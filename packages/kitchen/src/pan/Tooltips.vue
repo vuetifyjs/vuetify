@@ -1,7 +1,9 @@
 <template>
   <v-container>
     <v-layout column>
-      <h3 class="title grey--text mb-4 mt-5 center">Simple</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Simple
+      </h3>
       <v-flex>
         <v-layout justify-space-around>
           <v-tooltip left>
@@ -50,7 +52,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Programmatic visibility control</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Programmatic visibility control
+      </h3>
       <v-flex>
         <v-layout
           flex
@@ -58,19 +62,26 @@
           align-center
         >
           <v-flex xs12>
-            <v-btn @click="show = !show">toggle</v-btn>
+            <v-btn @click="show = !show">
+              toggle
+            </v-btn>
           </v-flex>
 
           <v-flex
             xs12
-            class="mt-5">
+            class="mt-5"
+          >
             <v-tooltip
               v-model="show"
-              top>
+              top
+            >
               <v-btn
                 slot="activator"
-                icon>
-                <v-icon color="grey lighten-1">mdi-cart</v-icon>
+                icon
+              >
+                <v-icon color="grey lighten-1">
+                  mdi-cart
+                </v-icon>
               </v-btn>
               <span>Programmatic tooltip</span>
             </v-tooltip>

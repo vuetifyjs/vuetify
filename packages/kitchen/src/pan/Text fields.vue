@@ -1,13 +1,16 @@
 <template>
   <v-container>
     <v-layout column>
-      <h3 class="title grey--text mb-4 mt-5 center">Styles</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Styles
+      </h3>
       <v-flex>
         <v-layout wrap>
           <v-flex
             xs12
             sm6
-            md3>
+            md3
+          >
             <v-text-field
               class="ma-2"
               label="Regular"
@@ -17,7 +20,8 @@
           <v-flex
             xs12
             sm6
-            md3>
+            md3
+          >
             <v-text-field
               class="ma-2"
               label="Regular"
@@ -28,7 +32,8 @@
           <v-flex
             xs12
             sm6
-            md3>
+            md3
+          >
             <v-text-field
               class="ma-2"
               label="Solo"
@@ -39,7 +44,8 @@
           <v-flex
             xs12
             sm6
-            md3>
+            md3
+          >
             <v-text-field
               class="ma-2"
               label="Solo"
@@ -51,7 +57,8 @@
           <v-flex
             xs12
             sm6
-            md3>
+            md3
+          >
             <v-text-field
               class="ma-2"
               label="Box"
@@ -62,7 +69,8 @@
           <v-flex
             xs12
             sm6
-            md3>
+            md3
+          >
             <v-text-field
               class="ma-2"
               label="Box"
@@ -74,7 +82,8 @@
           <v-flex
             xs12
             sm6
-            md3>
+            md3
+          >
             <v-text-field
               class="ma-2"
               label="Outline"
@@ -85,7 +94,8 @@
           <v-flex
             xs12
             sm6
-            md3>
+            md3
+          >
             <v-text-field
               class="ma-2"
               label="Outline"
@@ -96,14 +106,18 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Single line</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Single line
+      </h3>
       <v-flex>
         <v-layout
           row
-          wrap>
+          wrap
+        >
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               class="ma-2"
               label="Regular"
@@ -113,7 +127,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               class="ma-2"
               label="Solo"
@@ -124,7 +139,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               class="ma-2"
               label="Box"
@@ -135,7 +151,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               class="ma-2"
               label="Outline"
@@ -146,14 +163,18 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Disabled and read-only</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Disabled and read-only
+      </h3>
       <v-flex>
         <v-layout
           row
-          wrap>
+          wrap
+        >
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               class="ma-2"
               value="John Doe"
@@ -164,7 +185,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               class="ma-2"
               value="John Doe"
@@ -175,7 +197,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               class="ma-2"
               value="John Doe"
@@ -187,7 +210,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               class="ma-2"
               value="John Doe"
@@ -199,7 +223,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               class="ma-2"
               value="John Doe"
@@ -211,7 +236,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               class="ma-2"
               value="John Doe"
@@ -223,7 +249,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               class="ma-2"
               value="John Doe"
@@ -235,7 +262,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               class="ma-2"
               value="John Doe"
@@ -247,14 +275,18 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Icons</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Icons
+      </h3>
       <v-flex>
         <v-layout
           row
-          wrap>
+          wrap
+        >
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               class="ma-2"
               label="Prepend"
@@ -276,7 +308,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               class="ma-2"
               solo
@@ -301,7 +334,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               class="ma-2"
               box
@@ -326,7 +360,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               class="ma-2"
               outline
@@ -351,14 +386,18 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Clearable</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Clearable
+      </h3>
       <v-flex>
         <v-layout
           row
-          wrap>
+          wrap
+        >
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               v-model="message1"
               class="ma-2"
@@ -369,7 +408,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               v-model="message2"
               class="ma-2"
@@ -381,7 +421,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               v-model="message3"
               class="ma-2"
@@ -393,7 +434,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               v-model="message4"
               class="ma-2"
@@ -405,11 +447,16 @@
 
           <v-btn
             block
-            @click="message1 = message2 = message3 = message4 = 'Hey!'">Reset</v-btn>
+            @click="message1 = message2 = message3 = message4 = 'Hey!'"
+          >
+            Reset
+          </v-btn>
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Custom icon slots</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Custom icon slots
+      </h3>
       <v-flex>
         <v-text-field
           v-model="message5"
@@ -422,7 +469,9 @@
             slot="prepend"
             bottom
           >
-            <v-icon slot="activator">mdi-help-circle-outline</v-icon>
+            <v-icon slot="activator">
+              mdi-help-circle-outline
+            </v-icon>
             I'm a tooltip
           </v-tooltip>
 
@@ -437,7 +486,8 @@
               v-else
               width="24"
               height="24"
-              src="https://cdn.vuetifyjs.com/images/logos/v-alt.svg" >
+              src="https://cdn.vuetifyjs.com/images/logos/v-alt.svg"
+            >
           </v-fade-transition>
 
           <v-menu
@@ -446,7 +496,9 @@
             offset-y
           >
             <v-btn slot="activator">
-              <v-icon left>mdi-menu</v-icon>
+              <v-icon left>
+                mdi-menu
+              </v-icon>
               Menu
             </v-btn>
             <v-card>
@@ -455,14 +507,21 @@
                   large
                   flat
                   color="primary"
-                  @click="clickMe"><v-icon left>mdi-target</v-icon>Click me</v-btn>
+                  @click="clickMe"
+                >
+                  <v-icon left>
+                    mdi-target
+                  </v-icon>Click me
+                </v-btn>
               </v-card-text>
             </v-card>
           </v-menu>
         </v-text-field>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Colored icons using slots</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Colored icons using slots
+      </h3>
       <v-flex>
         <v-text-field
           v-model="message6"
@@ -474,35 +533,52 @@
           <v-icon
             slot="prepend"
             color="success"
-            bottom>mdi-check</v-icon>
+            bottom
+          >
+            mdi-check
+          </v-icon>
 
           <v-icon
             slot="append"
-            color="error">mdi-alert-circle</v-icon>
+            color="error"
+          >
+            mdi-alert-circle
+          </v-icon>
 
           <v-icon
             slot="append-outer"
-            color="teal">mdi-account</v-icon>
+            color="teal"
+          >
+            mdi-account
+          </v-icon>
         </v-text-field>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Label slot</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Label slot
+      </h3>
       <v-flex>
         <v-text-field>
           <template slot="label">
-            What about <strong>icon</strong> here? <v-icon style="vertical-align: middle">mdi-file-find</v-icon>
+            What about <strong>icon</strong> here? <v-icon style="vertical-align: middle">
+              mdi-file-find
+            </v-icon>
           </template>
         </v-text-field>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Character counter</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Character counter
+      </h3>
       <v-flex>
         <v-layout
           row
-          wrap>
+          wrap
+        >
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               v-model="title"
               :rules="rules"
@@ -515,7 +591,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               v-model="description"
               :rules="rules"
@@ -529,7 +606,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               v-model="title"
               :rules="rules"
@@ -542,7 +620,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               v-model="title"
               :rules="rules"
@@ -555,14 +634,18 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Password input</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Password input
+      </h3>
       <v-flex>
         <v-layout
           row
-          wrap>
+          wrap
+        >
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               v-model="password"
               :append-icon="show1 ? 'mdi-eye-off' : 'mdi-eye'"
@@ -579,7 +662,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               :append-icon="show2 ? 'mdi-eye-off' : 'mdi-eye'"
               :rules="[rules.required, rules.min]"
@@ -595,7 +679,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               :append-icon="show3 ? 'mdi-eye-off' : 'mdi-eye'"
               :rules="[rules.required, rules.min]"
@@ -611,7 +696,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               :append-icon="show4 ? 'mdi-eye-off' : 'mdi-eye'"
               :rules="[rules.required, rules.emailMatch]"
@@ -628,14 +714,18 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Password input</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Password input
+      </h3>
       <v-flex>
         <v-layout
           row
-          wrap>
+          wrap
+        >
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               v-model="title1"
               :rules="[rules2.required, rules2.counter]"
@@ -648,7 +738,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               v-model="email"
               :rules="[rules2.required, rules2.email]"
@@ -659,7 +750,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Full-width</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Full-width
+      </h3>
       <v-flex>
         <v-card>
           <v-toolbar
@@ -669,7 +762,7 @@
           >
             <v-icon>mdi-arrow-left</v-icon>
             <v-toolbar-title>Compose</v-toolbar-title>
-            <v-spacer/>
+            <v-spacer />
             <v-icon>mdi-send</v-icon>
           </v-toolbar>
           <v-form>
@@ -685,7 +778,7 @@
               multiple
               single-line
             />
-            <v-divider/>
+            <v-divider />
             <v-text-field
               label="Subject"
               value="Plans for the weekend"
@@ -693,7 +786,7 @@
               full-width
               hide-details
             />
-            <v-divider/>
+            <v-divider />
             <v-textarea
               v-model="title2"
               label="Message"
@@ -706,14 +799,18 @@
         </v-card>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Hints</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Hints
+      </h3>
       <v-flex>
         <v-layout
           row
-          wrap>
+          wrap
+        >
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               class="ma-2"
               label="Your product or service"
@@ -724,7 +821,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               class="ma-2"
               label="Your landing page"
@@ -735,7 +833,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               class="ma-2"
               label="Your product or service"
@@ -747,7 +846,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               class="ma-2"
               label="Your landing page"
@@ -759,7 +859,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               class="ma-2"
               label="Your product or service"
@@ -771,7 +872,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               class="ma-2"
               label="Your landing page"
@@ -783,14 +885,18 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Box design</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Box design
+      </h3>
       <v-flex>
         <v-layout
           row
-          wrap>
+          wrap
+        >
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               v-model="first"
               class="ma-2"
@@ -801,7 +907,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               v-model="last"
               class="ma-2"
@@ -812,14 +919,18 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Solo design</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Solo design
+      </h3>
       <v-flex>
         <v-layout
           row
-          wrap>
+          wrap
+        >
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               v-model="first"
               class="ma-2"
@@ -830,7 +941,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               v-model="last"
               class="ma-2"
@@ -841,14 +953,18 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Outline design</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Outline design
+      </h3>
       <v-flex>
         <v-layout
           row
-          wrap>
+          wrap
+        >
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               v-model="first"
               class="ma-2"
@@ -859,7 +975,8 @@
 
           <v-flex
             xs12
-            sm6>
+            sm6
+          >
             <v-text-field
               v-model="last"
               class="ma-2"
@@ -870,7 +987,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Prefixes and suffixes</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Prefixes and suffixes
+      </h3>
       <v-flex>
         <v-layout row>
           <v-flex xs4>
@@ -926,24 +1045,30 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Mask</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Mask
+      </h3>
       <v-flex>
         <v-card>
           <v-card-text>
             <v-text-field
               v-model="mask"
-              label="Mask"/>
+              label="Mask"
+            />
           </v-card-text>
           <v-card-text>
             <v-text-field
-              :mask="mask"
               v-model="value"
-              label="Value"/>
+              :mask="mask"
+              label="Value"
+            />
           </v-card-text>
         </v-card>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Loading</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Loading
+      </h3>
       <v-flex>
         <v-text-field
           v-model="value1"
@@ -954,7 +1079,9 @@
         />
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Progress</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Progress
+      </h3>
       <v-flex>
         <v-text-field
           v-model="value2"

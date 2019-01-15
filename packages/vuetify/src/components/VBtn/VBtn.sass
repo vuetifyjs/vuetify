@@ -1,6 +1,6 @@
 // Imports
 @import '../../styles/styles.sass'
-@import './_variables.sass'
+@import './_variables.scss'
 @import './_mixins.sass'
 
 // Theme
@@ -215,8 +215,9 @@
 
 .v-btn--outline,
 .v-btn--round
-  .v-icon
-    color: currentColor
+  .v-btn__content
+    .v-icon
+      color: currentColor
 
 .v-btn--outline,
 .v-btn--flat,

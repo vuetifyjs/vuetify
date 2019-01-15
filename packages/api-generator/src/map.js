@@ -200,6 +200,10 @@ const VSelect = {
     {
       name: 'valueComparator',
       default: '(a: any, b: any) => boolean'
+    },
+    {
+      name: 'menuProps',
+      default: '{"closeOnClick":false, "closeOnContentClick":false, "openOnClick":false, "maxHeight":300}'
     }
   ],
   slots: inputSlots.concat(['no-data', 'label', 'progress']),

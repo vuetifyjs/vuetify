@@ -1,0 +1,62 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [
+            "v-container",
+            "v-layout",
+            "v-flex",
+            "v-spacer"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "playground",
+            "offset",
+            "order",
+            "directionAndAlign",
+            "rowColumnBreakpoint",
+            "growShrink",
+            "nestedGrid",
+            "uniqueLayouts",
+            "spacer",
+            "tags"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "framework/grid-lists",
+            "framework/breakpoints",
+            "framework/display"
+          ]
+        }
+      ]
+    }
+  ]
+}
