@@ -15,7 +15,6 @@ import { deprecate } from '../../util/console'
 import mixins from '../../util/mixins'
 import { VNode } from 'vue'
 
-/* @vue/component */
 export default mixins(
   Applicationable('top', [
     'clippedLeft',
@@ -27,6 +26,7 @@ export default mixins(
   Colorable,
   SSRBootable,
   Themeable
+/* @vue/component */
 ).extend({
   name: 'v-toolbar',
 
