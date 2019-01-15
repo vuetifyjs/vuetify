@@ -119,7 +119,7 @@ export default CalendarBase.extend({
     minutesToPixels (minutes: number): number {
       return minutes / this.parsedIntervalMinutes * this.parsedIntervalHeight
     },
-    timeToY (time: VTime, clamp: boolean = true): number | false {
+    timeToY (time: VTime, clamp = true): number | false {
       const minutes = parseTime(time)
 
       if (minutes === false) {

@@ -77,7 +77,7 @@ export default mixins(Colorable, Themeable, Times, Mouse).extend({
   },
 
   methods: {
-    getRelativeClasses (timestamp: VTimestamp, outside: boolean = false): object {
+    getRelativeClasses (timestamp: VTimestamp, outside = false): object {
       return {
         'v-present': timestamp.present,
         'v-past': timestamp.past,

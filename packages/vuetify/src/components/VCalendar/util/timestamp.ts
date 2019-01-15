@@ -4,15 +4,15 @@ export const PARSE_TIME: RegExp = /(\d{1,2})?(:(\d{1,2}))?(:(\d{1,2}))/
 
 export const DAYS_IN_MONTH: number[] = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 export const DAYS_IN_MONTH_LEAP: number[] = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-export const DAYS_IN_MONTH_MIN: number = 28
-export const DAYS_IN_MONTH_MAX: number = 31
-export const MONTH_MAX: number = 12
-export const MONTH_MIN: number = 1
-export const DAY_MIN: number = 1
-export const DAYS_IN_WEEK: number = 7
-export const MINUTES_IN_HOUR: number = 60
-export const HOURS_IN_DAY: number = 24
-export const FIRST_HOUR: number = 0
+export const DAYS_IN_MONTH_MIN = 28
+export const DAYS_IN_MONTH_MAX = 31
+export const MONTH_MAX = 12
+export const MONTH_MIN = 1
+export const DAY_MIN = 1
+export const DAYS_IN_WEEK = 7
+export const MINUTES_IN_HOUR = 60
+export const HOURS_IN_DAY = 24
+export const FIRST_HOUR = 0
 
 export interface VTimestamp {
   date: string
@@ -128,7 +128,7 @@ export function getTimeIdentifier (timestamp: VTimestamp): number {
   return timestamp.hour * 100 + timestamp.minute
 }
 
-export function updateRelative (timestamp: VTimestamp, now: VTimestamp, time: boolean = false): VTimestamp {
+export function updateRelative (timestamp: VTimestamp, now: VTimestamp, time = false): VTimestamp {
   let a = getDayIdentifier(now)
   let b = getDayIdentifier(timestamp)
   let present = a === b
@@ -269,14 +269,14 @@ export function prevDay (timestamp: VTimestamp): VTimestamp {
 }
 
 export function relativeDays (timestamp: VTimestamp,
-  mover: VTimestampOperation = nextDay, days: number = 1): VTimestamp {
+  mover: VTimestampOperation = nextDay, days = 1): VTimestamp {
   while (--days >= 0) mover(timestamp)
 
   return timestamp
 }
 
 export function findWeekday (timestamp: VTimestamp, weekday: number,
-  mover: VTimestampOperation = nextDay, maxDays: number = 6): VTimestamp {
+  mover: VTimestampOperation = nextDay, maxDays = 6): VTimestamp {
   while (timestamp.weekday !== weekday && --maxDays >= 0) mover(timestamp)
 
   return timestamp
@@ -304,7 +304,7 @@ export function getWeekdaySkips (weekdays: number[]): number[] {
 }
 
 export function createDayList (start: VTimestamp, end: VTimestamp, now: VTimestamp,
-  weekdaySkips: number[], max: number = 42, min: number = 0): VTimestamp[] {
+  weekdaySkips: number[], max = 42, min = 0): VTimestamp[] {
   const stop = getDayIdentifier(end)
   const days: VTimestamp[] = []
   let current = copyTimestamp(start)

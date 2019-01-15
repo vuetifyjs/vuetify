@@ -116,7 +116,7 @@ export default CalendarBase.extend({
         this.$emit('change', { start, end })
       }
     },
-    move (amount: number = 1): void {
+    move (amount = 1): void {
       const moved = copyTimestamp(this.parsedValue)
       const forward = amount > 0
       const mover = forward ? nextDay : prevDay
@@ -148,13 +148,13 @@ export default CalendarBase.extend({
       this.$emit('input', moved.date)
       this.$emit('moved', moved)
     },
-    next (amount: number = 1): void {
+    next (amount = 1): void {
       this.move(amount)
     },
-    prev (amount: number = 1): void {
+    prev (amount = 1): void {
       this.move(-amount)
     },
-    timeToY (time: VTime, clamp: boolean = true): number | false {
+    timeToY (time: VTime, clamp = true): number | false {
       const c = this.$children[0] as any
       if (c && c.timeToY) {
         return c.timeToY(time, clamp)
