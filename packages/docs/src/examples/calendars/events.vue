@@ -2,27 +2,38 @@
   <v-layout>
     <v-flex>
       <v-sheet height="500">
-        <v-calendar :now="today" :value="today" color="primary">
+        <v-calendar
+          :now="today"
+          :value="today"
+          color="primary"
+        >
           <template
             slot="day"
             slot-scope="{ date }"
           >
             <template v-for="event in eventsMap[date]">
               <v-menu
-                v-model="event.open"
                 :key="event.title"
+                v-model="event.open"
                 full-width
                 offset-x
               >
                 <div
-                  v-ripple
                   v-if="!event.time"
                   slot="activator"
+                  v-ripple
                   class="my-event"
                   v-html="event.title"
                 ></div>
-                <v-card color="grey lighten-4" min-width="350px" flat>
-                  <v-toolbar color="primary" dark>
+                <v-card
+                  color="grey lighten-4"
+                  min-width="350px"
+                  flat
+                >
+                  <v-toolbar
+                    color="primary"
+                    dark
+                  >
                     <v-btn icon>
                       <v-icon>edit</v-icon>
                     </v-btn>
@@ -39,7 +50,12 @@
                     <span v-html="event.details"></span>
                   </v-card-title>
                   <v-card-actions>
-                    <v-btn flat color="secondary">Cancel</v-btn>
+                    <v-btn
+                      flat
+                      color="secondary"
+                    >
+                      Cancel
+                    </v-btn>
                   </v-card-actions>
                 </v-card>
               </v-menu>

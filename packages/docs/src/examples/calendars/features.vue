@@ -1,7 +1,10 @@
 <template>
   <v-layout wrap>
-    <v-flex sm12 lg3 class="pa-3 mb-3 feature-pane">
-
+    <v-flex
+      sm12
+      lg3
+      class="pa-3 mb-3 feature-pane"
+    >
       <v-btn
         fab
         outline
@@ -11,9 +14,10 @@
         color="primary"
         @click="$refs.calendar.prev()"
       >
-        <v-icon dark>keyboard_arrow_left</v-icon>
+        <v-icon dark>
+          keyboard_arrow_left
+        </v-icon>
       </v-btn>
-
       <v-btn
         fab
         outline
@@ -23,28 +27,27 @@
         color="primary"
         @click="$refs.calendar.next()"
       >
-        <v-icon dark>keyboard_arrow_right</v-icon>
+        <v-icon
+          dark
+        >
+          keyboard_arrow_right
+        </v-icon>
       </v-btn>
-
       <br><br><br>
-
       <v-select
         v-model="type"
         :items="typeOptions"
         label="Type"
       ></v-select>
-
       <v-checkbox
         v-model="dark"
         label="Dark"
       ></v-checkbox>
-
       <v-select
         v-model="color"
         :items="colorOptions"
         label="Color"
       ></v-select>
-
       <v-menu
         ref="startMenu"
         v-model="startMenu"
@@ -64,13 +67,28 @@
           prepend-icon="event"
           readonly
         ></v-text-field>
-        <v-date-picker v-model="start" no-title scrollable>
+        <v-date-picker
+          v-model="start"
+          no-title
+          scrollable
+        >
           <v-spacer></v-spacer>
-          <v-btn flat color="primary" @click="startMenu = false">Cancel</v-btn>
-          <v-btn flat color="primary" @click="$refs.startMenu.save(start)">OK</v-btn>
+          <v-btn
+            flat
+            color="primary"
+            @click="startMenu = false"
+          >
+            Cancel
+          </v-btn>
+          <v-btn
+            flat
+            color="primary"
+            @click="$refs.startMenu.save(start)"
+          >
+            OK
+          </v-btn>
         </v-date-picker>
       </v-menu>
-
       <v-menu
         v-if="hasEnd"
         ref="endMenu"
@@ -91,13 +109,28 @@
           prepend-icon="event"
           readonly
         ></v-text-field>
-        <v-date-picker v-model="end" no-title scrollable>
+        <v-date-picker
+          v-model="end"
+          no-title
+          scrollable
+        >
           <v-spacer></v-spacer>
-          <v-btn flat color="primary" @click="endMenu = false">Cancel</v-btn>
-          <v-btn flat color="primary" @click="$refs.endMenu.save(end)">OK</v-btn>
+          <v-btn
+            flat
+            color="primary"
+            @click="endMenu = false"
+          >
+            Cancel
+          </v-btn>
+          <v-btn
+            flat
+            color="primary"
+            @click="$refs.endMenu.save(end)"
+          >
+            OK
+          </v-btn>
         </v-date-picker>
       </v-menu>
-
       <v-menu
         ref="nowMenu"
         v-model="nowMenu"
@@ -117,54 +150,67 @@
           prepend-icon="event"
           readonly
         ></v-text-field>
-        <v-date-picker v-model="now" no-title scrollable>
+        <v-date-picker
+          v-model="now"
+          no-title
+          scrollable
+        >
           <v-spacer></v-spacer>
-          <v-btn flat color="primary" @click="nowMenu = false">Cancel</v-btn>
-          <v-btn flat color="primary" @click="$refs.nowMenu.save(now)">OK</v-btn>
+          <v-btn
+            flat
+            color="primary"
+            @click="nowMenu = false"
+          >
+            Cancel
+          </v-btn>
+          <v-btn
+            flat
+            color="primary"
+            @click="$refs.nowMenu.save(now)"
+          >
+            OK
+          </v-btn>
         </v-date-picker>
       </v-menu>
-
       <v-select
         v-model="weekdays"
         :items="weekdaysOptions"
         label="Weekdays"
       ></v-select>
-
       <v-text-field
         v-if="type === 'custom-weekly'"
         v-model="minWeeks"
         label="Minimum Weeks"
         type="number"
       ></v-text-field>
-
       <v-select
         v-if="hasIntervals"
         v-model="intervals"
         :items="intervalsOptions"
         label="Intervals"
       ></v-select>
-
       <v-select
         v-if="type === 'custom-daily'"
         v-model="maxDays"
         :items="maxDaysOptions"
         label="# of Days"
       ></v-select>
-
       <v-select
         v-if="hasIntervals"
         v-model="styleInterval"
         :items="styleIntervalOptions"
         label="Styling"
       ></v-select>
-
     </v-flex>
-    <v-flex sm12 lg9 class="pl-3">
-
+    <v-flex
+      sm12
+      lg9
+      class="pl-3"
+    >
       <v-sheet height="500">
-
         <v-calendar
           ref="calendar"
+          v-model="start"
           :type="type"
           :start="start"
           :end="end"
@@ -180,10 +226,11 @@
           :interval-style="intervalStyle"
           :show-interval-label="showIntervalLabel"
           :color="color"
-          v-model="start"
         >
-
-          <template slot="day" slot-scope="day">
+          <template
+            slot="day"
+            slot-scope="day"
+          >
             <div
               v-if="day.day % 3 === 0"
               class="day"
@@ -191,8 +238,10 @@
               day slot {{ day.date }}
             </div>
           </template>
-
-          <template slot="day-header" slot-scope="day">
+          <template
+            slot="day-header"
+            slot-scope="day"
+          >
             <div
               v-if="day.weekday % 2"
               class="day-header"
@@ -200,8 +249,10 @@
               day-header slot {{ day.date }}
             </div>
           </template>
-
-          <template slot="day-body" slot-scope="day">
+          <template
+            slot="day-body"
+            slot-scope="day"
+          >
             <div
               v-if="day.weekday % 3 === 2"
               class="day-body"
@@ -209,26 +260,23 @@
               day-body slot {{ day.date }}
             </div>
           </template>
-
         </v-calendar>
-
       </v-sheet>
-
     </v-flex>
   </v-layout>
 </template>
 
 <script>
-  let weekdaysDefault = [0, 1, 2, 3, 4, 5, 6]
+  const weekdaysDefault = [0, 1, 2, 3, 4, 5, 6]
 
-  let intervalsDefault = {
+  const intervalsDefault = {
     first: 0,
     minutes: 60,
     count: 24,
     height: 40
   }
 
-  let stylings = {
+  const stylings = {
     default (interval) {
       return undefined
     },

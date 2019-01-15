@@ -2,12 +2,18 @@
   <v-layout>
     <v-flex>
       <v-sheet height="400">
-        <v-calendar color="primary" type="day">
+        <v-calendar
+          color="primary"
+          type="day"
+        >
           <template
             slot="dayHeader"
             slot-scope="{ present }"
           >
-            <div v-if="present" class="text-xs-center">
+            <div
+              v-if="present"
+              class="text-xs-center"
+            >
               Today
             </div>
           </template>
