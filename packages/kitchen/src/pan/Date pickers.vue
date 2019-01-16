@@ -1,11 +1,29 @@
 <template>
   <v-container>
+    <v-btn
+      large
+      color="red"
+      dark
+      fab
+      fixed
+      bottom
+      left
+      @click="() => landscape = !landscape"
+    >
+      <v-icon small>
+        {{ landscape ? 'mdi-phone-rotate-portrait' : 'mdi-phone-rotate-landscape' }}
+      </v-icon>
+    </v-btn>
+
     <v-layout column>
       <h3 class="title grey--text mb-4 mt-5 center">
         Default
       </h3>
       <v-flex align-self-center>
-        <v-date-picker v-model="model1" />
+        <v-date-picker
+          v-model="model1"
+          :landscape="landscape"
+        />
       </v-flex>
 
       <h3 class="title grey--text mb-4 mt-5 center">
@@ -29,12 +47,8 @@
           align-center
         >
           <v-date-picker
+            :landscape="landscape"
             :value="new Date().toISOString().substr(0, 10)"
-            disabled
-          />
-          <v-date-picker
-            :value="new Date().toISOString().substr(0, 10)"
-            landscape
             disabled
           />
         </v-layout>
@@ -52,11 +66,7 @@
         >
           <v-date-picker
             v-model="model3"
-            reactive
-          />
-          <v-date-picker
-            v-model="model4"
-            landscape
+            :landscape="landscape"
             reactive
           />
         </v-layout>
@@ -74,35 +84,20 @@
         >
           <v-date-picker
             v-model="model5"
+            :landscape="landscape"
             class="mt-4"
             color="success"
           />
           <v-date-picker
             v-model="model6"
+            :landscape="landscape"
             class="mt-4"
             color="red lighten-2"
           />
           <v-date-picker
             v-model="model7"
+            :landscape="landscape"
             class="mt-4"
-            color="blue"
-          />
-          <v-date-picker
-            v-model="model8"
-            class="mt-4"
-            landscape
-            color="success"
-          />
-          <v-date-picker
-            v-model="model9"
-            class="mt-4"
-            landscape
-            color="red lighten-2"
-          />
-          <v-date-picker
-            v-model="model10"
-            class="mt-4"
-            landscape
             color="blue"
           />
         </v-layout>
@@ -120,35 +115,20 @@
         >
           <v-date-picker
             v-model="model11"
+            :landscape="landscape"
             class="mt-4"
             header-color="success"
           />
           <v-date-picker
             v-model="model12"
+            :landscape="landscape"
             class="mt-4"
             header-color="red lighten-2"
           />
           <v-date-picker
             v-model="model13"
+            :landscape="landscape"
             class="mt-4"
-            header-color="blue"
-          />
-          <v-date-picker
-            v-model="model14"
-            class="mt-4"
-            landscape
-            header-color="success"
-          />
-          <v-date-picker
-            v-model="model15"
-            class="mt-4"
-            landscape
-            header-color="red lighten-2"
-          />
-          <v-date-picker
-            v-model="model16"
-            class="mt-4"
-            landscape
             header-color="blue"
           />
         </v-layout>
@@ -166,42 +146,24 @@
         >
           <v-date-picker
             v-model="model17"
+            :landscape="landscape"
             class="mt-4"
             color="red lighten-2"
             header-color="success"
           />
           <v-date-picker
             v-model="model18"
+            :landscape="landscape"
             class="mt-4"
             color="error"
             header-color="red lighten-2"
           />
           <v-date-picker
             v-model="model19"
+            :landscape="landscape"
             class="mt-4"
             color="teal"
             header-color="blue"
-          />
-          <v-date-picker
-            v-model="model20"
-            class="mt-4"
-            color="red lighten-2"
-            header-color="success"
-            landscape
-          />
-          <v-date-picker
-            v-model="model21"
-            class="mt-4"
-            color="error"
-            header-color="red lighten-2"
-            landscape
-          />
-          <v-date-picker
-            v-model="model22"
-            class="mt-4"
-            color="teal"
-            header-color="blue"
-            landscape
           />
         </v-layout>
       </v-flex>
@@ -231,6 +193,7 @@
           />
           <v-date-picker
             v-model="date1"
+            :landscape="landscape"
             no-title
             scrollable
           >
@@ -275,6 +238,7 @@
           />
           <v-date-picker
             v-model="date1"
+            :landscape="landscape"
             scrollable
           >
             <v-spacer />
@@ -302,6 +266,7 @@
       <v-flex align-self-center>
         <v-date-picker
           v-model="date2"
+          :landscape="landscape"
           no-title
         />
         <p>Date in ISO format: <strong>{{ date2 }}</strong></p>
@@ -314,6 +279,7 @@
       <v-flex align-self-center>
         <v-date-picker
           v-model="date3"
+          :landscape="landscape"
           min="2016-06-15"
           max="2018-03-20"
         />
@@ -325,6 +291,7 @@
       <v-flex align-self-center>
         <v-date-picker
           v-model="date4"
+          :landscape="landscape"
           :allowed-dates="val => parseInt(val.split('-')[2], 10) % 2 === 0"
         />
       </v-flex>
@@ -339,6 +306,7 @@
         >
           <v-date-picker
             v-model="dates"
+            :landscape="landscape"
             multiple
           />
 
@@ -367,16 +335,19 @@
         >
           <v-date-picker
             v-model="date5"
+            :landscape="landscape"
             width="200"
             class="mt-3"
           />
           <v-date-picker
             v-model="date6"
+            :landscape="landscape"
             width="290"
             class="mt-3"
           />
           <v-date-picker
             v-model="date7"
+            :landscape="landscape"
             width="500"
             class="mt-3"
           />
@@ -395,12 +366,7 @@
         >
           <v-date-picker
             v-model="date8"
-            full-width
-            class="mt-3"
-          />
-          <v-date-picker
-            v-model="date9"
-            landscape
+            :landscape="landscape"
             full-width
             class="mt-3"
           />
@@ -413,6 +379,7 @@
       <v-flex align-self-center>
         <v-date-picker
           v-model="date8"
+          :landscape="landscape"
           :picker-date.sync="pickerDate"
         />
       </v-flex>
@@ -432,6 +399,7 @@
             </div>
             <v-date-picker
               v-model="date9"
+              :landscape="landscape"
               :events="arrayEvents"
               event-color="green lighten-1"
             />
@@ -442,6 +410,7 @@
             </div>
             <v-date-picker
               v-model="date10"
+              :landscape="landscape"
               :event-color="date => date[9] % 2 ? 'red' : 'yellow'"
               :events="functionEvents"
             />
@@ -461,12 +430,14 @@
         >
           <v-date-picker
             v-model="picker"
+            :landscape="landscape"
             :first-day-of-week="0"
             locale="zh-cn"
             class="mt-3"
           />
           <v-date-picker
             v-model="picker"
+            :landscape="landscape"
             :first-day-of-week="1"
             locale="sv-se"
             class="mt-3"
@@ -480,6 +451,7 @@
       <v-flex align-self-center>
         <v-date-picker
           v-model="picker1"
+          :landscape="landscape"
           year-icon="mdi-calendar-blank"
           prev-icon="mdi-skip-previous"
           next-icon="mdi-skip-next"
@@ -492,6 +464,7 @@
       <v-flex align-self-center>
         <v-date-picker
           v-model="date11"
+          :landscape="landscape"
           readonly
         />
       </v-flex>
@@ -507,11 +480,13 @@
         >
           <v-date-picker
             v-model="date12"
+            :landscape="landscape"
             class="mt-4"
             :show-current="false"
           />
           <v-date-picker
             v-model="date13"
+            :landscape="landscape"
             class="mt-4"
             show-current="2013-07-13"
           />
@@ -530,13 +505,8 @@
         >
           <v-date-picker
             v-model="picker2"
+            :landscape="landscape"
             class="mt-4"
-            type="month"
-          />
-          <v-date-picker
-            v-model="picker3"
-            class="mt-4"
-            landscape
             type="month"
           />
         </v-layout>
@@ -554,15 +524,9 @@
         >
           <v-date-picker
             v-model="picker4"
+            :landscape="landscape"
             class="mt-4"
             color="info"
-            type="month"
-          />
-          <v-date-picker
-            v-model="picker5"
-            class="mt-4"
-            color="success"
-            landscape
             type="month"
           />
         </v-layout>
@@ -574,6 +538,7 @@
       <v-flex align-self-center>
         <v-date-picker
           v-model="picker6"
+          :landscape="landscape"
           :allowed-dates="val => parseInt(val.split('-')[1], 10) % 2 === 0"
           type="month"
         />
@@ -605,6 +570,7 @@
           />
           <v-date-picker
             v-model="date16"
+            :landscape="landscape"
             type="month"
             no-title
             scrollable
@@ -650,6 +616,7 @@
           />
           <v-date-picker
             v-model="dialDate2"
+            :landscape="landscape"
             type="month"
             scrollable
           >
@@ -682,6 +649,7 @@
         >
           <v-date-picker
             v-model="months"
+            :landscape="landscape"
             type="month"
             multiple
           />
@@ -711,18 +679,21 @@
         >
           <v-date-picker
             v-model="date14"
+            :landscape="landscape"
             class="mt-4"
             type="month"
             width="150"
           />
           <v-date-picker
             v-model="date14"
+            :landscape="landscape"
             class="mt-4"
             type="month"
             width="290"
           />
           <v-date-picker
             v-model="date14"
+            :landscape="landscape"
             class="mt-4"
             type="month"
             width="400"
@@ -742,15 +713,9 @@
         >
           <v-date-picker
             v-model="date15"
+            :landscape="landscape"
             class="mt-4"
             full-width
-            type="month"
-          />
-          <v-date-picker
-            v-model="date15"
-            class="mt-4"
-            full-width
-            landscape
             type="month"
           />
         </v-layout>
@@ -769,6 +734,7 @@
           <div class="mt-4">
             <v-date-picker
               v-model="picker7"
+              :landscape="landscape"
               type="month"
               locale="th"
             />
@@ -776,6 +742,7 @@
           <div class="mt-4">
             <v-date-picker
               v-model="picker8"
+              :landscape="landscape"
               type="month"
               locale="sv-se"
             />
@@ -789,6 +756,7 @@
       <v-flex align-self-center>
         <v-date-picker
           v-model="picker9"
+          :landscape="landscape"
           readonly
           type="month"
         />
@@ -800,6 +768,7 @@
       <v-flex align-self-center>
         <v-date-picker
           v-model="picker10"
+          :landscape="landscape"
           type="month"
           year-icon="mdi-calendar-blank"
           prev-icon="mdi-skip-previous"
@@ -820,6 +789,7 @@
           <div class="mt-4">
             <v-date-picker
               v-model="month1"
+              :landscape="landscape"
               :show-current="false"
               type="month"
             />
@@ -827,6 +797,7 @@
           <div class="mt-4">
             <v-date-picker
               v-model="month2"
+              :landscape="landscape"
               type="month"
               show-current="2013-07"
             />
@@ -853,21 +824,12 @@ export default {
     model5: new Date().toISOString().substr(0, 10),
     model6: new Date().toISOString().substr(0, 10),
     model7: new Date().toISOString().substr(0, 10),
-    model8: new Date().toISOString().substr(0, 10),
-    model9: new Date().toISOString().substr(0, 10),
-    model10: new Date().toISOString().substr(0, 10),
     model11: new Date().toISOString().substr(0, 10),
     model12: new Date().toISOString().substr(0, 10),
     model13: new Date().toISOString().substr(0, 10),
-    model14: new Date().toISOString().substr(0, 10),
-    model15: new Date().toISOString().substr(0, 10),
-    model16: new Date().toISOString().substr(0, 10),
     model17: new Date().toISOString().substr(0, 10),
     model18: new Date().toISOString().substr(0, 10),
     model19: new Date().toISOString().substr(0, 10),
-    model20: new Date().toISOString().substr(0, 10),
-    model21: new Date().toISOString().substr(0, 10),
-    model22: new Date().toISOString().substr(0, 10),
     menu1: false,
     modal1: false,
     date1: new Date().toISOString().substr(0, 10),
@@ -889,9 +851,7 @@ export default {
     date12: new Date().toISOString().substr(0, 10),
     date13: '2013-07-29',
     picker2: new Date().toISOString().substr(0, 10),
-    picker3: new Date().toISOString().substr(0, 10),
     picker4: new Date().toISOString().substr(0, 10),
-    picker5: new Date().toISOString().substr(0, 10),
     picker6: new Date().toISOString().substr(0, 10),
     dialDate2: new Date().toISOString().substr(0, 7),
     modal2: false,
@@ -905,7 +865,8 @@ export default {
     picker9: '2018-06',
     picker10: new Date().toISOString().substr(0, 10),
     month1: new Date().toISOString().substr(0, 7),
-    month2: '2013-09'
+    month2: '2013-09',
+    landscape: false
   }),
 
   watch: {
