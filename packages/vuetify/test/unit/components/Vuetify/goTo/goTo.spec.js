@@ -18,13 +18,13 @@ test('$vuetify.goTo', ({ mount }) => {
   it('should throw error when target element is not found', async () => {
     await expect(wrapper.vm.$vuetify.goTo('#foo'))
       .rejects
-      .toEqual(new TypeError('Target element "#foo" not found.'))
+      .toEqual(new Error('Target element "#foo" not found.'))
   })
 
   it('should throw error when container element is not found', async () => {
     await expect(wrapper.vm.$vuetify.goTo(0, { container: '#thisContainerDoesNotExist' }))
       .rejects
-      .toEqual(new TypeError('Target element "#thisContainerDoesNotExist" not found.'))
+      .toEqual(new Error('Container element "#thisContainerDoesNotExist" not found.'))
   })
 
   it('should throw error when container is undefined or null', async () => {

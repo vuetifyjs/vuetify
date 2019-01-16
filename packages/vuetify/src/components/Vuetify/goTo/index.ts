@@ -1,11 +1,7 @@
 import * as easingPatterns from './easing-patterns'
 import {
-  $,
-  scroll,
-  offset,
-  type,
-  isValidTarget,
-  isValidContainer
+  getContainer,
+  getOffset
 } from './util'
 import Vue from 'vue'
 
@@ -14,61 +10,47 @@ interface GoToSettings {
   container: string | HTMLElement | Vue
   duration: number
   offset: number
-  easing: string | ((t: number) => number)
+  easing: string | easingPatterns.EasingFunction
   appOffset: boolean
 }
 
-export default function goTo (
-  this: Vue,
-  _target: GoToTarget,
-  _settings: Partial<GoToSettings> = {}
-): Promise<number> {
-  const { bar, top } = this.$vuetify.application
-  const defaults = {
-    container: document.scrollingElement || document.body || document.documentElement,
+export default function goTo (this: Vue, _target: GoToTarget, _settings: Partial<GoToSettings> = {}): Promise<number> {
+  const settings: GoToSettings = {
+    container: (document.scrollingElement as HTMLElement | null) || document.body || document.documentElement,
     duration: 500,
     offset: 0,
     easing: 'easeInOutCubic',
-    appOffset: true
-  }
-  const settings = {
-    ...defaults,
+    appOffset: true,
     ..._settings
   }
 
   // tslint:disable-next-line:promise-must-complete
   return new Promise(resolve => {
-    if (typeof window === 'undefined') throw new Error('Window is undefined.')
-
-    if (!isValidTarget(_target)) throw new TypeError(`Target must be a Number/Selector/HTMLElement/VueComponent, received ${type(_target)} instead.`)
-    if (!isValidContainer(settings.container)) throw new TypeError(`Container must be a Selector/HTMLElement/VueComponent, received ${type(settings.container)} instead.`)
-
-    const container = $(settings.container)
+    const container = getContainer(settings.container)
 
     if (settings.appOffset) {
       const isDrawer = container.classList.contains('v-navigation-drawer')
       const isClipped = container.classList.contains('v-navigation-drawer--clipped')
 
-      if (isDrawer) settings.offset += bar + (isClipped ? top : 0)
-      else settings.offset += bar + top
+      if (isDrawer) settings.offset += this.$vuetify.application.bar + (isClipped ? this.$vuetify.application.top : 0)
+      else settings.offset += this.$vuetify.application.bar + this.$vuetify.application.top
     }
 
-    const targetLocation = ((typeof _target === 'number') ? _target : offset($(_target))) - settings.offset
+    const targetLocation = getOffset(_target) - settings.offset
     const startLocation = container.scrollTop
-    const distance = targetLocation - startLocation
+    const initialDistance = targetLocation - startLocation
     const startTime = performance.now()
     const ease = typeof settings.easing === 'function'
       ? settings.easing
-      : (easingPatterns as Record<string, easingPatterns.EasingFunction>)[settings.easing]
+      : (easingPatterns as Dictionary<easingPatterns.EasingFunction>)[settings.easing]
 
     if (!ease) throw new TypeError(`Easing function "${settings.easing}" not found.`)
 
-    function step (currentTime: number) {
+    requestAnimationFrame(function step (currentTime: number) {
       const timeElapsed = currentTime - startTime
-      const progress = Math.min(timeElapsed / settings.duration, 1)
-      const stepTargetLocation = Math.floor(startLocation + distance * ease(progress))
+      const progress = settings.duration ? Math.min(timeElapsed / settings.duration, 1) : 1
 
-      scroll(container, stepTargetLocation)
+      container.scrollTop = Math.floor(startLocation + initialDistance * ease(progress))
 
       if (
         targetLocation === startLocation ||
@@ -76,9 +58,7 @@ export default function goTo (
         progress === 1
       ) return resolve(targetLocation)
 
-      window.requestAnimationFrame(step)
-    }
-
-    window.requestAnimationFrame(step)
+      requestAnimationFrame(step)
+    })
   })
 }
