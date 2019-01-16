@@ -10,7 +10,7 @@ import Picker from '../../mixins/picker'
 
 // Utils
 import { pad, createNativeLocaleFormatter } from './util'
-import isDateAllowed, { AllowedFunction } from './util/isDateAllowed'
+import isDateAllowed, { AllowedDateFunction } from './util/isDateAllowed'
 import { consoleWarn } from '../../util/console'
 import mixins from '../../util/mixins'
 
@@ -44,9 +44,9 @@ export default mixins(
   name: 'v-date-picker',
 
   props: {
-    allowedDates: Function as PropValidator<AllowedFunction>,
+    allowedDates: Function as PropValidator<AllowedDateFunction | undefined>,
     // Function formatting the day in date picker table
-    dayFormat: Function as PropValidator<AllowedFunction | undefined>,
+    dayFormat: Function as PropValidator<AllowedDateFunction | undefined>,
     disabled: Boolean,
     events: {
       type: [Array, Function, Object],

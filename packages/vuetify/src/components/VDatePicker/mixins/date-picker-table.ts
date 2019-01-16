@@ -8,7 +8,7 @@ import Colorable from '../../../mixins/colorable'
 import Themeable from '../../../mixins/themeable'
 
 // Utils
-import isDateAllowed, { AllowedFunction } from '../util/isDateAllowed'
+import isDateAllowed, { AllowedDateFunction } from '../util/isDateAllowed'
 import mixins from '../../../util/mixins'
 
 // Types
@@ -27,7 +27,7 @@ export default mixins(
   directives: { Touch },
 
   props: {
-    allowedDates: Function as PropValidator<AllowedFunction | undefined>,
+    allowedDates: Function as PropValidator<AllowedDateFunction | undefined>,
     current: String,
     disabled: Boolean,
     format: Function as PropValidator<DatePickerFormatter | undefined>,
