@@ -1,11 +1,11 @@
 // Services
-import { Layout } from '..'
+import { Application } from '..'
 
-describe('Layout.ts', () => {
-  let app: Layout
+describe('Application.ts', () => {
+  let app: Application
 
   beforeEach(() => {
-    app = new Layout()
+    app = new Application()
   })
 
   it('should register/unregister value on application section', () => {

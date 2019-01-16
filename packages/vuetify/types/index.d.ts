@@ -112,8 +112,8 @@ export interface VuetifyApplication {
   left: number
   right: number
   top: number
-  bind (uid: number, target: string, value: number): void
-  unbind (uid: number, target: string): void
+  register (uid: number, target: string, value: number): void
+  unregister (uid: number, target: string): void
   update (target: string): void
 }
 

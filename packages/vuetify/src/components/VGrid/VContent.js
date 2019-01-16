@@ -21,7 +21,7 @@ export default {
     styles () {
       const {
         bar, top, right, footer, insetFooter, bottom, left
-      } = this.$vuetify.layout
+      } = this.$vuetify.application
 
       return {
         paddingTop: `${top + bar}px`,
