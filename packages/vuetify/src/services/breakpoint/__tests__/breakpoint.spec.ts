@@ -1,7 +1,8 @@
-import { test, resizeWindow } from '@/test'
-import breakpointMixinFactory from '@/components/Vuetify/mixins/breakpoint'
+import { resizeWindow } from '@/test'
+import { Breakpoint } from '../'
 
-test('breakpoint.ts', ({ mount }) => {
+describe('Breakpoint.ts', () => {
+  let breakpoint: Breakpoint
   const scenarios = [
     {
       description: 'Huawei Smartwatch',
@@ -209,7 +210,6 @@ test('breakpoint.ts', ({ mount }) => {
       ]
     }
   ]
-
   const allFlags = [
     'xs',
     'sm',
@@ -229,15 +229,13 @@ test('breakpoint.ts', ({ mount }) => {
     'xlOnly'
   ]
 
-  scenarios.forEach(scenario => {
-    it('should calculate breakpoint for ' + scenario.description, async () => {
-      const wrapper = mount({
-        mixins: [breakpointMixinFactory()],
-        render: h => h('div')
-      })
+  beforeEach(() => {
+    breakpoint = new Breakpoint()
+  })
 
+  scenarios.slice(0, 1).forEach(scenario => {
+    it('should calculate breakpoint for ' + scenario.description, async () => {
       await resizeWindow(scenario.width, scenario.height)
-      const breakpoint = wrapper.vm.breakpoint
 
       expect(breakpoint.width).toBe(scenario.width)
       expect(breakpoint.height).toBe(scenario.height)
@@ -250,48 +248,32 @@ test('breakpoint.ts', ({ mount }) => {
   })
 
   it('should update breakpoint on window resize', async () => {
-    const wrapper = mount({
-      mixins: [breakpointMixinFactory()],
-      render: h => h('div')
-    })
-
     await resizeWindow(715)
-    expect(wrapper.vm.breakpoint.width).toBe(715)
+    expect(breakpoint.width).toBe(715)
   })
 
   it('should allow to change thresholds during runtime', async () => {
-    const wrapper = mount({
-      mixins: [breakpointMixinFactory()],
-      render: h => h('div')
-    })
-
     await resizeWindow(401)
-    expect(wrapper.vm.breakpoint.xs).toBe(true)
+    expect(breakpoint.xs).toBe(true)
 
-    wrapper.vm.breakpoint.thresholds.xs = 400
-    expect(wrapper.vm.breakpoint.xs).toBe(false)
+    await resizeWindow(698)
+    expect(breakpoint.xs).toBe(false)
 
-    await resizeWindow(399)
-    expect(wrapper.vm.breakpoint.xs).toBe(true)
+    await resizeWindow(1099)
+    expect(breakpoint.md).toBe(true)
   })
 
   it('should allow to override defaults via factory args', async () => {
-    const wrapper = mount({
-      mixins: [
-        breakpointMixinFactory({
-          thresholds: {
-            xs: 400
-          }
-        })
-      ],
-      render: h => h('div')
+    breakpoint = new Breakpoint({
+      thresholds: {
+        xs: 400
+      }
     })
 
     await resizeWindow(401)
-    expect(wrapper.vm.breakpoint.xs).toBe(false)
+    expect(breakpoint.xs).toBe(false)
 
     await resizeWindow(399)
-    expect(wrapper.vm.breakpoint.xs).toBe(true)
+    expect(breakpoint.xs).toBe(true)
   })
-
 })

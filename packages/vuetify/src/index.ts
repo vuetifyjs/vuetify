@@ -21,6 +21,7 @@ export default class Vuetify {
     this.userPreset = preset
 
     this.use(services.Application)
+    this.use(services.Breakpoint)
     this.use(services.Icons)
     this.use(services.Theme)
   }

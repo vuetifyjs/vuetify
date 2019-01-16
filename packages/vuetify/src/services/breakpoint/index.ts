@@ -1,152 +1,154 @@
-import Vue from 'vue'
-import { VuetifyUseOptions, VuetifyBreakpoint } from 'vuetify/types'
+import { VuetifyBreakpointOptions } from 'vuetify/types/services/breakpoint'
+// Utilities
 
-const BREAKPOINTS_DEFAULTS = {
-  thresholds: {
+// Types
+import { VuetifyServiceInstance } from 'vuetify/types/services'
+
+export class Breakpoint implements VuetifyServiceInstance {
+  static property = 'breakpoint'
+
+  // Private
+  private options = undefined as VuetifyBreakpointOptions | undefined
+  private resizeTimeout = 0
+
+  // Public
+  xs = false
+  sm = false
+  md = false
+  lg = false
+  xl = false
+
+  xsOnly = false
+  smOnly = false
+  smAndDown = false
+  smAndUp = false
+  mdOnly = false
+  mdAndDown = false
+  mdAndUp = false
+  lgOnly = false
+  lgAndDown = false
+  lgAndUp = false
+  xlOnly = false
+
+  name = ''
+
+  height = 0
+  width = 0
+
+  thresholds = {
     xs: 600,
     sm: 960,
     md: 1280,
     lg: 1920
-  },
-  scrollbarWidth: 16
-}
+  }
+  scrollbarWidth = 16
 
-/**
- * Factory function for the breakpoint mixin.
- */
-export default function breakpoint (opts: VuetifyUseOptions['breakpoint'] = {}) {
-  if (!opts) {
-    opts = {}
+  constructor (options: Partial<VuetifyBreakpointOptions> = {}) {
+    this.thresholds = {
+      ...this.thresholds,
+      ...options.thresholds
+    }
+    this.scrollbarWidth = (
+      options.scrollBarWidth ||
+      this.scrollbarWidth
+    )
+
+    this.init()
   }
 
-  return Vue.extend({
-    data () {
-      return {
-        clientHeight: getClientHeight(),
-        clientWidth: getClientWidth(),
-        resizeTimeout: undefined as number | undefined,
+  // Cross-browser support as described in:
+  // https://stackoverflow.com/questions/1248081
+  private getClientWidth () {
+    if (typeof document === 'undefined') return 0 // SSR
+    return Math.max(
+      document.documentElement!.clientWidth,
+      window.innerWidth || 0
+    )
+  }
 
-        ...BREAKPOINTS_DEFAULTS,
-        ...opts
-      }
-    },
+  private getClientHeight () {
+    if (typeof document === 'undefined') return 0 // SSR
+    return Math.max(
+      document.documentElement!.clientHeight,
+      window.innerHeight || 0
+    )
+  }
 
-    computed: {
-      breakpoint (): VuetifyBreakpoint {
-        const xs = this.clientWidth < this.thresholds.xs
-        const sm = this.clientWidth < this.thresholds.sm && !xs
-        const md = this.clientWidth < (this.thresholds.md - this.scrollbarWidth) && !(sm || xs)
-        const lg = this.clientWidth < (this.thresholds.lg - this.scrollbarWidth) && !(md || sm || xs)
-        const xl = this.clientWidth >= (this.thresholds.lg - this.scrollbarWidth)
+  onResize () {
+    clearTimeout(this.resizeTimeout)
 
-        const xsOnly = xs
-        const smOnly = sm
-        const smAndDown = (xs || sm) && !(md || lg || xl)
-        const smAndUp = !xs && (sm || md || lg || xl)
-        const mdOnly = md
-        const mdAndDown = (xs || sm || md) && !(lg || xl)
-        const mdAndUp = !(xs || sm) && (md || lg || xl)
-        const lgOnly = lg
-        const lgAndDown = (xs || sm || md || lg) && !xl
-        const lgAndUp = !(xs || sm || md) && (lg || xl)
-        const xlOnly = xl
+    // Added debounce to match what
+    // v-resize used to do but was
+    // removed due to a memory leak
+    // https://github.com/vuetifyjs/vuetify/pull/2997
+    this.resizeTimeout = window.setTimeout(this.update.bind(this), 200)
+  }
 
-        let name
-        switch (true) {
-          case (xs):
-            name = 'xs'
-            break
-          case (sm):
-            name = 'sm'
-            break
-          case (md):
-            name = 'md'
-            break
-          case (lg):
-            name = 'lg'
-            break
-          default:
-            name = 'xl'
-            break
-        }
+  init () {
+    if (typeof window === 'undefined') return
 
-        return {
-          // Definite breakpoint.
-          xs,
-          sm,
-          md,
-          lg,
-          xl,
+    window.addEventListener(
+      'resize',
+      this.onResize.bind(this),
+      { passive: true }
+    )
 
-          // Useful e.g. to construct CSS class names dynamically.
-          name,
+    this.update()
+  }
 
-          // Breakpoint ranges.
-          xsOnly,
-          smOnly,
-          smAndDown,
-          smAndUp,
-          mdOnly,
-          mdAndDown,
-          mdAndUp,
-          lgOnly,
-          lgAndDown,
-          lgAndUp,
-          xlOnly,
+  destroy () {
+    if (typeof window === 'undefined') return
 
-          // For custom breakpoint logic.
-          width: this.clientWidth,
-          height: this.clientHeight,
-          thresholds: this.thresholds,
-          scrollbarWidth: this.scrollbarWidth
-        }
-      }
-    },
+    window.removeEventListener('resize', this.onResize)
+  }
 
-    created () {
-      if (typeof window === 'undefined') return
+  update () {
+    const height = this.getClientHeight()
+    const width = this.getClientWidth()
 
-      window.addEventListener('resize', this.onResize, { passive: true })
-    },
+    const xs = width < this.thresholds.xs
+    const sm = width < this.thresholds.sm && !xs
+    const md = width < (this.thresholds.md - this.scrollbarWidth) && !(sm || xs)
+    const lg = width < (this.thresholds.lg - this.scrollbarWidth) && !(md || sm || xs)
+    const xl = width >= (this.thresholds.lg - this.scrollbarWidth)
 
-    beforeDestroy () {
-      if (typeof window === 'undefined') return
+    this.height = height
+    this.width = width
 
-      window.removeEventListener('resize', this.onResize)
-    },
+    this.xs = xs
+    this.sm = sm
+    this.md = md
+    this.lg = lg
+    this.xl = xl
 
-    methods: {
-      onResize (): void {
-        clearTimeout(this.resizeTimeout)
+    this.xsOnly = xs
+    this.smOnly = sm
+    this.smAndDown = (xs || sm) && !(md || lg || xl)
+    this.smAndUp = !xs && (sm || md || lg || xl)
+    this.mdOnly = md
+    this.mdAndDown = (xs || sm || md) && !(lg || xl)
+    this.mdAndUp = !(xs || sm) && (md || lg || xl)
+    this.lgOnly = lg
+    this.lgAndDown = (xs || sm || md || lg) && !xl
+    this.lgAndUp = !(xs || sm || md) && (lg || xl)
+    this.xlOnly = xl
 
-        // Added debounce to match what
-        // v-resize used to do but was
-        // removed due to a memory leak
-        // https://github.com/vuetifyjs/vuetify/pull/2997
-        this.resizeTimeout = window.setTimeout(this.setDimensions, 200)
-      },
-      setDimensions (): void {
-        this.clientHeight = getClientHeight()
-        this.clientWidth = getClientWidth()
-      }
+    switch (true) {
+      case (xs):
+        this.name = 'xs'
+        break
+      case (sm):
+        this.name = 'sm'
+        break
+      case (md):
+        this.name = 'md'
+        break
+      case (lg):
+        this.name = 'lg'
+        break
+      default:
+        this.name = 'xl'
+        break
     }
-  })
-}
-
-// Cross-browser support as described in:
-// https://stackoverflow.com/questions/1248081
-function getClientWidth () {
-  if (typeof document === 'undefined') return 0 // SSR
-  return Math.max(
-    document.documentElement!.clientWidth,
-    window.innerWidth || 0
-  )
-}
-
-function getClientHeight () {
-  if (typeof document === 'undefined') return 0 // SSR
-  return Math.max(
-    document.documentElement!.clientHeight,
-    window.innerHeight || 0
-  )
+  }
 }
