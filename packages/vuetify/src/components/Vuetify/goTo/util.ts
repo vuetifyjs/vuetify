@@ -39,7 +39,7 @@ function type (el: any) {
 function $ (el: any): HTMLElement | null {
   if (typeof el === 'string') {
     return document.querySelector<HTMLElement>(el)
-  } if (el && el._isVue) {
+  } else if (el && el._isVue) {
     return (el as Vue).$el as HTMLElement
   } else if (el instanceof HTMLElement) {
     return el
