@@ -28,7 +28,7 @@ export default function applicationable (value: TargetProp, events: string[] = [
           : this.callUpdate()
       },
       applicationProperty (newVal, oldVal) {
-        this.$vuetify.application.unbind(this._uid, oldVal)
+        this.$vuetify.application.unregister(this._uid, oldVal)
       }
     },
 
@@ -59,7 +59,7 @@ export default function applicationable (value: TargetProp, events: string[] = [
       callUpdate () {
         if (!this.app) return
 
-        this.$vuetify.application.bind(
+        this.$vuetify.application.register(
           this._uid,
           this.applicationProperty,
           this.updateApplication()
@@ -68,7 +68,7 @@ export default function applicationable (value: TargetProp, events: string[] = [
       removeApplication (force = false) {
         if (!force && !this.app) return
 
-        this.$vuetify.application.unbind(
+        this.$vuetify.application.unregister(
           this._uid,
           this.applicationProperty
         )
