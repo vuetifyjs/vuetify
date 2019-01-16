@@ -23,42 +23,37 @@ export default function goTo (this: Vue, _target: GoToTarget, _settings: Partial
     appOffset: true,
     ..._settings
   }
+  const container = getContainer(settings.container)
+
+  if (settings.appOffset) {
+    const isDrawer = container.classList.contains('v-navigation-drawer')
+    const isClipped = container.classList.contains('v-navigation-drawer--clipped')
+
+    settings.offset += this.$vuetify.application.bar
+    if (!isDrawer || isClipped) settings.offset += this.$vuetify.application.top
+  }
+
+  const startTime = performance.now()
+  const targetLocation = getOffset(_target) - settings.offset
+  const startLocation = container.scrollTop
+  if (targetLocation === startLocation) return Promise.resolve(targetLocation)
+
+  const ease = typeof settings.easing === 'function'
+    ? settings.easing
+    : (easingPatterns as Dictionary<easingPatterns.EasingFunction>)[settings.easing]
+  if (!ease) throw new TypeError(`Easing function "${settings.easing}" not found.`)
 
   // tslint:disable-next-line:promise-must-complete
-  return new Promise(resolve => {
-    const container = getContainer(settings.container)
+  return new Promise(resolve => requestAnimationFrame(function step (currentTime: number) {
+    const timeElapsed = currentTime - startTime
+    const progress = settings.duration ? Math.min(timeElapsed / settings.duration, 1) : 1
 
-    if (settings.appOffset) {
-      const isDrawer = container.classList.contains('v-navigation-drawer')
-      const isClipped = container.classList.contains('v-navigation-drawer--clipped')
+    container.scrollTop = Math.floor(startLocation + (targetLocation - startLocation) * ease(progress))
 
-      if (isDrawer) settings.offset += this.$vuetify.application.bar + (isClipped ? this.$vuetify.application.top : 0)
-      else settings.offset += this.$vuetify.application.bar + this.$vuetify.application.top
+    if (progress === 1 || container.clientHeight + container.scrollTop === container.scrollHeight) {
+      return resolve(targetLocation)
     }
 
-    const targetLocation = getOffset(_target) - settings.offset
-    const startLocation = container.scrollTop
-    const initialDistance = targetLocation - startLocation
-    const startTime = performance.now()
-    const ease = typeof settings.easing === 'function'
-      ? settings.easing
-      : (easingPatterns as Dictionary<easingPatterns.EasingFunction>)[settings.easing]
-
-    if (!ease) throw new TypeError(`Easing function "${settings.easing}" not found.`)
-
-    requestAnimationFrame(function step (currentTime: number) {
-      const timeElapsed = currentTime - startTime
-      const progress = settings.duration ? Math.min(timeElapsed / settings.duration, 1) : 1
-
-      container.scrollTop = Math.floor(startLocation + initialDistance * ease(progress))
-
-      if (
-        targetLocation === startLocation ||
-        container.clientHeight + container.scrollTop === container.scrollHeight ||
-        progress === 1
-      ) return resolve(targetLocation)
-
-      requestAnimationFrame(step)
-    })
-  })
+    requestAnimationFrame(step)
+  }))
 }

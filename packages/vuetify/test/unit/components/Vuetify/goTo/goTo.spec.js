@@ -6,41 +6,37 @@ test('$vuetify.goTo', ({ mount }) => {
   const wrapper = mount(VCard)
 
   it('should throw error when target is undefined or null', async () => {
-    await expect(wrapper.vm.$vuetify.goTo(undefined))
-      .rejects
-      .toEqual(new TypeError('Target must be a Number/Selector/HTMLElement/VueComponent, received undefined instead.'))
+    expect(() => wrapper.vm.$vuetify.goTo(undefined))
+      .toThrow(new TypeError('Target must be a Number/Selector/HTMLElement/VueComponent, received undefined instead.'))
 
-    await expect(wrapper.vm.$vuetify.goTo(null))
-      .rejects
-      .toEqual(new TypeError('Target must be a Number/Selector/HTMLElement/VueComponent, received null instead.'))
+    expect(() => wrapper.vm.$vuetify.goTo(null))
+      .toThrow(new TypeError('Target must be a Number/Selector/HTMLElement/VueComponent, received null instead.'))
   })
 
   it('should throw error when target element is not found', async () => {
-    await expect(wrapper.vm.$vuetify.goTo('#foo'))
-      .rejects
-      .toEqual(new Error('Target element "#foo" not found.'))
+    expect(() => wrapper.vm.$vuetify.goTo('#foo'))
+      .toThrow(new Error('Target element "#foo" not found.'))
   })
 
   it('should throw error when container element is not found', async () => {
-    await expect(wrapper.vm.$vuetify.goTo(0, { container: '#thisContainerDoesNotExist' }))
-      .rejects
-      .toEqual(new Error('Container element "#thisContainerDoesNotExist" not found.'))
+    expect(() => wrapper.vm.$vuetify.goTo(0, { container: '#thisContainerDoesNotExist' }))
+      .toThrow(new Error('Container element "#thisContainerDoesNotExist" not found.'))
   })
 
   it('should throw error when container is undefined or null', async () => {
-    await expect(wrapper.vm.$vuetify.goTo(0, { container: undefined }))
-      .rejects
-      .toEqual(new TypeError('Container must be a Selector/HTMLElement/VueComponent, received undefined instead.'))
+    expect(() => wrapper.vm.$vuetify.goTo(0, { container: undefined }))
+      .toThrow(new TypeError('Container must be a Selector/HTMLElement/VueComponent, received undefined instead.'))
 
-    await expect(wrapper.vm.$vuetify.goTo(0, { container: null }))
-      .rejects
-      .toEqual(new TypeError('Container must be a Selector/HTMLElement/VueComponent, received null instead.'))
-  })
+    expect(() => wrapper.vm.$vuetify.goTo(0, { container: null }))
+      .toThrow(new TypeError('Container must be a Selector/HTMLElement/VueComponent, received null instead.'))
+
+    expect(() => wrapper.vm.$vuetify.goTo(0, { container: 42 }))
+      .toThrow(new TypeError('Container must be a Selector/HTMLElement/VueComponent, received Number instead.'))
+    })
 
   it('should throw error if easing does not exist', async () => {
-    await expect(wrapper.vm.$vuetify.goTo(0, { easing: 'thisEasingDoesNotExist' }))
-      .rejects
-      .toEqual(new TypeError('Easing function "thisEasingDoesNotExist" not found.'))
+    expect(() => wrapper.vm.$vuetify.goTo(0, { easing: 'thisEasingDoesNotExist' }))
+      .toThrow(new TypeError('Easing function "thisEasingDoesNotExist" not found.'))
   })
 
   it('should not throw error when using VueComponent as target', async () => {
