@@ -273,6 +273,113 @@
           This is an error alert.
         </v-alert>
       </v-flex>
+      <!-- Dense Text -->
+      <v-flex>
+        <h3 class="title grey--text text-xs-center mb-4 mt-5">
+          Dense Text
+        </h3>
+        <v-alert
+          type="success"
+          dense
+          text
+        >
+          This is a success alert.
+        </v-alert>
+
+        <v-alert
+          type="info"
+          dense
+          text
+        >
+          This is an info alert.
+        </v-alert>
+
+        <v-alert
+          type="warning"
+          dense
+          text
+        >
+          This is a warning alert.
+        </v-alert>
+
+        <v-alert
+          type="error"
+          dense
+          text
+        >
+          This is an error alert.
+        </v-alert>
+      </v-flex>
+      <!-- Text -->
+      <v-flex>
+        <h3 class="title grey--text text-xs-center mb-4 mt-5">
+          Text
+        </h3>
+        <v-alert
+          type="success"
+          text
+        >
+          This is a success alert.
+        </v-alert>
+
+        <v-alert
+          type="info"
+          text
+        >
+          This is an info alert.
+        </v-alert>
+
+        <v-alert
+          type="warning"
+          text
+        >
+          This is a warning alert.
+        </v-alert>
+
+        <v-alert
+          type="error"
+          text
+        >
+          This is an error alert.
+        </v-alert>
+      </v-flex>
+      <!-- Prominent Text -->
+      <v-flex>
+        <h3 class="title grey--text text-xs-center mb-4 mt-5">
+          Prominent Text
+        </h3>
+        <v-alert
+          type="success"
+          prominent
+          text
+        >
+          This is a success alert.
+        </v-alert>
+
+        <v-alert
+          type="info"
+          prominent
+          text
+        >
+          This is an info alert.
+        </v-alert>
+
+        <v-alert
+          type="warning"
+          prominent
+          text
+        >
+          This is a warning alert.
+        </v-alert>
+
+        <v-alert
+          type="error"
+          prominent
+          text
+        >
+          This is an error alert.
+        </v-alert>
+      </v-flex>
       <!-- Closable -->
       <v-flex>
         <h3 class="title grey--text text-xs-center mb-4 mt-5">

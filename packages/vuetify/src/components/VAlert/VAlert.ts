@@ -50,6 +50,7 @@ export default mixins(
     outline: Boolean,
     outlined: Boolean,
     prominent: Boolean,
+    text: Boolean,
     type: {
       type: String,
       validator (val: string) {
@@ -127,7 +128,8 @@ export default mixins(
         'v-alert--border': Boolean(this.border),
         'v-alert--dense': this.dense,
         'v-alert--outline': this.hasOutline,
-        'v-alert--prominent': this.prominent
+        'v-alert--prominent': this.prominent,
+        'v-alert--text': this.text
       }
 
       if (this.border) {
@@ -152,13 +154,16 @@ export default mixins(
     },
     hasColoredIcon (): boolean {
       return (
-        this.hasOutline ||
+        this.hasText ||
         (Boolean(this.border) && this.coloredBorder)
       )
     },
     // TODO: remove deprecated
     hasOutline (): boolean {
       return this.outline || this.outlined
+    },
+    hasText (): boolean {
+      return this.text || this.hasOutline
     },
     iconColor () {
       return this.hasColoredIcon ? this.computedColor : undefined
@@ -196,7 +201,7 @@ export default mixins(
       }
 
       if (!this.coloredBorder) {
-        const setColor = this.hasOutline ? this.setTextColor : this.setBackgroundColor
+        const setColor = this.hasText ? this.setTextColor : this.setBackgroundColor
         data = setColor(this.computedColor, data)
       }
 
