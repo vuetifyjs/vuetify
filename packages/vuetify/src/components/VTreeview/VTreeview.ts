@@ -70,8 +70,7 @@ export default mixins(
     } as PropValidator<NodeArray>,
     search: String,
     customFilter: {
-      type: Function,
-      default: (items: any[], search: string, idKey: string, textKey: string, childrenKey: string) => {
+      default: (items, search, idKey, textKey, childrenKey) => {
         const excluded = new Set()
 
         if (!search) return excluded
@@ -82,7 +81,7 @@ export default mixins(
 
         return excluded
       }
-    },
+    } as PropValidator<(items: any[], search: string, idKey: string, textKey: string, childrenKey: string) => Set<any>>,
     ...VTreeviewNodeProps
   },
 
