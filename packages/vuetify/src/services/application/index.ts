@@ -1,8 +1,8 @@
 import { VuetifyServiceInstance } from 'vuetify/types/services'
 import { TargetPropValues, TargetProp } from 'vuetify/types/services/application'
 
-export class Layout implements VuetifyServiceInstance {
-  static property = 'layout'
+export class Application implements VuetifyServiceInstance {
+  static property = 'application'
 
   bar = 0
   top = 0
