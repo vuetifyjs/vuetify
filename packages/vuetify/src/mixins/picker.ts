@@ -11,10 +11,10 @@ import mixins from '../util/mixins'
 // Types
 import { VNode } from 'vue'
 
-/* @vue/component */
 export default mixins(
   Colorable,
   Themeable
+/* @vue/component */
 ).extend({
   name: 'picker',
 
