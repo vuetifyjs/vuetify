@@ -1,6 +1,7 @@
 import { test } from '@/test'
 import VSelect from '@/components/VSelect/VSelect'
 import VChip from '@/components/VChip'
+import VAutocomplete from '@/components/VAutocomplete'
 
 test('VSelect', ({ mount, compileToFunctions }) => {
   const app = document.createElement('div')
@@ -217,5 +218,46 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.isFocused).toBe(false)
     expect(wrapper.vm.isMenuActive).toBe(false)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/4853
+  it('should select item after typing its first few letters', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['aaa', 'foo', 'faa']
+      }
+    })
+
+    const input = wrapper.first('input')
+    input.trigger('focus')
+    await wrapper.vm.$nextTick()
+
+    input.trigger('keypress', { key: 'f' })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.internalValue).toEqual('foo')
+
+    input.trigger('keypress', { key: 'a' })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.internalValue).toEqual('faa')
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/4853
+  it('should not replicate html select hotkeys in v-autocomplete', async () => {
+    const wrapper = mount(VAutocomplete, {
+      propsData: {
+        items: ['aaa', 'foo', 'faa']
+      }
+    })
+
+    const onKeyPress = jest.fn()
+    wrapper.setMethods({ onKeyPress })
+
+    const input = wrapper.first('input')
+    input.trigger('focus')
+    await wrapper.vm.$nextTick()
+
+    input.trigger('keypress', { key: 'f' })
+    await wrapper.vm.$nextTick()
+    expect(onKeyPress).not.toBeCalled()
   })
 })

@@ -220,7 +220,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
   it('should not display menu when tab focused', async () => {
     const wrapper = mount(VAutocomplete, {
       propsData: {
-        items: [1 ,2],
+        items: [1, 2],
         value: 1
       }
     })
@@ -497,7 +497,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
     input.element.value = 'foo'
     input.trigger('input')
 
-    wrapper.setProps({ hideSelections: true })
+    wrapper.setProps({ hideSelected: true })
 
     expect(wrapper.vm.genSelections()).toEqual([])
   })
@@ -814,5 +814,27 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.getMenuIndex()).toBe(0)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/4580
+  it('should display menu when hide-no-date and hide-selected are enabled and selected item does not match search', async () => {
+    const wrapper = mount(VAutocomplete, {
+      propsData: {
+        items: [1, 2],
+        value: 1,
+        hideNoData: true,
+        hideSelected: true,
+      }
+    })
+
+    const input = wrapper.first('input')
+    input.trigger('focus')
+    await wrapper.vm.$nextTick()
+
+    input.element.value = 2
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.menuCanShow).toBe(true)
   })
 })

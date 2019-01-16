@@ -4,13 +4,15 @@ import '../../stylus/components/_counters.styl'
 // Mixins
 import Themeable, { functionalThemeClasses } from '../../mixins/themeable'
 
+// Types
+import { VNode, RenderContext } from 'vue'
+import mixins from '../../util/mixins'
+
 /* @vue/component */
-export default {
+export default mixins(Themeable).extend({
   name: 'v-counter',
 
   functional: true,
-
-  mixins: [Themeable],
 
   props: {
     value: {
@@ -20,7 +22,7 @@ export default {
     max: [Number, String]
   },
 
-  render (h, ctx) {
+  render (h, ctx: RenderContext): VNode {
     const { props } = ctx
     const max = parseInt(props.max, 10)
     const value = parseInt(props.value, 10)
@@ -35,4 +37,4 @@ export default {
       }
     }, content)
   }
-}
+})

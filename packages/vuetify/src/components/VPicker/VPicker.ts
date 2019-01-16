@@ -8,11 +8,13 @@ import Themeable from '../../mixins/themeable'
 // Helpers
 import { convertToUnit } from '../../util/helpers'
 
-/* @vue/component */
-export default {
-  name: 'v-picker',
+// Types
+import { VNode } from 'vue/types'
+import mixins from '../../util/mixins'
 
-  mixins: [Colorable, Themeable],
+/* @vue/component */
+export default mixins(Colorable, Themeable).extend({
+  name: 'v-picker',
 
   props: {
     fullWidth: Boolean,
@@ -28,8 +30,8 @@ export default {
   },
 
   computed: {
-    computedTitleColor () {
-      const defaultTitleColor = this.isDark ? null : (this.color || 'primary')
+    computedTitleColor (): string | false {
+      const defaultTitleColor = this.isDark ? false : (this.color || 'primary')
       return this.color || defaultTitleColor
     }
   },
@@ -68,7 +70,7 @@ export default {
     }
   },
 
-  render (h) {
+  render (h): VNode {
     return h('div', {
       staticClass: 'v-picker v-card',
       'class': {
@@ -82,4 +84,4 @@ export default {
       this.$slots.actions ? this.genActions() : null
     ])
   }
-}
+})

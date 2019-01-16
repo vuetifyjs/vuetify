@@ -4,23 +4,25 @@ import Applicationable from '../../mixins/applicationable'
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 
-/* @vue/component */
-export default {
-  name: 'v-system-bar',
+// Types
+import { VNode } from 'vue/types'
+import mixins from '../../util/mixins'
 
-  mixins: [
-    Applicationable('bar', [
-      'height',
-      'window'
-    ]),
-    Colorable,
-    Themeable
-  ],
+export default mixins(
+  Applicationable('bar', [
+    'height',
+    'window'
+  ]),
+  Colorable,
+  Themeable
+/* @vue/component */
+).extend({
+  name: 'v-system-bar',
 
   props: {
     height: {
       type: [Number, String],
-      validator: v => !isNaN(parseInt(v))
+      validator: (v: any) => !isNaN(parseInt(v))
     },
     lightsOut: Boolean,
     status: Boolean,
@@ -28,7 +30,7 @@ export default {
   },
 
   computed: {
-    classes () {
+    classes (): object {
       return {
         'v-system-bar--lights-out': this.lightsOut,
         'v-system-bar--absolute': this.absolute,
@@ -38,7 +40,7 @@ export default {
         ...this.themeClasses
       }
     },
-    computedHeight () {
+    computedHeight (): number {
       if (this.height) return parseInt(this.height)
 
       return this.window ? 32 : 24
@@ -56,7 +58,7 @@ export default {
     }
   },
 
-  render (h) {
+  render (h): VNode {
     const data = {
       staticClass: 'v-system-bar',
       'class': this.classes,
@@ -67,4 +69,4 @@ export default {
 
     return h('div', this.setBackgroundColor(this.color, data), this.$slots.default)
   }
-}
+})

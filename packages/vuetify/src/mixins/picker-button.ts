@@ -5,7 +5,7 @@ import Colorable from './colorable'
 import mixins from '../util/mixins'
 
 // Types
-import { VNode } from 'vue'
+import { VNodeChildren } from 'vue'
 
 /* @vue/component */
 export default mixins(
@@ -15,7 +15,7 @@ export default mixins(
     genPickerButton (
       prop: string,
       value: any,
-      content: string | VNode | VNode[],
+      content: VNodeChildren,
       readonly = false,
       staticClass = ''
     ) {
