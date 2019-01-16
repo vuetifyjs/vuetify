@@ -21,7 +21,7 @@
       </h3>
       <v-flex align-self-center>
         <v-date-picker
-          v-model="model1"
+          v-model="model"
           :landscape="landscape"
         />
       </v-flex>
@@ -31,7 +31,7 @@
       </h3>
       <v-flex align-self-center>
         <v-date-picker
-          v-model="model2"
+          v-model="model"
           landscape
         />
       </v-flex>
@@ -47,8 +47,8 @@
           align-center
         >
           <v-date-picker
+            v-model="model"
             :landscape="landscape"
-            value="2019-01-16"
             disabled
           />
         </v-layout>
@@ -65,7 +65,7 @@
           align-center
         >
           <v-date-picker
-            v-model="model3"
+            v-model="model"
             :landscape="landscape"
             reactive
           />
@@ -83,19 +83,19 @@
           align-center
         >
           <v-date-picker
-            v-model="model5"
+            v-model="model"
             :landscape="landscape"
             class="mt-4"
             color="success"
           />
           <v-date-picker
-            v-model="model6"
+            v-model="model"
             :landscape="landscape"
             class="mt-4"
             color="red lighten-2"
           />
           <v-date-picker
-            v-model="model7"
+            v-model="model"
             :landscape="landscape"
             class="mt-4"
             color="blue"
@@ -114,19 +114,19 @@
           align-center
         >
           <v-date-picker
-            v-model="model11"
+            v-model="model"
             :landscape="landscape"
             class="mt-4"
             header-color="success"
           />
           <v-date-picker
-            v-model="model12"
+            v-model="model"
             :landscape="landscape"
             class="mt-4"
             header-color="red lighten-2"
           />
           <v-date-picker
-            v-model="model13"
+            v-model="model"
             :landscape="landscape"
             class="mt-4"
             header-color="blue"
@@ -145,21 +145,21 @@
           align-center
         >
           <v-date-picker
-            v-model="model17"
+            v-model="model"
             :landscape="landscape"
             class="mt-4"
             color="red lighten-2"
             header-color="success"
           />
           <v-date-picker
-            v-model="model18"
+            v-model="model"
             :landscape="landscape"
             class="mt-4"
             color="error"
             header-color="red lighten-2"
           />
           <v-date-picker
-            v-model="model19"
+            v-model="model"
             :landscape="landscape"
             class="mt-4"
             color="teal"
@@ -177,7 +177,7 @@
           v-model="menu1"
           :close-on-content-click="false"
           :nudge-right="40"
-          :return-value.sync="date1"
+          :return-value.sync="model"
           lazy
           transition="scale-transition"
           offset-y
@@ -186,13 +186,13 @@
         >
           <v-text-field
             slot="activator"
-            v-model="date1"
+            v-model="model"
             label="Picker in menu"
             prepend-icon="mdi-calendar"
             readonly
           />
           <v-date-picker
-            v-model="date1"
+            v-model="model"
             :landscape="landscape"
             no-title
             scrollable
@@ -208,7 +208,7 @@
             <v-btn
               flat
               color="primary"
-              @click="$refs.menu.save(date1)"
+              @click="$refs.menu.save(model)"
             >
               OK
             </v-btn>
@@ -223,7 +223,7 @@
         <v-dialog
           ref="dialog"
           v-model="modal1"
-          :return-value.sync="date1"
+          :return-value.sync="model"
           persistent
           lazy
           full-width
@@ -231,13 +231,13 @@
         >
           <v-text-field
             slot="activator"
-            v-model="date1"
+            v-model="model"
             label="Picker in dialog"
             prepend-icon="mdi-calendar"
             readonly
           />
           <v-date-picker
-            v-model="date1"
+            v-model="model"
             :landscape="landscape"
             scrollable
           >
@@ -252,7 +252,7 @@
             <v-btn
               flat
               color="primary"
-              @click="$refs.dialog.save(date1)"
+              @click="$refs.dialog.save(model)"
             >
               OK
             </v-btn>
@@ -265,12 +265,12 @@
       </h3>
       <v-flex align-self-center>
         <v-date-picker
-          v-model="date2"
+          v-model="model"
           :landscape="landscape"
           no-title
         />
-        <p>Date in ISO format: <strong>{{ date2 }}</strong></p>
-        <p>Date in custom format: <strong>{{ date2 | customFormat }}</strong></p>
+        <p>Date in ISO format: <strong>{{ model }}</strong></p>
+        <p>Date in custom format: <strong>{{ model | customFormat }}</strong></p>
       </v-flex>
 
       <h3 class="title grey--text mb-4 mt-5 center">
@@ -278,7 +278,7 @@
       </h3>
       <v-flex align-self-center>
         <v-date-picker
-          v-model="date3"
+          v-model="modelMM"
           :landscape="landscape"
           min="2016-06-15"
           max="2018-03-20"
@@ -290,7 +290,7 @@
       </h3>
       <v-flex align-self-center>
         <v-date-picker
-          v-model="date4"
+          v-model="model"
           :landscape="landscape"
           :allowed-dates="val => parseInt(val.split('-')[2], 10) % 2 === 0"
         />
@@ -334,19 +334,19 @@
           align-center
         >
           <v-date-picker
-            v-model="date5"
+            v-model="model"
             :landscape="landscape"
             width="200"
             class="mt-3"
           />
           <v-date-picker
-            v-model="date6"
+            v-model="model"
             :landscape="landscape"
             width="290"
             class="mt-3"
           />
           <v-date-picker
-            v-model="date7"
+            v-model="model"
             :landscape="landscape"
             width="500"
             class="mt-3"
@@ -365,7 +365,7 @@
           align-center
         >
           <v-date-picker
-            v-model="date8"
+            v-model="model"
             :landscape="landscape"
             full-width
             class="mt-3"
@@ -378,7 +378,7 @@
       </h3>
       <v-flex align-self-center>
         <v-date-picker
-          v-model="date8"
+          v-model="model"
           :landscape="landscape"
           :picker-date.sync="pickerDate"
         />
@@ -398,7 +398,7 @@
               Defined by array
             </div>
             <v-date-picker
-              v-model="date9"
+              v-model="model"
               :landscape="landscape"
               :events="arrayEvents"
               event-color="green lighten-1"
@@ -409,7 +409,7 @@
               Defined by function
             </div>
             <v-date-picker
-              v-model="date10"
+              v-model="model"
               :landscape="landscape"
               :event-color="date => date[9] % 2 ? 'red' : 'yellow'"
               :events="functionEvents"
@@ -429,14 +429,14 @@
           align-center
         >
           <v-date-picker
-            v-model="picker"
+            v-model="model"
             :landscape="landscape"
             :first-day-of-week="0"
             locale="zh-cn"
             class="mt-3"
           />
           <v-date-picker
-            v-model="picker"
+            v-model="model"
             :landscape="landscape"
             :first-day-of-week="1"
             locale="sv-se"
@@ -450,7 +450,7 @@
       </h3>
       <v-flex align-self-center>
         <v-date-picker
-          v-model="picker1"
+          v-model="model"
           :landscape="landscape"
           year-icon="mdi-calendar-blank"
           prev-icon="mdi-skip-previous"
@@ -463,7 +463,7 @@
       </h3>
       <v-flex align-self-center>
         <v-date-picker
-          v-model="date11"
+          v-model="model"
           :landscape="landscape"
           readonly
         />
@@ -479,13 +479,13 @@
           justify-space-around
         >
           <v-date-picker
-            v-model="date12"
+            v-model="model"
             :landscape="landscape"
             class="mt-4"
             :show-current="false"
           />
           <v-date-picker
-            v-model="date13"
+            v-model="model"
             :landscape="landscape"
             class="mt-4"
             show-current="2013-07-13"
@@ -504,7 +504,7 @@
           align-center
         >
           <v-date-picker
-            v-model="picker2"
+            v-model="monthModel"
             :landscape="landscape"
             class="mt-4"
             type="month"
@@ -523,7 +523,7 @@
           align-center
         >
           <v-date-picker
-            v-model="picker4"
+            v-model="monthModel"
             :landscape="landscape"
             class="mt-4"
             color="info"
@@ -537,7 +537,7 @@
       </h3>
       <v-flex align-self-center>
         <v-date-picker
-          v-model="picker6"
+          v-model="monthModel"
           :landscape="landscape"
           :allowed-dates="val => parseInt(val.split('-')[1], 10) % 2 === 0"
           type="month"
@@ -553,7 +553,7 @@
           v-model="menu2"
           :close-on-content-click="false"
           :nudge-right="40"
-          :return-value.sync="date16"
+          :return-value.sync="monthModel"
           lazy
           transition="scale-transition"
           offset-y
@@ -563,13 +563,13 @@
         >
           <v-text-field
             slot="activator"
-            v-model="date16"
+            v-model="monthModel"
             label="Picker in menu"
             prepend-icon="mdi-calendar"
             readonly
           />
           <v-date-picker
-            v-model="date16"
+            v-model="monthModel"
             :landscape="landscape"
             type="month"
             no-title
@@ -586,7 +586,7 @@
             <v-btn
               flat
               color="primary"
-              @click="$refs.menu2.save(date16)"
+              @click="$refs.menu2.save(monthModel)"
             >
               OK
             </v-btn>
@@ -601,7 +601,7 @@
         <v-dialog
           ref="dialog2"
           v-model="modal2"
-          :return-value.sync="dialDate2"
+          :return-value.sync="monthModel"
           persistent
           lazy
           full-width
@@ -609,13 +609,13 @@
         >
           <v-text-field
             slot="activator"
-            v-model="dialDate2"
+            v-model="monthModel"
             label="Picker in dialog"
             prepend-icon="mdi-calendar"
             readonly
           />
           <v-date-picker
-            v-model="dialDate2"
+            v-model="monthModel"
             :landscape="landscape"
             type="month"
             scrollable
@@ -631,7 +631,7 @@
             <v-btn
               flat
               color="primary"
-              @click="$refs.dialog2.save(dialDate2)"
+              @click="$refs.dialog2.save(monthModel)"
             >
               OK
             </v-btn>
@@ -678,21 +678,21 @@
           align-center
         >
           <v-date-picker
-            v-model="date14"
+            v-model="monthModel"
             :landscape="landscape"
             class="mt-4"
             type="month"
             width="150"
           />
           <v-date-picker
-            v-model="date14"
+            v-model="monthModel"
             :landscape="landscape"
             class="mt-4"
             type="month"
             width="290"
           />
           <v-date-picker
-            v-model="date14"
+            v-model="monthModel"
             :landscape="landscape"
             class="mt-4"
             type="month"
@@ -712,7 +712,7 @@
           justify-space-around
         >
           <v-date-picker
-            v-model="date15"
+            v-model="monthModel"
             :landscape="landscape"
             class="mt-4"
             full-width
@@ -733,7 +733,7 @@
         >
           <div class="mt-4">
             <v-date-picker
-              v-model="picker7"
+              v-model="monthModel"
               :landscape="landscape"
               type="month"
               locale="th"
@@ -741,7 +741,7 @@
           </div>
           <div class="mt-4">
             <v-date-picker
-              v-model="picker8"
+              v-model="monthModel"
               :landscape="landscape"
               type="month"
               locale="sv-se"
@@ -755,7 +755,7 @@
       </h3>
       <v-flex align-self-center>
         <v-date-picker
-          v-model="picker9"
+          v-model="monthModel"
           :landscape="landscape"
           readonly
           type="month"
@@ -767,7 +767,7 @@
       </h3>
       <v-flex align-self-center>
         <v-date-picker
-          v-model="picker10"
+          v-model="monthModel"
           :landscape="landscape"
           type="month"
           year-icon="mdi-calendar-blank"
@@ -788,7 +788,7 @@
         >
           <div class="mt-4">
             <v-date-picker
-              v-model="month1"
+              v-model="monthModel"
               :landscape="landscape"
               :show-current="false"
               type="month"
@@ -796,7 +796,7 @@
           </div>
           <div class="mt-4">
             <v-date-picker
-              v-model="month2"
+              v-model="monthModel"
               :landscape="landscape"
               type="month"
               show-current="2013-07"
@@ -817,55 +817,17 @@ export default {
   },
 
   data: () => ({
-    model1: '2019-01-16',
-    model2: '2019-01-16',
-    model3: '2019-01-16',
-    model4: '2019-01-16',
-    model5: '2019-01-16',
-    model6: '2019-01-16',
-    model7: '2019-01-16',
-    model11: '2019-01-16',
-    model12: '2019-01-16',
-    model13: '2019-01-16',
-    model17: '2019-01-16',
-    model18: '2019-01-16',
-    model19: '2019-01-16',
     menu1: false,
     modal1: false,
-    date1: '2019-01-16',
-    date2: '2019-01-16',
-    date3: '2019-01-16',
-    date4: '2019-01-16',
-    dates: [],
-    date5: '2019-01-16',
-    date6: '2019-01-16',
-    date7: '2019-01-16',
-    date8: '2019-01-16',
     pickerDate: null,
     arrayEvents: null,
-    date9: '2019-01-16',
-    date10: '2019-01-16',
-    picker: '2019-01-16',
-    picker1: '2019-01-16',
-    date11: '2019-01-16',
-    date12: '2019-01-16',
-    date13: '2013-07-29',
-    picker2: '2019-01-16',
-    picker4: '2019-01-16',
-    picker6: '2019-01-16',
-    dialDate2: '2019-01',
     modal2: false,
     months: [],
-    date14: '2019-01-16',
-    date15: '2019-01-16',
-    date16: '2019-01',
+    dates: [],
     menu2: false,
-    picker7: '2019-01-16',
-    picker8: '2019-01-16',
-    picker9: '2018-06',
-    picker10: '2019-01-16',
-    month1: '2019-01',
-    month2: '2013-09',
+    model: '2019-01-16',
+    modelMM: '2017-07-15',
+    monthModel: '2019-01',
     landscape: false
   }),
 
