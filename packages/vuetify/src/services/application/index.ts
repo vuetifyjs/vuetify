@@ -1,9 +1,5 @@
 import { VuetifyServiceInstance } from 'vuetify/types/services'
-
-export type TargetProp = 'bar' | 'bottom' | 'footer' | 'insetFooter' | 'left' | 'right' | 'top'
-interface TargetPropValues {
-  [uid: number]: number
-}
+import { TargetPropValues, TargetProp } from 'vuetify/types/services/application'
 
 export class Layout implements VuetifyServiceInstance {
   static property = 'layout'
