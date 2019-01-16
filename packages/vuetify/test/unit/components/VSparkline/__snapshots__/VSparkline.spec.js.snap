@@ -1,0 +1,164 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VSparkline.vue should render component and match a snapshot 1`] = `
+
+<svg stroke-width="4"
+     width="100%"
+     height="25%"
+     viewbox="0 0 300 75"
+     class="primary--text"
+>
+  <defs>
+    <lineargradient id="1"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="currentColor"
+      >
+      </stop>
+    </lineargradient>
+  </defs>
+  <path id="1"
+        d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
+        fill="none"
+        stroke="url(#1)"
+  >
+  </path>
+</svg>
+
+`;
+
+exports[`VSparkline.vue should render component with gradient and match a snapshot 1`] = `
+
+<svg stroke-width="4"
+     width="100%"
+     height="25%"
+     viewbox="0 0 300 75"
+     class="primary--text"
+>
+  <defs>
+    <lineargradient id="5"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="rgba(80, 160, 240, 0.5)"
+      >
+      </stop>
+      <stop offset="0.5"
+            stop-color="red"
+      >
+      </stop>
+      <stop offset="1"
+            stop-color="#000"
+      >
+      </stop>
+    </lineargradient>
+  </defs>
+  <path id="5"
+        d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
+        fill="none"
+        stroke="url(#5)"
+  >
+  </path>
+</svg>
+
+`;
+
+exports[`VSparkline.vue should render component with line width and match a snapshot 1`] = `
+
+<svg stroke-width="42"
+     width="100%"
+     height="25%"
+     viewbox="0 0 300 75"
+     class="primary--text"
+>
+  <defs>
+    <lineargradient id="4"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="currentColor"
+      >
+      </stop>
+    </lineargradient>
+  </defs>
+  <path id="4"
+        d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
+        fill="none"
+        stroke="url(#4)"
+  >
+  </path>
+</svg>
+
+`;
+
+exports[`VSparkline.vue should render component with padding and match a snapshot 1`] = `
+
+<svg stroke-width="4"
+     width="100%"
+     height="25%"
+     viewbox="0 0 300 75"
+     class="primary--text"
+>
+  <defs>
+    <lineargradient id="2"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="currentColor"
+      >
+      </stop>
+    </lineargradient>
+  </defs>
+  <path id="2"
+        d="M20 54.186036511627904L150 49.30232558139535S150 49.30232558139535 150 49.30232558139535L280 20.813963488372092"
+        fill="none"
+        stroke="url(#2)"
+  >
+  </path>
+</svg>
+
+`;
+
+exports[`VSparkline.vue should render smooth component and match a snapshot 1`] = `
+
+<svg stroke-width="4"
+     width="100%"
+     height="25%"
+     viewbox="0 0 300 75"
+     class="primary--text"
+>
+  <defs>
+    <lineargradient id="3"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="currentColor"
+      >
+      </stop>
+    </lineargradient>
+  </defs>
+  <path id="3"
+        d="M8 65.62789697674418L130.03352731272736 58.55291889055212S150 57.395348837209305 168.94587032678325 50.98800948606565L292 9.372103023255814"
+        fill="none"
+        stroke="url(#3)"
+  >
+  </path>
+</svg>
+
+`;
