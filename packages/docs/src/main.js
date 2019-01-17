@@ -19,6 +19,8 @@ import App from './App.vue'
 
 Vue.config.performance = process.env.NODE_ENV === 'development'
 
+export const production = process.env.NODE_ENV !== 'development'
+
 // Expose a factory function that creates a fresh set of store, router,
 // app instances on each call (which is called for each SSR request)
 export async function createApp ({
