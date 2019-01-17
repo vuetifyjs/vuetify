@@ -103,6 +103,18 @@ const cacheMiddleware = microcache.cacheSeconds(10 * 60, req => useMicroCache &&
 const ouchInstance = (new Ouch()).pushHandler(new Ouch.handlers.PrettyPageHandler('orange', null, 'sublime'))
 
 function render (req, res) {
+  const alternate = languages.find(lang => lang.alternate === req.params[0])
+
+  // Redirect to new locale
+  if (alternate) {
+    return res.redirect(301, `/${alternate.locale}${req.params[1] || ''}`)
+  }
+
+  // Redirect to fallback if locale does not exist
+  if (!availableLanguages.includes(req.params[0])) {
+    return res.redirect(301, `/${fallbackLocale}`)
+  }
+
   const s = Date.now()
 
   res.setHeader('Content-Type', 'text/html')
