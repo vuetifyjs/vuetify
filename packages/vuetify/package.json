@@ -21,6 +21,7 @@
   ],
   "scripts": {
     "watch": "cross-env TARGET=development webpack --config build/config.js --progress --hide-modules --watch",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --hot",
     "build": "concurrently \"yarn build:dist --no-progress\" \"yarn build:lib\" -n \"dist,lib\" --kill-others-on-fail -r",
     "build:dist": "rimraf dist && cross-env NODE_ENV=production webpack --config build/config.js --progress --hide-modules",
     "build:lib": "node build/build-lib.js",
