@@ -18,7 +18,7 @@
   "localSubHeader2": "### Install PM2 (optional)",
   "localText5": "If you choose, you can use PM2 to run and manage multiple portions of the Vuetify mono-repo at the same time (Playground, Docs, Etc...) Included in the root directory are a few PM2 config files which will boot up and manage all that Vuetify has to offer. To get started you need to start PM2:",
   "setupHeader": "## Setup Dev Environment",
-  "setupText1": "Setting up your dev environemnt is easy! To start fork [Vuetify](https://github.com/vuetifyjs/vuetify) into your own repo.",
+  "setupText1": "Setting up your dev environment is easy! To start fork [Vuetify](https://github.com/vuetifyjs/vuetify) into your own repo.",
   "setupText2": "Now you are ready to boot up your dev environment!",
   "startupHeader": "## Starting up dev environment",
   "startupText1": "There are a few ways to startup the dev environments in Vuetify mono-repo:",
