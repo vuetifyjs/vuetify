@@ -1,4 +1,2 @@
-node_modules
-dist
-alpha-core
-lib
+/node_modules
+/dist

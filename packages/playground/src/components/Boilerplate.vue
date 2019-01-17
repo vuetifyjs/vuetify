@@ -19,7 +19,7 @@
 </template>
 
 <script>
-export default {
-  name: 'Boilerplate'
-}
+  export default {
+    name: 'Boilerplate'
+  }
 </script>

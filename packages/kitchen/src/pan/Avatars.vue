@@ -310,12 +310,12 @@
 </template>
 
 <script>
-export default {
-  name: 'Avatars',
+  export default {
+    name: 'Avatars',
 
-  data: () => ({
-  })
-}
+    data: () => ({
+    })
+  }
 </script>
 
 <style scoped>

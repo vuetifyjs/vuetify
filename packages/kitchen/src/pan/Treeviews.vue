@@ -199,195 +199,195 @@
 </template>
 
 <script>
-const avatars = [
-  '?accessoriesType=Blank&avatarStyle=Circle&clotheColor=PastelGreen&clotheType=ShirtScoopNeck&eyeType=Wink&eyebrowType=UnibrowNatural&facialHairColor=Black&facialHairType=MoustacheMagnum&hairColor=Platinum&mouthType=Concerned&skinColor=Tanned&topType=Turban',
-  '?accessoriesType=Sunglasses&avatarStyle=Circle&clotheColor=Gray02&clotheType=ShirtScoopNeck&eyeType=EyeRoll&eyebrowType=RaisedExcited&facialHairColor=Red&facialHairType=BeardMagestic&hairColor=Red&hatColor=White&mouthType=Twinkle&skinColor=DarkBrown&topType=LongHairBun',
-  '?accessoriesType=Prescription02&avatarStyle=Circle&clotheColor=Black&clotheType=ShirtVNeck&eyeType=Surprised&eyebrowType=Angry&facialHairColor=Blonde&facialHairType=Blank&hairColor=Blonde&hatColor=PastelOrange&mouthType=Smile&skinColor=Black&topType=LongHairNotTooLong',
-  '?accessoriesType=Round&avatarStyle=Circle&clotheColor=PastelOrange&clotheType=Overall&eyeType=Close&eyebrowType=AngryNatural&facialHairColor=Blonde&facialHairType=Blank&graphicType=Pizza&hairColor=Black&hatColor=PastelBlue&mouthType=Serious&skinColor=Light&topType=LongHairBigHair',
-  '?accessoriesType=Kurt&avatarStyle=Circle&clotheColor=Gray01&clotheType=BlazerShirt&eyeType=Surprised&eyebrowType=Default&facialHairColor=Red&facialHairType=Blank&graphicType=Selena&hairColor=Red&hatColor=Blue02&mouthType=Twinkle&skinColor=Pale&topType=LongHairCurly'
-]
+  const avatars = [
+    '?accessoriesType=Blank&avatarStyle=Circle&clotheColor=PastelGreen&clotheType=ShirtScoopNeck&eyeType=Wink&eyebrowType=UnibrowNatural&facialHairColor=Black&facialHairType=MoustacheMagnum&hairColor=Platinum&mouthType=Concerned&skinColor=Tanned&topType=Turban',
+    '?accessoriesType=Sunglasses&avatarStyle=Circle&clotheColor=Gray02&clotheType=ShirtScoopNeck&eyeType=EyeRoll&eyebrowType=RaisedExcited&facialHairColor=Red&facialHairType=BeardMagestic&hairColor=Red&hatColor=White&mouthType=Twinkle&skinColor=DarkBrown&topType=LongHairBun',
+    '?accessoriesType=Prescription02&avatarStyle=Circle&clotheColor=Black&clotheType=ShirtVNeck&eyeType=Surprised&eyebrowType=Angry&facialHairColor=Blonde&facialHairType=Blank&hairColor=Blonde&hatColor=PastelOrange&mouthType=Smile&skinColor=Black&topType=LongHairNotTooLong',
+    '?accessoriesType=Round&avatarStyle=Circle&clotheColor=PastelOrange&clotheType=Overall&eyeType=Close&eyebrowType=AngryNatural&facialHairColor=Blonde&facialHairType=Blank&graphicType=Pizza&hairColor=Black&hatColor=PastelBlue&mouthType=Serious&skinColor=Light&topType=LongHairBigHair',
+    '?accessoriesType=Kurt&avatarStyle=Circle&clotheColor=Gray01&clotheType=BlazerShirt&eyeType=Surprised&eyebrowType=Default&facialHairColor=Red&facialHairType=Blank&graphicType=Selena&hairColor=Red&hatColor=Blue02&mouthType=Twinkle&skinColor=Pale&topType=LongHairCurly'
+  ]
 
-const pause = ms => new Promise(resolve => setTimeout(resolve, ms))
+  const pause = ms => new Promise(resolve => setTimeout(resolve, ms))
 
-export default {
-  name: '',
+  export default {
+    name: '',
 
-  data: () => ({
-    open1: ['public'],
-    files1: {
-      html: 'mdi-language-html5',
-      js: 'mdi-nodejs',
-      json: 'mdi-json',
-      md: 'mdi-markdown',
-      pdf: 'mdi-file-pdf',
-      png: 'mdi-file-image',
-      txt: 'mdi-file-document-outline',
-      xls: 'mdi-file-excel'
-    },
-    tree1: [],
-    items1: [
-      {
-        name: '.git'
+    data: () => ({
+      open1: ['public'],
+      files1: {
+        html: 'mdi-language-html5',
+        js: 'mdi-nodejs',
+        json: 'mdi-json',
+        md: 'mdi-markdown',
+        pdf: 'mdi-file-pdf',
+        png: 'mdi-file-image',
+        txt: 'mdi-file-document-outline',
+        xls: 'mdi-file-excel'
       },
-      {
-        name: 'node_modules'
-      },
-      {
-        name: 'public',
-        children: [
-          {
-            name: 'static',
-            children: [{
-              name: 'logo.png',
-              file: 'png'
-            }]
-          },
-          {
-            name: 'favicon.ico',
-            file: 'png'
-          },
-          {
-            name: 'index.html',
-            file: 'html'
-          }
-        ]
-      },
-      {
-        name: '.gitignore',
-        file: 'txt'
-      },
-      {
-        name: 'babel.config.js',
-        file: 'js'
-      },
-      {
-        name: 'package.json',
-        file: 'json'
-      },
-      {
-        name: 'README.md',
-        file: 'md'
-      },
-      {
-        name: 'vue.config.js',
-        file: 'js'
-      },
-      {
-        name: 'yarn.lock',
-        file: 'txt'
-      }
-    ],
-    active2: [],
-    avatar2: null,
-    open2: [],
-    users2: [],
-    open3: ['public'],
-    files3: {
-      html: 'mdi-language-html5',
-      js: 'mdi-nodejs',
-      json: 'mdi-json',
-      md: 'mdi-markdown',
-      pdf: 'mdi-file-pdf',
-      png: 'mdi-file-image',
-      txt: 'mdi-file-document-outline',
-      xls: 'mdi-file-excel'
-    },
-    tree3: [],
-    items3: [
-      {
-        name: '.git'
-      },
-      {
-        name: 'node_modules'
-      },
-      {
-        name: 'public',
-        children: [
-          {
-            name: 'static',
-            children: [{
-              name: 'logo.png',
-              file: 'png'
-            }]
-          },
-          {
-            name: 'favicon.ico',
-            file: 'png'
-          },
-          {
-            name: 'index.html',
-            file: 'html',
-            changed: true
-          }
-        ]
-      },
-      {
-        name: '.gitignore',
-        file: 'txt'
-      },
-      {
-        name: 'babel.config.js',
-        file: 'js'
-      },
-      {
-        name: 'package.json',
-        file: 'json',
-        changed: true
-      },
-      {
-        name: 'README.md',
-        file: 'md'
-      },
-      {
-        name: 'vue.config.js',
-        file: 'js'
-      },
-      {
-        name: 'yarn.lock',
-        file: 'txt',
-        changed: true
-      }
-    ]
-  }),
-
-  computed: {
-    items2 () {
-      return [
+      tree1: [],
+      items1: [
         {
-          name: 'Users',
-          children: this.users2
+          name: '.git'
+        },
+        {
+          name: 'node_modules'
+        },
+        {
+          name: 'public',
+          children: [
+            {
+              name: 'static',
+              children: [{
+                name: 'logo.png',
+                file: 'png'
+              }]
+            },
+            {
+              name: 'favicon.ico',
+              file: 'png'
+            },
+            {
+              name: 'index.html',
+              file: 'html'
+            }
+          ]
+        },
+        {
+          name: '.gitignore',
+          file: 'txt'
+        },
+        {
+          name: 'babel.config.js',
+          file: 'js'
+        },
+        {
+          name: 'package.json',
+          file: 'json'
+        },
+        {
+          name: 'README.md',
+          file: 'md'
+        },
+        {
+          name: 'vue.config.js',
+          file: 'js'
+        },
+        {
+          name: 'yarn.lock',
+          file: 'txt'
+        }
+      ],
+      active2: [],
+      avatar2: null,
+      open2: [],
+      users2: [],
+      open3: ['public'],
+      files3: {
+        html: 'mdi-language-html5',
+        js: 'mdi-nodejs',
+        json: 'mdi-json',
+        md: 'mdi-markdown',
+        pdf: 'mdi-file-pdf',
+        png: 'mdi-file-image',
+        txt: 'mdi-file-document-outline',
+        xls: 'mdi-file-excel'
+      },
+      tree3: [],
+      items3: [
+        {
+          name: '.git'
+        },
+        {
+          name: 'node_modules'
+        },
+        {
+          name: 'public',
+          children: [
+            {
+              name: 'static',
+              children: [{
+                name: 'logo.png',
+                file: 'png'
+              }]
+            },
+            {
+              name: 'favicon.ico',
+              file: 'png'
+            },
+            {
+              name: 'index.html',
+              file: 'html',
+              changed: true
+            }
+          ]
+        },
+        {
+          name: '.gitignore',
+          file: 'txt'
+        },
+        {
+          name: 'babel.config.js',
+          file: 'js'
+        },
+        {
+          name: 'package.json',
+          file: 'json',
+          changed: true
+        },
+        {
+          name: 'README.md',
+          file: 'md'
+        },
+        {
+          name: 'vue.config.js',
+          file: 'js'
+        },
+        {
+          name: 'yarn.lock',
+          file: 'txt',
+          changed: true
         }
       ]
+    }),
+
+    computed: {
+      items2 () {
+        return [
+          {
+            name: 'Users',
+            children: this.users2
+          }
+        ]
+      },
+      selected2 () {
+        if (!this.active2.length) return undefined
+
+        const id = this.active2[0]
+
+        return this.users2.find(user => user.id === id)
+      }
     },
-    selected2 () {
-      if (!this.active2.length) return undefined
 
-      const id = this.active2[0]
-
-      return this.users2.find(user => user.id === id)
-    }
-  },
-
-  watch: {
-    selected2: 'randomAvatar2'
-  },
-
-  methods: {
-    async fetchUsers2 (item) {
-      // Remove in 6 months and say
-      // you've made optimizations! :)
-      await pause(1500)
-
-      return fetch('https://jsonplaceholder.typicode.com/users')
-        .then(res => res.json())
-        .then(json => (item.children.push(...json)))
-        .catch(err => console.warn(err))
+    watch: {
+      selected2: 'randomAvatar2'
     },
-    randomAvatar2 () {
-      this.avatar2 = avatars[Math.floor(Math.random() * avatars.length)]
+
+    methods: {
+      async fetchUsers2 (item) {
+        // Remove in 6 months and say
+        // you've made optimizations! :)
+        await pause(1500)
+
+        return fetch('https://jsonplaceholder.typicode.com/users')
+          .then(res => res.json())
+          .then(json => (item.children.push(...json)))
+          .catch(err => console.warn(err))
+      },
+      randomAvatar2 () {
+        this.avatar2 = avatars[Math.floor(Math.random() * avatars.length)]
+      }
     }
   }
-}
 </script>
 
 <style scoped>

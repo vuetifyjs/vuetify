@@ -1,5 +1,5 @@
 {
-  "name": "kitchen",
+  "name": "@vuetify/kitchen",
   "version": "2.0.0-alpha.0",
   "private": true,
   "scripts": {

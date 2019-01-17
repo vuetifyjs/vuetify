@@ -377,16 +377,16 @@
 </template>
 
 <script>
-export default {
-  name: 'Ratings',
+  export default {
+    name: 'Ratings',
 
-  data: () => ({
-    rating: 4,
-    rating1: 4,
-    colors: ['green', 'purple', 'orange', 'indigo', 'red'],
-    rating2: 4
-  })
-}
+    data: () => ({
+      rating: 4,
+      rating1: 4,
+      colors: ['green', 'purple', 'orange', 'indigo', 'red'],
+      rating2: 4
+    })
+  }
 </script>
 
 <style scoped>

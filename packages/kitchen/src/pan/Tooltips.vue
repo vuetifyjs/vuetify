@@ -93,13 +93,13 @@
 </template>
 
 <script>
-export default {
-  name: 'Tooltips',
+  export default {
+    name: 'Tooltips',
 
-  data: () => ({
-    show: false
-  })
-}
+    data: () => ({
+      show: false
+    })
+  }
 </script>
 
 <style scoped>

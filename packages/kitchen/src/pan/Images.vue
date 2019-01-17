@@ -130,11 +130,11 @@
 </template>
 
 <script>
-export default {
-  name: 'Images',
+  export default {
+    name: 'Images',
 
-  data: () => ({})
-}
+    data: () => ({})
+  }
 </script>
 
 <style scoped>

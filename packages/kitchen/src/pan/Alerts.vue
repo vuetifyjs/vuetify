@@ -595,16 +595,16 @@
 </template>
 
 <script>
-export default {
-  name: 'Alerts',
+  export default {
+    name: 'Alerts',
 
-  data: () => ({
-    alertClosable: true,
-    alertTransition: true,
-    alertTransition2: true,
-    alertOutline: true
-  })
-}
+    data: () => ({
+      alertClosable: true,
+      alertTransition: true,
+      alertTransition2: true,
+      alertOutline: true
+    })
+  }
 </script>
 
 <style>
