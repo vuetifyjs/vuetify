@@ -410,41 +410,41 @@
 </template>
 
 <script>
-export default {
-  name: 'DatePickers',
+  export default {
+    name: 'DatePickers',
 
-  data: () => ({
-    menu1: false,
-    modal1: false,
-    pickerDate: null,
-    arrayEvents: ['2019-01-18', '2019-01-14', '2019-01-02', '2019-01-06', '2019-01-03', '2019-01-29'],
-    modal2: false,
-    months: [],
-    dates: [],
-    menu2: false,
-    model: '2019-01-16',
-    monthModel: '2019-01',
-    landscape: false
-  }),
+    data: () => ({
+      menu1: false,
+      modal1: false,
+      pickerDate: null,
+      arrayEvents: ['2019-01-18', '2019-01-14', '2019-01-02', '2019-01-06', '2019-01-03', '2019-01-29'],
+      modal2: false,
+      months: [],
+      dates: [],
+      menu2: false,
+      model: '2019-01-16',
+      monthModel: '2019-01',
+      landscape: false
+    }),
 
-  watch: {
-    pickerDate (val, oldVal) {
-      oldVal && alert(val) // Don't trigger on page open
-    }
-  },
-
-  methods: {
-    functionEvents (date) {
-      const [,, day] = date.split('-')
-      if ([12, 17, 28].includes(parseInt(day, 10))) return true
-      if ([1, 19, 22].includes(parseInt(day, 10))) return ['red', '#00f']
-      return false
+    watch: {
+      pickerDate (val, oldVal) {
+        oldVal && alert(val) // Don't trigger on page open
+      }
     },
-    shortHeaderFormat (date) {
-      return date.substr(0, 7)
+
+    methods: {
+      functionEvents (date) {
+        const [,, day] = date.split('-')
+        if ([12, 17, 28].includes(parseInt(day, 10))) return true
+        if ([1, 19, 22].includes(parseInt(day, 10))) return ['red', '#00f']
+        return false
+      },
+      shortHeaderFormat (date) {
+        return date.substr(0, 7)
+      }
     }
   }
-}
 </script>
 
 <style scoped>
