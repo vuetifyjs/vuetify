@@ -77,32 +77,32 @@
 </template>
 
 <script>
-import meals from './pan'
+  import meals from './pan'
 
-const items = meals.map(meal => ({ title: meal, to: meal }))
+  const items = meals.map(meal => ({ title: meal, to: meal }))
 
-export default {
-  components: {
-    Codepen: () => import('@/components/Codepen')
-  },
-  filters: {
-    capitalize (value) {
-      if (!value) return ''
-      value = value.toString()
-      return value.charAt(0).toUpperCase() + value.slice(1)
-    }
-  },
-  data: () => ({
-    items: [
-      { title: 'Home', to: '/' },
-      ...items
-    ],
-    drawer: false
-  }),
-  computed: {
-    href () {
-      return `https://github.com/vuetifyjs/vuetify/tree/master/packages/kitchen/src/pan/${this.$route.params.component}.vue`
+  export default {
+    components: {
+      Codepen: () => import('@/components/Codepen')
+    },
+    filters: {
+      capitalize (value) {
+        if (!value) return ''
+        value = value.toString()
+        return value.charAt(0).toUpperCase() + value.slice(1)
+      }
+    },
+    data: () => ({
+      items: [
+        { title: 'Home', to: '/' },
+        ...items
+      ],
+      drawer: false
+    }),
+    computed: {
+      href () {
+        return `https://github.com/vuetifyjs/vuetify/tree/master/packages/kitchen/src/pan/${this.$route.params.component}.vue`
+      }
     }
   }
-}
 </script>

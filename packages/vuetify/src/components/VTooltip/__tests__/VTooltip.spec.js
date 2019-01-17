@@ -86,13 +86,13 @@ test('VTooltip', ({ mount, compileToFunctions }) => {
     jest.runAllTimers()
     await wrapper.vm.$nextTick()
     expect(setTimeout.mock.calls[0][1]).toBe(123)
-    expect(cb).toBeCalledWith(true)
+    expect(cb).toHaveBeenCalledWith(true)
 
     activator.trigger('mouseleave')
     jest.runAllTimers()
     await wrapper.vm.$nextTick()
     expect(setTimeout.mock.calls[1][1]).toBe(321)
-    expect(cb).toBeCalledWith(false)
+    expect(cb).toHaveBeenCalledWith(false)
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })

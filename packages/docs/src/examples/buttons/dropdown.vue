@@ -1,16 +1,7 @@
 <template>
-  <v-container
-    id="dropdown-example"
-    grid-list-xl
-  >
-    <v-layout
-      row
-      wrap
-    >
-      <v-flex
-        xs12
-        sm4
-      >
+  <v-container id="dropdown-example" grid-list-xl>
+    <v-layout row wrap>
+      <v-flex xs12 sm4>
         <p>Overflow</p>
 
         <v-overflow-btn
@@ -20,10 +11,7 @@
         ></v-overflow-btn>
       </v-flex>
 
-      <v-flex
-        xs12
-        sm4
-      >
+      <v-flex xs12 sm4>
         <p>Segmented</p>
 
         <v-overflow-btn
@@ -34,10 +22,7 @@
         ></v-overflow-btn>
       </v-flex>
 
-      <v-flex
-        xs12
-        sm4
-      >
+      <v-flex xs12 sm4>
         <p>Editable</p>
 
         <v-overflow-btn

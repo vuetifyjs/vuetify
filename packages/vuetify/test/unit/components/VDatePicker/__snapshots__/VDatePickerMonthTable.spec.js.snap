@@ -8,7 +8,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot (mu
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Jan
@@ -17,7 +17,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot (mu
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Feb
@@ -26,7 +26,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot (mu
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Mar
@@ -37,7 +37,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot (mu
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Apr
@@ -46,7 +46,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot (mu
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--outline theme--light accent--text"
+                  class="v-btn v-size--default v-btn--outline theme--light accent--text"
           >
             <div class="v-btn__content">
               May
@@ -55,7 +55,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot (mu
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Jun
@@ -66,7 +66,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot (mu
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Jul
@@ -75,7 +75,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot (mu
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Aug
@@ -84,7 +84,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot (mu
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Sep
@@ -95,7 +95,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot (mu
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--active v-btn--depressed theme--light accent"
+                  class="v-btn v-size--default v-btn--active theme--light accent"
           >
             <div class="v-btn__content">
               Oct
@@ -104,7 +104,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot (mu
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--active v-btn--depressed theme--light accent"
+                  class="v-btn v-size--default v-btn--active theme--light accent"
           >
             <div class="v-btn__content">
               Nov
@@ -113,7 +113,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot (mu
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Dec
@@ -135,7 +135,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Jan
@@ -144,7 +144,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Feb
@@ -153,7 +153,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Mar
@@ -164,7 +164,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Apr
@@ -173,7 +173,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--outline theme--light accent--text"
+                  class="v-btn v-size--default v-btn--outline theme--light accent--text"
           >
             <div class="v-btn__content">
               May
@@ -182,7 +182,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Jun
@@ -193,7 +193,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Jul
@@ -202,7 +202,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Aug
@@ -211,7 +211,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Sep
@@ -222,7 +222,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Oct
@@ -231,7 +231,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--active v-btn--depressed theme--light accent"
+                  class="v-btn v-size--default v-btn--active theme--light accent"
           >
             <div class="v-btn__content">
               Nov
@@ -240,7 +240,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Dec
@@ -262,7 +262,7 @@ exports[`VDatePickerMonthTable.js should render component with events (array) an
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Jan
@@ -271,7 +271,7 @@ exports[`VDatePickerMonthTable.js should render component with events (array) an
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Feb
@@ -280,7 +280,7 @@ exports[`VDatePickerMonthTable.js should render component with events (array) an
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Mar
@@ -291,7 +291,7 @@ exports[`VDatePickerMonthTable.js should render component with events (array) an
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Apr
@@ -300,7 +300,7 @@ exports[`VDatePickerMonthTable.js should render component with events (array) an
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               May
@@ -309,7 +309,7 @@ exports[`VDatePickerMonthTable.js should render component with events (array) an
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Jun
@@ -320,7 +320,7 @@ exports[`VDatePickerMonthTable.js should render component with events (array) an
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Jul
@@ -333,7 +333,7 @@ exports[`VDatePickerMonthTable.js should render component with events (array) an
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Aug
@@ -342,7 +342,7 @@ exports[`VDatePickerMonthTable.js should render component with events (array) an
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Sep
@@ -353,7 +353,7 @@ exports[`VDatePickerMonthTable.js should render component with events (array) an
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Oct
@@ -362,7 +362,7 @@ exports[`VDatePickerMonthTable.js should render component with events (array) an
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Nov
@@ -375,7 +375,7 @@ exports[`VDatePickerMonthTable.js should render component with events (array) an
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Dec
@@ -397,7 +397,7 @@ exports[`VDatePickerMonthTable.js should render component with events (function)
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Jan
@@ -406,7 +406,7 @@ exports[`VDatePickerMonthTable.js should render component with events (function)
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Feb
@@ -415,7 +415,7 @@ exports[`VDatePickerMonthTable.js should render component with events (function)
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Mar
@@ -426,7 +426,7 @@ exports[`VDatePickerMonthTable.js should render component with events (function)
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Apr
@@ -435,7 +435,7 @@ exports[`VDatePickerMonthTable.js should render component with events (function)
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               May
@@ -444,7 +444,7 @@ exports[`VDatePickerMonthTable.js should render component with events (function)
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Jun
@@ -455,7 +455,7 @@ exports[`VDatePickerMonthTable.js should render component with events (function)
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Jul
@@ -468,7 +468,7 @@ exports[`VDatePickerMonthTable.js should render component with events (function)
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Aug
@@ -477,7 +477,7 @@ exports[`VDatePickerMonthTable.js should render component with events (function)
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Sep
@@ -488,7 +488,7 @@ exports[`VDatePickerMonthTable.js should render component with events (function)
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Oct
@@ -497,7 +497,7 @@ exports[`VDatePickerMonthTable.js should render component with events (function)
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Nov
@@ -510,7 +510,7 @@ exports[`VDatePickerMonthTable.js should render component with events (function)
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Dec
@@ -532,7 +532,7 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Jan
@@ -541,7 +541,7 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Feb
@@ -550,7 +550,7 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Mar
@@ -561,7 +561,7 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Apr
@@ -570,7 +570,7 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               May
@@ -579,7 +579,7 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Jun
@@ -590,7 +590,7 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Jul
@@ -603,7 +603,7 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Aug
@@ -612,7 +612,7 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Sep
@@ -623,7 +623,7 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Oct
@@ -632,7 +632,7 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Nov
@@ -645,7 +645,7 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Dec
@@ -667,7 +667,7 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Jan
@@ -676,7 +676,7 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Feb
@@ -685,7 +685,7 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Mar
@@ -696,7 +696,7 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Apr
@@ -705,7 +705,7 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               May
@@ -714,7 +714,7 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Jun
@@ -725,7 +725,7 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Jul
@@ -738,7 +738,7 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Aug
@@ -747,7 +747,7 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Sep
@@ -758,7 +758,7 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Oct
@@ -767,7 +767,7 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Nov
@@ -780,7 +780,7 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               Dec

@@ -22,33 +22,21 @@
         color="transparent"
       >
         <v-tabs-slider></v-tabs-slider>
-        <v-tab
-          href="#mobile-tabs-5-1"
-          class="primary--text"
-        >
+        <v-tab href="#mobile-tabs-5-1" class="primary--text">
           <v-icon>phone</v-icon>
         </v-tab>
 
-        <v-tab
-          href="#mobile-tabs-5-2"
-          class="primary--text"
-        >
+        <v-tab href="#mobile-tabs-5-2" class="primary--text">
           <v-icon>favorite</v-icon>
         </v-tab>
 
-        <v-tab
-          href="#mobile-tabs-5-3"
-          class="primary--text"
-        >
+        <v-tab href="#mobile-tabs-5-3" class="primary--text">
           <v-icon>account_box</v-icon>
         </v-tab>
       </v-tabs>
     </v-toolbar>
 
-    <v-tabs-items
-      v-model="tabs"
-      class="white elevation-1"
-    >
+    <v-tabs-items v-model="tabs" class="white elevation-1">
       <v-tab-item
         v-for="i in 3"
         :key="i"

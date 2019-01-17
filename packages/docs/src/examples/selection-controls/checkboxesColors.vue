@@ -2,15 +2,8 @@
   <v-card flat>
     <v-card-text>
       <v-container fluid>
-        <v-layout
-          row
-          wrap
-        >
-          <v-flex
-            xs12
-            sm4
-            md4
-          >
+        <v-layout row wrap>
+          <v-flex xs12 sm4 md4>
             <v-checkbox
               v-model="ex4"
               label="red"
@@ -26,11 +19,7 @@
               hide-details
             ></v-checkbox>
           </v-flex>
-          <v-flex
-            xs12
-            sm4
-            md4
-          >
+          <v-flex xs12 sm4 md4>
             <v-checkbox
               v-model="ex4"
               label="indigo"
@@ -46,11 +35,7 @@
               hide-details
             ></v-checkbox>
           </v-flex>
-          <v-flex
-            xs12
-            sm4
-            md4
-          >
+          <v-flex xs12 sm4 md4>
             <v-checkbox
               v-model="ex4"
               label="orange"
@@ -68,16 +53,8 @@
           </v-flex>
         </v-layout>
 
-        <v-layout
-          row
-          wrap
-          class="mt-5"
-        >
-          <v-flex
-            xs12
-            sm4
-            md4
-          >
+        <v-layout row wrap class="mt-5">
+          <v-flex xs12 sm4 md4>
             <v-checkbox
               v-model="ex4"
               label="primary"
@@ -93,11 +70,7 @@
               hide-details
             ></v-checkbox>
           </v-flex>
-          <v-flex
-            xs12
-            sm4
-            md4
-          >
+          <v-flex xs12 sm4 md4>
             <v-checkbox
               v-model="ex4"
               label="success"
@@ -113,11 +86,7 @@
               hide-details
             ></v-checkbox>
           </v-flex>
-          <v-flex
-            xs12
-            sm4
-            md4
-          >
+          <v-flex xs12 sm4 md4>
             <v-checkbox
               v-model="ex4"
               label="warning"

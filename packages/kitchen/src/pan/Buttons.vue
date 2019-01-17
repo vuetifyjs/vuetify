@@ -1558,19 +1558,19 @@
 </template>
 
 <script>
-export default {
-  name: 'Buttons',
+  export default {
+    name: 'Buttons',
 
-  data: () => ({
-    loading: false
-  }),
+    data: () => ({
+      loading: false
+    }),
 
-  watch: {
-    loading (val) {
-      val && setTimeout(() => (this.loading = false), 2000)
+    watch: {
+      loading (val) {
+        val && setTimeout(() => (this.loading = false), 2000)
+      }
     }
   }
-}
 </script>
 
 <style>

@@ -7,10 +7,7 @@
     item-key="name"
     open-on-click
   >
-    <template
-      slot="prepend"
-      slot-scope="{ item, open }"
-    >
+    <template slot="prepend" slot-scope="{ item, open }">
       <v-icon v-if="!item.file">
         {{ open ? 'mdi-folder-open' : 'mdi-folder' }}
       </v-icon>

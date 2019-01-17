@@ -473,21 +473,21 @@
 </template>
 
 <script>
-export default {
-  name: 'Toolbars',
+  export default {
+    name: 'Toolbars',
 
-  data: () => ({
-    bars: [
-      { 'class': '' },
-      { 'class': '', dark: true },
-      { 'class': 'primary', dark: true },
-      { 'class': 'elevation-0' }
-    ],
-    items: [
-      'All', 'Family', 'Friends', 'Coworkers'
-    ]
-  })
-}
+    data: () => ({
+      bars: [
+        { 'class': '' },
+        { 'class': '', dark: true },
+        { 'class': 'primary', dark: true },
+        { 'class': 'elevation-0' }
+      ],
+      items: [
+        'All', 'Family', 'Friends', 'Coworkers'
+      ]
+    })
+  }
 </script>
 
 <style scoped>

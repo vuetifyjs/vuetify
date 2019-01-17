@@ -23,16 +23,8 @@
                 {{ item.heading }}
               </v-subheader>
             </v-flex>
-            <v-flex
-              xs6
-              class="text-xs-right"
-            >
-              <v-btn
-                small
-                flat
-              >
-                edit
-              </v-btn>
+            <v-flex xs6 class="text-xs-right">
+              <v-btn small flat>edit</v-btn>
             </v-flex>
           </v-layout>
           <v-divider
@@ -58,18 +50,9 @@
         </template>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar
-      color="amber"
-      app
-      absolute
-      clipped-left
-    >
+    <v-toolbar color="amber" app absolute clipped-left>
       <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
-      <span class="title ml-3 mr-5">
-        Google&nbsp;<span class="font-weight-light">
-          Keep
-        </span>
-      </span>
+      <span class="title ml-3 mr-5">Google&nbsp;<span class="font-weight-light">Keep</span></span>
       <v-text-field
         solo-inverted
         flat
@@ -80,15 +63,8 @@
       <v-spacer></v-spacer>
     </v-toolbar>
     <v-content>
-      <v-container
-        fluid
-        fill-height
-        class="grey lighten-4"
-      >
-        <v-layout
-          justify-center
-          align-center
-        >
+      <v-container fluid fill-height class="grey lighten-4">
+        <v-layout justify-center align-center>
           <v-flex shrink>
             <v-tooltip right>
               <v-btn
@@ -98,23 +74,13 @@
                 large
                 target="_blank"
               >
-                <v-icon large>
-                  code
-                </v-icon>
+                <v-icon large>code</v-icon>
               </v-btn>
               <span>Source</span>
             </v-tooltip>
             <v-tooltip right>
-              <v-btn
-                slot="activator"
-                icon
-                large
-                href="https://codepen.io/johnjleider/pen/jZQNbd"
-                target="_blank"
-              >
-                <v-icon large>
-                  mdi-codepen
-                </v-icon>
+              <v-btn slot="activator" icon large href="https://codepen.io/johnjleider/pen/jZQNbd" target="_blank">
+                <v-icon large>mdi-codepen</v-icon>
               </v-btn>
               <span>Codepen</span>
             </v-tooltip>

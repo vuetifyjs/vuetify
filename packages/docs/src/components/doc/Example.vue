@@ -75,7 +75,9 @@
             </v-item>
           </template>
         </v-item-group>
+
         <v-divider />
+
         <v-window v-model="selected">
           <template v-for="(section, i) in sections">
             <v-window-item
@@ -83,16 +85,12 @@
               :key="`window-${i}`"
               :value="section"
             >
-              <div
-                :class="($vuetify.breakpoint.smAndUp) ? 'v-example__container' : ''"
-              >
-                <!-- eslint-disable -->
+              <div :class="($vuetify.breakpoint.smAndUp) ? 'v-example__container' : ''">
                 <doc-markup
                   :value="file"
                   :filename="false"
                   class="mb-0"
                 >{{ parsed[section] }}</doc-markup>
-                <!-- eslint-enable -->
               </div>
             </v-window-item>
           </template>
@@ -109,10 +107,7 @@
         </div>
       </v-card-text>
     </v-sheet>
-    <doc-codepen
-      ref="codepen"
-      :pen="parsed"
-    />
+    <doc-codepen ref="codepen" :pen="parsed" />
   </v-card>
 </template>
 

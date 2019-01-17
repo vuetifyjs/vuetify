@@ -58,9 +58,7 @@
               large
               outline
             >
-              <v-icon left>
-                mdi-github-circle
-              </v-icon>
+              <v-icon left>mdi-github-circle</v-icon>
               Github
             </v-btn>
             <v-btn
@@ -73,9 +71,7 @@
               rel="noopener"
               target="_blank"
             >
-              <v-icon left>
-                mdi-discord
-              </v-icon>
+              <v-icon left>mdi-discord</v-icon>
               {{ $t('Vuetify.Home.getHelp') }}
             </v-btn>
           </v-layout>

@@ -193,7 +193,7 @@ export default mixins(
 
       if (this.$scopedSlots.item) return this.$scopedSlots.item(props)
 
-      const listeners: Record<string, Function>= {
+      const listeners: Record<string, Function> = {
         click: props.click
       }
 

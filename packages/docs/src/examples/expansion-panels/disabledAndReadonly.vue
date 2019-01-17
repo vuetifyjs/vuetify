@@ -18,9 +18,7 @@
       expand
     >
       <v-expansion-panel-content disabled>
-        <template slot="header">
-          Disabled
-        </template>
+        <template slot="header">Disabled</template>
         <v-card>
           <v-card-text>
             Disabled content. Style is changed and user is unable to toggle content.
@@ -29,9 +27,7 @@
       </v-expansion-panel-content>
 
       <v-expansion-panel-content readonly>
-        <template slot="header">
-          Readonly
-        </template>
+        <template slot="header">Readonly</template>
         <v-card>
           <v-card-text>
             Readonly content. Style is unchanged but user is unable to toggle content.
@@ -40,9 +36,7 @@
       </v-expansion-panel-content>
 
       <v-expansion-panel-content>
-        <template slot="header">
-          Regular
-        </template>
+        <template slot="header">Regular</template>
         <v-card>
           <v-card-text>Some content</v-card-text>
         </v-card>

@@ -46,7 +46,6 @@
           case 1: return 'teal'
           case 2: return 'brown'
           case 3: return 'indigo'
-          default: return 'cyan'
         }
       }
     }

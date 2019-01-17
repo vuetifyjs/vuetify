@@ -27,9 +27,7 @@
         width="38px"
       />
     </router-link>
-    <v-toolbar-title class="hidden-xs-only">
-      Vuetify
-    </v-toolbar-title>
+    <v-toolbar-title class="hidden-xs-only">Vuetify</v-toolbar-title>
     <v-spacer />
 
     <v-toolbar-items>
@@ -48,12 +46,8 @@
         text
         style="min-width: 48px;"
       >
-        <span class="hidden-sm-and-down">
-          {{ $t('Vuetify.AppToolbar.documentation' ) }}
-        </span>
-        <v-icon class="hidden-md-and-up">
-          mdi-file-document-box
-        </v-icon>
+        <span class="hidden-sm-and-down">{{ $t('Vuetify.AppToolbar.documentation' ) }}</span>
+        <v-icon class="hidden-md-and-up">mdi-file-document-box</v-icon>
       </v-btn>
       <core-store />
       <core-supports />

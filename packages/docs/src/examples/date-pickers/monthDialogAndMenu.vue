@@ -1,12 +1,6 @@
 <template>
-  <v-layout
-    row
-    wrap
-  >
-    <v-flex
-      xs11
-      sm5
-    >
+  <v-layout row wrap>
+    <v-flex xs11 sm5>
       <v-menu
         ref="menu"
         v-model="menu"
@@ -34,28 +28,13 @@
           scrollable
         >
           <v-spacer></v-spacer>
-          <v-btn
-            flat
-            color="primary"
-            @click="menu = false"
-          >
-            Cancel
-          </v-btn>
-          <v-btn
-            flat
-            color="primary"
-            @click="$refs.menu.save(date)"
-          >
-            OK
-          </v-btn>
+          <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
+          <v-btn flat color="primary" @click="$refs.menu.save(date)">OK</v-btn>
         </v-date-picker>
       </v-menu>
     </v-flex>
     <v-spacer></v-spacer>
-    <v-flex
-      xs11
-      sm5
-    >
+    <v-flex xs11 sm5>
       <v-dialog
         ref="dialog"
         v-model="modal"
@@ -72,26 +51,10 @@
           prepend-icon="event"
           readonly
         ></v-text-field>
-        <v-date-picker
-          v-model="date"
-          type="month"
-          scrollable
-        >
+        <v-date-picker v-model="date" type="month" scrollable>
           <v-spacer></v-spacer>
-          <v-btn
-            flat
-            color="primary"
-            @click="modal = false"
-          >
-            Cancel
-          </v-btn>
-          <v-btn
-            flat
-            color="primary"
-            @click="$refs.dialog.save(date)"
-          >
-            OK
-          </v-btn>
+          <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
+          <v-btn flat color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
         </v-date-picker>
       </v-dialog>
     </v-flex>

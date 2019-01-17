@@ -400,14 +400,14 @@
 </template>
 
 <script>
-export default {
-  name: 'Badges',
+  export default {
+    name: 'Badges',
 
-  data: () => ({
-    show1: false,
-    show2: false
-  })
-}
+    data: () => ({
+      show1: false,
+      show2: false
+    })
+  }
 </script>
 
 <style scoped>

@@ -1,16 +1,8 @@
 <template>
   <div>
     <v-breadcrumbs :items="items">
-      <template
-        slot="item"
-        slot-scope="props"
-      >
-        <a
-          :href="props.item.href"
-          :class="[props.item.disabled && 'disabled']"
-        >
-          {{ props.item.text.toUpperCase() }}
-        </a>
+      <template slot="item" slot-scope="props">
+        <a :href="props.item.href" :class="[props.item.disabled && 'disabled']">{{ props.item.text.toUpperCase() }}</a>
       </template>
     </v-breadcrumbs>
   </div>
