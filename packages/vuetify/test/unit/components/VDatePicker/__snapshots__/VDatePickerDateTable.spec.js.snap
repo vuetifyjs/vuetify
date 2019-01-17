@@ -2669,7 +2669,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2679,7 +2679,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2689,7 +2689,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2699,7 +2699,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2709,7 +2709,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2719,7 +2719,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2729,7 +2729,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2741,7 +2741,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2751,7 +2751,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2761,7 +2761,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2771,7 +2771,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2781,7 +2781,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2791,7 +2791,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2801,7 +2801,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2813,7 +2813,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2823,7 +2823,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2833,7 +2833,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2843,7 +2843,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2853,7 +2853,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2863,7 +2863,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2873,7 +2873,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2885,7 +2885,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2895,7 +2895,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2905,7 +2905,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2915,7 +2915,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2925,7 +2925,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2935,7 +2935,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2945,7 +2945,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2957,7 +2957,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2967,7 +2967,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">
@@ -2977,7 +2977,7 @@ exports[`VDatePickerDateTable.js should render disabled component and match snap
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                  class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                   disabled
           >
             <div class="v-btn__content">

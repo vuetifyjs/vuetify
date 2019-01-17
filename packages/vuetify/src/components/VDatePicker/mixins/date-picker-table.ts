@@ -88,7 +88,7 @@ export default mixins(
       return {
         'v-size--default': !isFloating,
         'v-btn--active': isSelected,
-        'v-btn--flat': !isAllowed,
+        'v-btn--flat': !isAllowed || this.disabled,
         'v-btn--text': isSelected === isCurrent,
         'v-btn--rounded': isFloating,
         'v-btn--disabled': !isAllowed || this.disabled,

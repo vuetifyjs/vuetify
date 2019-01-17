@@ -3154,7 +3154,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3164,7 +3164,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3174,7 +3174,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3184,7 +3184,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3196,7 +3196,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3206,7 +3206,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3216,7 +3216,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--active v-btn--rounded v-btn--disabled theme--light accent"
+                        class="v-btn v-btn--active v-btn--flat v-btn--rounded v-btn--disabled theme--light accent"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3226,7 +3226,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3236,7 +3236,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3246,7 +3246,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3256,7 +3256,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3268,7 +3268,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3278,7 +3278,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3288,7 +3288,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3298,7 +3298,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3308,7 +3308,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3318,7 +3318,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3328,7 +3328,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3340,7 +3340,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3350,7 +3350,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3360,7 +3360,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3370,7 +3370,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3380,7 +3380,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3390,7 +3390,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3400,7 +3400,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3412,7 +3412,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3422,7 +3422,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3432,7 +3432,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3442,7 +3442,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3452,7 +3452,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3462,7 +3462,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--text v-btn--rounded v-btn--disabled theme--light"
+                        class="v-btn v-btn--flat v-btn--text v-btn--rounded v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
