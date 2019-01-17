@@ -29,7 +29,7 @@
     </template>
     <template
       slot="expand"
-      slot-scope=""
+      slot-scope="props"
     >
       <v-card flat>
         <v-card-text>Peek-a-boo!</v-card-text>
