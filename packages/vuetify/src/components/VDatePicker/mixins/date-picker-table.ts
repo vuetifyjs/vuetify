@@ -86,12 +86,12 @@ export default mixins(
   methods: {
     genButtonClasses (isAllowed: boolean, isFloating: boolean, isSelected: boolean, isCurrent: boolean) {
       return {
+        'v-size--default': !isFloating,
         'v-btn--active': isSelected,
-        'v-btn--flat': !isSelected,
-        'v-btn--icon': isSelected && isAllowed && isFloating,
-        'v-btn--floating': isFloating,
-        'v-btn--depressed': !isFloating && isSelected,
-        'v-btn--disabled': !isAllowed || (this.disabled && isSelected),
+        'v-btn--flat': !isAllowed,
+        'v-btn--text': !isSelected ^ isCurrent,
+        'v-btn--rounded': isFloating,
+        'v-btn--disabled': !isAllowed || this.disabled,
         'v-btn--outline': isCurrent && !isSelected,
         ...this.themeClasses
       }
