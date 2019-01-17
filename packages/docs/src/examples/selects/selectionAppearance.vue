@@ -1,7 +1,7 @@
 <template>
   <v-select
-    v-model="value"
     :items="items"
+    v-model="value"
     label="Select Item"
     multiple
   >
@@ -15,9 +15,7 @@
       <span
         v-if="index === 1"
         class="grey--text caption"
-      >
-        (+{{ value.length - 1 }} others)
-      </span>
+      >(+{{ value.length - 1 }} others)</span>
     </template>
   </v-select>
 </template>

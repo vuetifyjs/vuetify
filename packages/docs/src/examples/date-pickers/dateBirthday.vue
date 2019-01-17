@@ -1,8 +1,8 @@
 <template>
   <v-menu
     ref="menu"
-    v-model="menu"
     :close-on-content-click="false"
+    v-model="menu"
     :nudge-right="40"
     lazy
     transition="scale-transition"

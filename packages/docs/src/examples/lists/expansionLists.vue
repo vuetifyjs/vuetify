@@ -1,15 +1,8 @@
 <template>
   <v-layout row>
-    <v-flex
-      xs12
-      sm6
-      offset-sm3
-    >
+    <v-flex xs12 sm6 offset-sm3>
       <v-card>
-        <v-toolbar
-          color="teal"
-          dark
-        >
+        <v-toolbar color="teal" dark>
           <v-toolbar-side-icon></v-toolbar-side-icon>
 
           <v-toolbar-title>Topics</v-toolbar-title>
@@ -24,8 +17,8 @@
         <v-list>
           <v-list-group
             v-for="item in items"
-            :key="item.title"
             v-model="item.active"
+            :key="item.title"
             :prepend-icon="item.action"
             no-action
           >

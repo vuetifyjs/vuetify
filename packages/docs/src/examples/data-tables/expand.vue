@@ -4,33 +4,17 @@
     :items="desserts"
     item-key="name"
   >
-    <template
-      slot="items"
-      slot-scope="props"
-    >
+    <template slot="items" slot-scope="props">
       <tr @click="props.expanded = !props.expanded">
         <td>{{ props.item.name }}</td>
-        <td class="text-xs-right">
-          {{ props.item.calories }}
-        </td>
-        <td class="text-xs-right">
-          {{ props.item.fat }}
-        </td>
-        <td class="text-xs-right">
-          {{ props.item.carbs }}
-        </td>
-        <td class="text-xs-right">
-          {{ props.item.protein }}
-        </td>
-        <td class="text-xs-right">
-          {{ props.item.iron }}
-        </td>
+        <td class="text-xs-right">{{ props.item.calories }}</td>
+        <td class="text-xs-right">{{ props.item.fat }}</td>
+        <td class="text-xs-right">{{ props.item.carbs }}</td>
+        <td class="text-xs-right">{{ props.item.protein }}</td>
+        <td class="text-xs-right">{{ props.item.iron }}</td>
       </tr>
     </template>
-    <template
-      slot="expand"
-      slot-scope=""
-    >
+    <template slot="expand" slot-scope="props">
       <v-card flat>
         <v-card-text>Peek-a-boo!</v-card-text>
       </v-card>

@@ -39,8 +39,8 @@
     <v-tabs-items v-model="model">
       <v-tab-item
         v-for="i in 3"
-        :key="i"
         :value="`tab-${i}`"
+        :key="i"
       >
         <v-card flat>
           <v-card-text v-text="text"></v-card-text>

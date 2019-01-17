@@ -70,6 +70,7 @@
     "docsearch.js": "^2.5.2",
     "eslint": "^5.8.0",
     "eslint-plugin-json": "^1.2.1",
+    "eslint-config-vuetify": "^0.2.0",
     "event-source-polyfill": "^0.0.12",
     "file-loader": "^2.0.0",
     "friendly-errors-webpack-plugin": "^1.7.0",

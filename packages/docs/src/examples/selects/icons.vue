@@ -1,17 +1,13 @@
 <template>
   <v-container fluid>
-    <v-layout
-      row
-      wrap
-      align-center
-    >
+    <v-layout row wrap align-center>
       <v-flex xs6>
         <v-subheader>Prepended icon</v-subheader>
       </v-flex>
       <v-flex xs6>
         <v-select
-          v-model="e1"
           :items="states"
+          v-model="e1"
           menu-props="auto"
           label="Select"
           hide-details
@@ -24,8 +20,8 @@
       </v-flex>
       <v-flex xs6>
         <v-select
-          v-model="e2"
           :items="states"
+          v-model="e2"
           append-outer-icon="map"
           menu-props="auto"
           hide-details

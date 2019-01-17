@@ -67,7 +67,8 @@ module.exports = {
     'vue/name-property-casing': 'off',
     'vue/require-default-prop': 'off',
     'vue/require-prop-types': 'off',
-    'vue/prop-name-casing': 'error'
+    'vue/prop-name-casing': 'error',
+    'vue/return-in-computed-property': 'off'
   },
   overrides: [
     {

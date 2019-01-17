@@ -5,7 +5,7 @@ export default async function (to, from, savedPosition) {
   await waitForReadystate()
 
   let scrollTo = 0
-  const options = {}
+  let options = {}
 
   if (to.hash) {
     scrollTo = to.hash

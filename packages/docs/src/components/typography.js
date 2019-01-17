@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-const typography = name => ({
+const typography = (name) => ({
   name: `v-${name}`,
 
   render (h) {

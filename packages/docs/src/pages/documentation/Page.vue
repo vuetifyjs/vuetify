@@ -41,9 +41,7 @@
         /* webpackChunkName: "pages" */
         `@/data/pages/${namespace}/${page}.json`
       )).default
-    } catch (err) {
-      console.log(err)
-    }
+    } catch (err) {}
 
     store.commit('documentation/setStructure', structure)
   }

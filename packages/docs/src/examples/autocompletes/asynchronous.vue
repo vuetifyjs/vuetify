@@ -5,10 +5,10 @@
   >
     <v-toolbar-title>State selection</v-toolbar-title>
     <v-autocomplete
-      v-model="select"
       :loading="loading"
       :items="items"
       :search-input.sync="search"
+      v-model="select"
       cache-items
       class="mx-3"
       flat

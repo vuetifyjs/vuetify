@@ -18,10 +18,7 @@
         <v-list>
           <v-list-tile avatar>
             <v-list-tile-avatar>
-              <img
-                src="https://cdn.vuetifyjs.com/images/john.jpg"
-                alt="John"
-              >
+              <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
             </v-list-tile-avatar>
 
             <v-list-tile-content>
@@ -46,20 +43,14 @@
         <v-list>
           <v-list-tile>
             <v-list-tile-action>
-              <v-switch
-                v-model="message"
-                color="purple"
-              ></v-switch>
+              <v-switch v-model="message" color="purple"></v-switch>
             </v-list-tile-action>
             <v-list-tile-title>Enable messages</v-list-tile-title>
           </v-list-tile>
 
           <v-list-tile>
             <v-list-tile-action>
-              <v-switch
-                v-model="hints"
-                color="purple"
-              ></v-switch>
+              <v-switch v-model="hints" color="purple"></v-switch>
             </v-list-tile-action>
             <v-list-tile-title>Enable hints</v-list-tile-title>
           </v-list-tile>
@@ -68,19 +59,8 @@
         <v-card-actions>
           <v-spacer></v-spacer>
 
-          <v-btn
-            flat
-            @click="menu = false"
-          >
-            Cancel
-          </v-btn>
-          <v-btn
-            color="primary"
-            flat
-            @click="menu = false"
-          >
-            Save
-          </v-btn>
+          <v-btn flat @click="menu = false">Cancel</v-btn>
+          <v-btn color="primary" flat @click="menu = false">Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-menu>

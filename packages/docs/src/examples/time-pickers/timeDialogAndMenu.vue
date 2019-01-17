@@ -1,16 +1,10 @@
 <template>
-  <v-layout
-    row
-    wrap
-  >
-    <v-flex
-      xs11
-      sm5
-    >
+  <v-layout row wrap>
+    <v-flex xs11 sm5>
       <v-menu
         ref="menu"
-        v-model="menu2"
         :close-on-content-click="false"
+        v-model="menu2"
         :nudge-right="40"
         :return-value.sync="time"
         lazy
@@ -36,10 +30,7 @@
       </v-menu>
     </v-flex>
     <v-spacer></v-spacer>
-    <v-flex
-      xs11
-      sm5
-    >
+    <v-flex xs11 sm5>
       <v-dialog
         ref="dialog"
         v-model="modal2"
@@ -62,20 +53,8 @@
           full-width
         >
           <v-spacer></v-spacer>
-          <v-btn
-            flat
-            color="primary"
-            @click="modal2 = false"
-          >
-            Cancel
-          </v-btn>
-          <v-btn
-            flat
-            color="primary"
-            @click="$refs.dialog.save(time)"
-          >
-            OK
-          </v-btn>
+          <v-btn flat color="primary" @click="modal2 = false">Cancel</v-btn>
+          <v-btn flat color="primary" @click="$refs.dialog.save(time)">OK</v-btn>
         </v-time-picker>
       </v-dialog>
     </v-flex>

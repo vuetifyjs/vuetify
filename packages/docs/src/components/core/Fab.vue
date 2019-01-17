@@ -1,8 +1,8 @@
 <template>
   <v-fab-transition>
     <v-btn
-      v-show="fab"
       v-scroll="onScroll"
+      v-show="fab"
       :style="{
         bottom: value ? '80px' : ''
       }"

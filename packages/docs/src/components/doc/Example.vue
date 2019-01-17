@@ -55,47 +55,43 @@
           class="pa-2"
           mandatory
         >
-          <template v-for="(section, i) in sections">
-            <v-item
-              v-if="parsed[section]"
-              :key="`item-${i}`"
-              :value="section"
+          <v-item
+            v-for="(section, i) in sections"
+            v-if="parsed[section]"
+            :key="`item-${i}`"
+            :value="section"
+          >
+            <v-btn
+              slot-scope="{ active, toggle }"
+              :color="active ? 'white' : 'transparent'"
+              :light="active"
+              class="mr-0"
+              depressed
+              round
+              @click="toggle"
             >
-              <v-btn
-                slot-scope="{ active, toggle }"
-                :color="active ? 'white' : 'transparent'"
-                :light="active"
-                class="mr-0"
-                depressed
-                round
-                @click="toggle"
-              >
-                {{ section }}
-              </v-btn>
-            </v-item>
-          </template>
+              {{ section }}
+            </v-btn>
+          </v-item>
         </v-item-group>
         <v-divider />
         <v-window v-model="selected">
-          <template v-for="(section, i) in sections">
-            <v-window-item
-              v-if="parsed[section]"
-              :key="`window-${i}`"
-              :value="section"
+          <v-window-item
+            v-for="(section, i) in sections"
+            v-if="parsed[section]"
+            :key="`window-${i}`"
+            :value="section"
+          >
+            <div
+              :class="($vuetify.breakpoint.smAndUp) ? 'v-example__container' : ''"
             >
-              <div
-                :class="($vuetify.breakpoint.smAndUp) ? 'v-example__container' : ''"
-              >
-                <!-- eslint-disable -->
-                <doc-markup
-                  :value="file"
-                  :filename="false"
-                  class="mb-0"
-                >{{ parsed[section] }}</doc-markup>
-                <!-- eslint-enable -->
-              </div>
-            </v-window-item>
-          </template>
+              <doc-markup
+                :value="file"
+                :filename="false"
+                class="mb-0"
+              >{{ parsed[section] }}</doc-markup>
+            </div>
+          </v-window-item>
         </v-window>
       </v-card>
     </v-expand-transition>
@@ -109,10 +105,7 @@
         </div>
       </v-card-text>
     </v-sheet>
-    <doc-codepen
-      ref="codepen"
-      :pen="parsed"
-    />
+    <doc-codepen ref="codepen" :pen="parsed" />
   </v-card>
 </template>
 
@@ -206,6 +199,9 @@
         }
       },
       kebabCase,
+      toggle () {
+        this.active = !this.active
+      },
       sendToCodepen () {
         this.$refs.codepen.submit()
       },

@@ -1,11 +1,11 @@
 <template>
   <v-snackbar
-    v-model="snack"
     :color="snackbar.color"
     :style="{
       marginBottom: $vuetify.breakpoint.smOnly ? '40px' : null
     }"
     :timeout="snackbar.timeout"
+    v-model="snack"
     bottom
     right
   >

@@ -8,8 +8,8 @@
 
     <v-tab
       v-for="i in 30"
-      :key="i"
       :href="'#tab-' + i"
+      :key="i"
     >
       Item {{ i }}
     </v-tab>
@@ -17,8 +17,8 @@
     <v-tabs-items>
       <v-tab-item
         v-for="i in 30"
-        :key="i"
         :value="'tab-' + i"
+        :key="i"
       >
         <v-card flat>
           <v-card-text>{{ text }}</v-card-text>

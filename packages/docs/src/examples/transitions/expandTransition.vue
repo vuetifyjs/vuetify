@@ -4,9 +4,7 @@
       dark
       color="primary"
       @click="expand = !expand"
-    >
-      Expand Transition
-    </v-btn>
+    >Expand Transition</v-btn>
 
     <v-expand-transition>
       <div v-if="expand">

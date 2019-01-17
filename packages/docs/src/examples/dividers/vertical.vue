@@ -11,9 +11,7 @@
       vertical
     ></v-divider>
 
-    <span class="subheading">
-      My Home
-    </span>
+    <span class="subheading">My Home</span>
 
     <v-spacer></v-spacer>
 
