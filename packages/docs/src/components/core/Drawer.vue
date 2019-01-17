@@ -9,9 +9,7 @@
       pb-0
     >
       <div class="text-xs-center">
-        <h4 class="body-2 font-weight-bold grey--text">
-          Premiere sponsor
-        </h4>
+        <h4 class="body-2 font-weight-bold grey--text">Premiere sponsor</h4>
         <span class="d-block mb-3 caption grey--text text--lighten-1">
           One spot available
         </span>

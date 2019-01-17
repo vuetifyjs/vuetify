@@ -50,22 +50,15 @@
           justify-end
           pa-3
         >
-          <h3 class="headline">
-            {{ name }}
-          </h3>
-          <span class="grey--text text--lighten-1">
-            {{ title }}
-          </span>
+          <h3 class="headline">{{ name }}</h3>
+          <span class="grey--text text--lighten-1">{{ title }}</span>
         </v-layout>
       </v-layout>
     </v-img>
     <v-form>
       <v-container>
         <v-layout wrap>
-          <v-flex
-            xs12
-            md6
-          >
+          <v-flex xs12 md6>
             <v-text-field
               v-model="name"
               :disabled="isUpdating"
@@ -74,10 +67,7 @@
               label="Name"
             ></v-text-field>
           </v-flex>
-          <v-flex
-            xs12
-            md6
-          >
+          <v-flex xs12 md6>
             <v-text-field
               v-model="title"
               :disabled="isUpdating"
@@ -155,9 +145,7 @@
         depressed
         @click="isUpdating = true"
       >
-        <v-icon left>
-          mdi-update
-        </v-icon>
+        <v-icon left>mdi-update</v-icon>
         Update Now
       </v-btn>
     </v-card-actions>

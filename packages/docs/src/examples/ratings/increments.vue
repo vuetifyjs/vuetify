@@ -25,9 +25,7 @@
     </v-card-text>
     <v-divider></v-divider>
     <v-card-actions class="justify-space-between">
-      <v-btn flat>
-        No Thanks
-      </v-btn>
+      <v-btn flat>No Thanks</v-btn>
       <v-btn
         color="primary"
         flat

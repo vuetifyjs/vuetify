@@ -16,12 +16,8 @@
         class="hidden-sm-and-down mr-1"
         v-text="$t('Vuetify.AppToolbar.ecosystem')"
       />
-      <v-icon class="hidden-sm-and-down">
-        mdi-menu-down
-      </v-icon>
-      <v-icon class="hidden-md-and-up">
-        mdi-earth
-      </v-icon>
+      <v-icon class="hidden-sm-and-down">mdi-menu-down</v-icon>
+      <v-icon class="hidden-md-and-up">mdi-earth</v-icon>
     </v-btn>
 
     <v-list

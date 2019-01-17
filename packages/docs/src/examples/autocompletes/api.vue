@@ -12,9 +12,7 @@
         class="grey--text text--lighten-3"
         href="https://github.com/toddmotto/public-apis"
         target="_blank"
-      >
-        the Github repository
-      </a>.
+      >the Github repository</a>.
     </v-card-text>
     <v-card-text>
       <v-autocomplete
@@ -35,10 +33,7 @@
     </v-card-text>
     <v-divider></v-divider>
     <v-expand-transition>
-      <v-list
-        v-if="model"
-        class="red lighten-3"
-      >
+      <v-list v-if="model" class="red lighten-3">
         <v-list-tile
           v-for="(field, i) in fields"
           :key="i"
@@ -58,9 +53,7 @@
         @click="model = null"
       >
         Clear
-        <v-icon right>
-          mdi-close-circle
-        </v-icon>
+        <v-icon right>mdi-close-circle</v-icon>
       </v-btn>
     </v-card-actions>
   </v-card>

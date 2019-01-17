@@ -18,10 +18,8 @@
     "@vue/cli-plugin-eslint": "^3.2.0",
     "@vue/cli-service": "^3.2.0",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.8.0",
-    "eslint-config-vuetify": "^0.1.0",
-    "eslint-plugin-vue": "^4.7.1",
+    "eslint": "^5.12.0",
     "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.1"
+    "stylus-loader": "^3.0.2"
   }
 }

@@ -1,14 +1,8 @@
 <template>
   <div>
     <v-subheader>Light status bar</v-subheader>
-    <v-card
-      img="https://cdn.vuetifyjs.com/images/home/vuetify_layout1.svg"
-      height="200px"
-    >
-      <v-system-bar
-        status
-        color="primary"
-      >
+    <v-card img="https://cdn.vuetifyjs.com/images/home/vuetify_layout1.svg" height="200px">
+      <v-system-bar status color="primary">
         <v-spacer></v-spacer>
         <v-icon>network_wifi</v-icon>
         <v-icon>signal_cellular_null</v-icon>
@@ -17,15 +11,8 @@
       </v-system-bar>
     </v-card>
     <v-subheader>Lights out</v-subheader>
-    <v-card
-      img="https://cdn.vuetifyjs.com/images/home/vuetify_layout2.svg"
-      height="200px"
-    >
-      <v-system-bar
-        status
-        color="primary"
-        lights-out
-      >
+    <v-card img="https://cdn.vuetifyjs.com/images/home/vuetify_layout2.svg" height="200px">
+      <v-system-bar status color="primary" lights-out>
         <v-spacer></v-spacer>
         <v-icon>network_wifi</v-icon>
         <v-icon>signal_cellular_null</v-icon>
@@ -34,15 +21,8 @@
       </v-system-bar>
     </v-card>
     <v-subheader>Dark status bar</v-subheader>
-    <v-card
-      img="https://cdn.vuetifyjs.com/images/home/vuetify_layout1.svg"
-      height="200px"
-    >
-      <v-system-bar
-        status
-        color="primary"
-        dark
-      >
+    <v-card img="https://cdn.vuetifyjs.com/images/home/vuetify_layout1.svg" height="200px">
+      <v-system-bar status color="primary" dark>
         <v-spacer></v-spacer>
         <v-icon>network_wifi</v-icon>
         <v-icon>signal_cellular_null</v-icon>
@@ -51,16 +31,8 @@
       </v-system-bar>
     </v-card>
     <v-subheader>Lights out</v-subheader>
-    <v-card
-      img="https://cdn.vuetifyjs.com/images/home/vuetify_layout2.svg"
-      height="200px"
-    >
-      <v-system-bar
-        status
-        color="primary"
-        lights-out
-        dark
-      >
+    <v-card img="https://cdn.vuetifyjs.com/images/home/vuetify_layout2.svg" height="200px">
+      <v-system-bar status color="primary" lights-out dark>
         <v-spacer></v-spacer>
         <v-icon>network_wifi</v-icon>
         <v-icon>signal_cellular_null</v-icon>
@@ -70,10 +42,7 @@
     </v-card>
     <v-divider class="my-5"></v-divider>
     <v-subheader>Window bar</v-subheader>
-    <v-system-bar
-      window
-      dark
-    >
+    <v-system-bar window dark>
       <v-spacer></v-spacer>
       <v-icon>remove</v-icon>
       <v-icon>check_box_outline_blank</v-icon>

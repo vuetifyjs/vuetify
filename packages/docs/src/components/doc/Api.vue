@@ -32,10 +32,7 @@
             />
           </v-flex>
 
-          <v-flex
-            xs12
-            sm4
-          >
+          <v-flex xs12 sm4>
             <v-text-field
               v-model="search"
               append-icon="search"
