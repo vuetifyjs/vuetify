@@ -82,24 +82,16 @@
               disabled
             />
           </v-flex>
-        </v-layout>
-      </v-flex>
-
-      <h3 class="title grey--text mb-4 mt-5 center">
-        Reactive
-      </h3>
-      <v-flex>
-        <v-layout
-          row
-          wrap
-          justify-space-around
-          align-center
-        >
-          <v-date-picker
-            v-model="model"
-            :landscape="landscape"
-            reactive
-          />
+          <v-flex text-xs-center>
+            <h3 class="title grey--text mb-4 mt-5 center">
+              Reactive
+            </h3>
+            <v-date-picker
+              v-model="model"
+              :landscape="landscape"
+              reactive
+            />
+          </v-flex>
         </v-layout>
       </v-flex>
 
@@ -211,7 +203,7 @@
               Allowed dates: min/max
             </h3>
             <v-date-picker
-              v-model="model"
+              v-model="modelMM"
               :landscape="landscape"
               min="2019-01-14"
               max="2019-02-05"
@@ -222,7 +214,7 @@
               Allowed dates: function
             </h3>
             <v-date-picker
-              v-model="model"
+              v-model="modelMM"
               :landscape="landscape"
               :allowed-dates="val => parseInt(val.split('-')[2], 10) % 2 === 0"
             />
@@ -383,7 +375,7 @@
       </v-flex>
 
       <h3 class="title grey--text mb-4 mt-5 center">
-        <code>show-current</code> prop
+        Current day indicator
       </h3>
       <v-flex>
         <v-layout
@@ -401,7 +393,7 @@
             v-model="model"
             :landscape="landscape"
             class="mt-4"
-            show-current="2013-07-13"
+            show-current="2019-01-05"
           />
         </v-layout>
       </v-flex>
@@ -414,24 +406,12 @@
     name: 'DatePickers',
 
     data: () => ({
-      menu1: false,
-      modal1: false,
-      pickerDate: null,
       arrayEvents: ['2019-01-18', '2019-01-14', '2019-01-02', '2019-01-06', '2019-01-03', '2019-01-29'],
-      modal2: false,
-      months: [],
-      dates: [],
-      menu2: false,
+      dates: ['2019-01-16', '2019-02-25', '2019-02-26', '2019-02-13'],
       model: '2019-01-16',
-      monthModel: '2019-01',
+      modelMM: '2019-01-16',
       landscape: false
     }),
-
-    watch: {
-      pickerDate (val, oldVal) {
-        oldVal && alert(val) // Don't trigger on page open
-      }
-    },
 
     methods: {
       functionEvents (date) {
