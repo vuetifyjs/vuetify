@@ -9,10 +9,12 @@
           xs12
           md6
         >
-          <h2 class="display-3 mb-5">What'll it be?</h2>
+          <h2 class="display-3 mb-5">
+            What'll it be?
+          </h2>
           <v-select
-            :items="meals"
             v-model="meal"
+            :items="meals"
             label="Meals"
             solo-inverted
           />

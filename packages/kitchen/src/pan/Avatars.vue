@@ -2,9 +2,12 @@
   <v-container text-xs-center>
     <v-layout
       column
-      variations>
+      variations
+    >
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">Round</h3>
+        <h3 class="title grey--text mb-4 mt-5">
+          Round
+        </h3>
         <v-layout
           justify-space-around
           align-center
@@ -37,7 +40,9 @@
         </v-layout>
       </v-flex>
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">Tile</h3>
+        <h3 class="title grey--text mb-4 mt-5">
+          Tile
+        </h3>
         <v-layout
           justify-space-around
           align-center
@@ -74,7 +79,9 @@
         </v-layout>
       </v-flex>
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">With icons</h3>
+        <h3 class="title grey--text mb-4 mt-5">
+          With icons
+        </h3>
         <v-layout
           align-center
           justify-space-around
@@ -82,28 +89,42 @@
         >
           <v-avatar
             size="32"
-            color="indigo">
-            <v-icon dark>mdi-account-group</v-icon>
+            color="indigo"
+          >
+            <v-icon dark>
+              mdi-account-group
+            </v-icon>
           </v-avatar>
           <v-avatar
             size="64"
-            color="indigo">
-            <v-icon dark>mdi-account-group</v-icon>
+            color="indigo"
+          >
+            <v-icon dark>
+              mdi-account-group
+            </v-icon>
           </v-avatar>
           <v-avatar
             size="128"
-            color="indigo">
-            <v-icon dark>mdi-account-group</v-icon>
+            color="indigo"
+          >
+            <v-icon dark>
+              mdi-account-group
+            </v-icon>
           </v-avatar>
           <v-avatar
             size="256"
-            color="indigo">
-            <v-icon dark>mdi-account-group</v-icon>
+            color="indigo"
+          >
+            <v-icon dark>
+              mdi-account-group
+            </v-icon>
           </v-avatar>
         </v-layout>
       </v-flex>
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">With images</h3>
+        <h3 class="title grey--text mb-4 mt-5">
+          With images
+        </h3>
         <v-layout
           align-center
           justify-space-around
@@ -136,56 +157,76 @@
         </v-layout>
       </v-flex>
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">With badges</h3>
+        <h3 class="title grey--text mb-4 mt-5">
+          With badges
+        </h3>
         <v-layout
           align-center
           justify-space-around
           wrap
         >
           <v-badge overlap>
-            <span slot="badge">3</span>
+            <span slot="badge">
+              3
+            </span>
 
             <v-avatar
               color="purple red--after"
               size="32"
             >
-              <v-icon dark>mdi-alarm</v-icon>
+              <v-icon dark>
+                mdi-alarm
+              </v-icon>
             </v-avatar>
           </v-badge>
           <v-badge overlap>
-            <span slot="badge">3</span>
+            <span slot="badge">
+              3
+            </span>
 
             <v-avatar
               color="purple red--after"
               size="64"
             >
-              <v-icon dark>mdi-alarm</v-icon>
+              <v-icon dark>
+                mdi-alarm
+              </v-icon>
             </v-avatar>
           </v-badge>
           <v-badge overlap>
-            <span slot="badge">3</span>
+            <span slot="badge">
+              3
+            </span>
 
             <v-avatar
               color="purple red--after"
               size="128"
             >
-              <v-icon dark>mdi-alarm</v-icon>
+              <v-icon dark>
+                mdi-alarm
+              </v-icon>
             </v-avatar>
           </v-badge>
           <v-badge overlap>
-            <span slot="badge">3</span>
+            <span slot="badge">
+              3
+            </span>
 
             <v-avatar
               color="purple red--after"
               size="256"
             >
-              <v-icon dark>mdi-alarm</v-icon>
+              <v-icon dark>
+                mdi-alarm
+              </v-icon>
             </v-avatar>
           </v-badge>
         </v-layout>
       </v-flex>
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">With letters</h3>
+        <h3 class="title grey--text mb-4 mt-5">
+          With letters
+        </h3>
         <v-layout
           align-center
           justify-space-around
@@ -193,23 +234,35 @@
         >
           <v-avatar
             size="32"
-            color="teal">
-            <span class="white--text headline">C</span>
+            color="teal"
+          >
+            <span class="white--text headline">
+              C
+            </span>
           </v-avatar>
           <v-avatar
             size="64"
-            color="teal">
-            <span class="white--text headline">C</span>
+            color="teal"
+          >
+            <span class="white--text headline">
+              C
+            </span>
           </v-avatar>
           <v-avatar
             size="128"
-            color="teal">
-            <span class="white--text headline">C</span>
+            color="teal"
+          >
+            <span class="white--text headline">
+              C
+            </span>
           </v-avatar>
           <v-avatar
             size="256"
-            color="teal">
-            <span class="white--text headline">C</span>
+            color="teal"
+          >
+            <span class="white--text headline">
+              C
+            </span>
           </v-avatar>
         </v-layout>
 
@@ -220,23 +273,35 @@
         >
           <v-avatar
             size="32"
-            color="red">
-            <span class="white--text headline">J</span>
+            color="red"
+          >
+            <span class="white--text headline">
+              J
+            </span>
           </v-avatar>
           <v-avatar
             size="64"
-            color="red">
-            <span class="white--text headline">J</span>
+            color="red"
+          >
+            <span class="white--text headline">
+              J
+            </span>
           </v-avatar>
           <v-avatar
             size="128"
-            color="red">
-            <span class="white--text headline">J</span>
+            color="red"
+          >
+            <span class="white--text headline">
+              J
+            </span>
           </v-avatar>
           <v-avatar
             size="256"
-            color="red">
-            <span class="white--text headline">J</span>
+            color="red"
+          >
+            <span class="white--text headline">
+              J
+            </span>
           </v-avatar>
         </v-layout>
       </v-flex>

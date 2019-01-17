@@ -60,6 +60,10 @@ export default mixins(
       default: () => ([])
     } as PropValidator<NodeArray>,
     openAll: Boolean,
+    returnObject: {
+      type: Boolean,
+      default: false // TODO: Should be true in next major
+    },
     value: {
       type: Array,
       default: () => ([])
@@ -102,29 +106,14 @@ export default mixins(
       },
       deep: true
     },
-    active (value: (string | number)[]) {
-      const old = [...this.activeCache]
-      if (!value || deepEqual(old, value)) return
-
-      old.forEach(key => this.updateActive(key, false))
-      value.forEach(key => this.updateActive(key, true))
-      this.emitActive()
+    active (value: (string | number | any)[]) {
+      this.handleNodeCacheWatcher(value, this.activeCache, this.updateActive, this.emitActive)
     },
-    value (value: (string | number)[]) {
-      const old = [...this.selectedCache]
-      if (!value || deepEqual(old, value)) return
-
-      old.forEach(key => this.updateSelected(key, false))
-      value.forEach(key => this.updateSelected(key, true))
-      this.emitSelected()
+    value (value: (string | number | any)[]) {
+      this.handleNodeCacheWatcher(value, this.selectedCache, this.updateSelected, this.emitSelected)
     },
-    open (value: (string | number)[]) {
-      const old = [...this.openCache]
-      if (deepEqual(old, value)) return
-
-      old.forEach(key => this.updateOpen(key, false))
-      value.forEach(key => this.updateOpen(key, true))
-      this.emitOpen()
+    open (value: (string | number | any)[]) {
+      this.handleNodeCacheWatcher(value, this.openCache, this.updateOpen, this.emitOpen)
     }
   },
 
@@ -217,13 +206,26 @@ export default mixins(
       return node
     },
     emitOpen () {
-      this.$emit('update:open', [...this.openCache])
+      this.emitNodeCache('update:open', this.openCache)
     },
     emitSelected () {
-      this.$emit('input', [...this.selectedCache])
+      this.emitNodeCache('input', this.selectedCache)
     },
     emitActive () {
-      this.$emit('update:active', [...this.activeCache])
+      this.emitNodeCache('update:active', this.activeCache)
+    },
+    emitNodeCache (event: string, cache: NodeCache) {
+      this.$emit(event, this.returnObject ? [...cache].map(key => this.nodes[key].item) : [...cache])
+    },
+    handleNodeCacheWatcher (value: any[], cache: NodeCache, updateFn: Function, emitFn: Function) {
+      value = this.returnObject ? value.map(v => getObjectValueByPath(v, this.itemKey)) : value
+      const old = [...cache]
+      if (deepEqual(old, value)) return
+
+      old.forEach(key => updateFn(key, false))
+      value.forEach(key => updateFn(key, true))
+
+      emitFn()
     },
     getDescendants (key: string | number, descendants: NodeArray = []) {
       const children = this.nodes[key].children

@@ -2,33 +2,43 @@
   <v-container text-xs-center>
     <v-layout
       column
-      variations>
+      variations
+    >
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">Simple</h3>
+        <h3 class="title grey--text mb-4 mt-5">
+          Simple
+        </h3>
         <v-layout
           align-center
           justify-space-around
           wrap
         >
-          <v-chip close>Example Chip</v-chip>
+          <v-chip close>
+            Example Chip
+          </v-chip>
           <v-chip>Example Chip</v-chip>
           <v-chip close>
             <v-avatar>
               <img
                 src="https://randomuser.me/api/portraits/men/35.jpg"
-                alt="trevor">
+                alt="trevor"
+              >
             </v-avatar>
             Trevor Hansen
           </v-chip>
           <v-chip>
-            <v-avatar class="teal">A</v-avatar>
+            <v-avatar class="teal">
+              A
+            </v-avatar>
             ANZ Bank
           </v-chip>
         </v-layout>
       </v-flex>
 
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">Colors</h3>
+        <h3 class="title grey--text mb-4 mt-5">
+          Colors
+        </h3>
         <v-layout
           align-center
           justify-space-around
@@ -36,24 +46,38 @@
         >
           <v-chip
             color="primary"
-            text-color="white">Primary</v-chip>
+            text-color="white"
+          >
+            Primary
+          </v-chip>
 
           <v-chip
             color="secondary"
-            text-color="white">Secondary</v-chip>
+            text-color="white"
+          >
+            Secondary
+          </v-chip>
 
           <v-chip
             color="red"
-            text-color="white">Colored Chip</v-chip>
+            text-color="white"
+          >
+            Colored Chip
+          </v-chip>
 
           <v-chip
             color="green"
-            text-color="white">Colored Chip</v-chip>
+            text-color="white"
+          >
+            Colored Chip
+          </v-chip>
         </v-layout>
       </v-flex>
 
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">With icons</h3>
+        <h3 class="title grey--text mb-4 mt-5">
+          With icons
+        </h3>
         <v-layout
           align-center
           justify-space-around
@@ -61,7 +85,8 @@
         >
           <v-chip
             color="indigo"
-            text-color="white">
+            text-color="white"
+          >
             <v-avatar>
               <v-icon>mdi-account-circle</v-icon>
             </v-avatar>
@@ -70,29 +95,39 @@
 
           <v-chip
             color="orange"
-            text-color="white">
+            text-color="white"
+          >
             Premium
-            <v-icon right>mdi-star</v-icon>
+            <v-icon right>
+              mdi-star
+            </v-icon>
           </v-chip>
 
           <v-chip
             color="primary"
-            text-color="white">
+            text-color="white"
+          >
             1 Year
-            <v-icon right>mdi-cake</v-icon>
+            <v-icon right>
+              mdi-cake
+            </v-icon>
           </v-chip>
 
           <v-chip
             color="green"
-            text-color="white">
-            <v-avatar class="green darken-4">1</v-avatar>
+            text-color="white"
+          >
+            <v-avatar class="green darken-4">
+              1
+            </v-avatar>
             Years
           </v-chip>
 
           <v-chip
             close
             color="teal"
-            text-color="white">
+            text-color="white"
+          >
             <v-avatar>
               <v-icon>mdi-check-circle</v-icon>
             </v-avatar>
@@ -102,7 +137,9 @@
       </v-flex>
 
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">Outline</h3>
+        <h3 class="title grey--text mb-4 mt-5">
+          Outline
+        </h3>
         <v-layout
           align-center
           justify-space-around
@@ -110,45 +147,66 @@
         >
           <v-chip
             outline
-            color="secondary">Outline</v-chip>
+            color="secondary"
+          >
+            Outline
+          </v-chip>
 
           <v-chip
             outline
-            color="primary">Colored</v-chip>
+            color="primary"
+          >
+            Colored
+          </v-chip>
 
           <v-chip
             outline
-            color="red">
-            <v-icon left>mdi-wrench</v-icon>Icon
+            color="red"
+          >
+            <v-icon left>
+              mdi-wrench
+            </v-icon>Icon
           </v-chip>
         </v-layout>
       </v-flex>
 
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">Labels</h3>
+        <h3 class="title grey--text mb-4 mt-5">
+          Labels
+        </h3>
         <v-layout
           align-center
           justify-space-around
           wrap
         >
-          <v-chip label>Label</v-chip>
+          <v-chip label>
+            Label
+          </v-chip>
 
           <v-chip
             label
             color="pink"
-            text-color="white">
-            <v-icon left>mdi-label</v-icon>Tags
+            text-color="white"
+          >
+            <v-icon left>
+              mdi-label
+            </v-icon>Tags
           </v-chip>
 
           <v-chip
             label
             outline
-            color="red">Outline</v-chip>
+            color="red"
+          >
+            Outline
+          </v-chip>
         </v-layout>
       </v-flex>
 
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">Closable</h3>
+        <h3 class="title grey--text mb-4 mt-5">
+          Closable
+        </h3>
         <v-layout
           align-center
           justify-space-around
@@ -168,21 +226,27 @@
           <v-chip
             v-model="chip1"
             close
-          >Closable</v-chip>
+          >
+            Closable
+          </v-chip>
 
           <v-chip
             v-model="chip2"
             close
             color="red"
             text-color="white"
-          >Remove</v-chip>
+          >
+            Remove
+          </v-chip>
 
           <v-chip
             v-model="chip3"
             close
             color="green"
             outline
-          >Success</v-chip>
+          >
+            Success
+          </v-chip>
 
           <v-chip
             v-model="chip4"
@@ -190,7 +254,9 @@
             color="orange"
             label
             outline
-          >Complete</v-chip>
+          >
+            Complete
+          </v-chip>
         </v-layout>
       </v-flex>
     </v-layout>

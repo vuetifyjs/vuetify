@@ -1,11 +1,15 @@
 <template>
   <v-container>
     <v-layout column>
-      <h3 class="title grey--text mb-4 mt-5 center">Left</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Left
+      </h3>
       <v-flex>
         <v-layout justify-space-around>
           <v-badge left>
-            <span slot="badge">1</span>
+            <span slot="badge">
+              1
+            </span>
             <v-sheet
               width="32"
               height="32"
@@ -14,7 +18,9 @@
           </v-badge>
 
           <v-badge left>
-            <span slot="badge">2</span>
+            <span slot="badge">
+              2
+            </span>
             <v-sheet
               width="32"
               height="32"
@@ -23,7 +29,9 @@
           </v-badge>
 
           <v-badge left>
-            <span slot="badge">3</span>
+            <span slot="badge">
+              3
+            </span>
             <v-sheet
               width="32"
               height="32"
@@ -33,11 +41,15 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Right</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Right
+      </h3>
       <v-flex>
         <v-layout justify-space-around>
           <v-badge right>
-            <span slot="badge">1</span>
+            <span slot="badge">
+              1
+            </span>
             <v-sheet
               width="32"
               height="32"
@@ -46,7 +58,9 @@
           </v-badge>
 
           <v-badge right>
-            <span slot="badge">2</span>
+            <span slot="badge">
+              2
+            </span>
             <v-sheet
               width="32"
               height="32"
@@ -55,7 +69,9 @@
           </v-badge>
 
           <v-badge right>
-            <span slot="badge">3</span>
+            <span slot="badge">
+              3
+            </span>
             <v-sheet
               width="32"
               height="32"
@@ -65,13 +81,18 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Color</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Color
+      </h3>
       <v-flex>
         <v-layout justify-space-around>
           <v-badge
             left
-            color="red">
-            <span slot="badge">1</span>
+            color="red"
+          >
+            <span slot="badge">
+              1
+            </span>
             <v-sheet
               width="32"
               height="32"
@@ -81,8 +102,11 @@
 
           <v-badge
             left
-            color="teal">
-            <span slot="badge">2</span>
+            color="teal"
+          >
+            <span slot="badge">
+              2
+            </span>
             <v-sheet
               width="32"
               height="32"
@@ -92,8 +116,11 @@
 
           <v-badge
             left
-            color="info darken-2">
-            <span slot="badge">3</span>
+            color="info darken-2"
+          >
+            <span slot="badge">
+              3
+            </span>
             <v-sheet
               width="32"
               height="32"
@@ -103,8 +130,11 @@
 
           <v-badge
             right
-            color="red">
-            <span slot="badge">1</span>
+            color="red"
+          >
+            <span slot="badge">
+              1
+            </span>
             <v-sheet
               width="32"
               height="32"
@@ -114,8 +144,11 @@
 
           <v-badge
             right
-            color="teal">
-            <span slot="badge">2</span>
+            color="teal"
+          >
+            <span slot="badge">
+              2
+            </span>
             <v-sheet
               width="32"
               height="32"
@@ -125,8 +158,11 @@
 
           <v-badge
             right
-            color="info darken-2">
-            <span slot="badge">3</span>
+            color="info darken-2"
+          >
+            <span slot="badge">
+              3
+            </span>
             <v-sheet
               width="32"
               height="32"
@@ -136,13 +172,18 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Overlap</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Overlap
+      </h3>
       <v-flex>
         <v-layout justify-space-around>
           <v-badge
             left
-            overlap>
-            <span slot="badge">1</span>
+            overlap
+          >
+            <span slot="badge">
+              1
+            </span>
             <v-sheet
               width="32"
               height="32"
@@ -152,8 +193,11 @@
 
           <v-badge
             left
-            overlap>
-            <span slot="badge">2</span>
+            overlap
+          >
+            <span slot="badge">
+              2
+            </span>
             <v-sheet
               width="32"
               height="32"
@@ -163,8 +207,11 @@
 
           <v-badge
             left
-            overlap>
-            <span slot="badge">3</span>
+            overlap
+          >
+            <span slot="badge">
+              3
+            </span>
             <v-sheet
               width="32"
               height="32"
@@ -174,7 +221,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Visibility control</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Visibility control
+      </h3>
       <v-flex>
         <v-layout
           flex
@@ -182,16 +231,22 @@
           align-center
         >
           <v-flex xs12>
-            <v-btn @click="show1 = !show1">toggle</v-btn>
+            <v-btn @click="show1 = !show1">
+              toggle
+            </v-btn>
           </v-flex>
 
           <v-flex
             xs12
-            class="mt-5">
+            class="mt-5"
+          >
             <v-badge
               :value="show1"
-              left>
-              <span slot="badge">1</span>
+              left
+            >
+              <span slot="badge">
+                1
+              </span>
               <v-sheet
                 width="32"
                 height="32"
@@ -202,12 +257,16 @@
 
           <v-flex
             xs12
-            class="mt-5">
+            class="mt-5"
+          >
             <v-badge
               :value="show1"
               left
-              overlap>
-              <span slot="badge">1</span>
+              overlap
+            >
+              <span slot="badge">
+                1
+              </span>
               <v-sheet
                 width="32"
                 height="32"
@@ -218,7 +277,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Custom transition</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Custom transition
+      </h3>
       <v-flex>
         <v-layout
           flex
@@ -226,34 +287,44 @@
           align-center
         >
           <v-flex xs12>
-            <v-btn @click="show2 = !show2">toggle</v-btn>
+            <v-btn @click="show2 = !show2">
+              toggle
+            </v-btn>
           </v-flex>
 
           <v-flex
             xs12
-            class="mt-5">
-            <v-badge
-              :value="show2"
-              left
-              transition="slide-x-reverse-transition">
-              <span slot="badge">1</span>
-              <v-sheet
-                width="32"
-                height="32"
-                color="grey lighten-1"
-              />
-            </v-badge>
-          </v-flex>
-
-          <v-flex
-            xs12
-            class="mt-5">
+            class="mt-5"
+          >
             <v-badge
               :value="show2"
               left
               transition="slide-x-reverse-transition"
-              overlap>
-              <span slot="badge">1</span>
+            >
+              <span slot="badge">
+                1
+              </span>
+              <v-sheet
+                width="32"
+                height="32"
+                color="grey lighten-1"
+              />
+            </v-badge>
+          </v-flex>
+
+          <v-flex
+            xs12
+            class="mt-5"
+          >
+            <v-badge
+              :value="show2"
+              left
+              transition="slide-x-reverse-transition"
+              overlap
+            >
+              <span slot="badge">
+                1
+              </span>
               <v-sheet
                 width="32"
                 height="32"
@@ -264,16 +335,22 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Icons</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Icons
+      </h3>
       <v-flex>
         <v-layout justify-space-around>
           <v-badge
             left
-            color="red">
+            color="red"
+          >
             <v-icon
               slot="badge"
               dark
-              small>mdi-adjust</v-icon>
+              small
+            >
+              mdi-adjust
+            </v-icon>
             <v-sheet
               width="32"
               height="32"
@@ -283,11 +360,15 @@
 
           <v-badge
             left
-            color="teal">
+            color="teal"
+          >
             <v-icon
               slot="badge"
               dark
-              small>mdi-invert-colors</v-icon>
+              small
+            >
+              mdi-invert-colors
+            </v-icon>
             <v-sheet
               width="32"
               height="32"
@@ -297,11 +378,15 @@
 
           <v-badge
             left
-            color="info darken-2">
+            color="info darken-2"
+          >
             <v-icon
               slot="badge"
               dark
-              small>mdi-cloud</v-icon>
+              small
+            >
+              mdi-cloud
+            </v-icon>
             <v-sheet
               width="32"
               height="32"

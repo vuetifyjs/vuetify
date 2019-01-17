@@ -1,7 +1,9 @@
 <template>
   <v-container>
     <v-layout column>
-      <h3 class="title grey--text mb-4 mt-5 center">Simple images</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Simple images
+      </h3>
       <v-flex>
         <v-layout>
           <v-img
@@ -15,7 +17,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Custom aspect ratio</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Custom aspect ratio
+      </h3>
       <v-flex>
         <v-layout>
           <v-img
@@ -29,7 +33,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">With custom placeholder</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        With custom placeholder
+      </h3>
       <v-flex>
         <v-layout>
           <v-img
@@ -49,41 +55,55 @@
             >
               <v-progress-circular
                 indeterminate
-                color="grey lighten-5"/>
+                color="grey lighten-5"
+              />
             </v-layout>
           </v-img>
         </v-layout>
       </v-flex>
     </v-layout>
 
-    <h3 class="title grey--text mb-4 mt-5 center">Contain</h3>
+    <h3 class="title grey--text mb-4 mt-5 center">
+      Contain
+    </h3>
     <v-flex>
       <v-layout>
         <v-flex>
-          <div class="subheading">Matching</div>
+          <div class="subheading">
+            Matching
+          </div>
           <v-img
             src="https://picsum.photos/510/300?random"
             aspect-ratio="1.7"
-            contain/>
+            contain
+          />
         </v-flex>
         <v-flex>
-          <div class="subheading">Too high</div>
+          <div class="subheading">
+            Too high
+          </div>
           <v-img
             src="https://picsum.photos/510/300?random"
             aspect-ratio="2"
-            contain/>
+            contain
+          />
         </v-flex>
         <v-flex>
-          <div class="subheading">Too low</div>
+          <div class="subheading">
+            Too low
+          </div>
           <v-img
             src="https://picsum.photos/510/300?random"
             aspect-ratio="1.4"
-            contain/>
+            contain
+          />
         </v-flex>
       </v-layout>
     </v-flex>
 
-    <h3 class="title grey--text mb-4 mt-5 center">Gradient</h3>
+    <h3 class="title grey--text mb-4 mt-5 center">
+      Gradient
+    </h3>
     <v-flex>
       <v-layout>
         <v-flex>
@@ -95,13 +115,13 @@
 
         <v-flex>
           <v-img src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg">
-            <div class="fill-height bottom-gradient"/>
+            <div class="fill-height bottom-gradient" />
           </v-img>
         </v-flex>
 
         <v-flex>
           <v-img src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg">
-            <div class="fill-height repeating-gradient"/>
+            <div class="fill-height repeating-gradient" />
           </v-img>
         </v-flex>
       </v-layout>
