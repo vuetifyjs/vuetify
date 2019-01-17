@@ -1,10 +1,10 @@
 {
   "name": "Vuetify",
   "short_name": "Vuetify",
-  "theme_color": "#094a7f",
+  "theme_color": "#1867C0",
   "background_color": "#5CBBF6",
   "display": "standalone",
-  "start_url": "/getting-started/quick-start",
+  "start_url": "/en/getting-started/quick-start",
   "description": "A material design component framework for Vue.js 2.x",
   "icons": [
     {
