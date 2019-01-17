@@ -4,6 +4,61 @@
       column
       variations
     >
+      <!-- Extra Small -->
+      <v-flex>
+        <h3 class="title grey--text mb-4 mt-5">
+          Extra Small
+        </h3>
+        <v-layout
+          align-center
+          justify-space-around
+          wrap
+        >
+          <v-chip
+            x-small
+            color="primary"
+          >
+            Extra Small Chip
+          </v-chip>
+          <v-chip
+            class="white--text"
+            color="red lighten-2"
+            x-small
+          >
+            <v-avatar
+              left
+              color="white"
+              class="elevation-4"
+            >
+              <v-img src="https://randomuser.me/api/portraits/men/32.jpg" />
+            </v-avatar>
+            Extra Small Avatar
+          </v-chip>
+          <v-badge
+            overlap
+            color="red lighten-2"
+          >
+            <template slot="badge">
+              2
+            </template>
+            <v-chip
+              x-small
+              color="secondary"
+            >
+              Chip with badge
+            </v-chip>
+          </v-badge>
+          <v-chip
+            close
+            color="purple"
+            class="white--text"
+            x-small
+          >
+            Extra small dismissible
+          </v-chip>
+        </v-layout>
+      </v-flex>
+      <!-- Simple -->
       <v-flex>
         <h3 class="title grey--text mb-4 mt-5">
           Simple
@@ -18,7 +73,7 @@
           </v-chip>
           <v-chip>Example Chip</v-chip>
           <v-chip close>
-            <v-avatar>
+            <v-avatar left>
               <img
                 src="https://randomuser.me/api/portraits/men/35.jpg"
                 alt="trevor"
@@ -26,12 +81,23 @@
             </v-avatar>
             Trevor Hansen
           </v-chip>
-          <v-chip>
-            <v-avatar class="teal">
+          <v-chip disabled>
+            <v-avatar
+              color="teal"
+              left
+              class="white--text"
+            >
               A
             </v-avatar>
             ANZ Bank
           </v-chip>
+        </v-layout>
+        <v-layout>
+          <v-select
+            :items="['Lorem Ipsum', 'Do Folar']"
+            chips
+            deletable-chips
+          />
         </v-layout>
       </v-flex>
 
@@ -87,9 +153,9 @@
             color="indigo"
             text-color="white"
           >
-            <v-avatar>
-              <v-icon>mdi-account-circle</v-icon>
-            </v-avatar>
+            <v-icon left>
+              mdi-account-circle
+            </v-icon>
             Ranee
           </v-chip>
 
@@ -117,7 +183,10 @@
             color="green"
             text-color="white"
           >
-            <v-avatar class="green darken-4">
+            <v-avatar
+              class="green darken-4"
+              left
+            >
               1
             </v-avatar>
             Years
@@ -128,9 +197,9 @@
             color="teal"
             text-color="white"
           >
-            <v-avatar>
-              <v-icon>mdi-check-circle</v-icon>
-            </v-avatar>
+            <v-icon left>
+              mdi-check-circle
+            </v-icon>
             Confirmed
           </v-chip>
         </v-layout>
@@ -165,7 +234,8 @@
           >
             <v-icon left>
               mdi-wrench
-            </v-icon>Icon
+            </v-icon>
+            Icon
           </v-chip>
         </v-layout>
       </v-flex>
@@ -190,7 +260,8 @@
           >
             <v-icon left>
               mdi-label
-            </v-icon>Tags
+            </v-icon>
+            Tags
           </v-chip>
 
           <v-chip

@@ -1,7 +1,7 @@
-import '../../stylus/components/_chips.styl'
+import './VChip.sass'
 
 // Types
-import { CreateElement, VNode } from 'vue'
+import { VNode } from 'vue'
 import mixins from '../../util/mixins'
 
 // Components
@@ -11,19 +11,30 @@ import VIcon from '../VIcon'
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 import Toggleable from '../../mixins/toggleable'
+import Sizeable from '../../mixins/sizeable'
+
+// Directives
+import Ripple from '../../directives/ripple'
 
 /* @vue/component */
-export default mixins(Colorable, Themeable, Toggleable).extend({
+export default mixins(
+  Colorable,
+  Sizeable,
+  Themeable,
+  Toggleable
+).extend({
   name: 'v-chip',
+
+  directives: { Ripple },
 
   props: {
     close: Boolean,
     disabled: Boolean,
     label: Boolean,
     outline: Boolean,
+    ripple: [Object, Boolean],
     // Used for selects/tagging
     selected: Boolean,
-    small: Boolean,
     textColor: String,
     value: {
       type: Boolean,
@@ -38,17 +49,20 @@ export default mixins(Colorable, Themeable, Toggleable).extend({
         'v-chip--selected': this.selected && !this.disabled,
         'v-chip--label': this.label,
         'v-chip--outline': this.outline,
-        'v-chip--small': this.small,
         'v-chip--removable': this.close,
-        ...this.themeClasses
+        ...this.themeClasses,
+        ...this.sizeableClasses
       }
     }
   },
 
   methods: {
-    genClose (h: CreateElement): VNode {
-      const data = {
+    genClose (): VNode {
+      return this.$createElement(VIcon, {
         staticClass: 'v-chip__close',
+        props: {
+          right: true
+        },
         on: {
           click: (e: Event) => {
             e.stopPropagation()
@@ -56,18 +70,14 @@ export default mixins(Colorable, Themeable, Toggleable).extend({
             this.$emit('input', false)
           }
         }
-      }
-
-      return h('div', data, [
-        h(VIcon, '$vuetify.icons.delete')
-      ])
+      }, '$vuetify.icons.delete')
     },
-    genContent (h: CreateElement): VNode {
-      return h('span', {
+    genContent (): VNode {
+      return this.$createElement('span', {
         staticClass: 'v-chip__content'
       }, [
         this.$slots.default,
-        this.close && this.genClose(h)
+        this.close && this.genClose()
       ])
     }
   },
@@ -75,16 +85,27 @@ export default mixins(Colorable, Themeable, Toggleable).extend({
   render (h): VNode {
     const data = this.setBackgroundColor(this.color, {
       staticClass: 'v-chip',
-      'class': this.classes,
+      class: this.classes,
       attrs: { tabindex: this.disabled ? -1 : 0 },
-      directives: [{
-        name: 'show',
-        value: this.isActive
-      }],
+      directives: [
+        {
+          name: 'show',
+          value: this.isActive
+        },
+        {
+          name: 'ripple',
+          value: this.ripple || !this.disabled
+        }
+      ],
       on: this.$listeners
     })
 
     const color = this.textColor || (this.outline && this.color)
-    return h('span', this.setTextColor(color, data), [this.genContent(h)])
+
+    return h(
+      'span',
+      this.setTextColor(color, data),
+      [this.genContent()]
+    )
   }
 })
