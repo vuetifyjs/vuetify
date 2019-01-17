@@ -12,7 +12,7 @@ $ yarn dev <package name>
 $ yarn build
 
 // To build a specific package
-$ yarn build <pacakage name>
+$ yarn build <package name>
 
 // Package alias
 api-generator: api
