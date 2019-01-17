@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
   parserOptions: {
-    parser: 'typescript-eslint-parser',
+    parser: 'eslint-plugin-typescript/parser',
     ecmaVersion: 2017,
     sourceType: 'module'
   },
@@ -88,15 +88,6 @@ module.exports = {
     {
       files: '**/*.ts',
       rules: {
-        // https://github.com/eslint/typescript-eslint-parser/issues/416
-        'no-undef': 'off',
-
-        // https://github.com/eslint/eslint/issues/10260
-        'space-infix-ops': 'off',
-
-        // https://github.com/nzakas/eslint-plugin-typescript/issues/127
-        // 'typescript/prefer-namespace-keyword': 'error',
-
         // Can't overload function exports with this enabled
         'import/export': 'off',
 
@@ -106,12 +97,16 @@ module.exports = {
         'no-unused-vars': 'off',
         // 'typescript/no-unused-vars': 'error',
 
-        // https://github.com/eslint/typescript-eslint-parser/issues/443
-        // 'no-redeclare': false,
-
+        'no-redeclare': 'error',
+        'typescript/prefer-namespace-keyword': 'error',
         'typescript/adjacent-overload-signatures': 'error',
         'typescript/member-delimiter-style': ['error', {
-          delimiter: 'none'
+          multiline: {
+            delimiter: 'none'
+          },
+          singleline: {
+            delimiter: 'comma'
+          }
         }],
         'typescript/member-ordering': 'error',
         'typescript/type-annotation-spacing': 'error'

@@ -25,9 +25,9 @@ const calculate = (e: MouseEvent, el: HTMLElement, value: RippleOptions = {}) =>
   if (el._ripple && el._ripple.circle) {
     scale = 0.15
     radius = el.clientWidth / 2
-    radius = value.center ? radius : radius + Math.sqrt((localX - radius)**2 + (localY - radius)**2) / 4
+    radius = value.center ? radius : radius + Math.sqrt((localX - radius) ** 2 + (localY - radius) ** 2) / 4
   } else {
-    radius = Math.sqrt(el.clientWidth**2 + el.clientHeight**2) / 2
+    radius = Math.sqrt(el.clientWidth ** 2 + el.clientHeight ** 2) / 2
   }
 
   const centerX = `${(el.clientWidth - (radius * 2)) / 2}px`
