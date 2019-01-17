@@ -24,8 +24,8 @@
           <v-layout wrap px-2 py-1>
             <v-flex
               v-for="(header, i) in headers"
-              :class="header.class"
               :key="header.value"
+              :class="header.class"
             >
               <div
                 class="header grey--text text--darken-2"
@@ -195,6 +195,7 @@
           str.indexOf('Components.') > -1
         )
       },
+      /* eslint-disable-next-line max-statements */
       genDescription (name, item) {
         let description = ''
         let devPrepend = ''
@@ -245,7 +246,7 @@
         if (item.signature) return name
 
         name = name || ''
-        name = name.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`)
+        name = name.replace(/([A-Z])/g, g => `-${g[0].toLowerCase()}`)
         const sync = (item.sync && '.sync') || ''
 
         return `${name}${sync}`

@@ -25,7 +25,7 @@
                 color="info"
                 indeterminate
               ></v-progress-circular>
-              <img v-else width="24" height="24" src="https://cdn.vuetifyjs.com/images/logos/v-alt.svg"></img>
+              <img v-else width="24" height="24" src="https://cdn.vuetifyjs.com/images/logos/v-alt.svg" alt="">
             </v-fade-transition>
 
             <v-menu

@@ -32,16 +32,18 @@
   async function load ({ route, store }) {
     const namespace = kebabCase(route.params.namespace)
     const page = upperFirst(camelCase(route.params.page))
-    let structure = false
 
     store.commit('documentation/setStructure', null)
 
+    let structure
     try {
       structure = (await import(
         /* webpackChunkName: "pages" */
         `@/data/pages/${namespace}/${page}.json`
       )).default
-    } catch (err) {}
+    } catch (err) {
+      structure = false
+    }
 
     store.commit('documentation/setStructure', structure)
   }

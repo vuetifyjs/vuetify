@@ -10,25 +10,16 @@ module.exports = {
     'plugin:vue/recommended'
   ],
   env: {
+    node: true,
     browser: true,
     es6: true
   },
-  globals: {
-    'expect': true,
-    'describe': true,
-    'it': true,
-    'jest': true,
-    'process': true,
-    '__REQUIRED_VUE__': true
-  },
   plugins: [
-    'typescript',
-    'eslint-plugin-local-rules'
+    'typescript'
   ],
   rules: {
     // allow paren-less arrow functions
     'arrow-parens': ['error', 'as-needed'],
-    'local-rules/no-render-string-reference': 'error',
     // set maximum line characters
     'max-len': ['error', 140, 4, {
       'ignoreUrls': true,
@@ -40,12 +31,7 @@ module.exports = {
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-return-assign': 'off',
-    'prefer-promise-reject-errors': 'off',
-    'no-unused-vars': ['error', {
-      vars: 'all',
-      args: 'none', // This needs to be off so we can specify mixin interfaces
-      ignoreRestSiblings: false
-    }],
+    'no-unused-vars': 'error',
     'no-empty': 'error',
     'object-curly-spacing': ['error', 'always'],
     'space-before-function-paren': [
@@ -64,6 +50,7 @@ module.exports = {
       'ignoreReadBeforeAssign': true
     }],
 
+    // Not in override, these apply to non-.vue files too
     'vue/name-property-casing': 'off',
     'vue/require-default-prop': 'off',
     'vue/require-prop-types': 'off',
@@ -71,6 +58,33 @@ module.exports = {
     'vue/return-in-computed-property': 'off'
   },
   overrides: [
+    {
+      files: '**/*.vue',
+      rules: {
+        indent: 'off',
+        'vue/script-indent': ['error', 2, {
+          'baseIndent': 1,
+          'switchCase': 1,
+          'ignores': []
+        }],
+        'vue/html-closing-bracket-newline': ['error', {
+          'singleline': 'never',
+          'multiline': 'always'
+        }],
+        'vue/html-closing-bracket-spacing': 'error',
+        'vue/max-attributes-per-line': ['error', {
+          'singleline': 5,
+          'multiline': {
+            'max': 1,
+            'allowFirstLine': false
+          }
+        }],
+        'vue/valid-v-on': 'off', // This rule doesn't allow empty event listeners
+        'vue/no-v-html': 'off',
+        'vue/singleline-html-element-content-newline': 'off',
+        'vue/multiline-html-element-content-newline': 'off'
+      }
+    },
     {
       files: '**/*.ts',
       rules: {

@@ -19,9 +19,9 @@
                 offset-x
               >
                 <div
-                  v-ripple
                   v-if="!event.time"
                   slot="activator"
+                  v-ripple
                   class="my-event"
                   v-html="event.title"
                 ></div>

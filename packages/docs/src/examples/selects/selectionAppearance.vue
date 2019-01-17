@@ -1,7 +1,7 @@
 <template>
   <v-select
-    :items="items"
     v-model="value"
+    :items="items"
     label="Select Item"
     multiple
   >

@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer
-    :mini-variant.sync="mini"
     v-model="drawer"
+    :mini-variant.sync="mini"
     hide-overlay
     stateless
   >
