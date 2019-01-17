@@ -12,11 +12,11 @@
 </template>
 
 <script>
-export default {
-  name: '',
+  export default {
+    name: '',
 
-  data: () => ({})
-}
+    data: () => ({})
+  }
 </script>
 
 <style scoped>

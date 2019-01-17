@@ -1,14 +1,9 @@
 <template>
   <v-form>
     <v-container fluid>
-      <v-layout
-        row
-        wrap
-      >
-        <v-flex
-          xs12
-          sm6
-        >
+      <v-layout row wrap>
+
+        <v-flex xs12 sm6>
           <v-text-field
             v-model="password"
             :append-icon="show1 ? 'visibility_off' : 'visibility'"
@@ -22,10 +17,7 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex
-          xs12
-          sm6
-        >
+        <v-flex xs12 sm6>
           <v-text-field
             :append-icon="show2 ? 'visibility_off' : 'visibility'"
             :rules="[rules.required, rules.min]"
@@ -39,10 +31,7 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex
-          xs12
-          sm6
-        >
+        <v-flex xs12 sm6>
           <v-text-field
             :append-icon="show3 ? 'visibility_off' : 'visibility'"
             :rules="[rules.required, rules.min]"
@@ -56,10 +45,7 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex
-          xs12
-          sm6
-        >
+        <v-flex xs12 sm6>
           <v-text-field
             :append-icon="show4 ? 'visibility_off' : 'visibility'"
             :rules="[rules.required, rules.emailMatch]"
@@ -72,6 +58,7 @@
             @click:append="show4 = !show4"
           ></v-text-field>
         </v-flex>
+
       </v-layout>
     </v-container>
   </v-form>

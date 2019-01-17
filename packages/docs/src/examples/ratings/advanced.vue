@@ -4,10 +4,7 @@
     style="max-width: 600px;"
   >
     <v-layout>
-      <v-flex
-        xs6
-        d-flex
-      >
+      <v-flex xs6 d-flex>
         <v-img
           src="https://cdn.vuetifyjs.com/images/ratings/fortnite1.png"
         ></v-img>
@@ -20,34 +17,22 @@
           style="margin: -4px 0"
         >
           <v-layout wrap>
-            <v-flex
-              xs7
-              d-flex
-            >
+            <v-flex xs7 d-flex>
               <v-img
                 src="https://cdn.vuetifyjs.com/images/ratings/fortnite2.png"
               ></v-img>
             </v-flex>
-            <v-flex
-              xs5
-              d-flex
-            >
+            <v-flex xs5 d-flex>
               <v-img
                 src="https://cdn.vuetifyjs.com/images/ratings/fortnite3.png"
               ></v-img>
             </v-flex>
-            <v-flex
-              xs5
-              d-flex
-            >
+            <v-flex xs5 d-flex>
               <v-img
                 src="https://cdn.vuetifyjs.com/images/ratings/fortnite4.png"
               ></v-img>
             </v-flex>
-            <v-flex
-              xs7
-              d-flex
-            >
+            <v-flex xs7 d-flex>
               <v-img
                 src="https://cdn.vuetifyjs.com/images/ratings/fortnite5.png"
               ></v-img>
@@ -58,12 +43,8 @@
     </v-layout>
     <v-card-title class="align-start">
       <div>
-        <span class="headline">
-          FORTNITE
-        </span>
-        <div class="grey--text font-weight-light">
-          Video game
-        </div>
+        <span class="headline">FORTNITE</span>
+        <div class="grey--text font-weight-light">Video game</div>
       </div>
       <v-spacer></v-spacer>
       <v-dialog
@@ -75,9 +56,7 @@
         </v-icon>
         <v-card>
           <v-card-title>
-            <span class="title font-weight-bold">
-              Share
-            </span>
+            <span class="title font-weight-bold">Share</span>
             <v-spacer></v-spacer>
             <v-btn
               class="mx-0"
@@ -90,17 +69,13 @@
           <v-list>
             <v-list-tile @click="">
               <v-list-tile-action>
-                <v-icon color="indigo">
-                  mdi-facebook-box
-                </v-icon>
+                <v-icon color="indigo">mdi-facebook-box</v-icon>
               </v-list-tile-action>
               <v-card-title>Facebook</v-card-title>
             </v-list-tile>
             <v-list-tile @click="">
               <v-list-tile-action>
-                <v-icon color="cyan">
-                  mdi-twitter-box
-                </v-icon>
+                <v-icon color="cyan">mdi-twitter-box</v-icon>
               </v-list-tile-action>
               <v-card-title>Twitter</v-card-title>
             </v-list-tile>
@@ -124,9 +99,7 @@
     </v-card-title>
     <v-divider></v-divider>
     <v-card-actions>
-      <span class="pl-2 grey--text text--darken-2 font-weight-light caption">
-        16,544 reviews
-      </span>
+      <span class="pl-2 grey--text text--darken-2 font-weight-light caption">16,544 reviews</span>
       <v-spacer></v-spacer>
       <v-rating
         v-model="rating"

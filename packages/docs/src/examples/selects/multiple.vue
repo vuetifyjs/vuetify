@@ -1,20 +1,10 @@
 <template>
   <v-container fluid>
-    <v-layout
-      row
-      wrap
-      align-center
-    >
-      <v-flex
-        xs12
-        sm6
-      >
+    <v-layout row wrap align-center>
+      <v-flex xs12 sm6>
         <v-subheader v-text="'Multiple with persistent hint'"></v-subheader>
       </v-flex>
-      <v-flex
-        xs12
-        sm6
-      >
+      <v-flex xs12 sm6>
         <v-select
           v-model="e6"
           :items="states"
@@ -26,17 +16,11 @@
         ></v-select>
       </v-flex>
 
-      <v-flex
-        xs12
-        sm6
-      >
+      <v-flex xs12 sm6>
         <v-subheader v-text="'Multiple (Chips) with persistent hint'"></v-subheader>
       </v-flex>
 
-      <v-flex
-        xs12
-        sm6
-      >
+      <v-flex xs12 sm6>
         <v-select
           v-model="e7"
           :items="states"

@@ -4,10 +4,7 @@
       :headers="headers"
       :items="desserts"
     >
-      <template
-        slot="items"
-        slot-scope="props"
-      >
+      <template slot="items" slot-scope="props">
         <td>
           <v-edit-dialog
             :return-value.sync="props.item.name"
@@ -16,8 +13,7 @@
             @cancel="cancel"
             @open="open"
             @close="close"
-          >
-            {{ props.item.name }}
+          > {{ props.item.name }}
             <v-text-field
               slot="input"
               v-model="props.item.name"
@@ -28,18 +24,10 @@
             ></v-text-field>
           </v-edit-dialog>
         </td>
-        <td class="text-xs-right">
-          {{ props.item.calories }}
-        </td>
-        <td class="text-xs-right">
-          {{ props.item.fat }}
-        </td>
-        <td class="text-xs-right">
-          {{ props.item.carbs }}
-        </td>
-        <td class="text-xs-right">
-          {{ props.item.protein }}
-        </td>
+        <td class="text-xs-right">{{ props.item.calories }}</td>
+        <td class="text-xs-right">{{ props.item.fat }}</td>
+        <td class="text-xs-right">{{ props.item.carbs }}</td>
+        <td class="text-xs-right">{{ props.item.protein }}</td>
         <td class="text-xs-right">
           <v-edit-dialog
             :return-value.sync="props.item.iron"
@@ -52,12 +40,7 @@
             @close="close"
           >
             <div>{{ props.item.iron }}</div>
-            <div
-              slot="input"
-              class="mt-3 title"
-            >
-              Update Iron
-            </div>
+            <div slot="input" class="mt-3 title">Update Iron</div>
             <v-text-field
               slot="input"
               v-model="props.item.iron"
@@ -72,18 +55,9 @@
       </template>
     </v-data-table>
 
-    <v-snackbar
-      v-model="snack"
-      :timeout="3000"
-      :color="snackColor"
-    >
+    <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
       {{ snackText }}
-      <v-btn
-        flat
-        @click="snack = false"
-      >
-        Close
-      </v-btn>
+      <v-btn flat @click="snack = false">Close</v-btn>
     </v-snackbar>
   </div>
 </template>

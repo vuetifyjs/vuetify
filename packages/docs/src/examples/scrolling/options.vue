@@ -1,10 +1,6 @@
 <template>
   <div>
-    <v-layout
-      column
-      justify-center
-      align-center
-    >
+    <v-layout column justify-center align-center>
       <v-subheader>Offset Top</v-subheader>
       {{ offsetTop }}
     </v-layout>

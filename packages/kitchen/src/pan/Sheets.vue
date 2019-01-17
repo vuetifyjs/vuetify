@@ -115,13 +115,13 @@
 </template>
 
 <script>
-export default {
-  name: 'Sheets',
+  export default {
+    name: 'Sheets',
 
-  data: () => ({
-    colors: [ 'red', 'teal', 'primary', 'error', 'warning', 'success', 'yellow darken-2', 'info' ]
-  })
-}
+    data: () => ({
+      colors: [ 'red', 'teal', 'primary', 'error', 'warning', 'success', 'yellow darken-2', 'info' ]
+    })
+  }
 </script>
 
 <style scoped>

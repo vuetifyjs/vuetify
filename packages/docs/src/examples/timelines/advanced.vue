@@ -1,18 +1,13 @@
 <template>
   <v-container style="max-width: 600px;">
-    <v-timeline
-      dense
-      clipped
-    >
+    <v-timeline dense clipped>
       <v-timeline-item
         fill-dot
         class="white--text mb-5"
         color="orange"
         large
       >
-        <span slot="icon">
-          JL
-        </span>
+        <span slot="icon">JL</span>
         <v-text-field
           v-model="input"
           hide-details
@@ -44,15 +39,8 @@
           small
         >
           <v-layout justify-space-between>
-            <v-flex
-              xs7
-              v-text="event.text"
-            ></v-flex>
-            <v-flex
-              xs5
-              text-xs-right
-              v-text="event.time"
-            ></v-flex>
+            <v-flex xs7 v-text="event.text"></v-flex>
+            <v-flex xs5 text-xs-right v-text="event.time"></v-flex>
           </v-layout>
         </v-timeline-item>
       </v-slide-x-transition>
@@ -71,15 +59,8 @@
         small
       >
         <v-layout justify-space-between>
-          <v-flex xs7>
-            This order was archived.
-          </v-flex>
-          <v-flex
-            xs5
-            text-xs-right
-          >
-            15:26 EDT
-          </v-flex>
+          <v-flex xs7>This order was archived.</v-flex>
+          <v-flex xs5 text-xs-right>15:26 EDT</v-flex>
         </v-layout>
       </v-timeline-item>
 
@@ -99,12 +80,7 @@
             </v-chip>
             Digital Downloads fulfilled 1 item.
           </v-flex>
-          <v-flex
-            xs5
-            text-xs-right
-          >
-            15:25 EDT
-          </v-flex>
+          <v-flex xs5 text-xs-right>15:25 EDT</v-flex>
         </v-layout>
       </v-timeline-item>
 
@@ -117,12 +93,7 @@
           <v-flex xs7>
             Order confirmation email was sent to John Leider (john@vuetifyjs.com).
           </v-flex>
-          <v-flex
-            xs5
-            text-xs-right
-          >
-            15:25 EDT
-          </v-flex>
+          <v-flex xs5 text-xs-right>15:25 EDT</v-flex>
         </v-layout>
       </v-timeline-item>
 
@@ -147,12 +118,7 @@
           <v-flex xs7>
             A $15.00 USD payment was processed on PayPal Express Checkout
           </v-flex>
-          <v-flex
-            xs5
-            text-xs-right
-          >
-            15:25 EDT
-          </v-flex>
+          <v-flex xs5 text-xs-right>15:25 EDT</v-flex>
         </v-layout>
       </v-timeline-item>
 
@@ -164,12 +130,7 @@
           <v-flex xs7>
             John Leider placed this order on Online Store (checkout #1937432132572).
           </v-flex>
-          <v-flex
-            xs5
-            text-xs-right
-          >
-            15:25 EDT
-          </v-flex>
+          <v-flex xs5 text-xs-right>15:25 EDT</v-flex>
         </v-layout>
       </v-timeline-item>
     </v-timeline>

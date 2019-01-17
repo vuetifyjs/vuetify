@@ -1,5 +1,5 @@
 {
-  "name": "playground",
+  "name": "@vuetify/playground",
   "version": "2.0.0-alpha.0",
   "private": true,
   "scripts": {
@@ -11,17 +11,15 @@
     "vue": "^2.5.21",
     "vue-router": "^3.0.1",
     "vue-template-compiler": "^2.5.21",
-    "vuetify": "^1.4.0"
+    "vuetify": "^2.0.0-alpha.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.2.0",
     "@vue/cli-plugin-eslint": "^3.2.0",
     "@vue/cli-service": "^3.2.0",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.8.0",
-    "eslint-config-vuetify": "^0.1.0",
-    "eslint-plugin-vue": "^4.7.1",
+    "eslint": "^5.12.0",
     "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.1"
+    "stylus-loader": "^3.0.2"
   }
 }

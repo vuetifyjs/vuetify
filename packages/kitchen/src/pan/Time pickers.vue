@@ -413,16 +413,16 @@
 </template>
 
 <script>
-export default {
-  name: 'TimePickers',
+  export default {
+    name: 'TimePickers',
 
-  data: () => ({
-    modal: false,
-    menu: false,
-    time1: '9:41',
-    time2: '9:41'
-  })
-}
+    data: () => ({
+      modal: false,
+      menu: false,
+      time1: '9:41',
+      time2: '9:41'
+    })
+  }
 </script>
 
 <style scoped>

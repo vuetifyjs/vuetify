@@ -32,10 +32,7 @@
         </v-list-tile>
       </v-list>
 
-      <v-list
-        class="pt-0"
-        dense
-      >
+      <v-list class="pt-0" dense>
         <v-divider></v-divider>
 
         <v-list-tile

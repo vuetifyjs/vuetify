@@ -1,5 +1,6 @@
 <template>
   <v-container fluid>
+
     <v-layout row>
       <v-flex xs4>
         <v-subheader>Prefix for dollar currency</v-subheader>
@@ -52,5 +53,6 @@
         ></v-text-field>
       </v-flex>
     </v-layout>
+
   </v-container>
 </template>

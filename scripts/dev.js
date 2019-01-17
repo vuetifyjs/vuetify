@@ -2,7 +2,9 @@ const shell = require('shelljs')
 
 let target = process.argv[2]
 const alias = {
-  docs: 'vuetifyjs.com'
+  docs: 'vuetifyjs.com',
+  kitchen: '@vuetify/kitchen',
+  playground: '@vuetify/playground'
 }
 target = alias[target] || target
 

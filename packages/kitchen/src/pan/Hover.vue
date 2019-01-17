@@ -41,11 +41,11 @@
 </template>
 
 <script>
-export default {
-  name: 'Hover',
+  export default {
+    name: 'Hover',
 
-  data: () => ({})
-}
+    data: () => ({})
+  }
 </script>
 
 <style scoped>
