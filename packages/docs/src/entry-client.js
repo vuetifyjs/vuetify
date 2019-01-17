@@ -7,7 +7,7 @@ import { createApp, production } from './main'
 import WebFontLoader from 'webfontloader'
 
 if ('serviceWorker' in navigator && production) {
-  navigator.serviceWorker.register('/sw.js')
+  navigator.serviceWorker.register('/vuetify-docs-sw.js')
     .then(() => navigator.serviceWorker.ready.then(worker => {
       worker.sync.register('syncdata')
     }))
