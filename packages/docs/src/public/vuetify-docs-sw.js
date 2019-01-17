@@ -9,11 +9,16 @@ self.addEventListener('install', event => {
 })
 
 self.addEventListener('fetch', function (event) {
-    const response = fromCache(event.request)
+    const response = fromCache(event.request) // try cache
         .then(response => response)
-        .catch(() => fromServer(event.request).then(response => response))
-    event.respondWith(response)
-    event.waitUntil(update(event.request))
+        .catch(() => fromServer(event.request) // try server
+            .then(response => response).catch(() => fallback()) // generic fallback
+        )
+    // Only fetch if asset is from origin
+    if (event.request.url.startsWith(self.location.origin)) {
+        event.respondWith(response)
+        event.waitUntil(update(event.request))
+    }
 })
 
 function fromCache (request) {
@@ -31,6 +36,11 @@ function fromCache (request) {
 
 function fromServer (request) {
     return fetch(request)
+}
+
+function fallback () {
+    // If both fail, show a generic fallback:
+    return caches.match('/en/')
 }
 
 function update (request) {
