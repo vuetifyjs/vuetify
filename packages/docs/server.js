@@ -152,6 +152,11 @@ function render (req, res) {
     <script type="text/javascript">
       var _jipt = [];
       _jipt.push(['project', 'vuetify']);
+      _jipt.push(['before_dom_insert', function(text, node, attribute) {
+        if (text.startsWith('##')) return '<h2>' + text + '</h2>';
+        else if (text.startsWith('#')) return '<h1>' + text + '</h1>';
+        else return text;
+      }]);
     </script>
     <script type="text/javascript" src="//cdn.crowdin.com/jipt/jipt.js"></script>
     `
