@@ -24,8 +24,8 @@
           <v-layout wrap px-2 py-1>
             <v-flex
               v-for="(header, i) in headers"
-              :class="header.class"
               :key="header.value"
+              :class="header.class"
             >
               <div
                 class="header grey--text text--darken-2"
@@ -67,12 +67,14 @@
               />
             </v-flex>
             <v-flex>
+              <!-- eslint-disable -->
               <doc-markup
                 v-if="item.example"
                 class="mt-2 mb-0"
                 lang="ts"
                 value="example"
               >{{ genTypescriptDef(item.example) }}</doc-markup>
+              <!-- eslint-enable -->
             </v-flex>
           </v-layout>
         </v-flex>
@@ -101,6 +103,10 @@
       headers: {
         type: Array,
         default: () => ([])
+      },
+      lang: {
+        type: String,
+        default: ''
       },
       items: {
         type: Array,
@@ -195,11 +201,13 @@
           str.indexOf('Components.') > -1
         )
       },
+      /* eslint-disable max-statements */
       genDescription (name, item) {
         let description = ''
         let devPrepend = ''
         const camelSource = this.parseSource(item.source)
-        const composite = `${this.namespace}.${this.page}`
+        const page = this.lang ? upperFirst(camelCase(this.lang)) : this.page
+        const composite = `${this.namespace}.${page}`
 
         // Components.Alerts.props['v-alert'].value
         const specialDesc = `${composite}.${this.type}['${this.target}']['${name}']`
@@ -245,7 +253,7 @@
         if (item.signature) return name
 
         name = name || ''
-        name = name.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`)
+        name = name.replace(/([A-Z])/g, g => `-${g[0].toLowerCase()}`)
         const sync = (item.sync && '.sync') || ''
 
         return `${name}${sync}`
