@@ -438,4 +438,21 @@ test('VMenu.js', ({ mount, compileToFunctions }) => {
     expect(menu.vm.isActive).toBe(false)
     expect(document.activeElement).toBe(input[2].element)
   })
+
+  it('should show the menu on mounted', () => {
+    const activate = jest.fn()
+    mount(VMenu, {
+      methods: { activate }
+    })
+
+    expect(activate).not.toBeCalled()
+
+    mount(VMenu, {
+      propsData: { value: true },
+      methods: { activate }
+    })
+    expect(activate).toBeCalled()
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
 })

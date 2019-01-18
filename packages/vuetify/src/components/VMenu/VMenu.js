@@ -166,6 +166,10 @@ export default Vue.extend({
     }
   },
 
+  mounted () {
+    this.isActive && this.activate()
+  },
+
   methods: {
     activate () {
       // This exists primarily for v-select
