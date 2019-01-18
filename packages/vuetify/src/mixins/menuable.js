@@ -110,9 +110,14 @@ export default Vue.extend({
       const activatorLeft = (this.isAttached ? a.offsetLeft : a.left) || 0
       const minWidth = Math.max(a.width, c.width)
       let left = 0
-
       left += this.left ? activatorLeft - (minWidth - a.width) : activatorLeft
-      if (this.offsetX) left += this.left ? -a.width : a.width
+      if (this.offsetX) {
+        const maxWidth = isNaN(this.maxWidth)
+          ? a.width
+          : Math.min(a.width, this.maxWidth)
+
+        left += this.left ? -maxWidth : a.width
+      }
       if (this.nudgeLeft) left -= parseInt(this.nudgeLeft)
       if (this.nudgeRight) left += parseInt(this.nudgeRight)
 
@@ -191,7 +196,7 @@ export default Vue.extend({
         this.dimensions.content.width,
         parsedMaxWidth
       )
-      const totalWidth = left + maxWidth
+      const totalWidth = left + this.dimensions.activator.width
       const availableWidth = totalWidth - innerWidth
 
       if ((!this.left || this.right) && availableWidth > 0) {
