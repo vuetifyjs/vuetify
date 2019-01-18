@@ -198,7 +198,7 @@ export default Vue.extend({
         this.dimensions.content.width,
         parsedMaxWidth
       )
-      const totalWidth = left + maxWidth
+      const totalWidth = left + this.dimensions.activator.width
       const availableWidth = totalWidth - innerWidth
 
       if ((!this.left || this.right) && availableWidth > 0) {
