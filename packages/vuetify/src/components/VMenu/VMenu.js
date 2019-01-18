@@ -68,8 +68,6 @@ export default Vue.extend({
     disabled: Boolean,
     fullWidth: Boolean,
     maxHeight: { default: 'auto' },
-    offsetX: Boolean,
-    offsetY: Boolean,
     openOnClick: {
       type: Boolean,
       default: true

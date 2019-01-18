@@ -79,6 +79,8 @@ export default Vue.extend({
       default: 0
     },
     offsetOverflow: Boolean,
+    offsetX: Boolean,
+    offsetY: Boolean,
     positionX: {
       type: Number,
       default: null
@@ -110,9 +112,14 @@ export default Vue.extend({
       const activatorLeft = (this.isAttached ? a.offsetLeft : a.left) || 0
       const minWidth = Math.max(a.width, c.width)
       let left = 0
-
       left += this.left ? activatorLeft - (minWidth - a.width) : activatorLeft
-      if (this.offsetX) left += this.left ? -a.width : a.width
+      if (this.offsetX) {
+        const maxWidth = isNaN(this.maxWidth)
+          ? a.width
+          : Math.min(a.width, this.maxWidth)
+
+        left += this.left ? -maxWidth : a.width
+      }
       if (this.nudgeLeft) left -= parseInt(this.nudgeLeft)
       if (this.nudgeRight) left += parseInt(this.nudgeRight)
 
