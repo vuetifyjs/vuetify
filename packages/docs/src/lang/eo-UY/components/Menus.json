@@ -1,0 +1,54 @@
+{
+  "header": "crwdns12642:0crwdne12642:0",
+  "headerText": "crwdns12644:0crwdne12644:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns12646:0crwdne12646:0",
+      "uninverted": true
+    },
+    "absolute": {
+      "header": "crwdns12650:0crwdne12650:0",
+      "desc": "crwdns12652:0crwdne12652:0",
+      "uninverted": true
+    },
+    "absoluteWithoutActivator": {
+      "header": "crwdns12656:0crwdne12656:0",
+      "desc": "crwdns12658:0crwdne12658:0",
+      "uninverted": true
+    },
+    "hover": {
+      "header": "crwdns12662:0crwdne12662:0",
+      "desc": "crwdns12664:0crwdne12664:0",
+      "uninverted": true
+    },
+    "menus": {
+      "header": "crwdns12668:0crwdne12668:0",
+      "desc": "crwdns12670:0crwdne12670:0",
+      "uninverted": true
+    },
+    "customTransition": {
+      "header": "crwdns12674:0crwdne12674:0",
+      "desc": "crwdns12676:0[here]crwdne12676:0",
+      "uninverted": true
+    },
+    "popover": {
+      "header": "crwdns12680:0crwdne12680:0",
+      "desc": "crwdns12682:0crwdne12682:0",
+      "uninverted": true
+    }
+  },
+  "props": {
+    "closeOnClick": "crwdns12686:0crwdne12686:0",
+    "closeOnContentClick": "crwdns12688:0crwdne12688:0",
+    "dark": "crwdns12690:0crwdne12690:0",
+    "light": "crwdns12692:0crwdne12692:0",
+    "disabled": "crwdns12694:0crwdne12694:0",
+    "disableKeys": "crwdns12696:0crwdne12696:0",
+    "offsetX": "crwdns12698:0crwdne12698:0",
+    "offsetY": "crwdns12700:0crwdne12700:0",
+    "openOnClick": "crwdns12702:0crwdne12702:0",
+    "openOnHover": "crwdns12704:0crwdne12704:0",
+    "origin": "crwdns12706:0crwdne12706:0",
+    "transition": "crwdns12708:0crwdne12708:0"
+  }
+}

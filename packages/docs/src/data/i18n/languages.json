@@ -1,8 +1,10 @@
 [
   {
     "name": "English",
-    "locale": "en",
-    "country": "us"
+    "locale": "en-US",
+    "alternate": "en",
+    "country": "us",
+    "fallback": true
   },
   {
     "name": "Español",
@@ -16,22 +18,31 @@
   },
   {
     "name": "Русский",
-    "locale": "ru",
+    "locale": "ru-RU",
+    "alternate": "ru",
     "country": "ru"
   },
   {
     "name": "简体中文",
-    "locale": "zh-Hans",
+    "locale": "zh-CN",
+    "alternate": "zh-Hans",
     "country": "cn"
   },
   {
     "name": "한국어",
-    "locale": "ko",
+    "locale": "ko-KR",
+    "alternate": "ko",
     "country": "kr"
   },
   {
     "name": "日本語",
-    "locale": "ja",
+    "locale": "ja-JP",
+    "alternate": "ja",
     "country": "jp"
+  },
+  {
+    "name": "Translate!",
+    "locale": "eo-UY",
+    "country": "uy"
   }
 ]
