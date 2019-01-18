@@ -16,6 +16,7 @@
       "children": [
         {
           "type": "api",
+          "lang": "grid",
           "value": [
             "v-container",
             "v-layout",

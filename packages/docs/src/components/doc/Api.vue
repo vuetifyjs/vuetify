@@ -3,8 +3,8 @@
     <doc-heading>Generic.Pages.api</doc-heading>
     <v-card>
       <v-tabs
-        :slider-color="computedTabs.length ? 'primary' : 'transparent'"
         v-model="tab"
+        :slider-color="computedTabs.length ? 'primary' : 'transparent'"
         color="grey lighten-3"
       >
         <v-tab
@@ -23,8 +23,8 @@
             sm4
           >
             <v-select
-              :items="value"
               v-model="current"
+              :items="value"
               :disabled="value.length < 2"
               hide-details
               single-line
@@ -59,6 +59,7 @@
             <doc-parameters
               :headers="headers[tab]"
               :items="component[tab]"
+              :lang="lang"
               :search="search"
               :target="current"
               :type="tab"
@@ -91,6 +92,10 @@
 
   export default {
     props: {
+      lang: {
+        type: String,
+        default: ''
+      },
       value: {
         type: Array,
         default: () => ([])
