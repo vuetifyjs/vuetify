@@ -1,14 +1,9 @@
 <template>
   <v-form>
     <v-container>
-      <v-layout
-        row
-        wrap
-      >
-        <v-flex
-          xs12
-          sm6
-        >
+      <v-layout row wrap>
+
+        <v-flex xs12 sm6>
           <v-text-field
             value="John Doe"
             label="Regular"
@@ -16,10 +11,7 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex
-          xs12
-          sm6
-        >
+        <v-flex xs12 sm6>
           <v-text-field
             value="John Doe"
             label="Regular"
@@ -27,10 +19,7 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex
-          xs12
-          sm6
-        >
+        <v-flex xs12 sm6>
           <v-text-field
             value="John Doe"
             label="Solo"
@@ -39,10 +28,7 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex
-          xs12
-          sm6
-        >
+        <v-flex xs12 sm6>
           <v-text-field
             value="John Doe"
             label="Solo"
@@ -51,10 +37,7 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex
-          xs12
-          sm6
-        >
+        <v-flex xs12 sm6>
           <v-text-field
             value="John Doe"
             label="Box"
@@ -63,10 +46,7 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex
-          xs12
-          sm6
-        >
+        <v-flex xs12 sm6>
           <v-text-field
             value="John Doe"
             label="Box"
@@ -75,10 +55,7 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex
-          xs12
-          sm6
-        >
+        <v-flex xs12 sm6>
           <v-text-field
             value="John Doe"
             label="Outline"
@@ -87,10 +64,7 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex
-          xs12
-          sm6
-        >
+        <v-flex xs12 sm6>
           <v-text-field
             value="John Doe"
             label="Outline"
@@ -98,6 +72,7 @@
             readonly
           ></v-text-field>
         </v-flex>
+
       </v-layout>
     </v-container>
   </v-form>

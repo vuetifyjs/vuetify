@@ -53,9 +53,7 @@
       background-color="grey lighten-1"
     ></v-rating>
     <div>
-      <span class="caption text-uppercase">
-        model:
-      </span>
+      <span class="caption text-uppercase">model:</span>
       <span class="font-weight-bold">
         {{ rating }}
       </span>

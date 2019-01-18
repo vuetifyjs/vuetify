@@ -9,10 +9,7 @@
       v-text="$t('Vuetify.Home.madeWithVuetify')"
     />
 
-    <v-container
-      grid-list-xl
-      mb-3
-    >
+    <v-container grid-list-xl mb-3>
       <v-layout
         align-center
         fill-height

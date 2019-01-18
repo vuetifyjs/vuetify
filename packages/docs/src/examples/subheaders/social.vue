@@ -28,10 +28,7 @@
     >
       <v-subheader>{{ type }}</v-subheader>
 
-      <v-layout
-        row
-        wrap
-      >
+      <v-layout row wrap>
         <v-spacer></v-spacer>
         <v-flex
           v-for="card in cards"

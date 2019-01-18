@@ -1,14 +1,9 @@
 <template>
   <v-form>
     <v-container>
-      <v-layout
-        row
-        wrap
-      >
-        <v-flex
-          xs12
-          sm6
-        >
+      <v-layout row wrap>
+
+        <v-flex xs12 sm6>
           <v-text-field
             v-model="title"
             :rules="rules"
@@ -18,10 +13,7 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex
-          xs12
-          sm6
-        >
+        <v-flex xs12 sm6>
           <v-text-field
             v-model="description"
             :rules="rules"
@@ -32,10 +24,7 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex
-          xs12
-          sm6
-        >
+        <v-flex xs12 sm6>
           <v-text-field
             v-model="title"
             :rules="rules"
@@ -45,10 +34,7 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex
-          xs12
-          sm6
-        >
+        <v-flex xs12 sm6>
           <v-text-field
             v-model="title"
             :rules="rules"
@@ -57,6 +43,7 @@
             outline
           ></v-text-field>
         </v-flex>
+
       </v-layout>
     </v-container>
   </v-form>
