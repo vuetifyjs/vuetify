@@ -410,4 +410,40 @@ test('VTreeView.ts', ({ mount }) => {
 
     expect(Object.keys(wrapper.vm.nodes).length).toBe(2)
   })
+
+  it('should handle replacing items with new array of equal length', async () => {
+    const wrapper = mount(VTreeview, {
+      propsData: {
+        items: [
+          {
+            id: 1,
+            name: 'one'
+          },
+          {
+            id: 2,
+            name: 'two'
+          }
+        ]
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({
+      items: [
+        {
+          id: 1,
+          name: 'one'
+        },
+        {
+          id: 3,
+          name: 'three'
+        }
+      ]
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
