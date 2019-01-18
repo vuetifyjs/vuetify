@@ -1,10 +1,17 @@
 {
   "title": "header",
-  "titleText": "headerText",
   "children": [
     {
       "type": "section",
       "children": [
+        {
+          "type": "heading",
+          "lang": "appHeader"
+        },
+        {
+          "type": "text",
+          "lang": "appText"
+        },
         {
           "type": "alert",
           "lang": "alert1",

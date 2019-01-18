@@ -6,14 +6,6 @@
       "type": "section",
       "children": [
         {
-          "type": "heading",
-          "lang": "appHeader"
-        },
-        {
-          "type": "text",
-          "lang": "appText"
-        },
-        {
           "type": "doc-pre-made-layouts"
         }
       ]
