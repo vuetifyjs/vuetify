@@ -1,5 +1,5 @@
 {
   "props": {
-    "app": "Designates the component as part of the application layout. Used for dynamically adjusting content sizing"
+    "app": "Designates the component as part of the application layout. Used for dynamically adjusting content sizing is pretty generic, could use a mention something like app level components should reside outside of v-content"
   }
 }
