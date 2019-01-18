@@ -132,6 +132,11 @@ export default {
     }
   },
 
+  watch: {
+    positionX: 'updateDimensions',
+    positionY: 'updateDimensions'
+  },
+
   beforeMount () {
     this.$nextTick(() => {
       this.value && this.callActivate()

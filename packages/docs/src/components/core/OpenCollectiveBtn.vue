@@ -1,0 +1,21 @@
+<template>
+  <v-btn
+    flat
+    href="https://opencollective.com/vuetify"
+    large
+    rel="noopener"
+    target="_blank"
+    title="Support Vuetity through OpenCollective"
+  >
+    <v-img
+      src="https://opencollective.com/static/images/opencollective-icon.svg"
+      class="mr-2"
+      height="36"
+      width="36"
+    />
+    <v-img
+      src="https://opencollective.com/static/images/logotype.svg"
+      width="150"
+    />
+  </v-btn>
+</template>
