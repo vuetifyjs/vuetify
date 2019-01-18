@@ -189,6 +189,21 @@ const inputEvents = [
   }
 ]
 
+const textEvents = [
+  {
+    name: 'click:clear',
+    value: 'Event'
+  },
+  {
+    name: 'click:append-outer',
+    value: 'Event'
+  },
+  {
+    name: 'click:prepend-inner',
+    value: 'Event'
+  }
+]
+
 const inputSlots = ['append', 'prepend', 'default']
 
 const VSelect = {
@@ -239,7 +254,9 @@ const VSelect = {
     {
       name: 'update:searchInput',
       value: 'string'
-    }
+    },
+    ...inputEvents,
+    ...textEvents
   ].concat(validatableEvents)
 }
 
@@ -658,6 +675,11 @@ module.exports = {
   'v-icon': {
     slots: ['default']
   },
+  'v-input': {
+    events: [
+      ...inputEvents
+    ]
+  },
   'v-layout': {
     props: [
       {
@@ -783,7 +805,8 @@ module.exports = {
       {
         name: 'end',
         value: 'number'
-      }
+      },
+      ...inputEvents
     ].concat(validatableEvents)
   },
   'v-range-slider': {
@@ -803,7 +826,8 @@ module.exports = {
       {
         name: 'end',
         value: 'array'
-      }
+      },
+      ...inputEvents
     ].concat(validatableEvents)
   },
   'v-sheet': {
@@ -881,14 +905,8 @@ module.exports = {
         name: 'change',
         value: 'string'
       },
-      {
-        name: 'click:prepend-inner',
-        value: 'Event'
-      },
-      {
-        name: 'click:append-outer',
-        value: 'Event'
-      }
+      ...inputEvents,
+      ...textEvents
     ].concat(validatableEvents),
     slots: ['label']
   },
