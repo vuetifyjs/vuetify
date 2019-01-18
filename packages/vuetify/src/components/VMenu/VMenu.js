@@ -72,6 +72,8 @@ export default Vue.extend({
       type: Boolean,
       default: true
     },
+    offsetX: Boolean,
+    offsetY: Boolean,
     openOnHover: Boolean,
     origin: {
       type: String,

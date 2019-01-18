@@ -35,6 +35,10 @@ test('menuable.js', ({ mount }) => {
   it('should apply maxWidth in left calculations when offset', async () => {
     const wrapper = mount({
       mixins: [Menuable],
+      props: {
+        offsetY: Boolean,
+        offsetX: Boolean
+      },
       render: h => h('div')
     }, {
       propsData: {

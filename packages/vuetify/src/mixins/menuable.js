@@ -79,8 +79,6 @@ export default Vue.extend({
       default: 0
     },
     offsetOverflow: Boolean,
-    offsetX: Boolean,
-    offsetY: Boolean,
     positionX: {
       type: Number,
       default: null
