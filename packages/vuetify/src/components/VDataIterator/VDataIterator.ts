@@ -121,21 +121,37 @@ export default mixins(Themeable).extend({
     },
     createItemProps (item: any) {
       const props = {
-        item
+        item,
+        select: {
+          props: {
+            value: this.isSelected(item)
+          },
+          on: {
+            input: (v: boolean) => this.select(item, v)
+          }
+        },
+        expand: {
+          props: {
+            value: this.isExpanded(item)
+          },
+          on: {
+            input: (v: boolean) => this.expand(item, v)
+          }
+        }
       }
 
-      Object.defineProperties(props, {
-        selected: {
-          get: () => this.isSelected(item),
-          set: (value: boolean) => this.select(item, value),
-          enumerable: true
-        },
-        expanded: {
-          get: () => this.isExpanded(item),
-          set: v => this.expand(item, v),
-          enumerable: true
-        }
-      })
+      // Object.defineProperties(props, {
+      //   selected: {
+      //     get: () => this.isSelected(item),
+      //     set: (value: boolean) => this.select(item, value),
+      //     enumerable: true
+      //   },
+      //   expanded: {
+      //     get: () => this.isExpanded(item),
+      //     set: v => this.expand(item, v),
+      //     enumerable: true
+      //   }
+      // })
 
       return props
     },

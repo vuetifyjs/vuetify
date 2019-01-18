@@ -1,7 +1,7 @@
 import '../../stylus/components/_data-table.styl'
 
 // Types
-import Vue, { VNode, VNodeChildrenArrayContents, VNodeChildren } from 'vue'
+import { VNode, VNodeChildrenArrayContents, VNodeChildren } from 'vue'
 import { PropValidator } from 'vue/types/options'
 import { DataProps } from '../VData/VData'
 import { TableHeader } from './mixins/header'
@@ -20,6 +20,13 @@ import VSimpleCheckbox from '../VCheckbox/VSimpleCheckbox'
 
 // Helpers
 import { deepEqual, getObjectValueByPath, convertToUnit } from '../../util/helpers'
+
+function getPrefixedScopedSlots (prefix: string, scopedSlots: any) {
+  return Object.keys(scopedSlots).filter(k => k.startsWith(prefix)).reduce((obj: any, k: string) => {
+    obj[k.replace(prefix, '')] = scopedSlots[k]
+    return obj
+  }, {})
+}
 
 /* @vue/component */
 export default VDataIterator.extend({
@@ -97,13 +104,13 @@ export default VDataIterator.extend({
     calcWidths () {
       this.widths = Array.from(this.$el.querySelectorAll('th')).map(e => e.clientWidth)
     },
-    customSearchWithColumns (items: any[], search: string) {
+    customFilterWithColumns (items: any[], search: string) {
       const filterableHeaders = this.headers.filter(h => !!h.filter)
       if (filterableHeaders.length) {
         items = items.filter(i => filterableHeaders.every(h => h.filter!(getObjectValueByPath(i, h.value), this.search, i)))
       }
 
-      return this.customSearch(items, search)
+      return this.customFilter(items, search)
     },
     customSortWithHeaders (items: any[], sortBy: string[], sortDesc: boolean[], locale: string) {
       const customSorters = this.computedHeaders.reduce((obj: Record<string, Function>, header: TableHeader) => {
@@ -167,6 +174,7 @@ export default VDataIterator.extend({
       const children: VNodeChildrenArrayContents = [this.genSlots('header', this.createSlotProps(props))]
 
       if (!this.hideDefaultHeader) {
+        const scopedSlots = getPrefixedScopedSlots('header.', this.$scopedSlots)
         children.push(this.$createElement(VDataTableHeader, {
           props: {
             ...this.headerProps,
@@ -177,7 +185,8 @@ export default VDataIterator.extend({
           on: {
             'sort': props.sort,
             'group': props.group
-          }
+          },
+          scopedSlots
         }))
       }
 
@@ -304,20 +313,22 @@ export default VDataIterator.extend({
       ])
     },
     genDefaultSimpleRow (item: any, classes: string | string[] | object | null = null): VNode {
-      const scopedSlots: any = Object.keys(this.$scopedSlots).filter(k => k.startsWith('item.column.')).reduce((obj: any, k: string) => {
-        obj[k.replace('item.column.', '')] = this.$scopedSlots[k]
-        return obj
-      }, {})
+      const scopedSlots = getPrefixedScopedSlots('item.', this.$scopedSlots)
 
       if (this.showSelect) {
-        scopedSlots['dataTableSelect'] = () => this.$createElement(VSimpleCheckbox, {
-          staticClass: 'v-data-table__checkbox',
+        const data = {
           props: {
             value: this.isSelected(item)
           },
           on: {
             input: (v: any) => this.select(item, v)
           }
+        }
+
+        const slot = scopedSlots['dataTableSelect']
+        scopedSlots['dataTableSelect'] = slot ? () => slot(data) : () => this.$createElement(VSimpleCheckbox, {
+          staticClass: 'v-data-table__checkbox',
+          ...data
         })
       }
 
@@ -392,17 +403,17 @@ export default VDataIterator.extend({
       ])
     },
     genDefaultScopedSlot (props: DataProps): VNode {
-      // TODO: Do we have to support static? Is there another way?
-      // if (this.static) {
-      //   return this.$createElement('div', ['static'])
-      // }
-
       const classes = {
         'v-data-table--dense': this.dense,
         'v-data-table--fixed': !!this.height,
         'v-data-table--mobile': this.isMobile,
         ...this.themeClasses
       }
+
+      // TODO: Do we have to support static? Is there another way?
+      // if (this.static) {
+      //   return this.$createElement('div', ['static'])
+      // }
 
       if (this.virtualRows) {
         return this.$createElement(VDataTableVirtual, {
@@ -435,7 +446,7 @@ export default VDataIterator.extend({
     return this.$createElement(VData, {
       props: {
         ...this.$props,
-        customSearch: this.customSearchWithColumns,
+        customFilter: this.customFilterWithColumns,
         customSort: this.customSortWithHeaders
       },
       on: {

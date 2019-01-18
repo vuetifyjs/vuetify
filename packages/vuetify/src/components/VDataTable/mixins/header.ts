@@ -56,17 +56,23 @@ export default mixins<options>().extend({
 
   methods: {
     genSelectAll () {
-      return this.$createElement(VSimpleCheckbox, {
-        staticClass: 'v-data-table__checkbox',
+      const data = {
         props: {
-          value: this.dataTable.everyItem
-        },
-        attrs: {
+          value: this.dataTable.everyItem,
           indeterminate: !this.dataTable.everyItem && this.dataTable.someItems
         },
         on: {
           input: (v: boolean) => this.dataTable.toggleSelectAll(v)
         }
+      }
+
+      if (this.$scopedSlots.dataTableSelect) {
+        return this.$scopedSlots.dataTableSelect(data)
+      }
+
+      return this.$createElement(VSimpleCheckbox, {
+        staticClass: 'v-data-table__checkbox',
+        ...data
       })
     },
     genSortIcon () {

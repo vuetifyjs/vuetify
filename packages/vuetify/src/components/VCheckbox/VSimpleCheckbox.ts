@@ -13,6 +13,7 @@ export default Vue.extend({
   props: {
     ...Colorable.options.props,
     ...Themeable.options.props,
+    disabled: Boolean,
     ripple: {
       type: Boolean,
       default: true
@@ -36,7 +37,7 @@ export default Vue.extend({
   render (h, { props, data }): VNode {
     const children = []
 
-    if (props.ripple) {
+    if (props.ripple && !props.disabled) {
       const ripple = h('div', Colorable.options.methods.setTextColor(props.color, {
         staticClass: 'v-input--selection-controls__ripple',
         directives: [{
@@ -54,19 +55,23 @@ export default Vue.extend({
 
     children.push(h(VIcon, Colorable.options.methods.setTextColor(props.color, {
       props: {
+        disabled: props.disabled,
         dark: props.dark,
         light: props.light
       }
     }), icon))
 
-    const staticClass = `v-simple-checkbox ${data.staticClass || ''}`.trim()
+    const classes = {
+      'v-simple-checkbox': true,
+      'v-simple-checkbox--disabled': props.disabled
+    }
 
     return h('div', {
       ...data,
-      staticClass,
+      class: classes,
       on: {
         click: () => {
-          if (data.on && data.on.input) {
+          if (data.on && data.on.input && !props.disabled) {
             wrapInArray(data.on.input).forEach(f => f(!props.value))
           }
         }

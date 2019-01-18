@@ -88,9 +88,9 @@ export default Vue.extend({
     },
     disableSort: Boolean,
     disablePagination: Boolean,
-    disableSearch: Boolean,
+    disableFiltering: Boolean,
     search: String,
-    customSearch: {
+    customFilter: {
       type: Function, // TODO: specific typing?
       default: searchItems
     },
@@ -148,8 +148,8 @@ export default Vue.extend({
     filteredItems (): any[] {
       let items = this.items.slice()
 
-      if (!this.disableSearch && this.serverItemsLength <= 0) {
-        items = this.customSearch(items, this.search)
+      if (!this.disableFiltering && this.serverItemsLength <= 0) {
+        items = this.customFilter(items, this.search)
       }
 
       return items

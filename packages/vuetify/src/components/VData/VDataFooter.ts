@@ -49,7 +49,9 @@ export default Vue.extend({
       default: '$vuetify.dataIterator.itemsPerPageAll'
     },
     showFirstLastPage: Boolean,
-    showCurrentPage: Boolean
+    showCurrentPage: Boolean,
+    disablePagination: Boolean,
+    disableItemsPerPage: Boolean
   },
 
   computed: {
@@ -111,6 +113,7 @@ export default Vue.extend({
             'aria-label': this.itemsPerPageText
           },
           props: {
+            disabled: this.disableItemsPerPage,
             items: this.computedItemsPerPageOptions,
             value: this.options.itemsPerPage,
             hideDetails: true,
@@ -145,9 +148,9 @@ export default Vue.extend({
     genIcon (click: Function, disabled: boolean, label: string, icon: string): VNode {
       return this.$createElement(VBtn, {
         props: {
-          disabled,
+          disabled: disabled || this.disablePagination,
           icon: true,
-          flat: true
+          text: true
           // dark: this.dark, // TODO: add mixin
           // light: this.light // TODO: add mixin
         },
