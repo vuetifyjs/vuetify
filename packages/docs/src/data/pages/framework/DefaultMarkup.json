@@ -6,15 +6,26 @@
       "type": "section",
       "children": [
         {
+          "type": "alert",
+          "lang": "alert1",
+          "value": "error"
+        },
+        {
           "type": "heading",
-          "lang": "appHeader"
+          "lang": "markupHeader"
         },
         {
           "type": "text",
-          "lang": "appText"
+          "lang": "markupText"
         },
         {
-          "type": "doc-pre-made-layouts"
+          "type": "markup",
+          "value": "html_default_markup"
+        },
+        {
+          "type": "alert",
+          "lang": "alert2",
+          "value": "info"
         }
       ]
     },
