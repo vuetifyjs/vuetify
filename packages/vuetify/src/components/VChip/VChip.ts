@@ -111,7 +111,7 @@ export default mixins(
       on: this.$listeners
     })
 
-    const color = this.textColor || (this.outline && this.color)
+    const color = this.textColor || (this.hasOutline && this.color)
 
     return h(
       'span',
