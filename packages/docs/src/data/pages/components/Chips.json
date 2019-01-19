@@ -26,6 +26,7 @@
         {
           "type": "examples",
           "value": [
+            "photos",
             "colored",
             "icon",
             "outline",

@@ -31,6 +31,10 @@
       "header": "### In selects",
       "desc": "Selects can use chips to display the selected data. Try adding your own tags below.",
       "uninverted": true
+    },
+    "photos": {
+      "header": "### Custom lists",
+      "desc": "In this example we opt to use a customized list instead of [v-autocomplete](/components/autocompletes). This allows us to always display the options available while still providing the same functionality of search and selection."
     }
   },
   "props": {
