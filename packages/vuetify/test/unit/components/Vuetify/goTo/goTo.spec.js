@@ -35,7 +35,7 @@ test('$vuetify.goTo', ({ mount }) => {
     })
 
   it('should throw error if easing does not exist', async () => {
-    expect(() => wrapper.vm.$vuetify.goTo(0, { easing: 'thisEasingDoesNotExist' }))
+    expect(() => wrapper.vm.$vuetify.goTo(1, { easing: 'thisEasingDoesNotExist' }))
       .toThrow(new TypeError('Easing function "thisEasingDoesNotExist" not found.'))
   })
 
