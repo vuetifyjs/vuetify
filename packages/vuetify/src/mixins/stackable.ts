@@ -10,8 +10,8 @@ export default Vue.extend({
     return {
       stackBase: null,
       stackClass: 'unpecified',
-      stackElement: null,
-      stackExclude: null,
+      stackElement: null as Element | null,
+      stackExclude: null as Element[] | null,
       stackMinZIndex: 0,
       isActive: false
     }
