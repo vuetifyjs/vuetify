@@ -105,6 +105,25 @@ rtl(v-slider-rtl, "v-input--slider")
 
 /** Thumb/Track/Ticks */
 .v-slider
+  &--vertical
+    min-height: 300px
+
+    .v-slider__track__container
+      width: 2px
+      height: 100%
+      top: 0
+      left: 50%
+      transform: translateX(-50%)
+
+    .v-slider__track
+      height: 100%
+      width: 2px
+      top: 0
+
+      &-fill
+        width: 2px
+        height: 100%
+
   &__track__container
     height: 2px
     left: 0
@@ -141,10 +160,8 @@ rtl(v-slider-rtl, "v-input--slider")
 
     &-fill
       position: absolute
-      left: 0
       height: 2px
       transform-origin: left
-      width: 100%
       transition: .3s $transition.swing
 
   &__ticks-container
