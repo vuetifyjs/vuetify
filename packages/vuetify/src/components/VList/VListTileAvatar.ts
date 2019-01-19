@@ -1,8 +1,11 @@
 // Components
 import VAvatar from '../VAvatar'
 
+// Types
+import Vue, { VNode } from 'vue'
+
 /* @vue/component */
-export default {
+export default Vue.extend({
   name: 'v-list-tile-avatar',
 
   functional: true,
@@ -16,7 +19,7 @@ export default {
     tile: Boolean
   },
 
-  render (h, { data, children, props }) {
+  render (h, { data, children, props }): VNode {
     data.staticClass = (`v-list__tile__avatar ${data.staticClass || ''}`).trim()
 
     const avatar = h(VAvatar, {
@@ -29,4 +32,4 @@ export default {
 
     return h('div', data, [avatar])
   }
-}
+})

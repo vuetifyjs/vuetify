@@ -1,27 +1,43 @@
 // Components
-import VIcon from '../../components/VIcon'
+import VIcon from '../VIcon'
+import VList from './VList'
 
 // Mixins
 import Bootable from '../../mixins/bootable'
 import Toggleable from '../../mixins/toggleable'
-import {
-  inject as RegistrableInject
-} from '../../mixins/registrable'
+import { Registrable, inject as RegistrableInject } from '../../mixins/registrable'
 
 // Transitions
 import { VExpandTransition } from '../transitions'
 
+// Utils
+import mixins, { ExtractVue } from '../../util/mixins'
+
+// Types
+import Vue, { VNode } from 'vue'
+
+type VListInstance = InstanceType<typeof VList>
+
+interface options extends Vue {
+  list: VListInstance
+  $route: any
+}
+
 /* @vue/component */
-export default {
+export default mixins<options &
+/* eslint-disable indent */
+  ExtractVue<[
+    typeof Bootable,
+    typeof Toggleable,
+    Registrable<'list'>
+  ]>
+/* eslint-enable indent */
+>(
+  Bootable,
+  RegistrableInject('list', 'v-list-group', 'v-list'),
+  Toggleable
+).extend({
   name: 'v-list-group',
-
-  mixins: [
-    Bootable,
-    RegistrableInject('list', 'v-list-group', 'v-list'),
-    Toggleable
-  ],
-
-  inject: ['listClick'],
 
   props: {
     activeClass: {
@@ -44,19 +60,19 @@ export default {
   }),
 
   computed: {
-    groupClasses () {
+    groupClasses (): object {
       return {
         'v-list__group--active': this.isActive,
         'v-list__group--disabled': this.disabled
       }
     },
-    headerClasses () {
+    headerClasses (): object {
       return {
         'v-list__group__header--active': this.isActive,
         'v-list__group__header--sub-group': this.subGroup
       }
     },
-    itemsClasses () {
+    itemsClasses (): object {
       return {
         'v-list__group__items--no-action': this.noAction
       }
@@ -66,7 +82,7 @@ export default {
   watch: {
     isActive (val) {
       if (!this.subGroup && val) {
-        this.listClick(this._uid)
+        this.list.listClick(this._uid)
       }
     },
     $route (to) {
@@ -74,7 +90,7 @@ export default {
 
       if (this.group) {
         if (isActive && this.isActive !== isActive) {
-          this.listClick(this._uid)
+          this.list.listClick(this._uid)
         }
 
         this.isActive = isActive
@@ -93,19 +109,23 @@ export default {
     }
   },
 
+  beforeMount () {
+    this.list.register(this)
+  },
+
   beforeDestroy () {
     this.list.unregister(this._uid)
   },
 
   methods: {
-    click (e) {
+    click (e: Event) {
       if (this.disabled) return
 
       this.$emit('click', e)
 
       this.isActive = !this.isActive
     },
-    genIcon (icon) {
+    genIcon (icon: any): VNode {
       return this.$createElement(VIcon, icon)
     },
     genAppendIcon () {
@@ -163,16 +183,16 @@ export default {
         this.$slots.prependIcon || this.genIcon(icon)
       ])
     },
-    toggle (uid) {
+    toggle (uid: any) {
       this.isActive = this._uid === uid
     },
-    matchRoute (to) {
+    matchRoute (to: any) {
       if (!this.group) return false
       return to.match(this.group) !== null
     }
   },
 
-  render (h) {
+  render (h): VNode {
     return h('div', {
       staticClass: 'v-list__group',
       'class': this.groupClasses
@@ -181,4 +201,4 @@ export default {
       h(VExpandTransition, [this.genItems()])
     ])
   }
-}
+})
