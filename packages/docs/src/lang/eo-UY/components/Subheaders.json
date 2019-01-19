@@ -1,0 +1,24 @@
+{
+  "header": "crwdns13414:0crwdne13414:0",
+  "headerText": "crwdns13416:0crwdne13416:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns13418:0crwdne13418:0"
+    },
+    "grid": {
+      "header": "crwdns13420:0crwdne13420:0",
+      "desc": "crwdns13422:0crwdne13422:0"
+    },
+    "menu": {
+      "header": "crwdns13424:0crwdne13424:0",
+      "desc": "crwdns13426:0crwdne13426:0"
+    },
+    "social": {
+      "header": "crwdns13428:0crwdne13428:0",
+      "desc": "crwdns13430:0crwdne13430:0"
+    }
+  },
+  "props": {
+    "inset": "crwdns13432:0crwdne13432:0"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "header": "crwdns11250:0crwdne11250:0",
+  "headerText": "crwdns11252:0crwdne11252:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns11254:0crwdne11254:0"
+    },
+    "iconDividers": {
+      "header": "crwdns11256:0crwdne11256:0",
+      "desc": "crwdns11258:0crwdne11258:0"
+    },
+    "itemSlot": {
+      "header": "crwdns11260:0crwdne11260:0",
+      "desc": "crwdns11262:0crwdne11262:0"
+    }
+  },
+  "props": {
+    "divider": "crwdns11264:0crwdne11264:0",
+    "icons": "crwdns11266:0crwdne11266:0",
+    "items": "crwdns11268:0crwdne11268:0",
+    "justifyCenter": "crwdns11270:0crwdne11270:0",
+    "justifyEnd": "crwdns11272:0crwdne11272:0",
+    "large": "crwdns11274:0crwdne11274:0"
+  },
+  "slots": {
+    "divider": "crwdns11276:0crwdne11276:0"
+  },
+  "scopedSlots": {
+    "item": "crwdns11278:0crwdne11278:0"
+  }
+}

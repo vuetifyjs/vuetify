@@ -1,0 +1,55 @@
+{
+  "header": "crwdns11106:0crwdne11106:0",
+  "headerText": "crwdns11108:0crwdne11108:0",
+  "supplemental": [
+    "crwdns11110:0crwdne11110:0"
+  ],
+  "examples": {
+    "usage": {
+      "desc": "crwdns11112:0crwdne11112:0"
+    },
+    "api": {
+      "header": "crwdns11114:0crwdne11114:0",
+      "desc": "crwdns11116:0crwdne11116:0"
+    },
+    "scopedSlots": {
+      "header": "crwdns11118:0crwdne11118:0",
+      "desc": "crwdns11120:0crwdne11120:0"
+    },
+    "customFilter": {
+      "header": "crwdns11122:0crwdne11122:0",
+      "desc": "crwdns11124:0crwdne11124:0"
+    },
+    "asynchronous": {
+      "header": "crwdns11126:0crwdne11126:0",
+      "desc": "crwdns11128:0crwdne11128:0"
+    },
+    "advanced": {
+      "header": "crwdns11130:0crwdne11130:0",
+      "desc": "crwdns11132:0crwdne11132:0"
+    }
+  },
+  "props": {
+    "allowOverflow": "crwdns11134:0crwdne11134:0",
+    "autoSelectFirst": "crwdns11136:0crwdne11136:0",
+    "filter": "crwdns11138:0[example]crwdne11138:0",
+    "noFilter": "crwdns11140:0crwdne11140:0",
+    "hideNoData": "crwdns11142:0crwdne11142:0"
+  },
+  "slots": {
+    "append": "crwdns11144:0crwdne11144:0",
+    "item": "crwdns11146:0crwdne11146:0",
+    "no-data": "crwdns11148:0crwdne11148:0",
+    "prepend": "crwdns11150:0crwdne11150:0",
+    "selection": "crwdns11152:0crwdne11152:0"
+  },
+  "scopedSlots": {
+    "item": "crwdns11154:0crwdne11154:0",
+    "selection": "crwdns11156:0crwdne11156:0"
+  },
+  "events": {
+    "change": "crwdns11158:0crwdne11158:0",
+    "update:error": "crwdns11160:0crwdne11160:0",
+    "update:searchInput": "crwdns11162:0crwdne11162:0"
+  }
+}
