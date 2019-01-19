@@ -1,6 +1,6 @@
-import { CreateElement, VNodeChildren } from 'vue'
+import { CreateElement, VNode } from 'vue'
 
-export default function rebuildFunctionalSlots (slots: Record<string, VNodeChildren>, h: CreateElement) {
+export default function rebuildFunctionalSlots (slots: { [key: string]: VNode[] | undefined }, h: CreateElement) {
   const children = []
 
   for (const slot in slots) {
