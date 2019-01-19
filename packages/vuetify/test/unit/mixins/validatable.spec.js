@@ -35,6 +35,27 @@ test('validatable.js', ({ mount }) => {
     expect(wrapper.vm.isResetting).toBe(true)
   })
 
+  ;[true, false].forEach(returns => {
+    it.only('should reset valid flag on resetValidation - ' + String(returns), async () => {
+      jest.useFakeTimers()
+      const wrapper = mount(Mock, {
+        propsData: {
+          rules: [() => returns || String(returns)]
+        }
+      })
+
+      expect(wrapper.vm.valid).toBe(returns)
+
+      wrapper.setData({ valid: !returns })
+
+      wrapper.vm.resetValidation()
+      await wrapper.vm.$nextTick()
+      jest.runAllTimers()
+      expect(wrapper.vm.valid).toBe(returns)
+      jest.useRealTimers()
+    })
+  })
+
   it('should manually validate', () => {
     const wrapper = mount(Mock)
 
@@ -342,5 +363,25 @@ test('validatable.js', ({ mount }) => {
     wrapper.vm.reset()
     expect(wrapper.vm.isResetting).toBe(true)
     expect(wrapper.vm.internalValue).toEqual([])
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/6025
+  it('should accept null for external messages', () => {
+    const wrapper = mount(Mock, {
+      propsData: {
+        errorMessages: ['Foobar']
+      }
+    })
+
+    expect(wrapper.vm.externalError).toBe(true)
+
+    wrapper.setProps({ errorMessages: [] })
+    expect(wrapper.vm.externalError).toBe(false)
+
+    wrapper.setProps({ errorMessages: 'Fizzbuzz' })
+    expect(wrapper.vm.externalError).toBe(true)
+
+    wrapper.setProps({ errorMessages: null })
+    expect(wrapper.vm.externalError).toBe(false)
   })
 })

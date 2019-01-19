@@ -1,0 +1,10 @@
+{
+  "props": {
+    "absolute": "crwdns15702:0crwdne15702:0",
+    "bottom": "crwdns15704:0crwdne15704:0",
+    "fixed": "crwdns15706:0crwdne15706:0",
+    "left": "crwdns15708:0crwdne15708:0",
+    "right": "crwdns15710:0crwdne15710:0",
+    "top": "crwdns15712:0crwdne15712:0"
+  }
+}
