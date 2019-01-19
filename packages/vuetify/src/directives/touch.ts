@@ -17,7 +17,7 @@ interface TouchHandlers {
   down?: (wrapper: TouchWrapper) => void
 }
 
-interface TouchWrapper extends TouchHandlers {
+export interface TouchWrapper extends TouchHandlers {
   touchstartX: number
   touchstartY: number
   touchmoveX: number

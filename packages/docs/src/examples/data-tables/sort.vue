@@ -7,41 +7,18 @@
       :pagination.sync="pagination"
       class="elevation-1"
     >
-      <template
-        slot="items"
-        slot-scope="props"
-      >
+      <template slot="items" slot-scope="props">
         <td>{{ props.item.name }}</td>
-        <td class="text-xs-right">
-          {{ props.item.calories }}
-        </td>
-        <td class="text-xs-right">
-          {{ props.item.fat }}
-        </td>
-        <td class="text-xs-right">
-          {{ props.item.carbs }}
-        </td>
-        <td class="text-xs-right">
-          {{ props.item.protein }}
-        </td>
-        <td class="text-xs-right">
-          {{ props.item.iron }}
-        </td>
+        <td class="text-xs-right">{{ props.item.calories }}</td>
+        <td class="text-xs-right">{{ props.item.fat }}</td>
+        <td class="text-xs-right">{{ props.item.carbs }}</td>
+        <td class="text-xs-right">{{ props.item.protein }}</td>
+        <td class="text-xs-right">{{ props.item.iron }}</td>
       </template>
     </v-data-table>
     <div class="text-xs-center pt-2">
-      <v-btn
-        color="primary"
-        @click="toggleOrder"
-      >
-        Toggle sort order
-      </v-btn>
-      <v-btn
-        color="primary"
-        @click="nextSort"
-      >
-        Sort next column
-      </v-btn>
+      <v-btn color="primary" @click="toggleOrder">Toggle sort order</v-btn>
+      <v-btn color="primary" @click="nextSort">Sort next column</v-btn>
     </div>
   </div>
 </template>

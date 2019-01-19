@@ -12,9 +12,7 @@
       >
         mdi-twitter
       </v-icon>
-      <span class="title font-weight-light">
-        Twitter
-      </span>
+      <span class="title font-weight-light">Twitter</span>
     </v-card-title>
 
     <v-card-text class="headline font-weight-bold">
@@ -38,21 +36,11 @@
           align-center
           justify-end
         >
-          <v-icon class="mr-1">
-            mdi-heart
-          </v-icon>
-          <span class="subheading mr-2">
-            256
-          </span>
-          <span class="mr-1">
-            ·
-          </span>
-          <v-icon class="mr-1">
-            mdi-share-variant
-          </v-icon>
-          <span class="subheading">
-            45
-          </span>
+          <v-icon class="mr-1">mdi-heart</v-icon>
+          <span class="subheading mr-2">256</span>
+          <span class="mr-1">·</span>
+          <v-icon class="mr-1">mdi-share-variant</v-icon>
+          <span class="subheading">45</span>
         </v-layout>
       </v-list-tile>
     </v-card-actions>
@@ -66,3 +54,9 @@
     })
   }
 </script>
+
+<codepen-resources lang="json">
+  {
+    "css": ["https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css"]
+  }
+</codepen-resources>

@@ -23,10 +23,7 @@
           chips
           label="I use a scoped slot"
         >
-          <template
-            slot="selection"
-            slot-scope="data"
-          >
+          <template slot="selection" slot-scope="data">
             <v-chip
               :key="JSON.stringify(data.item)"
               :selected="data.selected"

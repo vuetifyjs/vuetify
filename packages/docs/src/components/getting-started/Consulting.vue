@@ -27,18 +27,11 @@
       md4
     >
       <div class="text-xs-center d-inline-block">
-        <v-avatar
-          size="156"
-          class="mx-3 mb-2 mt-3 elevation-8"
-        >
+        <v-avatar size="156" class="mx-3 mb-2 mt-3 elevation-8">
           <v-img src="https://cdn.vuetifyjs.com/images/john.png" />
         </v-avatar>
-        <div class="body-2">
-          John Leider
-        </div>
-        <div class="caption">
-          Creator
-        </div>
+        <div class="body-2">John Leider</div>
+        <div class="caption">Creator</div>
       </div>
     </v-flex>
     <v-flex
@@ -51,12 +44,7 @@
       >
         <v-card-title class="pb-3 primary">
           <h3 class="title white--text">
-            <v-icon
-              color="white"
-              class="mr-2"
-            >
-              mdi-calendar
-            </v-icon>
+            <v-icon color="white" class="mr-2">mdi-calendar</v-icon>
             <span>Schedule an Appointment</span>
           </h3>
         </v-card-title>

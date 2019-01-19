@@ -8,21 +8,15 @@
       dark
     >
       <v-spacer></v-spacer>
-      <v-icon small>
-        mdi-square
-      </v-icon>
+      <v-icon small>mdi-square</v-icon>
       <v-icon
         class="ml-1"
         small
-      >
-        mdi-circle
-      </v-icon>
+      >mdi-circle</v-icon>
       <v-icon
         class="ml-1"
         small
-      >
-        mdi-triangle
-      </v-icon>
+      >mdi-triangle</v-icon>
     </v-system-bar>
     <v-toolbar
       color="deep-purple accent-4"
@@ -33,9 +27,7 @@
       <v-btn icon>
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
-      <v-card-title class="title font-weight-regular">
-        Sign up
-      </v-card-title>
+      <v-card-title class="title font-weight-regular">Sign up</v-card-title>
       <v-spacer></v-spacer>
       <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
@@ -89,19 +81,9 @@
       >
         <template slot="label">
           I agree to the&nbsp;
-          <a
-            href="#"
-            @click.stop.prevent="dialog = true"
-          >
-            Terms of Service
-          </a>
+          <a href="#" @click.stop.prevent="dialog = true">Terms of Service</a>
           &nbsp;and&nbsp;
-          <a
-            href="#"
-            @click.stop.prevent="dialog = true"
-          >
-            Privacy Policy
-          </a>*
+          <a href="#" @click.stop.prevent="dialog = true">Privacy Policy</a>*
         </template>
       </v-checkbox>
     </v-form>
@@ -120,9 +102,7 @@
         class="white--text"
         color="deep-purple accent-4"
         depressed
-      >
-        Submit
-      </v-btn>
+      >Submit</v-btn>
     </v-card-actions>
     <v-dialog
       v-model="dialog"
@@ -131,9 +111,7 @@
       persistent
     >
       <v-card>
-        <v-card-title class="headline grey lighten-3">
-          Legal
-        </v-card-title>
+        <v-card-title class="headline grey lighten-3">Legal</v-card-title>
         <v-card-text>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </v-card-text>

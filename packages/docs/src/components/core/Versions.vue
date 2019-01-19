@@ -15,9 +15,7 @@
         class="text-lowercase mr-1"
         v-text="version"
       />
-      <v-icon class="hidden-sm-and-down">
-        mdi-menu-down
-      </v-icon>
+      <v-icon class="hidden-sm-and-down">mdi-menu-down</v-icon>
     </v-btn>
 
     <v-card>

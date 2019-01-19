@@ -1,11 +1,6 @@
 <template>
   <div id="lateral">
-    <v-toolbar
-      dark
-      tabs
-      flat
-      color="indigo"
-    >
+    <v-toolbar dark tabs flat color="indigo">
       <v-toolbar-side-icon></v-toolbar-side-icon>
       <v-toolbar-title>Page title</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -21,15 +16,9 @@
         align-with-title
         color="transparent"
       >
-        <v-tab href="#one">
-          Item One
-        </v-tab>
-        <v-tab href="#two">
-          Item Two
-        </v-tab>
-        <v-tab href="#three">
-          Item Three
-        </v-tab>
+        <v-tab href="#one">Item One</v-tab>
+        <v-tab href="#two">Item Two</v-tab>
+        <v-tab href="#three">Item Three</v-tab>
         <v-tabs-slider color="pink"></v-tabs-slider>
       </v-tabs>
     </v-toolbar>
@@ -39,10 +28,7 @@
         :key="content"
         :value="content"
       >
-        <v-card
-          height="200px"
-          flat
-        >
+        <v-card height="200px" flat>
         </v-card>
       </v-tab-item>
     </v-tabs-items>

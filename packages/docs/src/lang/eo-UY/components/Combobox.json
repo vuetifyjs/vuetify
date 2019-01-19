@@ -1,0 +1,40 @@
+{
+  "header": "crwdns11716:0crwdne11716:0",
+  "headerText": "crwdns11718:0crwdne11718:0",
+  "supplemental": [
+    "crwdns11720:0crwdne11720:0"
+  ],
+  "examples": {
+    "usage": {
+      "desc": "crwdns11722:0crwdne11722:0"
+    },
+    "noData": {
+      "header": "crwdns11724:0crwdne11724:0",
+      "desc": "crwdns11726:0crwdne11726:0"
+    },
+    "advanced": {
+      "header": "crwdns11728:0crwdne11728:0",
+      "desc": "crwdns11730:0crwdne11730:0"
+    },
+    "comboboxMultiple": {
+      "header": "crwdns11732:0crwdne11732:0",
+      "desc": "crwdns11734:0crwdne11734:0"
+    }
+  },
+  "slots": {
+    "append": "crwdns11736:0crwdne11736:0",
+    "item": "crwdns11738:0crwdne11738:0",
+    "no-data": "crwdns11740:0crwdne11740:0",
+    "prepend": "crwdns11742:0crwdne11742:0",
+    "selection": "crwdns11744:0crwdne11744:0"
+  },
+  "scopedSlots": {
+    "item": "crwdns11746:0crwdne11746:0",
+    "selection": "crwdns11748:0crwdne11748:0"
+  },
+  "events": {
+    "change": "crwdns11750:0crwdne11750:0",
+    "update:error": "crwdns11752:0crwdne11752:0",
+    "update:searchInput": "crwdns11754:0crwdne11754:0"
+  }
+}
