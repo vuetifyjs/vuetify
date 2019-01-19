@@ -1,0 +1,19 @@
+{
+  "header": "crwdns14642:0crwdne14642:0",
+  "headerText": "crwdns14644:0$vuetifycrwdne14644:0",
+  "firstHeader": "crwdns14646:0crwdne14646:0",
+  "secondHeader": "crwdns14648:0crwdne14648:0",
+  "thirdHeader": "crwdns14650:0crwdne14650:0",
+  "loremIpsum": "crwdns14652:0crwdne14652:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns14654:0crwdne14654:0"
+    }
+  },
+  "components": [
+    "crwdns14656:0$vuetifycrwdne14656:0"
+  ],
+  "functions": {
+    "goTo": "crwdns14658:0crwdne14658:0"
+  }
+}

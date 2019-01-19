@@ -28,31 +28,19 @@
       class="transparent"
       multiple
     >
-      <v-btn
-        :value="1"
-        flat
-      >
+      <v-btn :value="1" flat>
         <v-icon>format_bold</v-icon>
       </v-btn>
 
-      <v-btn
-        :value="2"
-        flat
-      >
+      <v-btn :value="2" flat>
         <v-icon>format_italic</v-icon>
       </v-btn>
 
-      <v-btn
-        :value="3"
-        flat
-      >
+      <v-btn :value="3" flat>
         <v-icon>format_underlined</v-icon>
       </v-btn>
 
-      <v-btn
-        :value="4"
-        flat
-      >
+      <v-btn :value="4" flat>
         <v-icon>format_color_fill</v-icon>
       </v-btn>
     </v-btn-toggle>
@@ -66,31 +54,19 @@
       v-model="toggle_exclusive"
       class="transparent"
     >
-      <v-btn
-        :value="1"
-        flat
-      >
+      <v-btn :value="1" flat>
         <v-icon>format_align_left</v-icon>
       </v-btn>
 
-      <v-btn
-        :value="2"
-        flat
-      >
+      <v-btn :value="2" flat>
         <v-icon>format_align_center</v-icon>
       </v-btn>
 
-      <v-btn
-        :value="3"
-        flat
-      >
+      <v-btn :value="3" flat>
         <v-icon>format_align_right</v-icon>
       </v-btn>
 
-      <v-btn
-        :value="4"
-        flat
-      >
+      <v-btn :value="4" flat>
         <v-icon>format_align_justify</v-icon>
       </v-btn>
     </v-btn-toggle>

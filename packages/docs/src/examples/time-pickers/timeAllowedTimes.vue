@@ -1,12 +1,6 @@
 <template>
-  <v-layout
-    row
-    wrap
-  >
-    <v-flex
-      md12
-      lg6
-    >
+  <v-layout row wrap>
+    <v-flex md12 lg6>
       <v-time-picker
         v-model="time"
         :allowed-hours="allowedHours"
@@ -18,10 +12,7 @@
         max="22:15"
       ></v-time-picker>
     </v-flex>
-    <v-flex
-      md12
-      lg6
-    >
+    <v-flex md12 lg6>
       <v-time-picker
         v-model="timeStep"
         :allowed-minutes="allowedStep"

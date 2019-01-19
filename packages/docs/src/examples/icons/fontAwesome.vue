@@ -1,8 +1,5 @@
 <template>
-  <v-layout
-    align-center
-    justify-space-around
-  >
+  <v-layout align-center justify-space-around>
     <v-icon>fas fa-lock</v-icon>
 
     <v-icon>fas fa-search</v-icon>

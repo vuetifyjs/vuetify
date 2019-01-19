@@ -1,0 +1,39 @@
+{
+  "header": "crwdns12404:0crwdne12404:0",
+  "headerText": "crwdns12406:0crwdne12406:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns12408:0crwdne12408:0"
+    },
+    "fontAwesome": {
+      "header": "crwdns12410:0crwdne12410:0",
+      "desc": "crwdns12412:0crwdne12412:0"
+    },
+    "mdi": {
+      "header": "crwdns12414:0crwdne12414:0",
+      "desc": "crwdns12416:0crwdne12416:0"
+    },
+    "color": {
+      "header": "crwdns12418:0crwdne12418:0",
+      "desc": "crwdns12420:0crwdne12420:0"
+    },
+    "buttons": {
+      "header": "crwdns12422:0crwdne12422:0",
+      "desc": "crwdns12424:0crwdne12424:0"
+    },
+    "clickable": {
+      "header": "crwdns12426:0crwdne12426:0",
+      "desc": "crwdns12428:0crwdne12428:0"
+    }
+  },
+  "props": {
+    "disabled": "crwdns12430:0crwdne12430:0",
+    "large": "crwdns12432:0crwdne12432:0",
+    "left": "crwdns12434:0crwdne12434:0",
+    "medium": "crwdns12436:0crwdne12436:0",
+    "right": "crwdns12438:0crwdne12438:0",
+    "size": "crwdns12440:0crwdne12440:0",
+    "small": "crwdns12442:0crwdne12442:0",
+    "xLarge": "crwdns12444:0crwdne12444:0"
+  }
+}

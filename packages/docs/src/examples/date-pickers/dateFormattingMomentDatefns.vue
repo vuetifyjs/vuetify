@@ -1,13 +1,7 @@
 <template>
   <v-container grid-list-md>
-    <v-layout
-      row
-      wrap
-    >
-      <v-flex
-        xs12
-        lg6
-      >
+    <v-layout row wrap>
+      <v-flex xs12 lg6>
         <v-menu
           v-model="menu1"
           :close-on-content-click="false"
@@ -28,10 +22,7 @@
         </v-menu>
       </v-flex>
 
-      <v-flex
-        xs12
-        lg6
-      >
+      <v-flex xs12 lg6>
         <v-menu
           v-model="menu2"
           :close-on-content-click="false"

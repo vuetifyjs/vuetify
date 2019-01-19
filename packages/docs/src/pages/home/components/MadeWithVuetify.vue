@@ -9,10 +9,7 @@
       v-text="$t('Vuetify.Home.madeWithVuetify')"
     />
 
-    <v-container
-      grid-list-xl
-      mb-3
-    >
+    <v-container grid-list-xl mb-3>
       <v-layout
         align-center
         fill-height
@@ -73,7 +70,7 @@
         return this.featured.slice(0, 6)
       },
       features () {
-        return this.$t('Vuetify.Home.features', 'en')
+        return this.$t('Vuetify.Home.features', this.$i18n.fallbackLocale)
       }
     },
 

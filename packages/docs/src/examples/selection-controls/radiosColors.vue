@@ -2,19 +2,9 @@
   <v-card flat>
     <v-card-text>
       <v-container fluid>
-        <v-layout
-          row
-          wrap
-        >
-          <v-flex
-            xs12
-            sm6
-            md6
-          >
-            <v-radio-group
-              v-model="ex7"
-              column
-            >
+        <v-layout row wrap>
+          <v-flex xs12 sm6 md6>
+            <v-radio-group v-model="ex7" column>
               <v-radio
                 label="red"
                 color="red"
@@ -47,15 +37,8 @@
               ></v-radio>
             </v-radio-group>
           </v-flex>
-          <v-flex
-            xs12
-            sm6
-            md6
-          >
-            <v-radio-group
-              v-model="ex8"
-              column
-            >
+          <v-flex xs12 sm6 md6>
+            <v-radio-group v-model="ex8" column>
               <v-radio
                 label="primary"
                 color="primary"

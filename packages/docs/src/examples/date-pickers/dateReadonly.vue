@@ -1,9 +1,6 @@
 <template>
   <div>
-    <v-date-picker
-      v-model="date"
-      readonly
-    ></v-date-picker>
+    <v-date-picker v-model="date" readonly></v-date-picker>
   </div>
 </template>
 
