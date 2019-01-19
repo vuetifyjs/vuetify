@@ -15,7 +15,7 @@ export default function Grid (name: string) {
       }
     },
 
-    render: (h, { props, data, children }): VNode => {
+    render (h, { props, data, children }): VNode {
       data.staticClass = (`${name} ${data.staticClass || ''}`).trim()
 
       if (data.attrs) {
