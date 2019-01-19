@@ -38,7 +38,7 @@ const allowedMasks: Dictionary<MaskItem> = {
 const isMask = (char: string): boolean => allowedMasks.hasOwnProperty(char)
 
 const convert = (mask: MaskType, char: string): string => {
-  return allowedMasks[mask].convert ? allowedMasks[mask].convert(char) : char
+  return allowedMasks[mask].convert(char)
 }
 
 const maskValidates = (mask: MaskType, char: string): boolean => {
