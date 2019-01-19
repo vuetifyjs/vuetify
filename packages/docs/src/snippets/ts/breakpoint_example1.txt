@@ -1,0 +1,23 @@
+{
+  xs: boolean
+  xsOnly: boolean
+  sm: boolean
+  smOnly: boolean
+  smAndDown: boolean
+  smAndUp: boolean
+  md: boolean
+  mdOnly: boolean
+  mdAndDown: boolean
+  mdAndUp: boolean
+  lg: boolean
+  lgOnly: boolean
+  lgAndDown: boolean
+  lgAndUp: boolean
+  xl: boolean
+  xlOnly: boolean
+  name: ('xs' | 'sm' | 'md' | 'lg' | 'xl')
+  width: number
+  height: number
+  thresholds: { xs: number, sm: number, md: number, lg: number }
+  scrollbarWidth: number
+}

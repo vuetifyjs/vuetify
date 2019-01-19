@@ -1,0 +1,49 @@
+{
+  "header": "crwdns14070:0crwdne14070:0",
+  "headerText": "crwdns14072:0crwdne14072:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns14074:0crwdne14074:0",
+      "uninverted": true
+    },
+    "customColor": {
+      "header": "crwdns14078:0crwdne14078:0",
+      "desc": "crwdns14080:0crwdne14080:0",
+      "uninverted": true
+    },
+    "tabs": {
+      "header": "crwdns14084:0crwdne14084:0",
+      "desc": "crwdns14086:0crwdne14086:0",
+      "uninverted": true
+    },
+    "navigationDrawers": {
+      "header": "crwdns14090:0crwdne14090:0",
+      "desc": "crwdns14092:0crwdne14092:0",
+      "uninverted": true
+    },
+    "toolbars": {
+      "header": "crwdns14096:0crwdne14096:0",
+      "desc": "crwdns14098:0crwdne14098:0",
+      "uninverted": true
+    },
+    "expansionPanels": {
+      "header": "crwdns14102:0crwdne14102:0",
+      "desc": "crwdns14104:0crwdne14104:0",
+      "uninverted": true
+    },
+    "customRipple": {
+      "header": "crwdns14108:0crwdne14108:0",
+      "desc": "crwdns14110:0crwdne14110:0",
+      "uninverted": true
+    },
+    "htmlElement": {
+      "header": "crwdns14114:0crwdne14114:0",
+      "desc": "crwdns14116:0crwdne14116:0",
+      "uninverted": true
+    }
+  },
+  "options": {
+    "class": "crwdns14120:0crwdne14120:0",
+    "center": "crwdns14122:0crwdne14122:0"
+  }
+}

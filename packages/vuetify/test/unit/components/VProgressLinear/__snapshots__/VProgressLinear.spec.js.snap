@@ -213,6 +213,36 @@ exports[`VProgressLinear.js should render component with css color and match sna
 
 `;
 
+exports[`VProgressLinear.js should render default slot content 1`] = `
+
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="80"
+     aria-valuenow="90"
+     class="v-progress-linear"
+     style="height: 7px;"
+>
+  <div class="v-progress-linear__background primary"
+       style="height: 7px; opacity: 0.3; width: 80%;"
+  >
+  </div>
+  <div class="v-progress-linear__bar"
+       style="width: 80%;"
+  >
+    <div class="v-progress-linear__bar__determinate primary"
+         style="width: 112.5%;"
+    >
+    </div>
+  </div>
+  <div class="v-progress-linear__content">
+    <div class="foobar">
+      content
+    </div>
+  </div>
+</div>
+
+`;
+
 exports[`VProgressLinear.js should render inactive component and match snapshot 1`] = `
 
 <div role="progressbar"

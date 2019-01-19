@@ -3,9 +3,13 @@ import { SparklineItem, Boundary, Point } from '../VSparkline'
 export function genPoints (points: SparklineItem[], boundary: Boundary): Point[] {
   const { minX, minY, maxX, maxY } = boundary
   const normalisedPoints = points.map(item => (typeof item === 'number' ? item : item.value))
-  const minValue = Math.min(...normalisedPoints) - 0.001
+  const maxValue = Math.max(...normalisedPoints) + 1
+  let minValue = Math.min(...normalisedPoints)
+
+  if (minValue) minValue -= 1
+
   const gridX = (maxX - minX) / (normalisedPoints.length - 1)
-  const gridY = (maxY - minY) / (Math.max(...normalisedPoints) + 0.001 - minValue)
+  const gridY = (maxY - minY) / (maxValue - minValue)
 
   return normalisedPoints.map((value, index) => {
     return {
