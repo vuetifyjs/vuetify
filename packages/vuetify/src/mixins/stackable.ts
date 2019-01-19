@@ -17,11 +17,6 @@ export default Vue.extend({
     }
   },
   computed: {
-    /**
-     * Currently active z-index
-     *
-     * @return {number}
-     */
     activeZIndex (): number {
       if (typeof window === 'undefined') return 0
 
