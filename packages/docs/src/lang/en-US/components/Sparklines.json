@@ -28,7 +28,7 @@
     "autoDrawDuration": "Amount of time (in ms) to run the trace animation",
     "autoDrawEasing": "The easing function to use for the trace animation",
     "data": "An array of data points",
-    "fill": "Create a `v-sparkline` with fill",
+    "fill": "Using the **fill** property allows you to better customize the look and feel of your sparkline.",
     "gradient": "An array of colors to use as a linear-gradient",
     "gradientDirection": "The direction the gradient should run",
     "labels": "An array of string labels that correspond to the same index as its data counterpart",

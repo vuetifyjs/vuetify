@@ -1,14 +1,13 @@
 <template>
   <v-container fluid>
     <v-sparkline
-      :value="value"
+      :fill="fill"
       :gradient="gradient"
-      :smooth="radius || false"
-      :padding="padding"
       :line-width="width"
-      :stroke-linecap="lineCap"
+      :padding="padding"
+      :smooth="radius || false"
+      :value="value"
       auto-draw
-      fill
     ></v-sparkline>
 
     <v-divider></v-divider>
@@ -58,12 +57,7 @@
 
       <v-flex xs6>
         <v-layout fill-height align-center>
-          <v-subheader class="pl-0">Linecap</v-subheader>
-          <v-btn-toggle v-model="lineCap" mandatory>
-            <v-btn flat value="butt">butt</v-btn>
-            <v-btn flat value="round">round</v-btn>
-            <v-btn flat value="square">square</v-btn>
-          </v-btn-toggle>
+          <v-switch label="Filled" v-model="fill"></v-switch>
         </v-layout>
       </v-flex>
 
@@ -109,13 +103,13 @@
 
   export default {
     data: () => ({
-      width: 2,
-      radius: 10,
+      fill: true,
+      gradient: gradients[4],
+      gradients,
       padding: 8,
-      lineCap: 'round',
-      gradient: gradients[5],
+      radius: 10,
       value: [0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0],
-      gradients
+      width: 2
     })
   }
 </script>
