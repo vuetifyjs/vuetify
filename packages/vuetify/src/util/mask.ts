@@ -8,7 +8,7 @@ export const defaultDelimiters = /[-!$%^&*()_+|~=`{}[\]:";'<>?,./\\ ]/
 
 export const isMaskDelimiter = (char: string): boolean => char ? defaultDelimiters.test(char) : false
 
-const allowedMasks: Record<MaskType, MaskItem> = {
+const allowedMasks: Dictionary<MaskItem> = {
   '#': {
     test: char => Boolean(char.match(/[0-9]/)),
     convert: char => char
@@ -46,7 +46,7 @@ const maskValidates = (mask: MaskType, char: string): boolean => {
   return allowedMasks[mask].test(char)
 }
 
-export const maskText = (text: string | any[], masked: string | any[], dontFillMaskBlanks: boolean): string => {
+export const maskText = (text: string | string[], masked: string | any[], dontFillMaskBlanks: boolean): string => {
   if (text == null) return ''
   text = String(text)
   if (!masked.length || !text.length) return text
