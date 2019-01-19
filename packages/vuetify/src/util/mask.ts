@@ -10,28 +10,28 @@ export const isMaskDelimiter = (char: string): boolean => char ? defaultDelimite
 
 const allowedMasks: Record<MaskType, MaskItem> = {
   '#': {
-    test: (char: string): boolean => Boolean(char.match(/[0-9]/)),
-    convert: (char: string) => char
+    test: char => Boolean(char.match(/[0-9]/)),
+    convert: char => char
   },
   'A': {
-    test: (char: string): boolean => Boolean(char.match(/[A-Z]/i)),
-    convert: (char: string) => char.toUpperCase()
+    test: char => Boolean(char.match(/[A-Z]/i)),
+    convert: char => char.toUpperCase()
   },
   'a': {
-    test: (char: string): boolean => Boolean(char.match(/[a-z]/i)),
-    convert: (char: string) => char.toLowerCase()
+    test: char => Boolean(char.match(/[a-z]/i)),
+    convert: char => char.toLowerCase()
   },
   'N': {
-    test: (char: string): boolean => Boolean(char.match(/[0-9A-Z]/i)),
-    convert: (char: string) => char.toUpperCase()
+    test: char => Boolean(char.match(/[0-9A-Z]/i)),
+    convert: char => char.toUpperCase()
   },
   'n': {
-    test: (char: string): boolean => Boolean(char.match(/[0-9a-z]/i)),
-    convert: (char: string) => char.toLowerCase()
+    test: char => Boolean(char.match(/[0-9a-z]/i)),
+    convert: char => char.toLowerCase()
   },
   'X': {
     test: isMaskDelimiter,
-    convert: (char: string) => char
+    convert: char => char
   }
 }
 
