@@ -17,6 +17,10 @@
     "salesCard": {
       "header": "### Custom labels",
       "desc": "By providing a scoped slot **label**, we are able to modify the displayed content adding a dollar sign ($). This slot is **_exclusively_** for text content. For more information on the svg `<text>` element, [navigate here](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/text)."
+    },
+    "fill": {
+      "header": "### Fill",
+      "desc": "You can create a `v-sparkline` with fill using the `fill` property."
     }
   },
   "props": {
@@ -24,6 +28,7 @@
     "autoDrawDuration": "Amount of time (in ms) to run the trace animation",
     "autoDrawEasing": "The easing function to use for the trace animation",
     "data": "An array of data points",
+    "fill": "Using the **fill** property allows you to better customize the look and feel of your sparkline.",
     "gradient": "An array of colors to use as a linear-gradient",
     "gradientDirection": "The direction the gradient should run",
     "labels": "An array of string labels that correspond to the same index as its data counterpart",
