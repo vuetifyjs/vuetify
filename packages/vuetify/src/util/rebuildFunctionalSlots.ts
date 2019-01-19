@@ -1,11 +1,5 @@
-import { CreateElement, VNodeChildren } from "vue";
+import { CreateElement, VNodeChildren } from 'vue'
 
-/**
- *
- * @param {object} slots
- * @param {function} h
- * @returns {array}
- */
 export default function rebuildFunctionalSlots (slots: Record<string, VNodeChildren>, h: CreateElement) {
   const children = []
 
