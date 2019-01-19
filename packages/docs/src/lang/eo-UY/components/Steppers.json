@@ -1,0 +1,75 @@
+{
+  "header": "crwdns13336:0crwdne13336:0",
+  "headerText": "crwdns13338:0crwdne13338:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns13340:0crwdne13340:0"
+    },
+    "editable": {
+      "header": "crwdns13342:0crwdne13342:0",
+      "desc": "crwdns13344:0crwdne13344:0"
+    },
+    "nonEditable": {
+      "header": "crwdns13346:0crwdne13346:0",
+      "desc": "crwdns13348:0crwdne13348:0"
+    },
+    "optional": {
+      "header": "crwdns13350:0crwdne13350:0",
+      "desc": "crwdns13352:0crwdne13352:0"
+    },
+    "horizontal": {
+      "header": "crwdns13354:0crwdne13354:0",
+      "desc": "crwdns13356:0crwdne13356:0"
+    },
+    "vertical": {
+      "header": "crwdns13358:0crwdne13358:0",
+      "desc": "crwdns13360:0crwdne13360:0"
+    },
+    "linear": {
+      "header": "crwdns13362:0crwdne13362:0",
+      "desc": "crwdns13364:0crwdne13364:0"
+    },
+    "nonLinear": {
+      "header": "crwdns13366:0crwdne13366:0",
+      "desc": "crwdns13368:0crwdne13368:0"
+    },
+    "alternateLabels": {
+      "header": "crwdns13370:0crwdne13370:0",
+      "desc": "crwdns13372:0crwdne13372:0"
+    },
+    "error": {
+      "header": "crwdns13374:0crwdne13374:0",
+      "desc": "crwdns13376:0crwdne13376:0"
+    },
+    "alternateError": {
+      "header": "crwdns13378:0crwdne13378:0",
+      "desc": "crwdns13380:0crwdne13380:0"
+    },
+    "verticalError": {
+      "header": "crwdns13382:0crwdne13382:0",
+      "desc": "crwdns13384:0crwdne13384:0"
+    },
+    "dynamic": {
+      "header": "crwdns13386:0crwdne13386:0",
+      "desc": "crwdns13388:0crwdne13388:0"
+    }
+  },
+  "props": {
+    "altLabels": "crwdns13390:0crwdne13390:0",
+    "color": "crwdns13392:0crwdne13392:0",
+    "complete": "crwdns13394:0crwdne13394:0",
+    "completeIcon": "crwdns13396:0crwdne13396:0",
+    "editable": "crwdns13398:0crwdne13398:0",
+    "editIcon": "crwdns13400:0crwdne13400:0",
+    "errorIcon": "crwdns13402:0crwdne13402:0",
+    "nonLinear": "crwdns13404:0crwdne13404:0",
+    "rules": "crwdns13406:0crwdne13406:0",
+    "vertical": "crwdns13408:0crwdne13408:0",
+    "v-stepper-step": {
+      "step": "crwdns13410:0crwdne13410:0"
+    },
+    "v-stepper-content": {
+      "step": "crwdns13412:0crwdne13412:0"
+    }
+  }
+}

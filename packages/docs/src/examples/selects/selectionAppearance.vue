@@ -15,9 +15,7 @@
       <span
         v-if="index === 1"
         class="grey--text caption"
-      >
-        (+{{ value.length - 1 }} others)
-      </span>
+      >(+{{ value.length - 1 }} others)</span>
     </template>
   </v-select>
 </template>

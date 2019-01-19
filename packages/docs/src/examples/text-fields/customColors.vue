@@ -8,23 +8,12 @@
       color="success"
     >
       <span>Registration successful!</span>
-      <v-icon dark>
-        check_circle
-      </v-icon>
+      <v-icon dark>check_circle</v-icon>
     </v-snackbar>
-    <v-form
-      ref="form"
-      @submit.prevent="submit"
-    >
-      <v-container
-        grid-list-xl
-        fluid
-      >
+    <v-form ref="form" @submit.prevent="submit">
+      <v-container grid-list-xl fluid>
         <v-layout wrap>
-          <v-flex
-            xs12
-            sm6
-          >
+          <v-flex xs12 sm6>
             <v-text-field
               v-model="form.first"
               :rules="rules.name"
@@ -33,10 +22,7 @@
               required
             ></v-text-field>
           </v-flex>
-          <v-flex
-            xs12
-            sm6
-          >
+          <v-flex xs12 sm6>
             <v-text-field
               v-model="form.last"
               :rules="rules.name"
@@ -55,10 +41,7 @@
               </div>
             </v-textarea>
           </v-flex>
-          <v-flex
-            xs12
-            sm6
-          >
+          <v-flex xs12 sm6>
             <v-select
               v-model="form.favoriteAnimal"
               :items="animals"
@@ -68,10 +51,7 @@
               required
             ></v-select>
           </v-flex>
-          <v-flex
-            xs12
-            sm6
-          >
+          <v-flex xs12 sm6>
             <v-slider
               v-model="form.age"
               :rules="rules.age"
@@ -88,59 +68,31 @@
               v-model="form.terms"
               color="green"
             >
-              <div
-                slot="label"
-                @click.stop=""
-              >
+              <div slot="label" @click.stop="">
                 Do you accept the
-                <a
-                  href="javascript:;"
-                  @click.stop="terms = true"
-                >
-                  terms
-                </a>
+                <a href="javascript:;" @click.stop="terms = true">terms</a>
                 and
-                <a
-                  href="javascript:;"
-                  @click.stop="conditions = true"
-                >
-                  conditions?
-                </a>
+                <a href="javascript:;" @click.stop="conditions = true">conditions?</a>
               </div>
             </v-checkbox>
           </v-flex>
         </v-layout>
       </v-container>
       <v-card-actions>
-        <v-btn
-          flat
-          @click="resetForm"
-        >
-          Cancel
-        </v-btn>
+        <v-btn flat @click="resetForm">Cancel</v-btn>
         <v-spacer></v-spacer>
         <v-btn
           :disabled="!formIsValid"
           flat
           color="primary"
           type="submit"
-        >
-          Register
-        </v-btn>
+        >Register</v-btn>
       </v-card-actions>
     </v-form>
-    <v-dialog
-      v-model="terms"
-      width="70%"
-    >
+    <v-dialog v-model="terms" width="70%">
       <v-card>
-        <v-card-title class="title">
-          Terms
-        </v-card-title>
-        <v-card-text
-          v-for="n in 5"
-          :key="n"
-        >
+        <v-card-title class="title">Terms</v-card-title>
+        <v-card-text v-for="n in 5" :key="n">
           {{ content }}
         </v-card-text>
         <v-card-actions>
@@ -149,24 +101,14 @@
             flat
             color="purple"
             @click="terms = false"
-          >
-            Ok
-          </v-btn>
+          >Ok</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog
-      v-model="conditions"
-      width="70%"
-    >
+    <v-dialog v-model="conditions" width="70%">
       <v-card>
-        <v-card-title class="title">
-          Conditions
-        </v-card-title>
-        <v-card-text
-          v-for="n in 5"
-          :key="n"
-        >
+        <v-card-title class="title">Conditions</v-card-title>
+        <v-card-text v-for="n in 5" :key="n">
           {{ content }}
         </v-card-text>
         <v-card-actions>
@@ -175,9 +117,7 @@
             flat
             color="purple"
             @click="conditions = false"
-          >
-            Ok
-          </v-btn>
+          >Ok</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

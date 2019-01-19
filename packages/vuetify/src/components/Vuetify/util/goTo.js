@@ -56,7 +56,9 @@ function getTargetLocation (target, settings) {
 
 export default function goTo (target, options) {
   return new Promise((resolve, reject) => {
-    if (typeof window === 'undefined') return reject('Window is undefined')
+    if (typeof window === 'undefined') {
+      return reject(new Error('Window is undefined'))
+    }
 
     const settings = Object.assign({}, defaults, options)
     const startTime = performance.now()

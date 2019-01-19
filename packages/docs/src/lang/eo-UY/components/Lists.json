@@ -1,0 +1,67 @@
+{
+  "header": "crwdns12568:0crwdne12568:0",
+  "headerText": "crwdns12570:0crwdne12570:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns12572:0crwdne12572:0"
+    },
+    "avatarTitleAndAction": {
+      "header": "crwdns12574:0crwdne12574:0",
+      "desc": "crwdns12576:0crwdne12576:0"
+    },
+    "iconTwoLinesAndAction": {
+      "header": "crwdns12578:0crwdne12578:0",
+      "desc": "crwdns12580:0crwdne12580:0"
+    },
+    "avatarThreeLines": {
+      "header": "crwdns12582:0crwdne12582:0",
+      "desc": "crwdns12584:0[card]crwdne12584:0"
+    },
+    "avatarSubheaderTitleAndAction": {
+      "header": "crwdns12586:0crwdne12586:0",
+      "desc": "crwdns12588:0crwdne12588:0"
+    },
+    "subheadingsAndDividers": {
+      "header": "crwdns12590:0crwdne12590:0",
+      "desc": "crwdns12592:0crwdne12592:0"
+    },
+    "cardList": {
+      "header": "crwdns12594:0crwdne12594:0",
+      "desc": "crwdns12596:0crwdne12596:0"
+    },
+    "titleSubtitleActionsAndActionText": {
+      "header": "crwdns12598:0crwdne12598:0",
+      "desc": "crwdns12600:0crwdne12600:0"
+    },
+    "actionTitleAndSubtitle": {
+      "header": "crwdns12602:0crwdne12602:0",
+      "desc": "crwdns12604:0crwdne12604:0"
+    },
+    "expansionLists": {
+      "header": "crwdns12606:0crwdne12606:0",
+      "desc": "crwdns12608:0crwdne12608:0"
+    }
+  },
+  "props": {
+    "avatar": "crwdns12610:0crwdne12610:0",
+    "dense": "crwdns12612:0crwdne12612:0",
+    "expand": "crwdns12614:0crwdne12614:0",
+    "group": "crwdns12616:0crwdne12616:0",
+    "noAction": "crwdns12618:0crwdne12618:0",
+    "subheader": "crwdns12620:0crwdne12620:0",
+    "subGroup": "crwdns12622:0crwdne12622:0",
+    "threeLine": "crwdns12624:0crwdne12624:0",
+    "twoLine": "crwdns12626:0crwdne12626:0",
+    "inactive": "crwdns12628:0crwdne12628:0",
+    "value": "crwdns12630:0crwdne12630:0",
+    "v-list-tile-avatar": {
+      "color": "crwdns12632:0crwdne12632:0"
+    },
+    "v-list-group": {
+      "activeClass": "crwdns12634:0crwdne12634:0",
+      "appendIcon": "crwdns12636:0crwdne12636:0",
+      "disabled": "crwdns12638:0crwdne12638:0",
+      "prependIcon": "crwdns12640:0crwdne12640:0"
+    }
+  }
+}
