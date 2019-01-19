@@ -16,6 +16,9 @@ import Sizeable from '../../mixins/sizeable'
 // Directives
 import Ripple from '../../directives/ripple'
 
+// Utiles
+import { deprecate } from '../../util/console'
+
 /* @vue/component */
 export default mixins(
   Colorable,
@@ -32,6 +35,7 @@ export default mixins(
     disabled: Boolean,
     label: Boolean,
     outline: Boolean,
+    outlined: Boolean,
     ripple: [Object, Boolean],
     // Used for selects/tagging
     selected: Boolean,
@@ -48,11 +52,14 @@ export default mixins(
         'v-chip--disabled': this.disabled,
         'v-chip--selected': this.selected && !this.disabled,
         'v-chip--label': this.label,
-        'v-chip--outline': this.outline,
+        'v-chip--outlined': this.hasOutline,
         'v-chip--removable': this.close,
         ...this.themeClasses,
         ...this.sizeableClasses
       }
+    },
+    hasOutline (): boolean {
+      return this.outline || this.outlined
     }
   },
 
@@ -80,6 +87,10 @@ export default mixins(
         this.close && this.genClose()
       ])
     }
+  },
+
+  created () {
+    if (this.outline) deprecate('outline', 'outlined', this)
   },
 
   render (h): VNode {
