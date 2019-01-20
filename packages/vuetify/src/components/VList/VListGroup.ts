@@ -109,10 +109,6 @@ export default mixins<options &
     }
   },
 
-  beforeMount () {
-    this.list.register(this)
-  },
-
   beforeDestroy () {
     this.list.unregister(this._uid)
   },
