@@ -8,7 +8,9 @@
 
 <script>
   export default {
-    name: 'CoreTitle',
-    props: [ 'center' ]
+    name: 'CoreSection',
+    props: {
+      center: Boolean
+    }
   }
 </script>
