@@ -1,9 +1,9 @@
 <template>
   <v-container>
     <v-layout column>
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Simple
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout justify-space-around>
           <v-tooltip left>
@@ -52,9 +52,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Programmatic visibility control
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           flex
@@ -101,9 +101,3 @@
     })
   }
 </script>
-
-<style scoped>
-.center {
-  align-self: center;
-}
-</style>

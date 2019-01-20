@@ -1,9 +1,9 @@
 <template>
   <v-container>
     <v-layout column>
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         In list
-      </h3>
+      </core-title>
       <v-flex>
         <v-list two-line>
           <template v-for="index in 5">
@@ -24,9 +24,9 @@
         </v-list>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Vertical
-      </h3>
+      </core-title>
       <v-flex>
         <v-toolbar
           color="purple"
@@ -70,9 +70,9 @@
         </v-toolbar>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Vertical
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout justify-center>
           <v-flex
@@ -207,9 +207,3 @@
     })
   }
 </script>
-
-<style scoped>
-.center {
-  align-self: center;
-}
-</style>

@@ -2,10 +2,8 @@
   <v-container>
     <v-layout column>
       <!-- Dense -->
+      <core-title>Dense</core-title>
       <v-flex>
-        <h3 class="title grey--text text-xs-center mb-4 mt-5">
-          Dense
-        </h3>
         <v-alert
           type="success"
           dense
@@ -35,10 +33,8 @@
         </v-alert>
       </v-flex>
       <!-- Default -->
+      <core-title>Default</core-title>
       <v-flex>
-        <h3 class="title grey--text text-xs-center mb-4 mt-5">
-          Default
-        </h3>
         <v-alert
           type="success"
         >
@@ -64,10 +60,8 @@
         </v-alert>
       </v-flex>
       <!-- Prominent -->
+      <core-title>Prominent</core-title>
       <v-flex>
-        <h3 class="title grey--text text-xs-center mb-4 mt-5">
-          Prominent
-        </h3>
         <v-alert
           type="success"
           prominent
@@ -97,10 +91,8 @@
         </v-alert>
       </v-flex>
       <!-- Border -->
+      <core-title>Border</core-title>
       <v-flex>
-        <h3 class="title grey--text text-xs-center mb-4 mt-5">
-          Border
-        </h3>
         <v-alert
           type="success"
           border="top"
@@ -130,10 +122,8 @@
         </v-alert>
       </v-flex>
       <!-- Colored Border -->
+      <core-title>Colored Border</core-title>
       <v-flex>
-        <h3 class="title grey--text text-xs-center mb-4 mt-5">
-          Colored Border
-        </h3>
         <v-alert
           type="success"
           border="right"
@@ -166,11 +156,9 @@
           This is an error alert.
         </v-alert>
       </v-flex>
-      <!-- Prominent outline -->
+      <!-- Dense outline -->
+      <core-title>Dense outline</core-title>
       <v-flex>
-        <h3 class="title grey--text text-xs-center mb-4 mt-5">
-          Dense outline
-        </h3>
         <v-alert
           type="success"
           dense
@@ -204,10 +192,8 @@
         </v-alert>
       </v-flex>
       <!-- Outline -->
+      <core-title>Outline</core-title>
       <v-flex>
-        <h3 class="title grey--text text-xs-center mb-4 mt-5">
-          Outline
-        </h3>
         <v-alert
           type="success"
           outlined
@@ -237,10 +223,8 @@
         </v-alert>
       </v-flex>
       <!-- Prominent outline -->
+      <core-title>Prominent outline</core-title>
       <v-flex>
-        <h3 class="title grey--text text-xs-center mb-4 mt-5">
-          Prominent outline
-        </h3>
         <v-alert
           type="success"
           prominent
@@ -274,10 +258,8 @@
         </v-alert>
       </v-flex>
       <!-- Dense Text -->
+      <core-title>Dense Text</core-title>
       <v-flex>
-        <h3 class="title grey--text text-xs-center mb-4 mt-5">
-          Dense Text
-        </h3>
         <v-alert
           type="success"
           dense
@@ -311,10 +293,8 @@
         </v-alert>
       </v-flex>
       <!-- Text -->
+      <core-title>Text</core-title>
       <v-flex>
-        <h3 class="title grey--text text-xs-center mb-4 mt-5">
-          Text
-        </h3>
         <v-alert
           type="success"
           text
@@ -344,10 +324,8 @@
         </v-alert>
       </v-flex>
       <!-- Prominent Text -->
+      <core-title>Prominent Text</core-title>
       <v-flex>
-        <h3 class="title grey--text text-xs-center mb-4 mt-5">
-          Prominent Text
-        </h3>
         <v-alert
           type="success"
           prominent
@@ -381,10 +359,8 @@
         </v-alert>
       </v-flex>
       <!-- Closable -->
+      <core-title>Closable</core-title>
       <v-flex>
-        <h3 class="title grey--text text-xs-center mb-4 mt-5">
-          Closable
-        </h3>
         <v-alert
           v-model="alertClosable"
           dismissible
@@ -409,10 +385,8 @@
         </div>
       </v-flex>
       <!-- Custom icons -->
+      <core-title>Custom icons</core-title>
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Custom icons
-        </h3>
         <v-alert
           color="purple"
           dark
@@ -429,10 +403,8 @@
         </v-alert>
       </v-flex>
       <!-- CSS Transitions -->
+      <core-title>Custom transitions</core-title>
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Custom transitions
-        </h3>
         <div class="text-xs-center">
           <v-btn
             class="mb-3"
@@ -451,10 +423,8 @@
         </v-alert>
       </v-flex>
       <!-- Slots -->
+      <core-title>Slots</core-title>
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Slots
-        </h3>
         <v-alert
           v-model="alertTransition2"
           class="mb-0"
@@ -499,10 +469,9 @@
         </div>
       </v-flex>
 
+      <!-- Closable with outline -->
+      <core-title>Closable with outline</core-title>
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Closable with outline
-        </h3>
         <v-alert
           v-model="alertOutline"
           dismissible
@@ -550,10 +519,9 @@
         </div>
       </v-flex>
 
+      <!-- Custom icons with outline -->
+      <core-title>Custom icons with outline</core-title>
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Custom icons with outline
-        </h3>
         <v-alert
           :value="true"
           color="success"

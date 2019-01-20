@@ -1,9 +1,9 @@
 <template>
   <v-container>
     <v-layout column>
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Styles
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout wrap>
           <v-flex
@@ -106,9 +106,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Single line
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -163,9 +163,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Disabled and read-only
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -275,9 +275,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Icons
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -386,9 +386,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Clearable
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -454,9 +454,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Custom icon slots
-      </h3>
+      </core-title>
       <v-flex>
         <v-text-field
           v-model="message5"
@@ -519,9 +519,9 @@
         </v-text-field>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Colored icons using slots
-      </h3>
+      </core-title>
       <v-flex>
         <v-text-field
           v-model="message6"
@@ -554,9 +554,9 @@
         </v-text-field>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Label slot
-      </h3>
+      </core-title>
       <v-flex>
         <v-text-field>
           <template slot="label">
@@ -567,9 +567,9 @@
         </v-text-field>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Character counter
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -634,9 +634,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Password input
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -714,9 +714,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Password input
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -750,9 +750,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Full-width
-      </h3>
+      </core-title>
       <v-flex>
         <v-card>
           <v-toolbar
@@ -799,9 +799,9 @@
         </v-card>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Hints
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -885,9 +885,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Box design
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -919,9 +919,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Solo design
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -953,9 +953,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Outline design
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -987,9 +987,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Prefixes and suffixes
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout row>
           <v-flex xs4>
@@ -1045,9 +1045,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Mask
-      </h3>
+      </core-title>
       <v-flex>
         <v-card>
           <v-card-text>
@@ -1066,9 +1066,9 @@
         </v-card>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Loading
-      </h3>
+      </core-title>
       <v-flex>
         <v-text-field
           v-model="value1"
@@ -1079,9 +1079,9 @@
         />
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Progress
-      </h3>
+      </core-title>
       <v-flex>
         <v-text-field
           v-model="value2"
@@ -1173,9 +1173,3 @@
     }
   }
 </script>
-
-<style scoped>
-.center {
-  align-self: center;
-}
-</style>

@@ -4,9 +4,9 @@
       column
       variations
     >
-      <h3 class="title grey--text mb-4 mt-5">
+      <core-title>
         Normal
-      </h3>
+      </core-title>
       <v-flex>
         <v-btn small>
           Normal
@@ -67,9 +67,9 @@
           Disabled
         </v-btn>
       </v-flex>
-      <h3 class="title grey--text mb-4 mt-5">
+      <core-title>
         Flat
-      </h3>
+      </core-title>
       <v-flex>
         <v-btn
           flat
@@ -153,9 +153,9 @@
           Disabled
         </v-btn>
       </v-flex>
-      <h3 class="title grey--text mb-4 mt-5">
+      <core-title>
         Depressed
-      </h3>
+      </core-title>
       <v-flex>
         <v-btn
           depressed
@@ -239,9 +239,9 @@
           Disabled
         </v-btn>
       </v-flex>
-      <h3 class="title grey--text mb-4 mt-5">
+      <core-title>
         Rounded
-      </h3>
+      </core-title>
       <v-flex>
         <v-btn
           round
@@ -325,9 +325,9 @@
           Disabled
         </v-btn>
       </v-flex>
-      <h3 class="title grey--text mb-4 mt-5">
+      <core-title>
         Outline
-      </h3>
+      </core-title>
       <v-flex>
         <v-btn
           outline
@@ -411,9 +411,9 @@
           Disabled
         </v-btn>
       </v-flex>
-      <h3 class="title grey--text mb-4 mt-5">
+      <core-title>
         Rounded with Outline
-      </h3>
+      </core-title>
       <v-flex>
         <v-btn
           outline
@@ -887,9 +887,9 @@
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
       </v-flex>
-      <h3 class="title grey--text mb-4 mt-5">
+      <core-title>
         Outline FAB
-      </h3>
+      </core-title>
       <v-flex>
         <v-btn
           outline
@@ -987,9 +987,9 @@
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
       </v-flex>
-      <h3 class="title grey--text mb-4 mt-5">
+      <core-title>
         Left & right icons, loader
-      </h3>
+      </core-title>
       <v-flex>
         <v-btn
           :disabled="loading"
@@ -1036,9 +1036,9 @@
           </v-icon>
         </v-btn>
       </v-flex>
-      <h3 class="title grey--text mb-4 mt-5">
+      <core-title>
         Left & right icons, loader with outline
-      </h3>
+      </core-title>
       <v-flex>
         <v-btn
           :loading="loading"
@@ -1087,9 +1087,9 @@
           </v-icon>
         </v-btn>
       </v-flex>
-      <h3 class="title grey--text mb-4 mt-5">
+      <core-title>
         Block
-      </h3>
+      </core-title>
       <v-flex>
         <v-btn
           block
@@ -1173,9 +1173,9 @@
           Disabled
         </v-btn>
       </v-flex>
-      <h3 class="title grey--text mb-4 mt-5">
+      <core-title>
         Block with Outline
-      </h3>
+      </core-title>
       <v-flex>
         <v-btn
           outline
@@ -1273,9 +1273,9 @@
           Disabled
         </v-btn>
       </v-flex>
-      <h3 class="title grey--text mb-4 mt-5">
+      <core-title>
         Elevation
-      </h3>
+      </core-title>
       <v-flex>
         <v-btn
           elevation="6"
@@ -1403,9 +1403,9 @@
       </v-btn>
     </v-layout>
 
-    <h3 class="title grey--text mb-4 mt-5">
+    <core-title>
       Groups
-    </h3>
+    </core-title>
     <v-layout
       groups
       column

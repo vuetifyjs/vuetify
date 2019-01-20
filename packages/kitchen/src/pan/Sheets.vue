@@ -1,9 +1,9 @@
 <template>
   <v-container>
     <v-layout column>
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Elevation
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           justify-space-around
@@ -29,9 +29,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Colors
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           justify-space-around
@@ -56,9 +56,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Sizes
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           justify-space-around
@@ -123,9 +123,3 @@
     })
   }
 </script>
-
-<style scoped>
-.center {
-  align-self: center;
-}
-</style>

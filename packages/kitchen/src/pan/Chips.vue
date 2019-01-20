@@ -4,10 +4,10 @@
       column
       variations
     >
+      <core-title>
+        Simple
+      </core-title>
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Simple
-        </h3>
         <v-layout
           align-center
           justify-space-around
@@ -35,10 +35,10 @@
         </v-layout>
       </v-flex>
 
+      <core-title>
+        Colors
+      </core-title>
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Colors
-        </h3>
         <v-layout
           align-center
           justify-space-around
@@ -74,10 +74,10 @@
         </v-layout>
       </v-flex>
 
+      <core-title>
+        With icons
+      </core-title>
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          With icons
-        </h3>
         <v-layout
           align-center
           justify-space-around
@@ -136,10 +136,10 @@
         </v-layout>
       </v-flex>
 
+      <core-title>
+        Outline
+      </core-title>
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Outline
-        </h3>
         <v-layout
           align-center
           justify-space-around
@@ -170,10 +170,10 @@
         </v-layout>
       </v-flex>
 
+      <core-title>
+        Labels
+      </core-title>
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Labels
-        </h3>
         <v-layout
           align-center
           justify-space-around
@@ -203,10 +203,10 @@
         </v-layout>
       </v-flex>
 
+      <core-title>
+        Closable
+      </core-title>
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Closable
-        </h3>
         <v-layout
           align-center
           justify-space-around

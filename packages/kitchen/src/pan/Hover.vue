@@ -1,9 +1,9 @@
 <template>
   <v-container>
     <v-layout column>
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Simple hover
-      </h3>
+      </core-title>
       <v-flex>
         <v-hover>
           <v-sheet slot-scope="{ hover }">
@@ -12,9 +12,9 @@
         </v-hover>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Disabled
-      </h3>
+      </core-title>
       <v-flex>
         <v-hover disabled>
           <v-sheet slot-scope="{ hover }">
@@ -23,9 +23,9 @@
         </v-hover>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         With delay
-      </h3>
+      </core-title>
       <v-flex>
         <v-hover
           open-delay="100"
@@ -47,9 +47,3 @@
     data: () => ({})
   }
 </script>
-
-<style scoped>
-.center {
-  align-self: center;
-}
-</style>

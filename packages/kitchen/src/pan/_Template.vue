@@ -1,9 +1,7 @@
 <template>
   <v-container>
     <v-layout column>
-      <h3 class="title grey--text mb-4 mt-5 center">
-        Title
-      </h3>
+      <core-title>Title</core-title>
       <v-flex>
         Content
       </v-flex>
@@ -18,9 +16,3 @@
     data: () => ({})
   }
 </script>
-
-<style scoped>
-.center {
-  align-self: center;
-}
-</style>

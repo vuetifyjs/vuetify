@@ -4,10 +4,8 @@
       column
       variations
     >
+      <core-title>Round</core-title>
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Round
-        </h3>
         <v-layout
           justify-space-around
           align-center
@@ -39,10 +37,9 @@
           </v-avatar>
         </v-layout>
       </v-flex>
+
+      <core-title>Tile</core-title>
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Tile
-        </h3>
         <v-layout
           justify-space-around
           align-center
@@ -78,10 +75,9 @@
           </v-avatar>
         </v-layout>
       </v-flex>
+
+      <core-title>With icons</core-title>
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          With icons
-        </h3>
         <v-layout
           align-center
           justify-space-around
@@ -121,10 +117,9 @@
           </v-avatar>
         </v-layout>
       </v-flex>
+
+      <core-title>With images</core-title>
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          With images
-        </h3>
         <v-layout
           align-center
           justify-space-around
@@ -156,10 +151,9 @@
           </v-avatar>
         </v-layout>
       </v-flex>
+
+      <core-title>With badges</core-title>
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          With badges
-        </h3>
         <v-layout
           align-center
           justify-space-around
@@ -223,10 +217,9 @@
           </v-badge>
         </v-layout>
       </v-flex>
+
+      <core-title>With letters</core-title>
       <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          With letters
-        </h3>
         <v-layout
           align-center
           justify-space-around
@@ -317,9 +310,3 @@
     })
   }
 </script>
-
-<style scoped>
-.flex {
-  margin-top: 2rem;
-}
-</style>

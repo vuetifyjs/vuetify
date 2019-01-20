@@ -1,16 +1,16 @@
 <template>
   <v-container>
     <v-layout column>
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Basic
-      </h3>
+      </core-title>
       <v-flex>
         <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material.jpg" />
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         With content
-      </h3>
+      </core-title>
       <v-flex>
         <v-parallax
           dark
@@ -31,9 +31,9 @@
         </v-parallax>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Custom height
-      </h3>
+      </core-title>
       <v-flex>
         <v-parallax
           height="300"
@@ -62,9 +62,5 @@
 <style scoped>
 .flex {
   margin-top: 2rem;
-}
-
-.center {
-  align-self: center;
 }
 </style>

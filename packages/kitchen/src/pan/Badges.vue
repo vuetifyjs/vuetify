@@ -1,9 +1,9 @@
 <template>
   <v-container>
     <v-layout column>
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Left
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout justify-space-around>
           <v-badge left>
@@ -41,9 +41,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Right
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout justify-space-around>
           <v-badge right>
@@ -81,9 +81,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Color
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout justify-space-around>
           <v-badge
@@ -172,9 +172,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Overlap
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout justify-space-around>
           <v-badge
@@ -221,9 +221,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Visibility control
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           flex
@@ -277,9 +277,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Custom transition
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           flex
@@ -335,9 +335,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Icons
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout justify-space-around>
           <v-badge
@@ -409,9 +409,3 @@
     })
   }
 </script>
-
-<style scoped>
-.center {
-  align-self: center;
-}
-</style>

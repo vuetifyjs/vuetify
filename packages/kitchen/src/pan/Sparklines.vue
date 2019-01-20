@@ -1,9 +1,9 @@
 <template>
   <v-container>
     <v-layout column>
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Basic
-      </h3>
+      </core-title>
       <v-flex>
         <v-sparkline
           :value="value"
@@ -11,9 +11,9 @@
         />
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Gradient
-      </h3>
+      </core-title>
       <v-flex>
         <v-sparkline
           :value="value"
@@ -26,9 +26,9 @@
         />
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         With labels
-      </h3>
+      </core-title>
       <v-flex>
         <v-sparkline
           :labels="labels"
@@ -69,9 +69,3 @@
     })
   }
 </script>
-
-<style scoped>
-.center {
-  align-self: center;
-}
-</style>

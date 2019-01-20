@@ -23,19 +23,19 @@
           justify-space-around
           align-center
         >
+          <core-title>
+            Default
+          </core-title>
           <v-flex text-xs-center>
-            <h3 class="title grey--text mb-4 mt-5 center">
-              Default
-            </h3>
             <v-date-picker
               v-model="model"
               :landscape="landscape"
             />
           </v-flex>
+          <core-title>
+            With week number
+          </core-title>
           <v-flex text-xs-center>
-            <h3 class="title grey--text mb-4 mt-5 center">
-              With week number
-            </h3>
             <v-date-picker
               v-model="model"
               :landscape="landscape"
@@ -45,9 +45,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Landscape
-      </h3>
+      </core-title>
       <v-flex align-self-center>
         <v-date-picker
           v-model="model"
@@ -63,9 +63,9 @@
           align-center
         >
           <v-flex text-xs-center>
-            <h3 class="title grey--text mb-4 mt-5 center">
+            <core-title>
               Readonly
-            </h3>
+            </core-title>
             <v-date-picker
               v-model="model"
               :landscape="landscape"
@@ -73,9 +73,9 @@
             />
           </v-flex>
           <v-flex text-xs-center>
-            <h3 class="title grey--text mb-4 mt-5 center">
+            <core-title>
               Disabled
-            </h3>
+            </core-title>
             <v-date-picker
               v-model="model"
               :landscape="landscape"
@@ -83,9 +83,9 @@
             />
           </v-flex>
           <v-flex text-xs-center>
-            <h3 class="title grey--text mb-4 mt-5 center">
+            <core-title>
               Reactive
-            </h3>
+            </core-title>
             <v-date-picker
               v-model="model"
               :landscape="landscape"
@@ -95,9 +95,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Color
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -126,9 +126,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Header colors
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -157,9 +157,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Using header colors with colors
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -199,9 +199,9 @@
           align-center
         >
           <v-flex text-xs-center>
-            <h3 class="title grey--text mb-4 mt-5 center">
+            <core-title>
               Allowed dates: min/max
-            </h3>
+            </core-title>
             <v-date-picker
               v-model="modelMM"
               :landscape="landscape"
@@ -210,9 +210,9 @@
             />
           </v-flex>
           <v-flex text-xs-center>
-            <h3 class="title grey--text mb-4 mt-5 center">
+            <core-title>
               Allowed dates: function
-            </h3>
+            </core-title>
             <v-date-picker
               v-model="modelMM"
               :landscape="landscape"
@@ -222,9 +222,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Mulitple dates selection
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           column
@@ -249,9 +249,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Custom width
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -281,9 +281,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Full width
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -300,9 +300,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Events
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -334,9 +334,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         i18n
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -361,9 +361,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Custom icons
-      </h3>
+      </core-title>
       <v-flex align-self-center>
         <v-date-picker
           v-model="model"
@@ -374,9 +374,9 @@
         />
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Current day indicator
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -426,9 +426,3 @@
     }
   }
 </script>
-
-<style scoped>
-.center {
-  align-self: center;
-}
-</style>

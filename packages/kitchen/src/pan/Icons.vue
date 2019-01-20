@@ -1,9 +1,9 @@
 <template>
   <v-container>
     <v-layout column>
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Basic
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           justify-space-around
@@ -140,9 +140,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Colors
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           justify-space-around
@@ -326,9 +326,5 @@
   display: flex;
   flex: 1;
   justify-content: space-around;
-}
-
-.center {
-  align-self: center;
 }
 </style>

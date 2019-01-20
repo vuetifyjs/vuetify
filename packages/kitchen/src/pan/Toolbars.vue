@@ -1,9 +1,9 @@
 <template>
   <v-container>
     <v-layout column>
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Simple usage
-      </h3>
+      </core-title>
       <v-flex>
         <v-toolbar>
           <v-toolbar-side-icon />
@@ -23,9 +23,9 @@
         </v-toolbar>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Colors
-      </h3>
+      </core-title>
       <v-flex>
         <v-toolbar color="primary lighten-2">
           <v-toolbar-side-icon />
@@ -63,9 +63,9 @@
         </v-toolbar>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         App bar with icons
-      </h3>
+      </core-title>
       <v-flex>
         <v-toolbar
           dark
@@ -97,9 +97,9 @@
         </v-toolbar>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         App bar with items
-      </h3>
+      </core-title>
       <v-flex>
         <v-toolbar>
           <v-spacer />
@@ -118,9 +118,9 @@
         </v-toolbar>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         App bar with extension
-      </h3>
+      </core-title>
       <v-flex>
         <v-toolbar
           color="primary"
@@ -156,9 +156,9 @@
         </v-toolbar>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Using with cards
-      </h3>
+      </core-title>
       <v-flex>
         <v-card flat>
           <v-toolbar
@@ -211,9 +211,9 @@
         </v-card>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Floating
-      </h3>
+      </core-title>
       <v-flex>
         <v-card
           class="pa-3"
@@ -242,9 +242,9 @@
         </v-card>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Themes
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -285,9 +285,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Prominent
-      </h3>
+      </core-title>
       <v-flex>
         <v-toolbar
           prominent
@@ -313,9 +313,9 @@
         </v-toolbar>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Dense (48px)
-      </h3>
+      </core-title>
       <v-flex>
         <v-toolbar dense>
           <v-toolbar-side-icon />
@@ -338,9 +338,9 @@
         </v-toolbar>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         With menu
-      </h3>
+      </core-title>
       <v-flex>
         <v-toolbar
           color="grey darken-1"
@@ -382,9 +382,9 @@
         </v-toolbar>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         System / window bar
-      </h3>
+      </core-title>
       <v-flex>
         <div>
           <v-subheader>Light status bar</v-subheader>
@@ -491,10 +491,6 @@
 </script>
 
 <style scoped>
-.center {
-  align-self: center;
-}
-
 .card--flex-toolbar {
   margin-top: -64px;
 }

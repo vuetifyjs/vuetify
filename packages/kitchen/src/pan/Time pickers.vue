@@ -1,16 +1,16 @@
 <template>
   <v-container>
     <v-layout column>
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Default
-      </h3>
+      </core-title>
       <v-flex align-self-center>
         <v-time-picker value="9:41" />
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Landscape
-      </h3>
+      </core-title>
       <v-flex align-self-center>
         <v-time-picker
           value="9:41"
@@ -18,9 +18,9 @@
         />
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Disabled
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -39,9 +39,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Colors
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -91,9 +91,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         24 hour format
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -113,9 +113,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Disabled with 24 hour format
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -137,9 +137,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         In dialog
-      </h3>
+      </core-title>
       <v-flex align-self-center>
         <v-dialog
           ref="dialog"
@@ -182,9 +182,9 @@
         </v-dialog>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         In menu
-      </h3>
+      </core-title>
       <v-flex align-self-center>
         <v-menu
           ref="menu"
@@ -215,9 +215,9 @@
         </v-menu>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Allowed hours
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -248,9 +248,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Allowed minutes
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -281,9 +281,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Allowed hours & minutes
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -317,9 +317,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Custom width
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -369,9 +369,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Full width
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout column>
           <v-time-picker
@@ -388,9 +388,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         With seconds
-      </h3>
+      </core-title>
       <v-flex align-self-center>
         <v-time-picker
           value="9:41:14"
@@ -398,9 +398,9 @@
         />
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Allowed seconds
-      </h3>
+      </core-title>
       <v-flex align-self-center>
         <v-time-picker
           value="9:41:14"
@@ -424,9 +424,3 @@
     })
   }
 </script>
-
-<style scoped>
-.center {
-  align-self: center;
-}
-</style>

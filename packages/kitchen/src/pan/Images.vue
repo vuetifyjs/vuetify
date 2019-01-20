@@ -1,9 +1,9 @@
 <template>
   <v-container>
     <v-layout column>
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Simple images
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout>
           <v-img
@@ -17,9 +17,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Custom aspect ratio
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout>
           <v-img
@@ -33,9 +33,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         With custom placeholder
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout>
           <v-img
@@ -63,9 +63,9 @@
       </v-flex>
     </v-layout>
 
-    <h3 class="title grey--text mb-4 mt-5 center">
+    <core-title>
       Contain
-    </h3>
+    </core-title>
     <v-flex>
       <v-layout>
         <v-flex>
@@ -101,9 +101,9 @@
       </v-layout>
     </v-flex>
 
-    <h3 class="title grey--text mb-4 mt-5 center">
+    <core-title>
       Gradient
-    </h3>
+    </core-title>
     <v-flex>
       <v-layout>
         <v-flex>
@@ -138,10 +138,6 @@
 </script>
 
 <style scoped>
-.center {
-  align-self: center;
-}
-
 .bottom-gradient {
   background-image: linear-gradient(to top, rgba(0, 0, 0, 0.4) 0%, transparent 72px);
 }

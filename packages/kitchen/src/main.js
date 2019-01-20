@@ -3,8 +3,11 @@ import './plugins/vuetify'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import CoreTitle from '@/components/CoreTitle.vue'
 
 Vue.config.productionTip = false
+
+Vue.component('CoreTitle', CoreTitle)
 
 new Vue({
   router,

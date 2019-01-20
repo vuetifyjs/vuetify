@@ -1,9 +1,9 @@
 <template>
   <v-container>
     <v-layout column>
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         File tree
-      </h3>
+      </core-title>
       <v-flex>
         <v-treeview
           v-model="tree1"
@@ -27,9 +27,9 @@
         </v-treeview>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Async data loading
-      </h3>
+      </core-title>
       <v-flex>
         <v-card>
           <v-card-title class="indigo white--text headline">
@@ -151,9 +151,9 @@
         </v-card>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Prepend & append slots
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -389,9 +389,3 @@
     }
   }
 </script>
-
-<style scoped>
-.center {
-  align-self: center;
-}
-</style>

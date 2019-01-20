@@ -1,16 +1,16 @@
 <template>
   <v-container>
     <v-layout column>
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Simple
-      </h3>
+      </core-title>
       <v-flex align-self-center>
         <v-rating value="3" />
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Dense
-      </h3>
+      </core-title>
       <v-flex align-self-center>
         <v-rating
           value="3"
@@ -18,9 +18,9 @@
         />
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Colors
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -41,9 +41,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Background colors
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -64,9 +64,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Colors & background colors
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -90,9 +90,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Sizes
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           column
@@ -142,9 +142,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Dense with different sizes
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           column
@@ -201,9 +201,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Custom length
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -224,9 +224,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Hover
-      </h3>
+      </core-title>
       <v-flex align-self-center>
         <v-rating
           value="2"
@@ -234,9 +234,9 @@
         />
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Readonly
-      </h3>
+      </core-title>
       <v-flex>
         <v-layout
           row
@@ -257,9 +257,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Half-increment
-      </h3>
+      </core-title>
       <v-flex align-self-center>
         <v-rating
           value="1.5"
@@ -267,9 +267,9 @@
         />
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Half-increment & hover
-      </h3>
+      </core-title>
       <v-flex align-self-center>
         <v-rating
           value="3.5"
@@ -278,9 +278,9 @@
         />
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Custom icons
-      </h3>
+      </core-title>
       <v-flex align-self-center>
         <v-rating
           value="4.5"
@@ -291,9 +291,9 @@
         />
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Custom icons & color
-      </h3>
+      </core-title>
       <v-flex align-self-center>
         <v-rating
           value="3.5"
@@ -306,9 +306,9 @@
         />
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Scoped slots
-      </h3>
+      </core-title>
       <v-flex align-self-center>
         <v-rating value="2">
           <v-icon
@@ -323,9 +323,9 @@
         </v-rating>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Usage with cards
-      </h3>
+      </core-title>
       <v-flex>
         <v-card
           class="mx-auto elevation-20"
@@ -388,9 +388,3 @@
     })
   }
 </script>
-
-<style scoped>
-.center {
-  align-self: center;
-}
-</style>
