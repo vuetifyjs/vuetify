@@ -99,7 +99,7 @@ export default mixins<options &
   },
 
   mounted () {
-    this.list.register(this._uid, this.toggle)
+    this.list.register(this)
 
     if (this.group &&
       this.$route &&
