@@ -7,7 +7,15 @@ export default mixins(
 ).extend({
   name: 'v-slide-item',
 
+  props: {
+    value: {
+      required: false
+    }
+  },
+
   render (h) {
-    return h('div', this.$slots.default)
+    return h('div', {
+      staticClass: 'v-slide-item'
+    }, this.$slots.default)
   }
 })
