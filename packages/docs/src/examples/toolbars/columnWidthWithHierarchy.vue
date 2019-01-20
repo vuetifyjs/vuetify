@@ -1,17 +1,10 @@
 <template>
   <v-card flat>
     <v-container fluid>
-      <v-layout
-        row
-        child-flex
-        wrap
-      >
+      <v-layout row child-flex wrap>
         <div>
           <v-toolbar>
-            <v-btn
-              icon
-              class="hidden-xs-only"
-            >
+            <v-btn icon class="hidden-xs-only">
               <v-icon>arrow_back</v-icon>
             </v-btn>
 
@@ -19,10 +12,7 @@
 
             <v-spacer></v-spacer>
 
-            <v-btn
-              icon
-              class="hidden-xs-only"
-            >
+            <v-btn icon class="hidden-xs-only">
               <v-icon>search</v-icon>
             </v-btn>
           </v-toolbar>

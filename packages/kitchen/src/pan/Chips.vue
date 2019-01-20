@@ -264,14 +264,14 @@
 </template>
 
 <script>
-export default {
-  name: 'Chips',
+  export default {
+    name: 'Chips',
 
-  data: () => ({
-    chip1: true,
-    chip2: true,
-    chip3: true,
-    chip4: true
-  })
-}
+    data: () => ({
+      chip1: true,
+      chip2: true,
+      chip3: true,
+      chip4: true
+    })
+  }
 </script>

@@ -40,10 +40,7 @@
           class="v-tabs__div"
           left
         >
-          <a
-            slot="activator"
-            class="v-tabs__item"
-          >
+          <a slot="activator" class="v-tabs__item">
             more
             <v-icon>arrow_drop_down</v-icon>
           </a>

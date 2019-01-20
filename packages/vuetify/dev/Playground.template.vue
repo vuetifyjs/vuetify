@@ -1,7 +1,7 @@
 <template>
-  <boilerplate>
+  <v-container>
     <!--  -->
-  </boilerplate>
+  </v-container>
 </template>
 
 <script>

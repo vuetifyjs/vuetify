@@ -20,17 +20,8 @@
         slot="item"
         slot-scope="{ item }"
       >
-        <v-flex
-          xs12
-          grey
-          lighten-2
-          mt-2
-        >
-          <v-layout
-            wrap
-            px-2
-            py-1
-          >
+        <v-flex xs12 grey lighten-2 mt-2>
+          <v-layout wrap px-2 py-1>
             <v-flex
               v-for="(header, i) in headers"
               :key="header.value"
@@ -69,11 +60,7 @@
             pa-2
             wrap
           >
-            <v-flex
-              grey--text
-              text--darken-3
-              xs12
-            >
+            <v-flex grey--text text--darken-3 xs12>
               <doc-markdown
                 :code="item.description"
                 class="justify"
@@ -85,9 +72,7 @@
                 class="mt-2 mb-0"
                 lang="ts"
                 value="example"
-              >
-                {{ genTypescriptDef(item.example) }}
-              </doc-markup>
+              >{{ genTypescriptDef(item.example) }}</doc-markup>
             </v-flex>
           </v-layout>
         </v-flex>
@@ -210,7 +195,7 @@
           str.indexOf('Components.') > -1
         )
       },
-      /* eslint-disable max-statements */
+      /* eslint-disable-next-line max-statements */
       genDescription (name, item) {
         let description = ''
         let devPrepend = ''

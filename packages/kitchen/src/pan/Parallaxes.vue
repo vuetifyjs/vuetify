@@ -52,11 +52,11 @@
 </template>
 
 <script>
-export default {
-  name: 'Parallaxes',
+  export default {
+    name: 'Parallaxes',
 
-  data: () => ({})
-}
+    data: () => ({})
+  }
 </script>
 
 <style scoped>

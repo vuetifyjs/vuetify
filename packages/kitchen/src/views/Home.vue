@@ -33,16 +33,16 @@
 </template>
 
 <script>
-import meals from '../pan'
+  import meals from '../pan'
 
-export default {
-  name: 'Home',
+  export default {
+    name: 'Home',
 
-  data: () => ({
-    meals,
-    meal: ''
-  })
-}
+    data: () => ({
+      meals,
+      meal: ''
+    })
+  }
 </script>
 
 <style scoped>

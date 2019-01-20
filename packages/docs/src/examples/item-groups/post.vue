@@ -9,11 +9,7 @@
     </v-toolbar>
 
     <v-card-text>
-      <v-text-field
-        box
-        label="Title"
-        value="My new post"
-      ></v-text-field>
+      <v-text-field box label="Title" value="My new post"></v-text-field>
 
       <v-textarea
         box
