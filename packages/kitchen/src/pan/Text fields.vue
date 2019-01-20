@@ -4,7 +4,7 @@
       <core-title>
         Styles
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout wrap>
           <v-flex
             xs12
@@ -104,12 +104,12 @@
             />
           </v-flex>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Single line
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -161,12 +161,12 @@
             />
           </v-flex>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Disabled and read-only
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -273,12 +273,12 @@
             />
           </v-flex>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Icons
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -384,12 +384,12 @@
             />
           </v-flex>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Clearable
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -452,12 +452,12 @@
             Reset
           </v-btn>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Custom icon slots
       </core-title>
-      <v-flex>
+      <core-section>
         <v-text-field
           v-model="message5"
           outline
@@ -517,12 +517,12 @@
             </v-card>
           </v-menu>
         </v-text-field>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Colored icons using slots
       </core-title>
-      <v-flex>
+      <core-section>
         <v-text-field
           v-model="message6"
           outline
@@ -552,12 +552,12 @@
             mdi-account
           </v-icon>
         </v-text-field>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Label slot
       </core-title>
-      <v-flex>
+      <core-section>
         <v-text-field>
           <template slot="label">
             What about <strong>icon</strong> here? <v-icon style="vertical-align: middle">
@@ -565,12 +565,12 @@
             </v-icon>
           </template>
         </v-text-field>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Character counter
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -632,12 +632,12 @@
             />
           </v-flex>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Password input
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -712,12 +712,12 @@
             />
           </v-flex>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Password input
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -748,12 +748,12 @@
             />
           </v-flex>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Full-width
       </core-title>
-      <v-flex>
+      <core-section>
         <v-card>
           <v-toolbar
             card
@@ -797,12 +797,12 @@
             />
           </v-form>
         </v-card>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Hints
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -883,12 +883,12 @@
             />
           </v-flex>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Box design
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -917,12 +917,12 @@
             />
           </v-flex>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Solo design
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -951,12 +951,12 @@
             />
           </v-flex>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Outline design
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -985,12 +985,12 @@
             />
           </v-flex>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Prefixes and suffixes
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout row>
           <v-flex xs4>
             <v-subheader>Prefix for dollar currency</v-subheader>
@@ -1043,12 +1043,12 @@
             />
           </v-flex>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Mask
       </core-title>
-      <v-flex>
+      <core-section>
         <v-card>
           <v-card-text>
             <v-text-field
@@ -1064,12 +1064,12 @@
             />
           </v-card-text>
         </v-card>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Loading
       </core-title>
-      <v-flex>
+      <core-section>
         <v-text-field
           v-model="value1"
           color="cyan darken"
@@ -1077,12 +1077,12 @@
           placeholder="Start typing..."
           loading
         />
-      </v-flex>
+      </core-section>
 
       <core-title>
         Progress
       </core-title>
-      <v-flex>
+      <core-section>
         <v-text-field
           v-model="value2"
           :label="message"
@@ -1098,7 +1098,7 @@
             height="7"
           />
         </v-text-field>
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>

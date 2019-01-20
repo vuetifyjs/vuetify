@@ -4,7 +4,7 @@
       <core-title>
         Left
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout justify-space-around>
           <v-badge left>
             <span slot="badge">
@@ -39,12 +39,12 @@
             />
           </v-badge>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Right
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout justify-space-around>
           <v-badge right>
             <span slot="badge">
@@ -79,12 +79,12 @@
             />
           </v-badge>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Color
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout justify-space-around>
           <v-badge
             left
@@ -170,12 +170,12 @@
             />
           </v-badge>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Overlap
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout justify-space-around>
           <v-badge
             left
@@ -219,12 +219,12 @@
             />
           </v-badge>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Visibility control
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           flex
           column
@@ -275,12 +275,12 @@
             </v-badge>
           </v-flex>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Custom transition
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           flex
           column
@@ -333,12 +333,12 @@
             </v-badge>
           </v-flex>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Icons
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout justify-space-around>
           <v-badge
             left
@@ -394,7 +394,7 @@
             />
           </v-badge>
         </v-layout>
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>

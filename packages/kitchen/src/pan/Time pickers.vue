@@ -4,24 +4,24 @@
       <core-title>
         Default
       </core-title>
-      <v-flex align-self-center>
+      <core-section center>
         <v-time-picker value="9:41" />
-      </v-flex>
+      </core-section>
 
       <core-title>
         Landscape
       </core-title>
-      <v-flex align-self-center>
+      <core-section center>
         <v-time-picker
           value="9:41"
           landscape
         />
-      </v-flex>
+      </core-section>
 
       <core-title>
         Disabled
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           justify-space-around
@@ -37,12 +37,12 @@
             landscape
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Colors
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -89,12 +89,12 @@
             color="teal lighten-1"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         24 hour format
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -111,12 +111,12 @@
             format="24hr"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Disabled with 24 hour format
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -135,12 +135,12 @@
             format="24hr"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         In dialog
       </core-title>
-      <v-flex align-self-center>
+      <core-section center>
         <v-dialog
           ref="dialog"
           v-model="modal"
@@ -180,12 +180,12 @@
             </v-btn>
           </v-time-picker>
         </v-dialog>
-      </v-flex>
+      </core-section>
 
       <core-title>
         In menu
       </core-title>
-      <v-flex align-self-center>
+      <core-section center>
         <v-menu
           ref="menu"
           v-model="menu"
@@ -213,12 +213,12 @@
             @change="$refs.menu.save(time2)"
           />
         </v-menu>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Allowed hours
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -246,12 +246,12 @@
             format="24hr"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Allowed minutes
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -279,12 +279,12 @@
             format="24hr"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Allowed hours & minutes
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -315,12 +315,12 @@
             format="24hr"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Custom width
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -367,12 +367,12 @@
             width="400"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Full width
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout column>
           <v-time-picker
             value="9:41"
@@ -386,28 +386,28 @@
             full-width
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         With seconds
       </core-title>
-      <v-flex align-self-center>
+      <core-section center>
         <v-time-picker
           value="9:41:14"
           use-seconds
         />
-      </v-flex>
+      </core-section>
 
       <core-title>
         Allowed seconds
       </core-title>
-      <v-flex align-self-center>
+      <core-section center>
         <v-time-picker
           value="9:41:14"
           use-seconds
           :allowed-seconds="v => v <= 40 && v >= 15"
         />
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>

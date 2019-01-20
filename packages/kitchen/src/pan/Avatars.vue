@@ -5,7 +5,7 @@
       variations
     >
       <core-title>Round</core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           justify-space-around
           align-center
@@ -36,10 +36,10 @@
             <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png">
           </v-avatar>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>Tile</core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           justify-space-around
           align-center
@@ -74,10 +74,10 @@
             <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png">
           </v-avatar>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>With icons</core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           align-center
           justify-space-around
@@ -116,10 +116,10 @@
             </v-icon>
           </v-avatar>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>With images</core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           align-center
           justify-space-around
@@ -150,10 +150,10 @@
             >
           </v-avatar>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>With badges</core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           align-center
           justify-space-around
@@ -216,10 +216,10 @@
             </v-avatar>
           </v-badge>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>With letters</core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           align-center
           justify-space-around
@@ -297,7 +297,7 @@
             </span>
           </v-avatar>
         </v-layout>
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>

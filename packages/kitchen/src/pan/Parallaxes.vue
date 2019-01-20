@@ -4,14 +4,14 @@
       <core-title>
         Basic
       </core-title>
-      <v-flex>
+      <core-section>
         <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material.jpg" />
-      </v-flex>
+      </core-section>
 
       <core-title>
         With content
       </core-title>
-      <v-flex>
+      <core-section>
         <v-parallax
           dark
           src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
@@ -29,24 +29,24 @@
             </h4>
           </v-layout>
         </v-parallax>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Custom height
       </core-title>
-      <v-flex>
+      <core-section>
         <v-parallax
           height="300"
           src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg"
         />
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-parallax
           height="700"
           src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg"
         />
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>

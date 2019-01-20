@@ -4,17 +4,17 @@
       <core-title>
         Basic
       </core-title>
-      <v-flex>
+      <core-section>
         <v-sparkline
           :value="value"
           auto-draw
         />
-      </v-flex>
+      </core-section>
 
       <core-title>
         Gradient
       </core-title>
-      <v-flex>
+      <core-section>
         <v-sparkline
           :value="value"
           :gradient="['#00c6ff', '#F0F', '#FF0']"
@@ -24,12 +24,12 @@
           stroke-linecap="round"
           auto-draw
         />
-      </v-flex>
+      </core-section>
 
       <core-title>
         With labels
       </core-title>
-      <v-flex>
+      <core-section>
         <v-sparkline
           :labels="labels"
           :value="value"
@@ -38,7 +38,7 @@
           padding="16"
           smooth="5"
         />
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>

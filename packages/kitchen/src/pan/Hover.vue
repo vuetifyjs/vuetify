@@ -4,29 +4,29 @@
       <core-title>
         Simple hover
       </core-title>
-      <v-flex>
+      <core-section>
         <v-hover>
           <v-sheet slot-scope="{ hover }">
             {{ hover }}
           </v-sheet>
         </v-hover>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Disabled
       </core-title>
-      <v-flex>
+      <core-section>
         <v-hover disabled>
           <v-sheet slot-scope="{ hover }">
             {{ hover }}
           </v-sheet>
         </v-hover>
-      </v-flex>
+      </core-section>
 
       <core-title>
         With delay
       </core-title>
-      <v-flex>
+      <core-section>
         <v-hover
           open-delay="100"
           close-delay="100"
@@ -35,7 +35,7 @@
             {{ hover }}
           </v-sheet>
         </v-hover>
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>

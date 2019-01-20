@@ -16,26 +16,26 @@
     </v-btn>
 
     <v-layout column>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
           justify-space-around
           align-center
         >
-          <core-title>
-            Default
-          </core-title>
           <v-flex text-xs-center>
+            <core-title>
+              Default
+            </core-title>
             <v-date-picker
               v-model="model"
               :landscape="landscape"
             />
           </v-flex>
-          <core-title>
-            With week number
-          </core-title>
           <v-flex text-xs-center>
+            <core-title>
+              With week number
+            </core-title>
             <v-date-picker
               v-model="model"
               :landscape="landscape"
@@ -43,19 +43,19 @@
             />
           </v-flex>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Landscape
       </core-title>
-      <v-flex align-self-center>
+      <core-section center>
         <v-date-picker
           v-model="model"
           landscape
         />
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -93,12 +93,12 @@
             />
           </v-flex>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Color
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -124,12 +124,12 @@
             color="blue"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Header colors
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -155,12 +155,12 @@
             header-color="blue"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Using header colors with colors
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -189,9 +189,9 @@
             header-color="blue"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -220,12 +220,12 @@
             />
           </v-flex>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Mulitple dates selection
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           column
           align-center
@@ -247,12 +247,12 @@
             clearable
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Custom width
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -279,12 +279,12 @@
             class="mt-3"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Full width
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -298,12 +298,12 @@
             class="mt-3"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Events
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -332,12 +332,12 @@
             />
           </div>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         i18n
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -359,12 +359,12 @@
             class="mt-3"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Custom icons
       </core-title>
-      <v-flex align-self-center>
+      <core-section center>
         <v-date-picker
           v-model="model"
           :landscape="landscape"
@@ -372,12 +372,12 @@
           prev-icon="mdi-skip-previous"
           next-icon="mdi-skip-next"
         />
-      </v-flex>
+      </core-section>
 
       <core-title>
         Current day indicator
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -396,7 +396,7 @@
             show-current="2019-01-05"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>

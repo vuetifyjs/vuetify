@@ -4,7 +4,7 @@
       <core-title>
         Elevation
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           justify-space-around
           wrap
@@ -27,12 +27,12 @@
             </v-sheet>
           </v-flex>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Colors
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           justify-space-around
           wrap
@@ -54,12 +54,12 @@
             </v-sheet>
           </v-flex>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Sizes
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           justify-space-around
           wrap
@@ -109,7 +109,7 @@
             />
           </v-sheet>
         </v-layout>
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>

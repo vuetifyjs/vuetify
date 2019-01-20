@@ -4,24 +4,24 @@
       <core-title>
         Simple
       </core-title>
-      <v-flex align-self-center>
+      <core-section center>
         <v-rating value="3" />
-      </v-flex>
+      </core-section>
 
       <core-title>
         Dense
       </core-title>
-      <v-flex align-self-center>
+      <core-section center>
         <v-rating
           value="3"
           dense
         />
-      </v-flex>
+      </core-section>
 
       <core-title>
         Colors
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           justify-space-around
@@ -39,12 +39,12 @@
             color="red darken-2"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Background colors
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           justify-space-around
@@ -62,12 +62,12 @@
             background-color="red lighten-2"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Colors & background colors
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           justify-space-around
@@ -88,12 +88,12 @@
             background-color="red lighten-2"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Sizes
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           column
           align-center
@@ -140,12 +140,12 @@
             size="128"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Dense with different sizes
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           column
           align-center
@@ -199,12 +199,12 @@
             dense
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Custom length
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           justify-space-around
@@ -222,22 +222,22 @@
             length="10"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Hover
       </core-title>
-      <v-flex align-self-center>
+      <core-section center>
         <v-rating
           value="2"
           hover
         />
-      </v-flex>
+      </core-section>
 
       <core-title>
         Readonly
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           justify-space-around
@@ -255,33 +255,33 @@
             readonly
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Half-increment
       </core-title>
-      <v-flex align-self-center>
+      <core-section center>
         <v-rating
           value="1.5"
           half-increments
         />
-      </v-flex>
+      </core-section>
 
       <core-title>
         Half-increment & hover
       </core-title>
-      <v-flex align-self-center>
+      <core-section center>
         <v-rating
           value="3.5"
           half-increments
           hover
         />
-      </v-flex>
+      </core-section>
 
       <core-title>
         Custom icons
       </core-title>
-      <v-flex align-self-center>
+      <core-section center>
         <v-rating
           value="4.5"
           half-increments
@@ -289,12 +289,12 @@
           full-icon="mdi-heart"
           half-icon="mdi-heart-half-full"
         />
-      </v-flex>
+      </core-section>
 
       <core-title>
         Custom icons & color
       </core-title>
-      <v-flex align-self-center>
+      <core-section center>
         <v-rating
           value="3.5"
           half-increments
@@ -304,12 +304,12 @@
           color="red lighten-1"
           background-color="red lighten-3"
         />
-      </v-flex>
+      </core-section>
 
       <core-title>
         Scoped slots
       </core-title>
-      <v-flex align-self-center>
+      <core-section center>
         <v-rating value="2">
           <v-icon
             slot="item"
@@ -321,12 +321,12 @@
             {{ props.isFilled ? 'mdi-star-circle' : 'mdi-circle-outline' }}
           </v-icon>
         </v-rating>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Usage with cards
       </core-title>
-      <v-flex>
+      <core-section>
         <v-card
           class="mx-auto elevation-20"
           color="purple"
@@ -371,7 +371,7 @@
             />
           </v-card-actions>
         </v-card>
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>

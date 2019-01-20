@@ -4,7 +4,7 @@
       <core-title>
         Simple
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout justify-space-around>
           <v-tooltip left>
             <v-btn
@@ -50,12 +50,12 @@
             <span>Right tooltip</span>
           </v-tooltip>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Programmatic visibility control
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           flex
           column
@@ -87,7 +87,7 @@
             </v-tooltip>
           </v-flex>
         </v-layout>
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>

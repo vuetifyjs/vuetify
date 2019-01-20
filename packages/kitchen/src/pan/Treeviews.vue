@@ -4,7 +4,7 @@
       <core-title>
         File tree
       </core-title>
-      <v-flex>
+      <core-section>
         <v-treeview
           v-model="tree1"
           :open="open1"
@@ -25,12 +25,12 @@
             </v-icon>
           </template>
         </v-treeview>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Async data loading
       </core-title>
-      <v-flex>
+      <core-section>
         <v-card>
           <v-card-title class="indigo white--text headline">
             User Directory
@@ -149,12 +149,12 @@
             </v-flex>
           </v-layout>
         </v-card>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Prepend & append slots
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           justify-space-around
@@ -193,7 +193,7 @@
 
           <v-flex />
         </v-layout>
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>

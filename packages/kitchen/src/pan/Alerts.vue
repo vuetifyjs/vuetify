@@ -3,7 +3,7 @@
     <v-layout column>
       <!-- Dense -->
       <core-title>Dense</core-title>
-      <v-flex>
+      <core-section>
         <v-alert
           type="success"
           dense
@@ -31,10 +31,10 @@
         >
           This is an error alert.
         </v-alert>
-      </v-flex>
+      </core-section>
       <!-- Default -->
       <core-title>Default</core-title>
-      <v-flex>
+      <core-section>
         <v-alert
           type="success"
         >
@@ -58,10 +58,10 @@
         >
           This is an error alert.
         </v-alert>
-      </v-flex>
+      </core-section>
       <!-- Prominent -->
       <core-title>Prominent</core-title>
-      <v-flex>
+      <core-section>
         <v-alert
           type="success"
           prominent
@@ -89,10 +89,10 @@
         >
           This is an error alert.
         </v-alert>
-      </v-flex>
+      </core-section>
       <!-- Border -->
       <core-title>Border</core-title>
-      <v-flex>
+      <core-section>
         <v-alert
           type="success"
           border="top"
@@ -120,10 +120,10 @@
         >
           This is an error alert.
         </v-alert>
-      </v-flex>
+      </core-section>
       <!-- Colored Border -->
       <core-title>Colored Border</core-title>
-      <v-flex>
+      <core-section>
         <v-alert
           type="success"
           border="right"
@@ -155,10 +155,10 @@
         >
           This is an error alert.
         </v-alert>
-      </v-flex>
+      </core-section>
       <!-- Dense outline -->
       <core-title>Dense outline</core-title>
-      <v-flex>
+      <core-section>
         <v-alert
           type="success"
           dense
@@ -190,10 +190,10 @@
         >
           This is an error alert.
         </v-alert>
-      </v-flex>
+      </core-section>
       <!-- Outline -->
       <core-title>Outline</core-title>
-      <v-flex>
+      <core-section>
         <v-alert
           type="success"
           outlined
@@ -221,10 +221,10 @@
         >
           This is an error alert.
         </v-alert>
-      </v-flex>
+      </core-section>
       <!-- Prominent outline -->
       <core-title>Prominent outline</core-title>
-      <v-flex>
+      <core-section>
         <v-alert
           type="success"
           prominent
@@ -256,10 +256,10 @@
         >
           This is an error alert.
         </v-alert>
-      </v-flex>
+      </core-section>
       <!-- Dense Text -->
       <core-title>Dense Text</core-title>
-      <v-flex>
+      <core-section>
         <v-alert
           type="success"
           dense
@@ -291,10 +291,10 @@
         >
           This is an error alert.
         </v-alert>
-      </v-flex>
+      </core-section>
       <!-- Text -->
       <core-title>Text</core-title>
-      <v-flex>
+      <core-section>
         <v-alert
           type="success"
           text
@@ -322,10 +322,10 @@
         >
           This is an error alert.
         </v-alert>
-      </v-flex>
+      </core-section>
       <!-- Prominent Text -->
       <core-title>Prominent Text</core-title>
-      <v-flex>
+      <core-section>
         <v-alert
           type="success"
           prominent
@@ -357,10 +357,10 @@
         >
           This is an error alert.
         </v-alert>
-      </v-flex>
+      </core-section>
       <!-- Closable -->
       <core-title>Closable</core-title>
-      <v-flex>
+      <core-section>
         <v-alert
           v-model="alertClosable"
           dismissible
@@ -383,10 +383,10 @@
             Reset
           </v-btn>
         </div>
-      </v-flex>
+      </core-section>
       <!-- Custom icons -->
       <core-title>Custom icons</core-title>
-      <v-flex>
+      <core-section>
         <v-alert
           color="purple"
           dark
@@ -401,10 +401,10 @@
         >
           This is an error alert with no icon.
         </v-alert>
-      </v-flex>
+      </core-section>
       <!-- CSS Transitions -->
       <core-title>Custom transitions</core-title>
-      <v-flex>
+      <core-section>
         <div class="text-xs-center">
           <v-btn
             class="mb-3"
@@ -421,10 +421,10 @@
         >
           This is a success alert.
         </v-alert>
-      </v-flex>
+      </core-section>
       <!-- Slots -->
       <core-title>Slots</core-title>
-      <v-flex>
+      <core-section>
         <v-alert
           v-model="alertTransition2"
           class="mb-0"
@@ -467,11 +467,11 @@
             Reset
           </v-btn>
         </div>
-      </v-flex>
+      </core-section>
 
       <!-- Closable with outline -->
       <core-title>Closable with outline</core-title>
-      <v-flex>
+      <core-section>
         <v-alert
           v-model="alertOutline"
           dismissible
@@ -517,11 +517,11 @@
             Reset
           </v-btn>
         </div>
-      </v-flex>
+      </core-section>
 
       <!-- Custom icons with outline -->
       <core-title>Custom icons with outline</core-title>
-      <v-flex>
+      <core-section>
         <v-alert
           :value="true"
           color="success"
@@ -557,7 +557,7 @@
         >
           This is a error alert.
         </v-alert>
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>

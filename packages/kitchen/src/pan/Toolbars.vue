@@ -4,7 +4,7 @@
       <core-title>
         Simple usage
       </core-title>
-      <v-flex>
+      <core-section>
         <v-toolbar>
           <v-toolbar-side-icon />
           <v-toolbar-title>Title</v-toolbar-title>
@@ -21,12 +21,12 @@
             </v-btn>
           </v-toolbar-items>
         </v-toolbar>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Colors
       </core-title>
-      <v-flex>
+      <core-section>
         <v-toolbar color="primary lighten-2">
           <v-toolbar-side-icon />
           <v-toolbar-title>Title</v-toolbar-title>
@@ -43,8 +43,8 @@
             </v-btn>
           </v-toolbar-items>
         </v-toolbar>
-      </v-flex>
-      <v-flex class="mt-5">
+      </core-section>
+      <core-section class="mt-5">
         <v-toolbar color="success">
           <v-toolbar-side-icon />
           <v-toolbar-title>Title</v-toolbar-title>
@@ -61,12 +61,12 @@
             </v-btn>
           </v-toolbar-items>
         </v-toolbar>
-      </v-flex>
+      </core-section>
 
       <core-title>
         App bar with icons
       </core-title>
-      <v-flex>
+      <core-section>
         <v-toolbar
           dark
           color="primary"
@@ -95,12 +95,12 @@
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </v-toolbar>
-      </v-flex>
+      </core-section>
 
       <core-title>
         App bar with items
       </core-title>
-      <v-flex>
+      <core-section>
         <v-toolbar>
           <v-spacer />
 
@@ -116,12 +116,12 @@
             </v-btn>
           </v-toolbar-items>
         </v-toolbar>
-      </v-flex>
+      </core-section>
 
       <core-title>
         App bar with extension
       </core-title>
-      <v-flex>
+      <core-section>
         <v-toolbar
           color="primary"
           dark
@@ -154,12 +154,12 @@
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </v-toolbar>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Using with cards
       </core-title>
-      <v-flex>
+      <core-section>
         <v-card flat>
           <v-toolbar
             color="primary"
@@ -209,12 +209,12 @@
             </v-flex>
           </v-layout>
         </v-card>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Floating
       </core-title>
-      <v-flex>
+      <core-section>
         <v-card
           class="pa-3"
           flat
@@ -240,12 +240,12 @@
             </v-btn>
           </v-toolbar>
         </v-card>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Themes
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           row
           wrap
@@ -283,12 +283,12 @@
             </v-card>
           </v-flex>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Prominent
       </core-title>
-      <v-flex>
+      <core-section>
         <v-toolbar
           prominent
           extended
@@ -311,12 +311,12 @@
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </v-toolbar>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Dense (48px)
       </core-title>
-      <v-flex>
+      <core-section>
         <v-toolbar dense>
           <v-toolbar-side-icon />
 
@@ -336,12 +336,12 @@
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </v-toolbar>
-      </v-flex>
+      </core-section>
 
       <core-title>
         With menu
       </core-title>
-      <v-flex>
+      <core-section>
         <v-toolbar
           color="grey darken-1"
           dark
@@ -380,12 +380,12 @@
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </v-toolbar>
-      </v-flex>
+      </core-section>
 
       <core-title>
         System / window bar
       </core-title>
-      <v-flex>
+      <core-section>
         <div>
           <v-subheader>Light status bar</v-subheader>
           <v-card
@@ -467,7 +467,7 @@
             <v-icon>mdi-close</v-icon>
           </v-system-bar>
         </div>
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>

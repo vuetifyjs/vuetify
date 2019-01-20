@@ -4,7 +4,7 @@
       <core-title>
         In list
       </core-title>
-      <v-flex>
+      <core-section>
         <v-list two-line>
           <template v-for="index in 5">
             <v-list-tile
@@ -22,12 +22,12 @@
             />
           </template>
         </v-list>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Vertical
       </core-title>
-      <v-flex>
+      <core-section>
         <v-toolbar
           color="purple"
           dark
@@ -68,12 +68,12 @@
 
           <v-toolbar-side-icon />
         </v-toolbar>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Vertical
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout justify-center>
           <v-flex
             xs12
@@ -131,7 +131,7 @@
             </v-card>
           </v-flex>
         </v-layout>
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>

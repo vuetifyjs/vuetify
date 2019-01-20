@@ -4,7 +4,7 @@
       <core-title>
         Basic
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           justify-space-around
           class="mb-2"
@@ -138,12 +138,12 @@
             </v-icon>
           </span>
         </v-layout>
-      </v-flex>
+      </core-section>
 
       <core-title>
         Colors
       </core-title>
-      <v-flex>
+      <core-section>
         <v-layout
           justify-space-around
           class="mb-2"
@@ -310,7 +310,7 @@
             </v-icon>
           </span>
         </v-layout>
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>
