@@ -161,6 +161,7 @@ $secondary-transition: 0.2s map-get($transition, 'ease-in-out') !default;
 $alert-color: inherit !default;
 $alert-border-radius: 0 !default;
 $alert-border-width: 4px 0 0 0 !default;
+$alert-dense-border-width: 4px 0 0 0 !default;
 $alert-font-size: $font-size-root !default;
 $alert-icon-color: rgba(map-get($material-light, 'fg-color'), 0.3) !default;
 $alert-icon-font-size: 24px !default;
