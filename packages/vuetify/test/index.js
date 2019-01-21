@@ -163,7 +163,7 @@ export function touch(element) {
   const createTrigger = eventName => (clientX, clientY) => {
     const touches = [{ clientX, clientY }]
     element.trigger(eventName, ({ touches, changedTouches: touches }))
-    return touch(element)
+    // return touch(element)
   }
 
   return {
