@@ -7,7 +7,7 @@
       fab
       fixed
       bottom
-      left
+      right
       @click="() => landscape = !landscape"
     >
       <v-icon small>

@@ -1396,7 +1396,6 @@
         color="success"
         fixed
         bottom
-        left
         right
       >
         <v-icon>mdi-plus</v-icon>
