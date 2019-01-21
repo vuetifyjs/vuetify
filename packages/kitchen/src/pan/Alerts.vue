@@ -96,6 +96,43 @@
           This is an error alert.
         </v-alert>
       </v-flex>
+      <!-- Prominent & dense -->
+      <v-flex>
+        <h3 class="title grey--text text-xs-center mb-4 mt-5">
+          Prominent & dense
+        </h3>
+        <v-alert
+          type="success"
+          prominent
+          dense
+        >
+          This is a success alert.
+        </v-alert>
+
+        <v-alert
+          type="info"
+          prominent
+          dense
+        >
+          This is an info alert.
+        </v-alert>
+
+        <v-alert
+          type="warning"
+          prominent
+          dense
+        >
+          This is a warning alert.
+        </v-alert>
+
+        <v-alert
+          type="error"
+          prominent
+          dense
+        >
+          This is an error alert.
+        </v-alert>
+      </v-flex>
       <!-- Border -->
       <v-flex>
         <h3 class="title grey--text text-xs-center mb-4 mt-5">
@@ -166,7 +203,7 @@
           This is an error alert.
         </v-alert>
       </v-flex>
-      <!-- Prominent outline -->
+      <!-- Dense outline -->
       <v-flex>
         <h3 class="title grey--text text-xs-center mb-4 mt-5">
           Dense outline
@@ -199,6 +236,47 @@
           type="error"
           dense
           outlined
+        >
+          This is an error alert.
+        </v-alert>
+      </v-flex>
+      <!-- Dense with border -->
+      <v-flex>
+        <h3 class="title grey--text text-xs-center mb-4 mt-5">
+          Dense with border
+        </h3>
+        <v-alert
+          type="success"
+          dense
+          colored-border
+          border="top"
+        >
+          This is a success alert.
+        </v-alert>
+
+        <v-alert
+          type="info"
+          dense
+          colored-border
+          border="left"
+        >
+          This is an info alert.
+        </v-alert>
+
+        <v-alert
+          type="warning"
+          dense
+          colored-border
+          border="bottom"
+        >
+          This is a warning alert.
+        </v-alert>
+
+        <v-alert
+          type="error"
+          dense
+          colored-border
+          border="right"
         >
           This is an error alert.
         </v-alert>
