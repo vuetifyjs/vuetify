@@ -135,7 +135,7 @@ export default mixins<options &
       ])
     },
     toggle (active: boolean) {
-      if (active) this.isBooted = true
+      if (active !== undefined && active) this.isBooted = true
 
       this.isActive = active
     }
