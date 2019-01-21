@@ -1,6 +1,8 @@
 <template>
   <v-container>
     <v-layout column>
+      <main-header>Time pickers</main-header>
+
       <h3 class="title grey--text mb-4 mt-5 center">
         Default
       </h3>

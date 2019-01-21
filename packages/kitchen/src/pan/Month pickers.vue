@@ -16,6 +16,8 @@
     </v-btn>
 
     <v-layout column>
+      <main-header>Month pickers</main-header>
+
       <h3 class="title grey--text mb-4 mt-5 center">
         Month pickers
       </h3>

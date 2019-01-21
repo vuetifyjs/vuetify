@@ -4,6 +4,8 @@
       column
       variations
     >
+      <main-header>Chips</main-header>
+
       <v-flex>
         <h3 class="title grey--text mb-4 mt-5">
           Simple
