@@ -6,7 +6,6 @@
 // Block
 .v-slide-group
   display: flex
-  color: purple
 
 .v-slide-item
   display: inline-flex
@@ -15,8 +14,19 @@
 // Element
 .v-slide-group__append,
 .v-slide-group__prepend
-  background: pink
+  align-items: center
+  display: flex
   flex: 0 1 48px
+  justify-content: center
 
 .v-slide-group__content
-  background: blue
+  display: flex
+  flex: 1 0 auto
+  position: relative
+  transition: $primary-transition
+  white-space: nowrap
+
+.v-slide-group__wrapper
+  contain: content
+  display: flex
+  overflow: hidden
