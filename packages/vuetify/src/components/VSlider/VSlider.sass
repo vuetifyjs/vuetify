@@ -82,6 +82,27 @@
   &--filled
     background-color: rgba(255, 255, 255, 0.5) // TODO: move to theme mixin?
 
+  &:first-child .v-slider__tick-label
+    transform: none
+
+  +rtl()
+    &:first-child .v-slider__tick-label
+      transform: translateX(100%)
+
+  &:last-child .v-slider__tick-label
+    transform: translateX(-100%)
+
+  +rtl()
+    &:last-child .v-slider__tick-label
+      transform: none
+
+.v-slider__tick-label
+  position: absolute
+  top: 8px
+  transform: translateX(-50%)
+  user-select: none
+  white-space: nowrap
+
 .v-slider__thumb-label-container
   position: absolute
   left: 0
@@ -169,16 +190,17 @@
     > *
       transform: rotate(-135deg)
 
-.v-slider--focused
+.v-slider__thumb-container--focused
   .v-slider__thumb:before
     transform: scale(1)
 
 .v-slider--active
-  .v-slider__thumb:before
-    transform: scale(1.5) !important
-
   .v-slider__tick
     opacity: 1
+
+.v-slider__thumb-container--active
+  .v-slider__thumb:before
+    transform: scale(1.5) !important
 
 .v-slider--disabled
   pointer-events: none
@@ -222,10 +244,10 @@
 
 .v-input__slider--vertical
   align-items: center
-  flex-direction: column
+  flex-direction: column-reverse
 
   +rtl()
-    flex-direction: column-reverse
+    flex-direction: column
 
   .v-input
     &__slot, &__prepend-outer, &__append-outer

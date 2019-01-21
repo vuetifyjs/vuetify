@@ -270,7 +270,7 @@ export default mixins<options &
         this.genInput(),
         this.genTrackContainer(),
         this.genSteps(),
-        this.genThumbContainer(this.internalValue, this.inputWidth, this.onThumbMouseDown)
+        this.genThumbContainer(this.internalValue, this.inputWidth, this.isActive, this.onThumbMouseDown)
       ]
     },
     genInput (): VNode {
@@ -312,10 +312,13 @@ export default mixins<options &
       if (this.vertical) range.reverse()
 
       const ticks = range.map(i => {
+        const index = this.$vuetify.rtl ? this.maxValue - i : i
         const children = []
 
-        if (this.tickLabels[i]) {
-          children.push(this.$createElement('span', this.tickLabels[i]))
+        if (this.tickLabels[index]) {
+          children.push(this.$createElement('div', {
+            staticClass: 'v-slider__tick-label'
+          }, this.tickLabels[index]))
         }
 
         const width = i * (100 / this.numTicks)
@@ -343,7 +346,7 @@ export default mixins<options &
         }
       }, ticks)
     },
-    genThumbContainer (value: number | string, valueWidth: number, onDrag: Function): VNode {
+    genThumbContainer (value: number | string, valueWidth: number, isActive: boolean, onDrag: Function): VNode {
       const children = [this.genThumb()]
 
       const thumbLabelContent = this.genThumbLabelContent(value)
@@ -352,6 +355,8 @@ export default mixins<options &
       return this.$createElement('div', this.setTextColor(this.computedThumbColor, {
         staticClass: 'v-slider__thumb-container',
         class: {
+          'v-slider__thumb-container--active': isActive,
+          'v-slider__thumb-container--focused': this.isFocused,
           'v-slider__thumb-container--show-label': this.showThumbLabel
         },
         style: this.getThumbContainerStyles(valueWidth),
@@ -400,7 +405,7 @@ export default mixins<options &
               height: size,
               width: size
             }
-          }), [content])
+          }), [this.$createElement('div', [content])])
         ])
       ])
     },
@@ -424,7 +429,6 @@ export default mixins<options &
       this.keyPressed = 2
       const options = { passive: true }
       this.isActive = true
-      this.isFocused = false
 
       if ('touches' in e) {
         this.app.addEventListener('touchmove', this.onMouseMove, options)
@@ -448,7 +452,6 @@ export default mixins<options &
       }
 
       this.isActive = false
-      this.isFocused = false
     },
     onMouseMove (e: MouseEvent) {
       const { value, isInsideTrack } = this.parseMouseMove(e)
@@ -475,10 +478,10 @@ export default mixins<options &
       this.onMouseMove(e)
       this.$emit('change', this.internalValue)
     },
-    onBlur () {
+    onBlur (e: Event) {
       this.isFocused = false
     },
-    onFocus () {
+    onFocus (e: Event) {
       this.isFocused = true
     },
     parseMouseMove (e: MouseEvent) {
