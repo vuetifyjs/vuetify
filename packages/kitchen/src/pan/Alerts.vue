@@ -90,6 +90,41 @@
           This is an error alert.
         </v-alert>
       </core-section>
+      <!-- Prominent & dense -->
+      <core-sectionx>
+        <core-title>Prominent & dense</core-title>
+        <v-alert
+          type="success"
+          prominent
+          dense
+        >
+          This is a success alert.
+        </v-alert>
+
+        <v-alert
+          type="info"
+          prominent
+          dense
+        >
+          This is an info alert.
+        </v-alert>
+
+        <v-alert
+          type="warning"
+          prominent
+          dense
+        >
+          This is a warning alert.
+        </v-alert>
+
+        <v-alert
+          type="error"
+          prominent
+          dense
+        >
+          This is an error alert.
+        </v-alert>
+      </core-section>
       <!-- Border -->
       <core-title>Border</core-title>
       <core-section>
@@ -187,6 +222,45 @@
           type="error"
           dense
           outlined
+        >
+          This is an error alert.
+        </v-alert>
+      </core-section>
+      <!-- Dense with border -->
+      <core-section>
+        <core-title>Dense with border</core-title>
+        <v-alert
+          type="success"
+          dense
+          colored-border
+          border="top"
+        >
+          This is a success alert.
+        </v-alert>
+
+        <v-alert
+          type="info"
+          dense
+          colored-border
+          border="left"
+        >
+          This is an info alert.
+        </v-alert>
+
+        <v-alert
+          type="warning"
+          dense
+          colored-border
+          border="bottom"
+        >
+          This is a warning alert.
+        </v-alert>
+
+        <v-alert
+          type="error"
+          dense
+          colored-border
+          border="right"
         >
           This is an error alert.
         </v-alert>
