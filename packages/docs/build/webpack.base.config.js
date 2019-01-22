@@ -7,9 +7,9 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 const isProd = process.env.NODE_ENV === 'production'
-const resolve = (file) => path.resolve(__dirname, file)
+const resolve = file => path.resolve(__dirname, file)
 
-let plugins = [
+const plugins = [
   new webpack.DefinePlugin({
     'process.env': JSON.stringify(process.env)
   }),
