@@ -1,6 +1,8 @@
 <template>
   <v-container>
     <v-layout column>
+      <main-header>Alerts</main-header>
+
       <!-- Dense -->
       <v-flex>
         <h3 class="title grey--text text-xs-center mb-4 mt-5">

@@ -4,6 +4,8 @@
       column
       variations
     >
+      <main-header>Buttons</main-header>
+
       <h3 class="title grey--text mb-4 mt-5">
         Normal
       </h3>
