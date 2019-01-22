@@ -8,7 +8,9 @@ const preset: VuetifyPreset = {
     rtl: false
   },
   theme: {
-    cspNonce: undefined,
+    options: {
+      cspNonce: undefined,
+    },
     default: 'light',
     themes: {
       dark: {
