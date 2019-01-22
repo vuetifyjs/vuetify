@@ -1,0 +1,42 @@
+{
+  "header": "crwdns12790:0crwdne12790:0",
+  "headerText": "crwdns12792:0crwdne12792:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns12794:0crwdne12794:0"
+    },
+    "long": {
+      "header": "crwdns12796:0crwdne12796:0",
+      "desc": "crwdns12798:0crwdne12798:0"
+    },
+    "limit": {
+      "header": "crwdns12800:0crwdne12800:0",
+      "desc": "crwdns12802:0crwdne12802:0"
+    },
+    "round": {
+      "header": "crwdns12804:0crwdne12804:0",
+      "desc": "crwdns12806:0crwdne12806:0"
+    },
+    "icons": {
+      "header": "crwdns12808:0crwdne12808:0",
+      "desc": "crwdns12810:0crwdne12810:0"
+    },
+    "disabled": {
+      "header": "crwdns12812:0crwdne12812:0",
+      "desc": "crwdns12814:0crwdne12814:0"
+    }
+  },
+  "events": {
+    "previous": "crwdns12816:0crwdne12816:0",
+    "next": "crwdns12818:0crwdne12818:0"
+  },
+  "props": {
+    "circle": "crwdns12820:0crwdne12820:0",
+    "disabled": "crwdns12822:0crwdne12822:0",
+    "length": "crwdns12824:0crwdne12824:0",
+    "nextIcon": "crwdns12826:0crwdne12826:0",
+    "prevIcon": "crwdns12828:0crwdne12828:0",
+    "totalVisible": "crwdns12830:0crwdne12830:0",
+    "value": "crwdns12832:0crwdne12832:0"
+  }
+}

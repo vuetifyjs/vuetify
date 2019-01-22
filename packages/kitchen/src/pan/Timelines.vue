@@ -201,11 +201,11 @@
 </template>
 
 <script>
-export default {
-  name: 'Timelines',
+  export default {
+    name: 'Timelines',
 
-  data: () => ({})
-}
+    data: () => ({})
+  }
 </script>
 
 <style scoped>

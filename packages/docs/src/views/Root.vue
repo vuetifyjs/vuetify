@@ -5,11 +5,13 @@
 <script>
   import languages from '@/data/i18n/languages.json'
 
+  const fallbackLocale = languages.find(lang => lang.fallback === true).locale
+
   export default {
     props: {
       lang: {
         type: String,
-        default: 'en'
+        default: fallbackLocale
       }
     },
 
@@ -25,7 +27,7 @@
     },
 
     created () {
-      if (!this.languageIsValid) this.$router.push('/en')
+      if (!this.languageIsValid) this.$router.push(`/${fallbackLocale}`)
     }
   }
 </script>
