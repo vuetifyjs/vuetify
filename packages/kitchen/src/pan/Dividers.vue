@@ -2,7 +2,7 @@
   <v-container>
     <v-layout column>
       <main-header>Dividers</main-header>
-      
+
       <core-title>
         In list
       </core-title>

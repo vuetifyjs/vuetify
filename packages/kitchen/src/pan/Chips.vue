@@ -5,7 +5,7 @@
       variations
     >
       <main-header>Chips</main-header>
-      
+
       <core-title>
         Simple
       </core-title>

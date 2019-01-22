@@ -2,7 +2,7 @@
   <v-container>
     <v-layout column>
       <main-header>Pan</main-header>
-      
+
       <core-title>Title</core-title>
       <core-section>
         Content

@@ -2,7 +2,7 @@
   <v-container>
     <v-layout column>
       <main-header>Toolbars</main-header>
-      
+
       <core-title>
         Simple usage
       </core-title>

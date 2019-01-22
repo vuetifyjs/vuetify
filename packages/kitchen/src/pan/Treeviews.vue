@@ -2,7 +2,7 @@
   <v-container>
     <v-layout column>
       <main-header>Treeviews</main-header>
-      
+
       <core-title>
         File tree
       </core-title>

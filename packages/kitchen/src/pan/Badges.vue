@@ -2,10 +2,8 @@
   <v-container>
     <v-layout column>
       <main-header>Badges</main-header>
-      
-      <core-title
-        Left
-      </core-title>
+
+      <core-title>Left</core-title>
       <core-section>
         <v-layout justify-space-around>
           <v-badge left>

@@ -2,7 +2,7 @@
   <v-container>
     <v-layout column>
       <main-header>Text fields</main-header>
-      
+
       <core-title>
         Styles
       </core-title>

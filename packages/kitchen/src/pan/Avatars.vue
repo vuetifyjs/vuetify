@@ -5,7 +5,7 @@
       variations
     >
       <main-header>Avatars</main-header>
-      
+
       <core-title>Round</core-title>
       <core-section>
         <v-layout
