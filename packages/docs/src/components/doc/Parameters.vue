@@ -67,12 +67,14 @@
               />
             </v-flex>
             <v-flex>
+              <!-- eslint-disable -->
               <doc-markup
                 v-if="item.example"
                 class="mt-2 mb-0"
                 lang="ts"
                 value="example"
               >{{ genTypescriptDef(item.example) }}</doc-markup>
+              <!-- eslint-enable -->
             </v-flex>
           </v-layout>
         </v-flex>
@@ -101,6 +103,10 @@
       headers: {
         type: Array,
         default: () => ([])
+      },
+      lang: {
+        type: String,
+        default: ''
       },
       items: {
         type: Array,
@@ -200,7 +206,8 @@
         let description = ''
         let devPrepend = ''
         const camelSource = this.parseSource(item.source)
-        const composite = `${this.namespace}.${this.page}`
+        const page = this.lang ? upperFirst(camelCase(this.lang)) : this.page
+        const composite = `${this.namespace}.${page}`
 
         // Components.Alerts.props['v-alert'].value
         const specialDesc = `${composite}.${this.type}['${this.target}']['${name}']`

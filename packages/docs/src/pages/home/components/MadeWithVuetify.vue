@@ -70,27 +70,18 @@
         return this.featured.slice(0, 6)
       },
       features () {
-        return this.$t('Vuetify.Home.features', 'en')
+        return this.$t('Vuetify.Home.features', this.$i18n.fallbackLocale)
       }
     },
 
     // TODO: Remove when v-img
     // supports lazy loading
     mounted () {
-      window.addEventListener('scroll', this.init, { passive: true })
-    },
-
-    beforeDestroy () {
-      this.removeListener()
+      this.$nextTick(this.init)
     },
 
     methods: {
-      removeListener () {
-        window.removeEventListener('scroll', this.init, { passive: true })
-      },
       init () {
-        this.removeListener()
-
         fetch('https://madewithvuejs.com/api/tag/vuetify', {
           method: 'get',
           headers: {
