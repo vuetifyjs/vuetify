@@ -28,7 +28,7 @@
     },
     "expand": {
       "header": "Slot: expand",
-      "desc": "El componente `v-data-table` también soporta filas expandibles utilizando el slot `expand`. Puedes usar la prop `expand` para prevenir que las filas expandidas se cierren al hacer click en una fila distinta."
+      "desc": "El componente `v-data-table` también soporta filas expandibles utilizando el slot `expand`. Por defecto, cuando una fila se expande el resto se cierran. Puedes usar la prop `expand` en `v-data-table` para evitar que las filas expandidas se cierren al hacer click en una fila distinta."
     },
     "pageText": {
       "header": "Slot: page-text",

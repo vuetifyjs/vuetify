@@ -23,7 +23,7 @@
     },
     "icons": {
       "header": "### Icons",
-      "desc": "You can add icons to the slider with the `append-icon` and `prepend-icon` props. With `append-icon-cb` and `prepend-icon-cb` you can trigger a callback function when click the icon."
+      "desc": "You can add icons to the slider with the `append-icon` and `prepend-icon` props. With `@click:append` and `@click:prepend` you can trigger a callback function when click the icon."
     },
     "editableNumericValue": {
       "header": "### With an editable numeric value",
@@ -64,6 +64,8 @@
   },
   "events": {
     "change": "Components.Inputs.events.change",
+    "click:append": "Components.Inputs.events['click:append']",
+    "click:prepend": "Components.Inputs.events['click:prepend']",
     "end": "Slider value emitted at the end of slider movement",
     "start": "Slider value emitted at start of slider movement",
     "update:error": "Mixins.Validatable.events['update:error']"

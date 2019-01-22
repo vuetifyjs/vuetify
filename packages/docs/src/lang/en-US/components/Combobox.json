@@ -1,7 +1,9 @@
 {
   "header": "# Combobox",
   "headerText": "Combobox info coming soon",
-  "supplemental": [ "MaskTable" ],
+  "supplemental": [
+    "MaskTable"
+  ],
   "examples": {
     "usage": {
       "desc": "With Combobox, you can allow a user to create new values that may not be present in a provided items list."
@@ -32,6 +34,11 @@
   },
   "events": {
     "change": "Components.Inputs.events.change",
+    "click:append": "Components.Inputs.events['click:append']",
+    "click:append-outer": "Components.TextFields.events['click:append-outer']",
+    "click:clear": "Components.TextFields.events['click:clear']",
+    "click:prepend": "Components.Inputs.events['click:prepend']",
+    "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
     "update:error": "Mixins.Validatable.events['update:error']",
     "update:searchInput": "The `search-input.sync` event"
   }
