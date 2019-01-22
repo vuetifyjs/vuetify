@@ -3,7 +3,8 @@
     "publish": {
       "allowBranch": [
         "master",
-        "dev"
+        "dev",
+        "next"
       ],
       "message": "chore(release): publish %s"
     },
