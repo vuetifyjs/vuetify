@@ -12,10 +12,10 @@ import { VNode } from 'vue'
 
 type VListGroupInstance = InstanceType<typeof VListGroup>
 
-/* @vue/component */
 export default mixins(
   RegistrableProvide('list'),
   Themeable
+  /* @vue/component */
 ).extend({
   name: 'v-list',
 
@@ -56,15 +56,13 @@ export default mixins(
     unregister (content: VListGroupInstance) {
       const index = this.groups.findIndex(g => g._uid === content._uid)
 
-      if (index > -1) {
-        this.groups.splice(index, 1)
-      }
+      if (index > -1) this.groups.splice(index, 1)
     },
     listClick (uid: number) {
       if (this.expand) return
 
-      for (let i = this.groups.length; i--;) {
-        this.groups[i].toggle(uid)
+      for (const group of this.groups) {
+        group.toggle(uid)
       }
     }
   },
@@ -72,7 +70,7 @@ export default mixins(
   render (h): VNode {
     const data = {
       staticClass: 'v-list',
-      'class': this.classes,
+      class: this.classes,
       attrs: {
         role: 'list'
       }

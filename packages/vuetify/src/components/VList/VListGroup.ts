@@ -23,7 +23,6 @@ interface options extends Vue {
   $route: any
 }
 
-/* @vue/component */
 export default mixins<options &
 /* eslint-disable indent */
   ExtractVue<[
@@ -36,6 +35,7 @@ export default mixins<options &
   Bootable,
   RegistrableInject('list', 'v-list-group', 'v-list'),
   Toggleable
+  /* @vue/component */
 ).extend({
   name: 'v-list-group',
 
@@ -121,7 +121,7 @@ export default mixins<options &
 
       this.isActive = !this.isActive
     },
-    genIcon (icon: any): VNode {
+    genIcon (icon: string | false): VNode {
       return this.$createElement(VIcon, icon)
     },
     genAppendIcon () {
@@ -138,7 +138,7 @@ export default mixins<options &
     genGroup () {
       return this.$createElement('div', {
         staticClass: 'v-list__group__header',
-        'class': this.headerClasses,
+        class: this.headerClasses,
         on: {
           ...this.$listeners,
           click: this.click
@@ -153,7 +153,7 @@ export default mixins<options &
     genItems () {
       return this.$createElement('div', {
         staticClass: 'v-list__group__items',
-        'class': this.itemsClasses,
+        class: this.itemsClasses,
         directives: [{
           name: 'show',
           value: this.isActive
@@ -179,10 +179,10 @@ export default mixins<options &
         this.$slots.prependIcon || this.genIcon(icon)
       ])
     },
-    toggle (uid: any) {
+    toggle (uid: number) {
       this.isActive = this._uid === uid
     },
-    matchRoute (to: any) {
+    matchRoute (to: string) {
       if (!this.group) return false
       return to.match(this.group) !== null
     }
@@ -191,7 +191,7 @@ export default mixins<options &
   render (h): VNode {
     return h('div', {
       staticClass: 'v-list__group',
-      'class': this.groupClasses
+      class: this.groupClasses
     }, [
       this.genGroup(),
       h(VExpandTransition, [this.genItems()])

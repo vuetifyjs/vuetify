@@ -57,9 +57,14 @@ export default mixins(
         [this.activeClass]: this.isActive
       }
     },
-    isLink (): object | boolean {
-      return this.href || this.to ||
-        (this.$listeners && (this.$listeners.click || this.$listeners['!click']))
+    isLink (): boolean {
+      const hasClick = this.$listeners && (this.$listeners.click || this.$listeners['!click'])
+
+      return Boolean(
+        this.href ||
+        this.to ||
+        hasClick
+      )
     }
   },
 
