@@ -8,13 +8,63 @@ import { VuetifyServiceInstance } from 'vuetify/types/services'
 export class Theme implements VuetifyServiceInstance {
   static property = 'theme'
 
+  public default = 'light'
+  public options: VuetifyThemeOptions['options'] = {
+    cspNonce: null,
+    customProperties: false,
+    minifyTheme: null,
+    themeCache: undefined
+  }
   public style?: HTMLStyleElement
-  public options: VuetifyThemeOptions
+  public themes: VuetifyThemeOptions['themes'] = {
+    dark: {
+      primary: '#1976D2', // blue.darken2
+      secondary: '#424242', // grey.darken3
+      accent: '#82B1FF', // blue.accent1
+      error: '#FF5252', // red.accent2
+      info: '#2196F3', // blue.base
+      success: '#4CAF50', // green.base
+      warning: '#FFC107' // amber.base
+    },
+    light: {
+      primary: '#FF5252', // blue.darken2
+      secondary: '#424242', // grey.darken3
+      accent: '#82B1FF', // blue.accent1
+      error: '#FF5252', // red.accent2
+      info: '#2196F3', // blue.base
+      success: '#4CAF50', // green.base
+      warning: '#FFC107' // amber.base
+    }
+  }
 
-  constructor (options?: VuetifyThemeOptions) {
-    this.options = options || {}
+  constructor (options: Partial<VuetifyThemeOptions> = {}) {
+    if (options.disable) return
 
-    if (this.options.disable) return
+    this.options = {
+      ...this.options,
+      ...options.options
+    }
+
+    // Grab light and dark variants then
+    // move remaining into own object
+    const { light = {}, dark = {}, ...themes } = {
+      light: {},
+      dark: {},
+      ...options.themes
+    }
+
+    // Light and dark should always be defined
+    this.themes = {
+      light: {
+        ...this.themes!.light,
+        ...light
+      },
+      dark: {
+        ...this.themes!.dark,
+        ...dark
+      },
+      ...themes
+    }
 
     this.applyTheme()
   }
@@ -26,13 +76,13 @@ export class Theme implements VuetifyServiceInstance {
     }
   }
 
-  public applyTheme (theme = this.options.default) {
+  public applyTheme (theme = this.default) {
     this.genStyleElement()
 
-    if (!this.options.themes) return this.clearCss()
+    if (!this.themes) return this.clearCss()
     if (typeof theme !== 'string') return this.clearCss()
 
-    const activeTheme = this.options.themes[theme]
+    const activeTheme = this.themes[theme]
 
     if (!activeTheme) return this.clearCss()
 

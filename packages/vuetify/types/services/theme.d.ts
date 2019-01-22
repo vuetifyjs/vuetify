@@ -5,13 +5,15 @@ export interface VuetifyThemeService {
 }
 
 export interface VuetifyThemeOptions {
-  /** @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#Unsafe_inline_script */
-  cspNonce?: string | null
-  customProperties?: boolean
+  options: {
+    /** @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#Unsafe_inline_script */
+    cspNonce?: string | null
+    customProperties?: boolean
+    minifyTheme?: ((css: string) => string) | null
+    themeCache?: VuetifyThemeCache
+  }
   disable?: boolean
-  default?: string | false | undefined
-  minifyTheme?: ((css: string) => string) | null
-  themeCache?: VuetifyThemeCache
+  default?: string | false
   themes?: VuetifyTheme | undefined
 }
 
