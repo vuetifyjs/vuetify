@@ -270,7 +270,14 @@ export default mixins<options &
         this.genInput(),
         this.genTrackContainer(),
         this.genSteps(),
-        this.genThumbContainer(this.internalValue, this.inputWidth, this.isActive, this.onThumbMouseDown)
+        this.genThumbContainer(
+          this.internalValue,
+          this.inputWidth,
+          this.isActive,
+          this.isFocused,
+          this.onThumbMouseDown,
+          this.onFocus
+        )
       ]
     },
     genInput (): VNode {
@@ -346,17 +353,26 @@ export default mixins<options &
         }
       }, ticks)
     },
-    genThumbContainer (value: number | string, valueWidth: number, isActive: boolean, onDrag: Function): VNode {
+    genThumbContainer (
+      value: number,
+      valueWidth: number,
+      isActive: boolean,
+      isFocused: boolean,
+      onDrag: Function,
+      onFocus: Function,
+      ref = 'thumb'
+    ): VNode {
       const children = [this.genThumb()]
 
       const thumbLabelContent = this.genThumbLabelContent(value)
       this.showThumbLabel && children.push(this.genThumbLabel(thumbLabelContent))
 
       return this.$createElement('div', this.setTextColor(this.computedThumbColor, {
+        ref,
         staticClass: 'v-slider__thumb-container',
         class: {
           'v-slider__thumb-container--active': isActive,
-          'v-slider__thumb-container--focused': this.isFocused,
+          'v-slider__thumb-container--focused': isFocused,
           'v-slider__thumb-container--show-label': this.showThumbLabel
         },
         style: this.getThumbContainerStyles(valueWidth),
@@ -372,7 +388,7 @@ export default mixins<options &
           ...this.$attrs
         },
         on: {
-          focus: this.onFocus,
+          focus: onFocus,
           blur: this.onBlur,
           keydown: this.onKeyDown,
           keyup: this.onKeyUp,

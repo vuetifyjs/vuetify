@@ -12,7 +12,6 @@ import {
 
 // Types
 import { PropValidator } from 'vue/types/options'
-import { VNode } from 'vue'
 
 /* @vue/component */
 export default VSlider.extend({
@@ -21,16 +20,14 @@ export default VSlider.extend({
   props: {
     value: {
       type: Array,
-      default: () => ([])
+      default: () => ([0, 0])
     } as PropValidator<number[]>
   },
 
   data () {
     return {
       activeThumb: null as null | number,
-      lazyValue: !this.value.length
-        ? [0, 0]
-        : this.value
+      lazyValue: this.value
     }
   },
 
@@ -52,7 +49,11 @@ export default VSlider.extend({
 
         // Switch values if range and wrong order
         if (value[0] > value[1] || value[1] < value[0]) {
-          if (this.activeThumb !== null) this.activeThumb = this.activeThumb === 1 ? 0 : 1
+          if (this.activeThumb !== null) {
+            const toFocus = this.activeThumb === 1 ? 0 : 1
+            const el = this.$refs[`thumb_${toFocus}`] as HTMLElement
+            el.focus()
+          }
           value = [value[1], value[0]]
         }
 
@@ -68,16 +69,19 @@ export default VSlider.extend({
       )
     },
     trackStyles () {
+      const dir = this.vertical ? 'height' : 'width'
       return {
-        width: '100%'
+        [dir]: '100%'
       }
     },
     trackFillStyles () {
       const styles = VSlider.options.computed.trackFillStyles.call(this)
       const fillPercent = Math.abs(this.inputWidth[0] - this.inputWidth[1])
+      const dir = this.vertical ? 'height' : 'width'
+      const start = this.vertical ? this.$vuetify.rtl ? 'top' : 'bottom' : this.$vuetify.rtl ? 'right' : 'left'
 
-      styles.width = `${fillPercent}%`
-      styles[this.$vuetify.rtl ? 'right' : 'left'] = `${this.inputWidth[0]}%`
+      styles[dir] = `${fillPercent}%`
+      styles[start] = `${this.inputWidth[0]}%`
 
       return styles
     }
@@ -104,56 +108,25 @@ export default VSlider.extend({
         this.genInput(),
         this.genTrackContainer(),
         this.genSteps(),
-        createRange(2).map(i => {
-          return this.genThumbContainer(i)
+        createRange(2).map(index => {
+          const value = this.internalValue[index]
+          const onDrag = (e: MouseEvent) => {
+            this.isActive = true
+            this.activeThumb = index
+            this.onThumbMouseDown(e)
+          }
+          const onFocus = (e: Event) => {
+            this.isFocused = true
+            this.activeThumb = index
+          }
+
+          const valueWidth = this.inputWidth[index]
+          const isActive = this.isActive && this.activeThumb === index
+          const isFocused = this.isFocused && this.activeThumb === index
+
+          return this.genThumbContainer(value, valueWidth, isActive, isFocused, onDrag, onFocus, `thumb_${index}`)
         })
       ]
-    },
-    genThumbContainer (index: number): VNode {
-      const value = this.internalValue[index]
-      const onDrag = (e: MouseEvent) => {
-        this.isActive = true
-        this.activeThumb = index
-        this.onThumbMouseDown(e)
-      }
-
-      const valueWidth = this.inputWidth[index]
-      const isActive = this.isActive && this.activeThumb === index
-      const isFocused = this.isFocused && this.activeThumb === index
-
-      const children = [this.genThumb()]
-
-      const thumbLabelContent = this.genThumbLabelContent(value)
-      this.showThumbLabel && children.push(this.genThumbLabel(thumbLabelContent))
-
-      return this.$createElement('div', this.setTextColor(this.computedThumbColor, {
-        staticClass: 'v-slider__thumb-container',
-        class: {
-          'v-slider__thumb-container--active': isActive,
-          'v-slider__thumb-container--focused': isFocused,
-          'v-slider__thumb-container--show-label': this.showThumbLabel
-        },
-        style: this.getThumbContainerStyles(valueWidth),
-        attrs: {
-          role: 'slider',
-          tabindex: this.disabled || this.readonly ? -1 : this.$attrs.tabindex ? this.$attrs.tabindex : 0,
-          'aria-label': this.label,
-          'aria-valuemin': this.min,
-          'aria-valuemax': this.max,
-          'aria-valuenow': this.internalValue[index],
-          'aria-readonly': String(this.readonly),
-          'aria-orientation': this.vertical ? 'vertical' : 'horizontal',
-          ...this.$attrs
-        },
-        on: {
-          focus: () => this.onFocus(index),
-          blur: this.onBlur,
-          keydown: this.onKeyDown,
-          keyup: this.onKeyUp,
-          touchstart: onDrag,
-          mousedown: onDrag
-        }
-      }), children)
     },
     onFocus (index: number) {
       this.isFocused = true
@@ -187,6 +160,7 @@ export default VSlider.extend({
       if (value == null) return
 
       this.setInternalValue(value)
+      this.$emit('change', value)
     },
     setInternalValue (value: number) {
       this.internalValue = this.internalValue.map((v: number, i: number) => {
