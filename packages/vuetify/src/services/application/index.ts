@@ -22,10 +22,6 @@ export class Application implements VuetifyServiceInstance {
     footer: {}
   }
 
-  constructor (options?: any) {
-    //
-  }
-
   register (
     uid: number,
     location: TargetProp,

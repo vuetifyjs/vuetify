@@ -1,8 +1,6 @@
 <template functional>
   <core-goto class="core-goto--heading">
-    <doc-markdown v-bind="$attrs">
-      <slot />
-    </doc-markdown>
+    <doc-markdown v-bind="$attrs"><slot /></doc-markdown>
   </core-goto>
 </template>
 

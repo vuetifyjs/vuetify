@@ -24,6 +24,6 @@ describe('Application.ts', () => {
     app.register(0, 'top', 24)
     app.unregister(1, 'top')
 
-    expect(spy).toBeCalledTimes(1)
+    expect(spy).toHaveBeenCalledTimes(1)
   })
 })

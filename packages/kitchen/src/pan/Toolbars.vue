@@ -1,6 +1,8 @@
 <template>
   <v-container>
     <v-layout column>
+      <main-header>Toolbars</main-header>
+
       <h3 class="title grey--text mb-4 mt-5 center">
         Simple usage
       </h3>
@@ -473,21 +475,21 @@
 </template>
 
 <script>
-export default {
-  name: 'Toolbars',
+  export default {
+    name: 'Toolbars',
 
-  data: () => ({
-    bars: [
-      { 'class': '' },
-      { 'class': '', dark: true },
-      { 'class': 'primary', dark: true },
-      { 'class': 'elevation-0' }
-    ],
-    items: [
-      'All', 'Family', 'Friends', 'Coworkers'
-    ]
-  })
-}
+    data: () => ({
+      bars: [
+        { 'class': '' },
+        { 'class': '', dark: true },
+        { 'class': 'primary', dark: true },
+        { 'class': 'elevation-0' }
+      ],
+      items: [
+        'All', 'Family', 'Friends', 'Coworkers'
+      ]
+    })
+  }
 </script>
 
 <style scoped>

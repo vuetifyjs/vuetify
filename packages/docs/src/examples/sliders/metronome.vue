@@ -8,9 +8,7 @@
       dense
     >
       <v-toolbar-title>
-        <span class="subheading">
-          METRONOME
-        </span>
+        <span class="subheading">METRONOME</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon>
@@ -28,9 +26,7 @@
             class="display-3 font-weight-light"
             v-text="bpm"
           ></span>
-          <span class="subheading font-weight-light mr-1">
-            BPM
-          </span>
+          <span class="subheading font-weight-light mr-1">BPM</span>
           <v-fade-transition>
             <v-avatar
               v-if="isPlaying"

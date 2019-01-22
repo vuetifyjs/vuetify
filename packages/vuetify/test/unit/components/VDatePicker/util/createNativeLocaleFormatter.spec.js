@@ -18,7 +18,7 @@ test('VDatePicker/util/createNativeLocaleFormatter.js', ({ mount }) => {
       expect(formatter('2013')).toBe('2013-01-01')
 
       const nullFormatter = createNativeLocaleFormatter(undefined, { day: 'numeric', timeZone: 'UTC' })
-      expect(nullFormatter).toBe(null)
+      expect(nullFormatter).toBe(undefined)
       global.Intl = oldIntl
     })
   })

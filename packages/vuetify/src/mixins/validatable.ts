@@ -170,6 +170,7 @@ export default mixins(
         this.hasInput = false
         this.hasFocused = false
         this.isResetting = false
+        this.validate()
       }, 0)
     },
     hasError (val) {

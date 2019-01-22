@@ -128,7 +128,7 @@ describe('VBtn.ts', () => {
     wrapper.setProps({ href: undefined, to: '/foo' })
     wrapper.trigger('click')
 
-    expect(click.mock.calls.length).toBe(2)
+    expect(click.mock.calls).toHaveLength(2)
   })
 
   it('should use custom active-class', () => {
@@ -220,14 +220,14 @@ describe('VBtn.ts', () => {
     router.push('/foobar')
 
     await wrapper.vm.$nextTick()
-    expect(toggle).not.toBeCalled()
+    expect(toggle).not.toHaveBeenCalled()
 
     wrapper.setProps({ to: 'fizzbuzz' })
 
     router.push('/fizzbuzz')
 
     await wrapper.vm.$nextTick()
-    expect(toggle).toBeCalled()
+    expect(toggle).toHaveBeenCalled()
   })
 
   it('should call toggle when used in button group', () => {
@@ -242,7 +242,7 @@ describe('VBtn.ts', () => {
     })
 
     wrapper.trigger('click')
-    expect(toggle).toBeCalled()
+    expect(toggle).toHaveBeenCalled()
   })
 
   it('should stringify non string|number values', () => {

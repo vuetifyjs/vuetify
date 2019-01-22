@@ -323,3 +323,14 @@ const camelizeRE = /-(\w)/g
 export const camelize = (str: string): string => {
   return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : '')
 }
+
+/**
+ * Returns the set difference of B and A, i.e. the set of elements in B but not in A
+ */
+export function arrayDiff (a: any[], b: any[]): any[] {
+  const diff = []
+  for (let i = 0; i < b.length; i++) {
+    if (a.indexOf(b[i]) < 0) diff.push(b[i])
+  }
+  return diff
+}

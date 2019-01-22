@@ -1,13 +1,21 @@
-import { VueConstructor } from 'vue'
+import { DirectiveOptions, VueConstructor } from 'vue'
 import * as components from './components'
-import * as directives from './directives'
+import * as _directives from './directives'
+
+interface VuetifyDirectives {
+  [key: string]: DirectiveOptions
+}
+
+const directives: VuetifyDirectives = _directives
 
 export function install (Vue: VueConstructor, args?: object) {
   if ((install as any).installed) return
   (install as any).installed = true
 
   for (const name in directives) {
-    Vue.directive(name, directives[name])
+    const directive = directives[name]
+
+    Vue.directive(name, directive)
   }
 
   (function registerComponents (components: any) {
@@ -32,7 +40,7 @@ export function install (Vue: VueConstructor, args?: object) {
 
         Vue.util.defineReactive(this, '$vuetify', options.vuetify.framework)
       } else {
-        this.$vuetify = options.parent && options.parent.$vuetify || this
+        this.$vuetify = (options.parent && options.parent.$vuetify) || this
       }
     }
   })

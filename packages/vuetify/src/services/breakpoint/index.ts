@@ -7,10 +7,6 @@ import { VuetifyServiceInstance } from 'vuetify/types/services'
 export class Breakpoint implements VuetifyServiceInstance {
   static property = 'breakpoint'
 
-  // Private
-  private options = undefined as VuetifyBreakpointOptions | undefined
-  private resizeTimeout = 0
-
   // Public
   xs = false
   sm = false
@@ -43,6 +39,9 @@ export class Breakpoint implements VuetifyServiceInstance {
   }
   scrollbarWidth = 16
 
+  // private options = undefined as VuetifyBreakpointOptions | undefined
+  private resizeTimeout = 0
+
   constructor (options: Partial<VuetifyBreakpointOptions> = {}) {
     this.thresholds = {
       ...this.thresholds,
@@ -54,24 +53,6 @@ export class Breakpoint implements VuetifyServiceInstance {
     )
 
     this.init()
-  }
-
-  // Cross-browser support as described in:
-  // https://stackoverflow.com/questions/1248081
-  private getClientWidth () {
-    if (typeof document === 'undefined') return 0 // SSR
-    return Math.max(
-      document.documentElement!.clientWidth,
-      window.innerWidth || 0
-    )
-  }
-
-  private getClientHeight () {
-    if (typeof document === 'undefined') return 0 // SSR
-    return Math.max(
-      document.documentElement!.clientHeight,
-      window.innerHeight || 0
-    )
   }
 
   onResize () {
@@ -102,6 +83,7 @@ export class Breakpoint implements VuetifyServiceInstance {
     window.removeEventListener('resize', this.onResize)
   }
 
+  /* eslint-disable-next-line max-statements */
   update () {
     const height = this.getClientHeight()
     const width = this.getClientWidth()
@@ -150,5 +132,23 @@ export class Breakpoint implements VuetifyServiceInstance {
         this.name = 'xl'
         break
     }
+  }
+
+  // Cross-browser support as described in:
+  // https://stackoverflow.com/questions/1248081
+  private getClientWidth () {
+    if (typeof document === 'undefined') return 0 // SSR
+    return Math.max(
+      document.documentElement!.clientWidth,
+      window.innerWidth || 0
+    )
+  }
+
+  private getClientHeight () {
+    if (typeof document === 'undefined') return 0 // SSR
+    return Math.max(
+      document.documentElement!.clientHeight,
+      window.innerHeight || 0
+    )
   }
 }

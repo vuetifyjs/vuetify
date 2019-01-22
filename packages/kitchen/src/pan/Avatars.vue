@@ -4,6 +4,8 @@
       column
       variations
     >
+      <main-header>Avatars</main-header>
+
       <v-flex>
         <h3 class="title grey--text mb-4 mt-5">
           Round
@@ -310,12 +312,12 @@
 </template>
 
 <script>
-export default {
-  name: 'Avatars',
+  export default {
+    name: 'Avatars',
 
-  data: () => ({
-  })
-}
+    data: () => ({
+    })
+  }
 </script>
 
 <style scoped>

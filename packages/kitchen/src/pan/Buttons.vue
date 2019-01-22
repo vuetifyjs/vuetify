@@ -4,6 +4,8 @@
       column
       variations
     >
+      <main-header>Buttons</main-header>
+
       <h3 class="title grey--text mb-4 mt-5">
         Normal
       </h3>
@@ -1396,7 +1398,6 @@
         color="success"
         fixed
         bottom
-        left
         right
       >
         <v-icon>mdi-plus</v-icon>
@@ -1558,19 +1559,19 @@
 </template>
 
 <script>
-export default {
-  name: 'Buttons',
+  export default {
+    name: 'Buttons',
 
-  data: () => ({
-    loading: false
-  }),
+    data: () => ({
+      loading: false
+    }),
 
-  watch: {
-    loading (val) {
-      val && setTimeout(() => (this.loading = false), 2000)
+    watch: {
+      loading (val) {
+        val && setTimeout(() => (this.loading = false), 2000)
+      }
     }
   }
-}
 </script>
 
 <style>

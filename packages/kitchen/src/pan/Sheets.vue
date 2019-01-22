@@ -1,6 +1,8 @@
 <template>
   <v-container>
     <v-layout column>
+      <main-header>Sheets</main-header>
+
       <h3 class="title grey--text mb-4 mt-5 center">
         Elevation
       </h3>
@@ -115,13 +117,13 @@
 </template>
 
 <script>
-export default {
-  name: 'Sheets',
+  export default {
+    name: 'Sheets',
 
-  data: () => ({
-    colors: [ 'red', 'teal', 'primary', 'error', 'warning', 'success', 'yellow darken-2', 'info' ]
-  })
-}
+    data: () => ({
+      colors: [ 'red', 'teal', 'primary', 'error', 'warning', 'success', 'yellow darken-2', 'info' ]
+    })
+  }
 </script>
 
 <style scoped>

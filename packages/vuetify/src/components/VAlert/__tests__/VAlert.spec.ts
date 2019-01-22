@@ -60,7 +60,7 @@ describe('VAlert.ts', () => {
 
     icon.trigger('click')
 
-    expect(input).toBeCalledWith(false)
+    expect(input).toHaveBeenCalledWith(false)
     expect(wrapper.html()).toMatchSnapshot()
   })
 

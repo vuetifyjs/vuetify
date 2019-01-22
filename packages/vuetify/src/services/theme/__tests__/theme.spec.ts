@@ -66,7 +66,7 @@ describe('Theme.ts', () => {
     expect(html.indexOf('#000003') > -1).toBe(true)
   })
 
-  it ('should apply a new theme', () => {
+  it('should apply a new theme', () => {
     const theme = new Theme({
       default: 'light',
       themes: {
@@ -131,7 +131,7 @@ describe('Theme.ts', () => {
     const style = document.getElementById('vuetify-theme-stylesheet')
     const html = style!.innerHTML
 
-    expect(minifyTheme).toBeCalled()
+    expect(minifyTheme).toHaveBeenCalled()
     expect(html.indexOf('foobar') > -1).toBe(true)
   })
 

@@ -1,0 +1,26 @@
+@import ../../styles/styles.sass
+@import ./_variables
+
+.v-tooltip
+  &__content
+    background: $tooltip-background-color
+    color: $tooltip-text-color
+    border-radius: $tooltip-border-radius
+    font-size: $tooltip-font-size
+    line-height: round($tooltip-font-size * 1.6)
+    display: inline-block
+    padding: 5px 16px
+    position: absolute
+    text-transform: initial
+    width: auto
+    opacity: 1
+    pointer-events: none
+
+    &[class*="-active"]
+      transition-timing-function: map-get($transition, 'linear-out-slow-in')
+
+    &[class*="enter-active"]
+      transition-duration: 150ms
+
+    &[class*="leave-active"]
+      transition-duration: 75ms

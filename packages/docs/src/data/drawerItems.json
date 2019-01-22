@@ -28,6 +28,7 @@
         "group": "framework",
         "text": "layout",
         "children": [
+          { "text": "defaultMarkup", "to": "default-markup"},
           { "text": "aspectRatios", "to": "aspect-ratios" },
           { "text": "breakpoints", "to": "breakpoints" },
           { "text": "preMadeLayouts", "to": "pre-made-layouts", "updated": true }
@@ -77,6 +78,7 @@
       { "text": "breadcrumbs", "to": "breadcrumbs" },
       { "text": "buttons", "to": "buttons" },
       { "text": "fabs", "to": "floating-action-buttons" },
+      { "text": "calendars", "to": "calendars", "new": true },
       { "text": "cards", "to": "cards" },
       { "text": "carousels", "to": "carousels" },
       { "text": "chips", "to": "chips", "updated": true },

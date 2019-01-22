@@ -1,6 +1,8 @@
 <template>
   <v-container>
     <v-layout column>
+      <main-header>Sparklines</main-header>
+
       <h3 class="title grey--text mb-4 mt-5 center">
         Basic
       </h3>
@@ -44,30 +46,30 @@
 </template>
 
 <script>
-export default {
-  name: 'Sparklines',
+  export default {
+    name: 'Sparklines',
 
-  data: () => ({
-    value: [0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0],
-    labels: [
-      '1',
-      '2',
-      '3',
-      '4',
-      '5',
-      '6',
-      '7',
-      '8',
-      '9',
-      '10',
-      '11',
-      '12',
-      '13',
-      '14',
-      '15'
-    ]
-  })
-}
+    data: () => ({
+      value: [0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0],
+      labels: [
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        '10',
+        '11',
+        '12',
+        '13',
+        '14',
+        '15'
+      ]
+    })
+  }
 </script>
 
 <style scoped>

@@ -108,7 +108,9 @@ export default VTextField.extend({
       ? vm.value
       : vm.multiple ? [] : undefined,
     selectedIndex: -1,
-    selectedItems: []
+    selectedItems: [],
+    keyboardLookupPrefix: '',
+    keyboardLookupLastTime: 0
   }),
 
   computed: {
@@ -387,6 +389,7 @@ export default VTextField.extend({
       input.data.domProps.value = null
       input.data.attrs.readonly = true
       input.data.attrs['aria-readonly'] = String(this.readonly)
+      input.data.on.keypress = this.onKeyPress
 
       return input
     },
@@ -562,6 +565,22 @@ export default VTextField.extend({
       if (this.isMenuActive) {
         e.stopPropagation()
         this.isMenuActive = false
+      }
+    },
+    onKeyPress (e) {
+      if (this.multiple) return
+
+      const KEYBOARD_LOOKUP_THRESHOLD = 1000 // milliseconds
+      const now = performance.now()
+      if (now - this.keyboardLookupLastTime > KEYBOARD_LOOKUP_THRESHOLD) {
+        this.keyboardLookupPrefix = ''
+      }
+      this.keyboardLookupPrefix += e.key.toLowerCase()
+      this.keyboardLookupLastTime = now
+
+      const item = this.allItems.find(item => this.getText(item).toLowerCase().startsWith(this.keyboardLookupPrefix))
+      if (item !== undefined) {
+        this.setValue(this.returnObject ? item : this.getValue(item))
       }
     },
     onKeyDown (e) {

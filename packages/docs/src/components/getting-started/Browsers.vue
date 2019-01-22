@@ -19,18 +19,14 @@
             <v-icon
               v-if="typeof browser.icon === 'string'"
               dark
-            >
-              fab fa-{{ browser.icon }}
-            </v-icon>
+            >fab fa-{{ browser.icon }}</v-icon>
             <v-icon
               v-for="icon in browser.icon"
               v-else
               :key="icon"
               class="browser-icon--split"
               dark
-            >
-              fab fa-{{ icon }}
-            </v-icon>
+            >fab fa-{{ icon }}</v-icon>
           </v-list-tile-avatar>
           <v-list-tile-content>
             <v-list-tile-title>{{ browser.title }}</v-list-tile-title>

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { VuetifyPreset } from 'vuetify/types/presets'
 
 const preset: VuetifyPreset = {

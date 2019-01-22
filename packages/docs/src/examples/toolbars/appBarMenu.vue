@@ -4,18 +4,13 @@
     flat
     height="200px"
   >
-    <v-toolbar
-      color="grey darken-1"
-      dark
-    >
+    <v-toolbar color="grey darken-1" dark>
       <v-toolbar-side-icon></v-toolbar-side-icon>
 
       <v-menu :nudge-width="100">
         <v-toolbar-title slot="activator">
           <span>All</span>
-          <v-icon dark>
-            arrow_drop_down
-          </v-icon>
+          <v-icon dark>arrow_drop_down</v-icon>
         </v-toolbar-title>
 
         <v-list>

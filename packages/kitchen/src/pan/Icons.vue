@@ -1,6 +1,8 @@
 <template>
   <v-container>
     <v-layout column>
+      <main-header>Icons</main-header>
+
       <h3 class="title grey--text mb-4 mt-5 center">
         Basic
       </h3>
@@ -316,9 +318,9 @@
 </template>
 
 <script>
-export default {
-  name: 'Icons'
-}
+  export default {
+    name: 'Icons'
+  }
 </script>
 
 <style scoped>

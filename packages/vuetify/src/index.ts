@@ -1,6 +1,6 @@
 import {
   VuetifyService,
-  VuetifyServiceInstance,
+  VuetifyServiceInstance
 } from 'vuetify/types/services'
 import { VueConstructor } from 'vue'
 import defaultPreset from './presets/default'
@@ -9,13 +9,13 @@ import { VuetifyPreset } from 'vuetify/types/presets'
 import * as services from './services'
 
 export default class Vuetify {
+  static install: (Vue: VueConstructor) => void
+  static version: string
+
   framework: Record<string, VuetifyServiceInstance> = {}
   installed: string[] = []
   defaultPreset: VuetifyPreset = defaultPreset
   userPreset?: Partial<VuetifyPreset>
-
-  static install: (Vue: VueConstructor) => void
-  static version: string
 
   constructor (preset?: Partial<VuetifyPreset>) {
     this.userPreset = preset
@@ -34,12 +34,12 @@ export default class Vuetify {
     }
   }
 
-  use (service: VuetifyService) {
-    const property = service.property
+  use (Service: VuetifyService) {
+    const property = Service.property
 
     if (this.installed.includes(property)) return
 
-    this.framework[property] = new service(this.options[property])
+    this.framework[property] = new Service(this.options[property])
   }
 }
 

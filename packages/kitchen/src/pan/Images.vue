@@ -1,6 +1,8 @@
 <template>
   <v-container>
     <v-layout column>
+      <main-header>Images</main-header>
+
       <h3 class="title grey--text mb-4 mt-5 center">
         Simple images
       </h3>
@@ -130,11 +132,11 @@
 </template>
 
 <script>
-export default {
-  name: 'Images',
+  export default {
+    name: 'Images',
 
-  data: () => ({})
-}
+    data: () => ({})
+  }
 </script>
 
 <style scoped>

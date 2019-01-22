@@ -1,6 +1,8 @@
 <template>
   <v-container>
     <v-layout column>
+      <main-header>Badges</main-header>
+
       <h3 class="title grey--text mb-4 mt-5 center">
         Left
       </h3>
@@ -400,14 +402,14 @@
 </template>
 
 <script>
-export default {
-  name: 'Badges',
+  export default {
+    name: 'Badges',
 
-  data: () => ({
-    show1: false,
-    show2: false
-  })
-}
+    data: () => ({
+      show1: false,
+      show2: false
+    })
+  }
 </script>
 
 <style scoped>

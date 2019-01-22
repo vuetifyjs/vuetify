@@ -12,11 +12,7 @@
       single-line
     />
 
-    <v-container
-      fluid
-      pa-0
-      grid-list-xl
-    >
+    <v-container fluid pa-0 grid-list-xl>
       <v-layout wrap>
         <v-flex
           v-for="(color, key) in computedColors"
@@ -29,10 +25,7 @@
             tile
           >
             <v-card-text>
-              <span
-                class="title"
-                v-text="key"
-              />
+              <span class="title" v-text="key" />
             </v-card-text>
           </v-card>
           <v-card
@@ -44,25 +37,12 @@
           >
             <v-card-text>
               <v-layout>
-                <v-flex
-                  xs8
-                  caption
-                >
-                  <span v-if="key !== 'shades'">
-                    {{ key }}&nbsp;
-                  </span>
-                  <span v-if="key2 !== 'base'">
-                    {{ key2.replace(/(.*)(\d)/, '$1-$2') }}
-                  </span>
+                <v-flex xs8 caption>
+                  <span v-if="key !== 'shades'">{{ key }}&nbsp;</span>
+                  <span v-if="key2 !== 'base'">{{ key2.replace(/(.*)(\d)/, '$1-$2') }}</span>
                 </v-flex>
-                <v-flex
-                  xs4
-                  text-xs-right
-                >
-                  <span
-                    v-if="subColor !== 'transparent'"
-                    v-text="subColor.toUpperCase()"
-                  />
+                <v-flex xs4 text-xs-right>
+                  <span v-if="subColor !== 'transparent'" v-text="subColor.toUpperCase()" />
                 </v-flex>
               </v-layout>
             </v-card-text>

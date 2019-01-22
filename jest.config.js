@@ -37,6 +37,7 @@ module.exports = {
   testMatch: [
     // Default
     '**/test/**/*.js',
+    '**/__tests__/**/*.spec.js',
     '**/__tests__/**/*.spec.ts'
   ],
   globals: {
