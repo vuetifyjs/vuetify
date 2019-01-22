@@ -39,7 +39,6 @@ export class Breakpoint implements VuetifyServiceInstance {
   }
   scrollbarWidth = 16
 
-  // private options = undefined as VuetifyBreakpointOptions | undefined
   private resizeTimeout = 0
 
   constructor (options: Partial<VuetifyBreakpointOptions> = {}) {
