@@ -1,6 +1,8 @@
 <template>
   <v-container>
     <v-layout column>
+      <main-header>Ratings</main-header>
+      
       <core-title>
         Simple
       </core-title>

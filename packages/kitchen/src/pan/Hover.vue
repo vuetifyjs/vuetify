@@ -1,6 +1,8 @@
 <template>
   <v-container>
     <v-layout column>
+      <main-header>Hover</main-header>
+      
       <core-title>
         Simple hover
       </core-title>

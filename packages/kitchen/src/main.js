@@ -5,9 +5,11 @@ import router from './router'
 import store from './store'
 import CoreTitle from '@/components/CoreTitle.vue'
 import CoreSection from '@/components/CoreSection.vue'
+import MainHeader from '@/components/MainHeader'
 
 Vue.config.productionTip = false
 
+Vue.component('MainHeader', MainHeader)
 Vue.component('CoreTitle', CoreTitle)
 Vue.component('CoreSection', CoreSection)
 

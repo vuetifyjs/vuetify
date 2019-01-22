@@ -1,6 +1,8 @@
 <template>
   <v-container>
     <v-layout column>
+      <main-header>Icons</main-header>
+      
       <core-title>
         Basic
       </core-title>

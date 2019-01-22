@@ -1,6 +1,8 @@
 <template>
   <v-container>
     <v-layout column>
+      <main-header>Images</main-header>
+      
       <core-title>
         Simple images
       </core-title>

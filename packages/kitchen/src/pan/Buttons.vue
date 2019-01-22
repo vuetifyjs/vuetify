@@ -4,6 +4,8 @@
       column
       variations
     >
+      <main-header>Buttons</main-header>
+      
       <core-title>
         Normal
       </core-title>

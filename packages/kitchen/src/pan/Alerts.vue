@@ -1,6 +1,8 @@
 <template>
   <v-container>
     <v-layout column>
+      <main-header>Alerts</main-header>
+
       <!-- Dense -->
       <core-title>Dense</core-title>
       <core-section>

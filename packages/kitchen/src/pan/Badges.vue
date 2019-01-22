@@ -1,7 +1,9 @@
 <template>
   <v-container>
     <v-layout column>
-      <core-title>
+      <main-header>Badges</main-header>
+      
+      <core-title
         Left
       </core-title>
       <core-section>

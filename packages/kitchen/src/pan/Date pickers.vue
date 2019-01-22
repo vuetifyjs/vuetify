@@ -16,6 +16,8 @@
     </v-btn>
 
     <v-layout column>
+
+      <main-header>Date pickers</main-header>
       <core-section>
         <v-layout
           row

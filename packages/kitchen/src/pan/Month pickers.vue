@@ -16,6 +16,8 @@
     </v-btn>
 
     <v-layout column>
+      <main-header>Month pickers</main-header>
+      
       <core-title>
         Month pickers
       </core-title>

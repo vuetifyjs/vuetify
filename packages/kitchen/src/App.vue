@@ -101,7 +101,7 @@
     }),
     computed: {
       href () {
-        return `https://github.com/vuetifyjs/vuetify/tree/next/packages/kitchen/src/pan/${this.$route.params.component}.vue`  // TODO: set branch back to master before v2.0 release
+        return `https://github.com/vuetifyjs/vuetify/tree/next/packages/kitchen/src/pan/${this.$route.params.component}.vue` // TODO: set branch back to master before v2.0 release
       }
     }
   }

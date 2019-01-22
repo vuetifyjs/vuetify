@@ -1,6 +1,8 @@
 <template>
   <v-container>
     <v-layout column>
+      <main-header>Tooltips</main-header>
+
       <core-title>
         Simple
       </core-title>
