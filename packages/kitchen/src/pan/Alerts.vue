@@ -93,8 +93,8 @@
         </v-alert>
       </core-section>
       <!-- Prominent & dense -->
+      <core-title>Prominent & dense</core-title>
       <core-section>
-        <core-title>Prominent & dense</core-title>
         <v-alert
           type="success"
           prominent
