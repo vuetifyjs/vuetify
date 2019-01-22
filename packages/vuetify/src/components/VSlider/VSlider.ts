@@ -201,7 +201,8 @@ export default mixins<options &
       return this.validationState || this.color
     },
     computedTrackColor () {
-      return this.disabled ? false : this.trackColor
+      if (this.disabled) return false
+      return this.validationState || this.trackColor
     },
     computedThumbColor () {
       if (this.disabled) return false
@@ -284,6 +285,7 @@ export default mixins<options &
       return this.$createElement('input', {
         attrs: {
           value: this.internalValue,
+          disabled: this.disabled,
           readonly: true,
           tabindex: -1,
           ...this.$attrs
@@ -405,6 +407,10 @@ export default mixins<options &
     genThumbLabel (content: ScopedSlotChildren): VNode {
       const size = convertToUnit(this.thumbSize)
 
+      const transform = this.vertical
+        ? `translateY(20%) translateY(${(Number(this.thumbSize) / 3) - 1}px) translateX(55%) rotate(135deg)`
+        : `translateY(-20%) translateY(-12px) translateX(-50%) rotate(45deg)`
+
       return this.$createElement(VScaleTransition, {
         props: { origin: 'bottom center' }
       }, [
@@ -415,18 +421,19 @@ export default mixins<options &
             value: this.isFocused || this.isActive || this.thumbLabel === 'always'
           }]
         }, [
-          this.$createElement('div', this.setBackgroundColor(this.thumbColor, {
+          this.$createElement('div', this.setBackgroundColor(this.computedThumbColor, {
             staticClass: 'v-slider__thumb-label',
             style: {
               height: size,
-              width: size
+              width: size,
+              transform
             }
           }), [this.$createElement('div', [content])])
         ])
       ])
     },
     genThumb (): VNode {
-      return this.$createElement('div', this.setBackgroundColor(this.disabled ? false : this.thumbColor, {
+      return this.$createElement('div', this.setBackgroundColor(this.computedThumbColor, {
         staticClass: 'v-slider__thumb'
       }))
     },
@@ -477,7 +484,7 @@ export default mixins<options &
       }
     },
     onKeyDown (e: KeyboardEvent) {
-      if (this.disabled) return //  || this.readonly should be moved to wrapping input component
+      if (this.disabled || this.readonly) return
 
       const value = this.parseKeyDown(e, this.internalValue)
 
@@ -496,9 +503,13 @@ export default mixins<options &
     },
     onBlur (e: Event) {
       this.isFocused = false
+
+      this.$emit('blur', e)
     },
     onFocus (e: Event) {
       this.isFocused = true
+
+      this.$emit('focus', e)
     },
     parseMouseMove (e: MouseEvent) {
       const start = this.vertical ? 'top' : 'left'

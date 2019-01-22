@@ -88,6 +88,19 @@ export default VSlider.extend({
   },
 
   methods: {
+    getTrackStyle (startLength: number, endLength: number, startPadding = 0, endPadding = 0) {
+      const startDir = this.vertical ? this.$vuetify.rtl ? 'top' : 'bottom' : this.$vuetify.rtl ? 'right' : 'left'
+      const endDir = this.vertical ? 'height' : 'width'
+
+      const start = `calc(${startLength}% + ${startPadding}px)`
+      const end = `calc(${endLength}% + ${endPadding}px)`
+
+      return {
+        transition: this.trackTransition,
+        [startDir]: start,
+        [endDir]: end
+      }
+    },
     getIndexOfClosestValue (arr: number[], v: number) {
       if (Math.abs(arr[0] - v) < Math.abs(arr[1] - v)) return 0
       else return 1
@@ -102,6 +115,41 @@ export default VSlider.extend({
 
         return input
       })
+    },
+    genTrackContainer() {
+      const children = []
+
+      if (this.disabled) {
+        const disabledPadding = 10
+        const sections : [number, number, number, number][] = [
+          [0, this.inputWidth[0], 0, -disabledPadding],
+          [this.inputWidth[0], Math.abs(this.inputWidth[1] - this.inputWidth[0]), disabledPadding, disabledPadding * -2],
+          [this.inputWidth[1], Math.abs(100 - this.inputWidth[1]), disabledPadding, 0]
+        ]
+
+        if (this.$vuetify.rtl) sections.reverse()
+
+        children.push(...sections.map(section => this.$createElement('div', this.setBackgroundColor(this.computedTrackColor, {
+          staticClass: 'v-slider__track-background',
+          style: this.getTrackStyle(...section)
+        }))))
+      } else {
+        children.push(
+          this.$createElement('div', this.setBackgroundColor(this.computedTrackColor, {
+            staticClass: 'v-slider__track-background',
+            style: this.getTrackStyle(0, 100)
+          })),
+          this.$createElement('div', this.setBackgroundColor(this.computedColor, {
+            staticClass: 'v-slider__track-fill',
+            style: this.trackFillStyles
+          }))
+        )
+      }
+
+      return this.$createElement('div', {
+        staticClass: 'v-slider__track-container',
+        ref: 'track'
+      }, children)
     },
     genChildren () {
       return [

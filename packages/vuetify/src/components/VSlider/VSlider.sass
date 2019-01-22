@@ -98,8 +98,6 @@
 
 .v-slider__tick-label
   position: absolute
-  top: 8px
-  transform: translateX(-50%)
   user-select: none
   white-space: nowrap
 
@@ -181,11 +179,35 @@
     left: 50%
     transform: translateX(-50%)
 
+  .v-slider__tick
+    &:first-child .v-slider__tick-label
+      transform: translateY(-50%)
+
+    +rtl()
+      &:first-child .v-slider__tick-label
+        right: 12px
+
+    &:last-child .v-slider__tick-label
+      transform: translateY(-50%)
+
+    +rtl()
+      &:last-child .v-slider__tick-label
+        transform: translateY(-50%)
+
+    .v-slider__tick-label
+      left: 12px
+      transform: translateY(-50%)
+
+    +rtl()
+      .v-slider__tick-label
+        left: auto
+        right: 12px
+
   .v-slider__thumb-label
     // Needed for IE11 which does not
     // process translateY(calc(-20% - 12px))
     // or translate(-50%, calc(-20% - 12px))
-    transform: translateY(20%) translateY(10px) translateX(55%) rotate(135deg)
+    // transform: translateY(20%) translateY(10px) translateX(55%) rotate(135deg)
 
     > *
       transform: rotate(-135deg)
@@ -255,3 +277,7 @@
 
   .v-messages
     display: none
+
+.v-input--has-state
+  .v-slider__track-background
+    opacity: 0.4
