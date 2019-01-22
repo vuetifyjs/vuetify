@@ -21,7 +21,7 @@ export default mixins(
 
   provide (): object {
     return {
-      list: this
+      listClick: this.listClick
     }
   },
 

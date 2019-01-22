@@ -39,6 +39,8 @@ export default mixins<options &
 ).extend({
   name: 'v-list-group',
 
+  inject: ['listClick'],
+
   props: {
     activeClass: {
       type: String,
@@ -82,7 +84,7 @@ export default mixins<options &
   watch: {
     isActive (val) {
       if (!this.subGroup && val) {
-        this.list.listClick(this._uid)
+        (this as any).listClick(this._uid)
       }
     },
     $route (to) {
@@ -90,7 +92,7 @@ export default mixins<options &
 
       if (this.group) {
         if (isActive && this.isActive !== isActive) {
-          this.list.listClick(this._uid)
+          (this as any).listClick(this._uid)
         }
 
         this.isActive = isActive
