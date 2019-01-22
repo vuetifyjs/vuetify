@@ -21,10 +21,6 @@ export default mixins(
   name: 'v-card',
 
   props: {
-    elevation: {
-      type: [Number, String],
-      default: 2
-    },
     flat: Boolean,
     hover: Boolean,
     img: String,
@@ -35,15 +31,10 @@ export default mixins(
     classes (): object {
       return {
         'v-card': true,
+        'v-card--flat': this.flat,
         'v-card--hover': this.hover,
         ...VSheet.options.computed.classes.call(this)
       }
-    },
-    computedElevation (): number | string {
-      if (this.flat) return 0
-      if (this.raised) return 3
-
-      return (VSheet.options.computed as any).computedElevation.call(this)
     },
     styles (): object {
       const style = {
