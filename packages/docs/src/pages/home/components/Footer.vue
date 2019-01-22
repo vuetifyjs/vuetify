@@ -42,6 +42,57 @@
             </a>
           </v-layout>
         </v-flex>
+        <v-flex
+          xs12
+          sm8
+          md5
+          mx-auto
+        >
+          <v-form
+            action="https://www.getrevue.co/profile/vuetify/add_subscriber"
+            method="post"
+            name="revue-form"
+            target="_blank"
+          >
+            <v-text-field
+              id="member_email"
+              v-model="email"
+              class="v-text-field--rounded"
+              color="secondary"
+              type="email"
+              name="member[email]"
+              solo
+              flat
+              hide-details
+              label="Email Address"
+            >
+              <v-btn
+                slot="append"
+                type="submit"
+                color="secondary"
+                name="member[subscribe]"
+                value="Subscribe"
+                @click="email = ''"
+              >
+                Subscribe
+              </v-btn>
+            </v-text-field>
+          </v-form>
+          <div class="text-xs-center caption">
+            Subscribe to our <strong>monthly</strong> Newsletter
+          </div>
+        </v-flex>
+        <v-flex xs12 />
+        <v-flex
+          xs12
+          my-5
+          text-xs-center
+        >
+          <v-divider
+            class="mx-auto"
+            style="width: 150px; max-width: 70%;"
+          />
+        </v-flex>
         <v-flex xs12>
           <v-layout
             column
@@ -53,7 +104,6 @@
                 href="https://opensource.org/licenses/MIT"
                 class="grey--text text--lighten-1"
                 rel="noopener"
-                style="text-decoration: none;"
                 target="_blank"
               >
                 MIT License
@@ -89,6 +139,7 @@
 <script>
   export default {
     data: () => ({
+      email: '',
       socials: [
         {
           icon: 'mdi-reddit',
@@ -134,4 +185,23 @@
       &:hover
         color: #FFF
         opacity: 1
+
+    .v-text-field--rounded
+      margin-bottom: 16px
+
+      .v-input__slot
+        border-radius: 28px
+
+      .v-text-field__slot,
+      .v-label
+        padding-left: 8px
+
+      .v-btn
+        margin: 0
+        border-top-right-radius: 28px
+        border-bottom-right-radius: 28px
+        box-shadow: none
+        height: 48px
+        margin-right: -12px
+        padding-top: 2px
 </style>

@@ -1,0 +1,21 @@
+{
+  "header": "crwdns12834:0crwdne12834:0",
+  "headerText": "crwdns12836:0crwdne12836:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns12838:0crwdne12838:0"
+    },
+    "content": {
+      "header": "crwdns12840:0crwdne12840:0",
+      "desc": "crwdns12842:0crwdne12842:0"
+    },
+    "customHeight": {
+      "header": "crwdns12844:0crwdne12844:0",
+      "desc": "crwdns12846:0crwdne12846:0"
+    }
+  },
+  "props": {
+    "alt": "crwdns12848:0crwdne12848:0",
+    "src": "crwdns12850:0crwdne12850:0"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "header": "crwdns13292:0crwdne13292:0",
+  "headerText": "crwdns13294:0crwdne13294:0",
+  "examples": {
+    "playground": {
+      "header": "crwdns13296:0crwdne13296:0",
+      "desc": "crwdns13298:0crwdne13298:0"
+    },
+    "heartRate": {
+      "header": "crwdns13300:0crwdne13300:0",
+      "desc": "crwdns13302:0crwdne13302:0"
+    },
+    "dashboardCard": {
+      "header": "crwdns13304:0crwdne13304:0",
+      "desc": "crwdns13306:0crwdne13306:0"
+    },
+    "salesCard": {
+      "header": "crwdns13308:0crwdne13308:0",
+      "desc": "crwdns13310:0crwdne13310:0"
+    }
+  },
+  "props": {
+    "autoDraw": "crwdns13312:0crwdne13312:0",
+    "autoDrawDuration": "crwdns13314:0crwdne13314:0",
+    "autoDrawEasing": "crwdns13316:0crwdne13316:0",
+    "data": "crwdns13318:0crwdne13318:0",
+    "gradient": "crwdns13320:0crwdne13320:0",
+    "gradientDirection": "crwdns13322:0crwdne13322:0",
+    "labels": "crwdns13324:0crwdne13324:0",
+    "lineWidth": "crwdns13326:0crwdne13326:0",
+    "padding": "crwdns13328:0crwdne13328:0",
+    "showLabels": "crwdns13330:0crwdne13330:0",
+    "smooth": "crwdns13332:0crwdne13332:0",
+    "type": "crwdns13334:0crwdne13334:0"
+  }
+}

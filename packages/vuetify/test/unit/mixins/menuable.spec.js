@@ -31,4 +31,33 @@ test('menuable.js', ({ mount }) => {
     await wrapper.vm.$nextTick()
     expect(sneakPeek).toHaveBeenCalled()
   })
+
+  it('should apply maxWidth in left calculations when offset', async () => {
+    const wrapper = mount({
+      mixins: [Menuable],
+      props: {
+        offsetY: Boolean,
+        offsetX: Boolean
+      },
+      render: h => h('div')
+    }, {
+      propsData: {
+        attach: true,
+        left: true,
+        offsetX: true,
+        maxWidth: 200
+      }
+    })
+
+    wrapper.setData({
+      dimensions: {
+        activator: { width: 300 },
+        content: { width: 138 }
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.computedLeft).toBe(-200)
+  })
 })

@@ -1,0 +1,26 @@
+{
+  "header": "crwdns11756:0crwdne11756:0",
+  "headerText": "crwdns11758:0crwdne11758:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns11760:0crwdne11760:0"
+    },
+    "slots": {
+      "header": "crwdns11762:0crwdne11762:0",
+      "desc": "crwdns11764:0crwdne11764:0"
+    }
+  },
+  "props": {
+    "contentClass": "crwdns11766:0crwdne11766:0",
+    "contentProps": "crwdns11768:0crwdne11768:0",
+    "contentTag": "crwdns11770:0crwdne11770:0",
+    "nextIcon": "crwdns11772:0crwdne11772:0",
+    "prevIcon": "crwdns11774:0crwdne11774:0"
+  },
+  "slots": {
+    "header": "crwdns11776:0crwdne11776:0"
+  },
+  "events": {
+    "update:pagination": "crwdns11778:0crwdne11778:0"
+  }
+}
