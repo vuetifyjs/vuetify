@@ -1,6 +1,6 @@
 {
   "name": "@vuetify/kitchen",
-  "version": "2.0.0-alpha.0",
+  "version": "2.0.0-alpha.1",
   "private": true,
   "scripts": {
     "deploy": "now && now alias",
@@ -13,7 +13,7 @@
     "vue": "^2.5.21",
     "vue-router": "^3.0.1",
     "vue-template-compiler": "^2.5.21",
-    "vuetify": "^2.0.0-alpha.0"
+    "vuetify": "^2.0.0-alpha.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.2.0",
