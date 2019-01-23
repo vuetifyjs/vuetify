@@ -214,6 +214,7 @@ rtl(v-text-field-rtl, "v-text-field")
     position: relative
 
   &--box,
+  &--full-width,
   &--outline
     position: relative
 
@@ -262,25 +263,6 @@ rtl(v-text-field-rtl, "v-text-field")
 
     .v-text-field__details
       margin-bottom: 8px
-
-  &.v-text-field--full-width
-    &.v-input
-      margin-bottom: 0
-      margin-top: 0
-
-    .v-label
-      top: calc(50% - 10px)
-
-    .v-input__control
-      padding: 12px 0
-
-    .v-input__prepend-outer,
-    .v-input__append-outer
-      margin-top: 4px
-
-    .v-input__append-inner
-      align-self: center
-      margin-top: 0
 
   &--reverse
     input

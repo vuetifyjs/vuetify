@@ -1,7 +1,9 @@
 {
   "header": "# Autocomplete",
   "headerText": "The `v-autocomplete` component offers simple and flexible type-ahead functionality. This is useful when searching large sets of data or even dynamically requesting information from an API.",
-  "supplemental": [ "MaskTable" ],
+  "supplemental": [
+    "MaskTable"
+  ],
   "examples": {
     "usage": {
       "desc": "The autocomplete component extends `v-select` and adds the ability to filter items."
@@ -47,6 +49,11 @@
   },
   "events": {
     "change": "Components.Inputs.events.change",
+    "click:append": "Components.Inputs.events['click:append']",
+    "click:append-outer": "Components.TextFields.events['click:append-outer']",
+    "click:clear": "Components.TextFields.events['click:clear']",
+    "click:prepend": "Components.Inputs.events['click:prepend']",
+    "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
     "update:error": "Mixins.Validatable.events['update:error']",
     "update:searchInput": "The `search-input.sync` event"
   }

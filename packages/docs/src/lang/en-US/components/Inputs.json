@@ -25,6 +25,8 @@
   },
   "events": {
     "blur": "Emitted when the input is blurred",
-    "change": "Emitted when the input is changed by user interaction"
+    "change": "Emitted when the input is changed by user interaction",
+    "click:append": "Emitted when appended icon is clicked",
+    "click:prepend": "Emitted when prepended icon is clicked"
   }
 }

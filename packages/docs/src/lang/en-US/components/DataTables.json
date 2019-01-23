@@ -27,7 +27,7 @@
     },
     "expand": {
       "header": "### Slot: expand",
-      "desc": "The `v-data-table` component also supports expandable rows using the `expand` slot. You can use the prop `expand` to prevent expanded rows from closing when clicking on another row."
+      "desc": "The `v-data-table` component also supports expandable rows using the `expand` slot. By default expanding a row closes all remaining rows. You can use the prop `expand` on `v-data-table` to prevent expanded rows from closing when clicking on another row."
     },
     "pageText": {
       "header": "### Slot: pageText",

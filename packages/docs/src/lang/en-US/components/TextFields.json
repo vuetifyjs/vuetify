@@ -120,7 +120,10 @@
   },
   "events": {
     "change": "Components.Inputs.events.change",
+    "click:append": "Components.Inputs.events['click:append']",
     "click:append-outer": "Emitted when appended outer icon is clicked",
+    "click:clear": "Emitted when clearable icon clicked",
+    "click:prepend": "Components.Inputs.events['click:prepend']",
     "click:prepend-inner": "Emitted when prepended inner icon is clicked",
     "update:error": "Mixins.Validatable.events['update:error']"
   }

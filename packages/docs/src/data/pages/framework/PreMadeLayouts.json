@@ -6,41 +6,6 @@
       "type": "section",
       "children": [
         {
-          "type": "alert",
-          "lang": "alert1",
-          "value": "error"
-        },
-        {
-          "type": "heading",
-          "lang": "markupHeader"
-        },
-        {
-          "type": "text",
-          "lang": "markupText"
-        },
-        {
-          "type": "markup",
-          "value": "html_default_markup"
-        },
-        {
-          "type": "alert",
-          "lang": "alert2",
-          "value": "info"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "heading",
-          "lang": "appHeader"
-        },
-        {
-          "type": "text",
-          "lang": "appText"
-        },
-        {
           "type": "doc-pre-made-layouts"
         }
       ]
