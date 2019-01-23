@@ -1,6 +1,6 @@
 export interface MaskItem {
   test: (char: string) => boolean
-  convert: (char: string) => string // eslint-disable-line no-use-before-define
+  convert?: (char: string) => string
 }
 export type MaskType = '#' | 'A' | 'a' | 'N' | 'n' | 'X'
 
@@ -10,35 +10,33 @@ export const isMaskDelimiter = (char: string): boolean => char ? defaultDelimite
 
 const allowedMasks: Dictionary<MaskItem> = {
   '#': {
-    test: char => Boolean(char.match(/[0-9]/)),
-    convert: char => char
+    test: char => /[0-9]/.test(char)
   },
   'A': {
-    test: char => Boolean(char.match(/[A-Z]/i)),
+    test: char => /[A-Z]/i.test(char),
     convert: char => char.toUpperCase()
   },
   'a': {
-    test: char => Boolean(char.match(/[a-z]/i)),
+    test: char => /[a-z]/i.test(char),
     convert: char => char.toLowerCase()
   },
   'N': {
-    test: char => Boolean(char.match(/[0-9A-Z]/i)),
+    test: char => /[0-9A-Z]/i.test(char),
     convert: char => char.toUpperCase()
   },
   'n': {
-    test: char => Boolean(char.match(/[0-9a-z]/i)),
+    test: char => /[0-9a-z]/i.test(char),
     convert: char => char.toLowerCase()
   },
   'X': {
-    test: isMaskDelimiter,
-    convert: char => char
+    test: isMaskDelimiter
   }
 }
 
 const isMask = (char: string): boolean => allowedMasks.hasOwnProperty(char)
 
 const convert = (mask: MaskType, char: string): string => {
-  return allowedMasks[mask].convert(char)
+  return allowedMasks[mask].convert ? allowedMasks[mask].convert!(char) : char
 }
 
 const maskValidates = (mask: MaskType, char: string): boolean => {
@@ -46,7 +44,7 @@ const maskValidates = (mask: MaskType, char: string): boolean => {
   return allowedMasks[mask].test(char)
 }
 
-export const maskText = (text: string | string[], masked: string | any[], dontFillMaskBlanks: boolean): string => {
+export const maskText = (text: string | null | undefined, masked: string | string[], dontFillMaskBlanks: boolean): string => {
   if (text == null) return ''
   text = String(text)
   if (!masked.length || !text.length) return text
@@ -71,8 +69,8 @@ export const maskText = (text: string | string[], masked: string | any[], dontFi
     } else if (!isMask(mask) && !dontFillMaskBlanks) {
       newText += mask
     // Check if is mask and validates
-    } else if (maskValidates(mask, char)) {
-      newText += convert(mask, char)
+    } else if (maskValidates(mask as MaskType, char)) {
+      newText += convert(mask as MaskType, char)
       textIndex++
     } else {
       return newText

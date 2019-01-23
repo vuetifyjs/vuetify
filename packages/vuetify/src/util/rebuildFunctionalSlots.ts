@@ -1,7 +1,7 @@
 import { CreateElement, VNode } from 'vue'
 
 export default function rebuildFunctionalSlots (slots: { [key: string]: VNode[] | undefined }, h: CreateElement) {
-  const children = []
+  const children: VNode[] = []
 
   for (const slot in slots) {
     if (slots.hasOwnProperty(slot)) {
