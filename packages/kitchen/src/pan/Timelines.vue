@@ -1,10 +1,10 @@
 <template>
   <v-container>
     <v-layout column>
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Basic
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-timeline>
           <v-timeline-item
             v-for="n in 2"
@@ -23,12 +23,12 @@
             </v-card>
           </v-timeline-item>
         </v-timeline>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Opposite slot
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-timeline>
           <v-timeline-item
             v-for="n in 2"
@@ -50,12 +50,12 @@
             </v-card>
           </v-timeline-item>
         </v-timeline>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Different colors
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-timeline>
           <v-timeline-item
             v-for="n in 2"
@@ -74,12 +74,12 @@
             </v-card>
           </v-timeline-item>
         </v-timeline>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Large dots
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-timeline>
           <v-timeline-item
             v-for="n in 2"
@@ -98,12 +98,12 @@
             </v-card>
           </v-timeline-item>
         </v-timeline>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Icons in dots
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-timeline>
           <v-timeline-item
             v-for="n in 2"
@@ -123,12 +123,12 @@
             </v-card>
           </v-timeline-item>
         </v-timeline>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Dense
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-timeline dense>
           <v-timeline-item
             v-for="n in 2"
@@ -146,12 +146,12 @@
             </v-card>
           </v-timeline-item>
         </v-timeline>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Dense with large dots
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-timeline dense>
           <v-timeline-item
             v-for="n in 2"
@@ -170,12 +170,12 @@
             </v-card>
           </v-timeline-item>
         </v-timeline>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Dense with icons
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-timeline dense>
           <v-timeline-item
             v-for="n in 2"
@@ -195,7 +195,7 @@
             </v-card>
           </v-timeline-item>
         </v-timeline>
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>
