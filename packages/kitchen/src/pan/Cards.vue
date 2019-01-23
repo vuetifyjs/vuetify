@@ -3,11 +3,8 @@
     <v-layout column>
       <main-header>Cards</main-header>
 
-      <!-- Simple -->
-      <v-flex align-self-center>
-        <h3 class="title grey--text text-xs-center mb-4 mt-5">
-          Simple
-        </h3>
+      <core-title>Simple</core-title>
+      <core-section center>
         <v-card>
           <v-card-title primary-title>
             <div class="headline">Unlimited music now</div>
@@ -16,13 +13,10 @@
             Listen to your favorite artists and albums whenever and wherever, online and offline.
           </v-card-text>
         </v-card>
-      </v-flex>
+      </core-section>
 
-      <!-- With media -->
-      <v-flex align-self-center>
-        <h3 class="title grey--text text-xs-center mb-4 mt-5">
-          With media
-        </h3>
+      <core-title>With media</core-title>
+      <core-section center>
         <v-card>
           <v-card-title primary-title>
             <div class="headline">Card with media</div>
@@ -34,13 +28,10 @@
             You can use cards with media like <code>VImg</code>.
           </v-card-text>
         </v-card>
-      </v-flex>
+      </core-section>
 
-      <!-- Actions -->
-      <v-flex align-self-center>
-        <h3 class="title grey--text text-xs-center mb-4 mt-5">
-          Actions
-        </h3>
+      <core-title>Actions</core-title>
+      <core-section center>
         <v-card>
           <v-card-title primary-title>
             <div class="headline">Unlimited music now</div>
@@ -53,13 +44,10 @@
             <v-btn text>Details</v-btn>
           </v-card-actions>
         </v-card>
-      </v-flex>
+      </core-section>
 
-      <!-- Colors -->
-      <v-flex align-self-center>
-        <h3 class="title grey--text text-xs-center mb-4 mt-5">
-          Colors
-        </h3>
+      <core-title>Colors</core-title>
+      <core-section center>
         <v-layout row wrap justify-space-around align-center>
           <v-card dark color="success" class="mt-2">
             <v-card-title primary-title>
@@ -98,7 +86,7 @@
             </v-card-actions>
           </v-card>
         </v-layout>
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>
