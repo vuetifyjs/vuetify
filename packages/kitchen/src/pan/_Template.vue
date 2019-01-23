@@ -3,12 +3,10 @@
     <v-layout column>
       <main-header>Pan</main-header>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
-        Title
-      </h3>
-      <v-flex>
+      <core-title>Title</core-title>
+      <core-section>
         Content
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>
@@ -20,9 +18,3 @@
     data: () => ({})
   }
 </script>
-
-<style scoped>
-.center {
-  align-self: center;
-}
-</style>

@@ -3,10 +3,10 @@
     <v-layout column>
       <main-header>Sheets</main-header>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Elevation
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout
           justify-space-around
           wrap
@@ -29,12 +29,12 @@
             </v-sheet>
           </v-flex>
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Colors
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout
           justify-space-around
           wrap
@@ -56,12 +56,12 @@
             </v-sheet>
           </v-flex>
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Sizes
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout
           justify-space-around
           wrap
@@ -111,7 +111,7 @@
             />
           </v-sheet>
         </v-layout>
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>
@@ -125,9 +125,3 @@
     })
   }
 </script>
-
-<style scoped>
-.center {
-  align-self: center;
-}
-</style>

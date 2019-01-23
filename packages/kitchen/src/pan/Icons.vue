@@ -3,10 +3,10 @@
     <v-layout column>
       <main-header>Icons</main-header>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Basic
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout
           justify-space-around
           class="mb-2"
@@ -140,12 +140,12 @@
             </v-icon>
           </span>
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Colors
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout
           justify-space-around
           class="mb-2"
@@ -312,7 +312,7 @@
             </v-icon>
           </span>
         </v-layout>
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>
@@ -328,9 +328,5 @@
   display: flex;
   flex: 1;
   justify-content: space-around;
-}
-
-.center {
-  align-self: center;
 }
 </style>

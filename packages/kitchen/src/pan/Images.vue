@@ -3,10 +3,10 @@
     <v-layout column>
       <main-header>Images</main-header>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Simple images
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout>
           <v-img
             v-for="n in 3"
@@ -14,15 +14,15 @@
             :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
             :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
             aspect-ratio="1"
-            class="grey lighten-2"
+            class="grey lighten-2 ma-2"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Custom aspect ratio
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout>
           <v-img
             v-for="n in 3"
@@ -30,15 +30,15 @@
             :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
             :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
             aspect-ratio="1.5"
-            class="grey lighten-2"
+            class="grey lighten-2 ma-2"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         With custom placeholder
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout>
           <v-img
             v-for="n in 3"
@@ -46,7 +46,7 @@
             :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
             :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
             aspect-ratio="1"
-            class="grey lighten-2"
+            class="grey lighten-2 ma-2"
           >
             <v-layout
               slot="placeholder"
@@ -62,72 +62,72 @@
             </v-layout>
           </v-img>
         </v-layout>
-      </v-flex>
+      </core-section>
+
+      <core-title>
+        Contain
+      </core-title>
+      <core-section>
+        <v-layout>
+          <v-flex>
+            <div class="subheading">
+              Matching
+            </div>
+            <v-img
+              src="https://picsum.photos/510/300?random"
+              aspect-ratio="1.7"
+              contain
+            />
+          </v-flex>
+          <v-flex>
+            <div class="subheading">
+              Too high
+            </div>
+            <v-img
+              src="https://picsum.photos/510/300?random"
+              aspect-ratio="2"
+              contain
+            />
+          </v-flex>
+          <v-flex>
+            <div class="subheading">
+              Too low
+            </div>
+            <v-img
+              src="https://picsum.photos/510/300?random"
+              aspect-ratio="1.4"
+              contain
+            />
+          </v-flex>
+        </v-layout>
+      </core-section>
+
+      <core-title>
+        Gradient
+      </core-title>
+      <core-section>
+        <v-layout>
+          <v-flex>
+            <v-img
+              src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg"
+              gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
+            />
+          </v-flex>
+
+          <v-flex>
+            <v-img src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg">
+              <div class="fill-height bottom-gradient" />
+            </v-img>
+          </v-flex>
+
+          <v-flex>
+            <v-img src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg">
+              <div class="fill-height repeating-gradient" />
+            </v-img>
+          </v-flex>
+        </v-layout>
+      </core-section>
     </v-layout>
-
-    <h3 class="title grey--text mb-4 mt-5 center">
-      Contain
-    </h3>
-    <v-flex>
-      <v-layout>
-        <v-flex>
-          <div class="subheading">
-            Matching
-          </div>
-          <v-img
-            src="https://picsum.photos/510/300?random"
-            aspect-ratio="1.7"
-            contain
-          />
-        </v-flex>
-        <v-flex>
-          <div class="subheading">
-            Too high
-          </div>
-          <v-img
-            src="https://picsum.photos/510/300?random"
-            aspect-ratio="2"
-            contain
-          />
-        </v-flex>
-        <v-flex>
-          <div class="subheading">
-            Too low
-          </div>
-          <v-img
-            src="https://picsum.photos/510/300?random"
-            aspect-ratio="1.4"
-            contain
-          />
-        </v-flex>
-      </v-layout>
-    </v-flex>
-
-    <h3 class="title grey--text mb-4 mt-5 center">
-      Gradient
-    </h3>
-    <v-flex>
-      <v-layout>
-        <v-flex>
-          <v-img
-            src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg"
-            gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
-          />
-        </v-flex>
-
-        <v-flex>
-          <v-img src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg">
-            <div class="fill-height bottom-gradient" />
-          </v-img>
-        </v-flex>
-
-        <v-flex>
-          <v-img src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg">
-            <div class="fill-height repeating-gradient" />
-          </v-img>
-        </v-flex>
-      </v-layout>
-    </v-flex>
   </v-container>
 </template>
 
@@ -140,10 +140,6 @@
 </script>
 
 <style scoped>
-.center {
-  align-self: center;
-}
-
 .bottom-gradient {
   background-image: linear-gradient(to top, rgba(0, 0, 0, 0.4) 0%, transparent 72px);
 }
