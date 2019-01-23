@@ -31,14 +31,16 @@ interface options extends Vue {
 }
 
 export default mixins<options &
+/* eslint-disable indent */
   ExtractVue<[
     typeof BaseItemGroup
   ]>
+  /* eslint-enable indent */
 >(
   BaseItemGroup
   /* @vue/component */
 ).extend({
-  name: 'VSlideGroup',
+  name: 'v-slide-group',
 
   provide (): object {
     return {
