@@ -24,10 +24,11 @@ export default mixins<options &
     typeof Colorable,
     typeof Themeable
   ]>
-/* @vue/component */
+/* eslint-enable indent */
 >(
   Colorable,
   Themeable
+/* @vue/component */
 ).extend({
   name: 'v-time-picker-clock',
 

@@ -13,12 +13,8 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - [Clearblue Technologies](http://www.clearbluetechnologies.com/) <!-- Mark Windrim -->
 - [DigitalMaas](https://www.digitalmaas.com/) <!-- Scott Francis -->
 
-### $100+
-- [Anthony Gherghetta](https://gorilladash.com/)
-
 ### $50+
 - [Xavier Escoté](http://www.deister.net/)
-- [Steve Gehrman](https://cocoatech.com/)
 - [Cycloid](https://www.cycloid.io/)
 - [Zweidenker](http://zweidenker.de) <!-- Christian Denker -->
 - [Software IDM](https://softwareidm.com/) <!-- Peter Sidebotham -->
@@ -26,25 +22,25 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - [P2L Technologies](https://p2l.tech/) <!-- Blaise Laflamme -->
 - [madhead](https://www.madhead.com/) <!-- Terence Tsang -->
 - Hannes Kochniß
+- Yaroslav Dobzhanskij
+- Benjamin Chung
+- Aaron Henderson
 
 
 ### $20+
+- [Anthony Gherghetta](https://gorilladash.com/)
 - Michael Marti
 - [Aeroden](https://www.aeroden.com) <!-- Adrian Belovic -->
-- Sam Mitchell
-- David Hess
 - Jay Blanchard
 - Christo Crampton
 - Team Of Monkeys
 - Robin Paolini
 - [Integra CCS](https://www.integraccs.com/)
 - Joel Hatch
-- David Briscese
 - Juha Vehnia
 - Kent Johnson
 - [White Rabbit Express](https://www.whiterabbitexpress.com/) <!-- Max Hodges -->
 - Working Group Two
-- Yaroslav Dobzhanskij
 
 ### $10+
 - Espen Bratberg
@@ -61,7 +57,6 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Dejan Kovac
 - Anythony Estebe
 - Eeico Wentrup
-- Chris Britton
 - Matthew O'Leary
 - Mike Margerum
 - Mark Freedman
@@ -82,16 +77,11 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Hexodus
 - Pierre Vanhulst
 - Brett Lindenberg
-- Andrew Harvey
 - Cảnh Kiều
 - Dave Willenberg
 - James Chang
-- Maxence Rose
 - YubiGeek
-- Omar Abu Samra
-- MEHMET SAGLAM
 - Shu Ogawa
-- Rich Harris
 - Dan Trevino
 - Daan Roet
 - Rollin Crittendon
@@ -99,4 +89,29 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Jeremy Hall
 - Harrison Leong
 - Cameron Cox
-- Philipp Naderer-Puiu
+- Harold Bruton
+- Daaron Dwyer
+- Adam Kaput
+- Eric Helgeson
+- Glen Azzopardi
+- Eldar Zakiryanov
+- Taylor Hubbard
+- Rich Harris
+- Jilson Thomas
+- Boris Dayma
+- Jaeyoung Lee
+- Nathanael Björkgård
+- Göran Ehrsson
+- Daniel Rivers
+- Stephan Deglow
+- Tom McGee
+- David
+- Justin Sheppard
+- Steve Drucker
+- Morgan Benton
+- Mark
+- Christopher Bartling
+- Matheus Fonseca
+- Chadi Devigne
+- Kjetil Wikestad
+- MEHMET SAGLAM
