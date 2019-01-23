@@ -3,9 +3,12 @@
     fluid
     pa-0
   >
+
     <supporters-patreon-sub />
 
     <supporters-open-collective-sub />
+
+    <supporters-tidelift-sub />
 
     <supporters-one-time />
 

@@ -57,7 +57,7 @@
 
       <v-flex xs6>
         <v-layout fill-height align-center>
-          <v-switch label="Filled" v-model="fill"></v-switch>
+          <v-switch v-model="fill" label="Filled"></v-switch>
         </v-layout>
       </v-flex>
 

@@ -1,12 +1,11 @@
 <template>
   <v-btn
-    active-class=""
-    aria-label="Vuetify Open Collective"
     flat
     href="https://opencollective.com/vuetify"
     large
-    target="_blank"
     rel="noopener"
+    target="_blank"
+    title="Support Vuetity through OpenCollective"
   >
     <v-img
       src="https://opencollective.com/static/images/opencollective-icon.svg"

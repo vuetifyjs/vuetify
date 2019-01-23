@@ -36,7 +36,6 @@
         ],
         desserts: [
           {
-            value: false,
             name: 'Frozen Yogurt',
             calories: 159,
             fat: 6.0,
@@ -45,7 +44,6 @@
             iron: '1%'
           },
           {
-            value: false,
             name: 'Ice cream sandwich',
             calories: 237,
             fat: 9.0,
@@ -54,7 +52,6 @@
             iron: '1%'
           },
           {
-            value: false,
             name: 'Eclair',
             calories: 262,
             fat: 16.0,
@@ -63,7 +60,6 @@
             iron: '7%'
           },
           {
-            value: false,
             name: 'Cupcake',
             calories: 305,
             fat: 3.7,
@@ -72,7 +68,6 @@
             iron: '8%'
           },
           {
-            value: false,
             name: 'Gingerbread',
             calories: 356,
             fat: 16.0,
@@ -81,7 +76,6 @@
             iron: '16%'
           },
           {
-            value: false,
             name: 'Jelly bean',
             calories: 375,
             fat: 0.0,
@@ -90,7 +84,6 @@
             iron: '0%'
           },
           {
-            value: false,
             name: 'Lollipop',
             calories: 392,
             fat: 0.2,
@@ -99,7 +92,6 @@
             iron: '2%'
           },
           {
-            value: false,
             name: 'Honeycomb',
             calories: 408,
             fat: 3.2,
@@ -108,7 +100,6 @@
             iron: '45%'
           },
           {
-            value: false,
             name: 'Donut',
             calories: 452,
             fat: 25.0,
@@ -117,7 +108,6 @@
             iron: '22%'
           },
           {
-            value: false,
             name: 'KitKat',
             calories: 518,
             fat: 26.0,

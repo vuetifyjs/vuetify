@@ -94,7 +94,6 @@
       },
       items: [
         {
-          value: false,
           name: 'Frozen Yogurt',
           calories: 159,
           fat: 6.0,
@@ -105,7 +104,6 @@
           iron: '1%'
         },
         {
-          value: false,
           name: 'Ice cream sandwich',
           calories: 237,
           fat: 9.0,
@@ -116,7 +114,6 @@
           iron: '1%'
         },
         {
-          value: false,
           name: 'Eclair',
           calories: 262,
           fat: 16.0,
@@ -127,7 +124,6 @@
           iron: '7%'
         },
         {
-          value: false,
           name: 'Cupcake',
           calories: 305,
           fat: 3.7,

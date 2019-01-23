@@ -59,6 +59,7 @@
             <doc-parameters
               :headers="headers[tab]"
               :items="component[tab]"
+              :lang="lang"
               :search="search"
               :target="current"
               :type="tab"
@@ -91,6 +92,10 @@
 
   export default {
     props: {
+      lang: {
+        type: String,
+        default: ''
+      },
       value: {
         type: Array,
         default: () => ([])
