@@ -119,14 +119,13 @@ export default mixins<options &
 
   methods: {
     genAppend (): VNode {
-      const children = [
-        this.$slots.append || this.__cachedAppend,
-        this.$scopedSlots.append && this.$scopedSlots.append({})
-      ]
+      const slot = this.$scopedSlots.append
+        ? this.$scopedSlots.append({ click: this.onClick })
+        : this.$slots.append
 
       return this.$createElement('div', {
         staticClass: 'v-slide-group__append'
-      }, children)
+      }, [slot || this.__cachedAppend])
     },
     genContent (): VNode {
       return this.$createElement('div', {
@@ -141,22 +140,18 @@ export default mixins<options &
 
       return this.$createElement(VIcon, {
         on: {
-          click: () => {
-            this.$emit(`click:${location}`)
-            this.scrollTo(location)
-          }
+          click: () => this.onClick(location)
         }
       }, (this as any)[`${location}Icon`])
     },
     genPrepend (): VNode {
-      const children = [
-        this.$slots.prepend || this.__cachedPrepend,
-        this.$scopedSlots.prepend && this.$scopedSlots.prepend({})
-      ]
+      const slot = this.$scopedSlots.prepend
+        ? this.$scopedSlots.prepend({ click: this.onClick })
+        : this.$slots.prepend
 
       return this.$createElement('div', {
         staticClass: 'v-slide-group__prepend'
-      }, children)
+      }, [slot || this.__cachedPrepend])
     },
     genTransition (location: 'prepend' | 'append') {
       return this.$createElement(VFadeTransition, [this.genIcon(location)])
@@ -175,7 +170,7 @@ export default mixins<options &
         ref: 'wrapper'
       }, [this.genContent()])
     },
-    newOffset (direction: 'prepend' | 'append') {
+    newOffset /* istanbul ignore next */ (direction: 'prepend' | 'append') {
       // Force reflow
       const clientWidth = this.$refs.wrapper.clientWidth
 
@@ -188,7 +183,12 @@ export default mixins<options &
         this.$refs.content.clientWidth - clientWidth
       )
     },
+    onClick (location: 'prepend' | 'append') {
+      this.$emit(`click:${location}`)
+      this.scrollTo(location)
+    },
     onResize () {
+      /* istanbul ignore next */
       if (this._isDestroyed) return
 
       this.setWidths()
@@ -221,7 +221,7 @@ export default mixins<options &
     overflowCheck (e: TouchEvent, fn: (e: TouchEvent) => void) {
       this.isOverflowing && fn(e)
     },
-    scrollTo (location: 'prepend' | 'append') {
+    scrollTo /* istanbul ignore next */ (location: 'prepend' | 'append') {
       this.scrollOffset = this.newOffset(location)
     },
     setOverflow () {
