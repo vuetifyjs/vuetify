@@ -3,27 +3,27 @@
     <v-layout column>
       <main-header>Time pickers</main-header>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Default
-      </h3>
-      <v-flex align-self-center>
+      </core-title>
+      <core-section center>
         <v-time-picker value="9:41" />
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Landscape
-      </h3>
-      <v-flex align-self-center>
+      </core-title>
+      <core-section center>
         <v-time-picker
           value="9:41"
           landscape
         />
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Disabled
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout
           row
           justify-space-around
@@ -39,12 +39,12 @@
             landscape
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Colors
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout
           row
           wrap
@@ -91,12 +91,12 @@
             color="teal lighten-1"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         24 hour format
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout
           row
           wrap
@@ -113,12 +113,12 @@
             format="24hr"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Disabled with 24 hour format
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout
           row
           wrap
@@ -137,12 +137,12 @@
             format="24hr"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         In dialog
-      </h3>
-      <v-flex align-self-center>
+      </core-title>
+      <core-section center>
         <v-dialog
           ref="dialog"
           v-model="modal"
@@ -182,12 +182,12 @@
             </v-btn>
           </v-time-picker>
         </v-dialog>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         In menu
-      </h3>
-      <v-flex align-self-center>
+      </core-title>
+      <core-section center>
         <v-menu
           ref="menu"
           v-model="menu"
@@ -215,12 +215,12 @@
             @change="$refs.menu.save(time2)"
           />
         </v-menu>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Allowed hours
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout
           row
           wrap
@@ -248,12 +248,12 @@
             format="24hr"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Allowed minutes
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout
           row
           wrap
@@ -281,12 +281,12 @@
             format="24hr"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Allowed hours & minutes
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout
           row
           wrap
@@ -317,12 +317,12 @@
             format="24hr"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Custom width
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout
           row
           wrap
@@ -369,12 +369,12 @@
             width="400"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Full width
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout column>
           <v-time-picker
             value="9:41"
@@ -388,28 +388,28 @@
             full-width
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         With seconds
-      </h3>
-      <v-flex align-self-center>
+      </core-title>
+      <core-section center>
         <v-time-picker
           value="9:41:14"
           use-seconds
         />
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Allowed seconds
-      </h3>
-      <v-flex align-self-center>
+      </core-title>
+      <core-section center>
         <v-time-picker
           value="9:41:14"
           use-seconds
           :allowed-seconds="v => v <= 40 && v >= 15"
         />
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>
@@ -426,9 +426,3 @@
     })
   }
 </script>
-
-<style scoped>
-.center {
-  align-self: center;
-}
-</style>

@@ -3,27 +3,27 @@
     <v-layout column>
       <main-header>Ratings</main-header>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Simple
-      </h3>
-      <v-flex align-self-center>
+      </core-title>
+      <core-section center>
         <v-rating value="3" />
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Dense
-      </h3>
-      <v-flex align-self-center>
+      </core-title>
+      <core-section center>
         <v-rating
           value="3"
           dense
         />
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Colors
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout
           row
           justify-space-around
@@ -41,12 +41,12 @@
             color="red darken-2"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Background colors
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout
           row
           justify-space-around
@@ -64,12 +64,12 @@
             background-color="red lighten-2"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Colors & background colors
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout
           row
           justify-space-around
@@ -90,12 +90,12 @@
             background-color="red lighten-2"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Sizes
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout
           column
           align-center
@@ -142,12 +142,12 @@
             size="128"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Dense with different sizes
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout
           column
           align-center
@@ -201,12 +201,12 @@
             dense
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Custom length
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout
           row
           justify-space-around
@@ -224,22 +224,22 @@
             length="10"
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Hover
-      </h3>
-      <v-flex align-self-center>
+      </core-title>
+      <core-section center>
         <v-rating
           value="2"
           hover
         />
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Readonly
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout
           row
           justify-space-around
@@ -257,33 +257,33 @@
             readonly
           />
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Half-increment
-      </h3>
-      <v-flex align-self-center>
+      </core-title>
+      <core-section center>
         <v-rating
           value="1.5"
           half-increments
         />
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Half-increment & hover
-      </h3>
-      <v-flex align-self-center>
+      </core-title>
+      <core-section center>
         <v-rating
           value="3.5"
           half-increments
           hover
         />
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Custom icons
-      </h3>
-      <v-flex align-self-center>
+      </core-title>
+      <core-section center>
         <v-rating
           value="4.5"
           half-increments
@@ -291,12 +291,12 @@
           full-icon="mdi-heart"
           half-icon="mdi-heart-half-full"
         />
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Custom icons & color
-      </h3>
-      <v-flex align-self-center>
+      </core-title>
+      <core-section center>
         <v-rating
           value="3.5"
           half-increments
@@ -306,12 +306,12 @@
           color="red lighten-1"
           background-color="red lighten-3"
         />
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Scoped slots
-      </h3>
-      <v-flex align-self-center>
+      </core-title>
+      <core-section center>
         <v-rating value="2">
           <v-icon
             slot="item"
@@ -323,12 +323,12 @@
             {{ props.isFilled ? 'mdi-star-circle' : 'mdi-circle-outline' }}
           </v-icon>
         </v-rating>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Usage with cards
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-card
           class="mx-auto elevation-20"
           color="purple"
@@ -373,7 +373,7 @@
             />
           </v-card-actions>
         </v-card>
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>
@@ -390,9 +390,3 @@
     })
   }
 </script>
-
-<style scoped>
-.center {
-  align-self: center;
-}
-</style>

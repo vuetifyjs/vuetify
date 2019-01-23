@@ -6,10 +6,10 @@
     >
       <main-header>Buttons</main-header>
 
-      <h3 class="title grey--text mb-4 mt-5">
+      <core-title>
         Normal
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-btn small>
           Normal
         </v-btn>
@@ -31,9 +31,9 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn>Normal</v-btn>
         <v-btn color="primary">
           Primary
@@ -44,9 +44,9 @@
         <v-btn disabled>
           Disabled
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn large>
           Normal
         </v-btn>
@@ -68,11 +68,11 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
-      <h3 class="title grey--text mb-4 mt-5">
+      </core-section>
+      <core-title>
         Flat
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-btn
           flat
           small
@@ -100,9 +100,9 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn flat>
           Flat
         </v-btn>
@@ -124,9 +124,9 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn
           flat
           large
@@ -154,11 +154,11 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
-      <h3 class="title grey--text mb-4 mt-5">
+      </core-section>
+      <core-title>
         Depressed
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-btn
           depressed
           small
@@ -186,9 +186,9 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn depressed>
           Depressed
         </v-btn>
@@ -210,9 +210,9 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn
           depressed
           large
@@ -240,11 +240,11 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
-      <h3 class="title grey--text mb-4 mt-5">
+      </core-section>
+      <core-title>
         Rounded
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-btn
           round
           small
@@ -272,9 +272,9 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn round>
           Rounded
         </v-btn>
@@ -296,9 +296,9 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn
           round
           large
@@ -326,11 +326,11 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
-      <h3 class="title grey--text mb-4 mt-5">
+      </core-section>
+      <core-title>
         Outline
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-btn
           outline
           small
@@ -358,9 +358,9 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn outline>
           Outline
         </v-btn>
@@ -382,9 +382,9 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn
           outline
           large
@@ -412,11 +412,11 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
-      <h3 class="title grey--text mb-4 mt-5">
+      </core-section>
+      <core-title>
         Rounded with Outline
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-btn
           outline
           round
@@ -448,9 +448,9 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn
           outline
           round
@@ -478,9 +478,9 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn
           outline
           round
@@ -512,9 +512,9 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
+      </core-section>
       <!-- Outline -->
-      <v-flex>
+      <core-section>
         <v-btn
           outline
           small
@@ -546,9 +546,9 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn
           text
           outline
@@ -576,9 +576,9 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn
           outline
           large
@@ -610,9 +610,9 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
+      </core-section>
       <!-- Rounded with Outline -->
-      <v-flex>
+      <core-section>
         <v-btn
           outline
           text
@@ -648,9 +648,9 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn
           outline
           text
@@ -682,9 +682,9 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn
           outline
           text
@@ -720,9 +720,9 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
+      </core-section>
       <!-- FAB -->
-      <v-flex>
+      <core-section>
         <v-btn
           icon
           small
@@ -750,9 +750,9 @@
         >
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn icon>
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
@@ -774,9 +774,9 @@
         >
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn
           icon
           large
@@ -804,9 +804,9 @@
         >
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn
           fab
           small
@@ -834,9 +834,9 @@
         >
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn fab>
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
@@ -858,9 +858,9 @@
         >
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn
           fab
           large
@@ -888,11 +888,11 @@
         >
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
-      </v-flex>
-      <h3 class="title grey--text mb-4 mt-5">
+      </core-section>
+      <core-title>
         Outline FAB
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-btn
           outline
           fab
@@ -924,9 +924,9 @@
         >
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn
           outline
           fab
@@ -954,9 +954,9 @@
         >
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn
           outline
           fab
@@ -988,11 +988,11 @@
         >
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
-      </v-flex>
-      <h3 class="title grey--text mb-4 mt-5">
+      </core-section>
+      <core-title>
         Left & right icons, loader
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-btn
           :disabled="loading"
           :loading="loading"
@@ -1037,11 +1037,11 @@
             mdi-cloud-upload
           </v-icon>
         </v-btn>
-      </v-flex>
-      <h3 class="title grey--text mb-4 mt-5">
+      </core-section>
+      <core-title>
         Left & right icons, loader with outline
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-btn
           :loading="loading"
           :disabled="loading"
@@ -1088,11 +1088,11 @@
             mdi-cloud-upload
           </v-icon>
         </v-btn>
-      </v-flex>
-      <h3 class="title grey--text mb-4 mt-5">
+      </core-section>
+      <core-title>
         Block
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-btn
           block
           small
@@ -1120,9 +1120,9 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn block>
           Block
         </v-btn>
@@ -1144,9 +1144,9 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn
           block
           large
@@ -1174,11 +1174,11 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
-      <h3 class="title grey--text mb-4 mt-5">
+      </core-section>
+      <core-title>
         Block with Outline
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-btn
           outline
           block
@@ -1210,9 +1210,9 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn
           outline
           block
@@ -1240,9 +1240,9 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn
           outline
           block
@@ -1274,11 +1274,11 @@
         >
           Disabled
         </v-btn>
-      </v-flex>
-      <h3 class="title grey--text mb-4 mt-5">
+      </core-section>
+      <core-title>
         Elevation
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-btn
           elevation="6"
           small
@@ -1299,9 +1299,9 @@
         >
           Error
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn elevation="6">
           Normal
         </v-btn>
@@ -1317,9 +1317,9 @@
         >
           Error
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-btn
           elevation="6"
           large
@@ -1340,9 +1340,9 @@
         >
           Error
         </v-btn>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-card
           max-width="300"
           height="100"
@@ -1390,7 +1390,7 @@
             <v-icon>mdi-plus</v-icon>
           </v-btn>
         </v-card>
-      </v-flex>
+      </core-section>
 
       <v-btn
         fab
@@ -1404,14 +1404,14 @@
       </v-btn>
     </v-layout>
 
-    <h3 class="title grey--text mb-4 mt-5">
+    <core-title>
       Groups
-    </h3>
+    </core-title>
     <v-layout
       groups
       column
     >
-      <v-flex>
+      <core-section>
         <v-btn-toggle>
           <v-btn flat>
             <v-icon>mdi-format-align-left</v-icon>
@@ -1426,8 +1426,8 @@
             <v-icon>mdi-format-align-justify</v-icon>
           </v-btn>
         </v-btn-toggle>
-      </v-flex>
-      <v-flex>
+      </core-section>
+      <core-section>
         <v-btn-toggle multiple>
           <v-btn flat>
             <v-icon>mdi-format-bold</v-icon>
@@ -1442,8 +1442,8 @@
             <v-icon>mdi-format-color-fill</v-icon>
           </v-btn>
         </v-btn-toggle>
-      </v-flex>
-      <v-flex>
+      </core-section>
+      <core-section>
         <v-btn-toggle
           multiple
           rounded
@@ -1461,8 +1461,8 @@
             <v-icon>mdi-format-color-fill</v-icon>
           </v-btn>
         </v-btn-toggle>
-      </v-flex>
-      <v-flex>
+      </core-section>
+      <core-section>
         <v-btn-toggle>
           <v-btn flat>
             <v-icon>mdi-format-align-left</v-icon>
@@ -1477,8 +1477,8 @@
             <v-icon>mdi-format-align-justify</v-icon>
           </v-btn>
         </v-btn-toggle>
-      </v-flex>
-      <v-flex>
+      </core-section>
+      <core-section>
         <v-btn-toggle mandatory>
           <v-btn flat>
             <v-icon>mdi-format-align-left</v-icon>
@@ -1493,8 +1493,8 @@
             <v-icon>mdi-format-align-justify</v-icon>
           </v-btn>
         </v-btn-toggle>
-      </v-flex>
-      <v-flex>
+      </core-section>
+      <core-section>
         <v-btn-toggle>
           <v-btn
             flat
@@ -1521,8 +1521,8 @@
             Justify
           </v-btn>
         </v-btn-toggle>
-      </v-flex>
-      <v-flex>
+      </core-section>
+      <core-section>
         <v-btn-toggle>
           <v-btn
             flat
@@ -1553,7 +1553,7 @@
             <v-icon>mdi-format-align-justify</v-icon>
           </v-btn>
         </v-btn-toggle>
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>

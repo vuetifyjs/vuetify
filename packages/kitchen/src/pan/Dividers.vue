@@ -3,10 +3,10 @@
     <v-layout column>
       <main-header>Dividers</main-header>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         In list
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-list two-line>
           <template v-for="index in 5">
             <v-list-tile
@@ -24,12 +24,12 @@
             />
           </template>
         </v-list>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Vertical
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-toolbar
           color="purple"
           dark
@@ -70,12 +70,12 @@
 
           <v-toolbar-side-icon />
         </v-toolbar>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Vertical
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout justify-center>
           <v-flex
             xs12
@@ -133,7 +133,7 @@
             </v-card>
           </v-flex>
         </v-layout>
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>
@@ -209,9 +209,3 @@
     })
   }
 </script>
-
-<style scoped>
-.center {
-  align-self: center;
-}
-</style>

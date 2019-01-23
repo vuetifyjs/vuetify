@@ -6,10 +6,10 @@
     >
       <main-header>Chips</main-header>
 
-      <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Simple
-        </h3>
+      <core-title>
+        Simple
+      </core-title>
+      <core-section>
         <v-layout
           align-center
           justify-space-around
@@ -35,12 +35,12 @@
             ANZ Bank
           </v-chip>
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Colors
-        </h3>
+      <core-title>
+        Colors
+      </core-title>
+      <core-section>
         <v-layout
           align-center
           justify-space-around
@@ -74,12 +74,12 @@
             Colored Chip
           </v-chip>
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          With icons
-        </h3>
+      <core-title>
+        With icons
+      </core-title>
+      <core-section>
         <v-layout
           align-center
           justify-space-around
@@ -136,12 +136,12 @@
             Confirmed
           </v-chip>
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Outline
-        </h3>
+      <core-title>
+        Outline
+      </core-title>
+      <core-section>
         <v-layout
           align-center
           justify-space-around
@@ -170,12 +170,12 @@
             </v-icon>Icon
           </v-chip>
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Labels
-        </h3>
+      <core-title>
+        Labels
+      </core-title>
+      <core-section>
         <v-layout
           align-center
           justify-space-around
@@ -203,12 +203,12 @@
             Outline
           </v-chip>
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Closable
-        </h3>
+      <core-title>
+        Closable
+      </core-title>
+      <core-section>
         <v-layout
           align-center
           justify-space-around
@@ -260,7 +260,7 @@
             Complete
           </v-chip>
         </v-layout>
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>
