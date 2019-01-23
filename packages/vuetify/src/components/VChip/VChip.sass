@@ -27,6 +27,30 @@
   line-height: 20px
   outline: none
   padding: 0 12px
+  position: relative
+  transition-duration: 0.28s
+  transition-property: box-shadow, opacity
+  transition-timing-function: map-get($transition, 'fast-out-slow-in')
+  vertical-align: middle
+
+  &:after
+    background-color: currentColor
+    bottom: 0
+    border-radius: inherit
+    content: ''
+    left: 0
+    opacity: 0
+    position: absolute
+    pointer-events: none
+    right: 0
+    top: 0
+    transition: opacity 0.2s map-get($transition, 'ease-in-out')
+
+  &:active
+    +elevation(2)
+
+  &:focus:after
+    opacity: .22
 
   .v-avatar
     height: 24px !important
@@ -50,6 +74,7 @@
   font-size: 18px
   max-height: 18px
   max-width: 18px
+  user-select: none
 
   &.v-icon--right
     margin-right: -4px
@@ -68,6 +93,10 @@
 .v-chip--disabled
   opacity: .4
   pointer-events: none
+
+.v-chip--draggable
+  &:active
+    +elevation(12)
 
 .v-chip--label
   border-radius: 4px

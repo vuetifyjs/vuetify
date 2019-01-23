@@ -33,10 +33,14 @@ export default mixins(
   props: {
     close: Boolean,
     disabled: Boolean,
+    draggable: Boolean,
     label: Boolean,
     outline: Boolean,
     outlined: Boolean,
-    ripple: [Object, Boolean],
+    ripple: {
+      type: [Boolean, Object],
+      default: null
+    },
     // Used for selects/tagging
     selected: Boolean,
     textColor: String,
@@ -50,6 +54,7 @@ export default mixins(
     classes (): object {
       return {
         'v-chip--disabled': this.disabled,
+        'v-chip--draggable': this.draggable,
         'v-chip--selected': this.selected && !this.disabled,
         'v-chip--label': this.label,
         'v-chip--outlined': this.hasOutline,
@@ -74,7 +79,7 @@ export default mixins(
           click: (e: Event) => {
             e.stopPropagation()
 
-            this.$emit('input', false)
+            this.isActive = false
           }
         }
       }, '$vuetify.icons.delete')
@@ -97,7 +102,10 @@ export default mixins(
     const data = this.setBackgroundColor(this.color, {
       staticClass: 'v-chip',
       class: this.classes,
-      attrs: { tabindex: this.disabled ? -1 : 0 },
+      attrs: {
+        draggable: this.draggable ? 'true' : undefined,
+        tabindex: this.disabled ? -1 : this.$attrs.tabindex
+      },
       directives: [
         {
           name: 'show',
@@ -105,7 +113,7 @@ export default mixins(
         },
         {
           name: 'ripple',
-          value: this.ripple || !this.disabled
+          value: this.ripple != null ? this.ripple : !this.disabled
         }
       ],
       on: this.$listeners
