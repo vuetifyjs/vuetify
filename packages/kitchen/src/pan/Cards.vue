@@ -47,7 +47,7 @@
       </core-section>
 
       <core-title>Colors</core-title>
-      <core-section center>
+      <core-section>
         <v-layout row wrap justify-space-around align-center>
           <v-card dark color="success" class="mt-2">
             <v-card-title primary-title>
