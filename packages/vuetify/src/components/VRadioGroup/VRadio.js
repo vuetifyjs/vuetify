@@ -28,6 +28,7 @@ export default {
   inheritAttrs: false,
 
   props: {
+    id: String,
     color: {
       type: String,
       default: 'accent'
