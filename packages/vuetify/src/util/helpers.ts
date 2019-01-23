@@ -309,7 +309,7 @@ export function remapInternalIcon (vm: Vue, iconName: string): VuetifyIcon {
   }
 
   // Get the target icon name
-  const iconPath = `'$vuetify.icons.values'${iconName.split('.').pop()}`
+  const iconPath = `$vuetify.icons.values.${iconName.split('.').pop()}`
 
   // Now look up icon indirection name,
   // e.g. '$vuetify.icons.values.cancel'
