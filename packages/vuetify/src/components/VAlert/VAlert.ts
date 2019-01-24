@@ -35,7 +35,7 @@ export default mixins(Colorable, Toggleable, Transitionable).extend({
   },
 
   computed: {
-    computedColor (): string {
+    computedColor (): string | string[] {
       return (this.type && !this.color) ? this.type : (this.color || 'error')
     },
     computedIcon (): string | void {

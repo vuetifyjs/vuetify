@@ -120,7 +120,7 @@ export default mixins(
     validations (): VuetifyRuleValidations {
       return this.validationTarget.slice(0, Number(this.errorCount))
     },
-    validationState (): string | undefined {
+    validationState (): string | string[] | undefined {
       if (this.hasError && this.shouldValidate) return 'error'
       if (this.hasSuccess) return 'success'
       if (this.hasColor) return this.color

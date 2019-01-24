@@ -151,7 +151,7 @@ export default mixins(Colorable, Themeable).extend({
       ])
     },
     genItem (h: CreateElement, i: string | number): VNode {
-      const color: string | false = (i === this.value) && (this.color || 'primary')
+      const color: string | string[] | false = (i === this.value) && (this.color || 'primary')
       return h('button', this.setBackgroundColor(color, {
         staticClass: 'v-pagination__item',
         class: {

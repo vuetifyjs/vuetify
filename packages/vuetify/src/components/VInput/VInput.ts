@@ -21,6 +21,7 @@ import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
 import Vue, { VNode, VNodeData } from 'vue'
+import { PropValidator } from 'vue/types/options'
 interface options extends Vue {
   /* eslint-disable-next-line camelcase */
   $_modelEvent: string
@@ -47,9 +48,9 @@ export default mixins<options &
     /** @deprecated */
     appendIconCb: Function,
     backgroundColor: {
-      type: String,
+      type: [String, Array],
       default: ''
-    },
+    } as PropValidator<string | string[]>,
     height: [Number, String],
     hideDetails: Boolean,
     hint: String,

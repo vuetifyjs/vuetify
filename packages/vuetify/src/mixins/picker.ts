@@ -10,6 +10,7 @@ import mixins from '../util/mixins'
 
 // Types
 import { VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
 
 /* @vue/component */
 export default mixins(
@@ -20,7 +21,7 @@ export default mixins(
 
   props: {
     fullWidth: Boolean,
-    headerColor: String,
+    headerColor: [String, Array] as PropValidator<string | string[]>,
     landscape: Boolean,
     noTitle: Boolean,
     width: {

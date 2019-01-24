@@ -79,4 +79,17 @@ test('colorable.js', ({ mount }) => {
       }
     })
   })
+
+  it('should compute data with gradients css color', async () => {
+    const wrapper = mount({
+      mixins: [ Colorable ],
+      render: h => h('div')
+    })
+
+    expect(wrapper.vm.setBackgroundColor(['#123', 'blue lighten-1', 'primary'], {})).toEqual({
+      style: {
+        'background': 'linear-gradient(#123, #42a5f5, #1976D2)'
+      }
+    })
+  })
 })

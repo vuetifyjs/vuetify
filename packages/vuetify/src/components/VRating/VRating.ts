@@ -17,6 +17,7 @@ import mixins from '../../util/mixins'
 
 // Types
 import { VNode, VNodeDirective, VNodeChildren } from 'vue'
+import { PropValidator } from 'vue/types/options'
 
 type ItemSlotProps = {
   index: number
@@ -40,9 +41,9 @@ export default mixins(
 
   props: {
     backgroundColor: {
-      type: String,
+      type: [String, Array],
       default: 'accent'
-    },
+    } as PropValidator<string | string[]>,
     color: {
       type: String,
       default: 'primary'
@@ -163,7 +164,7 @@ export default mixins(
 
       return isFull ? this.fullIcon : isHalf ? this.halfIcon : this.emptyIcon
     },
-    getColor (props: ItemSlotProps): string {
+    getColor (props: ItemSlotProps): string | string[] {
       if (this.isHovering) {
         if (props.isHovered || props.isHalfHovered) return this.color
       } else {

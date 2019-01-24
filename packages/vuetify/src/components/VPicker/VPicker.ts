@@ -1,15 +1,14 @@
-import '../../stylus/components/_pickers.styl'
-import '../../stylus/components/_cards.styl'
+// Types
+import { VNode } from 'vue/types'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
+import '../../stylus/components/_cards.styl'
+import '../../stylus/components/_pickers.styl'
 
 // Helpers
 import { convertToUnit } from '../../util/helpers'
-
-// Types
-import { VNode } from 'vue/types'
 import mixins from '../../util/mixins'
 
 /* @vue/component */
@@ -30,7 +29,7 @@ export default mixins(Colorable, Themeable).extend({
   },
 
   computed: {
-    computedTitleColor (): string | false {
+    computedTitleColor (): string | string[] | false {
       const defaultTitleColor = this.isDark ? false : (this.color || 'primary')
       return this.color || defaultTitleColor
     }

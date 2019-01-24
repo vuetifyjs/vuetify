@@ -41,8 +41,8 @@ export default {
     right: Boolean,
     showArrows: Boolean,
     sliderColor: {
-      type: String,
-      default: 'accent'
+      type: [String, Array],
+      default: null
     },
     value: [Number, String]
   }

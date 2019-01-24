@@ -59,7 +59,7 @@ export default VInput.extend({
       default: 1
     },
     thumbColor: {
-      type: String,
+      type: [String, Array],
       default: null
     },
     thumbLabel: {
@@ -72,7 +72,7 @@ export default VInput.extend({
       default: 32
     },
     trackColor: {
-      type: String,
+      type: [String, Array],
       default: null
     },
     value: [Number, String]

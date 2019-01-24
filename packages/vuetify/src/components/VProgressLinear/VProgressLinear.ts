@@ -1,5 +1,10 @@
 import '../../stylus/components/_progress-linear.styl'
 
+import {
+  VFadeTransition,
+  VSlideXTransition
+} from '../transitions'
+
 // Mixins
 import Colorable from '../../mixins/colorable'
 
@@ -9,11 +14,7 @@ import mixins from '../../util/mixins'
 
 // Types
 import { CreateElement, VNode } from 'vue'
-
-import {
-  VFadeTransition,
-  VSlideXTransition
-} from '../transitions'
+import { PropValidator } from 'vue/types/options'
 
 /* @vue/component */
 export default mixins(Colorable).extend({
@@ -25,9 +26,9 @@ export default mixins(Colorable).extend({
       default: true
     },
     backgroundColor: {
-      type: String,
+      type: [String, Array],
       default: null
-    },
+    } as PropValidator<string | string[]>,
     backgroundOpacity: {
       type: [Number, String],
       default: null

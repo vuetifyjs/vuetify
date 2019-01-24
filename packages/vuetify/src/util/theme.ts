@@ -2,6 +2,7 @@ import { colorToInt, intToHex, colorToHex, RGB } from './colorUtils'
 import * as sRGB from './color/transformSRGB'
 import * as LAB from './color/transformCIELAB'
 import { VuetifyTheme } from 'vuetify/types'
+import colors from './colors'
 
 interface ParsedThemeItem {
   base: string
@@ -133,14 +134,61 @@ export function genVariations (name: string, value: RGB): Record<string, string>
   return values
 }
 
-function lighten (value: RGB, amount: number): RGB {
+export function lighten (value: RGB, amount: number): RGB {
   const lab = LAB.fromXYZ(sRGB.toXYZ(value))
   lab[0] = lab[0] + amount * 10
   return sRGB.fromXYZ(LAB.toXYZ(lab))
 }
 
-function darken (value: RGB, amount: number): RGB {
+export function darken (value: RGB, amount: number): RGB {
   const lab = LAB.fromXYZ(sRGB.toXYZ(value))
   lab[0] = lab[0] - amount * 10
   return sRGB.fromXYZ(LAB.toXYZ(lab))
+}
+
+export function extractCssColor (color: string, theme: VuetifyTheme): string {
+  const parts = color.trim().match(/^([^\s]+)(\s+(lighten|darken)-?([1-5]))?$/) || [null, null, null, null]
+
+  const [, colorName, , variant, num] = parts
+  const variantName = variant ? `${variant}${num}` : 'base'
+
+  if (!colorName) {
+    throw new TypeError(`Invalid color: ${color}`)
+  }
+
+  if (colorName in colors) {
+    const colorDef = (colors as any)[colorName]
+
+    if (!colorDef[variantName]) {
+      throw new TypeError(`Invalid color: ${color}`)
+    }
+
+    return colorDef[variantName]
+  }
+
+  if (colorName in theme) {
+    const themeDef = theme[colorName] as Record<string, string> | string
+
+    if (typeof themeDef === 'object') {
+      if (!themeDef[variantName]) {
+        throw new TypeError(`Invalid color: ${color}`)
+      }
+
+      return themeDef[variantName]
+    }
+
+    if (!variant) {
+      return themeDef
+    }
+
+    if (variant === 'lighten') {
+      return intToHex(lighten(colorToInt(themeDef), Number(num)))
+    } else if (variant === 'darken') {
+      return intToHex(darken(colorToInt(themeDef), Number(num)))
+    }
+
+    throw new TypeError(`Invalid color: ${color}`)
+  }
+
+  return color
 }
