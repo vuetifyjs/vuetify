@@ -1,5 +1,3 @@
-/* istanbul ignore file */
-
 // Extensions
 import { BaseItem } from '../VItemGroup/VItem'
 
