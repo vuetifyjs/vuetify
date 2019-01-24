@@ -1,0 +1,67 @@
+<template>
+  <v-sheet
+    class="mx-auto"
+    elevation="8"
+    max-width="800"
+  >
+    <v-slide-group
+      v-model="model"
+      class="pa-3"
+      show-arrows
+    >
+      <v-slide-item
+        v-for="n in 15"
+        :key="n"
+      >
+        <v-card
+          slot-scope="{ active, toggle }"
+          :color="active ? 'primary' : 'grey lighten-1'"
+          class="ma-3"
+          height="200"
+          width="100"
+          @click="toggle"
+        >
+          <v-layout
+            align-center
+            fill-height
+            justify-center
+          >
+            <v-scale-transition>
+              <v-icon
+                v-if="active"
+                color="white"
+                size="48"
+                v-text="'mdi-close-circle-outline'"
+              ></v-icon>
+            </v-scale-transition>
+          </v-layout>
+        </v-card>
+      </v-slide-item>
+    </v-slide-group>
+
+    <v-expand-transition>
+      <v-sheet
+        v-if="model != null"
+        color="grey lighten-4"
+        height="200"
+        tile
+      >
+        <v-layout
+          align-center
+          fill-height
+          justify-center
+        >
+          <h3 class="title">Selected {{ model }}</h3>
+        </v-layout>
+      </v-sheet>
+    </v-expand-transition>
+  </v-sheet>
+</template>
+
+<script>
+  export default {
+    data: () => ({
+      model: null
+    })
+  }
+</script>

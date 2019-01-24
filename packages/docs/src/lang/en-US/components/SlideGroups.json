@@ -4,6 +4,10 @@
   "examples": {
     "usage": {
       "desc": "Similar to the [v-window](/components/windows) component, `v-slide-group` lets items to take up as much space as needed, allowing the user to move horizontally through the provided information."
+    },
+    "carousel": {
+      "header": "### Pseudo Carousel",
+      "desc": "Customize the slide group to creatively display information on sheets. Using the selection, we can display auxillary information easily for the user."
     }
   },
   "props": {
