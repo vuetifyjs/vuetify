@@ -94,6 +94,7 @@
         "children": [
           { "text": "buttonGroups", "to": "button-groups" },
           { "text": "itemGroups", "to": "item-groups" },
+          { "text": "slideGroups", "to": "slide-groups" },
           { "text": "windows", "to": "windows" }
         ]
       },
