@@ -113,11 +113,11 @@ export const BaseSlideGroup = mixins<options &
     genAppend (): VNode {
       const slot = this.$scopedSlots.append
         ? this.$scopedSlots.append({ click: this.onAffixClick })
-        : this.$slots.append
+        : this.$slots.append || this.__cachedAppend
 
       return this.$createElement('div', {
         staticClass: 'v-slide-group__append'
-      }, [slot || this.__cachedAppend])
+      }, [slot])
     },
     genContent (): VNode {
       return this.$createElement('div', {
@@ -139,11 +139,11 @@ export const BaseSlideGroup = mixins<options &
     genPrepend (): VNode {
       const slot = this.$scopedSlots.prepend
         ? this.$scopedSlots.prepend({ click: this.onAffixClick })
-        : this.$slots.prepend
+        : this.$slots.prepend || this.__cachedPrepend
 
       return this.$createElement('div', {
         staticClass: 'v-slide-group__prepend'
-      }, [slot || this.__cachedPrepend])
+      }, [slot])
     },
     genTransition (location: 'prepend' | 'append') {
       return this.$createElement(VFadeTransition, [this.genIcon(location)])
