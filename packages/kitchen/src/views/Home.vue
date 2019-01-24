@@ -12,11 +12,11 @@
           <h2 class="display-3 mb-5">
             What'll it be?
           </h2>
-          <v-select
+          <v-autocomplete
             v-model="meal"
             :items="meals"
             label="Meals"
-            solo-inverted
+            solo
           />
           <v-btn
             :to="meal"
