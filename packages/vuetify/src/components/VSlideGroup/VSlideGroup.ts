@@ -32,10 +32,8 @@ interface options extends Vue {
 
 export const BaseSlideGroup = mixins<options &
 /* eslint-disable indent */
-  ExtractVue<[
-    typeof BaseItemGroup
-  ]>
-  /* eslint-enable indent */
+  ExtractVue<typeof BaseItemGroup>
+/* eslint-enable indent */
 >(
   BaseItemGroup
   /* @vue/component */
