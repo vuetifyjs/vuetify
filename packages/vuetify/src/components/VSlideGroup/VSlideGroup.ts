@@ -120,7 +120,7 @@ export default mixins<options &
   methods: {
     genAppend (): VNode {
       const slot = this.$scopedSlots.append
-        ? this.$scopedSlots.append({ click: this.onClick })
+        ? this.$scopedSlots.append({ click: this.onAffixClick })
         : this.$slots.append
 
       return this.$createElement('div', {
@@ -140,13 +140,13 @@ export default mixins<options &
 
       return this.$createElement(VIcon, {
         on: {
-          click: () => this.onClick(location)
+          click: () => this.onAffixClick(location)
         }
       }, (this as any)[`${location}Icon`])
     },
     genPrepend (): VNode {
       const slot = this.$scopedSlots.prepend
-        ? this.$scopedSlots.prepend({ click: this.onClick })
+        ? this.$scopedSlots.prepend({ click: this.onAffixClick })
         : this.$slots.prepend
 
       return this.$createElement('div', {
@@ -183,7 +183,7 @@ export default mixins<options &
         this.$refs.content.clientWidth - clientWidth
       )
     },
-    onClick (location: 'prepend' | 'append') {
+    onAffixClick (location: 'prepend' | 'append') {
       this.$emit(`click:${location}`)
       this.scrollTo(location)
     },
