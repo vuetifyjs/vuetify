@@ -148,9 +148,8 @@ describe('VSliderGroup.ts', () => {
       }
     })
 
-    const icons = wrapper.findAll('.v-icon')
-    const prepend = icons.at(0)
-    const append = icons.at(1)
+    const prepend = wrapper.find('.v-slide-group__prepend')
+    const append = wrapper.find('.v-slide-group__append')
 
     prepend.trigger('click')
     append.trigger('click')
@@ -159,7 +158,6 @@ describe('VSliderGroup.ts', () => {
   })
 
   it('should accept scoped slots', () => {
-    const scrollTo = jest.fn()
     const wrapper = mount(VSlideGroup, {
       data: () => ({
         isOverflowing: true,
@@ -169,21 +167,18 @@ describe('VSliderGroup.ts', () => {
           wrapper: 1000
         }
       }),
-      methods: { scrollTo },
       propsData: {
         showArrows: true
       },
       scopedSlots: {
-        prepend ({ click }) {
+        prepend () {
           return this.$createElement('div', {
-            staticClass: 'fizz',
-            on: { click }
+            staticClass: 'fizz'
           }, 'foo')
         },
-        append ({ click }) {
+        append () {
           return this.$createElement('div', {
-            staticClass: 'fizz',
-            on: { click }
+            staticClass: 'fizz'
           }, 'bar')
         }
       }
@@ -192,9 +187,5 @@ describe('VSliderGroup.ts', () => {
     const affixes = wrapper.findAll('.fizz')
     const foo = affixes.at(0)
     const bar = affixes.at(1)
-
-    foo.trigger('click')
-    bar.trigger('click')
-    expect(scrollTo).toHaveBeenCalledTimes(2)
   })
 })

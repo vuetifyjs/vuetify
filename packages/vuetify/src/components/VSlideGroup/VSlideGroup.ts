@@ -46,6 +46,10 @@ export const BaseSlideGroup = mixins<options &
   },
 
   props: {
+    activeClass: {
+      type: String,
+      default: 'v-slide-item--active'
+    },
     appendIcon: {
       type: String,
       default: '$vuetify.icons.next'
@@ -112,11 +116,17 @@ export const BaseSlideGroup = mixins<options &
   methods: {
     genAppend (): VNode {
       const slot = this.$scopedSlots.append
-        ? this.$scopedSlots.append({ click: this.onAffixClick })
+        ? this.$scopedSlots.append({})
         : this.$slots.append || this.__cachedAppend
 
       return this.$createElement('div', {
-        staticClass: 'v-slide-group__append'
+        staticClass: 'v-slide-group__append',
+        class: {
+          'v-slide-group__append--disabled': !this.hasAppend
+        },
+        on: {
+          click: () => this.onAffixClick('append')
+        }
       }, [slot])
     },
     genContent (): VNode {
@@ -127,22 +137,32 @@ export const BaseSlideGroup = mixins<options &
     },
     genIcon (location: 'prepend' | 'append'): VNode | null{
       const upperLocation = `${location[0].toUpperCase()}${location.slice(1)}`
+      const hasAffix = (this as any)[`has${upperLocation}`]
 
-      if (!(this as any)[`has${upperLocation}`]) return null
+      if (
+        !this.showArrows &&
+        !hasAffix
+      ) return null
 
       return this.$createElement(VIcon, {
-        on: {
-          click: () => this.onAffixClick(location)
+        props: {
+          disabled: !hasAffix
         }
       }, (this as any)[`${location}Icon`])
     },
     genPrepend (): VNode {
       const slot = this.$scopedSlots.prepend
-        ? this.$scopedSlots.prepend({ click: this.onAffixClick })
+        ? this.$scopedSlots.prepend({})
         : this.$slots.prepend || this.__cachedPrepend
 
       return this.$createElement('div', {
-        staticClass: 'v-slide-group__prepend'
+        staticClass: 'v-slide-group__prepend',
+        class: {
+          'v-slide-group__prepend--disabled': !this.hasPrepend
+        },
+        on: {
+          click: () => this.onAffixClick('prepend')
+        }
       }, [slot])
     },
     genTransition (location: 'prepend' | 'append') {

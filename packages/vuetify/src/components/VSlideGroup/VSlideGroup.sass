@@ -18,6 +18,7 @@
   display: flex
   flex: 0 1 48px
   justify-content: center
+  min-width: 48px
 
 .v-slide-group__content
   display: flex
@@ -30,3 +31,9 @@
   contain: content
   display: flex
   overflow: hidden
+
+// Modifiers
+.v-slide-group__append,
+.v-slide-group__prepend
+  &--disabled
+    pointer-events: none
