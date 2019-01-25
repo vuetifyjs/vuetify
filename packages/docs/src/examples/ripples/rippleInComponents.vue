@@ -8,7 +8,7 @@
     <v-btn
       color="primary"
     >
-      With ripple (defualt)
+      With ripple (default)
     </v-btn>
     <v-btn
       :ripple="false"
