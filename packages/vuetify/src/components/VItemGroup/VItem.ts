@@ -6,17 +6,25 @@ import mixins from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
 
 // Types
+import Vue from 'vue'
 import { VNode, VNodeChildrenArrayContents } from 'vue/types/vnode'
 
-export default mixins(
-  GroupableFactory('itemGroup', 'v-item', 'v-item-group')
-  /* @vue/component */
-).extend({
-  name: 'v-item',
-
+/* @vue/component */
+export const BaseItem = Vue.extend({
   props: {
+    activeClass: String,
     value: {
       required: false
+    }
+  },
+
+  data: () => ({
+    isActive: false
+  }),
+
+  methods: {
+    toggle () {
+      this.isActive = !this.isActive
     }
   },
 
@@ -51,4 +59,11 @@ export default mixins(
 
     return element
   }
+})
+
+export default mixins(
+  BaseItem,
+  GroupableFactory('itemGroup', 'v-item', 'v-item-group')
+).extend({
+  name: 'v-item'
 })

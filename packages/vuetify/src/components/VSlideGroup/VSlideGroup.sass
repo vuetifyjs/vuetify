@@ -1,0 +1,39 @@
+// Imports
+@import '../../styles/styles.sass'
+
+// Theme
+
+// Block
+.v-slide-group
+  display: flex
+
+.v-slide-item
+  display: inline-flex
+  flex: 0 1 auto
+
+// Element
+.v-slide-group__append,
+.v-slide-group__prepend
+  align-items: center
+  display: flex
+  flex: 0 1 48px
+  justify-content: center
+  min-width: 48px
+
+.v-slide-group__content
+  display: flex
+  flex: 1 0 auto
+  position: relative
+  transition: $primary-transition
+  white-space: nowrap
+
+.v-slide-group__wrapper
+  contain: content
+  display: flex
+  overflow: hidden
+
+// Modifiers
+.v-slide-group__append,
+.v-slide-group__prepend
+  &--disabled
+    pointer-events: none
