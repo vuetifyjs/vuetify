@@ -92,6 +92,9 @@
     "v-range-slider": {
       "append-icon-cb": false,
       "prepend-icon-cb": false
+    },
+    "v-data-iterator": {
+      "loading": false
     }
   }
 }
