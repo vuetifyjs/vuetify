@@ -91,6 +91,7 @@
                 outline
                 target="_blank"
                 rel="noopener"
+                @click="$ga.event('themes', 'click', template.title)"
               >
                 {{ $t('Themes.Premium.downloadNow') }}
               </v-btn>
