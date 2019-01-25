@@ -1,5 +1,5 @@
 <template>
-  <section id="themes-view">
+  <section id="premium-themes">
     <v-container
       pa-0
       fluid
@@ -12,7 +12,10 @@
           xs12
           md6
         >
-          <v-card height="100%">
+          <v-card
+            height="100%"
+            elevation="4"
+          >
             <v-img
               :src="template.src"
               height="350px"
@@ -38,6 +41,7 @@
             <v-card-text style="min-height: 95px;">{{ template.description }}</v-card-text>
             <v-card-actions class="grey lighten-4">
               <v-menu
+                v-if="template.demoUrl.length"
                 :disabled="template.demoUrl.length === 1"
                 transition="scale-transition"
                 origin="bottom left"
@@ -124,6 +128,14 @@
           demoUrl: ['https://demos.creative-tim.com/vuetify-material-dashboard/#/dashboard']
         },
         {
+          title: vm.$t('Themes.Premium.templates.freelancer.title'),
+          description: vm.$t('Themes.Premium.templates.freelancer.description'),
+          src: 'https://cdn.vuetifyjs.com/images/starter/freelancer.png',
+          free: true,
+          url: 'https://github.com/vuetifyjs/theme-freelancer',
+          demoUrl: []
+        },
+        {
           title: vm.$t('Themes.Premium.templates.parallax.title'),
           description: vm.$t('Themes.Premium.templates.parallax.description'),
           src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-parallax-starter.png',
@@ -143,3 +155,9 @@
     })
   }
 </script>
+
+<style>
+  #premium-themes .v-card {
+    border-radius: 6px;
+  }
+</style>
