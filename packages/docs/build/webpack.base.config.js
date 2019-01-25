@@ -16,9 +16,11 @@ const plugins = [
   new VueLoaderPlugin()
 ]
 
+const devtool = isProd ? 'none' : 'source-map'
+
 module.exports = {
   mode: isProd ? 'production' : 'development',
-  devtool: 'source-map',
+  devtool,
   output: {
     path: resolve('../dist'),
     publicPath: '/dist/',
