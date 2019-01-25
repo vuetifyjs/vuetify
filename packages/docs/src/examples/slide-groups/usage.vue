@@ -13,7 +13,7 @@
           :input-value="active"
           active-class="purple white--text"
           depressed
-          round
+          rounded
           @click="toggle"
         >
           Options {{ n }}
