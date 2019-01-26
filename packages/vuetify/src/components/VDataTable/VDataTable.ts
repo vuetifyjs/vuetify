@@ -171,21 +171,25 @@ export default VDataIterator.extend({
       }, [th])
     },
     genHeaders (props: DataProps) {
-      const children: VNodeChildrenArrayContents = [this.genSlots('header', this.createSlotProps(props))]
+      const data = {
+        props: {
+          ...this.headerProps,
+          headers: this.computedHeaders,
+          options: props.options,
+          mobile: this.isMobile
+        },
+        on: {
+          sort: props.sort,
+          group: props.group
+        }
+      }
+
+      const children: VNodeChildrenArrayContents = [this.genSlots('header', data)]
 
       if (!this.hideDefaultHeader) {
         const scopedSlots = getPrefixedScopedSlots('header.', this.$scopedSlots)
         children.push(this.$createElement(VDataTableHeader, {
-          props: {
-            ...this.headerProps,
-            headers: this.computedHeaders,
-            options: props.options,
-            mobile: this.isMobile
-          },
-          on: {
-            sort: props.sort,
-            group: props.group
-          },
+          ...data,
           scopedSlots
         }))
       }
@@ -368,21 +372,23 @@ export default VDataIterator.extend({
       ])
     },
     genFooters (props: DataProps) {
+      const data = {
+        props: {
+          ...this.footerProps,
+          options: props.options,
+          pagination: props.pagination
+        },
+        on: {
+          'update:options': (value: any) => props.updateOptions(value)
+        }
+      }
+
       const children: VNodeChildren = [
-        this.genSlots('footer', props)
+        this.genSlots('footer', data)
       ]
 
       if (!this.hideDefaultFooter) {
-        children.push(this.$createElement(VDataFooter, {
-          props: {
-            ...this.footerProps,
-            options: props.options,
-            pagination: props.pagination
-          },
-          on: {
-            'update:options': (value: any) => props.updateOptions(value)
-          }
-        }))
+        children.push(this.$createElement(VDataFooter, data))
       }
 
       return children
