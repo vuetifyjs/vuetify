@@ -30,8 +30,8 @@ export interface DataProps {
   updateOptions: (obj: any) => void
   sort: (value: string) => void
   group: (value: string) => void
-  groupedItems?: Record<string, any[]>
-  loading?: boolean
+  groupedItems: Record<string, any[]>
+  // loading?: boolean
 }
 
 export default Vue.extend({
@@ -169,34 +169,19 @@ export default Vue.extend({
 
       return items
     },
-    groupedItems (): any[] {
+    groupedItems (): Record<string, any[]> {
       return groupByProperty(this.computedItems, this.internalOptions.groupBy[0])
     },
-    scopedProps (): object {
+    scopedProps (): DataProps {
       const props = {
         sort: this.sort,
         sortArray: this.sortArray,
-        group: this.group
-      }
-
-      Object.defineProperties(props, {
-        items: {
-          get: () => this.computedItems
-        },
-        options: {
-          get: () => this.internalOptions,
-          set: v => this.updateOptions(v)
-        },
-        pagination: {
-          get: () => this.pagination
-        }
-      })
-
-      // TODO: Only suppports one level of grouping
-      if (this.internalOptions.groupBy.length) {
-        Object.defineProperty(props, 'groupedItems', {
-          get: () => this.groupedItems
-        })
+        group: this.group,
+        items: this.computedItems,
+        options: this.internalOptions,
+        updateOptions: this.updateOptions,
+        pagination: this.pagination,
+        groupedItems: this.groupedItems
       }
 
       return props

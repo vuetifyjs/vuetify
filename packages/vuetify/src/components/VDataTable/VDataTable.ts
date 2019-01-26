@@ -183,8 +183,8 @@ export default VDataIterator.extend({
             mobile: this.isMobile
           },
           on: {
-            'sort': props.sort,
-            'group': props.group
+            sort: props.sort,
+            group: props.group
           },
           scopedSlots
         }))
@@ -258,7 +258,7 @@ export default VDataIterator.extend({
             small: true
           },
           on: {
-            click: () => props.options = Object.assign({}, props.options, { groupBy: [], groupDesc: [] })
+            click: () => props.updateOptions({ groupBy: [], groupDesc: [] })
           }
         }, [this.$createElement(VIcon, ['close'])])
 
@@ -380,7 +380,7 @@ export default VDataIterator.extend({
             pagination: props.pagination
           },
           on: {
-            'update:options': (value: any) => props.options = value
+            'update:options': (value: any) => props.updateOptions(value)
           }
         }))
       }
