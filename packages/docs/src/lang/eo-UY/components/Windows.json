@@ -1,0 +1,29 @@
+{
+  "header": "crwdns14024:0crwdne14024:0",
+  "headerText": "crwdns14026:0crwdne14026:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns14028:0crwdne14028:0"
+    },
+    "onboarding": {
+      "header": "crwdns14030:0crwdne14030:0",
+      "desc": "crwdns14032:0crwdne14032:0"
+    },
+    "account": {
+      "header": "crwdns14034:0crwdne14034:0",
+      "desc": "crwdns14036:0crwdne14036:0"
+    }
+  },
+  "props": {
+    "activeClass": "crwdns14038:0crwdne14038:0",
+    "disabled": "crwdns14040:0crwdne14040:0",
+    "mandatory": "crwdns14042:0crwdne14042:0",
+    "multiple": "crwdns14044:0crwdne14044:0",
+    "reverse": "crwdns14046:0crwdne14046:0",
+    "reverseTransition": "crwdns14048:0crwdne14048:0",
+    "touch": "crwdns14050:0crwdne14050:0",
+    "touchless": "crwdns14052:0crwdne14052:0",
+    "transition": "crwdns14054:0crwdne14054:0",
+    "vertical": "crwdns14056:0crwdne14056:0"
+  }
+}

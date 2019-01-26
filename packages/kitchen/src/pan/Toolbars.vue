@@ -1,10 +1,12 @@
 <template>
   <v-container>
     <v-layout column>
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <main-header>Toolbars</main-header>
+
+      <core-title>
         Simple usage
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-toolbar>
           <v-toolbar-side-icon />
           <v-toolbar-title>Title</v-toolbar-title>
@@ -21,12 +23,12 @@
             </v-btn>
           </v-toolbar-items>
         </v-toolbar>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Colors
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-toolbar color="primary lighten-2">
           <v-toolbar-side-icon />
           <v-toolbar-title>Title</v-toolbar-title>
@@ -43,8 +45,8 @@
             </v-btn>
           </v-toolbar-items>
         </v-toolbar>
-      </v-flex>
-      <v-flex class="mt-5">
+      </core-section>
+      <core-section class="mt-5">
         <v-toolbar color="success">
           <v-toolbar-side-icon />
           <v-toolbar-title>Title</v-toolbar-title>
@@ -61,12 +63,12 @@
             </v-btn>
           </v-toolbar-items>
         </v-toolbar>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         App bar with icons
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-toolbar
           dark
           color="primary"
@@ -95,12 +97,12 @@
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </v-toolbar>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         App bar with items
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-toolbar>
           <v-spacer />
 
@@ -116,12 +118,12 @@
             </v-btn>
           </v-toolbar-items>
         </v-toolbar>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         App bar with extension
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-toolbar
           color="primary"
           dark
@@ -154,12 +156,12 @@
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </v-toolbar>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Using with cards
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-card flat>
           <v-toolbar
             color="primary"
@@ -209,12 +211,12 @@
             </v-flex>
           </v-layout>
         </v-card>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Floating
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-card
           class="pa-3"
           flat
@@ -240,12 +242,12 @@
             </v-btn>
           </v-toolbar>
         </v-card>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Themes
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout
           row
           wrap
@@ -283,12 +285,12 @@
             </v-card>
           </v-flex>
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Prominent
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-toolbar
           prominent
           extended
@@ -311,12 +313,12 @@
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </v-toolbar>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Dense (48px)
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-toolbar dense>
           <v-toolbar-side-icon />
 
@@ -336,12 +338,12 @@
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </v-toolbar>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         With menu
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-toolbar
           color="grey darken-1"
           dark
@@ -380,12 +382,12 @@
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </v-toolbar>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         System / window bar
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <div>
           <v-subheader>Light status bar</v-subheader>
           <v-card
@@ -467,7 +469,7 @@
             <v-icon>mdi-close</v-icon>
           </v-system-bar>
         </div>
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>
@@ -491,10 +493,6 @@
 </script>
 
 <style scoped>
-.center {
-  align-self: center;
-}
-
 .card--flex-toolbar {
   margin-top: -64px;
 }

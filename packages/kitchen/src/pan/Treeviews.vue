@@ -1,10 +1,12 @@
 <template>
   <v-container>
     <v-layout column>
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <main-header>Treeviews</main-header>
+
+      <core-title>
         File tree
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-treeview
           v-model="tree1"
           :open="open1"
@@ -25,12 +27,12 @@
             </v-icon>
           </template>
         </v-treeview>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Async data loading
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-card>
           <v-card-title class="indigo white--text headline">
             User Directory
@@ -149,12 +151,12 @@
             </v-flex>
           </v-layout>
         </v-card>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Prepend & append slots
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout
           row
           justify-space-around
@@ -193,7 +195,7 @@
 
           <v-flex />
         </v-layout>
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>
@@ -389,9 +391,3 @@
     }
   }
 </script>
-
-<style scoped>
-.center {
-  align-self: center;
-}
-</style>

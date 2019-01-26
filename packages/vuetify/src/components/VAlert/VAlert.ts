@@ -183,7 +183,6 @@ export default mixins(
     genAlert (): VNode {
       const children = [
         this.$slots.prepend || this.__cachedIcon,
-        this.__cachedBorder,
         this.genContent(),
         this.$slots.append,
         this.$scopedSlots.close
@@ -210,7 +209,10 @@ export default mixins(
     genContent (): VNode {
       return this.$createElement('div', {
         staticClass: 'v-alert__content'
-      }, this.$slots.default)
+      }, [
+        this.__cachedBorder,
+        this.$slots.default
+      ])
     },
     /** @public */
     toggle () {

@@ -4,65 +4,12 @@
       column
       variations
     >
-      <!-- Extra Small -->
-      <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Extra Small
-        </h3>
-        <v-layout
-          align-center
-          justify-space-around
-          wrap
-        >
-          <v-chip
-            x-small
-            color="primary"
-          >
-            Extra Small Chip
-          </v-chip>
-          <v-chip
-            class="white--text"
-            color="red lighten-2"
-            x-small
-          >
-            <v-avatar
-              left
-              color="white"
-              class="elevation-4"
-            >
-              <v-img src="https://randomuser.me/api/portraits/men/32.jpg" />
-            </v-avatar>
-            Extra Small Avatar
-          </v-chip>
-          <v-badge
-            overlap
-            color="red lighten-2"
-          >
-            <template slot="badge">
-              2
-            </template>
-            <v-chip
-              x-small
-              color="secondary"
-            >
-              Chip with badge
-            </v-chip>
-          </v-badge>
-          <v-chip
-            close
-            color="purple"
-            class="white--text"
-            x-small
-          >
-            Extra small dismissible
-          </v-chip>
-        </v-layout>
-      </v-flex>
-      <!-- Simple -->
-      <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Simple
-        </h3>
+      <main-header>Chips</main-header>
+
+      <core-title>
+        Simple
+      </core-title>
+      <core-section>
         <v-layout
           align-center
           justify-space-around
@@ -92,19 +39,12 @@
             ANZ Bank
           </v-chip>
         </v-layout>
-        <v-layout>
-          <v-select
-            :items="['Lorem Ipsum', 'Do Folar']"
-            chips
-            deletable-chips
-          />
-        </v-layout>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Colors
-        </h3>
+      <core-title>
+        Colors
+      </core-title>
+      <core-section>
         <v-layout
           align-center
           justify-space-around
@@ -138,12 +78,12 @@
             Colored Chip
           </v-chip>
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          With icons
-        </h3>
+      <core-title>
+        With icons
+      </core-title>
+      <core-section>
         <v-layout
           align-center
           justify-space-around
@@ -203,12 +143,12 @@
             Confirmed
           </v-chip>
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Outline
-        </h3>
+      <core-title>
+        Outline
+      </core-title>
+      <core-section>
         <v-layout
           align-center
           justify-space-around
@@ -238,12 +178,12 @@
             Icon
           </v-chip>
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Labels
-        </h3>
+      <core-title>
+        Labels
+      </core-title>
+      <core-section>
         <v-layout
           align-center
           justify-space-around
@@ -272,12 +212,12 @@
             Outline
           </v-chip>
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Closable
-        </h3>
+      <core-title>
+        Closable
+      </core-title>
+      <core-section>
         <v-layout
           align-center
           justify-space-around
@@ -329,7 +269,7 @@
             Complete
           </v-chip>
         </v-layout>
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>

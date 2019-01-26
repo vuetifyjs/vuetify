@@ -1,20 +1,22 @@
 <template>
   <v-container>
     <v-layout column>
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <main-header>Sparklines</main-header>
+
+      <core-title>
         Basic
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-sparkline
           :value="value"
           auto-draw
         />
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Gradient
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-sparkline
           :value="value"
           :gradient="['#00c6ff', '#F0F', '#FF0']"
@@ -24,12 +26,12 @@
           stroke-linecap="round"
           auto-draw
         />
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         With labels
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-sparkline
           :labels="labels"
           :value="value"
@@ -38,7 +40,7 @@
           padding="16"
           smooth="5"
         />
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>
@@ -69,9 +71,3 @@
     })
   }
 </script>
-
-<style scoped>
-.center {
-  align-self: center;
-}
-</style>
