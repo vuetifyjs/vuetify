@@ -12,6 +12,12 @@ export default mixins(header).extend({
       return this.headers.map(header => {
         const listeners: any = {}
         const children = []
+        const attrs = {
+          role: 'columnheader',
+          scope: 'col',
+          'aria-label': header.text || '',
+          'aria-sort': 'none'
+        }
 
         let classes = {
           [getTextAlignment(header.align, this.$vuetify.rtl)]: true
@@ -43,6 +49,15 @@ export default mixins(header).extend({
               'desc': beingSorted && isDesc
             }
 
+            if (beingSorted) {
+              attrs['aria-sort'] = isDesc ? 'descending' : 'ascending'
+              attrs['aria-label'] += isDesc
+                ? this.$vuetify.t('$vuetify.dataTable.ariaLabel.sortDescending')
+                : this.$vuetify.t('$vuetify.dataTable.ariaLabel.sortAscending')
+            } else {
+              attrs['aria-label'] += this.$vuetify.t('$vuetify.dataTable.ariaLabel.sortNone')
+            }
+
             if (header.align === 'end') children.unshift(this.genSortIcon())
             else children.push(this.genSortIcon())
 
@@ -61,6 +76,7 @@ export default mixins(header).extend({
         }
 
         return this.$createElement('th', {
+          attrs,
           class: classes,
           on: listeners
         }, children)

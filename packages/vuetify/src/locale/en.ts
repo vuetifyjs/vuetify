@@ -10,7 +10,12 @@ export default {
     loadingText: 'Loading items...'
   },
   dataTable: {
-    itemsPerPageText: 'Rows per page:'
+    itemsPerPageText: 'Rows per page:',
+    ariaLabel: {
+      sortDescending: ': Sorted descending. Activate to remove sorting.',
+      sortAscending: ': Sorted ascending. Activate to sort descending.',
+      sortNone: ': Not sorted. Activate to sort ascending.'
+    }
   },
   noDataText: 'No data available'
 }
