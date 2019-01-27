@@ -1,5 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VPicker.js should render a flat picker 1`] = `
+
+<div class="v-picker v-card v-card--flat theme--light">
+  <div class="v-picker__body theme--light"
+       style="width: 290px;"
+  >
+  </div>
+</div>
+
+`;
+
 exports[`VPicker.js should render component with title and match snapshot 1`] = `
 
 <div class="v-picker v-card theme--light">

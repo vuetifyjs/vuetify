@@ -19,6 +19,7 @@ export default mixins(
   name: 'picker',
 
   props: {
+    flat: Boolean,
     fullWidth: Boolean,
     headerColor: String,
     landscape: Boolean,
@@ -60,6 +61,7 @@ export default mixins(
         props: {
           color: this.headerColor || this.color,
           dark: this.dark,
+          flat: this.flat,
           fullWidth: this.fullWidth,
           landscape: this.landscape,
           light: this.light,

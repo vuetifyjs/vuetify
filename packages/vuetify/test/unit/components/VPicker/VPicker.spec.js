@@ -51,4 +51,15 @@ test('VPicker.js', ({ mount, compileToFunctions }) => {
     expect(title.hasClass('orange')).toBe(true)
     expect(title.hasClass('lighten-1')).toBe(true)
   })
+
+  it('should render a flat picker', () => {
+    const wrapper = mount(VPicker, {
+      propsData: {
+        flat: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
 })

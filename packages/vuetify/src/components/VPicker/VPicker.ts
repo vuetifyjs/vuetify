@@ -17,6 +17,7 @@ export default mixins(Colorable, Themeable).extend({
   name: 'v-picker',
 
   props: {
+    flat: Boolean,
     fullWidth: Boolean,
     landscape: Boolean,
     transition: {
@@ -74,6 +75,7 @@ export default mixins(Colorable, Themeable).extend({
     return h('div', {
       staticClass: 'v-picker v-card',
       'class': {
+        'v-card--flat': this.flat,
         'v-picker--landscape': this.landscape,
         'v-picker--full-width': this.fullWidth,
         ...this.themeClasses
