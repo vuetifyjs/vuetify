@@ -1,3 +1,4 @@
+// STyles
 import './VChip.sass'
 
 // Types
@@ -9,7 +10,6 @@ import VIcon from '../VIcon'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
-import { factory as GroupableFactory } from '../../mixins/groupable'
 import Themeable from '../../mixins/themeable'
 import Toggleable from '../../mixins/toggleable'
 import Sizeable from '../../mixins/sizeable'
@@ -23,7 +23,6 @@ import { deprecate } from '../../util/console'
 /* @vue/component */
 export default mixins(
   Colorable,
-  GroupableFactory('chipGroup'),
   Sizeable,
   Themeable,
   Toggleable
