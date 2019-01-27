@@ -2,17 +2,13 @@
 
 exports[`VBtn.ts should be removable 1`] = `
 
-<span tabindex="0"
-      class="v-chip v-chip--removable theme--light"
->
+<span class="v-chip v-chip--removable theme--light v-size--default">
   <span class="v-chip__content">
-    <div class="v-chip__close">
-      <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
-      >
-        $vuetify.icons.delete
-      </i>
-    </div>
+    <i aria-hidden="true"
+       class="v-icon v-chip__close v-icon--link v-icon--right material-icons theme--light"
+    >
+      $vuetify.icons.delete
+    </i>
   </span>
 </span>
 
@@ -20,18 +16,15 @@ exports[`VBtn.ts should be removable 1`] = `
 
 exports[`VBtn.ts should be removable 2`] = `
 
-<span tabindex="0"
-      class="v-chip v-chip--removable theme--light"
+<span class="v-chip v-chip--removable theme--light v-size--default"
       style="display: none;"
 >
   <span class="v-chip__content">
-    <div class="v-chip__close">
-      <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
-      >
-        $vuetify.icons.delete
-      </i>
-    </div>
+    <i aria-hidden="true"
+       class="v-icon v-chip__close v-icon--link v-icon--right material-icons theme--light"
+    >
+      $vuetify.icons.delete
+    </i>
   </span>
 </span>
 
@@ -39,9 +32,7 @@ exports[`VBtn.ts should be removable 2`] = `
 
 exports[`VBtn.ts should have a v-chip class 1`] = `
 
-<span tabindex="0"
-      class="v-chip theme--light"
->
+<span class="v-chip theme--light v-size--default">
   <span class="v-chip__content">
   </span>
 </span>

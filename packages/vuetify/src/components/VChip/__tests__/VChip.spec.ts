@@ -69,6 +69,17 @@ describe('VBtn.ts', () => {
     expect(wrapper.element.classList).toContain('green--text')
   })
 
+  it('should render a clickable chip', () => {
+    const wrapper = mountFunction({
+      on: {
+        click: () => {}
+      }
+    })
+
+    expect(wrapper.element.classList).toContain('clickable')
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render a disabled chip', () => {
     const wrapper = mountFunction({
       propsData: {
