@@ -30,7 +30,7 @@
       >
         <v-flex
           v-for="(selection, i) in selections"
-          :key="i"
+          :key="selection.text"
           shrink
         >
           <v-chip
