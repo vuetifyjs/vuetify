@@ -13,9 +13,7 @@
   >
     <template slot="no-data">
       <v-list-tile>
-        <span class="subheading">
-          Create
-        </span>
+        <span class="subheading">Create</span>
         <v-chip
           :color="`${colors[nonce - 1]} lighten-3`"
           label
@@ -42,9 +40,7 @@
         <v-icon
           small
           @click="parent.selectItem(item)"
-        >
-          close
-        </v-icon>
+        >close</v-icon>
       </v-chip>
     </template>
     <template

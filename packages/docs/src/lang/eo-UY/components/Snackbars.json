@@ -1,0 +1,19 @@
+{
+  "header": "crwdns13274:0crwdne13274:0",
+  "headerText": "crwdns13276:0crwdne13276:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns13278:0crwdne13278:0"
+    },
+    "contextual": {
+      "header": "crwdns13280:0crwdne13280:0",
+      "desc": "crwdns13282:0crwdne13282:0"
+    }
+  },
+  "props": {
+    "autoHeight": "crwdns13284:0crwdne13284:0",
+    "multiLine": "crwdns13286:0crwdne13286:0",
+    "timeout": "crwdns13288:0crwdne13288:0",
+    "vertical": "crwdns13290:0crwdne13290:0"
+  }
+}

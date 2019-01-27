@@ -16,16 +16,12 @@
         slot="activator"
         color="primary"
         dark
-      >
-        home
-      </v-icon>
+      >home</v-icon>
       <span>Tooltip</span>
     </v-tooltip>
 
     <v-tooltip bottom>
-      <span slot="activator">
-        This text has a tooltip
-      </span>
+      <span slot="activator">This text has a tooltip</span>
       <span>Tooltip</span>
     </v-tooltip>
   </div>

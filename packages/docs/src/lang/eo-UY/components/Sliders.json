@@ -1,0 +1,71 @@
+{
+  "header": "crwdns13196:0crwdne13196:0",
+  "headerText": "crwdns13198:0crwdne13198:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns13200:0crwdne13200:0"
+    },
+    "thumb": {
+      "header": "crwdns13202:0crwdne13202:0",
+      "desc": "crwdns13204:0crwdne13204:0"
+    },
+    "customThumb": {
+      "header": "crwdns13206:0crwdne13206:0",
+      "desc": "crwdns13208:0crwdne13208:0"
+    },
+    "ticks": {
+      "header": "crwdns13210:0crwdne13210:0",
+      "desc": "crwdns13212:0crwdne13212:0"
+    },
+    "discrete": {
+      "header": "crwdns13214:0crwdne13214:0",
+      "desc": "crwdns13216:0crwdne13216:0"
+    },
+    "icons": {
+      "header": "crwdns13218:0crwdne13218:0",
+      "desc": "crwdns13220:0crwdne13220:0"
+    },
+    "editableNumericValue": {
+      "header": "crwdns13222:0crwdne13222:0",
+      "desc": "crwdns13224:0crwdne13224:0"
+    },
+    "customColors": {
+      "header": "crwdns13226:0crwdne13226:0",
+      "desc": "crwdns13228:0crwdne13228:0"
+    },
+    "validation": {
+      "header": "crwdns13230:0crwdne13230:0",
+      "desc": "crwdns13232:0crwdne13232:0"
+    },
+    "range": {
+      "header": "crwdns13234:0crwdne13234:0",
+      "desc": "crwdns13236:0crwdne13236:0"
+    },
+    "minMax": {
+      "header": "crwdns13238:0crwdne13238:0",
+      "desc": "crwdns13240:0crwdne13240:0"
+    },
+    "metronome": {
+      "header": "crwdns13242:0crwdne13242:0",
+      "desc": "crwdns13244:0crwdne13244:0"
+    }
+  },
+  "props": {
+    "alwaysDirty": "crwdns13246:0crwdne13246:0",
+    "inverseLabel": "crwdns13248:0crwdne13248:0",
+    "step": "crwdns13250:0crwdne13250:0",
+    "thumbColor": "crwdns13252:0crwdne13252:0",
+    "thumbLabel": "crwdns13254:0crwdne13254:0",
+    "thumbSize": "crwdns13256:0crwdne13256:0",
+    "ticks": "crwdns13258:0crwdne13258:0",
+    "tickLabels": "crwdns13260:0crwdne13260:0",
+    "tickSize": "crwdns13262:0crwdne13262:0",
+    "trackColor": "crwdns13264:0crwdne13264:0"
+  },
+  "events": {
+    "change": "crwdns13266:0crwdne13266:0",
+    "end": "crwdns13268:0crwdne13268:0",
+    "start": "crwdns13270:0crwdne13270:0",
+    "update:error": "crwdns13272:0crwdne13272:0"
+  }
+}

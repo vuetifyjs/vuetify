@@ -1,12 +1,6 @@
 <template>
-  <v-container
-    fluid
-    grid-list-md
-  >
-    <v-layout
-      row
-      wrap
-    >
+  <v-container fluid grid-list-md>
+    <v-layout row wrap>
       <v-flex xs6>
         <v-textarea
           name="input-7-1"

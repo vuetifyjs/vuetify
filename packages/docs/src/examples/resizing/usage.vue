@@ -1,10 +1,5 @@
 <template>
-  <v-layout
-    v-resize="onResize"
-    column
-    align-center
-    justify-center
-  >
+  <v-layout v-resize="onResize" column align-center justify-center>
     <v-subheader>Window Size</v-subheader>
     {{ windowSize }}
   </v-layout>

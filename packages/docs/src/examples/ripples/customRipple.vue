@@ -8,9 +8,7 @@
         height="300"
         @click="color = (color + 1) % colors.length"
       >
-        <div class="title white--text pl-3 pt-3">
-          {{ colors[color] }}
-        </div>
+        <div class="title white--text pl-3 pt-3">{{ colors[color] }}</div>
       </v-card>
     </v-flex>
   </v-layout>

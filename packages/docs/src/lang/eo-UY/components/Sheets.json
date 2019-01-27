@@ -1,0 +1,17 @@
+{
+  "header": "crwdns13182:0crwdne13182:0",
+  "headerText": "crwdns13184:0crwdne13184:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns13186:0crwdne13186:0"
+    },
+    "elevation": {
+      "header": "crwdns13188:0crwdne13188:0",
+      "desc": "crwdns13190:0crwdne13190:0"
+    }
+  },
+  "props": {
+    "tag": "crwdns13192:0crwdne13192:0",
+    "tile": "crwdns13194:0crwdne13194:0"
+  }
+}

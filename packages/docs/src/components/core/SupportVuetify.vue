@@ -6,21 +6,14 @@
     target="_blank"
   >
     <v-card-text>
-      <v-layout
-        row
-        wrap
-      >
+      <v-layout row wrap>
         <v-flex
           :style="{ order: $vuetify.breakpoint.xs ? '2' : '1' }"
           d-flex
           pl-1
           xs10
         >
-          <v-layout
-            align-center
-            row
-            wrap
-          >
+          <v-layout align-center row wrap>
             <v-flex
               display-1
               mr-4
@@ -31,23 +24,9 @@
             >
               PATREON
             </v-flex>
-            <v-flex
-              hidden-xs-only
-              patreon-bar
-              mr-4
-            />
-            <v-flex
-              hidden-sm-and-up
-              patreon-bar-horizontal
-              mr-4
-            />
-            <v-flex
-              xs12
-              sm6
-              display-1
-              patreon-caption
-              pb-1
-            >
+            <v-flex hidden-xs-only patreon-bar mr-4 />
+            <v-flex hidden-sm-and-up patreon-bar-horizontal mr-4 />
+            <v-flex xs12 sm6 display-1 patreon-caption pb-1>
               Support Vuetify
             </v-flex>
           </v-layout>
@@ -61,12 +40,7 @@
         >
           <v-layout align-center>
             <v-flex xs12>
-              <img
-                class="logo"
-                src="https://cdn.vuetifyjs.com/images/logos/logo.svg"
-                width="50px"
-                alt=""
-              >
+              <img class="logo" src="https://cdn.vuetifyjs.com/images/logos/logo.svg" width="50px" alt="">
             </v-flex>
           </v-layout>
         </v-flex>

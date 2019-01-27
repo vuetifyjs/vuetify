@@ -1,14 +1,9 @@
 <template>
   <v-form>
     <v-container>
-      <v-layout
-        row
-        wrap
-      >
-        <v-flex
-          xs12
-          sm6
-        >
+      <v-layout row wrap>
+
+        <v-flex xs12 sm6>
           <v-text-field
             v-model="message1"
             label="Regular"
@@ -16,10 +11,7 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex
-          xs12
-          sm6
-        >
+        <v-flex xs12 sm6>
           <v-text-field
             v-model="message2"
             solo
@@ -28,10 +20,7 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex
-          xs12
-          sm6
-        >
+        <v-flex xs12 sm6>
           <v-text-field
             v-model="message3"
             box
@@ -40,10 +29,7 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex
-          xs12
-          sm6
-        >
+        <v-flex xs12 sm6>
           <v-text-field
             v-model="message4"
             label="Outline"
@@ -51,6 +37,7 @@
             clearable
           ></v-text-field>
         </v-flex>
+
       </v-layout>
     </v-container>
   </v-form>

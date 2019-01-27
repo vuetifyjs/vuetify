@@ -1,0 +1,47 @@
+{
+  "header": "crwdns14210:0crwdne14210:0",
+  "headerText": "crwdns14212:0crwdne14212:0",
+  "components": [
+    "crwdns14214:0crwdne14214:0",
+    "crwdns14216:0crwdne14216:0",
+    "crwdns14218:0crwdne14218:0",
+    "crwdns14220:0crwdne14220:0"
+  ],
+  "toc": [
+    {
+      "text": "crwdns14222:0crwdne14222:0",
+      "href": "crwdns14224:0crwdne14224:0"
+    },
+    {
+      "text": "crwdns14226:0crwdne14226:0",
+      "href": "crwdns14228:0crwdne14228:0"
+    },
+    {
+      "text": "crwdns14230:0crwdne14230:0",
+      "href": "crwdns14232:0crwdne14232:0"
+    },
+    {
+      "text": "crwdns14234:0crwdne14234:0",
+      "href": "crwdns14236:0crwdne14236:0"
+    },
+    {
+      "text": "crwdns14238:0crwdne14238:0",
+      "href": "crwdns14240:0crwdne14240:0"
+    },
+    {
+      "text": "crwdns14242:0crwdne14242:0",
+      "href": "crwdns14244:0crwdne14244:0"
+    },
+    {
+      "text": "crwdns14246:0crwdne14246:0",
+      "href": "crwdns14248:0crwdne14248:0"
+    }
+  ],
+  "breakpointHeader": "crwdns14250:0crwdne14250:0",
+  "breakpointText1": "crwdns14252:0$vuetifycrwdne14252:0",
+  "breakpointText2": "crwdns14254:0crwdne14254:0",
+  "breakpointText3": "crwdns14256:0[v-resize]crwdne14256:0",
+  "breakpointText4": "crwdns14258:0$vuetifycrwdne14258:0",
+  "customizeThresholdsHeader": "crwdns14260:0crwdne14260:0",
+  "customizeThresholdsText1": "crwdns14262:0$gridcrwdne14262:0"
+}

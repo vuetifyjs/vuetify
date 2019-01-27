@@ -1,15 +1,8 @@
 <template>
   <v-layout row>
-    <v-flex
-      xs12
-      sm6
-      offset-sm3
-    >
+    <v-flex xs12 sm6 offset-sm3>
       <v-card>
-        <v-toolbar
-          color="purple"
-          dark
-        >
+        <v-toolbar color="purple" dark>
           <v-toolbar-side-icon></v-toolbar-side-icon>
 
           <v-toolbar-title>Settings</v-toolbar-title>
@@ -21,10 +14,7 @@
           </v-btn>
         </v-toolbar>
 
-        <v-list
-          three-line
-          subheader
-        >
+        <v-list three-line subheader>
           <v-subheader>User Controls</v-subheader>
 
           <v-list-tile>

@@ -13,7 +13,7 @@ import Themeable from '../../mixins/themeable'
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
 // Utils
-import { getObjectValueByPath, deepEqual, filterTreeItems } from '../../util/helpers'
+import { getObjectValueByPath, deepEqual, filterTreeItems, arrayDiff } from '../../util/helpers'
 import mixins from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
 
@@ -70,7 +70,8 @@ export default mixins(
     } as PropValidator<NodeArray>,
     search: String,
     customFilter: {
-      default: (items, search, idKey, textKey, childrenKey) => {
+      type: Function,
+      default: (items: any[], search: string, idKey: string, textKey: string, childrenKey: string) => {
         const excluded = new Set()
 
         if (!search) return excluded
@@ -81,7 +82,7 @@ export default mixins(
 
         return excluded
       }
-    } as PropValidator<(items: any[], search: string, idKey: string, textKey: string, childrenKey: string) => Set<any>>,
+    },
     ...VTreeviewNodeProps
   },
 
@@ -103,14 +104,13 @@ export default mixins(
       handler () {
         const oldKeys = Object.keys(this.nodes).map(k => getObjectValueByPath(this.nodes[k].item, this.itemKey))
         const newKeys = this.getKeys(this.items)
+        const diff = arrayDiff(newKeys, oldKeys)
 
-        // We only care if nodes are removed or added
-        if (oldKeys.length === newKeys.length) return
+        // We only want to do stuff if items have changed
+        if (!diff.length && newKeys.length < oldKeys.length) return
 
         // If nodes are removed we need to clear them from this.nodes
-        if (oldKeys.length > newKeys.length) {
-          oldKeys.filter(k => !newKeys.includes(k)).forEach(k => delete this.nodes[k])
-        }
+        diff.forEach(k => delete this.nodes[k])
 
         const oldSelectedCache = [...this.selectedCache]
         this.selectedCache = new Set()

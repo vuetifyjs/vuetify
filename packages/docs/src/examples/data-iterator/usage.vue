@@ -1,8 +1,5 @@
 <template>
-  <v-container
-    fluid
-    grid-list-md
-  >
+  <v-container fluid grid-list-md>
     <v-data-iterator
       :items="items"
       :rows-per-page-items="rowsPerPageItems"
@@ -25,45 +22,31 @@
           <v-list dense>
             <v-list-tile>
               <v-list-tile-content>Calories:</v-list-tile-content>
-              <v-list-tile-content class="align-end">
-                {{ props.item.calories }}
-              </v-list-tile-content>
+              <v-list-tile-content class="align-end">{{ props.item.calories }}</v-list-tile-content>
             </v-list-tile>
             <v-list-tile>
               <v-list-tile-content>Fat:</v-list-tile-content>
-              <v-list-tile-content class="align-end">
-                {{ props.item.fat }}
-              </v-list-tile-content>
+              <v-list-tile-content class="align-end">{{ props.item.fat }}</v-list-tile-content>
             </v-list-tile>
             <v-list-tile>
               <v-list-tile-content>Carbs:</v-list-tile-content>
-              <v-list-tile-content class="align-end">
-                {{ props.item.carbs }}
-              </v-list-tile-content>
+              <v-list-tile-content class="align-end">{{ props.item.carbs }}</v-list-tile-content>
             </v-list-tile>
             <v-list-tile>
               <v-list-tile-content>Protein:</v-list-tile-content>
-              <v-list-tile-content class="align-end">
-                {{ props.item.protein }}
-              </v-list-tile-content>
+              <v-list-tile-content class="align-end">{{ props.item.protein }}</v-list-tile-content>
             </v-list-tile>
             <v-list-tile>
               <v-list-tile-content>Sodium:</v-list-tile-content>
-              <v-list-tile-content class="align-end">
-                {{ props.item.sodium }}
-              </v-list-tile-content>
+              <v-list-tile-content class="align-end">{{ props.item.sodium }}</v-list-tile-content>
             </v-list-tile>
             <v-list-tile>
               <v-list-tile-content>Calcium:</v-list-tile-content>
-              <v-list-tile-content class="align-end">
-                {{ props.item.calcium }}
-              </v-list-tile-content>
+              <v-list-tile-content class="align-end">{{ props.item.calcium }}</v-list-tile-content>
             </v-list-tile>
             <v-list-tile>
               <v-list-tile-content>Iron:</v-list-tile-content>
-              <v-list-tile-content class="align-end">
-                {{ props.item.iron }}
-              </v-list-tile-content>
+              <v-list-tile-content class="align-end">{{ props.item.iron }}</v-list-tile-content>
             </v-list-tile>
           </v-list>
         </v-card>
@@ -81,7 +64,6 @@
       },
       items: [
         {
-          value: false,
           name: 'Frozen Yogurt',
           calories: 159,
           fat: 6.0,
@@ -92,7 +74,6 @@
           iron: '1%'
         },
         {
-          value: false,
           name: 'Ice cream sandwich',
           calories: 237,
           fat: 9.0,
@@ -103,7 +84,6 @@
           iron: '1%'
         },
         {
-          value: false,
           name: 'Eclair',
           calories: 262,
           fat: 16.0,
@@ -114,7 +94,6 @@
           iron: '7%'
         },
         {
-          value: false,
           name: 'Cupcake',
           calories: 305,
           fat: 3.7,
@@ -125,7 +104,6 @@
           iron: '8%'
         },
         {
-          value: false,
           name: 'Gingerbread',
           calories: 356,
           fat: 16.0,
@@ -136,7 +114,6 @@
           iron: '16%'
         },
         {
-          value: false,
           name: 'Jelly bean',
           calories: 375,
           fat: 0.0,
@@ -147,7 +124,6 @@
           iron: '0%'
         },
         {
-          value: false,
           name: 'Lollipop',
           calories: 392,
           fat: 0.2,
@@ -158,7 +134,6 @@
           iron: '2%'
         },
         {
-          value: false,
           name: 'Honeycomb',
           calories: 408,
           fat: 3.2,
@@ -169,7 +144,6 @@
           iron: '45%'
         },
         {
-          value: false,
           name: 'Donut',
           calories: 452,
           fat: 25.0,
@@ -180,7 +154,6 @@
           iron: '22%'
         },
         {
-          value: false,
           name: 'KitKat',
           calories: 518,
           fat: 26.0,

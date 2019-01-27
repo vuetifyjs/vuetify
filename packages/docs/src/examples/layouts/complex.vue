@@ -52,14 +52,8 @@
       fixed
     ></v-navigation-drawer>
     <v-content>
-      <v-container
-        fluid
-        fill-height
-      >
-        <v-layout
-          justify-center
-          align-center
-        >
+      <v-container fluid fill-height>
+        <v-layout justify-center align-center>
           <v-flex shrink>
             <v-tooltip right>
               <v-btn
@@ -69,23 +63,13 @@
                 large
                 target="_blank"
               >
-                <v-icon large>
-                  code
-                </v-icon>
+                <v-icon large>code</v-icon>
               </v-btn>
               <span>Source</span>
             </v-tooltip>
             <v-tooltip right>
-              <v-btn
-                slot="activator"
-                icon
-                large
-                href="https://codepen.io/johnjleider/pen/KQrPKJ"
-                target="_blank"
-              >
-                <v-icon large>
-                  mdi-codepen
-                </v-icon>
+              <v-btn slot="activator" icon large href="https://codepen.io/johnjleider/pen/KQrPKJ" target="_blank">
+                <v-icon large>mdi-codepen</v-icon>
               </v-btn>
               <span>Codepen</span>
             </v-tooltip>
@@ -99,11 +83,7 @@
       temporary
       fixed
     ></v-navigation-drawer>
-    <v-footer
-      color="blue-grey"
-      class="white--text"
-      app
-    >
+    <v-footer color="blue-grey" class="white--text" app>
       <span>Vuetify</span>
       <v-spacer></v-spacer>
       <span>&copy; 2017</span>

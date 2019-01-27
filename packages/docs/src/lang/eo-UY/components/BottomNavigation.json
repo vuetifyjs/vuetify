@@ -1,0 +1,26 @@
+{
+  "header": "crwdns11206:0crwdne11206:0",
+  "headerText": "crwdns11208:0crwdne11208:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns11210:0crwdne11210:0"
+    },
+    "colorAndShift": {
+      "header": "crwdns11212:0crwdne11212:0",
+      "desc": "crwdns11214:0crwdne11214:0"
+    },
+    "toggle": {
+      "header": "crwdns11216:0crwdne11216:0",
+      "desc": "crwdns11218:0crwdne11218:0"
+    }
+  },
+  "props": {
+    "active": "crwdns11220:0crwdne11220:0",
+    "absolute": "crwdns11222:0crwdne11222:0",
+    "fixed": "crwdns11224:0crwdne11224:0",
+    "mandatory": "crwdns11226:0crwdne11226:0"
+  },
+  "events": {
+    "update:active": "crwdns11228:0crwdne11228:0"
+  }
+}

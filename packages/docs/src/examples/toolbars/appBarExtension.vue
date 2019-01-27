@@ -6,12 +6,7 @@
   >
     <v-toolbar-side-icon></v-toolbar-side-icon>
 
-    <v-toolbar-title
-      slot="extension"
-      class="white--text"
-    >
-      Title
-    </v-toolbar-title>
+    <v-toolbar-title slot="extension" class="white--text">Title</v-toolbar-title>
 
     <v-spacer></v-spacer>
 

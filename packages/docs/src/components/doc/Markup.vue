@@ -1,15 +1,10 @@
 <template>
-  <div
-    :id="id"
-    class="v-markup"
-  >
-    <!-- eslint-disable -->
+  <div :id="id" class="v-markup">
     <prism
       v-if="$slots.default || code"
       :language="language"
       :code="code"
     ><slot /></prism>
-    <!-- eslint-enable -->
 
     <div
       v-if="filename"
@@ -36,9 +31,7 @@
         <span
           v-if="copied"
           class="v-markup__copied"
-        >
-          Copied
-        </span>
+        >Copied</span>
       </v-slide-x-transition>
     </div>
 

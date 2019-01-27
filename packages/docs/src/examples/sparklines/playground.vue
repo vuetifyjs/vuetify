@@ -17,20 +17,10 @@
         xs12
         md6
       >
-        <v-layout
-          fill-height
-          align-center
-        >
-          <v-item-group
-            v-model="gradient"
-            mandatory
-          >
+        <v-layout fill-height align-center>
+          <v-item-group v-model="gradient" mandatory>
             <v-layout>
-              <v-item
-                v-for="(gradient, i) in gradients"
-                :key="i"
-                :value="gradient"
-              >
+              <v-item v-for="(gradient, i) in gradients" :key="i" :value="gradient">
                 <v-card
                   slot-scope="{ active, toggle }"
                   :style="{
@@ -66,35 +56,12 @@
       </v-flex>
 
       <v-flex xs6>
-        <v-layout
-          fill-height
-          align-center
-        >
-          <v-subheader class="pl-0">
-            Linecap
-          </v-subheader>
-          <v-btn-toggle
-            v-model="lineCap"
-            mandatory
-          >
-            <v-btn
-              flat
-              value="butt"
-            >
-              butt
-            </v-btn>
-            <v-btn
-              flat
-              value="round"
-            >
-              round
-            </v-btn>
-            <v-btn
-              flat
-              value="square"
-            >
-              square
-            </v-btn>
+        <v-layout fill-height align-center>
+          <v-subheader class="pl-0">Linecap</v-subheader>
+          <v-btn-toggle v-model="lineCap" mandatory>
+            <v-btn flat value="butt">butt</v-btn>
+            <v-btn flat value="round">round</v-btn>
+            <v-btn flat value="square">square</v-btn>
           </v-btn-toggle>
         </v-layout>
       </v-flex>
