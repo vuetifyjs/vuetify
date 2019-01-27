@@ -42,6 +42,41 @@
       </core-section>
 
       <core-title>
+        Clickable
+      </core-title>
+      <core-section>
+        <v-layout
+          align-center
+          justify-space-around
+          wrap
+        >
+          <v-chip close @click="() => {}">
+            Example Chip
+          </v-chip>
+          <v-chip>Example Chip</v-chip>
+          <v-chip close @click="() => {}">
+            <v-avatar left>
+              <img
+                src="https://randomuser.me/api/portraits/men/35.jpg"
+                alt="trevor"
+              >
+            </v-avatar>
+            Trevor Hansen
+          </v-chip>
+          <v-chip disabled @click="() => {}">
+            <v-avatar
+              color="teal"
+              left
+              class="white--text"
+            >
+              A
+            </v-avatar>
+            ANZ Bank
+          </v-chip>
+        </v-layout>
+      </core-section>
+
+      <core-title>
         Colors
       </core-title>
       <core-section>
