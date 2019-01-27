@@ -84,6 +84,9 @@ export const BaseSlideGroup = mixins<options &
     __cachedPrepend (): VNode {
       return this.genTransition('prepend')
     },
+    classes (): object {
+      return BaseItemGroup.options.computed.classes.call(this)
+    },
     hasAffixes (): Boolean {
       return (
         (this.showArrows || !this.isMobile) &&
