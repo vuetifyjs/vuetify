@@ -9,6 +9,7 @@ import VIcon from '../VIcon'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import { factory as GroupableFactory } from '../../mixins/groupable'
 import Themeable from '../../mixins/themeable'
 import Toggleable from '../../mixins/toggleable'
 import Sizeable from '../../mixins/sizeable'
@@ -22,6 +23,7 @@ import { deprecate } from '../../util/console'
 /* @vue/component */
 export default mixins(
   Colorable,
+  GroupableFactory('chipGroup'),
   Sizeable,
   Themeable,
   Toggleable
@@ -37,6 +39,7 @@ export default mixins(
     label: Boolean,
     outline: Boolean,
     outlined: Boolean,
+    pill: Boolean,
     ripple: {
       type: [Boolean, Object],
       default: null
@@ -55,6 +58,7 @@ export default mixins(
       return {
         'v-chip--disabled': this.disabled,
         'v-chip--draggable': this.draggable,
+        'v-chip--pill': this.pill,
         'v-chip--selected': this.selected && !this.disabled,
         'v-chip--label': this.label,
         'v-chip--outlined': this.hasOutline,
@@ -105,7 +109,7 @@ export default mixins(
       class: this.classes,
       attrs: {
         draggable: this.draggable ? 'true' : undefined,
-        tabindex: this.disabled ? -1 : this.$attrs.tabindex
+        tabindex: this.disabled ? -1 : (this.$attrs.tabindex || 0)
       },
       directives: [
         {
