@@ -1,0 +1,30 @@
+{
+  "header": "crwdns12488:0crwdne12488:0",
+  "headerText": "crwdns12490:0crwdne12490:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns12492:0crwdne12492:0"
+    }
+  },
+  "props": {
+    "appendIcon": "crwdns12494:0crwdne12494:0",
+    "appendIconCb": "crwdns12496:0crwdne12496:0",
+    "backgroundColor": "crwdns12498:0crwdne12498:0",
+    "hideDetails": "crwdns12500:0crwdne12500:0",
+    "hint": "crwdns12502:0crwdne12502:0",
+    "label": "crwdns12504:0crwdne12504:0",
+    "loading": "crwdns12506:0crwdne12506:0",
+    "persistentHint": "crwdns12508:0crwdne12508:0",
+    "placeholder": "crwdns12510:0crwdne12510:0",
+    "prependIcon": "crwdns12512:0crwdne12512:0",
+    "prependIconCb": "crwdns12514:0crwdne12514:0",
+    "required": "crwdns12516:0crwdne12516:0",
+    "tabindex": "crwdns12518:0crwdne12518:0",
+    "toggleKeys": "crwdns12520:0crwdne12520:0",
+    "value": "crwdns12522:0crwdne12522:0"
+  },
+  "events": {
+    "blur": "crwdns12524:0crwdne12524:0",
+    "change": "crwdns12526:0crwdne12526:0"
+  }
+}

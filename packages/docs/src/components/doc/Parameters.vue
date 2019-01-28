@@ -20,17 +20,8 @@
         slot="item"
         slot-scope="{ item }"
       >
-        <v-flex
-          xs12
-          grey
-          lighten-2
-          mt-2
-        >
-          <v-layout
-            wrap
-            px-2
-            py-1
-          >
+        <v-flex xs12 grey lighten-2 mt-2>
+          <v-layout wrap px-2 py-1>
             <v-flex
               v-for="(header, i) in headers"
               :key="header.value"
@@ -69,25 +60,21 @@
             pa-2
             wrap
           >
-            <v-flex
-              grey--text
-              text--darken-3
-              xs12
-            >
+            <v-flex grey--text text--darken-3 xs12>
               <doc-markdown
                 :code="item.description"
                 class="justify"
               />
             </v-flex>
             <v-flex>
+              <!-- eslint-disable -->
               <doc-markup
                 v-if="item.example"
                 class="mt-2 mb-0"
                 lang="ts"
                 value="example"
-              >
-                {{ genTypescriptDef(item.example) }}
-              </doc-markup>
+              >{{ genTypescriptDef(item.example) }}</doc-markup>
+              <!-- eslint-enable -->
             </v-flex>
           </v-layout>
         </v-flex>
@@ -116,6 +103,10 @@
       headers: {
         type: Array,
         default: () => ([])
+      },
+      lang: {
+        type: String,
+        default: ''
       },
       items: {
         type: Array,
@@ -210,12 +201,13 @@
           str.indexOf('Components.') > -1
         )
       },
-      /* eslint-disable max-statements */
+      /* eslint-disable-next-line max-statements */
       genDescription (name, item) {
         let description = ''
         let devPrepend = ''
         const camelSource = this.parseSource(item.source)
-        const composite = `${this.namespace}.${this.page}`
+        const page = this.lang ? upperFirst(camelCase(this.lang)) : this.page
+        const composite = `${this.namespace}.${page}`
 
         // Components.Alerts.props['v-alert'].value
         const specialDesc = `${composite}.${this.type}['${this.target}']['${name}']`

@@ -32,10 +32,7 @@
             />
           </v-flex>
 
-          <v-flex
-            xs12
-            sm4
-          >
+          <v-flex xs12 sm4>
             <v-text-field
               v-model="search"
               append-icon="search"
@@ -62,6 +59,7 @@
             <doc-parameters
               :headers="headers[tab]"
               :items="component[tab]"
+              :lang="lang"
               :search="search"
               :target="current"
               :type="tab"
@@ -94,6 +92,10 @@
 
   export default {
     props: {
+      lang: {
+        type: String,
+        default: ''
+      },
       value: {
         type: Array,
         default: () => ([])

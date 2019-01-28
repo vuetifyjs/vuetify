@@ -17,11 +17,7 @@
           row
           spacer
         >
-          <v-flex
-            xs4
-            sm2
-            md1
-          >
+          <v-flex xs4 sm2 md1>
             <v-avatar
               slot="activator"
               size="36px"
@@ -39,11 +35,7 @@
             </v-avatar>
           </v-flex>
 
-          <v-flex
-            sm5
-            md3
-            hidden-xs-only
-          >
+          <v-flex sm5 md3 hidden-xs-only>
             <strong v-html="message.name"></strong>
             <span
               v-if="message.total"
@@ -53,11 +45,7 @@
             </span>
           </v-flex>
 
-          <v-flex
-            no-wrap
-            xs5
-            sm3
-          >
+          <v-flex no-wrap xs5 sm3>
             <v-chip
               v-if="message.new"
               :color="`${message.color} lighten-4`"

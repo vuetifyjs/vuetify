@@ -2,14 +2,8 @@
   <v-toolbar light>
     <v-toolbar-title>Title</v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-toolbar-items
-      v-for="item in items"
-      :key="item.text"
-      class="hidden-sm-and-down"
-    >
-      <v-btn flat>
-        {{ item.text }}
-      </v-btn>
+    <v-toolbar-items v-for="item in items" :key="item.text" class="hidden-sm-and-down">
+      <v-btn flat>{{ item.text }}</v-btn>
     </v-toolbar-items>
   </v-toolbar>
 </template>

@@ -1,5 +1,6 @@
 import VDialog from '@/components/VDialog'
 import { test } from '@/test'
+import Vue from 'vue'
 
 test('VDialog.js', ({ mount, compileToFunctions }) => {
   it('should render component and match snapshot', () => {
@@ -227,6 +228,34 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
 
     const activator = wrapper.find('.v-dialog__activator')[0]
     expect(Object.keys(activator.vNode.data.on)).toHaveLength(0)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/6115
+  it('should have activator', () => {
+    const wrapper = mount(VDialog)
+    expect(wrapper.vm.hasActivator).toBe(false)
+    expect(wrapper.hasStyle('display', 'block')).toBe(true)
+
+    const wrapper2 = mount(VDialog, {
+      slots: {
+        activator: [compileToFunctions('<div></div>')]
+      }
+    })
+    expect(wrapper2.hasStyle('display', 'inline-block')).toBe(true)
+    expect(wrapper2.vm.hasActivator).toBe(true)
+
+    const wrapper3 = mount({
+      render: h => h(VDialog, {
+        scopedSlots: {
+          activator: () => '<div></div>'
+        }
+      })
+    })
+    const dialog = wrapper3.first(VDialog)
+    expect(dialog.hasStyle('display', 'inline-block')).toBe(true)
+    expect(dialog.vm.hasActivator).toBe(true)
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })

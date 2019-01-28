@@ -1,0 +1,45 @@
+{
+  "header": "# Combobox",
+  "headerText": "Combobox info coming soon",
+  "supplemental": [
+    "MaskTable"
+  ],
+  "examples": {
+    "usage": {
+      "desc": "With Combobox, you can allow a user to create new values that may not be present in a provided items list."
+    },
+    "noData": {
+      "header": "### No data with chips",
+      "desc": "In this example we utilize a custom **no-data** slot to provide context to the user when searching / creating items."
+    },
+    "advanced": {
+      "header": "### Advanced custom options",
+      "desc": "The `v-combobox` improves upon the added functionality from `v-select` and `v-autocomplete`. This provides you with an expansive interface to create truly customized implementations. This example takes advantage of some more advanced features such as a custom **filter** algorithm, inline list editing and dynamic input items."
+    },
+    "comboboxMultiple": {
+      "header": "### Multiple combobox",
+      "desc": "Previously known as **tags** - user is allowed to enter more than 1 value"
+    }
+  },
+  "slots": {
+    "append": "Components.Selects.slots.append",
+    "item": "Scoped slot for designating the markup for a list-tile",
+    "no-data": "Mixins.Filterable.slots.noData",
+    "prepend": "Components.Selects.slots.prepend",
+    "selection": "Scoped slot for designating the markup for the selected items"
+  },
+  "scopedSlots": {
+    "item": "Define a custom item appearance",
+    "selection": "Define a custom selection appearance"
+  },
+  "events": {
+    "change": "Components.Inputs.events.change",
+    "click:append": "Components.Inputs.events['click:append']",
+    "click:append-outer": "Components.TextFields.events['click:append-outer']",
+    "click:clear": "Components.TextFields.events['click:clear']",
+    "click:prepend": "Components.Inputs.events['click:prepend']",
+    "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
+    "update:error": "Mixins.Validatable.events['update:error']",
+    "update:searchInput": "The `search-input.sync` event"
+  }
+}
