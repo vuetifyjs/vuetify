@@ -10,7 +10,7 @@
         :link="variant.includes('link')"
         :outlined="variant.includes('outlined')"
         :pill="variant.includes('pill')"
-        :value="value"
+        :input-value="value"
       >
         <v-avatar
           v-if="avatar !== ''"

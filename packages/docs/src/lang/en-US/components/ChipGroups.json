@@ -9,6 +9,10 @@
     "filterResults": {
       "header": "### Filter results",
       "desc": "Easily create chip groups that provide additional feedback with the **filter** prop. This creates an alternative visual style that communicates to the user that the chip is selected."
+    },
+    "blouse": {
+      "header": "### Blouse product card",
+      "desc": "The `v-chip` component can have an explicit value used for its model. This gets passed to the `v-chip-group` component and is useful for when you don't want to use the chips index as their values."
     }
   }
 }
