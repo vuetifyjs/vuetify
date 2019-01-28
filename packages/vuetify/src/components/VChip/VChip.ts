@@ -12,7 +12,7 @@ import VIcon from '../VIcon'
 import Colorable from '../../mixins/colorable'
 import { factory as GroupableFactory } from '../../mixins/groupable'
 import Themeable from '../../mixins/themeable'
-import Toggleable from '../../mixins/toggleable'
+import { factory as ToggleableFactory } from '../../mixins/toggleable'
 import Sizeable from '../../mixins/sizeable'
 
 // Directives
@@ -21,13 +21,16 @@ import Ripple from '../../directives/ripple'
 // Utilities
 import { deprecate } from '../../util/console'
 
+// Types
+import { PropValidator } from 'vue/types/options'
+
 /* @vue/component */
 export default mixins(
   Colorable,
   GroupableFactory('chipGroup'),
   Sizeable,
   Themeable,
-  Toggleable
+  ToggleableFactory('inputValue')
 ).extend({
   name: 'v-chip',
 
@@ -57,7 +60,8 @@ export default mixins(
     },
     // Used for selects/tagging
     selected: Boolean,
-    textColor: String
+    textColor: String,
+    value: null as any as PropValidator<any>
   },
 
   computed: {
