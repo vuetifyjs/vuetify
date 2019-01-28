@@ -10,6 +10,7 @@ import VIcon from '../VIcon'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import { factory as GroupableFactory } from '../../mixins/groupable'
 import Themeable from '../../mixins/themeable'
 import Toggleable from '../../mixins/toggleable'
 import Sizeable from '../../mixins/sizeable'
@@ -23,6 +24,7 @@ import { deprecate } from '../../util/console'
 /* @vue/component */
 export default mixins(
   Colorable,
+  GroupableFactory('chipGroup'),
   Sizeable,
   Themeable,
   Toggleable
@@ -45,11 +47,7 @@ export default mixins(
     },
     // Used for selects/tagging
     selected: Boolean,
-    textColor: String,
-    value: {
-      type: Boolean,
-      default: true
-    }
+    textColor: String
   },
 
   computed: {
@@ -58,7 +56,7 @@ export default mixins(
         'v-chip--disabled': this.disabled,
         'v-chip--draggable': this.draggable,
         'v-chip--pill': this.pill,
-        'v-chip--selected': this.selected && !this.disabled,
+        'v-chip--selected': !this.disabled && this.isActive,
         'v-chip--label': this.label,
         'v-chip--outlined': this.hasOutline,
         'v-chip--removable': this.close,
@@ -83,7 +81,7 @@ export default mixins(
           click: (e: Event) => {
             e.stopPropagation()
 
-            this.isActive = false
+            this.$emit('click:close')
           }
         }
       }, '$vuetify.icons.delete')
@@ -100,9 +98,16 @@ export default mixins(
 
   created () {
     if (this.outline) deprecate('outline', 'outlined', this)
+    if (this.selected) deprecate('selected', 'value', this)
   },
 
   render (h): VNode {
+    const listeners = this.chipGroup
+      ? {
+        click: () => {
+          this.chipGroup && this.toggle()
+        }
+      } : undefined
     const data = this.setBackgroundColor(this.color, {
       staticClass: 'v-chip',
       class: this.classes,
@@ -110,17 +115,11 @@ export default mixins(
         draggable: this.draggable ? 'true' : undefined,
         tabindex: this.disabled ? -1 : (this.$attrs.tabindex || 0)
       },
-      directives: [
-        {
-          name: 'show',
-          value: this.isActive
-        },
-        {
-          name: 'ripple',
-          value: this.ripple != null ? this.ripple : !this.disabled
-        }
-      ],
-      on: this.$listeners
+      directives: [{
+        name: 'ripple',
+        value: this.ripple != null ? this.ripple : !this.disabled
+      }],
+      on: listeners
     })
 
     const color = this.textColor || (this.hasOutline && this.color)
