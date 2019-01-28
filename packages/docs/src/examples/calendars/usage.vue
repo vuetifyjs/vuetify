@@ -23,6 +23,7 @@
       <v-btn @click="$refs.calendar.prev()">
         <v-icon
           dark
+          left
         >
           keyboard_arrow_left
         </v-icon>
