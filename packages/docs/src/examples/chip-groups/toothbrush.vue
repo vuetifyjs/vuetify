@@ -20,8 +20,8 @@
       <span class="subheading">Select type</span>
 
       <v-chip-group
-        active-class="deep-purple--text text--accent-4"
         v-model="selection"
+        active-class="deep-purple--text text--accent-4"
       >
         <v-chip>Extra Soft</v-chip>
         <v-chip>Soft</v-chip>
@@ -46,6 +46,6 @@
   export default {
     data: () => ({
       selection: 2
-    }),
+    })
   }
 </script>
