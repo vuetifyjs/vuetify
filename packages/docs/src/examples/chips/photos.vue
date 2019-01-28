@@ -36,7 +36,7 @@
           <v-chip
             :disabled="loading"
             close
-            @input="selected.splice(i, 1)"
+            @click:close="selected.splice(i, 1)"
           >
             <v-icon
               left
@@ -62,7 +62,7 @@
     <v-divider v-if="!allSelected"></v-divider>
 
     <v-list>
-      <template v-for="(item, i) in items">
+      <template v-for="(item, i) in categories">
         <v-list-tile
           v-if="!selected.includes(i)"
           :key="i"
@@ -128,6 +128,17 @@
     computed: {
       allSelected () {
         return this.selected.length === this.items.length
+      },
+      categories () {
+        const search = this.search.toLowerCase()
+
+        if (!search) return this.items
+
+        return this.items.filter(item => {
+          const text = item.text.toLowerCase()
+
+          return text.indexOf(search) > -1
+        })
       },
       selections () {
         const selections = []

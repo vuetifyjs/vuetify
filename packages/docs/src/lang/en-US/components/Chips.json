@@ -35,6 +35,10 @@
     "photos": {
       "header": "### Custom lists",
       "desc": "In this example we opt to use a customized list instead of [v-autocomplete](/components/autocompletes). This allows us to always display the options available while still providing the same functionality of search and selection."
+    },
+    "actionChips": {
+      "header": "### Action chips",
+      "desc": "Chips can be used as actionable items. Provided with a _click_ event, the chip becomes interactive and can invoke methods."
     }
   },
   "props": {

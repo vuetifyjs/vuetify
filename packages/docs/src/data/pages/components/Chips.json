@@ -27,6 +27,7 @@
           "type": "examples",
           "value": [
             "photos",
+            "actionChips",
             "colored",
             "icon",
             "outline",
