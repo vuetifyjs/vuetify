@@ -6,6 +6,7 @@ import VList from './VList'
 import Bootable from '../../mixins/bootable'
 import Toggleable from '../../mixins/toggleable'
 import { Registrable, inject as RegistrableInject } from '../../mixins/registrable'
+import { Route } from 'vue-router'
 
 // Transitions
 import { VExpandTransition } from '../transitions'
@@ -20,7 +21,7 @@ type VListInstance = InstanceType<typeof VList>
 
 interface options extends Vue {
   list: VListInstance
-  $route: any
+  $route: Route
 }
 
 export default mixins<options &
