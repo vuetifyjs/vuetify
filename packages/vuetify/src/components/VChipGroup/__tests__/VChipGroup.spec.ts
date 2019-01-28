@@ -50,4 +50,4 @@ describe('VChipGroup.ts', () => {
     expect(wrapper.classes()).toContain('v-chip-group--column')
     expect(wrapper.html()).toMatchSnapshot()
   })
-});
+})
