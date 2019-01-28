@@ -1,3 +1,6 @@
+// Styles
+import './VChipGroup.sass'
+
 // Extensions
 import { BaseSlideGroup } from '../VSlideGroup/VSlideGroup'
 
@@ -12,22 +15,28 @@ export default BaseSlideGroup.extend({
   },
 
   props: {
-    multiple: {
-      type: Boolean,
-      default: true
+    activeClass: {
+      type: String,
+      default: 'primary--text'
     },
-    showArrows: {
-      type: Boolean,
-      default: true
-    }
+    column: Boolean
   },
 
   computed: {
     classes () {
       return {
         ...BaseSlideGroup.options.computed.classes.call(this),
-        'v-chip-group': true
+        'v-chip-group': true,
+        'v-chip-group--column': this.column
       }
+    }
+  },
+
+  watch: {
+    column (val) {
+      if (val) this.scrollOffset = 0
+
+      this.$nextTick(this.onResize)
     }
   }
 })

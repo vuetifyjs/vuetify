@@ -29,7 +29,7 @@
   padding: 0 12px
   position: relative
   transition-duration: 0.28s
-  transition-property: box-shadow, opacity
+  transition-property: box-shadow, opacity, background
   transition-timing-function: map-get($transition, 'fast-out-slow-in')
   vertical-align: middle
 
@@ -49,8 +49,11 @@
   &:active
     +elevation(2)
 
-  &.v-chip--selected:after
-    opacity: .32
+  &.v-chip--selected
+    background: transparent
+
+    &:after
+      opacity: .08
 
   &:focus:after
     opacity: .22
@@ -61,7 +64,6 @@
     width: 24px !important
 
   .v-icon
-    color: inherit
     font-size: 24px
 
   .v-avatar,
@@ -146,7 +148,11 @@
 
 .v-chip.v-chip--outlined
   background-color: transparent !important
-  border: $icon-outlined-border-width solid currentColor
+  border-width: $icon-outlined-border-width
+  border-style: solid
+
+  .v-icon
+    color: inherit
 
 .v-chip
   @each $name, $size in $icon-sizes

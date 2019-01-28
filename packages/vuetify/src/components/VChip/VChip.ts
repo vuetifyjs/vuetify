@@ -66,7 +66,8 @@ export default mixins(
           this.$listeners['!click']
         ),
         ...this.themeClasses,
-        ...this.sizeableClasses
+        ...this.sizeableClasses,
+        ...this.groupClasses
       }
     },
     hasOutline (): boolean {
