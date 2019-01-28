@@ -60,7 +60,11 @@ export default mixins(
         'v-chip--label': this.label,
         'v-chip--outlined': this.hasOutline,
         'v-chip--removable': this.close,
-        'v-chip--clickable': this.$listeners.click || this.$listeners['!click'],
+        'v-chip--clickable': Boolean(
+          this.chipGroup ||
+          this.$listeners.click ||
+          this.$listeners['!click']
+        ),
         ...this.themeClasses,
         ...this.sizeableClasses
       }
