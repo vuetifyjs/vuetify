@@ -110,6 +110,9 @@
   height: 100%
 
 // Modifiers
+.v-chip--clickable
+  cursor: pointer
+
 .v-chip--disabled
   opacity: .4
   pointer-events: none
@@ -119,8 +122,8 @@
   &:active
     +elevation(12)
 
-.v-chip--clickable
-  cursor: pointer
+.v-chip__filter.v-icon
+  color: inherit
 
 .v-chip--pill
   .v-avatar

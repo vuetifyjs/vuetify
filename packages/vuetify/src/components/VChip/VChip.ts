@@ -18,7 +18,7 @@ import Sizeable from '../../mixins/sizeable'
 // Directives
 import Ripple from '../../directives/ripple'
 
-// Utiles
+// Utilities
 import { deprecate } from '../../util/console'
 
 /* @vue/component */
@@ -37,6 +37,7 @@ export default mixins(
     close: Boolean,
     disabled: Boolean,
     draggable: Boolean,
+    filter: Boolean,
     label: Boolean,
     outline: Boolean,
     outlined: Boolean,
@@ -76,6 +77,12 @@ export default mixins(
   },
 
   methods: {
+    genFilter (): VNode {
+      return this.$createElement(VIcon, {
+        staticClass: 'v-chip__filter',
+        props: { left: true }
+      }, '$vuetify.icons.complete')
+    },
     genClose (): VNode {
       return this.$createElement(VIcon, {
         staticClass: 'v-chip__close',
@@ -95,6 +102,7 @@ export default mixins(
       return this.$createElement('span', {
         staticClass: 'v-chip__content'
       }, [
+        this.filter && this.isActive && this.genFilter(),
         this.$slots.default,
         this.close && this.genClose()
       ])
