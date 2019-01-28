@@ -63,12 +63,7 @@ export default mixins(
   computed: {
     classes (): object {
       return {
-        'v-chip--clickable': Boolean(
-          this.link ||
-          this.chipGroup ||
-          this.$listeners.click ||
-          this.$listeners['!click']
-        ),
+        'v-chip--clickable': this.isClickable,
         'v-chip--disabled': this.disabled,
         'v-chip--draggable': this.draggable,
         'v-chip--label': this.label,
@@ -84,6 +79,14 @@ export default mixins(
     },
     hasOutline (): boolean {
       return this.outline || this.outlined
+    },
+    isClickable (): boolean {
+      return Boolean(
+        this.link ||
+        this.chipGroup ||
+        this.$listeners.click ||
+        this.$listeners['!click']
+      )
     }
   },
 
@@ -131,7 +134,7 @@ export default mixins(
       class: this.classes,
       attrs: {
         draggable: this.draggable ? 'true' : undefined,
-        tabindex: this.disabled ? -1 : this.$attrs.tabindex
+        tabindex: this.disabled ? -1 : this.$attrs.tabindex || +this.isClickable - 1
       },
       directives: [{
         name: 'ripple',

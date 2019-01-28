@@ -53,10 +53,20 @@
     background: transparent
 
     &:after
-      opacity: .08
+      opacity: .28
+
+    &.v-chip--no-color
+      &:after
+        opacity: .08
+
+      &:focus:after
+        opacity: .16
 
   &:focus:after
-    opacity: .22
+    opacity: .36
+
+  &:hover:after
+    opacity: .18
 
   // Important is needed to account for new avatar structure
   .v-avatar
