@@ -35,10 +35,19 @@ export default mixins(
 
   props: {
     close: Boolean,
+    closeIcon: {
+      type: String,
+      default: '$vuetify.icons.delete'
+    },
     disabled: Boolean,
     draggable: Boolean,
     filter: Boolean,
+    filterIcon: {
+      type: String,
+      default: '$vuetify.icons.complete'
+    },
     label: Boolean,
+    link: Boolean,
     outline: Boolean,
     outlined: Boolean,
     pill: Boolean,
@@ -54,18 +63,20 @@ export default mixins(
   computed: {
     classes (): object {
       return {
-        'v-chip--disabled': this.disabled,
-        'v-chip--draggable': this.draggable,
-        'v-chip--pill': this.pill,
-        'v-chip--selected': !this.disabled && this.isActive,
-        'v-chip--label': this.label,
-        'v-chip--outlined': this.hasOutline,
-        'v-chip--removable': this.close,
         'v-chip--clickable': Boolean(
+          this.link ||
           this.chipGroup ||
           this.$listeners.click ||
           this.$listeners['!click']
         ),
+        'v-chip--disabled': this.disabled,
+        'v-chip--draggable': this.draggable,
+        'v-chip--label': this.label,
+        'v-chip--no-color': !this.color,
+        'v-chip--outlined': this.hasOutline,
+        'v-chip--pill': this.pill,
+        'v-chip--removable': this.close,
+        'v-chip--selected': !this.disabled && this.isActive,
         ...this.themeClasses,
         ...this.sizeableClasses,
         ...this.groupClasses
@@ -81,7 +92,7 @@ export default mixins(
       return this.$createElement(VIcon, {
         staticClass: 'v-chip__filter',
         props: { left: true }
-      }, '$vuetify.icons.complete')
+      }, this.filterIcon)
     },
     genClose (): VNode {
       return this.$createElement(VIcon, {
@@ -96,7 +107,7 @@ export default mixins(
             this.$emit('click:close')
           }
         }
-      }, '$vuetify.icons.delete')
+      }, this.closeIcon)
     },
     genContent (): VNode {
       return this.$createElement('span', {

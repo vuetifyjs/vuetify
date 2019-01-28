@@ -85,6 +85,10 @@
         margin-left: -6px
         margin-right: 8px
 
+  &:not(.v-chip--no-color)
+    .v-icon
+      color: inherit
+
 // Elements
 .v-chip__close.v-icon
   font-size: 18px
@@ -121,9 +125,6 @@
 .v-chip--draggable
   &:active
     +elevation(12)
-
-.v-chip__filter.v-icon
-  color: inherit
 
 .v-chip--pill
   .v-avatar
