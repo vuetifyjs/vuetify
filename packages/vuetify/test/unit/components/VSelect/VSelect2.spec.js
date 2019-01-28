@@ -425,8 +425,6 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
 
     wrapper.setProps({ disabled: true })
 
-    await wrapper.vm.$nextTick()
-
     wrapper.first('.v-chip--select-multi').trigger('click')
 
     expect(wrapper.vm.selectedIndex).toBe(1)

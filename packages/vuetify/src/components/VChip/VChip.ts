@@ -106,27 +106,25 @@ export default mixins(
   },
 
   render (h): VNode {
-    const listeners = this.chipGroup
-      ? {
-        click: () => {
-          this.chipGroup && this.toggle()
-        }
-      } : undefined
     const data = this.setBackgroundColor(this.color, {
       staticClass: 'v-chip',
       class: this.classes,
       attrs: {
         draggable: this.draggable ? 'true' : undefined,
-        tabindex: this.disabled ? -1 : (this.$attrs.tabindex || 0)
+        tabindex: this.disabled ? -1 : this.$attrs.tabindex
       },
       directives: [{
         name: 'ripple',
         value: this.ripple != null ? this.ripple : !this.disabled
       }],
-      on: listeners
+      on: this.$listeners
     })
 
     const color = this.textColor || (this.hasOutline && this.color)
+
+    if (!this.disabled && this.chipGroup) {
+      this._g(data, { click: this.toggle })
+    }
 
     return h(
       'span',

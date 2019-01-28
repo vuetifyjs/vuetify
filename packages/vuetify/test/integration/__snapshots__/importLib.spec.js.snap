@@ -30,6 +30,7 @@ Array [
   "VCarouselTransition",
   "VCheckbox",
   "VChip",
+  "VChipGroup",
   "VCombobox",
   "VContainer",
   "VContent",

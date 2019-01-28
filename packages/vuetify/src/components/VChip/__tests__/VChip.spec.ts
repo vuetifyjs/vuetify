@@ -48,13 +48,12 @@ describe('VBtn.ts', () => {
     const close = wrapper.find('.v-chip__close')
 
     const input = jest.fn(value => wrapper.setProps({ value }))
-    wrapper.vm.$on('input', input)
+    wrapper.vm.$on('click:close', input)
 
     expect(wrapper.html()).toMatchSnapshot()
 
     close.trigger('click')
-    expect(input).toBeCalledWith(false)
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(input).toHaveBeenCalled()
   })
 
   it('should render a colored chip', () => {
@@ -67,17 +66,6 @@ describe('VBtn.ts', () => {
 
     expect(wrapper.element.classList).toContain('blue')
     expect(wrapper.element.classList).toContain('green--text')
-  })
-
-  it('should render a clickable chip', () => {
-    const wrapper = mountFunction({
-      on: {
-        click: () => {}
-      }
-    })
-
-    expect(wrapper.element.classList).toContain('clickable')
-    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render a disabled chip', () => {
@@ -98,7 +86,7 @@ describe('VBtn.ts', () => {
   it('should render a colored outline chip', () => {
     const wrapper = mountFunction({
       propsData: {
-        outline: true,
+        outlined: true,
         color: 'blue'
       }
     })
@@ -110,7 +98,7 @@ describe('VBtn.ts', () => {
   it('should render a colored outline chip with text color', () => {
     const wrapper = mountFunction({
       propsData: {
-        outline: true,
+        outlined: true,
         color: 'blue',
         textColor: 'green'
       }

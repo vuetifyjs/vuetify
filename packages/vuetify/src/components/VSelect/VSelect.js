@@ -320,7 +320,7 @@ export default VTextField.extend({
         props: {
           close: this.deletableChips && !isDisabled,
           disabled: isDisabled,
-          selected: index === this.selectedIndex,
+          value: index === this.selectedIndex,
           small: this.smallChips
         },
         on: {
@@ -330,7 +330,7 @@ export default VTextField.extend({
             })
           },
           focus,
-          input: () => this.onChipInput(item)
+          'click:close': () => this.onChipInput(item)
         },
         key: this.getValue(item)
       }, this.getText(item))
