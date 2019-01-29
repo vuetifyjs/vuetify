@@ -28,11 +28,13 @@
           "value": [
             "photos",
             "actionChips",
+            "filtering",
             "colored",
             "icon",
             "outline",
             "label",
             "closable",
+            "expandable",
             "inSelects"
           ]
         }

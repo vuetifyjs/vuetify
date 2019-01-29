@@ -39,6 +39,14 @@
     "actionChips": {
       "header": "### Action chips",
       "desc": "Chips can be used as actionable items. Provided with a _click_ event, the chip becomes interactive and can invoke methods."
+    },
+    "filtering": {
+      "header": "### Additional filtering",
+      "desc": "Chips are great for providing supplementary actions to a particular task. In this instance, we are searching a list of items and collecting a subset of information to display available keywords."
+    },
+    "expandable": {
+      "header": "### Expandable",
+      "desc": "Chips can be combined with `v-menu` to enable a specific set of actions for a chip."
     }
   },
   "props": {

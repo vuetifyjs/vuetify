@@ -74,12 +74,18 @@ export default mixins(
         'v-chip--no-color': !this.color,
         'v-chip--outlined': this.hasOutline,
         'v-chip--pill': this.pill,
-        'v-chip--removable': this.close,
+        'v-chip--removable': this.hasClose,
         'v-chip--selected': !this.disabled && this.isActive,
         ...this.themeClasses,
         ...this.sizeableClasses,
         ...this.groupClasses
       }
+    },
+    hasClose (): boolean {
+      return Boolean(
+        this.close ||
+        this.$listeners['click:close']
+      )
     },
     hasOutline (): boolean {
       return this.outline || this.outlined
@@ -122,7 +128,7 @@ export default mixins(
       }, [
         this.filter && this.isActive && this.genFilter(),
         this.$slots.default,
-        this.close && this.genClose()
+        this.hasClose && this.genClose()
       ])
     }
   },
