@@ -68,6 +68,13 @@ export default {
 
       this.updateMenuDimensions()
     },
+    genInput () {
+      const input = VAutocomplete.options.methods.genInput.call(this)
+
+      input.data.on.paste = this.onPaste
+
+      return input
+    },
     genChipSelection (item, index) {
       const chip = VSelect.options.methods.genChipSelection.call(this, item, index)
 
@@ -213,6 +220,34 @@ export default {
 
       this.selectItem(this.internalSearch)
       this.internalSearch = null
+    },
+    onFocus () {
+      if (!this.isFocused) {
+        document.addEventListener('copy', this.onCopy)
+      }
+      VAutocomplete.options.methods.onFocus.call(this)
+    },
+    onBlur () {
+      document.removeEventListener('copy', this.onCopy)
+      VAutocomplete.options.methods.onBlur.call(this)
+    },
+    onCopy (event) {
+      if (this.selectedIndex === -1) return
+
+      const currentItem = this.selectedItems[this.selectedIndex]
+      const currentItemText = this.getText(currentItem)
+      event.clipboardData.setData('text/plain', currentItemText)
+      event.clipboardData.setData('text/vnd.vuetify.combobox.item+plain', currentItemText)
+      event.preventDefault()
+    },
+    onPaste (event) {
+      if (!this.multiple || this.searchIsDirty) return
+
+      const pastedItemText = event.clipboardData.getData('text/vnd.vuetify.combobox.item+plain')
+      if (pastedItemText && this.findExistingIndex(pastedItemText) === -1) {
+        event.preventDefault()
+        VSelect.options.methods.selectItem.call(this, pastedItemText)
+      }
     }
   }
 }
