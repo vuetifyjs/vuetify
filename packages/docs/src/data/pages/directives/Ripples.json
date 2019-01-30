@@ -27,12 +27,8 @@
           "type": "examples",
           "value": [
             "customColor",
-            "tabs",
-            "navigationDrawers",
-            "toolbars",
-            "expansionPanels",
-            "customRipple",
-            "htmlElement"
+            "center",
+            "rippleInComponents"
           ]
         }
       ]

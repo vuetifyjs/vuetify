@@ -39,6 +39,7 @@ export default function (expandedParentClass = '') {
 
       el.style.overflow = 'hidden'
       el.style.height = `${el.offsetHeight}px`
+      void el.offsetHeight // force reflow
 
       requestAnimationFrame(() => el.style.height = 0)
     },

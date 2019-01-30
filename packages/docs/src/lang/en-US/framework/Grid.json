@@ -6,7 +6,7 @@
   ],
   "examples": {
     "usage": {
-      "desc": "The `v-container` can be used for a center focused page, or given the `fluid` prop to extend its full width. `v-layout` is used for separating sections and contains the `v-flex`. The structure of your layout will be as follows, **v-container** &raquo; **v-layout** &raquo; **v-flex**. Each part of the grid chain is a flex-box element. The final, `v-flex`, automatically sets its children to have <kbd>flex: 1 1 auto</kbd>.",
+      "desc": "The `v-container` can be used for a center focused page, or given the `fluid` prop to extend its full width. `v-layout` is used for separating sections and contains the `v-flex`. The structure of your layout will be as follows, **v-container** &raquo; **v-layout** &raquo; **v-flex**. Each part of the grid chain is a flex-box element. The final, `v-flex`, automatically sets its children to have <kbd>flex: 1 1 auto</kbd>.<br>For convenience reasons, these components automatically transform attributes into classes. Allowing you to write `<v-layout pa-3 mb-2></v-layout>` instead of `<v-layout class=\"pa-3 mb-2\"></v-layout>`. The only exception are [data attributes](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes) which are left as-is.",
       "uninverted": true
     },
     "playground": {

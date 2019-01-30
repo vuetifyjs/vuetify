@@ -3,7 +3,7 @@
   "description": "A Vue.js project",
   "private": true,
   "author": "John Leider <john.j.leider@gmail.com>",
-  "version": "1.5.0-beta.2",
+  "version": "1.5.0-beta.3",
   "scripts": {
     "dev": "cross-env NODE_OPTIONS=--max_old_space_size=8192 node server",
     "start": "cross-env NODE_ENV=production node server",
@@ -15,7 +15,7 @@
     "npm": ">=4.0"
   },
   "dependencies": {
-    "@vuetify/api-generator": "^1.5.0-beta.2",
+    "@vuetify/api-generator": "^1.5.0-beta.3",
     "babel-polyfill": "^6.26.0",
     "chokidar": "^2.0.4",
     "compression": "^1.7.3",
@@ -44,7 +44,7 @@
     "vue-router": "^3.0.1",
     "vue-server-renderer": "^2.5.21",
     "vuelidate": "^0.6.2",
-    "vuetify": "^1.5.0-beta.2",
+    "vuetify": "^1.5.0-beta.3",
     "vuex": "^3.0.1",
     "vuex-router-sync": "^5.0.0",
     "webfontloader": "^1.6.28"
