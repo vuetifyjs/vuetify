@@ -50,4 +50,18 @@ describe('VChipGroup.ts', () => {
     expect(wrapper.classes()).toContain('v-chip-group--column')
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should switch to column', () => {
+    const wrapper = mountFunction()
+
+    expect(wrapper.classes()).not.toContain('v-chip-group--column')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({
+      column: true
+    })
+
+    expect(wrapper.classes()).toContain('v-chip-group--column')
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
