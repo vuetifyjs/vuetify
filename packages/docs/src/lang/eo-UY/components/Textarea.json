@@ -1,0 +1,23 @@
+{
+  "header": "crwdns13554:0crwdne13554:0",
+  "headerText": "crwdns13556:0crwdne13556:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns13558:0crwdne13558:0"
+    },
+    "autoGrow": {
+      "header": "crwdns13560:0crwdne13560:0",
+      "desc": "crwdns13562:0crwdne13562:0"
+    },
+    "signupBox": {
+      "header": "crwdns13564:0crwdne13564:0",
+      "desc": "crwdns13566:0crwdne13566:0"
+    }
+  },
+  "props": {
+    "autoGrow": "crwdns13568:0crwdne13568:0",
+    "noResize": "crwdns13570:0crwdne13570:0",
+    "rowHeight": "crwdns13572:0crwdne13572:0",
+    "rows": "crwdns13574:0crwdne13574:0"
+  }
+}

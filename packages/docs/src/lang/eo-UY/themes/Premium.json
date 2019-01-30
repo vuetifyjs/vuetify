@@ -1,0 +1,28 @@
+{
+  "header": "crwdns15786:0crwdne15786:0",
+  "headerText": "crwdns15788:0crwdne15788:0",
+  "buy": "crwdns15790:0crwdne15790:0",
+  "free": "crwdns15792:0crwdne15792:0",
+  "live": "crwdns15794:0crwdne15794:0",
+  "premium": "crwdns15796:0crwdne15796:0",
+  "downloadNow": "crwdns15798:0crwdne15798:0",
+  "viewDemo": "crwdns15800:0crwdne15800:0",
+  "templates": {
+    "alpha": {
+      "title": "crwdns15802:0crwdne15802:0",
+      "description": "crwdns15804:0crwdne15804:0"
+    },
+    "dashboard": {
+      "title": "crwdns15806:0crwdne15806:0",
+      "description": "crwdns15808:0crwdne15808:0"
+    },
+    "parallax": {
+      "title": "crwdns15810:0crwdne15810:0",
+      "description": "crwdns15812:0crwdne15812:0"
+    },
+    "blog": {
+      "title": "crwdns15814:0crwdne15814:0",
+      "description": "crwdns15816:0crwdne15816:0"
+    }
+  }
+}

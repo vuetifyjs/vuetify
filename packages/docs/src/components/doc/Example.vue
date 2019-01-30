@@ -55,43 +55,45 @@
           class="pa-2"
           mandatory
         >
-          <v-item
-            v-for="(section, i) in sections"
-            v-if="parsed[section]"
-            :key="`item-${i}`"
-            :value="section"
-          >
-            <v-btn
-              slot-scope="{ active, toggle }"
-              :color="active ? 'white' : 'transparent'"
-              :light="active"
-              class="mr-0"
-              depressed
-              round
-              @click="toggle"
+          <template v-for="(section, i) in sections">
+            <v-item
+              v-if="parsed[section]"
+              :key="`item-${i}`"
+              :value="section"
             >
-              {{ section }}
-            </v-btn>
-          </v-item>
+              <v-btn
+                slot-scope="{ active, toggle }"
+                :color="active ? 'white' : 'transparent'"
+                :light="active"
+                class="mr-0"
+                depressed
+                round
+                @click="toggle"
+              >
+                {{ section }}
+              </v-btn>
+            </v-item>
+          </template>
         </v-item-group>
+
         <v-divider />
+
         <v-window v-model="selected">
-          <v-window-item
-            v-for="(section, i) in sections"
-            v-if="parsed[section]"
-            :key="`window-${i}`"
-            :value="section"
-          >
-            <div
-              :class="($vuetify.breakpoint.smAndUp) ? 'v-example__container' : ''"
+          <template v-for="(section, i) in sections">
+            <v-window-item
+              v-if="parsed[section]"
+              :key="`window-${i}`"
+              :value="section"
             >
-              <doc-markup
-                :value="file"
-                :filename="false"
-                class="mb-0"
-              >{{ parsed[section] }}</doc-markup>
-            </div>
-          </v-window-item>
+              <div :class="($vuetify.breakpoint.smAndUp) ? 'v-example__container' : ''">
+                <doc-markup
+                  :value="file"
+                  :filename="false"
+                  class="mb-0"
+                >{{ parsed[section] }}</doc-markup>
+              </div>
+            </v-window-item>
+          </template>
         </v-window>
       </v-card>
     </v-expand-transition>
@@ -199,9 +201,6 @@
         }
       },
       kebabCase,
-      toggle () {
-        this.active = !this.active
-      },
       sendToCodepen () {
         this.$refs.codepen.submit()
       },

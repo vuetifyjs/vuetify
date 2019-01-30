@@ -17,9 +17,9 @@
       />
       <core-item
         v-else
+        :key="`item-${i}`"
         :chip="genChip(child)"
         :icon="child.icon"
-        :key="`item-${i}`"
         :subtext="child.subtext"
         :to="child.to"
         :text="child.text"
@@ -67,7 +67,7 @@
       genChip,
       genGroup (children) {
         return children.map(item => {
-          let parent = item.group || this.item.group
+          const parent = item.group || this.item.group
           let group = `${parent}/${kebabCase(item.to)}`
 
           if (item.children) {

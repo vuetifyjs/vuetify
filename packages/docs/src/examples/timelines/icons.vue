@@ -2,9 +2,9 @@
   <v-timeline align-top>
     <v-timeline-item
       v-for="(item, i) in items"
+      :key="i"
       :color="item.color"
       :icon="item.icon"
-      :key="i"
       fill-dot
     >
       <v-card

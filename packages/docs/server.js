@@ -18,7 +18,9 @@ const serverInfo =
   `express/${require('express/package.json').version} ` +
   `vue-server-renderer/${require('vue-server-renderer/package.json').version}`
 
-const availableLanguages = require('./src/data/i18n/languages').map(lang => lang.locale)
+const languages = require('./src/data/i18n/languages')
+const availableLanguages = languages.map(lang => lang.locale)
+const fallbackLocale = languages.find(lang => lang.fallback === true).locale
 
 const app = express()
 
@@ -101,6 +103,18 @@ const cacheMiddleware = microcache.cacheSeconds(10 * 60, req => useMicroCache &&
 const ouchInstance = (new Ouch()).pushHandler(new Ouch.handlers.PrettyPageHandler('orange', null, 'sublime'))
 
 function render (req, res) {
+  const alternate = languages.find(lang => lang.alternate === req.params[0])
+
+  // Redirect to new locale
+  if (alternate) {
+    return res.redirect(301, `/${alternate.locale}${req.params[1] || ''}`)
+  }
+
+  // Redirect to fallback if locale does not exist
+  if (!availableLanguages.includes(req.params[0])) {
+    return res.redirect(301, `/${fallbackLocale}`)
+  }
+
   const s = Date.now()
 
   res.setHeader('Content-Type', 'text/html')
@@ -129,8 +143,25 @@ function render (req, res) {
     res,
     hreflangs: availableLanguages.reduce((acc, lang) => {
       return acc + `<link rel="alternate" hreflang="${lang}" href="https://${req.hostname}/${lang}${req.params[1]}" />`
-    }, '')
+    }, ''),
+    crowdin: ''
   }
+
+  if (context.lang === 'eo-UY') {
+    context.crowdin = `
+    <script type="text/javascript">
+      var _jipt = [];
+      _jipt.push(['project', 'vuetify']);
+      _jipt.push(['before_dom_insert', function(text, node, attribute) {
+        if (text.startsWith('##')) return '<h2>' + text + '</h2>';
+        else if (text.startsWith('#')) return '<h1>' + text + '</h1>';
+        else return text;
+      }]);
+    </script>
+    <script type="text/javascript" src="//cdn.crowdin.com/jipt/jipt.js"></script>
+    `
+  }
+
   renderer.renderToString(context, (err, html) => {
     if (err) {
       return handleError(err)
@@ -148,8 +179,8 @@ app.get(languageRegex, isProd ? render : (req, res) => {
 
 // 302 redirect for no language
 app.get('*', (req, res) => {
-  let lang = req.cookies.currentLanguage || req.acceptsLanguages(availableLanguages) || 'en'
-  if (!languageRegex.test('/' + lang)) lang = 'en'
+  let lang = req.cookies.currentLanguage || req.acceptsLanguages(availableLanguages) || fallbackLocale
+  if (!languageRegex.test('/' + lang)) lang = fallbackLocale
   res.redirect(302, `/${lang}${req.originalUrl}`)
 })
 

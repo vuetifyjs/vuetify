@@ -6,8 +6,8 @@
       </v-flex>
       <v-flex xs12 sm6>
         <v-select
-          :items="states"
           v-model="e6"
+          :items="states"
           :menu-props="{ maxHeight: '400' }"
           label="Select"
           multiple
@@ -22,8 +22,8 @@
 
       <v-flex xs12 sm6>
         <v-select
-          :items="states"
           v-model="e7"
+          :items="states"
           label="Select"
           multiple
           chips

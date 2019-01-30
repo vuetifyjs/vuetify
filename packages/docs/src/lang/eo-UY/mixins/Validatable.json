@@ -1,0 +1,17 @@
+{
+  "props": {
+    "disabled": "crwdns15764:0crwdne15764:0",
+    "error": "crwdns15766:0crwdne15766:0",
+    "errorCount": "crwdns15768:0crwdne15768:0",
+    "errorMessages": "crwdns15770:0crwdne15770:0",
+    "messages": "crwdns15772:0crwdne15772:0",
+    "readonly": "crwdns15774:0crwdne15774:0",
+    "rules": "crwdns15776:0crwdne15776:0",
+    "success": "crwdns15778:0crwdne15778:0",
+    "successMessages": "crwdns15780:0crwdne15780:0",
+    "validateOnBlur": "crwdns15782:0crwdne15782:0"
+  },
+  "events": {
+    "update:error": "crwdns15784:0crwdne15784:0"
+  }
+}

@@ -3,8 +3,8 @@
     <v-flex xs12 sm6 md4>
       <v-menu
         ref="menu"
-        :close-on-content-click="false"
         v-model="menu"
+        :close-on-content-click="false"
         :nudge-right="40"
         :return-value.sync="date"
         lazy
@@ -54,8 +54,8 @@
     </v-flex>
     <v-flex xs12 sm6 md4>
       <v-menu
-        :close-on-content-click="false"
         v-model="menu2"
+        :close-on-content-click="false"
         :nudge-right="40"
         lazy
         transition="scale-transition"

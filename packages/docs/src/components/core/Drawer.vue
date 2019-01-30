@@ -78,9 +78,9 @@
         />
         <core-item
           v-else
+          :key="`item-${i}`"
           :chip="genChip(item)"
           :icon="item.icon"
-          :key="`item-${i}`"
           :subtext="item.subtext"
           :text="item.text"
           :to="item.to"
