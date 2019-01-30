@@ -107,4 +107,30 @@ describe('VBtn.ts', () => {
     expect(wrapper.element.classList).toContain('blue')
     expect(wrapper.element.classList).toContain('green--text')
   })
+
+  it('should render a chip with filter', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        filter: true,
+        inputValue: true
+      }
+    })
+
+    expect(wrapper.findAll('.v-chip__filter')).toHaveLength(1)
+  })
+
+  it('should call toggle event when used in the group', () => {
+    const register = jest.fn()
+    const unregister = jest.fn()
+    const toggle = jest.fn()
+    const wrapper = mountFunction({
+      provide: {
+        chipGroup: { register, unregister }
+      },
+      methods: { toggle }
+    })
+
+    wrapper.trigger('click')
+    expect(toggle).toHaveBeenCalled()
+  })
 })
