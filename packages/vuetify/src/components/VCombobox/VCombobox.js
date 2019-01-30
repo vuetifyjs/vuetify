@@ -224,7 +224,7 @@ export default {
     onPaste (event) {
       if (!this.multiple || this.searchIsDirty) return
 
-      const pastedItemText = event.clipboardData.getData('text/vnd.vuetify.combobox.item+plain')
+      const pastedItemText = event.clipboardData.getData('text/vnd.vuetify.autocomplete.item+plain')
       if (pastedItemText && this.findExistingIndex(pastedItemText) === -1) {
         event.preventDefault()
         VSelect.options.methods.selectItem.call(this, pastedItemText)

@@ -387,7 +387,7 @@ export default VSelect.extend({
       const currentItem = this.selectedItems[this.selectedIndex]
       const currentItemText = this.getText(currentItem)
       event.clipboardData.setData('text/plain', currentItemText)
-      event.clipboardData.setData('text/vnd.vuetify.combobox.item+plain', currentItemText)
+      event.clipboardData.setData('text/vnd.vuetify.autocomplete.item+plain', currentItemText)
       event.preventDefault()
     }
   }

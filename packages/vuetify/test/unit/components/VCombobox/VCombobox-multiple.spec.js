@@ -382,4 +382,45 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
     expect(wrapper.vm.internalValue).toEqual(['fizz'])
     expect(updateTags).toHaveBeenCalledTimes(2)
   })
+
+  it('should paste as item when source of pasted text is item in another v-combobox/v-autocomplete', async () => {
+    const { wrapper, change } = createMultipleCombobox({
+      items: ['aaa', 'bbb'],
+    })
+
+    const input = wrapper.first('input')
+    const getData = jest.fn(mimeType => 'ccc')
+    const event = {
+      clipboardData: {
+        getData: getData,
+      },
+    }
+
+    input.trigger('focus')
+    input.trigger('paste', event)
+
+    expect(getData).toHaveBeenCalledTimes(1)
+    expect(getData).toBeCalledWith('text/vnd.vuetify.autocomplete.item+plain')
+    expect(change).toBeCalledWith(['ccc'])
+  })
+
+  it('should paste as text if source of pasted text is not item in another v-combobox/v-autocomplete', async () => {
+    const { wrapper, change } = createMultipleCombobox({
+      items: ['aaa', 'bbb'],
+    })
+
+    const input = wrapper.first('input')
+    const getData = jest.fn(mimeType => mimeType === 'text/plain' ? 'ccc' : '')
+    const event = {
+      clipboardData: {
+        getData: getData,
+      },
+    }
+
+    input.trigger('focus')
+    input.trigger('paste', event)
+
+    expect(change).not.toHaveBeenCalled()
+    // expect(input.element.value).toBe('ccc')  // can be checked only in browser environment
+  })
 })
