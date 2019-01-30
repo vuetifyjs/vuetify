@@ -221,25 +221,6 @@ export default {
       this.selectItem(this.internalSearch)
       this.internalSearch = null
     },
-    onFocus () {
-      if (!this.isFocused) {
-        document.addEventListener('copy', this.onCopy)
-      }
-      VAutocomplete.options.methods.onFocus.call(this)
-    },
-    onBlur () {
-      document.removeEventListener('copy', this.onCopy)
-      VAutocomplete.options.methods.onBlur.call(this)
-    },
-    onCopy (event) {
-      if (this.selectedIndex === -1) return
-
-      const currentItem = this.selectedItems[this.selectedIndex]
-      const currentItemText = this.getText(currentItem)
-      event.clipboardData.setData('text/plain', currentItemText)
-      event.clipboardData.setData('text/vnd.vuetify.combobox.item+plain', currentItemText)
-      event.preventDefault()
-    },
     onPaste (event) {
       if (!this.multiple || this.searchIsDirty) return
 

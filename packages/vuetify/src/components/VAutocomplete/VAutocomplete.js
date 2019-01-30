@@ -370,6 +370,25 @@ export default VSelect.extend({
     },
     hasItem (item) {
       return this.selectedValues.indexOf(this.getValue(item)) > -1
+    },
+    onFocus () {
+      if (!this.isFocused) {
+        document.addEventListener('copy', this.onCopy)
+      }
+      VSelect.options.methods.onFocus.call(this)
+    },
+    onBlur () {
+      document.removeEventListener('copy', this.onCopy)
+      VSelect.options.methods.onBlur.call(this)
+    },
+    onCopy (event) {
+      if (this.selectedIndex === -1) return
+
+      const currentItem = this.selectedItems[this.selectedIndex]
+      const currentItemText = this.getText(currentItem)
+      event.clipboardData.setData('text/plain', currentItemText)
+      event.clipboardData.setData('text/vnd.vuetify.combobox.item+plain', currentItemText)
+      event.preventDefault()
     }
   }
 })
