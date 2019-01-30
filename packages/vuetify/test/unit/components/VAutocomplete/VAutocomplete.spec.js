@@ -837,4 +837,58 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.menuCanShow).toBe(true)
   })
+
+  it('should copy selected item if multiple', async () => {
+    const wrapper = mount(VAutocomplete, {
+      propsData: {
+        items: ['aaa', 'bbb', 'ccc'],
+        value: ['aaa', 'bbb'],
+        chips: true,
+        multiple: true
+      }
+    })
+
+    const input = wrapper.first('input')
+    const chip = wrapper.find('.v-chip')[1]
+    const setData = jest.fn()
+    const event = {
+      clipboardData: {
+        setData
+      },
+      preventDefault: jest.fn()
+    }
+
+    input.trigger('focus')
+    chip.trigger('click')
+    wrapper.vm.onCopy(event)
+
+    expect(setData).toBeCalledWith('text/plain', 'bbb')
+    expect(setData).toBeCalledWith('text/vnd.vuetify.autocomplete.item+plain', 'bbb')
+    expect(event.preventDefault).toBeCalled()
+  })
+
+  it('should not copy anything if there is no selected item', async () => {
+    const wrapper = mount(VAutocomplete, {
+      propsData: {
+        items: ['aaa', 'bbb', 'ccc'],
+        value: ['aaa', 'bbb'],
+        chips: true,
+        multiple: true
+      }
+    })
+
+    const input = wrapper.first('input')
+    const setData = jest.fn()
+    const event = {
+      clipboardData: {
+        setData
+      },
+      preventDefault: jest.fn()
+    }
+
+    input.trigger('focus')
+    wrapper.vm.onCopy(event)
+
+    expect(setData).not.toBeCalled()
+  })
 })
