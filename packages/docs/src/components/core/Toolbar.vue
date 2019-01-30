@@ -54,6 +54,7 @@
       <core-ecosystems />
       <core-versions />
       <core-locales />
+      <core-pwa-prompt />
     </v-toolbar-items>
   </v-toolbar>
 </template>
