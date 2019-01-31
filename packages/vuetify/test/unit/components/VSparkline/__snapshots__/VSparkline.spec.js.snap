@@ -1,5 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VSparkline.vue should auto draw on value change 1`] = `
+
+<svg stroke-width="4"
+     width="100%"
+     height="25%"
+     viewbox="0 0 300 75"
+     class="primary--text"
+>
+  <defs>
+    <lineargradient id="7"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="currentColor"
+      >
+      </stop>
+    </lineargradient>
+  </defs>
+  <path id="7"
+        d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
+        fill="none"
+        stroke="url(#7)"
+  >
+  </path>
+</svg>
+
+`;
+
 exports[`VSparkline.vue should render component and match a snapshot 1`] = `
 
 <svg stroke-width="4"
@@ -126,6 +157,150 @@ exports[`VSparkline.vue should render component with padding and match a snapsho
         d="M20 54.186036511627904L150 49.30232558139535S150 49.30232558139535 150 49.30232558139535L280 20.813963488372092"
         fill="none"
         stroke="url(#2)"
+  >
+  </path>
+</svg>
+
+`;
+
+exports[`VSparkline.vue should render component with string labels and match a snapshot 1`] = `
+
+<svg stroke-width="4"
+     width="100%"
+     height="25%"
+     viewbox="0 0 300 75"
+     class="primary--text"
+>
+  <defs>
+    <lineargradient id="6"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="currentColor"
+      >
+      </stop>
+    </lineargradient>
+  </defs>
+  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: currentColor;">
+    <text x="8"
+          y="73"
+    >
+      1
+    </text>
+    <text x="150"
+          y="73"
+    >
+      7
+    </text>
+    <text x="292"
+          y="73"
+    >
+      42
+    </text>
+  </g>
+  <path id="6"
+        d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
+        fill="none"
+        stroke="url(#6)"
+  >
+  </path>
+</svg>
+
+`;
+
+exports[`VSparkline.vue should render component with string labels and match a snapshot 2`] = `
+
+<svg stroke-width="4"
+     width="100%"
+     height="25%"
+     viewbox="0 0 300 75"
+     class="primary--text"
+>
+  <defs>
+    <lineargradient id="6"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="currentColor"
+      >
+      </stop>
+    </lineargradient>
+  </defs>
+  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: currentColor;">
+    <text x="8"
+          y="73"
+    >
+      2
+    </text>
+    <text x="150"
+          y="73"
+    >
+      8
+    </text>
+    <text x="292"
+          y="73"
+    >
+      43
+    </text>
+  </g>
+  <path id="6"
+        d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
+        fill="none"
+        stroke="url(#6)"
+  >
+  </path>
+</svg>
+
+`;
+
+exports[`VSparkline.vue should render component with string labels and match a snapshot 3`] = `
+
+<svg stroke-width="4"
+     width="100%"
+     height="25%"
+     viewbox="0 0 300 75"
+     class="primary--text"
+>
+  <defs>
+    <lineargradient id="6"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="currentColor"
+      >
+      </stop>
+    </lineargradient>
+  </defs>
+  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: currentColor;">
+    <text x="8"
+          y="73"
+    >
+      foo
+    </text>
+    <text x="150"
+          y="73"
+    >
+      bar
+    </text>
+    <text x="292"
+          y="73"
+    >
+      baz
+    </text>
+  </g>
+  <path id="6"
+        d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
+        fill="none"
+        stroke="url(#6)"
   >
   </path>
 </svg>
