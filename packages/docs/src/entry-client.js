@@ -8,9 +8,7 @@ import WebFontLoader from 'webfontloader'
 
 if ('serviceWorker' in navigator && production) {
   navigator.serviceWorker.register('/vuetify-docs-sw.js')
-    .then(() => navigator.serviceWorker.ready.then(worker => {
-      worker.sync.register('syncdata')
-    }))
+    .then(() => navigator.serviceWorker.ready)
     .catch(err => console.log(err))
 }
 
