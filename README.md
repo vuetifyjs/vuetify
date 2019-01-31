@@ -11,8 +11,9 @@
   <a href="https://codecov.io/gh/vuetifyjs/vuetify">
     <img src="https://img.shields.io/codecov/c/github/vuetifyjs/vuetify.svg" alt="Coverage">
   </a>
-  <a href="https://codebeat.co/projects/github-com-vuetifyjs-vuetify-dev">
-    <img src="https://codebeat.co/badges/b2d1ce87-848b-440e-9d7e-df9883c0cd93" alt="codebeat badge">
+  
+  <a href="http://api.otechie.com/vuetifyjs">
+    <img src="https://api.otechie.com/consultancy/vuetifyjs/badge.svg" alt="Consulting">
   </a>
   <a href="https://www.npmjs.com/package/vuetify">
     <img src="https://img.shields.io/npm/dt/vuetify.svg" alt="Downloads">
@@ -21,6 +22,9 @@
     <img src="https://img.shields.io/npm/dm/vuetify.svg" alt="Downloads">
   </a>
   <br>
+  <a href="https://codebeat.co/projects/github-com-vuetifyjs-vuetify-dev">
+    <img src="https://codebeat.co/badges/b2d1ce87-848b-440e-9d7e-df9883c0cd93" alt="codebeat badge">
+  </a>
   <a href="https://www.npmjs.com/package/vuetify">
     <img src="https://img.shields.io/npm/l/vuetify.svg" alt="License">
   </a>
