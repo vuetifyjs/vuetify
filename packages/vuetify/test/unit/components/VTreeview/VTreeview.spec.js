@@ -79,7 +79,7 @@ test('VTreeView.ts', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.find('.v-treeview-node__checkbox')[0].trigger('click')
-    await wrapper.vm.$nextTick()
+    await new Promise(resolve => setTimeout(resolve))
 
     expect(fn).toHaveBeenCalledTimes(1)
     expect(fn).toHaveBeenCalledWith([0, 1])

@@ -25,7 +25,7 @@ function createNativeLocaleFormatter (
 ): NativeLocaleFormatter | undefined {
   const makeIsoString = (dateString: string) => {
     const [year, month, date] = dateString.trim().split(' ')[0].split('-')
-    return [year, pad(month || 1), pad(date || 1)].join('-')
+    return [pad(year, 4), pad(month || 1), pad(date || 1)].join('-')
   }
 
   try {
