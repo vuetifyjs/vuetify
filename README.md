@@ -12,7 +12,7 @@
     <img src="https://img.shields.io/codecov/c/github/vuetifyjs/vuetify.svg" alt="Coverage">
   </a>
   
-  <a href="http://api.otechie.com/vuetifyjs">
+  <a href="https://otechie.com/vuetifyjs">
     <img src="https://api.otechie.com/consultancy/vuetifyjs/badge.svg" alt="Consulting">
   </a>
   <a href="https://www.npmjs.com/package/vuetify">
