@@ -1,36 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VSparkline.vue should auto draw on value change 1`] = `
-
-<svg stroke-width="4"
-     width="100%"
-     height="25%"
-     viewbox="0 0 300 75"
-     class="primary--text"
->
-  <defs>
-    <lineargradient id="7"
-                    x1="0"
-                    y1="1"
-                    x2="0"
-                    y2="0"
-    >
-      <stop offset="0"
-            stop-color="currentColor"
-      >
-      </stop>
-    </lineargradient>
-  </defs>
-  <path id="7"
-        d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
-        fill="none"
-        stroke="url(#7)"
-  >
-  </path>
-</svg>
-
-`;
-
 exports[`VSparkline.vue should render component and match a snapshot 1`] = `
 
 <svg stroke-width="4"
