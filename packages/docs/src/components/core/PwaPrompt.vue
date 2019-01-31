@@ -9,6 +9,7 @@
     <v-btn
       v-if="showInstallBanner"
       slot="activator"
+      :aria-label="$t('Vuetify.AppToolbar.pwa')"
       flat
       style="min-width: 48px"
     >
@@ -28,7 +29,7 @@
           mdi-info
         </v-icon>
         <v-spacer />
-        <span>Want to install Vuetify Docs to your Homescreen?</span>
+        <span>{{ this.$t('Vuetify.AppToolbar.pwaMenu') }}</span>
         <v-btn
           :ripple="false"
           icon

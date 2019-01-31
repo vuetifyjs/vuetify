@@ -24,6 +24,8 @@
   "medium": "Medium publication",
   "menu": "Menu",
   "next": "next branch",
+  "pwa": "PWA Install",
+  "pwaMenu": "Want to install Vuetify Docs to your Homescreen?",
   "quickLinks": "Quick links",
   "reddit": "Reddit",
   "releases": "Releases",
