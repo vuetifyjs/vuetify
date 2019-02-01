@@ -95,7 +95,8 @@ export default mixins(
         this.link ||
         this.chipGroup ||
         this.$listeners.click ||
-        this.$listeners['!click']
+        this.$listeners['!click'] ||
+        this.$attrs.tabindex
       )
     }
   },

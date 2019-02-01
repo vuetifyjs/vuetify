@@ -46,21 +46,6 @@
     top: 0
     transition: opacity 0.2s map-get($transition, 'ease-in-out')
 
-  &:active
-    +elevation(2)
-
-  &.v-chip--selected
-    background: transparent
-
-    &:after
-      opacity: .28
-
-  &:focus:after
-    opacity: .36
-
-  &:hover:after
-    opacity: .18
-
   // Important is needed to account for new avatar structure
   .v-avatar
     height: 24px !important
@@ -120,14 +105,19 @@
 .v-chip--clickable
   cursor: pointer
 
+  &:focus:after
+    opacity: .36
+
+  &:hover:after
+    opacity: .18
+
+  &:active
+    +elevation(2)
+
 .v-chip--disabled
   opacity: .4
   pointer-events: none
   user-select: none
-
-.v-chip--draggable
-  &:active
-    +elevation(12)
 
 .v-chip--pill
   .v-chip__filter
@@ -163,6 +153,12 @@
 
   .v-icon
     color: inherit
+
+.v-chip--selected
+  background: transparent
+
+  &:after
+    opacity: .28
 
 .v-chip
   @each $name, $size in $icon-sizes

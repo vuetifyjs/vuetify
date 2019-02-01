@@ -316,11 +316,10 @@ export default VTextField.extend({
       }
 
       return this.$createElement(VChip, {
-        staticClass: 'v-chip--select-multi',
         props: {
           close: this.deletableChips && !isDisabled,
           disabled: isDisabled,
-          value: index === this.selectedIndex,
+          inputValue: index === this.selectedIndex,
           small: this.smallChips
         },
         on: {
