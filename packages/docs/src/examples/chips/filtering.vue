@@ -77,12 +77,6 @@
           keyword: 'Phones'
         },
         {
-          image: 'https://cdn-images-1.medium.com/max/799/1*DLDHOTdn6Ze5k7cAOwqKJw.jpeg',
-          title: 'The Ridiculousness of the Military’s Transgender Ban',
-          category: 'Political',
-          keyword: 'Military'
-        },
-        {
           image: 'https://cdn-images-1.medium.com/max/1024/1*rTEtei1UEmNqbq6evRsExw.jpeg',
           title: 'How to Get Media Mentions for Your Business',
           category: 'Media',
