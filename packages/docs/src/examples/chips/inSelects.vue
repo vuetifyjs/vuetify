@@ -9,12 +9,13 @@
     prepend-icon="filter_list"
     solo
   >
-    <template slot="selection" slot-scope="data">
+    <template slot="selection" slot-scope="{ item, selected, select }">
       <v-chip
-        :input-value="data.selected"
-        @click:close="remove(data.item)"
+        :input-value="selected"
+        @click="select"
+        @click:close="remove(item)"
       >
-        <strong>{{ data.item }}</strong>&nbsp;
+        <strong>{{ item }}</strong>&nbsp;
         <span>(interest)</span>
       </v-chip>
     </template>

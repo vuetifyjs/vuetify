@@ -516,6 +516,10 @@ export default VTextField.extend({
         parent: this,
         item,
         index,
+        select: e => {
+          e.stopPropagation()
+          this.selectedIndex = index
+        },
         selected: index === this.selectedIndex,
         disabled: this.disabled || this.readonly
       })
