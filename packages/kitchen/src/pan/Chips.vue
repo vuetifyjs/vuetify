@@ -190,21 +190,21 @@
           wrap
         >
           <v-chip
-            outline
+            outlined
             color="secondary"
           >
             Outline
           </v-chip>
 
           <v-chip
-            outline
+            outlined
             color="primary"
           >
             Colored
           </v-chip>
 
           <v-chip
-            outline
+            outlined
             color="red"
           >
             <v-icon left>
@@ -241,7 +241,7 @@
 
           <v-chip
             label
-            outline
+            outlined
             color="red"
           >
             Outline
@@ -289,7 +289,7 @@
             v-model="chip3"
             close
             color="green"
-            outline
+            outlined
           >
             Success
           </v-chip>
@@ -299,7 +299,7 @@
             close
             color="orange"
             label
-            outline
+            outlined
           >
             Complete
           </v-chip>
