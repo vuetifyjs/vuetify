@@ -154,7 +154,9 @@
   .v-icon
     color: inherit
 
-.v-chip--selected
+// Needs increased specificity
+// to overwrite theme color
+.v-chip.v-chip--selected
   background: transparent
 
   &:after
