@@ -46,10 +46,7 @@ export default mixins(
       type: [Array, Function, Object, String],
       default: () => 'warning'
     } as any as PropValidator<DateEventColors>,
-    locale: {
-      type: String,
-      default: 'en-us'
-    },
+    locale: String,
     min: String,
     max: String,
     readonly: Boolean,
