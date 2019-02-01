@@ -38,7 +38,7 @@
       v-if="chip"
       :color="chipColor"
       x-small
-      dark
+      text-color="white"
     >{{ chip }}</v-chip>
     <slot />
   </v-list-tile>
