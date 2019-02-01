@@ -36,8 +36,9 @@
                 <template v-if="i === 0">
                   <v-chip
                     v-if="item.newIn"
-                    class="v-chip--x-small"
-                    dark
+                    x-small
+                    label
+                    text-color="white"
                     color="primary"
                   >
                     New in — v{{ item.newIn }}

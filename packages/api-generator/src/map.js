@@ -229,6 +229,7 @@ const VSelect = {
         parent: 'VueComponent',
         item: 'object',
         index: 'number',
+        select: 'function',
         selected: 'boolean',
         disabled: 'boolean'
       }
@@ -556,7 +557,7 @@ module.exports = {
       },
       {
         name: 'touchmove:day',
-        value:VTimestampWithTime
+        value: VTimestampWithTime
       },
       {
         name: 'touchend:day',
