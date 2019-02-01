@@ -38,6 +38,7 @@
             >
               <v-avatar
                 class="accent white--text"
+                left
                 v-text="data.item.slice(0, 1).toUpperCase()"
               ></v-avatar>
               {{ data.item }}
