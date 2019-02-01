@@ -1,8 +1,9 @@
 <template>
   <v-card
-    max-width="350"
+    max-width="400"
     class="mx-auto"
   >
+    <v-system-bar></v-system-bar>
     <v-card-title>
       <v-btn
         icon
