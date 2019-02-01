@@ -270,36 +270,40 @@
           </div>
 
           <v-chip
-            v-model="chip1"
+            v-if="chip1"
             close
+            @click:close="chip1 = false"
           >
             Closable
           </v-chip>
 
           <v-chip
-            v-model="chip2"
+            v-if="chip2"
             close
             color="red"
             text-color="white"
+            @click:close="chip2 = false"
           >
             Remove
           </v-chip>
 
           <v-chip
-            v-model="chip3"
+            v-if="chip3"
             close
             color="green"
             outlined
+            @click:close="chip3 = false"
           >
             Success
           </v-chip>
 
           <v-chip
-            v-model="chip4"
+            v-if="chip4"
             close
             color="orange"
             label
             outlined
+            @click:close="chip4 = false"
           >
             Complete
           </v-chip>
