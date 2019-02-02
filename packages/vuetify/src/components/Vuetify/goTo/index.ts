@@ -46,7 +46,7 @@ export default function goTo (_target: GoToTarget, _settings: Partial<GoToSettin
   // tslint:disable-next-line:promise-must-complete
   return new Promise(resolve => requestAnimationFrame(function step (currentTime: number) {
     const timeElapsed = currentTime - startTime
-    const progress = settings.duration ? Math.min(timeElapsed / settings.duration, 1) : 1
+    const progress = Math.abs(settings.duration ? Math.min(timeElapsed / settings.duration, 1) : 1)
 
     container.scrollTop = Math.floor(startLocation + (targetLocation - startLocation) * ease(progress))
 
