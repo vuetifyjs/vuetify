@@ -84,6 +84,9 @@ export const BaseSlideGroup = mixins<options &
     __cachedPrepend (): VNode {
       return this.genTransition('prepend')
     },
+    classes (): object {
+      return BaseItemGroup.options.computed.classes.call(this)
+    },
     hasAffixes (): Boolean {
       return (
         (this.showArrows || !this.isMobile) &&
@@ -114,7 +117,9 @@ export const BaseSlideGroup = mixins<options &
   },
 
   methods: {
-    genAppend (): VNode {
+    genAppend (): VNode | null {
+      if (!this.isOverflowing && !this.showArrows) return null
+
       const slot = this.$scopedSlots.append
         ? this.$scopedSlots.append({})
         : this.$slots.append || this.__cachedAppend
@@ -126,7 +131,8 @@ export const BaseSlideGroup = mixins<options &
         },
         on: {
           click: () => this.onAffixClick('append')
-        }
+        },
+        key: 'append'
       }, [slot])
     },
     genContent (): VNode {
@@ -135,7 +141,7 @@ export const BaseSlideGroup = mixins<options &
         ref: 'content'
       }, this.$slots.default)
     },
-    genIcon (location: 'prepend' | 'append'): VNode | null{
+    genIcon (location: 'prepend' | 'append'): VNode | null {
       const upperLocation = `${location[0].toUpperCase()}${location.slice(1)}`
       const hasAffix = (this as any)[`has${upperLocation}`]
 
@@ -150,7 +156,9 @@ export const BaseSlideGroup = mixins<options &
         }
       }, (this as any)[`${location}Icon`])
     },
-    genPrepend (): VNode {
+    genPrepend (): VNode | null {
+      if (!this.isOverflowing && !this.showArrows) return null
+
       const slot = this.$scopedSlots.prepend
         ? this.$scopedSlots.prepend({})
         : this.$slots.prepend || this.__cachedPrepend
@@ -162,7 +170,8 @@ export const BaseSlideGroup = mixins<options &
         },
         on: {
           click: () => this.onAffixClick('prepend')
-        }
+        },
+        key: 'prepend'
       }, [slot])
     },
     genTransition (location: 'prepend' | 'append') {

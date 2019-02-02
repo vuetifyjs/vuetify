@@ -1,0 +1,23 @@
+// Block
+.v-chip-group
+  .v-chip
+    margin: 4px 8px 4px 0
+
+  .v-chip--selected
+    &.v-chip--no-color
+      &:after
+        opacity: .08
+
+      &:focus:after
+        opacity: .16
+
+// Element
+.v-chip-group .v-slide-group__content
+  padding: 4px 0
+
+// Modifiers
+.v-chip-group--column
+  .v-slide-group__content
+    white-space: normal
+    flex-wrap: wrap
+    max-width: 100%

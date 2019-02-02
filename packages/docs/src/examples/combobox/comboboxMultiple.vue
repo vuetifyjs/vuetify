@@ -34,11 +34,11 @@
               :key="JSON.stringify(data.item)"
               :selected="data.selected"
               :disabled="data.disabled"
-              class="v-chip--select-multi"
               @input="data.parent.selectItem(data.item)"
             >
               <v-avatar
                 class="accent white--text"
+                left
                 v-text="data.item.slice(0, 1).toUpperCase()"
               ></v-avatar>
               {{ data.item }}

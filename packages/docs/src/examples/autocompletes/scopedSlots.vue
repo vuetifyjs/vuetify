@@ -96,7 +96,6 @@
                 <v-chip
                   :selected="data.selected"
                   close
-                  class="chip--select-multi"
                   @input="remove(data.item)"
                 >
                   <v-avatar>
