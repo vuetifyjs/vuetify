@@ -8,7 +8,7 @@
     },
     "slideYTransitions": {
       "header": "### Slide Y transitions",
-      "desc": "Animations use the applications <code>$primary-transition</code>."
+      "desc": "Animations use the application's <code>$primary-transition</code>."
     },
     "scaleTransition": {
       "header": "### Scale transition",
@@ -20,7 +20,7 @@
     },
     "expandTransition": {
       "header": "### Expand transition",
-      "desc": "An example of the expand transition can be found on the Expansion Panel component."
+      "desc": "The expand transition is used in Expansion Panels and List Groups. There is also a horizonal version available with `v-expand-x-transition`."
     },
     "customOrigin": {
       "header": "### Custom Origin",
