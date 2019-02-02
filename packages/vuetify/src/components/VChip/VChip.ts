@@ -144,6 +144,7 @@ export default mixins(
       staticClass: 'v-chip',
       class: this.classes,
       attrs: {
+        ...this.$attrs,
         draggable: this.draggable ? 'true' : undefined,
         tabindex: this.disabled ? -1 : this.$attrs.tabindex || +this.isClickable - 1
       },
