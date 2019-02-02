@@ -12,6 +12,8 @@ module.exports = {
   ],
   extends: ['plugin:jest/recommended'],
   rules: {
+    'vue/html-self-closing': 'off',
+    'vue/html-closing-bracket-spacing': 'off',
     'local-rules/no-render-string-reference': 'error',
     'jest/no-large-snapshots': 'warn',
     'jest/prefer-spy-on': 'warn',

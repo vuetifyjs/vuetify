@@ -16,6 +16,10 @@
       "title": "Material Dashboard",
       "description": "Vuetify Material Dashboard is a beautiful resource built over Vuetify, Vuex and Vuejs. It will help you get started developing dashboards in no time."
     },
+    "freelancer": {
+      "title": "Freelancer",
+      "description": "A single page Material inspired theme for Freelancers."
+    },
     "parallax": {
       "title": "Parallax",
       "description": "This beautiful single page parallax is a great home page for any application."

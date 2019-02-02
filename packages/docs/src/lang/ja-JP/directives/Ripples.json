@@ -1,29 +1,8 @@
 {
   "headerText": "`v-ripple`ディレクティブはユーザからのアクションを表示する際に利用します。どのブロックレベルの要素に対しても設定できます。`v-btn`、`v-tabs-item`など多くのコンポーネントにrippleディレクティブが組み込まれています。",
   "examples": {
-    "buttons": {
-      "desc": "Buttonはデフォルトでrippleが有効になっています。`:ripple=\"false\"`プロパティを設定することで無効にできます。"
-    },
     "customColor": {
       "desc": "Helperクラスを利用すれば波紋の色を変更できます。"
-    },
-    "tabs": {
-      "desc": "Tabはデフォルトではrippleが無効です。`ripple`プロパティを設定することで有効になります。"
-    },
-    "navigationDrawers": {
-      "desc": "Listはデフォルトではrippleが無効です。`ripple`プロパティを設定することで有効になります。"
-    },
-    "toolbars": {
-      "desc": "Toolbarはデフォルトではrippleが無効です。`ripple`プロパティを設定することで有効になります。"
-    },
-    "expansionPanels": {
-      "desc": "Exapansion panelはデフォルトではrippleが無効です。`ripple`プロパティを設定することで有効になります。"
-    },
-    "customRipple": {
-      "desc": "その他のコンポーネントでもrippleを利用できます。`ripple`プロパティを設定することで有効になります。"
-    },
-    "htmlElement": {
-      "desc": "通常のHTML要素にrippleエフェクトを追加するには、`v-ripple`ディレクティブを設定します。"
     }
   }
 }

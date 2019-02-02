@@ -16,7 +16,10 @@
       "children": [
         {
           "type": "api",
-          "value": [ "v-ripple" ]
+          "value": [
+            "v-slide-group",
+            "v-slide-item"
+          ]
         }
       ]
     },
@@ -26,9 +29,7 @@
         {
           "type": "examples",
           "value": [
-            "customColor",
-            "center",
-            "rippleInComponents"
+            "carousel"
           ]
         }
       ]
@@ -39,9 +40,9 @@
         {
           "type": "up-next",
           "value": [
-            "components/buttons",
-            "framework/colors",
-            "components/lists"
+            "components/icons",
+            "components/carousels",
+            "components/tabs"
           ]
         }
       ]
