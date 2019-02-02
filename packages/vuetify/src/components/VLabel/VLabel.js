@@ -37,26 +37,29 @@ export default {
   },
 
   render (h, ctx) {
-    const { children, listeners, props } = ctx
-    const data = {
-      staticClass: 'v-label',
-      'class': {
-        'v-label--active': props.value,
-        'v-label--is-disabled': props.disabled,
-        ...functionalThemeClasses(ctx)
-      },
-      attrs: {
-        for: props.for,
-        'aria-hidden': !props.for
-      },
-      on: listeners,
-      style: {
-        left: convertToUnit(props.left),
-        right: convertToUnit(props.right),
-        position: props.absolute ? 'absolute' : 'relative'
-      }
-    }
+    const { parent, children, props, data } = ctx
 
-    return h('label', Colorable.options.methods.setTextColor(props.focused && props.color, data), children)
+    return h(
+      'label',
+      Colorable.options.methods.setTextColor(
+        props.focused && props.color,
+        parent._b(data, 'label', {
+          class: {
+            'v-label': true,
+            'v-label--active': props.value,
+            'v-label--is-disabled': props.disabled,
+            ...functionalThemeClasses(ctx)
+          },
+          for: props.for,
+          'aria-hidden': !props.for,
+          style: {
+            left: convertToUnit(props.left),
+            right: convertToUnit(props.right),
+            position: props.absolute ? 'absolute' : 'relative'
+          }
+        })
+      ),
+      children
+    )
   }
 }

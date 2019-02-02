@@ -1,4 +1,5 @@
-import { VNodeDirective } from 'vue'
+import { VNode, VNodeDirective } from 'vue'
+import { consoleWarn } from '../util/console'
 
 function transform (el: HTMLElement, value: string) {
   el.style['transform'] = value
@@ -182,8 +183,16 @@ function removeListeners (el: HTMLElement) {
   el.removeEventListener('dragstart', rippleHide, false)
 }
 
-function directive (el: HTMLElement, binding: VNodeDirective) {
+function directive (el: HTMLElement, binding: VNodeDirective, node: VNode) {
   updateRipple(el, binding, false)
+
+  // warn if an inline element is used, waiting for el to be in the DOM first
+  node.context && node.context.$nextTick(() => {
+    if (window.getComputedStyle(el).display === 'inline') {
+      const context = (node as any).fnOptions ? [(node as any).fnOptions, node.context] : [node.componentInstance]
+      consoleWarn('v-ripple can only be used on block-level elements', ...context)
+    }
+  })
 }
 
 function unbind (el: HTMLElement) {

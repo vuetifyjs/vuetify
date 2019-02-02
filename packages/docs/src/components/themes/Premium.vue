@@ -108,11 +108,19 @@
     data: vm => ({
       templates: [
         {
+          title: vm.$t('Themes.Premium.templates.material-kit.title'),
+          description: vm.$t('Themes.Premium.templates.material-kit.description'),
+          src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-material-kit.png',
+          free: false,
+          url: 'https://store.vuetifyjs.com/product/material-kit-theme',
+          demoUrl: ['https://material-kit.vuetifyjs.com']
+        },
+        {
           title: vm.$t('Themes.Premium.templates.alpha.title'),
           description: vm.$t('Themes.Premium.templates.alpha.description'),
-          src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-premium.jpg',
+          src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-alpha-theme.png',
           free: false,
-          url: 'https://store.vuetifyjs.com/product/813199294506',
+          url: 'https://store.vuetifyjs.com/product/vuetify-alpha-theme',
           demoUrl: [
             ['Construction', 'https://alpha-construction.vuetifyjs.com'],
             ['Creative', 'https://alpha-creative.vuetifyjs.com'],

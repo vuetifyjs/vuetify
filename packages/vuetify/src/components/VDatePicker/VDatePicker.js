@@ -329,7 +329,7 @@ export default {
           max: this.activePicker === 'DATE' ? this.maxMonth : this.maxYear,
           prevIcon: this.prevIcon,
           readonly: this.readonly,
-          value: this.activePicker === 'DATE' ? `${this.tableYear}-${pad(this.tableMonth + 1)}` : `${this.tableYear}`
+          value: this.activePicker === 'DATE' ? `${pad(this.tableYear, 4)}-${pad(this.tableMonth + 1)}` : `${pad(this.tableYear, 4)}`
         },
         on: {
           toggle: () => this.activePicker = (this.activePicker === 'DATE' ? 'MONTH' : 'YEAR'),
@@ -356,7 +356,7 @@ export default {
           readonly: this.readonly,
           scrollable: this.scrollable,
           showWeek: this.showWeek,
-          tableDate: `${this.tableYear}-${pad(this.tableMonth + 1)}`,
+          tableDate: `${pad(this.tableYear, 4)}-${pad(this.tableMonth + 1)}`,
           value: this.value,
           weekdayFormat: this.weekdayFormat
         },
@@ -387,7 +387,7 @@ export default {
           readonly: this.readonly && this.type === 'month',
           scrollable: this.scrollable,
           value: this.selectedMonths,
-          tableDate: `${this.tableYear}`
+          tableDate: `${pad(this.tableYear, 4)}`
         },
         ref: 'table',
         on: {
@@ -406,7 +406,7 @@ export default {
           locale: this.locale,
           min: this.minYear,
           max: this.maxYear,
-          value: `${this.tableYear}`
+          value: this.tableYear
         },
         on: {
           input: this.yearClick
