@@ -69,6 +69,7 @@
       "q": "### How do I upgrade to the latest version",
       "a": "All required changes are noted in the **Upgrade Guide** of our releases.",
       "a2": [
+        "[v1.4.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.4.0)",
         "[v1.3.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.3.0)",
         "[v1.2.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.2.0)",
         "[v1.1.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.1.0)",

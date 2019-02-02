@@ -15,12 +15,6 @@ export default {
         }
       }
 
-      if (this.$scopedSlots.activator) {
-        const activator = this.$scopedSlots.activator({ on: listeners })
-        this.activatorNode = activator
-        return activator
-      }
-
       if (this.$slots.activator) {
         const options = {
           staticClass: 'v-menu__activator',
@@ -33,6 +27,10 @@ export default {
         }
 
         return this.$createElement('div', options, this.$slots.activator)
+      } else if (this.$scopedSlots.activator) {
+        const activator = this.$scopedSlots.activator({ on: listeners })
+        this.activatorNode = activator
+        return activator
       }
     },
 
