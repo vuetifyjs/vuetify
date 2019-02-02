@@ -48,6 +48,7 @@ Array [
   "VDivider",
   "VEditDialog",
   "VExpandTransition",
+  "VExpandXTransition",
   "VExpansionPanel",
   "VExpansionPanelContent",
   "VFabTransition",
