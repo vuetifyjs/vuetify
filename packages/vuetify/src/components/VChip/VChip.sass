@@ -124,6 +124,11 @@
   // of this breaks the transition
   max-width: 24px
 
+  // Increase specificity to
+  // overwrite theme style
+  &.v-icon
+    color: inherit
+
   &.expand-x-transition-leave-active,
   &.expand-x-transition-enter
     margin: 0
