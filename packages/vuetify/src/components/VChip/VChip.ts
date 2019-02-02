@@ -1,4 +1,4 @@
-// STyles
+// Styles
 import './VChip.sass'
 
 // Types
@@ -6,6 +6,7 @@ import { VNode } from 'vue'
 import mixins from '../../util/mixins'
 
 // Components
+import { VExpandXTransition } from '../transitions'
 import VIcon from '../VIcon'
 
 // Mixins
@@ -103,10 +104,18 @@ export default mixins(
 
   methods: {
     genFilter (): VNode {
-      return this.$createElement(VIcon, {
-        staticClass: 'v-chip__filter',
-        props: { left: true }
-      }, this.filterIcon)
+      const children = []
+
+      if (this.isActive) {
+        children.push(
+          this.$createElement(VIcon, {
+            staticClass: 'v-chip__filter',
+            props: { left: true }
+          }, this.filterIcon)
+        )
+      }
+
+      return this.$createElement(VExpandXTransition, children)
     },
     genClose (): VNode {
       return this.$createElement(VIcon, {
@@ -127,7 +136,7 @@ export default mixins(
       return this.$createElement('span', {
         staticClass: 'v-chip__content'
       }, [
-        this.filter && this.isActive && this.genFilter(),
+        this.filter && this.genFilter(),
         this.$slots.default,
         this.hasClose && this.genClose()
       ])
