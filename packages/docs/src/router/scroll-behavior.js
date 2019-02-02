@@ -9,7 +9,6 @@ export default async function (to, from, savedPosition) {
 
   if (to.hash) {
     scrollTo = to.hash
-    options.offset = -80
   } else if (savedPosition) {
     scrollTo = savedPosition.y
   }
