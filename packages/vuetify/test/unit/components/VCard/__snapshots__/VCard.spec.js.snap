@@ -2,7 +2,7 @@
 
 exports[`VCard.vue should render a card with custom height 1`] = `
 
-<div class="v-card v-sheet theme--light elevation-2"
+<div class="v-card v-sheet theme--light"
      style="height: 400px;"
 >
 </div>
@@ -11,28 +11,28 @@ exports[`VCard.vue should render a card with custom height 1`] = `
 
 exports[`VCard.vue should render a flat card 1`] = `
 
-<div class="v-card v-sheet theme--light">
+<div class="v-card v-card--flat v-sheet theme--light">
 </div>
 
 `;
 
 exports[`VCard.vue should render a raised card 1`] = `
 
-<div class="v-card v-sheet theme--light elevation-3">
+<div class="v-card v-sheet theme--light">
 </div>
 
 `;
 
 exports[`VCard.vue should render card with img 1`] = `
 
-<div class="v-card v-sheet theme--light elevation-2">
+<div class="v-card v-sheet theme--light">
 </div>
 
 `;
 
 exports[`VCard.vue should render component and match snapshot 1`] = `
 
-<div class="v-card v-sheet theme--light elevation-2">
+<div class="v-card v-sheet theme--light">
 </div>
 
 `;

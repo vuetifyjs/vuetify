@@ -14,7 +14,7 @@ interface GoToSettings {
   appOffset: boolean
 }
 
-export default function goTo (this: Vue, _target: GoToTarget, _settings: Partial<GoToSettings> = {}): Promise<number> {
+export default function goTo (_target: GoToTarget, _settings: Partial<GoToSettings> = {}): Promise<number> {
   const settings: GoToSettings = {
     container: (document.scrollingElement as HTMLElement | null) || document.body || document.documentElement,
     duration: 500,
@@ -29,8 +29,8 @@ export default function goTo (this: Vue, _target: GoToTarget, _settings: Partial
     const isDrawer = container.classList.contains('v-navigation-drawer')
     const isClipped = container.classList.contains('v-navigation-drawer--clipped')
 
-    settings.offset += this.$vuetify.application.bar
-    if (!isDrawer || isClipped) settings.offset += this.$vuetify.application.top
+    settings.offset += Vue.prototype.$vuetify.application.bar
+    if (!isDrawer || isClipped) settings.offset += Vue.prototype.$vuetify.application.top
   }
 
   const startTime = performance.now()
@@ -46,7 +46,7 @@ export default function goTo (this: Vue, _target: GoToTarget, _settings: Partial
   // tslint:disable-next-line:promise-must-complete
   return new Promise(resolve => requestAnimationFrame(function step (currentTime: number) {
     const timeElapsed = currentTime - startTime
-    const progress = settings.duration ? Math.min(timeElapsed / settings.duration, 1) : 1
+    const progress = Math.abs(settings.duration ? Math.min(timeElapsed / settings.duration, 1) : 1)
 
     container.scrollTop = Math.floor(startLocation + (targetLocation - startLocation) * ease(progress))
 
