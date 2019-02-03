@@ -2,6 +2,7 @@ import '../../stylus/components/_date-picker-years.styl'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import Localable from '../../mixins/localable'
 
 // Utils
 import { createNativeLocaleFormatter } from './util'
@@ -19,11 +20,13 @@ interface options extends Vue {
 export default mixins<options &
 /* eslint-disable indent */
   ExtractVue<[
-    typeof Colorable
+    typeof Colorable,
+    typeof Localable
   ]>
 /* eslint-enable indent */
 >(
-  Colorable
+  Colorable,
+  Localable
 /* @vue/component */
 ).extend({
   name: 'v-date-picker-years',
@@ -33,10 +36,6 @@ export default mixins<options &
       type: Function,
       default: null
     } as any as PropValidator<NativeLocaleFormatter | null>,
-    locale: {
-      type: String,
-      default: 'en-us'
-    },
     min: [Number, String],
     max: [Number, String],
     readonly: Boolean,
@@ -51,7 +50,7 @@ export default mixins<options &
 
   computed: {
     formatter (): NativeLocaleFormatter {
-      return this.format || createNativeLocaleFormatter(this.locale || this.$vuetify.lang.current, { year: 'numeric', timeZone: 'UTC' }, { length: 4 })
+      return this.format || createNativeLocaleFormatter(this.currentLocale, { year: 'numeric', timeZone: 'UTC' }, { length: 4 })
     }
   },
 

@@ -6,6 +6,7 @@ import VIcon from '../VIcon'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import Localable from '../../mixins/localable'
 import Themeable from '../../mixins/themeable'
 
 // Utils
@@ -19,6 +20,7 @@ import { PropValidator } from 'vue/types/options'
 
 export default mixins(
   Colorable,
+  Localable,
   Themeable
 /* @vue/component */
 ).extend({
@@ -30,7 +32,6 @@ export default mixins(
       type: Function,
       default: null
     } as any as PropValidator<NativeLocaleFormatter | null>,
-    locale: String,
     min: String,
     max: String,
     nextIcon: {
@@ -59,9 +60,9 @@ export default mixins(
       if (this.format) {
         return this.format
       } else if (String(this.value).split('-')[1]) {
-        return createNativeLocaleFormatter(this.locale || this.$vuetify.lang.current, { month: 'long', year: 'numeric', timeZone: 'UTC' }, { length: 7 })
+        return createNativeLocaleFormatter(this.currentLocale, { month: 'long', year: 'numeric', timeZone: 'UTC' }, { length: 7 })
       } else {
-        return createNativeLocaleFormatter(this.locale || this.$vuetify.lang.current, { year: 'numeric', timeZone: 'UTC' }, { length: 4 })
+        return createNativeLocaleFormatter(this.currentLocale, { year: 'numeric', timeZone: 'UTC' }, { length: 4 })
       }
     }
   },

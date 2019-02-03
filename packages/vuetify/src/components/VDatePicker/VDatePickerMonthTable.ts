@@ -17,7 +17,7 @@ export default mixins(
 
   computed: {
     formatter (): NativeLocaleFormatter {
-      return this.format || createNativeLocaleFormatter(this.locale || this.$vuetify.lang.current, { month: 'short', timeZone: 'UTC' }, { start: 5, length: 2 })
+      return this.format || createNativeLocaleFormatter(this.currentLocale, { month: 'short', timeZone: 'UTC' }, { start: 5, length: 2 })
     }
   },
 

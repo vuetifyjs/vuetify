@@ -6,6 +6,7 @@ import VDatePickerMonthTable from './VDatePickerMonthTable'
 import VDatePickerYears from './VDatePickerYears'
 
 // Mixins
+import Localable from '../../mixins/localable'
 import Picker from '../../mixins/picker'
 
 // Utils
@@ -17,7 +18,10 @@ import { consoleWarn } from '../../util/console'
 export default {
   name: 'v-date-picker',
 
-  mixins: [Picker],
+  mixins: [
+    Localable,
+    Picker
+  ],
 
   props: {
     allowedDates: Function,
@@ -44,7 +48,6 @@ export default {
       type: Function,
       default: null
     },
-    locale: String,
     max: String,
     min: String,
     // Function formatting month in the months table
@@ -161,7 +164,7 @@ export default {
     },
     formatters () {
       return {
-        year: this.yearFormat || createNativeLocaleFormatter(this.locale || this.$vuetify.lang.current, { year: 'numeric', timeZone: 'UTC' }, { length: 4 }),
+        year: this.yearFormat || createNativeLocaleFormatter(this.currentLocale, { year: 'numeric', timeZone: 'UTC' }, { length: 4 }),
         titleDate: this.titleDateFormat || (this.multiple ? this.defaultTitleMultipleDateFormatter : this.defaultTitleDateFormatter)
       }
     },
@@ -179,7 +182,7 @@ export default {
         date: { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'UTC' }
       }
 
-      const titleDateFormatter = createNativeLocaleFormatter(this.locale || this.$vuetify.lang.current, titleFormats[this.type], {
+      const titleDateFormatter = createNativeLocaleFormatter(this.currentLocale, titleFormats[this.type], {
         start: 0,
         length: { date: 10, month: 7, year: 4 }[this.type]
       })

@@ -5,6 +5,7 @@ import Touch, { TouchWrapper } from '../../../directives/touch'
 
 // Mixins
 import Colorable from '../../../mixins/colorable'
+import Localable from '../../../mixins/localable'
 import Themeable from '../../../mixins/themeable'
 
 // Utils
@@ -25,6 +26,7 @@ type DateEventColors = DateEventColorValue | Record<string, DateEventColorValue>
 /* @vue/component */
 export default mixins(
   Colorable,
+  Localable,
   Themeable
 ).extend({
   directives: { Touch },
@@ -46,7 +48,6 @@ export default mixins(
       type: [Array, Function, Object, String],
       default: () => 'warning'
     } as any as PropValidator<DateEventColors>,
-    locale: String,
     min: String,
     max: String,
     readonly: Boolean,
