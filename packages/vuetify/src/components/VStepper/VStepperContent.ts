@@ -5,18 +5,35 @@ import {
 } from '../transitions'
 
 // Mixins
-import { inject as RegistrableInject } from '../../mixins/registrable'
+import { Registrable, inject as RegistrableInject } from '../../mixins/registrable'
 
 // Helpers
 import { convertToUnit } from '../../util/helpers'
 
-/* @vue/component */
-export default {
-  name: 'v-stepper-content',
+// Util
+import mixins, { ExtractVue } from '../../util/mixins'
 
-  mixins: [
-    RegistrableInject('stepper', 'v-stepper-content', 'v-stepper')
-  ],
+// Types
+import Vue, { VNode, FunctionalComponentOptions, VNodeData } from 'vue'
+
+interface options extends Vue {
+  $refs: {
+    wrapper: HTMLElement
+  }
+  isVerticalProvided: boolean
+}
+
+export default mixins<options &
+/* eslint-disable indent */
+  ExtractVue<[
+    Registrable<'stepper'>
+  ]>
+/* eslint-enable indent */
+>(
+  RegistrableInject('stepper', 'v-stepper-content', 'v-stepper')
+/* @vue/component */
+).extend({
+  name: 'v-stepper-content',
 
   inject: {
     isVerticalProvided: {
@@ -33,34 +50,34 @@ export default {
 
   data () {
     return {
-      height: 0,
+      height: 0 as number | string,
       // Must be null to allow
       // previous comparison
-      isActive: null,
+      isActive: null as boolean | null,
       isReverse: false,
       isVertical: this.isVerticalProvided
     }
   },
 
   computed: {
-    classes () {
+    classes (): object {
       return {
         'v-stepper__content': true
       }
     },
-    computedTransition () {
+    computedTransition (): FunctionalComponentOptions {
       return this.isReverse
         ? VTabReverseTransition
         : VTabTransition
     },
-    styles () {
+    styles (): object {
       if (!this.isVertical) return {}
 
       return {
         height: convertToUnit(this.height)
       }
     },
-    wrapperClasses () {
+    wrapperClasses (): object {
       return {
         'v-stepper__wrapper': true
       }
@@ -72,7 +89,8 @@ export default {
       // If active and the previous state
       // was null, is just booting up
       if (current && previous == null) {
-        return (this.height = 'auto')
+        this.height = 'auto'
+        return
       }
 
       if (!this.isVertical) return
@@ -101,7 +119,7 @@ export default {
   },
 
   methods: {
-    onTransition (e) {
+    onTransition (e: TransitionEvent) {
       if (!this.isActive ||
         e.propertyName !== 'height'
       ) return
@@ -125,14 +143,14 @@ export default {
       this.height = this.$refs.wrapper.clientHeight
       setTimeout(() => (this.height = 0), 10)
     },
-    toggle (step, reverse) {
+    toggle (step: string | number, reverse: boolean) {
       this.isActive = step.toString() === this.step.toString()
       this.isReverse = reverse
     }
   },
 
-  render (h) {
-    const contentData = {
+  render (h): VNode {
+    const contentData: VNodeData = {
       'class': this.classes
     }
     const wrapperData = {
@@ -155,4 +173,4 @@ export default {
       on: this.$listeners
     }, [content])
   }
-}
+})

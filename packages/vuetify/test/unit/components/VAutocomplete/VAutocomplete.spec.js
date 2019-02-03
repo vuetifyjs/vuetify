@@ -837,4 +837,26 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.menuCanShow).toBe(true)
   })
+
+  it('should retain search value when item selected and multiple is enabled', async () => {
+    const wrapper = mount(VAutocomplete, {
+      propsData: {
+        items: ['Sandra Adams', 'Ali Connors', 'Trevor Hansen', 'Tucker Smith'],
+        multiple: true
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
+    const input = wrapper.first('input')
+
+    input.trigger('focus')
+    input.element.value = 't'
+    input.trigger('input')
+    wrapper.vm.selectItem('Trevor Hansen')
+
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.selectedItems.length).toBe(1)
+    expect(wrapper.vm.internalSearch).toBe('t')
+  })
 })
