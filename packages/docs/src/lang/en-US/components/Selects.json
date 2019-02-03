@@ -1,7 +1,9 @@
 {
   "header": "# Select",
   "headerText": "Select fields components are used for collecting user provided information from a list of options.",
-  "supplemental": [ "MaskTable" ],
+  "supplemental": [
+    "MaskTable"
+  ],
   "examples": {
     "usage": {
       "desc": ""
@@ -78,6 +80,11 @@
   },
   "events": {
     "change": "Components.Inputs.events.change",
+    "click:append": "Components.Inputs.events['click:append']",
+    "click:append-outer": "Components.TextFields.events['click:append-outer']",
+    "click:clear": "Components.TextFields.events['click:clear']",
+    "click:prepend": "Components.Inputs.events['click:prepend']",
+    "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
     "update:error": "Mixins.Validatable.events['update:error']",
     "update:searchInput": "The `search-input.sync` event"
   }

@@ -32,7 +32,7 @@
       await this.$nextTick()
       await waitForReadystate()
 
-      this.$vuetify.goTo(this.hash, { offset: -80 })
+      this.$vuetify.goTo(this.hash)
     }
   }
 </script>

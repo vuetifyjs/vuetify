@@ -25,6 +25,23 @@
       "children": [
         {
           "type": "heading",
+          "lang": "routerHeading"
+        },
+        {
+          "type": "text",
+          "lang": "routerText1"
+        },
+        {
+          "type": "markup",
+          "value": "js_import_goto_router"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
           "lang": "firstHeader"
         },
         {

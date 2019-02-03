@@ -28,6 +28,7 @@
         "group": "framework",
         "text": "layout",
         "children": [
+          { "text": "defaultMarkup", "to": "default-markup"},
           { "text": "aspectRatios", "to": "aspect-ratios" },
           { "text": "breakpoints", "to": "breakpoints" },
           { "text": "preMadeLayouts", "to": "pre-made-layouts", "updated": true }
