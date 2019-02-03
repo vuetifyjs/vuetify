@@ -21,6 +21,7 @@ type VListInstance = InstanceType<typeof VList>
 
 interface options extends Vue {
   list: VListInstance
+  listClick: Function
   $route: Route
 }
 
@@ -85,7 +86,7 @@ export default mixins<options &
   watch: {
     isActive (val) {
       if (!this.subGroup && val) {
-        (this as any).listClick(this._uid)
+        this.listClick(this._uid)
       }
     },
     $route (to) {
@@ -93,7 +94,7 @@ export default mixins<options &
 
       if (this.group) {
         if (isActive && this.isActive !== isActive) {
-          (this as any).listClick(this._uid)
+          this.listClick(this._uid)
         }
 
         this.isActive = isActive
