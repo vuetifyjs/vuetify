@@ -62,7 +62,8 @@ export default mixins(
     }
 
     if (!this.disabled) {
-      this._g(element.data!, {
+      element.data = element.data || {}
+      this._g(element.data, {
         mouseenter: this.onMouseEnter,
         mouseleave: this.onMouseLeave
       })
