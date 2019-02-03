@@ -184,4 +184,25 @@ test('VCarousel.ts', ({ mount }) => {
     await wrapper.vm.$nextTick()
     expect(input).toBeCalledWith(2)
   })
+
+  it('should auto change height when v-carousel changed height', async () => {
+    const vm = new Vue()
+    const wrapper = mount(VCarousel, {
+      slots: {
+        default: {
+          vNode: vm.$createElement(VCarouselItem, { attrs: { src: '1' } })
+        }
+      }
+    })
+
+    wrapper.setProps({ height: 600 })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.height).toEqual(600)
+    expect(wrapper.find('.v-carousel__item')[0].hasStyle('height', '600px')).toBe(true)
+
+    wrapper.setProps({ height: 200 })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.height).toEqual(200)
+    expect(wrapper.find('.v-carousel__item')[0].hasStyle('height', '200px')).toBe(true)
+  })
 })

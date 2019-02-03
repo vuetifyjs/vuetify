@@ -305,16 +305,10 @@ export default VTextField.extend({
         this.readonly ||
         this.getDisabled(item)
       )
-      const focus = (e, cb) => {
-        if (isDisabled) return
-
-        e.stopPropagation()
-        this.onFocus()
-        cb && cb()
-      }
 
       return this.$createElement(VChip, {
         staticClass: 'v-chip--select-multi',
+        attrs: { tabindex: -1 },
         props: {
           close: this.deletableChips && !isDisabled,
           disabled: isDisabled,
@@ -323,11 +317,12 @@ export default VTextField.extend({
         },
         on: {
           click: e => {
-            focus(e, () => {
-              this.selectedIndex = index
-            })
+            if (isDisabled) return
+
+            e.stopPropagation()
+
+            this.selectedIndex = index
           },
-          focus,
           input: () => this.onChipInput(item)
         },
         key: this.getValue(item)
