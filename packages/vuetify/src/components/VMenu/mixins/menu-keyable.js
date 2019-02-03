@@ -57,17 +57,16 @@ export default {
       this.getTiles()
 
       if (e.keyCode === keyCodes.down && this.listIndex < this.tiles.length - 1) {
-        e.preventDefault()
         this.listIndex++
         // Allow user to set listIndex to -1 so
         // that the list can be un-highlighted
       } else if (e.keyCode === keyCodes.up && this.listIndex > -1) {
-        e.preventDefault()
         this.listIndex--
       } else if (e.keyCode === keyCodes.enter && this.listIndex !== -1) {
-        e.preventDefault()
         this.tiles[this.listIndex].click()
-      }
+      } else { return }
+      // One of the conditions was met, prevent default action (#2988)
+      e.preventDefault()
     },
     getTiles () {
       this.tiles = this.$refs.content.querySelectorAll('.v-list__tile')
