@@ -2,13 +2,18 @@ import Vue from 'vue'
 
 import { getZIndex } from '../util/helpers'
 
+interface options extends Vue {
+  $refs: {
+    content: Element
+  }
+}
+
 /* @vue/component */
-export default Vue.extend({
+export default Vue.extend<options>().extend({
   name: 'stackable',
 
   data () {
     return {
-      stackBase: null,
       stackClass: 'unpecified',
       stackElement: null as Element | null,
       stackExclude: null as Element[] | null,
@@ -24,7 +29,7 @@ export default Vue.extend({
       // Return current zindex if not active
 
       const index = !this.isActive
-        ? getZIndex(content as Element)
+        ? getZIndex(content)
         : this.getMaxZIndex(this.stackExclude || [content]) + 2
 
       if (index == null) return index
@@ -35,8 +40,8 @@ export default Vue.extend({
     }
   },
   methods: {
-    getMaxZIndex (exclude: (Vue | Element | Element[] | Vue[])[] = []) {
-      const base = this.stackBase || this.$el
+    getMaxZIndex (exclude: Element[] = []) {
+      const base = this.$el
       // Start with lowest allowed z-index or z-index of
       // base component's element, whichever is greater
       const zis = [this.stackMinZIndex, getZIndex(base)]
