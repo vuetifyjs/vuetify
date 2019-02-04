@@ -52,7 +52,6 @@ export default mixins<options &
   },
 
   data: () => ({
-    isActive: null as null | boolean,
     height: 'auto'
   }),
 
@@ -138,7 +137,7 @@ export default mixins<options &
     toggle (active: boolean) {
       if (active) this.isBooted = true
 
-      this.isActive = active
+      this.$nextTick(() => (this.isActive = active))
     }
   },
 

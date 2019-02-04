@@ -339,7 +339,8 @@ export default VSelect.extend({
       this.$nextTick(() => {
         this.internalSearch = (
           this.multiple &&
-          this.internalSearch
+          this.internalSearch &&
+          this.isMenuActive
         )
           ? this.internalSearch
           : (
