@@ -200,7 +200,7 @@ export default {
       if (this.$vuetify.breakpoint.smAndDown) {
         document.documentElement.classList.add('overflow-y-hidden')
       } else {
-        window.addEventListener('wheel', this.scrollListener)
+        window.addEventListener('wheel', this.scrollListener, { passive: false })
         window.addEventListener('keydown', this.scrollListener)
       }
     },
