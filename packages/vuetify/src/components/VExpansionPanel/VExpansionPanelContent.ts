@@ -52,7 +52,6 @@ export default mixins<options &
   },
 
   data: () => ({
-    isActive: null as null | boolean,
     height: 'auto'
   }),
 
