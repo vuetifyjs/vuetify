@@ -113,7 +113,7 @@ export default mixins(
         key: String(this.value)
       }), [this.$createElement('button', {
         domProps: {
-            type: 'button'
+          type: 'button'
         },
         on: {
           click: () => this.$emit('toggle')
