@@ -326,7 +326,7 @@ export const camelize = (str: string): string => {
 
 export type FilterTreeItemFunction = (item: object, search: string, textKey: string) => boolean
 export function filterTreeItems (
-  filter: (item: object, search: string, textKey: string) => boolean,
+  filter: FilterTreeItemFunction,
   item: any,
   search: string,
   idKey: string,
