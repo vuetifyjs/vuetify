@@ -165,7 +165,7 @@ export default {
       if (this.fullscreen) {
         document.documentElement.classList.add('overflow-y-hidden')
       } else {
-        Overlayable.methods.hideScroll.call(this)
+        Overlayable.options.methods.hideScroll.call(this)
       }
     },
     show () {

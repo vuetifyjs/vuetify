@@ -1,10 +1,14 @@
+// Styles
 import '../stylus/components/_overlay.styl'
 
-// Utils
+// Utilities
 import { keyCodes } from '../util/helpers'
 
+// Types
+import Vue from 'vue'
+
 /* @vue/component */
-export default {
+export default Vue.extend({
   name: 'overlayable',
 
   props: {
@@ -210,4 +214,4 @@ export default {
       window.removeEventListener('keydown', this.scrollListener)
     }
   }
-}
+})

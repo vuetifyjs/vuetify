@@ -6,7 +6,7 @@ interface ClickOutsideBindingArgs {
 }
 
 interface ClickOutsideDirective extends VNodeDirective {
-  value: (e: Event) => void
+  value?: (e: Event) => void
   args?: ClickOutsideBindingArgs
 }
 
@@ -48,7 +48,7 @@ function directive (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirec
   // Note that, because we're in the capture phase, this callback will occure before
   // the bubbling click event on any outside elements.
   !clickedInEls(e, elements) && setTimeout(() => {
-    isActive(e) && binding.value(e)
+    isActive(e) && binding.value && binding.value(e)
   }, 0)
 }
 
