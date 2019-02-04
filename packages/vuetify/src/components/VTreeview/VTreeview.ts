@@ -13,7 +13,13 @@ import Themeable from '../../mixins/themeable'
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
 // Utils
-import { getObjectValueByPath, deepEqual, filterTreeItems, arrayDiff, FilterTreeItemFunction } from '../../util/helpers'
+import {
+  arrayDiff,
+  deepEqual,
+  FilterTreeItemFunction,
+  filterTreeItems,
+  getObjectValueByPath
+} from '../../util/helpers'
 import mixins from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
 
@@ -94,7 +100,15 @@ export default mixins(
       if (!this.search) return excluded
 
       for (let i = 0; i < this.items.length; i++) {
-        filterTreeItems(this.filter, this.items[i], this.search, this.itemKey, this.itemText, this.itemChildren, excluded)
+        filterTreeItems(
+          this.filter,
+          this.items[i],
+          this.search,
+          this.itemKey,
+          this.itemText,
+          this.itemChildren,
+          excluded
+        )
       }
 
       return excluded
