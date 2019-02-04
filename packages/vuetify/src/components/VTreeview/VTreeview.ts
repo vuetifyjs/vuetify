@@ -69,7 +69,7 @@ export default mixins(
       default: () => ([])
     } as PropValidator<NodeArray>,
     search: String,
-    itemFilter: {
+    filter: {
       type: Function as any,
       default: (item, search, textKey): boolean => {
         const text = getObjectValueByPath(item, textKey)
@@ -94,7 +94,7 @@ export default mixins(
       if (!this.search) return excluded
 
       for (let i = 0; i < this.items.length; i++) {
-        filterTreeItems(this.itemFilter, this.items[i], this.search, this.itemKey, this.itemText, this.itemChildren, excluded)
+        filterTreeItems(this.filter, this.items[i], this.search, this.itemKey, this.itemText, this.itemChildren, excluded)
       }
 
       return excluded

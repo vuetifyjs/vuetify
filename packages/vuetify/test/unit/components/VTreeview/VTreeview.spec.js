@@ -443,7 +443,7 @@ test('VTreeView.ts', ({ mount }) => {
   it('should filter items using custom item filter', async () => {
     const wrapper = mount(VTreeview, {
       propsData: {
-        itemFilter: (item, search, textKey) => item.special === search,
+        filter: (item, search, textKey) => item.special === search,
         items: [
           {
             id: 1,
