@@ -9,26 +9,31 @@ import SSRBootable from '../../mixins/ssr-bootable'
 
 // Directives
 import Scroll from '../../directives/scroll'
+
+// Utilities
 import { deprecate } from '../../util/console'
+import mixins from '../../util/mixins'
+
+// Types
+import { VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
 
 /* @vue/component */
-export default {
+export default mixins(
+  Applicationable('top', [
+    'clippedLeft',
+    'clippedRight',
+    'computedHeight',
+    'invertedScroll',
+    'manualScroll'
+  ]),
+  Colorable,
+  SSRBootable,
+  Themeable
+).extend({
   name: 'v-toolbar',
 
   directives: { Scroll },
-
-  mixins: [
-    Applicationable('top', [
-      'clippedLeft',
-      'clippedRight',
-      'computedHeight',
-      'invertedScroll',
-      'manualScroll'
-    ]),
-    Colorable,
-    SSRBootable,
-    Themeable
-  ],
 
   props: {
     card: Boolean,
@@ -39,13 +44,13 @@ export default {
     extensionHeight: {
       type: [Number, String],
       validator: v => !isNaN(parseInt(v))
-    },
+    } as PropValidator<number | string>,
     flat: Boolean,
     floating: Boolean,
     height: {
       type: [Number, String],
       validator: v => !isNaN(parseInt(v))
-    },
+    } as PropValidator<number | string>,
     invertedScroll: Boolean,
     manualScroll: Boolean,
     prominent: Boolean,
@@ -72,14 +77,14 @@ export default {
     isActive: true,
     isExtended: false,
     isScrollingUp: false,
-    previousScroll: null,
+    previousScroll: 0,
     previousScrollDirection: null,
     savedScroll: 0,
-    target: null
+    target: null as HTMLElement | null
   }),
 
   computed: {
-    canScroll () {
+    canScroll (): boolean {
       // TODO: remove
       if (this.scrollToolbarOffScreen) {
         deprecate('scrollToolbarOffScreen', 'scrollOffScreen', this)
@@ -89,7 +94,7 @@ export default {
 
       return this.scrollOffScreen || this.invertedScroll
     },
-    computedContentHeight () {
+    computedContentHeight (): number {
       if (this.height) return parseInt(this.height)
       if (this.dense) return this.heights.dense
 
@@ -104,23 +109,23 @@ export default {
 
       return this.heights.mobile
     },
-    computedExtensionHeight () {
+    computedExtensionHeight (): number {
       if (this.tabs) return 48
       if (this.extensionHeight) return parseInt(this.extensionHeight)
 
       return this.computedContentHeight
     },
-    computedHeight () {
+    computedHeight (): number {
       if (!this.isExtended) return this.computedContentHeight
 
       return this.computedContentHeight + this.computedExtensionHeight
     },
-    computedMarginTop () {
+    computedMarginTop (): number {
       if (!this.app) return 0
 
       return this.$vuetify.application.bar
     },
-    classes () {
+    classes (): object {
       return {
         'v-toolbar': true,
         'elevation-0': this.flat || (
@@ -139,24 +144,24 @@ export default {
         ...this.themeClasses
       }
     },
-    computedPaddingLeft () {
+    computedPaddingLeft (): number {
       if (!this.app || this.clippedLeft) return 0
 
       return this.$vuetify.application.left
     },
-    computedPaddingRight () {
+    computedPaddingRight (): number {
       if (!this.app || this.clippedRight) return 0
 
       return this.$vuetify.application.right
     },
-    computedTransform () {
+    computedTransform (): number {
       return !this.isActive
         ? this.canScroll
           ? -this.computedContentHeight
           : -this.computedHeight
         : 0
     },
-    currentThreshold () {
+    currentThreshold (): number {
       return Math.abs(this.currentScroll - this.savedScroll)
     },
     styles () {
@@ -172,7 +177,8 @@ export default {
   watch: {
     currentThreshold (val) {
       if (this.invertedScroll) {
-        return this.isActive = this.currentScroll > this.scrollThreshold
+        this.isActive = this.currentScroll > this.scrollThreshold
+        return
       }
 
       if (val < this.scrollThreshold ||
@@ -217,9 +223,9 @@ export default {
 
       const target = this.target || window
 
-      this.currentScroll = this.scrollTarget
+      this.currentScroll = target instanceof HTMLElement
         ? target.scrollTop
-        : target.pageYOffset || document.documentElement.scrollTop
+        : target.pageYOffset || document.documentElement!.scrollTop
 
       this.isScrollingUp = this.currentScroll < this.previousScroll
 
@@ -237,7 +243,7 @@ export default {
     }
   },
 
-  render (h) {
+  render (h): VNode {
     this.isExtended = this.extended || !!this.$slots.extension
 
     const children = []
@@ -268,4 +274,4 @@ export default {
 
     return h('nav', data, children)
   }
-}
+})
