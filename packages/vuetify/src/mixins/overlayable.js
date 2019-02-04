@@ -20,6 +20,13 @@ export default {
     }
   },
 
+  watch: {
+    hideOverlay (value) {
+      if (value) this.removeOverlay()
+      else this.genOverlay()
+    }
+  },
+
   beforeDestroy () {
     this.removeOverlay()
   },
