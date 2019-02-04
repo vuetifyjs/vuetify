@@ -324,7 +324,9 @@ export const camelize = (str: string): string => {
   return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : '')
 }
 
+export type FilterTreeItemFunction = (item: object, search: string, textKey: string) => boolean
 export function filterTreeItems (
+  filter: (item: object, search: string, textKey: string) => boolean,
   item: any,
   search: string,
   idKey: string,
@@ -332,9 +334,7 @@ export function filterTreeItems (
   childrenKey: string,
   excluded: Set<string | number>
 ): boolean {
-  const text = getObjectValueByPath(item, textKey)
-
-  if (text.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) > -1) {
+  if (filter(item, search, textKey)) {
     return true
   }
 
@@ -343,7 +343,7 @@ export function filterTreeItems (
   if (children) {
     let match = false
     for (let i = 0; i < children.length; i++) {
-      if (filterTreeItems(children[i], search, idKey, textKey, childrenKey, excluded)) {
+      if (filterTreeItems(filter, children[i], search, idKey, textKey, childrenKey, excluded)) {
         match = true
       }
     }

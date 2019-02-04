@@ -13,7 +13,7 @@ import Themeable from '../../mixins/themeable'
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
 // Utils
-import { getObjectValueByPath, deepEqual, filterTreeItems, arrayDiff } from '../../util/helpers'
+import { getObjectValueByPath, deepEqual, filterTreeItems, arrayDiff, FilterTreeItemFunction } from '../../util/helpers'
 import mixins from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
 
@@ -69,20 +69,35 @@ export default mixins(
       default: () => ([])
     } as PropValidator<NodeArray>,
     search: String,
+    itemFilter: {
+      type: Function as any,
+      default: (item, search, textKey): boolean => {
+        const text = getObjectValueByPath(item, textKey)
+
+        return text.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) > -1
+      }
+    } as PropValidator<FilterTreeItemFunction>,
     customFilter: {
       type: Function as any,
-      default: (items, search, idKey, textKey, childrenKey) => {
+      default: (filter, items, search, idKey, textKey, childrenKey) => {
         const excluded = new Set<string|number>()
 
         if (!search) return excluded
 
         for (let i = 0; i < items.length; i++) {
-          filterTreeItems(items[i], search, idKey, textKey, childrenKey, excluded)
+          filterTreeItems(filter, items[i], search, idKey, textKey, childrenKey, excluded)
         }
 
         return excluded
       }
-    } as PropValidator<(items: any[], search: string, idKey: string, textKey: string, childrenKey: string) => Set<string|number>>,
+    } as PropValidator<(
+      filter: FilterTreeItemFunction,
+      items: any[],
+      search: string,
+      idKey: string,
+      textKey: string,
+      childrenKey: string
+    ) => Set<string|number>>,
     ...VTreeviewNodeProps
   },
 
@@ -95,7 +110,7 @@ export default mixins(
 
   computed: {
     excludedItems (): Set<string | number> {
-      return this.customFilter(this.items.slice(), this.search, this.itemKey, this.itemText, this.itemChildren)
+      return this.customFilter(this.itemFilter, this.items.slice(), this.search, this.itemKey, this.itemText, this.itemChildren)
     }
   },
 
