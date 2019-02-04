@@ -53,10 +53,6 @@ export default mixins<options &
     height: [Number, String],
     hideDetails: Boolean,
     hint: String,
-    id: {
-      type: String,
-      required: false
-    },
     label: String,
     loading: Boolean,
     persistentHint: Boolean,
@@ -231,7 +227,7 @@ export default mixins<options &
           color: this.validationState,
           dark: this.dark,
           focused: this.hasState,
-          for: this.$attrs.id || this.id,
+          for: this.$attrs.id,
           light: this.light
         }
       }, this.$slots.label || this.label)
