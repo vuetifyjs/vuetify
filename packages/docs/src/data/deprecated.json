@@ -3,6 +3,10 @@
     "v-alert": {
       "outline": "2.0"
     },
+    "v-chip": {
+      "outline": "2.0",
+      "selected": "2.0"
+    },
     "v-text-field": {
       "textarea": "1.1",
       "append-icon-cb": false,

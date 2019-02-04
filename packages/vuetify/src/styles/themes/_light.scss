@@ -6,10 +6,7 @@ $material-light: (
   'app-bar': #F5F5F5,
   'background': #FAFAFA,
   'cards': #FFFFFF,
-  'chips': (
-    'background': map-get($grey, 'lighten-2'),
-    'color': rgba(#000, 0.87)
-  ),
+  'chips': map-get($grey, 'lighten-2'),
   'dividers': rgba(#000, 0.12),
   'text': (
     'theme': #fff,

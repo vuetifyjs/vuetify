@@ -36,16 +36,17 @@
                 <template v-if="i === 0">
                   <v-chip
                     v-if="item.newIn"
-                    class="v-chip--x-small"
-                    dark
+                    x-small
+                    label
+                    text-color="white"
                     color="primary"
                   >
                     New in — v{{ item.newIn }}
                   </v-chip>
                   <v-chip
                     v-else-if="item.deprecatedIn"
-                    class="v-chip--x-small"
-                    dark
+                    x-small
+                    label
                     color="red lighten-3"
                   >
                     Deprecated in — v{{ item.deprecatedIn }}

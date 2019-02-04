@@ -74,7 +74,7 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.internalValue).toBe(undefined)
+    expect(wrapper.vm.internalValue).toBeUndefined()
     expect(input).toHaveBeenCalledWith(undefined)
   })
 
@@ -96,7 +96,7 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
 
     clear.trigger('click')
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.internalValue).toBe(undefined)
+    expect(wrapper.vm.internalValue).toBeUndefined()
     expect(wrapper.vm.isMenuActive).toBe(false)
   })
 
@@ -239,7 +239,6 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.isMenuActive).toBe(true)
-
   })
 
   it('should react to different key down', async () => {
@@ -247,16 +246,15 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
     const blur = jest.fn()
     wrapper.vm.$on('blur', blur)
 
-
     const event = new Event('keydown')
     event.keyCode = keyCodes.tab
 
     wrapper.vm.onKeyDown(event)
 
-    expect(blur).toBeCalled()
+    expect(blur).toHaveBeenCalled()
     expect(wrapper.vm.isMenuActive).toBe(false)
 
-    for (let keyCode of [keyCodes.enter, keyCodes.space, keyCodes.up, keyCodes.down]) {
+    for (const keyCode of [keyCodes.enter, keyCodes.space, keyCodes.up, keyCodes.down]) {
       event.keyCode = keyCode
       wrapper.vm.onKeyDown(event)
       expect(wrapper.vm.isMenuActive).toBe(true)
@@ -277,12 +275,12 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
     wrapper.vm.selectItem('foo')
 
     expect(wrapper.vm.internalValue).toBe('foo')
-    expect(input).toBeCalledWith('foo')
+    expect(input).toHaveBeenCalledWith('foo')
     expect(input).toHaveBeenCalledTimes(1)
 
     await wrapper.vm.$nextTick()
 
-    expect(change).toBeCalledWith('foo')
+    expect(change).toHaveBeenCalledWith('foo')
     expect(change).toHaveBeenCalledTimes(1)
 
     wrapper.setProps({ returnObject: true })
@@ -291,12 +289,12 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
     wrapper.vm.selectItem(item)
 
     expect(wrapper.vm.internalValue).toBe(item)
-    expect(input).toBeCalledWith(item)
+    expect(input).toHaveBeenCalledWith(item)
     expect(input).toHaveBeenCalledTimes(2)
 
     await wrapper.vm.$nextTick()
 
-    expect(change).toBeCalledWith(item)
+    expect(change).toHaveBeenCalledWith(item)
     expect(change).toHaveBeenCalledTimes(2)
   })
 
@@ -310,11 +308,11 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
     const selectItem = jest.fn()
     wrapper.setMethods({ selectItem })
 
-    let el = wrapper.first('.v-list__tile')
+    const el = wrapper.first('.v-list__tile')
 
     el.element.click()
 
-    expect(selectItem).not.toBeCalled()
+    expect(selectItem).not.toHaveBeenCalled()
 
     wrapper.setProps({
       items: [{ text: 'foo', disabled: false, id: 0 }]
@@ -324,7 +322,7 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
 
     el.element.click()
 
-    expect(selectItem).toBeCalled()
+    expect(selectItem).toHaveBeenCalled()
   })
 
   it('should update menu status and focus when menu closes', async () => {
@@ -412,22 +410,20 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.selectedIndex).toBe(-1)
 
-    const foo = wrapper.first('.v-chip--select-multi')
+    const foo = wrapper.first('.v-chip')
     foo.trigger('click')
 
     expect(wrapper.vm.selectedIndex).toBe(0)
     expect(onFocus).toHaveBeenCalledTimes(1)
 
-    wrapper.find('.v-chip--select-multi')[1].trigger('click')
+    wrapper.find('.v-chip')[1].trigger('click')
 
     expect(wrapper.vm.selectedIndex).toBe(1)
     expect(onFocus).toHaveBeenCalledTimes(2)
 
     wrapper.setProps({ disabled: true })
 
-    await wrapper.vm.$nextTick()
-
-    wrapper.first('.v-chip--select-multi').trigger('click')
+    wrapper.first('.v-chip').trigger('click')
 
     expect(wrapper.vm.selectedIndex).toBe(1)
     expect(onFocus).toHaveBeenCalledTimes(2)
@@ -440,7 +436,7 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
         returnObject: true,
         itemText: 'text',
         itemValue: 'id',
-        items: [],
+        items: []
       }
     })
 
@@ -497,8 +493,8 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.find('.v-text-field__prefix').length).toBe(0)
-    expect(wrapper.find('.v-text-field__suffix').length).toBe(0)
+    expect(wrapper.find('.v-text-field__prefix')).toHaveLength(0)
+    expect(wrapper.find('.v-text-field__suffix')).toHaveLength(0)
   })
 
   it('should use custom clear icon cb', () => {
@@ -514,7 +510,7 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
     wrapper.vm.$on('click:clear', clearIconCb)
     wrapper.first('.v-input__icon--clear .v-icon').trigger('click')
 
-    expect(clearIconCb).toBeCalled()
+    expect(clearIconCb).toHaveBeenCalled()
   })
 
   it('should populate select[multiple=false] when using value as an object', async () => {
@@ -534,7 +530,7 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
 
     const selections = wrapper.find('.v-select__selection')
 
-    expect(selections.length).toEqual(1)
+    expect(selections).toHaveLength(1)
   })
 
   it('should add color to selected index', async () => {

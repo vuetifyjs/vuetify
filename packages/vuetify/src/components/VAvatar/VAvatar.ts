@@ -17,7 +17,8 @@ export default mixins(Colorable).extend({
   props: {
     // TODO: inherit these
     color: String,
-
+    left: Boolean,
+    right: Boolean,
     size: {
       type: [Number, String],
       default: 48
@@ -29,6 +30,8 @@ export default mixins(Colorable).extend({
     data.staticClass = (`v-avatar ${data.staticClass || ''}`).trim()
 
     if (props.tile) data.staticClass += ' v-avatar--tile'
+    if (props.left) data.staticClass += ' v-avatar--left'
+    if (props.right) data.staticClass += ' v-avatar--right'
 
     const size = convertToUnit(props.size)
     data.style = {

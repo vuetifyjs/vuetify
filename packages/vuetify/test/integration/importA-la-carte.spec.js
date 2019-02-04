@@ -15,6 +15,7 @@ import VCard from '@/components/VCard'
 import VCarousel from '@/components/VCarousel'
 import VCheckbox from '@/components/VCheckbox'
 import VChip from '@/components/VChip'
+import VChipGroup from '@/components/VChipGroup'
 import VCombobox from '@/components/VCombobox'
 import VCounter from '@/components/VCounter'
 import VDataIterator from '@/components/VDataIterator'
@@ -49,8 +50,8 @@ import VRadioGroup from '@/components/VRadioGroup'
 import VRangeSlider from '@/components/VRangeSlider'
 import VResponsive from '@/components/VResponsive'
 import VSelect from '@/components/VSelect'
-import VSlideGroup from '@/components/VSlideGroup'
-import VSlideItem from '@/components/VSlideGroup'
+import VSlideGroup from '@/components/VSlideGroup/VSlideGroup'
+import VSlideItem from '@/components/VSlideGroup/VSlideItem'
 import VSlider from '@/components/VSlider'
 import VSnackbar from '@/components/VSnackbar'
 import VSparkline from '@/components/VSparkline'
@@ -87,6 +88,7 @@ const components = {
   VCarousel,
   VCheckbox,
   VChip,
+  VChipGroup,
   VCombobox,
   VCounter,
   VDataIterator,
