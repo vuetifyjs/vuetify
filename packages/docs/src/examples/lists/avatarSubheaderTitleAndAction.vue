@@ -1,20 +1,11 @@
 <template>
   <v-layout row>
-    <v-flex
-      xs12
-      sm6
-      offset-sm3
-    >
+    <v-flex xs12 sm6 offset-sm3>
       <v-card>
-        <v-toolbar
-          color="teal"
-          dark
-        >
+        <v-toolbar color="teal" dark>
           <v-toolbar-side-icon></v-toolbar-side-icon>
 
-          <v-toolbar-title class="text-xs-center">
-            New Chat
-          </v-toolbar-title>
+          <v-toolbar-title class="text-xs-center">New Chat</v-toolbar-title>
 
           <v-spacer></v-spacer>
 
@@ -40,9 +31,7 @@
             </v-list-tile-content>
 
             <v-list-tile-action>
-              <v-icon :color="item.active ? 'teal' : 'grey'">
-                chat_bubble
-              </v-icon>
+              <v-icon :color="item.active ? 'teal' : 'grey'">chat_bubble</v-icon>
             </v-list-tile-action>
           </v-list-tile>
         </v-list>

@@ -1,0 +1,18 @@
+{
+  "header": "crwdns12528:0crwdne12528:0",
+  "headerText": "crwdns12530:0crwdne12530:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns12532:0crwdne12532:0"
+    },
+    "post": {
+      "header": "crwdns12534:0crwdne12534:0",
+      "desc": "crwdns12536:0crwdne12536:0"
+    }
+  },
+  "props": {
+    "activeClass": "crwdns12538:0crwdne12538:0",
+    "mandatory": "crwdns12540:0crwdne12540:0",
+    "multiple": "crwdns12542:0crwdne12542:0"
+  }
+}

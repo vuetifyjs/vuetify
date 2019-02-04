@@ -14,27 +14,21 @@
     <v-chip
       v-model="chip1"
       close
-    >
-      Closable
-    </v-chip>
+    >Closable</v-chip>
 
     <v-chip
       v-model="chip2"
       close
       color="red"
       text-color="white"
-    >
-      Remove
-    </v-chip>
+    >Remove</v-chip>
 
     <v-chip
       v-model="chip3"
       close
       color="green"
       outline
-    >
-      Success
-    </v-chip>
+    >Success</v-chip>
 
     <v-chip
       v-model="chip4"
@@ -42,9 +36,7 @@
       color="orange"
       label
       outline
-    >
-      Complete
-    </v-chip>
+    >Complete</v-chip>
   </div>
 </template>
 

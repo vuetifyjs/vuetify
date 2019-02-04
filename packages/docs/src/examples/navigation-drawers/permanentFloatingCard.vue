@@ -6,10 +6,7 @@
     permanent
   >
     <v-card class="ma-3">
-      <v-list
-        dense
-        class="py-0"
-      >
+      <v-list dense class="py-0">
         <v-list-tile
           v-for="item in items"
           :key="item.title"

@@ -1,12 +1,6 @@
 <template>
-  <v-layout
-    row
-    wrap
-  >
-    <v-flex
-      xs11
-      sm5
-    >
+  <v-layout row wrap>
+    <v-flex xs11 sm5>
       <v-menu
         ref="menu"
         v-model="menu2"
@@ -31,15 +25,12 @@
           v-if="menu2"
           v-model="time"
           full-width
-          @change="$refs.menu.save(time)"
+          @click:minute="$refs.menu.save(time)"
         ></v-time-picker>
       </v-menu>
     </v-flex>
     <v-spacer></v-spacer>
-    <v-flex
-      xs11
-      sm5
-    >
+    <v-flex xs11 sm5>
       <v-dialog
         ref="dialog"
         v-model="modal2"
@@ -62,20 +53,8 @@
           full-width
         >
           <v-spacer></v-spacer>
-          <v-btn
-            flat
-            color="primary"
-            @click="modal2 = false"
-          >
-            Cancel
-          </v-btn>
-          <v-btn
-            flat
-            color="primary"
-            @click="$refs.dialog.save(time)"
-          >
-            OK
-          </v-btn>
+          <v-btn flat color="primary" @click="modal2 = false">Cancel</v-btn>
+          <v-btn flat color="primary" @click="$refs.dialog.save(time)">OK</v-btn>
         </v-time-picker>
       </v-dialog>
     </v-flex>

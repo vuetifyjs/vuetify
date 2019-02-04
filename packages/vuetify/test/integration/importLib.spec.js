@@ -135,6 +135,7 @@ import Vuetify, {
   VSlideYTransition,
   VSlideYReverseTransition,
   VExpandTransition,
+  VExpandXTransition,
   VRowExpandTransition
 } from '@/entry-lib'
 
@@ -273,6 +274,7 @@ const components = {
   VSlideYTransition,
   VSlideYReverseTransition,
   VExpandTransition,
+  VExpandXTransition,
   VRowExpandTransition
 }
 

@@ -6,7 +6,15 @@
   >
     <template v-for="(item, i) in items">
       <v-timeline-item
-        v-if="index == null || index >= i"
+        v-if="typeof item === 'number'"
+        :key="`divider-${i}`"
+      >
+        <span slot="opposite">
+          Completed
+        </span>
+      </v-timeline-item>
+      <v-timeline-item
+        v-else-if="index == null || index >= i"
         :key="i"
         :icon="item.complete ? 'mdi-check' : item.icon"
         :color="item.complete ? 'success darken-1' : item.color"
@@ -20,8 +28,8 @@
         />
         <v-card
           :class="`elevation-${item.value ? 8 : 1}`"
+          :hover="!item.complete"
           class="py-2"
-          hover
           @click.native="item.value = !item.value"
         >
           <v-card-title class="py-0 pr-2">
@@ -42,9 +50,7 @@
                 class="mr-2"
                 v-text="item.caption"
               />
-              <v-icon
-                small
-              >
+              <v-icon small>
                 mdi-calendar
               </v-icon>
             </v-btn>
@@ -86,6 +92,7 @@
       interval: null,
       items: []
     }),
+
     mounted () {
       this.items = this.$t('GettingStarted.Roadmap.roadmapItems').map(item => {
         const type = types[item.type]
@@ -93,7 +100,7 @@
           ...type,
           ...item
         }
-      })
+      }).reverse()
     }
   }
 </script>

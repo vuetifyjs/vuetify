@@ -1,8 +1,5 @@
 <template>
-  <v-card
-    flat
-    color="transparent"
-  >
+  <v-card flat color="transparent">
     <v-subheader>Rules</v-subheader>
 
     <v-card-text class="pt-0">

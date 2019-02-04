@@ -5,10 +5,7 @@
     height="200px"
     tile
   >
-    <v-toolbar
-      prominent
-      extended
-    >
+    <v-toolbar prominent extended>
       <v-toolbar-side-icon></v-toolbar-side-icon>
 
       <v-toolbar-title>Title</v-toolbar-title>

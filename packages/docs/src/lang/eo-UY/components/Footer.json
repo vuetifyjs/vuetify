@@ -1,0 +1,26 @@
+{
+  "header": "crwdns12296:0crwdne12296:0",
+  "headerText": "crwdns12298:0crwdne12298:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns12300:0crwdne12300:0"
+    },
+    "companyFooter": {
+      "header": "crwdns12302:0crwdne12302:0",
+      "desc": "crwdns12304:0crwdne12304:0"
+    },
+    "indigoFooter": {
+      "header": "crwdns12306:0crwdne12306:0",
+      "desc": "crwdns12308:0crwdne12308:0"
+    },
+    "tealFooter": {
+      "header": "crwdns12310:0crwdne12310:0",
+      "desc": "crwdns12312:0crwdne12312:0"
+    }
+  },
+  "props": {
+    "absolute": "crwdns12314:0crwdne12314:0",
+    "fixed": "crwdns12316:0crwdne12316:0",
+    "inset": "crwdns12318:0crwdne12318:0"
+  }
+}

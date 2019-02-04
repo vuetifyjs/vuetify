@@ -1,35 +1,21 @@
 <template>
   <v-layout justify-center>
-    <v-flex
-      xs12
-      sm8
-    >
+    <v-flex xs12 sm8>
       <v-card>
         <v-card-title class="cyan darken-1">
-          <span class="headline white--text">
-            Sarah Mcbeal
-          </span>
+          <span class="headline white--text">Sarah Mcbeal</span>
 
           <v-spacer></v-spacer>
 
-          <v-btn
-            dark
-            icon
-          >
+          <v-btn dark icon>
             <v-icon>chevron_left</v-icon>
           </v-btn>
 
-          <v-btn
-            dark
-            icon
-          >
+          <v-btn dark icon>
             <v-icon>edit</v-icon>
           </v-btn>
 
-          <v-btn
-            dark
-            icon
-          >
+          <v-btn dark icon>
             <v-icon>more_vert</v-icon>
           </v-btn>
         </v-card-title>
@@ -44,6 +30,7 @@
               <v-list-tile-title>(650) 555-1234</v-list-tile-title>
             </v-list-tile-content>
             <v-list-tile-action>
+
               <v-icon>chat</v-icon>
             </v-list-tile-action>
           </v-list-tile>

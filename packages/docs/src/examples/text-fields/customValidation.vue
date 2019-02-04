@@ -1,11 +1,6 @@
 <template>
   <v-layout justify-center>
-    <v-flex
-      xs12
-      sm10
-      md8
-      lg6
-    >
+    <v-flex xs12 sm10 md8 lg6>
       <v-card ref="form">
         <v-card-text>
           <v-text-field
@@ -66,9 +61,7 @@
         </v-card-text>
         <v-divider class="mt-5"></v-divider>
         <v-card-actions>
-          <v-btn flat>
-            Cancel
-          </v-btn>
+          <v-btn flat>Cancel</v-btn>
           <v-spacer></v-spacer>
           <v-slide-x-reverse-transition>
             <v-tooltip
@@ -86,13 +79,7 @@
               <span>Refresh form</span>
             </v-tooltip>
           </v-slide-x-reverse-transition>
-          <v-btn
-            color="primary"
-            flat
-            @click="submit"
-          >
-            Submit
-          </v-btn>
+          <v-btn color="primary" flat @click="submit">Submit</v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>
