@@ -1,3 +1,4 @@
+// Styles
 import '../../stylus/components/_navigation-drawer.styl'
 
 // Mixins
@@ -10,13 +11,27 @@ import Themeable from '../../mixins/themeable'
 // Directives
 import ClickOutside from '../../directives/click-outside'
 import Resize from '../../directives/resize'
-import Touch from '../../directives/touch'
+import Touch, { TouchWrapper } from '../../directives/touch'
 
-// Helpers
+// Utilities
 import { convertToUnit } from '../../util/helpers'
+import mixins from '../../util/mixins'
+
+// TYpes
+import { VNode } from 'vue/types/vnode'
 
 /* @vue/component */
-export default {
+export default mixins(
+  Applicationable('left', [
+    'miniVariant',
+    'right',
+    'width'
+  ]),
+  Dependent,
+  Overlayable,
+  SSRBootable,
+  Themeable
+).extend({
   name: 'v-navigation-drawer',
 
   directives: {
@@ -24,18 +39,6 @@ export default {
     Resize,
     Touch
   },
-
-  mixins: [
-    Applicationable(null, [
-      'miniVariant',
-      'right',
-      'width'
-    ]),
-    Dependent,
-    Overlayable,
-    SSRBootable,
-    Themeable
-  ],
 
   props: {
     clipped: Boolean,
@@ -84,22 +87,24 @@ export default {
      *
      * @return {string}
      */
-    applicationProperty () {
+    applicationProperty (): string {
       return this.right ? 'right' : 'left'
     },
-    calculatedTransform () {
+    calculatedTransform (): number {
       if (this.isActive) return 0
 
       return this.right
         ? this.calculatedWidth
         : -this.calculatedWidth
     },
-    calculatedWidth () {
-      return this.miniVariant
-        ? this.miniVariantWidth
-        : this.width
+    calculatedWidth (): number {
+      return parseInt(
+        this.miniVariant
+          ? this.miniVariantWidth
+          : this.width
+      )
     },
-    classes () {
+    classes (): object {
       return {
         'v-navigation-drawer': true,
         'v-navigation-drawer--absolute': this.absolute,
@@ -115,17 +120,17 @@ export default {
         ...this.themeClasses
       }
     },
-    hasApp () {
+    hasApp (): boolean {
       return this.app &&
         (!this.isMobile && !this.temporary)
     },
-    isMobile () {
+    isMobile (): boolean {
       return !this.stateless &&
         !this.permanent &&
         !this.temporary &&
         this.$vuetify.breakpoint.width < parseInt(this.mobileBreakPoint, 10)
     },
-    marginTop () {
+    marginTop (): number {
       if (!this.hasApp) return 0
 
       let marginTop = this.$vuetify.application.bar
@@ -136,7 +141,7 @@ export default {
 
       return marginTop
     },
-    maxHeight () {
+    maxHeight (): number | null {
       if (!this.hasApp) return null
 
       const maxHeight = (
@@ -149,30 +154,30 @@ export default {
 
       return maxHeight + this.$vuetify.application.top
     },
-    reactsToClick () {
+    reactsToClick (): boolean {
       return !this.stateless &&
         !this.permanent &&
         (this.isMobile || this.temporary)
     },
-    reactsToMobile () {
+    reactsToMobile (): boolean {
       return !this.disableResizeWatcher &&
         !this.stateless &&
         !this.permanent &&
         !this.temporary
     },
-    reactsToRoute () {
+    reactsToRoute (): boolean {
       return !this.disableRouteWatcher &&
         !this.stateless &&
         (this.temporary || this.isMobile)
     },
-    resizeIsDisabled () {
+    resizeIsDisabled (): boolean {
       return this.disableResizeWatcher || this.stateless
     },
-    showOverlay () {
+    showOverlay (): boolean {
       return this.isActive &&
         (this.isMobile || this.temporary)
     },
-    styles () {
+    styles (): object {
       const styles = {
         height: convertToUnit(this.height),
         marginTop: `${this.marginTop}px`,
@@ -273,7 +278,7 @@ export default {
           left: this.swipeLeft,
           right: this.swipeRight
         }
-      })
+      } as any)
 
       return directives
     },
@@ -294,7 +299,7 @@ export default {
         this.isActive = !this.isMobile
       }
     },
-    swipeRight (e) {
+    swipeRight (e: TouchWrapper) {
       if (this.isActive && !this.right) return
       this.calculateTouchArea()
 
@@ -304,7 +309,7 @@ export default {
       ) this.isActive = true
       else if (this.right && this.isActive) this.isActive = false
     },
-    swipeLeft (e) {
+    swipeLeft (e: TouchWrapper) {
       if (this.isActive && this.right) return
       this.calculateTouchArea()
 
@@ -328,7 +333,7 @@ export default {
     }
   },
 
-  render (h) {
+  render (h): VNode {
     const data = {
       'class': this.classes,
       style: this.styles,
@@ -339,7 +344,7 @@ export default {
 
           this.$emit('update:miniVariant', false)
         },
-        transitionend: e => {
+        transitionend: (e: Event) => {
           if (e.target !== e.currentTarget) return
           this.$emit('transitionend', e)
 
@@ -356,4 +361,4 @@ export default {
       h('div', { 'class': 'v-navigation-drawer__border' })
     ])
   }
-}
+})
