@@ -127,7 +127,7 @@ exports[`VDatePickerHeader.js should render disabled component and match snapsho
   </button>
   <div class="v-date-picker-header__value v-date-picker-header__value--disabled">
     <div>
-      <button>
+      <button type="button">
         November 2005
       </button>
     </div>

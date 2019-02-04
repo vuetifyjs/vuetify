@@ -3099,7 +3099,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
         </button>
         <div class="v-date-picker-header__value v-date-picker-header__value--disabled">
           <div>
-            <button>
+            <button type="button">
               May 2013
             </button>
           </div>
