@@ -9,6 +9,8 @@ import SSRBootable from '../../mixins/ssr-bootable'
 
 // Directives
 import Scroll from '../../directives/scroll'
+
+// Utilities
 import { deprecate } from '../../util/console'
 import mixins from '../../util/mixins'
 
