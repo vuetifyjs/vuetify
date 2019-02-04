@@ -112,7 +112,7 @@ export default mixins(
       const header = this.$createElement('div', this.setTextColor(color, {
         key: String(this.value)
       }), [this.$createElement('button', {
-        domProp: {
+        domProps: {
             type: 'button'
         },
         on: {
