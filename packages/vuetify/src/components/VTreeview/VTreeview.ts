@@ -13,7 +13,7 @@ import Themeable from '../../mixins/themeable'
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
 // Utils
-import { getObjectValueByPath, deepEqual, arrayDiff } from '../../util/helpers'
+import { getObjectValueByPath, deepEqual, filterTreeItems, arrayDiff } from '../../util/helpers'
 import mixins from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
 
@@ -68,6 +68,21 @@ export default mixins(
       type: Array,
       default: () => ([])
     } as PropValidator<NodeArray>,
+    search: String,
+    customFilter: {
+      type: Function as any,
+      default: (items, search, idKey, textKey, childrenKey) => {
+        const excluded = new Set<string|number>()
+
+        if (!search) return excluded
+
+        for (let i = 0; i < items.length; i++) {
+          filterTreeItems(items[i], search, idKey, textKey, childrenKey, excluded)
+        }
+
+        return excluded
+      }
+    } as PropValidator<(items: any[], search: string, idKey: string, textKey: string, childrenKey: string) => Set<string|number>>,
     ...VTreeviewNodeProps
   },
 
@@ -77,6 +92,12 @@ export default mixins(
     activeCache: new Set() as NodeCache,
     openCache: new Set() as NodeCache
   }),
+
+  computed: {
+    excludedItems (): Set<string | number> {
+      return this.customFilter(this.items.slice(), this.search, this.itemKey, this.itemText, this.itemChildren)
+    }
+  },
 
   watch: {
     items: {
@@ -329,6 +350,9 @@ export default mixins(
         node.vnode.isActive = node.isActive
         node.vnode.isOpen = node.isOpen
       }
+    },
+    isExcluded (key: string | number) {
+      return !!this.search && this.excludedItems.has(key)
     }
   },
 
