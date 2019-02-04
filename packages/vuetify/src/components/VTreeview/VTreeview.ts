@@ -77,27 +77,6 @@ export default mixins(
         return text.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) > -1
       }
     } as PropValidator<FilterTreeItemFunction>,
-    customFilter: {
-      type: Function as any,
-      default: (filter, items, search, idKey, textKey, childrenKey) => {
-        const excluded = new Set<string|number>()
-
-        if (!search) return excluded
-
-        for (let i = 0; i < items.length; i++) {
-          filterTreeItems(filter, items[i], search, idKey, textKey, childrenKey, excluded)
-        }
-
-        return excluded
-      }
-    } as PropValidator<(
-      filter: FilterTreeItemFunction,
-      items: any[],
-      search: string,
-      idKey: string,
-      textKey: string,
-      childrenKey: string
-    ) => Set<string|number>>,
     ...VTreeviewNodeProps
   },
 
@@ -110,7 +89,15 @@ export default mixins(
 
   computed: {
     excludedItems (): Set<string | number> {
-      return this.customFilter(this.itemFilter, this.items.slice(), this.search, this.itemKey, this.itemText, this.itemChildren)
+      const excluded = new Set<string|number>()
+
+      if (!this.search) return excluded
+
+      for (let i = 0; i < this.items.length; i++) {
+        filterTreeItems(this.itemFilter, this.items[i], this.search, this.itemKey, this.itemText, this.itemChildren, excluded)
+      }
+
+      return excluded
     }
   },
 
