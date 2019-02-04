@@ -192,7 +192,7 @@ export default {
         }
       }
 
-      if (this.$scopedSlots.activator) {
+      if (this.$scopedSlots.activator && !this.$slots.activator) {
         const activator = this.$scopedSlots.activator({ on: listeners })
         this.activatorNode = activator
         return activator

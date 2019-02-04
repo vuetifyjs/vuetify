@@ -133,11 +133,6 @@ export default {
     }
   },
 
-  watch: {
-    positionX: 'updateDimensions',
-    positionY: 'updateDimensions'
-  },
-
   beforeMount () {
     this.$nextTick(() => {
       this.value && this.callActivate()
@@ -164,16 +159,15 @@ export default {
         }
       }
 
-      if (this.$scopedSlots.activator) {
-        const activator = this.$scopedSlots.activator({ on: listeners })
-        this.activatorNode = activator
-        return activator
-      }
       if (this.$slots.activator) {
         return this.$createElement('span', {
           on: listeners,
           ref: 'activator'
         }, this.$slots.activator)
+      } else if (this.$scopedSlots.activator) {
+        const activator = this.$scopedSlots.activator({ on: listeners })
+        this.activatorNode = activator
+        return activator
       }
     }
   },

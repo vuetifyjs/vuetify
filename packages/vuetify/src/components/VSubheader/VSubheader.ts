@@ -1,18 +1,24 @@
+// Styles
 import '../../stylus/components/_subheaders.styl'
 
+// Mixins
 import Themeable from '../../mixins/themeable'
+import mixins from '../../util/mixins'
 
-/* @vue/component */
-export default {
+// Types
+import { VNode } from 'vue'
+
+export default mixins(
+  Themeable
+  /* @vue/component */
+).extend({
   name: 'v-subheader',
-
-  mixins: [Themeable],
 
   props: {
     inset: Boolean
   },
 
-  render (h) {
+  render (h): VNode {
     return h('div', {
       staticClass: 'v-subheader',
       class: {
@@ -23,4 +29,4 @@ export default {
       on: this.$listeners
     }, this.$slots.default)
   }
-}
+})

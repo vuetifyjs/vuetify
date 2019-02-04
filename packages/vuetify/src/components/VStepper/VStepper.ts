@@ -1,20 +1,31 @@
 // Styles
 import '../../stylus/components/_steppers.styl'
 
+// Components
+import VStepperStep from './VStepperStep'
+import VStepperContent from './VStepperContent'
+
 // Mixins
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 import Themeable from '../../mixins/themeable'
 
+// Util
+import mixins from '../../util/mixins'
+
+// Types
+import { VNode } from 'vue'
+
+type VStepperStepInstance = InstanceType<typeof VStepperStep>
+type VStepperContentInstance = InstanceType<typeof VStepperContent>
+
+export default mixins(
+  RegistrableProvide('stepper'),
+  Themeable
 /* @vue/component */
-export default {
+).extend({
   name: 'v-stepper',
 
-  mixins: [
-    RegistrableProvide('stepper'),
-    Themeable
-  ],
-
-  provide () {
+  provide (): object {
     return {
       stepClick: this.stepClick,
       isVertical: this.vertical
@@ -30,16 +41,16 @@ export default {
 
   data () {
     return {
-      inputValue: null,
+      inputValue: null as any,
       isBooted: false,
-      steps: [],
-      content: [],
+      steps: [] as VStepperStepInstance[],
+      content: [] as VStepperContentInstance[],
       isReverse: false
     }
   },
 
   computed: {
-    classes () {
+    classes (): object {
       return {
         'v-stepper': true,
         'v-stepper--is-booted': this.isBooted,
@@ -74,30 +85,30 @@ export default {
   },
 
   methods: {
-    register (item) {
+    register (item: VStepperStepInstance | VStepperContentInstance) {
       if (item.$options.name === 'v-stepper-step') {
-        this.steps.push(item)
+        this.steps.push(item as VStepperStepInstance)
       } else if (item.$options.name === 'v-stepper-content') {
-        item.isVertical = this.vertical
-        this.content.push(item)
+        (item as VStepperContentInstance).isVertical = this.vertical
+        this.content.push(item as VStepperContentInstance)
       }
     },
-    unregister (item) {
+    unregister (item: VStepperStepInstance | VStepperContentInstance) {
       if (item.$options.name === 'v-stepper-step') {
-        this.steps = this.steps.filter(i => i !== item)
+        this.steps = this.steps.filter((i: VStepperStepInstance) => i !== item)
       } else if (item.$options.name === 'v-stepper-content') {
-        item.isVertical = this.vertical
-        this.content = this.content.filter(i => i !== item)
+        (item as VStepperContentInstance).isVertical = this.vertical
+        this.content = this.content.filter((i: VStepperContentInstance) => i !== item)
       }
     },
-    stepClick (step) {
+    stepClick (step: string | number) {
       this.$nextTick(() => (this.inputValue = step))
     }
   },
 
-  render (h) {
+  render (h): VNode {
     return h('div', {
       'class': this.classes
     }, this.$slots.default)
   }
-}
+})

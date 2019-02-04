@@ -1,16 +1,22 @@
 import { test } from '@/test'
 import VRangeSlider from '@/components/VRangeSlider'
 
-const warning = '[Vuetify] Missing v-app or a non-body wrapping element with the [data-app] attribute'
 
 test('VRangeSlider.vue', ({ mount }) => {
+  let el
+  beforeEach(() => {
+    el = document.createElement('div')
+    el.setAttribute('data-app', 'true')
+    document.body.appendChild(el)
+  })
+  afterEach(() => {
+    document.body.removeChild(el)
+  })
 
   it('should provide a default value if non provided', async () => {
     const wrapper = mount(VRangeSlider)
 
     expect(wrapper.vm.lazyValue).toEqual([0, 0])
-
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should round values and swap order if needed', () => {
@@ -46,8 +52,6 @@ test('VRangeSlider.vue', ({ mount }) => {
     wrapper.vm.internalValue = [1, 5]
 
     expect(input).not.toBeCalledWith()
-
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should change value on key down', () => {
@@ -70,8 +74,6 @@ test('VRangeSlider.vue', ({ mount }) => {
     input.trigger('keydown.esc')
 
     expect(setInternalValue).toHaveBeenCalledTimes(1)
-
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should return index of closest value', () => {
@@ -81,8 +83,6 @@ test('VRangeSlider.vue', ({ mount }) => {
     expect(wrapper.vm.getIndexOfClosestValue([0, 25], 5)).toBe(0)
     expect(wrapper.vm.getIndexOfClosestValue([25, 28], 32)).toBe(1)
     expect(wrapper.vm.getIndexOfClosestValue([25, 28], 23)).toBe(0)
-
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should call on drag', async () => {
@@ -97,8 +97,6 @@ test('VRangeSlider.vue', ({ mount }) => {
 
     expect(wrapper.vm.isActive).toBe(true)
     expect(wrapper.vm.activeThumb).toBe(0)
-
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should call mouse move and emit change on click', async () => {
@@ -129,7 +127,6 @@ test('VRangeSlider.vue', ({ mount }) => {
 
     expect(change).toHaveBeenCalledTimes(1)
     expect(onMouseMove).toHaveBeenCalledTimes(1)
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should react to a track click', () => {
@@ -162,8 +159,6 @@ test('VRangeSlider.vue', ({ mount }) => {
 
     expect(getIndexOfClosestValue).toBeCalled()
     expect(setInternalValue).toHaveBeenCalledTimes(2)
-
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should set internal value', () => {
@@ -196,8 +191,6 @@ test('VRangeSlider.vue', ({ mount }) => {
     wrapper.vm.setInternalValue(25)
 
     expect(wrapper.vm.internalValue).toEqual([5, 25])
-
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should return the proper styles', () => {
@@ -216,7 +209,5 @@ test('VRangeSlider.vue', ({ mount }) => {
     expect(styles.width).toBe('calc(0% - 7px)')
 
     wrapper.vm.$vuetify.rtl = undefined
-
-    expect(warning).toHaveBeenTipped()
   })
 })

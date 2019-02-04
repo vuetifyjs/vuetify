@@ -62,7 +62,7 @@
       "type": "release",
       "complete": false,
       "title": "v1.5 Release",
-      "caption": "February 2018",
+      "caption": "February 2019",
       "text": "Add new component `v-calendar`. Improve functionality of `v-sparkline` with a **bar** variant and fill. Improve `v-treeview` and prepare for LTS.",
       "value": true
     },

@@ -125,8 +125,8 @@ export default {
       return `<span class="v-list__tile__mask">${escapeHTML(text)}</span>`
     },
     getMaskedCharacters (text) {
-      const searchInput = (this.searchInput || '').toString().toLowerCase()
-      const index = text.toLowerCase().indexOf(searchInput)
+      const searchInput = (this.searchInput || '').toString().toLocaleLowerCase()
+      const index = text.toLocaleLowerCase().indexOf(searchInput)
 
       if (index < 0) return { start: '', middle: text, end: '' }
 
