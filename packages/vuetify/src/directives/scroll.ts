@@ -1,6 +1,8 @@
 import { VNodeDirective } from 'vue/types/vnode'
 
 interface ScrollVNodeDirective extends VNodeDirective {
+  arg: string
+  value: EventListenerOrEventListenerObject
   options?: boolean | AddEventListenerOptions
 }
 

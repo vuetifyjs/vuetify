@@ -1,12 +1,8 @@
-// Components
 import VBtn from '../../components/VBtn'
 import VIcon from '../../components/VIcon'
 
-// Types
-import Vue from 'vue'
-
 /* @vue/component */
-export default Vue.extend({
+export default {
   name: 'v-toolbar-side-icon',
 
   functional: true,
@@ -28,4 +24,4 @@ export default Vue.extend({
 
     return h(VBtn, d, defaultSlot || [h(VIcon, '$vuetify.icons.menu')])
   }
-})
+}

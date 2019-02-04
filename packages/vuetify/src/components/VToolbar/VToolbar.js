@@ -9,31 +9,26 @@ import SSRBootable from '../../mixins/ssr-bootable'
 
 // Directives
 import Scroll from '../../directives/scroll'
-
-// Utilities
 import { deprecate } from '../../util/console'
-import mixins from '../../util/mixins'
-
-// Types
-import { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
 
 /* @vue/component */
-export default mixins(
-  Applicationable('top', [
-    'clippedLeft',
-    'clippedRight',
-    'computedHeight',
-    'invertedScroll',
-    'manualScroll'
-  ]),
-  Colorable,
-  SSRBootable,
-  Themeable
-).extend({
+export default {
   name: 'v-toolbar',
 
   directives: { Scroll },
+
+  mixins: [
+    Applicationable('top', [
+      'clippedLeft',
+      'clippedRight',
+      'computedHeight',
+      'invertedScroll',
+      'manualScroll'
+    ]),
+    Colorable,
+    SSRBootable,
+    Themeable
+  ],
 
   props: {
     card: Boolean,
@@ -44,13 +39,13 @@ export default mixins(
     extensionHeight: {
       type: [Number, String],
       validator: v => !isNaN(parseInt(v))
-    } as PropValidator<number | string>,
+    },
     flat: Boolean,
     floating: Boolean,
     height: {
       type: [Number, String],
       validator: v => !isNaN(parseInt(v))
-    } as PropValidator<number | string>,
+    },
     invertedScroll: Boolean,
     manualScroll: Boolean,
     prominent: Boolean,
@@ -77,14 +72,14 @@ export default mixins(
     isActive: true,
     isExtended: false,
     isScrollingUp: false,
-    previousScroll: 0,
+    previousScroll: null,
     previousScrollDirection: null,
     savedScroll: 0,
-    target: null as HTMLElement | null
+    target: null
   }),
 
   computed: {
-    canScroll (): boolean {
+    canScroll () {
       // TODO: remove
       if (this.scrollToolbarOffScreen) {
         deprecate('scrollToolbarOffScreen', 'scrollOffScreen', this)
@@ -94,7 +89,7 @@ export default mixins(
 
       return this.scrollOffScreen || this.invertedScroll
     },
-    computedContentHeight (): number {
+    computedContentHeight () {
       if (this.height) return parseInt(this.height)
       if (this.dense) return this.heights.dense
 
@@ -109,23 +104,23 @@ export default mixins(
 
       return this.heights.mobile
     },
-    computedExtensionHeight (): number {
+    computedExtensionHeight () {
       if (this.tabs) return 48
       if (this.extensionHeight) return parseInt(this.extensionHeight)
 
       return this.computedContentHeight
     },
-    computedHeight (): number {
+    computedHeight () {
       if (!this.isExtended) return this.computedContentHeight
 
       return this.computedContentHeight + this.computedExtensionHeight
     },
-    computedMarginTop (): number {
+    computedMarginTop () {
       if (!this.app) return 0
 
       return this.$vuetify.application.bar
     },
-    classes (): object {
+    classes () {
       return {
         'v-toolbar': true,
         'elevation-0': this.flat || (
@@ -144,24 +139,24 @@ export default mixins(
         ...this.themeClasses
       }
     },
-    computedPaddingLeft (): number {
+    computedPaddingLeft () {
       if (!this.app || this.clippedLeft) return 0
 
       return this.$vuetify.application.left
     },
-    computedPaddingRight (): number {
+    computedPaddingRight () {
       if (!this.app || this.clippedRight) return 0
 
       return this.$vuetify.application.right
     },
-    computedTransform (): number {
+    computedTransform () {
       return !this.isActive
         ? this.canScroll
           ? -this.computedContentHeight
           : -this.computedHeight
         : 0
     },
-    currentThreshold (): number {
+    currentThreshold () {
       return Math.abs(this.currentScroll - this.savedScroll)
     },
     styles () {
@@ -177,8 +172,7 @@ export default mixins(
   watch: {
     currentThreshold (val) {
       if (this.invertedScroll) {
-        this.isActive = this.currentScroll > this.scrollThreshold
-        return
+        return this.isActive = this.currentScroll > this.scrollThreshold
       }
 
       if (val < this.scrollThreshold ||
@@ -223,9 +217,9 @@ export default mixins(
 
       const target = this.target || window
 
-      this.currentScroll = target instanceof HTMLElement
+      this.currentScroll = this.scrollTarget
         ? target.scrollTop
-        : target.pageYOffset || document.documentElement!.scrollTop
+        : target.pageYOffset || document.documentElement.scrollTop
 
       this.isScrollingUp = this.currentScroll < this.previousScroll
 
@@ -243,7 +237,7 @@ export default mixins(
     }
   },
 
-  render (h): VNode {
+  render (h) {
     this.isExtended = this.extended || !!this.$slots.extension
 
     const children = []
@@ -274,4 +268,4 @@ export default mixins(
 
     return h('nav', data, children)
   }
-})
+}
