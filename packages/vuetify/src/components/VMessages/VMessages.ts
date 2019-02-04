@@ -5,17 +5,25 @@ import '../../stylus/components/_messages.styl'
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 
-/* @vue/component */
-export default {
-  name: 'v-messages',
+// Utilities
+import mixins from '../../util/mixins'
 
-  mixins: [Colorable, Themeable],
+// Types
+import { VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
+
+/* @vue/component */
+export default mixins(
+  Colorable,
+  Themeable
+).extend({
+  name: 'v-messages',
 
   props: {
     value: {
       type: Array,
       default: () => ([])
-    }
+    } as PropValidator<string[]>
   },
 
   methods: {
@@ -28,7 +36,7 @@ export default {
         }
       }, this.value.map(this.genMessage))
     },
-    genMessage (message, key) {
+    genMessage (message: string, key: number) {
       return this.$createElement('div', {
         staticClass: 'v-messages__message',
         key,
@@ -39,10 +47,10 @@ export default {
     }
   },
 
-  render (h) {
+  render (h): VNode {
     return h('div', this.setTextColor(this.color, {
       staticClass: 'v-messages',
       class: this.themeClasses
     }), [this.genChildren()])
   }
-}
+})
