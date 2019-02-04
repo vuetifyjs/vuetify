@@ -126,12 +126,6 @@ export default VDataIterator.extend({
       // TODO: Will {}, props mess up .syncing?
       return Object.assign(props, { headers: this.computedHeaders })
     },
-    createSlotProps (props: any) {
-      props.headers = this.computedHeaders
-      props.widths = this.widths
-
-      return props
-    },
     genCaption (props: DataProps) {
       if (this.caption) return [this.$createElement('caption', [this.caption])]
 
@@ -380,7 +374,9 @@ export default VDataIterator.extend({
         },
         on: {
           'update:options': (value: any) => props.updateOptions(value)
-        }
+        },
+        widths: this.widths,
+        headers: this.computedHeaders
       }
 
       const children: VNodeChildren = [
