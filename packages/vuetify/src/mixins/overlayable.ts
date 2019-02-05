@@ -1,10 +1,30 @@
+// Styles
 import '../stylus/components/_overlay.styl'
 
-// Utils
+// Utilities
 import { keyCodes } from '../util/helpers'
 
+// Types
+import Vue from 'vue'
+
+interface Toggleable extends Vue {
+  isActive?: boolean
+}
+
+interface Stackable extends Vue {
+  activeZIndex: number
+}
+
+interface options {
+  absolute?: boolean
+  $refs: {
+    dialog?: HTMLElement
+    content?: HTMLElement
+  }
+}
+
 /* @vue/component */
-export default {
+export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
   name: 'overlayable',
 
   props: {
@@ -13,9 +33,9 @@ export default {
 
   data () {
     return {
-      overlay: null,
+      overlay: null as HTMLElement | null,
       overlayOffset: 0,
-      overlayTimeout: null,
+      overlayTimeout: undefined as number | undefined,
       overlayTransitionDuration: 500 + 150 // transition + delay
     }
   },
@@ -68,7 +88,7 @@ export default {
         this.overlay.className += ' v-overlay--active'
 
         if (this.activeZIndex !== undefined) {
-          this.overlay.style.zIndex = this.activeZIndex - 1
+          this.overlay.style.zIndex = String(this.activeZIndex - 1)
         }
       })
 
@@ -82,7 +102,7 @@ export default {
 
       this.overlay.classList.remove('v-overlay--active')
 
-      this.overlayTimeout = setTimeout(() => {
+      this.overlayTimeout = window.setTimeout(() => {
         // IE11 Fix
         try {
           if (this.overlay && this.overlay.parentNode) {
@@ -93,28 +113,24 @@ export default {
         } catch (e) { console.log(e) }
 
         clearTimeout(this.overlayTimeout)
-        this.overlayTimeout = null
+        this.overlayTimeout = undefined
       }, this.overlayTransitionDuration)
     },
-    /**
-     * @param {Event} e
-     * @returns void
-     */
-    scrollListener (e) {
+    scrollListener (e: WheelEvent & KeyboardEvent) {
       if (e.type === 'keydown') {
         if (
-          ['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName) ||
+          ['INPUT', 'TEXTAREA', 'SELECT'].includes((e.target as Element).tagName) ||
           // https://github.com/vuetifyjs/vuetify/issues/4715
-          e.target.isContentEditable
+          (e.target as HTMLElement).isContentEditable
         ) return
 
         const up = [keyCodes.up, keyCodes.pageup]
         const down = [keyCodes.down, keyCodes.pagedown]
 
         if (up.includes(e.keyCode)) {
-          e.deltaY = -1
+          (e as any).deltaY = -1
         } else if (down.includes(e.keyCode)) {
-          e.deltaY = 1
+          (e as any).deltaY = 1
         } else {
           return
         }
@@ -124,37 +140,33 @@ export default {
         (e.type !== 'keydown' && e.target === document.body) ||
         this.checkPath(e)) e.preventDefault()
     },
-    hasScrollbar (el) {
+    hasScrollbar (el?: Element) {
       if (!el || el.nodeType !== Node.ELEMENT_NODE) return false
 
       const style = window.getComputedStyle(el)
-      return ['auto', 'scroll'].includes(style['overflow-y']) && el.scrollHeight > el.clientHeight
+      return ['auto', 'scroll'].includes(style.overflowY!) && el.scrollHeight > el.clientHeight
     },
-    shouldScroll (el, delta) {
+    shouldScroll (el: Element, delta: number) {
       if (el.scrollTop === 0 && delta < 0) return true
       return el.scrollTop + el.clientHeight === el.scrollHeight && delta > 0
     },
-    isInside (el, parent) {
+    isInside (el: Element, parent: Element): boolean {
       if (el === parent) {
         return true
       } else if (el === null || el === document.body) {
         return false
       } else {
-        return this.isInside(el.parentNode, parent)
+        return this.isInside(el.parentNode as Element, parent)
       }
     },
-    /**
-     * @param {Event} e
-     * @returns boolean
-     */
-    checkPath (e) {
+    checkPath (e: WheelEvent) {
       const path = e.path || this.composedPath(e)
       const delta = e.deltaY || -e.wheelDelta
 
       if (e.type === 'keydown' && path[0] === document.body) {
         const dialog = this.$refs.dialog
-        const selected = window.getSelection().anchorNode
-        if (this.hasScrollbar(dialog) && this.isInside(selected, dialog)) {
+        const selected = window.getSelection().anchorNode as Element
+        if (dialog && this.hasScrollbar(dialog) && this.isInside(selected, dialog)) {
           return this.shouldScroll(dialog, delta)
         }
         return true
@@ -167,21 +179,19 @@ export default {
         if (el === document.documentElement) return true
         if (el === this.$refs.content) return true
 
-        if (this.hasScrollbar(el)) return this.shouldScroll(el, delta)
+        if (this.hasScrollbar(el as Element)) return this.shouldScroll(el as Element, delta)
       }
 
       return true
     },
     /**
      * Polyfill for Event.prototype.composedPath
-     * @param {Event} e
-     * @returns Element[]
      */
-    composedPath (e) {
+    composedPath (e: WheelEvent): EventTarget[] {
       if (e.composedPath) return e.composedPath()
 
       const path = []
-      let el = e.target
+      let el = e.target as Element
 
       while (el) {
         path.push(el)
@@ -193,21 +203,22 @@ export default {
           return path
         }
 
-        el = el.parentElement
+        el = el.parentElement!
       }
+      return path
     },
     hideScroll () {
       if (this.$vuetify.breakpoint.smAndDown) {
-        document.documentElement.classList.add('overflow-y-hidden')
+        document.documentElement!.classList.add('overflow-y-hidden')
       } else {
-        window.addEventListener('wheel', this.scrollListener, { passive: false })
-        window.addEventListener('keydown', this.scrollListener)
+        window.addEventListener('wheel', this.scrollListener as EventHandlerNonNull, { passive: false })
+        window.addEventListener('keydown', this.scrollListener as EventHandlerNonNull)
       }
     },
     showScroll () {
-      document.documentElement.classList.remove('overflow-y-hidden')
-      window.removeEventListener('wheel', this.scrollListener)
-      window.removeEventListener('keydown', this.scrollListener)
+      document.documentElement!.classList.remove('overflow-y-hidden')
+      window.removeEventListener('wheel', this.scrollListener as EventHandlerNonNull)
+      window.removeEventListener('keydown', this.scrollListener as EventHandlerNonNull)
     }
   }
-}
+})

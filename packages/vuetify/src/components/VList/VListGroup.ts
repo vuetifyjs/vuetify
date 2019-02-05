@@ -1,25 +1,45 @@
 // Components
-import VIcon from '../../components/VIcon'
+import VIcon from '../VIcon'
+import VList from './VList'
 
 // Mixins
 import Bootable from '../../mixins/bootable'
 import Toggleable from '../../mixins/toggleable'
-import {
-  inject as RegistrableInject
-} from '../../mixins/registrable'
+import { Registrable, inject as RegistrableInject } from '../../mixins/registrable'
+import { Route } from 'vue-router'
 
 // Transitions
 import { VExpandTransition } from '../transitions'
 
-/* @vue/component */
-export default {
-  name: 'v-list-group',
+// Utils
+import mixins, { ExtractVue } from '../../util/mixins'
 
-  mixins: [
-    Bootable,
-    RegistrableInject('list', 'v-list-group', 'v-list'),
-    Toggleable
-  ],
+// Types
+import Vue, { VNode } from 'vue'
+
+type VListInstance = InstanceType<typeof VList>
+
+interface options extends Vue {
+  list: VListInstance
+  listClick: Function
+  $route: Route
+}
+
+export default mixins<options &
+/* eslint-disable indent */
+  ExtractVue<[
+    typeof Bootable,
+    typeof Toggleable,
+    Registrable<'list'>
+  ]>
+/* eslint-enable indent */
+>(
+  Bootable,
+  RegistrableInject('list', 'v-list-group', 'v-list'),
+  Toggleable
+  /* @vue/component */
+).extend({
+  name: 'v-list-group',
 
   inject: ['listClick'],
 
@@ -44,19 +64,19 @@ export default {
   }),
 
   computed: {
-    groupClasses () {
+    groupClasses (): object {
       return {
         'v-list__group--active': this.isActive,
         'v-list__group--disabled': this.disabled
       }
     },
-    headerClasses () {
+    headerClasses (): object {
       return {
         'v-list__group__header--active': this.isActive,
         'v-list__group__header--sub-group': this.subGroup
       }
     },
-    itemsClasses () {
+    itemsClasses (): object {
       return {
         'v-list__group__items--no-action': this.noAction
       }
@@ -83,7 +103,7 @@ export default {
   },
 
   mounted () {
-    this.list.register(this._uid, this.toggle)
+    this.list.register(this)
 
     if (this.group &&
       this.$route &&
@@ -98,14 +118,14 @@ export default {
   },
 
   methods: {
-    click (e) {
+    click (e: Event) {
       if (this.disabled) return
 
       this.$emit('click', e)
 
       this.isActive = !this.isActive
     },
-    genIcon (icon) {
+    genIcon (icon: string | false): VNode {
       return this.$createElement(VIcon, icon)
     },
     genAppendIcon () {
@@ -122,7 +142,7 @@ export default {
     genGroup () {
       return this.$createElement('div', {
         staticClass: 'v-list__group__header',
-        'class': this.headerClasses,
+        class: this.headerClasses,
         on: {
           ...this.$listeners,
           click: this.click
@@ -137,7 +157,7 @@ export default {
     genItems () {
       return this.$createElement('div', {
         staticClass: 'v-list__group__items',
-        'class': this.itemsClasses,
+        class: this.itemsClasses,
         directives: [{
           name: 'show',
           value: this.isActive
@@ -163,22 +183,22 @@ export default {
         this.$slots.prependIcon || this.genIcon(icon)
       ])
     },
-    toggle (uid) {
+    toggle (uid: number) {
       this.isActive = this._uid === uid
     },
-    matchRoute (to) {
+    matchRoute (to: string) {
       if (!this.group) return false
       return to.match(this.group) !== null
     }
   },
 
-  render (h) {
+  render (h): VNode {
     return h('div', {
       staticClass: 'v-list__group',
-      'class': this.groupClasses
+      class: this.groupClasses
     }, [
       this.genGroup(),
       h(VExpandTransition, [this.genItems()])
     ])
   }
-}
+})

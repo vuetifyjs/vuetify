@@ -7,20 +7,22 @@ import Themeable from '../../mixins/themeable'
 // Directives
 import Ripple from '../../directives/ripple'
 
+// Types
+import mixins from '../../util/mixins'
+import { VNode } from 'vue'
+
 /* @vue/component */
-export default {
+export default mixins(
+  Colorable,
+  Routable,
+  Toggleable,
+  Themeable
+).extend({
   name: 'v-list-tile',
 
   directives: {
     Ripple
   },
-
-  mixins: [
-    Colorable,
-    Routable,
-    Toggleable,
-    Themeable
-  ],
 
   inheritAttrs: false,
 
@@ -39,12 +41,12 @@ export default {
   }),
 
   computed: {
-    listClasses () {
+    listClasses (): object | undefined {
       return this.disabled
         ? { 'v-list--disabled': true }
         : undefined
     },
-    classes () {
+    classes (): object {
       return {
         'v-list__tile': true,
         'v-list__tile--link': this.isLink && !this.inactive,
@@ -55,13 +57,18 @@ export default {
         [this.activeClass]: this.isActive
       }
     },
-    isLink () {
-      return this.href || this.to ||
-        (this.$listeners && (this.$listeners.click || this.$listeners['!click']))
+    isLink (): boolean {
+      const hasClick = this.$listeners && (this.$listeners.click || this.$listeners['!click'])
+
+      return Boolean(
+        this.href ||
+        this.to ||
+        hasClick
+      )
     }
   },
 
-  render (h) {
+  render (h): VNode {
     const isRouteLink = !this.inactive && this.isLink
     const { tag, data } = isRouteLink ? this.generateRouteLink(this.classes) : {
       tag: this.tag || 'div',
@@ -80,4 +87,4 @@ export default {
       }
     }), [h(tag, data, this.$slots.default)])
   }
-}
+})
