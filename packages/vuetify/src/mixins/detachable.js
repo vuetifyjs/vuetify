@@ -40,8 +40,11 @@ export default {
 
   beforeMount () {
     this.$nextTick(() => {
-      if (this.activatorNode && this.activatorNode.elm) {
-        this.$el.parentNode.insertBefore(this.activatorNode.elm, this.$el)
+      if (this.activatorNode) {
+        const activator = Array.isArray(this.activatorNode) ? this.activatorNode : [this.activatorNode]
+        activator.forEach(node => {
+          node.elm && this.$el.parentNode.insertBefore(node.elm, this.$el)
+        })
       }
     })
   },
