@@ -304,7 +304,7 @@ export default mixins<options &
         }
       }, [
         this.genGradient(),
-        this.genClipPath(props.offsetX, 'sparkline-bar-' + this._uid),
+        this.genClipPath(props.offsetX, props.lineWidth, 'sparkline-bar-' + this._uid),
         this.showLabels ? this.genBarLabels(props as BarText) : undefined as never,
         this.$createElement('g', {
           attrs: {
@@ -324,7 +324,7 @@ export default mixins<options &
         ])
       ])
     },
-    genClipPath (offsetX: number, id: string) {
+    genClipPath (offsetX: number, lineWidth: number, id: string) {
       const { maxY } = this.boundary
       const rounding = typeof this.smooth === 'number'
         ? this.smooth
@@ -337,9 +337,9 @@ export default mixins<options &
       }, this.points.map(item =>
         this.$createElement('rect', {
           attrs: {
-            x: item.x - offsetX,
+            x: item.x,
             y: 0,
-            width: this.lineWidth,
+            width: lineWidth,
             height: Math.max(maxY - item.y, 0),
             rx: rounding,
             ry: rounding
