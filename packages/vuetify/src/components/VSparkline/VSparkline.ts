@@ -337,7 +337,7 @@ export default mixins<options &
       }, this.points.map(item =>
         this.$createElement('rect', {
           attrs: {
-            x: item.x,
+            x: item.x - offsetX,
             y: 0,
             width: lineWidth,
             height: Math.max(maxY - item.y, 0),
@@ -363,7 +363,7 @@ export default mixins<options &
       const children = props.points.map(item => (
         this.$createElement('text', {
           attrs: {
-            x: item.x - offsetX * -0.45 + 1.5,
+            x: item.x - (offsetX * 1.9),
             y: props.boundary.maxY + 4,
             'font-size': 4
           }
