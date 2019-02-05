@@ -3,10 +3,10 @@
     <v-layout column>
       <main-header>Tooltips</main-header>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Simple
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout justify-space-around>
           <v-tooltip left>
             <v-btn
@@ -52,12 +52,12 @@
             <span>Right tooltip</span>
           </v-tooltip>
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Programmatic visibility control
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-layout
           flex
           column
@@ -89,7 +89,7 @@
             </v-tooltip>
           </v-flex>
         </v-layout>
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>
@@ -103,9 +103,3 @@
     })
   }
 </script>
-
-<style scoped>
-.center {
-  align-self: center;
-}
-</style>

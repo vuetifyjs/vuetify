@@ -165,7 +165,7 @@ export default {
       if (this.fullscreen) {
         document.documentElement.classList.add('overflow-y-hidden')
       } else {
-        Overlayable.methods.hideScroll.call(this)
+        Overlayable.options.methods.hideScroll.call(this)
       }
     },
     show () {
@@ -192,7 +192,7 @@ export default {
         }
       }
 
-      if (this.$scopedSlots.activator) {
+      if (this.$scopedSlots.activator && this.$scopedSlots.activator.length) {
         const activator = this.$scopedSlots.activator({ on: listeners })
         this.activatorNode = activator
         return activator
@@ -204,7 +204,7 @@ export default {
           'v-dialog__activator--disabled': this.disabled
         },
         on: listeners
-      }, [this.$slots.activator])
+      }, this.$slots.activator)
     }
   },
 

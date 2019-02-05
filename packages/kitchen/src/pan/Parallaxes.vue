@@ -3,17 +3,17 @@
     <v-layout column>
       <main-header>Parallaxes</main-header>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Basic
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material.jpg" />
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         With content
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-parallax
           dark
           src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
@@ -31,24 +31,24 @@
             </h4>
           </v-layout>
         </v-parallax>
-      </v-flex>
+      </core-section>
 
-      <h3 class="title grey--text mb-4 mt-5 center">
+      <core-title>
         Custom height
-      </h3>
-      <v-flex>
+      </core-title>
+      <core-section>
         <v-parallax
           height="300"
           src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg"
         />
-      </v-flex>
+      </core-section>
 
-      <v-flex>
+      <core-section>
         <v-parallax
           height="700"
           src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg"
         />
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>
@@ -64,9 +64,5 @@
 <style scoped>
 .flex {
   margin-top: 2rem;
-}
-
-.center {
-  align-self: center;
 }
 </style>

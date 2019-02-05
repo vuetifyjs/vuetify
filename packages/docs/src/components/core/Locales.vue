@@ -26,7 +26,7 @@
         v-for="language in languages"
         :key="language.locale"
         avatar
-        @click="translateI18n(language.locale)"
+        @click="translateI18n(language)"
       >
         <v-list-tile-avatar
           tile
@@ -56,12 +56,14 @@
 
     computed: {
       currentLanguage () {
-        return this.languages.find(l => l.locale === this.$i18n.locale)
+        const locale = this.$i18n.locale
+        return this.languages.find(l => l.alternate === locale || l.locale === locale)
       }
     },
 
     methods: {
       translateI18n (lang) {
+        lang = lang.alternate || lang.locale
         // If we're switching in or out of translating
         // then we need to force a reload to make sure
         // that crowdin script is loaded (or unloaded)

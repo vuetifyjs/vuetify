@@ -1,0 +1,71 @@
+{
+  "header": "# Chip",
+  "headerText": "The `v-chip` component is used to convey small pieces of information. Using the `close` property, the chip becomes interactive, allowing user interaction. This component is used by the [v-chip-group](/components/chip-groups) for advanced selection options.",
+  "examples": {
+    "usage": {
+      "desc": "Chips come in 4 primary variations. Regular, with icon, with portrait and closeable.",
+      "uninverted": true
+    },
+    "colored": {
+      "header": "### Colored",
+      "desc": "Any color from the Material Design palette can be used to change a chips color."
+    },
+    "icon": {
+      "header": "### Icon",
+      "desc": "Chips can use text or any icon available in the Material Icons font library."
+    },
+    "outline": {
+      "header": "### Outline",
+      "desc": "Outlined chips inherit their border color from the current text color."
+    },
+    "label": {
+      "header": "### Label",
+      "desc": "Label chips use the `v-card` border-radius."
+    },
+    "closable": {
+      "header": "### Closable",
+      "desc": "Closable chips can be controlled with a v-model. Listen to the `input` event if you want to know when a chip has been closed.",
+      "uninverted": true
+    },
+    "inSelects": {
+      "header": "### In selects",
+      "desc": "Selects can use chips to display the selected data. Try adding your own tags below.",
+      "uninverted": true
+    },
+    "photos": {
+      "header": "### Custom lists",
+      "desc": "In this example we opt to use a customized list instead of [v-autocomplete](/components/autocompletes). This allows us to always display the options available while still providing the same functionality of search and selection."
+    },
+    "actionChips": {
+      "header": "### Action chips",
+      "desc": "Chips can be used as actionable items. Provided with a _click_ event, the chip becomes interactive and can invoke methods."
+    },
+    "filtering": {
+      "header": "### Additional filtering",
+      "desc": "Chips are great for providing supplementary actions to a particular task. In this instance, we are searching a list of items and collecting a subset of information to display available keywords."
+    },
+    "expandable": {
+      "header": "### Expandable",
+      "desc": "Chips can be combined with `v-menu` to enable a specific set of actions for a chip."
+    },
+    "playground": {
+      "header": "### Playground",
+      "desc": "Explore the various options available to the `v-chip` component."
+    }
+  },
+  "props": {
+    "draggable": "Makes the chip draggable",
+    "close": "Adds remove button",
+    "closeIcon": "Change the default icon used for **close** chips",
+    "disabled": "Disables the chip, making it un-selectable",
+    "filter": "Displays a selection icon when selected",
+    "filterIcon": "Change the default icon used for **filter** chips",
+    "inputValue": "Designates whether the component is selected, highlighting the chip",
+    "label": "Removes circle edges",
+    "link": "Explicitly define the chip as a link",
+    "outline": "Removes background and applies border and text color",
+    "outlined": "Removes background and applies border and text color",
+    "pill": "Remove `v-avatar` padding.",
+    "selected": "Applies a selection color to the chip. Primarily used for displaying highlight context in `v-select`"
+  }
+}

@@ -153,7 +153,9 @@ export default Vue.extend({
       if (this.disabled) return
 
       val ? this.callActivate() : this.callDeactivate()
-    }
+    },
+    positionX: 'updateDimensions',
+    positionY: 'updateDimensions'
   },
 
   beforeMount () {

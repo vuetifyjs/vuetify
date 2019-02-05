@@ -1,6 +1,8 @@
 <template>
-  <div class="text-xs-center">
-    <v-btn color="primary" dark ripple>Default Ripple</v-btn>
-    <v-btn :ripple="false" color="primary" dark>Ripple Disabled</v-btn>
+  <div
+    v-ripple
+    class="text-xs-center elevation-2 pa-5 headline"
+  >
+    HTML element with v-ripple
   </div>
 </template>

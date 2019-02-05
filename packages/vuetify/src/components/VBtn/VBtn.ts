@@ -95,7 +95,7 @@ export default baseMixins.extend<options>().extend({
         'v-btn--outline': this.outline,
         'v-btn--right': this.right,
         'v-btn--round': this.isRound,
-        'v-btn--rounded': this.round,
+        'v-btn--rounded': this.round || this.rounded,
         'v-btn--router': this.to,
         'v-btn--text': this.text,
         'v-btn--top': this.top,

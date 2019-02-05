@@ -1,0 +1,184 @@
+// Imports
+@import '../../styles/styles.sass'
+@import './_mixins.sass'
+@import './_variables.scss'
+
+// Theme
+.v-chip:not(.v-chip--outlined)
+  &.primary,
+  &.secondary,
+  &.accent,
+  &.success,
+  &.error,
+  &.warning,
+  &.info
+    color: map-deep-get($material-dark, 'text', 'primary')
+
+.v-chip.theme--light
+  +chip-theme($material-light)
+.v-chip.theme--dark
+  +chip-theme($material-dark)
+
+// Block
+.v-chip
+  align-items: center
+  cursor: default
+  display: inline-flex
+  line-height: 20px
+  outline: none
+  padding: 0 12px
+  position: relative
+  transition-duration: 0.28s
+  transition-property: box-shadow, opacity, background
+  transition-timing-function: map-get($transition, 'fast-out-slow-in')
+  vertical-align: middle
+
+  &:after
+    background-color: currentColor
+    bottom: 0
+    border-radius: inherit
+    content: ''
+    left: 0
+    opacity: 0
+    position: absolute
+    pointer-events: none
+    right: 0
+    top: 0
+    transition: opacity 0.2s map-get($transition, 'ease-in-out')
+
+  // Important is needed to account for new avatar structure
+  .v-avatar
+    height: 24px !important
+    width: 24px !important
+
+  .v-icon
+    font-size: 24px
+
+  .v-avatar,
+  .v-icon
+    &--left
+      margin-left: -6px
+      margin-right: 8px
+
+    &--right
+      margin-left: 8px
+      margin-right: -6px
+
+    +rtl()
+      &--left
+        margin-left: 8px
+        margin-right: -6px
+
+      &--right
+        margin-left: -6px
+        margin-right: 8px
+
+  &:not(.v-chip--no-color)
+    .v-icon
+      color: inherit
+
+// Elements
+.v-chip__close.v-icon
+  font-size: 18px
+  max-height: 18px
+  max-width: 18px
+  user-select: none
+
+  &.v-icon--right
+    margin-right: -4px
+
+    +rtl()
+      margin-left: -4px
+      margin-right: 8px
+
+  &:hover,
+  &:focus,
+  &:active
+    opacity: .72
+
+.v-chip__content
+  align-items: center
+  display: inline-flex
+  height: 100%
+
+// Modifiers
+.v-chip--clickable
+  cursor: pointer
+
+  &:focus:after
+    opacity: .36
+
+  &:hover:after
+    opacity: .18
+
+  &:active
+    +elevation(2)
+
+.v-chip--disabled
+  opacity: .4
+  pointer-events: none
+  user-select: none
+
+.v-chip__filter
+  // TODO: Figure out why the absence
+  // of this breaks the transition
+  max-width: 24px
+
+  // Increase specificity to
+  // overwrite theme style
+  &.v-icon
+    color: inherit
+
+  &.expand-x-transition-leave-active,
+  &.expand-x-transition-enter
+    margin: 0
+
+.v-chip--pill
+  .v-chip__filter
+    margin-right: 16px
+
+  .v-avatar
+    height: 32px !important
+    width: 32px !important
+
+  .v-avatar
+    &--left
+      margin-left: -12px
+
+    &--right
+      margin-right: -12px
+
+    +rtl()
+      &--left
+        margin-left: 8px
+        margin-right: -12px
+
+      &--right
+        margin-left: -12px
+        margin-right: 8px
+
+.v-chip--label
+  border-radius: 4px !important
+
+.v-chip.v-chip--outlined
+  background-color: transparent !important
+  border-width: $icon-outlined-border-width
+  border-style: solid
+
+  .v-icon
+    color: inherit
+
+// Needs increased specificity
+// to overwrite theme color
+.v-chip.v-chip--selected
+  background: transparent
+
+  &:after
+    opacity: .28
+
+.v-chip
+  @each $name, $size in $icon-sizes
+    &.v-size--#{$name}
+      border-radius: #{map-get($size, 'height') / 2}px
+      font-size: #{map-get($size, 'font-size')}px
+      height: #{map-get($size, 'height')}px

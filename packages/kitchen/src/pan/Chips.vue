@@ -6,10 +6,10 @@
     >
       <main-header>Chips</main-header>
 
-      <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Simple
-        </h3>
+      <core-title>
+        Simple
+      </core-title>
+      <core-section>
         <v-layout
           align-center
           justify-space-around
@@ -20,7 +20,7 @@
           </v-chip>
           <v-chip>Example Chip</v-chip>
           <v-chip close>
-            <v-avatar>
+            <v-avatar left>
               <img
                 src="https://randomuser.me/api/portraits/men/35.jpg"
                 alt="trevor"
@@ -28,19 +28,58 @@
             </v-avatar>
             Trevor Hansen
           </v-chip>
-          <v-chip>
-            <v-avatar class="teal">
+          <v-chip disabled>
+            <v-avatar
+              color="teal"
+              left
+              class="white--text"
+            >
               A
             </v-avatar>
             ANZ Bank
           </v-chip>
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Colors
-        </h3>
+      <core-title>
+        Clickable
+      </core-title>
+      <core-section>
+        <v-layout
+          align-center
+          justify-space-around
+          wrap
+        >
+          <v-chip close @click="() => {}">
+            Example Chip
+          </v-chip>
+          <v-chip>Example Chip</v-chip>
+          <v-chip close @click="() => {}">
+            <v-avatar left>
+              <img
+                src="https://randomuser.me/api/portraits/men/35.jpg"
+                alt="trevor"
+              >
+            </v-avatar>
+            Trevor Hansen
+          </v-chip>
+          <v-chip disabled @click="() => {}">
+            <v-avatar
+              color="teal"
+              left
+              class="white--text"
+            >
+              A
+            </v-avatar>
+            ANZ Bank
+          </v-chip>
+        </v-layout>
+      </core-section>
+
+      <core-title>
+        Colors
+      </core-title>
+      <core-section>
         <v-layout
           align-center
           justify-space-around
@@ -74,12 +113,12 @@
             Colored Chip
           </v-chip>
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          With icons
-        </h3>
+      <core-title>
+        With icons
+      </core-title>
+      <core-section>
         <v-layout
           align-center
           justify-space-around
@@ -89,9 +128,9 @@
             color="indigo"
             text-color="white"
           >
-            <v-avatar>
-              <v-icon>mdi-account-circle</v-icon>
-            </v-avatar>
+            <v-icon left>
+              mdi-account-circle
+            </v-icon>
             Ranee
           </v-chip>
 
@@ -119,7 +158,10 @@
             color="green"
             text-color="white"
           >
-            <v-avatar class="green darken-4">
+            <v-avatar
+              class="green darken-4"
+              left
+            >
               1
             </v-avatar>
             Years
@@ -130,52 +172,53 @@
             color="teal"
             text-color="white"
           >
-            <v-avatar>
-              <v-icon>mdi-check-circle</v-icon>
-            </v-avatar>
+            <v-icon left>
+              mdi-check-circle
+            </v-icon>
             Confirmed
           </v-chip>
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Outline
-        </h3>
+      <core-title>
+        Outline
+      </core-title>
+      <core-section>
         <v-layout
           align-center
           justify-space-around
           wrap
         >
           <v-chip
-            outline
+            outlined
             color="secondary"
           >
             Outline
           </v-chip>
 
           <v-chip
-            outline
+            outlined
             color="primary"
           >
             Colored
           </v-chip>
 
           <v-chip
-            outline
+            outlined
             color="red"
           >
             <v-icon left>
               mdi-wrench
-            </v-icon>Icon
+            </v-icon>
+            Icon
           </v-chip>
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Labels
-        </h3>
+      <core-title>
+        Labels
+      </core-title>
+      <core-section>
         <v-layout
           align-center
           justify-space-around
@@ -192,23 +235,24 @@
           >
             <v-icon left>
               mdi-label
-            </v-icon>Tags
+            </v-icon>
+            Tags
           </v-chip>
 
           <v-chip
             label
-            outline
+            outlined
             color="red"
           >
             Outline
           </v-chip>
         </v-layout>
-      </v-flex>
+      </core-section>
 
-      <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Closable
-        </h3>
+      <core-title>
+        Closable
+      </core-title>
+      <core-section>
         <v-layout
           align-center
           justify-space-around
@@ -226,41 +270,45 @@
           </div>
 
           <v-chip
-            v-model="chip1"
+            v-if="chip1"
             close
+            @click:close="chip1 = false"
           >
             Closable
           </v-chip>
 
           <v-chip
-            v-model="chip2"
+            v-if="chip2"
             close
             color="red"
             text-color="white"
+            @click:close="chip2 = false"
           >
             Remove
           </v-chip>
 
           <v-chip
-            v-model="chip3"
+            v-if="chip3"
             close
             color="green"
-            outline
+            outlined
+            @click:close="chip3 = false"
           >
             Success
           </v-chip>
 
           <v-chip
-            v-model="chip4"
+            v-if="chip4"
             close
             color="orange"
             label
-            outline
+            outlined
+            @click:close="chip4 = false"
           >
             Complete
           </v-chip>
         </v-layout>
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>

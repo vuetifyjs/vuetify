@@ -6,10 +6,8 @@
     >
       <main-header>Avatars</main-header>
 
-      <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Round
-        </h3>
+      <core-title>Round</core-title>
+      <core-section>
         <v-layout
           justify-space-around
           align-center
@@ -40,11 +38,10 @@
             <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png">
           </v-avatar>
         </v-layout>
-      </v-flex>
-      <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          Tile
-        </h3>
+      </core-section>
+
+      <core-title>Tile</core-title>
+      <core-section>
         <v-layout
           justify-space-around
           align-center
@@ -79,11 +76,10 @@
             <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png">
           </v-avatar>
         </v-layout>
-      </v-flex>
-      <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          With icons
-        </h3>
+      </core-section>
+
+      <core-title>With icons</core-title>
+      <core-section>
         <v-layout
           align-center
           justify-space-around
@@ -122,11 +118,10 @@
             </v-icon>
           </v-avatar>
         </v-layout>
-      </v-flex>
-      <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          With images
-        </h3>
+      </core-section>
+
+      <core-title>With images</core-title>
+      <core-section>
         <v-layout
           align-center
           justify-space-around
@@ -157,11 +152,10 @@
             >
           </v-avatar>
         </v-layout>
-      </v-flex>
-      <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          With badges
-        </h3>
+      </core-section>
+
+      <core-title>With badges</core-title>
+      <core-section>
         <v-layout
           align-center
           justify-space-around
@@ -224,11 +218,10 @@
             </v-avatar>
           </v-badge>
         </v-layout>
-      </v-flex>
-      <v-flex>
-        <h3 class="title grey--text mb-4 mt-5">
-          With letters
-        </h3>
+      </core-section>
+
+      <core-title>With letters</core-title>
+      <core-section>
         <v-layout
           align-center
           justify-space-around
@@ -306,7 +299,7 @@
             </span>
           </v-avatar>
         </v-layout>
-      </v-flex>
+      </core-section>
     </v-layout>
   </v-container>
 </template>
@@ -319,9 +312,3 @@
     })
   }
 </script>
-
-<style scoped>
-.flex {
-  margin-top: 2rem;
-}
-</style>

@@ -455,4 +455,33 @@ test('VMenu.js', ({ mount, compileToFunctions }) => {
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
+
+  it('should update position dynamically', async () => {
+    const wrapper = mount(VMenu, {
+      propsData: {
+        absolute: true,
+        value: true,
+        positionX: 100,
+        positionY: 200,
+      }
+    })
+
+    const content = wrapper.find('.v-menu__content')[0]
+
+    const sleep = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds))
+
+    // TODO replace with jest fakeTimers when it will support requestAnimationFrame: https://github.com/facebook/jest/pull/7776
+    // See https://github.com/vuetifyjs/vuetify/pull/6330#issuecomment-460083547 for details
+    await sleep(50)
+    expect(content.getAttribute('style')).toMatchSnapshot()
+
+    wrapper.setProps({
+      positionX: 110,
+      positionY: 220
+    })
+    await sleep(50)
+    expect(content.getAttribute('style')).toMatchSnapshot()
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
 })

@@ -229,6 +229,7 @@ const VSelect = {
         parent: 'VueComponent',
         item: 'object',
         index: 'number',
+        select: 'function',
         selected: 'boolean',
         disabled: 'boolean'
       }
@@ -556,7 +557,7 @@ module.exports = {
       },
       {
         name: 'touchmove:day',
-        value:VTimestampWithTime
+        value: VTimestampWithTime
       },
       {
         name: 'touchend:day',
@@ -1148,6 +1149,22 @@ module.exports = {
       {
         name: 'input',
         value: 'string'
+      },
+      {
+        name: 'change',
+        value: 'string'
+      },
+      {
+        name: 'click:hour',
+        value: 'string'
+      },
+      {
+        name: 'click:minute',
+        value: 'string'
+      },
+      {
+        name: 'click:second',
+        value: 'string'
       }
     ]
   },
@@ -1178,6 +1195,12 @@ module.exports = {
       {
         name: 'append',
         props: VTreeviewScopedProps
+      }
+    ],
+    functions: [
+      {
+        name: 'updateAll',
+        signature: '(val: boolean): void'
       }
     ]
   },

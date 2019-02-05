@@ -26,6 +26,7 @@ import Vuetify, {
   VCarouselItem,
   VCheckbox,
   VChip,
+  VChipGroup,
   VCombobox,
   VCounter,
   VDataIterator,
@@ -82,6 +83,8 @@ import Vuetify, {
   VRating,
   VResponsive,
   VSelect,
+  VSlideGroup,
+  VSlideItem,
   VSlider,
   VSnackbar,
   VSparkline,
@@ -135,6 +138,7 @@ import Vuetify, {
   VSlideYTransition,
   VSlideYReverseTransition,
   VExpandTransition,
+  VExpandXTransition,
   VRowExpandTransition
 } from '@/entry-lib'
 
@@ -164,6 +168,7 @@ const components = {
   VCarouselItem,
   VCheckbox,
   VChip,
+  VChipGroup,
   VCombobox,
   VCounter,
   VDataIterator,
@@ -220,6 +225,8 @@ const components = {
   VRating,
   VResponsive,
   VSelect,
+  VSlideGroup,
+  VSlideItem,
   VSlider,
   VSnackbar,
   VSparkline,
@@ -273,6 +280,7 @@ const components = {
   VSlideYTransition,
   VSlideYReverseTransition,
   VExpandTransition,
+  VExpandXTransition,
   VRowExpandTransition
 }
 

@@ -81,6 +81,10 @@ export default VWindow.extend({
       this.$emit('input', val)
     },
     interval: 'restartTimeout',
+    height (val, oldVal) {
+      if (val === oldVal || !val) return
+      this.internalHeight = val
+    },
     cycle (val) {
       if (val) {
         this.restartTimeout()
