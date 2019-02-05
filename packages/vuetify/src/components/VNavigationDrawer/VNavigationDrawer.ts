@@ -19,8 +19,8 @@ import mixins from '../../util/mixins'
 
 // TYpes
 import { VNode } from 'vue/types/vnode'
+import { PropValidator } from 'vue/types/options'
 
-/* @vue/component */
 export default mixins(
   Applicationable('left', [
     'miniVariant',
@@ -31,6 +31,7 @@ export default mixins(
   Overlayable,
   SSRBootable,
   Themeable
+/* @vue/component */
 ).extend({
   name: 'v-navigation-drawer',
 
@@ -67,7 +68,7 @@ export default mixins(
       type: [Number, String],
       default: 300
     },
-    value: { required: false }
+    value: { required: false } as PropValidator<any>
   },
 
   data: () => ({
@@ -80,12 +81,8 @@ export default mixins(
 
   computed: {
     /**
-     * Used for setting an app
-     * value from a dynamic
-     * property. Called from
-     * applicationable.js
-     *
-     * @return {string}
+     * Used for setting an app value from a dynamic
+     * property. Called from applicationable.js
      */
     applicationProperty (): string {
       return this.right ? 'right' : 'left'
@@ -181,7 +178,7 @@ export default mixins(
       const styles = {
         height: convertToUnit(this.height),
         marginTop: `${this.marginTop}px`,
-        maxHeight: `calc(100% - ${+this.maxHeight}px)`,
+        maxHeight: this.maxHeight == null || `calc(100% - ${+this.maxHeight}px)`,
         transform: `translateX(${this.calculatedTransform}px)`,
         width: `${this.calculatedWidth}px`
       }
@@ -201,10 +198,8 @@ export default mixins(
       this.callUpdate()
     },
     /**
-     * When mobile changes, adjust
-     * the active state only when
-     * there has been a previous
-     * value
+     * When mobile changes, adjust the active state
+     * only when there has been a previous value
      */
     isMobile (val, prev) {
       !val &&
@@ -221,8 +216,7 @@ export default mixins(
       this.callUpdate()
     },
     permanent (val) {
-      // If enabling prop
-      // enable the drawer
+      // If enabling prop enable the drawer
       if (val) {
         this.isActive = true
       }
@@ -238,7 +232,10 @@ export default mixins(
     value (val) {
       if (this.permanent) return
 
-      if (val == null) return this.init()
+      // TODO: referring to this directly causes type errors
+      // all over the place for some reason
+      const _this = this as any
+      if (val == null) return _this.init()
 
       if (val !== this.isActive) this.isActive = val
     }
@@ -251,7 +248,7 @@ export default mixins(
   methods: {
     calculateTouchArea () {
       if (!this.$el.parentNode) return
-      const parentRect = this.$el.parentNode.getBoundingClientRect()
+      const parentRect = (this.$el.parentNode as Element).getBoundingClientRect()
 
       this.touchArea = {
         left: parentRect.left + 50,
@@ -285,8 +282,6 @@ export default mixins(
     /**
      * Sets state before mount to avoid
      * entry transitions in SSR
-     *
-     * @return {void}
      */
     init () {
       if (this.permanent) {
@@ -321,8 +316,6 @@ export default mixins(
     },
     /**
      * Update the application layout
-     *
-     * @return {number}
      */
     updateApplication () {
       return !this.isActive ||
