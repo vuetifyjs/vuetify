@@ -305,7 +305,7 @@ export default mixins<options &
       }, [
         this.genGradient(),
         this.genClipPath(props.offsetX, props.lineWidth, 'sparkline-bar-' + this._uid),
-        this.showLabels ? this.genBarLabels(props as BarText) : undefined as never,
+        this.hasLabels ? this.genBarLabels(props as BarText) : undefined as never,
         this.$createElement('g', {
           attrs: {
             transform: `scale(1,-1) translate(0,-${boundary.maxY})`,
@@ -363,8 +363,9 @@ export default mixins<options &
       const children = props.points.map(item => (
         this.$createElement('text', {
           attrs: {
-            x: item.x - offsetX * -0.45 - 10,
-            y: props.boundary.maxY + 10
+            x: item.x - offsetX * -0.45 + 1.5,
+            y: props.boundary.maxY + 4,
+            'font-size': 4
           }
         }, item.value.toString())
       ))
