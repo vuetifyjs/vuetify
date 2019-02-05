@@ -1195,6 +1195,12 @@ module.exports = {
         name: 'append',
         props: VTreeviewScopedProps
       }
+    ],
+    functions: [
+      {
+        name: 'updateAll',
+        signature: '(val: boolean): void'
+      }
     ]
   },
   'v-window': {
