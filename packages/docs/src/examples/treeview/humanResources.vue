@@ -3,7 +3,7 @@
     class="mx-auto"
     max-width="500"
   >
-    <v-card-title class="primary lighten-2">
+    <v-sheet class="pa-3 primary lighten-2">
       <v-text-field
         v-model="search"
         label="Search Company Directory"
@@ -14,11 +14,18 @@
         clearable
         clear-icon="mdi-close-circle-outline"
       ></v-text-field>
-    </v-card-title>
+      <v-checkbox
+        v-model="caseSensitive"
+        dark
+        hide-details
+        label="Case sensitive search"
+      ></v-checkbox>
+    </v-sheet>
     <v-card-text>
       <v-treeview
         :items="items"
         :search="search"
+        :filter="filter"
         :open.sync="open"
       >
         <template
@@ -105,7 +112,15 @@
         }
       ],
       open: [1, 2],
-      search: null
-    })
+      search: null,
+      caseSensitive: false
+    }),
+    computed: {
+      filter () {
+        return this.caseSensitive
+          ? (item, search, textKey) => item[textKey].indexOf(search) > -1
+          : undefined
+      }
+    }
   }
 </script>

@@ -324,38 +324,6 @@ export const camelize = (str: string): string => {
   return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : '')
 }
 
-export function filterTreeItems (
-  item: any,
-  search: string,
-  idKey: string,
-  textKey: string,
-  childrenKey: string,
-  excluded: Set<string | number>
-): boolean {
-  const text = getObjectValueByPath(item, textKey)
-
-  if (text.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) > -1) {
-    return true
-  }
-
-  const children = getObjectValueByPath(item, childrenKey)
-
-  if (children) {
-    let match = false
-    for (let i = 0; i < children.length; i++) {
-      if (filterTreeItems(children[i], search, idKey, textKey, childrenKey, excluded)) {
-        match = true
-      }
-    }
-
-    if (match) return true
-  }
-
-  excluded.add(getObjectValueByPath(item, idKey))
-
-  return false
-}
-
 /**
  * Returns the set difference of B and A, i.e. the set of elements in B but not in A
  */

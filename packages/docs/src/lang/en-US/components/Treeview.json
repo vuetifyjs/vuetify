@@ -19,7 +19,7 @@
     },
     "humanResources": {
       "header": "### Searching a directory",
-      "desc": "Easily filter your treeview by using the **search** prop. This works similar to the [v-autocomplete](/components/autocompletes) component."
+      "desc": "Easily filter your treeview by using the **search** prop. You can easily apply your custom filtering function if you need case-sensitive or fuzzy filtering by setting the **filter** prop. This works similar to the [v-autocomplete](/components/autocompletes) component."
     }
   },
   "props": {
@@ -30,6 +30,7 @@
       "customFilter": "Custom search filter",
       "expandIcon": "Icon used to indicate that a node can be expanded",
       "hoverable": "Applies a hover class when mousing over nodes",
+      "filter": "Custom item filtering function. By default it will use case-insensitive search in item's label.",
       "indeterminateIcon": "Icon used when node is in an indeterminate state",
       "itemChildren": "Property on supplied `items` that contains its children",
       "itemKey": "Property on supplied `items` used to keep track of node state. The value of this property has to be unique among all items.",

@@ -47,7 +47,7 @@
       "readonly": "1.2"
     },
     "v-treeview": {
-      "customFilter": "1.5",
+      "filter": "1.5",
       "search": "1.5"
     },
     "v-select": {

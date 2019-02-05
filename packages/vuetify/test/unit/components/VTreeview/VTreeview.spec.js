@@ -440,6 +440,39 @@ test('VTreeView.ts', ({ mount }) => {
     expect(wrapper.find('.v-treeview-node--excluded').length).toBe(1)
   })
 
+  it('should filter items using custom item filter', async () => {
+    const wrapper = mount(VTreeview, {
+      propsData: {
+        filter: (item, search, textKey) => item.special === search,
+        items: [
+          {
+            id: 1,
+            name: 'one',
+            special: 'yes'
+          },
+          {
+            id: 2,
+            name: 'two',
+            special: 'no'
+          }
+        ],
+        search: 'NO'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('.v-treeview-node--excluded').length).toBe(2)
+
+    wrapper.setProps({
+      search: 'yes'
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('.v-treeview-node--excluded').length).toBe(1)
+  })
+
   it('should emit objects when return-object prop is used', async () => {
     const items = [{ id: 0, name: 'Root', children: [{ id: 1, name: 'Child' }] }]
 

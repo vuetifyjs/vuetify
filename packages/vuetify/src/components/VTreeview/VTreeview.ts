@@ -13,9 +13,18 @@ import Themeable from '../../mixins/themeable'
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
 // Utils
-import { getObjectValueByPath, deepEqual, filterTreeItems, arrayDiff } from '../../util/helpers'
+import {
+  arrayDiff,
+  deepEqual,
+  getObjectValueByPath
+} from '../../util/helpers'
 import mixins from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
+import {
+  filterTreeItems,
+  FilterTreeItemFunction,
+  filterTreeItem
+} from './util/filterTreeItems'
 
 type VTreeviewNodeInstance = InstanceType<typeof VTreeviewNode>
 
@@ -69,20 +78,7 @@ export default mixins(
       default: () => ([])
     } as PropValidator<NodeArray>,
     search: String,
-    customFilter: {
-      type: Function as any,
-      default: (items, search, idKey, textKey, childrenKey) => {
-        const excluded = new Set<string|number>()
-
-        if (!search) return excluded
-
-        for (let i = 0; i < items.length; i++) {
-          filterTreeItems(items[i], search, idKey, textKey, childrenKey, excluded)
-        }
-
-        return excluded
-      }
-    } as PropValidator<(items: any[], search: string, idKey: string, textKey: string, childrenKey: string) => Set<string|number>>,
+    filter: Function as PropValidator<FilterTreeItemFunction>,
     ...VTreeviewNodeProps
   },
 
@@ -95,7 +91,23 @@ export default mixins(
 
   computed: {
     excludedItems (): Set<string | number> {
-      return this.customFilter(this.items.slice(), this.search, this.itemKey, this.itemText, this.itemChildren)
+      const excluded = new Set<string|number>()
+
+      if (!this.search) return excluded
+
+      for (let i = 0; i < this.items.length; i++) {
+        filterTreeItems(
+          this.filter || filterTreeItem,
+          this.items[i],
+          this.search,
+          this.itemKey,
+          this.itemText,
+          this.itemChildren,
+          excluded
+        )
+      }
+
+      return excluded
     }
   },
 
