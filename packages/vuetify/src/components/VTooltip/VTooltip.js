@@ -158,16 +158,16 @@ export default {
         }
       }
 
-      if (this.$slots.activator) {
-        return this.$createElement('span', {
-          on: listeners,
-          ref: 'activator'
-        }, this.$slots.activator)
-      } else if (this.$scopedSlots.activator) {
+      if (this.$scopedSlots.activator && this.$scopedSlots.activator.length) {
         const activator = this.$scopedSlots.activator({ on: listeners })
         this.activatorNode = activator
         return activator
       }
+
+      return this.$createElement('span', {
+        on: listeners,
+        ref: 'activator'
+      }, this.$slots.activator)
     }
   },
 

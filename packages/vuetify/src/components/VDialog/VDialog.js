@@ -192,7 +192,7 @@ export default {
         }
       }
 
-      if (this.$scopedSlots.activator && !this.$slots.activator) {
+      if (this.$scopedSlots.activator && this.$scopedSlots.activator.length) {
         const activator = this.$scopedSlots.activator({ on: listeners })
         this.activatorNode = activator
         return activator
@@ -204,7 +204,7 @@ export default {
           'v-dialog__activator--disabled': this.disabled
         },
         on: listeners
-      }, [this.$slots.activator])
+      }, this.$slots.activator)
     }
   },
 
