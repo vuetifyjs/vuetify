@@ -12492,10 +12492,10 @@ vue-router@^3.0.1:
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.1.tgz#d9b05ad9c7420ba0f626d6500d693e60092cc1e9"
   integrity sha512-vLLoY452L+JBpALMP5UHum9+7nzR9PeIBCghU9ZtJ1eWm6ieUI8Zb/DI3MYxH32bxkjzYV1LRjNv4qr8d+uX/w==
 
-vue-server-renderer@^2.6.0-beta.3:
-  version "2.6.0-beta.3"
-  resolved "https://registry.yarnpkg.com/vue-server-renderer/-/vue-server-renderer-2.6.0-beta.3.tgz#b07b8beaa7c1d058aae68f3b0126bff68f3c2e22"
-  integrity sha512-ifbBkA1LkCW2xArUuP0pDF7Nvu5kOc0i19i41FuSPxwzZ/LGhH4oaQVnb7mz5iMB9TYbT/w1FDmXR5ErhuRg3A==
+vue-server-renderer@^2.6.2:
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/vue-server-renderer/-/vue-server-renderer-2.6.2.tgz#89faa6d87e94f9333276a4ee9cd39bece97059db"
+  integrity sha512-UAAKbYhcT9WRP7L4aRR/c6e/GXBj5lwR9H8AQ+b/lbwVwMauHyYNdhQzFmLFZfujNAjZK6+mQQVtdMoa2J8Y5g==
   dependencies:
     chalk "^1.1.3"
     hash-sum "^1.0.2"
@@ -12522,10 +12522,10 @@ vue-style-loader@^4.1.2:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-template-compiler@^2.6.0-beta.3:
-  version "2.6.0-beta.3"
-  resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.6.0-beta.3.tgz#4091985b7c1e1817b0e08ebbafc00c2ccefbb366"
-  integrity sha512-UNA5zZxrG6gKtuiGFbMuisKhcSSJruZqA7Q2zyWyhcLZEMzTC8BsWzKGXTm2IvnnTajHoTXPlKFWnL84E85exg==
+vue-template-compiler@^2.6.2:
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.6.2.tgz#6230abf7ca92d565b7471c0cc3f54d5b12aa48e7"
+  integrity sha512-2dBKNCtBPdx1TFef7T4zwF8IjOx2xbMNryCtFzneP+XIonJwOtnkq4s1mhKv8W79gXcGINQWtuaxituGAcuSnA==
   dependencies:
     de-indent "^1.0.2"
     he "^1.1.0"
@@ -12540,10 +12540,10 @@ vue@^2.5.16:
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.21.tgz#3d33dcd03bb813912ce894a8303ab553699c4a85"
   integrity sha512-Aejvyyfhn0zjVeLvXd70h4hrE4zZDx1wfZqia6ekkobLmUZ+vNFQer53B4fu0EjWBSiqApxPejzkO1Znt3joxQ==
 
-vue@^2.6.0-beta.3:
-  version "2.6.0-beta.3"
-  resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.0-beta.3.tgz#afc7a0644eeb1a62ba2fe3f1d4fbbfe241106dec"
-  integrity sha512-VoHj8XaVSyb9gQPBs9oJiVGcFNUT+pWtkeTC6Zr5cM/R/vAs1dm9M9XM+H7OyvfcwNNEu4kf08XXTNdDS3ugXA==
+vue@^2.6.2:
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.2.tgz#1cc9c9c8f7ba8df45e9b97c284947de78b76301c"
+  integrity sha512-NZAb0H+t3/99g2nygURcEJ+ncvzNLPiEiFI5MGhc1Cjsw5uYprF+Ol7SOd1RXPcmVVzK7jUBl0th2tNgt+VQDg==
 
 vuelidate@^0.6.2:
   version "0.6.2"
