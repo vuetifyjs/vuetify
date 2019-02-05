@@ -1,8 +1,7 @@
 [
   {
     "name": "English",
-    "locale": "en-US",
-    "alternate": "en",
+    "locale": "en",
     "country": "us",
     "fallback": true
   },
