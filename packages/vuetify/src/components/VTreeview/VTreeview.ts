@@ -164,15 +164,19 @@ export default mixins(
     }
 
     if (this.openAll) {
-      Object.keys(this.nodes).forEach(key => this.updateOpen(getObjectValueByPath(this.nodes[key].item, this.itemKey), true))
+      this.updateAll(true)
     } else {
       this.open.forEach(key => this.updateOpen(key, true))
+      this.emitOpen()
     }
-
-    this.emitOpen()
   },
 
   methods: {
+    /** @public */
+    updateAll (value: boolean) {
+      Object.keys(this.nodes).forEach(key => this.updateOpen(getObjectValueByPath(this.nodes[key].item, this.itemKey), value))
+      this.emitOpen()
+    },
     getKeys (items: any[], keys: any[] = []) {
       for (let i = 0; i < items.length; i++) {
         const key = getObjectValueByPath(items[i], this.itemKey)

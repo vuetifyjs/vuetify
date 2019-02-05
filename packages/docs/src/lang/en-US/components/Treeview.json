@@ -58,5 +58,8 @@
       "label": "Label content",
       "prepend": "Prepends content before label"
     }
+  },
+  "functions": {
+    "updateAll": "Opens or closes all nodes"
   }
 }
