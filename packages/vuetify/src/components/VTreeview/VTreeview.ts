@@ -16,12 +16,11 @@ import { provide as RegistrableProvide } from '../../mixins/registrable'
 import {
   arrayDiff,
   deepEqual,
-  FilterTreeItemFunction,
-  filterTreeItems,
   getObjectValueByPath
 } from '../../util/helpers'
 import mixins from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
+import { filterTreeItems, FilterTreeItemFunction } from './util/filterTreeItems'
 
 type VTreeviewNodeInstance = InstanceType<typeof VTreeviewNode>
 
