@@ -49,6 +49,10 @@ declare global {
     }
   }
 
+  interface WheelEvent {
+    path?: EventTarget[]
+  }
+
   function parseInt(s: string | number, radix?: number): number
   function parseFloat(string: string | number): number
 
@@ -77,6 +81,9 @@ declare module 'vue/types/vue' {
   export interface Vue {
     _uid: number
     _isDestroyed: boolean
+
+    /** bindObjectProps */
+    _b (data: VNodeData, tag: string, value: Dictionary<any> | Dictionary<any>[], asProp?: boolean, isSync?: boolean): VNodeData
 
     /** bindObjectListeners */
      _g (data: VNodeData, value: {}): VNodeData

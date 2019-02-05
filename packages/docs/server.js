@@ -19,7 +19,7 @@ const serverInfo =
   `vue-server-renderer/${require('vue-server-renderer/package.json').version}`
 
 const languages = require('./src/data/i18n/languages')
-const availableLanguages = languages.map(lang => lang.locale)
+const availableLanguages = languages.map(lang => lang.alternate || lang.locale)
 const fallbackLocale = languages.find(lang => lang.fallback === true).locale
 
 const app = express()
@@ -103,11 +103,11 @@ const cacheMiddleware = microcache.cacheSeconds(10 * 60, req => useMicroCache &&
 const ouchInstance = (new Ouch()).pushHandler(new Ouch.handlers.PrettyPageHandler('orange', null, 'sublime'))
 
 function render (req, res) {
-  const alternate = languages.find(lang => lang.alternate === req.params[0])
+  const alternate = languages.find(lang => lang.alternate && lang.locale === req.params[0])
 
   // Redirect to new locale
   if (alternate) {
-    return res.redirect(301, `/${alternate.locale}${req.params[1] || ''}`)
+    return res.redirect(301, `/${alternate.alternate}${req.params[1] || ''}`)
   }
 
   // Redirect to fallback if locale does not exist

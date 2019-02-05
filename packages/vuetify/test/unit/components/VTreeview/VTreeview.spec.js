@@ -79,7 +79,7 @@ test('VTreeView.ts', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.find('.v-treeview-node__checkbox')[0].trigger('click')
-    await wrapper.vm.$nextTick()
+    await new Promise(resolve => setTimeout(resolve))
 
     expect(fn).toHaveBeenCalledTimes(1)
     expect(fn).toHaveBeenCalledWith([0, 1])
@@ -163,6 +163,25 @@ test('VTreeView.ts', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should open/close all children when using updateAll', async () => {
+    const wrapper = mount(VTreeview, {
+      propsData: {
+        items: threeLevels
+      }
+    })
+
+    const updateOpen = jest.fn()
+    wrapper.vm.$on('update:open', updateOpen)
+
+    wrapper.vm.updateAll(true)
+    expect(updateOpen).toHaveBeenCalledTimes(1)
+    expect(updateOpen).toBeCalledWith([0, 1])
+
+    wrapper.vm.updateAll(false)
+    expect(updateOpen).toHaveBeenCalledTimes(2)
+    expect(updateOpen).toBeCalledWith([])
   })
 
   it('should react to open changes', async () => {
@@ -410,6 +429,67 @@ test('VTreeView.ts', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
 
     expect(Object.keys(wrapper.vm.nodes).length).toBe(2)
+  })
+
+  it('should filter items', async () => {
+    const wrapper = mount(VTreeview, {
+      propsData: {
+        items: [
+          {
+            id: 1,
+            name: 'one'
+          },
+          {
+            id: 2,
+            name: 'two'
+          }
+        ]
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({
+      search: 'two'
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('.v-treeview-node--excluded').length).toBe(1)
+  })
+
+  it('should filter items using custom item filter', async () => {
+    const wrapper = mount(VTreeview, {
+      propsData: {
+        filter: (item, search, textKey) => item.special === search,
+        items: [
+          {
+            id: 1,
+            name: 'one',
+            special: 'yes'
+          },
+          {
+            id: 2,
+            name: 'two',
+            special: 'no'
+          }
+        ],
+        search: 'NO'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('.v-treeview-node--excluded').length).toBe(2)
+
+    wrapper.setProps({
+      search: 'yes'
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('.v-treeview-node--excluded').length).toBe(1)
   })
 
   it('should emit objects when return-object prop is used', async () => {

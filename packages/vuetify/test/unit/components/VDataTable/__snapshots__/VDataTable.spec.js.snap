@@ -416,15 +416,21 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
         </tr>
       </thead>
       <tbody>
-        <td>
-          b
-        </td>
-        <td>
-          c
-        </td>
-        <td>
-          a
-        </td>
+        <tr>
+          <td>
+            b
+          </td>
+        </tr>
+        <tr>
+          <td>
+            c
+          </td>
+        </tr>
+        <tr>
+          <td>
+            a
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>

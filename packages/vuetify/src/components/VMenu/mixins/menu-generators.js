@@ -15,25 +15,21 @@ export default {
         }
       }
 
-      if (this.$scopedSlots.activator) {
+      if (this.$scopedSlots.activator && this.$scopedSlots.activator.length) {
         const activator = this.$scopedSlots.activator({ on: listeners })
         this.activatorNode = activator
         return activator
       }
 
-      if (this.$slots.activator) {
-        const options = {
-          staticClass: 'v-menu__activator',
-          'class': {
-            'v-menu__activator--active': this.hasJustFocused || this.isActive,
-            'v-menu__activator--disabled': this.disabled
-          },
-          ref: 'activator',
-          on: listeners
-        }
-
-        return this.$createElement('div', options, this.$slots.activator)
-      }
+      return this.$createElement('div', {
+        staticClass: 'v-menu__activator',
+        'class': {
+          'v-menu__activator--active': this.hasJustFocused || this.isActive,
+          'v-menu__activator--disabled': this.disabled
+        },
+        ref: 'activator',
+        on: listeners
+      }, this.$slots.activator)
     },
 
     genTransition () {

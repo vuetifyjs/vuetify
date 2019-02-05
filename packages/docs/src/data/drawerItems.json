@@ -4,12 +4,12 @@
     "text": "gettingStarted",
     "icon": "mdi-speedometer",
     "children": [
-      { "text": "quickStart", "to": "quick-start", "updated": true },
+      { "text": "quickStart", "to": "quick-start" },
       { "text": "whyVuetify", "to": "why-vuetify" },
       { "text": "faq", "to": "frequently-asked-questions" },
-      { "text": "meetTheTeam", "to": "meet-the-team", "new": true },
+      { "text": "meetTheTeam", "to": "meet-the-team" },
       { "text": "sponsorsAndBackers", "to": "sponsors-and-backers" },
-      { "text": "contributing", "to": "contributing", "updated": true },
+      { "text": "contributing", "to": "contributing" },
       { "text": "roadmap", "to": "roadmap" },
       { "text": "consulting", "to": "consulting-and-support" }
     ]
@@ -19,7 +19,7 @@
     "text": "frameworkOptions",
     "icon": "mdi-buffer",
     "children": [
-      { "text": "aLaCarte", "to": "a-la-carte", "updated": true },
+      { "text": "aLaCarte", "to": "a-la-carte" },
       { "text": "grid", "to": "grid" },
       { "text": "gridLists", "to": "grid-lists" },
       { "text": "icons", "to": "icons" },
@@ -31,7 +31,7 @@
           { "text": "defaultMarkup", "to": "default-markup"},
           { "text": "aspectRatios", "to": "aspect-ratios" },
           { "text": "breakpoints", "to": "breakpoints" },
-          { "text": "preMadeLayouts", "to": "pre-made-layouts", "updated": true }
+          { "text": "preMadeLayouts", "to": "pre-made-layouts" }
         ]
       },
       {
@@ -58,7 +58,7 @@
         "group": "framework",
         "text": "motion",
         "children": [
-          { "text": "scroll", "to": "scroll" },
+          { "text": "scroll", "to": "scroll", "updated": true },
           { "text": "transitions", "to": "transitions" }
         ]
       }
@@ -69,7 +69,7 @@
     "text": "components",
     "icon": "mdi-view-dashboard",
     "children": [
-      { "text": "apiExplorer", "subtext": "browseAllComponents", "to": "api-explorer", "updated": true },
+      { "text": "apiExplorer", "subtext": "browseAllComponents", "to": "api-explorer" },
       { "text": "alerts", "to": "alerts" },
       { "text": "avatars", "to": "avatars" },
       { "text": "badges", "to": "badges" },
@@ -81,7 +81,7 @@
       { "text": "calendars", "to": "calendars", "new": true },
       { "text": "cards", "to": "cards" },
       { "text": "carousels", "to": "carousels" },
-      { "text": "chips", "to": "chips", "updated": true },
+      { "text": "chips", "to": "chips" },
       { "text": "dataIterator", "to": "data-iterator" },
       { "text": "dataTables", "to": "data-tables" },
       { "text": "dialogs", "to": "dialogs" },
@@ -128,22 +128,22 @@
         "group": "components",
         "text": "pickers",
         "children": [
-          { "text": "datePickers", "to": "date-pickers", "updated": true },
-          { "text": "timePickers", "to": "time-pickers", "updated": true }
+          { "text": "datePickers", "to": "date-pickers" },
+          { "text": "timePickers", "to": "time-pickers" }
         ]
       },
       { "text": "progress", "to": "progress" },
       { "text": "ratings", "to": "ratings" },
-      { "text": "sheets", "to": "sheets", "new": true },
+      { "text": "sheets", "to": "sheets" },
       { "text": "snackbars", "to": "snackbars" },
-      { "text": "sparklines", "to": "sparklines", "new": true },
+      { "text": "sparklines", "to": "sparklines", "updated": true },
       { "text": "steppers", "to": "steppers" },
       { "text": "subheaders", "to": "subheaders" },
       { "text": "tabs", "to": "tabs" },
       { "text": "timelines", "to": "timelines" },
       { "text": "toolbars", "to": "toolbars" },
       { "text": "tooltips", "to": "tooltips" },
-      { "text": "treeview", "to": "treeview" }
+      { "text": "treeview", "to": "treeview", "updated": true }
     ]
   },
   {
@@ -161,6 +161,6 @@
     "text": "premiumThemes",
     "icon": "mdi-palette",
     "to": "themes/premium",
-    "new": true
+    "updated": true
   }
 ]
