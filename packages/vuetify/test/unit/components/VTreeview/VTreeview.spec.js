@@ -165,6 +165,25 @@ test('VTreeView.ts', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should open/close all children when using updateAll', async () => {
+    const wrapper = mount(VTreeview, {
+      propsData: {
+        items: threeLevels
+      }
+    })
+
+    const updateOpen = jest.fn()
+    wrapper.vm.$on('update:open', updateOpen)
+
+    wrapper.vm.updateAll(true)
+    expect(updateOpen).toHaveBeenCalledTimes(1)
+    expect(updateOpen).toBeCalledWith([0, 1])
+
+    wrapper.vm.updateAll(false)
+    expect(updateOpen).toHaveBeenCalledTimes(2)
+    expect(updateOpen).toBeCalledWith([])
+  })
+
   it('should react to open changes', async () => {
     const wrapper = mount(VTreeview, {
       propsData: {
