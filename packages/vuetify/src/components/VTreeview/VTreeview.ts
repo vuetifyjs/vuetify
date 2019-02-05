@@ -20,7 +20,11 @@ import {
 } from '../../util/helpers'
 import mixins from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
-import { filterTreeItems, FilterTreeItemFunction } from './util/filterTreeItems'
+import {
+  filterTreeItems,
+  FilterTreeItemFunction,
+  filterTreeItem
+} from './util/filterTreeItems'
 
 type VTreeviewNodeInstance = InstanceType<typeof VTreeviewNode>
 
@@ -74,14 +78,7 @@ export default mixins(
       default: () => ([])
     } as PropValidator<NodeArray>,
     search: String,
-    filter: {
-      type: Function as any,
-      default: (item, search, textKey): boolean => {
-        const text = getObjectValueByPath(item, textKey)
-
-        return text.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) > -1
-      }
-    } as PropValidator<FilterTreeItemFunction>,
+    filter: Function as PropValidator<FilterTreeItemFunction>,
     ...VTreeviewNodeProps
   },
 
@@ -100,7 +97,7 @@ export default mixins(
 
       for (let i = 0; i < this.items.length; i++) {
         filterTreeItems(
-          this.filter,
+          this.filter || filterTreeItem,
           this.items[i],
           this.search,
           this.itemKey,
