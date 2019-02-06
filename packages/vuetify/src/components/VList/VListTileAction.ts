@@ -1,10 +1,13 @@
+// Types
+import Vue, { VNode } from 'vue'
+
 /* @vue/component */
-export default {
+export default Vue.extend({
   name: 'v-list-tile-action',
 
   functional: true,
 
-  render (h, { data, children = [] }) {
+  render (h, { data, children = [] }): VNode {
     data.staticClass = data.staticClass ? `v-list__tile__action ${data.staticClass}` : 'v-list__tile__action'
     const filteredChild = children.filter(VNode => {
       return VNode.isComment === false && VNode.text !== ' '
@@ -13,4 +16,4 @@ export default {
 
     return h('div', data, children)
   }
-}
+})

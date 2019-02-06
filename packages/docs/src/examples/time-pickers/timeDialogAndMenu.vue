@@ -25,7 +25,7 @@
           v-if="menu2"
           v-model="time"
           full-width
-          @change="$refs.menu.save(time)"
+          @click:minute="$refs.menu.save(time)"
         ></v-time-picker>
       </v-menu>
     </v-flex>

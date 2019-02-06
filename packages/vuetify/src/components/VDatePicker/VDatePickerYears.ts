@@ -10,7 +10,7 @@ import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
 import Vue, { VNode } from 'vue'
-import { NativeLocaleFormatter } from './util/createNativeLocaleFormatter'
+import { DatePickerFormatter } from './util/createNativeLocaleFormatter'
 import { PropValidator } from 'vue/types/options'
 
 interface options extends Vue {
@@ -32,10 +32,7 @@ export default mixins<options &
   name: 'v-date-picker-years',
 
   props: {
-    format: {
-      type: Function,
-      default: null
-    } as any as PropValidator<NativeLocaleFormatter | null>,
+    format: Function as PropValidator<DatePickerFormatter | undefined>,
     min: [Number, String],
     max: [Number, String],
     readonly: Boolean,
@@ -49,7 +46,7 @@ export default mixins<options &
   },
 
   computed: {
-    formatter (): NativeLocaleFormatter {
+    formatter (): DatePickerFormatter {
       return this.format || createNativeLocaleFormatter(this.currentLocale, { year: 'numeric', timeZone: 'UTC' }, { length: 4 })
     }
   },

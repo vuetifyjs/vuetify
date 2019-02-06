@@ -15,7 +15,7 @@ import mixins from '../../util/mixins'
 
 // Types
 import { VNode } from 'vue'
-import { NativeLocaleFormatter } from './util/createNativeLocaleFormatter'
+import { DatePickerFormatter } from './util/createNativeLocaleFormatter'
 import { PropValidator } from 'vue/types/options'
 
 export default mixins(
@@ -28,10 +28,7 @@ export default mixins(
 
   props: {
     disabled: Boolean,
-    format: {
-      type: Function,
-      default: null
-    } as any as PropValidator<NativeLocaleFormatter | null>,
+    format: Function as PropValidator<DatePickerFormatter | undefined>,
     min: String,
     max: String,
     nextIcon: {
@@ -56,7 +53,7 @@ export default mixins(
   },
 
   computed: {
-    formatter (): NativeLocaleFormatter {
+    formatter (): DatePickerFormatter {
       if (this.format) {
         return this.format
       } else if (String(this.value).split('-')[1]) {
@@ -110,6 +107,9 @@ export default mixins(
       const header = this.$createElement('div', this.setTextColor(color, {
         key: String(this.value)
       }), [this.$createElement('button', {
+        attrs: {
+          type: 'button'
+        },
         on: {
           click: () => this.$emit('toggle')
         }

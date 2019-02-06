@@ -2,14 +2,22 @@ import Vue from 'vue'
 import { test } from '@/test'
 import VSlider from '@/components/VSlider'
 
-const warning = '[Vuetify] Missing v-app or a non-body wrapping element with the [data-app] attribute'
 
 test('VSlider.vue', ({ mount }) => {
+  let el
+  beforeEach(() => {
+    el = document.createElement('div')
+    el.setAttribute('data-app', 'true')
+    document.body.appendChild(el)
+  })
+  afterEach(() => {
+    document.body.removeChild(el)
+  })
+
   it('should match a snapshot', () => {
     const wrapper = mount(VSlider)
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should render component with ticks and match a snapshot', async () => {
@@ -29,7 +37,6 @@ test('VSlider.vue', ({ mount }) => {
     wrapper.setProps({ ticks: 'always' })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should render component with thumbLabel and match a snapshot', () => {
@@ -48,7 +55,6 @@ test('VSlider.vue', ({ mount }) => {
     wrapper.setProps({ thumbLabel: 'always' })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should set tabindex in disabled component', () => {
@@ -61,7 +67,6 @@ test('VSlider.vue', ({ mount }) => {
     const slider = wrapper.first('input')
 
     expect(slider.element.getAttribute('tabindex')).toBe('-1')
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should not allow values outside of min/max', async () => {
@@ -82,8 +87,6 @@ test('VSlider.vue', ({ mount }) => {
     wrapper.setProps({ value: 5 })
     await wrapper.vm.$nextTick()
     expect(input).toBeCalledWith(4)
-
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should adjust value if min/max props change', async () => {
@@ -105,8 +108,6 @@ test('VSlider.vue', ({ mount }) => {
     wrapper.setProps({ max: 4 })
     await wrapper.vm.$nextTick()
     expect(input).toBeCalledWith(4)
-
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should round value with offset correct', async () => {
@@ -128,8 +129,6 @@ test('VSlider.vue', ({ mount }) => {
     wrapper.setProps({ value: 7 })
     await wrapper.vm.$nextTick()
     expect(input).toHaveBeenLastCalledWith(6)
-
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should react to keydown event', async () => {
@@ -196,8 +195,6 @@ test('VSlider.vue', ({ mount }) => {
     })
     expect(input).toBeCalledWith(72)
     wrapper.vm.$vuetify.rtl = undefined
-
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should add for to label', () => {
@@ -223,15 +220,9 @@ test('VSlider.vue', ({ mount }) => {
     const label2 = wrapper2.first('.v-label')
 
     expect(label2.element.getAttribute('for')).toBe(null)
-
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should deactivate', async () => {
-    const el = document.createElement('div')
-    el.setAttribute('data-app', true)
-    document.body.appendChild(el)
-
     const wrapper = mount(VSlider, {
       attachToDocument: true
     })
@@ -243,15 +234,9 @@ test('VSlider.vue', ({ mount }) => {
     container.trigger('mousedown')
 
     expect(wrapper.vm.isActive).toBe(true)
-
-    document.body.removeChild(el)
   })
 
   it('should react to touch', async () => {
-    const el = document.createElement('div')
-    el.setAttribute('data-app', true)
-    document.body.appendChild(el)
-
     const wrapper = mount(VSlider, {
       attachToDocument: true
     })
@@ -281,8 +266,6 @@ test('VSlider.vue', ({ mount }) => {
 
     expect(wrapper.vm.keyPressed).toBe(2)
     expect(wrapper.vm.isActive).toBe(true)
-
-    document.body.removeChild(el)
   })
 
   it('should emit number', async () => {
@@ -314,8 +297,6 @@ test('VSlider.vue', ({ mount }) => {
     })
     expect(input).toHaveBeenCalledWith(0)
     wrapper.vm.$vuetify.rtl = undefined
-
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should reset keys pressed', () => {
@@ -328,8 +309,6 @@ test('VSlider.vue', ({ mount }) => {
     wrapper.vm.onKeyUp()
 
     expect(wrapper.vm.keyPressed).toBe(0)
-
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should return a rounded value', () => {
@@ -352,8 +331,6 @@ test('VSlider.vue', ({ mount }) => {
     wrapper.setProps({ step: 2.5 })
 
     expect(wrapper.vm.roundValue(5.667)).toBe(5)
-
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should return a rounded value with offset', () => {
@@ -376,8 +353,6 @@ test('VSlider.vue', ({ mount }) => {
     wrapper.setProps({ step: 2.5, min: 5 })
 
     expect(wrapper.vm.roundValue(5.667)).toBe(5)
-
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should not update if value matches lazy value', () => {
@@ -405,8 +380,6 @@ test('VSlider.vue', ({ mount }) => {
 
     expect(input).toHaveBeenCalledTimes(1)
     expect(validate).toHaveBeenCalledTimes(2)
-
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should react to input events', () => {
@@ -445,8 +418,6 @@ test('VSlider.vue', ({ mount }) => {
     expect(wrapper.vm.isActive).toBe(false)
     expect(wrapper.vm.isFocused).toBe(false)
     expect(blur).toHaveBeenCalledTimes(2)
-
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should call mousemove and emit change', () => {
@@ -463,8 +434,6 @@ test('VSlider.vue', ({ mount }) => {
 
     expect(onMouseMove).toHaveBeenCalledTimes(1)
     expect(change).toHaveBeenCalledTimes(1)
-
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should keep thumb-label when focused and clicked', async () => {
@@ -490,7 +459,6 @@ test('VSlider.vue', ({ mount }) => {
 
     expect(wrapper.vm.isActive).toBe(true)
     expect(wrapper.vm.isFocused).toBe(false)
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should reverse label location when inverse', () => {
@@ -503,7 +471,6 @@ test('VSlider.vue', ({ mount }) => {
     wrapper.setProps({ inverseLabel: true })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should change track styles in rtl', () => {
@@ -532,7 +499,6 @@ test('VSlider.vue', ({ mount }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    expect(warning).toHaveBeenTipped()
     wrapper.vm.$vuetify.rtl = undefined
   })
 
@@ -543,8 +509,6 @@ test('VSlider.vue', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should display tick labels', () => {
@@ -560,8 +524,6 @@ test('VSlider.vue', ({ mount }) => {
     expect(ticks.length).toBe(2)
     expect(ticks[0].element.firstChild.innerHTML).toBe('foo')
     expect(ticks[1].element.firstChild.innerHTML).toBe('bar')
-
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should not react to keydown', () => {
@@ -598,7 +560,5 @@ test('VSlider.vue', ({ mount }) => {
     input.trigger('keydown.right')
 
     expect(parseKeyDown).toBeCalled()
-
-    expect(warning).toHaveBeenTipped()
   })
 })

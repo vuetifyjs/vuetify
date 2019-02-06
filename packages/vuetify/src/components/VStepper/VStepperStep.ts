@@ -3,21 +3,39 @@ import VIcon from '../VIcon'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
-import { inject as RegistrableInject } from '../../mixins/registrable'
+import { inject as RegistrableInject, Registrable } from '../../mixins/registrable'
 
 // Directives
 import Ripple from '../../directives/ripple'
 
+// Util
+import mixins, { ExtractVue } from '../../util/mixins'
+
+// Types
+import Vue, { VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
+
+type VuetifyStepperRuleValidator = () => string | false
+
+interface options extends Vue {
+  stepClick: (step: number | string) => void
+}
+
+export default mixins<options &
+/* eslint-disable indent */
+  ExtractVue<[
+    typeof Colorable,
+    Registrable<'stepper'>
+  ]>
+/* eslint-enable indent */
+>(
+  Colorable,
+  RegistrableInject('stepper', 'v-stepper-step', 'v-stepper')
 /* @vue/component */
-export default {
+).extend({
   name: 'v-stepper-step',
 
   directives: { Ripple },
-
-  mixins: [
-    Colorable,
-    RegistrableInject('stepper', 'v-stepper-step', 'v-stepper')
-  ],
 
   inject: ['stepClick'],
 
@@ -43,7 +61,7 @@ export default {
     rules: {
       type: Array,
       default: () => []
-    },
+    } as PropValidator<VuetifyStepperRuleValidator[]>,
     step: [Number, String]
   },
 
@@ -55,7 +73,7 @@ export default {
   },
 
   computed: {
-    classes () {
+    classes (): object {
       return {
         'v-stepper__step': true,
         'v-stepper__step--active': this.isActive,
@@ -66,8 +84,8 @@ export default {
         'error--text': this.hasError
       }
     },
-    hasError () {
-      return this.rules.some(i => (i() !== true))
+    hasError (): boolean {
+      return this.rules.some(validate => validate() !== true)
     }
   },
 
@@ -80,7 +98,7 @@ export default {
   },
 
   methods: {
-    click (e) {
+    click (e: MouseEvent) {
       e.stopPropagation()
 
       this.$emit('click', e)
@@ -89,13 +107,13 @@ export default {
         this.stepClick(this.step)
       }
     },
-    toggle (step) {
+    toggle (step: number | string) {
       this.isActive = step.toString() === this.step.toString()
       this.isInactive = Number(step) < Number(this.step)
     }
   },
 
-  render (h) {
+  render (h): VNode {
     const data = {
       'class': this.classes,
       directives: [{
@@ -115,7 +133,7 @@ export default {
         stepContent = [h(VIcon, {}, this.completeIcon)]
       }
     } else {
-      stepContent = this.step
+      stepContent = String(this.step)
     }
 
     const color = (!this.hasError && (this.complete || this.isActive)) ? this.color : false
@@ -129,4 +147,4 @@ export default {
 
     return h('div', data, [step, label])
   }
-}
+})

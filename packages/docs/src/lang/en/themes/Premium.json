@@ -20,6 +20,10 @@
       "title": "Freelancer",
       "description": "A single page Material inspired theme for Freelancers."
     },
+    "material-kit": {
+      "title": "Material Kit",
+      "description": "A complete set of Material Inspired themes built with Vuetify on top of vue-cli-3."
+    },
     "parallax": {
       "title": "Parallax",
       "description": "This beautiful single page parallax is a great home page for any application."
