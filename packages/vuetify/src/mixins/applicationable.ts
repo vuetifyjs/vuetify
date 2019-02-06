@@ -1,5 +1,5 @@
 import { factory as PositionableFactory } from './positionable'
-import { TargetProp } from '../components/Vuetify/mixins/application'
+import { TargetProp } from 'vuetify/types/services/application'
 
 // Util
 import mixins from '../util/mixins'

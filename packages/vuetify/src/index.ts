@@ -1,3 +1,4 @@
+import './stylus/app.styl'
 import {
   VuetifyService,
   VuetifyServiceInstance

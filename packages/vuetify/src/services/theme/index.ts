@@ -65,8 +65,6 @@ export class Theme implements VuetifyServiceInstance {
       },
       ...themes
     }
-
-    this.applyTheme()
   }
 
   set css (val: string) {
@@ -119,8 +117,12 @@ export class Theme implements VuetifyServiceInstance {
     this.css = ''
   }
 
+  public mounted () {
+    this.applyTheme()
+  }
+
   private genStyleElement () {
-    if (this.style) return
+    if (this.style || typeof document === 'undefined') return
 
     let style = document.getElementById('vuetify-theme-stylesheet') as HTMLStyleElement
 

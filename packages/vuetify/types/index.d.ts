@@ -1,5 +1,5 @@
 import Vue, { Component, PluginFunction, PluginObject, VueConstructor, DirectiveFunction, DirectiveOptions } from 'vue'
-import { VuetifyLanguage } from './lang'
+import { VuetifyLangOptions as VuetifyLanguage } from './services/lang'
 import './lib'
 import './alacarte'
 import './colors'
