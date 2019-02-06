@@ -37,8 +37,7 @@ export function install (Vue: VueConstructor, args?: object) {
 
       if (options.vuetify) {
         options.vuetify.rootInstance = this
-
-        Vue.util.defineReactive(this, '$vuetify', options.vuetify.framework)
+        this.$vuetify = Vue.observable(options.vuetify.framework)
       } else {
         this.$vuetify = (options.parent && options.parent.$vuetify) || this
       }
