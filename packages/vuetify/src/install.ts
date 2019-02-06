@@ -2,11 +2,7 @@ import { DirectiveOptions, VueConstructor } from 'vue'
 import * as components from './components'
 import * as _directives from './directives'
 
-interface VuetifyDirectives {
-  [key: string]: DirectiveOptions
-}
-
-const directives: VuetifyDirectives = _directives
+const directives: Record<string, DirectiveOptions> = _directives
 
 export function install (Vue: VueConstructor, args?: object) {
   if ((install as any).installed) return
@@ -35,12 +31,9 @@ export function install (Vue: VueConstructor, args?: object) {
     beforeCreate () {
       const options = this.$options as any
 
-      if (options.vuetify) {
-        options.vuetify.rootInstance = this
-        this.$vuetify = Vue.observable(options.vuetify.framework)
-      } else {
-        this.$vuetify = (options.parent && options.parent.$vuetify) || this
-      }
+      this.$vuetify = options.vuetify
+        ? Vue.observable(options.vuetify.framework)
+        : (options.parent && options.parent.$vuetify) || this
     }
   })
 }
