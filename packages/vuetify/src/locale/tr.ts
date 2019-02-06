@@ -8,7 +8,7 @@ export default {
     prevPage: 'Önceki sayfa'
   },
   dataTable: {
-        rowsPerPageText: 'Sayfa başına satır:'
+    rowsPerPageText: 'Sayfa başına satır:'
   },
   noDataText: 'Uygun veri yok'
 }
