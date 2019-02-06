@@ -859,4 +859,28 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.selectedItems.length).toBe(1)
     expect(wrapper.vm.internalSearch).toBe('t')
   })
+
+  it('should retain fuzzy match list after item is selected when search is re-engaged', async () => {
+    const wrapper = mount(VAutocomplete, {
+      propsData: {
+        items: ['bar', 'baz', 'foo', 'foo-bar', 'foo-baz', 'foo-foo']
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
+    const input = wrapper.first('input')
+
+    input.trigger('focus')
+    input.element.value = 'foo'
+    input.trigger('input')
+
+    const computedItems = wrapper.vm.computedItems
+    wrapper.vm.selectItem('foo')
+    await wrapper.vm.$nextTick()
+    input.trigger('input')
+
+    expect(wrapper.vm.selectedItems).toEqual(['foo'])
+    expect(wrapper.vm.computedItems).toEqual(computedItems)
+  })
 })

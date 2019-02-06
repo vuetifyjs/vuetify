@@ -104,12 +104,7 @@ export default VSelect.extend({
       return this.searchIsDirty || this.selectedItems.length > 0
     },
     isSearching () {
-      if (this.multiple) return this.searchIsDirty
-
-      return (
-        this.searchIsDirty &&
-        this.internalSearch !== this.getText(this.selectedItem)
-      )
+      return this.searchIsDirty
     },
     menuCanShow () {
       if (!this.isFocused) return false
