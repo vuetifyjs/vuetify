@@ -1,11 +1,12 @@
-import { default as setup } from '@/components/Vuetify/mixins/lang'
-import { test } from '@/test'
+// Service
+import { Lang } from '..'
+
 
 let lang
 
 test('$vuetify.lang', () => {
   beforeEach(() => {
-    lang = setup()
+    lang = new Lang()
   })
 
   it('should fall back to en', () => {
@@ -28,7 +29,7 @@ test('$vuetify.lang', () => {
   })
 
   it('should use a different default', () => {
-    lang = setup({
+    lang = new Lang({
       current: 'foreign',
       locales: {
         foreign: { foo: 'foreignBar' }

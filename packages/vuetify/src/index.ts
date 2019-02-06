@@ -21,6 +21,7 @@ export default class Vuetify {
     this.use(services.Application)
     this.use(services.Breakpoint)
     this.use(services.Icons)
+    this.use(services.Lang)
     this.use(services.Theme)
   }
 

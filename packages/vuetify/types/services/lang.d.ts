@@ -1,4 +1,4 @@
-export interface VuetifyLanguage {
+export interface VuetifyLangOptions {
   locales: Record<string, VuetifyLocale>
   current: string
   t (key: string, ...params: Array<string | number>): string
