@@ -1,6 +1,6 @@
 
-export const PARSE_REGEX: RegExp = /^(\d{1,4})-(\d{1,2})(-(\d{1,2}))?([^\d]+(\d{1,2}))?(:(\d{1,2}))?(:(\d{1,2}))?$/
-export const PARSE_TIME: RegExp = /(\d{1,2})?(:(\d{1,2}))?(:(\d{1,2}))/
+export const PARSE_REGEX: RegExp = /^(\d{4})-(\d{1,2})(-(\d{1,2}))?([^\d]+(\d{1,2}))?(:(\d{1,2}))?(:(\d{1,2}))?$/
+export const PARSE_TIME: RegExp = /(\d\d?)(:(\d\d?)|)(:(\d\d?)|)/
 
 export const DAYS_IN_MONTH: number[] = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 export const DAYS_IN_MONTH_LEAP: number[] = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -53,7 +53,7 @@ export function parseTime (input: any): number | false {
     if (!parts) {
       return false
     }
-    return parseInt(parts[1]) * 60 + parseInt(parts[2] || 0)
+    return parseInt(parts[1]) * 60 + parseInt(parts[3] || 0)
   } else if (typeof input === 'object') {
     // when an object is given, it must have hour and minute
     if (typeof input.hour !== 'number' || typeof input.minute !== 'number') {
@@ -121,7 +121,7 @@ export function parseDate (date: Date): VTimestamp {
 }
 
 export function getDayIdentifier (timestamp: VTimestamp): number {
-  return timestamp.year * 1000000 + timestamp.month * 100 + timestamp.day
+  return timestamp.year * 10000 + timestamp.month * 100 + timestamp.day
 }
 
 export function getTimeIdentifier (timestamp: VTimestamp): number {
