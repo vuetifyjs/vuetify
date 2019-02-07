@@ -1,5 +1,5 @@
 // Service
-import { Theme } from '..'
+import { Theme } from '../index'
 
 // Types
 import {
@@ -42,7 +42,9 @@ describe('Theme.ts', () => {
   it('should disable theme colors', () => {
     const theme = new Theme({ disable: true })
 
-    expect(theme.style).toBeFalsy()
+    theme.init()
+
+    expect(theme.styleEl).toBeFalsy()
   })
 
   it('should generate theme and apply to document', () => {
@@ -56,6 +58,8 @@ describe('Theme.ts', () => {
         })
       }
     })
+
+    theme.init()
 
     const style = document.getElementById('vuetify-theme-stylesheet')
     const html = style!.innerHTML
@@ -77,6 +81,8 @@ describe('Theme.ts', () => {
       }
     })
 
+    theme.init()
+
     const style = document.getElementById('vuetify-theme-stylesheet')
     const html = style!.innerHTML
 
@@ -89,11 +95,11 @@ describe('Theme.ts', () => {
     const theme = new Theme()
     const spy = jest.spyOn(theme, 'clearCss')
 
-    theme.applyTheme()
+    theme.applyTheme(false)
     expect(spy).toHaveBeenCalledTimes(1)
 
-    theme.options.themes = { light: FillVariant() }
-    theme.applyTheme(false)
+    theme.themes = { light: FillVariant() }
+    theme.applyTheme('')
     expect(spy).toHaveBeenCalledTimes(2)
 
     theme.applyTheme('dark')
@@ -111,12 +117,14 @@ describe('Theme.ts', () => {
 
     const theme = new Theme({
       ...mock,
-      themeCache
+      options: {
+        themeCache
+      }
     })
 
     theme.applyTheme()
 
-    expect(themeCache.get).toHaveBeenCalledTimes(2)
+    expect(themeCache.get).toHaveBeenCalledTimes(1)
     expect(themeCache.set).toHaveBeenCalledTimes(1)
   })
 
@@ -125,8 +133,12 @@ describe('Theme.ts', () => {
 
     const theme = new Theme({
       ...mock,
-      minifyTheme
+      options: {
+        minifyTheme
+      }
     })
+
+    theme.init()
 
     const style = document.getElementById('vuetify-theme-stylesheet')
     const html = style!.innerHTML
@@ -138,8 +150,12 @@ describe('Theme.ts', () => {
   it('should add nonce to stylesheet', () => {
     const theme = new Theme({
       ...mock,
-      cspNonce: 'foobar'
+      options: {
+        cspNonce: 'foobar'
+      }
     })
+
+    theme.init()
 
     const style = document.getElementById('vuetify-theme-stylesheet')
     expect(style!.getAttribute('nonce')).toBe('foobar')

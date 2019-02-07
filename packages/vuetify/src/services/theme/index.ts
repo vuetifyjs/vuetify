@@ -2,13 +2,22 @@
 import * as ThemeUtils from './utils/theme'
 
 // Types
-import { VuetifyThemeOptions } from 'vuetify/types/services/theme'
+import { VuetifyParsedTheme, VuetifyThemeOptions } from 'vuetify/types/services/theme'
 import { VuetifyServiceInstance } from 'vuetify/types/services'
 
+// Process
+// have a designated default
+// have themes (default dark/light)
+// can have other designated themes
+// the default activates the specific theme type for generated styles
+// ssr we hook this into the ssrContext
+// for spa we simply attach a style tag
+// default should be a single controlled variable that we monitor through set/get
+// when changed, update the theme and apply the new styles
 export class Theme implements VuetifyServiceInstance {
   static property = 'theme'
 
-  public default = 'light'
+  public dark = false
   public disabled = false
   public options: VuetifyThemeOptions['options'] = {
     cspNonce: null,
@@ -16,9 +25,9 @@ export class Theme implements VuetifyServiceInstance {
     minifyTheme: null,
     themeCache: undefined
   }
-  public style?: HTMLStyleElement
+  public styleEl?: HTMLStyleElement
   public themes: VuetifyThemeOptions['themes'] = {
-    dark: {
+    dark: { // Maybe use variables here?
       primary: '#1976D2', // blue.darken2
       secondary: '#424242', // grey.darken3
       accent: '#82B1FF', // blue.accent1
@@ -38,6 +47,9 @@ export class Theme implements VuetifyServiceInstance {
     }
   }
 
+  private ssr = false
+  private default = 'light'
+
   constructor (options: Partial<VuetifyThemeOptions> = {}) {
     if (options.disable) {
       this.disabled = true
@@ -50,9 +62,15 @@ export class Theme implements VuetifyServiceInstance {
       ...options.options
     }
 
-    // Grab light and dark variants then
+    this.default = options.default || 'light'
+
+    // Grab light and dark defaults then
     // move remaining into own object
-    const { light = {}, dark = {}, ...themes } = {
+    const {
+      light = {},
+      dark = {},
+      ...themes
+    } = {
       light: {},
       dark: {},
       ...options.themes
@@ -72,22 +90,31 @@ export class Theme implements VuetifyServiceInstance {
     }
   }
 
+  // When setting css, check for element
+  // and apply new values
   set css (val: string) {
-    /* istanbul ignore else */
-    if (this.style) {
-      this.style.innerHTML = val
-    }
+    this.checkStyleElement() && (this.styleEl!.innerHTML = val)
   }
 
-  public applyTheme (theme = this.default) {
-    this.genStyleElement()
+  // Getter for current default
+  get current (): string {
+    return this.default
+    // this isn't a Vue instance so we can't watch the value
+    // we need getters/setters so we can interact with it
+  }
 
-    if (!this.themes) return this.clearCss()
-    if (typeof theme !== 'string') return this.clearCss()
+  // When the current theme
+  // changes, re-init
+  set current (val: string) {
+    this.default = val
+    this.init()
+  }
 
-    const activeTheme = this.themes[theme]
+  // Apply current theme default
+  public applyTheme (theme = this.default): void {
+    const activeTheme = this.themes![theme]
 
-    if (!activeTheme) return this.clearCss()
+    if (this.disabled || !activeTheme) return this.clearCss()
 
     const parsedTheme = ThemeUtils.parse(activeTheme)
 
@@ -95,8 +122,7 @@ export class Theme implements VuetifyServiceInstance {
 
     // Theme cache get
     if (this.options.themeCache != null) {
-      css = this.options.themeCache.get(parsedTheme)
-      if (css != null) return (this.css = css)
+      this.css = this.options.themeCache.get(parsedTheme) || this.css
     }
 
     // Generate styles
@@ -118,53 +144,57 @@ export class Theme implements VuetifyServiceInstance {
     this.css = css
   }
 
-  public clearCss () {
+  public clearCss (): void {
     this.css = ''
   }
 
-  public init (ssrContext?: any) {
+  // Initialize theme for SSR and SPA
+  // Attach to ssrContext head or
+  // apply new theme to document
+  public init (ssrContext?: any): void {
     if (this.disabled) return
 
-    if (typeof document === 'undefined' && ssrContext) {
+    this.ssr = Boolean(ssrContext)
+
+    if (this.isSSR) {
       // SSR
-      const nonce = this.options.cspNonce
-        ? ` nonce="${this.options.cspNonce}"`
-        : ''
+      const nonce = this.options.cspNonce ? ` nonce="${this.options.cspNonce}"` : ''
       ssrContext.head = ssrContext.head || ''
       ssrContext.head += `<style type="text/css" id="vuetify-theme-stylesheet"${nonce}>${this.generatedStyles}</style>`
     } else if (typeof document !== 'undefined') {
       // Client-side
-      this.genStyleElement()
       this.applyTheme()
     }
   }
 
-  private genStyleElement () {
-    if (this.style || typeof document === 'undefined') return
+  // Check for existence of style element
+  private checkStyleElement (): boolean {
+    if (this.isSSR) return false // SSR
+    if (this.styleEl) return true
 
-    let style = document.getElementById('vuetify-theme-stylesheet') as HTMLStyleElement
+    this.genStyleElement() // If doesn't have it, create it
 
-    /* istanbul ignore else */
-    if (!style) {
-      style = document.createElement('style')
-      style.type = 'text/css'
-      style.id = 'vuetify-theme-stylesheet'
-      if (this.options.cspNonce) {
-        style.setAttribute('nonce', this.options.cspNonce)
-      }
-      document.head!.appendChild(style)
+    this.styleEl = document.getElementById('vuetify-theme-stylesheet') as HTMLStyleElement
+    return Boolean(this.styleEl)
+  }
+
+  // Generate the style element
+  // if applicable
+  private genStyleElement (): void {
+    this.styleEl = document.createElement('style')
+    this.styleEl.type = 'text/css'
+    this.styleEl.id = 'vuetify-theme-stylesheet'
+    if (this.options.cspNonce) {
+      this.styleEl.setAttribute('nonce', this.options.cspNonce)
     }
-
-    this.style = style
+    document.head.appendChild(this.styleEl)
   }
 
   get currentTheme () {
-    const themes = this.themes || {}
-
-    return themes[this.default]
+    return this.themes ? this.themes[this.default] : {}
   }
 
-  get generatedStyles () {
+  get generatedStyles (): string {
     const theme = this.parsedTheme
     let css
 
@@ -186,7 +216,11 @@ export class Theme implements VuetifyServiceInstance {
     return css
   }
 
-  get parsedTheme () {
+  get isSSR (): boolean {
+    return typeof document === 'undefined' && this.ssr
+  }
+
+  get parsedTheme (): VuetifyParsedTheme {
     return ThemeUtils.parse(this.currentTheme)
   }
 }
