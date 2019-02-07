@@ -155,10 +155,10 @@
         {
           title: vm.$t('Themes.Premium.templates.blog.title'),
           description: vm.$t('Themes.Premium.templates.blog.description'),
-          src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-blog-starter.png',
+          src: 'https://cdn.vuetifyjs.com/images/starter/blog.png',
           free: true,
-          url: 'https://github.com/vuetifyjs/blog-starter',
-          demoUrl: ['/themes/blog-starter']
+          url: 'https://github.com/vuetifyjs/theme-blog',
+          demoUrl: ['https://free-blog.vuetifyjs.com']
         }
       ]
     })
