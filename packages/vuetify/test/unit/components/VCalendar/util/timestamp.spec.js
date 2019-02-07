@@ -1,4 +1,4 @@
-import { parseTime, validateTimestamp, parseTimestamp, parseDate, getDayIdentifier, getTimeIdentifier, updateRelative, copyTimestamp } from '@/components/VCalendar/util/timestamp'
+import { parseTime, validateTimestamp, parseTimestamp, parseDate, getDayIdentifier, getTimeIdentifier, updateRelative, copyTimestamp, getWeekdaySkips, createDayList, getStartOfWeek, getEndOfWeek } from '@/components/VCalendar/util/timestamp'
 import { test } from '@/test'
 
 test('VCalendar/util/timestamp.ts', ({ mount }) => {
@@ -245,5 +245,95 @@ test('VCalendar/util/timestamp.ts', ({ mount }) => {
     expect(cc.past).toBe(true)
     expect(cc.present).toBe(false)
     expect(cc.future).toBe(false)
+  })
+
+  it('should calculate weekday', () => {
+    expect(parseTimestamp('2019-01-01').weekday).toBe(2)
+    expect(parseTimestamp('2019-01-02').weekday).toBe(3)
+    expect(parseTimestamp('2019-01-03').weekday).toBe(4)
+    expect(parseTimestamp('2019-01-04').weekday).toBe(5)
+    expect(parseTimestamp('2019-01-05').weekday).toBe(6)
+    expect(parseTimestamp('2019-01-06').weekday).toBe(0)
+    expect(parseTimestamp('2019-01-07').weekday).toBe(1)
+    expect(parseTimestamp('2019-01-08').weekday).toBe(2)
+    expect(parseTimestamp('2019-01-09').weekday).toBe(3)
+    expect(parseTimestamp('2019-01-10').weekday).toBe(4)
+    expect(parseTimestamp('2019-01-11').weekday).toBe(5)
+    expect(parseTimestamp('2019-01-12').weekday).toBe(6)
+    expect(parseTimestamp('2019-01-13').weekday).toBe(0)
+    expect(parseTimestamp('2019-01-14').weekday).toBe(1)
+    expect(parseTimestamp('2019-01-15').weekday).toBe(2)
+    expect(parseTimestamp('2019-01-16').weekday).toBe(3)
+    expect(parseTimestamp('2019-01-17').weekday).toBe(4)
+    expect(parseTimestamp('2019-01-18').weekday).toBe(5)
+    expect(parseTimestamp('2019-01-19').weekday).toBe(6)
+    expect(parseTimestamp('2019-01-20').weekday).toBe(0)
+    expect(parseTimestamp('2019-01-21').weekday).toBe(1)
+    expect(parseTimestamp('2019-01-22').weekday).toBe(2)
+    expect(parseTimestamp('2019-01-23').weekday).toBe(3)
+    expect(parseTimestamp('2019-01-24').weekday).toBe(4)
+    expect(parseTimestamp('2019-01-25').weekday).toBe(5)
+    expect(parseTimestamp('2019-01-26').weekday).toBe(6)
+    expect(parseTimestamp('2019-01-27').weekday).toBe(0)
+    expect(parseTimestamp('2019-01-28').weekday).toBe(1)
+    expect(parseTimestamp('2019-01-29').weekday).toBe(2)
+    expect(parseTimestamp('2019-01-30').weekday).toBe(3)
+    expect(parseTimestamp('2019-01-31').weekday).toBe(4)
+    expect(parseTimestamp('2019-02-01').weekday).toBe(5)
+    expect(parseTimestamp('2019-02-02').weekday).toBe(6)
+    expect(parseTimestamp('2019-02-03').weekday).toBe(0)
+    expect(parseTimestamp('2019-02-04').weekday).toBe(1)
+    expect(parseTimestamp('2019-02-05').weekday).toBe(2)
+    expect(parseTimestamp('2019-02-06').weekday).toBe(3)
+    expect(parseTimestamp('2019-02-07').weekday).toBe(4)
+    expect(parseTimestamp('2019-02-08').weekday).toBe(5)
+    expect(parseTimestamp('2019-02-09').weekday).toBe(6)
+    expect(parseTimestamp('2019-02-10').weekday).toBe(0)
+    expect(parseTimestamp('2019-02-11').weekday).toBe(1)
+    expect(parseTimestamp('2019-02-12').weekday).toBe(2)
+    expect(parseTimestamp('2019-02-13').weekday).toBe(3)
+    expect(parseTimestamp('2019-02-14').weekday).toBe(4)
+    expect(parseTimestamp('2019-02-15').weekday).toBe(5)
+    expect(parseTimestamp('2019-02-16').weekday).toBe(6)
+    expect(parseTimestamp('2019-02-17').weekday).toBe(0)
+    expect(parseTimestamp('2019-02-18').weekday).toBe(1)
+    expect(parseTimestamp('2019-02-19').weekday).toBe(2)
+    expect(parseTimestamp('2019-02-20').weekday).toBe(3)
+    expect(parseTimestamp('2019-02-21').weekday).toBe(4)
+    expect(parseTimestamp('2019-02-22').weekday).toBe(5)
+    expect(parseTimestamp('2019-02-23').weekday).toBe(6)
+    expect(parseTimestamp('2019-02-24').weekday).toBe(0)
+    expect(parseTimestamp('2019-02-25').weekday).toBe(1)
+    expect(parseTimestamp('2019-02-26').weekday).toBe(2)
+    expect(parseTimestamp('2019-02-27').weekday).toBe(3)
+    expect(parseTimestamp('2019-02-28').weekday).toBe(4)
+    expect(parseTimestamp('2019-03-01').weekday).toBe(5)
+  })
+
+  it('should allow first day of week', () => {
+    const weekdays = [1, 2, 3, 4, 5, 6, 0]
+    const skips = getWeekdaySkips(weekdays)
+    const today = parseTimestamp('2019-05-03')
+    const date = parseTimestamp('2019-04-30')
+    const start = getStartOfWeek(date, weekdays, today)
+    const end = getEndOfWeek(date, weekdays, today)
+
+    const days = createDayList(
+      start,
+      end,
+      today,
+      skips,
+      Number.MAX_SAFE_INTEGER
+    )
+
+    expect(days).toEqual([
+        {"date": "2019-04-29", "day": 29, "future": false, "hasDay": true, "hasTime": false, "hour": 0, "minute": 0, "month": 4, "past": true, "present": false, "time": "", "weekday": 1, "year": 2019},
+        {"date": "2019-04-30", "day": 30, "future": false, "hasDay": true, "hasTime": false, "hour": 0, "minute": 0, "month": 4, "past": true, "present": false, "time": "", "weekday": 2, "year": 2019},
+        {"date": "2019-05-01", "day": 1, "future": false, "hasDay": true, "hasTime": false, "hour": 0, "minute": 0, "month": 5, "past": true, "present": false, "time": "", "weekday": 3, "year": 2019},
+        {"date": "2019-05-02", "day": 2, "future": false, "hasDay": true, "hasTime": false, "hour": 0, "minute": 0, "month": 5, "past": true, "present": false, "time": "", "weekday": 4, "year": 2019},
+        {"date": "2019-05-03", "day": 3, "future": false, "hasDay": true, "hasTime": false, "hour": 0, "minute": 0, "month": 5, "past": false, "present": true, "time": "", "weekday": 5, "year": 2019},
+        {"date": "2019-05-04", "day": 4, "future": true, "hasDay": true, "hasTime": false, "hour": 0, "minute": 0, "month": 5, "past": false, "present": false, "time": "", "weekday": 6, "year": 2019},
+        {"date": "2019-05-05", "day": 5, "future": true, "hasDay": true, "hasTime": false, "hour": 0, "minute": 0, "month": 5, "past": false, "present": false, "time": "", "weekday": 0, "year": 2019}
+    ])
   })
 })
