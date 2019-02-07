@@ -1,38 +1,38 @@
 $material-dark: (
   'status-bar': (
-    'regular': #000000,
-    'lights-out': rgba(#000, 0.2)
+    'regular': map-get($shades, 'black'),
+    'lights-out': rgba(map-get($shades, 'black'), 0.2)
   ),
-  'app-bar': #212121,
+  'app-bar': map-get($grey, 'darken-4'),
   'background': #303030,
-  'cards': #424242,
+  'cards': map-get($grey, 'darken-3'),
   'chips': #555,
-  'dividers': rgba(#fff, 0.12),
+  'dividers': rgba(map-get($shades, 'white'), 0.12),
   'text': (
-    'theme': #fff,
-    'primary': #fff,
-    'secondary': rgba(#fff, 0.7),
-    'disabled': rgba(#fff, 0.5),
+    'theme': map-get($shades, 'white'),
+    'primary': map-get($shades, 'white'),
+    'secondary': rgba(map-get($shades, 'white'), 0.7),
+    'disabled': rgba(map-get($shades, 'white'), 0.5),
     'link': map-get($blue, 'accent-1'),
     'link-hover': map-get($grey, 'lighten-3')
   ),
   'icons': (
-    'active': #fff,
-    'inactive': rgba(#fff, 0.5)
+    'active': map-get($shades, 'white'),
+    'inactive': rgba(map-get($shades, 'white'), 0.5)
   ),
   'inputs': (
-    'box': #fff,
-    'solo-inverted': rgba(#fff, 0.16),
-    'solo-inverted-focused': #fff,
+    'box': map-get($shades, 'white'),
+    'solo-inverted': rgba(map-get($shades, 'white'), 0.16),
+    'solo-inverted-focused': map-get($shades, 'white'),
     'solo-inverted-focused-text': map-get(map-get($material-light, 'text'), 'primary')
   ),
   'list-tile': (
-    'hover': rgba(#fff, 0.08)
+    'hover': rgba(map-get($shades, 'white'), 0.08)
   ),
   'buttons': (
-    'disabled': rgba(#fff, 0.3),
-    'focused': rgba(#fff, 0.12),
-    'focused-alt': rgba(#fff, 0.1),
+    'disabled': rgba(map-get($shades, 'white'), 0.3),
+    'focused': rgba(map-get($shades, 'white'), 0.12),
+    'focused-alt': rgba(map-get($shades, 'white'), 0.1),
     'pressed': rgba(#ccc, 0.25)
   ),
   'expansion-panels': (
@@ -44,46 +44,46 @@ $material-dark: (
       'disabled': map-get($grey, 'darken-3')
     ),
     'track': (
-      'inactive': rgba(#fff, 0.3),
-      'disabled': rgba(#fff, 0.1)
+      'inactive': rgba(map-get($shades, 'white'), 0.3),
+      'disabled': rgba(map-get($shades, 'white'), 0.1)
     )
   ),
   'slider': (
-    'active': rgba(#fff, 0.3),
-    'inactive': rgba(#fff, 0.2),
-    'disabled': rgba(#fff, 0.2),
-    'discrete': #fff
+    'active': rgba(map-get($shades, 'white'), 0.3),
+    'inactive': rgba(map-get($shades, 'white'), 0.2),
+    'disabled': rgba(map-get($shades, 'white'), 0.2),
+    'discrete': map-get($shades, 'white')
   ),
   'tabs': (
-    'active': #fff
+    'active': map-get($shades, 'white')
   ),
   'toggle-buttons': (
-    'color': #FFFFFF
+    'color': map-get($shades, 'white')
   ),
   'text-fields': (
-    'box': rgba(#000, 0.1),
-    'box-hover': rgba(#000, 0.2),
-    'box-focus': rgba(#000, 0.3)
+    'box': rgba(map-get($shades, 'black'), 0.1),
+    'box-hover': rgba(map-get($shades, 'black'), 0.2),
+    'box-focus': rgba(map-get($shades, 'black'), 0.3)
   ),
-  'input-bottom-line': rgba(#fff, 0.7),
+  'input-bottom-line': rgba(map-get($shades, 'white'), 0.7),
   'stepper': (
-    'active': rgba(#fff, 1),
-    'completed': rgba(#fff, 0.87),
-    'hover': rgba(#fff, 0.75)
+    'active': rgba(map-get($shades, 'white'), 1),
+    'completed': rgba(map-get($shades, 'white'), 0.87),
+    'hover': rgba(map-get($shades, 'white'), 0.75)
   ),
   'table': (
     'active': #505050,
     'hover': map-get($grey, 'darken-2')
   ),
   'picker': (
-    'body': #424242,
+    'body': map-get($grey, 'darken-3'),
     'clock': map-get($grey, 'darken-2'),
     'indeterminateTime': map-get($grey, 'darken-1'),
     'title': map-get($grey, 'darken-2')
   ),
   'bg-color': #303030,
-  'fg-color': #fff,
-  'text-color': #fff,
+  'fg-color': map-get($shades, 'white'),
+  'text-color': map-get($shades, 'white'),
   'primary-text-percent': 1,
   'secondary-text-percent': 0.7,
   'disabledORhints-text-percent': 0.5,
