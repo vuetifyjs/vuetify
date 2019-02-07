@@ -5,15 +5,6 @@ import * as ThemeUtils from './utils/theme'
 import { VuetifyParsedTheme, VuetifyThemeOptions } from 'vuetify/types/services/theme'
 import { VuetifyServiceInstance } from 'vuetify/types/services'
 
-// Process
-// have a designated default
-// have themes (default dark/light)
-// can have other designated themes
-// the default activates the specific theme type for generated styles
-// ssr we hook this into the ssrContext
-// for spa we simply attach a style tag
-// default should be a single controlled variable that we monitor through set/get
-// when changed, update the theme and apply the new styles
 export class Theme implements VuetifyServiceInstance {
   static property = 'theme'
 
