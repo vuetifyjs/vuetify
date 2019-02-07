@@ -6,8 +6,8 @@
       </v-flex>
       <v-flex xs6>
         <v-select
-          :items="states"
           v-model="e1"
+          :items="states"
           menu-props="auto"
           label="Select"
           hide-details
@@ -20,8 +20,8 @@
       </v-flex>
       <v-flex xs6>
         <v-select
-          :items="states"
           v-model="e2"
+          :items="states"
           append-outer-icon="map"
           menu-props="auto"
           hide-details

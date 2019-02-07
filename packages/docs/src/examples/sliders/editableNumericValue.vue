@@ -48,8 +48,8 @@
 
           <v-flex xs9>
             <v-slider
-              :max="255"
               v-model="blue"
+              :max="255"
               label="B"
             ></v-slider>
           </v-flex>

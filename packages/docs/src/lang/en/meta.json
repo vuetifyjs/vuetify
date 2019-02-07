@@ -189,6 +189,11 @@
     "description": "The v-bottom-sheets component is used for elevating content above other elements in a dialog style fashion",
     "keywords": "bottom sheets, bottom dialog, bottom modal"
   },
+  "components/calendars": {
+    "title": "Calendars",
+    "description": "Calendar component for Vuetify framework.",
+    "keywords": "vuetify, calendar, components"
+  },
   "components/cards": {
     "title": "Cards",
     "description": "Card component for Vuetify framework.",

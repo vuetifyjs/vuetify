@@ -1,0 +1,127 @@
+{
+  "header": "crwdns13576:0crwdne13576:0",
+  "headerText": "crwdns13578:0crwdne13578:0",
+  "supplemental": [
+    "crwdns13580:0crwdne13580:0"
+  ],
+  "examples": {
+    "usage": {
+      "desc": "crwdns13582:0crwdne13582:0"
+    },
+    "singleLine": {
+      "header": "crwdns13584:0crwdne13584:0",
+      "desc": "crwdns13586:0crwdne13586:0"
+    },
+    "disabledAndReadonly": {
+      "header": "crwdns13588:0crwdne13588:0",
+      "desc": "crwdns13590:0crwdne13590:0"
+    },
+    "icon": {
+      "header": "crwdns13592:0crwdne13592:0",
+      "desc": "crwdns13594:0crwdne13594:0"
+    },
+    "clearable": {
+      "header": "crwdns13596:0crwdne13596:0",
+      "desc": "crwdns13598:0crwdne13598:0"
+    },
+    "iconEvents": {
+      "header": "crwdns13600:0crwdne13600:0",
+      "desc": "crwdns13602:0crwdne13602:0"
+    },
+    "iconSlots": {
+      "header": "crwdns13604:0crwdne13604:0",
+      "desc": "crwdns13606:0crwdne13606:0"
+    },
+    "labelSlot": {
+      "header": "crwdns13608:0crwdne13608:0",
+      "desc": "crwdns13610:0crwdne13610:0"
+    },
+    "characterCounter": {
+      "header": "crwdns13612:0crwdne13612:0",
+      "desc": "crwdns13614:0crwdne13614:0"
+    },
+    "password": {
+      "header": "crwdns13616:0crwdne13616:0",
+      "desc": "crwdns13618:0crwdne13618:0"
+    },
+    "validation": {
+      "header": "crwdns13620:0crwdne13620:0",
+      "desc": "crwdns13622:0crwdne13622:0"
+    },
+    "fullWidthWithCharacterCounter": {
+      "header": "crwdns13624:0crwdne13624:0",
+      "desc": "crwdns13626:0crwdne13626:0"
+    },
+    "hint": {
+      "header": "crwdns13628:0crwdne13628:0",
+      "desc": "crwdns13630:0crwdne13630:0"
+    },
+    "prefixesAndSuffixes": {
+      "header": "crwdns13632:0crwdne13632:0",
+      "desc": "crwdns13634:0crwdne13634:0"
+    },
+    "customValidation": {
+      "header": "crwdns13636:0crwdne13636:0",
+      "desc": "crwdns13638:0[vuelidate]crwdnd13638:0[vee-validation]crwdne13638:0"
+    },
+    "box": {
+      "header": "crwdns13640:0crwdne13640:0",
+      "desc": "crwdns13642:0crwdne13642:0"
+    },
+    "solo": {
+      "header": "crwdns13644:0crwdne13644:0",
+      "desc": "crwdns13646:0crwdne13646:0"
+    },
+    "outline": {
+      "header": "crwdns13648:0crwdne13648:0",
+      "desc": "crwdns13650:0crwdne13650:0"
+    },
+    "customColors": {
+      "header": "crwdns13652:0crwdne13652:0",
+      "desc": "crwdns13654:0crwdne13654:0"
+    },
+    "masks": {
+      "header": "crwdns13656:0crwdne13656:0",
+      "desc": "crwdns13658:0crwdne13658:0"
+    },
+    "progressBar": {
+      "header": "crwdns13660:0crwdne13660:0",
+      "desc": "crwdns13662:0crwdne13662:0"
+    }
+  },
+  "props": {
+    "appendOuterIcon": "crwdns13664:0crwdne13664:0",
+    "appendOuterIconCb": "crwdns13666:0crwdne13666:0",
+    "autoGrow": "crwdns13668:0crwdne13668:0",
+    "autofocus": "crwdns13670:0crwdne13670:0",
+    "box": "crwdns13672:0crwdne13672:0",
+    "browserAutocomplete": "crwdns13674:0crwdne13674:0",
+    "clearIcon": "crwdns13676:0crwdne13676:0",
+    "clearIconCb": "crwdns13678:0crwdne13678:0",
+    "counter": "crwdns13680:0crwdne13680:0",
+    "flat": "crwdns13682:0crwdne13682:0",
+    "fullWidth": "crwdns13684:0crwdne13684:0",
+    "multiLine": "crwdns13686:0crwdne13686:0",
+    "noResize": "crwdns13688:0crwdne13688:0",
+    "outline": "crwdns13690:0crwdne13690:0",
+    "placeholder": "crwdns13692:0crwdne13692:0",
+    "prefix": "crwdns13694:0crwdne13694:0",
+    "prependInnerIcon": "crwdns13696:0crwdne13696:0",
+    "prependInnerIconCb": "crwdns13698:0crwdne13698:0",
+    "reverse": "crwdns13700:0crwdne13700:0",
+    "rows": "crwdns13702:0crwdne13702:0",
+    "rowHeight": "crwdns13704:0crwdne13704:0",
+    "solo": "crwdns13706:0crwdne13706:0",
+    "soloInverted": "crwdns13708:0crwdne13708:0",
+    "suffix": "crwdns13710:0crwdne13710:0",
+    "textarea": "crwdns13712:0crwdne13712:0",
+    "toggleKeys": "crwdns13714:0crwdne13714:0",
+    "type": "crwdns13716:0crwdne13716:0"
+  },
+  "events": {
+    "change": "crwdns13718:0crwdne13718:0",
+    "click:append-outer": "crwdns13720:0crwdne13720:0",
+    "click:prepend-inner": "crwdns13722:0crwdne13722:0",
+    "update:error": "crwdns13724:0crwdne13724:0"
+  }
+}

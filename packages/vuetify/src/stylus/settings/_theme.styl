@@ -10,46 +10,46 @@ $line-height-root := 1.5
 // ============================================================
 $material-light := {
   status-bar: {
-    regular: #E0E0E0,
-    lights-out: rgba(#fff, .7)
+    regular: $grey.lighten-2,
+    lights-out: rgba($shades.white, .7)
   },
-  app-bar: #F5F5F5,
-  background: #FAFAFA,
-  cards: #FFFFFF,
+  app-bar: $grey.lighten-4,
+  background: $grey.lighten-5,
+  cards: $shades.white,
   chips: {
     background: $grey.lighten-2,
-    color: rgba(#000, .87)
+    color: rgba($shades.black, .87)
   },
-  dividers: rgba(#000, .12),
+  dividers: rgba($shades.black, .12),
   text: {
-    theme: #fff,
-    primary: rgba(#000, .87),
-    secondary: rgba(#000, .54),
-    disabled: rgba(#000, .38),
+    theme: $shades.white,
+    primary: rgba($shades.black, .87),
+    secondary: rgba($shades.black, .54),
+    disabled: rgba($shades.black, .38),
     link: $blue.darken-2,
     link-hover: $grey.darken-3
   },
   icons: {
-    active: rgba(#000, .54),
-    inactive: rgba(#000, .38)
+    active: rgba($shades.black, .54),
+    inactive: rgba($shades.black, .38)
   },
   inputs: {
-    box: rgba(#000, .04),
-    solo-inverted: rgba(#000, .16),
-    solo-inverted-focused: #424242,
-    solo-inverted-focused-text: #fff
+    box: rgba($shades.black, .04),
+    solo-inverted: rgba($shades.black, .16),
+    solo-inverted-focused: $grey.darken-3,
+    solo-inverted-focused-text: $shades.white
   },
   buttons: {
-    disabled: rgba(#000, .26),
-    focused: rgba(#000, .12),
-    focused-alt: rgba(#fff, .6),
+    disabled: rgba($shades.black, .26),
+    focused: rgba($shades.black, .12),
+    focused-alt: rgba($shades.white, .6),
     pressed: rgba(#999, .4)
   },
   expansion-panels: {
-    focus: #EEEEEE
+    focus: $grey.lighten-3
   },
   list-tile: {
-    hover: rgba(#000, .04)
+    hover: rgba($shades.black, .04)
   },
   selection-controls: {
     thumb: {
@@ -57,88 +57,97 @@ $material-light := {
       disabled: $grey.lighten-1
     },
     track: {
-      inactive: rgba(#000, .38),
-      disabled: rgba(#000, .12)
+      inactive: rgba($shades.black, .38),
+      disabled: rgba($shades.black, .12)
     }
   },
   slider: {
-    active: rgba(#000, .38),
-    inactive: rgba(#000, .26),
-    disabled: rgba(#000, .26),
-    discrete: #000
+    active: rgba($shades.black, .38),
+    inactive: rgba($shades.black, .26),
+    disabled: rgba($shades.black, .26),
+    discrete: $shades.black
   },
   tabs: {
-    active: rgba(#000, .87)
+    active: rgba($shades.black, .87)
   },
   text-fields: {
-    box: rgba(#000, .06),
-    box-hover: rgba(#000, .12)
+    box: rgba($shades.black, .06),
+    box-hover: rgba($shades.black, .12)
   },
-  input-bottom-line: rgba(#000, .42),
+  input-bottom-line: rgba($shades.black, .42),
   stepper: {
-    active: rgba(#fff, 1),
-    completed: rgba(#000, 0.87),
-    hover: rgba(#000, 0.54)
+    active: rgba($shades.white, 1),
+    completed: rgba($shades.black, 0.87),
+    hover: rgba($shades.black, 0.54)
   },
   table: {
     active: $grey.lighten-4
     hover: $grey.lighten-3
   },
   picker: {
-    body: #fff,
+    body: $shades.white,
     clock: $grey.lighten-2,
     indeterminateTime: $grey.lighten-1,
     title: $grey.lighten-2
   },
-  bg-color: #fff
-  fg-color: #000
-  text-color: #000
+  bg-color: $shades.white
+  fg-color: $shades.black
+  text-color: $shades.black
   primary-text-percent: .87
   secondary-text-percent: .54
   disabledORhints-text-percent: .38
   divider-percent: .12
   active-icon-percent: .54
   inactive-icon-percent: .38
+  calendar: {
+    background-color: #fff
+    outside-background-color: #f7f7f7
+    line-color: #e0e0e0
+    interval-color: $grey.darken-3
+    interval-line-color: $grey.lighten-2
+    text-color: #000
+    past-color: rgba(#000, .38)
+  }
 }
 
 $material-dark := {
   status-bar: {
-    regular: #000000,
-    lights-out: rgba(#000, .2)
+    regular: $shades.black,
+    lights-out: rgba($shades.black, .2)
   },
-  app-bar: #212121,
+  app-bar: $grey.darken-4,
   background: #303030,
-  cards: #424242,
+  cards: $grey.darken-3,
   chips: {
     background: #555,
-    color: #fff
+    color: $shades.white
   },
-  dividers: rgba(#fff, .12),
+  dividers: rgba($shades.white, .12),
   text: {
-    theme: #fff,
-    primary: #fff,
-    secondary: rgba(#fff, .70),
-    disabled: rgba(#fff, .50),
+    theme: $shades.white,
+    primary: $shades.white,
+    secondary: rgba($shades.white, .70),
+    disabled: rgba($shades.white, .50),
     link: $blue.accent-1,
     link-hover: $grey.lighten-3
   },
   icons: {
-    active: #fff,
-    inactive: rgba(#fff, .5)
+    active: $shades.white,
+    inactive: rgba($shades.white, .5)
   },
   inputs: {
-    box: #fff,
-    solo-inverted: rgba(#fff, .16),
-    solo-inverted-focused: #fff,
+    box: $shades.white,
+    solo-inverted: rgba($shades.white, .16),
+    solo-inverted-focused: $shades.white,
     solo-inverted-focused-text: $material-light.text.primary
   },
   list-tile: {
-    hover: rgba(#fff, .08)
+    hover: rgba($shades.white, .08)
   },
   buttons: {
-    disabled: rgba(#fff, .3),
-    focused: rgba(#fff, .12),
-    focused-alt: rgba(#fff, .1),
+    disabled: rgba($shades.white, .3),
+    focused: rgba($shades.white, .12),
+    focused-alt: rgba($shades.white, .1),
     pressed: rgba(#ccc, .25)
   },
   expansion-panels: {
@@ -150,50 +159,59 @@ $material-dark := {
       disabled: $grey.darken-3
     },
     track: {
-      inactive: rgba(#fff, .3),
-      disabled: rgba(#fff, .1)
+      inactive: rgba($shades.white, .3),
+      disabled: rgba($shades.white, .1)
     }
   },
   slider: {
-    active: rgba(#fff, .3),
-    inactive: rgba(#fff, .2),
-    disabled: rgba(#fff, .2),
-    discrete: #fff
+    active: rgba($shades.white, .3),
+    inactive: rgba($shades.white, .2),
+    disabled: rgba($shades.white, .2),
+    discrete: $shades.white
   },
   tabs: {
-    active: #fff
+    active: $shades.white
   },
   text-fields: {
-    box: rgba(#000, .1),
-    box-hover: rgba(#000, .2),
-    box-focus: rgba(#000, .3)
+    box: rgba($shades.black, .1),
+    box-hover: rgba($shades.black, .2),
+    box-focus: rgba($shades.black, .3)
   },
-  input-bottom-line: rgba(#fff, .7),
+  input-bottom-line: rgba($shades.white, .7),
 
   stepper: {
-    active: rgba(#fff, 1),
-    completed: rgba(#fff, 0.87),
-    hover: rgba(#fff, 0.75)
+    active: rgba($shades.white, 1),
+    completed: rgba($shades.white, 0.87),
+    hover: rgba($shades.white, 0.75)
   },
   table: {
     active: #505050
     hover: $grey.darken-2
   },
   picker: {
-    body: #424242,
+    body: $grey.darken-3,
     clock: $grey.darken-2,
     indeterminateTime: $grey.darken-1,
     title: $grey.darken-2
   },
   bg-color: #303030
-  fg-color: #fff
-  text-color: #fff
+  fg-color: $shades.white
+  text-color: $shades.white
   primary-text-percent: 1
   secondary-text-percent: .70
   disabledORhints-text-percent: .50
   divider-percent: .12
   active-icon-percent: 1
   inactive-icon-percent: .50
+  calendar: {
+    background-color: #303030
+    outside-background-color: #202020
+    line-color: $grey.base
+    interval-color: $grey.lighten-3
+    interval-line-color: $grey.darken-2
+    text-color: #fff
+    past-color: rgba(#fff, .50)
+  }
 }
 
 // Default Material Theme

@@ -1,0 +1,63 @@
+{
+  "header": "crwdns12852:0crwdne12852:0",
+  "headerText": "crwdns12854:0crwdne12854:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns12856:0crwdne12856:0"
+    },
+    "circularColored": {
+      "header": "crwdns12858:0crwdne12858:0",
+      "desc": "crwdns12860:0crwdne12860:0"
+    },
+    "circularIndeterminate": {
+      "header": "crwdns12862:0crwdne12862:0",
+      "desc": "crwdns12864:0crwdne12864:0"
+    },
+    "circularSizeAndWidth": {
+      "header": "crwdns12866:0crwdne12866:0",
+      "desc": "crwdns12868:0crwdne12868:0"
+    },
+    "circularRotate": {
+      "header": "crwdns12870:0crwdne12870:0",
+      "desc": "crwdns12872:0crwdne12872:0"
+    },
+    "linearDeterminate": {
+      "header": "crwdns12874:0crwdne12874:0",
+      "desc": "crwdns12876:0crwdne12876:0"
+    },
+    "linearIndeterminate": {
+      "header": "crwdns12878:0crwdne12878:0",
+      "desc": "crwdns12880:0crwdne12880:0"
+    },
+    "linearBuffer": {
+      "header": "crwdns12882:0crwdne12882:0",
+      "desc": "crwdns12884:0crwdne12884:0"
+    },
+    "linearQueryIndeterminateAndDeterminate": {
+      "header": "crwdns12886:0crwdne12886:0",
+      "desc": "crwdns12888:0crwdne12888:0"
+    },
+    "linearCustomHeightAndContextualColors": {
+      "header": "crwdns12890:0crwdne12890:0",
+      "desc": "crwdns12892:0crwdne12892:0"
+    },
+    "linearCustomColors": {
+      "header": "crwdns12894:0crwdne12894:0",
+      "desc": "crwdns12896:0crwdne12896:0"
+    }
+  },
+  "props": {
+    "active": "crwdns12898:0crwdne12898:0",
+    "backgroundColor": "crwdns12900:0crwdne12900:0",
+    "backgroundOpacity": "crwdns12902:0crwdne12902:0",
+    "bufferValue": "crwdns12904:0crwdne12904:0",
+    "button": "crwdns12906:0crwdne12906:0",
+    "fill": "crwdns12908:0crwdne12908:0",
+    "indeterminate": "crwdns12910:0crwdne12910:0",
+    "query": "crwdns12912:0crwdne12912:0",
+    "rotate": "crwdns12914:0crwdne12914:0",
+    "size": "crwdns12916:0crwdne12916:0",
+    "value": "crwdns12918:0crwdne12918:0",
+    "width": "crwdns12920:0crwdne12920:0"
+  }
+}

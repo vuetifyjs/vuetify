@@ -178,7 +178,7 @@ export default mixins(
       const styles = {
         height: convertToUnit(this.height),
         marginTop: `${this.marginTop}px`,
-        maxHeight: this.maxHeight == null || `calc(100% - ${+this.maxHeight}px)`,
+        maxHeight: this.maxHeight != null ? `calc(100% - ${+this.maxHeight}px)` : undefined,
         transform: `translateX(${this.calculatedTransform}px)`,
         width: `${this.calculatedWidth}px`
       }

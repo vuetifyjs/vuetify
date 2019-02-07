@@ -1,0 +1,114 @@
+{
+  "header": "crwdns11780:0crwdne11780:0",
+  "headerText": "crwdns11782:0crwdne11782:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns11784:0crwdne11784:0"
+    },
+    "noData": {
+      "header": "crwdns11786:0crwdne11786:0",
+      "desc": "crwdns11788:0crwdne11788:0"
+    },
+    "headers": {
+      "header": "crwdns11790:0crwdne11790:0",
+      "desc": "crwdns11792:0crwdne11792:0"
+    },
+    "headerCell": {
+      "header": "crwdns11794:0crwdne11794:0",
+      "desc": "crwdns11796:0crwdne11796:0"
+    },
+    "progress": {
+      "header": "crwdns11798:0crwdne11798:0",
+      "desc": "crwdns11800:0crwdne11800:0"
+    },
+    "footer": {
+      "header": "crwdns11802:0crwdne11802:0",
+      "desc": "crwdns11804:0crwdne11804:0"
+    },
+    "expand": {
+      "header": "crwdns11806:0crwdne11806:0",
+      "desc": "crwdns11808:0crwdne11808:0"
+    },
+    "pageText": {
+      "header": "crwdns11810:0crwdne11810:0",
+      "desc": "crwdns11812:0crwdne11812:0"
+    },
+    "select": {
+      "header": "crwdns11814:0crwdne11814:0",
+      "desc": "crwdns11816:0crwdne11816:0"
+    },
+    "search": {
+      "header": "crwdns11818:0crwdne11818:0",
+      "desc": "crwdns11820:0crwdne11820:0"
+    },
+    "customIcons": {
+      "header": "crwdns11822:0crwdne11822:0",
+      "desc": "crwdns11824:0crwdne11824:0"
+    },
+    "paginate": {
+      "header": "crwdns11826:0crwdne11826:0",
+      "desc": "crwdns11828:0crwdne11828:0"
+    },
+    "sort": {
+      "header": "crwdns11830:0crwdne11830:0",
+      "desc": "crwdns11832:0crwdne11832:0"
+    },
+    "server": {
+      "header": "crwdns11834:0crwdne11834:0",
+      "desc": "crwdns11836:0crwdne11836:0"
+    },
+    "headerless": {
+      "header": "crwdns11838:0crwdne11838:0",
+      "desc": "crwdns11840:0crwdne11840:0"
+    },
+    "editdialog": {
+      "header": "crwdns11842:0crwdne11842:0",
+      "desc": "crwdns11844:0crwdne11844:0"
+    },
+    "crud": {
+      "header": "crwdns11846:0crwdne11846:0",
+      "desc": "crwdns11848:0crwdne11848:0"
+    }
+  },
+  "props": {
+    "v-edit-dialog": {
+      "cancelText": "crwdns11850:0crwdne11850:0",
+      "lazy": "crwdns11852:0crwdne11852:0",
+      "large": "crwdns11854:0crwdne11854:0",
+      "saveText": "crwdns11856:0crwdne11856:0",
+      "transition": "crwdns11858:0crwdne11858:0"
+    },
+    "v-data-table": {
+      "headerKey": "crwdns11860:0crwdne11860:0",
+      "headerText": "crwdns11862:0crwdne11862:0",
+      "headers": "crwdns11864:0crwdne11864:0",
+      "headersLength": "crwdns11866:0crwdne11866:0",
+      "hideHeaders": "crwdns11868:0crwdne11868:0",
+      "sortIcon": "crwdns11870:0crwdne11870:0",
+      "nextIcon": "crwdns11872:0crwdne11872:0",
+      "prevIcon": "crwdns11874:0crwdne11874:0"
+    }
+  },
+  "scopedSlots": {
+    "v-data-table": {
+      "headerCell": "crwdns11876:0crwdne11876:0",
+      "headers": "crwdns11878:0crwdne11878:0"
+    }
+  },
+  "slots": {
+    "v-edit-dialog": {
+      "input": "crwdns11880:0crwdne11880:0"
+    }
+  },
+  "events": {
+    "v-edit-dialog": {
+      "cancel": "crwdns11882:0crwdne11882:0",
+      "close": "crwdns11884:0crwdne11884:0",
+      "open": "crwdns11886:0crwdne11886:0",
+      "save": "crwdns11888:0crwdne11888:0"
+    },
+    "v-data-table": {
+      "update:pagination": "crwdns11890:0crwdne11890:0"
+    }
+  }
+}

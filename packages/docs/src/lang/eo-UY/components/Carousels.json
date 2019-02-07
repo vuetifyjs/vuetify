@@ -1,0 +1,50 @@
+{
+  "header": "crwdns11440:0crwdne11440:0",
+  "headerText": "crwdns11442:0crwdne11442:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns11444:0crwdne11444:0",
+      "uninverted": true
+    },
+    "customTransition": {
+      "header": "crwdns11448:0crwdne11448:0",
+      "desc": "crwdns11450:0crwdne11450:0",
+      "uninverted": true
+    },
+    "customIcons": {
+      "header": "crwdns11454:0crwdne11454:0",
+      "desc": "crwdns11456:0crwdne11456:0",
+      "uninverted": true
+    },
+    "hideDelimiters": {
+      "header": "crwdns11460:0crwdne11460:0",
+      "desc": "crwdns11462:0crwdne11462:0",
+      "uninverted": true
+    },
+    "hideControls": {
+      "header": "crwdns11466:0crwdne11466:0",
+      "desc": "crwdns11468:0crwdne11468:0",
+      "uninverted": true
+    }
+  },
+  "props": {
+    "activeClass": "crwdns11472:0crwdne11472:0",
+    "disabled": "crwdns11474:0crwdne11474:0",
+    "mandatory": "crwdns11476:0crwdne11476:0",
+    "multiple": "crwdns11478:0crwdne11478:0",
+    "nextIcon": "crwdns11480:0crwdne11480:0",
+    "prevIcon": "crwdns11482:0crwdne11482:0",
+    "cycle": "crwdns11484:0crwdne11484:0",
+    "delimiterIcon": "crwdns11486:0crwdne11486:0",
+    "hideControls": "crwdns11488:0crwdne11488:0",
+    "hideDelimiters": "crwdns11490:0crwdne11490:0",
+    "interval": "crwdns11492:0crwdne11492:0",
+    "reverse": "crwdns11494:0crwdne11494:0",
+    "reverseTransition": "crwdns11496:0crwdne11496:0",
+    "src": "crwdns11498:0crwdne11498:0",
+    "touch": "crwdns11500:0crwdne11500:0",
+    "touchless": "crwdns11502:0crwdne11502:0",
+    "transition": "crwdns11504:0crwdne11504:0",
+    "vertical": "crwdns11506:0crwdne11506:0"
+  }
+}
