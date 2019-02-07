@@ -82,8 +82,6 @@ export default mixins(Themeable, RegistrableProvide('expansionPanel')).extend({
 
   methods: {
     updateFromValue (v: number | number[]) {
-      if (Array.isArray(v) && !this.expand) return
-
       let open = Array(this.items.length).fill(false)
       if (typeof v === 'number') {
         open[v] = true
@@ -114,7 +112,7 @@ export default mixins(Themeable, RegistrableProvide('expansionPanel')).extend({
     register (content: VExpansionPanelContentInstance) {
       const i = this.items.push(content) - 1
       this.value !== null && this.updateFromValue(this.value)
-      content.toggle(!!this.open[i])
+      content.isActive = !!this.open[i]
     },
     unregister (content: VExpansionPanelContentInstance) {
       const index = this.items.findIndex(i => i._uid === content._uid)

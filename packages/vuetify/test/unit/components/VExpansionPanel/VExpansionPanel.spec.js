@@ -178,4 +178,15 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
     expect(input).toHaveBeenCalledWith([false, true])
     expect(wrapper.find('.v-expansion-panel__container--active').length).toBe(1)
   })
+
+  it('should be opened at start when initialised as open', async () => {
+    const input = jest.fn()
+    const wrapper = mount(createPanel({ 
+      value: [true] 
+    }))
+
+    wrapper.vm.$on('input', input)
+
+    expect(wrapper.find('.v-expansion-panel__container--active').length).toBe(1)
+  })
 })
