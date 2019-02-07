@@ -26,12 +26,25 @@ export default class Vuetify {
     this.use(services.Theme)
   }
 
+  // Called on the new vuetify instance
+  // bootstrap in install beforeCreate
+  // Exposes ssrContext if available
+  init (ssrContext?: object) {
+    this.installed.forEach(property => {
+      const service = this.framework[property]
+
+      service.init(ssrContext)
+    })
+  }
+
+  // Instantiate a VuetifyService
   use (Service: VuetifyService) {
     const property = Service.property
 
     if (this.installed.includes(property)) return
 
     this.framework[property] = new Service(this.preset[property])
+    this.installed.push(property)
   }
 }
 

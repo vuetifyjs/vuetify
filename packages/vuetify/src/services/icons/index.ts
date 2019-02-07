@@ -29,4 +29,6 @@ export class Icons implements VuetifyServiceInstance {
       ...(options.values || {})
     }
   }
+
+  public init () {}
 }

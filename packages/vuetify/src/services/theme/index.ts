@@ -9,6 +9,7 @@ export class Theme implements VuetifyServiceInstance {
   static property = 'theme'
 
   public default = 'light'
+  public disabled = false
   public options: VuetifyThemeOptions['options'] = {
     cspNonce: null,
     customProperties: false,
@@ -38,7 +39,11 @@ export class Theme implements VuetifyServiceInstance {
   }
 
   constructor (options: Partial<VuetifyThemeOptions> = {}) {
-    if (options.disable) return
+    if (options.disable) {
+      this.disabled = true
+
+      return
+    }
 
     this.options = {
       ...this.options,
@@ -117,8 +122,21 @@ export class Theme implements VuetifyServiceInstance {
     this.css = ''
   }
 
-  public mounted () {
-    this.applyTheme()
+  public init (ssrContext?: any) {
+    if (this.disabled) return
+
+    if (typeof document === 'undefined' && ssrContext) {
+      // SSR
+      const nonce = this.options.cspNonce
+        ? ` nonce="${this.options.cspNonce}"`
+        : ''
+      ssrContext.head = ssrContext.head || ''
+      ssrContext.head += `<style type="text/css" id="vuetify-theme-stylesheet"${nonce}>${this.generatedStyles}</style>`
+    } else if (typeof document !== 'undefined') {
+      // Client-side
+      this.genStyleElement()
+      this.applyTheme()
+    }
   }
 
   private genStyleElement () {
@@ -138,5 +156,37 @@ export class Theme implements VuetifyServiceInstance {
     }
 
     this.style = style
+  }
+
+  get currentTheme () {
+    const themes = this.themes || {}
+
+    return themes[this.default]
+  }
+
+  get generatedStyles () {
+    const theme = this.parsedTheme
+    let css
+
+    if (this.options.themeCache != null) {
+      css = this.options.themeCache.get(theme)
+      if (css != null) return css
+    }
+
+    css = ThemeUtils.genStyles(theme, this.options.customProperties)
+
+    if (this.options.minifyTheme != null) {
+      css = this.options.minifyTheme(css)
+    }
+
+    if (this.options.themeCache != null) {
+      this.options.themeCache.set(theme, css)
+    }
+
+    return css
+  }
+
+  get parsedTheme () {
+    return ThemeUtils.parse(this.currentTheme)
   }
 }

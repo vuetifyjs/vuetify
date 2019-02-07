@@ -22,6 +22,10 @@ export class Application implements VuetifyServiceInstance {
     footer: {}
   }
 
+  init (ssrContext?: object) {
+    //
+  }
+
   register (
     uid: number,
     location: TargetProp,

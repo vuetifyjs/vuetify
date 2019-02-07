@@ -31,9 +31,12 @@ export function install (Vue: VueConstructor, args?: object) {
     beforeCreate () {
       const options = this.$options as any
 
-      this.$vuetify = options.vuetify
-        ? Vue.observable(options.vuetify.framework)
-        : (options.parent && options.parent.$vuetify) || this
+      if (options.vuetify) {
+        options.vuetify.init(options.ssrContext)
+        this.$vuetify = Vue.observable(options.vuetify.framework)
+      } else {
+        this.$vuetify = (options.parent && options.parent.$vuetify) || this
+      }
     }
   })
 }

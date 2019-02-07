@@ -7,10 +7,14 @@ export function createVuetify (ssrContext) {
   return new Vuetify({
     ssr: Boolean(ssrContext),
     theme: {
-      primary: '#1867c0',
-      secondary: '#5CBBF6',
-      tertiary: '#E57373',
-      accent: '#005CAF'
+      themes: {
+        light: {
+          primary: '#1867c0',
+          secondary: '#5CBBF6',
+          tertiary: '#E57373',
+          accent: '#005CAF'
+        }
+      }
     },
     options: {
       minifyTheme: css => {

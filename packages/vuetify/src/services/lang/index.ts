@@ -49,6 +49,8 @@ export class Lang implements VuetifyServiceInstance {
     this.translator = options.t
   }
 
+  public init () {}
+
   public t (key: string, ...params: any[]) {
     if (!key.startsWith(LANG_PREFIX)) return key
 
