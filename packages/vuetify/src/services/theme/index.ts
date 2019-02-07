@@ -156,7 +156,7 @@ export class Theme implements VuetifyServiceInstance {
 
     this.ssr = Boolean(ssrContext)
 
-    if (this.isSSR) {
+    if (this.ssr) {
       // SSR
       const nonce = this.options.cspNonce ? ` nonce="${this.options.cspNonce}"` : ''
       ssrContext.head = ssrContext.head || ''
@@ -169,7 +169,7 @@ export class Theme implements VuetifyServiceInstance {
 
   // Check for existence of style element
   private checkStyleElement (): boolean {
-    if (this.isSSR) return false // SSR
+    if (this.ssr) return false // SSR
     if (this.styleEl) return true
 
     this.genStyleElement() // If doesn't have it, create it
@@ -200,6 +200,7 @@ export class Theme implements VuetifyServiceInstance {
 
     if (this.options.themeCache != null) {
       css = this.options.themeCache.get(theme)
+      /* istanbul ignore if */
       if (css != null) return css
     }
 
@@ -214,10 +215,6 @@ export class Theme implements VuetifyServiceInstance {
     }
 
     return css
-  }
-
-  get isSSR (): boolean {
-    return typeof document === 'undefined' && this.ssr
   }
 
   get parsedTheme (): VuetifyParsedTheme {

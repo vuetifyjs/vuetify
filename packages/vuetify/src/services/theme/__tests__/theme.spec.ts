@@ -95,7 +95,7 @@ describe('Theme.ts', () => {
     const theme = new Theme()
     const spy = jest.spyOn(theme, 'clearCss')
 
-    theme.applyTheme(false)
+    theme.applyTheme('')
     expect(spy).toHaveBeenCalledTimes(1)
 
     theme.themes = { light: FillVariant() }
@@ -126,6 +126,7 @@ describe('Theme.ts', () => {
 
     expect(themeCache.get).toHaveBeenCalledTimes(1)
     expect(themeCache.set).toHaveBeenCalledTimes(1)
+    expect(theme.generatedStyles).toMatchSnapshot()
   })
 
   it('should minify theme', () => {
@@ -145,6 +146,7 @@ describe('Theme.ts', () => {
 
     expect(minifyTheme).toHaveBeenCalled()
     expect(html.indexOf('foobar') > -1).toBe(true)
+    expect(theme.generatedStyles).toMatchSnapshot()
   })
 
   it('should add nonce to stylesheet', () => {
@@ -159,5 +161,38 @@ describe('Theme.ts', () => {
 
     const style = document.getElementById('vuetify-theme-stylesheet')
     expect(style!.getAttribute('nonce')).toBe('foobar')
+  })
+
+  it('should get and set current default theme', () => {
+    const theme = new Theme({
+      ...mock,
+      default: 'foobar'
+    })
+    const spy = jest.spyOn(theme, 'init')
+
+    expect(theme.current).toBe('foobar')
+    theme.current = 'fizzbuzz'
+
+    expect(theme.current).toBe('fizzbuzz')
+    expect(spy).toHaveBeenCalledTimes(1)
+  })
+
+  it('should initialize the theme', () => {
+    const theme = new Theme({
+      ...mock
+    })
+    const spy = jest.spyOn(theme, 'applyTheme')
+
+    theme.init()
+
+    // maybe disable coverage? ??? there are coverage data in console
+    // computer not letting me add more watchers so I need it for the coverage report
+
+    const ssrContext = { head: '' }
+    theme.init(ssrContext)
+
+    expect(spy).toHaveBeenCalledTimes(1)
+    expect(ssrContext.head).toBeTruthy()
+    expect(ssrContext.head).toMatchSnapshot()
   })
 })
