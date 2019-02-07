@@ -211,22 +211,21 @@ export default {
   render (h) {
     const children = []
     const data = {
-      'class': this.classes,
-      ref: 'dialog',
-      directives: [
-        {
-          name: 'click-outside',
-          value: () => (this.isActive = false),
-          args: {
-            closeConditional: this.closeConditional,
-            include: this.getOpenDependentElements
-          }
-        },
-        { name: 'show', value: this.isActive }
-      ],
-      on: {
-        click: e => { e.stopPropagation() }
-      }
+        ref: 'dialog',
+        directives: [
+          {
+            name: 'click-outside',
+            value: () => (this.isActive = false),
+            args: {
+              closeConditional: this.closeConditional,
+              include: this.getOpenDependentElements
+            }
+          },
+          { name: 'show', value: this.isActive }
+        ],
+        on: {
+          click: e => { e.stopPropagation() }
+        }
     }
 
     if (!this.fullscreen) {
