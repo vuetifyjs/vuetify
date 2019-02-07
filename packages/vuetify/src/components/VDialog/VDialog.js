@@ -211,6 +211,7 @@ export default {
   render (h) {
     const children = []
     const data = {
+        'class': this.classes,
         ref: 'dialog',
         directives: [
           {
