@@ -168,7 +168,7 @@ export default VTextField.extend({
           dense: this.dense,
           hideSelected: this.hideSelected,
           items: this.virtualizedItems,
-          noDataText: this.$vuetify.t(this.noDataText),
+          noDataText: this.$vuetify.lang.t(this.noDataText),
           selectedItems: this.selectedItems,
           itemAvatar: this.itemAvatar,
           itemDisabled: this.itemDisabled,
