@@ -161,7 +161,10 @@ function updateRipple (el: HTMLElement, binding: VNodeDirective, wasEnabled: boo
   }
   if (enabled && !wasEnabled) {
     if (navigator.maxTouchPoints) {
-      el.addEventListener('touchstart', rippleShow, false)
+      el.addEventListener('touchstart', rippleShow, {
+        capture: false,
+        passive: true
+      })
       el.addEventListener('touchend', rippleHide, false)
       el.addEventListener('touchcancel', rippleHide, false)
     } else {
