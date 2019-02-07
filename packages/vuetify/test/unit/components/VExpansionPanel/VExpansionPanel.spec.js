@@ -3,10 +3,10 @@ import { test } from '@/test'
 import VExpansionPanel from '@/components/VExpansionPanel/VExpansionPanel'
 import VExpansionPanelContent from '@/components/VExpansionPanel/VExpansionPanelContent'
 
-const createPanel = props => {
+const createPanel = (props, childProps)  => {
   return Vue.component('test', {
     render: h => {
-      const panelContent = h(VExpansionPanelContent, [
+      const panelContent = h(VExpansionPanelContent, { props: childProps }, [
         h('div', { slot: 'header' }, 'header'),
         'content'
       ])
@@ -188,5 +188,16 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
     wrapper.vm.$on('input', input)
 
     expect(wrapper.find('.v-expansion-panel__container--active').length).toBe(1)
+  })
+
+  it('should not render content initially when lazy', async () => {
+    const input = jest.fn()
+    const wrapper = mount(createPanel({ value: [] }, { lazy: true }))
+
+    wrapper.vm.$on('input', input)
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.find('.v-expansion-panel__body')[0].text()).toBe('')
   })
 })

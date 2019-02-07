@@ -94,7 +94,7 @@ export default mixins(Themeable, RegistrableProvide('expansionPanel')).extend({
     updatePanels (open: boolean[]) {
       this.open = open
       for (let i = 0; i < this.items.length; i++) {
-        this.items[i].toggle(open && open[i])
+        this.items[i].toggle(open && !!open[i])
       }
     },
     panelClick (uid: number) {
