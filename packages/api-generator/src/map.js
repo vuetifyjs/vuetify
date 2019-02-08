@@ -1148,6 +1148,22 @@ module.exports = {
       {
         name: 'input',
         value: 'string'
+      },
+      {
+        name: 'change',
+        value: 'string'
+      },
+      {
+        name: 'click:hour',
+        value: 'string'
+      },
+      {
+        name: 'click:minute',
+        value: 'string'
+      },
+      {
+        name: 'click:second',
+        value: 'string'
       }
     ]
   },
@@ -1178,6 +1194,12 @@ module.exports = {
       {
         name: 'append',
         props: VTreeviewScopedProps
+      }
+    ],
+    functions: [
+      {
+        name: 'updateAll',
+        signature: '(val: boolean): void'
       }
     ]
   },

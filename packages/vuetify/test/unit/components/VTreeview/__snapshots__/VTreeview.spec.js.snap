@@ -1,5 +1,105 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VTreeView.ts should filter items 1`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node v-treeview-node--leaf">
+    <div class="v-treeview-node__root">
+      <div class="v-treeview-node__content">
+        <div class="v-treeview-node__label">
+          one
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="v-treeview-node v-treeview-node--leaf">
+    <div class="v-treeview-node__root">
+      <div class="v-treeview-node__content">
+        <div class="v-treeview-node__label">
+          two
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTreeView.ts should filter items 2`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node v-treeview-node--leaf v-treeview-node--excluded">
+    <div class="v-treeview-node__root">
+      <div class="v-treeview-node__content">
+        <div class="v-treeview-node__label">
+          one
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="v-treeview-node v-treeview-node--leaf">
+    <div class="v-treeview-node__root">
+      <div class="v-treeview-node__content">
+        <div class="v-treeview-node__label">
+          two
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTreeView.ts should filter items using custom item filter 1`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node v-treeview-node--leaf v-treeview-node--excluded">
+    <div class="v-treeview-node__root">
+      <div class="v-treeview-node__content">
+        <div class="v-treeview-node__label">
+          one
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="v-treeview-node v-treeview-node--leaf v-treeview-node--excluded">
+    <div class="v-treeview-node__root">
+      <div class="v-treeview-node__content">
+        <div class="v-treeview-node__label">
+          two
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTreeView.ts should filter items using custom item filter 2`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node v-treeview-node--leaf">
+    <div class="v-treeview-node__root">
+      <div class="v-treeview-node__content">
+        <div class="v-treeview-node__label">
+          one
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="v-treeview-node v-treeview-node--leaf v-treeview-node--excluded">
+    <div class="v-treeview-node__root">
+      <div class="v-treeview-node__content">
+        <div class="v-treeview-node__label">
+          two
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
 exports[`VTreeView.ts should handle replacing items with new array of equal length 1`] = `
 
 <div class="v-treeview theme--light">

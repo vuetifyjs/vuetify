@@ -69,8 +69,8 @@ export function createRouter () {
           {
             path: '*',
             redirect: to => {
-              let lang = `/${getLanguageCookie() || 'en'}`
-              if (!languageRegex.test(lang)) lang = '/en'
+              let lang = `/${getLanguageCookie() || fallbackLocale}`
+              if (!languageRegex.test(lang)) lang = `/${fallbackLocale}`
 
               return `${lang}`
             }

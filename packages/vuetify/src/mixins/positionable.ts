@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { filterObjectOnKeys } from '../util/helpers'
-import { OptionsVue } from 'vue/types/vue'
+import { OptionsVue, VueConstructor } from 'vue/types/vue'
 
 const availableProps = {
   absolute: Boolean,
@@ -12,9 +12,7 @@ const availableProps = {
 }
 type props = Record<keyof typeof availableProps, boolean>
 
-type someProps<S extends keyof props> = { [P in S]: props[P] }
-type somePropsDef<S extends keyof props> = { [P in S]: typeof availableProps[P] }
-type Positionable<S extends keyof props> = OptionsVue<Vue, {}, {}, {}, someProps<S>, somePropsDef<S>>
+export type Positionable<S extends keyof props> = VueConstructor<Vue & { [P in S]: boolean }, { [P in S]: BooleanConstructor }>
 
 export function factory <S extends keyof props> (selected?: S[]): Positionable<S>
 export function factory (selected: undefined): OptionsVue<Vue, {}, {}, {}, props, typeof availableProps>

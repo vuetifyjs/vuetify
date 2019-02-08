@@ -125,8 +125,8 @@ export default {
       return `<span class="v-list__tile__mask">${escapeHTML(text)}</span>`
     },
     getMaskedCharacters (text) {
-      const searchInput = (this.searchInput || '').toString().toLowerCase()
-      const index = text.toLowerCase().indexOf(searchInput)
+      const searchInput = (this.searchInput || '').toString().toLocaleLowerCase()
+      const index = text.toLocaleLowerCase().indexOf(searchInput)
 
       if (index < 0) return { start: '', middle: text, end: '' }
 
@@ -178,7 +178,7 @@ export default {
       const scopedSlot = this.$scopedSlots.item({ parent, item, tile })
 
       return this.needsTile(scopedSlot)
-        ? this.$createElement(VListTile, tile, [scopedSlot])
+        ? this.$createElement(VListTile, tile, scopedSlot)
         : scopedSlot
     },
     genTileContent (item) {
@@ -193,9 +193,10 @@ export default {
     hasItem (item) {
       return this.parsedItems.indexOf(this.getValue(item)) > -1
     },
-    needsTile (tile) {
-      return tile.componentOptions == null ||
-        tile.componentOptions.Ctor.options.name !== 'v-list-tile'
+    needsTile (slot) {
+      return slot.length !== 1 ||
+        slot[0].componentOptions == null ||
+        slot[0].componentOptions.Ctor.options.name !== 'v-list-tile'
     },
     getAvatar (item) {
       return Boolean(getPropertyFromItem(item, this.itemAvatar, false))
