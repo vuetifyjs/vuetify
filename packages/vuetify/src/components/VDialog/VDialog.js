@@ -179,14 +179,19 @@ export default {
       this.bind()
     },
     bind () {
-      this.$listeners.keydown && window.addEventListener('keydown', this.onKeydown)
       window.addEventListener('focusin', this.onFocusin)
     },
     unbind () {
-      window.removeEventListener('keydown', this.onKeydown)
       window.removeEventListener('focusin', this.onFocusin)
     },
     onKeydown (e) {
+      if (e.keyCode === keyCodes.esc && !this.getOpenDependents().length) {
+        if (!this.persistent) {
+          this.isActive = false
+        } else if (!this.noClickAnimation) {
+          this.animateClick()
+        }
+      }
       this.$emit('keydown', e)
     },
     onFocusin (e) {
@@ -279,6 +284,9 @@ export default {
       attrs: {
         tabIndex: '-1',
         ...this.getScopeIdAttrs()
+      },
+      on: {
+        keydown: this.onKeydown
       },
       style: { zIndex: this.activeZIndex },
       ref: 'content'

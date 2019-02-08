@@ -49,7 +49,7 @@ export default {
       // Do not add click outside for hover menu
       const directives = !this.openOnHover && this.closeOnClick ? [{
         name: 'click-outside',
-        value: () => (this.isActive = false),
+        value: () => { this.isActive = false },
         args: {
           closeConditional: this.closeConditional,
           include: () => [this.$el, ...this.getOpenDependentElements()]
@@ -82,7 +82,8 @@ export default {
             e.stopPropagation()
             if (e.target.getAttribute('disabled')) return
             if (this.closeOnContentClick) this.isActive = false
-          }
+          },
+          keydown: this.onKeyDown
         }
       }
 
