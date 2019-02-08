@@ -22,7 +22,9 @@ import {
   copyTimestamp,
   updateFormatted,
   updateWeekday,
-  updateRelative
+  updateRelative,
+  getStartOfMonth,
+  getEndOfMonth
 } from './util/timestamp'
 
 // Calendars
@@ -68,8 +70,8 @@ export default CalendarBase.extend({
       switch (this.type) {
         case 'month':
           component = VCalendarMonthly
-          start = this.getStartOfMonth(around)
-          end = this.getEndOfMonth(around)
+          start = getStartOfMonth(around)
+          end = getEndOfMonth(around)
           break
         case 'week':
           component = VCalendarDaily

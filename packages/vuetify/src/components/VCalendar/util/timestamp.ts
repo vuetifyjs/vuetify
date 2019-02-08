@@ -1,6 +1,6 @@
 
-export const PARSE_REGEX: RegExp = /^(\d{1,4})-(\d{1,2})(-(\d{1,2}))?([^\d]+(\d{1,2}))?(:(\d{1,2}))?(:(\d{1,2}))?$/
-export const PARSE_TIME: RegExp = /(\d{1,2})?(:(\d{1,2}))?(:(\d{1,2}))/
+export const PARSE_REGEX: RegExp = /^(\d{4})-(\d{1,2})(-(\d{1,2}))?([^\d]+(\d{1,2}))?(:(\d{1,2}))?(:(\d{1,2}))?$/
+export const PARSE_TIME: RegExp = /(\d\d?)(:(\d\d?)|)(:(\d\d?)|)/
 
 export const DAYS_IN_MONTH: number[] = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 export const DAYS_IN_MONTH_LEAP: number[] = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -43,6 +43,42 @@ export type VTimestampFormatOptions = (timestamp: VTimestamp, short: boolean) =>
 
 export type VTimestampOperation = (timestamp: VTimestamp) => VTimestamp
 
+export function getStartOfWeek (timestamp: VTimestamp, weekdays: number[], today?: VTimestamp): VTimestamp {
+  const start = copyTimestamp(timestamp)
+  findWeekday(start, weekdays[0], prevDay)
+  updateFormatted(start)
+  if (today) {
+    updateRelative(start, today, start.hasTime)
+  }
+  return start
+}
+
+export function getEndOfWeek (timestamp: VTimestamp, weekdays: number[], today?: VTimestamp): VTimestamp {
+  const end = copyTimestamp(timestamp)
+  findWeekday(end, weekdays[weekdays.length - 1])
+  updateFormatted(end)
+  if (today) {
+    updateRelative(end, today, end.hasTime)
+  }
+  return end
+}
+
+export function getStartOfMonth (timestamp: VTimestamp): VTimestamp {
+  const start = copyTimestamp(timestamp)
+  start.day = DAY_MIN
+  updateWeekday(start)
+  updateFormatted(start)
+  return start
+}
+
+export function getEndOfMonth (timestamp: VTimestamp): VTimestamp {
+  const end = copyTimestamp(timestamp)
+  end.day = daysInMonth(end.year, end.month)
+  updateWeekday(end)
+  updateFormatted(end)
+  return end
+}
+
 export function parseTime (input: any): number | false {
   if (typeof input === 'number') {
     // when a number is given, it's minutes since 12:00am
@@ -53,7 +89,7 @@ export function parseTime (input: any): number | false {
     if (!parts) {
       return false
     }
-    return parseInt(parts[1]) * 60 + parseInt(parts[2] || 0)
+    return parseInt(parts[1]) * 60 + parseInt(parts[3] || 0)
   } else if (typeof input === 'object') {
     // when an object is given, it must have hour and minute
     if (typeof input.hour !== 'number' || typeof input.minute !== 'number') {
@@ -121,7 +157,7 @@ export function parseDate (date: Date): VTimestamp {
 }
 
 export function getDayIdentifier (timestamp: VTimestamp): number {
-  return timestamp.year * 1000000 + timestamp.month * 100 + timestamp.day
+  return timestamp.year * 10000 + timestamp.month * 100 + timestamp.day
 }
 
 export function getTimeIdentifier (timestamp: VTimestamp): number {
@@ -179,7 +215,7 @@ export function getWeekday (timestamp: VTimestamp): number {
     const C = _(timestamp.year / 100)
     const Y = (timestamp.year % 100) - (timestamp.month <= 2 ? 1 : 0)
 
-    return (k + _(2.6 * m - 0.2) - 2 * C + Y + _(Y / 4) + _(C / 4)) % 7
+    return (((k + _(2.6 * m - 0.2) - 2 * C + Y + _(Y / 4) + _(C / 4)) % 7) + 7) % 7
   }
 
   return timestamp.weekday

@@ -236,5 +236,12 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
 
       expect(wrapper.element.classList).toContain('v-icon--right')
     })
+
+    it('should trim name', () => {
+      const context = functionalContext({}, ' add ')
+      const wrapper = mount(VIcon, context)
+
+      expect(wrapper.text()).toBe('add')
+    })
   })
 })
