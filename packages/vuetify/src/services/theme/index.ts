@@ -54,6 +54,7 @@ export class Theme implements VuetifyServiceInstance {
     }
 
     this.default = options.default || 'light'
+    this.dark = Boolean(options.dark)
 
     // Grab light and dark defaults then
     // move remaining into own object
@@ -102,6 +103,7 @@ export class Theme implements VuetifyServiceInstance {
   }
 
   // Apply current theme default
+  // only called on client side
   public applyTheme (theme = this.default): void {
     const activeTheme = this.themes![theme]
 

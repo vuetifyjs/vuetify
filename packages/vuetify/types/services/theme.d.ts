@@ -12,6 +12,7 @@ export interface VuetifyThemeOptions {
     minifyTheme?: ((css: string) => string) | null
     themeCache?: VuetifyThemeCache
   }
+  dark?: boolean
   disable?: boolean
   default?: string | false
   themes?: VuetifyTheme | undefined

@@ -1,22 +1,28 @@
+// Styles
 import '../../stylus/components/_app.styl'
 
-// Directives
-import Resize from '../../directives/resize'
+// Mixins
+import Themeable from '../../mixins/themeable'
 
 /* @vue/component */
 export default {
   name: 'v-app',
 
-  directives: {
-    Resize
-  },
+  mixins: [Themeable],
 
   props: {
+    dark: {
+      type: Boolean,
+      default: undefined
+    },
     id: {
       type: String,
       default: 'app'
     },
-    dark: Boolean
+    light: {
+      type: Boolean,
+      default: undefined
+    }
   },
 
   computed: {
@@ -25,17 +31,14 @@ export default {
         'application--is-rtl': this.$vuetify.rtl,
         ...this.themeClasses
       }
-    }
-  },
+    },
+    isDark () {
+      if (this.dark != null || this.light != null) {
+        return Themeable.options.computed.isDark.call(this)
+      }
 
-  watch: {
-    dark () {
-      this.$vuetify.dark = this.dark
+      return this.$vuetify.theme.dark
     }
-  },
-
-  mounted () {
-    this.$vuetify.dark = this.dark
   },
 
   render (h) {
