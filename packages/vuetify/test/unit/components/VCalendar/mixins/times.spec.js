@@ -15,20 +15,6 @@ test('times.ts', ({ mount }) => {
     })
 
     expect(wrapper.vm.parsedNow).toBeDefined();
-    expect(wrapper.vm.parsedNow).toEqual({
-      date: "2019-02-08",
-      day: 8,
-      future: false,
-      hasDay: true,
-      hasTime: false,
-      hour: 0,
-      minute: 0,
-      month: 2,
-      past: false,
-      present: false,
-      time: "",
-      weekday: 5,
-      year: 2019
-    });
+    expect(wrapper.vm.parsedNow).toMatchSnapshot();
   })
 })
