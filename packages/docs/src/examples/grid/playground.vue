@@ -58,7 +58,7 @@
       </v-flex>
       <v-flex xs12>
         <h5>Output:</h5>
-        <div class="markup mx-2">{{ formatAttributes(layoutAttributes) }}</div>
+        <code>{{ formatAttributes(layoutAttributes) }}</code>
       </v-flex>
     </v-layout>
   </v-container>
@@ -113,18 +113,5 @@
     min-height: 50px;
     min-width: 80px;
     margin: 10px;
-  }
-  .markup {
-    align-items: center;
-    box-shadow: none;
-    display: flex;
-    border-radius: 2px;
-    position: relative;
-    overflow-x: auto;
-    overflow-y: hidden;
-    margin-bottom: 16px;
-    background: #2d2d2d;
-    height: 50px;
-    color: #fff;
   }
 </style>
