@@ -1,4 +1,23 @@
-import { parseTime, validateTimestamp, parseTimestamp, parseDate, getDayIdentifier, getTimeIdentifier, updateRelative, copyTimestamp, getWeekdaySkips, createDayList, getStartOfWeek, getEndOfWeek } from '@/components/VCalendar/util/timestamp'
+import {
+  parseTime,
+  validateTimestamp,
+  parseTimestamp,
+  parseDate,
+  getDayIdentifier,
+  getTimeIdentifier,
+  updateRelative,
+  copyTimestamp,
+  getWeekdaySkips,
+  createDayList,
+  getStartOfWeek,
+  getEndOfWeek,
+  createIntervalList,
+  createNativeLocaleFormatter,
+  getStartOfMonth,
+  getEndOfMonth,
+  nextMinutes,
+  updateMinutes
+} from '@/components/VCalendar/util/timestamp'
 import { test } from '@/test'
 
 test('VCalendar/util/timestamp.ts', ({ mount }) => {
@@ -335,5 +354,91 @@ test('VCalendar/util/timestamp.ts', ({ mount }) => {
         {"date": "2019-05-04", "day": 4, "future": true, "hasDay": true, "hasTime": false, "hour": 0, "minute": 0, "month": 5, "past": false, "present": false, "time": "", "weekday": 6, "year": 2019},
         {"date": "2019-05-05", "day": 5, "future": true, "hasDay": true, "hasTime": false, "hour": 0, "minute": 0, "month": 5, "past": false, "present": false, "time": "", "weekday": 0, "year": 2019}
     ])
+  })
+
+  it('should return empty array when end is less than start', () => {
+    const weekdays = [1, 2, 3, 4, 5, 6, 0]
+    const skips = getWeekdaySkips(weekdays)
+    const today = parseTimestamp('2019-05-03')
+    const date = parseTimestamp('2019-04-30')
+    const start = getEndOfWeek(date, weekdays, today)
+    const end = getStartOfWeek(date, weekdays, today)
+
+    const days = createDayList(
+      start,
+      end,
+      today,
+      skips,
+      Number.MAX_SAFE_INTEGER
+    )
+
+    expect(days).toEqual([]);
+  })
+
+  it('should handle skips equal to zero', () => {
+    const weekdays = [1, 2, 3, 4, 5, 6, 0]
+    const skips = [0, 1, 0, 1, 0, 1, 0]
+    const today = parseTimestamp('2019-04-30')
+    const date = parseTimestamp('2019-04-27')
+    const start = getStartOfWeek(date, weekdays, today)
+    const end = getEndOfWeek(date, weekdays, today)
+
+    const days = createDayList(
+      start,
+      end,
+      today,
+      skips,
+      Number.MAX_SAFE_INTEGER
+    )
+
+    expect(days).toMatchSnapshot();
+  })
+
+  it('should create interval list', () => {
+    expect(createIntervalList(parseTimestamp("2019-02-08"), 2, 15, 10)).toMatchSnapshot();
+    expect(createIntervalList(parseTimestamp("2019-02-08"), 1, 15, 10)).toMatchSnapshot();
+    expect(createIntervalList(parseTimestamp("2019-02-08"), 2, 5, 2)).toMatchSnapshot();
+  })
+
+  it('should create native locale formatter', () => {
+    expect(createNativeLocaleFormatter("en-US", () => {})(parseTimestamp("2019-02-08"))).toBe('2/8/2019');
+    expect(createNativeLocaleFormatter("en-UK", () => {})(parseTimestamp("2019-02-08"))).toBe('2/8/2019');
+    expect(createNativeLocaleFormatter("ru-RU", () => {})(parseTimestamp("2019-02-08"))).toBe('2019-2-8');
+  })
+
+  it('should return emptyFormatter if Intl isn\'t defined', () => {
+    const intl = global.Intl;
+    global.Intl = undefined;
+    expect(createNativeLocaleFormatter("", () => {})(parseTimestamp("2019-02-08"))).toBe('');
+    global.Intl = intl;
+  })
+
+  it('should return emptyFormatter if Intl throws error', () => {
+    global.Intl.DateTimeFormat = () => { throw new Error(); };
+    expect(createNativeLocaleFormatter("", () => {})(parseTimestamp("2019-02-08"))).toBe('');
+  })
+
+  it('should get month start', () => {
+    expect(getStartOfMonth(parseTimestamp('2019-02-08')).date).toEqual('2019-02-01');
+    expect(getStartOfMonth(parseTimestamp('2019-03-08')).date).toEqual('2019-03-01');
+    expect(getStartOfMonth(parseTimestamp('2019-06-08')).date).toEqual('2019-06-01');
+  })
+
+  it('should get month end', () => {
+    expect(getEndOfMonth(parseTimestamp('2019-02-08')).date).toEqual('2019-02-28');
+    expect(getEndOfMonth(parseTimestamp('2019-03-08')).date).toEqual('2019-03-31');
+    expect(getEndOfMonth(parseTimestamp('2019-06-08')).date).toEqual('2019-06-30');
+  })
+
+  it('should get next minutes', () => {
+    expect(nextMinutes({ hour: 8, minute: 30 }, 40)).toEqual({ hour: 9, minute: 10 });
+    expect(nextMinutes({ hour: 8, minute: 10 }, 90)).toEqual({ hour: 9, minute: 40 });
+    expect(nextMinutes({ hour: 8, minute: 0 }, 40)).toEqual({ hour: 8, minute: 40 });
+    expect(nextMinutes({ day: 1, weekday: 1, hour: 23, minute: 50 }, 40)).toEqual({ hour: 0, minute: 30, day: 2, weekday: 2 });
+  })
+
+  it('should update minutes', () => {
+    expect(updateMinutes({}, 40)).toMatchObject({ hour: 0, minute: 40 });
+    expect(updateMinutes({}, 90)).toMatchObject({ hour: 1, minute: 30 });
   })
 })
