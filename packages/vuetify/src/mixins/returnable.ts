@@ -26,7 +26,9 @@ export default Vue.extend({
   methods: {
     save (value: any) {
       this.originalValue = value
-      this.isActive = false
+      setTimeout(() => {
+        this.isActive = false
+      })
     }
   }
 })
