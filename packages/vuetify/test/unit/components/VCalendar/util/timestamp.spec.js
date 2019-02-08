@@ -440,5 +440,12 @@ test('VCalendar/util/timestamp.ts', ({ mount }) => {
   it('should update minutes', () => {
     expect(updateMinutes({}, 40)).toMatchObject({ hour: 0, minute: 40 });
     expect(updateMinutes({}, 90)).toMatchObject({ hour: 1, minute: 30 });
+    expect(updateMinutes({}, 40, {})).toMatchObject({ hour: 0, minute: 40 });
+    expect(updateMinutes({}, 90, {})).toMatchObject({ hour: 1, minute: 30 });
+  })
+
+  it('should get weekday skips', () => {
+    expect(getWeekdaySkips([ 0, 1, 2, 3, 4, 5, 6 ])).toEqual([1, 1, 1, 1, 1, 1, 1]);
+    expect(getWeekdaySkips([ 1, 5, 0, 3, 4, 2, 6 ])).toEqual([1, 1, 1, 1, 1, 1, 1]);
   })
 })
