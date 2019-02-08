@@ -402,7 +402,7 @@ export default mixins<options &
     genThumbLabelContent (value: number | string): ScopedSlotChildren {
       return this.$scopedSlots['thumb-label']
         ? this.$scopedSlots['thumb-label']!({ value })
-        : this.$createElement('span', [String(value)])
+        : [this.$createElement('span', [String(value)])]
     },
     genThumbLabel (content: ScopedSlotChildren): VNode {
       const size = convertToUnit(this.thumbSize)
@@ -428,7 +428,7 @@ export default mixins<options &
               width: size,
               transform
             }
-          }), [this.$createElement('div', [content])])
+          }), [this.$createElement('div', content)])
         ])
       ])
     },

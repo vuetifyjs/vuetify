@@ -375,8 +375,6 @@ test('VSlider.vue', ({ mount }) => {
     wrapper.vm.internalValue = 15
 
     expect(input).toHaveBeenCalledTimes(1)
-
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should react to input events', async () => {
@@ -401,8 +399,6 @@ test('VSlider.vue', ({ mount }) => {
 
     expect(wrapper.vm.isFocused).toBe(false)
     expect(blur).toHaveBeenCalledTimes(1)
-
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should call mousemove and emit change', () => {

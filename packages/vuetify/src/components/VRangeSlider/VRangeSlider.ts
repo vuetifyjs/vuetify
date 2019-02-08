@@ -116,12 +116,12 @@ export default VSlider.extend({
         return input
       })
     },
-    genTrackContainer() {
+    genTrackContainer () {
       const children = []
 
       if (this.disabled) {
         const disabledPadding = 10
-        const sections : [number, number, number, number][] = [
+        const sections: [number, number, number, number][] = [
           [0, this.inputWidth[0], 0, -disabledPadding],
           [this.inputWidth[0], Math.abs(this.inputWidth[1] - this.inputWidth[0]), disabledPadding, disabledPadding * -2],
           [this.inputWidth[1], Math.abs(100 - this.inputWidth[1]), disabledPadding, 0]
