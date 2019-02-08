@@ -177,10 +177,10 @@ export default Vue.extend({
       }
     },
     activate () {},
-    calcLeft () {
+    calcLeft (menuWidth) {
       return `${this.isAttached
         ? this.computedLeft
-        : this.calcXOverflow(this.computedLeft)
+        : this.calcXOverflow(this.computedLeft, menuWidth)
       }px`
     },
     calcTop () {
@@ -189,24 +189,12 @@ export default Vue.extend({
         : this.calcYOverflow(this.computedTop)
       }px`
     },
-    calcXOverflow (left) {
-      const parsedMaxWidth = isNaN(parseInt(this.maxWidth))
-        ? 0
-        : parseInt(this.maxWidth)
+    calcXOverflow (left, menuWidth) {
       const innerWidth = this.getInnerWidth()
-      const maxWidth = Math.max(
-        this.dimensions.content.width,
-        parsedMaxWidth
-      )
-      const totalWidth = left + this.dimensions.activator.width
-      const availableWidth = totalWidth - innerWidth
+      const xOverflow = left + menuWidth - innerWidth
 
-      if ((!this.left || this.right) && availableWidth > 0) {
-        left = (
-          innerWidth -
-          maxWidth -
-          (innerWidth > 600 ? 30 : 12) // Account for scrollbar
-        )
+      if ((!this.left || this.right) && xOverflow > 0) {
+        left -= xOverflow + (innerWidth > 600 ? 30 : 12) // Account for scrollbar
       }
 
       if (left < 0) left = 12
