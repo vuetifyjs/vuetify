@@ -41,7 +41,8 @@ export default {
   methods: {
     onKeyDown (e) {
       if (e.keyCode === keyCodes.esc) {
-        this.isActive = false
+        // Wait for dependent elements to close first
+        setTimeout(() => { this.isActive = false })
       } else if (e.keyCode === keyCodes.tab) {
         setTimeout(() => {
           if (!this.$refs.content.contains(document.activeElement)) {
