@@ -16,7 +16,6 @@ test('VCalendar/util/timestamp.ts', ({ mount }) => {
     expect(parseTime('23:59')).toBe(23 * 60 + 59)
     expect(parseTime('7')).toBe(7 * 60)
     expect(parseTime('04:23:11')).toBe(4 * 60 + 23)
-    expect(parseTime('nopes')).toBe(false)
   })
 
   it('should parse time object', () => {
@@ -26,10 +25,11 @@ test('VCalendar/util/timestamp.ts', ({ mount }) => {
     expect(parseTime({hour: 8, minute: 30})).toBe(8 * 60 + 30)
     expect(parseTime({hour: 15, minute: 13})).toBe(15 * 60 + 13)
     expect(parseTime({hour: 23, minute: 59})).toBe(23 * 60 + 59)
-    expect(parseTime({hour: 23})).toBe(false)
   })
 
   it('should not parse time', () => {
+    expect(parseTime('nopes')).toBe(false)
+    expect(parseTime({hour: 23})).toBe(false)
     expect(parseTime([23])).toBe(false)
     expect(parseTime(false)).toBe(false)
     expect(parseTime(true)).toBe(false)
