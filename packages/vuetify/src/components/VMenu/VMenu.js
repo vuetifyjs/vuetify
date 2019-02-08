@@ -197,8 +197,10 @@ export default Vue.extend({
         })
       })
     },
-    closeConditional () {
-      return this.isActive && this.closeOnClick
+    closeConditional (e) {
+      return this.isActive &&
+        this.closeOnClick &&
+        !this.$refs.content.contains(e.target)
     },
     onResize () {
       if (!this.isActive) return
