@@ -155,7 +155,7 @@ export default baseMixins.extend({
       // If the dialog content contains
       // the click event, or if the
       // dialog is not active
-      if (!this.isActive || this.$refs.content.contains(target)) return false
+      if (!this.isActive || this.$refs.content.contains(e.target)) return false
 
       // If we made it here, the click is outside
       // and is active. If persistent, and the
@@ -185,9 +185,17 @@ export default baseMixins.extend({
       this.bind()
     },
     bind () {
+<<<<<<< HEAD:packages/vuetify/src/components/VDialog/VDialog.ts
       window.addEventListener('focusin', this.onFocusin)
     },
     unbind () {
+=======
+      this.$listeners.keydown && window.addEventListener('keydown', this.onKeydown)
+      window.addEventListener('focusin', this.onFocusin)
+    },
+    unbind () {
+      window.removeEventListener('keydown', this.onKeydown)
+>>>>>>> fix(VDialog): focus the first child when tab leaves the dialog:packages/vuetify/src/components/VDialog/VDialog.js
       window.removeEventListener('focusin', this.onFocusin)
     },
     onKeydown (e: KeyboardEvent) {
@@ -202,6 +210,7 @@ export default baseMixins.extend({
       }
       this.$emit('keydown', e)
     },
+<<<<<<< HEAD:packages/vuetify/src/components/VDialog/VDialog.ts
     onFocusin (e: Event) {
       if (!e) return
 
@@ -209,6 +218,12 @@ export default baseMixins.extend({
 
       if (
         !!target &&
+=======
+    onFocusin (e) {
+      const { target } = event
+
+      if (
+>>>>>>> fix(VDialog): focus the first child when tab leaves the dialog:packages/vuetify/src/components/VDialog/VDialog.js
         // It isn't the document or the dialog body
         ![document, this.$refs.content].includes(target) &&
         // It isn't inside the dialog body
@@ -221,6 +236,7 @@ export default baseMixins.extend({
       ) {
         // Find and focus the first available element inside the dialog
         const focusable = this.$refs.content.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+<<<<<<< HEAD:packages/vuetify/src/components/VDialog/VDialog.ts
         focusable.length && (focusable[0] as HTMLElement).focus()
       }
     },
@@ -246,6 +262,10 @@ export default baseMixins.extend({
       }
 
       return null
+=======
+        focusable.length && focusable[0].focus()
+      }
+>>>>>>> fix(VDialog): focus the first child when tab leaves the dialog:packages/vuetify/src/components/VDialog/VDialog.js
     },
     genActivator () {
       if (!this.hasActivator) return null
