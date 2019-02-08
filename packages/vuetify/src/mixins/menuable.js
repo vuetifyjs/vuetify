@@ -190,14 +190,13 @@ export default Vue.extend({
       }px`
     },
     calcXOverflow (left, menuWidth) {
-      const innerWidth = this.getInnerWidth()
-      const xOverflow = left + menuWidth - innerWidth
+      const xOverflow = left + menuWidth - this.getInnerWidth() + 12
 
       if ((!this.left || this.right) && xOverflow > 0) {
-        left -= xOverflow + (innerWidth > 600 ? 30 : 12) // Account for scrollbar
+        left = Math.max(left - xOverflow, 0)
+      } else {
+        left = Math.max(left, 12)
       }
-
-      if (left < 0) left = 12
 
       return left + this.getOffsetLeft()
     },
@@ -284,7 +283,7 @@ export default Vue.extend({
     getInnerWidth () {
       if (!this.hasWindow) return 0
 
-      return window.innerWidth
+      return document.documentElement.clientWidth
     },
     getOffsetLeft () {
       if (!this.hasWindow) return 0
