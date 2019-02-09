@@ -140,19 +140,6 @@ export default mixins(Themeable).extend({
         }
       }
 
-      // Object.defineProperties(props, {
-      //   selected: {
-      //     get: () => this.isSelected(item),
-      //     set: (value: boolean) => this.select(item, value),
-      //     enumerable: true
-      //   },
-      //   expanded: {
-      //     get: () => this.isExpanded(item),
-      //     set: v => this.expand(item, v),
-      //     enumerable: true
-      //   }
-      // })
-
       return props
     },
     genEmptyWrapper (content: VNodeChildren) {
