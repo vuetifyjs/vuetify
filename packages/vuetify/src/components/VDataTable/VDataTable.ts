@@ -1,4 +1,4 @@
-import '../../stylus/components/_data-table.styl'
+import './VDataTable.sass'
 
 // Types
 import { VNode, VNodeChildrenArrayContents, VNodeChildren } from 'vue'
@@ -357,7 +357,7 @@ export default VDataIterator.extend({
       })
     },
     genBody (props: DataProps): VNode | string | VNodeChildren {
-      if (this.$scopedSlots.body) return this.$scopedSlots.body!(this.createSlotProps(props))
+      if (this.$scopedSlots.body) return this.$scopedSlots.body!(props)
 
       return this.$createElement('tbody', [
         this.genSlots('body.prepend', props),
