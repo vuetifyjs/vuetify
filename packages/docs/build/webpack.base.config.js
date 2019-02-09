@@ -7,18 +7,20 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 const isProd = process.env.NODE_ENV === 'production'
-const resolve = (file) => path.resolve(__dirname, file)
+const resolve = file => path.resolve(__dirname, file)
 
-let plugins = [
+const plugins = [
   new webpack.DefinePlugin({
     'process.env': JSON.stringify(process.env)
   }),
   new VueLoaderPlugin()
 ]
 
+const devtool = isProd ? 'none' : 'source-map'
+
 module.exports = {
   mode: isProd ? 'production' : 'development',
-  devtool: 'source-map',
+  devtool,
   output: {
     path: resolve('../dist'),
     publicPath: '/dist/',

@@ -55,4 +55,37 @@ test('VSparkline.vue', ({ mount }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should render component with string labels and match a snapshot', async () => {
+    const wrapper = mount(VSparkline, {
+      propsData: {
+        showLabels: true,
+        value: [1, 7, 42],
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({
+      value: [
+        {
+          value: 2,
+        },
+        {
+          value: 8,
+        },
+        {
+          value: 43,
+        },
+      ]
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({
+      labels: ['foo', 'bar', 'baz'],
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

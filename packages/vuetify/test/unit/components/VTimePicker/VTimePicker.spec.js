@@ -331,6 +331,45 @@ test('VTimePicker.js', ({ mount }) => {
       expect(wrapper.vm.selectingSecond).toBe(useSecondsValue)
     })
 
+    it('should emit click:XXX event on change' + useSecondsDesc, () => {
+      const wrapper = mount(VTimePicker, {
+        propsData: {
+          value: '01:23:45pm',
+          format: 'ampm',
+          useSeconds: useSecondsValue
+        }
+      })
+
+      const clock = wrapper.vm.$refs.clock
+      const clickHour = jest.fn()
+      const clickMinute = jest.fn()
+      const clickSecond = jest.fn()
+
+      wrapper.vm.$on('click:hour', clickHour)
+      wrapper.vm.$on('click:minute', clickMinute)
+      wrapper.vm.$on('click:second', clickSecond)
+
+      clock.$emit('change', 1)
+      expect(clickHour).toHaveBeenCalledTimes(1)
+      expect(clickHour).toBeCalledWith(1)
+      expect(clickMinute).toHaveBeenCalledTimes(0)
+      expect(clickSecond).toHaveBeenCalledTimes(0)
+
+      clock.$emit('change', 59)
+      expect(clickHour).toHaveBeenCalledTimes(1)
+      expect(clickMinute).toHaveBeenCalledTimes(1)
+      expect(clickMinute).toBeCalledWith(59)
+      expect(clickSecond).toHaveBeenCalledTimes(0)
+
+      if (useSecondsValue) {
+        clock.$emit('change', 45)
+        expect(clickHour).toHaveBeenCalledTimes(1)
+        expect(clickMinute).toHaveBeenCalledTimes(1)
+        expect(clickSecond).toHaveBeenCalledTimes(1)
+        expect(clickSecond).toBeCalledWith(45)
+      }
+    })
+
     it('should change selecting when clicked in title' + useSecondsDesc, () => {
       const wrapper = mount(VTimePicker, {
         propsData: {

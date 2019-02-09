@@ -1,5 +1,5 @@
 <template>
-  <section id="themes-view">
+  <section id="premium-themes">
     <v-container
       pa-0
       fluid
@@ -12,7 +12,10 @@
           xs12
           md6
         >
-          <v-card height="100%">
+          <v-card
+            height="100%"
+            elevation="4"
+          >
             <v-img
               :src="template.src"
               height="350px"
@@ -38,6 +41,7 @@
             <v-card-text style="min-height: 95px;">{{ template.description }}</v-card-text>
             <v-card-actions class="grey lighten-4">
               <v-menu
+                v-if="template.demoUrl.length"
                 :disabled="template.demoUrl.length === 1"
                 transition="scale-transition"
                 origin="bottom left"
@@ -87,6 +91,7 @@
                 outline
                 target="_blank"
                 rel="noopener"
+                @click="$ga.event('themes', 'click', template.title)"
               >
                 {{ $t('Themes.Premium.downloadNow') }}
               </v-btn>
@@ -103,11 +108,19 @@
     data: vm => ({
       templates: [
         {
+          title: vm.$t('Themes.Premium.templates.material-kit.title'),
+          description: vm.$t('Themes.Premium.templates.material-kit.description'),
+          src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-material-kit.png',
+          free: false,
+          url: 'https://store.vuetifyjs.com/product/material-kit-theme',
+          demoUrl: ['https://material-kit.vuetifyjs.com']
+        },
+        {
           title: vm.$t('Themes.Premium.templates.alpha.title'),
           description: vm.$t('Themes.Premium.templates.alpha.description'),
-          src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-premium.jpg',
+          src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-alpha-theme.png',
           free: false,
-          url: 'https://store.vuetifyjs.com/product/813199294506',
+          url: 'https://store.vuetifyjs.com/product/vuetify-alpha-theme',
           demoUrl: [
             ['Construction', 'https://alpha-construction.vuetifyjs.com'],
             ['Creative', 'https://alpha-creative.vuetifyjs.com'],
@@ -124,6 +137,14 @@
           demoUrl: ['https://demos.creative-tim.com/vuetify-material-dashboard/#/dashboard']
         },
         {
+          title: vm.$t('Themes.Premium.templates.freelancer.title'),
+          description: vm.$t('Themes.Premium.templates.freelancer.description'),
+          src: 'https://cdn.vuetifyjs.com/images/starter/freelancer.png',
+          free: true,
+          url: 'https://github.com/vuetifyjs/theme-freelancer',
+          demoUrl: []
+        },
+        {
           title: vm.$t('Themes.Premium.templates.parallax.title'),
           description: vm.$t('Themes.Premium.templates.parallax.description'),
           src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-parallax-starter.png',
@@ -134,12 +155,18 @@
         {
           title: vm.$t('Themes.Premium.templates.blog.title'),
           description: vm.$t('Themes.Premium.templates.blog.description'),
-          src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-blog-starter.png',
+          src: 'https://cdn.vuetifyjs.com/images/starter/blog.png',
           free: true,
-          url: 'https://github.com/vuetifyjs/blog-starter',
-          demoUrl: ['/themes/blog-starter']
+          url: 'https://github.com/vuetifyjs/theme-blog',
+          demoUrl: ['https://free-blog.vuetifyjs.com']
         }
       ]
     })
   }
 </script>
+
+<style>
+  #premium-themes .v-card {
+    border-radius: 6px;
+  }
+</style>
