@@ -16,7 +16,11 @@ import {
   getStartOfMonth,
   getEndOfMonth,
   nextMinutes,
-  updateMinutes
+  updateMinutes,
+  findWeekday,
+  nextDay,
+  prevDay,
+  relativeDays
 } from '@/components/VCalendar/util/timestamp'
 import { test } from '@/test'
 
@@ -163,6 +167,20 @@ test('VCalendar/util/timestamp.ts', ({ mount }) => {
       present: false,
       future: false
     })
+    expect(parseTimestamp('bad')).toEqual(null)
+  })
+
+  it('should parse timestamp and update relative flags', () => {
+    expect(parseTimestamp('2019-01-03', parseTimestamp('2019-02-08'))).toMatchObject({
+      past: true,
+      present: false,
+      future: false
+    })
+    expect(parseTimestamp('2019-01-03 07:00', parseTimestamp('2019-01-03 07:00'))).toMatchObject({
+      past: false,
+      present: true,
+      future: false
+    })
   })
 
   it('should parse date', () => {
@@ -261,6 +279,32 @@ test('VCalendar/util/timestamp.ts', ({ mount }) => {
     expect(bb.future).toBe(true)
 
     updateRelative(cc, now)
+    expect(cc.past).toBe(true)
+    expect(cc.present).toBe(false)
+    expect(cc.future).toBe(false)
+  })
+
+  it('should update relative flags with time', () => {
+    const now = parseTimestamp('2019-02-04 09:30')
+    const a = parseTimestamp('2019-02-04 09:30')
+    const b = parseTimestamp('2019-02-04 12:30')
+    const c = parseTimestamp('2019-02-04 05:10')
+
+    const aa = copyTimestamp(a)
+    const bb = copyTimestamp(b)
+    const cc = copyTimestamp(c)
+
+    updateRelative(aa, now, true)
+    expect(aa.past).toBe(false)
+    expect(aa.present).toBe(true)
+    expect(aa.future).toBe(false)
+
+    updateRelative(bb, now, true)
+    expect(bb.past).toBe(false)
+    expect(bb.present).toBe(false)
+    expect(bb.future).toBe(true)
+
+    updateRelative(cc, now, true)
     expect(cc.past).toBe(true)
     expect(cc.present).toBe(false)
     expect(cc.future).toBe(false)
@@ -447,5 +491,30 @@ test('VCalendar/util/timestamp.ts', ({ mount }) => {
   it('should get weekday skips', () => {
     expect(getWeekdaySkips([ 0, 1, 2, 3, 4, 5, 6 ])).toEqual([1, 1, 1, 1, 1, 1, 1]);
     expect(getWeekdaySkips([ 1, 5, 0, 3, 4, 2, 6 ])).toEqual([1, 1, 1, 1, 1, 1, 1]);
+    expect(getWeekdaySkips([ 1, 5, 1, 3, 4, 2, 6 ])).toEqual([0, 1, 1, 1, 1, 1, 2]);
+  })
+
+  it('should create day list', () => {
+    const skips = getWeekdaySkips([ 0, 1, 2, 3, 4, 5, 6 ])
+    const skips1 = getWeekdaySkips([ 1, 1, 1, 1, 1, 1, 0 ])
+    expect(createDayList(parseTimestamp("2019-02-02"), parseTimestamp("2019-02-01"), parseTimestamp("2019-02-02"), skips)).toHaveLength(0)
+    expect(createDayList(parseTimestamp("2019-02-01"), parseTimestamp("2019-02-10"), parseTimestamp("2019-02-02"), skips)).toHaveLength(10)
+    expect(createDayList(parseTimestamp("2019-02-01"), parseTimestamp("2019-02-10"), parseTimestamp("2019-02-02"), skips1)).toHaveLength(3)
+  })
+
+  it('should find weekday', () => {
+    expect(findWeekday(parseTimestamp("2019-02-03"), 5, nextDay, 100)).toMatchObject({ weekday: 5 })
+    expect(findWeekday(parseTimestamp("2019-01-03"), 1, nextDay, 100)).toMatchObject({ weekday: 1 })
+    expect(findWeekday(parseTimestamp("2019-01-03"), 5, prevDay, 100)).toMatchObject({ weekday: 5 })
+    expect(findWeekday(parseTimestamp("2019-01-03"), 1, prevDay, 100)).toMatchObject({ weekday: 1 })
+  })
+
+  it('should calculate relative days', () => {
+    expect(relativeDays(parseTimestamp("2019-02-03"), nextDay, 1)).toMatchObject({ day: 4 })
+    expect(relativeDays(parseTimestamp("2019-01-03"), nextDay, 10)).toMatchObject({ day: 13 })
+    expect(relativeDays(parseTimestamp("2019-01-03"), nextDay, 1000)).toMatchObject({ day: 29, month: 9, year: 2021 })
+    expect(relativeDays(parseTimestamp("2019-01-03"), prevDay, 1)).toMatchObject({ day: 2 })
+    expect(relativeDays(parseTimestamp("2019-01-03"), prevDay, 10)).toMatchObject({ day: 24 })
+    expect(relativeDays(parseTimestamp("2019-01-03"), prevDay, 1000)).toMatchObject({ day: 8, month: 4, year: 2016 })
   })
 })
