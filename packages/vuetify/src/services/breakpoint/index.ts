@@ -1,10 +1,11 @@
-import { VuetifyBreakpointOptions } from 'vuetify/types/services/breakpoint'
-// Utilities
+// Extensions
+import { Service } from '../service'
 
 // Types
+import { VuetifyBreakpointOptions } from 'vuetify/types/services/breakpoint'
 import { VuetifyServiceInstance } from 'vuetify/types/services'
 
-export class Breakpoint implements VuetifyServiceInstance {
+export class Breakpoint extends Service implements VuetifyServiceInstance {
   static property = 'breakpoint'
 
   // Public
@@ -42,6 +43,7 @@ export class Breakpoint implements VuetifyServiceInstance {
   private resizeTimeout = 0
 
   constructor (options: Partial<VuetifyBreakpointOptions> = {}) {
+    super()
     this.thresholds = {
       ...this.thresholds,
       ...options.thresholds

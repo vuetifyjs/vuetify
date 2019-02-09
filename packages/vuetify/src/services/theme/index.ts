@@ -1,3 +1,6 @@
+// Extensions
+import { Service } from '../service'
+
 // Utilities
 import * as ThemeUtils from './utils/theme'
 
@@ -5,7 +8,7 @@ import * as ThemeUtils from './utils/theme'
 import { VuetifyParsedTheme, VuetifyThemeOptions } from 'vuetify/types/services/theme'
 import { VuetifyServiceInstance } from 'vuetify/types/services'
 
-export class Theme implements VuetifyServiceInstance {
+export class Theme extends Service implements VuetifyServiceInstance {
   static property = 'theme'
 
   public dark = false
@@ -42,6 +45,7 @@ export class Theme implements VuetifyServiceInstance {
   private default = 'light'
 
   constructor (options: Partial<VuetifyThemeOptions> = {}) {
+    super()
     if (options.disable) {
       this.disabled = true
 

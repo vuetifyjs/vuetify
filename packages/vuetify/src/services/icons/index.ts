@@ -1,3 +1,6 @@
+// Extensions
+import { Service } from '../service'
+
 // Types
 import { VuetifyServiceInstance } from 'vuetify/types/services'
 import {
@@ -15,13 +18,14 @@ const iconFonts: VuetifyIconSets = Object.freeze({
   md, mdi, fa, fa4
 })
 
-export class Icons implements VuetifyServiceInstance {
+export class Icons extends Service implements VuetifyServiceInstance {
   static property = 'icons'
 
   public iconfont: VuetifyIconOptions['iconfont'] = 'md'
   public values: VuetifyIconOptions['values'] = iconFonts[this.iconfont]
 
   constructor (options: Partial<VuetifyIconOptions> = {}) {
+    super()
     if (options.iconfont) this.iconfont = options.iconfont
 
     this.values = {
@@ -29,6 +33,4 @@ export class Icons implements VuetifyServiceInstance {
       ...(options.values || {})
     }
   }
-
-  public init () {}
 }

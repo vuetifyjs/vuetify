@@ -32,6 +32,7 @@ export default class Vuetify {
   init (ssrContext?: object) {
     this.installed.forEach(property => {
       const service = this.framework[property]
+      service.framework = this.framework
 
       service.init(ssrContext)
     })

@@ -1,4 +1,5 @@
 export interface VuetifyServiceInstance {
+  framework: Record<string, VuetifyServiceInstance>
   init: (ssrContext?: object) => void
 }
 

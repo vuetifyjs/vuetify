@@ -1,3 +1,6 @@
+// Extensions
+import { Service } from '../service'
+
 // Language
 import en from '../../locale/en'
 
@@ -36,7 +39,7 @@ function getTranslation (
   return translation
 }
 
-export class Lang implements VuetifyServiceInstance {
+export class Lang extends Service implements VuetifyServiceInstance {
   static property = 'lang'
 
   public locales: Record<string, VuetifyLocale>
@@ -44,6 +47,7 @@ export class Lang implements VuetifyServiceInstance {
   private translator: ((key: string, ...params: any[]) => string) | undefined
 
   constructor (options: Partial<VuetifyLangOptions> = {}) {
+    super()
     this.current = options.current || 'en'
     this.locales = Object.assign({ en }, options.locales)
     this.translator = options.t
