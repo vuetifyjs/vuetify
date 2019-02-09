@@ -1,4 +1,4 @@
-import '../../stylus/components/_avatars.styl'
+import './VAvatar.styl'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
