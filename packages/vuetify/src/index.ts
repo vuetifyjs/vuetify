@@ -1,18 +1,25 @@
+// Services
+import * as services from './services'
+
+// Styles
 import './stylus/app.styl'
+
+// Utilties
+import { install } from './install'
+
+// Types
 import {
   VuetifyService,
-  VuetifyServiceInstance
+  VuetifyServiceContract
 } from 'vuetify/types/services'
-import { VueConstructor } from 'vue'
-import { install } from './install'
 import { VuetifyPreset } from 'vuetify/types/presets'
-import * as services from './services'
+import { VueConstructor } from 'vue'
 
 export default class Vuetify {
   static install: (Vue: VueConstructor) => void
   static version: string
 
-  framework: Record<string, VuetifyServiceInstance> = {}
+  framework: Record<string, VuetifyServiceContract> = {}
   installed: string[] = []
   preset: Partial<VuetifyPreset> = {}
 

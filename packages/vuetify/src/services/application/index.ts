@@ -2,10 +2,9 @@
 import { Service } from '../service'
 
 // Types
-import { VuetifyServiceInstance } from 'vuetify/types/services'
 import { TargetPropValues, TargetProp } from 'vuetify/types/services/application'
 
-export class Application extends Service implements VuetifyServiceInstance {
+export class Application extends Service {
   static property = 'application'
 
   bar = 0

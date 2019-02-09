@@ -9,7 +9,6 @@ import { getObjectValueByPath } from '../../util/helpers'
 import { consoleError, consoleWarn } from '../../util/console'
 
 // Types
-import { VuetifyServiceInstance } from 'vuetify/types/services'
 import {
   VuetifyLangOptions,
   VuetifyLocale
@@ -39,7 +38,7 @@ function getTranslation (
   return translation
 }
 
-export class Lang extends Service implements VuetifyServiceInstance {
+export class Lang extends Service {
   static property = 'lang'
 
   public locales: Record<string, VuetifyLocale>

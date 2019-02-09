@@ -1,9 +1,9 @@
-export interface VuetifyServiceInstance {
-  framework: Record<string, VuetifyServiceInstance>
+export interface VuetifyServiceContract {
+  framework: Record<string, VuetifyServiceContract>
   init: (ssrContext?: object) => void
 }
 
 export interface VuetifyService {
-  new (options?: any): VuetifyServiceInstance
+  new (options?: any): VuetifyServiceContract
   property: string
 }

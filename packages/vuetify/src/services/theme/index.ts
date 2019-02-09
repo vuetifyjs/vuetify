@@ -6,9 +6,8 @@ import * as ThemeUtils from './utils/theme'
 
 // Types
 import { VuetifyParsedTheme, VuetifyThemeOptions } from 'vuetify/types/services/theme'
-import { VuetifyServiceInstance } from 'vuetify/types/services'
 
-export class Theme extends Service implements VuetifyServiceInstance {
+export class Theme extends Service {
   static property = 'theme'
 
   public dark = false

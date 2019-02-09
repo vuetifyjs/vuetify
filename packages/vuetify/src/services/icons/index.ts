@@ -2,7 +2,6 @@
 import { Service } from '../service'
 
 // Types
-import { VuetifyServiceInstance } from 'vuetify/types/services'
 import {
   VuetifyIconSets,
   VuetifyIconOptions
@@ -18,7 +17,7 @@ const iconFonts: VuetifyIconSets = Object.freeze({
   md, mdi, fa, fa4
 })
 
-export class Icons extends Service implements VuetifyServiceInstance {
+export class Icons extends Service {
   static property = 'icons'
 
   public iconfont: VuetifyIconOptions['iconfont'] = 'md'

@@ -3,9 +3,8 @@ import { Service } from '../service'
 
 // Types
 import { VuetifyBreakpointOptions } from 'vuetify/types/services/breakpoint'
-import { VuetifyServiceInstance } from 'vuetify/types/services'
 
-export class Breakpoint extends Service implements VuetifyServiceInstance {
+export class Breakpoint extends Service {
   static property = 'breakpoint'
 
   // Public
