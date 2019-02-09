@@ -58,4 +58,4 @@ export interface VuetifyParsedThemeItem {
   darken4: string
 }
 
-export type VuetifyThemeItem = VuetifyParsedThemeItem | string
+export type VuetifyThemeItem = VuetifyParsedThemeItem | string | number
