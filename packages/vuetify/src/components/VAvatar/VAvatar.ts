@@ -1,4 +1,4 @@
-import './VAvatar.styl'
+import './VAvatar.sass'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
