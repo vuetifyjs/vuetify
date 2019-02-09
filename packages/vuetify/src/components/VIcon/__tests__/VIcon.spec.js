@@ -60,7 +60,7 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     const wrapper = mount(VIcon, context)
 
     expect(wrapper.element.style.fontSize).toBe('112px')
- })
+  })
 
   it('should render a left aligned component', () => {
     const context = functionalContext({ props: { left: true } }, 'add')
