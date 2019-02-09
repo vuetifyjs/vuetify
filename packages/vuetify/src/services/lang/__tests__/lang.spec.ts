@@ -1,7 +1,6 @@
 // Service
 import { Lang } from '..'
 
-
 let lang
 
 test('$vuetify.lang', () => {

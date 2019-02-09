@@ -32,7 +32,7 @@ test('$vuetify.goTo', ({ mount }) => {
 
     expect(() => wrapper.vm.$vuetify.goTo(0, { container: 42 }))
       .toThrow(new TypeError('Container must be a Selector/HTMLElement/VueComponent, received Number instead.'))
-    })
+  })
 
   it('should throw error if easing does not exist', async () => {
     expect(() => wrapper.vm.$vuetify.goTo(1, { easing: 'thisEasingDoesNotExist' }))

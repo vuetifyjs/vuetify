@@ -42,8 +42,10 @@ Vue.component('theme', {
     })
 
     this.$vuetify.theme = {
-      ...this.$vuetify.theme,
-      primary: 132
+      light: {
+        ...this.$vuetify.theme,
+        primary: 132
+      }
     }
   }
 })

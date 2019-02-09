@@ -12,12 +12,7 @@ export class Theme extends Service {
 
   public dark = false
   public disabled = false
-  public options: VuetifyThemeOptions['options'] = {
-    cspNonce: null,
-    customProperties: false,
-    minifyTheme: null,
-    themeCache: undefined
-  }
+  public options: VuetifyThemeOptions['options']
   public styleEl?: HTMLStyleElement
   public themes: VuetifyThemeOptions['themes'] = {
     dark: { // Maybe use variables here?
@@ -112,29 +107,30 @@ export class Theme extends Service {
 
     if (this.disabled || !activeTheme) return this.clearCss()
 
+    const options = this.options || {}
     const parsedTheme = ThemeUtils.parse(activeTheme)
 
     let css: string | null = ''
 
     // Theme cache get
-    if (this.options.themeCache != null) {
-      this.css = this.options.themeCache.get(parsedTheme) || this.css
+    if (options.themeCache != null) {
+      this.css = options.themeCache.get(parsedTheme) || this.css
     }
 
     // Generate styles
     css = ThemeUtils.genStyles(
       parsedTheme,
-      this.options.customProperties
+      options.customProperties
     )
 
     // Minify theme
-    if (this.options.minifyTheme != null) {
-      css = this.options.minifyTheme(css)
+    if (options.minifyTheme != null) {
+      css = options.minifyTheme(css)
     }
 
     // Theme cache set
-    if (this.options.themeCache != null) {
-      this.options.themeCache.set(parsedTheme, css)
+    if (options.themeCache != null) {
+      options.themeCache.set(parsedTheme, css)
     }
 
     this.css = css
@@ -153,8 +149,9 @@ export class Theme extends Service {
     this.ssr = Boolean(ssrContext)
 
     if (this.ssr) {
+      const options = this.options || {}
       // SSR
-      const nonce = this.options.cspNonce ? ` nonce="${this.options.cspNonce}"` : ''
+      const nonce = options.cspNonce ? ` nonce="${options.cspNonce}"` : ''
       ssrContext.head = ssrContext.head || ''
       ssrContext.head += `<style type="text/css" id="vuetify-theme-stylesheet"${nonce}>${this.generatedStyles}</style>`
     } else if (typeof document !== 'undefined') {
@@ -177,13 +174,19 @@ export class Theme extends Service {
   // Generate the style element
   // if applicable
   private genStyleElement (): void {
+    const options = this.options || {}
+
     this.styleEl = document.createElement('style')
     this.styleEl.type = 'text/css'
     this.styleEl.id = 'vuetify-theme-stylesheet'
-    if (this.options.cspNonce) {
-      this.styleEl.setAttribute('nonce', this.options.cspNonce)
+
+    if (options.cspNonce) {
+      this.styleEl.setAttribute('nonce', options.cspNonce)
     }
-    document.head.appendChild(this.styleEl)
+
+    // Asserts that document could
+    // be null typescript is hard
+    document!.head!.appendChild(this.styleEl)
   }
 
   get currentTheme () {
@@ -192,22 +195,23 @@ export class Theme extends Service {
 
   get generatedStyles (): string {
     const theme = this.parsedTheme
+    const options = this.options || {}
     let css
 
-    if (this.options.themeCache != null) {
-      css = this.options.themeCache.get(theme)
+    if (options.themeCache != null) {
+      css = options.themeCache.get(theme)
       /* istanbul ignore if */
       if (css != null) return css
     }
 
-    css = ThemeUtils.genStyles(theme, this.options.customProperties)
+    css = ThemeUtils.genStyles(theme, options.customProperties)
 
-    if (this.options.minifyTheme != null) {
-      css = this.options.minifyTheme(css)
+    if (options.minifyTheme != null) {
+      css = options.minifyTheme(css)
     }
 
-    if (this.options.themeCache != null) {
-      this.options.themeCache.set(theme, css)
+    if (options.themeCache != null) {
+      options.themeCache.set(theme, css)
     }
 
     return css

@@ -5,7 +5,15 @@ export interface VuetifyIconService {
 }
 
 export interface VuetifyIconOptions {
-  iconfont: string
+  /**
+   * Select a base icon font to use. Note that none of these are included, you must install them yourself
+   *
+   * md: <a href="https://material.io/icons">material.io</a> (default)
+   * mdi: <a href="https://materialdesignicons.com">MDI</a>
+   * fa: <a href="https://fontawesome.com/get-started/web-fonts-with-css">FontAwesome 5</a>
+   * fa4: <a href="">FontAwesome 4</a> TODO: link
+   */
+  iconfont: 'md' | 'mdi' | 'fa' | 'fa4' // TODO: camelCase
   values?: VuetifyIcons
 }
 

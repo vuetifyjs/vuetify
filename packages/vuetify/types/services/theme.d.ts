@@ -5,20 +5,20 @@ export interface VuetifyThemeService {
 }
 
 export interface VuetifyThemeOptions {
-  options: {
+  dark?: boolean
+  disable?: boolean
+  default?: string | false
+  options?: {
     /** @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#Unsafe_inline_script */
     cspNonce?: string | null
     customProperties?: boolean
     minifyTheme?: ((css: string) => string) | null
     themeCache?: VuetifyThemeCache
   }
-  dark?: boolean
-  disable?: boolean
-  default?: string | false
-  themes?: VuetifyTheme | undefined
+  themes?: VuetifyThemes
 }
 
-export interface VuetifyTheme {
+export interface VuetifyThemes {
   [name: string]: VuetifyThemeVariant
 }
 
