@@ -1,6 +1,5 @@
 import { test } from "@/test"
 import VCalendarDaily from "@/components/VCalendar/VCalendarDaily"
-import { parseTimestamp } from "@/components/VCalendar/util/timestamp";
 
 test("VCalendarDaily", ({ mount }) => {
   it("should render component and have v-calendar-daily class", async () => {
