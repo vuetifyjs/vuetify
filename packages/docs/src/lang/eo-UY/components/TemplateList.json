@@ -1,0 +1,44 @@
+{
+  "close": "crwdns13510:0crwdne13510:0",
+  "init": "crwdns13512:0crwdne13512:0",
+  "quickstart": {
+    "title": "crwdns13514:0crwdne13514:0",
+    "desc": "crwdns13516:0crwdne13516:0"
+  },
+  "simple": {
+    "title": "crwdns13518:0crwdne13518:0",
+    "desc": "crwdns13520:0crwdne13520:0"
+  },
+  "webpack": {
+    "title": "crwdns13522:0crwdne13522:0",
+    "desc": "crwdns13524:0crwdne13524:0"
+  },
+  "webpackSimple": {
+    "title": "crwdns13526:0crwdne13526:0",
+    "desc": "crwdns13528:0crwdne13528:0"
+  },
+  "webpackSSR": {
+    "title": "crwdns13530:0crwdne13530:0",
+    "desc": "crwdns13532:0[Hackernews]crwdne13532:0"
+  },
+  "nuxt": {
+    "title": "crwdns13534:0crwdne13534:0",
+    "desc": "crwdns13536:0crwdne13536:0"
+  },
+  "pwa": {
+    "title": "crwdns13538:0crwdne13538:0",
+    "desc": "crwdns13540:0crwdne13540:0"
+  },
+  "electron": {
+    "title": "crwdns13542:0crwdne13542:0",
+    "desc": "crwdns13544:0crwdne13544:0"
+  },
+  "aLaCarte": {
+    "title": "crwdns13546:0crwdne13546:0",
+    "desc": "crwdns13548:0crwdne13548:0"
+  },
+  "cordova": {
+    "title": "crwdns13550:0crwdne13550:0",
+    "desc": "crwdns13552:0crwdne13552:0"
+  }
+}

@@ -114,6 +114,7 @@ export default {
       if (this.right) return 'slide-x-transition'
       if (this.bottom) return 'slide-y-transition'
       if (this.left) return 'slide-x-reverse-transition'
+      return ''
     },
     offsetY () {
       return this.top || this.bottom
@@ -130,11 +131,6 @@ export default {
         zIndex: this.zIndex || this.activeZIndex
       }
     }
-  },
-
-  watch: {
-    positionX: 'updateDimensions',
-    positionY: 'updateDimensions'
   },
 
   beforeMount () {
@@ -163,16 +159,16 @@ export default {
         }
       }
 
-      if (this.$slots.activator) {
-        return this.$createElement('span', {
-          on: listeners,
-          ref: 'activator'
-        }, this.$slots.activator)
-      } else if (this.$scopedSlots.activator) {
+      if (this.$scopedSlots.activator && this.$scopedSlots.activator.length) {
         const activator = this.$scopedSlots.activator({ on: listeners })
         this.activatorNode = activator
         return activator
       }
+
+      return this.$createElement('span', {
+        on: listeners,
+        ref: 'activator'
+      }, this.$slots.activator)
     }
   },
 

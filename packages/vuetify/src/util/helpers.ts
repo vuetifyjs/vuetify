@@ -334,3 +334,10 @@ export function arrayDiff (a: any[], b: any[]): any[] {
   }
   return diff
 }
+
+/**
+ * Makes the first character of a string uppercase
+ */
+export function upperFirst (str: string): string {
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}

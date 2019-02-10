@@ -38,10 +38,10 @@
 
     <v-sheet color="transparent">
       <v-sparkline
+        :key="String(avg)"
         :smooth="16"
         :gradient="['#f72047', '#ffd200', '#1feaea']"
         :line-width="3"
-        :key="String(avg)"
         :value="heartbeats"
         auto-draw
         stroke-linecap="round"

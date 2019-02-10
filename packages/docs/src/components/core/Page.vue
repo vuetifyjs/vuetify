@@ -21,9 +21,9 @@
       </div>
 
       <component
+        :is="getComponent(child.type)"
         v-for="(child, i) in structure.children"
         :key="`${composite}-${i}`"
-        :is="getComponent(child.type)"
         :value="child"
       />
 

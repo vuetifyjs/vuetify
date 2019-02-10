@@ -13,6 +13,10 @@ import Vuetify, {
   VBreadcrumbsDivider,
   VBtn,
   VBtnToggle,
+  VCalendar,
+  VCalendarDaily,
+  VCalendarMonthly,
+  VCalendarWeekly,
   VCard,
   VCardMedia,
   VCardTitle,
@@ -131,6 +135,7 @@ import Vuetify, {
   VSlideYTransition,
   VSlideYReverseTransition,
   VExpandTransition,
+  VExpandXTransition,
   VRowExpandTransition
 } from '@/entry-lib'
 
@@ -147,6 +152,10 @@ const components = {
   VBreadcrumbsDivider,
   VBtn,
   VBtnToggle,
+  VCalendar,
+  VCalendarWeekly,
+  VCalendarDaily,
+  VCalendarMonthly,
   VCard,
   VCardMedia,
   VCardTitle,
@@ -265,6 +274,7 @@ const components = {
   VSlideYTransition,
   VSlideYReverseTransition,
   VExpandTransition,
+  VExpandXTransition,
   VRowExpandTransition
 }
 

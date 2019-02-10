@@ -9,7 +9,9 @@
         v-if="typeof item === 'number'"
         :key="`divider-${i}`"
       >
-        <span slot="opposite">Completed</span>
+        <span slot="opposite">
+          Completed
+        </span>
       </v-timeline-item>
       <v-timeline-item
         v-else-if="index == null || index >= i"
@@ -48,9 +50,9 @@
                 class="mr-2"
                 v-text="item.caption"
               />
-              <v-icon
-                small
-              >mdi-calendar</v-icon>
+              <v-icon small>
+                mdi-calendar
+              </v-icon>
             </v-btn>
           </v-card-title>
           <v-expand-transition>
@@ -92,7 +94,7 @@
     }),
 
     mounted () {
-      this.items = this.$t('GettingStarted.Roadmap.roadmapItems').map((item) => {
+      this.items = this.$t('GettingStarted.Roadmap.roadmapItems').map(item => {
         const type = types[item.type]
         return {
           ...type,

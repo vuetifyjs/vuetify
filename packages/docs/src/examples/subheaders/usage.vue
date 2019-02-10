@@ -22,8 +22,8 @@
 
             <v-divider
               v-else-if="item.divider"
-              :inset="item.inset"
               :key="index"
+              :inset="item.inset"
             ></v-divider>
 
             <v-list-tile

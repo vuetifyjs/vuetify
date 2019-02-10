@@ -1,5 +1,105 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VTreeView.ts should filter items 1`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node v-treeview-node--leaf">
+    <div class="v-treeview-node__root">
+      <div class="v-treeview-node__content">
+        <div class="v-treeview-node__label">
+          one
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="v-treeview-node v-treeview-node--leaf">
+    <div class="v-treeview-node__root">
+      <div class="v-treeview-node__content">
+        <div class="v-treeview-node__label">
+          two
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTreeView.ts should filter items 2`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node v-treeview-node--leaf v-treeview-node--excluded">
+    <div class="v-treeview-node__root">
+      <div class="v-treeview-node__content">
+        <div class="v-treeview-node__label">
+          one
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="v-treeview-node v-treeview-node--leaf">
+    <div class="v-treeview-node__root">
+      <div class="v-treeview-node__content">
+        <div class="v-treeview-node__label">
+          two
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTreeView.ts should filter items using custom item filter 1`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node v-treeview-node--leaf v-treeview-node--excluded">
+    <div class="v-treeview-node__root">
+      <div class="v-treeview-node__content">
+        <div class="v-treeview-node__label">
+          one
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="v-treeview-node v-treeview-node--leaf v-treeview-node--excluded">
+    <div class="v-treeview-node__root">
+      <div class="v-treeview-node__content">
+        <div class="v-treeview-node__label">
+          two
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTreeView.ts should filter items using custom item filter 2`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node v-treeview-node--leaf">
+    <div class="v-treeview-node__root">
+      <div class="v-treeview-node__content">
+        <div class="v-treeview-node__label">
+          one
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="v-treeview-node v-treeview-node--leaf v-treeview-node--excluded">
+    <div class="v-treeview-node__root">
+      <div class="v-treeview-node__content">
+        <div class="v-treeview-node__label">
+          two
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
 exports[`VTreeView.ts should handle replacing items with new array of equal length 1`] = `
 
 <div class="v-treeview theme--light">
@@ -583,6 +683,11 @@ exports[`VTreeView.ts should update selection when selected prop changes 1`] = `
       >
         arrow_drop_down
       </i>
+      <i aria-hidden="true"
+         class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light"
+      >
+        check_box_outline_blank
+      </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
           Root
@@ -604,6 +709,11 @@ exports[`VTreeView.ts should update selection when selected prop changes 2`] = `
       >
         arrow_drop_down
       </i>
+      <i aria-hidden="true"
+         class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light accent--text"
+      >
+        check_box
+      </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
           Root
@@ -613,6 +723,11 @@ exports[`VTreeView.ts should update selection when selected prop changes 2`] = `
     <div class="v-treeview-node__children">
       <div class="v-treeview-node v-treeview-node--leaf v-treeview-node--selected">
         <div class="v-treeview-node__root">
+          <i aria-hidden="true"
+             class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light accent--text"
+          >
+            check_box
+          </i>
           <div class="v-treeview-node__content">
             <div class="v-treeview-node__label">
               Child
@@ -629,12 +744,17 @@ exports[`VTreeView.ts should update selection when selected prop changes 2`] = `
 exports[`VTreeView.ts should update selection when selected prop changes 3`] = `
 
 <div class="v-treeview theme--light">
-  <div class="v-treeview-node v-treeview-node--selected">
+  <div class="v-treeview-node">
     <div class="v-treeview-node__root">
       <i aria-hidden="true"
          class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
       >
         arrow_drop_down
+      </i>
+      <i aria-hidden="true"
+         class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light"
+      >
+        check_box_outline_blank
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -643,8 +763,13 @@ exports[`VTreeView.ts should update selection when selected prop changes 3`] = `
       </div>
     </div>
     <div class="v-treeview-node__children">
-      <div class="v-treeview-node v-treeview-node--leaf v-treeview-node--selected">
+      <div class="v-treeview-node v-treeview-node--leaf">
         <div class="v-treeview-node__root">
+          <i aria-hidden="true"
+             class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light"
+          >
+            check_box_outline_blank
+          </i>
           <div class="v-treeview-node__content">
             <div class="v-treeview-node__label">
               Child

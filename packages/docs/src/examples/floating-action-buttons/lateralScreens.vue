@@ -34,9 +34,9 @@
     </v-tabs-items>
     <v-fab-transition>
       <v-btn
-        :color="activeFab.color"
         :key="activeFab.icon"
         v-model="fab"
+        :color="activeFab.color"
         dark
         fab
         fixed

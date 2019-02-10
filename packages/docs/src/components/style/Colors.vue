@@ -30,9 +30,9 @@
           </v-card>
           <v-card
             v-for="(subColor, key2) in color"
+            :key="key2"
             :color="`${key} ${convertToClass(key2)}`"
             :class="getColorClass(key2)"
-            :key="key2"
             tile
           >
             <v-card-text>

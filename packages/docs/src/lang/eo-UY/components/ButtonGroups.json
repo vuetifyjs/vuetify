@@ -1,0 +1,21 @@
+{
+  "header": "crwdns11280:0crwdne11280:0",
+  "headerText": "crwdns11282:0crwdne11282:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns11284:0crwdne11284:0"
+    },
+    "appBar": {
+      "header": "crwdns11286:0crwdne11286:0",
+      "desc": "crwdns11288:0crwdne11288:0"
+    }
+  },
+  "props": {
+    "activeClass": "crwdns11290:0crwdne11290:0",
+    "mandatory": "crwdns11292:0crwdne11292:0",
+    "multiple": "crwdns11294:0crwdne11294:0"
+  },
+  "events": {
+    "change": "crwdns11296:0crwdne11296:0"
+  }
+}

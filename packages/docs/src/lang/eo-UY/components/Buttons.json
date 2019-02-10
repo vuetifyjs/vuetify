@@ -1,0 +1,80 @@
+{
+  "header": "crwdns11298:0crwdne11298:0",
+  "headerText": "crwdns11300:0crwdne11300:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns11302:0crwdne11302:0"
+    },
+    "flat": {
+      "header": "crwdns11304:0crwdne11304:0",
+      "desc": "crwdns11306:0crwdne11306:0"
+    },
+    "raised": {
+      "header": "crwdns11308:0crwdne11308:0",
+      "desc": "crwdns11310:0crwdne11310:0"
+    },
+    "depressed": {
+      "header": "crwdns11312:0crwdne11312:0",
+      "desc": "crwdns11314:0crwdne11314:0"
+    },
+    "dropdown": {
+      "header": "crwdns11316:0crwdne11316:0",
+      "desc": "crwdns11318:0crwdne11318:0",
+      "uninverted": true
+    },
+    "icon": {
+      "header": "crwdns11322:0crwdne11322:0",
+      "desc": "crwdns11324:0crwdne11324:0"
+    },
+    "floating": {
+      "header": "crwdns11326:0crwdne11326:0",
+      "desc": "crwdns11328:0crwdne11328:0"
+    },
+    "loaders": {
+      "header": "crwdns11330:0crwdne11330:0",
+      "desc": "crwdns11332:0crwdne11332:0"
+    },
+    "sizing": {
+      "header": "crwdns11334:0crwdne11334:0",
+      "desc": "crwdns11336:0crwdne11336:0"
+    },
+    "outline": {
+      "header": "crwdns11338:0crwdne11338:0",
+      "desc": "crwdns11340:0crwdne11340:0"
+    },
+    "round": {
+      "header": "crwdns11342:0crwdne11342:0",
+      "desc": "crwdns11344:0crwdne11344:0"
+    },
+    "block": {
+      "header": "crwdns11346:0crwdne11346:0",
+      "desc": "crwdns11348:0crwdne11348:0"
+    }
+  },
+  "props": {
+    "v-btn": {
+      "block": "crwdns11350:0crwdne11350:0",
+      "depressed": "crwdns11352:0crwdne11352:0",
+      "fab": "crwdns11354:0crwdne11354:0",
+      "flat": "crwdns11356:0crwdne11356:0",
+      "icon": "crwdns11358:0crwdne11358:0",
+      "inputValue": "crwdns11360:0crwdne11360:0",
+      "large": "crwdns11362:0crwdne11362:0",
+      "loading": "crwdns11364:0crwdne11364:0",
+      "outline": "crwdns11366:0crwdne11366:0",
+      "round": "crwdns11368:0crwdne11368:0",
+      "small": "crwdns11370:0crwdne11370:0",
+      "type": "crwdns11372:0crwdne11372:0"
+    },
+    "v-btn-toggle": {
+      "activeClass": "crwdns11374:0crwdne11374:0",
+      "mandatory": "crwdns11376:0crwdne11376:0",
+      "multiple": "crwdns11378:0crwdne11378:0"
+    }
+  },
+  "events": {
+    "v-btn-toggle": {
+      "change": "crwdns11380:0crwdne11380:0"
+    }
+  }
+}

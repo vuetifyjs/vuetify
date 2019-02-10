@@ -17,8 +17,8 @@
           mode="out-in"
         >
           <v-icon
-            :color="isEditing ? 'success' : 'info'"
             :key="`icon-${isEditing}`"
+            :color="isEditing ? 'success' : 'info'"
             @click="isEditing = !isEditing"
             v-text="isEditing ? 'mdi-check-outline' : 'mdi-circle-edit-outline'"
           ></v-icon>

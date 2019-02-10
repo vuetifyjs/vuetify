@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-unused-vars -->
 <template>
   <div>
     <v-toolbar flat color="white">
