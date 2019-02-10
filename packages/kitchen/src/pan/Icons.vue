@@ -323,31 +323,43 @@
           class="mb-2"
         >
           <span class="group pa-2">
-            <v-icon color="primary"
-            dense>
+            <v-icon
+              color="primary"
+              dense
+            >
               mdi-home
             </v-icon>
-            <v-icon color="primary"
-            dense>
+            <v-icon
+              color="primary"
+              dense
+            >
               mdi-calendar
             </v-icon>
-            <v-icon color="primary"
-            dense>
+            <v-icon
+              color="primary"
+              dense
+            >
               mdi-information
             </v-icon>
           </span>
 
           <span class="group pa-2">
-            <v-icon color="teal"
-            dense>
+            <v-icon
+              color="teal"
+              dense
+            >
               mdi-folder-open
             </v-icon>
-            <v-icon color="teal"
-            dense>
+            <v-icon
+              color="teal"
+              dense
+            >
               mdi-widgets
             </v-icon>
-            <v-icon color="teal"
-            dense>
+            <v-icon
+              color="teal"
+              dense
+            >
               mdi-gavel
             </v-icon>
           </span>
