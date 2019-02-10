@@ -21,6 +21,7 @@ import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
 import Vue, { VNode, VNodeData } from 'vue'
+import Elevatable from '../../mixins/elevatable'
 interface options extends Vue {
   /* eslint-disable-next-line camelcase */
   $_modelEvent: string
@@ -31,13 +32,15 @@ export default mixins<options &
   ExtractVue<[
     typeof Colorable,
     typeof Themeable,
-    typeof Validatable
+    typeof Validatable,
+    typeof Elevatable
   ]>
 /* eslint-enable indent */
 >(
   Colorable,
   Themeable,
-  Validatable
+  Validatable,
+  Elevatable
   /* @vue/component */
 ).extend({
   name: 'v-input',

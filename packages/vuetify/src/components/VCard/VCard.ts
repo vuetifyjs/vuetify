@@ -21,7 +21,6 @@ export default mixins(
   name: 'v-card',
 
   props: {
-    flat: Boolean,
     hover: Boolean,
     img: String,
     raised: Boolean
@@ -31,7 +30,6 @@ export default mixins(
     classes (): object {
       return {
         'v-card': true,
-        'v-card--flat': this.flat,
         'v-card--hover': this.hover,
         ...VSheet.options.computed.classes.call(this)
       }

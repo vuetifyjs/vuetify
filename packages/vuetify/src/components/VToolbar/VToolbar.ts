@@ -14,6 +14,7 @@ import { deprecate } from '../../util/console'
 // Types
 import mixins from '../../util/mixins'
 import { VNode } from 'vue'
+import Elevatable from '../../mixins/elevatable'
 
 export default mixins(
   Applicationable('top', [
@@ -25,7 +26,8 @@ export default mixins(
   ]),
   Colorable,
   SSRBootable,
-  Themeable
+  Themeable,
+  Elevatable
 /* @vue/component */
 ).extend({
   name: 'v-toolbar',
@@ -42,7 +44,6 @@ export default mixins(
       type: [Number, String],
       validator: (v: any) => !isNaN(parseInt(v))
     },
-    flat: Boolean,
     floating: Boolean,
     height: {
       type: [Number, String],
@@ -124,7 +125,7 @@ export default mixins(
     classes (): object {
       return {
         'v-toolbar': true,
-        'elevation-0': this.flat || (
+        'elevation-0': (
           !this.isActive &&
           !this.tabs &&
           this.canScroll
