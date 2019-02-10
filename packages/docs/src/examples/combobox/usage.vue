@@ -28,7 +28,8 @@
               :key="JSON.stringify(data.item)"
               :selected="data.selected"
               :disabled="data.disabled"
-              class="v-chip--select-multi "
+              class="v-chip--select-multi"
+              @click.stop="data.parent.selectedIndex = data.index"
               @input="data.parent.selectItem(data.item)"
             >
               <v-avatar class="accent white--text">
