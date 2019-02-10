@@ -1,5 +1,6 @@
 // Imports
 @import '../../styles/styles.sass'
+@import './_variables.sass'
 @import './_mixins.sass'
 
 // Theme
@@ -12,7 +13,7 @@
   align-items: center
   display: inline-flex
   font-feature-settings: 'liga'
-  font-size: 24px
+  font-size: $icon-size
   justify-content: center
   line-height: 1
   transition: $primary-transition
@@ -31,4 +32,4 @@
     opacity: .6
 
   &--is-component
-    height: 24px
+    height: $icon-size
