@@ -1,4 +1,4 @@
-import './VIcon.styl'
+import './VIcon.sass'
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Sizeable from '../../mixins/sizeable'
