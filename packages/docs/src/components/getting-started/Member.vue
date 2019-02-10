@@ -73,6 +73,16 @@
                 >
                   <v-icon>mdi-linkedin</v-icon>
                 </a>
+                <a
+                  v-if="value.patreon"
+                  :href="`https://patreon.com/${value.github}`"
+                  :title="`${value.name}'s Patreon`"
+                  class="text-decoration-none mx-2"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <v-icon>mdi-patreon</v-icon>
+                </a>
               </v-flex>
             </v-layout>
           </v-sheet>
