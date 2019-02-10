@@ -9,8 +9,8 @@ export default Vue.extend({
   },
 
   computed: {
-    computedElevation (): string | number | false {
-      return this.flat ? this.elevation : false
+    computedElevation (): string | number | undefined {
+      return this.flat ? undefined : this.elevation
     },
     elevationClasses (): Record<string, boolean> {
       if (!this.computedElevation) return {}
