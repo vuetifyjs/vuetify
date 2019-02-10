@@ -24,5 +24,10 @@ test('elevatable.js', ({ mount }) => {
       'elevation-12': true
     })
 
+    wrapper.setProps({ elevation: '12', flat: true })
+    expect(wrapper.vm.computedElevation).toBe(undefined)
+    expect(wrapper.vm.elevationClasses).toEqual({})
+
+
   })
 })
