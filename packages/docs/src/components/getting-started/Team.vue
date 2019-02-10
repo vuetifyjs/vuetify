@@ -45,6 +45,8 @@
           title: 'keeper',
           name: 'Kael Watts-Deuchar',
           github: 'kaelwd',
+          patreon: 'kaelwd',
+          twitter: '@kaelwd',
           avatar: 'avatarStyle=Transparent&topType=ShortHairShaggyMullet&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=ShirtCrewNeck&clotheColor=Heather&eyeType=Squint&eyebrowType=SadConcernedNatural&mouthType=Concerned&skinColor=Pale'
         },
         {
