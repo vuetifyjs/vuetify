@@ -71,7 +71,7 @@ export default {
             style: {
               transitionDelay: btnCount * 0.05 + 's'
             },
-            key: btnCount
+            key: i
           }, [b])
         } else {
           b.key = i
