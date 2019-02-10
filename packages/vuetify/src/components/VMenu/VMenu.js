@@ -95,9 +95,11 @@ export default Vue.extend({
 
   computed: {
     calculatedLeft () {
-      if (!this.auto) return this.calcLeft()
+      const menuWidth = Math.max(this.dimensions.content.width, this.dimensions.activator.width)
 
-      return `${this.calcXOverflow(this.calcLeftAuto())}px`
+      if (!this.auto) return this.calcLeft(menuWidth)
+
+      return `${this.calcXOverflow(this.calcLeftAuto(), menuWidth)}px`
     },
     calculatedMaxHeight () {
       return this.auto ? '200px' : convertToUnit(this.maxHeight)
