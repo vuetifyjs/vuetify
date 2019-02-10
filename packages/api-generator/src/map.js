@@ -907,7 +907,15 @@ module.exports = {
     ]
   },
   'v-icon': {
-    slots: ['default']
+    slots: ['default'],
+    props: [
+      {
+        name: 'dense',
+        type: 'boolean',
+        default: 'false',
+        'source': null
+      }
+    ]
   },
   'v-input': {
     events: [
