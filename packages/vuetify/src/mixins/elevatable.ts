@@ -4,12 +4,13 @@ export default Vue.extend({
   name: 'elevatable',
 
   props: {
-    elevation: [Number, String]
+    elevation: [Number, String],
+    flat: Boolean
   },
 
   computed: {
-    computedElevation (): string | number | undefined {
-      return this.elevation
+    computedElevation (): string | number | false {
+      return this.flat ? this.elevation : false
     },
     elevationClasses (): Record<string, boolean> {
       if (!this.computedElevation) return {}
