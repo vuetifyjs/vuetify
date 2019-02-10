@@ -199,29 +199,29 @@
 
 .v-btn.v-btn--fab.v-btn--e-fab
   width: auto
-  padding-left: 12px
-  padding-right: 20px
+  padding-left: $btn-e-fab-icon-padding
+  padding-right: $btn-e-fab-after-padding
 
   .v-icon, .v-icon--left
     margin-left: 0
-    margin-right: 12px
+    margin-right: $btn-e-fab-icon-padding
 
   .v-icon--right
     order: 2
-    margin-left: 12px
-    margin-right: -8px
+    margin-left: $btn-e-fab-icon-padding
+    margin-right: $btn-e-fab-icon-padding - $btn-e-fab-after-padding
 
   +rtl()
-    padding-left: 20px
-    padding-right: 12px
+    padding-left: $btn-e-fab-after-padding
+    padding-right: $btn-e-fab-icon-padding
 
     .v-icon, .v-icon--left
-      margin-left: 12px
+      margin-left: $btn-e-fab-icon-padding
       margin-right: 0
 
     .v-icon--right
-      margin-left: -8px
-      margin-right: 12px
+      margin-left: $btn-e-fab-icon-padding - $btn-e-fab-after-padding
+      margin-right: $btn-e-fab-icon-padding
 
 .v-btn--fixed
   position: fixed
