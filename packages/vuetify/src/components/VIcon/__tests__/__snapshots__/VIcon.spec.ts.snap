@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VIcon.js for component icon should render component 1`] = `
+exports[`VIcon for component icon should render component 1`] = `
 
 <div class="v-icon test-component v-icon--is-component theme--light"
      aria-hidden="true"
@@ -10,7 +10,7 @@ exports[`VIcon.js for component icon should render component 1`] = `
 
 `;
 
-exports[`VIcon.js for component icon should set font size from helper prop 1`] = `
+exports[`VIcon for component icon should set font size from helper prop 1`] = `
 
 <div class="v-icon test-component v-icon--is-component theme--light"
      aria-hidden="true"
@@ -21,7 +21,7 @@ exports[`VIcon.js for component icon should set font size from helper prop 1`] =
 
 `;
 
-exports[`VIcon.js for component icon should set font size from helper prop 2`] = `
+exports[`VIcon for component icon should set font size from helper prop 2`] = `
 
 <div class="v-icon test-component v-icon--is-component theme--light"
      aria-hidden="true"
@@ -31,7 +31,7 @@ exports[`VIcon.js for component icon should set font size from helper prop 2`] =
 
 `;
 
-exports[`VIcon.js for component icon should set font size from helper prop 3`] = `
+exports[`VIcon for component icon should set font size from helper prop 3`] = `
 
 <div class="v-icon test-component v-icon--is-component theme--light"
      aria-hidden="true"
@@ -42,7 +42,7 @@ exports[`VIcon.js for component icon should set font size from helper prop 3`] =
 
 `;
 
-exports[`VIcon.js for component icon should set font size from helper prop 4`] = `
+exports[`VIcon for component icon should set font size from helper prop 4`] = `
 
 <div class="v-icon test-component v-icon--is-component theme--light"
      aria-hidden="true"
@@ -53,41 +53,45 @@ exports[`VIcon.js for component icon should set font size from helper prop 4`] =
 
 `;
 
-exports[`VIcon.js set font size from helper prop 1`] = `
+exports[`VIcon set font size from helper prop 1`] = `
 
 <i aria-hidden="true"
    class="v-icon material-icons theme--light"
    style="font-size: 16px;"
 >
+  add
 </i>
 
 `;
 
-exports[`VIcon.js set font size from helper prop 2`] = `
+exports[`VIcon set font size from helper prop 2`] = `
 
 <i aria-hidden="true"
    class="v-icon material-icons theme--light"
 >
+  add
 </i>
 
 `;
 
-exports[`VIcon.js set font size from helper prop 3`] = `
+exports[`VIcon set font size from helper prop 3`] = `
 
 <i aria-hidden="true"
    class="v-icon material-icons theme--light"
    style="font-size: 36px;"
 >
+  add
 </i>
 
 `;
 
-exports[`VIcon.js set font size from helper prop 4`] = `
+exports[`VIcon set font size from helper prop 4`] = `
 
 <i aria-hidden="true"
    class="v-icon material-icons theme--light"
    style="font-size: 40px;"
 >
+  add
 </i>
 
 `;

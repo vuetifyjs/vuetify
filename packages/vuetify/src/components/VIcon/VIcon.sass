@@ -1,0 +1,41 @@
+// Imports
+@import '../../styles/styles.sass'
+@import './_variables.sass'
+@import './_mixins.sass'
+
+// Theme
+.v-btn.theme--light
+  @include icon-theme($material-light)
+.v-btn.theme--dark
+  @include icon-theme($material-dark)
+
+.v-icon
+  align-items: center
+  display: inline-flex
+  font-feature-settings: 'liga'
+  font-size: $icon-size
+  justify-content: center
+  line-height: 1
+  transition: $primary-transition
+  vertical-align: text-bottom
+
+  &--right
+    margin-left: map-get($grid-gutters, 'md')
+  &--left
+    margin-right: map-get($grid-gutters, 'md')
+
+  &.v-icon.v-icon--link
+    cursor: pointer
+
+  &--disabled
+    pointer-events: none
+    opacity: .6
+
+  &--is-component
+    height: $icon-size
+
+  &--dense
+    font-size: $icon-size-dense
+
+    &--is-component
+      height: $icon-size-dense
