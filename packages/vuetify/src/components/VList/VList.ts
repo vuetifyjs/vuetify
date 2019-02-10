@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_lists.styl'
+import './_lists.styl'
 import VListGroup from './VListGroup'
 
 // Mixins
