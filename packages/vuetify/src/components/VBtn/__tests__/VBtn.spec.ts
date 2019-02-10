@@ -53,6 +53,21 @@ describe('VBtn.ts', () => {
     }).html()).toMatchSnapshot()
   })
 
+  it('should render extended FAB component and match snapshot', () => {
+    expect(mountFunction({
+      propsData: {
+        extended: true
+      }
+    }).html()).toMatchSnapshot()
+
+    expect(mountFunction({
+      propsData: {
+        extended: true,
+        text: true
+      }
+    }).html()).toMatchSnapshot()
+  })
+
   it('should render component with loader slot and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {

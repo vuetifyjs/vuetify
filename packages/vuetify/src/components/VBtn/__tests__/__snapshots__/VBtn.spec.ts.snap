@@ -96,6 +96,30 @@ exports[`VBtn.ts should render component with loader slot and match snapshot 1`]
 
 `;
 
+exports[`VBtn.ts should render extended FAB component and match snapshot 1`] = `
+
+<button type="button"
+        class="v-btn v-btn--contained theme--light v-size--default"
+        extended="true"
+>
+  <span class="v-btn__content">
+  </span>
+</button>
+
+`;
+
+exports[`VBtn.ts should render extended FAB component and match snapshot 2`] = `
+
+<button type="button"
+        class="v-btn v-btn--flat v-btn--text theme--light v-size--default"
+        extended="true"
+>
+  <span class="v-btn__content">
+  </span>
+</button>
+
+`;
+
 exports[`VBtn.ts should render specified tag when using tag prop 1`] = `
 
 <a class="v-btn v-btn--contained theme--light v-size--default">
