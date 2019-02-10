@@ -1405,6 +1405,93 @@
     </v-layout>
 
     <core-title>
+      Extended FABs
+    </core-title>
+    <core-section>
+      <v-layout justify-space-around align-center wrap>
+        <v-btn
+          extended-fab
+          large
+          color="success"
+          fixed
+          bottom
+          left
+        >
+          <v-icon>mdi-plus</v-icon>
+          Add more data
+        </v-btn>
+        <v-btn
+          extended-fab
+          large
+          color="success"
+        >
+          <v-icon>mdi-plus</v-icon>
+          Add more data
+        </v-btn>
+        <v-btn
+          extended-fab
+          small
+          color="success"
+        >
+          <v-icon>mdi-plus</v-icon>
+          Add more data
+        </v-btn>
+        <v-btn
+          extended-fab
+          large
+          color="success"
+        >
+          <v-icon right>mdi-plus</v-icon>
+          Add more data
+        </v-btn>
+        <v-btn
+          extended-fab
+          small
+          color="success"
+        >
+          <v-icon right>mdi-plus</v-icon>
+          Add more data
+        </v-btn>
+        <v-btn
+          extended-fab
+          large
+          outline
+          color="success"
+        >
+          <v-icon>mdi-plus</v-icon>
+          Add more data
+        </v-btn>
+        <v-btn
+          extended-fab
+          small
+          outline
+          color="success"
+        >
+          <v-icon>mdi-plus</v-icon>
+          Add more data
+        </v-btn>
+      </v-layout>
+      <v-btn
+        extended-fab
+        large
+        text
+        color="success"
+      >
+        <v-icon>mdi-plus</v-icon>
+        Add more data
+      </v-btn>
+      <v-btn
+        extended-fab
+        small
+        text
+        color="success"
+      >
+        <v-icon>mdi-plus</v-icon>
+        Add more data
+      </v-btn>
+    </core-section>
+
+    <core-title>
       Groups
     </core-title>
     <v-layout
@@ -1563,10 +1650,43 @@
     name: 'Buttons',
 
     data: () => ({
-      loading: false
+      loading: false,
+      direction: 'top',
+      fab: false,
+      fling: false,
+      hover: false,
+      tabs: null,
+      top: false,
+      right: true,
+      bottom: true,
+      left: false,
+      transition: 'slide-y-reverse-transition'
     }),
 
+    computed: {
+      activeFab () {
+        switch (this.tabs) {
+          case 'one': return { 'class': 'purple', icon: 'account_circle' }
+          case 'two': return { 'class': 'red', icon: 'edit' }
+          case 'three': return { 'class': 'green', icon: 'keyboard_arrow_up' }
+          default: return {}
+        }
+      }
+    },
+
     watch: {
+      top (val) {
+        this.bottom = !val
+      },
+      right (val) {
+        this.left = !val
+      },
+      bottom (val) {
+        this.top = !val
+      },
+      left (val) {
+        this.right = !val
+      },
       loading (val) {
         val && setTimeout(() => (this.loading = false), 2000)
       }
@@ -1581,5 +1701,13 @@
 
   .v-item-group {
     margin: 16px;
+  }
+
+    #create .v-speed-dial {
+    position: absolute;
+  }
+
+  #create .v-btn--floating {
+    position: relative;
   }
 </style>

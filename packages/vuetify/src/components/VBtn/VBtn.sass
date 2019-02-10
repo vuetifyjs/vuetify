@@ -197,6 +197,32 @@
         &.v-btn--right
           right: map-get($grid-gutters, 'lg')
 
+.v-btn.v-btn--fab.v-btn--e-fab
+  width: auto
+  padding-left: 12px
+  padding-right: 20px
+
+  .v-icon, .v-icon--left
+    margin-left: 0
+    margin-right: 12px
+
+  .v-icon--right
+    order: 2
+    margin-left: 12px
+    margin-right: -8px
+
+  +rtl()
+    padding-left: 20px
+    padding-right: 12px
+
+    .v-icon, .v-icon--left
+      margin-left: 12px
+      margin-right: 0
+
+    .v-icon--right
+      margin-left: -8px
+      margin-right: 12px
+
 .v-btn--fixed
   position: fixed
 
@@ -214,7 +240,8 @@
     border-radius: 0
 
 .v-btn--outline,
-.v-btn--round
+.v-btn--round,
+.v-btn--e-fab
   .v-btn__content
     .v-icon
       color: currentColor
