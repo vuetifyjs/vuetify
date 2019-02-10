@@ -30,12 +30,11 @@ test('VListTileAction.js', ({ mount, functionalContext }) => {
   })
 
   it('should render component with one children and match snapshot', () => {
-
     const visible = mount(Vue.component('visible', {
-      render: h => { if(true) return h('div') }
+      render: h => { return h('div') || h() }
     })).vNode
     const notVisible = mount(Vue.component('notVisible', {
-      render: h => { if(false) return h('span') }
+      render: h => { return h() || h('span') }
     })).vNode
 
     const wrapper = mount(VListTileAction, functionalContext({}, [visible, notVisible]))
