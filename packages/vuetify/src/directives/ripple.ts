@@ -161,15 +161,15 @@ function updateRipple (el: HTMLElement, binding: VNodeDirective, wasEnabled: boo
   }
   if (enabled && !wasEnabled) {
     if (navigator.maxTouchPoints) {
-      el.addEventListener('touchstart', rippleShow, false)
-      el.addEventListener('touchend', rippleHide, false)
-      el.addEventListener('touchcancel', rippleHide, false)
+      el.addEventListener('touchstart', rippleShow, { passive: true })
+      el.addEventListener('touchend', rippleHide, { passive: true })
+      el.addEventListener('touchcancel', rippleHide, { passive: true })
     } else {
-      el.addEventListener('mousedown', rippleShow, false)
-      el.addEventListener('mouseup', rippleHide, false)
-      el.addEventListener('mouseleave', rippleHide, false)
+      el.addEventListener('mousedown', rippleShow)
+      el.addEventListener('mouseup', rippleHide)
+      el.addEventListener('mouseleave', rippleHide)
       // Anchor tags can be dragged, causes other hides to fail - #1537
-      el.addEventListener('dragstart', rippleHide, false)
+      el.addEventListener('dragstart', rippleHide, { passive: true })
     }
   } else if (!enabled && wasEnabled) {
     removeListeners(el)
@@ -177,13 +177,13 @@ function updateRipple (el: HTMLElement, binding: VNodeDirective, wasEnabled: boo
 }
 
 function removeListeners (el: HTMLElement) {
-  el.removeEventListener('mousedown', rippleShow, false)
-  el.removeEventListener('touchstart', rippleHide, false)
-  el.removeEventListener('touchend', rippleHide, false)
-  el.removeEventListener('touchcancel', rippleHide, false)
-  el.removeEventListener('mouseup', rippleHide, false)
-  el.removeEventListener('mouseleave', rippleHide, false)
-  el.removeEventListener('dragstart', rippleHide, false)
+  el.removeEventListener('mousedown', rippleShow)
+  el.removeEventListener('touchstart', rippleHide)
+  el.removeEventListener('touchend', rippleHide)
+  el.removeEventListener('touchcancel', rippleHide)
+  el.removeEventListener('mouseup', rippleHide)
+  el.removeEventListener('mouseleave', rippleHide)
+  el.removeEventListener('dragstart', rippleHide)
 }
 
 function directive (el: HTMLElement, binding: VNodeDirective, node: VNode) {

@@ -84,6 +84,7 @@
       "headers": "An array of objects that each describe a header column. See the example below for a definition of all properties.",
       "headersLength": "Can be used in combination with `hide-headers` to specify the number of columns in the table to allow expansion rows and loading bar to function properly",
       "hideHeaders": "Hide the table headers",
+      "hideActions": "Hide the table actions. This will also remove pagination. pagination can be reactivated using the `pagination.sync` prop",
       "sortIcon": "Use a custom sort icon, uses the same syntax as `v-icon`",
       "nextIcon": "Mixins.DataIterable.props.nextIcon",
       "prevIcon": "Mixins.DataIterable.props.prevIcon"
