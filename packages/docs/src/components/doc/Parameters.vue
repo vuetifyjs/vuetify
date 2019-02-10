@@ -201,7 +201,7 @@
           str.indexOf('Components.') > -1
         )
       },
-      /* eslint-disable max-statements */
+      /* eslint-disable-next-line max-statements */
       genDescription (name, item) {
         let description = ''
         let devPrepend = ''

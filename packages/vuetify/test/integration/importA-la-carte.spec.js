@@ -10,6 +10,7 @@ import VBottomSheet from '@/components/VBottomSheet'
 import VBreadcrumbs from '@/components/VBreadcrumbs'
 import VBtn from '@/components/VBtn'
 import VBtnToggle from '@/components/VBtnToggle'
+import VCalendar from '@/components/VCalendar'
 import VCard from '@/components/VCard'
 import VCarousel from '@/components/VCarousel'
 import VCheckbox from '@/components/VCheckbox'
@@ -79,6 +80,7 @@ const components = {
   VBreadcrumbs,
   VBtn,
   VBtnToggle,
+  VCalendar,
   VCard,
   VCarousel,
   VCheckbox,

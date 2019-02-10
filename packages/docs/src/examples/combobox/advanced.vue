@@ -45,7 +45,7 @@
     </template>
     <template
       slot="item"
-      slot-scope="{ index, item, parent }"
+      slot-scope="{ index, item }"
     >
       <v-list-tile-content>
         <v-text-field

@@ -1,8 +1,8 @@
 <template>
   <v-app id="inspire">
     <v-navigation-drawer
-      :clipped="$vuetify.breakpoint.lgAndUp"
       v-model="drawer"
+      :clipped="$vuetify.breakpoint.lgAndUp"
       fixed
       app
     >
@@ -25,8 +25,8 @@
           </v-layout>
           <v-list-group
             v-else-if="item.children"
-            v-model="item.model"
             :key="item.text"
+            v-model="item.model"
             :prepend-icon="item.model ? item.icon : item['icon-alt']"
             append-icon=""
           >

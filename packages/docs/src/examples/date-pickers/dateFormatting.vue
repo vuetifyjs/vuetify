@@ -4,8 +4,8 @@
       <v-flex xs12 lg6>
         <v-menu
           ref="menu1"
-          :close-on-content-click="false"
           v-model="menu1"
+          :close-on-content-click="false"
           :nudge-right="40"
           lazy
           transition="scale-transition"
@@ -30,8 +30,8 @@
 
       <v-flex xs12 lg6>
         <v-menu
-          :close-on-content-click="false"
           v-model="menu2"
+          :close-on-content-click="false"
           :nudge-right="40"
           lazy
           transition="scale-transition"

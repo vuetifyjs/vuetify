@@ -24,8 +24,8 @@
 
     <v-tab-item
       v-for="i in 3"
-      :value="'tab-' + i"
       :key="i"
+      :value="'tab-' + i"
     >
       <v-card flat>
         <v-card-text>{{ text }}</v-card-text>

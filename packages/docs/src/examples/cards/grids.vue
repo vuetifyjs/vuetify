@@ -18,8 +18,8 @@
           <v-layout row wrap>
             <v-flex
               v-for="card in cards"
-              v-bind="{ [`xs${card.flex}`]: true }"
               :key="card.title"
+              v-bind="{ [`xs${card.flex}`]: true }"
             >
               <v-card>
                 <v-img

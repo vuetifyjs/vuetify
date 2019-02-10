@@ -9,8 +9,8 @@
     <v-flex xs12 sm6>
       <v-menu
         ref="menu"
-        :close-on-content-click="false"
         v-model="menu"
+        :close-on-content-click="false"
         :nudge-right="40"
         :return-value.sync="dates"
         lazy

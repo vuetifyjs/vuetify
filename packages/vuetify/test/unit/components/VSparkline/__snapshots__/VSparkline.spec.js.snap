@@ -16,7 +16,7 @@ exports[`VSparkline.vue should render component and match a snapshot 1`] = `
                     y2="0"
     >
       <stop offset="0"
-            stop-color="currentColor"
+            stop-color="primary"
       >
       </stop>
     </lineargradient>
@@ -86,7 +86,7 @@ exports[`VSparkline.vue should render component with line width and match a snap
                     y2="0"
     >
       <stop offset="0"
-            stop-color="currentColor"
+            stop-color="primary"
       >
       </stop>
     </lineargradient>
@@ -117,7 +117,7 @@ exports[`VSparkline.vue should render component with padding and match a snapsho
                     y2="0"
     >
       <stop offset="0"
-            stop-color="currentColor"
+            stop-color="primary"
       >
       </stop>
     </lineargradient>
@@ -148,12 +148,12 @@ exports[`VSparkline.vue should render component with string labels and match a s
                     y2="0"
     >
       <stop offset="0"
-            stop-color="currentColor"
+            stop-color="primary"
       >
       </stop>
     </lineargradient>
   </defs>
-  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: currentColor;">
+  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
     <text x="8"
           y="73"
     >
@@ -196,12 +196,12 @@ exports[`VSparkline.vue should render component with string labels and match a s
                     y2="0"
     >
       <stop offset="0"
-            stop-color="currentColor"
+            stop-color="primary"
       >
       </stop>
     </lineargradient>
   </defs>
-  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: currentColor;">
+  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
     <text x="8"
           y="73"
     >
@@ -244,12 +244,12 @@ exports[`VSparkline.vue should render component with string labels and match a s
                     y2="0"
     >
       <stop offset="0"
-            stop-color="currentColor"
+            stop-color="primary"
       >
       </stop>
     </lineargradient>
   </defs>
-  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: currentColor;">
+  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
     <text x="8"
           y="73"
     >
@@ -292,7 +292,7 @@ exports[`VSparkline.vue should render smooth component and match a snapshot 1`] 
                     y2="0"
     >
       <stop offset="0"
-            stop-color="currentColor"
+            stop-color="primary"
       >
       </stop>
     </lineargradient>

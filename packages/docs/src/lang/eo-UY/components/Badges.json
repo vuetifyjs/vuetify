@@ -1,0 +1,30 @@
+{
+  "header": "crwdns11178:0crwdne11178:0",
+  "headerText": "crwdns11180:0crwdne11180:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns11182:0crwdne11182:0"
+    },
+    "overlap": {
+      "header": "crwdns11184:0crwdne11184:0",
+      "desc": "crwdns11186:0crwdne11186:0"
+    },
+    "inline": {
+      "header": "crwdns11188:0crwdne11188:0",
+      "desc": "crwdns11190:0crwdne11190:0"
+    },
+    "icon": {
+      "header": "crwdns11192:0crwdne11192:0",
+      "desc": "crwdns11194:0crwdne11194:0"
+    },
+    "visibility": {
+      "header": "crwdns11196:0crwdne11196:0",
+      "desc": "crwdns11198:0crwdne11198:0"
+    }
+  },
+  "props": {
+    "bottom": "crwdns11200:0crwdne11200:0",
+    "left": "crwdns11202:0crwdne11202:0",
+    "transition": "crwdns11204:0crwdne11204:0"
+  }
+}

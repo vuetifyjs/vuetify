@@ -3,7 +3,7 @@
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
         <v-card-actions>
-          <v-select :items="items" v-model="size" label="Size"></v-select>
+          <v-select v-model="size" :items="items" label="Size"></v-select>
           <v-spacer></v-spacer>
         </v-card-actions>
         <v-container v-bind="{ [`grid-list-${size}`]: true }" fluid>

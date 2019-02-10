@@ -43,7 +43,7 @@
       </template>
       <template
         slot="item"
-        slot-scope="{ item, tile }"
+        slot-scope="{ item }"
       >
         <v-list-tile-avatar
           color="indigo"
