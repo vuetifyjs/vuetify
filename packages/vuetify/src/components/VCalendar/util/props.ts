@@ -1,5 +1,6 @@
 
 import { validateTimestamp, parseDate } from './timestamp'
+import { VEventInput } from './events'
 
 export default {
   base: {
@@ -106,6 +107,40 @@ export default {
     value: {
       type: String,
       validate: validateTimestamp
+    }
+  },
+  events: {
+    events: {
+      type: Array as () => VEventInput[],
+      default: () => []
+    },
+    eventHeight: {
+      type: Number,
+      default: 20
+    },
+    eventWidth: {
+      type: [Boolean, Number],
+      default: false
+    },
+    eventOffset: {
+      type: Number,
+      default: 10
+    },
+    eventSpacing: {
+      type: Number,
+      default: 20
+    },
+    eventColor: {
+      type: [String, Function],
+      default: 'secondary'
+    },
+    eventTextColor: {
+      type: [String, Function],
+      default: 'white'
+    },
+    eventName: {
+      type: [String, Function],
+      default: 'name'
     }
   }
 }

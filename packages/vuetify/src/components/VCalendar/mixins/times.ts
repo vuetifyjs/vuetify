@@ -19,8 +19,8 @@ export default Vue.extend({
 
   data: () => ({
     times: {
-      now: parseTimestamp('0000-00-00 00:00') as VTimestamp,
-      today: parseTimestamp('0000-00-00') as VTimestamp
+      now: parseTimestamp('0000-00-00 00:00'),
+      today: parseTimestamp('0000-00-00')
     }
   }),
 

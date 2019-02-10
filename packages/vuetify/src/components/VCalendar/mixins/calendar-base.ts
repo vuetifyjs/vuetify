@@ -30,10 +30,10 @@ export default mixins(Colorable, Themeable, Times, Mouse).extend({
       return getWeekdaySkips(this.weekdays)
     },
     parsedStart (): VTimestamp {
-      return parseTimestamp(this.start) as VTimestamp
+      return parseTimestamp(this.start)
     },
     parsedEnd (): VTimestamp {
-      return parseTimestamp(this.end) as VTimestamp
+      return parseTimestamp(this.end)
     },
     days (): VTimestamp[] {
       return createDayList(
@@ -84,6 +84,12 @@ export default mixins(Colorable, Themeable, Times, Mouse).extend({
     },
     getEndOfWeek (timestamp: VTimestamp): VTimestamp {
       return getEndOfWeek(timestamp, this.weekdays, this.times.today)
+    },
+    getFormatter (options: object): VTimestampFormatter {
+      return createNativeLocaleFormatter(
+        this.locale,
+        (_tms, _short) => options
+      )
     }
   }
 })

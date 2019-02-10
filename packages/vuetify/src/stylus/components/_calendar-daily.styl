@@ -5,6 +5,8 @@ v-calendar-daily($material)
   background-color: $material.calendar.background-color
   .v-calendar-daily__intervals-head
     border-right: $material.calendar.line-color 1px solid;
+  .v-calendar-daily_head-weekday
+    color: $material.calendar.header-color
   .v-calendar-daily_head-day
     border-right: $material.calendar.line-color 1px solid;
     border-bottom: $material.calendar.line-color 1px solid;
@@ -49,6 +51,8 @@ theme(v-calendar-daily, "v-calendar-daily")
   user-select: none;
   padding: $calendar-daily-weekday-padding;
   font-size: $calendar-daily-weekday-font-size;
+  text-transform: uppercase;
+  text-align: center
 
 .v-calendar-daily_head-day-label
   user-select: none;
@@ -56,9 +60,14 @@ theme(v-calendar-daily, "v-calendar-daily")
   padding: $calendar-daily-day-padding;
   line-height: $calendar-daily-day-line-height;
   cursor: pointer;
+  text-align: center;
 
-  &:hover
-    text-decoration: underline;
+  .v-btn
+    font-size: $calendar-daily-weekday-button-font-size;
+    height: $calendar-daily-weekday-button-size;
+    width: $calendar-daily-weekday-button-size;
+    letter-spacing: -2.5px;
+    text-indent: -2.5px;
 
 .v-calendar-daily__body
   flex: 1 1 60%;

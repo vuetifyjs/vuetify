@@ -106,11 +106,13 @@ export function validateTimestamp (input: any): boolean {
   return !!PARSE_REGEX.exec(input)
 }
 
-export function parseTimestamp (input: string, now?: VTimestamp): VTimestamp | null {
+export function parseTimestamp (input: string, now?: VTimestamp): VTimestamp {
   // YYYY-MM-DD hh:mm:ss
   const parts = PARSE_REGEX.exec(input)
 
-  if (!parts) return null
+  if (!parts) {
+    throw new Error('Invalid timestamp format: ' + input)
+  }
 
   const timestamp: VTimestamp = {
     date: input,
@@ -162,6 +164,10 @@ export function getDayIdentifier (timestamp: VTimestamp): number {
 
 export function getTimeIdentifier (timestamp: VTimestamp): number {
   return timestamp.hour * 100 + timestamp.minute
+}
+
+export function getTimestampIdentifier (timestamp: VTimestamp): number {
+  return getDayIdentifier(timestamp) * 10000 + getTimeIdentifier(timestamp)
 }
 
 export function updateRelative (timestamp: VTimestamp, now: VTimestamp, time = false): VTimestamp {

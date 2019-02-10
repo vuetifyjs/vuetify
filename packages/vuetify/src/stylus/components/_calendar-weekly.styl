@@ -35,6 +35,8 @@ theme(v-calendar-weekly, "v-calendar-weekly")
   user-select: none;
   padding: $calendar-weekly-weekday-padding;
   font-size: $calendar-weekly-weekday-font-size;
+  text-transform: uppercase;
+  text-align: center
 
 .v-calendar-weekly__week
   display: flex;
@@ -43,40 +45,23 @@ theme(v-calendar-weekly, "v-calendar-weekly")
 .v-calendar-weekly__day
   flex: 1;
   width: 0;
-  overflow: hidden;
   user-select: none;
   position: relative;
   padding: $calendar-weekly-day-padding;
 
-  &.v-present
-    .v-calendar-weekly__day-label
-      border: 1px solid currentColor;
-    .v-calendar-weekly__day-month
-      color: currentColor
-
 .v-calendar-weekly__day-label
   position: absolute;
-  text-decoration: none;
-  user-select: none;
-  cursor: pointer;
-  box-shadow: none;
   text-align: center;
   left: 0;
   top: 0;
-  border-radius: $calendar-weekly-day-label-radius;
-  width: $calendar-weekly-day-label-size;
-  height: $calendar-weekly-day-label-size;
-  line-height: $calendar-weekly-day-label-size;
+  right: 0;
 
-  &:hover
-    text-decoration: underline;
-
-.v-calendar-weekly__day-month
-  position: absolute;
-  text-decoration: none;
-  user-select: none;
-  box-shadow: none;
-  top: 0;
-  left: $calendar-weekly-day-month-left;
-  height: $calendar-weekly-day-label-size;
-  line-height: $calendar-weekly-day-label-size;
+  .v-btn 
+    font-size: $calendar-weekly-day-label-font-size;
+    letter-spacing: .3px;
+    text-align: center;
+    white-space: nowrap;
+    width: max-content;
+    min-width: $calendar-weekly-day-label-size;
+    height: $calendar-weekly-day-label-size;
+    padding: $calendar-weekly-day-label-padding;

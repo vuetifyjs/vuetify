@@ -16,10 +16,10 @@ export default VCalendarWeekly.extend({
       return 'v-calendar-monthly v-calendar-weekly'
     },
     parsedStart (): VTimestamp {
-      return getStartOfMonth(parseTimestamp(this.start) as VTimestamp)
+      return getStartOfMonth(parseTimestamp(this.start))
     },
     parsedEnd (): VTimestamp {
-      return getEndOfMonth(parseTimestamp(this.end) as VTimestamp)
+      return getEndOfMonth(parseTimestamp(this.end))
     }
   }
 

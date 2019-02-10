@@ -1,0 +1,27 @@
+@import '../bootstrap'
+@import '../theme'
+
+.v-calendar
+  .v-event 
+    position: relative;
+    margin-bottom: $calendar-event-bottom-space;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.9em;
+    cursor: pointer;
+    margin-right: -1px;
+    &.v-event-start
+      margin-left: $calendar-weekly-day-padding-left;
+      border-top-left-radius: $calendar-event-border-radius;
+      border-bottom-left-radius: $calendar-event-border-radius;
+    &.v-event-end
+      margin-right: $calendar-weekly-day-padding-right;
+      border-top-right-radius: $calendar-event-border-radius;
+      border-bottom-right-radius: $calendar-event-border-radius;
+  .v-event-timed
+    position: absolute;
+    overflow: hidden;
+    font-size: 0.9em;
+    cursor: pointer;
+    border-radius: $calendar-event-border-radius;
