@@ -96,6 +96,7 @@ export default Vue.extend({
   data: () => ({
     absoluteX: 0,
     absoluteY: 0,
+    activatorFixed: false,
     dimensions: Object.assign({}, dimensions),
     isContentActive: false,
     pageYOffset: 0,
@@ -244,8 +245,19 @@ export default Vue.extend({
     },
     checkForPageYOffset () {
       if (this.hasWindow) {
-        this.pageYOffset = this.getOffsetTop()
+        this.pageYOffset = this.activatorFixed ? 0 : this.getOffsetTop()
       }
+    },
+    checkActivatorFixed () {
+      let el = this.getActivator()
+      while (el) {
+        if (window.getComputedStyle(el).position === 'fixed') {
+          this.activatorFixed = true
+          return
+        }
+        el = el.offsetParent
+      }
+      this.activatorFixed = false
     },
     deactivate () {},
     getActivator (e) {
@@ -345,6 +357,7 @@ export default Vue.extend({
     },
     updateDimensions () {
       this.checkForWindow()
+      this.checkActivatorFixed()
       this.checkForPageYOffset()
 
       const dimensions = {}
