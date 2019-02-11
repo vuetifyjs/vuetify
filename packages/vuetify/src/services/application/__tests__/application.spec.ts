@@ -1,5 +1,5 @@
 // Services
-import { Application } from '..'
+import { Application } from '../index'
 
 describe('Application.ts', () => {
   let app: Application

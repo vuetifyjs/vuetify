@@ -3,10 +3,9 @@ import { mount, shallow } from 'avoriaz'
 import Vuetify from '@/'
 import toHaveBeenWarnedInit from '@/test/util/to-have-been-warned'
 import { compileToFunctions } from 'vue-template-compiler'
+toHaveBeenWarnedInit()
 
 export function test(name, cb) {
-  toHaveBeenWarnedInit()
-
   Vuetify.install(Vue)
 /*
   const app = document.createElement('div')

@@ -1,9 +1,15 @@
 // Service
-import { Lang } from '..'
+import { Lang } from '../index'
 
-let lang
+// Utilities
+import toHaveBeenWarnedInit from '@/test/util/to-have-been-warned'
 
-test('$vuetify.lang', () => {
+
+describe('$vuetify.lang', () => {
+  let lang: Lang
+
+  toHaveBeenWarnedInit()
+
   beforeEach(() => {
     lang = new Lang()
   })
