@@ -44,6 +44,11 @@ export default class Vuetify {
 
       service.init(ssrContext)
     })
+
+    // rtl is not installed and
+    // will never be called by
+    // the init process
+    this.framework.rtl = Boolean(this.preset.rtl) as any
   }
 
   // Instantiate a VuetifyService
