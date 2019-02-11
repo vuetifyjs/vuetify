@@ -21,7 +21,10 @@ interface GoToSettings {
   appOffset: boolean
 }
 
-export default function goTo (_target: GoToTarget, _settings: Partial<GoToSettings> = {}): Promise<number> {
+export default function goTo (
+  _target: GoToTarget,
+  _settings: Partial<GoToSettings> = {}
+): Promise<number> {
   const settings: GoToSettings = {
     container: (document.scrollingElement as HTMLElement | null) || document.body || document.documentElement,
     duration: 500,
