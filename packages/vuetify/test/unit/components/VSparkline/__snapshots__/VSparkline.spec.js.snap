@@ -9,7 +9,7 @@ exports[`VSparkline.vue should render component and match a snapshot 1`] = `
      class="primary--text"
 >
   <defs>
-    <lineargradient id="1"
+    <lineargradient id="0"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -21,10 +21,10 @@ exports[`VSparkline.vue should render component and match a snapshot 1`] = `
       </stop>
     </lineargradient>
   </defs>
-  <path id="1"
+  <path id="0"
         d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
         fill="none"
-        stroke="url(#1)"
+        stroke="url(#0)"
   >
   </path>
 </svg>
@@ -40,7 +40,7 @@ exports[`VSparkline.vue should render component with gradient and match a snapsh
      class="primary--text"
 >
   <defs>
-    <lineargradient id="5"
+    <lineargradient id="4"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -60,10 +60,10 @@ exports[`VSparkline.vue should render component with gradient and match a snapsh
       </stop>
     </lineargradient>
   </defs>
-  <path id="5"
+  <path id="4"
         d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
         fill="none"
-        stroke="url(#5)"
+        stroke="url(#4)"
   >
   </path>
 </svg>
@@ -79,7 +79,7 @@ exports[`VSparkline.vue should render component with line width and match a snap
      class="primary--text"
 >
   <defs>
-    <lineargradient id="4"
+    <lineargradient id="3"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -91,10 +91,10 @@ exports[`VSparkline.vue should render component with line width and match a snap
       </stop>
     </lineargradient>
   </defs>
-  <path id="4"
+  <path id="3"
         d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
         fill="none"
-        stroke="url(#4)"
+        stroke="url(#3)"
   >
   </path>
 </svg>
@@ -110,7 +110,7 @@ exports[`VSparkline.vue should render component with padding and match a snapsho
      class="primary--text"
 >
   <defs>
-    <lineargradient id="2"
+    <lineargradient id="1"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -122,10 +122,10 @@ exports[`VSparkline.vue should render component with padding and match a snapsho
       </stop>
     </lineargradient>
   </defs>
-  <path id="2"
+  <path id="1"
         d="M20 54.186036511627904L150 49.30232558139535S150 49.30232558139535 150 49.30232558139535L280 20.813963488372092"
         fill="none"
-        stroke="url(#2)"
+        stroke="url(#1)"
   >
   </path>
 </svg>
@@ -141,7 +141,7 @@ exports[`VSparkline.vue should render component with string labels and match a s
      class="primary--text"
 >
   <defs>
-    <lineargradient id="6"
+    <lineargradient id="5"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -170,10 +170,10 @@ exports[`VSparkline.vue should render component with string labels and match a s
       42
     </text>
   </g>
-  <path id="6"
+  <path id="5"
         d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
         fill="none"
-        stroke="url(#6)"
+        stroke="url(#5)"
   >
   </path>
 </svg>
@@ -189,7 +189,7 @@ exports[`VSparkline.vue should render component with string labels and match a s
      class="primary--text"
 >
   <defs>
-    <lineargradient id="6"
+    <lineargradient id="5"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -218,10 +218,10 @@ exports[`VSparkline.vue should render component with string labels and match a s
       43
     </text>
   </g>
-  <path id="6"
+  <path id="5"
         d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
         fill="none"
-        stroke="url(#6)"
+        stroke="url(#5)"
   >
   </path>
 </svg>
@@ -237,7 +237,7 @@ exports[`VSparkline.vue should render component with string labels and match a s
      class="primary--text"
 >
   <defs>
-    <lineargradient id="6"
+    <lineargradient id="5"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -266,10 +266,10 @@ exports[`VSparkline.vue should render component with string labels and match a s
       baz
     </text>
   </g>
-  <path id="6"
+  <path id="5"
         d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
         fill="none"
-        stroke="url(#6)"
+        stroke="url(#5)"
   >
   </path>
 </svg>
@@ -285,7 +285,7 @@ exports[`VSparkline.vue should render smooth component and match a snapshot 1`] 
      class="primary--text"
 >
   <defs>
-    <lineargradient id="3"
+    <lineargradient id="2"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -297,10 +297,10 @@ exports[`VSparkline.vue should render smooth component and match a snapshot 1`] 
       </stop>
     </lineargradient>
   </defs>
-  <path id="3"
+  <path id="2"
         d="M8 65.62789697674418L130.03352731272736 58.55291889055212S150 57.395348837209305 168.94587032678325 50.98800948606565L292 9.372103023255814"
         fill="none"
-        stroke="url(#3)"
+        stroke="url(#2)"
   >
   </path>
 </svg>
