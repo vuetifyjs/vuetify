@@ -117,6 +117,14 @@ export default CalendarWithEvents.extend({
     }
   },
 
+  mounted () {
+    this.updateEventVisibility()
+  },
+
+  updated () {
+    this.updateEventVisibility()
+  },
+
   methods: {
     checkChange (): void {
       const { start, end } = this.renderProps
@@ -201,6 +209,11 @@ export default CalendarWithEvents.extend({
         end: end.date,
         maxDays
       },
+      directives: [{
+        modifiers: { quiet: true },
+        name: 'resize',
+        value: this.updateEventVisibility
+      }],
       on: {
         ...this.$listeners,
         'click:date': (day: VTimestamp) => {

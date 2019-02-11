@@ -118,18 +118,6 @@ export default {
       type: Number,
       default: 20
     },
-    eventWidth: {
-      type: [Boolean, Number],
-      default: false
-    },
-    eventOffset: {
-      type: Number,
-      default: 10
-    },
-    eventSpacing: {
-      type: Number,
-      default: 20
-    },
     eventColor: {
       type: [String, Function],
       default: 'secondary'
@@ -141,6 +129,22 @@ export default {
     eventName: {
       type: [String, Function],
       default: 'name'
+    },
+    eventOverlapThreshold: {
+      type: Number,
+      default: 60
+    },
+    eventMore: {
+      type: Boolean,
+      default: true
+    },
+    eventMoreText: {
+      type: String,
+      default: '$vuetify.calendar.moreEvents'
+    },
+    eventRipple: {
+      type: [Boolean, Object],
+      default: null
     }
   }
 }

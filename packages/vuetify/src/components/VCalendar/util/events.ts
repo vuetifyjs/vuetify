@@ -19,6 +19,7 @@ export interface VEventParsed {
   startTimestampIdentifier: number
   end: VTimestamp
   endIdentifier: number
+  endTimestampIdentifier: number
   allDay: boolean
   index: number
 }
@@ -29,9 +30,10 @@ export function parseEvent (input: VEventInput, index: number): VEventParsed {
   const startIdentifier: number = getDayIdentifier(start)
   const startTimestampIdentifier: number = getTimestampIdentifier(start)
   const endIdentifier: number = getDayIdentifier(end)
+  const endTimestampIdentifier: number = getTimestampIdentifier(end)
   const allDay: boolean = !start.hasTime
 
-  return { input, start, startIdentifier, startTimestampIdentifier, end, endIdentifier, allDay, index }
+  return { input, start, startIdentifier, startTimestampIdentifier, end, endIdentifier, endTimestampIdentifier, allDay, index }
 }
 
 export function isEventOn (event: VEventParsed, dayIdentifier: number): boolean {

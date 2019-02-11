@@ -12,16 +12,36 @@
     cursor: pointer;
     margin-right: -1px;
     &.v-event-start
-      margin-left: $calendar-weekly-day-padding-left;
       border-top-left-radius: $calendar-event-border-radius;
       border-bottom-left-radius: $calendar-event-border-radius;
     &.v-event-end
-      margin-right: $calendar-weekly-day-padding-right;
+      width: 95%;
       border-top-right-radius: $calendar-event-border-radius;
       border-bottom-right-radius: $calendar-event-border-radius;
+  .v-event-more
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.9em;
+    cursor: pointer;
+    border-radius: $calendar-event-border-radius
+    font-weight: bold;
+    width: 95%
+  .v-event-timed-container
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 95%;
+    pointer-events: none;
   .v-event-timed
     position: absolute;
     overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     font-size: 0.9em;
     cursor: pointer;
     border-radius: $calendar-event-border-radius;
+    border: 1px solid white !important;
+    pointer-events: all;
+    

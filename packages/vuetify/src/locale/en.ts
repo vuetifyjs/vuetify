@@ -11,5 +11,8 @@ export default {
   dataTable: {
     rowsPerPageText: 'Rows per page:'
   },
+  calendar: {
+    moreEvents: '{0} more'
+  },
   noDataText: 'No data available'
 }
