@@ -231,6 +231,12 @@ export default {
       if (this.pageStart >= this.itemsLength) {
         this.resetPagination()
       }
+      const newItemKeys = new Set(this.items.map(item => getObjectValueByPath(item, this.itemKey)))
+      const selection = this.value.filter(item => newItemKeys.has(getObjectValueByPath(item, this.itemKey)))
+
+      if (selection.length !== this.value.length) {
+        this.$emit('input', selection)
+      }
     },
     search () {
       this.$nextTick(() => {
