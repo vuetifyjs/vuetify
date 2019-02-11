@@ -1,12 +1,14 @@
+import { VuetifyUseOptions } from 'types'
 import { DirectiveOptions, VueConstructor } from 'vue'
-import * as components from './components'
+import * as _components from './components'
 import * as _directives from './directives'
 
-const directives: Record<string, DirectiveOptions> = _directives
-
-export function install (Vue: VueConstructor, args?: object) {
+export function install (Vue: VueConstructor, args: VuetifyUseOptions = {}) {
   if ((install as any).installed) return
   (install as any).installed = true
+
+  const directives: Record<string, DirectiveOptions> = args.directives || _directives
+  const components = args.components || _components
 
   for (const name in directives) {
     const directive = directives[name]
@@ -25,7 +27,7 @@ export function install (Vue: VueConstructor, args?: object) {
       return true
     }
     return false
-  })(components)
+  })(args.components || components)
 
   Vue.mixin({
     beforeCreate () {
