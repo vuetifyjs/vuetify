@@ -30,6 +30,7 @@
           "type": "examples",
           "value": [
             "small",
+            "extended",
             "displayAnimation",
             "lateralScreens",
             "speedDial"

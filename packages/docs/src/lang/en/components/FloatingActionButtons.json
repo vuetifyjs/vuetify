@@ -9,6 +9,10 @@
       "header": "### Small variant",
       "desc": "For better visual appeal, we use a small button to match our list avatars."
     },
+    "extended": {
+      "header": "### Extended FAB",
+      "desc": "You can use extended FAB to define action with icon and additional text."
+    },
     "displayAnimation": {
       "header": "### Display animation",
       "desc": "When displaying for the first time, a floating action button should animate onto the screen. Here we use the `v-fab-transition` with v-show. You can also use any custom transition provided by Vuetify or your own."
@@ -26,6 +30,7 @@
     "v-btn": {
       "block": "Expands the button to 100% of available space",
       "depressed": "Removes the button box shadow",
+      "extendedFab": "Extended FAB",
       "fab": "Makes button round",
       "flat": "Removes the button background color",
       "icon": "Designates the button as icon - round and flat",
