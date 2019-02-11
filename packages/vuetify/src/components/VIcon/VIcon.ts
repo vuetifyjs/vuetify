@@ -1,4 +1,4 @@
-import '../../stylus/components/_icons.styl'
+import './VIcon.sass'
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Sizeable from '../../mixins/sizeable'
@@ -33,7 +33,8 @@ const VIcon = mixins(
   props: {
     disabled: Boolean,
     left: Boolean,
-    right: Boolean
+    right: Boolean,
+    dense: Boolean
   },
 
   computed: {
@@ -45,7 +46,7 @@ const VIcon = mixins(
   methods: {
     getIcon (): VuetifyIcon {
       let iconName = ''
-      if (this.$slots.default) iconName = this.$slots.default[0].text!
+      if (this.$slots.default) iconName = this.$slots.default[0].text!.trim()
 
       return remapInternalIcon(this, iconName)
     },
@@ -69,7 +70,8 @@ const VIcon = mixins(
           'v-icon--disabled': this.disabled,
           'v-icon--left': this.left,
           'v-icon--link': this.$listeners.click || this.$listeners['!click'],
-          'v-icon--right': this.right
+          'v-icon--right': this.right,
+          'v-icon--dense': this.dense
         },
         attrs: {
           'aria-hidden': true,

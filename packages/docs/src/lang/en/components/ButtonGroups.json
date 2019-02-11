@@ -3,7 +3,7 @@
   "headerText": "The `v-btn-toggle` component is a simple wrapper for `v-item-group` built specifically to work with `v-btn`.",
   "examples": {
     "usage": {
-      "desc": "Toggle buttons are essentially styled radio or checkboxes, but for any element."
+      "desc": "Toggle buttons allow you to create a styled group of buttons that can selected or toggled under a single `v-model`"
     },
     "appBar": {
       "header": "### In toolbar",
