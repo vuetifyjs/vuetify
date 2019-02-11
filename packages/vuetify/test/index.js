@@ -29,7 +29,15 @@ export function test(name, cb) {
         vuetify: new Vuetify()
       })
     },
-    shallow,
+    shallow (component, options) {
+      if (component.options) {
+        component = component.options
+      }
+      return shallow(component, {
+        ...options,
+        vuetify: new Vuetify()
+      })
+    },
     compileToFunctions
   }))
 }
