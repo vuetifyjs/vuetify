@@ -71,6 +71,6 @@ test("VCalendar", ({ mount }) => {
       }
     });
 
-    expect(wrapper.vm.parsedValue.date).toBe("2019-02-09")
+    expect(wrapper.vm.parsedValue.date).toBe("2019-02-11")
   })
 });
