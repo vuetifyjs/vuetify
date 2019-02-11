@@ -24,7 +24,7 @@ Vuetify.install(Vue, {
         error: '#123456',
         success: '#123456'
       }
-    }
+    } as any
   },
   icons: {
     iconfont: 'fa',

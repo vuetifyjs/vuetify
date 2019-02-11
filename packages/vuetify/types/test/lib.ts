@@ -18,9 +18,9 @@ Vuetify.install(Vue, {
   theme: {
     themes: {
       dark: {
-        primary: colors.green,
+        primary: colors.green.base,
         secondary: colors.blueGrey.base
       }
-    }
+    } as any
   }
 })

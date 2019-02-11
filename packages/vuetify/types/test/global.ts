@@ -47,7 +47,7 @@ Vue.component('theme', {
           ...this.$vuetify.theme!.themes!.light,
           primary: 132
         }
-      }
+      } as any
     }
   }
 })

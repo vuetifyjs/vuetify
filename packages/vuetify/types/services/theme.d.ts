@@ -15,7 +15,11 @@ export interface VuetifyThemeOptions {
     minifyTheme?: ((css: string) => string) | null
     themeCache?: VuetifyThemeCache
   }
-  themes?: VuetifyThemes
+  themes?: {
+    [name: string]: VuetifyThemeVariant
+    dark: VuetifyThemeVariant
+    light: VuetifyThemeVariant
+  }
 }
 
 export interface VuetifyThemes {
@@ -26,8 +30,8 @@ export interface VuetifyThemeVariant {
   [name: string]: VuetifyThemeItem
 
   primary: VuetifyThemeItem
-  accent: VuetifyThemeItem
   secondary: VuetifyThemeItem
+  accent: VuetifyThemeItem
   info: VuetifyThemeItem
   warning: VuetifyThemeItem
   error: VuetifyThemeItem
