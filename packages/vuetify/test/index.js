@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import { mount, shallow } from 'avoriaz'
+import { install } from '@/install'
 import toHaveBeenWarnedInit from '@/test/util/to-have-been-warned'
 import { compileToFunctions } from 'vue-template-compiler'
 
 export function test(name, cb) {
   toHaveBeenWarnedInit()
 
+  install(Vue)
 /*
   const app = document.createElement('div')
   app.setAttribute('data-app', true)
