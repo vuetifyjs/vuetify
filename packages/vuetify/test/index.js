@@ -1,13 +1,10 @@
 import Vue from 'vue'
 import { mount, shallow } from 'avoriaz'
 import toHaveBeenWarnedInit from '@/test/util/to-have-been-warned'
-import Vuetify from '@/components/Vuetify'
 import { compileToFunctions } from 'vue-template-compiler'
 
 export function test(name, cb) {
   toHaveBeenWarnedInit()
-
-  Vuetify.install(Vue)
 
 /*
   const app = document.createElement('div')
