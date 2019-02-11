@@ -1,5 +1,5 @@
 // Styles
-import './_lists.styl'
+import './VList.sass'
 import VListGroup from './VListGroup'
 
 // Mixins

@@ -1,47 +1,14 @@
-@import '../../stylus/bootstrap'
-@import '../../stylus/theme'
+@import '../../styles/styles.sass'
+@import './_variables.sass'
+@import './_mixins.sass'
 
-/* Themes */
-v-list($material)
-  background: $material.cards
-  color: $material.text.primary
-
-  .v-list--disabled
-    color: $material.text.disabled
-
-  .v-list__tile__sub-title
-    color: $material.text.secondary
-
-  .v-list__tile__mask
-    color: $material.text.disabled
-
-    background: $material.expansion-panels.focus
-
-  .v-list__tile--link:hover,
-  .v-list__tile--highlighted,
-  .v-list__group__header:hover
-    background: $material.list-tile.hover
-
-  .v-list__group--active:before,
-  .v-list__group--active:after
-    background: $material.dividers
-
-  .v-list__group--disabled
-    .v-list__tile
-      color: $material.text.disabled !important
-
-    .v-list__group__header__prepend-icon .v-icon
-      color: $material.icons.inactive !important
-
-v-list-rtl()
-  &__tile
-    &__title
-      text-align: right
-    &__content
-      text-align: right
-
-theme(v-list, "v-list")
-rtl(v-list-rtl, "v-list")
+// Theme
+.v-list.theme--light
+  @include list-theme($material-light)
+.v-list.theme--dark
+  @include list-theme($material-dark)
+.v-list-rtl
+  @include list-rtl()
 
 .v-list
   list-style-type: none
