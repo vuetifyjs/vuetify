@@ -74,7 +74,7 @@ export default {
       if (this.nudgeLeft) left -= parseInt(this.nudgeLeft)
       if (this.nudgeRight) left += parseInt(this.nudgeRight)
 
-      return `${this.calcXOverflow(left)}px`
+      return `${this.calcXOverflow(left, this.dimensions.content.width)}px`
     },
     calculatedTop () {
       const { activator, content } = this.dimensions
