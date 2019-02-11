@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import { mount, shallow } from 'avoriaz'
-import { install } from '@/install'
+import Vuetify from '@/'
 import toHaveBeenWarnedInit from '@/test/util/to-have-been-warned'
 import { compileToFunctions } from 'vue-template-compiler'
 
 export function test(name, cb) {
   toHaveBeenWarnedInit()
 
-  install(Vue)
+  Vuetify.install(Vue)
 /*
   const app = document.createElement('div')
   app.setAttribute('data-app', true)
@@ -25,7 +25,10 @@ export function test(name, cb) {
       if (component.options) {
         component = component.options
       }
-      return mount(component, options)
+      return mount(component, {
+        ...options,
+        vuetify: new Vuetify()
+      })
     },
     shallow,
     compileToFunctions
