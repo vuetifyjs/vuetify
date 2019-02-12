@@ -22,8 +22,9 @@ import ClickOutside from '../../directives/click-outside'
 import Resize from '../../directives/resize'
 
 // Helpers
-import { convertToUnit } from '../../util/helpers'
+import { convertToUnit, getSlotType } from '../../util/helpers'
 import ThemeProvider from '../../util/ThemeProvider'
+import { consoleError } from '../../util/console'
 
 /* @vue/component */
 export default Vue.extend({
@@ -170,6 +171,10 @@ export default Vue.extend({
 
   mounted () {
     this.isActive && this.activate()
+
+    if (getSlotType(this, 'activator', true) === 'v-slot') {
+      consoleError(`v-tooltip's activator slot must be bound to data, try '<template #activator="data"><v-btn v-on="data.on>'`, this)
+    }
   },
 
   methods: {

@@ -341,3 +341,15 @@ export function arrayDiff (a: any[], b: any[]): any[] {
 export function upperFirst (str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
+
+/**
+ * Returns:
+ *  - 'normal' for old style slots - `<template slot="default">`
+ *  - 'scoped' for old style scoped slots (`<template slot="default" slot-scope="data">`) or bound v-slot (`#default="data"`)
+ *  - 'v-slot' for unbound v-slot (`#default`) - only if the third param is true, otherwise counts as scoped
+ */
+export function getSlotType<T extends boolean = false> (vm: Vue, name: string, split?: T): (T extends true ? 'v-slot' : never) | 'normal' | 'scoped' | void {
+  if (split && vm.$slots[name] && vm.$scopedSlots[name] && (vm.$scopedSlots[name] as any).name) return 'v-slot' as any
+  if (vm.$slots[name] && !vm.$scopedSlots[name]) return 'normal'
+  if (vm.$scopedSlots[name]) return 'scoped'
+}
