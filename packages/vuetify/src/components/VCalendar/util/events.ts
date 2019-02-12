@@ -24,9 +24,9 @@ export interface VEventParsed {
   index: number
 }
 
-export function parseEvent (input: VEventInput, index: number): VEventParsed {
-  const start: VTimestamp = parseTimestamp(input.start)
-  const end: VTimestamp = input.end ? parseTimestamp(input.end) : start
+export function parseEvent (input: VEventInput, index: number, startProperty: string, endProperty: string): VEventParsed {
+  const start: VTimestamp = parseTimestamp(input[ startProperty ])
+  const end: VTimestamp = input[ endProperty ] ? parseTimestamp(input[ endProperty ]) : start
   const startIdentifier: number = getDayIdentifier(start)
   const startTimestampIdentifier: number = getTimestampIdentifier(start)
   const endIdentifier: number = getDayIdentifier(end)

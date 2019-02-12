@@ -303,6 +303,31 @@ const VTimestampWithTime = {
   timeToY: '(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number'
 }
 
+const VEventScopedProps = {
+  event: {
+    start: 'string',
+    end: 'string'
+  },
+  day: VTimestampWithTime,
+  outside: 'boolean',
+  start: 'boolean',
+  end: 'boolean',
+  timed: 'boolean'
+}
+
+const VEventWithNative = {
+  event: {
+    start: 'string',
+    end: 'string'
+  },
+  day: VTimestampWithTime,
+  outside: 'boolean',
+  start: 'boolean',
+  end: 'boolean',
+  timed: 'boolean',
+  nativeEvent: 'Event'
+}
+
 module.exports = {
   '$vuetify': {
     functions: [
@@ -470,6 +495,10 @@ module.exports = {
       {
         name: 'interval',
         props: VTimestampWithTime
+      },
+      {
+        name: 'event',
+        props: VEventScopedProps
       }
     ],
     functions: [
@@ -500,6 +529,18 @@ module.exports = {
       {
         name: 'scrollToTime',
         signature: '(time: number | string | { hour: number, minute: number }): boolean'
+      },
+      {
+        name: 'updateEventVisibility',
+        signature: '(): void'
+      },
+      {
+        name: 'formatTime',
+        signature: '(withTime: { hour: number, minute: number }, ampm: boolean): string'
+      },
+      {
+        name: 'getFormatter',
+        signature: '(options: object): (VTimestamp) => string'
       }
     ],
     events: [
@@ -514,6 +555,10 @@ module.exports = {
       {
         name: 'change',
         value: { start: VTimestamp, end: VTimestamp }
+      },
+      {
+        name: 'click:more',
+        value: VTimestamp
       },
       {
         name: 'click:date',
@@ -642,6 +687,46 @@ module.exports = {
       {
         name: 'touchend:interval',
         value: VTimestamp
+      },
+      {
+        name: 'click:event',
+        value: VEventWithNative
+      },
+      {
+        name: 'contextmenu:event',
+        value: VEventWithNative
+      },
+      {
+        name: 'mousedown:event',
+        value: VEventWithNative
+      },
+      {
+        name: 'mousemove:event',
+        value: VEventWithNative
+      },
+      {
+        name: 'mouseup:event',
+        value: VEventWithNative
+      },
+      {
+        name: 'mouseenter:event',
+        value: VEventWithNative
+      },
+      {
+        name: 'mouseleave:event',
+        value: VEventWithNative
+      },
+      {
+        name: 'touchstart:event',
+        value: VEventWithNative
+      },
+      {
+        name: 'touchmove:event',
+        value: VEventWithNative
+      },
+      {
+        name: 'touchend:event',
+        value: VEventWithNative
       }
     ]
   },

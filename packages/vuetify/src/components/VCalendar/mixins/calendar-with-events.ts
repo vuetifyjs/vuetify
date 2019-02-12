@@ -73,7 +73,7 @@ export default CalendarBase.extend({
       return this.events.length === 0
     },
     parsedEvents (): VEventParsed[] {
-      return this.events.map(parseEvent)
+      return this.events.map((input, index) => parseEvent(input, index, this.eventStart, this.eventEnd))
     },
     eventColorFunction (): VColorFunction {
       return typeof this.eventColor === 'function'
@@ -119,7 +119,7 @@ export default CalendarBase.extend({
         : `${hour}${suffix}`
     },
     updateEventVisibility (): void {
-      if (this.noEvents) {
+      if (this.noEvents || !this.eventMore) {
         return
       }
 
@@ -141,7 +141,8 @@ export default CalendarBase.extend({
             hide = eventBounds.bottom + eventHeight > parentBounds.bottom && i !== last
           }
           if (hide) {
-            events[i].style.display = 'none'
+            const id = events[i].getAttribute('data-event') as string
+            this.hideEvents(id)
             hidden++
           }
         }
@@ -153,6 +154,15 @@ export default CalendarBase.extend({
           more.style.display = 'none'
         }
       }
+    },
+    hideEvents (id: string): void {
+      const elements = this.$refs.events as HTMLElement[]
+
+      elements.forEach(el => {
+        if (el.getAttribute('data-event') === id) {
+          el.style.display = 'none'
+        }
+      })
     },
     getEventsMap (): VDailyEventsMap {
       const elements = this.$refs.events as HTMLElement[]
@@ -198,7 +208,8 @@ export default CalendarBase.extend({
           top: `${relativeOffset}px`
         },
         attrs: {
-          'data-date': day.date
+          'data-date': day.date,
+          'data-event': event.index
         },
         key: event.index,
         ref: 'events',

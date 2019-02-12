@@ -114,6 +114,14 @@ export default {
       type: Array as () => VEventInput[],
       default: () => []
     },
+    eventStart: {
+      type: String,
+      default: 'start'
+    },
+    eventEnd: {
+      type: String,
+      default: 'end'
+    },
     eventHeight: {
       type: Number,
       default: 20

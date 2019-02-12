@@ -1,8 +1,14 @@
 @import '../bootstrap'
 @import '../theme'
 
+v-calendar-events($material)
+  .v-event-timed
+    border: 1px solid $material.calendar.event-outline !important;
+
+theme(v-calendar-events, "v-calendar-events")
+
 .v-calendar
-  .v-event 
+  .v-event
     position: relative;
     margin-bottom: $calendar-event-bottom-space;
     overflow: hidden;
@@ -42,6 +48,5 @@
     font-size: 0.9em;
     cursor: pointer;
     border-radius: $calendar-event-border-radius;
-    border: 1px solid white !important;
     pointer-events: all;
     

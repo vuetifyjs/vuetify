@@ -203,6 +203,9 @@ export default CalendarWithEvents.extend({
 
     return h(component, {
       staticClass: 'v-calendar',
+      class: {
+        'v-calendar-events': !this.noEvents
+      },
       props: {
         ...this.$props,
         start: start.date,

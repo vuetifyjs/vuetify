@@ -3,204 +3,209 @@
     <v-flex
       sm12
       lg3
-      class="pa-3 mb-3 feature-pane"
+      class="mb-3"
     >
-      <v-btn
-        fab
-        outline
-        small
-        absolute
-        left
-        color="primary"
-        @click="$refs.calendar.prev()"
+      <v-sheet
+        elevation="6"
+        class="pa-3"
       >
-        <v-icon dark>
-          keyboard_arrow_left
-        </v-icon>
-      </v-btn>
-      <v-btn
-        fab
-        outline
-        small
-        absolute
-        right
-        color="primary"
-        @click="$refs.calendar.next()"
-      >
-        <v-icon
-          dark
+        <v-btn
+          fab
+          outline
+          small
+          absolute
+          left
+          color="primary"
+          @click="$refs.calendar.prev()"
         >
-          keyboard_arrow_right
-        </v-icon>
-      </v-btn>
-      <br><br><br>
-      <v-select
-        v-model="type"
-        :items="typeOptions"
-        label="Type"
-      ></v-select>
-      <v-checkbox
-        v-model="dark"
-        label="Dark"
-      ></v-checkbox>
-      <v-select
-        v-model="color"
-        :items="colorOptions"
-        label="Color"
-      ></v-select>
-      <v-menu
-        ref="startMenu"
-        v-model="startMenu"
-        :close-on-content-click="false"
-        :nudge-right="40"
-        :return-value.sync="start"
-        transition="scale-transition"
-        min-width="290px"
-        lazy
-        offset-y
-        full-width
-      >
+          <v-icon dark>
+            keyboard_arrow_left
+          </v-icon>
+        </v-btn>
+        <v-btn
+          fab
+          outline
+          small
+          absolute
+          right
+          color="primary"
+          @click="$refs.calendar.next()"
+        >
+          <v-icon
+            dark
+          >
+            keyboard_arrow_right
+          </v-icon>
+        </v-btn>
+        <br><br><br>
+        <v-select
+          v-model="type"
+          :items="typeOptions"
+          label="Type"
+        ></v-select>
+        <v-checkbox
+          v-model="dark"
+          label="Dark"
+        ></v-checkbox>
+        <v-select
+          v-model="color"
+          :items="colorOptions"
+          label="Color"
+        ></v-select>
+        <v-menu
+          ref="startMenu"
+          v-model="startMenu"
+          :close-on-content-click="false"
+          :nudge-right="40"
+          :return-value.sync="start"
+          transition="scale-transition"
+          min-width="290px"
+          lazy
+          offset-y
+          full-width
+        >
+          <v-text-field
+            slot="activator"
+            v-model="start"
+            label="Start Date"
+            prepend-icon="event"
+            readonly
+          ></v-text-field>
+          <v-date-picker
+            v-model="start"
+            no-title
+            scrollable
+          >
+            <v-spacer></v-spacer>
+            <v-btn
+              flat
+              color="primary"
+              @click="startMenu = false"
+            >
+              Cancel
+            </v-btn>
+            <v-btn
+              flat
+              color="primary"
+              @click="$refs.startMenu.save(start)"
+            >
+              OK
+            </v-btn>
+          </v-date-picker>
+        </v-menu>
+        <v-menu
+          v-if="hasEnd"
+          ref="endMenu"
+          v-model="endMenu"
+          :close-on-content-click="false"
+          :nudge-right="40"
+          :return-value.sync="end"
+          transition="scale-transition"
+          min-width="290px"
+          lazy
+          offset-y
+          full-width
+        >
+          <v-text-field
+            slot="activator"
+            v-model="end"
+            label="End Date"
+            prepend-icon="event"
+            readonly
+          ></v-text-field>
+          <v-date-picker
+            v-model="end"
+            no-title
+            scrollable
+          >
+            <v-spacer></v-spacer>
+            <v-btn
+              flat
+              color="primary"
+              @click="endMenu = false"
+            >
+              Cancel
+            </v-btn>
+            <v-btn
+              flat
+              color="primary"
+              @click="$refs.endMenu.save(end)"
+            >
+              OK
+            </v-btn>
+          </v-date-picker>
+        </v-menu>
+        <v-menu
+          ref="nowMenu"
+          v-model="nowMenu"
+          :close-on-content-click="false"
+          :nudge-right="40"
+          :return-value.sync="now"
+          transition="scale-transition"
+          min-width="290px"
+          lazy
+          offset-y
+          full-width
+        >
+          <v-text-field
+            slot="activator"
+            v-model="now"
+            label="Today"
+            prepend-icon="event"
+            readonly
+          ></v-text-field>
+          <v-date-picker
+            v-model="now"
+            no-title
+            scrollable
+          >
+            <v-spacer></v-spacer>
+            <v-btn
+              flat
+              color="primary"
+              @click="nowMenu = false"
+            >
+              Cancel
+            </v-btn>
+            <v-btn
+              flat
+              color="primary"
+              @click="$refs.nowMenu.save(now)"
+            >
+              OK
+            </v-btn>
+          </v-date-picker>
+        </v-menu>
+        <v-select
+          v-model="weekdays"
+          :items="weekdaysOptions"
+          label="Weekdays"
+        ></v-select>
         <v-text-field
-          slot="activator"
-          v-model="start"
-          label="Start Date"
-          prepend-icon="event"
-          readonly
+          v-if="type === 'custom-weekly'"
+          v-model="minWeeks"
+          label="Minimum Weeks"
+          type="number"
         ></v-text-field>
-        <v-date-picker
-          v-model="start"
-          no-title
-          scrollable
-        >
-          <v-spacer></v-spacer>
-          <v-btn
-            flat
-            color="primary"
-            @click="startMenu = false"
-          >
-            Cancel
-          </v-btn>
-          <v-btn
-            flat
-            color="primary"
-            @click="$refs.startMenu.save(start)"
-          >
-            OK
-          </v-btn>
-        </v-date-picker>
-      </v-menu>
-      <v-menu
-        v-if="hasEnd"
-        ref="endMenu"
-        v-model="endMenu"
-        :close-on-content-click="false"
-        :nudge-right="40"
-        :return-value.sync="end"
-        transition="scale-transition"
-        min-width="290px"
-        lazy
-        offset-y
-        full-width
-      >
-        <v-text-field
-          slot="activator"
-          v-model="end"
-          label="End Date"
-          prepend-icon="event"
-          readonly
-        ></v-text-field>
-        <v-date-picker
-          v-model="end"
-          no-title
-          scrollable
-        >
-          <v-spacer></v-spacer>
-          <v-btn
-            flat
-            color="primary"
-            @click="endMenu = false"
-          >
-            Cancel
-          </v-btn>
-          <v-btn
-            flat
-            color="primary"
-            @click="$refs.endMenu.save(end)"
-          >
-            OK
-          </v-btn>
-        </v-date-picker>
-      </v-menu>
-      <v-menu
-        ref="nowMenu"
-        v-model="nowMenu"
-        :close-on-content-click="false"
-        :nudge-right="40"
-        :return-value.sync="now"
-        transition="scale-transition"
-        min-width="290px"
-        lazy
-        offset-y
-        full-width
-      >
-        <v-text-field
-          slot="activator"
-          v-model="now"
-          label="Today"
-          prepend-icon="event"
-          readonly
-        ></v-text-field>
-        <v-date-picker
-          v-model="now"
-          no-title
-          scrollable
-        >
-          <v-spacer></v-spacer>
-          <v-btn
-            flat
-            color="primary"
-            @click="nowMenu = false"
-          >
-            Cancel
-          </v-btn>
-          <v-btn
-            flat
-            color="primary"
-            @click="$refs.nowMenu.save(now)"
-          >
-            OK
-          </v-btn>
-        </v-date-picker>
-      </v-menu>
-      <v-select
-        v-model="weekdays"
-        :items="weekdaysOptions"
-        label="Weekdays"
-      ></v-select>
-      <v-text-field
-        v-if="type === 'custom-weekly'"
-        v-model="minWeeks"
-        label="Minimum Weeks"
-        type="number"
-      ></v-text-field>
-      <v-select
-        v-if="hasIntervals"
-        v-model="intervals"
-        :items="intervalsOptions"
-        label="Intervals"
-      ></v-select>
-      <v-select
-        v-if="type === 'custom-daily'"
-        v-model="maxDays"
-        :items="maxDaysOptions"
-        label="# of Days"
-      ></v-select>
-      <v-select
-        v-if="hasIntervals"
-        v-model="styleInterval"
-        :items="styleIntervalOptions"
-        label="Styling"
-      ></v-select>
+        <v-select
+          v-if="hasIntervals"
+          v-model="intervals"
+          :items="intervalsOptions"
+          label="Intervals"
+        ></v-select>
+        <v-select
+          v-if="type === 'custom-daily'"
+          v-model="maxDays"
+          :items="maxDaysOptions"
+          label="# of Days"
+        ></v-select>
+        <v-select
+          v-if="hasIntervals"
+          v-model="styleInterval"
+          :items="styleIntervalOptions"
+          label="Styling"
+        ></v-select>
+      </v-sheet>
     </v-flex>
     <v-flex
       sm12
@@ -212,6 +217,7 @@
           ref="calendar"
           v-model="start"
           :type="type"
+          :events="events"
           :start="start"
           :end="end"
           :min-weeks="minWeeks"
@@ -226,41 +232,10 @@
           :interval-style="intervalStyle"
           :show-interval-label="showIntervalLabel"
           :color="color"
-        >
-          <template
-            slot="day"
-            slot-scope="day"
-          >
-            <div
-              v-if="day.day % 3 === 0"
-              class="day"
-            >
-              day slot {{ day.date }}
-            </div>
-          </template>
-          <template
-            slot="day-header"
-            slot-scope="day"
-          >
-            <div
-              v-if="day.weekday % 2"
-              class="day-header"
-            >
-              day-header slot {{ day.date }}
-            </div>
-          </template>
-          <template
-            slot="day-body"
-            slot-scope="day"
-          >
-            <div
-              v-if="day.weekday % 3 === 2"
-              class="day-body"
-            >
-              day-body slot {{ day.date }}
-            </div>
-          </template>
-        </v-calendar>
+          :event-color="getEventColor"
+          @click:more="viewDay"
+          @click:date="viewDay"
+        ></v-calendar>
       </v-sheet>
     </v-flex>
   </v-layout>
@@ -370,6 +345,132 @@
         { text: 'Blue Gray', value: 'blue-gray' },
         { text: 'Gray', value: 'gray' },
         { text: 'Black', value: 'black' }
+      ],
+      events: [
+        {
+          name: 'Vacation',
+          details: 'Going to the beach!',
+          start: '2018-12-29',
+          end: '2019-01-01',
+          color: 'blue'
+        },
+        {
+          name: 'Meeting',
+          details: 'Spending time on how we do not have enough time',
+          start: '2019-01-07 09:00',
+          end: '2019-01-07 09:30',
+          color: 'indigo'
+        },
+        {
+          name: 'Large Event',
+          details: 'This starts in the middle of an event and spans over multiple events',
+          start: '2018-12-31',
+          end: '2019-01-04',
+          color: 'deep-purple'
+        },
+        {
+          name: '3rd to 7th',
+          details: 'Testing',
+          start: '2019-01-03',
+          end: '2019-01-07',
+          color: 'cyan'
+        },
+        {
+          name: 'Big Meeting',
+          details: 'A very important meeting about nothing',
+          start: '2019-01-07 08:00',
+          end: '2019-01-07 11:30',
+          color: 'red'
+        },
+        {
+          name: 'Another Meeting',
+          details: 'Another important meeting about nothing',
+          start: '2019-01-07 10:00',
+          end: '2019-01-07 13:30',
+          color: 'brown'
+        },
+        {
+          name: '7th to 8th',
+          start: '2019-01-07',
+          end: '2019-01-08',
+          color: 'blue'
+        },
+        {
+          name: 'Lunch',
+          details: 'Time to feed',
+          start: '2019-01-07 12:00',
+          end: '2019-01-07 15:00',
+          color: 'deep-orange'
+        },
+        {
+          name: '30th Birthday',
+          details: 'Celebrate responsibly',
+          start: '2019-01-03',
+          color: 'teal'
+        },
+        {
+          name: 'New Year',
+          details: 'Eat chocolate until you pass out',
+          start: '2019-01-01',
+          end: '2019-01-02',
+          color: 'green'
+        },
+        {
+          name: 'Conference',
+          details: 'The best time of my life',
+          start: '2019-01-21',
+          end: '2019-01-28',
+          color: 'grey darken-1'
+        },
+        {
+          name: 'Hackathon',
+          details: 'Code like there is no tommorrow',
+          start: '2019-01-30 23:00',
+          end: '2019-02-01 08:00',
+          color: 'black'
+        },
+        {
+          name: 'event 1',
+          start: '2019-01-14 18:00',
+          end: '2019-01-14 19:00',
+          color: '#4285F4'
+        },
+        {
+          name: 'event 2',
+          start: '2019-01-14 18:00',
+          end: '2019-01-14 19:00',
+          color: '#4285F4'
+        },
+        {
+          name: 'event 5',
+          start: '2019-01-14 18:00',
+          end: '2019-01-14 19:00',
+          color: '#4285F4'
+        },
+        {
+          name: 'event 3',
+          start: '2019-01-14 18:30',
+          end: '2019-01-14 20:30',
+          color: '#4285F4'
+        },
+        {
+          name: 'event 4',
+          start: '2019-01-14 19:00',
+          end: '2019-01-14 20:00',
+          color: '#4285F4'
+        },
+        {
+          name: 'event 6',
+          start: '2019-01-14 21:00',
+          end: '2019-01-14 23:00',
+          color: '#4285F4'
+        },
+        {
+          name: 'event 7',
+          start: '2019-01-14 22:00',
+          end: '2019-01-14 23:00',
+          color: '#4285F4'
+        }
       ]
     }),
     computed: {
@@ -388,6 +489,13 @@
       }
     },
     methods: {
+      viewDay ({ date }) {
+        this.start = date
+        this.type = 'day'
+      },
+      getEventColor (event) {
+        return event.color
+      },
       showIntervalLabel (interval) {
         return interval.minute === 0
       }
@@ -396,59 +504,5 @@
 </script>
 
 <style scoped>
-
-  .feature-pane {
-    position: relative;
-    padding-top: 30px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-  }
-
-  .day-header {
-    margin: 0px 2px 2px 2px;
-    padding: 2px 6px;
-    background-color: #1867c0;
-    color: #ffffff;
-    border: 1px solid #1867c0;
-    border-radius: 2px;
-    user-select: none;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
-
-  .day-body {
-    position: absolute;
-    top: 400px;
-    height: 36px;
-    margin: 2px;
-    padding: 2px 6px;
-    background-color: #1867c0;
-    color: #ffffff;
-    border: 1px solid #1867c0;
-    border-radius: 2px;
-    left: 0;
-    right: 0;
-    user-select: none;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
-
-  .day {
-    position: relative;
-    height: 24px;
-    margin: 0px;
-    padding: 0px 6px;
-    background-color: #1867c0;
-    color: #ffffff;
-    border: 1px solid #1867c0;
-    border-radius: 2px;
-    left: 0;
-    right: 0;
-    user-select: none;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
 
 </style>

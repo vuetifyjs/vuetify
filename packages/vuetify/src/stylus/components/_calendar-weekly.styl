@@ -3,6 +3,8 @@
 
 v-calendar-weekly($material)
   background-color: $material.calendar.background-color
+  border-left: $material.calendar.line-color 1px solid;
+  border-top: $material.calendar.line-color 1px solid;
   .v-calendar-weekly__head-weekday
     border-right: $material.calendar.line-color 1px solid;
     color: $material.calendar.text-color;
@@ -36,7 +38,8 @@ theme(v-calendar-weekly, "v-calendar-weekly")
   padding: $calendar-weekly-weekday-padding;
   font-size: $calendar-weekly-weekday-font-size;
   text-transform: uppercase;
-  text-align: center
+  text-align: center;
+  margin-right: -1px;
 
 .v-calendar-weekly__week
   display: flex;
