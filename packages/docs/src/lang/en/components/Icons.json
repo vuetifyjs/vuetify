@@ -32,6 +32,7 @@
     "left": "Places the icon on the left, when used inside a button",
     "medium": "Mixins.Sizeable.props.medium",
     "right": "Places the icon on the right, when used inside a button",
+    "dense": "Makes icon smaller (20px)",
     "size": "Mixins.Sizeable.props.size",
     "small": "Mixins.Sizeable.props.small",
     "xLarge": "Mixins.Sizeable.props.xLarge"
