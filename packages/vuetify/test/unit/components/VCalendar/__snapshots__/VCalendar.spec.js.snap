@@ -305,10 +305,10 @@ exports[`VCalendar should render month view 1`] = `
     <div class="v-calendar-weekly__head-weekday v-past v-outside">
       Sun
     </div>
-    <div class="v-calendar-weekly__head-weekday v-present v-outside">
+    <div class="v-calendar-weekly__head-weekday v-past">
       Mon
     </div>
-    <div class="v-calendar-weekly__head-weekday v-future">
+    <div class="v-calendar-weekly__head-weekday v-present">
       Tue
     </div>
     <div class="v-calendar-weekly__head-weekday v-future">
@@ -325,11 +325,6 @@ exports[`VCalendar should render month view 1`] = `
     </div>
   </div>
   <div class="v-calendar-weekly__week">
-    <div class="v-calendar-weekly__day v-past v-outside">
-      <div class="v-calendar-weekly__day-label">
-        30
-      </div>
-    </div>
     <div class="v-calendar-weekly__day v-past v-outside">
       <div class="v-calendar-weekly__day-label">
         31
@@ -363,13 +358,13 @@ exports[`VCalendar should render month view 1`] = `
         5
       </div>
     </div>
-  </div>
-  <div class="v-calendar-weekly__week">
     <div class="v-calendar-weekly__day v-past">
       <div class="v-calendar-weekly__day-label">
         6
       </div>
     </div>
+  </div>
+  <div class="v-calendar-weekly__week">
     <div class="v-calendar-weekly__day v-past">
       <div class="v-calendar-weekly__day-label">
         7
@@ -400,13 +395,13 @@ exports[`VCalendar should render month view 1`] = `
         12
       </div>
     </div>
-  </div>
-  <div class="v-calendar-weekly__week">
     <div class="v-calendar-weekly__day v-past">
       <div class="v-calendar-weekly__day-label">
         13
       </div>
     </div>
+  </div>
+  <div class="v-calendar-weekly__week">
     <div class="v-calendar-weekly__day v-past">
       <div class="v-calendar-weekly__day-label">
         14
@@ -437,13 +432,13 @@ exports[`VCalendar should render month view 1`] = `
         19
       </div>
     </div>
-  </div>
-  <div class="v-calendar-weekly__week">
     <div class="v-calendar-weekly__day v-past">
       <div class="v-calendar-weekly__day-label">
         20
       </div>
     </div>
+  </div>
+  <div class="v-calendar-weekly__week">
     <div class="v-calendar-weekly__day v-past">
       <div class="v-calendar-weekly__day-label">
         21
@@ -474,13 +469,13 @@ exports[`VCalendar should render month view 1`] = `
         26
       </div>
     </div>
-  </div>
-  <div class="v-calendar-weekly__week">
     <div class="v-calendar-weekly__day v-past">
       <div class="v-calendar-weekly__day-label">
         27
       </div>
     </div>
+  </div>
+  <div class="v-calendar-weekly__week">
     <div class="v-calendar-weekly__day v-past">
       <div class="v-calendar-weekly__day-label">
         28
@@ -512,6 +507,11 @@ exports[`VCalendar should render month view 1`] = `
     <div class="v-calendar-weekly__day v-past v-outside">
       <div class="v-calendar-weekly__day-label">
         2
+      </div>
+    </div>
+    <div class="v-calendar-weekly__day v-past v-outside">
+      <div class="v-calendar-weekly__day-label">
+        3
       </div>
     </div>
   </div>

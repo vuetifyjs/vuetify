@@ -32,8 +32,8 @@ test("VCalendar", ({ mount }) => {
     const wrapper = mount(VCalendar, {
       propsData: {
         type: "month",
-        start: "2019-01-29",
-        end: "2019-02-04"
+        start: "2018-01-29",
+        end: "2018-02-04"
       }
     });
 
@@ -67,10 +67,10 @@ test("VCalendar", ({ mount }) => {
   it("should calculate end", async () => {
     const wrapper = mount(VCalendar, {
       propsData: {
-        end: "2019-02-04"
+        end: "2018-12-04"
       }
     });
 
-    expect(wrapper.vm.parsedValue.date).toBe("2019-02-11")
+    expect(wrapper.vm.parsedValue.date).toEqual(new Date().toISOString().split('T')[0])
   })
 });
