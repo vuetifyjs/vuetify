@@ -142,7 +142,7 @@ export default {
 
   mounted () {
     if (getSlotType(this, 'activator', true) === 'v-slot') {
-      consoleError(`v-tooltip's activator slot must be bound to data, try '<template #activator="data"><v-btn v-on="data.on>'`, this)
+      consoleError(`v-tooltip's activator slot must be bound, try '<template #activator="data"><v-btn v-on="data.on>'`, this)
     }
   },
 
