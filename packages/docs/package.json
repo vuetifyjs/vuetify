@@ -42,7 +42,7 @@
     "vue-no-ssr": "^0.2.2",
     "vue-rollbar": "^0.2.4",
     "vue-router": "^3.0.2",
-    "vue-server-renderer": "^2.6.4",
+    "vue-server-renderer": "^2.6.6",
     "vuelidate": "^0.6.2",
     "vuetify": "^1.5.0",
     "vuex": "^3.1.0",
