@@ -272,6 +272,12 @@ export default Vue.extend({
 
       if (this.activatedBy) return this.activatedBy
 
+      if (this.activatorNode) {
+        const activator = Array.isArray(this.activatorNode) ? this.activatorNode[0] : this.activatorNode
+        const el = activator && activator.elm
+        if (el) return el
+      }
+
       consoleError('No activator found')
     },
     getInnerHeight () {
