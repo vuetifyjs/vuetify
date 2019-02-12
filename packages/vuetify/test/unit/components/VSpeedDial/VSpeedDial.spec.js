@@ -22,6 +22,31 @@ test('VSpeedDial.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should generate and remove overlay', () => {
+    const wrapper = mount(VSpeedDial, {
+      propsData: {
+        hasOverlay: true
+      },
+      slots: {
+        default: [compileToFunctions('<span>test</span>')]
+      }
+    })
+
+    jest.spyOn(wrapper.vm, 'genOverlay');
+    jest.spyOn(wrapper.vm, 'removeOverlay');
+
+    expect(wrapper.vm.genOverlay).not.toBeCalled();
+    expect(wrapper.vm.removeOverlay).not.toBeCalled();
+
+    wrapper.vm.isActive = true;
+    expect(wrapper.vm.genOverlay).toBeCalled();
+    expect(wrapper.vm.removeOverlay).not.toBeCalled();
+
+    wrapper.vm.isActive = false;
+    expect(wrapper.vm.genOverlay).toBeCalled();
+    expect(wrapper.vm.removeOverlay).toBeCalled();
+  })
+
   it('should render component with custom direction and match snapshot', () => {
     const wrapper = mount(VSpeedDial, {
       propsData: {

@@ -12,6 +12,7 @@
           <v-checkbox v-model="right" label="Right" hide-details></v-checkbox>
           <v-checkbox v-model="bottom" label="Bottom" hide-details></v-checkbox>
           <v-checkbox v-model="left" label="Left" hide-details></v-checkbox>
+          <v-checkbox v-model="overlay" label="Overlay" hide-details></v-checkbox>
         </v-flex>
         <v-flex xs12 sm6 md4>
           <v-subheader>Speed dial direction</v-subheader>
@@ -43,6 +44,7 @@
       :direction="direction"
       :open-on-hover="hover"
       :transition="transition"
+      :has-overlay="overlay"
     >
       <v-btn
         slot="activator"
@@ -94,7 +96,8 @@
       right: true,
       bottom: true,
       left: false,
-      transition: 'slide-y-reverse-transition'
+      transition: 'slide-y-reverse-transition',
+      overlay: false
     }),
 
     computed: {
