@@ -43,6 +43,23 @@ test('VSpeedDial.js', ({ mount }) => {
     expect(wrapper.vm.removeOverlay).toBeCalled();
   })
 
+  it('should not generate overlay on hover', () => {
+    const wrapper = mount(VSpeedDial, {
+      slots: {
+        default: [compileToFunctions('<span>test</span>')]
+      }
+    })
+
+    jest.spyOn(wrapper.vm, 'genOverlay');
+    jest.spyOn(wrapper.vm, 'removeOverlay');
+
+    wrapper.setData({
+      isActive: true,
+      hovered: true
+    })
+    expect(wrapper.vm.genOverlay).not.toBeCalled();
+  })
+
   it('should render component with custom direction and match snapshot', () => {
     const wrapper = mount(VSpeedDial, {
       propsData: {

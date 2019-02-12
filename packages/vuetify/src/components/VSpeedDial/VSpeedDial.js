@@ -34,6 +34,10 @@ export default {
     }
   },
 
+  data: () => ({
+    hovered: false
+  }),
+
   computed: {
     classes () {
       return {
@@ -63,8 +67,8 @@ export default {
     }
 
     if (this.openOnHover) {
-      data.on.mouseenter = () => (this.isActive = true)
-      data.on.mouseleave = () => (this.isActive = false)
+      data.on.mouseenter = () => { this.hovered = true; this.isActive = true }
+      data.on.mouseleave = () => { this.hovered = false; this.isActive = false }
     }
 
     if (this.isActive) {
@@ -74,7 +78,7 @@ export default {
         return b
       })
 
-      if (!this.hideOverlay) {
+      if (!this.hideOverlay && !this.hovered) {
         this.genOverlay()
       }
     } else if (!this.hideOverlay) {
