@@ -35,15 +35,14 @@ test('VSpeedDial.js', ({ mount }) => {
     jest.spyOn(wrapper.vm, 'genOverlay');
     jest.spyOn(wrapper.vm, 'removeOverlay');
 
-    expect(wrapper.vm.genOverlay).not.toBeCalled();
-    expect(wrapper.vm.removeOverlay).not.toBeCalled();
-
-    wrapper.vm.isActive = true;
+    wrapper.setData({
+      isActive: true
+    })
     expect(wrapper.vm.genOverlay).toBeCalled();
-    expect(wrapper.vm.removeOverlay).not.toBeCalled();
 
-    wrapper.vm.isActive = false;
-    expect(wrapper.vm.genOverlay).toBeCalled();
+    wrapper.setData({
+      isActive: false
+    })
     expect(wrapper.vm.removeOverlay).toBeCalled();
   })
 
