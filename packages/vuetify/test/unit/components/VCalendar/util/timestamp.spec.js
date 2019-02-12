@@ -167,7 +167,7 @@ test('VCalendar/util/timestamp.ts', ({ mount }) => {
       present: false,
       future: false
     })
-    expect(parseTimestamp('bad')).toEqual(null)
+    expect(() => parseTimestamp('bad')).toThrow()
   })
 
   it('should parse timestamp and update relative flags', () => {
