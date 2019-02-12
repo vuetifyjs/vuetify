@@ -28,7 +28,7 @@ export default {
       type: String,
       default: 'scale-transition'
     },
-    hasOverlay: {
+    hideOverlay: {
       type: Boolean,
       default: false
     }
@@ -74,10 +74,10 @@ export default {
         return b
       })
 
-      if (this.hasOverlay) {
+      if (!this.hideOverlay) {
         this.genOverlay()
       }
-    } else if (this.hasOverlay) {
+    } else if (!this.hideOverlay) {
       this.removeOverlay()
     }
 

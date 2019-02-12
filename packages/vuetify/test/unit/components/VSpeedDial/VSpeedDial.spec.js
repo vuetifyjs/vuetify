@@ -24,9 +24,6 @@ test('VSpeedDial.js', ({ mount }) => {
 
   it('should generate and remove overlay', () => {
     const wrapper = mount(VSpeedDial, {
-      propsData: {
-        hasOverlay: true
-      },
       slots: {
         default: [compileToFunctions('<span>test</span>')]
       }
