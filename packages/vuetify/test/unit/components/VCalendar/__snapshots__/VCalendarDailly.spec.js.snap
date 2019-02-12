@@ -13,7 +13,13 @@ exports[`VCalendarDaily should render component and have v-calendar-daily class 
         Tue
       </div>
       <div class="v-calendar-daily_head-day-label">
-        29
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            29
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -21,7 +27,13 @@ exports[`VCalendarDaily should render component and have v-calendar-daily class 
         Wed
       </div>
       <div class="v-calendar-daily_head-day-label">
-        30
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            30
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -29,7 +41,13 @@ exports[`VCalendarDaily should render component and have v-calendar-daily class 
         Thu
       </div>
       <div class="v-calendar-daily_head-day-label">
-        31
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            31
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -37,7 +55,13 @@ exports[`VCalendarDaily should render component and have v-calendar-daily class 
         Fri
       </div>
       <div class="v-calendar-daily_head-day-label">
-        1
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            1
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -45,7 +69,13 @@ exports[`VCalendarDaily should render component and have v-calendar-daily class 
         Sat
       </div>
       <div class="v-calendar-daily_head-day-label">
-        2
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            2
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -53,7 +83,13 @@ exports[`VCalendarDaily should render component and have v-calendar-daily class 
         Sun
       </div>
       <div class="v-calendar-daily_head-day-label">
-        3
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            3
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -61,7 +97,13 @@ exports[`VCalendarDaily should render component and have v-calendar-daily class 
         Mon
       </div>
       <div class="v-calendar-daily_head-day-label">
-        4
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            4
+          </span>
+        </button>
       </div>
     </div>
   </div>
@@ -947,7 +989,13 @@ exports[`VCalendarDaily should render correctly with firstInterval prop 1`] = `
         Tue
       </div>
       <div class="v-calendar-daily_head-day-label">
-        29
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            29
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -955,7 +1003,13 @@ exports[`VCalendarDaily should render correctly with firstInterval prop 1`] = `
         Wed
       </div>
       <div class="v-calendar-daily_head-day-label">
-        30
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            30
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -963,7 +1017,13 @@ exports[`VCalendarDaily should render correctly with firstInterval prop 1`] = `
         Thu
       </div>
       <div class="v-calendar-daily_head-day-label">
-        31
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            31
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -971,7 +1031,13 @@ exports[`VCalendarDaily should render correctly with firstInterval prop 1`] = `
         Fri
       </div>
       <div class="v-calendar-daily_head-day-label">
-        1
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            1
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -979,7 +1045,13 @@ exports[`VCalendarDaily should render correctly with firstInterval prop 1`] = `
         Sat
       </div>
       <div class="v-calendar-daily_head-day-label">
-        2
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            2
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -987,7 +1059,13 @@ exports[`VCalendarDaily should render correctly with firstInterval prop 1`] = `
         Sun
       </div>
       <div class="v-calendar-daily_head-day-label">
-        3
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            3
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -995,7 +1073,13 @@ exports[`VCalendarDaily should render correctly with firstInterval prop 1`] = `
         Mon
       </div>
       <div class="v-calendar-daily_head-day-label">
-        4
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            4
+          </span>
+        </button>
       </div>
     </div>
   </div>
@@ -1880,7 +1964,13 @@ exports[`VCalendarDaily should render correctly with intervalCount prop 1`] = `
         Tue
       </div>
       <div class="v-calendar-daily_head-day-label">
-        29
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            29
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -1888,7 +1978,13 @@ exports[`VCalendarDaily should render correctly with intervalCount prop 1`] = `
         Wed
       </div>
       <div class="v-calendar-daily_head-day-label">
-        30
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            30
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -1896,7 +1992,13 @@ exports[`VCalendarDaily should render correctly with intervalCount prop 1`] = `
         Thu
       </div>
       <div class="v-calendar-daily_head-day-label">
-        31
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            31
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -1904,7 +2006,13 @@ exports[`VCalendarDaily should render correctly with intervalCount prop 1`] = `
         Fri
       </div>
       <div class="v-calendar-daily_head-day-label">
-        1
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            1
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -1912,7 +2020,13 @@ exports[`VCalendarDaily should render correctly with intervalCount prop 1`] = `
         Sat
       </div>
       <div class="v-calendar-daily_head-day-label">
-        2
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            2
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -1920,7 +2034,13 @@ exports[`VCalendarDaily should render correctly with intervalCount prop 1`] = `
         Sun
       </div>
       <div class="v-calendar-daily_head-day-label">
-        3
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            3
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -1928,7 +2048,13 @@ exports[`VCalendarDaily should render correctly with intervalCount prop 1`] = `
         Mon
       </div>
       <div class="v-calendar-daily_head-day-label">
-        4
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            4
+          </span>
+        </button>
       </div>
     </div>
   </div>
@@ -2394,7 +2520,13 @@ exports[`VCalendarDaily should render correctly with intervalHeight prop 1`] = `
         Tue
       </div>
       <div class="v-calendar-daily_head-day-label">
-        29
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            29
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -2402,7 +2534,13 @@ exports[`VCalendarDaily should render correctly with intervalHeight prop 1`] = `
         Wed
       </div>
       <div class="v-calendar-daily_head-day-label">
-        30
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            30
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -2410,7 +2548,13 @@ exports[`VCalendarDaily should render correctly with intervalHeight prop 1`] = `
         Thu
       </div>
       <div class="v-calendar-daily_head-day-label">
-        31
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            31
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -2418,7 +2562,13 @@ exports[`VCalendarDaily should render correctly with intervalHeight prop 1`] = `
         Fri
       </div>
       <div class="v-calendar-daily_head-day-label">
-        1
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            1
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -2426,7 +2576,13 @@ exports[`VCalendarDaily should render correctly with intervalHeight prop 1`] = `
         Sat
       </div>
       <div class="v-calendar-daily_head-day-label">
-        2
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            2
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -2434,7 +2590,13 @@ exports[`VCalendarDaily should render correctly with intervalHeight prop 1`] = `
         Sun
       </div>
       <div class="v-calendar-daily_head-day-label">
-        3
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            3
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -2442,7 +2604,13 @@ exports[`VCalendarDaily should render correctly with intervalHeight prop 1`] = `
         Mon
       </div>
       <div class="v-calendar-daily_head-day-label">
-        4
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            4
+          </span>
+        </button>
       </div>
     </div>
   </div>
@@ -3328,7 +3496,13 @@ exports[`VCalendarDaily should render correctly with intervalMinutes prop 1`] = 
         Tue
       </div>
       <div class="v-calendar-daily_head-day-label">
-        29
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            29
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -3336,7 +3510,13 @@ exports[`VCalendarDaily should render correctly with intervalMinutes prop 1`] = 
         Wed
       </div>
       <div class="v-calendar-daily_head-day-label">
-        30
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            30
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -3344,7 +3524,13 @@ exports[`VCalendarDaily should render correctly with intervalMinutes prop 1`] = 
         Thu
       </div>
       <div class="v-calendar-daily_head-day-label">
-        31
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            31
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -3352,7 +3538,13 @@ exports[`VCalendarDaily should render correctly with intervalMinutes prop 1`] = 
         Fri
       </div>
       <div class="v-calendar-daily_head-day-label">
-        1
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            1
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -3360,7 +3552,13 @@ exports[`VCalendarDaily should render correctly with intervalMinutes prop 1`] = 
         Sat
       </div>
       <div class="v-calendar-daily_head-day-label">
-        2
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            2
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -3368,7 +3566,13 @@ exports[`VCalendarDaily should render correctly with intervalMinutes prop 1`] = 
         Sun
       </div>
       <div class="v-calendar-daily_head-day-label">
-        3
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            3
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -3376,7 +3580,13 @@ exports[`VCalendarDaily should render correctly with intervalMinutes prop 1`] = 
         Mon
       </div>
       <div class="v-calendar-daily_head-day-label">
-        4
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            4
+          </span>
+        </button>
       </div>
     </div>
   </div>
@@ -4246,7 +4456,13 @@ exports[`VCalendarDaily should render correctly with maxDays prop 1`] = `
         Tue
       </div>
       <div class="v-calendar-daily_head-day-label">
-        29
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            29
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -4254,7 +4470,13 @@ exports[`VCalendarDaily should render correctly with maxDays prop 1`] = `
         Wed
       </div>
       <div class="v-calendar-daily_head-day-label">
-        30
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            30
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -4262,7 +4484,13 @@ exports[`VCalendarDaily should render correctly with maxDays prop 1`] = `
         Thu
       </div>
       <div class="v-calendar-daily_head-day-label">
-        31
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            31
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -4270,7 +4498,13 @@ exports[`VCalendarDaily should render correctly with maxDays prop 1`] = `
         Fri
       </div>
       <div class="v-calendar-daily_head-day-label">
-        1
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            1
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -4278,7 +4512,13 @@ exports[`VCalendarDaily should render correctly with maxDays prop 1`] = `
         Sat
       </div>
       <div class="v-calendar-daily_head-day-label">
-        2
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            2
+          </span>
+        </button>
       </div>
     </div>
   </div>
@@ -4968,7 +5208,13 @@ exports[`VCalendarDaily should render correctly without shortIntervals prop 1`] 
         Tue
       </div>
       <div class="v-calendar-daily_head-day-label">
-        29
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            29
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -4976,7 +5222,13 @@ exports[`VCalendarDaily should render correctly without shortIntervals prop 1`] 
         Wed
       </div>
       <div class="v-calendar-daily_head-day-label">
-        30
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            30
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -4984,7 +5236,13 @@ exports[`VCalendarDaily should render correctly without shortIntervals prop 1`] 
         Thu
       </div>
       <div class="v-calendar-daily_head-day-label">
-        31
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            31
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -4992,7 +5250,13 @@ exports[`VCalendarDaily should render correctly without shortIntervals prop 1`] 
         Fri
       </div>
       <div class="v-calendar-daily_head-day-label">
-        1
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            1
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -5000,7 +5264,13 @@ exports[`VCalendarDaily should render correctly without shortIntervals prop 1`] 
         Sat
       </div>
       <div class="v-calendar-daily_head-day-label">
-        2
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            2
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -5008,7 +5278,13 @@ exports[`VCalendarDaily should render correctly without shortIntervals prop 1`] 
         Sun
       </div>
       <div class="v-calendar-daily_head-day-label">
-        3
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            3
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -5016,7 +5292,13 @@ exports[`VCalendarDaily should render correctly without shortIntervals prop 1`] 
         Mon
       </div>
       <div class="v-calendar-daily_head-day-label">
-        4
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            4
+          </span>
+        </button>
       </div>
     </div>
   </div>
@@ -5902,7 +6184,13 @@ exports[`VCalendarDaily should use custom interval formatter and render correctl
         Tue
       </div>
       <div class="v-calendar-daily_head-day-label">
-        29
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            29
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -5910,7 +6198,13 @@ exports[`VCalendarDaily should use custom interval formatter and render correctl
         Wed
       </div>
       <div class="v-calendar-daily_head-day-label">
-        30
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            30
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -5918,7 +6212,13 @@ exports[`VCalendarDaily should use custom interval formatter and render correctl
         Thu
       </div>
       <div class="v-calendar-daily_head-day-label">
-        31
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            31
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -5926,7 +6226,13 @@ exports[`VCalendarDaily should use custom interval formatter and render correctl
         Fri
       </div>
       <div class="v-calendar-daily_head-day-label">
-        1
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            1
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -5934,7 +6240,13 @@ exports[`VCalendarDaily should use custom interval formatter and render correctl
         Sat
       </div>
       <div class="v-calendar-daily_head-day-label">
-        2
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            2
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -5942,7 +6254,13 @@ exports[`VCalendarDaily should use custom interval formatter and render correctl
         Sun
       </div>
       <div class="v-calendar-daily_head-day-label">
-        3
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            3
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -5950,7 +6268,13 @@ exports[`VCalendarDaily should use custom interval formatter and render correctl
         Mon
       </div>
       <div class="v-calendar-daily_head-day-label">
-        4
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            4
+          </span>
+        </button>
       </div>
     </div>
   </div>
@@ -6836,7 +7160,13 @@ exports[`VCalendarDaily should use custom interval style function and render cor
         Tue
       </div>
       <div class="v-calendar-daily_head-day-label">
-        29
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            29
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -6844,7 +7174,13 @@ exports[`VCalendarDaily should use custom interval style function and render cor
         Wed
       </div>
       <div class="v-calendar-daily_head-day-label">
-        30
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            30
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -6852,7 +7188,13 @@ exports[`VCalendarDaily should use custom interval style function and render cor
         Thu
       </div>
       <div class="v-calendar-daily_head-day-label">
-        31
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            31
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -6860,7 +7202,13 @@ exports[`VCalendarDaily should use custom interval style function and render cor
         Fri
       </div>
       <div class="v-calendar-daily_head-day-label">
-        1
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            1
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -6868,7 +7216,13 @@ exports[`VCalendarDaily should use custom interval style function and render cor
         Sat
       </div>
       <div class="v-calendar-daily_head-day-label">
-        2
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            2
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -6876,7 +7230,13 @@ exports[`VCalendarDaily should use custom interval style function and render cor
         Sun
       </div>
       <div class="v-calendar-daily_head-day-label">
-        3
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            3
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -6884,7 +7244,13 @@ exports[`VCalendarDaily should use custom interval style function and render cor
         Mon
       </div>
       <div class="v-calendar-daily_head-day-label">
-        4
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            4
+          </span>
+        </button>
       </div>
     </div>
   </div>
@@ -7770,7 +8136,13 @@ exports[`VCalendarDaily should use custom showIntervalLabel function and render 
         Tue
       </div>
       <div class="v-calendar-daily_head-day-label">
-        29
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            29
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -7778,7 +8150,13 @@ exports[`VCalendarDaily should use custom showIntervalLabel function and render 
         Wed
       </div>
       <div class="v-calendar-daily_head-day-label">
-        30
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            30
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -7786,7 +8164,13 @@ exports[`VCalendarDaily should use custom showIntervalLabel function and render 
         Thu
       </div>
       <div class="v-calendar-daily_head-day-label">
-        31
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            31
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -7794,7 +8178,13 @@ exports[`VCalendarDaily should use custom showIntervalLabel function and render 
         Fri
       </div>
       <div class="v-calendar-daily_head-day-label">
-        1
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            1
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -7802,7 +8192,13 @@ exports[`VCalendarDaily should use custom showIntervalLabel function and render 
         Sat
       </div>
       <div class="v-calendar-daily_head-day-label">
-        2
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            2
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -7810,7 +8206,13 @@ exports[`VCalendarDaily should use custom showIntervalLabel function and render 
         Sun
       </div>
       <div class="v-calendar-daily_head-day-label">
-        3
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            3
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -7818,7 +8220,13 @@ exports[`VCalendarDaily should use custom showIntervalLabel function and render 
         Mon
       </div>
       <div class="v-calendar-daily_head-day-label">
-        4
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            4
+          </span>
+        </button>
       </div>
     </div>
   </div>
