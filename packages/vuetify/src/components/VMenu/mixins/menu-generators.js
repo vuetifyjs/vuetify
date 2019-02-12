@@ -1,3 +1,5 @@
+import { getSlotType } from '../../../util/helpers'
+
 /* @vue/component */
 export default {
   methods: {
@@ -15,7 +17,7 @@ export default {
         }
       }
 
-      if (this.$scopedSlots.activator && this.$scopedSlots.activator.length) {
+      if (getSlotType(this, 'activator') === 'scoped') {
         const activator = this.$scopedSlots.activator({ on: listeners })
         this.activatorNode = activator
         return activator

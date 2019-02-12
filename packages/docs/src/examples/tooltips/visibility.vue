@@ -12,9 +12,11 @@
 
       <v-flex xs12 class="mt-5">
         <v-tooltip v-model="show" top>
-          <v-btn slot="activator" icon>
-            <v-icon color="grey lighten-1">shopping_cart</v-icon>
-          </v-btn>
+          <template #activator="data">
+            <v-btn v-on="data.on" icon>
+              <v-icon color="grey lighten-1">shopping_cart</v-icon>
+            </v-btn>
+          </template>
           <span>Programmatic tooltip</span>
         </v-tooltip>
       </v-flex>
