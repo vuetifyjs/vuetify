@@ -34,7 +34,7 @@ function unbind (el: HTMLElement) {
 const scroll = {
   inserted,
   unbind
-}
+} as DirectiveOptions
 
 export { scroll }
 export default scroll
