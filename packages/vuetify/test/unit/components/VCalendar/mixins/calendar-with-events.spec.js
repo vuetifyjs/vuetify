@@ -371,7 +371,7 @@ test('calendar-with-events.ts', ({ mount }) => {
     expect(wrapper.vm.isOverlapping(visualEvents[0], visualEvents[1])).toBeFalsy();
   })
 
-  it('should get timed events for day', async () => {
+  it('should get scoped slots', async () => {
     const wrapper = mount(Mock, {
       propsData: {
         events: [
