@@ -4,6 +4,7 @@
       :headers="headers"
       :items="desserts"
       :search="search"
+      hide-actions
       :pagination.sync="pagination"
       class="elevation-1"
     >
