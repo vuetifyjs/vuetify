@@ -396,4 +396,111 @@ test('calendar-with-events.ts', ({ mount }) => {
 
     expect(wrapper.vm.getScopedSlots()).toEqual({});
   })
+
+  it('should generate day header', async () => {
+    const wrapper = mount(Mock, {
+      propsData: {
+        events: [
+          {
+            start: '2019-02-12 8:30',
+            end: '2019-02-12 12:00'
+          },
+          {
+            start: '2019-02-11',
+            end: '2019-02-13'
+          }
+        ]
+      }
+    })
+
+    expect(wrapper.vm.getScopedSlots().dayHeader({
+      ...parseTimestamp('2019-02-13'),
+      index: 0,
+      outside: false
+    })).toHaveLength(1);
+
+    expect(wrapper.vm.getScopedSlots().dayHeader({
+      ...parseTimestamp('2019-02-13'),
+      index: 0,
+      outside: true
+    })).toHaveLength(1);
+
+    expect(wrapper.vm.getScopedSlots().dayHeader({
+      ...parseTimestamp('2019-02-13'),
+      index: 1,
+      outside: false
+    })).toHaveLength(1);
+  })
+
+  it('should generate day body', async () => {
+    const wrapper = mount(Mock, {
+      propsData: {
+        events: [
+          {
+            start: '2019-02-12 8:30',
+            end: '2019-02-12 12:00'
+          },
+          {
+            start: '2019-02-11',
+            end: '2019-02-13'
+          }
+        ]
+      }
+    })
+
+    expect(wrapper.vm.getScopedSlots().dayBody({
+      ...parseTimestamp('2019-02-13'),
+      index: 0,
+      outside: false
+    })).toHaveLength(1);
+
+    expect(wrapper.vm.getScopedSlots().dayBody({
+      ...parseTimestamp('2019-02-13'),
+      index: 0,
+      outside: true
+    })).toHaveLength(1);
+
+    expect(wrapper.vm.getScopedSlots().dayBody({
+      ...parseTimestamp('2019-02-13'),
+      index: 1,
+      outside: false
+    })).toHaveLength(1);
+  })
+
+  it('should generate day', async () => {
+    const wrapper = mount(Mock, {
+      propsData: {
+        events: [
+          {
+            start: '2019-02-12 8:30',
+            end: '2019-02-12 12:00'
+          },
+          {
+            start: '2019-02-11',
+            end: '2019-02-13'
+          }
+        ]
+      }
+    })
+
+    expect(wrapper.vm.getScopedSlots().day({
+      ...parseTimestamp('2019-02-13'),
+      index: 0,
+      outside: false
+    })).toHaveLength(2);
+
+    expect(wrapper.vm.getScopedSlots().day({
+      ...parseTimestamp('2019-02-13'),
+      index: 0,
+      outside: true
+    })).toHaveLength(2);
+
+
+
+    expect(wrapper.vm.getScopedSlots().day({
+      ...parseTimestamp('2019-02-13'),
+      index: 1,
+      outside: false
+    })).toHaveLength(2);
+  })
 });
