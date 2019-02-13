@@ -2,7 +2,7 @@
   <div class="text-xs-center">
     <v-bottom-sheet v-model="sheet">
       <v-btn
-        slot="activator"
+        v-slot:activator
         color="purple"
         dark
       >
