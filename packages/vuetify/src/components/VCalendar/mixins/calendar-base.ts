@@ -26,11 +26,11 @@ import {
 export default mixins(Colorable, Themeable, Times, Mouse).extend({
   name: 'calendar-base',
 
-  props: props.base,
-
   directives: {
     Resize
   },
+
+  props: props.base,
 
   computed: {
     weekdaySkips (): number[] {
