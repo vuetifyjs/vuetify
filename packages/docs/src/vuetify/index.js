@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
+import goTo from 'vuetify/es5/services/goto'
 
 Vue.use(Vuetify)
 
 export function createVuetify (ssrContext) {
-  return new Vuetify({
+  const vuetify = new Vuetify({
     ssr: Boolean(ssrContext),
     theme: {
       themes: {
@@ -24,4 +25,12 @@ export function createVuetify (ssrContext) {
       }
     }
   })
+
+  // Using goTo for scroll options means it
+  // doesn't have access to framework.application
+  // stub it oout here so that it continues to work
+  // TODO: Figure out how to avoid this
+  goTo.framework = vuetify.framework
+
+  return vuetify
 }
