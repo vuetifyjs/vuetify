@@ -9,8 +9,7 @@
       wrap
     >
       <v-flex
-        slot="item"
-        slot-scope="props"
+        v-slot:item="props"
         xs12
         sm6
         md4

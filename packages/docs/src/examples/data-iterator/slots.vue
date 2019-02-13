@@ -10,7 +10,7 @@
       wrap
     >
       <v-toolbar
-        slot="header"
+        v-slot:header
         class="mb-2"
         color="indigo darken-5"
         dark
@@ -20,8 +20,7 @@
       </v-toolbar>
 
       <v-flex
-        slot="item"
-        slot-scope="props"
+        v-slot:item="props"
         xs12
         sm6
         md4
@@ -72,7 +71,7 @@
       </v-flex>
 
       <v-toolbar
-        slot="footer"
+        v-slot:footer
         class="mt-2"
         color="indigo"
         dark
