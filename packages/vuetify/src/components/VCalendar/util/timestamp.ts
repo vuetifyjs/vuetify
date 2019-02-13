@@ -111,7 +111,7 @@ export function parseTimestamp (input: string, now?: VTimestamp): VTimestamp {
   const parts = PARSE_REGEX.exec(input)
 
   if (!parts) {
-    throw new Error('Invalid timestamp format: ' + input)
+    throw new Error('Invalid timestamp format: ' + input + ', expected format is YYYY-MM-DD or YYYY-MM-DD hh:mm')
   }
 
   const timestamp: VTimestamp = {

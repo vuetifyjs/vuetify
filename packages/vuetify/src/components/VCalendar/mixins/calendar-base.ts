@@ -40,7 +40,7 @@ export default mixins(Colorable, Themeable, Times, Mouse).extend({
       return parseTimestamp(this.start)
     },
     parsedEnd (): VTimestamp {
-      return parseTimestamp(this.end)
+      return this.end ? parseTimestamp(this.end) : this.parsedStart
     },
     days (): VTimestamp[] {
       return createDayList(

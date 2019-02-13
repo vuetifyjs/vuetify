@@ -7,8 +7,6 @@ import {
 } from './timestamp'
 
 export interface VEventInput {
-  start: string
-  end?: string
   [prop: string]: any
 }
 
@@ -25,6 +23,10 @@ export interface VEventParsed {
 }
 
 export function parseEvent (input: VEventInput, index: number, startProperty: string, endProperty: string): VEventParsed {
+  if (!(startProperty in input)) {
+    throw new Error('The ' + startProperty + ' property is required on all events to be a valid timestamp in the format YYYY-MM-DD or YYYY-MM-DD hh:mm')
+  }
+
   const start: VTimestamp = parseTimestamp(input[ startProperty ])
   const end: VTimestamp = input[ endProperty ] ? parseTimestamp(input[ endProperty ]) : start
   const startIdentifier: number = getDayIdentifier(start)

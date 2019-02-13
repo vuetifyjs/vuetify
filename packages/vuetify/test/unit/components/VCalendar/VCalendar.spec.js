@@ -71,6 +71,6 @@ test("VCalendar", ({ mount }) => {
       }
     });
 
-    expect(wrapper.vm.parsedValue.date).toEqual(new Date().toISOString().split('T')[0])
+    expect(wrapper.vm.parsedEnd.date).toEqual("2018-12-04")
   })
 });
