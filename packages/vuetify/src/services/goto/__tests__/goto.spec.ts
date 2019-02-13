@@ -5,7 +5,7 @@ import { mount } from '@vue/test-utils'
 import VBtn from '../../../components/VBtn'
 
 // Services
-import goTo from '../index'
+import goTo, { Goto } from '../index'
 import { Application } from '../../application/index'
 
 // Types
@@ -61,5 +61,9 @@ describe('$vuetify.goTo', () => {
     const btn = mount(VBtn)
 
     await expect(goTo(btn.vm, { duration: 0 })).resolves.not.toBe(undefined)
+  })
+
+  it('should instantiate and return goto', () => {
+    expect(new Goto()).toEqual(goTo)
   })
 })

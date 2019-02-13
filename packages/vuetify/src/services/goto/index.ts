@@ -35,12 +35,14 @@ export default function goTo (
   }
   const container = getContainer(settings.container)
 
+  /* istanbul ignore else */
   if (settings.appOffset) {
     const isDrawer = container.classList.contains('v-navigation-drawer')
     const isClipped = container.classList.contains('v-navigation-drawer--clipped')
     const { bar, top } = goTo.framework.application as any
 
     settings.offset += bar
+    /* istanbul ignore else */
     if (!isDrawer || isClipped) settings.offset += top
   }
 
@@ -52,9 +54,12 @@ export default function goTo (
   const ease = typeof settings.easing === 'function'
     ? settings.easing
     : (easingPatterns as Dictionary<easingPatterns.EasingFunction>)[settings.easing]
+  /* istanbul ignore else */
   if (!ease) throw new TypeError(`Easing function "${settings.easing}" not found.`)
 
+  // Cannot be tested properly in jsdom
   // tslint:disable-next-line:promise-must-complete
+  /* istanbul ignore next */
   return new Promise(resolve => requestAnimationFrame(function step (currentTime: number) {
     const timeElapsed = currentTime - startTime
     const progress = Math.abs(settings.duration ? Math.min(timeElapsed / settings.duration, 1) : 1)
