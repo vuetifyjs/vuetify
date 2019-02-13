@@ -2,7 +2,7 @@
 import { Lang } from '../index'
 
 // Utilities
-import toHaveBeenWarnedInit from '@/test/util/to-have-been-warned'
+import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
 
 describe('$vuetify.lang', () => {
   let lang: Lang
@@ -41,5 +41,15 @@ describe('$vuetify.lang', () => {
     })
 
     expect(lang.t('$vuetify.foo')).toBe('foreignBar')
+  })
+
+  it('should use a custom translator', () => {
+    const translator = jest.fn(str => str)
+
+    lang = new Lang({ t: translator })
+
+    lang.t('$vuetify.foobar', 'fizzbuzz')
+
+    expect(translator).toBeCalledWith('$vuetify.foobar', 'fizzbuzz')
   })
 })

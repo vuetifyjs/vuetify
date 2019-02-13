@@ -52,8 +52,6 @@ export class Lang extends Service {
     this.translator = options.t
   }
 
-  public init () {}
-
   public t (key: string, ...params: any[]) {
     if (!key.startsWith(LANG_PREFIX)) return key
 
