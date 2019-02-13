@@ -12,14 +12,14 @@
         hide-actions
       >
         <v-layout
-          slot="header"
+          v-slot:header
           align-center
           row
           spacer
         >
           <v-flex xs4 sm2 md1>
             <v-avatar
-              slot="activator"
+              v-slot:activator
               size="36px"
             >
               <img
