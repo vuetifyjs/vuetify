@@ -19,7 +19,7 @@ describe('theme-utilities.ts', () => {
         darken1: '#0169dc',
         darken2: '#c28fd0',
         darken3: '#fbe002',
-        darken4: '#33303a',
+        darken4: '#33303a'
       }
     }
 
