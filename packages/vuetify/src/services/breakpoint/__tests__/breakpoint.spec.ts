@@ -261,6 +261,12 @@ describe('Breakpoint.ts', () => {
 
     await resizeWindow(1099)
     expect(breakpoint.md).toBe(true)
+
+    await resizeWindow(1281)
+    expect(breakpoint.lg).toBe(true)
+
+    await resizeWindow(1921)
+    expect(breakpoint.xl).toBe(true)
   })
 
   it('should allow to override defaults via factory args', async () => {

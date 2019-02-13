@@ -66,6 +66,7 @@ export class Breakpoint extends Service {
   }
 
   init () {
+    /* istanbul ignore if */
     if (typeof window === 'undefined') return
 
     window.addEventListener(
@@ -131,6 +132,7 @@ export class Breakpoint extends Service {
   // Cross-browser support as described in:
   // https://stackoverflow.com/questions/1248081
   private getClientWidth () {
+    /* istanbul ignore if */
     if (typeof document === 'undefined') return 0 // SSR
     return Math.max(
       document.documentElement!.clientWidth,
@@ -139,6 +141,7 @@ export class Breakpoint extends Service {
   }
 
   private getClientHeight () {
+    /* istanbul ignore if */
     if (typeof document === 'undefined') return 0 // SSR
     return Math.max(
       document.documentElement!.clientHeight,
