@@ -36,7 +36,7 @@ export default function goTo (
   const container = getContainer(settings.container)
 
   /* istanbul ignore else */
-  if (settings.appOffset) {
+  if (settings.appOffset && goTo.framework.application) {
     const isDrawer = container.classList.contains('v-navigation-drawer')
     const isClipped = container.classList.contains('v-navigation-drawer--clipped')
     const { bar, top } = goTo.framework.application as any
