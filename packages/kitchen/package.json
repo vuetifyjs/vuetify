@@ -10,17 +10,17 @@
   },
   "dependencies": {
     "sass-loader": "^7.0.1",
-    "vue": "^2.5.21",
-    "vue-router": "^3.0.1",
-    "vue-template-compiler": "^2.5.21",
+    "vue": "^2.6.6",
+    "vue-router": "^3.0.2",
+    "vue-template-compiler": "^2.6.6",
     "vuetify": "^2.0.0-alpha.4"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.2.0",
-    "@vue/cli-plugin-eslint": "^3.2.0",
-    "@vue/cli-service": "^3.2.0",
+    "@vue/cli-plugin-babel": "^3.4.0",
+    "@vue/cli-plugin-eslint": "^3.4.0",
+    "@vue/cli-service": "^3.4.0",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.12.0",
+    "eslint": "^5.13.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2"
   }
