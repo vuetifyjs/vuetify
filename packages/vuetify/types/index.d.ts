@@ -33,7 +33,6 @@ export interface VuetifyUseOptions {
 
 export interface VuetifyObject extends Vue {
   readonly breakpoint: Readonly<VuetifyBreakpoint>
-  readonly dark: boolean
   readonly goTo: <T extends string | number | HTMLElement | Vue>(target: T, options?: VuetifyGoToOptions) => Promise<T>
   readonly t: VuetifyLanguage['t']
   application: VuetifyApplication
