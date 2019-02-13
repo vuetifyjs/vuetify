@@ -8,8 +8,7 @@
           color="primary"
         >
           <template
-            slot="day"
-            slot-scope="{ date }"
+            v-slot:day="{ date }"
           >
             <template v-for="event in eventsMap[date]">
               <v-menu
@@ -18,13 +17,14 @@
                 full-width
                 offset-x
               >
-                <div
-                  v-if="!event.time"
-                  slot="activator"
-                  v-ripple
-                  class="my-event"
-                  v-html="event.title"
-                ></div>
+                <template v-slot:activator>
+                  <div
+                    v-if="!event.time"
+                    v-ripple
+                    class="my-event"
+                    v-html="event.title"
+                  ></div>
+                </template>
                 <v-card
                   color="grey lighten-4"
                   min-width="350px"

@@ -7,20 +7,18 @@
           type="day"
         >
           <template
-            slot="dayHeader"
-            slot-scope="{ present }"
+            v-slot:dayHeader="{ present }"
           >
-            <div
+            <template
               v-if="present"
               class="text-xs-center"
             >
               Today
-            </div>
+            </template>
           </template>
 
           <template
-            slot="interval"
-            slot-scope="{ hour }"
+            v-slot:interval="{ hour }"
           >
             <div
               class="text-xs-center"

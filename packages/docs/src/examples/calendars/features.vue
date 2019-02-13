@@ -61,8 +61,8 @@
         full-width
       >
         <v-text-field
-          slot="activator"
           v-model="start"
+          v-slot:activator
           label="Start Date"
           prepend-icon="event"
           readonly
@@ -103,8 +103,8 @@
         full-width
       >
         <v-text-field
-          slot="activator"
           v-model="end"
+          v-slot:activator
           label="End Date"
           prepend-icon="event"
           readonly
@@ -144,8 +144,8 @@
         full-width
       >
         <v-text-field
-          slot="activator"
           v-model="now"
+          v-slot:activator
           label="Today"
           prepend-icon="event"
           readonly
@@ -227,10 +227,7 @@
           :show-interval-label="showIntervalLabel"
           :color="color"
         >
-          <template
-            slot="day"
-            slot-scope="day"
-          >
+          <template v-slot:day="day">
             <div
               v-if="day.day % 3 === 0"
               class="day"
@@ -238,10 +235,7 @@
               day slot {{ day.date }}
             </div>
           </template>
-          <template
-            slot="day-header"
-            slot-scope="day"
-          >
+          <template v-slot:header="day">
             <div
               v-if="day.weekday % 2"
               class="day-header"
@@ -249,10 +243,7 @@
               day-header slot {{ day.date }}
             </div>
           </template>
-          <template
-            slot="day-body"
-            slot-scope="day"
-          >
+          <template v-slot:day-body="day">
             <div
               v-if="day.weekday % 3 === 2"
               class="day-body"
