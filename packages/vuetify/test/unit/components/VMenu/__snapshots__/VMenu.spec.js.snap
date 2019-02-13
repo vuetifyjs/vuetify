@@ -103,7 +103,7 @@ exports[`VMenu.js should render component with custom left and match snapshot 1`
 
 <div class="v-menu">
   <div class="v-menu__content theme--light "
-       style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
+       style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
   >
   </div>
 </div>
@@ -169,7 +169,7 @@ exports[`VMenu.js should render component with custom nudgeRight and match snaps
 
 <div class="v-menu">
   <div class="v-menu__content theme--light "
-       style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 100px; z-index: 0; display: none;"
+       style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
   >
   </div>
 </div>
@@ -308,11 +308,11 @@ exports[`VMenu.js should render component with custom transition and match snaps
 
 `;
 
-exports[`VMenu.js should round dimensions 1`] = `"max-height: auto; min-width: 101px; max-width: auto; top: 12px; left: 50px; z-index: 8; display: none; z-index: 8;"`;
+exports[`VMenu.js should round dimensions 1`] = `"max-height: auto; min-width: 101px; max-width: auto; top: 12px; left: 0px; z-index: 8; display: none; z-index: 8;"`;
 
-exports[`VMenu.js should update position dynamically 1`] = `"max-height: auto; min-width: 0px; max-width: auto; top: 200px; left: 100px; z-index: 8;"`;
+exports[`VMenu.js should update position dynamically 1`] = `"max-height: auto; min-width: 0px; max-width: auto; top: 200px; left: 0px; z-index: 8;"`;
 
-exports[`VMenu.js should update position dynamically 2`] = `"max-height: auto; min-width: 0px; max-width: auto; top: 220px; left: 110px; z-index: 8;"`;
+exports[`VMenu.js should update position dynamically 2`] = `"max-height: auto; min-width: 0px; max-width: auto; top: 220px; left: 0px; z-index: 8;"`;
 
 exports[`VMenu.js should work 1`] = `
 

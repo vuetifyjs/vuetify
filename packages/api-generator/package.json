@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "deepmerge": "^2.2.1",
-    "vue": "^2.5.16",
+    "vue": "^2.6.5",
     "vuetify": "^2.0.0-alpha.4"
   },
   "devDependencies": {
