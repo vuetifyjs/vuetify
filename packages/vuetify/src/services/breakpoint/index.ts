@@ -77,12 +77,6 @@ export class Breakpoint extends Service {
     this.update()
   }
 
-  destroy () {
-    if (typeof window === 'undefined') return
-
-    window.removeEventListener('resize', this.onResize)
-  }
-
   /* eslint-disable-next-line max-statements */
   update () {
     const height = this.getClientHeight()
