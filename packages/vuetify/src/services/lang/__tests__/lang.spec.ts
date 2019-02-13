@@ -50,6 +50,6 @@ describe('$vuetify.lang', () => {
 
     lang.t('$vuetify.foobar', 'fizzbuzz')
 
-    expect(translator).toBeCalledWith('$vuetify.foobar', 'fizzbuzz')
+    expect(translator).toHaveBeenCalledWith('$vuetify.foobar', 'fizzbuzz')
   })
 })
