@@ -1,4 +1,4 @@
-import { resizeWindow } from '@/test'
+import { resizeWindow } from '../../../../test'
 import { Breakpoint } from '../'
 
 describe('Breakpoint.ts', () => {
