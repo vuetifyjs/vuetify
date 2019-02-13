@@ -1,0 +1,55 @@
+import { test } from '@/test'
+import { parseTimestamp, getDayIdentifier } from '@/components/VCalendar/util/timestamp'
+import { parseEvent, isEventOn, isEventOverlapping } from '@/components/VCalendar/util/events'
+
+test('events.ts', () => {
+  it('should parse events', () => {
+    expect(parseEvent({
+      start: '2019-02-13',
+      end: '2019-02-14'
+    }, 0, 'start', 'end')).toMatchSnapshot();
+    expect(parseEvent({
+      a: '2019-02-13',
+      b: '2019-02-14'
+    }, 0, 'a', 'b')).toMatchSnapshot();
+    expect(parseEvent({
+      start: '2019-02-13',
+      end: '2019-02-14'
+    }, 1, 'start', 'end')).toMatchSnapshot();
+    expect(parseEvent({
+      a: '2019-02-13',
+      b: '2019-02-14'
+    }, 1, 'a', 'b')).toMatchSnapshot();
+  })
+
+  it('should parse timed events', () => {
+    expect(parseEvent({
+      start: '2019-02-13 8:30',
+      end: '2019-02-14'
+    }, 0, 'start', 'end')).toMatchSnapshot();
+  })
+
+  it('should check if event is on', () => {
+    const parsed = parseEvent({
+      start: '2019-02-13 8:30',
+      end: '2019-02-15'
+    }, 0, 'start', 'end');
+
+    expect(isEventOn(parsed, getDayIdentifier(parseTimestamp('2019-02-12')))).toBeFalsy();
+    expect(isEventOn(parsed, getDayIdentifier(parseTimestamp('2019-02-13')))).toBeTruthy();
+    expect(isEventOn(parsed, getDayIdentifier(parseTimestamp('2019-02-14')))).toBeTruthy();
+    expect(isEventOn(parsed, getDayIdentifier(parseTimestamp('2019-02-15')))).toBeTruthy();
+    expect(isEventOn(parsed, getDayIdentifier(parseTimestamp('2019-02-16')))).toBeFalsy();
+  })
+
+  it('should check if event is overlapping', () => {
+    const parsed = parseEvent({
+      start: '2019-02-13 8:30',
+      end: '2019-02-15'
+    }, 0, 'start', 'end');
+
+    expect(isEventOverlapping(parsed, getDayIdentifier(parseTimestamp('2019-02-10')), getDayIdentifier(parseTimestamp('2019-02-12')))).toBeFalsy();
+    expect(isEventOverlapping(parsed, getDayIdentifier(parseTimestamp('2019-02-12')), getDayIdentifier(parseTimestamp('2019-02-18')))).toBeTruthy();
+    expect(isEventOverlapping(parsed, getDayIdentifier(parseTimestamp('2019-02-16')), getDayIdentifier(parseTimestamp('2019-02-18')))).toBeFalsy();
+  })
+})
