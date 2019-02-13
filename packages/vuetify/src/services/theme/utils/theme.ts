@@ -19,6 +19,7 @@ export function parse (
     const value = theme[name]
 
     if (isItem) {
+      /* istanbul ignore else */
       if (name === 'base' || name.startsWith('lighten') || name.startsWith('darken')) {
         parsedTheme[name] = colorToHex(value)
       }

@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`theme-utilities.ts should parse a theme or theme item 1`] = `
+Object {
+  "primary": Object {
+    "base": "#000000",
+    "darken1": "#000000",
+    "darken2": "#000000",
+    "darken3": "#000000",
+    "darken4": "#000000",
+    "lighten1": "#1b1b1b",
+    "lighten2": "#303030",
+    "lighten3": "#474747",
+    "lighten4": "#5e5e5e",
+    "lighten5": "#777777",
+  },
+  "secondary": Object {
+    "base": "#ffffff",
+    "darken1": "#e2e2e2",
+    "darken2": "#c6c6c6",
+    "darken3": "#ababab",
+    "darken4": "#919191",
+    "lighten1": "#ffffff",
+    "lighten2": "#ffffff",
+    "lighten3": "#ffffff",
+    "lighten4": "#ffffff",
+    "lighten5": "#ffffff",
+  },
+}
+`;
+
+exports[`theme-utilities.ts should parse a theme or theme item 2`] = `
+Object {
+  "primary": Object {
+    "base": "#c42742",
+    "darken1": "#0169dc",
+    "darken2": "#c28fd0",
+    "darken3": "#fbe002",
+    "darken4": "#33303a",
+    "lighten1": "#f899c7",
+    "lighten2": "#b49921",
+    "lighten3": "#dd88cc",
+    "lighten4": "#cfa854",
+    "lighten5": "#2c0447",
+  },
+}
+`;
