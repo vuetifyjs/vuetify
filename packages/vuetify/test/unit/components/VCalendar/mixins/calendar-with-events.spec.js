@@ -1,6 +1,7 @@
 import { test } from '@/test'
 import CalendarWithEvents from '@/components/VCalendar/mixins/calendar-with-events'
-import { parseTimestamp, parseTime } from '@/components/VCalendar/util/timestamp'
+import { parseTimestamp } from '@/components/VCalendar/util/timestamp'
+import { parseEvent } from '@/components/VCalendar/util/events'
 
 const Mock = {
   mixins: [CalendarWithEvents],
@@ -234,5 +235,165 @@ test('calendar-with-events.ts', ({ mount }) => {
     expect(wrapper.vm.$refs.events[0].style.display).toEqual("none");
     wrapper.vm.updateEventVisibility();
     expect(wrapper.vm.$refs.events[0].style.display).not.toEqual("none");
+  })
+
+  it('should get events for day', async () => {
+    const wrapper = mount(Mock, {
+      propsData: {
+        events: [
+          {
+            start: '2019-02-12 8:30',
+            end: '2019-02-12 12:00'
+          },
+          {
+            start: '2019-02-11',
+            end: '2019-02-13'
+          }
+        ]
+      }
+    })
+
+    expect(wrapper.vm.getEventsForDay(parseTimestamp('2019-02-10'))).toHaveLength(0);
+    expect(wrapper.vm.getEventsForDay(parseTimestamp('2019-02-11'))).toHaveLength(1);
+    expect(wrapper.vm.getEventsForDay(parseTimestamp('2019-02-12'))).toHaveLength(2);
+    expect(wrapper.vm.getEventsForDay(parseTimestamp('2019-02-13'))).toHaveLength(1);
+    expect(wrapper.vm.getEventsForDay(parseTimestamp('2019-02-14'))).toHaveLength(0);
+  })
+
+  it('should get events for all day', async () => {
+    const wrapper = mount(Mock, {
+      propsData: {
+        events: [
+          {
+            start: '2019-02-12 8:30',
+            end: '2019-02-12 12:00'
+          },
+          {
+            start: '2019-02-11',
+            end: '2019-02-13'
+          }
+        ]
+      }
+    })
+
+    expect(wrapper.vm.getEventsForDayAll(parseTimestamp('2019-02-10'))).toHaveLength(0);
+    expect(wrapper.vm.getEventsForDayAll(parseTimestamp('2019-02-11'))).toHaveLength(1);
+    expect(wrapper.vm.getEventsForDayAll(parseTimestamp('2019-02-12'))).toHaveLength(1);
+    expect(wrapper.vm.getEventsForDayAll(parseTimestamp('2019-02-13'))).toHaveLength(1);
+    expect(wrapper.vm.getEventsForDayAll(parseTimestamp('2019-02-14'))).toHaveLength(0);
+  })
+
+  it('should get timed events for day', async () => {
+    const wrapper = mount(Mock, {
+      propsData: {
+        events: [
+          {
+            start: '2019-02-12 8:30',
+            end: '2019-02-12 12:00'
+          },
+          {
+            start: '2019-02-11',
+            end: '2019-02-13'
+          }
+        ]
+      }
+    })
+
+    expect(wrapper.vm.getEventsForDayTimed(parseTimestamp('2019-02-10'))).toHaveLength(0);
+    expect(wrapper.vm.getEventsForDayTimed(parseTimestamp('2019-02-11'))).toHaveLength(0);
+    expect(wrapper.vm.getEventsForDayTimed(parseTimestamp('2019-02-12'))).toHaveLength(1);
+    expect(wrapper.vm.getEventsForDayTimed(parseTimestamp('2019-02-13'))).toHaveLength(0);
+    expect(wrapper.vm.getEventsForDayTimed(parseTimestamp('2019-02-14'))).toHaveLength(0);
+  })
+
+  it('should check if is same column', async () => {
+    const events = [
+      {
+        start: '2019-02-12 8:30',
+        end: '2019-02-12 12:00'
+      },
+      {
+        start: '2019-02-11',
+        end: '2019-02-13'
+      },
+      {
+        start: '2019-02-24'
+      }
+    ]
+    const parsedEvents = events.map((e, i) => parseEvent(e, i, 'start', 'end'))
+    const visualEvents = parsedEvents.map(e => ({ event: e }))
+
+    const wrapper = mount(Mock, {
+      propsData: {
+        eventOverlapThreshold: 500
+      }
+    })
+
+    expect(wrapper.vm.isSameColumn(visualEvents[0], visualEvents[1])).toBeFalsy();
+    expect(wrapper.vm.isSameColumn(visualEvents[0], visualEvents[2])).toBeFalsy();
+
+    wrapper.setProps({
+      eventOverlapThreshold: 1000
+    })
+
+    expect(wrapper.vm.isSameColumn(visualEvents[0], visualEvents[1])).toBeTruthy();
+    expect(wrapper.vm.isSameColumn(visualEvents[0], visualEvents[2])).toBeTruthy();
+  })
+
+  it('should check if is overlapping', async () => {
+    const events = [
+      {
+        start: '2019-02-11',
+        end: '2019-02-13',
+        offset: 0
+      },
+      {
+        start: '2019-02-10',
+        end: '2019-02-13',
+        offset: 10
+      }
+    ]
+    const parsedEvents = events.map((e, i) => parseEvent(e, i, 'start', 'end'))
+    const visualEvents = parsedEvents.map((e, i) => ({ event: e, offset: events[i].offset }))
+
+    const wrapper = mount(Mock, {
+      propsData: {
+        eventOverlapThreshold: 500
+      }
+    })
+
+    expect(wrapper.vm.isOverlapping(visualEvents[0], visualEvents[1])).toBeFalsy();
+
+    wrapper.setProps({
+      eventOverlapThreshold: 1000
+    })
+
+    expect(wrapper.vm.isOverlapping(visualEvents[0], visualEvents[1])).toBeFalsy();
+  })
+
+  it('should get timed events for day', async () => {
+    const wrapper = mount(Mock, {
+      propsData: {
+        events: [
+          {
+            start: '2019-02-12 8:30',
+            end: '2019-02-12 12:00'
+          },
+          {
+            start: '2019-02-11',
+            end: '2019-02-13'
+          }
+        ]
+      }
+    })
+
+    expect(wrapper.vm.getScopedSlots()).not.toEqual({});
+    expect(typeof wrapper.vm.getScopedSlots().day).toBe('function');
+    expect(typeof wrapper.vm.getScopedSlots().dayBody).toBe('function');
+    expect(typeof wrapper.vm.getScopedSlots().dayHeader).toBe('function');
+
+    wrapper.setProps({ events: [] });
+
+    expect(wrapper.vm.getScopedSlots()).toEqual({});
   })
 });
