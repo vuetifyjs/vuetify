@@ -1,14 +1,13 @@
 import {
+  genStyles,
   parse
 } from '../theme'
 
 describe('theme-utilities.ts', () => {
-  it('should parse a theme or theme item', () => {
-    const theme = {
-      primary: '#000',
-      secondary: '#fff'
-    }
-    const theme2 = {
+  let parsedTheme
+
+  beforeEach(() => {
+    parsedTheme = {
       primary: {
         base: '#c42742',
         lighten5: '#2c0447',
@@ -22,8 +21,25 @@ describe('theme-utilities.ts', () => {
         darken4: '#33303a'
       }
     }
+  })
+  it('should parse a theme or theme item', () => {
+    const theme = {
+      primary: '#000',
+      secondary: '#fff'
+    }
 
     expect(parse(theme)).toMatchSnapshot()
-    expect(parse(theme2)).toMatchSnapshot()
+    expect(parse(parsedTheme)).toMatchSnapshot()
+  })
+
+  it('should generate styles', () => {
+    // No values provided
+    expect(genStyles({})).toBe('')
+
+    expect(genStyles(parsedTheme)).toMatchSnapshot()
+  })
+
+  it('should generate css vars', () => {
+    expect(genStyles(parsedTheme, true)).toMatchSnapshot()
   })
 })

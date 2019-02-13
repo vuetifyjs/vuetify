@@ -83,8 +83,6 @@ export function genStyles (theme: VuetifyParsedTheme, cssVar = false): string {
     const name = colors[i]
     const value = theme[name]
 
-    if (typeof value !== 'object') continue
-
     css += genBaseColor(name, cssVar ? genColorVariable(name) : value.base)
     cssVar && (variablesCss += `  ${genColorVariableName(name)}: ${value.base};\n`)
 
