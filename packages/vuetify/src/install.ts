@@ -1,14 +1,17 @@
-import { VuetifyUseOptions } from 'types'
-import { DirectiveOptions, VueConstructor } from 'vue'
+// Core Features
 import * as _components from './components'
 import * as _directives from './directives'
+
+// Types
+import { VuetifyUseOptions } from 'types'
+import { VueConstructor } from 'vue'
 
 export function install (Vue: VueConstructor, args: VuetifyUseOptions = {}) {
   if ((install as any).installed) return
   (install as any).installed = true
 
-  const directives: Record<string, DirectiveOptions> = args.directives || _directives
-  const components = args.components || _components
+  const directives = args.directives || _directives as any
+  const components = args.components || _components as any
 
   for (const name in directives) {
     const directive = directives[name]
