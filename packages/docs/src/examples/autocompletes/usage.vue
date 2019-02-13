@@ -13,7 +13,7 @@
         prepend-icon="mdi-city"
       >
         <v-slide-x-reverse-transition
-          slot="append-outer"
+          v-slot:append-outer
           mode="out-in"
         >
           <v-icon

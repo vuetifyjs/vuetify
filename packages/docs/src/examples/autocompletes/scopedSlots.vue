@@ -27,7 +27,7 @@
             transition="slide-y-transition"
           >
             <v-btn
-              slot="activator"
+              v-slot:activator
               icon
             >
               <v-icon>more_vert</v-icon>
@@ -89,10 +89,7 @@
               item-value="name"
               multiple
             >
-              <template
-                slot="selection"
-                slot-scope="data"
-              >
+              <template v-slot:selection="data">
                 <v-chip
                   :selected="data.selected"
                   close
@@ -105,10 +102,7 @@
                   {{ data.item.name }}
                 </v-chip>
               </template>
-              <template
-                slot="item"
-                slot-scope="data"
-              >
+              <template v-slot:item="data">
                 <template v-if="typeof data.item !== 'object'">
                   <v-list-tile-content v-text="data.item"></v-list-tile-content>
                 </template>
