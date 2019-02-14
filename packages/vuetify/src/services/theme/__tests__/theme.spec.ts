@@ -124,8 +124,8 @@ describe('Theme.ts', () => {
 
     theme.applyTheme()
 
-    expect(themeCache.get).toHaveBeenCalledTimes(2)
-    expect(themeCache.set).toHaveBeenCalledTimes(2)
+    expect(themeCache.get).toHaveBeenCalledTimes(1)
+    expect(themeCache.set).toHaveBeenCalledTimes(1)
     expect(theme.generatedStyles).toMatchSnapshot()
   })
 

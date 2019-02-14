@@ -71,6 +71,8 @@ export class Theme extends Service {
   }
 
   set dark (val: boolean) {
+    if (val === this.isDark) return
+
     this.isDark = val
     this.applyTheme()
   }
