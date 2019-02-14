@@ -26,7 +26,7 @@ export class Theme extends Service {
       error: '#FF5252',
       info: '#2196F3',
       success: '#4CAF50',
-      warning: '#FFC107'
+      warning: '#FB8C00'
     },
     dark: {
       primary: '#2196F3',
@@ -35,7 +35,7 @@ export class Theme extends Service {
       error: '#FF5252',
       info: '#2196F3',
       success: '#4CAF50',
-      warning: '#FFC107'
+      warning: '#FB8C00'
     }
   }
 
