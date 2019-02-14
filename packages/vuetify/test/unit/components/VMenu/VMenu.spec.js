@@ -4,7 +4,7 @@ import VMenu from '@/components/VMenu/VMenu'
 import { test } from '@/test'
 
 // TODO: Most of these have exactly the same snapshots
-test('VMenu.js', ({ mount, compileToFunctions }) => {
+test('VMenu.js', ({ mount, compileToFunctions, runAllTimers }) => {
   it('should work', async () => {
     const wrapper = mount(VMenu, {
       propsData: {
@@ -468,18 +468,18 @@ test('VMenu.js', ({ mount, compileToFunctions }) => {
 
     const content = wrapper.find('.v-menu__content')[0]
 
-    const sleep = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds))
-
     // TODO replace with jest fakeTimers when it will support requestAnimationFrame: https://github.com/facebook/jest/pull/7776
     // See https://github.com/vuetifyjs/vuetify/pull/6330#issuecomment-460083547 for details
-    await sleep(50)
+    runAllTimers()
+    await wrapper.vm.$nextTick()
     expect(content.getAttribute('style')).toMatchSnapshot()
 
     wrapper.setProps({
       positionX: 110,
       positionY: 220
     })
-    await sleep(50)
+    runAllTimers()
+    await wrapper.vm.$nextTick()
     expect(content.getAttribute('style')).toMatchSnapshot()
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()

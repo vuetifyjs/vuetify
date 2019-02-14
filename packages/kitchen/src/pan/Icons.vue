@@ -313,6 +313,214 @@
           </span>
         </v-layout>
       </core-section>
+
+      <core-title>
+        Dense
+      </core-title>
+      <core-section>
+        <v-layout
+          justify-space-around
+          class="mb-2"
+        >
+          <span class="group pa-2">
+            <v-icon
+              color="primary"
+              dense
+            >
+              mdi-home
+            </v-icon>
+            <v-icon
+              color="primary"
+              dense
+            >
+              mdi-calendar
+            </v-icon>
+            <v-icon
+              color="primary"
+              dense
+            >
+              mdi-information
+            </v-icon>
+          </span>
+
+          <span class="group pa-2">
+            <v-icon
+              color="teal"
+              dense
+            >
+              mdi-folder-open
+            </v-icon>
+            <v-icon
+              color="teal"
+              dense
+            >
+              mdi-widgets
+            </v-icon>
+            <v-icon
+              color="teal"
+              dense
+            >
+              mdi-gavel
+            </v-icon>
+          </span>
+        </v-layout>
+
+        <v-layout
+          justify-space-around
+          class="mb-2"
+        >
+          <span class="group pa-2">
+            <v-icon
+              color="primary"
+              medium
+              dense
+            >
+              mdi-home
+            </v-icon>
+            <v-icon
+              color="primary"
+              medium
+              dense
+            >
+              mdi-calendar
+            </v-icon>
+            <v-icon
+              color="primary"
+              medium
+              dense
+            >
+              mdi-information
+            </v-icon>
+          </span>
+
+          <span class="group pa-2">
+            <v-icon
+              medium
+              color="teal"
+              dense
+            >
+              mdi-folder-open
+            </v-icon>
+            <v-icon
+              medium
+              color="teal"
+              dense
+            >
+              mdi-widgets
+            </v-icon>
+            <v-icon
+              medium
+              color="teal"
+              dense
+            >
+              mdi-gavel
+            </v-icon>
+          </span>
+        </v-layout>
+
+        <v-layout
+          justify-space-around
+          class="mb-2"
+        >
+          <span class="group pa-2">
+            <v-icon
+              color="primary"
+              large
+              dense
+            >
+              mdi-home
+            </v-icon>
+            <v-icon
+              color="primary"
+              large
+              dense
+            >
+              mdi-calendar
+            </v-icon>
+            <v-icon
+              color="primary"
+              large
+              dense
+            >
+              mdi-information
+            </v-icon>
+          </span>
+
+          <span class="group pa-2">
+            <v-icon
+              large
+              color="teal"
+              dense
+            >
+              mdi-folder-open
+            </v-icon>
+            <v-icon
+              large
+              color="teal"
+              dense
+            >
+              mdi-widgets
+            </v-icon>
+            <v-icon
+              large
+              color="teal"
+              dense
+            >
+              mdi-gavel
+            </v-icon>
+          </span>
+        </v-layout>
+
+        <v-layout justify-space-around>
+          <span class="group pa-2">
+            <v-icon
+              color="primary"
+              x-large
+              dense
+            >
+              mdi-home
+            </v-icon>
+            <v-icon
+              color="primary"
+              x-large
+              dense
+            >
+              mdi-calendar
+            </v-icon>
+            <v-icon
+              color="primary"
+              x-large
+              dense
+            >
+              mdi-information
+            </v-icon>
+          </span>
+
+          <span class="group pa-2">
+            <v-icon
+              x-large
+              color="teal"
+              dense
+            >
+              mdi-folder-open
+            </v-icon>
+            <v-icon
+              x-large
+              color="teal"
+              dense
+            >
+              mdi-widgets
+            </v-icon>
+            <v-icon
+              x-large
+              color="teal"
+              dense
+            >
+              mdi-gavel
+            </v-icon>
+          </span>
+        </v-layout>
+      </core-section>
     </v-layout>
   </v-container>
 </template>
