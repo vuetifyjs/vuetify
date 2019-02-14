@@ -152,4 +152,28 @@ test('calendar-base.ts', ({ mount }) => {
     expect(wrapper.vm.dayFormatter(parseTimestamp("2019-01-27"), false)).toEqual("27");
     expect(wrapper.vm.dayFormatter(parseTimestamp("2019-01-29"), false)).toEqual("29");
   })
+
+  it('should create formatter', async () => {
+    const wrapper = mount(Mock, {
+      propsData: {
+        start: "2019-01-29",
+        end: "2019-02-08"
+      }
+    })
+
+    expect(wrapper.vm.getFormatter()).toBeDefined();
+    expect(typeof wrapper.vm.getFormatter()).toEqual("function");
+
+    expect(wrapper.vm.getFormatter()(parseTimestamp("2019-01-28"), false)).toEqual("1/28/2019");
+    expect(wrapper.vm.getFormatter()(parseTimestamp("2019-01-27"), false)).toEqual("1/27/2019");
+    expect(wrapper.vm.getFormatter()(parseTimestamp("2019-01-29"), false)).toEqual("1/29/2019");
+
+    wrapper.setProps({
+      locale: 'ru-RU'
+    });
+
+    expect(wrapper.vm.getFormatter()(parseTimestamp("2019-01-28"), false)).toEqual("2019-1-28");
+    expect(wrapper.vm.getFormatter()(parseTimestamp("2019-01-27"), false)).toEqual("2019-1-27");
+    expect(wrapper.vm.getFormatter()(parseTimestamp("2019-01-29"), false)).toEqual("2019-1-29");
+  })
 })
