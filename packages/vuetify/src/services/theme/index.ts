@@ -19,23 +19,23 @@ export class Theme extends Service {
   public options: VuetifyThemeOptions['options']
   public styleEl?: HTMLStyleElement
   public themes: VuetifyThemes = {
-    light: { // Maybe use variables here?
-      primary: '#1976D2', // blue.darken2
-      secondary: '#424242', // grey.darken3
-      accent: '#82B1FF', // blue.accent1
-      error: '#FF5252', // red.accent2
-      info: '#2196F3', // blue.base
-      success: '#4CAF50', // green.base
-      warning: '#FFC107' // amber.base
+    light: {
+      primary: '#1976D2',
+      secondary: '#424242',
+      accent: '#82B1FF',
+      error: '#FF5252',
+      info: '#2196F3',
+      success: '#4CAF50',
+      warning: '#FFC107'
     },
     dark: {
-      primary: '#FF5252', // blue.darken2
-      secondary: '#424242', // grey.darken3
-      accent: '#82B1FF', // blue.accent1
-      error: '#FF5252', // red.accent2
-      info: '#2196F3', // blue.base
-      success: '#4CAF50', // green.base
-      warning: '#FFC107' // amber.base
+      primary: '#3E50B4',
+      secondary: '#424242',
+      accent: '#FF3F80',
+      error: '#FF5252',
+      info: '#2196F3',
+      success: '#4CAF50',
+      warning: '#FFC107'
     }
   }
 
