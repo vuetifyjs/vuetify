@@ -29,7 +29,7 @@ export class Theme extends Service {
       warning: '#FFC107'
     },
     dark: {
-      primary: '#3E50B4',
+      primary: '#2196F3',
       secondary: '#424242',
       accent: '#FF3F80',
       error: '#FF5252',
@@ -39,7 +39,7 @@ export class Theme extends Service {
     }
   }
 
-  private isDark = false
+  private isDark = null as boolean | null
   private ssr = false
 
   constructor (options: Partial<VuetifyThemeOptions> = {}) {
@@ -71,14 +71,16 @@ export class Theme extends Service {
   }
 
   set dark (val: boolean) {
-    if (val === this.isDark) return
+    const oldDark = this.isDark
 
     this.isDark = val
-    this.applyTheme()
+    // Only apply theme after dark
+    // has already been set before
+    oldDark != null && this.applyTheme()
   }
 
   get dark () {
-    return this.isDark
+    return Boolean(this.isDark)
   }
 
   // Apply current theme default
