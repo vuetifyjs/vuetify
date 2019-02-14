@@ -16,14 +16,14 @@ export interface VuetifyThemeOptions {
     themeCache?: VuetifyThemeCache
   }
   themes?: {
-    [name: string]: VuetifyThemeVariant
-    dark: VuetifyThemeVariant
-    light: VuetifyThemeVariant
+    dark?: Partial<VuetifyThemeVariant>
+    light?: Partial<VuetifyThemeVariant>
   }
 }
 
 export interface VuetifyThemes {
-  [name: string]: VuetifyThemeVariant
+  dark: VuetifyThemeVariant,
+  light: VuetifyThemeVariant
 }
 
 export interface VuetifyThemeVariant {

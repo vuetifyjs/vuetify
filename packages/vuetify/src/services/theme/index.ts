@@ -5,17 +5,21 @@ import { Service } from '../service'
 import * as ThemeUtils from './utils'
 
 // Types
-import { VuetifyParsedTheme, VuetifyThemeOptions } from 'vuetify/types/services/theme'
+import {
+  VuetifyParsedTheme,
+  VuetifyThemeOptions,
+  VuetifyThemes,
+  VuetifyThemeVariant
+} from 'vuetify/types/services/theme'
 
 export class Theme extends Service {
   static property = 'theme'
 
-  public dark = false
   public disabled = false
   public options: VuetifyThemeOptions['options']
   public styleEl?: HTMLStyleElement
-  public themes: VuetifyThemeOptions['themes'] = {
-    dark: { // Maybe use variables here?
+  public themes: VuetifyThemes = {
+    light: { // Maybe use variables here?
       primary: '#1976D2', // blue.darken2
       secondary: '#424242', // grey.darken3
       accent: '#82B1FF', // blue.accent1
@@ -24,7 +28,7 @@ export class Theme extends Service {
       success: '#4CAF50', // green.base
       warning: '#FFC107' // amber.base
     },
-    light: {
+    dark: {
       primary: '#FF5252', // blue.darken2
       secondary: '#424242', // grey.darken3
       accent: '#82B1FF', // blue.accent1
@@ -35,8 +39,8 @@ export class Theme extends Service {
     }
   }
 
+  private isDark = false
   private ssr = false
-  private default = 'light'
 
   constructor (options: Partial<VuetifyThemeOptions> = {}) {
     super()
@@ -51,32 +55,12 @@ export class Theme extends Service {
       ...options.options
     }
 
-    this.default = options.default || 'light'
     this.dark = Boolean(options.dark)
+    const themes = options.themes || {}
 
-    // Grab light and dark defaults then
-    // move remaining into own object
-    const {
-      light = {},
-      dark = {},
-      ...themes
-    } = {
-      light: {},
-      dark: {},
-      ...options.themes
-    }
-
-    // Light and dark should always be defined
     this.themes = {
-      light: {
-        ...this.themes!.light,
-        ...light
-      },
-      dark: {
-        ...this.themes!.dark,
-        ...dark
-      },
-      ...themes
+      dark: this.fillVariant(themes.dark, true),
+      light: this.fillVariant(themes.light, false)
     }
   }
 
@@ -86,29 +70,22 @@ export class Theme extends Service {
     this.checkStyleElement() && (this.styleEl!.innerHTML = val)
   }
 
-  // Getter for current default
-  get current (): string {
-    return this.default
-    // this isn't a Vue instance so we can't watch the value
-    // we need getters/setters so we can interact with it
+  set dark (val: boolean) {
+    this.isDark = val
+    this.applyTheme()
   }
 
-  // When the current theme
-  // changes, re-init
-  set current (val: string) {
-    this.default = val
-    this.init()
+  get dark () {
+    return this.isDark
   }
 
   // Apply current theme default
   // only called on client side
-  public applyTheme (theme = this.default): void {
-    const activeTheme = this.themes![theme]
-
-    if (this.disabled || !activeTheme) return this.clearCss()
+  public applyTheme (): void {
+    if (this.disabled) return this.clearCss()
 
     const options = this.options || {}
-    const parsedTheme = ThemeUtils.parse(activeTheme)
+    const parsedTheme = this.parsedTheme
 
     let css: string | null = ''
 
@@ -171,6 +148,18 @@ export class Theme extends Service {
     return Boolean(this.styleEl)
   }
 
+  private fillVariant (
+    theme: Partial<VuetifyThemeVariant> = {},
+    dark: boolean
+  ): VuetifyThemeVariant {
+    const defaultTheme = this.themes[dark ? 'dark' : 'light']
+
+    return Object.assign({},
+      defaultTheme,
+      theme
+    )
+  }
+
   // Generate the style element
   // if applicable
   private genStyleElement (): void {
@@ -190,7 +179,9 @@ export class Theme extends Service {
   }
 
   get currentTheme () {
-    return this.themes ? this.themes[this.default] : {}
+    const target = this.dark ? 'dark' : 'light'
+
+    return this.themes![target]
   }
 
   get generatedStyles (): string {
@@ -218,6 +209,6 @@ export class Theme extends Service {
   }
 
   get parsedTheme (): VuetifyParsedTheme {
-    return ThemeUtils.parse(this.currentTheme)
+    return ThemeUtils.parse(this.currentTheme || {})
   }
 }

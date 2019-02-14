@@ -49,9 +49,8 @@ describe('Theme.ts', () => {
 
   it('should generate theme and apply to document', () => {
     const theme = new Theme({
-      default: 'custom',
       themes: {
-        custom: FillVariant({
+        light: FillVariant({
           primary: '#000001',
           secondary: '#000002',
           accent: '#000003'
@@ -75,7 +74,7 @@ describe('Theme.ts', () => {
       default: 'light',
       themes: {
         light: FillVariant(),
-        vuetify: FillVariant({
+        dark: FillVariant({
           primary: '#FFFFFF'
         })
       }
@@ -86,7 +85,7 @@ describe('Theme.ts', () => {
     const style = document.getElementById('vuetify-theme-stylesheet')
     const html = style!.innerHTML
 
-    theme.applyTheme('vuetify')
+    theme.dark = true
 
     expect(html).not.toEqual(style!.innerHTML)
   })
@@ -95,15 +94,16 @@ describe('Theme.ts', () => {
     const theme = new Theme()
     const spy = jest.spyOn(theme, 'clearCss')
 
-    theme.applyTheme('')
+    theme.dark = true
+    expect(spy).toHaveBeenCalledTimes(0)
+
+    theme.themes.light = FillVariant()
+    theme.dark = false
+    expect(spy).toHaveBeenCalledTimes(0)
+
+    theme.disabled = true
+    theme.dark = true
     expect(spy).toHaveBeenCalledTimes(1)
-
-    theme.themes = { light: FillVariant() }
-    theme.applyTheme('')
-    expect(spy).toHaveBeenCalledTimes(2)
-
-    theme.applyTheme('dark')
-    expect(spy).toHaveBeenCalledTimes(3)
   })
 
   it('should use themeCache', () => {
@@ -124,8 +124,8 @@ describe('Theme.ts', () => {
 
     theme.applyTheme()
 
-    expect(themeCache.get).toHaveBeenCalledTimes(1)
-    expect(themeCache.set).toHaveBeenCalledTimes(1)
+    expect(themeCache.get).toHaveBeenCalledTimes(2)
+    expect(themeCache.set).toHaveBeenCalledTimes(2)
     expect(theme.generatedStyles).toMatchSnapshot()
   })
 
@@ -161,20 +161,6 @@ describe('Theme.ts', () => {
 
     const style = document.getElementById('vuetify-theme-stylesheet')
     expect(style!.getAttribute('nonce')).toBe('foobar')
-  })
-
-  it('should get and set current default theme', () => {
-    const theme = new Theme({
-      ...mock,
-      default: 'foobar'
-    })
-    const spy = jest.spyOn(theme, 'init')
-
-    expect(theme.current).toBe('foobar')
-    theme.current = 'fizzbuzz'
-
-    expect(theme.current).toBe('fizzbuzz')
-    expect(spy).toHaveBeenCalledTimes(1)
   })
 
   it('should initialize the theme', () => {
