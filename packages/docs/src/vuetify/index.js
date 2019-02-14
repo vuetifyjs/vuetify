@@ -8,7 +8,6 @@ export function createVuetify (ssrContext) {
   const vuetify = new Vuetify({
     ssr: Boolean(ssrContext),
     theme: {
-      dark: true,
       themes: {
         light: {
           primary: '#1867c0',
