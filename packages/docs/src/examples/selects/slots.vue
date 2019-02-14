@@ -5,50 +5,48 @@
     label="Favorite Fruits"
     multiple
   >
-    <v-list-tile
-      slot="prepend-item"
-      ripple
-      @click="toggle"
-    >
-      <v-list-tile-action>
-        <v-icon :color="selectedFruits.length > 0 ? 'indigo darken-4' : ''">{{ icon }}</v-icon>
-      </v-list-tile-action>
-      <v-list-tile-title>Select All</v-list-tile-title>
-    </v-list-tile>
-    <v-divider
-      slot="prepend-item"
-      class="mt-2"
-    ></v-divider>
-    <v-divider
-      slot="append-item"
-      class="mb-2"
-    ></v-divider>
-    <v-list-tile
-      slot="append-item"
-      disabled
-    >
-      <v-list-tile-avatar color="grey lighten-3">
-        <v-icon>mdi-food-apple</v-icon>
-      </v-list-tile-avatar>
+    <template v-slot:prepend-item>
+      <v-list-tile
+        ripple
+        @click="toggle"
+      >
+        <v-list-tile-action>
+          <v-icon :color="selectedFruits.length > 0 ? 'indigo darken-4' : ''">{{ icon }}</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-title>Select All</v-list-tile-title>
+      </v-list-tile>
+    </template>
+    <template v-slot:prepend-item>
+      <v-divider class="mt-2"></v-divider>
+    </template>
+    <template v-slot:append-item>
+      <v-divider class="mb-2"></v-divider>
+    </template>
+    <template v-slot:append-item>
+      <v-list-tile disabled>
+        <v-list-tile-avatar color="grey lighten-3">
+          <v-icon>mdi-food-apple</v-icon>
+        </v-list-tile-avatar>
 
-      <v-list-tile-content v-if="likesAllFruit">
-        <v-list-tile-title>Holy smokes, someone call the fruit police!</v-list-tile-title>
-      </v-list-tile-content>
+        <v-list-tile-content v-if="likesAllFruit">
+          <v-list-tile-title>Holy smokes, someone call the fruit police!</v-list-tile-title>
+        </v-list-tile-content>
 
-      <v-list-tile-content v-else-if="likesSomeFruit">
-        <v-list-tile-title>Fruit Count</v-list-tile-title>
-        <v-list-tile-sub-title>{{ selectedFruits.length }}</v-list-tile-sub-title>
-      </v-list-tile-content>
+        <v-list-tile-content v-else-if="likesSomeFruit">
+          <v-list-tile-title>Fruit Count</v-list-tile-title>
+          <v-list-tile-sub-title>{{ selectedFruits.length }}</v-list-tile-sub-title>
+        </v-list-tile-content>
 
-      <v-list-tile-content v-else>
-        <v-list-tile-title>
-          How could you not like fruit?
-        </v-list-tile-title>
-        <v-list-tile-sub-title>
-          Go ahead, make a selection above!
-        </v-list-tile-sub-title>
-      </v-list-tile-content>
-    </v-list-tile>
+        <v-list-tile-content v-else>
+          <v-list-tile-title>
+            How could you not like fruit?
+          </v-list-tile-title>
+          <v-list-tile-sub-title>
+            Go ahead, make a selection above!
+          </v-list-tile-sub-title>
+        </v-list-tile-content>
+      </v-list-tile>
+    </template>
   </v-select>
 </template>
 
