@@ -10,7 +10,9 @@
     &nbsp;&nbsp;
 
     <v-badge color="green">
-      <v-icon v-slot:badge dark small>list</v-icon>
+      <template v-slot:badge>
+        <v-icon dark small>list</v-icon>
+      </template>
       <span>Lists</span>
     </v-badge>
   </div>

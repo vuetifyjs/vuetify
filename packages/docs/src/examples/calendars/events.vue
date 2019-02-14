@@ -7,9 +7,7 @@
           :value="today"
           color="primary"
         >
-          <template
-            v-slot:day="{ date }"
-          >
+          <template v-slot:day="{ date }">
             <template v-for="event in eventsMap[date]">
               <v-menu
                 :key="event.title"
@@ -17,11 +15,12 @@
                 full-width
                 offset-x
               >
-                <template v-slot:activator>
+                <template #activator="{ on: menu }">
                   <div
                     v-if="!event.time"
                     v-ripple
                     class="my-event"
+                    v-on="{ ...menu }"
                     v-html="event.title"
                   ></div>
                 </template>

@@ -6,9 +6,7 @@
           color="primary"
           type="day"
         >
-          <template
-            v-slot:dayHeader="{ present }"
-          >
+          <template v-slot:dayHeader="{ present }">
             <template
               v-if="present"
               class="text-xs-center"
@@ -17,9 +15,7 @@
             </template>
           </template>
 
-          <template
-            v-slot:interval="{ hour }"
-          >
+          <template v-slot:interval="{ hour }">
             <div
               class="text-xs-center"
             >

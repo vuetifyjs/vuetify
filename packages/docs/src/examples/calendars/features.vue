@@ -60,13 +60,15 @@
         offset-y
         full-width
       >
-        <v-text-field
-          v-model="start"
-          v-slot:activator
-          label="Start Date"
-          prepend-icon="event"
-          readonly
-        ></v-text-field>
+        <template #activator="{ on: menu }">
+          <v-text-field
+            v-model="start"
+            label="Start Date"
+            prepend-icon="event"
+            readonly
+            v-on="{ ...menu }"
+          ></v-text-field>
+        </template>
         <v-date-picker
           v-model="start"
           no-title
@@ -102,13 +104,15 @@
         offset-y
         full-width
       >
-        <v-text-field
-          v-model="end"
-          v-slot:activator
-          label="End Date"
-          prepend-icon="event"
-          readonly
-        ></v-text-field>
+        <template #activator="{ on: menu }">
+          <v-text-field
+            v-model="end"
+            label="End Date"
+            prepend-icon="event"
+            readonly
+            v-on="{ ...menu }"
+          ></v-text-field>
+        </template>
         <v-date-picker
           v-model="end"
           no-title
@@ -143,13 +147,15 @@
         offset-y
         full-width
       >
-        <v-text-field
-          v-model="now"
-          v-slot:activator
-          label="Today"
-          prepend-icon="event"
-          readonly
-        ></v-text-field>
+        <template #activator="{ on: menu }">
+          <v-text-field
+            v-model="now"
+            label="Today"
+            prepend-icon="event"
+            readonly
+            v-on="{ ...menu }"
+          ></v-text-field>
+        </template>
         <v-date-picker
           v-model="now"
           no-title

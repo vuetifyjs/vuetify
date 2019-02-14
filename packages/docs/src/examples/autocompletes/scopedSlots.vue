@@ -26,12 +26,14 @@
             left
             transition="slide-y-transition"
           >
-            <v-btn
-              v-slot:activator
-              icon
-            >
-              <v-icon>more_vert</v-icon>
-            </v-btn>
+            <template #activator="{ on: menu }">
+              <v-btn
+                icon
+                v-on="{ ...menu }"
+              >
+                <v-icon>more_vert</v-icon>
+              </v-btn>
+            </template>
             <v-list>
               <v-list-tile @click="isUpdating = true">
                 <v-list-tile-action>
