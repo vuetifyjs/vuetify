@@ -1,6 +1,6 @@
-import { colorToInt, intToHex, colorToHex, RGB } from '../../../util/colorUtils'
-import * as sRGB from '../../../util/color/transformSRGB'
-import * as LAB from '../../../util/color/transformCIELAB'
+import { colorToInt, intToHex, colorToHex, RGB } from '../../util/colorUtils'
+import * as sRGB from '../../util/color/transformSRGB'
+import * as LAB from '../../util/color/transformCIELAB'
 import {
   VuetifyThemes,
   VuetifyParsedTheme,

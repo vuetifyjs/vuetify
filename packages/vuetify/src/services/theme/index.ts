@@ -2,7 +2,7 @@
 import { Service } from '../service'
 
 // Utilities
-import * as ThemeUtils from './utils/theme'
+import * as ThemeUtils from './utils'
 
 // Types
 import { VuetifyParsedTheme, VuetifyThemeOptions } from 'vuetify/types/services/theme'

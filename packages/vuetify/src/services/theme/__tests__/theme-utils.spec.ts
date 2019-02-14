@@ -1,7 +1,7 @@
 import {
   genStyles,
   parse
-} from '../theme'
+} from '../utils'
 
 describe('theme-utilities.ts', () => {
   let parsedTheme
