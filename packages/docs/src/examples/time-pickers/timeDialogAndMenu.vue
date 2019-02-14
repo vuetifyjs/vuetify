@@ -14,13 +14,15 @@
         max-width="290px"
         min-width="290px"
       >
-        <v-text-field
-          slot="activator"
-          v-model="time"
-          label="Picker in menu"
-          prepend-icon="access_time"
-          readonly
-        ></v-text-field>
+        <template #activator="{ on: menu }">
+          <v-text-field
+            v-model="time"
+            label="Picker in menu"
+            prepend-icon="access_time"
+            readonly
+            v-on="{ ...menu }"
+          ></v-text-field>
+        </template>
         <v-time-picker
           v-if="menu2"
           v-model="time"
@@ -40,13 +42,15 @@
         full-width
         width="290px"
       >
-        <v-text-field
-          slot="activator"
-          v-model="time"
-          label="Picker in dialog"
-          prepend-icon="access_time"
-          readonly
-        ></v-text-field>
+        <template #activator="{ on: dialog }">
+          <v-text-field
+            v-model="time"
+            label="Picker in dialog"
+            prepend-icon="access_time"
+            readonly
+            v-on="{ ...dialog }"
+          ></v-text-field>
+        </template>
         <v-time-picker
           v-if="modal2"
           v-model="time"
