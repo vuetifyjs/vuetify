@@ -6,8 +6,8 @@ test("VCalendar", ({ mount }) => {
     const wrapper = mount(VCalendar, {
       propsData: {
         type: "day",
-        start: "2019-01-29",
-        end: "2019-02-04"
+        start: "2018-01-29",
+        end: "2018-02-04"
       }
     });
 
@@ -19,8 +19,8 @@ test("VCalendar", ({ mount }) => {
     const wrapper = mount(VCalendar, {
       propsData: {
         type: "week",
-        start: "2019-01-29",
-        end: "2019-02-04"
+        start: "2018-01-29",
+        end: "2018-02-04"
       }
     });
 
