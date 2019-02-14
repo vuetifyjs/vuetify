@@ -10,7 +10,7 @@ exports[`VCalendar should render day view 1`] = `
     </div>
     <div class="v-calendar-daily_head-day v-past">
       <div class="v-calendar-daily_head-weekday">
-        Tue
+        Mon
       </div>
       <div class="v-calendar-daily_head-day-label">
         29
@@ -311,10 +311,10 @@ exports[`VCalendar should render month view 1`] = `
     <div class="v-calendar-weekly__head-weekday v-past">
       Tue
     </div>
-    <div class="v-calendar-weekly__head-weekday v-present">
+    <div class="v-calendar-weekly__head-weekday v-past">
       Wed
     </div>
-    <div class="v-calendar-weekly__head-weekday v-future">
+    <div class="v-calendar-weekly__head-weekday v-present">
       Thu
     </div>
     <div class="v-calendar-weekly__head-weekday v-future">
@@ -532,7 +532,7 @@ exports[`VCalendar should render week view 1`] = `
         Sun
       </div>
       <div class="v-calendar-daily_head-day-label">
-        27
+        28
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -540,7 +540,7 @@ exports[`VCalendar should render week view 1`] = `
         Mon
       </div>
       <div class="v-calendar-daily_head-day-label">
-        28
+        29
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -548,7 +548,7 @@ exports[`VCalendar should render week view 1`] = `
         Tue
       </div>
       <div class="v-calendar-daily_head-day-label">
-        29
+        30
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -556,7 +556,7 @@ exports[`VCalendar should render week view 1`] = `
         Wed
       </div>
       <div class="v-calendar-daily_head-day-label">
-        30
+        31
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -564,7 +564,7 @@ exports[`VCalendar should render week view 1`] = `
         Thu
       </div>
       <div class="v-calendar-daily_head-day-label">
-        31
+        1
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -572,7 +572,7 @@ exports[`VCalendar should render week view 1`] = `
         Fri
       </div>
       <div class="v-calendar-daily_head-day-label">
-        1
+        2
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -580,7 +580,7 @@ exports[`VCalendar should render week view 1`] = `
         Sat
       </div>
       <div class="v-calendar-daily_head-day-label">
-        2
+        3
       </div>
     </div>
   </div>
