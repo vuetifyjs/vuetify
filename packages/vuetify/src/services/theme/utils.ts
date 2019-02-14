@@ -2,13 +2,12 @@ import { colorToInt, intToHex, colorToHex, RGB } from '../../util/colorUtils'
 import * as sRGB from '../../util/color/transformSRGB'
 import * as LAB from '../../util/color/transformCIELAB'
 import {
-  VuetifyThemes,
   VuetifyParsedTheme,
   VuetifyThemeItem
 } from 'vuetify/types/services/theme'
 
 export function parse (
-  theme: VuetifyThemes | Record<string, VuetifyThemeItem>,
+  theme: Record<string, VuetifyThemeItem>,
   isItem = false
 ): VuetifyParsedTheme {
   const colors = Object.keys(theme)
