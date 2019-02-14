@@ -52,4 +52,12 @@ test('events.ts', () => {
     expect(isEventOverlapping(parsed, getDayIdentifier(parseTimestamp('2019-02-12')), getDayIdentifier(parseTimestamp('2019-02-18')))).toBeTruthy();
     expect(isEventOverlapping(parsed, getDayIdentifier(parseTimestamp('2019-02-16')), getDayIdentifier(parseTimestamp('2019-02-18')))).toBeFalsy();
   })
+
+  it('should throw an error if start isn\'t defined', () => {
+    const fn = () => parseEvent({
+      end: '2019-02-15'
+    }, 0, 'start', 'end');
+
+    expect(fn).toThrow('The start property is required on all events to be a valid timestamp in the format YYYY-MM-DD or YYYY-MM-DD hh:mm');
+  })
 })
