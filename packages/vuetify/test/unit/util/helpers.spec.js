@@ -10,6 +10,7 @@ import {
 
 test('helpers.js', () => {
   it('should pass comparison', () => {
+
     // Null
     expect(deepEqual(null, null)).toEqual(true)
     expect(deepEqual(null, undefined)).toEqual(false)
@@ -38,7 +39,7 @@ test('helpers.js', () => {
     expect(deepEqual(true, '')).toEqual(false)
     expect(deepEqual(true, 'abc')).toEqual(false)
     expect(deepEqual(true, [1, 2])).toEqual(false)
-    expect(deepEqual(true, { x: 1 })).toEqual(false)
+    expect(deepEqual(true, {x: 1})).toEqual(false)
 
     expect(deepEqual(false, false)).toEqual(true)
     expect(deepEqual(false, true)).toEqual(false)
@@ -49,7 +50,7 @@ test('helpers.js', () => {
     expect(deepEqual(false, '')).toEqual(false)
     expect(deepEqual(false, 'abc')).toEqual(false)
     expect(deepEqual(false, [1, 2])).toEqual(false)
-    expect(deepEqual(false, { x: 1 })).toEqual(false)
+    expect(deepEqual(false, {x: 1})).toEqual(false)
 
     // Number
     expect(deepEqual(5, 5)).toEqual(true)
@@ -75,31 +76,32 @@ test('helpers.js', () => {
     expect(deepEqual([], [])).toEqual(true)
     expect(deepEqual([1], [1.0])).toEqual(true)
     expect(deepEqual([1, '2'], [1, '2'])).toEqual(true)
-    expect(deepEqual([1, { x: 1, y: 2 }], [1, { x: 1, y: 2 }])).toEqual(true)
-    expect(deepEqual([1, { x: 1, y: null }], [1, { x: 1, y: false }])).toEqual(false)
+    expect(deepEqual([1, {x: 1, y: 2}], [1, {x: 1, y: 2}])).toEqual(true)
+    expect(deepEqual([1, {x: 1, y: null}], [1, {x: 1, y: false}])).toEqual(false)
     expect(deepEqual([1, [1, 2]], [1, [1, 2]])).toEqual(true)
 
     // Object
     expect(deepEqual({}, {})).toEqual(true)
-    expect(deepEqual({ x: 1 }, { x: 1 })).toEqual(true)
-    expect(deepEqual({ x: 1 }, {})).toEqual(false)
-    expect(deepEqual({ x: { a: 1, b: 2 } }, { x: { a: 1, b: 2 } })).toEqual(true)
+    expect(deepEqual({x: 1}, {x: 1})).toEqual(true)
+    expect(deepEqual({x: 1}, {})).toEqual(false)
+    expect(deepEqual({x: {a: 1, b: 2}}, {x: {a: 1, b: 2}})).toEqual(true)
 
     // Date
-    const currentDate = new Date()
+    const currentDate = new Date
     const futureDate = new Date(1000)
 
     expect(deepEqual(currentDate, currentDate)).toEqual(true)
-    expect(deepEqual({ date: currentDate }, { date: currentDate })).toEqual(true)
+    expect(deepEqual({date: currentDate}, {date: currentDate})).toEqual(true)
     expect(deepEqual(currentDate, futureDate)).toEqual(false)
-    expect(deepEqual({ date: currentDate }, { date: futureDate })).toEqual(false)
+    expect(deepEqual({date: currentDate}, {date: futureDate})).toEqual(false)
 
     const circular = {}
     circular.me = circular
 
-    expect(deepEqual({ r: circular }, { r: circular })).toEqual(true)
-    expect(deepEqual({ r: circular, x: 1 }, { r: circular, x: 2 })).toEqual(false)
-    expect(deepEqual({ r: [circular] }, { r: [circular] })).toEqual(true)
+    expect(deepEqual({r: circular}, {r: circular})).toEqual(true)
+    expect(deepEqual({r: circular, x: 1}, {r: circular, x: 2})).toEqual(false)
+    expect(deepEqual({r: [circular]}, {r: [circular]})).toEqual(true)
+
   })
 
   it('should get nested value', () => {
@@ -110,7 +112,7 @@ test('helpers.js', () => {
           d: 2
         },
         e: [
-          { f: 'f' },
+          {f: 'f'},
           'e1'
         ]
       },
@@ -119,7 +121,7 @@ test('helpers.js', () => {
 
     expect(getNestedValue(obj, ['a', 'b', 'c'])).toEqual(1)
     expect(getNestedValue(obj, ['a', 'b', 'd'])).toEqual(2)
-    expect(getNestedValue(obj, ['a', 'b'])).toEqual({ c: 1, d: 2 })
+    expect(getNestedValue(obj, ['a', 'b'])).toEqual({c: 1, d: 2})
     expect(getNestedValue(obj, ['a', 'e', '0', 'f'])).toEqual('f')
     expect(getNestedValue(obj, ['a', 'e', 0, 'f'])).toEqual('f')
     expect(getNestedValue(obj, ['a', 'e', '1'])).toEqual('e1')
@@ -138,6 +140,7 @@ test('helpers.js', () => {
     expect(getNestedValue(null, [])).toEqual(null)
 
     expect(getNestedValue(null, ['a'])).toEqual(undefined)
+
   })
 
   it('should get property from items', () => {
@@ -145,7 +148,7 @@ test('helpers.js', () => {
       a: {
         b: 1
       },
-      c: [2, 3, { d: 'd' }],
+      c: [2, 3, {d: 'd'}],
       'x.y': 'comp',
       x: {
         y: 'nested'
@@ -185,10 +188,10 @@ test('helpers.js', () => {
   describe('getSlotType', () => {
     it('should detect old slots', () => {
       const vm = new Vue({
+        template: `<foo ref="foo"><template slot="bar">hello</template></foo>`,
         components: {
           foo: { render: h => h('div') }
-        },
-        template: `<foo ref="foo"><template v-slot:bar>hello</template></foo>`
+        }
       }).$mount()
 
       expect(getSlotType(vm.$refs.foo, 'bar')).toBe('normal')
@@ -196,10 +199,10 @@ test('helpers.js', () => {
 
     it('should detect old scoped slots', () => {
       const vm = new Vue({
+        template: `<foo ref="foo"><template slot="bar" slot-scope="data">hello</template></foo>`,
         components: {
           foo: { render: h => h('div') }
-        },
-        template: `<foo ref="foo"><template v-slot:bar="data">hello</template></foo>`
+        }
       }).$mount()
 
       expect(getSlotType(vm.$refs.foo, 'bar')).toBe('scoped')
@@ -207,10 +210,10 @@ test('helpers.js', () => {
 
     it('should detect bare v-slot', () => {
       const vm = new Vue({
+        template: `<foo ref="foo"><template #bar>hello</template></foo>`,
         components: {
           foo: { render: h => h('div') }
-        },
-        template: `<foo ref="foo"><template #bar>hello</template></foo>`
+        }
       }).$mount()
 
       expect(getSlotType(vm.$refs.foo, 'bar', true)).toBe('v-slot')
@@ -218,10 +221,10 @@ test('helpers.js', () => {
 
     it('should detect bound v-slot', () => {
       const vm = new Vue({
+        template: `<foo ref="foo"><template #bar="data">hello</template></foo>`,
         components: {
           foo: { render: h => h('div') }
-        },
-        template: `<foo ref="foo"><template #bar="data">hello</template></foo>`
+        }
       }).$mount()
 
       expect(getSlotType(vm.$refs.foo, 'bar', true)).toBe('scoped')
@@ -229,10 +232,10 @@ test('helpers.js', () => {
 
     it('should count bare v-slot as scoped', () => {
       const vm = new Vue({
+        template: `<foo ref="foo"><template #bar>hello</template></foo>`,
         components: {
           foo: { render: h => h('div') }
-        },
-        template: `<foo ref="foo"><template #bar>hello</template></foo>`
+        }
       }).$mount()
 
       expect(getSlotType(vm.$refs.foo, 'bar')).toBe('scoped')
