@@ -299,7 +299,7 @@ export const keyCodes = Object.freeze({
   pagedown: 34
 })
 
-const ICONS_PREFIX = '$vuetify.icons.'
+const ICONS_PREFIX = '$vuetify.'
 
 // This remaps internal names like '$vuetify.icons.cancel'
 // to the current name or component for that icon.
@@ -308,8 +308,12 @@ export function remapInternalIcon (vm: Vue, iconName: string): VuetifyIcon {
     return iconName
   }
 
-  // Now look up icon indirection name, e.g. '$vuetify.icons.cancel'
-  return getObjectValueByPath(vm, iconName, iconName)
+  // Get the target icon name
+  const iconPath = `$vuetify.icons.values.${iconName.split('.').pop()}`
+
+  // Now look up icon indirection name,
+  // e.g. '$vuetify.icons.values.cancel'
+  return getObjectValueByPath(vm, iconPath, iconName)
 }
 
 export function keys<O> (o: O) {
