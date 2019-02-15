@@ -5,7 +5,7 @@
         <v-btn
           color="primary"
           dark
-          v-on="{ ...menu }"
+          v-on="menu"
         >
           Dropdown
         </v-btn>

@@ -14,7 +14,7 @@
               clearable
               label="Formatted with Moment.js"
               readonly
-              v-on="{ ...menu }"
+              v-on="menu"
             ></v-text-field>
           </template>
           <v-date-picker
@@ -37,7 +37,7 @@
               clearable
               label="Formatted with datefns"
               readonly
-              v-on="{ ...menu }"
+              v-on="menu"
             ></v-text-field>
           </template>
           <v-date-picker

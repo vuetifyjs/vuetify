@@ -5,7 +5,7 @@
         <v-btn
           dark
           color="primary"
-          v-on="{ ...menu }"
+          v-on="menu"
         >
           Slide X Transition
         </v-btn>
@@ -21,7 +21,7 @@
         <v-btn
           dark
           color="secondary"
-          v-on="{ ...menu }"
+          v-on="menu"
         >
           Slide X Reverse Transition
         </v-btn>

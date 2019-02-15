@@ -2,7 +2,7 @@
   <v-layout row justify-center>
     <v-dialog v-model="dialog" scrollable max-width="300px">
       <template #activator="{ on: dialog }">
-        <v-btn color="primary" dark v-on="{ ...dialog }">Open Dialog</v-btn>
+        <v-btn color="primary" dark v-on="dialog">Open Dialog</v-btn>
       </template>
       <v-card>
         <v-card-title>Select Country</v-card-title>

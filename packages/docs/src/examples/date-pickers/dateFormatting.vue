@@ -22,7 +22,7 @@
               persistent-hint
               prepend-icon="event"
               @blur="date = parseDate(dateFormatted)"
-              v-on="{ ...menu }"
+              v-on="menu"
             ></v-text-field>
           </template>
           <v-date-picker v-model="date" no-title @input="menu1 = false"></v-date-picker>
@@ -50,7 +50,7 @@
               persistent-hint
               prepend-icon="event"
               readonly
-              v-on="{ ...menu }"
+              v-on="menu"
             ></v-text-field>
           </template>
           <v-date-picker v-model="date" no-title @input="menu2 = false"></v-date-picker>

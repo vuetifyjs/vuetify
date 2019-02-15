@@ -12,7 +12,7 @@
               <v-btn
                 dark
                 icon
-                v-on="{ ...menu }"
+                v-on="menu"
               >
                 <v-icon>more_vert</v-icon>
               </v-btn>

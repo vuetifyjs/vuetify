@@ -52,7 +52,7 @@
         width="400"
       >
         <template #activator="{ on: dialog }">
-          <v-icon v-on="{ ...dialog }">
+          <v-icon v-on="dialog">
             mdi-share-variant
           </v-icon>
         </template>

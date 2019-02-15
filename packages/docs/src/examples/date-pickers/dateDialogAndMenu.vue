@@ -19,7 +19,7 @@
             label="Picker in menu"
             prepend-icon="event"
             readonly
-            v-on="{ ...menu }"
+            v-on="menu"
           ></v-text-field>
         </template>
         <v-date-picker v-model="date" no-title scrollable>
@@ -46,7 +46,7 @@
             label="Picker in dialog"
             prepend-icon="event"
             readonly
-            v-on="{ ...dialog }"
+            v-on="dialog"
           ></v-text-field>
         </template>
         <v-date-picker v-model="date" scrollable>
@@ -73,7 +73,7 @@
             label="Picker without buttons"
             prepend-icon="event"
             readonly
-            v-on="{ ...menu }"
+            v-on="menu"
           ></v-text-field>
         </template>
         <v-date-picker v-model="date" @input="menu2 = false"></v-date-picker>

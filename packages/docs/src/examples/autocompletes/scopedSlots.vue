@@ -29,7 +29,7 @@
             <template #activator="{ on: menu }">
               <v-btn
                 icon
-                v-on="{ ...menu }"
+                v-on="menu"
               >
                 <v-icon>more_vert</v-icon>
               </v-btn>

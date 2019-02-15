@@ -5,7 +5,7 @@
         <v-btn
           dark
           color="primary"
-          v-on="{ ...menu }"
+          v-on="menu"
         >
           Fade Transition
         </v-btn>

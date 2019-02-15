@@ -10,7 +10,7 @@
       <v-btn
         class="hidden-md-and-down"
         flat
-        v-on="{ ...menu }"
+        v-on="menu"
       >
         <span
           class="text-lowercase mr-1"

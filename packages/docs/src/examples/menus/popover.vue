@@ -10,7 +10,7 @@
         <v-btn
           color="indigo"
           dark
-          v-on="{ ...menu }"
+          v-on="menu"
         >
           Menu as Popover
         </v-btn>

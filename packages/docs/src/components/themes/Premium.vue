@@ -53,7 +53,7 @@
                     bottom
                     v-on="{ ...menu }"
                   >
-                    <template #activator="{ on: menu }">
+                    <template #activator="{ on: tooltip }">
                       <v-btn
                         :href="template.demoUrl.length === 1 ? `${template.demoUrl[0]}?ref=vuetifyjs.com` : undefined"
                         icon

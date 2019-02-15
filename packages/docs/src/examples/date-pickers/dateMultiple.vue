@@ -28,7 +28,7 @@
             label="Multiple picker in menu"
             prepend-icon="event"
             readonly
-            v-on="{ ...menu }"
+            v-on="menu"
           ></v-combobox>
         </template>
         <v-date-picker v-model="dates" multiple no-title scrollable>

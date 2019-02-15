@@ -10,7 +10,7 @@
         :aria-label="$t('Vuetify.AppToolbar.translations')"
         flat
         style="min-width: 48px"
-        v-on="{ ...menu }"
+        v-on="menu"
       >
         <v-icon v-if="currentLanguage.locale === 'eo-UY'">language</v-icon>
         <v-img

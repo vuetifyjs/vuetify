@@ -73,13 +73,7 @@
           <v-flex shrink>
             <v-tooltip right>
               <template #activator="{ on: tooltip }">
-                <v-btn
-                  :href="source"
-                  icon
-                  large
-                  target="_blank"
-                  v-on="{ ...tooltip }"
-                >
+                <v-btn :href="source" icon large target="_blank" v-on="tooltip">
                   <v-icon large>code</v-icon>
                 </v-btn>
               </template>
@@ -87,7 +81,7 @@
             </v-tooltip>
             <v-tooltip right>
               <template #activator="{ on: tooltip }">
-                <v-btn icon large href="https://codepen.io/johnjleider/pen/YeRKwQ" target="_blank" v-on="{ ...tooltip }">
+                <v-btn icon large href="https://codepen.io/johnjleider/pen/YeRKwQ" target="_blank" v-on="tooltip">
                   <v-icon large>mdi-codepen</v-icon>
                 </v-btn>
               </template>

@@ -9,7 +9,7 @@
         <v-btn
           color="primary"
           dark
-          v-on="{ ...menu }"
+          v-on="menu"
         >
           Scale Transition
         </v-btn>
@@ -36,7 +36,7 @@
           class="deep-orange"
           color="primary"
           dark
-          v-on="{ ...menu }"
+          v-on="menu"
         >
           Slide X Transition
         </v-btn>
@@ -62,7 +62,7 @@
           class="purple"
           color="primary"
           dark
-          v-on="{ ...menu }"
+          v-on="menu"
         >
           Slide Y Transition
         </v-btn>

@@ -20,7 +20,7 @@
                     v-if="!event.time"
                     v-ripple
                     class="my-event"
-                    v-on="{ ...menu }"
+                    v-on="menu"
                     v-html="event.title"
                   ></div>
                 </template>

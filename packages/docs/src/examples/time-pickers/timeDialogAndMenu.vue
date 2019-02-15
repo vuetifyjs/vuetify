@@ -20,7 +20,7 @@
             label="Picker in menu"
             prepend-icon="access_time"
             readonly
-            v-on="{ ...menu }"
+            v-on="menu"
           ></v-text-field>
         </template>
         <v-time-picker
@@ -48,7 +48,7 @@
             label="Picker in dialog"
             prepend-icon="access_time"
             readonly
-            v-on="{ ...dialog }"
+            v-on="dialog"
           ></v-text-field>
         </template>
         <v-time-picker

@@ -16,7 +16,7 @@
         label="Birthday date"
         prepend-icon="event"
         readonly
-        v-on="{ ...menu }"
+        v-on="menu"
       ></v-text-field>
     </template>
     <v-date-picker

@@ -72,7 +72,7 @@
                 <v-btn
                   icon
                   class="my-0"
-                  v-on="{ ...tooltip }"
+                  v-on="tooltip"
                   @click="resetForm"
                 >
                   <v-icon>refresh</v-icon>

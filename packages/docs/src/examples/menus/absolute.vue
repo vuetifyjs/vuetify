@@ -15,7 +15,7 @@
           img="https://cdn.vuetifyjs.com/images/cards/girl.jpg"
           height="300"
           width="600"
-          v-on="{ ...menu }"
+          v-on="menu"
         ></v-card>
       </template>
 

@@ -8,7 +8,7 @@
         <v-btn
           color="red lighten-2"
           dark
-          v-on="{ ...dialog }"
+          v-on="dialog"
         >
           Click Me
         </v-btn>

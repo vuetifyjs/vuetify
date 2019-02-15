@@ -66,7 +66,7 @@
             label="Start Date"
             prepend-icon="event"
             readonly
-            v-on="{ ...menu }"
+            v-on="menu"
           ></v-text-field>
         </template>
         <v-date-picker
@@ -110,7 +110,7 @@
             label="End Date"
             prepend-icon="event"
             readonly
-            v-on="{ ...menu }"
+            v-on="menu"
           ></v-text-field>
         </template>
         <v-date-picker
@@ -153,7 +153,7 @@
             label="Today"
             prepend-icon="event"
             readonly
-            v-on="{ ...menu }"
+            v-on="menu"
           ></v-text-field>
         </template>
         <v-date-picker

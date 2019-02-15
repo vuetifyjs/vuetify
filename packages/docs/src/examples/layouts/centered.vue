@@ -15,7 +15,7 @@
                       icon
                       large
                       target="_blank"
-                      v-on="{ ...tooltip }"
+                      v-on="tooltip"
                     >
                       <v-icon large>code</v-icon>
                     </v-btn>
@@ -24,7 +24,7 @@
                 </v-tooltip>
                 <v-tooltip right>
                   <template #activator="{ on: tooltip }">
-                    <v-btn icon large href="https://codepen.io/johnjleider/pen/wyYVVj" target="_blank" v-on="{ ...tooltip }">
+                    <v-btn icon large href="https://codepen.io/johnjleider/pen/wyYVVj" target="_blank" v-on="tooltip">
                       <v-icon large>mdi-codepen</v-icon>
                     </v-btn>
                   </template>

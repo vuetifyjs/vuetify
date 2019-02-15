@@ -9,7 +9,7 @@
 
       <v-menu :nudge-width="100">
         <template #activator="{ on: menu }">
-          <v-toolbar-title v-on="{ ...menu }">
+          <v-toolbar-title v-on="menu">
             <span>All</span>
             <v-icon dark>arrow_drop_down</v-icon>
           </v-toolbar-title>

@@ -2,7 +2,7 @@
   <v-layout row justify-center>
     <v-dialog v-model="dialog" width="600px">
       <template #activator="{ on: dialog }">
-        <v-btn color="primary" dark v-on="{ ...dialog }">Open Dialog</v-btn>
+        <v-btn color="primary" dark v-on="dialog">Open Dialog</v-btn>
       </template>
       <v-card>
         <v-card-title>

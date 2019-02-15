@@ -11,7 +11,7 @@
         :aria-label="$t('Vuetify.AppToolbar.support')"
         flat
         style="min-width: 48px"
-        v-on="{ ...menu }"
+        v-on="menu"
       >
         <span
           class="hidden-sm-and-down mr-1"

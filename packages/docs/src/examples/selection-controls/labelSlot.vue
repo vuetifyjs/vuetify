@@ -10,7 +10,7 @@
               target="_blank"
               href="http://vuetifyjs.com"
               @click.stop
-              v-on="{ ...tooltip }"
+              v-on="tooltip"
             >
               Vuetify
             </a>
