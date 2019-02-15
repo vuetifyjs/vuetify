@@ -53,7 +53,10 @@ export default Vue.extend({
     inputActivator: Boolean,
     light: Boolean,
     dark: Boolean,
-    maxWidth: [Number, String],
+    maxWidth: {
+      type: [Number, String],
+      default: 'auto'
+    },
     minWidth: [Number, String],
     nudgeBottom: {
       type: [Number, String],

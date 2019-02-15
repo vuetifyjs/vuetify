@@ -106,12 +106,9 @@ export default Vue.extend({
       return this.auto ? '200px' : convertToUnit(this.maxHeight)
     },
     calculatedMaxWidth () {
-      if (this.maxWidth) {
-        return isNaN(this.maxWidth)
-          ? this.maxWidth
-          : `${this.maxWidth}px`
-      }
-      return this.pageWidth - 24
+      return isNaN(this.maxWidth)
+        ? this.maxWidth
+        : `${this.maxWidth}px`
     },
     calculatedMinWidth () {
       if (this.minWidth) {
@@ -120,10 +117,11 @@ export default Vue.extend({
           : `${this.minWidth}px`
       }
 
-      const minWidth = (
+      const minWidth = Math.min(
         this.dimensions.activator.width +
         this.nudgeWidth +
-        (this.auto ? 16 : 0)
+        (this.auto ? 16 : 0),
+        Math.max(this.pageWidth - 24, 0)
       )
 
       const calculatedMaxWidth = isNaN(parseInt(this.calculatedMaxWidth))
