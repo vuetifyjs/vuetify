@@ -13,6 +13,6 @@ export default {
   noDataText: 'Brak danych',
   carousel: {
     prev: 'Poprzedni obraz',
-    next: 'Następny wizualny'
+    next: 'Następny obraz'
   }
 }
