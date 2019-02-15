@@ -98,6 +98,7 @@ export default Vue.extend({
     absoluteY: 0,
     dimensions: Object.assign({}, dimensions),
     isContentActive: false,
+    pageWidth: 0,
     pageYOffset: 0,
     stackClass: 'v-menu__content--active',
     stackMinZIndex: 6
@@ -352,6 +353,7 @@ export default Vue.extend({
     updateDimensions () {
       this.checkForWindow()
       this.checkForPageYOffset()
+      this.pageWidth = document.documentElement.clientWidth
 
       const dimensions = {}
 

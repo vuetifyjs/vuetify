@@ -122,6 +122,9 @@ export default VWindow.extend({
           props: {
             icon: true
           },
+          attrs: {
+            'aria-label': this.$vuetify.t(`$vuetify.carousel.${direction}`)
+          },
           on: { click: fn }
         }, [
           this.$createElement(VIcon, {
