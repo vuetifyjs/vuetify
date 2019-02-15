@@ -40,9 +40,11 @@ test('VBreadcrumbs.js', ({ mount, compileToFunctions }) => {
   it('should use slot to render items if present', () => {
     const { render } = compileToFunctions(`
       <v-breadcrumbs :items="items">
-        <v-breadcrumbs-item slot="item" slot-scope="props" :key="props.item.text">
-          {{ props.item.text.toUpperCase() }}
-        </v-breadcrumbs-item>
+        <template v-slot:item="props">
+          <v-breadcrumbs-item :key="props.item.text">
+            {{ props.item.text.toUpperCase() }}
+          </v-breadcrumbs-item>
+        </template>
       </v-breadcrumbs>
     `)
     const component = Vue.component('test', {
@@ -67,7 +69,7 @@ test('VBreadcrumbs.js', ({ mount, compileToFunctions }) => {
   it('should use a custom divider slot', () => {
     const { render } = compileToFunctions(`
       <v-breadcrumbs :items="items">
-        <template slot="divider">/divider/</template>
+        <template v-slot:divider>/divider/</template>
       </v-breadcrumbs>
     `)
     const component = Vue.component('test', {
