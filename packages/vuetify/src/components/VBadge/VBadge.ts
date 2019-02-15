@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_badges.styl'
+import './VBadge.styl'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
