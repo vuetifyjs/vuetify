@@ -106,9 +106,12 @@ export default Vue.extend({
       return this.auto ? '200px' : convertToUnit(this.maxHeight)
     },
     calculatedMaxWidth () {
-      return isNaN(this.maxWidth)
-        ? this.maxWidth
-        : `${this.maxWidth}px`
+      if (this.maxWidth) {
+        return isNaN(this.maxWidth)
+          ? this.maxWidth
+          : `${this.maxWidth}px`
+      }
+      return this.pageWidth - 24
     },
     calculatedMinWidth () {
       if (this.minWidth) {
