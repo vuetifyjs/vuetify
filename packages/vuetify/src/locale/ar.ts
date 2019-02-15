@@ -10,5 +10,9 @@ export default {
   dataTable: {
     rowsPerPageText: 'الصفوف لكل صفحة:'
   },
-  noDataText: 'لا توجد بيانات متاحة'
+  noDataText: 'لا توجد بيانات متاحة',
+  carousel: {
+    prev: 'الصورة السابقة',
+    next: 'البصري التالي'
+  }
 }

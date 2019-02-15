@@ -191,7 +191,7 @@ export default Vue.extend({
       }px`
     },
     calcXOverflow (left, menuWidth) {
-      const xOverflow = left + menuWidth - this.getInnerWidth() + 12
+      const xOverflow = left + menuWidth - this.pageWidth + 12
 
       if ((!this.left || this.right) && xOverflow > 0) {
         left = Math.max(left - xOverflow, 0)
@@ -286,11 +286,6 @@ export default Vue.extend({
 
       return window.innerHeight ||
         document.documentElement.clientHeight
-    },
-    getInnerWidth () {
-      if (!this.hasWindow) return 0
-
-      return document.documentElement.clientWidth
     },
     getOffsetLeft () {
       if (!this.hasWindow) return 0
