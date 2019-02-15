@@ -14,7 +14,7 @@
           max-width="290px"
           min-width="290px"
         >
-          <template #activator="{ on: menu }">
+          <template v-slot:activator="{ on: menu }">
             <v-text-field
               v-model="dateFormatted"
               label="Date"
@@ -42,7 +42,7 @@
           max-width="290px"
           min-width="290px"
         >
-          <template #activator="{ on: menu }">
+          <template v-slot:activator="{ on: menu }">
             <v-text-field
               v-model="computedDateFormatted"
               label="Date (read only text field)"

@@ -5,7 +5,7 @@
       <v-btn color="primary" dark @click="dialog2 = true">Open Dialog 2</v-btn>
       <v-btn color="primary" dark @click="dialog3 = true">Open Dialog 3</v-btn>
       <v-menu bottom offset-y>
-        <template #activator="{ on: menu }">
+        <template v-slot:activator="{ on: menu }">
           <v-btn v-on="menu">A Menu</v-btn>
         </template>
         <v-list>
@@ -32,7 +32,7 @@
               <v-btn dark flat @click="dialog = false">Save</v-btn>
             </v-toolbar-items>
             <v-menu bottom right offset-y>
-              <template #activator="{ on: menu }">
+              <template v-slot:activator="{ on: menu }">
                 <v-btn dark icon v-on="menu">
                   <v-icon>more_vert</v-icon>
                 </v-btn>
@@ -47,7 +47,7 @@
           <v-card-text>
             <v-btn color="primary" dark @click="dialog2 = !dialog2">Open Dialog 2</v-btn>
             <v-tooltip right>
-              <template #activator="{ on: tooltip }">
+              <template v-slot:activator="{ on: tooltip }">
                 <v-btn v-on="tooltip">Tool Tip Activator</v-btn>
               </template>
               Tool Tip
@@ -127,7 +127,7 @@
             <span>Dialog 3</span>
             <v-spacer></v-spacer>
             <v-menu bottom left>
-              <template #activator="{ on: menu }">
+              <template v-slot:activator="{ on: menu }">
                 <v-btn icon v-on="menu">
                   <v-icon>more_vert</v-icon>
                 </v-btn>

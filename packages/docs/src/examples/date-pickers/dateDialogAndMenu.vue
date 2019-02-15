@@ -13,7 +13,7 @@
         full-width
         min-width="290px"
       >
-        <template #activator="{ on: menu }">
+        <template v-slot:activator="{ on: menu }">
           <v-text-field
             v-model="date"
             label="Picker in menu"
@@ -40,7 +40,7 @@
         full-width
         width="290px"
       >
-        <template #activator="{ on: dialog }">
+        <template v-slot:activator="{ on: dialog }">
           <v-text-field
             v-model="date"
             label="Picker in dialog"
@@ -67,7 +67,7 @@
         full-width
         min-width="290px"
       >
-        <template #activator="{ on: menu }">
+        <template v-slot:activator="{ on: menu }">
           <v-text-field
             v-model="date"
             label="Picker without buttons"

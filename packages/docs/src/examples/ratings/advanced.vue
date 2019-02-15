@@ -51,7 +51,7 @@
         v-model="dialog"
         width="400"
       >
-        <template #activator="{ on: dialog }">
+        <template v-slot:activator="{ on: dialog }">
           <v-icon v-on="dialog">
             mdi-share-variant
           </v-icon>

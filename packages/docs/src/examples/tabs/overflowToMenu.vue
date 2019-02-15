@@ -40,7 +40,7 @@
             class="v-tabs__div"
             left
           >
-            <template #activator="{ on: menu }">
+            <template v-slot:activator="{ on: menu }">
               <a class="v-tabs__item" v-on="menu">
                 more
                 <v-icon>arrow_drop_down</v-icon>

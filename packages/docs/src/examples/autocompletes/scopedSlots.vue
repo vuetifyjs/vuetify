@@ -26,7 +26,7 @@
             left
             transition="slide-y-transition"
           >
-            <template #activator="{ on: menu }">
+            <template v-slot:activator="{ on: menu }">
               <v-btn
                 icon
                 v-on="menu"

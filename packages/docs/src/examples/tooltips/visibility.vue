@@ -12,7 +12,7 @@
 
       <v-flex xs12 class="mt-5">
         <v-tooltip v-model="show" top>
-          <template #activator="data">
+          <template v-slot:activator="data">
             <v-btn icon v-on="data.on">
               <v-icon color="grey lighten-1">shopping_cart</v-icon>
             </v-btn>

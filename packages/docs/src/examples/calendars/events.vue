@@ -15,7 +15,7 @@
                 full-width
                 offset-x
               >
-                <template #activator="{ on: menu }">
+                <template v-slot:activator="{ on: menu }">
                   <div
                     v-if="!event.time"
                     v-ripple

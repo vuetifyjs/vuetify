@@ -8,7 +8,7 @@
           full-width
           max-width="290"
         >
-          <template #activator="{ on: menu }">
+          <template v-slot:activator="{ on: menu }">
             <v-text-field
               :value="computedDateFormattedMomentjs"
               clearable
@@ -31,7 +31,7 @@
           full-width
           max-width="290"
         >
-          <template #activator="{ on: menu }">
+          <template v-slot:activator="{ on: menu }">
             <v-text-field
               :value="computedDateFormattedDatefns"
               clearable

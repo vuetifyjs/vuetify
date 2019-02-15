@@ -60,7 +60,7 @@
         offset-y
         full-width
       >
-        <template #activator="{ on: menu }">
+        <template v-slot:activator="{ on: menu }">
           <v-text-field
             v-model="start"
             label="Start Date"
@@ -104,7 +104,7 @@
         offset-y
         full-width
       >
-        <template #activator="{ on: menu }">
+        <template v-slot:activator="{ on: menu }">
           <v-text-field
             v-model="end"
             label="End Date"
@@ -147,7 +147,7 @@
         offset-y
         full-width
       >
-        <template #activator="{ on: menu }">
+        <template v-slot:activator="{ on: menu }">
           <v-text-field
             v-model="now"
             label="Today"

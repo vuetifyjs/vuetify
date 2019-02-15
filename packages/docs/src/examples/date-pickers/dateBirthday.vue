@@ -10,7 +10,7 @@
     full-width
     min-width="290px"
   >
-    <template #activator="{ on: menu }">
+    <template v-slot:activator="{ on: menu }">
       <v-text-field
         v-model="date"
         label="Birthday date"

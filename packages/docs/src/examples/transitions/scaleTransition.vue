@@ -1,7 +1,7 @@
 <template>
   <div class="text-xs-center">
     <v-menu transition="scale-transition">
-      <template #activator="{ on: menu }">
+      <template v-slot:activator="{ on: menu }">
         <v-btn
           dark
           color="primary"

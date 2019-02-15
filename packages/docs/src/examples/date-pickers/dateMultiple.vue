@@ -19,7 +19,7 @@
         full-width
         min-width="290px"
       >
-        <template #activator="{ on: menu }">
+        <template v-slot:activator="{ on: menu }">
           <v-combobox
             v-model="dates"
             multiple

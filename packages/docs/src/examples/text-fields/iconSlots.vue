@@ -14,7 +14,7 @@
               <v-tooltip
                 bottom
               >
-                <template #activator="{ on: tooltip }">
+                <template v-slot:activator="{ on: tooltip }">
                   <v-icon v-on="tooltip">mdi-help-circle-outline</v-icon>
                 </template>
                 I'm a tooltip
@@ -36,7 +36,7 @@
                 style="top: -12px"
                 offset-y
               >
-                <template #activator="{ on: menu }">
+                <template v-slot:activator="{ on: menu }">
                   <v-btn v-on="menu">
                     <v-icon left>menu</v-icon>
                     Menu

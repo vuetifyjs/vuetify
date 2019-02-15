@@ -68,7 +68,7 @@
               v-if="formHasErrors"
               left
             >
-              <template #activator="{ on: tooltip }">
+              <template v-slot:activator="{ on: tooltip }">
                 <v-btn
                   icon
                   class="my-0"

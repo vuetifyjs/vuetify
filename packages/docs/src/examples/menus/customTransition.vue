@@ -5,7 +5,7 @@
       origin="center center"
       transition="scale-transition"
     >
-      <template #activator="{ on: menu }">
+      <template v-slot:activator="{ on: menu }">
         <v-btn
           color="primary"
           dark
@@ -31,7 +31,7 @@
       bottom
       right
     >
-      <template #activator="{ on: menu }">
+      <template v-slot:activator="{ on: menu }">
         <v-btn
           class="deep-orange"
           color="primary"
@@ -57,7 +57,7 @@
       transition="slide-y-transition"
       bottom
     >
-      <template #activator="{ on: menu }">
+      <template v-slot:activator="{ on: menu }">
         <v-btn
           class="purple"
           color="primary"

@@ -1,7 +1,7 @@
 <template>
   <v-layout row justify-center>
     <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-      <template #activator="{ on: dialog }">
+      <template v-slot:activator="{ on: dialog }">
         <v-btn color="primary" dark v-on="{...dialog }">Open Dialog</v-btn>
       </template>
       <v-card>

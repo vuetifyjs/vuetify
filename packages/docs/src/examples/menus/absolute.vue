@@ -9,7 +9,7 @@
       offset-y
       style="max-width: 600px"
     >
-      <template #activator="{ on: menu }">
+      <template v-slot:activator="{ on: menu }">
         <v-card
           class="portrait"
           img="https://cdn.vuetifyjs.com/images/cards/girl.jpg"

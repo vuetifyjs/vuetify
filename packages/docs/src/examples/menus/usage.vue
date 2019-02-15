@@ -1,7 +1,7 @@
 <template>
   <div class="text-xs-center">
     <v-menu offset-y>
-      <template #activator="{ on: menu }">
+      <template v-slot:activator="{ on: menu }">
         <v-btn
           color="primary"
           dark

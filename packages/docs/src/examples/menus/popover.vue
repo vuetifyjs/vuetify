@@ -6,7 +6,7 @@
       :nudge-width="200"
       offset-x
     >
-      <template #activator="{ on: menu }">
+      <template v-slot:activator="{ on: menu }">
         <v-btn
           color="indigo"
           dark

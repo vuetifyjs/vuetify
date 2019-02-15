@@ -4,7 +4,7 @@
       v-model="dialog"
       width="500"
     >
-      <template #activator="{ on: dialog }">
+      <template v-slot:activator="{ on: dialog }">
         <v-btn
           color="red lighten-2"
           dark

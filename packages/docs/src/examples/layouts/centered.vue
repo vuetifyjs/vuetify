@@ -9,7 +9,7 @@
                 <v-toolbar-title>Login form</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-tooltip bottom>
-                  <template #activator="{ on: tooltip }">
+                  <template v-slot:activator="{ on: tooltip }">
                     <v-btn
                       :href="source"
                       icon
@@ -23,7 +23,7 @@
                   <span>Source</span>
                 </v-tooltip>
                 <v-tooltip right>
-                  <template #activator="{ on: tooltip }">
+                  <template v-slot:activator="{ on: tooltip }">
                     <v-btn icon large href="https://codepen.io/johnjleider/pen/wyYVVj" target="_blank" v-on="tooltip">
                       <v-icon large>mdi-codepen</v-icon>
                     </v-btn>

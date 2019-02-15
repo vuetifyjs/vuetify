@@ -6,7 +6,7 @@
   >
     <template v-slot:headerCell="props">
       <v-tooltip bottom>
-        <template #activator="{ on: tooltip }">
+        <template v-slot:activator="{ on: tooltip }">
           <span v-on="tooltip">
             {{ props.header.text }}
           </span>

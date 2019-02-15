@@ -8,7 +8,7 @@
           <v-spacer></v-spacer>
 
           <v-menu bottom left>
-            <template #activator="{ on: menu }">
+            <template v-slot:activator="{ on: menu }">
               <v-btn
                 dark
                 icon
