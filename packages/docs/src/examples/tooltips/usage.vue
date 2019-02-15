@@ -2,14 +2,14 @@
   <div class="text-xs-center d-flex align-center">
     <v-tooltip bottom>
       <template #activator="data">
-        <v-btn v-on="data.on" color="primary" dark>Button</v-btn>
+        <v-btn color="primary" dark v-on="data.on">Button</v-btn>
       </template>
       <span>Tooltip</span>
     </v-tooltip>
 
     <v-tooltip bottom>
       <template #activator="data">
-        <v-icon v-on="data.on" color="primary" dark>home</v-icon>
+        <v-icon color="primary" dark v-on="data.on">home</v-icon>
       </template>
       <span>Tooltip</span>
     </v-tooltip>

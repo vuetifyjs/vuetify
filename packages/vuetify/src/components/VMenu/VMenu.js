@@ -96,7 +96,7 @@ export default Vue.extend({
 
   computed: {
     calculatedLeft () {
-      const menuWidth = Math.max(this.dimensions.content.width, this.dimensions.activator.width)
+      const menuWidth = Math.max(this.dimensions.content.width, parseFloat(this.calculatedMinWidth))
 
       if (!this.auto) return this.calcLeft(menuWidth)
 
@@ -117,10 +117,11 @@ export default Vue.extend({
           : `${this.minWidth}px`
       }
 
-      const minWidth = (
+      const minWidth = Math.min(
         this.dimensions.activator.width +
         this.nudgeWidth +
-        (this.auto ? 16 : 0)
+        (this.auto ? 16 : 0),
+        Math.max(this.pageWidth - 24, 0)
       )
 
       const calculatedMaxWidth = isNaN(parseInt(this.calculatedMaxWidth))

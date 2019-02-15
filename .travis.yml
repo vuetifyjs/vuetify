@@ -69,23 +69,14 @@ jobs:
     - stage: publish-docs-live
       name: 'Publish docs - live'
       before_script: yarn global add now
-      script:
-        - node scripts/set-now-alias.js vuetifyjs.com
-        - now --team=vuetifyjs --token=$NOW_TOKEN --npm
-        - now alias --team=vuetifyjs --token=$NOW_TOKEN
+      script: node scripts/deploy-and-alias.js vuetifyjs.com
 
     - stage: publish-docs-dev
       name: 'Publish docs - dev'
       before_script: yarn global add now
-      script:
-        - node scripts/set-now-alias.js dev.vuetifyjs.com
-        - now --team=vuetifyjs --token=$NOW_TOKEN --npm
-        - now alias --team=vuetifyjs --token=$NOW_TOKEN
+      script: node scripts/deploy-and-alias.js dev.vuetifyjs.com
 
     - stage: publish-docs-next
       name: 'Publish docs - next'
       before_script: yarn global add now
-      script:
-        - node scripts/set-now-alias.js next.vuetifyjs.com
-        - now --team=vuetifyjs --token=$NOW_TOKEN --npm
-        - now alias --team=vuetifyjs --token=$NOW_TOKEN
+      script: node scripts/deploy-and-alias.js next.vuetifyjs.com
