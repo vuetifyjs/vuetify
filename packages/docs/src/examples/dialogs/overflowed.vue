@@ -1,7 +1,9 @@
 <template>
   <v-layout row justify-center>
     <v-dialog v-model="dialog" width="600px">
-      <v-btn slot="activator" color="primary" dark>Open Dialog</v-btn>
+      <template #activator="{ on: dialog }">
+        <v-btn color="primary" dark v-on="{ ...dialog }">Open Dialog</v-btn>
+      </template>
       <v-card>
         <v-card-title>
           <span class="headline">Use Google's location service?</span>
