@@ -96,7 +96,7 @@ export default Vue.extend({
 
   computed: {
     calculatedLeft () {
-      const menuWidth = Math.max(this.dimensions.content.width, this.dimensions.activator.width)
+      const menuWidth = Math.max(this.dimensions.content.width, parseFloat(this.calculatedMinWidth))
 
       if (!this.auto) return this.calcLeft(menuWidth)
 
