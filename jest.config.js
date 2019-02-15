@@ -2,8 +2,7 @@ module.exports = {
   verbose: false,
   roots: [
     '<rootDir>/src',
-    '<rootDir>/test/unit',
-    '<rootDir>/test/integration'
+    '<rootDir>/test/unit'
   ],
   moduleFileExtensions: [
     'ts',

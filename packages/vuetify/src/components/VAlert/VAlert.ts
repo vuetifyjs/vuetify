@@ -103,7 +103,7 @@ export default mixins(
           icon: true
         },
         attrs: {
-          'aria-label': this.$vuetify.t(this.closeLabel)
+          'aria-label': this.$vuetify.lang.t(this.closeLabel)
         },
         on: {
           click: () => (this.isActive = false)

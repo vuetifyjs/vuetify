@@ -1,6 +1,3 @@
-// Libraries
-import Vue from 'vue'
-
 // Components
 import VAlert from '../VAlert'
 
@@ -10,8 +7,12 @@ import {
   Wrapper
 } from '@vue/test-utils'
 
+// Types
+import { ExtractVue } from './../../../util/mixins'
+
 describe('VAlert.ts', () => {
-  let mountFunction: (options?: object) => Wrapper<Vue>
+  type Instance = ExtractVue<typeof VAlert>
+  let mountFunction: (options?: object) => Wrapper<Instance>
 
   beforeEach(() => {
     mountFunction = (options = {}) => {
@@ -19,7 +20,9 @@ describe('VAlert.ts', () => {
         ...options,
         mocks: {
           $vuetify: {
-            t: (val: string) => val
+            lang: {
+              t: (val: string) => val
+            }
           }
         }
       })

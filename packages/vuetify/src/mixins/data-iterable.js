@@ -166,7 +166,7 @@ export default {
       return this.rowsPerPageItems.map(item => {
         return isObject(item)
           ? Object.assign({}, item, {
-            text: this.$vuetify.t(item.text)
+            text: this.$vuetify.lang.t(item.text)
           })
           : { value: item, text: Number(item).toLocaleString(this.$vuetify.lang.current) }
       })
@@ -368,12 +368,12 @@ export default {
     },
     genItems () {
       if (!this.itemsLength && !this.items.length) {
-        const noData = this.$slots['no-data'] || this.$vuetify.t(this.noDataText)
+        const noData = this.$slots['no-data'] || this.$vuetify.lang.t(this.noDataText)
         return [this.genEmptyItems(noData)]
       }
 
       if (!this.filteredItems.length) {
-        const noResults = this.$slots['no-results'] || this.$vuetify.t(this.noResultsText)
+        const noResults = this.$slots['no-results'] || this.$vuetify.lang.t(this.noResultsText)
         return [this.genEmptyItems(noResults)]
       }
 
@@ -393,7 +393,7 @@ export default {
           }
         },
         attrs: {
-          'aria-label': this.$vuetify.t('$vuetify.dataIterator.prevPage')
+          'aria-label': this.$vuetify.lang.t('$vuetify.dataIterator.prevPage')
         }
       }, [this.$createElement(VIcon, this.$vuetify.rtl ? this.nextIcon : this.prevIcon)])
     },
@@ -416,7 +416,7 @@ export default {
           }
         },
         attrs: {
-          'aria-label': this.$vuetify.t('$vuetify.dataIterator.nextPage')
+          'aria-label': this.$vuetify.lang.t('$vuetify.dataIterator.nextPage')
         }
       }, [this.$createElement(VIcon, this.$vuetify.rtl ? this.prevIcon : this.nextIcon)])
     },
@@ -424,10 +424,10 @@ export default {
       return this.$createElement('div', {
         'class': this.actionsSelectClasses
       }, [
-        this.$vuetify.t(this.rowsPerPageText),
+        this.$vuetify.lang.t(this.rowsPerPageText),
         this.$createElement(VSelect, {
           attrs: {
-            'aria-label': this.$vuetify.t(this.rowsPerPageText)
+            'aria-label': this.$vuetify.lang.t(this.rowsPerPageText)
           },
           props: {
             items: this.computedRowsPerPageItems,
@@ -465,7 +465,7 @@ export default {
             pageStop: stop,
             itemsLength: this.itemsLength
           })
-          : this.$vuetify.t('$vuetify.dataIterator.pageText',
+          : this.$vuetify.lang.t('$vuetify.dataIterator.pageText',
             ...([this.pageStart + 1, stop, this.itemsLength].map(n => Number(n).toLocaleString(this.$vuetify.lang.current))))
       }
 
