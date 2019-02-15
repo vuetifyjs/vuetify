@@ -68,11 +68,13 @@
     "valueComparator": "The comparison algorithm used for values. [More info](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/util/helpers.ts)"
   },
   "slots": {
-    "append": "Adds an item after menu content",
-    "item": "Scoped slot for designating the markup for a list-tile",
+    "append": "Components.Inputs.slots.append",
+    "append-outer": "Components.TextFields.slots.append-outer",
+    "prepend": "Components.Inputs.slots.prepend",
+    "prepend-inner": "Components.TextFields.slots.prepend-inner",
+    "append-item": "Adds an item after menu content",
     "no-data": "Mixins.Filterable.slots.noData",
-    "prepend": "Adds an item before menu content",
-    "selection": "Scoped slot for designating the markup for the selected items"
+    "prepend-item": "Adds an item before menu content"
   },
   "scopedSlots": {
     "item": "Define a custom item appearance",
