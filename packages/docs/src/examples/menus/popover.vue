@@ -6,13 +6,15 @@
       :nudge-width="200"
       offset-x
     >
-      <v-btn
-        slot="activator"
-        color="indigo"
-        dark
-      >
-        Menu as Popover
-      </v-btn>
+      <template #activator="{ on: menu }">
+        <v-btn
+          color="indigo"
+          dark
+          v-on="{ ...menu }"
+        >
+          Menu as Popover
+        </v-btn>
+      </template>
 
       <v-card>
         <v-list>

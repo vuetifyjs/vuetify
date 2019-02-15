@@ -9,13 +9,15 @@
       offset-y
       style="max-width: 600px"
     >
-      <v-card
-        slot="activator"
-        class="portrait"
-        img="https://cdn.vuetifyjs.com/images/cards/girl.jpg"
-        height="300"
-        width="600"
-      ></v-card>
+      <template #activator="{ on: menu }">
+        <v-card
+          class="portrait"
+          img="https://cdn.vuetifyjs.com/images/cards/girl.jpg"
+          height="300"
+          width="600"
+          v-on="{ ...menu }"
+        ></v-card>
+      </template>
 
       <v-list>
         <v-list-tile
