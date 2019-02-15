@@ -1,0 +1,65 @@
+{
+  "header": "# Treeview",
+  "headerText": "Компонент `v-treeview` полезен для отображения большого количества вложенных данных.",
+  "examples": {
+    "usage": {
+      "desc": "Основной пример"
+    },
+    "fileExplorer": {
+      "header": "### Scoped slots",
+      "desc": "Используя scoped slots мы можем создать интуитивно понятный файловый менеджер. Кроме слота `prepend`, есть также один для `label`, и `append` слот."
+    },
+    "directory": {
+      "header": "### Асинхронные элементы",
+      "desc": "Вы можете динамически загружать дочерние данные, предоставляя _Promise_ callback для `load-children` prop. Этот callback будет выполнен при первой попытке пользователя расширить элемент у которого есть свойство children, которое является пустым массивом."
+    },
+    "hotspots": {
+      "header": "### Пользовательские иконки выбора",
+      "desc": "Настройте **on**, **off** и **indeterminate** иконки для вашего выбираемого дерева. Комбинируйте с другими продвинутыми возможностями, такими как элементы, загруженные через API."
+    },
+    "humanResources": {
+      "header": "### Поиск директории",
+      "desc": "Легко фильтруйте ваш treeview используя **search** prop. Вы можете легко применить свою собственную функцию фильтрации (если вам нужна чувствительная к регистру или fuzzy фильтрация) установив **filter** prop. Это работает аналогично как [v-autocomplete](/components/autocompletes) компонент."
+    }
+  },
+  "props": {
+    "v-treeview": {
+      "activatable": "Позволяет пользователю пометить узел как активный, нажав на него",
+      "active": "Синхронизируемая prop, позволяющая контролировать, какие узлы активны. Массив состоит из `item-key` каждого активного элемента.",
+      "activeClass": "Класс применяющийся к узлу, когда тот активен",
+      "customFilter": "Пользовательская функция фильтрации",
+      "expandIcon": "Иконка, используемая для обозначения возможности открытия узла",
+      "hoverable": "Applies a hover class when mousing over nodes",
+      "filter": "Custom item filtering function. By default it will use case-insensitive search in item's label.",
+      "indeterminateIcon": "Icon used when node is in an indeterminate state",
+      "itemChildren": "Property on supplied `items` that contains its children",
+      "itemKey": "Property on supplied `items` used to keep track of node state. The value of this property has to be unique among all items.",
+      "itemText": "Property on supplied `items` that contains its label text",
+      "items": "An array of items used to build the treeview",
+      "loadChildren": "A function used when dynamically loading children. If this prop is set, then the supplied function will be run if expanding an item that has a `item-children` property that is an empty array. Supports returning a Promise.",
+      "loadingIcon": "Icon used when node is in a loading state",
+      "multipleActive": "When `true`, allows user to have multiple active nodes at the same time",
+      "offIcon": "Icon used when node is not selected",
+      "onIcon": "Icon used when leaf node is selected or when a branch node is fully selected",
+      "open": "Syncable prop that allows one to control which nodes are open. The array consists of the `item-key` of each open item.",
+      "openAll": "When `true` will cause all branch nodes to be opened when component is mounted",
+      "openOnClick": "When `true` will cause nodes to be opened by clicking anywhere on it, instead of only opening by clicking on expand icon. When using this prop with `activatable` you will be unable to mark nodes with children as active.",
+      "returnObject": "When `true` will make v-model, `active.sync` and `open.sync` return the complete object instead of just the key",
+      "search": "The search model for filtering results",
+      "selectable": "Will render a checkbox next to each node allowing them to be selected",
+      "selectedColor": "The color of the selection checkbox",
+      "transition": "Applies a transition when nodes are opened and closed",
+      "value": "Allows one to control which nodes are selected. The array consists of the `item-key` of each selected item. Is used with `@input` event to allow for `v-model` binding."
+    }
+  },
+  "scopedSlots": {
+    "v-treeview": {
+      "append": "Добавляет контент после label",
+      "label": "Контент для label",
+      "prepend": "Добавляет контент перед label"
+    }
+  },
+  "functions": {
+    "updateAll": "Открывает или закрывает все узлы"
+  }
+}
