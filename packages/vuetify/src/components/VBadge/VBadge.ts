@@ -1,5 +1,5 @@
 // Styles
-import './VBadge.styl'
+import './VBadge.sass'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
