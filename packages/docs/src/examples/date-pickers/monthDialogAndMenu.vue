@@ -14,13 +14,15 @@
         max-width="290px"
         min-width="290px"
       >
-        <v-text-field
-          slot="activator"
-          v-model="date"
-          label="Picker in menu"
-          prepend-icon="event"
-          readonly
-        ></v-text-field>
+        <template #activator="{ on: menu }">
+          <v-text-field
+            v-model="date"
+            label="Picker in menu"
+            prepend-icon="event"
+            readonly
+            v-on="{ ...menu }"
+          ></v-text-field>
+        </template>
         <v-date-picker
           v-model="date"
           type="month"
@@ -44,13 +46,15 @@
         full-width
         width="290px"
       >
-        <v-text-field
-          slot="activator"
-          v-model="date"
-          label="Picker in dialog"
-          prepend-icon="event"
-          readonly
-        ></v-text-field>
+        <template #activator="{ on: dialog }">
+          <v-text-field
+            v-model="date"
+            label="Picker in dialog"
+            prepend-icon="event"
+            readonly
+            v-on="{ ...dialog }"
+          ></v-text-field>
+        </template>
         <v-date-picker v-model="date" type="month" scrollable>
           <v-spacer></v-spacer>
           <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
