@@ -1,0 +1,85 @@
+// Imports
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+
+@media #{$banner-mobile}
+  .v-banner
+    padding: 10px 8px 8px 16px
+    display: flex
+    align-items: center
+
+    +rtl()
+      padding: 10px 16px 8px 8px
+
+    &__icon
+      margin-right: 16px
+      margin-left: 0
+
+      +rtl()
+        margin-right: 0
+        margin-left: 16px
+
+    &__content
+      line-height: 20px
+      font-size: 20px
+
+    &__actions
+      flex-grow: 1
+      display: flex
+      justify-content: flex-end
+      align-items: center
+
+      & > * // Margin between actions
+        margin-left: 8px
+
+    &--two-line
+      padding-top: 24px
+      align-items: flex-start
+      flex-wrap: wrap
+
+      .v-banner__content
+        flex: 1 0 0
+        margin-bottom: 20px
+
+      .v-banner__actions
+        flex: 1 0 100%
+
+@media #{$banner-desktop}
+  .v-banner
+    padding: 8px 8px 8px 0px
+    display: flex
+    align-items: center
+
+    +rtl()
+      padding: 8px 0px 8px 8px
+
+    &__icon
+      margin-right: 0
+      margin-left: 16px
+
+      +rtl()
+        margin-right: 16px
+        margin-left: 0
+
+    &__content
+      line-height: 20px
+      font-size: 20px
+      margin-left: 24px
+      margin-right: 0
+
+      +rtl()
+        margin-right: 24px
+        margin-left: 0
+
+    &__actions
+      flex: 1 0 0
+      align-self: flex-end
+      display: flex
+      justify-content: flex-end
+      align-items: center
+
+      & > * // Margin between actions
+        margin-left: 8px
+
+    &--two-line
+      padding-top: 16px
