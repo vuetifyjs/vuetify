@@ -86,8 +86,10 @@ export default mixins(
       return this.$createElement('div', { staticClass: 'v-banner__content' }, this.$slots.default)
     },
     genActions () {
-      if (this.$slots.actions) {
-        return this.$createElement('div', { staticClass: 'v-banner__actions' }, this.$slots.actions)
+      if (this.$slots.actions || this.$scopedSlots.actions) {
+        return this.$createElement('div', { staticClass: 'v-banner__actions' }, this.$scopedSlots.actions ? this.$scopedSlots.actions({
+          dismiss: () => this.isActive = false
+        }) : this.$slots.actions)
       } else {
         return undefined
       }

@@ -23,6 +23,18 @@
         </v-banner>
       </core-section>
 
+      <core-title>Dismissable</core-title>
+      <core-section>
+        <v-checkbox v-model="v0" label="Visible" />
+        <v-banner v-model="v0" transition="slide-y-transition">
+          No Internet connection
+          <template slot="actions" slot-scope="{ dismiss }">
+            <v-btn text color="accent">Retry</v-btn>
+            <v-btn outline color="error" @click="dismiss"><v-icon left>mdi-close</v-icon>Close</v-btn>
+          </template>
+        </v-banner>
+      </core-section>
+
       <core-title>With icon</core-title>
       <core-section>
         <v-banner icon="mdi-wifi-strength-alert-outline">
@@ -210,6 +222,7 @@
     name: 'Banners',
 
     data: () => ({
+      v0: true,
       v1: true,
       v2: true,
       v3: true,
