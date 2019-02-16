@@ -205,4 +205,44 @@ test('VCarousel.ts', ({ mount }) => {
     expect(wrapper.vm.height).toEqual(200)
     expect(wrapper.find('.v-carousel__item')[0].hasStyle('height', '200px')).toBe(true)
   })
+
+  it('should return correct transition direction when active item changed', async () => {
+    const vm = new Vue()
+    const wrapper = mount(VCarousel, {
+      propsData: {
+        value: 0
+      },
+      slots: {
+        default: [1, 2, 3].map(i => {
+          return {
+            vNode: vm.$createElement(VCarouselItem, { attrs: { src: i.toString() } })
+          }
+        })
+      }
+    })
+
+    // Change by carousel delimiters
+    wrapper.find('.v-carousel__next button')[0].trigger('click')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isReverse).toBe(false)
+    wrapper.find('.v-carousel__prev button')[0].trigger('click')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isReverse).toBe(true)
+
+    // Change by navigation controls
+    wrapper.find('.v-carousel__controls__item')[1].trigger('click')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isReverse).toBe(false)
+    wrapper.find('.v-carousel__controls__item')[0].trigger('click')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isReverse).toBe(true)
+
+    // Change by props
+    wrapper.setProps({ value: 1 })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isReverse).toBe(false)
+    wrapper.setProps({ value: 0 })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isReverse).toBe(true)
+  })
 })
