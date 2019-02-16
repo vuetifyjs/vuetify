@@ -221,10 +221,26 @@ test('VCarousel.ts', ({ mount }) => {
       }
     })
 
+    // Change by carousel delimiters
+    wrapper.find('.v-carousel__next button')[0].trigger('click')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isReverse).toBe(false)
+    wrapper.find('.v-carousel__prev button')[0].trigger('click')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isReverse).toBe(true)
+
+    // Change by navigation controls
+    wrapper.find('.v-carousel__controls__item')[1].trigger('click')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isReverse).toBe(false)
+    wrapper.find('.v-carousel__controls__item')[0].trigger('click')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isReverse).toBe(true)
+
+    // Change by props
     wrapper.setProps({ value: 1 })
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.isReverse).toBe(false)
-
     wrapper.setProps({ value: 0 })
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.isReverse).toBe(true)
