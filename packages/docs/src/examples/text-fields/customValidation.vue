@@ -68,12 +68,12 @@
               v-if="formHasErrors"
               left
             >
-              <template v-slot:activator="{ on: tooltip }">
+              <template v-slot:activator="{ on }">
                 <v-btn
                   icon
                   class="my-0"
-                  v-on="tooltip"
                   @click="resetForm"
+                  v-on="on"
                 >
                   <v-icon>refresh</v-icon>
                 </v-btn>

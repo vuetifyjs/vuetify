@@ -14,7 +14,7 @@
           max-width="290px"
           min-width="290px"
         >
-          <template v-slot:activator="{ on: menu }">
+          <template v-slot:activator="{ on }">
             <v-text-field
               v-model="dateFormatted"
               label="Date"
@@ -22,7 +22,7 @@
               persistent-hint
               prepend-icon="event"
               @blur="date = parseDate(dateFormatted)"
-              v-on="menu"
+              v-on="on"
             ></v-text-field>
           </template>
           <v-date-picker v-model="date" no-title @input="menu1 = false"></v-date-picker>
@@ -42,7 +42,7 @@
           max-width="290px"
           min-width="290px"
         >
-          <template v-slot:activator="{ on: menu }">
+          <template v-slot:activator="{ on }">
             <v-text-field
               v-model="computedDateFormatted"
               label="Date (read only text field)"
@@ -50,7 +50,7 @@
               persistent-hint
               prepend-icon="event"
               readonly
-              v-on="menu"
+              v-on="on"
             ></v-text-field>
           </template>
           <v-date-picker v-model="date" no-title @input="menu2 = false"></v-date-picker>

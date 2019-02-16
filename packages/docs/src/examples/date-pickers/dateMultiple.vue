@@ -19,7 +19,7 @@
         full-width
         min-width="290px"
       >
-        <template v-slot:activator="{ on: menu }">
+        <template v-slot:activator="{ on }">
           <v-combobox
             v-model="dates"
             multiple
@@ -28,7 +28,7 @@
             label="Multiple picker in menu"
             prepend-icon="event"
             readonly
-            v-on="menu"
+            v-on="on"
           ></v-combobox>
         </template>
         <v-date-picker v-model="dates" multiple no-title scrollable>

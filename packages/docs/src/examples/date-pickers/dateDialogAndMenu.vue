@@ -13,13 +13,13 @@
         full-width
         min-width="290px"
       >
-        <template v-slot:activator="{ on: menu }">
+        <template v-slot:activator="{ on }">
           <v-text-field
             v-model="date"
             label="Picker in menu"
             prepend-icon="event"
             readonly
-            v-on="menu"
+            v-on="on"
           ></v-text-field>
         </template>
         <v-date-picker v-model="date" no-title scrollable>
@@ -40,13 +40,13 @@
         full-width
         width="290px"
       >
-        <template v-slot:activator="{ on: dialog }">
+        <template v-slot:activator="{ on }">
           <v-text-field
             v-model="date"
             label="Picker in dialog"
             prepend-icon="event"
             readonly
-            v-on="dialog"
+            v-on="on"
           ></v-text-field>
         </template>
         <v-date-picker v-model="date" scrollable>
@@ -67,13 +67,13 @@
         full-width
         min-width="290px"
       >
-        <template v-slot:activator="{ on: menu }">
+        <template v-slot:activator="{ on }">
           <v-text-field
             v-model="date"
             label="Picker without buttons"
             prepend-icon="event"
             readonly
-            v-on="menu"
+            v-on="on"
           ></v-text-field>
         </template>
         <v-date-picker v-model="date" @input="menu2 = false"></v-date-picker>

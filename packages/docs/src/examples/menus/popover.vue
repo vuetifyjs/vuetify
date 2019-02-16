@@ -6,11 +6,11 @@
       :nudge-width="200"
       offset-x
     >
-      <template v-slot:activator="{ on: menu }">
+      <template v-slot:activator="{ on }">
         <v-btn
           color="indigo"
           dark
-          v-on="menu"
+          v-on="on"
         >
           Menu as Popover
         </v-btn>

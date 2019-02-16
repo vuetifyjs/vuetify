@@ -8,13 +8,13 @@
           full-width
           max-width="290"
         >
-          <template v-slot:activator="{ on: menu }">
+          <template v-slot:activator="{ on }">
             <v-text-field
               :value="computedDateFormattedMomentjs"
               clearable
               label="Formatted with Moment.js"
               readonly
-              v-on="menu"
+              v-on="on"
             ></v-text-field>
           </template>
           <v-date-picker
@@ -31,13 +31,13 @@
           full-width
           max-width="290"
         >
-          <template v-slot:activator="{ on: menu }">
+          <template v-slot:activator="{ on }">
             <v-text-field
               :value="computedDateFormattedDatefns"
               clearable
               label="Formatted with datefns"
               readonly
-              v-on="menu"
+              v-on="on"
             ></v-text-field>
           </template>
           <v-date-picker

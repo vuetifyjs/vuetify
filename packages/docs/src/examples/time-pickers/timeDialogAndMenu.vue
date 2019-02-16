@@ -14,13 +14,13 @@
         max-width="290px"
         min-width="290px"
       >
-        <template v-slot:activator="{ on: menu }">
+        <template v-slot:activator="{ on }">
           <v-text-field
             v-model="time"
             label="Picker in menu"
             prepend-icon="access_time"
             readonly
-            v-on="menu"
+            v-on="on"
           ></v-text-field>
         </template>
         <v-time-picker
@@ -42,13 +42,13 @@
         full-width
         width="290px"
       >
-        <template v-slot:activator="{ on: dialog }">
+        <template v-slot:activator="{ on }">
           <v-text-field
             v-model="time"
             label="Picker in dialog"
             prepend-icon="access_time"
             readonly
-            v-on="dialog"
+            v-on="on"
           ></v-text-field>
         </template>
         <v-time-picker

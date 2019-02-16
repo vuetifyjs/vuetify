@@ -8,11 +8,11 @@
           <v-spacer></v-spacer>
 
           <v-menu bottom left>
-            <template v-slot:activator="{ on: menu }">
+            <template v-slot:activator="{ on }">
               <v-btn
                 dark
                 icon
-                v-on="menu"
+                v-on="on"
               >
                 <v-icon>more_vert</v-icon>
               </v-btn>

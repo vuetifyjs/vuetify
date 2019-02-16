@@ -5,8 +5,8 @@
       <v-btn color="primary" dark @click="dialog2 = true">Open Dialog 2</v-btn>
       <v-btn color="primary" dark @click="dialog3 = true">Open Dialog 3</v-btn>
       <v-menu bottom offset-y>
-        <template v-slot:activator="{ on: menu }">
-          <v-btn v-on="menu">A Menu</v-btn>
+        <template v-slot:activator="{ on }">
+          <v-btn v-on="on">A Menu</v-btn>
         </template>
         <v-list>
           <v-list-tile v-for="(item, i) in items" :key="i" @click="">
@@ -32,8 +32,8 @@
               <v-btn dark flat @click="dialog = false">Save</v-btn>
             </v-toolbar-items>
             <v-menu bottom right offset-y>
-              <template v-slot:activator="{ on: menu }">
-                <v-btn dark icon v-on="menu">
+              <template v-slot:activator="{ on }">
+                <v-btn dark icon v-on="on">
                   <v-icon>more_vert</v-icon>
                 </v-btn>
               </template>
@@ -47,8 +47,8 @@
           <v-card-text>
             <v-btn color="primary" dark @click="dialog2 = !dialog2">Open Dialog 2</v-btn>
             <v-tooltip right>
-              <template v-slot:activator="{ on: tooltip }">
-                <v-btn v-on="tooltip">Tool Tip Activator</v-btn>
+              <template v-slot:activator="{ on }">
+                <v-btn v-on="on">Tool Tip Activator</v-btn>
               </template>
               Tool Tip
             </v-tooltip>
@@ -127,8 +127,8 @@
             <span>Dialog 3</span>
             <v-spacer></v-spacer>
             <v-menu bottom left>
-              <template v-slot:activator="{ on: menu }">
-                <v-btn icon v-on="menu">
+              <template v-slot:activator="{ on }">
+                <v-btn icon v-on="on">
                   <v-icon>more_vert</v-icon>
                 </v-btn>
               </template>

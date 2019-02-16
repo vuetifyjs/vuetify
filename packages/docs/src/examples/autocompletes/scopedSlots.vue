@@ -26,10 +26,10 @@
             left
             transition="slide-y-transition"
           >
-            <template v-slot:activator="{ on: menu }">
+            <template v-slot:activator="{ on }">
               <v-btn
                 icon
-                v-on="menu"
+                v-on="on"
               >
                 <v-icon>more_vert</v-icon>
               </v-btn>

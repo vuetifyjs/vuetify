@@ -5,11 +5,11 @@
       origin="center center"
       transition="scale-transition"
     >
-      <template v-slot:activator="{ on: menu }">
+      <template v-slot:activator="{ on }">
         <v-btn
           color="primary"
           dark
-          v-on="menu"
+          v-on="on"
         >
           Scale Transition
         </v-btn>
@@ -31,12 +31,12 @@
       bottom
       right
     >
-      <template v-slot:activator="{ on: menu }">
+      <template v-slot:activator="{ on }">
         <v-btn
           class="deep-orange"
           color="primary"
           dark
-          v-on="menu"
+          v-on="on"
         >
           Slide X Transition
         </v-btn>
@@ -57,12 +57,12 @@
       transition="slide-y-transition"
       bottom
     >
-      <template v-slot:activator="{ on: menu }">
+      <template v-slot:activator="{ on }">
         <v-btn
           class="purple"
           color="primary"
           dark
-          v-on="menu"
+          v-on="on"
         >
           Slide Y Transition
         </v-btn>

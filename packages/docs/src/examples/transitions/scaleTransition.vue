@@ -1,11 +1,11 @@
 <template>
   <div class="text-xs-center">
     <v-menu transition="scale-transition">
-      <template v-slot:activator="{ on: menu }">
+      <template v-slot:activator="{ on }">
         <v-btn
           dark
           color="primary"
-          v-on="menu"
+          v-on="on"
         >
           Scale Transition
         </v-btn>

@@ -15,12 +15,12 @@
                 full-width
                 offset-x
               >
-                <template v-slot:activator="{ on: menu }">
+                <template v-slot:activator="{ on }">
                   <div
                     v-if="!event.time"
                     v-ripple
                     class="my-event"
-                    v-on="menu"
+                    v-on="on"
                     v-html="event.title"
                   ></div>
                 </template>

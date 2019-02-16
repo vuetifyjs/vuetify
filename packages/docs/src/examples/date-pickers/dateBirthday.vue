@@ -10,13 +10,13 @@
     full-width
     min-width="290px"
   >
-    <template v-slot:activator="{ on: menu }">
+    <template v-slot:activator="{ on }">
       <v-text-field
         v-model="date"
         label="Birthday date"
         prepend-icon="event"
         readonly
-        v-on="menu"
+        v-on="on"
       ></v-text-field>
     </template>
     <v-date-picker

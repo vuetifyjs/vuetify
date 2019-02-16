@@ -1,11 +1,11 @@
 <template>
   <div class="text-xs-center">
     <v-menu transition="slide-x-transition">
-      <template v-slot:activator="{ on: menu }">
+      <template v-slot:activator="{ on }">
         <v-btn
           dark
           color="primary"
-          v-on="menu"
+          v-on="on"
         >
           Slide X Transition
         </v-btn>
@@ -17,11 +17,11 @@
       </v-list>
     </v-menu>
     <v-menu transition="slide-x-reverse-transition">
-      <template v-slot:activator="{ on: menu }">
+      <template v-slot:activator="{ on }">
         <v-btn
           dark
           color="secondary"
-          v-on="menu"
+          v-on="on"
         >
           Slide X Reverse Transition
         </v-btn>

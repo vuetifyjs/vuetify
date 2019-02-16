@@ -106,16 +106,16 @@
       <v-container fluid fill-height>
         <v-layout justify-center align-center>
           <v-tooltip right>
-            <template v-slot:activator="{ on: tooltip }">
-              <v-btn :href="source" icon large target="_blank" v-on="tooltip">
+            <template v-slot:activator="{ on }">
+              <v-btn :href="source" icon large target="_blank" v-on="on">
                 <v-icon large>code</v-icon>
               </v-btn>
             </template>
             <span>Source</span>
           </v-tooltip>
           <v-tooltip right>
-            <template v-slot:activator="{ on: tooltip }">
-              <v-btn icon large href="https://codepen.io/johnjleider/pen/EQOYVV" target="_blank" v-on="tooltip">
+            <template v-slot:activator="{ on }">
+              <v-btn icon large href="https://codepen.io/johnjleider/pen/EQOYVV" target="_blank" v-on="on">
                 <v-icon large>mdi-codepen</v-icon>
               </v-btn>
             </template>
