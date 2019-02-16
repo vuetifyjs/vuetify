@@ -179,7 +179,7 @@
       <core-title>Visibility control</core-title>
       <core-section>
         <v-checkbox v-model="v3" label="Visible" />
-        <v-banner two-line v-model="v3" icon="mdi-wifi-strength-alert-outline">
+        <v-banner v-model="v3" two-line icon="mdi-wifi-strength-alert-outline">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent cursus nec sem id malesuada.
           Curabitur lacinia sem et turpis euismod, eget elementum ex pretium.
           <template slot="actions">
@@ -192,7 +192,7 @@
       <core-title>Visibility control + transition</core-title>
       <core-section>
         <v-checkbox v-model="v4" label="Visible" />
-        <v-banner two-line transition="slide-y-transition" v-model="v4" icon="mdi-wifi-strength-alert-outline">
+        <v-banner v-model="v4" two-line transition="slide-y-transition" icon="mdi-wifi-strength-alert-outline">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent cursus nec sem id malesuada.
           Curabitur lacinia sem et turpis euismod, eget elementum ex pretium.
           <template slot="actions">
