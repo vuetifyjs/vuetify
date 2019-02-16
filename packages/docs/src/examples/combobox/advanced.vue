@@ -23,9 +23,7 @@
         </v-chip>
       </v-list-tile>
     </template>
-    <template
-      v-slot:selection="{ item, parent, selected }"
-    >
+    <template v-slot:selection="{ item, parent, selected }">
       <v-chip
         v-if="item === Object(item)"
         :color="`${item.color} lighten-3`"
