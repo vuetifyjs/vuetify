@@ -130,4 +130,27 @@ describe('VBanner.ts', () => {
     wrapper.vm.toggle()
     expect(wrapper.vm.isActive).toBeFalsy()
   })
+
+  it('should be dismissable', () => {
+    const wrapper = mountFunction({
+      slots: {
+        default: 'Hello, World!'
+      },
+      scopedSlots: {
+        actions (props) {
+          return this.$createElement('div', {
+            on: {
+              click: props.dismiss
+            },
+            staticClass: 'test'
+          })
+        }
+      }
+    })
+
+    const test = wrapper.find('.test')
+    expect(wrapper.vm.isActive).toBeTruthy()
+    test.trigger('click')
+    expect(wrapper.vm.isActive).toBeFalsy()
+  })
 })
