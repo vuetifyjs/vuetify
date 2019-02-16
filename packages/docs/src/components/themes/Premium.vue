@@ -49,10 +49,7 @@
                 right
               >
                 <template #activator="{ on: menu }">
-                  <v-tooltip
-                    bottom
-                    v-on="{ ...menu }"
-                  >
+                  <v-tooltip bottom>
                     <template #activator="{ on: tooltip }">
                       <v-btn
                         :href="template.demoUrl.length === 1 ? `${template.demoUrl[0]}?ref=vuetifyjs.com` : undefined"
@@ -60,7 +57,7 @@
                         target="_blank"
                         rel="noopener"
                         aria-label="View Demo"
-                        v-on="{ ...tooltip }"
+                        v-on="{ ...tooltip, ...menu }"
                       >
                         <v-icon color="primary">mdi-eye</v-icon>
                       </v-btn>
