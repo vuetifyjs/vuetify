@@ -21,7 +21,7 @@
               </v-tooltip>
             </template>
             <template v-slot:append>
-              <v-fade-transition>
+              <v-fade-transition leave-absolute>
                 <v-progress-circular
                   v-if="loading"
                   size="24"
