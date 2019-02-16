@@ -16,7 +16,16 @@ describe('VBanner.ts', () => {
 
   beforeEach(() => {
     mountFunction = (options = {}) => {
-      return mount(VBanner, options)
+      return mount(VBanner, {
+        ...options,
+        mocks: {
+          $vuetify: {
+            breakpoint: {
+              width: 1000
+            }
+          }
+        }
+      })
     }
   })
 
@@ -152,5 +161,22 @@ describe('VBanner.ts', () => {
     expect(wrapper.vm.isActive).toBeTruthy()
     test.trigger('click')
     expect(wrapper.vm.isActive).toBeFalsy()
+  })
+
+  it('should be responsive', () => {
+    const wrapper = mount(VBanner, {
+      slots: {
+        default: 'Hello, World!'
+      },
+      mocks: {
+        $vuetify: {
+          breakpoint: {
+            width: 900
+          }
+        }
+      }
+    })
+
+    expect(wrapper.classes('v-banner--mobile')).toBeTruthy()
   })
 })

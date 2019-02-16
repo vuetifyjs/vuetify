@@ -12,6 +12,7 @@ import Transitionable from '../../mixins/transitionable'
 // Types
 import { VNode, VNodeData, VNodeChildren } from 'vue/types'
 import mixins from '../../util/mixins'
+import { PropValidator } from 'vue/types/options'
 
 /* @vue/component */
 export default mixins(
@@ -30,7 +31,11 @@ export default mixins(
     twoLine: {
       type: Boolean,
       default: false
-    }
+    },
+    mobileBreakPoint: {
+      type: [Number, String],
+      default: 960
+    } as PropValidator<String | Number>
   },
 
   computed: {
@@ -38,8 +43,12 @@ export default mixins(
       return {
         ...VSheet.options.computed.classes.call(this),
         'v-banner--one-line': !this.twoLine,
-        'v-banner--two-line': this.twoLine
+        'v-banner--two-line': this.twoLine,
+        'v-banner--mobile': this.isMobile
       }
+    },
+    isMobile (): boolean {
+      return this.$vuetify.breakpoint.width < Number(this.mobileBreakPoint)
     }
   },
 
