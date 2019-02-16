@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VBanner.ts should render component with actions 1`] = `
+
+<div class="v-banner v-sheet theme--light v-banner--one-line">
+  <div class="v-banner__content">
+    Hello, World!
+  </div>
+  <div class="v-banner__actions">
+    <div>
+      <button>
+        OK
+      </button>
+      <button>
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VBanner.ts should render component with content 1`] = `
+
+<div class="v-banner v-sheet theme--light v-banner--one-line">
+  <div class="v-banner__content">
+    Hello, World!
+  </div>
+</div>
+
+`;
+
+exports[`VBanner.ts should render component with icon 1`] = `
+
+<div class="v-banner v-sheet theme--light v-banner--one-line">
+  <div class="v-banner__icon">
+    <i aria-hidden="true"
+       class="v-icon mdi mdi-plus theme--light"
+       style="font-size: 40px;"
+    >
+    </i>
+  </div>
+  <div class="v-banner__content">
+    Hello, World!
+  </div>
+</div>
+
+`;
+
+exports[`VBanner.ts should render component with icon slot 1`] = `
+
+<div class="v-banner v-sheet theme--light v-banner--one-line">
+  <div class="v-banner__icon">
+    <span>
+      icon
+    </span>
+  </div>
+  <div class="v-banner__content">
+    Hello, World!
+  </div>
+</div>
+
+`;

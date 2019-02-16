@@ -116,8 +116,10 @@ export default mixins(
   render (h): VNode {
     const render = this.genBanner()
 
+    /* istanbul ignore next */
     if (!this.transition) return render
 
+    /* istanbul ignore next */
     return h('transition', {
       props: {
         name: this.transition,
