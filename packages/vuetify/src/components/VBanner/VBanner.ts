@@ -30,10 +30,6 @@ export default mixins(
     twoLine: {
       type: Boolean,
       default: false
-    },
-    threeLine: {
-      type: Boolean,
-      default: false
     }
   },
 
@@ -41,9 +37,8 @@ export default mixins(
     classes (): object {
       return {
         ...VSheet.options.computed.classes.call(this),
-        'v-banner--one-line': !(this.twoLine || this.threeLine),
-        'v-banner--two-line': this.twoLine,
-        'v-banner--three-line': this.threeLine
+        'v-banner--one-line': !this.twoLine,
+        'v-banner--two-line': this.twoLine
       }
     }
   },
