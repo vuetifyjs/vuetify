@@ -18,7 +18,10 @@
               I'm a tooltip
             </v-tooltip>
 
-            <v-fade-transition slot="append">
+            <v-fade-transition
+              slot="append"
+              leave-absolute
+            >
               <v-progress-circular
                 v-if="loading"
                 size="24"

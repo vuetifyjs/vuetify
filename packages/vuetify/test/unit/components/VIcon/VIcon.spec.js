@@ -165,6 +165,16 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.element.className).toBe('v-icon fa fa-lock theme--light primary--text')
   })
 
+  it('should be a link', () => {
+    let clickHandler = jest.fn()
+    const context = functionalContext({ on: { click: clickHandler } }, 'add')
+    const wrapper = mount(VIcon, context)
+    wrapper.trigger('click')
+
+    expect(wrapper.element.classList).toContain('v-icon--link')
+    expect(clickHandler).toBeCalled()
+  })
+
   describe('for component icon', () => {
     const getTestComponent = () => ({
       props: ['name'],
@@ -236,6 +246,16 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
       const wrapper = mount(VIcon, context)
 
       expect(wrapper.element.classList).toContain('v-icon--right')
+    })
+
+    it('should be a link', () => {
+      let clickHandler = jest.fn()
+      const context = functionalContext({ on: { click: clickHandler } }, '$vuetify.icons.testIcon')
+      const wrapper = mount(VIcon, context)
+      wrapper.trigger('click')
+  
+      expect(wrapper.element.classList).toContain('v-icon--link')
+      expect(clickHandler).toBeCalled()
     })
 
     it('should trim name', () => {
