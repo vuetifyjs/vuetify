@@ -1,8 +1,11 @@
 // Styles
 import './VBanner.sass'
 
-// Components
+// Extensions
 import VSheet from '../VSheet'
+
+// Components
+import VAvatar from '../VAvatar'
 import VIcon from '../VIcon'
 
 // Mixins
@@ -10,7 +13,7 @@ import Toggleable from '../../mixins/toggleable'
 import Transitionable from '../../mixins/transitionable'
 
 // Types
-import { VNode, VNodeData, VNodeChildren } from 'vue/types'
+import { VNode } from 'vue/types'
 import mixins from '../../util/mixins'
 import { PropValidator } from 'vue/types/options'
 
@@ -24,28 +27,36 @@ export default mixins(
 
   props: {
     icon: String,
-    value: {
-      type: Boolean,
-      default: true
-    },
-    twoLine: {
-      type: Boolean,
-      default: false
-    },
+    iconColor: String,
     mobileBreakPoint: {
       type: [Number, String],
       default: 960
-    } as PropValidator<String | Number>
+    } as PropValidator<string | number>,
+    tile: {
+      type: Boolean,
+      default: true
+    },
+    twoLine: Boolean,
+    value: {
+      type: Boolean,
+      default: true
+    }
   },
 
   computed: {
     classes (): object {
       return {
         ...VSheet.options.computed.classes.call(this),
-        'v-banner--one-line': !this.twoLine,
-        'v-banner--two-line': this.twoLine,
-        'v-banner--mobile': this.isMobile
+        'v-banner--has-icon': this.hasIcon,
+        'v-banner--is-mobile': this.isMobile,
+        'v-banner--two-line': this.twoLine
       }
+    },
+    hasActions (): boolean {
+      return Boolean(this.$slots.actions || this.$scopedSlots.actions)
+    },
+    hasIcon (): boolean {
+      return Boolean(this.icon || this.$slots.icon)
     },
     isMobile (): boolean {
       return this.$vuetify.breakpoint.width < Number(this.mobileBreakPoint)
@@ -61,45 +72,50 @@ export default mixins(
       this.$emit('click:icon', e)
     },
     genIcon () {
+      if (!this.hasIcon) return undefined
+
       let content
 
       if (this.icon) {
         content = this.$createElement(VIcon, {
           props: {
-            size: 40
+            color: this.iconColor,
+            size: 28
           }
         }, [ this.icon ])
       } else {
         content = this.$slots.icon
       }
 
-      if (content) {
-        return this.$createElement('div', {
-          staticClass: 'v-banner__icon',
-          on: {
-            click: this.iconClick
-          }
-        }, [
-          content
-        ])
-      } else {
-        return undefined
-      }
+      return this.$createElement(VAvatar, {
+        staticClass: 'v-banner__icon',
+        props: {
+          color: this.color,
+          size: 40
+        },
+        on: {
+          click: this.iconClick
+        }
+      }, [content])
     },
     genContent () {
-      return this.$createElement('div', { staticClass: 'v-banner__content' }, this.$slots.default)
+      return this.$createElement('div', {
+        staticClass: 'v-banner__content'
+      }, this.$slots.default)
     },
     genActions () {
-      if (this.$slots.actions || this.$scopedSlots.actions) {
-        return this.$createElement('div', { staticClass: 'v-banner__actions' }, this.$scopedSlots.actions ? this.$scopedSlots.actions({
-          dismiss: () => this.isActive = false
-        }) : this.$slots.actions)
-      } else {
-        return undefined
-      }
+      if (!this.hasActions) return undefined
+
+      const children = this.$scopedSlots.actions ? this.$scopedSlots.actions({
+        dismiss: () => this.isActive = false
+      }) : this.$slots.actions
+
+      return this.$createElement('div', {
+        staticClass: 'v-banner__actions'
+      }, children)
     },
     genBanner () {
-      const data: VNodeData = {
+      return this.$createElement('div', {
         staticClass: 'v-banner',
         class: this.classes,
         style: this.styles,
@@ -107,25 +123,26 @@ export default mixins(
           name: 'show',
           value: this.isActive
         }]
-      }
-
-      const children: VNodeChildren = [
-        this.genIcon(),
-        this.genContent(),
+      }, [
+        this.genWrapper(),
         this.genActions()
-      ]
-
-      return this.$createElement('div', data, children)
+      ])
+    },
+    genWrapper () {
+      return this.$createElement('div', {
+        staticClass: 'v-banner__wrapper'
+      }, [
+        this.genIcon(),
+        this.genContent()
+      ])
     }
   },
 
   render (h): VNode {
     const render = this.genBanner()
 
-    /* istanbul ignore next */
     if (!this.transition) return render
 
-    /* istanbul ignore next */
     return h('transition', {
       props: {
         name: this.transition,

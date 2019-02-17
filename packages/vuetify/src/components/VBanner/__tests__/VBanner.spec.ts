@@ -177,6 +177,6 @@ describe('VBanner.ts', () => {
       }
     })
 
-    expect(wrapper.classes('v-banner--mobile')).toBeTruthy()
+    expect(wrapper.classes('v-banner--is-mobile')).toBeTruthy()
   })
 })
