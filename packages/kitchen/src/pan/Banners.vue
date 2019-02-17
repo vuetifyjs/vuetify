@@ -17,8 +17,8 @@
         <v-banner single-line>
           No Internet connection
           <template slot="actions">
-            <v-btn text color="accent">Retry</v-btn>
-            <v-btn outline color="error"><v-icon left>mdi-settings</v-icon>Settings</v-btn>
+            <v-btn text color="primary">Dismiss</v-btn>
+            <v-btn text color="primary">Retry</v-btn>
           </template>
         </v-banner>
       </core-section>
@@ -28,9 +28,9 @@
         <v-checkbox v-model="v0" label="Visible" />
         <v-banner v-model="v0" single-line transition="slide-y-transition">
           No Internet connection
-          <template slot="actions" slot-scope="{ dismiss }">
-            <v-btn text color="accent">Retry</v-btn>
-            <v-btn outline color="error" @click="dismiss"><v-icon left>mdi-close</v-icon>Close</v-btn>
+          <template v-slot:actions="{ dismiss }">
+            <v-btn text color="primary" @click="dismiss">Dismiss</v-btn>
+            <v-btn text color="primary">Retry</v-btn>
           </template>
         </v-banner>
       </core-section>
@@ -55,7 +55,7 @@
         <v-banner single-line icon="mdi-wifi-strength-alert-outline">
           No Internet connection
           <template slot="actions">
-            <v-btn text color="accent">Retry</v-btn>
+            <v-btn text color="primary">Retry</v-btn>
           </template>
         </v-banner>
       </core-section>
@@ -64,9 +64,9 @@
       <core-section>
         <v-banner single-line icon="mdi-wifi-strength-alert-outline">
           No Internet connection
-          <template slot="actions">
-            <v-btn text color="accent">Retry</v-btn>
-            <v-btn outline color="error"><v-icon left>mdi-settings</v-icon>Settings</v-btn>
+          <template v-slot:actions>
+            <v-btn text color="primary">Dismiss</v-btn>
+            <v-btn text color="primary">Retry</v-btn>
           </template>
         </v-banner>
       </core-section>
@@ -92,7 +92,7 @@
         <v-banner v-model="v1" single-line icon="mdi-wifi-strength-alert-outline">
           No Internet connection
           <template slot="actions">
-            <v-btn text color="accent">Retry</v-btn>
+            <v-btn text color="primary">Retry</v-btn>
           </template>
         </v-banner>
       </core-section>
@@ -103,7 +103,7 @@
         <v-banner v-model="v2" single-line transition="slide-y-transition" icon="mdi-wifi-strength-alert-outline">
           No Internet connection
           <template slot="actions">
-            <v-btn text color="accent">Retry</v-btn>
+            <v-btn text color="primary">Retry</v-btn>
           </template>
         </v-banner>
       </core-section>
@@ -132,9 +132,9 @@
           <v-icon slot="icon" size="40" color="warning">mdi-wifi-strength-alert-outline</v-icon>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent cursus nec sem id malesuada.
           Curabitur lacinia sem et turpis euismod, eget elementum ex pretium.
-          <template slot="actions">
-            <v-btn text color="accent">Retry</v-btn>
-            <v-btn outline color="error"><v-icon left>mdi-settings</v-icon>Settings</v-btn>
+          <template v-slot:actions>
+            <v-btn text color="primary">Dismiss</v-btn>
+            <v-btn text color="primary">Retry</v-btn>
           </template>
         </v-banner>
       </core-section>
@@ -144,9 +144,9 @@
         <v-banner>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent cursus nec sem id malesuada.
           Curabitur lacinia sem et turpis euismod, eget elementum ex pretium.
-          <template slot="actions">
-            <v-btn text color="accent">Retry</v-btn>
-            <v-btn outline color="error"><v-icon left>mdi-settings</v-icon>Settings</v-btn>
+          <template v-slot:actions>
+            <v-btn text color="primary">Dismiss</v-btn>
+            <v-btn text color="primary">Retry</v-btn>
           </template>
         </v-banner>
       </core-section>
@@ -156,9 +156,9 @@
         <v-banner icon="mdi-wifi-strength-alert-outline">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent cursus nec sem id malesuada.
           Curabitur lacinia sem et turpis euismod, eget elementum ex pretium.
-          <template slot="actions">
-            <v-btn text color="accent">Retry</v-btn>
-            <v-btn outline color="error"><v-icon left>mdi-settings</v-icon>Settings</v-btn>
+          <template v-slot:actions>
+            <v-btn text color="primary">Dismiss</v-btn>
+            <v-btn text color="primary">Retry</v-btn>
           </template>
         </v-banner>
       </core-section>
@@ -168,9 +168,9 @@
         <v-banner icon="mdi-wifi-strength-alert-outline" @click:icon="alert">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent cursus nec sem id malesuada.
           Curabitur lacinia sem et turpis euismod, eget elementum ex pretium.
-          <template slot="actions">
-            <v-btn text color="accent">Retry</v-btn>
-            <v-btn outline color="error"><v-icon left>mdi-settings</v-icon>Settings</v-btn>
+          <template v-slot:actions>
+            <v-btn text color="primary">Dismiss</v-btn>
+            <v-btn text color="primary">Retry</v-btn>
           </template>
         </v-banner>
       </core-section>
@@ -181,9 +181,9 @@
           <v-icon slot="icon" size="40" color="warning">mdi-wifi-strength-alert-outline</v-icon>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent cursus nec sem id malesuada.
           Curabitur lacinia sem et turpis euismod, eget elementum ex pretium.
-          <template slot="actions">
-            <v-btn text color="accent">Retry</v-btn>
-            <v-btn outline color="error"><v-icon left>mdi-settings</v-icon>Settings</v-btn>
+          <template v-slot:actions>
+            <v-btn text color="primary">Dismiss</v-btn>
+            <v-btn text color="primary">Retry</v-btn>
           </template>
         </v-banner>
       </core-section>
@@ -194,9 +194,9 @@
         <v-banner v-model="v3" icon="mdi-wifi-strength-alert-outline">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent cursus nec sem id malesuada.
           Curabitur lacinia sem et turpis euismod, eget elementum ex pretium.
-          <template slot="actions">
-            <v-btn text color="accent">Retry</v-btn>
-            <v-btn outline color="error"><v-icon left>mdi-settings</v-icon>Settings</v-btn>
+          <template v-slot:actions="{ dismiss }">
+            <v-btn text color="primary" @click="dismiss">Dismiss</v-btn>
+            <v-btn text color="primary">Retry</v-btn>
           </template>
         </v-banner>
       </core-section>
@@ -207,9 +207,9 @@
         <v-banner v-model="v4" transition="slide-y-transition" icon="mdi-wifi-strength-alert-outline">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent cursus nec sem id malesuada.
           Curabitur lacinia sem et turpis euismod, eget elementum ex pretium.
-          <template slot="actions">
-            <v-btn text color="accent">Retry</v-btn>
-            <v-btn outline color="error"><v-icon left>mdi-settings</v-icon>Settings</v-btn>
+          <template v-slot:actions="{ dismiss }">
+            <v-btn text color="primary" @click="dismiss">Dismiss</v-btn>
+            <v-btn text color="primary">Retry</v-btn>
           </template>
         </v-banner>
       </core-section>
