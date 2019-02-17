@@ -312,16 +312,14 @@
         Scoped slots
       </core-title>
       <core-section center>
-        <v-rating value="2">
-          <template #item="props">
-            <v-icon
-              :color="props.isFilled ? colors[props.index] : 'grey lighten-1'"
-              large
-              @click="props.click"
-            >
-              {{ props.isFilled ? 'mdi-star-circle' : 'mdi-circle-outline' }}
-            </v-icon>
-          </template>
+        <v-rating value="2" #item="props">
+          <v-icon
+            :color="props.isFilled ? colors[props.index] : 'grey lighten-1'"
+            large
+            @click="props.click"
+          >
+            {{ props.isFilled ? 'mdi-star-circle' : 'mdi-circle-outline' }}
+          </v-icon>
         </v-rating>
       </core-section>
 

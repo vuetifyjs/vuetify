@@ -14,26 +14,24 @@
                 xs12
                 md4
               >
-                <v-item>
-                  <template #default="{ active, toggle }">
-                    <v-card
-                      :color="active ? 'primary' : ''"
-                      class="d-flex align-center"
-                      dark
-                      height="200"
-                      style="user-select: none;"
-                      @click="toggle"
-                    >
-                      <v-scroll-y-transition>
-                        <div
-                          v-if="active"
-                          class="display-3 text-xs-center"
-                        >
-                          Active
-                        </div>
-                      </v-scroll-y-transition>
-                    </v-card>
-                  </template>
+                <v-item #default="{ active, toggle }">
+                  <v-card
+                    :color="active ? 'primary' : ''"
+                    class="d-flex align-center"
+                    dark
+                    height="200"
+                    style="user-select: none;"
+                    @click="toggle"
+                  >
+                    <v-scroll-y-transition>
+                      <div
+                        v-if="active"
+                        class="display-3 text-xs-center"
+                      >
+                        Active
+                      </div>
+                    </v-scroll-y-transition>
+                  </v-card>
                 </v-item>
               </v-flex>
             </v-layout>
@@ -52,26 +50,24 @@
                 xs12
                 md4
               >
-                <v-item>
-                  <template #default="{ active, toggle }">
-                    <v-card
-                      :color="active ? 'primary' : ''"
-                      class="d-flex align-center"
-                      dark
-                      height="200"
-                      style="user-select: none;"
-                      @click="toggle"
-                    >
-                      <v-scroll-y-transition>
-                        <div
-                          v-if="active"
-                          class="display-3 text-xs-center"
-                        >
-                          Active
-                        </div>
-                      </v-scroll-y-transition>
-                    </v-card>
-                  </template>
+                <v-item #default="{ active, toggle }">
+                  <v-card
+                    :color="active ? 'primary' : ''"
+                    class="d-flex align-center"
+                    dark
+                    height="200"
+                    style="user-select: none;"
+                    @click="toggle"
+                  >
+                    <v-scroll-y-transition>
+                      <div
+                        v-if="active"
+                        class="display-3 text-xs-center"
+                      >
+                        Active
+                      </div>
+                    </v-scroll-y-transition>
+                  </v-card>
                 </v-item>
               </v-flex>
             </v-layout>

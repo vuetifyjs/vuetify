@@ -14,17 +14,14 @@
           activatable
           item-key="name"
           open-on-click
+          #prepend="{ item, open }"
         >
-          <template
-            #prepend="{ item, open }"
-          >
-            <v-icon v-if="!item.file">
-              {{ open ? 'mdi-folder-open' : 'mdi-folder' }}
-            </v-icon>
-            <v-icon v-else>
-              {{ files1[item.file] }}
-            </v-icon>
-          </template>
+          <v-icon v-if="!item.file">
+            {{ open ? 'mdi-folder-open' : 'mdi-folder' }}
+          </v-icon>
+          <v-icon v-else>
+            {{ files1[item.file] }}
+          </v-icon>
         </v-treeview>
       </core-section>
 
@@ -51,15 +48,14 @@
                 class="grey lighten-5"
                 open-on-click
                 transition
+                #prepend="{ item, active }"
               >
-                <template #prepend="{ item, active }">
-                  <v-icon
-                    v-if="!item.children"
-                    :color="active ? 'primary' : ''"
-                  >
-                    mdi-account
-                  </v-icon>
-                </template>
+                <v-icon
+                  v-if="!item.children"
+                  :color="active ? 'primary' : ''"
+                >
+                  mdi-account
+                </v-icon>
               </v-treeview>
             </v-flex>
             <v-flex

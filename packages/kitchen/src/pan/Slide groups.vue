@@ -13,18 +13,17 @@
             <v-slide-item
               v-for="n in 25"
               :key="n"
+              #default="{ active, toggle }"
             >
-              <template #default="{ active, toggle }">
-                <v-btn
-                  :input-value="active"
-                  active-class="purple white--text"
-                  depressed
-                  rounded
-                  @click="toggle"
-                >
-                  Options {{ n }}
-                </v-btn>
-              </template>
+              <v-btn
+                :input-value="active"
+                active-class="purple white--text"
+                depressed
+                rounded
+                @click="toggle"
+              >
+                Options {{ n }}
+              </v-btn>
             </v-slide-item>
           </v-slide-group>
         </v-sheet>
@@ -40,18 +39,17 @@
             <v-slide-item
               v-for="n in 25"
               :key="n"
+              #default="{ active, toggle }"
             >
-              <template #default="{ active, toggle }">
-                <v-btn
-                  :input-value="active"
-                  active-class="purple white--text"
-                  depressed
-                  rounded
-                  @click="toggle"
-                >
-                  Options {{ n }}
-                </v-btn>
-              </template>
+              <v-btn
+                :input-value="active"
+                active-class="purple white--text"
+                depressed
+                rounded
+                @click="toggle"
+              >
+                Options {{ n }}
+              </v-btn>
             </v-slide-item>
           </v-slide-group>
         </v-sheet>
@@ -71,18 +69,17 @@
             <v-slide-item
               v-for="n in 25"
               :key="n"
+              #default="{ active, toggle }"
             >
-              <template #default="{ active, toggle }">
-                <v-btn
-                  :input-value="active"
-                  active-class="purple white--text"
-                  depressed
-                  rounded
-                  @click="toggle"
-                >
-                  Options {{ n }}
-                </v-btn>
-              </template>
+              <v-btn
+                :input-value="active"
+                active-class="purple white--text"
+                depressed
+                rounded
+                @click="toggle"
+              >
+                Options {{ n }}
+              </v-btn>
             </v-slide-item>
           </v-slide-group>
         </v-sheet>
@@ -101,16 +98,15 @@
             <v-slide-item
               v-for="n in 25"
               :key="n"
+              #default="{ toggle }"
             >
-              <template #default="{ toggle }">
-                <v-btn
-                  depressed
-                  rounded
-                  @click="toggle"
-                >
-                  Options {{ n }}
-                </v-btn>
-              </template>
+              <v-btn
+                depressed
+                rounded
+                @click="toggle"
+              >
+                Options {{ n }}
+              </v-btn>
             </v-slide-item>
           </v-slide-group>
         </v-sheet>
@@ -129,18 +125,17 @@
             <v-slide-item
               v-for="n in 25"
               :key="n"
+              #default="{ active, toggle }"
             >
-              <template #default="{ active, toggle }">
-                <v-btn
-                  :input-value="active"
-                  active-class="purple white--text"
-                  depressed
-                  rounded
-                  @click="toggle"
-                >
-                  Options {{ n }}
-                </v-btn>
-              </template>
+              <v-btn
+                :input-value="active"
+                active-class="purple white--text"
+                depressed
+                rounded
+                @click="toggle"
+              >
+                Options {{ n }}
+              </v-btn>
             </v-slide-item>
           </v-slide-group>
         </v-sheet>

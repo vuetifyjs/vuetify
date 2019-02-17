@@ -575,12 +575,10 @@
         Label slot
       </core-title>
       <core-section>
-        <v-text-field>
-          <template #label>
-            What about <strong>icon</strong> here? <v-icon style="vertical-align: middle">
-              mdi-file-find
-            </v-icon>
-          </template>
+        <v-text-field #label>
+          What about <strong>icon</strong> here? <v-icon style="vertical-align: middle">
+            mdi-file-find
+          </v-icon>
         </v-text-field>
       </core-section>
 
@@ -1107,9 +1105,9 @@
           password
           placeholder="Start typing..."
           loading
+          #progress
         >
           <v-progress-linear
-            #progress
             :value="progress"
             :color="color"
             height="7"

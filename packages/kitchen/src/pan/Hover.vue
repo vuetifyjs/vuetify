@@ -7,12 +7,10 @@
         Simple hover
       </core-title>
       <core-section>
-        <v-hover>
-          <template #default="{ hover }">
-            <v-sheet>
-              {{ hover }}
-            </v-sheet>
-          </template>
+        <v-hover #default="{ hover }">
+          <v-sheet>
+            {{ hover }}
+          </v-sheet>
         </v-hover>
       </core-section>
 
@@ -20,12 +18,10 @@
         Disabled
       </core-title>
       <core-section>
-        <v-hover disabled>
-          <template #default="{ hover }">
-            <v-sheet>
-              {{ hover }}
-            </v-sheet>
-          </template>
+        <v-hover disabled #default="{ hover }">
+          <v-sheet>
+            {{ hover }}
+          </v-sheet>
         </v-hover>
       </core-section>
 
@@ -36,12 +32,11 @@
         <v-hover
           open-delay="100"
           close-delay="100"
+          #default="{ hover }"
         >
-          <template #default="{ hover }">
-            <v-sheet>
-              {{ hover }}
-            </v-sheet>
-          </template>
+          <v-sheet>
+            {{ hover }}
+          </v-sheet>
         </v-hover>
       </core-section>
     </v-layout>
