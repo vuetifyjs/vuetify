@@ -161,7 +161,7 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
     },
     checkPath (e: WheelEvent) {
       const path = e.path || this.composedPath(e)
-      const delta = e.deltaY || -e.wheelDelta
+      const delta = e.deltaY
 
       if (e.type === 'keydown' && path[0] === document.body) {
         const dialog = this.$refs.dialog

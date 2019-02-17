@@ -28,7 +28,10 @@ function unbind (el: HTMLElement) {
   delete el._onResize
 }
 
-export default {
+const resize = {
   inserted,
   unbind
 }
+
+export { resize }
+export default resize

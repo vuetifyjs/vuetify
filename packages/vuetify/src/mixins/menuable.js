@@ -177,10 +177,10 @@ export default Vue.extend({
       }
     },
     activate () {},
-    calcLeft () {
+    calcLeft (menuWidth) {
       return `${this.isAttached
         ? this.computedLeft
-        : this.calcXOverflow(this.computedLeft)
+        : this.calcXOverflow(this.computedLeft, menuWidth)
       }px`
     },
     calcTop () {
@@ -189,27 +189,14 @@ export default Vue.extend({
         : this.calcYOverflow(this.computedTop)
       }px`
     },
-    calcXOverflow (left) {
-      const parsedMaxWidth = isNaN(parseInt(this.maxWidth))
-        ? 0
-        : parseInt(this.maxWidth)
-      const innerWidth = this.getInnerWidth()
-      const maxWidth = Math.max(
-        this.dimensions.content.width,
-        parsedMaxWidth
-      )
-      const totalWidth = left + this.dimensions.activator.width
-      const availableWidth = totalWidth - innerWidth
+    calcXOverflow (left, menuWidth) {
+      const xOverflow = left + menuWidth - this.getInnerWidth() + 12
 
-      if ((!this.left || this.right) && availableWidth > 0) {
-        left = (
-          innerWidth -
-          maxWidth -
-          (innerWidth > 600 ? 30 : 12) // Account for scrollbar
-        )
+      if ((!this.left || this.right) && xOverflow > 0) {
+        left = Math.max(left - xOverflow, 0)
+      } else {
+        left = Math.max(left, 12)
       }
-
-      if (left < 0) left = 12
 
       return left + this.getOffsetLeft()
     },
@@ -285,6 +272,12 @@ export default Vue.extend({
 
       if (this.activatedBy) return this.activatedBy
 
+      if (this.activatorNode) {
+        const activator = Array.isArray(this.activatorNode) ? this.activatorNode[0] : this.activatorNode
+        const el = activator && activator.elm
+        if (el) return el
+      }
+
       consoleError('No activator found')
     },
     getInnerHeight () {
@@ -296,7 +289,7 @@ export default Vue.extend({
     getInnerWidth () {
       if (!this.hasWindow) return 0
 
-      return window.innerWidth
+      return document.documentElement.clientWidth
     },
     getOffsetLeft () {
       if (!this.hasWindow) return 0

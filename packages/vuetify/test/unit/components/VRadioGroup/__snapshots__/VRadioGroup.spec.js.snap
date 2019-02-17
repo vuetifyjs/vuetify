@@ -15,7 +15,7 @@ exports[`VRadioGroup.vue should be in error when v-radio-group is 1`] = `
             <input aria-checked="false"
                    role="radio"
                    type="radio"
-                   name="v-radio-4"
+                   name="v-radio-3"
             >
             <div class="v-input--selection-controls__ripple error--text">
             </div>
@@ -57,7 +57,7 @@ exports[`VRadioGroup.vue should be in error when v-radio-group is 2`] = `
             <input aria-checked="false"
                    role="radio"
                    type="radio"
-                   name="v-radio-4"
+                   name="v-radio-3"
             >
             <div class="v-input--selection-controls__ripple">
             </div>
@@ -90,7 +90,7 @@ exports[`VRadioGroup.vue should make radios disabled 1`] = `
        disabled="disabled"
        role="radio"
        type="radio"
-       name="v-radio-54"
+       name="v-radio-53"
 >
 
 `;

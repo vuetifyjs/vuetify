@@ -1,7 +1,5 @@
 // Libraries
 import Vue from 'vue'
-import Vuetify from '../../Vuetify'
-import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
 
 // Components
 import VIcon from '../VIcon'
@@ -169,8 +167,10 @@ describe('VIcon', () => {
     beforeEach(() => {
       Vue.prototype.$vuetify = {
         icons: {
-          checkboxOn: 'check_box',
-          prev: 'chevron_left'
+          values: {
+            checkboxOn: 'check_box',
+            prev: 'chevron_left'
+          }
         }
       }
     })
@@ -203,10 +203,12 @@ describe('VIcon', () => {
     beforeEach(() => {
       Vue.prototype.$vuetify = {
         icons: {
-          testIcon: {
-            component: getTestComponent(),
-            props: {
-              name: 'test icon'
+          values: {
+            testIcon: {
+              component: getTestComponent(),
+              props: {
+                name: 'test icon'
+              }
             }
           }
         }
