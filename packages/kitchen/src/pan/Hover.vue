@@ -8,9 +8,11 @@
       </core-title>
       <core-section>
         <v-hover>
-          <v-sheet slot-scope="{ hover }">
-            {{ hover }}
-          </v-sheet>
+          <template #default="{ hover }">
+            <v-sheet>
+              {{ hover }}
+            </v-sheet>
+          </template>
         </v-hover>
       </core-section>
 
@@ -19,9 +21,11 @@
       </core-title>
       <core-section>
         <v-hover disabled>
-          <v-sheet slot-scope="{ hover }">
-            {{ hover }}
-          </v-sheet>
+          <template #default="{ hover }">
+            <v-sheet>
+              {{ hover }}
+            </v-sheet>
+          </template>
         </v-hover>
       </core-section>
 
@@ -33,9 +37,11 @@
           open-delay="100"
           close-delay="100"
         >
-          <v-sheet slot-scope="{ hover }">
-            {{ hover }}
-          </v-sheet>
+          <template #default="{ hover }">
+            <v-sheet>
+              {{ hover }}
+            </v-sheet>
+          </template>
         </v-hover>
       </core-section>
     </v-layout>

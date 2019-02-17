@@ -313,15 +313,15 @@
       </core-title>
       <core-section center>
         <v-rating value="2">
-          <v-icon
-            slot="item"
-            slot-scope="props"
-            :color="props.isFilled ? colors[props.index] : 'grey lighten-1'"
-            large
-            @click="props.click"
-          >
-            {{ props.isFilled ? 'mdi-star-circle' : 'mdi-circle-outline' }}
-          </v-icon>
+          <template #item="props">
+            <v-icon
+              :color="props.isFilled ? colors[props.index] : 'grey lighten-1'"
+              large
+              @click="props.click"
+            >
+              {{ props.isFilled ? 'mdi-star-circle' : 'mdi-circle-outline' }}
+            </v-icon>
+          </template>
         </v-rating>
       </core-section>
 

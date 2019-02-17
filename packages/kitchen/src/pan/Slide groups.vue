@@ -14,16 +14,17 @@
               v-for="n in 25"
               :key="n"
             >
-              <v-btn
-                slot-scope="{ active, toggle }"
-                :input-value="active"
-                active-class="purple white--text"
-                depressed
-                rounded
-                @click="toggle"
-              >
-                Options {{ n }}
-              </v-btn>
+              <template #default="{ active, toggle }">
+                <v-btn
+                  :input-value="active"
+                  active-class="purple white--text"
+                  depressed
+                  rounded
+                  @click="toggle"
+                >
+                  Options {{ n }}
+                </v-btn>
+              </template>
             </v-slide-item>
           </v-slide-group>
         </v-sheet>
@@ -40,16 +41,17 @@
               v-for="n in 25"
               :key="n"
             >
-              <v-btn
-                slot-scope="{ active, toggle }"
-                :input-value="active"
-                active-class="purple white--text"
-                depressed
-                rounded
-                @click="toggle"
-              >
-                Options {{ n }}
-              </v-btn>
+              <template #default="{ active, toggle }">
+                <v-btn
+                  :input-value="active"
+                  active-class="purple white--text"
+                  depressed
+                  rounded
+                  @click="toggle"
+                >
+                  Options {{ n }}
+                </v-btn>
+              </template>
             </v-slide-item>
           </v-slide-group>
         </v-sheet>
@@ -70,16 +72,17 @@
               v-for="n in 25"
               :key="n"
             >
-              <v-btn
-                slot-scope="{ active, toggle }"
-                :input-value="active"
-                active-class="purple white--text"
-                depressed
-                rounded
-                @click="toggle"
-              >
-                Options {{ n }}
-              </v-btn>
+              <template #default="{ active, toggle }">
+                <v-btn
+                  :input-value="active"
+                  active-class="purple white--text"
+                  depressed
+                  rounded
+                  @click="toggle"
+                >
+                  Options {{ n }}
+                </v-btn>
+              </template>
             </v-slide-item>
           </v-slide-group>
         </v-sheet>
@@ -99,14 +102,15 @@
               v-for="n in 25"
               :key="n"
             >
-              <v-btn
-                slot-scope="{ toggle }"
-                depressed
-                rounded
-                @click="toggle"
-              >
-                Options {{ n }}
-              </v-btn>
+              <template #default="{ toggle }">
+                <v-btn
+                  depressed
+                  rounded
+                  @click="toggle"
+                >
+                  Options {{ n }}
+                </v-btn>
+              </template>
             </v-slide-item>
           </v-slide-group>
         </v-sheet>
@@ -126,16 +130,17 @@
               v-for="n in 25"
               :key="n"
             >
-              <v-btn
-                slot-scope="{ active, toggle }"
-                :input-value="active"
-                active-class="purple white--text"
-                depressed
-                rounded
-                @click="toggle"
-              >
-                Options {{ n }}
-              </v-btn>
+              <template #default="{ active, toggle }">
+                <v-btn
+                  :input-value="active"
+                  active-class="purple white--text"
+                  depressed
+                  rounded
+                  @click="toggle"
+                >
+                  Options {{ n }}
+                </v-btn>
+              </template>
             </v-slide-item>
           </v-slide-group>
         </v-sheet>

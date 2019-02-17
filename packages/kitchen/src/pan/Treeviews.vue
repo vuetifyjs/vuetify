@@ -16,8 +16,7 @@
           open-on-click
         >
           <template
-            slot="prepend"
-            slot-scope="{ item, open }"
+            #prepend="{ item, open }"
           >
             <v-icon v-if="!item.file">
               {{ open ? 'mdi-folder-open' : 'mdi-folder' }}
@@ -53,14 +52,14 @@
                 open-on-click
                 transition
               >
-                <v-icon
-                  v-if="!item.children"
-                  slot="prepend"
-                  slot-scope="{ item, active }"
-                  :color="active ? 'primary' : ''"
-                >
-                  mdi-account
-                </v-icon>
+                <template #prepend="{ item, active }">
+                  <v-icon
+                    v-if="!item.children"
+                    :color="active ? 'primary' : ''"
+                  >
+                    mdi-account
+                  </v-icon>
+                </template>
               </v-treeview>
             </v-flex>
             <v-flex
@@ -171,8 +170,7 @@
               open-on-click
             >
               <template
-                slot="prepend"
-                slot-scope="{ item, open }"
+                #prepend="{ item, open }"
               >
                 <v-icon v-if="!item.file">
                   {{ open ? 'mdi-folder-open' : 'mdi-folder' }}
@@ -183,8 +181,7 @@
               </template>
 
               <template
-                slot="append"
-                slot-scope="{ item }"
+                #append="{ item }"
               >
                 <span v-if="item.changed">
                   U

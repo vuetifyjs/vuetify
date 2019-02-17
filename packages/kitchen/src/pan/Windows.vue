@@ -16,7 +16,7 @@
               v-for="n in length1"
               :key="n"
             >
-              <div slot-scope="{ active, toggle }">
+              <template #default="{ active, toggle }">
                 <v-btn
                   :input-value="active"
                   icon
@@ -24,7 +24,7 @@
                 >
                   <v-icon>mdi-record</v-icon>
                 </v-btn>
-              </div>
+              </template>
             </v-item>
           </v-item-group>
 
