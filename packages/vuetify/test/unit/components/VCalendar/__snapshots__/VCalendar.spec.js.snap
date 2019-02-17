@@ -302,19 +302,19 @@ exports[`VCalendar should render month view 1`] = `
 
 <div class="v-calendar-monthly v-calendar-weekly v-calendar theme--light">
   <div class="v-calendar-weekly__head">
-    <div class="v-calendar-weekly__head-weekday v-past v-outside">
+    <div class="v-calendar-weekly__head-weekday v-present v-outside">
       Sun
     </div>
-    <div class="v-calendar-weekly__head-weekday v-past">
+    <div class="v-calendar-weekly__head-weekday v-future">
       Mon
     </div>
-    <div class="v-calendar-weekly__head-weekday v-past">
+    <div class="v-calendar-weekly__head-weekday v-future">
       Tue
     </div>
-    <div class="v-calendar-weekly__head-weekday v-past">
+    <div class="v-calendar-weekly__head-weekday v-future">
       Wed
     </div>
-    <div class="v-calendar-weekly__head-weekday v-present">
+    <div class="v-calendar-weekly__head-weekday v-future">
       Thu
     </div>
     <div class="v-calendar-weekly__head-weekday v-future">
