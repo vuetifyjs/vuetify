@@ -1,3 +1,10 @@
+declare module 'vuetify/es5/install' {
+  import { VueConstructor } from 'vue'
+
+  const install: (Vue: VueConstructor, args: {}) => void
+
+  export { install }
+}
 declare module 'vuetify/es5/components/Vuetify' {
   import Vuetify from 'vuetify'
 

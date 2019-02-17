@@ -1,5 +1,5 @@
 import Router from 'vue-router'
-import goTo from 'vuetify/lib/components/Vuetify/goTo'
+import goTo from 'vuetify/es5/services/goto'
 
 export default new Router({
   scrollBehavior: (to, from, savedPosition) => {

@@ -1,6 +1,8 @@
 {
   "private": true,
-  "workspaces": [ "packages/*" ],
+  "workspaces": [
+    "packages/*"
+  ],
   "husky": {
     "hooks": {
       "prepare-commit-msg": "node scripts/prepare-commit-message.js",
@@ -18,30 +20,30 @@
     "postversion": "node scripts/post-release-merge.js"
   },
   "devDependencies": {
-    "eslint": "^5.12.0",
+    "@typescript-eslint/eslint-plugin": "^1.3.0",
+    "@typescript-eslint/parser": "^1.3.0",
+    "eslint": "^5.13.0",
     "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-local-rules": "^0.1.0",
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
-    "eslint-plugin-typescript": "^1.0.0-rc.3",
     "eslint-plugin-vue": "^5.1.0",
-    "husky": "^1.1.2",
-    "inquirer": "^6.2.0",
+    "husky": "^1.3.1",
+    "inquirer": "^6.2.2",
     "jest": "^21.2.1",
     "jest-cli": "^21.2.1",
     "jest-css-modules": "^1.1.0",
     "jest-serializer-html": "^5.0.0",
     "lerna": "^3.4.3",
-    "lint-staged": "^7.3.0",
     "semver": "^5.6.0",
     "shelljs": "^0.8.2",
     "ts-jest": "^21.2.1",
     "tslint": "^5.12.1",
-    "typescript": "^3.1.3",
-    "typestrict": "^1.0.1",
-    "vue": "^2.6.2",
-    "vue-template-compiler": "^2.6.2"
+    "typescript": "^3.3.3",
+    "typestrict": "^1.0.2",
+    "vue": "^2.6.6",
+    "vue-template-compiler": "^2.6.6"
   }
 }

@@ -45,6 +45,8 @@
           title: 'keeper',
           name: 'Kael Watts-Deuchar',
           github: 'kaelwd',
+          patreon: 'kaelwd',
+          twitter: '@kaelwd',
           avatar: 'avatarStyle=Transparent&topType=ShortHairShaggyMullet&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=ShirtCrewNeck&clotheColor=Heather&eyeType=Squint&eyebrowType=SadConcernedNatural&mouthType=Concerned&skinColor=Pale'
         },
         {
@@ -71,6 +73,12 @@
           github: 'bdeo',
           linkedin: 'brandondeo',
           avatar: 'avatarStyle=Transparent&clotheColor=Heather&clotheType=ShirtCrewNeck&eyeType=Default&eyebrowType=Default&facialHairColor=Black&facialHairType=Blank&hairColor=Blonde&mouthType=Default&skinColor=Pale&topType=ShortHairShortRound'
+        },
+        {
+          title: 'core',
+          name: 'Dmitry Sharshakov',
+          github: 'sh7dm',
+          avatar: 'accessoriesType=Blank&avatarStyle=Transparent&clotheColor=Heather&clotheType=Hoodie&eyeType=Default&eyebrowType=Default&facialHairType=Blank&graphicType=Bear&hairColor=BrownDark&mouthType=Smile&skinColor=Pale&topType=ShortHairShortFlat'
         }
       ]
     })

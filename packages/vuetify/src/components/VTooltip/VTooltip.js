@@ -9,7 +9,8 @@ import Menuable from '../../mixins/menuable'
 import Toggleable from '../../mixins/toggleable'
 
 // Helpers
-import { convertToUnit, keyCodes } from '../../util/helpers'
+import { convertToUnit, keyCodes, getSlotType } from '../../util/helpers'
+import { consoleError } from '../../util/console'
 
 /* @vue/component */
 export default {
@@ -74,7 +75,7 @@ export default {
       if (this.nudgeLeft) left -= parseInt(this.nudgeLeft)
       if (this.nudgeRight) left += parseInt(this.nudgeRight)
 
-      return `${this.calcXOverflow(left)}px`
+      return `${this.calcXOverflow(left, this.dimensions.content.width)}px`
     },
     calculatedTop () {
       const { activator, content } = this.dimensions
@@ -135,6 +136,12 @@ export default {
     })
   },
 
+  mounted () {
+    if (getSlotType(this, 'activator', true) === 'v-slot') {
+      consoleError(`v-tooltip's activator slot must be bound, try '<template #activator="data"><v-btn v-on="data.on>'`, this)
+    }
+  },
+
   methods: {
     activate () {
       // Update coordinates and dimensions of menu
@@ -172,7 +179,7 @@ export default {
         }
       }
 
-      if (this.$scopedSlots.activator && this.$scopedSlots.activator.length) {
+      if (getSlotType(this, 'activator') === 'scoped') {
         const activator = this.$scopedSlots.activator({ on: listeners })
         this.activatorNode = activator
         return activator
