@@ -186,6 +186,9 @@ export default VSelect.extend({
     },
     internalSearch (val) {
       this.onInternalSearchChanged(val)
+    },
+    itemText () {
+      this.updateSelf()
     }
   },
 

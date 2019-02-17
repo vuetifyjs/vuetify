@@ -10,5 +10,9 @@ export default {
   dataTable: {
     rowsPerPageText: 'Files per pàgina:'
   },
-  noDataText: 'Sense dades'
+  noDataText: 'Sense dades',
+  carousel: {
+    prev: 'Visualització prèvia',
+    next: 'Següent visual'
+  }
 }

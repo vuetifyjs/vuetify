@@ -2,6 +2,8 @@
   "name": "vuetifyjs.com",
   "alias": "vuetifyjs.com",
   "github": {
-    "autoAlias": false
-  }
+    "autoAlias": false,
+    "silent": true
+  },
+  "version": 1
 }

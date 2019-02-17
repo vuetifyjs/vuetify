@@ -10,5 +10,9 @@ export default {
   dataTable: {
     rowsPerPageText: 'Редова по страници:'
   },
-  noDataText: 'Нема доступних података'
+  noDataText: 'Нема доступних података',
+  carousel: {
+    prev: 'Превиоус висуал',
+    next: 'Нект висуал'
+  }
 }
