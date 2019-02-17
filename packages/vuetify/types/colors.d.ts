@@ -66,7 +66,7 @@ declare module 'vuetify/lib/util/colors' {
     readonly darken4: string
   }
 
-  interface Color extends BaseColor {
+  export interface Color extends BaseColor {
     readonly accent1: string
     readonly accent2: string
     readonly accent3: string

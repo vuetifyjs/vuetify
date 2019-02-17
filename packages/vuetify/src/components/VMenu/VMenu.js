@@ -22,8 +22,9 @@ import ClickOutside from '../../directives/click-outside'
 import Resize from '../../directives/resize'
 
 // Helpers
-import { convertToUnit } from '../../util/helpers'
+import { convertToUnit, getSlotType } from '../../util/helpers'
 import ThemeProvider from '../../util/ThemeProvider'
+import { consoleError } from '../../util/console'
 
 /* @vue/component */
 export default Vue.extend({
@@ -95,9 +96,11 @@ export default Vue.extend({
 
   computed: {
     calculatedLeft () {
-      if (!this.auto) return this.calcLeft()
+      const menuWidth = Math.max(this.dimensions.content.width, this.dimensions.activator.width)
 
-      return `${this.calcXOverflow(this.calcLeftAuto())}px`
+      if (!this.auto) return this.calcLeft(menuWidth)
+
+      return `${this.calcXOverflow(this.calcLeftAuto(), menuWidth)}px`
     },
     calculatedMaxHeight () {
       return this.auto ? '200px' : convertToUnit(this.maxHeight)
@@ -168,6 +171,10 @@ export default Vue.extend({
 
   mounted () {
     this.isActive && this.activate()
+
+    if (getSlotType(this, 'activator', true) === 'v-slot') {
+      consoleError(`v-tooltip's activator slot must be bound, try '<template #activator="data"><v-btn v-on="data.on>'`, this)
+    }
   },
 
   methods: {

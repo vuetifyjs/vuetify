@@ -299,7 +299,7 @@ export const keyCodes = Object.freeze({
   pagedown: 34
 })
 
-const ICONS_PREFIX = '$vuetify.icons.'
+const ICONS_PREFIX = '$vuetify.'
 
 // This remaps internal names like '$vuetify.icons.cancel'
 // to the current name or component for that icon.
@@ -308,8 +308,12 @@ export function remapInternalIcon (vm: Vue, iconName: string): VuetifyIcon {
     return iconName
   }
 
-  // Now look up icon indirection name, e.g. '$vuetify.icons.cancel'
-  return getObjectValueByPath(vm, iconName, iconName)
+  // Get the target icon name
+  const iconPath = `$vuetify.icons.values.${iconName.split('.').pop()}`
+
+  // Now look up icon indirection name,
+  // e.g. '$vuetify.icons.values.cancel'
+  return getObjectValueByPath(vm, iconPath, iconName)
 }
 
 export function keys<O> (o: O) {
@@ -340,4 +344,18 @@ export function arrayDiff (a: any[], b: any[]): any[] {
  */
 export function upperFirst (str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
+/**
+ * Returns:
+ *  - 'normal' for old style slots - `<template slot="default">`
+ *  - 'scoped' for old style scoped slots (`<template slot="default" slot-scope="data">`) or bound v-slot (`#default="data"`)
+ *  - 'v-slot' for unbound v-slot (`#default`) - only if the third param is true, otherwise counts as scoped
+ */
+export function getSlotType<T extends boolean = false> (vm: Vue, name: string, split?: T): (T extends true ? 'v-slot' : never) | 'normal' | 'scoped' | void {
+  if (vm.$slots[name] && vm.$scopedSlots[name] && (vm.$scopedSlots[name] as any).name) {
+    return split ? 'v-slot' as any : 'scoped'
+  }
+  if (vm.$slots[name]) return 'normal'
+  if (vm.$scopedSlots[name]) return 'scoped'
 }

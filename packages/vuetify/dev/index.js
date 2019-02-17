@@ -7,8 +7,11 @@ Vue.config.performance = true
 
 Vue.use(Vuetify)
 
+const vuetify = new Vuetify()
+
 const vm = new Vue({
   data: () => ({ isLoaded: document.readyState === 'complete' }),
+  vuetify,
   render (h) {
     return this.isLoaded ? h(App) : undefined
   }
