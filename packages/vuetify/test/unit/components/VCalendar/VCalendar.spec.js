@@ -1,4 +1,5 @@
 import { test } from "@/test"
+import { parseDate } from '@/components/VCalendar/util/timestamp'
 import VCalendar from "@/components/VCalendar/VCalendar"
 
 test("VCalendar", ({ mount }) => {
@@ -8,6 +9,9 @@ test("VCalendar", ({ mount }) => {
         type: "day",
         start: "2018-01-29",
         end: "2018-02-04"
+      },
+      methods: {
+        getNow: () => parseDate(new Date('2019-02-14'))
       }
     });
 
@@ -21,6 +25,9 @@ test("VCalendar", ({ mount }) => {
         type: "week",
         start: "2018-01-29",
         end: "2018-02-04"
+      },
+      methods: {
+        getNow: () => parseDate(new Date('2019-02-14'))
       }
     });
 
@@ -34,6 +41,9 @@ test("VCalendar", ({ mount }) => {
         type: "month",
         start: "2018-01-29",
         end: "2018-02-04"
+      },
+      methods: {
+        getNow: () => parseDate(new Date('2019-02-14'))
       }
     });
 
