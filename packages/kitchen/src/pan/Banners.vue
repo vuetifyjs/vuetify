@@ -7,14 +7,14 @@
 
       <core-title>Default</core-title>
       <core-section>
-        <v-banner>
+        <v-banner single-line>
           No Internet connection
         </v-banner>
       </core-section>
 
       <core-title>With actions</core-title>
       <core-section>
-        <v-banner>
+        <v-banner single-line>
           No Internet connection
           <template slot="actions">
             <v-btn text color="accent">Retry</v-btn>
@@ -26,7 +26,7 @@
       <core-title>Dismissable</core-title>
       <core-section>
         <v-checkbox v-model="v0" label="Visible" />
-        <v-banner v-model="v0" transition="slide-y-transition">
+        <v-banner v-model="v0" single-line transition="slide-y-transition">
           No Internet connection
           <template slot="actions" slot-scope="{ dismiss }">
             <v-btn text color="accent">Retry</v-btn>
@@ -37,14 +37,14 @@
 
       <core-title>With icon</core-title>
       <core-section>
-        <v-banner icon="mdi-wifi-strength-alert-outline">
+        <v-banner single-line icon="mdi-wifi-strength-alert-outline">
           No Internet connection
         </v-banner>
       </core-section>
 
       <core-title>With icon slot</core-title>
       <core-section>
-        <v-banner>
+        <v-banner single-line>
           <v-icon slot="icon" color="warning" size="40">mdi-wifi-strength-alert-outline</v-icon>
           No Internet connection
         </v-banner>
@@ -52,7 +52,7 @@
 
       <core-title>With action and icon</core-title>
       <core-section>
-        <v-banner icon="mdi-wifi-strength-alert-outline">
+        <v-banner single-line icon="mdi-wifi-strength-alert-outline">
           No Internet connection
           <template slot="actions">
             <v-btn text color="accent">Retry</v-btn>
@@ -62,7 +62,7 @@
 
       <core-title>With actions and icon</core-title>
       <core-section>
-        <v-banner icon="mdi-wifi-strength-alert-outline">
+        <v-banner single-line icon="mdi-wifi-strength-alert-outline">
           No Internet connection
           <template slot="actions">
             <v-btn text color="accent">Retry</v-btn>
@@ -73,14 +73,14 @@
 
       <core-title>With click:icon event</core-title>
       <core-section>
-        <v-banner icon="mdi-wifi-strength-alert-outline" @click:icon="alert">
+        <v-banner single-line icon="mdi-wifi-strength-alert-outline" @click:icon="alert">
           No Internet connection
         </v-banner>
       </core-section>
 
       <core-title>With click:icon event and icon slot</core-title>
       <core-section>
-        <v-banner @click:icon="alert">
+        <v-banner single-line @click:icon="alert">
           <v-icon slot="icon" color="warning" size="40">mdi-wifi-strength-alert-outline</v-icon>
           No Internet connection
         </v-banner>
@@ -89,7 +89,7 @@
       <core-title>Visibility control</core-title>
       <core-section>
         <v-checkbox v-model="v1" label="Visible" />
-        <v-banner v-model="v1" icon="mdi-wifi-strength-alert-outline">
+        <v-banner v-model="v1" single-line icon="mdi-wifi-strength-alert-outline">
           No Internet connection
           <template slot="actions">
             <v-btn text color="accent">Retry</v-btn>
@@ -100,7 +100,7 @@
       <core-title>Visibility control + transition</core-title>
       <core-section>
         <v-checkbox v-model="v2" label="Visible" />
-        <v-banner v-model="v2" transition="slide-y-transition" icon="mdi-wifi-strength-alert-outline">
+        <v-banner v-model="v2" single-line transition="slide-y-transition" icon="mdi-wifi-strength-alert-outline">
           No Internet connection
           <template slot="actions">
             <v-btn text color="accent">Retry</v-btn>
@@ -112,7 +112,7 @@
 
       <core-title>Default</core-title>
       <core-section>
-        <v-banner two-line>
+        <v-banner>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent cursus nec sem id malesuada.
           Curabitur lacinia sem et turpis euismod, eget elementum ex pretium.
         </v-banner>
@@ -120,7 +120,7 @@
 
       <core-title>With icon</core-title>
       <core-section>
-        <v-banner two-line icon="mdi-wifi-strength-alert-outline">
+        <v-banner icon="mdi-wifi-strength-alert-outline">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent cursus nec sem id malesuada.
           Curabitur lacinia sem et turpis euismod, eget elementum ex pretium.
         </v-banner>
@@ -128,7 +128,7 @@
 
       <core-title>With icon slot</core-title>
       <core-section>
-        <v-banner two-line>
+        <v-banner>
           <v-icon slot="icon" size="40" color="warning">mdi-wifi-strength-alert-outline</v-icon>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent cursus nec sem id malesuada.
           Curabitur lacinia sem et turpis euismod, eget elementum ex pretium.
@@ -141,7 +141,7 @@
 
       <core-title>With actions</core-title>
       <core-section>
-        <v-banner two-line>
+        <v-banner>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent cursus nec sem id malesuada.
           Curabitur lacinia sem et turpis euismod, eget elementum ex pretium.
           <template slot="actions">
@@ -153,7 +153,7 @@
 
       <core-title>With actions and icon</core-title>
       <core-section>
-        <v-banner two-line icon="mdi-wifi-strength-alert-outline">
+        <v-banner icon="mdi-wifi-strength-alert-outline">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent cursus nec sem id malesuada.
           Curabitur lacinia sem et turpis euismod, eget elementum ex pretium.
           <template slot="actions">
@@ -165,7 +165,7 @@
 
       <core-title>With click:icon event</core-title>
       <core-section>
-        <v-banner two-line icon="mdi-wifi-strength-alert-outline" @click:icon="alert">
+        <v-banner icon="mdi-wifi-strength-alert-outline" @click:icon="alert">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent cursus nec sem id malesuada.
           Curabitur lacinia sem et turpis euismod, eget elementum ex pretium.
           <template slot="actions">
@@ -177,7 +177,7 @@
 
       <core-title>With click:icon event and icon slot</core-title>
       <core-section>
-        <v-banner two-line @click:icon="alert">
+        <v-banner @click:icon="alert">
           <v-icon slot="icon" size="40" color="warning">mdi-wifi-strength-alert-outline</v-icon>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent cursus nec sem id malesuada.
           Curabitur lacinia sem et turpis euismod, eget elementum ex pretium.
@@ -191,7 +191,7 @@
       <core-title>Visibility control</core-title>
       <core-section>
         <v-checkbox v-model="v3" label="Visible" />
-        <v-banner v-model="v3" two-line icon="mdi-wifi-strength-alert-outline">
+        <v-banner v-model="v3" icon="mdi-wifi-strength-alert-outline">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent cursus nec sem id malesuada.
           Curabitur lacinia sem et turpis euismod, eget elementum ex pretium.
           <template slot="actions">
@@ -204,7 +204,7 @@
       <core-title>Visibility control + transition</core-title>
       <core-section>
         <v-checkbox v-model="v4" label="Visible" />
-        <v-banner v-model="v4" two-line transition="slide-y-transition" icon="mdi-wifi-strength-alert-outline">
+        <v-banner v-model="v4" transition="slide-y-transition" icon="mdi-wifi-strength-alert-outline">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent cursus nec sem id malesuada.
           Curabitur lacinia sem et turpis euismod, eget elementum ex pretium.
           <template slot="actions">

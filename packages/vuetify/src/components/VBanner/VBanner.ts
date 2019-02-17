@@ -32,11 +32,11 @@ export default mixins(
       type: [Number, String],
       default: 960
     } as PropValidator<string | number>,
+    singleLine: Boolean,
     tile: {
       type: Boolean,
       default: true
     },
-    twoLine: Boolean,
     value: {
       type: Boolean,
       default: true
@@ -49,7 +49,7 @@ export default mixins(
         ...VSheet.options.computed.classes.call(this),
         'v-banner--has-icon': this.hasIcon,
         'v-banner--is-mobile': this.isMobile,
-        'v-banner--two-line': this.twoLine
+        'v-banner--single-line': this.singleLine
       }
     },
     hasActions (): boolean {

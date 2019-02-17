@@ -73,3 +73,15 @@ exports[`VBanner.ts should render component with icon slot 1`] = `
 </div>
 
 `;
+
+exports[`VBanner.ts should render sinle-line component with content 1`] = `
+
+<div class="v-banner v-sheet v-sheet--tile theme--light">
+  <div class="v-banner__wrapper">
+    <div class="v-banner__content">
+      Hello, World!
+    </div>
+  </div>
+</div>
+
+`;

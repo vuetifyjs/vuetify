@@ -39,6 +39,19 @@ describe('VBanner.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render sinle-line component with content', () => {
+    const wrapper = mountFunction({
+      props: {
+        singleLine: true
+      },
+      slots: {
+        default: 'Hello, World!'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render component with icon', () => {
     const wrapper = mountFunction({
       slots: {
