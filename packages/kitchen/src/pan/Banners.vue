@@ -108,6 +108,18 @@
         </v-banner>
       </core-section>
 
+      <core-title>Text overflow</core-title>
+      <core-section>
+        <v-banner single-line icon="mdi-wifi-strength-alert-outline">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent cursus nec sem id malesuada.
+          Curabitur lacinia sem et turpis euismod, eget elementum ex pretium.
+          <template v-slot:actions>
+            <v-btn text color="primary">Dismiss</v-btn>
+            <v-btn text color="primary">Retry</v-btn>
+          </template>
+        </v-banner>
+      </core-section>
+
       <sub-header>Two-line</sub-header>
 
       <core-title>Default</core-title>

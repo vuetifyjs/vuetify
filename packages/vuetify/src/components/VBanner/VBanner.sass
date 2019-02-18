@@ -36,6 +36,11 @@
       margin-right: 90px
 
   &--single-line
+    .v-banner__content
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+
     .v-banner__actions
       margin-bottom: 0
 
@@ -53,6 +58,7 @@
   &__wrapper
     align-items: center
     display: flex
+    overflow: hidden
 
   &--has-icon
     padding-left: 16px
