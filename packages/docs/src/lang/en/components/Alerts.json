@@ -23,9 +23,15 @@
     }
   },
   "props": {
+    "border": "Puts a border on the element. Accepts **top** | **right** | **bottom** | **left**",
+    "coloredBorder": "Swap color from the background to the border for an alternative border look",
+    "closeLabel": "Text used for *aria-label* on **dismissible** alerts",
+    "dense": "Hides icon for a more simplistic alert",
     "dismissible": "Specifies that the Alert can be closed",
     "icon": "Designates a specific icon",
     "outline": "Alert will have an outline",
+    "outlined": "Alert will have an outline",
+    "prominent": "Displays a larger vertically centered icon to draw more attention",
     "type": "Specify a **success**, **info**, **warning** or **error** alert. Uses the contextual color and a pre-defined icon."
   }
 }

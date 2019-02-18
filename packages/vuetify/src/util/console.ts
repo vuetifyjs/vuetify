@@ -35,7 +35,10 @@ export function consoleError (message: string, vm?: any, parent?: any): void {
 }
 
 export function deprecate (original: string, replacement: string, vm?: any, parent?: any) {
-  consoleWarn(`'${original}' is deprecated, use '${replacement}' instead`, vm, parent)
+  consoleWarn(`[UPGRADE] '${original}' is deprecated, use '${replacement}' instead`, vm, parent)
+}
+export function breaking (original: string, replacement: string, vm?: any, parent?: any) {
+  consoleError(`[BREAKING] '${original}' has been removed, use '${replacement}' instead`, vm, parent)
 }
 
 /**

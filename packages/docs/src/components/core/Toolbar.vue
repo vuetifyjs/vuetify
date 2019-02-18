@@ -43,7 +43,7 @@
           }
         }"
         class="hidden-xs-only"
-        flat
+        text
         style="min-width: 48px;"
       >
         <span class="hidden-sm-and-down">{{ $t('Vuetify.AppToolbar.documentation' ) }}</span>

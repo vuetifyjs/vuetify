@@ -113,9 +113,9 @@ $headings := {
 
 // Transitions
 $transition := {
-  fast-out-slow-in: cubic-bezier(0.4, 0.0, 0.2, 1),
-  linear-out-slow-in: cubic-bezier(0.0, 0.0, 0.2, 1),
-  fast-out-linear-in: cubic-bezier(0.4, 0.0, 1, 1),
+  fast-out-slow-in: cubic-bezier(0.4, 0.0, 0.2, 1), // standard
+  linear-out-slow-in: cubic-bezier(0.0, 0.0, 0.2, 1), // decelerate
+  fast-out-linear-in: cubic-bezier(0.4, 0.0, 1, 1), // accelerate
   ease-in-out: cubic-bezier(0.4, 0.0, 0.6, 1),
   fast-in-fast-out: cubic-bezier(.25,.8,.25,1),
   swing: cubic-bezier(.25,.8,.50,1)
@@ -270,7 +270,7 @@ $list-dense-subheader-height := $list-item-dense-single-height
 $list-dense-subheader-group-height := $list-dense-subheader-height //the subheader under a group menu
 
 // Paper
-$sheet-border-radius := 2px
+$sheet-border-radius := 4px
 
 // Pickers
 $time-picker-number-font-size := 16px
@@ -295,7 +295,7 @@ $navigation-drawer-item-font-weight := $font-weights.medium
 $navigation-drawer-group-item-font-weight := $font-weights.regular
 
 // Snackbar
-$snackbar-color := #fff
+$snackbar-color := $shades.white
 $snackbar-background-color := #323232
 $snackbar-corner-offset := 24px
 

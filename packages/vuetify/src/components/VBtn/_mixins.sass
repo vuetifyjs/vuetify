@@ -1,0 +1,18 @@
+@mixin btn-theme($material)
+  color: map-deep-get($material, 'text', 'primary')
+
+  &.v-btn--disabled
+    color: map-deep-get($material, 'buttons', 'disabled') !important
+
+    .v-icon,
+    .v-btn__loading
+      color: map-deep-get($material, 'buttons', 'disabled') !important
+
+    &:not(.v-btn--flat):not(.v-btn--outline)
+      background-color: map-deep-get($material, 'buttons', 'focused') !important
+
+  &:not(.v-btn--flat)
+    background-color: map-get($material, 'app-bar')
+
+  &.v-btn--outline.v-btn--text
+    border-color: map-get($material, 'dividers')

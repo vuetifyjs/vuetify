@@ -86,7 +86,7 @@ export default VAutocomplete.extend({
       }
 
       return this.$createElement(VBtn, {
-        props: { flat: true },
+        props: { text: true },
         on: {
           click (e) {
             e.stopPropagation()

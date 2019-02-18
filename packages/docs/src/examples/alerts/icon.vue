@@ -1,16 +1,16 @@
 <template>
   <div>
     <v-alert
-      :value="true"
-      color="success"
+      type="info"
       icon="new_releases"
+      prominent
     >
-      This is a success alert with a custom icon.
+      This is an info alert with a custom icon.
     </v-alert>
 
     <v-alert
-      :value="true"
-      color="error"
+      type="error"
+      dense
     >
       This is an error alert with no icon.
     </v-alert>

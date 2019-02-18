@@ -3,7 +3,8 @@
     "publish": {
       "allowBranch": [
         "master",
-        "dev"
+        "dev",
+        "next"
       ],
       "message": "chore(release): publish %s"
     },
@@ -12,6 +13,6 @@
     }
   },
   "npmClient": "yarn",
-  "version": "1.5.1",
+  "version": "2.0.0-alpha.4",
   "useWorkspaces": true
 }

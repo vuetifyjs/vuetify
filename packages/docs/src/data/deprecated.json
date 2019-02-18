@@ -1,5 +1,12 @@
 {
   "props": {
+    "v-alert": {
+      "outline": "2.0"
+    },
+    "v-chip": {
+      "outline": "2.0",
+      "selected": "2.0"
+    },
     "v-text-field": {
       "textarea": "1.1",
       "append-icon-cb": false,
@@ -92,9 +99,6 @@
     "v-range-slider": {
       "append-icon-cb": false,
       "prepend-icon-cb": false
-    },
-    "v-data-iterator": {
-      "loading": false
     }
   }
 }

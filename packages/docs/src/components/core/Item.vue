@@ -37,8 +37,8 @@
     <v-chip
       v-if="chip"
       :color="chipColor"
-      class="v-chip--x-small"
-      dark
+      x-small
+      text-color="white"
     >{{ chip }}</v-chip>
     <slot />
   </v-list-tile>
@@ -127,16 +127,6 @@
 .v-list__tile--doc {
   p {
     margin-bottom: 0;
-  }
-
-  .v-chip--x-small {
-    font-size: 10px;
-    height: 16px;
-
-    .v-chip__content {
-      line-height: 1;
-      padding: 8px;
-    }
   }
 }
 </style>

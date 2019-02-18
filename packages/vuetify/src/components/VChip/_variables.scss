@@ -1,0 +1,23 @@
+$icon-outlined-border-width: thin;
+$icon-sizes: (
+  'x-small': (
+    'font-size': 10,
+    'height': 16
+  ),
+  'small': (
+    'font-size': 12,
+    'height': 24
+  ),
+  'default': (
+    'font-size': 14,
+    'height': 32
+  ),
+  'large': (
+    'font-size': 16,
+    'height': 54
+  ),
+  'x-large': (
+    'font-size': 18,
+    'height': 66
+  )
+);

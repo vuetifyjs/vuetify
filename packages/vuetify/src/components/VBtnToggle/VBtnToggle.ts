@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_button-toggle.styl'
+import './VBtnToggle.sass'
 
 // Mixins
 import ButtonGroup from '../../mixins/button-group'
@@ -12,7 +12,8 @@ export default ButtonGroup.extend({
     activeClass: {
       type: String,
       default: 'v-btn--active'
-    }
+    },
+    rounded: Boolean
   },
 
   computed: {
@@ -20,8 +21,7 @@ export default ButtonGroup.extend({
       return {
         ...ButtonGroup.options.computed.classes.call(this),
         'v-btn-toggle': true,
-        'v-btn-toggle--only-child': this.selectedItems.length === 1,
-        'v-btn-toggle--selected': this.selectedItems.length > 0
+        'v-btn-toggle--rounded': this.rounded
       }
     }
   }

@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import { test } from '@/test'
 import Applicationable from '@/mixins/applicationable'
 
@@ -6,7 +5,10 @@ test('applicationable.js', ({ mount }) => {
   it('should update application on mount', async () => {
     const updateApplication = jest.fn()
     const wrapper = mount({
-      mixins: [ Applicationable() ],
+      mixins: [Applicationable()],
+      computed: {
+        applicationProperty: () => 'left'
+      },
       methods: { updateApplication },
       render: h => h('div')
     })
@@ -20,7 +22,10 @@ test('applicationable.js', ({ mount }) => {
     const updateApplication = jest.fn()
     const removeApplication = jest.fn()
     const wrapper = mount({
-      mixins: [ Applicationable() ],
+      mixins: [Applicationable()],
+      computed: {
+        applicationProperty: () => 'left'
+      },
       methods: { updateApplication, removeApplication },
       render: h => h('div')
     })
@@ -51,7 +56,10 @@ test('applicationable.js', ({ mount }) => {
   it('should call to remove application on destroy', async () => {
     const removeApplication = jest.fn()
     const wrapper = mount({
-      mixins: [ Applicationable() ],
+      mixins: [Applicationable()],
+      computed: {
+        applicationProperty: () => 'left'
+      },
       methods: { removeApplication },
       render: h => h('div')
     })

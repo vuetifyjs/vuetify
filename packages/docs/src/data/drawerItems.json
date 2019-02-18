@@ -93,7 +93,9 @@
         "text": "groups",
         "children": [
           { "text": "buttonGroups", "to": "button-groups" },
+          { "text": "chipGroups", "to": "chip-groups" },
           { "text": "itemGroups", "to": "item-groups" },
+          { "text": "slideGroups", "to": "slide-groups" },
           { "text": "windows", "to": "windows" }
         ]
       },

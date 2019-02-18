@@ -135,7 +135,10 @@ function unbind (el: HTMLElement, binding: TouchVNodeDirective, vnode: VNode) {
   delete target._touchHandlers[vnode.context!._uid]
 }
 
-export default {
+const touch = {
   inserted,
   unbind
 }
+
+export { touch }
+export default touch

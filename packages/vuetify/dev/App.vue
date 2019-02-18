@@ -1,5 +1,9 @@
 <template>
-  <playground></playground>
+  <v-app>
+    <v-content>
+      <playground></playground>
+    </v-content>
+  </v-app>
 </template>
 
 <script>

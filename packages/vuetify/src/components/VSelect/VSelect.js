@@ -168,7 +168,7 @@ export default VTextField.extend({
           dense: this.dense,
           hideSelected: this.hideSelected,
           items: this.virtualizedItems,
-          noDataText: this.$vuetify.t(this.noDataText),
+          noDataText: this.$vuetify.lang.t(this.noDataText),
           selectedItems: this.selectedItems,
           itemAvatar: this.itemAvatar,
           itemDisabled: this.itemDisabled,
@@ -314,7 +314,7 @@ export default VTextField.extend({
         props: {
           close: this.deletableChips && !isDisabled,
           disabled: isDisabled,
-          selected: index === this.selectedIndex,
+          inputValue: index === this.selectedIndex,
           small: this.smallChips
         },
         on: {
@@ -325,7 +325,8 @@ export default VTextField.extend({
 
             this.selectedIndex = index
           },
-          input: () => this.onChipInput(item)
+          focus,
+          'click:close': () => this.onChipInput(item)
         },
         key: this.getValue(item)
       }, this.getText(item))
@@ -512,6 +513,10 @@ export default VTextField.extend({
         parent: this,
         item,
         index,
+        select: e => {
+          e.stopPropagation()
+          this.selectedIndex = index
+        },
         selected: index === this.selectedIndex,
         disabled: this.disabled || this.readonly
       })
