@@ -7,10 +7,10 @@ import VSheet from '../VSheet'
 // Components
 import VAvatar from '../VAvatar'
 import VIcon from '../VIcon'
+import { VExpandTransition } from '../transitions'
 
 // Mixins
 import Toggleable from '../../mixins/toggleable'
-import Transitionable from '../../mixins/transitionable'
 
 // Types
 import { VNode } from 'vue/types'
@@ -20,10 +20,11 @@ import { PropValidator } from 'vue/types/options'
 /* @vue/component */
 export default mixins(
   VSheet,
-  Toggleable,
-  Transitionable
+  Toggleable
 ).extend({
   name: 'v-banner',
+
+  inheritAttrs: false,
 
   props: {
     icon: String,
@@ -117,12 +118,10 @@ export default mixins(
     genBanner () {
       return this.$createElement('div', {
         staticClass: 'v-banner',
+        attrs: this.$attrs,
         class: this.classes,
         style: this.styles,
-        directives: [{
-          name: 'show',
-          value: this.isActive
-        }]
+        on: this.$listeners
       }, [
         this.genWrapper(),
         this.genActions()
@@ -139,16 +138,13 @@ export default mixins(
   },
 
   render (h): VNode {
-    const render = this.genBanner()
-
-    if (!this.transition) return render
-
-    return h('transition', {
-      props: {
-        name: this.transition,
-        origin: this.origin,
-        mode: this.mode
-      }
-    }, [render])
+    return h(VExpandTransition, [
+      h('div', {
+        directives: [{
+          name: 'show',
+          value: this.isActive
+        }]
+      },[this.genBanner()])
+    ])
   }
 })
