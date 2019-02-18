@@ -1,10 +1,14 @@
 <template>
   <v-banner single-line>
-    There was a problem processing a transaction on your credit card.
+    One line message text string with two actions on tablet / Desktop
 
-    <template v-slot:actions>
-      <v-btn text color="deep-purple accent-4">Fix it</v-btn>
-      <v-btn text color="deep-purple accent-4">Learn More</v-btn>
+    <template #actions>
+      <v-btn
+        text
+        color="deep-purple accent-4"
+      >
+        Action
+      </v-btn>
     </template>
   </v-banner>
 </template>
