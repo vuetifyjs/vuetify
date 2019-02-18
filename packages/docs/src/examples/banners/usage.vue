@@ -1,10 +1,10 @@
 <template>
-  <v-banner icon="mdi-wifi-strength-alert-outline">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent cursus nec sem id malesuada.
-    Curabitur lacinia sem et turpis euismod, eget elementum ex pretium.
+  <v-banner single-line>
+    There was a problem processing a transaction on your credit card.
+
     <template v-slot:actions>
-      <v-btn text color="primary">Dismiss</v-btn>
-      <v-btn text color="primary">Retry</v-btn>
+      <v-btn text color="deep-purple accent-4">Fix it</v-btn>
+      <v-btn text color="deep-purple accent-4">Learn More</v-btn>
     </template>
   </v-banner>
 </template>

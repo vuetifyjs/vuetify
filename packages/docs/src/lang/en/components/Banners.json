@@ -1,21 +1,21 @@
 {
   "header": "# Banner",
-  "headerText": "The `v-banner` component is used as middle-interruptive message to user with 1-2 actions. It comes in 2 variations, **single-line** and **two-line**. These can have icons which you can use with your message and actions",
+  "headerText": "The `v-banner` component is used as middle-interruptive message to user with 1-2 actions. It comes in 2 variations, **single-line** and **multi-line** (implicit). These can have icons which you can use with your message and actions.",
   "examples": {
     "usage": {
       "desc": "Banners can have 1-2 lines of text, actions and icon."
     },
     "single-line": {
-      "header": "### Single-line",
-      "desc": "**Single-line** VBanner is used for small amout of information."
+      "header": "### Single-line (desktop)",
+      "desc": "**Single-line** VBanner is used for small amout of information and is recommended for desktop only implementations."
     },
     "two-line": {
-      "header": "### Two-line",
+      "header": "### Two-line (mobile)",
       "desc": "**Two-line** VBanner can store larger amout of data, use it for big messages."
     },
     "icon-slot": {
       "header": "### Icon slot",
-      "desc": "You can use a custom icon using slot, not only property."
+      "desc": "The icon slot allows you to to explicitly control the content and functionality within it."
     },
     "icon-event": {
       "header": "### Icon click event",
