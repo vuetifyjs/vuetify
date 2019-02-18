@@ -1,6 +1,13 @@
 // Imports
 @import '../../styles/styles.sass'
 @import './_variables.scss'
+@import './_mixins.sass'
+
+// Theme
+.v-banner.theme--light
+  @include banner-theme($material-light)
+.v-banner.theme--dark
+  @include banner-theme($material-dark)
 
 .v-banner
   align-items: center
