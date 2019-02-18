@@ -34,6 +34,7 @@ export default mixins(
       default: 960
     } as PropValidator<string | number>,
     singleLine: Boolean,
+    sticky: Boolean,
     tile: {
       type: Boolean,
       default: true
@@ -50,7 +51,8 @@ export default mixins(
         ...VSheet.options.computed.classes.call(this),
         'v-banner--has-icon': this.hasIcon,
         'v-banner--is-mobile': this.isMobile,
-        'v-banner--single-line': this.singleLine
+        'v-banner--single-line': this.singleLine,
+        'v-banner--sticky': this.sticky
       }
     },
     hasActions (): boolean {
@@ -61,6 +63,20 @@ export default mixins(
     },
     isMobile (): boolean {
       return this.$vuetify.breakpoint.width < Number(this.mobileBreakPoint)
+    },
+    styles (): object {
+      const styles = VSheet.options.computed.styles.call(this)
+
+      if (!this.sticky) return styles
+
+      const { bar, top } = this.$vuetify.application
+
+      return {
+        ...styles,
+        position: 'sticky',
+        top: `${bar + top}px`,
+        zIndex: 1
+      }
     }
   },
 
@@ -99,9 +115,9 @@ export default mixins(
         }
       }, [content])
     },
-    genContent () {
+    genText () {
       return this.$createElement('div', {
-        staticClass: 'v-banner__content'
+        staticClass: 'v-banner__text'
       }, this.$slots.default)
     },
     genActions () {
@@ -115,24 +131,20 @@ export default mixins(
         staticClass: 'v-banner__actions'
       }, children)
     },
-    genBanner () {
+    genContent () {
       return this.$createElement('div', {
-        staticClass: 'v-banner',
-        attrs: this.$attrs,
-        class: this.classes,
-        style: this.styles,
-        on: this.$listeners
+        staticClass: 'v-banner__content'
       }, [
-        this.genWrapper(),
-        this.genActions()
+        this.genIcon(),
+        this.genText()
       ])
     },
     genWrapper () {
       return this.$createElement('div', {
         staticClass: 'v-banner__wrapper'
       }, [
-        this.genIcon(),
-        this.genContent()
+        this.genContent(),
+        this.genActions()
       ])
     }
   },
@@ -140,11 +152,14 @@ export default mixins(
   render (h): VNode {
     return h(VExpandTransition, [
       h('div', {
+        staticClass: 'v-banner',
+        class: this.classes,
+        style: this.styles,
         directives: [{
           name: 'show',
           value: this.isActive
         }]
-      },[this.genBanner()])
+      }, [this.genWrapper()])
     ])
   }
 })
