@@ -113,7 +113,8 @@
     "suffix": "Displays suffix text",
     "textarea": "Textarea text field with alternate style",
     "toggleKeys": "Array of key codes that will toggle the input (if it supports toggling)",
-    "type": "Sets input type"
+    "type": "Sets input type",
+    "value": "Components.Inputs.props.value"
   },
   "slots": {
     "append": "Components.Inputs.slots.append",
