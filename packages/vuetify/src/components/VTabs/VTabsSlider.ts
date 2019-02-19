@@ -1,14 +1,16 @@
+// Mixins
 import Colorable from '../../mixins/colorable'
 
-/* @vue/component */
-export default {
-  name: 'v-tabs-slider',
+// Utilities
+import mixins from '../../util/mixins'
 
-  mixins: [Colorable],
+/* @vue/component */
+export default mixins(Colorable).extend({
+  name: 'v-tabs-slider',
 
   render (h) {
     return h('div', this.setBackgroundColor(this.color || 'accent', {
       staticClass: 'v-tabs__slider'
     }))
   }
-}
+})

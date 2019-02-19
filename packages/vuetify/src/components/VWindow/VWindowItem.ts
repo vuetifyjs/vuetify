@@ -23,7 +23,12 @@ interface options extends Vue {
   windowGroup: VBaseWindow
 }
 
-export default mixins<options & ExtractVue<[typeof Bootable]>>(
+const baseOptions = mixins(
+  Bootable,
+  GroupableFactory('windowGroup', 'v-window-item', 'v-window')
+)
+
+export default mixins<options & ExtractVue<typeof baseOptions>>(
   Bootable,
   GroupableFactory('windowGroup', 'v-window-item', 'v-window')
   /* @vue/component */
@@ -57,6 +62,9 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
   },
 
   computed: {
+    classes (): object {
+      return this.groupClasses
+    },
     computedTransition (): string | boolean {
       if (!this.windowGroup.internalReverse) {
         return typeof this.transition !== 'undefined'
@@ -136,6 +144,7 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
   render (h): VNode {
     const div = h('div', {
       staticClass: 'v-window-item',
+      class: this.classes,
       directives: [{
         name: 'show',
         value: this.isActive
