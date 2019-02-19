@@ -14,5 +14,9 @@ export default {
   calendar: {
     moreEvents: '{0} more'
   },
-  noDataText: 'No data available'
+  noDataText: 'No data available',
+  carousel: {
+    prev: 'Previous visual',
+    next: 'Next visual'
+  }
 }
