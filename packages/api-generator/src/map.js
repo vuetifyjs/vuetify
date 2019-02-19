@@ -1152,6 +1152,23 @@ module.exports = {
       ...textFieldSlots
     ]
   },
+  'v-textarea': {
+    events: [
+      {
+        name: 'input',
+        value: 'string'
+      },
+      {
+        name: 'change',
+        value: 'string'
+      },
+      ...inputEvents,
+      ...textEvents
+    ].concat(validatableEvents),
+    slots: [
+      ...textFieldSlots
+    ]
+  },
   'v-time-picker': {
     events: [
       {
