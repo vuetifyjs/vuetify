@@ -90,7 +90,7 @@
     }
   },
   "props": {
-    "appendOuterIcon": "Appends an icon to the outside of `v-text-field`'s input, uses same syntax as `v-icon`",
+    "appendOuterIcon": "Appends an icon to the outside the component's input, uses same syntax as `v-icon`",
     "autoGrow": "Auto-grows the input. This option requires the use of **v-model**",
     "autofocus": "Enables autofocus",
     "box": "Applies the alternate box input style",
@@ -104,7 +104,7 @@
     "outline": "Applies the outline style to the input",
     "placeholder": "Sets the input’s placeholder text",
     "prefix": "Displays prefix text",
-    "prependInnerIcon": "Prepends an icon inside the component, uses the same syntax as `v-icon`",
+    "prependInnerIcon": "Prepends an icon inside the component's input, uses the same syntax as `v-icon`",
     "reverse": "Reverses the input orientation",
     "rows": "Controls the number of rows in a textarea",
     "rowHeight": "Designate a custom _row-height_. Used for determining input height when using **multi-line** or **textarea** props",
