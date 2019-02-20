@@ -15,7 +15,7 @@ export function test(name, cb) {
   document.body.appendChild(app)
 */
 
-  rafPolyfill(window)
+  const runAllTimers = rafPolyfill(window)
 
   // Very naive polyfill for performance.now()
   window.performance = { now: () => (new Date()).getTime() }
@@ -29,7 +29,8 @@ export function test(name, cb) {
       return mount(component, options)
     },
     shallow,
-    compileToFunctions
+    compileToFunctions,
+    runAllTimers
   }))
 }
 
@@ -157,6 +158,15 @@ export function rafPolyfill(w) {
 
   if (!w.requestAnimationFrame) w.requestAnimationFrame = raf;
   if (!w.cancelAnimationFrame)  w.cancelAnimationFrame  = cancelRaf;
+
+  // TODO remove requestAnimationFrame polyfill when jest will support it: https://github.com/facebook/jest/pull/7776
+  function runAllTimers () {
+    while (allCallbacks.length) {
+      executeAll()
+    }
+  }
+
+  return runAllTimers
 }
 
 export function touch(element) {

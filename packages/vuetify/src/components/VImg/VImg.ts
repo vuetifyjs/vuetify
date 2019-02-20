@@ -71,7 +71,7 @@ export default VResponsive.extend({
           aspect: Number(this.aspectRatio || this.src.aspect || this.calculatedAspectRatio)
         }
     },
-    __cachedImage (): VNode | never[] {
+    __cachedImage (): VNode | [] {
       if (!(this.normalisedSrc.src || this.normalisedSrc.lazySrc)) return []
 
       const backgroundImage: string[] = []
@@ -205,9 +205,9 @@ export default VResponsive.extend({
   render (h): VNode {
     const node = VResponsive.options.render.call(this, h)
 
-    node.data.staticClass += ' v-image'
+    node.data!.staticClass += ' v-image'
 
-    node.data.attrs = {
+    node.data!.attrs = {
       role: this.alt ? 'img' : undefined,
       'aria-label': this.alt
     }
@@ -217,7 +217,7 @@ export default VResponsive.extend({
       this.__cachedImage,
       this.__genPlaceholder(),
       this.genContent()
-    ]
+    ] as VNode[]
 
     return h(node.tag, node.data, node.children)
   }

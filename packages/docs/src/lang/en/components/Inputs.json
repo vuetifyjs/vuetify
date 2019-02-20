@@ -8,7 +8,6 @@
   },
   "props": {
     "appendIcon": "Appends an icon to the component, uses the same syntax as `v-icon`",
-    "appendIconCb": "Callback for appended icon when clicked",
     "backgroundColor": "Changes the background-color of the input",
     "hideDetails": "Hides hint, validation errors",
     "hint": "Hint text",
@@ -17,11 +16,14 @@
     "persistentHint": "Forces hint to always be visible",
     "placeholder": "Sets the input's placeholder text",
     "prependIcon": "Prepends an icon to the component, uses the same syntax as `v-icon`",
-    "prependIconCb": "Callback for prepended icon when clicked",
     "required": "Designates the input as required; Adds an asertisk to the end of the label; Does not perform any validation.",
     "tabindex": "Tabindex of input",
     "toggleKeys": "Array of key codes that will toggle the input (if it supports toggling)",
     "value": "Input value"
+  },
+  "slots": {
+    "append": "Adds an item after input content",
+    "prepend": "Adds an item before input content"
   },
   "events": {
     "blur": "Emitted when the input is blurred",

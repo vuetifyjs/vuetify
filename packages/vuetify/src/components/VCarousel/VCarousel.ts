@@ -59,7 +59,7 @@ export default VWindow.extend({
 
   data () {
     return {
-      changedByControls: false,
+      changedByDelimiters: false,
       internalHeight: this.height,
       slideTimeout: undefined as number | undefined
     }
@@ -122,7 +122,15 @@ export default VWindow.extend({
           props: {
             icon: true
           },
-          on: { click: fn }
+          attrs: {
+            'aria-label': this.$vuetify.t(`$vuetify.carousel.${direction}`)
+          },
+          on: {
+            click: () => {
+              this.changedByDelimiters = true
+              fn()
+            }
+          }
         }, [
           this.$createElement(VIcon, {
             props: { 'size': '46px' }
@@ -180,7 +188,6 @@ export default VWindow.extend({
         },
         on: {
           change: (val: any) => {
-            this.changedByControls = true
             this.internalValue = val
           }
         }
@@ -199,11 +206,12 @@ export default VWindow.extend({
       this.slideTimeout = window.setTimeout(this.next, +this.interval > 0 ? +this.interval : 6000)
     },
     updateReverse (val: number, oldVal: number) {
-      if (this.changedByControls) {
-        this.changedByControls = false
-
-        VWindow.options.methods.updateReverse.call(this, val, oldVal)
+      if (this.changedByDelimiters) {
+        this.changedByDelimiters = false
+        return
       }
+
+      VWindow.options.methods.updateReverse.call(this, val, oldVal)
     }
   },
 

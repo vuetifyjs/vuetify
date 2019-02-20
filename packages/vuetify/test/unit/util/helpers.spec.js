@@ -1,9 +1,11 @@
+import Vue from 'vue/dist/vue.common.js'
 import { test } from '@/test'
 import {
   deepEqual,
   getNestedValue,
   getPropertyFromItem,
-  convertToUnit
+  convertToUnit,
+  getSlotType
 } from '@/util/helpers'
 
 test('helpers.js', () => {
@@ -181,5 +183,62 @@ test('helpers.js', () => {
     expect(convertToUnit('3.14vw')).toBe('3.14vw')
 
     expect(convertToUnit('foo')).toBe('foo')
+  })
+
+  describe('getSlotType', () => {
+    it('should detect old slots', () => {
+      const vm = new Vue({
+        template: `<foo ref="foo"><template slot="bar">hello</template></foo>`,
+        components: {
+          foo: { render: h => h('div') }
+        }
+      }).$mount()
+
+      expect(getSlotType(vm.$refs.foo, 'bar')).toBe('normal')
+    })
+
+    it('should detect old scoped slots', () => {
+      const vm = new Vue({
+        template: `<foo ref="foo"><template slot="bar" slot-scope="data">hello</template></foo>`,
+        components: {
+          foo: { render: h => h('div') }
+        }
+      }).$mount()
+
+      expect(getSlotType(vm.$refs.foo, 'bar')).toBe('scoped')
+    })
+
+    it('should detect bare v-slot', () => {
+      const vm = new Vue({
+        template: `<foo ref="foo"><template #bar>hello</template></foo>`,
+        components: {
+          foo: { render: h => h('div') }
+        }
+      }).$mount()
+
+      expect(getSlotType(vm.$refs.foo, 'bar', true)).toBe('v-slot')
+    })
+
+    it('should detect bound v-slot', () => {
+      const vm = new Vue({
+        template: `<foo ref="foo"><template #bar="data">hello</template></foo>`,
+        components: {
+          foo: { render: h => h('div') }
+        }
+      }).$mount()
+
+      expect(getSlotType(vm.$refs.foo, 'bar', true)).toBe('scoped')
+    })
+
+    it('should count bare v-slot as scoped', () => {
+      const vm = new Vue({
+        template: `<foo ref="foo"><template #bar>hello</template></foo>`,
+        components: {
+          foo: { render: h => h('div') }
+        }
+      }).$mount()
+
+      expect(getSlotType(vm.$refs.foo, 'bar')).toBe('scoped')
+    })
   })
 })
