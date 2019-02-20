@@ -2,34 +2,22 @@
 import { Service } from '../service'
 
 // Types
-import {
-  VuetifyIconSets,
-  VuetifyIconOptions
-} from 'vuetify/types/services/icons'
-
-// Presets
-import md from './presets/md'
-import mdi from './presets/mdi'
-import fa from './presets/fa'
-import fa4 from './presets/fa4'
-
-const iconFonts: VuetifyIconSets = Object.freeze({
-  md, mdi, fa, fa4
-})
+import { VuetifyIconOptions } from 'vuetify/types/services/icons'
 
 export class Icons extends Service {
   static property = 'icons'
 
-  public iconfont: VuetifyIconOptions['iconfont'] = 'md'
-  public values: VuetifyIconOptions['values'] = iconFonts[this.iconfont]
+  public values: VuetifyIconOptions['values']
 
-  constructor (options: Partial<VuetifyIconOptions> = {}) {
+  constructor (
+    options: Partial<VuetifyIconOptions['values']> = {},
+    defaultOptions: VuetifyIconOptions['values']
+  ) {
     super()
-    if (options.iconfont) this.iconfont = options.iconfont
 
-    this.values = {
-      ...iconFonts[this.iconfont],
-      ...(options.values || {})
-    }
+    this.values = Object.assign({},
+      defaultOptions,
+      options
+    )
   }
 }

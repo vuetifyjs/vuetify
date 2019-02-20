@@ -1,40 +1,55 @@
-/* eslint-disable */
 import { VuetifyPreset } from 'vuetify/types/presets'
 
+// Icons
+import md from '../icons/md'
+
+// Language
+import en from '../locale/en'
+
 const preset: VuetifyPreset = {
-  ssr: false,
-  locale: {
-    lang: 'en',
-    rtl: false
+  breakpoint: {
+    thresholds: {
+      xs: 600,
+      sm: 960,
+      md: 1280,
+      lg: 1920
+    },
+    scrollBarWidth: 16
   },
+  icons: md,
+  lang: {
+    current: 'en',
+    locales: { en }
+  },
+  rtl: false,
   theme: {
+    dark: false,
     options: {
-      cspNonce: undefined,
+      cspNonce: null,
+      customProperties: false,
+      minifyTheme: null,
+      themeCache: null
     },
-    default: 'light',
-    themes: {
-      dark: {
-        primary: '#1976D2',   // blue.darken2
-        secondary: '#424242', // grey.darken3
-        accent: '#82B1FF',    // blue.accent1
-        error: '#FF5252',     // red.accent2
-        info: '#2196F3',      // blue.base
-        success: '#4CAF50',   // green.base
-        warning: '#FFC107'    // amber.base
-      },
+    variants: {
       light: {
-        primary: '#FF5252',   // blue.darken2
-        secondary: '#424242', // grey.darken3
-        accent: '#82B1FF',    // blue.accent1
-        error: '#FF5252',     // red.accent2
-        info: '#2196F3',      // blue.base
-        success: '#4CAF50',   // green.base
-        warning: '#FFC107'    // amber.base
+        primary: '#1976D2',
+        secondary: '#424242',
+        accent: '#82B1FF',
+        error: '#FF5252',
+        info: '#2196F3',
+        success: '#4CAF50',
+        warning: '#FB8C00'
+      },
+      dark: {
+        primary: '#2196F3',
+        secondary: '#424242',
+        accent: '#FF3F80',
+        error: '#FF5252',
+        info: '#2196F3',
+        success: '#4CAF50',
+        warning: '#FB8C00'
       }
-    },
-  },
-  icons: {
-    iconfont: 'md'
+    }
   }
 }
 

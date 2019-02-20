@@ -5,25 +5,19 @@ export interface VuetifyThemeService {
 }
 
 export interface VuetifyThemeOptions {
-  dark?: boolean
+  dark: boolean
   disable?: boolean
-  default?: string | false
-  options?: {
+  options: {
     /** @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#Unsafe_inline_script */
-    cspNonce?: string | null
-    customProperties?: boolean
-    minifyTheme?: ((css: string) => string) | null
-    themeCache?: VuetifyThemeCache
+    cspNonce: string | null
+    customProperties: boolean
+    minifyTheme: ((css: string) => string) | null
+    themeCache: VuetifyThemeCache | null
   }
-  themes?: {
-    dark?: Partial<VuetifyThemeVariant>
-    light?: Partial<VuetifyThemeVariant>
+  variants: {
+    dark?: VuetifyThemeVariant
+    light?: VuetifyThemeVariant
   }
-}
-
-export interface VuetifyThemes {
-  dark: VuetifyThemeVariant,
-  light: VuetifyThemeVariant
 }
 
 export interface VuetifyThemeVariant {

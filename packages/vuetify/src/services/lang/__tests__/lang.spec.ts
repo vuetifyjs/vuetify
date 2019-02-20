@@ -1,6 +1,9 @@
 // Service
 import { Lang } from '../index'
 
+// Preset
+import defaultPreset from '../../../presets/default'
+
 // Utilities
 import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
 
@@ -10,7 +13,7 @@ describe('$vuetify.lang', () => {
   toHaveBeenWarnedInit()
 
   beforeEach(() => {
-    lang = new Lang()
+    lang = new Lang({}, defaultPreset.lang)
   })
 
   it('should fall back to en', () => {
@@ -38,7 +41,7 @@ describe('$vuetify.lang', () => {
       locales: {
         foreign: { foo: 'foreignBar' }
       }
-    })
+    }, defaultPreset.lang)
 
     expect(lang.t('$vuetify.foo')).toBe('foreignBar')
   })
@@ -46,7 +49,7 @@ describe('$vuetify.lang', () => {
   it('should use a custom translator', () => {
     const translator = jest.fn(str => str)
 
-    lang = new Lang({ t: translator })
+    lang = new Lang({ t: translator }, defaultPreset.lang)
 
     lang.t('$vuetify.foobar', 'fizzbuzz')
 

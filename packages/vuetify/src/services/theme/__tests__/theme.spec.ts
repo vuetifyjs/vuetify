@@ -1,6 +1,9 @@
 // Service
 import { Theme } from '../index'
 
+// Preset
+import defaultPreset from '../../../presets/default'
+
 // Types
 import {
   VuetifyParsedTheme,
@@ -32,7 +35,7 @@ describe('Theme.ts', () => {
 
     mock = {
       default: 'light',
-      themes: {
+      variants: {
         dark: FillVariant(),
         light: FillVariant()
       }
@@ -40,7 +43,7 @@ describe('Theme.ts', () => {
   })
 
   it('should disable theme colors', () => {
-    const theme = new Theme({ disable: true })
+    const theme = new Theme({ disable: true }, defaultPreset.theme)
 
     theme.init()
 
@@ -49,14 +52,14 @@ describe('Theme.ts', () => {
 
   it('should generate theme and apply to document', () => {
     const theme = new Theme({
-      themes: {
+      variants: {
         light: FillVariant({
           primary: '#000001',
           secondary: '#000002',
           accent: '#000003'
         })
       }
-    })
+    }, defaultPreset.theme)
 
     theme.init()
 
@@ -71,14 +74,13 @@ describe('Theme.ts', () => {
 
   it('should apply a new theme', () => {
     const theme = new Theme({
-      default: 'light',
-      themes: {
+      variants: {
         light: FillVariant(),
         dark: FillVariant({
           primary: '#FFFFFF'
         })
       }
-    })
+    }, defaultPreset.theme)
 
     theme.init()
 
@@ -91,13 +93,13 @@ describe('Theme.ts', () => {
   })
 
   it('should clear css', () => {
-    const theme = new Theme()
+    const theme = new Theme({}, defaultPreset.theme)
     const spy = jest.spyOn(theme, 'clearCss')
 
     theme.dark = true
     expect(spy).toHaveBeenCalledTimes(0)
 
-    theme.themes.light = FillVariant()
+    theme.variants.light = FillVariant()
     theme.dark = false
     expect(spy).toHaveBeenCalledTimes(0)
 
@@ -120,7 +122,7 @@ describe('Theme.ts', () => {
       options: {
         themeCache
       }
-    })
+    }, defaultPreset.theme)
 
     theme.applyTheme()
 
@@ -137,7 +139,7 @@ describe('Theme.ts', () => {
       options: {
         minifyTheme
       }
-    })
+    }, defaultPreset.theme)
 
     theme.init()
 
@@ -155,7 +157,7 @@ describe('Theme.ts', () => {
       options: {
         cspNonce: 'foobar'
       }
-    })
+    }, defaultPreset.theme)
 
     theme.init()
 
@@ -166,7 +168,7 @@ describe('Theme.ts', () => {
   it('should initialize the theme', () => {
     const theme = new Theme({
       ...mock
-    })
+    }, defaultPreset.theme)
     const spy = jest.spyOn(theme, 'applyTheme')
 
     theme.init()

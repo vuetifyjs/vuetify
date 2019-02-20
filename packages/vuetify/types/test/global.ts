@@ -42,12 +42,25 @@ Vue.component('theme', {
     })
 
     this.$vuetify.theme = {
-      themes: {
+      dark: false,
+      options: {
+        customProperties: false,
+        minifyTheme: null,
+        cspNonce: null,
+        themeCache: null
+      },
+      variants: {
         light: {
-          ...this.$vuetify.theme!.themes!.light,
-          primary: 132
+          ...this.$vuetify.theme.variants.light,
+          primary: 132,
+          secondary: 132,
+          accent: 132,
+          success: 132,
+          warning: 132,
+          error: 132,
+          info: 132
         }
-      } as any
+      }
     }
   }
 })

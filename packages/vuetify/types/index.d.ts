@@ -18,28 +18,17 @@ export interface VuetifyUseOptions {
   transitions?: Record<string, VueConstructor>
   directives?: Record<string, DirectiveOptions>
   components?: Record<string, ComponentOrPack>
-  /** @see https://vuetifyjs.com/style/theme */
-  theme?: Partial<VuetifyThemeOptions> | false
-  breakpoint?: Partial<VuetifyBreakpointOptions> | false
-  /**
-   * Override specific icon names. You can also specify your own custom ones that can then be accessed from v-icon
-   *
-   * @example &lt;v-icon&gt;$vuetify.icons.(name)&lt;/v-icon&gt;
-   */
-  icons?: Partial<VuetifyIcons>
-  lang?: Partial<VuetifyLanguage>
-  rtl?: boolean
 }
 
 export interface VuetifyObject extends Vue {
   readonly breakpoint: Readonly<VuetifyBreakpoint>
   readonly goTo: <T extends string | number | HTMLElement | Vue>(target: T, options?: VuetifyGoToOptions) => Promise<T>
-  readonly t: VuetifyLanguage['t']
   application: VuetifyApplication
-  theme: VuetifyThemeOptions
+  dark: boolean
   icons: VuetifyIcons
   lang: VuetifyLanguage
   rtl: boolean
+  theme: VuetifyThemeOptions
 }
 
 declare module 'vue/types/vue' {

@@ -1,6 +1,9 @@
 // Services
 import * as services from './services'
 
+// Preset
+import DefaultPreset from './presets/default'
+
 // Styles
 import './stylus/app.styl'
 
@@ -20,11 +23,17 @@ export default class Vuetify {
   static version: string
 
   framework: Record<string, VuetifyServiceContract> = {}
+  globals = ['rtl']
   installed: string[] = []
+  defaultPreset: VuetifyPreset
   preset: Partial<VuetifyPreset> = {}
 
-  constructor (preset: Partial<VuetifyPreset> = {}) {
+  constructor (
+    preset: Partial<VuetifyPreset> = {},
+    defaultPreset: VuetifyPreset = DefaultPreset
+  ) {
     this.preset = preset
+    this.defaultPreset = defaultPreset
 
     this.use(services.Application)
     this.use(services.Breakpoint)
@@ -38,17 +47,19 @@ export default class Vuetify {
   // bootstrap in install beforeCreate
   // Exposes ssrContext if available
   init (ssrContext?: object) {
+    this.globals.forEach(property => {
+      const value = this.preset[property] || this.defaultPreset[property]
+
+      this.framework[property] = value
+    })
+
     this.installed.forEach(property => {
       const service = this.framework[property]
+
       service.framework = this.framework
 
       service.init(ssrContext)
     })
-
-    // rtl is not installed and
-    // will never be called by
-    // the init process
-    this.framework.rtl = Boolean(this.preset.rtl) as any
   }
 
   // Instantiate a VuetifyService
@@ -57,7 +68,11 @@ export default class Vuetify {
 
     if (this.installed.includes(property)) return
 
-    this.framework[property] = new Service(this.preset[property])
+    this.framework[property] = new Service(
+      this.preset[property],
+      this.defaultPreset[property]
+    )
+
     this.installed.push(property)
   }
 }

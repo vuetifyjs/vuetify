@@ -31,26 +31,21 @@ export class Breakpoint extends Service {
   height = 0
   width = 0
 
-  thresholds = {
-    xs: 600,
-    sm: 960,
-    md: 1280,
-    lg: 1920
-  }
-  scrollbarWidth = 16
+  thresholds: Record<string, number>
+  scrollbarWidth: number
 
   private resizeTimeout = 0
 
-  constructor (options: Partial<VuetifyBreakpointOptions> = {}) {
+  constructor (
+    options: Partial<VuetifyBreakpointOptions> = {},
+    defaultOptions: VuetifyBreakpointOptions
+  ) {
     super()
-    this.thresholds = {
-      ...this.thresholds,
-      ...options.thresholds
-    }
-    this.scrollbarWidth = (
-      options.scrollBarWidth ||
-      this.scrollbarWidth
+    this.thresholds = Object.assign({},
+      defaultOptions.thresholds,
+      options.thresholds
     )
+    this.scrollbarWidth = options.scrollBarWidth || defaultOptions.scrollBarWidth
 
     this.init()
   }

@@ -1,5 +1,11 @@
-import { resizeWindow } from '../../../../test'
+// Service
 import { Breakpoint } from '../'
+
+// Preset
+import defaultPreset from '../../../presets/default'
+
+// Utilities
+import { resizeWindow } from '../../../../test'
 
 describe('Breakpoint.ts', () => {
   let breakpoint: Breakpoint
@@ -230,7 +236,7 @@ describe('Breakpoint.ts', () => {
   ]
 
   beforeEach(() => {
-    breakpoint = new Breakpoint()
+    breakpoint = new Breakpoint({}, defaultPreset.breakpoint)
   })
 
   scenarios.slice(0, 1).forEach(scenario => {
@@ -274,7 +280,7 @@ describe('Breakpoint.ts', () => {
       thresholds: {
         xs: 400
       }
-    })
+    }, defaultPreset.breakpoint)
 
     await resizeWindow(401)
     expect(breakpoint.xs).toBe(false)

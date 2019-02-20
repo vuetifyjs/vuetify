@@ -4,6 +4,6 @@ export interface VuetifyServiceContract {
 }
 
 export interface VuetifyService {
-  new (options?: any): VuetifyServiceContract
+  new (options?: any, defaultOptions?: any): VuetifyServiceContract
   property: string
 }

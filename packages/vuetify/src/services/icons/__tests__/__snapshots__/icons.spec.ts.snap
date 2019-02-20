@@ -48,6 +48,7 @@ Object {
   "error": "fa fa-exclamation-triangle",
   "expand": "fa fa-chevron-down",
   "info": "fa fa-info-circle",
+  "loading": "cached",
   "menu": "fa fa-bars",
   "next": "fa fa-chevron-right",
   "prev": "fa fa-chevron-left",

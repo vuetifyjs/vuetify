@@ -1,9 +1,6 @@
 // Extensions
 import { Service } from '../service'
 
-// Language
-import en from '../../locale/en'
-
 // Utilities
 import { getObjectValueByPath } from '../../util/helpers'
 import { consoleError, consoleWarn } from '../../util/console'
@@ -17,38 +14,25 @@ import {
 const LANG_PREFIX = '$vuetify.'
 const fallback = Symbol('Lang fallback')
 
-function getTranslation (
-  locale: VuetifyLocale,
-  key: string,
-  usingFallback = false
-): string {
-  const shortKey = key.replace(LANG_PREFIX, '')
-  let translation = getObjectValueByPath(locale, shortKey, fallback) as string | typeof fallback
-
-  if (translation === fallback) {
-    if (usingFallback) {
-      consoleError(`Translation key "${shortKey}" not found in fallback`)
-      translation = key
-    } else {
-      consoleWarn(`Translation key "${shortKey}" not found, falling back to default`)
-      translation = getTranslation(en, key, true)
-    }
-  }
-
-  return translation
-}
-
 export class Lang extends Service {
   static property = 'lang'
 
-  public locales: Record<string, VuetifyLocale>
   public current: string
+  public fallback: VuetifyLocale
+  public locales: Record<string, VuetifyLocale>
   private translator: ((key: string, ...params: any[]) => string) | undefined
 
-  constructor (options: Partial<VuetifyLangOptions> = {}) {
+  constructor (
+    options: Partial<VuetifyLangOptions> = {},
+    defaultOptions: VuetifyLangOptions
+  ) {
     super()
-    this.current = options.current || 'en'
-    this.locales = Object.assign({ en }, options.locales)
+    this.current = options.current || defaultOptions.current
+    this.locales = {
+      ...defaultOptions.locales,
+      ...options.locales
+    }
+    this.fallback = defaultOptions.locales[defaultOptions.current]
     this.translator = options.t
   }
 
@@ -57,10 +41,31 @@ export class Lang extends Service {
 
     if (this.translator) return this.translator(key, ...params)
 
-    const translation = getTranslation(this.locales[this.current], key)
+    const translation = this.getTranslation(this.locales[this.current], key)
 
     return translation.replace(/\{(\d+)\}/g, (match: string, index: string) => {
       return String(params[+index])
     })
+  }
+
+  private getTranslation (
+    locale: VuetifyLocale,
+    key: string,
+    usingFallback = false
+  ): string {
+    const shortKey = key.replace(LANG_PREFIX, '')
+    let translation = getObjectValueByPath(locale, shortKey, fallback) as string | typeof fallback
+
+    if (translation === fallback) {
+      if (usingFallback) {
+        consoleError(`Translation key "${shortKey}" not found in fallback`)
+        translation = key
+      } else {
+        consoleWarn(`Translation key "${shortKey}" not found, falling back to default`)
+        translation = this.getTranslation(this.fallback, key, true)
+      }
+    }
+
+    return translation
   }
 }

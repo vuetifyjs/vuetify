@@ -8,7 +8,6 @@ import * as ThemeUtils from './utils'
 import {
   VuetifyParsedTheme,
   VuetifyThemeOptions,
-  VuetifyThemes,
   VuetifyThemeVariant
 } from 'vuetify/types/services/theme'
 
@@ -18,49 +17,36 @@ export class Theme extends Service {
   public disabled = false
   public options: VuetifyThemeOptions['options']
   public styleEl?: HTMLStyleElement
-  public themes: VuetifyThemes = {
-    light: {
-      primary: '#1976D2',
-      secondary: '#424242',
-      accent: '#82B1FF',
-      error: '#FF5252',
-      info: '#2196F3',
-      success: '#4CAF50',
-      warning: '#FB8C00'
-    },
-    dark: {
-      primary: '#2196F3',
-      secondary: '#424242',
-      accent: '#FF3F80',
-      error: '#FF5252',
-      info: '#2196F3',
-      success: '#4CAF50',
-      warning: '#FB8C00'
-    }
+  public variants?: {
+    dark: VuetifyThemeVariant
+    light: VuetifyThemeVariant
   }
-
   private isDark = null as boolean | null
   private ssr = false
 
-  constructor (options: Partial<VuetifyThemeOptions> = {}) {
+  constructor (
+    options: Partial<VuetifyThemeOptions> = {},
+    defaultOptions: VuetifyThemeOptions
+  ) {
     super()
+
+    this.options = Object.assign({},
+      defaultOptions.options,
+      options.options
+    )
+
     if (options.disable) {
       this.disabled = true
 
       return
     }
 
-    this.options = {
-      ...this.options,
-      ...options.options
-    }
-
     this.dark = Boolean(options.dark)
-    const themes = options.themes || {}
+    const variants = options.variants || { dark: {}, light: {} }
 
-    this.themes = {
-      dark: this.fillVariant(themes.dark, true),
-      light: this.fillVariant(themes.light, false)
+    this.variants = {
+      dark: this.fillVariant(variants.dark, defaultOptions.variants.dark),
+      light: this.fillVariant(variants.light, defaultOptions.variants.light)
     }
   }
 
@@ -88,7 +74,7 @@ export class Theme extends Service {
   public applyTheme (): void {
     if (this.disabled) return this.clearCss()
 
-    const options = this.options || {}
+    const options = this.options
     const parsedTheme = this.parsedTheme
 
     let css: string | null = ''
@@ -154,14 +140,12 @@ export class Theme extends Service {
 
   private fillVariant (
     theme: Partial<VuetifyThemeVariant> = {},
-    dark: boolean
+    defaultTheme: Partial<VuetifyThemeVariant> = {}
   ): VuetifyThemeVariant {
-    const defaultTheme = this.themes[dark ? 'dark' : 'light']
-
     return Object.assign({},
       defaultTheme,
       theme
-    )
+    ) as VuetifyThemeVariant
   }
 
   // Generate the style element
@@ -185,7 +169,7 @@ export class Theme extends Service {
   get currentTheme () {
     const target = this.dark ? 'dark' : 'light'
 
-    return this.themes![target]
+    return this.variants![target]
   }
 
   get generatedStyles (): string {
