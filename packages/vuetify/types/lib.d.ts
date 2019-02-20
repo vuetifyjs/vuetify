@@ -137,6 +137,8 @@ declare module 'vuetify/lib' {
   const VToolbarSideIcon: Component
   const VToolbarTitle: Component
   const VTooltip: Component
+  const VTreeSelect: Component
+  const VTreeSelectList: Component
   const VTreeview: Component
   const VTreeviewNode: Component
   const VWindow: Component
@@ -271,6 +273,8 @@ declare module 'vuetify/lib' {
     VToolbarSideIcon,
     VToolbarTitle,
     VTooltip,
+    VTreeSelect,
+    VTreeSelectList,
     VTreeview,
     VTreeviewNode,
     VWindow,

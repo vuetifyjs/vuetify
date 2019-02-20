@@ -149,6 +149,8 @@ Array [
   "VToolbarSideIcon",
   "VToolbarTitle",
   "VTooltip",
+  "VTreeSelect",
+  "VTreeSelectList",
   "VTreeview",
   "VTreeviewNode",
   "VWindow",
