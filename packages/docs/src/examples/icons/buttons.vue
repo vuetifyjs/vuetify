@@ -29,11 +29,11 @@
     </div>
 
     <div>
-      <v-btn flat icon color="blue lighten-2">
+      <v-btn text icon color="blue lighten-2">
         <v-icon>thumb_up</v-icon>
       </v-btn>
 
-      <v-btn flat icon color="red lighten-2">
+      <v-btn text icon color="red lighten-2">
         <v-icon>thumb_down</v-icon>
       </v-btn>
     </div>
