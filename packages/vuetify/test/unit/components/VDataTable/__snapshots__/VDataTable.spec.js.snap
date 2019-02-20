@@ -94,7 +94,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
               </div>
               <div class="v-menu">
                 <div class="v-menu__content theme--light v-menu__content--auto "
-                     style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
+                     style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
                 >
                   <div class="v-select-list v-card theme--light">
                     <div role="list"
@@ -275,7 +275,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
               </div>
               <div class="v-menu">
                 <div class="v-menu__content theme--light v-menu__content--auto "
-                     style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
+                     style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
                 >
                   <div class="v-select-list v-card theme--light">
                     <div role="list"
@@ -464,7 +464,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
               </div>
               <div class="v-menu">
                 <div class="v-menu__content theme--light v-menu__content--auto "
-                     style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
+                     style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
                 >
                   <div class="v-select-list v-card theme--light">
                     <div role="list"
