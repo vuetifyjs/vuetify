@@ -14,15 +14,15 @@ test('times.ts', ({ mount }) => {
       }
     })
 
-    expect(wrapper.vm.parsedNow).toBeDefined();
-    expect(wrapper.vm.parsedNow).toMatchSnapshot();
+    expect(wrapper.vm.parsedNow).toBeDefined()
+    expect(wrapper.vm.parsedNow).toMatchSnapshot()
   })
 
   it('should update day', async () => {
     const wrapper = mount(Mock)
 
-    expect(typeof wrapper.vm.updateDay).toBe("function");
-    let target = {};
+    expect(typeof wrapper.vm.updateDay).toBe("function")
+    let target = {}
     let now = {
       date: "2019-02-08",
       year: "2019",
@@ -30,15 +30,15 @@ test('times.ts', ({ mount }) => {
       day: "8",
       weekday: "4",
     }
-    wrapper.vm.updateDay(now, target);
-    expect(target).toEqual(now);
+    wrapper.vm.updateDay(now, target)
+    expect(target).toEqual(now)
   })
 
   it('should not update day if dates are equal', async () => {
     const wrapper = mount(Mock)
 
-    expect(typeof wrapper.vm.updateDay).toBe("function");
-    let target = { date: "2019-02-08" };
+    expect(typeof wrapper.vm.updateDay).toBe("function")
+    let target = { date: "2019-02-08" }
     let now = {
       date: "2019-02-08",
       year: "2019",
@@ -46,21 +46,21 @@ test('times.ts', ({ mount }) => {
       day: "8",
       weekday: "4",
     }
-    wrapper.vm.updateDay(now, target);
-    expect(target).not.toEqual(now);
+    wrapper.vm.updateDay(now, target)
+    expect(target).not.toEqual(now)
   })
 
   it('should not update time if times are equal', async () => {
     const wrapper = mount(Mock)
 
-    expect(typeof wrapper.vm.updateTime).toBe("function");
-    let target = { time: "08:30" };
+    expect(typeof wrapper.vm.updateTime).toBe("function")
+    let target = { time: "08:30" }
     let now = {
       time: "08:30",
       hour: "8",
       minute: "30"
     }
-    wrapper.vm.updateTime(now, target);
-    expect(target).not.toEqual(now);
+    wrapper.vm.updateTime(now, target)
+    expect(target).not.toEqual(now)
   })
 })

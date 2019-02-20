@@ -416,7 +416,7 @@ test('VCalendar/util/timestamp.ts', ({ mount }) => {
       Number.MAX_SAFE_INTEGER
     )
 
-    expect(days).toEqual([]);
+    expect(days).toEqual([])
   })
 
   it('should handle skips equal to zero', () => {
@@ -435,66 +435,66 @@ test('VCalendar/util/timestamp.ts', ({ mount }) => {
       Number.MAX_SAFE_INTEGER
     )
 
-    expect(days).toMatchSnapshot();
+    expect(days).toMatchSnapshot()
   })
 
   it('should create interval list', () => {
-    expect(createIntervalList(parseTimestamp("2019-02-08"), 2, 15, 10)).toMatchSnapshot();
-    expect(createIntervalList(parseTimestamp("2019-02-08"), 1, 15, 10)).toMatchSnapshot();
-    expect(createIntervalList(parseTimestamp("2019-02-08"), 2, 5, 2)).toMatchSnapshot();
+    expect(createIntervalList(parseTimestamp("2019-02-08"), 2, 15, 10)).toMatchSnapshot()
+    expect(createIntervalList(parseTimestamp("2019-02-08"), 1, 15, 10)).toMatchSnapshot()
+    expect(createIntervalList(parseTimestamp("2019-02-08"), 2, 5, 2)).toMatchSnapshot()
   })
 
   // TODO Create a test that doesn't fail when
   // the day changes or ignore the code it
   // covers
   it.skip('should create native locale formatter', () => {
-    expect(createNativeLocaleFormatter("en-US", () => {})(parseTimestamp("2019-02-08"))).toBe('2/8/2019');
-    expect(createNativeLocaleFormatter("en-UK", () => {})(parseTimestamp("2019-02-08"))).toBe('2/8/2019');
-    expect(createNativeLocaleFormatter("ru-RU", () => {})(parseTimestamp("2019-02-08"))).toBe('2019-2-8');
+    expect(createNativeLocaleFormatter("en-US", () => {})(parseTimestamp("2019-02-08"))).toBe('2/8/2019')
+    expect(createNativeLocaleFormatter("en-UK", () => {})(parseTimestamp("2019-02-08"))).toBe('2/8/2019')
+    expect(createNativeLocaleFormatter("ru-RU", () => {})(parseTimestamp("2019-02-08"))).toBe('2019-2-8')
   })
 
   it('should return emptyFormatter if Intl isn\'t defined', () => {
-    const intl = global.Intl;
-    global.Intl = undefined;
-    expect(createNativeLocaleFormatter("", () => {})(parseTimestamp("2019-02-08"))).toBe('');
-    global.Intl = intl;
+    const intl = global.Intl
+    global.Intl = undefined
+    expect(createNativeLocaleFormatter("", () => {})(parseTimestamp("2019-02-08"))).toBe('')
+    global.Intl = intl
   })
 
   it('should return emptyFormatter if Intl throws error', () => {
-    global.Intl.DateTimeFormat = () => { throw new Error(); };
-    expect(createNativeLocaleFormatter("", () => {})(parseTimestamp("2019-02-08"))).toBe('');
+    global.Intl.DateTimeFormat = () => { throw new Error() }
+    expect(createNativeLocaleFormatter("", () => {})(parseTimestamp("2019-02-08"))).toBe('')
   })
 
   it('should get month start', () => {
-    expect(getStartOfMonth(parseTimestamp('2019-02-08')).date).toEqual('2019-02-01');
-    expect(getStartOfMonth(parseTimestamp('2019-03-08')).date).toEqual('2019-03-01');
-    expect(getStartOfMonth(parseTimestamp('2019-06-08')).date).toEqual('2019-06-01');
+    expect(getStartOfMonth(parseTimestamp('2019-02-08')).date).toEqual('2019-02-01')
+    expect(getStartOfMonth(parseTimestamp('2019-03-08')).date).toEqual('2019-03-01')
+    expect(getStartOfMonth(parseTimestamp('2019-06-08')).date).toEqual('2019-06-01')
   })
 
   it('should get month end', () => {
-    expect(getEndOfMonth(parseTimestamp('2019-02-08')).date).toEqual('2019-02-28');
-    expect(getEndOfMonth(parseTimestamp('2019-03-08')).date).toEqual('2019-03-31');
-    expect(getEndOfMonth(parseTimestamp('2019-06-08')).date).toEqual('2019-06-30');
+    expect(getEndOfMonth(parseTimestamp('2019-02-08')).date).toEqual('2019-02-28')
+    expect(getEndOfMonth(parseTimestamp('2019-03-08')).date).toEqual('2019-03-31')
+    expect(getEndOfMonth(parseTimestamp('2019-06-08')).date).toEqual('2019-06-30')
   })
 
   it('should get next minutes', () => {
-    expect(nextMinutes({ hour: 8, minute: 30 }, 40)).toEqual({ hour: 9, minute: 10 });
-    expect(nextMinutes({ hour: 8, minute: 10 }, 90)).toEqual({ hour: 9, minute: 40 });
-    expect(nextMinutes({ hour: 8, minute: 0 }, 40)).toEqual({ hour: 8, minute: 40 });
-    expect(nextMinutes({ day: 1, weekday: 1, hour: 23, minute: 50 }, 40)).toEqual({ hour: 0, minute: 30, day: 2, weekday: 2 });
+    expect(nextMinutes({ hour: 8, minute: 30 }, 40)).toEqual({ hour: 9, minute: 10 })
+    expect(nextMinutes({ hour: 8, minute: 10 }, 90)).toEqual({ hour: 9, minute: 40 })
+    expect(nextMinutes({ hour: 8, minute: 0 }, 40)).toEqual({ hour: 8, minute: 40 })
+    expect(nextMinutes({ day: 1, weekday: 1, hour: 23, minute: 50 }, 40)).toEqual({ hour: 0, minute: 30, day: 2, weekday: 2 })
   })
 
   it('should update minutes', () => {
-    expect(updateMinutes({}, 40)).toMatchObject({ hour: 0, minute: 40 });
-    expect(updateMinutes({}, 90)).toMatchObject({ hour: 1, minute: 30 });
-    expect(updateMinutes({}, 40, {})).toMatchObject({ hour: 0, minute: 40 });
-    expect(updateMinutes({}, 90, {})).toMatchObject({ hour: 1, minute: 30 });
+    expect(updateMinutes({}, 40)).toMatchObject({ hour: 0, minute: 40 })
+    expect(updateMinutes({}, 90)).toMatchObject({ hour: 1, minute: 30 })
+    expect(updateMinutes({}, 40, {})).toMatchObject({ hour: 0, minute: 40 })
+    expect(updateMinutes({}, 90, {})).toMatchObject({ hour: 1, minute: 30 })
   })
 
   it('should get weekday skips', () => {
-    expect(getWeekdaySkips([ 0, 1, 2, 3, 4, 5, 6 ])).toEqual([1, 1, 1, 1, 1, 1, 1]);
-    expect(getWeekdaySkips([ 1, 5, 0, 3, 4, 2, 6 ])).toEqual([1, 1, 1, 1, 1, 1, 1]);
-    expect(getWeekdaySkips([ 1, 5, 1, 3, 4, 2, 6 ])).toEqual([0, 1, 1, 1, 1, 1, 2]);
+    expect(getWeekdaySkips([ 0, 1, 2, 3, 4, 5, 6 ])).toEqual([1, 1, 1, 1, 1, 1, 1])
+    expect(getWeekdaySkips([ 1, 5, 0, 3, 4, 2, 6 ])).toEqual([1, 1, 1, 1, 1, 1, 1])
+    expect(getWeekdaySkips([ 1, 5, 1, 3, 4, 2, 6 ])).toEqual([0, 1, 1, 1, 1, 1, 2])
   })
 
   it('should create day list', () => {

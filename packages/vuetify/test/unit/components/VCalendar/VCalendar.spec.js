@@ -14,10 +14,10 @@ test("VCalendar", ({ mount }) => {
       methods: {
         getNow: () => parseDate(new Date("2019-02-17"))
       }
-    });
+    })
 
     expect(wrapper.hasClass("v-calendar-daily")).toBe(true)
-    expect(wrapper.html()).toMatchSnapshot();
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it("should render week view", async () => {
@@ -31,10 +31,10 @@ test("VCalendar", ({ mount }) => {
       methods: {
         getNow: () => parseDate(new Date("2019-02-17"))
       }
-    });
+    })
 
     expect(wrapper.hasClass("v-calendar-daily")).toBe(true)
-    expect(wrapper.html()).toMatchSnapshot();
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it("should render month view", async () => {
@@ -48,10 +48,10 @@ test("VCalendar", ({ mount }) => {
       methods: {
         getNow: () => parseDate(new Date("2019-02-17"))
       }
-    });
+    })
 
     expect(wrapper.hasClass("v-calendar-monthly")).toBe(true)
-    expect(wrapper.html()).toMatchSnapshot();
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it("should parse value", async () => {
@@ -61,7 +61,7 @@ test("VCalendar", ({ mount }) => {
         start: "2019-01-29",
         end: "2019-02-04"
       }
-    });
+    })
 
     expect(wrapper.vm.parsedValue.date).toBe("2019-02-02")
   })
@@ -72,7 +72,7 @@ test("VCalendar", ({ mount }) => {
         start: "2019-01-29",
         end: "2019-02-04"
       }
-    });
+    })
 
     expect(wrapper.vm.parsedValue.date).toBe("2019-01-29")
   })
@@ -85,8 +85,8 @@ test("VCalendar", ({ mount }) => {
       propsData: {
         end: "2018-12-04"
       }
-    });
+    })
 
     expect(wrapper.vm.parsedEnd.date).toEqual("2018-12-04")
   })
-});
+})
