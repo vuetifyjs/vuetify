@@ -31,8 +31,8 @@
         ></v-combobox>
         <v-date-picker v-model="dates" multiple no-title scrollable>
           <v-spacer></v-spacer>
-          <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
-          <v-btn flat color="primary" @click="$refs.menu.save(dates)">OK</v-btn>
+          <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
+          <v-btn text color="primary" @click="$refs.menu.save(dates)">OK</v-btn>
         </v-date-picker>
       </v-menu>
     </v-flex>
