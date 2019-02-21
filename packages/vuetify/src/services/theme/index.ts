@@ -30,9 +30,9 @@ export class Theme extends Service {
       warning: '#FB8C00'    // amber.base
     },
     dark: {
-      primary: '#2196F3',   // blue.darken2
+      primary: '#2196F3',   // blue.base
       secondary: '#424242', // grey.darken3
-      accent: '#FF3F80',    // blue.accent1
+      accent: '#FF4081',    // pink.accent-2
       error: '#FF5252',     // red.accent2
       info: '#2196F3',      // blue.base
       success: '#4CAF50',   // green.base
