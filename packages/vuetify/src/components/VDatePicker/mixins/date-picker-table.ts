@@ -8,36 +8,29 @@ import Colorable from '../../../mixins/colorable'
 import Themeable from '../../../mixins/themeable'
 
 // Utils
-import isDateAllowed, { AllowedFunction } from '../util/isDateAllowed'
+import isDateAllowed, { AllowedDateFunction } from '../util/isDateAllowed'
 import mixins from '../../../util/mixins'
 
 // Types
 import { VNodeChildren } from 'vue'
 import { PropValidator } from 'vue/types/options'
-import { NativeLocaleFormatter } from '../util/createNativeLocaleFormatter'
+import { DatePickerFormatter } from '../util/createNativeLocaleFormatter'
+import { DateEvents, DateEventColors, DateEventColorValue } from '../VDatePicker'
 
 type CalculateTableDateFunction = (v: number) => string
 
-type DateEventColorValue = string | string[]
-type DateEvents = string[] | ((date: string) => boolean | DateEventColorValue) | Record<string, DateEventColorValue>
-type DateEventColors = DateEventColorValue | Record<string, DateEventColorValue> | ((date: string) => DateEventColorValue)
-
-/* @vue/component */
 export default mixins(
   Colorable,
   Themeable
+/* @vue/component */
 ).extend({
   directives: { Touch },
 
   props: {
-    allowedDates: {
-      type: Function
-    } as any as PropValidator<AllowedFunction | undefined>,
+    allowedDates: Function as PropValidator<AllowedDateFunction | undefined>,
     current: String,
     disabled: Boolean,
-    format: {
-      type: Function
-    } as any as PropValidator<NativeLocaleFormatter | undefined>,
+    format: Function as PropValidator<DatePickerFormatter | undefined>,
     events: {
       type: [Array, Function, Object],
       default: () => null
@@ -107,7 +100,7 @@ export default mixins(
         dblclick: () => this.$emit(`dblclick:${mouseEventType}`, value)
       }
     },
-    genButton (value: string, isFloating: boolean, mouseEventType: string, formatter: NativeLocaleFormatter) {
+    genButton (value: string, isFloating: boolean, mouseEventType: string, formatter: DatePickerFormatter) {
       const isAllowed = isDateAllowed(value, this.min, this.max, this.allowedDates)
       const isSelected = value === this.value || (Array.isArray(this.value) && this.value.indexOf(value) !== -1)
       const isCurrent = value === this.current

@@ -3,8 +3,8 @@
     <v-flex xs11 sm5>
       <v-menu
         ref="menu"
-        :close-on-content-click="false"
         v-model="menu2"
+        :close-on-content-click="false"
         :nudge-right="40"
         :return-value.sync="time"
         lazy
@@ -25,7 +25,7 @@
           v-if="menu2"
           v-model="time"
           full-width
-          @change="$refs.menu.save(time)"
+          @click:minute="$refs.menu.save(time)"
         ></v-time-picker>
       </v-menu>
     </v-flex>

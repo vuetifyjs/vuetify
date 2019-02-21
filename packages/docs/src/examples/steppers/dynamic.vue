@@ -20,8 +20,8 @@
       <v-stepper-header>
         <template v-for="n in steps">
           <v-stepper-step
-            :complete="e1 > n"
             :key="`${n}-step`"
+            :complete="e1 > n"
             :step="n"
             editable
           >

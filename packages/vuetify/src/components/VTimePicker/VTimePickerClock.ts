@@ -98,10 +98,10 @@ export default mixins<options &
   },
 
   methods: {
-    wheel (e: MouseWheelEvent) {
+    wheel (e: WheelEvent) {
       e.preventDefault()
 
-      const delta = Math.sign(e.wheelDelta || 1)
+      const delta = Math.sign(-e.deltaY || 1)
       let value = this.displayedValue
       do {
         value = value + delta

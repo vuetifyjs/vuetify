@@ -2,8 +2,8 @@
   <v-timeline>
     <v-timeline-item
       v-for="(year, i) in years"
-      :color="year.color"
       :key="i"
+      :color="year.color"
       small
     >
       <span

@@ -113,7 +113,7 @@
       path () {
         if (!this.to) return this.to
 
-        const lang = this.$route.params.lang || 'en'
+        const lang = this.$route.params.lang || this.$i18n.fallbackLocale
 
         return {
           path: `/${lang}/${this.to}`

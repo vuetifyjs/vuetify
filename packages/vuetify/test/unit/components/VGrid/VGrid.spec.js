@@ -26,6 +26,22 @@ test('VFlex', ({ mount, functionalContext }) => {
     expect(wrapper.find('#test')).toHaveLength(1)
   })
 
+  it('should not pass data-* attrs as classes', () => {
+    const wrapper = mount(
+      VFlex,
+      functionalContext({
+        attrs: {
+          foo: 'bar',
+          'data-test': 'foo'
+        }
+      })
+    )
+
+    expect(wrapper.hasClass('foo')).toBe(true)
+    expect(wrapper.hasClass('data-test')).toBe(false)
+    expect(wrapper.getAttribute('data-test')).toBe('foo')
+  })
+
   // TODO: Remove once resolved
   // https://github.com/vuejs/vue/issues/7841
   it('should filter the slot attr', () => {

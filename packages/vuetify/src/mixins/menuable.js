@@ -98,6 +98,7 @@ export default Vue.extend({
     absoluteY: 0,
     dimensions: Object.assign({}, dimensions),
     isContentActive: false,
+    pageWidth: 0,
     pageYOffset: 0,
     stackClass: 'v-menu__content--active',
     stackMinZIndex: 6
@@ -153,7 +154,9 @@ export default Vue.extend({
       if (this.disabled) return
 
       val ? this.callActivate() : this.callDeactivate()
-    }
+    },
+    positionX: 'updateDimensions',
+    positionY: 'updateDimensions'
   },
 
   beforeMount () {
@@ -175,10 +178,10 @@ export default Vue.extend({
       }
     },
     activate () {},
-    calcLeft () {
+    calcLeft (menuWidth) {
       return `${this.isAttached
         ? this.computedLeft
-        : this.calcXOverflow(this.computedLeft)
+        : this.calcXOverflow(this.computedLeft, menuWidth)
       }px`
     },
     calcTop () {
@@ -187,27 +190,14 @@ export default Vue.extend({
         : this.calcYOverflow(this.computedTop)
       }px`
     },
-    calcXOverflow (left) {
-      const parsedMaxWidth = isNaN(parseInt(this.maxWidth))
-        ? 0
-        : parseInt(this.maxWidth)
-      const innerWidth = this.getInnerWidth()
-      const maxWidth = Math.max(
-        this.dimensions.content.width,
-        parsedMaxWidth
-      )
-      const totalWidth = left + this.dimensions.activator.width
-      const availableWidth = totalWidth - innerWidth
+    calcXOverflow (left, menuWidth) {
+      const xOverflow = left + menuWidth - this.pageWidth + 12
 
-      if ((!this.left || this.right) && availableWidth > 0) {
-        left = (
-          innerWidth -
-          maxWidth -
-          (innerWidth > 600 ? 30 : 12) // Account for scrollbar
-        )
+      if ((!this.left || this.right) && xOverflow > 0) {
+        left = Math.max(left - xOverflow, 0)
+      } else {
+        left = Math.max(left, 12)
       }
-
-      if (left < 0) left = 12
 
       return left + this.getOffsetLeft()
     },
@@ -283,6 +273,12 @@ export default Vue.extend({
 
       if (this.activatedBy) return this.activatedBy
 
+      if (this.activatorNode) {
+        const activator = Array.isArray(this.activatorNode) ? this.activatorNode[0] : this.activatorNode
+        const el = activator && activator.elm
+        if (el) return el
+      }
+
       consoleError('No activator found')
     },
     getInnerHeight () {
@@ -290,11 +286,6 @@ export default Vue.extend({
 
       return window.innerHeight ||
         document.documentElement.clientHeight
-    },
-    getInnerWidth () {
-      if (!this.hasWindow) return 0
-
-      return window.innerWidth
     },
     getOffsetLeft () {
       if (!this.hasWindow) return 0
@@ -357,6 +348,7 @@ export default Vue.extend({
     updateDimensions () {
       this.checkForWindow()
       this.checkForPageYOffset()
+      this.pageWidth = document.documentElement.clientWidth
 
       const dimensions = {}
 

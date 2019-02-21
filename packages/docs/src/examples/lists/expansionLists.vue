@@ -17,8 +17,8 @@
         <v-list>
           <v-list-group
             v-for="item in items"
-            v-model="item.active"
             :key="item.title"
+            v-model="item.active"
             :prepend-icon="item.action"
             no-action
           >

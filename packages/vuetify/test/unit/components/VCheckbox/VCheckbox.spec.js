@@ -367,29 +367,4 @@ test('VCheckbox.js', ({ mount }) => {
 
     expect(input.html()).toMatchSnapshot()
   })
-
-  it('should add `for` attribute to label', () => {
-    const wrapper = mount(VCheckbox, {
-      attachToDocument: true,
-      propsData: {
-        id: 'foo',
-        label: 'bar'
-      }
-    })
-
-    const label = wrapper.first('.v-label')
-
-    expect(label.element.getAttribute('for')).toBe('foo')
-
-    const wrapper2 = mount(VCheckbox, {
-      attachToDocument: true,
-      propsData: {
-        label: 'bar'
-      }
-    })
-
-    const label2 = wrapper2.first('.v-label')
-
-    expect(label2.element.getAttribute('for')).toBe(null)
-  })
 })

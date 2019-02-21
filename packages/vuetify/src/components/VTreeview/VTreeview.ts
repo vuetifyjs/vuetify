@@ -13,9 +13,18 @@ import Themeable from '../../mixins/themeable'
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
 // Utils
-import { getObjectValueByPath, deepEqual, arrayDiff } from '../../util/helpers'
+import {
+  arrayDiff,
+  deepEqual,
+  getObjectValueByPath
+} from '../../util/helpers'
 import mixins from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
+import {
+  filterTreeItems,
+  FilterTreeItemFunction,
+  filterTreeItem
+} from './util/filterTreeItems'
 
 type VTreeviewNodeInstance = InstanceType<typeof VTreeviewNode>
 
@@ -60,10 +69,16 @@ export default mixins(
       default: () => ([])
     } as PropValidator<NodeArray>,
     openAll: Boolean,
+    returnObject: {
+      type: Boolean,
+      default: false // TODO: Should be true in next major
+    },
     value: {
       type: Array,
       default: () => ([])
     } as PropValidator<NodeArray>,
+    search: String,
+    filter: Function as PropValidator<FilterTreeItemFunction>,
     ...VTreeviewNodeProps
   },
 
@@ -73,6 +88,28 @@ export default mixins(
     activeCache: new Set() as NodeCache,
     openCache: new Set() as NodeCache
   }),
+
+  computed: {
+    excludedItems (): Set<string | number> {
+      const excluded = new Set<string|number>()
+
+      if (!this.search) return excluded
+
+      for (let i = 0; i < this.items.length; i++) {
+        filterTreeItems(
+          this.filter || filterTreeItem,
+          this.items[i],
+          this.search,
+          this.itemKey,
+          this.itemText,
+          this.itemChildren,
+          excluded
+        )
+      }
+
+      return excluded
+    }
+  },
 
   watch: {
     items: {
@@ -101,29 +138,14 @@ export default mixins(
       },
       deep: true
     },
-    active (value: (string | number)[]) {
-      const old = [...this.activeCache]
-      if (!value || deepEqual(old, value)) return
-
-      old.forEach(key => this.updateActive(key, false))
-      value.forEach(key => this.updateActive(key, true))
-      this.emitActive()
+    active (value: (string | number | any)[]) {
+      this.handleNodeCacheWatcher(value, this.activeCache, this.updateActive, this.emitActive)
     },
-    value (value: (string | number)[]) {
-      const old = [...this.selectedCache]
-      if (!value || deepEqual(old, value)) return
-
-      old.forEach(key => this.updateSelected(key, false))
-      value.forEach(key => this.updateSelected(key, true))
-      this.emitSelected()
+    value (value: (string | number | any)[]) {
+      this.handleNodeCacheWatcher(value, this.selectedCache, this.updateSelected, this.emitSelected)
     },
-    open (value: (string | number)[]) {
-      const old = [...this.openCache]
-      if (deepEqual(old, value)) return
-
-      old.forEach(key => this.updateOpen(key, false))
-      value.forEach(key => this.updateOpen(key, true))
-      this.emitOpen()
+    open (value: (string | number | any)[]) {
+      this.handleNodeCacheWatcher(value, this.openCache, this.updateOpen, this.emitOpen)
     }
   },
 
@@ -142,15 +164,19 @@ export default mixins(
     }
 
     if (this.openAll) {
-      Object.keys(this.nodes).forEach(key => this.updateOpen(getObjectValueByPath(this.nodes[key].item, this.itemKey), true))
+      this.updateAll(true)
     } else {
       this.open.forEach(key => this.updateOpen(key, true))
+      this.emitOpen()
     }
-
-    this.emitOpen()
   },
 
   methods: {
+    /** @public */
+    updateAll (value: boolean) {
+      Object.keys(this.nodes).forEach(key => this.updateOpen(getObjectValueByPath(this.nodes[key].item, this.itemKey), value))
+      this.emitOpen()
+    },
     getKeys (items: any[], keys: any[] = []) {
       for (let i = 0; i < items.length; i++) {
         const key = getObjectValueByPath(items[i], this.itemKey)
@@ -216,13 +242,26 @@ export default mixins(
       return node
     },
     emitOpen () {
-      this.$emit('update:open', [...this.openCache])
+      this.emitNodeCache('update:open', this.openCache)
     },
     emitSelected () {
-      this.$emit('input', [...this.selectedCache])
+      this.emitNodeCache('input', this.selectedCache)
     },
     emitActive () {
-      this.$emit('update:active', [...this.activeCache])
+      this.emitNodeCache('update:active', this.activeCache)
+    },
+    emitNodeCache (event: string, cache: NodeCache) {
+      this.$emit(event, this.returnObject ? [...cache].map(key => this.nodes[key].item) : [...cache])
+    },
+    handleNodeCacheWatcher (value: any[], cache: NodeCache, updateFn: Function, emitFn: Function) {
+      value = this.returnObject ? value.map(v => getObjectValueByPath(v, this.itemKey)) : value
+      const old = [...cache]
+      if (deepEqual(old, value)) return
+
+      old.forEach(key => updateFn(key, false))
+      value.forEach(key => updateFn(key, true))
+
+      emitFn()
     },
     getDescendants (key: string | number, descendants: NodeArray = []) {
       const children = this.nodes[key].children
@@ -327,6 +366,9 @@ export default mixins(
         node.vnode.isActive = node.isActive
         node.vnode.isOpen = node.isOpen
       }
+    },
+    isExcluded (key: string | number) {
+      return !!this.search && this.excludedItems.has(key)
     }
   },
 

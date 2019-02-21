@@ -67,6 +67,10 @@ theme(button, "v-btn")
     &:before
       background-color: currentColor
 
+  &:hover::before
+    @media (hover: none)
+      background-color: transparent
+
   &__content
     align-items: center
     border-radius: inherit

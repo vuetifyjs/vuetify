@@ -1,0 +1,68 @@
+{
+  "header": "crwdns13434:0crwdne13434:0",
+  "headerText": "crwdns13436:0crwdne13436:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns13438:0crwdne13438:0"
+    },
+    "fixedTabs": {
+      "header": "crwdns13440:0crwdne13440:0",
+      "desc": "crwdns13442:0crwdne13442:0"
+    },
+    "right": {
+      "header": "crwdns13444:0crwdne13444:0",
+      "desc": "crwdns13446:0crwdne13446:0"
+    },
+    "content": {
+      "header": "crwdns13448:0crwdne13448:0",
+      "desc": "crwdns13450:0crwdne13450:0"
+    },
+    "search": {
+      "header": "crwdns13452:0crwdne13452:0",
+      "desc": "crwdns13454:0crwdne13454:0"
+    },
+    "iconsAndText": {
+      "header": "crwdns13456:0crwdne13456:0",
+      "desc": "crwdns13458:0crwdne13458:0"
+    },
+    "desktop": {
+      "header": "crwdns13460:0crwdne13460:0",
+      "desc": "crwdns13462:0crwdne13462:0"
+    },
+    "alignWithTitle": {
+      "header": "crwdns13464:0crwdne13464:0",
+      "desc": "crwdns13466:0crwdne13466:0"
+    },
+    "grow": {
+      "header": "crwdns13468:0crwdne13468:0",
+      "desc": "crwdns13470:0crwdne13470:0"
+    },
+    "overflowToMenu": {
+      "header": "crwdns13472:0crwdne13472:0",
+      "desc": "crwdns13474:0crwdne13474:0"
+    },
+    "pagination": {
+      "header": "crwdns13476:0crwdne13476:0",
+      "desc": "crwdns13478:0crwdne13478:0"
+    },
+    "icons": {
+      "header": "crwdns13480:0crwdne13480:0",
+      "desc": "crwdns13482:0crwdne13482:0"
+    }
+  },
+  "props": {
+    "alignWithTitle": "crwdns13484:0crwdne13484:0",
+    "cycle": "crwdns13486:0crwdne13486:0",
+    "grow": "crwdns13488:0crwdne13488:0",
+    "hideSlider": "crwdns13490:0crwdne13490:0",
+    "iconsAndText": "crwdns13492:0crwdne13492:0",
+    "prevIcon": "crwdns13494:0crwdne13494:0",
+    "nextIcon": "crwdns13496:0crwdne13496:0",
+    "reverseTransition": "crwdns13498:0crwdne13498:0",
+    "right": "crwdns13500:0crwdne13500:0",
+    "showArrows": "crwdns13502:0crwdne13502:0",
+    "sliderColor": "crwdns13504:0crwdne13504:0",
+    "touchless": "crwdns13506:0crwdne13506:0",
+    "transition": "crwdns13508:0crwdne13508:0"
+  }
+}

@@ -1,4 +1,5 @@
 import VSpeedDial from '@/components/VSpeedDial'
+import VBtn from '@/components/VBtn'
 import { test } from '@/test'
 import { compileToFunctions } from 'vue-template-compiler'
 
@@ -52,5 +53,18 @@ test('VSpeedDial.js', ({ mount }) => {
     expect(wrapper.vm.isActive).toBe(true)
     wrapper.trigger('mouseleave')
     expect(wrapper.vm.isActive).toBe(false)
+  })
+
+  it('should wrap v-btn component with div tag', () => {
+    const wrapper = mount(VSpeedDial, {
+      slots: {
+        default: [VBtn]
+      },
+      data: {
+        isActive: true
+      }
+    })
+
+    expect(wrapper.find('.v-speed-dial__list div button').length).toBe(1)
   })
 })

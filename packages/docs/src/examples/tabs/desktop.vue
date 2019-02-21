@@ -39,8 +39,8 @@
     <v-tabs-items v-model="tabs" class="white elevation-1">
       <v-tab-item
         v-for="i in 3"
-        :value="'mobile-tabs-5-' + i"
         :key="i"
+        :value="'mobile-tabs-5-' + i"
       >
         <v-card>
           <v-card-text>{{ text }}</v-card-text>
