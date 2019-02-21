@@ -6,7 +6,7 @@ import { VListTile, VListTileContent, VListTileTitle } from '../VList'
 // Mixins
 import Themeable from '../../mixins/themeable'
 import Colorable from '../../mixins/colorable'
-import VTreeViewSelector from './VtreeViewSelector'
+import VTreeViewSelector from './VTreeViewSelector'
 import { VTreeviewNodeProps } from '../VTreeview/VTreeviewNode'
 
 export default mixins(
