@@ -1,25 +1,44 @@
 // Imports
 @import '../../styles/styles.sass'
+@import './_mixins.sass'
+
+.v-tabs__bar.theme--light
+  +tabs-theme($material-light)
+.v-tabs__bar.theme--dark
+  +tabs-theme($material-dark)
+
+  .v-tabs__item.v-tabs__item--active
+    color: map-deep-get($material-dark, 'text', 'primary')
 
 // Block
 .v-tabs
   //
 
 // Element
-.v-tabs__bar
-  //
+.v-tabs__bar.v-item-group > *
+  cursor: initial
 
 .v-tabs__item
   align-items: center
   display: flex
+  font-weight: 500
   height: 48px
+  justify-content: center
+  min-width: 90px
+  max-width: 360px
   padding: 0 16px
   text-decoration: none
+  text-transform: uppercase
+  transition: none
 
   &--active
-    //
+    color: inherit
+
+    .v-icon
+      color: inherit
 
 .v-tabs__slider
+  background-color: currentColor
   height: 2px
   width: 100%
 
@@ -30,3 +49,10 @@
     transition: $primary-transition
 
 // Modifier
+.v-tabs--icons-and-text
+  .v-tabs__item
+    flex-direction: column
+    height: 72px
+
+    > *:first-child
+      margin-bottom: 6px

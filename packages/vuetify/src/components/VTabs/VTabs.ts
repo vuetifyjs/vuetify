@@ -21,6 +21,7 @@ import mixins from '../../util/mixins'
 // Types
 import Vue from 'vue'
 import { VNode } from 'vue/types'
+import { GroupableInstance } from '../VItemGroup/VItemGroup'
 
 interface options extends Vue {
   $refs: {
@@ -51,7 +52,13 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
       default: 'v-tabs__window--active'
     },
     alignWithTitle: Boolean,
+    backgroundColor: String,
     centered: Boolean,
+    color: {
+      type: String,
+      default: 'primary'
+    },
+    dark: Boolean,
     fixedTabs: Boolean,
     grow: Boolean,
     height: {
@@ -60,6 +67,7 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
     },
     hideSlider: Boolean,
     iconsAndText: Boolean,
+    light: Boolean,
     mobileBreakPoint: {
       type: [Number, String],
       default: 1264
@@ -74,21 +82,25 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
     },
     right: Boolean,
     showArrows: Boolean,
-    sliderColor: {
-      type: String,
-      default: 'accent'
-    }
+    sliderColor: String
   },
 
   data () {
     return {
+      items: [] as GroupableInstance[],
       resizeTimeout: 0,
       sliderWidth: null as number | null,
-      sliderLeft: null as number | null
+      sliderLeft: null as number | null,
+      transitionTime: 300
     }
   },
 
   computed: {
+    classes (): object {
+      return {
+        'v-tabs--icons-and-text': this.iconsAndText
+      }
+    },
     sliderStyles (): object {
       return {
         left: `${this.sliderLeft}px`,
@@ -103,10 +115,16 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
     centered: 'callSlider',
     fixedTabs: 'callSlider',
     internalLazyValue: 'callSlider',
-    isBooted: 'callSlider',
     right: 'callSlider',
+    items: 'callSlider',
     '$vuetify.application.left': 'onResize',
     '$vuetify.application.right': 'onResize'
+  },
+
+  mounted () {
+    this.$nextTick(() => {
+      window.setTimeout(this.callSlider, 50)
+    })
   },
 
   methods: {
@@ -127,11 +145,14 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
       return true
     },
     genBar (items: VNode[], slider: VNode[]) {
-      return this.$createElement(VTabsBar, {
+      return this.$createElement(VTabsBar, this.setTextColor(this.color, {
+        staticClass: this.backgroundColor,
         props: {
           activeClass: 'v-tabs__item--active',
           // TODO: deprecate name
           appendIcon: this.nextIcon,
+          dark: this.dark,
+          light: this.light,
           // TODO: deprecate name
           prependIcon: this.prevIcon,
           mandatory: true,
@@ -142,10 +163,15 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
         on: {
           change: (val: any) => {
             this.internalValue = val
+          },
+          'hook:mounted': () => {
+            // We need this to watch for
+            // changes in item length
+            this.items = this.$refs.items.items
           }
         },
         ref: 'items'
-      }, [
+      }), [
         this.genSlider(slider),
         items
       ])
@@ -224,6 +250,7 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
 
     return h('div', {
       staticClass: 'v-tabs',
+      class: this.classes,
       directives: [{
         name: 'resize',
         modifiers: { quiet: true },
