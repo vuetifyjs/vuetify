@@ -42,7 +42,7 @@
               </v-btn>
               <v-card>
                 <v-card-text class="pa-4">
-                  <v-btn large flat color="primary" @click="clickMe"><v-icon left>mdi-target</v-icon>Click me</v-btn>
+                  <v-btn large text color="primary" @click="clickMe"><v-icon left>mdi-target</v-icon>Click me</v-btn>
                 </v-card-text>
               </v-card>
             </v-menu>

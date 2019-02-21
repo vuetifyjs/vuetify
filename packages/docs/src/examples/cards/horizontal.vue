@@ -31,7 +31,7 @@
                 </div>
               </v-card-title>
               <v-card-actions>
-                <v-btn flat dark>Listen now</v-btn>
+                <v-btn text dark>Listen now</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>

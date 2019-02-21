@@ -10,13 +10,13 @@
       <v-flex shrink>
         <v-expand-x-transition>
           <div v-show="expand" style="white-space: nowrap">
-            <v-btn flat>
+            <v-btn text>
               <v-icon>star_border</v-icon>
             </v-btn>
-            <v-btn flat>
+            <v-btn text>
               <v-icon>settings</v-icon>
             </v-btn>
-            <v-btn flat>
+            <v-btn text>
               <v-icon>power</v-icon>
             </v-btn>
           </div>
@@ -26,13 +26,13 @@
 
     <v-expand-transition>
       <div v-show="expand">
-        <v-btn flat>
+        <v-btn text>
           <v-icon>star_border</v-icon>
         </v-btn>
-        <v-btn flat>
+        <v-btn text>
           <v-icon>settings</v-icon>
         </v-btn>
-        <v-btn flat>
+        <v-btn text>
           <v-icon>power</v-icon>
         </v-btn>
       </div>

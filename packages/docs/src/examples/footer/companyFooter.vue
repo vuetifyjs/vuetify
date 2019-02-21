@@ -12,7 +12,7 @@
         v-for="link in links"
         :key="link"
         color="white"
-        flat
+        text
         round
       >
         {{ link }}
