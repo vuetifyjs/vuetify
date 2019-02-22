@@ -55,10 +55,10 @@ export default mixins(header).extend({
           if (beingSorted) {
             attrs['aria-sort'] = isDesc ? 'descending' : 'ascending'
             attrs['aria-label'] += isDesc
-              ? this.$vuetify.t('$vuetify.dataTable.ariaLabel.sortDescending')
-              : this.$vuetify.t('$vuetify.dataTable.ariaLabel.sortAscending')
+              ? this.$vuetify.lang.t('$vuetify.dataTable.ariaLabel.sortDescending')
+              : this.$vuetify.lang.t('$vuetify.dataTable.ariaLabel.sortAscending')
           } else {
-            attrs['aria-label'] += this.$vuetify.t('$vuetify.dataTable.ariaLabel.sortNone')
+            attrs['aria-label'] += this.$vuetify.lang.t('$vuetify.dataTable.ariaLabel.sortNone')
           }
 
           if (header.align === 'end') children.unshift(this.genSortIcon())

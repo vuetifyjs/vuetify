@@ -147,13 +147,13 @@ export default mixins(Themeable).extend({
     },
     genEmpty (itemsLength: number) {
       if (itemsLength <= 0 && this.loading) {
-        const loading = this.$slots['loading'] || this.$vuetify.t(this.loadingText)
+        const loading = this.$slots['loading'] || this.$vuetify.lang.t(this.loadingText)
         return this.genEmptyWrapper(loading)
       } else if (itemsLength <= 0 && !this.items.length) {
-        const noData = this.$slots['no-data'] || this.$vuetify.t(this.noDataText)
+        const noData = this.$slots['no-data'] || this.$vuetify.lang.t(this.noDataText)
         return this.genEmptyWrapper(noData)
       } else if (itemsLength <= 0 && this.search) {
-        const noResults = this.$slots['no-results'] || this.$vuetify.t(this.noResultsText)
+        const noResults = this.$slots['no-results'] || this.$vuetify.lang.t(this.noResultsText)
         return this.genEmptyWrapper(noResults)
       }
 

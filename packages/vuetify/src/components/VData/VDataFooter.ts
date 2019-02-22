@@ -80,7 +80,7 @@ export default Vue.extend({
         })
       }
 
-      return itemsPerPageOptions.map(value => ({ text: value === -1 ? this.$vuetify.t(this.itemsPerPageAllText) : String(value), value }))
+      return itemsPerPageOptions.map(value => ({ text: value === -1 ? this.$vuetify.lang.t(this.itemsPerPageAllText) : String(value), value }))
     }
   },
 
@@ -107,7 +107,7 @@ export default Vue.extend({
       return this.$createElement('div', {
         staticClass: 'v-data-footer__select'
       }, [
-        this.$vuetify.t(this.itemsPerPageText),
+        this.$vuetify.lang.t(this.itemsPerPageText),
         this.$createElement(VSelect, {
           attrs: {
             'aria-label': this.itemsPerPageText
