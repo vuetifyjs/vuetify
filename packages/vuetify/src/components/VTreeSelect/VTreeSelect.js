@@ -19,9 +19,25 @@ export default VAutocomplete.extend({
   computed: {
     listData () {
       const data = VSelect.options.computed.listData.call(this)
-      Object.assign(data.props, { selectedItems: this.selectedItems,
+      Object.assign(data.props, { ...VTreeviewNodeProps })
+      /* to remove console warns and type conflicts */
+      Object.assign(data.props, {
+        activatable: this.activatable,
+        activeClass: this.activeClass,
+        selectable: true,
+        selectedColor: this.selectedColor,
+        indeterminateIcon: this.indeterminateIcon,
+        onIcon: this.onIcon,
+        offIcon: this.offIcon,
+        expandIcon: this.expandIcon,
+        loadingIcon: this.loadingIcon,
+        itemKey: this.itemKey,
+        itemText: this.itemText,
+        itemChildren: this.itemChildren,
+        transition: this.transition,
+        selectedItems: this.selectedItems,
         openAll: this.openAll,
-        ...VTreeviewNodeProps })
+        openOnClick: this.openOnClick })
       Object.assign(data.on, {
         select: e => {
           this.selectItems(e)

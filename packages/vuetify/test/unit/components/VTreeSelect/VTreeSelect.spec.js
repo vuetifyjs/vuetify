@@ -17,13 +17,21 @@ test('VTreeSelect.js', ({ mount, compileToFunctions }) => {
       {id:6 , name: 'Petr'}
   ]
 
+  const staticTreeAlter = [
+    {id: 1, firstName: 'Ivan', position: 'head', children: [
+        {id: 2, firstName: 'Fred', position: 'manager'},
+        {id: 3, firstName: 'Vitaly', position: 'sales'}
+    ]},
+    {id:4 , firstName: 'Mary', position: 'accountant'},
+    {id:5 , firstName: 'Lisa', position: 'PR'}
+  ]
+
   it('should render correctly and match snapshot when toggle menu', async () => {
     const wrapper = mount(VTreeSelect, {
       propsData: {
         items: staticTree
       }
     })
-    const icon = wrapper.first('.v-icon')
     const slot = wrapper.first('.v-input__slot')
 
     expect(wrapper.vm.isMenuActive).toBe(false)
@@ -31,13 +39,42 @@ test('VTreeSelect.js', ({ mount, compileToFunctions }) => {
     slot.trigger('click')
     expect(wrapper.vm.isMenuActive).toBe(true)
 
-    slot.trigger('click')
-    expect(wrapper.vm.isMenuActive).toBe(true)
+    await wrapper.vm.$nextTick()
 
-    const treeview = wrapper.first('.v-treeview')
+    const treeview = wrapper.first('.v-tree-view-selector')
     expect(treeview.html()).toMatchSnapshot()
-
-
   })
+
+  it('should render correctly and match snapshot with openAll items', async () => {
+    const wrapper = mount(VTreeSelect, {
+      propsData: {
+        items: staticTree,
+        openAll: true
+      }
+    })
+    const slot = wrapper.first('.v-input__slot')
+    slot.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    const treeview = wrapper.first('.v-tree-view-selector')
+    expect(treeview.html()).toMatchSnapshot()
+  })
+
+  it('should render correctly and match snapshot with ItemText props custom', async () => {
+    const wrapper = mount(VTreeSelect, {
+      propsData: {
+        items: staticTreeAlter
+      }
+    })
+    const slot = wrapper.first('.v-input__slot')
+    slot.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    const treeview = wrapper.first('.v-tree-view-selector')
+    expect(treeview.html()).toMatchSnapshot()
+  })
+  
 
 })

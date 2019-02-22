@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VTreeSelect should render correctly and match snapshot when toggle menu 1`] = `
+<div class="v-treeview theme--light">
+    <div class="v-treeview-node">
+        <div class="v-treeview-node__root"><i aria-hidden="true" class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light">arrow_drop_down</i><i aria-hidden="true" class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light">check_box_outline_blank</i>
+            <div
+                class="v-treeview-node__content">
+                <div class="v-treeview-node__label">foo</div>
+        </div>
+    </div>
+</div>
+<div class="v-treeview-node v-treeview-node--leaf">
+    <div class="v-treeview-node__root"><i aria-hidden="true" class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light">check_box_outline_blank</i>
+        <div class="v-treeview-node__content">
+            <div class="v-treeview-node__label">Alex</div>
+        </div>
+    </div>
+</div>
+<div class="v-treeview-node v-treeview-node--leaf">
+    <div class="v-treeview-node__root"><i aria-hidden="true" class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light">check_box_outline_blank</i>
+        <div class="v-treeview-node__content">
+            <div class="v-treeview-node__label">Petr</div>
+        </div>
+    </div>
+</div>
+</div>
+`;
+
+exports[`VTreeSelect should render correctly and match snapshot with ItemText props custom 3`] = `
+<div class="v-treeview theme--light">
+    <div class="v-treeview-node">
+        <div class="v-treeview-node__root"><i aria-hidden="true" class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light">arrow_drop_down</i><i aria-hidden="true" class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light">check_box_outline_blank</i>
+            <div
+                class="v-treeview-node__content">
+                <div class="v-treeview-node__label">Ivan</div>
+        </div>
+    </div>
+</div>
+<div class="v-treeview-node v-treeview-node--leaf">
+    <div class="v-treeview-node__root"><i aria-hidden="true" class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light">check_box_outline_blank</i>
+        <div class="v-treeview-node__content">
+            <div class="v-treeview-node__label">Mary</div>
+        </div>
+    </div>
+</div>
+<div class="v-treeview-node v-treeview-node--leaf">
+    <div class="v-treeview-node__root"><i aria-hidden="true" class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light">check_box_outline_blank</i>
+        <div class="v-treeview-node__content">
+            <div class="v-treeview-node__label">Lisa</div>
+        </div>
+    </div>
+</div>
+</div>
+`;
+
+exports[`VTreeSelect should render correctly and match snapshot with openAll items 2`] = `
+<div class="v-treeview theme--light">
+    <div class="v-treeview-node">
+        <div class="v-treeview-node__root"><i aria-hidden="true" class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open">arrow_drop_down</i><i aria-hidden="true" class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light">check_box_outline_blank</i>
+            <div
+                class="v-treeview-node__content">
+                <div class="v-treeview-node__label">foo</div>
+        </div>
+    </div>
+    <div class="v-treeview-node__children">
+        <div class="v-treeview-node v-treeview-node--leaf">
+            <div class="v-treeview-node__root"><i aria-hidden="true" class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light">check_box_outline_blank</i>
+                <div class="v-treeview-node__content">
+                    <div class="v-treeview-node__label">bar</div>
+                </div>
+            </div>
+        </div>
+        <div class="v-treeview-node v-treeview-node--leaf">
+            <div class="v-treeview-node__root"><i aria-hidden="true" class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light">check_box_outline_blank</i>
+                <div class="v-treeview-node__content">
+                    <div class="v-treeview-node__label">baz</div>
+                </div>
+            </div>
+        </div>
+        <div class="v-treeview-node v-treeview-node--leaf">
+            <div class="v-treeview-node__root"><i aria-hidden="true" class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light">check_box_outline_blank</i>
+                <div class="v-treeview-node__content">
+                    <div class="v-treeview-node__label">wiz</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="v-treeview-node v-treeview-node--leaf">
+    <div class="v-treeview-node__root"><i aria-hidden="true" class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light">check_box_outline_blank</i>
+        <div class="v-treeview-node__content">
+            <div class="v-treeview-node__label">Alex</div>
+        </div>
+    </div>
+</div>
+<div class="v-treeview-node v-treeview-node--leaf">
+    <div class="v-treeview-node__root"><i aria-hidden="true" class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light">check_box_outline_blank</i>
+        <div class="v-treeview-node__content">
+            <div class="v-treeview-node__label">Petr</div>
+        </div>
+    </div>
+</div>
+</div>
+`;

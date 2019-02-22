@@ -83,7 +83,8 @@ export default mixins(
           returnObject: true,
           selectOnly: true,
           selectedItems: this.selectedItems,
-          openAll: this.openAll
+          openAll: this.openAll,
+          itemText: this.itemText
         },
         on: {
           input: e => {
