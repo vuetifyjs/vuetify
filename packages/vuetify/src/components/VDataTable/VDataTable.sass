@@ -1,65 +1,13 @@
-@import '../bootstrap'
-@import '../theme'
+// Imports
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+@import './_mixins.sass'
 
-/* Theme */
-v-data-table($material)
-  background-color: $material.cards
-  color: $material.text.primary
-
-  &--fixed
-    thead th
-      background: white
-      border-bottom: 0px !important
-      box-shadow: inset 0 -1px 0 rgba($material.fg-color, $material.divider-percent)
-
-  thead
-    tr
-
-      &:last-child th
-        border-bottom: 1px solid rgba($material.fg-color, $material.divider-percent)
-
-      th
-        // box-shadow: inset 0 -1px 0 rgba($material.fg-color, $material.divider-percent)
-        color: rgba($material.text-color, $material.secondary-text-percent)
-
-      &.sortable
-        i
-          color: rgba($material.fg-color, $material.disabledORhints-text-percent)
-
-        &:hover
-          color: rgba($material.fg-color, $material.primary-text-percent)
-
-        &.active
-          color: rgba($material.fg-color, $material.primary-text-percent)
-
-          i
-            color: rgba($material.fg-color, $material.primary-text-percent)
-
-  tbody
-    tr
-      &:not(:last-child)
-        border-bottom: 1px solid rgba($material.fg-color, $material.divider-percent)
-
-      &.active
-        background: $material.table.active
-
-      &:hover:not(.datatable__expand-row)
-        background: $material.table.hover
-
-      &.expanded
-        border-bottom: 0
-
-        &.expanded__row
-          background: $material.table.active
-
-        &.expanded__content
-          box-shadow: inset 0px 4px 8px -5px rgba(50, 50, 50, 0.75), inset 0px -4px 8px -5px rgba(50, 50, 50, 0.75)
-
-    .v-table__footer
-      .v-row
-        border-top: 1px solid rgba($material.fg-color, $material.divider-percent)
-
-theme(v-data-table, "v-data-table")
+// Theme
+.v-data-table.theme--light
+  @include data-table-theme($material-light)
+.v-data-table.theme--dark
+  @include data-table-theme($material-dark)
 
 .v-data-table-virtual
   position: relative
@@ -167,7 +115,7 @@ td, th
   th
     font-weight: 500
     font-size: 12px
-    transition: .3s $transition.swing
+    transition: .3s map-get($transition, 'swing')
     white-space: nowrap
     user-select: none
     position: relative
@@ -193,7 +141,7 @@ td, th
       font-size: 18px
       display: inline-block
       opacity: 0
-      transition: .3s $transition.swing
+      transition: .3s map-get($transition, 'swing')
 
     &:focus,
     &:hover
