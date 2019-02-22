@@ -1,74 +1,37 @@
-import { test } from '@/test'
-import VTab from '@/components/VTabs/VTab'
-import Vue from 'vue'
+// Components
+import VTab from '../VTab'
 
-const tabClick = 'Injection "tabClick" not found'
-const stub = {
-  name: 'router-link',
+// Utilities
+import {
+  mount,
+  RouterLinkStub,
+  Wrapper
+} from '@vue/test-utils'
 
-  props: {
-    to: [String, Object]
-  },
+// Types
+import { ExtractVue } from './../../../util/mixins'
 
-  render (h) {
-    return h('a', {
-      domProps: { href: this.to }
-    })
-  }
-}
+describe('VTab.ts', () => {
+  type Instance = ExtractVue<typeof VTab>
+  let mountFunction: (options?: object) => Wrapper<Instance>
 
-test('VTab', ({ mount }) => {
-  it('should render a div when disabled', async () => {
-    const wrapper = mount(VTab, {
-      propsData: {
-        href: '#foo'
-      }
-    })
-
-    expect(wrapper.find('.v-tabs__item')[0].vNode.elm.tagName).toBe('A')
-    wrapper.setProps({ disabled: true })
-    expect(wrapper.find('.v-tabs__item')[0].vNode.elm.tagName).toBe('DIV')
-  })
-
-  it('should emit click event and prevent default', async () => {
-    const click = jest.fn()
-    const wrapper = mount({
-      provide: {
-        tabClick: click
-      },
-      render (h) { return h('div', this.$slots.default) }
-    }, {
-      slots: {
-        default: [{
-          render: h => h(VTab, {
-            props: { href: '#foo' }
-          })
-        }]
-      }
-    })
-
-    const tab = wrapper.find(VTab)[0]
-    tab.vm.$on('click', click)
-    const event = new Event('click')
-    tab.vm.click(event)
-    await wrapper.vm.$nextTick()
-    // Cannot figure out how to ensure this actually happens
-    // expect(event.defaultPrevented).toBe(false)
-    expect(click).toHaveBeenCalled()
+  beforeEach(() => {
+    mountFunction = (options = {}) => {
+      return mount(VTab, {
+        ...options
+      })
+    }
   })
 
   it('should have the correct value', () => {
-    const instance = Vue.extend()
-    instance.component('router-link', stub)
-    const wrapper = mount(VTab, {
+    const wrapper = mountFunction({
       propsData: {
         href: '#foo'
       },
-      instance,
-      globals: {
+      mocks: {
         $route: { path: '/' },
         $router: {
-          resolve: (to, route, append) => {
+          resolve: to => {
             let href
             if (to.path) href = to.path
 
@@ -87,25 +50,67 @@ test('VTab', ({ mount }) => {
 
   // Still unsure how to test actual implementation
   it('should react to route change', async () => {
-    const instance = Vue.extend()
-    instance.component('router-link', stub)
     const toggle = jest.fn()
-    const wrapper = mount(VTab, {
+    const wrapper = mountFunction({
       propsData: {
         activeClass: 'bar',
         to: 'foo'
       },
       methods: { toggle },
-      instance,
-      globals: {
-        $route: { path: '/foo' }
+      mocks: {
+        $route: { path: '/' }
+      },
+      stubs: {
+        RouterLink: RouterLinkStub
       }
     })
 
+    // Mock route change being called
     wrapper.vm.onRouteChange()
-
     await wrapper.vm.$nextTick()
 
     expect(toggle).not.toBeCalled()
+
+    // explicitly mock class added
+    // by vue router
+    ;(wrapper.vm.$refs.link as any)._vnode.data = {
+      class: { 'bar': true }
+    }
+    wrapper.vm.$route.path = '/foo'
+
+    wrapper.vm.onRouteChange()
+    await wrapper.vm.$nextTick()
+
+    wrapper.setProps({ to: undefined })
+
+    wrapper.vm.onRouteChange()
+    await wrapper.vm.$nextTick()
+
+    expect(toggle).toHaveBeenCalledTimes(1)
+  })
+
+  it('should respond to clicks and mousedown.enter', () => {
+    const event = { preventDefault: jest.fn() }
+    const toggle = jest.fn()
+    const wrapper = mountFunction({
+      methods: { toggle }
+    })
+
+    wrapper.trigger('click', event)
+
+    expect(event.preventDefault).not.toHaveBeenCalled()
+    expect(toggle).toHaveBeenCalled()
+
+    wrapper.setProps({ href: '#foo' })
+
+    wrapper.trigger('click', event)
+
+    expect(event.preventDefault).toHaveBeenCalled()
+
+    wrapper.trigger('keydown.enter', event)
+    wrapper.trigger('keydown.space', event)
+
+    expect(event.preventDefault).toHaveBeenCalledTimes(2)
+    expect(toggle).toHaveBeenCalledTimes(3)
   })
 })

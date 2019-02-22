@@ -57,6 +57,10 @@ export default mixins(
     }
   },
 
+  watch: {
+    $route: 'onRouteChange'
+  },
+
   methods: {
     click (e: Event): void {
       // If user provides an
@@ -100,6 +104,7 @@ export default mixins(
         this.$emit('keydown', e)
       }
     }
+    data.ref = 'link'
 
     return h(tag, data, this.$slots.default)
   }
