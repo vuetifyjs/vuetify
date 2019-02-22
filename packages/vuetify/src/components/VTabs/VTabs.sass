@@ -21,6 +21,7 @@
 .v-tabs__item
   align-items: center
   display: flex
+  flex: 0 1 auto
   font-weight: 500
   height: 48px
   justify-content: center
@@ -68,10 +69,38 @@
     transition: $primary-transition
 
 // Modifier
+.v-tabs--align-with-title
+  padding-left: 56px
+
+.v-tabs--fixed-tabs,
+.v-tabs--centered
+  .v-slide-group__content > *:last-child
+    margin-right: auto
+
+  .v-tabs__slider-wrapper + *
+    margin-left: auto
+
+.v-tabs--grow
+  .v-tabs__item
+    flex: 1 0 auto
+    max-width: none
+
 .v-tabs--icons-and-text
   .v-tabs__item
-    flex-direction: column
+    flex-direction: column-reverse
     height: 72px
 
     > *:first-child
       margin-bottom: 6px
+
+.v-tabs--overflow
+  .v-tabs__item
+    flex: 1 0 auto
+
+.v-tabs--right
+  .v-tabs__item:first-child,
+  .v-tabs__slider-wrapper + .v-tabs__item
+    margin-left: auto
+
+  .v-tabs__item:last-child
+    margin-right: 0

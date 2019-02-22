@@ -98,7 +98,12 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
   computed: {
     classes (): object {
       return {
-        'v-tabs--icons-and-text': this.iconsAndText
+        'v-tabs--align-with-title': this.alignWithTitle,
+        'v-tabs--centered': this.centered,
+        'v-tabs--fixed-tabs': this.fixedTabs,
+        'v-tabs--grow': this.grow,
+        'v-tabs--icons-and-text': this.iconsAndText,
+        'v-tabs--right': this.right
       }
     },
     sliderStyles (): object {
