@@ -26,11 +26,16 @@
         {
           "type": "examples",
           "value": [
+            "playground",
+            "photos",
+            "actionChips",
+            "filtering",
             "colored",
             "icon",
             "outline",
             "label",
             "closable",
+            "expandable",
             "inSelects"
           ]
         }

@@ -1,38 +1,36 @@
 <template>
   <a
-    class="v-chip v-chip--tidelift text--primary"
     href="https://tidelift.com/subscription/npm/vuetify?utm_source=vuetify&utm_medium=referral&utm_campaign=homepage"
     rel="noopener"
     target="_blank"
+    class="v-tidelift"
   >
-    <span class="v-chip__content">
-      <img
+    <v-chip
+      color="#f6914d"
+      class="pr-5"
+      link
+    >
+      <v-img
         alt="Tidelift"
+        left
         class="mr-3"
         src="https://cdn.vuetifyjs.com/images/affiliates/tidelift-small.png"
         width="24px"
-      >
+      />
       <span class="body-2 text-uppercase font-weight-regular hidden-sm-and-down">
         Get Professionally-Supported Vuetify
       </span>
       <span class="body-2 text-uppercase font-weight-regular hidden-md-and-up">
         Get Professional Support
       </span>
-    </span>
+    </v-chip>
   </a>
 </template>
 
 <style lang="stylus">
-  .v-chip--tidelift
-    background: #f6914d !important
-    padding-right: 64px
+  .v-tidelift
     position: absolute !important
     right: -24px
     text-decoration: none
     top: 0
-
-    .v-chip__content
-      cursor: pointer !important
-      > span
-        line-height: 1
 </style>

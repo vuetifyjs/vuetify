@@ -45,7 +45,7 @@ const calculate = (e: MouseEvent | TouchEvent, el: HTMLElement, value: RippleOpt
   return { radius, scale, x, y, centerX, centerY }
 }
 
-const ripple = {
+const ripples = {
   /* eslint-disable max-statements */
   show (e: MouseEvent | TouchEvent, el: HTMLElement, value: RippleOptions = {}) {
     if (!el._ripple || !el._ripple.enabled) {
@@ -138,25 +138,21 @@ function rippleShow (e: MouseEvent | TouchEvent) {
   if (element._ripple!.class) {
     value.class = element._ripple!.class
   }
-  ripple.show(e, element, value)
+  ripples.show(e, element, value)
 }
 
 function rippleHide (e: Event) {
   const element = e.currentTarget as HTMLElement | null
   if (!element) return
 
-  window.setTimeout(() => {
-    if (element._ripple) {
-      element._ripple.touched = false
-    }
-  })
-  ripple.hide(element)
+  window.setTimeout(() => { element._ripple!.touched = false })
+  ripples.hide(element)
 }
 
 function updateRipple (el: HTMLElement, binding: VNodeDirective, wasEnabled: boolean) {
   const enabled = isRippleEnabled(binding.value)
   if (!enabled) {
-    ripple.hide(el)
+    ripples.hide(el)
   }
   el._ripple = el._ripple || {}
   el._ripple.enabled = enabled
@@ -221,8 +217,11 @@ function update (el: HTMLElement, binding: VNodeDirective) {
   updateRipple(el, binding, wasEnabled)
 }
 
-export default {
+const ripple = {
   bind: directive,
   unbind,
   update
 }
+
+export { ripple }
+export default ripple

@@ -83,7 +83,7 @@ const Themeable = Vue.extend<Themeable>().extend({
         return false
       } else {
         // inherit from v-app
-        return this.$vuetify.dark
+        return this.$vuetify.theme.dark || false
       }
     },
     rootThemeClasses (): Dictionary<boolean> {

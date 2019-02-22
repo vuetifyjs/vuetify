@@ -1,0 +1,25 @@
+// Imports
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+@import './_mixins.sass'
+
+/* Theme */
+.v-sheet.theme--light
+  @include sheet-theme($material-light)
+.v-sheet.theme--dark
+  @include sheet-theme($material-dark)
+
+.v-sheet
+  border-radius: $sheet-border-radius
+  position: relative
+
+  > *:first-child:not(.v-btn):not(.v-chip)
+    border-top-left-radius: inherit
+    border-top-right-radius: inherit
+
+  > *:last-child:not(.v-btn):not(.v-chip)
+    border-bottom-left-radius: inherit
+    border-bottom-right-radius: inherit
+
+  &--tile
+    border-radius: 0

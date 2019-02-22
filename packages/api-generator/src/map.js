@@ -233,6 +233,7 @@ const VSelect = {
         parent: 'VueComponent',
         item: 'object',
         index: 'number',
+        select: 'function',
         selected: 'boolean',
         disabled: 'boolean'
       }
@@ -354,6 +355,16 @@ module.exports = {
         name: 'value',
         default: '{}',
         type: 'Object'
+      },
+      {
+        name: 'center',
+        default: 'false',
+        type: 'Boolean'
+      },
+      {
+        name: 'class',
+        default: '""',
+        type: 'string'
       }
     ]
   },
@@ -910,7 +921,15 @@ module.exports = {
     ]
   },
   'v-icon': {
-    slots: ['default']
+    slots: ['default'],
+    props: [
+      {
+        name: 'dense',
+        type: 'boolean',
+        default: 'false',
+        'source': null
+      }
+    ]
   },
   'v-input': {
     events: [

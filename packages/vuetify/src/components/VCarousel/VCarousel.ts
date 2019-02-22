@@ -123,7 +123,7 @@ export default VWindow.extend({
             icon: true
           },
           attrs: {
-            'aria-label': this.$vuetify.t(`$vuetify.carousel.${direction}`)
+            'aria-label': this.$vuetify.lang.t(`$vuetify.carousel.${direction}`)
           },
           on: {
             click: () => {

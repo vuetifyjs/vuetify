@@ -4,15 +4,15 @@ exports[`VDatePickerHeader.js should render component and match snapshot 1`] = `
 
 <div class="v-date-picker-header theme--light">
   <button type="button"
-          class="v-btn v-btn--icon theme--light"
+          class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
   >
-    <div class="v-btn__content">
+    <span class="v-btn__content">
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
       >
         chevron_left
       </i>
-    </div>
+    </span>
   </button>
   <div class="v-date-picker-header__value">
     <div class="accent--text">
@@ -22,15 +22,15 @@ exports[`VDatePickerHeader.js should render component and match snapshot 1`] = `
     </div>
   </div>
   <button type="button"
-          class="v-btn v-btn--icon theme--light"
+          class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
   >
-    <div class="v-btn__content">
+    <span class="v-btn__content">
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
       >
         chevron_right
       </i>
-    </div>
+    </span>
   </button>
 </div>
 
@@ -40,15 +40,15 @@ exports[`VDatePickerHeader.js should render component in RTL mode and match snap
 
 <div class="v-date-picker-header theme--light">
   <button type="button"
-          class="v-btn v-btn--icon theme--light"
+          class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
   >
-    <div class="v-btn__content">
+    <span class="v-btn__content">
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
       >
         chevron_right
       </i>
-    </div>
+    </span>
   </button>
   <div class="v-date-picker-header__value">
     <div class="accent--text">
@@ -58,15 +58,15 @@ exports[`VDatePickerHeader.js should render component in RTL mode and match snap
     </div>
   </div>
   <button type="button"
-          class="v-btn v-btn--icon theme--light"
+          class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
   >
-    <div class="v-btn__content">
+    <span class="v-btn__content">
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
       >
         chevron_left
       </i>
-    </div>
+    </span>
   </button>
 </div>
 
@@ -76,15 +76,15 @@ exports[`VDatePickerHeader.js should render component with default slot and matc
 
 <div class="v-date-picker-header theme--light">
   <button type="button"
-          class="v-btn v-btn--icon theme--light"
+          class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
   >
-    <div class="v-btn__content">
+    <span class="v-btn__content">
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
       >
         chevron_left
       </i>
-    </div>
+    </span>
   </button>
   <div class="v-date-picker-header__value">
     <div class="accent--text">
@@ -96,15 +96,15 @@ exports[`VDatePickerHeader.js should render component with default slot and matc
     </div>
   </div>
   <button type="button"
-          class="v-btn v-btn--icon theme--light"
+          class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
   >
-    <div class="v-btn__content">
+    <span class="v-btn__content">
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
       >
         chevron_right
       </i>
-    </div>
+    </span>
   </button>
 </div>
 
@@ -115,15 +115,15 @@ exports[`VDatePickerHeader.js should render disabled component and match snapsho
 <div class="v-date-picker-header v-date-picker-header--disabled theme--light">
   <button disabled="disabled"
           type="button"
-          class="v-btn v-btn--disabled v-btn--icon theme--light"
+          class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
   >
-    <div class="v-btn__content">
+    <span class="v-btn__content">
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
       >
         chevron_left
       </i>
-    </div>
+    </span>
   </button>
   <div class="v-date-picker-header__value v-date-picker-header__value--disabled">
     <div>
@@ -134,15 +134,15 @@ exports[`VDatePickerHeader.js should render disabled component and match snapsho
   </div>
   <button disabled="disabled"
           type="button"
-          class="v-btn v-btn--disabled v-btn--icon theme--light"
+          class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
   >
-    <div class="v-btn__content">
+    <span class="v-btn__content">
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
       >
         chevron_right
       </i>
-    </div>
+    </span>
   </button>
 </div>
 
@@ -152,15 +152,15 @@ exports[`VDatePickerHeader.js should render readonly component and match snapsho
 
 <div class="v-date-picker-header theme--light">
   <button type="button"
-          class="v-btn v-btn--icon theme--light"
+          class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
   >
-    <div class="v-btn__content">
+    <span class="v-btn__content">
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
       >
         chevron_left
       </i>
-    </div>
+    </span>
   </button>
   <div class="v-date-picker-header__value">
     <div class="accent--text">
@@ -170,15 +170,15 @@ exports[`VDatePickerHeader.js should render readonly component and match snapsho
     </div>
   </div>
   <button type="button"
-          class="v-btn v-btn--icon theme--light"
+          class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
   >
-    <div class="v-btn__content">
+    <span class="v-btn__content">
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
       >
         chevron_right
       </i>
-    </div>
+    </span>
   </button>
 </div>
 

@@ -2,8 +2,7 @@ module.exports = {
   verbose: false,
   roots: [
     '<rootDir>/src',
-    '<rootDir>/test/unit',
-    '<rootDir>/test/integration'
+    '<rootDir>/test/unit'
   ],
   moduleFileExtensions: [
     'ts',
@@ -15,10 +14,12 @@ module.exports = {
   moduleNameMapper: {
     '^@/test$': '<rootDir>/test/index.js',
     '^@/test/(.*)$': '<rootDir>/test/$1',
-    '^@/(.*)$': '<rootDir>/src/$1'
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '\\.(css|sass|scss)$': 'identity-obj-proxy'
   },
   transform: {
     '\\.(styl)$': 'jest-css-modules',
+    '\\.(scss)$': 'jest-css-modules',
     '.*\\.(j|t)s$': 'ts-jest'
   },
   mapCoverage: true,
@@ -31,6 +32,12 @@ module.exports = {
   ],
   snapshotSerializers: [
     'jest-serializer-html'
+  ],
+  testMatch: [
+    // Default
+    '**/test/**/*.js',
+    '**/__tests__/**/*.spec.js',
+    '**/__tests__/**/*.spec.ts'
   ],
   globals: {
     'ts-jest': {

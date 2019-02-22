@@ -17,7 +17,8 @@ export default Vue.extend({
     const d = Object.assign(data, {
       staticClass: classes,
       props: Object.assign(props, {
-        icon: true
+        fab: true,
+        text: true
       }),
       on: listeners
     })

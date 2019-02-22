@@ -1,14 +1,10 @@
 module.exports = {
   apps: [
     {
-      name: 'vuetify',
+      name: 'vuetify-dev',
       script: 'yarn.js',
-      args: 'dev',
       cwd: './packages/vuetify/',
-      env: {
-        NODE_ENV: 'development',
-        HOST: '0.0.0.0'
-      }
+      args: 'dev'
     },
     {
       name: 'vuetify-build',
@@ -23,6 +19,12 @@ module.exports = {
       name: 'vuetify-docs',
       script: 'yarn.js',
       cwd: './packages/docs/',
+      args: 'dev'
+    },
+    {
+      name: 'vuetify-kitchen',
+      script: 'yarn.js',
+      cwd: './packages/kitchen/',
       args: 'dev'
     }
   ]

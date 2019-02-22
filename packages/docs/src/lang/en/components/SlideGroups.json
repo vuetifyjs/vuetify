@@ -1,0 +1,18 @@
+{
+  "header": "# Slide Groups",
+  "headerText": "The `v-slide-group` component is used to display pseudo paginated information. It uses [v-item-group](/components/item-groups) at its core and provides a baseline for components such as [v-tabs](/components/tabs) and [v-chip-group](/components/chip-groups).",
+  "examples": {
+    "usage": {
+      "desc": "Similar to the [v-window](/components/windows) component, `v-slide-group` lets items to take up as much space as needed, allowing the user to move horizontally through the provided information."
+    },
+    "carousel": {
+      "header": "### Pseudo Carousel",
+      "desc": "Customize the slide group to creatively display information on sheets. Using the selection, we can display auxillary information easily for the user."
+    }
+  },
+  "props": {
+    "appendIcon": "The appended slot when arrows are shown",
+    "prependIcon": "The prepended slot when arrows are shown",
+    "showArrows": "Always show pagination arrows"
+  }
+}

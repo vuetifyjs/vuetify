@@ -38,13 +38,14 @@ export default Vue.extend({
     click (e: MouseEvent): void {
       this.$emit('click', e)
     },
-    generateRouteLink (classes: any) {
+    generateRouteLink (classes: object, styles: object = {}) {
       let exact = this.exact
       let tag
 
       const data: VNodeData = {
         attrs: { disabled: this.disabled },
         class: classes,
+        style: styles,
         props: {},
         directives: [{
           name: 'ripple',

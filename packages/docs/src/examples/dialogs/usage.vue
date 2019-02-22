@@ -30,7 +30,7 @@
           <v-spacer></v-spacer>
           <v-btn
             color="primary"
-            flat
+            text
             @click="dialog = false"
           >
             I accept

@@ -1,0 +1,28 @@
+{
+  "header": "# Chip Groups",
+  "headerText": "The `v-chip-group` supercharges the `v-chip` component by providing groupable functionality. It is used for creating groups of selections using chips.",
+  "examples": {
+    "usage": {
+      "header": "Usage",
+      "desc": "Chip groups make it easy for users to select filtering options for more complex implementations. By default `v-chip-group` will overflow to the right but can be changed to a **column** only mode."
+    },
+    "toothbrush": {
+      "header": "### Toothbrush card",
+      "desc": "Chip groups allow the creation of custom interfaces that perform the same actions as an item group or radio controls, but are stylistically different."
+    },
+    "filterResults": {
+      "header": "### Filter results",
+      "desc": "Easily create chip groups that provide additional feedback with the **filter** prop. This creates an alternative visual style that communicates to the user that the chip is selected."
+    },
+    "blouse": {
+      "header": "### Blouse product card",
+      "desc": "The `v-chip` component can have an explicit value used for its model. This gets passed to the `v-chip-group` component and is useful for when you don't want to use the chips index as their values."
+    }
+  },
+  "props": {
+    "appendIcon": "The icon used in the append slot (if shown)",
+    "column": "Remove horizontal pagination and wrap items as needed",
+    "prependIcon": "This icon used in the prepend slot (if shown)",
+    "showArrows": "Force the display of the pagination errors"
+  }
+}
