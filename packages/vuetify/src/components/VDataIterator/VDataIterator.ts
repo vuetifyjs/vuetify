@@ -171,11 +171,10 @@ export default mixins(Themeable).extend({
 
       return []
     },
-    genSlots (slot: string, props: any): VNodeChildren {
-      return [
-        ...this.$slots[slot] || [],
-        this.$scopedSlots[slot] && this.$scopedSlots[slot]!(props)
-      ]
+    genSlots (slot: string, props: any = {}): VNodeChildren {
+      if (this.$scopedSlots[slot]) return this.$scopedSlots[slot]!(props)
+      else if (this.$slots[slot]) return this.$slots[slot]
+      return []
     },
     genDefaultScopedSLot (props: any) {
       return this.$createElement('div', {

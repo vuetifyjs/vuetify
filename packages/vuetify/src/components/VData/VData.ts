@@ -253,6 +253,12 @@ export default Vue.extend({
     },
     'internalOptions.mustSort' (mustSort: boolean) {
       this.$emit('update:mustSort', mustSort)
+    },
+    pageCount: {
+      handler (pageCount: number) {
+        this.$emit('pageCount', pageCount)
+      },
+      immediate: true
     }
   },
 

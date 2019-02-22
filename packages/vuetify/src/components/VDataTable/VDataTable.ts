@@ -38,8 +38,7 @@ export default VDataIterator.extend({
 
   props: {
     headers: {
-      type: Array,
-      required: true
+      type: Array
     } as PropValidator<TableHeader[]>,
     showSelect: Boolean,
     showExpand: Boolean,
@@ -77,7 +76,7 @@ export default VDataIterator.extend({
       return headers
     },
     isMobile (): boolean {
-      return !!this.$vuetify.breakpoint[this.mobileBreakpoint]
+      return !!(this.$vuetify.breakpoint as any)[this.mobileBreakpoint] // TODO: fix typing
     }
   },
 
@@ -145,7 +144,7 @@ export default VDataIterator.extend({
       }))
     },
     genLoading () {
-      const progress = this.$createElement(VProgressLinear, {
+      const progress = this.$slots['progress'] ? this.$slots.progress : this.$createElement(VProgressLinear, {
         props: {
           color: this.loading === true ? 'primary' : this.loading,
           height: 2,
@@ -438,6 +437,7 @@ export default VDataIterator.extend({
         staticClass: 'v-data-table',
         class: classes
       }, [
+        this.genSlots('top'),
         this.genTable(props),
         this.genFooters(props)
       ])
@@ -466,7 +466,8 @@ export default VDataIterator.extend({
         'current-items': (v: any[]) => {
           this.internalCurrentItems = v
           this.$emit('current-items', v)
-        }
+        },
+        'pageCount': (v: number) => this.$emit('pageCount', v)
       },
       scopedSlots: {
         default: this.genDefaultScopedSlot as any
