@@ -7,6 +7,9 @@ import Themeable from '../../mixins/themeable'
 // Utilities
 import mixins from '../../util/mixins'
 
+// Types
+import { VNode } from 'vue'
+
 export default mixins(
   BaseSlideGroup,
   Themeable
@@ -27,5 +30,15 @@ export default mixins(
         ...this.themeClasses
       }
     }
+  },
+
+  render (h): VNode {
+    const render = BaseSlideGroup.options.render.call(this, h)
+
+    render.data!.attrs = {
+      role: 'tablist'
+    }
+
+    return render
   }
 })

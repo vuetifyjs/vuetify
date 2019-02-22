@@ -86,7 +86,12 @@ export default mixins(
   render (h): VNode {
     const { tag, data } = this.generateRouteLink(this.classes, this.styles)
 
-    data.attrs!.tabindex = 0
+    data.attrs = {
+      ...data.attrs,
+      'aria-selected': String(this.isActive),
+      role: 'tab',
+      tabindex: 0
+    }
     data.on = {
       ...data.on,
       keydown: (e: KeyboardEvent) => {
