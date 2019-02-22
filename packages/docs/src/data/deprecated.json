@@ -8,6 +8,13 @@
       "prepend-inner-icon-cb": false,
       "clear-icon-cb": false
     },
+    "v-textarea": {
+      "append-icon-cb": false,
+      "append-outer-icon-cb": false,
+      "prepend-icon-cb": false,
+      "prepend-inner-icon-cb": false,
+      "clear-icon-cb": false
+    },
     "v-select": {
       "autocomplete": "1.1",
       "combobox": "1.1",
