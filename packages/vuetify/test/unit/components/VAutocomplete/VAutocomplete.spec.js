@@ -868,7 +868,6 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
     })
 
     await wrapper.vm.$nextTick()
-
     const input = wrapper.first('input')
 
     input.trigger('focus')
@@ -903,7 +902,6 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
     })
 
     await wrapper.vm.$nextTick()
-
     wrapper.vm.selectItem(wrapper.vm.items[0])
     await wrapper.vm.$nextTick()
 
