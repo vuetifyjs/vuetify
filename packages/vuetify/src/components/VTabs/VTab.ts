@@ -58,7 +58,7 @@ export default mixins(
   },
 
   methods: {
-    click (e: MouseEvent): void {
+    click (e: Event): void {
       // If user provides an
       // actual link, do not
       // prevent default
@@ -85,6 +85,16 @@ export default mixins(
 
   render (h): VNode {
     const { tag, data } = this.generateRouteLink(this.classes, this.styles)
+
+    data.attrs!.tabindex = 0
+    data.on = {
+      ...data.on,
+      keydown: (e: KeyboardEvent) => {
+        if (e.keyCode === 13) this.click(e)
+
+        this.$emit('keydown', e)
+      }
+    }
 
     return h(tag, data, this.$slots.default)
   }

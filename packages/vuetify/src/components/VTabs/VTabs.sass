@@ -26,10 +26,29 @@
   justify-content: center
   min-width: 90px
   max-width: 360px
+  outline: none
   padding: 0 16px
+  position: relative
   text-decoration: none
   text-transform: uppercase
   transition: none
+
+  &:after
+    background-color: currentColor
+    bottom: 0
+    content: ''
+    left: 0
+    opacity: 0
+    position: absolute
+    right: 0
+    top: 0
+    transition: $primary-transition
+
+  &:hover:after
+    opacity: 0.16
+
+  &:focus:after
+    opacity: 0.20
 
   &--active
     color: inherit
