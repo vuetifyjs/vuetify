@@ -17,5 +17,9 @@ export default {
       sortNone: ': Not sorted. Activate to sort ascending.'
     }
   },
-  noDataText: 'No data available'
+  noDataText: 'No data available',
+  carousel: {
+    prev: 'Previous visual',
+    next: 'Next visual'
+  }
 }

@@ -90,7 +90,7 @@
     <v-divider></v-divider>
     <v-card-actions>
       <v-btn
-        flat
+        text
         @click="$refs.form.reset()"
       >
         Clear
@@ -118,7 +118,7 @@
         <v-divider></v-divider>
         <v-card-actions>
           <v-btn
-            flat
+            text
             @click="agreement = false, dialog = false"
           >
             No

@@ -61,7 +61,7 @@
     <v-card-actions>
       <v-btn
         :disabled="step === 1"
-        flat
+        text
         @click="step--"
       >
         Back
