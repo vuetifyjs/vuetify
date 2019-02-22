@@ -1,6 +1,6 @@
 <template>
   <v-tabs
-    color="cyan"
+    background-color="cyan"
     dark
     next-icon="mdi-arrow-right-bold-box-outline"
     prev-icon="mdi-arrow-left-bold-box-outline"

@@ -1,7 +1,7 @@
 <template>
   <v-tabs
     centered
-    color="cyan"
+    background-color="cyan"
     dark
     icons-and-text
   >

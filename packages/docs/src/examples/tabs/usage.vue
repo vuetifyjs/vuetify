@@ -2,14 +2,13 @@
   <div>
     <v-tabs
       v-model="active"
-      color="cyan"
+      background-color="cyan"
       dark
       slider-color="yellow"
     >
       <v-tab
         v-for="n in 3"
         :key="n"
-        ripple
       >
         Item {{ n }}
 

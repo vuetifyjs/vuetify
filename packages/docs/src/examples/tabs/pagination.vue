@@ -1,7 +1,7 @@
 <template>
   <v-tabs
     dark
-    color="cyan"
+    background-color="cyan"
     show-arrows
   >
     <v-tabs-slider color="yellow"></v-tabs-slider>

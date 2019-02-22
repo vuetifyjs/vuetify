@@ -19,7 +19,6 @@
         slot="extension"
         v-model="tabs"
         fixed-tabs
-        color="transparent"
       >
         <v-tabs-slider></v-tabs-slider>
         <v-tab href="#mobile-tabs-5-1" class="primary--text">

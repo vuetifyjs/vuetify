@@ -37,7 +37,6 @@
         <v-menu
           v-if="more.length"
           bottom
-          class="v-tabs__div"
           left
         >
           <a slot="activator" class="v-tabs__item">
