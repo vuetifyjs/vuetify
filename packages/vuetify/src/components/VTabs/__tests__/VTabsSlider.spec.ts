@@ -1,9 +1,25 @@
-import { test } from '@/test'
-import VTabsSlider from '@/components/VTabs/VTabsSlider.js'
+// Components
+import VTabsSlider from '../VTabsSlider'
 
-test('VTabsSlider.vue', ({ mount }) => {
+// Utilities
+import { mount, Wrapper } from '@vue/test-utils'
+
+// Types
+import Vue from 'vue'
+
+describe('VTabsSlider.ts', () => {
+  let mountFunction: (options?: object) => Wrapper<Vue>
+
+  beforeEach(() => {
+    mountFunction = (options = {}) => {
+      return mount(VTabsSlider, {
+        ...options
+      })
+    }
+  })
+
   it('should render a tabs slider', () => {
-    const wrapper = mount(VTabsSlider, {
+    const wrapper = mountFunction({
       propsData: {
         color: 'blue lighten-1'
       }
