@@ -1,4 +1,3 @@
-import { VueConstructor } from 'vue';
 // Components
 import VTabs from '../VTabs'
 import VTab from '../VTab'
@@ -11,11 +10,10 @@ import {
   mount,
   Wrapper
 } from '@vue/test-utils'
-import { touch, resizeWindow } from '../../../../test'
 
 // Types
 import { ExtractVue } from './../../../util/mixins'
-import Vue from 'vue'
+import Vue, { VueConstructor } from 'vue'
 
 const Component = (items = ['foo', 'bar']): VueConstructor<Vue> => Vue.extend({
   inheritAttrs: false,
@@ -40,10 +38,6 @@ const ssrBootable = () => new Promise(resolve => requestAnimationFrame(resolve))
 
 // Avoriaz does not like extended
 // components with no render fn
-const TabsMock = {
-  name: 'v-tabs',
-  render: () => {}
-}
 const TabsItemsMock = {
   name: 'v-tabs-items',
   render: () => {}
@@ -108,7 +102,7 @@ describe('VTabs.ts', () => {
 
     await ssrBootable()
 
-    expect(wrapper.findAll(TabsItemsMock).length).toBe(1)
+    expect(wrapper.findAll(TabsItemsMock)).toHaveLength(1)
   })
 
   it('should hide slider', async () => {

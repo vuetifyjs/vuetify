@@ -44,7 +44,7 @@ describe('VTab.ts', () => {
     expect(wrapper.vm.value).toBe('foo')
     wrapper.setProps({ href: null, to: '/foo' })
     expect(wrapper.vm.value).toBe('/foo')
-    wrapper.setProps({ to: { path: 'bar' }})
+    wrapper.setProps({ to: { path: 'bar' } })
     expect(wrapper.vm.value).toBe('bar')
   })
 
@@ -69,7 +69,7 @@ describe('VTab.ts', () => {
     wrapper.vm.onRouteChange()
     await wrapper.vm.$nextTick()
 
-    expect(toggle).not.toBeCalled()
+    expect(toggle).not.toHaveBeenCalled()
 
     // explicitly mock class added
     // by vue router

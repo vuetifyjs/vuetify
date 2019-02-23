@@ -23,6 +23,10 @@ export default BaseItemGroup.extend({
   directives: { Touch },
 
   props: {
+    activeClass: {
+      type: String,
+      default: 'v-window-item--active'
+    },
     mandatory: {
       type: Boolean,
       default: true
