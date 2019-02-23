@@ -10,7 +10,7 @@
           <v-toolbar-title>Settings</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
-            <v-btn dark flat @click="dialog = false">Save</v-btn>
+            <v-btn dark text @click="dialog = false">Save</v-btn>
           </v-toolbar-items>
         </v-toolbar>
         <v-list three-line subheader>

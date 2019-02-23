@@ -31,7 +31,10 @@ function unbind (el: HTMLElement) {
   delete el._onScroll
 }
 
-export default {
+const scroll = {
   inserted,
   unbind
 } as DirectiveOptions
+
+export { scroll }
+export default scroll

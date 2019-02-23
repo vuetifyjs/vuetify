@@ -158,17 +158,8 @@ $transition: (
 $primary-transition: 0.3s map-get($transition, 'swing') !default;
 $secondary-transition: 0.2s map-get($transition, 'ease-in-out') !default;
 
-$alert-color: inherit !default;
-$alert-border-radius: 0 !default;
-$alert-border-width: 4px 0 0 0 !default;
-$alert-dense-border-width: 4px 0 0 0 !default;
-$alert-font-size: $font-size-root !default;
-$alert-icon-color: rgba(map-get($material-light, 'fg-color'), 0.3) !default;
-$alert-icon-font-size: 24px !default;
-$alert-padding: 16px !default;
-$alert-margin: map-get(map-get($spacers, 'one'), 'y') auto !default;
-$alert-outline-border-width: 1px !default;
-$alert-outline-border-style: solid !default;
+/** Alerts **/
+// moved to component
 
 $badge-border-radius: 50% !default;
 $badge-color: map-get($material-dark, 'fg-color') !default;
@@ -188,60 +179,13 @@ $breadcrumbs-margin: 0 !default;
 $breadcrumbs-padding: 0 14px !default;
 
 /** Buttons */
-$button-border-radius: 2px !default;
-$button-color: map-get($material-light, 'fg-color') !default;
-$button-background-color: #999999 !default;
-$button-height: 36px !default;
-$button-font-size: 14px !default;
-$button-font-weight: 500 !default;
-$button-margin-y: 6px !default;
-$button-margin-x: 8px !default;
-$button-margin: $button-margin-y $button-margin-x !default;
-$button-min-width: 88px !default;
-$button-small-padding: 0 8px !default;
-$button-padding: 0 16px !default;
-$button-large-padding: 0 32px !default;
-$button-text-transform: uppercase !default;
-
-$button-small-height: 28px !default;
-$button-small-font-size: 13px !default;
-
-$button-large-height: 44px !default;
-$button-large-font-size: 15px !default;
-
-$button-floating-width: 56px !default;
-$button-floating-icon-height: 24px !default;
-$button-floating-icon-width: 24px !default;
-$button-floating-small-width: 40px !default;
-$button-floating-large-width: 72px !default;
-$button-floating-small-icon-width: 18px !default;
-$button-floating-large-icon-width: 30px !default;
-$button-outline-color: rgba(map-get($shades, 'black'), 0.12) !default;
+// moved to component
 
 /** Cards */
 $card-border-radius: 2px !default;
 
 /** Chips */
-$chip-border-radius: 28px !default;
-$chip-close-margin: 0 2px 0 8px !default;
-$chip-close-margin-rtl: 0 8px 0 2px !default;
-$chip-font-size: 13px !default;
-$chip-label-border-radius: $card-border-radius !default;
-$chip-icon-font-size: 20px !default;
-$chip-padding: 0 12px !default;
-$chip-outline-background: transparent !important !default;
-$chip-outline-color: map-get($grey, 'base') !default;
-$chip-height: 32px !default;
-$chip-margin: 4px !default;
-$chip-small-height: 24px !default;
-$chip-small-font-size: 20px !default;
-$chip-icon-offset: 12px !default;
-$chip-icon-negative-offset: -8px !default;
-
-$chip-removeable-padding: 0 $chip-margin 0 $chip-icon-offset !default;
-$chip-removable-padding-rtl: 0 $chip-icon-offset 0 $chip-margin !default;
-
-$chip-removable-padding: $chip-removeable-padding !default;
+// moved to component
 
 /** Expansion panels */
 $expansion-panel-collapse-height: 48px !default;

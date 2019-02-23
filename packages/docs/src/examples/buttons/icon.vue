@@ -8,25 +8,25 @@
           </v-flex>
 
           <v-flex xs12 sm3>
-            <v-btn flat icon color="pink">
+            <v-btn text icon color="pink">
               <v-icon>favorite</v-icon>
             </v-btn>
           </v-flex>
 
           <v-flex xs12 sm3>
-            <v-btn flat icon color="indigo">
+            <v-btn text icon color="indigo">
               <v-icon>star</v-icon>
             </v-btn>
           </v-flex>
 
           <v-flex xs12 sm3>
-            <v-btn flat icon color="green">
+            <v-btn text icon color="green">
               <v-icon>cached</v-icon>
             </v-btn>
           </v-flex>
 
           <v-flex xs12 sm3>
-            <v-btn flat icon color="deep-orange">
+            <v-btn text icon color="deep-orange">
               <v-icon>thumb_up</v-icon>
             </v-btn>
           </v-flex>

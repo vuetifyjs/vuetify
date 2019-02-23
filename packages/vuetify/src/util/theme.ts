@@ -1,28 +1,12 @@
 import { colorToInt, intToHex, colorToHex, RGB } from './colorUtils'
 import * as sRGB from './color/transformSRGB'
 import * as LAB from './color/transformCIELAB'
-import { VuetifyTheme } from 'vuetify/types'
+import { VuetifyParsedTheme, VuetifyThemeVariant } from 'vuetify/types/services/theme'
 
-interface ParsedThemeItem {
-  base: string
-  lighten5: string
-  lighten4: string
-  lighten3: string
-  lighten2: string
-  lighten1: string
-  darken1: string
-  darken2: string
-  darken3: string
-  darken4: string
-
-  [name: string]: string
-}
-
-interface ParsedTheme {
-  [name: string]: ParsedThemeItem
-}
-
-export function parse (theme: VuetifyTheme | Record<string, number | string>, isItem = false): ParsedTheme {
+export function parse (
+  theme: VuetifyThemeVariant | Record<string, number | string>,
+  isItem = false
+): VuetifyParsedTheme {
   const colors = Object.keys(theme)
   const parsedTheme: any = {}
 
@@ -79,7 +63,7 @@ const genColorVariableName = (name: string, variant = 'base'): string => `--v-${
 
 const genColorVariable = (name: string, variant = 'base'): string => `var(${genColorVariableName(name, variant)})`
 
-export function genStyles (theme: ParsedTheme, cssVar = false): string {
+export function genStyles (theme: VuetifyParsedTheme, cssVar = false): string {
   const colors = Object.keys(theme)
 
   if (!colors.length) return ''

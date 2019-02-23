@@ -206,6 +206,10 @@ const textEvents = [
 
 const inputSlots = ['append', 'prepend', 'default']
 
+const textFieldSlots = [...inputSlots, 'append-outer', 'prepend-inner', 'label']
+
+const selectSlots = [...textFieldSlots, 'append-item', 'prepend-item']
+
 const VSelect = {
   props: [
     {
@@ -221,7 +225,7 @@ const VSelect = {
       default: '{"closeOnClick":false, "closeOnContentClick":false, "openOnClick":false, "maxHeight":300}'
     }
   ],
-  slots: inputSlots.concat(['no-data', 'label', 'progress']),
+  slots: selectSlots.concat(['no-data', 'progress']),
   scopedSlots: [
     {
       name: 'selection',
@@ -351,6 +355,16 @@ module.exports = {
         name: 'value',
         default: '{}',
         type: 'Object'
+      },
+      {
+        name: 'center',
+        default: 'false',
+        type: 'Boolean'
+      },
+      {
+        name: 'class',
+        default: '""',
+        type: 'string'
       }
     ]
   },
@@ -907,11 +921,22 @@ module.exports = {
     ]
   },
   'v-icon': {
-    slots: ['default']
+    slots: ['default'],
+    props: [
+      {
+        name: 'dense',
+        type: 'boolean',
+        default: 'false',
+        'source': null
+      }
+    ]
   },
   'v-input': {
     events: [
       ...inputEvents
+    ],
+    slots: [
+      ...inputSlots
     ]
   },
   'v-layout': {
@@ -1142,7 +1167,9 @@ module.exports = {
       ...inputEvents,
       ...textEvents
     ].concat(validatableEvents),
-    slots: ['label']
+    slots: [
+      ...textFieldSlots
+    ]
   },
   'v-time-picker': {
     events: [

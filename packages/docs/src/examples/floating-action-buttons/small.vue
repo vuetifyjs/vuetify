@@ -65,7 +65,7 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn flat color="primary" @click="dialog = false">Submit</v-btn>
+              <v-btn text color="primary" @click="dialog = false">Submit</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>

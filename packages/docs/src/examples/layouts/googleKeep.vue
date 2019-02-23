@@ -24,7 +24,7 @@
               </v-subheader>
             </v-flex>
             <v-flex xs6 class="text-xs-right">
-              <v-btn small flat>edit</v-btn>
+              <v-btn small text>edit</v-btn>
             </v-flex>
           </v-layout>
           <v-divider
