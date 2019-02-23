@@ -8,7 +8,7 @@
       class="elevation-1"
     ></v-data-table>
     <div class="text-xs-center pt-2">
-      <v-btn color="primary" @click="toggleOrder" class="mr-2">Toggle sort order</v-btn>
+      <v-btn color="primary" class="mr-2" @click="toggleOrder">Toggle sort order</v-btn>
       <v-btn color="primary" @click="nextSort">Sort next column</v-btn>
     </div>
   </div>
