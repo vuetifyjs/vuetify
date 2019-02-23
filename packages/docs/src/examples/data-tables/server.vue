@@ -3,20 +3,11 @@
     <v-data-table
       :headers="headers"
       :items="desserts"
-      :pagination.sync="pagination"
-      :total-items="totalDesserts"
+      :options.sync="options"
+      :server-items-length="totalDesserts"
       :loading="loading"
       class="elevation-1"
-    >
-      <template slot="items" slot-scope="props">
-        <td>{{ props.item.name }}</td>
-        <td class="text-xs-right">{{ props.item.calories }}</td>
-        <td class="text-xs-right">{{ props.item.fat }}</td>
-        <td class="text-xs-right">{{ props.item.carbs }}</td>
-        <td class="text-xs-right">{{ props.item.protein }}</td>
-        <td class="text-xs-right">{{ props.item.iron }}</td>
-      </template>
-    </v-data-table>
+    ></v-data-table>
   </div>
 </template>
 
@@ -27,7 +18,7 @@
         totalDesserts: 0,
         desserts: [],
         loading: true,
-        pagination: {},
+        options: {},
         headers: [
           {
             text: 'Dessert (100g serving)',
@@ -44,7 +35,7 @@
       }
     },
     watch: {
-      pagination: {
+      options: {
         handler () {
           this.getDataFromApi()
             .then(data => {
@@ -66,12 +57,12 @@
       getDataFromApi () {
         this.loading = true
         return new Promise((resolve, reject) => {
-          const { sortBy, descending, page, rowsPerPage } = this.pagination
+          const { sortBy, descending, page, itemsPerPage } = this.options
 
           let items = this.getDesserts()
           const total = items.length
 
-          if (this.pagination.sortBy) {
+          if (this.options.sortBy) {
             items = items.sort((a, b) => {
               const sortA = a[sortBy]
               const sortB = b[sortBy]
@@ -88,8 +79,8 @@
             })
           }
 
-          if (rowsPerPage > 0) {
-            items = items.slice((page - 1) * rowsPerPage, page * rowsPerPage)
+          if (itemsPerPage > 0) {
+            items = items.slice((page - 1) * itemsPerPage, page * itemsPerPage)
           }
 
           setTimeout(() => {

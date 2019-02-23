@@ -91,13 +91,11 @@
   },
   "props": {
     "appendOuterIcon": "Appends an icon to the outside of `v-text-field`'s input, uses same syntax as `v-icon`",
-    "appendOuterIconCb": "Callback for appended outer icon when clicked",
     "autoGrow": "Auto-grows the input. This option requires the use of **v-model**",
     "autofocus": "Enables autofocus",
     "box": "Applies the alternate box input style",
     "browserAutocomplete": "Configures the default `<input>` autocomplete attribute",
     "clearIcon": "Applied when using **clearable** and the input is dirty",
-    "clearIconCb": "Callback for clear icon when clicked",
     "counter": "Creates counter for input length; if no number is specified, it defaults to 25. Does not apply any validation.",
     "flat": "Mixins.Soloable.props.flat",
     "fullWidth": "Desginates input type as full-width",
@@ -107,7 +105,6 @@
     "placeholder": "Sets the input’s placeholder text",
     "prefix": "Displays prefix text",
     "prependInnerIcon": "Prepends an icon inside the component, uses the same syntax as `v-icon`",
-    "prependInnerIconCb": "Callback for prepended icon when clicked",
     "reverse": "Reverses the input orientation",
     "rows": "Controls the number of rows in a textarea",
     "rowHeight": "Designate a custom _row-height_. Used for determining input height when using **multi-line** or **textarea** props",
@@ -117,6 +114,12 @@
     "textarea": "Textarea text field with alternate style",
     "toggleKeys": "Array of key codes that will toggle the input (if it supports toggling)",
     "type": "Sets input type"
+  },
+  "slots": {
+    "append": "Components.Inputs.slots.append",
+    "append-outer": "Appends an item inside input content",
+    "prepend": "Components.Inputs.slots.prepend",
+    "prepend-inner": "Prepends an item inside input content"
   },
   "events": {
     "change": "Components.Inputs.events.change",

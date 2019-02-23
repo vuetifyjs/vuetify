@@ -3,22 +3,14 @@
     <v-data-table
       :headers="headers"
       :items="desserts"
-      :search="search"
-      hide-actions
-      :pagination.sync="pagination"
+      :page.sync="page"
+      :items-per-page="5"
+      @pageCount="pageCount = $event"
+      hide-default-footer
       class="elevation-1"
-    >
-      <template slot="items" slot-scope="props">
-        <td>{{ props.item.name }}</td>
-        <td class="text-xs-right">{{ props.item.calories }}</td>
-        <td class="text-xs-right">{{ props.item.fat }}</td>
-        <td class="text-xs-right">{{ props.item.carbs }}</td>
-        <td class="text-xs-right">{{ props.item.protein }}</td>
-        <td class="text-xs-right">{{ props.item.iron }}</td>
-      </template>
-    </v-data-table>
+    ></v-data-table>
     <div class="text-xs-center pt-2">
-      <v-pagination v-model="pagination.page" :length="pages"></v-pagination>
+      <v-pagination v-model="page" :length="pageCount"></v-pagination>
     </div>
   </div>
 </template>
@@ -27,9 +19,8 @@
   export default {
     data () {
       return {
-        search: '',
-        pagination: {},
-        selected: [],
+        page: 1,
+        pageCount: 0,
         headers: [
           {
             text: 'Dessert (100g serving)',
@@ -125,15 +116,6 @@
             iron: '6%'
           }
         ]
-      }
-    },
-    computed: {
-      pages () {
-        if (this.pagination.rowsPerPage == null ||
-          this.pagination.totalItems == null
-        ) return 0
-
-        return Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage)
       }
     }
   }

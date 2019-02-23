@@ -266,6 +266,15 @@ describe('VIcon', () => {
       expect(wrapper.element.classList).toContain('v-icon--right')
     })
 
+    it('should be a link', () => {
+      const clickHandler = jest.fn()
+      const wrapper = mountFunction({ on: { click: clickHandler } }, '$vuetify.icons.testIcon')
+      wrapper.trigger('click')
+
+      expect(wrapper.element.classList).toContain('v-icon--link')
+      expect(clickHandler).toHaveBeenCalled()
+    })
+
     it('should trim name', () => {
       const wrapper = mountFunction({}, ' add ')
 
