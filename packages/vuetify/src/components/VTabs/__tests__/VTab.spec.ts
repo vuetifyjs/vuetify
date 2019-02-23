@@ -76,7 +76,7 @@ describe('VTab.ts', () => {
     ;(wrapper.vm.$refs.link as any)._vnode.data = {
       class: { 'bar': true }
     }
-    wrapper.vm.$route.path = '/foo'
+    ;(wrapper.vm as any).$route.path = '/foo'
 
     wrapper.vm.onRouteChange()
     await wrapper.vm.$nextTick()
