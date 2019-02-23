@@ -28,7 +28,7 @@
         :color="computedColor"
         :ripple="false"
         v-bind="bind"
-        :flat="snackbar.color !== 'store'"
+        :text="snackbar.color !== 'store'"
         dark
         depressed
         @click="onClick"
