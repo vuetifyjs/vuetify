@@ -26,6 +26,7 @@
       "desc": "The `v-card` component has multiple children components that help you build complex examples without having to worry about spacing. This example is comprised of the `v-card-title`, `v-card-text` and `v-card-actions` components."
     }
   },
+  "cardMediaWarning": "`v-card-media` is deprecated used `v-img` instead.",
   "props": {
     "contain": "Change the background-size to contain.",
     "flat": "Removes card box shadow",
