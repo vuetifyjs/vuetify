@@ -1,10 +1,10 @@
-@import '../bootstrap'
-@import '../theme'
+@import '../../styles/styles.sass'
+@import './_mixins.sass'
 
-v-divider($material)
-  border-color: $material.dividers
-
-theme(v-divider, "v-divider")
+.v-divider.theme--light
+  @include divider-theme($material-light)
+.v-alert.theme--dark
+  @include divider-theme($material-dark)
 
 .v-divider
   display: block
