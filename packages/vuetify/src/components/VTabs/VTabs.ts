@@ -15,6 +15,7 @@ import SSRBootable from '../../mixins/ssr-bootable'
 import Resize from '../../directives/resize'
 
 // Utilities
+import { convertToUnit } from '../../util/helpers'
 import { ExtractVue } from './../../util/mixins'
 import mixins from '../../util/mixins'
 
@@ -152,6 +153,11 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
     genBar (items: VNode[], slider: VNode[]) {
       return this.$createElement(VTabsBar, this.setTextColor(this.color, {
         staticClass: this.backgroundColor,
+        style: {
+          height: this.height ? {
+            height: convertToUnit(this.height)
+          } : null
+        },
         props: {
           activeClass: 'v-tabs__item--active',
           // TODO: deprecate name
