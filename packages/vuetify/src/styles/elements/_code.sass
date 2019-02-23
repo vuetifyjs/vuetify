@@ -1,0 +1,20 @@
+code, kbd
+  display: inline-block
+  border-radius: 3px
+  white-space: pre-wrap
+  font-size: 85%
+  font-weight: 900
+
+  &:after,
+  &:before
+    content: "\00a0"
+    letter-spacing: -1px
+
+code
+  background-color: map-get($grey, 'lighten-4')
+  color: #bd4147
+  +elevation(1)
+
+kbd
+  background: map-get($grey, 'darken-2')
+  color: map-get($shades, 'white')
