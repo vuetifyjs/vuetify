@@ -5,9 +5,26 @@
     class="page"
   >
     <template v-if="structure">
-      <doc-heading v-if="structure.title">
-        {{ structure.title }}
-      </doc-heading>
+      <v-layout>
+        <v-flex shrink>
+          <doc-heading v-if="structure.title">
+            {{ structure.title }}
+          </doc-heading>
+        </v-flex>
+        <v-spacer />
+        <v-flex
+          v-if="structure.mdLink"
+          shrink
+        >
+          <v-btn
+            icon
+            :href="structure.mdLink"
+            class="mt-2"
+          >
+            <v-icon>mdi-material-design</v-icon>
+          </v-btn>
+        </v-flex>
+      </v-layout>
       <div
         v-if="structure.titleText"
         class="mb-5"
