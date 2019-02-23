@@ -80,7 +80,9 @@ export default Vue.extend({
         })
       }
 
-      return itemsPerPageOptions.map(value => ({ text: value === -1 ? this.$vuetify.lang.t(this.itemsPerPageAllText) : String(value), value }))
+      return itemsPerPageOptions.map(value => ({
+        text: value === -1 ? this.$vuetify.lang.t(this.itemsPerPageAllText) : String(value), value
+      }))
     }
   },
 
