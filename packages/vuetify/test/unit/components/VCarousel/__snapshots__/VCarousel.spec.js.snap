@@ -10,6 +10,7 @@ exports[`VCarousel.ts should render component in RTL mode and match snapshot 1`]
   <div class="v-carousel__prev">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
+            aria-label="Previous visual"
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
@@ -24,6 +25,7 @@ exports[`VCarousel.ts should render component in RTL mode and match snapshot 1`]
   <div class="v-carousel__next">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
+            aria-label="Next visual"
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
@@ -53,6 +55,7 @@ exports[`VCarousel.ts should render component with custom duration between image
   <div class="v-carousel__prev">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
+            aria-label="Previous visual"
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
@@ -67,6 +70,7 @@ exports[`VCarousel.ts should render component with custom duration between image
   <div class="v-carousel__next">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
+            aria-label="Next visual"
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
@@ -124,6 +128,7 @@ exports[`VCarousel.ts should render component with custom icon and match snapsho
   <div class="v-carousel__prev">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
+            aria-label="Previous visual"
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
@@ -138,6 +143,7 @@ exports[`VCarousel.ts should render component with custom icon and match snapsho
   <div class="v-carousel__next">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
+            aria-label="Next visual"
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
@@ -206,6 +212,7 @@ exports[`VCarousel.ts should render component with custom next icon and match sn
   <div class="v-carousel__prev">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
+            aria-label="Previous visual"
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
@@ -220,6 +227,7 @@ exports[`VCarousel.ts should render component with custom next icon and match sn
   <div class="v-carousel__next">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
+            aria-label="Next visual"
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
@@ -249,6 +257,7 @@ exports[`VCarousel.ts should render component with custom prev icon and match sn
   <div class="v-carousel__prev">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
+            aria-label="Previous visual"
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
@@ -263,6 +272,7 @@ exports[`VCarousel.ts should render component with custom prev icon and match sn
   <div class="v-carousel__next">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
+            aria-label="Next visual"
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
@@ -292,6 +302,7 @@ exports[`VCarousel.ts should render component with image cycling off and match s
   <div class="v-carousel__prev">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
+            aria-label="Previous visual"
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
@@ -306,6 +317,7 @@ exports[`VCarousel.ts should render component with image cycling off and match s
   <div class="v-carousel__next">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
+            aria-label="Next visual"
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
@@ -363,6 +375,7 @@ exports[`VCarousel.ts should render component with selected active item 1`] = `
   <div class="v-carousel__prev">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
+            aria-label="Previous visual"
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
@@ -377,6 +390,7 @@ exports[`VCarousel.ts should render component with selected active item 1`] = `
   <div class="v-carousel__next">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
+            aria-label="Next visual"
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
@@ -473,6 +487,7 @@ exports[`VCarousel.ts should render component without delimiters 1`] = `
   <div class="v-carousel__prev">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
+            aria-label="Previous visual"
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
@@ -487,6 +502,7 @@ exports[`VCarousel.ts should render component without delimiters 1`] = `
   <div class="v-carousel__next">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
+            aria-label="Next visual"
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
@@ -512,6 +528,7 @@ exports[`VCarousel.ts should render component without next icon and match snapsh
   <div class="v-carousel__prev">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
+            aria-label="Previous visual"
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
@@ -541,6 +558,7 @@ exports[`VCarousel.ts should render component without prev icon and match snapsh
   <div class="v-carousel__next">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
+            aria-label="Next visual"
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
