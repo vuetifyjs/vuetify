@@ -1,9 +1,28 @@
-import VBadge from '@/components/VBadge'
-import { test } from '@/test'
+// Components
+import VBadge from '../VBadge'
 
-test('VBadge.js', ({ mount, compileToFunctions }) => {
+// Utilities
+import {
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+import { compileToFunctions } from 'vue-template-compiler'
+
+// Types
+import { ExtractVue } from './../../../util/mixins'
+
+describe('VBadge.ts', () => {
+  type Instance = ExtractVue<typeof VBadge>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+
+  beforeEach(() => {
+    mountFunction = (options = {}) => {
+      return mount(VBadge, options)
+    }
+  })
+
   it('should render component and match snapshot', async () => {
-    const wrapper = mount(VBadge, {
+    const wrapper = mountFunction({
       slots: {
         badge: [compileToFunctions('<span>content</span>')],
         default: [compileToFunctions('<span>element</span>')]
@@ -14,7 +33,7 @@ test('VBadge.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should render component with with value=false and match snapshot', async () => {
-    const wrapper = mount(VBadge, {
+    const wrapper = mountFunction({
       propsData: {
         value: false
       },
@@ -28,37 +47,37 @@ test('VBadge.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should render component with bottom prop', () => {
-    const wrapper = mount(VBadge, {
+    const wrapper = mountFunction({
       propsData: {
         bottom: true
       }
     })
 
-    expect(wrapper.hasClass('v-badge--bottom')).toBe(true)
+    expect(wrapper.classes('v-badge--bottom')).toBeTruthy()
   })
 
   it('should render component with left prop', () => {
-    const wrapper = mount(VBadge, {
+    const wrapper = mountFunction({
       propsData: {
         left: true
       }
     })
 
-    expect(wrapper.hasClass('v-badge--left')).toBe(true)
+    expect(wrapper.classes('v-badge--left')).toBeTruthy()
   })
 
   it('should render component with overlap prop', () => {
-    const wrapper = mount(VBadge, {
+    const wrapper = mountFunction({
       propsData: {
         overlap: true
       }
     })
 
-    expect(wrapper.hasClass('v-badge--overlap')).toBe(true)
+    expect(wrapper.classes('v-badge--overlap')).toBeTruthy()
   })
 
   it('should render component with color prop', () => {
-    const wrapper = mount(VBadge, {
+    const wrapper = mountFunction({
       propsData: {
         color: 'green lighten-1'
       },
@@ -67,8 +86,8 @@ test('VBadge.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const badge = wrapper.find('.v-badge__badge')[0]
-    expect(badge.hasClass('green')).toBe(true)
-    expect(badge.hasClass('lighten-1')).toBe(true)
+    const badge = wrapper.find('.v-badge__badge')
+    expect(badge.classes('green')).toBeTruthy()
+    expect(badge.classes('lighten-1')).toBeTruthy()
   })
 })

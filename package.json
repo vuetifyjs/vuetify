@@ -36,7 +36,7 @@
     "jest-cli": "^21.2.1",
     "jest-css-modules": "^1.1.0",
     "jest-serializer-html": "^5.0.0",
-    "lerna": "^3.4.3",
+    "lerna": "^3.13.0",
     "semver": "^5.6.0",
     "shelljs": "^0.8.2",
     "ts-jest": "^21.2.1",

@@ -1,15 +1,13 @@
-@import '../bootstrap'
-@import '../theme'
+@import '../../styles/styles.sass'
 
 /* Theme */
-v-messages($material)
-  color: $material.text.secondary
+@mixin messages-theme($material)
+  color: map-deep-get($material, 'text', 'secondary')
 
-v-messages-rtl()
-  text-align: right
-
-theme(v-messages, "v-messages")
-rtl(v-messages-rtl, "v-messages")
+.v-messages.theme--light
+  @include messages-theme($material-light)
+.v-messages.theme--dark
+  @include messages-theme($material-dark)
 
 .v-messages
   flex: 1 1 auto
@@ -17,6 +15,9 @@ rtl(v-messages-rtl, "v-messages")
   min-height: 12px
   min-width: 1px // Ensure takes up space with no messages and inside of flex
   position: relative
+
+  +rtl()
+    text-align: right
 
   &__message
     line-height: 1

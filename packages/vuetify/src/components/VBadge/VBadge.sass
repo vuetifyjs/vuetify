@@ -1,26 +1,6 @@
-@import '../bootstrap'
-
-v-badge-rtl()
-  &__badge
-    right: initial
-    left: -($badge-width)
-
-  &--overlap
-    .v-badge__badge
-      right: initial
-      left: -8px
-
-    &.v-badge--left
-      .v-badge__badge
-        right: -8px
-        left: initial
-
-  &--left
-    .v-badge__badge
-      right: -($badge-width)
-      left: initial
-
-rtl(v-badge-rtl, "v-badge")
+// Imports
+@import '../../styles/styles.sass'
+@import './_variables.sass'
 
 .v-badge
   display: inline-block
@@ -67,4 +47,24 @@ rtl(v-badge-rtl, "v-badge")
   &--bottom
     .v-badge__badge
       bottom: -($badge-height / 2)
-      top: initial;
+      top: initial
+
+  +rtl()
+    &__badge
+      right: initial
+      left: -($badge-width)
+
+    &--overlap
+      .v-badge__badge
+        right: initial
+        left: -8px
+
+      &.v-badge--left
+        .v-badge__badge
+          right: -8px
+          left: initial
+
+    &--left
+      .v-badge__badge
+        right: -($badge-width)
+        left: initial
