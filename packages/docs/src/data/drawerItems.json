@@ -119,7 +119,6 @@
           { "text": "textFields", "to": "text-fields" }
         ]
       },
-      { "text": "jumbotrons", "to": "jumbotrons", "deprecated": true },
       { "text": "lists", "to": "lists" },
       { "text": "menus", "to": "menus" },
       { "text": "navigationDrawers", "to": "navigation-drawers" },
