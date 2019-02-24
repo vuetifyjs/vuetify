@@ -247,6 +247,71 @@
       "type": "section",
       "children": [
         {
+          "type": "heading",
+          "lang": "sassHeader"
+        },
+        {
+          "type": "text",
+          "lang": "sassText1"
+        },
+        {
+          "type": "heading",
+          "lang": "sassHeader2"
+        },
+        {
+          "type": "text",
+          "lang": "sassText2"
+        },
+        {
+          "type": "markup",
+          "value": "bash_yarn_install_sass"
+        },
+        {
+          "type": "text",
+          "lang": "sassText3"
+        },
+        {
+          "type": "markup",
+          "value": "js_webpack_sass"
+        },
+        {
+          "type": "text",
+          "lang": "sassText4"
+        },
+        {
+          "type": "markup",
+          "value": "sass_import_vuetify_css"
+        },
+        {
+          "type": "text",
+          "lang": "sassText5"
+        },
+        {
+          "type": "markup",
+          "value": "js_import_vuetify_sass"
+        },
+        {
+          "type": "text",
+          "lang": "sassText6"
+        },
+        {
+          "type": "heading",
+          "lang": "sassHeader3"
+        },
+        {
+          "type": "text",
+          "lang": "sassText7"
+        },
+        {
+          "type": "markup",
+          "value": "sass_changing_variables"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "up-next",
           "value": [
             "framework/colors",
