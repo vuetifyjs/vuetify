@@ -12,13 +12,13 @@
 // Block
 .v-alert
   display: flex
-  font-size: 16px
-  margin-bottom: 16px
-  padding: 16px
+  font-size: $alert-font-size
+  margin-bottom: $alert-margin
+  padding: $alert-padding
 
   > .v-icon,
   > .v-alert__content
-    margin-right: 16px
+    margin-right: $alert-margin
 
   > .v-icon + .v-alert__content
     margin-right: 0
@@ -30,7 +30,7 @@
     > .v-icon,
     > .v-alert__content
       margin-right: 0
-      margin-left: 16px
+      margin-left: $alert-margin
 
     > .v-icon + .v-alert__content
       margin-left: 0
@@ -46,7 +46,7 @@
   position: absolute
 
   &:not(.v-alert__border--has-color)
-    opacity: 0.26
+    opacity: $alert-border-opacity
 
   &--left,
   &--right
@@ -104,38 +104,38 @@
 
 .v-alert__icon
   border-radius: 50%
-  height: 24px
-  min-width: 24px
+  height: $alert-icon-size
+  min-width: $alert-icon-size
   position: relative
 
   &.v-icon
-    font-size: 24px
+    font-size: $alert-icon-size
 
 // Modifiers
 .v-alert--border
   @each $direction in ['top', 'right', 'bottom', 'left']
     &-#{$direction}
-      padding-#{$direction}: 24px
+      padding-#{$direction}: 1.5 * $alert-padding
 
   +rtl()
     &-left
-      padding-right: 24px
-      padding-left: 16px
+      padding-right: 1.5 * $alert-padding
+      padding-left: $alert-padding
 
     &-right
-      padding-left: 24px
-      padding-right: 16px
+      padding-left: 1.5 * $alert-padding
+      padding-right: $alert-padding
 
 .v-alert--dense
-  padding-top: 8px
-  padding-bottom: 8px
+  padding-top: $alert-padding / 2
+  padding-bottom: $alert-padding / 2
 
   .v-alert__border
     border-width: $alert-dense-border-width
 
 .v-alert--outline
   background: transparent !important
-  border: 2px solid currentColor !important
+  border: $alert-outline !important
 
   .v-alert__icon
     color: inherit !important
@@ -144,8 +144,8 @@
   align-items: center
 
   .v-alert__icon
-    height: 48px
-    min-width: 48px
+    height: $alert-promient-icon-size
+    min-width: $alert-promient-icon-size
 
     &:after
       background: currentColor !important
@@ -159,7 +159,7 @@
       top: 0
 
     &.v-icon
-      font-size: 32px
+      font-size: $alert-promient-icon-font-size
 
 .v-alert--text
   background: transparent !important
