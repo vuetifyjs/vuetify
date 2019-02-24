@@ -5,7 +5,7 @@
   >
     <v-card-text class="text-xs-center">
       <v-btn
-        flat
+        text
         color="primary"
         @click="showNav = !showNav"
       >
@@ -19,17 +19,17 @@
       absolute
       color="transparent"
     >
-      <v-btn flat color="teal">
+      <v-btn text color="teal">
         <span>Recents</span>
         <v-icon>history</v-icon>
       </v-btn>
 
-      <v-btn flat color="teal">
+      <v-btn text color="teal">
         <span>Favorites</span>
         <v-icon>favorite</v-icon>
       </v-btn>
 
-      <v-btn flat color="teal">
+      <v-btn text color="teal">
         <span>Nearby</span>
         <v-icon>place</v-icon>
       </v-btn>
