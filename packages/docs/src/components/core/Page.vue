@@ -19,6 +19,8 @@
           <v-btn
             icon
             :href="structure.mdLink"
+            target="_blank"
+            rel="noopener"
             class="mt-2"
           >
             <v-icon>mdi-material-design</v-icon>
