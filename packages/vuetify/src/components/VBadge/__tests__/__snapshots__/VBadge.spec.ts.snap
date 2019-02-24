@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VBadge.js should render component and match snapshot 1`] = `
+exports[`VBadge.ts should render component and match snapshot 1`] = `
 
 <span class="v-badge">
   <span>
@@ -15,7 +15,7 @@ exports[`VBadge.js should render component and match snapshot 1`] = `
 
 `;
 
-exports[`VBadge.js should render component with with value=false and match snapshot 1`] = `
+exports[`VBadge.ts should render component with with value=false and match snapshot 1`] = `
 
 <span class="v-badge">
   <span>
