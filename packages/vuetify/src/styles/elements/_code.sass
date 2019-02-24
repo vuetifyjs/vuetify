@@ -11,10 +11,10 @@ code, kbd
     letter-spacing: -1px
 
 code
-  background-color: $grey.lighten-4
+  background-color: map-get($grey, 'lighten-4')
   color: #bd4147
-  elevation(1)
+  +elevation(1)
 
 kbd
-  background: $grey.darken-2
-  color: $shades.white
+  background: map-get($grey, 'darken-2')
+  color: map-get($shades, 'white')
