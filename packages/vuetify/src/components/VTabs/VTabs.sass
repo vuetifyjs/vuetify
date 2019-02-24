@@ -15,15 +15,17 @@
   //
 
 // Element
-.v-tabs__bar.v-item-group > *
-  cursor: initial
+.v-tabs__bar
+  height: 48px
+
+  &.v-item-group > *
+    cursor: initial
 
 .v-tabs__item
   align-items: center
   display: flex
   flex: 0 1 auto
   font-weight: 500
-  height: 48px
   justify-content: center
   min-width: 90px
   max-width: 360px
@@ -86,9 +88,11 @@
     max-width: none
 
 .v-tabs--icons-and-text
+  .v-tabs__bar
+    height: 72px
+
   .v-tabs__item
     flex-direction: column-reverse
-    height: 72px
 
     > *:first-child
       margin-bottom: 6px
