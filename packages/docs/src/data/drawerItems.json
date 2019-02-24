@@ -73,6 +73,7 @@
       { "text": "alerts", "to": "alerts" },
       { "text": "avatars", "to": "avatars" },
       { "text": "badges", "to": "badges" },
+      { "text": "banners", "to": "banners", "new": true },
       { "text": "bottomNavigation", "to": "bottom-navigation" },
       { "text": "bottomSheets", "to": "bottom-sheets" },
       { "text": "breadcrumbs", "to": "breadcrumbs" },
