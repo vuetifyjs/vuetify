@@ -141,7 +141,11 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
         // Give screen time to paint
         const activeTab = this.$refs.items.selectedItems[0]
         /* istanbul ignore if */
-        if (!activeTab || !activeTab.$el) return
+        if (!activeTab || !activeTab.$el) {
+          this.sliderWidth = 0
+          this.sliderLeft = 0
+          return
+        }
         const el = activeTab.$el as HTMLElement
 
         this.sliderWidth = el.scrollWidth

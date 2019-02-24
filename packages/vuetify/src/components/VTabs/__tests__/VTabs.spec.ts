@@ -150,4 +150,23 @@ describe('VTabs.ts', () => {
 
     expect(wrapper.vm.internalValue).toBe('bar')
   })
+
+  it('should reset the tabs slider', async () => {
+    const wrapper = mountFunction({
+      data: () => ({
+        sliderLeft: 100,
+        sliderWidth: 100
+      }),
+      slots: {
+        default: [VTab]
+      }
+    })
+
+    wrapper.vm.callSlider()
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.sliderLeft).toBe(0)
+    expect(wrapper.vm.sliderWidth).toBe(0)
+  })
 })
