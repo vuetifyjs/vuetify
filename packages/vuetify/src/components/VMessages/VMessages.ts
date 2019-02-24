@@ -1,5 +1,5 @@
 // Styles
-import './VMessages.styl'
+import './VMessages.sass'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
