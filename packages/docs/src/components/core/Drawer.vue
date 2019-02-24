@@ -142,7 +142,10 @@
         ) this.inputValue = false
       },
       inputValue (val) {
-        if (!val) this.docSearch.autocomplete.autocomplete.close()
+        if (!val) {
+          this.docSearch.autocomplete.autocomplete.close()
+          this.docSearch.autocomplete.autocomplete.setVal('')
+        }
       },
       isSearching (val) {
         this.$refs.toolbar.isScrolling = !val
@@ -155,6 +158,7 @@
       search (val) {
         if (!val) {
           this.docSearch.autocomplete.autocomplete.close()
+          this.docSearch.autocomplete.autocomplete.setVal('')
         }
       }
     },
@@ -172,6 +176,7 @@
 
     destroyed () {
       this.docSearch.autocomplete.autocomplete.close()
+      this.docSearch.autocomplete.autocomplete.setVal('')
     },
 
     methods: {
