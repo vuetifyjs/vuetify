@@ -1,28 +1,48 @@
-import { test } from '@/test'
-import VRating from '@/components/VRating'
+// Libraries
 import Vue from 'vue'
 
-test('VRating.js', ({ mount }) => {
+// Components
+import VRating from '../VRating'
+
+// Utilities
+import {
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+import { ExtractVue } from '../../../util/mixins'
+
+describe('VRating.ts', () => {
+  type Instance = ExtractVue<typeof VRating>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+
+  beforeEach(() => {
+    mountFunction = (options = {}) => {
+      return mount(VRating, {
+        ...options
+      })
+    }
+  })
+
   it('should not register directives if readonly or !ripple', () => {
-    const wrapper = mount(VRating, {
+    const wrapper = mountFunction({
       propsData: {
         readonly: true
       }
     })
 
-    expect(wrapper.vm.directives.length).toEqual(0)
+    expect(wrapper.vm.directives).toHaveLength(0)
 
     wrapper.setProps({ readonly: false })
 
-    expect(wrapper.vm.directives.length).toBe(1)
+    expect(wrapper.vm.directives).toHaveLength(1)
 
     wrapper.setProps({ ripple: false })
 
-    expect(wrapper.vm.directives.length).toBe(0)
+    expect(wrapper.vm.directives).toHaveLength(0)
   })
 
   it('should respond to internal and prop value changes', async () => {
-    const wrapper = mount(VRating)
+    const wrapper = mountFunction()
 
     const input = jest.fn()
     wrapper.vm.$on('input', input)
@@ -34,7 +54,7 @@ test('VRating.js', ({ mount }) => {
 
     expect(input).not.toHaveBeenCalled()
 
-    const icon = wrapper.find('.v-icon')[1]
+    const icon = wrapper.findAll('.v-icon').at(1)
 
     icon.trigger('click')
 
@@ -44,7 +64,7 @@ test('VRating.js', ({ mount }) => {
   })
 
   it('should not null the rating if clicked on the current value unless clearable', async () => {
-    const wrapper = mount(VRating)
+    const wrapper = mountFunction()
 
     const input = jest.fn()
     wrapper.vm.$on('input', input)
@@ -54,7 +74,7 @@ test('VRating.js', ({ mount }) => {
 
     expect(wrapper.vm.internalValue).toBe(1)
 
-    const icon = wrapper.find('.v-icon')[0]
+    const icon = wrapper.find('.v-icon')
 
     icon.trigger('click')
 
@@ -72,7 +92,7 @@ test('VRating.js', ({ mount }) => {
   })
 
   it('should not react to events when readonly', async () => {
-    const wrapper = mount(VRating, {
+    const wrapper = mountFunction({
       propsData: {
         readonly: true
       }
@@ -81,13 +101,13 @@ test('VRating.js', ({ mount }) => {
     const input = jest.fn()
     wrapper.vm.$on('input', input)
 
-    const icon = wrapper.first('.v-icon')
+    const icon = wrapper.find('.v-icon')
 
     icon.trigger('click')
 
     await wrapper.vm.$nextTick()
 
-    expect(input).not.toBeCalled()
+    expect(input).not.toHaveBeenCalled()
 
     wrapper.setProps({ readonly: false })
 
@@ -95,29 +115,31 @@ test('VRating.js', ({ mount }) => {
 
     await wrapper.vm.$nextTick()
 
-    expect(input).toBeCalledWith(1)
+    expect(input).toHaveBeenCalledWith(1)
   })
 
   it('should change hover index on mouse action', async () => {
     jest.useFakeTimers()
 
-    const wrapper = mount(VRating, {
+    const wrapper = mountFunction({
       propsData: {
         hover: true
       }
     })
 
-    const icons = wrapper.find('.v-icon')
+    const icons = wrapper.findAll('.v-icon')
+    const icon1 = icons.at(0)
+    const icon2 = icons.at(3)
 
     expect(wrapper.vm.hoverIndex).toBe(-1)
 
-    icons[0].trigger('mouseenter')
+    icon1.trigger('mouseenter')
 
     jest.runAllTimers()
 
     expect(wrapper.vm.hoverIndex).toBe(1)
 
-    icons[3].trigger('mouseenter')
+    icon2.trigger('mouseenter')
 
     jest.runAllTimers()
 
@@ -125,9 +147,10 @@ test('VRating.js', ({ mount }) => {
   })
 
   it('should check for half event', () => {
-    const wrapper = mount(VRating)
+    const wrapper = mountFunction()
 
-    expect(wrapper.vm.genHoverIndex({}, 1)).toBe(2)
+    const event = new MouseEvent('hover')
+    expect(wrapper.vm.genHoverIndex(event, 1)).toBe(2)
 
     wrapper.setProps({ halfIncrements: true })
 
@@ -148,7 +171,7 @@ test('VRating.js', ({ mount }) => {
 
   it('should render a scoped slot', () => {
     const vm = new Vue()
-    const itemSlot = () => vm.$createElement('span', 'foobar')
+    const itemSlot = () => [vm.$createElement('span', 'foobar')]
 
     const component = Vue.component('test', {
       render: h => h(VRating, {
@@ -165,7 +188,7 @@ test('VRating.js', ({ mount }) => {
 
   it('it should bind mousemove listener', () => {
     const onMouseEnter = jest.fn()
-    const wrapper = mount(VRating, {
+    const wrapper = mountFunction({
       propsData: {
         halfIncrements: true,
         hover: true
@@ -173,20 +196,20 @@ test('VRating.js', ({ mount }) => {
       methods: { onMouseEnter }
     })
 
-    const icon = wrapper.first('.v-icon')
+    const icon = wrapper.find('.v-icon')
 
     icon.trigger('mousemove')
 
-    expect(onMouseEnter).toBeCalled()
+    expect(onMouseEnter).toHaveBeenCalled()
   })
 
   it('should reset hoverIndex on mouse leave', () => {
     jest.useFakeTimers()
-    const wrapper = mount(VRating, {
+    const wrapper = mountFunction({
       propsData: { hover: true }
     })
 
-    const icon = wrapper.first('.v-icon')
+    const icon = wrapper.find('.v-icon')
 
     expect(wrapper.vm.hoverIndex).toBe(-1)
 
