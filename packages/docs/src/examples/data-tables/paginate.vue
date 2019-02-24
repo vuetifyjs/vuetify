@@ -5,9 +5,9 @@
       :items="desserts"
       :page.sync="page"
       :items-per-page="5"
-      @pageCount="pageCount = $event"
       hide-default-footer
       class="elevation-1"
+      @pageCount="pageCount = $event"
     ></v-data-table>
     <div class="text-xs-center pt-2">
       <v-pagination v-model="page" :length="pageCount"></v-pagination>

@@ -10,16 +10,13 @@
   },
   "dependencies": {
     "sass-loader": "^7.1.0",
-    "vue": "^2.6.6",
     "vue-router": "^3.0.2",
-    "vue-template-compiler": "^2.6.6",
     "vuetify": "^2.0.0-alpha.5"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.4.1",
     "@vue/cli-service": "^3.4.1",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.14.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2"
   }
