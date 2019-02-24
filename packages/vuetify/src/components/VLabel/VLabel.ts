@@ -1,5 +1,5 @@
 // Styles
-import './VLabel.styl'
+import './VLabel.sass'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
