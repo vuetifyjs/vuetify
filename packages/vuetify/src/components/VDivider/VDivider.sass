@@ -1,4 +1,5 @@
 @import '../../styles/styles.sass'
+@import './_variables.sass'
 @import './_mixins.sass'
 
 .v-divider.theme--light
@@ -17,8 +18,8 @@
   transition: inherit
 
   &--inset:not(.v-divider--vertical)
-    margin-left: 72px
-    max-width: calc(100% - 72px)
+    margin-left: $divider-inset-margin
+    max-width: calc(100% - $divider-inset-margin)
 
   &--vertical
     align-self: stretch
