@@ -12,10 +12,10 @@ import mixins from '../util/mixins'
 import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
-/* @vue/component */
 export default mixins(
   Colorable,
   Themeable
+/* @vue/component */
 ).extend({
   name: 'picker',
 

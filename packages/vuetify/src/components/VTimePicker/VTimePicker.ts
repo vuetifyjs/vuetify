@@ -18,7 +18,12 @@ const rangeHours24 = createRange(24)
 const rangeHours12am = createRange(12)
 const rangeHours12pm = rangeHours12am.map(v => v + 12)
 const range60 = createRange(60)
-const selectingTimes = { hour: 1, minute: 2, second: 3 }
+const selectingTimes: {
+  hour: 1
+  minute: 2
+  second: 3
+} = { hour: 1, minute: 2, second: 3 }
+const selectingNames = { 1: 'hour', 2: 'minute', 3: 'second' }
 export { selectingTimes }
 
 type Period = 'am' | 'pm'
@@ -58,7 +63,7 @@ export default mixins(
       lazyInputMinute: null as number | null,
       lazyInputSecond: null as number | null,
       period: 'am' as Period,
-      selecting: selectingTimes.hour
+      selecting: selectingTimes.hour as 1 | 2 | 3
     }
   },
 
@@ -206,7 +211,9 @@ export default mixins(
       }
       this.emitValue()
     },
-    onChange () {
+    onChange (value: number) {
+      this.$emit(`click:${selectingNames[this.selecting]}`, value)
+
       const emitChange = this.selecting === (this.useSeconds ? selectingTimes.second : selectingTimes.minute)
 
       if (this.selecting === selectingTimes.hour) {
@@ -220,14 +227,14 @@ export default mixins(
         (!this.useSeconds || this.inputSecond === this.lazyInputSecond)
       ) return
 
-      const value = this.genValue()
-      if (value === null) return
+      const time = this.genValue()
+      if (time === null) return
 
       this.lazyInputHour = this.inputHour
       this.lazyInputMinute = this.inputMinute
       this.useSeconds && (this.lazyInputSecond = this.inputSecond)
 
-      emitChange && this.$emit('change', value)
+      emitChange && this.$emit('change', time)
     },
     firstAllowed (type: 'hour' | 'minute' | 'second', value: number) {
       const allowedFn = type === 'hour' ? this.isAllowedHourCb : (type === 'minute' ? this.isAllowedMinuteCb : this.isAllowedSecondCb)
@@ -302,7 +309,7 @@ export default mixins(
           selecting: this.selecting
         },
         on: {
-          'update:selecting': (value: number) => (this.selecting = value),
+          'update:selecting': (value: 1 | 2 | 3) => (this.selecting = value),
           'update:period': this.setPeriod
         },
         ref: 'title',

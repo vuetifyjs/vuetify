@@ -38,6 +38,7 @@ declare global {
       centered?: boolean
       class?: string
       circle?: boolean
+      touched?: boolean
     }
     _onScroll?: {
       callback: EventListenerOrEventListenerObject
@@ -47,6 +48,10 @@ declare global {
     _touchHandlers?: {
       [_uid: number]: TouchStoredHandlers
     }
+  }
+
+  interface WheelEvent {
+    path?: EventTarget[]
   }
 
   function parseInt(s: string | number, radix?: number): number
@@ -77,6 +82,9 @@ declare module 'vue/types/vue' {
   export interface Vue {
     _uid: number
     _isDestroyed: boolean
+
+    /** bindObjectProps */
+    _b (data: VNodeData, tag: string, value: Dictionary<any> | Dictionary<any>[], asProp?: boolean, isSync?: boolean): VNodeData
 
     /** bindObjectListeners */
      _g (data: VNodeData, value: {}): VNodeData

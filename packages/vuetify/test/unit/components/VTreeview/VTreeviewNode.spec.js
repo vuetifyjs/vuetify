@@ -37,7 +37,8 @@ test('VTreeViewNode.ts', ({ mount }) => {
   beforeEach(() => {
     treeview = {
       register: jest.fn(),
-      unregister: jest.fn()
+      unregister: jest.fn(),
+      isExcluded: () => false
     }
   })
 

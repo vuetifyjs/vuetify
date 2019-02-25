@@ -9,7 +9,8 @@ import Menuable from '../../mixins/menuable'
 import Toggleable from '../../mixins/toggleable'
 
 // Helpers
-import { convertToUnit } from '../../util/helpers'
+import { convertToUnit, getSlotType } from '../../util/helpers'
+import { consoleError } from '../../util/console'
 
 /* @vue/component */
 export default {
@@ -74,7 +75,7 @@ export default {
       if (this.nudgeLeft) left -= parseInt(this.nudgeLeft)
       if (this.nudgeRight) left += parseInt(this.nudgeRight)
 
-      return `${this.calcXOverflow(left)}px`
+      return `${this.calcXOverflow(left, this.dimensions.content.width)}px`
     },
     calculatedTop () {
       const { activator, content } = this.dimensions
@@ -133,15 +134,16 @@ export default {
     }
   },
 
-  watch: {
-    positionX: 'updateDimensions',
-    positionY: 'updateDimensions'
-  },
-
   beforeMount () {
     this.$nextTick(() => {
       this.value && this.callActivate()
     })
+  },
+
+  mounted () {
+    if (getSlotType(this, 'activator', true) === 'v-slot') {
+      consoleError(`v-tooltip's activator slot must be bound, try '<template #activator="data"><v-btn v-on="data.on>'`, this)
+    }
   },
 
   methods: {
@@ -164,17 +166,16 @@ export default {
         }
       }
 
-      if (this.$scopedSlots.activator) {
+      if (getSlotType(this, 'activator') === 'scoped') {
         const activator = this.$scopedSlots.activator({ on: listeners })
         this.activatorNode = activator
         return activator
       }
-      if (this.$slots.activator) {
-        return this.$createElement('span', {
-          on: listeners,
-          ref: 'activator'
-        }, this.$slots.activator)
-      }
+
+      return this.$createElement('span', {
+        on: listeners,
+        ref: 'activator'
+      }, this.$slots.activator)
     }
   },
 

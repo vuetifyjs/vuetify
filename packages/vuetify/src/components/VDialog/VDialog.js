@@ -12,8 +12,9 @@ import Toggleable from '../../mixins/toggleable'
 import ClickOutside from '../../directives/click-outside'
 
 // Helpers
-import { getZIndex, convertToUnit } from '../../util/helpers'
+import { getZIndex, convertToUnit, getSlotType } from '../../util/helpers'
 import ThemeProvider from '../../util/ThemeProvider'
+import { consoleError } from '../../util/console'
 
 /* @vue/component */
 export default {
@@ -123,6 +124,12 @@ export default {
     })
   },
 
+  mounted () {
+    if (getSlotType(this, 'activator', true) === 'v-slot') {
+      consoleError(`v-dialog's activator slot must be bound, try '<template #activator="data"><v-btn v-on="data.on>'`, this)
+    }
+  },
+
   beforeDestroy () {
     if (typeof window !== 'undefined') this.unbind()
   },
@@ -165,7 +172,7 @@ export default {
       if (this.fullscreen) {
         document.documentElement.classList.add('overflow-y-hidden')
       } else {
-        Overlayable.methods.hideScroll.call(this)
+        Overlayable.options.methods.hideScroll.call(this)
       }
     },
     show () {
@@ -192,7 +199,7 @@ export default {
         }
       }
 
-      if (this.$scopedSlots.activator) {
+      if (getSlotType(this, 'activator') === 'scoped') {
         const activator = this.$scopedSlots.activator({ on: listeners })
         this.activatorNode = activator
         return activator
@@ -204,7 +211,7 @@ export default {
           'v-dialog__activator--disabled': this.disabled
         },
         on: listeners
-      }, [this.$slots.activator])
+      }, this.$slots.activator)
     }
   },
 
