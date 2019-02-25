@@ -1,2 +1,2 @@
 // index.js or main.js
-import './sass' // Ensure you are using sass-loader
+import './sass'
