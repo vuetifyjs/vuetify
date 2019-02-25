@@ -14,18 +14,14 @@
           activatable
           item-key="name"
           open-on-click
+          #prepend="{ item, open }"
         >
-          <template
-            slot="prepend"
-            slot-scope="{ item, open }"
-          >
-            <v-icon v-if="!item.file">
-              {{ open ? 'mdi-folder-open' : 'mdi-folder' }}
-            </v-icon>
-            <v-icon v-else>
-              {{ files1[item.file] }}
-            </v-icon>
-          </template>
+          <v-icon v-if="!item.file">
+            {{ open ? 'mdi-folder-open' : 'mdi-folder' }}
+          </v-icon>
+          <v-icon v-else>
+            {{ files1[item.file] }}
+          </v-icon>
         </v-treeview>
       </core-section>
 
@@ -52,11 +48,10 @@
                 class="grey lighten-5"
                 open-on-click
                 transition
+                #prepend="{ item, active }"
               >
                 <v-icon
                   v-if="!item.children"
-                  slot="prepend"
-                  slot-scope="{ item, active }"
                   :color="active ? 'primary' : ''"
                 >
                   mdi-account
@@ -171,8 +166,7 @@
               open-on-click
             >
               <template
-                slot="prepend"
-                slot-scope="{ item, open }"
+                #prepend="{ item, open }"
               >
                 <v-icon v-if="!item.file">
                   {{ open ? 'mdi-folder-open' : 'mdi-folder' }}
@@ -183,8 +177,7 @@
               </template>
 
               <template
-                slot="append"
-                slot-scope="{ item }"
+                #append="{ item }"
               >
                 <span v-if="item.changed">
                   U
