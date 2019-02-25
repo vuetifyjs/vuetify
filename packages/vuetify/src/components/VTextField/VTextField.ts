@@ -381,11 +381,11 @@ export default mixins<options &
         this.suffix ? this.genAffix('suffix') : null
       ])
     },
-    genAffix (type: string) {
+    genAffix (type: 'prefix' | 'suffix') {
       return this.$createElement('div', {
         'class': `v-text-field__${type}`,
         ref: type
-      }, (this as any)[type])
+      }, this[type])
     },
     onBlur (e: Event) {
       this.isFocused = false
