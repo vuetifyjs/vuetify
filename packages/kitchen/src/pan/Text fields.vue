@@ -467,57 +467,69 @@
           label="Message"
           type="text"
         >
-          <v-tooltip
-            slot="prepend"
-            bottom
+          <template
+            #prepend
           >
-            <v-icon slot="activator">
-              mdi-help-circle-outline
-            </v-icon>
-            I'm a tooltip
-          </v-tooltip>
-
-          <v-fade-transition slot="append">
-            <v-progress-circular
-              v-if="loading"
-              size="24"
-              color="info"
-              indeterminate
-            />
-            <img
-              v-else
-              width="24"
-              height="24"
-              src="https://cdn.vuetifyjs.com/images/logos/v-alt.svg"
+            <v-tooltip
+              bottom
             >
-          </v-fade-transition>
+              <template #activator>
+                <v-icon>
+                  mdi-help-circle-outline
+                </v-icon>
+              </template>
+              I'm a tooltip
+            </v-tooltip>
+          </template>
 
-          <v-menu
-            slot="append-outer"
-            style="top: -12px"
-            offset-y
+          <template #append>
+            <v-fade-transition>
+              <v-progress-circular
+                v-if="loading"
+                size="24"
+                color="info"
+                indeterminate
+              />
+              <img
+                v-else
+                width="24"
+                height="24"
+                src="https://cdn.vuetifyjs.com/images/logos/v-alt.svg"
+              >
+            </v-fade-transition>
+          </template>
+
+          <template
+            #append-outer
           >
-            <v-btn slot="activator">
-              <v-icon left>
-                mdi-menu
-              </v-icon>
-              Menu
-            </v-btn>
-            <v-card>
-              <v-card-text class="pa-4">
-                <v-btn
-                  large
-                  flat
-                  color="primary"
-                  @click="clickMe"
-                >
+            <v-menu
+              style="top: -12px"
+              offset-y
+            >
+              <template #activator>
+                <v-btn>
                   <v-icon left>
-                    mdi-target
-                  </v-icon>Click me
+                    mdi-menu
+                  </v-icon>
+                  Menu
                 </v-btn>
-              </v-card-text>
-            </v-card>
-          </v-menu>
+              </template>
+              <v-card>
+                <v-card-text class="pa-4">
+                  <v-btn
+                    large
+                    flat
+                    color="primary"
+                    @click="clickMe"
+                  >
+                    <v-icon left>
+                      mdi-target
+                    </v-icon>Click me
+                  </v-btn>
+                </v-card-text>
+              </v-card>
+            </v-menu>
+          </template>
         </v-text-field>
       </core-section>
 
@@ -532,27 +544,30 @@
           label="Message"
           type="text"
         >
-          <v-icon
-            slot="prepend"
-            color="success"
-            bottom
-          >
-            mdi-check
-          </v-icon>
+          <template #prepend>
+            <v-icon
+              color="success"
+              bottom
+            >
+              mdi-check
+            </v-icon>
+          </template>
 
-          <v-icon
-            slot="append"
-            color="error"
-          >
-            mdi-alert-circle
-          </v-icon>
+          <template #append>
+            <v-icon
+              color="error"
+            >
+              mdi-alert-circle
+            </v-icon>
+          </template>
 
-          <v-icon
-            slot="append-outer"
-            color="teal"
-          >
-            mdi-account
-          </v-icon>
+          <template #append-outer>
+            <v-icon
+              color="teal"
+            >
+              mdi-account
+            </v-icon>
+          </template>
         </v-text-field>
       </core-section>
 
@@ -560,12 +575,10 @@
         Label slot
       </core-title>
       <core-section>
-        <v-text-field>
-          <template slot="label">
-            What about <strong>icon</strong> here? <v-icon style="vertical-align: middle">
-              mdi-file-find
-            </v-icon>
-          </template>
+        <v-text-field #label>
+          What about <strong>icon</strong> here? <v-icon style="vertical-align: middle">
+            mdi-file-find
+          </v-icon>
         </v-text-field>
       </core-section>
 
@@ -1092,9 +1105,9 @@
           password
           placeholder="Start typing..."
           loading
+          #progress
         >
           <v-progress-linear
-            slot="progress"
             :value="progress"
             :color="color"
             height="7"

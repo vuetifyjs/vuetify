@@ -1,7 +1,6 @@
 // Imports
 @import '../../styles/styles.sass'
-
-// Theme
+@import './_variables.sass'
 
 // Block
 .v-slide-group
@@ -16,9 +15,9 @@
 .v-slide-group__prepend
   align-items: center
   display: flex
-  flex: 0 1 48px
+  flex: 0 1 $slide-group-prepend-basis
   justify-content: center
-  min-width: 48px
+  min-width: $slide-group-prepend-basis
 
 .v-slide-group__content
   display: flex
