@@ -25,6 +25,7 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --hot",
     "build": "concurrently \"yarn build:dist --no-progress\" \"yarn build:lib\" -n \"dist,lib\" --kill-others-on-fail -r",
     "build:dist": "rimraf dist && cross-env NODE_ENV=production webpack --config build/config.js --progress --hide-modules",
+    "tsc": "tsc",
     "build:lib": "node build/build-lib.js",
     "debug:test": "cross-env NODE_ENV=test node --inspect --inspect-brk ./node_modules/jest/bin/jest.js --no-cache -i --verbose",
     "test": "node build/run-tests.js",
@@ -55,7 +56,6 @@
     "css-loader": "^2.1.0",
     "css-mqpacker": "^7.0.0",
     "cssnano": "^4.1.10",
-    "eslint": "^5.14.1",
     "eslint-loader": "^2.1.2",
     "eslint-plugin-jest": "^22.3.0",
     "file-loader": "^3.0.1",
@@ -75,17 +75,10 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "ts-loader": "^5.3.3",
-    "tslint": "^5.12.1",
-    "typescript": "^3.3.3",
     "url-loader": "^1.1.2",
-    "vue-loader": "^15.6.4",
     "vue-router": "^3.0.2",
-    "vue-template-es2015-compiler": "^1.8.2",
     "vuetify-loader": "^1.2.1",
-    "webpack": "^4.29.5",
-    "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.2.0",
-    "webpack-merge": "^4.2.1"
+    "webpack-dev-server": "^3.2.0"
   },
   "peerDependencies": {
     "vue": "^2.5.18"
