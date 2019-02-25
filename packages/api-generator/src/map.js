@@ -1115,7 +1115,7 @@ module.exports = {
     slots: ['default'],
     events: [
       {
-        name: 'input',
+        name: 'change',
         value: 'string'
       }
     ]
@@ -1130,7 +1130,7 @@ module.exports = {
     slots: ['default'],
     events: [
       {
-        name: 'input',
+        name: 'change',
         value: 'string'
       }
     ]
