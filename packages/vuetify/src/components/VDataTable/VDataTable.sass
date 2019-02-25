@@ -11,14 +11,14 @@
 
 .v-data-table-virtual
   position: relative
-  padding-right: 17px
+  padding-right: $data-table-scroller-width
 
   &__scroller
     position: absolute
     top: 0
     right: 0
     height: 100%
-    width: 17px
+    width: $data-table-scroller-width
     overflow-x: hidden
 
   &__wrapper
@@ -40,13 +40,13 @@
 
     colgroup
       .divider
-        border-right: 1px solid lightgrey
+        border-right: $data-table-divider-border
 
   &--dense
     td
-      height: 24px
+      height: $data-table-dense-row-height
     th
-      height: 32px
+      height: $data-table-dense-header-height
 
   &--fixed
     .v-data-table__wrapper
@@ -59,14 +59,14 @@
         z-index: 10
 
     .v-table__header, .v-data-footer
-      margin-right: 17px
+      margin-right: $data-table-scroller-width
 
   &--mobile
     tr, td, th
       display: block
 
     td, th
-      padding: 14px
+      padding: $data-table-mobile-cell-padding
 
   &__progress
     height: auto !important
@@ -80,11 +80,11 @@
         margin: 0
 
 td, th
-  padding: 0 16px
+  padding: $data-table-mobile-cell-padding
 
 .v-row
   &__header
-    font-weight: 600
+    font-weight: $data-table-row-header-font-weight
 
   &__value
     text-align: right
@@ -107,15 +107,15 @@ td, th
         display: flex
 
         .v-simple-checkbox
-          margin-right: 24px
+          margin: $data-table-mobile-checkbox-margin
 
         .v-select
           margin-top: 0
 
   th
-    font-weight: 500
-    font-size: 12px
-    transition: .3s map-get($transition, 'swing')
+    font-weight: $data-table-header-font-weight
+    font-size: $data-table-header-font-size
+    transition: $data-table-header-transition
     white-space: nowrap
     user-select: none
     position: relative
@@ -126,7 +126,7 @@ td, th
       right: -4px
       top: 0
       height: 100%
-      width: 8px
+      width: $data-table-resize-handle-width
       cursor: ew-resize
 
       &:hover
@@ -138,10 +138,10 @@ td, th
     outline: 0
 
     i
-      font-size: 18px
+      font-size: $data-table-sort-icon-font-size
       display: inline-block
       opacity: 0
-      transition: .3s map-get($transition, 'swing')
+      transition: $data-table-sort-icon-transition
 
     &:focus,
     &:hover
@@ -164,8 +164,8 @@ td, th
     will-change: background
 
   .v-cell
-    font-weight: 400
-    font-size: 13px
+    font-weight: $data-table-cell-font-weight
+    font-size: $data-table-cell-font-size
 
 td, th
   > .v-input
@@ -176,10 +176,10 @@ td, th
       margin-right: 0
 
 td
-  height: 48px
+  height: $data-table-row-height
 
 th
-  height: 48px
+  height: $data-table-row-height
 
   .badge
     display: inline-flex
@@ -187,12 +187,12 @@ th
     border: 0px
     border-radius: 50%
     background-color: lightgrey // TODO: theme
-    min-width: 16px
-    min-height: 16px
-    height: 16px
-    width: 16px
+    min-width: $data-table-header-badge-size
+    min-height: $data-table-header-badge-size
+    height: $data-table-header-badge-size
+    width: $data-table-header-badge-size
     color: white // TODO: theme
-    font-size: 0.8rem
+    font-size: $data-table-header-badge-font-size
 
 th
   font-weight: bold
@@ -203,7 +203,7 @@ tr > th
 .v-row, .v-row-expandable
   &:not(:last-child)
     .v-cell
-      border-bottom: 1px solid rgba(0,0,0,.12) // TODO: theme
+      border-bottom: $data-table-cell-border // TODO: theme
 
 .v-cell, .v-head
   word-break: break-word
@@ -235,18 +235,18 @@ tr > th
   &__pagination
     display: block
     text-align: center
-    margin: 0 32px 0 24px
+    margin: $data-table-pagination-margin
 
   &__select
     display: flex
     align-items: center
     justify-content: flex-end
-    margin-right: 14px
+    margin: $data-table-select-margin
     white-space: nowrap
 
     .v-select
       flex: 0 1 0
-      margin: 13px 0 13px 34px
+      margin: $data-table-v-select-margin
       padding: 0
       position: initial
 
@@ -254,11 +254,11 @@ tr > th
       flex-wrap: nowrap
 
       .v-select__selection--comma
-        font-size: 12px
+        font-size: $data-table-select-font-size
 
 .v-row-expandable
   &__wrapper
-    transition: all 0.3s ease-out
+    transition: $data-table-expand-transition
 
 .v-data-table__expand
   &-row
@@ -269,7 +269,7 @@ tr > th
     height: 0px !important
 
     &--expanded
-      border-bottom: 1px solid rgba(0,0,0,0.12) // TODO: theme
+      border-bottom: $data-table-cell-border // TODO: theme
 
   &-content
     transition: height $primary-transition
@@ -283,7 +283,7 @@ tr > th
     background: lightgrey
 
     td
-      height: 35px
+      height: $data-table-row-group-height
 
 .expand__icon
   user-select: none
