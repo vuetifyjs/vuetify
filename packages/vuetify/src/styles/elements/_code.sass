@@ -1,9 +1,9 @@
 code, kbd
   display: inline-block
-  border-radius: 3px
+  border-radius: $code-kbd-border-radius
   white-space: pre-wrap
-  font-size: 85%
-  font-weight: 900
+  font-size: $code-kbd-font-size
+  font-weight: $code-kbd-font-weight
 
   &:after,
   &:before
@@ -12,7 +12,7 @@ code, kbd
 
 code
   background-color: map-get($grey, 'lighten-4')
-  color: #bd4147
+  color: $code-color
   +elevation(1)
 
 kbd
