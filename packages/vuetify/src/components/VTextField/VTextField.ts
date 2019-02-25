@@ -16,20 +16,41 @@ import Loadable from '../../mixins/loadable'
 import Ripple from '../../directives/ripple'
 
 // Utilities
-import {
-  keyCodes
-} from '../../util/helpers'
+import { keyCodes } from '../../util/helpers'
 import { deprecate } from '../../util/console'
+import mixins, { ExtractVue } from './../../util/mixins'
+
+// Types
+import { VNode } from 'vue/types'
+import Vue from 'vue'
+
+interface options extends Vue {
+  $refs: {
+    input: HTMLInputElement
+    prefix: HTMLElement
+    suffix: HTMLElement
+  }
+}
 
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
 /* @vue/component */
-export default VInput.extend({
+export default mixins<options &
+/* eslint-disable indent */
+  ExtractVue<[
+    typeof VInput,
+    typeof Maskable,
+    typeof Loadable
+  ]>
+/* eslint-enable indent */
+>(
+  VInput,
+  Maskable,
+  Loadable
+).extend({
   name: 'v-text-field',
 
   directives: { Ripple },
-
-  mixins: [Maskable, Loadable],
 
   inheritAttrs: false,
 
@@ -79,7 +100,7 @@ export default VInput.extend({
   }),
 
   computed: {
-    classes () {
+    classes (): object {
       return {
         'v-text-field': true,
         'v-text-field--full-width': this.fullWidth,
@@ -91,7 +112,7 @@ export default VInput.extend({
         'v-text-field--box': this.box,
         'v-text-field--enclosed': this.isEnclosed,
         'v-text-field--reverse': this.reverse,
-        'v-text-field--outline': this.hasOutline,
+        'v-text-field--outline': this.outline,
         'v-text-field--placeholder': this.placeholder
       }
     },
@@ -101,15 +122,11 @@ export default VInput.extend({
     directivesInput () {
       return []
     },
-    // TODO: Deprecate
-    hasOutline () {
-      return this.outline || this.textarea
-    },
     internalValue: {
       get () {
         return this.lazyValue
       },
-      set (val) {
+      set (val: any) {
         if (this.mask) {
           this.lazyValue = this.unmaskText(this.maskText(this.unmaskText(val)))
           this.setSelectionRange()
@@ -128,7 +145,7 @@ export default VInput.extend({
       return (
         this.box ||
         this.isSolo ||
-        this.hasOutline ||
+        this.outline ||
         this.fullWidth
       )
     },
@@ -215,7 +232,7 @@ export default VInput.extend({
       const slot = []
 
       if (this.$slots['append-outer']) {
-        slot.push(this.$slots['append-outer'])
+        slot.push(this.$slots['append-outer'] as VNode[])
       } else if (this.appendOuterIcon) {
         slot.push(this.genIcon('appendOuter'))
       }
@@ -226,7 +243,7 @@ export default VInput.extend({
       const slot = []
 
       if (this.$slots['prepend-inner']) {
-        slot.push(this.$slots['prepend-inner'])
+        slot.push(this.$slots['prepend-inner'] as VNode[])
       } else if (this.prependInnerIcon) {
         slot.push(this.genIcon('prependInner'))
       }
@@ -237,7 +254,7 @@ export default VInput.extend({
       const slot = []
 
       if (this.$slots['append']) {
-        slot.push(this.$slots['append'])
+        slot.push(this.$slots['append'] as VNode[])
       } else if (this.appendIcon) {
         slot.push(this.genIcon('append'))
       }
@@ -248,16 +265,18 @@ export default VInput.extend({
       const input = VInput.options.methods.genInputSlot.call(this)
 
       const prepend = this.genPrependInnerSlot()
-      prepend && input.children.unshift(prepend)
+
+      if (prepend) {
+        input.children = input.children || []
+        input.children.unshift(prepend)
+      }
 
       return input
     },
     genClearIcon () {
       if (!this.clearable) return null
 
-      const icon = !this.isDirty
-        ? false
-        : 'clear'
+      const icon = !this.isDirty ? '' : 'clear'
 
       if (this.clearIconCb) deprecate(':clear-icon-cb', '@click:clear', this)
 
@@ -301,14 +320,13 @@ export default VInput.extend({
           dark: this.dark,
           disabled: this.disabled,
           focused: !this.isSingle && (this.isFocused || !!this.validationState),
+          for: this.$attrs.id,
           left: this.labelPosition.left,
           light: this.light,
           right: this.labelPosition.right,
           value: this.labelValue
         }
       }
-
-      if (this.$attrs.id) data.props.for = this.$attrs.id
 
       return this.$createElement(VLabel, data, this.$slots.label || this.label)
     },
@@ -323,9 +341,12 @@ export default VInput.extend({
         },
         attrs: {
           'aria-label': (!this.$attrs || !this.$attrs.id) && this.label, // Label `for` will be set if we have an id
+          maxlength: this.mask ? this.masked.length : undefined,
           ...this.$attrs,
+          autocomplete: this.browserAutocomplete,
           autofocus: this.autofocus,
           disabled: this.disabled,
+          placeholder: this.placeholder,
           readonly: this.readonly,
           type: this.type
         },
@@ -337,10 +358,6 @@ export default VInput.extend({
         }),
         ref: 'input'
       }
-
-      if (this.placeholder) data.attrs.placeholder = this.placeholder
-      if (this.mask) data.attrs.maxlength = this.masked.length
-      if (this.browserAutocomplete) data.attrs.autocomplete = this.browserAutocomplete
 
       return this.$createElement('input', data)
     },
@@ -364,13 +381,13 @@ export default VInput.extend({
         this.suffix ? this.genAffix('suffix') : null
       ])
     },
-    genAffix (type) {
+    genAffix (type: 'prefix' | 'suffix') {
       return this.$createElement('div', {
         'class': `v-text-field__${type}`,
         ref: type
       }, this[type])
     },
-    onBlur (e) {
+    onBlur (e?: Event) {
       this.isFocused = false
       // Reset internalChange state
       // to allow external change
@@ -384,7 +401,7 @@ export default VInput.extend({
 
       this.$refs.input.focus()
     },
-    onFocus (e) {
+    onFocus (e?: Event) {
       if (!this.$refs.input) return
 
       if (document.activeElement !== this.$refs.input) {
@@ -393,23 +410,24 @@ export default VInput.extend({
 
       if (!this.isFocused) {
         this.isFocused = true
-        this.$emit('focus', e)
+        e && this.$emit('focus', e)
       }
     },
-    onInput (e) {
+    onInput (e: Event) {
+      const target = e.target as HTMLInputElement
       this.internalChange = true
-      this.mask && this.resetSelections(e.target)
-      this.internalValue = e.target.value
-      this.badInput = e.target.validity && e.target.validity.badInput
+      this.mask && this.resetSelections(target)
+      this.internalValue = target.value
+      this.badInput = target.validity && target.validity.badInput
     },
-    onKeyDown (e) {
+    onKeyDown (e: KeyboardEvent) {
       this.internalChange = true
 
       if (e.keyCode === keyCodes.enter) this.$emit('change', this.internalValue)
 
       this.$emit('keydown', e)
     },
-    onMouseDown (e) {
+    onMouseDown (e: Event) {
       // Prevent input from being blurred
       if (e.target !== this.$refs.input) {
         e.preventDefault()
@@ -418,7 +436,7 @@ export default VInput.extend({
 
       VInput.options.methods.onMouseDown.call(this, e)
     },
-    onMouseUp (e) {
+    onMouseUp (e: Event) {
       if (this.hasMouseDown) this.focus()
 
       VInput.options.methods.onMouseUp.call(this, e)

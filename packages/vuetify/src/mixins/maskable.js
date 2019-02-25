@@ -15,8 +15,11 @@ import {
   unmaskText
 } from '../util/mask'
 
+// Types
+import Vue from 'vue'
+
 /* @vue/component */
-export default {
+export default Vue.extend({
   name: 'maskable',
 
   props: {
@@ -150,4 +153,4 @@ export default {
       }
     }
   }
-}
+})
