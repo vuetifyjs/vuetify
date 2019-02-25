@@ -221,8 +221,8 @@ export default mixins<options &
       this.onFocus()
     },
     /** @public */
-    blur (e: Event) {
-      this.$refs.input ? this.$refs.input.blur() : this.onBlur(e)
+    blur () {
+      this.$refs.input ? this.$refs.input.blur() : this.onBlur()
     },
     clearableCallback () {
       this.internalValue = null
@@ -387,7 +387,7 @@ export default mixins<options &
         ref: type
       }, this[type])
     },
-    onBlur (e: Event) {
+    onBlur (e?: Event) {
       this.isFocused = false
       // Reset internalChange state
       // to allow external change
