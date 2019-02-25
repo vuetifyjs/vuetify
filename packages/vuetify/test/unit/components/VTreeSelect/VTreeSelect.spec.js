@@ -1,6 +1,6 @@
 import { test } from '@/test'
 import { keyCodes } from '@/util/helpers'
-import VTreeSelect from '@/components/VTreeSelect'
+import VTreeSelect from '@/components/VTreeSelect/VTreeSelect'
 
 test('VTreeSelect.js', ({ mount, compileToFunctions }) => {
   const app = document.createElement('div')
