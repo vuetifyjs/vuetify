@@ -51,7 +51,7 @@
                   </v-card-title>
                   <v-card-actions>
                     <v-btn
-                      flat
+                      text
                       color="secondary"
                     >
                       Cancel

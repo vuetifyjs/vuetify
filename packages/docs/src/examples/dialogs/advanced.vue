@@ -27,7 +27,7 @@
             <v-toolbar-title>Settings</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-toolbar-items>
-              <v-btn dark flat @click="dialog = false">Save</v-btn>
+              <v-btn dark text @click="dialog = false">Save</v-btn>
             </v-toolbar-items>
             <v-menu bottom right offset-y>
               <v-btn slot="activator" dark icon>
@@ -111,7 +111,7 @@
             ></v-select>
           </v-card-text>
           <v-card-actions>
-            <v-btn color="primary" flat @click="dialog2=false">Close</v-btn>
+            <v-btn color="primary" text @click="dialog2=false">Close</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -132,7 +132,7 @@
             </v-menu>
           </v-card-title>
           <v-card-actions>
-            <v-btn color="primary" flat @click="dialog3=false">Close</v-btn>
+            <v-btn color="primary" text @click="dialog3=false">Close</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>

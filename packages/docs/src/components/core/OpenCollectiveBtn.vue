@@ -1,6 +1,6 @@
 <template>
   <v-btn
-    flat
+    text
     href="https://opencollective.com/vuetify"
     large
     rel="noopener"
