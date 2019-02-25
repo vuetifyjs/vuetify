@@ -1,3 +1,18 @@
+$chip-after-transition: opacity 0.2s map-get($transition, 'ease-in-out');
+$chip-avatar-size: 24px;
+$chip-close-size: 18px;
+$chip-icon-margin-after: 8px;
+$chip-icon-margin-before: -6px;
+$chip-icon-right-margin-after: -4px;
+$chip-icon-right-margin-before: 8px;
+$chip-icon-size: 24px;
+$chip-label-border-radius: 4px;
+$chip-pill-avatar-margin-after: 8px;
+$chip-pill-avatar-margin-before: -12px;
+$chip-pill-avatar-size: 32px;
+$chip-pill-filter-margin: 0 16px 0 0;
+$chip-transition-duration: 0.28s;
+$chip-transition-fn: map-get($transition, 'fast-out-slow-in');
 $icon-outlined-border-width: thin;
 $icon-sizes: (
   'x-small': (
@@ -21,18 +36,3 @@ $icon-sizes: (
     'height': 66
   )
 );
-$chip-icon-margin-before: -6px;
-$chip-icon-margin-after: 8px;
-$chip-close-size: 18px;
-$chip-avatar-size: 24px;
-$chip-after-transition: opacity 0.2s map-get($transition, 'ease-in-out');
-$chip-transition-duration: 0.28s;
-$chip-transition-fn: map-get($transition, 'fast-out-slow-in');
-$chip-icon-size: 24px;
-$chip-icon-right-margin-after: -4px;
-$chip-icon-right-margin-before: 8px;
-$chip-pill-filter-margin: 0 16px 0 0;
-$chip-pill-avatar-size: 32px;
-$chip-pill-avatar-margin-before: -12px;
-$chip-pill-avatar-margin-after: 8px;
-$chip-label-border-radius: 4px;
