@@ -15,9 +15,9 @@
     color: map-deep-get($material-dark, 'text', 'primary')
 
 .v-btn.theme--light
-  @include btn-theme($material-light)
+  +btn-theme($material-light)
 .v-btn.theme--dark
-  @include btn-theme($material-dark)
+  +btn-theme($material-dark)
 
 // Block
 .v-btn
@@ -136,13 +136,13 @@
   max-width: auto
 
 .v-btn--contained
-  @include elevation(2)
+  +elevation(2)
 
   &:after
-    @include elevation(4)
+    +elevation(4)
 
   &:active
-    @include elevation(8)
+    +elevation(8)
 
 .v-btn--depressed
   box-shadow: none !important
@@ -157,13 +157,13 @@
   padding: 0
 
   &.v-btn--contained
-    @include elevation(6)
+    +elevation(6)
 
     &:after
-      @include elevation(8)
+      +elevation(8)
 
     &:active
-      @include elevation(12)
+      +elevation(12)
 
   &.v-btn--fixed,
   &.v-btn--absolute
