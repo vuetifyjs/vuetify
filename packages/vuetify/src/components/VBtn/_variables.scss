@@ -11,3 +11,6 @@ $btn-sizes: (
   'large': 54,
   'x-large': 70
 );
+$btn-transition: opacity 0.2s map-get($transition, 'ease-in-out');
+$btn-transition-duration: 0.28s;
+$btn-transition-fn: map-get($transition, 'fast-out-slow-in');

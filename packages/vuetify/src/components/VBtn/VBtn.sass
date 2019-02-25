@@ -32,9 +32,9 @@
   position: relative
   text-decoration: none
   text-transform: uppercase
-  transition-duration: 0.28s
+  transition-duration: $btn-transition-duration
   transition-property: box-shadow, transform, opacity
-  transition-timing-function: map-get($transition, 'fast-out-slow-in')
+  transition-timing-function: $btn-transition-fn
   user-select: none
   vertical-align: middle
   white-space: nowrap
@@ -50,7 +50,7 @@
     position: absolute
     right: 0
     top: 0
-    transition: opacity 0.2s map-get($transition, 'ease-in-out')
+    transition: $btn-transition
 
   &:before
     background-color: currentColor
