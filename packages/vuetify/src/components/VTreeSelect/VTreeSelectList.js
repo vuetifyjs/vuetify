@@ -15,7 +15,10 @@ export default mixins(
 ).extend({
   name: 'v-tree-select-list',
   props: {
-    selectedItems: [],
+    selectedItems: {
+      type: Array,
+      default: () => ([])
+    },
     noDataText: String,
     dense: Boolean,
     multiple: Boolean,

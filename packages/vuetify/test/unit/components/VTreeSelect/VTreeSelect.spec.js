@@ -41,7 +41,7 @@ test('VTreeSelect.js', ({ mount, compileToFunctions }) => {
 
     await wrapper.vm.$nextTick()
 
-    const treeview = wrapper.first('.v-tree-view-selector')
+    const treeview = wrapper.first('.v-treeview')
     expect(treeview.html()).toMatchSnapshot()
   })
 
@@ -57,7 +57,7 @@ test('VTreeSelect.js', ({ mount, compileToFunctions }) => {
 
     await wrapper.vm.$nextTick()
 
-    const treeview = wrapper.first('.v-tree-view-selector')
+    const treeview = wrapper.first('.v-treeview')
     expect(treeview.html()).toMatchSnapshot()
   })
 
@@ -68,11 +68,13 @@ test('VTreeSelect.js', ({ mount, compileToFunctions }) => {
       }
     })
     const slot = wrapper.first('.v-input__slot')
+
+    expect(wrapper.vm.isMenuActive).toBe(false)
     slot.trigger('click')
 
     await wrapper.vm.$nextTick()
 
-    const treeview = wrapper.first('.v-tree-view-selector')
+    const treeview = wrapper.first('.v-treeview')
     expect(treeview.html()).toMatchSnapshot()
   })
   
