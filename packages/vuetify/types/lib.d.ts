@@ -67,7 +67,6 @@ declare module 'vuetify/lib' {
   const VInput: Component
   const VItem: Component
   const VItemGroup: Component
-  const VJumbotron: Component
   const VLabel: Component
   const VLayout: Component
   const VList: Component
@@ -203,7 +202,6 @@ declare module 'vuetify/lib' {
     VInput,
     VItem,
     VItemGroup,
-    VJumbotron,
     VLabel,
     VLayout,
     VList,

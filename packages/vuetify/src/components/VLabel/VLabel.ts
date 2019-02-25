@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_labels.styl'
+import './VLabel.sass'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
