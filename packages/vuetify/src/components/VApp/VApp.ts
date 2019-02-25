@@ -4,11 +4,14 @@ import '../../stylus/components/_app.styl'
 // Mixins
 import Themeable from '../../mixins/themeable'
 
-/* @vue/component */
-export default {
-  name: 'v-app',
+// Utilities
+import mixins from '../../util/mixins'
 
-  mixins: [Themeable],
+/* @vue/component */
+export default mixins(
+  Themeable
+).extend({
+  name: 'v-app',
 
   props: {
     dark: {
@@ -26,12 +29,6 @@ export default {
   },
 
   computed: {
-    classes () {
-      return {
-        'application--is-rtl': this.$vuetify.rtl,
-        ...this.themeClasses
-      }
-    },
     isDark () {
       if (this.dark != null || this.light != null) {
         return Themeable.options.computed.isDark.call(this)
@@ -42,15 +39,16 @@ export default {
   },
 
   render (h) {
-    const data = {
-      staticClass: 'application',
-      'class': this.classes,
-      attrs: { 'data-app': true },
-      domProps: { id: this.id }
-    }
-
     const wrapper = h('div', { staticClass: 'application--wrap' }, this.$slots.default)
 
-    return h('div', data, [wrapper])
+    return h('div', {
+      staticClass: 'application',
+      class: {
+        'application--is-rtl': this.$vuetify.rtl,
+        ...this.themeClasses
+      },
+      attrs: { 'data-app': true },
+      domProps: { id: this.id }
+    }, [wrapper])
   }
-}
+})
