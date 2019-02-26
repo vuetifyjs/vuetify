@@ -1134,7 +1134,7 @@ module.exports = {
     slots: ['default'],
     events: [
       {
-        name: 'input',
+        name: 'change',
         value: 'string'
       }
     ]
@@ -1149,12 +1149,29 @@ module.exports = {
     slots: ['default'],
     events: [
       {
-        name: 'input',
+        name: 'change',
         value: 'string'
       }
     ]
   },
   'v-text-field': {
+    events: [
+      {
+        name: 'input',
+        value: 'string'
+      },
+      {
+        name: 'change',
+        value: 'string'
+      },
+      ...inputEvents,
+      ...textEvents
+    ].concat(validatableEvents),
+    slots: [
+      ...textFieldSlots
+    ]
+  },
+  'v-textarea': {
     events: [
       {
         name: 'input',

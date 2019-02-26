@@ -2,14 +2,13 @@
 import Bootable from './bootable'
 
 // Utilities
-import { ExtractVue } from './../util/mixins'
+import { getObjectValueByPath } from '../util/helpers'
+import mixins, { ExtractVue } from '../util/mixins'
 import { consoleWarn } from '../util/console'
-import mixins from '../util/mixins'
 
 // Types
-import Vue from 'vue'
+import Vue, { PropOptions } from 'vue'
 import { VNode } from 'vue/types'
-import { getObjectValueByPath } from '../util/helpers'
 
 interface options extends Vue {
   $el: HTMLElement
@@ -38,7 +37,7 @@ export default mixins<options &
     attach: {
       default: false,
       validator: validateAttachTarget
-    },
+    } as PropOptions<boolean | string | Element>,
     contentClass: {
       type: String,
       default: ''
@@ -81,13 +80,23 @@ export default mixins<options &
   },
 
   beforeDestroy () {
-    const content = this.$refs.content
-
-    if (!content || !content.parentNode) return
-
     // IE11 Fix
     try {
-      content.parentNode.removeChild(content)
+      if (
+        this.$refs.content &&
+        this.$refs.content.parentNode
+      ) {
+        this.$refs.content.parentNode.removeChild(this.$refs.content)
+      }
+
+      if (this.activatorNode) {
+        const activator = Array.isArray(this.activatorNode) ? this.activatorNode : [this.activatorNode]
+        activator.forEach(node => {
+          node.elm &&
+            node.elm.parentNode &&
+            node.elm.parentNode.removeChild(node.elm)
+        })
+      }
     } catch (e) { console.log(e) }
   },
 

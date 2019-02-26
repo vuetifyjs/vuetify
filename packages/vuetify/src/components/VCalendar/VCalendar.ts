@@ -197,7 +197,7 @@ export default CalendarBase.extend({
         ...this.$listeners,
         'click:date': (day: VTimestamp) => {
           if (this.$listeners['input']) {
-            this.$emit('input', day)
+            this.$emit('input', day.date)
           }
           if (this.$listeners['click:date']) {
             this.$emit('click:date', day)
