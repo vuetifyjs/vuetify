@@ -367,16 +367,18 @@ export function computeSlots (cmp: Vue, name: string, props: object) {
   return slots
 }
 
+export type compareFn<T = any> = (a: T, b: T) => number
+
 export function sortItems (
   items: any[],
   sortBy: string[],
   sortDesc: boolean[],
   locale: string,
-  customSorters?: Record<string, (a: any, b: any) => number>
+  customSorters?: Record<string, compareFn>
 ) {
   if (sortBy === null || !sortBy.length) return items
 
-  return items.sort((a: any, b: any): number => {
+  return items.sort((a, b) => {
     for (let i = 0; i < sortBy.length; i++) {
       const sortKey = sortBy[i]
 
