@@ -4,5 +4,6 @@
   "github": {
     "autoAlias": false,
     "silent": true
-  }
+  },
+  "version": 1
 }

@@ -6,6 +6,10 @@
   padding: $grid-gutters.xl
   width: 100%
 
+  &.grow-shrink-0
+    flex-grow: 0;
+    flex-shrink: 0;
+
   for $size, $width in $container-max-widths
     @media only screen and (min-width: $width)
       max-width: ($width * 0.9375) // Credit to bootstrap
@@ -23,6 +27,10 @@
     > .layout
       height: 100%
       flex: 1 1 auto
+
+      &.grow-shrink-0
+        flex-grow: 0;
+        flex-shrink: 0;
 
   &.grid-list
     for $size, $gutter in $grid-gutters
@@ -69,6 +77,10 @@
   &.wrap
     flex-wrap: wrap
 
+  &.grow-shrink-0
+    flex-grow: 0;
+    flex-shrink: 0;
+
 for $size, $width in $grid-breakpoints
   @media all and (min-width: $width)
     for n in (1..$grid-columns)
@@ -89,6 +101,10 @@ for $size, $width in $grid-breakpoints
 .child-flex > *
   flex: 1 1 auto
   max-width: 100%
+
+  &.grow-shrink-0
+    flex-grow: 0;
+    flex-shrink: 0;
 
 .align
   &-start
@@ -204,6 +220,10 @@ for $size, $width in $grid-breakpoints
 .d-inline-flex
   > *
     flex: 1 1 auto !important
+
+    &.grow-shrink-0
+      flex-grow: 0;
+      flex-shrink: 0;
 
 .d-block
   display: block !important

@@ -74,14 +74,14 @@
         >
           <v-spacer></v-spacer>
           <v-btn
-            flat
+            text
             color="primary"
             @click="startMenu = false"
           >
             Cancel
           </v-btn>
           <v-btn
-            flat
+            text
             color="primary"
             @click="$refs.startMenu.save(start)"
           >
@@ -116,14 +116,14 @@
         >
           <v-spacer></v-spacer>
           <v-btn
-            flat
+            text
             color="primary"
             @click="endMenu = false"
           >
             Cancel
           </v-btn>
           <v-btn
-            flat
+            text
             color="primary"
             @click="$refs.endMenu.save(end)"
           >
@@ -157,14 +157,14 @@
         >
           <v-spacer></v-spacer>
           <v-btn
-            flat
+            text
             color="primary"
             @click="nowMenu = false"
           >
             Cancel
           </v-btn>
           <v-btn
-            flat
+            text
             color="primary"
             @click="$refs.nowMenu.save(now)"
           >

@@ -87,7 +87,7 @@
               <v-btn
                 :href="`${template.url}?ref=vuetifyjs.com`"
                 color="primary"
-                flat
+                text
                 outline
                 target="_blank"
                 rel="noopener"

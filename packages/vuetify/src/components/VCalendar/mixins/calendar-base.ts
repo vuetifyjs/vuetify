@@ -1,10 +1,11 @@
 
 // Mixins
 import mixins from '../../../util/mixins'
-import Themeable from '../../../mixins/themeable'
 import Colorable from '../../../mixins/colorable'
-import Times from './times'
+import Localable from '../../../mixins/localable'
 import Mouse from './mouse'
+import Themeable from '../../../mixins/themeable'
+import Times from './times'
 
 // Util
 import props from '../util/props'
@@ -19,8 +20,14 @@ import {
   getEndOfWeek
 } from '../util/timestamp'
 
+export default mixins(
+  Colorable,
+  Localable,
+  Mouse,
+  Themeable,
+  Times
 /* @vue/component */
-export default mixins(Colorable, Themeable, Times, Mouse).extend({
+).extend({
   name: 'calendar-base',
 
   props: props.base,
@@ -51,7 +58,7 @@ export default mixins(Colorable, Themeable, Times, Mouse).extend({
       const options = { timeZone: 'UTC', day: 'numeric' }
 
       return createNativeLocaleFormatter(
-        this.locale,
+        this.currentLocale,
         (_tms, _short) => options
       )
     },
@@ -64,7 +71,7 @@ export default mixins(Colorable, Themeable, Times, Mouse).extend({
       const shortOptions = { timeZone: 'UTC', weekday: 'short' }
 
       return createNativeLocaleFormatter(
-        this.locale,
+        this.currentLocale,
         (_tms, short) => short ? shortOptions : longOptions
       )
     }

@@ -67,7 +67,7 @@
 
     <v-card-actions>
       <v-btn
-        flat
+        text
         @click="tree = []"
       >
         Reset

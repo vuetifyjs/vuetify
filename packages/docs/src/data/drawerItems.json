@@ -73,6 +73,7 @@
       { "text": "alerts", "to": "alerts" },
       { "text": "avatars", "to": "avatars" },
       { "text": "badges", "to": "badges" },
+      { "text": "banners", "to": "banners", "new": true },
       { "text": "bottomNavigation", "to": "bottom-navigation" },
       { "text": "bottomSheets", "to": "bottom-sheets" },
       { "text": "breadcrumbs", "to": "breadcrumbs" },
@@ -118,7 +119,6 @@
           { "text": "textFields", "to": "text-fields" }
         ]
       },
-      { "text": "jumbotrons", "to": "jumbotrons", "deprecated": true },
       { "text": "lists", "to": "lists" },
       { "text": "menus", "to": "menus" },
       { "text": "navigationDrawers", "to": "navigation-drawers" },

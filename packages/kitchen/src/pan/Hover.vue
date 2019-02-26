@@ -7,8 +7,8 @@
         Simple hover
       </core-title>
       <core-section>
-        <v-hover>
-          <v-sheet slot-scope="{ hover }">
+        <v-hover #default="{ hover }">
+          <v-sheet>
             {{ hover }}
           </v-sheet>
         </v-hover>
@@ -18,8 +18,8 @@
         Disabled
       </core-title>
       <core-section>
-        <v-hover disabled>
-          <v-sheet slot-scope="{ hover }">
+        <v-hover disabled #default="{ hover }">
+          <v-sheet>
             {{ hover }}
           </v-sheet>
         </v-hover>
@@ -32,8 +32,9 @@
         <v-hover
           open-delay="100"
           close-delay="100"
+          #default="{ hover }"
         >
-          <v-sheet slot-scope="{ hover }">
+          <v-sheet>
             {{ hover }}
           </v-sheet>
         </v-hover>

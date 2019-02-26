@@ -3,7 +3,7 @@ import { test } from '@/test'
 import VDataIterator from '@/components/VDataIterator'
 import VBtn from '@/components/VBtn'
 
-test('VDataIterator.js', ({ mount, compileToFunctions }) => {
+test.skip('VDataIterator.js', ({ mount, compileToFunctions }) => {
   function dataIteratorTestData () {
     return {
       propsData: {

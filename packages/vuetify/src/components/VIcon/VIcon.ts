@@ -130,6 +130,8 @@ const VIcon = mixins(
 
       const component = icon.component
       data.props = icon.props
+      data.nativeOn = data.on
+
       return h(component, data)
     }
   },

@@ -2,64 +2,60 @@
   <v-container fluid>
     <v-layout row>
       <v-flex
-        grow
         pa-1
       >
         <v-card
           dark
           color="green darken-3"
         >
-          <v-card-text>#1 Im a Grow Flex</v-card-text>
+          <v-card-text>I'm a Flex that will grow and shrink (default behavior)</v-card-text>
         </v-card>
       </v-flex>
       <v-flex
-        shrink
         pa-1
       >
         <v-card
           dark
           color="green darken-1"
         >
-          <v-card-text>#2 Im a Shrink Flex</v-card-text>
+          <v-card-text>I'm a Flex that will grow and shrink (default behavior)</v-card-text>
         </v-card>
       </v-flex>
     </v-layout>
     <v-layout row>
       <v-flex
-        grow
         pa-1
       >
         <v-card
           dark
           color="green darken-1"
         >
-          <v-card-text>#1 Im a Grow Flex</v-card-text>
+          <v-card-text>I'm a Flex that will grow and shrink (default behavior)</v-card-text>
         </v-card>
       </v-flex>
       <v-flex
-        shrink
+        grow
         pa-1
       >
         <v-card
           dark
           color="green lighten-1"
         >
-          <v-card-text>#2 Im a Shrink Flex</v-card-text>
+          <v-card-text>I'm a Flex with a lot of content that will NOT shrink when the content is wider than the available width in the row. Try resizing the window</v-card-text>
         </v-card>
       </v-flex>
+    </v-layout>
+    <v-layout row>
       <v-flex
-        grow
         pa-1
       >
         <v-card
           dark
           color="green darken-4"
         >
-          <v-card-text>#3 Im a Grow Flex</v-card-text>
+          <v-card-text>I'm a Flex that will grow and shrink (default behavior)</v-card-text>
         </v-card>
       </v-flex>
-    </v-layout>
-    <v-layout row>
       <v-flex
         shrink
         pa-1
@@ -68,29 +64,31 @@
           dark
           color="green darken-3"
         >
-          <v-card-text>#1 Im a Shrink Flex</v-card-text>
+          <v-card-text>I'm a Flex that will NOT grow</v-card-text>
         </v-card>
       </v-flex>
+    </v-layout>
+    <v-layout>
       <v-flex
-        grow
+        grow-shrink-0
         pa-1
       >
         <v-card
           dark
           color="green"
         >
-          <v-card-text>#2 Im a Grow Flex</v-card-text>
+          <v-card-text>I'm a Flex that will NOT grow OR shrink</v-card-text>
         </v-card>
       </v-flex>
       <v-flex
-        shrink
+        grow-shrink-0
         pa-1
       >
         <v-card
           dark
           color="green lighten-1"
         >
-          <v-card-text>#3 Im a Shrink Flex</v-card-text>
+          <v-card-text>I'm a Flex that will NOT grow OR shrink</v-card-text>
         </v-card>
       </v-flex>
     </v-layout>

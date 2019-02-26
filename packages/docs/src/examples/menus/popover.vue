@@ -59,8 +59,8 @@
         <v-card-actions>
           <v-spacer></v-spacer>
 
-          <v-btn flat @click="menu = false">Cancel</v-btn>
-          <v-btn color="primary" flat @click="menu = false">Save</v-btn>
+          <v-btn text @click="menu = false">Cancel</v-btn>
+          <v-btn color="primary" text @click="menu = false">Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-menu>

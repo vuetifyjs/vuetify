@@ -9,46 +9,58 @@
       <core-section>
         <v-layout justify-space-around>
           <v-tooltip left>
-            <v-btn
+            <template
               slot="activator"
-              color="primary"
-              dark
             >
-              Left
-            </v-btn>
+              <v-btn
+                color="primary"
+                dark
+              >
+                Left
+              </v-btn>
+            </template>
             <span>Left tooltip</span>
           </v-tooltip>
 
           <v-tooltip top>
-            <v-btn
+            <template
               slot="activator"
-              color="primary"
-              dark
             >
-              Top
-            </v-btn>
+              <v-btn
+                color="primary"
+                dark
+              >
+                Top
+              </v-btn>
+            </template>
             <span>Top tooltip</span>
           </v-tooltip>
 
           <v-tooltip bottom>
-            <v-btn
+            <template
               slot="activator"
-              color="primary"
-              dark
             >
-              Bottom
-            </v-btn>
+              <v-btn
+                color="primary"
+                dark
+              >
+                Bottom
+              </v-btn>
+            </template>
             <span>Bottom tooltip</span>
           </v-tooltip>
 
           <v-tooltip right>
-            <v-btn
+            <template
               slot="activator"
-              color="primary"
-              dark
             >
-              Right
-            </v-btn>
+              <v-btn
+                color="primary"
+                dark
+              >
+                Right
+              </v-btn>
+            </template>
             <span>Right tooltip</span>
           </v-tooltip>
         </v-layout>
@@ -77,14 +89,17 @@
               v-model="show"
               top
             >
-              <v-btn
+              <template
                 slot="activator"
-                icon
               >
-                <v-icon color="grey lighten-1">
-                  mdi-cart
-                </v-icon>
-              </v-btn>
+                <v-btn
+                  icon
+                >
+                  <v-icon color="grey lighten-1">
+                    mdi-cart
+                  </v-icon>
+                </v-btn>
+              </template>
               <span>Programmatic tooltip</span>
             </v-tooltip>
           </v-flex>
