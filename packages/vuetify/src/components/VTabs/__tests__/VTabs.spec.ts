@@ -66,10 +66,13 @@ describe('VTabs.ts', () => {
 
     expect(wrapper.vm.resizeTimeout).toBe(0)
     wrapper.vm.$vuetify.application.left = 100
+    await wrapper.vm.$nextTick()
     expect(wrapper.vm.resizeTimeout).toBeTruthy()
     wrapper.setData({ resizeTimeout: 0 })
+    await wrapper.vm.$nextTick()
     expect(wrapper.vm.resizeTimeout).toBe(0)
     wrapper.vm.$vuetify.application.right = 100
+    await wrapper.vm.$nextTick()
     expect(wrapper.vm.resizeTimeout).toBeTruthy()
   })
 

@@ -135,7 +135,11 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
 
   methods: {
     callSlider () {
-      if (this.hideSlider || !this.$refs.items.selectedItems.length) return false
+      if (
+        this.hideSlider ||
+        !this.$refs.items ||
+        !this.$refs.items.selectedItems.length
+      ) return false
 
       this.$nextTick(() => {
         // Give screen time to paint
