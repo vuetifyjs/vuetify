@@ -95,15 +95,15 @@ export const BaseItemGroup = mixins(
         ? i
         : item.value
     },
-    onClick (item: GroupableInstance, index: number) {
+    onClick (item: GroupableInstance) {
       this.updateInternalValue(
-        this.getValue(item, index)
+        this.getValue(item, this.items.indexOf(item))
       )
     },
     register (item: GroupableInstance) {
       const index = this.items.push(item) - 1
 
-      item.$on('change', () => this.onClick(item, index))
+      item.$on('change', () => this.onClick(item))
 
       // If no value provided and mandatory,
       // assign first registered item

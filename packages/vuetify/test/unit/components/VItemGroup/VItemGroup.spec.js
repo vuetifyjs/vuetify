@@ -273,4 +273,28 @@ test('VItemGroup.ts', ({ mount }) => {
 
     expect(change).not.toBeCalled()
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/6278
+  it('should infer index dynamically', () => {
+    const wrapper = mount(VItemGroup, {
+      propsData: { value: 0 },
+      slots: {
+        default: [
+          Mock,
+          Mock,
+          Mock
+        ]
+      }
+    })
+
+    const items = wrapper.find(Mock)
+    const item2 = items[1]
+    const item3 = items[2]
+
+    item2.destroy()
+
+    item3.trigger('click')
+
+    expect(wrapper.vm.internalValue).toBe(1)
+  })
 })
