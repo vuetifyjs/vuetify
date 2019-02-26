@@ -6,18 +6,22 @@ import Applicationable from '../../mixins/applicationable'
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 
-/* @vue/component */
-export default {
-  name: 'v-footer',
+// Utilities
+import mixins from '../../util/mixins'
 
-  mixins: [
-    Applicationable(null, [
-      'height',
-      'inset'
-    ]),
-    Colorable,
-    Themeable
-  ],
+// TYpes
+import { VNode } from 'vue/types/vnode'
+
+/* @vue/component */
+export default mixins(
+  Applicationable('footer', [
+    'height',
+    'inset'
+  ]),
+  Colorable,
+  Themeable
+).extend({
+  name: 'v-footer',
 
   props: {
     height: {
@@ -28,27 +32,27 @@ export default {
   },
 
   computed: {
-    applicationProperty () {
+    applicationProperty (): string {
       return this.inset ? 'insetFooter' : 'footer'
     },
-    computedMarginBottom () {
-      if (!this.app) return
+    computedMarginBottom (): number {
+      if (!this.app) return 0
 
       return this.$vuetify.application.bottom
     },
-    computedPaddingLeft () {
+    computedPaddingLeft (): number {
       return !this.app || !this.inset
         ? 0
         : this.$vuetify.application.left
     },
-    computedPaddingRight () {
+    computedPaddingRight (): number {
       return !this.app || !this.inset
         ? 0
         : this.$vuetify.application.right
     },
-    styles () {
-      const styles = {
-        height: isNaN(this.height) ? this.height : `${this.height}px`
+    styles (): object {
+      const styles: Record<string, string | number> = {
+        height: isNaN(parseInt(this.height)) ? this.height : `${this.height}px`
       }
 
       if (this.computedPaddingLeft) {
@@ -82,7 +86,7 @@ export default {
     }
   },
 
-  render (h) {
+  render (h): VNode {
     const data = this.setBackgroundColor(this.color, {
       staticClass: 'v-footer',
       'class': {
@@ -97,4 +101,4 @@ export default {
 
     return h('footer', data, this.$slots.default)
   }
-}
+})

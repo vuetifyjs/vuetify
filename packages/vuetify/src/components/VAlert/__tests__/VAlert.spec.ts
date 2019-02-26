@@ -8,7 +8,7 @@ import {
 } from '@vue/test-utils'
 
 // Types
-import { ExtractVue } from './../../../util/mixins'
+import { ExtractVue } from '../../../util/mixins'
 
 describe('VAlert.ts', () => {
   type Instance = ExtractVue<typeof VAlert>

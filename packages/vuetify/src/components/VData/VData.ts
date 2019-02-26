@@ -1,7 +1,6 @@
 // Helpers
 import { wrapInArray, sortItems, deepEqual, groupByProperty, searchItems } from '../../util/helpers'
-import { PropValidator } from 'vue/types/options'
-import Vue, { VNode } from 'vue'
+import Vue, { VNode, PropType } from 'vue'
 
 export interface DataOptions {
   page: number
@@ -41,9 +40,9 @@ export default Vue.extend({
 
   props: {
     items: {
-      type: Array,
+      type: Array as PropType<any[]>,
       default: () => []
-    } as PropValidator<any[]>,
+    },
     itemKey: {
       type: String,
       default: 'id'
@@ -53,15 +52,15 @@ export default Vue.extend({
       default: () => ({})
     },
     sortBy: {
-      type: [String, Array],
+      type: [String, Array] as PropType<string | string[]>,
       default: () => []
-    } as PropValidator<string | string[]>,
+    },
     sortDesc: {
-      type: [Boolean, Array],
+      type: [Boolean, Array] as PropType<boolean | boolean[]>,
       default: () => []
-    } as PropValidator<boolean | boolean[]>,
+    },
     customSort: {
-      type: Function, // TODO: specific typing?
+      type: Function as any as PropType<typeof sortItems>,
       default: sortItems
     },
     mustSort: Boolean,
@@ -75,13 +74,13 @@ export default Vue.extend({
       default: 10
     },
     groupBy: {
-      type: [String, Array],
+      type: [String, Array] as PropType<string | string[]>,
       default: () => []
-    } as PropValidator<string | string[]>,
+    },
     groupDesc: {
-      type: [Boolean, Array],
+      type: [Boolean, Array] as PropType<boolean | boolean[]>,
       default: () => []
-    } as PropValidator<boolean | boolean[]>,
+    },
     locale: {
       type: String,
       default: 'en-US'
@@ -91,7 +90,7 @@ export default Vue.extend({
     disableFiltering: Boolean,
     search: String,
     customFilter: {
-      type: Function, // TODO: specific typing?
+      type: Function as any as PropType<typeof searchItems>,
       default: searchItems
     },
     serverItemsLength: {

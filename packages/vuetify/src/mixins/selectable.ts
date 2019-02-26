@@ -5,11 +5,16 @@ import VInput from '../components/VInput'
 import Rippleable from './rippleable'
 import Comparable from './comparable'
 
-/* @vue/component */
-export default VInput.extend({
-  name: 'selectable',
+// Utilities
+import mixins from '../util/mixins'
 
-  mixins: [Rippleable, Comparable],
+/* @vue/component */
+export default mixins(
+  VInput,
+  Rippleable,
+  Comparable
+).extend({
+  name: 'selectable',
 
   model: {
     prop: 'inputValue',
@@ -22,9 +27,9 @@ export default VInput.extend({
       default: 'accent'
     },
     id: String,
-    inputValue: null,
-    falseValue: null,
-    trueValue: null,
+    inputValue: null as any,
+    falseValue: null as any,
+    trueValue: null as any,
     multiple: {
       type: Boolean,
       default: null
@@ -32,18 +37,20 @@ export default VInput.extend({
     label: String
   },
 
-  data: vm => ({
-    lazyValue: vm.inputValue
-  }),
+  data () {
+    return {
+      lazyValue: this.inputValue
+    }
+  },
 
   computed: {
-    computedColor () {
+    computedColor (): string | undefined {
       return this.isActive ? this.color : this.validationState
     },
-    isMultiple () {
+    isMultiple (): boolean {
       return this.multiple === true || (this.multiple === null && Array.isArray(this.internalValue))
     },
-    isActive () {
+    isActive (): boolean {
       const value = this.value
       const input = this.internalValue
 
@@ -78,11 +85,11 @@ export default VInput.extend({
 
       const label = VInput.options.methods.genLabel.call(this)
 
-      label.data.on = { click: this.onChange }
+      label!.data!.on = { click: this.onChange }
 
       return label
     },
-    genInput (type, attrs) {
+    genInput (type: string, attrs: object) {
       return this.$createElement('input', {
         attrs: Object.assign({
           'aria-label': this.label,
@@ -121,7 +128,7 @@ export default VInput.extend({
 
         const length = input.length
 
-        input = input.filter(item => !this.valueComparator(item, value))
+        input = input.filter((item: any) => !this.valueComparator(item, value))
 
         if (input.length === length) {
           input.push(value)
@@ -141,6 +148,6 @@ export default VInput.extend({
       this.isFocused = true
     },
     /** @abstract */
-    onKeydown (e) {}
+    onKeydown (e: Event) {}
   }
 })
