@@ -1,11 +1,11 @@
-// Helpers
-import Vue from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { VDataTable } from '../'
 import { DataOptions } from '../../VData/VData'
 import VIcon from '../../VIcon'
 import VSimpleCheckbox from '../../VCheckbox/VSimpleCheckbox'
+
+import Vue, { PropType } from 'vue'
 import mixins from '../../../util/mixins'
-import { VDataTable } from '../'
+import { compareFn } from '../../../util/helpers'
 
 export interface TableHeader {
   text: string
@@ -18,7 +18,7 @@ export interface TableHeader {
   width?: string | number
   type?: 'showExpand' | 'showSelect'
   filter?: (value: any, search: string, item: any) => boolean
-  sort?: (a: any, b: any) => number
+  sort?: compareFn
 }
 
 type VDataTableInstance = InstanceType<typeof VDataTable>
@@ -32,11 +32,11 @@ export default mixins<options>().extend({
 
   props: {
     headers: {
-      type: Array,
+      type: Array as PropType<TableHeader[]>,
       required: true
-    } as PropValidator<TableHeader[]>,
+    },
     options: {
-      type: Object,
+      type: Object as PropType<DataOptions>,
       default: () => ({
         page: 1,
         itemsPerPage: 10,
@@ -47,7 +47,7 @@ export default mixins<options>().extend({
         multiSort: false,
         mustSort: false
       })
-    } as PropValidator<DataOptions>,
+    },
     sortIcon: {
       type: String,
       default: '$vuetify.icons.sort'
