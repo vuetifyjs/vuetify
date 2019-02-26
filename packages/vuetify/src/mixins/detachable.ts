@@ -1,7 +1,24 @@
+// Mixins
 import Bootable from './bootable'
-import { consoleWarn } from '../util/console'
 
-function validateAttachTarget (val) {
+// Utilities
+import { ExtractVue } from './../util/mixins'
+import { consoleWarn } from '../util/console'
+import mixins from '../util/mixins'
+
+// Types
+import Vue from 'vue'
+import { VNode } from 'vue/types'
+import { getObjectValueByPath } from '../util/helpers'
+
+interface options extends Vue {
+  $el: HTMLElement
+  $refs: {
+    content: HTMLElement
+  }
+}
+
+function validateAttachTarget (val: any) {
   const type = typeof val
 
   if (type === 'boolean' || type === 'string') return true
@@ -10,23 +27,26 @@ function validateAttachTarget (val) {
 }
 
 /* @vue/component */
-export default {
+export default mixins<options &
+  /* eslint-disable indent */
+  ExtractVue<typeof Bootable>
+  /* eslint-enable indent */
+>(Bootable).extend({
   name: 'detachable',
-
-  mixins: [Bootable],
 
   props: {
     attach: {
-      type: null,
       default: false,
       validator: validateAttachTarget
     },
     contentClass: {
+      type: String,
       default: ''
     }
   },
 
   data: () => ({
+    activatorNode: null as null | VNode | VNode[],
     hasDetached: false
   }),
 
@@ -42,8 +62,11 @@ export default {
     this.$nextTick(() => {
       if (this.activatorNode) {
         const activator = Array.isArray(this.activatorNode) ? this.activatorNode : [this.activatorNode]
+
         activator.forEach(node => {
-          node.elm && this.$el.parentNode.insertBefore(node.elm, this.$el)
+          node.elm &&
+            this.$el.parentNode &&
+            this.$el.parentNode.insertBefore(node.elm, this.$el)
         })
       }
     })
@@ -58,17 +81,20 @@ export default {
   },
 
   beforeDestroy () {
-    if (!this.$refs.content) return
+    const content = this.$refs.content
+
+    if (!content || !content.parentNode) return
 
     // IE11 Fix
     try {
-      this.$refs.content.parentNode.removeChild(this.$refs.content)
+      content.parentNode.removeChild(content)
     } catch (e) { console.log(e) }
   },
 
   methods: {
     getScopeIdAttrs () {
-      const scopeId = this.$vnode && this.$vnode.context.$options._scopeId
+      const scopeId = getObjectValueByPath(this.$vnode, 'context.$options._scopeId')
+
       return scopeId && {
         [scopeId]: ''
       }
@@ -109,4 +135,4 @@ export default {
       this.hasDetached = true
     }
   }
-}
+})

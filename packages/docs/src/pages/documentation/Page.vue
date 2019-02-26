@@ -51,8 +51,6 @@
   export default {
     name: 'Documentation',
 
-    asyncData: load,
-
     watch: {
       '$route.path' () {
         this.load({
@@ -61,6 +59,8 @@
         })
       }
     },
+
+    asyncData: load,
 
     methods: {
       load

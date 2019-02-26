@@ -4,13 +4,28 @@ import '../../stylus/components/_textarea.styl'
 // Extensions
 import VTextField from '../VTextField/VTextField'
 
+// Utilities
+import mixins, { ExtractVue } from './../../util/mixins'
 import { consoleInfo } from '../../util/console'
 
-/* @vue/component */
-export default {
-  name: 'v-textarea',
+// Types
+import Vue from 'vue'
 
-  extends: VTextField,
+interface options extends Vue {
+  $refs: {
+    input: HTMLTextAreaElement
+  }
+}
+
+/* @vue/component */
+export default mixins<options &
+/* eslint-disable indent */
+  ExtractVue<typeof VTextField>
+/* eslint-enable indent */
+>(
+  VTextField
+).extend({
+  name: 'v-textarea',
 
   props: {
     autoGrow: Boolean,
@@ -19,34 +34,25 @@ export default {
     rowHeight: {
       type: [Number, String],
       default: 24,
-      validator: v => !isNaN(parseFloat(v))
+      validator: (v: any) => !isNaN(parseFloat(v))
     },
     rows: {
       type: [Number, String],
       default: 5,
-      validator: v => !isNaN(parseInt(v, 10))
+      validator: (v: any) => !isNaN(parseInt(v, 10))
     }
   },
 
   computed: {
-    classes () {
+    classes (): object {
       return {
         'v-textarea': true,
         'v-textarea--auto-grow': this.autoGrow,
         'v-textarea--no-resize': this.noResizeHandle,
-        ...VTextField.options.computed.classes.call(this, null)
+        ...VTextField.options.computed.classes.call(this)
       }
     },
-    dynamicHeight () {
-      return this.autoGrow
-        ? this.inputHeight
-        : 'auto'
-    },
-    isEnclosed () {
-      return this.textarea ||
-        VTextField.options.computed.isEnclosed.call(this)
-    },
-    noResizeHandle () {
+    noResizeHandle (): boolean {
       return this.noResize || this.autoGrow
     }
   },
@@ -71,8 +77,9 @@ export default {
   methods: {
     calculateInputHeight () {
       const input = this.$refs.input
+
       if (input) {
-        input.style.height = 0
+        input.style.height = '0'
         const height = input.scrollHeight
         const minHeight = parseInt(this.rows, 10) * parseFloat(this.rowHeight)
         // This has to be done ASAP, waiting for Vue
@@ -84,16 +91,16 @@ export default {
       const input = VTextField.options.methods.genInput.call(this)
 
       input.tag = 'textarea'
-      delete input.data.attrs.type
-      input.data.attrs.rows = this.rows
+      delete input.data!.attrs!.type
+      input.data!.attrs!.rows = this.rows
 
       return input
     },
-    onInput (e) {
+    onInput (e: Event) {
       VTextField.options.methods.onInput.call(this, e)
       this.autoGrow && this.calculateInputHeight()
     },
-    onKeyDown (e) {
+    onKeyDown (e: KeyboardEvent) {
       // Prevents closing of a
       // dialog when pressing
       // enter
@@ -107,4 +114,4 @@ export default {
       this.$emit('keydown', e)
     }
   }
-}
+})

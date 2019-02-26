@@ -292,3 +292,12 @@ $ripple-animation-visible-opacity: 0.15 !default;
 
 /** Treeviews */
 $treeview-transition: 0.2s map-get($transition, 'linear-out-slow-in') !default;
+
+/** Elements */
+$bootable-transition: 0.2s map-get($transition, 'fast-out-slow-in');
+$blockquote-font-size: 18px;
+$blockquote-font-weight: 300;
+$code-color: #bd4147;
+$code-kbd-border-radius: 3px;
+$code-kbd-font-size: 85%;
+$code-kbd-font-weight: 900;

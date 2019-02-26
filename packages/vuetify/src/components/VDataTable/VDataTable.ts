@@ -112,7 +112,7 @@ export default VDataIterator.extend({
       return this.customFilter(items, search)
     },
     customSortWithHeaders (items: any[], sortBy: string[], sortDesc: boolean[], locale: string) {
-      const customSorters = this.computedHeaders.reduce((obj: Record<string, Function>, header: TableHeader) => {
+      const customSorters = this.computedHeaders.reduce((obj: Record<string, Function>, header: TableHeader): any => {
         if (header.sort) obj[header.value] = header.sort
         return obj
       }, {})
