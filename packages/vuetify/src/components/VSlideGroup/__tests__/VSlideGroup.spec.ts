@@ -131,7 +131,6 @@ describe('VSliderGroup.ts', () => {
     const scrollTo = jest.fn()
     const wrapper = mount(VSlideGroup, {
       data: () => ({
-        isOverflowing: true,
         scrollOffset: 200,
         widths: {
           content: 1920,
@@ -148,6 +147,8 @@ describe('VSliderGroup.ts', () => {
       }
     })
 
+    wrapper.setData({ isOverflowing: true })
+
     const prepend = wrapper.find('.v-slide-group__prepend')
     const append = wrapper.find('.v-slide-group__append')
 
@@ -160,7 +161,6 @@ describe('VSliderGroup.ts', () => {
   it('should accept scoped slots', () => {
     const wrapper = mount(VSlideGroup, {
       data: () => ({
-        isOverflowing: true,
         scrollOffset: 200,
         widths: {
           content: 1920,
@@ -183,6 +183,8 @@ describe('VSliderGroup.ts', () => {
         }
       }
     })
+
+    wrapper.setData({ isOverflowing: true })
 
     const affixes = wrapper.findAll('.fizz')
     const foo = affixes.at(0)

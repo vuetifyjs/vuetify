@@ -28,6 +28,11 @@ describe('VChipGroup.ts', () => {
       return mount(VChipGroup, {
         localVue,
         router,
+        mocks: {
+          $vuetify: {
+            breakpoint: {}
+          }
+        },
         ...options
       })
     }

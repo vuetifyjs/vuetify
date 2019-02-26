@@ -6,6 +6,14 @@
 .v-slide-group
   display: flex
 
+  // Needed increased specificity
+  // to overwrite v-tabs pointer
+  // replacement
+  &.v-item-group
+    > .v-slide-group__append,
+    > .v-slide-group__prepend
+      cursor: pointer
+
 .v-slide-item
   display: inline-flex
   flex: 0 1 auto

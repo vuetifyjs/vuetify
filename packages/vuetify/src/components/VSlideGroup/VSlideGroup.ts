@@ -118,7 +118,7 @@ export const BaseSlideGroup = mixins<options &
 
   methods: {
     genAppend (): VNode | null {
-      if (!this.isOverflowing && !this.showArrows) return null
+      if (!this.hasAffixes) return null
 
       const slot = this.$scopedSlots.append
         ? this.$scopedSlots.append({})
@@ -157,7 +157,7 @@ export const BaseSlideGroup = mixins<options &
       }, (this as any)[`${location}Icon`])
     },
     genPrepend (): VNode | null {
-      if (!this.isOverflowing && !this.showArrows) return null
+      if (!this.hasAffixes) return null
 
       const slot = this.$scopedSlots.prepend
         ? this.$scopedSlots.prepend({})

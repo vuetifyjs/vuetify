@@ -53,7 +53,8 @@ describe('VTabs.ts', () => {
       return mount(VTabs, {
         mocks: {
           $vuetify: {
-            application: { left: 0, right: 0 }
+            application: { left: 0, right: 0 },
+            breakpoint: {}
           }
         },
         ...options
@@ -93,7 +94,7 @@ describe('VTabs.ts', () => {
   })
 
   it('should generate a v-tabs-items if none present and has v-tab-item', async () => {
-    const wrapper = mount(VTabs, {
+    const wrapper = mountFunction({
       propsData: { value: 'foo' },
       slots: {
         default: [{
@@ -109,7 +110,7 @@ describe('VTabs.ts', () => {
   })
 
   it('should hide slider', async () => {
-    const wrapper = mount(VTabs, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: { hideSlider: true },
       slots: {
@@ -137,14 +138,19 @@ describe('VTabs.ts', () => {
       }
     }
     const wrapper = mount(component, {
-      attachToDocument: true
+      attachToDocument: true,
+      mocks: {
+        $vuetify: {
+          breakpoint: {}
+        }
+      }
     })
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should update input value when changed externally', async () => {
-    const wrapper = mount(VTabs, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: { value: 'foo' }
     })
