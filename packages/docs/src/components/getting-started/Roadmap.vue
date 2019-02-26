@@ -44,7 +44,7 @@
               :input-value="item.value"
               :ripple="false"
               class="font-weight-light ma-0"
-              flat
+              text
             >
               <span
                 class="mr-2"

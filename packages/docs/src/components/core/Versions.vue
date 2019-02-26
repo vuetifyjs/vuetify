@@ -9,7 +9,7 @@
     <v-btn
       slot="activator"
       class="hidden-md-and-down"
-      flat
+      text
     >
       <span
         class="text-lowercase mr-1"

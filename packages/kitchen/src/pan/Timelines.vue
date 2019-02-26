@@ -36,9 +36,11 @@
             color="red lighten-2"
             :large="n % 2"
           >
-            <span slot="opposite">
-              Tus eu perfecto
-            </span>
+            <template #opposite>
+              <span>
+                Tus eu perfecto
+              </span>
+            </template>
             <v-card class="elevation-2">
               <v-card-title class="headline">
                 Lorem ipsum

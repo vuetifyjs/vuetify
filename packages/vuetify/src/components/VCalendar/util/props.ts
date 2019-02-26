@@ -33,10 +33,6 @@ export default {
     dayFormat: {
       type: Function, // VTimestampFormatter,
       default: null
-    },
-    locale: {
-      type: String,
-      default: 'en-us'
     }
   },
   intervals: {

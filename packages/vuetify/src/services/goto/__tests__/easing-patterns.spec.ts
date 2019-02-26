@@ -18,6 +18,6 @@ describe('easing-patterns.ts', () => {
     expect(easingPatterns.easeInQuint(5)).toBe(3125)
     expect(easingPatterns.easeOutQuint(5)).toBe(1025)
     expect(easingPatterns.easeInOutQuint(5)).toBe(16385)
-    expect(easingPatterns.easeInOutQuint(0.1)).toBe(0.00016000000000000007)
+    expect(easingPatterns.easeInOutQuint(0.1)).toBeCloseTo(0.00016, 5)
   })
 })
