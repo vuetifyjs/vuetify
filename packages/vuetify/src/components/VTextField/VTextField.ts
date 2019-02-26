@@ -18,7 +18,7 @@ import Ripple from '../../directives/ripple'
 // Utilities
 import { keyCodes } from '../../util/helpers'
 import { deprecate } from '../../util/console'
-import mixins, { ExtractVue } from './../../util/mixins'
+import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
 import { VNode } from 'vue/types'

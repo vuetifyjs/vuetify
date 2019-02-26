@@ -5,7 +5,7 @@ import '../../stylus/components/_textarea.styl'
 import VTextField from '../VTextField/VTextField'
 
 // Utilities
-import mixins, { ExtractVue } from './../../util/mixins'
+import mixins, { ExtractVue } from '../../util/mixins'
 import { consoleInfo } from '../../util/console'
 
 // Types

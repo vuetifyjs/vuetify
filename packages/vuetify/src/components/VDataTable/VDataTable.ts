@@ -19,7 +19,7 @@ import VRowGroup from './VRowGroup'
 import VSimpleCheckbox from '../VCheckbox/VSimpleCheckbox'
 
 // Helpers
-import { deepEqual, getObjectValueByPath, convertToUnit } from '../../util/helpers'
+import { deepEqual, getObjectValueByPath, convertToUnit, compareFn } from '../../util/helpers'
 
 function getPrefixedScopedSlots (prefix: string, scopedSlots: any) {
   return Object.keys(scopedSlots).filter(k => k.startsWith(prefix)).reduce((obj: any, k: string) => {
@@ -112,9 +112,9 @@ export default VDataIterator.extend({
       return this.customFilter(items, search)
     },
     customSortWithHeaders (items: any[], sortBy: string[], sortDesc: boolean[], locale: string) {
-      const customSorters = this.computedHeaders.reduce((obj: Record<string, Function>, header: TableHeader): any => {
-        if (header.sort) obj[header.value] = header.sort
-        return obj
+      const customSorters = this.computedHeaders.reduce<Record<string, compareFn>>((acc, header) => {
+        if (header.sort) acc[header.value] = header.sort
+        return acc
       }, {})
 
       return this.customSort(items, sortBy, sortDesc, locale, customSorters)

@@ -10,8 +10,7 @@ import Touch from '../../directives/touch'
 
 // Utilities
 import { convertToUnit } from '../../util/helpers'
-import { ExtractVue } from './../../util/mixins'
-import mixins from '../../util/mixins'
+import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
 import Vue, { VNode } from 'vue'

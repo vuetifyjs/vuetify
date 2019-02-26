@@ -16,39 +16,44 @@ import {
 } from '../util/mask'
 
 // Types
-import Vue from 'vue'
+import Vue, { PropType } from 'vue'
+
+interface options extends Vue {
+  $refs: {
+    input: HTMLInputElement
+  }
+}
 
 /* @vue/component */
-export default Vue.extend({
+export default Vue.extend<options>().extend({
   name: 'maskable',
 
   props: {
     dontFillMaskBlanks: Boolean,
-    mask: {
-      type: [Object, String],
-      default: null
-    },
+    mask: String,
     returnMaskedValue: Boolean,
-    value: { required: false }
+    value: null as any as PropType<any>
   },
 
-  data: vm => ({
-    selection: 0,
-    lazySelection: 0,
-    lazyValue: vm.value,
-    preDefined: {
-      'credit-card': '#### - #### - #### - ####',
-      'date': '##/##/####',
-      'date-with-time': '##/##/#### ##:##',
-      'phone': '(###) ### - ####',
-      'social': '###-##-####',
-      'time': '##:##',
-      'time-with-seconds': '##:##:##'
+  data () {
+    return {
+      selection: 0,
+      lazySelection: 0,
+      lazyValue: this.value,
+      preDefined: {
+        'credit-card': '#### - #### - #### - ####',
+        'date': '##/##/####',
+        'date-with-time': '##/##/#### ##:##',
+        'phone': '(###) ### - ####',
+        'social': '###-##-####',
+        'time': '##:##',
+        'time-with-seconds': '##:##:##'
+      } as Record<string, string>
     }
-  }),
+  },
 
   computed: {
-    masked () {
+    masked (): string[] {
       const preDefined = this.preDefined[this.mask]
       const mask = preDefined || this.mask || ''
 
@@ -105,7 +110,7 @@ export default Vue.extend({
   },
 
   methods: {
-    setCaretPosition (selection) {
+    setCaretPosition (selection: number) {
       this.selection = selection
       window.setTimeout(() => {
         this.$refs.input && this.$refs.input.setSelectionRange(this.selection, this.selection)
@@ -131,10 +136,10 @@ export default Vue.extend({
       // this.$emit() must occur only when all internal values are correct
       this.$emit('input', this.returnMaskedValue ? this.$refs.input.value : this.lazyValue)
     },
-    maskText (text) {
+    maskText (text: string) {
       return this.mask ? maskText(text, this.masked, this.dontFillMaskBlanks) : text
     },
-    unmaskText (text) {
+    unmaskText (text: string) {
       return this.mask && !this.returnMaskedValue ? unmaskText(text) : text
     },
     // When the input changes and is
@@ -143,7 +148,7 @@ export default Vue.extend({
     setSelectionRange () {
       this.$nextTick(this.updateRange)
     },
-    resetSelections (input) {
+    resetSelections (input: HTMLInputElement) {
       if (!input.selectionEnd) return
       this.selection = input.selectionEnd
       this.lazySelection = 0
