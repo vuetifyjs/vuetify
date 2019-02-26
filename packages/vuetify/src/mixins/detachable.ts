@@ -80,13 +80,20 @@ export default mixins<options &
   },
 
   beforeDestroy () {
-    const content = this.$refs.content
-
-    if (!content || !content.parentNode) return
-
     // IE11 Fix
     try {
-      content.parentNode.removeChild(content)
+      if (this.$refs.content.parentNode) {
+        this.$refs.content.parentNode.removeChild(this.$refs.content)
+      }
+
+      if (this.activatorNode) {
+        const activator = Array.isArray(this.activatorNode) ? this.activatorNode : [this.activatorNode]
+        activator.forEach(node => {
+          node.elm &&
+            node.elm.parentNode &&
+            node.elm.parentNode.removeChild(node.elm)
+        })
+      }
     } catch (e) { console.log(e) }
   },
 

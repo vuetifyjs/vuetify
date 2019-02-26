@@ -15,6 +15,11 @@
       "type": "section",
       "children": [
         {
+          "type": "alert",
+          "lang": "cardMediaWarning",
+          "value": "warning"
+        },
+        {
           "type": "api",
           "value": [
             "v-card",
