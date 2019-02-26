@@ -13,6 +13,7 @@ import { VNode } from 'vue'
 export default mixins(
   BaseSlideGroup,
   Themeable
+  /* @vue/component */
 ).extend({
   name: 'v-tabs-bar',
 

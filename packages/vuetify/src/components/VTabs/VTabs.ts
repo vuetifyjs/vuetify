@@ -40,6 +40,7 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
   Colorable,
   Proxyable,
   SSRBootable
+  /* @vue/component */
 ).extend({
   name: 'v-tabs',
 
