@@ -7,7 +7,7 @@ import mixins, { ExtractVue } from '../util/mixins'
 import { consoleWarn } from '../util/console'
 
 // Types
-import Vue from 'vue'
+import Vue, { PropOptions } from 'vue'
 import { VNode } from 'vue/types'
 
 interface options extends Vue {
@@ -37,7 +37,7 @@ export default mixins<options &
     attach: {
       default: false,
       validator: validateAttachTarget
-    },
+    } as PropOptions<boolean | string | Element>,
     contentClass: {
       type: String,
       default: ''
