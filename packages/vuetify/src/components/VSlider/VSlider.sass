@@ -20,9 +20,9 @@
 
   input
     cursor: default
-    opacity: 0
     padding: 0
     width: 100%
+    display: none
 
 // Elements
 .v-slider__track-container
@@ -144,6 +144,29 @@
     height: $slider-track-width
     width: 100%
 
+  .v-slider__tick
+    &:first-child .v-slider__tick-label
+      transform: translateX(0%)
+
+    +rtl()
+      &:first-child .v-slider__tick-label
+        transform: translate(100%)
+
+    &:last-child .v-slider__tick-label
+      transform: translateX(-100%)
+
+    +rtl()
+      &:last-child .v-slider__tick-label
+        transform: translateX(0%)
+
+    .v-slider__tick-label
+      top: 8px
+      transform: translateX(-50%)
+
+    +rtl()
+      .v-slider__tick-label
+        transform: translateX(50%)
+
   .v-slider__thumb-label
     // Needed for IE11 which does not
     // process translateY(calc(-20% - 12px))
@@ -154,7 +177,7 @@
       transform: rotate(-45deg)
 
 .v-slider--vertical
-  min-height: 300px
+  min-height: 150px
   margin-top: 12px
   margin-bottom: 12px
 

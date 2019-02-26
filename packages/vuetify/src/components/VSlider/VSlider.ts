@@ -93,7 +93,7 @@ export default mixins<options &
     },
     trackColor: {
       type: String,
-      default: 'accent'
+      default: 'primary lighten-3'
     },
     value: [Number, String],
     vertical: Boolean

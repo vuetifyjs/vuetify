@@ -307,6 +307,50 @@ const VTimestampWithTime = {
   timeToY: '(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number'
 }
 
+const VSlider = {
+  events: [
+    {
+      name: 'input',
+      value: 'number'
+    },
+    {
+      name: 'change',
+      value: 'number'
+    },
+    {
+      name: 'start',
+      value: 'number'
+    },
+    {
+      name: 'end',
+      value: 'number'
+    },
+    ...inputEvents
+  ].concat(validatableEvents),
+  slots: [
+    {
+      name: 'append',
+      source: 'v-input'
+    },
+    {
+      name: 'prepend',
+      source: 'v-input'
+    },
+    {
+      name: 'label',
+      source: 'v-input'
+    }
+  ],
+  scopedSlots: [
+    {
+      name: 'thumb-label',
+      props: {
+        value: 'number | string'
+      }
+    }
+  ]
+}
+
 module.exports = {
   '$vuetify': {
     functions: [
@@ -1047,48 +1091,8 @@ module.exports = {
     slots: ['default']
   },
   'v-select': VSelect,
-  'v-slider': {
-    events: [
-      {
-        name: 'input',
-        value: 'number'
-      },
-      {
-        name: 'change',
-        value: 'number'
-      },
-      {
-        name: 'start',
-        value: 'number'
-      },
-      {
-        name: 'end',
-        value: 'number'
-      },
-      ...inputEvents
-    ].concat(validatableEvents)
-  },
-  'v-range-slider': {
-    events: [
-      {
-        name: 'input',
-        value: 'array'
-      },
-      {
-        name: 'change',
-        value: 'array'
-      },
-      {
-        name: 'start',
-        value: 'array'
-      },
-      {
-        name: 'end',
-        value: 'array'
-      },
-      ...inputEvents
-    ].concat(validatableEvents)
-  },
+  'v-slider': VSlider,
+  'v-range-slider': VSlider,
   'v-sheet': {
     slots: ['default'],
     props: [
