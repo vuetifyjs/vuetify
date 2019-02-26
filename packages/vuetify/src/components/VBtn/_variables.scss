@@ -1,16 +1,16 @@
-$btn-border-radius: 4px;
-$btn-font-size: 14px;
-$btn-icon-font-size: 18px;
-$btn-icon-padding: 12px;
-$btn-outline-border-width: thin;
-$btn-rounded-border-radius: 28px;
+$btn-border-radius: 4px !default;
+$btn-font-size: 14px !default;
+$btn-icon-font-size: 18px !default;
+$btn-icon-padding: 12px !default;
+$btn-outline-border-width: thin !default;
+$btn-rounded-border-radius: 28px !default;
 $btn-sizes: (
   'x-small': 20,
   'small': 28,
   'default': 36,
   'large': 54,
   'x-large': 70
-);
-$btn-transition-duration: 0.28s;
-$btn-transition-fn: map-get($transition, 'fast-out-slow-in');
-$btn-transition: opacity 0.2s map-get($transition, 'ease-in-out');
+) !default;
+$btn-transition-duration: 0.28s !default;
+$btn-transition-fn: map-get($transition, 'fast-out-slow-in') !default;
+$btn-transition: opacity 0.2s map-get($transition, 'ease-in-out') !default;

@@ -1,4 +1,4 @@
-$icon-outlined-border-width: thin;
+$icon-outlined-border-width: thin !default;
 $icon-sizes: (
   'x-small': (
     'font-size': 10,
@@ -20,4 +20,4 @@ $icon-sizes: (
     'font-size': 18,
     'height': 66
   )
-);
+) !default;
