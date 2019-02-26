@@ -17,14 +17,15 @@ describe('VSliderGroup.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return shallowMount(VSlideGroup, {
-        ...options,
         mocks: {
           $vuetify: {
+            rtl: false,
             breakpoint: {
               width: 1920
             }
           }
-        }
+        },
+        ...options
       })
     }
   })
@@ -43,11 +44,23 @@ describe('VSliderGroup.ts', () => {
     expect(wrapper.vm.hasAppend).toBe(false)
     expect(wrapper.vm.hasPrepend).toBe(false)
 
-    wrapper.setData({ scrollOffset: 100 })
+    wrapper.setData({
+      scrollOffset: 100,
+      widths: {
+        content: 1000,
+        wrapper: 500
+      }
+    })
 
     expect(wrapper.vm.hasPrepend).toBe(true)
 
-    wrapper.setData({ scrollOffset: -100 })
+    wrapper.setData({
+      scrollOffset: -100,
+      widths: {
+        content: 1000,
+        wrapper: 500
+      }
+    })
 
     expect(wrapper.vm.hasAppend).toBe(true)
   })
@@ -126,17 +139,10 @@ describe('VSliderGroup.ts', () => {
     expect(fn).toHaveBeenCalled()
   })
 
-  it('it should scroll from affix click', () => {
+  it('it should scroll from affix click', async () => {
     const onClick = jest.fn()
     const scrollTo = jest.fn()
-    const wrapper = mount(VSlideGroup, {
-      data: () => ({
-        scrollOffset: 200,
-        widths: {
-          content: 1920,
-          wrapper: 1000
-        }
-      }),
+    const wrapper = mountFunction({
       methods: { scrollTo },
       propsData: {
         showArrows: true
@@ -147,7 +153,16 @@ describe('VSliderGroup.ts', () => {
       }
     })
 
-    wrapper.setData({ isOverflowing: true })
+    wrapper.setData({
+      isOverflowing: true,
+      scrollOffset: 200,
+      widths: {
+        content: 1000,
+        wrapper: 500
+      }
+    })
+
+    await wrapper.vm.$nextTick()
 
     const prepend = wrapper.find('.v-slide-group__prepend')
     const append = wrapper.find('.v-slide-group__append')
@@ -189,5 +204,39 @@ describe('VSliderGroup.ts', () => {
     const affixes = wrapper.findAll('.fizz')
     const foo = affixes.at(0)
     const bar = affixes.at(1)
+  })
+
+  it('should match snapshot in rtl', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        showArrows: true
+      },
+      mocks: {
+        $vuetify: {
+          rtl: true
+        }
+      }
+    })
+    wrapper.setData({
+      widths: {
+        content: 1000,
+        wrapper: 500
+      },
+      isOverflowing: true,
+      scrollOffset: 0
+    })
+
+    await wrapper.vm.$nextTick()
+
+    const html1 = wrapper.html()
+
+    expect(html1).toMatchSnapshot()
+
+    wrapper.vm.$vuetify.rtl = false
+
+    const html2 = wrapper.html()
+
+    expect(html1).not.toEqual(html2)
+    expect(html2).toMatchSnapshot()
   })
 })

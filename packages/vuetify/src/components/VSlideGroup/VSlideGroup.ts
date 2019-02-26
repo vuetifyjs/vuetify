@@ -99,10 +99,10 @@ export const BaseSlideGroup = mixins<options &
       const { content, wrapper } = this.widths
 
       // Check one scroll ahead to know the width of right-most item
-      return content > this.scrollOffset + wrapper
+      return content > Math.abs(this.scrollOffset) + wrapper
     },
     hasPrepend (): boolean {
-      return this.hasAffixes && this.scrollOffset > 0
+      return this.hasAffixes && this.scrollOffset !== 0
     },
     isMobile (): boolean {
       return this.$vuetify.breakpoint.width < this.mobileBreakPoint
@@ -142,6 +142,14 @@ export const BaseSlideGroup = mixins<options &
       }, this.$slots.default)
     },
     genIcon (location: 'prepend' | 'append'): VNode | null {
+      let icon = location
+
+      if (this.$vuetify.rtl && location === 'prepend') {
+        icon = 'append'
+      } else if (this.$vuetify.rtl && location === 'append') {
+        icon = 'prepend'
+      }
+
       const upperLocation = `${location[0].toUpperCase()}${location.slice(1)}`
       const hasAffix = (this as any)[`has${upperLocation}`]
 
@@ -154,7 +162,7 @@ export const BaseSlideGroup = mixins<options &
         props: {
           disabled: !hasAffix
         }
-      }, (this as any)[`${location}Icon`])
+      }, (this as any)[`${icon}Icon`])
     },
     genPrepend (): VNode | null {
       if (!this.hasAffixes) return null
@@ -199,10 +207,12 @@ export const BaseSlideGroup = mixins<options &
         return Math.max(this.scrollOffset - clientWidth, 0)
       }
 
-      return Math.min(
+      const min = Math.min(
         this.scrollOffset + clientWidth,
         this.$refs.content.clientWidth - clientWidth
       )
+
+      return this.$vuetify.rtl ? -min : min
     },
     onAffixClick (location: 'prepend' | 'append') {
       this.$emit(`click:${location}`)
