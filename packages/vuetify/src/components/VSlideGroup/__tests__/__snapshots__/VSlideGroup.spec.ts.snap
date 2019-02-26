@@ -3,9 +3,9 @@
 exports[`VSliderGroup.ts should match snapshot in rtl 1`] = `
 
 <div class="v-item-group v-slide-group theme--light">
-  <div class="v-slide-group__prepend v-slide-group__prepend--disabled">
+  <div class="v-slide-group__prepend">
     <fade-transition-stub origin="top center 0">
-      <vuecomponent-stub disabled="true">
+      <vuecomponent-stub>
         $vuetify.icons.next
       </vuecomponent-stub>
     </fade-transition-stub>
@@ -28,9 +28,9 @@ exports[`VSliderGroup.ts should match snapshot in rtl 1`] = `
 exports[`VSliderGroup.ts should match snapshot in rtl 2`] = `
 
 <div class="v-item-group v-slide-group theme--light">
-  <div class="v-slide-group__prepend v-slide-group__prepend--disabled">
+  <div class="v-slide-group__prepend">
     <fade-transition-stub origin="top center 0">
-      <vuecomponent-stub disabled="true">
+      <vuecomponent-stub>
         $vuetify.icons.prev
       </vuecomponent-stub>
     </fade-transition-stub>

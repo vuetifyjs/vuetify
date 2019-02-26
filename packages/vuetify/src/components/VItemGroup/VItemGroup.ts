@@ -52,6 +52,13 @@ export const BaseItemGroup = mixins(
         ...this.themeClasses
       }
     },
+    selectedItem (): GroupableInstance | undefined {
+      if (this.multiple) return undefined
+
+      return this.items.find((item, index) => {
+        return this.toggleMethod(this.getValue(item, index))
+      })
+    },
     selectedItems (): GroupableInstance[] {
       return this.items.filter((item, index) => {
         return this.toggleMethod(this.getValue(item, index))

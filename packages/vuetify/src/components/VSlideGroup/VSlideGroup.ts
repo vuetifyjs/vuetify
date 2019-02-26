@@ -110,10 +110,14 @@ export const BaseSlideGroup = mixins<options &
   },
 
   watch: {
+    internalValue: 'setWidths',
+    // When overflow changes, the arrows alter
+    // the widths of the content and wrapper
+    // and need to be recalculated
+    isOverflowing: 'setWidths',
     scrollOffset (val) {
       this.$refs.content.style.transform = `translateX(${-val}px)`
-    },
-    widths: 'setOverflow'
+    }
   },
 
   methods: {
@@ -252,6 +256,30 @@ export const BaseSlideGroup = mixins<options &
     overflowCheck (e: TouchEvent, fn: (e: TouchEvent) => void) {
       this.isOverflowing && fn(e)
     },
+    scrollIntoView () {
+      /* istanbul ignore next */
+      if (!this.selectedItem) return
+      if (!this.isOverflowing) {
+        (this.scrollOffset = 0)
+        return
+      }
+
+      const totalWidth = this.widths.wrapper + this.scrollOffset
+      const { clientWidth, offsetLeft } = this.selectedItem.$el as HTMLElement
+      const itemOffset = clientWidth + offsetLeft
+      let additionalOffset = clientWidth * 0.3
+
+      if (this.selectedItem === this.items[this.items.length - 1]) {
+        additionalOffset = 0 // don't add an offset if selecting the last tab
+      }
+
+      /* istanbul ignore else */
+      if (offsetLeft < this.scrollOffset) {
+        this.scrollOffset = Math.max(offsetLeft - additionalOffset, 0)
+      } else if (totalWidth < itemOffset) {
+        this.scrollOffset -= totalWidth - itemOffset - additionalOffset
+      }
+    },
     scrollTo /* istanbul ignore next */ (location: 'prepend' | 'append') {
       this.scrollOffset = this.newOffset(location)
     },
@@ -259,12 +287,17 @@ export const BaseSlideGroup = mixins<options &
       this.isOverflowing = this.widths.wrapper < this.widths.content
     },
     setWidths () {
-      const { content, wrapper } = this.$refs
+      window.requestAnimationFrame(() => {
+        const { content, wrapper } = this.$refs
 
-      this.widths = {
-        content: content ? content.clientWidth : 0,
-        wrapper: wrapper ? wrapper.clientWidth : 0
-      }
+        this.widths = {
+          content: content ? content.clientWidth : 0,
+          wrapper: wrapper ? wrapper.clientWidth : 0
+        }
+
+        this.setOverflow()
+        this.scrollIntoView()
+      })
     }
   },
 

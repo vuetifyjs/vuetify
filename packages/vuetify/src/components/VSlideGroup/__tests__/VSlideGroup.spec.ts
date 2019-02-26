@@ -13,10 +13,12 @@ import {
 describe('VSliderGroup.ts', () => {
   type Instance = ExtractVue<typeof VSlideGroup>
   let mountFunction: (options?: object) => Wrapper<Instance>
+  (global as any).requestAnimationFrame = cb => cb()
 
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return shallowMount(VSlideGroup, {
+        methods: { setWidths: jest.fn() },
         mocks: {
           $vuetify: {
             rtl: false,
@@ -142,8 +144,9 @@ describe('VSliderGroup.ts', () => {
   it('it should scroll from affix click', async () => {
     const onClick = jest.fn()
     const scrollTo = jest.fn()
+    const setWidths = jest.fn()
     const wrapper = mountFunction({
-      methods: { scrollTo },
+      methods: { scrollTo, setWidths },
       propsData: {
         showArrows: true
       },
@@ -175,13 +178,11 @@ describe('VSliderGroup.ts', () => {
 
   it('should accept scoped slots', () => {
     const wrapper = mount(VSlideGroup, {
-      data: () => ({
-        scrollOffset: 200,
-        widths: {
-          content: 1920,
-          wrapper: 1000
-        }
-      }),
+      computed: {
+        hasAffixes: () => true,
+        hasAppend: () => true,
+        hasPrepend: () => true
+      },
       propsData: {
         showArrows: true
       },
@@ -201,13 +202,16 @@ describe('VSliderGroup.ts', () => {
 
     wrapper.setData({ isOverflowing: true })
 
-    const affixes = wrapper.findAll('.fizz')
-    const foo = affixes.at(0)
-    const bar = affixes.at(1)
+    expect(wrapper.findAll('.fizz')).toHaveLength(2)
   })
 
   it('should match snapshot in rtl', async () => {
     const wrapper = mountFunction({
+      computed: {
+        hasAffixes: () => true,
+        hasAppend: () => true,
+        hasPrepend: () => true
+      },
       propsData: {
         showArrows: true
       },
@@ -217,16 +221,6 @@ describe('VSliderGroup.ts', () => {
         }
       }
     })
-    wrapper.setData({
-      widths: {
-        content: 1000,
-        wrapper: 500
-      },
-      isOverflowing: true,
-      scrollOffset: 0
-    })
-
-    await wrapper.vm.$nextTick()
 
     const html1 = wrapper.html()
 
