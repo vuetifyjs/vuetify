@@ -82,7 +82,10 @@ export default mixins<options &
   beforeDestroy () {
     // IE11 Fix
     try {
-      if (this.$refs.content.parentNode) {
+      if (
+        this.$refs.content &&
+        this.$refs.content.parentNode
+      ) {
         this.$refs.content.parentNode.removeChild(this.$refs.content)
       }
 
