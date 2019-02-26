@@ -1,5 +1,6 @@
 // Imports
 @import '../../styles/styles.sass'
+@import './_variables.sass'
 
 // first function, should move to global functions
 // does a deep map-get
@@ -36,9 +37,9 @@
     border-width: thin
     box-shadow: none
     min-height: 0
-    min-width: 48px
-    padding: 0 12px
-    height: 48px
+    min-width: $btn-toggle-btn-width
+    padding: $btn-toggle-btn-padding
+    height: $btn-toggle-btn-height
 
     &:first-child
       border-top-left-radius: inherit
@@ -53,4 +54,4 @@
 
 // Modifiers
 .v-btn-toggle--rounded
-  border-radius: 24px
+  border-radius: $btn-toggle-round-radius
