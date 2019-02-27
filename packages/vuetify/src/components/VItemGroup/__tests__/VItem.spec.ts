@@ -16,7 +16,8 @@ import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
 const itemWarning = '[Vuetify] The v-item component must be used inside a v-item-group'
 
 describe('VItem', () => {
-  let mountFunction: (options?: object) => Wrapper<Vue>
+  type Instance = ExtractVue<typeof VItem>
+  let mountFunction: (options?: object) => Wrapper<Instance>
   let localVue: typeof Vue
 
   beforeEach(() => {
