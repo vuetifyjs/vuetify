@@ -8,6 +8,7 @@ import mixins, { ExtractVue } from '../util/mixins'
 
 // Types
 import Vue, { VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
 
 /* eslint-disable object-property-newline */
 const dimensions = {
@@ -28,14 +29,14 @@ const dimensions = {
 }
 
 interface options extends Vue {
-  attach: Boolean
+  attach: boolean
   activatedBy: EventTarget | null
-  disabled: Boolean
+  disabled: boolean
   hasJustFocused: boolean
-  inputActivator: Boolean
+  inputActivator: boolean
   hasWindow: boolean
-  offsetX: Number
-  offsetY: Number
+  offsetX: number
+  offsetY: number
   $refs: {
     content: HTMLElement
     activator: HTMLElement
@@ -75,7 +76,7 @@ export default mixins<options &
       validator: (val: string | object) => {
         return ['string', 'object'].includes(typeof val)
       }
-    },
+    } as PropValidator<string | HTMLElement>,
     allowOverflow: Boolean,
     light: Boolean,
     dark: Boolean,
@@ -122,7 +123,7 @@ export default mixins<options &
   data: () => ({
     absoluteX: 0,
     absoluteY: 0,
-    dimensions: Object.assign({}, dimensions),
+    dimensions: { ...dimensions },
     isContentActive: false,
     pageWidth: 0,
     pageYOffset: 0,
@@ -165,11 +166,11 @@ export default mixins<options &
 
       return top
     },
-    hasActivator (): string | boolean | object {
-      return !!this.$slots.activator || !!this.$scopedSlots.activator || this.activator || this.inputActivator
+    hasActivator (): boolean {
+      return !!this.$slots.activator || !!this.$scopedSlots.activator || !!this.activator || !!this.inputActivator
     },
     isAttached (): boolean {
-      return Boolean(this.attach !== false)
+      return this.attach !== false
     }
   },
 
@@ -276,7 +277,7 @@ export default mixins<options &
       }
     },
     deactivate () {},
-    getActivator (e: Event | void): any {
+    getActivator (e?: Event): HTMLElement | null {
       if (this.inputActivator) {
         return this.$el.querySelector('.v-input__slot')
       }
@@ -289,24 +290,25 @@ export default mixins<options &
 
       if (this.$refs.activator) {
         return this.$refs.activator.children.length > 0
-          ? this.$refs.activator.children[0]
-          : this.$refs.activator
+          ? this.$refs.activator.children[0] as HTMLElement
+          : this.$refs.activator as HTMLElement
       }
 
       if (e) {
         this.activatedBy = e.currentTarget || e.target
-        return this.activatedBy
+        return this.activatedBy as HTMLElement
       }
 
-      if (this.activatedBy) return this.activatedBy
+      if (this.activatedBy) return this.activatedBy as HTMLElement
 
       if (this.activatorNode) {
         const activator = Array.isArray(this.activatorNode) ? this.activatorNode[0] : this.activatorNode
         const el = activator && activator.elm
-        if (el) return el
+        if (el) return el as HTMLElement
       }
 
       consoleError('No activator found')
+      return null
     },
     getInnerHeight () {
       if (!this.hasWindow) return 0
@@ -356,7 +358,10 @@ export default mixins<options &
       requestAnimationFrame(() => {
         const el = this.$refs.content
 
-        if (!el || this.isShown(el)) return cb()
+        if (!el || this.isShown(el)) {
+          cb()
+          return
+        }
 
         el.style.display = 'inline-block'
         cb()
@@ -377,13 +382,15 @@ export default mixins<options &
       this.checkForPageYOffset()
       this.pageWidth = document.documentElement.clientWidth
 
-      const dimensions = {} as any
+      const dimensions: any = {}
 
       // Activator should already be shown
       if (!this.hasActivator || this.absolute) {
         dimensions.activator = this.absolutePosition()
       } else {
         const activator = this.getActivator()
+        if (!activator) return
+
         dimensions.activator = this.measure(activator)
         dimensions.activator.offsetLeft = activator.offsetLeft
         if (this.isAttached) {
