@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import { test } from '@/test'
 import VItem from '@/components/VItemGroup/VItem'
 

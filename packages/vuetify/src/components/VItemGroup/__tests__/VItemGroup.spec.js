@@ -46,13 +46,13 @@ test('VItemGroup.ts', ({ mount }) => {
       }
     })
 
-    expect(wrapper.vm.items.length).toBe(1)
+    expect(wrapper.vm.items).toHaveLength(1)
 
     const item = wrapper.first(Mock)
 
     item.destroy()
 
-    expect(wrapper.vm.items.length).toBe(0)
+    expect(wrapper.vm.items).toHaveLength(0)
   })
 
   it('should register and activate elements', () => {
@@ -61,7 +61,7 @@ test('VItemGroup.ts', ({ mount }) => {
       slots: { default: [Mock] }
     })
 
-    expect(wrapper.vm.items.length).toBe(1)
+    expect(wrapper.vm.items).toHaveLength(1)
 
     // Avoriaz doesn't like
     // components without
@@ -87,20 +87,20 @@ test('VItemGroup.ts', ({ mount }) => {
 
     wrapper.vm.$on('change', change)
 
-    expect(wrapper.vm.items.length).toBe(2)
+    expect(wrapper.vm.items).toHaveLength(2)
 
     const [ child1, child2 ] = wrapper.vm.$el.children
 
     child1.click()
-    expect(change).toBeCalledWith(0)
+    expect(change).toHaveBeenCalledWith(0)
     expect(wrapper.vm.internalValue).toBe(0)
 
     child2.click()
-    expect(change).toBeCalledWith(1)
+    expect(change).toHaveBeenCalledWith(1)
     expect(wrapper.vm.internalValue).toBe(1)
 
     child2.click()
-    expect(wrapper.vm.internalValue).toBe(undefined)
+    expect(wrapper.vm.internalValue).toBeUndefined()
 
     wrapper.setProps({
       value: [],
@@ -108,13 +108,13 @@ test('VItemGroup.ts', ({ mount }) => {
     })
 
     child1.click()
-    expect(change).toBeCalledWith([0])
+    expect(change).toHaveBeenCalledWith([0])
 
     child2.click()
-    expect(change).toBeCalledWith([0, 1])
+    expect(change).toHaveBeenCalledWith([0, 1])
 
     child1.click()
-    expect(change).toBeCalledWith([1])
+    expect(change).toHaveBeenCalledWith([1])
   })
 
   it('should have a conditional method for toggling items', () => {
@@ -152,7 +152,7 @@ test('VItemGroup.ts', ({ mount }) => {
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.selectedItems.length).toBe(1)
+    expect(wrapper.vm.selectedItems).toHaveLength(1)
     expect(wrapper.vm.internalValue).toBe(0)
 
     wrapper.setProps({ multiple: true })
@@ -160,7 +160,7 @@ test('VItemGroup.ts', ({ mount }) => {
     // Manually update selected items
     wrapper.vm.updateItemsState()
 
-    expect(wrapper.vm.selectedItems.length).toBe(1)
+    expect(wrapper.vm.selectedItems).toHaveLength(1)
     expect(wrapper.vm.internalValue).toEqual([0])
   })
 
@@ -171,7 +171,7 @@ test('VItemGroup.ts', ({ mount }) => {
     wrapper.vm.updateSingle('foo')
     expect(wrapper.vm.internalValue).toBe('foo')
     wrapper.vm.updateSingle('foo')
-    expect(wrapper.vm.internalValue).toBe(undefined)
+    expect(wrapper.vm.internalValue).toBeUndefined()
 
     wrapper.setProps({ mandatory: true })
 
@@ -235,23 +235,23 @@ test('VItemGroup.ts', ({ mount }) => {
 
     fourth.destroy()
 
-    expect(change).toBeCalledWith([])
+    expect(change).toHaveBeenCalledWith([])
 
     wrapper.setProps({ mandatory: true, value: [2] })
 
     third.destroy()
 
-    expect(change).toBeCalledWith([1])
+    expect(change).toHaveBeenCalledWith([1])
 
     wrapper.setProps({ multiple: false, value: 1 })
 
     second.destroy()
 
-    expect(change).toBeCalledWith(0)
+    expect(change).toHaveBeenCalledWith(0)
 
     first.destroy()
 
-    expect(change).toBeCalledWith(undefined)
+    expect(change).toHaveBeenCalledWith(undefined)
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/5384
@@ -271,6 +271,6 @@ test('VItemGroup.ts', ({ mount }) => {
 
     wrapper.destroy()
 
-    expect(change).not.toBeCalled()
+    expect(change).not.toHaveBeenCalled()
   })
 })
