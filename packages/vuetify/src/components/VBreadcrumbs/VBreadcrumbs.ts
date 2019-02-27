@@ -49,36 +49,9 @@ export default mixins(
   mounted () {
     if (this.justifyCenter) deprecate('justify-center', 'class="justify-center"', this)
     if (this.justifyEnd) deprecate('justify-end', 'class="justify-end"', this)
-    if (this.$slots.default) deprecate('default slot', ':items and scoped slot "item"', this)
   },
 
   methods: {
-    /* @deprecated */
-    genChildren /* istanbul ignore next */ () {
-      if (!this.$slots.default) return undefined
-
-      const children = []
-
-      let createDividers = false
-      for (let i = 0; i < this.$slots.default.length; i++) {
-        const elm = this.$slots.default[i]
-
-        if (
-          !elm.componentOptions ||
-          elm.componentOptions.Ctor.options.name !== 'v-breadcrumbs-item'
-        ) {
-          children.push(elm)
-        } else {
-          if (createDividers) {
-            children.push(this.genDivider())
-          }
-          children.push(elm)
-          createDividers = true
-        }
-      }
-
-      return children
-    },
     genDivider () {
       return this.$createElement(VBreadcrumbsDivider, this.$slots.divider ? this.$slots.divider : this.divider)
     },
@@ -100,7 +73,7 @@ export default mixins(
   },
 
   render (h): VNode {
-    const children = this.$slots.default ? this.genChildren() : this.genItems()
+    const children = this.$slots.default || this.genItems()
 
     return h('ul', {
       staticClass: 'v-breadcrumbs',
