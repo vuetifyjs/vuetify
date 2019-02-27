@@ -1,12 +1,16 @@
-import Vue from 'vue'
-
+// Mixins
 import Positionable from './positionable'
-
 import Stackable from './stackable'
+
+// Utilities
 import { consoleError } from '../util/console'
+import mixins, { ExtractVue } from '../util/mixins'
+
+// Types
+import Vue, { VNode } from 'vue'
 
 /* eslint-disable object-property-newline */
-const dimensions = {
+const dimensions: any = {
   activator: {
     top: 0, left: 0,
     bottom: 0, right: 0,
@@ -21,6 +25,21 @@ const dimensions = {
   },
   hasWindow: false
 }
+
+interface options extends Vue {
+  attach: Boolean
+  activatedBy: EventTarget | null
+  disabled: Boolean
+  hasJustFocused: boolean
+  hasWindow: boolean
+  offsetX: Number
+  offsetY: Number
+  $refs: {
+    content: HTMLElement
+    activator: HTMLElement
+  }
+}
+
 /* eslint-enable object-property-newline */
 
 /**
@@ -34,18 +53,24 @@ const dimensions = {
  * As well as be manually positioned
  */
 /* @vue/component */
-export default Vue.extend({
+export default mixins<options &
+/* eslint-disable indent */
+  ExtractVue<[
+    typeof Stackable,
+    typeof Positionable
+  ]>
+/* eslint-enable indent */
+>(
+  Stackable,
+  Positionable
+  /* @vue/component */
+).extend({
   name: 'menuable',
-
-  mixins: [
-    Positionable,
-    Stackable
-  ],
 
   props: {
     activator: {
       default: null,
-      validator: val => {
+      validator: (val: string | object) => {
         return ['string', 'object'].includes(typeof val)
       }
     },
@@ -101,7 +126,8 @@ export default Vue.extend({
     pageWidth: 0,
     pageYOffset: 0,
     stackClass: 'v-menu__content--active',
-    stackMinZIndex: 6
+    stackMinZIndex: 6,
+    activatorNode: null as null | VNode | VNode[]
   }),
 
   computed: {
@@ -113,9 +139,9 @@ export default Vue.extend({
       let left = 0
       left += this.left ? activatorLeft - (minWidth - a.width) : activatorLeft
       if (this.offsetX) {
-        const maxWidth = isNaN(this.maxWidth)
+        const maxWidth = isNaN(Number(this.maxWidth))
           ? a.width
-          : Math.min(a.width, this.maxWidth)
+          : Math.min(a.width, Number(this.maxWidth))
 
         left += this.left ? -maxWidth : a.width
       }
@@ -138,11 +164,11 @@ export default Vue.extend({
 
       return top
     },
-    hasActivator () {
+    hasActivator (): string | boolean | object {
       return !!this.$slots.activator || !!this.$scopedSlots.activator || this.activator || this.inputActivator
     },
-    isAttached () {
-      return this.attach !== false
+    isAttached (): boolean {
+      return Boolean(this.attach !== false)
     }
   },
 
@@ -178,7 +204,7 @@ export default Vue.extend({
       }
     },
     activate () {},
-    calcLeft (menuWidth) {
+    calcLeft (menuWidth: number) {
       return `${this.isAttached
         ? this.computedLeft
         : this.calcXOverflow(this.computedLeft, menuWidth)
@@ -190,7 +216,7 @@ export default Vue.extend({
         : this.calcYOverflow(this.computedTop)
       }px`
     },
-    calcXOverflow (left, menuWidth) {
+    calcXOverflow (left: number, menuWidth: number) {
       const xOverflow = left + menuWidth - this.pageWidth + 12
 
       if ((!this.left || this.right) && xOverflow > 0) {
@@ -201,7 +227,7 @@ export default Vue.extend({
 
       return left + this.getOffsetLeft()
     },
-    calcYOverflow (top) {
+    calcYOverflow (top: number) {
       const documentHeight = this.getInnerHeight()
       const toTop = this.pageYOffset + documentHeight
       const activator = this.dimensions.activator
@@ -249,7 +275,7 @@ export default Vue.extend({
       }
     },
     deactivate () {},
-    getActivator (e) {
+    getActivator (e: Event | void): any {
       if (this.inputActivator) {
         return this.$el.querySelector('.v-input__slot')
       }
@@ -299,7 +325,7 @@ export default Vue.extend({
       return window.pageYOffset ||
         document.documentElement.scrollTop
     },
-    getRoundedBoundedClientRect (el) {
+    getRoundedBoundedClientRect (el: Element): any {
       const rect = el.getBoundingClientRect()
       return {
         top: Math.round(rect.top),
@@ -310,14 +336,14 @@ export default Vue.extend({
         height: Math.round(rect.height)
       }
     },
-    measure (el) {
+    measure (el: HTMLElement) {
       if (!el || !this.hasWindow) return null
 
       const rect = this.getRoundedBoundedClientRect(el)
 
       // Account for activator margin
       if (this.isAttached) {
-        const style = window.getComputedStyle(el)
+        const style = window.getComputedStyle(el) as any
 
         rect.left = parseInt(style.marginLeft)
         rect.top = parseInt(style.marginTop)
@@ -325,7 +351,7 @@ export default Vue.extend({
 
       return rect
     },
-    sneakPeek (cb) {
+    sneakPeek (cb: Function) {
       requestAnimationFrame(() => {
         const el = this.$refs.content
 
@@ -342,7 +368,7 @@ export default Vue.extend({
         resolve()
       }))
     },
-    isShown (el) {
+    isShown (el: HTMLElement) {
       return el.style.display !== 'none'
     },
     updateDimensions () {
@@ -350,7 +376,7 @@ export default Vue.extend({
       this.checkForPageYOffset()
       this.pageWidth = document.documentElement.clientWidth
 
-      const dimensions = {}
+      const dimensions = {} as any
 
       // Activator should already be shown
       if (!this.hasActivator || this.absolute) {
