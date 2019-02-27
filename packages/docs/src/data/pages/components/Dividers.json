@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "mdLink": "https://material.io/design/components/dividers.html",
   "children": [
     {
       "type": "section",
