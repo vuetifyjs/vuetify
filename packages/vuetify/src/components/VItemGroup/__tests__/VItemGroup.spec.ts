@@ -313,9 +313,9 @@ describe('VItemGroup', () => {
       }
     })
 
-    const items = wrapper.find(Mock)
-    const item2 = items[1]
-    const item3 = items[2]
+    const items = wrapper.findAll(Mock)
+    const item2 = items.at(1)
+    const item3 = items.at(2)
 
     item2.destroy()
 
