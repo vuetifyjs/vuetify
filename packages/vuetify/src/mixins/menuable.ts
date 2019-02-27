@@ -10,12 +10,13 @@ import mixins, { ExtractVue } from '../util/mixins'
 import Vue, { VNode } from 'vue'
 
 /* eslint-disable object-property-newline */
-const dimensions: any = {
+const dimensions = {
   activator: {
     top: 0, left: 0,
     bottom: 0, right: 0,
     width: 0, height: 0,
-    offsetTop: 0, scrollHeight: 0
+    offsetTop: 0, scrollHeight: 0,
+    offsetLeft: 0
   },
   content: {
     top: 0, left: 0,
@@ -325,7 +326,7 @@ export default mixins<options &
       return window.pageYOffset ||
         document.documentElement.scrollTop
     },
-    getRoundedBoundedClientRect (el: Element): Record<string, number> {
+    getRoundedBoundedClientRect (el: Element) {
       const rect = el.getBoundingClientRect()
       return {
         top: Math.round(rect.top),
