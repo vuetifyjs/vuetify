@@ -71,9 +71,9 @@ describe('VItem', () => {
 
     const wrapper = mount(Mock)
 
-    expect(wrapper.html()).toMatchSnapshot();
+    expect(wrapper.html()).toMatchSnapshot()
 
-    (wrapper.vm.$children[0] as any).isActive = true
+    wrapper.vm.$children[0].isActive = true
 
     await wrapper.vm.$nextTick()
 
