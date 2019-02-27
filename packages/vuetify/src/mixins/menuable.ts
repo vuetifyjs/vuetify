@@ -325,7 +325,7 @@ export default mixins<options &
       return window.pageYOffset ||
         document.documentElement.scrollTop
     },
-    getRoundedBoundedClientRect (el: Element): any {
+    getRoundedBoundedClientRect (el: Element): Record<string, number> {
       const rect = el.getBoundingClientRect()
       return {
         top: Math.round(rect.top),
@@ -343,10 +343,10 @@ export default mixins<options &
 
       // Account for activator margin
       if (this.isAttached) {
-        const style = window.getComputedStyle(el) as any
+        const style = window.getComputedStyle(el) as CSSStyleDeclaration
 
-        rect.left = parseInt(style.marginLeft)
-        rect.top = parseInt(style.marginTop)
+        rect.left = parseInt(style.marginLeft as string)
+        rect.top = parseInt(style.marginTop as string)
       }
 
       return rect
@@ -363,7 +363,7 @@ export default mixins<options &
       })
     },
     startTransition () {
-      return new Promise(resolve => requestAnimationFrame(() => {
+      return new Promise<void>(resolve => requestAnimationFrame(() => {
         this.isContentActive = this.hasJustFocused = this.isActive
         resolve()
       }))
