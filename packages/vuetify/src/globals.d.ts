@@ -13,6 +13,7 @@ import {
   ThisTypedComponentOptionsWithRecordProps
 } from 'vue/types/options'
 import { TouchStoredHandlers } from './directives/touch'
+import ResizeSensor from 'css-element-queries/src/ResizeSensor'
 
 declare global {
   interface Window {
@@ -29,10 +30,7 @@ declare global {
 
   interface HTMLElement {
     _clickOutside?: EventListenerOrEventListenerObject
-    _onResize?: {
-      callback: () => void
-      options?: boolean | AddEventListenerOptions
-    }
+    _resizeSensor?: ResizeSensor
     _ripple?: {
       enabled?: boolean
       centered?: boolean

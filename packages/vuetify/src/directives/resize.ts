@@ -1,4 +1,5 @@
 import { VNodeDirective } from 'vue/types/vnode'
+import ResizeSensor from 'css-element-queries/src/ResizeSensor'
 
 interface ResizeVNodeDirective extends VNodeDirective {
   value?: () => void
@@ -7,13 +8,8 @@ interface ResizeVNodeDirective extends VNodeDirective {
 
 function inserted (el: HTMLElement, binding: ResizeVNodeDirective) {
   const callback = binding.value!
-  const options = binding.options || { passive: true }
 
-  window.addEventListener('resize', callback, options)
-  el._onResize = {
-    callback,
-    options
-  }
+  el._resizeSensor = new ResizeSensor(el, callback)
 
   if (!binding.modifiers || !binding.modifiers.quiet) {
     callback()
@@ -21,11 +17,9 @@ function inserted (el: HTMLElement, binding: ResizeVNodeDirective) {
 }
 
 function unbind (el: HTMLElement) {
-  if (!el._onResize) return
+  if (!el._resizeSensor) return
 
-  const { callback, options } = el._onResize
-  window.removeEventListener('resize', callback, options)
-  delete el._onResize
+  delete el._resizeSensor
 }
 
 const resize = {
