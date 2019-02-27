@@ -13,7 +13,7 @@ import { consoleWarn } from '../../util/console'
 // Types
 import { VNode } from 'vue/types'
 
-export type GroupableInstance = InstanceType<typeof Groupable> & { value?: any }
+export type GroupableInstance = InstanceType<typeof Groupable> & { to?: any, value?: any }
 
 export const BaseItemGroup = mixins(
   Proxyable,

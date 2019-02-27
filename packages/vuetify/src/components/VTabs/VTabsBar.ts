@@ -33,6 +33,38 @@ export default mixins(
     }
   },
 
+  watch: {
+    items () {
+      this.$nextTick(() => this.$emit('call:slider'))
+    },
+    $route: 'onRouteChange'
+  },
+
+  methods: {
+    onRouteChange (val: any, oldVal: any) {
+      /* istanbul ignore next */
+      if (this.mandatory) return
+
+      const newPath = val.path
+      const oldPath = oldVal.path
+
+      let hasNew = false
+      let hasOld = false
+
+      for (const item of this.items) {
+        if (item.to === newPath) hasNew = true
+        else if (item.to === oldPath) hasOld = true
+
+        if (hasNew && hasOld) break
+      }
+
+      // If we have an old item and not a new one
+      // it's assumed that the user navigated to
+      // a path that is not present in the items
+      if (!hasNew && hasOld) this.internalValue = undefined
+    }
+  },
+
   render (h): VNode {
     const render = BaseSlideGroup.options.render.call(this, h)
 

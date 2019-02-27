@@ -21,7 +21,6 @@ import mixins from '../../util/mixins'
 // Types
 import Vue from 'vue'
 import { VNode } from 'vue/types'
-import { GroupableInstance } from '../VItemGroup/VItemGroup'
 
 interface options extends Vue {
   $refs: {
@@ -75,6 +74,7 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
       type: String,
       default: '$vuetify.icons.next'
     },
+    optional: Boolean,
     prevIcon: {
       type: String,
       default: '$vuetify.icons.prev'
@@ -86,7 +86,6 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
 
   data () {
     return {
-      items: [] as GroupableInstance[],
       resizeTimeout: 0,
       sliderWidth: null as number | null,
       sliderLeft: null as number | null,
@@ -120,7 +119,6 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
     fixedTabs: 'callSlider',
     internalLazyValue: 'callSlider',
     right: 'callSlider',
-    items: 'callSlider',
     '$vuetify.application.left': 'onResize',
     '$vuetify.application.right': 'onResize'
   },
@@ -131,7 +129,10 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
         this.hideSlider ||
         !this.$refs.items ||
         !this.$refs.items.selectedItems.length
-      ) return false
+      ) {
+        this.sliderWidth = 0
+        return false
+      }
 
       this.$nextTick(() => {
         // Give screen time to paint
@@ -166,19 +167,15 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
           light: this.light,
           // TODO: deprecate name
           prependIcon: this.prevIcon,
-          mandatory: true,
+          mandatory: !this.optional,
           mobileBreakPoint: this.mobileBreakPoint,
           showArrows: this.showArrows,
           value: this.internalValue
         },
         on: {
+          'call:slider': this.callSlider,
           change: (val: any) => {
             this.internalValue = val
-          },
-          'hook:mounted': () => {
-            // We need this to watch for
-            // changes in item length
-            this.items = this.$refs.items.items
           }
         },
         ref: 'items'

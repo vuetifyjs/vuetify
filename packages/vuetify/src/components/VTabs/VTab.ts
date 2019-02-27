@@ -61,6 +61,10 @@ export default mixins(
     $route: 'onRouteChange'
   },
 
+  mounted () {
+    this.onRouteChange()
+  },
+
   methods: {
     click (e: Event): void {
       // If user provides an
