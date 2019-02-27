@@ -9,7 +9,6 @@ import VTabsSlider from './VTabsSlider'
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Proxyable from '../../mixins/proxyable'
-import SSRBootable from '../../mixins/ssr-bootable'
 
 // Directives
 import Resize from '../../directives/resize'
@@ -32,14 +31,12 @@ interface options extends Vue {
 
 const baseOptions = mixins(
   Colorable,
-  Proxyable,
-  SSRBootable
+  Proxyable
 )
 
 export default mixins<options & ExtractVue<typeof baseOptions>>(
   Colorable,
-  Proxyable,
-  SSRBootable
+  Proxyable
   /* @vue/component */
 ).extend({
   name: 'v-tabs',
@@ -126,12 +123,6 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
     items: 'callSlider',
     '$vuetify.application.left': 'onResize',
     '$vuetify.application.right': 'onResize'
-  },
-
-  mounted () {
-    this.$nextTick(() => {
-      window.setTimeout(this.callSlider, 50)
-    })
   },
 
   methods: {

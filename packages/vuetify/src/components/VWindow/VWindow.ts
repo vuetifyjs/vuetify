@@ -80,7 +80,7 @@ export default BaseItemGroup.extend({
   },
 
   mounted () {
-    this.$nextTick(() => (this.isBooted = true))
+    window.requestAnimationFrame(() => (this.isBooted = true))
   },
 
   methods: {
