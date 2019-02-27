@@ -6,16 +6,29 @@ import Themeable from '../../mixins/themeable'
 // Utilities
 import { getObjectValueByPath } from '../../util/helpers'
 import mixins from '../../util/mixins'
+import { ExtractVue } from './../../util/mixins'
 
 // Types
+import Vue from 'vue'
 import { VNode } from 'vue/types'
 
-export default mixins(
+interface options extends Vue {
+  $el: HTMLElement
+}
+
+const baseMixins = mixins(
   Routable,
   // Must be after routable
   // to overwrite activeClass
   GroupableFactory('tabsBar'),
   Themeable
+)
+
+interface options extends ExtractVue<typeof baseMixins> {
+  $el: HTMLElement
+}
+
+export default baseMixins.extend<options>().extend(
   /* @vue/component */
 ).extend({
   name: 'v-tab',
@@ -66,13 +79,15 @@ export default mixins(
   },
 
   methods: {
-    click (e: Event): void {
+    click (e: KeyboardEvent | MouseEvent): void {
       // If user provides an
       // actual link, do not
       // prevent default
       if (this.href &&
         this.href.indexOf('#') > -1
       ) e.preventDefault()
+
+      if (e.detail) this.$el.blur()
 
       this.$emit('click', e)
 
