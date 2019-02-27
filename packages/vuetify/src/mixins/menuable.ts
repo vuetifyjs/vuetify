@@ -346,7 +346,7 @@ export default mixins<options &
 
       // Account for activator margin
       if (this.isAttached) {
-        const style = window.getComputedStyle(el) as CSSStyleDeclaration
+        const style = window.getComputedStyle(el)
 
         rect.left = parseInt(style.marginLeft!)
         rect.top = parseInt(style.marginTop!)
