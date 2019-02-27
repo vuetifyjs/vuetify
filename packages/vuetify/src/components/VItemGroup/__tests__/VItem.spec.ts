@@ -1,12 +1,40 @@
+// Libraries
 import Vue from 'vue'
-import { test } from '@/test'
-import VItem from '@/components/VItemGroup/VItem'
+
+// Components
+import VItem from '../VItem'
+
+// Utilities
+import {
+  createLocalVue,
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+
+import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
 
 const itemWarning = '[Vuetify] The v-item component must be used inside a v-item-group'
 
-test('VItem', ({ mount }) => {
+describe('VItem', () => {
+  type Instance = ExtractVue<typeof VItem>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+  let localVue: typeof Vue
+
+  beforeEach(() => {
+    localVue = createLocalVue()
+
+    mountFunction = (options = {}) => {
+      return mount(VItem, {
+        localVue,
+        ...options
+      })
+    }
+  })
+
+  toHaveBeenWarnedInit()
+
   it('should warn if missing default scopedSlot', () => {
-    mount(VItem)
+    mountFunction()
 
     expect('v-item is missing a default scopedSlot').toHaveBeenTipped()
     expect(itemWarning).toHaveBeenTipped()
