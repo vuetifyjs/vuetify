@@ -3,6 +3,7 @@ import { BaseSlideGroup } from '../VSlideGroup/VSlideGroup'
 
 // Mixins
 import Themeable from '../../mixins/themeable'
+import SSRBootable from '../../mixins/ssr-bootable'
 
 // Utilities
 import mixins from '../../util/mixins'
@@ -12,6 +13,7 @@ import { VNode } from 'vue'
 
 export default mixins(
   BaseSlideGroup,
+  SSRBootable,
   Themeable
   /* @vue/component */
 ).extend({
@@ -34,13 +36,17 @@ export default mixins(
   },
 
   watch: {
-    items () {
-      this.$nextTick(() => this.$emit('call:slider'))
-    },
+    items: 'callSlider',
+    internalValue: 'callSlider',
     $route: 'onRouteChange'
   },
 
   methods: {
+    callSlider () {
+      if (!this.isBooted) return
+
+      this.$emit('call:slider')
+    },
     onRouteChange (val: any, oldVal: any) {
       /* istanbul ignore next */
       if (this.mandatory) return

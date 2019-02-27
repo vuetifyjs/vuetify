@@ -117,10 +117,15 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
     alignWithTitle: 'callSlider',
     centered: 'callSlider',
     fixedTabs: 'callSlider',
-    internalLazyValue: 'callSlider',
     right: 'callSlider',
     '$vuetify.application.left': 'onResize',
     '$vuetify.application.right': 'onResize'
+  },
+
+  mounted () {
+    this.$nextTick(() => {
+      window.setTimeout(this.callSlider, 30)
+    })
   },
 
   methods: {
