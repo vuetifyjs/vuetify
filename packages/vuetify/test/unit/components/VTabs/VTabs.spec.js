@@ -380,38 +380,6 @@ test('VTabs', ({ mount }) => {
     wrapper.vm.setOverflow()
   })
 
-  it('should set dimensions when onResize is called', async () => {
-    const setWidths = jest.fn()
-    mount(VTabs, {
-      propsData: {
-        value: 'foo'
-      },
-      slots: {
-        default: [{
-          functional: true,
-          render: h => h(VTab, {
-            props: { href: '#foo' }
-          })
-        }]
-      },
-      methods: { setWidths }
-    })
-
-    expect(setWidths).not.toBeCalled()
-
-    await ssrBootable()
-
-    expect(setWidths).toHaveBeenCalledTimes(1)
-
-    await resizeWindow(800)
-
-    expect(setWidths).toHaveBeenCalledTimes(2)
-
-    await resizeWindow(1800)
-
-    expect(setWidths).toHaveBeenCalledTimes(3)
-  })
-
   it('should call init when mounted', () => {
     const init = jest.fn()
 

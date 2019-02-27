@@ -1,30 +1,28 @@
+jest.mock('css-element-queries/src/ResizeSensor')
 import Resize from '@/directives/resize'
 import { test } from '@/test'
+import ResizeSensor from 'css-element-queries/src/ResizeSensor'
 
 test('resize.js', () => {
   it('shoud bind event on inserted', () => {
     const callback = jest.fn()
-    global.addEventListener = jest.fn()
-    global.removeEventListener = jest.fn()
     const el = {}
 
     Resize.inserted(el, { value: callback })
     expect(callback).toBeCalled()
-    expect(window.addEventListener).toBeCalledWith('resize', callback, { passive: true })
+    expect(ResizeSensor).toBeCalledWith(el, callback)
     Resize.unbind(el)
-    expect(window.removeEventListener).toBeCalledWith('resize', callback, { passive: true })
+    expect(el).not.toHaveProperty('_resizeSensor')
   })
 
   it('shoud not run the callback in quiet mode', () => {
     const callback = jest.fn()
-    global.addEventListener = jest.fn()
-    global.removeEventListener = jest.fn()
     const el = {}
 
     Resize.inserted(el, { value: callback, modifiers: { quiet: true } })
     expect(callback).not.toBeCalled()
-    expect(window.addEventListener).toBeCalledWith('resize', callback, { passive: true })
+    expect(ResizeSensor).toBeCalledWith(el, callback)
     Resize.unbind(el)
-    expect(window.removeEventListener).toBeCalledWith('resize', callback, { passive: true })
+    expect(el).not.toHaveProperty('_resizeSensor')
   })
 })
