@@ -178,7 +178,7 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
           mandatory: true,
           mobileBreakPoint: this.mobileBreakPoint,
           showArrows: this.showArrows,
-          value: this.value
+          value: this.internalValue
         },
         on: {
           change: (val: any) => {
@@ -203,7 +203,7 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
       return this.$createElement(VTabsItems, {
         props: {
           activeClass: this.activeClass,
-          value: this.value
+          value: this.internalValue
         },
         on: {
           change: (val: any) => {

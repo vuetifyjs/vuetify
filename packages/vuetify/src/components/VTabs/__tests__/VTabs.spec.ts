@@ -13,28 +13,6 @@ import {
 
 // Types
 import { ExtractVue } from './../../../util/mixins'
-import Vue, { VueConstructor } from 'vue'
-
-const Component = (items = ['foo', 'bar']): VueConstructor<Vue> => Vue.extend({
-  inheritAttrs: false,
-
-  render (h) {
-    return h(VTabs, {
-      attrs: this.$attrs
-    }, [
-      items.map(item => h(VTab, {
-        props: { href: `#${item}` }
-      })),
-      h(VTabsItems, items.map(item => h(VTabItem, {
-        props: {
-          value: item
-        }
-      })))
-    ])
-  }
-})
-
-const ssrBootable = () => new Promise(resolve => requestAnimationFrame(resolve))
 
 // Avoriaz does not like extended
 // components with no render fn
@@ -97,31 +75,23 @@ describe('VTabs.ts', () => {
     const wrapper = mountFunction({
       propsData: { value: 'foo' },
       slots: {
-        default: [{
-          name: 'v-tab-item',
-          render: h => h('div')
-        }]
+        default: [VTabItem]
       }
     })
-
-    await ssrBootable()
 
     expect(wrapper.findAll(TabsItemsMock)).toHaveLength(1)
   })
 
   it('should hide slider', async () => {
     const wrapper = mountFunction({
-      attachToDocument: true,
-      propsData: { hideSlider: true },
+      propsData: {
+        hideSlider: true,
+        value: 0
+      },
       slots: {
-        default: [{
-          name: 'v-tab',
-          render: h => h(VTab)
-        }]
+        default: [VTab]
       }
     })
-
-    await ssrBootable()
 
     const slider = wrapper.findAll('.v-tabs__slider')
     expect(slider).toHaveLength(0)
@@ -138,7 +108,6 @@ describe('VTabs.ts', () => {
       }
     }
     const wrapper = mount(component, {
-      attachToDocument: true,
       mocks: {
         $vuetify: {
           breakpoint: {}
@@ -151,7 +120,6 @@ describe('VTabs.ts', () => {
 
   it('should update input value when changed externally', async () => {
     const wrapper = mountFunction({
-      attachToDocument: true,
       propsData: { value: 'foo' }
     })
 
@@ -162,6 +130,9 @@ describe('VTabs.ts', () => {
 
   it('should reset the tabs slider', async () => {
     const wrapper = mountFunction({
+      propsData: {
+        value: 0
+      },
       data: () => ({
         sliderLeft: 100,
         sliderWidth: 100
