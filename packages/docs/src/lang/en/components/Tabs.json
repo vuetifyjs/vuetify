@@ -3,11 +3,11 @@
   "headerText": "The `v-tabs` component is used for hiding content behind a selectable item. This can also be used as a pseudo-navigation for a page, where the tabs are links and the tab-items are the content.",
   "examples": {
     "usage": {
-      "desc": ""
+      "desc": "The `v-tabs` component is a styled extension of [v-item-group](/components/item-groups). It provides an easy to use interface for organizing groups of content."
     },
     "fixedTabs": {
       "header": "### Fixed tabs",
-      "desc": "The **fixed-tabs** prop sets a higher minimum width and applies a new maximum width to `v-tabs-items`. On desktop screens, the tab items will be centered within the `v-tabs` component and switch to evenly fill on mobile."
+      "desc": "The **fixed-tabs** prop forces `v-tab` to take up all available space up to the maximum width (300px)."
     },
     "right": {
       "header": "### Right aligned tabs",
