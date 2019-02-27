@@ -31,6 +31,7 @@ interface options extends Vue {
   activatedBy: EventTarget | null
   disabled: Boolean
   hasJustFocused: boolean
+  inputActivator: Boolean
   hasWindow: boolean
   offsetX: Number
   offsetY: Number
@@ -75,7 +76,6 @@ export default mixins<options &
       }
     },
     allowOverflow: Boolean,
-    inputActivator: Boolean,
     light: Boolean,
     dark: Boolean,
     maxWidth: {
@@ -345,13 +345,13 @@ export default mixins<options &
       if (this.isAttached) {
         const style = window.getComputedStyle(el) as CSSStyleDeclaration
 
-        rect.left = parseInt(style.marginLeft as string)
-        rect.top = parseInt(style.marginTop as string)
+        rect.left = parseInt(style.marginLeft!)
+        rect.top = parseInt(style.marginTop!)
       }
 
       return rect
     },
-    sneakPeek (cb: Function) {
+    sneakPeek (cb: () => void) {
       requestAnimationFrame(() => {
         const el = this.$refs.content
 
