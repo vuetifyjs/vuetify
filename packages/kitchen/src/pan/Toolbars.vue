@@ -131,12 +131,13 @@
         >
           <v-toolbar-side-icon />
 
-          <v-toolbar-title
-            slot="extension"
-            class="white--text"
-          >
-            Title
-          </v-toolbar-title>
+          <template #extension>
+            <v-toolbar-title
+              class="white--text"
+            >
+              Title
+            </v-toolbar-title>
+          </template>
 
           <v-spacer />
 
@@ -351,12 +352,14 @@
           <v-toolbar-side-icon />
 
           <v-menu :nudge-width="100">
-            <v-toolbar-title slot="activator">
-              <span>All</span>
-              <v-icon dark>
-                mdi-chevron-down
-              </v-icon>
-            </v-toolbar-title>
+            <template #activator>
+              <v-toolbar-title>
+                <span>All</span>
+                <v-icon dark>
+                  mdi-chevron-down
+                </v-icon>
+              </v-toolbar-title>
+            </template>
 
             <v-list>
               <v-list-tile

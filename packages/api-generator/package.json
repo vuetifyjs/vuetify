@@ -1,6 +1,6 @@
 {
   "name": "@vuetify/api-generator",
-  "version": "2.0.0-alpha.5",
+  "version": "2.0.0-alpha.6",
   "private": true,
   "description": "",
   "main": "dist/api.js",
@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "deepmerge": "^2.2.1",
-    "vuetify": "^2.0.0-alpha.5"
+    "vuetify": "^2.0.0-alpha.6"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

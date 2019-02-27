@@ -507,7 +507,7 @@
           color="blue darken-3"
           dark
         >
-          <template slot="prepend">
+          <template #prepend>
             <v-avatar
               class="pa-2 mr-3"
               color="white"
@@ -524,14 +524,14 @@
             <!-- eslint-disable max-len -->
             Nullam vel sem. Vestibulum rutrum, mi nec elementum vehicula, eros quam gravida nisl, id fringilla neque ante vel mi. Sed hendrerit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce id purus. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.
           </div>
-          <v-btn
-            slot="close"
-            slot-scope="{ toggle }"
-            icon
-            @click="toggle"
-          >
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
+          <template #close="{ toggle }">
+            <v-btn
+              icon
+              @click="toggle"
+            >
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+          </template>
         </v-alert>
         <div class="text-xs-center">
           <v-btn

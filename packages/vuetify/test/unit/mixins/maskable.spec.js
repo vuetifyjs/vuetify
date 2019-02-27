@@ -1,14 +1,13 @@
 import { test } from '@/test'
 import Maskable from '@/mixins/maskable'
 
-const Mock = {
-  ...Maskable,
+const Mock = Maskable.extend({
   render: h => h('div')
-}
+})
 
 test('maskable.js', ({ mount }) => {
   it('should not mask text beforeMount', async () => {
-    const maskText = jest.spyOn(Mock.methods, 'maskText')
+    const maskText = jest.spyOn(Mock.options.methods, 'maskText')
     mount(Mock, {
       propsData: {
         returnMaskedValue: true,

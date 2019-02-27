@@ -13,9 +13,9 @@
             <v-slide-item
               v-for="n in 25"
               :key="n"
+              #default="{ active, toggle }"
             >
               <v-btn
-                slot-scope="{ active, toggle }"
                 :input-value="active"
                 active-class="purple white--text"
                 depressed
@@ -39,9 +39,9 @@
             <v-slide-item
               v-for="n in 25"
               :key="n"
+              #default="{ active, toggle }"
             >
               <v-btn
-                slot-scope="{ active, toggle }"
                 :input-value="active"
                 active-class="purple white--text"
                 depressed
@@ -69,9 +69,9 @@
             <v-slide-item
               v-for="n in 25"
               :key="n"
+              #default="{ active, toggle }"
             >
               <v-btn
-                slot-scope="{ active, toggle }"
                 :input-value="active"
                 active-class="purple white--text"
                 depressed
@@ -98,9 +98,9 @@
             <v-slide-item
               v-for="n in 25"
               :key="n"
+              #default="{ toggle }"
             >
               <v-btn
-                slot-scope="{ toggle }"
                 depressed
                 rounded
                 @click="toggle"
@@ -125,9 +125,9 @@
             <v-slide-item
               v-for="n in 25"
               :key="n"
+              #default="{ active, toggle }"
             >
               <v-btn
-                slot-scope="{ active, toggle }"
                 :input-value="active"
                 active-class="purple white--text"
                 depressed

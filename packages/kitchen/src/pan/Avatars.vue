@@ -162,9 +162,11 @@
           wrap
         >
           <v-badge overlap>
-            <span slot="badge">
-              3
-            </span>
+            <template #badge>
+              <span>
+                3
+              </span>
+            </template>
 
             <v-avatar
               color="purple red--after"
@@ -176,9 +178,11 @@
             </v-avatar>
           </v-badge>
           <v-badge overlap>
-            <span slot="badge">
-              3
-            </span>
+            <template #badge>
+              <span>
+                3
+              </span>
+            </template>
 
             <v-avatar
               color="purple red--after"
@@ -190,9 +194,11 @@
             </v-avatar>
           </v-badge>
           <v-badge overlap>
-            <span slot="badge">
-              3
-            </span>
+            <template #badge>
+              <span>
+                3
+              </span>
+            </template>
 
             <v-avatar
               color="purple red--after"
@@ -204,9 +210,11 @@
             </v-avatar>
           </v-badge>
           <v-badge overlap>
-            <span slot="badge">
-              3
-            </span>
+            <template #badge>
+              <span>
+                3
+              </span>
+            </template>
 
             <v-avatar
               color="purple red--after"
