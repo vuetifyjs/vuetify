@@ -11,7 +11,7 @@ exports[`VSlider.vue should change track styles in rtl 1`] = `
                tabindex="-1"
         >
         <div class="v-slider__track-container">
-          <div class="v-slider__track-background accent"
+          <div class="v-slider__track-background primary lighten-3"
                style="right: 0px;"
           >
           </div>
@@ -54,7 +54,7 @@ exports[`VSlider.vue should change track styles in rtl 2`] = `
                tabindex="-1"
         >
         <div class="v-slider__track-container">
-          <div class="v-slider__track-background accent"
+          <div class="v-slider__track-background primary lighten-3"
                style="right: 0px;"
           >
           </div>
@@ -143,7 +143,7 @@ exports[`VSlider.vue should change track styles in rtl 4`] = `
                tabindex="-1"
         >
         <div class="v-slider__track-container">
-          <div class="v-slider__track-background accent"
+          <div class="v-slider__track-background primary lighten-3"
                style="left: 0px;"
           >
           </div>
@@ -187,7 +187,7 @@ exports[`VSlider.vue should change track styles in rtl 5`] = `
                tabindex="-1"
         >
         <div class="v-slider__track-container">
-          <div class="v-slider__track-background accent"
+          <div class="v-slider__track-background primary lighten-3"
                style="left: 0px;"
           >
           </div>
@@ -283,7 +283,7 @@ exports[`VSlider.vue should display label and have different aria-label 1`] = `
                aria-label="bar"
         >
         <div class="v-slider__track-container">
-          <div class="v-slider__track-background accent"
+          <div class="v-slider__track-background primary lighten-3"
                style="right: 0px;"
           >
           </div>
@@ -327,7 +327,7 @@ exports[`VSlider.vue should match a snapshot 1`] = `
                tabindex="-1"
         >
         <div class="v-slider__track-container">
-          <div class="v-slider__track-background accent"
+          <div class="v-slider__track-background primary lighten-3"
                style="right: 0px;"
           >
           </div>
@@ -370,7 +370,7 @@ exports[`VSlider.vue should render component with thumbLabel and match a snapsho
                tabindex="-1"
         >
         <div class="v-slider__track-container">
-          <div class="v-slider__track-background accent"
+          <div class="v-slider__track-background primary lighten-3"
                style="right: 0px;"
           >
           </div>
@@ -426,7 +426,7 @@ exports[`VSlider.vue should render component with thumbLabel and match a snapsho
                tabindex="-1"
         >
         <div class="v-slider__track-container">
-          <div class="v-slider__track-background accent"
+          <div class="v-slider__track-background primary lighten-3"
                style="right: 0px;"
           >
           </div>
@@ -482,7 +482,7 @@ exports[`VSlider.vue should render component with ticks and match a snapshot 1`]
                tabindex="-1"
         >
         <div class="v-slider__track-container">
-          <div class="v-slider__track-background accent"
+          <div class="v-slider__track-background primary lighten-3"
                style="right: 0px;"
           >
           </div>
@@ -547,7 +547,7 @@ exports[`VSlider.vue should render component with ticks and match a snapshot 2`]
                tabindex="-1"
         >
         <div class="v-slider__track-container">
-          <div class="v-slider__track-background accent"
+          <div class="v-slider__track-background primary lighten-3"
                style="right: 0px;"
           >
           </div>
@@ -618,7 +618,7 @@ exports[`VSlider.vue should reverse label location when inverse 1`] = `
                tabindex="-1"
         >
         <div class="v-slider__track-container">
-          <div class="v-slider__track-background accent"
+          <div class="v-slider__track-background primary lighten-3"
                style="right: 0px;"
           >
           </div>
@@ -662,7 +662,7 @@ exports[`VSlider.vue should reverse label location when inverse 2`] = `
                tabindex="-1"
         >
         <div class="v-slider__track-container">
-          <div class="v-slider__track-background accent"
+          <div class="v-slider__track-background primary lighten-3"
                style="right: 0px;"
           >
           </div>
