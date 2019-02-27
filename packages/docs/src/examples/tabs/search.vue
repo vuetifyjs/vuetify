@@ -1,14 +1,17 @@
 <template>
-  <div>
+  <v-card>
     <v-toolbar
       color="purple"
+      card
       dark
+      prominent
       tabs
     >
       <v-text-field
         append-icon="mic"
         class="mx-3"
         flat
+        hide-details
         label="Search"
         prepend-inner-icon="search"
         solo-inverted
@@ -18,7 +21,6 @@
         slot="extension"
         v-model="tabs"
         centered
-        color="transparent"
         slider-color="white"
       >
         <v-tab
@@ -35,14 +37,14 @@
         v-for="n in 3"
         :key="n"
       >
-        <v-card>
+        <v-card flat>
           <v-card-text>
             {{ text }}
           </v-card-text>
         </v-card>
       </v-tab-item>
     </v-tabs-items>
-  </div>
+  </v-card>
 </template>
 
 <script>
