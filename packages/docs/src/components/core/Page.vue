@@ -16,15 +16,20 @@
           v-if="structure.mdLink"
           shrink
         >
-          <v-btn
-            icon
-            :href="structure.mdLink"
-            target="_blank"
-            rel="noopener"
-            class="mt-2"
-          >
-            <v-icon>mdi-material-design</v-icon>
-          </v-btn>
+          <v-tooltip left>
+            <v-btn
+              slot="activator"
+              :href="structure.mdLink"
+              icon
+              target="_blank"
+              rel="noopener"
+              class="mt-2"
+              aria-label="Material Design Specification"
+            >
+              <v-icon>mdi-material-design</v-icon>
+            </v-btn>
+            <span>Material Design Specification</span>
+          </v-tooltip>
         </v-flex>
       </v-layout>
       <div
