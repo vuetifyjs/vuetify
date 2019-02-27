@@ -7,7 +7,9 @@ Vue.use(Router)
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  scrollBehavior: (to, from, savedPosition) => {
+  scrollBehavior: async (to, from, savedPosition) => {
+    await goTo(0)
+
     let scrollTo = 0
 
     if (to.hash) {
