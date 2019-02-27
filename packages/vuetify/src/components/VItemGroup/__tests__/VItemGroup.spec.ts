@@ -1,7 +1,17 @@
+// Libraries
 import Vue from 'vue'
-import { test } from '@/test'
-import VItem from '@/components/VItemGroup/VItem'
-import VItemGroup from '@/components/VItemGroup/VItemGroup'
+
+// Components
+import VItem from '../VItem'
+import VItemGroup from '../VItemGroup'
+
+// Utilities
+import {
+  createLocalVue,
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
 
 const vm = new Vue()
 const defaultSlot = ({ toggle }) => vm.$createElement('div', { on: { click: toggle } }, 'foobar')
@@ -16,20 +26,36 @@ const Mock = {
   })
 }
 
-test('VItemGroup.ts', ({ mount }) => {
+describe('VItemGroup', () => {
+  let mountFunction: (options?: object) => Wrapper<Vue>
+  let localVue: typeof Vue
+
+  beforeEach(() => {
+    localVue = createLocalVue()
+
+    mountFunction = (options = {}) => {
+      return mount(VItemGroup, {
+        localVue,
+        ...options
+      })
+    }
+  })
+
+  toHaveBeenWarnedInit()
+
   it('should warn if using multiple prop without an array value', () => {
-    mount(VItemGroup, {
+    mountFunction({
       propsData: {
         multiple: true,
         value: ''
       }
-    })
+    });
 
-    expect('Model must be bound to an array if the multiple property is true').toHaveBeenTipped()
+    (expect('Model must be bound to an array if the multiple property is true') as any).toHaveBeenTipped()
   })
 
   it('should return the correct value', () => {
-    const wrapper = mount(VItemGroup)
+    const wrapper = mountFunction()
 
     const getValue = wrapper.vm.getValue
 
@@ -40,33 +66,33 @@ test('VItemGroup.ts', ({ mount }) => {
   })
 
   it('should register elements', () => {
-    const wrapper = mount(VItemGroup, {
+    const wrapper = mountFunction({
       slots: {
         default: [Mock]
       }
     })
 
-    expect(wrapper.vm.items.length).toBe(1)
+    expect(wrapper.vm.items).toHaveLength(1)
 
-    const item = wrapper.first(Mock)
+    const item = wrapper.find(Mock)
 
     item.destroy()
 
-    expect(wrapper.vm.items.length).toBe(0)
+    expect(wrapper.vm.items).toHaveLength(0)
   })
 
   it('should register and activate elements', () => {
-    const wrapper = mount(VItemGroup, {
+    const wrapper = mountFunction({
       propsData: { value: 0 },
       slots: { default: [Mock] }
     })
 
-    expect(wrapper.vm.items.length).toBe(1)
+    expect(wrapper.vm.items).toHaveLength(1)
 
     // Avoriaz doesn't like
     // components without
     // a render function
-    const item = wrapper.first({
+    const item = wrapper.find({
       name: 'v-item',
       render: () => null
     })
@@ -76,7 +102,7 @@ test('VItemGroup.ts', ({ mount }) => {
 
   it('should update state from child clicks', () => {
     const change = jest.fn()
-    const wrapper = mount(VItemGroup, {
+    const wrapper = mountFunction({
       slots: {
         default: [
           Mock,
@@ -87,20 +113,20 @@ test('VItemGroup.ts', ({ mount }) => {
 
     wrapper.vm.$on('change', change)
 
-    expect(wrapper.vm.items.length).toBe(2)
+    expect(wrapper.vm.items).toHaveLength(2)
 
     const [ child1, child2 ] = wrapper.vm.$el.children
 
     child1.click()
-    expect(change).toBeCalledWith(0)
+    expect(change).toHaveBeenCalledWith(0)
     expect(wrapper.vm.internalValue).toBe(0)
 
     child2.click()
-    expect(change).toBeCalledWith(1)
+    expect(change).toHaveBeenCalledWith(1)
     expect(wrapper.vm.internalValue).toBe(1)
 
     child2.click()
-    expect(wrapper.vm.internalValue).toBe(undefined)
+    expect(wrapper.vm.internalValue).toBeUndefined()
 
     wrapper.setProps({
       value: [],
@@ -108,17 +134,17 @@ test('VItemGroup.ts', ({ mount }) => {
     })
 
     child1.click()
-    expect(change).toBeCalledWith([0])
+    expect(change).toHaveBeenCalledWith([0])
 
     child2.click()
-    expect(change).toBeCalledWith([0, 1])
+    expect(change).toHaveBeenCalledWith([0, 1])
 
     child1.click()
-    expect(change).toBeCalledWith([1])
+    expect(change).toHaveBeenCalledWith([1])
   })
 
   it('should have a conditional method for toggling items', () => {
-    const wrapper = mount(VItemGroup)
+    const wrapper = mountFunction()
 
     expect(wrapper.vm.toggleMethod(0)).toBe(false)
 
@@ -143,7 +169,7 @@ test('VItemGroup.ts', ({ mount }) => {
   })
 
   it('should select the first item if mandatory and no value', async () => {
-    const wrapper = mount(VItemGroup, {
+    const wrapper = mountFunction({
       propsData: { mandatory: true },
       slots: {
         default: [Mock]
@@ -152,7 +178,7 @@ test('VItemGroup.ts', ({ mount }) => {
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.selectedItems.length).toBe(1)
+    expect(wrapper.vm.selectedItems).toHaveLength(1)
     expect(wrapper.vm.internalValue).toBe(0)
 
     wrapper.setProps({ multiple: true })
@@ -160,18 +186,18 @@ test('VItemGroup.ts', ({ mount }) => {
     // Manually update selected items
     wrapper.vm.updateItemsState()
 
-    expect(wrapper.vm.selectedItems.length).toBe(1)
+    expect(wrapper.vm.selectedItems).toHaveLength(1)
     expect(wrapper.vm.internalValue).toEqual([0])
   })
 
   it('should update a single item group', () => {
-    const wrapper = mount(VItemGroup)
+    const wrapper = mountFunction()
 
     // Toggling on and off
     wrapper.vm.updateSingle('foo')
     expect(wrapper.vm.internalValue).toBe('foo')
     wrapper.vm.updateSingle('foo')
-    expect(wrapper.vm.internalValue).toBe(undefined)
+    expect(wrapper.vm.internalValue).toBeUndefined()
 
     wrapper.setProps({ mandatory: true })
 
@@ -183,7 +209,7 @@ test('VItemGroup.ts', ({ mount }) => {
   })
 
   it('should update a multiple item group', () => {
-    const wrapper = mount(VItemGroup, {
+    const wrapper = mountFunction({
       propsData: { multiple: true }
     })
 
@@ -213,7 +239,7 @@ test('VItemGroup.ts', ({ mount }) => {
   })
 
   it('should update value if mandatory and dynamic items', async () => {
-    const wrapper = mount(VItemGroup, {
+    const wrapper = mountFunction({
       propsData: {
         multiple: true,
         value: [3]
@@ -231,32 +257,32 @@ test('VItemGroup.ts', ({ mount }) => {
     const change = jest.fn()
     wrapper.vm.$on('change', change)
 
-    const [first, second, third, fourth] = wrapper.find(Mock)
+    const [first, second, third, fourth] = wrapper.findAll(Mock).wrappers
 
     fourth.destroy()
 
-    expect(change).toBeCalledWith([])
+    expect(change).toHaveBeenCalledWith([])
 
     wrapper.setProps({ mandatory: true, value: [2] })
 
     third.destroy()
 
-    expect(change).toBeCalledWith([1])
+    expect(change).toHaveBeenCalledWith([1])
 
     wrapper.setProps({ multiple: false, value: 1 })
 
     second.destroy()
 
-    expect(change).toBeCalledWith(0)
+    expect(change).toHaveBeenCalledWith(0)
 
     first.destroy()
 
-    expect(change).toBeCalledWith(undefined)
+    expect(change).toHaveBeenCalledWith(undefined)
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/5384
   it('should not unregister children when is destroyed', () => {
-    const wrapper = mount(VItemGroup, {
+    const wrapper = mountFunction({
       propsData: {
         value: 0
       },
@@ -271,6 +297,6 @@ test('VItemGroup.ts', ({ mount }) => {
 
     wrapper.destroy()
 
-    expect(change).not.toBeCalled()
+    expect(change).not.toHaveBeenCalled()
   })
 })
