@@ -112,7 +112,7 @@ test('detachable.js', ({ mount }) => {
   })
 
   it('should validate attach prop', () => {
-    const validator = Detachable.props.attach.validator
+    const validator = Detachable.options.props.attach.validator
 
     expect(validator(true)).toBe(true)
     expect(validator(false)).toBe(true)

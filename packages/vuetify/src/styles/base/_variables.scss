@@ -236,9 +236,6 @@ $list-item-dense-avatar-height: 38px !default;
 $list-dense-subheader-height: $list-item-dense-single-height !default;
 $list-dense-subheader-group-height: $list-dense-subheader-height !default;
 
-/** Sheets */
-$sheet-border-radius: 2px !default;
-
 /** Time pickers */
 $time-picker-number-font-size: 16px !default;
 $time-picker-indicator-size: 40px !default;
@@ -292,3 +289,12 @@ $ripple-animation-visible-opacity: 0.15 !default;
 
 /** Treeviews */
 $treeview-transition: 0.2s map-get($transition, 'linear-out-slow-in') !default;
+
+/** Elements */
+$bootable-transition: 0.2s map-get($transition, 'fast-out-slow-in') !default;
+$blockquote-font-size: 18px !default;
+$blockquote-font-weight: 300 !default;
+$code-color: #bd4147 !default;
+$code-kbd-border-radius: 3px !default;
+$code-kbd-font-size: 85% !default;
+$code-kbd-font-weight: 900 !default;

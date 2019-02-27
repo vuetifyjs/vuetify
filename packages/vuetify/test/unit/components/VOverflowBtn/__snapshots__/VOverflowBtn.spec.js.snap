@@ -10,9 +10,9 @@ exports[`VOverflowBtn should use default autocomplete selections 1`] = `
           <div class="v-select__selection v-select__selection--comma">
             foo
           </div>
-          <input readonly="readonly"
+          <input autocomplete="off"
+                 readonly="readonly"
                  type="text"
-                 autocomplete="off"
           >
         </div>
         <div class="v-input__append-inner">
@@ -53,9 +53,9 @@ exports[`VOverflowBtn should use default autocomplete selections 2`] = `
               foo
             </span>
           </button>
-          <input readonly="readonly"
+          <input autocomplete="off"
+                 readonly="readonly"
                  type="text"
-                 autocomplete="off"
           >
         </div>
         <div class="v-input__append-inner">

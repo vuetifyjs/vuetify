@@ -152,13 +152,14 @@
           full-width
           width="290px"
         >
-          <v-text-field
-            slot="activator"
-            v-model="time1"
-            label="Picker in dialog"
-            prepend-icon="mdi-clock-outline"
-            readonly
-          />
+          <template #activator>
+            <v-text-field
+              v-model="time1"
+              label="Picker in dialog"
+              prepend-icon="mdi-clock-outline"
+              readonly
+            />
+          </template>
           <v-time-picker
             v-if="modal"
             v-model="time1"
@@ -201,13 +202,14 @@
           max-width="290px"
           min-width="290px"
         >
-          <v-text-field
-            slot="activator"
-            v-model="time2"
-            label="Picker in menu"
-            prepend-icon="mdi-clock-outline"
-            readonly
-          />
+          <template #activator>
+            <v-text-field
+              v-model="time2"
+              label="Picker in menu"
+              prepend-icon="mdi-clock-outline"
+              readonly
+            />
+          </template>
           <v-time-picker
             v-if="menu"
             v-model="time2"

@@ -1,107 +1,108 @@
 {
-    "title": "header",
-    "titleText": "headerText",
-    "children": [
-      {
-        "type": "section",
-        "children": [
-          {
-            "type": "heading",
-            "lang": "fontHeader"
-          },
-          {
-            "type": "text",
-            "lang": "fontText"
-          },
-          {
-            "type": "markdown",
-            "lang": "fonts"
-          },
-          {
-            "type": "style-headings"
-          }
-        ]
-      },
-      {
-        "type": "section",
-        "children": [
-          {
-            "type": "heading",
-            "lang": "weightsHeader"
-          },
-          {
-            "type": "text",
-            "lang": "weightsText"
-          },
-          {
-            "type": "markdown",
-            "lang": "weights"
-          },
-          {
-            "type": "text",
-            "lang": "italicText"
-          },
-          {
-            "type": "markdown",
-            "lang": "italic"
-          },
-          {
-            "type": "style-weights"
-          }
-        ]
-      },
-      {
-        "type": "section",
-        "children": [
-          {
-            "type": "heading",
-            "lang": "transformHeader"
-          },
-          {
-            "type": "text",
-            "lang": "transformText"
-          },
-          {
-            "type": "markdown",
-            "lang": "transforms"
-          },
-          {
-            "type": "style-typefaces"
-          }
-        ]
-      },
-      {
-        "type": "section",
-        "children": [
-          {
-            "type": "heading",
-            "lang": "wrapHeader"
-          },
-          {
-            "type": "text",
-            "lang": "wrapText"
-          },
-          {
-            "type": "markdown",
-            "lang": "wraps"
-          },
-          {
-            "type": "example",
-            "value": "truncate"
-          }
-        ]
-      },
-      {
-        "type": "section",
-        "children": [
-          {
-            "type": "up-next",
-            "value": [
-              "framework/alignment",
-              "framework/content"
-            ]
-          }
-        ]
-      }
-    ]
-  }
+  "title": "header",
+  "titleText": "headerText",
+  "mdLink": "https://material.io/design/typography/the-type-system.html",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "fontHeader"
+        },
+        {
+          "type": "text",
+          "lang": "fontText"
+        },
+        {
+          "type": "markdown",
+          "lang": "fonts"
+        },
+        {
+          "type": "style-headings"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "weightsHeader"
+        },
+        {
+          "type": "text",
+          "lang": "weightsText"
+        },
+        {
+          "type": "markdown",
+          "lang": "weights"
+        },
+        {
+          "type": "text",
+          "lang": "italicText"
+        },
+        {
+          "type": "markdown",
+          "lang": "italic"
+        },
+        {
+          "type": "style-weights"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "transformHeader"
+        },
+        {
+          "type": "text",
+          "lang": "transformText"
+        },
+        {
+          "type": "markdown",
+          "lang": "transforms"
+        },
+        {
+          "type": "style-typefaces"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "wrapHeader"
+        },
+        {
+          "type": "text",
+          "lang": "wrapText"
+        },
+        {
+          "type": "markdown",
+          "lang": "wraps"
+        },
+        {
+          "type": "example",
+          "value": "truncate"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "framework/alignment",
+            "framework/content"
+          ]
+        }
+      ]
+    }
+  ]
+}
