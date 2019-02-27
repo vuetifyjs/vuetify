@@ -1,5 +1,5 @@
 // Styles
-import './VItemGroup.styl'
+import './VItemGroup.sass'
 
 // Mixins
 import Groupable from '../../mixins/groupable'
