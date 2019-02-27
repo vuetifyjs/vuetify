@@ -127,6 +127,7 @@ export default {
       return {
         left: this.calculatedLeft,
         maxWidth: convertToUnit(this.maxWidth),
+        minWidth: convertToUnit(this.minWidth),
         opacity: this.isActive ? 0.9 : 0,
         top: this.calculatedTop,
         zIndex: this.zIndex || this.activeZIndex
