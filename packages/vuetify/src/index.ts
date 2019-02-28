@@ -20,4 +20,8 @@ if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(Vuetify)
 }
 
-export default Vuetify
+export default {
+  ...Vuetify,
+  ...components,
+  ...directives
+}
