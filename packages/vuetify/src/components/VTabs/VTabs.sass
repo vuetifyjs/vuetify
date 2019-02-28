@@ -1,5 +1,6 @@
 // Imports
 @import '../../styles/styles.sass'
+@import './_variables.scss'
 @import './_mixins.sass'
 
 .v-tabs__bar.theme--light
@@ -21,7 +22,7 @@
 // Element
 .v-tabs__bar
   border-radius: inherit
-  height: 48px
+  height: $tabs-bar-height
 
   &.v-item-group > *
     cursor: initial
@@ -32,10 +33,10 @@
   flex: 0 1 auto
   font-weight: 500
   justify-content: center
-  min-width: 90px
-  max-width: 360px
+  min-width: $tabs-item-min-width
+  max-width: $tabs-item-man-width
   outline: none
-  padding: 0 16px
+  padding: $tabs-item-padding
   position: relative
   text-decoration: none
   text-transform: uppercase
@@ -53,10 +54,10 @@
     transition: $primary-transition
 
   &:hover:before
-    opacity: 0.16
+    opacity: $tabs-item-hover-opacity
 
   &:focus:before
-    opacity: 0.20
+    opacity: $tabs-item-focus-opacity
 
   &--active
     color: inherit
@@ -66,7 +67,7 @@
 
 .v-tabs__slider
   background-color: currentColor
-  height: 2px
+  height: $tabs-slider-height
   width: 100%
 
   &-wrapper
@@ -77,7 +78,7 @@
 
 // Modifier
 .v-tabs--align-with-title
-  padding-left: 56px
+  padding-left: $tabs-item-align-with-title-padding
 
 .v-tabs--fixed-tabs,
 .v-tabs--centered
@@ -101,7 +102,7 @@
 
 .v-tabs--icons-and-text
   .v-tabs__bar
-    height: 72px
+    height: $tabs-icons-and-text-bar-height
 
   .v-tabs__item
     flex-direction: column-reverse
@@ -131,7 +132,7 @@
     flex-direction: column
 
   .v-tabs__item
-    height: 48px
+    height: $tabs-item-vertical-height
 
   .v-tabs__slider
     height: 100%
@@ -141,4 +142,4 @@
 
   &.v-tabs--icons-and-text
     .v-tabs__item
-      height: 72px
+      height: $tabs-item-vertical-icons-and-text-height
