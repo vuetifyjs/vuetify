@@ -4,6 +4,7 @@ import Routable from '../../mixins/routable'
 import Themeable from '../../mixins/themeable'
 
 // Utilities
+import { keyCodes } from './../../util/helpers'
 import { getObjectValueByPath } from '../../util/helpers'
 import mixins from '../../util/mixins'
 import { ExtractVue } from './../../util/mixins'
@@ -110,7 +111,7 @@ export default baseMixins.extend<options>().extend(
     data.on = {
       ...data.on,
       keydown: (e: KeyboardEvent) => {
-        if (e.keyCode === 13) this.click(e)
+        if (e.keyCode === keyCodes.enter) this.click(e)
 
         this.$emit('keydown', e)
       }
