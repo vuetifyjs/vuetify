@@ -135,7 +135,7 @@ const directives = {}
 const installedComponents = Vue.options._base.options.components
 const installedDirectives = Vue.options._base.options.directives
 
-const hyphenateRE = /\B([A-Z])/g
+const hyphenateRE = /\B([A-Z\d])/g
 const hyphenate = str => {
   return str.replace(hyphenateRE, '-$1').toLowerCase()
 }

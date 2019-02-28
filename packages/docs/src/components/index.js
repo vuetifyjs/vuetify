@@ -2,8 +2,6 @@ import Vue from 'vue'
 import upperFirst from 'lodash/upperFirst'
 import camelCase from 'lodash/camelCase'
 
-import './typography'
-
 const requireComponent = require.context(
   '@/components', true, /\.vue$/
 )

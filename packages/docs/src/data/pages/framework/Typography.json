@@ -8,6 +8,36 @@
       "children": [
         {
           "type": "heading",
+          "lang": "helperHeader"
+        },
+        {
+          "type": "text",
+          "lang": "helperText"
+        },
+        {
+          "type": "api",
+          "value": [
+            "v-display-4",
+            "v-display-3",
+            "v-display-2",
+            "v-display-1",
+            "v-headline",
+            "v-title",
+            "v-subtitle-2",
+            "v-subtitle-1",
+            "v-body-2",
+            "v-body-1",
+            "v-caption",
+            "v-overline"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
           "lang": "fontHeader"
         },
         {

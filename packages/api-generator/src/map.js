@@ -102,7 +102,14 @@ const sharedGridProps = [
     'source': null
   }
 ]
-
+const sharedTypographyProps = [
+  {
+    'name': 'tag',
+    'type': 'String',
+    'default': 'div',
+    'source': null
+  }
+]
 const dataIterableProps = [
   {
     name: 'pagination',
@@ -1248,6 +1255,19 @@ module.exports = {
       }
     ]
   },
+  // Typography
+  'v-display-4': { props: [].concat(sharedTypographyProps) },
+  'v-display-3': { props: [].concat(sharedTypographyProps) },
+  'v-display-2': { props: [].concat(sharedTypographyProps) },
+  'v-display-1': { props: [].concat(sharedTypographyProps) },
+  'v-headline': { props: [].concat(sharedTypographyProps) },
+  'v-title': { props: [].concat(sharedTypographyProps) },
+  'v-subtitle-2': { props: [].concat(sharedTypographyProps) },
+  'v-subtitle-1': { props: [].concat(sharedTypographyProps) },
+  'v-body-2': { props: [].concat(sharedTypographyProps) },
+  'v-body-1': { props: [].concat(sharedTypographyProps) },
+  'v-caption': { props: [].concat(sharedTypographyProps) },
+  'v-overline': { props: [].concat(sharedTypographyProps) },
   'v-window': {
     props: [
       {

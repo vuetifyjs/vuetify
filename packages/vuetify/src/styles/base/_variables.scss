@@ -84,66 +84,84 @@ $heading-font-family: $body-font-family !default;
 
 $headings: (
   'h1': (
-    'size': 112px,
+    'size': 96px,
     'weight': 300,
     'line-height': 1,
-    'letter-spacing': -0.04em,
+    'letter-spacing': -1.5px,
     'font-family': $heading-font-family
   ),
   'h2': (
-    'size': 56px,
+    'size': 60px,
     'weight': 400,
     'line-height': 1.35,
-    'letter-spacing': -0.02em,
+    'letter-spacing': -0.5px,
     'font-family': $heading-font-family
   ),
   'h3': (
-    'size': 45px,
+    'size': 48px,
     'weight': 400,
     'line-height': 48px,
-    'letter-spacing': normal,
+    'letter-spacing': 0,
     'font-family': $heading-font-family
   ),
   'h4': (
     'size': 34px,
     'weight': 400,
     'line-height': 40px,
-    'letter-spacing': normal,
+    'letter-spacing': 0.25px,
     'font-family': $heading-font-family
   ),
   'h5': (
     'size': 24px,
     'weight': 400,
     'line-height': 32px,
-    'letter-spacing': normal,
+    'letter-spacing': 0,
     'font-family': $heading-font-family
   ),
   'h6': (
     'size': 20px,
     'weight': 500,
     'line-height': 1,
-    'letter-spacing': 0.02em,
+    'letter-spacing': 0.15px,
     'font-family': $heading-font-family
   ),
-  'subheading': (
+  'subtitle-1': (
     'size': 16px,
-    'weight': 400
+    'weight': 400,
+    'line-height': 1.5,
+    'letter-spacing': 0.15px
+  ),
+  'subtitle-2': (
+    'size': 16px,
+    'weight': 500,
+    'line-height': 1.5,
+    'letter-spacing': 0.1px
   ),
   'body-2': (
     'size': 14px,
-    'weight': 500
+    'weight': 500,
+    'line-height': 1.5,
+    'letter-spacing': 0.5px
   ),
   'body-1': (
     'size': 14px,
-    'weight': 400
-  ),
-  'caption': (
-    'size': 12px,
-    'weight': 400
+    'weight': 400,
+    'letter-spacing': 0.25px
   ),
   'button': (
     'size': 14px,
-    'weight': 500
+    'weight': 500,
+    'letter-spacing': 0.75px
+  ),
+  'caption': (
+    'size': 12px,
+    'weight': 400,
+    'letter-spacing': 0.4px
+  ),
+  'overline': (
+    'size': 10px,
+    'weight': 500,
+    'letter-spacing': 1.5px
   )
 ) !default;
 
@@ -195,8 +213,8 @@ $collapsible-transition-height: 0.23s !default;
 $footer-height: 36px !default;
 
 /** Lists */
-$list-tile-font-size: map-get(map-get($headings, 'subheading'), 'size') !default;
-$list-tile-font-weight: map-get(map-get($headings, 'subheading'), 'weight') !default;
+$list-tile-font-size: map-deep-get($headings, 'subtitle-1', 'size') !default;
+$list-tile-font-weight: map-deep-get($headings, 'subtitle-1', 'weight') !default;
 
 $list-action-text-font-size: 12px !default;
 $list-action-text-font-color: map-get($grey, 'base') !default;
