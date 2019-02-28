@@ -19,25 +19,20 @@ import { ExtractVue } from './../../util/mixins'
 import mixins from '../../util/mixins'
 
 // Types
-import Vue from 'vue'
 import { VNode } from 'vue/types'
 
-interface options extends Vue {
+const baseMixins = mixins(
+  Colorable,
+  Proxyable
+)
+
+interface options extends ExtractVue<typeof baseMixins> {
   $refs: {
     items: InstanceType<typeof VTabsBar>
   }
 }
 
-const baseOptions = mixins(
-  Colorable,
-  Proxyable
-)
-
-export default mixins<options & ExtractVue<typeof baseOptions>>(
-  Colorable,
-  Proxyable
-  /* @vue/component */
-).extend({
+export default baseMixins.extend<options>().extend({
   name: 'v-tabs',
 
   directives: {

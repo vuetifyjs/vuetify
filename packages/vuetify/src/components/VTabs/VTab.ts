@@ -9,12 +9,7 @@ import mixins from '../../util/mixins'
 import { ExtractVue } from './../../util/mixins'
 
 // Types
-import Vue from 'vue'
 import { VNode } from 'vue/types'
-
-interface options extends Vue {
-  $el: HTMLElement
-}
 
 const baseMixins = mixins(
   Routable,
