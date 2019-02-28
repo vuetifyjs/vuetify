@@ -1,0 +1,20 @@
+module: {
+  rules: [
+    {
+      test: /\.s(a|c)ss$/,
+      loader: ['style-loader', 'css-loader', 'sass-loader']
+    }
+  ]
+}
+
+/*
+For Dart Sass:
+
+{
+  loader: "sass-loader",
+  options: {
+    implementation: require("sass"),
+    fiber: require('fibers')
+  }
+}
+*/

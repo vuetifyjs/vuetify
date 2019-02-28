@@ -1,7 +1,9 @@
+@import './_variables.sass'
+
 // Block
 .v-chip-group
   .v-chip
-    margin: 4px 8px 4px 0
+    margin: $chip-group-margin
 
   .v-chip--selected
     &.v-chip--no-color
@@ -13,7 +15,7 @@
 
 // Element
 .v-chip-group .v-slide-group__content
-  padding: 4px 0
+  padding: $chip-group-content-padding
 
 // Modifiers
 .v-chip-group--column

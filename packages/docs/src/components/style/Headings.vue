@@ -27,16 +27,18 @@
   export default {
     data: () => ({
       texts: [
-        ['display-4', 'Light 112sp', '300'],
-        ['display-3', 'Regular 56sp', '400'],
-        ['display-2', 'Regular 45sp', '400'],
+        ['display-4', 'Light 96sp', '300'],
+        ['display-3', 'Regular 60sp', '400'],
+        ['display-2', 'Regular 48sp', '400'],
         ['display-1', 'Regular 34sp', '400'],
         ['headline', 'Regular 24sp', '400'],
         ['title', 'Medium 20sp', '500'],
-        ['subheading', 'Regular 16sp', '400'],
+        ['subtitle-2', 'Medium 16sp', '500'],
+        ['subtitle-1', 'Regular 16sp', '400'],
         ['body-2', 'Medium 14sp', '500'],
         ['body-1', 'Regular 14sp', '400'],
-        ['caption', 'Regular 12sp', '400']
+        ['caption', 'Regular 12sp', '400'],
+        ['overline', 'Medium 10sp', '500']
       ]
     })
 

@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "mdLink": "https://material.io/archive/guidelines/components/expansion-panels.html",
   "children": [
     {
       "type": "section",

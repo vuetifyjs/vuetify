@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "mdLink": "https://material.io/design/components/banners.html",
   "children": [
     {
       "type": "section",
