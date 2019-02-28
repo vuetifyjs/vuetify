@@ -2,34 +2,36 @@
 import VAvatar from '../VAvatar'
 
 // Types
-import Vue, { VNode } from 'vue'
+import { VNode } from 'vue'
 
 /* @vue/component */
-export default Vue.extend({
+export default VAvatar.extend({
   name: 'v-list-tile-avatar',
 
-  functional: true,
-
   props: {
-    color: String,
+    horizontal: Boolean,
     size: {
       type: [Number, String],
       default: 40
-    },
-    tile: Boolean
+    }
   },
 
-  render (h, { data, children, props }): VNode {
-    data.staticClass = (`v-list__tile__avatar ${data.staticClass || ''}`).trim()
-
-    const avatar = h(VAvatar, {
-      props: {
-        color: props.color,
-        size: props.size,
-        tile: props.tile
+  computed: {
+    classes (): object {
+      return {
+        'v-list__tile__avatar--horizontal': this.horizontal,
+        ...VAvatar.options.computed.classes.call(this),
+        'v-avatar--tile': this.tile || this.horizontal
       }
-    }, [children])
+    }
+  },
 
-    return h('div', data, [avatar])
+  render (h): VNode {
+    const render = VAvatar.options.render.call(this, h)
+
+    render.data = render.data || {}
+    render.data.staticClass += ' v-list__tile__avatar'
+
+    return render
   }
 })

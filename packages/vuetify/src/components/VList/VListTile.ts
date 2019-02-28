@@ -31,9 +31,9 @@ export default mixins(
       type: String,
       default: 'primary--text'
     },
-    avatar: Boolean,
     inactive: Boolean,
-    tag: String
+    threeLine: Boolean,
+    twoLine: Boolean
   },
 
   data: () => ({
@@ -49,10 +49,11 @@ export default mixins(
     classes (): object {
       return {
         'v-list__tile': true,
-        'v-list__tile--link': this.isLink && !this.inactive,
-        'v-list__tile--avatar': this.avatar,
-        'v-list__tile--disabled': this.disabled,
         'v-list__tile--active': !this.to && this.isActive,
+        'v-list__tile--disabled': this.disabled,
+        'v-list__tile--link': this.isLink && !this.inactive,
+        'v-list__tile--three-line': this.threeLine,
+        'v-list__tile--two-line': this.twoLine,
         ...this.themeClasses,
         [this.activeClass]: this.isActive
       }
@@ -78,13 +79,8 @@ export default mixins(
     }
 
     data.attrs = Object.assign({}, data.attrs, this.$attrs)
+    data.attrs.disabled = this.disabled
 
-    return h('div', this.setTextColor(!this.disabled && this.color, {
-      class: this.listClasses,
-      attrs: {
-        disabled: this.disabled,
-        role: 'listitem'
-      }
-    }), [h(tag, data, this.$slots.default)])
+    return h(tag, this.setBackgroundColor(this.color, data), this.$slots.default)
   }
 })
