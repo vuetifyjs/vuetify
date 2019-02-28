@@ -105,11 +105,15 @@ export default baseMixins.extend<options>().extend({
         'v-tabs--vertical': this.vertical
       }
     },
+    isReversed (): boolean {
+      return this.$vuetify.rtl && this.vertical
+    },
     sliderStyles (): object {
       return {
-        left: convertToUnit(this.slider.left),
-        top: this.vertical ? convertToUnit(this.slider.top) : undefined,
         height: convertToUnit(this.slider.height),
+        left: this.isReversed ? undefined : convertToUnit(this.slider.left),
+        right: this.isReversed ? convertToUnit(this.slider.right) : undefined,
+        top: this.vertical ? convertToUnit(this.slider.top) : undefined,
         transition: this.slider.left != null ? null : 'none',
         width: convertToUnit(this.slider.width)
       }
@@ -125,7 +129,8 @@ export default baseMixins.extend<options>().extend({
     showArrows: 'callSlider',
     vertical: 'callSlider',
     '$vuetify.application.left': 'onResize',
-    '$vuetify.application.right': 'onResize'
+    '$vuetify.application.right': 'onResize',
+    '$vuetify.rtl': 'onResize'
   },
 
   mounted () {
@@ -157,9 +162,10 @@ export default baseMixins.extend<options>().extend({
         const el = activeTab.$el as HTMLElement
 
         this.slider = {
-          top: el.offsetTop,
           height: this.vertical ? el.offsetHeight : 2,
           left: this.vertical ? 0 : el.offsetLeft,
+          right: this.vertical ? 0 : el.offsetLeft + el.offsetWidth,
+          top: el.offsetTop,
           width: this.vertical ? 2 : el.scrollWidth
         }
       })
