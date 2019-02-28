@@ -55,11 +55,16 @@
     }
   },
   "props": {
+    "activeClass": "Mixins.BaseItemGroup.props.activeClass",
     "alignWithTitle": "Make `v-tabs` lined up with the toolbar title",
+    "backgroundColor": "Changes the background color of `v-tabs-bar`.",
     "cycle": "Will reset to first or last tab when swiping left or right if at the end of indexes",
+    "dark": "Mixins.Themeable.props.dark",
     "grow": "Force `v-tab`'s to take up all available space",
     "hideSlider": "Hide's the generated `v-tabs-slider`",
     "iconsAndText": "Will stack icon and text vertically",
+    "light": "Mixins.Themeable.props.light",
+    "optional": "Does not require an active item. Useful when using `v-tab` as a `router-link`",
     "prevIcon": "Left pagination icon",
     "nextIcon": "Right pagination icon",
     "reverseTransition": "Components.Windows.props.reverseTransition",
