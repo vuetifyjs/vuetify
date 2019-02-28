@@ -156,9 +156,9 @@ export default baseMixins.extend<options>().extend({
 
         this.slider = {
           top: el.offsetTop,
-          height: !this.vertical ? 2 : el.offsetHeight,
-          left: !this.vertical ? el.offsetLeft : 0,
-          width: !this.vertical ? el.scrollWidth : 2
+          height: this.vertical ? el.offsetHeight : 2,
+          left: this.vertical ? 0 : el.offsetLeft,
+          width: this.vertical ? 2 : el.scrollWidth
         }
       })
 
