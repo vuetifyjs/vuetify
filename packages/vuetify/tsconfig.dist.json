@@ -7,5 +7,10 @@
     "sourceMap": false,
     "inlineSourceMap": true,
     "inlineSources": true
-  }
+  },
+  "exclude": [
+    "**/*.spec.ts",
+    "**/*.spec.js",
+    "node_modules"
+  ]
 }
