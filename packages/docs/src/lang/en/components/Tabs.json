@@ -52,6 +52,10 @@
     "dynamic": {
       "header": "### Dynamic Tabs",
       "desc": "Tabs can be dynamically added and removed. This allows you to update to any number and the `v-tabs` component will react. In this example when we add a new tab, we automatically change our model to match. As we add more tabs and overflow the container, the selected item will be automatically scrolled into view. Remove all `v-tab`s and the slider will disappear."
+    },
+    "vertical": {
+      "header": "### Vertical Tabs",
+      "desc": "Tabs can be toggled to stack its `v-tab` components vertically."
     }
   },
   "props": {

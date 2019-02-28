@@ -81,14 +81,19 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
     },
     right: Boolean,
     showArrows: Boolean,
-    sliderColor: String
+    sliderColor: String,
+    vertical: Boolean
   },
 
   data () {
     return {
       resizeTimeout: 0,
-      sliderWidth: null as number | null,
-      sliderLeft: null as number | null,
+      slider: {
+        height: null as null | number,
+        left: null as null | number,
+        top: null as null | number,
+        width: null as null | number
+      } as Record<string, number | null>,
       transitionTime: 300
     }
   },
@@ -101,14 +106,17 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
         'v-tabs--fixed-tabs': this.fixedTabs,
         'v-tabs--grow': this.grow,
         'v-tabs--icons-and-text': this.iconsAndText,
-        'v-tabs--right': this.right
+        'v-tabs--right': this.right,
+        'v-tabs--vertical': this.vertical
       }
     },
     sliderStyles (): object {
       return {
-        left: `${this.sliderLeft}px`,
-        transition: this.sliderLeft != null ? null : 'none',
-        width: `${this.sliderWidth}px`
+        left: convertToUnit(this.slider.left),
+        top: this.vertical ? convertToUnit(this.slider.top) : undefined,
+        height: convertToUnit(this.slider.height),
+        transition: this.slider.left != null ? null : 'none',
+        width: convertToUnit(this.slider.width)
       }
     }
   },
@@ -118,6 +126,7 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
     centered: 'callSlider',
     fixedTabs: 'callSlider',
     right: 'callSlider',
+    vertical: 'callSlider',
     '$vuetify.application.left': 'onResize',
     '$vuetify.application.right': 'onResize'
   },
@@ -135,7 +144,7 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
         !this.$refs.items ||
         !this.$refs.items.selectedItems.length
       ) {
-        this.sliderWidth = 0
+        this.slider.width = 0
         return false
       }
 
@@ -144,14 +153,18 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
         const activeTab = this.$refs.items.selectedItems[0]
         /* istanbul ignore if */
         if (!activeTab || !activeTab.$el) {
-          this.sliderWidth = 0
-          this.sliderLeft = 0
+          this.slider.width = 0
+          this.slider.left = 0
           return
         }
         const el = activeTab.$el as HTMLElement
 
-        this.sliderWidth = el.scrollWidth
-        this.sliderLeft = el.offsetLeft
+        this.slider = {
+          top: el.offsetTop,
+          height: !this.vertical ? 2 : el.offsetHeight,
+          left: !this.vertical ? el.offsetLeft : 0,
+          width: !this.vertical ? el.scrollWidth : 2
+        }
       })
 
       return true
@@ -205,7 +218,7 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
       }, item)
     },
     genSlider (items: VNode[]) {
-      if (this.hideSlider) return undefined
+      if (this.hideSlider) return null
 
       if (!items.length) {
         const slider = this.$createElement(VTabsSlider, {

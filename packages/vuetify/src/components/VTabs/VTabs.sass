@@ -120,3 +120,25 @@
 
   .v-tabs__item:last-child
     margin-right: 0
+
+.v-tabs--vertical
+  display: flex
+
+  .v-tabs__bar
+    height: auto
+
+  .v-slide-group__content
+    flex-direction: column
+
+  .v-tabs__item
+    height: 48px
+
+  .v-tabs__slider
+    height: 100%
+
+  .v-window
+    flex: 1 1 auto
+
+  &.v-tabs--icons-and-text
+    .v-tabs__item
+      height: 72px

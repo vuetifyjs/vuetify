@@ -134,8 +134,10 @@ describe('VTabs.ts', () => {
         value: 0
       },
       data: () => ({
-        sliderLeft: 100,
-        sliderWidth: 100
+        slider: {
+          left: 100,
+          width: 100
+        },
       }),
       slots: {
         default: [VTab]
@@ -146,7 +148,7 @@ describe('VTabs.ts', () => {
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.sliderLeft).toBe(0)
-    expect(wrapper.vm.sliderWidth).toBe(0)
+    expect(wrapper.vm.slider.left).toBe(0)
+    expect(wrapper.vm.slider.width).toBe(0)
   })
 })
