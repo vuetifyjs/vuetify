@@ -73,6 +73,15 @@ export default mixins(
         }
       }, [this.genInnerDot()])
     },
+    genDivider () {
+      const children = [this.$createElement('div', { staticClass: 'v-timeline-item__line' })]
+
+      if (!this.hideDot) children.push(this.genDot())
+
+      return this.$createElement('div', {
+        staticClass: 'v-timeline-item__divider'
+      }, children)
+    },
     genOpposite () {
       return this.$createElement('div', {
         staticClass: 'v-timeline-item__opposite'
@@ -81,17 +90,19 @@ export default mixins(
   },
 
   render (h): VNode {
-    const children = [this.genBody()]
+    const children = [
+      this.genBody(),
+      this.genDivider()
+    ]
 
-    if (!this.hideDot) children.unshift(this.genDot())
     if (this.$slots.opposite) children.push(this.genOpposite())
 
     return h('div', {
       staticClass: 'v-timeline-item',
       class: {
         'v-timeline-item--fill-dot': this.fillDot,
-        'v-timeline-item--left': this.left,
-        'v-timeline-item--right': this.right,
+        'v-timeline-item--before': this.left,
+        'v-timeline-item--after': this.right,
         ...this.themeClasses
       }
     }, children)

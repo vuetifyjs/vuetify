@@ -1,5 +1,5 @@
 @mixin timeline-theme($material)
-  &:before
+  .v-timeline-item__line
     background: map-get($material, 'dividers')
 
   .v-timeline-item
@@ -10,12 +10,50 @@
       &:before
         border-right-color: $shadow-key-ambient-opacity
 
-@mixin timeline-dots($dot-size, $inner-dot-size, $inner-dot-margin)
+@mixin timeline-dots($dot-size, $inner-dot-size)
   height: $dot-size
   left: calc(50% - #{$dot-size / 2})
   width: $dot-size
 
   .v-timeline-item__inner-dot
     height: $inner-dot-size
-    margin: $inner-dot-margin
+    margin: #{($dot-size - $inner-dot-size) / 2}
     width: $inner-dot-size
+
+@mixin timeline-wedge-align($direction)
+  .v-card:before, .v-card:after
+    transform: rotate(if($direction == right, 180deg, 0))
+    #{$direction}: -($timeline-wedge-size)
+    #{if($direction == left, right, left)}: initial
+
+  +rtl()
+    .v-card:before, .v-card:after
+      transform: rotate(if($direction == right, 0, 180deg))
+      #{$direction}: initial
+      #{if($direction == left, right, left)}: -($timeline-wedge-size)
+
+@mixin timeline-wedge-before()
+  @include timeline-wedge-align(left)
+
+@mixin timeline-wedge-after()
+  @include timeline-wedge-align(right)
+
+@mixin timeline-item-before()
+  flex-direction: row-reverse
+
+  .v-timeline-item__opposite
+    text-align: right
+
+  +rtl()
+    .v-timeline-item__opposite
+      text-align: left
+
+@mixin timeline-item-after()
+  flex-direction: row
+
+  .v-timeline-item__opposite
+    text-align: left
+
+  +rtl()
+    .v-timeline-item__opposite
+      text-align: right

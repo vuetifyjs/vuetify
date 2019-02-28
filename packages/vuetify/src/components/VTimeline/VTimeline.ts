@@ -16,7 +16,8 @@ export default mixins(
 
   props: {
     alignTop: Boolean,
-    dense: Boolean
+    dense: Boolean,
+    reverse: Boolean
   },
 
   computed: {
@@ -24,6 +25,7 @@ export default mixins(
       return {
         'v-timeline--align-top': this.alignTop,
         'v-timeline--dense': this.dense,
+        'v-timeline--reverse': this.reverse,
         ...this.themeClasses
       }
     }
