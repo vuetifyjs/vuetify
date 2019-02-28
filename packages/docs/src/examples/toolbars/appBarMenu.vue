@@ -8,10 +8,12 @@
       <v-toolbar-side-icon></v-toolbar-side-icon>
 
       <v-menu :nudge-width="100">
-        <v-toolbar-title slot="activator">
-          <span>All</span>
-          <v-icon dark>arrow_drop_down</v-icon>
-        </v-toolbar-title>
+        <template v-slot:activator="{ on }">
+          <v-toolbar-title v-on="on">
+            <span>All</span>
+            <v-icon dark>arrow_drop_down</v-icon>
+          </v-toolbar-title>
+        </template>
 
         <v-list>
           <v-list-tile

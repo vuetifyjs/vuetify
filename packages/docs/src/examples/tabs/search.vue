@@ -14,20 +14,21 @@
         solo-inverted
       ></v-text-field>
 
-      <v-tabs
-        slot="extension"
-        v-model="tabs"
-        centered
-        color="transparent"
-        slider-color="white"
-      >
-        <v-tab
-          v-for="n in 3"
-          :key="n"
+      <template v-slot:extension>
+        <v-tabs
+          v-model="tabs"
+          centered
+          color="transparent"
+          slider-color="white"
         >
-          Item {{ n }}
-        </v-tab>
-      </v-tabs>
+          <v-tab
+            v-for="n in 3"
+            :key="n"
+          >
+            Item {{ n }}
+          </v-tab>
+        </v-tabs>
+      </template>
     </v-toolbar>
 
     <v-tabs-items v-model="tabs">

@@ -27,7 +27,9 @@
       @click="loader = 'loading2'"
     >
       Custom Loader
-      <span slot="loader">Loading...</span>
+      <template v-slot:loader>
+        <span>Loading...</span>
+      </template>
     </v-btn>
 
     <v-btn
@@ -37,9 +39,11 @@
       @click="loader = 'loading4'"
     >
       Icon Loader
-      <span slot="loader" class="custom-loader">
-        <v-icon light>cached</v-icon>
-      </span>
+      <template v-slot:loader>
+        <span class="custom-loader">
+          <v-icon light>cached</v-icon>
+        </span>
+      </template>
     </v-btn>
   </div>
 </template>
