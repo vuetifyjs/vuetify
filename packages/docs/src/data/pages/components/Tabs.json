@@ -43,7 +43,8 @@
             "grow",
             "overflowToMenu",
             "pagination",
-            "icons"
+            "icons",
+            "dynamic"
           ]
         }
       ]

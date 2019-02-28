@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <v-card>
     <v-toolbar
-      color="cyan"
+      card
+      color="deep-purple accent-4"
       dark
       tabs
     >
@@ -22,9 +23,8 @@
       <v-tabs
         slot="extension"
         v-model="currentItem"
-        color="transparent"
         fixed-tabs
-        slider-color="yellow"
+        slider-color="white"
       >
         <v-tab
           v-for="item in items"
@@ -38,11 +38,12 @@
           v-if="more.length"
           bottom
           left
+          class="v-tab__item"
         >
-          <a slot="activator" class="v-tabs__item">
+          <v-btn slot="activator" text>
             more
-            <v-icon>arrow_drop_down</v-icon>
-          </a>
+            <v-icon right>arrow_drop_down</v-icon>
+          </v-btn>
 
           <v-list class="grey lighten-3">
             <v-list-tile
@@ -71,7 +72,7 @@
         </v-card>
       </v-tab-item>
     </v-tabs-items>
-  </div>
+  </v-card>
 </template>
 
 <script>
