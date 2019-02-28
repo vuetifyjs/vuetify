@@ -6,6 +6,7 @@ import VDatePickerMonthTable from './VDatePickerMonthTable'
 import VDatePickerYears from './VDatePickerYears'
 
 // Mixins
+import Localable from '../../mixins/localable'
 import Picker from '../../mixins/picker'
 
 // Utils
@@ -38,6 +39,7 @@ function sanitizeDateString (dateString: string, type: 'date' | 'month' | 'year'
 }
 
 export default mixins(
+  Localable,
   Picker
 /* @vue/component */
 ).extend({
@@ -62,10 +64,6 @@ export default mixins(
     },
     // Function formatting the tableDate in the day/month table header
     headerDateFormat: Function as PropValidator<DatePickerFormatter | undefined>,
-    locale: {
-      type: String,
-      default: 'en-us'
-    },
     max: String,
     min: String,
     // Function formatting month in the months table
@@ -169,7 +167,7 @@ export default mixins(
     },
     formatters (): Formatters {
       return {
-        year: this.yearFormat || createNativeLocaleFormatter(this.locale, { year: 'numeric', timeZone: 'UTC' }, { length: 4 }),
+        year: this.yearFormat || createNativeLocaleFormatter(this.currentLocale, { year: 'numeric', timeZone: 'UTC' }, { length: 4 }),
         titleDate: this.titleDateFormat || (this.multiple ? this.defaultTitleMultipleDateFormatter : this.defaultTitleDateFormatter)
       }
     },
@@ -187,7 +185,7 @@ export default mixins(
         date: { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'UTC' }
       }
 
-      const titleDateFormatter = createNativeLocaleFormatter(this.locale, titleFormats[this.type], {
+      const titleDateFormatter = createNativeLocaleFormatter(this.currentLocale, titleFormats[this.type], {
         start: 0,
         length: { date: 10, month: 7, year: 4 }[this.type]
       })

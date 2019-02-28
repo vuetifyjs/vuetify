@@ -312,10 +312,8 @@
         Scoped slots
       </core-title>
       <core-section center>
-        <v-rating value="2">
+        <v-rating value="2" #item="props">
           <v-icon
-            slot="item"
-            slot-scope="props"
             :color="props.isFilled ? colors[props.index] : 'grey lighten-1'"
             large
             @click="props.click"

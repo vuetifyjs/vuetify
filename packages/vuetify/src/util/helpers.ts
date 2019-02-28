@@ -358,7 +358,7 @@ export function wrapInArray<T> (v: T | T[]): T[] { return Array.isArray(v) ? v :
 export function computeSlots (cmp: Vue, name: string, props: object) {
   const slots: VNodeChildrenArrayContents = []
 
-  if (cmp.$slots[name]) slots.push(...cmp.$slots[name])
+  if (cmp.$slots[name]) slots.push(...cmp.$slots[name]!)
   if (cmp.$scopedSlots[name]) {
     const scoped = cmp.$scopedSlots[name]!(props)
     Array.isArray(scoped) ? slots.push(...scoped) : slots.push(scoped)
@@ -367,16 +367,18 @@ export function computeSlots (cmp: Vue, name: string, props: object) {
   return slots
 }
 
+export type compareFn<T = any> = (a: T, b: T) => number
+
 export function sortItems (
   items: any[],
   sortBy: string[],
   sortDesc: boolean[],
   locale: string,
-  customSorters?: Record<string, (a: any, b: any) => number>
+  customSorters?: Record<string, compareFn>
 ) {
   if (sortBy === null || !sortBy.length) return items
 
-  return items.sort((a: any, b: any): number => {
+  return items.sort((a, b) => {
     for (let i = 0; i < sortBy.length; i++) {
       const sortKey = sortBy[i]
 

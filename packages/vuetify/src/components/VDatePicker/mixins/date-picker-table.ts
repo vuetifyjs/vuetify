@@ -5,6 +5,7 @@ import Touch, { TouchWrapper } from '../../../directives/touch'
 
 // Mixins
 import Colorable from '../../../mixins/colorable'
+import Localable from '../../../mixins/localable'
 import Themeable from '../../../mixins/themeable'
 
 // Utils
@@ -21,6 +22,7 @@ type CalculateTableDateFunction = (v: number) => string
 
 export default mixins(
   Colorable,
+  Localable,
   Themeable
 /* @vue/component */
 ).extend({
@@ -39,10 +41,6 @@ export default mixins(
       type: [Array, Function, Object, String],
       default: () => 'warning'
     } as any as PropValidator<DateEventColors>,
-    locale: {
-      type: String,
-      default: 'en-us'
-    },
     min: String,
     max: String,
     readonly: Boolean,

@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_rating.styl'
+import './VRating.sass'
 
 // Components
 import VIcon from '../VIcon'

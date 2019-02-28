@@ -1,11 +1,25 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import goTo from 'vuetify/lib/services/goto'
 
 Vue.use(Router)
 
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
+  scrollBehavior: async (to, from, savedPosition) => {
+    await goTo(0)
+
+    let scrollTo = 0
+
+    if (to.hash) {
+      scrollTo = to.hash
+    } else if (savedPosition) {
+      scrollTo = savedPosition.y
+    }
+
+    return goTo(scrollTo)
+  },
   routes: [
     {
       path: '/theme',
