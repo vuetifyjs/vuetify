@@ -7,15 +7,20 @@
 .v-tabs__bar.theme--dark
   +tabs-theme($material-dark)
 
-  .v-tabs__item.v-tabs__item--active
+  .v-tabs__item.v-tabs__item--active,
+  .v-tabs__slider-wrapper
     color: map-deep-get($material-dark, 'text', 'primary')
 
 // Block
 .v-tabs
-  //
+  flex: 1 1 auto
+
+  .v-menu__activator
+    height: 100%
 
 // Element
 .v-tabs__bar
+  border-radius: inherit
   height: 48px
 
   &.v-item-group > *
