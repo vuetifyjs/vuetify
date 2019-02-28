@@ -120,7 +120,9 @@ export default baseMixins.extend<options>().extend({
     alignWithTitle: 'callSlider',
     centered: 'callSlider',
     fixedTabs: 'callSlider',
+    grow: 'callSlider',
     right: 'callSlider',
+    showArrows: 'callSlider',
     vertical: 'callSlider',
     '$vuetify.application.left': 'onResize',
     '$vuetify.application.right': 'onResize'
