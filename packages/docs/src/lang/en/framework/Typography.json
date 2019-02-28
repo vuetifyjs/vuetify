@@ -1,8 +1,6 @@
 {
   "header": "# Typography",
   "headerText": "The typography of an application is just as important as its functionality. Vuetify.js uses the Material Design spec Roboto Font. Each heading size also has a corresponding helper class to style other elements the same.",
-  "helperHeader": "## Helper components",
-  "helperText": "The Typography helper components are simple implementations that provide you with a semantic usage of the underlying classes.",
   "fontHeader": "## Font sizes",
   "fontText": "Typography helper classes allow you to easily style text according to Material Design sizing.",
   "fonts": [
@@ -44,8 +42,5 @@
   "wraps": [
     "`.text-no-wrap` - Sets whitespace to **no-wrap**",
     "`.text-truncate` - Truncates overflowed text"
-  ],
-  "props": {
-    "tag": "Specifies a tag"
-  }
+  ]
 }
