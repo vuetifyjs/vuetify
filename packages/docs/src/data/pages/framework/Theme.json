@@ -1,7 +1,6 @@
 {
   "title": "header",
   "titleText": "headerText",
-  "mdLink": "https://material.io/design/material-theming/overview.html",
   "children": [
     {
       "type": "section",
@@ -184,63 +183,69 @@
       "children": [
         {
           "type": "heading",
-          "lang": "stylusHeader"
+          "lang": "sassHeader"
         },
         {
           "type": "text",
-          "lang": "stylusText1"
+          "lang": "sassText1"
+        },
+        {
+          "type": "alert",
+          "lang": "sassAlert1",
+          "value": "info"
         },
         {
           "type": "heading",
-          "lang": "stylusHeader2"
+          "lang": "sassHeader2"
         },
         {
           "type": "text",
-          "lang": "stylusText2"
+          "lang": "sassText2"
         },
         {
           "type": "markup",
-          "value": "bash_yarn_install_stylus"
+          "value": "bash_yarn_install_sass"
         },
         {
           "type": "text",
-          "lang": "stylusText3"
+          "lang": "sassText3"
         },
         {
           "type": "markup",
-          "value": "js_webpack_stylus"
+          "value": "js_webpack_sass"
         },
         {
           "type": "text",
-          "lang": "stylusText4"
+          "lang": "sassText4"
         },
         {
           "type": "markup",
-          "value": "stylus_import_vuetify_css"
-        },
-        {
-          "type": "text",
-          "lang": "stylusText5"
+          "value": "sass_import_vuetify_css"
         },
         {
           "type": "markup",
-          "value": "js_import_vuetify_css"
+          "value": "js_import_vuetify_sass"
+        },
+        {
+          "type": "alert",
+          "lang": "sassAlert2",
+          "value": "warning"
         },
         {
           "type": "text",
-          "lang": "stylusText6"
+          "lang": "sassText5"
         },
         {
           "type": "heading",
-          "lang": "stylusHeader3"
+          "lang": "sassHeader3"
         },
         {
           "type": "text",
-          "lang": "stylusText7"
+          "lang": "sassText6"
         },
         {
           "type": "markup",
-          "value": "stylus_changing_variables"
+          "value": "sass_changing_variables"
         }
       ]
     },

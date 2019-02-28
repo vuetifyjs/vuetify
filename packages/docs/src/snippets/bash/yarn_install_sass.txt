@@ -1,0 +1,5 @@
+$ yarn add node-sass sass-loader style-loader css-loader -D
+// OR
+$ npm i node-sass sass-loader style-loader css-loader --save-dev
+
+// Replace node-sass with sass to use Dart Sass
