@@ -13,23 +13,19 @@ import { convertToUnit } from '../../util/helpers'
 import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
-import Vue, { VNode } from 'vue'
+import { VNode } from 'vue'
 
-type VBaseWindow = InstanceType<typeof VWindow>
-
-interface options extends Vue {
-  $el: HTMLElement
-  windowGroup: VBaseWindow
-}
-
-const baseOptions = mixins(
+const baseMixins = mixins(
   Bootable,
   GroupableFactory('windowGroup', 'v-window-item', 'v-window')
 )
 
-export default mixins<options & ExtractVue<typeof baseOptions>>(
-  Bootable,
-  GroupableFactory('windowGroup', 'v-window-item', 'v-window')
+interface options extends ExtractVue<typeof baseMixins> {
+  $el: HTMLElement
+  windowGroup: InstanceType<typeof VWindow>
+}
+
+export default baseMixins.extend<options>().extend(
   /* @vue/component */
 ).extend({
   name: 'v-window-item',
