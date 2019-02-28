@@ -137,7 +137,7 @@ describe('VTabs.ts', () => {
         slider: {
           left: 100,
           width: 100
-        },
+        }
       }),
       slots: {
         default: [VTab]
