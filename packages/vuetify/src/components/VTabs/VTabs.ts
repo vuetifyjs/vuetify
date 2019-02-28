@@ -47,7 +47,7 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
   props: {
     activeClass: {
       type: String,
-      default: 'v-tabs__window--active'
+      default: 'v-tabs__item--active'
     },
     alignWithTitle: Boolean,
     backgroundColor: String,
@@ -165,7 +165,7 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
           } : null
         },
         props: {
-          activeClass: 'v-tabs__item--active',
+          activeClass: this.activeClass,
           // TODO: deprecate name
           appendIcon: this.nextIcon,
           dark: this.dark,
@@ -195,7 +195,6 @@ export default mixins<options & ExtractVue<typeof baseOptions>>(
 
       return this.$createElement(VTabsItems, {
         props: {
-          activeClass: this.activeClass,
           value: this.internalValue
         },
         on: {
