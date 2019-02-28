@@ -43,9 +43,6 @@ export default baseMixins.extend<options>().extend(
         ...this.groupClasses
       }
     },
-    styles () {
-      return {}
-    },
     value (): any {
       let to = this.to || this.href || ''
 
@@ -102,7 +99,7 @@ export default baseMixins.extend<options>().extend(
   },
 
   render (h): VNode {
-    const { tag, data } = this.generateRouteLink(this.classes, this.styles)
+    const { tag, data } = this.generateRouteLink(this.classes)
 
     data.attrs = {
       ...data.attrs,
