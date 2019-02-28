@@ -31,12 +31,14 @@ test('VTimelineItem.js', ({ mount }) => {
   })
 
   it('should render opposite slot', () => {
-    expect(mount(VTimelineItem, {
+    const wrapper = mount(VTimelineItem, {
       slots: {
         opposite: [{
           render: h => h('div', 'foo')
         }]
       }
-    }).html())
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

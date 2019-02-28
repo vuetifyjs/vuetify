@@ -1,29 +1,13 @@
-@import '../bootstrap'
-@import '../theme'
+// Imports
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+@import './_mixins.sass'
 
-v-timeline($material)
-  &:before
-    background: $material.dividers
-
-  .v-timeline-item
-    &__dot
-      background: $material.cards
-
-    .v-card
-      &:before
-        border-right-color: $shadow-key-ambient-opacity
-
-theme(v-timeline, "v-timeline")
-
-timeline-dots($dot-size, $inner-dot-size, $inner-dot-margin)
-  height: $dot-size
-  left: 'calc(50% - %s)' % ($dot-size / 2)
-  width: $dot-size
-
-  .v-timeline-item__inner-dot
-    height: $inner-dot-size
-    margin:$inner-dot-margin
-    width: $inner-dot-size
+// Theme
+.v-timeline.theme--light
+  +timeline-theme($material-light)
+.v-timeline.theme--dark
+  +timeline-theme($material-dark)
 
 .v-timeline-item
   display: flex
@@ -40,7 +24,7 @@ timeline-dots($dot-size, $inner-dot-size, $inner-dot-margin)
     .v-timeline-item__opposite
       margin-left: 96px
       text-align: left
-      
+
       .v-card:before, .v-card:after
         transform: rotate(0)
         left: -10px
@@ -52,7 +36,7 @@ timeline-dots($dot-size, $inner-dot-size, $inner-dot-margin)
     .v-timeline-item__opposite
       margin-right: 96px
       text-align: right
-      
+
       .v-card:before, .v-card:after
         transform: rotate(180deg)
         right: -10px
@@ -62,28 +46,16 @@ timeline-dots($dot-size, $inner-dot-size, $inner-dot-margin)
     border-radius: 50%
 
   &__dot
-    elevation(1)
+    +elevation(1)
     align-self: center
     position: absolute
-    timeline-dots(
-      $timeline-dot-regular-size,
-      $timeline-inner-dot-regular-size,
-      $timeline-inner-dot-regular-margin
-    )
+    +timeline-dots($timeline-dot-regular-size, $timeline-inner-dot-regular-size, $timeline-inner-dot-regular-margin)
 
     &--small
-      timeline-dots(
-        $timeline-dot-small-size,
-        $timeline-inner-dot-small-size,
-        $timeline-inner-dot-small-margin
-      )
+      +timeline-dots($timeline-dot-small-size, $timeline-inner-dot-small-size, $timeline-inner-dot-small-margin)
 
     &--large
-      timeline-dots(
-        $timeline-dot-large-size,
-        $timeline-inner-dot-large-size,
-        $timeline-inner-dot-large-margin
-      )
+      +timeline-dots($timeline-dot-large-size, $timeline-inner-dot-large-size, $timeline-inner-dot-large-margin)
 
   &__inner-dot
     display: flex
@@ -103,13 +75,13 @@ timeline-dots($dot-size, $inner-dot-size, $inner-dot-margin)
       border-top: $timeline-wedge-size solid transparent
       border-bottom: $timeline-wedge-size solid transparent
       border-right: $timeline-wedge-size solid black
-      top: 'calc(50% - %s)' % $timeline-wedge-size
+      top: calc(50% - #{$timeline-wedge-size})
 
     &:after
       border-right-color: inherit
 
     &:before
-      top: 'calc(50% - %s + 2px)' % $timeline-wedge-size
+      top: calc(50% - #{$timeline-wedge-size} + 2px)
 
   &__opposite
     flex: 1 1 auto
@@ -150,10 +122,10 @@ timeline-dots($dot-size, $inner-dot-size, $inner-dot-margin)
 
       .v-card
         &:before
-          top: 'calc(0% + %s + 2px)' % $timeline-wedge-size
+          top: calc(0% + #{$timeline-wedge-size} + 2px)
 
         &:after
-          top: 'calc(0% + %s)' % $timeline-wedge-size
+          top: calc(0% + #{$timeline-wedge-size})
 
   &--dense
     &:before

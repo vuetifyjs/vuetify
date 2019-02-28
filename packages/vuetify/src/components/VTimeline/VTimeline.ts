@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_timeline.styl'
+import './VTimeline.sass'
 
 // Types
 import { VNode } from 'vue'
