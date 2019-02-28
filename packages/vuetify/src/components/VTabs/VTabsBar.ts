@@ -47,7 +47,7 @@ export default mixins(
 
       this.$emit('call:slider')
     },
-    onRouteChange (val: any, oldVal: any) {
+    onRouteChange (val: Route, oldVal: Route) {
       /* istanbul ignore next */
       if (this.mandatory) return
 
