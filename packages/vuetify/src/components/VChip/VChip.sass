@@ -28,9 +28,9 @@
   outline: none
   padding: 0 12px
   position: relative
-  transition-duration: 0.28s
+  transition-duration: $chip-transition-duration
   transition-property: box-shadow, opacity, background
-  transition-timing-function: map-get($transition, 'fast-out-slow-in')
+  transition-timing-function: $chip-transition-fn
   vertical-align: middle
 
   &:after
@@ -44,34 +44,34 @@
     pointer-events: none
     right: 0
     top: 0
-    transition: opacity 0.2s map-get($transition, 'ease-in-out')
+    transition: $chip-after-transition
 
   // Important is needed to account for new avatar structure
   .v-avatar
-    height: 24px !important
-    width: 24px !important
+    height: $chip-avatar-size !important
+    width: $chip-avatar-size !important
 
   .v-icon
-    font-size: 24px
+    font-size: $chip-icon-size
 
   .v-avatar,
   .v-icon
     &--left
-      margin-left: -6px
-      margin-right: 8px
+      margin-left: $chip-icon-margin-before
+      margin-right: $chip-icon-margin-after
 
     &--right
-      margin-left: 8px
-      margin-right: -6px
+      margin-left: $chip-icon-margin-after
+      margin-right: $chip-icon-margin-before
 
     +rtl()
       &--left
-        margin-left: 8px
-        margin-right: -6px
+        margin-left: $chip-icon-margin-after
+        margin-right: $chip-icon-margin-before
 
       &--right
-        margin-left: -6px
-        margin-right: 8px
+        margin-left: $chip-icon-margin-before
+        margin-right: $chip-icon-margin-after
 
   &:not(.v-chip--no-color)
     .v-icon
@@ -79,17 +79,17 @@
 
 // Elements
 .v-chip__close.v-icon
-  font-size: 18px
-  max-height: 18px
-  max-width: 18px
+  font-size: $chip-close-size
+  max-height: $chip-close-size
+  max-width: $chip-close-size
   user-select: none
 
   &.v-icon--right
-    margin-right: -4px
+    margin-right: $chip-icon-right-margin-after
 
     +rtl()
-      margin-left: -4px
-      margin-right: 8px
+      margin-left: $chip-icon-right-margin-after
+      margin-right: $chip-icon-right-margin-before
 
   &:hover,
   &:focus,
@@ -135,30 +135,30 @@
 
 .v-chip--pill
   .v-chip__filter
-    margin-right: 16px
+    margin-right: $chip-pill-filter-margin
 
   .v-avatar
-    height: 32px !important
-    width: 32px !important
+    height: $chip-pill-avatar-size !important
+    width: $chip-pill-avatar-size !important
 
   .v-avatar
     &--left
-      margin-left: -12px
+      margin-left: $chip-pill-avatar-margin-before
 
     &--right
-      margin-right: -12px
+      margin-right: $chip-pill-avatar-margin-before
 
     +rtl()
       &--left
-        margin-left: 8px
-        margin-right: -12px
+        margin-left: chip-pill-avatar-margin-after
+        margin-right: $chip-pill-avatar-margin-before
 
       &--right
-        margin-left: -12px
-        margin-right: 8px
+        margin-left: $chip-pill-avatar-margin-before
+        margin-right: chip-pill-avatar-margin-after
 
 .v-chip--label
-  border-radius: 4px !important
+  border-radius: $chip-label-border-radius !important
 
 .v-chip.v-chip--outlined
   background-color: transparent !important
