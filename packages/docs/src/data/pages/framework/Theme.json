@@ -1,7 +1,6 @@
 {
   "title": "header",
   "titleText": "headerText",
-  "mdLink": "https://material.io/design/material-theming/overview.html",
   "children": [
     {
       "type": "section",
@@ -191,6 +190,11 @@
           "lang": "sassText1"
         },
         {
+          "type": "alert",
+          "lang": "sassAlert1",
+          "value": "info"
+        },
+        {
           "type": "heading",
           "lang": "sassHeader2"
         },
@@ -219,16 +223,17 @@
           "value": "sass_import_vuetify_css"
         },
         {
-          "type": "text",
-          "lang": "sassText5"
-        },
-        {
           "type": "markup",
           "value": "js_import_vuetify_sass"
         },
         {
+          "type": "alert",
+          "lang": "sassAlert2",
+          "value": "warning"
+        },
+        {
           "type": "text",
-          "lang": "sassText6"
+          "lang": "sassText5"
         },
         {
           "type": "heading",
@@ -236,7 +241,7 @@
         },
         {
           "type": "text",
-          "lang": "sassText7"
+          "lang": "sassText6"
         },
         {
           "type": "markup",
