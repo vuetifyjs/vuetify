@@ -13,6 +13,15 @@
 .v-list__tile.theme--dark
   +list-tile-theme($material-dark)
 
+.theme--light
+  .v-list__tile__subtitle,
+  .v-list__tile__action-text
+    +list-tile-secondary-text-theme($material-light)
+.theme--dark
+  .v-list__tile__subtitle
+  .v-list__tile__action-text
+    +list-tile-secondary-text-theme($material-dark)
+
 .v-list-rtl
   +list-rtl()
 
@@ -30,8 +39,10 @@
 
 .v-list__group__header
   align-items: center
+  cursor: pointer
   display: flex
   padding: 0 16px
+  user-select: none
 
   > .v-list__tile
     padding: 0
@@ -191,12 +202,10 @@
 
 .v-list--three-line .v-list__tile,
 .v-list__tile--three-line
+  min-height: $list-tile-three-line-min-height
+
   .v-list__tile__content
     align-self: flex-start
-
-.v-list--three-line,
-.v-list__tile--three-line
-  min-height: $list-tile-three-line-min-height
 
   .v-list__tile__avatar,
   .v-list__tile__action

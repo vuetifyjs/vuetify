@@ -29,9 +29,8 @@
 @mixin list-tile-theme($material)
   color: map-deep-get($material, 'text', 'primary')
 
-  .v-list__tile__action-text,
-  .v-list__tile__subtitle
-    color: map-deep-get($material, 'text', 'secondary')
+@mixin list-tile-secondary-text-theme($material)
+  color: map-deep-get($material, 'text', 'secondary')
 
 @mixin list-rtl()
   &__tile
