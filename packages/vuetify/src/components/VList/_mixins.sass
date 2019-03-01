@@ -5,9 +5,6 @@
   .v-list--disabled
     color: map-deep-get($material, 'text', 'disabled')
 
-  .v-list__tile__sub-title
-    color: map-deep-get($material, 'text', 'secondary')
-
   .v-list__tile__mask
     color: map-deep-get($material, 'text', 'disabled')
 
@@ -28,6 +25,10 @@
 
     .v-list__group__header__prepend-icon .v-icon
       color: map-deep-get($material, 'icons', 'inactive') !important
+
+@mixin list-tile-theme($material)
+  .v-list__tile__subtitle
+    color: map-deep-get($material, 'text', 'secondary')
 
 @mixin list-rtl()
   &__tile

@@ -4,11 +4,17 @@
 
 // Theme
 .v-list.theme--light
-  @include list-theme($material-light)
+  +list-theme($material-light)
 .v-list.theme--dark
-  @include list-theme($material-dark)
+  +list-theme($material-dark)
+
+.v-list__tile.theme--light
+  +list-tile-theme($material-light)
+.v-list__tile.theme--dark
+  +list-tile-theme($material-dark)
+
 .v-list-rtl
-  @include list-rtl()
+  +list-rtl()
 
 // Block
 .v-list
@@ -19,7 +25,7 @@
   align-items: stretch
   display: flex
   flex: 1 1
-  min-height: 48px
+  min-height: $list-tile-min-height
   padding: 0 16px
 
 .v-list__tile__action
@@ -42,37 +48,48 @@
     .v-messages
       display: none
 
+  &--left
+    margin-right: $list-tile-action-margin-x
+
   &--right
-    margin-left: 32px
+    margin-left: $list-tile-action-margin-x
 
 .v-list__tile__avatar
   align-self: center
   justify-content: flex-start
-  margin-bottom: 8px
-  margin-top: 8px
+  margin-bottom: $list-tile-avatar-margin-y
+  margin-top: $list-tile-avatar-margin-y
+
+  &.v-list__tile__avatar--horizontal
+    margin-bottom: 8px
+    margin-top: 8px
 
   &.v-avatar--left
-    margin-right: 16px
+    margin-right: $avatar-margin-x
 
     &.v-list__tile__avatar--horizontal
-      margin-left: -16px
+      margin-left: $list-tile-avatar-horizontal-margin-x
 
   &.v-avatar--right
-    margin-left: 16px
+    margin-left: $avatar-margin-x
 
     &.v-list__tile__avatar--horizontal
-      margin-right: -16px
+      margin-right: $list-tile-avatar-horizontal-margin-x
 
 .v-list__tile__content
   align-items: center
+  align-self: center
   display: flex
   flex-wrap: wrap
-  flex: 1 1 auto
+  flex: 1 1 0
   padding: 16px 0
 
   > *
     line-height: 1
     flex: 1 0 100%
+
+    &:not(:last-child)
+      margin-bottom: 4px
 
 .v-list__tile__icon
   align-self: flex-start
@@ -90,25 +107,31 @@
 
 .v-list__tile__title
   align-self: center
-  font-size: map-deep-get($headings, 'subtitle-1', 'size')
+  font-size: $list-tile-title-font-size
 
 // Modifier
-v-list--two-line,
-v-list--three-line
-    .v-list__tile__avatar,
-    .v-list__tile__icon
-      margin-bottom: 16px
-      margin-top: 16px
+.v-list--two-line,
+.v-list__tile--two-line,
+.v-list--three-line,
+.v-list__tile--three-line
+  .v-list__tile__avatar:not(.v-list__tile__avatar--horizontal),
+  .v-list__tile__icon
+    margin-bottom: $list-tile-icon-margin-y
+    margin-top: $list-tile-icon-margin-y
 
-v-list--two-line
-    min-height: 64px
+.v-list--two-line,
+.v-list__tile--two-line
+  .v-list__tile__icon
+    margin-bottom: 32px
 
-    .v-list__tile__icon
-      margin-bottom: 32px
+.v-list--three-line,
+.v-list__tile--three-line
+  min-height: $list-tile-three-line-min-height
 
-v-list--three-line
-    min-height: 88px
+  .v-list__tile__avatar,
+  .v-list__tile__action
+    align-self: flex-start
 
-    .v-list__tile__avatar,
-    .v-list__tile__action
-      align-self: flex-start
+  .v-list__tile__avatar
+    margin-top: 16px
+    margin-bottom: 16px

@@ -1,0 +1,26 @@
+$avatar-margin-x: 16px;
+
+$list-tile-action-margin-x: 32px;
+
+$list-tile-avatar-margin-y: 8px;
+$list-tile-avatar-horizontal-margin-x: -16px;
+
+$list-tile-icon-margin-y: 16px;
+
+$list-tile-min-height: 48px;
+$list-tile-two-line-min-height: 64px;
+$list-tile-three-line-min-height: 88px;
+
+$list-tile-title-font-size: map-deep-get($headings, 'subtitle-1', 'size');
+
+// vs
+
+$list-tile: (
+  'action-margin-x': 32px,
+  'avatar-margin-y': 8px,
+  'avatar-horizontal-margin-x': -16px,
+  'icon-margin-y': 16px,
+  'min-height': 48px,
+  'two-line-min-height': 64px,
+  'three-line-min-height': 88px
+) !default;
