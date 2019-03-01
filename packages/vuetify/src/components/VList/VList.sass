@@ -21,12 +21,23 @@
   padding: 8px 0
 
 // Element
+.v-list__group__header
+  align-items: center
+  display: flex
+  padding: 0 16px
+
+.v-list__group__header,
+.v-list__group__items
+  > .v-list__tile
+    padding: 0
+
 .v-list__tile
   align-items: stretch
   display: flex
   flex: 1 1
   min-height: $list-tile-min-height
   padding: 0 16px
+  text-decoration: none
 
 .v-list__tile__action
   align-self: center
@@ -112,6 +123,9 @@
   font-size: $list-tile-subtitle-font-size
 
 // Modifier
+.v-list__group__items--no-action > * > *:first-child
+  text-indent: 72px
+
 .v-list--two-line,
 .v-list__tile--two-line,
 .v-list--three-line,
@@ -142,12 +156,3 @@
   .v-list__tile__avatar
     margin-top: 16px
     margin-bottom: 16px
-
-.v-list__group__header
-  display: flex
-  
-  &__prepend-icon,
-  &__append-icon
-    margin: 16px
-    
-  

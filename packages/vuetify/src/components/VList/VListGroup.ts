@@ -1,6 +1,7 @@
 // Components
 import VIcon from '../VIcon'
 import VList from './VList'
+import VListTileIcon from './VListTileIcon'
 
 // Mixins
 import Bootable from '../../mixins/bootable'
@@ -133,7 +134,7 @@ export default mixins<options &
 
       if (!icon && !this.$slots.appendIcon) return null
 
-      return this.$createElement('div', {
+      return this.$createElement(VListTileIcon, {
         staticClass: 'v-list__group__header__append-icon'
       }, [
         this.$slots.appendIcon || this.genIcon(icon)
@@ -174,7 +175,7 @@ export default mixins<options &
 
       if (!icon && !this.$slots.prependIcon) return null
 
-      return this.$createElement('div', {
+      return this.$createElement(VListTileIcon, {
         staticClass: 'v-list__group__header__prepend-icon',
         'class': {
           [this.activeClass]: this.isActive
