@@ -84,84 +84,88 @@ $heading-font-family: $body-font-family !default;
 
 $headings: (
   'h1': (
-    'size': 96px,
+    'size': 6rem,
     'weight': 300,
-    'line-height': 1,
-    'letter-spacing': -1.5px,
+    'line-height': 6rem,
+    'letter-spacing': -.015625em,
     'font-family': $heading-font-family
   ),
   'h2': (
-    'size': 60px,
+    'size': 3.75rem,
     'weight': 400,
-    'line-height': 1.35,
-    'letter-spacing': -0.5px,
+    'line-height': 3.75rem,
+    'letter-spacing': -.0083333333em,
     'font-family': $heading-font-family
   ),
   'h3': (
-    'size': 48px,
+    'size': 3rem,
     'weight': 400,
-    'line-height': 48px,
-    'letter-spacing': 0,
+    'line-height': 3.125rem,
+    'letter-spacing': normal,
     'font-family': $heading-font-family
   ),
   'h4': (
-    'size': 34px,
+    'size': 2.125rem,
     'weight': 400,
-    'line-height': 40px,
-    'letter-spacing': 0.25px,
+    'line-height': 2.5rem,
+    'letter-spacing': .0073529412em,
     'font-family': $heading-font-family
   ),
   'h5': (
-    'size': 24px,
+    'size': 1.5rem,
     'weight': 400,
-    'line-height': 32px,
-    'letter-spacing': 0,
+    'line-height': 2rem,
+    'letter-spacing': normal,
     'font-family': $heading-font-family
   ),
   'h6': (
-    'size': 20px,
+    'size': 1.25rem,
     'weight': 500,
-    'line-height': 1,
-    'letter-spacing': 0.15px,
+    'line-height': 2rem,
+    'letter-spacing': .0125em,
     'font-family': $heading-font-family
   ),
   'subtitle-1': (
-    'size': 16px,
+    'size': 1rem,
     'weight': 400,
-    'line-height': 1.5,
-    'letter-spacing': 0.15px
+    'line-height': 1.75rem,
+    'letter-spacing': .009375em
   ),
   'subtitle-2': (
-    'size': 16px,
+    'size': .875rem,
     'weight': 500,
-    'line-height': 1.5,
-    'letter-spacing': 0.1px
+    'line-height': 1.375rem,
+    'letter-spacing': .0071428571em
   ),
   'body-2': (
-    'size': 14px,
-    'weight': 500,
-    'line-height': 1.5,
-    'letter-spacing': 0.5px
+    'size': .875rem,
+    'weight': 400,
+    'letter-spacing': .0178571429em,
+    'line-height': 1.25rem
   ),
   'body-1': (
-    'size': 14px,
+    'size': 1rem,
     'weight': 400,
-    'letter-spacing': 0.25px
+    'letter-spacing': .03125em,
+    'line-height': 1.5rem
   ),
   'button': (
-    'size': 14px,
+    'size': .875rem,
     'weight': 500,
-    'letter-spacing': 0.75px
+    'letter-spacing': .0892857143em,
+    'line-height': 2.25rem
   ),
   'caption': (
-    'size': 12px,
+    'size': .75rem,
     'weight': 400,
-    'letter-spacing': 0.4px
+    'letter-spacing': .0333333333em,
+    'line-height': 1.25rem
   ),
   'overline': (
-    'size': 10px,
+    'size': .75rem,
     'weight': 500,
-    'letter-spacing': 1.5px
+    'letter-spacing': .1666666667em,
+    'line-height': 2rem
   )
 ) !default;
 
@@ -176,137 +180,10 @@ $transition: (
 $primary-transition: 0.3s map-get($transition, 'swing') !default;
 $secondary-transition: 0.2s map-get($transition, 'ease-in-out') !default;
 
-/** Alerts **/
-// moved to component
-
-$badge-border-radius: 50% !default;
-$badge-color: map-get($material-dark, 'fg-color') !default;
-$badge-font-family: $body-font-family !default;
-$badge-font-size: 14px !default;
-$badge-height: 22px !default;
-$badge-top: 0 !default;
-$badge-right: 0 !default;
-$badge-width: 22px !default;
-
-$breadcrumbs-flex: 0 1 auto !default;
-$breadcrumbs-padding: 18px 12px !default;
-$breadcrumbs-even-child-padding: 0 12px !default;
-$breadcrumbs-item-font-size: 14px !default;
-$breadcrumbs-item-large-font-size: 16px !default;
-$breadcrumbs-margin: 0 !default;
-$breadcrumbs-padding: 0 14px !default;
-
-/** Buttons */
-// moved to component
-
-/** Cards */
-$card-border-radius: 2px !default;
-
-/** Chips */
-// moved to component
-
-/** Expansion panels */
-$expansion-panel-collapse-height: 48px !default;
-$collapsible-transition-height: 0.23s !default;
-
-/** Footer */
-$footer-height: 36px !default;
-
-/** Lists */
-$list-tile-font-size: map-deep-get($headings, 'subtitle-1', 'size') !default;
-$list-tile-font-weight: map-deep-get($headings, 'subtitle-1', 'weight') !default;
-
-$list-action-text-font-size: 12px !default;
-$list-action-text-font-color: map-get($grey, 'base') !default;
-
-$list-sub-title-font-size: $list-tile-font-size - 2px !default;
-
-$subheader-height-font-size: $list-tile-font-size - 2px !default;
-$subheader-font-weight: map-get($font-weights, 'medium') !default;
-
-$list-left-padding: 16px !default;
-$list-right-padding: 16px !default;
-$list-top-padding: 8px !default;
-$list-bottom-padding: 8px !default;
-
-$list-item-right-margin: 56px !default;
-$list-item-left-padding: 72px !default;
-$list-item-avatar-triple-margin-top: -18px !default;
-$list-item-single-height: 48px !default;
-$list-item-double-height: 72px !default;
-$list-item-triple-height: 88px !default;
-$list-item-avatar-single-height: 56px !default;
-
-$subheader-inset-margin: $list-item-right-margin !default;
-
-$list-item-dense-font-size: $list-tile-font-size - 3px !default;
-$subheader-dense-font-size: $list-item-dense-font-size !default;
-$list-item-dense-icon-font-size: 22px !default;
-$list-item-dense-avatar-triple-margin-top: -14px !default;
-$list-item-dense-top-padding: $list-top-padding / 2 !default;
-$list-item-dense-single-height: $list-item-single-height - 8px !default;
-$list-item-dense-double-height: $list-item-double-height - 12px !default;
-$list-item-dense-triple-height: $list-item-triple-height - 12px !default;
-
-$list-item-dense-avatar-single-height: $list-item-single-height !default;
-$list-item-dense-avatar-height: 38px !default;
-
-$list-dense-subheader-height: $list-item-dense-single-height !default;
-$list-dense-subheader-group-height: $list-dense-subheader-height !default;
-
-/** Time pickers */
-$time-picker-number-font-size: 16px !default;
-$time-picker-indicator-size: 40px !default;
-
-/** Toolbars */
-$toolbar-height: 56px !default;
-$toolbar-item-padding: 0 16px !default;
-$toolbar-padding-y: 0 !default;
-$toolbar-padding-x: 16px !default;
-
-/** Circular progress bars */
-$progress-circular-rotate-animation: progress-circular-rotate 1.4s linear infinite !default;
-$progress-circular-rotate-dash: progress-circular-dash 1.4s ease-in-out infinite !default;
-$process-circular-intermediate-svg-transition: all 0.2s ease-in-out !default;
-$progress-circular-underlay-stroke: rgba(map-get($material-light, 'fg-color'), 0.1) !default;
-$progress-circular-overlay-transition: all 0.6s ease-in-out !default;
-
-/** Navigation drawers */
-$navigation-drawer-item-font-size: 14px !default;
-$navigation-drawer-item-font-weight: map-get($font-weights, 'medium') !default;
-$navigation-drawer-group-item-font-weight: map-get($font-weights, 'regular') !default;
-
-/** Snackbars */
-$snackbar-color: map-get($shades, 'white') !default;
-$snackbar-background-color: #323232 !default;
-$snackbar-corner-offset: 24px !default;
-
-$tab-text-transform: uppercase !default;
-
-/** Inputs */
-$input-top-spacing: 16px !default;
-$text-field-active-label-height: 12px !default;
-
-/** Timelines */
-$timeline-wedge-size: 10px !default;
-$timeline-dot-small-size: 24px !default;
-$timeline-dot-regular-size: 38px !default;
-$timeline-dot-large-size: 52px !default;
-
-$timeline-inner-dot-small-size: 18px !default;
-$timeline-inner-dot-small-margin: 3px !default;
-$timeline-inner-dot-regular-size: 30px !default;
-$timeline-inner-dot-regular-margin: 4px !default;
-$timeline-inner-dot-large-size: 42px !default;
-$timeline-inner-dot-large-margin: 5px !default;
-
 /** Ripples */
 $ripple-animation-transition-in: transform 0.25s map-get($transition, 'fast-out-slow-in'), opacity 0.1s map-get($transition, 'fast-out-slow-in') !default;
 $ripple-animation-transition-out: opacity 0.3s map-get($transition, 'fast-out-slow-in') !default;
 $ripple-animation-visible-opacity: 0.15 !default;
-
-/** Treeviews */
-$treeview-transition: 0.2s map-get($transition, 'linear-out-slow-in') !default;
 
 /** Elements */
 $bootable-transition: 0.2s map-get($transition, 'fast-out-slow-in') !default;

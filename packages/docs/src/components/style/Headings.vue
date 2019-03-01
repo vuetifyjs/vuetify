@@ -28,17 +28,18 @@
     data: () => ({
       texts: [
         ['display-4', 'Light 96sp', '300'],
-        ['display-3', 'Regular 60sp', '400'],
+        ['display-3', 'Light 60sp', '400'],
         ['display-2', 'Regular 48sp', '400'],
         ['display-1', 'Regular 34sp', '400'],
         ['headline', 'Regular 24sp', '400'],
         ['title', 'Medium 20sp', '500'],
-        ['subtitle-2', 'Medium 16sp', '500'],
         ['subtitle-1', 'Regular 16sp', '400'],
-        ['body-2', 'Medium 14sp', '500'],
-        ['body-1', 'Regular 14sp', '400'],
+        ['subtitle-2', 'Medium 14sp', '500'],
+        ['body-1', 'Regular 16sp', '400'],
+        ['body-2', 'Regular 14sp', '500'],
+        ['button', 'Medium 14sp', '500'],
         ['caption', 'Regular 12sp', '400'],
-        ['overline', 'Medium 10sp', '500']
+        ['overline', 'Regular 10sp', '500']
       ]
     })
 
