@@ -21,23 +21,29 @@
   padding: 8px 0
 
 // Element
+.v-list__group--sub-group
+  align-items: center
+  display: flex
+
+  .v-list__tile
+    padding-left: 0
+
 .v-list__group__header
   align-items: center
   display: flex
   padding: 0 16px
 
-.v-list__group__header,
-.v-list__group__items
   > .v-list__tile
     padding: 0
 
 .v-list__tile
-  align-items: stretch
+  align-items: center
   display: flex
   flex: 1 1
   min-height: $list-tile-min-height
   padding: 0 16px
   text-decoration: none
+  user-select: none
 
 .v-list__tile__action
   align-self: center
@@ -58,6 +64,9 @@
 
     .v-messages
       display: none
+
+.v-list__tile__action-text
+  font-size: map-deep-get($headings, 'caption', 'size')
 
 .v-list__tile__avatar
   align-self: center
@@ -81,6 +90,7 @@
   display: flex
   flex-wrap: wrap
   flex: 1 1 0
+  overflow: hidden
   padding: 16px 0
 
   > *
@@ -115,6 +125,13 @@
   display: inline-flex
   min-width: 24px
 
+.v-list__tile__title,
+.v-list__tile__subtitle
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+  width: 100%
+
 .v-list__tile__title
   align-self: center
   font-size: $list-tile-title-font-size
@@ -123,8 +140,40 @@
   font-size: $list-tile-subtitle-font-size
 
 // Modifier
-.v-list__group__items--no-action > * > *:first-child
-  text-indent: 72px
+.v-list__tile__action--stack
+  align-items: flex-end
+  align-self: stretch
+  justify-content: space-between
+  white-space: nowrap
+  flex-direction: column
+
+.v-list__group--active
+  .v-list__group__header__append-icon
+    .v-icon
+      transform: rotate(-180deg)
+
+  .v-list__group__header__prepend-icon
+    .v-icon
+      color: inherit
+
+  &.v-list__group__header--sub-group
+    .v-list__group__header__prepend-icon.v-icon
+      transform: rotate(-180deg)
+
+.v-list__group__header--sub-group
+  .v-list__tile__icon.v-list__group__header__prepend-icon
+    margin-left: 16px
+    margin-right: 16px
+
+  &.v-list__group__header--active
+    .v-list__tile__icon.v-list__group__header__prepend-icon .v-icon
+      transform: rotate(-180deg)
+
+.v-list__group__items--no-action .v-list__group__items
+  padding-left: 56px
+
+.v-list__group__items--no-action > *:not(.v-list__group):not(.v-list__group__header--sub-group)
+  padding-left: 72px
 
 .v-list--two-line,
 .v-list__tile--two-line,
@@ -156,3 +205,9 @@
   .v-list__tile__avatar
     margin-top: 16px
     margin-bottom: 16px
+
+  .v-list__tile__subtitle
+    white-space: initial
+    -webkit-line-clamp: 2
+    -webkit-box-orient: vertical
+    display: -webkit-box
