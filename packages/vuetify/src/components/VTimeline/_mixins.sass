@@ -1,5 +1,5 @@
 @mixin timeline-theme($material)
-  .v-timeline-item__line
+  &:before
     background: map-get($material, 'dividers')
 
   .v-timeline-item
@@ -32,28 +32,22 @@
       #{$direction}: initial
       #{if($direction == left, right, left)}: -($timeline-wedge-size)
 
-@mixin timeline-wedge-before()
-  @include timeline-wedge-align(left)
-
-@mixin timeline-wedge-after()
-  @include timeline-wedge-align(right)
-
-@mixin timeline-item-before()
-  flex-direction: row-reverse
+@mixin timeline-item-align($direction)
+  flex-direction: if($direction == left, row-reverse, row)
 
   .v-timeline-item__opposite
-    text-align: right
+    text-align: if($direction == left, right, left)
 
   +rtl()
     .v-timeline-item__opposite
-      text-align: left
+      text-align: if($direction == left, left, right)
 
-@mixin timeline-item-after()
-  flex-direction: row
-
-  .v-timeline-item__opposite
-    text-align: left
+@mixin timeline-line-align($first, $second)
+  &:before
+    #{$first}: $timeline-divider-width / 2
+    #{$second}: initial
 
   +rtl()
-    .v-timeline-item__opposite
-      text-align: right
+    &:before
+      #{$first}: initial
+      #{$second}: $timeline-divider-width / 2

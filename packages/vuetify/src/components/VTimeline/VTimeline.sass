@@ -14,6 +14,14 @@
   padding-top: $timeline-item-padding
   position: relative
 
+  &:before
+    bottom: 0
+    content: ''
+    height: 100%
+    position: absolute
+    top: 0
+    width: $timeline-line-width
+
 .v-timeline-item
   display: flex
   padding-bottom: $timeline-item-padding
@@ -22,19 +30,14 @@
   position: relative
   height: 100%
   flex: 1 1 auto
-  max-width: calc(50% - #{$timeline-item-divider-width / 2})
+  max-width: calc(50% - #{$timeline-divider-width / 2})
 
 .v-timeline-item__divider
   position: relative
-  min-width: $timeline-item-divider-width
+  min-width: $timeline-divider-width
   display: flex
   align-items: center
   justify-content: center
-
-.v-timeline-item__line
-  height: calc(100% + #{$timeline-item-padding})
-  position: absolute
-  width: $timeline-line-width
 
 .v-timeline-item__dot
   z-index: 2
@@ -57,36 +60,18 @@
 .v-timeline-item__opposite
   flex: 1 1 auto
   align-self: center
-  max-width: calc(50% - #{$timeline-item-divider-width / 2})
+  max-width: calc(50% - #{$timeline-divider-width / 2})
 
 // Before/after directions
 .v-timeline:not(.v-timeline--dense)
   .v-timeline-item
     &:nth-child(odd):not(.v-timeline-item--after), &--before
-      +timeline-item-before()
-      +timeline-wedge-before()
+      +timeline-item-align(left)
+      +timeline-wedge-align(left)
 
     &:nth-child(even):not(.v-timeline-item--before), &--after
-      +timeline-item-after()
-      +timeline-wedge-after()
-
-  &--fill-dot
-    .v-timeline-item__inner-dot
-      height: inherit
-      margin: 0
-      width: inherit
-
-  &:first-child, &:last-child
-    .v-timeline-item__line
-      height: calc(100% + #{$timeline-item-padding + ($timeline-item-padding / 2)})
-
-  &:first-child
-    .v-timeline-item__line
-      top: -($timeline-item-padding)
-
-  &:last-child
-    .v-timeline-item__line
-      bottom: -($timeline-item-padding)
+      +timeline-item-align(right)
+      +timeline-wedge-align(right)
 
 // Wedge
 .v-timeline-item__body
@@ -121,20 +106,30 @@
 .v-timeline--reverse:not(.v-timeline--dense)
   .v-timeline-item
     &:nth-child(odd):not(.v-timeline-item--after), &--before
-      +timeline-item-after()
-      +timeline-wedge-after()
+      +timeline-item-align(right)
+      +timeline-wedge-align(right)
 
     &:nth-child(even):not(.v-timeline-item--before), &--after
-      +timeline-item-before()
-      +timeline-wedge-before()
+      +timeline-item-align(left)
+      +timeline-wedge-align(left)
+
+.v-timeline:not(.v-timeline--dense)
+  &:before
+    left: calc(50% - #{$timeline-line-width / 2})
+
+.v-timeline--reverse.v-timeline--dense
+  +timeline-line-align(right, left)
+
+.v-timeline--dense:not(.v-timeline--reverse)
+  +timeline-line-align(left, right)
 
 .v-timeline--dense
   .v-timeline-item
     flex-direction: row-reverse !important
-    +timeline-wedge-before()
+    +timeline-wedge-align(left)
 
   .v-timeline-item__body
-    max-width: calc(100% - #{$timeline-item-divider-width})
+    max-width: calc(100% - #{$timeline-divider-width})
 
   .v-timeline-item__opposite
     display: none
@@ -142,4 +137,10 @@
 .v-timeline--reverse.v-timeline--dense
   .v-timeline-item
     flex-direction: row !important
-    +timeline-wedge-after()
+    +timeline-wedge-align(right)
+
+.v-timeline-item--fill-dot
+  .v-timeline-item__inner-dot
+    height: inherit
+    margin: 0
+    width: inherit

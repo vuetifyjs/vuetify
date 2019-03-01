@@ -74,7 +74,7 @@ export default mixins(
       }, [this.genInnerDot()])
     },
     genDivider () {
-      const children = [this.$createElement('div', { staticClass: 'v-timeline-item__line' })]
+      const children = []
 
       if (!this.hideDot) children.push(this.genDot())
 
