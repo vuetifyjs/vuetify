@@ -12,8 +12,7 @@ $list-tile-two-line-min-height: 64px;
 $list-tile-three-line-min-height: 88px;
 
 $list-tile-title-font-size: map-deep-get($headings, 'subtitle-1', 'size');
-
-// vs
+$list-tile-subtitle-font-size: map-deep-get($headings, 'subtitle-2', 'size');
 
 $list-tile: (
   'action-margin-x': 32px,

@@ -27,6 +27,9 @@
       color: map-deep-get($material, 'icons', 'inactive') !important
 
 @mixin list-tile-theme($material)
+  .v-list__tile__title
+    color: map-deep-get($material, 'text', 'primary')
+
   .v-list__tile__subtitle
     color: map-deep-get($material, 'text', 'secondary')
 
