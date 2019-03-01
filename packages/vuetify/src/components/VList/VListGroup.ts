@@ -147,8 +147,7 @@ export default mixins<options &
         on: {
           ...this.$listeners,
           click: this.click
-        },
-        ref: 'item'
+        }
       }, [
         this.genPrependIcon(),
         this.$slots.activator,
