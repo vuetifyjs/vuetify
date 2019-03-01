@@ -48,12 +48,6 @@
     .v-messages
       display: none
 
-  &--left
-    margin-right: $list-tile-action-margin-x
-
-  &--right
-    margin-left: $list-tile-action-margin-x
-
 .v-list__tile__avatar
   align-self: center
   justify-content: flex-start
@@ -64,17 +58,11 @@
     margin-bottom: 8px
     margin-top: 8px
 
-  &.v-avatar--left
-    margin-right: $avatar-margin-x
-
-    &.v-list__tile__avatar--horizontal
+    &:first-child
       margin-left: $list-tile-avatar-horizontal-margin-x
 
-  &.v-avatar--right
-    margin-left: $avatar-margin-x
-
-    &.v-list__tile__avatar--horizontal
-      margin-right: $list-tile-avatar-horizontal-margin-x
+    &:last-child
+      margin-left: $list-tile-avatar-horizontal-margin-x
 
 .v-list__tile__content
   align-items: center
@@ -95,10 +83,20 @@
   align-self: flex-start
   margin: 16px 0
 
+.v-list__tile__avatar
+  &:first-child
+    margin-right: 16px
+
+  &:last-child
+    margin-left: 16px
+
 .v-list__tile__action,
 .v-list__tile__icon
-  &--left
-    margin-right: 32px
+  &:first-child
+    margin-right: $list-tile-action-margin-x
+
+  &:last-child
+    margin-left: $list-tile-action-margin-x
 
 .v-list__tile__action,
 .v-list__tile__avatar,
