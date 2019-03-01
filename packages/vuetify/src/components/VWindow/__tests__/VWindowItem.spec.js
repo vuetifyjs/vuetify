@@ -11,13 +11,13 @@ test('VWindowItem.ts', ({ mount }) => {
 
     const item = wrapper.first(VWindowItem.options)
     // Before enter
-    expect(wrapper.vm.isActive).toBe(false)
+    expect(wrapper.vm.isActive).toBeFalsy()
     item.vm.onBeforeEnter()
-    expect(wrapper.vm.isActive).toBe(true)
+    expect(wrapper.vm.isActive).toBeTruthy()
 
     // Enter
     const el = document.createElement('div')
-    expect(wrapper.vm.internalHeight).toBe(undefined)
+    expect(wrapper.vm.internalHeight).toBeUndefined()
     item.vm.onEnter(el)
     await new Promise(resolve => window.requestAnimationFrame(resolve))
     expect(wrapper.vm.internalHeight).toBe('0px')
@@ -25,8 +25,8 @@ test('VWindowItem.ts', ({ mount }) => {
     // After enter
     item.vm.onAfterEnter()
     await new Promise(resolve => window.requestAnimationFrame(resolve))
-    expect(wrapper.vm.internalHeight).toBe(undefined)
-    expect(wrapper.vm.isActive).toBe(false)
+    expect(wrapper.vm.internalHeight).toBeUndefined()
+    expect(wrapper.vm.isActive).toBeFalsy()
 
     // Leave
     item.vm.onLeave(el)
@@ -37,14 +37,14 @@ test('VWindowItem.ts', ({ mount }) => {
     item.vm.onEnter(el)
     item.vm.onEnterCancelled()
 
-    expect(item.vm.wasCancelled).toBe(true)
-    expect(wrapper.vm.isActive).toBe(true)
+    expect(item.vm.wasCancelled).toBeTruthy()
+    expect(wrapper.vm.isActive).toBeTruthy()
 
     item.vm.onAfterEnter()
 
     await new Promise(resolve => requestAnimationFrame(resolve))
 
-    expect(wrapper.vm.isActive).toBe(true)
+    expect(wrapper.vm.isActive).toBeTruthy()
   })
 
   it('should use custom transition', () => {
@@ -93,7 +93,7 @@ test('VWindowItem.ts', ({ mount }) => {
       propertyName: 'border-color'
     })
 
-    expect(done).not.toBeCalled()
+    expect(done).not.toHaveBeenCalled()
 
     // Incorrect target
     wrapper.vm.onTransitionEnd({
@@ -101,7 +101,7 @@ test('VWindowItem.ts', ({ mount }) => {
       target: document.createElement('div')
     })
 
-    expect(done).not.toBeCalled()
+    expect(done).not.toHaveBeenCalled()
 
     // Should work
     wrapper.vm.onTransitionEnd({
@@ -135,6 +135,6 @@ test('VWindowItem.ts', ({ mount }) => {
 
     await new Promise(resolve => requestAnimationFrame(resolve))
 
-    expect(done).toBeCalled()
+    expect(done).toHaveBeenCalled()
   })
 })

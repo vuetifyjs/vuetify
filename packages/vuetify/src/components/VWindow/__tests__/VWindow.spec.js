@@ -36,24 +36,24 @@ test('VWindow.ts', ({ mount }) => {
     // Reverse implicitly set by changed index
     wrapper.setProps({ value: 1 })
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.internalReverse).toBe(false)
+    expect(wrapper.vm.internalReverse).toBeFalsy()
 
     // Reverse implicitly set by changed index
     wrapper.setProps({ value: 0 })
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.internalReverse).toBe(true)
+    expect(wrapper.vm.internalReverse).toBeTruthy()
 
     // Reverse explicit prop override
     wrapper.setProps({ reverse: false })
-    expect(wrapper.vm.internalReverse).toBe(false)
+    expect(wrapper.vm.internalReverse).toBeFalsy()
 
     // Reverse explicit prop override
     wrapper.setProps({ reverse: true })
-    expect(wrapper.vm.internalReverse).toBe(true)
+    expect(wrapper.vm.internalReverse).toBeTruthy()
 
     // Reverts back to local isReverse
     wrapper.setProps({ reverse: undefined })
-    expect(wrapper.vm.internalReverse).toBe(true)
+    expect(wrapper.vm.internalReverse).toBeTruthy()
   })
 
   it('should increment and decrement current value', async () => {
@@ -117,7 +117,7 @@ test('VWindow.ts', ({ mount }) => {
     expect(wrapper.vm.internalValue).toBe(0)
 
     item1.destroy()
-    expect(wrapper.vm.internalValue).toBe(undefined)
+    expect(wrapper.vm.internalValue).toBeUndefined()
   })
 
   it('should react to touch', async () => {
@@ -179,7 +179,7 @@ test('VWindow.ts', ({ mount }) => {
 
     touch(wrapper).start(200, 0).end(0, 0)
     touch(wrapper).start(0, 0).end(200, 0)
-    expect(left).toBeCalled()
-    expect(right).toBeCalled()
+    expect(left).toHaveBeenCalled()
+    expect(right).toHaveBeenCalled()
   })
 })
