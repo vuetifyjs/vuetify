@@ -36,9 +36,11 @@
               v-model="form.bio"
               color="teal"
             >
-              <div slot="label">
-                Bio <small>(optional)</small>
-              </div>
+              <template v-slot:label>
+                <div>
+                  Bio <small>(optional)</small>
+                </div>
+              </template>
             </v-textarea>
           </v-flex>
           <v-flex xs12 sm6>
@@ -68,12 +70,14 @@
               v-model="form.terms"
               color="green"
             >
-              <div slot="label" @click.stop="">
-                Do you accept the
-                <a href="javascript:;" @click.stop="terms = true">terms</a>
-                and
-                <a href="javascript:;" @click.stop="conditions = true">conditions?</a>
-              </div>
+              <template v-slot:label>
+                <div @click.stop="">
+                  Do you accept the
+                  <a href="javascript:;" @click.stop="terms = true">terms</a>
+                  and
+                  <a href="javascript:;" @click.stop="conditions = true">conditions?</a>
+                </div>
+              </template>
             </v-checkbox>
           </v-flex>
         </v-layout>

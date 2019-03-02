@@ -72,7 +72,7 @@ const ripple = {
     el.appendChild(container)
 
     const computed = window.getComputedStyle(el)
-    if (computed.position === 'static') {
+    if (computed && computed.position === 'static') {
       el.style.position = 'relative'
       el.dataset.previousPosition = 'static'
     }
@@ -200,7 +200,8 @@ function directive (el: HTMLElement, binding: VNodeDirective, node: VNode) {
 
   // warn if an inline element is used, waiting for el to be in the DOM first
   node.context && node.context.$nextTick(() => {
-    if (window.getComputedStyle(el).display === 'inline') {
+    const computed = window.getComputedStyle(el)
+    if (computed && computed.display === 'inline') {
       const context = (node as any).fnOptions ? [(node as any).fnOptions, node.context] : [node.componentInstance]
       consoleWarn('v-ripple can only be used on block-level elements', ...context)
     }
