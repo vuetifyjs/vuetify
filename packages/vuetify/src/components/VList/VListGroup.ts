@@ -14,6 +14,7 @@ import { VExpandTransition } from '../transitions'
 
 // Utils
 import mixins, { ExtractVue } from '../../util/mixins'
+import { keyCodes } from '../../util/helpers'
 
 // Types
 import Vue, { VNode } from 'vue'
@@ -23,6 +24,9 @@ type VListInstance = InstanceType<typeof VList>
 interface options extends Vue {
   list: VListInstance
   listClick: Function
+  $refs: {
+    group: HTMLElement
+  }
   $route: Route
 }
 
@@ -119,8 +123,10 @@ export default mixins<options &
   },
 
   methods: {
-    click (e: Event) {
+    click (e: MouseEvent | KeyboardEvent) {
       if (this.disabled) return
+
+      if (e.detail) this.$refs.group.blur()
 
       this.$emit('click', e)
 
@@ -145,12 +151,17 @@ export default mixins<options &
         staticClass: 'v-list__group__header',
         class: this.headerClasses,
         attrs: {
-          role: 'listitem'
+          role: 'listitem',
+          tabindex: 0
         },
         on: {
           ...this.$listeners,
-          click: this.click
-        }
+          click: this.click,
+          keydown: (e: KeyboardEvent) => {
+            if (e.keyCode === keyCodes.enter) this.click(e)
+          }
+        },
+        ref: 'group'
       }, [
         this.genPrependIcon(),
         this.$slots.activator,
@@ -164,8 +175,7 @@ export default mixins<options &
         directives: [{
           name: 'show',
           value: this.isActive
-        }],
-        ref: 'group'
+        }]
       }, this.showLazyContent(this.$slots.default))
     },
     genPrependIcon () {
