@@ -1,7 +1,7 @@
-import { test } from '@/test'
-import ClickOutside from '@/directives/click-outside'
+// Directives
+import ClickOutside from '../click-outside'
 
-function bootstrap (args) {
+function bootstrap (args?: object) {
   let registeredHandler
   const el = {
     getBoundingClientRect: () => ({
@@ -17,27 +17,27 @@ function bootstrap (args) {
     args
   }
 
-  jest.spyOn(global.document.body, 'addEventListener').mockImplementation((eventName, eventHandler, options) => {
+  jest.spyOn(window.document.body, 'addEventListener').mockImplementation((eventName, eventHandler, options) => {
     registeredHandler = eventHandler
   })
-  jest.spyOn(global.document.body, 'removeEventListener')
+  jest.spyOn(window.document.body, 'removeEventListener')
 
-  ClickOutside.inserted(el, binding)
+  ClickOutside.inserted(el as HTMLElement, binding as any)
 
   return {
     callback: binding.value,
-    el,
+    el: el as HTMLElement,
     registeredHandler
   }
 }
 
-test('click-outside.js', () => {
+describe('click-outside.js', () => {
   it('should register and unregister handler', () => {
     const { registeredHandler, el } = bootstrap()
-    expect(global.document.body.addEventListener).toHaveBeenCalledWith('click', registeredHandler, true)
+    expect(window.document.body.addEventListener).toHaveBeenCalledWith('click', registeredHandler, true)
 
     ClickOutside.unbind(el)
-    expect(global.document.body.removeEventListener).toHaveBeenCalledWith('click', registeredHandler, true)
+    expect(window.document.body.removeEventListener).toHaveBeenCalledWith('click', registeredHandler, true)
   })
 
   it('should call the callback when closeConditional returns true', async () => {
