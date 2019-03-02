@@ -113,10 +113,7 @@ export default mixins<options &
       return {
         'v-input__slider': true,
         'v-input__slider--vertical': this.vertical,
-        // 'v-input--slider--ticks': this.showTicks,
         'v-input__slider--inverse-label': this.inverseLabel
-        // 'v-input--slider--ticks-labels': this.tickLabels.length > 0,
-        // 'v-input--slider--thumb-label': this.thumbLabel || this.$scopedSlots.thumbLabel
       }
     },
     internalValue: {
@@ -497,7 +494,9 @@ export default mixins<options &
       this.keyPressed = 0
     },
     onSliderClick (e: MouseEvent) {
-      this.isFocused = true
+      const thumb = this.$refs.thumb as HTMLElement
+      thumb.focus()
+
       this.onMouseMove(e)
       this.$emit('change', this.internalValue)
     },

@@ -186,7 +186,10 @@ export default VSlider.extend({
     },
     onSliderClick (e: MouseEvent) {
       if (!this.isActive) {
-        this.isFocused = true
+        // It doesn't seem to matter if we focus on the wrong thumb here
+        const thumb = this.$refs.thumb_1 as HTMLElement
+        thumb.focus()
+
         this.onMouseMove(e, true)
         this.$emit('change', this.internalValue)
       }
