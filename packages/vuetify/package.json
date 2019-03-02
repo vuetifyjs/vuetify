@@ -34,7 +34,7 @@
     "test:coverage": "yarn test --coverage",
     "test:types": "tsc -p ./types/test/tsconfig.json",
     "lint": "concurrently -n \"tsc,tslint,eslint,types\" --kill-others-on-fail \"tsc --noEmit --pretty\" \"tslint -p . src/**/*.ts -t verbose\" \"eslint --ext .js,.ts src\" \"yarn test:types\"",
-    "lint:fix": "concurrently -n \"tsc,tslint,eslint,types\" --kill-others-on-fail \"tsc --noEmit --pretty\" \"tslint --fix -p . src/**/*.ts -t verbose\" \"eslint --fix --ext .js,.ts src\" \"yarn test:types\""
+    "lint:fix": "concurrently -n \"tsc,tslint,eslint,types\" --kill-others-on-fail \"tsc --noEmit --pretty\" \"tslint --fix -p . -c .tslint.js src/**/*.ts -t stylish\" \"eslint --fix --ext .js,.ts src\" \"yarn test:types\""
   },
   "devDependencies": {
     "@types/jest": "^22.2.3",
