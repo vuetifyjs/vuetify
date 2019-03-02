@@ -156,7 +156,7 @@ export default mixins<options &
       ])
     },
     genGroup () {
-      return this.$createElement('div', {
+      return this.$createElement('a', {
         staticClass: 'v-list__group__header',
         class: this.headerClasses,
         attrs: {
