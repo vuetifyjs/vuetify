@@ -144,6 +144,9 @@ export default mixins<options &
       return this.$createElement('div', {
         staticClass: 'v-list__group__header',
         class: this.headerClasses,
+        attrs: {
+          role: 'listitem'
+        },
         on: {
           ...this.$listeners,
           click: this.click

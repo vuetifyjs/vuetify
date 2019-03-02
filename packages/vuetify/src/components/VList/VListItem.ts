@@ -80,6 +80,7 @@ export default mixins(
 
     data.attrs = Object.assign({}, data.attrs, this.$attrs)
     data.attrs.disabled = this.disabled
+    data.attrs.role = 'listitem'
 
     return h(tag, this.setBackgroundColor(this.color, data), this.$slots.default)
   }
