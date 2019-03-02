@@ -61,8 +61,8 @@
         "dense": "Reduce la altura máxima de los _list tiles_",
         "expand": "Sólo colapsará cuando explícitamente se cierre",
         "subheader": "Quita el _padding_ de arriba. Utilizado cuando el hermano anterior es un encabezado",
-        "threeLine": "Incrementa el alto del _list-tile_ para cuando hay tres líneas",
-        "twoLine": "Incrementa el alto del _list-tile_ para cuando hay dos líneas",
+        "threeLine": "Incrementa el alto del _list-item_ para cuando hay tres líneas",
+        "twoLine": "Incrementa el alto del _list-item_ para cuando hay dos líneas",
         "inactive": "Si se especifica, el _list tile_ no será desplegado como un link incluso si tiene las props to/href o un @click"
     }
 }

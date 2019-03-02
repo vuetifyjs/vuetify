@@ -5,35 +5,35 @@
   .v-list--disabled
     color: map-deep-get($material, 'text', 'disabled')
 
-  .v-list__tile__mask
+  .v-list__item__mask
     color: map-deep-get($material, 'text', 'disabled')
 
     background: map-deep-get($material, 'expansion-panels', 'focus')
 
-  .v-list__tile--link:hover,
-  .v-list__tile--highlighted,
+  .v-list__item--link:hover,
+  .v-list__item--highlighted,
   .v-list__group__header:hover
-    background: map-deep-get($material, 'list-tile', 'hover')
+    background: map-deep-get($material, 'list-item', 'hover')
 
   .v-list__group--active:before,
   .v-list__group--active:after
     background: map-get($material, 'dividers')
 
-  .v-list__group--disabled
-    .v-list__tile
-      color: map-deep-get($material, 'text', 'disabled') !important
+  // .v-list__group--disabled
+  //   .v-list__item
+  //     color: map-deep-get($material, 'text', 'disabled') !important
 
-    .v-list__group__header__prepend-icon .v-icon
-      color: map-deep-get($material, 'icons', 'inactive') !important
+  //   .v-list__group__header__prepend-icon .v-icon
+  //     color: map-deep-get($material, 'icons', 'inactive') !important
 
-@mixin list-tile-theme($material)
+@mixin list-item-theme($material)
   color: map-deep-get($material, 'text', 'primary')
 
-@mixin list-tile-secondary-text-theme($material)
+@mixin list-item-secondary-text-theme($material)
   color: map-deep-get($material, 'text', 'secondary')
 
 @mixin list-rtl()
-  &__tile
+  &__item
     &__title
       text-align: right
     &__content

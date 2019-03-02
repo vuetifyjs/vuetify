@@ -50,8 +50,8 @@
     "noAction": "Removes left padding assigned for action icons from group items",
     "subheader": "Removes top padding. Used when previous sibling is a header",
     "subGroup": "Designate the component as nested list group",
-    "threeLine": "Increases list-tile height for three lines",
-    "twoLine": "Increases list-tile height for two lines",
+    "threeLine": "Increases list-item height for three lines",
+    "twoLine": "Increases list-item height for two lines",
     "inactive": "If set, the list tile will not be rendered as a link even if it has to/href prop or @click handler",
     "value": "Expands / Collapse list group",
     "v-list-item-avatar": {

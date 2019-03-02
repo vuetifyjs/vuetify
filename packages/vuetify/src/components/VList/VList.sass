@@ -9,18 +9,18 @@
   +list-theme($material-dark)
 
 .v-list__item.theme--light
-  +list-tile-theme($material-light)
+  +list-item-theme($material-light)
 .v-list__item.theme--dark
-  +list-tile-theme($material-dark)
+  +list-item-theme($material-dark)
 
 .theme--light
   .v-list__item__subtitle,
   .v-list__item__action-text
-    +list-tile-secondary-text-theme($material-light)
+    +list-item-secondary-text-theme($material-light)
 .theme--dark
   .v-list__item__subtitle
   .v-list__item__action-text
-    +list-tile-secondary-text-theme($material-dark)
+    +list-item-secondary-text-theme($material-dark)
 
 .v-list-rtl
   +list-rtl()
@@ -51,7 +51,7 @@
   align-items: center
   display: flex
   flex: 1 1
-  min-height: $list-tile-min-height
+  min-height: $list-item-min-height
   padding: 0 16px
   text-decoration: none
   user-select: none
@@ -82,18 +82,18 @@
 .v-list__item__avatar
   align-self: center
   justify-content: flex-start
-  margin-bottom: $list-tile-avatar-margin-y
-  margin-top: $list-tile-avatar-margin-y
+  margin-bottom: $list-item-avatar-margin-y
+  margin-top: $list-item-avatar-margin-y
 
   &.v-list__item__avatar--horizontal
     margin-bottom: 8px
     margin-top: 8px
 
     &:first-child
-      margin-left: $list-tile-avatar-horizontal-margin-x
+      margin-left: $list-item-avatar-horizontal-margin-x
 
     &:last-child
-      margin-left: $list-tile-avatar-horizontal-margin-x
+      margin-left: $list-item-avatar-horizontal-margin-x
 
 .v-list__item__content
   align-items: center
@@ -125,10 +125,10 @@
 .v-list__item__action,
 .v-list__item__icon
   &:first-child
-    margin-right: $list-tile-action-margin-x
+    margin-right: $list-item-action-margin-x
 
   &:last-child
-    margin-left: $list-tile-action-margin-x
+    margin-left: $list-item-action-margin-x
 
 .v-list__item__action,
 .v-list__item__avatar,
@@ -145,10 +145,10 @@
 
 .v-list__item__title
   align-self: center
-  font-size: $list-tile-title-font-size
+  font-size: $list-item-title-font-size
 
 .v-list__item__subtitle
-  font-size: $list-tile-subtitle-font-size
+  font-size: $list-item-subtitle-font-size
 
 // Modifier
 .v-list--dense
@@ -216,8 +216,8 @@
 .v-list__item--three-line
   .v-list__item__avatar:not(.v-list__item__avatar--horizontal),
   .v-list__item__icon
-    margin-bottom: $list-tile-icon-margin-y
-    margin-top: $list-tile-icon-margin-y
+    margin-bottom: $list-item-icon-margin-y
+    margin-top: $list-item-icon-margin-y
 
 .v-list--two-line,
 .v-list__item--two-line
@@ -226,7 +226,7 @@
 
 .v-list--three-line .v-list__item,
 .v-list__item--three-line
-  min-height: $list-tile-three-line-min-height
+  min-height: $list-item-three-line-min-height
 
   .v-list__item__avatar,
   .v-list__item__action

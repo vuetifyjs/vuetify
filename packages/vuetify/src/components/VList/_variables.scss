@@ -1,20 +1,20 @@
 $avatar-margin-x: 16px;
 
-$list-tile-action-margin-x: 32px;
+$list-item-action-margin-x: 32px;
 
-$list-tile-avatar-margin-y: 8px;
-$list-tile-avatar-horizontal-margin-x: -16px;
+$list-item-avatar-margin-y: 8px;
+$list-item-avatar-horizontal-margin-x: -16px;
 
-$list-tile-icon-margin-y: 16px;
+$list-item-icon-margin-y: 16px;
 
-$list-tile-min-height: 48px;
-$list-tile-two-line-min-height: 64px;
-$list-tile-three-line-min-height: 88px;
+$list-item-min-height: 48px;
+$list-item-two-line-min-height: 64px;
+$list-item-three-line-min-height: 88px;
 
-$list-tile-title-font-size: map-deep-get($headings, 'subtitle-1', 'size');
-$list-tile-subtitle-font-size: map-deep-get($headings, 'subtitle-2', 'size');
+$list-item-title-font-size: map-deep-get($headings, 'subtitle-1', 'size');
+$list-item-subtitle-font-size: map-deep-get($headings, 'subtitle-2', 'size');
 
-$list-tile: (
+$list-item: (
   'action-margin-x': 32px,
   'avatar-margin-y': 8px,
   'avatar-horizontal-margin-x': -16px,
