@@ -8,7 +8,7 @@ test('VRipple', ({ mount }) => {
       directives: {
         Ripple
       },
-      render (h){
+      render (h) {
         const data = {
           directives: [{
             name: 'ripple'
@@ -31,9 +31,9 @@ test('VRipple', ({ mount }) => {
       },
       props: {
         ripple: Boolean,
-        default: false
+        default: () => false
       },
-      render (h){
+      render (h) {
         const data = {
           directives: [{
             name: 'ripple',
