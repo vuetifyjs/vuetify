@@ -1,30 +1,30 @@
-import Resize from '@/directives/resize'
-import { test } from '@/test'
+// Directives
+import Resize from '../resize'
 
-test('resize.js', () => {
+describe('resize.ts', () => {
   it('should bind event on inserted', () => {
     const callback = jest.fn()
-    jest.spyOn(global, 'addEventListener')
-    jest.spyOn(global, 'removeEventListener')
+    jest.spyOn(window, 'addEventListener')
+    jest.spyOn(window, 'removeEventListener')
     const el = {}
 
-    Resize.inserted(el, { value: callback })
+    Resize.inserted(el as HTMLElement, { value: callback } as any)
     expect(callback).toHaveBeenCalled()
     expect(window.addEventListener).toHaveBeenCalledWith('resize', callback, { passive: true })
-    Resize.unbind(el)
+    Resize.unbind(el as HTMLElement)
     expect(window.removeEventListener).toHaveBeenCalledWith('resize', callback, { passive: true })
   })
 
   it('should not run the callback in quiet mode', () => {
     const callback = jest.fn()
-    jest.spyOn(global, 'addEventListener')
-    jest.spyOn(global, 'removeEventListener')
+    jest.spyOn(window, 'addEventListener')
+    jest.spyOn(window, 'removeEventListener')
     const el = {}
 
-    Resize.inserted(el, { value: callback, modifiers: { quiet: true } })
+    Resize.inserted(el as HTMLElement, { value: callback, modifiers: { quiet: true } } as any)
     expect(callback).not.toHaveBeenCalled()
     expect(window.addEventListener).toHaveBeenCalledWith('resize', callback, { passive: true })
-    Resize.unbind(el)
+    Resize.unbind(el as HTMLElement)
     expect(window.removeEventListener).toHaveBeenCalledWith('resize', callback, { passive: true })
   })
 })
