@@ -21,13 +21,13 @@
     width: $inner-dot-size
 
 @mixin timeline-wedge-align($direction)
-  .v-card:before, .v-card:after
+  > .v-card:before, .v-card:after
     transform: rotate(if($direction == right, 180deg, 0))
     #{$direction}: -($timeline-wedge-size)
     #{if($direction == left, right, left)}: initial
 
   +rtl()
-    .v-card:before, .v-card:after
+    > .v-card:before, .v-card:after
       transform: rotate(if($direction == right, 0, 180deg))
       #{$direction}: initial
       #{if($direction == left, right, left)}: -($timeline-wedge-size)
