@@ -9,6 +9,9 @@ import Toggleable from '../../mixins/toggleable'
 import { Registrable, inject as RegistrableInject } from '../../mixins/registrable'
 import { Route } from 'vue-router'
 
+// Directives
+import Ripple from '../../directives/ripple'
+
 // Transitions
 import { VExpandTransition } from '../transitions'
 
@@ -46,6 +49,8 @@ export default mixins<options &
 ).extend({
   name: 'v-list-group',
 
+  directives: { Ripple },
+
   inject: ['listClick'],
 
   props: {
@@ -61,6 +66,10 @@ export default mixins<options &
     group: String,
     noAction: Boolean,
     prependIcon: String,
+    ripple: {
+      type: [Boolean, Object],
+      default: true
+    },
     subGroup: Boolean
   },
 
@@ -154,6 +163,10 @@ export default mixins<options &
           role: 'listitem',
           tabindex: 0
         },
+        directives: [{
+          name: 'ripple',
+          value: this.ripple
+        }],
         on: {
           ...this.$listeners,
           click: this.click,
