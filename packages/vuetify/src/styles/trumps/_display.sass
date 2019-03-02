@@ -1,7 +1,7 @@
-for $size, $media_query in $display-breakpoints
+@each $size, $media_query in $display-breakpoints
   .hidden
-    &-{$size}
-      @media $media_query
+    &-#{$size}
+      @media #{$media_query}
         display: none !important
 
 .overflow-hidden
