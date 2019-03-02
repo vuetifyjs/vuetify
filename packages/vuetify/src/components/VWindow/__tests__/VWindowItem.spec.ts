@@ -34,11 +34,6 @@ describe('VWindowItem.ts', () => {
       return mount(VWindowItem, {
         localVue,
         router,
-        mocks: {
-          $vuetify: {
-            rtl: false
-          }
-        },
         ...options
       })
     }
@@ -48,6 +43,11 @@ describe('VWindowItem.ts', () => {
     const wrapper = mount(VWindow, {
       slots: {
         default: [VWindowItem]
+      },
+      mocks: {
+        $vuetify: {
+          rtl: false
+        }
       }
     })
 
