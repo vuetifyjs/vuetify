@@ -79,7 +79,7 @@ export default mixins<options &
     },
     itemsClasses (): object {
       return {
-        'v-list__group__items--no-action': this.noAction
+        'v-list__group__items--no-action': this.noAction && !this.subGroup
       }
     }
   },
