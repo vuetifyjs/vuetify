@@ -151,6 +151,30 @@
   font-size: $list-tile-subtitle-font-size
 
 // Modifier
+.v-list--dense
+  .v-list__tile
+    min-height: 40px
+
+  .v-list__tile__icon
+    margin-top: 8px
+    margin-bottom: 8px
+
+  .v-list__tile__content
+    padding: 8px 0
+
+  .v-list__tile__title,
+  .v-list__tile__subtitle
+    font-size: 0.8125rem
+    line-height: 1rem
+
+  &.v-list--two-line .v-list__tile,
+  .v-list__tile--two-line
+    min-height: 60px
+
+  &.v-list--three-line .v-list__tile,
+  .v-list__tile--three-line
+    min-height: 76px
+
 .v-list__group--active
   .v-list__group__header__append-icon
     .v-icon
@@ -173,8 +197,8 @@
     .v-list__tile__icon.v-list__group__header__prepend-icon .v-icon
       transform: rotate(-180deg)
 
-.v-list__group__items--no-action .v-list__group__items
-  padding-left: 56px
+.v-list__group__items--no-action .v-list__group__items > .v-list__tile
+  padding-left: 72px
 
 .v-list__group__items--no-action > *:not(.v-list__group):not(.v-list__group__header--sub-group)
   padding-left: 72px
