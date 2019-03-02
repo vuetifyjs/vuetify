@@ -1,15 +1,57 @@
-import { test } from '@/test'
-import { VWindow, VWindowItem } from '@/components/VWindow'
+// Libraries
+import Vue from 'vue'
 
-test('VWindowItem.ts', ({ mount }) => {
+// Plugins
+import Router from 'vue-router'
+
+// Components
+import VWindow from '../VWindow'
+import VWindowItem from '../VWindowItem'
+
+// Utilities
+import {
+  createLocalVue,
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+import { ExtractVue } from '../../../util/mixins'
+import { rafPolyfill } from '../../../../test/index'
+
+describe('VWindowItem.ts', () => {
+  type Instance = ExtractVue<typeof VWindowItem>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+  let router: Router
+  let localVue: typeof Vue
+
+  rafPolyfill(global)
+
+  beforeEach(() => {
+    router = new Router()
+    localVue = createLocalVue()
+    localVue.use(Router)
+
+    mountFunction = (options = {}) => {
+      return mount(VWindowItem, {
+        localVue,
+        router,
+        ...options
+      })
+    }
+  })
+
   it('should transition content', async () => {
     const wrapper = mount(VWindow, {
       slots: {
         default: [VWindowItem]
+      },
+      mocks: {
+        $vuetify: {
+          rtl: false
+        }
       }
     })
 
-    const item = wrapper.first(VWindowItem.options)
+    const item = wrapper.find(VWindowItem.options)
     // Before enter
     expect(wrapper.vm.isActive).toBeFalsy()
     item.vm.onBeforeEnter()
@@ -48,18 +90,18 @@ test('VWindowItem.ts', ({ mount }) => {
   })
 
   it('should use custom transition', () => {
-    const wrapper = mount(VWindowItem, {
+    const wrapper = mountFunction({
       propsData: {
         transition: 'foo',
         reverseTransition: 'bar'
       },
-      data: {
+      data: () => ({
         windowGroup: {
           internalReverse: false,
           register: () => {},
           unregister: () => {}
         }
-      }
+      })
     })
 
     expect(wrapper.vm.computedTransition).toBe('foo')
@@ -77,15 +119,15 @@ test('VWindowItem.ts', ({ mount }) => {
   it('should only call done when the transition is on the window-item', () => {
     const done = jest.fn()
 
-    const wrapper = mount(VWindowItem, {
-      data: {
+    const wrapper = mountFunction({
+      data: () => ({
         done,
         windowGroup: {
           internalReverse: false,
           register: () => {},
           unregister: () => {}
         }
-      }
+      })
     })
 
     // Incorrect property
@@ -115,18 +157,18 @@ test('VWindowItem.ts', ({ mount }) => {
   it('should immediately call done when no transition', async () => {
     const done = jest.fn()
 
-    const wrapper = mount(VWindowItem, {
+    const wrapper = mountFunction({
       propsData: {
         transition: false,
         reverseTransition: false
       },
-      data: {
+      data: () => ({
         windowGroup: {
           internalHeight: 0,
           register: () => {},
           unregister: () => {}
         }
-      }
+      })
     })
 
     expect(wrapper.vm.computedTransition).toBeFalsy()
