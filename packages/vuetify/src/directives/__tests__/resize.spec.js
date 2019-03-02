@@ -2,7 +2,7 @@ import Resize from '@/directives/resize'
 import { test } from '@/test'
 
 test('resize.js', () => {
-  it('shoud bind event on inserted', () => {
+  it('should bind event on inserted', () => {
     const callback = jest.fn()
     jest.spyOn(global, 'addEventListener')
     jest.spyOn(global, 'removeEventListener')
@@ -15,7 +15,7 @@ test('resize.js', () => {
     expect(window.removeEventListener).toHaveBeenCalledWith('resize', callback, { passive: true })
   })
 
-  it('shoud not run the callback in quiet mode', () => {
+  it('should not run the callback in quiet mode', () => {
     const callback = jest.fn()
     jest.spyOn(global, 'addEventListener')
     jest.spyOn(global, 'removeEventListener')
