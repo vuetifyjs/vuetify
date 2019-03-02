@@ -196,7 +196,7 @@ export default {
     needsTile (slot) {
       return slot.length !== 1 ||
         slot[0].componentOptions == null ||
-        slot[0].componentOptions.Ctor.options.name !== 'v-list-tile'
+        slot[0].componentOptions.Ctor.options.name !== 'v-list-item'
     },
     getAvatar (item) {
       return Boolean(getPropertyFromItem(item, this.itemAvatar, false))

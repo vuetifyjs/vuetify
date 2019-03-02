@@ -11,19 +11,19 @@
         <v-list two-line subheader>
           <v-subheader>General</v-subheader>
 
-          <v-list-tile avatar>
-            <v-list-tile-content>
-              <v-list-tile-title>Profile photo</v-list-tile-title>
-              <v-list-tile-sub-title>Change your Google+ profile photo</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
+          <v-list-item avatar>
+            <v-list-item-content>
+              <v-list-item-title>Profile photo</v-list-item-title>
+              <v-list-item-subtitle>Change your Google+ profile photo</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
 
-          <v-list-tile avatar>
-            <v-list-tile-content>
-              <v-list-tile-title>Show your status</v-list-tile-title>
-              <v-list-tile-sub-title>Your status is visible to everyone</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
+          <v-list-item avatar>
+            <v-list-item-content>
+              <v-list-item-title>Show your status</v-list-item-title>
+              <v-list-item-subtitle>Your status is visible to everyone</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
         </v-list>
 
         <v-divider></v-divider>
@@ -34,49 +34,49 @@
         >
           <v-subheader>Hangout notifications</v-subheader>
 
-          <v-list-tile @click="">
-            <v-list-tile-action>
+          <v-list-item @click="">
+            <v-list-item-action>
               <v-checkbox v-model="notifications"></v-checkbox>
-            </v-list-tile-action>
+            </v-list-item-action>
 
-            <v-list-tile-content @click="notifications = !notifications">
-              <v-list-tile-title>Notifications</v-list-tile-title>
-              <v-list-tile-sub-title>Allow notifications</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
+            <v-list-item-content @click="notifications = !notifications">
+              <v-list-item-title>Notifications</v-list-item-title>
+              <v-list-item-subtitle>Allow notifications</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
 
-          <v-list-tile @click="">
-            <v-list-tile-action>
+          <v-list-item @click="">
+            <v-list-item-action>
               <v-checkbox v-model="sound"></v-checkbox>
-            </v-list-tile-action>
+            </v-list-item-action>
 
-            <v-list-tile-content @click="sound = !sound">
-              <v-list-tile-title>Sound</v-list-tile-title>
-              <v-list-tile-sub-title>Hangouts message</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
+            <v-list-item-content @click="sound = !sound">
+              <v-list-item-title>Sound</v-list-item-title>
+              <v-list-item-subtitle>Hangouts message</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
 
-          <v-list-tile @click="">
-            <v-list-tile-action>
+          <v-list-item @click="">
+            <v-list-item-action>
               <v-checkbox v-model="video"></v-checkbox>
-            </v-list-tile-action>
+            </v-list-item-action>
 
-            <v-list-tile-content @click="video = !video">
-              <v-list-tile-title>Video sounds</v-list-tile-title>
-              <v-list-tile-sub-title>Hangouts video call</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
+            <v-list-item-content @click="video = !video">
+              <v-list-item-title>Video sounds</v-list-item-title>
+              <v-list-item-subtitle>Hangouts video call</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
 
-          <v-list-tile @click="">
-            <v-list-tile-action>
+          <v-list-item @click="">
+            <v-list-item-action>
               <v-checkbox v-model="invites"></v-checkbox>
-            </v-list-tile-action>
+            </v-list-item-action>
 
-            <v-list-tile-content @click="invites = !invites">
-              <v-list-tile-title>Invites</v-list-tile-title>
-              <v-list-tile-sub-title>Notify when receiving invites</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
+            <v-list-item-content @click="invites = !invites">
+              <v-list-item-title>Invites</v-list-item-title>
+              <v-list-item-subtitle>Notify when receiving invites</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
         </v-list>
       </v-card>
     </v-flex>

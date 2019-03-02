@@ -18,24 +18,24 @@
           </v-btn>
         </v-toolbar>
         <v-list>
-          <v-list-tile
+          <v-list-item
             v-for="item in items"
             :key="item.title"
             avatar
             @click=""
           >
-            <v-list-tile-action>
+            <v-list-item-action>
               <v-icon v-if="item.icon" color="pink">star</v-icon>
-            </v-list-tile-action>
+            </v-list-item-action>
 
-            <v-list-tile-content>
-              <v-list-tile-title v-text="item.title"></v-list-tile-title>
-            </v-list-tile-content>
+            <v-list-item-content>
+              <v-list-item-title v-text="item.title"></v-list-item-title>
+            </v-list-item-content>
 
-            <v-list-tile-avatar>
+            <v-list-item-avatar>
               <img :src="item.avatar">
-            </v-list-tile-avatar>
-          </v-list-tile>
+            </v-list-item-avatar>
+          </v-list-item>
         </v-list>
       </v-card>
     </v-flex>

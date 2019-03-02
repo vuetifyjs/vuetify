@@ -21,59 +21,59 @@
         </v-card-title>
 
         <v-list>
-          <v-list-tile @click="">
-            <v-list-tile-action>
+          <v-list-item @click="">
+            <v-list-item-action>
               <v-icon>phone</v-icon>
-            </v-list-tile-action>
+            </v-list-item-action>
 
-            <v-list-tile-content>
-              <v-list-tile-title>(650) 555-1234</v-list-tile-title>
-            </v-list-tile-content>
-            <v-list-tile-action>
+            <v-list-item-content>
+              <v-list-item-title>(650) 555-1234</v-list-item-title>
+            </v-list-item-content>
+            <v-list-item-action>
 
               <v-icon>chat</v-icon>
-            </v-list-tile-action>
-          </v-list-tile>
+            </v-list-item-action>
+          </v-list-item>
 
           <v-divider inset></v-divider>
 
-          <v-list-tile @click="">
-            <v-list-tile-action>
+          <v-list-item @click="">
+            <v-list-item-action>
               <v-icon>phone</v-icon>
-            </v-list-tile-action>
+            </v-list-item-action>
 
-            <v-list-tile-content>
-              <v-list-tile-title>(323) 555-6789</v-list-tile-title>
-            </v-list-tile-content>
+            <v-list-item-content>
+              <v-list-item-title>(323) 555-6789</v-list-item-title>
+            </v-list-item-content>
 
-            <v-list-tile-action>
+            <v-list-item-action>
               <v-icon>chat</v-icon>
-            </v-list-tile-action>
-          </v-list-tile>
+            </v-list-item-action>
+          </v-list-item>
 
           <v-divider inset></v-divider>
 
-          <v-list-tile @click="">
-            <v-list-tile-action>
+          <v-list-item @click="">
+            <v-list-item-action>
               <v-icon>mail</v-icon>
-            </v-list-tile-action>
+            </v-list-item-action>
 
-            <v-list-tile-content>
-              <v-list-tile-title>mcbeal@example.com</v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
+            <v-list-item-content>
+              <v-list-item-title>mcbeal@example.com</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
 
           <v-divider inset></v-divider>
 
-          <v-list-tile @click="">
-            <v-list-tile-action>
+          <v-list-item @click="">
+            <v-list-item-action>
               <v-icon>location_on</v-icon>
-            </v-list-tile-action>
+            </v-list-item-action>
 
-            <v-list-tile-content>
-              <v-list-tile-title>Orlando, FL 79938</v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
+            <v-list-item-content>
+              <v-list-item-title>Orlando, FL 79938</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
         </v-list>
 
         <v-img

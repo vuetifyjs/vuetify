@@ -16,19 +16,19 @@
 
         <v-list>
           <template v-for="(item, index) in items">
-            <v-list-tile
+            <v-list-item
               v-if="item.action"
               :key="item.title"
               @click=""
             >
-              <v-list-tile-action>
+              <v-list-item-action>
                 <v-icon>{{ item.action }}</v-icon>
-              </v-list-tile-action>
+              </v-list-item-action>
 
-              <v-list-tile-content>
-                <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
+              <v-list-item-content>
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
 
             <v-divider
               v-else-if="item.divider"

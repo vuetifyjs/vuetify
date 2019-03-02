@@ -31,7 +31,7 @@
     },
     "titleSubtitleActionsAndActionText": {
       "header": "### Title with sub-title, actions and action-text",
-      "desc": "A list can contain a stack within an action. Ripple and router props can be passed through the main v-list, to the v-list-tile or as a property in the items array."
+      "desc": "A list can contain a stack within an action. Ripple and router props can be passed through the main v-list, to the v-list-item or as a property in the items array."
     },
     "actionTitleAndSubtitle": {
       "header": "### Action with title and sub-title",
@@ -54,7 +54,7 @@
     "twoLine": "Increases list-tile height for two lines",
     "inactive": "If set, the list tile will not be rendered as a link even if it has to/href prop or @click handler",
     "value": "Expands / Collapse list group",
-    "v-list-tile-avatar": {
+    "v-list-item-avatar": {
       "color": "Mixins.Colorable.props.color"
     },
     "v-list-group": {

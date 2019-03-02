@@ -35,13 +35,13 @@
           slot="item"
           slot-scope="props"
         >
-          <v-list-tile-action>
+          <v-list-item-action>
             <v-icon v-text="props.item.icon" />
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title v-text="props.item.text" />
-            <v-list-tile-sub-title v-text="props.item.subtext" />
-          </v-list-tile-content>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title v-text="props.item.text" />
+            <v-list-item-subtitle v-text="props.item.subtext" />
+          </v-list-item-content>
         </template>
       </v-autocomplete>
     </v-flex>

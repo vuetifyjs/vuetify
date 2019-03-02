@@ -298,7 +298,7 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
     expect(change).toHaveBeenCalledTimes(2)
   })
 
-  it('should disable v-list-tile', async () => {
+  it('should disable v-list-item', async () => {
     const wrapper = mount(VSelect, {
       propsData: {
         items: [{ text: 'foo', disabled: true, id: 0 }]

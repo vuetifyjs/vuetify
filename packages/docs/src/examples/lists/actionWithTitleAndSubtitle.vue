@@ -17,19 +17,19 @@
         <v-list three-line subheader>
           <v-subheader>User Controls</v-subheader>
 
-          <v-list-tile>
-            <v-list-tile-content>
-              <v-list-tile-title>Content filtering</v-list-tile-title>
-              <v-list-tile-sub-title>Set the content filtering level to restrict apps that can be downloaded</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
+          <v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>Content filtering</v-list-item-title>
+              <v-list-item-subtitle>Set the content filtering level to restrict apps that can be downloaded</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
 
-          <v-list-tile>
-            <v-list-tile-content>
-              <v-list-tile-title>Password</v-list-tile-title>
-              <v-list-tile-sub-title>Require password for purchase or use password to restrict purchase</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
+          <v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>Password</v-list-item-title>
+              <v-list-item-subtitle>Require password for purchase or use password to restrict purchase</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
         </v-list>
 
         <v-divider></v-divider>
@@ -40,41 +40,41 @@
         >
           <v-subheader>General</v-subheader>
 
-          <v-list-tile @click="">
-            <v-list-tile-action>
+          <v-list-item @click="">
+            <v-list-item-action>
               <v-checkbox
                 v-model="notifications"
                 readonly
               ></v-checkbox>
-            </v-list-tile-action>
+            </v-list-item-action>
 
-            <v-list-tile-content @click="notifications = !notifications">
-              <v-list-tile-title>Notifications</v-list-tile-title>
-              <v-list-tile-sub-title>Notify me about updates to apps or games that I downloaded</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
+            <v-list-item-content @click="notifications = !notifications">
+              <v-list-item-title>Notifications</v-list-item-title>
+              <v-list-item-subtitle>Notify me about updates to apps or games that I downloaded</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
 
-          <v-list-tile @click="">
-            <v-list-tile-action>
+          <v-list-item @click="">
+            <v-list-item-action>
               <v-checkbox v-model="sound"></v-checkbox>
-            </v-list-tile-action>
+            </v-list-item-action>
 
-            <v-list-tile-content @click="sound = !sound">
-              <v-list-tile-title>Sound</v-list-tile-title>
-              <v-list-tile-sub-title>Auto-update apps at any time. Data charges may apply</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
+            <v-list-item-content @click="sound = !sound">
+              <v-list-item-title>Sound</v-list-item-title>
+              <v-list-item-subtitle>Auto-update apps at any time. Data charges may apply</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
 
-          <v-list-tile @click="">
-            <v-list-tile-action>
+          <v-list-item @click="">
+            <v-list-item-action>
               <v-checkbox v-model="widgets"></v-checkbox>
-            </v-list-tile-action>
+            </v-list-item-action>
 
-            <v-list-tile-content @click="widgets = !widgets">
-              <v-list-tile-title>Auto-add widgets</v-list-tile-title>
-              <v-list-tile-sub-title>Automatically add home screen widgets</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
+            <v-list-item-content @click="widgets = !widgets">
+              <v-list-item-title>Auto-add widgets</v-list-item-title>
+              <v-list-item-subtitle>Automatically add home screen widgets</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
         </v-list>
       </v-card>
     </v-flex>

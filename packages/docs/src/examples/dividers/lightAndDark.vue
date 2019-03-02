@@ -12,14 +12,14 @@
         </v-toolbar>
         <v-list class="indigo darken-2" dark>
           <template v-for="(item, index) in items">
-            <v-list-tile v-if="item.action" :key="item.title" @click="">
-              <v-list-tile-action>
+            <v-list-item v-if="item.action" :key="item.title" @click="">
+              <v-list-item-action>
                 <v-icon>{{ item.action }}</v-icon>
-              </v-list-tile-action>
-              <v-list-tile-content class="white--text">
-                <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
+              </v-list-item-action>
+              <v-list-item-content class="white--text">
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
             <v-divider v-else-if="item.divider" :key="index"></v-divider>
             <v-subheader v-else-if="item.header" :key="item.header" class="grey--text text--lighten-4">{{ item.header }}</v-subheader>
           </template>

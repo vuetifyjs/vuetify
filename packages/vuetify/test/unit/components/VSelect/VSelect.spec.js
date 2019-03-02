@@ -47,7 +47,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(item.element.getAttribute('disabled')).toBe('disabled')
   })
 
-  it('should render v-select correctly when using v-list-tile in item scope slot', async () => {
+  it('should render v-select correctly when using v-list-item in item scope slot', async () => {
     const items = Array.from({ length: 2 }, (x, i) => ({ value: i, text: `Text ${i}` }))
 
     const vm = new Vue({
@@ -55,14 +55,14 @@ test('VSelect', ({ mount, compileToFunctions }) => {
         VListTile
       }
     })
-    const itemSlot = ({ item, tile }) => vm.$createElement('v-list-tile', {
+    const itemSlot = ({ item, tile }) => vm.$createElement('v-list-item', {
       on: tile.on,
       props: tile.props,
       class: item.value % 2 === 0 ? '' : 'red lighten-1'
     }, [
       item.text
     ])
-    const selectionSlot = ({ item }) => vm.$createElement('v-list-tile', item.value)
+    const selectionSlot = ({ item }) => vm.$createElement('v-list-item', item.value)
     const component = Vue.component('test', {
       render (h) {
         return h(VSelect, {
@@ -84,7 +84,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render v-select correctly when not using v-list-tile in item scope slot', async () => {
+  it('should render v-select correctly when not using v-list-item in item scope slot', async () => {
     const items = Array.from({ length: 2 }, (x, i) => ({ value: i, text: `Text ${i}` }))
 
     const vm = new Vue({
@@ -93,10 +93,10 @@ test('VSelect', ({ mount, compileToFunctions }) => {
         VListTileContent
       }
     })
-    const itemSlot = ({ item }) => vm.$createElement('v-list-tile-content', {
+    const itemSlot = ({ item }) => vm.$createElement('v-list-item-content', {
       class: item.value % 2 === 0 ? '' : 'red lighten-1'
     }, [
-      vm.$createElement('v-list-tile-title', [item.value])
+      vm.$createElement('v-list-item-title', [item.value])
     ])
     const component = Vue.component('test', {
       render (h) {

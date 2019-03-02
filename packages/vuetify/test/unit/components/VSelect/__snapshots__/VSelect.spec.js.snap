@@ -215,7 +215,7 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
 
 `;
 
-exports[`VSelect should render v-select correctly when not using v-list-tile in item scope slot 1`] = `
+exports[`VSelect should render v-select correctly when not using v-list-item in item scope slot 1`] = `
 
 <div role="combobox"
      class="v-input v-text-field v-select theme--light"
@@ -254,7 +254,7 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
 
 `;
 
-exports[`VSelect should render v-select correctly when using v-list-tile in item scope slot 1`] = `
+exports[`VSelect should render v-select correctly when using v-list-item in item scope slot 1`] = `
 
 <div role="combobox"
      class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty theme--light"

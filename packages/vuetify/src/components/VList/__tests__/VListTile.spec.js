@@ -121,7 +121,7 @@ test('VListTile.vue', ({ mount }) => {
 
   it('should have --link class when click handler present', () => {
     const { render } = compileToFunctions(`
-      <v-list-tile @click="">Test</v-list-tile>
+      <v-list-item @click="">Test</v-list-item>
     `)
 
     const component = Vue.component('test', {
@@ -138,7 +138,7 @@ test('VListTile.vue', ({ mount }) => {
 
   it('should have --link class when click.prevent.stop handler present', () => {
     const { render } = compileToFunctions(`
-      <v-list-tile @click.prevent.stop="">Test</v-list-tile>
+      <v-list-item @click.prevent.stop="">Test</v-list-item>
     `)
 
     const component = Vue.component('test', {

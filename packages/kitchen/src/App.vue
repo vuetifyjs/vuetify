@@ -61,15 +61,15 @@
         dense
         class="pt-0"
       >
-        <v-list-tile
+        <v-list-item
           v-for="item in items"
           :key="item.title"
           :to="item.to"
         >
-          <v-list-tile-content>
-            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
     <router-view />
