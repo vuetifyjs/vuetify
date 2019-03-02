@@ -1,7 +1,23 @@
+// Mixins
 import Bootable from './bootable'
+
+// Utilities
+import { getObjectValueByPath } from '../util/helpers'
+import mixins, { ExtractVue } from '../util/mixins'
 import { consoleWarn } from '../util/console'
 
-function validateAttachTarget (val) {
+// Types
+import Vue, { PropOptions } from 'vue'
+import { VNode } from 'vue/types'
+
+interface options extends Vue {
+  $el: HTMLElement
+  $refs: {
+    content: HTMLElement
+  }
+}
+
+function validateAttachTarget (val: any) {
   const type = typeof val
 
   if (type === 'boolean' || type === 'string') return true
@@ -10,23 +26,26 @@ function validateAttachTarget (val) {
 }
 
 /* @vue/component */
-export default {
+export default mixins<options &
+  /* eslint-disable indent */
+  ExtractVue<typeof Bootable>
+  /* eslint-enable indent */
+>(Bootable).extend({
   name: 'detachable',
-
-  mixins: [Bootable],
 
   props: {
     attach: {
-      type: null,
       default: false,
       validator: validateAttachTarget
-    },
+    } as PropOptions<boolean | string | Element>,
     contentClass: {
+      type: String,
       default: ''
     }
   },
 
   data: () => ({
+    activatorNode: null as null | VNode | VNode[],
     hasDetached: false
   }),
 
@@ -42,8 +61,11 @@ export default {
     this.$nextTick(() => {
       if (this.activatorNode) {
         const activator = Array.isArray(this.activatorNode) ? this.activatorNode : [this.activatorNode]
+
         activator.forEach(node => {
-          node.elm && this.$el.parentNode.insertBefore(node.elm, this.$el)
+          node.elm &&
+            this.$el.parentNode &&
+            this.$el.parentNode.insertBefore(node.elm, this.$el)
         })
       }
     })
@@ -58,17 +80,30 @@ export default {
   },
 
   beforeDestroy () {
-    if (!this.$refs.content) return
-
     // IE11 Fix
     try {
-      this.$refs.content.parentNode.removeChild(this.$refs.content)
+      if (
+        this.$refs.content &&
+        this.$refs.content.parentNode
+      ) {
+        this.$refs.content.parentNode.removeChild(this.$refs.content)
+      }
+
+      if (this.activatorNode) {
+        const activator = Array.isArray(this.activatorNode) ? this.activatorNode : [this.activatorNode]
+        activator.forEach(node => {
+          node.elm &&
+            node.elm.parentNode &&
+            node.elm.parentNode.removeChild(node.elm)
+        })
+      }
     } catch (e) { console.log(e) }
   },
 
   methods: {
     getScopeIdAttrs () {
-      const scopeId = this.$vnode && this.$vnode.context.$options._scopeId
+      const scopeId = getObjectValueByPath(this.$vnode, 'context.$options._scopeId')
+
       return scopeId && {
         [scopeId]: ''
       }
@@ -109,4 +144,4 @@ export default {
       this.hasDetached = true
     }
   }
-}
+})

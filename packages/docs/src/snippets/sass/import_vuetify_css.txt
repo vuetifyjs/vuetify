@@ -1,0 +1,2 @@
+// main.sass
+@import '~vuetify/src/styles/styles.sass'

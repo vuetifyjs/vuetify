@@ -7,9 +7,11 @@
       <core-section>
         <v-layout justify-space-around>
           <v-badge left>
-            <span slot="badge">
-              1
-            </span>
+            <template #badge>
+              <span>
+                1
+              </span>
+            </template>
             <v-sheet
               width="32"
               height="32"
@@ -18,9 +20,11 @@
           </v-badge>
 
           <v-badge left>
-            <span slot="badge">
-              2
-            </span>
+            <template #badge>
+              <span>
+                2
+              </span>
+            </template>
             <v-sheet
               width="32"
               height="32"
@@ -29,9 +33,11 @@
           </v-badge>
 
           <v-badge left>
-            <span slot="badge">
-              3
-            </span>
+            <template #badge>
+              <span>
+                3
+              </span>
+            </template>
             <v-sheet
               width="32"
               height="32"
@@ -47,9 +53,11 @@
       <core-section>
         <v-layout justify-space-around>
           <v-badge right>
-            <span slot="badge">
-              1
-            </span>
+            <template #badge>
+              <span>
+                1
+              </span>
+            </template>
             <v-sheet
               width="32"
               height="32"
@@ -58,9 +66,11 @@
           </v-badge>
 
           <v-badge right>
-            <span slot="badge">
-              2
-            </span>
+            <template #badge>
+              <span>
+                2
+              </span>
+            </template>
             <v-sheet
               width="32"
               height="32"
@@ -69,9 +79,11 @@
           </v-badge>
 
           <v-badge right>
-            <span slot="badge">
-              3
-            </span>
+            <template #badge>
+              <span>
+                3
+              </span>
+            </template>
             <v-sheet
               width="32"
               height="32"
@@ -90,9 +102,11 @@
             left
             color="red"
           >
-            <span slot="badge">
-              1
-            </span>
+            <template #badge>
+              <span>
+                1
+              </span>
+            </template>
             <v-sheet
               width="32"
               height="32"
@@ -104,9 +118,11 @@
             left
             color="teal"
           >
-            <span slot="badge">
-              2
-            </span>
+            <template #badge>
+              <span>
+                2
+              </span>
+            </template>
             <v-sheet
               width="32"
               height="32"
@@ -118,9 +134,11 @@
             left
             color="info darken-2"
           >
-            <span slot="badge">
-              3
-            </span>
+            <template #badge>
+              <span>
+                3
+              </span>
+            </template>
             <v-sheet
               width="32"
               height="32"
@@ -132,9 +150,11 @@
             right
             color="red"
           >
-            <span slot="badge">
-              1
-            </span>
+            <template #badge>
+              <span>
+                1
+              </span>
+            </template>
             <v-sheet
               width="32"
               height="32"
@@ -146,9 +166,11 @@
             right
             color="teal"
           >
-            <span slot="badge">
-              2
-            </span>
+            <template #badge>
+              <span>
+                2
+              </span>
+            </template>
             <v-sheet
               width="32"
               height="32"
@@ -160,9 +182,11 @@
             right
             color="info darken-2"
           >
-            <span slot="badge">
-              3
-            </span>
+            <template #badge>
+              <span>
+                3
+              </span>
+            </template>
             <v-sheet
               width="32"
               height="32"
@@ -181,9 +205,11 @@
             left
             overlap
           >
-            <span slot="badge">
-              1
-            </span>
+            <template #badge>
+              <span>
+                1
+              </span>
+            </template>
             <v-sheet
               width="32"
               height="32"
@@ -195,9 +221,11 @@
             left
             overlap
           >
-            <span slot="badge">
-              2
-            </span>
+            <template #badge>
+              <span>
+                2
+              </span>
+            </template>
             <v-sheet
               width="32"
               height="32"
@@ -209,9 +237,11 @@
             left
             overlap
           >
-            <span slot="badge">
-              3
-            </span>
+            <template #badge>
+              <span>
+                3
+              </span>
+            </template>
             <v-sheet
               width="32"
               height="32"
@@ -244,9 +274,11 @@
               :value="show1"
               left
             >
-              <span slot="badge">
-                1
-              </span>
+              <template #badge>
+                <span>
+                  1
+                </span>
+              </template>
               <v-sheet
                 width="32"
                 height="32"
@@ -264,9 +296,11 @@
               left
               overlap
             >
-              <span slot="badge">
-                1
-              </span>
+              <template #badge>
+                <span>
+                  1
+                </span>
+              </template>
               <v-sheet
                 width="32"
                 height="32"
@@ -301,9 +335,11 @@
               left
               transition="slide-x-reverse-transition"
             >
-              <span slot="badge">
-                1
-              </span>
+              <template #badge>
+                <span>
+                  1
+                </span>
+              </template>
               <v-sheet
                 width="32"
                 height="32"
@@ -322,9 +358,11 @@
               transition="slide-x-reverse-transition"
               overlap
             >
-              <span slot="badge">
-                1
-              </span>
+              <template #badge>
+                <span>
+                  1
+                </span>
+              </template>
               <v-sheet
                 width="32"
                 height="32"
@@ -344,13 +382,14 @@
             left
             color="red"
           >
-            <v-icon
-              slot="badge"
-              dark
-              small
-            >
-              mdi-adjust
-            </v-icon>
+            <template #badge>
+              <v-icon
+                dark
+                small
+              >
+                mdi-adjust
+              </v-icon>
+            </template>
             <v-sheet
               width="32"
               height="32"
@@ -362,13 +401,14 @@
             left
             color="teal"
           >
-            <v-icon
-              slot="badge"
-              dark
-              small
-            >
-              mdi-invert-colors
-            </v-icon>
+            <template #badge>
+              <v-icon
+                dark
+                small
+              >
+                mdi-invert-colors
+              </v-icon>
+            </template>
             <v-sheet
               width="32"
               height="32"
@@ -380,13 +420,14 @@
             left
             color="info darken-2"
           >
-            <v-icon
-              slot="badge"
-              dark
-              small
-            >
-              mdi-cloud
-            </v-icon>
+            <template #badge>
+              <v-icon
+                dark
+                small
+              >
+                mdi-cloud
+              </v-icon>
+            </template>
             <v-sheet
               width="32"
               height="32"

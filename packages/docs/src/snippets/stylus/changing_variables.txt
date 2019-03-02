@@ -1,6 +1,0 @@
-$body-font-family = 'Open Sans'
-$alert-font-size = 18px
-
-@import '~vuetify/src/stylus/main'
-// For a-la-carte
-@import '~vuetify/src/stylus/app'

@@ -23,6 +23,8 @@
   import 'prismjs/components/prism-json.js'
   import 'prismjs/components/prism-stylus.js'
   import 'prismjs/components/prism-typescript.js'
+  import 'prismjs/components/prism-sass.js'
+  import 'prismjs/components/prism-scss.js'
 
   // Utilities
   import kebabCase from 'lodash/kebabCase'
@@ -51,8 +53,6 @@
   export default {
     name: 'Documentation',
 
-    asyncData: load,
-
     watch: {
       '$route.path' () {
         this.load({
@@ -61,6 +61,8 @@
         })
       }
     },
+
+    asyncData: load,
 
     methods: {
       load

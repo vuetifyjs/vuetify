@@ -21,6 +21,9 @@
       "desc": "Previously known as **tags** - user is allowed to enter more than 1 value"
     }
   },
+  "props": {
+    "value": "Components.Inputs.props.value"
+  },
   "slots": {
     "append": "Components.Inputs.slots.append",
     "append-outer": "Components.TextFields.slots.append-outer",
