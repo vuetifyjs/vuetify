@@ -13,33 +13,21 @@
         </v-flex>
         <v-spacer />
         <v-flex
-          v-if="structure.mdLink"
+          v-if="structure.mdSpec"
           shrink
         >
-          <v-tooltip left>
-            <v-btn
-              slot="activator"
-              :href="structure.mdLink"
-              icon
-              target="_blank"
-              rel="noopener"
-              class="mt-2"
-              aria-label="Material Design Specification"
-            >
-              <v-icon>mdi-material-design</v-icon>
-            </v-btn>
-            <span>Material Design Specification</span>
-          </v-tooltip>
+          <core-spec-btn
+            :link="structure.mdSpec.link"
+            :version="structure.mdSpec.version"
+          />
         </v-flex>
       </v-layout>
+
       <div
         v-if="structure.titleText"
         class="mb-5"
       >
-        <doc-text
-          v-if="structure.titleText"
-          class="mb-4"
-        >
+        <doc-text class="mb-4">
           {{ structure.titleText }}
         </doc-text>
       </div>
