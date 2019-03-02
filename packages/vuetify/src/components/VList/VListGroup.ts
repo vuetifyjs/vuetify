@@ -1,7 +1,7 @@
 // Components
 import VIcon from '../VIcon'
 import VList from './VList'
-import VListTileIcon from './VListTileIcon'
+import VListTileIcon from './VListItemIcon'
 
 // Mixins
 import Bootable from '../../mixins/bootable'

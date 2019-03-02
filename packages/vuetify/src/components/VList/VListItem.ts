@@ -18,7 +18,7 @@ export default mixins(
   Toggleable,
   Themeable
 ).extend({
-  name: 'v-list-tile',
+  name: 'v-list-item',
 
   directives: {
     Ripple
@@ -37,7 +37,7 @@ export default mixins(
   },
 
   data: () => ({
-    proxyClass: 'v-list__tile--active'
+    proxyClass: 'v-list__item--active'
   }),
 
   computed: {
@@ -48,12 +48,12 @@ export default mixins(
     },
     classes (): object {
       return {
-        'v-list__tile': true,
-        'v-list__tile--active': !this.to && this.isActive,
-        'v-list__tile--disabled': this.disabled,
-        'v-list__tile--link': this.isLink && !this.inactive,
-        'v-list__tile--three-line': this.threeLine,
-        'v-list__tile--two-line': this.twoLine,
+        'v-list__item': true,
+        'v-list__item--active': !this.to && this.isActive,
+        'v-list__item--disabled': this.disabled,
+        'v-list__item--link': this.isLink && !this.inactive,
+        'v-list__item--three-line': this.threeLine,
+        'v-list__item--two-line': this.twoLine,
         ...this.themeClasses,
         [this.activeClass]: this.isActive
       }

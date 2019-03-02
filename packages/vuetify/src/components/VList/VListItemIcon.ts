@@ -3,12 +3,12 @@ import Vue, { VNode } from 'vue'
 
 /* @vue/component */
 export default Vue.extend({
-  name: 'v-list-tile-icon',
+  name: 'v-list-item-icon',
 
   functional: true,
 
   render (h, { data, children, props }): VNode {
-    data.staticClass = (`v-list__tile__icon ${data.staticClass || ''}`).trim()
+    data.staticClass = (`v-list__item__icon ${data.staticClass || ''}`).trim()
 
     return h('div', data, children)
   }
