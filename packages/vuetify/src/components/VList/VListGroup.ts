@@ -1,7 +1,8 @@
 // Components
 import VIcon from '../VIcon'
 import VList from './VList'
-import VListTileIcon from './VListItemIcon'
+import VListItem from './VListItem'
+import VListItemIcon from './VListItemIcon'
 
 // Mixins
 import Bootable from '../../mixins/bootable'
@@ -132,12 +133,8 @@ export default mixins<options &
   },
 
   methods: {
-    click (e: MouseEvent | KeyboardEvent) {
+    click () {
       if (this.disabled) return
-
-      if (e.detail) this.$refs.group.blur()
-
-      this.$emit('click', e)
 
       this.isActive = !this.isActive
     },
@@ -149,20 +146,16 @@ export default mixins<options &
 
       if (!icon && !this.$slots.appendIcon) return null
 
-      return this.$createElement(VListTileIcon, {
+      return this.$createElement(VListItemIcon, {
         staticClass: 'v-list__group__header__append-icon'
       }, [
         this.$slots.appendIcon || this.genIcon(icon)
       ])
     },
     genGroup () {
-      return this.$createElement('a', {
+      return this.$createElement(VListItem, {
         staticClass: 'v-list__group__header',
         class: this.headerClasses,
-        attrs: {
-          role: 'listitem',
-          tabindex: 0
-        },
         directives: [{
           name: 'ripple',
           value: this.ripple
@@ -171,10 +164,9 @@ export default mixins<options &
           ...this.$listeners,
           click: this.click,
           keydown: (e: KeyboardEvent) => {
-            if (e.keyCode === keyCodes.enter) this.click(e)
+            if (e.keyCode === keyCodes.enter) this.click()
           }
-        },
-        ref: 'group'
+        }
       }, [
         this.genPrependIcon(),
         this.$slots.activator,
@@ -200,7 +192,7 @@ export default mixins<options &
 
       if (!icon && !this.$slots.prependIcon) return null
 
-      return this.$createElement(VListTileIcon, {
+      return this.$createElement(VListItemIcon, {
         staticClass: 'v-list__group__header__prepend-icon',
         'class': {
           [this.activeClass]: this.isActive

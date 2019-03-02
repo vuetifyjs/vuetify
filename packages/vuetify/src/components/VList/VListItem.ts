@@ -54,11 +54,6 @@ export default baseMixins.extend<options>().extend({
   }),
 
   computed: {
-    listClasses (): object | undefined {
-      return this.disabled
-        ? { 'v-list--disabled': true }
-        : undefined
-    },
     classes (): object {
       return {
         'v-list__item': true,
@@ -108,8 +103,6 @@ export default baseMixins.extend<options>().extend({
     data.attrs.disabled = this.disabled
     data.attrs.role = 'listitem'
     if (tag === 'a') data.attrs.tabindex = 0
-
-    console.log(data.directives)
 
     return h(tag, this.setBackgroundColor(this.color, data), this.$slots.default)
   }
