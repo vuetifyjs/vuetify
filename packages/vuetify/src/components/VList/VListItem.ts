@@ -5,19 +5,28 @@ import Toggleable from '../../mixins/toggleable'
 import Themeable from '../../mixins/themeable'
 
 // Directives
-import Ripple from '../../directives/ripple'
+import Ripple, { RippleOptions } from '../../directives/ripple'
+
+// Utilities
+import { ExtractVue } from './../../util/mixins'
 
 // Types
 import mixins from '../../util/mixins'
 import { VNode } from 'vue'
 
-/* @vue/component */
-export default mixins(
+const baseMixins = mixins(
   Colorable,
   Routable,
   Toggleable,
   Themeable
-).extend({
+)
+
+interface options extends ExtractVue<typeof baseMixins> {
+  $el: HTMLElement
+}
+
+/* @vue/component */
+export default baseMixins.extend<options>().extend({
   name: 'v-list-item',
 
   directives: {
@@ -32,6 +41,10 @@ export default mixins(
       default: 'primary--text'
     },
     inactive: Boolean,
+    ripple: {
+      type: [Boolean, Object],
+      default: null
+    },
     threeLine: Boolean,
     twoLine: Boolean
   },
@@ -58,6 +71,11 @@ export default mixins(
         [this.activeClass]: this.isActive
       }
     },
+    computedRipple (): RippleOptions | boolean {
+      const defaultRipple = this.isLink
+      if (this.disabled) return false
+      else return this.ripple !== null ? this.ripple : defaultRipple
+    },
     isLink (): boolean {
       const hasClick = this.$listeners && (this.$listeners.click || this.$listeners['!click'])
 
@@ -66,6 +84,14 @@ export default mixins(
         this.to ||
         hasClick
       )
+    }
+  },
+
+  methods: {
+    click (e: MouseEvent | KeyboardEvent) {
+      if (e.detail) this.$el.blur()
+
+      this.$emit('click', e)
     }
   },
 
@@ -82,6 +108,8 @@ export default mixins(
     data.attrs.disabled = this.disabled
     data.attrs.role = 'listitem'
     if (tag === 'a') data.attrs.tabindex = 0
+
+    console.log(data.directives)
 
     return h(tag, this.setBackgroundColor(this.color, data), this.$slots.default)
   }

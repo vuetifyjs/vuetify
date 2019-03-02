@@ -37,12 +37,26 @@
   .v-list__item
     padding-left: 0
 
+.v-list__item,
+.v-list__group__header
+  &:before
+    background-color: currentColor
+    bottom: 0
+    content: ''
+    left: 0
+    opacity: 0
+    position: absolute
+    right: 0
+    top: 0
+    transition: $primary-transition
+
 .v-list__group__header
   align-items: center
   cursor: pointer
   display: flex
   outline: none
   padding: 0 16px
+  position: relative
   user-select: none
 
   > .v-list__item
@@ -55,6 +69,7 @@
   min-height: $list-item-min-height
   outline: none
   padding: 0 16px
+  position: relative
   text-decoration: none
   user-select: none
 
@@ -211,6 +226,18 @@
   justify-content: space-between
   white-space: nowrap
   flex-direction: column
+
+.v-list__item--highlighted
+  &:before
+    opacity: 0.12
+
+.v-list__item--link,
+.v-list__group__header
+  &:hover:before
+    opacity: 0.04
+
+  &:focus:before
+    opacity: 0.12
 
 .v-list--two-line,
 .v-list__item--two-line,
