@@ -6,7 +6,7 @@ exports[`VSlider.vue should change track styles in rtl 1`] = `
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-slider v-slider--horizontal theme--light">
-        <input value="NaN"
+        <input value="0"
                readonly="readonly"
                tabindex="-1"
         >
@@ -16,7 +16,7 @@ exports[`VSlider.vue should change track styles in rtl 1`] = `
           >
           </div>
           <div class="v-slider__track-fill primary"
-               style="left: 0px;"
+               style="left: 0px; width: 0%;"
           >
           </div>
         </div>
@@ -24,10 +24,11 @@ exports[`VSlider.vue should change track styles in rtl 1`] = `
              tabindex="0"
              aria-valuemin="0"
              aria-valuemax="100"
-             aria-valuenow="NaN"
+             aria-valuenow="0"
              aria-readonly="false"
              aria-orientation="horizontal"
              class="v-slider__thumb-container primary--text"
+             style="left: 0%;"
         >
           <div class="v-slider__thumb primary">
           </div>
@@ -277,7 +278,7 @@ exports[`VSlider.vue should display label and have different aria-label 1`] = `
         foo
       </label>
       <div class="v-slider v-slider--horizontal theme--light">
-        <input value="NaN"
+        <input value="0"
                readonly="readonly"
                tabindex="-1"
                aria-label="bar"
@@ -288,7 +289,7 @@ exports[`VSlider.vue should display label and have different aria-label 1`] = `
           >
           </div>
           <div class="v-slider__track-fill primary"
-               style="left: 0px;"
+               style="left: 0px; width: 0%;"
           >
           </div>
         </div>
@@ -297,10 +298,11 @@ exports[`VSlider.vue should display label and have different aria-label 1`] = `
              aria-label="bar"
              aria-valuemin="0"
              aria-valuemax="100"
-             aria-valuenow="NaN"
+             aria-valuenow="0"
              aria-readonly="false"
              aria-orientation="horizontal"
              class="v-slider__thumb-container primary--text"
+             style="left: 0%;"
         >
           <div class="v-slider__thumb primary">
           </div>
@@ -322,7 +324,7 @@ exports[`VSlider.vue should match a snapshot 1`] = `
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-slider v-slider--horizontal theme--light">
-        <input value="NaN"
+        <input value="0"
                readonly="readonly"
                tabindex="-1"
         >
@@ -332,7 +334,7 @@ exports[`VSlider.vue should match a snapshot 1`] = `
           >
           </div>
           <div class="v-slider__track-fill primary"
-               style="left: 0px;"
+               style="left: 0px; width: 0%;"
           >
           </div>
         </div>
@@ -340,10 +342,11 @@ exports[`VSlider.vue should match a snapshot 1`] = `
              tabindex="0"
              aria-valuemin="0"
              aria-valuemax="100"
-             aria-valuenow="NaN"
+             aria-valuenow="0"
              aria-readonly="false"
              aria-orientation="horizontal"
              class="v-slider__thumb-container primary--text"
+             style="left: 0%;"
         >
           <div class="v-slider__thumb primary">
           </div>
@@ -365,7 +368,7 @@ exports[`VSlider.vue should render component with thumbLabel and match a snapsho
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-slider v-slider--horizontal theme--light">
-        <input value="NaN"
+        <input value="0"
                readonly="readonly"
                tabindex="-1"
         >
@@ -375,7 +378,7 @@ exports[`VSlider.vue should render component with thumbLabel and match a snapsho
           >
           </div>
           <div class="v-slider__track-fill primary"
-               style="left: 0px;"
+               style="left: 0px; width: 0%;"
           >
           </div>
         </div>
@@ -383,10 +386,11 @@ exports[`VSlider.vue should render component with thumbLabel and match a snapsho
              tabindex="0"
              aria-valuemin="0"
              aria-valuemax="100"
-             aria-valuenow="NaN"
+             aria-valuenow="0"
              aria-readonly="false"
              aria-orientation="horizontal"
              class="v-slider__thumb-container v-slider__thumb-container--show-label primary--text"
+             style="left: 0%;"
         >
           <div class="v-slider__thumb primary">
           </div>
@@ -398,7 +402,7 @@ exports[`VSlider.vue should render component with thumbLabel and match a snapsho
             >
               <div>
                 <span>
-                  NaN
+                  0
                 </span>
               </div>
             </div>
@@ -421,7 +425,7 @@ exports[`VSlider.vue should render component with thumbLabel and match a snapsho
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-slider v-slider--horizontal theme--light">
-        <input value="NaN"
+        <input value="0"
                readonly="readonly"
                tabindex="-1"
         >
@@ -431,7 +435,7 @@ exports[`VSlider.vue should render component with thumbLabel and match a snapsho
           >
           </div>
           <div class="v-slider__track-fill primary"
-               style="left: 0px;"
+               style="left: 0px; width: 0%;"
           >
           </div>
         </div>
@@ -439,10 +443,11 @@ exports[`VSlider.vue should render component with thumbLabel and match a snapsho
              tabindex="0"
              aria-valuemin="0"
              aria-valuemax="100"
-             aria-valuenow="NaN"
+             aria-valuenow="0"
              aria-readonly="false"
              aria-orientation="horizontal"
              class="v-slider__thumb-container v-slider__thumb-container--show-label primary--text"
+             style="left: 0%;"
         >
           <div class="v-slider__thumb primary">
           </div>
@@ -454,7 +459,7 @@ exports[`VSlider.vue should render component with thumbLabel and match a snapsho
             >
               <div>
                 <span>
-                  NaN
+                  0
                 </span>
               </div>
             </div>
@@ -477,7 +482,7 @@ exports[`VSlider.vue should render component with ticks and match a snapshot 1`]
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-slider v-slider--horizontal theme--light">
-        <input value="NaN"
+        <input value="0"
                readonly="readonly"
                tabindex="-1"
         >
@@ -487,7 +492,7 @@ exports[`VSlider.vue should render component with ticks and match a snapshot 1`]
           >
           </div>
           <div class="v-slider__track-fill primary"
-               style="left: 0px;"
+               style="left: 0px; width: 0%;"
           >
           </div>
         </div>
@@ -517,10 +522,11 @@ exports[`VSlider.vue should render component with ticks and match a snapshot 1`]
              tabindex="0"
              aria-valuemin="0"
              aria-valuemax="100"
-             aria-valuenow="NaN"
+             aria-valuenow="0"
              aria-readonly="false"
              aria-orientation="horizontal"
              class="v-slider__thumb-container primary--text"
+             style="left: 0%;"
         >
           <div class="v-slider__thumb primary">
           </div>
@@ -542,7 +548,7 @@ exports[`VSlider.vue should render component with ticks and match a snapshot 2`]
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-slider v-slider--horizontal theme--light">
-        <input value="NaN"
+        <input value="0"
                readonly="readonly"
                tabindex="-1"
         >
@@ -552,7 +558,7 @@ exports[`VSlider.vue should render component with ticks and match a snapshot 2`]
           >
           </div>
           <div class="v-slider__track-fill primary"
-               style="left: 0px;"
+               style="left: 0px; width: 0%;"
           >
           </div>
         </div>
@@ -582,10 +588,11 @@ exports[`VSlider.vue should render component with ticks and match a snapshot 2`]
              tabindex="0"
              aria-valuemin="0"
              aria-valuemax="100"
-             aria-valuenow="NaN"
+             aria-valuenow="0"
              aria-readonly="false"
              aria-orientation="horizontal"
              class="v-slider__thumb-container primary--text"
+             style="left: 0%;"
         >
           <div class="v-slider__thumb primary">
           </div>
@@ -613,7 +620,7 @@ exports[`VSlider.vue should reverse label location when inverse 1`] = `
         foo
       </label>
       <div class="v-slider v-slider--horizontal theme--light">
-        <input value="NaN"
+        <input value="0"
                readonly="readonly"
                tabindex="-1"
         >
@@ -623,7 +630,7 @@ exports[`VSlider.vue should reverse label location when inverse 1`] = `
           >
           </div>
           <div class="v-slider__track-fill primary"
-               style="left: 0px;"
+               style="left: 0px; width: 0%;"
           >
           </div>
         </div>
@@ -632,10 +639,11 @@ exports[`VSlider.vue should reverse label location when inverse 1`] = `
              aria-label="foo"
              aria-valuemin="0"
              aria-valuemax="100"
-             aria-valuenow="NaN"
+             aria-valuenow="0"
              aria-readonly="false"
              aria-orientation="horizontal"
              class="v-slider__thumb-container primary--text"
+             style="left: 0%;"
         >
           <div class="v-slider__thumb primary">
           </div>
@@ -657,7 +665,7 @@ exports[`VSlider.vue should reverse label location when inverse 2`] = `
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-slider v-slider--horizontal theme--light">
-        <input value="NaN"
+        <input value="0"
                readonly="readonly"
                tabindex="-1"
         >
@@ -667,7 +675,7 @@ exports[`VSlider.vue should reverse label location when inverse 2`] = `
           >
           </div>
           <div class="v-slider__track-fill primary"
-               style="left: 0px;"
+               style="left: 0px; width: 0%;"
           >
           </div>
         </div>
@@ -676,10 +684,11 @@ exports[`VSlider.vue should reverse label location when inverse 2`] = `
              aria-label="foo"
              aria-valuemin="0"
              aria-valuemax="100"
-             aria-valuenow="NaN"
+             aria-valuenow="0"
              aria-readonly="false"
              aria-orientation="horizontal"
              class="v-slider__thumb-container primary--text"
+             style="left: 0%;"
         >
           <div class="v-slider__thumb primary">
           </div>
