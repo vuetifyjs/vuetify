@@ -14,7 +14,7 @@ import Themeable from '../../mixins/themeable'
 import Ripple, { RippleOptions } from '../../directives/ripple'
 
 // Utilities
-import { keyCodes } from './../../util/helpers'
+import { getObjectValueByPath, keyCodes } from './../../util/helpers'
 import { ExtractVue } from './../../util/mixins'
 
 // Types
@@ -93,7 +93,32 @@ export default baseMixins.extend<options>().extend({
         this.listItemGroup ||
         hasClick
       )
+    },
+    value (): any {
+      let to = this.to || this.href || ''
+
+      if (this.$router &&
+        this.to === Object(this.to)
+      ) {
+        const resolve = this.$router.resolve(
+          this.to,
+          this.$route,
+          this.append
+        )
+
+        to = resolve.href
+      }
+
+      return to
     }
+  },
+
+  watch: {
+    $route: 'onRouteChange'
+  },
+
+  mounted () {
+    this.onRouteChange()
   },
 
   methods: {
@@ -103,6 +128,23 @@ export default baseMixins.extend<options>().extend({
       this.$emit('click', e)
 
       this.to || this.toggle()
+    },
+    onRouteChange () {
+      if (!this.to || !this.$refs.link) return
+
+      const path = `_vnode.data.class.${this.activeClass} ${this.proxyClass}`
+
+      this.$nextTick(() => {
+        if (
+          // Is route active but not data active
+          (getObjectValueByPath(this.$refs.link, path) && !this.isActive) ||
+          // If we made it here it means we are not
+          // route active but are still data active
+          this.isActive
+        ) {
+          this.toggle()
+        }
+      })
     }
   },
 
@@ -115,9 +157,12 @@ export default baseMixins.extend<options>().extend({
       }
     }
 
-    data.attrs = Object.assign({}, data.attrs, this.$attrs)
-    data.attrs.disabled = this.disabled
-    data.attrs.role = 'listitem'
+    data.attrs = {
+      ...data.attrs,
+      'aria-selected': String(this.isActive),
+      role: 'listitem',
+      tabindex: tag === 'a' ? 0 : -1
+    }
     data.on = {
       ...data.on,
       keydown: (e: KeyboardEvent) => {
@@ -126,7 +171,7 @@ export default baseMixins.extend<options>().extend({
         this.$emit('keydown', e)
       }
     }
-    if (tag === 'a') data.attrs.tabindex = 0
+    data.ref = 'link'
 
     const children = this.$scopedSlots.default
       ? this.$scopedSlots.default({
