@@ -135,13 +135,7 @@ export default baseMixins.extend<options>().extend({
       const path = `_vnode.data.class.${this.activeClass} ${this.proxyClass}`
 
       this.$nextTick(() => {
-        if (
-          // Is route active but not data active
-          (getObjectValueByPath(this.$refs.link, path) && !this.isActive) ||
-          // If we made it here it means we are not
-          // route active but are still data active
-          this.isActive
-        ) {
+        if (getObjectValueByPath(this.$refs.link, path)) {
           this.toggle()
         }
       })
