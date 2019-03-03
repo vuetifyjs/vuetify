@@ -1,3 +1,4 @@
+// Extensions
 import { BaseItemGroup } from '../VItemGroup/VItemGroup'
 
 export default BaseItemGroup.extend({
