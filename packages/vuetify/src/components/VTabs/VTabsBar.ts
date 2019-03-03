@@ -1,6 +1,9 @@
 // Extensions
 import { BaseSlideGroup } from '../VSlideGroup/VSlideGroup'
 
+// Components
+import VTab from './VTab'
+
 // Mixins
 import Themeable from '../../mixins/themeable'
 import SSRBootable from '../../mixins/ssr-bootable'
@@ -11,6 +14,8 @@ import mixins from '../../util/mixins'
 // Types
 import { Route } from 'vue-router'
 import { VNode } from 'vue'
+
+type VTabInstance = InstanceType<typeof VTab>
 
 export default mixins(
   BaseSlideGroup,
@@ -52,13 +57,14 @@ export default mixins(
       /* istanbul ignore next */
       if (this.mandatory) return
 
+      const items = this.items as VTabInstance[]
       const newPath = val.path
       const oldPath = oldVal.path
 
       let hasNew = false
       let hasOld = false
 
-      for (const item of this.items) {
+      for (const item of items) {
         if (item.to === newPath) hasNew = true
         else if (item.to === oldPath) hasOld = true
 
