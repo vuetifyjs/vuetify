@@ -10,7 +10,7 @@ import VListItemIcon from './VListItemIcon'
 // Mixins
 import Bootable from '../../mixins/bootable'
 import Toggleable from '../../mixins/toggleable'
-import { Registrable, inject as RegistrableInject } from '../../mixins/registrable'
+import { inject as RegistrableInject } from '../../mixins/registrable'
 import { Route } from 'vue-router'
 
 // Directives
@@ -24,12 +24,15 @@ import mixins, { ExtractVue } from '../../util/mixins'
 import { keyCodes } from '../../util/helpers'
 
 // Types
-import Vue, { VNode } from 'vue'
+import { VNode } from 'vue'
 
-type VListInstance = InstanceType<typeof VList>
+const baseMixins = mixins(
+  Bootable,
+  RegistrableInject('list', 'v-list-group', 'v-list'),
+  Toggleable
+)
 
-interface options extends Vue {
-  list: VListInstance
+interface options extends ExtractVue<typeof baseMixins> {
   listClick: Function
   $refs: {
     group: HTMLElement
@@ -37,20 +40,7 @@ interface options extends Vue {
   $route: Route
 }
 
-export default mixins<options &
-/* eslint-disable indent */
-  ExtractVue<[
-    typeof Bootable,
-    typeof Toggleable,
-    Registrable<'list'>
-  ]>
-/* eslint-enable indent */
->(
-  Bootable,
-  RegistrableInject('list', 'v-list-group', 'v-list'),
-  Toggleable
-  /* @vue/component */
-).extend({
+export default baseMixins.extend<options>().extend({
   name: 'v-list-group',
 
   directives: { Ripple },
