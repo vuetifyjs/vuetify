@@ -43,12 +43,12 @@
     .v-timeline-item__opposite
       text-align: if($direction == left, left, right)
 
-@mixin timeline-line-align($first, $second)
+@mixin timeline-line-align($center, $first, $second)
   &:before
-    #{$first}: $timeline-divider-width / 2
+    #{$first}: calc(#{$center} - #{$timeline-line-width / 2})
     #{$second}: initial
 
   +rtl()
     &:before
       #{$first}: initial
-      #{$second}: $timeline-divider-width / 2
+      #{$second}: calc(#{$center} - #{$timeline-line-width / 2})

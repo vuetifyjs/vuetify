@@ -14,6 +14,10 @@ export default mixins(
 ).extend({
   name: 'v-timeline',
 
+  provide (): object {
+    return { timeline: this }
+  },
+
   props: {
     alignTop: Boolean,
     dense: Boolean,

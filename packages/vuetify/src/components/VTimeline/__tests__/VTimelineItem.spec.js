@@ -6,6 +6,11 @@ test('VTimelineItem.js', ({ mount }) => {
     const wrapper = mount(VTimelineItem, {
       propsData: {
         hideDot: true
+      },
+      provide: {
+        timeline: {
+          reverse: false
+        }
       }
     })
 
@@ -22,11 +27,21 @@ test('VTimelineItem.js', ({ mount }) => {
         icon: [{
           render: h => h('div', 'foo')
         }]
+      },
+      provide: {
+        timeline: {
+          reverse: false
+        }
       }
     }).html()).toMatchSnapshot()
 
     expect(mount(VTimelineItem, {
-      propsData: { icon: 'foo' }
+      propsData: { icon: 'foo' },
+      provide: {
+        timeline: {
+          reverse: false
+        }
+      }
     }).html()).toMatchSnapshot()
   })
 
@@ -36,6 +51,11 @@ test('VTimelineItem.js', ({ mount }) => {
         opposite: [{
           render: h => h('div', 'foo')
         }]
+      },
+      provide: {
+        timeline: {
+          reverse: false
+        }
       }
     })
 

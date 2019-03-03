@@ -1,20 +1,31 @@
 // Types
-import mixins from '../../util/mixins'
+import mixins, { ExtractVue } from '../../util/mixins'
 import { VNode, VNodeData } from 'vue'
 
 // Components
+import VTimeline from './VTimeline'
 import VIcon from '../VIcon'
 
 // Mixins
 import Themeable from '../../mixins/themeable'
 import Colorable from '../../mixins/colorable'
 
-export default mixins(
+const baseMixins = mixins(
   Colorable,
   Themeable
 /* @vue/component */
-).extend({
+)
+
+type VTimelineInstance = InstanceType<typeof VTimeline>
+
+interface options extends ExtractVue<typeof baseMixins> {
+  timeline: VTimelineInstance
+}
+
+export default baseMixins.extend<options>().extend({
   name: 'v-timeline-item',
+
+  inject: ['timeline'],
 
   props: {
     color: {
@@ -101,8 +112,8 @@ export default mixins(
       staticClass: 'v-timeline-item',
       class: {
         'v-timeline-item--fill-dot': this.fillDot,
-        'v-timeline-item--before': this.left,
-        'v-timeline-item--after': this.right,
+        'v-timeline-item--before': this.timeline.reverse ? this.right : this.left,
+        'v-timeline-item--after': this.timeline.reverse ? this.left : this.right,
         ...this.themeClasses
       }
     }, children)
