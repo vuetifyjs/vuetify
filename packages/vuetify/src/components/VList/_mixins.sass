@@ -10,7 +10,7 @@
     background: map-get($material, 'dividers')
 
   // .v-list__group--disabled
-  //   .v-list__item
+  //   .v-list-item
   //     color: map-deep-get($material, 'text', 'disabled') !important
 
   //   .v-list__group__header__prepend-icon .v-icon
@@ -19,12 +19,12 @@
 @mixin list-item-theme($material)
   color: map-deep-get($material, 'text', 'primary')
 
-  &.v-list__item__mask
+  &.v-list-item__mask
     color: map-deep-get($material, 'text', 'disabled')
     background: map-deep-get($material, 'expansion-panels', 'focus')
 
-  .v-list__item__subtitle,
-  .v-list__item__action-text
+  .v-list-item__subtitle,
+  .v-list-item__action-text
     color: map-deep-get($material, 'text', 'secondary')
 
 @mixin list-rtl()

@@ -8,11 +8,11 @@ export default Vue.extend({
   functional: true,
 
   render (h, { data, children = [], props }): VNode {
-    data.staticClass = data.staticClass ? `v-list__item__action ${data.staticClass}` : 'v-list__item__action'
+    data.staticClass = data.staticClass ? `v-list-item__action ${data.staticClass}` : 'v-list-item__action'
     const filteredChild = children.filter(VNode => {
       return VNode.isComment === false && VNode.text !== ' '
     })
-    if (filteredChild.length > 1) data.staticClass += ' v-list__item__action--stack'
+    if (filteredChild.length > 1) data.staticClass += ' v-list-item__action--stack'
 
     return h('div', data, children)
   }

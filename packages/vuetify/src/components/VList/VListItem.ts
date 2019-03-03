@@ -57,19 +57,19 @@ export default baseMixins.extend<options>().extend({
   },
 
   data: () => ({
-    proxyClass: 'v-list__item--active'
+    proxyClass: 'v-list-item--active'
   }),
 
   computed: {
     classes (): object {
       return {
-        'v-list__item': true,
-        'v-list__item--active': !this.to && this.isActive,
-        'v-list__item--dense': this.dense,
-        'v-list__item--disabled': this.disabled,
-        'v-list__item--link': this.isLink && !this.inactive,
-        'v-list__item--three-line': this.threeLine,
-        'v-list__item--two-line': this.twoLine,
+        'v-list-item': true,
+        'v-list-item--active': !this.to && this.isActive,
+        'v-list-item--dense': this.dense,
+        'v-list-item--disabled': this.disabled,
+        'v-list-item--link': this.isLink && !this.inactive,
+        'v-list-item--three-line': this.threeLine,
+        'v-list-item--two-line': this.twoLine,
         ...this.themeClasses,
         [this.activeClass]: this.isActive
       }

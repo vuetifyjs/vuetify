@@ -19,7 +19,7 @@ export default VAvatar.extend({
   computed: {
     classes (): object {
       return {
-        'v-list__item__avatar--horizontal': this.horizontal,
+        'v-list-item__avatar--horizontal': this.horizontal,
         ...VAvatar.options.computed.classes.call(this),
         'v-avatar--tile': this.tile || this.horizontal
       }
@@ -30,7 +30,7 @@ export default VAvatar.extend({
     const render = VAvatar.options.render.call(this, h)
 
     render.data = render.data || {}
-    render.data.staticClass += ' v-list__item__avatar'
+    render.data.staticClass += ' v-list-item__avatar'
 
     return render
   }

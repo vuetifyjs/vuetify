@@ -8,10 +8,10 @@ import VListItemAction from './VListItemAction'
 import VListItemAvatar from './VListItemAvatar'
 import VListItemIcon from './VListItemIcon'
 
-export const VListItemActionText = createSimpleFunctional('v-list__item__action-text', 'span')
-export const VListItemContent = createSimpleFunctional('v-list__item__content', 'div')
-export const VListItemTitle = createSimpleFunctional('v-list__item__title', 'div')
-export const VListItemSubtitle = createSimpleFunctional('v-list__item__subtitle', 'div')
+export const VListItemActionText = createSimpleFunctional('v-list-item__action-text', 'span')
+export const VListItemContent = createSimpleFunctional('v-list-item__content', 'div')
+export const VListItemTitle = createSimpleFunctional('v-list-item__title', 'div')
+export const VListItemSubtitle = createSimpleFunctional('v-list-item__subtitle', 'div')
 
 const VListTile = VListItem.extend({
   mounted () { deprecate('v-list-item', 'v-list-item') }
