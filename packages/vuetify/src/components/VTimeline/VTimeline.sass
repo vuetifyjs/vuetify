@@ -67,13 +67,11 @@
   .v-timeline-item
     &:nth-child(odd):not(.v-timeline-item--after), &--before
       +timeline-item-align(left)
-      .v-timeline-item__body
-        +timeline-wedge-align(left)
+      +timeline-wedge-align(left)
 
     &:nth-child(even):not(.v-timeline-item--before), &--after
       +timeline-item-align(right)
-      .v-timeline-item__body
-        +timeline-wedge-align(right)
+      +timeline-wedge-align(right)
 
 // Wedge
 .v-timeline-item__body
@@ -98,7 +96,7 @@
     align-self: start
 
   .v-timeline-item__body
-    .v-card
+    > .v-card
       &:before
         top: calc(0% + #{$timeline-wedge-size} + 2px)
 
