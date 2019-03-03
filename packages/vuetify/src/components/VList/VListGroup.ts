@@ -1,3 +1,6 @@
+// Styles
+import './VListGroup.sass'
+
 // Components
 import VIcon from '../VIcon'
 import VList from './VList'

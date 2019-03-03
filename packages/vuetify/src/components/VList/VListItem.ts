@@ -1,3 +1,9 @@
+// Styles
+import './VListItem.sass'
+
+// Components
+import VList from './VList'
+
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Routable from '../../mixins/routable'
@@ -40,6 +46,7 @@ export default baseMixins.extend<options>().extend({
       type: String,
       default: 'primary--text'
     },
+    dense: Boolean,
     inactive: Boolean,
     ripple: {
       type: [Boolean, Object],
@@ -58,6 +65,7 @@ export default baseMixins.extend<options>().extend({
       return {
         'v-list__item': true,
         'v-list__item--active': !this.to && this.isActive,
+        'v-list__item--dense': this.dense,
         'v-list__item--disabled': this.disabled,
         'v-list__item--link': this.isLink && !this.inactive,
         'v-list__item--three-line': this.threeLine,

@@ -1,0 +1,51 @@
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+@import './_mixins.sass'
+
+// Element
+.v-list__group--sub-group
+  align-items: center
+  display: flex
+
+  .v-list__item
+    padding-left: 0
+
+.v-list__group__header
+  align-items: center
+  cursor: pointer
+  display: flex
+  outline: none
+  padding: 0 16px
+  position: relative
+  user-select: none
+
+  > .v-list__item
+    padding: 0
+
+.v-list__group--active > .v-list__group__header
+  > .v-list__group__header__append-icon
+    .v-icon
+      transform: rotate(-180deg)
+
+  .v-list__group__header__prepend-icon
+    .v-icon
+      color: inherit
+
+  &.v-list__group__header--sub-group
+    .v-list__group__header__prepend-icon.v-icon
+      transform: rotate(-180deg)
+
+.v-list__group__header--sub-group
+  .v-list__item__icon.v-list__group__header__prepend-icon
+    margin-left: 16px
+    margin-right: 16px
+
+  &.v-list__group__header--active
+    .v-list__item__icon.v-list__group__header__prepend-icon .v-icon
+      transform: rotate(-180deg)
+
+.v-list__group__items--no-action .v-list__group__items > .v-list__item
+  padding-left: 72px
+
+.v-list__group__items--no-action > *:not(.v-list__group):not(.v-list__group__header--sub-group)
+  padding-left: 72px
