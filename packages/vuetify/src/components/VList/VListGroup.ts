@@ -75,18 +75,9 @@ export default baseMixins.extend<options>().extend({
     groupClasses (): object {
       return {
         'v-list-group--active': this.isActive,
-        'v-list-group--disabled': this.disabled
-      }
-    },
-    headerClasses (): object {
-      return {
-        'v-list-group__header--active': this.isActive,
-        'v-list-group__header--sub-group': this.subGroup
-      }
-    },
-    itemsClasses (): object {
-      return {
-        'v-list-group__items--no-action': this.noAction && !this.subGroup
+        'v-list-group--disabled': this.disabled,
+        'v-list-group--no-action': this.noAction,
+        'v-list-group--sub-group': this.subGroup
       }
     }
   },
@@ -148,7 +139,6 @@ export default baseMixins.extend<options>().extend({
     genHeader () {
       return this.$createElement(VListItem, {
         staticClass: 'v-list-group__header',
-        class: this.headerClasses,
         directives: [{
           name: 'ripple',
           value: this.ripple
@@ -169,7 +159,6 @@ export default baseMixins.extend<options>().extend({
     genItems () {
       return this.$createElement('div', {
         staticClass: 'v-list-group__items',
-        class: this.itemsClasses,
         directives: [{
           name: 'show',
           value: this.isActive
