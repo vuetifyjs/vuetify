@@ -84,19 +84,19 @@ export default mixins<options &
   computed: {
     groupClasses (): object {
       return {
-        'v-list__group--active': this.isActive,
-        'v-list__group--disabled': this.disabled
+        'v-list-group--active': this.isActive,
+        'v-list-group--disabled': this.disabled
       }
     },
     headerClasses (): object {
       return {
-        'v-list__group__header--active': this.isActive,
-        'v-list__group__header--sub-group': this.subGroup
+        'v-list-group__header--active': this.isActive,
+        'v-list-group__header--sub-group': this.subGroup
       }
     },
     itemsClasses (): object {
       return {
-        'v-list__group__items--no-action': this.noAction && !this.subGroup
+        'v-list-group__items--no-action': this.noAction && !this.subGroup
       }
     }
   },
@@ -150,14 +150,14 @@ export default mixins<options &
       if (!icon && !this.$slots.appendIcon) return null
 
       return this.$createElement(VListItemIcon, {
-        staticClass: 'v-list__group__header__append-icon'
+        staticClass: 'v-list-group__header__append-icon'
       }, [
         this.$slots.appendIcon || this.genIcon(icon)
       ])
     },
-    genGroup () {
+    genHeader () {
       return this.$createElement(VListItem, {
-        staticClass: 'v-list__group__header',
+        staticClass: 'v-list-group__header',
         class: this.headerClasses,
         directives: [{
           name: 'ripple',
@@ -178,7 +178,7 @@ export default mixins<options &
     },
     genItems () {
       return this.$createElement('div', {
-        staticClass: 'v-list__group__items',
+        staticClass: 'v-list-group__items',
         class: this.itemsClasses,
         directives: [{
           name: 'show',
@@ -196,7 +196,7 @@ export default mixins<options &
       if (!icon && !this.$slots.prependIcon) return null
 
       return this.$createElement(VListItemIcon, {
-        staticClass: 'v-list__group__header__prepend-icon',
+        staticClass: 'v-list-group__header__prepend-icon',
         'class': {
           [this.activeClass]: this.isActive
         }
@@ -215,10 +215,10 @@ export default mixins<options &
 
   render (h): VNode {
     return h('div', {
-      staticClass: 'v-list__group',
+      staticClass: 'v-list-group',
       class: this.groupClasses
     }, [
-      this.genGroup(),
+      this.genHeader(),
       h(VExpandTransition, [this.genItems()])
     ])
   }

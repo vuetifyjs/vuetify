@@ -5,9 +5,9 @@ exports[`VListGroup.js should render a component with no padding for action icon
 <div role="list"
      class="v-list theme--light"
 >
-  <div class="v-list__group">
-    <div class="v-list__group__header">
-      <div class="v-list__group__header__append-icon">
+  <div class="v-list-group">
+    <div class="v-list-group__header">
+      <div class="v-list-group__header__append-icon">
         <i aria-hidden="true"
            class="v-icon material-icons theme--light"
         >
@@ -15,7 +15,7 @@ exports[`VListGroup.js should render a component with no padding for action icon
         </i>
       </div>
     </div>
-    <div class="v-list__group__items"
+    <div class="v-list-group__items"
          style="display: none;"
     >
     </div>
@@ -29,9 +29,9 @@ exports[`VListGroup.js should render a component with route namespace and match 
 <div role="list"
      class="v-list theme--light"
 >
-  <div class="v-list__group">
-    <div class="v-list__group__header">
-      <div class="v-list__group__header__append-icon">
+  <div class="v-list-group">
+    <div class="v-list-group__header">
+      <div class="v-list-group__header__append-icon">
         <i aria-hidden="true"
            class="v-icon material-icons theme--light"
         >
@@ -39,7 +39,7 @@ exports[`VListGroup.js should render a component with route namespace and match 
         </i>
       </div>
     </div>
-    <div class="v-list__group__items"
+    <div class="v-list-group__items"
          style="display: none;"
     >
     </div>
@@ -53,9 +53,9 @@ exports[`VListGroup.js should render a lazy component and match snapshot 1`] = `
 <div role="list"
      class="v-list theme--light"
 >
-  <div class="v-list__group">
-    <div class="v-list__group__header">
-      <div class="v-list__group__header__append-icon">
+  <div class="v-list-group">
+    <div class="v-list-group__header">
+      <div class="v-list-group__header__append-icon">
         <i aria-hidden="true"
            class="v-icon material-icons theme--light"
         >
@@ -63,7 +63,7 @@ exports[`VListGroup.js should render a lazy component and match snapshot 1`] = `
         </i>
       </div>
     </div>
-    <div class="v-list__group__items"
+    <div class="v-list-group__items"
          style="display: none;"
     >
     </div>
@@ -77,9 +77,9 @@ exports[`VListGroup.js should render component and match snapshot 1`] = `
 <div role="list"
      class="v-list theme--light"
 >
-  <div class="v-list__group">
-    <div class="v-list__group__header">
-      <div class="v-list__group__header__append-icon">
+  <div class="v-list-group">
+    <div class="v-list-group__header">
+      <div class="v-list-group__header__append-icon">
         <i aria-hidden="true"
            class="v-icon material-icons theme--light"
         >
@@ -87,7 +87,7 @@ exports[`VListGroup.js should render component and match snapshot 1`] = `
         </i>
       </div>
     </div>
-    <div class="v-list__group__items"
+    <div class="v-list-group__items"
          style="display: none;"
     >
     </div>
