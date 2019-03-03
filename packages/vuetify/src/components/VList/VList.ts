@@ -17,7 +17,7 @@ export default mixins(
 ).extend({
   name: 'v-list',
 
-  provide () {
+  provide (): object {
     return {
       list: this
     }
