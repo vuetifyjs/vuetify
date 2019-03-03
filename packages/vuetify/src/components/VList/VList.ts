@@ -19,12 +19,6 @@ export default mixins(
 ).extend({
   name: 'v-list',
 
-  provide (): object {
-    return {
-      listClick: this.listClick
-    }
-  },
-
   props: {
     dense: Boolean,
     expand: Boolean,

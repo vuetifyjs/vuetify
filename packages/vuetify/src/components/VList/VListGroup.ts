@@ -28,12 +28,14 @@ import { VNode } from 'vue'
 
 const baseMixins = mixins(
   Bootable,
-  RegistrableInject('list', 'v-list-group', 'v-list'),
+  RegistrableInject('list'),
   Toggleable
 )
 
+type VListInstance = InstanceType<typeof VList>
+
 interface options extends ExtractVue<typeof baseMixins> {
-  listClick: Function
+  list: VListInstance
   $refs: {
     group: HTMLElement
   }
@@ -44,8 +46,6 @@ export default baseMixins.extend<options>().extend({
   name: 'v-list-group',
 
   directives: { Ripple },
-
-  inject: ['listClick'],
 
   props: {
     activeClass: {
@@ -67,10 +67,6 @@ export default baseMixins.extend<options>().extend({
     subGroup: Boolean
   },
 
-  data: () => ({
-    groups: []
-  }),
-
   computed: {
     groupClasses (): object {
       return {
@@ -85,7 +81,7 @@ export default baseMixins.extend<options>().extend({
   watch: {
     isActive (val) {
       if (!this.subGroup && val) {
-        this.listClick(this._uid)
+        this.list && this.list.listClick(this._uid)
       }
     },
     $route (to) {
@@ -93,7 +89,7 @@ export default baseMixins.extend<options>().extend({
 
       if (this.group) {
         if (isActive && this.isActive !== isActive) {
-          this.listClick(this._uid)
+          this.list && this.list.listClick(this._uid)
         }
 
         this.isActive = isActive
@@ -102,7 +98,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   mounted () {
-    this.list.register(this)
+    this.list && this.list.register(this)
 
     if (this.group &&
       this.$route &&
@@ -113,7 +109,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   beforeDestroy () {
-    this.list.unregister(this._uid)
+    this.list && this.list.unregister(this)
   },
 
   methods: {
