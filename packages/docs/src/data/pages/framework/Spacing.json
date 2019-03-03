@@ -1,7 +1,10 @@
 {
   "title": "header",
   "titleText": "headerText",
-  "mdLink": "https://material.io/design/layout/spacing-methods.html",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/layout/spacing-methods.html"
+  },
   "children": [
     {
       "type": "section",

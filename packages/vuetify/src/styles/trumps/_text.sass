@@ -1,20 +1,20 @@
-for $size, $width in $grid-breakpoints
+@each $size, $width in $grid-breakpoints
   @media all and (min-width: $width)
-    .text-{$size}-left
+    .text-#{$size}-left
       text-align: left !important
 
-    .text-{$size}-center
+    .text-#{$size}-center
       text-align: center !important
 
-    .text-{$size}-right
+    .text-#{$size}-right
       text-align: right !important
 
-    .text-{$size}-justify
+    .text-#{$size}-justify
       text-align: justify !important
 
-for $name, $weight in $font-weights
+@each $name, $weight in $font-weights
   .font-weight
-    &-{$name}
+    &-#{$name}
       font-weight: $weight !important
 
 .font-italic

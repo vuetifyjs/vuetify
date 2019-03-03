@@ -19,7 +19,7 @@ module.exports = {
   },
   transform: {
     '\\.(styl)$': 'jest-css-modules',
-    '\\.(scss)$': 'jest-css-modules',
+    '\\.(sass|scss)$': 'jest-css-modules',
     '.*\\.(j|t)s$': 'ts-jest'
   },
   mapCoverage: true,

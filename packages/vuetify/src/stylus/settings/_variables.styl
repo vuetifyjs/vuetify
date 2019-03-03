@@ -97,17 +97,19 @@ $font-weights := {
 // ============================================================
 $heading-font-family := $body-font-family
 $headings := {
-  h1: { size: 112px, weight: 300, line-height: 1, letter-spacing: -.04em, font-family: $heading-font-family },
-  h2: { size: 56px, weight: 400, line-height: 1.35, letter-spacing: -.02em, font-family: $heading-font-family },
-  h3: { size: 45px, weight: 400, line-height: 48px, letter-spacing: normal, font-family: $heading-font-family },
-  h4: { size: 34px, weight: 400, line-height: 40px, letter-spacing: normal, font-family: $heading-font-family },
-  h5: { size: 24px, weight: 400, line-height: 32px, letter-spacing: normal, font-family: $heading-font-family },
-  h6: { size: 20px, weight: 500, line-height: 1, letter-spacing: .02em, font-family: $heading-font-family },
-  subheading: { size: 16px, weight: 400 },
-  body-2: { size: 14px, weight: 500 },
-  body-1: { size: 14px, weight: 400 },
-  caption: { size: 12px, weight: 400 },
-  button: { size: 14px, weight: 500 }
+  h1: { size: 96px, weight: 300, line-height: 1, letter-spacing: -1.5px, font-family: $heading-font-family },
+  h2: { size: 60px, weight: 400, line-height: 1.35, letter-spacing: -0.5px, font-family: $heading-font-family },
+  h3: { size: 48px, weight: 400, line-height: 48px, letter-spacing: 0, font-family: $heading-font-family },
+  h4: { size: 34px, weight: 400, line-height: 40px, letter-spacing: 0.25px, font-family: $heading-font-family },
+  h5: { size: 24px, weight: 400, line-height: 32px, letter-spacing: 0, font-family: $heading-font-family },
+  h6: { size: 20px, weight: 500, line-height: 1, letter-spacing: 0.15px, font-family: $heading-font-family },
+  subtitle-1: { size: 16px, weight: 400, line-height: 1.5, letter-spacing: 0.15px, font-family: $heading-font-family },
+  subtitle-2: { size: 16px, weight: 500, line-height: 1.5, letter-spacing: 0.1px, font-family: $heading-font-family },
+  body-1: { size: 16px, weight: 400, letter-spacing: 0.5px },
+  body-2: { size: 14px, weight: 400, letter-spacing: 0.25px },
+  button: { size: 14px, weight: 500, letter-spacing: 0.75px },
+  caption: { size: 12px, weight: 400, letter-spacing: 0.4px },
+  overline: { size: 10px, weight: 500, letter-spacing: 1.5px }
 }
 
 
@@ -225,8 +227,8 @@ $footer-height := 36px
 
 /** Lists */
 // List fonts and weights
-$list-tile-font-size := $headings.subheading.size // 16px - the mdc scss uses subheading to configure like this
-$list-tile-font-weight := $headings.subheading.weight // 400
+$list-tile-font-size := $headings.subtitle-1.size // 16px - the mdc scss uses subheading to configure like this
+$list-tile-font-weight := $headings.subtitle-1.weight // 400
 
 $list-action-text-font-size := 12px // this is for the stacked actions
 $list-action-text-font-color := $grey.base
