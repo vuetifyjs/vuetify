@@ -1,7 +1,10 @@
 {
   "title": "header",
   "titleText": "headerText",
-  "mdLink": "https://material.io/design/communication/imagery.html",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/communication/imagery.html"
+  },
   "children": [
     {
       "type": "section",
