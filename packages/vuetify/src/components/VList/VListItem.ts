@@ -1,20 +1,18 @@
 // Styles
 import './VListItem.sass'
 
-// Components
-import VList from './VList'
-
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Routable from '../../mixins/routable'
 import { factory as GroupableFactory } from '../../mixins/groupable'
 import Themeable from '../../mixins/themeable'
+import Toggleable from '../../mixins/toggleable'
 
 // Directives
 import Ripple, { RippleOptions } from '../../directives/ripple'
 
 // Utilities
-import { getObjectValueByPath, keyCodes } from './../../util/helpers'
+import { keyCodes } from './../../util/helpers'
 import { ExtractVue } from './../../util/mixins'
 
 // Types
@@ -26,7 +24,8 @@ const baseMixins = mixins(
   Colorable,
   GroupableFactory('listItemGroup'),
   Routable,
-  Themeable
+  Themeable,
+  Toggleable
 )
 
 interface options extends ExtractVue<typeof baseMixins> {
@@ -93,32 +92,7 @@ export default baseMixins.extend<options>().extend({
         this.listItemGroup ||
         hasClick
       )
-    },
-    value (): any {
-      let to = this.to || this.href || ''
-
-      if (this.$router &&
-        this.to === Object(this.to)
-      ) {
-        const resolve = this.$router.resolve(
-          this.to,
-          this.$route,
-          this.append
-        )
-
-        to = resolve.href
-      }
-
-      return to
     }
-  },
-
-  watch: {
-    $route: 'onRouteChange'
-  },
-
-  mounted () {
-    this.onRouteChange()
   },
 
   methods: {
@@ -128,17 +102,6 @@ export default baseMixins.extend<options>().extend({
       this.$emit('click', e)
 
       this.to || this.toggle()
-    },
-    onRouteChange () {
-      if (!this.to || !this.$refs.link) return
-
-      const path = `_vnode.data.class.${this.activeClass} ${this.proxyClass}`
-
-      this.$nextTick(() => {
-        if (getObjectValueByPath(this.$refs.link, path)) {
-          this.toggle()
-        }
-      })
     }
   },
 
