@@ -148,9 +148,6 @@
   &.v-list-item--three-line
     min-height: 76px
 
-.v-list-item--highlighted:before
-  opacity: 0.12
-
 .v-list-item--link,
 .v-list-group__header
   &:hover:before
@@ -158,6 +155,15 @@
 
   &:focus:before
     opacity: 0.12
+
+.v-list-item--active
+  &:before
+    opacity: 0.12
+
+  &:hover,
+  &:focus
+    &:before
+      opacity: 0.2
 
 .v-list-item__action--stack
   align-items: flex-end

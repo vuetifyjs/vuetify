@@ -4,6 +4,7 @@ import { deprecate } from '../../util/console'
 import VList from './VList'
 import VListGroup from './VListGroup'
 import VListItem from './VListItem'
+import VListItemGroup from './VListItemGroup'
 import VListItemAction from './VListItemAction'
 import VListItemAvatar from './VListItemAvatar'
 import VListItemIcon from './VListItemIcon'
@@ -69,6 +70,7 @@ export {
   VListItemAction,
   VListItemAvatar,
   VListItemIcon,
+  VListItemGroup,
   // Deprecated
   VListTile,
   VListTileAction,
@@ -89,6 +91,7 @@ export default {
     VListItemActionText,
     VListItemAvatar,
     VListItemContent,
+    VListItemGroup,
     VListItemSubtitle,
     VListItemTitle,
     // Deprecated

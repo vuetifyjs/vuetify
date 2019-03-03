@@ -7,23 +7,25 @@ import VList from './VList'
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Routable from '../../mixins/routable'
-import Toggleable from '../../mixins/toggleable'
+import { factory as GroupableFactory } from '../../mixins/groupable'
 import Themeable from '../../mixins/themeable'
 
 // Directives
 import Ripple, { RippleOptions } from '../../directives/ripple'
 
 // Utilities
+import { keyCodes } from './../../util/helpers'
 import { ExtractVue } from './../../util/mixins'
 
 // Types
 import mixins from '../../util/mixins'
 import { VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
 
 const baseMixins = mixins(
   Colorable,
+  GroupableFactory('listItemGroup'),
   Routable,
-  Toggleable,
   Themeable
 )
 
@@ -44,8 +46,12 @@ export default baseMixins.extend<options>().extend({
   props: {
     activeClass: {
       type: String,
-      default: 'primary--text'
-    },
+      default (): string | undefined {
+        if (!this.listItemGroup) return 'primary--text'
+
+        return this.listItemGroup.activeClass
+      }
+    } as any as PropValidator<string>,
     dense: Boolean,
     inactive: Boolean,
     ripple: {
@@ -64,7 +70,7 @@ export default baseMixins.extend<options>().extend({
     classes (): object {
       return {
         'v-list-item': true,
-        'v-list-item--active': !this.to && this.isActive,
+        'v-list-item--active': this.isActive,
         'v-list-item--dense': this.dense,
         'v-list-item--disabled': this.disabled,
         'v-list-item--link': this.isLink && !this.inactive,
@@ -75,9 +81,8 @@ export default baseMixins.extend<options>().extend({
       }
     },
     computedRipple (): RippleOptions | boolean {
-      const defaultRipple = this.isLink
       if (this.disabled) return false
-      else return this.ripple !== null ? this.ripple : defaultRipple
+      return this.ripple !== null ? this.ripple : this.isLink
     },
     isLink (): boolean {
       const hasClick = this.$listeners && (this.$listeners.click || this.$listeners['!click'])
@@ -85,6 +90,7 @@ export default baseMixins.extend<options>().extend({
       return Boolean(
         this.href ||
         this.to ||
+        this.listItemGroup ||
         hasClick
       )
     }
@@ -95,6 +101,8 @@ export default baseMixins.extend<options>().extend({
       if (e.detail) this.$el.blur()
 
       this.$emit('click', e)
+
+      this.to || this.toggle()
     }
   },
 
@@ -110,8 +118,23 @@ export default baseMixins.extend<options>().extend({
     data.attrs = Object.assign({}, data.attrs, this.$attrs)
     data.attrs.disabled = this.disabled
     data.attrs.role = 'listitem'
+    data.on = {
+      ...data.on,
+      keydown: (e: KeyboardEvent) => {
+        if (e.keyCode === keyCodes.enter) this.click(e)
+
+        this.$emit('keydown', e)
+      }
+    }
     if (tag === 'a') data.attrs.tabindex = 0
 
-    return h(tag, this.setBackgroundColor(this.color, data), this.$slots.default)
+    const children = this.$scopedSlots.default
+      ? this.$scopedSlots.default({
+        active: this.isActive,
+        toggle: this.toggle
+      })
+      : this.$slots.default
+
+    return h(tag, this.setBackgroundColor(this.color, data), children)
   }
 })
