@@ -37,7 +37,7 @@ test('VBreadcrumbs.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it.only('should not complain about identical keys', () => {
+  it('should not complain about identical keys', () => {
     const { render } = compileToFunctions(`
       <v-breadcrumbs :items="items"></v-breadcrumbs>
     `)
