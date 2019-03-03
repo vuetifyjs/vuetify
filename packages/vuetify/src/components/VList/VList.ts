@@ -4,7 +4,6 @@ import VListGroup from './VListGroup'
 
 // Mixins
 import Themeable from '../../mixins/themeable'
-import { provide as RegistrableProvide } from '../../mixins/registrable'
 
 // Types
 import mixins from '../../util/mixins'
@@ -13,11 +12,16 @@ import { VNode } from 'vue'
 type VListGroupInstance = InstanceType<typeof VListGroup>
 
 export default mixins(
-  RegistrableProvide('list'),
   Themeable
   /* @vue/component */
 ).extend({
   name: 'v-list',
+
+  provide () {
+    return {
+      list: this
+    }
+  },
 
   props: {
     dense: Boolean,
