@@ -172,10 +172,20 @@ export const BaseItemGroup = mixins(
     updateMandatory (last?: boolean) {
       if (!this.items.length) return
 
-      const index = last ? this.items.length - 1 : 0
+      const items = this.items.slice()
+
+      if (last) items.reverse()
+
+      const item = items.find(item => !item.disabled)
+
+      // If no tabs are available
+      // aborts mandatory value
+      if (!item) return
+
+      const index = this.items.indexOf(item)
 
       this.updateInternalValue(
-        this.getValue(this.items[index], index)
+        this.getValue(item, index)
       )
     },
     updateMultiple (value: any) {
