@@ -86,9 +86,10 @@ export default baseMixins.extend<options>().extend({
       slider: {
         height: null as null | number,
         left: null as null | number,
+        right: null as null | number,
         top: null as null | number,
         width: null as null | number
-      } as Record<string, number | null>,
+      },
       transitionTime: 300
     }
   },
