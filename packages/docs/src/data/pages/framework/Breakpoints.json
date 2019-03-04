@@ -1,7 +1,10 @@
 {
   "title": "header",
   "titleText": "headerText",
-  "mdLink": "https://material.io/design/layout/responsive-layout-grid.html#breakpoints",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/layout/responsive-layout-grid.html#breakpoints"
+  },
   "children": [
     {
       "type": "layout-grid"

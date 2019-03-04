@@ -1,7 +1,10 @@
 {
   "title": "header",
   "titleText": "headerText",
-  "mdLink": "https://material.io/design/iconography/system-icons.html",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/iconography/system-icons.html"
+  },
   "children": [
     {
       "type": "section",
