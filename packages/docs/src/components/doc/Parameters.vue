@@ -10,17 +10,19 @@
     <v-data-iterator
       :search="search"
       :items="computedItems"
-      :pagination.sync="pagination"
+      sort-by="name"
+      :items-per-page="-1"
       class="component-parameters pa-2"
-      hide-actions
-      content-tag="v-layout"
-      content-class="wrap"
     >
-      <template
-        slot="item"
-        slot-scope="{ item }"
-      >
-        <v-flex xs12 grey lighten-2 mt-2>
+      <v-layout slot-scope="props" wrap>
+        <v-flex
+          v-for="item in props.items"
+          :key="item.name"
+          xs12
+          grey
+          lighten-2
+          mt-2
+        >
           <v-layout wrap px-2 py-1>
             <v-flex
               v-for="(header, i) in headers"
@@ -79,7 +81,7 @@
             </v-flex>
           </v-layout>
         </v-flex>
-      </template>
+      </v-layout>
     </v-data-iterator>
   </div>
 </template>
@@ -122,13 +124,6 @@
         default: ''
       }
     },
-
-    data: () => ({
-      pagination: {
-        sortBy: 'name',
-        rowsPerPage: -1
-      }
-    }),
 
     computed: {
       ...mapGetters('documentation', [

@@ -59,7 +59,8 @@
       "inverse-label": "1.1",
       "thumb-size": "1.1",
       "tick-labels": "1.1",
-      "tick-size": "1.1"
+      "tick-size": "1.1",
+      "vertical": "2.0"
     }
   }
 }

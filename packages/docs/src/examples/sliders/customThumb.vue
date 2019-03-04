@@ -4,20 +4,15 @@
       <v-range-slider
         :tick-labels="seasons"
         :value="[0, 1]"
-        always-dirty
         min="0"
         max="3"
-        thumb-label
-        thumb-size="64"
         ticks="always"
+        tick-size="4"
       >
-        <template
-          slot="thumb-label"
-          slot-scope="props"
-        >
-          <span>
+        <template #thumb-label="props">
+          <v-icon dark>
             {{ season(props.value) }}
-          </span>
+          </v-icon>
         </template>
       </v-range-slider>
     </v-flex>
@@ -32,12 +27,18 @@
         'Spring',
         'Summer',
         'Fall'
+      ],
+      icons: [
+        'mdi-snowflake',
+        'mdi-leaf',
+        'mdi-fire',
+        'mdi-water'
       ]
     }),
 
     methods: {
       season (val) {
-        return this.seasons[val]
+        return this.icons[val]
       }
     }
   }
