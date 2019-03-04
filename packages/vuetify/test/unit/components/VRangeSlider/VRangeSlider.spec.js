@@ -180,4 +180,24 @@ test('VRangeSlider.vue', ({ mount }) => {
 
     wrapper.vm.$vuetify.rtl = undefined
   })
+
+  it('should render a vertical slider', async () => {
+    const wrapper = mount(VRangeSlider, {
+      propsData: {
+        vertical: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render disabled slider', async () => {
+    const wrapper = mount(VRangeSlider, {
+      propsData: {
+        disabled: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

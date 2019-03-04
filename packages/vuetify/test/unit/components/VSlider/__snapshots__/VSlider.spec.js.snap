@@ -608,6 +608,50 @@ exports[`VSlider.vue should render component with ticks and match a snapshot 2`]
 
 `;
 
+exports[`VSlider.vue should render vertical slider 1`] = `
+
+<div class="v-input v-input__slider v-input__slider--vertical theme--light">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider v-slider--vertical theme--light">
+        <input value="0"
+               readonly="readonly"
+               tabindex="-1"
+        >
+        <div class="v-slider__track-container">
+          <div class="v-slider__track-background primary lighten-3"
+               style="top: 0px;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="bottom: 0px; height: 0%;"
+          >
+          </div>
+        </div>
+        <div role="slider"
+             tabindex="0"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             aria-valuenow="0"
+             aria-readonly="false"
+             aria-orientation="vertical"
+             class="v-slider__thumb-container primary--text"
+             style="top: 100%;"
+        >
+          <div class="v-slider__thumb primary">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <div class="v-messages__wrapper">
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
 exports[`VSlider.vue should reverse label location when inverse 1`] = `
 
 <div class="v-input v-input__slider theme--light">

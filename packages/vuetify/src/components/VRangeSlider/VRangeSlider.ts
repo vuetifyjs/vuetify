@@ -68,12 +68,6 @@ export default VSlider.extend({
         this.roundValue(v) - this.minValue) / (this.maxValue - this.minValue) * 100
       )
     },
-    trackStyles () {
-      const dir = this.vertical ? 'height' : 'width'
-      return {
-        [dir]: '100%'
-      }
-    },
     trackFillStyles () {
       const styles = VSlider.options.computed.trackFillStyles.call(this)
       const fillPercent = Math.abs(this.inputWidth[0] - this.inputWidth[1])

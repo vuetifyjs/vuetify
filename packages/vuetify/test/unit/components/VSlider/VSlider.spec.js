@@ -20,6 +20,16 @@ test('VSlider.vue', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render vertical slider', async () => {
+    const wrapper = mount(VSlider, {
+      propsData: {
+        vertical: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render component with ticks and match a snapshot', async () => {
     const wrapper = mount(VSlider, {
       propsData: {
