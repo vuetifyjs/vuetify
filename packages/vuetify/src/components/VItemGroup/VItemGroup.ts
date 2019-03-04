@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_item-group.styl'
+import './VItemGroup.sass'
 
 // Mixins
 import Groupable from '../../mixins/groupable'
@@ -58,6 +58,8 @@ export const BaseItemGroup = mixins(
       })
     },
     selectedValues (): any[] {
+      if (this.internalValue == null) return []
+
       return Array.isArray(this.internalValue)
         ? this.internalValue
         : [this.internalValue]

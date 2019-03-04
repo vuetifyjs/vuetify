@@ -64,3 +64,7 @@ export default class Vuetify {
 
 Vuetify.install = install
 Vuetify.version = __VUETIFY_VERSION__
+
+if (typeof window !== 'undefined' && window.Vue) {
+  window.Vue.use(Vuetify)
+}

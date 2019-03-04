@@ -1,6 +1,10 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/bottom-navigation.html"
+  },
   "children": [
     {
       "type": "section",

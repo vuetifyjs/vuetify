@@ -1,6 +1,10 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "mdSpec": {
+    "version": "1",
+    "link": "https://material.io/archive/guidelines/components/pickers.html#pickers-date-pickers"
+  },
   "children": [
     {
       "type": "section",

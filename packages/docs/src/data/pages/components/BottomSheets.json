@@ -1,6 +1,10 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/sheets-bottom.html"
+  },
   "children": [
     {
       "type": "section",

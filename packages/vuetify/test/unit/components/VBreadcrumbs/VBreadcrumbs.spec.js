@@ -105,7 +105,6 @@ test('VBreadcrumbs.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.html()).toMatchSnapshot()
     expect(`'justify-end' is deprecated, use 'class="justify-end"' instead`).toHaveBeenTipped()
     expect(`'justify-center' is deprecated, use 'class="justify-center"' instead`).toHaveBeenTipped()
-    expect(`'default slot' is deprecated, use ':items and scoped slot "item"' instead`).toHaveBeenTipped()
   })
 
   // TODO: this always passes in jest, needs to be e2e

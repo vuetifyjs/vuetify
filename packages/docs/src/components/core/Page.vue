@@ -5,17 +5,29 @@
     class="page"
   >
     <template v-if="structure">
-      <doc-heading v-if="structure.title">
-        {{ structure.title }}
-      </doc-heading>
+      <v-layout>
+        <v-flex shrink>
+          <doc-heading v-if="structure.title">
+            {{ structure.title }}
+          </doc-heading>
+        </v-flex>
+        <v-spacer />
+        <v-flex
+          v-if="structure.mdSpec"
+          shrink
+        >
+          <core-spec-btn
+            :link="structure.mdSpec.link"
+            :version="structure.mdSpec.version"
+          />
+        </v-flex>
+      </v-layout>
+
       <div
         v-if="structure.titleText"
         class="mb-5"
       >
-        <doc-text
-          v-if="structure.titleText"
-          class="mb-4"
-        >
+        <doc-text class="mb-4">
           {{ structure.titleText }}
         </doc-text>
       </div>

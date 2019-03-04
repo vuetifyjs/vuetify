@@ -1,6 +1,10 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/cards.html"
+  },
   "children": [
     {
       "type": "section",
@@ -14,6 +18,11 @@
     {
       "type": "section",
       "children": [
+        {
+          "type": "alert",
+          "lang": "cardMediaWarning",
+          "value": "warning"
+        },
         {
           "type": "api",
           "value": [
