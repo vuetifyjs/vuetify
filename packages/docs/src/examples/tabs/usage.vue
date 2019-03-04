@@ -1,5 +1,5 @@
 <template>
-  <v-tabs v-model="value">
+  <v-tabs>
     <v-tab>Item One</v-tab>
     <v-tab>Item Two</v-tab>
     <v-tab>Item Three</v-tab>
