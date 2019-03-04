@@ -13,9 +13,9 @@
       </v-tab>
     </v-tabs>
     <v-card-text class="text-xs-center">
-      <v-btn flat @click="length--">Remove Tab</v-btn>
+      <v-btn text @click="length--">Remove Tab</v-btn>
       <v-divider class="mx-3" vertical></v-divider>
-      <v-btn flat @click="length++">Add Tab</v-btn>
+      <v-btn text @click="length++">Add Tab</v-btn>
     </v-card-text>
   </v-card>
 </template>
