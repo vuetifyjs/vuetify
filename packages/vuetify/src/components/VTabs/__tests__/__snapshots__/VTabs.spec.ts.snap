@@ -8,7 +8,7 @@ exports[`VTabs.ts should render generic elements in the tab container 1`] = `
        data-booted="true"
   >
     <div class="v-slide-group__wrapper">
-      <div class="v-slide-group__content">
+      <div class="v-slide-group__content v-tabs__bar__content">
         <div class="test-element">
           foobar
         </div>

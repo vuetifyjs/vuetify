@@ -53,6 +53,14 @@ export default mixins(
 
       this.$emit('call:slider')
     },
+    genContent () {
+      const render = BaseSlideGroup.options.methods.genContent.call(this)
+
+      render.data = render.data || {}
+      render.data.staticClass += ' v-tabs__bar__content'
+
+      return render
+    },
     onRouteChange (val: Route, oldVal: Route) {
       /* istanbul ignore next */
       if (this.mandatory) return
