@@ -8,7 +8,7 @@
 .v-tabs__bar.theme--dark
   +tabs-theme($material-dark)
 
-  .v-tabs__item.v-tabs__item--active,
+  .v-tabs__item.v-tabs__item--active:not(.v-tabs__item--disabled),
   .v-tabs__slider-wrapper
     color: map-deep-get($material-dark, 'text', 'primary')
 
@@ -41,6 +41,7 @@
   text-decoration: none
   text-transform: uppercase
   transition: none
+  user-select: none
 
   &:before
     background-color: currentColor
@@ -58,12 +59,6 @@
 
   &:focus:before
     opacity: $tabs-item-focus-opacity
-
-  &--active
-    color: inherit
-
-    .v-icon
-      color: inherit
 
 .v-tabs__slider
   background-color: currentColor
@@ -144,3 +139,16 @@
   &.v-tabs--icons-and-text
     .v-tabs__item
       height: $tabs-item-vertical-icons-and-text-height
+
+.v-tabs__item--active
+  color: inherit
+
+  .v-icon
+    color: inherit
+
+.v-tabs__item--disabled
+  pointer-events: none
+  opacity: .5
+
+  &:before
+    opacity: 0

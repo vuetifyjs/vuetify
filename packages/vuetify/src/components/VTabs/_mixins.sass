@@ -1,4 +1,5 @@
 @mixin tabs-theme($material)
   .v-tabs__item:not(.v-tabs__item--active),
-  .v-tabs__item:not(.v-tabs__item--active) > .v-icon
+  .v-tabs__item:not(.v-tabs__item--active) > .v-icon,
+  .v-tabs__item--disabled
     color: map-get($material, 'tabs')
