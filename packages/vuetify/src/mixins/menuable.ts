@@ -7,7 +7,7 @@ import { consoleError } from '../util/console'
 import mixins, { ExtractVue } from '../util/mixins'
 
 // Types
-import Vue, { VNode } from 'vue'
+import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
 /* eslint-disable object-property-newline */
@@ -28,9 +28,13 @@ const dimensions = {
   hasWindow: false
 }
 
-interface options extends Vue {
+const baseMixins = mixins(
+  Stackable,
+  Positionable
+)
+
+interface options extends ExtractVue<typeof baseMixins> {
   attach: boolean
-  activatedBy: EventTarget | null
   disabled: boolean
   hasJustFocused: boolean
   inputActivator: boolean
@@ -43,31 +47,8 @@ interface options extends Vue {
   }
 }
 
-/* eslint-enable object-property-newline */
-
-/**
- * Menuable
- *
- * @mixin
- *
- * Used for fixed or absolutely positioning
- * elements within the DOM
- * Can calculate X and Y axis overflows
- * As well as be manually positioned
- */
 /* @vue/component */
-export default mixins<options &
-/* eslint-disable indent */
-  ExtractVue<[
-    typeof Stackable,
-    typeof Positionable
-  ]>
-/* eslint-enable indent */
->(
-  Stackable,
-  Positionable
-  /* @vue/component */
-).extend({
+export default baseMixins.extend<options>().extend({
   name: 'menuable',
 
   props: {
@@ -123,6 +104,7 @@ export default mixins<options &
   data: () => ({
     absoluteX: 0,
     absoluteY: 0,
+    activatedBy: null as EventTarget | null,
     dimensions: { ...dimensions },
     isContentActive: false,
     pageWidth: 0,
@@ -291,19 +273,17 @@ export default mixins<options &
       if (this.$refs.activator) {
         return this.$refs.activator.children.length > 0
           ? this.$refs.activator.children[0] as HTMLElement
-          : this.$refs.activator as HTMLElement
+          : this.$refs.activator
       }
 
-      if (e) {
-        this.activatedBy = e.currentTarget || e.target
-        return this.activatedBy as HTMLElement
-      }
+      if (e) this.activatedBy = e.currentTarget || e.target
 
       if (this.activatedBy) return this.activatedBy as HTMLElement
 
       if (this.activatorNode) {
         const activator = Array.isArray(this.activatorNode) ? this.activatorNode[0] : this.activatorNode
         const el = activator && activator.elm
+
         if (el) return el as HTMLElement
       }
 
