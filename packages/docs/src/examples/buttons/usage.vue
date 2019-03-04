@@ -92,7 +92,7 @@
         return options
       },
       colors () {
-        return Object.keys(this.$vuetify.theme)
+        return Object.keys(this.$vuetify.theme.themes.dark)
       }
     }
   }

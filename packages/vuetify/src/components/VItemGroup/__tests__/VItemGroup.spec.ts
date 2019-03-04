@@ -11,6 +11,7 @@ import {
   mount,
   Wrapper
 } from '@vue/test-utils'
+import { ExtractVue } from './../../../util/mixins'
 import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
 
 const vm = new Vue()
@@ -27,7 +28,8 @@ const Mock = {
 }
 
 describe('VItemGroup', () => {
-  let mountFunction: (options?: object) => Wrapper<Vue>
+  type Instance = ExtractVue<typeof VItemGroup>
+  let mountFunction: (options?: object) => Wrapper<Instance>
   let localVue: typeof Vue
 
   beforeEach(() => {
@@ -298,5 +300,38 @@ describe('VItemGroup', () => {
     wrapper.destroy()
 
     expect(change).not.toHaveBeenCalled()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/5000
+  it('should update mandatory to first non-disabled item', () => {
+    const Mock2 = {
+      name: 'mock2',
+
+      render (h) {
+        return h(VItem, {
+          props: {
+            disabled: true
+          },
+          scopedSlots: {
+            default: defaultSlot
+          }
+        })
+      }
+    }
+
+    const wrapper = mountFunction({
+      propsData: {
+        mandatory: true
+      },
+      slots: {
+        default: [
+          Mock2,
+          Mock,
+          Mock
+        ]
+      }
+    })
+
+    expect(wrapper.vm.internalValue).toBe(1)
   })
 })

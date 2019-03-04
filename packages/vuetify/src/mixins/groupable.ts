@@ -10,6 +10,7 @@ import { VueConstructor } from 'vue'
 export type Groupable<T extends string> = VueConstructor<ExtractVue<Registrable<T>> & {
   activeClass: string
   isActive: boolean
+  disabled: boolean
   groupClasses: object
   toggle (): void
 }>

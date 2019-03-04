@@ -35,6 +35,7 @@
             "color",
             "slot",
             "alert",
+            "reverse",
             "advanced"
           ]
         }

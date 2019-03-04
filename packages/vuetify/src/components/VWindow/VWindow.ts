@@ -59,6 +59,11 @@ export default BaseItemGroup.extend({
 
       return `v-window-${axis}${direction}-transition`
     },
+    hasActiveItems (): boolean {
+      return Boolean(
+        this.items.find(item => !item.disabled)
+      )
+    },
     internalIndex (): number {
       return this.items.findIndex((item, i) => {
         return this.internalValue === this.getValue(item, i)
@@ -91,16 +96,38 @@ export default BaseItemGroup.extend({
         }
       }, this.$slots.default)
     },
+    getNextIndex (index: number): number {
+      const nextIndex = (index + 1) % this.items.length
+      const item = this.items[nextIndex]
+
+      if (item.disabled) return this.getNextIndex(nextIndex)
+
+      return nextIndex
+    },
+    getPrevIndex (index: number): number {
+      const prevIndex = (index + this.items.length - 1) % this.items.length
+      const item = this.items[prevIndex]
+
+      if (item.disabled) return this.getPrevIndex(prevIndex)
+
+      return prevIndex
+    },
     next () {
       this.isReverse = false
-      const nextIndex = (this.internalIndex + 1) % this.items.length
+
+      if (!this.hasActiveItems) return
+
+      const nextIndex = this.getNextIndex(this.internalIndex)
       const item = this.items[nextIndex]
 
       this.internalValue = this.getValue(item, nextIndex)
     },
     prev () {
       this.isReverse = true
-      const lastIndex = (this.internalIndex + this.items.length - 1) % this.items.length
+
+      if (!this.hasActiveItems) return
+
+      const lastIndex = this.getPrevIndex(this.internalIndex)
       const item = this.items[lastIndex]
 
       this.internalValue = this.getValue(item, lastIndex)

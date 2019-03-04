@@ -34,6 +34,7 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
   },
 
   props: {
+    disabled: Boolean,
     reverseTransition: {
       type: [Boolean, String],
       default: undefined

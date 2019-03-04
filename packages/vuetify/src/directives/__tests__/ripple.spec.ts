@@ -1,14 +1,21 @@
+// Libraries
 import Vue from 'vue'
-import { test } from '@/test'
-import Ripple from '@/directives/ripple'
 
-test('VRipple', ({ mount }) => {
+// Directives
+import Ripple from '../ripple'
+
+// Utilities
+import {
+  mount
+} from '@vue/test-utils'
+
+describe('ripple.ts', () => {
   it('Ripple with no value should render element with ripple enabled', () => {
     const testComponent = Vue.component('test', {
       directives: {
         Ripple
       },
-      render (h){
+      render (h) {
         const data = {
           directives: [{
             name: 'ripple'
@@ -20,8 +27,8 @@ test('VRipple', ({ mount }) => {
 
     const wrapper = mount(testComponent)
 
-    const div = wrapper.find('div')[0]
-    expect(div.element._ripple.enabled).toBe(true)
+    const div = wrapper.find('div')
+    expect(div.element['_ripple'].enabled).toBe(true)
   })
 
   it('Ripple should update element property reactively', () => {
@@ -31,9 +38,9 @@ test('VRipple', ({ mount }) => {
       },
       props: {
         ripple: Boolean,
-        default: false
+        default: () => false
       },
-      render (h){
+      render (h) {
         const data = {
           directives: [{
             name: 'ripple',
@@ -50,13 +57,13 @@ test('VRipple', ({ mount }) => {
       }
     })
 
-    const div = wrapper.find('div')[0]
-    expect(div.element._ripple.enabled).toBe(true)
+    const div = wrapper.find('div')
+    expect(div.element['_ripple'].enabled).toBe(true)
 
     wrapper.setProps({ ripple: false })
-    expect(div.element._ripple.enabled).toBe(false)
+    expect(div.element['_ripple'].enabled).toBe(false)
 
     wrapper.setProps({ ripple: true })
-    expect(div.element._ripple.enabled).toBe(true)
+    expect(div.element['_ripple'].enabled).toBe(true)
   })
 })
