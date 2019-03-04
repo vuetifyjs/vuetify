@@ -1,6 +1,7 @@
 import VWindow from '@/components/VWindow/VWindow'
 import VWindowItem from '@/components/VWindow/VWindowItem'
 import { test, touch } from '@/test'
+import Vue from 'vue'
 
 test('VWindow.ts', ({ mount }) => {
   it('it should return the correct transition', async () => {
@@ -181,5 +182,28 @@ test('VWindow.ts', ({ mount }) => {
     touch(wrapper).start(0, 0).end(200, 0)
     expect(left).toBeCalled()
     expect(right).toBeCalled()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/5000
+  it('should change to the next available index when using touch swipe', () => {
+    const vm = new Vue()
+
+    const wrapper = mount(VWindow, {
+      slots: {
+        default: [
+          {
+            vNode: vm.$createElement(VWindowItem, { props: { disabled: true }})
+          },
+          VWindowItem,
+          VWindowItem
+        ]
+      }
+    })
+
+    expect(wrapper.vm.internalValue).toBe(1)
+    touch(wrapper).start(0, 0).end(200, 0)
+    expect(wrapper.vm.internalValue).toBe(2)
+    touch(wrapper).start(0, 0).end(200, 0)
+    expect(wrapper.vm.internalValue).toBe(1)
   })
 })
