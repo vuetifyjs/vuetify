@@ -32,7 +32,7 @@ describe('VSliderGroup.ts', () => {
     }
   })
 
-  it('should conditionally have affixes, prepend and append', () => {
+  it('should conditionally have affixes, prev and next', () => {
     const wrapper = mountFunction({
       data: () => ({
         isOverflowing: true
@@ -43,8 +43,8 @@ describe('VSliderGroup.ts', () => {
     })
 
     expect(wrapper.vm.hasAffixes).toBe(true)
-    expect(wrapper.vm.hasAppend).toBe(false)
-    expect(wrapper.vm.hasPrepend).toBe(false)
+    expect(wrapper.vm.hasNext).toBe(false)
+    expect(wrapper.vm.hasPrev).toBe(false)
 
     wrapper.setData({
       scrollOffset: 100,
@@ -54,7 +54,7 @@ describe('VSliderGroup.ts', () => {
       }
     })
 
-    expect(wrapper.vm.hasPrepend).toBe(true)
+    expect(wrapper.vm.hasPrev).toBe(true)
 
     wrapper.setData({
       scrollOffset: -100,
@@ -64,7 +64,7 @@ describe('VSliderGroup.ts', () => {
       }
     })
 
-    expect(wrapper.vm.hasAppend).toBe(true)
+    expect(wrapper.vm.hasNext).toBe(true)
   })
 
   it('should be considered mobile', async () => {
@@ -151,8 +151,8 @@ describe('VSliderGroup.ts', () => {
         showArrows: true
       },
       listeners: {
-        'click:prepend': onClick,
-        'click:append': onClick
+        'click:prev': onClick,
+        'click:next': onClick
       }
     })
 
@@ -167,11 +167,11 @@ describe('VSliderGroup.ts', () => {
 
     await wrapper.vm.$nextTick()
 
-    const prepend = wrapper.find('.v-slide-group__prepend')
-    const append = wrapper.find('.v-slide-group__append')
+    const prev = wrapper.find('.v-slide-group__prev')
+    const next = wrapper.find('.v-slide-group__next')
 
-    prepend.trigger('click')
-    append.trigger('click')
+    prev.trigger('click')
+    next.trigger('click')
     expect(scrollTo).toHaveBeenCalledTimes(2)
     expect(onClick).toHaveBeenCalledTimes(2)
   })
@@ -180,19 +180,19 @@ describe('VSliderGroup.ts', () => {
     const wrapper = mount(VSlideGroup, {
       computed: {
         hasAffixes: () => true,
-        hasAppend: () => true,
-        hasPrepend: () => true
+        hasNext: () => true,
+        hasPrev: () => true
       },
       propsData: {
         showArrows: true
       },
       scopedSlots: {
-        prepend () {
+        prev () {
           return this.$createElement('div', {
             staticClass: 'fizz'
           }, 'foo')
         },
-        append () {
+        next () {
           return this.$createElement('div', {
             staticClass: 'fizz'
           }, 'bar')
@@ -209,8 +209,8 @@ describe('VSliderGroup.ts', () => {
     const wrapper = mountFunction({
       computed: {
         hasAffixes: () => true,
-        hasAppend: () => true,
-        hasPrepend: () => true
+        hasNext: () => true,
+        hasPrev: () => true
       },
       propsData: {
         showArrows: true

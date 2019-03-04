@@ -50,7 +50,7 @@ export const BaseSlideGroup = mixins<options &
       type: String,
       default: 'v-slide-item--active'
     },
-    appendIcon: {
+    nextIcon: {
       type: String,
       default: '$vuetify.icons.next'
     },
@@ -59,7 +59,7 @@ export const BaseSlideGroup = mixins<options &
       default: 1264,
       validator: (v: any) => !isNaN(parseInt(v))
     },
-    prependIcon: {
+    prevIcon: {
       type: String,
       default: '$vuetify.icons.prev'
     },
@@ -78,11 +78,11 @@ export const BaseSlideGroup = mixins<options &
   }),
 
   computed: {
-    __cachedAppend (): VNode {
-      return this.genTransition('append')
+    __cachedNext (): VNode {
+      return this.genTransition('next')
     },
-    __cachedPrepend (): VNode {
-      return this.genTransition('prepend')
+    __cachedPrev (): VNode {
+      return this.genTransition('prev')
     },
     classes (): object {
       return BaseItemGroup.options.computed.classes.call(this)
@@ -93,7 +93,7 @@ export const BaseSlideGroup = mixins<options &
         this.isOverflowing
       )
     },
-    hasAppend (): boolean {
+    hasNext (): boolean {
       if (!this.hasAffixes) return false
 
       const { content, wrapper } = this.widths
@@ -101,7 +101,7 @@ export const BaseSlideGroup = mixins<options &
       // Check one scroll ahead to know the width of right-most item
       return content > Math.abs(this.scrollOffset) + wrapper
     },
-    hasPrepend (): boolean {
+    hasPrev (): boolean {
       return this.hasAffixes && this.scrollOffset !== 0
     },
     isMobile (): boolean {
@@ -121,22 +121,22 @@ export const BaseSlideGroup = mixins<options &
   },
 
   methods: {
-    genAppend (): VNode | null {
+    genNext (): VNode | null {
       if (!this.hasAffixes) return null
 
-      const slot = this.$scopedSlots.append
-        ? this.$scopedSlots.append({})
-        : this.$slots.append || this.__cachedAppend
+      const slot = this.$scopedSlots.next
+        ? this.$scopedSlots.next({})
+        : this.$slots.next || this.__cachedNext
 
       return this.$createElement('div', {
-        staticClass: 'v-slide-group__append',
+        staticClass: 'v-slide-group__next',
         class: {
-          'v-slide-group__append--disabled': !this.hasAppend
+          'v-slide-group__next--disabled': !this.hasNext
         },
         on: {
-          click: () => this.onAffixClick('append')
+          click: () => this.onAffixClick('next')
         },
-        key: 'append'
+        key: 'next'
       }, [slot])
     },
     genContent (): VNode {
@@ -145,13 +145,13 @@ export const BaseSlideGroup = mixins<options &
         ref: 'content'
       }, this.$slots.default)
     },
-    genIcon (location: 'prepend' | 'append'): VNode | null {
+    genIcon (location: 'prev' | 'next'): VNode | null {
       let icon = location
 
-      if (this.$vuetify.rtl && location === 'prepend') {
-        icon = 'append'
-      } else if (this.$vuetify.rtl && location === 'append') {
-        icon = 'prepend'
+      if (this.$vuetify.rtl && location === 'prev') {
+        icon = 'next'
+      } else if (this.$vuetify.rtl && location === 'next') {
+        icon = 'prev'
       }
 
       const upperLocation = `${location[0].toUpperCase()}${location.slice(1)}`
@@ -168,25 +168,25 @@ export const BaseSlideGroup = mixins<options &
         }
       }, (this as any)[`${icon}Icon`])
     },
-    genPrepend (): VNode | null {
+    genPrev (): VNode | null {
       if (!this.hasAffixes) return null
 
-      const slot = this.$scopedSlots.prepend
-        ? this.$scopedSlots.prepend({})
-        : this.$slots.prepend || this.__cachedPrepend
+      const slot = this.$scopedSlots.prev
+        ? this.$scopedSlots.prev({})
+        : this.$slots.prev || this.__cachedPrev
 
       return this.$createElement('div', {
-        staticClass: 'v-slide-group__prepend',
+        staticClass: 'v-slide-group__prev',
         class: {
-          'v-slide-group__prepend--disabled': !this.hasPrepend
+          'v-slide-group__prev--disabled': !this.hasPrev
         },
         on: {
-          click: () => this.onAffixClick('prepend')
+          click: () => this.onAffixClick('prev')
         },
-        key: 'prepend'
+        key: 'prev'
       }, [slot])
     },
-    genTransition (location: 'prepend' | 'append') {
+    genTransition (location: 'prev' | 'next') {
       return this.$createElement(VFadeTransition, [this.genIcon(location)])
     },
     genWrapper (): VNode {
@@ -203,11 +203,11 @@ export const BaseSlideGroup = mixins<options &
         ref: 'wrapper'
       }, [this.genContent()])
     },
-    newOffset /* istanbul ignore next */ (direction: 'prepend' | 'append') {
+    newOffset /* istanbul ignore next */ (direction: 'prev' | 'next') {
       // Force reflow
       const clientWidth = this.$refs.wrapper.clientWidth
 
-      if (direction === 'prepend') {
+      if (direction === 'prev') {
         return Math.max(this.scrollOffset - clientWidth, 0)
       }
 
@@ -218,7 +218,7 @@ export const BaseSlideGroup = mixins<options &
 
       return this.$vuetify.rtl ? -min : min
     },
-    onAffixClick (location: 'prepend' | 'append') {
+    onAffixClick (location: 'prev' | 'next') {
       this.$emit(`click:${location}`)
       this.scrollTo(location)
     },
@@ -280,7 +280,7 @@ export const BaseSlideGroup = mixins<options &
         this.scrollOffset -= totalWidth - itemOffset - additionalOffset
       }
     },
-    scrollTo /* istanbul ignore next */ (location: 'prepend' | 'append') {
+    scrollTo /* istanbul ignore next */ (location: 'prev' | 'next') {
       this.scrollOffset = this.newOffset(location)
     },
     setOverflow () {
@@ -310,9 +310,9 @@ export const BaseSlideGroup = mixins<options &
         value: this.onResize
       }]
     }, [
-      this.genPrepend(),
+      this.genPrev(),
       this.genWrapper(),
-      this.genAppend()
+      this.genNext()
     ])
   }
 })
