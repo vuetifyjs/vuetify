@@ -1,7 +1,10 @@
 {
   "title": "header",
   "titleText": "headerText",
-  "mdLink": "https://material.io/design/typography/the-type-system.html",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/typography/the-type-system.html"
+  },
   "children": [
     {
       "type": "section",

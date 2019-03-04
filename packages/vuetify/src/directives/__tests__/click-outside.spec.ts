@@ -1,8 +1,7 @@
-import Vue from 'vue'
-import { test } from '@/test'
-import ClickOutside from '@/directives/click-outside'
+// Directives
+import ClickOutside from '../click-outside'
 
-function bootstrap (args) {
+function bootstrap (args?: object) {
   let registeredHandler
   const el = {
     getBoundingClientRect: () => ({
@@ -18,60 +17,60 @@ function bootstrap (args) {
     args
   }
 
-  global.document.body.addEventListener = jest.fn((eventName, eventHandler, options) => {
+  jest.spyOn(window.document.body, 'addEventListener').mockImplementation((eventName, eventHandler, options) => {
     registeredHandler = eventHandler
   })
-  global.document.body.removeEventListener = jest.fn()
+  jest.spyOn(window.document.body, 'removeEventListener')
 
-  ClickOutside.inserted(el, binding)
+  ClickOutside.inserted(el as HTMLElement, binding as any)
 
   return {
     callback: binding.value,
-    el,
+    el: el as HTMLElement,
     registeredHandler
   }
 }
 
-test('click-outside.js', () => {
+describe('click-outside.js', () => {
   it('should register and unregister handler', () => {
     const { registeredHandler, el } = bootstrap()
-    expect(global.document.body.addEventListener).toBeCalledWith('click', registeredHandler, true)
+    expect(window.document.body.addEventListener).toHaveBeenCalledWith('click', registeredHandler, true)
 
     ClickOutside.unbind(el)
-    expect(global.document.body.removeEventListener).toBeCalledWith('click', registeredHandler, true)
+    expect(window.document.body.removeEventListener).toHaveBeenCalledWith('click', registeredHandler, true)
   })
 
   it('should call the callback when closeConditional returns true', async () => {
     const { registeredHandler, callback } = bootstrap({ closeConditional: () => true })
-    const event = { clientX: 5, clientY: 20}
+    const event = { clientX: 5, clientY: 20 }
 
     registeredHandler(event)
     await new Promise(resolve => setTimeout(resolve))
-    expect(callback).toBeCalledWith(event)
+    expect(callback).toHaveBeenCalledWith(event)
   })
 
   it('should not call the callback when closeConditional returns false', async () => {
     const { registeredHandler, callback } = bootstrap({ closeConditional: () => false })
 
-    registeredHandler({ clientX: 5, clientY: 20})
+    registeredHandler({ clientX: 5, clientY: 20 })
     await new Promise(resolve => setTimeout(resolve))
-    expect(callback).not.toBeCalled()
+    expect(callback).not.toHaveBeenCalled()
   })
 
   it('should not call the callback when closeConditional is not provided', async () => {
     const { registeredHandler, callback } = bootstrap()
 
-    registeredHandler({ clientX: 5, clientY: 20})
+    registeredHandler({ clientX: 5, clientY: 20 })
     await new Promise(resolve => setTimeout(resolve))
-    expect(callback).not.toBeCalled()
+    expect(callback).not.toHaveBeenCalled()
   })
 
   it('should not call the callback when clicked in element', async () => {
     const { registeredHandler, callback } = bootstrap({ closeConditional: () => true })
 
-    registeredHandler({ clientX: 105, clientY: 120})
+    registeredHandler({ clientX: 105, clientY: 120 })
     await new Promise(resolve => setTimeout(resolve))
-    expect(callback).not.toBeCalledWith()
+    expect(callback).not.toHaveBeenCalledWith()
   })
 
   it('should not call the callback when clicked in elements', async () => {
@@ -87,9 +86,9 @@ test('click-outside.js', () => {
       }]
     })
 
-    registeredHandler({ clientX: 1105, clientY: 1120})
+    registeredHandler({ clientX: 1105, clientY: 1120 })
     await new Promise(resolve => setTimeout(resolve))
-    expect(callback).not.toBeCalledWith()
+    expect(callback).not.toHaveBeenCalledWith()
   })
 
   it('should not call the callback when event is not fired by user action', async () => {
@@ -97,10 +96,10 @@ test('click-outside.js', () => {
 
     registeredHandler({ clientX: 5, clientY: 20, isTrusted: false })
     await new Promise(resolve => setTimeout(resolve))
-    expect(callback).not.toBeCalledWith()
+    expect(callback).not.toHaveBeenCalledWith()
 
     registeredHandler({ clientX: 5, clientY: 20, pointerType: false })
     await new Promise(resolve => setTimeout(resolve))
-    expect(callback).not.toBeCalledWith()
+    expect(callback).not.toHaveBeenCalledWith()
   })
 })

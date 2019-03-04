@@ -3,7 +3,7 @@
   "headerText": "The `v-timeline` is useful for stylistically displaying chronological information.",
   "examples": {
     "usage": {
-      "desc": ""
+      "desc": "If you place a `v-card` inside a `v-timeline-item` then a caret will appear on the side of the card."
     },
     "small": {
       "header": "### Small dots",
@@ -29,21 +29,30 @@
       "header": "### Dense alert",
       "desc": "Dense timelines position all content to the right. In this example, `v-alert` replaces the card to provide a different design."
     },
+    "reverse": {
+      "header": "### Reverse direction",
+      "desc": "You can reverse the direction of the timeline items by using the `reverse` prop. This works both in regular and dense mode."
+    },
     "advanced": {
       "header": "### Advanced",
       "desc": "Modular components allow you to create highly customized solutions that just work."
     }
   },
   "props": {
-    "alignTop": "Align `v-timeline-item`'s caret to the top",
-    "dense": "Position all items to the left",
-    "fillDot": "Remove padding from dot container",
-    "hideDot": "Hide display of timeline dot",
-    "icon": "Specify icon for dot container",
-    "iconColor": "Mixins.colorable.props.color",
-    "large": "Large size dot",
-    "left": "Explicitly set the item to a left orientation",
-    "right": "Explicitly set the item to a right orientation",
-    "small": "Small size dot"
+    "v-timeline": {
+      "alignTop": "Align caret and dot of timeline items to the top",
+      "dense": "Hide opposite slot content, and position all items to one side of timeline",
+      "reverse": "Reverse direction of timeline items"
+    },
+    "v-timeline-item": {
+      "fillDot": "Remove padding from dot container",
+      "hideDot": "Hide display of timeline dot",
+      "icon": "Specify icon for dot container",
+      "iconColor": "Mixins.colorable.props.color",
+      "large": "Large size dot",
+      "left": "Explicitly set the item to a left orientation",
+      "right": "Explicitly set the item to a right orientation",
+      "small": "Small size dot"
+    }
   }
 }

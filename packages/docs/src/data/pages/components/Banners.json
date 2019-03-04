@@ -1,7 +1,10 @@
 {
   "title": "header",
   "titleText": "headerText",
-  "mdLink": "https://material.io/design/components/banners.html",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/banners.html"
+  },
   "children": [
     {
       "type": "section",
