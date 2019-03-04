@@ -46,8 +46,12 @@
       "desc": "You can set `min` and `max` values of sliders."
     },
     "metronome": {
-      "header": "### Metronome",
-      "desc": "Use slotted _prepend_ and _append_ icons to easily customize the `v-slider` to fit any situation."
+      "header": "### Slots",
+      "desc": "Use slots such as `prepend` and `append` to easily customize the `v-slider` to fit any situation."
+    },
+    "vertical": {
+      "header": "### Vertical sliders",
+      "desc": "You can use `vertical` to switch sliders to a vertical orientation. If you need to change the height of the slider, use css."
     }
   },
   "props": {
@@ -55,12 +59,14 @@
     "inverseLabel": "Reverse the label position. Works with **rtl**.",
     "step": "If greater than 0, sets step interval for ticks",
     "thumbColor": "Sets the thumb and thumb label color",
-    "thumbLabel": "Show thumb label",
-    "thumbSize": "Controls the size of the **thumb-label**",
-    "ticks": "",
+    "thumbLabel": "Show thumb label. If `true` it shows label when using slider. If set to `'always'` it always shows label.",
+    "thumbSize": "Controls the size of the thumb label.",
+    "ticks": "Show track ticks. If `true` it shows ticks when using slider. If set to `'always'` it always shows ticks.",
     "tickLabels": "When provided with Array<string>, will attempt to map the labels to each step in index order",
     "tickSize": "Controls the size of **ticks**",
-    "trackColor": "Sets the track fill color"
+    "trackColor": "Sets the track fill color",
+    "value": "Controls the current value of the slider",
+    "vertical": "Changes slider direction to vertical"
   },
   "events": {
     "change": "Components.Inputs.events.change",
@@ -69,5 +75,8 @@
     "end": "Slider value emitted at the end of slider movement",
     "start": "Slider value emitted at start of slider movement",
     "update:error": "Mixins.Validatable.events['update:error']"
+  },
+  "scopedSlots": {
+    "thumb-label": "Replaces the content inside the thumb label"
   }
 }
