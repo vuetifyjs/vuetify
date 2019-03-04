@@ -16,7 +16,7 @@ const baseMixins = mixins(
 )
 
 interface options extends ExtractVue<typeof baseMixins> {
-  attach:  boolean | string | Element
+  attach: boolean | string | Element
   offsetY: boolean
   offsetX: boolean
   $refs: {
