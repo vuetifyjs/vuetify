@@ -35,6 +35,7 @@ export default baseMixins.extend<options>().extend(
   },
 
   props: {
+    disabled: Boolean,
     reverseTransition: {
       type: [Boolean, String],
       default: undefined
