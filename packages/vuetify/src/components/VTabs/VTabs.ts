@@ -173,7 +173,7 @@ export default baseMixins.extend<options>().extend({
 
       return true
     },
-    genBar (items: VNode[], slider: VNode[]) {
+    genBar (items: VNode[], slider: VNode | null) {
       return this.$createElement(VTabsBar, this.setTextColor(this.color, {
         staticClass: this.backgroundColor,
         style: {
@@ -206,13 +206,10 @@ export default baseMixins.extend<options>().extend({
         items
       ])
     },
-    genItems (
-      items: VNode[], // Array of `v-tabs-items`
-      item: VNode[] // Array of `v-tab-item`
-    ) {
+    genItems (items: VNode | null, item: VNode[]) {
       // If user provides items
       // opt to use theirs
-      if (items.length > 0) return items
+      if (items) return items
 
       // If no tabs are provided
       // render nothing
@@ -229,21 +226,19 @@ export default baseMixins.extend<options>().extend({
         }
       }, item)
     },
-    genSlider (items: VNode[]) {
+    genSlider (slider: VNode | null) {
       if (this.hideSlider) return null
 
-      if (!items.length) {
-        const slider = this.$createElement(VTabsSlider, {
+      if (!slider) {
+        slider = this.$createElement(VTabsSlider, {
           props: { color: this.sliderColor }
         })
-
-        items = [slider]
       }
 
       return this.$createElement('div', {
         staticClass: 'v-tabs__slider-wrapper',
         style: this.sliderStyles
-      }, items)
+      }, [slider])
     },
     onResize () {
       if (this._isDestroyed) return
@@ -252,9 +247,9 @@ export default baseMixins.extend<options>().extend({
       this.resizeTimeout = window.setTimeout(this.callSlider, 0)
     },
     parseNodes () {
+      let items = null
+      let slider = null
       const item = []
-      const items = []
-      const slider = []
       const tab = []
       const slot = this.$slots.default || []
       const length = slot.length
@@ -264,9 +259,9 @@ export default baseMixins.extend<options>().extend({
 
         if (vnode.componentOptions) {
           switch (vnode.componentOptions.Ctor.options.name) {
-            case 'v-tabs-slider': slider.push(vnode)
+            case 'v-tabs-slider': slider = vnode
               break
-            case 'v-tabs-items': items.push(vnode)
+            case 'v-tabs-items': items = vnode
               break
             case 'v-tab-item': item.push(vnode)
               break
@@ -278,6 +273,12 @@ export default baseMixins.extend<options>().extend({
         }
       }
 
+      /**
+       * tab: array of `v-tab`
+       * slider: single `v-tabs-slider`
+       * items: single `v-tabs-items`
+       * item: array of `v-tab-item`
+       */
       return { tab, slider, items, item }
     }
   },
