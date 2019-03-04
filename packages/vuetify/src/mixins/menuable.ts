@@ -10,24 +10,6 @@ import mixins, { ExtractVue } from '../util/mixins'
 import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
-/* eslint-disable object-property-newline */
-const dimensions = {
-  activator: {
-    top: 0, left: 0,
-    bottom: 0, right: 0,
-    width: 0, height: 0,
-    offsetTop: 0, scrollHeight: 0,
-    offsetLeft: 0
-  },
-  content: {
-    top: 0, left: 0,
-    bottom: 0, right: 0,
-    width: 0, height: 0,
-    offsetTop: 0, scrollHeight: 0
-  },
-  hasWindow: false
-}
-
 const baseMixins = mixins(
   Stackable,
   Positionable
@@ -35,12 +17,8 @@ const baseMixins = mixins(
 
 interface options extends ExtractVue<typeof baseMixins> {
   attach: boolean
-  disabled: boolean
-  hasJustFocused: boolean
-  inputActivator: boolean
-  hasWindow: boolean
-  offsetX: number
-  offsetY: number
+  offsetY: boolean
+  offsetX: boolean
   $refs: {
     content: HTMLElement
     activator: HTMLElement
@@ -61,6 +39,7 @@ export default baseMixins.extend<options>().extend({
     allowOverflow: Boolean,
     light: Boolean,
     dark: Boolean,
+    disabled: Boolean,
     maxWidth: {
       type: [Number, String],
       default: 'auto'
@@ -105,13 +84,38 @@ export default baseMixins.extend<options>().extend({
     absoluteX: 0,
     absoluteY: 0,
     activatedBy: null as EventTarget | null,
-    dimensions: { ...dimensions },
+    activatorNode: null as null | VNode | VNode[],
+    dimensions: {
+      activator: {
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+        width: 0,
+        height: 0,
+        offsetTop: 0,
+        scrollHeight: 0,
+        offsetLeft: 0
+      },
+      content: {
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+        width: 0,
+        height: 0,
+        offsetTop: 0,
+        scrollHeight: 0
+      }
+    },
+    hasJustFocused: false,
+    hasWindow: false,
+    inputActivator: false,
     isContentActive: false,
     pageWidth: 0,
     pageYOffset: 0,
     stackClass: 'v-menu__content--active',
-    stackMinZIndex: 6,
-    activatorNode: null as null | VNode | VNode[]
+    stackMinZIndex: 6
   }),
 
   computed: {
