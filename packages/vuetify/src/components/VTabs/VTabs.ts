@@ -206,8 +206,16 @@ export default baseMixins.extend<options>().extend({
         items
       ])
     },
-    genItems (items: VNode[], item: VNode[]) {
+    genItems (
+      items: VNode[], // Array of `v-tabs-items`
+      item: VNode[] // Array of `v-tab-item`
+    ) {
+      // If user provides items
+      // opt to use theirs
       if (items.length > 0) return items
+
+      // If no tabs are provided
+      // render nothing
       if (!item.length) return null
 
       return this.$createElement(VTabsItems, {
