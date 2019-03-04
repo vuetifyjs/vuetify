@@ -183,14 +183,12 @@ export default baseMixins.extend<options>().extend({
         },
         props: {
           activeClass: this.activeClass,
-          // TODO: deprecate name
-          appendIcon: this.nextIcon,
           dark: this.dark,
           light: this.light,
-          // TODO: deprecate name
-          prependIcon: this.prevIcon,
           mandatory: !this.optional,
           mobileBreakPoint: this.mobileBreakPoint,
+          nextIcon: this.nextIcon,
+          prevIcon: this.prevIcon,
           showArrows: this.showArrows,
           value: this.internalValue
         },
