@@ -50,6 +50,7 @@ export const BaseSlideGroup = mixins<options &
       type: String,
       default: 'v-slide-item--active'
     },
+    centerActiveItem: Boolean,
     nextIcon: {
       type: String,
       default: '$vuetify.icons.next'
@@ -264,20 +265,29 @@ export const BaseSlideGroup = mixins<options &
         return
       }
 
-      const totalWidth = this.widths.wrapper + this.scrollOffset
       const { clientWidth, offsetLeft } = this.selectedItem.$el as HTMLElement
-      const itemOffset = clientWidth + offsetLeft
-      let additionalOffset = clientWidth * 0.3
 
-      if (this.selectedItem === this.items[this.items.length - 1]) {
-        additionalOffset = 0 // don't add an offset if selecting the last tab
-      }
+      if (!this.centerActiveItem) {
+        const totalWidth = this.widths.wrapper + this.scrollOffset
+        const itemOffset = clientWidth + offsetLeft
+        let additionalOffset = clientWidth * 0.3
 
-      /* istanbul ignore else */
-      if (offsetLeft < this.scrollOffset) {
-        this.scrollOffset = Math.max(offsetLeft - additionalOffset, 0)
-      } else if (totalWidth < itemOffset) {
-        this.scrollOffset -= totalWidth - itemOffset - additionalOffset
+        if (this.selectedItem === this.items[this.items.length - 1]) {
+          additionalOffset = 0 // don't add an offset if selecting the last tab
+        }
+
+        /* istanbul ignore else */
+        if (offsetLeft < this.scrollOffset) {
+          this.scrollOffset = Math.max(offsetLeft - additionalOffset, 0)
+        } else if (totalWidth < itemOffset) {
+          this.scrollOffset -= totalWidth - itemOffset - additionalOffset
+        }
+      } else if (this.$vuetify.rtl) {
+        const offsetCentered = this.widths.content - offsetLeft - clientWidth / 2 - this.widths.wrapper / 2
+        this.scrollOffset = -Math.min(this.widths.content - this.widths.wrapper, Math.max(0, offsetCentered))
+      } else {
+        const offsetCentered = offsetLeft + clientWidth / 2 - this.widths.wrapper / 2
+        this.scrollOffset = Math.min(this.widths.content - this.widths.wrapper, Math.max(0, offsetCentered))
       }
     },
     scrollTo /* istanbul ignore next */ (location: 'prev' | 'next') {
