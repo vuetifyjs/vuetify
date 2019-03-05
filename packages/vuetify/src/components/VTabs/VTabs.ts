@@ -47,6 +47,7 @@ export default baseMixins.extend<options>().extend({
     alignWithTitle: Boolean,
     backgroundColor: String,
     centered: Boolean,
+    centerActiveTab: Boolean,
     color: {
       type: String,
       default: 'primary'
@@ -124,6 +125,7 @@ export default baseMixins.extend<options>().extend({
   watch: {
     alignWithTitle: 'callSlider',
     centered: 'callSlider',
+    centerActiveTab: 'callSlider',
     fixedTabs: 'callSlider',
     grow: 'callSlider',
     right: 'callSlider',
@@ -183,6 +185,7 @@ export default baseMixins.extend<options>().extend({
         },
         props: {
           activeClass: this.activeClass,
+          centerActiveItem: this.centerActiveTab,
           dark: this.dark,
           light: this.light,
           mandatory: !this.optional,
@@ -245,10 +248,10 @@ export default baseMixins.extend<options>().extend({
       this.resizeTimeout = window.setTimeout(this.callSlider, 0)
     },
     parseNodes () {
-      let items = null
-      let slider = null
-      const item = []
-      const tab = []
+      let items: VNode | null = null
+      let slider: VNode | null = null
+      const item: VNode[] = []
+      const tab: VNode[] = []
       const slot = this.$slots.default || []
       const length = slot.length
 
