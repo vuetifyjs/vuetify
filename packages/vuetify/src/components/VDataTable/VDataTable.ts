@@ -7,9 +7,9 @@ import { DataProps } from '../VData/VData'
 import { TableHeader } from './mixins/header'
 
 // Components
-import { VData, VDataFooter } from '../VData'
+import { VData } from '../VData'
+import { VDataFooter, VDataIterator } from '../VDataIterator'
 import VBtn from '../VBtn'
-import VDataIterator from '../VDataIterator'
 import VDataTableHeader from './VDataTableHeader'
 import VVirtualTable from './VVirtualTable'
 import VIcon from '../VIcon'
@@ -343,7 +343,7 @@ export default VDataIterator.extend({
           on: {
             click: () => this.expand(item, !expanded)
           }
-        }, [this.$vuetify.icons.expand as string]) // TODO: prop?
+        }, ['$vuetify.icons.expand']) // TODO: prop?
       }
 
       return this.$createElement(this.isMobile ? VMobileRow : VRow, {
@@ -418,7 +418,7 @@ export default VDataIterator.extend({
       return this.$createElement(VSimpleTable, {
         props: simpleProps
       }, [
-        this.proxySlot('top', this.genSlots('top')),
+        this.proxySlot('top', this.genSlots('top', props)),
         this.genCaption(props),
         this.genColgroup(props),
         this.genHeaders(props),
@@ -444,17 +444,17 @@ export default VDataIterator.extend({
           !deepEqual(v, old) && this.$emit('update:options', v)
         },
         'update:page': (v: any) => this.$emit('update:page', v),
-        'update:itemsPerPage': (v: any) => this.$emit('update:itemsPerPage', v),
-        'update:sortBy': (v: any) => this.$emit('update:sortBy', v),
-        'update:sortDesc': (v: any) => this.$emit('update:sortDesc', v),
-        'update:groupBy': (v: any) => this.$emit('update:groupBy', v),
-        'update:groupDesc': (v: any) => this.$emit('update:groupDesc', v),
+        'update:items-per-page': (v: any) => this.$emit('update:items-per-page', v),
+        'update:sort-by': (v: any) => this.$emit('update:sort-by', v),
+        'update:sort-desc': (v: any) => this.$emit('update:sort-desc', v),
+        'update:group-by': (v: any) => this.$emit('update:group-by', v),
+        'update:group-desc': (v: any) => this.$emit('update:group-desc', v),
         'pagination': (v: any, old: any) => !deepEqual(v, old) && this.$emit('pagination', v),
         'current-items': (v: any[]) => {
           this.internalCurrentItems = v
           this.$emit('current-items', v)
         },
-        'pageCount': (v: number) => this.$emit('pageCount', v)
+        'page-count': (v: number) => this.$emit('page-count', v)
       },
       scopedSlots: {
         default: this.genDefaultScopedSlot as any

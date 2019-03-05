@@ -176,7 +176,7 @@ export default mixins(Themeable).extend({
       else if (this.$slots[slot]) return this.$slots[slot]
       return []
     },
-    genDefaultScopedSLot (props: any) {
+    genDefaultScopedSlot (props: any) {
       return this.$createElement('div', {
         staticClass: 'v-data-iterator'
       }, [
@@ -193,11 +193,11 @@ export default mixins(Themeable).extend({
       on: {
         'update:options': (v: any, old: any) => !deepEqual(v, old) && this.$emit('update:options', v),
         'update:page': (v: any) => this.$emit('update:page', v),
-        'update:itemsPerPage': (v: any) => this.$emit('update:itemsPerPage', v),
-        'update:sortBy': (v: any) => this.$emit('update:sortBy', v),
-        'update:sortDesc': (v: any) => this.$emit('update:sortDesc', v),
-        'update:groupBy': (v: any) => this.$emit('update:groupBy', v),
-        'update:groupDesc': (v: any) => this.$emit('update:groupDesc', v),
+        'update:items-per-page': (v: any) => this.$emit('update:items-per-page', v),
+        'update:sort-by': (v: any) => this.$emit('update:sort-by', v),
+        'update:sort-desc': (v: any) => this.$emit('update:sort-desc', v),
+        'update:group-by': (v: any) => this.$emit('update:group-by', v),
+        'update:group-desc': (v: any) => this.$emit('update:group-desc', v),
         'pagination': (v: any, old: any) => !deepEqual(v, old) && this.$emit('pagination', v),
         'current-items': (v: any[]) => {
           this.internalCurrentItems = v
@@ -205,7 +205,7 @@ export default mixins(Themeable).extend({
         }
       },
       scopedSlots: {
-        default: this.genDefaultScopedSLot
+        default: this.genDefaultScopedSlot
       }
     })
   }

@@ -104,7 +104,7 @@
       "progress": "Slot to replace the default `<v-progress-linear>` component",
       "group": "Slot to replace the default rendering of grouped rows",
       "group.header": "Slot to customize the default rendering of group headers",
-      "group.summary": "Slot to customize the default rendering of group summaries",
+      "group.summary": "Slot to customize the default rendering of group summaries"
     }
   },
   "slots": {
