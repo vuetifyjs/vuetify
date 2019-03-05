@@ -3,11 +3,19 @@
 @import './_variables.scss'
 @import './_mixins.sass'
 
-.v-row
+.v-data-table__mobile-row
+  display: block
+
+  &__wrapper
+    height: 100%
+    display: flex
+    justify-content: space-between
+    align-items: center
+
   &__header
     font-weight: 600
 
-  &__value
+  &__cell
     text-align: right
 
 .v-simple-checkbox
@@ -18,96 +26,6 @@
 
   &--disabled
     cursor: default
-
-.v-data-table-header
-  &--mobile
-    th
-      height: initial
-
-      > div
-        display: flex
-
-        .v-simple-checkbox
-          margin-right: 24px
-
-        .v-select
-          margin-top: 0
-
-  th
-    .resize-handle
-      z-index: 10
-      position: absolute
-      right: -4px
-      top: 0
-      height: 100%
-      width: 8px
-      cursor: ew-resize
-
-      &:hover
-        background: grey
-
-  .sortable
-    pointer-events: auto
-    cursor: pointer
-    outline: 0
-
-    i
-      font-size: 18px
-      display: inline-block
-      opacity: 0
-      transition: .3s map-get($transition, 'swing')
-
-    &:focus,
-    &:hover
-      i
-        opacity: .6
-
-    &.active
-      transform: none
-
-      i
-        opacity: 1
-
-      &.desc
-        i
-          transform: rotate(-180deg)
-
-// .v-data-table__body
-//   .v-row
-//     transition: background $primary-transition
-//     will-change: background
-
-//   .v-cell
-//     font-weight: 400
-//     font-size: 13px
-
-// td, th
-//   > .v-input
-//     margin-top: 0
-//     padding-top: 0
-
-//     .v-input--selection-controls__input
-//       margin-right: 0
-
-th
-  .badge
-    display: inline-flex
-    justify-content: center
-    border: 0px
-    border-radius: 50%
-    background-color: lightgrey // TODO: theme
-    min-width: 16px
-    min-height: 16px
-    height: 16px
-    width: 16px
-    color: white // TODO: theme
-    font-size: 0.8rem
-
-// th
-//   font-weight: bold
-
-// tr > th
-//   white-space: normal
 
 .v-row, .v-row-expandable
   &:not(:last-child)
@@ -120,50 +38,7 @@ th
   text-overflow: ellipsis
 
 /** Actions */
-.v-data-footer
-  display: flex
-  flex-wrap: wrap
-  justify-content: flex-end
-  align-items: center
-  font-size: 12px
 
-  .v-btn
-    color: inherit
-
-    &:first-of-type
-      margin-right: 7px
-
-    &:last-of-type
-      margin-left: 7px
-
-  &__range-controls
-    display: flex
-    align-items: center
-    min-height: 48px
-
-  &__pagination
-    display: block
-    text-align: center
-    margin: 0 32px 0 24px
-
-  &__select
-    display: flex
-    align-items: center
-    justify-content: flex-end
-    margin-right: 14px
-    white-space: nowrap
-
-    .v-select
-      flex: 0 1 0
-      margin: 13px 0 13px 34px
-      padding: 0
-      position: initial
-
-    .v-select__selections
-      flex-wrap: nowrap
-
-      .v-select__selection--comma
-        font-size: 12px
 
 .v-row-expandable
   &__wrapper

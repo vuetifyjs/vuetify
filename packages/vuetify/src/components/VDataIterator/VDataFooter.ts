@@ -1,3 +1,5 @@
+import './VDataFooter.sass'
+
 // Helpers
 import { DataOptions, DataPaginaton } from './VData'
 import { PropValidator } from 'vue/types/options'

@@ -65,7 +65,7 @@ export default mixins(header).extend({
           else children.push(this.genSortIcon())
 
           if (this.options.multiSort && beingSorted) {
-            children.push(this.$createElement('span', { class: 'badge' }, [String(sortIndex + 1)]))
+            children.push(this.$createElement('span', { class: 'v-data-table-header__sort-badge' }, [String(sortIndex + 1)]))
           }
         }
 

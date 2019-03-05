@@ -19,8 +19,9 @@ import VRowGroup from './VRowGroup'
 import VSimpleCheckbox from '../VCheckbox/VSimpleCheckbox'
 
 // Helpers
-import { deepEqual, getObjectValueByPath, convertToUnit, compareFn } from '../../util/helpers'
+import { deepEqual, getObjectValueByPath, compareFn } from '../../util/helpers'
 import VSimpleTable from './VSimpleTable'
+import VMobileRow from './VMobileRow'
 
 function getPrefixedScopedSlots (prefix: string, scopedSlots: any) {
   return Object.keys(scopedSlots).filter(k => k.startsWith(prefix)).reduce((obj: any, k: string) => {
@@ -345,13 +346,12 @@ export default VDataIterator.extend({
         }, [this.$vuetify.icons.expand as string]) // TODO: prop?
       }
 
-      return this.$createElement(VRow, {
+      return this.$createElement(this.isMobile ? VMobileRow : VRow, {
         key: getObjectValueByPath(item, this.itemKey),
         class: classes,
         props: {
           headers: this.computedHeaders,
           item,
-          mobile: this.isMobile,
           rtl: this.$vuetify.rtl
         },
         scopedSlots
