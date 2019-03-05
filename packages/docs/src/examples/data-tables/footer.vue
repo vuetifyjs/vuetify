@@ -4,7 +4,7 @@
     :items="desserts"
     class="elevation-1"
   >
-    <template slot="footer">
+    <template v-slot:footer>
       <td :colspan="headers.length">
         <strong>This is an extra footer</strong>
       </td>

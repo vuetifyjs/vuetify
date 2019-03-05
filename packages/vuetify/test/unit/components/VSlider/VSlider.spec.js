@@ -365,6 +365,21 @@ test('VSlider.vue', ({ mount }) => {
     expect(wrapper.vm.roundValue(5.667)).toBe(5)
   })
 
+  it('should return a rounded value bounded by min and max', () => {
+    const wrapper = mount(VSlider, {
+      propsData: {
+        min: 5,
+        max: 10
+      }
+    })
+
+    wrapper.setProps({ value: 1 })
+    expect(wrapper.vm.internalValue).toBe(5)
+
+    wrapper.setProps({ value: 15 })
+    expect(wrapper.vm.internalValue).toBe(10)
+  })
+
   it('should not update if value matches lazy value', () => {
     const wrapper = mount(VSlider, {
       propsData: {

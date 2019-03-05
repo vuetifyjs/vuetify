@@ -6,19 +6,21 @@
     offset-y
     max-height="500"
   >
-    <v-btn
-      slot="activator"
-      :aria-label="$t('Vuetify.AppToolbar.support')"
-      text
-      style="min-width: 48px"
-    >
-      <span
-        class="hidden-sm-and-down mr-1"
-        v-text="$t('Vuetify.AppToolbar.support')"
-      />
-      <v-icon class="hidden-sm-and-down">mdi-menu-down</v-icon>
-      <v-icon class="hidden-md-and-up">mdi-comment-question</v-icon>
-    </v-btn>
+    <template #activator="{ on: menu }">
+      <v-btn
+        :aria-label="$t('Vuetify.AppToolbar.support')"
+        flat
+        style="min-width: 48px"
+        v-on="menu"
+      >
+        <span
+          class="hidden-sm-and-down mr-1"
+          v-text="$t('Vuetify.AppToolbar.support')"
+        />
+        <v-icon class="hidden-sm-and-down">mdi-menu-down</v-icon>
+        <v-icon class="hidden-md-and-up">mdi-comment-question</v-icon>
+      </v-btn>
+    </template>
     <v-list dense>
       <v-subheader v-text="$t('Vuetify.AppToolbar.getHelp')" />
       <core-item
