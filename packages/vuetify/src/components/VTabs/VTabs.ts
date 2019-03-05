@@ -234,7 +234,7 @@ export default baseMixins.extend<options>().extend({
       }
 
       return this.$createElement('div', {
-        staticClass: 'v-tabs__slider-wrapper',
+        staticClass: 'v-tabs-slider-wrapper',
         style: this.sliderStyles
       }, [slider])
     },

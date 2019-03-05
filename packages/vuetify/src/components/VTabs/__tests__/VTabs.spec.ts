@@ -93,7 +93,7 @@ describe('VTabs.ts', () => {
       }
     })
 
-    const slider = wrapper.findAll('.v-tabs__slider')
+    const slider = wrapper.findAll('.v-tabs-slider')
     expect(slider).toHaveLength(0)
   })
 

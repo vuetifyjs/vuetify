@@ -9,7 +9,7 @@
   +tabs-theme($material-dark)
 
   .v-tab.v-tab--active:not(.v-tab--disabled),
-  .v-tabs__slider-wrapper
+  .v-tabs-slider-wrapper
     color: map-deep-get($material-dark, 'text', 'primary')
 
 // Block
@@ -61,7 +61,7 @@
   &:focus:before
     opacity: $tabs-item-focus-opacity
 
-.v-tabs__slider
+.v-tabs-slider
   background-color: currentColor
   height: $tabs-slider-height
   width: 100%
@@ -81,10 +81,10 @@
   .v-tabs-bar__content > *:last-child
     margin-right: auto
 
-  .v-tabs-bar__content > *:first-child:not(.v-tabs__slider-wrapper)
+  .v-tabs-bar__content > *:first-child:not(.v-tabs-slider-wrapper)
     margin-left: auto
 
-  .v-tabs__slider-wrapper + *
+  .v-tabs-slider-wrapper + *
     margin-left: auto
 
 .v-tabs--fixed-tabs
@@ -113,7 +113,7 @@
 
 .v-tabs--right
   .v-tab:first-child,
-  .v-tabs__slider-wrapper + .v-tab
+  .v-tabs-slider-wrapper + .v-tab
     margin-left: auto
 
   .v-tab:last-child
@@ -131,7 +131,7 @@
   .v-tab
     height: $tabs-item-vertical-height
 
-  .v-tabs__slider
+  .v-tabs-slider
     height: 100%
 
   .v-window
