@@ -4,6 +4,9 @@ import '../../stylus/components/_forms.styl'
 // Mixins
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
+// Helpers
+import { CreateElement, VNode } from 'vue'
+
 type Watchers = {
   _uid: number
   valid: () => void
@@ -69,12 +72,12 @@ export default RegistrableProvide('form').extend({
       return watchers
     },
     /** @public */
-    validate () {
+    validate (): boolean {
       const errors = this.inputs.filter(input => !input.validate(true)).length
       return !errors
     },
     /** @public */
-    reset () {
+    reset (): void {
       for (let i = this.inputs.length; i--;) {
         this.inputs[i].reset()
       }
@@ -86,7 +89,7 @@ export default RegistrableProvide('form').extend({
       }
     },
     /** @public */
-    resetValidation () {
+    resetValidation (): void {
       for (let i = this.inputs.length; i--;) {
         this.inputs[i].resetValidation()
       }
@@ -108,8 +111,8 @@ export default RegistrableProvide('form').extend({
       if (!found) return
 
       const unwatch = this.watchers.find(i => i._uid === found._uid)
-      unwatch && unwatch.valid && unwatch.valid()
-      unwatch && unwatch.shouldValidate && unwatch.shouldValidate()
+      unwatch!.valid && unwatch!.valid()
+      unwatch!.shouldValidate && unwatch!.shouldValidate()
 
       this.watchers = this.watchers.filter(i => i._uid !== found._uid)
       this.inputs = this.inputs.filter(i => i._uid !== found._uid)
@@ -117,7 +120,7 @@ export default RegistrableProvide('form').extend({
     }
   },
 
-  render (h) {
+  render (h: CreateElement): VNode {
     return h('form', {
       staticClass: 'v-form',
       attrs: Object.assign({
