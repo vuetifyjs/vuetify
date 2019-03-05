@@ -45,6 +45,7 @@
             "desktop",
             "alignWithTitle",
             "grow",
+            "centerActiveTab",
             "overflowToMenu",
             "pagination",
             "icons",
