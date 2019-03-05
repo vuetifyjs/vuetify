@@ -1,0 +1,8 @@
+{
+  "props": {
+    "dismissible": "Especifica que o alerta pode ser fechado",
+    "icon": "Determina um ícone específico",
+    "outline": "Alerta terá um contorno",
+    "type": "Especifica um alerta de **success**, **info**, **warning** ou **error**. Usa a cor contextual e um ícone pré-definido."
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "events": {
+    "input": {
+      "name": "input",
+      "value": "boolean"
+    }
+  },
+  "inherit": [
+    "v-sheet",
+    "colorable",
+    "elevatable",
+    "measurable",
+    "themeable",
+    "toggleable",
+    "transitionable"
+  ],
+  "props": {
+    "border": {
+      "type": "string",
+      "default": "undefined"
+    },
+    "coloredBorder": {
+      "type": "boolean",
+      "default": "false"
+    },
+    "closeLabel": {
+      "type": "string",
+      "default": "'$vuetify.close'"
+    },
+    "dense": {
+      "type": "boolean",
+      "default": "false"
+    },
+    "dismissible": {
+      "type": "boolean",
+      "default": "false"
+    },
+    "icon": {
+      "type": "string",
+      "default": "undefined"
+    },
+    "outline": {
+      "type": "boolean",
+      "default": "false"
+    },
+    "outlined": {
+      "type": "boolean",
+      "default": "false"
+    },
+    "prominent": {
+      "type": "boolean",
+      "default": "false"
+    },
+    "text": {
+      "type": "boolean",
+      "default": "false"
+    },
+    "type": {
+      "type": "string",
+      "default": "undefined"
+    }
+  },
+  "scopedSlots": {},
+  "slots": ["default"]
+}
