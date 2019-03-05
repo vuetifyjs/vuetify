@@ -35,7 +35,7 @@ export default mixins(
     classes () {
       return {
         ...BaseSlideGroup.options.computed.classes.call(this),
-        'v-tabs__bar': true,
+        'v-tabs-bar': true,
         ...this.themeClasses
       }
     }
@@ -57,7 +57,7 @@ export default mixins(
       const render = BaseSlideGroup.options.methods.genContent.call(this)
 
       render.data = render.data || {}
-      render.data.staticClass += ' v-tabs__bar__content'
+      render.data.staticClass += ' v-tabs-bar__content'
 
       return render
     },

@@ -3,9 +3,9 @@
 @import './_variables.scss'
 @import './_mixins.sass'
 
-.v-tabs__bar.theme--light
+.v-tabs-bar.theme--light
   +tabs-theme($material-light)
-.v-tabs__bar.theme--dark
+.v-tabs-bar.theme--dark
   +tabs-theme($material-dark)
 
   .v-tab.v-tab--active:not(.v-tab--disabled),
@@ -20,7 +20,7 @@
     height: 100%
 
 // Element
-.v-tabs__bar
+.v-tabs-bar
   border-radius: inherit
   height: $tabs-bar-height
 
@@ -78,10 +78,10 @@
 
 .v-tabs--fixed-tabs,
 .v-tabs--centered
-  .v-tabs__bar__content > *:last-child
+  .v-tabs-bar__content > *:last-child
     margin-right: auto
 
-  .v-tabs__bar__content > *:first-child:not(.v-tabs__slider-wrapper)
+  .v-tabs-bar__content > *:first-child:not(.v-tabs__slider-wrapper)
     margin-left: auto
 
   .v-tabs__slider-wrapper + *
@@ -98,7 +98,7 @@
     max-width: none
 
 .v-tabs--icons-and-text
-  .v-tabs__bar
+  .v-tabs-bar
     height: $tabs-icons-and-text-bar-height
 
   .v-tab
@@ -122,10 +122,10 @@
 .v-tabs--vertical
   display: flex
 
-  .v-tabs__bar
+  .v-tabs-bar
     height: auto
 
-  .v-tabs__bar__content
+  .v-tabs-bar__content
     flex-direction: column
 
   .v-tab
