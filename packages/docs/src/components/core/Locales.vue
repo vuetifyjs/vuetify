@@ -5,19 +5,21 @@
     left
     offset-y
   >
-    <v-btn
-      slot="activator"
-      :aria-label="$t('Vuetify.AppToolbar.translations')"
-      text
-      style="min-width: 48px"
-    >
-      <v-icon v-if="currentLanguage.locale === 'eo-UY'">language</v-icon>
-      <v-img
-        v-else
-        :src="`https://cdn.vuetifyjs.com/images/flags/${currentLanguage.country}.png`"
-        width="26px"
-      />
-    </v-btn>
+    <template #activator="{ on: menu }">
+      <v-btn
+        :aria-label="$t('Vuetify.AppToolbar.translations')"
+        flat
+        style="min-width: 48px"
+        v-on="menu"
+      >
+        <v-icon v-if="currentLanguage.locale === 'eo-UY'">language</v-icon>
+        <v-img
+          v-else
+          :src="`https://cdn.vuetifyjs.com/images/flags/${currentLanguage.country}.png`"
+          width="26px"
+        />
+      </v-btn>
+    </template>
     <v-list
       dense
       light

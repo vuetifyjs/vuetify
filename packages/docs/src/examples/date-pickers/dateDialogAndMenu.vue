@@ -13,13 +13,15 @@
         full-width
         min-width="290px"
       >
-        <v-text-field
-          slot="activator"
-          v-model="date"
-          label="Picker in menu"
-          prepend-icon="event"
-          readonly
-        ></v-text-field>
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            v-model="date"
+            label="Picker in menu"
+            prepend-icon="event"
+            readonly
+            v-on="on"
+          ></v-text-field>
+        </template>
         <v-date-picker v-model="date" no-title scrollable>
           <v-spacer></v-spacer>
           <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
@@ -38,13 +40,15 @@
         full-width
         width="290px"
       >
-        <v-text-field
-          slot="activator"
-          v-model="date"
-          label="Picker in dialog"
-          prepend-icon="event"
-          readonly
-        ></v-text-field>
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            v-model="date"
+            label="Picker in dialog"
+            prepend-icon="event"
+            readonly
+            v-on="on"
+          ></v-text-field>
+        </template>
         <v-date-picker v-model="date" scrollable>
           <v-spacer></v-spacer>
           <v-btn text color="primary" @click="modal = false">Cancel</v-btn>
@@ -63,13 +67,15 @@
         full-width
         min-width="290px"
       >
-        <v-text-field
-          slot="activator"
-          v-model="date"
-          label="Picker without buttons"
-          prepend-icon="event"
-          readonly
-        ></v-text-field>
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            v-model="date"
+            label="Picker without buttons"
+            prepend-icon="event"
+            readonly
+            v-on="on"
+          ></v-text-field>
+        </template>
         <v-date-picker v-model="date" @input="menu2 = false"></v-date-picker>
       </v-menu>
     </v-flex>

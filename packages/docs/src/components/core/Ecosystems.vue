@@ -6,19 +6,21 @@
     offset-y
     max-height="700"
   >
-    <v-btn
-      slot="activator"
-      :aria-label="$t('Vuetify.AppToolbar.ecosystem')"
-      text
-      style="min-width: 48px"
-    >
-      <span
-        class="hidden-sm-and-down mr-1"
-        v-text="$t('Vuetify.AppToolbar.ecosystem')"
-      />
-      <v-icon class="hidden-sm-and-down">mdi-menu-down</v-icon>
-      <v-icon class="hidden-md-and-up">mdi-earth</v-icon>
-    </v-btn>
+    <template #activator="{ on: menu }">
+      <v-btn
+        :aria-label="$t('Vuetify.AppToolbar.ecosystem')"
+        flat
+        style="min-width: 48px"
+        v-on="menu"
+      >
+        <span
+          class="hidden-sm-and-down mr-1"
+          v-text="$t('Vuetify.AppToolbar.ecosystem')"
+        />
+        <v-icon class="hidden-sm-and-down">mdi-menu-down</v-icon>
+        <v-icon class="hidden-md-and-up">mdi-earth</v-icon>
+      </v-btn>
+    </template>
 
     <v-list
       light

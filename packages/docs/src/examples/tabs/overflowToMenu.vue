@@ -20,42 +20,48 @@
         <v-icon>more_vert</v-icon>
       </v-btn>
 
-      <v-tabs
-        slot="extension"
-        v-model="currentItem"
-        fixed-tabs
-        slider-color="white"
-      >
-        <v-tab
-          v-for="item in items"
-          :key="item"
-          :href="'#tab-' + item"
+      <template #extension>
+        <v-tabs
+          v-model="currentItem"
+          fixed-tabs
+          slider-color="white"
         >
-          {{ item }}
-        </v-tab>
+          <v-tab
+            v-for="item in items"
+            :key="item"
+            :href="'#tab-' + item"
+          >
+            {{ item }}
+          </v-tab>
 
-        <v-menu
-          v-if="more.length"
-          bottom
-          left
-          class="v-tab__item"
-        >
-          <v-btn slot="activator" text>
-            more
-            <v-icon right>arrow_drop_down</v-icon>
-          </v-btn>
+          <v-menu
+            v-if="more.length"
+            bottom
+            left
+          >
+            <template #activator="{ on }">
+              <v-btn
+                text
+                class="align-self-center mr-3"
+                v-on="on"
+              >
+                more
+                <v-icon right>arrow_drop_down</v-icon>
+              </v-btn>
+            </template>
 
-          <v-list class="grey lighten-3">
-            <v-list-tile
-              v-for="item in more"
-              :key="item"
-              @click="addItem(item)"
-            >
-              {{ item }}
-            </v-list-tile>
-          </v-list>
-        </v-menu>
-      </v-tabs>
+            <v-list class="grey lighten-3">
+              <v-list-tile
+                v-for="item in more"
+                :key="item"
+                @click="addItem(item)"
+              >
+                {{ item }}
+              </v-list-tile>
+            </v-list>
+          </v-menu>
+        </v-tabs>
+      </template>
     </v-toolbar>
 
     <v-tabs-items v-model="currentItem">

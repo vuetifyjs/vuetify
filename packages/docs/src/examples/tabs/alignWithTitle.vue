@@ -20,17 +20,18 @@
         <v-icon>more_vert</v-icon>
       </v-btn>
 
-      <v-tabs
-        slot="extension"
-        v-model="tab"
-        align-with-title
-      >
-        <v-tabs-slider color="yellow"></v-tabs-slider>
+      <template v-slot:extension>
+        <v-tabs
+          v-model="tab"
+          align-with-title
+        >
+          <v-tabs-slider color="yellow"></v-tabs-slider>
 
-        <v-tab v-for="item in items" :key="item">
-          {{ item }}
-        </v-tab>
-      </v-tabs>
+          <v-tab v-for="item in items" :key="item">
+            {{ item }}
+          </v-tab>
+        </v-tabs>
+      </template>
     </v-toolbar>
 
     <v-tabs-items v-model="tab">

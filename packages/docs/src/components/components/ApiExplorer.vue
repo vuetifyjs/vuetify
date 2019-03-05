@@ -14,10 +14,7 @@
         chips
         return-object
       >
-        <template
-          slot="selection"
-          slot-scope="props"
-        >
+        <template v-slot:selection="props">
           <v-chip
             :selected="props.selected"
             color="primary"
@@ -31,10 +28,7 @@
             <span v-text="props.item.text" />
           </v-chip>
         </template>
-        <template
-          slot="item"
-          slot-scope="props"
-        >
+        <template v-slot:item="props">
           <v-list-tile-action>
             <v-icon v-text="props.item.icon" />
           </v-list-tile-action>
