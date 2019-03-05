@@ -31,10 +31,10 @@ export default Selectable.extend({
     }
   },
 
-  data: () => ({ inputIndeterminate: false }),
-
-  created () {
-    this.inputIndeterminate = this.indeterminate
+  data () {
+    return {
+      inputIndeterminate: this.indeterminate
+    }
   },
 
   computed: {
