@@ -1,13 +1,18 @@
 // Styles
 import '../../stylus/components/_forms.styl'
 
+// Mixins
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
-/* @vue/component */
-export default {
-  name: 'v-form',
+type Watchers = {
+  _uid: number
+  valid: () => void
+  shouldValidate: () => void
+}
 
-  mixins: [RegistrableProvide('form')],
+/* @vue/component */
+export default RegistrableProvide('form').extend({
+  name: 'v-form',
 
   inheritAttrs: false,
 
@@ -16,18 +21,16 @@ export default {
     lazyValidation: Boolean
   },
 
-  data () {
-    return {
-      inputs: [],
-      watchers: [],
-      errorBag: {}
-    }
-  },
+  data: () => ({
+    inputs: [] as any[],
+    watchers: [] as Watchers[],
+    errorBag: {}
+  }),
 
   watch: {
     errorBag: {
-      handler () {
-        const errors = Object.values(this.errorBag).includes(true)
+      handler (val) {
+        const errors = Object.values(val).includes(true)
         this.$emit('input', !errors)
       },
       deep: true,
@@ -36,22 +39,22 @@ export default {
   },
 
   methods: {
-    watchInput (input) {
-      const watcher = input => {
-        return input.$watch('hasError', val => {
+    watchInput (input: any): Watchers {
+      const watcher = (input: any): (() => void) => {
+        return input.$watch('hasError', (val: boolean) => {
           this.$set(this.errorBag, input._uid, val)
         }, { immediate: true })
       }
 
       const watchers = {
         _uid: input._uid,
-        valid: undefined,
-        shouldValidate: undefined
+        valid: () => {},
+        shouldValidate: () => {}
       }
 
       if (this.lazyValidation) {
         // Only start watching inputs if we need to
-        watchers.shouldValidate = input.$watch('shouldValidate', val => {
+        watchers.shouldValidate = input.$watch('shouldValidate', (val: boolean) => {
           if (!val) return
 
           // Only watch if we're not already doing it
@@ -94,19 +97,19 @@ export default {
         }, 0)
       }
     },
-    register (input) {
-      const unwatch = this.watchInput(input)
+    register (input: any) {
+      const unwatch = (this as any).watchInput(input)
       this.inputs.push(input)
       this.watchers.push(unwatch)
     },
-    unregister (input) {
+    unregister (input: any) {
       const found = this.inputs.find(i => i._uid === input._uid)
 
       if (!found) return
 
       const unwatch = this.watchers.find(i => i._uid === found._uid)
-      unwatch.valid && unwatch.valid()
-      unwatch.shouldValidate && unwatch.shouldValidate()
+      unwatch && unwatch.valid && unwatch.valid()
+      unwatch && unwatch.shouldValidate && unwatch.shouldValidate()
 
       this.watchers = this.watchers.filter(i => i._uid !== found._uid)
       this.inputs = this.inputs.filter(i => i._uid !== found._uid)
@@ -121,8 +124,8 @@ export default {
         novalidate: true
       }, this.$attrs),
       on: {
-        submit: e => this.$emit('submit', e)
+        submit: (e: Event) => this.$emit('submit', e)
       }
     }, this.$slots.default)
   }
-}
+})
