@@ -1,0 +1,166 @@
+// Imports
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+@import './_mixins.sass'
+
+.v-tabs-bar.theme--light
+  +tabs-theme($material-light)
+.v-tabs-bar.theme--dark
+  +tabs-theme($material-dark)
+
+  .v-tab.v-tab--active:not(.v-tab--disabled),
+  .v-tabs-slider-wrapper
+    color: map-deep-get($material-dark, 'text', 'primary')
+
+// Block
+.v-tabs
+  flex: 1 1 auto
+
+  .v-menu__activator
+    height: 100%
+
+.v-toolbar
+  > .v-toolbar__content,
+  > .v-toolbar__extension
+    > .v-tabs
+      margin-left: -#{map-get($grid-gutters, 'xl')}
+      margin-right: -#{map-get($grid-gutters, 'xl')}
+
+      @media #{map-get($display-breakpoints, 'sm-and-down')}
+        margin-left: -#{map-get($grid-gutters, 'lg')}
+        margin-right: -#{map-get($grid-gutters, 'lg')}
+
+// Element
+.v-tabs-bar
+  border-radius: inherit
+  height: $tabs-bar-height
+
+  &.v-item-group > *
+    cursor: initial
+
+.v-tab
+  align-items: center
+  display: flex
+  flex: 0 1 auto
+  font-size: 0.875rem
+  font-weight: 500
+  justify-content: center
+  min-width: $tabs-item-min-width
+  max-width: $tabs-item-man-width
+  outline: none
+  padding: $tabs-item-padding
+  position: relative
+  text-decoration: none
+  text-transform: uppercase
+  transition: none
+  user-select: none
+
+  &:before
+    background-color: currentColor
+    bottom: 0
+    content: ''
+    left: 0
+    opacity: 0
+    position: absolute
+    right: 0
+    top: 0
+    transition: $primary-transition
+
+  &:hover:before
+    opacity: $tabs-item-hover-opacity
+
+  &:focus:before
+    opacity: $tabs-item-focus-opacity
+
+.v-tabs-slider
+  background-color: currentColor
+  height: $tabs-slider-height
+  width: 100%
+
+  &-wrapper
+    bottom: 0
+    margin: 0 !important
+    position: absolute
+    transition: $primary-transition
+
+// Modifier
+.v-tabs--align-with-title
+  padding-left: $tabs-item-align-with-title-padding
+
+.v-tabs--fixed-tabs,
+.v-tabs--centered
+  .v-tabs-bar__content > *:last-child
+    margin-right: auto
+
+  .v-tabs-bar__content > *:first-child:not(.v-tabs-slider-wrapper)
+    margin-left: auto
+
+  .v-tabs-slider-wrapper + *
+    margin-left: auto
+
+.v-tabs--fixed-tabs
+  .v-tab
+    flex: 1 1 auto
+    width: 100%
+
+.v-tabs--grow
+  .v-tab
+    flex: 1 0 auto
+    max-width: none
+
+.v-tabs--icons-and-text
+  .v-tabs-bar
+    height: $tabs-icons-and-text-bar-height
+
+  .v-tab
+    flex-direction: column-reverse
+
+    > *:first-child
+      margin-bottom: 6px
+
+.v-tabs--overflow
+  .v-tab
+    flex: 1 0 auto
+
+.v-tabs--right
+  .v-tab:first-child,
+  .v-tabs-slider-wrapper + .v-tab
+    margin-left: auto
+
+  .v-tab:last-child
+    margin-right: 0
+
+.v-tabs--vertical
+  display: flex
+
+  .v-tabs-bar
+    height: auto
+
+  .v-tabs-bar__content
+    flex-direction: column
+
+  .v-tab
+    height: $tabs-item-vertical-height
+
+  .v-tabs-slider
+    height: 100%
+
+  .v-window
+    flex: 1 1 auto
+
+  &.v-tabs--icons-and-text
+    .v-tab
+      height: $tabs-item-vertical-icons-and-text-height
+
+.v-tab--active
+  color: inherit
+
+  .v-icon
+    color: inherit
+
+.v-tab--disabled
+  pointer-events: none
+  opacity: .5
+
+  &:before
+    opacity: 0

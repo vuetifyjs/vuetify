@@ -4,7 +4,7 @@
     :items="desserts"
     class="elevation-1"
   >
-    <template slot="items" slot-scope="props">
+    <template v-slot:items="props">
       <td>{{ props.item.name }}</td>
       <td class="text-xs-right">{{ props.item.calories }}</td>
       <td class="text-xs-right">{{ props.item.fat }}</td>
@@ -12,7 +12,7 @@
       <td class="text-xs-right">{{ props.item.protein }}</td>
       <td class="text-xs-right">{{ props.item.iron }}</td>
     </template>
-    <template slot="pageText" slot-scope="props">
+    <template v-slot:pageText="props">
       Lignes {{ props.pageStart }} - {{ props.pageStop }} de {{ props.itemsLength }}
     </template>
   </v-data-table>

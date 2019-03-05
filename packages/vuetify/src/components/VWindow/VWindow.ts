@@ -23,6 +23,10 @@ export default BaseItemGroup.extend({
   directives: { Touch },
 
   props: {
+    activeClass: {
+      type: String,
+      default: 'v-window-item--active'
+    },
     mandatory: {
       type: Boolean,
       default: true
@@ -81,7 +85,7 @@ export default BaseItemGroup.extend({
   },
 
   mounted () {
-    this.$nextTick(() => (this.isBooted = true))
+    window.requestAnimationFrame(() => (this.isBooted = true))
   },
 
   methods: {

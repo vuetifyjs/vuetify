@@ -13,23 +13,26 @@ import {
 describe('VSliderGroup.ts', () => {
   type Instance = ExtractVue<typeof VSlideGroup>
   let mountFunction: (options?: object) => Wrapper<Instance>
+  (global as any).requestAnimationFrame = cb => cb()
 
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return shallowMount(VSlideGroup, {
-        ...options,
+        methods: { setWidths: jest.fn() },
         mocks: {
           $vuetify: {
+            rtl: false,
             breakpoint: {
               width: 1920
             }
           }
-        }
+        },
+        ...options
       })
     }
   })
 
-  it('should conditionally have affixes, prepend and append', () => {
+  it('should conditionally have affixes, prev and next', () => {
     const wrapper = mountFunction({
       data: () => ({
         isOverflowing: true
@@ -40,16 +43,28 @@ describe('VSliderGroup.ts', () => {
     })
 
     expect(wrapper.vm.hasAffixes).toBe(true)
-    expect(wrapper.vm.hasAppend).toBe(false)
-    expect(wrapper.vm.hasPrepend).toBe(false)
+    expect(wrapper.vm.hasNext).toBe(false)
+    expect(wrapper.vm.hasPrev).toBe(false)
 
-    wrapper.setData({ scrollOffset: 100 })
+    wrapper.setData({
+      scrollOffset: 100,
+      widths: {
+        content: 1000,
+        wrapper: 500
+      }
+    })
 
-    expect(wrapper.vm.hasPrepend).toBe(true)
+    expect(wrapper.vm.hasPrev).toBe(true)
 
-    wrapper.setData({ scrollOffset: -100 })
+    wrapper.setData({
+      scrollOffset: -100,
+      widths: {
+        content: 1000,
+        wrapper: 500
+      }
+    })
 
-    expect(wrapper.vm.hasAppend).toBe(true)
+    expect(wrapper.vm.hasNext).toBe(true)
   })
 
   it('should be considered mobile', async () => {
@@ -126,57 +141,58 @@ describe('VSliderGroup.ts', () => {
     expect(fn).toHaveBeenCalled()
   })
 
-  it('it should scroll from affix click', () => {
+  it('it should scroll from affix click', async () => {
     const onClick = jest.fn()
     const scrollTo = jest.fn()
-    const wrapper = mount(VSlideGroup, {
-      data: () => ({
-        isOverflowing: true,
-        scrollOffset: 200,
-        widths: {
-          content: 1920,
-          wrapper: 1000
-        }
-      }),
-      methods: { scrollTo },
+    const setWidths = jest.fn()
+    const wrapper = mountFunction({
+      methods: { scrollTo, setWidths },
       propsData: {
         showArrows: true
       },
       listeners: {
-        'click:prepend': onClick,
-        'click:append': onClick
+        'click:prev': onClick,
+        'click:next': onClick
       }
     })
 
-    const prepend = wrapper.find('.v-slide-group__prepend')
-    const append = wrapper.find('.v-slide-group__append')
+    wrapper.setData({
+      isOverflowing: true,
+      scrollOffset: 200,
+      widths: {
+        content: 1000,
+        wrapper: 500
+      }
+    })
 
-    prepend.trigger('click')
-    append.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    const prev = wrapper.find('.v-slide-group__prev')
+    const next = wrapper.find('.v-slide-group__next')
+
+    prev.trigger('click')
+    next.trigger('click')
     expect(scrollTo).toHaveBeenCalledTimes(2)
     expect(onClick).toHaveBeenCalledTimes(2)
   })
 
   it('should accept scoped slots', () => {
     const wrapper = mount(VSlideGroup, {
-      data: () => ({
-        isOverflowing: true,
-        scrollOffset: 200,
-        widths: {
-          content: 1920,
-          wrapper: 1000
-        }
-      }),
+      computed: {
+        hasAffixes: () => true,
+        hasNext: () => true,
+        hasPrev: () => true
+      },
       propsData: {
         showArrows: true
       },
       scopedSlots: {
-        prepend () {
+        prev () {
           return this.$createElement('div', {
             staticClass: 'fizz'
           }, 'foo')
         },
-        append () {
+        next () {
           return this.$createElement('div', {
             staticClass: 'fizz'
           }, 'bar')
@@ -184,8 +200,37 @@ describe('VSliderGroup.ts', () => {
       }
     })
 
-    const affixes = wrapper.findAll('.fizz')
-    const foo = affixes.at(0)
-    const bar = affixes.at(1)
+    wrapper.setData({ isOverflowing: true })
+
+    expect(wrapper.findAll('.fizz')).toHaveLength(2)
+  })
+
+  it('should match snapshot in rtl', async () => {
+    const wrapper = mountFunction({
+      computed: {
+        hasAffixes: () => true,
+        hasNext: () => true,
+        hasPrev: () => true
+      },
+      propsData: {
+        showArrows: true
+      },
+      mocks: {
+        $vuetify: {
+          rtl: true
+        }
+      }
+    })
+
+    const html1 = wrapper.html()
+
+    expect(html1).toMatchSnapshot()
+
+    wrapper.vm.$vuetify.rtl = false
+
+    const html2 = wrapper.html()
+
+    expect(html1).not.toEqual(html2)
+    expect(html2).toMatchSnapshot()
   })
 })

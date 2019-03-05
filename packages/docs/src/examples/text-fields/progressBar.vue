@@ -8,13 +8,14 @@
       placeholder="Start typing..."
       loading
     >
-      <v-progress-linear
-        v-if="custom"
-        slot="progress"
-        :value="progress"
-        :color="color"
-        height="7"
-      ></v-progress-linear>
+      <template v-slot:progress>
+        <v-progress-linear
+          v-if="custom"
+          :value="progress"
+          :color="color"
+          height="7"
+        ></v-progress-linear>
+      </template>
     </v-text-field>
   </v-container>
 </template>
