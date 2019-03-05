@@ -1,9 +1,14 @@
 <template>
-  <div>
-    <v-toolbar color="cyan" dark tabs>
+  <v-card>
+    <v-toolbar
+      color="cyan"
+      dark
+      flat
+      tabs
+    >
       <v-toolbar-side-icon></v-toolbar-side-icon>
 
-      <v-toolbar-title>Page title</v-toolbar-title>
+      <v-toolbar-title>Your Dashboard</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
@@ -18,7 +23,6 @@
       <template v-slot:extension>
         <v-tabs
           v-model="tab"
-          color="cyan"
           align-with-title
         >
           <v-tabs-slider color="yellow"></v-tabs-slider>
@@ -31,13 +35,16 @@
     </v-toolbar>
 
     <v-tabs-items v-model="tab">
-      <v-tab-item v-for="item in items" :key="item">
+      <v-tab-item
+        v-for="item in items"
+        :key="item"
+      >
         <v-card flat>
-          <v-card-text>{{ text }}</v-card-text>
+          <v-card-text v-text="text"></v-card-text>
         </v-card>
       </v-tab-item>
     </v-tabs-items>
-  </div>
+  </v-card>
 </template>
 
 <script>

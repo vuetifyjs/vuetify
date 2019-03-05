@@ -4,19 +4,30 @@ import Routable from '../../mixins/routable'
 import Themeable from '../../mixins/themeable'
 
 // Utilities
+import { keyCodes } from './../../util/helpers'
 import { getObjectValueByPath } from '../../util/helpers'
+import mixins from '../../util/mixins'
+import { ExtractVue } from './../../util/mixins'
 
-/* @vue/component */
-export default {
+// Types
+import { VNode } from 'vue/types'
+
+const baseMixins = mixins(
+  Routable,
+  // Must be after routable
+  // to overwrite activeClass
+  GroupableFactory('tabsBar'),
+  Themeable
+)
+
+interface options extends ExtractVue<typeof baseMixins> {
+  $el: HTMLElement
+}
+
+export default baseMixins.extend<options>().extend(
+  /* @vue/component */
+).extend({
   name: 'v-tab',
-
-  mixins: [
-    Routable,
-    // Must be after routable
-    // to overwrite activeClass
-    GroupableFactory('tabGroup'),
-    Themeable
-  ],
 
   props: {
     ripple: {
@@ -26,14 +37,14 @@ export default {
   },
 
   computed: {
-    classes () {
+    classes (): object {
       return {
-        'v-tabs__item': true,
-        'v-tabs__item--disabled': this.disabled,
+        'v-tab': true,
+        'v-tab--disabled': this.disabled,
         ...this.groupClasses
       }
     },
-    value () {
+    value (): any {
       let to = this.to || this.href || ''
 
       if (this.$router &&
@@ -61,13 +72,15 @@ export default {
   },
 
   methods: {
-    click (e) {
+    click (e: KeyboardEvent | MouseEvent): void {
       // If user provides an
       // actual link, do not
       // prevent default
       if (this.href &&
         this.href.indexOf('#') > -1
       ) e.preventDefault()
+
+      if (e.detail) this.$el.blur()
 
       this.$emit('click', e)
 
@@ -86,18 +99,25 @@ export default {
     }
   },
 
-  render (h) {
-    const link = this.generateRouteLink(this.classes)
-    const { data } = link
+  render (h): VNode {
+    const { tag, data } = this.generateRouteLink(this.classes)
 
-    // If disabled, use div as anchor tags do not support
-    // being disabled
-    const tag = this.disabled ? 'div' : link.tag
+    data.attrs = {
+      ...data.attrs,
+      'aria-selected': String(this.isActive),
+      role: 'tab',
+      tabindex: 0
+    }
+    data.on = {
+      ...data.on,
+      keydown: (e: KeyboardEvent) => {
+        if (e.keyCode === keyCodes.enter) this.click(e)
 
+        this.$emit('keydown', e)
+      }
+    }
     data.ref = 'link'
 
-    return h('div', {
-      staticClass: 'v-tabs__div'
-    }, [h(tag, data, this.$slots.default)])
+    return h(tag, data, this.$slots.default)
   }
-}
+})

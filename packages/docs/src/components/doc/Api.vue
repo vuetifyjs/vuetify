@@ -5,7 +5,6 @@
       <v-tabs
         v-model="tab"
         :slider-color="computedTabs.length ? 'primary' : 'transparent'"
-        color="grey lighten-3"
       >
         <v-tab
           v-for="(tab, i) in computedTabs"
