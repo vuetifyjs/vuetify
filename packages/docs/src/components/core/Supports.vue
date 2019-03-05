@@ -9,7 +9,7 @@
     <template #activator="{ on: menu }">
       <v-btn
         :aria-label="$t('Vuetify.AppToolbar.support')"
-        flat
+        text
         style="min-width: 48px"
         v-on="menu"
       >
