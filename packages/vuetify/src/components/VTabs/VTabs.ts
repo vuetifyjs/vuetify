@@ -248,10 +248,10 @@ export default baseMixins.extend<options>().extend({
       this.resizeTimeout = window.setTimeout(this.callSlider, 0)
     },
     parseNodes () {
-      let items: VNode | null = null
-      let slider: VNode | null = null
-      const item: VNode[] = []
-      const tab: VNode[] = []
+      let items = null
+      let slider = null
+      const item = []
+      const tab = []
       const slot = this.$slots.default || []
       const length = slot.length
 
