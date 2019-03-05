@@ -34,7 +34,7 @@
   export default {
     data () {
       return {
-        tab: null,
+        tab: null
       }
     }
   }
