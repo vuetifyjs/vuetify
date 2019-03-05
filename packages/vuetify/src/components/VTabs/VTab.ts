@@ -39,8 +39,8 @@ export default baseMixins.extend<options>().extend(
   computed: {
     classes (): object {
       return {
-        'v-tabs__item': true,
-        'v-tabs__item--disabled': this.disabled,
+        'v-tab': true,
+        'v-tab--disabled': this.disabled,
         ...this.groupClasses
       }
     },

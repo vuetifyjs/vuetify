@@ -8,7 +8,7 @@
 .v-tabs__bar.theme--dark
   +tabs-theme($material-dark)
 
-  .v-tabs__item.v-tabs__item--active:not(.v-tabs__item--disabled),
+  .v-tab.v-tab--active:not(.v-tab--disabled),
   .v-tabs__slider-wrapper
     color: map-deep-get($material-dark, 'text', 'primary')
 
@@ -27,7 +27,7 @@
   &.v-item-group > *
     cursor: initial
 
-.v-tabs__item
+.v-tab
   align-items: center
   display: flex
   flex: 0 1 auto
@@ -88,12 +88,12 @@
     margin-left: auto
 
 .v-tabs--fixed-tabs
-  .v-tabs__item
+  .v-tab
     flex: 1 1 auto
     width: 100%
 
 .v-tabs--grow
-  .v-tabs__item
+  .v-tab
     flex: 1 0 auto
     max-width: none
 
@@ -101,22 +101,22 @@
   .v-tabs__bar
     height: $tabs-icons-and-text-bar-height
 
-  .v-tabs__item
+  .v-tab
     flex-direction: column-reverse
 
     > *:first-child
       margin-bottom: 6px
 
 .v-tabs--overflow
-  .v-tabs__item
+  .v-tab
     flex: 1 0 auto
 
 .v-tabs--right
-  .v-tabs__item:first-child,
-  .v-tabs__slider-wrapper + .v-tabs__item
+  .v-tab:first-child,
+  .v-tabs__slider-wrapper + .v-tab
     margin-left: auto
 
-  .v-tabs__item:last-child
+  .v-tab:last-child
     margin-right: 0
 
 .v-tabs--vertical
@@ -128,7 +128,7 @@
   .v-tabs__bar__content
     flex-direction: column
 
-  .v-tabs__item
+  .v-tab
     height: $tabs-item-vertical-height
 
   .v-tabs__slider
@@ -138,16 +138,16 @@
     flex: 1 1 auto
 
   &.v-tabs--icons-and-text
-    .v-tabs__item
+    .v-tab
       height: $tabs-item-vertical-icons-and-text-height
 
-.v-tabs__item--active
+.v-tab--active
   color: inherit
 
   .v-icon
     color: inherit
 
-.v-tabs__item--disabled
+.v-tab--disabled
   pointer-events: none
   opacity: .5
 

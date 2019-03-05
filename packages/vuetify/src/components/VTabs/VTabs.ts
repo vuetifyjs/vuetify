@@ -42,7 +42,7 @@ export default baseMixins.extend<options>().extend({
   props: {
     activeClass: {
       type: String,
-      default: 'v-tabs__item--active'
+      default: 'v-tab--active'
     },
     alignWithTitle: Boolean,
     backgroundColor: String,
