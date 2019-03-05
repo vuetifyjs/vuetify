@@ -19,6 +19,17 @@
   .v-menu__activator
     height: 100%
 
+.v-toolbar
+  > .v-toolbar__content,
+  > .v-toolbar__extension
+    > .v-tabs
+      margin-left: -#{map-get($grid-gutters, 'xl')}
+      margin-right: -#{map-get($grid-gutters, 'xl')}
+
+      @media #{map-get($display-breakpoints, 'sm-and-down')}
+        margin-left: -#{map-get($grid-gutters, 'lg')}
+        margin-right: -#{map-get($grid-gutters, 'lg')}
+
 // Element
 .v-tabs-bar
   border-radius: inherit
