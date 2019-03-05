@@ -11,7 +11,7 @@ import { VData, VDataFooter } from '../VData'
 import VBtn from '../VBtn'
 import VDataIterator from '../VDataIterator'
 import VDataTableHeader from './VDataTableHeader'
-import VDataTableVirtual from './VDataTableVirtual'
+import VVirtualTable from './VVirtualTable'
 import VIcon from '../VIcon'
 import VProgressLinear from '../VProgressLinear'
 import VRow from './VRow'
@@ -20,6 +20,7 @@ import VSimpleCheckbox from '../VCheckbox/VSimpleCheckbox'
 
 // Helpers
 import { deepEqual, getObjectValueByPath, convertToUnit, compareFn } from '../../util/helpers'
+import VSimpleTable from './VSimpleTable'
 
 function getPrefixedScopedSlots (prefix: string, scopedSlots: any) {
   return Object.keys(scopedSlots).filter(k => k.startsWith(prefix)).reduce((obj: any, k: string) => {
@@ -55,7 +56,8 @@ export default VDataIterator.extend({
     dense: Boolean,
     footerProps: Object,
     headerProps: Object,
-    calculateWidths: Boolean
+    calculateWidths: Boolean,
+    fixedHeader: Boolean
   },
 
   data () {
@@ -388,59 +390,44 @@ export default VDataIterator.extend({
 
       return children
     },
-    genTable (props: DataProps): VNode {
-      return this.$createElement('div', {
-        staticClass: 'v-data-table__wrapper',
-        style: {
-          height: convertToUnit(this.height)
-        }
-      }, [
-        this.$createElement('table', [
-          this.genCaption(props),
-          this.genColgroup(props),
-          this.genHeaders(props),
-          this.genBody(props)
-        ])
-      ])
-    },
     genDefaultScopedSlot (props: DataProps): VNode {
-      const classes = {
-        'v-data-table--dense': this.dense,
-        'v-data-table--fixed': !!this.height,
-        'v-data-table--mobile': this.isMobile,
-        ...this.themeClasses
+      const simpleProps = {
+        height: this.height,
+        fixedHeader: this.fixedHeader,
+        dense: this.dense
       }
 
-      // TODO: Do we have to support static? Is there another way?
-      // if (this.static) {
-      //   return this.$createElement('div', ['static'])
-      // }
-
       if (this.virtualRows) {
-        return this.$createElement(VDataTableVirtual, {
-          class: classes,
-          props: {
+        return this.$createElement(VVirtualTable, {
+          props: Object.assign(simpleProps, {
             itemsLength: props.items.length,
-            height: Number(this.height)
-          },
+            height: this.height,
+            rowHeight: this.dense ? 24 : 48,
+            headerHeight: this.dense ? 32 : 48
+            // TODO: expose rest of props from virtual table?
+          }),
           scopedSlots: {
             items: ({ start, stop }) => this.genItems(props.items.slice(start, stop), props)
           }
         }, [
-          this.$createElement('template', { slot: 'caption' }, this.genCaption(props)),
-          this.$createElement('template', { slot: 'header' }, this.genHeaders(props)),
-          this.$createElement('template', { slot: 'footer' }, this.genFooters(props))
+          this.proxySlot('body.before', [this.genCaption(props), this.genHeaders(props)]),
+          this.proxySlot('bottom', this.genFooters(props))
         ])
       }
 
-      return this.$createElement('div', {
-        staticClass: 'v-data-table',
-        class: classes
+      return this.$createElement(VSimpleTable, {
+        props: simpleProps
       }, [
-        this.genSlots('top'),
-        this.genTable(props),
-        this.genFooters(props)
+        this.proxySlot('top', this.genSlots('top')),
+        this.genCaption(props),
+        this.genColgroup(props),
+        this.genHeaders(props),
+        this.genBody(props),
+        this.proxySlot('bottom', this.genFooters(props))
       ])
+    },
+    proxySlot (slot: string, content: VNodeChildren) {
+      return this.$createElement('template', { slot }, content)
     }
   },
 

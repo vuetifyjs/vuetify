@@ -5,10 +5,12 @@ import VDataTableHeader from './VDataTableHeader'
 import VRow from './VRow'
 import VRowGroup from './VRowGroup'
 import VEditDialog from './VEditDialog'
+import VSimpleTable from './VSimpleTable'
+import VVirtualTable from './VVirtualTable'
 
 const VTableOverflow = createSimpleFunctional('v-table__overflow')
 
-export { VDataTable, VEditDialog, VTableOverflow, VRow, VRowGroup, VDataTableHeader }
+export { VDataTable, VEditDialog, VTableOverflow, VRow, VRowGroup, VDataTableHeader, VSimpleTable, VVirtualTable }
 
 export default {
   $_vuetify_subcomponents: {
@@ -17,6 +19,8 @@ export default {
     VRow,
     VRowGroup,
     VEditDialog,
-    VTableOverflow
+    VTableOverflow,
+    VSimpleTable,
+    VVirtualTable
   }
 }

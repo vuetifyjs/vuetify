@@ -1,8 +1,11 @@
-import Vue, { VNode } from 'vue'
-import { convertToUnit } from '../../util/helpers'
+import './VVirtualTable.sass'
 
-export default Vue.extend({
-  name: 'v-data-table-virtual',
+import { VNode } from 'vue'
+import { convertToUnit } from '../../util/helpers'
+import VSimpleTable from './VSimpleTable'
+
+export default VSimpleTable.extend({
+  name: 'v-virtual-table',
 
   props: {
     bufferLength: {
@@ -13,7 +16,6 @@ export default Vue.extend({
       type: Number,
       default: 48
     },
-    height: Number,
     itemsLength: Number,
     rowHeight: {
       type: Number,
@@ -30,8 +32,7 @@ export default Vue.extend({
       return (this.bufferLength * this.rowHeight) / 2
     },
     totalHeight (): number {
-      const headerHeight = this.$slots.header ? this.headerHeight : 0
-      return (this.itemsLength * this.rowHeight) + headerHeight
+      return (this.itemsLength * this.rowHeight) + this.headerHeight
     },
     startIndex (): number {
       return Math.max(0, Math.ceil((this.scrollTop - this.bufferHeight) / this.rowHeight))
@@ -40,10 +41,10 @@ export default Vue.extend({
       return Math.max(0, this.startIndex * this.rowHeight)
     },
     visibleRows (): number {
-      return Math.ceil(Number(this.height) / this.rowHeight) + this.bufferLength
+      return Math.ceil(parseInt(this.height, 10) / this.rowHeight) + this.bufferLength
     },
     stopIndex (): number {
-      return this.startIndex + this.visibleRows
+      return Math.min(this.startIndex + this.visibleRows, this.itemsLength)
     },
     offsetBottom (): number {
       return Math.max(0, ((this.itemsLength - this.visibleRows) * this.rowHeight) - this.offsetTop)
@@ -71,7 +72,10 @@ export default Vue.extend({
     genScroller () {
       return this.$createElement('div', {
         ref: 'scroller',
-        staticClass: 'v-data-table-virtual__scroller',
+        staticClass: 'v-virtual-table__scroller',
+        style: {
+          top: `${this.scrollTop}px`
+        },
         on: {
           scroll: (e: Event) => {
             const target = e.target as Element
@@ -94,7 +98,10 @@ export default Vue.extend({
     genWrapper () {
       return this.$createElement('div', {
         ref: 'wrapper',
-        staticClass: 'v-data-table-virtual__wrapper',
+        staticClass: 'v-virtual-table__wrapper',
+        style: {
+          height: convertToUnit(this.height)
+        },
         on: {
           mousewheel: (e: WheelEvent) => {
             const scroller = this.$refs.scroller as Element
@@ -103,24 +110,24 @@ export default Vue.extend({
         }
       }, [
         this.$createElement('table', [
-          this.$slots.caption,
-          this.$slots.header,
-          this.genBody()
-        ])
+          this.$slots['body.before'],
+          this.genBody(),
+          this.$slots['body.after']
+        ]),
+        this.genScroller()
       ])
     }
   },
 
   render (h): VNode {
     return h('div', {
-      staticClass: 'v-data-table v-data-table-virtual',
-      style: {
-        height: convertToUnit(this.height)
-      }
+      staticClass: 'v-data-table v-virtual-table',
+      class: this.classes
     }, [
+      this.$slots.top,
       this.genWrapper(),
-      this.genScroller(),
-      this.$slots.footer
+      // this.genScroller(),
+      this.$slots.bottom
     ])
   }
 })

@@ -1,5 +1,5 @@
 // Types
-import Vue, { VNode } from 'vue'
+import Vue, { VNode, VNodeChildren } from 'vue'
 import { PropValidator } from 'vue/types/options'
 import { TableHeader } from './mixins/header'
 
@@ -21,7 +21,7 @@ export default Vue.extend({
   render (h, { props, slots, data }): VNode {
     const computedSlots = slots()
 
-    const columns = props.headers.map(header => {
+    const columns: VNode[] = props.headers.map((header: TableHeader) => {
       const classes = {
         [getTextAlignment(header.align, props.rtl)]: true
       }
@@ -50,7 +50,7 @@ export default Vue.extend({
       return h('td', {
         class: classes
       }, children)
-    }) as any
+    })
 
     return h('tr', data, columns)
   }
