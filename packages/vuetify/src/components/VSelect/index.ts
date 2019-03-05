@@ -5,6 +5,7 @@ import VCombobox from '../VCombobox'
 import rebuildSlots from '../../util/rebuildFunctionalSlots'
 import dedupeModelListeners from '../../util/dedupeModelListeners'
 import { deprecate } from '../../util/console'
+import { CreateElement, RenderContext } from 'vue'
 
 /* @vue/component */
 const wrapper = {
@@ -30,7 +31,7 @@ const wrapper = {
     segmented: Boolean
   },
 
-  render (h, { props, data, slots, parent }) { // eslint-disable-line max-statements
+  render (h: CreateElement, { props, data, slots, parent }: RenderContext) { // eslint-disable-line max-statements
     dedupeModelListeners(data)
     const children = rebuildSlots(slots(), h)
 
