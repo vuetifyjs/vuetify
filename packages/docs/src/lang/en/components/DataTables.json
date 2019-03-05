@@ -79,12 +79,10 @@
       "transition": "Mixins.Transitionable.props.transition"
     },
     "v-data-table": {
-      "headerKey": "If using an object, the key value for the header",
-      "headerText": "If using an object, the text value for the header",
       "headers": "An array of objects that each describe a header column. See the example below for a definition of all properties.",
       "headersLength": "Can be used in combination with `hide-headers` to specify the number of columns in the table to allow expansion rows and loading bar to function properly",
-      "hideHeaders": "Hide the table headers",
-      "hideActions": "Hide the table actions. This will also remove pagination. pagination can be reactivated using the `pagination.sync` prop",
+      "hideDefaultHeader": "Hide the default table headers",
+      "hideDefaultFooter": "Hide the default table footer",
       "sortIcon": "Use a custom sort icon, uses the same syntax as `v-icon`",
       "nextIcon": "Mixins.DataIterable.props.nextIcon",
       "prevIcon": "Mixins.DataIterable.props.prevIcon",
@@ -93,8 +91,20 @@
   },
   "scopedSlots": {
     "v-data-table": {
-      "headerCell": "Slot to customize header cells",
-      "headers": "Slot to customize entire header"
+      "item": "Slot to replace the default rendering of a row",
+      "item.dataTableSelect": "Slot to replace the default `v-checkbox` used when selecting rows",
+      "item.dataTableExpand": "Slot to replace the default `v-icon` used when expanding rows",
+      "item.expanded": "Slot to customize expanded rows",
+      "body": "Slot to replaces the default table `<tbody>`",
+      "body.append": "Appends elements to the end of the default table `<tbody>`",
+      "body.prepend": "Prepends elements to the end of the default table `<tbody>`",
+      "footer": "Slot to add a custom footer",
+      "header": "Slot to add a custom header",
+      "top": "Slot to add content above the table",
+      "progress": "Slot to replace the default `<v-progress-linear>` component",
+      "group": "Slot to replace the default rendering of grouped rows",
+      "group.header": "Slot to customize the default rendering of group headers",
+      "group.summary": "Slot to customize the default rendering of group summaries",
     }
   },
   "slots": {

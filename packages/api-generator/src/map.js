@@ -105,17 +105,6 @@ const sharedGridProps = [
 
 const dataIterableProps = [
   {
-    name: 'pagination',
-    sync: true,
-    example: {
-      descending: 'boolean',
-      page: 'number',
-      rowsPerPage: 'number // -1 for All',
-      sortBy: 'string',
-      totalItems: 'number'
-    }
-  },
-  {
     name: 'filter',
     default: '(val: object, search: string): boolean'
   },
@@ -129,46 +118,126 @@ const dataIterableProps = [
   }
 ]
 
-const dataIterableEvents = [
-  {
-    name: 'update:pagination',
-    value: 'object',
-    source: 'data-iterable'
-  },
-  {
-    name: 'input',
-    value: 'object[]'
-  }
+const dataOptions = {
+  page: 'number',
+  itemsPerPage: 'number',
+  sortBy: 'string[]',
+  sortDesc: 'boolean[]',
+  groupBy: 'string[]',
+  groupDesc: 'boolean[]',
+  multiSort: 'boolean',
+  mustSort: 'boolean'
+}
+
+const dataPagination = {
+  page: 'number',
+  itemsPerPage: 'number',
+  pageStart: 'number',
+  pageStop: 'number',
+  pageCount: 'number',
+  itemsLength: 'number'
+}
+
+const dataProps = {
+  items: 'any[]',
+  pagination: dataPagination,
+  options: dataOptions,
+  updateOptions: '(obj: any): void',
+  sort: '(value: string): void',
+  group: '(value: string): void',
+  groupedItems: 'Record<string, any[]>'
+}
+
+const dataEvents = [
+  { name: 'current-items', source: 'v-data', value: 'any[]' },
+  { name: 'page-count', source: 'v-data', value: 'number' },
+  { name: 'pagination', source: 'v-data', value: dataPagination },
+  { name: 'update:options', source: 'v-data', value: dataOptions },
+  { name: 'update:page', source: 'v-data', value: 'number' },
+  { name: 'update:items-per-page', source: 'v-data', value: 'number' },
+  { name: 'update:sort-by', source: 'v-data', value: 'string | string[]' },
+  { name: 'update:sort-desc', source: 'v-data', value: 'boolean | boolean[]' },
+  { name: 'update:group-by', source: 'v-data', value: 'string | string[]' },
+  { name: 'update:group-desc', source: 'v-data', value: 'boolean | boolean[]' },
+  { name: 'update:multi-sort', source: 'v-data', value: 'boolean' },
+  { name: 'update:must-sort', source: 'v-data', value: 'boolean' }
 ]
 
-const dataIterableSlots = [
-  { name: 'actions-append', source: 'data-iterable' },
-  { name: 'actions-prepend', source: 'data-iterable' },
-  { name: 'footer', source: 'data-iterable' },
-  { name: 'noData', source: 'data-iterable' },
-  { name: 'noResults', source: 'data-iterable' }
+const dataIteratorEvents = [
+  { name: 'input', source: 'v-data', value: 'any[]' },
+  { name: 'update:expanded', source: 'v-data', value: 'any[]' },
+  { name: 'item-selected', source: 'v-data', value: '{ item: any, value: boolean }' },
+  { name: 'item-expanded', source: 'v-data', value: '{ item: any, value: boolean }' }
+].concat(dataEvents)
+
+const dataTableEvents = [].concat(dataIteratorEvents)
+
+const dataIteratorSlots = [
+  { name: 'loading', source: 'data-iterator' },
+  { name: 'no-data', source: 'data-iterator' },
+  { name: 'no-results', source: 'data-iterator' },
 ]
 
-const dataIterableScopedSlots = [
+const dataIteratorScopedSlots = [
   {
     name: 'item',
-    props: {
-      item: 'object',
-      index: 'number',
-      selected: 'boolean',
-      expanded: 'boolean'
-    },
-    source: 'data-iterable'
+    props: dataProps,
+    source: 'data-iterator'
   },
   {
-    name: 'pageText',
-    props: {
-      pageStart: 'number',
-      pageStop: 'number',
-      itemsLength: 'number'
-    },
-    source: 'data-iterable'
+    name: 'prepend',
+    props: dataProps,
+    source: 'data-iterator'
+  },
+  {
+    name: 'append',
+    props: dataProps,
+    source: 'data-iterator'
   }
+]
+
+const tableHeader = {
+  text: 'string',
+  value: 'string',
+  'align?': '\'start\' | \'center\' | \'end\'',
+  'sortable?': 'boolean',
+  'resizable?': 'boolean',
+  'divider?': 'boolean',
+  'class?': 'string | string[]',
+  'width?': 'string | number',
+  'filter?': '(value: any, search: string, item: any): boolean',
+  'sort?': '(a: any, b: any): number'
+}
+
+const dataTableHeaderScopedProps = {
+  props: {
+    options: dataOptions,
+    pagination: dataPagination
+    // TOOD: Also the rest of v-data-footer props
+  },
+  on: {
+    'update:options': '(value: any) => void'
+  },
+  widths: 'number[]',
+  headers: 'TableHeader[]' // TODO: expand this?
+}
+
+const dataTableSlots = [
+  { name: 'body.append', source: 'v-data-table', props: dataProps },
+  { name: 'body.prepend', source: 'v-data-table', props: dataProps },
+  { name: 'body', source: 'v-data-table', props: dataProps },
+  { name: 'footer', source: 'v-data-table', props: dataProps },
+  { name: 'header', source: 'v-data-table', props: dataTableHeaderScopedProps },
+  { name: 'top', source: 'v-data-table', props: dataProps },
+  { name: 'progress', source: 'v-data-table', props: dataProps },
+  { name: 'group', source: 'v-data-table', props: dataProps },
+  { name: 'group.header', source: 'v-data-table', props: dataProps },
+  { name: 'group.summary', source: 'v-data-table', props: dataProps },
+  { name: 'item', source: 'v-data-table', props: dataProps },
+  { name: 'item.dataTableSelect', source: 'v-data-table', props: dataProps },
+  { name: 'item.dataTableExpand', source: 'v-data-table', props: dataProps },
+  { name: 'item.column.<column>', source: 'v-data-table', props: dataProps },
+  { name: 'item.expanded', source: 'v-data-table', props: dataProps }
 ]
 
 const validatableEvents = [
@@ -757,42 +826,20 @@ module.exports = {
   },
   'v-data-iterator': {
     props: dataIterableProps,
-    slots: dataIterableSlots.concat(['header']),
-    scopedSlots: dataIterableScopedSlots,
-    events: dataIterableEvents
+    slots: dataIteratorSlots,
+    scopedSlots: dataIteratorScopedSlots,
+    events: dataIteratorEvents
   },
   'v-data-table': {
     props: [
       {
         name: 'headers',
-        example: {
-          text: 'string',
-          value: 'string',
-          align: '\'left\' | \'center\' | \'right\'',
-          sortable: 'boolean',
-          class: 'string[] | string',
-          width: 'string'
-        }
+        example: tableHeader
       }
     ].concat(dataIterableProps),
-    slots: dataIterableSlots,
-    scopedSlots: [
-      {
-        name: 'headerCell',
-        props: {
-          header: 'object'
-        }
-      },
-      {
-        name: 'headers',
-        props: {
-          headers: 'object[]',
-          indeterminate: 'boolean',
-          all: 'boolean'
-        }
-      }
-    ].concat(dataIterableScopedSlots),
-    events: dataIterableEvents
+    slots: dataTableSlots,
+    scopedSlots: dataTableSlots,
+    events: dataTableEvents
   },
   'v-date-picker': {
     events: [
