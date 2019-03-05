@@ -1,3 +1,6 @@
+// Helpers
+import { VNode } from 'vue'
+
 // Styles
 import '../../stylus/components/_selection-controls.styl'
 
@@ -9,12 +12,8 @@ import VIcon from '../VIcon'
 import Selectable from '../../mixins/selectable'
 
 /* @vue/component */
-export default {
+export default Selectable.extend({
   name: 'v-checkbox',
-
-  mixins: [
-    Selectable
-  ],
 
   props: {
     indeterminate: Boolean,
@@ -32,18 +31,20 @@ export default {
     }
   },
 
-  data: vm => ({
-    inputIndeterminate: vm.indeterminate
-  }),
+  data: () => ({ inputIndeterminate: false }),
+
+  created () {
+    this.inputIndeterminate = this.indeterminate
+  },
 
   computed: {
-    classes () {
+    classes (): object {
       return {
         'v-input--selection-controls': true,
         'v-input--checkbox': true
       }
     },
-    computedIcon () {
+    computedIcon (): string {
       if (this.inputIndeterminate) {
         return this.indeterminateIcon
       } else if (this.isActive) {
@@ -61,7 +62,7 @@ export default {
   },
 
   methods: {
-    genCheckbox () {
+    genCheckbox (): VNode {
       return this.$createElement('div', {
         staticClass: 'v-input--selection-controls__input'
       }, [
@@ -87,4 +88,4 @@ export default {
       ]
     }
   }
-}
+})
