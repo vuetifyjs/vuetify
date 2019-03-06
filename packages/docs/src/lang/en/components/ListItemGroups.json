@@ -8,6 +8,10 @@
     "selectionControls": {
       "header": "Selection controls",
       "desc": "Using a default scoped slot, you can access an items internal state and toggle it. Since the **active** property is a _boolean_, we use the **true-value** prop on the checkbox to link its state to the `v-list-item`."
+    },
+    "flat": {
+      "header": "De-emphasized selections",
+      "desc": "You can easily disable the default highlighting of selected `v-list-item`s. This creates a lower profile for a user's choices."
     }
   }
 }

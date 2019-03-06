@@ -46,6 +46,7 @@
     "avatar": "Used to set minimum tile height on a single-line list item",
     "dense": "Lowers max height of list tiles",
     "expand": "Will only collapse when explicitly closed",
+    "flat": "Remove the highlighted background on active `v-list-item`s",
     "group": "Assign a route namespace. Accepts a string or regexp for determining active state",
     "noAction": "Removes left padding assigned for action icons from group items",
     "shaped": "Provides an alternative active style for `v-list-item`.",
