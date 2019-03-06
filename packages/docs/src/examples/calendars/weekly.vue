@@ -11,10 +11,7 @@
           type="week"
         >
           <!-- the events at the top (all-day) -->
-          <template
-            slot="dayHeader"
-            slot-scope="{ date }"
-          >
+          <template v-slot:dayHeadere="{ date }">
             <template v-for="event in eventsMap[date]">
               <!-- all day events don't have time -->
               <div
@@ -27,10 +24,7 @@
             </template>
           </template>
           <!-- the events at the bottom (timed) -->
-          <template
-            slot="dayBody"
-            slot-scope="{ date, timeToY, minutesToPixels }"
-          >
+          <template v-slot:dayBody="{ date, timeToY, minutesToPixels }">
             <template v-for="event in eventsMap[date]">
               <!-- timed events -->
               <div

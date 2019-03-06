@@ -3,59 +3,72 @@
   "headerText": "The `v-tabs` component is used for hiding content behind a selectable item. This can also be used as a pseudo-navigation for a page, where the tabs are links and the tab-items are the content.",
   "examples": {
     "usage": {
-      "desc": ""
+      "desc": "The `v-tabs` component is a styled extension of [v-item-group](/components/item-groups). It provides an easy to use interface for organizing groups of content."
     },
     "fixedTabs": {
       "header": "### Fixed tabs",
-      "desc": "The **fixed-tabs** prop sets a higher minimum width and applies a new maximum width to `v-tabs-items`. On desktop screens, the tab items will be centered within the `v-tabs` component and switch to evenly fill on mobile."
+      "desc": "The **fixed-tabs** prop forces `v-tab` to take up all available space up to the maximum width (300px)."
     },
     "right": {
       "header": "### Right aligned tabs",
-      "desc": "The **right** prop aligns the tabs to the right"
+      "desc": "The **right** prop aligns the tabs to the right."
     },
     "content": {
       "header": "### Content",
-      "desc": "Tabs are not the only thing you can put inside the `v-tabs` component. In this example we've also added a toolbar."
+      "desc": "It is common to put `v-tabs` inside the **extension** slot of `v-toolbar`. Using `v-toolbar`'s **tabs** prop auto adjusts its height to 48px to match `v-tabs`."
     },
-    "search": {
+    "dynamicHeight": {
       "header": "### With search",
-      "desc": "Here is another example of additional content inside the `v-tabs` component."
+      "desc": "When changing your `v-tab-item`, the content area will smoothly scale to the new size."
     },
     "iconsAndText": {
       "header": "### Icons and text",
-      "desc": "By using the **icons-and-text** prop you can add icons to each tab item."
+      "desc": "`v-tab`'s can contain icons as well as text. This increases the `v-tabs` height to 72px."
     },
     "desktop": {
       "header": "### Desktop tabs",
-      "desc": ""
+      "desc": "You can represent `v-tab` actions by using single icons. This is useful when it is easy to correlate content to each tab."
     },
     "alignWithTitle": {
       "header": "### Align tabs with toolbar title",
-      "desc": "Make `v-tabs` lined up with the `v-toolbar-title` component (`v-toolbar-side-icon` or `v-btn` must be used in `v-toolbar`). May not work if the tab text is wrapped."
+      "desc": "Make `v-tabs` lined up with the `v-toolbar-title` component (`v-toolbar-side-icon` or `v-btn` must be used in `v-toolbar`)."
     },
     "grow": {
       "header": "### Grow",
-      "desc": "The **grow** prop will make the tab items take up all available space."
+      "desc": "The **grow** prop will make the tab items take up all available space up to a maximum width of 300px."
     },
     "overflowToMenu": {
       "header": "### With menu",
-      "desc": "You can use a menu to hold additional tabs, swapping them out on the fly"
+      "desc": "You can use a menu to hold additional tabs, swapping them out on the fly."
     },
     "pagination": {
       "header": "### Pagination",
-      "desc": "If the tab items overflow their container, pagination controls will appear."
+      "desc": "If the tab items overflow their container, pagination controls will appear on desktop. For mobile devices, arrows will only display with the **show-arrows** prop."
     },
     "icons": {
       "header": "### Custom icons",
       "desc": "**prev-icon** and **next-icon** can be used for applying custom pagination icons."
+    },
+    "dynamic": {
+      "header": "### Dynamic Tabs",
+      "desc": "Tabs can be dynamically added and removed. This allows you to update to any number and the `v-tabs` component will react. In this example when we add a new tab, we automatically change our model to match. As we add more tabs and overflow the container, the selected item will be automatically scrolled into view. Remove all `v-tab`s and the slider will disappear."
+    },
+    "vertical": {
+      "header": "### Vertical Tabs",
+      "desc": "Tabs can be toggled to stack its `v-tab` components vertically."
     }
   },
   "props": {
+    "activeClass": "Mixins.BaseItemGroup.props.activeClass",
     "alignWithTitle": "Make `v-tabs` lined up with the toolbar title",
+    "backgroundColor": "Changes the background color of `v-tabs-bar`.",
     "cycle": "Will reset to first or last tab when swiping left or right if at the end of indexes",
+    "dark": "Mixins.Themeable.props.dark",
     "grow": "Force `v-tab`'s to take up all available space",
     "hideSlider": "Hide's the generated `v-tabs-slider`",
     "iconsAndText": "Will stack icon and text vertically",
+    "light": "Mixins.Themeable.props.light",
+    "optional": "Does not require an active item. Useful when using `v-tab` as a `router-link`",
     "prevIcon": "Left pagination icon",
     "nextIcon": "Right pagination icon",
     "reverseTransition": "Components.Windows.props.reverseTransition",

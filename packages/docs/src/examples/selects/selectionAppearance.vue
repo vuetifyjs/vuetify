@@ -5,10 +5,7 @@
     label="Select Item"
     multiple
   >
-    <template
-      slot="selection"
-      slot-scope="{ item, index }"
-    >
+    <template v-slot:selection="{ item, index }">
       <v-chip v-if="index === 0">
         <span>{{ item }}</span>
       </v-chip>

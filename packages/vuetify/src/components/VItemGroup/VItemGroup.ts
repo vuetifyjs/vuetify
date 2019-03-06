@@ -13,7 +13,7 @@ import { consoleWarn } from '../../util/console'
 // Types
 import { VNode } from 'vue/types'
 
-type GroupableInstance = InstanceType<typeof Groupable> & { value?: any }
+export type GroupableInstance = InstanceType<typeof Groupable> & { to?: any, value?: any }
 
 export const BaseItemGroup = mixins(
   Proxyable,
@@ -51,6 +51,13 @@ export const BaseItemGroup = mixins(
       return {
         ...this.themeClasses
       }
+    },
+    selectedItem (): GroupableInstance | undefined {
+      if (this.multiple) return undefined
+
+      return this.items.find((item, index) => {
+        return this.toggleMethod(this.getValue(item, index))
+      })
     },
     selectedItems (): GroupableInstance[] {
       return this.items.filter((item, index) => {
@@ -97,15 +104,15 @@ export const BaseItemGroup = mixins(
         ? i
         : item.value
     },
-    onClick (item: GroupableInstance, index: number) {
+    onClick (item: GroupableInstance) {
       this.updateInternalValue(
-        this.getValue(item, index)
+        this.getValue(item, this.items.indexOf(item))
       )
     },
     register (item: GroupableInstance) {
       const index = this.items.push(item) - 1
 
-      item.$on('change', () => this.onClick(item, index))
+      item.$on('change', () => this.onClick(item))
 
       // If no value provided and mandatory,
       // assign first registered item
