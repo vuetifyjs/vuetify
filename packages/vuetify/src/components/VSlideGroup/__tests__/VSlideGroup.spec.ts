@@ -2,7 +2,6 @@
 import VSlideGroup from '../VSlideGroup'
 
 // Utilities
-import { resizeWindow } from '../../../../test'
 import { ExtractVue } from '../../../util/mixins'
 import {
   mount,
@@ -75,6 +74,47 @@ describe('VSliderGroup.ts', () => {
     wrapper.vm.$vuetify.breakpoint.width = 700
 
     expect(wrapper.vm.isMobile).toBe(true)
+  })
+
+  it('should compute centered position for active element', async () => {
+    const wrapper = mountFunction()
+
+    wrapper.setData({
+      widths: {
+        content: 1000,
+        wrapper: 500
+      },
+    })
+
+    expect(wrapper.vm.computeCenteredOffset(10, 20)).toBe(0)
+    expect(wrapper.vm.computeCenteredOffset(400, 20)).toBe(160)
+    expect(wrapper.vm.computeCenteredOffset(600, 20)).toBe(360)
+    expect(wrapper.vm.computeCenteredOffset(960, 20)).toBe(500)
+  })
+
+  it('should compute centered position for active element in rtl mode', async () => {
+    const wrapper = mountFunction({
+      mocks: {
+        $vuetify: {
+          breakpoint: {
+            width: 1920
+          },
+          rtl: true
+        }
+      }
+    })
+
+    wrapper.setData({
+      widths: {
+        content: 1000,
+        wrapper: 500
+      },
+    })
+
+    expect(wrapper.vm.computeCenteredOffset(10, 20)).toBe(-500)
+    expect(wrapper.vm.computeCenteredOffset(400, 20)).toBe(-340)
+    expect(wrapper.vm.computeCenteredOffset(600, 20)).toBe(-140)
+    expect(wrapper.vm.computeCenteredOffset(960, 20)).toBe(0)
   })
 
   it('should call on touch methods', async () => {

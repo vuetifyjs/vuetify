@@ -267,7 +267,9 @@ export const BaseSlideGroup = mixins<options &
 
       const { clientWidth, offsetLeft } = this.selectedItem.$el as HTMLElement
 
-      if (!this.centerActive) {
+      if (this.centerActive) {
+        this.scrollOffset = this.computeCenteredOffset(offsetLeft, clientWidth)
+      } else {
         const totalWidth = this.widths.wrapper + this.scrollOffset
         const itemOffset = clientWidth + offsetLeft
         let additionalOffset = clientWidth * 0.3
@@ -282,12 +284,15 @@ export const BaseSlideGroup = mixins<options &
         } else if (totalWidth < itemOffset) {
           this.scrollOffset -= totalWidth - itemOffset - additionalOffset
         }
-      } else if (this.$vuetify.rtl) {
+      }
+    },
+    computeCenteredOffset (offsetLeft: number, clientWidth: number): number {
+      if (this.$vuetify.rtl) {
         const offsetCentered = this.widths.content - offsetLeft - clientWidth / 2 - this.widths.wrapper / 2
-        this.scrollOffset = -Math.min(this.widths.content - this.widths.wrapper, Math.max(0, offsetCentered))
+        return -Math.min(this.widths.content - this.widths.wrapper, Math.max(0, offsetCentered))
       } else {
         const offsetCentered = offsetLeft + clientWidth / 2 - this.widths.wrapper / 2
-        this.scrollOffset = Math.min(this.widths.content - this.widths.wrapper, Math.max(0, offsetCentered))
+        return Math.min(this.widths.content - this.widths.wrapper, Math.max(0, offsetCentered))
       }
     },
     scrollTo /* istanbul ignore next */ (location: 'prev' | 'next') {
