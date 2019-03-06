@@ -1,12 +1,17 @@
 // Styles
 import '../../stylus/components/_forms.styl'
 
+// Components
+import VInput from '../VInput/VInput'
+
 // Mixins
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
 // Helpers
-import { CreateElement, VNode } from 'vue'
+import { VNode } from 'vue'
 
+type ErrorBag = Record<number, boolean>
+type VInputInstance = InstanceType<typeof VInput>
 type Watchers = {
   _uid: number
   valid: () => void
@@ -25,15 +30,16 @@ export default RegistrableProvide('form').extend({
   },
 
   data: () => ({
-    inputs: [] as any[],
+    inputs: [] as VInputInstance[],
     watchers: [] as Watchers[],
-    errorBag: {}
+    errorBag: {} as ErrorBag
   }),
 
   watch: {
     errorBag: {
       handler (val) {
         const errors = Object.values(val).includes(true)
+
         this.$emit('input', !errors)
       },
       deep: true,
@@ -49,7 +55,7 @@ export default RegistrableProvide('form').extend({
         }, { immediate: true })
       }
 
-      const watchers = {
+      const watchers: Watchers = {
         _uid: input._uid,
         valid: () => {},
         shouldValidate: () => {}
@@ -73,14 +79,14 @@ export default RegistrableProvide('form').extend({
     },
     /** @public */
     validate (): boolean {
-      const errors = this.inputs.filter(input => !input.validate(true)).length
-      return !errors
+      return this.inputs.every(input => input.validate(true))
     },
     /** @public */
     reset (): void {
-      for (let i = this.inputs.length; i--;) {
-        this.inputs[i].reset()
-      }
+      this.inputs.forEach(input => input.reset())
+      this.resetErrorBag()
+    },
+    resetErrorBag () {
       if (this.lazyValidation) {
         // Account for timeout in validatable
         setTimeout(() => {
@@ -89,30 +95,24 @@ export default RegistrableProvide('form').extend({
       }
     },
     /** @public */
-    resetValidation (): void {
-      for (let i = this.inputs.length; i--;) {
-        this.inputs[i].resetValidation()
-      }
-      if (this.lazyValidation) {
-        // Account for timeout in validatable
-        setTimeout(() => {
-          this.errorBag = {}
-        }, 0)
-      }
+    resetValidation () {
+      this.inputs.forEach(input => input.resetValidation())
+      this.resetErrorBag()
     },
-    register (input: any) {
-      const unwatch = (this as any).watchInput(input)
+    register (input: VInputInstance) {
       this.inputs.push(input)
-      this.watchers.push(unwatch)
+      this.watchers.push(this.watchInput(input))
     },
-    unregister (input: any) {
+    unregister (input: VInputInstance) {
       const found = this.inputs.find(i => i._uid === input._uid)
 
       if (!found) return
 
       const unwatch = this.watchers.find(i => i._uid === found._uid)
-      unwatch!.valid && unwatch!.valid()
-      unwatch!.shouldValidate && unwatch!.shouldValidate()
+      if (unwatch) {
+        unwatch.valid()
+        unwatch.shouldValidate()
+      }
 
       this.watchers = this.watchers.filter(i => i._uid !== found._uid)
       this.inputs = this.inputs.filter(i => i._uid !== found._uid)
@@ -120,12 +120,13 @@ export default RegistrableProvide('form').extend({
     }
   },
 
-  render (h: CreateElement): VNode {
+  render (h): VNode {
     return h('form', {
       staticClass: 'v-form',
-      attrs: Object.assign({
-        novalidate: true
-      }, this.$attrs),
+      attrs: {
+        novalidate: true,
+        ...this.$attrs
+      },
       on: {
         submit: (e: Event) => this.$emit('submit', e)
       }

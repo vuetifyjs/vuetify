@@ -180,4 +180,21 @@ test('VForm.js', ({ mount }) => {
 
     expect(shouldValidate).toBeCalled()
   })
+
+  it('should reset validation', async () => {
+    const resetErrorBag = jest.fn()
+    const wrapper = mount(VForm, {
+      methods: { resetErrorBag },
+      slots: {
+        default: [VTextField]
+      }
+    })
+
+    const spy = jest.spyOn(wrapper.vm.inputs[0], 'resetValidation')
+
+    wrapper.vm.resetValidation()
+
+    expect(spy).toHaveBeenCalled()
+    expect(resetErrorBag).toHaveBeenCalled()
+  })
 })
