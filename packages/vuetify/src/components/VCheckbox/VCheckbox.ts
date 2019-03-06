@@ -3,18 +3,13 @@ import '../../stylus/components/_selection-controls.styl'
 
 // Components
 import VIcon from '../VIcon'
-// import { VFadeTransition } from '../transitions'
 
 // Mixins
 import Selectable from '../../mixins/selectable'
 
 /* @vue/component */
-export default {
+export default Selectable.extend({
   name: 'v-checkbox',
-
-  mixins: [
-    Selectable
-  ],
 
   props: {
     indeterminate: Boolean,
@@ -32,18 +27,20 @@ export default {
     }
   },
 
-  data: vm => ({
-    inputIndeterminate: vm.indeterminate
-  }),
+  data () {
+    return {
+      inputIndeterminate: this.indeterminate
+    }
+  },
 
   computed: {
-    classes () {
+    classes (): object {
       return {
         'v-input--selection-controls': true,
         'v-input--checkbox': true
       }
     },
-    computedIcon () {
+    computedIcon (): string {
       if (this.inputIndeterminate) {
         return this.indeterminateIcon
       } else if (this.isActive) {
@@ -87,4 +84,4 @@ export default {
       ]
     }
   }
-}
+})
