@@ -39,14 +39,16 @@
             "fixedTabs",
             "right",
             "content",
-            "search",
+            "dynamicHeight",
             "iconsAndText",
             "desktop",
             "alignWithTitle",
             "grow",
             "overflowToMenu",
             "pagination",
-            "icons"
+            "icons",
+            "dynamic",
+            "vertical"
           ]
         }
       ]

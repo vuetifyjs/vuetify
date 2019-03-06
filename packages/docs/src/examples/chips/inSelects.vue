@@ -9,7 +9,7 @@
     prepend-icon="filter_list"
     solo
   >
-    <template slot="selection" slot-scope="{ item, selected, select }">
+    <template v-slot:selection="{ item, selected, select }">
       <v-chip
         :input-value="selected"
         @click="select"

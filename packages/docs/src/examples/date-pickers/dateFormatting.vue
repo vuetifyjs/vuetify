@@ -14,15 +14,17 @@
           max-width="290px"
           min-width="290px"
         >
-          <v-text-field
-            slot="activator"
-            v-model="dateFormatted"
-            label="Date"
-            hint="MM/DD/YYYY format"
-            persistent-hint
-            prepend-icon="event"
-            @blur="date = parseDate(dateFormatted)"
-          ></v-text-field>
+          <template v-slot:activator="{ on }">
+            <v-text-field
+              v-model="dateFormatted"
+              label="Date"
+              hint="MM/DD/YYYY format"
+              persistent-hint
+              prepend-icon="event"
+              @blur="date = parseDate(dateFormatted)"
+              v-on="on"
+            ></v-text-field>
+          </template>
           <v-date-picker v-model="date" no-title @input="menu1 = false"></v-date-picker>
         </v-menu>
         <p>Date in ISO format: <strong>{{ date }}</strong></p>
@@ -40,15 +42,17 @@
           max-width="290px"
           min-width="290px"
         >
-          <v-text-field
-            slot="activator"
-            v-model="computedDateFormatted"
-            label="Date (read only text field)"
-            hint="MM/DD/YYYY format"
-            persistent-hint
-            prepend-icon="event"
-            readonly
-          ></v-text-field>
+          <template v-slot:activator="{ on }">
+            <v-text-field
+              v-model="computedDateFormatted"
+              label="Date (read only text field)"
+              hint="MM/DD/YYYY format"
+              persistent-hint
+              prepend-icon="event"
+              readonly
+              v-on="on"
+            ></v-text-field>
+          </template>
           <v-date-picker v-model="date" no-title @input="menu2 = false"></v-date-picker>
         </v-menu>
         <p>Date in ISO format: <strong>{{ date }}</strong></p>

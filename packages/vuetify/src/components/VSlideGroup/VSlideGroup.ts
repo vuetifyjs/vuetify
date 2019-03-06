@@ -50,7 +50,7 @@ export const BaseSlideGroup = mixins<options &
       type: String,
       default: 'v-slide-item--active'
     },
-    appendIcon: {
+    nextIcon: {
       type: String,
       default: '$vuetify.icons.next'
     },
@@ -59,7 +59,7 @@ export const BaseSlideGroup = mixins<options &
       default: 1264,
       validator: (v: any) => !isNaN(parseInt(v))
     },
-    prependIcon: {
+    prevIcon: {
       type: String,
       default: '$vuetify.icons.prev'
     },
@@ -78,11 +78,11 @@ export const BaseSlideGroup = mixins<options &
   }),
 
   computed: {
-    __cachedAppend (): VNode {
-      return this.genTransition('append')
+    __cachedNext (): VNode {
+      return this.genTransition('next')
     },
-    __cachedPrepend (): VNode {
-      return this.genTransition('prepend')
+    __cachedPrev (): VNode {
+      return this.genTransition('prev')
     },
     classes (): object {
       return BaseItemGroup.options.computed.classes.call(this)
@@ -93,16 +93,16 @@ export const BaseSlideGroup = mixins<options &
         this.isOverflowing
       )
     },
-    hasAppend (): boolean {
+    hasNext (): boolean {
       if (!this.hasAffixes) return false
 
       const { content, wrapper } = this.widths
 
       // Check one scroll ahead to know the width of right-most item
-      return content > this.scrollOffset + wrapper
+      return content > Math.abs(this.scrollOffset) + wrapper
     },
-    hasPrepend (): boolean {
-      return this.hasAffixes && this.scrollOffset > 0
+    hasPrev (): boolean {
+      return this.hasAffixes && this.scrollOffset !== 0
     },
     isMobile (): boolean {
       return this.$vuetify.breakpoint.width < this.mobileBreakPoint
@@ -110,29 +110,33 @@ export const BaseSlideGroup = mixins<options &
   },
 
   watch: {
+    internalValue: 'setWidths',
+    // When overflow changes, the arrows alter
+    // the widths of the content and wrapper
+    // and need to be recalculated
+    isOverflowing: 'setWidths',
     scrollOffset (val) {
       this.$refs.content.style.transform = `translateX(${-val}px)`
-    },
-    widths: 'setOverflow'
+    }
   },
 
   methods: {
-    genAppend (): VNode | null {
-      if (!this.isOverflowing && !this.showArrows) return null
+    genNext (): VNode | null {
+      if (!this.hasAffixes) return null
 
-      const slot = this.$scopedSlots.append
-        ? this.$scopedSlots.append({})
-        : this.$slots.append || this.__cachedAppend
+      const slot = this.$scopedSlots.next
+        ? this.$scopedSlots.next({})
+        : this.$slots.next || this.__cachedNext
 
       return this.$createElement('div', {
-        staticClass: 'v-slide-group__append',
+        staticClass: 'v-slide-group__next',
         class: {
-          'v-slide-group__append--disabled': !this.hasAppend
+          'v-slide-group__next--disabled': !this.hasNext
         },
         on: {
-          click: () => this.onAffixClick('append')
+          click: () => this.onAffixClick('next')
         },
-        key: 'append'
+        key: 'next'
       }, [slot])
     },
     genContent (): VNode {
@@ -141,7 +145,15 @@ export const BaseSlideGroup = mixins<options &
         ref: 'content'
       }, this.$slots.default)
     },
-    genIcon (location: 'prepend' | 'append'): VNode | null {
+    genIcon (location: 'prev' | 'next'): VNode | null {
+      let icon = location
+
+      if (this.$vuetify.rtl && location === 'prev') {
+        icon = 'next'
+      } else if (this.$vuetify.rtl && location === 'next') {
+        icon = 'prev'
+      }
+
       const upperLocation = `${location[0].toUpperCase()}${location.slice(1)}`
       const hasAffix = (this as any)[`has${upperLocation}`]
 
@@ -154,27 +166,27 @@ export const BaseSlideGroup = mixins<options &
         props: {
           disabled: !hasAffix
         }
-      }, (this as any)[`${location}Icon`])
+      }, (this as any)[`${icon}Icon`])
     },
-    genPrepend (): VNode | null {
-      if (!this.isOverflowing && !this.showArrows) return null
+    genPrev (): VNode | null {
+      if (!this.hasAffixes) return null
 
-      const slot = this.$scopedSlots.prepend
-        ? this.$scopedSlots.prepend({})
-        : this.$slots.prepend || this.__cachedPrepend
+      const slot = this.$scopedSlots.prev
+        ? this.$scopedSlots.prev({})
+        : this.$slots.prev || this.__cachedPrev
 
       return this.$createElement('div', {
-        staticClass: 'v-slide-group__prepend',
+        staticClass: 'v-slide-group__prev',
         class: {
-          'v-slide-group__prepend--disabled': !this.hasPrepend
+          'v-slide-group__prev--disabled': !this.hasPrev
         },
         on: {
-          click: () => this.onAffixClick('prepend')
+          click: () => this.onAffixClick('prev')
         },
-        key: 'prepend'
+        key: 'prev'
       }, [slot])
     },
-    genTransition (location: 'prepend' | 'append') {
+    genTransition (location: 'prev' | 'next') {
       return this.$createElement(VFadeTransition, [this.genIcon(location)])
     },
     genWrapper (): VNode {
@@ -191,20 +203,22 @@ export const BaseSlideGroup = mixins<options &
         ref: 'wrapper'
       }, [this.genContent()])
     },
-    newOffset /* istanbul ignore next */ (direction: 'prepend' | 'append') {
+    newOffset /* istanbul ignore next */ (direction: 'prev' | 'next') {
       // Force reflow
       const clientWidth = this.$refs.wrapper.clientWidth
 
-      if (direction === 'prepend') {
+      if (direction === 'prev') {
         return Math.max(this.scrollOffset - clientWidth, 0)
       }
 
-      return Math.min(
+      const min = Math.min(
         this.scrollOffset + clientWidth,
         this.$refs.content.clientWidth - clientWidth
       )
+
+      return this.$vuetify.rtl ? -min : min
     },
-    onAffixClick (location: 'prepend' | 'append') {
+    onAffixClick (location: 'prev' | 'next') {
       this.$emit(`click:${location}`)
       this.scrollTo(location)
     },
@@ -242,19 +256,48 @@ export const BaseSlideGroup = mixins<options &
     overflowCheck (e: TouchEvent, fn: (e: TouchEvent) => void) {
       this.isOverflowing && fn(e)
     },
-    scrollTo /* istanbul ignore next */ (location: 'prepend' | 'append') {
+    scrollIntoView () {
+      /* istanbul ignore next */
+      if (!this.selectedItem) return
+      if (!this.isOverflowing) {
+        (this.scrollOffset = 0)
+        return
+      }
+
+      const totalWidth = this.widths.wrapper + this.scrollOffset
+      const { clientWidth, offsetLeft } = this.selectedItem.$el as HTMLElement
+      const itemOffset = clientWidth + offsetLeft
+      let additionalOffset = clientWidth * 0.3
+
+      if (this.selectedItem === this.items[this.items.length - 1]) {
+        additionalOffset = 0 // don't add an offset if selecting the last tab
+      }
+
+      /* istanbul ignore else */
+      if (offsetLeft < this.scrollOffset) {
+        this.scrollOffset = Math.max(offsetLeft - additionalOffset, 0)
+      } else if (totalWidth < itemOffset) {
+        this.scrollOffset -= totalWidth - itemOffset - additionalOffset
+      }
+    },
+    scrollTo /* istanbul ignore next */ (location: 'prev' | 'next') {
       this.scrollOffset = this.newOffset(location)
     },
     setOverflow () {
       this.isOverflowing = this.widths.wrapper < this.widths.content
     },
     setWidths () {
-      const { content, wrapper } = this.$refs
+      window.requestAnimationFrame(() => {
+        const { content, wrapper } = this.$refs
 
-      this.widths = {
-        content: content ? content.clientWidth : 0,
-        wrapper: wrapper ? wrapper.clientWidth : 0
-      }
+        this.widths = {
+          content: content ? content.clientWidth : 0,
+          wrapper: wrapper ? wrapper.clientWidth : 0
+        }
+
+        this.setOverflow()
+        this.scrollIntoView()
+      })
     }
   },
 
@@ -267,9 +310,9 @@ export const BaseSlideGroup = mixins<options &
         value: this.onResize
       }]
     }, [
-      this.genPrepend(),
+      this.genPrev(),
       this.genWrapper(),
-      this.genAppend()
+      this.genNext()
     ])
   }
 })

@@ -13,18 +13,19 @@ import { convertToUnit } from '../../util/helpers'
 import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
-import Vue, { VNode } from 'vue'
+import { VNode } from 'vue'
 
-type VBaseWindow = InstanceType<typeof VWindow>
-
-interface options extends Vue {
-  $el: HTMLElement
-  windowGroup: VBaseWindow
-}
-
-export default mixins<options & ExtractVue<[typeof Bootable]>>(
+const baseMixins = mixins(
   Bootable,
   GroupableFactory('windowGroup', 'v-window-item', 'v-window')
+)
+
+interface options extends ExtractVue<typeof baseMixins> {
+  $el: HTMLElement
+  windowGroup: InstanceType<typeof VWindow>
+}
+
+export default baseMixins.extend<options>().extend(
   /* @vue/component */
 ).extend({
   name: 'v-window-item',
@@ -57,6 +58,9 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
   },
 
   computed: {
+    classes (): object {
+      return this.groupClasses
+    },
     computedTransition (): string | boolean {
       if (!this.windowGroup.internalReverse) {
         return typeof this.transition !== 'undefined'
@@ -136,6 +140,7 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
   render (h): VNode {
     const div = h('div', {
       staticClass: 'v-window-item',
+      class: this.classes,
       directives: [{
         name: 'show',
         value: this.isActive
