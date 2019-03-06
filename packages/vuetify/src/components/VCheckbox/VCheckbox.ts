@@ -1,12 +1,8 @@
-// Helpers
-import { VNode } from 'vue'
-
 // Styles
 import '../../stylus/components/_selection-controls.styl'
 
 // Components
 import VIcon from '../VIcon'
-// import { VFadeTransition } from '../transitions'
 
 // Mixins
 import Selectable from '../../mixins/selectable'
@@ -62,7 +58,7 @@ export default Selectable.extend({
   },
 
   methods: {
-    genCheckbox (): VNode {
+    genCheckbox () {
       return this.$createElement('div', {
         staticClass: 'v-input--selection-controls__input'
       }, [
