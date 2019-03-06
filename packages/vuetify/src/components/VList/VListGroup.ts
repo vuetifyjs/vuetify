@@ -68,7 +68,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   computed: {
-    groupClasses (): object {
+    classes (): object {
       return {
         'v-list-group--active': this.isActive,
         'v-list-group--disabled': this.disabled,
@@ -135,6 +135,9 @@ export default baseMixins.extend<options>().extend({
     genHeader () {
       return this.$createElement(VListItem, {
         staticClass: 'v-list-group__header',
+        class: {
+          [this.activeClass]: this.isActive
+        },
         directives: [{
           name: 'ripple',
           value: this.ripple
@@ -171,10 +174,7 @@ export default baseMixins.extend<options>().extend({
       if (!icon && !this.$slots.prependIcon) return null
 
       return this.$createElement(VListItemIcon, {
-        staticClass: 'v-list-group__header__prepend-icon',
-        'class': {
-          [this.activeClass]: this.isActive
-        }
+        staticClass: 'v-list-group__header__prepend-icon'
       }, [
         this.$slots.prependIcon || this.genIcon(icon)
       ])
@@ -191,7 +191,7 @@ export default baseMixins.extend<options>().extend({
   render (h): VNode {
     return h('div', {
       staticClass: 'v-list-group',
-      class: this.groupClasses
+      class: this.classes
     }, [
       this.genHeader(),
       h(VExpandTransition, [this.genItems()])
