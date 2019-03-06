@@ -122,10 +122,13 @@ describe('Theme.ts', () => {
       }
     })
 
+    expect(theme.generatedStyles).toMatchSnapshot()
+    expect(themeCache.set).toHaveBeenCalledTimes(1)
+
     theme.applyTheme()
 
-    expect(themeCache.get).toHaveBeenCalledTimes(1)
-    expect(themeCache.set).toHaveBeenCalledTimes(1)
+    expect(themeCache.get).toHaveBeenCalledTimes(2)
+    expect(themeCache.set).toHaveBeenCalledTimes(2)
     expect(theme.generatedStyles).toMatchSnapshot()
   })
 
