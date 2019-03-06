@@ -6,7 +6,6 @@ import Colorable from '../../mixins/colorable'
 import Routable from '../../mixins/routable'
 import { factory as GroupableFactory } from '../../mixins/groupable'
 import Themeable from '../../mixins/themeable'
-import Toggleable from '../../mixins/toggleable'
 
 // Directives
 import Ripple, { RippleOptions } from '../../directives/ripple'
@@ -24,8 +23,7 @@ const baseMixins = mixins(
   Colorable,
   GroupableFactory('listItemGroup'),
   Routable,
-  Themeable,
-  Toggleable
+  Themeable
 )
 
 interface options extends ExtractVue<typeof baseMixins> {
@@ -58,7 +56,8 @@ export default baseMixins.extend<options>().extend({
       default: null
     },
     threeLine: Boolean,
-    twoLine: Boolean
+    twoLine: Boolean,
+    value: { default: null }
   },
 
   data: () => ({
