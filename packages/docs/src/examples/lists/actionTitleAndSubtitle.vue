@@ -1,6 +1,12 @@
 <template>
-  <v-card class="mx-auto" max-width="400">
-    <v-toolbar color="purple" dark>
+  <v-card
+    class="mx-auto"
+    max-width="400"
+  >
+    <v-toolbar
+      color="purple"
+      dark
+    >
       <v-toolbar-side-icon></v-toolbar-side-icon>
 
       <v-toolbar-title>Settings</v-toolbar-title>
@@ -36,42 +42,56 @@
     <v-divider></v-divider>
 
     <v-list
+      flat
       subheader
       three-line
     >
       <v-subheader>General</v-subheader>
-      <v-list-item @click="">
-        <v-list-item-action>
-          <v-checkbox v-model="notifications"></v-checkbox>
-        </v-list-item-action>
 
-        <v-list-item-content @click.prevent="notifications = !notifications">
-          <v-list-item-title>Notifications</v-list-item-title>
-          <v-list-item-subtitle>Notify me about updates to apps or games that I downloaded</v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
+      <v-list-item-group
+        v-model="settings"
+        multiple
+        active-class=""
+      >
+        <v-list-item>
+          <template #default="{ active }">
+            <v-list-item-action>
+              <v-checkbox v-model="active"></v-checkbox>
+            </v-list-item-action>
 
-      <v-list-item @click="">
-        <v-list-item-action>
-          <v-checkbox v-model="sound"></v-checkbox>
-        </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Notifications</v-list-item-title>
+              <v-list-item-subtitle>Notify me about updates to apps or games that I downloaded</v-list-item-subtitle>
+            </v-list-item-content>
+          </template>
+        </v-list-item>
 
-        <v-list-item-content @click.prevent="sound = !sound">
-          <v-list-item-title>Sound</v-list-item-title>
-          <v-list-item-subtitle>Auto-update apps at any time. Data charges may apply</v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
+        <v-list-item>
+          <template #default="{ active }">
+            <v-list-item-action>
+              <v-checkbox v-model="active"></v-checkbox>
+            </v-list-item-action>
 
-      <v-list-item @click="">
-        <v-list-item-action>
-          <v-checkbox v-model="widgets"></v-checkbox>
-        </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Sound</v-list-item-title>
+              <v-list-item-subtitle>Auto-update apps at any time. Data charges may apply</v-list-item-subtitle>
+            </v-list-item-content>
+          </template>
+        </v-list-item>
 
-        <v-list-item-content @click.prevent="widgets = !widgets">
-          <v-list-item-title>Auto-add widgets</v-list-item-title>
-          <v-list-item-subtitle>Automatically add home screen widgets</v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
+        <v-list-item>
+          <template #default="{ active }">
+            <v-list-item-action>
+              <v-checkbox v-model="active"></v-checkbox>
+            </v-list-item-action>
+
+            <v-list-item-content>
+              <v-list-item-title>Auto-add widgets</v-list-item-title>
+              <v-list-item-subtitle>Automatically add home screen widgets when downloads complete</v-list-item-subtitle>
+            </v-list-item-content>
+          </template>
+        </v-list-item>
+      </v-list-item-group>
     </v-list>
   </v-card>
 </template>
@@ -80,9 +100,7 @@
   export default {
     data () {
       return {
-        notifications: false,
-        sound: true,
-        widgets: false
+        settings: []
       }
     }
   }
