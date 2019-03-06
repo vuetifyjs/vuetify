@@ -3,7 +3,7 @@
     <v-tabs
       v-model="tab"
       background-color="deep-purple accent-4"
-      center-active-tab
+      center-active
       dark
     >
       <v-tab>One</v-tab>
