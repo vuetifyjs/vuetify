@@ -9,12 +9,11 @@
   .v-list-group--active:after
     background: map-get($material, 'dividers')
 
-  // .v-list-group--disabled
-  //   .v-list-item
-  //     color: map-deep-get($material, 'text', 'disabled') !important
-
-  //   .v-list-group__header__prepend-icon .v-icon
-  //     color: map-deep-get($material, 'icons', 'inactive') !important
+@mixin list-shaped($size)
+  .v-list-item,
+  .v-list-item:before
+    border-bottom-right-radius: #{$size * 0.6666666666666667}
+    border-top-right-radius: #{$size * 0.6666666666666667}
 
 @mixin list-item-theme($material)
   color: map-deep-get($material, 'text', 'primary')

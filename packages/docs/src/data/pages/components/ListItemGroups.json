@@ -28,7 +28,9 @@
       "children": [
         {
           "type": "examples",
-          "value": []
+          "value": [
+            "selectionControls"
+          ]
         }
       ]
     },

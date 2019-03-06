@@ -14,3 +14,13 @@
 // Block
 .v-list
   padding: 8px 0
+
+// Modifier
+.v-list--shaped
+  +list-shaped($list-item-min-height)
+
+  &.v-list--two-line
+    +list-shaped($list-item-two-line-min-height)
+
+  &.v-list--three-line
+    +list-shaped($list-item-three-line-min-height)

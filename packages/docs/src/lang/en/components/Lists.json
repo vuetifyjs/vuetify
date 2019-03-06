@@ -48,6 +48,7 @@
     "expand": "Will only collapse when explicitly closed",
     "group": "Assign a route namespace. Accepts a string or regexp for determining active state",
     "noAction": "Removes left padding assigned for action icons from group items",
+    "shaped": "Provides an alternative active style for `v-list-item`.",
     "subheader": "Removes top padding. Used when previous sibling is a header",
     "subGroup": "Designate the component as nested list group",
     "threeLine": "Increases list-item height for three lines",
