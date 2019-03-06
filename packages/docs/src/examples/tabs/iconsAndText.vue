@@ -1,10 +1,10 @@
 <template>
   <v-card>
     <v-tabs
+      v-model="tab"
       background-color="deep-purple accent-4"
       centered
       dark
-      v-model="tab"
       icons-and-text
     >
       <v-tabs-slider></v-tabs-slider>

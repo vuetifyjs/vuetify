@@ -9,7 +9,7 @@
     <template #activator="{ on: menu }">
       <v-btn
         class="hidden-md-and-down"
-        flat
+        text
         v-on="menu"
       >
         <span
