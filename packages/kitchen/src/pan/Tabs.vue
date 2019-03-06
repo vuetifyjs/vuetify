@@ -154,7 +154,7 @@
 
       <core-title>Centered active tab</core-title>
       <core-section>
-        <v-tabs center-active-tab>
+        <v-tabs center-active>
           <v-tab
             v-for="i in 30"
             :key="i"

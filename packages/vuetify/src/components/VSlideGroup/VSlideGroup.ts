@@ -50,7 +50,7 @@ export const BaseSlideGroup = mixins<options &
       type: String,
       default: 'v-slide-item--active'
     },
-    centerActiveItem: Boolean,
+    centerActive: Boolean,
     nextIcon: {
       type: String,
       default: '$vuetify.icons.next'
@@ -267,7 +267,7 @@ export const BaseSlideGroup = mixins<options &
 
       const { clientWidth, offsetLeft } = this.selectedItem.$el as HTMLElement
 
-      if (!this.centerActiveItem) {
+      if (!this.centerActive) {
         const totalWidth = this.widths.wrapper + this.scrollOffset
         const itemOffset = clientWidth + offsetLeft
         let additionalOffset = clientWidth * 0.3

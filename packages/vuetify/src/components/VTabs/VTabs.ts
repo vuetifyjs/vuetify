@@ -47,7 +47,7 @@ export default baseMixins.extend<options>().extend({
     alignWithTitle: Boolean,
     backgroundColor: String,
     centered: Boolean,
-    centerActiveTab: Boolean,
+    centerActive: Boolean,
     color: {
       type: String,
       default: 'primary'
@@ -125,7 +125,7 @@ export default baseMixins.extend<options>().extend({
   watch: {
     alignWithTitle: 'callSlider',
     centered: 'callSlider',
-    centerActiveTab: 'callSlider',
+    centerActive: 'callSlider',
     fixedTabs: 'callSlider',
     grow: 'callSlider',
     right: 'callSlider',
@@ -185,7 +185,7 @@ export default baseMixins.extend<options>().extend({
         },
         props: {
           activeClass: this.activeClass,
-          centerActiveItem: this.centerActiveTab,
+          centerActive: this.centerActive,
           dark: this.dark,
           light: this.light,
           mandatory: !this.optional,
