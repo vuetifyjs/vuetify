@@ -162,7 +162,9 @@ export default baseMixins.extend<options>().extend({
           name: 'show',
           value: this.isActive
         }]
-      }, this.showLazyContent(this.$slots.default))
+      }, [
+        this.$createElement('div', this.showLazyContent(this.$slots.default))
+      ])
     },
     genPrependIcon () {
       const icon = this.prependIcon

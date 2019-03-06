@@ -27,6 +27,7 @@ export default mixins(
     dense: Boolean,
     expand: Boolean,
     flat: Boolean,
+    nav: Boolean,
     shaped: Boolean,
     subheader: Boolean,
     threeLine: Boolean,
@@ -42,6 +43,7 @@ export default mixins(
       return {
         'v-list--dense': this.dense,
         'v-list--flat': this.flat,
+        'v-list--nav': this.nav,
         'v-list--shaped': this.shaped,
         'v-list--subheader': this.subheader,
         'v-list--two-line': this.twoLine,
