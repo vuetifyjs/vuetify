@@ -1,7 +1,6 @@
-import { test } from '@/test'
-import { maskText, unmaskText, isMaskDelimiter } from '@/util/mask'
+import { maskText, unmaskText, isMaskDelimiter } from '../mask'
 
-test('mask.js', ({ mount }) => {
+describe('mask.js', () => {
   // Mask
   it('should add delimiter', () => {
     expect(maskText('5', '(#')).toBe('(5')
@@ -89,7 +88,7 @@ test('mask.js', ({ mount }) => {
   })
 
   it('should return null if no input is given', () => {
-    expect(unmaskText(null)).toBe(null)
+    expect(unmaskText(null)).toBeNull()
   })
 
   // isMaskDelimiter

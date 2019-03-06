@@ -1,9 +1,11 @@
-import { test } from '@/test'
-import { colorToInt, intToHex, getContrast, getLuma } from '@/util/colorUtils'
-import * as transformSRGB from '@/util/color/transformSRGB'
-import * as transformCIELAB from '@/util/color/transformCIELAB'
+import { colorToInt, intToHex } from '../colorUtils'
+import * as transformSRGB from '../color/transformSRGB'
+import * as transformCIELAB from '../color/transformCIELAB'
+import toHaveBeenWarnedInit from '../../../test/util/to-have-been-warned'
 
-test('colorToInt', () => {
+describe('colorToInt', () => {
+  toHaveBeenWarnedInit()
+
   it('should convert a hex string to a number', () => {
     expect(colorToInt('#123456')).toBe(0x123456)
     expect(colorToInt('#abc')).toBe(0xaabbcc)
@@ -86,7 +88,7 @@ expect.extend({
   toEqualCloseTo (received, expected, precision = 3) {
     const getType = item => item.constructor.name.toLowerCase()
 
-    function round(obj) {
+    function round (obj) {
       switch (getType(obj)) {
         case 'array':
           return obj.map(round)
@@ -108,5 +110,5 @@ expect.extend({
     expect(round(received)).toEqual(expected)
 
     return { pass: true }
-  },
+  }
 })

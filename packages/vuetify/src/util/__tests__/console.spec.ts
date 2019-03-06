@@ -1,7 +1,9 @@
-import { test } from '@/test'
-import { consoleWarn, consoleError } from '@/util/console'
+import { consoleWarn, consoleError } from '../console'
+import toHaveBeenWarnedInit from '../../../test/util/to-have-been-warned'
 
-test('console.js', () => {
+describe('console', () => {
+  toHaveBeenWarnedInit()
+
   it('should generate a warning', () => {
     consoleWarn('foo')
     expect('[Vuetify] foo').toHaveBeenTipped()
