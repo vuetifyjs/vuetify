@@ -6,7 +6,9 @@
   >
     <v-toolbar-side-icon></v-toolbar-side-icon>
 
-    <v-toolbar-title v-slot:extension class="white--text">Title</v-toolbar-title>
+    <template v-slot:extension>
+      <v-toolbar-title class="white--text">Title</v-toolbar-title>
+    </template>
 
     <v-spacer></v-spacer>
 
