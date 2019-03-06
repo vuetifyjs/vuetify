@@ -83,7 +83,7 @@ describe('VSliderGroup.ts', () => {
       widths: {
         content: 1000,
         wrapper: 500
-      },
+      }
     })
 
     expect(wrapper.vm.computeCenteredOffset(10, 20)).toBe(0)
@@ -108,7 +108,7 @@ describe('VSliderGroup.ts', () => {
       widths: {
         content: 1000,
         wrapper: 500
-      },
+      }
     })
 
     expect(wrapper.vm.computeCenteredOffset(10, 20)).toBe(-500)
