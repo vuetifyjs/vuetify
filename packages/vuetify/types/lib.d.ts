@@ -17,6 +17,7 @@ declare module 'vuetify/lib' {
   const VAutocomplete: Component
   const VAvatar: Component
   const VBadge: Component
+  const VBanner: Component
   const VBottomNav: Component
   const VBottomSheet: Component
   const VBottomSheetTransition: Component
@@ -150,6 +151,7 @@ declare module 'vuetify/lib' {
     VAutocomplete,
     VAvatar,
     VBadge,
+    VBanner,
     VBottomNav,
     VBottomSheet,
     VBottomSheetTransition,
