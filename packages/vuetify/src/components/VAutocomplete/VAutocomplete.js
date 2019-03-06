@@ -83,15 +83,7 @@ export default VSelect.extend({
       return this.getText(this.selectedItem).toString().length
     },
     filteredItems () {
-      if (
-        !this.isSearching ||
-        (
-          this.returnObject &&
-          this.internalSearch === this.getText(this.selectedItem)
-        ) ||
-        this.noFilter ||
-        this.internalSearch == null
-      ) return this.allItems
+      if (!this.isSearching || this.noFilter || this.internalSearch == null) return this.allItems
 
       return this.allItems.filter(item => this.filter(item, this.internalSearch.toString(), this.getText(item).toString()))
     },
@@ -112,7 +104,12 @@ export default VSelect.extend({
       return this.searchIsDirty || this.selectedItems.length > 0
     },
     isSearching () {
-      return this.searchIsDirty
+      if (this.multiple) return this.searchIsDirty
+
+      return (
+        this.searchIsDirty &&
+        this.internalSearch !== this.getText(this.selectedItem)
+      )
     },
     menuCanShow () {
       if (!this.isFocused) return false

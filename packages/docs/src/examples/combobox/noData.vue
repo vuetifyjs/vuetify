@@ -10,7 +10,7 @@
     persistent-hint
     small-chips
   >
-    <template slot="no-data">
+    <template v-slot:no-data>
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title>

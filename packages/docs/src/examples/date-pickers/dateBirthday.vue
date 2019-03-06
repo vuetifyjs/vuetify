@@ -10,13 +10,15 @@
     full-width
     min-width="290px"
   >
-    <v-text-field
-      slot="activator"
-      v-model="date"
-      label="Birthday date"
-      prepend-icon="event"
-      readonly
-    ></v-text-field>
+    <template v-slot:activator="{ on }">
+      <v-text-field
+        v-model="date"
+        label="Birthday date"
+        prepend-icon="event"
+        readonly
+        v-on="on"
+      ></v-text-field>
+    </template>
     <v-date-picker
       ref="picker"
       v-model="date"

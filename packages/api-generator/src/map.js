@@ -151,7 +151,7 @@ const dataIterableSlots = [
 
 const dataIterableScopedSlots = [
   {
-    name: 'items',
+    name: 'item',
     props: {
       item: 'object',
       index: 'number',
