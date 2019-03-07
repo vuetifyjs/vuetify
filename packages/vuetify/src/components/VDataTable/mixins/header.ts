@@ -12,7 +12,6 @@ export interface TableHeader {
   value: string
   align?: 'start' | 'center' | 'end'
   sortable?: boolean
-  resizable?: boolean
   divider?: boolean
   class?: string | string[]
   width?: string | number

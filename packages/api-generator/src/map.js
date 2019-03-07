@@ -201,7 +201,6 @@ const tableHeader = {
   value: 'string',
   'align?': '\'start\' | \'center\' | \'end\'',
   'sortable?': 'boolean',
-  'resizable?': 'boolean',
   'divider?': 'boolean',
   'class?': 'string | string[]',
   'width?': 'string | number',
@@ -216,28 +215,28 @@ const dataTableHeaderScopedProps = {
     // TOOD: Also the rest of v-data-footer props
   },
   on: {
-    'update:options': '(value: any) => void'
+    'update:options': '(value: any): void'
   },
   widths: 'number[]',
   headers: 'TableHeader[]' // TODO: expand this?
 }
 
 const dataTableSlots = [
-  { name: 'body.append', source: 'v-data-table', props: dataProps },
-  { name: 'body.prepend', source: 'v-data-table', props: dataProps },
-  { name: 'body', source: 'v-data-table', props: dataProps },
-  { name: 'footer', source: 'v-data-table', props: dataProps },
-  { name: 'header', source: 'v-data-table', props: dataTableHeaderScopedProps },
-  { name: 'top', source: 'v-data-table', props: dataProps },
-  { name: 'progress', source: 'v-data-table', props: dataProps },
-  { name: 'group', source: 'v-data-table', props: dataProps },
-  { name: 'group.header', source: 'v-data-table', props: dataProps },
-  { name: 'group.summary', source: 'v-data-table', props: dataProps },
-  { name: 'item', source: 'v-data-table', props: dataProps },
-  { name: 'item.dataTableSelect', source: 'v-data-table', props: dataProps },
-  { name: 'item.dataTableExpand', source: 'v-data-table', props: dataProps },
-  { name: 'item.column.<column>', source: 'v-data-table', props: dataProps },
-  { name: 'item.expanded', source: 'v-data-table', props: dataProps }
+  { name: 'body.append', props: dataProps },
+  { name: 'body.prepend', props: dataProps },
+  { name: 'body', props: dataProps },
+  { name: 'footer', props: dataProps },
+  { name: 'header', props: dataTableHeaderScopedProps },
+  { name: 'top', props: dataProps },
+  { name: 'progress', props: dataProps },
+  { name: 'group', props: dataProps },
+  { name: 'group.header', props: dataProps },
+  { name: 'group.summary', props: dataProps },
+  { name: 'item', props: dataProps },
+  { name: 'item.dataTableSelect', props: dataProps },
+  { name: 'item.dataTableExpand', props: dataProps },
+  { name: 'item.column.<column>', props: dataProps },
+  { name: 'item.expanded', props: dataProps }
 ]
 
 const validatableEvents = [
@@ -283,11 +282,11 @@ const VSelect = {
   props: [
     {
       name: 'filter',
-      default: '(item: object, queryText: string, itemText: string) => boolean'
+      default: '(item: object, queryText: string, itemText: string): boolean'
     },
     {
       name: 'valueComparator',
-      default: '(a: any, b: any) => boolean'
+      default: '(a: any, b: any): boolean'
     },
     {
       name: 'menuProps',
@@ -425,7 +424,7 @@ module.exports = {
     functions: [
       {
         name: 'goTo',
-        signature: '(target: string | number | HTMLElement | VueComponent, options?: object) => void'
+        signature: '(target: string | number | HTMLElement | VueComponent, options?: object): void'
       }
     ]
   },
@@ -490,7 +489,7 @@ module.exports = {
       },
       {
         name: 'value',
-        default: '() => {}',
+        default: '(): {}',
         type: 'Function'
       }
     ]

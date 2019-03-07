@@ -3,6 +3,12 @@
 @import './_variables.scss'
 @import './_mixins.sass'
 
+// Theme
+.v-data-table.theme--light
+  +data-table-theme($material-light)
+.v-data-table.theme--dark
+  +data-table-theme($material-dark)
+
 .v-data-table__mobile-row
   display: block
 
@@ -17,32 +23,6 @@
 
   &__cell
     text-align: right
-
-.v-simple-checkbox
-  align-self: center
-  position: relative
-  user-select: none
-  cursor: pointer
-
-  &--disabled
-    cursor: default
-
-.v-row, .v-row-expandable
-  &:not(:last-child)
-    .v-cell
-      border-bottom: 1px solid rgba(0,0,0,.12) // TODO: theme
-
-.v-cell, .v-head
-  word-break: break-word
-  overflow: hidden
-  text-overflow: ellipsis
-
-/** Actions */
-
-
-.v-row-expandable
-  &__wrapper
-    transition: all 0.3s ease-out
 
 .v-data-table__expand
   &-row
@@ -64,12 +44,12 @@
 
 .v-row-group
   &__header, &__summary
-    background: lightgrey
+    background: lightgrey // TOOD: theme
 
     td
       height: 35px
 
-.expand__icon
+.v-data-table__expand-icon
   user-select: none
   cursor: pointer
 

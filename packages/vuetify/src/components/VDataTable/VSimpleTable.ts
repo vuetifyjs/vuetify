@@ -11,8 +11,7 @@ export default mixins(Themeable).extend({
   props: {
     fixedHeader: Boolean,
     height: [Number, String],
-    dense: Boolean,
-    mobile: Boolean
+    dense: Boolean
   },
 
   computed: {
@@ -20,7 +19,6 @@ export default mixins(Themeable).extend({
       return {
         'v-data-table--dense': this.dense,
         'v-data-table--fixed': this.fixedHeader,
-        'v-data-table--mobile': this.mobile,
         ...this.themeClasses
       }
     }

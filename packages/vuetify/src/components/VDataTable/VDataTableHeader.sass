@@ -4,38 +4,29 @@
 @import './_mixins.sass'
 
 // Theme
-
+.v-data-table.theme--light
+  +data-table-header-theme($material-light)
+.v-data-table.theme--dark
+  +data-table-header-theme($material-dark)
 
 // Block
 .v-data-table-header
   th
-    .resize-handle
-      z-index: 10
-      position: absolute
-      right: -4px
-      top: 0
-      height: 100%
-      width: 8px
-      cursor: ew-resize
+    &.sortable
+      pointer-events: auto
+      cursor: pointer
+      outline: 0
 
-      &:hover
-        background: grey
-
-  .sortable
-    pointer-events: auto
-    cursor: pointer
-    outline: 0
-
-    i
-      font-size: 18px
-      display: inline-block
-      opacity: 0
-      transition: .3s map-get($transition, 'swing')
-
-    &:focus,
-    &:hover
       i
-        opacity: .6
+        font-size: 18px
+        display: inline-block
+        opacity: 0
+        transition: .3s map-get($transition, 'swing')
+
+      &:focus,
+      &:hover
+        i
+          opacity: .6
 
     &.active
       transform: none
@@ -53,12 +44,10 @@
   align-items: center
   border: 0px
   border-radius: 50%
-  background-color: lightgrey // TODO: theme
   min-width: 18px
   min-height: 18px
   height: 18px
   width: 18px
-  color: white // TODO: theme
 
 // Modifiers
 .v-data-table-header-mobile

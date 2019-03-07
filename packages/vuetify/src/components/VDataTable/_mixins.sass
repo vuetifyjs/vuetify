@@ -16,20 +16,6 @@
       th
         color: rgba(map-get($material, 'text-color'), map-get($material, 'secondary-text-percent'))
 
-      // This should be part of header component?
-      // &.sortable
-      //   i
-      //     color: rgba(map-get($material, 'fg-color'), map-get($material, 'disabledORhints-text-percent'))
-
-      //   &:hover
-      //     color: rgba(map-get($material, 'fg-color'), map-get($material, 'primary-text-percent'))
-
-      //   &.active
-      //     color: rgba(map-get($material, 'fg-color'), map-get($material, 'primary-text-percent'))
-
-      //     i
-      //       color: rgba(map-get($material, 'fg-color'), map-get($material, 'primary-text-percent'))
-
   tbody
     tr
       &:not(:last-child)
@@ -38,21 +24,41 @@
       &.active
         background: map-deep-get($material, 'table', 'active')
 
-      // This should be part of data-table/expand?
-      // &:hover:not(.datatable__expand-row)
-      //   background: map-deep-get($material, 'table', 'hover')
-
-      // &.expanded
-      //   border-bottom: 0
-
-      //   &.expanded__row
-      //     background: map-deep-get($material, 'table', 'active')
-
-      //   &.expanded__content
-      //     box-shadow: inset 0px 4px 8px -5px rgba(50, 50, 50, 0.75), inset 0px -4px 8px -5px rgba(50, 50, 50, 0.75)
-
-
   // This should be own mixin for footer component
     // .v-table__footer
     //   .v-row
     //     border-top: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+
+@mixin data-table-theme($material)
+  tbody
+    tr
+      &:hover:not(.v-data-table__expand-row)
+        background: map-deep-get($material, 'table', 'hover')
+
+      &.expanded
+        border-bottom: 0
+
+        &.expanded__row
+          background: map-deep-get($material, 'table', 'active')
+
+        &.expanded__content
+          box-shadow: inset 0px 4px 8px -5px rgba(50, 50, 50, 0.75), inset 0px -4px 8px -5px rgba(50, 50, 50, 0.75)
+
+@mixin data-table-header-theme($material)
+  .v-data-table-header
+    th.sortable
+      .v-icon
+        color: rgba(map-get($material, 'fg-color'), map-get($material, 'disabledORhints-text-percent'))
+
+      &:hover
+        color: rgba(map-get($material, 'fg-color'), map-get($material, 'primary-text-percent'))
+
+      &.active
+        color: rgba(map-get($material, 'fg-color'), map-get($material, 'primary-text-percent'))
+
+        .v-icon
+          color: rgba(map-get($material, 'fg-color'), map-get($material, 'primary-text-percent'))
+
+  .v-data-table-header__sort-badge
+    background-color: rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+    color: map-deep-get($material, 'text', 'primary')

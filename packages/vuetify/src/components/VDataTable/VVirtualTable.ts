@@ -126,7 +126,6 @@ export default VSimpleTable.extend({
     }, [
       this.$slots.top,
       this.genWrapper(),
-      // this.genScroller(),
       this.$slots.bottom
     ])
   }

@@ -3,7 +3,7 @@ import './VDataTable.sass'
 // Types
 import { VNode, VNodeChildrenArrayContents, VNodeChildren } from 'vue'
 import { PropValidator } from 'vue/types/options'
-import { DataProps } from '../VData/VData'
+import { DataProps, DataPaginaton, DataOptions } from '../VData/VData'
 import { TableHeader } from './mixins/header'
 
 // Components
@@ -47,8 +47,8 @@ export default VDataIterator.extend({
     showGroupBy: Boolean,
     virtualRows: Boolean,
     mobileBreakpoint: {
-      type: String,
-      default: 'sm'
+      type: Number,
+      default: 600
     },
     height: [Number, String],
     hideDefaultFooter: Boolean,
@@ -79,7 +79,7 @@ export default VDataIterator.extend({
       return headers
     },
     isMobile (): boolean {
-      return !!(this.$vuetify.breakpoint as any)[this.mobileBreakpoint] // TODO: fix typing
+      return this.$vuetify.breakpoint.width < this.mobileBreakpoint
     }
   },
 
@@ -91,9 +91,8 @@ export default VDataIterator.extend({
 
     if (this.calculateWidths) {
       window.addEventListener('resize', this.calcWidths)
+      this.calcWidths()
     }
-
-    this.calcWidths()
   },
 
   beforeDestroy () {
@@ -125,7 +124,6 @@ export default VDataIterator.extend({
     createItemProps (item: any) {
       const props = VDataIterator.options.methods.createItemProps.call(this, item)
 
-      // TODO: Will {}, props mess up .syncing?
       return Object.assign(props, { headers: this.computedHeaders })
     },
     genCaption (props: DataProps) {
@@ -137,8 +135,7 @@ export default VDataIterator.extend({
       return this.$createElement('colgroup', this.computedHeaders.map(header => {
         return this.$createElement('col', {
           class: {
-            'divider': header.divider || header.resizable,
-            'resizable': header.resizable
+            'divider': header.divider
           },
           style: {
             width: header.width
@@ -325,8 +322,8 @@ export default VDataIterator.extend({
           }
         }
 
-        const slot = scopedSlots['dataTableSelect']
-        scopedSlots['dataTableSelect'] = slot ? () => slot(data) : () => this.$createElement(VSimpleCheckbox, {
+        const slot = scopedSlots['column.dataTableSelect']
+        scopedSlots['column.dataTableSelect'] = slot ? () => slot(data) : () => this.$createElement(VSimpleCheckbox, {
           staticClass: 'v-data-table__checkbox',
           ...data
         })
@@ -335,14 +332,22 @@ export default VDataIterator.extend({
       const expanded = this.isExpanded(item)
 
       if (this.showExpand) {
-        scopedSlots['dataTableExpand'] = () => this.$createElement(VIcon, {
-          staticClass: 'expand__icon',
-          class: {
-            'expand__icon--active': expanded
+        const data = {
+          props: {
+            expanded
           },
           on: {
             click: () => this.expand(item, !expanded)
           }
+        }
+
+        const slot = scopedSlots['column.dataTableExpand']
+        scopedSlots['column.dataTableExpand'] = slot ? () => slot(data) : () => this.$createElement(VIcon, {
+          staticClass: 'v-data-table__expand-icon',
+          class: {
+            'v-data-table__expand-icon--active': expanded
+          },
+          ...data
         }, ['$vuetify.icons.expand']) // TODO: prop?
       }
 
@@ -357,8 +362,13 @@ export default VDataIterator.extend({
         scopedSlots
       })
     },
-    genBody (props: DataProps) {
-      if (this.$scopedSlots.body) return this.$scopedSlots.body(props)
+    genBody (props: DataProps): VNode | string | VNodeChildren {
+      if (this.$scopedSlots.body) {
+        return this.$scopedSlots.body!({
+          ...props,
+          headers: this.computedHeaders
+        })
+      }
 
       return this.$createElement('tbody', [
         this.genSlots('body.prepend', props),
@@ -439,17 +449,17 @@ export default VDataIterator.extend({
         customSort: this.customSortWithHeaders
       },
       on: {
-        'update:options': (v: any, old: any) => {
+        'update:options': (v: DataOptions, old: DataOptions) => {
           this.internalGroupBy = v.groupBy || []
           !deepEqual(v, old) && this.$emit('update:options', v)
         },
-        'update:page': (v: any) => this.$emit('update:page', v),
-        'update:items-per-page': (v: any) => this.$emit('update:items-per-page', v),
-        'update:sort-by': (v: any) => this.$emit('update:sort-by', v),
-        'update:sort-desc': (v: any) => this.$emit('update:sort-desc', v),
-        'update:group-by': (v: any) => this.$emit('update:group-by', v),
-        'update:group-desc': (v: any) => this.$emit('update:group-desc', v),
-        'pagination': (v: any, old: any) => !deepEqual(v, old) && this.$emit('pagination', v),
+        'update:page': (v: number) => this.$emit('update:page', v),
+        'update:items-per-page': (v: number) => this.$emit('update:items-per-page', v),
+        'update:sort-by': (v: string | string[]) => this.$emit('update:sort-by', v),
+        'update:sort-desc': (v: boolean | boolean[]) => this.$emit('update:sort-desc', v),
+        'update:group-by': (v: string | string[]) => this.$emit('update:group-by', v),
+        'update:group-desc': (v: boolean | boolean[]) => this.$emit('update:group-desc', v),
+        'pagination': (v: DataPaginaton, old: DataPaginaton) => !deepEqual(v, old) && this.$emit('pagination', v),
         'current-items': (v: any[]) => {
           this.internalCurrentItems = v
           this.$emit('current-items', v)
