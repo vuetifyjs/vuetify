@@ -104,18 +104,18 @@ const sharedGridProps = [
 ]
 
 const dataIterableProps = [
-  {
-    name: 'filter',
-    default: '(val: object, search: string): boolean'
-  },
-  {
-    name: 'customSort',
-    default: '(items: object[], index: number, isDescending: boolean): object[]'
-  },
-  {
-    name: 'customFilter',
-    default: '(items: object[], search: string, filter: Filter): object[]'
-  }
+  // {
+  //   name: 'filter',
+  //   default: '(val: object, search: string): boolean'
+  // },
+  // {
+  //   name: 'customSort',
+  //   default: '(items: object[], index: number, isDescending: boolean): object[]'
+  // },
+  // {
+  //   name: 'customFilter',
+  //   default: '(items: object[], search: string, filter: Filter): object[]'
+  // }
 ]
 
 const dataOptions = {
@@ -138,7 +138,7 @@ const dataPagination = {
   itemsLength: 'number'
 }
 
-const dataProps = {
+const dataScopedProps = {
   items: 'any[]',
   pagination: dataPagination,
   options: dataOptions,
@@ -172,26 +172,48 @@ const dataIteratorEvents = [
 
 const dataTableEvents = [].concat(dataIteratorEvents)
 
+const dataProps = [
+  { name: 'items', source: 'v-data' },
+  { name: 'itemKey', source: 'v-data' },
+  { name: 'options', source: 'v-data' },
+  { name: 'sortBy', source: 'v-data' },
+  { name: 'sortDesc', source: 'v-data' },
+  { name: 'customSort', source: 'v-data' },
+  { name: 'mustSort', source: 'v-data' },
+  { name: 'multiSort', source: 'v-data' },
+  { name: 'page', source: 'v-data' },
+  { name: 'itemsPerPage', source: 'v-data' },
+  { name: 'groupBy', source: 'v-data' },
+  { name: 'groupDesc', source: 'v-data' },
+  { name: 'locale', source: 'v-data' },
+  { name: 'disableSort', source: 'v-data' },
+  { name: 'disablePagination', source: 'v-data' },
+  { name: 'disableFiltering', source: 'v-data' },
+  { name: 'search', source: 'v-data' },
+  { name: 'customFilter', source: 'v-data' },
+  { name: 'serverItemsLength', source: 'v-data' }
+]
+
 const dataIteratorSlots = [
   { name: 'loading', source: 'data-iterator' },
   { name: 'no-data', source: 'data-iterator' },
-  { name: 'no-results', source: 'data-iterator' },
+  { name: 'no-results', source: 'data-iterator' }
 ]
 
 const dataIteratorScopedSlots = [
   {
     name: 'item',
-    props: dataProps,
+    props: dataScopedProps,
     source: 'data-iterator'
   },
   {
     name: 'prepend',
-    props: dataProps,
+    props: dataScopedProps,
     source: 'data-iterator'
   },
   {
     name: 'append',
-    props: dataProps,
+    props: dataScopedProps,
     source: 'data-iterator'
   }
 ]
@@ -222,21 +244,21 @@ const dataTableHeaderScopedProps = {
 }
 
 const dataTableSlots = [
-  { name: 'body.append', props: dataProps },
-  { name: 'body.prepend', props: dataProps },
-  { name: 'body', props: dataProps },
-  { name: 'footer', props: dataProps },
+  { name: 'body.append', props: dataScopedProps },
+  { name: 'body.prepend', props: dataScopedProps },
+  { name: 'body', props: dataScopedProps },
+  { name: 'footer', props: dataScopedProps },
   { name: 'header', props: dataTableHeaderScopedProps },
-  { name: 'top', props: dataProps },
-  { name: 'progress', props: dataProps },
-  { name: 'group', props: dataProps },
-  { name: 'group.header', props: dataProps },
-  { name: 'group.summary', props: dataProps },
-  { name: 'item', props: dataProps },
-  { name: 'item.dataTableSelect', props: dataProps },
-  { name: 'item.dataTableExpand', props: dataProps },
-  { name: 'item.column.<column>', props: dataProps },
-  { name: 'item.expanded', props: dataProps }
+  { name: 'top', props: dataScopedProps },
+  { name: 'progress', props: dataScopedProps },
+  { name: 'group', props: dataScopedProps },
+  { name: 'group.header', props: dataScopedProps },
+  { name: 'group.summary', props: dataScopedProps },
+  { name: 'item', props: dataScopedProps },
+  { name: 'item.dataTableSelect', props: dataScopedProps },
+  { name: 'item.dataTableExpand', props: dataScopedProps },
+  { name: 'item.column.<column>', props: dataScopedProps },
+  { name: 'item.expanded', props: dataScopedProps }
 ]
 
 const validatableEvents = [
@@ -824,7 +846,7 @@ module.exports = {
     ].concat(sharedGridProps)
   },
   'v-data-iterator': {
-    props: dataIterableProps,
+    props: dataIterableProps.concat(dataProps),
     slots: dataIteratorSlots,
     scopedSlots: dataIteratorScopedSlots,
     events: dataIteratorEvents

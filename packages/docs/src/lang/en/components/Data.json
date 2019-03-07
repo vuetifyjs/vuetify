@@ -1,4 +1,28 @@
 {
+  "props": {
+    "items": "",
+    "itemKey": "",
+    "options": "",
+    "sortBy": "",
+    "sortDesc": "",
+    "customSort": "",
+    "mustSort": "",
+    "multiSort": "",
+    "page": "",
+    "itemsPerPage": "",
+    "groupBy": "",
+    "groupDesc": "",
+    "locale": "",
+    "disableSort": "",
+    "disablePagination": "",
+    "disableFiltering": "",
+    "search": "",
+    "customFilter": "",
+    "serverItemsLength": ""
+  },
+  "scopedSlots": {
+    "default": ""
+  },
   "events": {
     "current-items": "The items on the current page",
     "page-count": "The total number of pages",

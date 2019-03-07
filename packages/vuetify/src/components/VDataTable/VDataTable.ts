@@ -51,11 +51,9 @@ export default VDataIterator.extend({
       default: 600
     },
     height: [Number, String],
-    hideDefaultFooter: Boolean,
     hideDefaultHeader: Boolean,
     caption: String,
     dense: Boolean,
-    footerProps: Object,
     headerProps: Object,
     calculateWidths: Boolean,
     fixedHeader: Boolean

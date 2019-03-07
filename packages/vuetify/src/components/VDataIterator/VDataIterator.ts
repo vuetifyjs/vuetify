@@ -2,13 +2,16 @@ import { VNode, VNodeChildren } from 'vue'
 
 // Components
 import { VData } from '../VData'
+import VDataFooter from './VDataFooter'
+
+// Mixins
+import mixins from '../../util/mixins'
+import Themeable from '../../mixins/themeable'
 
 // Helpers
 import { deepEqual, getObjectValueByPath } from '../../util/helpers'
 import { DataProps } from '../VData/VData'
 import { PropValidator } from 'vue/types/options'
-import mixins from '../../util/mixins'
-import Themeable from '../../mixins/themeable'
 
 /* @vue/component */
 export default mixins(Themeable).extend({
@@ -38,7 +41,9 @@ export default mixins(Themeable).extend({
     loadingText: {
       type: String,
       default: '$vuetify.dataIterator.loadingText'
-    }
+    },
+    hideDefaultFooter: Boolean,
+    footerProps: Object
   },
 
   data: () => ({
@@ -171,6 +176,22 @@ export default mixins(Themeable).extend({
 
       return []
     },
+    genFooter (props: DataProps) {
+      if (this.hideDefaultFooter) return null
+
+      const data = {
+        props: {
+          ...this.footerProps,
+          options: props.options,
+          pagination: props.pagination
+        },
+        on: {
+          'update:options': (value: any) => props.updateOptions(value)
+        }
+      }
+
+      return this.$createElement(VDataFooter, data)
+    },
     genSlots (slot: string, props: any = {}): VNodeChildren {
       if (this.$scopedSlots[slot]) return this.$scopedSlots[slot]!(props)
       else if (this.$slots[slot]) return this.$slots[slot]
@@ -180,9 +201,10 @@ export default mixins(Themeable).extend({
       return this.$createElement('div', {
         staticClass: 'v-data-iterator'
       }, [
-        this.genSlots('prepend', props),
+        this.genSlots('header', props),
         this.genItems(props),
-        this.genSlots('append', props)
+        this.genFooter(props),
+        this.genSlots('footer', props)
       ]) as any
     }
   },
