@@ -15,7 +15,6 @@ import Toggleable from '../../mixins/toggleable'
 // Utilities
 import { convertToUnit } from '../../util/helpers'
 import mixins from '../../util/mixins'
-import { deprecate } from '../../util/console'
 
 // Types
 import { VNode } from 'vue'
@@ -29,7 +28,7 @@ export default mixins(
     'clippedRight',
     'computedHeight',
     'invertedScroll',
-    'manualScroll'
+    'value'
   ])
   /* @vue/component */
 ).extend({
@@ -128,6 +127,8 @@ export default mixins(
 
   watch: {
     currentThreshold (val: number) {
+      if (!this.isBooted) return
+
       // If falsey, user has provided an
       // explicit value which should
       // overwrite anything we do
@@ -138,11 +139,12 @@ export default mixins(
         return
       }
 
-      if (val < this.scrollThreshold ||
-        !this.isBooted
-      ) return
+      if (val < this.scrollThreshold) return
 
-      this.isActive = this.isScrollingUp
+      if (this.hideOnScroll) {
+        this.isActive = this.isScrollingUp
+      }
+
       this.savedScroll = this.currentScroll
     },
     invertedScroll (val: boolean) {

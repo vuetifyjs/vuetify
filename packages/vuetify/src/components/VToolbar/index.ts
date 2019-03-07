@@ -42,7 +42,7 @@ const wrapper = Vue.extend({
     tabs: Boolean
   },
 
-  render (h, { props, data, slots }): VNode {
+  render (h, { props, data, slots }): VNode { // eslint-disable-line max-statements
     dedupeModelListeners(data)
     const children = rebuildSlots(slots(), h)
 

@@ -49,7 +49,7 @@ describe('VToolbarSideIcon.ts', () => {
 
     wrapper.trigger('click')
 
-    expect(click).toBeCalled()
+    expect(click).toHaveBeenCalled()
   })
 
   it('should pass through css classes to button component', () => {
