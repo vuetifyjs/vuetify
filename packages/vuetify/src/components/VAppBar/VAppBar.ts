@@ -69,7 +69,12 @@ export default mixins(
         (
           this.invertedScroll ||
           this.elevateOnScroll ||
-          this.hideOnScroll
+          this.hideOnScroll ||
+          this.isBooted ||
+          // If falsey, user has provided an
+          // explicit value which should
+          // overwrite anything we do
+          !this.value
         )
       )
     },
@@ -127,13 +132,6 @@ export default mixins(
 
   watch: {
     currentThreshold (val: number) {
-      if (!this.isBooted) return
-
-      // If falsey, user has provided an
-      // explicit value which should
-      // overwrite anything we do
-      if (!this.value) return
-
       if (this.invertedScroll) {
         this.isActive = this.currentScroll > this.scrollThreshold
         return
@@ -148,9 +146,6 @@ export default mixins(
       this.savedScroll = this.currentScroll
     },
     invertedScroll (val: boolean) {
-      this.isActive = !val
-    },
-    manualScroll (val: boolean) {
       this.isActive = !val
     },
     isScrollingUp () {

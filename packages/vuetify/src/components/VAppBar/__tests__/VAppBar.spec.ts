@@ -153,4 +153,28 @@ describe('AppBar.ts', () => {
     Vue.set(wrapper.vm.$vuetify.application, 'bar', 24)
     expect(wrapper.vm.computedMarginTop).toBe(24)
   })
+
+  it('should set isActive false when created and vertical-scroll', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        invertedScroll: true
+      }
+    })
+
+    expect(wrapper.vm.isActive).toBe(false)
+  })
+
+  it('should hide shadow when using elevate-on-scroll', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        elevateOnScroll: true
+      }
+    })
+
+    expect(wrapper.vm.hideShadow).toBe(true)
+
+    wrapper.setData({ currentScroll: 100 })
+
+    expect(wrapper.vm.hideShadow).toBe(false)
+  })
 })
