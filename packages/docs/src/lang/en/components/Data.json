@@ -1,0 +1,16 @@
+{
+  "events": {
+    "current-items": "The items on the current page",
+    "page-count": "The total number of pages",
+    "pagination": "Information about the current pagination",
+    "update:options": "Information about the current options",
+    "update:page": "The `.sync` event for `page` prop",
+    "update:items-per-page": "The `.sync` event for `items-per-page` prop",
+    "update:sort-by": "The `.sync` event for `sort-by` prop",
+    "update:sort-desc": "The `.sync` event for `sort-desc` prop",
+    "update:group-by": "The `.sync` event for `group-by` prop",
+    "update:group-desc": "The `.sync` event for `group-desc` prop",
+    "update:multi-sort": "The `.sync` event for `multi-sort` prop",
+    "update:must-sort": "The `.sync` event for `must-sort` prop"
+  }
+}
