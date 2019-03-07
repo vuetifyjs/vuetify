@@ -1,23 +1,26 @@
-import { createSimpleFunctional } from '../../util/helpers'
-import rebuildSlots from '../../util/rebuildFunctionalSlots'
-import dedupeModelListeners from '../../util/dedupeModelListeners'
-import { deprecate } from '../../util/console'
-
-import { VNode } from 'vue'
-
+// Components
 import VToolbar from './VToolbar'
 import VToolbarAction from './VToolbarAction'
 import VToolbarSideIcon from './VToolbarSideIcon'
 import VAppBar from '../VAppBar/VAppBar'
 
+// Utilities
+import { createSimpleFunctional } from '../../util/helpers'
+import rebuildSlots from '../../util/rebuildFunctionalSlots'
+import dedupeModelListeners from '../../util/dedupeModelListeners'
+import { deprecate } from '../../util/console'
+
+// Types
+import Vue, { VNode } from 'vue'
+
 const VToolbarTitle = createSimpleFunctional('v-toolbar__title')
 const VToolbarItems = createSimpleFunctional('v-toolbar__items')
 
 /* @vue/component */
-const wrapper = {
+const wrapper = Vue.extend({
   functional: true,
 
-  $_wrapperFor: VAppBar,
+  $_wrapperFor: VToolbar,
 
   props: {
     app: Boolean,
@@ -39,8 +42,7 @@ const wrapper = {
     tabs: Boolean
   },
 
-  /* eslint-disable-next-line */
-  render (h, { props, data, slots, parent }): VNode {
+  render (h, { props, data, slots }): VNode {
     dedupeModelListeners(data)
     const children = rebuildSlots(slots(), h)
 
@@ -108,7 +110,7 @@ const wrapper = {
 
     return h(VToolbar, data, children)
   }
-}
+})
 
 export {
   wrapper as VToolbar,
