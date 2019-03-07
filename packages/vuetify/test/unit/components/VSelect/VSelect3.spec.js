@@ -102,9 +102,9 @@ test('VSelect', ({ mount, compileToFunctions }) => {
         items: ['foo', 'bar']
       },
       slots: {
-        'no-data': [() => ({
+        'no-data': {
           render: h => h('div', 'No Data')
-        })]
+        }
       }
     })
 
