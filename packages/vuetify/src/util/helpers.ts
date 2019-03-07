@@ -443,3 +443,11 @@ export function getSlotType<T extends boolean = false> (vm: Vue, name: string, s
   if (vm.$slots[name]) return 'normal'
   if (vm.$scopedSlots[name]) return 'scoped'
 }
+
+export function debounce (fn: Function, delay: number) {
+  let timeoutId = 0 as any
+  return (...args: any[]) => {
+    clearTimeout(timeoutId)
+    timeoutId = setTimeout(() => fn(...args), delay)
+  }
+}
