@@ -47,6 +47,7 @@ export default mixins(
       type: Number,
       default: 300
     },
+    shrinkOnScroll: Boolean,
     value: {
       type: Boolean,
       default: true
@@ -86,8 +87,33 @@ export default mixins(
         'v-app-bar--elevate-on-scroll': this.elevateOnScroll,
         'v-app-bar--fixed': !this.absolute && (this.app || this.fixed),
         'v-app-bar--hide-shadow': this.hideShadow,
-        'v-app-bar--is-scrolled': this.currentScroll > 0
+        'v-app-bar--is-scrolled': this.currentScroll > 0,
+        'v-app-bar--shrink-on-scroll': this.shrinkOnScroll
       }
+    },
+    computedContentHeight (): number {
+      const height = VToolbar.options.computed.computedContentHeight.call(this)
+
+      if (!this.shrinkOnScroll || !this.prominent) {
+        return height
+      }
+
+      const max = this.dense ? 48 : 56
+
+      return Math.max(max, height - this.currentScroll)
+    },
+    computedFontSize (): number | undefined {
+      if (
+        !this.shrinkOnScroll ||
+        !this.prominent
+      ) return undefined
+
+      const max = this.dense ? 96 : 128
+      const difference = max - this.computedContentHeight
+      const increment = 0.00347
+
+      // 1.5 default rem
+      return Number((1.50 - difference * increment).toFixed(2))
     },
     computedLeft (): number {
       if (!this.app || this.clippedLeft) return 0
@@ -122,6 +148,7 @@ export default mixins(
     styles (): object {
       return {
         ...VToolbar.options.computed.styles.call(this),
+        fontSize: convertToUnit(this.computedFontSize, 'rem'),
         marginTop: convertToUnit(this.computedMarginTop),
         transform: `translateY(${convertToUnit(this.computedTransform)})`,
         left: convertToUnit(this.computedLeft),

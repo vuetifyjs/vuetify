@@ -34,8 +34,10 @@ export default VSheet.extend({
   computed: {
     computedContentHeight (): number {
       if (this.height) return parseInt(this.height)
-      if (this.dense) return 48
+      if (this.prominent && this.dense) return 96
+      if (this.prominent && this.short) return 112
       if (this.prominent) return 128
+      if (this.dense) return 48
       if (this.short || this.$vuetify.breakpoint.smAndDown) return 56
       return 64
     },
