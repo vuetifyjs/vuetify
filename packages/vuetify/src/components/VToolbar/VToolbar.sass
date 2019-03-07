@@ -1,0 +1,57 @@
+@import '../../styles/styles.sass'
+
+// Block
+.v-toolbar
+  transition: .2s map-get($transition, 'fast-out-slow-in') transform, 280ms map-get($transition, 'fast-out-slow-in') box-shadow
+
+  +elevation(4)
+
+// Element
+.v-toolbar__content,
+.v-toolbar__extension
+  padding-bottom: 4px
+  padding-top: 4px
+
+.v-toolbar__content
+  align-items: center
+  display: flex
+  padding-left: 16px
+  padding-right: 16px
+
+.v-toolbar__items
+  height: inherit
+
+  > .v-btn
+    border-radius: 0
+    height: 100% !important
+    max-height: none
+
+.v-toolbar__icon.v-btn
+  height: 48px
+  width: 48px
+
+  &:first-child
+    margin-left: -12px
+
+  &:last-child
+    margin-right: -12px
+
+.v-toolbar__title
+  font-size: 1.25rem
+  padding-left: 20px
+
+// Modifier
+.v-toolbar--absolute
+  top: 0
+  width: 100%
+
+.v-toolbar--absolute
+  position: absolute
+
+.v-toolbar--prominent
+  .v-toolbar__content
+    align-items: flex-start
+
+  .v-toolbar__title
+    align-self: flex-end
+    padding-bottom: 6px

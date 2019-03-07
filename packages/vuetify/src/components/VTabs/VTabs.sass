@@ -23,12 +23,18 @@
   > .v-toolbar__content,
   > .v-toolbar__extension
     > .v-tabs
-      margin-left: -#{map-get($grid-gutters, 'xl')}
-      margin-right: -#{map-get($grid-gutters, 'xl')}
+      height: inherit
+      margin-top: -4px
+      margin-bottom: -4px
 
-      @media #{map-get($display-breakpoints, 'sm-and-down')}
-        margin-left: -#{map-get($grid-gutters, 'lg')}
-        margin-right: -#{map-get($grid-gutters, 'lg')}
+      .v-tabs-bar
+        height: inherit
+
+      &:first-child
+        margin-left: -16px
+
+      &:last-child
+        margin-right: -16px
 
 // Element
 .v-tabs-bar
