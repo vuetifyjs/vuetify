@@ -1,7 +1,7 @@
 <template>
-  <v-toolbar
+  <v-app-bar
     id="app-toolbar"
-    :class="`elevation-${isHome ? 0 : 6}`"
+    :elevate-on-scroll="isHome"
     app
     clipped-left
     clipped-right
@@ -55,7 +55,7 @@
       <core-versions />
       <core-locales />
     </v-toolbar-items>
-  </v-toolbar>
+  </v-app-bar>
 </template>
 
 <script>

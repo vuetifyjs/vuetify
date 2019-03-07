@@ -43,9 +43,6 @@ export default mixins(
     elevateOnScroll: Boolean,
     hideOnScroll: Boolean,
     invertedScroll: Boolean,
-    manualScroll: Boolean,
-    /* @deprecated */
-    scrollOffScreen: Boolean,
     scrollTarget: String,
     scrollThreshold: {
       type: Number,
@@ -71,7 +68,6 @@ export default mixins(
       return (
         typeof window !== 'undefined' &&
         (
-          this.scrollOffScreen ||
           this.invertedScroll ||
           this.elevateOnScroll ||
           this.hideOnScroll
@@ -164,17 +160,7 @@ export default mixins(
   },
 
   created () {
-    if (this.manualScroll) {
-      deprecate('manual-scroll', 'value')
-    }
-
-    if (this.scrollOffScreen) {
-      deprecate('scroll-off-screen', 'hide-on-scroll')
-    }
-
-    if (this.invertedScroll ||
-      this.manualScroll
-    ) this.isActive = false
+    if (this.invertedScroll) this.isActive = false
   },
 
   mounted () {
@@ -195,7 +181,7 @@ export default mixins(
       this.previousScroll = this.currentScroll
     },
     updateApplication (): number {
-      return this.invertedScroll || this.manualScroll
+      return this.invertedScroll
         ? 0
         : this.$el ? this.$el.clientHeight : 0
     }
