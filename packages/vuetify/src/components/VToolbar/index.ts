@@ -3,6 +3,8 @@ import rebuildSlots from '../../util/rebuildFunctionalSlots'
 import dedupeModelListeners from '../../util/dedupeModelListeners'
 import { deprecate } from '../../util/console'
 
+import { VNode } from 'vue'
+
 import VToolbar from './VToolbar'
 import VToolbarAction from './VToolbarAction'
 import VToolbarSideIcon from './VToolbarSideIcon'
@@ -19,6 +21,8 @@ const wrapper = {
 
   props: {
     app: Boolean,
+    /* @deprecated */
+    card: Boolean,
     clippedLeft: Boolean,
     clippedRight: Boolean,
     invertedScroll: Boolean,
@@ -30,10 +34,13 @@ const wrapper = {
     scrollThreshold: {
       type: Number,
       default: 300
-    }
+    },
+    /* @deprecated */
+    tabs: Boolean
   },
 
-  render (h, { props, data, slots, parent }) {
+  /* eslint-disable-next-line */
+  render (h, { props, data, slots, parent }): VNode {
     dedupeModelListeners(data)
     const children = rebuildSlots(slots(), h)
 
@@ -79,6 +86,11 @@ const wrapper = {
     if (props.scrollThreshold) {
       deprecate('<v-toolbar scroll-threshold>', '<v-app-bar scroll-threshold>')
       data.attrs.scrollThreshold = props.scrollThreshold
+    }
+
+    if (props.card) {
+      deprecate('<v-toolbar card>', '<v-toolbar flat>')
+      data.attrs.flat = props.card
     }
 
     if (
