@@ -1,19 +1,38 @@
+// Styles
+import './VAppBar.sass'
 
+// Extensions
+import VToolbar from '../VToolbar/VToolbar'
+
+// Directives
+import Scroll from '../../directives/scroll'
 
 // Mixins
 import Applicationable from '../../mixins/applicationable'
 import SSRBootable from '../../mixins/ssr-bootable'
 import Toggleable from '../../mixins/toggleable'
 
-SSRBootable,
-Applicationable('top', [
-  'clippedLeft',
-  'clippedRight',
-  'computedHeight',
-  'invertedScroll',
-  'manualScroll'
-]),
-export default {
+// Utilities
+import { convertToUnit } from '../../util/helpers'
+import mixins from '../../util/mixins'
+import { deprecate } from '../../util/console'
+
+// Types
+import { VNode } from 'vue'
+
+export default mixins(
+  VToolbar,
+  SSRBootable,
+  Toggleable,
+  Applicationable('top', [
+    'clippedLeft',
+    'clippedRight',
+    'computedHeight',
+    'invertedScroll',
+    'manualScroll'
+  ])
+  /* @vue/component */
+).extend({
   name: 'v-app-bar',
 
   directives: { Scroll },
@@ -21,37 +40,26 @@ export default {
   props: {
     clippedLeft: Boolean,
     clippedRight: Boolean,
-    dense: Boolean,
-    extended: Boolean,
-    extensionHeight: {
-      type: [Number, String],
-      validator: (v: any) => !isNaN(parseInt(v))
-    },
-    flat: Boolean,
-    floating: Boolean,
+    elevateOnScroll: Boolean,
+    hideOnScroll: Boolean,
     invertedScroll: Boolean,
     manualScroll: Boolean,
-    prominent: Boolean,
+    /* @deprecated */
     scrollOffScreen: Boolean,
     scrollTarget: String,
     scrollThreshold: {
       type: Number,
       default: 300
     },
-    short: Boolean,
-    tile: {
-      type: Boolean,
-      default: true
-    },
     value: {
       type: Boolean,
       default: true
     }
   },
+
   data: () => ({
     activeTimeout: null,
     currentScroll: 0,
-    isExtended: false,
     isScrollingUp: false,
     previousScroll: 0,
     savedScroll: 0,
@@ -62,32 +70,34 @@ export default {
     canScroll (): boolean {
       return (
         typeof window !== 'undefined' &&
-        (this.scrollOffScreen || this.invertedScroll)
+        (
+          this.scrollOffScreen ||
+          this.invertedScroll ||
+          this.elevateOnScroll ||
+          this.hideOnScroll
+        )
       )
     },
-
     classes (): object {
       return {
-        ...VSheet.options.computed.classes.call(this),
-        'v-toolbar': true,
-        'v-toolbar--absolute': this.absolute,
-        'v-toolbar--clipped': this.clippedLeft || this.clippedRight,
-        'v-toolbar--dense': this.dense,
-        'v-toolbar--extended': this.isExtended,
-        'v-toolbar--fixed': !this.absolute && (this.app || this.fixed),
-        'v-toolbar--floating': this.floating,
-        'v-toolbar--prominent': this.prominent
+        ...VToolbar.options.computed.classes.call(this),
+        'v-app-bar': true,
+        'v-app-bar--clipped': this.clippedLeft || this.clippedRight,
+        'v-app-bar--elevate-on-scroll': this.elevateOnScroll,
+        'v-app-bar--fixed': !this.absolute && (this.app || this.fixed),
+        'v-app-bar--hide-shadow': this.hideShadow,
+        'v-app-bar--is-scrolled': this.currentScroll > 0
       }
-    },
-    computedMarginTop (): number {
-      if (!this.app) return 0
-
-      return this.$vuetify.application.bar
     },
     computedLeft (): number {
       if (!this.app || this.clippedLeft) return 0
 
       return this.$vuetify.application.left
+    },
+    computedMarginTop (): number {
+      if (!this.app) return 0
+
+      return this.$vuetify.application.bar
     },
     computedRight (): number {
       if (!this.app || this.clippedRight) return 0
@@ -95,7 +105,7 @@ export default {
       return this.$vuetify.application.right
     },
     computedTransform (): number {
-      if (!this.canScroll) return 0
+      if (!this.canScroll || this.elevateOnScroll) return 0
 
       return !this.isActive
         ? -this.computedContentHeight
@@ -104,8 +114,14 @@ export default {
     currentThreshold (): number {
       return Math.abs(this.currentScroll - this.savedScroll)
     },
-    styles () {
+    hideShadow (): boolean {
+      if (this.elevateOnScroll) return this.currentScroll === 0
+
+      return this.computedTransform !== 0
+    },
+    styles (): object {
       return {
+        ...VToolbar.options.computed.styles.call(this),
         marginTop: convertToUnit(this.computedMarginTop),
         transform: `translateY(${convertToUnit(this.computedTransform)})`,
         left: convertToUnit(this.computedLeft),
@@ -116,6 +132,11 @@ export default {
 
   watch: {
     currentThreshold (val: number) {
+      // If falsey, user has provided an
+      // explicit value which should
+      // overwrite anything we do
+      if (!this.value) return
+
       if (this.invertedScroll) {
         this.isActive = this.currentScroll > this.scrollThreshold
         return
@@ -128,35 +149,39 @@ export default {
       this.isActive = this.isScrollingUp
       this.savedScroll = this.currentScroll
     },
-    // invertedScroll (val: boolean) {
-    //   this.isActive = !val
-    // },
-    // manualScroll (val: boolean) {
-    //   this.isActive = !val
-    // },
+    invertedScroll (val: boolean) {
+      this.isActive = !val
+    },
+    manualScroll (val: boolean) {
+      this.isActive = !val
+    },
     isScrollingUp () {
       this.savedScroll = this.savedScroll || this.currentScroll
-    }
+    },
     isActive () {
       this.savedScroll = 0
-    },
+    }
   },
 
   created () {
-    // if (this.invertedScroll ||
-    //   this.manualScroll
-    // ) this.isActive = false
+    if (this.manualScroll) {
+      deprecate('manual-scroll', 'value')
+    }
+
+    if (this.scrollOffScreen) {
+      deprecate('scroll-off-screen', 'hide-on-scroll')
+    }
+
+    if (this.invertedScroll ||
+      this.manualScroll
+    ) this.isActive = false
   },
-
-
 
   mounted () {
     if (this.scrollTarget) {
       this.target = document.querySelector(this.scrollTarget)
     }
   },
-
-
 
   methods: {
     onScroll () {
@@ -176,13 +201,17 @@ export default {
     }
   },
 
-  render (h) {
+  render (h): VNode {
+    const render = VToolbar.options.render.call(this, h)
 
-
-    data.directives = [{
+    render.data = render.data || {}
+    render.data.directives = render.data.directives || []
+    render.data.directives.push({
       arg: this.scrollTarget,
       name: 'scroll',
       value: this.onScroll
-    }]
+    })
+
+    return render
   }
-}
+})

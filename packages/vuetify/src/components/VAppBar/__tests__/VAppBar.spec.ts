@@ -1,4 +1,22 @@
 
+// Libraries
+import Vue from 'vue'
+
+// Plugins
+import Router from 'vue-router'
+
+// Components
+import VAppBar from '../VAppBar'
+
+// Utilities
+import {
+  createLocalVue,
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+import { compileToFunctions } from 'vue-template-compiler'
+import { resizeWindow } from '../../../../test'
+
 const scrollWindow = y => {
   global.pageYOffset = y
   global.dispatchEvent(new Event('scroll'))
@@ -6,7 +24,18 @@ const scrollWindow = y => {
   return new Promise(resolve => setTimeout(resolve, 200))
 }
 
-import { resizeWindow } from '../../../../test'
+describe('AppBar.ts', () => {
+  let mountFunction: (options?: object) => Wrapper<Vue>
+
+  beforeEach(() => {
+
+    mountFunction = (options = {}) => {
+      return mount(VAppBar, {
+        ...options
+      })
+    }
+  })
+
   it('should calculate paddings ', () => {
     const wrapper = mount(VToolbar)
 
@@ -173,3 +202,4 @@ import { resizeWindow } from '../../../../test'
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.$vuetify.application.top).toBe(0)
   })
+})
