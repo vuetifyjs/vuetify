@@ -27,8 +27,9 @@ export default mixins(
   Applicationable('top', [
     'clippedLeft',
     'clippedRight',
-    'computedHeight',
     'invertedScroll',
+    'isExtended',
+    'shrinkOnScroll',
     'value'
   ])
   /* @vue/component */
@@ -46,10 +47,7 @@ export default mixins(
     hideOnScroll: Boolean,
     invertedScroll: Boolean,
     scrollTarget: String,
-    scrollThreshold: {
-      type: Number,
-      default: 300
-    },
+    scrollThreshold: [String, Number],
     shrinkOnScroll: Boolean,
     value: {
       type: Boolean,
@@ -98,26 +96,20 @@ export default mixins(
       }
     },
     computedContentHeight (): number {
-      let height = VToolbar.options.computed.computedContentHeight.call(this)
-      if (this.isExtended) height += this.extensionHeight
+      if (!this.isProminent) return VToolbar.options.computed.computedContentHeight.call(this)
 
-      if (!this.shrinkOnScroll || !this.prominent) {
-        return height
-      }
+      const height = this.computedOriginalHeight
 
       const min = this.dense ? 48 : 56
       const max = height
       const difference = max - min
-      const iteration = difference / this.scrollThreshold
+      const iteration = difference / this.computedScrollThreshold
       const offset = this.currentScroll * iteration
 
       return Math.max(min, max - offset)
     },
     computedFontSize (): number | undefined {
-      if (
-        !this.shrinkOnScroll ||
-        !this.prominent
-      ) return undefined
+      if (!this.isProminent) return undefined
 
       const max = this.dense ? 96 : 128
       const difference = max - this.computedContentHeight
@@ -137,7 +129,17 @@ export default mixins(
       return this.$vuetify.application.bar
     },
     computedOpacity (): number {
-      return (this.scrollThreshold - this.currentScroll) / this.scrollThreshold
+      return (this.computedScrollThreshold - this.currentScroll) / this.computedScrollThreshold
+    },
+    computedOriginalHeight (): number {
+      let height = VToolbar.options.computed.computedContentHeight.call(this)
+      if (this.isExtended) height += this.extensionHeight
+      return height
+    },
+    computedScrollThreshold (): number {
+      if (this.scrollThreshold) return Number(this.scrollThreshold)
+
+      return this.computedOriginalHeight - (this.dense ? 48 : 56)
     },
     computedRight (): number {
       if (!this.app || this.clippedRight) return 0
@@ -160,6 +162,12 @@ export default mixins(
       }
 
       return this.currentScroll > 0
+    },
+    isProminent (): boolean {
+      return (
+        VToolbar.options.computed.isProminent.call(this) ||
+        this.shrinkOnScroll
+      )
     },
     hideShadow (): boolean {
       if (this.elevateOnScroll) return this.currentScroll === 0

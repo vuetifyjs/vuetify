@@ -54,9 +54,9 @@ export default VSheet.extend({
     },
     computedContentHeight (): number {
       if (this.height) return parseInt(this.height)
-      if (this.prominent && this.dense) return 96
-      if (this.prominent && this.short) return 112
-      if (this.prominent) return 128
+      if (this.isProminent && this.dense) return 96
+      if (this.isProminent && this.short) return 112
+      if (this.isProminent) return 128
       if (this.dense) return 48
       if (this.short || this.$vuetify.breakpoint.smAndDown) return 56
       return 64
@@ -71,12 +71,15 @@ export default VSheet.extend({
         'v-toolbar--dense': this.dense,
         'v-toolbar--extended': this.isExtended,
         'v-toolbar--floating': this.floating,
-        'v-toolbar--prominent': this.prominent,
+        'v-toolbar--prominent': this.isProminent,
         'elevation-0': this.isFlat
       }
     },
     isCollapsed (): boolean {
       return this.collapse
+    },
+    isProminent (): boolean {
+      return this.prominent
     },
     isFlat (): boolean {
       return this.flat
