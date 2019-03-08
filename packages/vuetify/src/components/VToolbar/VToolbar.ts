@@ -4,9 +4,13 @@ import './VToolbar.sass'
 // Extensions
 import VSheet from '../VSheet/VSheet'
 
+// Components
+import VImg, { srcObject } from '../VImg/VImg'
+
 // Types
 import { VNode } from 'vue'
 import { convertToUnit } from '../../util/helpers'
+import { PropValidator } from 'vue/types/options'
 
 /* @vue/component */
 export default VSheet.extend({
@@ -24,8 +28,16 @@ export default VSheet.extend({
     },
     flat: Boolean,
     floating: Boolean,
+    imgProps: {
+      type: Object,
+      default: () => ({})
+    },
     prominent: Boolean,
     short: Boolean,
+    src: {
+      type: [String, Object],
+      default: ''
+    } as PropValidator<string | srcObject>,
     tile: {
       type: Boolean,
       default: true
@@ -33,6 +45,12 @@ export default VSheet.extend({
   },
 
   computed: {
+    computedHeight (): number {
+      return (
+        this.computedContentHeight +
+        this.extensionHeight
+      )
+    },
     computedContentHeight (): number {
       if (this.height) return parseInt(this.height)
       if (this.prominent && this.dense) return 96
@@ -71,6 +89,15 @@ export default VSheet.extend({
   },
 
   methods: {
+    genBackground (children: VNode[]) {
+      return this.$createElement(VImg, {
+        props: {
+          height: convertToUnit(this.computedHeight),
+          src: this.src,
+          ...this.imgProps
+        }
+      }, children)
+    },
     genContent () {
       return this.$createElement('div', {
         staticClass: 'v-toolbar__content',
@@ -90,7 +117,7 @@ export default VSheet.extend({
   },
 
   render (h): VNode {
-    const children = [this.genContent()]
+    let children = [this.genContent()]
     const data = this.setBackgroundColor(this.color, {
       class: this.classes,
       style: this.styles,
@@ -98,6 +125,7 @@ export default VSheet.extend({
     })
 
     if (this.isExtended) children.push(this.genExtension())
+    if (this.src) children = [this.genBackground(children)]
 
     return h('nav', data, children)
   }
