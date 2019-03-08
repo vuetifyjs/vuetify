@@ -129,6 +129,8 @@ export default mixins(
       return this.$vuetify.application.bar
     },
     computedOpacity (): number {
+      if (!this.fadeImgOnScroll) return 1
+
       return (this.computedScrollThreshold - this.currentScroll) / this.computedScrollThreshold
     },
     computedOriginalHeight (): number {
