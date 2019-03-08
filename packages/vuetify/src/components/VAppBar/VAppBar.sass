@@ -17,10 +17,18 @@
 .v-app-bar.v-app-bar--hide-shadow
   +elevation(0)
 
+.v-app-bar--fade-img-on-scroll
+  .v-toolbar__image .v-image__image
+    transition: .4s opacity map-get($transition, 'fast-out-slow-in')
+
+  &.v-app-bar--is-scrolled
+    > .v-toolbar__image .v-image__image
+      opacity: 0
+
 .v-app-bar.v-toolbar--prominent.v-app-bar--shrink-on-scroll
   &.v-app-bar--is-scrolled
     .v-toolbar__title
-      padding-bottom: 9px
+      padding-bottom: 8px
 
 .v-app-bar.v-app-bar--shrink-on-scroll
   .v-toolbar__title

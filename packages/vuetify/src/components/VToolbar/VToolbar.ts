@@ -91,6 +91,7 @@ export default VSheet.extend({
   methods: {
     genBackground (children: VNode[]) {
       return this.$createElement(VImg, {
+        staticClass: 'v-toolbar__image',
         props: {
           height: convertToUnit(this.computedHeight),
           src: this.src,
