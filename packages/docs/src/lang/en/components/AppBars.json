@@ -30,8 +30,12 @@
       "desc": "With the **collapse** and **collapse-on-scroll** props you can easily control the state of toolbar that the user interacts with."
     },
     "elevate-on-scroll": {
-      "header": "Elevate bar on scroll",
+      "header": "### Elevate bar on scroll",
       "desc": "When using the **elevate-on-scroll** prop, the `v-app-bar` will rest at an elevation of 0dp until the user begins to scroll down. Once scrolling, the bar raises to 4dp."
+    },
+    "inverted-scroll": {
+      "header": "### Inverted scrolling",
+      "desc": "When using the **inverted-scroll** property, the bar will hide until the user scrolls past the designated threshold. Once past the threshold, the `v-app-bar` will continue to display until the users scrolls up past the threshold. If no **scroll-threshold** value is supplied a default value of _0_ will be used."
     }
   },
   "props": {

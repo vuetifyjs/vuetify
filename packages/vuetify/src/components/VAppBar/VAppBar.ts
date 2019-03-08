@@ -192,11 +192,11 @@ export default mixins(
     canScroll: 'onScroll',
     currentThreshold (val: number) {
       if (this.invertedScroll) {
-        this.isActive = this.currentScroll > this.scrollThreshold
+        this.isActive = this.currentScroll > this.computedScrollThreshold
         return
       }
 
-      if (val < this.scrollThreshold) return
+      if (val < this.computedScrollThreshold) return
 
       if (this.hideOnScroll) {
         this.isActive = this.isScrollingUp
