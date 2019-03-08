@@ -240,4 +240,23 @@ describe('AppBar.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should calculate opacity', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        fadeImgOnScroll: false
+      }
+    })
+
+    expect(wrapper.vm.computedOpacity).toBe(1)
+
+    wrapper.setProps({ fadeImgOnScroll: true })
+    expect(wrapper.vm.computedOpacity).toBe(1)
+
+    wrapper.setData({ currentScroll: 5 })
+    expect(wrapper.vm.computedOpacity).toBe(0.375)
+
+    wrapper.setData({ currentScroll: 100 })
+    expect(wrapper.vm.computedOpacity).toBe(0)
+  })
 })
