@@ -1,0 +1,21 @@
+{
+  "header": "# App Bar",
+  "headerText": "The `v-toolbar` component is pivotal to any gui, as it generally is the primary source of site navigation. The toolbar component works great in conjunction with a navigation drawer for hiding links and presenting an activator to open the sidebar on mobile.",
+  "examples": {
+    "usage": {
+      "desc": "An **app-bar** is composed of 5 parts. The **container**, **navigation icon** (optional), **title** (optional), **action items** (optional) and an **overflow menu** (optional)"
+    },
+    "prominent": {
+      "header": "### Prominent w/ scroll shrink",
+      "desc": "Prominent `v-app-bar`s can opt to have their height shrunk as the user scrolls down. This provides a smooth transition to taking up less visual space when the user is scrolling through content. Shrink height has 2 possible options, **dense** (48px) and **short** (56px) sizes."
+    }
+  },
+  "props": {
+    "clippedLeft": "Designates that the applications `v-navigation-drawer` is clipped on the left side of the toolbar",
+    "clippedRight": "Designates that the applications `v-navigation-drawer` is clipped on the right side of the toolbar",
+    "invertedScroll": "Will slide out of view when scrolling down and back into view when scrolling up",
+    "hideOnScroll": "Will transition the toolbar and extension off screen when scrolling down",
+    "scrollTarget": "Assign the scroll target for scroll-off-screen",
+    "scrollThreshold": "The amount of scroll distance down before the toolbar uses scroll-off-screen"
+  }
+}
