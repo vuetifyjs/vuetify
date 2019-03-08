@@ -7,7 +7,7 @@
       shrink-on-scroll
       prominent
       src="https://picsum.photos/1920/1080?random"
-      :imgProps="{ gradient: 'to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)' }"
+      :img-props="{ gradient: 'to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)' }"
       scroll-target="#scrolling-techniques-2"
     >
       <v-toolbar-side-icon></v-toolbar-side-icon>
