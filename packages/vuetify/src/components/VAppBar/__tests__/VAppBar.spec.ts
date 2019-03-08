@@ -1,4 +1,3 @@
-
 // Libraries
 import Vue from 'vue'
 
@@ -16,6 +15,7 @@ import {
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../util/mixins'
 import { rafPolyfill, resizeWindow } from '../../../../test'
+import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
 
 const scrollWindow = (y: number) => {
   (global as any).pageYOffset = y
@@ -130,6 +130,16 @@ describe('AppBar.ts', () => {
     expect(wrapper.vm.target).toBe(document.body)
   })
 
+  it('should warn if target isn\'t present', async () => {
+    mountFunction({
+      propsData: {
+        scrollTarget: '#test'
+      }
+    })
+
+    expect('Unable to locate element with identifier #test').toHaveBeenTipped()
+  })
+
   it('should set active based on manual scroll', async () => {
     const wrapper = mountFunction({
       propsData: {
@@ -176,5 +186,58 @@ describe('AppBar.ts', () => {
     wrapper.setData({ currentScroll: 100 })
 
     expect(wrapper.vm.hideShadow).toBe(false)
+  })
+
+  it('should collapse-on-scroll', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        collapseOnScroll: true
+      }
+    })
+
+    wrapper.setData({ currentScroll: 0 })
+    expect(wrapper.vm.isCollapsed).toBeFalsy()
+    wrapper.setData({ currentScroll: 100 })
+    expect(wrapper.vm.isCollapsed).toBeTruthy()
+  })
+
+  it('should calculate font size', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        shrinkOnScroll: false,
+        prominent: false
+      }
+    })
+
+    expect(wrapper.vm.computedFontSize).toBeUndefined()
+    wrapper.setProps({
+      shrinkOnScroll: true,
+      prominent: true
+    })
+    expect(wrapper.vm.computedFontSize).toBeDefined()
+    expect(wrapper.vm.computedFontSize).toBe(1.5)
+  })
+
+  it('should remove target', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        scrollTarget: 'body'
+      }
+    })
+
+    expect(wrapper.vm.target).toBeDefined()
+    const spy = jest.spyOn(wrapper.vm.target, 'removeEventListener')
+    wrapper.destroy()
+    expect(spy).toHaveBeenCalled()
+  })
+
+  it('should render with background', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        src: '/test.jpg'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })
