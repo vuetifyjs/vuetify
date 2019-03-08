@@ -16,6 +16,10 @@
     "img-fade": {
       "header": "### Prominent w/ scroll shrink and image, fading on scroll",
       "desc": "The background image of a `v-app-bar` can fade on scroll. Use the `fade-img-on-scroll` property for this."
+    },
+    "hide": {
+      "header": "### Hiding on scroll",
+      "desc": "`v-app-bar` can be hidden on scroll. Use the `hide-on-scroll` property for this."
     }
   },
   "props": {

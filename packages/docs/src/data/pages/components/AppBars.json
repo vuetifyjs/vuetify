@@ -34,7 +34,8 @@
           "value": [
             "prominent",
             "img",
-            "img-fade"
+            "img-fade",
+            "hide"
           ]
         }
       ]
