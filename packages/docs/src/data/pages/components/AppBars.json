@@ -33,7 +33,8 @@
           "type": "examples",
           "value": [
             "prominent",
-            "img"
+            "img",
+            "img-fade"
           ]
         }
       ]

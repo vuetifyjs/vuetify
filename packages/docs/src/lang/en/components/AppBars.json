@@ -12,6 +12,10 @@
     "img": {
       "header": "### Prominent w/ scroll shrink and image",
       "desc": "`v-app-bar`s can contain background images. You can set source via `src` prop, other `v-img`'s props via `imgProps`."
+    },
+    "img-fade": {
+      "header": "### Prominent w/ scroll shrink and image, fading on scroll",
+      "desc": "`v-app-bar`'s background image can fade on scroll. Use `fade-img-on-scroll` property for this."
     }
   },
   "props": {
@@ -22,6 +26,7 @@
     "scrollTarget": "Assign the scroll target for scroll-off-screen",
     "scrollThreshold": "The amount of scroll distance down before the toolbar uses scroll-off-screen",
     "src": "Image source. See `v-img` for details",
-    "imgProps": "`v-img` props. See `v-img` for documentation about them"
+    "imgProps": "`v-img` props. See `v-img` for documentation about them",
+    "fade-img-on-scroll": "Fade image when user scrolls"
   }
 }
