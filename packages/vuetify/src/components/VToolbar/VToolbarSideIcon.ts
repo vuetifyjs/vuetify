@@ -1,6 +1,6 @@
 // Components
 import VIcon from '../VIcon'
-import VToolbarAction from './VToolbarAction'
+import VBtn from '../VBtn/VBtn'
 
 // Types
 import Vue from 'vue'
@@ -14,12 +14,15 @@ export default Vue.extend({
   render (h, { slots, listeners, props, data }) {
     const d = Object.assign(data, {
       staticClass: (`v-toolbar__side-icon ${data.staticClass || ''}`).trim(),
-      props,
+      props: {
+        ...props,
+        icon: true
+      },
       on: listeners
     })
 
     const defaultSlot = slots().default
 
-    return h(VToolbarAction, d, defaultSlot || [h(VIcon, '$vuetify.icons.menu')])
+    return h(VBtn, d, defaultSlot || [h(VIcon, '$vuetify.icons.menu')])
   }
 })

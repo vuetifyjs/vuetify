@@ -1,6 +1,5 @@
 // Components
 import VToolbar from './VToolbar'
-import VToolbarAction from './VToolbarAction'
 import VToolbarSideIcon from './VToolbarSideIcon'
 import VAppBar from '../VAppBar/VAppBar'
 
@@ -114,7 +113,6 @@ const wrapper = Vue.extend({
 
 export {
   wrapper as VToolbar,
-  VToolbarAction,
   VToolbarSideIcon,
   VToolbarTitle,
   VToolbarItems
@@ -125,7 +123,6 @@ export default {
     VToolbar,
     VToolbarItems,
     VToolbarTitle,
-    VToolbarAction,
     VToolbarSideIcon
   }
 }

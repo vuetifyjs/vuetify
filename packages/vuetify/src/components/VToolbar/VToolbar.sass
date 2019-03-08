@@ -12,6 +12,16 @@
   padding-bottom: 4px
   padding-top: 4px
 
+  .v-btn.v-btn--icon
+    height: 48px
+    width: 48px
+
+    &:first-child
+      margin-left: -12px
+
+    &:last-child
+      margin-right: -12px
+
 .v-toolbar__content
   align-items: center
   display: flex
@@ -27,16 +37,6 @@
     height: 100% !important
     max-height: none
 
-.v-toolbar__icon.v-btn.v-btn--fab
-  height: 48px
-  width: 48px
-
-  &:first-child
-    margin-left: -12px
-
-  &:last-child
-    margin-right: -12px
-
 .v-toolbar__title
   font-size: 1.25rem
   padding-left: 20px
@@ -46,6 +46,7 @@
   position: absolute
   top: 0
   width: 100%
+  z-index: 1
 
 .v-toolbar--dense
   .v-toolbar__content,
