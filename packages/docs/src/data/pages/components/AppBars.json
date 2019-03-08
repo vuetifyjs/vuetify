@@ -35,7 +35,8 @@
             "prominent",
             "img",
             "img-fade",
-            "hide"
+            "hide",
+            "scroll-threshold"
           ]
         }
       ]

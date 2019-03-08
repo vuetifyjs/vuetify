@@ -20,6 +20,10 @@
     "hide": {
       "header": "### Hiding on scroll",
       "desc": "`v-app-bar` can be hidden on scroll. Use the `hide-on-scroll` property for this."
+    },
+    "scroll-threshold": {
+      "header": "### Scroll threshold",
+      "desc": "`v-app-bar` can have scroll threshold. It will start reacting to scroll only after defined via `scroll-threshold` property amount of pixels."
     }
   },
   "props": {
