@@ -33,9 +33,6 @@
         {
           "type": "examples",
           "value": [
-            "appBar",
-            "appBarItems",
-            "appBarExtension",
             "columnWidthWithHierarchy",
             "flexibleAndCard",
             "floatingWithSearch",
@@ -43,7 +40,6 @@
             "prominent",
             "dense",
             "contextualActionBar",
-            "appBarMenu",
             "systemBarsStatusWindow"
           ]
         }
