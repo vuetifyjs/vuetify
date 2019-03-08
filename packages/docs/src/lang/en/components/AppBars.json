@@ -28,6 +28,10 @@
     "collapse": {
       "header": "### Collapsible bars",
       "desc": "With the **collapse** and **collapse-on-scroll** props you can easily control the state of toolbar that the user interacts with."
+    },
+    "elevate-on-scroll": {
+      "header": "Elevate bar on scroll",
+      "desc": "When using the **elevate-on-scroll** prop, the `v-app-bar` will rest at an elevation of 0dp until the user begins to scroll down. Once scrolling, the bar raises to 4dp."
     }
   },
   "props": {
