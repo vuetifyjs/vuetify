@@ -200,7 +200,7 @@ export default VDataIterator.extend({
         }, content)
       ])
     },
-    genItems (items: any[], props: DataProps): VNodeChildren {
+    genItems (items: any[], props: DataProps) {
       const empty = this.genEmpty(props.pagination.itemsLength)
       if (empty) return [empty]
 
@@ -208,7 +208,7 @@ export default VDataIterator.extend({
         ? this.genGroupedRows(props.groupedItems!, props)
         : this.genRows(items, props)
     },
-    genGroupedRows (groupedItems: Record<string, any[]>, props: DataProps): VNodeChildren {
+    genGroupedRows (groupedItems: Record<string, any[]>, props: DataProps) {
       const groups = Object.keys(groupedItems || {})
 
       return groups.map(group => {
@@ -282,13 +282,13 @@ export default VDataIterator.extend({
         }
       }, children)
     },
-    genRows (items: any[], props: DataProps): VNodeChildren {
+    genRows (items: any[], props: DataProps) {
       return this.$scopedSlots.item ? this.genScopedRows(items, props) : this.genDefaultRows(items, props)
     },
-    genScopedRows (items: any[], props: DataProps): VNodeChildren {
+    genScopedRows (items: any[], props: DataProps) {
       return items.map((item: any) => this.$scopedSlots.item!(this.createItemProps(item)))
     },
-    genDefaultRows (items: any[], props: DataProps): VNodeChildren {
+    genDefaultRows (items: any[], props: DataProps) {
       return this.$scopedSlots['item.expanded']
         ? items.map(item => this.genDefaultExpandedRow(item))
         : items.map(item => this.genDefaultSimpleRow(item))
@@ -355,8 +355,8 @@ export default VDataIterator.extend({
         scopedSlots
       })
     },
-    genBody (props: DataProps): VNode | string | VNodeChildren {
-      if (this.$scopedSlots.body) return this.$scopedSlots.body!(props)
+    genBody (props: DataProps) {
+      if (this.$scopedSlots.body) return this.$scopedSlots.body(props)
 
       return this.$createElement('tbody', [
         this.genSlots('body.prepend', props),
@@ -424,7 +424,7 @@ export default VDataIterator.extend({
             height: Number(this.height)
           },
           scopedSlots: {
-            items: ({ start, stop }) => this.genItems(props.items.slice(start, stop), props) as any // TODO: What is up with this typing?
+            items: ({ start, stop }) => this.genItems(props.items.slice(start, stop), props)
           }
         }, [
           this.$createElement('template', { slot: 'caption' }, this.genCaption(props)),
