@@ -71,7 +71,7 @@ describe('AppBar.ts', () => {
   it('should scroll off screen', async () => {
     const wrapper = mountFunction({
       attachToDocument: true,
-      propsData: { hideOnScroll: true }
+      propsData: { hideOnScroll: true, scrollThreshold: 300 }
     })
 
     expect(wrapper.vm.isActive).toBe(true)
