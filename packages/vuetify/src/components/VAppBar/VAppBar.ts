@@ -29,7 +29,7 @@ export default mixins(
     'clippedRight',
     'invertedScroll',
     'isExtended',
-    'shrinkOnScroll',
+    'isProminent',
     'value'
   ])
   /* @vue/component */
@@ -96,7 +96,7 @@ export default mixins(
       }
     },
     computedContentHeight (): number {
-      if (!this.isProminent) return VToolbar.options.computed.computedContentHeight.call(this)
+      if (!this.shrinkOnScroll) return VToolbar.options.computed.computedContentHeight.call(this)
 
       const height = this.computedOriginalHeight
 
