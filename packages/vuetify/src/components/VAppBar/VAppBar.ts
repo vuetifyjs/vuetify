@@ -269,12 +269,15 @@ export default mixins(
     const render = VToolbar.options.render.call(this, h)
 
     render.data = render.data || {}
-    render.data.directives = render.data.directives || []
-    render.data.directives.push({
-      arg: this.scrollTarget,
-      name: 'scroll',
-      value: this.onScroll
-    })
+
+    if (!this.scrollTarget && this.canScroll) {
+      render.data.directives = render.data.directives || []
+      render.data.directives.push({
+        arg: this.scrollTarget,
+        name: 'scroll',
+        value: this.onScroll
+      })
+    }
 
     return render
   }
