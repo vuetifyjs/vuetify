@@ -60,6 +60,7 @@ export class Lang extends Service {
     const translation = getTranslation(this.locales[this.current], key)
 
     return translation.replace(/\{(\d+)\}/g, (match: string, index: string) => {
+      /* istanbul ignore next */
       return String(params[+index])
     })
   }
