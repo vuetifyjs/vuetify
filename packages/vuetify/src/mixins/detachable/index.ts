@@ -127,7 +127,7 @@ export default mixins<options &
       let target
       if (this.attach === false) {
         // Default, detach to app
-        target = document.querySelector('[data-app]')
+        target = document.querySelector('#menuArea')
       } else if (typeof this.attach === 'string') {
         // CSS selector
         target = document.querySelector(this.attach)

@@ -46,6 +46,6 @@ export default mixins(
       },
       attrs: { 'data-app': true },
       domProps: { id: this.id },
-    }, [wrapper])
+    }, [wrapper, h('div', { domProps: { id: 'menuArea' } })])
   },
 })
