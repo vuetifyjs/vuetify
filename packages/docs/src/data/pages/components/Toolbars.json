@@ -42,6 +42,7 @@
             "variations",
             "prominent",
             "dense",
+            "contextualActionBar",
             "appBarMenu",
             "systemBarsStatusWindow"
           ]
