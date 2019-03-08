@@ -8,6 +8,10 @@
     "prominent": {
       "header": "### Prominent w/ scroll shrink",
       "desc": "Prominent `v-app-bar`s can opt to have their height shrunk as the user scrolls down. This provides a smooth transition to taking up less visual space when the user is scrolling through content. Shrink height has 2 possible options, **dense** (48px) and **short** (56px) sizes."
+    },
+    "img": {
+      "header": "### Prominent w/ scroll shrink and image",
+      "desc": "`v-app-bar`s can contain background images. You can set source via `src` prop, other `v-img`'s props via `imgProps`."
     }
   },
   "props": {
@@ -16,6 +20,8 @@
     "invertedScroll": "Will slide out of view when scrolling down and back into view when scrolling up",
     "hideOnScroll": "Will transition the toolbar and extension off screen when scrolling down",
     "scrollTarget": "Assign the scroll target for scroll-off-screen",
-    "scrollThreshold": "The amount of scroll distance down before the toolbar uses scroll-off-screen"
+    "scrollThreshold": "The amount of scroll distance down before the toolbar uses scroll-off-screen",
+    "src": "Image source. See `v-img` for details",
+    "imgProps": "`v-img` props. See `v-img` for documentation about them"
   }
 }

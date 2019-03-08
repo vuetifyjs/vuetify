@@ -32,7 +32,8 @@
         {
           "type": "examples",
           "value": [
-            "prominent"
+            "prominent",
+            "img"
           ]
         }
       ]
