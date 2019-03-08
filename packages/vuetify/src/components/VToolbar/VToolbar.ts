@@ -15,6 +15,7 @@ export default VSheet.extend({
   props: {
     absolute: Boolean,
     dense: Boolean,
+    collapse: Boolean,
     extended: Boolean,
     extensionHeight: {
       default: 48,
@@ -46,12 +47,17 @@ export default VSheet.extend({
         ...VSheet.options.computed.classes.call(this),
         'v-toolbar': true,
         'v-toolbar--absolute': this.absolute,
+        'v-toolbar--collapse': this.collapse,
+        'v-toolbar--collapsed': this.isCollapsed,
         'v-toolbar--dense': this.dense,
         'v-toolbar--extended': this.isExtended,
         'v-toolbar--floating': this.floating,
         'v-toolbar--prominent': this.prominent,
         'elevation-0': this.isFlat
       }
+    },
+    isCollapsed (): boolean {
+      return this.collapse
     },
     isExtended (): boolean {
       return this.extended || !!this.$slots.extension

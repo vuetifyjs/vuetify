@@ -1,0 +1,3 @@
+$toolbar-transition: 0.2s map-get($transition, 'fast-out-slow-in') transform,
+                     280ms map-get($transition, 'fast-out-slow-in') box-shadow,
+                     0.25s map-get($transition, 'fast-out-slow-in') width

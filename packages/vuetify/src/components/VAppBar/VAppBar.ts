@@ -40,6 +40,7 @@ export default mixins(
   props: {
     clippedLeft: Boolean,
     clippedRight: Boolean,
+    collapseOnScroll: Boolean,
     elevateOnScroll: Boolean,
     hideOnScroll: Boolean,
     invertedScroll: Boolean,
@@ -72,6 +73,7 @@ export default mixins(
           this.invertedScroll ||
           this.elevateOnScroll ||
           this.hideOnScroll ||
+          this.collapseOnScroll ||
           this.isBooted ||
           // If falsey, user has provided an
           // explicit value which should
@@ -83,6 +85,7 @@ export default mixins(
     classes (): object {
       return {
         ...VToolbar.options.computed.classes.call(this),
+        'v-toolbar--collapse': this.collapse || this.collapseOnScroll,
         'v-app-bar': true,
         'v-app-bar--clipped': this.clippedLeft || this.clippedRight,
         'v-app-bar--elevate-on-scroll': this.elevateOnScroll,
@@ -140,6 +143,13 @@ export default mixins(
     },
     currentThreshold (): number {
       return Math.abs(this.currentScroll - this.savedScroll)
+    },
+    isCollapsed (): boolean {
+      if (!this.collapseOnScroll) {
+        return VToolbar.options.computed.isCollapsed.call(this)
+      }
+
+      return this.currentScroll > 0
     },
     hideShadow (): boolean {
       if (this.elevateOnScroll) return this.currentScroll === 0

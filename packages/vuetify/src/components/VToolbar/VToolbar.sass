@@ -1,8 +1,9 @@
 @import '../../styles/styles.sass'
+@import './_variables.scss'
 
 // Block
 .v-toolbar
-  transition: .2s map-get($transition, 'fast-out-slow-in') transform, 280ms map-get($transition, 'fast-out-slow-in') box-shadow
+  transition: $toolbar-transition
 
   +elevation(4)
 
@@ -47,6 +48,19 @@
   top: 0
   width: 100%
   z-index: 1
+
+.v-toolbar.v-toolbar--collapse
+  .v-toolbar__title
+    white-space: nowrap
+
+.v-toolbar.v-toolbar--collapsed
+  border-bottom-right-radius: 24px
+  width: 112px
+
+  .v-toolbar__content,
+  .v-toolbar__extension
+    > *:not(:first-child):not(:last-child)
+      display: none
 
 .v-toolbar--dense
   .v-toolbar__content,
