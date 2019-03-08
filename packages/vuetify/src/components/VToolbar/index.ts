@@ -84,7 +84,7 @@ const wrapper = Vue.extend({
       data.attrs.scrollTarget = props.scrollTarget
     }
 
-    if (props.scrollThreshold) {
+    if (props.scrollThreshold !== 300) {
       deprecate('<v-toolbar scroll-threshold>', '<v-app-bar scroll-threshold>')
       data.attrs.scrollThreshold = props.scrollThreshold
     }
