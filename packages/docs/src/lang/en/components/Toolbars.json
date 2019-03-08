@@ -48,18 +48,25 @@
     }
   },
   "props": {
-    "dense": "Reduces the height of the toolbar content and extension",
+    "absolute": "Absolutely position the toolbar",
+    "collapse": "Puts the toolbar into a collapse state",
+    "dense": "Reduces the height of the toolbar content to 48px (96px when using with prominent)",
     "extended": "Force the toolbar to generate the extension without using the slot",
     "extensionHeight": "Specify an explicit height for the extended slot",
     "flat": "Removes the toolbar box-shadow",
     "floating": "Makes the toolbar float inline",
     "height": "Designates a specific height for the toolbar",
     "lightsOut": "Reduces the system bar opacity",
-    "prominent": "Increases the height of the toolbar content and extension",
+    "prominent": "Increases the height of the toolbar content to 128px",
+    "short": "Reduce the height of the toolbar content to 56px (112px when using with short)",
+    "src": "Specifies an image background",
     "status": "Reduces the system bar height",
     "window": "Increases the system bar height"
   },
   "slots": {
     "extension": "Slot positioned directly under main content"
+  },
+  "scopedSlots": {
+    "img": "Expects a `v-img` component. Scoped **props** should be applied with `v-bind=\"props\"`"
   }
 }
