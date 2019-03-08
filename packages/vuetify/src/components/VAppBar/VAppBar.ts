@@ -131,7 +131,7 @@ export default mixins(
     computedOpacity (): number {
       if (!this.fadeImgOnScroll) return 1
 
-      return (this.computedScrollThreshold - this.currentScroll) / this.computedScrollThreshold
+      return Math.max((this.computedScrollThreshold - this.currentScroll) / this.computedScrollThreshold, 0)
     },
     computedOriginalHeight (): number {
       let height = VToolbar.options.computed.computedContentHeight.call(this)
