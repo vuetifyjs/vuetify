@@ -40,7 +40,10 @@
 
 .v-toolbar__title
   font-size: 1.25rem
+  overflow: hidden
   padding-left: 20px
+  text-overflow: ellipsis
+  white-space: nowrap
 
 // Modifier
 .v-toolbar.v-toolbar--absolute
@@ -57,10 +60,8 @@
   border-bottom-right-radius: 24px
   width: 112px
 
-  .v-toolbar__content,
-  .v-toolbar__extension
-    > *:not(:first-child):not(:last-child)
-      display: none
+  .v-toolbar__title
+    display: none
 
 .v-toolbar--dense
   .v-toolbar__content,
