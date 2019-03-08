@@ -36,7 +36,8 @@
             "img",
             "img-fade",
             "hide",
-            "scroll-threshold"
+            "scroll-threshold",
+            "collapse"
           ]
         }
       ]

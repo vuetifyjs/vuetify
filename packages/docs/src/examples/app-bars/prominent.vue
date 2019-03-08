@@ -2,7 +2,7 @@
   <v-card class="hide-overflow">
     <v-app-bar
       absolute
-      color="teal lighten-3"
+      color="indigo darken-2"
       dark
       shrink-on-scroll
       prominent

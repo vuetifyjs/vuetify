@@ -2,14 +2,19 @@
   <v-card class="hide-overflow">
     <v-app-bar
       absolute
-      color="teal lighten-3"
+      color="#fcb69f"
       dark
       shrink-on-scroll
-      prominent
       src="https://picsum.photos/1920/1080?random"
-      :img-props="{ gradient: 'to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)' }"
       scroll-target="#scrolling-techniques-2"
     >
+      <template #img="{ props }">
+        <v-img
+          v-bind="props"
+          gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"
+        ></v-img>
+      </template>
+
       <v-toolbar-side-icon></v-toolbar-side-icon>
 
       <v-toolbar-title>Title</v-toolbar-title>

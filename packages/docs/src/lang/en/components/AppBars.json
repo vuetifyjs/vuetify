@@ -11,7 +11,7 @@
     },
     "img": {
       "header": "### Prominent w/ scroll shrink and image",
-      "desc": "`v-app-bar` can contain background images. You can set source via the `src` prop, other `v-img` props via `img-props`."
+      "desc": "`v-app-bar` can contain background images. You can set source via the `src` prop. If you need to customize the `v-img` properties, the app-bar provides you with an **img** scoped slot."
     },
     "img-fade": {
       "header": "### Prominent w/ scroll shrink and image, fading on scroll",
@@ -24,6 +24,10 @@
     "scroll-threshold": {
       "header": "### Scroll threshold",
       "desc": "`v-app-bar` can have scroll threshold. It will start reacting to scroll only after defined via `scroll-threshold` property amount of pixels."
+    },
+    "collapse": {
+      "header": "### Collapsible bars",
+      "desc": "With the **collapse** and **collapse-on-scroll** props you can easily control the state of toolbar that the user interacts with."
     }
   },
   "props": {

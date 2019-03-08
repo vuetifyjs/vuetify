@@ -7,11 +7,17 @@
       shrink-on-scroll
       prominent
       src="https://picsum.photos/1920/1080?random"
-      :img-props="{ gradient: 'to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)' }"
       fade-img-on-scroll
       scroll-target="#scrolling-techniques-5"
       scroll-threshold="500"
     >
+      <template #img="{ props }">
+        <v-img
+          v-bind="props"
+          gradient="to top right, rgba(55,236,186,.7), rgba(25,32,72,.7)"
+        ></v-img>
+      </template>
+
       <v-toolbar-side-icon></v-toolbar-side-icon>
 
       <v-toolbar-title>Title</v-toolbar-title>
