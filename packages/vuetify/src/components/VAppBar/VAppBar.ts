@@ -98,15 +98,20 @@ export default mixins(
       }
     },
     computedContentHeight (): number {
-      const height = VToolbar.options.computed.computedContentHeight.call(this)
+      let height = VToolbar.options.computed.computedContentHeight.call(this)
+      if (this.isExtended) height += this.extensionHeight
 
       if (!this.shrinkOnScroll || !this.prominent) {
         return height
       }
 
-      const max = this.dense ? 48 : 56
+      const min = this.dense ? 48 : 56
+      const max = height
+      const difference = max - min
+      const iteration = difference / this.scrollThreshold
+      const offset = this.currentScroll * iteration
 
-      return Math.max(max, height - this.currentScroll)
+      return Math.max(min, max - offset)
     },
     computedFontSize (): number | undefined {
       if (
@@ -130,6 +135,9 @@ export default mixins(
       if (!this.app) return 0
 
       return this.$vuetify.application.bar
+    },
+    computedOpacity (): number {
+      return (this.scrollThreshold - this.currentScroll) / this.scrollThreshold
     },
     computedRight (): number {
       if (!this.app || this.clippedRight) return 0
@@ -171,6 +179,7 @@ export default mixins(
   },
 
   watch: {
+    canScroll: 'onScroll',
     currentThreshold (val: number) {
       if (this.invertedScroll) {
         this.isActive = this.currentScroll > this.scrollThreshold
@@ -217,6 +226,18 @@ export default mixins(
   },
 
   methods: {
+    genBackground () {
+      const render = VToolbar.options.methods.genBackground.call(this)
+
+      render.data = render.data || {}
+      render.data.style = render.data.style || {}
+      render.data.style = {
+        ...render.data.style,
+        opacity: this.computedOpacity
+      }
+
+      return render
+    },
     onScroll () {
       if (!this.canScroll) return
 

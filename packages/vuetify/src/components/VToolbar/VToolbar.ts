@@ -28,10 +28,6 @@ export default VSheet.extend({
     },
     flat: Boolean,
     floating: Boolean,
-    imgProps: {
-      type: Object,
-      default: () => ({})
-    },
     prominent: Boolean,
     short: Boolean,
     src: {
@@ -44,12 +40,17 @@ export default VSheet.extend({
     }
   },
 
+  data: () => ({
+    isExtended: false
+  }),
+
   computed: {
     computedHeight (): number {
-      return (
-        this.computedContentHeight +
-        this.extensionHeight
-      )
+      const height = this.computedContentHeight
+
+      return this.isCollapsed
+        ? height
+        : height + (this.isExtended ? this.extensionHeight : 0)
     },
     computedContentHeight (): number {
       if (this.height) return parseInt(this.height)
@@ -77,9 +78,6 @@ export default VSheet.extend({
     isCollapsed (): boolean {
       return this.collapse
     },
-    isExtended (): boolean {
-      return this.extended || !!this.$slots.extension
-    },
     isFlat (): boolean {
       return this.flat
     },
@@ -89,15 +87,19 @@ export default VSheet.extend({
   },
 
   methods: {
-    genBackground (children: VNode[]) {
-      return this.$createElement(VImg, {
-        staticClass: 'v-toolbar__image',
-        props: {
-          height: convertToUnit(this.computedHeight),
-          src: this.src,
-          ...this.imgProps
-        }
-      }, children)
+    genBackground () {
+      const props = {
+        height: convertToUnit(this.computedHeight),
+        src: this.src
+      }
+
+      const image = this.$scopedSlots.img
+        ? this.$scopedSlots.img({ props })
+        : this.$createElement(VImg, { props })
+
+      return this.$createElement('div', {
+        staticClass: 'v-toolbar__image'
+      }, [image])
     },
     genContent () {
       return this.$createElement('div', {
@@ -118,7 +120,9 @@ export default VSheet.extend({
   },
 
   render (h): VNode {
-    let children = [this.genContent()]
+    this.isExtended = this.extended || !!this.$slots.extension
+
+    const children = [this.genContent()]
     const data = this.setBackgroundColor(this.color, {
       class: this.classes,
       style: this.styles,
@@ -126,7 +130,7 @@ export default VSheet.extend({
     })
 
     if (this.isExtended) children.push(this.genExtension())
-    if (this.src) children = [this.genBackground(children)]
+    if (this.src || this.$scopedSlots.img) children.unshift(this.genBackground())
 
     return h('nav', data, children)
   }

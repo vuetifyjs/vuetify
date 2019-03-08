@@ -21,11 +21,11 @@
   .v-toolbar__image .v-image__image
     transition: .4s opacity map-get($transition, 'fast-out-slow-in')
 
-  &.v-app-bar--is-scrolled
-    > .v-toolbar__image .v-image__image
-      opacity: 0
-
 .v-app-bar.v-toolbar--prominent.v-app-bar--shrink-on-scroll
+  &.v-app-bar--collapse-on-scroll
+    .v-toolbar__extension
+      display: none
+
   &.v-app-bar--is-scrolled
     .v-toolbar__title
       padding-bottom: 8px
