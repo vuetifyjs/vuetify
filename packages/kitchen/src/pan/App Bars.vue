@@ -224,10 +224,10 @@
 
         <v-sheet
           class="scroll-y"
-          max-height="100"
           id="scroll-1"
+          max-height="100"
         >
-          <v-container style="height: 1500px;"></v-container>
+          <v-container style="height: 1500px;" />
         </v-sheet>
       </core-section>
 
@@ -279,10 +279,10 @@
 
         <v-sheet
           class="scroll-y"
-          max-height="100"
           id="scroll-2"
+          max-height="100"
         >
-          <v-container style="height: 1500px;"></v-container>
+          <v-container style="height: 1500px;" />
         </v-sheet>
       </core-section>
     </v-layout>
