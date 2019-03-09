@@ -261,7 +261,7 @@ export default mixins(
 
     render.data = render.data || {}
 
-    if (!this.scrollTarget && this.canScroll) {
+    if (this.canScroll) {
       render.data.directives = render.data.directives || []
       render.data.directives.push({
         arg: this.scrollTarget,
