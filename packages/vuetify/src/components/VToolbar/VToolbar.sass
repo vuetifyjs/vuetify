@@ -33,6 +33,16 @@
     &:last-child
       margin-right: -12px
 
+    +rtl()
+    &:first-child
+      margin-right: -12px
+
+      + .v-toolbar__title
+        padding-right: 20px
+
+    &:last-child
+      margin-left: -12px
+
   > .v-tabs
     height: inherit
     margin-top: -4px
