@@ -218,19 +218,6 @@ describe('AppBar.ts', () => {
     expect(wrapper.vm.computedFontSize).toBe(1.5)
   })
 
-  it('should remove target', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        scrollTarget: 'body'
-      }
-    })
-
-    expect(wrapper.vm.target).toBeDefined()
-    const spy = jest.spyOn(wrapper.vm.target, 'removeEventListener')
-    wrapper.destroy()
-    expect(spy).toHaveBeenCalled()
-  })
-
   it('should render with background', () => {
     const wrapper = mountFunction({
       propsData: {
