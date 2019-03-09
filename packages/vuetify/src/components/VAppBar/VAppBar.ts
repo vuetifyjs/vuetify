@@ -200,11 +200,6 @@ export default baseMixins.extend<options>().extend({
 
   watch: {
     canScroll: 'onScroll',
-    computedOpacity (val: number) {
-      if (!this.fadeImgOnScroll) return
-
-      this.$refs.image.style.opacity = String(val)
-    },
     currentThreshold (val: number) {
       if (this.invertedScroll) {
         this.isActive = this.currentScroll > this.computedScrollThreshold
@@ -248,6 +243,9 @@ export default baseMixins.extend<options>().extend({
     genBackground () {
       const render = VToolbar.options.methods.genBackground.call(this)
 
+      render.data = this._b(render.data || {}, render.tag!, {
+        style: { opacity: this.computedOpacity }
+      })
       render.data = render.data || {}
       render.data.ref = 'image'
 

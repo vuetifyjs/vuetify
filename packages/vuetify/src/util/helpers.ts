@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { VNode, VNodeDirective, FunctionalComponentOptions, VNodeChildrenArrayContents } from 'vue/types'
+import { VNode, VNodeDirective, FunctionalComponentOptions } from 'vue/types'
 import { VuetifyIcon } from 'vuetify'
 
 export function createSimpleFunctional (
@@ -355,18 +355,6 @@ export function groupByProperty (xs: any[], key: string): Record<string, any[]> 
 
 export function wrapInArray<T> (v: T | T[]): T[] { return Array.isArray(v) ? v : [v] }
 
-export function computeSlots (cmp: Vue, name: string, props: object) {
-  const slots: VNodeChildrenArrayContents = []
-
-  if (cmp.$slots[name]) slots.push(...cmp.$slots[name]!)
-  if (cmp.$scopedSlots[name]) {
-    const scoped = cmp.$scopedSlots[name]!(props)
-    Array.isArray(scoped) ? slots.push(...scoped) : slots.push(scoped)
-  }
-
-  return slots
-}
-
 export type compareFn<T = any> = (a: T, b: T) => number
 
 export function sortItems (
@@ -442,4 +430,13 @@ export function getSlotType<T extends boolean = false> (vm: Vue, name: string, s
   }
   if (vm.$slots[name]) return 'normal'
   if (vm.$scopedSlots[name]) return 'scoped'
+}
+
+export function getSlot (vm: Vue, name = 'default', data?: object) {
+  if (vm.$scopedSlots[name]) {
+    return vm.$scopedSlots[name]!(data)
+  } else if (vm.$slots[name] && !data) {
+    return vm.$slots[name]
+  }
+  return undefined
 }

@@ -9,7 +9,7 @@ import VImg, { srcObject } from '../VImg/VImg'
 
 // Types
 import { VNode } from 'vue'
-import { convertToUnit } from '../../util/helpers'
+import { convertToUnit, getSlot } from '../../util/helpers'
 import { PropValidator } from 'vue/types/options'
 
 /* @vue/component */
@@ -110,7 +110,7 @@ export default VSheet.extend({
         style: {
           height: convertToUnit(this.computedContentHeight)
         }
-      }, this.$slots.default)
+      }, getSlot(this))
     },
     genExtension () {
       return this.$createElement('div', {
@@ -118,12 +118,12 @@ export default VSheet.extend({
         style: {
           height: convertToUnit(this.extensionHeight)
         }
-      }, this.$slots.extension)
+      }, getSlot(this, 'extension'))
     }
   },
 
   render (h): VNode {
-    this.isExtended = this.extended || !!this.$slots.extension
+    this.isExtended = this.extended || !!this.$scopedSlots.extension
 
     const children = [this.genContent()]
     const data = this.setBackgroundColor(this.color, {
