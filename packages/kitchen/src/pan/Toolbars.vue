@@ -69,7 +69,7 @@
         App bar with icons
       </core-title>
       <core-section>
-        <v-toolbar
+        <v-app-bar
           dark
           color="primary"
         >
@@ -96,14 +96,14 @@
           <v-btn icon>
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
-        </v-toolbar>
+        </v-app-bar>
       </core-section>
 
       <core-title>
         App bar with items
       </core-title>
       <core-section>
-        <v-toolbar>
+        <v-app-bar>
           <v-spacer />
 
           <v-toolbar-items>
@@ -117,14 +117,14 @@
               Link Three
             </v-btn>
           </v-toolbar-items>
-        </v-toolbar>
+        </v-app-bar>
       </core-section>
 
       <core-title>
         App bar with extension
       </core-title>
       <core-section>
-        <v-toolbar
+        <v-app-bar
           color="primary"
           dark
           extended
@@ -156,7 +156,91 @@
           <v-btn icon>
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
-        </v-toolbar>
+        </v-app-bar>
+      </core-section>
+
+      <core-title>
+        App bar with extension and background image
+      </core-title>
+      <core-section>
+        <v-app-bar
+          color="primary"
+          dark
+          extended
+          src="https://picsum.photos/1920/1080?random"
+        >
+          <v-toolbar-side-icon />
+
+          <template #extension>
+            <v-toolbar-title
+              class="white--text"
+            >
+              Title
+            </v-toolbar-title>
+          </template>
+
+          <v-spacer />
+
+          <v-btn icon>
+            <v-icon>mdi-magnify</v-icon>
+          </v-btn>
+
+          <v-btn icon>
+            <v-icon>mdi-apps</v-icon>
+          </v-btn>
+
+          <v-btn icon>
+            <v-icon>mdi-refresh</v-icon>
+          </v-btn>
+
+          <v-btn icon>
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </v-app-bar>
+      </core-section>
+
+      <core-title>
+        App bar with extension and background image scoped slot
+      </core-title>
+      <core-section>
+        <v-app-bar
+          color="primary"
+          dark
+          extended
+          src="https://picsum.photos/1920/1080?random"
+        >
+          <template #img="img">
+            <v-img v-bind="img" gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)" />
+          </template>
+
+          <v-toolbar-side-icon />
+
+          <template #extension>
+            <v-toolbar-title
+              class="white--text"
+            >
+              Title
+            </v-toolbar-title>
+          </template>
+
+          <v-spacer />
+
+          <v-btn icon>
+            <v-icon>mdi-magnify</v-icon>
+          </v-btn>
+
+          <v-btn icon>
+            <v-icon>mdi-apps</v-icon>
+          </v-btn>
+
+          <v-btn icon>
+            <v-icon>mdi-refresh</v-icon>
+          </v-btn>
+
+          <v-btn icon>
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </v-app-bar>
       </core-section>
 
       <core-title>
