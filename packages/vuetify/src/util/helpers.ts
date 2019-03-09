@@ -451,3 +451,10 @@ export function debounce (fn: Function, delay: number) {
     timeoutId = setTimeout(() => fn(...args), delay)
   }
 }
+
+export function getPrefixedScopedSlots (prefix: string, scopedSlots: any) {
+  return Object.keys(scopedSlots).filter(k => k.startsWith(prefix)).reduce((obj: any, k: string) => {
+    obj[k.replace(prefix, '')] = scopedSlots[k]
+    return obj
+  }, {})
+}

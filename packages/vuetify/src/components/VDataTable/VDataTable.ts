@@ -19,16 +19,9 @@ import VRowGroup from './VRowGroup'
 import VSimpleCheckbox from '../VCheckbox/VSimpleCheckbox'
 
 // Helpers
-import { deepEqual, getObjectValueByPath, compareFn } from '../../util/helpers'
+import { deepEqual, getObjectValueByPath, compareFn, getPrefixedScopedSlots } from '../../util/helpers'
 import VSimpleTable from './VSimpleTable'
 import VMobileRow from './VMobileRow'
-
-function getPrefixedScopedSlots (prefix: string, scopedSlots: any) {
-  return Object.keys(scopedSlots).filter(k => k.startsWith(prefix)).reduce((obj: any, k: string) => {
-    obj[k.replace(prefix, '')] = scopedSlots[k]
-    return obj
-  }, {})
-}
 
 /* @vue/component */
 export default VDataIterator.extend({
