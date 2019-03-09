@@ -44,7 +44,7 @@
         </v-btn>
       </v-btn-toggle>
 
-      <v-div class="mx-3"></v-div>
+      <div class="mx-3"></div>
 
       <v-btn-toggle v-model="toggle_exclusive">
         <v-btn :value="1" text>
