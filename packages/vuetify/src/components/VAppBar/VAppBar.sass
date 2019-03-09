@@ -1,3 +1,4 @@
+@import './_variables.sass'
 @import '../../styles/styles.sass'
 
 // Block
@@ -19,7 +20,7 @@
 
 .v-app-bar--fade-img-on-scroll
   .v-toolbar__image .v-image__image
-    transition: .4s opacity map-get($transition, 'fast-out-slow-in')
+    transition: $app-bar-transition
 
 .v-app-bar.v-toolbar--prominent.v-app-bar--shrink-on-scroll
   .v-toolbar__content
