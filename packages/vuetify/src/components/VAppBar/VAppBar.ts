@@ -15,12 +15,12 @@ import Toggleable from '../../mixins/toggleable'
 // Utilities
 import { convertToUnit } from '../../util/helpers'
 import { consoleWarn } from '../../util/console'
-import mixins from '../../util/mixins'
+import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
 import { VNode } from 'vue'
 
-export default mixins(
+const baseMixins = mixins(
   VToolbar,
   SSRBootable,
   Toggleable,
@@ -32,8 +32,16 @@ export default mixins(
     'isProminent',
     'value'
   ])
+)
+
+interface options extends ExtractVue<typeof baseMixins> {
+  $refs: {
+    image: HTMLImageElement
+  }
+}
+
   /* @vue/component */
-).extend({
+export default baseMixins.extend<options>().extend({
   name: 'v-app-bar',
 
   directives: { Scroll },
@@ -192,6 +200,9 @@ export default mixins(
 
   watch: {
     canScroll: 'onScroll',
+    computedOpacity (val) {
+      this.$refs.image.style.opacity = val
+    },
     currentScroll () {
       if (
         !this.shrinkOnScroll ||
@@ -244,11 +255,7 @@ export default mixins(
       const render = VToolbar.options.methods.genBackground.call(this)
 
       render.data = render.data || {}
-      render.data.style = render.data.style || {}
-      render.data.style = {
-        ...render.data.style,
-        opacity: this.computedOpacity
-      }
+      render.data.ref = 'image'
 
       return render
     },

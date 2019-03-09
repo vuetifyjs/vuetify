@@ -22,6 +22,12 @@
     transition: .4s opacity map-get($transition, 'fast-out-slow-in')
 
 .v-app-bar.v-toolbar--prominent.v-app-bar--shrink-on-scroll
+  .v-toolbar__content
+    will-change: height
+
+  .v-toolbar__image
+    will-change: opacity
+
   &.v-app-bar--collapse-on-scroll
     .v-toolbar__extension
       display: none
