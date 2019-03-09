@@ -57,6 +57,7 @@ export default mixins(
 
   data: () => ({
     currentScroll: 0,
+    currentThreshold: 0,
     isScrollingUp: false,
     previousScroll: 0,
     savedScroll: 0,
@@ -127,10 +128,15 @@ export default mixins(
 
       return this.$vuetify.application.bar
     },
-    computedOpacity (): number {
-      if (!this.fadeImgOnScroll) return 1
+    computedOpacity (): number | undefined {
+      if (!this.fadeImgOnScroll) return undefined
 
-      return Math.max((this.computedScrollThreshold - this.currentScroll) / this.computedScrollThreshold, 0)
+      const opacity = Math.max(
+        (this.computedScrollThreshold - this.currentScroll) / this.computedScrollThreshold,
+        0
+      )
+
+      return Number(parseFloat(opacity).toFixed(2))
     },
     computedOriginalHeight (): number {
       let height = VToolbar.options.computed.computedContentHeight.call(this)
@@ -153,9 +159,6 @@ export default mixins(
       return !this.isActive
         ? -this.computedContentHeight
         : 0
-    },
-    currentThreshold (): number {
-      return Math.abs(this.currentScroll - this.savedScroll)
     },
     isCollapsed (): boolean {
       if (!this.collapseOnScroll) {
@@ -189,6 +192,14 @@ export default mixins(
 
   watch: {
     canScroll: 'onScroll',
+    currentScroll () {
+      if (
+        !this.shrinkOnScroll ||
+        this.currentScroll > this.currentThreshold
+      ) return
+
+      this.currentThreshold = Math.abs(this.currentScroll - this.computedScrollThreshold)
+    },
     currentThreshold (val: number) {
       if (this.invertedScroll) {
         this.isActive = this.currentScroll > this.computedScrollThreshold
