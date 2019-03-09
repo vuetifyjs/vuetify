@@ -22,7 +22,8 @@
           "type": "api",
           "value": [
             "v-toolbar",
-            "v-system-bar"
+            "v-toolbar-title",
+            "v-toolbar-items"
           ]
         }
       ]
@@ -39,7 +40,8 @@
             "variations",
             "prominent",
             "dense",
-            "contextualActionBar"
+            "contextualActionBar",
+            "background"
           ]
         }
       ]

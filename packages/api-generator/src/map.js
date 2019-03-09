@@ -1242,6 +1242,12 @@ module.exports = {
       }
     }]
   },
+  'v-toolbar-title': {
+    slots: ['default']
+  },
+  'v-toolbar-items': {
+    slots: ['default']
+  },
   'v-tooltip': {
     slots: ['activator', 'default']
   },
