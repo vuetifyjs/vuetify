@@ -265,9 +265,7 @@ export default baseMixins.extend<options>().extend({
       this.currentThreshold = Math.abs(this.currentScroll - this.computedScrollThreshold)
     },
     updateApplication (): number {
-      return this.invertedScroll
-        ? 0
-        : this.$el ? this.$el.clientHeight : 0
+      return this.$el ? this.$el.clientHeight : 0
     }
   },
 
