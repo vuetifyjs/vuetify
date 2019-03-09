@@ -15,7 +15,7 @@ import Toggleable from '../../mixins/toggleable'
 // Utilities
 import { convertToUnit } from '../../util/helpers'
 import { consoleWarn } from '../../util/console'
-import mixins, { ExtractVue } from '../../util/mixins'
+import mixins from '../../util/mixins'
 
 // Types
 import { VNode } from 'vue'
@@ -34,14 +34,8 @@ const baseMixins = mixins(
   ])
 )
 
-interface options extends ExtractVue<typeof baseMixins> {
-  $refs: {
-    image: HTMLImageElement
-  }
-}
-
 /* @vue/component */
-export default baseMixins.extend<options>().extend({
+export default baseMixins.extend({
   name: 'v-app-bar',
 
   directives: { Scroll },
@@ -123,7 +117,7 @@ export default baseMixins.extend<options>().extend({
       const difference = max - this.computedContentHeight
       const increment = 0.00347
 
-      // 1.5 default rem
+      // 1.5rem to a minimum of 1.25rem
       return Number((1.50 - difference * increment).toFixed(2))
     },
     computedLeft (): number {
@@ -151,15 +145,15 @@ export default baseMixins.extend<options>().extend({
       if (this.isExtended) height += this.extensionHeight
       return height
     },
-    computedScrollThreshold (): number {
-      if (this.scrollThreshold) return Number(this.scrollThreshold)
-
-      return this.computedOriginalHeight - (this.dense ? 48 : 56)
-    },
     computedRight (): number {
       if (!this.app || this.clippedRight) return 0
 
       return this.$vuetify.application.right
+    },
+    computedScrollThreshold (): number {
+      if (this.scrollThreshold) return Number(this.scrollThreshold)
+
+      return this.computedOriginalHeight - (this.dense ? 48 : 56)
     },
     computedTransform (): number {
       if (!this.canScroll || this.elevateOnScroll) return 0
@@ -167,6 +161,11 @@ export default baseMixins.extend<options>().extend({
       return !this.isActive
         ? -this.computedContentHeight
         : 0
+    },
+    hideShadow (): boolean {
+      if (this.elevateOnScroll) return this.currentScroll === 0
+
+      return this.computedTransform !== 0
     },
     isCollapsed (): boolean {
       if (!this.collapseOnScroll) {
@@ -180,11 +179,6 @@ export default baseMixins.extend<options>().extend({
         VToolbar.options.computed.isProminent.call(this) ||
         this.shrinkOnScroll
       )
-    },
-    hideShadow (): boolean {
-      if (this.elevateOnScroll) return this.currentScroll === 0
-
-      return this.computedTransform !== 0
     },
     styles (): object {
       return {
@@ -217,11 +211,11 @@ export default baseMixins.extend<options>().extend({
     invertedScroll (val: boolean) {
       this.isActive = !val
     },
-    isScrollingUp () {
-      this.savedScroll = this.savedScroll || this.currentScroll
-    },
     isActive () {
       this.savedScroll = 0
+    },
+    isScrollingUp () {
+      this.savedScroll = this.savedScroll || this.currentScroll
     }
   },
 
@@ -246,8 +240,6 @@ export default baseMixins.extend<options>().extend({
       render.data = this._b(render.data || {}, render.tag!, {
         style: { opacity: this.computedOpacity }
       })
-      render.data = render.data || {}
-      render.data.ref = 'image'
 
       return render
     },

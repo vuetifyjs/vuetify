@@ -78,11 +78,11 @@ export default VSheet.extend({
     isCollapsed (): boolean {
       return this.collapse
     },
-    isProminent (): boolean {
-      return this.prominent
-    },
     isFlat (): boolean {
       return this.flat
+    },
+    isProminent (): boolean {
+      return this.prominent
     },
     styles (): object {
       return this.measurableStyles
