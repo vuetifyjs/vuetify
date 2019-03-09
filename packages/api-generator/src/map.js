@@ -103,19 +103,17 @@ const sharedGridProps = [
   }
 ]
 
-const dataIterableProps = [
-  // {
-  //   name: 'filter',
-  //   default: '(val: object, search: string): boolean'
-  // },
-  // {
-  //   name: 'customSort',
-  //   default: '(items: object[], index: number, isDescending: boolean): object[]'
-  // },
-  // {
-  //   name: 'customFilter',
-  //   default: '(items: object[], search: string, filter: Filter): object[]'
-  // }
+const dataIteratorProps = [
+  { name: 'value', source: 'v-data-iterator' },
+  { name: 'singleSelect', source: 'v-data-iterator' },
+  { name: 'expanded', source: 'v-data-iterator' },
+  { name: 'singleExpand', source: 'v-data-iterator' },
+  { name: 'loading', source: 'v-data-iterator' },
+  { name: 'loadingText', source: 'v-data-iterator' },
+  { name: 'noResultsText', source: 'v-data-iterator' },
+  { name: 'noDataText', source: 'v-data-iterator' },
+  { name: 'hideDefaultFooter', source: 'v-data-iterator' },
+  { name: 'footerProps', source: 'v-data-iterator' }
 ]
 
 const dataOptions = {
@@ -178,7 +176,7 @@ const dataProps = [
   { name: 'options', source: 'v-data' },
   { name: 'sortBy', source: 'v-data' },
   { name: 'sortDesc', source: 'v-data' },
-  { name: 'customSort', source: 'v-data' },
+  { name: 'customSort', source: 'v-data', default: '(items: any[], sortBy: string[], sortDesc: boolean[], locale: string, customSorters?: Record<string, compareFn>): any[]' },
   { name: 'mustSort', source: 'v-data' },
   { name: 'multiSort', source: 'v-data' },
   { name: 'page', source: 'v-data' },
@@ -190,7 +188,7 @@ const dataProps = [
   { name: 'disablePagination', source: 'v-data' },
   { name: 'disableFiltering', source: 'v-data' },
   { name: 'search', source: 'v-data' },
-  { name: 'customFilter', source: 'v-data' },
+  { name: 'customFilter', source: 'v-data', default: '(items: any[], search: string): any[]' },
   { name: 'serverItemsLength', source: 'v-data' }
 ]
 
@@ -202,17 +200,17 @@ const dataIteratorSlots = [
 
 const dataIteratorScopedSlots = [
   {
-    name: 'item',
+    name: 'default',
     props: dataScopedProps,
     source: 'data-iterator'
   },
   {
-    name: 'prepend',
+    name: 'footer',
     props: dataScopedProps,
     source: 'data-iterator'
   },
   {
-    name: 'append',
+    name: 'header',
     props: dataScopedProps,
     source: 'data-iterator'
   }
@@ -257,8 +255,16 @@ const dataTableSlots = [
   { name: 'item', props: dataScopedProps },
   { name: 'item.dataTableSelect', props: dataScopedProps },
   { name: 'item.dataTableExpand', props: dataScopedProps },
-  { name: 'item.column.<column>', props: dataScopedProps },
+  { name: 'item.column.<name>', props: dataScopedProps },
   { name: 'item.expanded', props: dataScopedProps }
+]
+
+const dataFooterSlots = [
+  { name: 'pageText' }
+]
+
+const dataFooterEvents = [
+  { name: 'update:options' }
 ]
 
 const validatableEvents = [
@@ -845,8 +851,16 @@ module.exports = {
       }
     ].concat(sharedGridProps)
   },
+  'v-data': {
+    props: dataProps,
+    events: dataEvents
+  },
+  'v-data-footer': {
+    slots: dataFooterSlots,
+    events: dataFooterEvents
+  },
   'v-data-iterator': {
-    props: dataIterableProps.concat(dataProps),
+    props: dataIteratorProps.concat(dataProps),
     slots: dataIteratorSlots,
     scopedSlots: dataIteratorScopedSlots,
     events: dataIteratorEvents
@@ -857,7 +871,7 @@ module.exports = {
         name: 'headers',
         example: tableHeader
       }
-    ].concat(dataIterableProps),
+    ].concat(dataIteratorProps).concat(dataProps),
     slots: dataTableSlots,
     scopedSlots: dataTableSlots,
     events: dataTableEvents
