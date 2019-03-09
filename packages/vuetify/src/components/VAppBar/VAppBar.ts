@@ -56,7 +56,6 @@ export default mixins(
   },
 
   data: () => ({
-    activeTimeout: null,
     currentScroll: 0,
     isScrollingUp: false,
     previousScroll: 0,
@@ -251,12 +250,14 @@ export default mixins(
     onScroll () {
       if (!this.canScroll) return
 
-      this.currentScroll = this.target
-        ? this.target.scrollTop
-        : window.pageYOffset
+      window.requestAnimationFrame(() => {
+        this.currentScroll = this.target
+          ? this.target.scrollTop
+          : window.pageYOffset
 
-      this.isScrollingUp = this.currentScroll < this.previousScroll
-      this.previousScroll = this.currentScroll
+        this.isScrollingUp = this.currentScroll < this.previousScroll
+        this.previousScroll = this.currentScroll
+      })
     },
     updateApplication (): number {
       return this.invertedScroll
