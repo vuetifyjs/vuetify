@@ -10,7 +10,7 @@
     fixed
     height="58"
   >
-    <v-toolbar-side-icon
+    <v-app-bar-nav-icon
       v-if="!isHome"
       :aria-label="$t('Vuetify.AppToolbar.menu')"
       class="hidden-lg-and-up"

@@ -8,7 +8,7 @@
       </core-title>
       <core-section>
         <v-toolbar>
-          <v-toolbar-side-icon />
+          <v-app-bar-nav-icon />
           <v-toolbar-title>Title</v-toolbar-title>
           <v-spacer />
           <v-toolbar-items class="hidden-sm-and-down">
@@ -30,7 +30,7 @@
       </core-title>
       <core-section>
         <v-toolbar color="primary lighten-2">
-          <v-toolbar-side-icon />
+          <v-app-bar-nav-icon />
           <v-toolbar-title>Title</v-toolbar-title>
           <v-spacer />
           <v-toolbar-items class="hidden-sm-and-down">
@@ -48,7 +48,7 @@
       </core-section>
       <core-section class="mt-5">
         <v-toolbar color="success">
-          <v-toolbar-side-icon />
+          <v-app-bar-nav-icon />
           <v-toolbar-title>Title</v-toolbar-title>
           <v-spacer />
           <v-toolbar-items class="hidden-sm-and-down">
@@ -76,7 +76,7 @@
             extended
             flat
           >
-            <v-toolbar-side-icon />
+            <v-app-bar-nav-icon />
           </v-toolbar>
 
           <v-layout
@@ -176,7 +176,7 @@
                 :color="bar.class"
                 :dark="bar.dark"
               >
-                <v-toolbar-side-icon />
+                <v-app-bar-nav-icon />
                 <v-toolbar-title>Title</v-toolbar-title>
                 <v-spacer />
                 <v-btn icon>
@@ -202,7 +202,7 @@
           prominent
           extended
         >
-          <v-toolbar-side-icon />
+          <v-app-bar-nav-icon />
 
           <v-toolbar-title>Title</v-toolbar-title>
 
@@ -227,7 +227,7 @@
       </core-title>
       <core-section>
         <v-toolbar dense>
-          <v-toolbar-side-icon />
+          <v-app-bar-nav-icon />
 
           <v-toolbar-title>Title</v-toolbar-title>
 
@@ -255,7 +255,7 @@
           color="grey darken-1"
           dark
         >
-          <v-toolbar-side-icon />
+          <v-app-bar-nav-icon />
 
           <v-menu :nudge-width="100">
             <template #activator>

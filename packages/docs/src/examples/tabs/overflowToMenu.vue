@@ -6,7 +6,7 @@
       dark
       tabs
     >
-      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title>Page title</v-toolbar-title>
 

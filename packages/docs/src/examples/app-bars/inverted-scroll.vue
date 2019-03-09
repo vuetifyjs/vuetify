@@ -7,7 +7,7 @@
       inverted-scroll
       scroll-target="#scrolling-techniques-8"
     >
-      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title>Title</v-toolbar-title>
 

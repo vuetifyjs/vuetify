@@ -6,7 +6,7 @@
       extended
       flat
     >
-      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
     </v-toolbar>
 
     <v-card

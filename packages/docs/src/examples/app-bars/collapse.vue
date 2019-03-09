@@ -8,7 +8,7 @@
       dark
       scroll-target="#scrolling-techniques-6"
     >
-      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title>Collapsing Bar</v-toolbar-title>
 

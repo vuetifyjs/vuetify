@@ -1,28 +1,19 @@
 // Components
-import VIcon from '../VIcon'
-import VBtn from '../VBtn/VBtn'
+import VAppBarNavIcon from '../VAppBar/VAppBarNavIcon'
+
+// Utilities
+import { deprecate } from '../../util/console'
 
 // Types
-import Vue from 'vue'
+import { VNode } from 'vue'
 
 /* @vue/component */
-export default Vue.extend({
-  name: 'v-toolbar-side-icon',
+export default VAppBarNavIcon.extend({
+  name: 'v-app-bar-nav-icon',
 
-  functional: true,
+  render (h, context): VNode {
+    deprecate('<v-app-bar-nav-icon>', '<v-app-bar-nav-icon>', this)
 
-  render (h, { slots, listeners, props, data }) {
-    const d = Object.assign(data, {
-      staticClass: (`v-toolbar__side-icon ${data.staticClass || ''}`).trim(),
-      props: {
-        ...props,
-        icon: true
-      },
-      on: listeners
-    })
-
-    const defaultSlot = slots().default
-
-    return h(VBtn, d, defaultSlot || [h(VIcon, '$vuetify.icons.menu')])
+    return VAppBarNavIcon.options.render.call(this, h, context)
   }
 })

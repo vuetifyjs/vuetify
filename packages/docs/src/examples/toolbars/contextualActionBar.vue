@@ -7,7 +7,7 @@
       :color="selection.length ? 'grey darken-4' : 'deep-purple accent-4'"
       dark
     >
-      <v-toolbar-side-icon v-if="!selection.length"></v-toolbar-side-icon>
+      <v-app-bar-nav-icon v-if="!selection.length"></v-app-bar-nav-icon>
       <v-btn
         v-else
         icon

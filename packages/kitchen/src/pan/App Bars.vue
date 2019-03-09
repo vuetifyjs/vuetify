@@ -9,7 +9,7 @@
           dark
           color="primary"
         >
-          <v-toolbar-side-icon />
+          <v-app-bar-nav-icon />
 
           <v-toolbar-title class="white--text">
             Title
@@ -44,7 +44,7 @@
           dense
           color="primary"
         >
-          <v-toolbar-side-icon />
+          <v-app-bar-nav-icon />
 
           <v-toolbar-title class="white--text">
             Title
@@ -100,7 +100,7 @@
           dark
           extended
         >
-          <v-toolbar-side-icon />
+          <v-app-bar-nav-icon />
 
           <template #extension>
             <v-toolbar-title
@@ -140,7 +140,7 @@
           extended
           src="https://picsum.photos/1920/1080?random"
         >
-          <v-toolbar-side-icon />
+          <v-app-bar-nav-icon />
 
           <template #extension>
             <v-toolbar-title
@@ -184,7 +184,7 @@
             <v-img v-bind="props" gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)" />
           </template>
 
-          <v-toolbar-side-icon />
+          <v-app-bar-nav-icon />
 
           <template #extension>
             <v-toolbar-title
@@ -227,7 +227,7 @@
           scroll-target="#scroll-1"
           scroll-threshold="500"
         >
-          <v-toolbar-side-icon />
+          <v-app-bar-nav-icon />
 
           <template #extension>
             <v-toolbar-title
@@ -282,7 +282,7 @@
             <v-img v-bind="props" gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)" />
           </template>
 
-          <v-toolbar-side-icon />
+          <v-app-bar-nav-icon />
 
           <template #extension>
             <v-toolbar-title
@@ -337,7 +337,7 @@
             <v-img v-bind="props" gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)" />
           </template>
 
-          <v-toolbar-side-icon />
+          <v-app-bar-nav-icon />
 
           <template #extension>
             <v-toolbar-title
@@ -397,7 +397,7 @@
             Title
           </v-toolbar-title>
 
-          <v-toolbar-side-icon />
+          <v-app-bar-nav-icon />
 
           <v-spacer />
 

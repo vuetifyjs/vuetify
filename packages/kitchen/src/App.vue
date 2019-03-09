@@ -8,7 +8,7 @@
       clipped-right
       dir="ltr"
     >
-      <v-toolbar-side-icon @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title class="white--text headline">
         🍣
         <span class="font-weight-black">
