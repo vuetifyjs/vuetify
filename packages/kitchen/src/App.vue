@@ -1,6 +1,6 @@
 <template>
   <v-app :dark="$vuetify.theme.dark">
-    <v-toolbar
+    <v-app-bar
       color="blue-grey"
       dark
       fixed
@@ -51,7 +51,7 @@
       >
         <v-icon>mdi-pencil</v-icon>
       </v-btn>
-    </v-toolbar>
+    </v-app-bar>
     <v-navigation-drawer
       v-model="drawer"
       app
