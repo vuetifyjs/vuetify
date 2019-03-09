@@ -5,6 +5,10 @@
     "usage": {
       "desc": "An **app-bar** is composed of 5 parts. The **container**, **navigation icon** (optional), **title** (optional), **action items** (optional) and an **overflow menu** (optional)"
     },
+    "dense": {
+      "header": "### Dense",
+      "desc": "You can make **app-bar** dense. A dense app bar has lower height than regular one"
+    },
     "prominent": {
       "header": "### Prominent w/ scroll shrink",
       "desc": "An `v-app-bar` with the `prominent` prop can opt to have its height shrunk as the user scrolls down. This provides a smooth transition to taking up less visual space when the user is scrolling through content. Shrink height has 2 possible options, **dense** (48px) and **short** (56px) sizes."
