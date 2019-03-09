@@ -1,6 +1,6 @@
 {
-  "header": "# App Bar",
-  "headerText": "The `v-toolbar` component is pivotal to any gui, as it generally is the primary source of site navigation. The toolbar component works great in conjunction with a navigation drawer for hiding links and presenting an activator to open the sidebar on mobile.",
+  "header": "# App Bars",
+  "headerText": "The `v-app-bar` component is pivotal to any gui, as it generally is the primary source of site navigation. The toolbar component works great in conjunction with a navigation drawer for hiding links and presenting an activator to open the sidebar on mobile.",
   "examples": {
     "usage": {
       "desc": "An **app-bar** is composed of 5 parts. The **container**, **navigation icon** (optional), **title** (optional), **action items** (optional) and an **overflow menu** (optional)"
@@ -54,7 +54,6 @@
     "scrollThreshold": "The amount of scroll distance down before the toolbar uses scroll-off-screen",
     "shrinkOnScroll": "Shrinks a **prominent** toolbar to a **dense** or **short** (default) one",
     "src": "Image source. See `v-img` for details",
-    "imgProps": "Extra `v-img` props. See `v-img` for more information",
     "fade-img-on-scroll": "Fade image when user scrolls"
   },
   "slots": {
