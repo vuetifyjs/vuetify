@@ -408,7 +408,7 @@ export default VDataIterator.extend({
             // TODO: expose rest of props from virtual table?
           }),
           scopedSlots: {
-            items: ({ start, stop }) => this.genItems(props.items.slice(start, stop), props)
+            items: ({ start, stop }) => this.genItems(props.items.slice(start, stop), props) as any // TODO: fix typing
           }
         }, [
           this.proxySlot('body.before', [this.genCaption(props), this.genHeaders(props)]),
