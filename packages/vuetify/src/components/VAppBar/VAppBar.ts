@@ -221,17 +221,7 @@ export default mixins(
   mounted () {
     if (this.scrollTarget) {
       this.target = document.querySelector(this.scrollTarget)
-
-      if (!this.target) {
-        consoleWarn(`Unable to locate element with identifier ${this.scrollTarget}`, this)
-      } else {
-        this.target.addEventListener('scroll', this.onScroll, { passive: true })
-      }
     }
-  },
-
-  beforeDestroy () {
-    this.target && this.target.removeEventListener('scroll', this.onScroll)
   },
 
   methods: {
