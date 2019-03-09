@@ -21,25 +21,7 @@
         {
           "type": "api",
           "value": [
-            "v-toolbar",
             "v-system-bar"
-          ]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "examples",
-          "value": [
-            "columnWidthWithHierarchy",
-            "flexibleAndCard",
-            "floatingWithSearch",
-            "variations",
-            "prominent",
-            "dense",
-            "contextualActionBar"
           ]
         }
       ]
@@ -51,7 +33,7 @@
           "type": "up-next",
           "value": [
             "components/buttons",
-            "components/footer",
+            "components/toolbar",
             "components/tabs"
           ]
         }

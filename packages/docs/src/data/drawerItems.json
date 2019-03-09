@@ -79,7 +79,8 @@
         "text": "bars",
         "children": [
           { "text": "appBars", "to": "app-bars", "new": true },
-          { "text": "toolbars", "to": "toolbars", "updated": true }
+          { "text": "toolbars", "to": "toolbars", "updated": true },
+          { "text": "systemBars", "to": "system-bars", "updated": true }
         ]
       },
       { "text": "bottomNavigation", "to": "bottom-navigation" },
