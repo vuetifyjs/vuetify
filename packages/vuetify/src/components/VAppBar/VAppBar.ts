@@ -40,7 +40,7 @@ interface options extends ExtractVue<typeof baseMixins> {
   }
 }
 
-  /* @vue/component */
+/* @vue/component */
 export default baseMixins.extend<options>().extend({
   name: 'v-app-bar',
 
@@ -200,16 +200,10 @@ export default baseMixins.extend<options>().extend({
 
   watch: {
     canScroll: 'onScroll',
-    computedOpacity (val) {
-      this.$refs.image.style.opacity = val
-    },
-    currentScroll () {
-      if (
-        !this.shrinkOnScroll ||
-        this.currentScroll > this.currentThreshold
-      ) return
+    computedOpacity (val: number) {
+      if (!this.fadeImgOnScroll) return
 
-      this.currentThreshold = Math.abs(this.currentScroll - this.computedScrollThreshold)
+      this.$refs.image.style.opacity = String(val)
     },
     currentThreshold (val: number) {
       if (this.invertedScroll) {
@@ -262,14 +256,13 @@ export default baseMixins.extend<options>().extend({
     onScroll () {
       if (!this.canScroll) return
 
-      window.requestAnimationFrame(() => {
-        this.currentScroll = this.target
-          ? this.target.scrollTop
-          : window.pageYOffset
+      this.previousScroll = this.currentScroll
+      this.currentScroll = this.target
+        ? this.target.scrollTop
+        : window.pageYOffset
 
-        this.isScrollingUp = this.currentScroll < this.previousScroll
-        this.previousScroll = this.currentScroll
-      })
+      this.isScrollingUp = this.currentScroll < this.previousScroll
+      this.currentThreshold = Math.abs(this.currentScroll - this.computedScrollThreshold)
     },
     updateApplication (): number {
       return this.invertedScroll

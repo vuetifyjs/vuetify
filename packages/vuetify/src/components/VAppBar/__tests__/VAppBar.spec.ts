@@ -1,11 +1,7 @@
 // Libraries
 import Vue from 'vue'
 
-// Plugins
-import Router from 'vue-router'
-
 // Components
-import VApp from '../../VApp/VApp'
 import VAppBar from '../VAppBar'
 
 // Utilities
@@ -14,8 +10,7 @@ import {
   Wrapper
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../util/mixins'
-import { rafPolyfill, resizeWindow } from '../../../../test'
-import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
+import { rafPolyfill } from '../../../../test'
 
 const scrollWindow = (y: number) => {
   (global as any).pageYOffset = y
@@ -82,10 +77,10 @@ describe('AppBar.ts', () => {
     expect(wrapper.vm.isActive).toBe(true)
     expect(wrapper.vm.currentScroll).toBe(100)
 
-    await scrollWindow(500)
+    await scrollWindow(600)
 
     expect(wrapper.vm.isActive).toBe(false)
-    expect(wrapper.vm.currentScroll).toBe(500)
+    expect(wrapper.vm.currentScroll).toBe(600)
 
     await scrollWindow(475)
     await scrollWindow(0)
@@ -231,7 +226,8 @@ describe('AppBar.ts', () => {
   it('should calculate opacity', () => {
     const wrapper = mountFunction({
       propsData: {
-        fadeImgOnScroll: false
+        src: '/test.jpg',
+        fadeImgOnScroll: true
       }
     })
 
@@ -241,7 +237,7 @@ describe('AppBar.ts', () => {
     expect(wrapper.vm.computedOpacity).toBe(1)
 
     wrapper.setData({ currentScroll: 5 })
-    expect(wrapper.vm.computedOpacity).toBe(0.375)
+    expect(wrapper.vm.computedOpacity).toBe(0.38)
 
     wrapper.setData({ currentScroll: 100 })
     expect(wrapper.vm.computedOpacity).toBe(0)

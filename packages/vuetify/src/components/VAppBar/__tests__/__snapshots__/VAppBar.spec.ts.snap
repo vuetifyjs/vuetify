@@ -5,9 +5,7 @@ exports[`AppBar.ts should render with background 1`] = `
 <nav class="v-sheet v-sheet--tile theme--light v-toolbar v-app-bar"
      style="margin-top: 0px; left: 0px; right: 0px;"
 >
-  <div class="v-toolbar__image"
-       style="opacity: 1;"
-  >
+  <div class="v-toolbar__image">
     <div class="v-responsive v-image"
          style="height: 64px;"
     >
