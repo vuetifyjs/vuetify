@@ -18,6 +18,7 @@ export default VSheet.extend({
 
   props: {
     absolute: Boolean,
+    bottom: Boolean,
     dense: Boolean,
     collapse: Boolean,
     extended: Boolean,
@@ -45,6 +46,9 @@ export default VSheet.extend({
   }),
 
   computed: {
+    applicationProperty (): string {
+      return !this.bottom ? 'top' : 'bottom'
+    },
     computedHeight (): number {
       const height = this.computedContentHeight
 
@@ -66,6 +70,7 @@ export default VSheet.extend({
         ...VSheet.options.computed.classes.call(this),
         'v-toolbar': true,
         'v-toolbar--absolute': this.absolute,
+        'v-toolbar--bottom': this.bottom,
         'v-toolbar--collapse': this.collapse,
         'v-toolbar--collapsed': this.isCollapsed,
         'v-toolbar--dense': this.dense,
