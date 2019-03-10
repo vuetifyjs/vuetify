@@ -64,8 +64,8 @@ export default VDataIterator.extend({
     computedHeaders (): TableHeader[] {
       const headers = this.headers.filter(h => h.value === undefined || !this.internalGroupBy.find(v => v === h.value))
 
-      this.showSelect && headers.unshift({ text: '', value: 'dataTableSelect', sortable: false, width: '1px' })
-      this.showExpand && headers.unshift({ text: '', value: 'dataTableExpand', sortable: false, width: '1px' })
+      this.showSelect && headers.unshift({ text: '', value: 'data-table-select', sortable: false, width: '1px' })
+      this.showExpand && headers.unshift({ text: '', value: 'data-table-expand', sortable: false, width: '1px' })
 
       return headers
     },
@@ -313,8 +313,8 @@ export default VDataIterator.extend({
           }
         }
 
-        const slot = scopedSlots['column.dataTableSelect']
-        scopedSlots['column.dataTableSelect'] = slot ? () => slot(data) : () => this.$createElement(VSimpleCheckbox, {
+        const slot = scopedSlots['column.data-table-select']
+        scopedSlots['column.data-table-select'] = slot ? () => slot(data) : () => this.$createElement(VSimpleCheckbox, {
           staticClass: 'v-data-table__checkbox',
           ...data
         })
@@ -332,8 +332,8 @@ export default VDataIterator.extend({
           }
         }
 
-        const slot = scopedSlots['column.dataTableExpand']
-        scopedSlots['column.dataTableExpand'] = slot ? () => slot(data) : () => this.$createElement(VIcon, {
+        const slot = scopedSlots['column.data-table-expand']
+        scopedSlots['column.data-table-expand'] = slot ? () => slot(data) : () => this.$createElement(VIcon, {
           staticClass: 'v-data-table__expand-icon',
           class: {
             'v-data-table__expand-icon--active': expanded

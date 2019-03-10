@@ -15,7 +15,6 @@ export interface TableHeader {
   divider?: boolean
   class?: string | string[]
   width?: string | number
-  type?: 'showExpand' | 'showSelect'
   filter?: (value: any, search: string, item: any) => boolean
   sort?: compareFn
 }
@@ -65,8 +64,8 @@ export default mixins<options>().extend({
         }
       }
 
-      if (this.$scopedSlots.dataTableSelect) {
-        return this.$scopedSlots.dataTableSelect(data)
+      if (this.$scopedSlots['data-table-select']) {
+        return this.$scopedSlots['data-table-select']!(data)
       }
 
       return this.$createElement(VSimpleCheckbox, {

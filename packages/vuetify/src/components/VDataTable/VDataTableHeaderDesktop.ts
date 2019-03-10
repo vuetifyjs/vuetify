@@ -29,7 +29,7 @@ export default mixins(header).extend({
         [getTextAlignment(header.align, this.$vuetify.rtl)]: true
       }
 
-      if (header.value === 'dataTableSelect') {
+      if (header.value === 'data-table-select') {
         children.push(this.genSelectAll())
       } else {
         children.push(this.$scopedSlots[header.value]
