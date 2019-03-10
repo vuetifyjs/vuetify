@@ -1,0 +1,15 @@
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+@import './_mixins.sass'
+
+/* Theme */
+.v-counter.theme--light
+  +counter-theme($material-light)
+.v-counter.theme--dark
+  +counter-theme($material-dark)
+
+.v-counter
+  flex: 0 1 auto
+  font-size: $counter-font-size
+  min-height: $counter-min-height
+  line-height: 1
