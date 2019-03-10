@@ -88,6 +88,6 @@
 
 <style lang="stylus">
   #consulting
-    .v-list__tile
+    .v-list-item
       height: 32px !important
 </style>

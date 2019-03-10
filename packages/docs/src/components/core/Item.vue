@@ -2,7 +2,7 @@
   <v-list-item
     :to="path"
     v-bind="customAttrs"
-    class="v-list__tile--doc"
+    class="v-list-item--doc"
     ripple
     v-on="$listeners"
   >
@@ -124,7 +124,7 @@
 </script>
 
 <style lang="stylus">
-.v-list__tile--doc {
+.v-list-item--doc {
   p {
     margin-bottom: 0;
   }
