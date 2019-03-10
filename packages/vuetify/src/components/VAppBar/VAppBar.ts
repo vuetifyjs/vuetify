@@ -67,6 +67,9 @@ export default baseMixins.extend({
   }),
 
   computed: {
+    applicationProperty (): string {
+      return !this.bottom ? 'top' : 'bottom'
+    },
     canScroll (): boolean {
       return (
         typeof window !== 'undefined' &&

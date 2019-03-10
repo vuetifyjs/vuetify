@@ -46,9 +46,6 @@ export default VSheet.extend({
   }),
 
   computed: {
-    applicationProperty (): string {
-      return !this.bottom ? 'top' : 'bottom'
-    },
     computedHeight (): number {
       const height = this.computedContentHeight
 
