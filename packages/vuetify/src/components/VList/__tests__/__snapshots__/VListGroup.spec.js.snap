@@ -6,8 +6,12 @@ exports[`VListGroup.js should render a component with no padding for action icon
      class="v-list theme--light"
 >
   <div class="v-list-group">
-    <div class="v-list-group__header">
-      <div class="v-list-group__header__append-icon">
+    <div aria-selected="false"
+         role="listitem"
+         tabindex="-1"
+         class="v-list-group__header v-list-item v-list-item--link theme--light"
+    >
+      <div class="v-list-item__icon v-list-group__header__append-icon">
         <i aria-hidden="true"
            class="v-icon material-icons theme--light"
         >
@@ -18,6 +22,8 @@ exports[`VListGroup.js should render a component with no padding for action icon
     <div class="v-list-group__items"
          style="display: none;"
     >
+      <div>
+      </div>
     </div>
   </div>
 </div>
@@ -30,8 +36,12 @@ exports[`VListGroup.js should render a component with route namespace and match 
      class="v-list theme--light"
 >
   <div class="v-list-group">
-    <div class="v-list-group__header">
-      <div class="v-list-group__header__append-icon">
+    <div aria-selected="false"
+         role="listitem"
+         tabindex="-1"
+         class="v-list-group__header v-list-item v-list-item--link theme--light"
+    >
+      <div class="v-list-item__icon v-list-group__header__append-icon">
         <i aria-hidden="true"
            class="v-icon material-icons theme--light"
         >
@@ -42,6 +52,8 @@ exports[`VListGroup.js should render a component with route namespace and match 
     <div class="v-list-group__items"
          style="display: none;"
     >
+      <div>
+      </div>
     </div>
   </div>
 </div>
@@ -54,8 +66,12 @@ exports[`VListGroup.js should render a lazy component and match snapshot 1`] = `
      class="v-list theme--light"
 >
   <div class="v-list-group">
-    <div class="v-list-group__header">
-      <div class="v-list-group__header__append-icon">
+    <div aria-selected="false"
+         role="listitem"
+         tabindex="-1"
+         class="v-list-group__header v-list-item v-list-item--link theme--light"
+    >
+      <div class="v-list-item__icon v-list-group__header__append-icon">
         <i aria-hidden="true"
            class="v-icon material-icons theme--light"
         >
@@ -66,6 +82,8 @@ exports[`VListGroup.js should render a lazy component and match snapshot 1`] = `
     <div class="v-list-group__items"
          style="display: none;"
     >
+      <div>
+      </div>
     </div>
   </div>
 </div>
@@ -78,8 +96,12 @@ exports[`VListGroup.js should render component and match snapshot 1`] = `
      class="v-list theme--light"
 >
   <div class="v-list-group">
-    <div class="v-list-group__header">
-      <div class="v-list-group__header__append-icon">
+    <div aria-selected="false"
+         role="listitem"
+         tabindex="-1"
+         class="v-list-group__header v-list-item v-list-item--link theme--light"
+    >
+      <div class="v-list-item__icon v-list-group__header__append-icon">
         <i aria-hidden="true"
            class="v-icon material-icons theme--light"
         >
@@ -90,6 +112,8 @@ exports[`VListGroup.js should render component and match snapshot 1`] = `
     <div class="v-list-group__items"
          style="display: none;"
     >
+      <div>
+      </div>
     </div>
   </div>
 </div>

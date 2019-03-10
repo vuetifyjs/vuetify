@@ -84,7 +84,7 @@ export default Vue.extend({
           replace: this.replace
         })
       } else {
-        tag = (this.href && 'a') || this.tag || 'a'
+        tag = (this.href && 'a') || this.tag || 'div'
 
         if (tag === 'a' && this.href) data.attrs!.href = this.href
       }
