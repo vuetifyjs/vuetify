@@ -53,6 +53,7 @@
   },
   "props": {
     "absolute": "Absolutely position the toolbar",
+    "bottom": "Mixins.Positionable.props.bottom",
     "collapse": "Puts the toolbar into a collapse state",
     "dense": "Reduces the height of the toolbar content to 48px (96px when using with prominent)",
     "extended": "Force the toolbar to generate the extension without using the slot",

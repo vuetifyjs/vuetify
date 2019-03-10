@@ -51,7 +51,8 @@
     "hideOnScroll": "Will transition the toolbar and extension off screen when scrolling down",
     "fadeImgOnScroll": "When using the **src** prop or `img` scoped slot, will fade the image when scrolling",
     "scrollTarget": "Assign the scroll target for scroll-off-screen",
-    "scrollThreshold": "The amount of scroll distance down before the toolbar uses scroll-off-screen",
+    "scrollThreshold": "The amount of scroll distance down before **hide-on-scroll** activates.",
+    "scrollOffScreen": "Scroll the entire `v-app-bar` (including extension) off screen.",
     "shrinkOnScroll": "Shrinks a **prominent** toolbar to a **dense** or **short** (default) one",
     "src": "Image source. See `v-img` for details",
     "fade-img-on-scroll": "Fade image when user scrolls"
