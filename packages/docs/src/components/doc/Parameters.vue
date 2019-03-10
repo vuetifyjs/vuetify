@@ -15,7 +15,7 @@
       class="component-parameters pa-2"
       hide-default-footer
     >
-      <template v-slot:default="{ items }">
+      <template #default="{ items }">
         <v-flex
           v-for="item in items"
           :key="item.name"
