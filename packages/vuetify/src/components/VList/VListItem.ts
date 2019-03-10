@@ -52,6 +52,7 @@ export default baseMixins.extend<options>().extend({
     } as any as PropValidator<string>,
     dense: Boolean,
     inactive: Boolean,
+    link: Boolean,
     ripple: {
       type: [Boolean, Object],
       default: null
@@ -90,6 +91,7 @@ export default baseMixins.extend<options>().extend({
         this.href ||
         this.to ||
         this.listItemGroup ||
+        this.link ||
         hasClick
       )
     }
