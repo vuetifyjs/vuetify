@@ -111,13 +111,13 @@ test('VSelectList', ({ mount }) => {
       }
     })
 
-    expect(wrapper.find('.v-list__tile').length).toBe(2)
+    expect(wrapper.find('.v-list-item').length).toBe(2)
 
     wrapper.setProps({ selectedItems: ['foo', 'bar'] })
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.find('.v-list__tile').length).toBe(1)
+    expect(wrapper.find('.v-list-item').length).toBe(1)
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/4431

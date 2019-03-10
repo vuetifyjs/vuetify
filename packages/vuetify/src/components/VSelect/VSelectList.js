@@ -122,7 +122,7 @@ export default {
       return this.$createElement(VSubheader, { props }, props.header)
     },
     genHighlight (text) {
-      return `<span class="v-list__tile__mask">${escapeHTML(text)}</span>`
+      return `<span class="v-list-item__mask">${escapeHTML(text)}</span>`
     },
     getMaskedCharacters (text) {
       const searchInput = (this.searchInput || '').toString().toLocaleLowerCase()

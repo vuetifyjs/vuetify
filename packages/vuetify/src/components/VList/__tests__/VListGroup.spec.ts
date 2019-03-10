@@ -45,7 +45,7 @@ describe('VListGroup.ts', () => {
     })
 
     await wrapper.vm.$nextTick()
-    expect(listClick).toBeCalledWith(wrapper.vm._uid)
+    expect(listClick).toHaveBeenCalledWith(wrapper.vm._uid)
   })
 
   it('should toggle when clicked', async () => {
@@ -55,7 +55,7 @@ describe('VListGroup.ts', () => {
     wrapper.vm.$on('input', input)
     wrapper.vm.click()
     await wrapper.vm.$nextTick()
-    expect(input).toBeCalledWith(true)
+    expect(input).toHaveBeenCalledWith(true)
   })
 
   it('should register when mounted', () => {
@@ -69,7 +69,7 @@ describe('VListGroup.ts', () => {
       }
     })
 
-    expect(register).toBeCalledWith(wrapper.vm)
+    expect(register).toHaveBeenCalledWith(wrapper.vm)
   })
 
   it('should unregister when destroyed', async () => {
@@ -85,7 +85,7 @@ describe('VListGroup.ts', () => {
 
     wrapper.destroy()
     await wrapper.vm.$nextTick()
-    expect(unregister).toBeCalledWith(wrapper.vm)
+    expect(unregister).toHaveBeenCalledWith(wrapper.vm)
   })
 
   it('should render a custom affix icons', async () => {
@@ -134,7 +134,7 @@ describe('VListGroup.ts', () => {
         }
       },
       propsData: {
-        group: 'foo',
+        group: 'foo'
       },
       mocks: { $route }
     })

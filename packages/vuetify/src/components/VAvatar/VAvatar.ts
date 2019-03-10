@@ -47,7 +47,8 @@ export default mixins(
     const data = {
       staticClass: 'v-avatar',
       class: this.classes,
-      style: this.styles
+      style: this.styles,
+      on: this.$listeners
     }
 
     return h('div', this.setBackgroundColor(this.color, data), this.$slots.default)

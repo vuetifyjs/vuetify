@@ -212,7 +212,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
     // Wait for watcher
     await wrapper.vm.$nextTick()
 
-    const tile = wrapper.first('.v-list__tile__title')
+    const tile = wrapper.first('.v-list-item__title')
 
     expect(tile.text()).toBe('No data available')
   })
@@ -513,7 +513,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.isMenuActive).toBe(false)
     const slot = wrapper.first('.v-input__slot')
-    const item = wrapper.first('.v-list__tile')
+    const item = wrapper.first('.v-list-item')
     slot.trigger('click')
 
     expect(wrapper.vm.isMenuActive).toBe(true)

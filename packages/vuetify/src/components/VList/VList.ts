@@ -25,6 +25,7 @@ export default mixins(
 
   props: {
     dense: Boolean,
+    disabled: Boolean,
     expand: Boolean,
     flat: Boolean,
     nav: Boolean,
@@ -42,6 +43,7 @@ export default mixins(
     classes (): object {
       return {
         'v-list--dense': this.dense,
+        'v-list--disabled': this.disabled,
         'v-list--flat': this.flat,
         'v-list--nav': this.nav,
         'v-list--shaped': this.shaped,

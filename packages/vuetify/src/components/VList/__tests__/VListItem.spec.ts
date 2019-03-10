@@ -1,13 +1,9 @@
+// Components
 import VListItem from '../VListItem'
 
-const stub = {
-  name: 'router-link',
-  render: h => h('button')
-}
-
+// Utilities
 import {
   mount,
-  RouterLinkStub,
   Wrapper
 } from '@vue/test-utils'
 

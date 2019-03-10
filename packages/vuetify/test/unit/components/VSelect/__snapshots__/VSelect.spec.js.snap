@@ -2,7 +2,7 @@
 
 exports[`VSelect should escape items in menu 1`] = `
 
-<div class="v-list__tile__title">
+<div class="v-list-item__title">
   &lt;strong&gt;foo&lt;/strong&gt;
 </div>
 

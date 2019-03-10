@@ -40,11 +40,11 @@
 
   &-transition
     &-enter
-      .v-list__tile
+      .v-list-item
         min-width: 0
         pointer-events: none
     &-enter-to
-      .v-list__tile
+      .v-list-item
         pointer-events: auto
         transition-delay: .1s
 
@@ -64,11 +64,11 @@
   &.v-menu__content--auto
     transition: none !important
 
-    .v-list__tile
+    .v-list-item
       opacity: 0
       transform: translateY(-15px)
 
-    .v-list__tile--active
+    .v-list-item--active
       opacity: 1
       transform: none !important
       pointer-events: auto

@@ -42,7 +42,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const item = wrapper.first('div.v-list--disabled')
+    const item = wrapper.first('.v-list-item--disabled')
 
     expect(item.element.getAttribute('disabled')).toBe('disabled')
   })
@@ -157,7 +157,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.isFocused).toBe(true)
     expect(wrapper.vm.isMenuActive).toBe(true)
 
-    const item = wrapper.find('div a.v-list__tile')[0]
+    const item = wrapper.find('.v-list-item')[0]
     item.trigger('click')
 
     await wrapper.vm.$nextTick()
@@ -259,7 +259,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const tileTitle = wrapper.find('.v-list__tile__title')[0]
+    const tileTitle = wrapper.find('.v-list-item__title')[0]
     expect(tileTitle.html()).toMatchSnapshot()
   })
 
