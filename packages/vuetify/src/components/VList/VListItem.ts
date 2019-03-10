@@ -98,6 +98,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   created () {
+    /* istanbul ignore next */
     if ('avatar' in this.$attrs) {
       removed('avatar')
     }
@@ -130,7 +131,9 @@ export default baseMixins.extend<options>().extend({
     }
     data.on = {
       ...data.on,
+      click: this.click,
       keydown: (e: KeyboardEvent) => {
+        /* istanbul ignore else */
         if (e.keyCode === keyCodes.enter) this.click(e)
 
         this.$emit('keydown', e)

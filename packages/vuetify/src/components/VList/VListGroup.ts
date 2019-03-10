@@ -11,7 +11,6 @@ import VListItemIcon from './VListItemIcon'
 import Bootable from '../../mixins/bootable'
 import Toggleable from '../../mixins/toggleable'
 import { inject as RegistrableInject } from '../../mixins/registrable'
-import { Route } from 'vue-router'
 
 // Directives
 import Ripple from '../../directives/ripple'
@@ -25,6 +24,7 @@ import { keyCodes } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
+import { Route } from 'vue-router'
 
 const baseMixins = mixins(
   Bootable,
@@ -80,21 +80,12 @@ export default baseMixins.extend<options>().extend({
 
   watch: {
     isActive (val) {
+      /* istanbul ignore else */
       if (!this.subGroup && val) {
         this.list && this.list.listClick(this._uid)
       }
     },
-    $route (to) {
-      const isActive = this.matchRoute(to.path)
-
-      if (this.group) {
-        if (isActive && this.isActive !== isActive) {
-          this.list && this.list.listClick(this._uid)
-        }
-
-        this.isActive = isActive
-      }
-    }
+    $route: 'onRouteChange'
   },
 
   mounted () {
@@ -146,6 +137,7 @@ export default baseMixins.extend<options>().extend({
           ...this.$listeners,
           click: this.click,
           keydown: (e: KeyboardEvent) => {
+            /* istanbul ignore else */
             if (e.keyCode === keyCodes.enter) this.click()
           }
         }
@@ -181,11 +173,23 @@ export default baseMixins.extend<options>().extend({
         this.$slots.prependIcon || this.genIcon(icon)
       ])
     },
+    onRouteChange (to: Route) {
+      /* istanbul ignore if */
+      if (!this.group) return
+
+      const isActive = this.matchRoute(to.path)
+
+      /* istanbul ignore else */
+      if (isActive && this.isActive !== isActive) {
+        this.list && this.list.listClick(this._uid)
+      }
+
+      this.isActive = isActive
+    },
     toggle (uid: number) {
       this.isActive = this._uid === uid
     },
     matchRoute (to: string) {
-      if (!this.group) return false
       return to.match(this.group) !== null
     }
   },
