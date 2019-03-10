@@ -24,8 +24,7 @@ export default VSheet.extend({
     extended: Boolean,
     extensionHeight: {
       default: 48,
-      type: [Number, String],
-      validator: (v: any) => !isNaN(parseInt(v))
+      type: [Number, String]
     },
     flat: Boolean,
     floating: Boolean,
@@ -49,9 +48,13 @@ export default VSheet.extend({
     computedHeight (): number {
       const height = this.computedContentHeight
 
+      if (!this.isExtended) return height
+
+      const extensionHeight = parseInt(this.extensionHeight)
+
       return this.isCollapsed
         ? height
-        : height + (this.isExtended ? this.extensionHeight : 0)
+        : height + (!isNaN(extensionHeight) ? extensionHeight : 0)
     },
     computedContentHeight (): number {
       if (this.height) return parseInt(this.height)

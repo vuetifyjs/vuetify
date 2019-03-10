@@ -145,7 +145,7 @@ export default baseMixins.extend({
     },
     computedOriginalHeight (): number {
       let height = VToolbar.options.computed.computedContentHeight.call(this)
-      if (this.isExtended) height += this.extensionHeight
+      if (this.isExtended) height += parseInt(this.extensionHeight)
       return height
     },
     computedRight (): number {
