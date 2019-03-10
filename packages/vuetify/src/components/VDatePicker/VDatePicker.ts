@@ -277,7 +277,7 @@ export default mixins(
       if (this.type === 'month') {
         this.tableDate = `${value}`
       } else {
-        this.tableDate = `${value}-${pad(this.tableMonth + 1)}`
+        this.tableDate = `${value}-${pad((this.tableMonth || 0) + 1)}`
       }
       this.activePicker = 'MONTH'
       if (this.reactive && !this.readonly && !this.multiple && this.isDateAllowed(this.inputDate)) {
