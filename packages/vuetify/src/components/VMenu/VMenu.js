@@ -98,9 +98,7 @@ export default Vue.extend({
     calculatedLeft () {
       const menuWidth = Math.max(this.dimensions.content.width, parseFloat(this.calculatedMinWidth))
 
-      if (!this.auto) return this.calcLeft(menuWidth)
-
-      return `${this.calcXOverflow(this.calcLeftAuto(), menuWidth)}px`
+      return this.calcLeft(menuWidth)
     },
     calculatedMaxHeight () {
       return this.auto ? '200px' : convertToUnit(this.maxHeight)
@@ -118,9 +116,7 @@ export default Vue.extend({
       }
 
       const minWidth = Math.min(
-        this.dimensions.activator.width +
-        this.nudgeWidth +
-        (this.auto ? 16 : 0),
+        this.dimensions.activator.width + this.nudgeWidth,
         Math.max(this.pageWidth - 24, 0)
       )
 
