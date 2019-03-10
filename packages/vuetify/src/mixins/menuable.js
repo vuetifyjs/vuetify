@@ -100,7 +100,6 @@ export default Vue.extend({
     isContentActive: false,
     pageWidth: 0,
     pageYOffset: 0,
-    stackClass: 'v-menu__content--active',
     stackMinZIndex: 6
   }),
 
