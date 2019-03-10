@@ -48,6 +48,7 @@ export default baseMixins.extend({
     elevateOnScroll: Boolean,
     hideOnScroll: Boolean,
     invertedScroll: Boolean,
+    scrollOffScreen: Boolean,
     scrollTarget: String,
     scrollThreshold: [String, Number],
     shrinkOnScroll: Boolean,
@@ -161,14 +162,16 @@ export default baseMixins.extend({
     computedTransform (): number {
       if (!this.canScroll || this.elevateOnScroll) return 0
 
-      return !this.isActive
-        ? -this.computedContentHeight
-        : 0
+      if (this.isActive) return 0
+
+      return this.scrollOffScreen
+        ? -this.computedHeight
+        : -this.computedContentHeight
     },
     hideShadow (): boolean {
       if (this.elevateOnScroll) return this.currentScroll === 0
 
-      return this.computedTransform !== 0
+      return this.scrollOffScreen && this.computedTransform !== 0
     },
     isCollapsed (): boolean {
       if (!this.collapseOnScroll) {

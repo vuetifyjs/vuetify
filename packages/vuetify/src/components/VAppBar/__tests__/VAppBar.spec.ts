@@ -10,7 +10,7 @@ import {
   Wrapper
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../util/mixins'
-import { rafPolyfill } from '../../../../test'
+import { rafPolyfill, resizeWindow } from '../../../../test'
 
 const scrollWindow = (y: number) => {
   (global as any).pageYOffset = y
@@ -135,7 +135,7 @@ describe('AppBar.ts', () => {
     expect('Unable to locate element with identifier #test').toHaveBeenTipped()
   })
 
-  it('should set active based on manual scroll', async () => {
+  it('should set active based on value', async () => {
     const wrapper = mountFunction({
       propsData: {
         hideOnScroll: true
@@ -241,5 +241,25 @@ describe('AppBar.ts', () => {
 
     wrapper.setData({ currentScroll: 100 })
     expect(wrapper.vm.computedOpacity).toBe(0)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/4985
+  it('should scroll toolbar and extension completely off screen', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        hideOnScroll: true,
+        extended: true
+      }
+    })
+
+    expect(wrapper.vm.computedTransform).toBe(0)
+
+    await scrollWindow(500)
+
+    expect(wrapper.vm.computedTransform).toBe(-64)
+
+    wrapper.setProps({ scrollOffScreen: true })
+
+    expect(wrapper.vm.computedTransform).toBe(-112)
   })
 })

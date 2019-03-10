@@ -75,7 +75,7 @@ const wrapper = Vue.extend({
     }
 
     if (props.scrollOffScreen) {
-      deprecate('<v-toolbar scroll-off-screen>', '<v-app-bar hide-on-scroll>')
+      deprecate('<v-toolbar scroll-off-screen>', '<v-app-bar hide-on-scroll scroll-off-screen>')
       data.attrs.scrollOffScreen = props.scrollOffScreen
     }
 
