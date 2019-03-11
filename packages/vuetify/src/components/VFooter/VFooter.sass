@@ -1,0 +1,26 @@
+@import '../../styles/styles.sass'
+@import './_mixins.sass'
+@import './_variables.scss'
+
+.v-footer.theme--light
+  +footer-theme($material-light)
+.v-footer.theme--dark
+  +footer-theme($material-dark)
+
+.v-footer
+  align-items: center
+  display: flex
+  flex: 0 1 auto !important // Don't let devs break their code
+  padding: $footer-padding
+  transition: background-color .2s map-get($transition, 'fast-out-slow-in')
+
+  &--absolute,
+  &--fixed
+    z-index: 3
+
+  &--absolute
+    position: absolute
+    width: 100%
+
+  &--fixed
+    position: fixed

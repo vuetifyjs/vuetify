@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_footer.styl'
+import './VFooter.sass'
 
 // Mixins
 import Applicationable from '../../mixins/applicationable'
@@ -42,20 +42,20 @@ export default mixins(
         'v-footer--inset': this.inset
       }
     },
-    computedBottom (): number | undefined {
+    computedBottom (): number {
       return this.app
         ? this.$vuetify.application.bottom
-        : undefined
+        : 0
     },
-    computedLeft (): number | undefined {
+    computedLeft (): number {
       return this.app && this.inset
         ? this.$vuetify.application.left
-        : undefined
+        : 0
     },
-    computedRight (): number | undefined {
+    computedRight (): number {
       return this.app && this.inset
-        ? this.$vuetify.application.left
-        : undefined
+        ? this.$vuetify.application.right
+        : 0
     },
     styles (): object {
       const height = parseInt(this.height)
