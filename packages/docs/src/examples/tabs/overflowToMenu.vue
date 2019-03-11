@@ -20,7 +20,7 @@
         <v-icon>more_vert</v-icon>
       </v-btn>
 
-      <template #extension>
+      <template v-slot:extension>
         <v-tabs
           v-model="currentItem"
           fixed-tabs

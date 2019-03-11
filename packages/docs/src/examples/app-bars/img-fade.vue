@@ -10,7 +10,7 @@
       fade-img-on-scroll
       scroll-target="#scrolling-techniques-3"
     >
-      <template #img="{ props }">
+      <template v-slot:img="{ props }">
         <v-img
           v-bind="props"
           gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)"
@@ -35,7 +35,7 @@
         <v-icon>more_vert</v-icon>
       </v-btn>
 
-      <template #extension>
+      <template v-slot:extension>
         <v-tabs align-with-title>
           <v-tab>Tab 1</v-tab>
           <v-tab>Tab 2</v-tab>

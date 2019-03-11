@@ -11,7 +11,7 @@
       scroll-target="#scrolling-techniques-5"
       scroll-threshold="500"
     >
-      <template #img="{ props }">
+      <template v-slot:img="{ props }">
         <v-img
           v-bind="props"
           gradient="to top right, rgba(55,236,186,.7), rgba(25,32,72,.7)"
