@@ -3,7 +3,7 @@
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
         <v-toolbar color="pink" dark>
-          <v-toolbar-side-icon></v-toolbar-side-icon>
+          <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
           <v-toolbar-title>Inbox</v-toolbar-title>
 

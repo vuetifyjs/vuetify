@@ -1,46 +1,34 @@
 {
   "header": "# Toolbar",
-  "headerText": "The `v-toolbar` component is pivotal to any gui, as it generally is the primary source of site navigation. The toolbar component works great in conjunction with a navigation drawer for hiding links and presenting an activator to open the sidebar on mobile.",
+  "headerText": "The `v-toolbar` component is pivotal to any gui, as it generally is the primary source of site navigation. The toolbar component works great in conjunction with [v-navigation-drawer](/components/navigation-drawers) and [v-card](/components/cards).",
   "examples": {
     "usage": {
-      "desc": "A toolbar is a flexible container that can be utilized in a number of ways. By default, the toolbar is 64px high on desktop, 56px high on mobile portrait and 48px high on mobile landscape. There are a number of helper components available to use with the toolbar. These are `v-toolbar-side-icon`, `v-toolbar-title` and `v-toolbar-items`."
-    },
-    "appBar": {
-      "header": "### App bar",
-      "desc": "An App bar is the primary toolbar of your application. It can contain icons, menus and more."
-    },
-    "appBarItems": {
-      "header": "### App bar with items",
-      "desc": "Utilizing the `v-toolbar-items` component you can use regular `v-btn` components to create app bar items. Don't forget to apply the `flat` prop to each button."
-    },
-    "appBarExtension": {
-      "header": "### App bar with extension",
-      "desc": "An extension can be used that creates a much more prominent bar. If a title is placed within the extension, it will automatically be shifted to the right to match the normal location it would be at in the main bar."
+      "desc": "A toolbar is a flexible container that can be utilized in a number of ways. By default, the toolbar is 64px high on desktop and 56px high on mobile. There are a number of helper components available to use with the toolbar. The `v-toolbar-title` is used for displaying a title and `v-toolbar-items` allow [v-btn](/components/buttons) to extend full height."
     },
     "columnWidthWithHierarchy": {
       "header": "### Column width with hierarchy",
-      "desc": "Toolbars come in 2 variants, light and dark. Light toolbars have dark tinted buttons and dark text whereas Dark toolbars have white tinted buttons and white text."
+      "desc": "Toolbars come in **2** variants, light and dark. Light toolbars have dark tinted buttons and dark text whereas dark toolbars have white tinted buttons and white text."
     },
     "flexibleAndCard": {
       "header": "### Flexible toolbar and card toolbar",
-      "desc": "With a few custom styles, you can easily create your amazing user interfaces."
+      "desc": "In this example we offset our card onto the extended content area of a toolbar using the **extended** prop."
     },
     "floatingWithSearch": {
       "header": "### Floating with search",
-      "desc": "A floating toolbar can be placed over the content that it references."
+      "desc": "A floating toolbar is turned into an inline element that only takes up as much space as needed. This is particilarly useful when placing toolbars over content."
     },
     "variations": {
       "header": "### Variations",
-      "desc": "An app-bar has multiple variations that can be applied with themes and helper classes. These range from light and dark themes, colored and transparent.",
+      "desc": "A `v-toolbar` has multiple variations that can be applied with themes and helper classes. These range from light and dark themes, colored and transparent.",
       "uninverted": true
     },
     "prominent": {
       "header": "### Prominent toolbars",
-      "desc": "Prominent toolbars add a slot where you can placed elements in the extended area. The content and extension areas will be locked to 64px in height."
+      "desc": "Prominent toolbars increase the `v-toolbar`'s height to _128px_ and positions the `v-toolbar-title` towards the bottom of the container. This is exanded upon in [v-app](/components/app-bars#prominent-w-scroll-shrink) with the ability to shrink a **prominent** toolbar to a **dense** or **short** one."
     },
     "dense": {
       "header": "### Dense toolbars",
-      "desc": "Dense toolbars reduce their height to 48px. This is also the default behavior for mobile landscape orientation."
+      "desc": "Dense toolbars reduce their height to _48px_. When using in conjunction with the **prominent** prop, will reduce height to _96px_."
     },
     "denseProminent": {
       "header": "### Dense prominent toolbars",
@@ -50,38 +38,40 @@
       "header": "### Scrolling techniques",
       "desc": "A toolbar can transition off screen when scrolling. Here we demonstrate how you can specify the scroll target (default is window). Keep in mind, for this example there is special markup that will not be required in your application."
     },
-    "appBarMenu": {
-      "header": "### App bar with menu",
-      "desc": "You can add menu components to a toolbar."
-    },
     "systemBarsStatusWindow": {
       "header": "### System bars - status/window",
       "desc": "System bars are useful for notification icons on mobile and desktop. For live examples of these, head to the pre-defined layouts."
+    },
+    "contextualActionBar": {
+      "header": "### Contextual action bars",
+      "desc": "In this example we conntext various item visibility states through a `v-select`'s **v-model**."
+    },
+    "background": {
+      "header": "### Prominent w/ Background",
+      "desc": "Toolbars can display a background as opposed to a solid color. This can be modified by using the **img** scoped slot and providing your own [v-img](/components/images) component. Backgrounds can be faded using a [v-app-bar](/components/app-bars#prominent-w-scroll-shrink-and-image)."
     }
   },
   "props": {
-    "card": "Inherits border radius when used within `v-card`",
-    "clippedLeft": "Designates that the applications `v-navigation-drawer` is clipped on the left side of the toolbar",
-    "clippedRight": "Designates that the applications `v-navigation-drawer` is clipped on the right side of the toolbar",
-    "dense": "Reduces the height of the toolbar content and extension",
+    "absolute": "Absolutely position the toolbar",
+    "bottom": "Mixins.Positionable.props.bottom",
+    "collapse": "Puts the toolbar into a collapse state",
+    "dense": "Reduces the height of the toolbar content to 48px (96px when using with prominent)",
     "extended": "Force the toolbar to generate the extension without using the slot",
     "extensionHeight": "Specify an explicit height for the extended slot",
     "flat": "Removes the toolbar box-shadow",
     "floating": "Makes the toolbar float inline",
     "height": "Designates a specific height for the toolbar",
-    "invertedScroll": "Will slide out of view when scrolling down and back into view when scrolling up",
     "lightsOut": "Reduces the system bar opacity",
-    "manualScroll": "Manually apply the **scroll-off-screen** functionality",
-    "prominent": "Increases the height of the toolbar content and extension",
-    "scrollOffScreen": "Will transition the toolbar and extension off screen when scrolling down",
-    "scrollToolbarOffScreen": "Will transition the toolbar off screen when scrolling down",
-    "scrollTarget": "Assign the scroll target for scroll-off-screen",
-    "scrollThreshold": "The amount of scroll distance down before the toolbar uses scroll-off-screen",
+    "prominent": "Increases the height of the toolbar content to 128px",
+    "short": "Reduce the height of the toolbar content to 56px (112px when using with short)",
+    "src": "Specifies an image background",
     "status": "Reduces the system bar height",
-    "tabs": "Will set an explicit **42px** height for extension. Useful when default `v-tab`s are used in the extended slot. If you have a custom height `v-tab`, you should specify a height with **extensionHeight**.",
     "window": "Increases the system bar height"
   },
   "slots": {
     "extension": "Slot positioned directly under main content"
+  },
+  "scopedSlots": {
+    "img": "Expects a `v-img` component. Scoped **props** should be applied with `v-bind=\"props\"`"
   }
 }

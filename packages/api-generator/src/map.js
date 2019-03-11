@@ -438,6 +438,15 @@ module.exports = {
   'v-app': {
     slots: ['default']
   },
+  'v-app-bar': {
+    slots: ['default', 'extension'],
+    scopedSlots: [{
+      name: 'img',
+      props: {
+        props: '{ height: string, src: string | srcObject }'
+      }
+    }]
+  },
   'v-alert': {
     slots: ['default'],
     events: [
@@ -1225,7 +1234,19 @@ module.exports = {
     ]
   },
   'v-toolbar': {
-    slots: ['default', 'extension']
+    slots: ['default', 'extension'],
+    scopedSlots: [{
+      name: 'img',
+      props: {
+        props: '{ height: string, src: string | srcObject }'
+      }
+    }]
+  },
+  'v-toolbar-title': {
+    slots: ['default']
+  },
+  'v-toolbar-items': {
+    slots: ['default']
   },
   'v-tooltip': {
     slots: ['activator', 'default']
