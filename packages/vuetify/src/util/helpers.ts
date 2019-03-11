@@ -432,6 +432,21 @@ export function getSlotType<T extends boolean = false> (vm: Vue, name: string, s
   if (vm.$scopedSlots[name]) return 'scoped'
 }
 
+export function debounce (fn: Function, delay: number) {
+  let timeoutId = 0 as any
+  return (...args: any[]) => {
+    clearTimeout(timeoutId)
+    timeoutId = setTimeout(() => fn(...args), delay)
+  }
+}
+
+export function getPrefixedScopedSlots (prefix: string, scopedSlots: any) {
+  return Object.keys(scopedSlots).filter(k => k.startsWith(prefix)).reduce((obj: any, k: string) => {
+    obj[k.replace(prefix, '')] = scopedSlots[k]
+    return obj
+  }, {})
+}
+
 export function getSlot (vm: Vue, name = 'default', data?: object) {
   if (vm.$scopedSlots[name]) {
     return vm.$scopedSlots[name]!(data)

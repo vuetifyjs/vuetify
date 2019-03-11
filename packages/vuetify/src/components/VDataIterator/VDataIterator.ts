@@ -2,13 +2,16 @@ import { VNode, VNodeChildren } from 'vue'
 
 // Components
 import { VData } from '../VData'
+import VDataFooter from './VDataFooter'
 
-// Helpers
-import { deepEqual, getObjectValueByPath } from '../../util/helpers'
-import { DataProps } from '../VData/VData'
-import { PropValidator } from 'vue/types/options'
+// Mixins
 import mixins from '../../util/mixins'
 import Themeable from '../../mixins/themeable'
+
+// Helpers
+import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots } from '../../util/helpers'
+import { DataProps } from '../VData/VData'
+import { PropValidator } from 'vue/types/options'
 
 /* @vue/component */
 export default mixins(Themeable).extend({
@@ -38,7 +41,9 @@ export default mixins(Themeable).extend({
     loadingText: {
       type: String,
       default: '$vuetify.dataIterator.loadingText'
-    }
+    },
+    hideDefaultFooter: Boolean,
+    footerProps: Object
   },
 
   data: () => ({
@@ -171,18 +176,40 @@ export default mixins(Themeable).extend({
 
       return []
     },
+    genFooter (props: DataProps) {
+      if (this.hideDefaultFooter) return null
+
+      const data = {
+        props: {
+          ...this.footerProps,
+          options: props.options,
+          pagination: props.pagination
+        },
+        on: {
+          'update:options': (value: any) => props.updateOptions(value)
+        }
+      }
+
+      const scopedSlots = getPrefixedScopedSlots('footer.', this.$scopedSlots)
+
+      return this.$createElement(VDataFooter, {
+        scopedSlots,
+        ...data
+      })
+    },
     genSlots (slot: string, props: any = {}): VNodeChildren {
       if (this.$scopedSlots[slot]) return this.$scopedSlots[slot]!(props)
       else if (this.$slots[slot]) return this.$slots[slot]
       return []
     },
-    genDefaultScopedSLot (props: any) {
+    genDefaultScopedSlot (props: any) {
       return this.$createElement('div', {
         staticClass: 'v-data-iterator'
       }, [
-        this.genSlots('prepend', props),
+        this.genSlots('header', props),
         this.genItems(props),
-        this.genSlots('append', props)
+        this.genFooter(props),
+        this.genSlots('footer', props)
       ]) as any
     }
   },
@@ -193,11 +220,11 @@ export default mixins(Themeable).extend({
       on: {
         'update:options': (v: any, old: any) => !deepEqual(v, old) && this.$emit('update:options', v),
         'update:page': (v: any) => this.$emit('update:page', v),
-        'update:itemsPerPage': (v: any) => this.$emit('update:itemsPerPage', v),
-        'update:sortBy': (v: any) => this.$emit('update:sortBy', v),
-        'update:sortDesc': (v: any) => this.$emit('update:sortDesc', v),
-        'update:groupBy': (v: any) => this.$emit('update:groupBy', v),
-        'update:groupDesc': (v: any) => this.$emit('update:groupDesc', v),
+        'update:items-per-page': (v: any) => this.$emit('update:items-per-page', v),
+        'update:sort-by': (v: any) => this.$emit('update:sort-by', v),
+        'update:sort-desc': (v: any) => this.$emit('update:sort-desc', v),
+        'update:group-by': (v: any) => this.$emit('update:group-by', v),
+        'update:group-desc': (v: any) => this.$emit('update:group-desc', v),
         'pagination': (v: any, old: any) => !deepEqual(v, old) && this.$emit('pagination', v),
         'current-items': (v: any[]) => {
           this.internalCurrentItems = v
@@ -205,7 +232,7 @@ export default mixins(Themeable).extend({
         }
       },
       scopedSlots: {
-        default: this.genDefaultScopedSLot
+        default: this.genDefaultScopedSlot
       }
     })
   }

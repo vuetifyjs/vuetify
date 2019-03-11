@@ -1,5 +1,7 @@
+import './VDataFooter.sass'
+
 // Helpers
-import { DataOptions, DataPaginaton } from './VData'
+import { DataOptions, DataPaginaton } from '../VData/VData'
 import { PropValidator } from 'vue/types/options'
 import Vue, { VNode, VNodeChildrenArrayContents } from 'vue'
 import VSelect from '../VSelect/VSelect'

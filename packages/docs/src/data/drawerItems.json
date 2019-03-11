@@ -92,7 +92,7 @@
       { "text": "cards", "to": "cards" },
       { "text": "carousels", "to": "carousels" },
       { "text": "chips", "to": "chips" },
-      { "text": "dataIterator", "to": "data-iterator" },
+      { "text": "dataIterators", "to": "data-iterators" },
       { "text": "dataTables", "to": "data-tables" },
       { "text": "dialogs", "to": "dialogs" },
       { "text": "dividers", "to": "dividers" },
