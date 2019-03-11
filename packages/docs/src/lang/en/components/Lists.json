@@ -44,6 +44,10 @@
     "nav": {
       "header": "### Navigation lists",
       "desc": "Lists can receive an alternative **nav** styling that reduces the width `v-list-item` takes up as well as adding a border radius."
+    },
+    "shaped": {
+      "header": "### Shaped lists",
+      "desc": "Shaped lists have rounded borders on one side of the `v-list-item`."
     }
   },
   "props": {
