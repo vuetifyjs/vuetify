@@ -1,0 +1,40 @@
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+@import './_mixins.sass'
+
+/* Theme */
+.v-system-bar.theme--light
+  +system-bar-theme($material-light)
+.v-system-bar.theme--dark
+  +system-bar-theme($material-dark)
+
+.v-system-bar
+  align-items: center
+  display: flex
+  font-size: $system-bar-font-size
+  font-weight: $system-bar-font-weight
+  padding: $system-bar-padding
+
+  .v-icon
+    font-size: $system-bar-icon-font-size
+
+  &--fixed, &--absolute
+    left: 0
+    top: 0
+    width: 100%
+    z-index: 3
+
+  &--fixed
+    position: fixed
+
+  &--absolute
+    position: absolute
+
+  &--status
+    .v-icon
+      margin-right: $system-bar-status-icon-margin-right
+
+  &--window
+    .v-icon
+      font-size: $system-bar-window-icon-font-size
+      margin-right: $system-bar-window-icon-margin-right

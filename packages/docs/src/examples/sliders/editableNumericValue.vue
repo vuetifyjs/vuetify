@@ -14,52 +14,58 @@
           row
           wrap
         >
-          <v-flex xs9>
+          <v-flex xs12>
             <v-slider
               v-model="red"
               :max="255"
               label="R"
-            ></v-slider>
+              class="align-center"
+            >
+              <template #append>
+                <v-text-field
+                  v-model="red"
+                  class="mt-0 pt-0"
+                  type="number"
+                  style="width: 60px"
+                ></v-text-field>
+              </template>
+            </v-slider>
           </v-flex>
 
-          <v-flex xs3>
-            <v-text-field
-              v-model="red"
-              class="mt-0"
-              type="number"
-            ></v-text-field>
-          </v-flex>
-
-          <v-flex xs9>
+          <v-flex xs12>
             <v-slider
               v-model="green"
               :max="255"
               label="G"
-            ></v-slider>
+              class="align-center"
+            >
+              <template #append>
+                <v-text-field
+                  v-model="green"
+                  class="mt-0 pt-0"
+                  type="number"
+                  style="width: 60px"
+                ></v-text-field>
+              </template>
+            </v-slider>
           </v-flex>
 
-          <v-flex xs3>
-            <v-text-field
-              v-model="green"
-              class="mt-0"
-              type="number"
-            ></v-text-field>
-          </v-flex>
-
-          <v-flex xs9>
+          <v-flex xs12>
             <v-slider
               v-model="blue"
               :max="255"
               label="B"
-            ></v-slider>
-          </v-flex>
-
-          <v-flex xs3>
-            <v-text-field
-              v-model="blue"
-              class="mt-0"
-              type="number"
-            ></v-text-field>
+              class="align-center"
+            >
+              <template #append>
+                <v-text-field
+                  v-model="blue"
+                  class="mt-0 pt-0"
+                  type="number"
+                  style="width: 60px"
+                ></v-text-field>
+              </template>
+            </v-slider>
           </v-flex>
         </v-layout>
       </v-container>

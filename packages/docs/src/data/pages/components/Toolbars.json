@@ -1,7 +1,10 @@
 {
   "title": "header",
   "titleText": "headerText",
-  "mdLink": "https://material.io/design/components/app-bars-top.html",
+  "mdSpec": {
+    "version": "1",
+    "link": "https://material.io/archive/guidelines/components/toolbars.html"
+  },
   "children": [
     {
       "type": "section",
@@ -19,7 +22,8 @@
           "type": "api",
           "value": [
             "v-toolbar",
-            "v-system-bar"
+            "v-toolbar-title",
+            "v-toolbar-items"
           ]
         }
       ]
@@ -30,18 +34,14 @@
         {
           "type": "examples",
           "value": [
-            "appBar",
-            "appBarItems",
-            "appBarExtension",
             "columnWidthWithHierarchy",
             "flexibleAndCard",
             "floatingWithSearch",
             "variations",
             "prominent",
             "dense",
-            "scrolling",
-            "appBarMenu",
-            "systemBarsStatusWindow"
+            "contextualActionBar",
+            "background"
           ]
         }
       ]

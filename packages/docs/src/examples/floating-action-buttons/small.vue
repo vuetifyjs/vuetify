@@ -3,7 +3,7 @@
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
         <v-toolbar color="light-blue" light extended>
-          <v-toolbar-side-icon></v-toolbar-side-icon>
+          <v-app-bar-nav-icon></v-app-bar-nav-icon>
           <v-btn
             fab
             small
@@ -15,7 +15,9 @@
           >
             <v-icon>add</v-icon>
           </v-btn>
-          <v-toolbar-title slot="extension" class="white--text">My files</v-toolbar-title>
+          <template v-slot:extension>
+            <v-toolbar-title class="white--text">My files</v-toolbar-title>
+          </template>
           <v-spacer></v-spacer>
           <v-btn icon>
             <v-icon>search</v-icon>

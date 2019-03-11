@@ -5,11 +5,10 @@
       <v-tabs
         v-model="tab"
         :slider-color="computedTabs.length ? 'primary' : 'transparent'"
-        color="grey lighten-3"
       >
         <v-tab
-          v-for="(tab, i) in computedTabs"
-          :key="`tab-${i}`"
+          v-for="(tab) in computedTabs"
+          :key="`tab-${tab}`"
           :href="`#${tab}`"
         >
           {{ tab.replace(/([A-Z])/g, ' $1') }}

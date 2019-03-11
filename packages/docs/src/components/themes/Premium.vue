@@ -48,22 +48,23 @@
                 top
                 right
               >
-                <v-tooltip
-                  slot="activator"
-                  bottom
-                >
-                  <v-btn
-                    slot="activator"
-                    :href="template.demoUrl.length === 1 ? `${template.demoUrl[0]}?ref=vuetifyjs.com` : undefined"
-                    icon
-                    target="_blank"
-                    rel="noopener"
-                    aria-label="View Demo"
-                  >
-                    <v-icon color="primary">mdi-eye</v-icon>
-                  </v-btn>
-                  <span v-text="$t('Themes.Premium.viewDemo')" />
-                </v-tooltip>
+                <template #activator="{ on: menu }">
+                  <v-tooltip bottom>
+                    <template #activator="{ on: tooltip }">
+                      <v-btn
+                        :href="template.demoUrl.length === 1 ? `${template.demoUrl[0]}?ref=vuetifyjs.com` : undefined"
+                        icon
+                        target="_blank"
+                        rel="noopener"
+                        aria-label="View Demo"
+                        v-on="{ ...tooltip, ...menu }"
+                      >
+                        <v-icon color="primary">mdi-eye</v-icon>
+                      </v-btn>
+                    </template>
+                    <span v-text="$t('Themes.Premium.viewDemo')" />
+                  </v-tooltip>
+                </template>
                 <v-list v-if="template.demoUrl.length > 1">
                   <v-list-tile
                     v-for="([title, demo], i) in template.demoUrl"

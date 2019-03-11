@@ -1,4 +1,3 @@
-
 // Components
 import VWindow from '../VWindow'
 import VWindowItem from '../VWindowItem'
@@ -205,5 +204,32 @@ describe('VWindow.ts', () => {
     touch(wrapper).start(0, 0).end(200, 0)
     expect(left).toHaveBeenCalled()
     expect(right).toHaveBeenCalled()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/5000
+  it('should change to the next available index when using touch swipe', () => {
+    const wrapper = mountFunction({
+      slots: {
+        default: [
+          {
+            extends: VWindowItem,
+            props: {
+              disabled: {
+                type: Boolean,
+                default: true
+              }
+            }
+          },
+          VWindowItem,
+          VWindowItem
+        ]
+      }
+    })
+
+    expect(wrapper.vm.internalValue).toBe(1)
+    touch(wrapper).start(0, 0).end(200, 0)
+    expect(wrapper.vm.internalValue).toBe(2)
+    touch(wrapper).start(0, 0).end(200, 0)
+    expect(wrapper.vm.internalValue).toBe(1)
   })
 })

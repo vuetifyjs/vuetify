@@ -4,13 +4,15 @@
       v-model="dialog"
       width="500"
     >
-      <v-btn
-        slot="activator"
-        color="red lighten-2"
-        dark
-      >
-        Click Me
-      </v-btn>
+      <template v-slot:activator="{ on }">
+        <v-btn
+          color="red lighten-2"
+          dark
+          v-on="on"
+        >
+          Click Me
+        </v-btn>
+      </template>
 
       <v-card>
         <v-card-title

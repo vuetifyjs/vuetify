@@ -1,7 +1,10 @@
 {
   "title": "header",
   "titleText": "headerText",
-  "mdLink": "https://material.io/archive/guidelines/components/text-fields.html",
+  "mdSpec": {
+    "version": "1",
+    "link": "https://material.io/archive/guidelines/components/text-fields.html"
+  },
   "children": [
     {
       "type": "section",

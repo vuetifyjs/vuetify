@@ -1,7 +1,7 @@
 <template>
   <div id="lateral">
     <v-toolbar dark tabs flat color="indigo">
-      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
       <v-toolbar-title>Page title</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon>
@@ -10,17 +10,18 @@
       <v-btn icon>
         <v-icon>more_vert</v-icon>
       </v-btn>
-      <v-tabs
-        slot="extension"
-        v-model="tabs"
-        align-with-title
-        color="transparent"
-      >
-        <v-tab href="#one">Item One</v-tab>
-        <v-tab href="#two">Item Two</v-tab>
-        <v-tab href="#three">Item Three</v-tab>
-        <v-tabs-slider color="pink"></v-tabs-slider>
-      </v-tabs>
+      <template v-slot:extension>
+        <v-tabs
+          v-model="tabs"
+          align-with-title
+          color="transparent"
+        >
+          <v-tab href="#one">Item One</v-tab>
+          <v-tab href="#two">Item Two</v-tab>
+          <v-tab href="#three">Item Three</v-tab>
+          <v-tabs-slider color="pink"></v-tabs-slider>
+        </v-tabs>
+      </template>
     </v-toolbar>
     <v-tabs-items v-model="tabs">
       <v-tab-item

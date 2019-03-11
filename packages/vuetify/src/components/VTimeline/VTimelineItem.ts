@@ -1,20 +1,31 @@
 // Types
-import mixins from '../../util/mixins'
+import mixins, { ExtractVue } from '../../util/mixins'
 import { VNode, VNodeData } from 'vue'
 
 // Components
+import VTimeline from './VTimeline'
 import VIcon from '../VIcon'
 
 // Mixins
 import Themeable from '../../mixins/themeable'
 import Colorable from '../../mixins/colorable'
 
-export default mixins(
+const baseMixins = mixins(
   Colorable,
   Themeable
 /* @vue/component */
-).extend({
+)
+
+type VTimelineInstance = InstanceType<typeof VTimeline>
+
+interface options extends ExtractVue<typeof baseMixins> {
+  timeline: VTimelineInstance
+}
+
+export default baseMixins.extend<options>().extend({
   name: 'v-timeline-item',
+
+  inject: ['timeline'],
 
   props: {
     color: {
@@ -73,6 +84,15 @@ export default mixins(
         }
       }, [this.genInnerDot()])
     },
+    genDivider () {
+      const children = []
+
+      if (!this.hideDot) children.push(this.genDot())
+
+      return this.$createElement('div', {
+        staticClass: 'v-timeline-item__divider'
+      }, children)
+    },
     genOpposite () {
       return this.$createElement('div', {
         staticClass: 'v-timeline-item__opposite'
@@ -81,17 +101,19 @@ export default mixins(
   },
 
   render (h): VNode {
-    const children = [this.genBody()]
+    const children = [
+      this.genBody(),
+      this.genDivider()
+    ]
 
-    if (!this.hideDot) children.unshift(this.genDot())
     if (this.$slots.opposite) children.push(this.genOpposite())
 
     return h('div', {
       staticClass: 'v-timeline-item',
       class: {
         'v-timeline-item--fill-dot': this.fillDot,
-        'v-timeline-item--left': this.left,
-        'v-timeline-item--right': this.right,
+        'v-timeline-item--before': this.timeline.reverse ? this.right : this.left,
+        'v-timeline-item--after': this.timeline.reverse ? this.left : this.right,
         ...this.themeClasses
       }
     }, children)

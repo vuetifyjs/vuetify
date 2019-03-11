@@ -59,7 +59,7 @@ test('VRangeSlider.vue', ({ mount }) => {
     const wrapper = mount(VRangeSlider, {
       methods: { setInternalValue }
     })
-    const input = wrapper.first('input')
+    const input = wrapper.first('.v-slider__thumb-container')
 
     expect(wrapper.vm.activeThumb).toBe(null)
     input.trigger('focus')
@@ -97,36 +97,6 @@ test('VRangeSlider.vue', ({ mount }) => {
 
     expect(wrapper.vm.isActive).toBe(true)
     expect(wrapper.vm.activeThumb).toBe(0)
-  })
-
-  it('should call mouse move and emit change on click', async () => {
-    const onMouseMove = jest.fn()
-    const wrapper = mount(VRangeSlider, {
-      attachToDocument: true,
-      methods: { onMouseMove }
-    })
-
-    const change = jest.fn()
-    wrapper.vm.$on('change', change)
-
-    expect(wrapper.vm.isActive).toBe(false)
-
-    const input = wrapper.first('input')
-    input.trigger('focus')
-
-    expect(wrapper.vm.isActive).toBe(false)
-    expect(change).not.toBeCalled()
-
-    wrapper.setData({ isActive: true })
-    input.trigger('click')
-
-    expect(change).not.toBeCalled()
-
-    wrapper.setData({ isActive: false })
-    input.trigger('click')
-
-    expect(change).toHaveBeenCalledTimes(1)
-    expect(onMouseMove).toHaveBeenCalledTimes(1)
   })
 
   it('should react to a track click', () => {
@@ -200,14 +170,34 @@ test('VRangeSlider.vue', ({ mount }) => {
 
     expect(styles.left).toBe('0%')
     expect(styles.right).toBe('auto')
-    expect(styles.width).toBe('calc(0% - 7px)')
+    expect(styles.width).toBe('0%')
     wrapper.vm.$vuetify.rtl = true
 
     styles = wrapper.vm.trackFillStyles
     expect(styles.left).toBe('auto')
     expect(styles.right).toBe('0%')
-    expect(styles.width).toBe('calc(0% - 7px)')
+    expect(styles.width).toBe('0%')
 
     wrapper.vm.$vuetify.rtl = undefined
+  })
+
+  it('should render a vertical slider', async () => {
+    const wrapper = mount(VRangeSlider, {
+      propsData: {
+        vertical: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render disabled slider', async () => {
+    const wrapper = mount(VRangeSlider, {
+      propsData: {
+        disabled: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

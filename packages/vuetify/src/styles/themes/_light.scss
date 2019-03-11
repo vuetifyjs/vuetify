@@ -54,9 +54,7 @@ $material-light: (
     'disabled': rgba(map-get($shades, 'black'), 0.26),
     'discrete': map-get($shades, 'black')
   ),
-  'tabs': (
-    'active': rgba(map-get($shades, 'black'), 0.87)
-  ),
+  'tabs': rgba(0, 0, 0, 0.54),
   'toggle-buttons': (
     'color': map-get($shades, 'black')
   ),

@@ -25,7 +25,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar color="indigo" dark fixed app>
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Application</v-toolbar-title>
     </v-toolbar>
     <v-content>
@@ -36,15 +36,19 @@
         >
           <v-flex text-xs-center>
             <v-tooltip left>
-              <v-btn slot="activator" :href="source" icon large target="_blank">
-                <v-icon large>code</v-icon>
-              </v-btn>
+              <template v-slot:activator="{ on }">
+                <v-btn :href="source" icon large target="_blank" v-on="on">
+                  <v-icon large>code</v-icon>
+                </v-btn>
+              </template>
               <span>Source</span>
             </v-tooltip>
             <v-tooltip right>
-              <v-btn slot="activator" icon large href="https://codepen.io/johnjleider/pen/rJdVMq" target="_blank">
-                <v-icon large>mdi-codepen</v-icon>
-              </v-btn>
+              <template v-slot:activator="{ on }">
+                <v-btn icon large href="https://codepen.io/johnjleider/pen/rJdVMq" target="_blank" v-on="on">
+                  <v-icon large>mdi-codepen</v-icon>
+                </v-btn>
+              </template>
               <span>Codepen</span>
             </v-tooltip>
           </v-flex>

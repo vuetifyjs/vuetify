@@ -1,7 +1,10 @@
 {
   "title": "header",
   "titleText": "headerText",
-  "mdLink": "https://material.io/archive/guidelines/components/buttons.html#buttons-dropdown-buttons",
+  "mdSpec": {
+    "version": "1",
+    "link": "https://material.io/archive/guidelines/components/buttons.html#buttons-dropdown-buttons"
+  },
   "children": [
     {
       "type": "section",

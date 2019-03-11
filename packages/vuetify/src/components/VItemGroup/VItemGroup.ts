@@ -13,7 +13,7 @@ import { consoleWarn } from '../../util/console'
 // Types
 import { VNode } from 'vue/types'
 
-type GroupableInstance = InstanceType<typeof Groupable> & { value?: any }
+export type GroupableInstance = InstanceType<typeof Groupable> & { to?: any, value?: any }
 
 export const BaseItemGroup = mixins(
   Proxyable,
@@ -52,12 +52,21 @@ export const BaseItemGroup = mixins(
         ...this.themeClasses
       }
     },
+    selectedItem (): GroupableInstance | undefined {
+      if (this.multiple) return undefined
+
+      return this.items.find((item, index) => {
+        return this.toggleMethod(this.getValue(item, index))
+      })
+    },
     selectedItems (): GroupableInstance[] {
       return this.items.filter((item, index) => {
         return this.toggleMethod(this.getValue(item, index))
       })
     },
     selectedValues (): any[] {
+      if (this.internalValue == null) return []
+
       return Array.isArray(this.internalValue)
         ? this.internalValue
         : [this.internalValue]
@@ -95,15 +104,15 @@ export const BaseItemGroup = mixins(
         ? i
         : item.value
     },
-    onClick (item: GroupableInstance, index: number) {
+    onClick (item: GroupableInstance) {
       this.updateInternalValue(
-        this.getValue(item, index)
+        this.getValue(item, this.items.indexOf(item))
       )
     },
     register (item: GroupableInstance) {
       const index = this.items.push(item) - 1
 
-      item.$on('change', () => this.onClick(item, index))
+      item.$on('change', () => this.onClick(item))
 
       // If no value provided and mandatory,
       // assign first registered item
@@ -170,10 +179,20 @@ export const BaseItemGroup = mixins(
     updateMandatory (last?: boolean) {
       if (!this.items.length) return
 
-      const index = last ? this.items.length - 1 : 0
+      const items = this.items.slice()
+
+      if (last) items.reverse()
+
+      const item = items.find(item => !item.disabled)
+
+      // If no tabs are available
+      // aborts mandatory value
+      if (!item) return
+
+      const index = this.items.indexOf(item)
 
       this.updateInternalValue(
-        this.getValue(this.items[index], index)
+        this.getValue(item, index)
       )
     },
     updateMultiple (value: any) {

@@ -1,7 +1,6 @@
 <template>
   <v-card class="mb-5">
     <v-toolbar
-      card
       dense
       flat
     >
@@ -247,10 +246,10 @@
       .v-expansion-panel__body
         border: none
 
-      .v-tabs__item, .markup
+      .v-tab, .markup
         height: 100%
 
-      .v-tabs__items
+      .v-tabs
         border: none
         max-height: 500px
         overflow-y: auto
