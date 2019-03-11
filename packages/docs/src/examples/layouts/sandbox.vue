@@ -12,10 +12,10 @@
       app
     ></v-navigation-drawer>
     <v-toolbar :clipped-left="primaryDrawer.clipped" app absolute>
-      <v-toolbar-side-icon
+      <v-app-bar-nav-icon
         v-if="primaryDrawer.type !== 'permanent'"
         @click.stop="primaryDrawer.model = !primaryDrawer.model"
-      ></v-toolbar-side-icon>
+      ></v-app-bar-nav-icon>
       <v-toolbar-title>Vuetify</v-toolbar-title>
     </v-toolbar>
     <v-content>

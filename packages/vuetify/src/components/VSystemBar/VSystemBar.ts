@@ -1,12 +1,17 @@
-import '../../stylus/components/_system-bars.styl'
+// Styles
+import './VSystemBar.sass'
 
+// Mixins
 import Applicationable from '../../mixins/applicationable'
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 
+// Utilities
+import mixins from '../../util/mixins'
+import { convertToUnit, getSlot } from '../../util/helpers'
+
 // Types
 import { VNode } from 'vue/types'
-import mixins from '../../util/mixins'
 
 export default mixins(
   Applicationable('bar', [
@@ -20,10 +25,7 @@ export default mixins(
   name: 'v-system-bar',
 
   props: {
-    height: {
-      type: [Number, String],
-      validator: (v: any) => !isNaN(parseInt(v))
-    },
+    height: [Number, String],
     lightsOut: Boolean,
     status: Boolean,
     window: Boolean
@@ -40,33 +42,35 @@ export default mixins(
         ...this.themeClasses
       }
     },
-    computedHeight (): number {
-      if (this.height) return parseInt(this.height)
+    computedHeight (): number | string {
+      if (this.height) {
+        return isNaN(parseInt(this.height)) ? this.height : parseInt(this.height)
+      }
 
       return this.window ? 32 : 24
+    },
+    styles (): object {
+      return {
+        height: convertToUnit(this.computedHeight)
+      }
     }
   },
 
   methods: {
-    /**
-     * Update the application layout
-     *
-     * @return {number}
-     */
     updateApplication () {
-      return this.computedHeight
+      return this.$el
+        ? this.$el.clientHeight
+        : this.computedHeight
     }
   },
 
   render (h): VNode {
     const data = {
       staticClass: 'v-system-bar',
-      'class': this.classes,
-      style: {
-        height: `${this.computedHeight}px`
-      }
+      class: this.classes,
+      style: this.styles
     }
 
-    return h('div', this.setBackgroundColor(this.color, data), this.$slots.default)
+    return h('div', this.setBackgroundColor(this.color, data), getSlot(this))
   }
 })

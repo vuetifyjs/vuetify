@@ -1,16 +1,14 @@
 <template>
-  <div
-    class="hide-overflow"
-    style="position: relative;"
-  >
-    <v-toolbar
+  <v-card class="hide-overflow">
+    <v-app-bar
       absolute
       color="teal lighten-3"
       dark
-      scroll-off-screen
-      scroll-target="#scrolling-techniques"
+      hide-on-scroll
+      prominent
+      scroll-target="#scrolling-techniques-4"
     >
-      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title>Title</v-toolbar-title>
 
@@ -27,13 +25,13 @@
       <v-btn icon>
         <v-icon>more_vert</v-icon>
       </v-btn>
-    </v-toolbar>
-    <div
-      id="scrolling-techniques"
+    </v-app-bar>
+    <v-sheet
+      id="scrolling-techniques-4"
       class="scroll-y"
-      style="max-height: 600px;"
+      max-height="600"
     >
       <v-container style="height: 1000px;"></v-container>
-    </div>
-  </div>
+    </v-sheet>
+  </v-card>
 </template>

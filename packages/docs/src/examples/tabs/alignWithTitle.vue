@@ -6,7 +6,7 @@
       flat
       tabs
     >
-      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title>Your Dashboard</v-toolbar-title>
 

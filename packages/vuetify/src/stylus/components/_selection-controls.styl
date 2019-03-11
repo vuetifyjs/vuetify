@@ -85,11 +85,14 @@ rtl(v-selection-control-rtl, "v-input--selection-controls")
     .v-ripple__container
       transform: scale(1.4)
 
-  &.v-input .v-label
-    align-items: center
-    display: inline-flex
-    top: 0
-    height: auto
+  &.v-input
+    flex: 0 1 auto
+
+    .v-label
+      align-items: center
+      display: inline-flex
+      top: 0
+      height: auto
 
   &.v-input--is-focused,
   .v-radio--is-focused

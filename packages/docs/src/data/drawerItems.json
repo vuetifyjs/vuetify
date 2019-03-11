@@ -74,6 +74,15 @@
       { "text": "avatars", "to": "avatars" },
       { "text": "badges", "to": "badges" },
       { "text": "banners", "to": "banners", "new": true },
+      {
+        "group": "components",
+        "text": "bars",
+        "children": [
+          { "text": "appBars", "to": "app-bars", "new": true },
+          { "text": "toolbars", "to": "toolbars", "updated": true },
+          { "text": "systemBars", "to": "system-bars", "updated": true }
+        ]
+      },
       { "text": "bottomNavigation", "to": "bottom-navigation" },
       { "text": "bottomSheets", "to": "bottom-sheets" },
       { "text": "breadcrumbs", "to": "breadcrumbs" },
@@ -141,7 +150,6 @@
       { "text": "subheaders", "to": "subheaders" },
       { "text": "tabs", "to": "tabs" },
       { "text": "timelines", "to": "timelines" },
-      { "text": "toolbars", "to": "toolbars" },
       { "text": "tooltips", "to": "tooltips" },
       { "text": "treeview", "to": "treeview", "updated": true }
     ]

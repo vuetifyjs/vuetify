@@ -1,7 +1,6 @@
 <template>
   <v-card class="mb-5">
     <v-toolbar
-      card
       dense
       flat
     >
