@@ -1,11 +1,33 @@
-import VWindow from '@/components/VWindow/VWindow'
-import VWindowItem from '@/components/VWindow/VWindowItem'
-import { test, touch } from '@/test'
-import Vue from 'vue'
+// Components
+import VWindow from '../VWindow'
+import VWindowItem from '../VWindowItem'
 
-test('VWindow.ts', ({ mount }) => {
+// Utilities
+import {
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+import { touch } from '../../../../test'
+
+describe('VWindow.ts', () => {
+  type Instance = InstanceType<typeof VWindow>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+
+  (global as any).requestAnimationFrame = cb => cb()
+
+  beforeEach(() => {
+    mountFunction = (options = {}) => {
+      return mount(VWindow, {
+        ...options,
+        mocks: {
+          $vuetify: { rtl: false }
+        }
+      })
+    }
+  })
+
   it('it should return the correct transition', async () => {
-    const wrapper = mount(VWindow)
+    const wrapper = mountFunction()
     // Force booted
     wrapper.setData({ isBooted: true })
 
@@ -22,7 +44,7 @@ test('VWindow.ts', ({ mount }) => {
   })
 
   it('should set reverse', async () => {
-    const wrapper = mount(VWindow, {
+    const wrapper = mountFunction({
       propsData: {
         value: 0
       },
@@ -37,28 +59,28 @@ test('VWindow.ts', ({ mount }) => {
     // Reverse implicitly set by changed index
     wrapper.setProps({ value: 1 })
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.internalReverse).toBe(false)
+    expect(wrapper.vm.internalReverse).toBeFalsy()
 
     // Reverse implicitly set by changed index
     wrapper.setProps({ value: 0 })
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.internalReverse).toBe(true)
+    expect(wrapper.vm.internalReverse).toBeTruthy()
 
     // Reverse explicit prop override
     wrapper.setProps({ reverse: false })
-    expect(wrapper.vm.internalReverse).toBe(false)
+    expect(wrapper.vm.internalReverse).toBeFalsy()
 
     // Reverse explicit prop override
     wrapper.setProps({ reverse: true })
-    expect(wrapper.vm.internalReverse).toBe(true)
+    expect(wrapper.vm.internalReverse).toBeTruthy()
 
     // Reverts back to local isReverse
     wrapper.setProps({ reverse: undefined })
-    expect(wrapper.vm.internalReverse).toBe(true)
+    expect(wrapper.vm.internalReverse).toBeTruthy()
   })
 
   it('should increment and decrement current value', async () => {
-    const wrapper = mount(VWindow, {
+    const wrapper = mountFunction({
       slots: {
         default: [
           VWindowItem,
@@ -92,7 +114,7 @@ test('VWindow.ts', ({ mount }) => {
   })
 
   it('should update model when internal index is greater than item count', async () => {
-    const wrapper = mount(VWindow, {
+    const wrapper = mountFunction({
       propsData: {
         value: 2
       },
@@ -109,7 +131,7 @@ test('VWindow.ts', ({ mount }) => {
 
     expect(wrapper.vm.internalValue).toBe(2)
 
-    const [item1, item2, item3] = wrapper.find(VWindowItem.options)
+    const [item1, item2, item3] = wrapper.findAll(VWindowItem).wrappers
 
     item3.destroy()
     expect(wrapper.vm.internalValue).toBe(1)
@@ -118,11 +140,11 @@ test('VWindow.ts', ({ mount }) => {
     expect(wrapper.vm.internalValue).toBe(0)
 
     item1.destroy()
-    expect(wrapper.vm.internalValue).toBe(undefined)
+    expect(wrapper.vm.internalValue).toBeUndefined()
   })
 
   it('should react to touch', async () => {
-    const wrapper = mount(VWindow, {
+    const wrapper = mountFunction({
       propsData: { value: 1 },
       slots: {
         default: [
@@ -160,7 +182,7 @@ test('VWindow.ts', ({ mount }) => {
     const left = jest.fn()
     const right = jest.fn()
     const fns = { left, right }
-    const wrapper = mount(VWindow, {
+    const wrapper = mountFunction({
       propsData: {
         touch: fns,
         value: 1
@@ -180,19 +202,23 @@ test('VWindow.ts', ({ mount }) => {
 
     touch(wrapper).start(200, 0).end(0, 0)
     touch(wrapper).start(0, 0).end(200, 0)
-    expect(left).toBeCalled()
-    expect(right).toBeCalled()
+    expect(left).toHaveBeenCalled()
+    expect(right).toHaveBeenCalled()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/5000
   it('should change to the next available index when using touch swipe', () => {
-    const vm = new Vue()
-
-    const wrapper = mount(VWindow, {
+    const wrapper = mountFunction({
       slots: {
         default: [
           {
-            vNode: vm.$createElement(VWindowItem, { props: { disabled: true }})
+            extends: VWindowItem,
+            props: {
+              disabled: {
+                type: Boolean,
+                default: true
+              }
+            }
           },
           VWindowItem,
           VWindowItem

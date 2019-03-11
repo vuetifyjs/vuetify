@@ -1,9 +1,10 @@
-@import '../bootstrap'
+@import '../../styles/styles.sass'
+@import './_variables.sass'
 
 .v-window
   &__container
     position: relative
-    transition: .3s cubic-bezier(.25, .8, .50, 1)
+    transition: $window-transition
 
     &--is-active
       overflow: hidden
@@ -14,7 +15,7 @@
   &-y-reverse-transition
     &-enter-active,
     &-leave-active
-      transition: .3s cubic-bezier(.25, .8, .50, 1)
+      transition: $window-transition
 
     &-leave,
     &-leave-to
