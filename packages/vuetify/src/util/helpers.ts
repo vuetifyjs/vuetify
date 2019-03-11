@@ -446,7 +446,7 @@ export function getPrefixedScopedSlots (prefix: string, scopedSlots: any) {
     return obj
   }, {})
 }
-                      
+
 export function getSlot (vm: Vue, name = 'default', data?: object) {
   if (vm.$scopedSlots[name]) {
     return vm.$scopedSlots[name]!(data)
