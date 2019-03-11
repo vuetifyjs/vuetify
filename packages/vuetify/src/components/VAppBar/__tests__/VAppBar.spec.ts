@@ -261,5 +261,10 @@ describe('AppBar.ts', () => {
     wrapper.setProps({ scrollOffScreen: true })
 
     expect(wrapper.vm.computedTransform).toBe(-112)
+    expect(wrapper.vm.hideShadow).toBe(true)
+
+    wrapper.setProps({ scrollOffScreen: false })
+
+    expect(wrapper.vm.hideShadow).toBe(false)
   })
 })
