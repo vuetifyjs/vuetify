@@ -40,8 +40,11 @@ export default {
 
   beforeMount () {
     this.$nextTick(() => {
-      if (this.activatorNode && this.activatorNode.elm) {
-        this.$el.parentNode.insertBefore(this.activatorNode.elm, this.$el)
+      if (this.activatorNode) {
+        const activator = Array.isArray(this.activatorNode) ? this.activatorNode : [this.activatorNode]
+        activator.forEach(node => {
+          node.elm && this.$el.parentNode.insertBefore(node.elm, this.$el)
+        })
       }
     })
   },
@@ -55,11 +58,18 @@ export default {
   },
 
   beforeDestroy () {
-    if (!this.$refs.content) return
-
     // IE11 Fix
     try {
-      this.$refs.content.parentNode.removeChild(this.$refs.content)
+      if (this.$refs.content) {
+        this.$refs.content.parentNode.removeChild(this.$refs.content)
+      }
+
+      if (this.activatorNode) {
+        const activator = Array.isArray(this.activatorNode) ? this.activatorNode : [this.activatorNode]
+        activator.forEach(node => {
+          node.elm && node.elm.parentNode.removeChild(node.elm)
+        })
+      }
     } catch (e) { console.log(e) }
   },
 

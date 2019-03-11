@@ -1,7 +1,9 @@
 {
   "header": "# Select",
   "headerText": "Select fields components are used for collecting user provided information from a list of options.",
-  "supplemental": [ "MaskTable" ],
+  "supplemental": [
+    "MaskTable"
+  ],
   "examples": {
     "usage": {
       "desc": ""
@@ -27,7 +29,7 @@
       "desc": "The `v-select` components can be optionally expanded with prepended and appended items. This is perfect for customized **select-all** functionality."
     },
     "selectionAppearance": {
-      "header": "### Change selection apperance",
+      "header": "### Change selection appearance",
       "desc": "The `selection` scoped slot can be used to customize the way selected values are shown in the input. This is great when you want something like `foo (+20 others)` or don't want the selection to occupy multiple lines."
     }
   },
@@ -63,14 +65,17 @@
     "segmented": "Creates a segmented button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "smallChips": "Changes display of selections to chips with the **small** property",
     "tags": "Tagging functionality, allows the user to create new values not available from the **items** prop",
-    "valueComparator": "The comparison algorithm used for values. [More info](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/util/helpers.ts)"
+    "valueComparator": "The comparison algorithm used for values. [More info](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/util/helpers.ts)",
+    "value": "Components.Inputs.props.value"
   },
   "slots": {
-    "append": "Adds an item after menu content",
-    "item": "Scoped slot for designating the markup for a list-tile",
+    "append": "Components.Inputs.slots.append",
+    "append-outer": "Components.TextFields.slots.append-outer",
+    "prepend": "Components.Inputs.slots.prepend",
+    "prepend-inner": "Components.TextFields.slots.prepend-inner",
+    "append-item": "Adds an item after menu content",
     "no-data": "Mixins.Filterable.slots.noData",
-    "prepend": "Adds an item before menu content",
-    "selection": "Scoped slot for designating the markup for the selected items"
+    "prepend-item": "Adds an item before menu content"
   },
   "scopedSlots": {
     "item": "Define a custom item appearance",
@@ -78,6 +83,11 @@
   },
   "events": {
     "change": "Components.Inputs.events.change",
+    "click:append": "Components.Inputs.events['click:append']",
+    "click:append-outer": "Components.TextFields.events['click:append-outer']",
+    "click:clear": "Components.TextFields.events['click:clear']",
+    "click:prepend": "Components.Inputs.events['click:prepend']",
+    "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
     "update:error": "Mixins.Validatable.events['update:error']",
     "update:searchInput": "The `search-input.sync` event"
   }

@@ -7,7 +7,9 @@
         color="orange"
         large
       >
-        <span slot="icon">JL</span>
+        <template v-slot:icon>
+          <span>JL</span>
+        </template>
         <v-text-field
           v-model="input"
           hide-details
@@ -16,7 +18,7 @@
           solo
           @keydown.enter="comment"
         >
-          <template slot="append">
+          <template v-slot:append>
             <v-btn
               class="mx-0"
               depressed

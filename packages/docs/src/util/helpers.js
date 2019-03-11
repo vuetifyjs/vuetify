@@ -1,6 +1,6 @@
 // Must be called in Vue context
 export function goTo (id) {
-  this.$vuetify.goTo(id, { offset: -80 }).then(() => {
+  this.$vuetify.goTo(id).then(() => {
     if (!id) {
       return (document.location.hash = '')
     }
@@ -31,6 +31,7 @@ export function getComponent (type) {
     case 'tree': return 'doc-tree'
     case 'up-next': return 'doc-up-next'
     case 'usage': return 'doc-usage'
+    case 'locales': return 'doc-locales'
     default: return type
   }
 }

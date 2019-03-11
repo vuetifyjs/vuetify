@@ -16,10 +16,7 @@
       content-tag="v-layout"
       content-class="wrap"
     >
-      <template
-        slot="item"
-        slot-scope="{ item }"
-      >
+      <template v-slot:item="{ item }">
         <v-flex xs12 grey lighten-2 mt-2>
           <v-layout wrap px-2 py-1>
             <v-flex
@@ -201,7 +198,7 @@
           str.indexOf('Components.') > -1
         )
       },
-      /* eslint-disable max-statements */
+      /* eslint-disable-next-line max-statements */
       genDescription (name, item) {
         let description = ''
         let devPrepend = ''

@@ -53,13 +53,6 @@ export default {
       }
     },
     changeListIndex (e) {
-      if ([
-        keyCodes.down,
-        keyCodes.up,
-        keyCodes.enter
-      ].includes(e.keyCode)
-      ) e.preventDefault()
-
       // For infinite scroll and autocomplete, re-evaluate children
       this.getTiles()
 
@@ -71,7 +64,9 @@ export default {
         this.listIndex--
       } else if (e.keyCode === keyCodes.enter && this.listIndex !== -1) {
         this.tiles[this.listIndex].click()
-      }
+      } else { return }
+      // One of the conditions was met, prevent default action (#2988)
+      e.preventDefault()
     },
     getTiles () {
       this.tiles = this.$refs.content.querySelectorAll('.v-list__tile')

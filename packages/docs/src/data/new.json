@@ -46,6 +46,10 @@
       "disabled": "1.4",
       "readonly": "1.2"
     },
+    "v-treeview": {
+      "filter": "1.5",
+      "search": "1.5"
+    },
     "v-select": {
       "small-chips": "1.1",
       "menu-props": "1.2"

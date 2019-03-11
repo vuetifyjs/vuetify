@@ -1,11 +1,11 @@
 <template>
   <v-snackbar
+    v-model="snack"
     :color="snackbar.color"
     :style="{
       marginBottom: $vuetify.breakpoint.smOnly ? '40px' : null
     }"
     :timeout="snackbar.timeout"
-    v-model="snack"
     bottom
     right
   >
@@ -111,11 +111,13 @@
     async created () {
       if (this.$ssrContext) return
 
-      const notify = await fetch('https://cdn.vuetifyjs.com/notify.json', {
-        headers: {
-          'Access-Control-Allow-Origin': '*'
-        }
-      }).then(res => res.json())
+      const notify = require('@/data/api/notify.json')
+
+      // const notify = await fetch('https://cdn.vuetifyjs.com/notify.json', {
+      //   headers: {
+      //     'Access-Control-Allow-Origin': '*'
+      //   }
+      // }).then(res => res.json())
 
       if (notify) this.setSnackbar(notify)
     },

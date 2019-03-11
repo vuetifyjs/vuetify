@@ -28,7 +28,8 @@
           "value": [
             "heartRate",
             "dashboardCard",
-            "salesCard"
+            "salesCard",
+            "fill"
           ]
         }
       ]

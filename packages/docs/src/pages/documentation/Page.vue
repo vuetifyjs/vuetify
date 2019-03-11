@@ -32,24 +32,24 @@
   async function load ({ route, store }) {
     const namespace = kebabCase(route.params.namespace)
     const page = upperFirst(camelCase(route.params.page))
-    let structure = false
 
     store.commit('documentation/setStructure', null)
 
+    let structure
     try {
       structure = (await import(
         /* webpackChunkName: "pages" */
         `@/data/pages/${namespace}/${page}.json`
       )).default
-    } catch (err) {}
+    } catch (err) {
+      structure = false
+    }
 
     store.commit('documentation/setStructure', structure)
   }
 
   export default {
     name: 'Documentation',
-
-    asyncData: load,
 
     watch: {
       '$route.path' () {
@@ -60,8 +60,19 @@
       }
     },
 
+    asyncData: load,
+
     methods: {
       load
     }
   }
 </script>
+
+<style scoped>
+  @media (min-width: 1264px) {
+    .v-content:not([data-booted="true"]) {
+      padding-left: 300px !important;
+      padding-right: 210px !important;
+    }
+  }
+</style>

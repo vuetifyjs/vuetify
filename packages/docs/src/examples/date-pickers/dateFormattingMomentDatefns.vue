@@ -8,13 +8,15 @@
           full-width
           max-width="290"
         >
-          <v-text-field
-            slot="activator"
-            :value="computedDateFormattedMomentjs"
-            clearable
-            label="Formatted with Moment.js"
-            readonly
-          ></v-text-field>
+          <template v-slot:activator="{ on }">
+            <v-text-field
+              :value="computedDateFormattedMomentjs"
+              clearable
+              label="Formatted with Moment.js"
+              readonly
+              v-on="on"
+            ></v-text-field>
+          </template>
           <v-date-picker
             v-model="date"
             @change="menu1 = false"
@@ -29,13 +31,15 @@
           full-width
           max-width="290"
         >
-          <v-text-field
-            slot="activator"
-            :value="computedDateFormattedDatefns"
-            clearable
-            label="Formatted with datefns"
-            readonly
-          ></v-text-field>
+          <template v-slot:activator="{ on }">
+            <v-text-field
+              :value="computedDateFormattedDatefns"
+              clearable
+              label="Formatted with datefns"
+              readonly
+              v-on="on"
+            ></v-text-field>
+          </template>
           <v-date-picker
             v-model="date"
             @change="menu2 = false"

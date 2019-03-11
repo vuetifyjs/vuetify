@@ -98,10 +98,10 @@ export default mixins<options &
   },
 
   methods: {
-    wheel (e: MouseWheelEvent) {
+    wheel (e: WheelEvent) {
       e.preventDefault()
 
-      const delta = Math.sign(e.wheelDelta || 1)
+      const delta = Math.sign(-e.deltaY || 1)
       let value = this.displayedValue
       do {
         value = value + delta
@@ -192,8 +192,10 @@ export default mixins<options &
       const coords = { x: clientX - left, y: top - clientY }
       const handAngle = Math.round(this.angle(center, coords) - this.rotate + 360) % 360
       const insideClick = this.double && this.euclidean(center, coords) < (innerWidth + innerWidth * this.innerRadiusScale) / 4
-      const value = Math.round(handAngle / this.degreesPerUnit) +
-        this.min + (insideClick ? this.roundCount : 0)
+      const value = (
+        Math.round(handAngle / this.degreesPerUnit) +
+        (insideClick ? this.roundCount : 0)
+      ) % this.count + this.min
 
       // Necessary to fix edge case when selecting left part of the value(s) at 12 o'clock
       let newValue: number

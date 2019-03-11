@@ -1,0 +1,87 @@
+{
+  "header": "crwdns12972:0crwdne12972:0",
+  "headerText": "crwdns12974:0crwdne12974:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns12976:0crwdne12976:0"
+    },
+    "checkboxesBoolean": {
+      "header": "crwdns12978:0crwdne12978:0",
+      "desc": "crwdns12980:0crwdne12980:0"
+    },
+    "checkboxesArray": {
+      "header": "crwdns12982:0crwdne12982:0",
+      "desc": "crwdns12984:0crwdne12984:0"
+    },
+    "checkboxesStates": {
+      "header": "crwdns12986:0crwdne12986:0",
+      "desc": "crwdns12988:0crwdne12988:0"
+    },
+    "checkboxesColors": {
+      "header": "crwdns12990:0crwdne12990:0",
+      "desc": "crwdns12992:0crwdne12992:0"
+    },
+    "checkboxesInlineTexfield": {
+      "header": "crwdns12994:0crwdne12994:0",
+      "desc": "crwdns12996:0crwdne12996:0"
+    },
+    "radiosDefault": {
+      "header": "crwdns12998:0crwdne12998:0",
+      "desc": "crwdns13000:0crwdne13000:0"
+    },
+    "radiosDirection": {
+      "header": "crwdns13002:0crwdne13002:0",
+      "desc": "crwdns13004:0crwdne13004:0"
+    },
+    "radiosColors": {
+      "header": "crwdns13006:0crwdne13006:0",
+      "desc": "crwdns13008:0crwdne13008:0"
+    },
+    "switchesBoolean": {
+      "header": "crwdns13010:0crwdne13010:0",
+      "desc": "crwdns13012:0crwdne13012:0"
+    },
+    "switchesArray": {
+      "header": "crwdns13014:0crwdne13014:0",
+      "desc": "crwdns13016:0crwdne13016:0"
+    },
+    "switchesStates": {
+      "header": "crwdns13018:0crwdne13018:0",
+      "desc": "crwdns13020:0crwdne13020:0"
+    },
+    "switchesColors": {
+      "header": "crwdns13022:0crwdne13022:0",
+      "desc": "crwdns13024:0crwdne13024:0"
+    },
+    "labelSlot": {
+      "header": "crwdns13026:0crwdne13026:0",
+      "desc": "crwdns13028:0crwdne13028:0"
+    }
+  },
+  "props": {
+    "column": "crwdns13030:0crwdne13030:0",
+    "mandatory": "crwdns13032:0crwdne13032:0",
+    "name": "crwdns13034:0crwdne13034:0",
+    "onIcon": "crwdns13036:0crwdne13036:0",
+    "offIcon": "crwdns13038:0crwdne13038:0",
+    "row": "crwdns13040:0crwdne13040:0",
+    "indeterminate": "crwdns13042:0crwdne13042:0",
+    "indeterminateIcon": "crwdns13044:0crwdne13044:0",
+    "inputValue": "crwdns13046:0crwdne13046:0",
+    "multiple": "crwdns13048:0crwdne13048:0",
+    "value": "crwdns13050:0crwdne13050:0",
+    "v-radio": {
+      "disabled": "crwdns13052:0crwdne13052:0",
+      "label": "crwdns13054:0crwdne13054:0",
+      "readonly": "crwdns13056:0crwdne13056:0"
+    }
+  },
+  "slots": {
+    "append": "crwdns13058:0crwdne13058:0",
+    "prepend": "crwdns13060:0crwdne13060:0"
+  },
+  "events": {
+    "change": "crwdns13062:0crwdne13062:0",
+    "update:error": "crwdns13064:0crwdne13064:0"
+  }
+}

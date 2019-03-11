@@ -58,17 +58,14 @@
       </v-flex>
       <v-flex xs12>
         <h5>Output:</h5>
-        <markup>{{ formatAttributes(layoutAttributes) }}</markup>
+        <code>{{ formatAttributes(layoutAttributes) }}</code>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
-  import Markup from '../../components/doc/Markup'
-
   export default {
-    components: { Markup },
     data () {
       return {
         alignmentsAvailable: ['align-center', 'align-end', 'align-space-around', 'align-space-between', 'align-start', ''],

@@ -26,14 +26,11 @@
           multiple
           chips
         >
-          <template
-            slot="selection"
-            slot-scope="data"
-          >
+          <template v-slot:selection="data">
             <v-chip
+              :key="JSON.stringify(data.item)"
               :selected="data.selected"
               :disabled="data.disabled"
-              :key="JSON.stringify(data.item)"
               class="v-chip--select-multi"
               @input="data.parent.selectItem(data.item)"
             >

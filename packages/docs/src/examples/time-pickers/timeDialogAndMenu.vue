@@ -3,8 +3,8 @@
     <v-flex xs11 sm5>
       <v-menu
         ref="menu"
-        :close-on-content-click="false"
         v-model="menu2"
+        :close-on-content-click="false"
         :nudge-right="40"
         :return-value.sync="time"
         lazy
@@ -14,18 +14,20 @@
         max-width="290px"
         min-width="290px"
       >
-        <v-text-field
-          slot="activator"
-          v-model="time"
-          label="Picker in menu"
-          prepend-icon="access_time"
-          readonly
-        ></v-text-field>
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            v-model="time"
+            label="Picker in menu"
+            prepend-icon="access_time"
+            readonly
+            v-on="on"
+          ></v-text-field>
+        </template>
         <v-time-picker
           v-if="menu2"
           v-model="time"
           full-width
-          @change="$refs.menu.save(time)"
+          @click:minute="$refs.menu.save(time)"
         ></v-time-picker>
       </v-menu>
     </v-flex>
@@ -40,13 +42,15 @@
         full-width
         width="290px"
       >
-        <v-text-field
-          slot="activator"
-          v-model="time"
-          label="Picker in dialog"
-          prepend-icon="access_time"
-          readonly
-        ></v-text-field>
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            v-model="time"
+            label="Picker in dialog"
+            prepend-icon="access_time"
+            readonly
+            v-on="on"
+          ></v-text-field>
+        </template>
         <v-time-picker
           v-if="modal2"
           v-model="time"

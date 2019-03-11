@@ -5,10 +5,9 @@
     :sub-group="subGroup"
     no-action
   >
-    <core-item
-      slot="activator"
-      :text="item.text"
-    />
+    <template v-slot:activator>
+      <core-item :text="item.text" />
+    </template>
     <template v-for="(child, i) in children">
       <core-sub-group
         v-if="child.group != null"
@@ -17,9 +16,9 @@
       />
       <core-item
         v-else
+        :key="`item-${i}`"
         :chip="genChip(child)"
         :icon="child.icon"
-        :key="`item-${i}`"
         :subtext="child.subtext"
         :to="child.to"
         :text="child.text"
@@ -67,7 +66,7 @@
       genChip,
       genGroup (children) {
         return children.map(item => {
-          let parent = item.group || this.item.group
+          const parent = item.group || this.item.group
           let group = `${parent}/${kebabCase(item.to)}`
 
           if (item.children) {

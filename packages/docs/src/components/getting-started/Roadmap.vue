@@ -9,7 +9,9 @@
         v-if="typeof item === 'number'"
         :key="`divider-${i}`"
       >
-        <span slot="opposite">Completed</span>
+        <template v-slot:opposite>
+          <span>Completed</span>
+        </template>
       </v-timeline-item>
       <v-timeline-item
         v-else-if="index == null || index >= i"
@@ -19,11 +21,12 @@
         :small="item.complete || item.small"
         fill-dot
       >
-        <strong
-          slot="opposite"
-          :class="index === i ? 'primary--text' : undefined"
-          v-text="item.caption"
-        />
+        <template v-slot:opposite>
+          <strong
+            :class="index === i ? 'primary--text' : undefined"
+            v-text="item.caption"
+          />
+        </template>
         <v-card
           :class="`elevation-${item.value ? 8 : 1}`"
           :hover="!item.complete"
@@ -48,9 +51,9 @@
                 class="mr-2"
                 v-text="item.caption"
               />
-              <v-icon
-                small
-              >mdi-calendar</v-icon>
+              <v-icon small>
+                mdi-calendar
+              </v-icon>
             </v-btn>
           </v-card-title>
           <v-expand-transition>
@@ -92,7 +95,7 @@
     }),
 
     mounted () {
-      this.items = this.$t('GettingStarted.Roadmap.roadmapItems').map((item) => {
+      this.items = this.$t('GettingStarted.Roadmap.roadmapItems').map(item => {
         const type = types[item.type]
         return {
           ...type,

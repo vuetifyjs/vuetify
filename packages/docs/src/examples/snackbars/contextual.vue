@@ -7,8 +7,8 @@
             <v-radio-group v-model="color" row>
               <v-radio
                 v-for="(colorValue, i) in ['success', 'info', 'error', 'cyan darken-2']"
-                :color="colorValue"
                 :key="i"
+                :color="colorValue"
                 :label="colorValue"
                 :value="colorValue"
               ></v-radio>

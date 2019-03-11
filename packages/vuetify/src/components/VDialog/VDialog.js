@@ -12,8 +12,9 @@ import Toggleable from '../../mixins/toggleable'
 import ClickOutside from '../../directives/click-outside'
 
 // Helpers
-import { getZIndex, convertToUnit } from '../../util/helpers'
+import { getZIndex, convertToUnit, getSlotType } from '../../util/helpers'
 import ThemeProvider from '../../util/ThemeProvider'
+import { consoleError } from '../../util/console'
 
 /* @vue/component */
 export default {
@@ -84,6 +85,12 @@ export default {
         'v-dialog__content': true,
         'v-dialog__content--active': this.isActive
       }
+    },
+    hasActivator () {
+      return Boolean(
+        !!this.$slots.activator ||
+        !!this.$scopedSlots.activator
+      )
     }
   },
 
@@ -115,6 +122,12 @@ export default {
       this.isBooted = this.isActive
       this.isActive && this.show()
     })
+  },
+
+  mounted () {
+    if (getSlotType(this, 'activator', true) === 'v-slot') {
+      consoleError(`v-dialog's activator slot must be bound, try '<template #activator="data"><v-btn v-on="data.on>'`, this)
+    }
   },
 
   beforeDestroy () {
@@ -159,7 +172,7 @@ export default {
       if (this.fullscreen) {
         document.documentElement.classList.add('overflow-y-hidden')
       } else {
-        Overlayable.methods.hideScroll.call(this)
+        Overlayable.options.methods.hideScroll.call(this)
       }
     },
     show () {
@@ -177,7 +190,7 @@ export default {
       this.$emit('keydown', e)
     },
     genActivator () {
-      if (!this.$slots.activator && !this.$scopedSlots.activator) return null
+      if (!this.hasActivator) return null
 
       const listeners = this.disabled ? {} : {
         click: e => {
@@ -186,7 +199,7 @@ export default {
         }
       }
 
-      if (this.$scopedSlots.activator) {
+      if (getSlotType(this, 'activator') === 'scoped') {
         const activator = this.$scopedSlots.activator({ on: listeners })
         this.activatorNode = activator
         return activator
@@ -198,7 +211,7 @@ export default {
           'v-dialog__activator--disabled': this.disabled
         },
         on: listeners
-      }, [this.$slots.activator])
+      }, this.$slots.activator)
     }
   },
 
@@ -263,7 +276,7 @@ export default {
     return h('div', {
       staticClass: 'v-dialog__container',
       style: {
-        display: (!this.$slots.activator || this.fullWidth) ? 'block' : 'inline-block'
+        display: (!this.hasActivator || this.fullWidth) ? 'block' : 'inline-block'
       }
     }, children)
   }

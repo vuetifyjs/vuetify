@@ -9,7 +9,7 @@
     solo
     multiple
   >
-    <template slot="selection" slot-scope="data">
+    <template v-slot:selection="data">
       <v-chip
         :selected="data.selected"
         close
