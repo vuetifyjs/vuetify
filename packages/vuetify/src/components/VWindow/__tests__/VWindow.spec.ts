@@ -1,10 +1,34 @@
-import VWindow from '@/components/VWindow/VWindow'
-import VWindowItem from '@/components/VWindow/VWindowItem'
-import { test, touch } from '@/test'
 
-test('VWindow.ts', ({ mount }) => {
+// Components
+import VWindow from '../VWindow'
+import VWindowItem from '../VWindowItem'
+
+// Utilities
+import {
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+import { touch } from '../../../../test'
+
+describe('VWindow.ts', () => {
+  type Instance = InstanceType<typeof VWindow>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+
+  (global as any).requestAnimationFrame = cb => cb()
+
+  beforeEach(() => {
+    mountFunction = (options = {}) => {
+      return mount(VWindow, {
+        ...options,
+        mocks: {
+          $vuetify: { rtl: false }
+        }
+      })
+    }
+  })
+
   it('it should return the correct transition', async () => {
-    const wrapper = mount(VWindow)
+    const wrapper = mountFunction()
     // Force booted
     wrapper.setData({ isBooted: true })
 
@@ -21,7 +45,7 @@ test('VWindow.ts', ({ mount }) => {
   })
 
   it('should set reverse', async () => {
-    const wrapper = mount(VWindow, {
+    const wrapper = mountFunction({
       propsData: {
         value: 0
       },
@@ -57,7 +81,7 @@ test('VWindow.ts', ({ mount }) => {
   })
 
   it('should increment and decrement current value', async () => {
-    const wrapper = mount(VWindow, {
+    const wrapper = mountFunction({
       slots: {
         default: [
           VWindowItem,
@@ -91,7 +115,7 @@ test('VWindow.ts', ({ mount }) => {
   })
 
   it('should update model when internal index is greater than item count', async () => {
-    const wrapper = mount(VWindow, {
+    const wrapper = mountFunction({
       propsData: {
         value: 2
       },
@@ -108,7 +132,7 @@ test('VWindow.ts', ({ mount }) => {
 
     expect(wrapper.vm.internalValue).toBe(2)
 
-    const [item1, item2, item3] = wrapper.find(VWindowItem.options)
+    const [item1, item2, item3] = wrapper.findAll(VWindowItem).wrappers
 
     item3.destroy()
     expect(wrapper.vm.internalValue).toBe(1)
@@ -121,7 +145,7 @@ test('VWindow.ts', ({ mount }) => {
   })
 
   it('should react to touch', async () => {
-    const wrapper = mount(VWindow, {
+    const wrapper = mountFunction({
       propsData: { value: 1 },
       slots: {
         default: [
@@ -159,7 +183,7 @@ test('VWindow.ts', ({ mount }) => {
     const left = jest.fn()
     const right = jest.fn()
     const fns = { left, right }
-    const wrapper = mount(VWindow, {
+    const wrapper = mountFunction({
       propsData: {
         touch: fns,
         value: 1

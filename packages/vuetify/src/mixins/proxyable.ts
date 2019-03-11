@@ -33,7 +33,7 @@ export function factory (
 
     computed: {
       internalValue: {
-        get (): unknown {
+        get () {
           return this.internalLazyValue
         },
         set (val: any) {
