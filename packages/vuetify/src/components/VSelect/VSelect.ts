@@ -47,7 +47,7 @@ export default mixins(VTextField, Comparable, Filterable).extend({
     appendIconCb: Function,
     attach: {
       default: false
-    } as PropValidator<string | boolean>,
+    } as PropValidator<string | boolean | Element | VNode>,
     browserAutocomplete: {
       type: String,
       default: 'on'
