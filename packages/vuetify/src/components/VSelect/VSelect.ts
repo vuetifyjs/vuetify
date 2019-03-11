@@ -346,7 +346,7 @@ export default mixins(VTextField, Comparable, Filterable).extend({
         key
       }), `${this.getText(item)}${last ? '' : ', '}`)
     },
-    genDefaultSlot (): any[] {
+    genDefaultSlot (): (VNode | VNode[] | null)[] {
       const selections = this.genSelections()
       const input = this.genInput()
 
