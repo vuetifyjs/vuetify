@@ -211,7 +211,19 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
       if (this.$vuetify.breakpoint.smAndDown) {
         document.documentElement!.classList.add('overflow-y-hidden')
       } else {
-        window.addEventListener('wheel', this.scrollListener as EventHandlerNonNull, { passive: false })
+        // IE11 does not support passive
+        let supportsPassive = false
+        try {
+          const opts = Object.defineProperty({}, 'passive', {
+            get: () => {
+              supportsPassive = true
+            }
+          })
+          window.addEventListener('testPassive', () => {}, opts)
+          window.removeEventListener('testPassive', () => {}, opts)
+        } catch (e) { console.log(e) }
+
+        window.addEventListener('wheel', this.scrollListener as EventHandlerNonNull, supportsPassive ? { passive: false } : false)
         window.addEventListener('keydown', this.scrollListener as EventHandlerNonNull)
       }
     },
