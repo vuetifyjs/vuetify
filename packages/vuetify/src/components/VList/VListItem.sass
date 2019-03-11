@@ -94,7 +94,7 @@
   &:first-child
     margin-right: 16px
 
-  &:last-child
+  &:last-child:not(:only-child)
     margin-left: 16px
 
 .v-list-item__action,
@@ -102,7 +102,7 @@
   &:first-child
     margin-right: $list-item-action-margin-x
 
-  &:last-child
+  &:last-child:not(:only-child)
     margin-left: $list-item-action-margin-x
 
 .v-list-item__action,
@@ -116,7 +116,6 @@
   overflow: hidden
   text-overflow: ellipsis
   white-space: nowrap
-  width: 100%
 
 .v-list-item__title
   align-self: center
@@ -148,6 +147,9 @@
 
   &.v-list-item--three-line
     min-height: 76px
+
+.v-list-item--link
+  cursor: pointer
 
 .v-list-item--link,
 .v-list-group__header
