@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VResponsive should force aspect ratio 1`] = `
+exports[`VResponsive.ts should force aspect ratio 1`] = `
 
 <div class="v-responsive">
   <div class="v-responsive__sizer"
@@ -13,7 +13,7 @@ exports[`VResponsive should force aspect ratio 1`] = `
 
 `;
 
-exports[`VResponsive should render content 1`] = `
+exports[`VResponsive.ts should render content 1`] = `
 
 <div class="v-responsive">
   <div class="v-responsive__content">
@@ -25,7 +25,7 @@ exports[`VResponsive should render content 1`] = `
 
 `;
 
-exports[`VResponsive should set height 1`] = `
+exports[`VResponsive.ts should set height 1`] = `
 
 <div class="v-responsive"
      style="height: 100px; max-height: 200px;"

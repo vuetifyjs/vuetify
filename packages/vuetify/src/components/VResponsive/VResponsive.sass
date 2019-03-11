@@ -1,4 +1,4 @@
-@import '../bootstrap'
+@import '../../styles/styles.sass'
 
 .v-responsive
   position: relative
@@ -10,5 +10,5 @@
     flex: 1 0 0px
 
   &__sizer
-    transition: padding-bottom 0.2s $transition.swing
+    transition: padding-bottom 0.2s map-get($transition, 'swing')
     flex: 0 0 0px
