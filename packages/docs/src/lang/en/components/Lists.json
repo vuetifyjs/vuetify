@@ -40,6 +40,10 @@
     "expansionLists": {
       "header": "### Expansion Lists",
       "desc": "A list can contain a group of items which will display on click. Expansion lists are also used within the [v-navigation-drawer](/components/navigation-drawers) component."
+    },
+    "nav": {
+      "header": "### Navigation lists",
+      "desc": "Lists can receive an alternative **nav** styling that reduces the width `v-list-item` takes up as well as adding a border radius."
     }
   },
   "props": {
@@ -48,13 +52,15 @@
     "expand": "Will only collapse when explicitly closed",
     "flat": "Remove the highlighted background on active `v-list-item`s",
     "group": "Assign a route namespace. Accepts a string or regexp for determining active state",
+    "inactive": "If set, the list tile will not be rendered as a link even if it has to/href prop or @click handler",
+    "link": "Applies `v-list-item` hover styles. Useful when using the item as an _activator_.",
+    "nav": "An alternative styling that reduces `v-list-item` width and rounds the corners. Typically used with [v-navigation-drawer](/components/navigation-drawers)",
     "noAction": "Removes left padding assigned for action icons from group items",
     "shaped": "Provides an alternative active style for `v-list-item`.",
-    "subheader": "Removes top padding. Used when previous sibling is a header",
     "subGroup": "Designate the component as nested list group",
+    "subheader": "Removes top padding. Used when previous sibling is a header",
     "threeLine": "Increases list-item height for three lines",
     "twoLine": "Increases list-item height for two lines",
-    "inactive": "If set, the list tile will not be rendered as a link even if it has to/href prop or @click handler",
     "value": "Expands / Collapse list group",
     "v-list-item-avatar": {
       "color": "Mixins.Colorable.props.color"

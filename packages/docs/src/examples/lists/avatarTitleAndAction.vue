@@ -25,7 +25,6 @@
       <v-list-item
         v-for="item in items"
         :key="item.title"
-        avatar
         @click=""
       >
         <v-list-item-icon>

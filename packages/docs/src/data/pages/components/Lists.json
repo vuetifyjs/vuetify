@@ -48,7 +48,8 @@
             "cardList",
             "titleSubtitleActionsAndActionText",
             "actionTitleAndSubtitle",
-            "expansionLists"
+            "expansionLists",
+            "nav"
           ]
         }
       ]
