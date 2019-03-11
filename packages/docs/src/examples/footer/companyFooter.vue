@@ -1,7 +1,7 @@
 <template>
   <v-footer
-    height="auto"
     color="primary lighten-1"
+    padless
   >
     <v-layout
       justify-center
@@ -13,7 +13,8 @@
         :key="link"
         color="white"
         text
-        round
+        rounded
+        class="my-2"
       >
         {{ link }}
       </v-btn>

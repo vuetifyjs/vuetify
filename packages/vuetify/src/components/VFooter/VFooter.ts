@@ -27,7 +27,12 @@ export default mixins(
       default: 'auto',
       type: [Number, String]
     },
-    inset: Boolean
+    inset: Boolean,
+    padless: Boolean,
+    tile: {
+      type: Boolean,
+      default: true
+    }
   },
 
   computed: {
@@ -39,23 +44,37 @@ export default mixins(
         ...VSheet.options.computed.classes.call(this),
         'v-footer--absolute': this.absolute,
         'v-footer--fixed': !this.absolute && (this.app || this.fixed),
+        'v-footer--padless': this.padless,
         'v-footer--inset': this.inset
       }
     },
-    computedBottom (): number {
+    computedBottom (): number | undefined {
+      if (!this.isPositioned) return undefined
+
       return this.app
         ? this.$vuetify.application.bottom
         : 0
     },
-    computedLeft (): number {
+    computedLeft (): number | undefined {
+      if (!this.isPositioned) return undefined
+
       return this.app && this.inset
         ? this.$vuetify.application.left
         : 0
     },
-    computedRight (): number {
+    computedRight (): number | undefined {
+      if (!this.isPositioned) return undefined
+
       return this.app && this.inset
         ? this.$vuetify.application.right
         : 0
+    },
+    isPositioned (): boolean {
+      return Boolean(
+        this.absolute ||
+        this.fixed ||
+        this.app
+      )
     },
     styles (): object {
       const height = parseInt(this.height)
