@@ -5,9 +5,9 @@
     <v-spacer></v-spacer>
 
     <v-toolbar-items>
-      <v-btn flat>Link 1</v-btn>
-      <v-btn flat>Link 2</v-btn>
-      <v-btn flat>Link 3</v-btn>
+      <v-btn text>Link 1</v-btn>
+      <v-btn text>Link 2</v-btn>
+      <v-btn text>Link 3</v-btn>
     </v-toolbar-items>
 
     <v-btn icon>

@@ -14,7 +14,7 @@
       max-width="700"
       style="margin-top: -64px;"
     >
-      <v-toolbar card>
+      <v-toolbar flat>
         <v-toolbar-title class="grey--text">Title</v-toolbar-title>
 
         <v-spacer></v-spacer>
