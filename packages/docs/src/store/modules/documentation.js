@@ -19,9 +19,13 @@ export default {
 
   getters: {
     namespace (state, getters, rootState) {
+      if (!rootState || !rootState.route) return undefined
+
       return upperFirst(camelCase(rootState.route.params.namespace))
     },
     page (state, getters, rootState) {
+      if (!rootState || !rootState.route) return undefined
+
       return upperFirst(camelCase(rootState.route.params.page))
     }
   },
