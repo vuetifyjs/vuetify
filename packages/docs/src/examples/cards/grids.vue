@@ -2,7 +2,7 @@
   <v-layout justify-center>
     <v-flex xs12 sm6>
       <v-toolbar color="indigo" dark>
-        <v-toolbar-side-icon></v-toolbar-side-icon>
+        <v-app-bar-nav-icon></v-app-bar-nav-icon>
         <v-toolbar-title>Discover</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn icon>

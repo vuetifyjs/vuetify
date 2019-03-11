@@ -130,6 +130,7 @@ export class Theme extends Service {
 
     this.ssr = Boolean(ssrContext)
 
+    /* istanbul ignore else */
     if (this.ssr) {
       const options = this.options || {}
       // SSR
@@ -144,6 +145,7 @@ export class Theme extends Service {
 
   // Check for existence of style element
   private checkStyleElement (): boolean {
+    /* istanbul ignore next */
     if (this.ssr) return false // SSR
     if (this.styleEl) return true
 
@@ -168,6 +170,7 @@ export class Theme extends Service {
   // Generate the style element
   // if applicable
   private genStyleElement (): void {
+    /* istanbul ignore next */
     const options = this.options || {}
 
     this.styleEl = document.createElement('style')
@@ -191,6 +194,7 @@ export class Theme extends Service {
 
   get generatedStyles (): string {
     const theme = this.parsedTheme
+    /* istanbul ignore next */
     const options = this.options || {}
     let css
 
@@ -214,6 +218,8 @@ export class Theme extends Service {
   }
 
   get parsedTheme (): VuetifyParsedTheme {
-    return ThemeUtils.parse(this.currentTheme || {})
+    /* istanbul ignore next */
+    const theme = this.currentTheme || {}
+    return ThemeUtils.parse(theme)
   }
 }

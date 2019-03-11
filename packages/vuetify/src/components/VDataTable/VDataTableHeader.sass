@@ -1,0 +1,64 @@
+// Imports
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+@import './_mixins.sass'
+
+// Theme
+.v-data-table.theme--light
+  +data-table-header-theme($material-light)
+.v-data-table.theme--dark
+  +data-table-header-theme($material-dark)
+
+// Block
+.v-data-table-header
+  th
+    &.sortable
+      pointer-events: auto
+      cursor: pointer
+      outline: 0
+
+      i
+        font-size: 18px
+        display: inline-block
+        opacity: 0
+        transition: .3s map-get($transition, 'swing')
+
+      &:focus,
+      &:hover
+        i
+          opacity: .6
+
+    &.active
+      transform: none
+
+      i
+        opacity: 1
+
+      &.desc
+        i
+          transform: rotate(-180deg)
+
+.v-data-table-header__sort-badge
+  display: inline-flex
+  justify-content: center
+  align-items: center
+  border: 0px
+  border-radius: 50%
+  min-width: 18px
+  min-height: 18px
+  height: 18px
+  width: 18px
+
+// Modifiers
+.v-data-table-header-mobile
+  th
+    height: initial
+
+.v-data-table-header-mobile__wrapper
+  display: flex
+
+  .v-simple-checkbox
+    margin-right: 24px
+
+  .v-select
+    margin-bottom: 8px

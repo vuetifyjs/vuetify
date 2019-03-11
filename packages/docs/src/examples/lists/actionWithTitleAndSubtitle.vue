@@ -3,7 +3,7 @@
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
         <v-toolbar color="purple" dark>
-          <v-toolbar-side-icon></v-toolbar-side-icon>
+          <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
           <v-toolbar-title>Settings</v-toolbar-title>
 

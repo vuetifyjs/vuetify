@@ -1,0 +1,56 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "mdSpec": {
+    "version": "1",
+    "link": "https://material.io/archive/guidelines/components/toolbars.html"
+  },
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [
+            "v-system-bar"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "window",
+            "themes",
+            "lights-out"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/buttons",
+            "components/toolbar",
+            "components/tabs"
+          ]
+        }
+      ]
+    }
+  ]
+}

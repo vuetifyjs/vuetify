@@ -14,7 +14,6 @@ export default Vue.extend<options>().extend({
 
   data () {
     return {
-      stackClass: 'unpecified',
       stackElement: null as Element | null,
       stackExclude: null as Element[] | null,
       stackMinZIndex: 0,
@@ -48,7 +47,10 @@ export default Vue.extend<options>().extend({
       // Convert the NodeList to an array to
       // prevent an Edge bug with Symbol.iterator
       // https://github.com/vuetifyjs/vuetify/issues/2146
-      const activeElements = [...document.getElementsByClassName(this.stackClass)]
+      const activeElements = [
+        ...document.getElementsByClassName('v-menu__content--active'),
+        ...document.getElementsByClassName('v-dialog__content--active')
+      ]
 
       // Get z-index for all active dialogs
       for (let index = 0; index < activeElements.length; index++) {

@@ -1,3 +1,5 @@
+import './VSimpleCheckbox.sass'
+
 import Vue, { VNode, VNodeDirective } from 'vue'
 import { VIcon } from '../VIcon'
 
