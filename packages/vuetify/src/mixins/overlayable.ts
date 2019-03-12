@@ -34,7 +34,6 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
   data () {
     return {
       overlay: null as HTMLElement | null,
-      overlayOffset: 0,
       overlayTimeout: undefined as number | undefined,
       overlayTransitionDuration: 500 + 150 // transition + delay
     }
