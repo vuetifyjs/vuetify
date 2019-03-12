@@ -98,7 +98,6 @@ export default {
     isActive (val) {
       if (val) {
         this.show()
-        this.hideScroll()
       } else {
         this.removeOverlay()
         this.unbind()
