@@ -111,11 +111,13 @@
     async created () {
       if (this.$ssrContext) return
 
-      const notify = await fetch('https://cdn.vuetifyjs.com/notify.json', {
-        headers: {
-          'Access-Control-Allow-Origin': '*'
-        }
-      }).then(res => res.json())
+      const notify = require('@/data/api/notify.json')
+
+      // const notify = await fetch('https://cdn.vuetifyjs.com/notify.json', {
+      //   headers: {
+      //     'Access-Control-Allow-Origin': '*'
+      //   }
+      // }).then(res => res.json())
 
       if (notify) this.setSnackbar(notify)
     },

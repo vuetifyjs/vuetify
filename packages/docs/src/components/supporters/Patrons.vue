@@ -98,11 +98,13 @@
     async created () {
       if (this.$ssrContext || Object.keys(this.supporters).length) return
 
-      const supporters = await fetch('https://cdn.vuetifyjs.com/supporters.json', {
-        headers: {
-          'Access-Control-Allow-Origin': '*'
-        }
-      }).then(res => res.json())
+      const supporters = require('@/data/api/supporters.json')
+
+      // const supporters = await fetch('https://cdn.vuetifyjs.com/supporters.json', {
+      //   headers: {
+      //     'Access-Control-Allow-Origin': '*'
+      //   }
+      // }).then(res => res.json())
 
       if (supporters) this.setSupporters(supporters)
     },
