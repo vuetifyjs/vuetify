@@ -1,7 +1,12 @@
-import { test } from '@/test'
-import VSubheader from '@/components/VSubheader'
+// Components
+import VSubheader from '../VSubheader'
 
-test('VSubheader.js', ({ mount }) => {
+// Utilities
+import {
+  mount
+} from '@vue/test-utils'
+
+describe('VSubheader.ts', () => {
   it('should have custom class', () => {
     const wrapper = mount({
       render: h => h(VSubheader, { staticClass: 'foo' })
