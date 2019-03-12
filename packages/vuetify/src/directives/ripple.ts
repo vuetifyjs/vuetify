@@ -130,13 +130,13 @@ function isRippleEnabled (value: any): value is true {
 function rippleShow (e: MouseEvent | TouchEvent) {
   const value: RippleOptions = {}
   const element = e.currentTarget as HTMLElement
-  if (!element || element._ripple!.touched) return
+  if (!element || !element._ripple || element._ripple.touched) return
   if (isTouchEvent(e)) {
-    element._ripple!.touched = true
+    element._ripple.touched = true
   }
-  value.center = element._ripple!.centered
-  if (element._ripple!.class) {
-    value.class = element._ripple!.class
+  value.center = element._ripple.centered
+  if (element._ripple.class) {
+    value.class = element._ripple.class
   }
   ripples.show(e, element, value)
 }

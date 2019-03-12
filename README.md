@@ -37,6 +37,9 @@
   <a href="https://www.npmjs.com/package/vuetify">
     <img src="https://img.shields.io/npm/v/vuetify.svg" alt="Version">
   </a>
+  <a href="https://www.npmjs.com/package/vuetify">
+    <img src="https://img.shields.io/npm/v/vuetify/next.svg" alt="Next version">
+  </a>
   <a href="https://cdnjs.com/libraries/vuetify">
     <img src="https://img.shields.io/cdnjs/v/vuetify.svg" alt="CDN">
   </a>
