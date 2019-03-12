@@ -1,7 +1,24 @@
-import { test } from '@/test'
-import VSubheader from '@/components/VSubheader'
+// Components
+import VSubheader from '../VSubheader'
 
-test('VSubheader.js', ({ mount }) => {
+// Utilities
+import {
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+
+describe('VSubheader.ts', () => {
+  type Instance = InstanceType<typeof VSubheader>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+
+  beforeEach(() => {
+    mountFunction = (options = {}) => {
+      return mount(VSubheader, {
+        ...options
+      })
+    }
+  })
+
   it('should have custom class', () => {
     const wrapper = mount({
       render: h => h(VSubheader, { staticClass: 'foo' })
@@ -12,7 +29,7 @@ test('VSubheader.js', ({ mount }) => {
   })
 
   it('should be light', () => {
-    const wrapper = mount(VSubheader, {
+    const wrapper = mountFunction({
       propsData: { light: true }
     })
 
@@ -21,7 +38,7 @@ test('VSubheader.js', ({ mount }) => {
   })
 
   it('should be dark', () => {
-    const wrapper = mount(VSubheader, {
+    const wrapper = mountFunction({
       propsData: { dark: true }
     })
 
@@ -30,7 +47,7 @@ test('VSubheader.js', ({ mount }) => {
   })
 
   it('should be inset', () => {
-    const wrapper = mount(VSubheader, {
+    const wrapper = mountFunction({
       propsData: { inset: true }
     })
 
