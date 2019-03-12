@@ -1,0 +1,15 @@
+@mixin expansion-panel-theme($material)
+  .v-expansion-panel__container
+    background-color: map-get($material, 'cards')
+    color: map-deep-get($material, 'text', 'primary')
+
+    &:after
+      background-color: map-get($material, 'dividers')
+
+    .v-expansion-panel__header
+      .v-expansion-panel__header__icon
+        .v-icon
+          color: map-deep-get($material, 'icons', 'active')
+
+    &--disabled
+      color: map-deep-get($material, 'text', 'disabled')

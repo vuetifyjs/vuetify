@@ -1,40 +1,33 @@
-import { VExpandTransition } from '../transitions'
-
-import Bootable from '../../mixins/bootable'
-import Toggleable from '../../mixins/toggleable'
-import Rippleable from '../../mixins/rippleable'
-import { Registrable, inject as RegistrableInject } from '../../mixins/registrable'
-
-import VIcon from '../VIcon'
+// Components
 import VExpansionPanel from './VExpansionPanel'
+import { VExpandTransition } from '../transitions'
+import VIcon from '../VIcon'
 
+// Mixins
+import { factory as GroupableFactory } from '../../mixins/groupable'
+import Bootable from '../../mixins/bootable'
+import Rippleable from '../../mixins/rippleable'
+
+// Utilities
 import mixins, { ExtractVue } from '../../util/mixins'
-import Vue, { VNode } from 'vue'
-
 import { consoleWarn } from '../../util/console'
 
-type VExpansionPanelInstance = InstanceType<typeof VExpansionPanel>
+// Types
+import { VNode } from 'vue'
 
-interface options extends Vue {
-  expansionPanel: VExpansionPanelInstance
+const baseMixins = mixins(
+  Bootable,
+  GroupableFactory('expansionPanel'),
+  Rippleable
+)
+
+interface options extends ExtractVue<typeof baseMixins> {
+  $el: HTMLElement
+  expansionPanel: InstanceType<typeof VExpansionPanel>
 }
 
-export default mixins<options &
-/* eslint-disable indent */
-  ExtractVue<[
-    typeof Bootable,
-    typeof Toggleable,
-    typeof Rippleable,
-    Registrable<'expansionPanel'>
-  ]>
-/* eslint-enable indent */
->(
-  Bootable,
-  Toggleable,
-  Rippleable,
-  RegistrableInject('expansionPanel', 'v-expansion-panel-content', 'v-expansion-panel')
-  /* @vue/component */
-).extend({
+/* @vue/component */
+export default baseMixins.extend<options>().extend({
   name: 'v-expansion-panel-content',
 
   props: {
@@ -56,10 +49,11 @@ export default mixins<options &
   }),
 
   computed: {
-    containerClasses (): object {
+    classes (): object {
       return {
         'v-expansion-panel__container--active': this.isActive,
-        'v-expansion-panel__container--disabled': this.isDisabled
+        'v-expansion-panel__container--disabled': this.isDisabled,
+        ...this.groupClasses
       }
     },
     isDisabled (): boolean {
@@ -70,27 +64,20 @@ export default mixins<options &
     }
   },
 
-  beforeMount () {
-    this.expansionPanel.register(this)
-
-    // Can be removed once fully deprecated
-    if (typeof this.value !== 'undefined') consoleWarn('v-model has been deprecated', this)
-  },
-
-  beforeDestroy () {
-    this.expansionPanel.unregister(this)
-  },
-
   methods: {
     onKeydown (e: KeyboardEvent) {
       // Ensure element is the activeElement
       if (
         e.keyCode === 13 &&
         this.$el === document.activeElement
-      ) this.expansionPanel.panelClick(this._uid)
+      ) this.click(e)
     },
-    onHeaderClick () {
-      this.isReadonly || this.expansionPanel.panelClick(this._uid)
+    click (e: MouseEvent | KeyboardEvent) {
+      if (e.detail) this.$el.blur()
+
+      this.$emit('click', e)
+
+      this.isReadonly || this.toggle()
     },
     genBody () {
       return this.$createElement('div', {
@@ -113,9 +100,7 @@ export default mixins<options &
           name: 'ripple',
           value: this.ripple
         }],
-        on: {
-          click: this.onHeaderClick
-        }
+        on: { click: this.click }
       }, children)
     },
     genIcon () {
@@ -133,21 +118,16 @@ export default mixins<options &
           }]
         }, icon)
       ])
-    },
-    toggle (active: boolean) {
-      if (active) this.isBooted = true
-
-      this.$nextTick(() => (this.isActive = active))
     }
   },
 
   render (h): VNode {
     return h('li', {
       staticClass: 'v-expansion-panel__container',
-      class: this.containerClasses,
+      class: this.classes,
       attrs: {
         tabindex: this.isReadonly || this.isDisabled ? null : 0,
-        'aria-expanded': Boolean(this.isActive)
+        'aria-expanded': String(!!this.isActive)
       },
       on: {
         keydown: this.onKeydown
