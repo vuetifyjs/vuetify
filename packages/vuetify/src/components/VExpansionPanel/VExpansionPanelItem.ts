@@ -10,7 +10,6 @@ import Rippleable from '../../mixins/rippleable'
 
 // Utilities
 import mixins, { ExtractVue } from '../../util/mixins'
-import { consoleWarn } from '../../util/console'
 
 // Types
 import { VNode } from 'vue'
