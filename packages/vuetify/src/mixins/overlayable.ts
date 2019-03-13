@@ -2,7 +2,7 @@
 import '../stylus/components/_overlay.styl'
 
 // Utilities
-import { keyCodes } from '../util/helpers'
+import { keyCodes, addOptionsSafeEventListener } from '../util/helpers'
 
 // Types
 import Vue from 'vue'
@@ -211,19 +211,7 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
       if (this.$vuetify.breakpoint.smAndDown) {
         document.documentElement!.classList.add('overflow-y-hidden')
       } else {
-        // IE11 does not support passive
-        let supportsPassive = false
-        try {
-          const opts = Object.defineProperty({}, 'passive', {
-            get: () => {
-              supportsPassive = true
-            }
-          })
-          window.addEventListener('testPassive', () => {}, opts)
-          window.removeEventListener('testPassive', () => {}, opts)
-        } catch (e) { console.log(e) }
-
-        window.addEventListener('wheel', this.scrollListener as EventHandlerNonNull, supportsPassive ? { passive: false } : false)
+        addOptionsSafeEventListener(window, 'wheel', this.scrollListener as EventHandlerNonNull, { passive: false })
         window.addEventListener('keydown', this.scrollListener as EventHandlerNonNull)
       }
     },
