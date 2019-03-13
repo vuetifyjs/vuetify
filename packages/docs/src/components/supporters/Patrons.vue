@@ -96,7 +96,7 @@
     },
 
     async created () {
-      if (this.$ssrContext || Object.keys(this.supporters).length) return
+      // if (this.$ssrContext || Object.keys(this.supporters).length) return
 
       const supporters = require('@/data/api/supporters.json')
 
