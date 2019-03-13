@@ -3,7 +3,7 @@
     "headerText": "El componente `v-expansion-panel` es útil para reducir el espacio vertical cuando hay grandes cantidades de información. La funcionalidad default es que el componente sólo despliega un contenido de _expansion-panel_ a la vez. Sin embargo, con la prop `expandable`, el _expansion-panel_ puede permanecer abierto hasta que sea explicitamente cerrado por el usuario.",
     "components": [
         "v-expansion-panel",
-        "v-expansion-panel-content"
+        "v-expansion-panel-item"
     ],
     "examples": [
         {
@@ -35,7 +35,7 @@
             "inset": "Hace que el _expansion panel_ abra con un estilo _inset_",
             "popout": "Hace que el _expansion panel_ abra con un estilo _popup_"
         },
-        "v-expansion-panel-content": {
+        "v-expansion-panel-item": {
             "hideActions": "Esconde el ícono _expand_ en el encabezado del contenido"
         }
     }

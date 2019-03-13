@@ -17,30 +17,30 @@
       :readonly="readonly"
       expand
     >
-      <v-expansion-panel-content disabled>
+      <v-expansion-panel-item disabled>
         <template v-slot:header>Disabled</template>
         <v-card>
           <v-card-text>
             Disabled content. Style is changed and user is unable to toggle content.
           </v-card-text>
         </v-card>
-      </v-expansion-panel-content>
+      </v-expansion-panel-item>
 
-      <v-expansion-panel-content readonly>
+      <v-expansion-panel-item readonly>
         <template v-slot:header>Readonly</template>
         <v-card>
           <v-card-text>
             Readonly content. Style is unchanged but user is unable to toggle content.
           </v-card-text>
         </v-card>
-      </v-expansion-panel-content>
+      </v-expansion-panel-item>
 
-      <v-expansion-panel-content>
+      <v-expansion-panel-item>
         <template v-slot:header>Regular</template>
         <v-card>
           <v-card-text>Some content</v-card-text>
         </v-card>
-      </v-expansion-panel-content>
+      </v-expansion-panel-item>
     </v-expansion-panel>
   </div>
 </template>

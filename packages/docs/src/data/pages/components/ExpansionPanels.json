@@ -22,7 +22,7 @@
           "type": "api",
           "value": [
             "v-expansion-panel",
-            "v-expansion-panel-content"
+            "v-expansion-panel-item"
           ]
         }
       ]

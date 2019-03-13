@@ -6,7 +6,7 @@
     <v-subheader>Today</v-subheader>
 
     <v-expansion-panel popout>
-      <v-expansion-panel-content
+      <v-expansion-panel-item
         v-for="(message, i) in messages"
         :key="i"
         hide-actions
@@ -73,7 +73,7 @@
           <v-divider></v-divider>
           <v-card-text v-text="lorem"></v-card-text>
         </v-card>
-      </v-expansion-panel-content>
+      </v-expansion-panel-item>
     </v-expansion-panel>
   </v-layout>
 </template>

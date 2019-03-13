@@ -5,7 +5,7 @@
   "webpackVersionWarning": "Tree shaking only works with webpack 4 in production mode",
   "importText1": "Vuetify v1.3 brings support for tree-shaking with webpack. Simply import your components from `'vuetify/lib'`",
   "optionsDirectivesNotice": "The options object that you pass as the second argument to `Vue.use` can also include both a _directives_ and a _transitions_ property.",
-  "importText2": "You can also import components in .vue files, as seen below. When doing so it's important that you import all named exports, and then destructure them in components. Otherwise child components such as `v-card-text` or `v-expansion-panel-content` will not be available.",
+  "importText2": "You can also import components in .vue files, as seen below. When doing so it's important that you import all named exports, and then destructure them in components. Otherwise child components such as `v-card-text` or `v-expansion-panel-item` will not be available.",
   "styleHeader": "## Required styles",
   "styleText1": "To obtain all the required styles, we need to import them in stylus. In order for webpack to handle this, you will need to install `stylus` and the `stylus-loader` from **npm**.",
   "stylusDetailNotice": "For a more detailed explanation on how to setup your application to handle stylus, please navigate to the [theme page](/framework/theme#modifying-stylus-variables).",

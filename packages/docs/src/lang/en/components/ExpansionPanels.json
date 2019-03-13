@@ -47,7 +47,7 @@
       "readonly": "Makes the entire expansion-panel read only.",
       "value": "Controls the opened/closed state of content in the expansion-panel. Corresponds to a zero-based index of the currently opened content. If `expand` prop is used then it is an array of booleans where the index corresponds to the index of the content."
     },
-    "v-expansion-panel-content": {
+    "v-expansion-panel-item": {
       "disabled": "Disables the expansion-panel content",
       "expandIcon": "Set the expand action icon",
       "hideActions": "Hide the expand icon in the content header",
