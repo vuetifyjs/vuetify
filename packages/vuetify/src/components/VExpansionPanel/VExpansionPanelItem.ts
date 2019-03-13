@@ -85,7 +85,6 @@ export default baseMixins.extend<options>().extend({
     },
     genBody () {
       return this.$createElement('div', {
-        ref: 'body',
         class: 'v-expansion-panel-item__body',
         directives: [{
           name: 'show',
@@ -139,6 +138,11 @@ export default baseMixins.extend<options>().extend({
     onMouseup (e: Event) {
       this.hasMousedown = false
       this.$emit('mouseup', e)
+    },
+    toggle () {
+      this.isBooted = true
+
+      this.$nextTick(() => this.$emit('change'))
     }
   },
 
