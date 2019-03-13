@@ -3,6 +3,7 @@ import * as services from './services'
 
 // Styles
 import './stylus/app.styl'
+import './styles/main.sass'
 
 // Utilties
 import { install } from './install'
