@@ -30,7 +30,6 @@
 .v-expansion-panel-item
   flex: 1 0 100%
   max-width: 100%
-  outline: none
   position: relative
   transition: .3s map-get($transition, 'swing')
 
@@ -43,8 +42,9 @@
     position: absolute
     right: 0
 
-  &:focus .v-expansion-panel-item__header:before
-    opacity: 0.12
+  &:not(.v-expansion-panel-item--has-mousedown)
+    .v-expansion-panel-item__header:focus:before
+      opacity: 0.12
 
   &--disabled
     .v-expansion-panel-item__header
@@ -69,6 +69,7 @@
   font-size: 0.9375rem
   line-height: 1
   min-height: 48px
+  outline: none
   padding: 16px
   position: relative
 

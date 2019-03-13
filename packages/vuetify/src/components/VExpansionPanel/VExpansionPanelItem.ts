@@ -22,7 +22,9 @@ const baseMixins = mixins(
 )
 
 interface options extends ExtractVue<typeof baseMixins> {
-  $el: HTMLElement
+  $refs: {
+    header: HTMLElement
+  }
   expansionPanel: InstanceType<typeof VExpansionPanel>
 }
 
@@ -45,7 +47,8 @@ export default baseMixins.extend<options>().extend({
   },
 
   data: () => ({
-    height: 'auto'
+    height: 'auto',
+    hasMousedown: false
   }),
 
   computed: {
@@ -53,6 +56,7 @@ export default baseMixins.extend<options>().extend({
       return {
         'v-expansion-panel-item--active': this.isActive,
         'v-expansion-panel-item--disabled': this.isDisabled,
+        'v-expansion-panel-item--has-mousedown': this.hasMousedown,
         ...this.groupClasses
       }
     },
@@ -69,11 +73,11 @@ export default baseMixins.extend<options>().extend({
       // Ensure element is the activeElement
       if (
         e.keyCode === 13 &&
-        this.$el === document.activeElement
+        this.$refs.header === document.activeElement
       ) this.click(e)
     },
     click (e: MouseEvent | KeyboardEvent) {
-      if (e.detail) this.$el.blur()
+      if (e.detail) this.$refs.header.blur()
 
       this.$emit('click', e)
 
@@ -96,11 +100,20 @@ export default baseMixins.extend<options>().extend({
 
       return this.$createElement('div', {
         staticClass: 'v-expansion-panel-item__header',
+        attrs: {
+          tabindex: this.isReadonly || this.isDisabled ? null : 0
+        },
         directives: [{
           name: 'ripple',
           value: this.ripple
         }],
-        on: { click: this.click }
+        on: {
+          click: this.click,
+          keydown: this.onKeydown,
+          mousedown: this.onMousedown,
+          mouseup: this.onMouseup
+        },
+        ref: 'header'
       }, children)
     },
     genIcon () {
@@ -118,6 +131,14 @@ export default baseMixins.extend<options>().extend({
           }]
         }, icon)
       ])
+    },
+    onMousedown (e: Event) {
+      this.hasMousedown = true
+      this.$emit('mousedown', e)
+    },
+    onMouseup (e: Event) {
+      this.hasMousedown = false
+      this.$emit('mouseup', e)
     }
   },
 
@@ -126,11 +147,7 @@ export default baseMixins.extend<options>().extend({
       staticClass: 'v-expansion-panel-item',
       class: this.classes,
       attrs: {
-        tabindex: this.isReadonly || this.isDisabled ? null : 0,
         'aria-expanded': String(!!this.isActive)
-      },
-      on: {
-        keydown: this.onKeydown
       }
     }, [
       this.$slots.header && this.genHeader(),
