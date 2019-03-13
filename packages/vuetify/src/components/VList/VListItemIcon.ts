@@ -7,7 +7,7 @@ export default Vue.extend({
 
   functional: true,
 
-  render (h, { data, children, props }): VNode {
+  render (h, { data, children }): VNode {
     data.staticClass = (`v-list-item__icon ${data.staticClass || ''}`).trim()
 
     return h('div', data, children)
