@@ -9,6 +9,7 @@ import Bootable from '../../mixins/bootable'
 import Rippleable from '../../mixins/rippleable'
 
 // Utilities
+import { keyCodes } from '../../util/helpers'
 import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
@@ -71,7 +72,7 @@ export default baseMixins.extend<options>().extend({
     onKeydown (e: KeyboardEvent) {
       // Ensure element is the activeElement
       if (
-        e.keyCode === 13 &&
+        e.keyCode === keyCodes.enter &&
         this.$refs.header === document.activeElement
       ) this.click(e)
     },

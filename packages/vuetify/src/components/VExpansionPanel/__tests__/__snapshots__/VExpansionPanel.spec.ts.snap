@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VExpansionPanel.ts should work 1`] = `
+
+<div class="v-item-group theme--light v-expansion-panel">
+</div>
+
+`;

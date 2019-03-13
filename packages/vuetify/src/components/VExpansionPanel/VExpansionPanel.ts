@@ -7,9 +7,6 @@ import { BaseItemGroup } from '../VItemGroup/VItemGroup'
 // Utilities
 import { breaking } from '../../util/console'
 
-// Types
-import { VNode } from 'vue'
-
 /* @vue/component */
 export default BaseItemGroup.extend({
   name: 'v-expansion-panel',
