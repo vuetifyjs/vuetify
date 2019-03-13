@@ -59,8 +59,13 @@
 .v-expansion-panel-item__header__icon
   display: inline-flex
   margin-top: -4px
+  margin-left: auto
   margin-bottom: -4px
   user-select: none
+
+  +rtl()
+    margin-left: initial
+    margin-right: auto
 
 .v-expansion-panel-item__header
   align-items: center
