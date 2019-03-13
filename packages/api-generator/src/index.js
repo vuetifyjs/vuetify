@@ -275,3 +275,51 @@ components['$vuetify'] = map['$vuetify']
 components['internationalization'] = map['internationalization']
 
 writeApiFile({ ...components, ...directives }, 'dist/api.js')
+
+// Vars
+// const langs = ['en', 'eo-UY', 'ja-JP', 'pt-BR', 'ru-RU', 'zh-CN']
+
+/* const process = {
+  lang: lang => {
+    return lang
+  },
+  events: events => {
+    return events
+  },
+  props: props => {
+    return props
+  },
+  slots: slots => {
+    // slots scopedSlots
+    return slots
+  },
+  inherited: inherited => {
+    return inherited
+  }
+} */
+
+const processFolder = (folder, path) => {
+  var retFolder = {}
+  const folderDir = `${path}/${folder}`
+  fs.readdirSync(folderDir).forEach(file => {
+    var langs = {}
+    fs.readdirSync(`${folderDir}/${file}/lang`, { withFileTypes: false }).forEach(langFile => {
+      const lang = langFile.split('.')[0]
+      langs[lang] = JSON.parse(
+        fs.readFileSync(`${folderDir}/${file}/lang/${langFile}`, 'utf-8')
+      )
+    })
+    const map = JSON.parse(
+      fs.readFileSync(`${folderDir}/${file}/${file}.json`, 'utf-8')
+    )
+    retFolder[file] = { langs, map }
+  })
+  return retFolder
+}
+
+// get mixins
+const mixins = processFolder('mixins', 'src')
+const comps = processFolder('components', 'src')
+
+console.log(mixins)
+console.log(comps)

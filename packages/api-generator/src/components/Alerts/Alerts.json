@@ -5,7 +5,7 @@
       "value": "boolean"
     }
   },
-  "inherit": [
+  "inherited": [
     "v-sheet",
     "colorable",
     "elevatable",
@@ -60,6 +60,5 @@
       "default": "undefined"
     }
   },
-  "scopedSlots": {},
   "slots": ["default"]
 }

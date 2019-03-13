@@ -1,12 +1,8 @@
 {
-  "events": {},
-  "inherit": [],
   "props": {
     "color": {
       "type": "string",
       "default": "undefined"
     }
-  },
-  "scopedSlots": {},
-  "slots": []
+  }
 }
