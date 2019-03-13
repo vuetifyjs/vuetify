@@ -5,7 +5,7 @@ import './VExpansionPanel.sass'
 import { BaseItemGroup } from '../VItemGroup/VItemGroup'
 
 // Utilities
-import { deprecate } from '../../util/console'
+import { breaking } from '../../util/console'
 
 // Types
 import { VNode } from 'vue'
@@ -43,7 +43,14 @@ export default BaseItemGroup.extend({
   },
 
   created () {
-    if (this.expand) deprecate('expand', 'multiple')
+    if (this.expand) breaking('expand', 'multiple')
+    if (
+      Array.isArray(this.value) &&
+      this.value.length > 0 &&
+      typeof this.value[0] === 'boolean'
+    ) {
+      breaking('<v-expansion-panel :value="[true, false]">', '<v-expansion-panel :value="[0]">')
+    }
   },
 
   render (h): VNode {
