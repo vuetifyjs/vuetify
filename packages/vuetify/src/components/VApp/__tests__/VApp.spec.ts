@@ -25,7 +25,7 @@ describe('VApp.ts', () => {
         $vuetify: {
           rtl: false,
           theme: {
-            dark: false,
+            dark: false
           }
         }
       }
@@ -40,7 +40,7 @@ describe('VApp.ts', () => {
         $vuetify: {
           rtl: false,
           theme: {
-            dark: false,
+            dark: false
           }
         }
       }
@@ -59,7 +59,7 @@ describe('VApp.ts', () => {
         $vuetify: {
           rtl: false,
           theme: {
-            dark: false,
+            dark: false
           }
         }
       }
