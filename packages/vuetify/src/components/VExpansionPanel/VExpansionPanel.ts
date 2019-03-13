@@ -34,6 +34,7 @@ export default BaseItemGroup.extend({
     classes (): object {
       return {
         ...BaseItemGroup.options.computed.classes.call(this),
+        'v-expansion-panel': true,
         'v-expansion-panel--accordion': this.accordion,
         'v-expansion-panel--focusable': this.focusable,
         'v-expansion-panel--popout': this.popout,
@@ -43,7 +44,10 @@ export default BaseItemGroup.extend({
   },
 
   created () {
+    /* istanbul ignore next */
     if (this.expand) breaking('expand', 'multiple')
+
+    /* istanbul ignore next */
     if (
       Array.isArray(this.value) &&
       this.value.length > 0 &&
@@ -51,12 +55,5 @@ export default BaseItemGroup.extend({
     ) {
       breaking('<v-expansion-panel :value="[true, false]">', '<v-expansion-panel :value="[0]">')
     }
-  },
-
-  render (h): VNode {
-    return h('ul', {
-      staticClass: 'v-expansion-panel',
-      class: this.classes
-    }, this.$slots.default)
   }
 })
