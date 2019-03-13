@@ -28,7 +28,7 @@
     border-bottom-right-radius: inherit
 
 // Element
-.v-expansion-panel__container
+.v-expansion-panel-item
   flex: 1 0 100%
   max-width: 100%
   outline: none
@@ -44,27 +44,27 @@
     position: absolute
     right: 0
 
-  &:focus .v-expansion-panel__header:before
+  &:focus .v-expansion-panel-item__header:before
     opacity: 0.12
 
   &--disabled
-    .v-expansion-panel__header
+    .v-expansion-panel-item__header
       pointer-events: none
 
   &--active
-    > .v-expansion-panel__header
-      .v-expansion-panel__header__icon .v-icon
+    > .v-expansion-panel-item__header
+      .v-expansion-panel-item__header__icon .v-icon
         transform: rotate(-180deg)
 
 
-.v-expansion-panel__header__icon
+.v-expansion-panel-item__header__icon
   display: inline-flex
   margin-top: -4px
   margin-bottom: -4px
   margin-left: auto
   user-select: none
 
-.v-expansion-panel__header
+.v-expansion-panel-item__header
   align-items: center
   cursor: pointer
   display: flex
@@ -86,18 +86,18 @@
     right: 0
     transition: .3s opacity map-get($transition, 'fast-out-slow-in')
 
-  > *:not(.v-expansion-panel__header__icon)
+  > *:not(.v-expansion-panel-item__header__icon)
     flex: 1 1 auto
 
-.v-expansion-panel__body
+.v-expansion-panel-item__body
   > .v-card
     border-radius: 0
     +elevation(0)
 
 // Modifier
 .v-expansion-panel--focusable
-  .v-expansion-panel__container--active
-    .v-expansion-panel__header
+  .v-expansion-panel-item--active
+    .v-expansion-panel-item__header
       &:before
         opacity: 0.12
 
@@ -106,12 +106,12 @@
           opacity: 0.2
 
 .v-expansion-panel--accordion
-  .v-expansion-panel__container--active
+  .v-expansion-panel-item--active
     margin: 16px 0
 
 .v-expansion-panel--popout,
 .v-expansion-panel--inset
-  .v-expansion-panel__container--active
+  .v-expansion-panel-item--active
     margin: 16px 0
 
 .v-expansion-panel--popout,
@@ -119,7 +119,7 @@
 .v-expansion-panel--accordion
   +elevation(0)
 
-  .v-expansion-panel__container
+  .v-expansion-panel-item
     > *:first-child
       border-top-left-radius: inherit
       border-top-right-radius: inherit
@@ -128,30 +128,30 @@
       border-bottom-left-radius: inherit
       border-bottom-right-radius: inherit
 
-  .v-expansion-panel__body
+  .v-expansion-panel-item__body
     > .v-card
       border-radius: inherit
 
-  .v-expansion-panel__container--active
+  .v-expansion-panel-item--active
     border-radius: 4px
     +elevation(3)
 
     &:after,
-    + .v-expansion-panel__container:after
+    + .v-expansion-panel-item:after
       opacity: 0
 
 .v-expansion-panel--popout
-  .v-expansion-panel__container
+  .v-expansion-panel-item
     max-width: calc(100% - 32px)
 
 .v-expansion-panel--inset
-  .v-expansion-panel__container
+  .v-expansion-panel-item
     max-width: 100%
 
 .v-expansion-panel--popout
-  .v-expansion-panel__container--active
+  .v-expansion-panel-item--active
     max-width: calc(100% + 16px)
 
 .v-expansion-panel--inset
-  .v-expansion-panel__container--active
+  .v-expansion-panel-item--active
     max-width: calc(100% - 48px)
