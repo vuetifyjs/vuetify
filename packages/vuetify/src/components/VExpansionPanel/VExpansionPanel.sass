@@ -16,7 +16,7 @@
   list-style-type: none
   padding: 0
   width: 100%
-  +elevation(2)
+  z-index: 1
 
   > *:first-child
     border-top-left-radius: inherit
@@ -31,7 +31,18 @@
   flex: 1 0 100%
   max-width: 100%
   position: relative
-  transition: .3s map-get($transition, 'swing')
+  transition: .2s map-get($transition, 'fast-in-slow-out')
+
+  &:before
+    content: ''
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    z-index: -1
+    +elevationTransition()
+    +elevation(1)
 
   &:not(:first-child):after
     content: ''
@@ -121,8 +132,6 @@
 .v-expansion-panel--popout,
 .v-expansion-panel--inset,
 .v-expansion-panel--accordion
-  +elevation(0)
-
   .v-expansion-panel-item
     > *:first-child
       border-top-left-radius: inherit
@@ -138,7 +147,9 @@
 
   .v-expansion-panel-item--active
     border-radius: 4px
-    +elevation(3)
+
+    &:before
+      +elevation(2)
 
     &:after,
     + .v-expansion-panel-item:after
