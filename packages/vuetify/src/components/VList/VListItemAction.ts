@@ -7,7 +7,7 @@ export default Vue.extend({
 
   functional: true,
 
-  render (h, { data, children = [], props }): VNode {
+  render (h, { data, children = [] }): VNode {
     data.staticClass = data.staticClass ? `v-list-item__action ${data.staticClass}` : 'v-list-item__action'
     const filteredChild = children.filter(VNode => {
       return VNode.isComment === false && VNode.text !== ' '
