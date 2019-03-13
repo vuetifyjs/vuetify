@@ -1,4 +1,3 @@
-/* istanbul ignore file */
 import VExpansionPanelItem from './VExpansionPanelItem'
 import { deprecate } from '../../util/console'
 
