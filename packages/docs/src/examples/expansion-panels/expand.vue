@@ -3,7 +3,7 @@
     <div class="text-xs-center mb-3">{{ panel }}</div>
     <v-expansion-panel
       v-model="panel"
-      expand
+      multiple
     >
       <v-expansion-panel-content
         v-for="(item, i) in 5"
@@ -24,7 +24,7 @@
   export default {
     data () {
       return {
-        panel: [false, true, true]
+        panel: [1, 2]
       }
     }
   }

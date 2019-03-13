@@ -7,7 +7,7 @@
 
     <v-expansion-panel
       v-model="panel"
-      expand
+      multiple
     >
       <v-expansion-panel-content
         v-for="(item,i) in items"
@@ -36,7 +36,7 @@
       // Create an array the length of our items
       // with all values as true
       all () {
-        this.panel = [...Array(this.items).keys()].map(_ => true)
+        this.panel = [...Array(this.items).keys()].map((k, i) => i)
       },
       // Reset the panel
       none () {
