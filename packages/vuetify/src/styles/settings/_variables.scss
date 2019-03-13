@@ -1,5 +1,9 @@
 $color-pack: true !default;
 
+$body-font-family: 'Roboto', sans-serif !default;
+$font-size-root: 16px !default;
+$line-height-root: 1.5 !default;
+
 $grid-breakpoints: (
   'xs': 0,
   'sm': 600px,
