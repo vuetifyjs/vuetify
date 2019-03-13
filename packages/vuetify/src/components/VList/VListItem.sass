@@ -14,7 +14,7 @@
   flex: 1 1
   min-height: $list-item-min-height
   outline: none
-  padding: 0 16px
+  padding: $list-item-padding
   position: relative
   text-decoration: none
   user-select: none
@@ -33,7 +33,7 @@
 // Element
 .v-list-item__action
   align-self: center
-  margin: 12px 0
+  margin: $list-item-action-margin
 
   // Remove all margins when used
   // in an item action. If user
@@ -61,8 +61,7 @@
   margin-top: $list-item-avatar-margin-y
 
   &.v-list-item__avatar--horizontal
-    margin-bottom: 8px
-    margin-top: 8px
+    margin: $list-item-avatar-horizontal-margin
 
     &:first-child
       margin-left: $list-item-avatar-horizontal-margin-x
@@ -77,25 +76,25 @@
   flex-wrap: wrap
   flex: 1 1 0
   overflow: hidden
-  padding: 16px 0
+  padding: $list-item-content-padding
 
   > *
     line-height: 1
     flex: 1 0 100%
 
     &:not(:last-child)
-      margin-bottom: 4px
+      margin: $list-item-content-margin
 
 .v-list-item__icon
   align-self: flex-start
-  margin: 16px 0
+  margin: $list-item-icon-margin
 
 .v-list-item__avatar
   &:first-child
-    margin-right: 16px
+    margin-right: $list-item-avatar-margin-x
 
   &:last-child:not(:only-child)
-    margin-left: 16px
+    margin-left: $list-item-avatar-margin-x
 
 .v-list-item__action,
 .v-list-item__icon
@@ -109,7 +108,7 @@
 .v-list-item__avatar,
 .v-list-item__icon
   display: inline-flex
-  min-width: 24px
+  min-width: $list-item-action-min-width
 
 .v-list-item__title,
 .v-list-item__subtitle
@@ -127,14 +126,13 @@
 // Modifier
 .v-list-item--dense,
 .v-list--dense .v-list-item
-  min-height: 40px
+  min-height: $list-item-dense-min-height
 
   .v-list-item__icon
-    margin-top: 8px
-    margin-bottom: 8px
+    margin: $list-item-dense-icon-margin
 
   .v-list-item__content
-    padding: 8px 0
+    padding: $list-item-dense-content-padding
 
   .v-list-item__title,
   .v-list-item__subtitle
@@ -143,10 +141,10 @@
     line-height: 1rem
 
   &.v-list-item--two-line
-    min-height: 60px
+    min-height: $list-item-dense-two-line-min-height
 
   &.v-list-item--three-line
-    min-height: 76px
+    min-height: $list-item-dense-three-line-min-height
 
 .v-list-item--link
   cursor: pointer
@@ -192,7 +190,7 @@
   min-height: $list-item-two-line-min-height
 
   .v-list-item__icon
-    margin-bottom: 32px
+    margin: $list-item-two-line-icon-margin
 
 .v-list--three-line .v-list-item,
 .v-list-item--three-line
