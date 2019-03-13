@@ -79,7 +79,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   watch: {
-    isActive (val) {
+    isActive (val: boolean) {
       /* istanbul ignore else */
       if (!this.subGroup && val) {
         this.list && this.list.listClick(this._uid)
@@ -112,7 +112,7 @@ export default baseMixins.extend<options>().extend({
     genIcon (icon: string | false): VNode {
       return this.$createElement(VIcon, icon)
     },
-    genAppendIcon () {
+    genAppendIcon (): VNode | null {
       const icon = !this.subGroup ? this.appendIcon : false
 
       if (!icon && !this.$slots.appendIcon) return null
@@ -123,7 +123,7 @@ export default baseMixins.extend<options>().extend({
         this.$slots.appendIcon || this.genIcon(icon)
       ])
     },
-    genHeader () {
+    genHeader (): VNode {
       return this.$createElement(VListItem, {
         staticClass: 'v-list-group__header',
         class: {
@@ -147,7 +147,7 @@ export default baseMixins.extend<options>().extend({
         this.genAppendIcon()
       ])
     },
-    genItems () {
+    genItems (): VNode {
       return this.$createElement('div', {
         staticClass: 'v-list-group__items',
         directives: [{
@@ -158,7 +158,7 @@ export default baseMixins.extend<options>().extend({
         this.$createElement('div', this.showLazyContent(this.$slots.default))
       ])
     },
-    genPrependIcon () {
+    genPrependIcon (): VNode | null {
       const icon = this.prependIcon
         ? this.prependIcon
         : this.subGroup
