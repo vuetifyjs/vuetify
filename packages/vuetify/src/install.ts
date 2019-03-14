@@ -1,7 +1,3 @@
-// Core Features
-import * as _components from './components'
-import * as _directives from './directives'
-
 // Types
 import { VuetifyUseOptions } from 'types'
 import { VueConstructor } from 'vue'
@@ -10,8 +6,8 @@ export function install (Vue: VueConstructor, args: VuetifyUseOptions = {}) {
   if ((install as any).installed) return
   (install as any).installed = true
 
-  const directives = args.directives || _directives as any
-  const components = args.components || _components as any
+  const components = args.components || {}
+  const directives = args.directives || {}
 
   for (const name in directives) {
     const directive = directives[name]
@@ -30,7 +26,7 @@ export function install (Vue: VueConstructor, args: VuetifyUseOptions = {}) {
       return true
     }
     return false
-  })(args.components || components)
+  })(components)
 
   Vue.mixin({
     beforeCreate () {
