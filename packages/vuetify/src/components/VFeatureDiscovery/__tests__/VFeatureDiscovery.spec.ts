@@ -4,8 +4,7 @@ import VFeatureDiscovery from '../VFeatureDiscovery'
 // Utilities
 import {
   mount,
-  Wrapper,
-  MountOptions
+  Wrapper
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../util/mixins'
 
@@ -14,33 +13,11 @@ describe('FeatureDiscovery.ts', () => {
   let mountFunction: (options?: object) => Wrapper<Instance>
 
   beforeEach(() => {
-    mountFunction = (options = {} as MountOptions<Instance>) => {
-      return mount(VFeatureDiscovery, options)
+    mountFunction = (options = {}) => {
+      return mount(VFeatureDiscovery, {
+        ...options
+      })
     }
-  })
-
-  it('should get closeConditional', () => {
-    const wrapper = mountFunction()
-
-    wrapper.setData({
-      rect: {
-        bottom: 100,
-        top: 668
-      }
-    })
-
-    expect(wrapper.vm.closeConditional()).toBeTruthy()
-    wrapper.setProps({
-      persistent: true
-    })
-    expect(wrapper.vm.closeConditional()).toBeFalsy()
-    wrapper.setProps({
-      persistent: false
-    })
-    wrapper.setData({
-      isActive: false
-    })
-    expect(wrapper.vm.closeConditional()).toBeFalsy()
   })
 
   it('should render correctly', () => {
@@ -62,16 +39,7 @@ describe('FeatureDiscovery.ts', () => {
   })
 
   it('should toggle', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        target: document.body
-      },
-      computed: {
-        internalActive () {
-          return this.isActive
-        }
-      }
-    })
+    const wrapper = mountFunction()
 
     expect(wrapper.classes('v-feature-discovery--active')).toBeTruthy()
     expect(wrapper.html()).toMatchSnapshot()
@@ -80,189 +48,41 @@ describe('FeatureDiscovery.ts', () => {
 
     expect(wrapper.classes('v-feature-discovery--active')).toBeFalsy()
     expect(wrapper.html()).toMatchSnapshot()
-
-    wrapper.vm.isActive = true
-    wrapper.vm.isActive = false
   })
 
-  it('should update targetEl when target prop updates', () => {
+  it('should render in different positions', () => {
     const wrapper = mountFunction()
 
-    const spy = jest.spyOn(wrapper.vm, 'updateTarget')
-
-    expect(spy).toHaveBeenCalledTimes(0)
     wrapper.setProps({
-      target: '#asd'
-    })
-    expect(spy).toHaveBeenCalledTimes(1)
-  })
-
-  it('should close on esc', () => {
-    let close = false
-    const wrapper = mountFunction({
-      methods: {
-        closeConditional: () => close
-      }
+      top: true,
+      left: true
     })
 
-    wrapper.vm.keyPress({ keyCode: 27 } as any)
-    expect(wrapper.vm.isActive).toBeTruthy()
+    expect(wrapper.classes('v-feature-discovery--top-left')).toBeTruthy()
+    expect(wrapper.html()).toMatchSnapshot()
 
-    close = true
-    wrapper.vm.keyPress({ keyCode: 27 } as any)
-    expect(wrapper.vm.isActive).toBeFalsy()
-  })
-
-  it('should close on close method of actions scoped slot', () => {
-    let close = false
-    const wrapper = mountFunction({
-      methods: {
-        closeConditional: () => close
-      },
-      scopedSlots: {
-        actions: `
-          <template slot-scope="{ close }">
-            <button id="close" @click="close">Close</button>
-          </template>
-        `
-      }
+    wrapper.setProps({
+      top: false,
+      left: true
     })
 
-    const closeButton = wrapper.find('#close')
+    expect(wrapper.classes('v-feature-discovery--bottom-left')).toBeTruthy()
+    expect(wrapper.html()).toMatchSnapshot()
 
-    closeButton.trigger('click')
-    expect(wrapper.vm.isActive).toBeTruthy()
-
-    close = true
-    closeButton.trigger('click')
-    expect(wrapper.vm.isActive).toBeFalsy()
-  })
-
-  it('should compute base shift', async () => {
-    const wrapper1 = mountFunction({
-      computed: {
-        computedSize: () => 500
-      }
+    wrapper.setProps({
+      top: true,
+      left: false
     })
 
-    expect(wrapper1.vm.baseShift).toBeCloseTo(132.58, 1)
+    expect(wrapper.classes('v-feature-discovery--top-right')).toBeTruthy()
+    expect(wrapper.html()).toMatchSnapshot()
 
-    const wrapper2 = mountFunction({
-      computed: {
-        computedSize: () => 100
-      }
+    wrapper.setProps({
+      top: false,
+      left: false
     })
 
-    expect(wrapper2.vm.baseShift).toBeCloseTo(26.51, 1)
-  })
-
-  it('should compute left shift', async () => {
-    const wrapper = mountFunction({
-      computed: {
-        computedSize: () => 500
-      }
-    })
-
-    wrapper.setData({
-      rect: {
-        left: -100,
-        right: 0,
-        width: 100
-      }
-    })
-    expect(wrapper.vm.leftShift).toBeCloseTo(132.58, 1)
-
-    wrapper.setData({
-      rect: {
-        left: 1024,
-        right: 1124,
-        width: 100
-      }
-    })
-    expect(wrapper.vm.leftShift).toBeCloseTo(-132.58, 1)
-
-    wrapper.setData({
-      rect: {
-        left: 500,
-        right: 600,
-        width: 100
-      }
-    })
-    expect(wrapper.vm.leftShift).toBe(0)
-  })
-
-  it('should compute top shift', async () => {
-    const wrapper = mountFunction({
-      computed: {
-        computedSize: () => 500
-      }
-    })
-
-    wrapper.setData({
-      rect: {
-        top: -100,
-        bottom: 0,
-        height: 100
-      }
-    })
-    expect(wrapper.vm.topShift).toBeCloseTo(132.58, 1)
-
-    wrapper.setData({
-      rect: {
-        top: 768,
-        bottom: 868,
-        height: 100
-      }
-    })
-    expect(wrapper.vm.topShift).toBeCloseTo(-132.58, 1)
-
-    wrapper.setData({
-      rect: {
-        top: 400,
-        bottom: 500,
-        height: 100
-      }
-    })
-    expect(wrapper.vm.topShift).toBe(0)
-  })
-
-  it('should compute rect size', async () => {
-    const wrapper = mountFunction()
-
-    wrapper.setData({
-      rect: {
-        width: 200,
-        height: 100
-      }
-    })
-    expect(wrapper.vm.rectSize).toBe(200)
-
-    wrapper.setData({
-      rect: {
-        width: 200,
-        height: 200
-      }
-    })
-    expect(wrapper.vm.rectSize).toBe(200)
-
-    wrapper.setData({
-      rect: {
-        width: 200.1,
-        height: 100
-      }
-    })
-    expect(wrapper.vm.rectSize).toBe(200.1)
-  })
-
-  it('should compute highlight padding', async () => {
-    const wrapper = mountFunction()
-
-    wrapper.setData({
-      rect: {
-        width: 200,
-        height: 100
-      }
-    })
-    expect(wrapper.vm.highlightPadding).toBeCloseTo(57.14, 1)
+    expect(wrapper.classes('v-feature-discovery--bottom-right')).toBeTruthy()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

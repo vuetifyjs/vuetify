@@ -2,29 +2,21 @@
 
 exports[`FeatureDiscovery.ts should render correctly 1`] = `
 
-<div aria-hidden="true"
-     class="v-feature-discovery v-feature-discovery--lr-shifted theme--light"
-     style="left: -164.3826898599915px; top: -164.3826898599915px; height: 700px; width: 700px;"
+<div class="v-feature-discovery v-feature-discovery--active v-feature-discovery--bottom-right theme--light primary"
+     style="height: 400px; width: 400px;"
 >
-  <div class="v-feature-discovery__backdrop primary"
-       style="padding-right: 15%;"
-  >
-    <div class="v-feature-discovery__content white--text">
-      <div class="v-feature-discovery__wrapper">
-        <div class="v-feature-discovery__title">
+  <div class="v-feature-discovery-outer-container layout row wrap fill-height justify-end align-end">
+    <div class="v-feature-discovery-container flex fill-height"
+         style="max-width: 340px; max-height: 320px;"
+    >
+      <div class="v-feature-discovery-inner-container layout pa-2 column fill-height">
+        <div class="v-feature-discovery-title flex d-flex text-xs-center ml-4 mt-3 align-end">
         </div>
-        <div class="v-feature-discovery__text">
+        <div class="v-feature-discovery-text flex d-flex text-xs-center align-center">
+        </div>
+        <div class="v-feature-discovery-actions flex d-flex text-xs-center">
         </div>
       </div>
-      <div class="v-feature-discovery__actions">
-      </div>
-    </div>
-  </div>
-  <div aria-hidden="true"
-       class="v-feature-discovery__highlight white primary--text"
-       style="height: 0px; width: 0px;"
-  >
-    <div class="v-feature-discovery__target">
     </div>
   </div>
 </div>
@@ -33,29 +25,113 @@ exports[`FeatureDiscovery.ts should render correctly 1`] = `
 
 exports[`FeatureDiscovery.ts should render correctly when flat 1`] = `
 
-<div aria-hidden="true"
-     class="v-feature-discovery v-feature-discovery--flat v-feature-discovery--lr-shifted theme--light"
-     style="left: -164.3826898599915px; top: -164.3826898599915px; height: 700px; width: 700px;"
+<div class="v-feature-discovery v-feature-discovery--flat v-feature-discovery--active v-feature-discovery--bottom-right theme--light primary"
+     style="height: 400px; width: 400px;"
 >
-  <div class="v-feature-discovery__backdrop primary"
-       style="padding-right: 15%;"
-  >
-    <div class="v-feature-discovery__content white--text">
-      <div class="v-feature-discovery__wrapper">
-        <div class="v-feature-discovery__title">
+  <div class="v-feature-discovery-outer-container layout row wrap fill-height justify-end align-end">
+    <div class="v-feature-discovery-container flex fill-height"
+         style="max-width: 340px; max-height: 320px;"
+    >
+      <div class="v-feature-discovery-inner-container layout pa-2 column fill-height">
+        <div class="v-feature-discovery-title flex d-flex text-xs-center ml-4 mt-3 align-end">
         </div>
-        <div class="v-feature-discovery__text">
+        <div class="v-feature-discovery-text flex d-flex text-xs-center align-center">
         </div>
-      </div>
-      <div class="v-feature-discovery__actions">
+        <div class="v-feature-discovery-actions flex d-flex text-xs-center">
+        </div>
       </div>
     </div>
   </div>
-  <div aria-hidden="true"
-       class="v-feature-discovery__highlight white primary--text"
-       style="height: 0px; width: 0px;"
-  >
-    <div class="v-feature-discovery__target">
+</div>
+
+`;
+
+exports[`FeatureDiscovery.ts should render in different positions 1`] = `
+
+<div class="v-feature-discovery v-feature-discovery--active v-feature-discovery--top-left theme--light primary"
+     style="height: 400px; width: 400px;"
+>
+  <div class="v-feature-discovery-outer-container layout row wrap fill-height justify-start align-baseline">
+    <div class="v-feature-discovery-container flex fill-height"
+         style="max-width: 340px; max-height: 320px;"
+    >
+      <div class="v-feature-discovery-inner-container layout pa-2 column fill-height">
+        <div class="v-feature-discovery-title flex d-flex text-xs-center align-end">
+        </div>
+        <div class="v-feature-discovery-text flex d-flex text-xs-center align-center">
+        </div>
+        <div class="v-feature-discovery-actions flex d-flex text-xs-center mr-5">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`FeatureDiscovery.ts should render in different positions 2`] = `
+
+<div class="v-feature-discovery v-feature-discovery--active v-feature-discovery--bottom-left theme--light primary"
+     style="height: 400px; width: 400px;"
+>
+  <div class="v-feature-discovery-outer-container layout row wrap fill-height justify-start align-end">
+    <div class="v-feature-discovery-container flex fill-height"
+         style="max-width: 340px; max-height: 320px;"
+    >
+      <div class="v-feature-discovery-inner-container layout pa-2 column fill-height">
+        <div class="v-feature-discovery-title flex d-flex text-xs-center mr-4 align-end">
+        </div>
+        <div class="v-feature-discovery-text flex d-flex text-xs-center align-center">
+        </div>
+        <div class="v-feature-discovery-actions flex d-flex text-xs-center">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`FeatureDiscovery.ts should render in different positions 3`] = `
+
+<div class="v-feature-discovery v-feature-discovery--active v-feature-discovery--top-right theme--light primary"
+     style="height: 400px; width: 400px;"
+>
+  <div class="v-feature-discovery-outer-container layout row wrap fill-height justify-end align-baseline">
+    <div class="v-feature-discovery-container flex fill-height"
+         style="max-width: 340px; max-height: 320px;"
+    >
+      <div class="v-feature-discovery-inner-container layout pa-2 column fill-height">
+        <div class="v-feature-discovery-title flex d-flex text-xs-center align-end">
+        </div>
+        <div class="v-feature-discovery-text flex d-flex text-xs-center align-center">
+        </div>
+        <div class="v-feature-discovery-actions flex d-flex text-xs-center ml-5">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`FeatureDiscovery.ts should render in different positions 4`] = `
+
+<div class="v-feature-discovery v-feature-discovery--active v-feature-discovery--bottom-right theme--light primary"
+     style="height: 400px; width: 400px;"
+>
+  <div class="v-feature-discovery-outer-container layout row wrap fill-height justify-end align-end">
+    <div class="v-feature-discovery-container flex fill-height"
+         style="max-width: 340px; max-height: 320px;"
+    >
+      <div class="v-feature-discovery-inner-container layout pa-2 column fill-height">
+        <div class="v-feature-discovery-title flex d-flex text-xs-center ml-4 mt-3 align-end">
+        </div>
+        <div class="v-feature-discovery-text flex d-flex text-xs-center align-center">
+        </div>
+        <div class="v-feature-discovery-actions flex d-flex text-xs-center">
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -64,32 +140,21 @@ exports[`FeatureDiscovery.ts should render correctly when flat 1`] = `
 
 exports[`FeatureDiscovery.ts should toggle 1`] = `
 
-<div class="v-feature-discovery v-feature-discovery--active v-feature-discovery--lr-shifted theme--light"
-     style="left: -164.3826898599915px; top: -164.3826898599915px; height: 700px; width: 700px;"
+<div class="v-feature-discovery v-feature-discovery--active v-feature-discovery--bottom-right theme--light primary"
+     style="height: 400px; width: 400px;"
 >
-  <div class="v-feature-discovery__backdrop primary"
-       style="padding-right: 15%;"
-  >
-    <div class="v-feature-discovery__content white--text">
-      <div class="v-feature-discovery__wrapper">
-        <div class="v-feature-discovery__title">
+  <div class="v-feature-discovery-outer-container layout row wrap fill-height justify-end align-end">
+    <div class="v-feature-discovery-container flex fill-height"
+         style="max-width: 340px; max-height: 320px;"
+    >
+      <div class="v-feature-discovery-inner-container layout pa-2 column fill-height">
+        <div class="v-feature-discovery-title flex d-flex text-xs-center ml-4 mt-3 align-end">
         </div>
-        <div class="v-feature-discovery__text">
+        <div class="v-feature-discovery-text flex d-flex text-xs-center align-center">
+        </div>
+        <div class="v-feature-discovery-actions flex d-flex text-xs-center">
         </div>
       </div>
-      <div class="v-feature-discovery__actions">
-      </div>
-    </div>
-  </div>
-  <div aria-hidden="true"
-       class="v-feature-discovery__highlight white primary--text"
-       style="height: 0px; width: 0px;"
-  >
-    <div class="v-feature-discovery__target">
-      <body style="display: block;"
-            class="primary--text"
-      >
-      </body>
     </div>
   </div>
 </div>
@@ -98,33 +163,21 @@ exports[`FeatureDiscovery.ts should toggle 1`] = `
 
 exports[`FeatureDiscovery.ts should toggle 2`] = `
 
-<div class="v-feature-discovery v-feature-discovery--lr-shifted theme--light"
-     style="left: -164.3826898599915px; top: -164.3826898599915px; height: 700px; width: 700px;"
-     aria-hidden="true"
+<div class="v-feature-discovery v-feature-discovery--bottom-right theme--light primary"
+     style="height: 400px; width: 400px;"
 >
-  <div class="v-feature-discovery__backdrop primary"
-       style="padding-right: 15%;"
-  >
-    <div class="v-feature-discovery__content white--text">
-      <div class="v-feature-discovery__wrapper">
-        <div class="v-feature-discovery__title">
+  <div class="v-feature-discovery-outer-container layout row wrap fill-height justify-end align-end">
+    <div class="v-feature-discovery-container flex fill-height"
+         style="max-width: 340px; max-height: 320px;"
+    >
+      <div class="v-feature-discovery-inner-container layout pa-2 column fill-height">
+        <div class="v-feature-discovery-title flex d-flex text-xs-center ml-4 mt-3 align-end">
         </div>
-        <div class="v-feature-discovery__text">
+        <div class="v-feature-discovery-text flex d-flex text-xs-center align-center">
+        </div>
+        <div class="v-feature-discovery-actions flex d-flex text-xs-center">
         </div>
       </div>
-      <div class="v-feature-discovery__actions">
-      </div>
-    </div>
-  </div>
-  <div aria-hidden="true"
-       class="v-feature-discovery__highlight white primary--text"
-       style="height: 0px; width: 0px;"
-  >
-    <div class="v-feature-discovery__target">
-      <body style="display: block;"
-            class="primary--text"
-      >
-      </body>
     </div>
   </div>
 </div>
