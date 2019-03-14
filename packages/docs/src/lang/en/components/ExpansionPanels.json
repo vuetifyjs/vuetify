@@ -39,7 +39,7 @@
   },
   "props": {
     "v-expansion-panel": {
-      "accordion": "Makes the expansion-panel open with the an accordion style",
+      "accordion": "Makes the expansion-panel open with an accordion style",
       "disabled": "Disables the entire expansion-panel",
       "expand": "Leaves the expansion-panel open while selecting another",
       "focusable": "Makes the expansion-panel headers focusable",
@@ -50,6 +50,7 @@
     },
     "v-expansion-panel-item": {
       "disabled": "Disables the expansion-panel content",
+      "disableIconRotate": "Removes the icon rotation animation when expanding a panel",
       "expandIcon": "Set the expand action icon",
       "hideActions": "Hide the expand icon in the content header",
       "readonly": "Makes the expansion-panel content read only.",
