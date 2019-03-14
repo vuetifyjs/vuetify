@@ -15,7 +15,7 @@
       v-model="panel"
       :disabled="disabled"
       :readonly="readonly"
-      expand
+      multiple
     >
       <v-expansion-panel-item disabled>
         <template v-slot:header>Disabled</template>
@@ -48,7 +48,7 @@
 <script>
   export default {
     data: () => ({
-      panel: [true, true, false],
+      panel: [0, 1],
       disabled: false,
       readonly: false
     })
