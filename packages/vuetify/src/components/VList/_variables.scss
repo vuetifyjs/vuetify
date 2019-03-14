@@ -1,7 +1,5 @@
 $avatar-margin-x: 16px !default;
 
-$list-item-action-margin-x: 32px !default;
-
 $list-item-avatar-margin-y: 8px !default;
 $list-item-avatar-horizontal-margin-x: -16px !default;
 
@@ -13,16 +11,6 @@ $list-item-three-line-min-height: 88px !default;
 
 $list-item-title-font-size: map-deep-get($headings, 'subtitle-1', 'size') !default;
 $list-item-subtitle-font-size: map-deep-get($headings, 'subtitle-2', 'size') !default;
-
-$list-item: (
-  'action-margin-x': 32px,
-  'avatar-margin-y': 8px,
-  'avatar-horizontal-margin-x': -16px,
-  'icon-margin-y': 16px,
-  'min-height': 48px,
-  'two-line-min-height': 64px,
-  'three-line-min-height': 88px
-) !default;
 
 $list-item-dense-title-font-size: 0.8125rem !default;
 $list-item-dense-title-font-weight: 500 !default;
