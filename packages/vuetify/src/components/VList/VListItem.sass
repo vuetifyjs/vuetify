@@ -75,12 +75,12 @@
   align-self: center
   display: flex
   flex-wrap: wrap
-  flex: 1 1 0
+  flex: 1 1
   overflow: hidden
   padding: 16px 0
 
   > *
-    line-height: 1
+    line-height: 1rem
     flex: 1 0 100%
 
     &:not(:last-child)
@@ -113,6 +113,7 @@
 
 .v-list-item__title,
 .v-list-item__subtitle
+  line-height: 1rem
   overflow: hidden
   text-overflow: ellipsis
   white-space: nowrap
