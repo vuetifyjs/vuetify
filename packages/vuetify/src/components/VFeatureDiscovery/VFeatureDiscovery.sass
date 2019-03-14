@@ -1,11 +1,10 @@
-@import "../../stylus/bootstrap"
-@import "../../stylus/theme"
+@import "../../styles/styles.sass"
+@import "./_mixins.sass"
 
-v-feature-discovery($material)
-  color: $material.text.primary
-  background-color: $material.app-bar
-
-theme(v-feature-discovery, "v-feature-discovery")
+.v-feature-discovery.theme--light
+  +feature-discovery-theme($material-light)
+.v-feature-discovery.theme--dark
+  +feature-discovery-theme($material-dark)
 
 .v-feature-discovery
   overflow: hidden
@@ -16,7 +15,7 @@ theme(v-feature-discovery, "v-feature-discovery")
   z-index: 10
 
   &:not(.v-feature-discovery--flat)
-    elevation(4)
+    +elevation(4)
 
   &--active
     transform: translate3d(0, 0, 0) !important
