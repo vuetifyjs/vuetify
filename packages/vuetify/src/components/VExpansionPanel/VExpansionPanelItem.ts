@@ -58,7 +58,7 @@ export default baseMixins.extend<options>().extend({
         'v-expansion-panel-item--active': this.isActive,
         'v-expansion-panel-item--disabled': this.isDisabled,
         'v-expansion-panel-item--has-mousedown': this.hasMousedown,
-        'v-expansion-panel-item--disable-item-rotate': this.disableIconRotate,
+        'v-expansion-panel-item--disable-icon-rotate': this.disableIconRotate,
         ...this.groupClasses
       }
     },
