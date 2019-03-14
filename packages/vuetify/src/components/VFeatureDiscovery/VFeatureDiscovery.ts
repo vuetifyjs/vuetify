@@ -32,7 +32,7 @@ export default mixins(
       type: String,
       default: 'primary'
     },
-    height: {
+    size: {
       default: 400,
       type: [Number, String],
       validator: (v: string | number): boolean => !isNaN(parseInt(v))
@@ -76,8 +76,8 @@ export default mixins(
         }
       }
     },
-    computedHeight (): number {
-      return parseInt(this.height)
+    computedSize (): number {
+      return parseInt(this.size)
     }
   },
 
@@ -101,8 +101,8 @@ export default mixins(
         {
           staticClass: 'v-feature-discovery-container flex fill-height',
           style: {
-            maxWidth: `${this.computedHeight - (this.computedHeight * 0.15)}px`,
-            maxHeight: `${this.computedHeight - (this.computedHeight * 0.2)}px`
+            maxWidth: `${this.computedSize - (this.computedSize * 0.15)}px`,
+            maxHeight: `${this.computedSize - (this.computedSize * 0.2)}px`
           }
         },
         [this.genInnerContainer()]
@@ -143,8 +143,8 @@ export default mixins(
       staticClass: 'v-feature-discovery',
       class: this.classes,
       style: {
-        height: `${parseInt(this.computedHeight)}px`,
-        width: `${parseInt(this.computedHeight)}px`
+        height: `${parseInt(this.computedSize)}px`,
+        width: `${parseInt(this.computedSize)}px`
       },
       ref: 'content'
     }
