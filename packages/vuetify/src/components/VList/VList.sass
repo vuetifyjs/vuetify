@@ -10,7 +10,7 @@
 
 // Block
 .v-list
-  padding: $list-padding
+  padding: 8px 0
 
 // Modifier
 .v-list--disabled
@@ -21,23 +21,24 @@
     display: none
 
 .v-list--nav
-  padding: $list-nav-padding
+  padding-left: 8px
+  padding-right: 8px
 
   .v-list-group__items > div
-    padding: $list-group-padding
+    padding: 8px 0
 
     > .v-list-item:not(:last-child):not(:only-child)
-      margin: $list-item-margin
+      margin-bottom: 8px
 
   .v-list-item,
   .v-list-item:before
-    border-radius: $list-item-border-radius
+    border-radius: 4px
 
   &.v-list--dense,
   .v-list-item--dense
     .v-list-group__items > div
       > .v-list-item:not(:last-child):not(:only-child)
-        margin: $list-dense-item-margin
+        margin-bottom: 4px
 
 .v-list--shaped
   +list-shaped($list-item-min-height)
