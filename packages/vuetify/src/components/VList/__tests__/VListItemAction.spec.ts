@@ -1,16 +1,37 @@
-import Vue from 'vue'
-import { VListTileAction } from '@/components/VList'
-import { test } from '@/test'
+// Components
+import VListItemAction from '../VListItemAction'
 
-test('VListTileAction.js', ({ mount, functionalContext }) => {
+// Utilities
+import Vue from 'vue'
+import {
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+import { functionalContext } from '../../../../test'
+
+// Types
+import { ExtractVue } from '../../../util/mixins'
+
+describe('VListItemAction.ts', () => {
+  type Instance = ExtractVue<typeof VListItemAction>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+
+  beforeEach(() => {
+    mountFunction = (options = {}) => {
+      return mount(VListItemAction, {
+        ...options
+      })
+    }
+  })
+
   it('should render component and match snapshot', () => {
-    const wrapper = mount(VListTileAction, functionalContext())
+    const wrapper = mountFunction(functionalContext())
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render component with static class and match snapshot', () => {
-    const wrapper = mount(VListTileAction, functionalContext({
+    const wrapper = mountFunction(functionalContext({
       staticClass: 'static-class'
     }))
 
@@ -24,27 +45,26 @@ test('VListTileAction.js', ({ mount, functionalContext }) => {
     const content2 = mount(Vue.component('content2', {
       render: h => h('span')
     })).vNode
-    const wrapper = mount(VListTileAction, functionalContext({}, [content1, content2]))
+    const wrapper = mountFunction(functionalContext({}, [content1, content2]))
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render component with one children and match snapshot', () => {
-
     const visible = mount(Vue.component('visible', {
-      render: h => { if(true) return h('div') }
+      render: h => { return h('div') || h() }
     })).vNode
     const notVisible = mount(Vue.component('notVisible', {
-      render: h => { if(false) return h('span') }
+      render: h => { return h() || h('span') }
     })).vNode
 
-    const wrapper = mount(VListTileAction, functionalContext({}, [visible, notVisible]))
+    const wrapper = mountFunction(functionalContext({}, [visible, notVisible]))
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should work with v-html', () => {
-    const wrapper = mount(VListTileAction, {
+    const wrapper = mountFunction({
       context: Object.assign({
         domProps: {
           innerHTML: '<b>something</b>'

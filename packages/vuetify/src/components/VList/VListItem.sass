@@ -1,0 +1,218 @@
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+@import './_mixins.sass'
+
+.v-list-item.theme--light
+  +list-item-theme($material-light)
+.v-list-item.theme--dark
+  +list-item-theme($material-dark)
+
+// Block
+.v-list-item
+  align-items: center
+  display: flex
+  flex: 1 1 100%
+  min-height: $list-item-min-height
+  outline: none
+  padding: 0 16px
+  position: relative
+  text-decoration: none
+  user-select: none
+
+  &:before
+    background-color: currentColor
+    bottom: 0
+    content: ''
+    left: 0
+    opacity: 0
+    position: absolute
+    right: 0
+    top: 0
+    transition: $primary-transition
+
+// Element
+.v-list-item__action
+  align-self: center
+  margin: 12px 0
+
+  // Remove all margins when used
+  // in an item action. If user
+  // wants this they can not
+  // use this component
+  .v-input,
+  .v-input__control,
+  .v-input__slot,
+  .v-input--selection-controls__input
+    margin: 0 !important
+
+  .v-input
+    padding: 0
+
+    .v-messages
+      display: none
+
+.v-list-item__action-text
+  font-size: map-deep-get($headings, 'caption', 'size')
+
+.v-list-item__avatar
+  align-self: center
+  justify-content: flex-start
+  margin-bottom: $list-item-avatar-margin-y
+  margin-top: $list-item-avatar-margin-y
+
+  &.v-list-item__avatar--horizontal
+    margin-bottom: 8px
+    margin-top: 8px
+
+    &:first-child
+      margin-left: $list-item-avatar-horizontal-margin-x
+
+    &:last-child
+      margin-left: $list-item-avatar-horizontal-margin-x
+
+.v-list-item__content
+  align-items: center
+  align-self: center
+  display: flex
+  flex-wrap: wrap
+  flex: 1 1
+  overflow: hidden
+  padding: 16px 0
+
+  > *
+    line-height: 1rem
+    flex: 1 0 100%
+
+    &:not(:last-child)
+      margin-bottom: 4px
+
+.v-list-item__icon
+  align-self: flex-start
+  margin: 16px 0
+
+.v-list-item__avatar
+  &:first-child
+    margin-right: 16px
+
+  &:last-child:not(:only-child)
+    margin-left: 16px
+
+.v-list-item__action,
+.v-list-item__icon
+  &:first-child
+    margin-right: 32px
+
+  &:last-of-type:not(:only-child)
+    margin-left: 16px
+
+.v-list-item__action,
+.v-list-item__avatar,
+.v-list-item__icon
+  display: inline-flex
+  min-width: 24px
+
+.v-list-item__title,
+.v-list-item__subtitle
+  flex: 1 1 100%
+  line-height: 1rem
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+
+.v-list-item__title
+  align-self: center
+  font-size: $list-item-title-font-size
+
+.v-list-item__subtitle
+  font-size: $list-item-subtitle-font-size
+
+// Modifier
+.v-list-item--dense,
+.v-list--dense .v-list-item
+  padding: 0 8px
+  min-height: 40px
+
+  .v-list-item__icon
+    margin-top: 8px
+    margin-bottom: 8px
+
+  .v-list-item__content
+    padding: 8px 0
+
+  .v-list-item__title,
+  .v-list-item__subtitle
+    font-size: $list-item-dense-title-font-size
+    font-weight: $list-item-dense-title-font-weight
+    line-height: 1rem
+
+  &.v-list-item--two-line
+    min-height: 60px
+
+  &.v-list-item--three-line
+    min-height: 76px
+
+.v-list-item--link
+  cursor: pointer
+
+.v-list-item--link,
+.v-list-group__header
+  &:hover:before
+    opacity: 0.04
+
+  &:focus:before
+    opacity: 0.12
+
+.v-list-item--active
+  .v-icon
+    color: inherit
+
+  &:before
+    opacity: 0.12
+
+  &:hover,
+  &:focus
+    &:before
+      opacity: 0.2
+
+.v-list-item__action--stack
+  align-items: flex-end
+  align-self: stretch
+  justify-content: space-between
+  white-space: nowrap
+  flex-direction: column
+
+.v-list--two-line .v-list-item,
+.v-list--three-line .v-list-item,
+.v-list-item--two-line,
+.v-list-item--three-line
+  .v-list-item__avatar:not(.v-list-item__avatar--horizontal),
+  .v-list-item__icon
+    margin-bottom: $list-item-icon-margin-y
+    margin-top: $list-item-icon-margin-y
+
+.v-list--two-line .v-list-item,
+.v-list-item--two-line
+  min-height: $list-item-two-line-min-height
+
+  .v-list-item__icon
+    margin-bottom: 32px
+
+.v-list--three-line .v-list-item,
+.v-list-item--three-line
+  min-height: $list-item-three-line-min-height
+
+  .v-list-item__avatar,
+  .v-list-item__action
+    align-self: flex-start
+    margin-top: 16px
+    margin-bottom: 16px
+
+  .v-list-item__content
+    align-self: stretch
+
+  .v-list-item__subtitle
+    line-height: 1.1rem // remove when line-clamp is supported
+    white-space: initial
+    -webkit-line-clamp: 2
+    -webkit-box-orient: vertical
+    display: -webkit-box

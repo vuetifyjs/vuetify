@@ -31,7 +31,7 @@
     "v-img": {
       "gradient": "1.2"
     },
-    "v-list-tile": {
+    "v-list-item": {
       "dark": "1.2",
       "light": "1.2"
     },

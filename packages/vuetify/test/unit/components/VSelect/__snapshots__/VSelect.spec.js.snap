@@ -2,7 +2,7 @@
 
 exports[`VSelect should escape items in menu 1`] = `
 
-<div class="v-list__tile__title">
+<div class="v-list-item__title">
   &lt;strong&gt;foo&lt;/strong&gt;
 </div>
 
@@ -215,7 +215,7 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
 
 `;
 
-exports[`VSelect should render v-select correctly when not using v-list-tile in item scope slot 1`] = `
+exports[`VSelect should render v-select correctly when not using v-list-item in item scope slot 1`] = `
 
 <div role="combobox"
      class="v-input v-text-field v-select theme--light"
@@ -254,7 +254,7 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
 
 `;
 
-exports[`VSelect should render v-select correctly when using v-list-tile in item scope slot 1`] = `
+exports[`VSelect should render v-select correctly when using v-list-item in item scope slot 1`] = `
 
 <div role="combobox"
      class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty theme--light"
@@ -263,10 +263,12 @@ exports[`VSelect should render v-select correctly when using v-list-tile in item
     <div class="v-input__slot">
       <div class="v-select__slot">
         <div class="v-select__selections">
-          <div role="listitem">
-            <div class="v-list__tile theme--light">
-              1
-            </div>
+          <div aria-selected="false"
+               role="listitem"
+               tabindex="-1"
+               class="v-list-item theme--light"
+          >
+            1
           </div>
           <input autocomplete="on"
                  readonly="readonly"
@@ -345,14 +347,16 @@ exports[`VSelect should use slotted append-item 1`] = `
 <div role="list"
      class="v-list theme--light"
 >
-  <div role="listitem">
-    <a class="v-list__tile v-list__tile--link theme--light">
-      <div class="v-list__tile__content">
-        <div class="v-list__tile__title">
-          foo
-        </div>
+  <div aria-selected="false"
+       role="listitem"
+       tabindex="-1"
+       class="v-list-item v-list-item--link theme--light"
+  >
+    <div class="v-list-item__content">
+      <div class="v-list-item__title">
+        foo
       </div>
-    </a>
+    </div>
   </div>
   <div>
     foo
@@ -366,14 +370,16 @@ exports[`VSelect should use slotted no-data 1`] = `
 <div role="list"
      class="v-list theme--light"
 >
-  <div role="listitem">
-    <a class="v-list__tile v-list__tile--link theme--light">
-      <div class="v-list__tile__content">
-        <div class="v-list__tile__title">
-          foo
-        </div>
+  <div aria-selected="false"
+       role="listitem"
+       tabindex="-1"
+       class="v-list-item v-list-item--link theme--light"
+  >
+    <div class="v-list-item__content">
+      <div class="v-list-item__title">
+        foo
       </div>
-    </a>
+    </div>
   </div>
 </div>
 
@@ -387,14 +393,16 @@ exports[`VSelect should use slotted prepend-item 1`] = `
   <div>
     foo
   </div>
-  <div role="listitem">
-    <a class="v-list__tile v-list__tile--link theme--light">
-      <div class="v-list__tile__content">
-        <div class="v-list__tile__title">
-          foo
-        </div>
+  <div aria-selected="false"
+       role="listitem"
+       tabindex="-1"
+       class="v-list-item v-list-item--link theme--light"
+  >
+    <div class="v-list-item__content">
+      <div class="v-list-item__title">
+        foo
       </div>
-    </a>
+    </div>
   </div>
 </div>
 

@@ -73,7 +73,7 @@
     "tags": "标记功能允许用户创建一个 **items** 属性中不存在的新值"
   },
   "slots": {
-    "item": "Scoped slot for designating the markup for a list-tile",
+    "item": "Scoped slot for designating the markup for a list-item",
     "selection": "Scoped slot for designating the markup for the selected items"
   }
 }

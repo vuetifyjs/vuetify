@@ -1113,19 +1113,19 @@ module.exports = {
   'v-list': {
     slots: ['default']
   },
-  'v-list-tile': {
+  'v-list-item': {
     slots: ['default']
   },
-  'v-list-tile-action': {
+  'v-list-item-action': {
     slots: ['default']
   },
-  'v-list-tile-avatar': {
+  'v-list-item-avatar': {
     slots: ['default']
   },
-  'v-list-tile-title': {
+  'v-list-item-title': {
     slots: ['default']
   },
-  'v-list-tile-sub-title': {
+  'v-list-item-subtitle': {
     slots: ['default']
   },
   'v-menu': {

@@ -26,9 +26,6 @@ $material-dark: (
     'solo-inverted-focused': map-get($shades, 'white'),
     'solo-inverted-focused-text': map-get(map-get($material-light, 'text'), 'primary')
   ),
-  'list-tile': (
-    'hover': rgba(map-get($shades, 'white'), 0.08)
-  ),
   'buttons': (
     'disabled': rgba(map-get($shades, 'white'), 0.3),
     'focused': rgba(map-get($shades, 'white'), 0.12),

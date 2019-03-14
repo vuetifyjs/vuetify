@@ -24,13 +24,13 @@
       dense
       light
     >
-      <v-list-tile
+      <v-list-item
         v-for="language in languages"
         :key="language.locale"
         avatar
         @click="translateI18n(language)"
       >
-        <v-list-tile-avatar
+        <v-list-item-avatar
           tile
           size="24px"
         >
@@ -40,9 +40,9 @@
             :src="`https://cdn.vuetifyjs.com/images/flags/${language.country}.png`"
             width="24px"
           />
-        </v-list-tile-avatar>
-        <v-list-tile-title v-text="language.name" />
-      </v-list-tile>
+        </v-list-item-avatar>
+        <v-list-item-title v-text="language.name" />
+      </v-list-item>
     </v-list>
   </v-menu>
 </template>

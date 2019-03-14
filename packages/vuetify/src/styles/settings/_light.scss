@@ -35,9 +35,6 @@ $material-light: (
   'expansion-panels': (
     'focus': map-get($grey, 'lighten-3')
   ),
-  'list-tile': (
-    'hover': rgba(map-get($shades, 'black'), 0.04)
-  ),
   'selection-controls': (
     'thumb': (
       'inactive': map-get($grey, 'lighten-5'),
