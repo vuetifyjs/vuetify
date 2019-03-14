@@ -19,16 +19,18 @@
         full-width
         min-width="290px"
       >
-        <v-combobox
-          slot="activator"
-          v-model="dates"
-          multiple
-          chips
-          small-chips
-          label="Multiple picker in menu"
-          prepend-icon="event"
-          readonly
-        ></v-combobox>
+        <template v-slot:activator="{ on }">
+          <v-combobox
+            v-model="dates"
+            multiple
+            chips
+            small-chips
+            label="Multiple picker in menu"
+            prepend-icon="event"
+            readonly
+            v-on="on"
+          ></v-combobox>
+        </template>
         <v-date-picker v-model="dates" multiple no-title scrollable>
           <v-spacer></v-spacer>
           <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>

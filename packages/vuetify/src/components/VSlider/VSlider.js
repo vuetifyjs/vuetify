@@ -511,7 +511,7 @@ export default VInput.extend({
 
       const newValue = Math.round((value - offset) / this.stepNumeric) * this.stepNumeric + offset
 
-      return parseFloat(Math.min(newValue, this.max).toFixed(decimals))
+      return parseFloat(Math.max(Math.min(newValue, this.max), this.min).toFixed(decimals))
     },
     setInternalValue (value) {
       this.internalValue = value

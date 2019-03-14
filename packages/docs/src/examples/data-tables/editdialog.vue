@@ -4,7 +4,7 @@
       :headers="headers"
       :items="desserts"
     >
-      <template slot="items" slot-scope="props">
+      <template v-slot:items="props">
         <td>
           <v-edit-dialog
             :return-value.sync="props.item.name"
@@ -14,14 +14,15 @@
             @open="open"
             @close="close"
           > {{ props.item.name }}
-            <v-text-field
-              slot="input"
-              v-model="props.item.name"
-              :rules="[max25chars]"
-              label="Edit"
-              single-line
-              counter
-            ></v-text-field>
+            <template v-slot:input>
+              <v-text-field
+                v-model="props.item.name"
+                :rules="[max25chars]"
+                label="Edit"
+                single-line
+                counter
+              ></v-text-field>
+            </template>
           </v-edit-dialog>
         </td>
         <td class="text-xs-right">{{ props.item.calories }}</td>
@@ -40,16 +41,19 @@
             @close="close"
           >
             <div>{{ props.item.iron }}</div>
-            <div slot="input" class="mt-3 title">Update Iron</div>
-            <v-text-field
-              slot="input"
-              v-model="props.item.iron"
-              :rules="[max25chars]"
-              label="Edit"
-              single-line
-              counter
-              autofocus
-            ></v-text-field>
+            <template v-slot:input>
+              <div class="mt-3 title">Update Iron</div>
+            </template>
+            <template v-slot:input>
+              <v-text-field
+                v-model="props.item.iron"
+                :rules="[max25chars]"
+                label="Edit"
+                single-line
+                counter
+                autofocus
+              ></v-text-field>
+            </template>
           </v-edit-dialog>
         </td>
       </template>

@@ -1,10 +1,10 @@
 {
   "app": "컴포넌트를 어플리케이션 레이아웃의 일부로 지정. 컨덴츠의 크기를 동적으로 맞추는데 사용됨.",
-  "auto": "Centers list on selected element",
+  "auto": "선택 항목의 중앙 요소",
   "centered": "탭을 중앙 정렬",
   "clearable": "Add input clear functionality, default icon is Material Icons **clear**",
   "dontFillMaskBlanks": "입력시 자동 문자 표시 비활성화",
-  "falseValue": "Sets value for falsy state",
+  "falseValue": "거짓(falsy) 상태에 대한 값을 설정",
   "fullWidth": "100% 너비(width)를 가지도록 강제",
   "fixedTabs": "`v-tabs-item` min-width 160px (72px mobile), max-width 264px",
   "height": "컴포넌트의 높이를 설정",
@@ -18,12 +18,12 @@
   "persistent": "대화창(dialog)의 외부를 클릭해도 대화창이 사라지지 않음",
   "returnMaskedValue": "Returns the unmodified masked string",
   "ripple": "Applies the `v-ripple` directive",
-  "shift": "Hide text of button when not active",
+  "shift": "활성화되지 않을 시 버튼 택스트 숨기기",
   "singleLine": "Label does not move on focus/dirty",
   "size": "엘리먼트의 높이와 너비를 지정",
-  "textColor": "Applies a specified color to the control text",
+  "textColor": "컨트롤 텍스트에 지정된 색을 적용",
   "tile": "Removes border radius",
-  "trueValue": "Sets value for truthy state",
+  "trueValue": "참(truthy) 상태에 대한 값을 설정",
   "value": "표시여부를 조절 (Controls visibility)",
-  "width": "The width of the content"
+  "width": "컨텐츠의 폭을 설정"
 }

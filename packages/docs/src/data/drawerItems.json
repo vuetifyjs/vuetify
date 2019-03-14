@@ -10,7 +10,7 @@
       { "text": "meetTheTeam", "to": "meet-the-team" },
       { "text": "sponsorsAndBackers", "to": "sponsors-and-backers" },
       { "text": "contributing", "to": "contributing" },
-      { "text": "roadmap", "to": "roadmap" },
+      { "updated": true, "text": "roadmap", "to": "roadmap" },
       { "text": "consulting", "to": "consulting-and-support" }
     ]
   },

@@ -19,43 +19,45 @@
         <v-icon>more_vert</v-icon>
       </v-btn>
 
-      <v-tabs
-        slot="extension"
-        v-model="currentItem"
-        color="transparent"
-        fixed-tabs
-        slider-color="yellow"
-      >
-        <v-tab
-          v-for="item in items"
-          :key="item"
-          :href="'#tab-' + item"
+      <template v-slot:extension>
+        <v-tabs
+          v-model="currentItem"
+          color="transparent"
+          fixed-tabs
+          slider-color="yellow"
         >
-          {{ item }}
-        </v-tab>
+          <v-tab
+            v-for="item in items"
+            :key="item"
+            :href="'#tab-' + item"
+          >
+            {{ item }}
+          </v-tab>
 
-        <v-menu
-          v-if="more.length"
-          bottom
-          class="v-tabs__div"
-          left
-        >
-          <a slot="activator" class="v-tabs__item">
-            more
-            <v-icon>arrow_drop_down</v-icon>
-          </a>
-
-          <v-list class="grey lighten-3">
-            <v-list-tile
-              v-for="item in more"
-              :key="item"
-              @click="addItem(item)"
-            >
-              {{ item }}
-            </v-list-tile>
-          </v-list>
-        </v-menu>
-      </v-tabs>
+          <v-menu
+            v-if="more.length"
+            bottom
+            class="v-tabs__div"
+            left
+          >
+            <template v-slot:activator="{ on }">
+              <a class="v-tabs__item" v-on="on">
+                more
+                <v-icon>arrow_drop_down</v-icon>
+              </a>
+            </template>
+            <v-list class="grey lighten-3">
+              <v-list-tile
+                v-for="item in more"
+                :key="item"
+                @click="addItem(item)"
+              >
+                {{ item }}
+              </v-list-tile>
+            </v-list>
+          </v-menu>
+        </v-tabs>
+      </template>
     </v-toolbar>
 
     <v-tabs-items v-model="currentItem">

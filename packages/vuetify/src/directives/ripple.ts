@@ -72,7 +72,7 @@ const ripple = {
     el.appendChild(container)
 
     const computed = window.getComputedStyle(el)
-    if (computed.position === 'static') {
+    if (computed && computed.position === 'static') {
       el.style.position = 'relative'
       el.dataset.previousPosition = 'static'
     }
@@ -130,13 +130,13 @@ function isRippleEnabled (value: any): value is true {
 function rippleShow (e: MouseEvent | TouchEvent) {
   const value: RippleOptions = {}
   const element = e.currentTarget as HTMLElement
-  if (!element || element._ripple!.touched) return
+  if (!element || !element._ripple || element._ripple.touched) return
   if (isTouchEvent(e)) {
-    element._ripple!.touched = true
+    element._ripple.touched = true
   }
-  value.center = element._ripple!.centered
-  if (element._ripple!.class) {
-    value.class = element._ripple!.class
+  value.center = element._ripple.centered
+  if (element._ripple.class) {
+    value.class = element._ripple.class
   }
   ripple.show(e, element, value)
 }
@@ -200,7 +200,8 @@ function directive (el: HTMLElement, binding: VNodeDirective, node: VNode) {
 
   // warn if an inline element is used, waiting for el to be in the DOM first
   node.context && node.context.$nextTick(() => {
-    if (window.getComputedStyle(el).display === 'inline') {
+    const computed = window.getComputedStyle(el)
+    if (computed && computed.display === 'inline') {
       const context = (node as any).fnOptions ? [(node as any).fnOptions, node.context] : [node.componentInstance]
       consoleWarn('v-ripple can only be used on block-level elements', ...context)
     }

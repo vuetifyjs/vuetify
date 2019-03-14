@@ -15,18 +15,21 @@
         prepend-icon="account_circle"
         value="true"
       >
-        <v-list-tile slot="activator">
-          <v-list-tile-title>Users</v-list-tile-title>
-        </v-list-tile>
-
+        <template v-slot:activator>
+          <v-list-tile>
+            <v-list-tile-title>Users</v-list-tile-title>
+          </v-list-tile>
+        </template>
         <v-list-group
           no-action
           sub-group
           value="true"
         >
-          <v-list-tile slot="activator">
-            <v-list-tile-title>Admin</v-list-tile-title>
-          </v-list-tile>
+          <template v-slot:activator>
+            <v-list-tile>
+              <v-list-tile-title>Admin</v-list-tile-title>
+            </v-list-tile>
+          </template>
 
           <v-list-tile
             v-for="(admin, i) in admins"
@@ -44,10 +47,11 @@
           sub-group
           no-action
         >
-          <v-list-tile slot="activator">
-            <v-list-tile-title>Actions</v-list-tile-title>
-          </v-list-tile>
-
+          <template v-slot:activator>
+            <v-list-tile>
+              <v-list-tile-title>Actions</v-list-tile-title>
+            </v-list-tile>
+          </template>
           <v-list-tile
             v-for="(crud, i) in cruds"
             :key="i"

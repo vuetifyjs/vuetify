@@ -16,7 +16,9 @@
     </v-avatar>
 
     <v-badge overlap>
-      <span slot="badge">3</span>
+      <template v-slot:badge>
+        <span>3</span>
+      </template>
 
       <v-avatar
         color="purple red--after"
