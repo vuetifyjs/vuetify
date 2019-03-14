@@ -53,8 +53,10 @@
 
 .v-card--hover
   cursor: pointer
-  transition: all .4s cubic-bezier(.25, .8, .25, 1)
-  transition-property: box-shadow
+  transition: box-shadow .4s cubic-bezier(.25, .8, .25, 1)
 
   &:hover
     +elevation(8)
+
+.v-card--raised
+  +elevation(8)
