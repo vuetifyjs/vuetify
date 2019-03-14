@@ -45,7 +45,8 @@
             "horizontal",
             "grids",
             "customActions",
-            "twitterCard"
+            "twitterCard",
+            "weather"
           ]
         }
       ]
