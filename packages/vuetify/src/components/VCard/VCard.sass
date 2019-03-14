@@ -1,12 +1,13 @@
 @import '../../styles/styles.sass'
 @import './_mixins.sass'
 
-/* Themes */
+// Theme
 .v-card.theme--light
   +card-theme($material-light)
 .v-card.theme--dark
   +card-theme($material-dark)
 
+// Block
 .v-card
   +elevation(2)
   text-decoration: none
@@ -19,38 +20,41 @@
     border-bottom-left-radius: inherit
     border-bottom-right-radius: inherit
 
-  &--flat
-    +elevation(0)
+// Element
+.v-card__title
+  align-items: center
+  display: flex
+  flex-wrap: wrap
+  padding: 16px
 
-  &--hover
-    cursor: pointer
-    transition: all .4s cubic-bezier(.25, .8, .25, 1)
-    transition-property: box-shadow
+.v-card__text
+  font-size: map-deep-get($headings, 'subtitle-2', 'size')
+  padding: 16px
+  width: 100%
 
-    &:hover
-      +elevation(8)
+.v-card__actions
+  align-items: center
+  display: flex
+  padding: 8px
 
-  &__title
-    align-items: center
-    display: flex
-    flex-wrap: wrap
-    padding: 16px
+  .v-btn.v-size--default
+    padding: 0 8px
 
-    &--primary
-      padding-top: 24px
-
-  &__text
-    padding: 16px
-    width: 100%
-
-  &__actions
-    align-items: center
-    display: flex
-    padding: 8px
-
-    > *,
-    .v-btn
-      margin: 0
-
-    .v-btn + .v-btn
+    + .v-btn
       margin-left: 8px
+
+      +rtl()
+        margin-left: 0
+        margin-right: 8px
+
+// Modifier
+.v-card--flat
+  +elevation(0)
+
+.v-card--hover
+  cursor: pointer
+  transition: all .4s cubic-bezier(.25, .8, .25, 1)
+  transition-property: box-shadow
+
+  &:hover
+    +elevation(8)
