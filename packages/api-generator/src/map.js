@@ -599,6 +599,14 @@ module.exports = {
   'v-btn': {
     slots: ['default']
   },
+  'v-overflow-btn': {
+    props: [
+      {
+        name: 'menuProps',
+        default: '{"closeOnClick":false, "closeOnContentClick":false, "openOnClick":false, "maxHeight":300, "offsetY":true, "offsetOverflow":true, "transition":false}'
+      }
+    ]
+  },
   'v-btn-toggle': {
     slots: ['default'],
     events: [
