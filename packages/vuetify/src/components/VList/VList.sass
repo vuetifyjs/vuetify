@@ -24,11 +24,8 @@
   padding-left: 8px
   padding-right: 8px
 
-  .v-list-group__items > div
-    padding: 8px 0
-
-    > .v-list-item:not(:last-child):not(:only-child)
-      margin-bottom: 8px
+  .v-list-item:not(:last-child):not(:only-child)
+    margin-bottom: 8px
 
   .v-list-item,
   .v-list-item:before
@@ -36,9 +33,8 @@
 
   &.v-list--dense,
   .v-list-item--dense
-    .v-list-group__items > div
-      > .v-list-item:not(:last-child):not(:only-child)
-        margin-bottom: 4px
+    .v-list-item:not(:last-child):not(:only-child)
+      margin-bottom: 4px
 
 .v-list--shaped
   +list-shaped($list-item-min-height)
