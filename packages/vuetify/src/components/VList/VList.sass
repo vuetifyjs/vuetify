@@ -31,9 +31,9 @@
   .v-list-item:before
     border-radius: 4px
 
-  &.v-list--dense,
+  &.v-list--dense .v-list-item,
   .v-list-item--dense
-    .v-list-item:not(:last-child):not(:only-child)
+    &:not(:last-child):not(:only-child)
       margin-bottom: 4px
 
 .v-list--shaped
