@@ -1,16 +1,14 @@
-@import '../bootstrap'
-@import '../theme'
+@import '../../styles/styles.sass'
+@import './_mixins.sass'
 
 /* Themes */
-v-card($material)
-  background-color: $material.cards
-  border-color: $material.cards
-  color: $material.text.primary
-
-theme(v-card, "v-card")
+.v-card.theme--light
+  +card-theme($material-light)
+.v-card.theme--dark
+  +card-theme($material-dark)
 
 .v-card
-  elevation(2)
+  +elevation(2)
   text-decoration: none
 
   > *:first-child:not(.v-btn):not(.v-chip)
@@ -22,7 +20,7 @@ theme(v-card, "v-card")
     border-bottom-right-radius: inherit
 
   &--flat
-    elevation(0)
+    +elevation(0)
 
   &--hover
     cursor: pointer
@@ -30,7 +28,7 @@ theme(v-card, "v-card")
     transition-property: box-shadow
 
     &:hover
-      elevation(8)
+      +elevation(8)
 
   &__title
     align-items: center

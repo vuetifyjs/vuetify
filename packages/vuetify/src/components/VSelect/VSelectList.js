@@ -1,4 +1,4 @@
-import '../../stylus/components/_cards.styl'
+import '../VCard/VCard.sass'
 
 // Components
 import VCheckbox from '../VCheckbox'

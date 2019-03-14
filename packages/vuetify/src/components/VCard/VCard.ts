@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_cards.styl'
+import './VCard.sass'
 
 // Extensions
 import VSheet from '../VSheet'
