@@ -79,22 +79,39 @@
       "transition": "Mixins.Transitionable.props.transition"
     },
     "v-data-table": {
-      "headerKey": "If using an object, the key value for the header",
-      "headerText": "If using an object, the text value for the header",
-      "headers": "An array of objects that each describe a header column. See the example below for a definition of all properties.",
+      "headers": "An array of objects that each describe a header column. See the example below for a definition of all properties",
       "headersLength": "Can be used in combination with `hide-headers` to specify the number of columns in the table to allow expansion rows and loading bar to function properly",
-      "hideHeaders": "Hide the table headers",
-      "hideActions": "Hide the table actions. This will also remove pagination. pagination can be reactivated using the `pagination.sync` prop",
-      "sortIcon": "Use a custom sort icon, uses the same syntax as `v-icon`",
-      "nextIcon": "Mixins.DataIterable.props.nextIcon",
-      "prevIcon": "Mixins.DataIterable.props.prevIcon",
-      "totalItems": "Manually sets total number of row items, which disables built-in sort and pagination. Used together with pagination prop to enable server-side sort and pagination. **Caution: Binding this to a blank string or using in conjunction with search will yield unexpected behaviours**"
+      "hideDefaultHeader": "Hide the default headers",
+      "dense": "Decreases the height of rows",
+      "showSelect": "Shows the select checkboxes in both the header and rows (if using default rows)",
+      "showExpand": "Shows the expand toggle in default rows",
+      "showGroupBy": "Shows the group by toggle in the header and enables grouped rows",
+      "virtualRows": "Virtualizes the rendering of rows",
+      "mobileBreakpoint": "Used to set when to toggle between regular table and mobile view",
+      "height": "Set an explicit height of table",
+      "caption": "Set the caption (using `<caption>`)",
+      "headerProps": "Pass props to the default header. See 'v-data-table-header' API for more information",
+      "calculateWidths": "Enables calculation of column widths. `widths` property will be available in select scoped slots",
+      "fixedHeader": "Fixed header to top of table. **NOTE:** Does not work in IE11"
     }
   },
   "scopedSlots": {
     "v-data-table": {
-      "headerCell": "Slot to customize header cells",
-      "headers": "Slot to customize entire header"
+      "item": "Slot to replace the default rendering of a row",
+      "item.dataTableSelect": "Slot to replace the default `v-checkbox` used when selecting rows",
+      "item.dataTableExpand": "Slot to replace the default `v-icon` used when expanding rows",
+      "item.expanded": "Slot to customize expanded rows",
+      "body": "Slot to replaces the default table `<tbody>`",
+      "body.append": "Appends elements to the end of the default table `<tbody>`",
+      "body.prepend": "Prepends elements to the end of the default table `<tbody>`",
+      "footer": "Slot to add a custom footer",
+      "header": "Slot to add a custom header",
+      "top": "Slot to add content above the table",
+      "progress": "Slot to replace the default `<v-progress-linear>` component",
+      "group": "Slot to replace the default rendering of grouped rows",
+      "group.header": "Slot to customize the default rendering of group headers",
+      "group.summary": "Slot to customize the default rendering of group summaries",
+      "item.column.<name>": "Slot to customize a specific column"
     }
   },
   "slots": {

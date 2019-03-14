@@ -8,7 +8,7 @@
       card
       color="transparent"
     >
-      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
       <v-toolbar-title>Photo Info</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn

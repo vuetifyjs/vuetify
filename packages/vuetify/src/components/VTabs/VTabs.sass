@@ -19,17 +19,6 @@
   .v-menu__activator
     height: 100%
 
-.v-toolbar
-  > .v-toolbar__content,
-  > .v-toolbar__extension
-    > .v-tabs
-      margin-left: -#{map-get($grid-gutters, 'xl')}
-      margin-right: -#{map-get($grid-gutters, 'xl')}
-
-      @media #{map-get($display-breakpoints, 'sm-and-down')}
-        margin-left: -#{map-get($grid-gutters, 'lg')}
-        margin-right: -#{map-get($grid-gutters, 'lg')}
-
 // Element
 .v-tabs-bar
   border-radius: inherit
@@ -84,7 +73,7 @@
     transition: $primary-transition
 
 // Modifier
-.v-tabs--align-with-title
+.v-tabs--align-with-title > .v-tabs-bar
   padding-left: $tabs-item-align-with-title-padding
 
 .v-tabs--fixed-tabs,

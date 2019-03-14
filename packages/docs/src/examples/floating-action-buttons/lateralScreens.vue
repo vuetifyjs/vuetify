@@ -1,7 +1,7 @@
 <template>
   <div id="lateral">
     <v-toolbar dark tabs flat color="indigo">
-      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
       <v-toolbar-title>Page title</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon>

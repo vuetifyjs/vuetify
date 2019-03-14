@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_windows.styl'
+import './VWindow.sass'
 
 // Components
 import { BaseItemGroup } from '../VItemGroup/VItemGroup'

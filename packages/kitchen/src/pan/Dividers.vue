@@ -68,7 +68,7 @@
             <v-divider vertical />
           </v-toolbar-items>
 
-          <v-toolbar-side-icon />
+          <v-app-bar-nav-icon />
         </v-toolbar>
       </core-section>
 
@@ -87,7 +87,7 @@
                 color="orange lighten-1"
                 dark
               >
-                <v-toolbar-side-icon />
+                <v-app-bar-nav-icon />
 
                 <v-toolbar-title>Message Board</v-toolbar-title>
 

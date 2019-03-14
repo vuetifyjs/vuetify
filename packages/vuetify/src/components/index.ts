@@ -1,4 +1,5 @@
 export * from './VApp'
+export * from './VAppBar'
 export * from './VAlert'
 export * from './VAutocomplete'
 export * from './VAvatar'

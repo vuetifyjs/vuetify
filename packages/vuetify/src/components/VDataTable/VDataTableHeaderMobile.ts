@@ -69,12 +69,12 @@ export default mixins(header).extend({
       attrs: {
         colspan: this.headers.length
       }
-    }, [h('div', children)])
+    }, [h('div', { staticClass: 'v-data-table-header-mobile__wrapper' }, children)])
 
     const tr = h('tr', [th])
 
     return h('thead', {
-      staticClass: 'v-data-table-header v-data-table-header--mobile'
+      staticClass: 'v-data-table-header v-data-table-header-mobile'
     }, [tr])
   }
 })
