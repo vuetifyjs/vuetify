@@ -121,14 +121,20 @@
         &:before
           opacity: 0.2
 
-.v-expansion-panel--accordion
-  .v-expansion-panel-item--active
-    margin: 16px 0
+  // .v-expansion-panel-item--active
+  //   margin: 16px 0 0
 
+.v-expansion-panel--accordion,
 .v-expansion-panel--popout,
 .v-expansion-panel--inset
   .v-expansion-panel-item--active
     margin: 16px 0
+
+    + .v-expansion-panel-item--active
+      margin-top: 0
+
+    &:first-child
+      margin: 0 0 16px
 
 .v-expansion-panel--popout,
 .v-expansion-panel--inset,
