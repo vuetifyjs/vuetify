@@ -1,5 +1,5 @@
 // Styles
-import './VFeatureDiscovery.styl'
+import './VFeatureDiscovery.sass'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
