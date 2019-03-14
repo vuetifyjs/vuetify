@@ -10,9 +10,9 @@
         <v-btn @click="model1 = true">Show</v-btn>
 
         <v-feature-discovery
+          v-model="model1"
           class="white--text"
           color="primary"
-          v-model="model1"
           :top="top1"
           :left="left1"
         >
@@ -34,9 +34,9 @@
         <v-btn @click="model2 = true">Show</v-btn>
 
         <v-feature-discovery
+          v-model="model2"
           class="white--text"
           color="primary"
-          v-model="model2"
           :flat="flat2"
         >
           <h2 slot="title">Hey! New feature...</h2>
@@ -57,13 +57,13 @@
           v-model="height3"
           min="200"
           max="1000"
-        ></v-slider>
+        />
         <v-btn @click="model3 = true">Show</v-btn>
 
         <v-feature-discovery
+          v-model="model3"
           class="white--text"
           color="primary"
-          v-model="model3"
           :height="height3"
         >
           <h2 slot="title">Hey! New feature...</h2>
