@@ -111,10 +111,17 @@
   display: inline-flex
   min-width: 24px
 
+// Increased specificity to beat
+// out default typography rules
+// line height plays a role in
+// proper element sizing
+.v-list-item .v-list-item__title,
+.v-list-item .v-list-item__subtitle
+  line-height: 1.2
+
 .v-list-item__title,
 .v-list-item__subtitle
   flex: 1 1 100%
-  line-height: 1.2
   overflow: hidden
   text-overflow: ellipsis
   white-space: nowrap
