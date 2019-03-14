@@ -20,6 +20,23 @@ describe('FeatureDiscovery.ts', () => {
     }
   })
 
+  it('should get closeConditional', () => {
+    const wrapper = mountFunction()
+
+    expect(wrapper.vm.closeConditional()).toBeTruthy()
+    wrapper.setProps({
+      persistent: true
+    })
+    expect(wrapper.vm.closeConditional()).toBeFalsy()
+    wrapper.setProps({
+      persistent: false
+    })
+    wrapper.setData({
+      isActive: false
+    })
+    expect(wrapper.vm.closeConditional()).toBeFalsy()
+  })
+
   it('should render correctly', () => {
     const wrapper = mountFunction()
 
