@@ -135,7 +135,7 @@ export default mixins(
     const data = {
       directives: [{
         name: 'click-outside',
-        value: () => (this.isActive = false),
+        value: () => /* istanbul ignore next */ (this.isActive = false),
         args: {
           closeConditional: this.closeConditional
         }
