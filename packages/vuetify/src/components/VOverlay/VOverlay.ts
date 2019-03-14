@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_overlay.styl'
+import './VOverlay.sass'
 
 // Mixins
 import Colorable from './../../mixins/colorable'

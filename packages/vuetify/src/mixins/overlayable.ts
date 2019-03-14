@@ -1,6 +1,3 @@
-// Styles
-import '../stylus/components/_overlay.styl'
-
 // Components
 import VOverlay from '../components/VOverlay'
 
