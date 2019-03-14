@@ -1,4 +1,5 @@
 @import '../../styles/styles.sass'
+@import './_variables.scss'
 @import './_mixins.sass'
 
 // Theme
@@ -9,7 +10,7 @@
 
 // Block
 .v-expansion-panel
-  border-radius: 4px
+  border-radius: $expansion-panel-border-radius
   display: flex
   flex-wrap: wrap
   justify-content: center
@@ -83,11 +84,11 @@
   align-items: center
   cursor: pointer
   display: flex
-  font-size: 0.9375rem
+  font-size: $expansion-panel-item-header-font-size
   line-height: 1
-  min-height: 48px
+  min-height: $expansion-panel-item-header-min-height
   outline: none
-  padding: 16px
+  padding: $expansion-panel-item-header-padding
   position: relative
 
   &:before
@@ -125,13 +126,13 @@
 .v-expansion-panel--popout,
 .v-expansion-panel--inset
   .v-expansion-panel-item--active
-    margin: 16px 0
+    margin: $expansion-panel-item-active-margin 0
 
     + .v-expansion-panel-item--active
       margin-top: 0
 
     &:first-child
-      margin: 0 0 16px
+      margin-top: 0 0 $expansion-panel-item-active-margin
 
 .v-expansion-panel--popout,
 .v-expansion-panel--inset,
@@ -161,16 +162,16 @@
 
 .v-expansion-panel--popout
   .v-expansion-panel-item
-    max-width: calc(100% - 32px)
+    max-width: $expansion-panel-popout-max-width
 
 .v-expansion-panel--inset
   .v-expansion-panel-item
-    max-width: 100%
+    max-width: $expansion-panel-inset-max-width
 
 .v-expansion-panel--popout
   .v-expansion-panel-item--active
-    max-width: calc(100% + 16px)
+    max-width: $expansion-panel-popout-active-max-width
 
 .v-expansion-panel--inset
   .v-expansion-panel-item--active
-    max-width: calc(100% - 32px)
+    max-width: $expansion-panel-inset-active-max-width
