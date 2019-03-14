@@ -69,7 +69,7 @@ const ripples = {
     animation.style.width = size
     animation.style.height = size
 
-    el.insertBefore(container, el.lastChild)
+    el.appendChild(container)
 
     const computed = window.getComputedStyle(el)
     if (computed && computed.position === 'static') {
