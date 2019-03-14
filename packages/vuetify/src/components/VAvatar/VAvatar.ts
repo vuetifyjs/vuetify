@@ -2,21 +2,21 @@ import './VAvatar.sass'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import Measurable from '../../mixins/measurable'
 import { convertToUnit } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
 import mixins from '../../util/mixins'
 
-/* @vue/component */
-export default mixins(Colorable).extend({
+export default mixins(
+  Colorable,
+  Measurable
+  /* @vue/component */
+).extend({
   name: 'v-avatar',
 
-  functional: true,
-
   props: {
-    // TODO: inherit these
-    color: String,
     left: Boolean,
     right: Boolean,
     size: {
@@ -26,20 +26,31 @@ export default mixins(Colorable).extend({
     tile: Boolean
   },
 
-  render (h, { data, props, children }): VNode {
-    data.staticClass = (`v-avatar ${data.staticClass || ''}`).trim()
+  computed: {
+    classes (): object {
+      return {
+        'v-avatar--left': this.left,
+        'v-avatar--right': this.right,
+        'v-avatar--tile': this.tile
+      }
+    },
+    styles (): object {
+      return {
+        height: convertToUnit(this.size),
+        width: convertToUnit(this.size),
+        ...this.measurableStyles
+      }
+    }
+  },
 
-    if (props.tile) data.staticClass += ' v-avatar--tile'
-    if (props.left) data.staticClass += ' v-avatar--left'
-    if (props.right) data.staticClass += ' v-avatar--right'
-
-    const size = convertToUnit(props.size)
-    data.style = {
-      height: size,
-      width: size,
-      ...data.style
+  render (h): VNode {
+    const data = {
+      staticClass: 'v-avatar',
+      class: this.classes,
+      style: this.styles,
+      on: this.$listeners
     }
 
-    return h('div', Colorable.options.methods.setBackgroundColor(props.color, data), children)
+    return h('div', this.setBackgroundColor(this.color, data), this.$slots.default)
   }
 })

@@ -6,49 +6,59 @@ exports[`VSelectList should display falsy items 1`] = `
   <div role="list"
        class="v-list theme--light"
   >
-    <div role="listitem">
-      <a class="v-list__tile v-list__tile--link theme--light">
-        <div class="v-list__tile__content">
-          <div class="v-list__tile__title">
-            0
-          </div>
+    <div aria-selected="false"
+         role="listitem"
+         tabindex="-1"
+         class="v-list-item v-list-item--link theme--light"
+    >
+      <div class="v-list-item__content">
+        <div class="v-list-item__title">
+          0
         </div>
-      </a>
+      </div>
     </div>
-    <div role="listitem">
-      <a class="v-list__tile v-list__tile--link theme--light">
-        <div class="v-list__tile__content">
-          <div class="v-list__tile__title">
-            null
-          </div>
+    <div aria-selected="false"
+         role="listitem"
+         tabindex="-1"
+         class="v-list-item v-list-item--link theme--light"
+    >
+      <div class="v-list-item__content">
+        <div class="v-list-item__title">
+          null
         </div>
-      </a>
+      </div>
     </div>
-    <div role="listitem">
-      <a class="v-list__tile v-list__tile--link theme--light">
-        <div class="v-list__tile__content">
-          <div class="v-list__tile__title">
-            false
-          </div>
+    <div aria-selected="false"
+         role="listitem"
+         tabindex="-1"
+         class="v-list-item v-list-item--link theme--light"
+    >
+      <div class="v-list-item__content">
+        <div class="v-list-item__title">
+          false
         </div>
-      </a>
+      </div>
     </div>
-    <div role="listitem">
-      <a class="v-list__tile v-list__tile--link theme--light">
-        <div class="v-list__tile__content">
-          <div class="v-list__tile__title">
-            undefined
-          </div>
+    <div aria-selected="false"
+         role="listitem"
+         tabindex="-1"
+         class="v-list-item v-list-item--link theme--light"
+    >
+      <div class="v-list-item__content">
+        <div class="v-list-item__title">
+          undefined
         </div>
-      </a>
+      </div>
     </div>
-    <div role="listitem">
-      <a class="v-list__tile v-list__tile--link theme--light">
-        <div class="v-list__tile__content">
-          <div class="v-list__tile__title">
-          </div>
+    <div aria-selected="false"
+         role="listitem"
+         tabindex="-1"
+         class="v-list-item v-list-item--link theme--light"
+    >
+      <div class="v-list-item__content">
+        <div class="v-list-item__title">
         </div>
-      </a>
+      </div>
     </div>
   </div>
 </div>
@@ -61,12 +71,14 @@ exports[`VSelectList should display no-data-text when item slot is provided 1`] 
   <div role="list"
        class="v-list theme--light"
   >
-    <div role="listitem">
-      <div class="v-list__tile theme--light">
-        <div class="v-list__tile__content">
-          <div class="v-list__tile__title">
-            this is ok
-          </div>
+    <div aria-selected="false"
+         role="listitem"
+         tabindex="-1"
+         class="v-list-item theme--light"
+    >
+      <div class="v-list-item__content">
+        <div class="v-list-item__title">
+          this is ok
         </div>
       </div>
     </div>
@@ -85,14 +97,16 @@ exports[`VSelectList should generate children 1`] = `
       true
     </div>
     <hr class="v-divider theme--light">
-    <div role="listitem">
-      <a class="v-list__tile v-list__tile--link theme--light">
-        <div class="v-list__tile__content">
-          <div class="v-list__tile__title">
-            foo
-          </div>
+    <div aria-selected="false"
+         role="listitem"
+         tabindex="-1"
+         class="v-list-item v-list-item--link theme--light"
+    >
+      <div class="v-list-item__content">
+        <div class="v-list-item__title">
+          foo
         </div>
-      </a>
+      </div>
     </div>
   </div>
 </div>

@@ -1,0 +1,19 @@
+@import '../../styles/styles.sass'
+@import './_mixins.sass'
+@import './_variables.scss'
+
+.v-subheader.theme--light
+  +subheader-theme($material-light)
+.v-subheader.theme--dark
+  +subheader-theme($material-dark)
+
+.v-subheader
+  align-items: center
+  display: flex
+  height: $subheader-item-single-height
+  font-size: map-deep-get($headings, 'body-2', 'size')
+  font-weight: map-deep-get($headings, 'body-2', 'weight')
+  padding: 0 $subheader-right-padding 0 $subheader-left-padding
+
+  &--inset
+    margin-left: $subheader-inset-margin

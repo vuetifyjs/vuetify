@@ -1,45 +1,46 @@
 <template>
-  <v-layout row>
-    <v-flex xs12 sm6 offset-sm3>
-      <v-card>
-        <v-toolbar color="indigo" dark>
-          <v-app-bar-nav-icon></v-app-bar-nav-icon>
+  <v-card
+    max-width="500"
+    class="mx-auto"
+  >
+    <v-toolbar
+      color="indigo"
+      dark
+    >
+      <v-toolbar-side-icon></v-toolbar-side-icon>
 
-          <v-toolbar-title>Inbox</v-toolbar-title>
+      <v-toolbar-title>Inbox</v-toolbar-title>
 
-          <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
 
-          <v-btn icon>
-            <v-icon>search</v-icon>
-          </v-btn>
+      <v-btn icon>
+        <v-icon>search</v-icon>
+      </v-btn>
 
-          <v-btn icon>
-            <v-icon>more_vert</v-icon>
-          </v-btn>
-        </v-toolbar>
-        <v-list>
-          <v-list-tile
-            v-for="item in items"
-            :key="item.title"
-            avatar
-            @click=""
-          >
-            <v-list-tile-action>
-              <v-icon v-if="item.icon" color="pink">star</v-icon>
-            </v-list-tile-action>
+      <v-btn icon>
+        <v-icon>more_vert</v-icon>
+      </v-btn>
+    </v-toolbar>
+    <v-list>
+      <v-list-item
+        v-for="item in items"
+        :key="item.title"
+        @click=""
+      >
+        <v-list-item-icon>
+          <v-icon v-if="item.icon" color="pink">star</v-icon>
+        </v-list-item-icon>
 
-            <v-list-tile-content>
-              <v-list-tile-title v-text="item.title"></v-list-tile-title>
-            </v-list-tile-content>
+        <v-list-item-content>
+          <v-list-item-title v-text="item.title"></v-list-item-title>
+        </v-list-item-content>
 
-            <v-list-tile-avatar>
-              <img :src="item.avatar">
-            </v-list-tile-avatar>
-          </v-list-tile>
-        </v-list>
-      </v-card>
-    </v-flex>
-  </v-layout>
+        <v-list-item-avatar>
+          <v-img :src="item.avatar"></v-img>
+        </v-list-item-avatar>
+      </v-list-item>
+    </v-list>
+  </v-card>
 </template>
 
 <script>

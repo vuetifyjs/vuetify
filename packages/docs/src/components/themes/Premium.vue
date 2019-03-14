@@ -66,20 +66,20 @@
                   </v-tooltip>
                 </template>
                 <v-list v-if="template.demoUrl.length > 1">
-                  <v-list-tile
+                  <v-list-item
                     v-for="([title, demo], i) in template.demoUrl"
                     :key="i"
                     :href="`${demo}?ref=vuetifyjs.com`"
                     target="_blank"
                     rel="noopener"
                   >
-                    <v-list-tile-content>
-                      <v-list-tile-title v-text="title" />
-                    </v-list-tile-content>
-                    <v-list-tile-action>
+                    <v-list-item-content>
+                      <v-list-item-title v-text="title" />
+                    </v-list-item-content>
+                    <v-list-item-action>
                       <v-icon>mdi-open-in-new</v-icon>
-                    </v-list-tile-action>
-                  </v-list-tile>
+                    </v-list-item-action>
+                  </v-list-item>
                 </v-list>
               </v-menu>
 

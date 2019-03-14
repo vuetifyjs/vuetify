@@ -24,9 +24,9 @@
               no-markdown
               @click.native="$ga.event('up-next', 'click', link.target, $route.path)"
             >
-              <v-list-tile-action>
+              <v-list-item-action>
                 <v-icon>mdi-arrow-right</v-icon>
-              </v-list-tile-action>
+              </v-list-item-action>
             </core-item>
           </v-list>
         </v-flex>

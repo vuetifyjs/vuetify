@@ -268,12 +268,12 @@
             </template>
 
             <v-list>
-              <v-list-tile
+              <v-list-item
                 v-for="item in items"
                 :key="item"
               >
-                <v-list-tile-title v-text="item" />
-              </v-list-tile>
+                <v-list-item-title v-text="item" />
+              </v-list-item>
             </v-list>
           </v-menu>
 
