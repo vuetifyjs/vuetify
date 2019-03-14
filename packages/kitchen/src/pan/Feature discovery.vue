@@ -51,10 +51,10 @@
         </v-feature-discovery>
       </core-section>
 
-      <core-title>Custom height</core-title>
+      <core-title>Custom size</core-title>
       <core-section>
         <v-slider
-          v-model="height3"
+          v-model="size3"
           min="200"
           max="1000"
         />
@@ -64,7 +64,7 @@
           v-model="model3"
           class="white--text"
           color="primary"
-          :height="height3"
+          :size="size3"
         >
           <h2 slot="title">Hey! New feature...</h2>
           <p slot="text">
@@ -92,7 +92,7 @@
       model2: false,
       flat2: true,
       model3: false,
-      height3: 500
+      size3: 500
     })
   }
 </script>
