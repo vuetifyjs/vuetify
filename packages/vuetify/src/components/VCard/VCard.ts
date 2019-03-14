@@ -24,6 +24,7 @@ export default mixins(
     flat: Boolean,
     hover: Boolean,
     img: String,
+    outlined: Boolean,
     raised: Boolean
   },
 
@@ -33,6 +34,7 @@ export default mixins(
         'v-card': true,
         'v-card--flat': this.flat,
         'v-card--hover': this.hover,
+        'v-card--outlined': this.outlined,
         'v-card--raised': this.raised,
         ...VSheet.options.computed.classes.call(this)
       }
