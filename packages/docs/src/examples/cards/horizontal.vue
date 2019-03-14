@@ -1,108 +1,93 @@
 <template>
-  <div
-    id="e3"
-    style="max-width: 400px; margin: auto;"
-    class="grey lighten-3"
+  <v-card
+    max-width="400"
+    class="mx-auto"
   >
-    <v-toolbar
-      color="pink"
-      dark
-    >
+    <v-system-bar color="pink darken-2"></v-system-bar>
+
+    <v-app-bar dark color="pink">
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
+
       <v-toolbar-title>My Music</v-toolbar-title>
+
       <v-spacer></v-spacer>
+
       <v-btn icon>
-        <v-icon>search</v-icon>
+        <v-icon>mdi-magnify</v-icon>
       </v-btn>
-    </v-toolbar>
+    </v-app-bar>
 
-    <v-card>
-      <v-container
-        fluid
-        grid-list-lg
-      >
-        <v-layout row wrap>
-          <v-flex xs12>
-            <v-card color="blue-grey darken-2" class="white--text">
-              <v-card-title primary-title>
-                <div>
-                  <div class="headline">Unlimited music now</div>
-                  <span>Listen to your favorite artists and albums whenever and wherever, online and offline.</span>
-                </div>
-              </v-card-title>
-              <v-card-actions>
-                <v-btn text dark>Listen now</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-flex>
+    <v-container
+      class="pa-2"
+      fluid
+      grid-list-md
+    >
+      <v-layout column>
+        <v-flex>
+          <v-card
+            color="#385F73"
+            dark
+          >
+            <v-card-text class="white--text">
+              <div class="headline mb-2">Unlimited music now</div>
+              Listen to your favorite artists and albums whenever and wherever, online and offline.
+            </v-card-text>
 
-          <v-flex xs12>
-            <v-card color="cyan darken-2" class="white--text">
-              <v-layout>
-                <v-flex xs5>
-                  <v-img
-                    src="https://cdn.vuetifyjs.com/images/cards/foster.jpg"
-                    height="125px"
-                    contain
-                  ></v-img>
-                </v-flex>
-                <v-flex xs7>
-                  <v-card-title primary-title>
-                    <div>
-                      <div class="headline">Supermodel</div>
-                      <div>Foster the People</div>
-                      <div>(2014)</div>
-                    </div>
-                  </v-card-title>
-                </v-flex>
-              </v-layout>
-              <v-divider light></v-divider>
-              <v-card-actions class="pa-3">
-                Rate this album
-                <v-spacer></v-spacer>
-                <v-icon>star_border</v-icon>
-                <v-icon>star_border</v-icon>
-                <v-icon>star_border</v-icon>
-                <v-icon>star_border</v-icon>
-                <v-icon>star_border</v-icon>
-              </v-card-actions>
-            </v-card>
-          </v-flex>
+            <v-card-actions>
+              <v-btn text>Listen Now</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-flex>
 
-          <v-flex xs12>
-            <v-card color="purple" class="white--text">
-              <v-layout row>
-                <v-flex xs7>
-                  <v-card-title primary-title>
-                    <div>
-                      <div class="headline">Halycon Days</div>
-                      <div>Ellie Goulding</div>
-                      <div>(2013)</div>
-                    </div>
-                  </v-card-title>
-                </v-flex>
-                <v-flex xs5>
-                  <v-img
-                    src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
-                    height="125px"
-                    contain
-                  ></v-img>
-                </v-flex>
-              </v-layout>
-              <v-divider light></v-divider>
-              <v-card-actions class="pa-3">
-                Rate this album
-                <v-spacer></v-spacer>
-                <v-icon>star_border</v-icon>
-                <v-icon>star_border</v-icon>
-                <v-icon>star_border</v-icon>
-                <v-icon>star_border</v-icon>
-                <v-icon>star_border</v-icon>
-              </v-card-actions>
-            </v-card>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-card>
-  </div>
+        <v-flex
+          v-for="(item, i) in items"
+          :key="i"
+        >
+          <v-card
+            :color="item.color"
+            dark
+          >
+            <v-list-item three-line>
+              <v-list-item-content class="align-self-start">
+                <v-list-item-title
+                  class="headline mb-2"
+                  v-text="item.title"
+                ></v-list-item-title>
+
+                <v-list-item-subtitle v-text="item.artist"></v-list-item-subtitle>
+              </v-list-item-content>
+
+              <v-list-item-avatar
+                size="125"
+                tile
+              >
+                <v-img :src="item.src"></v-img>
+              </v-list-item-avatar>
+            </v-list-item>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </v-card>
 </template>
+
+<script>
+  export default {
+    data: () => ({
+      items: [
+        {
+          color: '#1F7087',
+          src: 'https://cdn.vuetifyjs.com/images/cards/foster.jpg',
+          title: 'Supermodel',
+          artist: 'Foster the People'
+        },
+        {
+          color: '#952175',
+          src: 'https://cdn.vuetifyjs.com/images/cards/halcyon.png',
+          title: 'Halcyon Days',
+          artist: 'Ellie Goulding'
+        }
+      ]
+    })
+  }
+</script>
