@@ -1,58 +1,45 @@
-import Vue from 'vue'
-
+// Mixins
 import Positionable from '../positionable'
-
 import Stackable from '../stackable'
+
+// Utilities
 import { consoleError } from '../../util/console'
+import mixins, { ExtractVue } from '../../util/mixins'
 
-/* eslint-disable object-property-newline */
-const dimensions = {
-  activator: {
-    top: 0, left: 0,
-    bottom: 0, right: 0,
-    width: 0, height: 0,
-    offsetTop: 0, scrollHeight: 0
-  },
-  content: {
-    top: 0, left: 0,
-    bottom: 0, right: 0,
-    width: 0, height: 0,
-    offsetTop: 0, scrollHeight: 0
-  },
-  hasWindow: false
+// Types
+import { VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
+
+const baseMixins = mixins(
+  Stackable,
+  Positionable
+)
+
+interface options extends ExtractVue<typeof baseMixins> {
+  attach: boolean | string | Element
+  offsetY: boolean
+  offsetX: boolean
+  $refs: {
+    content: HTMLElement
+    activator: HTMLElement
+  }
 }
-/* eslint-enable object-property-newline */
 
-/**
- * Menuable
- *
- * @mixin
- *
- * Used for fixed or absolutely positioning
- * elements within the DOM
- * Can calculate X and Y axis overflows
- * As well as be manually positioned
- */
 /* @vue/component */
-export default Vue.extend({
+export default baseMixins.extend<options>().extend({
   name: 'menuable',
-
-  mixins: [
-    Positionable,
-    Stackable
-  ],
 
   props: {
     activator: {
       default: null,
-      validator: val => {
+      validator: (val: string | object) => {
         return ['string', 'object'].includes(typeof val)
       }
-    },
+    } as PropValidator<string | HTMLElement>,
     allowOverflow: Boolean,
-    inputActivator: Boolean,
     light: Boolean,
     dark: Boolean,
+    disabled: Boolean,
     maxWidth: {
       type: [Number, String],
       default: 'auto'
@@ -96,10 +83,38 @@ export default Vue.extend({
   data: () => ({
     absoluteX: 0,
     absoluteY: 0,
-    dimensions: Object.assign({}, dimensions),
+    activatedBy: null as EventTarget | null,
+    activatorNode: null as null | VNode | VNode[],
+    dimensions: {
+      activator: {
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+        width: 0,
+        height: 0,
+        offsetTop: 0,
+        scrollHeight: 0,
+        offsetLeft: 0
+      },
+      content: {
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+        width: 0,
+        height: 0,
+        offsetTop: 0,
+        scrollHeight: 0
+      }
+    },
+    hasJustFocused: false,
+    hasWindow: false,
+    inputActivator: false,
     isContentActive: false,
     pageWidth: 0,
     pageYOffset: 0,
+    stackClass: 'v-menu__content--active',
     stackMinZIndex: 6
   }),
 
@@ -112,9 +127,9 @@ export default Vue.extend({
       let left = 0
       left += this.left ? activatorLeft - (minWidth - a.width) : activatorLeft
       if (this.offsetX) {
-        const maxWidth = isNaN(this.maxWidth)
+        const maxWidth = isNaN(Number(this.maxWidth))
           ? a.width
-          : Math.min(a.width, this.maxWidth)
+          : Math.min(a.width, Number(this.maxWidth))
 
         left += this.left ? -maxWidth : a.width
       }
@@ -137,10 +152,10 @@ export default Vue.extend({
 
       return top
     },
-    hasActivator () {
-      return !!this.$slots.activator || !!this.$scopedSlots.activator || this.activator || this.inputActivator
+    hasActivator (): boolean {
+      return !!this.$slots.activator || !!this.$scopedSlots.activator || !!this.activator || !!this.inputActivator
     },
-    isAttached () {
+    isAttached (): boolean {
       return this.attach !== false
     }
   },
@@ -177,7 +192,7 @@ export default Vue.extend({
       }
     },
     activate () {},
-    calcLeft (menuWidth) {
+    calcLeft (menuWidth: number) {
       return `${this.isAttached
         ? this.computedLeft
         : this.calcXOverflow(this.computedLeft, menuWidth)
@@ -189,7 +204,7 @@ export default Vue.extend({
         : this.calcYOverflow(this.computedTop)
       }px`
     },
-    calcXOverflow (left, menuWidth) {
+    calcXOverflow (left: number, menuWidth: number) {
       const xOverflow = left + menuWidth - this.pageWidth + 12
 
       if ((!this.left || this.right) && xOverflow > 0) {
@@ -200,7 +215,7 @@ export default Vue.extend({
 
       return left + this.getOffsetLeft()
     },
-    calcYOverflow (top) {
+    calcYOverflow (top: number) {
       const documentHeight = this.getInnerHeight()
       const toTop = this.pageYOffset + documentHeight
       const activator = this.dimensions.activator
@@ -248,7 +263,7 @@ export default Vue.extend({
       }
     },
     deactivate () {},
-    getActivator (e) {
+    getActivator (e?: Event): HTMLElement | null {
       if (this.inputActivator) {
         return this.$el.querySelector('.v-input__slot')
       }
@@ -261,24 +276,23 @@ export default Vue.extend({
 
       if (this.$refs.activator) {
         return this.$refs.activator.children.length > 0
-          ? this.$refs.activator.children[0]
+          ? this.$refs.activator.children[0] as HTMLElement
           : this.$refs.activator
       }
 
-      if (e) {
-        this.activatedBy = e.currentTarget || e.target
-        return this.activatedBy
-      }
+      if (e) this.activatedBy = e.currentTarget || e.target
 
-      if (this.activatedBy) return this.activatedBy
+      if (this.activatedBy) return this.activatedBy as HTMLElement
 
       if (this.activatorNode) {
         const activator = Array.isArray(this.activatorNode) ? this.activatorNode[0] : this.activatorNode
         const el = activator && activator.elm
-        if (el) return el
+
+        if (el) return el as HTMLElement
       }
 
       consoleError('No activator found')
+      return null
     },
     getInnerHeight () {
       if (!this.hasWindow) return 0
@@ -298,7 +312,7 @@ export default Vue.extend({
       return window.pageYOffset ||
         document.documentElement.scrollTop
     },
-    getRoundedBoundedClientRect (el) {
+    getRoundedBoundedClientRect (el: Element) {
       const rect = el.getBoundingClientRect()
       return {
         top: Math.round(rect.top),
@@ -309,7 +323,7 @@ export default Vue.extend({
         height: Math.round(rect.height)
       }
     },
-    measure (el) {
+    measure (el: HTMLElement) {
       if (!el || !this.hasWindow) return null
 
       const rect = this.getRoundedBoundedClientRect(el)
@@ -318,17 +332,20 @@ export default Vue.extend({
       if (this.isAttached) {
         const style = window.getComputedStyle(el)
 
-        rect.left = parseInt(style.marginLeft)
-        rect.top = parseInt(style.marginTop)
+        rect.left = parseInt(style.marginLeft!)
+        rect.top = parseInt(style.marginTop!)
       }
 
       return rect
     },
-    sneakPeek (cb) {
+    sneakPeek (cb: () => void) {
       requestAnimationFrame(() => {
         const el = this.$refs.content
 
-        if (!el || this.isShown(el)) return cb()
+        if (!el || this.isShown(el)) {
+          cb()
+          return
+        }
 
         el.style.display = 'inline-block'
         cb()
@@ -336,12 +353,12 @@ export default Vue.extend({
       })
     },
     startTransition () {
-      return new Promise(resolve => requestAnimationFrame(() => {
+      return new Promise<void>(resolve => requestAnimationFrame(() => {
         this.isContentActive = this.hasJustFocused = this.isActive
         resolve()
       }))
     },
-    isShown (el) {
+    isShown (el: HTMLElement) {
       return el.style.display !== 'none'
     },
     updateDimensions () {
@@ -349,13 +366,15 @@ export default Vue.extend({
       this.checkForPageYOffset()
       this.pageWidth = document.documentElement.clientWidth
 
-      const dimensions = {}
+      const dimensions: any = {}
 
       // Activator should already be shown
       if (!this.hasActivator || this.absolute) {
         dimensions.activator = this.absolutePosition()
       } else {
         const activator = this.getActivator()
+        if (!activator) return
+
         dimensions.activator = this.measure(activator)
         dimensions.activator.offsetLeft = activator.offsetLeft
         if (this.isAttached) {
