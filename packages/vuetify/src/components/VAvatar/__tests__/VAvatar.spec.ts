@@ -35,37 +35,11 @@ describe('VAvatar', () => {
 
   it('should have an proper class with tile prop', () => {
     const wrapper = mountFunction({
-      context: {
-        props: {
-          tile: true
-        }
+      propsData: {
+        tile: true
       }
     })
 
     expect(wrapper.classes()).toContain('v-avatar--tile')
-  })
-
-  it('should accept custom or no class declarations', () => {
-    const wrapper = mountFunction()
-    const wrapperTwo = mountFunction({
-      context: {
-        class: 'active'
-      }
-    })
-    const wrapperThree = mountFunction({
-      context: {
-        class: ['active']
-      }
-    })
-    const wrapperFour = mountFunction({
-      context: {
-        class: { 'active': true }
-      }
-    })
-
-    expect(wrapper.classes()).not.toContain('active')
-    expect(wrapperTwo.classes()).toContain('active')
-    expect(wrapperThree.classes()).toContain('active')
-    expect(wrapperFour.classes()).toContain('active')
   })
 })

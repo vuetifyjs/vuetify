@@ -3,14 +3,14 @@
   "headerText": "`v-list` компонент используется для отображения информации. Он может содержать аватар, контент, действия, подзаголовки и многое другое. Списки могут содержать детей и использоваться на боковой панели(sidebar).",
   "components": [
     "v-list",
-    "v-list-tile",
-    "v-list-tile-title",
-    "v-list-tile-sub-title",
-    "v-list-tile-content",
-    "v-list-tile-action",
-    "v-list-tile-avatar",
+    "v-list-item",
+    "v-list-item-title",
+    "v-list-item-subtitle",
+    "v-list-item-content",
+    "v-list-item-action",
+    "v-list-item-avatar",
     "v-list-group",
-    "v-list-tile-action-text"
+    "v-list-item-action-text"
   ],
   "examples": {
     "avatarTwoLines": {
@@ -43,7 +43,7 @@
     },
     "titleSubtitleActionsAndActionText": {
       "header": "### Заголовок с _sub-title_, _actions_ и _action-text_",
-      "desc": "Список может содержать стек внутри действия. _Ripple_ и _router_ пропсы могут передаваться через главный `v-list`, в `v-list-tile` или как свойство в массиве items."
+      "desc": "Список может содержать стек внутри действия. _Ripple_ и _router_ пропсы могут передаваться через главный `v-list`, в `v-list-item` или как свойство в массиве items."
     },
     "actionTitleAndSubtitle": {
       "header": "### Действие с заголовком и подзаголовком",

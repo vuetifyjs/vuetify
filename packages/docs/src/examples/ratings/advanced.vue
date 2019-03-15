@@ -51,9 +51,11 @@
         v-model="dialog"
         width="400"
       >
-        <v-icon slot="activator">
-          mdi-share-variant
-        </v-icon>
+        <template v-slot:activator="{ on }">
+          <v-icon v-on="on">
+            mdi-share-variant
+          </v-icon>
+        </template>
         <v-card>
           <v-card-title>
             <span class="title font-weight-bold">Share</span>
@@ -67,24 +69,24 @@
             </v-btn>
           </v-card-title>
           <v-list>
-            <v-list-tile @click="">
-              <v-list-tile-action>
+            <v-list-item @click="">
+              <v-list-item-action>
                 <v-icon color="indigo">mdi-facebook-box</v-icon>
-              </v-list-tile-action>
+              </v-list-item-action>
               <v-card-title>Facebook</v-card-title>
-            </v-list-tile>
-            <v-list-tile @click="">
-              <v-list-tile-action>
+            </v-list-item>
+            <v-list-item @click="">
+              <v-list-item-action>
                 <v-icon color="cyan">mdi-twitter-box</v-icon>
-              </v-list-tile-action>
+              </v-list-item-action>
               <v-card-title>Twitter</v-card-title>
-            </v-list-tile>
-            <v-list-tile @click="">
-              <v-list-tile-action>
+            </v-list-item>
+            <v-list-item @click="">
+              <v-list-item-action>
                 <v-icon>mdi-email</v-icon>
-              </v-list-tile-action>
+              </v-list-item-action>
               <v-card-title>Email</v-card-title>
-            </v-list-tile>
+            </v-list-item>
           </v-list>
           <v-text-field
             ref="link"
@@ -106,12 +108,12 @@
         length="10"
         readonly
       >
-        <v-icon
-          slot="item"
-          slot-scope="props"
-          :color="props.isFilled ? 'purple darken-4' : ''"
-          v-text="`mdi-numeric-${props.index}-box`"
-        ></v-icon>
+        <template v-slot:item="props">
+          <v-icon
+            :color="props.isFilled ? 'purple darken-4' : ''"
+            v-text="`mdi-numeric-${props.index}-box`"
+          ></v-icon>
+        </template>
       </v-rating>
     </v-card-actions>
     <div class="pa-3 pt-0 caption">

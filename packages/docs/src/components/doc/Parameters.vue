@@ -13,10 +13,11 @@
       sort-by="name"
       :items-per-page="-1"
       class="component-parameters pa-2"
+      hide-default-footer
     >
-      <v-layout slot-scope="props" wrap>
+      <template #default="{ items }">
         <v-flex
-          v-for="item in props.items"
+          v-for="item in items"
           :key="item.name"
           xs12
           grey
@@ -81,7 +82,7 @@
             </v-flex>
           </v-layout>
         </v-flex>
-      </v-layout>
+      </template>
     </v-data-iterator>
   </div>
 </template>
@@ -209,6 +210,8 @@
         const specialDesc = `${composite}.${this.type}['${this.target}']['${name}']`
         // Components.Inputs.props.value
         const componentDesc = `${this.namespace}.${camelSource}.${this.type}['${name}']`
+        // Components.Inputs.props.inputs.value
+        const componentNestedDesc = `${this.namespace}.${camelSource}.${this.type}['${item.source}']['${name}']`
         // Components.Alerts.props.value
         const selfDesc = `${composite}.${this.type}['${name}']`
         // Mixins.Bootable.props.value
@@ -222,6 +225,9 @@
         } else if (this.$te(componentDesc)) {
           description = this.$t(componentDesc)
           devPrepend = `**COMPONENT (${item.source})** - `
+        } else if (this.$te(componentNestedDesc)) {
+          description = this.$t(componentNestedDesc)
+          devPrepend = `**COMPONENT NESTED (${item.source})** - `
         } else if (this.$te(selfDesc)) {
           description = this.$t(selfDesc)
           devPrepend = `**SELF** - `
@@ -291,11 +297,14 @@
 
 <style lang="stylus">
   .component-parameters
+    font-size: 14px
+
     p
       margin-bottom: 0
 
     .mono
       font-family: 'Roboto Mono', monospace
+      white-space: pre
       font-weight: 500
 
     .header

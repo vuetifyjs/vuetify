@@ -216,7 +216,7 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.selectedItems).toHaveLength(1)
     wrapper.trigger('click')
-    const item = wrapper.first('div.v-list__tile__action')
+    const item = wrapper.first('div.v-list-item__action')
     item.trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.selectedItems).toHaveLength(0)
@@ -298,7 +298,7 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
     expect(change).toHaveBeenCalledTimes(2)
   })
 
-  it('should disable v-list-tile', async () => {
+  it('should disable v-list-item', async () => {
     const wrapper = mount(VSelect, {
       propsData: {
         items: [{ text: 'foo', disabled: true, id: 0 }]
@@ -308,7 +308,7 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
     const selectItem = jest.fn()
     wrapper.setMethods({ selectItem })
 
-    const el = wrapper.first('.v-list__tile')
+    const el = wrapper.first('.v-list-item')
 
     el.element.click()
 

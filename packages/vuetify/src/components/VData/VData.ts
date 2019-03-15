@@ -215,47 +215,47 @@ export default Vue.extend({
       this.updateOptions({ itemsPerPage })
     },
     'internalOptions.itemsPerPage' (itemsPerPage: number) {
-      this.$emit('update:itemsPerPage', itemsPerPage)
+      this.$emit('update:items-per-page', itemsPerPage)
     },
     sortBy (sortBy: string | string[]) {
       this.updateOptions({ sortBy: wrapInArray(sortBy) })
     },
     'internalOptions.sortBy' (sortBy: string[], old: string[]) {
-      !deepEqual(sortBy, old) && this.$emit('update:sortBy', Array.isArray(this.sortBy) ? sortBy : sortBy[0])
+      !deepEqual(sortBy, old) && this.$emit('update:sort-by', Array.isArray(this.sortBy) ? sortBy : sortBy[0])
     },
     sortDesc (sortDesc: boolean | boolean[]) {
       this.updateOptions({ sortDesc: wrapInArray(sortDesc) })
     },
     'internalOptions.sortDesc' (sortDesc: boolean[], old: boolean[]) {
-      !deepEqual(sortDesc, old) && this.$emit('update:sortDesc', Array.isArray(this.sortDesc) ? sortDesc : sortDesc[0])
+      !deepEqual(sortDesc, old) && this.$emit('update:sort-desc', Array.isArray(this.sortDesc) ? sortDesc : sortDesc[0])
     },
     groupBy (groupBy: string | string[]) {
       this.updateOptions({ groupBy: wrapInArray(groupBy) })
     },
     'internalOptions.groupBy' (groupBy: string[], old: string[]) {
-      !deepEqual(groupBy, old) && this.$emit('update:groupBy', Array.isArray(this.groupBy) ? groupBy : groupBy[0])
+      !deepEqual(groupBy, old) && this.$emit('update:group-by', Array.isArray(this.groupBy) ? groupBy : groupBy[0])
     },
     groupDesc (groupDesc: boolean | boolean[]) {
       this.updateOptions({ groupDesc: wrapInArray(groupDesc) })
     },
     'internalOptions.groupDesc' (groupDesc: boolean[], old: boolean[]) {
-      !deepEqual(groupDesc, old) && this.$emit('update:groupDesc', Array.isArray(this.groupDesc) ? groupDesc : groupDesc[0])
+      !deepEqual(groupDesc, old) && this.$emit('update:group-desc', Array.isArray(this.groupDesc) ? groupDesc : groupDesc[0])
     },
     multiSort (multiSort: boolean) {
       this.updateOptions({ multiSort })
     },
     'internalOptions.multiSort' (multiSort: boolean) {
-      this.$emit('update:multiSort', multiSort)
+      this.$emit('update:multi-sort', multiSort)
     },
     mustSort (mustSort: boolean) {
       this.updateOptions({ mustSort })
     },
     'internalOptions.mustSort' (mustSort: boolean) {
-      this.$emit('update:mustSort', mustSort)
+      this.$emit('update:must-sort', mustSort)
     },
     pageCount: {
       handler (pageCount: number) {
-        this.$emit('pageCount', pageCount)
+        this.$emit('page-count', pageCount)
       },
       immediate: true
     }

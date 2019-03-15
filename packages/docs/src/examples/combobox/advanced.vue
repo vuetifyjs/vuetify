@@ -11,8 +11,8 @@
     small-chips
     solo
   >
-    <template slot="no-data">
-      <v-list-tile>
+    <template v-slot:no-data>
+      <v-list-item>
         <span class="subheading">Create</span>
         <v-chip
           :color="`${colors[nonce - 1]} lighten-3`"
@@ -21,14 +21,11 @@
         >
           {{ search }}
         </v-chip>
-      </v-list-tile>
+      </v-list-item>
     </template>
-    <template
-      v-if="item === Object(item)"
-      slot="selection"
-      slot-scope="{ item, parent, selected }"
-    >
+    <template v-slot:selection="{ item, parent, selected }">
       <v-chip
+        v-if="item === Object(item)"
         :color="`${item.color} lighten-3`"
         :selected="selected"
         label
@@ -43,11 +40,8 @@
         >close</v-icon>
       </v-chip>
     </template>
-    <template
-      slot="item"
-      slot-scope="{ index, item }"
-    >
-      <v-list-tile-content>
+    <template v-slot:item="{ index, item }">
+      <v-list-item-content>
         <v-text-field
           v-if="editing === item"
           v-model="editing.text"
@@ -67,16 +61,16 @@
         >
           {{ item.text }}
         </v-chip>
-      </v-list-tile-content>
+      </v-list-item-content>
       <v-spacer></v-spacer>
-      <v-list-tile-action @click.stop>
+      <v-list-item-action @click.stop>
         <v-btn
           icon
           @click.stop.prevent="edit(index, item)"
         >
           <v-icon>{{ editing !== item ? 'edit' : 'check' }}</v-icon>
         </v-btn>
-      </v-list-tile-action>
+      </v-list-item-action>
     </template>
   </v-combobox>
 </template>

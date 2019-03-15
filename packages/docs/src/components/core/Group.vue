@@ -5,10 +5,13 @@
     :sub-group="subGroup"
     no-action
   >
-    <core-item
-      slot="activator"
-      :text="item.text"
-    />
+    <template v-slot:activator>
+      <v-list-item-content class="v-list-group__activator">
+        <v-list-item-title>
+          <doc-markdown>{{ item.text }}</doc-markdown>
+        </v-list-item-title>
+      </v-list-item-content>
+    </template>
     <template v-for="(child, i) in children">
       <core-sub-group
         v-if="child.group != null"
@@ -80,3 +83,9 @@
     }
   }
 </script>
+
+<style>
+.v-list-group__activator p {
+  margin-bottom: 0;
+}
+</style>

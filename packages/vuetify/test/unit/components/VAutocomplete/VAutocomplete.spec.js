@@ -212,7 +212,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
     // Wait for watcher
     await wrapper.vm.$nextTick()
 
-    const tile = wrapper.first('.v-list__tile__title')
+    const tile = wrapper.first('.v-list-item__title')
 
     expect(tile.text()).toBe('No data available')
   })
@@ -513,7 +513,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.isMenuActive).toBe(false)
     const slot = wrapper.first('.v-input__slot')
-    const item = wrapper.first('.v-list__tile')
+    const item = wrapper.first('.v-list-item')
     slot.trigger('click')
 
     expect(wrapper.vm.isMenuActive).toBe(true)
@@ -860,29 +860,6 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.internalSearch).toBe('t')
   })
 
-  it('should retain fuzzy match list after item is selected when search is re-engaged', async () => {
-    const wrapper = mount(VAutocomplete, {
-      propsData: {
-        items: ['bar', 'baz', 'foo', 'foo-bar', 'foo-baz', 'foo-foo']
-      }
-    })
-
-    await wrapper.vm.$nextTick()
-    const input = wrapper.first('input')
-
-    input.trigger('focus')
-    input.element.value = 'foo'
-    input.trigger('input')
-
-    const computedItems = wrapper.vm.computedItems
-    wrapper.vm.selectItem('foo')
-    await wrapper.vm.$nextTick()
-    input.trigger('input')
-
-    expect(wrapper.vm.selectedItems).toEqual(['foo'])
-    expect(wrapper.vm.computedItems).toEqual(computedItems)
-  })
-
   it('should update render dynamically when itemText changes', async () => {
     const wrapper = mount(VAutocomplete, {
       propsData: {
@@ -902,6 +879,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
     })
 
     await wrapper.vm.$nextTick()
+
     wrapper.vm.selectItem(wrapper.vm.items[0])
     await wrapper.vm.$nextTick()
 

@@ -1,3 +1,5 @@
+import './VDataTableHeader.sass'
+
 import Vue from 'vue'
 import dedupeModelListeners from '../../util/dedupeModelListeners'
 import rebuildSlots from '../../util/rebuildFunctionalSlots'

@@ -4,7 +4,7 @@
     v-on="$listeners"
   >
     <slot />
-    <v-list-tile
+    <v-list-item
       v-for="(item, i) in items"
       :key="i"
       :href="item.href"
@@ -14,17 +14,17 @@
         rel: item.href ? 'noopener': undefined
       }"
     >
-      <v-list-tile-icon v-if="item[itemIcon]">
+      <v-list-item-icon v-if="item[itemIcon]">
         <v-icon v-text="item[itemIcon]" />
-      </v-list-tile-icon>
-      <v-list-tile-content>
-        <v-list-tile-title v-text="item[itemText]" />
+      </v-list-item-icon>
+      <v-list-item-content>
+        <v-list-item-title v-text="item[itemText]" />
         <v-list-sub-tile-title
           v-if="item[itemSubTitle]"
           v-text="item[itemSubTitle]"
         />
-      </v-list-tile-content>
-    </v-list-tile>
+      </v-list-item-content>
+    </v-list-item>
   </v-list>
 </template>
 

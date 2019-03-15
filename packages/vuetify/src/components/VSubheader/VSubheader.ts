@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_subheaders.styl'
+import './VSubheader.sass'
 
 // Mixins
 import Themeable from '../../mixins/themeable'

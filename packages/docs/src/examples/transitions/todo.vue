@@ -6,7 +6,7 @@
       solo
       @keydown.enter="create"
     >
-      <v-fade-transition slot="append">
+      <v-fade-transition v-slot:append>
         <v-icon
           v-if="task"
           @click="create"
@@ -63,20 +63,21 @@
             :key="`${i}-divider`"
           ></v-divider>
 
-          <v-list-tile :key="`${i}-${task.text}`">
-            <v-list-tile-action>
+          <v-list-item :key="`${i}-${task.text}`">
+            <v-list-item-action>
               <v-checkbox
                 v-model="task.done"
                 color="info darken-3"
               >
-                <div
-                  slot="label"
-                  :class="task.done && 'grey--text' || 'text--primary'"
-                  class="ml-3"
-                  v-text="task.text"
-                ></div>
+                <template v-slot:label>
+                  <div
+                    :class="task.done && 'grey--text' || 'text--primary'"
+                    class="ml-3"
+                    v-text="task.text"
+                  ></div>
+                </template>
               </v-checkbox>
-            </v-list-tile-action>
+            </v-list-item-action>
 
             <v-spacer></v-spacer>
 
@@ -88,7 +89,7 @@
                 check
               </v-icon>
             </v-scroll-x-transition>
-          </v-list-tile>
+          </v-list-item>
         </template>
       </v-slide-y-transition>
     </v-card>

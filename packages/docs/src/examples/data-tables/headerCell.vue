@@ -4,11 +4,13 @@
     :items="desserts"
     class="elevation-1"
   >
-    <template slot="headerCell" slot-scope="props">
+    <template v-slot:headerCell="props">
       <v-tooltip bottom>
-        <span slot="activator">
-          {{ props.header.text }}
-        </span>
+        <template v-slot:activator="{ on }">
+          <span v-on="on">
+            {{ props.header.text }}
+          </span>
+        </template>
         <span>
           {{ props.header.text }}
         </span>

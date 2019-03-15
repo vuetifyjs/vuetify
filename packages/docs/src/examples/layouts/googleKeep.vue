@@ -33,25 +33,25 @@
             dark
             class="my-3"
           ></v-divider>
-          <v-list-tile
+          <v-list-item
             v-else
             :key="i"
             @click=""
           >
-            <v-list-tile-action>
+            <v-list-item-action>
               <v-icon>{{ item.icon }}</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title class="grey--text">
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title class="grey--text">
                 {{ item.text }}
-              </v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
         </template>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar color="amber" app absolute clipped-left>
-      <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <span class="title ml-3 mr-5">Google&nbsp;<span class="font-weight-light">Keep</span></span>
       <v-text-field
         solo-inverted
@@ -67,21 +67,19 @@
         <v-layout justify-center align-center>
           <v-flex shrink>
             <v-tooltip right>
-              <v-btn
-                slot="activator"
-                :href="source"
-                icon
-                large
-                target="_blank"
-              >
-                <v-icon large>code</v-icon>
-              </v-btn>
+              <template v-slot:activator="{ on }">
+                <v-btn :href="source" icon large target="_blank" v-on="on">
+                  <v-icon large>code</v-icon>
+                </v-btn>
+              </template>
               <span>Source</span>
             </v-tooltip>
             <v-tooltip right>
-              <v-btn slot="activator" icon large href="https://codepen.io/johnjleider/pen/jZQNbd" target="_blank">
-                <v-icon large>mdi-codepen</v-icon>
-              </v-btn>
+              <template v-slot:activator="{ on }">
+                <v-btn icon large href="https://codepen.io/johnjleider/pen/jZQNbd" target="_blank" v-on="on">
+                  <v-icon large>mdi-codepen</v-icon>
+                </v-btn>
+              </template>
               <span>Codepen</span>
             </v-tooltip>
           </v-flex>

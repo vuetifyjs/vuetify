@@ -159,6 +159,11 @@
     "description": "The v-alert component is used to convey information to the user. Designed to stand out, the alerts come in four contextual styles, success, info, warning, and error.",
     "keywords": "alerts, components"
   },
+  "components/app-bars": {
+    "title": "AppBars Component",
+    "description": "The v-app-bar component is a supercharged toolbar with advanced scrolling techniques and application layout support.",
+    "keywords": "toolbars, system-bars, app-bars"
+  },
   "components/autocompletes": {
     "title": "Autocomplete Component",
     "description": "The v-autocomplete component provides type-ahead autocomplete functionality.",
@@ -413,6 +418,11 @@
     "title": "Subheaders",
     "description": "Subheaders are used for separating lists of content.",
     "keywords": "subheader"
+  },
+  "components/system-bars": {
+    "title": "SystemBar Component",
+    "description": "THe v-system-bar component provides an appplication with an android style status bar.",
+    "keywords": "system-bar, android status bar, status bar"
   },
   "components/tabs": {
     "title": "Tabs",

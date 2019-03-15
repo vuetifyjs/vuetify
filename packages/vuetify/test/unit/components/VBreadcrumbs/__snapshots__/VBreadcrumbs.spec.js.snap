@@ -11,33 +11,33 @@ exports[`VBreadcrumbs.js should render items without slot 1`] = `
 
 <ul class="v-breadcrumbs theme--light">
   <li>
-    <a class="v-breadcrumbs__item">
+    <div class="v-breadcrumbs__item">
       a
-    </a>
+    </div>
   </li>
   <li class="v-breadcrumbs__divider">
     /
   </li>
   <li>
-    <a class="v-breadcrumbs__item">
+    <div class="v-breadcrumbs__item">
       b
-    </a>
+    </div>
   </li>
   <li class="v-breadcrumbs__divider">
     /
   </li>
   <li>
-    <a class="v-breadcrumbs__item">
+    <div class="v-breadcrumbs__item">
       c
-    </a>
+    </div>
   </li>
   <li class="v-breadcrumbs__divider">
     /
   </li>
   <li>
-    <a class="v-breadcrumbs__item">
+    <div class="v-breadcrumbs__item">
       d
-    </a>
+    </div>
   </li>
 </ul>
 
@@ -56,33 +56,33 @@ exports[`VBreadcrumbs.js should use a custom divider slot 1`] = `
 
 <ul class="v-breadcrumbs theme--light">
   <li>
-    <a class="v-breadcrumbs__item">
+    <div class="v-breadcrumbs__item">
       a
-    </a>
+    </div>
   </li>
   <li class="v-breadcrumbs__divider">
     /divider/
   </li>
   <li>
-    <a class="v-breadcrumbs__item">
+    <div class="v-breadcrumbs__item">
       b
-    </a>
+    </div>
   </li>
   <li class="v-breadcrumbs__divider">
     /divider/
   </li>
   <li>
-    <a class="v-breadcrumbs__item">
+    <div class="v-breadcrumbs__item">
       c
-    </a>
+    </div>
   </li>
   <li class="v-breadcrumbs__divider">
     /divider/
   </li>
   <li>
-    <a class="v-breadcrumbs__item">
+    <div class="v-breadcrumbs__item">
       d
-    </a>
+    </div>
   </li>
 </ul>
 
@@ -92,33 +92,33 @@ exports[`VBreadcrumbs.js should use slot to render items if present 1`] = `
 
 <ul class="v-breadcrumbs theme--light">
   <li>
-    <a class="v-breadcrumbs__item">
+    <div class="v-breadcrumbs__item">
       A
-    </a>
+    </div>
   </li>
   <li class="v-breadcrumbs__divider">
     /
   </li>
   <li>
-    <a class="v-breadcrumbs__item">
+    <div class="v-breadcrumbs__item">
       B
-    </a>
+    </div>
   </li>
   <li class="v-breadcrumbs__divider">
     /
   </li>
   <li>
-    <a class="v-breadcrumbs__item">
+    <div class="v-breadcrumbs__item">
       C
-    </a>
+    </div>
   </li>
   <li class="v-breadcrumbs__divider">
     /
   </li>
   <li>
-    <a class="v-breadcrumbs__item">
+    <div class="v-breadcrumbs__item">
       D
-    </a>
+    </div>
   </li>
 </ul>
 

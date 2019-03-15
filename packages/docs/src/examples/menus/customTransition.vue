@@ -5,22 +5,24 @@
       origin="center center"
       transition="scale-transition"
     >
-      <v-btn
-        slot="activator"
-        color="primary"
-        dark
-      >
-        Scale Transition
-      </v-btn>
+      <template v-slot:activator="{ on }">
+        <v-btn
+          color="primary"
+          dark
+          v-on="on"
+        >
+          Scale Transition
+        </v-btn>
+      </template>
 
       <v-list>
-        <v-list-tile
+        <v-list-item
           v-for="(item, i) in items"
           :key="i"
           @click=""
         >
-          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-        </v-list-tile>
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item>
       </v-list>
     </v-menu>
 
@@ -29,23 +31,25 @@
       bottom
       right
     >
-      <v-btn
-        slot="activator"
-        class="deep-orange"
-        color="primary"
-        dark
-      >
-        Slide X Transition
-      </v-btn>
+      <template v-slot:activator="{ on }">
+        <v-btn
+          class="deep-orange"
+          color="primary"
+          dark
+          v-on="on"
+        >
+          Slide X Transition
+        </v-btn>
+      </template>
 
       <v-list>
-        <v-list-tile
+        <v-list-item
           v-for="(item, i) in items"
           :key="i"
           @click=""
         >
-          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-        </v-list-tile>
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item>
       </v-list>
     </v-menu>
 
@@ -53,22 +57,24 @@
       transition="slide-y-transition"
       bottom
     >
-      <v-btn
-        slot="activator"
-        class="purple"
-        color="primary"
-        dark
-      >
-        Slide Y Transition
-      </v-btn>
+      <template v-slot:activator="{ on }">
+        <v-btn
+          class="purple"
+          color="primary"
+          dark
+          v-on="on"
+        >
+          Slide Y Transition
+        </v-btn>
+      </template>
       <v-list>
-        <v-list-tile
+        <v-list-item
           v-for="(item, i) in items"
           :key="i"
           @click=""
         >
-          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-        </v-list-tile>
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item>
       </v-list>
     </v-menu>
   </div>

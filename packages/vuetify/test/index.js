@@ -181,7 +181,12 @@ export function rafPolyfill(w) {
 export function touch(element) {
   const createTrigger = eventName => (clientX, clientY) => {
     const touches = [{ clientX, clientY }]
-    element.trigger(eventName, ({ touches, changedTouches: touches }))
+    const event = new Event(eventName)
+
+    event.touches = touches
+    event.changedTouches = touches
+    element.element.dispatchEvent(event)
+
     return touch(element)
   }
 
