@@ -44,9 +44,6 @@ exports[`VExpansionPanelContent.js should render component and match snapshot 1`
   <div class="v-expansion-panel__body"
        style="display: none;"
   >
-    <span>
-      default
-    </span>
   </div>
 </li>
 

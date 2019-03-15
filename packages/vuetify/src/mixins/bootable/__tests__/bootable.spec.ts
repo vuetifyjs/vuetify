@@ -1,15 +1,32 @@
-import Vue from 'vue'
-import { test } from '@/test'
-import Bootable from '@/mixins/bootable'
+// Components
+import Bootable from '../index'
 
-test('bootable.js', ({ mount }) => {
+// Utilities
+import {
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+
+describe('Bootable.ts', () => {
+  type Instance = InstanceType<typeof Bootable>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+
+  beforeEach(() => {
+    mountFunction = (options = {}) => {
+      return mount({
+        mixins: [Bootable],
+        render: h => h('div')
+      }, {
+        ...options
+      })
+    }
+  })
+
   it('should be booted after activation', async () => {
-    const wrapper = mount({
+    const wrapper = mountFunction({
       data: () => ({
-        isActive: false,
-      }),
-      mixins: [ Bootable ],
-      render: h => h('div')
+        isActive: false
+      })
     })
 
     expect(wrapper.vm.isBooted).toBe(false)
@@ -19,26 +36,21 @@ test('bootable.js', ({ mount }) => {
   })
 
   it('should return lazy content', async () => {
-    const wrapper = mount({
-      mixins: [ Bootable ],
-      render: h => h('div')
+    const wrapper = mountFunction({
+      propsData: {
+        eager: true
+      }
     })
 
     expect(wrapper.vm.showLazyContent('content')).toBe('content')
 
-    const wrapperLazy = mount({
+    const wrapperLazy = mountFunction({
       data: () => ({
-        isActive: false,
-      }),
-      mixins: [ Bootable ],
-      render: h => h('div')
-    }, {
-      propsData: {
-        lazy: true
-      }
+        isActive: false
+      })
     })
 
-    expect(wrapperLazy.vm.showLazyContent('content')).toBe(undefined)
+    expect(wrapperLazy.vm.showLazyContent('content')).toBeUndefined()
     wrapperLazy.vm.isActive = true
     await wrapper.vm.$nextTick()
     expect(wrapperLazy.vm.showLazyContent('content')).toBe('content')
@@ -48,15 +60,9 @@ test('bootable.js', ({ mount }) => {
   })
 
   it('should show if lazy and active at boot', async () => {
-    const wrapper = mount({
-      data: () => ({
-        isActive: true
-      }),
-      mixins: [Bootable],
-      render: h => h('div')
-    }, {
+    const wrapper = mountFunction({
       propsData: {
-        lazy: true
+        eager: true
       }
     })
 
@@ -64,10 +70,8 @@ test('bootable.js', ({ mount }) => {
   })
 
   it('should boot', async () => {
-    const wrapper = mount({
-      data: () => ({ isActive: false }),
-      mixins: [Bootable],
-      render: h => h('div')
+    const wrapper = mountFunction({
+      data: () => ({ isActive: false })
     })
 
     expect(wrapper.vm.isActive).toBe(false)

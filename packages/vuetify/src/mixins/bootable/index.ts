@@ -1,5 +1,9 @@
-import Vue, { VNode } from 'vue'
 
+// Utilities
+import { breaking } from '../../util/console'
+
+// Types
+import Vue, { VNode } from 'vue'
 interface Toggleable extends Vue {
   isActive?: boolean
 }
@@ -17,7 +21,7 @@ export default Vue.extend<Vue & Toggleable>().extend({
   name: 'bootable',
 
   props: {
-    lazy: Boolean
+    eager: Boolean
   },
 
   data: () => ({
@@ -26,13 +30,19 @@ export default Vue.extend<Vue & Toggleable>().extend({
 
   computed: {
     hasContent (): boolean | undefined {
-      return this.isBooted || !this.lazy || this.isActive
+      return this.isBooted || this.eager || this.isActive
     }
   },
 
   watch: {
     isActive () {
       this.isBooted = true
+    }
+  },
+
+  created () {
+    if ('lazy' in this.$attrs) {
+      breaking('lazy', 'eager')
     }
   },
 

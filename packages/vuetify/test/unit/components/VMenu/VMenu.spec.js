@@ -78,8 +78,6 @@ test('VMenu.js', ({ mount, compileToFunctions, runAllTimers }) => {
 
     wrapper.setProps({ openOnHover: true })
     expect(Object.keys(wrapper.find('.v-menu__activator')[0].vNode.data.on)).toHaveLength(0)
-
-    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should close menu when tab is pressed', async () => {
@@ -144,8 +142,6 @@ test('VMenu.js', ({ mount, compileToFunctions, runAllTimers }) => {
       methods: { activate }
     })
     expect(activate).toBeCalled()
-
-    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should update position dynamically', async () => {
@@ -173,7 +169,5 @@ test('VMenu.js', ({ mount, compileToFunctions, runAllTimers }) => {
     runAllTimers()
     await wrapper.vm.$nextTick()
     expect(content.getAttribute('style')).toMatchSnapshot()
-
-    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })
