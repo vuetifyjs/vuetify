@@ -53,7 +53,8 @@ export default mixins(
       height: 0,
       width: 0
     },
-    targetEl: null as Element | null
+    targetEl: null as Element | null,
+    oldZIndex: 0
   }),
 
   computed: {
@@ -86,6 +87,9 @@ export default mixins(
   watch: {
     target () {
       this.updateTarget()
+    },
+    isActive (val: boolean) {
+      if (!val) (this.targetEl as any).style.zIndex = this.oldZIndex
     }
   },
 
@@ -102,8 +106,9 @@ export default mixins(
       this.targetEl = document.querySelector(this.target)
       if (!this.targetEl) return
 
-      this.rect = this.targetEl.getBoundingClientRect();
-      (this.targetEl as any).style.zIndex = 11
+      this.rect = this.targetEl.getBoundingClientRect()
+      this.oldZIndex = Number(getComputedStyle(this.targetEl).zIndex) || 11
+      if (this.isActive) (this.targetEl as any).style.zIndex = 11
     },
     onScroll () {
       if (!this.targetEl) return
