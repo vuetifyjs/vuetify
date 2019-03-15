@@ -82,17 +82,26 @@ export default mixins(
     }
   },
 
+  watch: {
+    target () {
+      this.updateTarget()
+    }
+  },
+
   mounted () {
-    if (!this.target) return
-
-    const target = document.querySelector(this.target)
-    if (!target) return
-
-    this.rect = target.getBoundingClientRect();
-    (target as any).style.zIndex = 11
+    this.updateTarget()
   },
 
   methods: {
+    updateTarget () {
+      if (!this.target) return
+
+      const target = document.querySelector(this.target)
+      if (!target) return
+
+      this.rect = target.getBoundingClientRect();
+      (target as any).style.zIndex = 11
+    },
     closeConditional (): boolean {
       return !this.persistent && this.isActive
     },
