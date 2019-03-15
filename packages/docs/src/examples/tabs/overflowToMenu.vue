@@ -6,7 +6,7 @@
       dark
       tabs
     >
-      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title>Page title</v-toolbar-title>
 
@@ -20,7 +20,7 @@
         <v-icon>more_vert</v-icon>
       </v-btn>
 
-      <template #extension>
+      <template v-slot:extension>
         <v-tabs
           v-model="currentItem"
           fixed-tabs
@@ -51,13 +51,13 @@
             </template>
 
             <v-list class="grey lighten-3">
-              <v-list-tile
+              <v-list-item
                 v-for="item in more"
                 :key="item"
                 @click="addItem(item)"
               >
                 {{ item }}
-              </v-list-tile>
+              </v-list-item>
             </v-list>
           </v-menu>
         </v-tabs>

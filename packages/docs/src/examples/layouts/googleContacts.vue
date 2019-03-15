@@ -31,39 +31,39 @@
             append-icon=""
           >
             <template v-slot:activator>
-              <v-list-tile>
-                <v-list-tile-content>
-                  <v-list-tile-title>
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title>
                     {{ item.text }}
-                  </v-list-tile-title>
-                </v-list-tile-content>
-              </v-list-tile>
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
             </template>
-            <v-list-tile
+            <v-list-item
               v-for="(child, i) in item.children"
               :key="i"
               @click=""
             >
-              <v-list-tile-action v-if="child.icon">
+              <v-list-item-action v-if="child.icon">
                 <v-icon>{{ child.icon }}</v-icon>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>
                   {{ child.text }}
-                </v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
           </v-list-group>
-          <v-list-tile v-else :key="item.text" @click="">
-            <v-list-tile-action>
+          <v-list-item v-else :key="item.text" @click="">
+            <v-list-item-action>
               <v-icon>{{ item.icon }}</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>
                 {{ item.text }}
-              </v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
         </template>
       </v-list>
     </v-navigation-drawer>
@@ -75,7 +75,7 @@
       fixed
     >
       <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
-        <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <span class="hidden-sm-and-down">Google Contacts</span>
       </v-toolbar-title>
       <v-text-field
@@ -94,7 +94,7 @@
         <v-icon>notifications</v-icon>
       </v-btn>
       <v-btn icon large>
-        <v-avatar size="32px" tile>
+        <v-avatar size="32px" item>
           <img
             src="https://cdn.vuetifyjs.com/images/logos/logo.svg"
             alt="Vuetify"

@@ -17,59 +17,53 @@
       class="pa-0"
       overflow
     ></v-overflow-btn>
+    <v-divider vertical></v-divider>
 
-    <v-divider
-      class="mr-2"
-      vertical
-    ></v-divider>
+    <template v-if="$vuetify.breakpoint.mdAndUp">
 
-    <v-btn-toggle
-      v-model="toggle_multiple"
-      class="transparent"
-      multiple
-    >
-      <v-btn :value="1" text>
-        <v-icon>format_bold</v-icon>
-      </v-btn>
+      <v-spacer></v-spacer>
 
-      <v-btn :value="2" text>
-        <v-icon>format_italic</v-icon>
-      </v-btn>
+      <v-btn-toggle
+        v-model="toggle_multiple"
+        multiple
+      >
+        <v-btn :value="1" text>
+          <v-icon>format_bold</v-icon>
+        </v-btn>
 
-      <v-btn :value="3" text>
-        <v-icon>format_underlined</v-icon>
-      </v-btn>
+        <v-btn :value="2" text>
+          <v-icon>format_italic</v-icon>
+        </v-btn>
 
-      <v-btn :value="4" text>
-        <v-icon>format_color_fill</v-icon>
-      </v-btn>
-    </v-btn-toggle>
+        <v-btn :value="3" text>
+          <v-icon>format_underlined</v-icon>
+        </v-btn>
 
-    <v-divider
-      class="mx-2"
-      vertical
-    ></v-divider>
+        <v-btn :value="4" text>
+          <v-icon>format_color_fill</v-icon>
+        </v-btn>
+      </v-btn-toggle>
 
-    <v-btn-toggle
-      v-model="toggle_exclusive"
-      class="transparent"
-    >
-      <v-btn :value="1" text>
-        <v-icon>format_align_left</v-icon>
-      </v-btn>
+      <div class="mx-3"></div>
 
-      <v-btn :value="2" text>
-        <v-icon>format_align_center</v-icon>
-      </v-btn>
+      <v-btn-toggle v-model="toggle_exclusive">
+        <v-btn :value="1" text>
+          <v-icon>format_align_left</v-icon>
+        </v-btn>
 
-      <v-btn :value="3" text>
-        <v-icon>format_align_right</v-icon>
-      </v-btn>
+        <v-btn :value="2" text>
+          <v-icon>format_align_center</v-icon>
+        </v-btn>
 
-      <v-btn :value="4" text>
-        <v-icon>format_align_justify</v-icon>
-      </v-btn>
-    </v-btn-toggle>
+        <v-btn :value="3" text>
+          <v-icon>format_align_right</v-icon>
+        </v-btn>
+
+        <v-btn :value="4" text>
+          <v-icon>format_align_justify</v-icon>
+        </v-btn>
+      </v-btn-toggle>
+    </template>
   </v-toolbar>
 </template>
 

@@ -57,9 +57,10 @@
       </a>
     </v-layout>
     <v-list
-      class="pa-0"
+      class="py-0"
       dense
       expand
+      nav
     >
       <template v-for="(item, i) in items">
         <v-subheader

@@ -11,9 +11,9 @@
         </v-btn>
       </template>
       <v-list>
-        <v-list-tile v-for="n in 5" :key="n" @click="">
-          <v-list-tile-title v-text="'Item ' + n"></v-list-tile-title>
-        </v-list-tile>
+        <v-list-item v-for="n in 5" :key="n" @click="">
+          <v-list-item-title v-text="'Item ' + n"></v-list-item-title>
+        </v-list-item>
       </v-list>
     </v-menu>
   </div>

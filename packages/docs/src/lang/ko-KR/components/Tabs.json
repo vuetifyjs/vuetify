@@ -39,7 +39,7 @@
     },
     "alignWithTitle": {
       "header": "툴바 타이틀과 탭 정렬 (Align tabs with toolbar title)",
-      "desc": "`v-tabs`을 `v-toolbar-title` 컴포넌트와 함께 나열합니다. (`v-toolbar-side-icon`나 `v-btn` 컴포넌트가 `v-toolbar` 안에 사용되어야만 합니다. May not work if the tab text is wrapped."
+      "desc": "`v-tabs`을 `v-toolbar-title` 컴포넌트와 함께 나열합니다. (`v-app-bar-nav-icon`나 `v-btn` 컴포넌트가 `v-toolbar` 안에 사용되어야만 합니다. May not work if the tab text is wrapped."
     },
     "grow": {
       "header": "Grow",

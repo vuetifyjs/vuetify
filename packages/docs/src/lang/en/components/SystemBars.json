@@ -1,0 +1,26 @@
+{
+  "header": "# System bar",
+  "headerText": "The `v-system-bar` component can be used for displaying some statuses to user. It looks like Android system bar and can contain icons, spacers and some amount of text.",
+  "examples": {
+    "usage": {
+      "desc": "A system bar is a flexible container for your data. It can be themed using multiple style variants, and even be a window bar with close, fullscreen and minify icons."
+    },
+    "window": {
+      "header": "### Window bar",
+      "desc": "A window bar with window controls and status info."
+    },
+    "themes": {
+      "header": "### Themes",
+      "desc": "Dark or light theme variants can be applied to `v-system-bar`."
+    },
+    "lights-out": {
+      "header": "### Lights out",
+      "desc": "You can reduce `v-system-bar`'s opacity using `lights-out` property."
+    }
+  },
+  "props": {
+    "lightsOut": "Reduces the system bar opacity",
+    "status": "Reduces the system bar height",
+    "window": "Increases the system bar height"
+  }
+}

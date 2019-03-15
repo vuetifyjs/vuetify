@@ -19,14 +19,14 @@
               :key="index"
             />
 
-            <v-list-tile
+            <v-list-item
               v-else
               :key="item.title"
             >
-              <v-list-tile-content>
-                <v-list-tile-title v-html="item.title" />
-              </v-list-tile-content>
-            </v-list-tile>
+              <v-list-item-content>
+                <v-list-item-title v-html="item.title" />
+              </v-list-item-content>
+            </v-list-item>
           </template>
         </v-list>
       </core-section>
@@ -48,19 +48,19 @@
               :inset="item.inset"
             />
 
-            <v-list-tile
+            <v-list-item
               v-else
               :key="item.title"
               avatar
             >
-              <v-list-tile-avatar>
+              <v-list-item-avatar>
                 <img :src="item.avatar">
-              </v-list-tile-avatar>
+              </v-list-item-avatar>
 
-              <v-list-tile-content>
-                <v-list-tile-title v-html="item.title" />
-              </v-list-tile-content>
-            </v-list-tile>
+              <v-list-item-content>
+                <v-list-item-title v-html="item.title" />
+              </v-list-item-content>
+            </v-list-item>
           </template>
         </v-list>
       </core-section>
@@ -81,15 +81,15 @@
               :key="index"
             />
 
-            <v-list-tile
+            <v-list-item
               v-else
               :key="item.title"
             >
-              <v-list-tile-content>
-                <v-list-tile-title v-html="item.title" />
-                <v-list-tile-sub-title v-html="item.subtitle" />
-              </v-list-tile-content>
-            </v-list-tile>
+              <v-list-item-content>
+                <v-list-item-title v-html="item.title" />
+                <v-list-item-subtitle v-html="item.subtitle" />
+              </v-list-item-content>
+            </v-list-item>
           </template>
         </v-list>
       </core-section>
@@ -111,20 +111,20 @@
               :inset="item.inset"
             />
 
-            <v-list-tile
+            <v-list-item
               v-else
               :key="item.title"
               avatar
             >
-              <v-list-tile-avatar>
+              <v-list-item-avatar>
                 <img :src="item.avatar">
-              </v-list-tile-avatar>
+              </v-list-item-avatar>
 
-              <v-list-tile-content>
-                <v-list-tile-title v-html="item.title" />
-                <v-list-tile-sub-title v-html="item.subtitle" />
-              </v-list-tile-content>
-            </v-list-tile>
+              <v-list-item-content>
+                <v-list-item-title v-html="item.title" />
+                <v-list-item-subtitle v-html="item.subtitle" />
+              </v-list-item-content>
+            </v-list-item>
           </template>
         </v-list>
       </core-section>
@@ -145,18 +145,18 @@
               :key="index"
             />
 
-            <v-list-tile
+            <v-list-item
               v-else
               :key="item.title"
             >
-              <v-list-tile-content>
-                <v-list-tile-title v-html="item.title" />
-              </v-list-tile-content>
+              <v-list-item-content>
+                <v-list-item-title v-html="item.title" />
+              </v-list-item-content>
 
-              <v-list-tile-action>
+              <v-list-item-action>
                 <v-icon color="pink">mdi-star</v-icon>
-              </v-list-tile-action>
-            </v-list-tile>
+              </v-list-item-action>
+            </v-list-item>
           </template>
         </v-list>
       </core-section>
@@ -177,19 +177,19 @@
               :key="index"
             />
 
-            <v-list-tile
+            <v-list-item
               v-else
               :key="item.title"
             >
-              <v-list-tile-content>
-                <v-list-tile-title v-html="item.title" />
-                <v-list-tile-sub-title v-html="item.subtitle" />
-              </v-list-tile-content>
+              <v-list-item-content>
+                <v-list-item-title v-html="item.title" />
+                <v-list-item-subtitle v-html="item.subtitle" />
+              </v-list-item-content>
 
-              <v-list-tile-action>
+              <v-list-item-action>
                 <v-icon color="pink">mdi-star</v-icon>
-              </v-list-tile-action>
-            </v-list-tile>
+              </v-list-item-action>
+            </v-list-item>
           </template>
         </v-list>
       </core-section>
@@ -210,15 +210,15 @@
               :key="index"
             />
 
-            <v-list-tile
+            <v-list-item
               v-else
               :key="item.title"
             >
-              <v-list-tile-content>
-                <v-list-tile-title v-html="item.title" />
-                <v-list-tile-sub-title v-html="item.subtitle" />
-              </v-list-tile-content>
-            </v-list-tile>
+              <v-list-item-content>
+                <v-list-item-title v-html="item.title" />
+                <v-list-item-subtitle v-html="item.subtitle" />
+              </v-list-item-content>
+            </v-list-item>
           </template>
         </v-list>
       </core-section>
@@ -243,23 +243,23 @@
               :inset="item.inset"
             />
 
-            <v-list-tile
+            <v-list-item
               v-else
               :key="item.title"
               avatar
             >
-              <v-list-tile-avatar>
+              <v-list-item-avatar>
                 <img :src="item.avatar">
-              </v-list-tile-avatar>
+              </v-list-item-avatar>
 
-              <v-list-tile-content>
-                <v-list-tile-title v-html="item.title" />
-              </v-list-tile-content>
+              <v-list-item-content>
+                <v-list-item-title v-html="item.title" />
+              </v-list-item-content>
 
-              <v-list-tile-action>
+              <v-list-item-action>
                 <v-icon :color="item.active ? 'teal' : 'grey'">mdi-message</v-icon>
-              </v-list-tile-action>
-            </v-list-tile>
+              </v-list-item-action>
+            </v-list-item>
           </template>
         </v-list>
       </core-section>

@@ -4,7 +4,7 @@
   "examples": {
     "usage": {
       "header": "Utilização",
-      "desc": "Uma barra de ferramentas (toolbar) é um container flexível que pode ser utilizado em diversas maneiras. Por padrão, a barra de ferramentas possui 64px de altura em desktops, 56px de altura em dispositivos móveis na vertical (modo retrato) e 48px de altura em dispositivos móveis na horizontal (modo paisagem). Existe um número de componentes de auxílio disponíveis para serem usados com a barra de ferramentas. Estes são `v-toolbar-side-icon`, `v-toolbar-title` e `v-toolbar-items`."
+      "desc": "Uma barra de ferramentas (toolbar) é um container flexível que pode ser utilizado em diversas maneiras. Por padrão, a barra de ferramentas possui 64px de altura em desktops, 56px de altura em dispositivos móveis na vertical (modo retrato) e 48px de altura em dispositivos móveis na horizontal (modo paisagem). Existe um número de componentes de auxílio disponíveis para serem usados com a barra de ferramentas. Estes são `v-app-bar-nav-icon`, `v-toolbar-title` e `v-toolbar-items`."
     },
     "appBar": {
       "header": "Barra de aplicativos",

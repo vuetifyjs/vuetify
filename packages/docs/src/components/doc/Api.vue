@@ -7,8 +7,8 @@
         :slider-color="computedTabs.length ? 'primary' : 'transparent'"
       >
         <v-tab
-          v-for="(tab, i) in computedTabs"
-          :key="`tab-${i}`"
+          v-for="(tab) in computedTabs"
+          :key="`tab-${tab}`"
           :href="`#${tab}`"
         >
           {{ tab.replace(/([A-Z])/g, ' $1') }}

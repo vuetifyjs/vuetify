@@ -19,13 +19,13 @@
             </template>
 
             <v-list>
-              <v-list-tile
+              <v-list-item
                 v-for="(item, i) in items"
                 :key="i"
                 @click=""
               >
-                <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-              </v-list-tile>
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </v-list-item>
             </v-list>
           </v-menu>
         </v-card-title>

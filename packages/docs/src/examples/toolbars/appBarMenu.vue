@@ -16,13 +16,13 @@
         </template>
 
         <v-list>
-          <v-list-tile
+          <v-list-item
             v-for="item in items"
             :key="item"
             @click=""
           >
-            <v-list-tile-title v-text="item"></v-list-tile-title>
-          </v-list-tile>
+            <v-list-item-title v-text="item"></v-list-item-title>
+          </v-list-item>
         </v-list>
       </v-menu>
 

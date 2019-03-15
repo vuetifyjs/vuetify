@@ -74,7 +74,7 @@
     "valueComparator": "Apply a custom value comparator function"
   },
   "slots": {
-    "item": "Scoped slot for designating the markup for a list-tile",
+    "item": "Scoped slot for designating the markup for a list-item",
     "no-data": "Mixins.Filterable.slots.noData",
     "selection": "Scoped slot for designating the markup for the selected items"
   },

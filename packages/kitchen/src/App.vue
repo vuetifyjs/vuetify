@@ -1,6 +1,6 @@
 <template>
   <v-app :dark="$vuetify.theme.dark">
-    <v-toolbar
+    <v-app-bar
       color="blue-grey"
       dark
       fixed
@@ -8,7 +8,7 @@
       clipped-right
       dir="ltr"
     >
-      <v-toolbar-side-icon @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title class="white--text headline">
         🍣
         <span class="font-weight-black">
@@ -51,7 +51,7 @@
       >
         <v-icon>mdi-pencil</v-icon>
       </v-btn>
-    </v-toolbar>
+    </v-app-bar>
     <v-navigation-drawer
       v-model="drawer"
       app
@@ -61,15 +61,15 @@
         dense
         class="pt-0"
       >
-        <v-list-tile
+        <v-list-item
           v-for="item in items"
           :key="item.title"
           :to="item.to"
         >
-          <v-list-tile-content>
-            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
     <router-view />

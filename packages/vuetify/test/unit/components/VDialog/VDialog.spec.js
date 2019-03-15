@@ -7,7 +7,6 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
     const wrapper = mount(VDialog)
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render a disabled component and match snapshot', () => {
@@ -18,7 +17,6 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render a persistent component and match snapshot', () => {
@@ -29,7 +27,6 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render a fullscreen component and match snapshot', () => {
@@ -40,7 +37,6 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render a lazy component and match snapshot', () => {
@@ -61,7 +57,6 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom origin and match snapshot', () => {
@@ -72,7 +67,6 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom width (max-width) and match snapshot', () => {
@@ -83,7 +77,6 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom width and match snapshot', () => {
@@ -94,7 +87,6 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom transition and match snapshot', () => {
@@ -105,7 +97,6 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should open dialog on activator click', async () => {
@@ -145,8 +136,6 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.isActive).toBe(false)
     await wrapper.vm.$nextTick()
     expect(input).not.toBeCalled()
-
-    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('not change state on v-model update', async () => {
@@ -193,8 +182,6 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
     window.dispatchEvent(new Event('keydown'))
     expect(keydown).toBeCalled()
-
-    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/3101
@@ -228,8 +215,6 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
 
     const activator = wrapper.find('.v-dialog__activator')[0]
     expect(Object.keys(activator.vNode.data.on)).toHaveLength(0)
-
-    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/6115
@@ -256,7 +241,5 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
     const dialog = wrapper3.first(VDialog)
     expect(dialog.hasStyle('display', 'inline-block')).toBe(true)
     expect(dialog.vm.hasActivator).toBe(true)
-
-    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })

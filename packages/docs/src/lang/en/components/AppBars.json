@@ -1,0 +1,66 @@
+{
+  "header": "# App Bars",
+  "headerText": "The `v-app-bar` component is pivotal to any gui, as it generally is the primary source of site navigation. The toolbar component works great in conjunction with a navigation drawer for hiding links and presenting an activator to open the sidebar on mobile.",
+  "examples": {
+    "usage": {
+      "desc": "An **app-bar** is composed of 5 parts. The **container**, **navigation icon** (optional), **title** (optional), **action items** (optional) and an **overflow menu** (optional)"
+    },
+    "dense": {
+      "header": "### Dense",
+      "desc": "You can make **app-bar** dense. A dense app bar has lower height than regular one"
+    },
+    "prominent": {
+      "header": "### Prominent w/ scroll shrink",
+      "desc": "An `v-app-bar` with the `prominent` prop can opt to have its height shrunk as the user scrolls down. This provides a smooth transition to taking up less visual space when the user is scrolling through content. Shrink height has 2 possible options, **dense** (48px) and **short** (56px) sizes."
+    },
+    "img": {
+      "header": "### Prominent w/ scroll shrink and image",
+      "desc": "`v-app-bar` can contain background images. You can set source via the `src` prop. If you need to customize the `v-img` properties, the app-bar provides you with an **img** scoped slot."
+    },
+    "img-fade": {
+      "header": "### Prominent w/ scroll shrink and image, fading on scroll",
+      "desc": "The background image of a `v-app-bar` can fade on scroll. Use the `fade-img-on-scroll` property for this."
+    },
+    "hide": {
+      "header": "### Hiding on scroll",
+      "desc": "`v-app-bar` can be hidden on scroll. Use the `hide-on-scroll` property for this."
+    },
+    "scroll-threshold": {
+      "header": "### Scroll threshold",
+      "desc": "`v-app-bar` can have scroll threshold. It will start reacting to scroll only after defined via `scroll-threshold` property amount of pixels."
+    },
+    "collapse": {
+      "header": "### Collapsible bars",
+      "desc": "With the **collapse** and **collapse-on-scroll** props you can easily control the state of toolbar that the user interacts with."
+    },
+    "elevate-on-scroll": {
+      "header": "### Elevate bar on scroll",
+      "desc": "When using the **elevate-on-scroll** prop, the `v-app-bar` will rest at an elevation of 0dp until the user begins to scroll down. Once scrolling, the bar raises to 4dp."
+    },
+    "inverted-scroll": {
+      "header": "### Inverted scrolling",
+      "desc": "When using the **inverted-scroll** property, the bar will hide until the user scrolls past the designated threshold. Once past the threshold, the `v-app-bar` will continue to display until the users scrolls up past the threshold. If no **scroll-threshold** value is supplied a default value of _0_ will be used."
+    }
+  },
+  "props": {
+    "clippedLeft": "Designates that the application's `v-navigation-drawer` is clipped on the left side of the toolbar",
+    "clippedRight": "Designates that the application's `v-navigation-drawer` is clipped on the right side of the toolbar",
+    "collapseOnScroll": "Collapse the toolbar when scrolling",
+    "elevateOnScroll": "Elevate the toolbar from 0dp to 4dp when scrolling",
+    "invertedScroll": "Will slide out of view when scrolling down and back into view when scrolling up",
+    "hideOnScroll": "Will transition the toolbar and extension off screen when scrolling down",
+    "fadeImgOnScroll": "When using the **src** prop or `img` scoped slot, will fade the image when scrolling",
+    "scrollTarget": "Assign the scroll target for scroll-off-screen",
+    "scrollThreshold": "The amount of scroll distance down before **hide-on-scroll** activates.",
+    "scrollOffScreen": "Scroll the entire `v-app-bar` (including extension) off screen.",
+    "shrinkOnScroll": "Shrinks a **prominent** toolbar to a **dense** or **short** (default) one",
+    "src": "Image source. See `v-img` for details",
+    "fade-img-on-scroll": "Fade image when user scrolls"
+  },
+  "slots": {
+    "extension": "Components.Toolbars.slots.extension"
+  },
+  "scopedSlots": {
+    "img": "Components.Toolbars.scopedSlots.img"
+  }
+}

@@ -107,22 +107,10 @@ exports[`VCarousel.ts should render component with custom icon and match snapsho
     <div class="v-window-item"
          style="display: none;"
     >
-      <div class="v-responsive v-image v-carousel__item"
-           style="height: 500px;"
-      >
-        <div class="v-responsive__content">
-        </div>
-      </div>
     </div>
     <div class="v-window-item"
          style="display: none;"
     >
-      <div class="v-responsive v-image v-carousel__item"
-           style="height: 500px;"
-      >
-        <div class="v-responsive__content">
-        </div>
-      </div>
     </div>
   </div>
   <div class="v-carousel__prev">
@@ -346,12 +334,6 @@ exports[`VCarousel.ts should render component with selected active item 1`] = `
     <div class="v-window-item"
          style="display: none;"
     >
-      <div class="v-responsive v-image v-carousel__item"
-           style="height: 500px;"
-      >
-        <div class="v-responsive__content">
-        </div>
-      </div>
     </div>
     <div class="v-window-item v-window-item--active">
       <div class="v-responsive v-image v-carousel__item"
@@ -364,12 +346,6 @@ exports[`VCarousel.ts should render component with selected active item 1`] = `
     <div class="v-window-item"
          style="display: none;"
     >
-      <div class="v-responsive v-image v-carousel__item"
-           style="height: 500px;"
-      >
-        <div class="v-responsive__content">
-        </div>
-      </div>
     </div>
   </div>
   <div class="v-carousel__prev">
@@ -466,22 +442,10 @@ exports[`VCarousel.ts should render component without delimiters 1`] = `
     <div class="v-window-item"
          style="display: none;"
     >
-      <div class="v-responsive v-image v-carousel__item"
-           style="height: 500px;"
-      >
-        <div class="v-responsive__content">
-        </div>
-      </div>
     </div>
     <div class="v-window-item"
          style="display: none;"
     >
-      <div class="v-responsive v-image v-carousel__item"
-           style="height: 500px;"
-      >
-        <div class="v-responsive__content">
-        </div>
-      </div>
     </div>
   </div>
   <div class="v-carousel__prev">

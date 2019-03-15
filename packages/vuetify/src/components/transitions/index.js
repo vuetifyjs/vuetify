@@ -31,7 +31,6 @@ export const VSlideYReverseTransition = createSimpleTransition('slide-y-reverse-
 // JavaScript transitions
 export const VExpandTransition = createJavaScriptTransition('expand-transition', ExpandTransitionGenerator())
 export const VExpandXTransition = createJavaScriptTransition('expand-x-transition', ExpandTransitionGenerator('', true))
-export const VRowExpandTransition = createJavaScriptTransition('row-expand-transition', ExpandTransitionGenerator('datatable__expand-col--expanded'))
 
 export default {
   $_vuetify_subcomponents: {
@@ -55,7 +54,6 @@ export default {
     VTabReverseTransition,
     VTabTransition,
     VExpandTransition,
-    VExpandXTransition,
-    VRowExpandTransition
+    VExpandXTransition
   }
 }
