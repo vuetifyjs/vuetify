@@ -31,6 +31,9 @@ export const defaultMenuProps = {
   maxHeight: 300
 }
 
+// Types
+type ItemProperty = PropValidator<string | (string | number)[] | ((item: object, fallback?: any) => any)>
+
 /* @vue/component */
 export default mixins(VTextField, Comparable, Filterable).extend({
   name: 'v-select',
@@ -69,15 +72,15 @@ export default mixins(VTextField, Comparable, Filterable).extend({
     itemDisabled: {
       type: [String, Array, Function],
       default: 'disabled'
-    } as PropValidator<string | (string | number)[] | ((item: object, fallback?: any) => any)>,
+    } as ItemProperty,
     itemText: {
       type: [String, Array, Function],
       default: 'text'
-    } as PropValidator<string | (string | number)[] | ((item: object, fallback?: any) => any)>,
+    } as ItemProperty,
     itemValue: {
       type: [String, Array, Function],
       default: 'value'
-    } as PropValidator<string | (string | number)[] | ((item: object, fallback?: any) => any)>,
+    } as ItemProperty,
     menuProps: {
       type: [String, Array, Object],
       default: () => defaultMenuProps
