@@ -1,3 +1,7 @@
+// Libraries
+import { VNode } from 'vue'
+
+// Styles
 import '../../stylus/components/_cards.styl'
 
 // Components
@@ -21,15 +25,12 @@ import {
   escapeHTML,
   getPropertyFromItem
 } from '../../util/helpers'
+import mixins from '../../util/mixins'
+import { PropValidator } from 'vue/types/options'
 
 /* @vue/component */
-export default {
+export default mixins(Colorable, Themeable).extend({
   name: 'v-select-list',
-
-  mixins: [
-    Colorable,
-    Themeable
-  ],
 
   props: {
     action: Boolean,
@@ -38,45 +39,45 @@ export default {
     items: {
       type: Array,
       default: () => []
-    },
+    } as PropValidator<any[]>,
     itemAvatar: {
       type: [String, Array, Function],
       default: 'avatar'
-    },
+    } as PropValidator<string | (string | number)[] | ((item: object, fallback?: any) => any)>,
     itemDisabled: {
       type: [String, Array, Function],
       default: 'disabled'
-    },
+    } as PropValidator<string | (string | number)[] | ((item: object, fallback?: any) => any)>,
     itemText: {
       type: [String, Array, Function],
       default: 'text'
-    },
+    } as PropValidator<string | (string | number)[] | ((item: object, fallback?: any) => any)>,
     itemValue: {
       type: [String, Array, Function],
       default: 'value'
-    },
+    } as PropValidator<string | (string | number)[] | ((item: object, fallback?: any) => any)>,
     noDataText: String,
     noFilter: Boolean,
     searchInput: {
       default: null
-    },
+    } as PropValidator<any>,
     selectedItems: {
       type: Array,
       default: () => []
-    }
+    } as PropValidator<any[]>
   },
 
   computed: {
-    parsedItems () {
+    parsedItems (): any {
       return this.selectedItems.map(item => this.getValue(item))
     },
-    tileActiveClass () {
+    tileActiveClass (): string {
       return Object.keys(this.setTextColor(this.color).class || {}).join(' ')
     },
-    staticNoDataTile () {
+    staticNoDataTile (): VNode {
       const tile = {
         on: {
-          mousedown: e => e.preventDefault() // Prevent onBlur from being called
+          mousedown: (e: MouseEvent) => e.preventDefault() // Prevent onBlur from being called
         }
       }
 
@@ -87,10 +88,10 @@ export default {
   },
 
   methods: {
-    genAction (item, inputValue) {
+    genAction (item: object, inputValue: any): VNode {
       const data = {
         on: {
-          click: e => {
+          click: (e: MouseEvent) => {
             e.stopPropagation()
             this.$emit('select', item)
           }
@@ -106,11 +107,11 @@ export default {
         })
       ])
     },
-    genDivider (props) {
+    genDivider (props: { [key: string]: any }) {
       return this.$createElement(VDivider, { props })
     },
-    genFilteredText (text) {
-      text = (text || '').toString()
+    genFilteredText (text: string) {
+      text = text || ''
 
       if (!this.searchInput || this.noFilter) return escapeHTML(text)
 
@@ -118,13 +119,17 @@ export default {
 
       return `${escapeHTML(start)}${this.genHighlight(middle)}${escapeHTML(end)}`
     },
-    genHeader (props) {
+    genHeader (props: { [key: string]: any }): VNode {
       return this.$createElement(VSubheader, { props }, props.header)
     },
-    genHighlight (text) {
-      return `<span class="v-list-item__mask">${escapeHTML(text)}</span>`
+    genHighlight (text: string): string {
+      return `<span class="v-list__tile__mask">${escapeHTML(text)}</span>`
     },
-    getMaskedCharacters (text) {
+    getMaskedCharacters (text: string): {
+      start: string
+      middle: string
+      end: string
+    } {
       const searchInput = (this.searchInput || '').toString().toLocaleLowerCase()
       const index = text.toLocaleLowerCase().indexOf(searchInput)
 
@@ -136,11 +141,13 @@ export default {
       return { start, middle, end }
     },
     genTile (
-      item,
-      disabled = null,
+      item: object,
+      disabled = null as unknown as boolean,
       avatar = false,
-      value = this.hasItem(item)
-    ) {
+      value = false
+    ): VNode | VNode[] | undefined {
+      if (!value) value = this.hasItem(item)
+
       if (item === Object(item)) {
         avatar = this.getAvatar(item)
         disabled = disabled !== null
@@ -150,7 +157,7 @@ export default {
 
       const tile = {
         on: {
-          mousedown: e => {
+          mousedown: (e: MouseEvent) => {
             // Prevent onBlur from being called
             e.preventDefault()
           },
@@ -181,7 +188,7 @@ export default {
         ? this.$createElement(VListItem, tile, scopedSlot)
         : scopedSlot
     },
-    genTileContent (item) {
+    genTileContent (item: any): VNode {
       const innerHTML = this.genFilteredText(this.getText(item))
 
       return this.$createElement(VListItemContent,
@@ -190,29 +197,29 @@ export default {
         })]
       )
     },
-    hasItem (item) {
+    hasItem (item: object) {
       return this.parsedItems.indexOf(this.getValue(item)) > -1
     },
-    needsTile (slot) {
-      return slot.length !== 1 ||
-        slot[0].componentOptions == null ||
-        slot[0].componentOptions.Ctor.options.name !== 'v-list-item'
+    needsTile (slot: VNode[] | undefined) {
+      return slot!.length !== 1 ||
+        slot![0].componentOptions == null ||
+        slot![0].componentOptions.Ctor.options.name !== 'v-list-tile'
     },
-    getAvatar (item) {
+    getAvatar (item: object) {
       return Boolean(getPropertyFromItem(item, this.itemAvatar, false))
     },
-    getDisabled (item) {
+    getDisabled (item: object) {
       return Boolean(getPropertyFromItem(item, this.itemDisabled, false))
     },
-    getText (item) {
+    getText (item: object) {
       return String(getPropertyFromItem(item, this.itemText, item))
     },
-    getValue (item) {
+    getValue (item: object) {
       return getPropertyFromItem(item, this.itemValue, this.getText(item))
     }
   },
 
-  render () {
+  render (): VNode {
     const children = []
     for (const item of this.items) {
       if (this.hideSelected &&
@@ -242,4 +249,4 @@ export default {
       }, children)
     ])
   }
-}
+})

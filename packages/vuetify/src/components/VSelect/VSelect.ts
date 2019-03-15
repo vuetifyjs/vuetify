@@ -20,6 +20,9 @@ import ClickOutside from '../../directives/click-outside'
 // Helpers
 import { camelize, getPropertyFromItem, keyCodes } from '../../util/helpers'
 import { consoleError, consoleWarn } from '../../util/console'
+import mixins from '../../util/mixins'
+import { PropValidator } from 'vue/types/options'
+import { VNode, VNodeDirective } from 'vue'
 
 export const defaultMenuProps = {
   eager: true,
@@ -29,18 +32,16 @@ export const defaultMenuProps = {
   maxHeight: 300
 }
 
+// Types
+type ItemProperty = PropValidator<string | (string | number)[] | ((item: object, fallback?: any) => any)>
+
 /* @vue/component */
-export default VTextField.extend({
+export default mixins(VTextField, Comparable, Filterable).extend({
   name: 'v-select',
 
   directives: {
     ClickOutside
   },
-
-  mixins: [
-    Comparable,
-    Filterable
-  ],
 
   props: {
     appendIcon: {
@@ -49,9 +50,8 @@ export default VTextField.extend({
     },
     appendIconCb: Function,
     attach: {
-      type: null,
       default: false
-    },
+    } as PropValidator<string | boolean | Element | VNode>,
     browserAutocomplete: {
       type: String,
       default: 'on'
@@ -73,15 +73,15 @@ export default VTextField.extend({
     itemDisabled: {
       type: [String, Array, Function],
       default: 'disabled'
-    },
+    } as ItemProperty,
     itemText: {
       type: [String, Array, Function],
       default: 'text'
-    },
+    } as ItemProperty,
     itemValue: {
       type: [String, Array, Function],
       default: 'value'
-    },
+    } as ItemProperty,
     menuProps: {
       type: [String, Array, Object],
       default: () => defaultMenuProps
@@ -95,31 +95,33 @@ export default VTextField.extend({
     smallChips: Boolean
   },
 
-  data: vm => ({
-    attrsInput: { role: 'combobox' },
-    cachedItems: vm.cacheItems ? vm.items : [],
-    content: null,
-    isBooted: false,
-    isMenuActive: false,
-    lastItem: 20,
-    // As long as a value is defined, show it
-    // Otherwise, check if multiple
-    // to determine which default to provide
-    lazyValue: vm.value !== undefined
-      ? vm.value
-      : vm.multiple ? [] : undefined,
-    selectedIndex: -1,
-    selectedItems: [],
-    keyboardLookupPrefix: '',
-    keyboardLookupLastTime: 0
-  }),
+  data () {
+    return {
+      attrsInput: { role: 'combobox' },
+      cachedItems: this.cacheItems ? this.items : [],
+      content: null as any,
+      isBooted: false,
+      isMenuActive: false,
+      lastItem: 20,
+      // As long as a value is defined, show it
+      // Otherwise, check if multiple
+      // to determine which default to provide
+      lazyValue: this.value !== undefined
+        ? this.value
+        : this.multiple ? [] : undefined,
+      selectedIndex: -1,
+      selectedItems: [] as any[],
+      keyboardLookupPrefix: '',
+      keyboardLookupLastTime: 0
+    }
+  },
 
   computed: {
     /* All items that the select has */
-    allItems () {
+    allItems (): object[] {
       return this.filterDuplicates(this.cachedItems.concat(this.items))
     },
-    classes () {
+    classes (): object {
       return Object.assign({}, VTextField.options.computed.classes.call(this), {
         'v-select': true,
         'v-select--chips': this.hasChips,
@@ -128,15 +130,15 @@ export default VTextField.extend({
       })
     },
     /* Used by other components to overwrite */
-    computedItems () {
+    computedItems (): object[] {
       return this.allItems
     },
-    counterValue () {
+    counterValue (): number {
       return this.multiple
         ? this.selectedItems.length
         : (this.getText(this.selectedItems[0]) || '').toString().length
     },
-    directives () {
+    directives (): object[] | undefined {
       return this.isFocused ? [{
         name: 'click-outside',
         value: this.blur,
@@ -148,23 +150,23 @@ export default VTextField.extend({
     dynamicHeight () {
       return 'auto'
     },
-    hasChips () {
+    hasChips (): boolean {
       return this.chips || this.smallChips
     },
-    hasSlot () {
+    hasSlot (): boolean {
       return Boolean(this.hasChips || this.$scopedSlots.selection)
     },
-    isDirty () {
+    isDirty (): boolean {
       return this.selectedItems.length > 0
     },
-    listData () {
-      const scopeId = this.$vnode && this.$vnode.context.$options._scopeId
+    listData (): object {
+      const scopeId = this.$vnode && (this.$vnode.context!.$options as { [key: string]: any })._scopeId
       return {
         attrs: scopeId ? {
           [scopeId]: true
         } : null,
         props: {
-          action: this.multiple && !this.isHidingSelected,
+          action: this.multiple,
           color: this.color,
           dense: this.dense,
           hideSelected: this.hideSelected,
@@ -184,20 +186,20 @@ export default VTextField.extend({
         }
       }
     },
-    staticList () {
+    staticList (): VNode {
       if (this.$slots['no-data'] || this.$slots['prepend-item'] || this.$slots['append-item']) {
         consoleError('assert: staticList should not be called if slots are used')
       }
 
       return this.$createElement(VSelectList, this.listData)
     },
-    virtualizedItems () {
+    virtualizedItems (): object[] {
       return this.$_menuProps.auto
         ? this.computedItems
         : this.computedItems.slice(0, this.lastItem)
     },
-    menuCanShow () { return true },
-    $_menuProps () {
+    menuCanShow (): boolean { return true },
+    $_menuProps (): any {
       let normalisedProps
 
       normalisedProps = typeof this.menuProps === 'string'
@@ -214,9 +216,7 @@ export default VTextField.extend({
       return {
         ...defaultMenuProps,
         value: this.menuCanShow && this.isMenuActive,
-        nudgeBottom: this.nudgeBottom
-          ? this.nudgeBottom
-          : normalisedProps.offsetY ? 1 : 0, // convert to int
+        nudgeBottom: normalisedProps.offsetY ? 1 : 0, // convert to int
         ...normalisedProps
       }
     }
@@ -252,12 +252,12 @@ export default VTextField.extend({
   },
 
   mounted () {
-    this.content = this.$refs.menu && this.$refs.menu.$refs.content
+    this.content = this.$refs.menu && (this.$refs.menu as { [key: string]: any }).$refs.content
   },
 
   methods: {
     /** @public */
-    blur (e) {
+    blur (e: Event) {
       this.isMenuActive = false
       this.isFocused = false
       this.$refs.input && this.$refs.input.blur()
@@ -274,7 +274,7 @@ export default VTextField.extend({
 
       if (this.openOnClear) this.isMenuActive = true
     },
-    closeConditional (e) {
+    closeConditional (e: Event) {
       return (
         // Click originates from outside the menu content
         !!this.content &&
@@ -282,11 +282,11 @@ export default VTextField.extend({
 
         // Click originates from outside the element
         !!this.$el &&
-        !this.$el.contains(e.target) &&
+        !this.$el.contains(e.target as Node) &&
         e.target !== this.$el
       )
     },
-    filterDuplicates (arr) {
+    filterDuplicates (arr: any[]) {
       const uniqueValues = new Map()
       for (let index = 0; index < arr.length; ++index) {
         const item = arr[index]
@@ -297,12 +297,12 @@ export default VTextField.extend({
       }
       return Array.from(uniqueValues.values())
     },
-    findExistingIndex (item) {
+    findExistingIndex (item: object) {
       const itemValue = this.getValue(item)
 
-      return (this.internalValue || []).findIndex(i => this.valueComparator(this.getValue(i), itemValue))
+      return (this.internalValue || []).findIndex((i: object) => this.valueComparator(this.getValue(i), itemValue))
     },
-    genChipSelection (item, index) {
+    genChipSelection (item: object, index: number) {
       const isDisabled = (
         this.disabled ||
         this.readonly ||
@@ -319,7 +319,7 @@ export default VTextField.extend({
           small: this.smallChips
         },
         on: {
-          click: e => {
+          click: (e: MouseEvent) => {
             if (isDisabled) return
 
             e.stopPropagation()
@@ -332,7 +332,7 @@ export default VTextField.extend({
         key: this.getValue(item)
       }, this.getText(item))
     },
-    genCommaSelection (item, index, last) {
+    genCommaSelection (item: object, index: number, last: boolean) {
       // Item may be an object
       // TODO: Remove JSON.stringify
       const key = JSON.stringify(this.getValue(item))
@@ -350,7 +350,7 @@ export default VTextField.extend({
         key
       }), `${this.getText(item)}${last ? '' : ', '}`)
     },
-    genDefaultSlot () {
+    genDefaultSlot (): (VNode | VNode[] | null)[] {
       const selections = this.genSelections()
       const input = this.genInput()
 
@@ -367,7 +367,7 @@ export default VTextField.extend({
       return [
         this.$createElement('div', {
           staticClass: 'v-select__slot',
-          directives: this.directives
+          directives: this.directives as VNodeDirective[]
         }, [
           this.genLabel(),
           this.prefix ? this.genAffix('prefix') : null,
@@ -380,17 +380,17 @@ export default VTextField.extend({
         this.genProgress()
       ]
     },
-    genInput () {
+    genInput (): VNode {
       const input = VTextField.options.methods.genInput.call(this)
 
-      input.data.domProps.value = null
-      input.data.attrs.readonly = true
-      input.data.attrs['aria-readonly'] = String(this.readonly)
-      input.data.on.keypress = this.onKeyPress
+      input.data!.domProps!.value = null
+      input.data!.attrs!.readonly = true
+      input.data!.attrs!['aria-readonly'] = String(this.readonly)
+      input.data!.on!.keypress = this.onKeyPress
 
       return input
     },
-    genList () {
+    genList (): VNode {
       // If there's no slots, we can use a cached VNode to improve performance
       if (this.$slots['no-data'] || this.$slots['prepend-item'] || this.$slots['append-item']) {
         return this.genListWithSlot()
@@ -398,7 +398,7 @@ export default VTextField.extend({
         return this.staticList
       }
     },
-    genListWithSlot () {
+    genListWithSlot (): VNode {
       const slots = ['prepend-item', 'no-data', 'append-item']
         .filter(slotName => this.$slots[slotName])
         .map(slotName => this.$createElement('template', {
@@ -411,7 +411,7 @@ export default VTextField.extend({
         ...this.listData
       }, slots)
     },
-    genMenu () {
+    genMenu (): VNode {
       const props = this.$_menuProps
       props.activator = this.$refs['input-slot']
 
@@ -419,7 +419,7 @@ export default VTextField.extend({
       // TODO: remove (2.0)
       const inheritedProps = Object.keys(VMenu.options.props)
 
-      const deprecatedProps = Object.keys(this.$attrs).reduce((acc, attr) => {
+      const deprecatedProps = Object.keys(this.$attrs).reduce<string[]>((acc, attr) => {
         if (inheritedProps.includes(camelize(attr))) acc.push(attr)
         return acc
       }, [])
@@ -431,15 +431,15 @@ export default VTextField.extend({
       if (process.env.NODE_ENV !== 'production') {
         if (deprecatedProps.length) {
           const multiple = deprecatedProps.length > 1
-          let replacement = deprecatedProps.reduce((acc, p) => {
+          let replacement = deprecatedProps.reduce<any>((acc, p) => {
             acc[camelize(p)] = this.$attrs[p]
             return acc
           }, {})
-          const props = deprecatedProps.map(p => `'${p}'`).join(', ')
+          const props = deprecatedProps.map((p: any) => `'${p}'`).join(', ')
           const separator = multiple ? '\n' : '\''
 
           const onlyBools = Object.keys(replacement).every(prop => {
-            const propType = VMenu.options.props[prop]
+            const propType = (VMenu.options.props as { [key: string]: any })[prop]
             const value = replacement[prop]
             return value === true || ((propType.type || propType) === Boolean && value === '')
           })
@@ -476,7 +476,7 @@ export default VTextField.extend({
       return this.$createElement(VMenu, {
         props,
         on: {
-          input: val => {
+          input: (val: boolean) => {
             this.isMenuActive = val
             this.isFocused = val
           }
@@ -484,7 +484,7 @@ export default VTextField.extend({
         ref: 'menu'
       }, [this.genList()])
     },
-    genSelections () {
+    genSelections (): VNode {
       let length = this.selectedItems.length
       const children = new Array(length)
 
@@ -509,12 +509,12 @@ export default VTextField.extend({
         staticClass: 'v-select__selections'
       }, children)
     },
-    genSlotSelection (item, index) {
-      return this.$scopedSlots.selection({
+    genSlotSelection (item: object, index: number): VNode[] | undefined {
+      return this.$scopedSlots.selection!({
         parent: this,
         item,
         index,
-        select: e => {
+        select: (e: Event) => {
           e.stopPropagation()
           this.selectedIndex = index
         },
@@ -523,21 +523,21 @@ export default VTextField.extend({
       })
     },
     getMenuIndex () {
-      return this.$refs.menu ? this.$refs.menu.listIndex : -1
+      return this.$refs.menu ? (this.$refs.menu as { [key: string]: any }).listIndex : -1
     },
-    getDisabled (item) {
+    getDisabled (item: object) {
       return getPropertyFromItem(item, this.itemDisabled, false)
     },
-    getText (item) {
+    getText (item: object) {
       return getPropertyFromItem(item, this.itemText, item)
     },
-    getValue (item) {
+    getValue (item: object) {
       return getPropertyFromItem(item, this.itemValue, this.getText(item))
     },
-    onBlur (e) {
+    onBlur (e: Event) {
       this.$emit('blur', e)
     },
-    onChipInput (item) {
+    onChipInput (item: object) {
       if (this.multiple) this.selectItem(item)
       else this.setValue(null)
 
@@ -558,17 +558,17 @@ export default VTextField.extend({
         this.$emit('focus')
       }
     },
-    onEnterDown () {
-      this.onBlur()
+    onEnterDown (e: Event) {
+      this.onBlur(e)
     },
-    onEscDown (e) {
+    onEscDown (e: Event) {
       e.preventDefault()
       if (this.isMenuActive) {
         e.stopPropagation()
         this.isMenuActive = false
       }
     },
-    onKeyPress (e) {
+    onKeyPress (e: KeyboardEvent) {
       if (this.multiple) return
 
       const KEYBOARD_LOOKUP_THRESHOLD = 1000 // milliseconds
@@ -584,7 +584,7 @@ export default VTextField.extend({
         this.setValue(this.returnObject ? item : this.getValue(item))
       }
     },
-    onKeyDown (e) {
+    onKeyDown (e: KeyboardEvent) {
       const keyCode = e.keyCode
 
       // If enter, space, up, or down is pressed, open menu
@@ -594,7 +594,7 @@ export default VTextField.extend({
         keyCodes.up, keyCodes.down
       ].includes(keyCode)) this.activateMenu()
 
-      if (this.isMenuActive && this.$refs.menu) this.$refs.menu.changeListIndex(e)
+      if (this.isMenuActive && this.$refs.menu) (this.$refs.menu as { [key: string]: any }).changeListIndex(e)
 
       // This should do something different
       if (keyCode === keyCodes.enter) return this.onEnterDown(e)
@@ -605,7 +605,7 @@ export default VTextField.extend({
       // If tab - select item or close menu
       if (keyCode === keyCodes.tab) return this.onTabDown(e)
     },
-    onMouseUp (e) {
+    onMouseUp (e: MouseEvent) {
       if (this.hasMouseDown) {
         const appendInner = this.$refs['append-inner']
 
@@ -615,7 +615,7 @@ export default VTextField.extend({
         if (this.isMenuActive &&
           appendInner &&
           (appendInner === e.target ||
-          appendInner.contains(e.target))
+          (appendInner as { [key: string]: any }).contains(e.target))
         ) {
           this.$nextTick(() => (this.isMenuActive = !this.isMenuActive))
         // If user is clicking in the container
@@ -644,10 +644,10 @@ export default VTextField.extend({
         }
       }
     },
-    onTabDown (e) {
+    onTabDown (e: KeyboardEvent) {
       const menuIndex = this.getMenuIndex()
 
-      const listTile = this.$refs.menu.tiles[menuIndex]
+      const listTile = (this.$refs.menu as { [key: string]: any }).tiles[menuIndex]
 
       // An item that is selected by
       // menu-index should toggled
@@ -668,7 +668,7 @@ export default VTextField.extend({
         this.blur(e)
       }
     },
-    selectItem (item) {
+    selectItem (item: object) {
       if (!this.multiple) {
         this.setValue(this.returnObject ? item : this.getValue(item))
         this.isMenuActive = false
@@ -677,7 +677,7 @@ export default VTextField.extend({
         const i = this.findExistingIndex(item)
 
         i !== -1 ? internalValue.splice(i, 1) : internalValue.push(item)
-        this.setValue(internalValue.map(i => {
+        this.setValue(internalValue.map((i: object) => {
           return this.returnObject ? i : this.getValue(i)
         }))
 
@@ -686,12 +686,12 @@ export default VTextField.extend({
         // selection
         this.$nextTick(() => {
           this.$refs.menu &&
-            this.$refs.menu.updateDimensions()
+            (this.$refs.menu as { [key: string]: any }).updateDimensions()
         })
       }
     },
-    setMenuIndex (index) {
-      this.$refs.menu && (this.$refs.menu.listIndex = index)
+    setMenuIndex (index: number) {
+      this.$refs.menu && ((this.$refs.menu as { [key: string]: any }).listIndex = index)
     },
     setSelectedItems () {
       const selectedItems = []
@@ -712,7 +712,7 @@ export default VTextField.extend({
 
       this.selectedItems = selectedItems
     },
-    setValue (value) {
+    setValue (value: any) {
       const oldValue = this.internalValue
       this.internalValue = value
       value !== oldValue && this.$emit('change', value)
