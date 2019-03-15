@@ -25,3 +25,10 @@
   .v-list-item__subtitle,
   .v-list-item__action-text
     color: map-deep-get($material, 'text', 'secondary')
+
+@mixin list-rtl()
+  &__item
+    &__title
+      text-align: right
+    &__content
+      text-align: right

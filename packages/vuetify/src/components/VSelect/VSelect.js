@@ -652,7 +652,7 @@ export default VTextField.extend({
       // menu-index should toggled
       if (
         listTile &&
-        listTile.className.indexOf('v-list__tile--highlighted') > -1 &&
+        listTile.className.indexOf('v-list-item--highlighted') > -1 &&
         this.isMenuActive &&
         menuIndex > -1
       ) {

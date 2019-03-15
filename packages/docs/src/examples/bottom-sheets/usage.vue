@@ -11,21 +11,21 @@
       </template>
       <v-list>
         <v-subheader>Open in</v-subheader>
-        <v-list-tile
+        <v-list-item
           v-for="tile in tiles"
           :key="tile.title"
           @click="sheet = false"
         >
-          <v-list-tile-avatar>
+          <v-list-item-avatar>
             <v-avatar size="32px" tile>
               <img
                 :src="`https://cdn.vuetifyjs.com/images/bottom-sheets/${tile.img}`"
                 :alt="tile.title"
               >
             </v-avatar>
-          </v-list-tile-avatar>
-          <v-list-tile-title>{{ tile.title }}</v-list-tile-title>
-        </v-list-tile>
+          </v-list-item-avatar>
+          <v-list-item-title>{{ tile.title }}</v-list-item-title>
+        </v-list-item>
       </v-list>
     </v-bottom-sheet>
   </div>

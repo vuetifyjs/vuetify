@@ -1,80 +1,79 @@
 <template>
-  <v-layout row>
-    <v-flex xs12 sm6 offset-sm3>
-      <v-card>
-        <v-toolbar color="teal" dark>
-          <v-app-bar-nav-icon></v-app-bar-nav-icon>
+  <v-card
+    max-width="500"
+    class="mx-auto"
+  >
+    <v-toolbar
+      color="deep-purple accent-4"
+      dark
+    >
+      <v-toolbar-side-icon></v-toolbar-side-icon>
 
-          <v-toolbar-title class="text-xs-center">New Chat</v-toolbar-title>
+      <v-toolbar-title>New Chat</v-toolbar-title>
 
-          <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
 
-          <v-btn icon>
-            <v-icon>search</v-icon>
-          </v-btn>
-        </v-toolbar>
+      <v-btn icon>
+        <v-icon>search</v-icon>
+      </v-btn>
+    </v-toolbar>
 
-        <v-list subheader>
-          <v-subheader>Recent chat</v-subheader>
-          <v-list-tile
-            v-for="item in items"
-            :key="item.title"
-            avatar
-            @click=""
-          >
-            <v-list-tile-avatar>
-              <img :src="item.avatar">
-            </v-list-tile-avatar>
+    <v-list subheader>
+      <v-subheader>Recent chat</v-subheader>
 
-            <v-list-tile-content>
-              <v-list-tile-title v-html="item.title"></v-list-tile-title>
-            </v-list-tile-content>
+      <v-list-item
+        v-for="item in items"
+        :key="item.title"
+        @click=""
+      >
+        <v-list-item-avatar>
+          <v-img :src="item.avatar"></v-img>
+        </v-list-item-avatar>
 
-            <v-list-tile-action>
-              <v-icon :color="item.active ? 'teal' : 'grey'">chat_bubble</v-icon>
-            </v-list-tile-action>
-          </v-list-tile>
-        </v-list>
+        <v-list-item-content>
+          <v-list-item-title v-text="item.title"></v-list-item-title>
+        </v-list-item-content>
 
-        <v-divider></v-divider>
+        <v-list-item-icon>
+          <v-icon :color="item.active ? 'deep-purple accent-4' : 'grey'">chat_bubble</v-icon>
+        </v-list-item-icon>
+      </v-list-item>
+    </v-list>
 
-        <v-list subheader>
-          <v-subheader>Previous chats</v-subheader>
+    <v-divider></v-divider>
 
-          <v-list-tile
-            v-for="item in items2"
-            :key="item.title"
-            avatar
-            @click=""
-          >
-            <v-list-tile-avatar>
-              <img :src="item.avatar">
-            </v-list-tile-avatar>
+    <v-list subheader>
+      <v-subheader>Previous chats</v-subheader>
 
-            <v-list-tile-content>
-              <v-list-tile-title v-html="item.title"></v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-        </v-list>
-      </v-card>
-    </v-flex>
-  </v-layout>
+      <v-list-item
+        v-for="item in items2"
+        :key="item.title"
+        @click=""
+      >
+        <v-list-item-avatar>
+          <v-img :src="item.avatar"></v-img>
+        </v-list-item-avatar>
+
+        <v-list-item-content>
+          <v-list-item-title v-text="item.title"></v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>
+  </v-card>
 </template>
 
 <script>
   export default {
-    data () {
-      return {
-        items: [
-          { active: true, title: 'Jason Oner', avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg' },
-          { active: true, title: 'Ranee Carlson', avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg' },
-          { title: 'Cindy Baker', avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg' },
-          { title: 'Ali Connors', avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg' }
-        ],
-        items2: [
-          { title: 'Travis Howard', avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg' }
-        ]
-      }
-    }
+    data: () => ({
+      items: [
+        { active: true, title: 'Jason Oner', avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg' },
+        { active: true, title: 'Ranee Carlson', avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg' },
+        { title: 'Cindy Baker', avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg' },
+        { title: 'Ali Connors', avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg' }
+      ],
+      items2: [
+        { title: 'Travis Howard', avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg' }
+      ]
+    })
   }
 </script>

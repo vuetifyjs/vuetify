@@ -51,13 +51,13 @@
             </template>
 
             <v-list class="grey lighten-3">
-              <v-list-tile
+              <v-list-item
                 v-for="item in more"
                 :key="item"
                 @click="addItem(item)"
               >
                 {{ item }}
-              </v-list-tile>
+              </v-list-item>
             </v-list>
           </v-menu>
         </v-tabs>

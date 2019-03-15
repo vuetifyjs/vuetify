@@ -1,10 +1,9 @@
 // Styles
-import '../../stylus/components/_lists.styl'
+import './VList.sass'
 import VListGroup from './VListGroup'
 
 // Mixins
 import Themeable from '../../mixins/themeable'
-import { provide as RegistrableProvide } from '../../mixins/registrable'
 
 // Types
 import mixins from '../../util/mixins'
@@ -13,7 +12,6 @@ import { VNode } from 'vue'
 type VListGroupInstance = InstanceType<typeof VListGroup>
 
 export default mixins(
-  RegistrableProvide('list'),
   Themeable
   /* @vue/component */
 ).extend({
@@ -21,13 +19,17 @@ export default mixins(
 
   provide (): object {
     return {
-      listClick: this.listClick
+      list: this
     }
   },
 
   props: {
     dense: Boolean,
+    disabled: Boolean,
     expand: Boolean,
+    flat: Boolean,
+    nav: Boolean,
+    shaped: Boolean,
     subheader: Boolean,
     threeLine: Boolean,
     twoLine: Boolean
@@ -41,6 +43,10 @@ export default mixins(
     classes (): object {
       return {
         'v-list--dense': this.dense,
+        'v-list--disabled': this.disabled,
+        'v-list--flat': this.flat,
+        'v-list--nav': this.nav,
+        'v-list--shaped': this.shaped,
         'v-list--subheader': this.subheader,
         'v-list--two-line': this.twoLine,
         'v-list--three-line': this.threeLine,

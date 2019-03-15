@@ -21,12 +21,12 @@
       solo
     >
       <template v-slot:no-data>
-        <v-list-tile>
-          <v-list-tile-title>
+        <v-list-item>
+          <v-list-item-title>
             Search for your favorite
             <strong>Cryptocurrency</strong>
-          </v-list-tile-title>
-        </v-list-tile>
+          </v-list-item-title>
+        </v-list-item>
       </template>
       <template v-slot:selection="{ item, selected }">
         <v-chip
@@ -39,19 +39,19 @@
         </v-chip>
       </template>
       <template v-slot:item="{ item }">
-        <v-list-tile-avatar
+        <v-list-item-avatar
           color="indigo"
           class="headline font-weight-light white--text"
         >
           {{ item.name.charAt(0) }}
-        </v-list-tile-avatar>
-        <v-list-tile-content>
-          <v-list-tile-title v-text="item.name"></v-list-tile-title>
-          <v-list-tile-sub-title v-text="item.symbol"></v-list-tile-sub-title>
-        </v-list-tile-content>
-        <v-list-tile-action>
+        </v-list-item-avatar>
+        <v-list-item-content>
+          <v-list-item-title v-text="item.name"></v-list-item-title>
+          <v-list-item-subtitle v-text="item.symbol"></v-list-item-subtitle>
+        </v-list-item-content>
+        <v-list-item-action>
           <v-icon>mdi-coin</v-icon>
-        </v-list-tile-action>
+        </v-list-item-action>
       </template>
     </v-autocomplete>
     <template v-slot:extension>

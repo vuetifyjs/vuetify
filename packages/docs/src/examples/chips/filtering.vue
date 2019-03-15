@@ -32,7 +32,7 @@
     </v-card-text>
 
     <v-list three-line>
-      <v-list-tile
+      <v-list-item
         v-for="(item, i) in searching"
         :key="i"
         ripple
@@ -45,15 +45,15 @@
           min-width="64"
         ></v-img>
 
-        <v-list-tile-content>
+        <v-list-item-content>
           <span
             class="text-uppercase font-weight-regular caption"
             v-text="item.category"
           ></span>
 
           <div v-text="item.title"></div>
-        </v-list-tile-content>
-      </v-list-tile>
+        </v-list-item-content>
+      </v-list-item>
     </v-list>
   </v-card>
 </template>

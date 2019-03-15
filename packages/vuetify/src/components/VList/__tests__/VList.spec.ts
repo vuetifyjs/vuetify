@@ -1,16 +1,35 @@
-import VList from '@/components/VList/VList'
-import { test } from '@/test'
+// Components
+import VList from '../VList'
 
-// TODO: Test actual behaviour instead of classes
-test('VList.js', ({ mount }) => {
+// Utilities
+import {
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+
+// Types
+import { ExtractVue } from '../../../util/mixins'
+
+describe('VList.ts', () => {
+  type Instance = ExtractVue<typeof VList>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+
+  beforeEach(() => {
+    mountFunction = (options = {}) => {
+      return mount(VList, {
+        ...options
+      })
+    }
+  })
+
   it('should render component and match snapshot', () => {
-    const wrapper = mount(VList)
+    const wrapper = mountFunction()
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render a dense component and match snapshot', () => {
-    const wrapper = mount(VList, {
+    const wrapper = mountFunction({
       propsData: {
         dense: true
       }
@@ -20,7 +39,7 @@ test('VList.js', ({ mount }) => {
   })
 
   it('should render a subheader component and match snapshot', () => {
-    const wrapper = mount(VList, {
+    const wrapper = mountFunction({
       propsData: {
         subheader: true
       }
@@ -30,7 +49,7 @@ test('VList.js', ({ mount }) => {
   })
 
   it('should render a threeLine component and match snapshot', () => {
-    const wrapper = mount(VList, {
+    const wrapper = mountFunction({
       propsData: {
         threeLine: true
       }
@@ -40,7 +59,7 @@ test('VList.js', ({ mount }) => {
   })
 
   it('should render a twoLine component and match snapshot', () => {
-    const wrapper = mount(VList, {
+    const wrapper = mountFunction({
       propsData: {
         twoLine: true
       }

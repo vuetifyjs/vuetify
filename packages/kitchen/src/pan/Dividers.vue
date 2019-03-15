@@ -9,15 +9,15 @@
       <core-section>
         <v-list two-line>
           <template v-for="index in 5">
-            <v-list-tile
+            <v-list-item
               :key="index"
               ripple
             >
-              <v-list-tile-content>
-                <v-list-tile-title>Item</v-list-tile-title>
-                <v-list-tile-sub-title>Some item</v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile>
+              <v-list-item-content>
+                <v-list-item-title>Item</v-list-item-title>
+                <v-list-item-subtitle>Some item</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
             <v-divider
               v-if="index + 1 <= 5"
               :key="`divider-${index}`"
@@ -114,20 +114,20 @@
                     inset
                   />
 
-                  <v-list-tile
+                  <v-list-item
                     v-else
                     :key="item.title"
                     avatar
                     ripple
                   >
-                    <v-list-tile-avatar>
+                    <v-list-item-avatar>
                       <img :src="item.avatar">
-                    </v-list-tile-avatar>
-                    <v-list-tile-content>
-                      <v-list-tile-title v-text="item.title" />
-                      <v-list-tile-sub-title v-text="item.subtitle" />
-                    </v-list-tile-content>
-                  </v-list-tile>
+                    </v-list-item-avatar>
+                    <v-list-item-content>
+                      <v-list-item-title v-text="item.title" />
+                      <v-list-item-subtitle v-text="item.subtitle" />
+                    </v-list-item-content>
+                  </v-list-item>
                 </template>
               </v-list>
             </v-card>
