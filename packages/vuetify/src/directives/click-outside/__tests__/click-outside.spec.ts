@@ -1,5 +1,5 @@
 // Directives
-import ClickOutside from '../click-outside'
+import ClickOutside from '../'
 
 function bootstrap (args?: object) {
   let registeredHandler

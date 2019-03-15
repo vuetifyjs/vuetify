@@ -2,7 +2,7 @@
 import Vue from 'vue'
 
 // Directives
-import Ripple from '../ripple'
+import Ripple from '../'
 
 // Utilities
 import {

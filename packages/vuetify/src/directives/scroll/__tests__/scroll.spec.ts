@@ -1,5 +1,5 @@
 // Directives
-import Scroll from '../scroll'
+import Scroll from '../'
 
 describe('scroll.ts', () => {
   it('shoud bind event on inserted (selector)', () => {

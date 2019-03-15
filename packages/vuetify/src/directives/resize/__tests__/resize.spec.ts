@@ -1,5 +1,5 @@
 // Directives
-import Resize from '../resize'
+import Resize from '../'
 
 describe('resize.ts', () => {
   it('should bind event on inserted', () => {
