@@ -30,10 +30,6 @@ export default mixins(
       type: [Number, String],
       default: 0.46
     },
-    lazy: {
-      type: Boolean,
-      default: true
-    },
     zIndex: {
       type: [Number, String],
       default: 1
@@ -61,10 +57,8 @@ export default mixins(
         ...this.themeClasses
       }
     },
-    computedOpacity (): string | number {
-      if (!this.isActive) return 0
-
-      return this.opacity
+    computedOpacity (): number {
+      return Number(this.isActive ? this.opacity : 0)
     },
     styles (): object {
       return {
@@ -74,7 +68,7 @@ export default mixins(
   },
 
   methods: {
-    genContent (): VNode {
+    genContent () {
       return this.$createElement('div', {
         staticClass: 'v-overlay__content'
       }, this.$slots.default)
