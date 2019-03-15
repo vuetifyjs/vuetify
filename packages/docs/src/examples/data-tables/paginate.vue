@@ -13,11 +13,11 @@
       <v-pagination v-model="page" :length="pageCount"></v-pagination>
       <v-text-field
         :value="itemsPerPage"
-        @input="itemsPerPage = $event"
         label="Items per page"
         type="number"
         min="-1"
         max="15"
+        @input="itemsPerPage = $event"
       ></v-text-field>
     </div>
   </div>

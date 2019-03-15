@@ -49,4 +49,6 @@ export interface VuetifyIcons {
   ratingFull?: string
   ratingHalf?: string
   loading?: string
+  first?: string
+  last?: string
 }

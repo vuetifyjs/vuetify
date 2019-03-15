@@ -195,7 +195,7 @@ export default VDataIterator.extend({
       const children: VNodeChildrenArrayContents = [this.genSlots('header', data)]
 
       if (!this.hideDefaultHeader) {
-        const scopedSlots = getPrefixedScopedSlots('header.', this.$scopedSlots)
+        const scopedSlots = getPrefixedScopedSlots('header.column.', this.$scopedSlots)
         children.push(this.$createElement(VDataTableHeader, {
           ...data,
           scopedSlots
