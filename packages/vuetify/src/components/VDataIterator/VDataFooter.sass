@@ -12,33 +12,35 @@
   .v-btn
     color: inherit
 
-    &:first-of-type
-      margin-right: 7px
-
-    &:last-of-type
-      margin-left: 7px
-
 // Elements
+.v-data-footer__icons-before
+  .v-btn:last-child
+    margin-right: 7px
+
+.v-data-footer__icons-after
+  .v-btn:first-child
+    margin-left: 7px
+
 .v-data-footer__pagination
-    display: block
-    text-align: center
-    margin: 0 32px 0 24px
+  display: block
+  text-align: center
+  margin: 0 32px 0 24px
 
 .v-data-footer__select
-    display: flex
-    align-items: center
-    justify-content: flex-end
-    margin-right: 14px
-    white-space: nowrap
+  display: flex
+  align-items: center
+  justify-content: flex-end
+  margin-right: 14px
+  white-space: nowrap
 
-    .v-select
-      flex: 0 1 0
-      margin: 13px 0 13px 34px
-      padding: 0
-      position: initial
+  .v-select
+    flex: 0 1 0
+    margin: 13px 0 13px 34px
+    padding: 0
+    position: initial
 
-    .v-select__selections
-      flex-wrap: nowrap
+  .v-select__selections
+    flex-wrap: nowrap
 
-      .v-select__selection--comma
-        font-size: 12px
+    .v-select__selection--comma
+      font-size: 12px

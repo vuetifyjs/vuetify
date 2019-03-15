@@ -46,7 +46,12 @@ export default VDataIterator.extend({
     dense: Boolean,
     headerProps: Object,
     calculateWidths: Boolean,
-    fixedHeader: Boolean
+    fixedHeader: Boolean,
+    headersLength: Number,
+    expandIcon: {
+      type: String,
+      default: '$vuetify.icons.expand'
+    }
   },
 
   data () {
@@ -352,7 +357,7 @@ export default VDataIterator.extend({
             'v-data-table__expand-icon--active': expanded
           },
           ...data
-        }, ['$vuetify.icons.expand']) // TODO: prop?
+        }, [this.expandIcon])
       }
 
       return this.$createElement(this.isMobile ? VMobileRow : VRow, {
@@ -383,9 +388,10 @@ export default VDataIterator.extend({
     genFooters (props: DataProps) {
       const data = {
         props: {
-          ...this.footerProps,
           options: props.options,
-          pagination: props.pagination
+          pagination: props.pagination,
+          itemsPerPageText: '$vuetify.dataTable.itemsPerPageText',
+          ...this.footerProps
         },
         on: {
           'update:options': (value: any) => props.updateOptions(value)
