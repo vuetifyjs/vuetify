@@ -52,7 +52,8 @@ export default mixins(
       right: 0,
       height: 0,
       width: 0
-    }
+    },
+    targetEl: null as Element | null
   }),
 
   computed: {
@@ -90,17 +91,24 @@ export default mixins(
 
   mounted () {
     this.updateTarget()
+
+    document.addEventListener('scroll', this.onScroll)
   },
 
   methods: {
     updateTarget () {
       if (!this.target) return
 
-      const target = document.querySelector(this.target)
-      if (!target) return
+      this.targetEl = document.querySelector(this.target)
+      if (!this.targetEl) return
 
-      this.rect = target.getBoundingClientRect();
-      (target as any).style.zIndex = 11
+      this.rect = this.targetEl.getBoundingClientRect();
+      (this.targetEl as any).style.zIndex = 11
+    },
+    onScroll () {
+      if (!this.targetEl) return
+
+      this.rect = this.targetEl.getBoundingClientRect()
     },
     closeConditional (): boolean {
       return !this.persistent && this.isActive
