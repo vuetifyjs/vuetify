@@ -12,6 +12,7 @@ import Themeable from '../../mixins/themeable'
 import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots } from '../../util/helpers'
 import { DataProps } from '../VData/VData'
 import { PropValidator } from 'vue/types/options'
+import { breaking, removed } from '../../util/console'
 
 /* @vue/component */
 export default mixins(Themeable).extend({
@@ -89,6 +90,35 @@ export default mixins(Themeable).extend({
       const expanded = !keys.length ? [] : this.items.filter(i => keys.includes(String(getObjectValueByPath(i, this.itemKey))))
       this.$emit('update:expanded', expanded)
     }
+  },
+
+  created () {
+    const breakingProps = [
+      ['disable-initial-sort', 'sort-by'],
+      ['filter', 'custom-filter'],
+      ['pagination', 'options'],
+      ['total-items', 'server-items-length'],
+      ['hide-actions', 'hide-default-footer'],
+      ['rows-per-page-items', 'footer-props.items-per-page-options'],
+      ['rows-per-page-text', 'footer-props.items-per-page-text'],
+      ['prev-icon', 'footer-props.prev-icon'],
+      ['next-icon', 'footer-props.next-icon']
+    ]
+
+    breakingProps.forEach(([original, replacement]) => {
+      if (this.$attrs.hasOwnProperty(original)) breaking(original, replacement)
+    })
+
+    const removedProps = [
+      'expand',
+      'content-class',
+      'content-props',
+      'content-tag'
+    ]
+
+    removedProps.forEach(prop => {
+      if (this.$attrs.hasOwnProperty(prop)) removed(prop)
+    })
   },
 
   methods: {

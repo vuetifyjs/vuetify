@@ -17,11 +17,12 @@ import VProgressLinear from '../VProgressLinear'
 import VRow from './VRow'
 import VRowGroup from './VRowGroup'
 import VSimpleCheckbox from '../VCheckbox/VSimpleCheckbox'
+import VSimpleTable from './VSimpleTable'
+import VMobileRow from './VMobileRow'
 
 // Helpers
 import { deepEqual, getObjectValueByPath, compareFn, getPrefixedScopedSlots } from '../../util/helpers'
-import VSimpleTable from './VSimpleTable'
-import VMobileRow from './VMobileRow'
+import { breaking } from '../../util/console'
 
 /* @vue/component */
 export default VDataIterator.extend({
@@ -72,6 +73,18 @@ export default VDataIterator.extend({
     isMobile (): boolean {
       return this.$vuetify.breakpoint.width < this.mobileBreakpoint
     }
+  },
+
+  created () {
+    const breakingProps = [
+      ['sort-icon', 'header-props.sort-icon'],
+      ['hide-headers', 'hide-default-hedader'],
+      ['select-all', 'show-select']
+    ]
+
+    breakingProps.forEach(([original, replacement]) => {
+      if (this.$attrs.hasOwnProperty(original)) breaking(original, replacement)
+    })
   },
 
   mounted () {
