@@ -69,7 +69,7 @@ export default mixins(header).extend({
           }
         }
 
-        if (this.dataTable.showGroupBy) {
+        if (this.showGroupBy) {
           children.push(this.genGroupByToggle(header))
         }
       }

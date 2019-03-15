@@ -28,10 +28,6 @@ import { breaking } from '../../util/console'
 export default VDataIterator.extend({
   name: 'v-data-table',
 
-  provide (): object {
-    return { dataTable: this }
-  },
-
   props: {
     headers: {
       type: Array
@@ -173,11 +169,15 @@ export default VDataIterator.extend({
           ...this.headerProps,
           headers: this.computedHeaders,
           options: props.options,
-          mobile: this.isMobile
+          mobile: this.isMobile,
+          showGroupBy: this.showGroupBy,
+          someItems: this.someItems,
+          everyItem: this.everyItem
         },
         on: {
           sort: props.sort,
-          group: props.group
+          group: props.group,
+          'toggle-select-all': this.toggleSelectAll
         }
       }
 

@@ -26,8 +26,6 @@ interface options extends Vue {
 }
 
 export default mixins<options>().extend({
-  inject: ['dataTable'],
-
   props: {
     headers: {
       type: Array as PropType<TableHeader[]>,
@@ -49,18 +47,21 @@ export default mixins<options>().extend({
     sortIcon: {
       type: String,
       default: '$vuetify.icons.sort'
-    }
+    },
+    everyItem: Boolean,
+    someItems: Boolean,
+    showGroupBy: Boolean
   },
 
   methods: {
     genSelectAll () {
       const data = {
         props: {
-          value: this.dataTable.everyItem,
-          indeterminate: !this.dataTable.everyItem && this.dataTable.someItems
+          value: this.everyItem,
+          indeterminate: !this.everyItem && this.someItems
         },
         on: {
-          input: (v: boolean) => this.dataTable.toggleSelectAll(v)
+          input: (v: boolean) => this.$emit('toggle-select-all', v)
         }
       }
 
