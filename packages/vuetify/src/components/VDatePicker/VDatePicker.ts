@@ -13,6 +13,7 @@ import Picker from '../../mixins/picker'
 import { pad, createNativeLocaleFormatter } from './util'
 import isDateAllowed, { AllowedDateFunction } from './util/isDateAllowed'
 import { consoleWarn } from '../../util/console'
+import { daysInMonth } from '../VCalendar/util/timestamp'
 import mixins from '../../util/mixins'
 
 // Types
@@ -275,7 +276,7 @@ export default mixins(
       if (this.type === 'month') {
         this.tableDate = `${value}`
       } else {
-        this.tableDate = `${value}-${pad(this.tableMonth + 1)}`
+        this.tableDate = `${value}-${pad((this.tableMonth || 0) + 1)}`
       }
       this.activePicker = 'MONTH'
       if (this.reactive && !this.readonly && !this.multiple && this.isDateAllowed(this.inputDate)) {
@@ -286,6 +287,10 @@ export default mixins(
       this.inputYear = parseInt(value.split('-')[0], 10)
       this.inputMonth = parseInt(value.split('-')[1], 10) - 1
       if (this.type === 'date') {
+        if (this.inputDay) {
+          this.inputDay = Math.min(this.inputDay, daysInMonth(this.inputYear, this.inputMonth + 1))
+        }
+
         this.tableDate = value
         this.activePicker = 'DATE'
         if (this.reactive && !this.readonly && !this.multiple && this.isDateAllowed(this.inputDate)) {

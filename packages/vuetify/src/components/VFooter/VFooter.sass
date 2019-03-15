@@ -1,0 +1,33 @@
+@import '../../styles/styles.sass'
+@import './_mixins.sass'
+@import './_variables.scss'
+
+// Theme
+.v-footer.theme--light
+  +footer-theme($material-light)
+.v-footer.theme--dark
+  +footer-theme($material-dark)
+
+// Block
+.v-footer
+  align-items: center
+  display: flex
+  flex: 0 1 auto !important // Don't let devs break their code
+  flex-wrap: wrap
+  padding: $footer-padding
+  transition: background-color .2s map-get($transition, 'fast-out-slow-in')
+
+// Modifier
+.v-footer--absolute,
+.v-footer--fixed
+  z-index: 3
+
+.v-footer--absolute
+  position: absolute
+  width: 100%
+
+.v-footer--fixed
+  position: fixed
+
+.v-footer--padless
+  padding: $footer-padless-padding

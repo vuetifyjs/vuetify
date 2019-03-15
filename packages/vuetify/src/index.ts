@@ -1,13 +1,19 @@
+// Core Features
+import * as components from './components'
+import * as directives from './directives'
+
 // Services
 import * as services from './services'
 
 // Styles
 import './stylus/app.styl'
+import './styles/main.sass'
 
 // Utilties
 import { install } from './install'
 
 // Types
+import { VuetifyUseOptions } from 'vuetify/types'
 import {
   VuetifyService,
   VuetifyServiceContract
@@ -62,7 +68,13 @@ export default class Vuetify {
   }
 }
 
-Vuetify.install = install
+Vuetify.install = (Vue, args?: VuetifyUseOptions) => {
+  Vue.use(install, {
+    components,
+    directives,
+    ...args
+  })
+}
 Vuetify.version = __VUETIFY_VERSION__
 
 if (typeof window !== 'undefined' && window.Vue) {

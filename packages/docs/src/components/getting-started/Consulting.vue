@@ -11,15 +11,15 @@
         John, is available for the following consulting services:
       </p>
       <v-list class="transparent">
-        <v-list-tile
+        <v-list-item
           v-for="(tile, i) in tiles"
           :key="i"
         >
-          <v-list-tile-action>
+          <v-list-item-action>
             <v-icon>mdi-record</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title v-text="tile" />
-        </v-list-tile>
+          </v-list-item-action>
+          <v-list-item-title v-text="tile" />
+        </v-list-item>
       </v-list>
     </v-flex>
     <v-flex
@@ -88,6 +88,6 @@
 
 <style lang="stylus">
   #consulting
-    .v-list__tile
+    .v-list-item
       height: 32px !important
 </style>

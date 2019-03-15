@@ -18,17 +18,17 @@
 
       <v-card>
         <v-list>
-          <v-list-tile avatar>
-            <v-list-tile-avatar>
+          <v-list-item avatar>
+            <v-list-item-avatar>
               <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
-            </v-list-tile-avatar>
+            </v-list-item-avatar>
 
-            <v-list-tile-content>
-              <v-list-tile-title>John Leider</v-list-tile-title>
-              <v-list-tile-sub-title>Founder of Vuetify.js</v-list-tile-sub-title>
-            </v-list-tile-content>
+            <v-list-item-content>
+              <v-list-item-title>John Leider</v-list-item-title>
+              <v-list-item-subtitle>Founder of Vuetify.js</v-list-item-subtitle>
+            </v-list-item-content>
 
-            <v-list-tile-action>
+            <v-list-item-action>
               <v-btn
                 :class="fav ? 'red--text' : ''"
                 icon
@@ -36,26 +36,26 @@
               >
                 <v-icon>favorite</v-icon>
               </v-btn>
-            </v-list-tile-action>
-          </v-list-tile>
+            </v-list-item-action>
+          </v-list-item>
         </v-list>
 
         <v-divider></v-divider>
 
         <v-list>
-          <v-list-tile>
-            <v-list-tile-action>
+          <v-list-item>
+            <v-list-item-action>
               <v-switch v-model="message" color="purple"></v-switch>
-            </v-list-tile-action>
-            <v-list-tile-title>Enable messages</v-list-tile-title>
-          </v-list-tile>
+            </v-list-item-action>
+            <v-list-item-title>Enable messages</v-list-item-title>
+          </v-list-item>
 
-          <v-list-tile>
-            <v-list-tile-action>
+          <v-list-item>
+            <v-list-item-action>
               <v-switch v-model="hints" color="purple"></v-switch>
-            </v-list-tile-action>
-            <v-list-tile-title>Enable hints</v-list-tile-title>
-          </v-list-tile>
+            </v-list-item-action>
+            <v-list-item-title>Enable hints</v-list-item-title>
+          </v-list-item>
         </v-list>
 
         <v-card-actions>
