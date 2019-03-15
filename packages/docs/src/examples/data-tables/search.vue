@@ -15,13 +15,7 @@
       :headers="headers"
       :items="desserts"
       :search="search"
-    >
-      <template v-slot:no-results>
-        <v-alert :value="true" color="error" icon="warning" class="ma-2">
-          Your search for "{{ search }}" found no results.
-        </v-alert>
-      </template>
-    </v-data-table>
+    ></v-data-table>
   </v-card>
 </template>
 

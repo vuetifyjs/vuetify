@@ -2,20 +2,11 @@
   <v-data-table
     :headers="headers"
     :items="desserts"
+    :sort-by="['calories', 'fat']"
+    :sort-desc="[false, true]"
+    multi-sort
     class="elevation-1"
-  >
-    <template v-slot:items="props">
-      <td>{{ props.item.name }}</td>
-      <td class="text-xs-right">{{ props.item.calories }}</td>
-      <td class="text-xs-right">{{ props.item.fat }}</td>
-      <td class="text-xs-right">{{ props.item.carbs }}</td>
-      <td class="text-xs-right">{{ props.item.protein }}</td>
-      <td class="text-xs-right">{{ props.item.iron }}</td>
-    </template>
-    <template v-slot:pageText="props">
-      Lignes {{ props.pageStart }} - {{ props.pageStop }} de {{ props.itemsLength }}
-    </template>
-  </v-data-table>
+  ></v-data-table>
 </template>
 
 <script>
@@ -38,7 +29,7 @@
         desserts: [
           {
             name: 'Frozen Yogurt',
-            calories: 159,
+            calories: 200,
             fat: 6.0,
             carbs: 24,
             protein: 4.0,
@@ -46,7 +37,7 @@
           },
           {
             name: 'Ice cream sandwich',
-            calories: 237,
+            calories: 200,
             fat: 9.0,
             carbs: 37,
             protein: 4.3,
@@ -54,7 +45,7 @@
           },
           {
             name: 'Eclair',
-            calories: 262,
+            calories: 300,
             fat: 16.0,
             carbs: 23,
             protein: 6.0,
@@ -62,7 +53,7 @@
           },
           {
             name: 'Cupcake',
-            calories: 305,
+            calories: 300,
             fat: 3.7,
             carbs: 67,
             protein: 4.3,
@@ -70,7 +61,7 @@
           },
           {
             name: 'Gingerbread',
-            calories: 356,
+            calories: 400,
             fat: 16.0,
             carbs: 49,
             protein: 3.9,
@@ -78,7 +69,7 @@
           },
           {
             name: 'Jelly bean',
-            calories: 375,
+            calories: 400,
             fat: 0.0,
             carbs: 94,
             protein: 0.0,
@@ -86,7 +77,7 @@
           },
           {
             name: 'Lollipop',
-            calories: 392,
+            calories: 400,
             fat: 0.2,
             carbs: 98,
             protein: 0,
@@ -94,7 +85,7 @@
           },
           {
             name: 'Honeycomb',
-            calories: 408,
+            calories: 400,
             fat: 3.2,
             carbs: 87,
             protein: 6.5,
@@ -102,7 +93,7 @@
           },
           {
             name: 'Donut',
-            calories: 452,
+            calories: 500,
             fat: 25.0,
             carbs: 51,
             protein: 4.9,
@@ -110,7 +101,7 @@
           },
           {
             name: 'KitKat',
-            calories: 518,
+            calories: 500,
             fat: 26.0,
             carbs: 65,
             protein: 7,

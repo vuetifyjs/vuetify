@@ -18,15 +18,12 @@
   export default {
     data () {
       return {
-        search: '',
         sortBy: 'fat',
         descending: false,
-        selected: [],
         headers: [
           {
             text: 'Dessert (100g serving)',
             align: 'left',
-            sortable: false,
             value: 'name'
           },
           { text: 'Calories', value: 'calories' },
@@ -126,7 +123,6 @@
       nextSort () {
         let index = this.headers.findIndex(h => h.value === this.sortBy)
         index = (index + 1) % this.headers.length
-        index = index === 0 ? index + 1 : index
         this.sortBy = this.headers[index].value
       }
     }
