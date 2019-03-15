@@ -1,45 +1,57 @@
 @import "../../styles/styles.sass"
 @import "./_mixins.sass"
 
-.v-feature-discovery.theme--light
-  +feature-discovery-theme($material-light)
-.v-feature-discovery.theme--dark
-  +feature-discovery-theme($material-dark)
+// .v-feature-discovery.theme--light
+//   +feature-discovery-theme($material-light)
+// .v-feature-discovery.theme--dark
+//   +feature-discovery-theme($material-dark)
 
+ // Block
 .v-feature-discovery
   overflow: hidden
-  transition: $primary-transition
   position: fixed
-  height: 400px
-  width: 400px
   z-index: 10
 
-  &:not(.v-feature-discovery--flat)
-    +elevation(4)
+// Element
+.v-feature-discovery__backdrop
+  border-radius: 100%
+  height: 100%
+  width: 100%
+  opacity: 0.96
+  transform: scale(0)
+  transition: $primary-transition
+  +elevation(4)
 
-  &--active
-    transform: translate3d(0, 0, 0) !important
+.v-feature-discovery__highlight
+  border-radius: 100%
+  position: absolute
+  top: calc(50% - (140px / 2))
+  left: calc(50% - (140px / 2))
+  background: white
+  height: 140px
+  width: 140px
 
-  &--top-left
-    transform: translate3d(-100%, -100%, 0)
-    border-radius: 0 0 100% 0
-    top: 0
-    left: 0
+  &:before
+    content: ''
+    border-radius: inherit
+    position: absolute
+    left: -20px
+    top: -20px
+    height: 180px
+    width: 180px
+    animation: pulse-animation 1.4s cubic-bezier(0.24, 0, 0.38, 1) infinite
+    background: white
 
-  &--top-right
-    transform: translate3d(100%, -100%, 0)
-    border-radius: 0 0 0 100%
-    top: 0
-    right: 0
+// Modifier
+.v-feature-discovery--active
+  .v-feature-discovery__backdrop
+    transform: scale(1)
 
-  &--bottom-left
-    transform: translate3d(-100%, 100%, 0)
-    border-radius: 0 100% 0 0
-    bottom: 0
-    left: 0
+@keyframes pulse-animation
+  from
+    opacity: 1
+    transform: scale(.2)
 
-  &--bottom-right
-    transform: translate3d(100%, 100%, 0)
-    border-radius: 100% 0 0 0
-    bottom: 0
-    right: 0
+  to
+    opacity: 0
+    transform: scale(1)
