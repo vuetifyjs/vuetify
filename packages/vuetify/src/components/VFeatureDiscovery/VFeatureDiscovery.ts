@@ -113,18 +113,18 @@ export default mixins(
     closeConditional (): boolean {
       return !this.persistent && this.isActive
     },
-    genBackdrop () {
+    genBackdrop (): VNode {
       return this.$createElement('div', this.setBackgroundColor(this.color, {
         staticClass: 'v-feature-discovery__backdrop'
       }), this.$slots.default)
     },
-    genChildren () {
+    genChildren (): VNode[] {
       return [
         this.genBackdrop(),
         this.genHighlight()
       ]
     },
-    genHighlight () {
+    genHighlight (): VNode {
       return this.$createElement('div', {
         staticClass: 'v-feature-discovery__highlight'
       }, this.$slots.default)
