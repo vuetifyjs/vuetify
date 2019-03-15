@@ -64,12 +64,16 @@ export default VDataIterator.extend({
 
   computed: {
     computedHeaders (): TableHeader[] {
+      if (!this.headers) return []
       const headers = this.headers.filter(h => h.value === undefined || !this.internalGroupBy.find(v => v === h.value))
 
       this.showSelect && headers.unshift({ text: '', value: 'data-table-select', sortable: false, width: '1px' })
       this.showExpand && headers.unshift({ text: '', value: 'data-table-expand', sortable: false, width: '1px' })
 
       return headers
+    },
+    computedHeadersLength (): number {
+      return this.headersLength || this.computedHeaders.length
     },
     isMobile (): boolean {
       return this.$vuetify.breakpoint.width < this.mobileBreakpoint
@@ -111,7 +115,7 @@ export default VDataIterator.extend({
       this.widths = Array.from(this.$el.querySelectorAll('th')).map(e => e.clientWidth)
     },
     customFilterWithColumns (items: any[], search: string) {
-      const filterableHeaders = this.headers.filter(h => !!h.filter)
+      const filterableHeaders = this.computedHeaders.filter(h => !!h.filter)
       if (filterableHeaders.length) {
         items = items.filter(i => filterableHeaders.every(h => h.filter!(getObjectValueByPath(i, h.value), this.search, i)))
       }
@@ -160,13 +164,15 @@ export default VDataIterator.extend({
       const th = this.$createElement('th', {
         staticClass: 'column',
         attrs: {
-          colspan: this.computedHeaders.length
+          colspan: this.computedHeadersLength
         }
       }, [progress])
 
-      return this.$createElement('tr', {
+      const tr = this.$createElement('tr', {
         staticClass: 'v-data-table__progress'
       }, [th])
+
+      return this.$createElement('thead', [tr])
     },
     genHeaders (props: DataProps) {
       const data = {
@@ -204,7 +210,7 @@ export default VDataIterator.extend({
       return this.$createElement('tr', [
         this.$createElement('td', {
           attrs: {
-            colspan: this.computedHeaders.length
+            colspan: this.computedHeadersLength
           }
         }, content)
       ])
@@ -271,7 +277,7 @@ export default VDataIterator.extend({
         const column = this.$createElement('td', {
           staticClass: 'text-xs-left',
           attrs: {
-            colspan: this.computedHeaders.length
+            colspan: this.computedHeadersLength
           }
         }, [toggle, `${props.options.groupBy[0]}: ${group}`, remove])
 
