@@ -5,7 +5,6 @@ import './VFeatureDiscovery.sass'
 import Colorable from '../../mixins/colorable'
 import Toggleable from '../../mixins/toggleable'
 import Themeable from '../../mixins/themeable'
-import { factory as PositionableFactory } from '../../mixins/positionable'
 
 // Types
 import { VNode } from 'vue'
@@ -38,7 +37,7 @@ export default mixins(
       validator: (v: string | number) => !isNaN(parseInt(v))
     },
     target: {
-      default: null
+      default: null as string | null
     },
     value: {
       default: true
@@ -87,9 +86,10 @@ export default mixins(
     if (!this.target) return
 
     const target = document.querySelector(this.target)
+    if (!target) return
 
-    this.rect = target.getBoundingClientRect()
-    target.style.zIndex = 11
+    this.rect = target.getBoundingClientRect();
+    (target as any).style.zIndex = 11
   },
 
   methods: {
