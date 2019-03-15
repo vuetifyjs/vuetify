@@ -3,13 +3,13 @@
 @import './_mixins.sass'
 
 // Theme
-.v-expansion-panel.theme--light
+.v-expansion-panels.theme--light
   +expansion-panel-theme($material-light)
-.v-expansion-panel.theme--dark
+.v-expansion-panels.theme--dark
   +expansion-panel-theme($material-dark)
 
 // Block
-.v-expansion-panel
+.v-expansion-panels
   border-radius: $expansion-panel-border-radius
   display: flex
   flex-wrap: wrap
@@ -18,6 +18,9 @@
   padding: 0
   width: 100%
   z-index: 1
+
+  > *
+    cursor: auto
 
   > *:first-child
     border-top-left-radius: inherit
@@ -28,13 +31,14 @@
     border-bottom-right-radius: inherit
 
 // Element
-.v-expansion-panel-item
+.v-expansion-panel
   flex: 1 0 100%
   max-width: 100%
   position: relative
-  transition: .2s map-get($transition, 'fast-in-slow-out')
+  // border-radius: $expansion-panel-border-radius
+  transition: .3s map-get($transition, 'swing')
 
-  &:before
+  &::before
     border-radius: inherit
     content: ''
     position: absolute
@@ -44,32 +48,51 @@
     right: 0
     z-index: -1
     +elevationTransition()
-    +elevation(1)
+    +elevation(2)
 
-  &:not(:first-child):after
+  &:not(:first-child)::after
     content: ''
-    left: 0
-    top: 0
-    height: 1px
-    transition: .2s background-color map-get($transition, 'fast-out-slow-in')
     position: absolute
+    top: 0
+    left: 0
     right: 0
-
-  &:not(.v-expansion-panel-item--has-mousedown)
-    .v-expansion-panel-item__header:focus:before
-      opacity: 0.12
+    border-top: thin solid
+    transition: .2s border-color map-get($transition, 'fast-out-slow-in'), .2s opacity map-get($transition, 'fast-out-slow-in')
 
   &--disabled
     .v-expansion-panel-item__header
       pointer-events: none
 
-  &--active:not(.v-expansion-panel-item--disable-icon-rotate)
-    > .v-expansion-panel-item__header
-      .v-expansion-panel-item__header__icon .v-icon
+  &--active
+    &:not(:first-child),
+    + .v-expansion-panel
+      margin-top: $expansion-panel-active-margin
+      &::after
+        opacity: 0
+
+    .v-expansion-panel-header
+      min-height: $expansion-panel-active-header-min-height
+
+    .v-expansion-panel-header__icon
+      &:not(.v-expansion-panel-header__icon--disable-rotate) .v-icon
         transform: rotate(-180deg)
 
+.v-expansion-panels:not(.v-expansion-panels--accordion)
+  .v-expansion-panel
+    &--active
+      border-radius: $expansion-panel-border-radius
 
-.v-expansion-panel-item__header__icon
+      + .v-expansion-panel
+        border-top-left-radius: $expansion-panel-border-radius
+        border-top-right-radius: $expansion-panel-border-radius
+    &--next-active
+      border-bottom-left-radius: $expansion-panel-border-radius
+      border-bottom-right-radius: $expansion-panel-border-radius
+      .v-expansion-panel-header
+        border-bottom-left-radius: inherit
+        border-bottom-right-radius: inherit
+
+.v-expansion-panel-header__icon
   display: inline-flex
   margin-top: -4px
   margin-left: auto
@@ -80,16 +103,22 @@
     margin-left: initial
     margin-right: auto
 
-.v-expansion-panel-item__header
+.v-expansion-panel-header
   align-items: center
-  cursor: pointer
   display: flex
-  font-size: $expansion-panel-item-header-font-size
+  font-size: $expansion-panel-header-font-size
   line-height: 1
-  min-height: $expansion-panel-item-header-min-height
+  width: 100%
+  min-height: $expansion-panel-header-min-height
   outline: none
-  padding: $expansion-panel-item-header-padding
+  padding: $expansion-panel-header-padding
+  border-top-left-radius: inherit
+  border-top-right-radius: inherit
   position: relative
+  text-align: left
+  +rtl()
+    text-align: right
+  transition: .3s min-height map-get($transition, 'swing')
 
   &:before
     background-color: currentColor
@@ -101,77 +130,45 @@
     left: 0
     position: absolute
     right: 0
-    transition: .3s opacity map-get($transition, 'fast-out-slow-in')
+    transition: .3s opacity map-get($transition, 'swing')
 
-  > *:not(.v-expansion-panel-item__header__icon)
+  > *:not(.v-expansion-panel-header__icon)
     flex: 1 1 auto
 
-.v-expansion-panel-item__body
-  > .v-card
-    border-radius: 0
-    +elevation(0)
+.v-expansion-panel-content
+  display: flex
+  &__wrap
+    padding: $expansion-panel-content-padding
+    flex: 1 1 auto
 
 // Modifier
-.v-expansion-panel--focusable
-  .v-expansion-panel-item--active
-    .v-expansion-panel-item__header
-      &:before
+.v-expansion-panels--focusable
+  .v-expansion-panel-header:focus
+    &::before
+      opacity: 0.2
+  .v-expansion-panel--active
+    .v-expansion-panel-header
+      &::before
         opacity: 0.12
 
       &:focus
-        &:before
+        &::before
           opacity: 0.2
 
-.v-expansion-panel--accordion,
-.v-expansion-panel--popout,
-.v-expansion-panel--inset
-  .v-expansion-panel-item--active
-    margin: $expansion-panel-item-active-margin 0
+.v-expansion-panels--accordion
+  .v-expansion-panel
+    margin-top: 0
+    &::after
+      opacity: 1
 
-    + .v-expansion-panel-item--active
-      margin-top: 0
-
-    &:first-child
-      margin-top: 0 0 $expansion-panel-item-active-margin
-
-.v-expansion-panel--popout,
-.v-expansion-panel--inset,
-.v-expansion-panel--accordion
-  .v-expansion-panel-item
-    > *:first-child
-      border-top-left-radius: inherit
-      border-top-right-radius: inherit
-
-    > *:last-child
-      border-bottom-left-radius: inherit
-      border-bottom-right-radius: inherit
-
-  .v-expansion-panel-item__body
-    > .v-card
-      border-radius: inherit
-
-  .v-expansion-panel-item--active
-    border-radius: 4px
-
-    &:before
-      +elevation(2)
-
-    &:after,
-    + .v-expansion-panel-item:after
-      opacity: 0
-
-.v-expansion-panel--popout
-  .v-expansion-panel-item
+.v-expansion-panels--popout
+  .v-expansion-panel
     max-width: $expansion-panel-popout-max-width
+    &--active
+      max-width: $expansion-panel-popout-active-max-width
 
-.v-expansion-panel--inset
-  .v-expansion-panel-item
+.v-expansion-panels--inset
+  .v-expansion-panel
     max-width: $expansion-panel-inset-max-width
-
-.v-expansion-panel--popout
-  .v-expansion-panel-item--active
-    max-width: $expansion-panel-popout-active-max-width
-
-.v-expansion-panel--inset
-  .v-expansion-panel-item--active
-    max-width: $expansion-panel-inset-active-max-width
+    &--active
+      max-width: $expansion-panel-inset-active-max-width

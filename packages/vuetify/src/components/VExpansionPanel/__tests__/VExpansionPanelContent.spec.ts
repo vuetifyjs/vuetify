@@ -7,7 +7,7 @@ import {
   Wrapper
 } from '@vue/test-utils'
 
-describe('VExpansionPanelContent.ts', () => {
+describe('VExpansionPanelContent', () => {
   type Instance = InstanceType<typeof VExpansionPanelContent>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

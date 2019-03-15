@@ -6,14 +6,16 @@ function generateWarning (child: string, parent: string) {
   return () => consoleWarn(`The ${child} component must be used inside a ${parent}`)
 }
 
-export type Registrable<T extends string> = VueConstructor<Vue & {
-  [K in T]: {
+export type Registrable<T extends string, C extends VueConstructor | null = null> = VueConstructor<Vue & {
+  [K in T]: C extends VueConstructor ? InstanceType<C> : {
     register (...props: any[]): void
     unregister (self: any): void
   }
 }>
 
-export function inject<T extends string> (namespace: T, child?: string, parent?: string): Registrable<T> {
+export function inject<
+T extends string, C extends VueConstructor | null = null
+> (namespace: T, child?: string, parent?: string): Registrable<T, C> {
   const defaultImpl = child && parent ? {
     register: generateWarning(child, parent),
     unregister: generateWarning(child, parent)
@@ -30,17 +32,17 @@ export function inject<T extends string> (namespace: T, child?: string, parent?:
   })
 }
 
-export function provide (namespace: string) {
+export function provide (namespace: string, self = false) {
   return Vue.extend({
     name: 'registrable-provide',
 
-    methods: {
+    methods: self ? {} : {
       register: null,
       unregister: null
     },
-    provide () {
+    provide (): object {
       return {
-        [namespace]: {
+        [namespace]: self ? this : {
           register: this.register,
           unregister: this.unregister
         }

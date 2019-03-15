@@ -1,56 +1,93 @@
-// Styles
-import './VExpansionPanel.sass'
+// Components
+import VExpansionPanels from './VExpansionPanels'
+import VExpansionPanelHeader from './VExpansionPanelHeader'
+import VExpansionPanelContent from './VExpansionPanelContent'
 
-// Extensions
-import { BaseItemGroup } from '../VItemGroup/VItemGroup'
+// Mixins
+import { factory as GroupableFactory } from '../../mixins/groupable'
+import { provide as RegistrableProvide } from '../../mixins/registrable'
 
 // Utilities
-import { breaking } from '../../util/console'
+import { getSlot } from '../../util/helpers'
+import mixins from '../../util/mixins'
 
-/* @vue/component */
-export default BaseItemGroup.extend({
+// Types
+import { VNode } from 'vue'
+
+type VExpansionPanelHeaderInstance = InstanceType<typeof VExpansionPanelHeader>
+type VExpansionPanelContentInstance = InstanceType<typeof VExpansionPanelContent>
+
+export default mixins(
+  GroupableFactory<'expansionPanels', typeof VExpansionPanels>('expansionPanels', 'v-expansion-panel', 'v-expansion-panels'),
+  RegistrableProvide('expansionPanel', true)
+  /* @vue/component */
+).extend({
   name: 'v-expansion-panel',
 
-  provide (): object {
-    return {
-      expansionPanel: this
-    }
+  props: {
+    disabled: Boolean,
+    readonly: Boolean
   },
 
-  props: {
-    accordion: Boolean,
-    disabled: Boolean,
-    readonly: Boolean,
-    expand: Boolean,
-    focusable: Boolean,
-    inset: Boolean,
-    popout: Boolean
+  data () {
+    return {
+      header: null as VExpansionPanelHeaderInstance | null,
+      content: null as VExpansionPanelContentInstance | null,
+      nextIsActive: false
+    }
   },
 
   computed: {
     classes (): object {
       return {
-        ...BaseItemGroup.options.computed.classes.call(this),
-        'v-expansion-panel': true,
-        'v-expansion-panel--accordion': this.accordion,
-        'v-expansion-panel--focusable': this.focusable,
-        'v-expansion-panel--popout': this.popout,
-        'v-expansion-panel--inset': this.inset
+        'v-expansion-panel--active': this.isActive,
+        'v-expansion-panel--next-active': this.nextIsActive,
+        'v-expansion-panel--disabled': this.isDisabled,
+        ...this.groupClasses
       }
+    },
+    isDisabled (): boolean {
+      return this.expansionPanels.disabled || this.disabled
+    },
+    isReadonly (): boolean {
+      return this.expansionPanels.readonly || this.readonly
     }
   },
 
-  created () {
-    /* istanbul ignore next */
-    if (this.expand) breaking('expand', 'multiple')
+  methods: {
+    registerContent (vm: VExpansionPanelContentInstance) {
+      this.content = vm
+    },
+    unregisterContent (vm: VExpansionPanelContentInstance) {
+      this.content = null
+    },
+    registerHeader (vm: VExpansionPanelHeaderInstance) {
+      this.header = vm
+      vm.$on('click', this.onClick)
+    },
+    unregisterHeader (vm: VExpansionPanelHeaderInstance) {
+      this.header = null
+    },
+    onClick (e: MouseEvent) {
+      if (e.detail) this.header!.$el.blur()
 
-    /* istanbul ignore next */
-    if (
-      Array.isArray(this.value) &&
-      this.value.length > 0 &&
-      typeof this.value[0] === 'boolean'
-    ) {
-      breaking('<v-expansion-panel :value="[true, false]">', '<v-expansion-panel :value="[0]">')
+      this.$emit('click', e)
+
+      this.isReadonly || this.toggle()
+    },
+    toggle () {
+      if (this.content) this.content.isBooted = true
+      this.$nextTick(() => this.$emit('change'))
     }
+  },
+
+  render (h): VNode {
+    return h('div', {
+      staticClass: 'v-expansion-panel',
+      class: this.classes,
+      attrs: {
+        'aria-expanded': String(this.isActive)
+      }
+    }, getSlot(this))
   }
 })

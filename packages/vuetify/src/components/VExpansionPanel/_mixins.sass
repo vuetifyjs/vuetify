@@ -1,13 +1,13 @@
 @mixin expansion-panel-theme($material)
-  .v-expansion-panel-item
+  .v-expansion-panel
     background-color: map-get($material, 'cards')
     color: map-deep-get($material, 'text', 'primary')
 
-    &:after
-      background-color: map-get($material, 'dividers')
+    &::after
+      border-color: map-get($material, 'dividers')
 
-    .v-expansion-panel-item__header
-      .v-expansion-panel-item__header__icon
+    .v-expansion-panel-header
+      .v-expansion-panel-header__icon
         .v-icon
           color: map-deep-get($material, 'icons', 'active')
 

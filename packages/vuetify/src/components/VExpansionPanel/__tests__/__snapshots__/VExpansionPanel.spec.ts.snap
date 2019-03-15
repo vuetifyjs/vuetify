@@ -1,8 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VExpansionPanel.ts should work 1`] = `
+exports[`VExpansionPanel should hide actions and match snapshot 1`] = `
 
-<div class="v-item-group theme--light v-expansion-panel">
+<div aria-expanded="false"
+     class="v-expansion-panel"
+     hideactions="true"
+>
+</div>
+
+`;
+
+exports[`VExpansionPanel should hide actions and match snapshot 2`] = `
+
+<div aria-expanded="false"
+     class="v-expansion-panel"
+     hideactions="true"
+>
 </div>
 
 `;
