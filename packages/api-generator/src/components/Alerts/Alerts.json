@@ -1,7 +1,6 @@
 {
   "events": {
     "input": {
-      "name": "input",
       "value": "boolean"
     }
   },
@@ -60,5 +59,7 @@
       "default": "undefined"
     }
   },
-  "slots": ["default"]
+  "slots": {
+    "default": {}
+  }
 }
