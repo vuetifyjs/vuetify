@@ -9,9 +9,9 @@
         <v-btn @click="model1 = true">Show</v-btn>
 
         <v-layout justify-space-around align-center>
-          <v-sheet class="ma-5" color="green" width="40" height="40" id="t1v1" />
-          <v-sheet class="ma-5" color="blue" width="80" height="80" id="t1v2" />
-          <v-sheet class="ma-5" color="red" width="120" height="120" id="t1v3" />
+          <v-sheet id="t1v1" class="ma-5" color="green" width="40" height="40" />
+          <v-sheet id="t1v2" class="ma-5" color="blue" width="80" height="80" />
+          <v-sheet id="t1v3" class="ma-5" color="red" width="120" height="120" />
         </v-layout>
 
         <v-feature-discovery
@@ -40,7 +40,7 @@
         </v-layout>
 
         <v-layout justify-center>
-          <v-sheet class="ma-5" color="warning" width="40" height="40" id="t2" />
+          <v-sheet id="t2" class="ma-5" color="warning" width="40" height="40" />
         </v-layout>
 
         <v-feature-discovery
@@ -72,7 +72,7 @@
         <v-btn @click="model3 = true">Show</v-btn>
 
         <v-layout justify-center>
-          <v-sheet class="ma-5" color="warning" width="40" height="40" id="t3" />
+          <v-sheet id="t3" class="ma-5" color="warning" width="40" height="40" />
         </v-layout>
 
         <v-feature-discovery
