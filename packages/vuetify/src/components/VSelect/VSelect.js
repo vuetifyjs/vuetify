@@ -22,6 +22,7 @@ import { camelize, getPropertyFromItem, keyCodes } from '../../util/helpers'
 import { consoleError, consoleWarn } from '../../util/console'
 
 export const defaultMenuProps = {
+  eager: true,
   closeOnClick: false,
   closeOnContentClick: false,
   openOnClick: false,

@@ -20,7 +20,6 @@ test('VTooltip', ({ mount, compileToFunctions }) => {
     })
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
-
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
@@ -51,7 +50,6 @@ test('VTooltip', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.data().isActive).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with min/max width and match snapshot', async () => {
@@ -68,7 +66,6 @@ test('VTooltip', ({ mount, compileToFunctions }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with zIndex prop and match snapshot', async () => {
@@ -79,7 +76,6 @@ test('VTooltip', ({ mount, compileToFunctions }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should display tooltip after mouseenter and hide after mouseleave', async () => {
@@ -110,7 +106,6 @@ test('VTooltip', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
     expect(setTimeout.mock.calls[1][1]).toBe(321)
     expect(cb).toHaveBeenCalledWith(false)
-
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })

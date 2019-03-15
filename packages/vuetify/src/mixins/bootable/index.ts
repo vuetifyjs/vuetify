@@ -1,6 +1,6 @@
 
 // Utilities
-import { breaking } from '../util/console'
+import { breaking } from '../../util/console'
 
 // Types
 import Vue, { VNode } from 'vue'

@@ -19,8 +19,6 @@ exports[`VListGroup.ts should render component and match snapshot 1`] = `
   <div class="v-list-group__items"
        style="display: none;"
   >
-    <div>
-    </div>
   </div>
 </div>
 
