@@ -1,5 +1,5 @@
 import { VNode, VNodeDirective } from 'vue'
-import { consoleWarn } from '../util/console'
+import { consoleWarn } from '../../util/console'
 
 function transform (el: HTMLElement, value: string) {
   el.style['transform'] = value
