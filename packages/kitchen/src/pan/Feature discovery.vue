@@ -5,16 +5,20 @@
 
       <core-title>Basic</core-title>
       <core-section>
-        <v-switch v-model="top1" label="Top" />
-        <v-switch v-model="left1" label="Left" />
+        <v-select v-model="t1" :items="targets1" />
         <v-btn @click="model1 = true">Show</v-btn>
+
+        <v-layout justify-space-around align-center>
+          <v-sheet class="ma-5" color="green" width="40" height="40" id="t1v1" />
+          <v-sheet class="ma-5" color="blue" width="80" height="80" id="t1v2" />
+          <v-sheet class="ma-5" color="red" width="120" height="120" id="t1v3" />
+        </v-layout>
 
         <v-feature-discovery
           v-model="model1"
           class="white--text"
           color="primary"
-          :top="top1"
-          :left="left1"
+          :target="t1"
         >
           <h2 slot="title">Hey! New feature...</h2>
           <p slot="text">
@@ -30,13 +34,20 @@
 
       <core-title>Flat</core-title>
       <core-section>
-        <v-switch v-model="flat2" label="Flat" />
-        <v-btn @click="model2 = true">Show</v-btn>
+        <v-layout justify-space-around>
+          <v-switch v-model="flat2" label="Flat" />
+          <v-btn @click="model2 = true">Show</v-btn>
+        </v-layout>
+
+        <v-layout justify-center>
+          <v-sheet class="ma-5" color="warning" width="40" height="40" id="t2" />
+        </v-layout>
 
         <v-feature-discovery
           v-model="model2"
           class="white--text"
           color="primary"
+          target="#t2"
           :flat="flat2"
         >
           <h2 slot="title">Hey! New feature...</h2>
@@ -60,11 +71,16 @@
         />
         <v-btn @click="model3 = true">Show</v-btn>
 
+        <v-layout justify-center>
+          <v-sheet class="ma-5" color="warning" width="40" height="40" id="t3" />
+        </v-layout>
+
         <v-feature-discovery
           v-model="model3"
           class="white--text"
           color="primary"
           :size="size3"
+          target="#t3"
         >
           <h2 slot="title">Hey! New feature...</h2>
           <p slot="text">
@@ -87,8 +103,8 @@
 
     data: () => ({
       model1: false,
-      top1: false,
-      left1: false,
+      t1: '#t1v2',
+      targets1: ['#t1v1', '#t1v2', '#t1v3'],
       model2: false,
       flat2: true,
       model3: false,
