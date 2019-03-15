@@ -5,8 +5,12 @@ import '../../stylus/components/_autocompletes.styl'
 import VSelect, { defaultMenuProps as VSelectMenuProps } from '../VSelect/VSelect'
 import VTextField from '../VTextField/VTextField'
 
-// Utils
+// Components
+import VMenu from '../VMenu/VMenu'
+
+// Utilities
 import { keyCodes } from '../../util/helpers'
+import mixins, { ExtractVue } from '../../util/mixins'
 
 const defaultMenuProps = {
   ...VSelectMenuProps,
@@ -15,8 +19,20 @@ const defaultMenuProps = {
   transition: false
 }
 
+// Types
+const baseMixins = mixins(VSelect)
+
+interface options extends ExtractVue<typeof baseMixins> {
+  $refs: {
+    menu: InstanceType<typeof VMenu>
+    input: HTMLInputElement
+    prefix: HTMLElement
+    suffix: HTMLElement
+  }
+}
+
 /* @vue/component */
-export default VSelect.extend({
+export default baseMixins.extend<options>().extend({
   name: 'v-autocomplete',
 
   props: {
@@ -30,7 +46,7 @@ export default VSelect.extend({
     },
     filter: {
       type: Function,
-      default: (item, queryText, itemText) => {
+      default: (item: any, queryText: string, itemText: string) => {
         return itemText.toLocaleLowerCase().indexOf(queryText.toLocaleLowerCase()) > -1
       }
     },
@@ -49,13 +65,15 @@ export default VSelect.extend({
     }
   },
 
-  data: vm => ({
-    attrsInput: null,
-    lazySearch: vm.searchInput
-  }),
+  data () {
+    return {
+      attrsInput: null,
+      lazySearch: this.searchInput as null | undefined
+    }
+  },
 
   computed: {
-    classes () {
+    classes (): object {
       return Object.assign({}, VSelect.options.computed.classes.call(this), {
         'v-autocomplete': true,
         'v-autocomplete--is-selecting-index': this.selectedIndex > -1
@@ -72,11 +90,6 @@ export default VSelect.extend({
         ? this.filteredItems.some(item => !this.hasItem(item))
         : this.filteredItems.length > 0
     },
-    /**
-     * The range of the current input text
-     *
-     * @return {Number}
-     */
     currentRange () {
       if (this.selectedItem == null) return 0
 
@@ -91,7 +104,7 @@ export default VSelect.extend({
       get () {
         return this.lazySearch
       },
-      set (val) {
+      set (val: any) {
         this.lazySearch = val
 
         this.$emit('update:searchInput', val)
@@ -136,7 +149,7 @@ export default VSelect.extend({
       })
     },
     listData () {
-      const data = VSelect.options.computed.listData.call(this)
+      const data = VSelect.options.computed.listData.call(this) as any
 
       Object.assign(data.props, {
         items: this.virtualizedItems,
@@ -153,12 +166,8 @@ export default VSelect.extend({
   },
 
   watch: {
-    filteredItems (val) {
-      this.onFilteredItemsChanged(val)
-    },
-    internalValue () {
-      this.setSearch()
-    },
+    filteredItems: 'onFilteredItemsChanged',
+    internalValue: 'setSearch',
     isFocused (val) {
       if (val) {
         this.$refs.input &&
@@ -189,12 +198,8 @@ export default VSelect.extend({
     searchInput (val) {
       this.lazySearch = val
     },
-    internalSearch (val) {
-      this.onInternalSearchChanged(val)
-    },
-    itemText () {
-      this.updateSelf()
-    }
+    internalSearch: 'onInternalSearchChanged',
+    itemText: 'updateSelf'
   },
 
   created () {
@@ -202,24 +207,25 @@ export default VSelect.extend({
   },
 
   methods: {
-    onFilteredItemsChanged (val) {
+    onFilteredItemsChanged (val: never[]) {
       this.setMenuIndex(-1)
 
       this.$nextTick(() => {
         this.setMenuIndex(val.length > 0 && (val.length === 1 || this.autoSelectFirst) ? 0 : -1)
       })
     },
-    onInternalSearchChanged (val) {
+    onInternalSearchChanged () {
       this.updateMenuDimensions()
     },
     updateMenuDimensions () {
       if (this.isMenuActive &&
         this.$refs.menu
       ) {
-        this.$refs.menu.updateDimensions()
+        // Type from menuable is not making it through
+        (this.$refs.menu as any).updateDimensions()
       }
     },
-    changeSelectedIndex (keyCode) {
+    changeSelectedIndex (keyCode: number) {
       // Do not allow changing of selectedIndex
       // when search is dirty
       if (this.searchIsDirty) return
@@ -277,6 +283,10 @@ export default VSelect.extend({
     genInput () {
       const input = VTextField.options.methods.genInput.call(this)
 
+      input.data = input.data || {}
+      input.data.attrs = input.data.attrs || {}
+      input.data.domProps = input.data.domProps || {}
+
       input.data.attrs.role = 'combobox'
       input.data.domProps.value = this.internalSearch
 
@@ -301,20 +311,25 @@ export default VSelect.extend({
       // will cause updateSelf to
       // be called emptying search
     },
-    onInput (e) {
-      if (this.selectedIndex > -1) return
+    onInput (e: Event) {
+      if (
+        this.selectedIndex > -1 ||
+        !e.target
+      ) return
+
+      const target = e.target as HTMLInputElement
 
       // If typing and menu is not currently active
-      if (e.target.value) {
+      if (target.value) {
         this.activateMenu()
         if (!this.isAnyValueAllowed) this.setMenuIndex(0)
       }
 
-      this.mask && this.resetSelections(e.target)
-      this.internalSearch = e.target.value
-      this.badInput = e.target.validity && e.target.validity.badInput
+      this.mask && this.resetSelections(target)
+      this.internalSearch = target.value
+      this.badInput = target.validity && target.validity.badInput
     },
-    onKeyDown (e) {
+    onKeyDown (e: KeyboardEvent) {
       const keyCode = e.keyCode
 
       VSelect.options.methods.onKeyDown.call(this, e)
@@ -325,7 +340,7 @@ export default VSelect.extend({
       // proper location
       this.changeSelectedIndex(keyCode)
     },
-    onTabDown (e) {
+    onTabDown (e: KeyboardEvent) {
       VSelect.options.methods.onTabDown.call(this, e)
       this.updateSelf()
     },
@@ -370,7 +385,7 @@ export default VSelect.extend({
         this.setSearch()
       }
     },
-    hasItem (item) {
+    hasItem (item: any) {
       return this.selectedValues.indexOf(this.getValue(item)) > -1
     }
   }

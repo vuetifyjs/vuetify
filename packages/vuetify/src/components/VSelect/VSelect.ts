@@ -17,10 +17,10 @@ import Filterable from '../../mixins/filterable'
 // Directives
 import ClickOutside from '../../directives/click-outside'
 
-// Helpers
+// Utilities
 import { camelize, getPropertyFromItem, keyCodes } from '../../util/helpers'
 import { consoleError, consoleWarn } from '../../util/console'
-import mixins from '../../util/mixins'
+import mixins, { ExtractVue } from '../../util/mixins'
 import { PropValidator } from 'vue/types/options'
 import { VNode, VNodeDirective } from 'vue'
 
@@ -34,9 +34,23 @@ export const defaultMenuProps = {
 
 // Types
 type ItemProperty = PropValidator<string | (string | number)[] | ((item: object, fallback?: any) => any)>
+const baseMixins = mixins(
+  VTextField,
+  Comparable,
+  Filterable
+)
+
+interface options extends ExtractVue<typeof baseMixins> {
+  $refs: {
+    menu: InstanceType<typeof VMenu>
+    input: HTMLInputElement
+    prefix: HTMLElement
+    suffix: HTMLElement
+  }
+}
 
 /* @vue/component */
-export default mixins(VTextField, Comparable, Filterable).extend({
+export default baseMixins.extend<options>().extend({
   name: 'v-select',
 
   directives: {
