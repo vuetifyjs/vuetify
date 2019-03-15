@@ -33,7 +33,7 @@ test('detachable.js', ({ mount }) => {
 
     const detach = wrapper.find(localMock)[0]
 
-    expect(detach.vm.hasDetached).toBe(true)
+    expect(detach.vm.hasDetached).toBe(false)
 
     wrapper.destroy()
   })
@@ -44,9 +44,7 @@ test('detachable.js', ({ mount }) => {
       attachToDocument: true,
       slots: {
         default: [{
-          render: h => h(localMock, {
-            props: { lazy: true }
-          })
+          render: h => h(localMock)
         }]
       }
     })
@@ -72,8 +70,6 @@ test('detachable.js', ({ mount }) => {
         }]
       }
     })
-
-    expect('[Vuetify] Unable to locate target [data-app]').toHaveBeenTipped()
 
     expect(wrapper.vm.initDetach()).toBe(undefined)
 

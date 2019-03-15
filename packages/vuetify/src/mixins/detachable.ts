@@ -77,7 +77,7 @@ export default mixins<options &
   },
 
   mounted () {
-    !this.lazy && this.initDetach()
+    this.eager && this.initDetach()
   },
 
   deactivated () {
