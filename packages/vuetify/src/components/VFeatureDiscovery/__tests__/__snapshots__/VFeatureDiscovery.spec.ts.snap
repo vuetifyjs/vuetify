@@ -2,22 +2,14 @@
 
 exports[`FeatureDiscovery.ts should render correctly 1`] = `
 
-<div class="v-feature-discovery v-feature-discovery--active v-feature-discovery--bottom-right theme--light primary"
-     style="height: 400px; width: 400px;"
+<div class="v-feature-discovery v-feature-discovery--active v-feature-discovery--movable theme--light"
+     style="left: -200px; top: -200px; height: 400px; width: 400px;"
 >
-  <div class="v-feature-discovery-outer-container layout row wrap fill-height justify-end align-end">
-    <div class="v-feature-discovery-container flex fill-height"
-         style="max-width: 340px; max-height: 320px;"
-    >
-      <div class="v-feature-discovery-inner-container layout pa-2 column fill-height">
-        <div class="v-feature-discovery-title flex d-flex text-xs-center ml-4 mt-3 align-end">
-        </div>
-        <div class="v-feature-discovery-text flex d-flex text-xs-center align-center">
-        </div>
-        <div class="v-feature-discovery-actions flex d-flex text-xs-center">
-        </div>
-      </div>
-    </div>
+  <div class="v-feature-discovery__backdrop elevation-4 primary">
+  </div>
+  <div class="v-feature-discovery__highlight"
+       style="height: 35.35533905932738px; width: 35.35533905932738px;"
+  >
   </div>
 </div>
 
@@ -25,114 +17,14 @@ exports[`FeatureDiscovery.ts should render correctly 1`] = `
 
 exports[`FeatureDiscovery.ts should render correctly when flat 1`] = `
 
-<div class="v-feature-discovery v-feature-discovery--flat v-feature-discovery--active v-feature-discovery--bottom-right theme--light primary"
-     style="height: 400px; width: 400px;"
+<div class="v-feature-discovery v-feature-discovery--flat v-feature-discovery--active v-feature-discovery--movable theme--light"
+     style="left: -200px; top: -200px; height: 400px; width: 400px;"
 >
-  <div class="v-feature-discovery-outer-container layout row wrap fill-height justify-end align-end">
-    <div class="v-feature-discovery-container flex fill-height"
-         style="max-width: 340px; max-height: 320px;"
-    >
-      <div class="v-feature-discovery-inner-container layout pa-2 column fill-height">
-        <div class="v-feature-discovery-title flex d-flex text-xs-center ml-4 mt-3 align-end">
-        </div>
-        <div class="v-feature-discovery-text flex d-flex text-xs-center align-center">
-        </div>
-        <div class="v-feature-discovery-actions flex d-flex text-xs-center">
-        </div>
-      </div>
-    </div>
+  <div class="v-feature-discovery__backdrop primary">
   </div>
-</div>
-
-`;
-
-exports[`FeatureDiscovery.ts should render in different positions 1`] = `
-
-<div class="v-feature-discovery v-feature-discovery--active v-feature-discovery--top-left theme--light primary"
-     style="height: 400px; width: 400px;"
->
-  <div class="v-feature-discovery-outer-container layout row wrap fill-height justify-start align-baseline">
-    <div class="v-feature-discovery-container flex fill-height"
-         style="max-width: 340px; max-height: 320px;"
-    >
-      <div class="v-feature-discovery-inner-container layout pa-2 column fill-height">
-        <div class="v-feature-discovery-title flex d-flex text-xs-center align-end">
-        </div>
-        <div class="v-feature-discovery-text flex d-flex text-xs-center align-center">
-        </div>
-        <div class="v-feature-discovery-actions flex d-flex text-xs-center mr-5">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-`;
-
-exports[`FeatureDiscovery.ts should render in different positions 2`] = `
-
-<div class="v-feature-discovery v-feature-discovery--active v-feature-discovery--bottom-left theme--light primary"
-     style="height: 400px; width: 400px;"
->
-  <div class="v-feature-discovery-outer-container layout row wrap fill-height justify-start align-end">
-    <div class="v-feature-discovery-container flex fill-height"
-         style="max-width: 340px; max-height: 320px;"
-    >
-      <div class="v-feature-discovery-inner-container layout pa-2 column fill-height">
-        <div class="v-feature-discovery-title flex d-flex text-xs-center mr-4 align-end">
-        </div>
-        <div class="v-feature-discovery-text flex d-flex text-xs-center align-center">
-        </div>
-        <div class="v-feature-discovery-actions flex d-flex text-xs-center">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-`;
-
-exports[`FeatureDiscovery.ts should render in different positions 3`] = `
-
-<div class="v-feature-discovery v-feature-discovery--active v-feature-discovery--top-right theme--light primary"
-     style="height: 400px; width: 400px;"
->
-  <div class="v-feature-discovery-outer-container layout row wrap fill-height justify-end align-baseline">
-    <div class="v-feature-discovery-container flex fill-height"
-         style="max-width: 340px; max-height: 320px;"
-    >
-      <div class="v-feature-discovery-inner-container layout pa-2 column fill-height">
-        <div class="v-feature-discovery-title flex d-flex text-xs-center align-end">
-        </div>
-        <div class="v-feature-discovery-text flex d-flex text-xs-center align-center">
-        </div>
-        <div class="v-feature-discovery-actions flex d-flex text-xs-center ml-5">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-`;
-
-exports[`FeatureDiscovery.ts should render in different positions 4`] = `
-
-<div class="v-feature-discovery v-feature-discovery--active v-feature-discovery--bottom-right theme--light primary"
-     style="height: 400px; width: 400px;"
->
-  <div class="v-feature-discovery-outer-container layout row wrap fill-height justify-end align-end">
-    <div class="v-feature-discovery-container flex fill-height"
-         style="max-width: 340px; max-height: 320px;"
-    >
-      <div class="v-feature-discovery-inner-container layout pa-2 column fill-height">
-        <div class="v-feature-discovery-title flex d-flex text-xs-center ml-4 mt-3 align-end">
-        </div>
-        <div class="v-feature-discovery-text flex d-flex text-xs-center align-center">
-        </div>
-        <div class="v-feature-discovery-actions flex d-flex text-xs-center">
-        </div>
-      </div>
-    </div>
+  <div class="v-feature-discovery__highlight"
+       style="height: 35.35533905932738px; width: 35.35533905932738px;"
+  >
   </div>
 </div>
 
@@ -140,22 +32,14 @@ exports[`FeatureDiscovery.ts should render in different positions 4`] = `
 
 exports[`FeatureDiscovery.ts should toggle 1`] = `
 
-<div class="v-feature-discovery v-feature-discovery--active v-feature-discovery--bottom-right theme--light primary"
-     style="height: 400px; width: 400px;"
+<div class="v-feature-discovery v-feature-discovery--active v-feature-discovery--movable theme--light"
+     style="left: -200px; top: -200px; height: 400px; width: 400px;"
 >
-  <div class="v-feature-discovery-outer-container layout row wrap fill-height justify-end align-end">
-    <div class="v-feature-discovery-container flex fill-height"
-         style="max-width: 340px; max-height: 320px;"
-    >
-      <div class="v-feature-discovery-inner-container layout pa-2 column fill-height">
-        <div class="v-feature-discovery-title flex d-flex text-xs-center ml-4 mt-3 align-end">
-        </div>
-        <div class="v-feature-discovery-text flex d-flex text-xs-center align-center">
-        </div>
-        <div class="v-feature-discovery-actions flex d-flex text-xs-center">
-        </div>
-      </div>
-    </div>
+  <div class="v-feature-discovery__backdrop elevation-4 primary">
+  </div>
+  <div class="v-feature-discovery__highlight"
+       style="height: 35.35533905932738px; width: 35.35533905932738px;"
+  >
   </div>
 </div>
 
@@ -163,22 +47,14 @@ exports[`FeatureDiscovery.ts should toggle 1`] = `
 
 exports[`FeatureDiscovery.ts should toggle 2`] = `
 
-<div class="v-feature-discovery v-feature-discovery--bottom-right theme--light primary"
-     style="height: 400px; width: 400px;"
+<div class="v-feature-discovery v-feature-discovery--movable theme--light"
+     style="left: -200px; top: -200px; height: 400px; width: 400px; display: none;"
 >
-  <div class="v-feature-discovery-outer-container layout row wrap fill-height justify-end align-end">
-    <div class="v-feature-discovery-container flex fill-height"
-         style="max-width: 340px; max-height: 320px;"
-    >
-      <div class="v-feature-discovery-inner-container layout pa-2 column fill-height">
-        <div class="v-feature-discovery-title flex d-flex text-xs-center ml-4 mt-3 align-end">
-        </div>
-        <div class="v-feature-discovery-text flex d-flex text-xs-center align-center">
-        </div>
-        <div class="v-feature-discovery-actions flex d-flex text-xs-center">
-        </div>
-      </div>
-    </div>
+  <div class="v-feature-discovery__backdrop elevation-4 primary">
+  </div>
+  <div class="v-feature-discovery__highlight"
+       style="height: 35.35533905932738px; width: 35.35533905932738px;"
+  >
   </div>
 </div>
 
