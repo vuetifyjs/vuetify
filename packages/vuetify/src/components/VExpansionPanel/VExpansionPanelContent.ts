@@ -37,13 +37,13 @@ export default baseMixins.extend<options>().extend({
   },
 
   beforeDestroy () {
-    this.expansionPanel.unregisterContent(this)
+    this.expansionPanel.unregisterContent()
   },
 
   render (h): VNode {
     return h(VExpandTransition, [
       h('div', {
-        class: 'v-expansion-panel-content',
+        staticClass: 'v-expansion-panel-content',
         directives: [{
           name: 'show',
           value: this.isActive

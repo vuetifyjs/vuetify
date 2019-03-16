@@ -26,12 +26,12 @@ export default baseMixins.extend<options>().extend({
   name: 'v-expansion-panel-header',
 
   props: {
+    disableIconRotate: Boolean,
     expandIcon: {
       type: String,
       default: '$vuetify.icons.expand'
     },
     hideActions: Boolean,
-    disableIconRotate: Boolean,
     ripple: {
       type: [Boolean, Object],
       default: false
@@ -64,7 +64,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   beforeDestroy () {
-    this.expansionPanel.unregisterHeader(this)
+    this.expansionPanel.unregisterHeader()
   },
 
   methods: {

@@ -31,8 +31,8 @@ export default mixins(
 
   data () {
     return {
-      header: null as VExpansionPanelHeaderInstance | null,
       content: null as VExpansionPanelContentInstance | null,
+      header: null as VExpansionPanelHeaderInstance | null,
       nextIsActive: false
     }
   },
@@ -58,14 +58,14 @@ export default mixins(
     registerContent (vm: VExpansionPanelContentInstance) {
       this.content = vm
     },
-    unregisterContent (vm: VExpansionPanelContentInstance) {
+    unregisterContent () {
       this.content = null
     },
     registerHeader (vm: VExpansionPanelHeaderInstance) {
       this.header = vm
       vm.$on('click', this.onClick)
     },
-    unregisterHeader (vm: VExpansionPanelHeaderInstance) {
+    unregisterHeader () {
       this.header = null
     },
     onClick (e: MouseEvent) {

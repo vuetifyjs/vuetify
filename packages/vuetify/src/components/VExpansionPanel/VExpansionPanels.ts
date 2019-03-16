@@ -23,12 +23,12 @@ export default BaseItemGroup.extend({
   props: {
     accordion: Boolean,
     disabled: Boolean,
-    readonly: Boolean,
     /** @deprecated */
     expand: Boolean,
     focusable: Boolean,
     inset: Boolean,
-    popout: Boolean
+    popout: Boolean,
+    readonly: Boolean
   },
 
   computed: {
@@ -38,8 +38,8 @@ export default BaseItemGroup.extend({
         'v-expansion-panels': true,
         'v-expansion-panels--accordion': this.accordion,
         'v-expansion-panels--focusable': this.focusable,
-        'v-expansion-panels--popout': this.popout,
-        'v-expansion-panels--inset': this.inset
+        'v-expansion-panels--inset': this.inset,
+        'v-expansion-panels--popout': this.popout
       }
     }
   },
