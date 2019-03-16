@@ -1,23 +1,159 @@
-import { test } from '@/test'
-import { keyCodes } from '@/util/helpers'
-import VSelect from '@/components/VSelect/VSelect'
-import VChip from '@/components/VChip'
+// Components
+import VSelect from '../VSelect'
 
-test('VSelect2', ({ mount, compileToFunctions }) => {
-  const app = document.createElement('div')
-  app.setAttribute('data-app', true)
-  document.body.appendChild(app)
+// Utilities
+import { keyCodes } from '../../../util/helpers'
+import {
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+
+describe('.ts', () => {
+  type Instance = InstanceType<typeof VSelect>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+
+  beforeEach(() => {
+    mountFunction = (options = {}) => {
+      return mount(VSelect, {
+        ...options
+      })
+    }
+  })
+
+  it('should use scoped slot for selection generation', () => {
+    const wrapper = mountFunction({
+      render (h) {
+        return h(VSelect, {
+          attrs: {
+            items: ['foo', 'bar'],
+            value: 'foo'
+          },
+          scopedSlots: {
+            selection: ({ item }) => {
+              return h('div', item + ' - from slot')
+            }
+          }
+        })
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should toggle menu on icon click', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['foo', 'bar'],
+        offsetY: true
+      }
+    })
+
+    const icon = wrapper.find('.v-icon')
+    const slot = wrapper.find('.v-input__slot')
+
+    expect(wrapper.vm.isMenuActive).toBe(false)
+
+    slot.trigger('click')
+    expect(wrapper.vm.isMenuActive).toBe(true)
+
+    slot.trigger('click')
+    expect(wrapper.vm.isMenuActive).toBe(true)
+
+    // Mock mouseup event with a target of
+    // the inner icon element
+    const event = new Event('mouseup')
+    Object.defineProperty(event, 'target', { writable: false, value: icon.element })
+
+    wrapper.vm.hasMouseDown = true
+    slot.element.dispatchEvent(event)
+
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isMenuActive).toBe(false)
+  })
+
+  it('should calculate the counter value', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['foo'],
+        value: 'foo'
+      }
+    })
+
+    expect(wrapper.vm.counterValue).toBe(3)
+
+    wrapper.setProps({
+      items: [{
+        text: 'foobarbaz',
+        value: 'foo'
+      }]
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.counterValue).toBe(9)
+
+    wrapper.setProps({
+      items: ['foo', 'bar', 'baz'],
+      multiple: true,
+      value: ['foo', 'bar']
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.counterValue).toBe(2)
+  })
+
+  it('should emit a single change event', async () => {
+    const wrapper = mountFunction({
+      attachToDocument: true,
+      propsData: {
+        attach: true,
+        items: ['foo', 'bar']
+      }
+    })
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    const menu = wrapper.find('.v-input__slot')
+
+    menu.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    wrapper.vm.selectItem('foo')
+    await wrapper.vm.$nextTick()
+
+    wrapper.vm.blur()
+    await wrapper.vm.$nextTick()
+
+    expect(change.mock.calls).toEqual([['foo']])
+  })
+
+  it('should not emit change event when clicked on the selected item', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['foo', 'bar']
+      }
+    })
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    wrapper.vm.selectItem('foo')
+    await wrapper.vm.$nextTick()
+
+    wrapper.vm.selectItem('foo')
+    await wrapper.vm.$nextTick()
+
+    expect(change.mock.calls).toHaveLength(1)
+  })
 
   // Inspired by https://github.com/vuetifyjs/vuetify/pull/1425 - Thanks @kevmo314
   it('should open the select when focused and enter, space, up or down are pressed', async () => {
-    const wrapper = mount(VSelect, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
         items: ['foo', 'bar']
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     for (const key of ['up', 'down', 'space', 'enter']) {
       input.trigger('focus')
@@ -32,7 +168,7 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
   })
 
   it('should not open the select when readonly and focused and enter, space, up or down are pressed', async () => {
-    const wrapper = mount(VSelect, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
         items: ['foo', 'bar'],
@@ -40,7 +176,7 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     for (const key of ['up', 'down', 'space', 'enter']) {
       input.trigger('focus')
@@ -54,7 +190,7 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
   })
 
   it('should clear input value', async () => {
-    const wrapper = mount(VSelect, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
         clearable: true,
@@ -79,7 +215,7 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
   })
 
   it('should be clearable with prop, dirty and single select', async () => {
-    const wrapper = mount(VSelect, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
         clearable: true,
@@ -88,7 +224,7 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const clear = wrapper.first('.v-icon')
+    const clear = wrapper.find('.v-icon')
 
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalValue).toBe(1)
@@ -101,7 +237,7 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
   })
 
   it('should be clearable with prop, dirty and multi select', async () => {
-    const wrapper = mount(VSelect, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
         clearable: true,
@@ -111,7 +247,7 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const clear = wrapper.first('.v-icon')
+    const clear = wrapper.find('.v-icon')
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
@@ -128,14 +264,14 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
   it('should prepopulate selectedItems', () => {
     const items = ['foo', 'bar', 'baz']
 
-    const wrapper = mount(VSelect, {
+    const wrapper = mountFunction({
       propsData: {
         items,
         value: 'foo'
       }
     })
 
-    const wrapper2 = mount(VSelect, {
+    const wrapper2 = mountFunction({
       propsData: {
         items,
         multiple: true,
@@ -143,7 +279,7 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const wrapper3 = mount(VSelect, {
+    const wrapper3 = mountFunction({
       propsData: {
         items,
         value: null
@@ -156,18 +292,17 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
   })
 
   it('should show input with placeholder and not dirty', async () => {
-    const wrapper = mount(VSelect, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
         placeholder: 'foo'
       }
     })
-
-    expect(wrapper.find('input')[0].hasStyle('display', 'block'))
+    expect(wrapper.find('input').element.style.display).toBe('block')
   })
 
   it('should not show input with placeholder and dirty', async () => {
-    const wrapper = mount(VSelect, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
         items: ['bar'],
@@ -176,12 +311,12 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.find('input')[0].hasStyle('display', 'none'))
+    expect(wrapper.find('input').element.style.display).toBe('block')
   })
 
   // #1704
   it('should populate select when using value as an object', async () => {
-    const wrapper = mount(VSelect, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
         items: [
@@ -195,14 +330,14 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
 
     await wrapper.vm.$nextTick()
 
-    const selections = wrapper.find('.v-select__selection')
+    const selections = wrapper.findAll('.v-select__selection')
 
     expect(selections.length).toBeGreaterThan(0)
   })
 
   // Discovered when working on #1704
   it('should remove item when re-selecting it', async () => {
-    const wrapper = mount(VSelect, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
         items: [
@@ -216,14 +351,14 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.selectedItems).toHaveLength(1)
     wrapper.trigger('click')
-    const item = wrapper.first('div.v-list-item__action')
+    const item = wrapper.find('div.v-list-item__action')
     item.trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.selectedItems).toHaveLength(0)
   })
 
   it('should open menu when cleared with open-on-clear', async () => {
-    const wrapper = mount(VSelect, {
+    const wrapper = mountFunction({
       propsData: {
         clearable: true,
         openOnClear: true,
@@ -232,7 +367,7 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const clear = wrapper.first('.v-input__icon--clear .v-icon')
+    const clear = wrapper.find('.v-input__icon--clear .v-icon')
 
     clear.trigger('click')
 
@@ -242,7 +377,7 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
   })
 
   it('should react to different key down', async () => {
-    const wrapper = mount(VSelect)
+    const wrapper = mountFunction()
     const blur = jest.fn()
     wrapper.vm.$on('blur', blur)
 
@@ -265,7 +400,7 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
   })
 
   it('should select an item !multiple', async () => {
-    const wrapper = mount(VSelect)
+    const wrapper = mountFunction()
 
     const input = jest.fn()
     const change = jest.fn()
@@ -299,7 +434,7 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
   })
 
   it('should disable v-list-item', async () => {
-    const wrapper = mount(VSelect, {
+    const wrapper = mountFunction({
       propsData: {
         items: [{ text: 'foo', disabled: true, id: 0 }]
       }
@@ -308,7 +443,7 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
     const selectItem = jest.fn()
     wrapper.setMethods({ selectItem })
 
-    const el = wrapper.first('.v-list-item')
+    const el = wrapper.find('.v-list-item')
 
     el.element.click()
 
@@ -326,7 +461,7 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
   })
 
   it('should update menu status and focus when menu closes', async () => {
-    const wrapper = mount(VSelect)
+    const wrapper = mountFunction()
     const menu = wrapper.vm.$refs.menu
 
     wrapper.setData({
@@ -349,228 +484,12 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.isFocused).toBe(false)
   })
 
+  // const wrapper = mountFunction()
   it('should use specified value', async () => {
-    const wrapper = mount(VSelect, {
+    const wrapper = mountFunction({
       propsData: {
         items: ['foo']
       }
     })
-  })
-
-  it('should update model when chips are removed', async () => {
-    const selectItem = jest.fn()
-    const wrapper = mount(VSelect, {
-      propsData: {
-        chips: true,
-        deletableChips: true,
-        items: ['foo'],
-        value: 'foo'
-      },
-      methods: { selectItem }
-    })
-
-    const input = jest.fn()
-    const change = jest.fn()
-
-    wrapper.vm.$on('input', input)
-
-    expect(wrapper.vm.internalValue).toEqual('foo')
-    wrapper.first('.v-chip__close').trigger('click')
-
-    expect(input).toHaveBeenCalledTimes(1)
-
-    wrapper.setProps({
-      items: ['foo', 'bar'],
-      multiple: true,
-      value: ['foo', 'bar']
-    })
-    wrapper.vm.$on('change', change)
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.internalValue).toEqual(['foo', 'bar'])
-    wrapper.first('.v-chip__close').trigger('click')
-
-    await wrapper.vm.$nextTick()
-
-    expect(selectItem).toHaveBeenCalledTimes(1)
-  })
-
-  it('should set selected index', async () => {
-    const wrapper = mount(VSelect, {
-      propsData: {
-        chips: true,
-        deletableChips: true,
-        multiple: true,
-        items: ['foo', 'bar', 'fizz', 'buzz'],
-        value: ['foo', 'bar', 'fizz', 'buzz']
-      }
-    })
-
-    expect(wrapper.vm.selectedIndex).toBe(-1)
-
-    const foo = wrapper.first('.v-chip')
-    foo.trigger('click')
-
-    expect(wrapper.vm.selectedIndex).toBe(0)
-
-    wrapper.find('.v-chip')[1].trigger('click')
-
-    expect(wrapper.vm.selectedIndex).toBe(1)
-
-    wrapper.setProps({ disabled: true })
-
-    wrapper.first('.v-chip').trigger('click')
-
-    expect(wrapper.vm.selectedIndex).toBe(1)
-  })
-
-  it('should not duplicate items after items update when caching is turned on', async () => {
-    const wrapper = mount(VSelect, {
-      propsData: {
-        cacheItems: true,
-        returnObject: true,
-        itemText: 'text',
-        itemValue: 'id',
-        items: []
-      }
-    })
-
-    wrapper.setProps({ items: [{ id: 1, text: 'A' }] })
-    expect(wrapper.vm.computedItems).toHaveLength(1)
-    wrapper.setProps({ items: [{ id: 1, text: 'A' }] })
-    expect(wrapper.vm.computedItems).toHaveLength(1)
-  })
-
-  it('should cache items', async () => {
-    const wrapper = mount(VSelect, {
-      propsData: {
-        cacheItems: true,
-        items: []
-      }
-    })
-
-    wrapper.setProps({ items: ['bar', 'baz'] })
-    expect(wrapper.vm.computedItems).toHaveLength(2)
-
-    wrapper.setProps({ items: ['foo'] })
-    expect(wrapper.vm.computedItems).toHaveLength(3)
-
-    wrapper.setProps({ items: ['bar'] })
-    expect(wrapper.vm.computedItems).toHaveLength(3)
-  })
-
-  it('should cache items passed via prop', async () => {
-    const wrapper = mount(VSelect, {
-      propsData: {
-        cacheItems: true,
-        items: [1, 2, 3, 4]
-      }
-    })
-
-    expect(wrapper.vm.computedItems).toHaveLength(4)
-
-    wrapper.setProps({ items: [5] })
-    expect(wrapper.vm.computedItems).toHaveLength(5)
-  })
-
-  it('should have an affix', async () => {
-    const wrapper = mount(VSelect, {
-      propsData: {
-        prefix: '$',
-        suffix: 'lbs'
-      }
-    })
-
-    expect(wrapper.first('.v-text-field__prefix').element.innerHTML).toBe('$')
-    expect(wrapper.first('.v-text-field__suffix').element.innerHTML).toBe('lbs')
-
-    wrapper.setProps({ prefix: undefined, suffix: undefined })
-
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.find('.v-text-field__prefix')).toHaveLength(0)
-    expect(wrapper.find('.v-text-field__suffix')).toHaveLength(0)
-  })
-
-  it('should use custom clear icon cb', () => {
-    const clearIconCb = jest.fn()
-    const wrapper = mount(VSelect, {
-      propsData: {
-        clearable: true,
-        items: ['foo'],
-        value: 'foo'
-      }
-    })
-
-    wrapper.vm.$on('click:clear', clearIconCb)
-    wrapper.first('.v-input__icon--clear .v-icon').trigger('click')
-
-    expect(clearIconCb).toHaveBeenCalled()
-  })
-
-  it('should populate select[multiple=false] when using value as an object', async () => {
-    const wrapper = mount(VSelect, {
-      attachToDocument: true,
-      propsData: {
-        items: [
-          { text: 'foo', value: { id: { subid: 1 } } },
-          { text: 'foo', value: { id: { subid: 2 } } }
-        ],
-        multiple: false,
-        value: { id: { subid: 2 } }
-      }
-    })
-
-    await wrapper.vm.$nextTick()
-
-    const selections = wrapper.find('.v-select__selection')
-
-    expect(selections).toHaveLength(1)
-  })
-
-  it('should add color to selected index', async () => {
-    const wrapper = mount(VSelect, {
-      propsData: {
-        multiple: true,
-        items: ['foo', 'bar'],
-        value: ['foo']
-      }
-    })
-
-    wrapper.vm.selectedIndex = 0
-
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should not react to click when disabled', async () => {
-    const wrapper = mount(VSelect, {
-      propsData: { items: ['foo', 'bar'] }
-    })
-    const slot = wrapper.first('.v-input__slot')
-    const input = wrapper.first('input')
-
-    expect(wrapper.vm.isMenuActive).toBe(false)
-    slot.trigger('click')
-    expect(wrapper.vm.isMenuActive).toBe(true)
-
-    wrapper.setData({ isMenuActive: false })
-    wrapper.setProps({ disabled: true })
-    await wrapper.vm.$nextTick()
-    expect(wrapper.vm.isMenuActive).toBe(false)
-
-    slot.trigger('click')
-    expect(wrapper.vm.isMenuActive).toBe(false)
-  })
-
-  it('should set the menu index', () => {
-    const wrapper = mount(VSelect)
-
-    expect(wrapper.vm.getMenuIndex()).toBe(-1)
-
-    wrapper.vm.setMenuIndex(1)
-
-    expect(wrapper.vm.getMenuIndex()).toBe(1)
   })
 })
