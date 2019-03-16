@@ -1,5 +1,7 @@
 // Components
 import VExpansionPanel from '../VExpansionPanel'
+import VExpansionPanelHeader from '../VExpansionPanelHeader'
+import VExpansionPanelContent from '../VExpansionPanelContent'
 
 // Utilities
 import {
@@ -15,10 +17,13 @@ describe('VExpansionPanel', () => {
     mountFunction = (options = {}) => {
       return mount(VExpansionPanel, {
         slots: {
-          header: '<span>foobar</span>'
+          default: [
+            VExpansionPanelHeader,
+            VExpansionPanelContent
+          ]
         },
         provide: {
-          expansionPanel: {
+          expansionPanels: {
             register: () => {},
             unregister: () => {}
           }
@@ -28,26 +33,7 @@ describe('VExpansionPanel', () => {
     }
   })
 
-  it.skip('should respond to keyboard.enter', () => {
-    const click = jest.fn()
-    const wrapper = mountFunction({
-      methods: { click }
-    })
-
-    const header = wrapper.find('.v-expansion-panel-item__header')
-
-    header.trigger('keydown.up')
-    expect(click).not.toHaveBeenCalled()
-
-    header.trigger('keydown.enter')
-    expect(click).not.toHaveBeenCalled()
-
-    header.element.focus()
-    header.trigger('keydown.enter')
-    expect(click).toHaveBeenCalled()
-  })
-
-  it.skip('should respond to clicks', () => {
+  it('should respond to clicks', () => {
     const click = jest.fn()
     const toggle = jest.fn()
     const wrapper = mountFunction({
@@ -57,7 +43,7 @@ describe('VExpansionPanel', () => {
 
     wrapper.vm.$on('click', click)
     const spy = jest.spyOn(wrapper.vm.header.$el, 'blur')
-    const header = wrapper.find('.v-expansion-panel-item__header')
+    const header = wrapper.find('.v-expansion-panel-header')
 
     header.trigger('click')
 
@@ -105,21 +91,59 @@ describe('VExpansionPanel', () => {
     expect(change).toHaveBeenCalled()
   }) */
 
-  it.skip('should hide actions and match snapshot', () => {
+  it('should hide actions and match snapshot', async () => {
     const wrapper = mountFunction({
-      propsData: {
-        hideActions: true
+      slots: {
+        default: [
+          {
+            render: h => h(VExpansionPanelHeader, {
+              props: { hideActions: true }
+            })
+          },
+          VExpansionPanelContent
+        ]
       }
     })
 
+    const wrapper2 = mountFunction()
     const snapshot = wrapper.html()
+    const snapshot2 = wrapper2.html()
+
     expect(snapshot).toMatchSnapshot()
-
-    wrapper.setProps({ hideActions: false })
-
-    const snapshot2 = wrapper.html()
     expect(snapshot2).toMatchSnapshot()
-
     expect(snapshot).not.toEqual(snapshot2)
+  })
+
+  it('should register and unregister header/content', () => {
+    const wrapper = mountFunction()
+    const header = wrapper.find('.v-expansion-panel-header')
+    const content = wrapper.find('.v-expansion-panel-content')
+
+    expect(wrapper.vm.header).toBeTruthy()
+    expect(wrapper.vm.content).toBeTruthy()
+
+    header.destroy()
+    content.destroy()
+
+    expect(wrapper.vm.header).toBeNull()
+    expect(wrapper.vm.content).toBeNull()
+  })
+
+  it('should toggle, boot content and emit a change', async () => {
+    const change = jest.fn()
+    const wrapper = mountFunction()
+    const content = wrapper.find('.v-expansion-panel-content') as typeof VExpansionPanelContent
+
+    wrapper.vm.$on('change', change)
+
+    expect(content.vm.isBooted).toBe(false)
+
+    wrapper.vm.toggle()
+
+    expect(content.vm.isBooted).toBe(true)
+
+    await wrapper.vm.$nextTick()
+
+    expect(change).toHaveBeenCalled()
   })
 })

@@ -76,6 +76,7 @@ export default mixins(
       this.isReadonly || this.toggle()
     },
     toggle () {
+      /* istanbul ignore else */
       if (this.content) this.content.isBooted = true
       this.$nextTick(() => this.$emit('change'))
     }

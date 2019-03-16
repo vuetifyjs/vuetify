@@ -6,6 +6,9 @@ import VIcon from '../VIcon'
 // Mixins
 import { inject as RegistrableInject } from '../../mixins/registrable'
 
+// Directives
+import Ripple from '../../directives/ripple'
+
 // Utilities
 import { getSlot } from '../../util/helpers'
 import mixins, { ExtractVue } from '../../util/mixins'
@@ -24,6 +27,8 @@ interface options extends ExtractVue<typeof baseMixins> {
 
 export default baseMixins.extend<options>().extend({
   name: 'v-expansion-panel-header',
+
+  directives: { Ripple },
 
   props: {
     disableIconRotate: Boolean,

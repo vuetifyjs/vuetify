@@ -4,8 +4,17 @@ exports[`VExpansionPanel should hide actions and match snapshot 1`] = `
 
 <div aria-expanded="false"
      class="v-expansion-panel"
-     hideactions="true"
 >
+  <button tabindex="0"
+          class="v-expansion-panel-header"
+  >
+  </button>
+  <div class="v-expansion-panel-content"
+       style="display: none;"
+  >
+    <div class="v-expansion-panel-content__wrap">
+    </div>
+  </div>
 </div>
 
 `;
@@ -14,8 +23,24 @@ exports[`VExpansionPanel should hide actions and match snapshot 2`] = `
 
 <div aria-expanded="false"
      class="v-expansion-panel"
-     hideactions="true"
 >
+  <button tabindex="0"
+          class="v-expansion-panel-header"
+  >
+    <div class="v-expansion-panel-header__icon">
+      <i aria-hidden="true"
+         class="v-icon material-icons theme--light"
+      >
+        $vuetify.icons.expand
+      </i>
+    </div>
+  </button>
+  <div class="v-expansion-panel-content"
+       style="display: none;"
+  >
+    <div class="v-expansion-panel-content__wrap">
+    </div>
+  </div>
 </div>
 
 `;
