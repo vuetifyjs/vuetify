@@ -1,0 +1,76 @@
+@import '../../styles/styles.sass'
+@import './_mixins.sass'
+
+// Theme
+.v-bottom-nav.theme--light
+  +bottom-nav-theme($material-light)
+.v-bottom-nav.theme--dark
+  +bottom-nav-theme($material-dark)
+
+  .v-btn.v-btn--active
+    color: map-deep-get($material-dark, 'text', 'primary')
+
+// Block
+.v-item-group.v-bottom-nav
+  bottom: 0
+  display: flex
+  left: 0
+  justify-content: center
+  width: 100%
+  +elevation(4)
+
+  .v-btn
+    border-radius: 0
+    font-size: map-deep-get($headings, 'caption', 'size')
+    height: 100%
+    min-width: 80px
+    max-width: 168px
+    text-transform: none
+    position: relative
+    width: auto
+
+    .v-btn__content
+      flex-direction: column
+      height: 100%
+      opacity: .7
+
+      > .v-icon
+        margin-bottom: 4px
+
+      > *:not(.v-icon)
+        line-height: 1.2
+
+    &.v-btn--active
+      &:before
+        content: none
+
+      .v-btn__content
+        opacity: 1
+
+// Modifier
+.v-bottom-nav--absolute
+  position: absolute
+
+.v-bottom-nav--active
+  transform: translate(0, 0)
+
+.v-bottom-nav--fixed
+  position: fixed
+  z-index: 4
+
+.v-bottom-nav--shift
+  .v-btn .v-btn__content > *:not(.v-icon)
+    top: calc(100% - 8px)
+    opacity: 0
+    position: absolute
+    transition: $primary-transition
+    transform: scale(.9)
+
+  .v-btn--active .v-btn__content
+    > .v-icon
+      transform: translateY(-8px)
+
+    > *:not(.v-icon)
+      opacity: 1
+      top: calc(100% - 16px)
+      transform: scale(1)
