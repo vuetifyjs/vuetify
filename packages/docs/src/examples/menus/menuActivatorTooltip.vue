@@ -6,7 +6,8 @@
           <template #activator="{ on: tooltip }">
             <v-btn
               color="primary"
-              dark v-on="{ ...tooltip, ...menu }"
+              dark
+              v-on="{ ...tooltip, ...menu }"
             >Drowdown w/ Tooltip</v-btn>
           </template>
           <span>Im A ToolTip</span>
