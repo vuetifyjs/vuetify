@@ -38,7 +38,16 @@ export default baseMixins.extend<options>().extend({
     }
   },
 
+  data: () => ({
+    hasMousedown: false
+  }),
+
   computed: {
+    classes (): object {
+      return {
+        'v-expansion-panel-header--mousedown': this.hasMousedown
+      }
+    },
     isActive (): boolean {
       return this.expansionPanel.isActive
     },
@@ -84,6 +93,7 @@ export default baseMixins.extend<options>().extend({
   render (h): VNode {
     return h('button', {
       staticClass: 'v-expansion-panel-header',
+      class: this.classes,
       attrs: {
         tabindex: this.isReadonly || this.isDisabled ? null : 0
       },
@@ -93,7 +103,9 @@ export default baseMixins.extend<options>().extend({
       }],
       on: {
         ...this.$listeners,
-        click: this.onClick
+        click: this.onClick,
+        mousedown: () => (this.hasMousedown = true),
+        mouseup: () => (this.hasMousedown = false)
       }
     }, [
       getSlot(this, 'default', { open: this.isActive }, true),

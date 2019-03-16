@@ -120,6 +120,9 @@
   transition: .3s min-height map-get($transition, 'swing')
   width: 100%
 
+  &:not(.v-expansion-panel-header--mousedown):focus::before
+    opacity: 0.12
+
   +rtl()
     text-align: right
 
@@ -147,10 +150,6 @@
 
 // Modifier
 .v-expansion-panels--focusable
-  .v-expansion-panel-header
-    &:focus::before
-      opacity: 0.2
-
   .v-expansion-panel--active
     .v-expansion-panel-header
       &::before
