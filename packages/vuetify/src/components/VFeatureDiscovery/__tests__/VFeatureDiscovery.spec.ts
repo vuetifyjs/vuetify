@@ -66,40 +66,4 @@ describe('FeatureDiscovery.ts', () => {
     expect(wrapper.classes('v-feature-discovery--active')).toBeFalsy()
     expect(wrapper.html()).toMatchSnapshot()
   })
-
-  it('should render in different positions', () => {
-    const wrapper = mountFunction()
-
-    wrapper.setProps({
-      top: true,
-      left: true
-    })
-
-    expect(wrapper.classes('v-feature-discovery--top-left')).toBeTruthy()
-    expect(wrapper.html()).toMatchSnapshot()
-
-    wrapper.setProps({
-      top: false,
-      left: true
-    })
-
-    expect(wrapper.classes('v-feature-discovery--bottom-left')).toBeTruthy()
-    expect(wrapper.html()).toMatchSnapshot()
-
-    wrapper.setProps({
-      top: true,
-      left: false
-    })
-
-    expect(wrapper.classes('v-feature-discovery--top-right')).toBeTruthy()
-    expect(wrapper.html()).toMatchSnapshot()
-
-    wrapper.setProps({
-      top: false,
-      left: false
-    })
-
-    expect(wrapper.classes('v-feature-discovery--bottom-right')).toBeTruthy()
-    expect(wrapper.html()).toMatchSnapshot()
-  })
 })
