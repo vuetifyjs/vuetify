@@ -3,6 +3,7 @@ import './VFeatureDiscovery.sass'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import Elevatable from '../../mixins/elevatable'
 import Toggleable from '../../mixins/toggleable'
 import Themeable from '../../mixins/themeable'
 
@@ -16,6 +17,7 @@ import { convertToUnit } from '../../util/helpers'
 
 export default mixins(
   Colorable,
+  Elevatable,
   Toggleable,
   Themeable
 /* @vue/component */
@@ -64,6 +66,9 @@ export default mixins(
         'v-feature-discovery--active': this.isActive,
         ...this.themeClasses
       }
+    },
+    computedElevation (): string | number | undefined {
+      return this.flat ? 0 : (this.elevation || 4)
     },
     computedLeft (): number {
       return this.rect.left - (this.computedSize / 2) + (this.rect.width / 2)
@@ -123,7 +128,8 @@ export default mixins(
     },
     genBackdrop (): VNode {
       return this.$createElement('div', this.setBackgroundColor(this.color, {
-        staticClass: 'v-feature-discovery__backdrop'
+        staticClass: 'v-feature-discovery__backdrop',
+        class: this.elevationClasses
       }), this.$slots.default)
     },
     genChildren (): VNode[] {
