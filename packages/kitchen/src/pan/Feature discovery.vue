@@ -93,6 +93,72 @@
           </div>
         </v-feature-discovery>
       </core-section>
+
+      <core-title>Colors</core-title>
+      <core-section>
+        <v-layout justify-space-around align-center>
+          <v-btn @click="model41 = true">Show 1</v-btn>
+          <v-btn @click="model42 = true">Show 2</v-btn>
+          <v-btn @click="model43 = true">Show 3</v-btn>
+        </v-layout>
+
+        <v-layout justify-space-around align-center>
+          <v-sheet id="t4v1" class="ma-5" color="green" width="40" height="40" />
+          <v-sheet id="t4v2" class="ma-5" color="blue" width="80" height="80" />
+          <v-sheet id="t4v3" class="ma-5" color="red" width="120" height="120" />
+        </v-layout>
+
+        <v-feature-discovery
+          v-model="model41"
+          class="white--text"
+          color="teal"
+          target="#t4v1"
+        >
+          <h2 slot="title">Hey! New feature...</h2>
+          <p slot="text">
+            There's all sorts of new things that you can do with the great new features.
+            Just click the buttons to check them out!
+          </p>
+          <div slot="actions">
+            <v-btn class="mx-1" color="white" depressed>Action</v-btn>
+            <v-btn class="mx-1" outline color="white" @click="model1 = false">Lesser action</v-btn>
+          </div>
+        </v-feature-discovery>
+
+        <v-feature-discovery
+          v-model="model42"
+          class="white--text"
+          color="green"
+          target="#t4v2"
+        >
+          <h2 slot="title">Hey! New feature...</h2>
+          <p slot="text">
+            There's all sorts of new things that you can do with the great new features.
+            Just click the buttons to check them out!
+          </p>
+          <div slot="actions">
+            <v-btn class="mx-1" color="white" depressed>Action</v-btn>
+            <v-btn class="mx-1" outline color="white" @click="model1 = false">Lesser action</v-btn>
+          </div>
+        </v-feature-discovery>
+
+        <v-feature-discovery
+          v-model="model43"
+          class="white--text"
+          color="warning lighten-2"
+          target="#t4v3"
+        >
+          <h2 slot="title">Hey! New feature...</h2>
+          <p slot="text">
+            There's all sorts of new things that you can do with the great new features.
+            Just click the buttons to check them out!
+          </p>
+          <div slot="actions">
+            <v-btn class="mx-1" color="white" depressed>Action</v-btn>
+            <v-btn class="mx-1" outline color="white" @click="model1 = false">Lesser action</v-btn>
+          </div>
+        </v-feature-discovery>
+      </core-section>
     </v-layout>
   </v-container>
 </template>
@@ -108,7 +174,10 @@
             model2: false,
             flat2: true,
             model3: false,
-            size3: 500
+            size3: 500,
+            model41: false,
+            model42: false,
+            model43: false
         })
     }
 </script>
