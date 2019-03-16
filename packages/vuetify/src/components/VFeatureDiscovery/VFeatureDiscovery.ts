@@ -37,7 +37,7 @@ export default mixins(
       validator: (v: string | number) => !isNaN(parseInt(v))
     },
     target: {
-      default: null as string | null
+      default: null as string | Element | null
     },
     value: {
       default: true
@@ -104,9 +104,9 @@ export default mixins(
 
   methods: {
     updateTarget () {
-      if (!this.target) return
+      if (this.target instanceof Element) this.targetEl = this.target
+      else this.targetEl = document.querySelector(this.target)
 
-      this.targetEl = document.querySelector(this.target)
       if (!this.targetEl) return
 
       this.rect = this.targetEl.getBoundingClientRect()
