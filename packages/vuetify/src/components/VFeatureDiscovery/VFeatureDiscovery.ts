@@ -81,6 +81,9 @@ export default mixins(
         height: convertToUnit(this.computedSize),
         width: convertToUnit(this.computedSize)
       }
+    },
+    highlightSize (): number {
+      return Math.sqrt(2 * (Math.max(this.rect.width, this.rect.height) + 25) ** 2)
     }
   },
 
@@ -131,7 +134,13 @@ export default mixins(
     },
     genHighlight (): VNode {
       return this.$createElement('div', {
-        staticClass: 'v-feature-discovery__highlight'
+        staticClass: 'v-feature-discovery__highlight',
+        style: {
+          top: `calc(50% - (${this.highlightSize}px / 2))`,
+          left: `calc(50% - (${this.highlightSize}px / 2))`,
+          height: `${this.highlightSize}px`,
+          width: `${this.highlightSize}px`
+        }
       }, this.$slots.default)
     }
   },
