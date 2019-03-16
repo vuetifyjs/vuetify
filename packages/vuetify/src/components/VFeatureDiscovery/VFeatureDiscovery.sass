@@ -10,6 +10,7 @@
 .v-feature-discovery
   position: fixed
   z-index: 10
+  transition: $primary-transition
 
 // Element
 .v-feature-discovery__backdrop
@@ -35,6 +36,7 @@
   display: flex
   justify-content: center
   align-items: center
+  transition: $primary-transition
 
   &:before
     content: ''
@@ -42,6 +44,7 @@
     position: absolute
     height: calc(100% + 180px)
     width: calc(100% + 180px)
+    transition: $primary-transition
     animation: pulse-animation 1.4s cubic-bezier(0.24, 0, 0.38, 1) infinite
     background: white
 
