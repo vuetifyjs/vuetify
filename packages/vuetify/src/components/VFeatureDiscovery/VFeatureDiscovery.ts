@@ -109,6 +109,8 @@ export default mixins(
 
   methods: {
     updateTarget () {
+      (this.targetEl as any).style.zIndex = this.oldZIndex
+
       if (this.target instanceof Element) this.targetEl = this.target
       else this.targetEl = document.querySelector(this.target)
 
