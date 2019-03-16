@@ -39,7 +39,8 @@
             "popout",
             "customIcons",
             "iconSlot",
-            "focusable"
+            "focusable",
+            "advanced"
           ]
         }
       ]

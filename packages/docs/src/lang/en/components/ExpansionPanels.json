@@ -35,6 +35,10 @@
       "header": "### Focusable",
       "desc": "The expansion-panel headers can be made focusable with the prop `focusable`.",
       "uninverted": true
+    },
+    "advanced": {
+      "header": "### Advanced",
+      "desc": "The expansion panel component provides a rich playground to build truly advanced implementations. Here we take advantage of scoped slots in the `v-expansion-panel-header` component to react to the state of being open or closed by fading content in and out."
     }
   },
   "props": {
