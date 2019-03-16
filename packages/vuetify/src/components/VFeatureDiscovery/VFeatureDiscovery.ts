@@ -56,7 +56,8 @@ export default mixins(
       width: 0
     },
     targetEl: null as Element | null,
-    oldZIndex: 0
+    oldZIndex: 0,
+    movable: true
   }),
 
   computed: {
@@ -64,6 +65,7 @@ export default mixins(
       return {
         'v-feature-discovery--flat': this.flat,
         'v-feature-discovery--active': this.isActive,
+        'v-feature-discovery--movable': this.movable,
         ...this.themeClasses
       }
     },
@@ -123,7 +125,10 @@ export default mixins(
     onScroll () {
       if (!this.targetEl) return
 
+      this.movable = false
       this.rect = this.targetEl.getBoundingClientRect()
+      const vm = this
+      setTimeout(() => vm.movable = true)
     },
     closeConditional (): boolean {
       return !this.persistent && this.isActive
