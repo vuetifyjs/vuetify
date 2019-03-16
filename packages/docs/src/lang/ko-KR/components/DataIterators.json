@@ -1,5 +1,5 @@
 {
-  "header": "데이터 반복자 (Data iterator)",
+  "header": "데이터 반복자 (Data iterators)",
   "headerText": "`v-data-iterator` 컴포넌트는 데이터를 보여주는데 사용합니다. 주요 기능은 `v-data-table`과 공유합니다.\n정렬(sorting), 검색(searching), 페이지네이션(pagination), 선택(selection) 등이 가능합니다.",
   "components": ["v-data-iterator"],
   "examples": {

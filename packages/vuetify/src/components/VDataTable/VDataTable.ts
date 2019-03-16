@@ -378,17 +378,19 @@ export default VDataIterator.extend({
       })
     },
     genBody (props: DataProps): VNode | string | VNodeChildren {
+      const data = {
+        ...props,
+        headers: this.computedHeaders
+      }
+
       if (this.$scopedSlots.body) {
-        return this.$scopedSlots.body!({
-          ...props,
-          headers: this.computedHeaders
-        })
+        return this.$scopedSlots.body!(data)
       }
 
       return this.$createElement('tbody', [
-        this.genSlots('body.prepend', props),
+        this.genSlots('body.prepend', data),
         this.genItems(props.items, props),
-        this.genSlots('body.append', props)
+        this.genSlots('body.append', data)
       ])
     },
     genFooters (props: DataProps) {

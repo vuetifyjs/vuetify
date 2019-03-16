@@ -17,7 +17,7 @@
   "checkboxesText": "Captures boolean input with an optional indeterminate mode.",
   "chips": "Chip",
   "chipsText": "Presents a list of items as a set of small, tactile entities.",
-  "dataIterator": "Data iterator",
+  "dataIterators": "Data iterators",
   "dataIteratorText": "Allows the user to configure how tabular data is displayed.",
   "dataTables": "Table",
   "dataTablesText": "A configurable component for displaying tabular data",

@@ -1,10 +1,6 @@
 {
   "title": "header",
   "titleText": "headerText",
-  "mdSpec": {
-    "version": "2",
-    "link": "https://material.io/design/components/data-tables.html"
-  },
   "children": [
     {
       "type": "section",
@@ -21,8 +17,8 @@
         {
           "type": "api",
           "value": [
-            "v-data-table",
-            "v-edit-dialog"
+            "v-data-iterator",
+            "v-data-footer"
           ]
         }
       ]
@@ -33,22 +29,7 @@
         {
           "type": "examples",
           "value": [
-            "slots",
-            "select",
-            "expand",
-            "group",
-            "multiSort",
-            "search",
-            "customizeRows",
-            "customizeFooter",
-            "progress",
-            "footer",
-            "paginate",
-            "sort",
-            "server",
-            "headerless",
-            "editdialog",
-            "crud"
+            "slots"
           ]
         }
       ]
@@ -59,9 +40,9 @@
         {
           "type": "up-next",
           "value": [
-            "components/data-iterator",
-            "components/paginations",
-            "components/lists"
+            "components/data-tables",
+            "components/footer",
+            "components/toolbars"
           ]
         }
       ]

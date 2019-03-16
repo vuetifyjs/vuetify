@@ -173,14 +173,14 @@ export default Vue.extend({
       before.push(this.genIcon(
         this.onPreviousPage,
         this.options.page === 1,
-        this.$vuetify.t('$vuetify.dataFooter.prevPage'),
+        this.$vuetify.lang.t('$vuetify.dataFooter.prevPage'),
         this.$vuetify.rtl ? this.nextIcon : this.prevIcon
       ))
 
       after.push(this.genIcon(
         this.onNextPage,
         this.disableNextPageIcon,
-        this.$vuetify.t('$vuetify.dataFooter.nextPage'),
+        this.$vuetify.lang.t('$vuetify.dataFooter.nextPage'),
         this.$vuetify.rtl ? this.prevIcon : this.nextIcon
       ))
 
@@ -188,14 +188,14 @@ export default Vue.extend({
         before.unshift(this.genIcon(
           this.onFirstPage,
           this.options.page === 1,
-          this.$vuetify.t('$vuetify.dataFooter.firstPage'),
+          this.$vuetify.lang.t('$vuetify.dataFooter.firstPage'),
           this.$vuetify.rtl ? this.lastIcon : this.firstIcon
         ))
 
         after.push(this.genIcon(
           this.onLastPage,
           this.options.page === this.pagination.pageCount || this.options.itemsPerPage === -1,
-          this.$vuetify.t('$vuetify.dataFooter.lastPage'),
+          this.$vuetify.lang.t('$vuetify.dataFooter.lastPage'),
           this.$vuetify.rtl ? this.firstIcon : this.lastIcon
         ))
       }

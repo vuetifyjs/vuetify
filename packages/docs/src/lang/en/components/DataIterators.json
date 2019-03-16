@@ -1,0 +1,73 @@
+{
+  "header": "# Data iterators",
+  "headerText": "The `v-data-iterator` component is used for displaying data, and shares a majority of its functionality with the `v-data-table` component. Features include sorting, searching, pagination, and selection.",
+  "examples": {
+    "usage": {
+      "desc": "The `v-data-iterator` allows you to customize exactly how to display your data. In this example we are using a grid list with cards."
+    },
+    "slots": {
+      "header": "### Slots",
+      "desc": "The `v-data-iterator` has both a header and footer slot for adding extra content"
+    }
+  },
+  "props": {
+    "v-data-iterator": {
+      "value": "Used for selection",
+      "singleSelect": "Changes selection mode to single select",
+      "expanded": "Array of expanded items. Can be used with `.sync` modifier",
+      "singleExpand": "Changes expansion mode to single expand",
+      "loading": "If `true` and no items are provided, then a loading text will be shown",
+      "loadingText": "Text shown when `loading` is true and no items are provided",
+      "noResultsText": "Text shown when `search` prop is used and there are no results",
+      "noDataText": "Text shown when no items are provided to the component",
+      "hideDefaultFooter": "Hides default footer",
+      "footerProps": "See the `v-data-footer` API for more information"
+    },
+    "v-data-footer": {
+      "options": "DataOptions",
+      "pagination": "DataPagination",
+      "itemsPerPageOptions": "Array of options to show in the items-per-page dropdown",
+      "prevIcon": "Previous icon",
+      "nextIcon": "Next icon",
+      "firstIcon": "First icon",
+      "lastIcon": "Last icon",
+      "itemsPerPageText": "Text for items-per-page dropdown",
+      "itemsPerPageAllText": "Text for 'All' option in items-per-page dropdown",
+      "showFirstLastPage": "Show first/last icons",
+      "showCurrentPage": "Show current page number between prev/next icons",
+      "disablePagination": "Disables pagination buttons",
+      "disableItemsPerPage": "Disables items-per-page dropdown"
+    }
+  },
+  "scopedSlots": {
+    "v-data-iterator": {
+      "footer": "Defines a footer below the items",
+      "footer.pageText": "This slot is forwarded to the default footer. See the `v-data-footer` API for more information",
+      "default": "The default slot. Use this to render your items",
+      "header": "Defines a header above the items"
+    }
+  },
+  "slots": {
+    "v-data-iterator": {
+      "header": "Defines a header above the items",
+      "footer": "Defines a footer below the items",
+      "loading": "Defines content for when `loading` is true and no items are provided",
+      "no-data": "Defines content for when no items are provided",
+      "no-results": "Defines content for when `search` is provided but no results are found"
+    },
+    "v-data-footer": {
+      "pageText": "Defines content for the items-per-page text"
+    }
+  },
+  "events": {
+    "v-data-iterator": {
+      "input": "Array of selected items",
+      "update:expanded": "The `.sync` event for `expanded` prop",
+      "item-selected": "Event emitted when an item is selected or deselected",
+      "item-expanded": "Event emitted when an item is expanded or closed"
+    },
+    "v-data-footer": {
+      "update:options": "The `.sync` event for `options` prop"
+    }
+  }
+}
