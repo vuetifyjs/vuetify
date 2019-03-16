@@ -89,7 +89,7 @@ export default mixins(
       this.updateTarget()
     },
     isActive (val: boolean) {
-      if (!val) (this.targetEl as any).style.zIndex = this.oldZIndex
+      (this.targetEl as any).style.zIndex = val ? 11 : this.oldZIndex
     }
   },
 
