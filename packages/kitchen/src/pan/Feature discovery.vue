@@ -105,7 +105,7 @@
         <v-layout justify-space-around align-center>
           <v-sheet id="t4v1" class="ma-5" color="green" width="40" height="40" />
           <v-sheet id="t4v2" class="ma-5" color="blue" width="80" height="80" />
-          <v-sheet id="t4v3" class="ma-5" color="red" width="120" height="120" />
+          <v-sheet id="t4v3" class="ma-5" color="red" width="120" height="50" />
         </v-layout>
 
         <v-feature-discovery
