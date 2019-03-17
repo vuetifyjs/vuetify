@@ -225,24 +225,24 @@
 </template>
 
 <script>
-    export default {
-        name: 'FeatureDiscovery',
+  export default {
+    name: 'FeatureDiscovery',
 
-        data: () => ({
-            model1: false,
-            t1: '#t1v2',
-            targets1: ['#t1v1', '#t1v2', '#t1v3'],
-            model2: false,
-            flat2: true,
-            model3: false,
-            size3: 500,
-            model41: false,
-            model42: false,
-            model43: false,
-            model5: false,
-            elevation5: 4,
-            persistent6: false,
-            model6: false
-        })
-    }
+    data: () => ({
+      model1: false,
+      t1: '#t1v2',
+      targets1: ['#t1v1', '#t1v2', '#t1v3'],
+      model2: false,
+      flat2: true,
+      model3: false,
+      size3: 700,
+      model41: false,
+      model42: false,
+      model43: false,
+      model5: false,
+      elevation5: 4,
+      persistent6: false,
+      model6: false
+    })
+  }
 </script>
