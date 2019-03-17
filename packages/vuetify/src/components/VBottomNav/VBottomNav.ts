@@ -60,7 +60,7 @@ export default mixins(
         Scrollable.options.computed.canScroll.call(this) &&
         (
           this.hideOnScroll ||
-          this.inputValue !== false
+          !this.inputValue
         )
       )
     },
