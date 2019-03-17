@@ -3,11 +3,11 @@
 exports[`FeatureDiscovery.ts should render correctly 1`] = `
 
 <div class="v-feature-discovery v-feature-discovery--active v-feature-discovery--movable theme--light"
-     style="left: -200px; top: -200px; height: 400px; width: 400px;"
+     style="left: -200px; top: -200px; height: 400px; width: 400px; pointer-events: auto;"
 >
   <div class="v-feature-discovery__backdrop elevation-4 primary">
   </div>
-  <div class="v-feature-discovery__highlight"
+  <div class="v-feature-discovery__highlight white"
        style="height: 35.35533905932738px; width: 35.35533905932738px;"
   >
   </div>
@@ -18,11 +18,11 @@ exports[`FeatureDiscovery.ts should render correctly 1`] = `
 exports[`FeatureDiscovery.ts should render correctly when flat 1`] = `
 
 <div class="v-feature-discovery v-feature-discovery--flat v-feature-discovery--active v-feature-discovery--movable theme--light"
-     style="left: -200px; top: -200px; height: 400px; width: 400px;"
+     style="left: -200px; top: -200px; height: 400px; width: 400px; pointer-events: auto;"
 >
   <div class="v-feature-discovery__backdrop primary">
   </div>
-  <div class="v-feature-discovery__highlight"
+  <div class="v-feature-discovery__highlight white"
        style="height: 35.35533905932738px; width: 35.35533905932738px;"
   >
   </div>
@@ -33,11 +33,11 @@ exports[`FeatureDiscovery.ts should render correctly when flat 1`] = `
 exports[`FeatureDiscovery.ts should toggle 1`] = `
 
 <div class="v-feature-discovery v-feature-discovery--active v-feature-discovery--movable theme--light"
-     style="left: -200px; top: -200px; height: 400px; width: 400px;"
+     style="left: -200px; top: -200px; height: 400px; width: 400px; pointer-events: auto;"
 >
   <div class="v-feature-discovery__backdrop elevation-4 primary">
   </div>
-  <div class="v-feature-discovery__highlight"
+  <div class="v-feature-discovery__highlight white"
        style="height: 35.35533905932738px; width: 35.35533905932738px;"
   >
   </div>
@@ -48,11 +48,11 @@ exports[`FeatureDiscovery.ts should toggle 1`] = `
 exports[`FeatureDiscovery.ts should toggle 2`] = `
 
 <div class="v-feature-discovery v-feature-discovery--movable theme--light"
-     style="left: -200px; top: -200px; height: 400px; width: 400px; display: none;"
+     style="left: -200px; top: -200px; height: 400px; width: 400px; pointer-events: none;"
 >
   <div class="v-feature-discovery__backdrop elevation-4 primary">
   </div>
-  <div class="v-feature-discovery__highlight"
+  <div class="v-feature-discovery__highlight white"
        style="height: 35.35533905932738px; width: 35.35533905932738px;"
   >
   </div>
