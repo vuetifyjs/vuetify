@@ -100,7 +100,7 @@ export default baseMixins.extend<options>().extend({
       staticClass: 'v-expansion-panel-header',
       class: this.classes,
       attrs: {
-        tabindex: this.isReadonly || this.isDisabled ? null : 0
+        tabindex: this.isDisabled ? -1 : null
       },
       directives: [{
         name: 'ripple',

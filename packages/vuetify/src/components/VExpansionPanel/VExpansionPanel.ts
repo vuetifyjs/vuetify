@@ -73,7 +73,7 @@ export default mixins(
 
       this.$emit('click', e)
 
-      this.isReadonly || this.toggle()
+      this.isReadonly || this.isDisabled || this.toggle()
     },
     toggle () {
       /* istanbul ignore else */
