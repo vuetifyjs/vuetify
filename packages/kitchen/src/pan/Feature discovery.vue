@@ -159,6 +159,36 @@
           </div>
         </v-feature-discovery>
       </core-section>
+
+      <core-title>Custom elevation</core-title>
+      <core-section>
+        <v-layout justify-space-around>
+          <v-slider v-model="elevation5" label="Elevation" min="0" max="24" />
+          <v-btn @click="model5 = true">Show</v-btn>
+        </v-layout>
+
+        <v-layout justify-center>
+          <v-sheet id="t5" class="ma-5" color="warning" width="40" height="40" />
+        </v-layout>
+
+        <v-feature-discovery
+          v-model="model5"
+          class="white--text"
+          color="primary"
+          target="#t5"
+          :elevation="elevation5"
+        >
+          <h2 slot="title">Hey! New feature...</h2>
+          <p slot="text">
+            There's all sorts of new things that you can do with the great new features.
+            Just click the buttons to check them out!
+          </p>
+          <div slot="actions">
+            <v-btn class="mx-1" color="white" depressed>Action</v-btn>
+            <v-btn class="mx-1" outline color="white" @click="model5 = false">Lesser action</v-btn>
+          </div>
+        </v-feature-discovery>
+      </core-section>
     </v-layout>
   </v-container>
 </template>
@@ -177,7 +207,9 @@
       size3: 500,
       model41: false,
       model42: false,
-      model43: false
+      model43: false,
+      model5: false,
+      elevation5: 4
     })
   }
 </script>
