@@ -47,6 +47,10 @@ export default mixins(
     },
     value: {
       default: true
+    },
+    noRipple: {
+      default: false,
+      type: Boolean
     }
   },
 
@@ -198,6 +202,9 @@ export default mixins(
     genHighlight (): VNode {
       return this.$createElement('div', this.setBackgroundColor(this.highlightColor, {
         staticClass: 'v-feature-discovery__highlight',
+        class: {
+          'v-feature-discovery__highlight--no-ripple': this.noRipple
+        },
         style: {
           top: `calc(50% - (${this.highlightSize}px / 2))`,
           left: `calc(50% - (${this.highlightSize}px / 2))`,
