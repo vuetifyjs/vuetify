@@ -10,14 +10,7 @@ import {
   Wrapper
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../util/mixins'
-import { rafPolyfill, resizeWindow } from '../../../../test'
-
-const scrollWindow = (y: number) => {
-  (global as any).pageYOffset = y
-  ;(global as any).dispatchEvent(new Event('scroll'))
-
-  return new Promise(resolve => setTimeout(resolve, 200))
-}
+import { rafPolyfill, scrollWindow } from '../../../../test'
 
 describe('AppBar.ts', () => {
   type Instance = ExtractVue<typeof VAppBar>
@@ -96,43 +89,10 @@ describe('AppBar.ts', () => {
 
     expect(wrapper.vm.isActive).toBe(false)
 
-    await scrollWindow(500)
+    await scrollWindow(0)
+    await scrollWindow(475)
 
     expect(wrapper.vm.isActive).toBe(true)
-  })
-
-  it('should set isScrollingUp', async () => {
-    const wrapper = mountFunction({
-      propsData: {
-        hideOnScroll: true
-      }
-    })
-
-    await scrollWindow(1000)
-    expect(wrapper.vm.isScrollingUp).toBe(false)
-    await scrollWindow(0)
-    expect(wrapper.vm.isScrollingUp).toBe(true)
-  })
-
-  it('should set a custom target', async () => {
-    const wrapper = mountFunction({
-      propsData: {
-        scrollTarget: 'body'
-      }
-    })
-
-    wrapper.vm.onScroll()
-    expect(wrapper.vm.target).toBe(document.body)
-  })
-
-  it('should warn if target isn\'t present', async () => {
-    mountFunction({
-      propsData: {
-        scrollTarget: '#test'
-      }
-    })
-
-    expect('Unable to locate element with identifier #test').toHaveBeenTipped()
   })
 
   it('should set active based on value', async () => {
