@@ -3,7 +3,7 @@
     "v-alert": {
       "outline": "2.0"
     },
-    "v-bottom-nav": {
+    "v-bottom-navigation": {
       "active": false
     },
     "v-chip": {
