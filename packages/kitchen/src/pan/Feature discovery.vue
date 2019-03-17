@@ -251,6 +251,36 @@
           </template>
         </v-feature-discovery>
       </core-section>
+
+      <core-title>Disabling ripple</core-title>
+      <core-section>
+        <v-layout justify-start align-center>
+          <v-switch v-model="noRipple8" label="Disable ripple" />
+          <v-btn class="ml-4" @click="model8 = true">Show</v-btn>
+        </v-layout>
+
+        <v-layout justify-center>
+          <v-sheet id="t8" class="ma-5" color="warning" width="40" height="40" />
+        </v-layout>
+
+        <v-feature-discovery
+          v-model="model8"
+          class="white--text"
+          color="primary"
+          target="#t8"
+          :no-ripple="noRipple8"
+        >
+          <h2 slot="title">Hey! New feature...</h2>
+          <p>
+            There's all sorts of new things that you can do with the great new features.
+            Just click the buttons to check them out!
+          </p>
+          <template #actions="{ close }">
+            <v-btn class="mx-1" color="white" depressed>Action</v-btn>
+            <v-btn class="mx-1" outline color="white" @click="close">Lesser action</v-btn>
+          </template>
+        </v-feature-discovery>
+      </core-section>
     </v-layout>
   </v-container>
 </template>
@@ -274,7 +304,9 @@
       elevation5: 4,
       persistent6: false,
       model6: false,
-      model7: false
+      model7: false,
+      noRipple8: false,
+      model8: false
     })
   }
 </script>
