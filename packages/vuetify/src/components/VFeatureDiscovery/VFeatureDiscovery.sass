@@ -34,6 +34,7 @@
   display: flex
   justify-content: center
   align-items: center
+  transform: scale(0)
   transition: $primary-transition
 
   &:before
@@ -49,6 +50,9 @@
 // Modifier
 .v-feature-discovery--active
   .v-feature-discovery__backdrop
+    transform: scale(1)
+
+  .v-feature-discovery__highlight
     transform: scale(1)
 
 @keyframes pulse-animation
