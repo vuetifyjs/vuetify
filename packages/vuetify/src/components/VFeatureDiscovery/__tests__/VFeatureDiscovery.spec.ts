@@ -88,7 +88,7 @@ describe('FeatureDiscovery.ts', () => {
     wrapper.vm.$watch('movable', fn)
 
     expect(fn).toHaveBeenCalledTimes(0)
-    wrapper.vm.onScroll()
+    wrapper.vm.updateRect()
     wrapper.setData({
       targetEl: {
         getBoundingClientRect: () => ({
@@ -103,7 +103,7 @@ describe('FeatureDiscovery.ts', () => {
       }
     })
     expect(fn).toHaveBeenCalledTimes(0)
-    wrapper.vm.onScroll()
+    wrapper.vm.updateRect()
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.rect).toEqual({
       top: 1,
