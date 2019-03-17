@@ -101,6 +101,7 @@ export default mixins(
     isActive (val: boolean) {
       if (!this.targetEl) return
 
+      if (val) this.updateRect();
       (this.targetEl as any).style.zIndex = val ? 11 : this.oldZIndex
     }
   },
@@ -127,7 +128,7 @@ export default mixins(
       if (this.isActive) (this.targetEl as any).style.zIndex = 11
     },
     updateRect () {
-      if (!this.targetEl) return
+      if (!this.targetEl || !this.isActive) return
 
       this.movable = false
       this.rect = this.targetEl.getBoundingClientRect()
