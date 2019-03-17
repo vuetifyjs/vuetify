@@ -189,6 +189,36 @@
           </div>
         </v-feature-discovery>
       </core-section>
+
+      <core-title>Persistent</core-title>
+      <core-section>
+        <v-layout justify-space-around>
+          <v-switch v-model="persistent6" label="Persistent" />
+          <v-btn @click="model6 = true">Show</v-btn>
+        </v-layout>
+
+        <v-layout justify-center>
+          <v-sheet id="t6" class="ma-5" color="warning" width="40" height="40" />
+        </v-layout>
+
+        <v-feature-discovery
+          v-model="model6"
+          class="white--text"
+          color="primary"
+          target="#t6"
+          :persistent="persistent6"
+        >
+          <h2 slot="title">Hey! New feature...</h2>
+          <p slot="text">
+            There's all sorts of new things that you can do with the great new features.
+            Just click the buttons to check them out!
+          </p>
+          <div slot="actions">
+            <v-btn class="mx-1" color="white" depressed>Action</v-btn>
+            <v-btn class="mx-1" outline color="white" @click="model6 = false">Lesser action</v-btn>
+          </div>
+        </v-feature-discovery>
+      </core-section>
     </v-layout>
   </v-container>
 </template>
@@ -209,7 +239,9 @@
       model42: false,
       model43: false,
       model5: false,
-      elevation5: 4
+      elevation5: 4,
+      persistent6: false,
+      model6: false
     })
   }
 </script>
