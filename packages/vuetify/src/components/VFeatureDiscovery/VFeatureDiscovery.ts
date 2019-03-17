@@ -121,7 +121,7 @@ export default mixins(
 
   methods: {
     keyPress (e: KeyboardEvent) {
-      if (!this.persistent && this.isActive && e.keyCode === 27) this.isActive = false
+      if (this.closeConditional() && e.keyCode === 27) this.isActive = false
     },
     updateTarget () {
       if (this.targetEl) (this.targetEl as any).style.zIndex = this.oldZIndex
@@ -154,33 +154,39 @@ export default mixins(
       }), [ this.genContent() ])
     },
     genContent (): VNode {
-      const vm = this
-
       return this.$createElement('div', {
         staticClass: 'v-feature-discovery__content'
       }, [
-        this.$createElement('div', {
-          staticClass: 'v-feature-discovery__wrapper'
-        }, [
-          this.$createElement('div', {
-            staticClass: 'v-feature-discovery__title'
-          }, this.$slots.title),
-          this.$createElement('div', {
-            staticClass: 'v-feature-discovery__text'
-          }, this.$slots.default)
-        ]),
+        this.genWrapper(),
         this.$createElement('div', {
           style: {
             height: `${this.highlightSize}px`
           }
         }),
+        this.genActions()
+      ])
+    },
+    genActions (): VNode {
+      const vm = this
+
+      return this.$createElement('div', {
+        staticClass: 'v-feature-discovery__actions'
+      }, this.$scopedSlots.actions!({
+        close: () => {
+          if (vm.closeConditional()) vm.isActive = false
+        }
+      }) || this.$slots.actions)
+    },
+    genWrapper (): VNode {
+      return this.$createElement('div', {
+        staticClass: 'v-feature-discovery__wrapper'
+      }, [
         this.$createElement('div', {
-          staticClass: 'v-feature-discovery__actions'
-        }, this.$scopedSlots.actions!({
-          close: () => {
-            if (!vm.persistent && vm.isActive) vm.isActive = false
-          }
-        }) || this.$slots.actions)
+          staticClass: 'v-feature-discovery__title'
+        }, this.$slots.title),
+        this.$createElement('div', {
+          staticClass: 'v-feature-discovery__text'
+        }, this.$slots.default)
       ])
     },
     genChildren (): VNode[] {
