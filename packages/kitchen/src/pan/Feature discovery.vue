@@ -235,7 +235,7 @@
       model2: false,
       flat2: true,
       model3: false,
-      size3: 500,
+      size3: 700,
       model41: false,
       model42: false,
       model43: false,

@@ -38,7 +38,7 @@ export default mixins(
       default: 'white'
     },
     size: {
-      default: 400,
+      default: 700,
       type: [Number, String],
       validator: (v: string | number) => !isNaN(parseInt(v))
     },
@@ -151,7 +151,26 @@ export default mixins(
       return this.$createElement('div', this.setBackgroundColor(this.color, {
         staticClass: 'v-feature-discovery__backdrop',
         class: this.elevationClasses
-      }), this.$slots.default)
+      }), [ this.genContent() ])
+    },
+    genContent (): VNode {
+      return this.$createElement('div', {
+        staticClass: 'v-feature-discovery__content'
+      }, [
+        this.$createElement('div', {
+          staticClass: 'v-feature-discovery__wrapper'
+        }, [
+          this.$createElement('div', {
+            staticClass: 'v-feature-discovery__title'
+          }, this.$slots.title),
+          this.$createElement('div', {
+            staticClass: 'v-feature-discovery__text'
+          }, this.$slots.text)
+        ]),
+        this.$createElement('div', {
+          staticClass: 'v-feature-discovery__actions'
+        }, this.$slots.actions)
+      ])
     },
     genChildren (): VNode[] {
       return [
