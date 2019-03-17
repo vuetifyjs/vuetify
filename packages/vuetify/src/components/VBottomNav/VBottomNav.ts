@@ -20,7 +20,7 @@ import { VNode } from 'vue'
 export default mixins(
   Applicationable('bottom', [
     'height',
-    'value'
+    'inputValue'
   ]),
   Colorable,
   Measurable,
@@ -70,7 +70,10 @@ export default mixins(
   },
 
   created () {
-    deprecate('active.sync', 'value or v-model')
+    /* istanbul ignore next */
+    if (this.active != null) {
+      deprecate('active.sync', 'value or v-model')
+    }
   },
 
   methods: {
