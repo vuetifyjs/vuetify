@@ -195,7 +195,7 @@
       <core-section>
         <v-layout justify-start>
           <v-switch v-model="persistent6" label="Persistent" />
-          <v-btn @click="model6 = true">Show</v-btn>
+          <v-btn class="px-2" @click="model6 = true">Show</v-btn>
         </v-layout>
 
         <v-layout justify-center>
@@ -220,6 +220,34 @@
           </div>
         </v-feature-discovery>
       </core-section>
+
+      <core-title>Scoped slots</core-title>
+      <core-section>
+        <v-layout justify-start>
+          <v-btn class="px-2" @click="model7 = true">Show</v-btn>
+        </v-layout>
+
+        <v-layout justify-center>
+          <v-sheet id="t7" class="ma-5" color="warning" width="40" height="40" />
+        </v-layout>
+
+        <v-feature-discovery
+          v-model="model7"
+          class="white--text"
+          color="primary"
+          target="#t7"
+        >
+          <h2 slot="title">Hey! New feature...</h2>
+          <p>
+            There's all sorts of new things that you can do with the great new features.
+            Just click the buttons to check them out!
+          </p>
+          <template #actions="{ close }">
+            <v-btn class="mx-1" color="white" depressed>Action</v-btn>
+            <v-btn class="mx-1" outline color="white" @click="close">Lesser action</v-btn>
+          </template>
+        </v-feature-discovery>
+      </core-section>
     </v-layout>
   </v-container>
 </template>
@@ -242,7 +270,8 @@
       model5: false,
       elevation5: 4,
       persistent6: false,
-      model6: false
+      model6: false,
+      model7: false
     })
   }
 </script>
