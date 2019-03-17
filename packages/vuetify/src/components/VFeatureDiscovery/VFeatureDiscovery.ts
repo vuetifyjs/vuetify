@@ -154,6 +154,8 @@ export default mixins(
       }), [ this.genContent() ])
     },
     genContent (): VNode {
+      const vm = this
+
       return this.$createElement('div', {
         staticClass: 'v-feature-discovery__content'
       }, [
@@ -174,7 +176,11 @@ export default mixins(
         }),
         this.$createElement('div', {
           staticClass: 'v-feature-discovery__actions'
-        }, this.$slots.actions)
+        }, this.$scopedSlots.actions!({
+          close: () => {
+            if (!vm.persistent && vm.isActive) vm.isActive = false
+          }
+        }) || this.$slots.actions)
       ])
     },
     genChildren (): VNode[] {
