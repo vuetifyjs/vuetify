@@ -7,6 +7,7 @@ import ButtonGroup from '../../mixins/button-group'
 import Colorable from '../../mixins/colorable'
 import Measurable from '../../mixins/measurable'
 import Proxyable from '../../mixins/proxyable'
+import Scrollable from '../../mixins/scrollable'
 import Themeable from '../../mixins/themeable'
 import { factory as ToggleableFactory } from '../../mixins/toggleable'
 
@@ -26,6 +27,7 @@ export default mixins(
   Measurable,
   ToggleableFactory('inputValue'),
   Proxyable,
+  Scrollable,
   Themeable
   /* @vue/component */
 ).extend({
@@ -38,6 +40,7 @@ export default mixins(
       default: 'v-btn--active'
     },
     grow: Boolean,
+    hideOnScroll: Boolean,
     horizontal: Boolean,
     mandatory: Boolean,
     height: {
@@ -52,6 +55,15 @@ export default mixins(
   },
 
   computed: {
+    canScroll (): boolean {
+      return (
+        Scrollable.options.computed.canScroll.call(this) &&
+        (
+          this.hideOnScroll ||
+          this.inputValue !== false
+        )
+      )
+    },
     classes (): object {
       return {
         'v-bottom-nav--absolute': this.absolute,
@@ -77,6 +89,9 @@ export default mixins(
   },
 
   methods: {
+    thresholdMet () {
+      this.isActive = !this.isScrollingUp
+    },
     updateApplication (): number {
       return this.$el
         ? this.$el.clientHeight
@@ -89,7 +104,7 @@ export default mixins(
   },
 
   render (h): VNode {
-    return h(ButtonGroup, this.setBackgroundColor(this.color, {
+    const data = this.setBackgroundColor(this.color, {
       staticClass: 'v-bottom-nav',
       class: this.classes,
       style: this.styles,
@@ -103,6 +118,18 @@ export default mixins(
         value: this.internalValue || this.active
       },
       on: { change: this.updateValue }
-    }), this.$slots.default)
+    })
+
+    if (this.canScroll) {
+      data.directives = data.directives || []
+
+      data.directives.push({
+        arg: this.scrollTarget,
+        name: 'scroll',
+        value: this.onScroll
+      })
+    }
+
+    return h(ButtonGroup, data, this.$slots.default)
   }
 })

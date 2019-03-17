@@ -96,7 +96,8 @@ describe('AppBar.ts', () => {
 
     expect(wrapper.vm.isActive).toBe(false)
 
-    await scrollWindow(500)
+    await scrollWindow(0)
+    await scrollWindow(475)
 
     expect(wrapper.vm.isActive).toBe(true)
   })
