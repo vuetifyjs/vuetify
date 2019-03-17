@@ -122,6 +122,7 @@ export default mixins(
 
       this.rect = this.targetEl.getBoundingClientRect()
       this.oldZIndex = Number(getComputedStyle(this.targetEl).zIndex) || 0
+      /* istanbul ignore next */
       if (this.isActive) (this.targetEl as any).style.zIndex = 11
     },
     onScroll () {

@@ -56,14 +56,96 @@ describe('FeatureDiscovery.ts', () => {
   })
 
   it('should toggle', () => {
-    const wrapper = mountFunction()
+    const wrapper = mountFunction({
+      propsData: {
+        target: document.body
+      }
+    })
 
     expect(wrapper.classes('v-feature-discovery--active')).toBeTruthy()
+    expect(document.body.style.zIndex).toBe('11')
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.vm.isActive = false
 
     expect(wrapper.classes('v-feature-discovery--active')).toBeFalsy()
+    expect(document.body.style.zIndex).toBe('0')
     expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.vm.isActive = true
+    wrapper.setData({
+      oldZIndex: 123
+    })
+    wrapper.vm.isActive = false
+    expect(document.body.style.zIndex).toBe('123')
+  })
+
+  it('should work with scroll properly', async () => {
+    const fn = jest.fn()
+
+    const wrapper = mountFunction()
+
+    wrapper.vm.$watch('movable', fn)
+
+    expect(fn).toHaveBeenCalledTimes(0)
+    wrapper.vm.onScroll()
+    wrapper.setData({
+      targetEl: {
+        getBoundingClientRect: () => ({
+          top: 1,
+          bottom: 2,
+          left: 3,
+          right: 4,
+          height: 5,
+          width: 6
+        }),
+        style: {}
+      }
+    })
+    expect(fn).toHaveBeenCalledTimes(0)
+    wrapper.vm.onScroll()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.rect).toEqual({
+      top: 1,
+      bottom: 2,
+      left: 3,
+      right: 4,
+      height: 5,
+      width: 6
+    })
+    expect(fn).toHaveBeenCalledWith(false, true)
+  })
+
+  it('should update targetEl when target prop updates', () => {
+    const wrapper = mountFunction()
+
+    const spy = jest.spyOn(wrapper.vm, 'updateTarget')
+
+    expect(spy).toHaveBeenCalledTimes(0)
+    wrapper.setProps({
+      target: '#asd'
+    })
+    expect(spy).toHaveBeenCalledTimes(1)
+  })
+
+  it('should update z-index', () => {
+    const wrapper = mountFunction()
+
+    wrapper.setProps({
+      target: document.body
+    })
+
+    wrapper.setData({
+      oldZIndex: 123
+    })
+    expect(document.body.style.zIndex).toBe('11')
+
+    document.head.style.zIndex = '321'
+    wrapper.setProps({
+      target: document.head
+    })
+    wrapper.vm.updateTarget()
+    expect(wrapper.vm.oldZIndex).toBe(321)
+    expect(document.head.style.zIndex).toBe('11')
   })
 })
