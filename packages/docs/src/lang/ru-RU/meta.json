@@ -131,7 +131,7 @@
   },
   "components/bottom-navigation": {
     "title": "Bottom Navigation Component",
-    "description": "The v-bottom-nav component is primarily for mobile use and acts as the primary navigation.",
+    "description": "The v-bottom-navigation component is primarily for mobile use and acts as the primary navigation.",
     "keywords": "bottom nav, material nav, nav, bottom navigation, navigation"
   },
   "components/bottom-sheets": {

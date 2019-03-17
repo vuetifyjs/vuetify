@@ -574,7 +574,7 @@ module.exports = {
   'v-breadcrumbs-item': {
     slots: ['default']
   },
-  'v-bottom-nav': {
+  'v-bottom-navigation': {
     props: [
       {
         name: 'active',

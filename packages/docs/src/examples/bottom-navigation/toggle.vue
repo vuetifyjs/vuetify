@@ -14,7 +14,7 @@
       </v-btn>
     </v-card-text>
 
-    <v-bottom-nav
+    <v-bottom-navigation
       :input-value="showNav"
       :value="activeBtn"
       absolute
@@ -35,7 +35,7 @@
         <span>Nearby</span>
         <v-icon>place</v-icon>
       </v-btn>
-    </v-bottom-nav>
+    </v-bottom-navigation>
   </v-card>
 </template>
 

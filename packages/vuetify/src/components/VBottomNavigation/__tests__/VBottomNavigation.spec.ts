@@ -2,7 +2,7 @@
 import Vue from 'vue'
 
 // Components
-import VBottomNav from '../VBottomNav'
+import VBottomNavigation from '../VBottomNavigation'
 import VBtn from '../../VBtn/VBtn'
 
 // Utilities
@@ -25,13 +25,13 @@ function createBtn (val = null) {
   })
 }
 
-describe('VBottomNav.ts', () => {
-  type Instance = InstanceType<typeof VBottomNav>
+describe('VBottomNavigation.ts', () => {
+  type Instance = InstanceType<typeof VBottomNavigation>
   let mountFunction: (options?: object) => Wrapper<Instance>
 
   beforeEach(() => {
     mountFunction = (options = {}) => {
-      return mount(VBottomNav, {
+      return mount(VBottomNavigation, {
         mocks: {
           $vuetify: {
             application: {

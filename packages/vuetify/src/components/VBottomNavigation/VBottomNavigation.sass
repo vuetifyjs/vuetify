@@ -3,16 +3,16 @@
 @import './_mixins.sass'
 
 // Theme
-.v-bottom-nav.theme--light
+.v-bottom-navigation.theme--light
   +bottom-nav-theme($material-light)
-.v-bottom-nav.theme--dark
+.v-bottom-navigation.theme--dark
   +bottom-nav-theme($material-dark)
 
   .v-btn.v-btn--active
     color: map-deep-get($material-dark, 'text', 'primary')
 
 // Block
-.v-item-group.v-bottom-nav
+.v-item-group.v-bottom-navigation
   bottom: 0
   display: flex
   left: 0
@@ -54,24 +54,24 @@
         opacity: 1
 
 // Modifier
-.v-bottom-nav--absolute,
-.v-bottom-nav--fixed
+.v-bottom-navigation--absolute,
+.v-bottom-navigation--fixed
   z-index: 4
 
-.v-bottom-nav--absolute
+.v-bottom-navigation--absolute
   position: absolute
 
-.v-bottom-nav--active
+.v-bottom-navigation--active
   transform: translate(0, 0)
 
-.v-bottom-nav--fixed
+.v-bottom-navigation--fixed
   position: fixed
 
-.v-bottom-nav--grow
+.v-bottom-navigation--grow
   .v-btn
     width: 100%
 
-.v-item-group.v-bottom-nav--horizontal
+.v-item-group.v-bottom-navigation--horizontal
   .v-btn > .v-btn__content
     flex-direction: row-reverse
 
@@ -79,7 +79,7 @@
       margin-bottom: 0
       margin-right: 16px
 
-.v-bottom-nav--shift
+.v-bottom-navigation--shift
   .v-btn .v-btn__content > *:not(.v-icon)
     opacity: 0
     position: absolute

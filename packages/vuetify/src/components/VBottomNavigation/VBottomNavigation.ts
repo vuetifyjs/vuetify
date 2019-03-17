@@ -1,5 +1,5 @@
 // Styles
-import './VBottomNav.sass'
+import './VBottomNavigation.sass'
 
 // Mixins
 import Applicationable from '../../mixins/applicationable'
@@ -31,7 +31,7 @@ export default mixins(
   Themeable
   /* @vue/component */
 ).extend({
-  name: 'v-bottom-nav',
+  name: 'v-bottom-navigation',
 
   props: {
     active: [Number, String],
@@ -72,11 +72,11 @@ export default mixins(
     },
     classes (): object {
       return {
-        'v-bottom-nav--absolute': this.absolute,
-        'v-bottom-nav--grow': this.grow,
-        'v-bottom-nav--fixed': !this.absolute && (this.app || this.fixed),
-        'v-bottom-nav--horizontal': this.horizontal,
-        'v-bottom-nav--shift': this.shift
+        'v-bottom-navigation--absolute': this.absolute,
+        'v-bottom-navigation--grow': this.grow,
+        'v-bottom-navigation--fixed': !this.absolute && (this.app || this.fixed),
+        'v-bottom-navigation--horizontal': this.horizontal,
+        'v-bottom-navigation--shift': this.shift
       }
     },
     styles (): object {
@@ -111,7 +111,7 @@ export default mixins(
 
   render (h): VNode {
     const data = this.setBackgroundColor(this.color, {
-      staticClass: 'v-bottom-nav',
+      staticClass: 'v-bottom-navigation',
       class: this.classes,
       style: this.styles,
       props: {

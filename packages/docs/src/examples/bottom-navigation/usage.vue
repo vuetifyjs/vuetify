@@ -8,7 +8,7 @@
     <div class="headline text-xs-center pa-5">
       Active: {{ bottomNav }}
     </div>
-    <v-bottom-nav
+    <v-bottom-navigation
       v-model="bottomNav"
       absolute
       color="white"
@@ -40,7 +40,7 @@
         <span>Nearby</span>
         <v-icon>place</v-icon>
       </v-btn>
-    </v-bottom-nav>
+    </v-bottom-navigation>
   </v-card>
 </template>
 

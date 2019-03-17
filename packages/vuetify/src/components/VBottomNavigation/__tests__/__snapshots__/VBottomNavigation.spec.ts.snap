@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VBottomNav.ts should be visible with a true value 1`] = `
+exports[`VBottomNavigation.ts should be visible with a true value 1`] = `
 Object {
   "height": "56px",
   "transform": "none",
 }
 `;
 
-exports[`VBottomNav.ts should be visible with a true value 2`] = `
+exports[`VBottomNavigation.ts should be visible with a true value 2`] = `
 
-<div class="v-item-group v-bottom-nav theme--light"
+<div class="v-item-group v-bottom-navigation theme--light"
      style="height: 56px;"
 >
   <button type="button"
@@ -28,16 +28,16 @@ exports[`VBottomNav.ts should be visible with a true value 2`] = `
 
 `;
 
-exports[`VBottomNav.ts should be visible with a true value 3`] = `
+exports[`VBottomNavigation.ts should be visible with a true value 3`] = `
 Object {
   "height": "56px",
   "transform": "translateY(100%)",
 }
 `;
 
-exports[`VBottomNav.ts should be visible with a true value 4`] = `
+exports[`VBottomNavigation.ts should be visible with a true value 4`] = `
 
-<div class="v-item-group v-bottom-nav theme--light"
+<div class="v-item-group v-bottom-navigation theme--light"
      style="height: 56px;"
 >
   <button type="button"

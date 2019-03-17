@@ -5,7 +5,7 @@
     max-width="344"
     tile
   >
-    <v-bottom-nav
+    <v-bottom-navigation
       v-model="bottomNav"
       :color="color"
       absolute
@@ -31,7 +31,7 @@
         <span>Image</span>
         <v-icon>image</v-icon>
       </v-btn>
-    </v-bottom-nav>
+    </v-bottom-navigation>
   </v-card>
 </template>
 
