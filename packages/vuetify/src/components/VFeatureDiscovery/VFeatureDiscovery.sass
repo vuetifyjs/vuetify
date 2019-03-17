@@ -38,6 +38,7 @@
   transition: $primary-transition
 
   &:before
+    background-color: inherit
     content: ''
     border-radius: inherit
     position: absolute
@@ -45,7 +46,6 @@
     width: calc(100% + 180px)
     transition: $primary-transition
     animation: pulse-animation 1.4s cubic-bezier(0.24, 0, 0.38, 1) infinite
-    background: white
 
 // Modifier
 .v-feature-discovery--active

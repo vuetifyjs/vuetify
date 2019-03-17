@@ -105,7 +105,7 @@
         <v-layout justify-space-around align-center>
           <v-sheet id="t4v1" class="ma-5" color="green" width="40" height="40" />
           <v-sheet id="t4v2" class="ma-5" color="blue" width="80" height="80" />
-          <v-sheet id="t4v3" class="ma-5" color="red" width="120" height="50" />
+          <v-sheet id="t4v3" class="ma-5" color="blue lighten-1" width="120" height="50" />
         </v-layout>
 
         <v-feature-discovery
@@ -146,6 +146,7 @@
           v-model="model43"
           class="white--text"
           color="warning lighten-2"
+          highlight-color="error"
           target="#t4v3"
         >
           <h2 slot="title">Hey! New feature...</h2>
