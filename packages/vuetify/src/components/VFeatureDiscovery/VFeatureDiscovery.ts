@@ -33,6 +33,10 @@ export default mixins(
       type: String,
       default: 'primary'
     },
+    highlightColor: {
+      type: String,
+      default: 'white'
+    },
     size: {
       default: 400,
       type: [Number, String],
@@ -156,7 +160,7 @@ export default mixins(
       ]
     },
     genHighlight (): VNode {
-      return this.$createElement('div', {
+      return this.$createElement('div', this.setBackgroundColor(this.highlightColor, {
         staticClass: 'v-feature-discovery__highlight',
         style: {
           top: `calc(50% - (${this.highlightSize}px / 2))`,
@@ -164,7 +168,7 @@ export default mixins(
           height: `${this.highlightSize}px`,
           width: `${this.highlightSize}px`
         }
-      }, this.$slots.default)
+      }), this.$slots.default)
     }
   },
 
