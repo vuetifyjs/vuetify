@@ -3,11 +3,6 @@ import Vue from 'vue'
 
 // Components
 import VSelectList from '../VSelectList'
-import {
-  VListTile,
-  VListTileTitle,
-  VListTileContent
-} from '../../VList'
 
 // Utilities
 import {
@@ -38,7 +33,8 @@ describe('.ts', () => {
   })
 
   // TODO: wat
-  /* it.skip('should generate a header', () => {
+  // eslint-disable-next-line jest/no-disabled-tests
+  it.skip('should generate a header', () => {
     const wrapper = mount(VSelectList)
 
     const divider = wrapper.vm.genHeader({
@@ -51,7 +47,7 @@ describe('.ts', () => {
     // Check that header exists
     expect(divider.children).toHaveLength(1)
     expect(divider.children[0].text).toBe('foobar')
-  }) */
+  })
 
   it('should use no-data slot', () => {
     const wrapper = mountFunction({
