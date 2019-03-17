@@ -97,15 +97,18 @@
       <core-title>Colors</core-title>
       <core-section>
         <v-layout justify-space-around align-center>
-          <v-btn @click="model41 = true">Show 1</v-btn>
-          <v-btn @click="model42 = true">Show 2</v-btn>
-          <v-btn @click="model43 = true">Show 3</v-btn>
-        </v-layout>
-
-        <v-layout justify-space-around align-center>
-          <v-sheet id="t4v1" class="ma-5" color="green" width="40" height="40" />
-          <v-sheet id="t4v2" class="ma-5" color="blue" width="80" height="80" />
-          <v-sheet id="t4v3" class="ma-5" color="blue lighten-1" width="120" height="50" />
+          <v-layout column align-center>
+            <v-btn @click="model41 = true">Show</v-btn>
+            <v-sheet id="t4v1" class="ma-5" color="green" width="40" height="40" />
+          </v-layout>
+          <v-layout column align-center>
+            <v-btn @click="model42 = true">Show</v-btn>
+            <v-sheet id="t4v2" class="ma-5" color="blue" width="80" height="80" />
+          </v-layout>
+          <v-layout column align-center>
+            <v-btn @click="model43 = true">Show</v-btn>
+            <v-sheet id="t4v3" class="ma-5" color="blue lighten-1" width="120" height="50" />
+          </v-layout>
         </v-layout>
 
         <v-feature-discovery
@@ -121,7 +124,7 @@
           </p>
           <div slot="actions">
             <v-btn class="mx-1" color="white" depressed>Action</v-btn>
-            <v-btn class="mx-1" outline color="white" @click="model1 = false">Lesser action</v-btn>
+            <v-btn class="mx-1" outline color="white" @click="model41 = false">Lesser action</v-btn>
           </div>
         </v-feature-discovery>
 
@@ -138,7 +141,7 @@
           </p>
           <div slot="actions">
             <v-btn class="mx-1" color="white" depressed>Action</v-btn>
-            <v-btn class="mx-1" outline color="white" @click="model1 = false">Lesser action</v-btn>
+            <v-btn class="mx-1" outline color="white" @click="model42 = false">Lesser action</v-btn>
           </div>
         </v-feature-discovery>
 
@@ -156,7 +159,7 @@
           </p>
           <div slot="actions">
             <v-btn class="mx-1" color="white" depressed>Action</v-btn>
-            <v-btn class="mx-1" outline color="white" @click="model1 = false">Lesser action</v-btn>
+            <v-btn class="mx-1" outline color="white" @click="model43 = false">Lesser action</v-btn>
           </div>
         </v-feature-discovery>
       </core-section>
@@ -193,9 +196,9 @@
 
       <core-title>Persistent</core-title>
       <core-section>
-        <v-layout justify-start>
+        <v-layout justify-start align-center>
           <v-switch v-model="persistent6" label="Persistent" />
-          <v-btn class="px-2" @click="model6 = true">Show</v-btn>
+          <v-btn class="ml-4" @click="model6 = true">Show</v-btn>
         </v-layout>
 
         <v-layout justify-center>
