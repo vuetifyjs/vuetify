@@ -2,7 +2,7 @@
   <div>
     <div class="text-xs-center d-flex pb-3">
       <v-btn @click="all">all</v-btn>
-      <div></div>
+      <div>{{ panel }}</div>
       <v-btn @click="none">none</v-btn>
     </div>
 

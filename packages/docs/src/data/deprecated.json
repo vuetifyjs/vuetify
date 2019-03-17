@@ -3,6 +3,9 @@
     "v-alert": {
       "outline": "2.0"
     },
+    "v-expansion-panel": {
+      "expand": "2.0"
+    },
     "v-chip": {
       "outline": "2.0",
       "selected": "2.0"
