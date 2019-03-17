@@ -86,7 +86,8 @@ export default mixins(
         left: convertToUnit(this.computedLeft),
         top: convertToUnit(this.computedTop),
         height: convertToUnit(this.computedSize),
-        width: convertToUnit(this.computedSize)
+        width: convertToUnit(this.computedSize),
+        'pointer-events': this.isActive ? 'auto' : 'none'
       }
     },
     highlightSize (): number {
@@ -173,10 +174,6 @@ export default mixins(
           args: {
             closeConditional: this.closeConditional
           }
-        },
-        {
-          name: 'show',
-          value: this.isActive
         }
       ],
       class: this.classes,
