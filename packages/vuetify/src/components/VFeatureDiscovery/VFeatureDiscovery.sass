@@ -22,6 +22,9 @@
   opacity: 0.96
   transform: scale(0)
   transition: $primary-transition
+  display: flex
+  justify-content: center
+  align-items: center
 
 .v-feature-discovery__highlight
   border-radius: 100%
@@ -46,6 +49,14 @@
     width: calc(100% + 180px)
     transition: $primary-transition
     animation: pulse-animation 1.4s cubic-bezier(0.24, 0, 0.38, 1) infinite
+
+.v-feature-discovery__content
+  width: 60%
+  height: 60%
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  align-items: center
 
 // Modifier
 .v-feature-discovery--active
