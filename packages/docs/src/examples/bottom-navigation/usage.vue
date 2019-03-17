@@ -1,13 +1,18 @@
 <template>
-  <v-card height="200px" flat>
+  <v-card
+    class="mx-auto"
+    height="200"
+    flat
+    max-width="500"
+  >
     <div class="headline text-xs-center pa-5">
       Active: {{ bottomNav }}
     </div>
     <v-bottom-nav
-      :active.sync="bottomNav"
-      :value="true"
+      v-model="bottomNav"
       absolute
-      color="transparent"
+      color="white"
+      grow
     >
       <v-btn
         color="teal"
