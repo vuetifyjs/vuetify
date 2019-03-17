@@ -577,7 +577,7 @@ module.exports = {
   'v-bottom-navigation': {
     props: [
       {
-        name: 'active',
+        name: 'input-value',
         sync: true
       }
     ],
@@ -588,7 +588,7 @@ module.exports = {
         value: 'boolean'
       },
       {
-        name: 'update:active',
+        name: 'update:inputValue',
         value: 'string | number'
       }
     ]

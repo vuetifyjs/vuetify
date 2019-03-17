@@ -97,6 +97,7 @@ export default mixins(
   methods: {
     thresholdMet () {
       this.isActive = !this.isScrollingUp
+      this.$emit('update:inputValue', this.isActive)
     },
     updateApplication (): number {
       return this.$el
@@ -104,7 +105,6 @@ export default mixins(
         : 0
     },
     updateValue (val: any) {
-      this.internalValue = val
       this.$emit('update:active', val)
     }
   },
