@@ -575,12 +575,6 @@ module.exports = {
     slots: ['default']
   },
   'v-bottom-navigation': {
-    props: [
-      {
-        name: 'input-value',
-        sync: true
-      }
-    ],
     slots: ['default'],
     events: [
       {
