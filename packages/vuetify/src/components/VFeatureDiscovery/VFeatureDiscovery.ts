@@ -108,7 +108,8 @@ export default mixins(
   mounted () {
     this.updateTarget()
 
-    document.addEventListener('scroll', this.onScroll)
+    window.addEventListener('scroll', this.updateRect)
+    window.addEventListener('resize', this.updateRect)
   },
 
   methods: {
@@ -125,7 +126,7 @@ export default mixins(
       /* istanbul ignore next */
       if (this.isActive) (this.targetEl as any).style.zIndex = 11
     },
-    onScroll () {
+    updateRect () {
       if (!this.targetEl) return
 
       this.movable = false
