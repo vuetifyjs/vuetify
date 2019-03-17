@@ -54,6 +54,12 @@ export default mixins(
     }
   },
 
+  data () {
+    return {
+      isActive: this.inputValue
+    }
+  },
+
   computed: {
     canScroll (): boolean {
       return (

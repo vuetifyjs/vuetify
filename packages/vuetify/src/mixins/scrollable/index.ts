@@ -18,6 +18,7 @@ export default Vue.extend({
   },
 
   data: () => ({
+    isActive: false,
     currentScroll: 0,
     currentThreshold: 0,
     isScrollingUp: false,

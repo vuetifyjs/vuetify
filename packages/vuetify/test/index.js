@@ -203,3 +203,10 @@ export const resizeWindow = (width = global.innerWidth, height = global.innerHei
   global.dispatchEvent(new Event('resize'))
   return new Promise(resolve => setTimeout(resolve, 200))
 }
+
+export const scrollWindow = (y) => {
+  global.pageYOffset = y
+  global.dispatchEvent(new Event('scroll'))
+
+  return new Promise(resolve => setTimeout(resolve, 200))
+}
