@@ -7,6 +7,15 @@ import { consoleWarn } from '../../util/console'
 // Types
 import Vue from 'vue'
 
+/**
+ * Scrollable
+ *
+ * Used for monitoring scrolling and
+ * invoking functions based upon
+ * scrolling thresholds being
+ * met.
+ */
+/* @vue/component */
 export default Vue.extend({
   name: 'scrollable',
 
@@ -28,9 +37,18 @@ export default Vue.extend({
   }),
 
   computed: {
+    /**
+     * A computed property that returns
+     * whether scrolling features are
+     * enabled or disabled
+     */
     canScroll (): boolean {
       return typeof window !== 'undefined'
     },
+    /**
+     * The threshold that must be met before
+     * thresholdMet function is invoked
+     */
     computedScrollThreshold (): number {
       return this.scrollThreshold
         ? Number(this.scrollThreshold)
@@ -76,6 +94,11 @@ export default Vue.extend({
         ) this.thresholdMet()
       })
     },
+    /**
+     * The method invoked when
+     * scrolling in any direction
+     * has exceeded the threshold
+     */
     thresholdMet () { /* noop */ }
   }
 })
