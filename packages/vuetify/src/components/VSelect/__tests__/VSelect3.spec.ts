@@ -14,7 +14,17 @@ describe('.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VSelect, {
-        ...options
+        ...options,
+        mocks: {
+          $vuetify: {
+            lang: {
+              t: (val: string) => val
+            },
+            theme: {
+              dark: false
+            }
+          }
+        }
       })
     }
   })

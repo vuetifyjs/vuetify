@@ -16,14 +16,25 @@ import {
   Wrapper
 } from '@vue/test-utils'
 
-describe('.ts', () => {
+describe('VSelect.ts', () => {
   type Instance = InstanceType<typeof VSelect>
   let mountFunction: (options?: object) => Wrapper<Instance>
 
   beforeEach(() => {
     mountFunction = (options = {}) => {
+      let localVue: typeof Vue
       return mount(VSelect, {
-        ...options
+        ...options,
+        mocks: {
+          $vuetify: {
+            lang: {
+              t: (val: string) => val
+            },
+            theme: {
+              dark: false
+            }
+          }
+        }
       })
     }
   })
