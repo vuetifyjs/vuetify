@@ -168,6 +168,11 @@ export default mixins(
           }, this.$slots.text)
         ]),
         this.$createElement('div', {
+          style: {
+            height: `${this.highlightSize}px`
+          }
+        }),
+        this.$createElement('div', {
           staticClass: 'v-feature-discovery__actions'
         }, this.$slots.actions)
       ])
