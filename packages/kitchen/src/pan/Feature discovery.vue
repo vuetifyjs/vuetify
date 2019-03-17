@@ -21,7 +21,7 @@
           :target="t1"
         >
           <h2 slot="title">Hey! New feature...</h2>
-          <p slot="text">
+          <p>
             There's all sorts of new things that you can do with the great new features.
             Just click the buttons to check them out!
           </p>
@@ -51,7 +51,7 @@
           :flat="flat2"
         >
           <h2 slot="title">Hey! New feature...</h2>
-          <p slot="text">
+          <p>
             There's all sorts of new things that you can do with the great new features.
             Just click the buttons to check them out!
           </p>
@@ -83,7 +83,7 @@
           target="#t3"
         >
           <h2 slot="title">Hey! New feature...</h2>
-          <p slot="text">
+          <p>
             There's all sorts of new things that you can do with the great new features.
             Just click the buttons to check them out!
           </p>
@@ -115,7 +115,7 @@
           target="#t4v1"
         >
           <h2 slot="title">Hey! New feature...</h2>
-          <p slot="text">
+          <p>
             There's all sorts of new things that you can do with the great new features.
             Just click the buttons to check them out!
           </p>
@@ -132,7 +132,7 @@
           target="#t4v2"
         >
           <h2 slot="title">Hey! New feature...</h2>
-          <p slot="text">
+          <p>
             There's all sorts of new things that you can do with the great new features.
             Just click the buttons to check them out!
           </p>
@@ -150,7 +150,7 @@
           target="#t4v3"
         >
           <h2 slot="title">Hey! New feature...</h2>
-          <p slot="text">
+          <p>
             There's all sorts of new things that you can do with the great new features.
             Just click the buttons to check them out!
           </p>
@@ -180,7 +180,7 @@
           :elevation="elevation5"
         >
           <h2 slot="title">Hey! New feature...</h2>
-          <p slot="text">
+          <p>
             There's all sorts of new things that you can do with the great new features.
             Just click the buttons to check them out!
           </p>
@@ -210,7 +210,7 @@
           :persistent="persistent6"
         >
           <h2 slot="title">Hey! New feature...</h2>
-          <p slot="text">
+          <p>
             There's all sorts of new things that you can do with the great new features.
             Just click the buttons to check them out!
           </p>

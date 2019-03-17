@@ -165,7 +165,7 @@ export default mixins(
           }, this.$slots.title),
           this.$createElement('div', {
             staticClass: 'v-feature-discovery__text'
-          }, this.$slots.text)
+          }, this.$slots.default)
         ]),
         this.$createElement('div', {
           style: {
@@ -192,7 +192,7 @@ export default mixins(
           height: `${this.highlightSize}px`,
           width: `${this.highlightSize}px`
         }
-      }), this.$slots.default)
+      }))
     }
   },
 
