@@ -29,27 +29,6 @@ exports[`VSelect.ts should only show items if they are in items 1`] = `
         </div>
       </div>
       <div class="v-menu">
-        <div class="v-menu__content theme--light "
-             style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
-        >
-          <div class="v-select-list v-card theme--light">
-            <div role="list"
-                 class="v-list theme--light"
-            >
-              <div aria-selected="false"
-                   role="listitem"
-                   tabindex="-1"
-                   class="v-list-item v-list-item--link theme--light"
-              >
-                <div class="v-list-item__content">
-                  <div class="v-list-item__title">
-                    foo
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
     <div class="v-text-field__details">
@@ -92,27 +71,6 @@ exports[`VSelect.ts should only show items if they are in items 2`] = `
         </div>
       </div>
       <div class="v-menu">
-        <div class="v-menu__content theme--light "
-             style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
-        >
-          <div class="v-select-list v-card theme--light">
-            <div role="list"
-                 class="v-list theme--light"
-            >
-              <div aria-selected="false"
-                   role="listitem"
-                   tabindex="-1"
-                   class="v-list-item v-list-item--link theme--light"
-              >
-                <div class="v-list-item__content">
-                  <div class="v-list-item__title">
-                    foo
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
     <div class="v-text-field__details">
@@ -158,38 +116,6 @@ exports[`VSelect.ts should only show items if they are in items 3`] = `
         </div>
       </div>
       <div class="v-menu">
-        <div class="v-menu__content theme--light "
-             style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
-        >
-          <div class="v-select-list v-card theme--light">
-            <div role="list"
-                 class="v-list theme--light"
-            >
-              <div aria-selected="false"
-                   role="listitem"
-                   tabindex="-1"
-                   class="v-list-item v-list-item--link theme--light"
-              >
-                <div class="v-list-item__content">
-                  <div class="v-list-item__title">
-                    foo
-                  </div>
-                </div>
-              </div>
-              <div aria-selected="false"
-                   role="listitem"
-                   tabindex="-1"
-                   class="v-list-item v-list-item--link theme--light"
-              >
-                <div class="v-list-item__content">
-                  <div class="v-list-item__title">
-                    bar
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
     <div class="v-text-field__details">
@@ -232,27 +158,6 @@ exports[`VSelect.ts should render v-select correctly when not using scope slot 1
         </div>
       </div>
       <div class="v-menu">
-        <div class="v-menu__content theme--light "
-             style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
-        >
-          <div class="v-select-list v-card theme--light">
-            <div role="list"
-                 class="v-list theme--light"
-            >
-              <div aria-selected="false"
-                   role="listitem"
-                   tabindex="-1"
-                   class="v-list-item theme--light"
-              >
-                <div class="v-list-item__content">
-                  <div class="v-list-item__title">
-                    $vuetify.noDataText
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
     <div class="v-text-field__details">
@@ -295,27 +200,6 @@ exports[`VSelect.ts should render v-select correctly when not using v-list-item 
         </div>
       </div>
       <div class="v-menu">
-        <div class="v-menu__content theme--light "
-             style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
-        >
-          <div class="v-select-list v-card theme--light">
-            <div role="list"
-                 class="v-list theme--light"
-            >
-              <div aria-selected="false"
-                   role="listitem"
-                   tabindex="-1"
-                   class="v-list-item theme--light"
-              >
-                <div class="v-list-item__content">
-                  <div class="v-list-item__title">
-                    $vuetify.noDataText
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
     <div class="v-text-field__details">
@@ -358,27 +242,6 @@ exports[`VSelect.ts should render v-select correctly when using v-list-item in i
         </div>
       </div>
       <div class="v-menu">
-        <div class="v-menu__content theme--light "
-             style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
-        >
-          <div class="v-select-list v-card theme--light">
-            <div role="list"
-                 class="v-list theme--light"
-            >
-              <div aria-selected="false"
-                   role="listitem"
-                   tabindex="-1"
-                   class="v-list-item theme--light"
-              >
-                <div class="v-list-item__content">
-                  <div class="v-list-item__title">
-                    $vuetify.noDataText
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
     <div class="v-text-field__details">
@@ -390,29 +253,6 @@ exports[`VSelect.ts should render v-select correctly when using v-list-item in i
         </span>
       </div>
     </div>
-  </div>
-</div>
-
-`;
-
-exports[`VSelect.ts should use slotted append-item 1`] = `
-
-<div role="list"
-     class="v-list theme--light"
->
-  <div aria-selected="false"
-       role="listitem"
-       tabindex="-1"
-       class="v-list-item v-list-item--link theme--light"
-  >
-    <div class="v-list-item__content">
-      <div class="v-list-item__title">
-        foo
-      </div>
-    </div>
-  </div>
-  <div>
-    foo
   </div>
 </div>
 

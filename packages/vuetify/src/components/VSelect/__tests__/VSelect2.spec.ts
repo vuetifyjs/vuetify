@@ -11,8 +11,12 @@ import {
 describe('.ts', () => {
   type Instance = InstanceType<typeof VSelect>
   let mountFunction: (options?: object) => Wrapper<Instance>
+  let el
 
   beforeEach(() => {
+    el = document.createElement('div')
+    el.setAttribute('data-app', 'true')
+    document.body.appendChild(el)
     mountFunction = (options = {}) => {
       return mount(VSelect, {
         ...options,
@@ -28,6 +32,24 @@ describe('.ts', () => {
         }
       })
     }
+  })
+
+  it('should use slotted append-item', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['foo']
+      },
+      slots: {
+        'append-item': [{
+          render: h => h('div', 'foo')
+        }]
+      }
+    })
+
+    const list = wrapper.find('.v-list')
+
+    expect(wrapper.vm.$slots['append-item']).toBeTruthy()
+    expect(list.html()).toMatchSnapshot()
   })
 
   it('should use scoped slot for selection generation', () => {
@@ -468,38 +490,5 @@ describe('.ts', () => {
     el.element.click()
 
     expect(selectItem).toHaveBeenCalled()
-  })
-
-  it('should update menu status and focus when menu closes', async () => {
-    const wrapper = mountFunction()
-    const menu = wrapper.vm.$refs.menu
-
-    wrapper.setData({
-      isMenuActive: true,
-      isFocused: true
-    })
-
-    expect(wrapper.vm.isMenuActive).toBe(true)
-    expect(wrapper.vm.isFocused).toBe(true)
-
-    await wrapper.vm.$nextTick()
-
-    expect(menu.isActive).toBe(true)
-
-    menu.isActive = false
-
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.isMenuActive).toBe(false)
-    expect(wrapper.vm.isFocused).toBe(false)
-  })
-
-  // const wrapper = mountFunction()
-  it('should use specified value', async () => {
-    const wrapper = mountFunction({
-      propsData: {
-        items: ['foo']
-      }
-    })
   })
 })

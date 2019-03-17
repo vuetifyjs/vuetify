@@ -19,8 +19,12 @@ import {
 describe('VSelect.ts', () => {
   type Instance = InstanceType<typeof VSelect>
   let mountFunction: (options?: object) => Wrapper<Instance>
+  let el
 
   beforeEach(() => {
+    el = document.createElement('div')
+    el.setAttribute('data-app', 'true')
+    document.body.appendChild(el)
     mountFunction = (options = {}) => {
       let localVue: typeof Vue
       return mount(VSelect, {
@@ -438,24 +442,6 @@ describe('VSelect.ts', () => {
     const list = wrapper.find('.v-list')
 
     expect(wrapper.vm.$slots['prepend-item']).toBeTruthy()
-    expect(list.html()).toMatchSnapshot()
-  })
-
-  it('should use slotted append-item', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        items: ['foo']
-      },
-      slots: {
-        'append-item': [{
-          render: h => h('div', 'foo')
-        }]
-      }
-    })
-
-    const list = wrapper.find('.v-list')
-
-    expect(wrapper.vm.$slots['append-item']).toBeTruthy()
     expect(list.html()).toMatchSnapshot()
   })
 })
