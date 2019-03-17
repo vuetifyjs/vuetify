@@ -112,9 +112,13 @@ export default mixins(
 
     window.addEventListener('scroll', this.updateRect)
     window.addEventListener('resize', this.updateRect)
+    window.addEventListener('keyup', this.keyPress)
   },
 
   methods: {
+    keyPress (e: KeyboardEvent) {
+      if (!this.persistent && this.isActive && e.keyCode === 27) this.isActive = false
+    },
     updateTarget () {
       if (this.targetEl) (this.targetEl as any).style.zIndex = this.oldZIndex
 
