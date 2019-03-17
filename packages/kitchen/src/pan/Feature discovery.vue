@@ -193,7 +193,7 @@
 
       <core-title>Persistent</core-title>
       <core-section>
-        <v-layout justify-space-around>
+        <v-layout justify-start>
           <v-switch v-model="persistent6" label="Persistent" />
           <v-btn @click="model6 = true">Show</v-btn>
         </v-layout>
