@@ -20,18 +20,23 @@
   +elevation(4)
 
   .v-btn
+    background: transparent
     border-radius: 0
+    box-shadow: none
+    flex: 0 1 auto
     font-size: map-deep-get($headings, 'caption', 'size')
-    height: 100%
+    height: inherit
     min-width: 80px
     max-width: 168px
     text-transform: none
     position: relative
-    width: auto
+
+    &:after
+      content: none
 
     .v-btn__content
-      flex-direction: column
-      height: 100%
+      flex-direction: column-reverse
+      height: inherit
       opacity: .7
 
       > .v-icon
@@ -41,8 +46,8 @@
         line-height: 1.2
 
     &.v-btn--active
-      &:before
-        content: none
+      &:not(:hover):before
+        opacity: 0
 
       .v-btn__content
         opacity: 1
@@ -58,9 +63,21 @@
   position: fixed
   z-index: 4
 
+.v-bottom-nav--grow
+  .v-btn
+    width: 100%
+
+.v-item-group.v-bottom-nav--horizontal
+  .v-btn > .v-btn__content
+    flex-direction: row-reverse
+
+    > .v-icon
+      margin-bottom: 0
+      margin-right: 16px
+
 .v-bottom-nav--shift
   .v-btn .v-btn__content > *:not(.v-icon)
-    top: calc(100% - 8px)
+    top: calc(100% - 12px)
     opacity: 0
     position: absolute
     transition: $primary-transition
@@ -72,5 +89,5 @@
 
     > *:not(.v-icon)
       opacity: 1
-      top: calc(100% - 16px)
+      top: calc(100% - 22px)
       transform: scale(1)
