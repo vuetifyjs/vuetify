@@ -7,7 +7,6 @@
         :close-on-content-click="false"
         :nudge-right="40"
         :return-value.sync="date"
-        lazy
         transition="scale-transition"
         offset-y
         full-width
@@ -36,7 +35,6 @@
         v-model="modal"
         :return-value.sync="date"
         persistent
-        lazy
         full-width
         width="290px"
       >
@@ -61,7 +59,6 @@
         v-model="menu2"
         :close-on-content-click="false"
         :nudge-right="40"
-        lazy
         transition="scale-transition"
         offset-y
         full-width

@@ -7,7 +7,7 @@
       color="teal"
       dark
     >
-      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title>Topics</v-toolbar-title>
 

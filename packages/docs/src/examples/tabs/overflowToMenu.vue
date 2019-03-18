@@ -1,10 +1,9 @@
 <template>
   <v-card>
     <v-toolbar
-      card
       color="deep-purple accent-4"
       dark
-      tabs
+      flat
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 

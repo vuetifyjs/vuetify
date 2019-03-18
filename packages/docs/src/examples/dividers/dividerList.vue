@@ -33,7 +33,6 @@
             <v-list-item
               v-else
               :key="item.title"
-              avatar
               ripple
               @click=""
             >

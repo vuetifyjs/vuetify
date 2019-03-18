@@ -74,7 +74,7 @@
   "props": {
     "v-edit-dialog": {
       "cancelText": "Configura el texto default para el botón de cancelar cuando se utiliza la prop **large**",
-      "lazy": "Mixins.Bootable.props.lazy",
+      "eager": "Mixins.Bootable.props.eager",
       "large": "Agrega botones de _submit_ y _cancel_ al diálogo.",
       "saveText": "Configura el texto default para el botón de guardar cuando se usa la prop **large**",
       "transition": "Mixins.Transitionable.props.transition"

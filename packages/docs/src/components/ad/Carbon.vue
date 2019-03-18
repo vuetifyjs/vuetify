@@ -59,7 +59,7 @@
     }
 
     .v-system-bar,
-    .v-bottom-nav {
+    .v-bottom-navigation {
       #carbonads {
         height: 100%;
 
@@ -89,7 +89,7 @@
       }
     }
 
-    .v-bottom-nav #carbonads {
+    .v-bottom-navigation #carbonads {
       padding: 0 16px;
 
       > span {

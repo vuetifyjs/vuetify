@@ -1,132 +1,94 @@
-import '../../stylus/components/_expansion-panel.styl'
+// Components
+import VExpansionPanels from './VExpansionPanels'
+import VExpansionPanelHeader from './VExpansionPanelHeader'
+import VExpansionPanelContent from './VExpansionPanelContent'
 
-import { VExpansionPanelContent } from '.'
-
-import Themeable from '../../mixins/themeable'
+// Mixins
+import { factory as GroupableFactory } from '../../mixins/groupable'
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
+// Utilities
+import { getSlot } from '../../util/helpers'
 import mixins from '../../util/mixins'
-import { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
 
+// Types
+import { VNode } from 'vue'
+
+type VExpansionPanelHeaderInstance = InstanceType<typeof VExpansionPanelHeader>
 type VExpansionPanelContentInstance = InstanceType<typeof VExpansionPanelContent>
 
-/* @vue/component */
-export default mixins(Themeable, RegistrableProvide('expansionPanel')).extend({
+export default mixins(
+  GroupableFactory<'expansionPanels', typeof VExpansionPanels>('expansionPanels', 'v-expansion-panel', 'v-expansion-panels'),
+  RegistrableProvide('expansionPanel', true)
+  /* @vue/component */
+).extend({
   name: 'v-expansion-panel',
-
-  provide (): object {
-    return {
-      expansionPanel: this
-    }
-  },
 
   props: {
     disabled: Boolean,
-    readonly: Boolean,
-    expand: Boolean,
-    focusable: Boolean,
-    inset: Boolean,
-    popout: Boolean,
-    value: {
-      type: [Number, Array],
-      default: () => null
-    } as any as PropValidator<number | number[]>
+    readonly: Boolean
   },
 
-  data: () => ({
-    items: [] as VExpansionPanelContentInstance[],
-    open: [] as boolean[]
-  }),
+  data () {
+    return {
+      content: null as VExpansionPanelContentInstance | null,
+      header: null as VExpansionPanelHeaderInstance | null,
+      nextIsActive: false
+    }
+  },
 
   computed: {
     classes (): object {
       return {
-        'v-expansion-panel--focusable': this.focusable,
-        'v-expansion-panel--popout': this.popout,
-        'v-expansion-panel--inset': this.inset,
-        ...this.themeClasses
+        'v-expansion-panel--active': this.isActive,
+        'v-expansion-panel--next-active': this.nextIsActive,
+        'v-expansion-panel--disabled': this.isDisabled,
+        ...this.groupClasses
       }
-    }
-  },
-
-  watch: {
-    expand (v: boolean) {
-      let openIndex = -1
-      if (!v) {
-        // Close all panels unless only one is open
-        const openCount = this.open.reduce((acc, val) => val ? acc + 1 : acc, 0)
-        const open = Array(this.items.length).fill(false)
-
-        if (openCount === 1) {
-          openIndex = this.open.indexOf(true)
-        }
-
-        if (openIndex > -1) {
-          open[openIndex] = true
-        }
-
-        this.open = open
-      }
-
-      this.$emit('input', v ? this.open : (openIndex > -1 ? openIndex : null))
     },
-    value (v: number | number[]) {
-      this.updateFromValue(v)
+    isDisabled (): boolean {
+      return this.expansionPanels.disabled || this.disabled
+    },
+    isReadonly (): boolean {
+      return this.expansionPanels.readonly || this.readonly
     }
-  },
-
-  mounted () {
-    this.value !== null && this.updateFromValue(this.value)
   },
 
   methods: {
-    updateFromValue (v: number | number[]) {
-      if (Array.isArray(v) && !this.expand) return
+    registerContent (vm: VExpansionPanelContentInstance) {
+      this.content = vm
+    },
+    unregisterContent () {
+      this.content = null
+    },
+    registerHeader (vm: VExpansionPanelHeaderInstance) {
+      this.header = vm
+      vm.$on('click', this.onClick)
+    },
+    unregisterHeader () {
+      this.header = null
+    },
+    onClick (e: MouseEvent) {
+      if (e.detail) this.header!.$el.blur()
 
-      let open = Array(this.items.length).fill(false)
-      if (typeof v === 'number') {
-        open[v] = true
-      } else if (v !== null) {
-        open = v
-      }
+      this.$emit('click', e)
 
-      this.updatePanels(open)
+      this.isReadonly || this.isDisabled || this.toggle()
     },
-    updatePanels (open: boolean[]) {
-      this.open = open
-      for (let i = 0; i < this.items.length; i++) {
-        this.items[i].toggle(open && open[i])
-      }
-    },
-    panelClick (uid: number) {
-      const open = this.expand ? this.open.slice() : Array(this.items.length).fill(false)
-      for (let i = 0; i < this.items.length; i++) {
-        if (this.items[i]._uid === uid) {
-          open[i] = !this.open[i]
-          !this.expand && this.$emit('input', open[i] ? i : null)
-        }
-      }
-
-      this.updatePanels(open)
-      if (this.expand) this.$emit('input', open)
-    },
-    register (content: VExpansionPanelContentInstance) {
-      const i = this.items.push(content) - 1
-      this.value !== null && this.updateFromValue(this.value)
-      content.toggle(!!this.open[i])
-    },
-    unregister (content: VExpansionPanelContentInstance) {
-      const index = this.items.findIndex(i => i._uid === content._uid)
-      this.items.splice(index, 1)
-      this.open.splice(index, 1)
+    toggle () {
+      /* istanbul ignore else */
+      if (this.content) this.content.isBooted = true
+      this.$nextTick(() => this.$emit('change'))
     }
   },
 
   render (h): VNode {
-    return h('ul', {
+    return h('div', {
       staticClass: 'v-expansion-panel',
-      class: this.classes
-    }, this.$slots.default)
+      class: this.classes,
+      attrs: {
+        'aria-expanded': String(this.isActive)
+      }
+    }, getSlot(this))
   }
 })

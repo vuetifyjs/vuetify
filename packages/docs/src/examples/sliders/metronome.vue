@@ -4,7 +4,7 @@
     max-width="600"
   >
     <v-toolbar
-      card
+      flat
       dense
     >
       <v-toolbar-title>

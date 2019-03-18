@@ -107,7 +107,9 @@ export default baseMixins.extend<options>().extend({
     click () {
       if (this.disabled) return
 
-      this.isActive = !this.isActive
+      this.isBooted = true
+
+      this.$nextTick(() => (this.isActive = !this.isActive))
     },
     genIcon (icon: string | false): VNode {
       return this.$createElement(VIcon, icon)
@@ -154,9 +156,9 @@ export default baseMixins.extend<options>().extend({
           name: 'show',
           value: this.isActive
         }]
-      }, [
-        this.$createElement('div', this.showLazyContent(this.$slots.default))
-      ])
+      }, this.showLazyContent([
+        this.$createElement('div', this.$slots.default)
+      ]))
     },
     genPrependIcon (): VNode | null {
       const icon = this.prependIcon
@@ -187,7 +189,10 @@ export default baseMixins.extend<options>().extend({
       this.isActive = isActive
     },
     toggle (uid: number) {
-      this.isActive = this._uid === uid
+      const isActive = this._uid === uid
+
+      if (isActive) this.isBooted = true
+      this.$nextTick(() => (this.isActive = isActive))
     },
     matchRoute (to: string) {
       return to.match(this.group) !== null

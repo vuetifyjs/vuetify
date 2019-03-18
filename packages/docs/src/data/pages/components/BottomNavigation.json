@@ -20,7 +20,7 @@
       "children": [
         {
           "type": "api",
-          "value": ["v-bottom-nav"]
+          "value": ["v-bottom-navigation"]
         }
       ]
     },

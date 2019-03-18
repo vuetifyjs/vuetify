@@ -26,8 +26,7 @@ theme(v-card, "v-card")
 
   &--hover
     cursor: pointer
-    transition: all .4s cubic-bezier(.25, .8, .25, 1)
-    transition-property: box-shadow
+    will-change: box-shadow
 
     &:hover
       elevation(8)
