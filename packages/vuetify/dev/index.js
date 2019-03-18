@@ -14,9 +14,6 @@ const vm = new Vue({
   data: () => ({ isLoaded: document.readyState === 'complete' }),
   vuetify,
   router,
-  mounted () {
-    console.log(this)
-  },
   render (h) {
     return this.isLoaded ? h(App) : undefined
   }
