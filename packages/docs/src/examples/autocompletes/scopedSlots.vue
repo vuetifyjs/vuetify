@@ -35,14 +35,14 @@
               </v-btn>
             </template>
             <v-list>
-              <v-list-tile @click="isUpdating = true">
-                <v-list-tile-action>
+              <v-list-item @click="isUpdating = true">
+                <v-list-item-action>
                   <v-icon>mdi-settings</v-icon>
-                </v-list-tile-action>
-                <v-list-tile-content>
-                  <v-list-tile-title>Update</v-list-tile-title>
-                </v-list-tile-content>
-              </v-list-tile>
+                </v-list-item-action>
+                <v-list-item-content>
+                  <v-list-item-title>Update</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
             </v-list>
           </v-menu>
         </v-flex>
@@ -105,16 +105,16 @@
               </template>
               <template v-slot:item="data">
                 <template v-if="typeof data.item !== 'object'">
-                  <v-list-tile-content v-text="data.item"></v-list-tile-content>
+                  <v-list-item-content v-text="data.item"></v-list-item-content>
                 </template>
                 <template v-else>
-                  <v-list-tile-avatar>
+                  <v-list-item-avatar>
                     <img :src="data.item.avatar">
-                  </v-list-tile-avatar>
-                  <v-list-tile-content>
-                    <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
-                    <v-list-tile-sub-title v-html="data.item.group"></v-list-tile-sub-title>
-                  </v-list-tile-content>
+                  </v-list-item-avatar>
+                  <v-list-item-content>
+                    <v-list-item-title v-html="data.item.name"></v-list-item-title>
+                    <v-list-item-subtitle v-html="data.item.group"></v-list-item-subtitle>
+                  </v-list-item-content>
                 </template>
               </template>
             </v-autocomplete>

@@ -1,9 +1,13 @@
 <template>
-  <v-card height="200px">
-    <v-bottom-nav
-      :active.sync="bottomNav"
+  <v-card
+    class="mx-auto"
+    height="200"
+    max-width="344"
+    tile
+  >
+    <v-bottom-navigation
+      v-model="bottomNav"
       :color="color"
-      :value="true"
       absolute
       dark
       shift
@@ -27,7 +31,7 @@
         <span>Image</span>
         <v-icon>image</v-icon>
       </v-btn>
-    </v-bottom-nav>
+    </v-bottom-navigation>
   </v-card>
 </template>
 

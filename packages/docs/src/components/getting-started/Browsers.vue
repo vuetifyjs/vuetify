@@ -12,8 +12,8 @@
         sm6
         md4
       >
-        <v-list-tile avatar>
-          <v-list-tile-avatar
+        <v-list-item avatar>
+          <v-list-item-avatar
             :color="browser.supported ? browser.supported === 'polyfill' ? 'warning' : 'success' : 'error'"
           >
             <v-icon
@@ -27,12 +27,12 @@
               class="browser-icon--split"
               dark
             >fab fa-{{ icon }}</v-icon>
-          </v-list-tile-avatar>
-          <v-list-tile-content>
-            <v-list-tile-title>{{ browser.title }}</v-list-tile-title>
-            <v-list-tile-sub-title><span>{{ $t(getBrowserSupport(browser)) }}</span></v-list-tile-sub-title>
-          </v-list-tile-content>
-        </v-list-tile>
+          </v-list-item-avatar>
+          <v-list-item-content>
+            <v-list-item-title>{{ browser.title }}</v-list-item-title>
+            <v-list-item-subtitle><span>{{ $t(getBrowserSupport(browser)) }}</span></v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
       </v-flex>
     </v-layout>
   </v-list>

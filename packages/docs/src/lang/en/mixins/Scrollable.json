@@ -1,0 +1,6 @@
+{
+  "props": {
+    "scrollTarget": "Assigns the scroll target",
+    "scrollThreshold": "The amount of scroll distance down before **hide-on-scroll** activates."
+  }
+}

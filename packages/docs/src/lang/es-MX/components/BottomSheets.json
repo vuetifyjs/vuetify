@@ -1,6 +1,6 @@
 {
   "header": "Bottom sheet",
-  "headerText": "El _bottom sheet_ es un `v-dialog` modificado que aparece desde la parte baja de la pantalla, similar a un `v-bottom-nav`. Mientras que un componente _bottom navigation_ es para los botones y acciones específicas al nivel de la aplicación, un _bottom sheet_ puede contener cualquier cosa.",
+  "headerText": "El _bottom sheet_ es un `v-dialog` modificado que aparece desde la parte baja de la pantalla, similar a un `v-bottom-navigation`. Mientras que un componente _bottom navigation_ es para los botones y acciones específicas al nivel de la aplicación, un _bottom sheet_ puede contener cualquier cosa.",
   "examples": {
     "standard": {
       "header": "Presentación estándar",
