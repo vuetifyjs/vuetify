@@ -3,7 +3,9 @@
 
 // Block
 .v-toolbar
-  transition: $toolbar-transition
+  // Needs increased specificity
+  &.v-sheet
+    transition: $toolbar-transition
 
   +elevation(4)
 

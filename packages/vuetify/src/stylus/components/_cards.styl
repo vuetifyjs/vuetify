@@ -11,6 +11,8 @@ theme(v-card, "v-card")
 
 .v-card
   elevation(2)
+  // Use +elevationTransition() in 2.0
+  box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1)
   text-decoration: none
 
   > *:first-child:not(.v-btn):not(.v-chip)
