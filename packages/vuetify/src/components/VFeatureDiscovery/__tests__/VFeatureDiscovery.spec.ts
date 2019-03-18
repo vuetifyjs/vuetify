@@ -4,7 +4,8 @@ import VFeatureDiscovery from '../VFeatureDiscovery'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
+  MountOptions
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../util/mixins'
 
@@ -13,10 +14,8 @@ describe('FeatureDiscovery.ts', () => {
   let mountFunction: (options?: object) => Wrapper<Instance>
 
   beforeEach(() => {
-    mountFunction = (options = {}) => {
-      return mount(VFeatureDiscovery, {
-        ...options
-      })
+    mountFunction = (options = {} as MountOptions<Instance>) => {
+      return mount(VFeatureDiscovery, options)
     }
   })
 
@@ -147,5 +146,46 @@ describe('FeatureDiscovery.ts', () => {
     wrapper.vm.updateTarget()
     expect(wrapper.vm.oldZIndex).toBe(321)
     expect(document.head.style.zIndex).toBe('11')
+  })
+
+  it('should close on esc', () => {
+    let close = false
+    const wrapper = mountFunction({
+      methods: {
+        closeConditional: () => close
+      }
+    })
+
+    wrapper.vm.keyPress({ keyCode: 27 } as any)
+    expect(wrapper.vm.isActive).toBeTruthy()
+
+    close = true
+    wrapper.vm.keyPress({ keyCode: 27 } as any)
+    expect(wrapper.vm.isActive).toBeFalsy()
+  })
+
+  it('should close on close method of actions scoped slot', () => {
+    let close = false
+    const wrapper = mountFunction({
+      methods: {
+        closeConditional: () => close
+      },
+      scopedSlots: {
+        actions: `
+          <template slot-scope="{ close }">
+            <button id="close" @click="close">Close</button>
+          </template>
+        `
+      }
+    })
+
+    const closeButton = wrapper.find('#close')
+
+    closeButton.trigger('click')
+    expect(wrapper.vm.isActive).toBeTruthy()
+
+    close = true
+    closeButton.trigger('click')
+    expect(wrapper.vm.isActive).toBeFalsy()
   })
 })
