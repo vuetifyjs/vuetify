@@ -36,6 +36,67 @@ describe('.ts', () => {
     }
   })
 
+  it('should select an item !multiple', async () => {
+    const wrapper = mountFunction()
+
+    const input = jest.fn()
+    const change = jest.fn()
+    wrapper.vm.$on('input', input)
+    wrapper.vm.$on('change', change)
+
+    wrapper.vm.selectItem('foo')
+
+    expect(wrapper.vm.internalValue).toBe('foo')
+    expect(input).toHaveBeenCalledWith('foo')
+    expect(input).toHaveBeenCalledTimes(1)
+
+    await wrapper.vm.$nextTick()
+
+    expect(change).toHaveBeenCalledWith('foo')
+    expect(change).toHaveBeenCalledTimes(1)
+
+    wrapper.setProps({ returnObject: true })
+
+    const item = { foo: 'bar' }
+    wrapper.vm.selectItem(item)
+
+    expect(wrapper.vm.internalValue).toBe(item)
+    expect(input).toHaveBeenCalledWith(item)
+    expect(input).toHaveBeenCalledTimes(2)
+
+    await wrapper.vm.$nextTick()
+
+    expect(change).toHaveBeenCalledWith(item)
+    expect(change).toHaveBeenCalledTimes(2)
+  })
+
+  it('should disable v-list-item', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: [{ text: 'foo', disabled: true, id: 0 }]
+      }
+    })
+
+    const selectItem = jest.fn()
+    wrapper.setMethods({ selectItem })
+
+    const el = wrapper.find('.v-list-item')
+
+    el.element.click()
+
+    expect(selectItem).not.toHaveBeenCalled()
+
+    wrapper.setProps({
+      items: [{ text: 'foo', disabled: false, id: 0 }]
+    })
+
+    await wrapper.vm.$nextTick()
+
+    el.element.click()
+
+    expect(selectItem).toHaveBeenCalled()
+  })
+
   it('should update menu status and focus when menu closes', async () => {
     const wrapper = mountFunction()
     const menu = wrapper.vm.$refs.menu
@@ -368,71 +429,5 @@ describe('.ts', () => {
     expect(wrapper.vm.selectedItems).toEqual([
       { text: 'Foo', value: ['bar'] }
     ])
-  })
-
-  // https://github.com/vuetifyjs/vuetify/issues/4359
-  // Vue modifies the `on` property of the
-  // computed `listData` — easiest way to fix
-  it('should select value when using a scoped slot', async () => {
-    const wrapper = mountFunction({
-      propsData: {
-        items: ['foo', 'bar']
-      },
-      slots: {
-        'no-data': {
-          render: h => h('div', 'No Data')
-        }
-      }
-    })
-
-    // Will be undefined if fails
-    expect(wrapper.vm.listData.on).toBeTruthy()
-  })
-
-  // https://github.com/vuetifyjs/vuetify/issues/4431
-  it('should accept null and "" as values', async () => {
-    const wrapper = mountFunction({
-      propsData: {
-        clearable: true,
-        items: [
-          { text: 'Foo', value: null },
-          { text: 'Bar', value: 'bar' }
-        ],
-        value: null
-      }
-    })
-
-    const icon = wrapper.find('.v-input__append-inner .v-icon')
-
-    expect(wrapper.vm.selectedItems).toHaveLength(1)
-    expect(wrapper.vm.isDirty).toBe(true)
-
-    icon.trigger('click')
-
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.selectedItems).toHaveLength(0)
-    expect(wrapper.vm.isDirty).toBe(false)
-    expect(wrapper.vm.internalValue).toBeUndefined()
-  })
-
-  it('should only calls change once when clearing', async () => {
-    const wrapper = mountFunction({
-      propsData: {
-        clearable: true,
-        value: 'foo'
-      }
-    })
-
-    const change = jest.fn()
-    wrapper.vm.$on('change', change)
-
-    const icon = wrapper.find('.v-input__icon > .v-icon')
-
-    icon.trigger('click')
-
-    await wrapper.vm.$nextTick()
-
-    expect(change).toHaveBeenCalledTimes(1)
   })
 })

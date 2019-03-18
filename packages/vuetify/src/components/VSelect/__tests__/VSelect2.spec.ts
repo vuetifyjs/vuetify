@@ -37,6 +37,24 @@ describe('.ts', () => {
     }
   })
 
+  it('should use slotted prepend-item', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['foo']
+      },
+      slots: {
+        'prepend-item': [{
+          render: h => h('div', 'foo')
+        }]
+      }
+    })
+
+    const list = wrapper.find('.v-list')
+
+    expect(wrapper.vm.$slots['prepend-item']).toBeTruthy()
+    expect(list.html()).toMatchSnapshot()
+  })
+
   it('should use slotted append-item', () => {
     const wrapper = mountFunction({
       propsData: {
@@ -434,66 +452,5 @@ describe('.ts', () => {
       wrapper.vm.isMenuActive = false
       expect(wrapper.vm.isMenuActive).toBe(false)
     }
-  })
-
-  it('should select an item !multiple', async () => {
-    const wrapper = mountFunction()
-
-    const input = jest.fn()
-    const change = jest.fn()
-    wrapper.vm.$on('input', input)
-    wrapper.vm.$on('change', change)
-
-    wrapper.vm.selectItem('foo')
-
-    expect(wrapper.vm.internalValue).toBe('foo')
-    expect(input).toHaveBeenCalledWith('foo')
-    expect(input).toHaveBeenCalledTimes(1)
-
-    await wrapper.vm.$nextTick()
-
-    expect(change).toHaveBeenCalledWith('foo')
-    expect(change).toHaveBeenCalledTimes(1)
-
-    wrapper.setProps({ returnObject: true })
-
-    const item = { foo: 'bar' }
-    wrapper.vm.selectItem(item)
-
-    expect(wrapper.vm.internalValue).toBe(item)
-    expect(input).toHaveBeenCalledWith(item)
-    expect(input).toHaveBeenCalledTimes(2)
-
-    await wrapper.vm.$nextTick()
-
-    expect(change).toHaveBeenCalledWith(item)
-    expect(change).toHaveBeenCalledTimes(2)
-  })
-
-  it('should disable v-list-item', async () => {
-    const wrapper = mountFunction({
-      propsData: {
-        items: [{ text: 'foo', disabled: true, id: 0 }]
-      }
-    })
-
-    const selectItem = jest.fn()
-    wrapper.setMethods({ selectItem })
-
-    const el = wrapper.find('.v-list-item')
-
-    el.element.click()
-
-    expect(selectItem).not.toHaveBeenCalled()
-
-    wrapper.setProps({
-      items: [{ text: 'foo', disabled: false, id: 0 }]
-    })
-
-    await wrapper.vm.$nextTick()
-
-    el.element.click()
-
-    expect(selectItem).toHaveBeenCalled()
   })
 })

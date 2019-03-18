@@ -201,7 +201,7 @@ describe('VSelect.ts', () => {
     const wrapper = mountFunction()
 
     const icon = wrapper.find('.v-icon')
-    expect(icon.attributes('aria-hidden')).toBe("true")
+    expect(icon.attributes('aria-hidden')).toBe('true')
   })
 
   it('should only show items if they are in items', async () => {
@@ -432,24 +432,6 @@ describe('VSelect.ts', () => {
     const list = wrapper.find('.v-list')
 
     expect(wrapper.vm.$slots['no-data']).toBeTruthy()
-    expect(list.html()).toMatchSnapshot()
-  })
-
-  it('should use slotted prepend-item', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        items: ['foo']
-      },
-      slots: {
-        'prepend-item': [{
-          render: h => h('div', 'foo')
-        }]
-      }
-    })
-
-    const list = wrapper.find('.v-list')
-
-    expect(wrapper.vm.$slots['prepend-item']).toBeTruthy()
     expect(list.html()).toMatchSnapshot()
   })
 })
