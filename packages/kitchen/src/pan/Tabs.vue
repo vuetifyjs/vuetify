@@ -31,7 +31,7 @@
       <core-section>
         <v-tabs
           v-model="active2"
-          color="cyan"
+          background-color="cyan"
           dark
           slider-color="yellow"
         >
@@ -55,7 +55,7 @@
 
         <v-tabs
           v-model="active3"
-          color="success"
+          background-color="success"
           dark
           slider-color="error"
         >
@@ -79,7 +79,7 @@
 
         <v-tabs
           v-model="active4"
-          color="cyan lighten-2"
+          background-color="cyan lighten-2"
           dark
           slider-color="orange"
         >
@@ -156,7 +156,7 @@
       <core-section>
         <v-tabs
           centered
-          color="cyan"
+          background-color="cyan"
           dark
           icons-and-text
         >
@@ -193,7 +193,7 @@
       <core-section>
         <v-tabs
           centered
-          color="cyan"
+          background-color="cyan"
           dark
           icons-and-text
           grow
@@ -231,7 +231,7 @@
       <core-section>
         <v-tabs
           dark
-          color="cyan"
+          background-color="cyan"
           show-arrows
         >
           <v-tabs-slider color="yellow" />
@@ -261,7 +261,7 @@
       <core-title>Custom icons</core-title>
       <core-section>
         <v-tabs
-          color="cyan"
+          background-color="cyan"
           dark
           next-icon="mdi-arrow-right-bold-box-outline"
           prev-icon="mdi-arrow-left-bold-box-outline"

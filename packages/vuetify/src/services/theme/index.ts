@@ -39,6 +39,7 @@ export class Theme extends Service {
       warning: '#FB8C00'    // amber.base
     }
   }
+  public defaults: VuetifyThemes = this.themes
 
   private isDark = null as boolean | null
   private ssr = false
@@ -130,6 +131,7 @@ export class Theme extends Service {
 
     this.ssr = Boolean(ssrContext)
 
+    /* istanbul ignore else */
     if (this.ssr) {
       const options = this.options || {}
       // SSR
@@ -142,8 +144,22 @@ export class Theme extends Service {
     }
   }
 
+  // Allows for you to set target theme
+  public setTheme (theme: 'light' | 'dark', value: object) {
+    this.themes[theme] = Object.assign(this.themes[theme], value)
+    this.applyTheme()
+  }
+
+  // Reset theme defaults
+  public resetThemes () {
+    this.themes.light = Object.assign({}, this.defaults.light)
+    this.themes.dark = Object.assign({}, this.defaults.dark)
+    this.applyTheme()
+  }
+
   // Check for existence of style element
   private checkStyleElement (): boolean {
+    /* istanbul ignore next */
     if (this.ssr) return false // SSR
     if (this.styleEl) return true
 
@@ -168,6 +184,7 @@ export class Theme extends Service {
   // Generate the style element
   // if applicable
   private genStyleElement (): void {
+    /* istanbul ignore next */
     const options = this.options || {}
 
     this.styleEl = document.createElement('style')
@@ -191,6 +208,7 @@ export class Theme extends Service {
 
   get generatedStyles (): string {
     const theme = this.parsedTheme
+    /* istanbul ignore next */
     const options = this.options || {}
     let css
 
@@ -214,6 +232,8 @@ export class Theme extends Service {
   }
 
   get parsedTheme (): VuetifyParsedTheme {
-    return ThemeUtils.parse(this.currentTheme || {})
+    /* istanbul ignore next */
+    const theme = this.currentTheme || {}
+    return ThemeUtils.parse(theme)
   }
 }

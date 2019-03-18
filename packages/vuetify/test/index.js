@@ -181,7 +181,12 @@ export function rafPolyfill(w) {
 export function touch(element) {
   const createTrigger = eventName => (clientX, clientY) => {
     const touches = [{ clientX, clientY }]
-    element.trigger(eventName, ({ touches, changedTouches: touches }))
+    const event = new Event(eventName)
+
+    event.touches = touches
+    event.changedTouches = touches
+    element.element.dispatchEvent(event)
+
     return touch(element)
   }
 
@@ -196,5 +201,12 @@ export const resizeWindow = (width = global.innerWidth, height = global.innerHei
   global.innerWidth = width
   global.innerHeight = height
   global.dispatchEvent(new Event('resize'))
+  return new Promise(resolve => setTimeout(resolve, 200))
+}
+
+export const scrollWindow = (y) => {
+  global.pageYOffset = y
+  global.dispatchEvent(new Event('scroll'))
+
   return new Promise(resolve => setTimeout(resolve, 200))
 }

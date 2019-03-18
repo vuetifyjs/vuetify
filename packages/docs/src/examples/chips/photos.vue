@@ -5,10 +5,10 @@
     max-width="500"
   >
     <v-toolbar
-      card
+      flat
       color="transparent"
     >
-      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
       <v-toolbar-title>Photo Info</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn
@@ -63,20 +63,20 @@
 
     <v-list>
       <template v-for="(item, i) in categories">
-        <v-list-tile
+        <v-list-item
           v-if="!selected.includes(i)"
           :key="i"
           :disabled="loading"
           @click="selected.push(i)"
         >
-          <v-list-tile-avatar>
+          <v-list-item-avatar>
             <v-icon
               :disabled="loading"
               v-text="item.icon"
             ></v-icon>
-          </v-list-tile-avatar>
-          <v-list-tile-title v-text="item.text"></v-list-tile-title>
-        </v-list-tile>
+          </v-list-item-avatar>
+          <v-list-item-title v-text="item.text"></v-list-item-title>
+        </v-list-item>
       </template>
     </v-list>
 

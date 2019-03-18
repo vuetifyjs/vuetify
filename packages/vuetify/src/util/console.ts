@@ -40,6 +40,9 @@ export function deprecate (original: string, replacement: string, vm?: any, pare
 export function breaking (original: string, replacement: string, vm?: any, parent?: any) {
   consoleError(`[BREAKING] '${original}' has been removed, use '${replacement}' instead`, vm, parent)
 }
+export function removed (original: string, vm?: any, parent?: any) {
+  consoleWarn(`[DEPRECATION] '${original}' has been deprecated. You can safely remove it`, vm, parent)
+}
 
 /**
  * Shamelessly stolen from vuejs/vue/blob/dev/src/core/util/debug.js

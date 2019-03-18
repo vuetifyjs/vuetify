@@ -48,37 +48,38 @@
                 top
                 right
               >
-                <v-tooltip
-                  slot="activator"
-                  bottom
-                >
-                  <v-btn
-                    slot="activator"
-                    :href="template.demoUrl.length === 1 ? `${template.demoUrl[0]}?ref=vuetifyjs.com` : undefined"
-                    icon
-                    target="_blank"
-                    rel="noopener"
-                    aria-label="View Demo"
-                  >
-                    <v-icon color="primary">mdi-eye</v-icon>
-                  </v-btn>
-                  <span v-text="$t('Themes.Premium.viewDemo')" />
-                </v-tooltip>
+                <template #activator="{ on: menu }">
+                  <v-tooltip bottom>
+                    <template #activator="{ on: tooltip }">
+                      <v-btn
+                        :href="template.demoUrl.length === 1 ? `${template.demoUrl[0]}?ref=vuetifyjs.com` : undefined"
+                        icon
+                        target="_blank"
+                        rel="noopener"
+                        aria-label="View Demo"
+                        v-on="{ ...tooltip, ...menu }"
+                      >
+                        <v-icon color="primary">mdi-eye</v-icon>
+                      </v-btn>
+                    </template>
+                    <span v-text="$t('Themes.Premium.viewDemo')" />
+                  </v-tooltip>
+                </template>
                 <v-list v-if="template.demoUrl.length > 1">
-                  <v-list-tile
+                  <v-list-item
                     v-for="([title, demo], i) in template.demoUrl"
                     :key="i"
                     :href="`${demo}?ref=vuetifyjs.com`"
                     target="_blank"
                     rel="noopener"
                   >
-                    <v-list-tile-content>
-                      <v-list-tile-title v-text="title" />
-                    </v-list-tile-content>
-                    <v-list-tile-action>
+                    <v-list-item-content>
+                      <v-list-item-title v-text="title" />
+                    </v-list-item-content>
+                    <v-list-item-action>
                       <v-icon>mdi-open-in-new</v-icon>
-                    </v-list-tile-action>
-                  </v-list-tile>
+                    </v-list-item-action>
+                  </v-list-item>
                 </v-list>
               </v-menu>
 

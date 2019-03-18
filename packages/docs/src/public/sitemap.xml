@@ -236,6 +236,12 @@
        <priority>0.8000</priority>
   </url>
   <url>
+       <loc>https://vuetifyjs.com/en/components/app-bars</loc>
+       <lastmod>2019-01-07</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
        <loc>https://vuetifyjs.com/en/components/badges</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
@@ -501,6 +507,12 @@
   </url>
   <url>
        <loc>https://vuetifyjs.com/en/components/subheaders</loc>
+       <lastmod>2019-01-07</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://vuetifyjs.com/en/components/system-bars</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>

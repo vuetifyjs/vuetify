@@ -3,7 +3,7 @@
     <v-flex xs12 sm8 md6>
       <v-card>
         <v-toolbar color="orange lighten-1" dark>
-          <v-toolbar-side-icon></v-toolbar-side-icon>
+          <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
           <v-toolbar-title>Message Board</v-toolbar-title>
 
@@ -30,21 +30,20 @@
               inset
             ></v-divider>
 
-            <v-list-tile
+            <v-list-item
               v-else
               :key="item.title"
-              avatar
               ripple
               @click=""
             >
-              <v-list-tile-avatar>
+              <v-list-item-avatar>
                 <img :src="item.avatar">
-              </v-list-tile-avatar>
-              <v-list-tile-content>
-                <v-list-tile-title v-html="item.title"></v-list-tile-title>
-                <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile>
+              </v-list-item-avatar>
+              <v-list-item-content>
+                <v-list-item-title v-html="item.title"></v-list-item-title>
+                <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
           </template>
         </v-list>
       </v-card>

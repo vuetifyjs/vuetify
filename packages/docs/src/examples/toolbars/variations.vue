@@ -10,7 +10,7 @@
     >
       <v-card color="grey lighten-4" flat height="200px">
         <v-toolbar :color="bar.class" :dark="bar.dark">
-          <v-toolbar-side-icon></v-toolbar-side-icon>
+          <v-app-bar-nav-icon></v-app-bar-nav-icon>
           <v-toolbar-title>Title</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn icon>

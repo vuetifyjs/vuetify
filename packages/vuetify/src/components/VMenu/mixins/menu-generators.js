@@ -18,6 +18,7 @@ export default {
       }
 
       if (getSlotType(this, 'activator') === 'scoped') {
+        listeners.keydown = this.onKeyDown
         const activator = this.$scopedSlots.activator({ on: listeners })
         this.activatorNode = activator
         return activator

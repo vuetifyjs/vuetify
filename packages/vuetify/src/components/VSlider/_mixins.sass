@@ -1,0 +1,5 @@
+@mixin slider-theme($material)
+  .v-slider__track-background,
+  .v-slider__track-fill,
+  .v-slider__thumb
+    background: map-deep-get($material, 'slider', 'inactive')

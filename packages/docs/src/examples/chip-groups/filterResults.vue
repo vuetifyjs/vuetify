@@ -4,7 +4,7 @@
     max-width="400"
   >
     <v-toolbar
-      card
+      flat
       color="deep-purple accent-4"
       dark
     >

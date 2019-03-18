@@ -5,30 +5,32 @@
     left
     offset-y
   >
-    <v-btn
-      slot="activator"
-      :aria-label="$t('Vuetify.AppToolbar.translations')"
-      text
-      style="min-width: 48px"
-    >
-      <v-icon v-if="currentLanguage.locale === 'eo-UY'">language</v-icon>
-      <v-img
-        v-else
-        :src="`https://cdn.vuetifyjs.com/images/flags/${currentLanguage.country}.png`"
-        width="26px"
-      />
-    </v-btn>
+    <template #activator="{ on: menu }">
+      <v-btn
+        :aria-label="$t('Vuetify.AppToolbar.translations')"
+        text
+        style="min-width: 48px"
+        v-on="menu"
+      >
+        <v-icon v-if="currentLanguage.locale === 'eo-UY'">language</v-icon>
+        <v-img
+          v-else
+          :src="`https://cdn.vuetifyjs.com/images/flags/${currentLanguage.country}.png`"
+          width="26px"
+        />
+      </v-btn>
+    </template>
     <v-list
       dense
       light
     >
-      <v-list-tile
+      <v-list-item
         v-for="language in languages"
         :key="language.locale"
         avatar
         @click="translateI18n(language)"
       >
-        <v-list-tile-avatar
+        <v-list-item-avatar
           tile
           size="24px"
         >
@@ -38,9 +40,9 @@
             :src="`https://cdn.vuetifyjs.com/images/flags/${language.country}.png`"
             width="24px"
           />
-        </v-list-tile-avatar>
-        <v-list-tile-title v-text="language.name" />
-      </v-list-tile>
+        </v-list-item-avatar>
+        <v-list-item-title v-text="language.name" />
+      </v-list-item>
     </v-list>
   </v-menu>
 </template>

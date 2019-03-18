@@ -11,7 +11,7 @@ export default {
     fullWidth: Boolean,
     hideOverlay: Boolean,
     inset: Boolean,
-    lazy: Boolean,
+    eager: Boolean,
     maxWidth: {
       type: [String, Number],
       default: 'auto'

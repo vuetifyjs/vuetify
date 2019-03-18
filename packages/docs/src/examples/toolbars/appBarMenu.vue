@@ -5,22 +5,24 @@
     height="200px"
   >
     <v-toolbar color="grey darken-1" dark>
-      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-menu :nudge-width="100">
-        <v-toolbar-title slot="activator">
-          <span>All</span>
-          <v-icon dark>arrow_drop_down</v-icon>
-        </v-toolbar-title>
+        <template v-slot:activator="{ on }">
+          <v-toolbar-title v-on="on">
+            <span>All</span>
+            <v-icon dark>arrow_drop_down</v-icon>
+          </v-toolbar-title>
+        </template>
 
         <v-list>
-          <v-list-tile
+          <v-list-item
             v-for="item in items"
             :key="item"
             @click=""
           >
-            <v-list-tile-title v-text="item"></v-list-tile-title>
-          </v-list-tile>
+            <v-list-item-title v-text="item"></v-list-item-title>
+          </v-list-item>
         </v-list>
       </v-menu>
 

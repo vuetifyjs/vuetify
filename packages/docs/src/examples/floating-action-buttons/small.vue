@@ -3,7 +3,7 @@
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
         <v-toolbar color="light-blue" light extended>
-          <v-toolbar-side-icon></v-toolbar-side-icon>
+          <v-app-bar-nav-icon></v-app-bar-nav-icon>
           <v-btn
             fab
             small
@@ -15,7 +15,9 @@
           >
             <v-icon>add</v-icon>
           </v-btn>
-          <v-toolbar-title slot="extension" class="white--text">My files</v-toolbar-title>
+          <template v-slot:extension>
+            <v-toolbar-title class="white--text">My files</v-toolbar-title>
+          </template>
           <v-spacer></v-spacer>
           <v-btn icon>
             <v-icon>search</v-icon>
@@ -26,36 +28,36 @@
         </v-toolbar>
         <v-list two-line subheader>
           <v-subheader inset>Folders</v-subheader>
-          <v-list-tile v-for="item in items" :key="item.title" avatar @click="">
-            <v-list-tile-avatar>
+          <v-list-item v-for="item in items" :key="item.title" @click="">
+            <v-list-item-avatar>
               <v-icon :class="[item.iconClass]">{{ item.icon }}</v-icon>
-            </v-list-tile-avatar>
-            <v-list-tile-content>
-              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-              <v-list-tile-sub-title>{{ item.subtitle }}</v-list-tile-sub-title>
-            </v-list-tile-content>
-            <v-list-tile-action>
+            </v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+              <v-list-item-subtitle>{{ item.subtitle }}</v-list-item-subtitle>
+            </v-list-item-content>
+            <v-list-item-action>
               <v-btn icon>
                 <v-icon color="grey lighten-1">info</v-icon>
               </v-btn>
-            </v-list-tile-action>
-          </v-list-tile>
+            </v-list-item-action>
+          </v-list-item>
           <v-divider inset></v-divider>
           <v-subheader inset>Files</v-subheader>
-          <v-list-tile v-for="item in items2" :key="item.title" avatar @click="">
-            <v-list-tile-avatar>
+          <v-list-item v-for="item in items2" :key="item.title" @click="">
+            <v-list-item-avatar>
               <v-icon :class="[item.iconClass]">{{ item.icon }}</v-icon>
-            </v-list-tile-avatar>
-            <v-list-tile-content>
-              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-              <v-list-tile-sub-title>{{ item.subtitle }}</v-list-tile-sub-title>
-            </v-list-tile-content>
-            <v-list-tile-action>
+            </v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+              <v-list-item-subtitle>{{ item.subtitle }}</v-list-item-subtitle>
+            </v-list-item-content>
+            <v-list-item-action>
               <v-btn icon ripple>
                 <v-icon color="grey lighten-1">info</v-icon>
               </v-btn>
-            </v-list-tile-action>
-          </v-list-tile>
+            </v-list-item-action>
+          </v-list-item>
         </v-list>
         <v-dialog v-model="dialog" max-width="500px">
           <v-card>

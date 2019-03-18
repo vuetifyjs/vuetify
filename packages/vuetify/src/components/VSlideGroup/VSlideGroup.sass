@@ -6,18 +6,26 @@
 .v-slide-group
   display: flex
 
+  // Needed increased specificity
+  // to overwrite v-tabs pointer
+  // replacement
+  &.v-item-group
+    > .v-slide-group__next,
+    > .v-slide-group__prev
+      cursor: pointer
+
 .v-slide-item
   display: inline-flex
   flex: 0 1 auto
 
 // Element
-.v-slide-group__append,
-.v-slide-group__prepend
+.v-slide-group__next,
+.v-slide-group__prev
   align-items: center
   display: flex
-  flex: 0 1 $slide-group-prepend-basis
+  flex: 0 1 $slide-group-prev-basis
   justify-content: center
-  min-width: $slide-group-prepend-basis
+  min-width: $slide-group-prev-basis
 
 .v-slide-group__content
   display: flex
@@ -32,7 +40,7 @@
   overflow: hidden
 
 // Modifiers
-.v-slide-group__append,
-.v-slide-group__prepend
+.v-slide-group__next,
+.v-slide-group__prev
   &--disabled
     pointer-events: none

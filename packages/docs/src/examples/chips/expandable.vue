@@ -28,31 +28,31 @@
         </v-chip>
         <v-card width="300">
           <v-list dark>
-            <v-list-tile>
-              <v-list-tile-avatar>
+            <v-list-item>
+              <v-list-item-avatar>
                 <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
-              </v-list-tile-avatar>
-              <v-list-tile-content>
-                <v-list-tile-title>John Leider</v-list-tile-title>
-                <v-list-tile-sub-title>john@vuetifyjs.com</v-list-tile-sub-title>
-              </v-list-tile-content>
-              <v-list-tile-action>
+              </v-list-item-avatar>
+              <v-list-item-content>
+                <v-list-item-title>John Leider</v-list-item-title>
+                <v-list-item-subtitle>john@vuetifyjs.com</v-list-item-subtitle>
+              </v-list-item-content>
+              <v-list-item-action>
                 <v-btn
                   icon
                   @click="menu = false"
                 >
                   <v-icon>mdi-close-circle</v-icon>
                 </v-btn>
-              </v-list-tile-action>
-            </v-list-tile>
+              </v-list-item-action>
+            </v-list-item>
           </v-list>
           <v-list>
-            <v-list-tile @click="() => {}">
-              <v-list-tile-action>
+            <v-list-item @click="() => {}">
+              <v-list-item-action>
                 <v-icon>mdi-briefcase</v-icon>
-              </v-list-tile-action>
-              <v-list-tile-sub-title>john@gmail.com</v-list-tile-sub-title>
-            </v-list-tile>
+              </v-list-item-action>
+              <v-list-item-subtitle>john@gmail.com</v-list-item-subtitle>
+            </v-list-item>
           </v-list>
         </v-card>
       </v-menu>

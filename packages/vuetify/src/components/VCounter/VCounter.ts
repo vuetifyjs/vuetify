@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_counters.styl'
+import './VCounter.sass'
 
 // Mixins
 import Themeable, { functionalThemeClasses } from '../../mixins/themeable'

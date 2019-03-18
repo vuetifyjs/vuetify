@@ -7,20 +7,21 @@
         :close-on-content-click="false"
         :nudge-right="40"
         :return-value.sync="date"
-        lazy
         transition="scale-transition"
         offset-y
         full-width
         max-width="290px"
         min-width="290px"
       >
-        <v-text-field
-          slot="activator"
-          v-model="date"
-          label="Picker in menu"
-          prepend-icon="event"
-          readonly
-        ></v-text-field>
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            v-model="date"
+            label="Picker in menu"
+            prepend-icon="event"
+            readonly
+            v-on="on"
+          ></v-text-field>
+        </template>
         <v-date-picker
           v-model="date"
           type="month"
@@ -40,17 +41,18 @@
         v-model="modal"
         :return-value.sync="date"
         persistent
-        lazy
         full-width
         width="290px"
       >
-        <v-text-field
-          slot="activator"
-          v-model="date"
-          label="Picker in dialog"
-          prepend-icon="event"
-          readonly
-        ></v-text-field>
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            v-model="date"
+            label="Picker in dialog"
+            prepend-icon="event"
+            readonly
+            v-on="on"
+          ></v-text-field>
+        </template>
         <v-date-picker v-model="date" type="month" scrollable>
           <v-spacer></v-spacer>
           <v-btn text color="primary" @click="modal = false">Cancel</v-btn>

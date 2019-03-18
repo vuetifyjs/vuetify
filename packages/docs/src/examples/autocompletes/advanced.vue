@@ -2,9 +2,8 @@
   <v-toolbar
     color="orange accent-1"
     prominent
-    tabs
   >
-    <v-toolbar-side-icon></v-toolbar-side-icon>
+    <v-app-bar-nav-icon></v-app-bar-nav-icon>
     <v-toolbar-title class="title mr-4">Cryptocurrency</v-toolbar-title>
     <v-autocomplete
       v-model="model"
@@ -20,18 +19,15 @@
       label="Search for a coin..."
       solo
     >
-      <template slot="no-data">
-        <v-list-tile>
-          <v-list-tile-title>
+      <template v-slot:no-data>
+        <v-list-item>
+          <v-list-item-title>
             Search for your favorite
             <strong>Cryptocurrency</strong>
-          </v-list-tile-title>
-        </v-list-tile>
+          </v-list-item-title>
+        </v-list-item>
       </template>
-      <template
-        slot="selection"
-        slot-scope="{ item, selected }"
-      >
+      <template v-slot:selection="{ item, selected }">
         <v-chip
           :selected="selected"
           color="blue-grey"
@@ -41,35 +37,33 @@
           <span v-text="item.name"></span>
         </v-chip>
       </template>
-      <template
-        slot="item"
-        slot-scope="{ item }"
-      >
-        <v-list-tile-avatar
+      <template v-slot:item="{ item }">
+        <v-list-item-avatar
           color="indigo"
           class="headline font-weight-light white--text"
         >
           {{ item.name.charAt(0) }}
-        </v-list-tile-avatar>
-        <v-list-tile-content>
-          <v-list-tile-title v-text="item.name"></v-list-tile-title>
-          <v-list-tile-sub-title v-text="item.symbol"></v-list-tile-sub-title>
-        </v-list-tile-content>
-        <v-list-tile-action>
+        </v-list-item-avatar>
+        <v-list-item-content>
+          <v-list-item-title v-text="item.name"></v-list-item-title>
+          <v-list-item-subtitle v-text="item.symbol"></v-list-item-subtitle>
+        </v-list-item-content>
+        <v-list-item-action>
           <v-icon>mdi-coin</v-icon>
-        </v-list-tile-action>
+        </v-list-item-action>
       </template>
     </v-autocomplete>
-    <v-tabs
-      slot="extension"
-      :hide-slider="!model"
-      color="transparent"
-      slider-color="blue-grey"
-    >
-      <v-tab :disabled="!model">News</v-tab>
-      <v-tab :disabled="!model">Trading</v-tab>
-      <v-tab :disabled="!model">Blog</v-tab>
-    </v-tabs>
+    <template v-slot:extension>
+      <v-tabs
+        :hide-slider="!model"
+        color="transparent"
+        slider-color="blue-grey"
+      >
+        <v-tab :disabled="!model">News</v-tab>
+        <v-tab :disabled="!model">Trading</v-tab>
+        <v-tab :disabled="!model">Blog</v-tab>
+      </v-tabs>
+    </template>
   </v-toolbar>
 </template>
 

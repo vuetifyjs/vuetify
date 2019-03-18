@@ -7,20 +7,21 @@
         :close-on-content-click="false"
         :nudge-right="40"
         :return-value.sync="time"
-        lazy
         transition="scale-transition"
         offset-y
         full-width
         max-width="290px"
         min-width="290px"
       >
-        <v-text-field
-          slot="activator"
-          v-model="time"
-          label="Picker in menu"
-          prepend-icon="access_time"
-          readonly
-        ></v-text-field>
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            v-model="time"
+            label="Picker in menu"
+            prepend-icon="access_time"
+            readonly
+            v-on="on"
+          ></v-text-field>
+        </template>
         <v-time-picker
           v-if="menu2"
           v-model="time"
@@ -36,17 +37,18 @@
         v-model="modal2"
         :return-value.sync="time"
         persistent
-        lazy
         full-width
         width="290px"
       >
-        <v-text-field
-          slot="activator"
-          v-model="time"
-          label="Picker in dialog"
-          prepend-icon="access_time"
-          readonly
-        ></v-text-field>
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            v-model="time"
+            label="Picker in dialog"
+            prepend-icon="access_time"
+            readonly
+            v-on="on"
+          ></v-text-field>
+        </template>
         <v-time-picker
           v-if="modal2"
           v-model="time"

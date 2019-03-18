@@ -33,16 +33,15 @@
         {
           "type": "examples",
           "value": [
+            "minMax",
+            "icons",
+            "vertical",
             "thumb",
             "customThumb",
             "ticks",
-            "discrete",
-            "icons",
-            "editableNumericValue",
             "customColors",
             "validation",
             "range",
-            "minMax",
             "metronome"
           ]
         }
