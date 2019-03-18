@@ -5,7 +5,7 @@
     height="200px"
   >
     <v-toolbar color="grey darken-1" dark>
-      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-menu :nudge-width="100">
         <template v-slot:activator="{ on }">

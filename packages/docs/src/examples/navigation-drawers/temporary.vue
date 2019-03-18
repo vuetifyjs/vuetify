@@ -21,7 +21,7 @@
       temporary
     >
       <v-list class="pa-1">
-        <v-list-item avatar>
+        <v-list-item>
           <v-list-item-avatar>
             <img src="https://randomuser.me/api/portraits/men/85.jpg">
           </v-list-item-avatar>

@@ -5,13 +5,13 @@
   >
     <v-subheader>Today</v-subheader>
 
-    <v-expansion-panel popout>
-      <v-expansion-panel-item
+    <v-expansion-panels popout>
+      <v-expansion-panel
         v-for="(message, i) in messages"
         :key="i"
         hide-actions
       >
-        <template v-slot:header>
+        <v-expansion-panel-header>
           <v-layout
             align-center
             row
@@ -67,14 +67,14 @@
               {{ message.excerpt }}
             </v-flex>
           </v-layout>
-        </template>
+        </v-expansion-panel-header>
 
-        <v-card>
+        <v-expansion-panel-content>
           <v-divider></v-divider>
           <v-card-text v-text="lorem"></v-card-text>
-        </v-card>
-      </v-expansion-panel-item>
-    </v-expansion-panel>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
   </v-layout>
 </template>
 

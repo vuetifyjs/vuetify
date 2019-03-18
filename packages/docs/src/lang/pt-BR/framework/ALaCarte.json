@@ -7,7 +7,7 @@
   "alert2": "Tenha em mente, os componentes `Vuetify` e` VApp` são necessários para usar o Vuetify",
   "alert3": "O objeto de opções que você passa como o segundo argumento para `Vue.use` também pode incluir uma propriedade _directives_ e uma _transitions_.",
   "importText2": "Se você não está usando o pacote transform-imports, você terá que importar cada componente desta forma:",
-  "importText3": "Você também pode importar componentes nos arquivos .vue, como visto abaixo. Quando se faz isso, é importante que você importe todas as exportações nomeadas e, em seguida, desestruture-as em componentes. Caso contrário, os componentes filho, como `v-card-text` ou` v-expansion-panel-item`, não estarão disponíveis.",
+  "importText3": "Você também pode importar componentes nos arquivos .vue, como visto abaixo. Quando se faz isso, é importante que você importe todas as exportações nomeadas e, em seguida, desestruture-as em componentes. Caso contrário, os componentes filho, como `v-card-text` ou` v-expansion-panel`, não estarão disponíveis.",
   "styleHeader": "Estilos necessários",
   "styleText1": "Para obter todos os estilos necessários, precisamos importá-los no stylus. Para que o webpack possa lidar com isso, você precisará instalar `stylus` e `stylus-loader` pelo **npm**.",
   "alert4": "Para obter uma explicação mais detalhada sobre como configurar seu aplicativo para lidar com o stylus, vá para [página de temas](/style/themes).",

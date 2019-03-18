@@ -56,7 +56,6 @@
         :return-value.sync="start"
         transition="scale-transition"
         min-width="290px"
-        lazy
         offset-y
         full-width
       >
@@ -100,7 +99,6 @@
         :return-value.sync="end"
         transition="scale-transition"
         min-width="290px"
-        lazy
         offset-y
         full-width
       >
@@ -143,7 +141,6 @@
         :return-value.sync="now"
         transition="scale-transition"
         min-width="290px"
-        lazy
         offset-y
         full-width
       >

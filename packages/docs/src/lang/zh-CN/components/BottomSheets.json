@@ -15,7 +15,7 @@
   "props": {
     "disabled": "禁用打开对话框的功能",
     "inset": "将对话框内容最大宽度减少到70％",
-    "lazy": "Mixins.Bootable.props.lazy",
+    "eager": "Mixins.Bootable.props.eager",
     "maxWidth": "指定表容器的最大宽度"
   }
 }

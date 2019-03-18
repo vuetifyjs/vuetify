@@ -7,7 +7,7 @@
   "alert2": "Vuetify 를 쓰려면 `Vuetify` 와 `VApp` 컴포넌트가 둘다 필요하다는 것을 기억하세요",
   "alert3": "`Vue.use` 의 두번째 인자로 사용하는 옵션 객체는 _directives_ 와 _transitions_ 프로퍼티를 둘다 포함할 수 있습니다.",
   "importText2": "transform-imports 패키지를 사용하지 않는다면 다음처럼 각 컴포넌트를 직접 임포트해야 합니다.",
-  "importText3": "아래와 같이 .vue 파일에서 컴포넌트를 임포트할 수도 있습니다. 이 경우 중요한 점은 이름을 가진 export들(named exports)을 모두 임포트하고 컴포넌트 내내에서 비구조화(destructure)해야 한다는 것입니다. 그렇지 않으면 `v-card-text` 나 `v-expansion-panel-item` 와 같은 자식 컴포넌트들을 사용할 수 없게 됩니다.",
+  "importText3": "아래와 같이 .vue 파일에서 컴포넌트를 임포트할 수도 있습니다. 이 경우 중요한 점은 이름을 가진 export들(named exports)을 모두 임포트하고 컴포넌트 내내에서 비구조화(destructure)해야 한다는 것입니다. 그렇지 않으면 `v-card-text` 나 `v-expansion-panel` 와 같은 자식 컴포넌트들을 사용할 수 없게 됩니다.",
   "styleHeader": "필요한 스타일 (Required styles)",
   "styleText1": "필요한 모든 스타일을 적용하려면 스타일들을 stylus 내에 임포트해야 합니다. 웹팩이 이 것을 다루기 때문에, `stylus` 와 `stylus-loader` 를 **npm** 으로 설치해야 합니다.",
   "alert4": "stylus 설정에 대한 더 자세한 설명은 [테마 페이지](/style/themes) 를 참고하세요.",

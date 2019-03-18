@@ -16,7 +16,7 @@
     "disabled": "대화창(dialog)이 열릴 수 없도록 설정",
     "hideOverlay": "오버레이 표시 숨기기",
     "inset": "대화창(dialog) 컨텐츠의 최대 너비를 70%로 줄임",
-    "lazy": "Mixins.Bootable.props.lazy",
+    "eager": "Mixins.Bootable.props.eager",
     "maxWidth": "시트의 컨테이너의 최대 너비를 설정"
   }
 }

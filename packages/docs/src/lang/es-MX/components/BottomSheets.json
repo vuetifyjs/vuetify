@@ -14,7 +14,7 @@
   "props": {
     "disabled": "Deshabilita abrir el díalogo",
     "inset": "Reduce el ancho máximo del contenido del diálogo a 70%",
-    "lazy": "Mixins.Bootable.props.lazy",
+    "eager": "Mixins.Bootable.props.eager",
     "maxWidth": "Especifica el ancho máximo del contenedor del _bottom sheet_."
   }
 }
