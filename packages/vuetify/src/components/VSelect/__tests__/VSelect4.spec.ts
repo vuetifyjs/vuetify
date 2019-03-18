@@ -6,11 +6,17 @@ import {
   mount,
   Wrapper
 } from '@vue/test-utils'
+import { rafPolyfill } from '../../../../test'
 
 describe('.ts', () => {
   type Instance = InstanceType<typeof VSelect>
   let mountFunction: (options?: object) => Wrapper<Instance>
   let el
+
+  (global as any).performance = {
+    now: () => {}
+  }
+  rafPolyfill(window)
 
   beforeEach(() => {
     mountFunction = (options = {}) => {
