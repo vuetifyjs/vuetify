@@ -292,7 +292,7 @@
     data: () => ({
       model1: false,
       t1: '#t1v2',
-      targets1: ['#t1v1', '#t1v2', '#t1v3'],
+      targets1: ['#t1v1', '#t1v2', '#t1v3', '.v-btn'],
       model2: false,
       flat2: true,
       model3: false,
