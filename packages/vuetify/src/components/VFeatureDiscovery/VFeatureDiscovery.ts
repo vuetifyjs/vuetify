@@ -13,7 +13,7 @@ import mixins from '../../util/mixins'
 
 // Directives
 import ClickOutside from '../../directives/click-outside'
-import { convertToUnit } from '../../util/helpers'
+import { convertToUnit, keyCodes } from '../../util/helpers'
 
 export default mixins(
   Colorable,
@@ -125,7 +125,7 @@ export default mixins(
 
   methods: {
     keyPress (e: KeyboardEvent) {
-      if (this.closeConditional() && e.keyCode === 27) this.isActive = false
+      if (this.closeConditional() && e.keyCode === keyCodes.esc) this.isActive = false
     },
     updateTarget () {
       if (this.targetEl) (this.targetEl as any).style.zIndex = this.oldZIndex
@@ -145,8 +145,8 @@ export default mixins(
 
       this.movable = false
       this.rect = this.targetEl.getBoundingClientRect()
-      const vm = this
-      setTimeout(() => vm.movable = true)
+
+      setTimeout(() => (this.movable = true))
     },
     closeConditional (): boolean {
       return !this.persistent && this.isActive
