@@ -5,7 +5,7 @@ import VSelect from '../VSelect/VSelect'
 import VIcon from '../VIcon'
 import VBtn from '../VBtn'
 
-// Helpers
+// Types
 import Vue, { VNode, VNodeChildrenArrayContents } from 'vue'
 import { DataOptions, DataPaginaton } from '../VData/VData'
 import { PropValidator } from 'vue/types/options'
