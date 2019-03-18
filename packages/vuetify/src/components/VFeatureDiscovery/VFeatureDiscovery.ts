@@ -175,11 +175,11 @@ export default mixins(
 
       return this.$createElement('div', {
         staticClass: 'v-feature-discovery__actions'
-      }, this.$scopedSlots.actions!({
+      }, this.$scopedSlots.actions ? this.$scopedSlots.actions({
         close: () => {
           if (vm.closeConditional()) vm.isActive = false
         }
-      }) || this.$slots.actions)
+      }) : this.$slots.actions)
     },
     genWrapper (): VNode {
       return this.$createElement('div', {
