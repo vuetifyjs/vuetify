@@ -122,7 +122,7 @@ describe('.ts', () => {
       }
     })
 
-    expect(wrapper.find('.v-list-item')).toHaveLength(2)
+    expect(wrapper.findAll('.v-list-item')).toHaveLength(2)
 
     wrapper.setProps({ selectedItems: ['foo', 'bar'] })
 

@@ -254,7 +254,7 @@ describe('.ts', () => {
       }
     })
 
-    const clear = wrapper.find('.v-icon')[0]
+    const clear = wrapper.find('.v-icon')
 
     const input = jest.fn()
     wrapper.vm.$on('input', input)
@@ -365,7 +365,6 @@ describe('.ts', () => {
         value: 'bar'
       }
     })
-
     expect(wrapper.find('input').element.style.display).toBe('block')
   })
 

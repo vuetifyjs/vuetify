@@ -333,26 +333,3 @@ exports[`VSelect.ts should use slotted no-data 1`] = `
 </div>
 
 `;
-
-exports[`VSelect.ts should use slotted prepend-item 1`] = `
-
-<div role="list"
-     class="v-list theme--light"
->
-  <div>
-    foo
-  </div>
-  <div aria-selected="false"
-       role="listitem"
-       tabindex="-1"
-       class="v-list-item v-list-item--link theme--light"
-  >
-    <div class="v-list-item__content">
-      <div class="v-list-item__title">
-        foo
-      </div>
-    </div>
-  </div>
-</div>
-
-`;

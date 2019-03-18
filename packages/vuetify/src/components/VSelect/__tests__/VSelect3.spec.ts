@@ -295,7 +295,7 @@ describe('.ts', () => {
 
     await wrapper.vm.$nextTick()
 
-    const selections = wrapper.find('.v-select__selection')
+    const selections = wrapper.findAll('.v-select__selection')
 
     expect(selections).toHaveLength(1)
   })
