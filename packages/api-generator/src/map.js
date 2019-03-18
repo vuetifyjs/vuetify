@@ -960,7 +960,7 @@ module.exports = {
   'v-expansion-panel': {
     slots: ['default']
   },
-  'v-expansion-panel-content': {
+  'v-expansion-panel-item': {
     slots: ['default', 'header']
   },
   'v-flex': {

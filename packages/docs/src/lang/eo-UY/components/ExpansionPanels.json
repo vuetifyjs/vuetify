@@ -47,7 +47,7 @@
       "readonly": "crwdns12228:0crwdne12228:0",
       "value": "crwdns12230:0crwdne12230:0"
     },
-    "v-expansion-panel-content": {
+    "v-expansion-panel-item": {
       "disabled": "crwdns12232:0crwdne12232:0",
       "expandIcon": "crwdns12234:0crwdne12234:0",
       "hideActions": "crwdns12236:0crwdne12236:0",

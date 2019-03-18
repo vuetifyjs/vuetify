@@ -7,7 +7,7 @@ import { PropValidator } from 'vue/types/options'
 import { VueConstructor } from 'vue'
 
 /* eslint-disable-next-line no-use-before-define */
-export type Groupable<T extends string> = VueConstructor<ExtractVue<Registrable<T>> & {
+export type Groupable<T extends string, C extends VueConstructor | null = null> = VueConstructor<ExtractVue<Registrable<T, C>> & {
   activeClass: string
   isActive: boolean
   disabled: boolean
@@ -15,12 +15,12 @@ export type Groupable<T extends string> = VueConstructor<ExtractVue<Registrable<
   toggle (): void
 }>
 
-export function factory<T extends string> (
+export function factory<T extends string, C extends VueConstructor | null = null> (
   namespace: T,
   child?: string,
   parent?: string
-): Groupable<T> {
-  return RegistrableInject(namespace, child, parent).extend({
+): Groupable<T, C> {
+  return RegistrableInject<T, C>(namespace, child, parent).extend({
     name: 'groupable',
 
     props: {
