@@ -11,6 +11,7 @@
       <div class="text-xs-center">
         <h4 class="body-2 font-weight-bold grey--text">Premiere sponsor</h4>
         <supporters-patron
+          v-if="supporters.special && supporters.special.length"
           :value="supporters.special[0]"
           :href="supporters.special[0].href"
           class="mb-4"
