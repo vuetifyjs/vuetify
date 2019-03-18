@@ -9,12 +9,12 @@ import Scroll from '../../directives/scroll'
 
 // Mixins
 import Applicationable from '../../mixins/applicationable'
+import Scrollable from '../../mixins/scrollable'
 import SSRBootable from '../../mixins/ssr-bootable'
 import Toggleable from '../../mixins/toggleable'
 
 // Utilities
 import { convertToUnit } from '../../util/helpers'
-import { consoleWarn } from '../../util/console'
 import mixins from '../../util/mixins'
 
 // Types
@@ -22,6 +22,7 @@ import { VNode } from 'vue'
 
 const baseMixins = mixins(
   VToolbar,
+  Scrollable,
   SSRBootable,
   Toggleable,
   Applicationable('top', [
@@ -49,8 +50,6 @@ export default baseMixins.extend({
     hideOnScroll: Boolean,
     invertedScroll: Boolean,
     scrollOffScreen: Boolean,
-    scrollTarget: String,
-    scrollThreshold: [String, Number],
     shrinkOnScroll: Boolean,
     value: {
       type: Boolean,
@@ -58,14 +57,11 @@ export default baseMixins.extend({
     }
   },
 
-  data: () => ({
-    currentScroll: 0,
-    currentThreshold: 0,
-    isScrollingUp: false,
-    previousScroll: 0,
-    savedScroll: 0,
-    target: null as Element | null
-  }),
+  data () {
+    return {
+      isActive: this.value
+    }
+  },
 
   computed: {
     applicationProperty (): string {
@@ -73,7 +69,7 @@ export default baseMixins.extend({
     },
     canScroll (): boolean {
       return (
-        typeof window !== 'undefined' &&
+        Scrollable.options.computed.canScroll.call(this) &&
         (
           this.invertedScroll ||
           this.elevateOnScroll ||
@@ -203,43 +199,13 @@ export default baseMixins.extend({
 
   watch: {
     canScroll: 'onScroll',
-    currentThreshold (val: number) {
-      if (this.invertedScroll) {
-        this.isActive = this.currentScroll > this.computedScrollThreshold
-        return
-      }
-
-      if (val < this.computedScrollThreshold) return
-
-      if (this.hideOnScroll) {
-        this.isActive = this.isScrollingUp
-      }
-
-      this.savedScroll = this.currentScroll
-    },
     invertedScroll (val: boolean) {
       this.isActive = !val
-    },
-    isActive () {
-      this.savedScroll = 0
-    },
-    isScrollingUp () {
-      this.savedScroll = this.savedScroll || this.currentScroll
     }
   },
 
   created () {
     if (this.invertedScroll) this.isActive = false
-  },
-
-  mounted () {
-    if (this.scrollTarget) {
-      this.target = document.querySelector(this.scrollTarget)
-
-      if (!this.target) {
-        consoleWarn(`Unable to locate element with identifier ${this.scrollTarget}`, this)
-      }
-    }
   },
 
   methods: {
@@ -252,21 +218,24 @@ export default baseMixins.extend({
 
       return render
     },
-    onScroll () {
-      if (!this.canScroll) return
-
-      this.previousScroll = this.currentScroll
-      this.currentScroll = this.target
-        ? this.target.scrollTop
-        : window.pageYOffset
-
-      this.isScrollingUp = this.currentScroll < this.previousScroll
-      this.currentThreshold = Math.abs(this.currentScroll - this.computedScrollThreshold)
-    },
     updateApplication (): number {
       return this.invertedScroll
         ? 0
         : this.$el ? this.$el.clientHeight : 0
+    },
+    thresholdMet () {
+      if (this.invertedScroll) {
+        this.isActive = this.currentScroll > this.computedScrollThreshold
+        return
+      }
+
+      if (this.currentThreshold < this.computedScrollThreshold) return
+
+      if (this.hideOnScroll) {
+        this.isActive = this.isScrollingUp
+      }
+
+      this.savedScroll = this.currentScroll
     }
   },
 

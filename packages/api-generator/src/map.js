@@ -574,13 +574,7 @@ module.exports = {
   'v-breadcrumbs-item': {
     slots: ['default']
   },
-  'v-bottom-nav': {
-    props: [
-      {
-        name: 'active',
-        sync: true
-      }
-    ],
+  'v-bottom-navigation': {
     slots: ['default'],
     events: [
       {
@@ -588,7 +582,7 @@ module.exports = {
         value: 'boolean'
       },
       {
-        name: 'update:active',
+        name: 'update:inputValue',
         value: 'string | number'
       }
     ]

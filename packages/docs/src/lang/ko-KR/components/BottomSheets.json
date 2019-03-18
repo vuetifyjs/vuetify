@@ -1,6 +1,6 @@
 {
   "header": "바닥 시트 (Bottom sheet)",
-  "headerText": "바닥시트(bottom sheet)는 스크린 바닥으로 부터의 슬라이드를 추가한  `v-dialog` 의 변형이며 `v-bottom-nav`와 유사합니다. 바닥 네비게이션 (bottom navigation)이 버튼이나 어플리케이션 레벨 동작을 위한 컴포넌트라면, 바닥시트는 무엇이든 포함할 수 있습니다.",
+  "headerText": "바닥시트(bottom sheet)는 스크린 바닥으로 부터의 슬라이드를 추가한  `v-dialog` 의 변형이며 `v-bottom-navigation`와 유사합니다. 바닥 네비게이션 (bottom navigation)이 버튼이나 어플리케이션 레벨 동작을 위한 컴포넌트라면, 바닥시트는 무엇이든 포함할 수 있습니다.",
   "components": ["v-bottom-sheet"],
   "examples": {
     "standard": {
