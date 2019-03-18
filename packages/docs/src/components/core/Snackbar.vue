@@ -109,7 +109,7 @@
     },
 
     async created () {
-      if (this.$ssrContext) return
+      // if (this.$ssrContext) return
 
       const notify = require('@/data/api/notify.json')
 
