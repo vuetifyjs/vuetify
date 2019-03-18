@@ -13,6 +13,7 @@
   display: block
   border-radius: $sheet-border-radius
   position: relative
+  transition: .3s box-shadow map-get($transition, 'fast-in-slow-out')
 
   > *:first-child:not(.v-btn):not(.v-chip)
     border-top-left-radius: inherit
