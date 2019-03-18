@@ -1,4 +1,13 @@
 {
+  "special": [
+    {
+      "type": "Sponsor",
+      "name": "Segment",
+      "href": "https://segment.com",
+      "logo": "backers/segment.png",
+      "pledge": "Premiere Sponsor"
+    }
+  ],
   "diamond": [
     {
       "type": "Patron",

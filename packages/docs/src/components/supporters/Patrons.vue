@@ -12,6 +12,15 @@
         pa-0
       >
         <supporter-group
+          v-if="tier >= 0 && parseInt(tier) !== 1"
+          :group="supporters.special"
+          :title="!hideTitles ? 'Premiere Sponsor' : undefined"
+          :class="classes"
+          :large="!compact"
+          :small="compact"
+        />
+
+        <supporter-group
           v-if="tier >= 1"
           :group="supporters.diamond"
           :title="!hideTitles ? 'Diamond' : undefined"
