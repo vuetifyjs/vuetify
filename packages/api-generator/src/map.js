@@ -959,6 +959,9 @@ module.exports = {
   'v-list': {
     slots: ['default']
   },
+  'v-list-group': {
+    slots: ['activator']
+  },
   'v-list-tile': {
     slots: ['default']
   },
