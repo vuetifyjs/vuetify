@@ -1,0 +1,5 @@
+@mixin bottom-nav-theme($material)
+  background-color: map-get($material, 'cards')
+
+  .v-btn:not(.v-btn--active)
+    color: map-deep-get($material, 'text', 'secondary') !important

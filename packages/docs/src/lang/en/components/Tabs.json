@@ -31,7 +31,7 @@
     },
     "alignWithTitle": {
       "header": "### Align tabs with toolbar title",
-      "desc": "Make `v-tabs` lined up with the `v-toolbar-title` component (`v-toolbar-side-icon` or `v-btn` must be used in `v-toolbar`)."
+      "desc": "Make `v-tabs` lined up with the `v-toolbar-title` component (`v-app-bar-nav-icon` or `v-btn` must be used in `v-toolbar`)."
     },
     "grow": {
       "header": "### Grow",

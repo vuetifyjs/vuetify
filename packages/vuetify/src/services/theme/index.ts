@@ -39,6 +39,7 @@ export class Theme extends Service {
       warning: '#FB8C00'    // amber.base
     }
   }
+  public defaults: VuetifyThemes = this.themes
 
   private isDark = null as boolean | null
   private ssr = false
@@ -141,6 +142,19 @@ export class Theme extends Service {
       // Client-side
       this.applyTheme()
     }
+  }
+
+  // Allows for you to set target theme
+  public setTheme (theme: 'light' | 'dark', value: object) {
+    this.themes[theme] = Object.assign(this.themes[theme], value)
+    this.applyTheme()
+  }
+
+  // Reset theme defaults
+  public resetThemes () {
+    this.themes.light = Object.assign({}, this.defaults.light)
+    this.themes.dark = Object.assign({}, this.defaults.dark)
+    this.applyTheme()
   }
 
   // Check for existence of style element

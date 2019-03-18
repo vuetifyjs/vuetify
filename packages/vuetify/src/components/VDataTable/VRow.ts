@@ -14,14 +14,13 @@ export default Vue.extend({
   props: {
     headers: Array as PropValidator<TableHeader[]>,
     item: Object,
-    mobile: Boolean,
     rtl: Boolean
   },
 
   render (h, { props, slots, data }): VNode {
     const computedSlots = slots()
 
-    const columns = props.headers.map(header => {
+    const columns: VNode[] = props.headers.map((header: TableHeader) => {
       const classes = {
         [getTextAlignment(header.align, props.rtl)]: true
       }
@@ -29,28 +28,22 @@ export default Vue.extend({
       const children = []
       const value = getObjectValueByPath(props.item, header.value)
 
-      const scopedSlot = data.scopedSlots && data.scopedSlots[header.value]
-      const regularSlot = computedSlots[header.value]
+      const slotName = `column.${header.value}`
+      const scopedSlot = data.scopedSlots && data.scopedSlots[slotName]
+      const regularSlot = computedSlots[slotName]
 
       if (scopedSlot) {
-        children.push(scopedSlot({ item: props.item, header, value, mobile: props.mobile }))
+        children.push(scopedSlot({ item: props.item, header, value }))
       } else if (regularSlot) {
         children.push(regularSlot)
       } else {
-        if (props.mobile) {
-          children.push(h('div', { class: 'd-flex justify-content-between' }, [
-            h('span', { staticClass: 'v-row__header' }, [header.text]),
-            h('span', { staticClass: 'v-row__value' }, [value])
-          ]))
-        } else {
-          children.push(value)
-        }
+        children.push(value)
       }
 
       return h('td', {
         class: classes
       }, children)
-    }) as any
+    })
 
     return h('tr', data, columns)
   }

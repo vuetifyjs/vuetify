@@ -6,15 +6,15 @@
     multiple
   >
     <template v-slot:prepend-item>
-      <v-list-tile
+      <v-list-item
         ripple
         @click="toggle"
       >
-        <v-list-tile-action>
+        <v-list-item-action>
           <v-icon :color="selectedFruits.length > 0 ? 'indigo darken-4' : ''">{{ icon }}</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-title>Select All</v-list-tile-title>
-      </v-list-tile>
+        </v-list-item-action>
+        <v-list-item-title>Select All</v-list-item-title>
+      </v-list-item>
     </template>
     <template v-slot:prepend-item>
       <v-divider class="mt-2"></v-divider>
@@ -23,29 +23,29 @@
       <v-divider class="mb-2"></v-divider>
     </template>
     <template v-slot:append-item>
-      <v-list-tile disabled>
-        <v-list-tile-avatar color="grey lighten-3">
+      <v-list-item disabled>
+        <v-list-item-avatar color="grey lighten-3">
           <v-icon>mdi-food-apple</v-icon>
-        </v-list-tile-avatar>
+        </v-list-item-avatar>
 
-        <v-list-tile-content v-if="likesAllFruit">
-          <v-list-tile-title>Holy smokes, someone call the fruit police!</v-list-tile-title>
-        </v-list-tile-content>
+        <v-list-item-content v-if="likesAllFruit">
+          <v-list-item-title>Holy smokes, someone call the fruit police!</v-list-item-title>
+        </v-list-item-content>
 
-        <v-list-tile-content v-else-if="likesSomeFruit">
-          <v-list-tile-title>Fruit Count</v-list-tile-title>
-          <v-list-tile-sub-title>{{ selectedFruits.length }}</v-list-tile-sub-title>
-        </v-list-tile-content>
+        <v-list-item-content v-else-if="likesSomeFruit">
+          <v-list-item-title>Fruit Count</v-list-item-title>
+          <v-list-item-sub-title>{{ selectedFruits.length }}</v-list-item-sub-title>
+        </v-list-item-content>
 
-        <v-list-tile-content v-else>
-          <v-list-tile-title>
+        <v-list-item-content v-else>
+          <v-list-item-title>
             How could you not like fruit?
-          </v-list-tile-title>
-          <v-list-tile-sub-title>
+          </v-list-item-title>
+          <v-list-item-sub-title>
             Go ahead, make a selection above!
-          </v-list-tile-sub-title>
-        </v-list-tile-content>
-      </v-list-tile>
+          </v-list-item-sub-title>
+        </v-list-item-content>
+      </v-list-item>
     </template>
   </v-select>
 </template>

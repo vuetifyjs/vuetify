@@ -6,9 +6,6 @@ exports[`VTooltip should render component and match snapshot 1`] = `
   <div class="v-tooltip__content"
        style="left: 0px; max-width: auto; opacity: 0; top: 12px; z-index: 0; display: none;"
   >
-    <span>
-      content
-    </span>
   </div>
   <span>
     <span>

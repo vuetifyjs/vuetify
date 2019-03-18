@@ -1,6 +1,6 @@
 {
   "header": "Bottom sheet",
-  "headerText": "Bottom sheet はスクリーンの下部からスライドするように修飾された `v-dialog` で `v-bottom-nav` と似ています。 ボトムナビゲーションコンポーネントは、ボタンと特定のアプリケーションレベルのアクション用ですが、 Bottom sheet にはなんでも含めることができます。",
+  "headerText": "Bottom sheet はスクリーンの下部からスライドするように修飾された `v-dialog` で `v-bottom-navigation` と似ています。 ボトムナビゲーションコンポーネントは、ボタンと特定のアプリケーションレベルのアクション用ですが、 Bottom sheet にはなんでも含めることができます。",
   "components": ["v-bottom-sheet"],
   "examples": {
     "standard": {

@@ -3,6 +3,9 @@
     "v-alert": {
       "outline": "2.0"
     },
+    "v-bottom-navigation": {
+      "active": false
+    },
     "v-chip": {
       "outline": "2.0",
       "selected": "2.0"

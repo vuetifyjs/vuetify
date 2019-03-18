@@ -21,7 +21,6 @@ exports[`VExpansionPanel.js should render an expanded component and match snapsh
     <div class="v-expansion-panel__body"
          style="display: none;"
     >
-      content
     </div>
   </li>
 </ul>
@@ -78,7 +77,6 @@ exports[`VExpansionPanel.js should render component and match snapshot 1`] = `
     <div class="v-expansion-panel__body"
          style="display: none;"
     >
-      content
     </div>
   </li>
 </ul>

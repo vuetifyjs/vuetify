@@ -4,7 +4,7 @@
       <v-flex xs12 sm12 md6>
         <v-card>
           <v-toolbar>
-            <v-toolbar-side-icon></v-toolbar-side-icon>
+            <v-app-bar-nav-icon></v-app-bar-nav-icon>
           </v-toolbar>
           <v-card-text style="height: 300px;" class="grey lighten-5"></v-card-text>
           <v-card-text style="height: 100px; position: relative">
@@ -24,7 +24,7 @@
       <v-flex xs12 sm12 md6>
         <v-card>
           <v-toolbar extended>
-            <v-toolbar-side-icon></v-toolbar-side-icon>
+            <v-app-bar-nav-icon></v-app-bar-nav-icon>
             <v-btn
               color="pink"
               dark

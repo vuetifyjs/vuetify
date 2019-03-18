@@ -1,6 +1,6 @@
 {
   "header": "# Bottom sheet",
-  "headerText": "The bottom sheet is a modified `v-dialog` that slides from the bottom of the screen, similar to a `v-bottom-nav`. Whereas a bottom navigation component is for buttons and specific application level actions, a bottom sheet can contain anything.",
+  "headerText": "The bottom sheet is a modified `v-dialog` that slides from the bottom of the screen, similar to a `v-bottom-navigation`. Whereas a bottom navigation component is for buttons and specific application level actions, a bottom sheet can contain anything.",
   "examples": {
     "usage": {
       "desc": "Here we display an example list of actions that could be present in an application."

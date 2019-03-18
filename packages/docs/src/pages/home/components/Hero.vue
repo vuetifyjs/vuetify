@@ -32,6 +32,7 @@
           />
           <v-layout
             :justify-center="$vuetify.breakpoint.mdAndDown"
+            pa-3
             wrap
           >
             <v-btn
@@ -44,7 +45,7 @@
                   page: 'quick-start'
                 }
               }"
-              class="primary--text ma-3"
+              class="primary--text ma-2"
               color="white"
               large
             >
@@ -52,7 +53,7 @@
             </v-btn>
             <v-btn
               :block="$vuetify.breakpoint.xsOnly"
-              class="ma-3"
+              class="ma-2"
               color="white"
               href="https://github.com/vuetifyjs/vuetify"
               large
@@ -63,7 +64,7 @@
             </v-btn>
             <v-btn
               :block="$vuetify.breakpoint.xsOnly"
-              class="ma-3"
+              class="ma-2"
               color="grey lighten-3"
               outline
               href="https://community.vuetifyjs.com"
