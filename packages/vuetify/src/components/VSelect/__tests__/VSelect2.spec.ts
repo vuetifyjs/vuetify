@@ -3,6 +3,7 @@ import VSelect from '../VSelect'
 
 // Utilities
 import { keyCodes } from '../../../util/helpers'
+import { rafPolyfill } from '../../../../test'
 import {
   mount,
   Wrapper
@@ -12,6 +13,8 @@ describe('.ts', () => {
   type Instance = InstanceType<typeof VSelect>
   let mountFunction: (options?: object) => Wrapper<Instance>
   let el
+
+  rafPolyfill(window)
 
   beforeEach(() => {
     el = document.createElement('div')
@@ -76,7 +79,9 @@ describe('.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         items: ['foo', 'bar'],
-        offsetY: true
+        'menu-props': {
+          offsetY: true
+        }
       }
     })
 
