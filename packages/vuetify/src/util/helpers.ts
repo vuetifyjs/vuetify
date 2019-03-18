@@ -150,31 +150,26 @@ export function addOnceEventListener (el: EventTarget, event: string, cb: () => 
   el.addEventListener(event, once, false)
 }
 
-export function addOptionsSafeEventListener (
+let passiveSupported = false
+try {
+  const testListenerOpts = Object.defineProperty({}, 'passive', {
+    get: () => {
+      passiveSupported = true
+    }
+  })
+
+  window.addEventListener('testListener', () => {}, testListenerOpts)
+  window.removeEventListener('testListener', () => {}, testListenerOpts)
+} catch (e) { console.warn(e) }
+export { passiveSupported }
+
+export function addPassiveEventListener (
   el: EventTarget,
   event: string,
   cb: EventHandlerNonNull | (() => void),
   options: {}
 ): void {
-  const optionsSupported = Object.keys(options).reduce((obj, key) => {
-    obj[key] = false
-    return obj
-  }, Object())
-
-  try {
-    // IE does not support passing an options object
-    const testOpts = Object.keys(options).reduce((obj, key) => {
-      Object.defineProperty(obj, key, {
-        get: () => {
-          optionsSupported[key] = true
-        }
-      })
-    }, Object())
-    el.addEventListener('testListener', () => {}, testOpts)
-    el.removeEventListener('testListener', () => {}, testOpts)
-  } catch (e) { console.log(e) }
-
-  el.addEventListener(event, cb, Object.values(optionsSupported).every(val => !val) ? false : options)
+  el.addEventListener(event, cb, passiveSupported ? options : false)
 }
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
