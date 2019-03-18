@@ -77,9 +77,6 @@ export default mixins(
         ...this.themeClasses
       }
     },
-    computedElevation (): string | number | undefined {
-      return this.flat ? 0 : (this.elevation || 4)
-    },
     computedLeft (): number {
       return this.rect.left - (this.computedSize / 2) + (this.rect.width / 2)
     },
