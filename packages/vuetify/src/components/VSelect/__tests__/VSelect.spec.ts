@@ -15,11 +15,14 @@ import {
   mount,
   Wrapper
 } from '@vue/test-utils'
+import { rafPolyfill } from '../../../../test'
 
 describe('VSelect.ts', () => {
   type Instance = InstanceType<typeof VSelect>
   let mountFunction: (options?: object) => Wrapper<Instance>
   let el
+
+  rafPolyfill(window)
 
   beforeEach(() => {
     el = document.createElement('div')
@@ -186,7 +189,7 @@ describe('VSelect.ts', () => {
     expect(wrapper.vm.isFocused).toBe(true)
     expect(wrapper.vm.isMenuActive).toBe(true)
 
-    const item = wrapper.find('.v-list-item')[0]
+    const item = wrapper.find('.v-list-item')
     item.trigger('click')
 
     await wrapper.vm.$nextTick()
@@ -198,7 +201,7 @@ describe('VSelect.ts', () => {
     const wrapper = mountFunction()
 
     const icon = wrapper.find('.v-icon')
-    expect(icon.attributes('aria-hidden')).toBe(true)
+    expect(icon.attributes('aria-hidden')).toBe("true")
   })
 
   it('should only show items if they are in items', async () => {
@@ -208,6 +211,8 @@ describe('VSelect.ts', () => {
         items: ['foo']
       }
     })
+
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.internalValue).toEqual('foo')
     expect(wrapper.vm.selectedItems).toEqual(['foo'])
@@ -229,7 +234,10 @@ describe('VSelect.ts', () => {
     expect(wrapper.vm.selectedItems).toEqual(['bar'])
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.setProps({ value: ['foo', 'bar'], multiple: true })
+    wrapper.setProps({ multiple: true })
+    await wrapper.vm.$nextTick()
+
+    wrapper.setProps({ value: ['foo', 'bar'] })
 
     await wrapper.vm.$nextTick()
 
@@ -260,7 +268,7 @@ describe('VSelect.ts', () => {
       }
     })
 
-    const menu = wrapper.find('.v-menu__content')[0]
+    const menu = wrapper.find('.v-menu__content')
     expect(menu.element.classList).toContain('v-menu-class')
   })
 
@@ -288,7 +296,7 @@ describe('VSelect.ts', () => {
       }
     })
 
-    const tileTitle = wrapper.find('.v-list-item__title')[0]
+    const tileTitle = wrapper.find('.v-list-item__title')
     expect(tileTitle.html()).toMatchSnapshot()
   })
 
