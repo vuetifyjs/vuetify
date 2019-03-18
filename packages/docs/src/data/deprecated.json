@@ -4,7 +4,7 @@
       "outline": "2.0"
     },
     "v-expansion-panels": {
-      "expand": "2.0"
+      "expand": false
     },
     "v-chip": {
       "outline": "2.0",
