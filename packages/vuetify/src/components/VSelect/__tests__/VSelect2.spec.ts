@@ -346,28 +346,6 @@ describe('.ts', () => {
     expect(wrapper3.vm.selectedItems).toHaveLength(0)
   })
 
-  it('should show input with placeholder and not dirty', async () => {
-    const wrapper = mountFunction({
-      attachToDocument: true,
-      propsData: {
-        placeholder: 'foo'
-      }
-    })
-    expect(wrapper.find('input').element.style.display).toBe('block')
-  })
-
-  it('should not show input with placeholder and dirty', async () => {
-    const wrapper = mountFunction({
-      attachToDocument: true,
-      propsData: {
-        items: ['bar'],
-        placeholder: 'foo',
-        value: 'bar'
-      }
-    })
-    expect(wrapper.find('input').element.style.display).toBe('block')
-  })
-
   // #1704
   it('should populate select when using value as an object', async () => {
     const wrapper = mountFunction({
