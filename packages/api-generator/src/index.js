@@ -1,4 +1,5 @@
 const fs = require('fs')
+const { kebabCase } = require('lodash')
 
 // components['$vuetify'] = map['$vuetify']
 // components['internationalization'] = map['internationalization']
@@ -23,33 +24,19 @@ const writeApiFile = (obj, file) => {
   })
 }
 
-const parseLangDir = async path => {
-  let retData = {}
-  await asyncForEach(fs.readdirSync(path), async file => {
-    const filename = file.split('.')[0]
-    const fileData = await JSON.parse(
-      fs.readFileSync(`${path}/${file}`, 'utf-8')
-    )
-    retData = Object.assign(retData, { [filename]: fileData })
-  })
-  return retData
-}
-
-const processComponentFolder = async rootPath => {
+const processAPIFolder = async dirPath => {
   let comps = {}
-  let langs = {}
-  await asyncForEach(fs.readdirSync(rootPath), async compName => {
+  await asyncForEach(fs.readdirSync(dirPath), async compFile => {
+    const compName = compFile.split('.')[0]
     const compMap = await JSON.parse(
-      fs.readFileSync(`${rootPath}/${compName}/${compName}.json`, 'utf-8')
+      fs.readFileSync(`${dirPath}/${compFile}`, 'utf-8')
     )
     comps = Object.assign(comps, { [compName]: compMap })
-    const compLang = await parseLangDir(`${rootPath}/${compName}/lang`)
-    langs = Object.assign(langs, { [compName]: compLang })
   })
-  return { comps, langs }
+  return comps
 }
 
-const compileOutputData = async (lang, groups, descs) => {
+const compileAPIOutput = async groups => {
   let retData = {}
   await asyncForEach(Object.keys(groups), async group => {
     const groupDetails = groups[group]
@@ -58,14 +45,8 @@ const compileOutputData = async (lang, groups, descs) => {
     } else {
       var items = []
       await asyncForEach(Object.keys(groupDetails), async item => {
-        let desc = ''
-        if (descs[lang] && descs[lang][group] && descs[lang][group][item]) {
-          desc = descs[lang][group][item]
-        }
-        if (descs[lang] && descs.en[group] && descs.en[group][item]) {
-          desc = descs.en[group][item]
-        }
-        items.push({ name: item, desc, ...groupDetails[item] })
+        const itemDetails = groupDetails[item]
+        items.push({ name: item, ...itemDetails, desc: '' })
       })
       retData = Object.assign(retData, { [group]: items })
     }
@@ -75,38 +56,29 @@ const compileOutputData = async (lang, groups, descs) => {
 
 const init = async () => {
   // set variables
-  const languages = ['en', 'eo-UY', 'ja-JP', 'pt-BR', 'ru-RU', 'zh-CN']
-  const folders = ['mixins', 'components']
+  const dataDir = 'src/data'
+  const folders = fs.readdirSync('src/data', 'utf-8')
   let apiData = {}
-  let langData = {}
   let compData = {}
 
   // collect langs and component maps from files
   await asyncForEach(folders, async folder => {
-    const { comps, langs } = await processComponentFolder(`src/${folder}`)
-    langData = Object.assign(langData, langs)
+    const comps = await processAPIFolder(`${dataDir}/${folder}`)
     compData = Object.assign(compData, comps)
   })
 
-  // process lang file
-  await asyncForEach(languages, async lang => {
-    let apiLang = {}
-    await asyncForEach(Object.keys(compData), async comp => {
-      const apiComp = await compileOutputData(lang, compData[comp], langData[comp])
-      // may want to do a type conversion here from Alert -> v-alert
-      apiLang = Object.assign(apiLang, { [comp]: apiComp })
-    })
-    apiData = Object.assign(apiData, { [lang]: apiLang })
+  // process component descriptions
+  await asyncForEach(Object.keys(compData), async comp => {
+    const apiComp = await compileAPIOutput(compData[comp])
+    // may want to do a type conversion here from Alert -> v-alert
+    apiData = Object.assign(apiData, { [kebabCase(comp)]: apiComp })
   })
 
-  // ensure folder exists and write files
+  // ensure folder exists and write api file
   if (!fs.existsSync('dist')) {
     fs.mkdirSync('dist', 0o755)
   }
   writeApiFile(apiData, 'dist/api.js')
-  await asyncForEach(Object.keys(apiData), async apiFile => {
-    writeApiFile(apiData[apiFile], `dist/${apiFile}.js`)
-  })
 }
 
 init()
