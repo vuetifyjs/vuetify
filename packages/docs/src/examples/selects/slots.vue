@@ -12,17 +12,17 @@
       >
         <v-list-item-action>
           <v-icon :color="selectedFruits.length > 0 ? 'indigo darken-4' : ''">{{ icon }}</v-icon>
-        </v-list-item-action>
-        <v-list-item-content>
-          <v-list-item-title>Select All</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>Select All</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
       <v-divider class="mt-2"></v-divider>
     </template>
     <template v-slot:append-item>
       <v-divider class="mb-2"></v-divider>
-      <v-list-item disabled>
-        <v-list-item-avatar color="grey lighten-3">
+      <v-list-tile disabled>
+        <v-list-tile-avatar color="grey lighten-3">
           <v-icon>mdi-food-apple</v-icon>
         </v-list-item-avatar>
 
