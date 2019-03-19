@@ -214,7 +214,7 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
     })
 
     const activator = wrapper.find('.v-dialog__activator')[0]
-    expect(Object.keys(activator.vNode.data.on)).toHaveLength(0)
+    expect(activator.vNode.data.on).toBeUndefined()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/6115
@@ -238,7 +238,7 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
         }
       })
     })
-    const dialog = wrapper3.first(VDialog)
+    const dialog = wrapper3.first(VDialog.options)
     expect(dialog.hasStyle('display', 'inline-block')).toBe(true)
     expect(dialog.vm.hasActivator).toBe(true)
   })

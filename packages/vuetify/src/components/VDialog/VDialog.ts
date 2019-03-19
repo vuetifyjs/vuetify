@@ -11,27 +11,31 @@ import Toggleable from '../../mixins/toggleable'
 // Directives
 import ClickOutside from '../../directives/click-outside'
 
-// Helpers
+// Utilities
 import { getZIndex, convertToUnit, getSlotType } from '../../util/helpers'
 import ThemeProvider from '../../util/ThemeProvider'
 import { consoleError } from '../../util/console'
+import mixins from '../../util/mixins'
+
+// Types
+import { VNode } from 'vue'
+
+const baseMixins = mixins(
+  Dependent,
+  Detachable,
+  Overlayable,
+  Returnable,
+  Stackable,
+  Toggleable
+)
 
 /* @vue/component */
-export default {
+export default baseMixins.extend({
   name: 'v-dialog',
 
   directives: {
     ClickOutside
   },
-
-  mixins: [
-    Dependent,
-    Detachable,
-    Overlayable,
-    Returnable,
-    Stackable,
-    Toggleable
-  ],
 
   props: {
     disabled: Boolean,
@@ -63,13 +67,13 @@ export default {
   data () {
     return {
       animate: false,
-      animateTimeout: null,
+      animateTimeout: -1,
       stackMinZIndex: 200
     }
   },
 
   computed: {
-    classes () {
+    classes (): object {
       return {
         [(`v-dialog ${this.contentClass}`).trim()]: true,
         'v-dialog--active': this.isActive,
@@ -79,13 +83,13 @@ export default {
         'v-dialog--animated': this.animate
       }
     },
-    contentClasses () {
+    contentClasses (): object {
       return {
         'v-dialog__content': true,
         'v-dialog__content--active': this.isActive
       }
     },
-    hasActivator () {
+    hasActivator (): boolean {
       return Boolean(
         !!this.$slots.activator ||
         !!this.$scopedSlots.activator
@@ -140,15 +144,15 @@ export default {
       // outside of the dialog
       this.$nextTick(() => {
         this.animate = true
-        clearTimeout(this.animateTimeout)
-        this.animateTimeout = setTimeout(() => (this.animate = false), 150)
+        window.clearTimeout(this.animateTimeout)
+        this.animateTimeout = window.setTimeout(() => (this.animate = false), 150)
       })
     },
-    closeConditional (e) {
+    closeConditional (e: Event) {
       // If the dialog content contains
       // the click event, or if the
       // dialog is not active
-      if (this.$refs.content.contains(e.target) ||
+      if (this.$refs.content.contains(e.target as Node) ||
         !this.isActive
       ) return false
 
@@ -185,22 +189,24 @@ export default {
     unbind () {
       window.removeEventListener('keydown', this.onKeydown)
     },
-    onKeydown (e) {
+    onKeydown (e: KeyboardEvent) {
       this.$emit('keydown', e)
     },
     genActivator () {
       if (!this.hasActivator) return null
 
-      const listeners = this.disabled ? {} : {
-        click: e => {
+      const listeners = this.disabled ? undefined : {
+        click: (e: Event) => {
           e.stopPropagation()
           if (!this.disabled) this.isActive = !this.isActive
         }
       }
 
       if (getSlotType(this, 'activator') === 'scoped') {
-        const activator = this.$scopedSlots.activator({ on: listeners })
+        const activator = this.$scopedSlots.activator!({ on: listeners }) || null
+
         this.activatorNode = activator
+
         return activator
       }
 
@@ -214,7 +220,7 @@ export default {
     }
   },
 
-  render (h) {
+  render (h): VNode {
     const children = []
     const data = {
       'class': this.classes,
@@ -231,8 +237,9 @@ export default {
         { name: 'show', value: this.isActive }
       ],
       on: {
-        click: e => { e.stopPropagation() }
-      }
+        click: (e: Event) => { e.stopPropagation() }
+      },
+      style: {}
     }
 
     if (!this.fullscreen) {
@@ -279,4 +286,4 @@ export default {
       }
     }, children)
   }
-}
+})
