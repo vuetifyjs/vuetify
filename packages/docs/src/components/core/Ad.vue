@@ -24,8 +24,8 @@
             <core-toc />
             <div class="my-3">
               <supporters-patrons
+                :tier="[1]"
                 compact
-                tier="1"
               />
               <supporters-sponsor-btn small />
             </div>

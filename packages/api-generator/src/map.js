@@ -1107,6 +1107,9 @@ module.exports = {
   'v-list-item': {
     slots: ['default']
   },
+  'v-list-group': {
+    slots: ['activator', 'default']
+  },
   'v-list-item-action': {
     slots: ['default']
   },
