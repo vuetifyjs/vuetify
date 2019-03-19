@@ -156,21 +156,6 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.computedItems).toHaveLength(1)
   })
 
-  it('should cache items', async () => {
-    const wrapper = mount(VAutocomplete, {
-      propsData: { cacheItems: true }
-    })
-
-    wrapper.setProps({ items: ['bar', 'baz'] })
-    expect(wrapper.vm.computedItems).toHaveLength(2)
-
-    wrapper.setProps({ items: ['foo'] })
-    expect(wrapper.vm.computedItems).toHaveLength(3)
-
-    wrapper.setProps({ items: ['bar'] })
-    expect(wrapper.vm.computedItems).toHaveLength(3)
-  })
-
   it('should cache items passed via prop', async () => {
     const wrapper = mount(VAutocomplete, {
       propsData: {
@@ -890,7 +875,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.computedItems).toHaveLength(2)
     expect(wrapper.vm.internalSearch).toEqual('ID 1 French')
   })
-  
+
   it('should not replicate html select hotkeys in v-autocomplete', async () => {
     // const wrapper = mountFunction()
     const wrapper = mount(VAutocomplete, {
