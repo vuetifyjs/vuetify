@@ -51,7 +51,7 @@
     "fullWidth": "Specifies the modal to force 100% width",
     "fullscreen": "Changes layout for fullscreen display",
     "hideOverlay": "Hides the display of the overlay",
-    "lazy": "Mixins.Bootable.props.lazy",
+    "eager": "Mixins.Bootable.props.eager",
     "light": "Mixins.Themeable.props.light",
     "maxWidth": "The maximum width of the content",
     "noClickAnimation": "Disables the bounce effect when clicking outside of a `v-dialog`'s content when using the **persistent** prop",

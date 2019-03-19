@@ -24,7 +24,6 @@ theme(v-navigation-drawer, "v-navigation-drawer")
   pointer-events: auto
   top: 0
   will-change: transform
-  z-index: 3
   -webkit-overflow-scrolling: touch
 
   &[data-booted="true"]
@@ -50,8 +49,15 @@ theme(v-navigation-drawer, "v-navigation-drawer")
       right: auto
       left: 0
 
+  &--absolute,
+  &--fixed
+    z-index: 6
+
   &--absolute
     position: absolute
+
+  &--clipped
+    z-index: 4
 
   &--fixed
     position: fixed
@@ -62,25 +68,6 @@ theme(v-navigation-drawer, "v-navigation-drawer")
   &--mini-variant
     overflow: hidden
 
-    // .v-list-group__header__prepend-icon
-    //   flex: 1 0 auto
-    //   justify-content: center
-    //   width: 100%
-
-    // .v-list-item__action,
-    // .v-list-item__avatar
-    //   justify-content: center
-    //   min-width: 48px
-
-    // .v-list-item__content,
-    // .v-list-item:after
-    //   opacity: 0
-
-    // .v-subheader,
-    // .v-divider,
-    // .v-list--group
-    //   display: none !important
-
   &--temporary,
   &--is-mobile
     z-index: 6
@@ -90,24 +77,3 @@ theme(v-navigation-drawer, "v-navigation-drawer")
 
   .v-list
     background: inherit
-
-  // > .v-list
-  //   .v-list-item
-  //     transition: none
-  //     font-weight: $navigation-drawer-item-font-weight
-
-  //     &--active
-  //       .v-list-item__title
-  //         color: inherit
-
-  //   .v-list--group
-  //     .v-list-item
-  //       font-weight: $navigation-drawer-group-item-font-weight
-
-  //     &__header--active
-  //       &:after
-  //         background: transparent
-
-  // > .v-list:not(.v-list--dense)
-  //   .v-list-item
-  //     font-size: $navigation-drawer-item-font-size

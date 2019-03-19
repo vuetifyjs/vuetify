@@ -52,7 +52,7 @@
           v-for="(tab, i) in computedTabs"
           :key="`tab-item-${i}`"
           :value="tab"
-          lazy
+          eager
         >
           <v-card flat>
             <doc-parameters

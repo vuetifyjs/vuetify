@@ -52,7 +52,7 @@
     "fullWidth": "Especifica que el modal será forzado a 100% del ancho",
     "fullscreen": "Cambia la distribución para ser mostrada en pantalla completa",
     "hideOverlay": "Esconde el _overlay_",
-    "lazy": "Mixins.Bootable.props.lazy",
+    "eager": "Mixins.Bootable.props.eager",
     "maxWidth": "El ancho máximo del contenido",
     "noClickAnimation": "Deshabilita el efecto 'de rebote' cuando se hace click afuera de los contenidos del `v-dialog` cuando se usa la prop **persistent**",
     "origin": "Mixins.Transitionable.props.origin",

@@ -6,7 +6,7 @@
     <v-system-bar></v-system-bar>
 
     <v-toolbar
-      card
+      flat
       color="transparent"
     >
       <v-btn icon>

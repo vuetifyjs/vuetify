@@ -11,44 +11,40 @@
       ></v-checkbox>
     </div>
 
-    <v-expansion-panel
+    <v-expansion-panels
       v-model="panel"
       :disabled="disabled"
       :readonly="readonly"
-      expand
+      multiple
     >
-      <v-expansion-panel-content disabled>
-        <template v-slot:header>Disabled</template>
-        <v-card>
-          <v-card-text>
-            Disabled content. Style is changed and user is unable to toggle content.
-          </v-card-text>
-        </v-card>
-      </v-expansion-panel-content>
+      <v-expansion-panel disabled>
+        <v-expansion-panel-header>Disabled</v-expansion-panel-header>
+        <v-expansion-panel-content>
+          Disabled content. Style is changed and user is unable to toggle content.
+        </v-expansion-panel-content>
+      </v-expansion-panel>
 
-      <v-expansion-panel-content readonly>
-        <template v-slot:header>Readonly</template>
-        <v-card>
-          <v-card-text>
-            Readonly content. Style is unchanged but user is unable to toggle content.
-          </v-card-text>
-        </v-card>
-      </v-expansion-panel-content>
+      <v-expansion-panel readonly>
+        <v-expansion-panel-header>Readonly</v-expansion-panel-header>
+        <v-expansion-panel-content>
+          Readonly content. Style is unchanged but user is unable to toggle content.
+        </v-expansion-panel-content>
+      </v-expansion-panel>
 
-      <v-expansion-panel-content>
-        <template v-slot:header>Regular</template>
-        <v-card>
-          <v-card-text>Some content</v-card-text>
-        </v-card>
-      </v-expansion-panel-content>
-    </v-expansion-panel>
+      <v-expansion-panel>
+        <v-expansion-panel-header>Regular</v-expansion-panel-header>
+        <v-expansion-panel-content>
+          Some content
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
   </div>
 </template>
 
 <script>
   export default {
     data: () => ({
-      panel: [true, true, false],
+      panel: [0, 1],
       disabled: false,
       readonly: false
     })

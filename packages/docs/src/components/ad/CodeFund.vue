@@ -31,7 +31,7 @@
         .cf-img-wrapper
           margin-bottom: 16px
     .v-system-bar,
-    .v-bottom-nav
+    .v-bottom-navigation
       #codefund_ad
         height: 100%
         width: 100%
@@ -58,7 +58,7 @@
             font-size: 12px
           a.cf-powered-by
             font-size: 9px
-    .v-bottom-nav
+    .v-bottom-navigation
       #cf_ad
         > span > .cf-wrapper
           .cf-text

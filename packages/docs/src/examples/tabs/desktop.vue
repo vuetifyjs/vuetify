@@ -1,9 +1,6 @@
 <template>
   <v-card>
-    <v-toolbar
-      tabs
-      flat
-    >
+    <v-toolbar flat>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title>Contact Database</v-toolbar-title>

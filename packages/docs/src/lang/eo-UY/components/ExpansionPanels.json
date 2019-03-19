@@ -38,7 +38,7 @@
     }
   },
   "props": {
-    "v-expansion-panel": {
+    "v-expansion-panels": {
       "disabled": "crwdns12218:0crwdne12218:0",
       "expand": "crwdns12220:0crwdne12220:0",
       "focusable": "crwdns12222:0crwdne12222:0",
@@ -47,7 +47,7 @@
       "readonly": "crwdns12228:0crwdne12228:0",
       "value": "crwdns12230:0crwdne12230:0"
     },
-    "v-expansion-panel-content": {
+    "v-expansion-panel": {
       "disabled": "crwdns12232:0crwdne12232:0",
       "expandIcon": "crwdns12234:0crwdne12234:0",
       "hideActions": "crwdns12236:0crwdne12236:0",

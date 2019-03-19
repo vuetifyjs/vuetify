@@ -130,7 +130,7 @@
     align-items: center
     box-shadow: none
     display: flex
-    border-radius: 2px
+    border-radius: 4px
     position: relative
     overflow-x: auto
     overflow-y: hidden

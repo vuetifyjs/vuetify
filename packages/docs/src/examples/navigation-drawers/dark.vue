@@ -29,7 +29,7 @@
           </v-list-item-action>
         </v-list-item>
 
-        <v-list-item avatar tag="div">
+        <v-list-item tag="div">
           <v-list-item-avatar>
             <img src="https://randomuser.me/api/portraits/men/85.jpg">
           </v-list-item-avatar>

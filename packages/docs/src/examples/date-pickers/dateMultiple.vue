@@ -13,7 +13,6 @@
         :close-on-content-click="false"
         :nudge-right="40"
         :return-value.sync="dates"
-        lazy
         transition="scale-transition"
         offset-y
         full-width

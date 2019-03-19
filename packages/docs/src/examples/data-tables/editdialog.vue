@@ -8,7 +8,6 @@
         <td>
           <v-edit-dialog
             :return-value.sync="props.item.name"
-            lazy
             @save="save"
             @cancel="cancel"
             @open="open"
@@ -33,7 +32,6 @@
           <v-edit-dialog
             :return-value.sync="props.item.iron"
             large
-            lazy
             persistent
             @save="save"
             @cancel="cancel"
