@@ -1,4 +1,4 @@
-import '../../stylus/components/_dialogs.styl'
+import './VDialog.sass'
 
 // Mixins
 import Dependent from '../../mixins/dependent'
