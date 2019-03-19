@@ -3,8 +3,7 @@
     <v-toolbar
       color="cyan"
       dark
-      card
-      tabs
+      flat
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 

@@ -42,7 +42,7 @@ export default Vue.extend<Vue & Toggleable>().extend({
 
   created () {
     if ('lazy' in this.$attrs) {
-      breaking('lazy', 'eager')
+      breaking('lazy', 'eager', this)
     }
   },
 

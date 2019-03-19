@@ -22,7 +22,7 @@
         scrollable
       >
         <v-card tile>
-          <v-toolbar card dark color="primary">
+          <v-toolbar flat dark color="primary">
             <v-btn icon dark @click="dialog = false">
               <v-icon>close</v-icon>
             </v-btn>
@@ -54,13 +54,13 @@
             </v-tooltip>
             <v-list three-line subheader>
               <v-subheader>User Controls</v-subheader>
-              <v-list-item avatar>
+              <v-list-item>
                 <v-list-item-content>
                   <v-list-item-title>Content filtering</v-list-item-title>
                   <v-list-item-subtitle>Set the content filtering level to restrict apps that can be downloaded</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
-              <v-list-item avatar>
+              <v-list-item>
                 <v-list-item-content>
                   <v-list-item-title>Password</v-list-item-title>
                   <v-list-item-subtitle>Require password for purchase or use password to restrict purchase</v-list-item-subtitle>
@@ -70,7 +70,7 @@
             <v-divider></v-divider>
             <v-list three-line subheader>
               <v-subheader>General</v-subheader>
-              <v-list-item avatar>
+              <v-list-item>
                 <v-list-item-action>
                   <v-checkbox v-model="notifications"></v-checkbox>
                 </v-list-item-action>
@@ -79,7 +79,7 @@
                   <v-list-item-subtitle>Notify me about updates to apps or games that I downloaded</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
-              <v-list-item avatar>
+              <v-list-item>
                 <v-list-item-action>
                   <v-checkbox v-model="sound"></v-checkbox>
                 </v-list-item-action>
@@ -88,7 +88,7 @@
                   <v-list-item-subtitle>Auto-update apps at any time. Data charges may apply</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
-              <v-list-item avatar>
+              <v-list-item>
                 <v-list-item-action>
                   <v-checkbox v-model="widgets"></v-checkbox>
                 </v-list-item-action>

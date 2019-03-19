@@ -18,7 +18,7 @@ declare module 'vuetify/lib' {
   const VAvatar: Component
   const VBadge: Component
   const VBanner: Component
-  const VBottomNav: Component
+  const VBottomNavigation: Component
   const VBottomSheet: Component
   const VBottomSheetTransition: Component
   const VBreadcrumbs: Component
@@ -151,7 +151,7 @@ declare module 'vuetify/lib' {
     VAvatar,
     VBadge,
     VBanner,
-    VBottomNav,
+    VBottomNavigation,
     VBottomSheet,
     VBottomSheetTransition,
     VBreadcrumbs,

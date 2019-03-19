@@ -148,7 +148,6 @@
           v-model="modal"
           :return-value.sync="time1"
           persistent
-          lazy
           full-width
           width="290px"
         >
@@ -195,7 +194,6 @@
           :close-on-content-click="false"
           :nudge-right="40"
           :return-value.sync="time2"
-          lazy
           transition="scale-transition"
           offset-y
           full-width

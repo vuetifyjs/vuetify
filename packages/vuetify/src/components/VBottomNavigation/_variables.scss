@@ -1,0 +1,5 @@
+$bottom-nav-btn-font-size: map-deep-get($headings, 'caption', 'size') !default;
+$bottom-nav-btn-min-width: 80px !default;
+$bottom-nav-btn-max-width: 168px !default;
+$bottom-nav-shift-btn-top: calc(100% - 12px) !default;
+$bottom-nav-shift-btn-active-top: calc(100% - 22px) !default;

@@ -2,10 +2,9 @@
   <v-card>
     <v-toolbar
       color="purple"
-      card
       dark
+      flat
       prominent
-      tabs
     >
       <v-text-field
         append-icon="mic"
