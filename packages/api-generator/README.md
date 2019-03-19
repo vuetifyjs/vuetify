@@ -38,15 +38,6 @@ eg:
   }
 }
 ```
-* Add the API description to the appropriate `lang.json` file (`en.json` required) located in the `lang` folder under the component
-eg: `en.json`
-``` json
-{
-  "props": {
-    "border": "Puts a border on the element. Accepts **top** | **right** | **bottom** | **left**"
-  }
-}
-```
 
 ### Inheritance
 Instead of duplicating API's in each component you can auto inherit API's from other components.
