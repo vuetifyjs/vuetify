@@ -8,6 +8,10 @@
     "slots": {
       "header": "### Slots",
       "desc": "The `v-data-iterator` has both a header and footer slot for adding extra content"
+    },
+    "expand": {
+      "header": "### Expand",
+      "desc": "`v-data-iterator` can leverage the power of the `expand` prop and `props.expanded` inside the item slot you can control how display an items data."
     }
   },
   "props": {
