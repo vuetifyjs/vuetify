@@ -121,14 +121,6 @@ describe('.ts', () => {
     expect(wrapper.vm.isFocused).toBe(false)
   })
 
-  it('should use specified value', async () => {
-    const wrapper = mountFunction({
-      propsData: {
-        items: ['foo']
-      }
-    })
-  })
-
   it('should update model when chips are removed', async () => {
     const selectItem = jest.fn()
     const wrapper = mountFunction({
@@ -185,7 +177,7 @@ describe('.ts', () => {
 
     expect(wrapper.vm.selectedIndex).toBe(0)
 
-    wrapper.find('.v-chip')[1].trigger('click')
+    wrapper.findAll('.v-chip').at(1).trigger('click')
 
     expect(wrapper.vm.selectedIndex).toBe(1)
 
@@ -222,12 +214,15 @@ describe('.ts', () => {
     })
 
     wrapper.setProps({ items: ['bar', 'baz'] })
+    await wrapper.vm.$nextTick()
     expect(wrapper.vm.computedItems).toHaveLength(2)
 
     wrapper.setProps({ items: ['foo'] })
+    await wrapper.vm.$nextTick()
     expect(wrapper.vm.computedItems).toHaveLength(3)
 
     wrapper.setProps({ items: ['bar'] })
+    await wrapper.vm.$nextTick()
     expect(wrapper.vm.computedItems).toHaveLength(3)
   })
 
@@ -260,11 +255,11 @@ describe('.ts', () => {
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.find('.v-text-field__prefix')).toHaveLength(0)
-    expect(wrapper.find('.v-text-field__suffix')).toHaveLength(0)
+    expect(wrapper.findAll('.v-text-field__prefix')).toHaveLength(0)
+    expect(wrapper.findAll('.v-text-field__suffix')).toHaveLength(0)
   })
 
-  it('should use custom clear icon cb', () => {
+  it('should use custom clear icon cb', async () => {
     const clearIconCb = jest.fn()
     const wrapper = mountFunction({
       propsData: {
@@ -293,8 +288,6 @@ describe('.ts', () => {
       }
     })
 
-    await wrapper.vm.$nextTick()
-
     const selections = wrapper.findAll('.v-select__selection')
 
     expect(selections).toHaveLength(1)
@@ -320,8 +313,8 @@ describe('.ts', () => {
     const wrapper = mountFunction({
       propsData: { items: ['foo', 'bar'] }
     })
+
     const slot = wrapper.find('.v-input__slot')
-    const input = wrapper.find('input')
 
     expect(wrapper.vm.isMenuActive).toBe(false)
     slot.trigger('click')
@@ -336,7 +329,7 @@ describe('.ts', () => {
     expect(wrapper.vm.isMenuActive).toBe(false)
   })
 
-  it('should set the menu index', () => {
+  it('should set the menu index', async () => {
     const wrapper = mountFunction()
 
     expect(wrapper.vm.getMenuIndex()).toBe(-1)
@@ -383,7 +376,7 @@ describe('.ts', () => {
     expect(wrapper.vm.isMenuActive).toBe(true)
   })
 
-  it('should return full items if using auto prop', () => {
+  it('should return full items if using auto prop', async () => {
     const wrapper = mountFunction({
       propsData: {
         items: [...Array(100).keys()]
@@ -397,7 +390,7 @@ describe('.ts', () => {
     expect(wrapper.vm.virtualizedItems).toHaveLength(100)
   })
 
-  it('should fallback to using text as value if none present', () => {
+  it('should fallback to using text as value if none present', async () => {
     const wrapper = mountFunction({
       propsData: {
         items: [{

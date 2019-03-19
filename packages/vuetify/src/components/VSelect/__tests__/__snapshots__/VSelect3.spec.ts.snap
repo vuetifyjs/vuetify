@@ -9,7 +9,7 @@ exports[`.ts should add color to selected index 1`] = `
     <div class="v-input__slot">
       <div class="v-select__slot">
         <div class="v-select__selections">
-          <div class="v-select__selection v-select__selection--comma">
+          <div class="v-select__selection v-select__selection--comma primary--text">
             foo
           </div>
           <input autocomplete="on"
