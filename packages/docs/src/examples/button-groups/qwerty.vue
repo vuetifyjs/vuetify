@@ -86,7 +86,7 @@
   export default {
     data: () => ({
       alignment: 1,
-      formatting: null,
+      formatting: [],
       numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
       letters: 'qwertyuiop'.split(''),
       value: 'Toggle button requirements.\r\rHave at least three toggle buttons in a group\rLabel buttons with text, an icon, or'

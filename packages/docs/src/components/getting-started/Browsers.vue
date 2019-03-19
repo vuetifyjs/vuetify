@@ -12,7 +12,7 @@
         sm6
         md4
       >
-        <v-list-item avatar>
+        <v-list-item>
           <v-list-item-avatar
             :color="browser.supported ? browser.supported === 'polyfill' ? 'warning' : 'success' : 'error'"
           >

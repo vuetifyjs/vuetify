@@ -44,7 +44,7 @@
     "fullWidth": "Specifies the modal to force 100% width",
     "fullscreen": "Changes layout for fullscreen display",
     "hideOverlay": "Hide the display of the overlay",
-    "lazy": "Mixins.Bootable.props.lazy",
+    "eager": "Mixins.Bootable.props.eager",
     "maxWidth": "The maximum width of the content",
     "origin": "Mixins.Transitionable.props.origin",
     "persistent": "Clicking outside will not dismiss the dialog",

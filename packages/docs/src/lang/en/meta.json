@@ -59,6 +59,11 @@
     "description": "Get ready for automatic treeshaking. Use only the components you need. Single component importing only pulls in what you use.",
     "keywords": "a la carte, a-la-carte, vuetify single import, vuetify import, component importing"
   },
+  "framework/default-markup": {
+    "title": "Default Markup",
+    "description": "Vuetify comes equipped with a default markup that makes it easy to create layouts for any application.",
+    "keywords": "default layout, default markup, vuetify default layout"
+  },
   "framework/icons": {
     "title": "Installing Icons",
     "description": "Vuetify supports custom icon sets through prefixes and global options.",
@@ -264,6 +269,11 @@
     "description": "Chip component for Vuetify Framework.",
     "keywords": "chip"
   },
+  "components/chip-groups": {
+    "title": "Chip Group Component",
+    "description": "Chip Group component for Vuetify Framework.",
+    "keywords": "chip, chip-group, chip group, grouped chips"
+  },
   "components/combobox": {
     "title": "Combobox Component",
     "description": "The v-combobox component provides type-ahead autocomplete functionality and allows user to provide a custom value.",
@@ -274,7 +284,7 @@
     "description": "Divider component for Vuetify Framework.",
     "keywords": "carousel"
   },
-  "components/data-iterator": {
+  "components/data-iterators": {
     "title": "Data iterator Component",
     "description": "The v-data-iterator component is used for displaying data, and shares a majority of its functionality with the v-data-table component. Features include sorting, searching, pagination, and selection.",
     "keywords": "data iterator, tables"
@@ -334,6 +344,11 @@
     "description": "List component for Vuetify Framework",
     "keywords": "list, lists"
   },
+  "components/list-item-groups": {
+    "title": "List Item Group Component",
+    "description": "List Item Group component for Vuetify Framework",
+    "keywords": "list-groups, list groups, list-item-groups, list item groups"
+  },
   "components/menus": {
     "title": "Menu Component",
     "description": "Menu component for Vuetify Framework",
@@ -388,6 +403,11 @@
     "title": "Slider Component",
     "description": "The v-slider component is a better visualization of the number input. It is used for gathering numerical user data.",
     "keywords": "slider, components"
+  },
+  "components/slide-groups": {
+    "title": "Slide Group Component",
+    "description": "Slide Group component for the Vuetify framework.",
+    "keywords": "slide groups, slideable groups, carousel groups"
   },
   "components/snackbars": {
     "title": "Snackbar & toasts Component",

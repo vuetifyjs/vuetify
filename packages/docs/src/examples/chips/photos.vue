@@ -5,7 +5,7 @@
     max-width="500"
   >
     <v-toolbar
-      card
+      flat
       color="transparent"
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>

@@ -102,7 +102,7 @@ export function createSimpleTransition (
 
 export function createJavaScriptTransition (
   name: string,
-  functions: Record<string, () => any>,
+  functions: Record<string, any>,
   mode = 'in-out'
 ): FunctionalComponentOptions {
   return {
@@ -447,10 +447,10 @@ export function getPrefixedScopedSlots (prefix: string, scopedSlots: any) {
   }, {})
 }
 
-export function getSlot (vm: Vue, name = 'default', data?: object) {
+export function getSlot (vm: Vue, name = 'default', data?: object, optional = false) {
   if (vm.$scopedSlots[name]) {
     return vm.$scopedSlots[name]!(data)
-  } else if (vm.$slots[name] && !data) {
+  } else if (vm.$slots[name] && (!data || optional)) {
     return vm.$slots[name]
   }
   return undefined

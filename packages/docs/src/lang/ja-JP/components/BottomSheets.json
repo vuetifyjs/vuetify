@@ -15,7 +15,7 @@
   "props": {
     "disabled": "ダイアログを開けなくします。",
     "inset": "ダイアログの最大の横幅を 70% に縮小します。",
-    "lazy": "Mixins.Bootable.props.lazy",
+    "eager": "Mixins.Bootable.props.eager",
     "maxWidth": "シートのコンテナの最大の横幅を指定します。"
   }
 }

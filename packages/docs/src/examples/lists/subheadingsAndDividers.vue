@@ -7,7 +7,7 @@
       color="teal"
       dark
     >
-      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title>Settings</v-toolbar-title>
     </v-toolbar>

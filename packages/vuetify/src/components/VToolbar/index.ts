@@ -48,7 +48,6 @@ const wrapper = Vue.extend({
     data.attrs = data.attrs || {}
 
     if (props.app) {
-      deprecate('manual-scroll', 'value')
       deprecate('<v-toolbar app>', '<v-app-bar app>')
       data.attrs.app = props.app
     }

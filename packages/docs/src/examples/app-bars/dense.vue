@@ -34,7 +34,7 @@
           :key="n"
           @click="() => {}"
         >
-          <v-list-tile-title>Option {{ n }}</v-list-tile-title>
+          <v-list-tile-item>Option {{ n }}</v-list-tile-item>
         </v-list-tile>
       </v-list>
     </v-menu>

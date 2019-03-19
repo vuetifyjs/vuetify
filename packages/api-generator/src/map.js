@@ -960,9 +960,6 @@ module.exports = {
   'v-expansion-panel': {
     slots: ['default']
   },
-  'v-expansion-panel-content': {
-    slots: ['default', 'header']
-  },
   'v-flex': {
     props: [
       {
@@ -1109,6 +1106,9 @@ module.exports = {
   },
   'v-list-item': {
     slots: ['default']
+  },
+  'v-list-group': {
+    slots: ['activator', 'default']
   },
   'v-list-item-action': {
     slots: ['default']

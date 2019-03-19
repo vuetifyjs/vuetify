@@ -12,7 +12,16 @@
         pa-0
       >
         <supporter-group
-          v-if="tier >= 1"
+          v-if="tier.includes(0)"
+          :group="supporters.special"
+          :title="!hideTitles ? 'Premiere Sponsor' : undefined"
+          :class="classes"
+          :large="!compact"
+          :small="compact"
+        />
+
+        <supporter-group
+          v-if="tier.includes(1)"
           :group="supporters.diamond"
           :title="!hideTitles ? 'Diamond' : undefined"
           :class="classes"
@@ -21,14 +30,14 @@
         />
 
         <supporter-group
-          v-if="tier >= 2"
+          v-if="tier.includes(2)"
           :group="supporters.palladium"
           :title="!hideTitles ? 'Palladium' : undefined"
           :class="classes"
         />
 
         <supporter-group
-          v-if="tier >= 3"
+          v-if="tier.includes(3)"
           :group="supporters.gold"
           :title="!hideTitles ? 'Gold' : undefined"
           :class="classes"
@@ -36,7 +45,7 @@
         />
 
         <supporter-group
-          v-if="tier >= 4"
+          v-if="tier.includes(4)"
           :group="supporters.affiliates"
           :title="!hideTitles ? 'Affiliate' : undefined"
           :class="classes"
@@ -44,7 +53,7 @@
         />
 
         <supporter-group
-          v-if="tier >= 5"
+          v-if="tier.includes(5)"
           :group="supporters.service"
           :title="!hideTitles ? 'Service' : undefined"
           small
@@ -80,8 +89,8 @@
         default: false
       },
       tier: {
-        type: [Number, String],
-        default: 10
+        type: Array,
+        default: () => ([0, 1, 2, 3, 4, 5])
       }
     },
 
