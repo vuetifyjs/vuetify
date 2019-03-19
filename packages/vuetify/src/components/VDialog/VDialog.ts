@@ -68,6 +68,7 @@ export default baseMixins.extend({
     return {
       animate: false,
       animateTimeout: -1,
+      isActive: false,
       stackMinZIndex: 200
     }
   },
