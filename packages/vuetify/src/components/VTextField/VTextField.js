@@ -110,7 +110,7 @@ export default VInput.extend({
         return this.lazyValue
       },
       set (val) {
-        if (this.mask) {
+        if (this.mask && val !== this.lazyValue) {
           this.lazyValue = this.unmaskText(this.maskText(this.unmaskText(val)))
           this.setSelectionRange()
         } else {
