@@ -29,7 +29,7 @@
         }
     ],
     "props": {
-        "v-expansion-panel": {
+        "v-expansion-panels": {
             "expand": "Mantiene el _expansion-panel_ abierto cuando se selecciona algún otro",
             "focusable": "Hace que los headers del _expansion panel_ sean enfocables",
             "inset": "Hace que el _expansion panel_ abra con un estilo _inset_",

@@ -38,7 +38,7 @@
     }
   },
   "props": {
-    "v-expansion-panel": {
+    "v-expansion-panels": {
       "disabled": "crwdns12218:0crwdne12218:0",
       "expand": "crwdns12220:0crwdne12220:0",
       "focusable": "crwdns12222:0crwdne12222:0",
