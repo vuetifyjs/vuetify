@@ -250,6 +250,7 @@ export default Vue.extend({
       }
     },
     checkActivatorFixed () {
+      if (this.attach !== false) return
       let el = this.getActivator()
       while (el) {
         if (window.getComputedStyle(el).position === 'fixed') {
