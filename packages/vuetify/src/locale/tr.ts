@@ -10,5 +10,9 @@ export default {
   dataTable: {
     rowsPerPageText: 'Sayfa başına satır:'
   },
-  noDataText: 'Uygun veri yok'
+  noDataText: 'Uygun veri yok',
+  carousel: {
+    prev: 'Önceki görsel',
+    next: 'Sonraki görsel'
+  }
 }

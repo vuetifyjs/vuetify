@@ -12,8 +12,9 @@ import Toggleable from '../../mixins/toggleable'
 import ClickOutside from '../../directives/click-outside'
 
 // Helpers
-import { getZIndex, convertToUnit } from '../../util/helpers'
+import { convertToUnit, keyCodes, getSlotType } from '../../util/helpers'
 import ThemeProvider from '../../util/ThemeProvider'
+import { consoleError } from '../../util/console'
 
 /* @vue/component */
 export default {
@@ -123,6 +124,12 @@ export default {
     })
   },
 
+  mounted () {
+    if (getSlotType(this, 'activator', true) === 'v-slot') {
+      consoleError(`v-dialog's activator slot must be bound, try '<template #activator="data"><v-btn v-on="data.on>'`, this)
+    }
+  },
+
   beforeDestroy () {
     if (typeof window !== 'undefined') this.unbind()
   },
@@ -142,9 +149,7 @@ export default {
       // If the dialog content contains
       // the click event, or if the
       // dialog is not active
-      if (this.$refs.content.contains(e.target) ||
-        !this.isActive
-      ) return false
+      if (!this.isActive || this.$refs.content.contains(e.target)) return false
 
       // If we made it here, the click is outside
       // and is active. If persistent, and the
@@ -159,7 +164,7 @@ export default {
 
       // close dialog if !persistent, clicked outside and we're the topmost dialog.
       // Since this should only be called in a capture event (bottom up), we shouldn't need to stop propagation
-      return getZIndex(this.$refs.content) >= this.getMaxZIndex()
+      return this.activeZIndex >= this.getMaxZIndex()
     },
     hideScroll () {
       if (this.fullscreen) {
@@ -171,16 +176,65 @@ export default {
     show () {
       !this.fullscreen && !this.hideOverlay && this.genOverlay()
       this.$refs.content.focus()
-      this.$listeners.keydown && this.bind()
+      this.bind()
     },
     bind () {
-      window.addEventListener('keydown', this.onKeydown)
+      window.addEventListener('focusin', this.onFocusin)
     },
     unbind () {
-      window.removeEventListener('keydown', this.onKeydown)
+      window.removeEventListener('focusin', this.onFocusin)
     },
     onKeydown (e) {
+      if (e.keyCode === keyCodes.esc && !this.getOpenDependents().length) {
+        if (!this.persistent) {
+          this.isActive = false
+          const activator = this.getActivator()
+          this.$nextTick(() => activator && activator.focus())
+        } else if (!this.noClickAnimation) {
+          this.animateClick()
+        }
+      }
       this.$emit('keydown', e)
+    },
+    onFocusin (e) {
+      const { target } = event
+
+      if (
+        // It isn't the document or the dialog body
+        ![document, this.$refs.content].includes(target) &&
+        // It isn't inside the dialog body
+        !this.$refs.content.contains(target) &&
+        // We're the topmost dialog
+        this.activeZIndex >= this.getMaxZIndex() &&
+        // It isn't inside a dependent element (like a menu)
+        !this.getOpenDependentElements().some(el => el.contains(target))
+        // So we must have focused something outside the dialog and its children
+      ) {
+        // Find and focus the first available element inside the dialog
+        const focusable = this.$refs.content.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+        focusable.length && focusable[0].focus()
+      }
+    },
+    getActivator (e) {
+      if (this.$refs.activator) {
+        return this.$refs.activator.children.length > 0
+          ? this.$refs.activator.children[0]
+          : this.$refs.activator
+      }
+
+      if (e) {
+        this.activatedBy = e.currentTarget || e.target
+      }
+
+      if (this.activatedBy) return this.activatedBy
+
+      if (this.activatorNode) {
+        const activator = Array.isArray(this.activatorNode) ? this.activatorNode[0] : this.activatorNode
+        const el = activator && activator.elm
+        if (el) return el
+      }
+
+      consoleError('No activator found')
     },
     genActivator () {
       if (!this.hasActivator) return null
@@ -188,11 +242,12 @@ export default {
       const listeners = this.disabled ? {} : {
         click: e => {
           e.stopPropagation()
+          this.getActivator(e)
           if (!this.disabled) this.isActive = !this.isActive
         }
       }
 
-      if (this.$scopedSlots.activator && this.$scopedSlots.activator.length) {
+      if (getSlotType(this, 'activator') === 'scoped') {
         const activator = this.$scopedSlots.activator({ on: listeners })
         this.activatorNode = activator
         return activator
@@ -200,9 +255,10 @@ export default {
 
       return this.$createElement('div', {
         staticClass: 'v-dialog__activator',
-        'class': {
+        class: {
           'v-dialog__activator--disabled': this.disabled
         },
+        ref: 'activator',
         on: listeners
       }, this.$slots.activator)
     }
@@ -216,7 +272,7 @@ export default {
       directives: [
         {
           name: 'click-outside',
-          value: () => (this.isActive = false),
+          value: () => { this.isActive = false },
           args: {
             closeConditional: this.closeConditional,
             include: this.getOpenDependentElements
@@ -253,6 +309,9 @@ export default {
       attrs: {
         tabIndex: '-1',
         ...this.getScopeIdAttrs()
+      },
+      on: {
+        keydown: this.onKeydown
       },
       style: { zIndex: this.activeZIndex },
       ref: 'content'

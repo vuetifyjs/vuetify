@@ -99,6 +99,7 @@ export default Vue.extend({
     activatorFixed: false,
     dimensions: Object.assign({}, dimensions),
     isContentActive: false,
+    pageWidth: 0,
     pageYOffset: 0,
     stackClass: 'v-menu__content--active',
     stackMinZIndex: 6
@@ -191,7 +192,7 @@ export default Vue.extend({
       }px`
     },
     calcXOverflow (left, menuWidth) {
-      const xOverflow = left + menuWidth - this.getInnerWidth() + 12
+      const xOverflow = left + menuWidth - this.pageWidth + 12
 
       if ((!this.left || this.right) && xOverflow > 0) {
         left = Math.max(left - xOverflow, 0)
@@ -284,6 +285,12 @@ export default Vue.extend({
 
       if (this.activatedBy) return this.activatedBy
 
+      if (this.activatorNode) {
+        const activator = Array.isArray(this.activatorNode) ? this.activatorNode[0] : this.activatorNode
+        const el = activator && activator.elm
+        if (el) return el
+      }
+
       consoleError('No activator found')
     },
     getInnerHeight () {
@@ -291,11 +298,6 @@ export default Vue.extend({
 
       return window.innerHeight ||
         document.documentElement.clientHeight
-    },
-    getInnerWidth () {
-      if (!this.hasWindow) return 0
-
-      return document.documentElement.clientWidth
     },
     getOffsetLeft () {
       if (!this.hasWindow) return 0
@@ -359,6 +361,7 @@ export default Vue.extend({
       this.checkForWindow()
       this.checkActivatorFixed()
       this.checkForPageYOffset()
+      this.pageWidth = document.documentElement.clientWidth
 
       const dimensions = {}
 

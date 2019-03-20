@@ -19,21 +19,22 @@
         <v-icon>more_vert</v-icon>
       </v-btn>
 
-      <v-tabs
-        slot="extension"
-        v-model="model"
-        centered
-        color="cyan"
-        slider-color="yellow"
-      >
-        <v-tab
-          v-for="i in 3"
-          :key="i"
-          :href="`#tab-${i}`"
+      <template v-slot:extension>
+        <v-tabs
+          v-model="model"
+          centered
+          color="cyan"
+          slider-color="yellow"
         >
-          Item {{ i }}
-        </v-tab>
-      </v-tabs>
+          <v-tab
+            v-for="i in 3"
+            :key="i"
+            :href="`#tab-${i}`"
+          >
+            Item {{ i }}
+          </v-tab>
+        </v-tabs>
+      </template>
     </v-toolbar>
 
     <v-tabs-items v-model="model">

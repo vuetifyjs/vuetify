@@ -1,3 +1,5 @@
+import { getSlotType } from '../../../util/helpers'
+
 /* @vue/component */
 export default {
   methods: {
@@ -15,7 +17,8 @@ export default {
         }
       }
 
-      if (this.$scopedSlots.activator && this.$scopedSlots.activator.length) {
+      if (getSlotType(this, 'activator') === 'scoped') {
+        listeners.keydown = this.onKeyDown
         const activator = this.$scopedSlots.activator({ on: listeners })
         this.activatorNode = activator
         return activator
@@ -46,7 +49,7 @@ export default {
       // Do not add click outside for hover menu
       const directives = !this.openOnHover && this.closeOnClick ? [{
         name: 'click-outside',
-        value: () => (this.isActive = false),
+        value: () => { this.isActive = false },
         args: {
           closeConditional: this.closeConditional,
           include: () => [this.$el, ...this.getOpenDependentElements()]
@@ -80,7 +83,8 @@ export default {
             e.stopPropagation()
             if (e.target.getAttribute('disabled')) return
             if (this.closeOnContentClick) this.isActive = false
-          }
+          },
+          keydown: this.onKeyDown
         }
       }
 

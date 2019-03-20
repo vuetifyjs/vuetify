@@ -36,14 +36,13 @@
     "jest-css-modules": "^1.1.0",
     "jest-serializer-html": "^5.0.0",
     "lerna": "^3.4.3",
-    "lint-staged": "^7.3.0",
     "semver": "^5.6.0",
     "shelljs": "^0.8.2",
     "ts-jest": "^21.2.1",
     "tslint": "^5.12.1",
     "typescript": "^3.3.3",
     "typestrict": "^1.0.2",
-    "vue": "^2.6.4",
-    "vue-template-compiler": "^2.6.4"
+    "vue": "^2.6.6",
+    "vue-template-compiler": "^2.6.6"
   }
 }

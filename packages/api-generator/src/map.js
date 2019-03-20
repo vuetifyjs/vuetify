@@ -206,6 +206,10 @@ const textEvents = [
 
 const inputSlots = ['append', 'prepend', 'default']
 
+const textFieldSlots = [...inputSlots, 'append-outer', 'prepend-inner', 'label']
+
+const selectSlots = [...textFieldSlots, 'append-item', 'prepend-item']
+
 const VSelect = {
   props: [
     {
@@ -221,7 +225,7 @@ const VSelect = {
       default: '{"closeOnClick":false, "closeOnContentClick":false, "openOnClick":false, "maxHeight":300}'
     }
   ],
-  slots: inputSlots.concat(['no-data', 'label', 'progress']),
+  slots: selectSlots.concat(['no-data', 'progress']),
   scopedSlots: [
     {
       name: 'selection',
@@ -435,6 +439,14 @@ module.exports = {
   'v-btn': {
     slots: ['default']
   },
+  'v-overflow-btn': {
+    props: [
+      {
+        name: 'menuProps',
+        default: '{"closeOnClick":false, "closeOnContentClick":false, "openOnClick":false, "maxHeight":300, "offsetY":true, "offsetOverflow":true, "transition":false}'
+      }
+    ]
+  },
   'v-btn-toggle': {
     slots: ['default'],
     events: [
@@ -556,7 +568,7 @@ module.exports = {
       },
       {
         name: 'touchmove:day',
-        value:VTimestampWithTime
+        value: VTimestampWithTime
       },
       {
         name: 'touchend:day',
@@ -911,6 +923,9 @@ module.exports = {
   'v-input': {
     events: [
       ...inputEvents
+    ],
+    slots: [
+      ...inputSlots
     ]
   },
   'v-layout': {
@@ -943,6 +958,9 @@ module.exports = {
   },
   'v-list': {
     slots: ['default']
+  },
+  'v-list-group': {
+    slots: ['activator']
   },
   'v-list-tile': {
     slots: ['default']
@@ -1108,7 +1126,7 @@ module.exports = {
     slots: ['default'],
     events: [
       {
-        name: 'input',
+        name: 'change',
         value: 'string'
       }
     ]
@@ -1123,7 +1141,7 @@ module.exports = {
     slots: ['default'],
     events: [
       {
-        name: 'input',
+        name: 'change',
         value: 'string'
       }
     ]
@@ -1141,7 +1159,26 @@ module.exports = {
       ...inputEvents,
       ...textEvents
     ].concat(validatableEvents),
-    slots: ['label']
+    slots: [
+      ...textFieldSlots
+    ]
+  },
+  'v-textarea': {
+    events: [
+      {
+        name: 'input',
+        value: 'string'
+      },
+      {
+        name: 'change',
+        value: 'string'
+      },
+      ...inputEvents,
+      ...textEvents
+    ].concat(validatableEvents),
+    slots: [
+      ...textFieldSlots
+    ]
   },
   'v-time-picker': {
     events: [

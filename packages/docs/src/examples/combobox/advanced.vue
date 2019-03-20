@@ -11,7 +11,7 @@
     small-chips
     solo
   >
-    <template slot="no-data">
+    <template v-slot:no-data>
       <v-list-tile>
         <span class="subheading">Create</span>
         <v-chip
@@ -23,12 +23,9 @@
         </v-chip>
       </v-list-tile>
     </template>
-    <template
-      v-if="item === Object(item)"
-      slot="selection"
-      slot-scope="{ item, parent, selected }"
-    >
+    <template v-slot:selection="{ item, parent, selected }">
       <v-chip
+        v-if="item === Object(item)"
         :color="`${item.color} lighten-3`"
         :selected="selected"
         label
@@ -43,10 +40,7 @@
         >close</v-icon>
       </v-chip>
     </template>
-    <template
-      slot="item"
-      slot-scope="{ index, item }"
-    >
+    <template v-slot:item="{ index, item }">
       <v-list-tile-content>
         <v-text-field
           v-if="editing === item"

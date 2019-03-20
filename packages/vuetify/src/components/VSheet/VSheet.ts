@@ -47,7 +47,8 @@ export default mixins(
   render (h): VNode {
     const data = {
       class: this.classes,
-      style: this.styles
+      style: this.styles,
+      on: this.$listeners
     }
 
     return h(

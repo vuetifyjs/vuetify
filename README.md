@@ -37,6 +37,9 @@
   <a href="https://www.npmjs.com/package/vuetify">
     <img src="https://img.shields.io/npm/v/vuetify.svg" alt="Version">
   </a>
+  <a href="https://www.npmjs.com/package/vuetify">
+    <img src="https://img.shields.io/npm/v/vuetify/next.svg" alt="Next version">
+  </a>
   <a href="https://cdnjs.com/libraries/vuetify">
     <img src="https://img.shields.io/cdnjs/v/vuetify.svg" alt="CDN">
   </a>
@@ -72,6 +75,20 @@
 </ul>
 
 <br>
+
+<h4 align="center"><b>Premiere Sponsor</b></h4>
+
+<table>
+  <tbody>
+    <tr>
+      <td>
+        <a href="https://segment.com">
+          <img height="50px" src="https://cdn.vuetifyjs.com/images/backers/segment.png">
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 align="center"><b>Diamond Sponsors</b></h4>
 

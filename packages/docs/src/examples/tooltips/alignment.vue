@@ -1,46 +1,30 @@
 <template>
   <div class="text-xs-center">
     <v-tooltip left>
-      <v-btn
-        slot="activator"
-        color="primary"
-        dark
-      >
-        Left
-      </v-btn>
+      <template v-slot:activator="{ on }">
+        <v-btn color="primary" dark v-on="on">Left</v-btn>
+      </template>
       <span>Left tooltip</span>
     </v-tooltip>
 
     <v-tooltip top>
-      <v-btn
-        slot="activator"
-        color="primary"
-        dark
-      >
-        Top
-      </v-btn>
+      <template v-slot:activator="{ on }">
+        <v-btn color="primary" dark v-on="on">Top</v-btn>
+      </template>
       <span>Top tooltip</span>
     </v-tooltip>
 
     <v-tooltip bottom>
-      <v-btn
-        slot="activator"
-        color="primary"
-        dark
-      >
-        Bottom
-      </v-btn>
+      <template v-slot:activator="{ on }">
+        <v-btn color="primary" dark v-on="on">Bottom</v-btn>
+      </template>
       <span>Bottom tooltip</span>
     </v-tooltip>
 
     <v-tooltip right>
-      <v-btn
-        slot="activator"
-        color="primary"
-        dark
-      >
-        Right
-      </v-btn>
+      <template v-slot:activator="{ on }">
+        <v-btn color="primary" dark v-on="on">Right</v-btn>
+      </template>
       <span>Right tooltip</span>
     </v-tooltip>
   </div>

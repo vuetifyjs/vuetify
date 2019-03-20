@@ -9,7 +9,8 @@ import Menuable from '../../mixins/menuable'
 import Toggleable from '../../mixins/toggleable'
 
 // Helpers
-import { convertToUnit } from '../../util/helpers'
+import { convertToUnit, getSlotType } from '../../util/helpers'
+import { consoleError } from '../../util/console'
 
 /* @vue/component */
 export default {
@@ -126,6 +127,7 @@ export default {
       return {
         left: this.calculatedLeft,
         maxWidth: convertToUnit(this.maxWidth),
+        minWidth: convertToUnit(this.minWidth),
         opacity: this.isActive ? 0.9 : 0,
         top: this.calculatedTop,
         zIndex: this.zIndex || this.activeZIndex
@@ -137,6 +139,12 @@ export default {
     this.$nextTick(() => {
       this.value && this.callActivate()
     })
+  },
+
+  mounted () {
+    if (getSlotType(this, 'activator', true) === 'v-slot') {
+      consoleError(`v-tooltip's activator slot must be bound, try '<template #activator="data"><v-btn v-on="data.on>'`, this)
+    }
   },
 
   methods: {
@@ -159,7 +167,7 @@ export default {
         }
       }
 
-      if (this.$scopedSlots.activator && this.$scopedSlots.activator.length) {
+      if (getSlotType(this, 'activator') === 'scoped') {
         const activator = this.$scopedSlots.activator({ on: listeners })
         this.activatorNode = activator
         return activator

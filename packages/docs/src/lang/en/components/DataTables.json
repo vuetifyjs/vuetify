@@ -11,7 +11,7 @@
     },
     "headers": {
       "header": "### Slot: items and headers",
-      "desc": "The `items` and `headers` slots can accept either a collection of <kbd>td/th</kbd> tags, or if you want control of the entire row, a <kbd>tr</kbd> tag."
+      "desc": "The `items` and `headers` slots can accept either a collection of <kbd>td/th</kbd> tags, or if you want control of the entire row, a <kbd>tr</kbd> tag. In the latter case, you have to manually specify a `key` on the row regardless of the `item-key` value."
     },
     "headerCell": {
       "header": "### Slot: headerCell",
@@ -87,7 +87,8 @@
       "hideActions": "Hide the table actions. This will also remove pagination. pagination can be reactivated using the `pagination.sync` prop",
       "sortIcon": "Use a custom sort icon, uses the same syntax as `v-icon`",
       "nextIcon": "Mixins.DataIterable.props.nextIcon",
-      "prevIcon": "Mixins.DataIterable.props.prevIcon"
+      "prevIcon": "Mixins.DataIterable.props.prevIcon",
+      "totalItems": "Manually sets total number of row items, which disables built-in sort and pagination. Used together with pagination prop to enable server-side sort and pagination. **Caution: Binding this to a blank string or using in conjunction with search will yield unexpected behaviours**"
     }
   },
   "scopedSlots": {

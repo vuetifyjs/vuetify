@@ -6,17 +6,19 @@
     offset-y
     max-height="500"
   >
-    <v-btn
-      slot="activator"
-      class="hidden-md-and-down"
-      flat
-    >
-      <span
-        class="text-lowercase mr-1"
-        v-text="version"
-      />
-      <v-icon class="hidden-sm-and-down">mdi-menu-down</v-icon>
-    </v-btn>
+    <template #activator="{ on: menu }">
+      <v-btn
+        class="hidden-md-and-down"
+        flat
+        v-on="menu"
+      >
+        <span
+          class="text-lowercase mr-1"
+          v-text="version"
+        />
+        <v-icon class="hidden-sm-and-down">mdi-menu-down</v-icon>
+      </v-btn>
+    </template>
 
     <v-card>
       <v-list dense>

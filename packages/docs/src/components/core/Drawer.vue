@@ -10,9 +10,16 @@
     >
       <div class="text-xs-center">
         <h4 class="body-2 font-weight-bold grey--text">Premiere sponsor</h4>
-        <span class="d-block mb-3 caption grey--text text--lighten-1">
+        <supporters-patron
+          v-if="supporters.special && supporters.special.length"
+          :value="supporters.special[0]"
+          :href="supporters.special[0].href"
+          class="mb-4"
+          large
+        />
+        <!-- <span class="d-block mb-3 caption grey--text text--lighten-1">
           One spot available
-        </span>
+        </span> -->
 
         <supporters-sponsor-btn
           large
@@ -109,7 +116,7 @@
     }),
 
     computed: {
-      ...mapState('app', ['drawer']),
+      ...mapState('app', ['drawer', 'supporters']),
       children () {
         return this.item.children.map(item => ({
           ...item,
@@ -142,7 +149,10 @@
         ) this.inputValue = false
       },
       inputValue (val) {
-        if (!val) this.docSearch.autocomplete.autocomplete.close()
+        if (!val) {
+          this.docSearch.autocomplete.autocomplete.close()
+          this.docSearch.autocomplete.autocomplete.setVal('')
+        }
       },
       isSearching (val) {
         this.$refs.toolbar.isScrolling = !val
@@ -155,6 +165,7 @@
       search (val) {
         if (!val) {
           this.docSearch.autocomplete.autocomplete.close()
+          this.docSearch.autocomplete.autocomplete.setVal('')
         }
       }
     },
@@ -172,6 +183,7 @@
 
     destroyed () {
       this.docSearch.autocomplete.autocomplete.close()
+      this.docSearch.autocomplete.autocomplete.setVal('')
     },
 
     methods: {
