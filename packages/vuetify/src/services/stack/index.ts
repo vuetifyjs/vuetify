@@ -150,8 +150,6 @@ export class Stack extends Service {
     if (this.framework.breakpoint.smAndDown) {
       document.documentElement!.classList.add('overflow-y-hidden')
     } else {
-      // window.onwheel = this.scrollListener.bind(this)
-      // window.onkeydown = this.scrollListener.bind(this)
       window.addEventListener('wheel', Stack.scrollListener as EventHandlerNonNull, { passive: false })
       window.addEventListener('keydown', Stack.scrollListener as EventHandlerNonNull)
     }
@@ -159,8 +157,6 @@ export class Stack extends Service {
 
   private startScroll () {
     document.documentElement!.classList.remove('overflow-y-hidden')
-    window.onwheel = null
-    window.onkeydown = null
     window.removeEventListener('wheel', Stack.scrollListener as EventHandlerNonNull)
     window.removeEventListener('keydown', Stack.scrollListener as EventHandlerNonNull)
   }
