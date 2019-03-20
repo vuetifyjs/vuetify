@@ -22,7 +22,7 @@
     </template>
     <v-list
       dense
-      light
+      nav
     >
       <v-list-item
         v-for="language in languages"

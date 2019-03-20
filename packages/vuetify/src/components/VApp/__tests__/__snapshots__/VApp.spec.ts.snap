@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VApp.js should allow a custom id 1`] = `
+exports[`VApp.ts should allow a custom id 1`] = `
 
 <div data-app="true"
      class="application theme--light"
@@ -12,7 +12,7 @@ exports[`VApp.js should allow a custom id 1`] = `
 
 `;
 
-exports[`VApp.js should match a snapshot 1`] = `
+exports[`VApp.ts should match a snapshot 1`] = `
 
 <div data-app="true"
      class="application theme--light"
