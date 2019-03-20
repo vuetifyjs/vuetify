@@ -16,7 +16,7 @@
       </template>
 
       <template v-if="isEnabled('header.data-table-select')" v-slot:header.data-table-select="{ on, props }">
-        <v-simple-checkbox v-on="on" v-bind="props" color="purple"></v-simple-checkbox>
+        <v-simple-checkbox color="purple" v-bind="props" v-on="on"></v-simple-checkbox>
       </template>
 
       <template v-if="isEnabled('header')" v-slot:header="{ props: { headers } }">
@@ -30,7 +30,7 @@
       </template>
 
       <template v-if="isEnabled('item.column.data-table-select')" v-slot:item.column.data-table-select="{ on, props }">
-        <v-simple-checkbox v-on="on" v-bind="props" color="green"></v-simple-checkbox>
+        <v-simple-checkbox color="green" v-bind="props" v-on="on"></v-simple-checkbox>
       </template>
 
       <template v-if="isEnabled('item.column.<name>')" v-slot:item.column.name="{ item }">

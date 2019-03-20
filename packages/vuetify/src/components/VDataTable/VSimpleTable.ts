@@ -18,7 +18,8 @@ export default mixins(Themeable).extend({
     classes (): Record<string, boolean> {
       return {
         'v-data-table--dense': this.dense,
-        'v-data-table--fixed': this.fixedHeader,
+        'v-data-table--fixed-height': !!this.height && !this.fixedHeader,
+        'v-data-table--fixed-header': this.fixedHeader,
         ...this.themeClasses
       }
     }

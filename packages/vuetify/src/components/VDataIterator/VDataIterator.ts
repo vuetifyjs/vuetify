@@ -198,7 +198,15 @@ export default mixins(Themeable).extend({
       const empty = this.genEmpty(props.pagination.itemsLength)
       if (empty) return [empty]
 
-      if (this.$scopedSlots.default) return this.$scopedSlots.default(props)
+      if (this.$scopedSlots.default) {
+        return this.$scopedSlots.default({
+          ...props,
+          isSelected: this.isSelected,
+          select: this.select,
+          isExpanded: this.isExpanded,
+          expand: this.expand
+        })
+      }
 
       if (this.$scopedSlots.item) {
         return props.items.map((item: any) => this.$scopedSlots.item!(this.createItemProps(item)))

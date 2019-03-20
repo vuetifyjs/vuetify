@@ -51,7 +51,11 @@
   th
     height: $data-table-dense-header-height
 
-.v-data-table--fixed
+.v-data-table--fixed-height
+  .v-data-table__wrapper
+    overflow-y: auto
+
+.v-data-table--fixed-header
   .v-data-table__wrapper
     overflow-y: auto
 
@@ -59,7 +63,7 @@
     th
       position: sticky
       top: 0
-      z-index: 10
+      z-index: 2
 
     tr:nth-child(2)
       th
