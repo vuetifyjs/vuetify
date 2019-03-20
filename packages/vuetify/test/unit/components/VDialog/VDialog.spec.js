@@ -167,20 +167,13 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
 
   it('should emit keydown event', async () => {
     const keydown = jest.fn()
-    const component = {
-      render: h => h(VDialog, {
-        props: {
-          value: true
-        },
-        on: {
-          keydown
-        }
-      })
-    }
-    const wrapper = mount(component)
+    const wrapper = mount(VDialog, {
+      propsData: { value: true }
+    })
+    wrapper.vm.$on('keydown', keydown)
 
     await wrapper.vm.$nextTick()
-    window.dispatchEvent(new Event('keydown'))
+    wrapper.vm.$refs.content.dispatchEvent(new Event('keydown'))
     expect(keydown).toBeCalled()
   })
 

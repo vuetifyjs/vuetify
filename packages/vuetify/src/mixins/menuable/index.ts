@@ -3,7 +3,6 @@ import Positionable from '../positionable'
 import Stackable from '../stackable'
 
 // Utilities
-import { consoleError } from '../../util/console'
 import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
@@ -84,6 +83,7 @@ export default baseMixins.extend<options>().extend({
     absoluteX: 0,
     absoluteY: 0,
     activatedBy: null as EventTarget | null,
+    activatorFixed: false,
     activatorNode: null as null | VNode | VNode[],
     dimensions: {
       activator: {
@@ -259,8 +259,20 @@ export default baseMixins.extend<options>().extend({
     },
     checkForPageYOffset () {
       if (this.hasWindow) {
-        this.pageYOffset = this.getOffsetTop()
+        this.pageYOffset = this.activatorFixed ? 0 : this.getOffsetTop()
       }
+    },
+    checkActivatorFixed () {
+      if (this.attach !== false) return
+      let el = this.getActivator()
+      while (el) {
+        if (window.getComputedStyle(el).position === 'fixed') {
+          this.activatorFixed = true
+          return
+        }
+        el = el.offsetParent as HTMLElement
+      }
+      this.activatorFixed = false
     },
     deactivate () {},
     getActivator (e?: Event): HTMLElement | null {
@@ -291,7 +303,6 @@ export default baseMixins.extend<options>().extend({
         if (el) return el as HTMLElement
       }
 
-      consoleError('No activator found')
       return null
     },
     getInnerHeight () {
@@ -363,6 +374,7 @@ export default baseMixins.extend<options>().extend({
     },
     updateDimensions () {
       this.checkForWindow()
+      this.checkActivatorFixed()
       this.checkForPageYOffset()
       this.pageWidth = document.documentElement.clientWidth
 

@@ -82,7 +82,7 @@
   <tbody>
     <tr>
       <td>
-        <a href="https://segment.com">
+        <a href="https://segment.com/?utm_source=devflight&utm_medium=sponsorship">
           <img height="50px" src="https://cdn.vuetifyjs.com/images/backers/segment.png">
         </a>
       </td>

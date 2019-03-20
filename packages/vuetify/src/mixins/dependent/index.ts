@@ -7,6 +7,7 @@ interface options extends Vue {
   $refs: {
     content: HTMLElement
   }
+  overlay?: HTMLElement
 }
 
 interface DependentInstance extends Vue {
@@ -70,6 +71,7 @@ export default mixins<options>().extend({
     getClickableDependentElements (): HTMLElement[] {
       const result = [this.$el]
       if (this.$refs.content) result.push(this.$refs.content)
+      if (this.overlay) result.push(this.overlay)
       result.push(...this.getOpenDependentElements())
 
       return result
