@@ -4,7 +4,6 @@
       color="cyan"
       dark
       flat
-      tabs
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 

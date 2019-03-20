@@ -5,7 +5,7 @@
     dark
   >
     <v-toolbar
-      card
+      flat
       color="purple"
     >
       <v-icon>mdi-account</v-icon>

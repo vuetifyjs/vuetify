@@ -2,7 +2,6 @@
   <v-toolbar
     color="orange accent-1"
     prominent
-    tabs
   >
     <v-app-bar-nav-icon></v-app-bar-nav-icon>
     <v-toolbar-title class="title mr-4">Cryptocurrency</v-toolbar-title>

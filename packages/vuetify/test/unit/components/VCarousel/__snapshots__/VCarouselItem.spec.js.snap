@@ -5,10 +5,6 @@ exports[`VCarouselItem.js should render component and match snapshot 1`] = `
 <div class="v-window-item"
      style="display: none;"
 >
-  <div class="v-responsive v-image v-carousel__item">
-    <div class="v-responsive__content">
-    </div>
-  </div>
 </div>
 
 `;
@@ -18,10 +14,6 @@ exports[`VCarouselItem.js should throw warning when not used inside v-carousel 1
 <div class="v-window-item"
      style="display: none;"
 >
-  <div class="v-responsive v-image v-carousel__item">
-    <div class="v-responsive__content">
-    </div>
-  </div>
 </div>
 
 `;

@@ -1,7 +1,8 @@
 <template>
   <v-card
-    class="hide-overflow"
-    height="200px"
+    class="hide-overflow mx-auto"
+    height="200"
+    max-width="500"
   >
     <v-card-text class="text-xs-center">
       <v-btn
@@ -13,11 +14,12 @@
       </v-btn>
     </v-card-text>
 
-    <v-bottom-nav
-      :active.sync="activeBtn"
-      :value="showNav"
+    <v-bottom-navigation
+      :input-value="showNav"
+      :value="activeBtn"
       absolute
-      color="transparent"
+      color="white"
+      horizontal
     >
       <v-btn text color="teal">
         <span>Recents</span>
@@ -33,7 +35,7 @@
         <span>Nearby</span>
         <v-icon>place</v-icon>
       </v-btn>
-    </v-bottom-nav>
+    </v-bottom-navigation>
   </v-card>
 </template>
 

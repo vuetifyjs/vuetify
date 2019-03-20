@@ -21,7 +21,9 @@
         {
           "type": "api",
           "value": [
+            "v-expansion-panels",
             "v-expansion-panel",
+            "v-expansion-panel-header",
             "v-expansion-panel-content"
           ]
         }
@@ -33,13 +35,12 @@
         {
           "type": "examples",
           "value": [
-            "expand",
             "external",
             "disabledAndReadonly",
             "popout",
             "customIcons",
-            "iconSlot",
-            "focusable"
+            "focusable",
+            "advanced"
           ]
         }
       ]

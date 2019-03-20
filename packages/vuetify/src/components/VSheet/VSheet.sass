@@ -10,8 +10,10 @@
   +sheet-theme($material-dark)
 
 .v-sheet
+  display: block
   border-radius: $sheet-border-radius
   position: relative
+  +elevationTransition()
 
   > *:first-child:not(.v-btn):not(.v-chip)
     border-top-left-radius: inherit

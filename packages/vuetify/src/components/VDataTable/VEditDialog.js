@@ -21,7 +21,7 @@ export default {
       default: 'Cancel'
     },
     large: Boolean,
-    lazy: Boolean,
+    eager: Boolean,
     persistent: Boolean,
     saveText: {
       default: 'Save'
@@ -108,7 +108,7 @@ export default {
         value: this.isActive,
         closeOnClick: !this.persistent,
         closeOnContentClick: false,
-        lazy: this.lazy,
+        eager: this.eager,
         light: this.light,
         dark: this.dark
       },
