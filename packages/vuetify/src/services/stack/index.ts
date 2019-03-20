@@ -129,6 +129,7 @@ export class Stack extends Service {
     this.checkFullscreen()
   }
 
+  // https://github.com/vuetifyjs/vuetify/issues/3101
   public checkFullscreen () {
     const isFullscreen = this.items.some(item => item.fullscreen)
     const method = isFullscreen ? 'add' : 'remove'
