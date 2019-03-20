@@ -185,7 +185,8 @@ export default {
       staticClass: 'v-tooltip__content',
       'class': {
         [this.contentClass]: true,
-        'menuable__content__active': this.isActive
+        'menuable__content__active': this.isActive,
+        'v-tooltip__content--fixed': this.activatorFixed
       },
       style: this.styles,
       attrs: this.getScopeIdAttrs(),
