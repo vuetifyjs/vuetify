@@ -9,6 +9,7 @@ import { Breakpoint } from '../src/services/breakpoint'
 import { Goto } from '../src/services/goto'
 import { Icons } from '../src/services/icons'
 import { Lang } from '../src/services/lang'
+import { Stack } from '../src/services/stack'
 import { Theme } from '../src/services/theme'
 
 // Service Options
@@ -53,6 +54,7 @@ export interface VuetifyObject extends Vue {
   theme: InstanceType<typeof Theme>
   icons: InstanceType<typeof Icons>
   lang: InstanceType<typeof Lang>
+  stack: InstanceType<typeof Stack>
   rtl: boolean
 }
 

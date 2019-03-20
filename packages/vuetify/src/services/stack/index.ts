@@ -1,24 +1,26 @@
 // Extensions
 import { Service } from '../service'
 
-// Mixins
-import Stackable from '../../mixins/stackable'
-
 // Utilities
 import { keyCodes } from '../../util/helpers'
 
 // Types
-import { VuetifyStackOptions } from 'vuetify/types/services/stack'
-
-type StackableInstance = InstanceType<typeof Stackable>
+import {
+  StackableInstance,
+  VuetifyStackOptions
+} from 'vuetify/types/services/stack'
 
 export class Stack extends Service {
   static property = 'stack'
 
   public items: StackableInstance[] = []
 
+  private minZIndex: number
+
   constructor (options: Partial<VuetifyStackOptions> = {}) {
     super()
+
+    this.minZIndex = options.minZIndex || 200
   }
 
   public static hasScrollbar (el?: Element) {
@@ -142,7 +144,7 @@ export class Stack extends Service {
   private getZIndex (index: number, minZIndex: number) {
     return (
       (index * 2) +
-      minZIndex
+      Math.max(minZIndex, this.minZIndex)
     )
   }
 
