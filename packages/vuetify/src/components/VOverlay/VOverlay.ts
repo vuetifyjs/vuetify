@@ -36,7 +36,7 @@ export default mixins(
     },
     zIndex: {
       type: [Number, String],
-      default: 10
+      default: 5
     },
     value: {
       default: true
