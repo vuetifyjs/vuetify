@@ -8,6 +8,7 @@
     class="d-inline-flex mx-2"
     target="_blank"
     rel="noopener"
+    @click.native="$ga.event('patrons', 'click', $route.path, value.name)"
   >
     <div>
       <v-img

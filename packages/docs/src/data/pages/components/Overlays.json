@@ -1,10 +1,6 @@
 {
   "title": "header",
   "titleText": "headerText",
-  "mdSpec": {
-    "version": "2",
-    "link": "https://material.io/design/components/menus.html"
-  },
   "children": [
     {
       "type": "section",
@@ -20,7 +16,7 @@
       "children": [
         {
           "type": "api",
-          "value": ["v-menu"]
+          "value": ["v-overlay"]
         }
       ]
     },
@@ -30,13 +26,8 @@
         {
           "type": "examples",
           "value": [
-            "absolute",
-            "absoluteWithoutActivator",
-            "menuActivatorTooltip",
-            "hover",
-            "menus",
-            "customTransition",
-            "popover"
+            "loader",
+            "advanced"
           ]
         }
       ]
@@ -47,9 +38,9 @@
         {
           "type": "up-next",
           "value": [
-            "components/dialogs",
-            "components/tooltips",
-            "framework/transitions"
+            "components/cards",
+            "components/sheets",
+            "components/dialogs"
           ]
         }
       ]

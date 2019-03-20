@@ -102,7 +102,7 @@ export function createSimpleTransition (
 
 export function createJavaScriptTransition (
   name: string,
-  functions: Record<string, () => any>,
+  functions: Record<string, any>,
   mode = 'in-out'
 ): FunctionalComponentOptions {
   return {
