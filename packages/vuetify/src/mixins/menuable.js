@@ -3,7 +3,6 @@ import Vue from 'vue'
 import Positionable from './positionable'
 
 import Stackable from './stackable'
-import { consoleError } from '../util/console'
 
 /* eslint-disable object-property-newline */
 const dimensions = {
@@ -291,8 +290,6 @@ export default Vue.extend({
         const el = activator && activator.elm
         if (el) return el
       }
-
-      consoleError('No activator found')
     },
     getInnerHeight () {
       if (!this.hasWindow) return 0
