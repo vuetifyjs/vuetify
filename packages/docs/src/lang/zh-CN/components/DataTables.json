@@ -13,7 +13,7 @@
     },
     "headers": {
       "header": "items 和 headers 插槽",
-      "desc": "`items` 和 `headers` 可以接受 <kbd>td/th</kbd> 标签, 或者你想控制一整行，可以使用 <kbd>tr</kbd> 标签."
+      "desc": "`items` 和 `headers` 可以接受 <kbd>td/th</kbd> 标签, 或者你想控制一整行，可以使用 <kbd>tr</kbd> 标签。第二种情况下，`item-key`并不会自动在行上加上`key`，你需要手动添加。"
     },
     "headerCell": {
       "header": "headerCell 插槽",
