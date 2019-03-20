@@ -2,18 +2,18 @@
 
 exports[`FeatureDiscovery.ts should render correctly 1`] = `
 
-<div class="v-feature-discovery v-feature-discovery--active v-feature-discovery--movable theme--light"
-     style="left: -350px; top: -350px; height: 700px; width: 700px; pointer-events: auto;"
+<div class="v-feature-discovery v-feature-discovery--active v-feature-discovery--movable v-feature-discovery--lr-shifted theme--light"
+     style="left: -102.51025314665534px; top: -102.51025314665534px; height: 700px; width: 700px; pointer-events: auto;"
 >
-  <div class="v-feature-discovery__backdrop elevation-4 primary">
+  <div class="v-feature-discovery__backdrop primary"
+       style="padding-right: 10%;"
+  >
     <div class="v-feature-discovery__content">
       <div class="v-feature-discovery__wrapper">
         <div class="v-feature-discovery__title">
         </div>
         <div class="v-feature-discovery__text">
         </div>
-      </div>
-      <div style="height: 35.35533905932738px;">
       </div>
       <div class="v-feature-discovery__actions">
       </div>
@@ -29,18 +29,18 @@ exports[`FeatureDiscovery.ts should render correctly 1`] = `
 
 exports[`FeatureDiscovery.ts should render correctly when flat 1`] = `
 
-<div class="v-feature-discovery v-feature-discovery--flat v-feature-discovery--active v-feature-discovery--movable theme--light"
-     style="left: -350px; top: -350px; height: 700px; width: 700px; pointer-events: auto;"
+<div class="v-feature-discovery v-feature-discovery--flat v-feature-discovery--active v-feature-discovery--movable v-feature-discovery--lr-shifted theme--light"
+     style="left: -102.51025314665534px; top: -102.51025314665534px; height: 700px; width: 700px; pointer-events: auto;"
 >
-  <div class="v-feature-discovery__backdrop primary">
+  <div class="v-feature-discovery__backdrop primary"
+       style="padding-right: 10%;"
+  >
     <div class="v-feature-discovery__content">
       <div class="v-feature-discovery__wrapper">
         <div class="v-feature-discovery__title">
         </div>
         <div class="v-feature-discovery__text">
         </div>
-      </div>
-      <div style="height: 35.35533905932738px;">
       </div>
       <div class="v-feature-discovery__actions">
       </div>
@@ -56,18 +56,18 @@ exports[`FeatureDiscovery.ts should render correctly when flat 1`] = `
 
 exports[`FeatureDiscovery.ts should toggle 1`] = `
 
-<div class="v-feature-discovery v-feature-discovery--active v-feature-discovery--movable theme--light"
-     style="left: -350px; top: -350px; height: 700px; width: 700px; pointer-events: auto;"
+<div class="v-feature-discovery v-feature-discovery--active v-feature-discovery--movable v-feature-discovery--lr-shifted theme--light"
+     style="left: -102.51025314665534px; top: -102.51025314665534px; height: 700px; width: 700px; pointer-events: auto;"
 >
-  <div class="v-feature-discovery__backdrop elevation-4 primary">
+  <div class="v-feature-discovery__backdrop primary"
+       style="padding-right: 10%;"
+  >
     <div class="v-feature-discovery__content">
       <div class="v-feature-discovery__wrapper">
         <div class="v-feature-discovery__title">
         </div>
         <div class="v-feature-discovery__text">
         </div>
-      </div>
-      <div style="height: 35.35533905932738px;">
       </div>
       <div class="v-feature-discovery__actions">
       </div>
@@ -83,18 +83,18 @@ exports[`FeatureDiscovery.ts should toggle 1`] = `
 
 exports[`FeatureDiscovery.ts should toggle 2`] = `
 
-<div class="v-feature-discovery v-feature-discovery--movable theme--light"
-     style="left: -350px; top: -350px; height: 700px; width: 700px; pointer-events: none;"
+<div class="v-feature-discovery v-feature-discovery--movable v-feature-discovery--lr-shifted theme--light"
+     style="left: -102.51025314665534px; top: -102.51025314665534px; height: 700px; width: 700px; pointer-events: none;"
 >
-  <div class="v-feature-discovery__backdrop elevation-4 primary">
+  <div class="v-feature-discovery__backdrop primary"
+       style="padding-right: 10%;"
+  >
     <div class="v-feature-discovery__content">
       <div class="v-feature-discovery__wrapper">
         <div class="v-feature-discovery__title">
         </div>
         <div class="v-feature-discovery__text">
         </div>
-      </div>
-      <div style="height: 35.35533905932738px;">
       </div>
       <div class="v-feature-discovery__actions">
       </div>
