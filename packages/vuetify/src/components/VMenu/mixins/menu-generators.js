@@ -71,6 +71,7 @@ export default {
         'class': {
           ...this.rootThemeClasses,
           'v-menu__content--auto': this.auto,
+          'v-menu__content--fixed': this.activatorFixed,
           'menuable__content__active': this.isActive,
           [this.contentClass.trim()]: true
         },

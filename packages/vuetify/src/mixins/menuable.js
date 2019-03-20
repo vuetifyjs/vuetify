@@ -3,7 +3,6 @@ import Vue from 'vue'
 import Positionable from './positionable'
 
 import Stackable from './stackable'
-import { consoleError } from '../util/console'
 
 /* eslint-disable object-property-newline */
 const dimensions = {
@@ -96,6 +95,7 @@ export default Vue.extend({
   data: () => ({
     absoluteX: 0,
     absoluteY: 0,
+    activatorFixed: false,
     dimensions: Object.assign({}, dimensions),
     isContentActive: false,
     pageWidth: 0,
@@ -245,8 +245,20 @@ export default Vue.extend({
     },
     checkForPageYOffset () {
       if (this.hasWindow) {
-        this.pageYOffset = this.getOffsetTop()
+        this.pageYOffset = this.activatorFixed ? 0 : this.getOffsetTop()
       }
+    },
+    checkActivatorFixed () {
+      if (this.attach !== false) return
+      let el = this.getActivator()
+      while (el) {
+        if (window.getComputedStyle(el).position === 'fixed') {
+          this.activatorFixed = true
+          return
+        }
+        el = el.offsetParent
+      }
+      this.activatorFixed = false
     },
     deactivate () {},
     getActivator (e) {
@@ -278,8 +290,6 @@ export default Vue.extend({
         const el = activator && activator.elm
         if (el) return el
       }
-
-      consoleError('No activator found')
     },
     getInnerHeight () {
       if (!this.hasWindow) return 0
@@ -347,6 +357,7 @@ export default Vue.extend({
     },
     updateDimensions () {
       this.checkForWindow()
+      this.checkActivatorFixed()
       this.checkForPageYOffset()
       this.pageWidth = document.documentElement.clientWidth
 
