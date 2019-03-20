@@ -151,7 +151,7 @@ export default baseMixins.extend({
       })
     },
     closeConditional (e: Event) {
-      const target = e.target as HTMLElement & Element
+      const target = e.target as HTMLElement
       // If the dialog content contains
       // the click event, or if the
       // dialog is not active
@@ -205,7 +205,7 @@ export default baseMixins.extend({
     onFocusin (e: Event) {
       if (!e) return
 
-      const target = e.target as HTMLElement & Element
+      const target = e.target as HTMLElement
 
       if (
         !!target &&
