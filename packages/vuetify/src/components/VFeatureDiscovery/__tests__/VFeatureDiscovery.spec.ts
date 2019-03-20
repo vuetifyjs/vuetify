@@ -188,4 +188,74 @@ describe('FeatureDiscovery.ts', () => {
     closeButton.trigger('click')
     expect(wrapper.vm.isActive).toBeFalsy()
   })
+
+  it('should compute left shift', async () => {
+    const wrapper = mountFunction({
+      computed: {
+        computedSize: () => 500
+      }
+    })
+
+    wrapper.setData({
+      rect: {
+        left: -100,
+        right: 0,
+        width: 100
+      }
+    })
+    expect(wrapper.vm.leftShift).toBeCloseTo(176.77, 1)
+
+    wrapper.setData({
+      rect: {
+        left: 1024,
+        right: 1124,
+        width: 100
+      }
+    })
+    expect(wrapper.vm.leftShift).toBeCloseTo(-176.77, 1)
+
+    wrapper.setData({
+      rect: {
+        left: 500,
+        right: 600,
+        width: 100
+      }
+    })
+    expect(wrapper.vm.leftShift).toBe(0)
+  })
+
+  it('should compute top shift', async () => {
+    const wrapper = mountFunction({
+      computed: {
+        computedSize: () => 500
+      }
+    })
+
+    wrapper.setData({
+      rect: {
+        top: -100,
+        bottom: 0,
+        height: 100
+      }
+    })
+    expect(wrapper.vm.topShift).toBeCloseTo(176.77, 1)
+
+    wrapper.setData({
+      rect: {
+        top: 768,
+        bottom: 868,
+        height: 100
+      }
+    })
+    expect(wrapper.vm.topShift).toBeCloseTo(-176.77, 1)
+
+    wrapper.setData({
+      rect: {
+        top: 400,
+        bottom: 500,
+        height: 100
+      }
+    })
+    expect(wrapper.vm.topShift).toBe(0)
+  })
 })
