@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VSelect should escape items in menu 1`] = `
+exports[`VSelect.ts should escape items in menu 1`] = `
 
 <div class="v-list-item__title">
   &lt;strong&gt;foo&lt;/strong&gt;
@@ -8,7 +8,7 @@ exports[`VSelect should escape items in menu 1`] = `
 
 `;
 
-exports[`VSelect should only show items if they are in items 1`] = `
+exports[`VSelect.ts should only show items if they are in items 1`] = `
 
 <div role="combobox"
      class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty theme--light"
@@ -31,7 +31,7 @@ exports[`VSelect should only show items if they are in items 1`] = `
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
-              arrow_drop_down
+              $vuetify.icons.dropdown
             </i>
           </div>
         </div>
@@ -41,8 +41,11 @@ exports[`VSelect should only show items if they are in items 1`] = `
     </div>
     <div class="v-text-field__details">
       <div class="v-messages theme--light">
-        <div class="v-messages__wrapper">
-        </div>
+        <span name="message-transition"
+              tag="div"
+              class="v-messages__wrapper"
+        >
+        </span>
       </div>
     </div>
   </div>
@@ -50,7 +53,7 @@ exports[`VSelect should only show items if they are in items 1`] = `
 
 `;
 
-exports[`VSelect should only show items if they are in items 2`] = `
+exports[`VSelect.ts should only show items if they are in items 2`] = `
 
 <div role="combobox"
      class="v-input v-text-field v-select theme--light"
@@ -70,7 +73,7 @@ exports[`VSelect should only show items if they are in items 2`] = `
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
-              arrow_drop_down
+              $vuetify.icons.dropdown
             </i>
           </div>
         </div>
@@ -80,8 +83,11 @@ exports[`VSelect should only show items if they are in items 2`] = `
     </div>
     <div class="v-text-field__details">
       <div class="v-messages theme--light">
-        <div class="v-messages__wrapper">
-        </div>
+        <span name="message-transition"
+              tag="div"
+              class="v-messages__wrapper"
+        >
+        </span>
       </div>
     </div>
   </div>
@@ -89,7 +95,7 @@ exports[`VSelect should only show items if they are in items 2`] = `
 
 `;
 
-exports[`VSelect should only show items if they are in items 3`] = `
+exports[`VSelect.ts should only show items if they are in items 3`] = `
 
 <div role="combobox"
      class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty theme--light"
@@ -112,7 +118,7 @@ exports[`VSelect should only show items if they are in items 3`] = `
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
-              arrow_drop_down
+              $vuetify.icons.dropdown
             </i>
           </div>
         </div>
@@ -122,8 +128,11 @@ exports[`VSelect should only show items if they are in items 3`] = `
     </div>
     <div class="v-text-field__details">
       <div class="v-messages theme--light">
-        <div class="v-messages__wrapper">
-        </div>
+        <span name="message-transition"
+              tag="div"
+              class="v-messages__wrapper"
+        >
+        </span>
       </div>
     </div>
   </div>
@@ -131,7 +140,7 @@ exports[`VSelect should only show items if they are in items 3`] = `
 
 `;
 
-exports[`VSelect should only show items if they are in items 4`] = `
+exports[`VSelect.ts should only show items if they are in items 4`] = `
 
 <div role="combobox"
      class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty theme--light"
@@ -157,7 +166,7 @@ exports[`VSelect should only show items if they are in items 4`] = `
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
-              arrow_drop_down
+              $vuetify.icons.dropdown
             </i>
           </div>
         </div>
@@ -167,8 +176,11 @@ exports[`VSelect should only show items if they are in items 4`] = `
     </div>
     <div class="v-text-field__details">
       <div class="v-messages theme--light">
-        <div class="v-messages__wrapper">
-        </div>
+        <span name="message-transition"
+              tag="div"
+              class="v-messages__wrapper"
+        >
+        </span>
       </div>
     </div>
   </div>
@@ -176,7 +188,7 @@ exports[`VSelect should only show items if they are in items 4`] = `
 
 `;
 
-exports[`VSelect should render v-select correctly when not using scope slot 1`] = `
+exports[`VSelect.ts should render v-select correctly when not using scope slot 1`] = `
 
 <div role="combobox"
      class="v-input v-text-field v-select theme--light"
@@ -196,7 +208,7 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
-              arrow_drop_down
+              $vuetify.icons.dropdown
             </i>
           </div>
         </div>
@@ -206,8 +218,11 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
     </div>
     <div class="v-text-field__details">
       <div class="v-messages theme--light">
-        <div class="v-messages__wrapper">
-        </div>
+        <span name="message-transition"
+              tag="div"
+              class="v-messages__wrapper"
+        >
+        </span>
       </div>
     </div>
   </div>
@@ -215,7 +230,7 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
 
 `;
 
-exports[`VSelect should render v-select correctly when not using v-list-item in item scope slot 1`] = `
+exports[`VSelect.ts should render v-select correctly when not using v-list-item in item scope slot 1`] = `
 
 <div role="combobox"
      class="v-input v-text-field v-select theme--light"
@@ -235,7 +250,7 @@ exports[`VSelect should render v-select correctly when not using v-list-item in 
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
-              arrow_drop_down
+              $vuetify.icons.dropdown
             </i>
           </div>
         </div>
@@ -245,8 +260,11 @@ exports[`VSelect should render v-select correctly when not using v-list-item in 
     </div>
     <div class="v-text-field__details">
       <div class="v-messages theme--light">
-        <div class="v-messages__wrapper">
-        </div>
+        <span name="message-transition"
+              tag="div"
+              class="v-messages__wrapper"
+        >
+        </span>
       </div>
     </div>
   </div>
@@ -254,22 +272,15 @@ exports[`VSelect should render v-select correctly when not using v-list-item in 
 
 `;
 
-exports[`VSelect should render v-select correctly when using v-list-item in item scope slot 1`] = `
+exports[`VSelect.ts should render v-select correctly when using v-list-item in item scope slot 1`] = `
 
 <div role="combobox"
-     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty theme--light"
+     class="v-input v-text-field v-select theme--light"
 >
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-select__slot">
         <div class="v-select__selections">
-          <div aria-selected="false"
-               role="listitem"
-               tabindex="-1"
-               class="v-list-item theme--light"
-          >
-            1
-          </div>
           <input autocomplete="on"
                  readonly="readonly"
                  type="text"
@@ -281,7 +292,7 @@ exports[`VSelect should render v-select correctly when using v-list-item in item
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
-              arrow_drop_down
+              $vuetify.icons.dropdown
             </i>
           </div>
         </div>
@@ -291,8 +302,11 @@ exports[`VSelect should render v-select correctly when using v-list-item in item
     </div>
     <div class="v-text-field__details">
       <div class="v-messages theme--light">
-        <div class="v-messages__wrapper">
-        </div>
+        <span name="message-transition"
+              tag="div"
+              class="v-messages__wrapper"
+        >
+        </span>
       </div>
     </div>
   </div>
@@ -300,99 +314,11 @@ exports[`VSelect should render v-select correctly when using v-list-item in item
 
 `;
 
-exports[`VSelect should use scoped slot for selection generation 1`] = `
-
-<div role="combobox"
-     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty theme--light"
->
-  <div class="v-input__control">
-    <div class="v-input__slot">
-      <div class="v-select__slot">
-        <div class="v-select__selections">
-          <div>
-            foo - from slot
-          </div>
-          <input autocomplete="on"
-                 readonly="readonly"
-                 type="text"
-                 aria-readonly="false"
-          >
-        </div>
-        <div class="v-input__append-inner">
-          <div class="v-input__icon v-input__icon--append">
-            <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
-            >
-              arrow_drop_down
-            </i>
-          </div>
-        </div>
-      </div>
-      <div class="v-menu">
-      </div>
-    </div>
-    <div class="v-text-field__details">
-      <div class="v-messages theme--light">
-        <div class="v-messages__wrapper">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-`;
-
-exports[`VSelect should use slotted append-item 1`] = `
+exports[`VSelect.ts should use slotted no-data 1`] = `
 
 <div role="list"
      class="v-list theme--light"
 >
-  <div aria-selected="false"
-       role="listitem"
-       tabindex="-1"
-       class="v-list-item v-list-item--link theme--light"
-  >
-    <div class="v-list-item__content">
-      <div class="v-list-item__title">
-        foo
-      </div>
-    </div>
-  </div>
-  <div>
-    foo
-  </div>
-</div>
-
-`;
-
-exports[`VSelect should use slotted no-data 1`] = `
-
-<div role="list"
-     class="v-list theme--light"
->
-  <div aria-selected="false"
-       role="listitem"
-       tabindex="-1"
-       class="v-list-item v-list-item--link theme--light"
-  >
-    <div class="v-list-item__content">
-      <div class="v-list-item__title">
-        foo
-      </div>
-    </div>
-  </div>
-</div>
-
-`;
-
-exports[`VSelect should use slotted prepend-item 1`] = `
-
-<div role="list"
-     class="v-list theme--light"
->
-  <div>
-    foo
-  </div>
   <div aria-selected="false"
        role="listitem"
        tabindex="-1"
