@@ -11,7 +11,7 @@
     },
     "headers": {
       "header": "### Slot: items and headers",
-      "desc": "The `items` and `headers` slots can accept either a collection of <kbd>td/th</kbd> tags, or if you want control of the entire row, a <kbd>tr</kbd> tag."
+      "desc": "The `items` and `headers` slots can accept either a collection of <kbd>td/th</kbd> tags, or if you want control of the entire row, a <kbd>tr</kbd> tag. In the latter case, you have to manually specify a `key` on the row regardless of the `item-key` value."
     },
     "headerCell": {
       "header": "### Slot: headerCell",
