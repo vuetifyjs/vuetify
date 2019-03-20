@@ -11,8 +11,8 @@ import Toggleable from '../../mixins/toggleable'
 // Directives
 import ClickOutside from '../../directives/click-outside'
 
-// Utilities
-import { getZIndex, convertToUnit, getSlotType } from '../../util/helpers'
+// Helpers
+import { convertToUnit, keyCodes, getSlotType } from '../../util/helpers'
 import ThemeProvider from '../../util/ThemeProvider'
 import { consoleError } from '../../util/console'
 import mixins from '../../util/mixins'
@@ -66,6 +66,7 @@ export default baseMixins.extend({
 
   data () {
     return {
+      activatedBy: null as EventTarget | null,
       animate: false,
       animateTimeout: -1,
       isActive: false,
@@ -150,19 +151,18 @@ export default baseMixins.extend({
       })
     },
     closeConditional (e: Event) {
+      const target = e.target as HTMLElement & Element
       // If the dialog content contains
       // the click event, or if the
       // dialog is not active
-      if (this.$refs.content.contains(e.target as Node) ||
-        !this.isActive
-      ) return false
+      if (!this.isActive || this.$refs.content.contains(target)) return false
 
       // If we made it here, the click is outside
       // and is active. If persistent, and the
       // click is on the overlay, animate
       if (this.persistent) {
         if (!this.noClickAnimation &&
-          this.overlay === e.target
+          this.overlay === target
         ) this.animateClick()
 
         return false
@@ -170,7 +170,7 @@ export default baseMixins.extend({
 
       // close dialog if !persistent, clicked outside and we're the topmost dialog.
       // Since this should only be called in a capture event (bottom up), we shouldn't need to stop propagation
-      return getZIndex(this.$refs.content) >= this.getMaxZIndex()
+      return this.activeZIndex >= this.getMaxZIndex()
     },
     hideScroll () {
       if (this.fullscreen) {
@@ -182,16 +182,70 @@ export default baseMixins.extend({
     show () {
       !this.fullscreen && !this.hideOverlay && this.genOverlay()
       this.$refs.content.focus()
-      this.$listeners.keydown && this.bind()
+      this.bind()
     },
     bind () {
-      window.addEventListener('keydown', this.onKeydown)
+      window.addEventListener('focusin', this.onFocusin)
     },
     unbind () {
-      window.removeEventListener('keydown', this.onKeydown)
+      window.removeEventListener('focusin', this.onFocusin)
     },
     onKeydown (e: KeyboardEvent) {
+      if (e.keyCode === keyCodes.esc && !this.getOpenDependents().length) {
+        if (!this.persistent) {
+          this.isActive = false
+          const activator = this.getActivator()
+          this.$nextTick(() => activator && (activator as HTMLElement).focus())
+        } else if (!this.noClickAnimation) {
+          this.animateClick()
+        }
+      }
       this.$emit('keydown', e)
+    },
+    onFocusin (e: Event) {
+      if (!e) return
+
+      const target = e.target as HTMLElement & Element
+
+      if (
+        !!target &&
+        // It isn't the document or the dialog body
+        ![document, this.$refs.content].includes(target) &&
+        // It isn't inside the dialog body
+        !this.$refs.content.contains(target) &&
+        // We're the topmost dialog
+        this.activeZIndex >= this.getMaxZIndex() &&
+        // It isn't inside a dependent element (like a menu)
+        !this.getOpenDependentElements().some(el => el.contains(target))
+        // So we must have focused something outside the dialog and its children
+      ) {
+        // Find and focus the first available element inside the dialog
+        const focusable = this.$refs.content.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+        focusable.length && (focusable[0] as HTMLElement).focus()
+      }
+    },
+    getActivator (e?: Event) {
+      const activator = this.$refs.activator as HTMLElement
+
+      if (activator) {
+        return activator.children.length > 0
+          ? activator.children[0]
+          : activator
+      }
+
+      if (e) {
+        this.activatedBy = e.currentTarget || e.target
+      }
+
+      if (this.activatedBy) return this.activatedBy
+
+      if (this.activatorNode) {
+        const activator = Array.isArray(this.activatorNode) ? this.activatorNode[0] : this.activatorNode
+        const el = activator && activator.elm
+        if (el) return el
+      }
+
+      return null
     },
     genActivator () {
       if (!this.hasActivator) return null
@@ -199,6 +253,7 @@ export default baseMixins.extend({
       const listeners = this.disabled ? undefined : {
         click: (e: Event) => {
           e.stopPropagation()
+          this.getActivator(e)
           if (!this.disabled) this.isActive = !this.isActive
         }
       }
@@ -213,9 +268,10 @@ export default baseMixins.extend({
 
       return this.$createElement('div', {
         staticClass: 'v-dialog__activator',
-        'class': {
+        class: {
           'v-dialog__activator--disabled': this.disabled
         },
+        ref: 'activator',
         on: listeners
       }, this.$slots.activator)
     }
@@ -229,7 +285,7 @@ export default baseMixins.extend({
       directives: [
         {
           name: 'click-outside',
-          value: () => (this.isActive = false),
+          value: () => { this.isActive = false },
           args: {
             closeConditional: this.closeConditional,
             include: this.getOpenDependentElements
@@ -267,6 +323,9 @@ export default baseMixins.extend({
       attrs: {
         tabIndex: '-1',
         ...this.getScopeIdAttrs()
+      },
+      on: {
+        keydown: this.onKeydown
       },
       style: { zIndex: this.activeZIndex },
       ref: 'content'

@@ -1138,6 +1138,9 @@ module.exports = {
       }
     ]
   },
+  'v-overlay': {
+    slots: ['default']
+  },
   'v-pagination': {
     events: [
       {

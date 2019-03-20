@@ -144,7 +144,7 @@ describe('VDialog.ts', () => {
     wrapper.find('.v-dialog__activator').trigger('click')
     expect(wrapper.vm.isActive).toBe(true)
     await wrapper.vm.$nextTick()
-    expect(input).toBeCalledWith(true)
+    expect(input).toHaveBeenCalledWith(true)
   })
 
   it('not should open disabed dialog on activator click', async () => {
@@ -164,7 +164,7 @@ describe('VDialog.ts', () => {
     wrapper.find('.v-dialog__activator').trigger('click')
     expect(wrapper.vm.isActive).toBe(false)
     await wrapper.vm.$nextTick()
-    expect(input).not.toBeCalled()
+    expect(input).not.toHaveBeenCalled()
   })
 
   it('not change state on v-model update', async () => {
@@ -190,6 +190,18 @@ describe('VDialog.ts', () => {
     })
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.isActive).toBe(false)
+  })
+
+  it('should emit keydown event', async () => {
+    const keydown = jest.fn()
+    const wrapper = mountFunction({
+      propsData: { value: true }
+    })
+    wrapper.vm.$on('keydown', keydown)
+
+    await wrapper.vm.$nextTick()
+    wrapper.vm.$refs.content.dispatchEvent(new Event('keydown'))
+    expect(keydown).toHaveBeenCalled()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/3101

@@ -1,48 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VSelect2 should add color to selected index 1`] = `
-
-<div role="combobox"
-     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty theme--light"
->
-  <div class="v-input__control">
-    <div class="v-input__slot">
-      <div class="v-select__slot">
-        <div class="v-select__selections">
-          <div class="v-select__selection v-select__selection--comma primary--text">
-            foo
-          </div>
-          <input autocomplete="on"
-                 readonly="readonly"
-                 type="text"
-                 aria-readonly="false"
-          >
-        </div>
-        <div class="v-input__append-inner">
-          <div class="v-input__icon v-input__icon--append">
-            <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
-            >
-              arrow_drop_down
-            </i>
-          </div>
-        </div>
-      </div>
-      <div class="v-menu">
-      </div>
-    </div>
-    <div class="v-text-field__details">
-      <div class="v-messages theme--light">
-        <div class="v-messages__wrapper">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-`;
-
-exports[`VSelect2 should be clearable with prop, dirty and multi select 1`] = `
+exports[`.ts should be clearable with prop, dirty and multi select 1`] = `
 
 <div role="combobox"
      class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty theme--light"
@@ -65,7 +23,7 @@ exports[`VSelect2 should be clearable with prop, dirty and multi select 1`] = `
             <i aria-hidden="true"
                class="v-icon v-icon--link material-icons theme--light"
             >
-              clear
+              $vuetify.icons.clear
             </i>
           </div>
         </div>
@@ -74,7 +32,7 @@ exports[`VSelect2 should be clearable with prop, dirty and multi select 1`] = `
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
-              arrow_drop_down
+              $vuetify.icons.dropdown
             </i>
           </div>
         </div>
@@ -84,8 +42,11 @@ exports[`VSelect2 should be clearable with prop, dirty and multi select 1`] = `
     </div>
     <div class="v-text-field__details">
       <div class="v-messages theme--light">
-        <div class="v-messages__wrapper">
-        </div>
+        <span name="message-transition"
+              tag="div"
+              class="v-messages__wrapper"
+        >
+        </span>
       </div>
     </div>
   </div>
@@ -93,7 +54,7 @@ exports[`VSelect2 should be clearable with prop, dirty and multi select 1`] = `
 
 `;
 
-exports[`VSelect2 should be clearable with prop, dirty and single select 1`] = `
+exports[`.ts should be clearable with prop, dirty and single select 1`] = `
 
 <div role="combobox"
      class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty theme--light"
@@ -116,7 +77,7 @@ exports[`VSelect2 should be clearable with prop, dirty and single select 1`] = `
             <i aria-hidden="true"
                class="v-icon v-icon--link material-icons theme--light"
             >
-              clear
+              $vuetify.icons.clear
             </i>
           </div>
         </div>
@@ -125,7 +86,7 @@ exports[`VSelect2 should be clearable with prop, dirty and single select 1`] = `
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
-              arrow_drop_down
+              $vuetify.icons.dropdown
             </i>
           </div>
         </div>
@@ -135,8 +96,102 @@ exports[`VSelect2 should be clearable with prop, dirty and single select 1`] = `
     </div>
     <div class="v-text-field__details">
       <div class="v-messages theme--light">
-        <div class="v-messages__wrapper">
+        <span name="message-transition"
+              tag="div"
+              class="v-messages__wrapper"
+        >
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`.ts should use scoped slot for selection generation 1`] = `
+
+<div role="combobox"
+     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty theme--light"
+>
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-select__slot">
+        <div class="v-select__selections">
+          <div>
+            foo - from slot
+          </div>
+          <input autocomplete="on"
+                 readonly="readonly"
+                 type="text"
+                 aria-readonly="false"
+          >
         </div>
+        <div class="v-input__append-inner">
+          <div class="v-input__icon v-input__icon--append">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              $vuetify.icons.dropdown
+            </i>
+          </div>
+        </div>
+      </div>
+      <div class="v-menu">
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages theme--light">
+        <span name="message-transition"
+              tag="div"
+              class="v-messages__wrapper"
+        >
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`.ts should use slotted append-item 1`] = `
+
+<div role="list"
+     class="v-list theme--light"
+>
+  <div aria-selected="false"
+       role="listitem"
+       tabindex="-1"
+       class="v-list-item v-list-item--link theme--light"
+  >
+    <div class="v-list-item__content">
+      <div class="v-list-item__title">
+        foo
+      </div>
+    </div>
+  </div>
+  <div>
+    foo
+  </div>
+</div>
+
+`;
+
+exports[`.ts should use slotted prepend-item 1`] = `
+
+<div role="list"
+     class="v-list theme--light"
+>
+  <div>
+    foo
+  </div>
+  <div aria-selected="false"
+       role="listitem"
+       tabindex="-1"
+       class="v-list-item v-list-item--link theme--light"
+  >
+    <div class="v-list-item__content">
+      <div class="v-list-item__title">
+        foo
       </div>
     </div>
   </div>
