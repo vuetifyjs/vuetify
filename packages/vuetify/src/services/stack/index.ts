@@ -23,6 +23,7 @@ export class Stack extends Service {
     this.minZIndex = options.minZIndex || 200
   }
 
+  /** Check if a given element has a scrollbar */
   public static hasScrollbar (el?: Element) {
     if (!el || el.nodeType !== Node.ELEMENT_NODE) return false
 
@@ -72,6 +73,7 @@ export class Stack extends Service {
     return path
   }
 
+  /** Check if element is inside designated parent */
   public static isInside (el: Element, parent: Element): boolean {
     if (el === parent) {
       return true
@@ -113,29 +115,22 @@ export class Stack extends Service {
       this.stopScroll()
     }
 
-    this.items.push(node)
-    this.updateValues()
+    node.activeZIndex = this.getZIndex(this.items.push(node), node.stackMinZIndex)
+    this.checkFullscreen()
   }
 
   public unregister (node: StackableInstance) {
-    node.activeZIndex = 0
     this.items = this.items.filter(item => item !== node)
-    this.updateValues()
 
     if (this.items.length === 0) {
       this.startScroll()
     }
+
+    this.checkFullscreen()
   }
 
-  public updateValues () {
-    let isFullscreen = false
-
-    this.items.forEach((item, i) => {
-      if (item.fullscreen) isFullscreen = true
-
-      item.activeZIndex = this.getZIndex(i, item.stackMinZIndex)
-    })
-
+  public checkFullscreen () {
+    const isFullscreen = this.items.some(item => item.fullscreen)
     const method = isFullscreen ? 'add' : 'remove'
 
     document.documentElement.classList[method]('overflow-y-hidden')

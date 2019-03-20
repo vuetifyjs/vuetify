@@ -1,13 +1,7 @@
 import Vue from 'vue'
 
-interface options extends Vue {
-  $refs: {
-    content: Element
-  }
-}
-
 /* @vue/component */
-export default Vue.extend<options>().extend({
+export default Vue.extend({
   name: 'stackable',
 
   props: {

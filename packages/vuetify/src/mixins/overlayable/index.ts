@@ -33,7 +33,8 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
 
   data () {
     return {
-      overlay: null as InstanceType<typeof VOverlay> | null
+      overlay: null as InstanceType<typeof VOverlay> | null,
+      overlayZIndex: null
     }
   },
 
@@ -53,7 +54,8 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
       const overlay = new VOverlay({
         propsData: {
           absolute: this.absolute,
-          value: false
+          value: false,
+          zIndex: this.overlayZIndex
         }
       })
 

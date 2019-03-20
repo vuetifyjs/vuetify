@@ -73,6 +73,7 @@ export default mixins(
 
   data: () => ({
     isActive: false,
+    overlayZIndex: 5,
     touchArea: {
       left: 0,
       right: 0
