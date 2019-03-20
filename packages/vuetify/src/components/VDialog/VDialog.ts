@@ -195,7 +195,7 @@ export default baseMixins.extend({
         if (!this.persistent) {
           this.isActive = false
           const activator = this.getActivator()
-          this.$nextTick(() => activator && (activator as HTMLElement).focus())
+          this.$nextTick(() => activator && activator.focus())
         } else if (!this.noClickAnimation) {
           this.animateClick()
         }
@@ -224,13 +224,11 @@ export default baseMixins.extend({
         focusable.length && (focusable[0] as HTMLElement).focus()
       }
     },
-    getActivator (e?: Event) {
-      const activator = this.$refs.activator as HTMLElement
-
-      if (activator) {
-        return activator.children.length > 0
-          ? activator.children[0]
-          : activator
+    getActivator (e) {
+      if (this.$refs.activator) {
+        return this.$refs.activator.children.length > 0
+          ? this.$refs.activator.children[0]
+          : this.$refs.activator
       }
 
       if (e) {
@@ -245,7 +243,7 @@ export default baseMixins.extend({
         if (el) return el
       }
 
-      return null
+      consoleError('No activator found')
     },
     genActivator () {
       if (!this.hasActivator) return null
