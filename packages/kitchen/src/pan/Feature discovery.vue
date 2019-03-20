@@ -1,12 +1,40 @@
 <template>
   <v-container>
     <v-layout column>
+      <v-btn
+        id="fab1"
+        fab
+        large
+        color="success"
+        fixed
+        bottom
+        right
+      >
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
+      <v-btn
+        id="fab2"
+        fab
+        large
+        color="success"
+        fixed
+        bottom
+      >
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
+
       <main-header>Feature discovery</main-header>
 
       <core-title>Basic</core-title>
       <core-section>
         <v-select v-model="t1" :items="targets1" />
         <v-btn @click="model1 = true">Show</v-btn>
+        <v-slider
+          v-model="size1"
+          min="200"
+          max="1000"
+          label="Size"
+        />
 
         <v-layout justify-space-around align-center>
           <v-sheet id="t1v1" class="ma-5" color="green" width="40" height="40" />
@@ -19,6 +47,7 @@
           class="white--text"
           color="primary"
           :target="t1"
+          :size="size1"
         >
           <h2 slot="title">Hey! New feature...</h2>
           <p>
@@ -68,6 +97,7 @@
           v-model="size3"
           min="200"
           max="1000"
+          label="Size"
         />
         <v-btn @click="model3 = true">Show</v-btn>
 
@@ -292,7 +322,8 @@
     data: () => ({
       model1: false,
       t1: '#t1v2',
-      targets1: ['#t1v1', '#t1v2', '#t1v3', '.v-btn'],
+      targets1: ['#t1v1', '#t1v2', '#t1v3', '.v-btn', 'a.v-btn', '#fab1', '#fab2'],
+      size1: 700,
       model2: false,
       flat2: true,
       model3: false,

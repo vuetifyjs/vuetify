@@ -15,6 +15,8 @@ import mixins from '../../util/mixins'
 import ClickOutside from '../../directives/click-outside'
 import { convertToUnit, keyCodes } from '../../util/helpers'
 
+const doubledSqrt2 = 2.8284
+
 export default mixins(
   Colorable,
   Elevatable,
@@ -74,14 +76,15 @@ export default mixins(
         'v-feature-discovery--flat': this.flat,
         'v-feature-discovery--active': this.isActive,
         'v-feature-discovery--movable': this.movable,
+        'v-feature-discovery--lr-shifted': this.leftShift !== 0,
         ...this.themeClasses
       }
     },
     computedLeft (): number {
-      return this.rect.left - (this.computedSize / 2) + (this.rect.width / 2)
+      return this.rect.left - (this.computedSize / 2) + (this.rect.width / 2) + this.leftShift
     },
     computedTop (): number {
-      return this.rect.top - (this.computedSize / 2) + (this.rect.height / 2)
+      return this.rect.top - (this.computedSize / 2) + (this.rect.height / 2) + this.topShift
     },
     computedSize (): number {
       return parseInt(this.size)
@@ -97,6 +100,49 @@ export default mixins(
     },
     highlightSize (): number {
       return Math.sqrt(2 * (Math.max(this.rect.width, this.rect.height) + 25) ** 2)
+    },
+    leftShift (): number {
+      if ((this.rect.left - (this.computedSize / 2) + (this.rect.width / 2)) < 0) return this.computedSize / doubledSqrt2
+      if ((window.innerWidth - this.rect.right - (this.computedSize / 2) + (this.rect.width / 2)) < 0) {
+        return -this.computedSize / doubledSqrt2
+      }
+      return 0
+    },
+    topShift (): number {
+      if ((this.rect.top - (this.computedSize / 2) + (this.rect.height / 2)) < 0) return this.computedSize / doubledSqrt2
+      if ((window.innerHeight - this.rect.bottom - (this.computedSize / 2) + (this.rect.height / 2)) < 0) {
+        return -this.computedSize / doubledSqrt2
+      }
+      return 0
+    },
+    backdropStyle (): object {
+      let justify = 'center'
+      let paddingL
+      let paddingR
+
+      if (this.leftShift > 0) {
+        justify = 'flex-end'
+        paddingR = '10%'
+      }
+      if (this.leftShift < 0) {
+        justify = 'flex-start'
+        paddingL = '10%'
+      }
+
+      return {
+        'justify-content': justify,
+        'padding-left': paddingL,
+        'padding-right': paddingR
+      }
+    },
+    contentStyle (): object {
+      let justify = 'space-between'
+      if (this.topShift > 0) justify = 'flex-end'
+      if (this.topShift < 0) justify = 'flex-start'
+
+      return {
+        'justify-content': justify
+      }
     }
   },
 
@@ -151,30 +197,25 @@ export default mixins(
     genBackdrop (): VNode {
       return this.$createElement('div', this.setBackgroundColor(this.color, {
         staticClass: 'v-feature-discovery__backdrop',
-        class: this.elevationClasses
+        class: this.elevationClasses,
+        style: this.backdropStyle
       }), [ this.genContent() ])
     },
     genContent (): VNode {
       return this.$createElement('div', {
-        staticClass: 'v-feature-discovery__content'
+        staticClass: 'v-feature-discovery__content',
+        style: this.contentStyle
       }, [
         this.genWrapper(),
-        this.$createElement('div', {
-          style: {
-            height: `${this.highlightSize}px`
-          }
-        }),
         this.genActions()
       ])
     },
     genActions (): VNode {
-      const vm = this
-
       return this.$createElement('div', {
         staticClass: 'v-feature-discovery__actions'
       }, this.$scopedSlots.actions ? this.$scopedSlots.actions({
         close: () => {
-          if (vm.closeConditional()) vm.isActive = false
+          if (this.closeConditional()) this.isActive = false
         }
       }) : this.$slots.actions)
     },
@@ -203,8 +244,8 @@ export default mixins(
           'v-feature-discovery__highlight--no-ripple': this.noRipple
         },
         style: {
-          top: `calc(50% - (${this.highlightSize}px / 2))`,
-          left: `calc(50% - (${this.highlightSize}px / 2))`,
+          top: `calc(50% - (${this.highlightSize}px / 2) - ${this.topShift}px)`,
+          left: `calc(50% - (${this.highlightSize}px / 2) - ${this.leftShift}px)`,
           height: `${this.highlightSize}px`,
           width: `${this.highlightSize}px`
         }
