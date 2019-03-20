@@ -1,20 +1,52 @@
-import { test } from '@/test'
-import { keyCodes } from '@/util/helpers'
-import VAutocomplete from '@/components/VAutocomplete'
+// Components
+import VAutocomplete from '../VAutocomplete'
 
-test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
-  const app = document.createElement('div')
-  app.setAttribute('data-app', true)
-  document.body.appendChild(app)
+// Utilities
+import {
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+import { compileToFunctions } from 'vue-template-compiler'
+import { keyCodes } from '../../../util/helpers'
+import { rafPolyfill } from '../../../../test'
+
+describe('VAutocomplete.ts', () => {
+  type Instance = InstanceType<typeof VAutocomplete>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+  let el
+
+  rafPolyfill(window)
+
+  beforeEach(() => {
+    el = document.createElement('div')
+    el.setAttribute('data-app', 'true')
+    document.body.appendChild(el)
+
+    mountFunction = (options = {}) => {
+      return mount(VAutocomplete, {
+        ...options,
+        mocks: {
+          $vuetify: {
+            lang: {
+              t: (val: string) => val
+            },
+            theme: {
+              dark: false
+            }
+          }
+        }
+      })
+    }
+  })
 
   it('should allow changing of browser autocomplete', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: {
         browserAutocomplete: 'on'
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     expect(input.element.getAttribute('autocomplete')).toBe('on')
 
@@ -26,7 +58,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should have explicit tabindex passed through when autocomplete', () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       attrs: {
         tabindex: 10
       }
@@ -37,12 +69,12 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should emit search input changes', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: {
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     const update = jest.fn()
     wrapper.vm.$on('update:searchInput', update)
@@ -52,11 +84,11 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
 
     await wrapper.vm.$nextTick()
 
-    expect(update).toBeCalledWith('test')
+    expect(update).toHaveBeenCalledWith('test')
   })
 
   it('should filter autocomplete search results', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: { items: ['foo', 'bar'] }
     })
 
@@ -67,7 +99,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should filter numeric primitives', () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: {
         items: [1, 2]
       }
@@ -80,7 +112,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should activate when search changes and not active', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: {
         items: [1, 2, 3, 4],
         multiple: true
@@ -96,7 +128,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should set searchValue to null when deactivated', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: {
         items: [1, 2, 3, 4],
         multiple: true
@@ -105,7 +137,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
 
     await wrapper.vm.$nextTick()
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
     input.element.value = 2
@@ -131,22 +163,22 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should render role=combobox correctly when autocomplete', async () => {
-    const wrapper = mount(VAutocomplete)
+    const wrapper = mountFunction()
 
     expect(wrapper.vm.$el.getAttribute('role')).toBeFalsy()
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     expect(input.element.getAttribute('role')).toBe('combobox')
   })
 
   it('should not duplicate items after items update when caching is turned on', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: {
         cacheItems: true,
         returnObject: true,
         itemText: 'text',
         itemValue: 'id',
-        items: [],
+        items: []
       }
     })
 
@@ -157,7 +189,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should cache items passed via prop', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: {
         cacheItems: true,
         items: [1, 2, 3, 4]
@@ -172,19 +204,19 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should show input when focused and autocomplete', async () => {
-    const wrapper = mount(VAutocomplete)
+    const wrapper = mountFunction()
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
-    expect(input.hasStyle('display', 'none'))
+    expect(wrapper.find('input').element.style.display).toBe('none')
 
     wrapper.trigger('focus')
 
-    expect(input.hasStyle('display', 'block'))
+    expect(wrapper.find('input').element.style.display).toBe('block')
   })
 
   it('should not filter text with no items', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: {
         items: ['foo', 'bar']
       }
@@ -197,20 +229,20 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
     // Wait for watcher
     await wrapper.vm.$nextTick()
 
-    const tile = wrapper.first('.v-list-item__title')
+    const tile = wrapper.find('.v-list-item__title')
 
     expect(tile.text()).toBe('No data available')
   })
 
   it('should not display menu when tab focused', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: {
         items: [1, 2],
         value: 1
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     input.trigger('focus')
 
     await wrapper.vm.$nextTick()
@@ -219,7 +251,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should change selected index', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
         items: ['foo', 'bar', 'fizz'],
@@ -231,7 +263,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.selectedIndex).toBe(-1)
-    expect(wrapper.vm.selectedItems.length).toBe(3)
+    expect(wrapper.vm.selectedItems).toHaveLength(3)
 
     // Right arrow
     wrapper.vm.changeSelectedIndex(keyCodes.right)
@@ -276,7 +308,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
     wrapper.vm.changeSelectedIndex(keyCodes.backspace)
 
     expect(wrapper.vm.selectedIndex).toBe(0)
-    expect(wrapper.vm.selectedItems.length).toBe(1)
+    expect(wrapper.vm.selectedItems).toHaveLength(1)
 
     wrapper.setProps({ searchInput: undefined })
 
@@ -285,12 +317,12 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.selectedIndex).toBe(0)
-    expect(wrapper.vm.selectedItems.length).toBe(1)
+    expect(wrapper.vm.selectedItems).toHaveLength(1)
 
     wrapper.vm.changeSelectedIndex(keyCodes.backspace)
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.selectedItems.length).toBe(0)
+    expect(wrapper.vm.selectedItems).toHaveLength(0)
     expect(wrapper.vm.selectedIndex).toBe(-1)
 
     // Should not change/error if called with no selection
@@ -303,7 +335,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.selectedItems.length).toBe(3)
+    expect(wrapper.vm.selectedItems).toHaveLength(3)
 
     wrapper.vm.selectedIndex = 2
 
@@ -320,15 +352,15 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should conditionally show the menu', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
         items: ['foo', 'bar', 'fizz']
       }
     })
 
-    const slot = wrapper.first('.v-input__slot')
-    const input = wrapper.first('input')
+    const slot = wrapper.find('.v-input__slot')
+    const input = wrapper.find('input')
 
     // Focus input should only focus
     input.trigger('focus')
@@ -359,7 +391,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should have the correct selected item', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: {
         items: ['foo', 'bar', 'fizz'],
         multiple: true,
@@ -367,7 +399,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.vm.selectedItem).toBe(null)
+    expect(wrapper.vm.selectedItem).toBeNull()
 
     wrapper.setProps({
       multiple: false,
@@ -378,7 +410,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should reset lazySearch', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: {
         chips: true,
         items: ['foo', 'bar', 'fizz'],
@@ -394,15 +426,15 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
     wrapper.setData({ isMenuActive: false })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.lazySearch).toBe(null)
+    expect(wrapper.vm.lazySearch).toBeNull()
   })
 
   it('should select input text on focus', async () => {
-    const wrapper = mount(VAutocomplete)
+    const wrapper = mountFunction()
     const select = jest.fn()
     wrapper.vm.$refs.input.select = select
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     input.trigger('focus')
 
     await wrapper.vm.$nextTick()
@@ -420,27 +452,27 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
 
   it('should not respond to click', () => {
     const onFocus = jest.fn()
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: { disabled: true },
       methods: { onFocus }
     })
-    const slot = wrapper.first('.v-input__slot')
+    const slot = wrapper.find('.v-input__slot')
 
     slot.trigger('click')
 
-    expect(onFocus).not.toBeCalled()
+    expect(onFocus).not.toHaveBeenCalled()
 
     wrapper.setProps({ disabled: false, readonly: true })
 
     slot.trigger('click')
 
-    expect(onFocus).not.toBeCalled()
+    expect(onFocus).not.toHaveBeenCalled()
 
     wrapper.setProps({ readonly: false })
 
     slot.trigger('click')
 
-    expect(onFocus).toBeCalled()
+    expect(onFocus).toHaveBeenCalled()
   })
 
   it('should react to keydown', () => {
@@ -448,7 +480,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
     const changeSelectedIndex = jest.fn()
     const onEscDown = jest.fn()
     const onTabDown = jest.fn()
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       methods: {
         activateMenu,
         changeSelectedIndex,
@@ -457,7 +489,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     expect(wrapper.vm.isMenuActive).toBe(false)
 
@@ -489,7 +521,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
 
   // https://github.com/vuetifyjs/vuetify/issues/3793
   it('should reset menu index after selection', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: {
         items: ['foo', 'bar'],
         value: 'foo'
@@ -497,8 +529,8 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
     })
 
     expect(wrapper.vm.isMenuActive).toBe(false)
-    const slot = wrapper.first('.v-input__slot')
-    const item = wrapper.first('.v-list-item')
+    const slot = wrapper.find('.v-input__slot')
+    const item = wrapper.find('.v-list-item')
     slot.trigger('click')
 
     expect(wrapper.vm.isMenuActive).toBe(true)
@@ -507,20 +539,20 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should not remove a disabled item', () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: {
         chips: true,
         multiple: true,
         items: [
           { text: 'foo', value: 'foo', disabled: true },
-          { text: 'bar', value: 'bar' },
+          { text: 'bar', value: 'bar' }
         ],
         value: ['foo', 'bar']
       }
     })
 
     const chips = wrapper.find('.v-chip')
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     expect(chips[0].element.classList.contains('v-chip--disabled')).toBe(true)
 
@@ -539,29 +571,29 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should not filter results', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: {
         items: ['foo', 'bar']
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     input.element.value = 'foo'
     input.trigger('input')
 
-    expect(wrapper.vm.filteredItems.length).toBe(1)
+    expect(wrapper.vm.filteredItems).toHaveLength(1)
 
     wrapper.setProps({ noFilter: true })
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.filteredItems.length).toBe(2)
+    expect(wrapper.vm.filteredItems).toHaveLength(2)
   })
 
   it('should hide menu when no data', async () => {
-    const wrapper = mount(VAutocomplete)
+    const wrapper = mountFunction()
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     input.trigger('focus')
     input.element.value = 'foo'
     input.trigger('input')
@@ -588,16 +620,16 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
     wrapper.setProps({
       hideNoData: true,
       hideSelected: true,
-      items: [1,2,3,4],
+      items: [1, 2, 3, 4],
       multiple: true,
-      value: [1,2,3]
+      value: [1, 2, 3]
     })
 
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.menuCanShow).toBe(true)
 
-    wrapper.setProps({ value: [1,2,3,4] })
+    wrapper.setProps({ value: [1, 2, 3, 4] })
 
     await wrapper.vm.$nextTick()
 
@@ -605,7 +637,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should not hide menu when no data but has no-data slot', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: {
         combobox: true
       },
@@ -614,7 +646,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     input.trigger('focus')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.menuCanShow).toBe(true)
@@ -622,9 +654,9 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
 
   // https://github.com/vuetifyjs/vuetify/issues/2834
   it('should not update search if selectedIndex is > -1', () => {
-    const wrapper = mount(VAutocomplete)
+    const wrapper = mountFunction()
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
     input.element.value = 'foo'
@@ -646,14 +678,14 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should clear search input on clear callback', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: {
         clearable: true
       }
     })
 
-    const icon = wrapper.first('.v-input__append-inner .v-icon')
-    const input = wrapper.first('input')
+    const icon = wrapper.find('.v-input__append-inner .v-icon')
+    const input = wrapper.find('input')
 
     input.element.value = 'foobar'
     input.trigger('input')
@@ -662,30 +694,30 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
 
     icon.trigger('click')
 
-    expect(wrapper.vm.internalSearch).toBe(undefined)
+    expect(wrapper.vm.internalSearch).toBeUndefined()
   })
 
   it('should propagate content class', () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: {
         menuProps: { contentClass: 'foobar' }
       }
     })
 
-    const content = wrapper.first('.v-autocomplete__content')
+    const content = wrapper.find('.v-autocomplete__content')
 
     expect(content.element.classList.contains('foobar')).toBe(true)
   })
 
   it('should update the displayed value when items changes', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: {
         value: 1,
         items: []
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     await wrapper.vm.$nextTick()
     wrapper.setProps({ items: [{ text: 'foo', value: 1 }] })
@@ -694,14 +726,14 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should show menu when items are added for the first time and hide-no-data is enabled', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: {
         hideNoData: true,
         items: []
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
 
@@ -718,14 +750,14 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should not show menu when items are updated and hide-no-data is enabled ', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: {
         hideNoData: true,
         items: [ 'Something first' ]
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
 
@@ -743,7 +775,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
 
   // https://github.com/vuetifyjs/vuetify/issues/5110
   it('should set internal search', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: {
         value: undefined,
         items: [0, 1, 2]
@@ -751,28 +783,28 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
     })
 
     // Initial value
-    expect(wrapper.vm.internalSearch).toBe(undefined)
+    expect(wrapper.vm.internalSearch).toBeUndefined()
 
     wrapper.vm.setSearch()
 
     await wrapper.vm.$nextTick()
 
     // !this.selectedItem
-    expect(wrapper.vm.internalSearch).toBe(null)
+    expect(wrapper.vm.internalSearch).toBeNull()
 
     wrapper.setData({ internalSearch: undefined })
     wrapper.setProps({ multiple: true, value: 1 })
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.selectedItems.length).toBe(1)
+    expect(wrapper.vm.selectedItems).toHaveLength(1)
 
     wrapper.vm.setSearch()
 
     await wrapper.vm.$nextTick()
 
     // this.multiple
-    expect(wrapper.vm.internalSearch).toBe(null)
+    expect(wrapper.vm.internalSearch).toBeNull()
 
     wrapper.setData({ internalSearch: undefined })
     wrapper.setProps({ multiple: false, value: 0 })
@@ -783,7 +815,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should auto select first', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: {
         autoSelectFirst: true,
         items: [
@@ -803,16 +835,16 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
 
   // https://github.com/vuetifyjs/vuetify/issues/4580
   it('should display menu when hide-no-date and hide-selected are enabled and selected item does not match search', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: {
         items: [1, 2],
         value: 1,
         hideNoData: true,
-        hideSelected: true,
+        hideSelected: true
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     input.trigger('focus')
     await wrapper.vm.$nextTick()
 
@@ -824,7 +856,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should retain search value when item selected and multiple is enabled', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: {
         items: ['Sandra Adams', 'Ali Connors', 'Trevor Hansen', 'Tucker Smith'],
         multiple: true
@@ -833,7 +865,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
 
     await wrapper.vm.$nextTick()
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
     input.element.value = 't'
@@ -841,12 +873,12 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
     wrapper.vm.selectItem('Trevor Hansen')
 
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.selectedItems.length).toBe(1)
+    expect(wrapper.vm.selectedItems).toHaveLength(1)
     expect(wrapper.vm.internalSearch).toBe('t')
   })
 
   it('should update render dynamically when itemText changes', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: {
         returnObject: true,
         itemText: 'labels.1033',
@@ -858,8 +890,8 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
           {
             id: 2,
             labels: { '1033': 'ID 2 English', '1036': 'ID 2 French' }
-          },
-        ],
+          }
+        ]
       }
     })
 
@@ -878,7 +910,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
 
   it('should not replicate html select hotkeys in v-autocomplete', async () => {
     // const wrapper = mountFunction()
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mountFunction({
       propsData: {
         items: ['aaa', 'foo', 'faa']
       }
@@ -887,7 +919,7 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
     const onKeyPress = jest.fn()
     wrapper.setMethods({ onKeyPress })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     input.trigger('focus')
     await wrapper.vm.$nextTick()
 
