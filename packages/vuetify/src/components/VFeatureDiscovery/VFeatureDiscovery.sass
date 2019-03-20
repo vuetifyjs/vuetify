@@ -33,8 +33,8 @@
   top: calc(50% - (140px / 2))
   left: calc(50% - (140px / 2))
   background: white
-  height: 140px
-  width: 140px
+  height: 112px
+  width: 112px
   display: flex
   justify-content: center
   align-items: center
@@ -47,8 +47,8 @@
     content: ''
     border-radius: inherit
     position: absolute
-    height: calc(100% + 180px)
-    width: calc(100% + 180px)
+    height: 100%
+    width: 100%
     transition: $primary-transition
     animation: pulse-animation 1.4s cubic-bezier(0.24, 0, 0.38, 1) infinite
     pointer-events: none
@@ -76,6 +76,10 @@
 .v-feature-discovery--flat .v-feature-discovery__backdrop
   +elevation(0)
 
+.v-feature-discovery--lr-shifted
+  .v-feature-discovery__content
+    width: 75%
+
 @keyframes highlight-pulse-animation
   from
     transform: scale(1)
@@ -89,8 +93,8 @@
 @keyframes pulse-animation
   from
     opacity: 1
-    transform: scale(.2)
+    transform: scale(1)
 
   to
     opacity: 0
-    transform: scale(1)
+    transform: scale(1.5)
