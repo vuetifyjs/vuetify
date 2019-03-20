@@ -103,7 +103,6 @@ export default baseMixins.extend({
     isActive (val) {
       if (val) {
         this.show()
-        this.hideScroll()
       } else {
         this.removeOverlay()
         this.unbind()
@@ -113,7 +112,6 @@ export default baseMixins.extend({
       if (!this.isActive) return
 
       if (val) {
-        this.hideScroll()
         this.removeOverlay(false)
       } else {
         this.showScroll()
@@ -172,14 +170,7 @@ export default baseMixins.extend({
 
       // close dialog if !persistent, clicked outside and we're the topmost dialog.
       // Since this should only be called in a capture event (bottom up), we shouldn't need to stop propagation
-      return this.activeZIndex >= this.getMaxZIndex()
-    },
-    hideScroll () {
-      if (this.fullscreen) {
-        document.documentElement.classList.add('overflow-y-hidden')
-      } else {
-        Overlayable.options.methods.hideScroll.call(this)
-      }
+      return true
     },
     show () {
       !this.fullscreen && !this.hideOverlay && this.genOverlay()
