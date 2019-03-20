@@ -1,4 +1,4 @@
-import '../../stylus/components/_dialogs.styl'
+import './VDialog.sass'
 
 // Mixins
 import Dependent from '../../mixins/dependent'
@@ -15,23 +15,27 @@ import ClickOutside from '../../directives/click-outside'
 import { convertToUnit, keyCodes, getSlotType } from '../../util/helpers'
 import ThemeProvider from '../../util/ThemeProvider'
 import { consoleError } from '../../util/console'
+import mixins from '../../util/mixins'
+
+// Types
+import { VNode } from 'vue'
+
+const baseMixins = mixins(
+  Dependent,
+  Detachable,
+  Overlayable,
+  Returnable,
+  Stackable,
+  Toggleable
+)
 
 /* @vue/component */
-export default {
+export default baseMixins.extend({
   name: 'v-dialog',
 
   directives: {
     ClickOutside
   },
-
-  mixins: [
-    Dependent,
-    Detachable,
-    Overlayable,
-    Returnable,
-    Stackable,
-    Toggleable
-  ],
 
   props: {
     disabled: Boolean,
@@ -62,14 +66,16 @@ export default {
 
   data () {
     return {
+      activatedBy: null as EventTarget | null,
       animate: false,
-      animateTimeout: null,
+      animateTimeout: -1,
+      isActive: false,
       stackMinZIndex: 200
     }
   },
 
   computed: {
-    classes () {
+    classes (): object {
       return {
         [(`v-dialog ${this.contentClass}`).trim()]: true,
         'v-dialog--active': this.isActive,
@@ -79,13 +85,13 @@ export default {
         'v-dialog--animated': this.animate
       }
     },
-    contentClasses () {
+    contentClasses (): object {
       return {
         'v-dialog__content': true,
         'v-dialog__content--active': this.isActive
       }
     },
-    hasActivator () {
+    hasActivator (): boolean {
       return Boolean(
         !!this.$slots.activator ||
         !!this.$scopedSlots.activator
@@ -140,22 +146,23 @@ export default {
       // outside of the dialog
       this.$nextTick(() => {
         this.animate = true
-        clearTimeout(this.animateTimeout)
-        this.animateTimeout = setTimeout(() => (this.animate = false), 150)
+        window.clearTimeout(this.animateTimeout)
+        this.animateTimeout = window.setTimeout(() => (this.animate = false), 150)
       })
     },
-    closeConditional (e) {
+    closeConditional (e: Event) {
+      const target = e.target as HTMLElement
       // If the dialog content contains
       // the click event, or if the
       // dialog is not active
-      if (!this.isActive || this.$refs.content.contains(e.target)) return false
+      if (!this.isActive || this.$refs.content.contains(target)) return false
 
       // If we made it here, the click is outside
       // and is active. If persistent, and the
       // click is on the overlay, animate
       if (this.persistent) {
         if (!this.noClickAnimation &&
-          this.overlay === e.target
+          this.overlay === target
         ) this.animateClick()
 
         return false
@@ -183,22 +190,25 @@ export default {
     unbind () {
       window.removeEventListener('focusin', this.onFocusin)
     },
-    onKeydown (e) {
+    onKeydown (e: KeyboardEvent) {
       if (e.keyCode === keyCodes.esc && !this.getOpenDependents().length) {
         if (!this.persistent) {
           this.isActive = false
           const activator = this.getActivator()
-          this.$nextTick(() => activator && activator.focus())
+          this.$nextTick(() => activator && (activator as HTMLElement).focus())
         } else if (!this.noClickAnimation) {
           this.animateClick()
         }
       }
       this.$emit('keydown', e)
     },
-    onFocusin (e) {
-      const { target } = event
+    onFocusin (e: Event) {
+      if (!e) return
+
+      const target = e.target as HTMLElement
 
       if (
+        !!target &&
         // It isn't the document or the dialog body
         ![document, this.$refs.content].includes(target) &&
         // It isn't inside the dialog body
@@ -211,14 +221,16 @@ export default {
       ) {
         // Find and focus the first available element inside the dialog
         const focusable = this.$refs.content.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
-        focusable.length && focusable[0].focus()
+        focusable.length && (focusable[0] as HTMLElement).focus()
       }
     },
-    getActivator (e) {
-      if (this.$refs.activator) {
-        return this.$refs.activator.children.length > 0
-          ? this.$refs.activator.children[0]
-          : this.$refs.activator
+    getActivator (e?: Event) {
+      const activator = this.$refs.activator as HTMLElement
+
+      if (activator) {
+        return activator.children.length > 0
+          ? activator.children[0]
+          : activator
       }
 
       if (e) {
@@ -233,13 +245,13 @@ export default {
         if (el) return el
       }
 
-      consoleError('No activator found')
+      return null
     },
     genActivator () {
       if (!this.hasActivator) return null
 
-      const listeners = this.disabled ? {} : {
-        click: e => {
+      const listeners = this.disabled ? undefined : {
+        click: (e: Event) => {
           e.stopPropagation()
           this.getActivator(e)
           if (!this.disabled) this.isActive = !this.isActive
@@ -247,8 +259,10 @@ export default {
       }
 
       if (getSlotType(this, 'activator') === 'scoped') {
-        const activator = this.$scopedSlots.activator({ on: listeners })
+        const activator = this.$scopedSlots.activator!({ on: listeners }) || null
+
         this.activatorNode = activator
+
         return activator
       }
 
@@ -263,7 +277,7 @@ export default {
     }
   },
 
-  render (h) {
+  render (h): VNode {
     const children = []
     const data = {
       'class': this.classes,
@@ -280,8 +294,9 @@ export default {
         { name: 'show', value: this.isActive }
       ],
       on: {
-        click: e => { e.stopPropagation() }
-      }
+        click: (e: Event) => { e.stopPropagation() }
+      },
+      style: {}
     }
 
     if (!this.fullscreen) {
@@ -331,4 +346,4 @@ export default {
       }
     }, children)
   }
-}
+})

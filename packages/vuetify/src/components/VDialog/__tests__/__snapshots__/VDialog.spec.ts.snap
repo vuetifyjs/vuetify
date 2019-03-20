@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VDialog.js should render a disabled component and match snapshot 1`] = `
+exports[`VDialog.ts should render a disabled component and match snapshot 1`] = `
 
 <div class="v-dialog__container"
      style="display: block;"
@@ -18,7 +18,16 @@ exports[`VDialog.js should render a disabled component and match snapshot 1`] = 
 
 `;
 
-exports[`VDialog.js should render a fullscreen component and match snapshot 1`] = `
+exports[`VDialog.ts should render a eager component and match snapshot 1`] = `
+
+<div class="v-dialog__container"
+     style="display: block;"
+>
+</div>
+
+`;
+
+exports[`VDialog.ts should render a fullscreen component and match snapshot 1`] = `
 
 <div class="v-dialog__container"
      style="display: block;"
@@ -36,25 +45,7 @@ exports[`VDialog.js should render a fullscreen component and match snapshot 1`] 
 
 `;
 
-exports[`VDialog.js should render a lazy component and match snapshot 1`] = `
-
-<div class="v-dialog__container"
-     style="display: block;"
->
-  <div tabindex="-1"
-       class="v-dialog__content"
-       style="z-index: 0;"
-  >
-    <div class="v-dialog"
-         style="display: none;"
-    >
-    </div>
-  </div>
-</div>
-
-`;
-
-exports[`VDialog.js should render a persistent component and match snapshot 1`] = `
+exports[`VDialog.ts should render a persistent component and match snapshot 1`] = `
 
 <div class="v-dialog__container"
      style="display: block;"
@@ -72,7 +63,7 @@ exports[`VDialog.js should render a persistent component and match snapshot 1`] 
 
 `;
 
-exports[`VDialog.js should render a scrollable component and match snapshot 1`] = `
+exports[`VDialog.ts should render a scrollable component and match snapshot 1`] = `
 
 <div class="v-dialog__container"
      style="display: block;"
@@ -90,7 +81,7 @@ exports[`VDialog.js should render a scrollable component and match snapshot 1`] 
 
 `;
 
-exports[`VDialog.js should render component and match snapshot 1`] = `
+exports[`VDialog.ts should render component and match snapshot 1`] = `
 
 <div class="v-dialog__container"
      style="display: block;"
@@ -108,7 +99,7 @@ exports[`VDialog.js should render component and match snapshot 1`] = `
 
 `;
 
-exports[`VDialog.js should render component with custom origin and match snapshot 1`] = `
+exports[`VDialog.ts should render component with custom origin and match snapshot 1`] = `
 
 <div class="v-dialog__container"
      style="display: block;"
@@ -126,7 +117,7 @@ exports[`VDialog.js should render component with custom origin and match snapsho
 
 `;
 
-exports[`VDialog.js should render component with custom transition and match snapshot 1`] = `
+exports[`VDialog.ts should render component with custom transition and match snapshot 1`] = `
 
 <div class="v-dialog__container"
      style="display: block;"
@@ -144,7 +135,7 @@ exports[`VDialog.js should render component with custom transition and match sna
 
 `;
 
-exports[`VDialog.js should render component with custom width (max-width) and match snapshot 1`] = `
+exports[`VDialog.ts should render component with custom width (max-width) and match snapshot 1`] = `
 
 <div class="v-dialog__container"
      style="display: block;"
@@ -162,7 +153,7 @@ exports[`VDialog.js should render component with custom width (max-width) and ma
 
 `;
 
-exports[`VDialog.js should render component with custom width and match snapshot 1`] = `
+exports[`VDialog.ts should render component with custom width and match snapshot 1`] = `
 
 <div class="v-dialog__container"
      style="display: block;"
