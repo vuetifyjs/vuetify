@@ -1,27 +1,24 @@
-// Mixins
-import Positionable from '../positionable'
-import Stackable from '../stackable'
+import Vue from 'vue'
 
-// Utilities
-import mixins, { ExtractVue } from '../../util/mixins'
+import Positionable from './positionable'
 
-// Types
-import { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import Stackable from './stackable'
 
-const baseMixins = mixins(
-  Stackable,
-  Positionable
-)
-
-interface options extends ExtractVue<typeof baseMixins> {
-  attach: boolean | string | Element
-  offsetY: boolean
-  offsetX: boolean
-  $refs: {
-    content: HTMLElement
-    activator: HTMLElement
-  }
+/* eslint-disable object-property-newline */
+const dimensions = {
+  activator: {
+    top: 0, left: 0,
+    bottom: 0, right: 0,
+    width: 0, height: 0,
+    offsetTop: 0, scrollHeight: 0
+  },
+  content: {
+    top: 0, left: 0,
+    bottom: 0, right: 0,
+    width: 0, height: 0,
+    offsetTop: 0, scrollHeight: 0
+  },
+  hasWindow: false
 }
 
 /* @vue/component */
@@ -82,35 +79,8 @@ export default baseMixins.extend<options>().extend({
   data: () => ({
     absoluteX: 0,
     absoluteY: 0,
-    activatedBy: null as EventTarget | null,
     activatorFixed: false,
-    activatorNode: null as null | VNode | VNode[],
-    dimensions: {
-      activator: {
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-        width: 0,
-        height: 0,
-        offsetTop: 0,
-        scrollHeight: 0,
-        offsetLeft: 0
-      },
-      content: {
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-        width: 0,
-        height: 0,
-        offsetTop: 0,
-        scrollHeight: 0
-      }
-    },
-    hasJustFocused: false,
-    hasWindow: false,
-    inputActivator: false,
+    dimensions: Object.assign({}, dimensions),
     isContentActive: false,
     pageWidth: 0,
     pageYOffset: 0,
@@ -270,7 +240,7 @@ export default baseMixins.extend<options>().extend({
           this.activatorFixed = true
           return
         }
-        el = el.offsetParent as HTMLElement
+        el = el.offsetParent
       }
       this.activatorFixed = false
     },
@@ -302,8 +272,6 @@ export default baseMixins.extend<options>().extend({
 
         if (el) return el as HTMLElement
       }
-
-      return null
     },
     getInnerHeight () {
       if (!this.hasWindow) return 0
