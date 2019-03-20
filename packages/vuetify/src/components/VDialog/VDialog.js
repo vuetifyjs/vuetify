@@ -188,6 +188,8 @@ export default {
       if (e.keyCode === keyCodes.esc && !this.getOpenDependents().length) {
         if (!this.persistent) {
           this.isActive = false
+          const activator = this.getActivator()
+          this.$nextTick(() => activator && activator.focus())
         } else if (!this.noClickAnimation) {
           this.animateClick()
         }
@@ -213,12 +215,34 @@ export default {
         focusable.length && focusable[0].focus()
       }
     },
+    getActivator (e) {
+      if (this.$refs.activator) {
+        return this.$refs.activator.children.length > 0
+          ? this.$refs.activator.children[0]
+          : this.$refs.activator
+      }
+
+      if (e) {
+        this.activatedBy = e.currentTarget || e.target
+      }
+
+      if (this.activatedBy) return this.activatedBy
+
+      if (this.activatorNode) {
+        const activator = Array.isArray(this.activatorNode) ? this.activatorNode[0] : this.activatorNode
+        const el = activator && activator.elm
+        if (el) return el
+      }
+
+      consoleError('No activator found')
+    },
     genActivator () {
       if (!this.hasActivator) return null
 
       const listeners = this.disabled ? {} : {
         click: e => {
           e.stopPropagation()
+          this.getActivator(e)
           if (!this.disabled) this.isActive = !this.isActive
         }
       }
@@ -231,9 +255,10 @@ export default {
 
       return this.$createElement('div', {
         staticClass: 'v-dialog__activator',
-        'class': {
+        class: {
           'v-dialog__activator--disabled': this.disabled
         },
+        ref: 'activator',
         on: listeners
       }, this.$slots.activator)
     }

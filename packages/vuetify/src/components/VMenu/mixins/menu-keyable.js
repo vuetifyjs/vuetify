@@ -43,6 +43,8 @@ export default {
       if (e.keyCode === keyCodes.esc) {
         // Wait for dependent elements to close first
         setTimeout(() => { this.isActive = false })
+        const activator = this.getActivator()
+        this.$nextTick(() => activator && activator.focus())
       } else if (e.keyCode === keyCodes.tab) {
         setTimeout(() => {
           if (!this.$refs.content.contains(document.activeElement)) {
