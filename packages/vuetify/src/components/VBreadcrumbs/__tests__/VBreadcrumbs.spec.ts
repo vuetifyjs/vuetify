@@ -1,15 +1,29 @@
-import { test } from '@/test'
-import {
-  VBreadcrumbs,
-  VBreadcrumbsItem
-} from '@/components/VBreadcrumbs'
-import Vue from 'vue'
+// Components
+import VBreadcrumbs from '../VBreadcrumbs'
+import VBreadcrumbsItem from '../VBreadcrumbsItem'
 
-test('VBreadcrumbs.js', ({ mount, compileToFunctions }) => {
+// Utilities
+import {
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+
+describe('VBreadcrumbs.ts', () => {
+  type Instance = InstanceType<typeof VBreadcrumbs>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+
+  beforeEach(() => {
+    mountFunction = (options = {}) => {
+      return mount(VBreadcrumbs, {
+        ...options
+      })
+    }
+  })
+
   it('should have breadcrumbs classes', () => {
     const wrapper = mount(VBreadcrumbs)
 
-    expect(wrapper.hasClass('v-breadcrumbs')).toBe(true)
+    expect(wrapper.classes('v-breadcrumbs')).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
