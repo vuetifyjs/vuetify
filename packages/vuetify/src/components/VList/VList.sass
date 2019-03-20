@@ -5,6 +5,17 @@
 // Theme
 .v-list.theme--light
   +list-theme($material-light)
+
+  &.primary,
+  &.secondary,
+  &.accent,
+  &.success,
+  &.error,
+  &.warning,
+  &.info
+    > .v-list-item
+      color: map-deep-get($material-dark, 'text', 'primary')
+
 .v-list.theme--dark
   +list-theme($material-dark)
 
