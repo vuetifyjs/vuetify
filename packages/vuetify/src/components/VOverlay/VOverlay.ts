@@ -26,13 +26,17 @@ export default mixins(
       type: String,
       default: '#212121'
     },
+    dark: {
+      type: Boolean,
+      default: true
+    },
     opacity: {
       type: [Number, String],
       default: 0.46
     },
     zIndex: {
       type: [Number, String],
-      default: 1
+      default: 10
     },
     value: {
       default: true
