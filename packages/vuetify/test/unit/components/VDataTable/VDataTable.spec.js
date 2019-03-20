@@ -456,4 +456,24 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
+
+  it('item-key should also be applied when users try to control the whole row in items slot', async () => {
+    const data = dataTableNestedTestData()
+    const component = Vue.component('test', {
+      render (h) {
+        return h(VDataTable, {
+          props: data.propsData,
+          scopedSlots: {
+            items: props => {
+              return [h('tr', {class: 'custom-item-class'}, [props.item.nested.value.name])]
+            }
+          }
+        })
+      }
+    })
+    const wrapper = mount(component)
+    expect(wrapper.find('tr.custom-item-class').map(w => w.vNode.key)).toEqual([0, 1, 2])
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
 })

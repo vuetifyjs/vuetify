@@ -33,6 +33,9 @@ export default {
 
       return this.genTR([transition], { class: 'v-datatable__expand-row' })
     },
+    getItemKeyOrDefault (props, defalutVal) {
+      return this.itemKey ? getObjectValueByPath(props.item, this.itemKey) : defalutVal
+    },
     genFilteredItems () {
       if (!this.$scopedSlots.items) {
         return null
@@ -42,15 +45,19 @@ export default {
       for (let index = 0, len = this.filteredItems.length; index < len; ++index) {
         const item = this.filteredItems[index]
         const props = this.createProps(item, index)
-        const row = this.$scopedSlots.items(props)
+        let row = this.$scopedSlots.items(props)
 
-        rows.push(this.hasTag(row, 'td')
-          ? this.genTR(row, {
-            key: this.itemKey ? getObjectValueByPath(props.item, this.itemKey) : index,
+        if (this.hasTag(row, 'td')) {
+          row = this.genTR(row, {
+            key: this.getItemKeyOrDefault(props, index),
             attrs: { active: this.isSelected(item) }
           })
-          : row)
-
+        } else if (row.length === 1 && !row[0].key) {
+          row[0].key = this.getItemKeyOrDefault(props, index)
+        } else {
+          // reach cases of bad usage
+        }
+        rows.push(row)
         if (this.$scopedSlots.expand) {
           const expandRow = this.genExpandedRow(props)
           rows.push(expandRow)
