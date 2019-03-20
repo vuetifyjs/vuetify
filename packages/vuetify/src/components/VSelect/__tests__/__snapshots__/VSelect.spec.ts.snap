@@ -317,7 +317,7 @@ exports[`VSelect.ts should render v-select correctly when using v-list-item in i
 exports[`VSelect.ts should use slotted no-data 1`] = `
 
 <div role="list"
-     class="v-list theme--light"
+     class="v-list v-sheet v-sheet--tile theme--light"
 >
   <div aria-selected="false"
        role="listitem"

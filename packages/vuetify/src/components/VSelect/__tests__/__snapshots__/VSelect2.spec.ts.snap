@@ -156,7 +156,7 @@ exports[`.ts should use scoped slot for selection generation 1`] = `
 exports[`.ts should use slotted append-item 1`] = `
 
 <div role="list"
-     class="v-list theme--light"
+     class="v-list v-sheet v-sheet--tile theme--light"
 >
   <div aria-selected="false"
        role="listitem"
@@ -179,7 +179,7 @@ exports[`.ts should use slotted append-item 1`] = `
 exports[`.ts should use slotted prepend-item 1`] = `
 
 <div role="list"
-     class="v-list theme--light"
+     class="v-list v-sheet v-sheet--tile theme--light"
 >
   <div>
     foo

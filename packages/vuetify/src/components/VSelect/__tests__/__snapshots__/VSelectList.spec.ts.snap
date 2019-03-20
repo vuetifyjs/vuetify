@@ -4,7 +4,7 @@ exports[`.ts should display falsy items 1`] = `
 
 <div class="v-select-list v-card theme--light">
   <div role="list"
-       class="v-list theme--light"
+       class="v-list v-sheet v-sheet--tile theme--light"
   >
     <div aria-selected="false"
          role="listitem"
@@ -69,7 +69,7 @@ exports[`.ts should display no-data-text when item slot is provided 1`] = `
 
 <div class="v-select-list v-card theme--light">
   <div role="list"
-       class="v-list theme--light"
+       class="v-list v-sheet v-sheet--tile theme--light"
   >
     <div aria-selected="false"
          role="listitem"
@@ -91,7 +91,7 @@ exports[`.ts should generate children 1`] = `
 
 <div class="v-select-list v-card theme--light">
   <div role="list"
-       class="v-list theme--light"
+       class="v-list v-sheet v-sheet--tile theme--light"
   >
     <div class="v-subheader theme--light">
       true
