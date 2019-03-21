@@ -8,24 +8,30 @@
       height="200px"
       src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
     >
-      <v-container fill-height fluid>
-        <v-layout align-end>
-          <span class="headline font-weight-regular">Top 10 Australian beaches</span>
-        </v-layout>
-      </v-container>
+      <v-card-title class="align-end fill-height">Top 10 Australian beaches</v-card-title>
     </v-img>
 
-    <v-card-title>
-      <div>
-        <span class="grey--text">Number 10</span><br>
+    <v-card-text>
+      <span>Number 10</span><br>
+      <span class="text--primary">
         <span>Whitehaven Beach</span><br>
         <span>Whitsunday Island, Whitsunday Islands</span>
-      </div>
-    </v-card-title>
+      </span>
+    </v-card-text>
 
     <v-card-actions>
-      <v-btn text color="orange">Share</v-btn>
-      <v-btn text color="orange">Explore</v-btn>
+      <v-btn
+        text
+        color="orange"
+      >
+        Share
+      </v-btn>
+      <v-btn
+        text
+        color="orange"
+      >
+        Explore
+      </v-btn>
     </v-card-actions>
   </v-card>
 </template>

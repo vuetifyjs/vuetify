@@ -5,6 +5,10 @@
     "usage": {
       "desc": "A card has 3 basic components, `v-card-title`, `v-card-text` and `v-card-actions`."
     },
+    "infoCard": {
+      "header": "### Information card",
+      "desc": "Cards are entry points to more detailed information. To keep things concise, ensure to limit the number of actions the user can take."
+    },
     "mediaWithText": {
       "header": "### Media with text",
       "desc": "Using the layout system, we can add custom text anywhere within the background."

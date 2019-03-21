@@ -5,7 +5,10 @@
   >
     <v-system-bar color="indigo darken-2"></v-system-bar>
 
-    <v-toolbar color="indigo" dark>
+    <v-toolbar
+      color="indigo"
+      dark
+    >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title>Discover</v-toolbar-title>
@@ -22,7 +25,10 @@
       grid-list-md
       pa-2
     >
-      <v-layout row wrap>
+      <v-layout
+        row
+        wrap
+      >
         <v-flex
           v-for="card in cards"
           :key="card.title"
@@ -31,17 +37,14 @@
           <v-card>
             <v-img
               :src="card.src"
+              class="white--text"
               height="200px"
               gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
             >
-              <v-container
-                fill-height
-                fluid
-              >
-                <v-layout align-end>
-                  <span class="headline white--text" v-text="card.title"></span>
-                </v-layout>
-              </v-container>
+              <v-card-title
+                class="fill-height align-end"
+                v-text="card.title"
+              ></v-card-title>
             </v-img>
 
             <v-card-actions>

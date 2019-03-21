@@ -9,8 +9,8 @@
     ></v-img>
 
     <v-card-title>
-      <div class="headline">Top western road trips</div>
-      <span class="grey--text">1,000 miles of wonder</span>
+      <div>Top western road trips</div>
+      <span class="grey--text subtitle-1">1,000 miles of wonder</span>
     </v-card-title>
 
     <v-card-actions>
@@ -25,7 +25,10 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon @click="show = !show">
+      <v-btn
+        icon
+        @click="show = !show"
+      >
         <v-icon>{{ show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
       </v-btn>
     </v-card-actions>
