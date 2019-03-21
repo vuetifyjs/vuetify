@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_breadcrumbs.styl'
+import './VBreadcrumbs.sass'
 
 // Types
 import { VNode } from 'vue'
