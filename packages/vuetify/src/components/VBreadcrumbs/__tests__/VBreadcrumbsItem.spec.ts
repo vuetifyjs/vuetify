@@ -24,16 +24,4 @@ describe('VBreadcrumbsItem.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
-
-  // TODO: Use vue-router or nuxt in tests
-  it.skip('should have a custom active class', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        activeClass: 'v-breadcrumbs-item--active',
-        to: '/'
-      }
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
 })
