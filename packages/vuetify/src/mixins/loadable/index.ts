@@ -22,6 +22,10 @@ export default Vue.extend<colorable>().extend({
     loading: {
       type: [Boolean, String],
       default: false
+    },
+    loaderHeight: {
+      type: [Number, String],
+      default: 2
     }
   },
 
@@ -34,7 +38,7 @@ export default Vue.extend<colorable>().extend({
           color: (this.loading === true || this.loading === '')
             ? (this.color || 'primary')
             : this.loading,
-          height: 2,
+          height: this.loaderHeight,
           indeterminate: true
         }
       })
