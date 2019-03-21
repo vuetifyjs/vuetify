@@ -6,7 +6,6 @@ import {
 import ExpandTransitionGenerator from './expand-transition'
 
 // Component specific transitions
-export const VBottomSheetTransition = createSimpleTransition('bottom-sheet-transition')
 export const VCarouselTransition = createSimpleTransition('carousel-transition')
 export const VCarouselReverseTransition = createSimpleTransition('carousel-reverse-transition')
 export const VTabTransition = createSimpleTransition('tab-transition')
@@ -34,7 +33,6 @@ export const VExpandXTransition = createJavaScriptTransition('expand-x-transitio
 
 export default {
   $_vuetify_subcomponents: {
-    VBottomSheetTransition,
     VCarouselTransition,
     VCarouselReverseTransition,
     VDialogTransition,
