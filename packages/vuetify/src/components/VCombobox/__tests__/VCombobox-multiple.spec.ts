@@ -1,20 +1,43 @@
-import { test } from '@/test'
-import { keyCodes } from '@/util/helpers'
-import VCombobox from '@/components/VCombobox'
+// Components
+import VCombobox from '../VCombobox'
 
-test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
-  const app = document.createElement('div')
-  app.setAttribute('data-app', true)
-  document.body.appendChild(app)
-  const backspaceEvent = () => {
-    const backspace = new Event('keydown')
-    backspace.keyCode = keyCodes.delete
-    return backspace
-  }
+// Utilities
+import {
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+import { rafPolyfill } from '../../../../test'
+import { keyCodes } from '../../../util/helpers'
+
+describe('VCombobox.ts', () => {
+  type Instance = InstanceType<typeof VCombobox>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+
+  rafPolyfill(window)
+
+  beforeEach(() => {
+    document.body.setAttribute('data-app', 'true')
+
+    mountFunction = (options = {}) => {
+      return mount(VCombobox, {
+        ...options,
+        mocks: {
+          $vuetify: {
+            lang: {
+              t: (val: string) => val
+            },
+            theme: {
+              dark: false
+            }
+          }
+        }
+      })
+    }
+  })
 
   function createMultipleCombobox (propsData) {
     const change = jest.fn()
-    const wrapper = shallow(VCombobox, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: Object.assign({
         multiple: true,
@@ -27,9 +50,9 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
   }
 
   it('should create new values when tagging', async () => {
-    const { wrapper, change } = createMultipleCombobox()
+    const { wrapper, change } = createMultipleCombobox({})
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
     input.element.value = 'foo'
@@ -44,7 +67,7 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
       value: ['foo', 'bar']
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
     await wrapper.vm.$nextTick()
@@ -54,7 +77,6 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
       await wrapper.vm.$nextTick()
       expect(wrapper.vm.selectedIndex).toBe(index)
     }
-
   })
 
   it('should delete a tagged item when selected and backspace/delete is pressed', async () => {
@@ -62,7 +84,7 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
       value: ['foo', 'bar']
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
     input.trigger('keydown.left')
@@ -73,11 +95,13 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
     expect(change).toHaveBeenCalledWith(['foo'])
     expect(wrapper.vm.selectedIndex).toBe(0)
 
-    input.element.dispatchEvent(backspaceEvent()) // Avoriaz doesn't wrap keydown.backspace
+    const backspace = new Event('keydown')
+    backspace.keyCode = keyCodes.delete
+
+    input.element.dispatchEvent(backspace) // Avoriaz doesn't wrap keydown.backspace
     await wrapper.vm.$nextTick()
     expect(change).toHaveBeenCalledWith([])
     expect(wrapper.vm.selectedIndex).toBe(-1)
-
   })
 
   it('should add a tag on tab using the first suggestion', async () => {
@@ -85,8 +109,8 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
       items: ['bar']
     })
 
-    const input = wrapper.first('input')
-    const menu = wrapper.first('.v-menu')
+    const input = wrapper.find('input')
+    const menu = wrapper.find('.v-menu')
 
     input.trigger('focus')
     input.element.value = 'b'
@@ -101,7 +125,7 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
 
     input.trigger('keydown.tab')
 
-    expect(change).toBeCalledWith(['bar'])
+    expect(change).toHaveBeenCalledWith(['bar'])
     expect(wrapper.vm.getMenuIndex()).toBe(0)
   })
 
@@ -110,19 +134,19 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
       items: ['bar']
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
 
     wrapper.setProps({ searchInput: 'ba' })
     input.trigger('keydown.tab')
     await wrapper.vm.$nextTick()
-    expect(change).toBeCalledWith(['ba'])
+    expect(change).toHaveBeenCalledWith(['ba'])
 
     wrapper.setProps({ searchInput: 'it' })
     input.trigger('keydown.tab')
     await wrapper.vm.$nextTick()
-    expect(change).toBeCalledWith(['ba', 'it'])
+    expect(change).toHaveBeenCalledWith(['ba', 'it'])
   })
 
   it('should add a tag on enter using the current searchValue', async () => {
@@ -130,7 +154,7 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
       items: ['bar']
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
     await wrapper.vm.$nextTick()
@@ -141,7 +165,7 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
     input.trigger('keydown.enter')
     await wrapper.vm.$nextTick()
 
-    expect(change).toBeCalledWith(['ba'])
+    expect(change).toHaveBeenCalledWith(['ba'])
   })
 
   it('should add a tag on left arrow and select the previous tag', async () => {
@@ -150,14 +174,14 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
       items: ['foo', 'bar']
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
     input.element.value = 'b'
     input.trigger('input')
     input.trigger('keydown.left')
 
-    expect(change).toBeCalledWith(['foo', 'b'])
+    expect(change).toHaveBeenCalledWith(['foo', 'b'])
     expect(wrapper.vm.selectedIndex).toBe(0)
   })
 
@@ -166,7 +190,7 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
       value: ['foo', 'bar']
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
     await wrapper.vm.$nextTick()
@@ -176,20 +200,20 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
     input.trigger('keydown.tab')
     await wrapper.vm.$nextTick()
 
-    expect(change).toBeCalledWith(['bar', 'foo'])
+    expect(change).toHaveBeenCalledWith(['bar', 'foo'])
   })
 
   it('should add tag with valid search value on blur', async () => {
-    const { wrapper, change } = createMultipleCombobox()
+    const { wrapper, change } = createMultipleCombobox({})
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
     input.element.value = 'bar'
     input.trigger('input')
     input.trigger('keydown.tab')
 
-    expect(change).toBeCalledWith(['bar'])
+    expect(change).toHaveBeenCalledWith(['bar'])
   })
 
   it('should be able to add a tag from user input after deleting a tag with delete', async () => {
@@ -198,7 +222,7 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
       value: ['foo', 'bar']
     })
 
-    let input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
     input.trigger('keydown.left')
@@ -215,9 +239,8 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
     input.trigger('input')
     input.trigger('keydown.enter')
 
-    expect(change).toBeCalledWith(['foo', 'baz'])
+    expect(change).toHaveBeenCalledWith(['foo', 'baz'])
     expect(wrapper.vm.selectedIndex).toBe(-1)
-
   })
 
   it('should be able to add a tag from user input after clicking a deletable chip', async () => {
@@ -229,9 +252,9 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
       value: ['foo', 'bar']
     })
 
-    const input = wrapper.first('input')
-    const chip = wrapper.find('.v-chip')[1]
-    const close = chip.first('.v-chip__close')
+    const input = wrapper.find('input')
+    const chip = wrapper.findAll('.v-chip').at(1)
+    const close = chip.find('.v-chip__close')
 
     input.trigger('focus')
     chip.trigger('click')
@@ -244,7 +267,7 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
     expect(wrapper.vm.internalSearch).toBe('baz')
     input.trigger('keydown.enter')
 
-    expect(change).toBeCalledWith(['foo', 'baz'])
+    expect(change).toHaveBeenCalledWith(['foo', 'baz'])
     expect(wrapper.vm.selectedIndex).toBe(-1)
   })
 
@@ -256,7 +279,7 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
       value: ['foo', 'bar']
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
     expect(wrapper.vm.selectedIndex).toBe(-1)
@@ -264,7 +287,7 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
     input.trigger('keydown.left')
     expect(wrapper.vm.selectedIndex).toBe(1)
 
-    expect(wrapper.vm.internalSearch).toBe(undefined)
+    expect(wrapper.vm.internalSearch).toBeUndefined()
     input.trigger('keydown.right')
     input.element.value = 'fizz'
     input.trigger('input')
@@ -280,7 +303,7 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
 
     await wrapper.vm.$nextTick()
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     input.trigger('focus')
 
     input.element.value = 'foo,'
@@ -320,14 +343,14 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
 
     const change = jest.fn()
     const internal = jest.fn()
-    const chip = wrapper.first('.v-chip')
-    const input = wrapper.first('input')
+    const chip = wrapper.find('.v-chip')
+    const input = wrapper.find('input')
 
     wrapper.vm.$on('change', change)
     wrapper.vm.$watch('internalValue', internal)
 
     expect(wrapper.vm.editingIndex).toBe(-1)
-    expect(wrapper.vm.internalSearch).toBe(undefined)
+    expect(wrapper.vm.internalSearch).toBeUndefined()
 
     chip.trigger('dblclick')
 
@@ -340,13 +363,13 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
 
     await wrapper.vm.$nextTick()
 
-    expect(change).toBeCalledWith(['foobar'])
-    expect(internal).toBeCalledWith(['foobar'], ['foo'])
+    expect(change).toHaveBeenCalledWith(['foobar'])
+    expect(internal).toHaveBeenCalledWith(['foobar'], ['foo'])
   })
 
   it('should react to tabs', async () => {
     const updateTags = jest.fn()
-    const wrapper = shallow(VCombobox, {
+    const wrapper = mountFunction({
       propsData: {
         items: ['fizz', 'buzz'],
         multiple: true
@@ -356,7 +379,7 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
     input.element.value = 'foo'

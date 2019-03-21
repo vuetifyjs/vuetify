@@ -1,13 +1,41 @@
-import { test } from '@/test'
-import VCombobox from '@/components/VCombobox'
+// Components
+import VCombobox from '../VCombobox'
 
-test('VCombobox', ({ shallow }) => {
-  const app = document.createElement('div')
-  app.setAttribute('data-app', true)
-  document.body.appendChild(app)
+// Utilities
+import {
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+import { rafPolyfill } from '../../../../test'
+
+describe('VCombobox.ts', () => {
+  type Instance = InstanceType<typeof VCombobox>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+
+  rafPolyfill(window)
+
+  beforeEach(() => {
+    document.body.setAttribute('data-app', 'true')
+
+    mountFunction = (options = {}) => {
+      return mount(VCombobox, {
+        ...options,
+        mocks: {
+          $vuetify: {
+            lang: {
+              t: (val: string) => val
+            },
+            theme: {
+              dark: false
+            }
+          }
+        }
+      })
+    }
+  })
 
   it('should evaluate the range of an integer', async () => {
-    const wrapper = shallow(VCombobox, {
+    const wrapper = mountFunction({
       propsData: {
         value: 11
       }
@@ -22,7 +50,7 @@ test('VCombobox', ({ shallow }) => {
   })
 
   it('should not use search input when blurring', async () => {
-    const wrapper = shallow(VCombobox, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
         items: [1, 12]
@@ -32,7 +60,7 @@ test('VCombobox', ({ shallow }) => {
     const event = jest.fn()
     wrapper.vm.$on('input', event)
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     input.trigger('focus')
     await wrapper.vm.$nextTick()
 
@@ -44,12 +72,12 @@ test('VCombobox', ({ shallow }) => {
     const list = wrapper.find('.v-list-item')[1]
     list.trigger('click')
     await wrapper.vm.$nextTick()
-    expect(event).toBeCalledWith(12)
+    expect(event).toHaveBeenCalledWith(12)
   })
 
   it('should not use search input if an option is selected from the menu', async () => {
     const item = { value: 123, text: 'Foo' }
-    const wrapper = shallow(VCombobox, {
+    const wrapper = mountFunction({
       propsData: {
         items: [item]
       }
@@ -67,11 +95,11 @@ test('VCombobox', ({ shallow }) => {
     wrapper.setData({ isMenuActive: false })
     await wrapper.vm.$nextTick()
 
-    expect(event).toBeCalledWith(item)
+    expect(event).toHaveBeenCalledWith(item)
   })
 
   it('should not populate search field if value is falsey', async () => {
-    const wrapper = shallow(VCombobox)
+    const wrapper = mountFunction()
 
     const event = jest.fn()
     wrapper.vm.$on('input', event)
@@ -85,16 +113,16 @@ test('VCombobox', ({ shallow }) => {
     wrapper.setData({ isMenuActive: false })
     await wrapper.vm.$nextTick()
 
-    expect(event).not.toBeCalled()
+    expect(event).not.toHaveBeenCalled()
   })
 
   it('should clear value', async () => {
-    const wrapper = shallow(VCombobox, {
+    const wrapper = mountFunction({
       attachToDocument: true
     })
 
     const change = jest.fn()
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     wrapper.vm.$on('change', change)
     wrapper.vm.$on('input', change)
@@ -104,7 +132,7 @@ test('VCombobox', ({ shallow }) => {
     input.trigger('input')
     input.trigger('keydown.enter')
 
-    expect(change).toBeCalledWith('foo')
+    expect(change).toHaveBeenCalledWith('foo')
     expect(change).toHaveBeenCalledTimes(2)
     expect(wrapper.vm.internalValue).toBe('foo')
 
@@ -118,26 +146,25 @@ test('VCombobox', ({ shallow }) => {
 
   it('should call methods on blur', async () => {
     const updateCombobox = jest.fn()
-    const wrapper = shallow(VCombobox, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       methods: {
         updateCombobox
       }
     })
 
-
     const e = { preventDefault: jest.fn() }
     wrapper.vm.onEnterDown(e)
 
     // https://github.com/vuetifyjs/vuetify/issues/4974
-    expect(e.preventDefault).toBeCalled()
+    expect(e.preventDefault).toHaveBeenCalled()
     expect(updateCombobox).toHaveBeenCalledTimes(1)
   })
 
   it('should emit custom value on blur', async () => {
-    const wrapper = shallow(VCombobox)
+    const wrapper = mountFunction()
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
@@ -162,7 +189,7 @@ test('VCombobox', ({ shallow }) => {
   })
 
   it('should conditionally show the menu', async () => {
-    const wrapper = shallow(VCombobox, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
         items: ['foo', 'bar', 'fizz'],
@@ -170,8 +197,8 @@ test('VCombobox', ({ shallow }) => {
       }
     })
 
-    const slot = wrapper.first('.v-input__slot')
-    const input = wrapper.first('input')
+    const slot = wrapper.find('.v-input__slot')
+    const input = wrapper.find('input')
 
     // Focus input should only focus
     input.trigger('focus')
@@ -193,13 +220,13 @@ test('VCombobox', ({ shallow }) => {
       { text: 'Vue', value: 2 },
       { text: 'Vuetify', value: 3 }
     ]
-    const wrapper = shallow(VCombobox, {
+    const wrapper = mountFunction({
       propsData: {
         items
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     const event = jest.fn()
     wrapper.vm.$on('input', event)
 
@@ -209,7 +236,7 @@ test('VCombobox', ({ shallow }) => {
     wrapper.vm.selectItem(items[0])
 
     expect(wrapper.vm.isFocused).toBe(true)
-    expect(event).toBeCalledWith(items[0])
+    expect(event).toHaveBeenCalledWith(items[0])
 
     input.trigger('keydown.tab')
 
@@ -219,13 +246,13 @@ test('VCombobox', ({ shallow }) => {
 
   // https://github.com/vuetifyjs/vuetify/issues/5008
   it('should select item if menu index is greater than -1', async () => {
-    const wrapper = shallow(VCombobox, {
+    const wrapper = mountFunction({
       propsData: {
         items: ['foo']
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
     input.trigger('keydown.enter')
