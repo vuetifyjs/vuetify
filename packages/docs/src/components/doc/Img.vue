@@ -1,9 +1,11 @@
 <template>
   <figure class="mb-4">
-    <v-img
-      :src="computedValue"
-      class="mb-2"
-    />
+    <v-sheet>
+      <v-img
+        :src="computedValue"
+        class="mb-2"
+      />
+    </v-sheet>
 
     <figcaption
       v-if="$slots.default"

@@ -21,7 +21,7 @@
             src="http://cdn.vuetifyjs.com/images/cards/sun.png"
             alt="Sunny image"
             width="92"
-          ></v-img></v-img>
+          ></v-img>
         </v-flex>
       </v-layout>
     </v-card-text>

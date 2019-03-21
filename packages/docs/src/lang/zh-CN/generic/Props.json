@@ -22,7 +22,7 @@
   "singleLine": "Label does not move on focus/dirty",
   "size": "设置元素的高度和宽度",
   "textColor": "将指定的颜色应用于控件文本",
-  "tile": "删除边看弧度",
+  "tile": "删除边框弧度",
   "trueValue": "设置真值",
   "value": "控制可见性",
   "width": "内容的宽度"

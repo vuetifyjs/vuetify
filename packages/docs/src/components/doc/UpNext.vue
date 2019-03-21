@@ -10,25 +10,30 @@
         <v-flex
           v-for="(link, i) in links"
           :key="i"
+          xs12
+          md4
         >
-          <v-list
-            class="grey lighten-3 pa-0"
-            two-line
-          >
-            <core-item
-              :to="link.link"
-              :avatar="link.icon"
-              :avatar-color="link.color"
-              :text="link.target"
-              :subtext="link.section"
-              no-markdown
-              @click.native="$ga.event('up-next', 'click', link.target, $route.path)"
+          <v-sheet color="grey lighten-3">
+            <v-list
+              class="pa-0"
+              two-line
+              nav
             >
-              <v-list-item-action>
-                <v-icon>mdi-arrow-right</v-icon>
-              </v-list-item-action>
-            </core-item>
-          </v-list>
+              <core-item
+                :to="link.link"
+                :avatar="link.icon"
+                :avatar-color="link.color"
+                :text="link.target"
+                :subtext="link.section"
+                no-markdown
+                @click.native="$ga.event('up-next', 'click', link.target, $route.path)"
+              >
+                <v-list-item-action>
+                  <v-icon>mdi-arrow-right</v-icon>
+                </v-list-item-action>
+              </core-item>
+            </v-list>
+          </v-sheet>
         </v-flex>
       </v-layout>
     </v-container>

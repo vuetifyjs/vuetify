@@ -156,21 +156,6 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.computedItems).toHaveLength(1)
   })
 
-  it('should cache items', async () => {
-    const wrapper = mount(VAutocomplete, {
-      propsData: { cacheItems: true }
-    })
-
-    wrapper.setProps({ items: ['bar', 'baz'] })
-    expect(wrapper.vm.computedItems).toHaveLength(2)
-
-    wrapper.setProps({ items: ['foo'] })
-    expect(wrapper.vm.computedItems).toHaveLength(3)
-
-    wrapper.setProps({ items: ['bar'] })
-    expect(wrapper.vm.computedItems).toHaveLength(3)
-  })
-
   it('should cache items passed via prop', async () => {
     const wrapper = mount(VAutocomplete, {
       propsData: {
@@ -889,5 +874,25 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.computedItems).toHaveLength(2)
     expect(wrapper.vm.internalSearch).toEqual('ID 1 French')
+  })
+
+  it('should not replicate html select hotkeys in v-autocomplete', async () => {
+    // const wrapper = mountFunction()
+    const wrapper = mount(VAutocomplete, {
+      propsData: {
+        items: ['aaa', 'foo', 'faa']
+      }
+    })
+
+    const onKeyPress = jest.fn()
+    wrapper.setMethods({ onKeyPress })
+
+    const input = wrapper.first('input')
+    input.trigger('focus')
+    await wrapper.vm.$nextTick()
+
+    input.trigger('keypress', { key: 'f' })
+    await wrapper.vm.$nextTick()
+    expect(onKeyPress).not.toHaveBeenCalled()
   })
 })

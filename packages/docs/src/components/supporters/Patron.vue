@@ -16,6 +16,7 @@
         :height="small ? 40 : 70"
         :src="`https://cdn.vuetifyjs.com/images/${value.logo}`"
         contain
+        @click="$ga.event('patrons', 'click', value.name)"
       />
     </div>
   </v-card>

@@ -1,0 +1,33 @@
+@import '../../styles/styles.sass'
+@import './_mixins.sass'
+
+.application
+  display: flex
+
+  a
+    cursor: pointer
+
+  &--is-rtl
+    direction: rtl
+
+  &--wrap
+    flex: 1 1 auto
+    backface-visibility: hidden
+    display: flex
+    flex-direction: column
+    min-height: 100vh
+    max-width: 100%
+    position: relative
+
+.application.theme--light
+  +application-theme($material-light)
+.application.theme--dark
+  +application-theme($material-dark)
+
+@include firefox()
+  @media print
+    .application
+      display: block
+
+      &--wrap
+        display: block

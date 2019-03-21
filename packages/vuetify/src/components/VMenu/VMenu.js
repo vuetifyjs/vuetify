@@ -6,7 +6,7 @@ import Vue from 'vue'
 import Delayable from '../../mixins/delayable'
 import Dependent from '../../mixins/dependent'
 import Detachable from '../../mixins/detachable'
-import Menuable from '../../mixins/menuable.js'
+import Menuable from '../../mixins/menuable'
 import Returnable from '../../mixins/returnable'
 import Toggleable from '../../mixins/toggleable'
 import Themeable from '../../mixins/themeable'
@@ -197,8 +197,10 @@ export default Vue.extend({
         })
       })
     },
-    closeConditional () {
-      return this.isActive && this.closeOnClick
+    closeConditional (e) {
+      return this.isActive &&
+        this.closeOnClick &&
+        !this.$refs.content.contains(e.target)
     },
     onResize () {
       if (!this.isActive) return

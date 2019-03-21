@@ -574,13 +574,7 @@ module.exports = {
   'v-breadcrumbs-item': {
     slots: ['default']
   },
-  'v-bottom-nav': {
-    props: [
-      {
-        name: 'active',
-        sync: true
-      }
-    ],
+  'v-bottom-navigation': {
     slots: ['default'],
     events: [
       {
@@ -588,7 +582,7 @@ module.exports = {
         value: 'boolean'
       },
       {
-        name: 'update:active',
+        name: 'update:inputValue',
         value: 'string | number'
       }
     ]
@@ -966,9 +960,6 @@ module.exports = {
   'v-expansion-panel': {
     slots: ['default']
   },
-  'v-expansion-panel-content': {
-    slots: ['default', 'header']
-  },
   'v-flex': {
     props: [
       {
@@ -1116,6 +1107,9 @@ module.exports = {
   'v-list-item': {
     slots: ['default']
   },
+  'v-list-group': {
+    slots: ['activator', 'default']
+  },
   'v-list-item-action': {
     slots: ['default']
   },
@@ -1143,6 +1137,9 @@ module.exports = {
         value: 'boolean'
       }
     ]
+  },
+  'v-overlay': {
+    slots: ['default']
   },
   'v-pagination': {
     events: [

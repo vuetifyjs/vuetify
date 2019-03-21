@@ -7,7 +7,6 @@
         :close-on-content-click="false"
         :nudge-right="40"
         :return-value.sync="time"
-        lazy
         transition="scale-transition"
         offset-y
         full-width
@@ -38,7 +37,6 @@
         v-model="modal2"
         :return-value.sync="time"
         persistent
-        lazy
         full-width
         width="290px"
       >

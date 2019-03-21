@@ -13,7 +13,7 @@
     },
     "headers": {
       "header": "items 和 headers 插槽",
-      "desc": "`items` 和 `headers` 可以接受 <kbd>td/th</kbd> 标签, 或者你想控制一整行，可以使用 <kbd>tr</kbd> 标签."
+      "desc": "`items` 和 `headers` 可以接受 <kbd>td/th</kbd> 标签, 或者你想控制一整行，可以使用 <kbd>tr</kbd> 标签。第二种情况下，`item-key`并不会自动在行上加上`key`，你需要手动添加。"
     },
     "headerCell": {
       "header": "headerCell 插槽",
@@ -75,7 +75,7 @@
   "props": {
     "v-edit-dialog": {
       "cancelText": "为取消按钮设置默认文本，当使用了 `large` 属性时（即有提交和取消按钮的对话框）。",
-      "lazy": "Mixins.Bootable.props.lazy",
+      "eager": "Mixins.Bootable.props.eager",
       "large": "附加一个提交和取消按钮到对话框",
       "saveText": "为保存按钮设置默认文本，当使用了 `large` 属性时。",
       "transition": "Mixins.Transitionable.props.transition"

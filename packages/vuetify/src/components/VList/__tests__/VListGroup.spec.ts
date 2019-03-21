@@ -166,13 +166,15 @@ describe('VListGroup.ts', () => {
     expect(wrapper.vm.isActive).toBe(false)
   })
 
-  it('should toggle is uid matches', () => {
+  it('should toggle is uid matches', async () => {
     const wrapper = mountFunction()
 
     expect(wrapper.vm.isActive).toBe(false)
     wrapper.vm.toggle(100)
+    await wrapper.vm.$nextTick()
     expect(wrapper.vm.isActive).toBe(false)
     wrapper.vm.toggle(wrapper.vm._uid)
+    await wrapper.vm.$nextTick()
     expect(wrapper.vm.isActive).toBe(true)
   })
 })

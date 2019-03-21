@@ -21,7 +21,10 @@
         <v-icon class="hidden-md-and-up">mdi-comment-question</v-icon>
       </v-btn>
     </template>
-    <v-list dense>
+    <v-list
+      dense
+      nav
+    >
       <v-subheader v-text="$t('Vuetify.AppToolbar.getHelp')" />
       <core-item
         v-for="support in supports"
