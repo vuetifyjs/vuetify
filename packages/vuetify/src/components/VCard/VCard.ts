@@ -75,6 +75,8 @@ export default mixins(
     genProgress () {
       const render = Loadable.options.methods.genProgress.call(this)
 
+      if (!render) return null
+
       return this.$createElement('div', {
         staticClass: 'v-card__progress'
       }, [render])
