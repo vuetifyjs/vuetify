@@ -1,5 +1,4 @@
-@import '../bootstrap'
-@import '../theme'
+@import '../../styles/styles.sass'
 
 .v-bottom-sheet.v-dialog
   align-self: flex-end
@@ -8,11 +7,10 @@
   margin: 0
   min-width: 100%
   overflow: visible
-  transition: .3s $transition.fast-in-fast-out
 
   &.v-bottom-sheet--inset
     max-width: 70%
     min-width: 0
 
-    @media $display-breakpoints.xs-only
+    @media #{map-get($display-breakpoints, 'xs-only')}
       max-width: none
