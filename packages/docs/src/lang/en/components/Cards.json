@@ -9,6 +9,10 @@
       "header": "### Media with text",
       "desc": "Using the layout system, we can add custom text anywhere within the background."
     },
+    "outlined": {
+      "header": "### Outlined cards",
+      "desc": "An **outlined** card has 0 elevation and contains a soft border."
+    },
     "horizontal": {
       "header": "### Horizontal cards",
       "desc": "Using `v-flex`, you can create customized horizontal cards. Use the `contain` property to shrink the `v-img` to fit inside the container, instead of covering."

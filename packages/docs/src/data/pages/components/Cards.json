@@ -37,6 +37,7 @@
           "type": "examples",
           "value": [
             "mediaWithText",
+            "outlined",
             "horizontal",
             "grids",
             "customActions",
