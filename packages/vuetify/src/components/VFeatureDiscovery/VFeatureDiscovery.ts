@@ -102,16 +102,16 @@ export default mixins(
       return Math.sqrt(2 * (Math.max(this.rect.width, this.rect.height) + 25) ** 2)
     },
     leftShift (): number {
-      if ((this.rect.left - (this.computedSize / 2) + (this.rect.width / 2)) < 0) return this.computedSize / doubledSqrt2
+      if ((this.rect.left - (this.computedSize / 2) + (this.rect.width / 2)) < 0) return this.computedSize / doubledSqrt2 * 0.75
       if ((window.innerWidth - this.rect.right - (this.computedSize / 2) + (this.rect.width / 2)) < 0) {
-        return -this.computedSize / doubledSqrt2
+        return -this.computedSize / doubledSqrt2 * 0.75
       }
       return 0
     },
     topShift (): number {
-      if ((this.rect.top - (this.computedSize / 2) + (this.rect.height / 2)) < 0) return this.computedSize / doubledSqrt2
+      if ((this.rect.top - (this.computedSize / 2) + (this.rect.height / 2)) < 0) return this.computedSize / doubledSqrt2 * 0.75
       if ((window.innerHeight - this.rect.bottom - (this.computedSize / 2) + (this.rect.height / 2)) < 0) {
-        return -this.computedSize / doubledSqrt2
+        return -this.computedSize / doubledSqrt2 * 0.75
       }
       return 0
     },
@@ -122,17 +122,18 @@ export default mixins(
 
       if (this.leftShift > 0) {
         justify = 'flex-end'
-        paddingR = '10%'
+        paddingR = '15%'
       }
       if (this.leftShift < 0) {
         justify = 'flex-start'
-        paddingL = '10%'
+        paddingL = '15%'
       }
 
       return {
         'justify-content': justify,
         'padding-left': paddingL,
-        'padding-right': paddingR
+        'padding-right': paddingR,
+        'transform-origin': `calc(50% - ${this.leftShift}px) calc(50% - ${this.topShift}px)`
       }
     },
     contentStyle (): object {
