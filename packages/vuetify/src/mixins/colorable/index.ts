@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import { VNodeData } from 'vue/types/vnode'
+import { consoleError } from '../../util/console'
 
 function isCssColor (color?: string | false): boolean {
   return !!color && !!color.match(/^(#|(rgb|hsl)a?\()/)
@@ -14,6 +15,14 @@ export default Vue.extend({
 
   methods: {
     setBackgroundColor (color?: string | false, data: VNodeData = {}): VNodeData {
+      if (typeof data.style === 'string') {
+        consoleError('style must be an object', this)
+        return data
+      }
+      if (typeof data.class === 'string') {
+        consoleError('class must be an object', this)
+        return data
+      }
       if (isCssColor(color)) {
         data.style = {
           ...data.style,
@@ -31,6 +40,14 @@ export default Vue.extend({
     },
 
     setTextColor (color?: string | false, data: VNodeData = {}): VNodeData {
+      if (typeof data.style === 'string') {
+        consoleError('style must be an object', this)
+        return data
+      }
+      if (typeof data.class === 'string') {
+        consoleError('class must be an object', this)
+        return data
+      }
       if (isCssColor(color)) {
         data.style = {
           ...data.style,
