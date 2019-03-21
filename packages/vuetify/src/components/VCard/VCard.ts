@@ -24,6 +24,7 @@ export default mixins(
     flat: Boolean,
     hover: Boolean,
     img: String,
+    link: Boolean,
     outlined: Boolean,
     raised: Boolean
   },
@@ -34,10 +35,21 @@ export default mixins(
         'v-card': true,
         'v-card--flat': this.flat,
         'v-card--hover': this.hover,
+        'v-card--link': this.isLink,
         'v-card--outlined': this.outlined,
         'v-card--raised': this.raised,
         ...VSheet.options.computed.classes.call(this)
       }
+    },
+    isLink (): boolean {
+      const hasClick = this.$listeners && (this.$listeners.click || this.$listeners['!click'])
+
+      return Boolean(
+        this.href ||
+        this.to ||
+        this.link ||
+        hasClick
+      )
     },
     styles (): object {
       const style: Dictionary<string> = {
@@ -56,6 +68,11 @@ export default mixins(
     const { tag, data } = this.generateRouteLink(this.classes)
 
     data.style = this.styles
+
+    if (this.isLink) {
+      data.attrs = data.attrs || {}
+      data.attrs.tabindex = 0
+    }
 
     return h(tag, this.setBackgroundColor(this.color, data), this.$slots.default)
   }

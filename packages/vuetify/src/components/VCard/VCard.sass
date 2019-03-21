@@ -10,6 +10,7 @@
 // Block
 .v-card
   +elevation(2)
+  outline: none
   text-decoration: none
 
   > *:first-child:not(.v-btn):not(.v-chip)
@@ -57,6 +58,24 @@
 
   &:hover
     +elevation(8)
+
+.v-card--link
+  cursor: pointer
+
+  &:focus:before
+    opacity: 0.08
+
+  &:before
+    background: currentColor
+    bottom: 0
+    content: ''
+    left: 0
+    opacity: 0
+    position: absolute
+    right: 0
+    top: 0
+    transition: .2s opacity map-get($transition, 'fast-in-slow-out')
+
 
 .v-card--raised
   +elevation(8)
