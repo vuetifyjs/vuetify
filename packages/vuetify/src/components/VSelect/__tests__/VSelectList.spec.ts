@@ -1,19 +1,29 @@
+// Libraries
 import Vue from 'vue'
-import { test } from '@/test'
-import VSelectList from '@/components/VSelect/VSelectList'
-import {
-  VListTile,
-  VListTileTitle,
-  VListTileContent
-} from '@/components/VList'
 
-test('VSelectList', ({ mount }) => {
-  const app = document.createElement('div')
-  app.setAttribute('data-app', true)
-  document.body.appendChild(app)
+// Components
+import VSelectList from '../VSelectList'
+
+// Utilities
+import {
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+
+describe('.ts', () => {
+  type Instance = InstanceType<typeof VSelectList>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+
+  beforeEach(() => {
+    mountFunction = (options = {}) => {
+      return mount(VSelectList, {
+        ...options
+      })
+    }
+  })
 
   it('should generate a divider', () => {
-    const wrapper = mount(VSelectList)
+    const wrapper = mountFunction()
 
     const divider = wrapper.vm.genDivider({
       inset: true
@@ -23,6 +33,7 @@ test('VSelectList', ({ mount }) => {
   })
 
   // TODO: wat
+  // eslint-disable-next-line jest/no-disabled-tests
   it.skip('should generate a header', () => {
     const wrapper = mount(VSelectList)
 
@@ -34,19 +45,19 @@ test('VSelectList', ({ mount }) => {
     expect(divider.data.props.light).toBe(true)
 
     // Check that header exists
-    expect(divider.children.length).toBe(1)
+    expect(divider.children).toHaveLength(1)
     expect(divider.children[0].text).toBe('foobar')
   })
 
   it('should use no-data slot', () => {
-    const wrapper = mount(VSelectList, {
+    const wrapper = mountFunction({
       slots: {
         'no-data': [{
           render: h => h('div', 'foo')
         }]
       }
     })
-    expect(wrapper.vm.$slots['no-data'].length).toBe(1)
+    expect(wrapper.vm.$slots['no-data']).toHaveLength(1)
   })
 
   it('should display no-data-text when item slot is provided', async () => {
@@ -60,19 +71,19 @@ test('VSelectList', ({ mount }) => {
             noDataText: 'this is ok'
           },
           scopedSlots: {
-            item: itemSlot,
+            item: itemSlot
           }
         })
       }
     })
 
-    const wrapper = mount(component)
+    const wrapper = mountFunction()
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should generate children', () => {
-    const wrapper = mount(VSelectList, {
+    const wrapper = mountFunction({
       propsData: {
         items: [
           { header: true },
@@ -86,7 +97,7 @@ test('VSelectList', ({ mount }) => {
   })
 
   it('should return defined item value', async () => {
-    const wrapper = mount(VSelectList, {
+    const wrapper = mountFunction({
       propsData: {
         itemValue: 'foo'
       }
@@ -103,7 +114,7 @@ test('VSelectList', ({ mount }) => {
   })
 
   it('should hide selected items', async () => {
-    const wrapper = mount(VSelectList, {
+    const wrapper = mountFunction({
       propsData: {
         selectedItems: ['foo'],
         hideSelected: true,
@@ -111,18 +122,18 @@ test('VSelectList', ({ mount }) => {
       }
     })
 
-    expect(wrapper.find('.v-list-item').length).toBe(2)
+    expect(wrapper.findAll('.v-list-item')).toHaveLength(2)
 
     wrapper.setProps({ selectedItems: ['foo', 'bar'] })
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.find('.v-list-item').length).toBe(1)
+    expect(wrapper.findAll('.v-list-item')).toHaveLength(1)
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/4431
   it('should display falsy items', () => {
-    const wrapper = mount(VSelectList, {
+    const wrapper = mountFunction({
       propsData: {
         items: [0, null, false, undefined, '']
       }

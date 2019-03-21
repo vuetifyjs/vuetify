@@ -1,6 +1,5 @@
 <template>
   <v-menu
-    attach
     bottom
     left
     offset-y
@@ -22,7 +21,7 @@
     </template>
     <v-list
       dense
-      light
+      nav
     >
       <v-list-item
         v-for="language in languages"

@@ -1,21 +1,54 @@
+// Libraries
 import Vue from 'vue'
-import { test } from '@/test'
-import VSelect from '@/components/VSelect/VSelect'
+
+// Components
+// import { test } from '@/test'
+import VSelect from '../VSelect'
 import {
   VListTile,
   VListTileTitle,
   VListTileContent
-} from '@/components/VList'
-import VAutocomplete from '@/components/VAutocomplete'
+} from '../../VList'
 
-test('VSelect', ({ mount, compileToFunctions }) => {
-  const app = document.createElement('div')
-  app.setAttribute('data-app', true)
-  document.body.appendChild(app)
+// Utilities
+import {
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+import { rafPolyfill } from '../../../../test'
+
+describe('VSelect.ts', () => {
+  type Instance = InstanceType<typeof VSelect>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+  let el
+
+  rafPolyfill(window)
+
+  beforeEach(() => {
+    el = document.createElement('div')
+    el.setAttribute('data-app', 'true')
+    document.body.appendChild(el)
+    mountFunction = (options = {}) => {
+      let localVue: typeof Vue
+      return mount(VSelect, {
+        ...options,
+        mocks: {
+          $vuetify: {
+            lang: {
+              t: (val: string) => val
+            },
+            theme: {
+              dark: false
+            }
+          }
+        }
+      })
+    }
+  })
 
   it('should return numeric 0', async () => {
     const item = { value: 0, text: '0' }
-    const wrapper = mount(VSelect, {
+    const wrapper = mountFunction({
       propsData: {
         value: null,
         items: [item],
@@ -29,11 +62,11 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     await wrapper.vm.$nextTick()
 
-    expect(change).toBeCalledWith([0])
+    expect(change).toHaveBeenCalledWith([0])
   })
 
   it('should disable list items', () => {
-    const wrapper = mount(VSelect, {
+    const wrapper = mountFunction({
       propsData: {
         items: [{
           text: 'item',
@@ -42,7 +75,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const item = wrapper.first('.v-list-item--disabled')
+    const item = wrapper.find('.v-list-item--disabled')
 
     expect(item.element.getAttribute('disabled')).toBe('disabled')
   })
@@ -74,8 +107,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
         })
       }
     })
-
-    const wrapper = mount(component)
+    const wrapper = mountFunction(component)
 
     wrapper.vm.$children[0].inputValue = items[0]
 
@@ -107,7 +139,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const wrapper = mount(component)
+    const wrapper = mountFunction(component)
 
     wrapper.vm.$children[0].inputValue = items[0]
 
@@ -127,7 +159,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const wrapper = mount(component)
+    const wrapper = mountFunction(component)
 
     wrapper.vm.$children[0].inputValue = items[0]
 
@@ -137,7 +169,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
   })
 
   it('should not close menu when using multiple prop', async () => {
-    const wrapper = mount(VSelect, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
         items: [1, 2, 3, 4],
@@ -148,7 +180,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     const blur = jest.fn()
     wrapper.vm.$on('blur', blur)
 
-    const menu = wrapper.first('.v-input__slot')
+    const menu = wrapper.find('.v-input__slot')
 
     menu.trigger('click')
 
@@ -157,7 +189,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.isFocused).toBe(true)
     expect(wrapper.vm.isMenuActive).toBe(true)
 
-    const item = wrapper.find('.v-list-item')[0]
+    const item = wrapper.find('.v-list-item')
     item.trigger('click')
 
     await wrapper.vm.$nextTick()
@@ -166,19 +198,21 @@ test('VSelect', ({ mount, compileToFunctions }) => {
   })
 
   it('should render aria-hidden=true on arrow icon', async () => {
-    const wrapper = mount(VSelect)
+    const wrapper = mountFunction()
 
-    const icon = wrapper.first('.v-icon')
-    expect(icon.hasAttribute('aria-hidden')).toBe(true)
+    const icon = wrapper.find('.v-icon')
+    expect(icon.attributes('aria-hidden')).toBe('true')
   })
 
   it('should only show items if they are in items', async () => {
-    const wrapper = mount(VSelect, {
+    const wrapper = mountFunction({
       propsData: {
         value: 'foo',
         items: ['foo']
       }
     })
+
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.internalValue).toEqual('foo')
     expect(wrapper.vm.selectedItems).toEqual(['foo'])
@@ -200,7 +234,10 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.selectedItems).toEqual(['bar'])
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.setProps({ value: ['foo', 'bar'], multiple: true })
+    wrapper.setProps({ multiple: true })
+    await wrapper.vm.$nextTick()
+
+    wrapper.setProps({ value: ['foo', 'bar'] })
 
     await wrapper.vm.$nextTick()
 
@@ -210,7 +247,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
   })
 
   it('should update the displayed value when items changes', async () => {
-    const wrapper = mount(VSelect, {
+    const wrapper = mountFunction({
       propsData: {
         value: 1,
         items: []
@@ -224,19 +261,19 @@ test('VSelect', ({ mount, compileToFunctions }) => {
   it('should render select menu with content class', async () => {
     const items = ['abc']
 
-    const wrapper = mount(VSelect, {
+    const wrapper = mountFunction({
       propsData: {
         menuProps: { contentClass: 'v-menu-class' },
         items
       }
     })
 
-    const menu = wrapper.find('.v-menu__content')[0]
+    const menu = wrapper.find('.v-menu__content')
     expect(menu.element.classList).toContain('v-menu-class')
   })
 
   it('should have deletable chips', async () => {
-    const wrapper = mount(VSelect, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
         chips: true,
@@ -247,31 +284,31 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     })
 
     await wrapper.vm.$nextTick()
-    const chip = wrapper.first('.v-chip')
+    const chip = wrapper.find('.v-chip')
 
     expect(!!chip).toBe(true)
   })
 
   it('should escape items in menu', async () => {
-    const wrapper = mount(VSelect, {
+    const wrapper = mountFunction({
       propsData: {
         items: ['<strong>foo</strong>']
       }
     })
 
-    const tileTitle = wrapper.find('.v-list-item__title')[0]
+    const tileTitle = wrapper.find('.v-list-item__title')
     expect(tileTitle.html()).toMatchSnapshot()
   })
 
   it('should use value comparator', async () => {
-    const wrapper = mount(VSelect, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
         multiple: true,
         items: [
-          {text: 'one', value: 1},
-          {text: 'two', value: 2},
-          {text: 'three', value: 3}
+          { text: 'one', value: 1 },
+          { text: 'two', value: 2 },
+          { text: 'three', value: 3 }
         ],
         itemText: 'text',
         itemValue: 'value',
@@ -285,7 +322,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
   })
 
   it('should not open if readonly', async () => {
-    const wrapper = mount(VSelect, {
+    const wrapper = mountFunction({
       propsData: {
         readonly: true,
         items: ['foo', 'bar']
@@ -296,84 +333,84 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.isMenuActive).toBe(false)
 
-    wrapper.first('.v-input__append-inner').trigger('click')
+    wrapper.find('.v-input__append-inner').trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.isMenuActive).toBe(false)
   })
 
   it('can use itemValue as function', async () => {
-    const wrapper = mount(VSelect, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
         multiple: true,
         items: [
-          {text: 'one', v1: "prop v1"},
-          {text: 'two', v2: "prop v2"},
-          {text: 'three', v1: "also prop v1"}
+          { text: 'one', v1: 'prop v1' },
+          { text: 'two', v2: 'prop v2' },
+          { text: 'three', v1: 'also prop v1' }
         ],
         itemText: 'text',
         itemValue: item => item.hasOwnProperty('v1') ? item.v1 : item.v2,
-        value: ["prop v1", "prop v2"]
+        value: ['prop v1', 'prop v2']
       }
     })
 
     expect(wrapper.vm.selectedItems).toHaveLength(2)
-    expect(wrapper.vm.getValue(wrapper.vm.selectedItems[0])).toBe("prop v1")
-    expect(wrapper.vm.getValue(wrapper.vm.selectedItems[1])).toBe("prop v2")
+    expect(wrapper.vm.getValue(wrapper.vm.selectedItems[0])).toBe('prop v1')
+    expect(wrapper.vm.getValue(wrapper.vm.selectedItems[1])).toBe('prop v2')
   })
 
   it('should work correctly with return-object', async () => {
-    const wrapper = mount(VSelect, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
         multiple: false,
         returnObject: true,
         items: [
-          {text: 'one', value: {x: [1, 2], y: ["a", "b"]}},
-          {text: 'two', value: {x: [3, 4], y: ["a", "b"]}},
-          {text: 'three', value: {x: [1, 2], y: ["a", "c"]}}
+          { text: 'one', value: { x: [1, 2], y: ['a', 'b'] } },
+          { text: 'two', value: { x: [3, 4], y: ['a', 'b'] } },
+          { text: 'three', value: { x: [1, 2], y: ['a', 'c'] } }
         ],
         itemText: 'text',
         itemValue: 'value',
-        value: {text: 'two', value: {x: [3, 4], y: ["a", "b"]}}
+        value: { text: 'two', value: { x: [3, 4], y: ['a', 'b'] } }
       }
     })
 
     expect(wrapper.vm.selectedItems).toHaveLength(1)
-    expect(wrapper.vm.internalValue).toEqual({text: 'two', value: {x: [3, 4], y: ["a", "b"]}})
+    expect(wrapper.vm.internalValue).toEqual({ text: 'two', value: { x: [3, 4], y: ['a', 'b'] } })
   })
 
   it('should work correctly with return-object [multiple]', async () => {
-    const wrapper = mount(VSelect, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
         multiple: true,
         returnObject: true,
         items: [
-          {text: 'one', value: {x: [1, 2], y: ["a", "b"]}},
-          {text: 'two', value: {x: [3, 4], y: ["a", "b"]}},
-          {text: 'three', value: {x: [1, 2], y: ["a", "c"]}}
+          { text: 'one', value: { x: [1, 2], y: ['a', 'b'] } },
+          { text: 'two', value: { x: [3, 4], y: ['a', 'b'] } },
+          { text: 'three', value: { x: [1, 2], y: ['a', 'c'] } }
         ],
         itemText: 'text',
         itemValue: 'value',
         value: [
-          {text: 'two', value: {x: [3, 4], y: ["a", "b"]}},
-          {text: 'one', value: {x: [1, 2], y: ["a", "b"]}}
+          { text: 'two', value: { x: [3, 4], y: ['a', 'b'] } },
+          { text: 'one', value: { x: [1, 2], y: ['a', 'b'] } }
         ]
       }
     })
 
     expect(wrapper.vm.selectedItems).toHaveLength(2)
-    expect(wrapper.vm.internalValue[0]).toEqual({text: 'two', value: {x: [3, 4], y: ["a", "b"]}})
-    expect(wrapper.vm.internalValue[1]).toEqual({text: 'one', value: {x: [1, 2], y: ["a", "b"]}})
+    expect(wrapper.vm.internalValue[0]).toEqual({ text: 'two', value: { x: [3, 4], y: ['a', 'b'] } })
+    expect(wrapper.vm.internalValue[1]).toEqual({ text: 'one', value: { x: [1, 2], y: ['a', 'b'] } })
   })
 
   it('should provide the correct default value', () => {
-    const wrapper = mount(VSelect)
+    const wrapper = mountFunction()
 
-    expect(wrapper.vm.internalValue).toBe(undefined)
+    expect(wrapper.vm.internalValue).toBeUndefined()
 
-    const wrapper2 = mount(VSelect, {
+    const wrapper2 = mountFunction({
       propsData: { multiple: true }
     })
 
@@ -381,7 +418,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
   })
 
   it('should use slotted no-data', () => {
-    const wrapper = mount(VSelect, {
+    const wrapper = mountFunction({
       propsData: {
         items: ['foo']
       },
@@ -392,169 +429,9 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const list = wrapper.first('.v-list')
+    const list = wrapper.find('.v-list')
 
     expect(wrapper.vm.$slots['no-data']).toBeTruthy()
     expect(list.html()).toMatchSnapshot()
-  })
-
-  it('should use slotted prepend-item', () => {
-    const wrapper = mount(VSelect, {
-      propsData: {
-        items: ['foo']
-      },
-      slots: {
-        'prepend-item': [{
-          render: h => h('div', 'foo')
-        }]
-      }
-    })
-
-    const list = wrapper.first('.v-list')
-
-    expect(wrapper.vm.$slots['prepend-item']).toBeTruthy()
-    expect(list.html()).toMatchSnapshot()
-  })
-
-  it('should use slotted append-item', () => {
-    const wrapper = mount(VSelect, {
-      propsData: {
-        items: ['foo']
-      },
-      slots: {
-        'append-item': [{
-          render: h => h('div', 'foo')
-        }]
-      }
-    })
-
-    const list = wrapper.first('.v-list')
-
-    expect(wrapper.vm.$slots['append-item']).toBeTruthy()
-    expect(list.html()).toMatchSnapshot()
-  })
-
-  it('should use scoped slot for selection generation', () => {
-    const wrapper = mount({
-      render (h) {
-        return h(VSelect, {
-          attrs: {
-            items: ['foo', 'bar'],
-            value: 'foo'
-          },
-          scopedSlots: {
-            selection: ({ item }) => {
-              return h('div', item + ' - from slot')
-            }
-          }
-        })
-      }
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should toggle menu on icon click', async () => {
-    const wrapper = mount(VSelect, {
-      propsData: {
-        items: ['foo', 'bar'],
-        offsetY: true
-      }
-    })
-
-    const icon = wrapper.first('.v-icon')
-    const slot = wrapper.first('.v-input__slot')
-
-    expect(wrapper.vm.isMenuActive).toBe(false)
-
-    slot.trigger('click')
-    expect(wrapper.vm.isMenuActive).toBe(true)
-
-    slot.trigger('click')
-    expect(wrapper.vm.isMenuActive).toBe(true)
-
-    // Mock mouseup event with a target of
-    // the inner icon element
-    const event = new Event('mouseup')
-    Object.defineProperty(event, 'target', { writable: false, value: icon.element })
-
-    wrapper.vm.hasMouseDown = true
-    slot.element.dispatchEvent(event)
-
-    await wrapper.vm.$nextTick()
-    expect(wrapper.vm.isMenuActive).toBe(false)
-  })
-
-  it('should calculate the counter value', async () => {
-    const wrapper = mount(VSelect, {
-      propsData: {
-        items: ['foo'],
-        value: 'foo'
-      }
-    })
-
-    expect(wrapper.vm.counterValue).toBe(3)
-
-    wrapper.setProps({
-      items: [{
-        text: 'foobarbaz',
-        value: 'foo'
-      }]
-    })
-    await wrapper.vm.$nextTick()
-    expect(wrapper.vm.counterValue).toBe(9)
-
-    wrapper.setProps({
-      items: ['foo', 'bar', 'baz'],
-      multiple: true,
-      value: ['foo', 'bar']
-    })
-    await wrapper.vm.$nextTick()
-    expect(wrapper.vm.counterValue).toBe(2)
-  })
-
-  it('should emit a single change event', async () => {
-    const wrapper = mount(VSelect, {
-      attachToDocument: true,
-      propsData: {
-        attach: true,
-        items: ['foo', 'bar']
-      }
-    })
-
-    const change = jest.fn()
-    wrapper.vm.$on('change', change)
-
-    const menu = wrapper.first('.v-input__slot')
-
-    menu.trigger('click')
-    await wrapper.vm.$nextTick()
-
-    wrapper.vm.selectItem('foo')
-    await wrapper.vm.$nextTick()
-
-    wrapper.vm.blur()
-    await wrapper.vm.$nextTick()
-
-    expect(change.mock.calls).toEqual([['foo']])
-  })
-
-  it('should not emit change event when clicked on the selected item', async () => {
-    const wrapper = mount(VSelect, {
-      propsData: {
-        items: ['foo', 'bar']
-      }
-    })
-
-    const change = jest.fn()
-    wrapper.vm.$on('change', change)
-
-    wrapper.vm.selectItem('foo')
-    await wrapper.vm.$nextTick()
-
-    wrapper.vm.selectItem('foo')
-    await wrapper.vm.$nextTick()
-
-    expect(change.mock.calls.length).toBe(1);
   })
 })

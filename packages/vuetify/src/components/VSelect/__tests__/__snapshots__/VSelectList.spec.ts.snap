@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VSelectList should display falsy items 1`] = `
+exports[`.ts should display falsy items 1`] = `
 
 <div class="v-select-list v-card theme--light">
   <div role="list"
-       class="v-list theme--light"
+       class="v-list v-sheet v-sheet--tile theme--light"
   >
     <div aria-selected="false"
          role="listitem"
@@ -65,11 +65,11 @@ exports[`VSelectList should display falsy items 1`] = `
 
 `;
 
-exports[`VSelectList should display no-data-text when item slot is provided 1`] = `
+exports[`.ts should display no-data-text when item slot is provided 1`] = `
 
 <div class="v-select-list v-card theme--light">
   <div role="list"
-       class="v-list theme--light"
+       class="v-list v-sheet v-sheet--tile theme--light"
   >
     <div aria-selected="false"
          role="listitem"
@@ -78,7 +78,7 @@ exports[`VSelectList should display no-data-text when item slot is provided 1`] 
     >
       <div class="v-list-item__content">
         <div class="v-list-item__title">
-          this is ok
+          undefined
         </div>
       </div>
     </div>
@@ -87,11 +87,11 @@ exports[`VSelectList should display no-data-text when item slot is provided 1`] 
 
 `;
 
-exports[`VSelectList should generate children 1`] = `
+exports[`.ts should generate children 1`] = `
 
 <div class="v-select-list v-card theme--light">
   <div role="list"
-       class="v-list theme--light"
+       class="v-list v-sheet v-sheet--tile theme--light"
   >
     <div class="v-subheader theme--light">
       true

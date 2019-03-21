@@ -257,7 +257,12 @@ export default baseMixins.extend<options>().extend({
       immediate: true,
       handler (val) {
         if (this.cacheItems) {
-          this.cachedItems = this.filterDuplicates(this.cachedItems.concat(val))
+          // Breaks vue-test-utils if
+          // this isn't calculated
+          // on the next tick
+          this.$nextTick(() => {
+            this.cachedItems = this.filterDuplicates(this.cachedItems.concat(val))
+          })
         }
 
         this.setSelectedItems()
