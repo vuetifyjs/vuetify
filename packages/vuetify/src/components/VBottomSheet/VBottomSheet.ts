@@ -1,48 +1,31 @@
 import '../../stylus/components/_bottom-sheets.styl'
 
+// Extensions
 import VDialog from '../VDialog/VDialog'
 
 /* @vue/component */
-export default {
+export default VDialog.extend({
   name: 'v-bottom-sheet',
 
   props: {
-    disabled: Boolean,
-    fullWidth: Boolean,
-    hideOverlay: Boolean,
     inset: Boolean,
-    eager: Boolean,
     maxWidth: {
       type: [String, Number],
       default: 'auto'
     },
-    persistent: Boolean,
-    value: null
+    transition: {
+      type: String,
+      default: 'bottom-sheet-transition'
+    }
   },
 
-  render (h) {
-    const activator = h('template', {
-      slot: 'activator'
-    }, this.$slots.activator)
-
-    const contentClass = [
-      'v-bottom-sheet',
-      this.inset ? 'v-bottom-sheet--inset' : ''
-    ].join(' ')
-
-    return h(VDialog, {
-      attrs: {
-        ...this.$props
-      },
-      on: {
-        ...this.$listeners
-      },
-      props: {
-        contentClass,
-        noClickAnimation: true,
-        transition: 'bottom-sheet-transition',
-        value: this.value
+  computed: {
+    classes (): object {
+      return {
+        ...VDialog.options.computed.classes.call(this),
+        'v-bottom-sheet': true,
+        'v-bottom-sheet--inset': this.inset
       }
-    }, [activator, this.$slots.default])
+    }
   }
-}
+})
