@@ -12,6 +12,8 @@
   +elevation(2)
   outline: none
   text-decoration: none
+  transition-property: box-shadow, opacity
+  will-change: box-shadow, opacity
 
   > *:first-child:not(.v-btn):not(.v-chip)
     border-top-left-radius: inherit
@@ -22,6 +24,16 @@
     border-bottom-right-radius: inherit
 
 // Element
+.v-card__progress
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  overflow: hidden
+
+  > .v-progress-linear
+    margin: 0
+
 .v-card__title
   align-items: center
   display: flex
@@ -75,6 +87,11 @@
     right: 0
     top: 0
     transition: .2s opacity map-get($transition, 'fast-in-slow-out')
+
+.v-card--disabled
+  opacity: 0.6
+  pointer-events: none
+  user-select: none
 
 .v-card--outlined
   box-shadow: none
