@@ -12,7 +12,7 @@
   },
   "components": [ "$vuetify" ],
   "routerHeading": "## Using with router",
-  "routerText1": "The **goTo** function can be individually imported and invoked anywhere. This is particularly useful when hooking up toe [vue-router](https://router.vuejs.org/).",
+  "routerText1": "The **goTo** function can be individually imported and invoked anywhere. This is particularly useful when hooking up to [vue-router](https://router.vuejs.org/).",
   "functions": {
     "goTo": "Scroll to target location, using provided options"
   }
