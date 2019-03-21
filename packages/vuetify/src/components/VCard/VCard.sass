@@ -38,10 +38,16 @@
   align-items: center
   display: flex
   flex-wrap: wrap
+  font-size: map-deep-get($headings, 'h5', 'size')
+  font-weight: map-deep-get($headings, 'h5', 'weight')
+  letter-spacing: map-deep-get($headings, 'h5', 'letter-spacing')
+  line-height: map-deep-get($headings, 'h5', 'line-height')
   padding: 16px
 
 .v-card__text
   font-size: map-deep-get($headings, 'subtitle-2', 'size')
+  line-height: map-deep-get($headings, 'subtitle-2', 'line-height')
+  letter-spacing: map-deep-get($headings, 'subtitle-2', 'letter-spacing')
   padding: 16px
   width: 100%
 
