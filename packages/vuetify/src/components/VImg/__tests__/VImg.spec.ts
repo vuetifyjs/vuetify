@@ -1,13 +1,34 @@
-import { test } from '@/test'
-import VImg from '@/components/VImg'
+// Components
+import VImg from '../VImg'
 
-test('VImg', ({ mount }) => {
+// Utilities
+import {
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
+
+describe('VImg.ts', () => {
+  type Instance = InstanceType<typeof VImg>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+
+  beforeEach(() => {
+    mountFunction = (options = {}) => {
+      return mount(VImg, {
+        ...options
+      })
+    }
+  })
+
+  toHaveBeenWarnedInit()
+
   const LOAD_FAILURE_SRC = 'LOAD_FAILURE_SRC'
   const LOAD_SUCCESS_SRC = 'LOAD_SUCCESS_SRC'
 
   beforeAll(() => {
     jest.useFakeTimers()
-    Object.defineProperty(global.Image.prototype, 'src', {
+    Object.defineProperty((global as any).Image.prototype, 'src', {
+      get () {},
       set (src) {
         this._currentSrc = src
         if (src === LOAD_FAILURE_SRC) {
@@ -21,15 +42,15 @@ test('VImg', ({ mount }) => {
         }
       }
     })
-    Object.defineProperty(global.Image.prototype, 'currentSrc', {
+    Object.defineProperty((global as any).Image.prototype, 'currentSrc', {
       get () {
         return this._currentSrc
       }
     })
-    Object.defineProperty(global.Image.prototype, 'naturalWidth', {
+    Object.defineProperty((global as any).Image.prototype, 'naturalWidth', {
       get () { return this._naturalWidth }
     })
-    Object.defineProperty(global.Image.prototype, 'naturalHeight', {
+    Object.defineProperty((global as any).Image.prototype, 'naturalHeight', {
       get () { return this._naturalHeight }
     })
   })
@@ -39,7 +60,7 @@ test('VImg', ({ mount }) => {
   })
 
   it('should load', async () => {
-    const wrapper = mount(VImg, {
+    const wrapper = mountFunction({
       propsData: { src: LOAD_SUCCESS_SRC }
     })
 
@@ -52,13 +73,13 @@ test('VImg', ({ mount }) => {
   })
 
   it('should display placeholders', async () => {
-    const wrapper = mount(VImg, {
+    const wrapper = mountFunction({
       propsData: {
         src: 'full_src',
         lazySrc: 'lazy_src'
       },
       slots: {
-        placeholder: { render: h => h('div', ['loading...'])}
+        placeholder: { render: h => h('div', ['loading...']) }
       }
     })
 
@@ -71,7 +92,7 @@ test('VImg', ({ mount }) => {
   })
 
   it('should emit errors', () => {
-    const wrapper = mount(VImg, {
+    const wrapper = mountFunction({
       propsData: { src: LOAD_FAILURE_SRC }
     })
 
@@ -86,7 +107,7 @@ test('VImg', ({ mount }) => {
   })
 
   it('should have aria attributes', async () => {
-    const wrapper = mount(VImg, {
+    const wrapper = mountFunction({
       propsData: {
         src: LOAD_SUCCESS_SRC,
         alt: 'this is not a decorative image'
@@ -100,7 +121,7 @@ test('VImg', ({ mount }) => {
   })
 
   it('should use vuetify-loader data', async () => {
-    const wrapper = mount(VImg, {
+    const wrapper = mountFunction({
       propsData: {
         src: {
           src: LOAD_SUCCESS_SRC,
@@ -116,7 +137,7 @@ test('VImg', ({ mount }) => {
   })
 
   it('should override vuetify-loader values', async () => {
-    const wrapper = mount(VImg, {
+    const wrapper = mountFunction({
       propsData: {
         src: {
           src: LOAD_SUCCESS_SRC,
@@ -134,7 +155,7 @@ test('VImg', ({ mount }) => {
   })
 
   it('should update src', async () => {
-    const wrapper = mount(VImg, {
+    const wrapper = mountFunction({
       propsData: {
         src: LOAD_SUCCESS_SRC
       }
@@ -154,7 +175,7 @@ test('VImg', ({ mount }) => {
   })
 
   it('should update src while still loading', async () => {
-    const wrapper = mount(VImg, {
+    const wrapper = mountFunction({
       propsData: {
         src: LOAD_SUCCESS_SRC
       }
