@@ -69,9 +69,12 @@
   .v-feature-discovery__highlight
     transform: scale(1)
 
-.v-feature-discovery--active
-  .v-feature-discovery__highlight:not(.v-feature-discovery__highlight--no-ripple)
+.v-feature-discovery--active:not(.v-feature-discovery--no-ripple)
+  .v-feature-discovery__highlight
     animation: highlight-pulse-animation 1.4s cubic-bezier(0.24, 0, 0.38, 1) infinite
+
+.v-feature-discovery:not(.v-feature-discovery--active)
+  pointer-events: none
 
 .v-feature-discovery--flat .v-feature-discovery__backdrop
   +elevation(0)
