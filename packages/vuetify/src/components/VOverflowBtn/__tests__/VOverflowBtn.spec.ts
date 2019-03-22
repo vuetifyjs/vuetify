@@ -40,7 +40,7 @@ describe('VOverflowBtn.js', () => {
 
   it('segmented - should warn when item has no callback', async () => {
     const items = [
-      { text: 'Hello', callback: () => { } },
+      { text: 'Hello' },
       { text: 'Hello' }
     ]
 
@@ -50,6 +50,8 @@ describe('VOverflowBtn.js', () => {
         items
       }
     })
+
+    await wrapper.vm.$nextTick()
 
     // The error only happens
     // when generating the button
