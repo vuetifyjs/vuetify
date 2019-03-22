@@ -1,19 +1,50 @@
-import { test } from '@/test'
-import VOverflowBtn from '@/components/VOverflowBtn'
+// Components
+import VOverflowBtn from '../VOverflowBtn'
 
-test('VOverflowBtn', ({ mount }) => {
-  const el = document.createElement('div')
-  el.setAttribute('data-app', true)
-  document.body.appendChild(el)
+// Utilities
+import {
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+import { ExtractVue } from '../../../util/mixins'
+import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
+
+describe('VOverflowBtn.js', () => {
+  type Instance = ExtractVue<typeof VOverflowBtn>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+
+  beforeEach(() => {
+    mountFunction = (options = {}) => {
+      return mount(VOverflowBtn, {
+        ...options,
+        mocks: {
+          $vuetify: {
+            lang: {
+              t: (val: string) => val
+            },
+            theme: {
+              dark: false
+            }
+          }
+        }
+      })
+    }
+
+    const el = document.createElement('div')
+    el.setAttribute('data-app', 'true')
+    document.body.appendChild(el)
+  })
+
+  toHaveBeenWarnedInit()
   const warning = 'items must contain both a text and callback property'
 
   it('segmented - should warn when item has no callback', async () => {
     const items = [
-      { text: 'Hello', callback: () => {} },
+      { text: 'Hello', callback: () => { } },
       { text: 'Hello' }
     ]
 
-    const wrapper = mount(VOverflowBtn, {
+    const wrapper = mountFunction({
       propsData: {
         segmented: true,
         items
@@ -35,7 +66,7 @@ test('VOverflowBtn', ({ mount }) => {
   })
 
   it('should use default autocomplete selections', async () => {
-    const wrapper = mount(VOverflowBtn, {
+    const wrapper = mountFunction({
       propsData: {
         items: ['foo'],
         multiple: true,
@@ -46,7 +77,7 @@ test('VOverflowBtn', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({
-      items: [{ text: 'foo', value: 'foo', callback: () => {} }],
+      items: [{ text: 'foo', value: 'foo', callback: () => { } }],
       multiple: false,
       segmented: true,
       value: 'foo'
@@ -61,7 +92,7 @@ test('VOverflowBtn', ({ mount }) => {
 
   it('should invoke item callback', () => {
     const callback = jest.fn()
-    const wrapper = mount(VOverflowBtn, {
+    const wrapper = mountFunction({
       propsData: {
         items: [{
           text: 'foo',
@@ -77,6 +108,6 @@ test('VOverflowBtn', ({ mount }) => {
 
     btn.trigger('click')
 
-    expect(callback).toBeCalled()
+    expect(callback).toHaveBeenCalled()
   })
 })
