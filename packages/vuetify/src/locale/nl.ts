@@ -1,4 +1,10 @@
 export default {
+  info: {
+    iso: 'nl',
+    iso_639_2_B: 'dut',
+    name: 'Dutch',
+    native: 'Nederlands'
+  },
   dataIterator: {
     rowsPerPageText: 'Aantal per pagina:',
     rowsPerPageAll: 'Alles',

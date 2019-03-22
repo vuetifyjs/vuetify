@@ -1,4 +1,10 @@
 export default {
+  info: {
+    iso: 'de',
+    iso_639_2_B: 'ger',
+    name: 'German',
+    native: 'Deutsch'
+  },
   dataIterator: {
     rowsPerPageText: 'Elemente pro Seite:',
     rowsPerPageAll: 'Alle',

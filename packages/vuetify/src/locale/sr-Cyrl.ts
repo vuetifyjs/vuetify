@@ -1,4 +1,10 @@
 export default {
+  info: {
+    iso: 'sr-Cyrl',
+    iso_639_2_B: '',
+    name: 'Serbian Cyrillic',
+    native: 'Српски'
+  },
   dataIterator: {
     rowsPerPageText: 'Ставки по страници:',
     rowsPerPageAll: 'Све',

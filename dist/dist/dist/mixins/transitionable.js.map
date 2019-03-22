@@ -1,0 +1,1 @@
+{"version":3,"file":"transitionable.js","sourceRoot":"","sources":["../../mixins/transitionable.js"],"names":[],"mappings":"AAAA,OAAO,GAAG,MAAM,KAAK,CAAC;AACtB,eAAe,GAAG,CAAC,MAAM,CAAC;IACtB,IAAI,EAAE,gBAAgB;IACtB,KAAK,EAAE;QACH,IAAI,EAAE,MAAM;QACZ,MAAM,EAAE,MAAM;QACd,UAAU,EAAE,MAAM;KACrB;CACJ,CAAC,CAAC;AACH,0CAA0C;AAC1C,0CAA0C"}

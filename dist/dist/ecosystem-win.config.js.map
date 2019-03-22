@@ -1,0 +1,1 @@
+{"version":3,"file":"ecosystem-win.config.js","sourceRoot":"","sources":["../ecosystem-win.config.js"],"names":[],"mappings":"AAAA,YAAY,CAAC;AACb,mBAAmB;AACnB,+DAA+D;AAC/D,MAAM,CAAC,OAAO,GAAG;IACb,IAAI,EAAE;QACF;YACI,IAAI,EAAE,cAAc;YACpB,MAAM,EAAE,WAAW;YACnB,GAAG,EAAE,kBAAkB;SAC1B;KACJ;CACJ,CAAC"}

@@ -1,4 +1,10 @@
 export default {
+  info: {
+    iso: 'pl',
+    iso_639_2_B: 'pol',
+    name: 'Polish',
+    native: 'Język polski'
+  },
   dataIterator: {
     rowsPerPageText: 'Pozycji na stronie:',
     rowsPerPageAll: 'Wszystkie',

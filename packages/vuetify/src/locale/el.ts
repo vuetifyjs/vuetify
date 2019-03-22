@@ -1,4 +1,10 @@
 export default {
+  info: {
+    iso: 'el',
+    iso_639_2_B: 'gre',
+    name: 'Greek',
+    native: 'ελληνικά'
+  },
   dataIterator: {
     rowsPerPageText: 'Αντικείμενα ανά σελίδα:',
     rowsPerPageAll: 'Όλα',

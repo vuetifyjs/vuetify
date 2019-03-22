@@ -1,4 +1,10 @@
 export default {
+  info: {
+    iso: 'ca',
+    iso_639_2_B: 'cat',
+    name: 'Catalan',
+    native: 'Català'
+  },
   dataIterator: {
     rowsPerPageText: 'Elements per pàgina:',
     rowsPerPageAll: 'Tot',

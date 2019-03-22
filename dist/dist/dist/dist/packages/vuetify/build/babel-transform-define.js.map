@@ -1,0 +1,1 @@
+{"version":3,"file":"babel-transform-define.js","sourceRoot":"","sources":["../../../../packages/vuetify/build/babel-transform-define.js"],"names":[],"mappings":"AAAA,YAAY,CAAC;AACb,IAAI,cAAc,GAAG,OAAO,CAAC,iBAAiB,CAAC,CAAC;AAChD,MAAM,CAAC,OAAO,GAAG;IACb,mBAAmB,EAAE,cAAc,CAAC,OAAO;IAC3C,gBAAgB,EAAE,cAAc,CAAC,gBAAgB,CAAC,GAAG;CACxD,CAAC"}

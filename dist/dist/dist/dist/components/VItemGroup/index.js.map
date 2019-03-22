@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../components/VItemGroup/index.js"],"names":[],"mappings":"AAAA,OAAO,KAAK,MAAM,SAAS,CAAC;AAC5B,OAAO,UAAU,MAAM,cAAc,CAAC;AACtC,OAAO,EAAE,KAAK,EAAE,UAAU,EAAE,CAAC;AAC7B,eAAe;IACX,uBAAuB,EAAE;QACrB,KAAK,EAAE,KAAK;QACZ,UAAU,EAAE,UAAU;KACzB;CACJ,CAAC;AACF,iCAAiC;AACjC,iCAAiC;AACjC,iCAAiC"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../packages/vuetify/src/components/VExpansionPanel/index.ts"],"names":[],"mappings":"AAAA,OAAO,eAAe,MAAM,mBAAmB,CAAA;AAC/C,OAAO,sBAAsB,MAAM,0BAA0B,CAAA;AAE7D,OAAO,EAAE,eAAe,EAAE,sBAAsB,EAAE,CAAA;AAElD,eAAe;IACb,uBAAuB,EAAE;QACvB,eAAe,iBAAA;QACf,sBAAsB,wBAAA;KACvB;CACF,CAAA"}

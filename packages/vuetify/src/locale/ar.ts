@@ -1,4 +1,10 @@
 export default {
+  info: {
+    iso: 'ar',
+    iso_639_2_B: 'ara',
+    name: 'Arabic',
+    native: 'العربية'
+  },
   dataIterator: {
     rowsPerPageText: 'العناصر لكل صفحة:',
     rowsPerPageAll: 'الكل',

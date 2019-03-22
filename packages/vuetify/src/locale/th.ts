@@ -1,4 +1,10 @@
 export default {
+  info: {
+    iso: 'th',
+    iso_639_2_B: 'tha',
+    name: 'Thai',
+    native: 'ไทย'
+  },
   dataIterator: {
     rowsPerPageText: 'รายการต่อหน้า:',
     rowsPerPageAll: 'ทั้งหมด',

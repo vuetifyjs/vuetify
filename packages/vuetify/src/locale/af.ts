@@ -1,4 +1,10 @@
 export default {
+  info: {
+    iso: 'af',
+    iso_639_2_B: 'afr',
+    name: 'Afrikaans',
+    native: 'Afrikaans'
+  },
   dataIterator: {
     rowsPerPageText: 'Aantal per bladsy:',
     rowsPerPageAll: 'Alles',

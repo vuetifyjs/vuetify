@@ -1,4 +1,10 @@
 export default {
+   info: {
+    iso: 'tr',
+    iso_639_2_B: 'tur',
+    name: 'Turkish',
+    native: 'Türkçe'
+  },
   dataIterator: {
     rowsPerPageText: 'Sayfa başına satır:',
     rowsPerPageAll: 'Hepsi',

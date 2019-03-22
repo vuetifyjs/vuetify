@@ -1,4 +1,10 @@
 export default {
+  info: {
+    iso: 'hr',
+    iso_639_2_B: 'hrv',
+    name: 'Croatian',
+    native: 'Hrvatski jezik'
+  },
   dataIterator: {
     rowsPerPageText: 'Stavaka po stranici:',
     rowsPerPageAll: 'Svi',

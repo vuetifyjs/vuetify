@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../packages/vuetify/src/components/VTreeview/index.js"],"names":[],"mappings":"AAAA,OAAO,SAAS,MAAM,aAAa,CAAC;AACpC,OAAO,aAAa,MAAM,iBAAiB,CAAC;AAC5C,OAAO,EAAE,SAAS,EAAE,aAAa,EAAE,CAAC;AACpC,eAAe;IACX,uBAAuB,EAAE;QACrB,SAAS,EAAE,SAAS;QACpB,aAAa,EAAE,aAAa;KAC/B;CACJ,CAAC;AACF,iCAAiC;AACjC,iCAAiC"}

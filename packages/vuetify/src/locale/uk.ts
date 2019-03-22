@@ -1,4 +1,10 @@
 export default {
+  info: {
+    iso: 'uk',
+    iso_639_2_B: 'ukr',
+    name: 'Ukrainian',
+    native: 'Українська'
+  },
   dataIterator: {
     rowsPerPageText: 'Елементів на сторінці:',
     rowsPerPageAll: 'Всі',

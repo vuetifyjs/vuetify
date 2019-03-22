@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../packages/vuetify/src/components/VWindow/index.ts"],"names":[],"mappings":"AAAA,OAAO,OAAO,MAAM,WAAW,CAAA;AAC/B,OAAO,WAAW,MAAM,eAAe,CAAA;AAEvC,OAAO,EAAE,OAAO,EAAE,WAAW,EAAE,CAAA;AAE/B,eAAe;IACb,uBAAuB,EAAE;QACvB,OAAO,SAAA;QACP,WAAW,aAAA;KACZ;CACF,CAAA"}

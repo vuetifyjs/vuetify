@@ -1,4 +1,10 @@
 export default {
+  info: {
+    iso: 'et',
+    iso_639_2_B: 'est',
+    name: 'Estonian',
+    native: 'Eesti'
+  },
   dataIterator: {
     rowsPerPageText: 'Kirjeid leheküljel:',
     rowsPerPageAll: 'Kõik',

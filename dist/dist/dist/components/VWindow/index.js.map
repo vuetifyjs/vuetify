@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../components/VWindow/index.js"],"names":[],"mappings":"AAAA,OAAO,OAAO,MAAM,WAAW,CAAC;AAChC,OAAO,WAAW,MAAM,eAAe,CAAC;AACxC,OAAO,EAAE,OAAO,EAAE,WAAW,EAAE,CAAC;AAChC,eAAe;IACX,uBAAuB,EAAE;QACrB,OAAO,EAAE,OAAO;QAChB,WAAW,EAAE,WAAW;KAC3B;CACJ,CAAC;AACF,iCAAiC;AACjC,iCAAiC"}

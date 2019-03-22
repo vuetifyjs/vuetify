@@ -1,4 +1,10 @@
 export default {
+  info: {
+    iso: 'pt',
+    iso_639_2_B: 'por',
+    name: 'Portuguese',
+    native: 'Português'
+  },
   dataIterator: {
     rowsPerPageText: 'Itens por página:',
     rowsPerPageAll: 'Todos',

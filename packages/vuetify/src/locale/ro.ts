@@ -1,4 +1,10 @@
 export default {
+  info: {
+    iso: 'ro',
+    iso_639_2_B: 'rum',
+    name: 'Romanian',
+    native: 'Română'
+  },
   dataIterator: {
     rowsPerPageText: 'Articole pe pagină:',
     rowsPerPageAll: 'Toate',

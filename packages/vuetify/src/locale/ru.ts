@@ -1,4 +1,10 @@
 export default {
+  info: {
+    iso: 'ru',
+    iso_639_2_B: 'rus',
+    name: 'Russian',
+    native: 'русский'
+  },
   dataIterator: {
     rowsPerPageText: 'Записей на странице:',
     rowsPerPageAll: 'Все',

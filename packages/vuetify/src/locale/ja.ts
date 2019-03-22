@@ -1,4 +1,10 @@
 export default {
+  info: {
+    iso: 'ja',
+    iso_639_2_B: 'jpn',
+    name: 'Japanese',
+    native: '日本語 (にほんご)'
+  },
   dataIterator: {
     rowsPerPageText: '1ページあたりの件数：',
     rowsPerPageAll: 'すべて',

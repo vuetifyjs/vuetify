@@ -1,4 +1,10 @@
 export default {
+  info: {
+    iso: 'fa',
+    iso_639_2_B: 'per',
+    name: 'Persian',
+    native: 'فارسی'
+  },
   dataIterator: {
     rowsPerPageText: 'ردیف در صفحه:',
     rowsPerPageAll: 'همه',

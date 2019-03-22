@@ -1,0 +1,1 @@
+{"version":3,"file":"webpack.prod.config.js","sourceRoot":"","sources":["../../../../packages/docs/build/webpack.prod.config.js"],"names":[],"mappings":";AAAA,IAAM,YAAY,GAAG,OAAO,CAAC,yBAAyB,CAAC,CAAA;AACvD,IAAM,YAAY,GAAG,OAAO,CAAC,yBAAyB,CAAC,CAAA;AAEvD,MAAM,CAAC,OAAO,GAAG;IACf,YAAY;IACZ,YAAY;CACb,CAAA"}

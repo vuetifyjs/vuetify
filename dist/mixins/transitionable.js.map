@@ -1,0 +1,1 @@
+{"version":3,"file":"transitionable.js","sourceRoot":"","sources":["../../packages/vuetify/src/mixins/transitionable.ts"],"names":[],"mappings":"AAAA,OAAO,GAAG,MAAM,KAAK,CAAA;AAErB,eAAe,GAAG,CAAC,MAAM,CAAC;IACxB,IAAI,EAAE,gBAAgB;IAEtB,KAAK,EAAE;QACL,IAAI,EAAE,MAAM;QACZ,MAAM,EAAE,MAAM;QACd,UAAU,EAAE,MAAM;KACnB;CACF,CAAC,CAAA"}

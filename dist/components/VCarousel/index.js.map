@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../packages/vuetify/src/components/VCarousel/index.ts"],"names":[],"mappings":"AAAA,OAAO,SAAS,MAAM,aAAa,CAAA;AACnC,OAAO,aAAa,MAAM,iBAAiB,CAAA;AAE3C,OAAO,EAAE,SAAS,EAAE,aAAa,EAAE,CAAA;AAEnC,eAAe;IACb,uBAAuB,EAAE;QACvB,SAAS,WAAA;QACT,aAAa,eAAA;KACd;CACF,CAAA"}

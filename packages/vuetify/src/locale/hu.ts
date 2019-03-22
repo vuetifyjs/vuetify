@@ -1,4 +1,10 @@
 export default {
+  info: {
+    iso: 'hu',
+    iso_639_2_B: 'hun',
+    name: 'Hungarian',
+    native: 'Magyar'
+  },
   dataIterator: {
     rowsPerPageText: 'Elem oldalanként:',
     rowsPerPageAll: 'Mind',

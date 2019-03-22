@@ -1,4 +1,10 @@
 export default {
+  info: {
+    iso: 'zh-Hant',
+    iso_639_2_B: 'zh-Hant',
+    name: 'Chinese (traditional)',
+    native: '漢語'
+  },
   dataIterator: {
     rowsPerPageText: '每頁記錄數：',
     rowsPerPageAll: '全部',
