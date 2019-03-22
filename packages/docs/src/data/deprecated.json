@@ -17,6 +17,7 @@
     },
     "v-select": {
       "autocomplete": "1.1",
+      "search-input": false,
       "combobox": "1.1",
       "tags": "1.1",
       "editable": "1.1",
