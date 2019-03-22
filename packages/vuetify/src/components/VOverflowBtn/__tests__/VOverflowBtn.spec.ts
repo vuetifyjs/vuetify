@@ -104,7 +104,7 @@ describe('VOverflowBtn.js', () => {
       }
     })
 
-    const btn = wrapper.first('.v-btn')
+    const btn = wrapper.find('.v-btn')
 
     btn.trigger('click')
 
