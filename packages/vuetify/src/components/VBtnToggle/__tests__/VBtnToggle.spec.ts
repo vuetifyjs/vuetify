@@ -17,14 +17,7 @@ describe('VBtnToggle.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VBtnToggle, {
-        ...options,
-        mocks: {
-          $vuetify: {
-            lang: {
-              t: (val: string) => val
-            }
-          }
-        }
+        ...options
       })
     }
   })
