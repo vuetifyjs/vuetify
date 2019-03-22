@@ -69,7 +69,7 @@ describe('VCombobox.ts', () => {
 
     expect(wrapper.vm.internalSearch).toBe('1')
 
-    const list = wrapper.find('.v-list-item')[1]
+    const list = wrapper.findAll('.v-list-item').at(1)
     list.trigger('click')
     await wrapper.vm.$nextTick()
     expect(event).toHaveBeenCalledWith(12)
