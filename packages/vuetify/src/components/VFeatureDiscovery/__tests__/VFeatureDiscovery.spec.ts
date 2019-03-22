@@ -68,7 +68,6 @@ describe('FeatureDiscovery.ts', () => {
     wrapper.vm.isActive = false
 
     expect(wrapper.classes('v-feature-discovery--active')).toBeFalsy()
-    expect(document.body.style.zIndex).toBe('0')
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.vm.isActive = true
@@ -189,6 +188,24 @@ describe('FeatureDiscovery.ts', () => {
     expect(wrapper.vm.isActive).toBeFalsy()
   })
 
+  it('should compute base shift', async () => {
+    const wrapper1 = mountFunction({
+      computed: {
+        computedSize: () => 500
+      }
+    })
+
+    expect(wrapper1.vm.baseShift).toBeCloseTo(132.58, 1)
+
+    const wrapper2 = mountFunction({
+      computed: {
+        computedSize: () => 100
+      }
+    })
+
+    expect(wrapper2.vm.baseShift).toBeCloseTo(26.51, 1)
+  })
+
   it('should compute left shift', async () => {
     const wrapper = mountFunction({
       computed: {
@@ -203,7 +220,7 @@ describe('FeatureDiscovery.ts', () => {
         width: 100
       }
     })
-    expect(wrapper.vm.leftShift).toBeCloseTo(176.77, 1)
+    expect(wrapper.vm.leftShift).toBeCloseTo(132.58, 1)
 
     wrapper.setData({
       rect: {
@@ -212,7 +229,7 @@ describe('FeatureDiscovery.ts', () => {
         width: 100
       }
     })
-    expect(wrapper.vm.leftShift).toBeCloseTo(-176.77, 1)
+    expect(wrapper.vm.leftShift).toBeCloseTo(-132.58, 1)
 
     wrapper.setData({
       rect: {
@@ -238,7 +255,7 @@ describe('FeatureDiscovery.ts', () => {
         height: 100
       }
     })
-    expect(wrapper.vm.topShift).toBeCloseTo(176.77, 1)
+    expect(wrapper.vm.topShift).toBeCloseTo(132.58, 1)
 
     wrapper.setData({
       rect: {
@@ -247,7 +264,7 @@ describe('FeatureDiscovery.ts', () => {
         height: 100
       }
     })
-    expect(wrapper.vm.topShift).toBeCloseTo(-176.77, 1)
+    expect(wrapper.vm.topShift).toBeCloseTo(-132.58, 1)
 
     wrapper.setData({
       rect: {
@@ -257,5 +274,45 @@ describe('FeatureDiscovery.ts', () => {
       }
     })
     expect(wrapper.vm.topShift).toBe(0)
+  })
+
+  it('should compute rect size', async () => {
+    const wrapper = mountFunction()
+
+    wrapper.setData({
+      rect: {
+        width: 200,
+        height: 100
+      }
+    })
+    expect(wrapper.vm.rectSize).toBe(200)
+
+    wrapper.setData({
+      rect: {
+        width: 200,
+        height: 200
+      }
+    })
+    expect(wrapper.vm.rectSize).toBe(200)
+
+    wrapper.setData({
+      rect: {
+        width: 200.1,
+        height: 100
+      }
+    })
+    expect(wrapper.vm.rectSize).toBe(200.1)
+  })
+
+  it('should compute highlight padding', async () => {
+    const wrapper = mountFunction()
+
+    wrapper.setData({
+      rect: {
+        width: 200,
+        height: 100
+      }
+    })
+    expect(wrapper.vm.highlightPadding).toBeCloseTo(57.14, 1)
   })
 })
