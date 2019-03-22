@@ -1,5 +1,5 @@
 export default {
-   info: {
+  info: {
     iso: 'tr',
     iso_639_2_B: 'tur',
     name: 'Turkish',
