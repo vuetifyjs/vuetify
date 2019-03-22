@@ -1,0 +1,27 @@
+@import '../../styles/styles.sass'
+
+// Block
+.v-image
+  z-index: 0
+
+// Element
+.v-image__image,
+.v-image__placeholder
+  z-index: -1
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+
+.v-image__image
+  background-repeat: no-repeat
+
+  &--preload
+    filter: blur(2px)
+
+  &--contain
+    background-size: contain
+
+  &--cover
+    background-size: cover

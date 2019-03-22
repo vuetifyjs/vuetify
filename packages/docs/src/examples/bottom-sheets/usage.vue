@@ -1,10 +1,11 @@
 <template>
   <div class="text-xs-center">
     <v-bottom-sheet v-model="sheet">
-      <template v-slot:activator>
+      <template v-slot:activator="{ on }">
         <v-btn
           color="purple"
           dark
+          v-on="on"
         >
           Click me
         </v-btn>
