@@ -56,6 +56,6 @@
     "touchless": "Disable mobile touch functionality"
   },
   "events": {
-    "update:miniVariant": "The `update.sync` event for mini-variant"
+    "update:miniVariant": "The `mini-variant.sync` event"
   }
 }
