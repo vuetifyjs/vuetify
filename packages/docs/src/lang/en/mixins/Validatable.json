@@ -12,6 +12,6 @@
     "validateOnBlur": "Delays validation until blur event"
   },
   "events": {
-    "update:error": "The `update.sync` event"
+    "update:error": "The `error.sync` event"
   }
 }
