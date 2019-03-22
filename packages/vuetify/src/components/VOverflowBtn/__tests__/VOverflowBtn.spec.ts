@@ -14,6 +14,8 @@ describe('VOverflowBtn.js', () => {
   let mountFunction: (options?: object) => Wrapper<Instance>
 
   beforeEach(() => {
+    document.body.setAttribute('data-app', 'true')
+
     mountFunction = (options = {}) => {
       return mount(VOverflowBtn, {
         ...options,
@@ -29,10 +31,6 @@ describe('VOverflowBtn.js', () => {
         }
       })
     }
-
-    const el = document.createElement('div')
-    el.setAttribute('data-app', 'true')
-    document.body.appendChild(el)
   })
 
   toHaveBeenWarnedInit()
