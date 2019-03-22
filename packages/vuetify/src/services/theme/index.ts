@@ -12,6 +12,7 @@ import {
   VuetifyThemes,
   VuetifyThemeVariant
 } from 'vuetify/types/services/theme'
+import Vue from 'vue'
 
 export class Theme extends Service {
   static property = 'theme'
@@ -90,33 +91,7 @@ export class Theme extends Service {
   public applyTheme (): void {
     if (this.disabled) return this.clearCss()
 
-    const options = this.options || {}
-    const parsedTheme = this.parsedTheme
-
-    let css: string | null = ''
-
-    // Theme cache get
-    if (options.themeCache != null) {
-      this.css = options.themeCache.get(parsedTheme) || this.css
-    }
-
-    // Generate styles
-    css = ThemeUtils.genStyles(
-      parsedTheme,
-      options.customProperties
-    )
-
-    // Minify theme
-    if (options.minifyTheme != null) {
-      css = options.minifyTheme(css)
-    }
-
-    // Theme cache set
-    if (options.themeCache != null) {
-      options.themeCache.set(parsedTheme, css)
-    }
-
-    this.css = css
+    this.css = this.generatedStyles
   }
 
   public clearCss (): void {
@@ -126,14 +101,31 @@ export class Theme extends Service {
   // Initialize theme for SSR and SPA
   // Attach to ssrContext head or
   // apply new theme to document
-  public init (ssrContext?: any): void {
+  public init (root: Vue, ssrContext?: any): void {
     if (this.disabled) return
 
     this.ssr = Boolean(ssrContext)
+    const options = this.options || {}
 
-    /* istanbul ignore else */
-    if (this.ssr) {
-      const options = this.options || {}
+    if ((root as any).$meta) {
+      (root as any).$children.push({
+        $children: [],
+        $options: {
+          head: () => {
+            return {
+              style: [
+                {
+                  cssText: this.generatedStyles,
+                  type: 'text/css',
+                  id: 'vuetify-theme-stylesheet',
+                  nonce: options.cspNonce
+                }
+              ]
+            }
+          }
+        }
+      })
+    } else if (this.ssr) {
       // SSR
       const nonce = options.cspNonce ? ` nonce="${options.cspNonce}"` : ''
       ssrContext.head = ssrContext.head || ''

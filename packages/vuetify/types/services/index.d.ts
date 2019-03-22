@@ -1,9 +1,11 @@
+import Vue from 'vue'
+
 export interface VuetifyServiceContract {
   framework: Record<string, VuetifyServiceContract>
-  init: (ssrContext?: object) => void
+  init: (root: Vue, ssrContext?: object) => void
 }
 
 export interface VuetifyService {
-  new (options?: any): VuetifyServiceContract
   property: string
+  new (options?: any): VuetifyServiceContract
 }
