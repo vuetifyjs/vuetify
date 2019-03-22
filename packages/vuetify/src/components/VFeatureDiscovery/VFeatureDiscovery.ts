@@ -99,7 +99,10 @@ export default mixins(
       }
     },
     highlightSize (): number {
-      return Math.sqrt(2 * (Math.max(this.rect.width, this.rect.height) + 25) ** 2)
+      return Math.sqrt(2 * (Math.max(this.rect.width, this.rect.height) + this.highlightPadding) ** 2)
+    },
+    highlightPadding (): number {
+      return Math.max(this.rect.width, this.rect.height) / 3.5
     },
     leftShift (): number {
       if ((this.rect.left - (this.computedSize / 2) + (this.rect.width / 2)) < 0) return this.computedSize / doubledSqrt2 * 0.75
