@@ -13,6 +13,8 @@ import mixins from '../../util/mixins'
 
 // Directives
 import ClickOutside from '../../directives/click-outside'
+
+// Helpers
 import { convertToUnit, keyCodes } from '../../util/helpers'
 
 const doubledSqrt2 = 2.8284
@@ -66,7 +68,7 @@ export default mixins(
       width: 0
     },
     targetEl: null as Element | null,
-    oldZIndex: 0,
+    oldZIndex: undefined as number | undefined,
     movable: true
   }),
 
@@ -77,67 +79,76 @@ export default mixins(
         'v-feature-discovery--active': this.isActive,
         'v-feature-discovery--movable': this.movable,
         'v-feature-discovery--lr-shifted': this.leftShift !== 0,
+        'v-feature-discovery--no-ripple': this.noRipple,
         ...this.themeClasses
       }
     },
     computedLeft (): number {
-      return this.rect.left - (this.computedSize / 2) + (this.rect.width / 2) + this.leftShift
+      return this.rect.left - (this.computedSize / 2) + (this.rect.width / 2)
+    },
+    computedRight (): number {
+      return window.innerWidth - this.rect.right - (this.computedSize / 2) + (this.rect.width / 2)
+    },
+    shiftedLeft (): number {
+      return this.computedLeft + this.leftShift
+    },
+    computedBottom (): number {
+      return window.innerHeight - this.rect.bottom - (this.computedSize / 2) + (this.rect.height / 2)
     },
     computedTop (): number {
-      return this.rect.top - (this.computedSize / 2) + (this.rect.height / 2) + this.topShift
+      return this.rect.top - (this.computedSize / 2) + (this.rect.height / 2)
+    },
+    shiftedTop (): number {
+      return this.computedTop + this.topShift
     },
     computedSize (): number {
       return parseInt(this.size)
     },
     styles (): object {
       return {
-        left: convertToUnit(this.computedLeft),
-        top: convertToUnit(this.computedTop),
+        left: convertToUnit(this.shiftedLeft),
+        top: convertToUnit(this.shiftedTop),
         height: convertToUnit(this.computedSize),
-        width: convertToUnit(this.computedSize),
-        'pointer-events': this.isActive ? 'auto' : 'none'
+        width: convertToUnit(this.computedSize)
       }
+    },
+    rectSize (): number {
+      return Math.max(this.rect.width, this.rect.height)
     },
     highlightSize (): number {
-      return Math.sqrt(2 * (Math.max(this.rect.width, this.rect.height) + this.highlightPadding) ** 2)
+      return Math.sqrt(2 * (this.rectSize + this.highlightPadding) ** 2)
     },
     highlightPadding (): number {
-      return Math.max(this.rect.width, this.rect.height) / 3.5
+      return this.rectSize / 3.5
+    },
+    baseShift (): number {
+      return this.computedSize / doubledSqrt2 * 0.75
     },
     leftShift (): number {
-      if ((this.rect.left - (this.computedSize / 2) + (this.rect.width / 2)) < 0) return this.computedSize / doubledSqrt2 * 0.75
-      if ((window.innerWidth - this.rect.right - (this.computedSize / 2) + (this.rect.width / 2)) < 0) {
-        return -this.computedSize / doubledSqrt2 * 0.75
-      }
+      if (this.computedLeft < 0) return this.baseShift
+      if (this.computedRight < 0) return -this.baseShift
       return 0
     },
     topShift (): number {
-      if ((this.rect.top - (this.computedSize / 2) + (this.rect.height / 2)) < 0) return this.computedSize / doubledSqrt2 * 0.75
-      if ((window.innerHeight - this.rect.bottom - (this.computedSize / 2) + (this.rect.height / 2)) < 0) {
-        return -this.computedSize / doubledSqrt2 * 0.75
-      }
+      if (this.computedTop < 0) return this.baseShift
+      if (this.computedBottom < 0) return -this.baseShift
       return 0
     },
     backdropStyle (): object {
-      let justify = 'center'
-      let paddingL
-      let paddingR
+      const out = {
+        'transform-origin': `calc(50% - ${convertToUnit(this.leftShift)}) calc(50% - ${convertToUnit(this.topShift)})`
+      } as { [key: string]: any }
 
       if (this.leftShift > 0) {
-        justify = 'flex-end'
-        paddingR = '15%'
+        out['justify-content'] = 'flex-end'
+        out['padding-right'] = '15%'
       }
       if (this.leftShift < 0) {
-        justify = 'flex-start'
-        paddingL = '15%'
+        out['justify-content'] = 'flex-start'
+        out['padding-left'] = '15%'
       }
 
-      return {
-        'justify-content': justify,
-        'padding-left': paddingL,
-        'padding-right': paddingR,
-        'transform-origin': `calc(50% - ${this.leftShift}px) calc(50% - ${this.topShift}px)`
-      }
+      return out
     },
     contentStyle (): object {
       let justify = 'space-between'
@@ -183,7 +194,7 @@ export default mixins(
       if (!this.targetEl) return
 
       this.rect = this.targetEl.getBoundingClientRect()
-      this.oldZIndex = Number(getComputedStyle(this.targetEl).zIndex) || 0
+      this.oldZIndex = Number(getComputedStyle(this.targetEl).zIndex) || undefined
       /* istanbul ignore next */
       if (this.isActive) (this.targetEl as any).style.zIndex = 11
     },
@@ -244,14 +255,11 @@ export default mixins(
     genHighlight (): VNode {
       return this.$createElement('div', this.setBackgroundColor(this.highlightColor, {
         staticClass: 'v-feature-discovery__highlight',
-        class: {
-          'v-feature-discovery__highlight--no-ripple': this.noRipple
-        },
         style: {
-          top: `calc(50% - (${this.highlightSize}px / 2) - ${this.topShift}px)`,
-          left: `calc(50% - (${this.highlightSize}px / 2) - ${this.leftShift}px)`,
-          height: `${this.highlightSize}px`,
-          width: `${this.highlightSize}px`
+          top: `calc(50% - (${convertToUnit(this.highlightSize)} / 2) - ${convertToUnit(this.topShift)})`,
+          left: `calc(50% - (${convertToUnit(this.highlightSize)} / 2) - ${convertToUnit(this.leftShift)})`,
+          height: `${convertToUnit(this.highlightSize)}`,
+          width: `${convertToUnit(this.highlightSize)}`
         }
       }))
     }
