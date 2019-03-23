@@ -114,7 +114,46 @@ const VIcon = mixins(
 
       return h('i', data, newChildren)
     },
-    renderSvgIcon (icon: VuetifyIconComponent, h: CreateElement): VNode {
+    renderSvgIcon (icon: string, h: CreateElement): VNode {
+      const data = this.getDefaultData()
+      data.class['v-icon--svg'] = true
+
+      data.attrs = {
+        xmlns: 'http://www.w3.org/2000/svg',
+        viewBox: '0 0 24 24',
+        height: '24',
+        width: '24',
+        role: 'icon'
+      }
+
+      const size = this.getSize()
+      if (size) {
+        data.style = {
+          fontSize: size,
+          height: size,
+          width: size
+        }
+        data.attrs.height = size
+        data.attrs.width = size
+      }
+
+      this.applyColors(data)
+
+      data.nativeOn = data.on
+
+      return h('svg', data, [this.renderSvgIconPath(icon, h)])
+    },
+    renderSvgIconPath (icon: string, h: CreateElement): VNode {
+      // svg prefix is svg-
+      const pathD = icon.slice(4 - icon.length)
+
+      return h('path', {
+        attrs: {
+          d: pathD
+        }
+      })
+    },
+    renderSvgIconComponent (icon: VuetifyIconComponent, h: CreateElement): VNode {
       const data = this.getDefaultData()
       data.class['v-icon--is-component'] = true
 
@@ -140,10 +179,13 @@ const VIcon = mixins(
     const icon = this.getIcon()
 
     if (typeof icon === 'string') {
+      if (icon.indexOf('svg-') === 0) {
+        return this.renderSvgIcon(icon, h)
+      }
       return this.renderFontIcon(icon, h)
     }
 
-    return this.renderSvgIcon(icon, h)
+    return this.renderSvgIconComponent(icon, h)
   }
 })
 
