@@ -90,10 +90,14 @@ export default BaseItemGroup.extend({
       this.nextIconVisible = this.checkNextIcon()
     },
     checkPrevIcon () {
+      if (this.$vuetify.rtl) return this.widths.container > (this.scrollOffset * -1) + this.widths.wrapper
+
       return this.scrollOffset > 0
     },
     checkNextIcon () {
       // Check one scroll ahead to know the width of right-most item
+      if (this.$vuetify.rtl) return this.scrollOffset < 0
+
       return this.widths.container > this.scrollOffset + this.widths.wrapper
     },
     callSlider () {
@@ -195,6 +199,7 @@ export default BaseItemGroup.extend({
       /* istanbul ignore next */
       if (!this.activeTab) return
       if (!this.isOverflowing) return (this.scrollOffset = 0)
+      if (this.$vuetify.rtl) return
 
       const totalWidth = this.widths.wrapper + this.scrollOffset
       const { clientWidth, offsetLeft } = this.activeTab.$el

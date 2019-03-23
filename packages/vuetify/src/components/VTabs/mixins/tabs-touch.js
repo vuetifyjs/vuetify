@@ -10,8 +10,14 @@ export default {
       const clientWidth = this.$refs.wrapper.clientWidth
 
       if (direction === 'prev') {
+        if (this.$vuetify.rtl) {
+          return Math.max(this.scrollOffset - clientWidth, (this.$refs.container.clientWidth - clientWidth) * -1)
+        }
         return Math.max(this.scrollOffset - clientWidth, 0)
       } else {
+        if (this.$vuetify.rtl) {
+          return Math.min(this.scrollOffset + clientWidth, 0)
+        }
         return Math.min(this.scrollOffset + clientWidth, this.$refs.container.clientWidth - clientWidth)
       }
     },
@@ -31,10 +37,18 @@ export default {
       container.style.willChange = null
 
       /* istanbul ignore else */
-      if (this.scrollOffset < 0 || !this.isOverflowing) {
-        this.scrollOffset = 0
-      } else if (this.scrollOffset >= maxScrollOffset) {
-        this.scrollOffset = maxScrollOffset
+      if (this.$vuetify.rtl) {
+        if (this.scrollOffset > 0 || !this.isOverflowing) {
+          this.scrollOffset = 0
+        } else if (this.scrollOffset * -1 >= maxScrollOffset) {
+          this.scrollOffset = maxScrollOffset * -1
+        }
+      } else {
+        if (this.scrollOffset < 0 || !this.isOverflowing) {
+          this.scrollOffset = 0
+        } else if (this.scrollOffset >= maxScrollOffset) {
+          this.scrollOffset = maxScrollOffset
+        }
       }
     }
   }
