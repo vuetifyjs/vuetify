@@ -39,17 +39,17 @@
     transform: scale(0)
     transition: $primary-transition
 
-    &:not(&__highlight--no-ripple)
-      &:before
-        content: ''
-        position: absolute
-        height: 100%
-        width: 100%
-        background-color: inherit
-        border-radius: inherit
-        transition: $primary-transition
-        animation: pulse-animation 1.4s cubic-bezier(0.24, 0, 0.38, 1) infinite
-        pointer-events: none
+  &:not(&--no-ripple)
+    .v-feature-discovery__highlight:before
+      content: ''
+      position: absolute
+      height: 100%
+      width: 100%
+      background-color: inherit
+      border-radius: inherit
+      transition: $primary-transition
+      animation: pulse-animation 1.4s cubic-bezier(0.24, 0, 0.38, 1) infinite
+      pointer-events: none
 
   &__content
     width: 60%
