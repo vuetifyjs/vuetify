@@ -53,12 +53,12 @@ describe('VSwitch.js', () => {
     const change = jest.fn()
     wrapper.vm.$on('change', change)
     touch(wrapper.find('.v-input--selection-controls__ripple')).start(0, 0).end(20, 0)
-    expect(change).toBeCalledWith(true)
+    expect(change).toHaveBeenCalledWith(true)
     expect(change).toHaveBeenCalledTimes(1)
 
     wrapper.setProps({ inputValue: true })
     touch(wrapper.find('.v-input--selection-controls__ripple')).start(0, 0).end(-20, 0)
-    expect(change).toBeCalledWith(false)
+    expect(change).toHaveBeenCalledWith(false)
     expect(change).toHaveBeenCalledTimes(2)
   })
 
@@ -74,17 +74,17 @@ describe('VSwitch.js', () => {
     wrapper.vm.$on('change', change)
 
     input.trigger('keydown.left')
-    expect(change).not.toBeCalled()
+    expect(change).not.toHaveBeenCalled()
 
     input.trigger('keydown.right')
-    expect(change).toBeCalledWith(true)
+    expect(change).toHaveBeenCalledWith(true)
     expect(change).toHaveBeenCalledTimes(1)
 
     input.trigger('keydown.right')
     expect(change).toHaveBeenCalledTimes(1)
 
     input.trigger('keydown.left')
-    expect(change).toBeCalledWith(false)
+    expect(change).toHaveBeenCalledWith(false)
     expect(change).toHaveBeenCalledTimes(2)
   })
 
@@ -98,11 +98,11 @@ describe('VSwitch.js', () => {
     const change = jest.fn()
     wrapper.vm.$on('change', change)
     touch(wrapper.find('.v-input--selection-controls__ripple')).start(0, 0).end(-20, 0)
-    expect(change).not.toBeCalled()
+    expect(change).not.toHaveBeenCalled()
 
     wrapper.setProps({ inputValue: true })
     touch(wrapper.find('.v-input--selection-controls__ripple')).start(0, 0).end(20, 0)
-    expect(change).not.toBeCalled()
+    expect(change).not.toHaveBeenCalled()
   })
 
   it('should render element with loader and match the snapshot', async () => {
