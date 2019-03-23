@@ -247,10 +247,10 @@ export default mixins(
       }, [
         this.$createElement('div', {
           staticClass: 'v-feature-discovery__title'
-        }, this.$slots.title),
+        }, getSlot(this, 'title')),
         this.$createElement('div', {
           staticClass: 'v-feature-discovery__text'
-        }, this.$slots.default)
+        }, getSlot(this, 'default'))
       ])
     },
     genChildren (): VNode[] {
