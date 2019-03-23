@@ -16,6 +16,7 @@ import ClickOutside from '../../directives/click-outside'
 
 // Helpers
 import { convertToUnit, keyCodes, getSlot } from '../../util/helpers'
+import { PropValidator } from 'vue/types/options'
 
 const doubledSqrt2 = 2.8284
 
@@ -47,8 +48,8 @@ export default mixins(
       validator: (v: string | number) => !isNaN(parseInt(v))
     },
     target: {
-      default: null as string | Element | null
-    },
+      default: null as string | HTMLElement | null
+    } as PropValidator<string | HTMLElement>,
     value: {
       default: true
     },
@@ -71,7 +72,7 @@ export default mixins(
       height: 0,
       width: 0
     },
-    targetEl: null as Element | null,
+    targetEl: null as HTMLElement | null,
     movable: true
   }),
 
@@ -176,8 +177,8 @@ export default mixins(
     isActive (val: boolean) {
       if (!this.targetEl) return
 
-      val && this.updateRect();
-      (this.targetEl as any).style.zIndex = val ? 11 : ''
+      val && this.updateRect()
+      this.targetEl.style.zIndex = val ? '11' : ''
     }
   },
 
@@ -194,16 +195,16 @@ export default mixins(
       if (this.closeConditional() && e.keyCode === keyCodes.esc) this.isActive = false
     },
     updateTarget () {
-      if (this.targetEl) (this.targetEl as any).style.zIndex = ''
+      if (this.targetEl) this.targetEl.style.zIndex = ''
 
-      if (this.target instanceof Element) this.targetEl = this.target
+      if (this.target instanceof HTMLElement) this.targetEl = this.target
       else this.targetEl = document.querySelector(this.target)
 
       if (!this.targetEl) return
 
       this.rect = this.targetEl.getBoundingClientRect()
       /* istanbul ignore next */
-      if (this.isActive) (this.targetEl as any).style.zIndex = 11
+      if (this.isActive) this.targetEl.style.zIndex = '11'
     },
     updateRect () {
       if (!this.targetEl || !this.isActive) return
