@@ -37,6 +37,8 @@ describe('VSwitch.js', () => {
 
     wrapper.setProps({ ripple: true })
 
+    await wrapper.vm.$nextTick()
+
     ripple = wrapper.find('.v-input--selection-controls__ripple')
 
     expect(ripple.element._ripple.enabled).toBe(true)
