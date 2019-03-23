@@ -1,4 +1,5 @@
 @import "../../styles/styles.sass"
+@import "./_variables.sass"
 // @import "./_mixins.sass"
 
 // .v-feature-discovery.theme--light
@@ -10,6 +11,7 @@
 .v-feature-discovery
   position: fixed
   z-index: 10
+  transition: $feature-discovery-transition
 
 // Element
 .v-feature-discovery
@@ -22,7 +24,7 @@
     justify-content: center
     align-items: center
     transform: scale(0)
-    transition: $primary-transition
+    transition: $feature-discovery-transition
     +elevation(4)
 
   &__highlight
@@ -37,7 +39,7 @@
     justify-content: center
     align-items: center
     transform: scale(0)
-    transition: $primary-transition
+    transition: $feature-discovery-transition
 
   &:not(&--no-ripple)
     .v-feature-discovery__highlight:before
@@ -47,7 +49,7 @@
       width: 100%
       background-color: inherit
       border-radius: inherit
-      transition: $primary-transition
+      transition: $feature-discovery-transition
       animation: pulse-animation 1.4s cubic-bezier(0.24, 0, 0.38, 1) infinite
       pointer-events: none
 
@@ -64,9 +66,6 @@
   &--active
     .v-feature-discovery__backdrop, .v-feature-discovery__highlight
       transform: scale(1)
-
-  &--movable
-    transition: $primary-transition
 
   &--active:not(&--no-ripple)
     .v-feature-discovery__highlight
