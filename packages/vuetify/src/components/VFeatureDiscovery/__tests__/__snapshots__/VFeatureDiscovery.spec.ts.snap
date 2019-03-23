@@ -8,7 +8,7 @@ exports[`FeatureDiscovery.ts should render correctly 1`] = `
   <div class="v-feature-discovery__backdrop primary"
        style="padding-right: 15%;"
   >
-    <div class="v-feature-discovery__content">
+    <div class="v-feature-discovery__content white--text">
       <div class="v-feature-discovery__wrapper">
         <div class="v-feature-discovery__title">
         </div>
@@ -36,7 +36,7 @@ exports[`FeatureDiscovery.ts should render correctly when flat 1`] = `
   <div class="v-feature-discovery__backdrop primary"
        style="padding-right: 15%;"
   >
-    <div class="v-feature-discovery__content">
+    <div class="v-feature-discovery__content white--text">
       <div class="v-feature-discovery__wrapper">
         <div class="v-feature-discovery__title">
         </div>
@@ -64,7 +64,7 @@ exports[`FeatureDiscovery.ts should toggle 1`] = `
   <div class="v-feature-discovery__backdrop primary"
        style="padding-right: 15%;"
   >
-    <div class="v-feature-discovery__content">
+    <div class="v-feature-discovery__content white--text">
       <div class="v-feature-discovery__wrapper">
         <div class="v-feature-discovery__title">
         </div>
@@ -93,7 +93,7 @@ exports[`FeatureDiscovery.ts should toggle 2`] = `
   <div class="v-feature-discovery__backdrop primary"
        style="padding-right: 15%;"
   >
-    <div class="v-feature-discovery__content">
+    <div class="v-feature-discovery__content white--text">
       <div class="v-feature-discovery__wrapper">
         <div class="v-feature-discovery__title">
         </div>
