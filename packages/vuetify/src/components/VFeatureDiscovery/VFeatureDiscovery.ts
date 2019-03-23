@@ -158,6 +158,11 @@ export default mixins(
       return {
         'justify-content': justify
       }
+    },
+    attrs (): object {
+      return {
+        'aria-hidden': !this.isActive
+      }
     }
   },
 
@@ -260,6 +265,9 @@ export default mixins(
           left: `calc(50% - (${convertToUnit(this.highlightSize)} / 2) - ${convertToUnit(this.leftShift)})`,
           height: `${convertToUnit(this.highlightSize)}`,
           width: `${convertToUnit(this.highlightSize)}`
+        },
+        attrs: {
+          'aria-hidden': true
         }
       }))
     }
@@ -278,7 +286,8 @@ export default mixins(
         }
       ],
       class: this.classes,
-      style: this.styles
+      style: this.styles,
+      attrs: this.attrs
     }
 
     return h('div', data, this.genChildren())
