@@ -44,7 +44,6 @@
 
         <v-feature-discovery
           v-model="model1"
-          class="white--text"
           color="primary"
           :target="t1"
           :size="size1"
@@ -74,7 +73,6 @@
 
         <v-feature-discovery
           v-model="model2"
-          class="white--text"
           color="primary"
           target="#t2"
           :flat="flat2"
@@ -107,7 +105,6 @@
 
         <v-feature-discovery
           v-model="model3"
-          class="white--text"
           color="primary"
           :size="size3"
           target="#t3"
@@ -143,8 +140,8 @@
 
         <v-feature-discovery
           v-model="model41"
-          class="white--text"
           color="teal"
+          highlight-color="blue"
           target="#t4v1"
         >
           <h2 slot="title">Hey! New feature...</h2>
@@ -160,8 +157,8 @@
 
         <v-feature-discovery
           v-model="model42"
-          class="white--text"
           color="green"
+          text-color="warning lighten-2"
           target="#t4v2"
         >
           <h2 slot="title">Hey! New feature...</h2>
@@ -177,9 +174,9 @@
 
         <v-feature-discovery
           v-model="model43"
-          class="white--text"
           color="warning lighten-2"
           highlight-color="error"
+          text-color="error"
           target="#t4v3"
         >
           <h2 slot="title">Hey! New feature...</h2>
@@ -207,7 +204,6 @@
 
         <v-feature-discovery
           v-model="model5"
-          class="white--text"
           color="primary"
           target="#t5"
           :elevation="elevation5"
@@ -237,7 +233,6 @@
 
         <v-feature-discovery
           v-model="model6"
-          class="white--text"
           color="primary"
           target="#t6"
           :persistent="persistent6"
@@ -266,7 +261,6 @@
 
         <v-feature-discovery
           v-model="model7"
-          class="white--text"
           color="primary"
           target="#t7"
         >
@@ -295,7 +289,6 @@
 
         <v-feature-discovery
           v-model="model8"
-          class="white--text"
           color="primary"
           target="#t8"
           :no-ripple="noRipple8"

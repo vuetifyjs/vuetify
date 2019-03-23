@@ -55,6 +55,10 @@ export default mixins(
     noRipple: {
       default: false,
       type: Boolean
+    },
+    textColor: {
+      type: String,
+      default: 'white'
     }
   },
 
@@ -222,10 +226,10 @@ export default mixins(
       }), [ this.genContent() ])
     },
     genContent (): VNode {
-      return this.$createElement('div', {
+      return this.$createElement('div', this.setTextColor(this.textColor, {
         staticClass: 'v-feature-discovery__content',
         style: this.contentStyle
-      }, [
+      }), [
         this.genWrapper(),
         this.genActions()
       ])
