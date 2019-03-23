@@ -32,6 +32,7 @@ export default VInput.extend({
   props: {
     alwaysDirty: Boolean,
     inverseLabel: Boolean,
+    decreasing: Boolean,
     label: String,
     min: {
       type: [Number, String],
@@ -143,8 +144,8 @@ export default VInput.extend({
       return this.step > 0 ? parseFloat(this.step) : 0
     },
     trackFillStyles () {
-      const left = this.$vuetify.rtl ? 'auto' : 0
-      const right = this.$vuetify.rtl ? 0 : 'auto'
+      const left = (this.$vuetify.rtl || this.decreasing) ? 'auto' : 0
+      const right = (this.$vuetify.rtl || this.decreasing) ? 0 : 'auto'
       let width = `${this.inputWidth}%`
 
       if (this.disabled) width = `calc(${this.inputWidth}% - 8px)`
@@ -165,8 +166,8 @@ export default VInput.extend({
     },
     trackStyles () {
       const trackPadding = this.disabled ? `calc(${this.inputWidth}% + 8px)` : `${this.trackPadding}px`
-      const left = this.$vuetify.rtl ? 'auto' : trackPadding
-      const right = this.$vuetify.rtl ? trackPadding : 'auto'
+      const left = (this.$vuetify.rtl || this.decreasing) ? 'auto' : trackPadding
+      const right = (this.$vuetify.rtl || this.decreasing) ? trackPadding : 'auto'
       const width = this.disabled
         ? `calc(${100 - this.inputWidth}% - 8px)`
         : '100%'
@@ -332,7 +333,7 @@ export default VInput.extend({
         },
         style: {
           transition: this.trackTransition,
-          left: `${this.$vuetify.rtl ? 100 - valueWidth : valueWidth}%`
+          left: `${(this.$vuetify.rtl || this.decreasing) ? 100 - valueWidth : valueWidth}%`
         },
         on: {
           touchstart: onDrag,
@@ -462,7 +463,7 @@ export default VInput.extend({
       // It is possible for left to be NaN, force to number
       let left = Math.min(Math.max((clientX - offsetLeft) / trackWidth, 0), 1) || 0
 
-      if (this.$vuetify.rtl) left = 1 - left
+      if (this.$vuetify.rtl || this.decreasing) left = 1 - left
 
       const isInsideTrack = clientX >= offsetLeft - 8 && clientX <= offsetLeft + trackWidth + 8
       const value = parseFloat(this.min) + left * (this.max - this.min)
@@ -482,7 +483,7 @@ export default VInput.extend({
       if ([left, right, down, up].includes(e.keyCode)) {
         this.keyPressed += 1
 
-        const increase = this.$vuetify.rtl ? [left, up] : [right, up]
+        const increase = (this.$vuetify.rtl || this.decreasing) ? [left, up] : [right, up]
         const direction = increase.includes(e.keyCode) ? 1 : -1
         const multiplier = e.shiftKey ? 3 : (e.ctrlKey ? 2 : 1)
 
