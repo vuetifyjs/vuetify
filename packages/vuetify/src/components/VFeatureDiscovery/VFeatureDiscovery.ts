@@ -267,8 +267,8 @@ export default mixins(
         style: {
           top: `calc(50% - (${convertToUnit(this.highlightSize)} / 2) - ${convertToUnit(this.topShift)})`,
           left: `calc(50% - (${convertToUnit(this.highlightSize)} / 2) - ${convertToUnit(this.leftShift)})`,
-          height: `${convertToUnit(this.highlightSize)}`,
-          width: `${convertToUnit(this.highlightSize)}`
+          height: convertToUnit(this.highlightSize),
+          width: convertToUnit(this.highlightSize)
         },
         attrs: {
           'aria-hidden': true
