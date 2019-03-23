@@ -190,18 +190,32 @@ export default baseMixins.extend({
     unbind () {
       window.removeEventListener('focusin', this.onFocusin)
     },
+<<<<<<< HEAD:packages/vuetify/src/components/VDialog/VDialog.js
+    onKeydown (e) {
+=======
     onKeydown (e: KeyboardEvent) {
+>>>>>>> d92c2b144ebd6dc72c106623464c5f013eeac9ef:packages/vuetify/src/components/VDialog/VDialog.ts
       if (e.keyCode === keyCodes.esc && !this.getOpenDependents().length) {
         if (!this.persistent) {
           this.isActive = false
           const activator = this.getActivator()
+<<<<<<< HEAD:packages/vuetify/src/components/VDialog/VDialog.js
+          this.$nextTick(() => activator && activator.focus())
+=======
           this.$nextTick(() => activator && (activator as HTMLElement).focus())
+>>>>>>> d92c2b144ebd6dc72c106623464c5f013eeac9ef:packages/vuetify/src/components/VDialog/VDialog.ts
         } else if (!this.noClickAnimation) {
           this.animateClick()
         }
       }
       this.$emit('keydown', e)
     },
+<<<<<<< HEAD:packages/vuetify/src/components/VDialog/VDialog.js
+    onFocusin (e) {
+      const { target } = event
+
+      if (
+=======
     onFocusin (e: Event) {
       if (!e) return
 
@@ -209,6 +223,7 @@ export default baseMixins.extend({
 
       if (
         !!target &&
+>>>>>>> d92c2b144ebd6dc72c106623464c5f013eeac9ef:packages/vuetify/src/components/VDialog/VDialog.ts
         // It isn't the document or the dialog body
         ![document, this.$refs.content].includes(target) &&
         // It isn't inside the dialog body
@@ -221,6 +236,16 @@ export default baseMixins.extend({
       ) {
         // Find and focus the first available element inside the dialog
         const focusable = this.$refs.content.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+<<<<<<< HEAD:packages/vuetify/src/components/VDialog/VDialog.js
+        focusable.length && focusable[0].focus()
+      }
+    },
+    getActivator (e) {
+      if (this.$refs.activator) {
+        return this.$refs.activator.children.length > 0
+          ? this.$refs.activator.children[0]
+          : this.$refs.activator
+=======
         focusable.length && (focusable[0] as HTMLElement).focus()
       }
     },
@@ -231,6 +256,7 @@ export default baseMixins.extend({
         return activator.children.length > 0
           ? activator.children[0]
           : activator
+>>>>>>> d92c2b144ebd6dc72c106623464c5f013eeac9ef:packages/vuetify/src/components/VDialog/VDialog.ts
       }
 
       if (e) {
@@ -245,7 +271,11 @@ export default baseMixins.extend({
         if (el) return el
       }
 
+<<<<<<< HEAD:packages/vuetify/src/components/VDialog/VDialog.js
+      consoleError('No activator found')
+=======
       return null
+>>>>>>> d92c2b144ebd6dc72c106623464c5f013eeac9ef:packages/vuetify/src/components/VDialog/VDialog.ts
     },
     genActivator () {
       if (!this.hasActivator) return null

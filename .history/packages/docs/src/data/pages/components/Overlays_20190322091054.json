@@ -1,0 +1,54 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": ["v-overlay"]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+<<<<<<< HEAD:packages/docs/src/data/pages/components/DataIterator.json
+            "slots",
+            "expand"
+=======
+            "loader",
+            "advanced"
+>>>>>>> d92c2b144ebd6dc72c106623464c5f013eeac9ef:packages/docs/src/data/pages/components/Overlays.json
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/cards",
+            "components/sheets",
+            "components/dialogs"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,3 +1,26 @@
+<<<<<<< HEAD:packages/vuetify/src/mixins/menuable.js
+import Vue from 'vue'
+
+import Positionable from './positionable'
+
+import Stackable from './stackable'
+
+/* eslint-disable object-property-newline */
+const dimensions = {
+  activator: {
+    top: 0, left: 0,
+    bottom: 0, right: 0,
+    width: 0, height: 0,
+    offsetTop: 0, scrollHeight: 0
+  },
+  content: {
+    top: 0, left: 0,
+    bottom: 0, right: 0,
+    width: 0, height: 0,
+    offsetTop: 0, scrollHeight: 0
+  },
+  hasWindow: false
+=======
 // Mixins
 import Positionable from '../positionable'
 import Stackable from '../stackable'
@@ -22,6 +45,7 @@ interface options extends ExtractVue<typeof baseMixins> {
     content: HTMLElement
     activator: HTMLElement
   }
+>>>>>>> d92c2b144ebd6dc72c106623464c5f013eeac9ef:packages/vuetify/src/mixins/menuable/index.ts
 }
 
 /* @vue/component */
@@ -82,6 +106,10 @@ export default baseMixins.extend<options>().extend({
   data: () => ({
     absoluteX: 0,
     absoluteY: 0,
+<<<<<<< HEAD:packages/vuetify/src/mixins/menuable.js
+    activatorFixed: false,
+    dimensions: Object.assign({}, dimensions),
+=======
     activatedBy: null as EventTarget | null,
     activatorFixed: false,
     activatorNode: null as null | VNode | VNode[],
@@ -111,6 +139,7 @@ export default baseMixins.extend<options>().extend({
     hasJustFocused: false,
     hasWindow: false,
     inputActivator: false,
+>>>>>>> d92c2b144ebd6dc72c106623464c5f013eeac9ef:packages/vuetify/src/mixins/menuable/index.ts
     isContentActive: false,
     pageWidth: 0,
     pageYOffset: 0,
@@ -270,7 +299,11 @@ export default baseMixins.extend<options>().extend({
           this.activatorFixed = true
           return
         }
+<<<<<<< HEAD:packages/vuetify/src/mixins/menuable.js
+        el = el.offsetParent
+=======
         el = el.offsetParent as HTMLElement
+>>>>>>> d92c2b144ebd6dc72c106623464c5f013eeac9ef:packages/vuetify/src/mixins/menuable/index.ts
       }
       this.activatorFixed = false
     },
@@ -302,8 +335,11 @@ export default baseMixins.extend<options>().extend({
 
         if (el) return el as HTMLElement
       }
+<<<<<<< HEAD:packages/vuetify/src/mixins/menuable.js
+=======
 
       return null
+>>>>>>> d92c2b144ebd6dc72c106623464c5f013eeac9ef:packages/vuetify/src/mixins/menuable/index.ts
     },
     getInnerHeight () {
       if (!this.hasWindow) return 0

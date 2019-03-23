@@ -1,0 +1,98 @@
+@import '../bootstrap'
+@import '../theme'
+
+/* Theme */
+v-treeview($material)
+  color: $material.text.primary
+
+  &--hoverable .v-treeview-node__root:hover,
+  .v-treeview-node--active
+    background: $material.dividers
+
+v-treeview-rtl()
+  > .v-treeview-node
+    margin-right: 0
+
+    &--leaf
+      margin-right: 24px
+      margin-left: 0
+
+  &-node
+    margin-right: 26px
+    margin-left: 0
+
+    &--leaf
+      margin-right: 50px
+      margin-left: 0
+
+    &__toggle
+      transform: rotate(90deg)
+
+      &--open
+        transform: none
+
+theme(v-treeview, "v-treeview")
+rtl(v-treeview-rtl, "v-treeview")
+
+.v-treeview
+  > .v-treeview-node
+    margin-left: 0
+
+    &--leaf
+      margin-left: 24px
+
+  &-node
+    margin-left: 26px
+
+    &--excluded
+      display: none
+
+    &--click
+      > .v-treeview-node__root,
+      > .v-treeview-node__root > .v-treeview-node__content > *
+        cursor: pointer
+        user-select: none
+
+    &--leaf
+      margin-left: 50px
+
+    &__root
+      display: flex
+      align-items: center
+      height: 34px
+
+    &__content
+      display: flex
+      flex-grow: 1
+      flex-shrink: 0
+      align-items: center
+
+      // TODO: this is temporary fix for d-flex * shenanigans
+      .v-btn
+        flex-grow: 0 !important
+        flex-shrink: 1 !important
+
+    &__label
+      font-size: 1.2rem
+      margin-left: 6px
+      flex-grow: 1
+      flex-shrink: 0
+
+      .v-icon
+        padding-right: 8px
+
+    &__checkbox
+      user-select: none
+
+    &__toggle
+      user-select: none
+      transform: rotate(-90deg)
+
+      &--open
+        transform: none
+
+      &--loading
+        animation: progress-circular-rotate 1s linear infinite
+
+    &__children
+      transition: all $treeview-transition
