@@ -72,7 +72,6 @@ export default mixins(
       width: 0
     },
     targetEl: null as Element | null,
-    oldZIndex: undefined as number | undefined,
     movable: true
   }),
 
@@ -177,8 +176,8 @@ export default mixins(
     isActive (val: boolean) {
       if (!this.targetEl) return
 
-      if (val) this.updateRect();
-      (this.targetEl as any).style.zIndex = val ? 11 : this.oldZIndex
+      val && this.updateRect();
+      (this.targetEl as any).style.zIndex = val ? 11 : ''
     }
   },
 
@@ -195,7 +194,7 @@ export default mixins(
       if (this.closeConditional() && e.keyCode === keyCodes.esc) this.isActive = false
     },
     updateTarget () {
-      if (this.targetEl) (this.targetEl as any).style.zIndex = this.oldZIndex
+      if (this.targetEl) (this.targetEl as any).style.zIndex = ''
 
       if (this.target instanceof Element) this.targetEl = this.target
       else this.targetEl = document.querySelector(this.target)
@@ -203,7 +202,6 @@ export default mixins(
       if (!this.targetEl) return
 
       this.rect = this.targetEl.getBoundingClientRect()
-      this.oldZIndex = Number(getComputedStyle(this.targetEl).zIndex) || undefined
       /* istanbul ignore next */
       if (this.isActive) (this.targetEl as any).style.zIndex = 11
     },
