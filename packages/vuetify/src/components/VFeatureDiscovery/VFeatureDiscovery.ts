@@ -15,7 +15,7 @@ import mixins from '../../util/mixins'
 import ClickOutside from '../../directives/click-outside'
 
 // Helpers
-import { convertToUnit, keyCodes } from '../../util/helpers'
+import { convertToUnit, keyCodes, getSlot } from '../../util/helpers'
 
 const doubledSqrt2 = 2.8284
 
@@ -235,11 +235,11 @@ export default mixins(
     genActions (): VNode {
       return this.$createElement('div', {
         staticClass: 'v-feature-discovery__actions'
-      }, this.$scopedSlots.actions ? this.$scopedSlots.actions({
+      }, getSlot(this, 'actions', {
         close: () => {
           if (this.closeConditional()) this.isActive = false
         }
-      }) : this.$slots.actions)
+      }, true))
     },
     genWrapper (): VNode {
       return this.$createElement('div', {
