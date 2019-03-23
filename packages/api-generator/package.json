@@ -12,11 +12,11 @@
   "license": "ISC",
   "dependencies": {
     "deepmerge": "^2.2.1",
-    "vue": "^2.6.5",
+    "vue": "^2.6.10",
     "vuetify": "^2.0.0-alpha.10"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1"
+    "babel-preset-env": "^1.7.0"
   }
 }

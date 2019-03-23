@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VOverflowBtn should use default autocomplete selections 1`] = `
+exports[`VOverflowBtn.js should use default autocomplete selections 1`] = `
 
 <div class="v-input v-text-field v-text-field--single-line v-select v-autocomplete v-overflow-btn v-input--is-label-active v-input--is-dirty theme--light">
   <div class="v-input__control">
@@ -20,7 +20,7 @@ exports[`VOverflowBtn should use default autocomplete selections 1`] = `
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
-              arrow_drop_down
+              $vuetify.icons.dropdown
             </i>
           </div>
         </div>
@@ -30,8 +30,11 @@ exports[`VOverflowBtn should use default autocomplete selections 1`] = `
     </div>
     <div class="v-text-field__details">
       <div class="v-messages theme--light">
-        <div class="v-messages__wrapper">
-        </div>
+        <span name="message-transition"
+              tag="div"
+              class="v-messages__wrapper"
+        >
+        </span>
       </div>
     </div>
   </div>
@@ -39,20 +42,16 @@ exports[`VOverflowBtn should use default autocomplete selections 1`] = `
 
 `;
 
-exports[`VOverflowBtn should use default autocomplete selections 2`] = `
+exports[`VOverflowBtn.js should use default autocomplete selections 2`] = `
 
-<div class="v-input v-text-field v-text-field--single-line v-select v-autocomplete v-overflow-btn v-overflow-btn--segmented v-input--is-label-active v-input--is-dirty theme--light">
+<div class="v-input v-text-field v-text-field--single-line v-select v-autocomplete v-overflow-btn v-input--is-label-active v-input--is-dirty theme--light">
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-select__slot">
         <div class="v-select__selections">
-          <button type="button"
-                  class="v-btn v-btn--flat v-btn--text theme--light v-size--default"
-          >
-            <span class="v-btn__content">
-              foo
-            </span>
-          </button>
+          <div class="v-select__selection v-select__selection--comma">
+            foo
+          </div>
           <input autocomplete="off"
                  readonly="readonly"
                  type="text"
@@ -63,7 +62,7 @@ exports[`VOverflowBtn should use default autocomplete selections 2`] = `
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
-              arrow_drop_down
+              $vuetify.icons.dropdown
             </i>
           </div>
         </div>
@@ -73,8 +72,11 @@ exports[`VOverflowBtn should use default autocomplete selections 2`] = `
     </div>
     <div class="v-text-field__details">
       <div class="v-messages theme--light">
-        <div class="v-messages__wrapper">
-        </div>
+        <span name="message-transition"
+              tag="div"
+              class="v-messages__wrapper"
+        >
+        </span>
       </div>
     </div>
   </div>
