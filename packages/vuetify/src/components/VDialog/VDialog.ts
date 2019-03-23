@@ -155,7 +155,7 @@ export default baseMixins.extend({
       // If the dialog content contains
       // the click event, or if the
       // dialog is not active
-      if (!this.isActive || this.$refs.content.contains(target)) return false
+      if (!this.isActive || this.$refs.content.contains(e.target)) return false
 
       // If we made it here, the click is outside
       // and is active. If persistent, and the
@@ -190,25 +190,22 @@ export default baseMixins.extend({
     unbind () {
       window.removeEventListener('focusin', this.onFocusin)
     },
-    onKeydown (e: KeyboardEvent) {
+    onKeydown (e) {
       if (e.keyCode === keyCodes.esc && !this.getOpenDependents().length) {
         if (!this.persistent) {
           this.isActive = false
           const activator = this.getActivator()
-          this.$nextTick(() => activator && (activator as HTMLElement).focus())
+          this.$nextTick(() => activator && activator.focus())
         } else if (!this.noClickAnimation) {
           this.animateClick()
         }
       }
       this.$emit('keydown', e)
     },
-    onFocusin (e: Event) {
-      if (!e) return
-
-      const target = e.target as HTMLElement
+    onFocusin (e) {
+      const { target } = event
 
       if (
-        !!target &&
         // It isn't the document or the dialog body
         ![document, this.$refs.content].includes(target) &&
         // It isn't inside the dialog body
@@ -221,16 +218,14 @@ export default baseMixins.extend({
       ) {
         // Find and focus the first available element inside the dialog
         const focusable = this.$refs.content.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
-        focusable.length && (focusable[0] as HTMLElement).focus()
+        focusable.length && focusable[0].focus()
       }
     },
-    getActivator (e?: Event) {
-      const activator = this.$refs.activator as HTMLElement
-
-      if (activator) {
-        return activator.children.length > 0
-          ? activator.children[0]
-          : activator
+    getActivator (e) {
+      if (this.$refs.activator) {
+        return this.$refs.activator.children.length > 0
+          ? this.$refs.activator.children[0]
+          : this.$refs.activator
       }
 
       if (e) {
@@ -245,7 +240,7 @@ export default baseMixins.extend({
         if (el) return el
       }
 
-      return null
+      consoleError('No activator found')
     },
     genActivator () {
       if (!this.hasActivator) return null

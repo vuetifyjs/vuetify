@@ -194,24 +194,14 @@ describe('VDialog.ts', () => {
 
   it('should emit keydown event', async () => {
     const keydown = jest.fn()
-<<<<<<< HEAD:packages/vuetify/test/unit/components/VDialog/VDialog.spec.js
-    const wrapper = mount(VDialog, {
-=======
     const wrapper = mountFunction({
->>>>>>> d92c2b144ebd6dc72c106623464c5f013eeac9ef:packages/vuetify/src/components/VDialog/__tests__/VDialog.spec.ts
       propsData: { value: true }
     })
     wrapper.vm.$on('keydown', keydown)
 
     await wrapper.vm.$nextTick()
     wrapper.vm.$refs.content.dispatchEvent(new Event('keydown'))
-<<<<<<< HEAD:packages/vuetify/test/unit/components/VDialog/VDialog.spec.js
-    expect(keydown).toBeCalled()
-
-    expect('Unable to locate target [data-app]').toHaveBeenTipped()
-=======
     expect(keydown).toHaveBeenCalled()
->>>>>>> d92c2b144ebd6dc72c106623464c5f013eeac9ef:packages/vuetify/src/components/VDialog/__tests__/VDialog.spec.ts
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/3101
