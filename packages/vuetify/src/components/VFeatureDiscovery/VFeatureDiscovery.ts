@@ -72,8 +72,7 @@ export default mixins(
       height: 0,
       width: 0
     },
-    targetEl: null as HTMLElement | null,
-    movable: true
+    targetEl: null as HTMLElement | null
   }),
 
   computed: {
@@ -81,7 +80,6 @@ export default mixins(
       return {
         'v-feature-discovery--flat': this.flat,
         'v-feature-discovery--active': this.isActive,
-        'v-feature-discovery--movable': this.movable,
         'v-feature-discovery--lr-shifted': this.leftShift !== 0,
         'v-feature-discovery--no-ripple': this.noRipple,
         ...this.themeClasses
@@ -209,10 +207,7 @@ export default mixins(
     updateRect () {
       if (!this.targetEl || !this.isActive) return
 
-      this.movable = false
       this.rect = this.targetEl.getBoundingClientRect()
-
-      setTimeout(() => (this.movable = true))
     },
     closeConditional (): boolean {
       return !this.persistent && this.isActive
