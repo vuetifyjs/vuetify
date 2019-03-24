@@ -13,7 +13,7 @@ export interface VuetifyIconOptions {
    * fa: <a href="https://fontawesome.com/get-started/web-fonts-with-css">FontAwesome 5</a>
    * fa4: <a href="">FontAwesome 4</a> TODO: link
    */
-  iconfont: 'mdi-svg' | 'md' | 'mdi' | 'fa' | 'fa4' // TODO: camelCase
+  iconfont: 'mdi' | 'mdi-svg' | 'md' | 'fa' | 'fa4' // TODO: camelCase
   values?: VuetifyIcons
 }
 
