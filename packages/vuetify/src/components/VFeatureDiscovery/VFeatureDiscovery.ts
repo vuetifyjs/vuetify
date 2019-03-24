@@ -87,7 +87,7 @@ export default baseMixins.extend<options>().extend({
     classes (): object {
       return {
         'v-feature-discovery--flat': this.flat,
-        'v-feature-discovery--active': this.isActive,
+        'v-feature-discovery--active': this.internalActive,
         'v-feature-discovery--lr-shifted': this.leftShift !== 0,
         'v-feature-discovery--no-ripple': this.noRipple,
         ...this.themeClasses
@@ -173,8 +173,11 @@ export default baseMixins.extend<options>().extend({
     },
     attrs (): object {
       return {
-        'aria-hidden': !this.isActive
+        'aria-hidden': !this.internalActive
       }
+    },
+    internalActive (): boolean {
+      return this.isActive && this.rect.bottom > 0 && window.innerHeight - this.rect.top > 0
     }
   },
 
@@ -236,7 +239,7 @@ export default baseMixins.extend<options>().extend({
       this.rect = this.targetEl.getBoundingClientRect()
     },
     closeConditional (): boolean {
-      return !this.persistent && this.isActive
+      return !this.persistent && this.internalActive
     },
     genBackdrop (): VNode {
       return this.$createElement('div', this.setBackgroundColor(this.color, {
