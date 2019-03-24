@@ -1,0 +1,52 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": ["v-feature-discovery"]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "fab",
+            "toolbar",
+            "persistent",
+            "flat",
+            "no-ripple"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/banners",
+            "components/floating-action-buttons",
+            "components/tooltips"
+          ]
+        }
+      ]
+    }
+  ]
+}

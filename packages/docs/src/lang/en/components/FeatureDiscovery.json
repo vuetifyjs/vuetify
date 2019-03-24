@@ -1,0 +1,31 @@
+{
+  "header": "# Feature discovery",
+  "headerText": "The `v-feature-discovery` component can contain 4 different elements: target, the element about what you're telling to user, title, text and actions, which can trigger various events.",
+  "examples": {
+    "usage": {
+      "desc": "You can use different targets for `v-feature-discovery`."
+    },
+    "fab": {
+      "header": "### Using with FAB",
+      "desc": "The most often used with `v-feature-discovery` components are FABs and icons."
+    },
+    "toolbar": {
+      "header": "### Using with toolbar",
+      "desc": "You can even tell users about useful icons on a toolbar."
+    },
+    "persistent": {
+      "header": "### Persistent",
+      "desc": "Persistent `v-feature-discovery` can't be closed any way, except its model."
+    },
+    "flat": {
+      "header": "### Flat",
+      "desc": "If you pass a `flat` property to `v-feature-discovery`, it will display without elevation."
+    },
+    "no-ripple": {
+      "header": "### Without ripple",
+      "desc": "`v-feature-discovery` with a `no-ripple` property displays without ripple animation around the highlighted area."
+    }
+  },
+  "props": {
+  }
+}
