@@ -27,5 +27,9 @@
     }
   },
   "props": {
+    "flat": "Disable elevation.",
+    "target": "An element or a CSS selector of it. Will be used as target for `v-feature-discovery`.",
+    "noRipple": "Disable ripple animation.",
+    "highlightColor": "The color for highlight and ripple (if enabled)."
   }
 }
