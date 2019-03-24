@@ -29,7 +29,7 @@ const baseMixins = mixins(
 
 interface options extends ExtractVue<typeof baseMixins> {
   $refs: {
-    highlight: HTMLElement
+    target: HTMLElement
   }
 }
 
@@ -190,20 +190,20 @@ export default baseMixins.extend<options>().extend({
         newTarget.style.webkitTextFillColor = ''
         newTarget.style.cssFloat = ''
         newTarget.style.margin = ''
-        newTarget.style.transform = ''
         newTarget.style.top = ''
         newTarget.style.bottom = ''
         newTarget.style.left = ''
         newTarget.style.right = ''
+        newTarget.style.zIndex = '11'
         newTarget.classList.add(this.color + '--text')
         if (newTarget.style.position === 'fixed') {
           newTarget.style.position = 'static'
         }
 
-        while (this.$refs.highlight.firstChild) {
-          this.$refs.highlight.firstChild.remove()
+        while (this.$refs.target.firstChild) {
+          this.$refs.target.firstChild.remove()
         }
-        this.$refs.highlight.appendChild(newTarget)
+        this.$refs.target.appendChild(newTarget)
       }
     },
     isActive (val: boolean) {
@@ -295,7 +295,8 @@ export default baseMixins.extend<options>().extend({
           'aria-hidden': true
         }
       })), [this.$createElement('div', {
-        ref: 'highlight'
+        ref: 'target',
+        staticClass: 'v-feature-discovery__target'
       })])
     }
   },
