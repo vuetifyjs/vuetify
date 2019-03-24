@@ -9,7 +9,7 @@ import Themeable from '../../mixins/themeable'
 
 // Types
 import { VNode } from 'vue'
-import mixins from '../../util/mixins'
+import mixins, { ExtractVue } from '../../util/mixins'
 
 // Directives
 import ClickOutside from '../../directives/click-outside'
@@ -20,13 +20,21 @@ import { PropValidator } from 'vue/types/options'
 
 const doubledSqrt2 = 2.8284
 
-export default mixins(
+const baseMixins = mixins(
   Colorable,
   Elevatable,
   Toggleable,
   Themeable
-  /* @vue/component */
-).extend({
+)
+
+interface options extends ExtractVue<typeof baseMixins> {
+  $refs: {
+    highlight: HTMLElement
+  }
+}
+
+/* @vue/component */
+export default baseMixins.extend<options>().extend({
   name: 'v-feature-discovery',
 
   directives: { ClickOutside },
@@ -174,11 +182,25 @@ export default mixins(
     target () {
       this.updateTarget()
     },
-    isActive (val: boolean) {
-      if (!this.targetEl) return
+    targetEl () {
+      if (this.targetEl) {
+        const newTarget = this.targetEl.cloneNode(true) as HTMLElement
+        newTarget.style.cssText = window.getComputedStyle(this.targetEl).cssText
+        newTarget.style.color = ''
+        newTarget.style.webkitTextFillColor = ''
+        newTarget.style.cssFloat = ''
+        newTarget.style.margin = ''
+        newTarget.style.transform = ''
+        newTarget.classList.add(this.color + '--text')
 
+        while (this.$refs.highlight.firstChild) {
+          this.$refs.highlight.firstChild.remove()
+        }
+        this.$refs.highlight.appendChild(newTarget)
+      }
+    },
+    isActive (val: boolean) {
       val && this.updateRect()
-      this.targetEl.style.zIndex = val ? '11' : ''
     }
   },
 
@@ -195,16 +217,12 @@ export default mixins(
       if (this.closeConditional() && e.keyCode === keyCodes.esc) this.isActive = false
     },
     updateTarget () {
-      if (this.targetEl) this.targetEl.style.zIndex = ''
-
       if (this.target instanceof HTMLElement) this.targetEl = this.target
       else this.targetEl = document.querySelector(this.target)
 
       if (!this.targetEl) return
 
       this.rect = this.targetEl.getBoundingClientRect()
-      /* istanbul ignore next */
-      if (this.isActive) this.targetEl.style.zIndex = '11'
     },
     updateRect () {
       if (!this.targetEl || !this.isActive) return
@@ -258,8 +276,9 @@ export default mixins(
       ]
     },
     genHighlight (): VNode {
-      return this.$createElement('div', this.setBackgroundColor(this.highlightColor, {
+      return this.$createElement('div', this.setTextColor(this.color, this.setBackgroundColor(this.highlightColor, {
         staticClass: 'v-feature-discovery__highlight',
+        ref: 'highlight',
         style: {
           top: `calc(50% - (${convertToUnit(this.highlightSize)} / 2) - ${convertToUnit(this.topShift)})`,
           left: `calc(50% - (${convertToUnit(this.highlightSize)} / 2) - ${convertToUnit(this.leftShift)})`,
@@ -269,7 +288,7 @@ export default mixins(
         attrs: {
           'aria-hidden': true
         }
-      }))
+      })))
     }
   },
 
