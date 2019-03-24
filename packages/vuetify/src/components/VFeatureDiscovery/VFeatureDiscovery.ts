@@ -127,12 +127,14 @@ export default mixins(
       return this.computedSize / doubledSqrt2 * 0.75
     },
     leftShift (): number {
-      if (this.computedLeft < 0) return this.baseShift
+      if (this.computedLeft === this.computedRight) return 0
+      if (this.computedLeft < 0 && this.computedLeft < this.computedRight) return this.baseShift
       if (this.computedRight < 0) return -this.baseShift
       return 0
     },
     topShift (): number {
-      if (this.computedTop < 0) return this.baseShift
+      if (this.computedTop === this.computedBottom) return 0
+      if (this.computedTop < 0 && this.computedTop < this.computedBottom) return this.baseShift
       if (this.computedBottom < 0) return -this.baseShift
       return 0
     },
