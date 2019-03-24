@@ -84,6 +84,7 @@
       { "text": "dialogs", "to": "dialogs" },
       { "text": "dividers", "to": "dividers" },
       { "text": "expansionPanels", "to": "expansion-panels" },
+      { "text": "featureDiscovery", "to": "feature-discovery", "new": true },
       { "text": "footer", "to": "footer" },
       { "text": "grid", "to": "grids" },
       {
