@@ -126,20 +126,18 @@ const VIcon = mixins(
         role: 'icon'
       }
 
-      const size = this.getSize()
-      if (size) {
+      const fontSize = this.getSize()
+      if (fontSize) {
         data.style = {
-          fontSize: size,
-          height: size,
-          width: size
+          fontSize,
+          height: fontSize,
+          width: fontSize
         }
-        data.attrs.height = size
-        data.attrs.width = size
+        data.attrs.height = fontSize
+        data.attrs.width = fontSize
       }
 
       this.applyColors(data)
-
-      data.nativeOn = data.on
 
       return h('svg', data, [this.renderSvgIconPath(icon, h)])
     },
