@@ -69,10 +69,6 @@
     .v-feature-discovery__backdrop, .v-feature-discovery__highlight
       transform: scale(1)
 
-  &--active:not(&--no-ripple)
-    .v-feature-discovery__highlight
-      animation: highlight-pulse-animation 1.4s cubic-bezier(0.24, 0, 0.38, 1) infinite
-
   &:not(&--active)
     pointer-events: none
 
@@ -83,20 +79,13 @@
       width: 75%
 
 // Animations
-@keyframes highlight-pulse-animation
-  from
-    transform: scale(1)
-
-  75%
-    transform: scale(1.05)
-
-  to
-    transform: scale(1)
-
 @keyframes pulse-animation
   from
     opacity: 1
     transform: scale(1)
+
+  20%
+    opacity: 1
 
   to
     opacity: 0
