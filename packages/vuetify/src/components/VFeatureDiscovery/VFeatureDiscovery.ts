@@ -191,7 +191,14 @@ export default baseMixins.extend<options>().extend({
         newTarget.style.cssFloat = ''
         newTarget.style.margin = ''
         newTarget.style.transform = ''
+        newTarget.style.top = ''
+        newTarget.style.bottom = ''
+        newTarget.style.left = ''
+        newTarget.style.right = ''
         newTarget.classList.add(this.color + '--text')
+        if (newTarget.style.position === 'fixed') {
+          newTarget.style.position = 'static'
+        }
 
         while (this.$refs.highlight.firstChild) {
           this.$refs.highlight.firstChild.remove()
@@ -278,7 +285,6 @@ export default baseMixins.extend<options>().extend({
     genHighlight (): VNode {
       return this.$createElement('div', this.setTextColor(this.color, this.setBackgroundColor(this.highlightColor, {
         staticClass: 'v-feature-discovery__highlight',
-        ref: 'highlight',
         style: {
           top: `calc(50% - (${convertToUnit(this.highlightSize)} / 2) - ${convertToUnit(this.topShift)})`,
           left: `calc(50% - (${convertToUnit(this.highlightSize)} / 2) - ${convertToUnit(this.leftShift)})`,
@@ -288,7 +294,9 @@ export default baseMixins.extend<options>().extend({
         attrs: {
           'aria-hidden': true
         }
-      })))
+      })), [this.$createElement('div', {
+        ref: 'highlight'
+      })])
     }
   },
 
