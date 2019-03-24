@@ -5,6 +5,7 @@
       v-model="model"
       color="primary"
       target="#target1"
+      size="700"
     >
       <template #title>
         <h2>Hey! New feature...</h2>

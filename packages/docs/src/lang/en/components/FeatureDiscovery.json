@@ -24,20 +24,8 @@
     "no-ripple": {
       "header": "### Without ripple",
       "desc": "`v-feature-discovery` with a `no-ripple` property displays without ripple animation around the highlighted area."
-    },
-    "elevation": {
-      "header": "### With custom elevation",
-      "desc": "`v-feature-discovery` has elevation of 4 by default, but you can customize elevation using the `elevation` prop."
-    },
-    "size": {
-      "header": "### With custom size",
-      "desc": "`v-feature-discovery` has default size equal to 700px, but you can set size using the `size` prop of `v-feature-discovery` component."
     }
   },
   "props": {
-    "flat": "Disable elevation.",
-    "target": "An element or a CSS selector of it. Will be used as target for `v-feature-discovery`.",
-    "noRipple": "Disable ripple animation.",
-    "highlightColor": "The color for highlight and ripple (if enabled)."
   }
 }

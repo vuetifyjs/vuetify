@@ -7,6 +7,7 @@
       :no-ripple="noRipple"
       color="primary"
       target="#target6"
+      size="700"
     >
       <template #title>
         <h2>Hey! New feature...</h2>

@@ -10,6 +10,7 @@
       :persistent="persistent"
       color="primary"
       target="#target4"
+      size="700"
     >
       <template #title>
         <h2>Hey! New feature...</h2>

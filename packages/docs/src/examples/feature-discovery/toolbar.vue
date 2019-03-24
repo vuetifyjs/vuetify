@@ -28,6 +28,7 @@
         v-model="model1"
         color="primary"
         target="#target31"
+        size="700"
       >
         <template #title>
           <h2>Hey! New feature...</h2>
@@ -46,6 +47,7 @@
         v-model="model2"
         color="primary"
         target="#target32"
+        size="700"
       >
         <template #title>
           <h2>Hey! New feature...</h2>
@@ -64,6 +66,7 @@
         v-model="model3"
         color="primary"
         target="button.v-btn:nth-child(10) > span:nth-child(1)"
+        size="700"
       >
         <template #title>
           <h2>Hey! New feature...</h2>
