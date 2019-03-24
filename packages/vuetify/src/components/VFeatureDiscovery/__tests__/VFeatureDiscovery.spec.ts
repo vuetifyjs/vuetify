@@ -22,6 +22,13 @@ describe('FeatureDiscovery.ts', () => {
   it('should get closeConditional', () => {
     const wrapper = mountFunction()
 
+    wrapper.setData({
+      rect: {
+        bottom: 100,
+        top: 668
+      }
+    })
+
     expect(wrapper.vm.closeConditional()).toBeTruthy()
     wrapper.setProps({
       persistent: true
@@ -58,6 +65,11 @@ describe('FeatureDiscovery.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         target: document.body
+      },
+      computed: {
+        internalActive () {
+          return this.isActive
+        }
       }
     })
 
@@ -71,42 +83,6 @@ describe('FeatureDiscovery.ts', () => {
 
     wrapper.vm.isActive = true
     wrapper.vm.isActive = false
-  })
-
-  it('should work with scroll properly', async () => {
-    const fn = jest.fn()
-
-    const wrapper = mountFunction()
-
-    wrapper.vm.$watch('movable', fn)
-
-    expect(fn).toHaveBeenCalledTimes(0)
-    wrapper.vm.updateRect()
-    wrapper.setData({
-      targetEl: {
-        getBoundingClientRect: () => ({
-          top: 1,
-          bottom: 2,
-          left: 3,
-          right: 4,
-          height: 5,
-          width: 6
-        }),
-        style: {}
-      }
-    })
-    expect(fn).toHaveBeenCalledTimes(0)
-    wrapper.vm.updateRect()
-    await wrapper.vm.$nextTick()
-    expect(wrapper.vm.rect).toEqual({
-      top: 1,
-      bottom: 2,
-      left: 3,
-      right: 4,
-      height: 5,
-      width: 6
-    })
-    expect(fn).toHaveBeenCalledWith(false, true)
   })
 
   it('should update targetEl when target prop updates', () => {
