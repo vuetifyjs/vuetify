@@ -2,7 +2,8 @@
 
 exports[`FeatureDiscovery.ts should render correctly 1`] = `
 
-<div class="v-feature-discovery v-feature-discovery--active v-feature-discovery--movable v-feature-discovery--lr-shifted theme--light"
+<div aria-hidden="true"
+     class="v-feature-discovery v-feature-discovery--lr-shifted theme--light"
      style="left: -164.3826898599915px; top: -164.3826898599915px; height: 700px; width: 700px;"
 >
   <div class="v-feature-discovery__backdrop primary"
@@ -20,9 +21,11 @@ exports[`FeatureDiscovery.ts should render correctly 1`] = `
     </div>
   </div>
   <div aria-hidden="true"
-       class="v-feature-discovery__highlight white"
+       class="v-feature-discovery__highlight white primary--text"
        style="height: 0px; width: 0px;"
   >
+    <div class="v-feature-discovery__target">
+    </div>
   </div>
 </div>
 
@@ -30,7 +33,8 @@ exports[`FeatureDiscovery.ts should render correctly 1`] = `
 
 exports[`FeatureDiscovery.ts should render correctly when flat 1`] = `
 
-<div class="v-feature-discovery v-feature-discovery--flat v-feature-discovery--active v-feature-discovery--movable v-feature-discovery--lr-shifted theme--light"
+<div aria-hidden="true"
+     class="v-feature-discovery v-feature-discovery--flat v-feature-discovery--lr-shifted theme--light"
      style="left: -164.3826898599915px; top: -164.3826898599915px; height: 700px; width: 700px;"
 >
   <div class="v-feature-discovery__backdrop primary"
@@ -48,9 +52,11 @@ exports[`FeatureDiscovery.ts should render correctly when flat 1`] = `
     </div>
   </div>
   <div aria-hidden="true"
-       class="v-feature-discovery__highlight white"
+       class="v-feature-discovery__highlight white primary--text"
        style="height: 0px; width: 0px;"
   >
+    <div class="v-feature-discovery__target">
+    </div>
   </div>
 </div>
 
@@ -58,7 +64,7 @@ exports[`FeatureDiscovery.ts should render correctly when flat 1`] = `
 
 exports[`FeatureDiscovery.ts should toggle 1`] = `
 
-<div class="v-feature-discovery v-feature-discovery--active v-feature-discovery--movable v-feature-discovery--lr-shifted theme--light"
+<div class="v-feature-discovery v-feature-discovery--active v-feature-discovery--lr-shifted theme--light"
      style="left: -164.3826898599915px; top: -164.3826898599915px; height: 700px; width: 700px;"
 >
   <div class="v-feature-discovery__backdrop primary"
@@ -76,9 +82,15 @@ exports[`FeatureDiscovery.ts should toggle 1`] = `
     </div>
   </div>
   <div aria-hidden="true"
-       class="v-feature-discovery__highlight white"
+       class="v-feature-discovery__highlight white primary--text"
        style="height: 0px; width: 0px;"
   >
+    <div class="v-feature-discovery__target">
+      <body style="display: block;"
+            class="primary--text"
+      >
+      </body>
+    </div>
   </div>
 </div>
 
@@ -86,7 +98,7 @@ exports[`FeatureDiscovery.ts should toggle 1`] = `
 
 exports[`FeatureDiscovery.ts should toggle 2`] = `
 
-<div class="v-feature-discovery v-feature-discovery--movable v-feature-discovery--lr-shifted theme--light"
+<div class="v-feature-discovery v-feature-discovery--lr-shifted theme--light"
      style="left: -164.3826898599915px; top: -164.3826898599915px; height: 700px; width: 700px;"
      aria-hidden="true"
 >
@@ -105,9 +117,15 @@ exports[`FeatureDiscovery.ts should toggle 2`] = `
     </div>
   </div>
   <div aria-hidden="true"
-       class="v-feature-discovery__highlight white"
+       class="v-feature-discovery__highlight white primary--text"
        style="height: 0px; width: 0px;"
   >
+    <div class="v-feature-discovery__target">
+      <body style="display: block;"
+            class="primary--text"
+      >
+      </body>
+    </div>
   </div>
 </div>
 
