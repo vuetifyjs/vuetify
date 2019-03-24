@@ -194,7 +194,6 @@ export default baseMixins.extend<options>().extend({
         newTarget.style.bottom = ''
         newTarget.style.left = ''
         newTarget.style.right = ''
-        newTarget.style.zIndex = '11'
         newTarget.classList.add(this.color + '--text')
         if (newTarget.style.position === 'fixed') {
           newTarget.style.position = 'static'
