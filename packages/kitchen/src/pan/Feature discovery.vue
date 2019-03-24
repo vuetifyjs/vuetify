@@ -2,7 +2,6 @@
   <v-container>
     <v-layout column>
       <v-btn
-        id="fab1"
         fab
         large
         color="success"
@@ -10,17 +9,16 @@
         bottom
         right
       >
-        <v-icon>mdi-plus</v-icon>
+        <v-icon id="fab1">mdi-plus</v-icon>
       </v-btn>
       <v-btn
-        id="fab2"
         fab
         large
         color="success"
         fixed
         bottom
       >
-        <v-icon>mdi-plus</v-icon>
+        <v-icon id="fab2">mdi-plus</v-icon>
       </v-btn>
 
       <main-header>Feature discovery</main-header>
