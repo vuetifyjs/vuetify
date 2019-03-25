@@ -1,12 +1,11 @@
 <template>
-  <v-layout row justify-space-between align-center>
-    <v-switch v-model="flat" label="Flat"></v-switch>
-    <v-btn id="target5" color="green" large @click="model = !model">Toggle</v-btn>
+  <v-layout row justify-center align-center>
+    <v-btn id="target8" color="green" large @click="model = !model">Toggle</v-btn>
     <v-feature-discovery
       v-model="model"
-      :flat="flat"
       color="primary"
-      target="#target5"
+      target="#target8"
+      size="1000"
     >
       <template #title>
         <h2>Hey! New feature...</h2>
@@ -27,8 +26,7 @@
   export default {
     data () {
       return {
-        model: false,
-        flat: false
+        model: false
       }
     }
   }
