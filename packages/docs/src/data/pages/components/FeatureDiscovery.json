@@ -30,7 +30,9 @@
             "toolbar",
             "persistent",
             "flat",
-            "no-ripple"
+            "no-ripple",
+            "elevation",
+            "size"
           ]
         }
       ]
