@@ -1,11 +1,38 @@
-import VBtn from '@/components/VBtn/VBtn'
-import VCard from '@/components/VCard/VCard'
-import VMenu from '@/components/VMenu/VMenu'
-import { test } from '@/test'
+// Components
+import VMenu from '../VMenu'
+import VBtn from '../../VBtn/VBtn'
+import VCard from '../../VCard/VCard'
 
-test('VMenu.js', ({ mount, compileToFunctions, runAllTimers }) => {
+// Utilities
+import { compileToFunctions } from 'vue-template-compiler'
+import { rafPolyfill } from '../../../../test'
+import {
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+
+describe('VMenu.ts', () => {
+  type Instance = InstanceType<typeof VMenu>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+
+  rafPolyfill(window)
+
+  beforeEach(() => {
+    mountFunction = (options = {}) => {
+      return mount(VMenu, {
+        ...options,
+        mocks: {
+          $vuetify: {
+            theme: {}
+          }
+        }
+      })
+    }
+  })
+  // const wrapper = mountFunction()
+
   it('should work', async () => {
-    const wrapper = mount(VMenu, {
+    const wrapper = mountFunction({
       propsData: {
         value: false,
         fullWidth: true
@@ -16,20 +43,20 @@ test('VMenu.js', ({ mount, compileToFunctions, runAllTimers }) => {
       }
     })
 
-    const activator = wrapper.find('.v-menu__activator')[0]
+    const activator = wrapper.findAll('.v-menu__activator').at(0)
     const input = jest.fn()
-    wrapper.instance().$on('input', input)
+    wrapper.vm.$on('input', input)
     activator.trigger('click')
 
     await wrapper.vm.$nextTick()
 
-    expect(input).toBeCalledWith(true)
+    expect(input).toHaveBeenCalledWith(true)
     expect(wrapper.html()).toMatchSnapshot()
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should round dimensions', async () => {
-    const wrapper = mount(VMenu, {
+    const wrapper = mountFunction({
       propsData: {
         value: false
       },
@@ -38,7 +65,7 @@ test('VMenu.js', ({ mount, compileToFunctions, runAllTimers }) => {
       }
     })
 
-    const content = wrapper.find('.v-menu__content')[0]
+    const content = wrapper.findAll('.v-menu__content').at(0)
 
     const getBoundingClientRect = () => {
       return {
@@ -60,28 +87,28 @@ test('VMenu.js', ({ mount, compileToFunctions, runAllTimers }) => {
 
     await new Promise(resolve => requestAnimationFrame(resolve))
 
-    expect(content.getAttribute('style')).toMatchSnapshot()
+    expect(content.attributes('style')).toMatchSnapshot()
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should not attach event handlers to the activator container if disabled', async () => {
-    const wrapper = mount(VMenu, {
+    const wrapper = mountFunction({
       propsData: {
-        disabled: true,
+        disabled: true
       },
       slots: {
         activator: [compileToFunctions('<button></button>')]
       }
     })
 
-    expect(Object.keys(wrapper.find('.v-menu__activator')[0].vNode.data.on)).toHaveLength(0)
+    const activator = wrapper.find('.v-menu__activator')
+    activator.trigger('click')
 
-    wrapper.setProps({ openOnHover: true })
-    expect(Object.keys(wrapper.find('.v-menu__activator')[0].vNode.data.on)).toHaveLength(0)
+    expect(wrapper.vm.isActive).toBe(false)
   })
 
   it('should close menu when tab is pressed', async () => {
-    const wrapper = mount(VMenu)
+    const wrapper = mountFunction()
 
     wrapper.vm.isActive = true
     await wrapper.vm.$nextTick()
@@ -101,9 +128,10 @@ test('VMenu.js', ({ mount, compileToFunctions, runAllTimers }) => {
   })
 
   // TODO: figure out how to simulate tab focus
+  // eslint-disable-next-line jest/no-disabled-tests
   it.skip('should not close on tab if child is focused', async () => {
     const wrapper = mount({
-      render: h =>  h('div', [
+      render: h => h('div', [
         h(VMenu, {
           ref: 'menu',
           props: {
@@ -114,7 +142,7 @@ test('VMenu.js', ({ mount, compileToFunctions, runAllTimers }) => {
         h('input', { class: 'third' })
       ])
     }, { attachToDocument: true })
-    const menu = wrapper.first({ name: 'v-menu', render: () => null })
+    const menu = wrapper.find({ name: 'v-menu', render: () => null })
     const input = wrapper.find('input')
 
     input[0].element.focus()
@@ -131,43 +159,44 @@ test('VMenu.js', ({ mount, compileToFunctions, runAllTimers }) => {
 
   it('should show the menu on mounted', () => {
     const activate = jest.fn()
-    mount(VMenu, {
+    mountFunction({
       methods: { activate }
     })
 
-    expect(activate).not.toBeCalled()
+    expect(activate).not.toHaveBeenCalled()
 
-    mount(VMenu, {
+    mountFunction({
       propsData: { value: true },
       methods: { activate }
     })
-    expect(activate).toBeCalled()
+    expect(activate).toHaveBeenCalled()
   })
 
   it('should update position dynamically', async () => {
-    const wrapper = mount(VMenu, {
+    jest.useFakeTimers()
+    const wrapper = mountFunction({
       propsData: {
         absolute: true,
         value: true,
         positionX: 100,
-        positionY: 200,
+        positionY: 200
       }
     })
 
-    const content = wrapper.find('.v-menu__content')[0]
+    const content = wrapper.findAll('.v-menu__content').at(0)
 
     // TODO replace with jest fakeTimers when it will support requestAnimationFrame: https://github.com/facebook/jest/pull/7776
     // See https://github.com/vuetifyjs/vuetify/pull/6330#issuecomment-460083547 for details
-    runAllTimers()
+    jest.runAllTimers()
     await wrapper.vm.$nextTick()
-    expect(content.getAttribute('style')).toMatchSnapshot()
+    expect(content.attributes('style')).toMatchSnapshot()
 
     wrapper.setProps({
       positionX: 110,
       positionY: 220
     })
-    runAllTimers()
+    jest.runAllTimers()
     await wrapper.vm.$nextTick()
-    expect(content.getAttribute('style')).toMatchSnapshot()
+    expect(content.attributes('style')).toMatchSnapshot()
   })
 })

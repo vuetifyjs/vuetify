@@ -48,6 +48,18 @@ declare module 'vue/types/vue' {
   }
 }
 
+declare module 'vue/types/options' {
+  export interface ComponentOptions<
+    V extends Vue,
+    Data=DefaultData<V>,
+    Methods=DefaultMethods<V>,
+    Computed=DefaultComputed,
+    PropsDef=PropsDefinition<DefaultProps>,
+    Props=DefaultProps> {
+    vuetify?: any
+  }
+}
+
 export type VuetifyIconComponent = {
   component: Component | string
   props?: object
