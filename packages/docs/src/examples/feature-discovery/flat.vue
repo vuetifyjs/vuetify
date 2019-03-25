@@ -7,7 +7,6 @@
       :flat="flat"
       color="primary"
       target="#target5"
-      size="700"
     >
       <template #title>
         <h2>Hey! New feature...</h2>

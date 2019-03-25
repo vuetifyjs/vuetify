@@ -13,7 +13,6 @@
       v-model="model"
       color="primary"
       target="#fab2"
-      size="700"
     >
       <template #title>
         <h2>Hey! New feature...</h2>
