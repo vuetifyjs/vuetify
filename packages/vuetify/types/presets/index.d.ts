@@ -1,7 +1,4 @@
-import {
-  VuetifyIconOptions,
-  VuetifyIconService
-} from 'vuetify/types/services/icons'
+import { VuetifyIconOptions } from 'vuetify/types/services/icons'
 
 import {
   VuetifyThemeService,
