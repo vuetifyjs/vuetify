@@ -1,15 +1,31 @@
 import VTooltip from '../VTooltip'
-import { test } from '@/test'
+import {
+  mount
+} from '@vue/test-utils'
+import { rafPolyfill } from '../../../../test'
 
-test('VTooltip', ({ mount, compileToFunctions }) => {
+describe('VTooltip', () => {
+  rafPolyfill(window)
+
+  type Instance = ExtractVue<typeof VTooltip>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+
+  beforeEach(() => {
+    document.body.setAttribute('data-app', 'true')
+
+    mountFunction = (options = {}) => {
+      return mount(VTooltip, options)
+    }
+  })
+
   it('should render component and match snapshot', async () => {
-    const wrapper = mount(VTooltip, {
+    const wrapper = mountFunction({
       propsData: {
         openDelay: 0
       },
       slots: {
-        activator: [compileToFunctions('<span>activator</span>')],
-        default: [compileToFunctions('<span>content</span>')]
+        activator: '<span>activator</span>',
+        default: '<span>content</span>'
       }
     })
 
@@ -20,17 +36,16 @@ test('VTooltip', ({ mount, compileToFunctions }) => {
     })
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
-  it('should render component with custom lazy and match snapshot', () => {
-    const wrapper = mount(VTooltip, {
+  it('should render component with custom eager and match snapshot', () => {
+    const wrapper = mountFunction({
       propsData: {
-        lazy: true
+        eager: true
       },
       slots: {
-        activator: [compileToFunctions('<span>activator</span>')],
-        default: [compileToFunctions('<span>content</span>')]
+        activator: '<span>activator</span>',
+        default: '<span>content</span>'
       }
     })
 
@@ -38,30 +53,30 @@ test('VTooltip', ({ mount, compileToFunctions }) => {
   })
 
   it('should render component with value=true and match snapshot', async () => {
-    const wrapper = mount(VTooltip, {
+    const wrapper = mountFunction({
       propsData: {
         value: true
       },
       slots: {
-        activator: [compileToFunctions('<span>activator</span>')],
-        default: [compileToFunctions('<span>content</span>')]
+        activator: '<span>activator</span>',
+        default: '<span>content</span>'
       }
     })
 
-    expect(wrapper.data().isActive).toBe(true)
+    expect(wrapper.vm.isActive).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render component with min/max width and match snapshot', async () => {
-    const wrapper = mount(VTooltip, {
+    const wrapper = mountFunction({
       propsData: {
         value: true,
         minWidth: 100,
         maxWidth: 200
       },
       slots: {
-        activator: [compileToFunctions('<span>activator</span>')],
-        default: [compileToFunctions('<span>content</span>')]
+        activator: '<span>activator</span>',
+        default: '<span>content</span>'
       }
     })
 
@@ -69,7 +84,7 @@ test('VTooltip', ({ mount, compileToFunctions }) => {
   })
 
   it('should render component with zIndex prop and match snapshot', async () => {
-    const wrapper = mount(VTooltip, {
+    const wrapper = mountFunction({
       propsData: {
         zIndex: 42
       }
@@ -80,20 +95,20 @@ test('VTooltip', ({ mount, compileToFunctions }) => {
 
   it('should display tooltip after mouseenter and hide after mouseleave', async () => {
     jest.useFakeTimers()
-    const wrapper = mount(VTooltip, {
+    const wrapper = mountFunction({
       propsData: {
         openDelay: 123,
         closeDelay: 321
       },
       slots: {
-        activator: [compileToFunctions('<span>activator</span>')],
-        default: [compileToFunctions('<span>content</span>')]
+        activator: '<span>activator</span>',
+        default: '<span>content</span>'
       }
     })
 
-    const activator = wrapper.find('.v-tooltip__content + span')[0]
+    const activator = wrapper.find('.v-tooltip__content + span')
     const cb = jest.fn()
-    wrapper.instance().$on('input', cb)
+    wrapper.vm.$on('input', cb)
 
     activator.trigger('mouseenter')
     jest.runAllTimers()
@@ -106,6 +121,5 @@ test('VTooltip', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
     expect(setTimeout.mock.calls[1][1]).toBe(321)
     expect(cb).toHaveBeenCalledWith(false)
-    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })
