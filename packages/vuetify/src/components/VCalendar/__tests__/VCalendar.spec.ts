@@ -1,10 +1,32 @@
-import { test } from '@/test'
-import { parseDate } from '@/components/VCalendar/util/timestamp'
-import VCalendar from '@/components/VCalendar/VCalendar'
+import { parseDate } from '../util/timestamp'
+import VCalendar from '../VCalendar'
+import {
+  mount,
+  Wrapper,
+  MountOptions
+} from '@vue/test-utils'
+import { ExtractVue } from '../../../util/mixins'
 
-test('VCalendar', ({ mount }) => {
+describe('VCalendar', () => {
+  type Instance = ExtractVue<typeof VCalendar>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+  beforeEach(() => {
+    mountFunction = (options?: MountOptions<Instance>) => {
+      return mount(VCalendar, {
+        ...options,
+        mocks: {
+          $vuetify: {
+            lang: {
+              current: 'en-US'
+            }
+          }
+        }
+      })
+    }
+  })
+
   it('should render day view', async () => {
-    const wrapper = mount(VCalendar, {
+    const wrapper = mountFunction({
       propsData: {
         type: 'day',
         start: '2018-01-29',
@@ -16,12 +38,12 @@ test('VCalendar', ({ mount }) => {
       }
     })
 
-    expect(wrapper.hasClass('v-calendar-daily')).toBe(true)
+    expect(wrapper.classes('v-calendar-daily')).toBeTruthy()
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render week view', async () => {
-    const wrapper = mount(VCalendar, {
+    const wrapper = mountFunction({
       propsData: {
         type: 'week',
         start: '2018-01-29',
@@ -33,12 +55,12 @@ test('VCalendar', ({ mount }) => {
       }
     })
 
-    expect(wrapper.hasClass('v-calendar-daily')).toBe(true)
+    expect(wrapper.classes('v-calendar-daily')).toBeTruthy()
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render month view', async () => {
-    const wrapper = mount(VCalendar, {
+    const wrapper = mountFunction({
       propsData: {
         type: 'month',
         start: '2018-01-29',
@@ -50,12 +72,12 @@ test('VCalendar', ({ mount }) => {
       }
     })
 
-    expect(wrapper.hasClass('v-calendar-monthly')).toBe(true)
+    expect(wrapper.classes('v-calendar-monthly')).toBeTruthy()
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should parse value', async () => {
-    const wrapper = mount(VCalendar, {
+    const wrapper = mountFunction({
       propsData: {
         value: '2019-02-02',
         start: '2019-01-29',
@@ -67,7 +89,7 @@ test('VCalendar', ({ mount }) => {
   })
 
   it('should parse start', async () => {
-    const wrapper = mount(VCalendar, {
+    const wrapper = mountFunction({
       propsData: {
         start: '2019-01-29',
         end: '2019-02-04'
@@ -77,11 +99,8 @@ test('VCalendar', ({ mount }) => {
     expect(wrapper.vm.parsedValue.date).toBe('2019-01-29')
   })
 
-  // TODO Create a test that doesn't fail when
-  // the day changes or ignore the code it
-  // covers
-  it.skip('should calculate end', async () => {
-    const wrapper = mount(VCalendar, {
+  it('should calculate end', async () => {
+    const wrapper = mountFunction({
       propsData: {
         end: '2018-12-04'
       }
