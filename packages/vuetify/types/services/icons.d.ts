@@ -1,5 +1,4 @@
 // Types
-import { Icons } from '../../src/services/icons'
 import { Component } from 'vue'
 
 export interface VuetifyIconOptions {
@@ -12,20 +11,14 @@ export interface VuetifyIconOptions {
    * fa4: <a href="">FontAwesome 4</a> TODO: link
    */
   iconfont: 'md' | 'mdi' | 'fa' | 'fa4' // TODO: camelCase
-  values?: {
-    [key: string]: VuetifyIcon
-  }
+  values?: Partial<VuetifyIcons>
 }
-
-export interface VuetifyIconSets {
-  [key: string]: VuetifyIcons
-}
-
 
 export type VuetifyIconComponent = {
   component: Component | string
   props?: object
 }
+
 export type VuetifyIcon = string | VuetifyIconComponent
 
 export interface VuetifyIcons {
