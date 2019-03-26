@@ -21,10 +21,9 @@ import {
   nextDay,
   prevDay,
   relativeDays
-} from '@/components/VCalendar/util/timestamp'
-import { test } from '@/test'
+} from '../../util/timestamp'
 
-test('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-statements
+describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-statements
   it('should parse time number', () => {
     expect(parseTime(0)).toBe(0)
     expect(parseTime(120)).toBe(120)
