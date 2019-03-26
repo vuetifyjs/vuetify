@@ -1,14 +1,27 @@
-import { test } from '@/test'
-import Times from '@/components/VCalendar/mixins/times'
+import Times from '../times'
+import {
+  mount,
+  Wrapper,
+  MountOptions
+} from '@vue/test-utils'
+import { ExtractVue } from '../../../../util/mixins'
+import { VTimestamp } from '../../util/timestamp'
 
-const Mock = {
-  mixins: [Times],
+const Mock = Times.extend({
   render: h => h('div')
-}
+})
 
-test('times.ts', ({ mount }) => {
+describe('times.ts', () => {
+  type Instance = ExtractVue<typeof Mock>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+  beforeEach(() => {
+    mountFunction = (options?: MountOptions<Instance>) => {
+      return mount(Mock, options)
+    }
+  })
+
   it('should parse timestamp', async () => {
-    const wrapper = mount(Mock, {
+    const wrapper = mountFunction({
       propsData: {
         now: '2019-02-08'
       }
@@ -19,7 +32,7 @@ test('times.ts', ({ mount }) => {
   })
 
   it('should update day', async () => {
-    const wrapper = mount(Mock)
+    const wrapper = mountFunction()
 
     expect(typeof wrapper.vm.updateDay).toBe('function')
     const target = {}
@@ -30,12 +43,12 @@ test('times.ts', ({ mount }) => {
       day: '8',
       weekday: '4'
     }
-    wrapper.vm.updateDay(now, target)
+    wrapper.vm.updateDay(now as unknown as VTimestamp, target as unknown as VTimestamp)
     expect(target).toEqual(now)
   })
 
   it('should not update day if dates are equal', async () => {
-    const wrapper = mount(Mock)
+    const wrapper = mountFunction()
 
     expect(typeof wrapper.vm.updateDay).toBe('function')
     const target = { date: '2019-02-08' }
@@ -46,12 +59,12 @@ test('times.ts', ({ mount }) => {
       day: '8',
       weekday: '4'
     }
-    wrapper.vm.updateDay(now, target)
+    wrapper.vm.updateDay(now as unknown as VTimestamp, target as unknown as VTimestamp)
     expect(target).not.toEqual(now)
   })
 
   it('should not update time if times are equal', async () => {
-    const wrapper = mount(Mock)
+    const wrapper = mountFunction()
 
     expect(typeof wrapper.vm.updateTime).toBe('function')
     const target = { time: '08:30' }
@@ -60,7 +73,7 @@ test('times.ts', ({ mount }) => {
       hour: '8',
       minute: '30'
     }
-    wrapper.vm.updateTime(now, target)
+    wrapper.vm.updateTime(now as unknown as VTimestamp, target as unknown as VTimestamp)
     expect(target).not.toEqual(now)
   })
 })

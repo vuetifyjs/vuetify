@@ -1,12 +1,25 @@
-import { test } from '@/test'
-import Mouse from '@/components/VCalendar/mixins/mouse'
+import Mouse from '../mouse'
 
-const Mock = {
-  mixins: [Mouse],
+import {
+  mount,
+  Wrapper,
+  MountOptions
+} from '@vue/test-utils'
+import { ExtractVue } from '../../../../util/mixins'
+
+const Mock = Mouse.extend({
   render: h => h('div')
-}
+})
 
-test('mouse.ts', ({ mount }) => {
+describe('mouse.ts', () => {
+  type Instance = ExtractVue<typeof Mock>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+  beforeEach(() => {
+    mountFunction = (options?: MountOptions<Instance>) => {
+      return mount(Mock, options)
+    }
+  })
+
   it('should generate mouse event handlers', async () => {
     const noop = e => e
     const wrapper = mount(Mock, {
@@ -38,7 +51,8 @@ test('mouse.ts', ({ mount }) => {
       }
     })
 
-    wrapper.vm.getMouseEventHandlers({ click: { event: 'click' } }, fn).click()
+    const { click } = wrapper.vm.getMouseEventHandlers({ click: { event: 'click' } }, () => {})
+    Array.isArray(click) ? click[0](null) : click(null)
     expect(fn).toHaveBeenCalledTimes(1)
   })
 
@@ -52,7 +66,8 @@ test('mouse.ts', ({ mount }) => {
     const event = { preventDefault: () => {} }
     const spy = jest.spyOn(event, 'preventDefault')
 
-    wrapper.vm.getMouseEventHandlers({ click: { event: 'click', prevent: true } }, fn).click(event)
+    const { click } = wrapper.vm.getMouseEventHandlers({ click: { event: 'click', prevent: true } }, () => {})
+    Array.isArray(click) ? click[0](event as MouseEvent) : click(event as MouseEvent)
     expect(fn).toHaveBeenCalledTimes(1)
     expect(spy).toHaveBeenCalledTimes(1)
   })
@@ -67,7 +82,8 @@ test('mouse.ts', ({ mount }) => {
     const event = { stopPropagation: () => {} }
     const spy = jest.spyOn(event, 'stopPropagation')
 
-    wrapper.vm.getMouseEventHandlers({ click: { event: 'click', stop: true } }, fn).click(event)
+    const { click } = wrapper.vm.getMouseEventHandlers({ click: { event: 'click', stop: true } }, () => {})
+    Array.isArray(click) ? click[0](event as MouseEvent) : click(event as MouseEvent)
     expect(fn).toHaveBeenCalledTimes(1)
     expect(spy).toHaveBeenCalledTimes(1)
   })

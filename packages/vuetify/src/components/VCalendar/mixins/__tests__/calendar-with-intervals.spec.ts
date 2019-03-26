@@ -1,11 +1,15 @@
-import { test } from '@/test'
-import CalendarWithIntervals from '@/components/VCalendar/mixins/calendar-with-intervals'
-import { parseTimestamp } from '@/components/VCalendar/util/timestamp'
+import CalendarWithIntervals from '../calendar-with-intervals'
+import { parseTimestamp, VTimestamp } from '../../util/timestamp'
+import {
+  mount,
+  Wrapper,
+  MountOptions
+} from '@vue/test-utils'
+import { ExtractVue } from '../../../../util/mixins'
 
-const Mock = {
-  mixins: [CalendarWithIntervals],
+const Mock = CalendarWithIntervals.extend({
   render: h => h('div')
-}
+})
 
 const createMouseEvent = (x, y) => ({
   clientX: x,
@@ -20,9 +24,26 @@ const createTouchEvent = (x, y) => ({
   currentTarget: document.body
 })
 
-test('calendar-with-intervals.ts', ({ mount }) => {
+describe('calendar-with-intervals.ts', () => {
+  type Instance = ExtractVue<typeof Mock>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+  beforeEach(() => {
+    mountFunction = (options?: MountOptions<Instance>) => {
+      return mount(Mock, {
+        ...options,
+        mocks: {
+          $vuetify: {
+            lang: {
+              current: 'en-US'
+            }
+          }
+        }
+      })
+    }
+  })
+
   it('should parse all data', async () => {
-    const wrapper = mount(Mock, {
+    const wrapper = mountFunction({
       propsData: {
         firstInterval: '1',
         intervalMinutes: '30',
@@ -42,7 +63,7 @@ test('calendar-with-intervals.ts', ({ mount }) => {
   })
 
   it('should generate firstMinute', async () => {
-    const wrapper = mount(Mock, {
+    const wrapper = mountFunction({
       propsData: {
         firstInterval: '2',
         intervalMinutes: '30'
@@ -54,7 +75,7 @@ test('calendar-with-intervals.ts', ({ mount }) => {
   })
 
   it('should generate bodyHeight', async () => {
-    const wrapper = mount(Mock, {
+    const wrapper = mountFunction({
       propsData: {
         intervalCount: '10',
         intervalHeight: '20'
@@ -66,7 +87,7 @@ test('calendar-with-intervals.ts', ({ mount }) => {
   })
 
   it('should generate days', async () => {
-    const wrapper = mount(Mock, {
+    const wrapper = mountFunction({
       propsData: {
         start: '2019-01-29',
         end: '2019-02-04'
@@ -92,7 +113,7 @@ test('calendar-with-intervals.ts', ({ mount }) => {
   })
 
   it('should generate intervals', async () => {
-    const wrapper = mount(Mock, {
+    const wrapper = mountFunction({
       propsData: {
         start: '2019-01-29',
         end: '2019-02-04'
@@ -120,26 +141,26 @@ test('calendar-with-intervals.ts', ({ mount }) => {
   })
 
   it('should generate intervalFormatter', async () => {
-    const wrapper = mount(Mock)
+    const wrapper = mountFunction()
 
     expect(wrapper.vm.intervalFormatter).toBeDefined()
     expect(typeof wrapper.vm.intervalFormatter).toBe('function')
   })
 
   it('should format interval', async () => {
-    const wrapper = mount(Mock)
+    const wrapper = mountFunction()
 
-    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 8, minute: 30 }, false)).toBe('8:30 AM')
-    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 20, minute: 30 }, false)).toBe('8:30 PM')
-    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 0, minute: 30 }, false)).toBe('12:30 AM')
-    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 8, minute: 30 }, true)).toBe('8:30 AM')
-    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 20, minute: 30 }, true)).toBe('8:30 PM')
-    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 0, minute: 30 }, true)).toBe('12:30 AM')
+    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 8, minute: 30 } as VTimestamp, false)).toBe('8:30 AM')
+    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 20, minute: 30 } as VTimestamp, false)).toBe('8:30 PM')
+    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 0, minute: 30 } as VTimestamp, false)).toBe('12:30 AM')
+    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 8, minute: 30 } as VTimestamp, true)).toBe('8:30 AM')
+    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 20, minute: 30 } as VTimestamp, true)).toBe('8:30 PM')
+    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 0, minute: 30 } as VTimestamp, true)).toBe('12:30 AM')
   })
 
   it('should return intervalFormat if has one', async () => {
     const intervalFormat = x => x
-    const wrapper = mount(Mock, {
+    const wrapper = mountFunction({
       propsData: {
         intervalFormat
       }
@@ -151,7 +172,7 @@ test('calendar-with-intervals.ts', ({ mount }) => {
   })
 
   it('should generate slot scope', async () => {
-    const wrapper = mount(Mock)
+    const wrapper = mountFunction()
 
     expect(wrapper.vm.getSlotScope(parseTimestamp('2019-02-08'))).toBeDefined()
     expect(wrapper.vm.getSlotScope(parseTimestamp('2019-02-08')).date).toBe('2019-02-08')
@@ -161,13 +182,13 @@ test('calendar-with-intervals.ts', ({ mount }) => {
   })
 
   it('should convert time to Y', async () => {
-    const wrapper = mount(Mock)
+    const wrapper = mountFunction()
 
     expect(typeof wrapper.vm.timeToY).toBe('function')
     expect(wrapper.vm.timeToY('08:30')).toBeDefined()
     expect(wrapper.vm.timeToY('08:30')).toBe(340)
     expect(wrapper.vm.timeToY('09:30')).toBe(380)
-    expect(Math.round(wrapper.vm.timeToY('23:50'))).toBe(953)
+    expect(Math.round(wrapper.vm.timeToY('23:50') || 0)).toBe(953)
 
     wrapper.setProps({
       firstInterval: 5,
@@ -182,7 +203,7 @@ test('calendar-with-intervals.ts', ({ mount }) => {
 
     expect(wrapper.vm.timeToY('00:05')).toBe(0)
 
-    expect(Math.round(wrapper.vm.timeToY('08:30', false))).toBe(1840)
+    expect(Math.round(wrapper.vm.timeToY('08:30', false) || 0)).toBe(1840)
     expect(wrapper.vm.timeToY('09:30', false)).toBe(2080)
     expect(wrapper.vm.timeToY('23:50', false)).toBe(5520)
 
@@ -190,7 +211,7 @@ test('calendar-with-intervals.ts', ({ mount }) => {
   })
 
   it('should convert minutes to pixels', async () => {
-    const wrapper = mount(Mock, {
+    const wrapper = mountFunction({
       propsData: {
         intervalMinutes: 5,
         bodyHeight: 200
@@ -216,8 +237,7 @@ test('calendar-with-intervals.ts', ({ mount }) => {
   })
 
   it('should scroll to time', async () => {
-    const wrapper = mount({
-      ...Mock,
+    const wrapper = mountFunction({
       render: h => h('div', [
         h('div', {
           ref: 'scrollArea'
@@ -226,11 +246,11 @@ test('calendar-with-intervals.ts', ({ mount }) => {
     })
 
     wrapper.vm.scrollToTime('8:30')
-    expect(wrapper.vm.$refs.scrollArea.scrollTop).toBe(340)
+    expect((wrapper.vm.$refs.scrollArea as any).scrollTop).toBe(340)
     wrapper.vm.scrollToTime('12:30')
-    expect(Math.round(wrapper.vm.$refs.scrollArea.scrollTop)).toBe(500)
+    expect(Math.round((wrapper.vm.$refs.scrollArea as any).scrollTop)).toBe(500)
     wrapper.vm.scrollToTime('20:00')
-    expect(wrapper.vm.$refs.scrollArea.scrollTop).toBe(800)
+    expect((wrapper.vm.$refs.scrollArea as any).scrollTop).toBe(800)
 
     wrapper.setProps({
       intervalMinutes: 5,
@@ -238,11 +258,11 @@ test('calendar-with-intervals.ts', ({ mount }) => {
     })
 
     wrapper.vm.scrollToTime('8:30')
-    expect(wrapper.vm.$refs.scrollArea.scrollTop).toBe(960)
+    expect((wrapper.vm.$refs.scrollArea as any).scrollTop).toBe(960)
     wrapper.vm.scrollToTime('12:30')
-    expect(wrapper.vm.$refs.scrollArea.scrollTop).toBe(960)
+    expect((wrapper.vm.$refs.scrollArea as any).scrollTop).toBe(960)
     wrapper.vm.scrollToTime('20:30')
-    expect(wrapper.vm.$refs.scrollArea.scrollTop).toBe(960)
+    expect((wrapper.vm.$refs.scrollArea as any).scrollTop).toBe(960)
 
     wrapper.setProps({
       intervalMinutes: 30,
@@ -250,45 +270,45 @@ test('calendar-with-intervals.ts', ({ mount }) => {
     })
 
     wrapper.vm.scrollToTime('8:30')
-    expect(wrapper.vm.$refs.scrollArea.scrollTop).toBe(680)
+    expect((wrapper.vm.$refs.scrollArea as any).scrollTop).toBe(680)
     wrapper.vm.scrollToTime('12:30')
-    expect(wrapper.vm.$refs.scrollArea.scrollTop).toBe(960)
+    expect((wrapper.vm.$refs.scrollArea as any).scrollTop).toBe(960)
     wrapper.vm.scrollToTime('20:30')
-    expect(wrapper.vm.$refs.scrollArea.scrollTop).toBe(960)
+    expect((wrapper.vm.$refs.scrollArea as any).scrollTop).toBe(960)
 
     expect(wrapper.vm.scrollToTime('20:19')).toBe(true)
     expect(wrapper.vm.scrollToTime('bad')).toBe(false)
   })
 
   it('should get timestamp at mouse event', async () => {
-    const wrapper = mount(Mock)
+    const wrapper = mountFunction()
 
     expect(typeof wrapper.vm.getTimestampAtEvent).toBe('function')
 
-    expect(wrapper.vm.getTimestampAtEvent(createMouseEvent(0, 100), { time: '20:00' })).toMatchObject({ hour: 2, minute: 30 })
-    expect(wrapper.vm.getTimestampAtEvent(createMouseEvent(0, 150), { time: '20:00' })).toMatchObject({ hour: 3, minute: 45 })
-    expect(wrapper.vm.getTimestampAtEvent(createMouseEvent(0, 200), { time: '20:00' })).toMatchObject({ hour: 5, minute: 0 })
+    expect(wrapper.vm.getTimestampAtEvent(createMouseEvent(0, 100) as unknown as MouseEvent, { time: '20:00' } as VTimestamp)).toMatchObject({ hour: 2, minute: 30 })
+    expect(wrapper.vm.getTimestampAtEvent(createMouseEvent(0, 150) as unknown as MouseEvent, { time: '20:00' } as VTimestamp)).toMatchObject({ hour: 3, minute: 45 })
+    expect(wrapper.vm.getTimestampAtEvent(createMouseEvent(0, 200) as unknown as MouseEvent, { time: '20:00' } as VTimestamp)).toMatchObject({ hour: 5, minute: 0 })
   })
 
   it('should get timestamp at touch event', async () => {
-    const wrapper = mount(Mock)
+    const wrapper = mountFunction()
 
     expect(typeof wrapper.vm.getTimestampAtEvent).toBe('function')
 
-    expect(wrapper.vm.getTimestampAtEvent(createTouchEvent(0, 100), { time: '20:00' })).toMatchObject({ hour: 2, minute: 30 })
-    expect(wrapper.vm.getTimestampAtEvent(createTouchEvent(0, 150), { time: '20:00' })).toMatchObject({ hour: 3, minute: 45 })
-    expect(wrapper.vm.getTimestampAtEvent(createTouchEvent(0, 200), { time: '20:00' })).toMatchObject({ hour: 5, minute: 0 })
+    expect(wrapper.vm.getTimestampAtEvent(createTouchEvent(0, 100) as unknown as TouchEvent, { time: '20:00' } as VTimestamp)).toMatchObject({ hour: 2, minute: 30 })
+    expect(wrapper.vm.getTimestampAtEvent(createTouchEvent(0, 150) as unknown as TouchEvent, { time: '20:00' } as VTimestamp)).toMatchObject({ hour: 3, minute: 45 })
+    expect(wrapper.vm.getTimestampAtEvent(createTouchEvent(0, 200) as unknown as TouchEvent, { time: '20:00' } as VTimestamp)).toMatchObject({ hour: 5, minute: 0 })
   })
 
   it('should get style', async () => {
-    const wrapper = mount(Mock)
+    const wrapper = mountFunction()
 
     expect(typeof wrapper.vm.intervalStyleDefault).toBe('function')
-    expect(wrapper.vm.intervalStyleDefault({})).toBeUndefined()
+    expect(wrapper.vm.intervalStyleDefault({} as VTimestamp)).toBeUndefined()
   })
 
   it('should show interval label', async () => {
-    const wrapper = mount(Mock, {
+    const wrapper = mountFunction({
       propsData: {
         start: '2019-01-29',
         end: '2019-02-04',
@@ -298,9 +318,9 @@ test('calendar-with-intervals.ts', ({ mount }) => {
     expect(typeof wrapper.vm.showIntervalLabelDefault).toBe('function')
     expect(wrapper.vm.showIntervalLabelDefault({})).toBeFalsy()
 
-    expect(wrapper.vm.showIntervalLabelDefault({ hour: 0, minute: 5 })).toBeFalsy()
-    expect(wrapper.vm.showIntervalLabelDefault({ hour: 12, minute: 30 })).toBeFalsy()
-    expect(wrapper.vm.showIntervalLabelDefault({ hour: 13, minute: 0 })).toBeTruthy()
-    expect(wrapper.vm.showIntervalLabelDefault({ hour: 13, minute: 30 })).toBeFalsy()
+    expect(wrapper.vm.showIntervalLabelDefault({ hour: 0, minute: 5 } as VTimestamp)).toBeFalsy()
+    expect(wrapper.vm.showIntervalLabelDefault({ hour: 12, minute: 30 } as VTimestamp)).toBeFalsy()
+    expect(wrapper.vm.showIntervalLabelDefault({ hour: 13, minute: 0 } as VTimestamp)).toBeTruthy()
+    expect(wrapper.vm.showIntervalLabelDefault({ hour: 13, minute: 30 } as VTimestamp)).toBeFalsy()
   })
 })
