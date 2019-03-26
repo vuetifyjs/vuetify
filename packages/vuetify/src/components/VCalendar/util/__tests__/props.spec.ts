@@ -1,4 +1,4 @@
-import { validateNumber } from '../../util/props'
+import { validateNumber } from '../props'
 
 describe('props.ts', () => {
   it('should return true if number is valid', () => {

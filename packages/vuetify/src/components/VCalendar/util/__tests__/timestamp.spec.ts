@@ -21,7 +21,7 @@ import {
   nextDay,
   prevDay,
   relativeDays
-} from '../../util/timestamp'
+} from '../timestamp'
 
 describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-statements
   it('should parse time number', () => {
