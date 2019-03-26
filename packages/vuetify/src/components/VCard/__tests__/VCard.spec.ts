@@ -1,15 +1,28 @@
-import { test } from '@/test'
-import VCard from '@/components/VCard/VCard'
+import {
+  mount,
+  Wrapper,
+  MountOptions
+} from '@vue/test-utils'
+import VCard from '../VCard'
+import { ExtractVue } from '../../../util/mixins'
 
-test('VCard.vue', ({ mount }) => {
+describe('VCard.vue', () => {
+  type Instance = ExtractVue<typeof VCard>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+  beforeEach(() => {
+    mountFunction = (options?: MountOptions<Instance>) => {
+      return mount(VCard, options)
+    }
+  })
+
   it('should render component and match snapshot', () => {
-    const wrapper = mount(VCard)
+    const wrapper = mountFunction()
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render card with img', () => {
-    const wrapper = mount(VCard, {
+    const wrapper = mountFunction({
       propsData: {
         img: 'image.jpg'
       }
@@ -19,7 +32,7 @@ test('VCard.vue', ({ mount }) => {
   })
 
   it('should render a flat card', () => {
-    const wrapper = mount(VCard, {
+    const wrapper = mountFunction({
       propsData: {
         flat: true
       }
@@ -29,7 +42,7 @@ test('VCard.vue', ({ mount }) => {
   })
 
   it('should render a raised card', () => {
-    const wrapper = mount(VCard, {
+    const wrapper = mountFunction({
       propsData: {
         raised: true
       }
@@ -40,18 +53,18 @@ test('VCard.vue', ({ mount }) => {
 
   it('should render a card with custom height', () => {
     const heightpx = '400px'
-    const wrapper = mount(VCard, {
+    const wrapper = mountFunction({
       propsData: {
         height: heightpx
       }
     })
 
-    expect(wrapper.hasStyle('height', heightpx)).toBe(true)
+    expect(wrapper.element.style.height).toBe(heightpx)
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({
       height: 401
     })
-    expect(wrapper.hasStyle('height', '401px')).toBe(true)
+    expect(wrapper.element.style.height).toBe('401px')
   })
 })

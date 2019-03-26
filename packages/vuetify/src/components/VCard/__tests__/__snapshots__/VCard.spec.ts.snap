@@ -18,7 +18,7 @@ exports[`VCard.vue should render a flat card 1`] = `
 
 exports[`VCard.vue should render a raised card 1`] = `
 
-<div class="v-card v-sheet theme--light">
+<div class="v-card v-card--raised v-sheet theme--light">
 </div>
 
 `;
