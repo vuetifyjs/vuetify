@@ -15,7 +15,7 @@ test('mouse.ts', ({ mount }) => {
       }
     })
 
-    expect(typeof wrapper.vm.getMouseEventHandlers({ click: { event: "click" } }, noop).click).toBe("function")
+    expect(typeof wrapper.vm.getMouseEventHandlers({ click: { event: 'click' } }, noop).click).toBe('function')
   })
 
   it('should generate default mouse event handlers', async () => {
@@ -26,8 +26,8 @@ test('mouse.ts', ({ mount }) => {
       }
     })
 
-    expect(typeof wrapper.vm.getDefaultMouseEventHandlers("", noop).click).toBe("function")
-    expect(Object.keys(typeof wrapper.vm.getDefaultMouseEventHandlers("", noop)).length).toBe(6)
+    expect(typeof wrapper.vm.getDefaultMouseEventHandlers('', noop).click).toBe('function')
+    expect(Object.keys(typeof wrapper.vm.getDefaultMouseEventHandlers('', noop))).toHaveLength(6)
   })
 
   it('should emit events', async () => {
@@ -38,7 +38,7 @@ test('mouse.ts', ({ mount }) => {
       }
     })
 
-    wrapper.vm.getMouseEventHandlers({ click: { event: "click" } }, fn).click()
+    wrapper.vm.getMouseEventHandlers({ click: { event: 'click' } }, fn).click()
     expect(fn).toHaveBeenCalledTimes(1)
   })
 
@@ -52,7 +52,7 @@ test('mouse.ts', ({ mount }) => {
     const event = { preventDefault: () => {} }
     const spy = jest.spyOn(event, 'preventDefault')
 
-    wrapper.vm.getMouseEventHandlers({ click: { event: "click", prevent: true } }, fn).click(event)
+    wrapper.vm.getMouseEventHandlers({ click: { event: 'click', prevent: true } }, fn).click(event)
     expect(fn).toHaveBeenCalledTimes(1)
     expect(spy).toHaveBeenCalledTimes(1)
   })
@@ -67,7 +67,7 @@ test('mouse.ts', ({ mount }) => {
     const event = { stopPropagation: () => {} }
     const spy = jest.spyOn(event, 'stopPropagation')
 
-    wrapper.vm.getMouseEventHandlers({ click: { event: "click", stop: true } }, fn).click(event)
+    wrapper.vm.getMouseEventHandlers({ click: { event: 'click', stop: true } }, fn).click(event)
     expect(fn).toHaveBeenCalledTimes(1)
     expect(spy).toHaveBeenCalledTimes(1)
   })
