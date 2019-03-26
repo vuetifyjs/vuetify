@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VSparkline.vue should render component and match a snapshot 1`] = `
+exports[`VSparkline.ts should render component and match a snapshot 1`] = `
 
 <svg stroke-width="4"
      width="100%"
@@ -9,7 +9,7 @@ exports[`VSparkline.vue should render component and match a snapshot 1`] = `
      class="primary--text"
 >
   <defs>
-    <lineargradient id="0"
+    <lineargradient id="1"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -21,24 +21,24 @@ exports[`VSparkline.vue should render component and match a snapshot 1`] = `
       </stop>
     </lineargradient>
   </defs>
-  <path id="0"
+  <path id="1"
         d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
         fill="none"
-        stroke="url(#0)"
+        stroke="url(#1)"
   >
   </path>
 </svg>
 
 `;
 
-exports[`VSparkline.vue should render component with bars and auto-line-width and match a snapshot 1`] = `
+exports[`VSparkline.ts should render component with bars and auto-line-width and match a snapshot 1`] = `
 
 <svg width="100%"
      height="25%"
      viewbox="0 0 300 75"
 >
   <defs>
-    <lineargradient id="9"
+    <lineargradient id="19"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -50,7 +50,7 @@ exports[`VSparkline.vue should render component with bars and auto-line-width an
       </stop>
     </lineargradient>
   </defs>
-  <clippath id="sparkline-bar-9-clip">
+  <clippath id="sparkline-bar-19-clip">
     <rect x="8"
           y="0"
           width="89.33333333333333"
@@ -77,8 +77,8 @@ exports[`VSparkline.vue should render component with bars and auto-line-width an
     </rect>
   </clippath>
   <g transform="scale(1,-1) translate(0,-67)"
-     clip-path="url(#sparkline-bar-9-clip)"
-     fill="url(#9)"
+     clip-path="url(#sparkline-bar-19-clip)"
+     fill="url(#19)"
   >
     <rect x="0"
           y="0"
@@ -91,14 +91,14 @@ exports[`VSparkline.vue should render component with bars and auto-line-width an
 
 `;
 
-exports[`VSparkline.vue should render component with bars and auto-line-width with custom padding and match a snapshot 1`] = `
+exports[`VSparkline.ts should render component with bars and auto-line-width with custom padding and match a snapshot 1`] = `
 
 <svg width="100%"
      height="25%"
      viewbox="0 0 300 75"
 >
   <defs>
-    <lineargradient id="12"
+    <lineargradient id="25"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -110,7 +110,7 @@ exports[`VSparkline.vue should render component with bars and auto-line-width wi
       </stop>
     </lineargradient>
   </defs>
-  <clippath id="sparkline-bar-12-clip">
+  <clippath id="sparkline-bar-25-clip">
     <rect x="12"
           y="0"
           width="84"
@@ -137,8 +137,8 @@ exports[`VSparkline.vue should render component with bars and auto-line-width wi
     </rect>
   </clippath>
   <g transform="scale(1,-1) translate(0,-63)"
-     clip-path="url(#sparkline-bar-12-clip)"
-     fill="url(#12)"
+     clip-path="url(#sparkline-bar-25-clip)"
+     fill="url(#25)"
   >
     <rect x="0"
           y="0"
@@ -151,7 +151,355 @@ exports[`VSparkline.vue should render component with bars and auto-line-width wi
 
 `;
 
-exports[`VSparkline.vue should render component with bars and custom label size and match a snapshot 1`] = `
+exports[`VSparkline.ts should render component with bars and custom label size and match a snapshot 1`] = `
+
+<svg width="100%"
+     height="25%"
+     viewbox="0 0 300 75"
+>
+  <defs>
+    <lineargradient id="27"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="primary"
+      >
+      </stop>
+    </lineargradient>
+  </defs>
+  <clippath id="sparkline-bar-27-clip">
+    <rect x="48.666666666666664"
+          y="0"
+          width="4"
+          height="1.3721030232558178"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+    <rect x="146"
+          y="0"
+          width="4"
+          height="9.604651162790695"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+    <rect x="243.33333333333331"
+          y="0"
+          width="4"
+          height="57.62789697674418"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+  </clippath>
+  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
+    <text x="50.666666666666664"
+          y="82"
+          font-size="15"
+    >
+      1
+    </text>
+    <text x="148"
+          y="82"
+          font-size="15"
+    >
+      7
+    </text>
+    <text x="245.33333333333331"
+          y="82"
+          font-size="15"
+    >
+      42
+    </text>
+  </g>
+  <g transform="scale(1,-1) translate(0,-67)"
+     clip-path="url(#sparkline-bar-27-clip)"
+     fill="url(#27)"
+  >
+    <rect x="0"
+          y="0"
+          width="300"
+          height="75"
+    >
+    </rect>
+  </g>
+</svg>
+
+`;
+
+exports[`VSparkline.ts should render component with bars and custom padding and match a snapshot 1`] = `
+
+<svg width="100%"
+     height="25%"
+     viewbox="0 0 300 75"
+>
+  <defs>
+    <lineargradient id="23"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="primary"
+      >
+      </stop>
+    </lineargradient>
+  </defs>
+  <clippath id="sparkline-bar-23-clip">
+    <rect x="48"
+          y="0"
+          width="4"
+          height="1.1860565116279105"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+    <rect x="144"
+          y="0"
+          width="4"
+          height="8.302325581395351"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+    <rect x="240"
+          y="0"
+          width="4"
+          height="49.813943488372104"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+  </clippath>
+  <g transform="scale(1,-1) translate(0,-63)"
+     clip-path="url(#sparkline-bar-23-clip)"
+     fill="url(#23)"
+  >
+    <rect x="0"
+          y="0"
+          width="300"
+          height="75"
+    >
+    </rect>
+  </g>
+</svg>
+
+`;
+
+exports[`VSparkline.ts should render component with bars and gradient and match a snapshot 1`] = `
+
+<svg width="100%"
+     height="25%"
+     viewbox="0 0 300 75"
+>
+  <defs>
+    <lineargradient id="15"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="rgba(80, 160, 240, 0.5)"
+      >
+      </stop>
+      <stop offset="0.5"
+            stop-color="red"
+      >
+      </stop>
+      <stop offset="1"
+            stop-color="#000"
+      >
+      </stop>
+    </lineargradient>
+  </defs>
+  <clippath id="sparkline-bar-15-clip">
+    <rect x="48.666666666666664"
+          y="0"
+          width="4"
+          height="1.3721030232558178"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+    <rect x="146"
+          y="0"
+          width="4"
+          height="9.604651162790695"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+    <rect x="243.33333333333331"
+          y="0"
+          width="4"
+          height="57.62789697674418"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+  </clippath>
+  <g transform="scale(1,-1) translate(0,-67)"
+     clip-path="url(#sparkline-bar-15-clip)"
+     fill="url(#15)"
+  >
+    <rect x="0"
+          y="0"
+          width="300"
+          height="75"
+    >
+    </rect>
+  </g>
+</svg>
+
+`;
+
+exports[`VSparkline.ts should render component with bars and labels and match a snapshot 1`] = `
+
+<svg width="100%"
+     height="25%"
+     viewbox="0 0 300 75"
+>
+  <defs>
+    <lineargradient id="17"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="primary"
+      >
+      </stop>
+    </lineargradient>
+  </defs>
+  <clippath id="sparkline-bar-17-clip">
+    <rect x="48.666666666666664"
+          y="0"
+          width="4"
+          height="1.3721030232558178"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+    <rect x="146"
+          y="0"
+          width="4"
+          height="9.604651162790695"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+    <rect x="243.33333333333331"
+          y="0"
+          width="4"
+          height="57.62789697674418"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+  </clippath>
+  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
+    <text x="50.666666666666664"
+          y="74"
+          font-size="7"
+    >
+      1
+    </text>
+    <text x="148"
+          y="74"
+          font-size="7"
+    >
+      7
+    </text>
+    <text x="245.33333333333331"
+          y="74"
+          font-size="7"
+    >
+      42
+    </text>
+  </g>
+  <g transform="scale(1,-1) translate(0,-67)"
+     clip-path="url(#sparkline-bar-17-clip)"
+     fill="url(#17)"
+  >
+    <rect x="0"
+          y="0"
+          width="300"
+          height="75"
+    >
+    </rect>
+  </g>
+</svg>
+
+`;
+
+exports[`VSparkline.ts should render component with bars and line width and match a snapshot 1`] = `
+
+<svg width="100%"
+     height="25%"
+     viewbox="0 0 300 75"
+>
+  <defs>
+    <lineargradient id="21"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="primary"
+      >
+      </stop>
+    </lineargradient>
+  </defs>
+  <clippath id="sparkline-bar-21-clip">
+    <rect x="48.666666666666664"
+          y="0"
+          width="8"
+          height="1.3721030232558178"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+    <rect x="146"
+          y="0"
+          width="8"
+          height="9.604651162790695"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+    <rect x="243.33333333333331"
+          y="0"
+          width="8"
+          height="57.62789697674418"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+  </clippath>
+  <g transform="scale(1,-1) translate(0,-67)"
+     clip-path="url(#sparkline-bar-21-clip)"
+     fill="url(#21)"
+  >
+    <rect x="0"
+          y="0"
+          width="300"
+          height="75"
+    >
+    </rect>
+  </g>
+</svg>
+
+`;
+
+exports[`VSparkline.ts should render component with bars and match a snapshot 1`] = `
 
 <svg width="100%"
      height="25%"
@@ -196,26 +544,6 @@ exports[`VSparkline.vue should render component with bars and custom label size 
     >
     </rect>
   </clippath>
-  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
-    <text x="50.666666666666664"
-          y="82"
-          font-size="15"
-    >
-      1
-    </text>
-    <text x="148"
-          y="82"
-          font-size="15"
-    >
-      7
-    </text>
-    <text x="245.33333333333331"
-          y="82"
-          font-size="15"
-    >
-      42
-    </text>
-  </g>
   <g transform="scale(1,-1) translate(0,-67)"
      clip-path="url(#sparkline-bar-13-clip)"
      fill="url(#13)"
@@ -231,71 +559,52 @@ exports[`VSparkline.vue should render component with bars and custom label size 
 
 `;
 
-exports[`VSparkline.vue should render component with bars and custom padding and match a snapshot 1`] = `
+exports[`VSparkline.ts should render component with gradient and match a snapshot 1`] = `
 
-<svg width="100%"
+<svg stroke-width="4"
+     width="100%"
      height="25%"
      viewbox="0 0 300 75"
+     class="primary--text"
 >
   <defs>
-    <lineargradient id="11"
+    <lineargradient id="9"
                     x1="0"
                     y1="1"
                     x2="0"
                     y2="0"
     >
       <stop offset="0"
-            stop-color="primary"
+            stop-color="rgba(80, 160, 240, 0.5)"
+      >
+      </stop>
+      <stop offset="0.5"
+            stop-color="red"
+      >
+      </stop>
+      <stop offset="1"
+            stop-color="#000"
       >
       </stop>
     </lineargradient>
   </defs>
-  <clippath id="sparkline-bar-11-clip">
-    <rect x="48"
-          y="0"
-          width="4"
-          height="1.1860565116279105"
-          rx="0"
-          ry="0"
-    >
-    </rect>
-    <rect x="144"
-          y="0"
-          width="4"
-          height="8.302325581395351"
-          rx="0"
-          ry="0"
-    >
-    </rect>
-    <rect x="240"
-          y="0"
-          width="4"
-          height="49.813943488372104"
-          rx="0"
-          ry="0"
-    >
-    </rect>
-  </clippath>
-  <g transform="scale(1,-1) translate(0,-63)"
-     clip-path="url(#sparkline-bar-11-clip)"
-     fill="url(#11)"
+  <path id="9"
+        d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
+        fill="none"
+        stroke="url(#9)"
   >
-    <rect x="0"
-          y="0"
-          width="300"
-          height="75"
-    >
-    </rect>
-  </g>
+  </path>
 </svg>
 
 `;
 
-exports[`VSparkline.vue should render component with bars and gradient and match a snapshot 1`] = `
+exports[`VSparkline.ts should render component with line width and match a snapshot 1`] = `
 
-<svg width="100%"
+<svg stroke-width="42"
+     width="100%"
      height="25%"
      viewbox="0 0 300 75"
+     class="primary--text"
 >
   <defs>
     <lineargradient id="7"
@@ -305,302 +614,24 @@ exports[`VSparkline.vue should render component with bars and gradient and match
                     y2="0"
     >
       <stop offset="0"
-            stop-color="rgba(80, 160, 240, 0.5)"
-      >
-      </stop>
-      <stop offset="0.5"
-            stop-color="red"
-      >
-      </stop>
-      <stop offset="1"
-            stop-color="#000"
-      >
-      </stop>
-    </lineargradient>
-  </defs>
-  <clippath id="sparkline-bar-7-clip">
-    <rect x="48.666666666666664"
-          y="0"
-          width="4"
-          height="1.3721030232558178"
-          rx="0"
-          ry="0"
-    >
-    </rect>
-    <rect x="146"
-          y="0"
-          width="4"
-          height="9.604651162790695"
-          rx="0"
-          ry="0"
-    >
-    </rect>
-    <rect x="243.33333333333331"
-          y="0"
-          width="4"
-          height="57.62789697674418"
-          rx="0"
-          ry="0"
-    >
-    </rect>
-  </clippath>
-  <g transform="scale(1,-1) translate(0,-67)"
-     clip-path="url(#sparkline-bar-7-clip)"
-     fill="url(#7)"
-  >
-    <rect x="0"
-          y="0"
-          width="300"
-          height="75"
-    >
-    </rect>
-  </g>
-</svg>
-
-`;
-
-exports[`VSparkline.vue should render component with bars and labels and match a snapshot 1`] = `
-
-<svg width="100%"
-     height="25%"
-     viewbox="0 0 300 75"
->
-  <defs>
-    <lineargradient id="8"
-                    x1="0"
-                    y1="1"
-                    x2="0"
-                    y2="0"
-    >
-      <stop offset="0"
             stop-color="primary"
       >
       </stop>
     </lineargradient>
   </defs>
-  <clippath id="sparkline-bar-8-clip">
-    <rect x="48.666666666666664"
-          y="0"
-          width="4"
-          height="1.3721030232558178"
-          rx="0"
-          ry="0"
-    >
-    </rect>
-    <rect x="146"
-          y="0"
-          width="4"
-          height="9.604651162790695"
-          rx="0"
-          ry="0"
-    >
-    </rect>
-    <rect x="243.33333333333331"
-          y="0"
-          width="4"
-          height="57.62789697674418"
-          rx="0"
-          ry="0"
-    >
-    </rect>
-  </clippath>
-  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
-    <text x="50.666666666666664"
-          y="74"
-          font-size="7"
-    >
-      1
-    </text>
-    <text x="148"
-          y="74"
-          font-size="7"
-    >
-      7
-    </text>
-    <text x="245.33333333333331"
-          y="74"
-          font-size="7"
-    >
-      42
-    </text>
-  </g>
-  <g transform="scale(1,-1) translate(0,-67)"
-     clip-path="url(#sparkline-bar-8-clip)"
-     fill="url(#8)"
-  >
-    <rect x="0"
-          y="0"
-          width="300"
-          height="75"
-    >
-    </rect>
-  </g>
-</svg>
-
-`;
-
-exports[`VSparkline.vue should render component with bars and line width and match a snapshot 1`] = `
-
-<svg width="100%"
-     height="25%"
-     viewbox="0 0 300 75"
->
-  <defs>
-    <lineargradient id="10"
-                    x1="0"
-                    y1="1"
-                    x2="0"
-                    y2="0"
-    >
-      <stop offset="0"
-            stop-color="primary"
-      >
-      </stop>
-    </lineargradient>
-  </defs>
-  <clippath id="sparkline-bar-10-clip">
-    <rect x="48.666666666666664"
-          y="0"
-          width="8"
-          height="1.3721030232558178"
-          rx="0"
-          ry="0"
-    >
-    </rect>
-    <rect x="146"
-          y="0"
-          width="8"
-          height="9.604651162790695"
-          rx="0"
-          ry="0"
-    >
-    </rect>
-    <rect x="243.33333333333331"
-          y="0"
-          width="8"
-          height="57.62789697674418"
-          rx="0"
-          ry="0"
-    >
-    </rect>
-  </clippath>
-  <g transform="scale(1,-1) translate(0,-67)"
-     clip-path="url(#sparkline-bar-10-clip)"
-     fill="url(#10)"
-  >
-    <rect x="0"
-          y="0"
-          width="300"
-          height="75"
-    >
-    </rect>
-  </g>
-</svg>
-
-`;
-
-exports[`VSparkline.vue should render component with bars and match a snapshot 1`] = `
-
-<svg width="100%"
-     height="25%"
-     viewbox="0 0 300 75"
->
-  <defs>
-    <lineargradient id="6"
-                    x1="0"
-                    y1="1"
-                    x2="0"
-                    y2="0"
-    >
-      <stop offset="0"
-            stop-color="primary"
-      >
-      </stop>
-    </lineargradient>
-  </defs>
-  <clippath id="sparkline-bar-6-clip">
-    <rect x="48.666666666666664"
-          y="0"
-          width="4"
-          height="1.3721030232558178"
-          rx="0"
-          ry="0"
-    >
-    </rect>
-    <rect x="146"
-          y="0"
-          width="4"
-          height="9.604651162790695"
-          rx="0"
-          ry="0"
-    >
-    </rect>
-    <rect x="243.33333333333331"
-          y="0"
-          width="4"
-          height="57.62789697674418"
-          rx="0"
-          ry="0"
-    >
-    </rect>
-  </clippath>
-  <g transform="scale(1,-1) translate(0,-67)"
-     clip-path="url(#sparkline-bar-6-clip)"
-     fill="url(#6)"
-  >
-    <rect x="0"
-          y="0"
-          width="300"
-          height="75"
-    >
-    </rect>
-  </g>
-</svg>
-
-`;
-
-exports[`VSparkline.vue should render component with gradient and match a snapshot 1`] = `
-
-<svg stroke-width="4"
-     width="100%"
-     height="25%"
-     viewbox="0 0 300 75"
-     class="primary--text"
->
-  <defs>
-    <lineargradient id="4"
-                    x1="0"
-                    y1="1"
-                    x2="0"
-                    y2="0"
-    >
-      <stop offset="0"
-            stop-color="rgba(80, 160, 240, 0.5)"
-      >
-      </stop>
-      <stop offset="0.5"
-            stop-color="red"
-      >
-      </stop>
-      <stop offset="1"
-            stop-color="#000"
-      >
-      </stop>
-    </lineargradient>
-  </defs>
-  <path id="4"
+  <path id="7"
         d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
         fill="none"
-        stroke="url(#4)"
+        stroke="url(#7)"
   >
   </path>
 </svg>
 
 `;
 
-exports[`VSparkline.vue should render component with line width and match a snapshot 1`] = `
+exports[`VSparkline.ts should render component with padding and match a snapshot 1`] = `
 
-<svg stroke-width="42"
+<svg stroke-width="4"
      width="100%"
      height="25%"
      viewbox="0 0 300 75"
@@ -620,7 +651,7 @@ exports[`VSparkline.vue should render component with line width and match a snap
     </lineargradient>
   </defs>
   <path id="3"
-        d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
+        d="M20 54.186036511627904L150 49.30232558139535S150 49.30232558139535 150 49.30232558139535L280 20.813963488372092"
         fill="none"
         stroke="url(#3)"
   >
@@ -629,7 +660,7 @@ exports[`VSparkline.vue should render component with line width and match a snap
 
 `;
 
-exports[`VSparkline.vue should render component with padding and match a snapshot 1`] = `
+exports[`VSparkline.ts should render component with string labels and match a snapshot 1`] = `
 
 <svg stroke-width="4"
      width="100%"
@@ -638,38 +669,7 @@ exports[`VSparkline.vue should render component with padding and match a snapsho
      class="primary--text"
 >
   <defs>
-    <lineargradient id="1"
-                    x1="0"
-                    y1="1"
-                    x2="0"
-                    y2="0"
-    >
-      <stop offset="0"
-            stop-color="primary"
-      >
-      </stop>
-    </lineargradient>
-  </defs>
-  <path id="1"
-        d="M20 54.186036511627904L150 49.30232558139535S150 49.30232558139535 150 49.30232558139535L280 20.813963488372092"
-        fill="none"
-        stroke="url(#1)"
-  >
-  </path>
-</svg>
-
-`;
-
-exports[`VSparkline.vue should render component with string labels and match a snapshot 1`] = `
-
-<svg stroke-width="4"
-     width="100%"
-     height="25%"
-     viewbox="0 0 300 75"
-     class="primary--text"
->
-  <defs>
-    <lineargradient id="5"
+    <lineargradient id="11"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -698,17 +698,17 @@ exports[`VSparkline.vue should render component with string labels and match a s
       42
     </text>
   </g>
-  <path id="5"
+  <path id="11"
         d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
         fill="none"
-        stroke="url(#5)"
+        stroke="url(#11)"
   >
   </path>
 </svg>
 
 `;
 
-exports[`VSparkline.vue should render component with string labels and match a snapshot 2`] = `
+exports[`VSparkline.ts should render component with string labels and match a snapshot 2`] = `
 
 <svg stroke-width="4"
      width="100%"
@@ -717,7 +717,7 @@ exports[`VSparkline.vue should render component with string labels and match a s
      class="primary--text"
 >
   <defs>
-    <lineargradient id="5"
+    <lineargradient id="11"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -746,17 +746,17 @@ exports[`VSparkline.vue should render component with string labels and match a s
       43
     </text>
   </g>
-  <path id="5"
+  <path id="11"
         d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
         fill="none"
-        stroke="url(#5)"
+        stroke="url(#11)"
   >
   </path>
 </svg>
 
 `;
 
-exports[`VSparkline.vue should render component with string labels and match a snapshot 3`] = `
+exports[`VSparkline.ts should render component with string labels and match a snapshot 3`] = `
 
 <svg stroke-width="4"
      width="100%"
@@ -765,7 +765,7 @@ exports[`VSparkline.vue should render component with string labels and match a s
      class="primary--text"
 >
   <defs>
-    <lineargradient id="5"
+    <lineargradient id="11"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -794,17 +794,17 @@ exports[`VSparkline.vue should render component with string labels and match a s
       baz
     </text>
   </g>
-  <path id="5"
+  <path id="11"
         d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
         fill="none"
-        stroke="url(#5)"
+        stroke="url(#11)"
   >
   </path>
 </svg>
 
 `;
 
-exports[`VSparkline.vue should render smooth component and match a snapshot 1`] = `
+exports[`VSparkline.ts should render smooth component and match a snapshot 1`] = `
 
 <svg stroke-width="4"
      width="100%"
@@ -813,7 +813,7 @@ exports[`VSparkline.vue should render smooth component and match a snapshot 1`] 
      class="primary--text"
 >
   <defs>
-    <lineargradient id="2"
+    <lineargradient id="5"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -825,10 +825,10 @@ exports[`VSparkline.vue should render smooth component and match a snapshot 1`] 
       </stop>
     </lineargradient>
   </defs>
-  <path id="2"
+  <path id="5"
         d="M8 65.62789697674418L130.03352731272736 58.55291889055212S150 57.395348837209305 168.94587032678325 50.98800948606565L292 9.372103023255814"
         fill="none"
-        stroke="url(#2)"
+        stroke="url(#5)"
   >
   </path>
 </svg>
