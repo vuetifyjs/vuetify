@@ -1,21 +1,43 @@
-import { test } from '@/test'
-import VCalendarDaily from '@/components/VCalendar/VCalendarDaily'
+import VCalendarDaily from '../VCalendarDaily'
+import {
+  mount,
+  Wrapper,
+  MountOptions
+} from '@vue/test-utils'
+import { ExtractVue } from '../../../util/mixins'
 
-test('VCalendarDaily', ({ mount }) => {
+describe('VCalendarDaily', () => {
+  type Instance = ExtractVue<typeof VCalendarDaily>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+  beforeEach(() => {
+    mountFunction = (options?: MountOptions<Instance>) => {
+      return mount(VCalendarDaily, {
+        ...options,
+        mocks: {
+          $vuetify: {
+            lang: {
+              current: 'en-US'
+            }
+          }
+        }
+      })
+    }
+  })
+
   it('should render component and have v-calendar-daily class', async () => {
-    const wrapper = mount(VCalendarDaily, {
+    const wrapper = mountFunction({
       propsData: {
         start: '2019-01-29',
         end: '2019-02-04'
       }
     })
 
-    expect(wrapper.hasClass('v-calendar-daily')).toBe(true)
+    expect(wrapper.classes('v-calendar-daily')).toBeTruthy()
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should compute scrollPush on init', async () => {
-    const wrapper = mount(VCalendarDaily, {
+    const wrapper = mountFunction({
       propsData: {
         start: '2019-01-29',
         end: '2019-02-04'
@@ -32,7 +54,7 @@ test('VCalendarDaily', ({ mount }) => {
   })
 
   it('should compute scrollPush properly', async () => {
-    const wrapper = mount(VCalendarDaily, {
+    const wrapper = mountFunction({
       propsData: {
         start: '2019-01-29',
         end: '2019-02-04'
@@ -48,7 +70,7 @@ test('VCalendarDaily', ({ mount }) => {
   })
 
   it('should render correctly with intervalMinutes prop', async () => {
-    const wrapper = mount(VCalendarDaily, {
+    const wrapper = mountFunction({
       propsData: {
         start: '2019-01-29',
         end: '2019-02-04',
@@ -60,7 +82,7 @@ test('VCalendarDaily', ({ mount }) => {
   })
 
   it('should render correctly with maxDays prop', async () => {
-    const wrapper = mount(VCalendarDaily, {
+    const wrapper = mountFunction({
       propsData: {
         start: '2019-01-29',
         end: '2019-02-04',
@@ -72,7 +94,7 @@ test('VCalendarDaily', ({ mount }) => {
   })
 
   it('should render correctly without shortIntervals prop', async () => {
-    const wrapper = mount(VCalendarDaily, {
+    const wrapper = mountFunction({
       propsData: {
         start: '2019-01-29',
         end: '2019-02-04',
@@ -84,7 +106,7 @@ test('VCalendarDaily', ({ mount }) => {
   })
 
   it('should render correctly with intervalHeight prop', async () => {
-    const wrapper = mount(VCalendarDaily, {
+    const wrapper = mountFunction({
       propsData: {
         start: '2019-01-29',
         end: '2019-02-04',
@@ -96,7 +118,7 @@ test('VCalendarDaily', ({ mount }) => {
   })
 
   it('should render correctly with firstInterval prop', async () => {
-    const wrapper = mount(VCalendarDaily, {
+    const wrapper = mountFunction({
       propsData: {
         start: '2019-01-29',
         end: '2019-02-04',
@@ -108,7 +130,7 @@ test('VCalendarDaily', ({ mount }) => {
   })
 
   it('should render correctly with intervalCount prop', async () => {
-    const wrapper = mount(VCalendarDaily, {
+    const wrapper = mountFunction({
       propsData: {
         start: '2019-01-29',
         end: '2019-02-04',
@@ -120,7 +142,7 @@ test('VCalendarDaily', ({ mount }) => {
   })
 
   it('should use custom interval formatter and render correctly', async () => {
-    const wrapper = mount(VCalendarDaily, {
+    const wrapper = mountFunction({
       propsData: {
         start: '2019-01-29',
         end: '2019-02-04',
@@ -133,7 +155,7 @@ test('VCalendarDaily', ({ mount }) => {
   })
 
   it('should use custom interval style function and render correctly', async () => {
-    const wrapper = mount(VCalendarDaily, {
+    const wrapper = mountFunction({
       propsData: {
         start: '2019-01-29',
         end: '2019-02-04',
@@ -148,7 +170,7 @@ test('VCalendarDaily', ({ mount }) => {
   })
 
   it('should use custom showIntervalLabel function and render correctly', async () => {
-    const wrapper = mount(VCalendarDaily, {
+    const wrapper = mountFunction({
       propsData: {
         start: '2019-01-29',
         end: '2019-02-04',
