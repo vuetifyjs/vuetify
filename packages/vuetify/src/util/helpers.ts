@@ -254,13 +254,6 @@ export function filterObjectOnKeys<T, K extends keyof T> (obj: T, keys: K[]): { 
   return filtered
 }
 
-export function filterChildren (array: VNode[] = [], tag: string): VNode[] {
-  return array.filter(child => {
-    return child.componentOptions &&
-      child.componentOptions.Ctor.options.name === tag
-  })
-}
-
 export function convertToUnit (str: string | number | null | undefined, unit = 'px'): string | undefined {
   if (str == null || str === '') {
     return undefined

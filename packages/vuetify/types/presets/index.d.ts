@@ -1,9 +1,5 @@
 import { VuetifyIconOptions } from 'vuetify/types/services/icons'
-
-import {
-  VuetifyThemeService,
-  VuetifyThemeOptions
-} from 'vuetify/types/services/theme'
+import { VuetifyThemeOptions } from 'vuetify/types/services/theme'
 
 export interface VuetifyPreset {
   [name: string]: any
