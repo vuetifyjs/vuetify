@@ -21,6 +21,26 @@ describe('VCard.vue', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render loading card', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        loading: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render card, which is link', () => {
+    const wrapper = mountFunction({
+      listeners: {
+        click: () => {}
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render card with img', () => {
     const wrapper = mountFunction({
       propsData: {
