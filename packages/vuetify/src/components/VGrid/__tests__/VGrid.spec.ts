@@ -1,34 +1,52 @@
-import { test } from '@/test'
-import VFlex from '@/components/VGrid/VFlex'
 
-test('VFlex', ({ mount, functionalContext }) => {
+// Components
+import VFlex from '../VFlex'
+
+// Utilities
+import {
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+import { functionalContext } from '../../../../test'
+
+describe('VFlex.ts', () => {
+  type Instance = InstanceType<typeof VFlex>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+
+  beforeEach(() => {
+    mountFunction = (options = {}) => {
+      return mount(VFlex, {
+        ...options
+      })
+    }
+  })
+
   it('should conditionally apply if boolean is used', () => {
-    const wrapper = mount(VFlex, functionalContext({
+    const wrapper = mountFunction(functionalContext({
       attrs: {
         foo: '',
         bar: false
       }
     }))
 
-    expect(wrapper.hasAttribute('foo')).toBe(false)
-    expect(wrapper.hasAttribute('bar')).toBe(false)
-    expect(wrapper.hasClass('foo')).toBe(true)
-    expect(wrapper.hasClass('bar')).toBe(false)
+    expect(wrapper.attributes('foo')).toBe(false)
+    expect(wrapper.attributes('bar')).toBe(false)
+    expect(wrapper.classes('foo')).toBe(true)
+    expect(wrapper.classes('bar')).toBe(false)
   })
 
   it('should pass the id attr', () => {
-    const wrapper = mount(VFlex, functionalContext({
+    const wrapper = mountFunction(functionalContext({
       attrs: {
         id: 'test'
       }
     }))
 
-    expect(wrapper.find('#test')).toHaveLength(1)
+    expect(wrapper.findAll('#test')).toHaveLength(1)
   })
 
   it('should not pass data-* attrs as classes', () => {
-    const wrapper = mount(
-      VFlex,
+    const wrapper = mountFunction(
       functionalContext({
         attrs: {
           foo: 'bar',
@@ -37,15 +55,15 @@ test('VFlex', ({ mount, functionalContext }) => {
       })
     )
 
-    expect(wrapper.hasClass('foo')).toBe(true)
-    expect(wrapper.hasClass('data-test')).toBe(false)
-    expect(wrapper.getAttribute('data-test')).toBe('foo')
+    expect(wrapper.classes('foo')).toBe(true)
+    expect(wrapper.classes('data-test')).toBe(false)
+    expect(wrapper.attributes('data-test')).toBe('foo')
   })
 
   // TODO: Remove once resolved
   // https://github.com/vuejs/vue/issues/7841
   it('should filter the slot attr', () => {
-    const wrapper = mount(VFlex, functionalContext({
+    const wrapper = mountFunction(functionalContext({
       attrs: { slot: 'content' }
     }))
 
