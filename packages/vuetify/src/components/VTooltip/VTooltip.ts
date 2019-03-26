@@ -12,11 +12,13 @@ import Toggleable from '../../mixins/toggleable'
 import { convertToUnit, keyCodes, getSlotType } from '../../util/helpers'
 import { consoleError } from '../../util/console'
 
-/* @vue/component */
-export default {
-  name: 'v-tooltip',
+// Types
+import { VNode } from 'vue'
+import mixins from '../../util/mixins'
 
-  mixins: [Colorable, Delayable, Dependent, Detachable, Menuable, Toggleable],
+/* @vue/component */
+export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Toggleable).extend({
+  name: 'v-tooltip',
 
   props: {
     closeDelay: {
@@ -52,7 +54,7 @@ export default {
   }),
 
   computed: {
-    calculatedLeft () {
+    calculatedLeft (): string {
       const { activator, content } = this.dimensions
       const unknown = !this.bottom && !this.left && !this.top && !this.right
       const activatorLeft = this.isAttached ? activator.offsetLeft : activator.left
@@ -77,7 +79,7 @@ export default {
 
       return `${this.calcXOverflow(left, this.dimensions.content.width)}px`
     },
-    calculatedTop () {
+    calculatedTop (): string {
       const { activator, content } = this.dimensions
       const activatorTop = this.isAttached ? activator.offsetTop : activator.top
       let top = 0
@@ -101,7 +103,7 @@ export default {
 
       return `${this.calcYOverflow(top + this.pageYOffset)}px`
     },
-    classes () {
+    classes (): object {
       return {
         'v-tooltip--top': this.top,
         'v-tooltip--right': this.right,
@@ -109,18 +111,18 @@ export default {
         'v-tooltip--left': this.left
       }
     },
-    computedTransition () {
+    computedTransition (): string {
       if (this.transition) return this.transition
 
       return this.isActive ? 'scale-transition' : 'fade-transition'
     },
-    offsetY () {
+    offsetY (): boolean {
       return this.top || this.bottom
     },
-    offsetX () {
+    offsetX (): boolean {
       return this.left || this.right
     },
-    styles () {
+    styles (): object {
       return {
         left: this.calculatedLeft,
         maxWidth: convertToUnit(this.maxWidth),
@@ -156,24 +158,24 @@ export default {
       this.runDelay('close')
     },
     genActivator () {
-      const listeners = this.disabled ? {} : {
-        mouseenter: e => {
+      const listeners = this.disabled ? undefined : {
+        mouseenter: (e: Event) => {
           this.getActivator(e)
           this.runDelay('open')
         },
-        focus: e => {
+        focus: (e: Event) => {
           this.getActivator(e)
           this.runDelay('open')
         },
-        mouseleave: e => {
+        mouseleave: (e: Event) => {
           this.getActivator(e)
           this.runDelay('close')
         },
-        blur: e => {
+        blur: (e: Event) => {
           this.getActivator(e)
           this.runDelay('close')
         },
-        keydown: e => {
+        keydown: (e: KeyboardEvent) => {
           if (e.keyCode === keyCodes.esc) {
             this.getActivator(e)
             this.runDelay('close')
@@ -182,8 +184,8 @@ export default {
       }
 
       if (getSlotType(this, 'activator') === 'scoped') {
-        const activator = this.$scopedSlots.activator({ on: listeners })
-        this.activatorNode = activator
+        const activator = this.$scopedSlots.activator!({ on: listeners })
+        this.activatorNode = activator || null
         return activator
       }
 
@@ -194,7 +196,7 @@ export default {
     }
   },
 
-  render (h) {
+  render (h): VNode {
     const tooltip = h('div', this.setBackgroundColor(this.color, {
       staticClass: 'v-tooltip__content',
       'class': {
@@ -223,4 +225,4 @@ export default {
       this.genActivator()
     ])
   }
-}
+})
