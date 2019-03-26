@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { VNode, VNodeDirective, FunctionalComponentOptions } from 'vue/types'
-import { VuetifyIcon } from 'vuetify'
+import { VuetifyIcon } from 'vuetify/types/services/icons'
 
 export function createSimpleFunctional (
   c: string,

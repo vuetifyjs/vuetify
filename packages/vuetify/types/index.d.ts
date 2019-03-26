@@ -4,6 +4,8 @@ import './lib'
 import './alacarte'
 import './colors'
 import { VuetifyThemeOptions } from 'vuetify/types/services/theme'
+import { VuetifyIconOptions } from 'vuetify/types/services/icons'
+import { Icons } from '../src/services/icons'
 
 declare const Vuetify: Vuetify
 export default Vuetify
@@ -26,7 +28,7 @@ export interface VuetifyUseOptions {
    *
    * @example &lt;v-icon&gt;$vuetify.icons.(name)&lt;/v-icon&gt;
    */
-  icons?: Partial<VuetifyIcons>
+  icons?: Partial<VuetifyIconOptions>
   lang?: Partial<VuetifyLanguage>
   rtl?: boolean
 }
@@ -34,10 +36,9 @@ export interface VuetifyUseOptions {
 export interface VuetifyObject extends Vue {
   readonly breakpoint: Readonly<VuetifyBreakpoint>
   readonly goTo: <T extends string | number | HTMLElement | Vue>(target: T, options?: VuetifyGoToOptions) => Promise<T>
-  readonly t: VuetifyLanguage['t']
   application: VuetifyApplication
   theme: VuetifyThemeOptions
-  icons: VuetifyIcons
+  icons: InstanceType<typeof Icons>
   lang: VuetifyLanguage
   rtl: boolean
 }
@@ -58,43 +59,6 @@ declare module 'vue/types/options' {
     Props=DefaultProps> {
     vuetify?: any
   }
-}
-
-export type VuetifyIconComponent = {
-  component: Component | string
-  props?: object
-}
-export type VuetifyIcon = string | VuetifyIconComponent
-
-export interface VuetifyIcons {
-  [name: string]: VuetifyIcon
-
-  complete: VuetifyIcon
-  cancel: VuetifyIcon
-  close: VuetifyIcon
-  delete: VuetifyIcon
-  clear: VuetifyIcon
-  success: VuetifyIcon
-  info: VuetifyIcon
-  warning: VuetifyIcon
-  error: VuetifyIcon
-  prev: VuetifyIcon
-  next: VuetifyIcon
-  checkboxOn: VuetifyIcon
-  checkboxOff: VuetifyIcon
-  checkboxIndeterminate: VuetifyIcon
-  delimiter: VuetifyIcon
-  sort: VuetifyIcon
-  expand: VuetifyIcon
-  menu: VuetifyIcon
-  subgroup: VuetifyIcon
-  dropdown: VuetifyIcon
-  radioOn: VuetifyIcon
-  radioOff: VuetifyIcon
-  edit: VuetifyIcon
-  ratingEmpty: VuetifyIcon
-  ratingFull: VuetifyIcon
-  ratingHalf: VuetifyIcon
 }
 
 export interface VuetifyApplication {
