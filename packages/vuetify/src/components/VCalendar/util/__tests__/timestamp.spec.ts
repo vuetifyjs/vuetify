@@ -21,10 +21,9 @@ import {
   nextDay,
   prevDay,
   relativeDays
-} from '@/components/VCalendar/util/timestamp'
-import { test } from '@/test'
+} from '../timestamp'
 
-test('VCalendar/util/timestamp.ts', ({ mount }) => {
+describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-statements
   it('should parse time number', () => {
     expect(parseTime(0)).toBe(0)
     expect(parseTime(120)).toBe(120)
@@ -42,17 +41,17 @@ test('VCalendar/util/timestamp.ts', ({ mount }) => {
   })
 
   it('should parse time object', () => {
-    expect(parseTime({hour: 0, minute: 0})).toBe(0)
-    expect(parseTime({hour: 0, minute: 30})).toBe(30)
-    expect(parseTime({hour: 8, minute: 0})).toBe(8 * 60)
-    expect(parseTime({hour: 8, minute: 30})).toBe(8 * 60 + 30)
-    expect(parseTime({hour: 15, minute: 13})).toBe(15 * 60 + 13)
-    expect(parseTime({hour: 23, minute: 59})).toBe(23 * 60 + 59)
+    expect(parseTime({ hour: 0, minute: 0 })).toBe(0)
+    expect(parseTime({ hour: 0, minute: 30 })).toBe(30)
+    expect(parseTime({ hour: 8, minute: 0 })).toBe(8 * 60)
+    expect(parseTime({ hour: 8, minute: 30 })).toBe(8 * 60 + 30)
+    expect(parseTime({ hour: 15, minute: 13 })).toBe(15 * 60 + 13)
+    expect(parseTime({ hour: 23, minute: 59 })).toBe(23 * 60 + 59)
   })
 
   it('should not parse time', () => {
     expect(parseTime('nopes')).toBe(false)
-    expect(parseTime({hour: 23})).toBe(false)
+    expect(parseTime({ hour: 23 })).toBe(false)
     expect(parseTime([23])).toBe(false)
     expect(parseTime(false)).toBe(false)
     expect(parseTime(true)).toBe(false)
@@ -167,7 +166,7 @@ test('VCalendar/util/timestamp.ts', ({ mount }) => {
       present: false,
       future: false
     })
-    expect(parseTimestamp('bad')).toEqual(null)
+    expect(parseTimestamp('bad')).toBeNull()
   })
 
   it('should parse timestamp and update relative flags', () => {
@@ -310,7 +309,7 @@ test('VCalendar/util/timestamp.ts', ({ mount }) => {
     expect(cc.future).toBe(false)
   })
 
-  it('should calculate weekday', () => {
+  it('should calculate weekday', () => { // eslint-disable-line max-statements
     expect(parseTimestamp('2019-01-01').weekday).toBe(2)
     expect(parseTimestamp('2019-01-02').weekday).toBe(3)
     expect(parseTimestamp('2019-01-03').weekday).toBe(4)
@@ -390,13 +389,13 @@ test('VCalendar/util/timestamp.ts', ({ mount }) => {
     )
 
     expect(days).toEqual([
-        {"date": "2019-04-29", "day": 29, "future": false, "hasDay": true, "hasTime": false, "hour": 0, "minute": 0, "month": 4, "past": true, "present": false, "time": "", "weekday": 1, "year": 2019},
-        {"date": "2019-04-30", "day": 30, "future": false, "hasDay": true, "hasTime": false, "hour": 0, "minute": 0, "month": 4, "past": true, "present": false, "time": "", "weekday": 2, "year": 2019},
-        {"date": "2019-05-01", "day": 1, "future": false, "hasDay": true, "hasTime": false, "hour": 0, "minute": 0, "month": 5, "past": true, "present": false, "time": "", "weekday": 3, "year": 2019},
-        {"date": "2019-05-02", "day": 2, "future": false, "hasDay": true, "hasTime": false, "hour": 0, "minute": 0, "month": 5, "past": true, "present": false, "time": "", "weekday": 4, "year": 2019},
-        {"date": "2019-05-03", "day": 3, "future": false, "hasDay": true, "hasTime": false, "hour": 0, "minute": 0, "month": 5, "past": false, "present": true, "time": "", "weekday": 5, "year": 2019},
-        {"date": "2019-05-04", "day": 4, "future": true, "hasDay": true, "hasTime": false, "hour": 0, "minute": 0, "month": 5, "past": false, "present": false, "time": "", "weekday": 6, "year": 2019},
-        {"date": "2019-05-05", "day": 5, "future": true, "hasDay": true, "hasTime": false, "hour": 0, "minute": 0, "month": 5, "past": false, "present": false, "time": "", "weekday": 0, "year": 2019}
+      { 'date': '2019-04-29', 'day': 29, 'future': false, 'hasDay': true, 'hasTime': false, 'hour': 0, 'minute': 0, 'month': 4, 'past': true, 'present': false, 'time': '', 'weekday': 1, 'year': 2019 },
+      { 'date': '2019-04-30', 'day': 30, 'future': false, 'hasDay': true, 'hasTime': false, 'hour': 0, 'minute': 0, 'month': 4, 'past': true, 'present': false, 'time': '', 'weekday': 2, 'year': 2019 },
+      { 'date': '2019-05-01', 'day': 1, 'future': false, 'hasDay': true, 'hasTime': false, 'hour': 0, 'minute': 0, 'month': 5, 'past': true, 'present': false, 'time': '', 'weekday': 3, 'year': 2019 },
+      { 'date': '2019-05-02', 'day': 2, 'future': false, 'hasDay': true, 'hasTime': false, 'hour': 0, 'minute': 0, 'month': 5, 'past': true, 'present': false, 'time': '', 'weekday': 4, 'year': 2019 },
+      { 'date': '2019-05-03', 'day': 3, 'future': false, 'hasDay': true, 'hasTime': false, 'hour': 0, 'minute': 0, 'month': 5, 'past': false, 'present': true, 'time': '', 'weekday': 5, 'year': 2019 },
+      { 'date': '2019-05-04', 'day': 4, 'future': true, 'hasDay': true, 'hasTime': false, 'hour': 0, 'minute': 0, 'month': 5, 'past': false, 'present': false, 'time': '', 'weekday': 6, 'year': 2019 },
+      { 'date': '2019-05-05', 'day': 5, 'future': true, 'hasDay': true, 'hasTime': false, 'hour': 0, 'minute': 0, 'month': 5, 'past': false, 'present': false, 'time': '', 'weekday': 0, 'year': 2019 }
     ])
   })
 
@@ -416,7 +415,7 @@ test('VCalendar/util/timestamp.ts', ({ mount }) => {
       Number.MAX_SAFE_INTEGER
     )
 
-    expect(days).toEqual([]);
+    expect(days).toEqual([])
   })
 
   it('should handle skips equal to zero', () => {
@@ -435,89 +434,89 @@ test('VCalendar/util/timestamp.ts', ({ mount }) => {
       Number.MAX_SAFE_INTEGER
     )
 
-    expect(days).toMatchSnapshot();
+    expect(days).toMatchSnapshot()
   })
 
   it('should create interval list', () => {
-    expect(createIntervalList(parseTimestamp("2019-02-08"), 2, 15, 10)).toMatchSnapshot();
-    expect(createIntervalList(parseTimestamp("2019-02-08"), 1, 15, 10)).toMatchSnapshot();
-    expect(createIntervalList(parseTimestamp("2019-02-08"), 2, 5, 2)).toMatchSnapshot();
+    expect(createIntervalList(parseTimestamp('2019-02-08'), 2, 15, 10)).toMatchSnapshot()
+    expect(createIntervalList(parseTimestamp('2019-02-08'), 1, 15, 10)).toMatchSnapshot()
+    expect(createIntervalList(parseTimestamp('2019-02-08'), 2, 5, 2)).toMatchSnapshot()
   })
 
   // TODO Create a test that doesn't fail when
   // the day changes or ignore the code it
   // covers
   it.skip('should create native locale formatter', () => {
-    expect(createNativeLocaleFormatter("en-US", () => {})(parseTimestamp("2019-02-08"))).toBe('2/8/2019');
-    expect(createNativeLocaleFormatter("en-UK", () => {})(parseTimestamp("2019-02-08"))).toBe('2/8/2019');
-    expect(createNativeLocaleFormatter("ru-RU", () => {})(parseTimestamp("2019-02-08"))).toBe('2019-2-8');
+    expect(createNativeLocaleFormatter('en-US', () => {})(parseTimestamp('2019-02-08'))).toBe('2/8/2019')
+    expect(createNativeLocaleFormatter('en-UK', () => {})(parseTimestamp('2019-02-08'))).toBe('2/8/2019')
+    expect(createNativeLocaleFormatter('ru-RU', () => {})(parseTimestamp('2019-02-08'))).toBe('2019-2-8')
   })
 
   it('should return emptyFormatter if Intl isn\'t defined', () => {
-    const intl = global.Intl;
-    global.Intl = undefined;
-    expect(createNativeLocaleFormatter("", () => {})(parseTimestamp("2019-02-08"))).toBe('');
-    global.Intl = intl;
+    const intl = global.Intl
+    global.Intl = undefined
+    expect(createNativeLocaleFormatter('', () => {})(parseTimestamp('2019-02-08'))).toBe('')
+    global.Intl = intl
   })
 
   it('should return emptyFormatter if Intl throws error', () => {
-    global.Intl.DateTimeFormat = () => { throw new Error(); };
-    expect(createNativeLocaleFormatter("", () => {})(parseTimestamp("2019-02-08"))).toBe('');
+    global.Intl.DateTimeFormat = () => { throw new Error() }
+    expect(createNativeLocaleFormatter('', () => {})(parseTimestamp('2019-02-08'))).toBe('')
   })
 
   it('should get month start', () => {
-    expect(getStartOfMonth(parseTimestamp('2019-02-08')).date).toEqual('2019-02-01');
-    expect(getStartOfMonth(parseTimestamp('2019-03-08')).date).toEqual('2019-03-01');
-    expect(getStartOfMonth(parseTimestamp('2019-06-08')).date).toEqual('2019-06-01');
+    expect(getStartOfMonth(parseTimestamp('2019-02-08')).date).toEqual('2019-02-01')
+    expect(getStartOfMonth(parseTimestamp('2019-03-08')).date).toEqual('2019-03-01')
+    expect(getStartOfMonth(parseTimestamp('2019-06-08')).date).toEqual('2019-06-01')
   })
 
   it('should get month end', () => {
-    expect(getEndOfMonth(parseTimestamp('2019-02-08')).date).toEqual('2019-02-28');
-    expect(getEndOfMonth(parseTimestamp('2019-03-08')).date).toEqual('2019-03-31');
-    expect(getEndOfMonth(parseTimestamp('2019-06-08')).date).toEqual('2019-06-30');
+    expect(getEndOfMonth(parseTimestamp('2019-02-08')).date).toEqual('2019-02-28')
+    expect(getEndOfMonth(parseTimestamp('2019-03-08')).date).toEqual('2019-03-31')
+    expect(getEndOfMonth(parseTimestamp('2019-06-08')).date).toEqual('2019-06-30')
   })
 
   it('should get next minutes', () => {
-    expect(nextMinutes({ hour: 8, minute: 30 }, 40)).toEqual({ hour: 9, minute: 10 });
-    expect(nextMinutes({ hour: 8, minute: 10 }, 90)).toEqual({ hour: 9, minute: 40 });
-    expect(nextMinutes({ hour: 8, minute: 0 }, 40)).toEqual({ hour: 8, minute: 40 });
-    expect(nextMinutes({ day: 1, weekday: 1, hour: 23, minute: 50 }, 40)).toEqual({ hour: 0, minute: 30, day: 2, weekday: 2 });
+    expect(nextMinutes({ hour: 8, minute: 30 }, 40)).toEqual({ hour: 9, minute: 10 })
+    expect(nextMinutes({ hour: 8, minute: 10 }, 90)).toEqual({ hour: 9, minute: 40 })
+    expect(nextMinutes({ hour: 8, minute: 0 }, 40)).toEqual({ hour: 8, minute: 40 })
+    expect(nextMinutes({ day: 1, weekday: 1, hour: 23, minute: 50 }, 40)).toEqual({ hour: 0, minute: 30, day: 2, weekday: 2 })
   })
 
   it('should update minutes', () => {
-    expect(updateMinutes({}, 40)).toMatchObject({ hour: 0, minute: 40 });
-    expect(updateMinutes({}, 90)).toMatchObject({ hour: 1, minute: 30 });
-    expect(updateMinutes({}, 40, {})).toMatchObject({ hour: 0, minute: 40 });
-    expect(updateMinutes({}, 90, {})).toMatchObject({ hour: 1, minute: 30 });
+    expect(updateMinutes({}, 40)).toMatchObject({ hour: 0, minute: 40 })
+    expect(updateMinutes({}, 90)).toMatchObject({ hour: 1, minute: 30 })
+    expect(updateMinutes({}, 40, {})).toMatchObject({ hour: 0, minute: 40 })
+    expect(updateMinutes({}, 90, {})).toMatchObject({ hour: 1, minute: 30 })
   })
 
   it('should get weekday skips', () => {
-    expect(getWeekdaySkips([ 0, 1, 2, 3, 4, 5, 6 ])).toEqual([1, 1, 1, 1, 1, 1, 1]);
-    expect(getWeekdaySkips([ 1, 5, 0, 3, 4, 2, 6 ])).toEqual([1, 1, 1, 1, 1, 1, 1]);
-    expect(getWeekdaySkips([ 1, 5, 1, 3, 4, 2, 6 ])).toEqual([0, 1, 1, 1, 1, 1, 2]);
+    expect(getWeekdaySkips([ 0, 1, 2, 3, 4, 5, 6 ])).toEqual([1, 1, 1, 1, 1, 1, 1])
+    expect(getWeekdaySkips([ 1, 5, 0, 3, 4, 2, 6 ])).toEqual([1, 1, 1, 1, 1, 1, 1])
+    expect(getWeekdaySkips([ 1, 5, 1, 3, 4, 2, 6 ])).toEqual([0, 1, 1, 1, 1, 1, 2])
   })
 
   it('should create day list', () => {
     const skips = getWeekdaySkips([ 0, 1, 2, 3, 4, 5, 6 ])
     const skips1 = getWeekdaySkips([ 1, 1, 1, 1, 1, 1, 0 ])
-    expect(createDayList(parseTimestamp("2019-02-02"), parseTimestamp("2019-02-01"), parseTimestamp("2019-02-02"), skips)).toHaveLength(0)
-    expect(createDayList(parseTimestamp("2019-02-01"), parseTimestamp("2019-02-10"), parseTimestamp("2019-02-02"), skips)).toHaveLength(10)
-    expect(createDayList(parseTimestamp("2019-02-01"), parseTimestamp("2019-02-10"), parseTimestamp("2019-02-02"), skips1)).toHaveLength(3)
+    expect(createDayList(parseTimestamp('2019-02-02'), parseTimestamp('2019-02-01'), parseTimestamp('2019-02-02'), skips)).toHaveLength(0)
+    expect(createDayList(parseTimestamp('2019-02-01'), parseTimestamp('2019-02-10'), parseTimestamp('2019-02-02'), skips)).toHaveLength(10)
+    expect(createDayList(parseTimestamp('2019-02-01'), parseTimestamp('2019-02-10'), parseTimestamp('2019-02-02'), skips1)).toHaveLength(3)
   })
 
   it('should find weekday', () => {
-    expect(findWeekday(parseTimestamp("2019-02-03"), 5, nextDay, 100)).toMatchObject({ weekday: 5 })
-    expect(findWeekday(parseTimestamp("2019-01-03"), 1, nextDay, 100)).toMatchObject({ weekday: 1 })
-    expect(findWeekday(parseTimestamp("2019-01-03"), 5, prevDay, 100)).toMatchObject({ weekday: 5 })
-    expect(findWeekday(parseTimestamp("2019-01-03"), 1, prevDay, 100)).toMatchObject({ weekday: 1 })
+    expect(findWeekday(parseTimestamp('2019-02-03'), 5, nextDay, 100)).toMatchObject({ weekday: 5 })
+    expect(findWeekday(parseTimestamp('2019-01-03'), 1, nextDay, 100)).toMatchObject({ weekday: 1 })
+    expect(findWeekday(parseTimestamp('2019-01-03'), 5, prevDay, 100)).toMatchObject({ weekday: 5 })
+    expect(findWeekday(parseTimestamp('2019-01-03'), 1, prevDay, 100)).toMatchObject({ weekday: 1 })
   })
 
   it('should calculate relative days', () => {
-    expect(relativeDays(parseTimestamp("2019-02-03"), nextDay, 1)).toMatchObject({ day: 4 })
-    expect(relativeDays(parseTimestamp("2019-01-03"), nextDay, 10)).toMatchObject({ day: 13 })
-    expect(relativeDays(parseTimestamp("2019-01-03"), nextDay, 1000)).toMatchObject({ day: 29, month: 9, year: 2021 })
-    expect(relativeDays(parseTimestamp("2019-01-03"), prevDay, 1)).toMatchObject({ day: 2 })
-    expect(relativeDays(parseTimestamp("2019-01-03"), prevDay, 10)).toMatchObject({ day: 24 })
-    expect(relativeDays(parseTimestamp("2019-01-03"), prevDay, 1000)).toMatchObject({ day: 8, month: 4, year: 2016 })
+    expect(relativeDays(parseTimestamp('2019-02-03'), nextDay, 1)).toMatchObject({ day: 4 })
+    expect(relativeDays(parseTimestamp('2019-01-03'), nextDay, 10)).toMatchObject({ day: 13 })
+    expect(relativeDays(parseTimestamp('2019-01-03'), nextDay, 1000)).toMatchObject({ day: 29, month: 9, year: 2021 })
+    expect(relativeDays(parseTimestamp('2019-01-03'), prevDay, 1)).toMatchObject({ day: 2 })
+    expect(relativeDays(parseTimestamp('2019-01-03'), prevDay, 10)).toMatchObject({ day: 24 })
+    expect(relativeDays(parseTimestamp('2019-01-03'), prevDay, 1000)).toMatchObject({ day: 8, month: 4, year: 2016 })
   })
 })
