@@ -13,10 +13,10 @@
     margin-left: 0
 
     &--leaf
-      margin-left: 24px
+      margin-left: $treeview-direct-leaf-node-x-margin
 
   &-node
-    margin-left: 26px
+    margin-left: $treeview-node-x-margin
 
     &--excluded
       display: none
@@ -28,7 +28,7 @@
         user-select: none
 
     &--leaf
-      margin-left: 50px
+      margin-left: $treeview-leaf-node-x-margin
 
     &__root
       display: flex
@@ -47,13 +47,13 @@
         flex-shrink: 1 !important
 
     &__label
-      font-size: 1.2rem
-      margin-left: 6px
+      font-size: $treeview-label-font-size
+      margin-left: $treeview-label-margin-left
       flex-grow: 1
       flex-shrink: 0
 
       .v-icon
-        padding-right: 8px
+        padding-right: $treeview-label-icon-padding-right
 
     &__checkbox
       user-select: none
@@ -76,15 +76,15 @@
       margin-right: 0
 
       &--leaf
-        margin-right: 24px
+        margin-right: $treeview-direct-leaf-node-x-margin
         margin-left: 0
 
     &-node
-      margin-right: 26px
+      margin-right: $treeview-node-x-margin
       margin-left: 0
 
       &--leaf
-        margin-right: 50px
+        margin-right: $treeview-leaf-node-x-margin
         margin-left: 0
 
       &__toggle
