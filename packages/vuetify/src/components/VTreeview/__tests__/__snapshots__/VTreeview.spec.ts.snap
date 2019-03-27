@@ -630,7 +630,7 @@ exports[`VTreeView.ts should render items 1`] = `
 exports[`VTreeView.ts should select all descendants 1`] = `
 
 <div class="v-treeview theme--light">
-  <div class="v-treeview-node">
+  <div class="v-treeview-node v-treeview-node--selected">
     <div class="v-treeview-node__root">
       <i aria-hidden="true"
          class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light"
@@ -638,9 +638,9 @@ exports[`VTreeView.ts should select all descendants 1`] = `
         arrow_drop_down
       </i>
       <i aria-hidden="true"
-         class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light"
+         class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light accent--text"
       >
-        check_box_outline_blank
+        check_box
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
