@@ -1,0 +1,6 @@
+@mixin treeview-theme($material)
+  color: map-deep-get($material, 'text', 'primary')
+
+  &--hoverable .v-treeview-node__root:hover,
+  .v-treeview-node--active
+    background: map-get($material, 'dividers')

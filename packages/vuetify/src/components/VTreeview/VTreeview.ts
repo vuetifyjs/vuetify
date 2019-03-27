@@ -1,5 +1,5 @@
 // Styles
-import './VTreeview.styl'
+import './VTreeview.sass'
 
 // Types
 import { VNode, VNodeChildrenArrayContents } from 'vue'
