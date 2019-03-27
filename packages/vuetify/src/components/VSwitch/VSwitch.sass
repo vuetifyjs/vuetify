@@ -1,5 +1,6 @@
 @import '../../styles/styles.sass'
 @import './_mixins.sass'
+@import './_variables.sass'
 
 // Theme
 .v-input--switch.theme--light
@@ -11,12 +12,12 @@
   +rtl()
     .v-input--selection-controls__ripple
       left: auto
-      right: -14px
+      right: $switch-ripple-x
 
     &.v-input--is-dirty
       .v-input--selection-controls__ripple,
       .v-input--switch__thumb
-        transform: translate(-16px, 0)
+        transform: translate(-$switch-dirty-offset-x, 0)
 
   &__track,
   &__thumb
@@ -25,33 +26,33 @@
     transition: inherit
 
   &__track
-    border-radius: 8px
-    height: 14px
-    left: 2px
-    opacity: .6
+    border-radius: $switch-track-border-radius
+    height: $switch-track-height
+    left: $switch-track-x
+    opacity: $switch-track-opacity
     position: absolute
-    right: 2px
-    top: calc(50% - 7px)
+    right: $switch-track-x
+    top: $switch-track-top
 
   &__thumb
     border-radius: 50%
-    top: calc(50% - 10px)
-    height: 20px
+    top: $switch-thumb-top
+    height: $switch-thumb-height
     position: relative
-    width: 20px
+    width: $switch-thumb-width
     display: flex
     justify-content: center
     align-items: center
-    +elevation(4)
+    +elevation($switch-thumb-elevation)
 
   .v-input--selection-controls__input
     width: 38px
 
   .v-input--selection-controls__ripple
-    left: -14px
-    top: calc(50% - 24px)
+    left: $switch-ripple-x
+    top: $switch-ripple-top
 
   &.v-input--is-dirty
     .v-input--selection-controls__ripple,
     .v-input--switch__thumb
-      transform: translate(16px, 0)
+      transform: translate($switch-dirty-offset-x, 0)
