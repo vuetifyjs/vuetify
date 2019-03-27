@@ -11,7 +11,7 @@ import { touch } from '../../../../test'
 // Types
 import { ExtractVue } from '../../../util/mixins'
 
-describe('VSwitch.js', () => {
+describe('VSwitch.ts', () => {
   type Instance = ExtractVue<typeof VSwitch>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

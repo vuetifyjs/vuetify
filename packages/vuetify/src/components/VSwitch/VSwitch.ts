@@ -14,15 +14,14 @@ import VProgressCircular from '../VProgressCircular/VProgressCircular'
 // Helpers
 import { keyCodes } from '../../util/helpers'
 
+// Types
+import { VNode, VNodeData } from 'vue'
+
 /* @vue/component */
-export default {
+export default Selectable.extend({
   name: 'v-switch',
 
   directives: { Touch },
-
-  mixins: [
-    Selectable
-  ],
 
   props: {
     loading: {
@@ -32,12 +31,12 @@ export default {
   },
 
   computed: {
-    classes () {
+    classes (): object {
       return {
         'v-input--selection-controls v-input--switch': true
       }
     },
-    switchData () {
+    switchData (): VNodeData {
       return this.setTextColor(this.loading ? undefined : this.computedColor, {
         class: this.themeClasses
       })
@@ -45,13 +44,13 @@ export default {
   },
 
   methods: {
-    genDefaultSlot () {
+    genDefaultSlot (): (VNode | null)[] {
       return [
         this.genSwitch(),
         this.genLabel()
       ]
     },
-    genSwitch () {
+    genSwitch (): VNode {
       return this.$createElement('div', {
         staticClass: 'v-input--selection-controls__input'
       }, [
@@ -75,7 +74,7 @@ export default {
         }, [this.genProgress()])
       ])
     },
-    genProgress () {
+    genProgress (): VNode {
       return this.$createElement(VFabTransition, {}, [
         this.loading === false
           ? null
@@ -97,11 +96,11 @@ export default {
     onSwipeRight () {
       if (!this.isActive) this.onChange()
     },
-    onKeydown (e) {
+    onKeydown (e: KeyboardEvent) {
       if (
         (e.keyCode === keyCodes.left && this.isActive) ||
         (e.keyCode === keyCodes.right && !this.isActive)
       ) this.onChange()
     }
   }
-}
+})
