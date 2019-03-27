@@ -1,6 +1,19 @@
 import Vue from 'vue'
-import { test } from '@/test'
-import VTreeviewNode from '@/components/VTreeview/VTreeviewNode'
+import VTreeviewNode from '../VTreeviewNode'
+import {
+  mount,
+  MountOptions,
+  Wrapper
+} from '@vue/test-utils'
+import { ExtractVue } from '../../../util/mixins'
+
+Vue.prototype.$vuetify = {
+  icons: {
+    values: {
+      subgroup: 'arrow_drop_down'
+    }
+  }
+}
 
 const singleRootTwoChildren = { id: 0, name: 'Root', children: [{ id: 1, name: 'Child' }, { id: 2, name: 'Child 2' }] }
 
@@ -31,7 +44,9 @@ const MockScopedLabel = {
   })
 }
 
-test('VTreeViewNode.ts', ({ mount }) => {
+describe('VTreeViewNode.ts', () => {
+  type Instance = ExtractVue<typeof VTreeviewNode>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   let treeview
 
   beforeEach(() => {
@@ -40,10 +55,14 @@ test('VTreeViewNode.ts', ({ mount }) => {
       unregister: jest.fn(),
       isExcluded: () => false
     }
+
+    mountFunction = (options?: MountOptions<Instance>) => {
+      return mount(VTreeviewNode, options)
+    }
   })
 
   it('should return indeterminate icon', async () => {
-    const wrapper = mount(VTreeviewNode, {
+    const wrapper = mountFunction({
       provide: { treeview }
     })
 
@@ -63,7 +82,7 @@ test('VTreeViewNode.ts', ({ mount }) => {
   })
 
   it('should generate a transition element', () => {
-    const wrapper = mount(VTreeviewNode, {
+    const wrapper = mountFunction({
       propsData: { transition: true },
       provide: { treeview }
     })
