@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import { test } from '@/test'
 import VTreeview from '@/components/VTreeview/VTreeview'
 
@@ -143,8 +142,8 @@ test('VTreeView.ts', ({ mount }) => {
     wrapper.setProps({ value: [1] })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.find('.v-treeview-node').length).toBe(2)
-    expect(wrapper.find('.v-treeview-node--selected').length).toBe(2)
+    expect(wrapper.find('.v-treeview-node')).toHaveLength(2)
+    expect(wrapper.find('.v-treeview-node--selected')).toHaveLength(2)
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({ value: [] })
@@ -177,11 +176,11 @@ test('VTreeView.ts', ({ mount }) => {
 
     wrapper.vm.updateAll(true)
     expect(updateOpen).toHaveBeenCalledTimes(1)
-    expect(updateOpen).toBeCalledWith([0, 1])
+    expect(updateOpen).toHaveBeenCalledWith([0, 1])
 
     wrapper.vm.updateAll(false)
     expect(updateOpen).toHaveBeenCalledTimes(2)
-    expect(updateOpen).toBeCalledWith([])
+    expect(updateOpen).toHaveBeenCalledWith([])
   })
 
   it('should react to open changes', async () => {
@@ -344,7 +343,7 @@ test('VTreeView.ts', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('.v-treeview-node__toggle').length).toBe(0)
+    expect(wrapper.find('.v-treeview-node__toggle')).toHaveLength(0)
   })
 
   it('should show expand icon when children is empty and load-children prop used', () => {
@@ -361,7 +360,7 @@ test('VTreeView.ts', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('.v-treeview-node__toggle').length).toBe(1)
+    expect(wrapper.find('.v-treeview-node__toggle')).toHaveLength(1)
   })
 
   it('should recalculate tree when loading async children using custom key', async () => {
@@ -383,7 +382,6 @@ test('VTreeView.ts', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-
   })
 
   it('should remove old nodes', async () => {
@@ -428,7 +426,7 @@ test('VTreeView.ts', ({ mount }) => {
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
 
-    expect(Object.keys(wrapper.vm.nodes).length).toBe(2)
+    expect(Object.keys(wrapper.vm.nodes)).toHaveLength(2)
   })
 
   it('should filter items', async () => {
@@ -456,7 +454,7 @@ test('VTreeView.ts', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('.v-treeview-node--excluded').length).toBe(1)
+    expect(wrapper.find('.v-treeview-node--excluded')).toHaveLength(1)
   })
 
   it('should filter items using custom item filter', async () => {
@@ -480,7 +478,7 @@ test('VTreeView.ts', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('.v-treeview-node--excluded').length).toBe(2)
+    expect(wrapper.find('.v-treeview-node--excluded')).toHaveLength(2)
 
     wrapper.setProps({
       search: 'yes'
@@ -489,7 +487,7 @@ test('VTreeView.ts', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('.v-treeview-node--excluded').length).toBe(1)
+    expect(wrapper.find('.v-treeview-node--excluded')).toHaveLength(1)
   })
 
   it('should emit objects when return-object prop is used', async () => {
