@@ -534,11 +534,12 @@ export default VTextField.extend({
     onChipInput (item) {
       if (this.multiple) this.selectItem(item)
       else this.setValue(null)
-
       // If all items have been deleted,
       // open `v-menu`
       if (this.selectedItems.length === 0) {
         this.isMenuActive = true
+      } else {
+        this.isMenuActive = false
       }
       this.selectedIndex = -1
     },
