@@ -1,20 +1,11 @@
-@import '../bootstrap'
-@import '../theme'
+@import '../styles.sass'
+@import './_mixins.sass'
 
-/** Theme */
-selection-control($material)
-  &.v-input--is-disabled
-    .v-icon
-      // needed for helper override
-      color: $material.buttons.disabled !important
-
-v-selection-control-rtl()
-  .v-input--selection-controls__input
-    margin-right: 0
-    margin-left: 8px
-
-theme(selection-control, "v-input--selection-controls")
-rtl(v-selection-control-rtl, "v-input--selection-controls")
+// Theme
+.v-input--selection-controls.theme--light
+  +selection-control-theme($material-light)
+.v-input--selection-controls.theme--dark
+  +selection-control-theme($material-dark)
 
 .v-input--selection-controls
   margin-top: $input-top-spacing
@@ -44,6 +35,10 @@ rtl(v-selection-control-rtl, "v-input--selection-controls")
     transition-property: color, transform
     width: 24px
     user-select: none
+
+    +rtl()
+      margin-right: 0
+      margin-left: 8px
 
     input
       position: absolute
