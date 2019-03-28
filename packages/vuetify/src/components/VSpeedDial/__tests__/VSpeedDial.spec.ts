@@ -1,30 +1,45 @@
-import VSpeedDial from '@/components/VSpeedDial'
-import VBtn from '@/components/VBtn'
-import { test } from '@/test'
+// Components
+import VSpeedDial from '../VSpeedDial'
+import VBtn from '../../VBtn/VBtn'
+
+// Utilities
+import {
+  mount,
+  Wrapper
+} from '@vue/test-utils'
 import { compileToFunctions } from 'vue-template-compiler'
 
-test('VSpeedDial.js', ({ mount }) => {
+describe('VSpeedDial.ts', () => {
+  type Instance = InstanceType<typeof VSpeedDial>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+
+  beforeEach(() => {
+    mountFunction = (options = {}) => {
+      return mount(VSpeedDial, {
+        ...options
+      })
+    }
+  })
+
   it('should render component and match snapshot', () => {
-    const wrapper = mount(VSpeedDial)
+    const wrapper = mountFunction()
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render active component and match snapshot', () => {
-    const wrapper = mount(VSpeedDial, {
+    const wrapper = mountFunction({
       slots: {
         default: [compileToFunctions('<span>test</span>')]
       },
-      data: {
-        isActive: true
-      }
+      data: () => ({ isActive: true })
     })
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render component with custom direction and match snapshot', () => {
-    const wrapper = mount(VSpeedDial, {
+    const wrapper = mountFunction({
       propsData: {
         direction: 'right'
       }
@@ -34,7 +49,7 @@ test('VSpeedDial.js', ({ mount }) => {
   })
 
   it('should activate on click', () => {
-    const wrapper = mount(VSpeedDial)
+    const wrapper = mountFunction()
 
     expect(wrapper.vm.isActive).toBe(false)
     wrapper.trigger('click')
@@ -42,7 +57,7 @@ test('VSpeedDial.js', ({ mount }) => {
   })
 
   it('should activate on hover', () => {
-    const wrapper = mount(VSpeedDial, {
+    const wrapper = mountFunction({
       propsData: {
         openOnHover: true
       }
@@ -60,11 +75,9 @@ test('VSpeedDial.js', ({ mount }) => {
       slots: {
         default: [VBtn]
       },
-      data: {
-        isActive: true
-      }
+      data: () => ({ isActive: true })
     })
 
-    expect(wrapper.find('.v-speed-dial__list div button').length).toBe(1)
+    expect(wrapper.findAll('.v-speed-dial__list div button')).toHaveLength(1)
   })
 })
