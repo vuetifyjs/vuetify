@@ -41,6 +41,13 @@ export default Selectable.extend({
         'v-input--switch--flat': this.flat
       }
     },
+    attrs (): object {
+      return {
+        'aria-checked': String(this.isActive),
+        'aria-disabled': String(this.disabled),
+        'role': 'switch'
+      }
+    },
     switchData (): VNodeData {
       return this.setTextColor(this.loading ? undefined : this.computedColor, {
         class: this.themeClasses
@@ -59,7 +66,10 @@ export default Selectable.extend({
       return this.$createElement('div', {
         staticClass: 'v-input--selection-controls__input'
       }, [
-        this.genInput('checkbox', this.$attrs),
+        this.genInput('checkbox', {
+          ...this.$attrs,
+          ...this.attrs
+        }),
         this.genRipple(this.setTextColor(this.computedColor, {
           directives: [{
             name: 'touch',
