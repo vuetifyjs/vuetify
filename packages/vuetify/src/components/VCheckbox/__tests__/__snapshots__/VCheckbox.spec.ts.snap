@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VCheckbox.js should be disabled 1`] = `
+exports[`VCheckbox.ts should be disabled 1`] = `
 
 <input aria-checked="false"
        disabled="disabled"
@@ -10,7 +10,7 @@ exports[`VCheckbox.js should be disabled 1`] = `
 
 `;
 
-exports[`VCheckbox.js should render themed component 1`] = `
+exports[`VCheckbox.ts should render themed component 1`] = `
 
 <div class="v-input v-input--selection-controls v-input--checkbox theme--light">
   <div class="v-input__control">
@@ -25,20 +25,23 @@ exports[`VCheckbox.js should render themed component 1`] = `
         <i aria-hidden="true"
            class="v-icon material-icons theme--light"
         >
-          check_box_outline_blank
+          $vuetify.icons.checkboxOff
         </i>
       </div>
     </div>
     <div class="v-messages theme--light">
-      <div class="v-messages__wrapper">
-      </div>
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
     </div>
   </div>
 </div>
 
 `;
 
-exports[`VCheckbox.js should use custom icons 1`] = `
+exports[`VCheckbox.ts should use custom icons 1`] = `
 
 <div class="v-input v-input--selection-controls v-input--checkbox theme--light">
   <div class="v-input__control">
@@ -58,15 +61,18 @@ exports[`VCheckbox.js should use custom icons 1`] = `
       </div>
     </div>
     <div class="v-messages theme--light">
-      <div class="v-messages__wrapper">
-      </div>
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
     </div>
   </div>
 </div>
 
 `;
 
-exports[`VCheckbox.js should use custom icons 2`] = `
+exports[`VCheckbox.ts should use custom icons 2`] = `
 
 <div class="v-input v-input--selection-controls v-input--checkbox theme--light">
   <div class="v-input__control">
@@ -86,17 +92,20 @@ exports[`VCheckbox.js should use custom icons 2`] = `
       </div>
     </div>
     <div class="v-messages theme--light">
-      <div class="v-messages__wrapper">
-      </div>
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
     </div>
   </div>
 </div>
 
 `;
 
-exports[`VCheckbox.js should use custom icons 3`] = `
+exports[`VCheckbox.ts should use custom icons 3`] = `
 
-<div class="v-input v-input--selection-controls v-input--checkbox theme--light">
+<div class="v-input v-input--selection-controls v-input--checkbox v-input--is-label-active v-input--is-dirty theme--light">
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-input--selection-controls__input">
@@ -104,18 +113,21 @@ exports[`VCheckbox.js should use custom icons 3`] = `
                role="checkbox"
                type="checkbox"
         >
-        <div class="v-input--selection-controls__ripple">
+        <div class="v-input--selection-controls__ripple accent--text">
         </div>
         <i aria-hidden="true"
-           class="v-icon material-icons theme--light"
+           class="v-icon material-icons theme--light accent--text"
         >
           fizzbuzz
         </i>
       </div>
     </div>
     <div class="v-messages theme--light">
-      <div class="v-messages__wrapper">
-      </div>
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
     </div>
   </div>
 </div>
