@@ -18,9 +18,8 @@ exports[`VTreeViewNode.ts should use label slot 1`] = `
 <div class="v-treeview-node">
   <div class="v-treeview-node__root">
     <i aria-hidden="true"
-       class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light"
+       class="v-icon v-treeview-node__toggle v-icon--link mdi mdi-menu-down theme--light"
     >
-      arrow_drop_down
     </i>
     <div class="v-treeview-node__content">
       <div class="v-treeview-node__label">
