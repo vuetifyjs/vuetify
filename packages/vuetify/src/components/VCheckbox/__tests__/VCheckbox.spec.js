@@ -16,7 +16,7 @@ test('VCheckbox.js', ({ mount }) => {
 
     input.trigger('click')
     expect(change).toHaveBeenCalledTimes(1)
-    expect(change).toBeCalledWith(true)
+    expect(change).toHaveBeenCalledWith(true)
   })
 
   it('should return a value when toggled on with a specified value', () => {
@@ -33,7 +33,7 @@ test('VCheckbox.js', ({ mount }) => {
     wrapper.vm.$on('change', change)
 
     input.trigger('click')
-    expect(change).toBeCalledWith('John')
+    expect(change).toHaveBeenCalledWith('John')
   })
 
   it('should return null when toggled off with a specified value', () => {
@@ -50,7 +50,7 @@ test('VCheckbox.js', ({ mount }) => {
     wrapper.vm.$on('change', change)
 
     ripple.trigger('click')
-    expect(change).toBeCalledWith(null)
+    expect(change).toHaveBeenCalledWith(null)
   })
 
   it('should toggle when label is clicked', () => {
@@ -68,7 +68,7 @@ test('VCheckbox.js', ({ mount }) => {
     wrapper.vm.$on('change', change)
 
     label.trigger('click')
-    expect(change).toBeCalled()
+    expect(change).toHaveBeenCalled()
   })
 
   it('should render role and aria-checked attributes on input group', () => {
@@ -181,7 +181,7 @@ test('VCheckbox.js', ({ mount }) => {
   it('should return a value when toggled on with a specified object value', () => {
     const wrapper = mount(VCheckbox, {
       propsData: {
-        value: {x: 1, y: 2},
+        value: { x: 1, y: 2 },
         inputValue: null
       }
     })
@@ -192,13 +192,13 @@ test('VCheckbox.js', ({ mount }) => {
     wrapper.vm.$on('change', change)
 
     ripple.trigger('click')
-    expect(change).toBeCalledWith({x: 1, y: 2})
+    expect(change).toHaveBeenCalledWith({ x: 1, y: 2 })
   })
 
   it('should return a value when toggled on with a specified array value', () => {
     const wrapper = mount(VCheckbox, {
       propsData: {
-        value: [1, "2", {x: 1, y: 2}],
+        value: [1, '2', { x: 1, y: 2 }],
         inputValue: null
       }
     })
@@ -209,7 +209,7 @@ test('VCheckbox.js', ({ mount }) => {
     wrapper.vm.$on('change', change)
 
     ripple.trigger('click')
-    expect(change).toBeCalledWith([1, "2", {x: 1, y: 2}])
+    expect(change).toHaveBeenCalledWith([1, '2', { x: 1, y: 2 }])
   })
 
   it('should push value to array when toggled on and is multiple', () => {
@@ -226,13 +226,13 @@ test('VCheckbox.js', ({ mount }) => {
     wrapper.vm.$on('change', change)
 
     ripple.trigger('click')
-    expect(change).toBeCalledWith(['John'])
+    expect(change).toHaveBeenCalledWith(['John'])
   })
 
   it('should push array value to array when toggled on and is multiple', () => {
     const wrapper = mount(VCheckbox, {
       propsData: {
-        value: [1, 2, {x: 1, y: 2}],
+        value: [1, 2, { x: 1, y: 2 }],
         inputValue: ['Existing']
       }
     })
@@ -243,7 +243,7 @@ test('VCheckbox.js', ({ mount }) => {
     wrapper.vm.$on('change', change)
 
     ripple.trigger('click')
-    expect(change).toBeCalledWith(['Existing', [1, 2, {x: 1, y: 2}]])
+    expect(change).toHaveBeenCalledWith(['Existing', [1, 2, { x: 1, y: 2 }]])
   })
 
   it('should return null when toggled off with a specified array value', () => {
@@ -261,7 +261,7 @@ test('VCheckbox.js', ({ mount }) => {
     wrapper.vm.$on('change', change)
 
     ripple.trigger('click')
-    expect(change).toBeCalledWith(null)
+    expect(change).toHaveBeenCalledWith(null)
   })
 
   it('should remove value(s) from array when toggled off and multiple', () => {
@@ -278,14 +278,14 @@ test('VCheckbox.js', ({ mount }) => {
     wrapper.vm.$on('change', change)
 
     ripple.trigger('click')
-    expect(change).toBeCalledWith([2, 3])
+    expect(change).toHaveBeenCalledWith([2, 3])
   })
 
   it('should remove value(s) from array when toggled off and multiple - with objects', () => {
     const wrapper = mount(VCheckbox, {
       propsData: {
-        value: {a: 1},
-        inputValue: [{a: 1}, {b: 1}, {a: 1}, {c: 1}]
+        value: { a: 1 },
+        inputValue: [{ a: 1 }, { b: 1 }, { a: 1 }, { c: 1 }]
       }
     })
 
@@ -295,7 +295,7 @@ test('VCheckbox.js', ({ mount }) => {
     wrapper.vm.$on('change', change)
 
     ripple.trigger('click')
-    expect(change).toBeCalledWith([{b: 1}, {c: 1}])
+    expect(change).toHaveBeenCalledWith([{ b: 1 }, { c: 1 }])
   })
 
   it('should work with custom true- and false-value', () => {
@@ -313,10 +313,10 @@ test('VCheckbox.js', ({ mount }) => {
     wrapper.vm.$on('change', change)
 
     ripple.trigger('click')
-    expect(change).toBeCalledWith('on')
+    expect(change).toHaveBeenCalledWith('on')
 
     ripple.trigger('click')
-    expect(change).toBeCalledWith('off')
+    expect(change).toHaveBeenCalledWith('off')
 
     expect(change).toHaveBeenCalledTimes(2)
   })
@@ -343,9 +343,9 @@ test('VCheckbox.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    wrapper.setData({ value: 'fizz'})
+    wrapper.setData({ value: 'fizz' })
     expect(wrapper.html()).toMatchSnapshot()
-    wrapper.setData({ value: 'buzz'})
+    wrapper.setData({ value: 'buzz' })
     expect(wrapper.html()).toMatchSnapshot()
   })
 
