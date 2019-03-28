@@ -3,7 +3,7 @@
   "headerText": "The `v-icon` component provides a large set of glyphs to provide context to various aspects of your application. Vuetify icons utilize Google's Material Icons font library. For a list of all available icons, visit the official [Material Design Icons](https://materialdesignicons.com/) page.",
   "examples": {
     "usage": {
-      "desc": "Icons come in two themes (light and dark), and four different sizes (standard, medium, large, and x-large). If you want to use SVG icons with `VIcon` component, read about using SVG icons with `VIcon` [here](/framework/icons#component-icons)."
+      "desc": "Icons come in two themes (light and dark), and five different sizes (x-small, small, medium (default), large, and x-large)."
     },
     "fontAwesome": {
       "header": "### Font Awesome",
@@ -27,7 +27,7 @@
     },
     "mdiSvg": {
       "header": "### MDI SVG",
-      "desc": "You can manually import only the icons you use when using the [@mdi/js](https://www.npmjs.com/package/@mdi/js) package."
+      "desc": "You can manually import only the icons you use when using the [@mdi/js](https://www.npmjs.com/package/@mdi/js) package. If you want to use SVG icons with `VIcon` component, read about using them [here](/framework/icons#install-material-design-icons-js-svg)."
     }
   },
   "props": {
