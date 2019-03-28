@@ -34,7 +34,8 @@
             "fontAwesome",
             "color",
             "buttons",
-            "clickable"
+            "clickable",
+            "mdiSvg"
           ]
         }
       ]

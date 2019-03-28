@@ -24,6 +24,10 @@
     "clickable": {
       "header": "### Clickable",
       "desc": "Binding any click event to `v-icon` will automatically change the cursor to a pointer."
+    },
+    "mdiSvg": {
+      "header": "### MDI SVG",
+      "desc": "You can manually import only the icons you use when using the [@mdi/js](https://www.npmjs.com/package/@mdi/js) package."
     }
   },
   "props": {
