@@ -15,7 +15,8 @@
   transition-property: box-shadow, opacity
   will-change: box-shadow, opacity
 
-  > *:first-child:not(.v-btn):not(.v-chip)
+  > *:first-child:not(.v-btn):not(.v-chip),
+  > .v-card__progress + *:not(.v-btn):not(.v-chip),
     border-top-left-radius: inherit
     border-top-right-radius: inherit
 
@@ -42,7 +43,10 @@
   font-weight: map-deep-get($headings, 'h5', 'weight')
   letter-spacing: map-deep-get($headings, 'h5', 'letter-spacing')
   line-height: map-deep-get($headings, 'h5', 'line-height')
-  padding: 16px
+  padding: 16px 16px 8px
+
+  + .v-card__text
+    padding-top: 0
 
 .v-card__text
   font-size: map-deep-get($headings, 'subtitle-2', 'size')
