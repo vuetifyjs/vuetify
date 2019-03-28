@@ -27,13 +27,18 @@ export default Selectable.extend({
     loading: {
       type: [Boolean, String],
       default: false
+    },
+    flat: {
+      type: Boolean,
+      default: false
     }
   },
 
   computed: {
     classes (): object {
       return {
-        'v-input--selection-controls v-input--switch': true
+        'v-input--selection-controls v-input--switch': true,
+        'v-input--switch--flat': this.flat
       }
     },
     switchData (): VNodeData {

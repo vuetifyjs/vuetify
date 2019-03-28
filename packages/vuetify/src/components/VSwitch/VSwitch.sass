@@ -44,7 +44,7 @@
     display: flex
     justify-content: center
     align-items: center
-    +elevation($switch-thumb-elevation)
+    transition: $primary-transition
 
   .v-input--selection-controls__input
     width: 38px
@@ -57,3 +57,7 @@
     .v-input--selection-controls__ripple,
     .v-input--switch__thumb
       transform: translate($switch-dirty-offset-x, 0)
+
+  &:not(&--flat)
+    .v-input--switch__thumb
+      +elevation($switch-thumb-elevation)
