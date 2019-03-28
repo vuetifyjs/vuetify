@@ -43,6 +43,7 @@
             "grids",
             "customActions",
             "twitterCard",
+            "loading",
             "weather"
           ]
         }

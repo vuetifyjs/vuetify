@@ -33,6 +33,10 @@
       "header": "### Twitter card",
       "desc": "The `v-card` component has multiple children components that help you build complex examples without having to worry about spacing. This example is comprised of the `v-card-title`, `v-card-text` and `v-card-actions` components."
     },
+    "loading": {
+      "header": "### Loading card",
+      "desc": "Cards can be set to a loading state when processing a user action. This disables further actions and provides visual feedback with an indeterminate [v-progress-linear](/components/progress-linear)."
+    },
     "weather": {
       "header": "### Weather card",
       "desc": "Using [v-list-items](/components/lists) and a [v-slider](/components/sliders), we are able to create a unique weather card. The list components ensure that we have consistent spacing and functionality while the slider component allows us to provide a useful interface of selection to the user."
