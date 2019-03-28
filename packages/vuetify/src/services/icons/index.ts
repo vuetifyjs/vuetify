@@ -10,7 +10,7 @@ import presets from './presets'
 export class Icons extends Service {
   static property = 'icons'
 
-  public iconfont: VuetifyIconOptions['iconfont'] = 'md'
+  public iconfont: VuetifyIconOptions['iconfont'] = 'mdi'
   public values: VuetifyIconOptions['values'] = presets[this.iconfont]
 
   constructor (options: Partial<VuetifyIconOptions> = {}) {

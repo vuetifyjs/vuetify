@@ -49,6 +49,7 @@
   },
   "devDependencies": {
     "@mdi/font": "^3.5.95",
+    "@mdi/js": "^3.5.95",
     "autoprefixer": "^9.5.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",

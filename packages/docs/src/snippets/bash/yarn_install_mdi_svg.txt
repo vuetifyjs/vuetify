@@ -1,0 +1,3 @@
+$ yarn add @mdi/js -D
+// OR
+$ npm install @mdi/js -D
