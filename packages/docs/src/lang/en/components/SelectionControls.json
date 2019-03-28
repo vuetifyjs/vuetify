@@ -74,7 +74,9 @@
       "disabled": "Mixins.Validatable.props.disabled",
       "label": "Components.Inputs.props.label",
       "readonly": "Mixins.Validatable.props.readonly"
-    }
+    },
+    "flat": "Display component without elevation. Default elevation for thumb is 4dp, `flat` resets it",
+    "loading": "Displays circular progress bar. Can either be a String which specifies which color is applied to the progress bar (any material color or theme color - primary, secondary, success, info, warning, error) or a Boolean which uses the component color (set by color prop - if it's supported by the component) or the primary color"
   },
   "slots": {
     "append": "Components.Selects.slots.append",
