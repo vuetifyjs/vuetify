@@ -8,7 +8,7 @@ import { convertToUnit, keys, remapInternalIcon } from '../../util/helpers'
 // Types
 import Vue, { CreateElement, VNode, VNodeChildren, VNodeData } from 'vue'
 import mixins from '../../util/mixins'
-import { VuetifyIcon, VuetifyIconComponent } from 'vuetify'
+import { VuetifyIcon, VuetifyIconComponent } from 'vuetify/types/services/icons'
 
 enum SIZE_MAP {
   small = '16px',

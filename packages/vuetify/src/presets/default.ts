@@ -34,7 +34,7 @@ const preset: VuetifyPreset = {
     },
   },
   icons: {
-    iconfont: 'svg'
+    iconfont: 'mdi'
   }
 }
 

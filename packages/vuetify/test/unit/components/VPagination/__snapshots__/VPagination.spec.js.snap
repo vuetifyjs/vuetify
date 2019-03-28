@@ -8,9 +8,8 @@ exports[`VPagination.vue emits an event when next or previous is clicked 1`] = `
             class="v-pagination__navigation"
     >
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon mdi mdi-chevron-left theme--light"
       >
-        chevron_left
       </i>
     </button>
   </li>
@@ -54,9 +53,8 @@ exports[`VPagination.vue emits an event when next or previous is clicked 1`] = `
             class="v-pagination__navigation"
     >
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon mdi mdi-chevron-right theme--light"
       >
-        chevron_right
       </i>
     </button>
   </li>
@@ -72,9 +70,8 @@ exports[`VPagination.vue should only render end of range if value is equals "rig
             class="v-pagination__navigation"
     >
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon mdi mdi-chevron-left theme--light"
       >
-        chevron_left
       </i>
     </button>
   </li>
@@ -116,9 +113,8 @@ exports[`VPagination.vue should only render end of range if value is equals "rig
             class="v-pagination__navigation"
     >
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon mdi mdi-chevron-right theme--light"
       >
-        chevron_right
       </i>
     </button>
   </li>
@@ -134,9 +130,8 @@ exports[`VPagination.vue should only render middle of range if length is big and
             class="v-pagination__navigation"
     >
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon mdi mdi-chevron-left theme--light"
       >
-        chevron_left
       </i>
     </button>
   </li>
@@ -295,9 +290,8 @@ exports[`VPagination.vue should only render middle of range if length is big and
             class="v-pagination__navigation"
     >
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon mdi mdi-chevron-right theme--light"
       >
-        chevron_right
       </i>
     </button>
   </li>
@@ -313,9 +307,8 @@ exports[`VPagination.vue should only render start and end of range if length is 
             class="v-pagination__navigation v-pagination__navigation--disabled"
     >
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon mdi mdi-chevron-left theme--light"
       >
-        chevron_left
       </i>
     </button>
   </li>
@@ -476,9 +469,8 @@ exports[`VPagination.vue should only render start and end of range if length is 
             class="v-pagination__navigation"
     >
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon mdi mdi-chevron-right theme--light"
       >
-        chevron_right
       </i>
     </button>
   </li>
@@ -494,9 +486,8 @@ exports[`VPagination.vue should only render start of range if value is equals "l
             class="v-pagination__navigation"
     >
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon mdi mdi-chevron-left theme--light"
       >
-        chevron_left
       </i>
     </button>
   </li>
@@ -538,9 +529,8 @@ exports[`VPagination.vue should only render start of range if value is equals "l
             class="v-pagination__navigation"
     >
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon mdi mdi-chevron-right theme--light"
       >
-        chevron_right
       </i>
     </button>
   </li>
@@ -556,9 +546,8 @@ exports[`VPagination.vue should render component in RTL mode and match snapshot 
             class="v-pagination__navigation"
     >
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon mdi mdi-chevron-right theme--light"
       >
-        chevron_right
       </i>
     </button>
   </li>
@@ -602,9 +591,8 @@ exports[`VPagination.vue should render component in RTL mode and match snapshot 
             class="v-pagination__navigation"
     >
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon mdi mdi-chevron-left theme--light"
       >
-        chevron_left
       </i>
     </button>
   </li>
@@ -620,9 +608,8 @@ exports[`VPagination.vue should render disabled buttons with length equals to 0 
             class="v-pagination__navigation v-pagination__navigation--disabled"
     >
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon mdi mdi-chevron-left theme--light"
       >
-        chevron_left
       </i>
     </button>
   </li>
@@ -631,9 +618,8 @@ exports[`VPagination.vue should render disabled buttons with length equals to 0 
             class="v-pagination__navigation v-pagination__navigation--disabled"
     >
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon mdi mdi-chevron-right theme--light"
       >
-        chevron_right
       </i>
     </button>
   </li>
@@ -649,9 +635,8 @@ exports[`VPagination.vue should use totalVisible prop if defined 1`] = `
             class="v-pagination__navigation"
     >
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon mdi mdi-chevron-left theme--light"
       >
-        chevron_left
       </i>
     </button>
   </li>
@@ -726,9 +711,8 @@ exports[`VPagination.vue should use totalVisible prop if defined 1`] = `
             class="v-pagination__navigation"
     >
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon mdi mdi-chevron-right theme--light"
       >
-        chevron_right
       </i>
     </button>
   </li>

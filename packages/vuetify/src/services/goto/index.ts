@@ -9,23 +9,15 @@ import {
 } from './util'
 
 // Types
-import { VuetifyServiceContract } from 'vuetify/types/services'
-import Vue from 'vue'
+import { VuetifyGoToOptions, VuetifyGoToTarget } from 'vuetify/types/services/goto'
 
-type GoToTarget = number | string | HTMLElement | Vue
-interface GoToSettings {
-  container: string | HTMLElement | Vue
-  duration: number
-  offset: number
-  easing: string | easingPatterns.EasingFunction
-  appOffset: boolean
-}
+import { VuetifyServiceContract } from 'vuetify/types/services'
 
 export default function goTo (
-  _target: GoToTarget,
-  _settings: Partial<GoToSettings> = {}
+  _target: VuetifyGoToTarget,
+  _settings: Partial<VuetifyGoToOptions> = {}
 ): Promise<number> {
-  const settings: GoToSettings = {
+  const settings: VuetifyGoToOptions = {
     container: (document.scrollingElement as HTMLElement | null) || document.body || document.documentElement,
     duration: 500,
     offset: 0,
@@ -47,13 +39,13 @@ export default function goTo (
   }
 
   const startTime = performance.now()
-  const targetLocation = getOffset(_target) - settings.offset
+  const targetLocation = getOffset(_target) - settings.offset!
   const startLocation = container.scrollTop
   if (targetLocation === startLocation) return Promise.resolve(targetLocation)
 
   const ease = typeof settings.easing === 'function'
     ? settings.easing
-    : (easingPatterns as Dictionary<easingPatterns.EasingFunction>)[settings.easing]
+    : easingPatterns[settings.easing!]
   /* istanbul ignore else */
   if (!ease) throw new TypeError(`Easing function "${settings.easing}" not found.`)
 
