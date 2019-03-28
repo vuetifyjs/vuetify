@@ -53,6 +53,9 @@
     top: $switch-ripple-top
 
   &.v-input--is-dirty
+    &.v-input--is-disabled
+      opacity: .6
+
     .v-input--selection-controls__ripple,
     .v-input--switch__thumb
       transform: translate($switch-dirty-offset-x, 0)
