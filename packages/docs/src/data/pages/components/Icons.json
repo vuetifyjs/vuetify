@@ -30,8 +30,8 @@
         {
           "type": "examples",
           "value": [
+            "md",
             "fontAwesome",
-            "mdi",
             "color",
             "buttons",
             "clickable"
