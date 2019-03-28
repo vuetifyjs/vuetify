@@ -156,9 +156,8 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
         >
           <span class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon mdi mdi-chevron-left theme--light"
             >
-              chevron_left
             </i>
           </span>
         </button>
@@ -174,9 +173,8 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
         >
           <span class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon mdi mdi-chevron-right theme--light"
             >
-              chevron_right
             </i>
           </span>
         </button>
@@ -334,9 +332,8 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
         >
           <span class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon mdi mdi-chevron-left theme--light"
             >
-              chevron_left
             </i>
           </span>
         </button>
@@ -352,9 +349,8 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
         >
           <span class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon mdi mdi-chevron-right theme--light"
             >
-              chevron_right
             </i>
           </span>
         </button>
@@ -635,9 +631,8 @@ exports[`VDatePicker.js should match snapshot with pick-month prop 1`] = `
         >
           <span class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon mdi mdi-chevron-left theme--light"
             >
-              chevron_left
             </i>
           </span>
         </button>
@@ -653,9 +648,8 @@ exports[`VDatePicker.js should match snapshot with pick-month prop 1`] = `
         >
           <span class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon mdi mdi-chevron-right theme--light"
             >
-              chevron_right
             </i>
           </span>
         </button>
