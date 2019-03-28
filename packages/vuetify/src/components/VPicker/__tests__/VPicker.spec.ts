@@ -44,13 +44,13 @@ describe('VPicker.ts', () => {
   it('should render dark component and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        dark: true,
+        dark: true
       },
       slots: {
         default: [compileToFunctions('<span>default</span>')],
         title: [compileToFunctions('<span>title</span>')]
       }
-  })
+    })
 
     expect(wrapper.html()).toMatchSnapshot()
   })
@@ -58,12 +58,12 @@ describe('VPicker.ts', () => {
   it('should render colored component', () => {
     const wrapper = mountFunction({
       propsData: {
-        color: 'orange lighten-1',
+        color: 'orange lighten-1'
       },
       slots: {
         title: [compileToFunctions('<span>title</span>')]
       }
-  })
+    })
 
     const title = wrapper.find('.v-picker__title')
     expect(title.classes('orange')).toBe(true)
