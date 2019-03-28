@@ -37,6 +37,7 @@
     "lint:fix": "concurrently -n \"tsc,tslint,eslint,types\" --kill-others-on-fail \"tsc --noEmit --pretty\" \"tslint --fix -p . -c .tslint.js src/**/*.ts -t stylish\" \"eslint --fix --ext .js,.ts src\" \"yarn test:types\""
   },
   "devDependencies": {
+    "@mdi/js": "^3.5.95",
     "@types/jest": "^22.2.3",
     "@types/node": "^11.11.4",
     "@vue/test-utils": "^1.0.0-beta.29",

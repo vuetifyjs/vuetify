@@ -8,9 +8,8 @@ exports[`VDatePickerHeader.js should render component and match snapshot 1`] = `
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon mdi mdi-chevron-left theme--light"
       >
-        chevron_left
       </i>
     </span>
   </button>
@@ -26,9 +25,8 @@ exports[`VDatePickerHeader.js should render component and match snapshot 1`] = `
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon mdi mdi-chevron-right theme--light"
       >
-        chevron_right
       </i>
     </span>
   </button>
@@ -44,9 +42,8 @@ exports[`VDatePickerHeader.js should render component in RTL mode and match snap
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon mdi mdi-chevron-right theme--light"
       >
-        chevron_right
       </i>
     </span>
   </button>
@@ -62,9 +59,8 @@ exports[`VDatePickerHeader.js should render component in RTL mode and match snap
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon mdi mdi-chevron-left theme--light"
       >
-        chevron_left
       </i>
     </span>
   </button>
@@ -80,9 +76,8 @@ exports[`VDatePickerHeader.js should render component with default slot and matc
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon mdi mdi-chevron-left theme--light"
       >
-        chevron_left
       </i>
     </span>
   </button>
@@ -100,9 +95,8 @@ exports[`VDatePickerHeader.js should render component with default slot and matc
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon mdi mdi-chevron-right theme--light"
       >
-        chevron_right
       </i>
     </span>
   </button>
@@ -119,9 +113,8 @@ exports[`VDatePickerHeader.js should render disabled component and match snapsho
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon mdi mdi-chevron-left theme--light"
       >
-        chevron_left
       </i>
     </span>
   </button>
@@ -138,9 +131,8 @@ exports[`VDatePickerHeader.js should render disabled component and match snapsho
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon mdi mdi-chevron-right theme--light"
       >
-        chevron_right
       </i>
     </span>
   </button>
@@ -156,9 +148,8 @@ exports[`VDatePickerHeader.js should render readonly component and match snapsho
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon mdi mdi-chevron-left theme--light"
       >
-        chevron_left
       </i>
     </span>
   </button>
@@ -174,9 +165,8 @@ exports[`VDatePickerHeader.js should render readonly component and match snapsho
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon mdi mdi-chevron-right theme--light"
       >
-        chevron_right
       </i>
     </span>
   </button>
