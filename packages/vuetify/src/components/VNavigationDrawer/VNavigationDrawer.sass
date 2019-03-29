@@ -1,20 +1,14 @@
-@import '../bootstrap'
-@import '../theme'
+@import '../../styles/styles.sass'
+@import './_mixins.sass'
 
-v-navigation-drawer($material)
-  background-color: $material.cards
-
-  &:not(.v-navigation-drawer--floating)
-    .v-navigation-drawer__border
-      background-color: $material.dividers
-
-  .v-divider
-    border-color: $material.dividers
-
-theme(v-navigation-drawer, "v-navigation-drawer")
+// Theme
+.v-navigation-drawer.theme--light
+  +navigation-drawer-theme($material-light)
+.v-navigation-drawer.theme--dark
+  +navigation-drawer-theme($material-dark)
 
 .v-navigation-drawer
-  bootable()
+  +bootable()
 
   display: block
   left: 0
@@ -73,7 +67,7 @@ theme(v-navigation-drawer, "v-navigation-drawer")
     z-index: 6
 
     &:not(.v-navigation-drawer--close)
-      elevation(16)
+      +elevation(16)
 
   .v-list
     background: inherit
