@@ -1,4 +1,4 @@
-import '../../stylus/components/_time-picker-clock.styl'
+import './VTimePickerClock.styl'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
