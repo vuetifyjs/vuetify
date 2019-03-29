@@ -1,4 +1,4 @@
-@import '../bootstrap'
+@import '../../styles/styles.sass'
 
 .v-menu
   display: block
@@ -26,7 +26,7 @@
     // This is required for an issue on Chrome 65
     // that prevents scrolling after a menu is opened
     will-change: transform
-    elevation(8)
+    +elevation(8)
 
     &--active
       pointer-events: none
@@ -61,7 +61,7 @@
 
     &-enter-active,
     &-leave-active
-      transition: all .3s $transition.fast-in-fast-out
+      transition: all .3s map-get($transition, 'fast-in-fast-out')
 
 .v-menu-transition-enter
   &.v-menu__content--auto
