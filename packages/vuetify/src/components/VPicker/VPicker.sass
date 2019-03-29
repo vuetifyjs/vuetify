@@ -1,20 +1,20 @@
-@import '../bootstrap'
-@import '../theme'
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+@import './_mixins.sass'
 
-/* Themes */
+// Theme
+.v-picker__title.theme--light
+  +picker-title-theme($material-light)
+.v-picker__title.theme--dark
+  +picker-title-theme($material-dark)
 
-v-picker-title($material)
-  background: $material.picker.title
-
-theme(v-picker-title, "v-picker__title")
-
-v-picker-body($material)
-  background: $material.picker.body
-
-theme(v-picker-body, 'v-picker__body')
+.v-picker__body.theme--light
+  +picker-body-theme($material-light)
+.v-picker__body.theme--dark
+  +picker-body-theme($material-dark)
 
 .v-picker
-  border-radius: $card-border-radius
+  border-radius: $picker-border-radius
   contain: layout style
   display: inline-flex
   flex-direction: column
@@ -25,16 +25,16 @@ theme(v-picker-body, 'v-picker__body')
   display: flex
 
 .v-picker__title
-  color: $shades.white
-  border-top-left-radius: $card-border-radius
-  border-top-right-radius: $card-border-radius
-  padding: 16px
+  color: map-get($shades, 'white')
+  border-top-left-radius: $picker-border-radius
+  border-top-right-radius: $picker-border-radius
+  padding: $picker-title-padding
 
 .v-picker__title__btn
   transition: $primary-transition
 
   &:not(.v-picker__title__btn--active)
-    opacity: .6
+    opacity: $picker-inactive-btn-opacity
     cursor: pointer
 
     &:hover:not(:focus)
@@ -45,7 +45,7 @@ theme(v-picker-body, 'v-picker__body')
 
 
 .v-picker__title__btn--active
-    opacity: 1
+    opacity: $picker-active-btn-opacity
 
 .v-picker__body
   height: auto
@@ -68,7 +68,7 @@ theme(v-picker-body, 'v-picker__body')
   .v-picker__title
     border-top-right-radius: 0
     border-bottom-right-radius: 0
-    width: 170px
+    width: $picker-landscape-title-width
     position: absolute
     top: 0
     left: 0
@@ -77,4 +77,4 @@ theme(v-picker-body, 'v-picker__body')
 
   .v-picker__body,
   .v-picker__actions
-    margin-left: 170px
+    margin-left: $picker-landscape-title-width
