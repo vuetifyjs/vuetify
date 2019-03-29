@@ -1,8 +1,8 @@
-// Styles
-import '../../stylus/components/_overlay.styl'
+// Components
+import VOverlay from '../../components/VOverlay'
 
 // Utilities
-import { keyCodes } from '../../util/helpers'
+import { keyCodes, addOnceEventListener } from '../../util/helpers'
 
 // Types
 import Vue from 'vue'
@@ -33,10 +33,7 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
 
   data () {
     return {
-      overlay: null as HTMLElement | null,
-      overlayOffset: 0,
-      overlayTimeout: undefined as number | undefined,
-      overlayTransitionDuration: 500 + 150 // transition + delay
+      overlay: null as InstanceType<typeof VOverlay> | null
     }
   },
 
@@ -52,69 +49,60 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
   },
 
   methods: {
-    genOverlay () {
-      // If fn is called and timeout is active
-      // or overlay already exists
-      // cancel removal of overlay and re-add active
-      if ((!this.isActive || this.hideOverlay) ||
-        (this.isActive && this.overlayTimeout) ||
-        this.overlay
-      ) {
-        clearTimeout(this.overlayTimeout)
+    createOverlay () {
+      const overlay = new VOverlay({
+        propsData: {
+          absolute: this.absolute,
+          value: false
+        }
+      })
 
-        return this.overlay &&
-          this.overlay.classList.add('v-overlay--active')
-      }
-
-      this.overlay = document.createElement('div')
-      this.overlay.className = 'v-overlay'
-
-      if (this.absolute) this.overlay.className += ' v-overlay--absolute'
-
-      this.hideScroll()
+      overlay.$mount()
 
       const parent = this.absolute
         ? this.$el.parentNode
         : document.querySelector('[data-app]')
 
-      parent && parent.insertBefore(this.overlay, parent.firstChild)
+      parent && parent.insertBefore(overlay.$el, parent.firstChild)
 
-      // eslint-disable-next-line no-unused-expressions
-      this.overlay.clientHeight // Force repaint
+      this.overlay = overlay
+    },
+    genOverlay () {
+      if (!this.overlay) this.createOverlay()
+
+      this.hideScroll()
+
       requestAnimationFrame(() => {
-        // https://github.com/vuetifyjs/vuetify/issues/4678
         if (!this.overlay) return
 
-        this.overlay.className += ' v-overlay--active'
-
         if (this.activeZIndex !== undefined) {
-          this.overlay.style.zIndex = String(this.activeZIndex - 1)
+          this.overlay.zIndex = String(this.activeZIndex - 1)
         }
+
+        this.overlay.value = true
       })
 
       return true
     },
     /** removeOverlay(false) will not restore the scollbar afterwards */
     removeOverlay (showScroll = true) {
-      if (!this.overlay) {
-        return showScroll && this.showScroll()
+      if (this.overlay) {
+        addOnceEventListener(this.overlay.$el, 'transitionend', () => {
+          if (
+            !this.overlay ||
+            !this.overlay.$el ||
+            !this.overlay.$el.parentNode
+          ) return
+
+          this.overlay.$el.parentNode.removeChild(this.overlay.$el)
+          this.overlay.$destroy()
+          this.overlay = null
+        })
+
+        this.overlay.value = false
       }
 
-      this.overlay.classList.remove('v-overlay--active')
-
-      this.overlayTimeout = window.setTimeout(() => {
-        // IE11 Fix
-        try {
-          if (this.overlay && this.overlay.parentNode) {
-            this.overlay.parentNode.removeChild(this.overlay)
-          }
-          this.overlay = null
-          showScroll && this.showScroll()
-        } catch (e) { console.log(e) }
-
-        clearTimeout(this.overlayTimeout)
-        this.overlayTimeout = undefined
-      }, this.overlayTransitionDuration)
+      showScroll && this.showScroll()
     },
     scrollListener (e: WheelEvent & KeyboardEvent) {
       if (e.type === 'keydown') {

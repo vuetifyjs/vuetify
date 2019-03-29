@@ -3,7 +3,7 @@
 exports[`VList.ts should render a dense component and match snapshot 1`] = `
 
 <div role="list"
-     class="v-list v-list--dense theme--light"
+     class="v-list v-sheet v-sheet--tile theme--light v-list--dense"
 >
 </div>
 
@@ -12,7 +12,7 @@ exports[`VList.ts should render a dense component and match snapshot 1`] = `
 exports[`VList.ts should render a subheader component and match snapshot 1`] = `
 
 <div role="list"
-     class="v-list v-list--subheader theme--light"
+     class="v-list v-sheet v-sheet--tile theme--light v-list--subheader"
 >
 </div>
 
@@ -21,7 +21,7 @@ exports[`VList.ts should render a subheader component and match snapshot 1`] = `
 exports[`VList.ts should render a threeLine component and match snapshot 1`] = `
 
 <div role="list"
-     class="v-list v-list--three-line theme--light"
+     class="v-list v-sheet v-sheet--tile theme--light v-list--three-line"
 >
 </div>
 
@@ -30,7 +30,7 @@ exports[`VList.ts should render a threeLine component and match snapshot 1`] = `
 exports[`VList.ts should render a twoLine component and match snapshot 1`] = `
 
 <div role="list"
-     class="v-list v-list--two-line theme--light"
+     class="v-list v-sheet v-sheet--tile theme--light v-list--two-line"
 >
 </div>
 
@@ -39,7 +39,7 @@ exports[`VList.ts should render a twoLine component and match snapshot 1`] = `
 exports[`VList.ts should render component and match snapshot 1`] = `
 
 <div role="list"
-     class="v-list theme--light"
+     class="v-list v-sheet v-sheet--tile theme--light"
 >
 </div>
 

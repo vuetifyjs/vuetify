@@ -1,5 +1,5 @@
 import '../../stylus/components/_pickers.styl'
-import '../../stylus/components/_cards.styl'
+import '../VCard/VCard.sass'
 
 // Mixins
 import Colorable from '../../mixins/colorable'

@@ -44,6 +44,7 @@
       </v-card-text>
 
       <v-tabs-items
+        :key="current"
         v-model="tab"
         touchless
         class="white"

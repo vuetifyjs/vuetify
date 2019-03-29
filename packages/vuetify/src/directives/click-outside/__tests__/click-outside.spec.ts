@@ -3,14 +3,7 @@ import ClickOutside from '../'
 
 function bootstrap (args?: object) {
   let registeredHandler
-  const el = {
-    getBoundingClientRect: () => ({
-      top: 100,
-      bottom: 200,
-      left: 100,
-      right: 200
-    })
-  }
+  const el = document.createElement('div')
 
   const binding = {
     value: jest.fn(),
@@ -42,7 +35,7 @@ describe('click-outside.js', () => {
 
   it('should call the callback when closeConditional returns true', async () => {
     const { registeredHandler, callback } = bootstrap({ closeConditional: () => true })
-    const event = { clientX: 5, clientY: 20 }
+    const event = { target: document.createElement('div') }
 
     registeredHandler(event)
     await new Promise(resolve => setTimeout(resolve))
@@ -50,43 +43,36 @@ describe('click-outside.js', () => {
   })
 
   it('should not call the callback when closeConditional returns false', async () => {
-    const { registeredHandler, callback } = bootstrap({ closeConditional: () => false })
+    const { registeredHandler, callback, el } = bootstrap({ closeConditional: () => false })
 
-    registeredHandler({ clientX: 5, clientY: 20 })
+    registeredHandler({ target: el })
     await new Promise(resolve => setTimeout(resolve))
     expect(callback).not.toHaveBeenCalled()
   })
 
   it('should not call the callback when closeConditional is not provided', async () => {
-    const { registeredHandler, callback } = bootstrap()
+    const { registeredHandler, callback, el } = bootstrap()
 
-    registeredHandler({ clientX: 5, clientY: 20 })
+    registeredHandler({ target: el })
     await new Promise(resolve => setTimeout(resolve))
     expect(callback).not.toHaveBeenCalled()
   })
 
   it('should not call the callback when clicked in element', async () => {
-    const { registeredHandler, callback } = bootstrap({ closeConditional: () => true })
+    const { registeredHandler, callback, el } = bootstrap({ closeConditional: () => true })
 
-    registeredHandler({ clientX: 105, clientY: 120 })
+    registeredHandler({ target: el })
     await new Promise(resolve => setTimeout(resolve))
     expect(callback).not.toHaveBeenCalledWith()
   })
 
   it('should not call the callback when clicked in elements', async () => {
-    const { registeredHandler, callback } = bootstrap({
+    const { registeredHandler, callback, el } = bootstrap({
       closeConditional: () => true,
-      include: () => [{
-        getBoundingClientRect: () => ({
-          top: 1100,
-          bottom: 1200,
-          left: 1100,
-          right: 1200
-        })
-      }]
+      include: () => [el]
     })
 
-    registeredHandler({ clientX: 1105, clientY: 1120 })
+    registeredHandler({ target: document.createElement('div') })
     await new Promise(resolve => setTimeout(resolve))
     expect(callback).not.toHaveBeenCalledWith()
   })
@@ -94,11 +80,11 @@ describe('click-outside.js', () => {
   it('should not call the callback when event is not fired by user action', async () => {
     const { registeredHandler, callback } = bootstrap({ closeConditional: () => true })
 
-    registeredHandler({ clientX: 5, clientY: 20, isTrusted: false })
+    registeredHandler({ isTrusted: false })
     await new Promise(resolve => setTimeout(resolve))
     expect(callback).not.toHaveBeenCalledWith()
 
-    registeredHandler({ clientX: 5, clientY: 20, pointerType: false })
+    registeredHandler({ pointerType: false })
     await new Promise(resolve => setTimeout(resolve))
     expect(callback).not.toHaveBeenCalledWith()
   })

@@ -2,19 +2,16 @@
 import './VList.sass'
 import VListGroup from './VListGroup'
 
-// Mixins
-import Themeable from '../../mixins/themeable'
+// Components
+import VSheet from '../VSheet/VSheet'
 
 // Types
-import mixins from '../../util/mixins'
 import { VNode } from 'vue'
 
 type VListGroupInstance = InstanceType<typeof VListGroup>
 
-export default mixins(
-  Themeable
-  /* @vue/component */
-).extend({
+/* @vue/component */
+export default VSheet.extend({
   name: 'v-list',
 
   provide (): object {
@@ -32,6 +29,10 @@ export default mixins(
     shaped: Boolean,
     subheader: Boolean,
     threeLine: Boolean,
+    tile: {
+      type: Boolean,
+      default: true
+    },
     twoLine: Boolean
   },
 
@@ -42,6 +43,7 @@ export default mixins(
   computed: {
     classes (): object {
       return {
+        ...VSheet.options.computed.classes.call(this),
         'v-list--dense': this.dense,
         'v-list--disabled': this.disabled,
         'v-list--flat': this.flat,
@@ -49,8 +51,7 @@ export default mixins(
         'v-list--shaped': this.shaped,
         'v-list--subheader': this.subheader,
         'v-list--two-line': this.twoLine,
-        'v-list--three-line': this.threeLine,
-        ...this.themeClasses
+        'v-list--three-line': this.threeLine
       }
     }
   },
@@ -82,6 +83,6 @@ export default mixins(
       }
     }
 
-    return h('div', data, [this.$slots.default])
+    return h('div', this.setBackgroundColor(this.color, data), [this.$slots.default])
   }
 })

@@ -156,9 +156,8 @@ exports[`VTreeView.ts should load children when expanding 1`] = `
   <div class="v-treeview-node">
     <div class="v-treeview-node__root">
       <i aria-hidden="true"
-         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light"
+         class="v-icon v-treeview-node__toggle v-icon--link mdi mdi-menu-down theme--light"
       >
-        arrow_drop_down
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -177,9 +176,8 @@ exports[`VTreeView.ts should load children when expanding 2`] = `
   <div class="v-treeview-node">
     <div class="v-treeview-node__root">
       <i aria-hidden="true"
-         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+         class="v-icon v-treeview-node__toggle v-icon--link mdi mdi-menu-down theme--light v-treeview-node__toggle--open"
       >
-        arrow_drop_down
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -209,14 +207,12 @@ exports[`VTreeView.ts should load children when selecting, but not render 1`] = 
   <div class="v-treeview-node">
     <div class="v-treeview-node__root">
       <i aria-hidden="true"
-         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light"
+         class="v-icon v-treeview-node__toggle v-icon--link mdi mdi-menu-down theme--light"
       >
-        arrow_drop_down
       </i>
       <i aria-hidden="true"
-         class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light"
+         class="v-icon v-treeview-node__checkbox v-icon--link mdi mdi-checkbox-blank-outline theme--light"
       >
-        check_box_outline_blank
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -235,14 +231,12 @@ exports[`VTreeView.ts should load children when selecting, but not render 2`] = 
   <div class="v-treeview-node v-treeview-node--selected">
     <div class="v-treeview-node__root">
       <i aria-hidden="true"
-         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light"
+         class="v-icon v-treeview-node__toggle v-icon--link mdi mdi-menu-down theme--light"
       >
-        arrow_drop_down
       </i>
       <i aria-hidden="true"
-         class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light accent--text"
+         class="v-icon v-treeview-node__checkbox v-icon--link mdi mdi-checkbox-marked theme--light accent--text"
       >
-        check_box
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -276,9 +270,8 @@ exports[`VTreeView.ts should open all children when using open-all prop 1`] = `
   <div class="v-treeview-node">
     <div class="v-treeview-node__root">
       <i aria-hidden="true"
-         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+         class="v-icon v-treeview-node__toggle v-icon--link mdi mdi-menu-down theme--light v-treeview-node__toggle--open"
       >
-        arrow_drop_down
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -290,9 +283,8 @@ exports[`VTreeView.ts should open all children when using open-all prop 1`] = `
       <div class="v-treeview-node">
         <div class="v-treeview-node__root">
           <i aria-hidden="true"
-             class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+             class="v-icon v-treeview-node__toggle v-icon--link mdi mdi-menu-down theme--light v-treeview-node__toggle--open"
           >
-            arrow_drop_down
           </i>
           <div class="v-treeview-node__content">
             <div class="v-treeview-node__label">
@@ -333,9 +325,8 @@ exports[`VTreeView.ts should react to open changes 1`] = `
   <div class="v-treeview-node">
     <div class="v-treeview-node__root">
       <i aria-hidden="true"
-         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+         class="v-icon v-treeview-node__toggle v-icon--link mdi mdi-menu-down theme--light v-treeview-node__toggle--open"
       >
-        arrow_drop_down
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -347,9 +338,8 @@ exports[`VTreeView.ts should react to open changes 1`] = `
       <div class="v-treeview-node">
         <div class="v-treeview-node__root">
           <i aria-hidden="true"
-             class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+             class="v-icon v-treeview-node__toggle v-icon--link mdi mdi-menu-down theme--light v-treeview-node__toggle--open"
           >
-            arrow_drop_down
           </i>
           <div class="v-treeview-node__content">
             <div class="v-treeview-node__label">
@@ -390,9 +380,8 @@ exports[`VTreeView.ts should react to open changes 2`] = `
   <div class="v-treeview-node">
     <div class="v-treeview-node__root">
       <i aria-hidden="true"
-         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+         class="v-icon v-treeview-node__toggle v-icon--link mdi mdi-menu-down theme--light v-treeview-node__toggle--open"
       >
-        arrow_drop_down
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -404,9 +393,8 @@ exports[`VTreeView.ts should react to open changes 2`] = `
       <div class="v-treeview-node">
         <div class="v-treeview-node__root">
           <i aria-hidden="true"
-             class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light"
+             class="v-icon v-treeview-node__toggle v-icon--link mdi mdi-menu-down theme--light"
           >
-            arrow_drop_down
           </i>
           <div class="v-treeview-node__content">
             <div class="v-treeview-node__label">
@@ -436,9 +424,8 @@ exports[`VTreeView.ts should react to open changes 3`] = `
   <div class="v-treeview-node">
     <div class="v-treeview-node__root">
       <i aria-hidden="true"
-         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+         class="v-icon v-treeview-node__toggle v-icon--link mdi mdi-menu-down theme--light v-treeview-node__toggle--open"
       >
-        arrow_drop_down
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -450,9 +437,8 @@ exports[`VTreeView.ts should react to open changes 3`] = `
       <div class="v-treeview-node">
         <div class="v-treeview-node__root">
           <i aria-hidden="true"
-             class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+             class="v-icon v-treeview-node__toggle v-icon--link mdi mdi-menu-down theme--light v-treeview-node__toggle--open"
           >
-            arrow_drop_down
           </i>
           <div class="v-treeview-node__content">
             <div class="v-treeview-node__label">
@@ -493,9 +479,8 @@ exports[`VTreeView.ts should react to open changes 4`] = `
   <div class="v-treeview-node">
     <div class="v-treeview-node__root">
       <i aria-hidden="true"
-         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light"
+         class="v-icon v-treeview-node__toggle v-icon--link mdi mdi-menu-down theme--light"
       >
-        arrow_drop_down
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -514,9 +499,8 @@ exports[`VTreeView.ts should recalculate tree when loading async children using 
   <div class="v-treeview-node">
     <div class="v-treeview-node__root">
       <i aria-hidden="true"
-         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+         class="v-icon v-treeview-node__toggle v-icon--link mdi mdi-menu-down theme--light v-treeview-node__toggle--open"
       >
-        arrow_drop_down
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -612,9 +596,8 @@ exports[`VTreeView.ts should render items 1`] = `
   <div class="v-treeview-node">
     <div class="v-treeview-node__root">
       <i aria-hidden="true"
-         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light"
+         class="v-icon v-treeview-node__toggle v-icon--link mdi mdi-menu-down theme--light"
       >
-        arrow_drop_down
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -633,14 +616,12 @@ exports[`VTreeView.ts should select all descendants 1`] = `
   <div class="v-treeview-node">
     <div class="v-treeview-node__root">
       <i aria-hidden="true"
-         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light"
+         class="v-icon v-treeview-node__toggle v-icon--link mdi mdi-menu-down theme--light"
       >
-        arrow_drop_down
       </i>
       <i aria-hidden="true"
-         class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light"
+         class="v-icon v-treeview-node__checkbox v-icon--link mdi mdi-checkbox-blank-outline theme--light"
       >
-        check_box_outline_blank
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -659,9 +640,8 @@ exports[`VTreeView.ts should show expand icon when children is empty and load-ch
   <div class="v-treeview-node">
     <div class="v-treeview-node__root">
       <i aria-hidden="true"
-         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light"
+         class="v-icon v-treeview-node__toggle v-icon--link mdi mdi-menu-down theme--light"
       >
-        arrow_drop_down
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -679,14 +659,12 @@ exports[`VTreeView.ts should update selection when selected prop changes 1`] = `
   <div class="v-treeview-node">
     <div class="v-treeview-node__root">
       <i aria-hidden="true"
-         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light"
+         class="v-icon v-treeview-node__toggle v-icon--link mdi mdi-menu-down theme--light"
       >
-        arrow_drop_down
       </i>
       <i aria-hidden="true"
-         class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light"
+         class="v-icon v-treeview-node__checkbox v-icon--link mdi mdi-checkbox-blank-outline theme--light"
       >
-        check_box_outline_blank
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -705,14 +683,12 @@ exports[`VTreeView.ts should update selection when selected prop changes 2`] = `
   <div class="v-treeview-node v-treeview-node--selected">
     <div class="v-treeview-node__root">
       <i aria-hidden="true"
-         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+         class="v-icon v-treeview-node__toggle v-icon--link mdi mdi-menu-down theme--light v-treeview-node__toggle--open"
       >
-        arrow_drop_down
       </i>
       <i aria-hidden="true"
-         class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light accent--text"
+         class="v-icon v-treeview-node__checkbox v-icon--link mdi mdi-checkbox-marked theme--light accent--text"
       >
-        check_box
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -724,9 +700,8 @@ exports[`VTreeView.ts should update selection when selected prop changes 2`] = `
       <div class="v-treeview-node v-treeview-node--leaf v-treeview-node--selected">
         <div class="v-treeview-node__root">
           <i aria-hidden="true"
-             class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light accent--text"
+             class="v-icon v-treeview-node__checkbox v-icon--link mdi mdi-checkbox-marked theme--light accent--text"
           >
-            check_box
           </i>
           <div class="v-treeview-node__content">
             <div class="v-treeview-node__label">
@@ -747,14 +722,12 @@ exports[`VTreeView.ts should update selection when selected prop changes 3`] = `
   <div class="v-treeview-node">
     <div class="v-treeview-node__root">
       <i aria-hidden="true"
-         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+         class="v-icon v-treeview-node__toggle v-icon--link mdi mdi-menu-down theme--light v-treeview-node__toggle--open"
       >
-        arrow_drop_down
       </i>
       <i aria-hidden="true"
-         class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light"
+         class="v-icon v-treeview-node__checkbox v-icon--link mdi mdi-checkbox-blank-outline theme--light"
       >
-        check_box_outline_blank
       </i>
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
@@ -766,9 +739,8 @@ exports[`VTreeView.ts should update selection when selected prop changes 3`] = `
       <div class="v-treeview-node v-treeview-node--leaf">
         <div class="v-treeview-node__root">
           <i aria-hidden="true"
-             class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light"
+             class="v-icon v-treeview-node__checkbox v-icon--link mdi mdi-checkbox-blank-outline theme--light"
           >
-            check_box_outline_blank
           </i>
           <div class="v-treeview-node__content">
             <div class="v-treeview-node__label">

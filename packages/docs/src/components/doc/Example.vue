@@ -66,7 +66,7 @@
                 :light="active"
                 class="mr-0"
                 depressed
-                round
+                rounded
                 @click="toggle"
               >
                 {{ section }}
@@ -98,7 +98,7 @@
     </v-expand-transition>
     <v-sheet
       :dark="dark"
-      tile
+      color="transparent"
     >
       <v-card-text>
         <div data-app="true">

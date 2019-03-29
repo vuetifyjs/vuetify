@@ -35,10 +35,6 @@
       "prepend-inner-icon-cb": false,
       "clear-icon-cb": false
     },
-    "v-breadcrumbs": {
-      "justify-center": "1.2",
-      "justify-end": "1.2"
-    },
     "v-autocomplete": {
       "activator": false,
       "closeOnClick": false,

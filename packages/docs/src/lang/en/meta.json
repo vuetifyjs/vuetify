@@ -364,6 +364,11 @@
     "description": "Coming soon",
     "keywords": "overflow button, components"
   },
+  "components/overlays": {
+    "title": "Overlay Component",
+    "description": "Overlay component for the Vuetify Framework",
+    "keywords": "overlay, components"
+  },
   "components/paginations": {
     "title": "Pagination Component",
     "description": "The v-pagination component is used to separate long sets of data so that it is easier for a user to consume information.",

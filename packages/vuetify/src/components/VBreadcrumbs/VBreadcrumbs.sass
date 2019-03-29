@@ -1,0 +1,47 @@
+﻿@import '../../styles/styles.sass'
+@import './_variables'
+@import './_mixins'
+
+.v-breadcrumbs.theme--light
+  breadcrumbs-theme($material-light)
+.v-breadcrumbs.theme--dark
+  breadcrumbs-theme($material-dark)
+
+// Block
+.v-breadcrumbs
+  align-items: center
+  display: flex
+  flex-wrap: wrap
+  flex: $breadcrumbs-flex
+  list-style-type: none
+  margin: $breadcrumbs-margin
+  padding: $breadcrumbs-padding
+
+  li
+    align-items: center
+    display: inline-flex
+    font-size: $breadcrumbs-item-font-size
+
+    .v-icon
+      font-size: $breadcrumbs-item-large-font-size
+
+    &:nth-child(even)
+      padding: $breadcrumbs-even-child-padding
+
+// Element
+.v-breadcrumbs__item
+  align-items: center
+  display: inline-flex
+  text-decoration: none
+  transition: $primary-transition
+
+  &--disabled
+    pointer-events: none
+
+// Modifier
+.v-breadcrumbs--large
+  li
+    font-size: $breadcrumbs-item-large-font-size
+
+    .v-icon
+      font-size: $breadcrumbs-item-large-font-size

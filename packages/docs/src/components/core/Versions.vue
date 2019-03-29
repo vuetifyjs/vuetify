@@ -1,6 +1,5 @@
 <template>
   <v-menu
-    attach
     bottom
     left
     offset-y
@@ -21,7 +20,10 @@
     </template>
 
     <v-card>
-      <v-list dense>
+      <v-list
+        dense
+        nav
+      >
         <v-subheader v-text="$t('Vuetify.AppToolbar.documentation')" />
         <core-item
           v-for="(archive, i) in archives"
