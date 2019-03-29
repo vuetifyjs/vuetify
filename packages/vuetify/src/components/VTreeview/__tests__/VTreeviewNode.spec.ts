@@ -5,7 +5,6 @@ import {
   MountOptions,
   Wrapper
 } from '@vue/test-utils'
-import { ExtractVue } from '../../../util/mixins'
 
 Vue.prototype.$vuetify = {
   icons: {
