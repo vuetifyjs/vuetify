@@ -20,13 +20,13 @@
     display: flex
     align-items: center
     justify-content: center
-    padding: 10px
+    padding: $time-picker-clock-padding
 
   &__hand
-    height: calc(50% - 4px)
-    width: 2px
+    height: $time-picker-clock-hand-height
+    width: $time-picker-clock-hand-width
     bottom: 50%
-    left: calc(50% - 1px)
+    left: $time-picker-clock-hand-left
     transform-origin: center bottom
     position: absolute
     will-change: transform
@@ -38,19 +38,19 @@
       border-style: solid
       border-color: inherit
       border-radius: 100%
-      width: 10px
-      height: 10px
+      width: $time-picker-clock-end-size
+      height: $time-picker-clock-end-size
       content: ''
       position: absolute
-      top: -4px
+      top: $time-picker-clock-end-top
       left: 50%
       transform: translate(-50%, -50%)
 
     &:after
       content: ''
       position: absolute
-      height: 8px
-      width: 8px
+      height: $time-picker-clock-center-size
+      width: $time-picker-clock-center-size
       top: 100%
       left: 50%
       border-radius: 100%
@@ -60,18 +60,18 @@
       transform: translate(-50%, -50%)
 
     &--inner:after
-      height: 14px
+      height: $time-picker-clock-inner-hand-height
 
 .v-picker--full-width
   .v-time-picker-clock__container
-    max-width: 290px
+    max-width: $time-picker-clock-max-width
 
 .v-time-picker-clock__inner
   position: absolute
-  bottom: 27px
-  left: 27px
-  right: 27px
-  top: 27px
+  bottom: $time-picker-clock-inner-offset
+  left: $time-picker-clock-inner-offset
+  right: $time-picker-clock-inner-offset
+  top: $time-picker-clock-inner-offset
 
 .v-time-picker-clock__item
   align-items: center
