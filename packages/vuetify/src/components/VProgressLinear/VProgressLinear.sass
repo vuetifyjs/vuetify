@@ -1,4 +1,4 @@
-@import '../bootstrap'
+@import '../../styles/styles.sass'
 
 .v-progress-linear
   background: transparent
@@ -11,12 +11,12 @@
     width: 100%
     height: inherit
     position: relative
-    transition: .2s $transition.ease-in-out
+    transition: .2s map-get($transition, 'ease-in-out')
     z-index: 1
 
     &__determinate
       height: inherit
-      transition: .2s $transition.ease-in-out
+      transition: .2s map-get($transition, 'ease-in-out')
 
     &__indeterminate
       .long, .short
