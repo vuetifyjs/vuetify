@@ -1,9 +1,27 @@
-import { test } from '@/test'
-import VProgressLinear from '@/components/VProgressLinear'
+// Components
+import VProgressLinear from '../VProgressLinear'
 
-test('VProgressLinear.js', ({ mount, compileToFunctions }) => {
+// Utilities
+import {
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+import { compileToFunctions } from 'vue-template-compiler'
+
+describe('VProgressLinear.ts', () => {
+  type Instance = InstanceType<typeof VProgressLinear>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+
+  beforeEach(() => {
+    mountFunction = (options = {}) => {
+      return mount(VProgressLinear, {
+        ...options
+      })
+    }
+  })
+
   it('should render component and match snapshot', () => {
-    const wrapper = mount(VProgressLinear, {
+    const wrapper = mountFunction({
       propsData: {
         value: 33
       }
@@ -45,7 +63,7 @@ test('VProgressLinear.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should render inactive component and match snapshot', () => {
-    const wrapper = mount(VProgressLinear, {
+    const wrapper = mountFunction({
       propsData: {
         value: 33,
         active: false
@@ -56,7 +74,7 @@ test('VProgressLinear.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should render component with color and match snapshot', () => {
-    const wrapper = mount(VProgressLinear, {
+    const wrapper = mountFunction({
       propsData: {
         value: 33,
         color: 'orange'
@@ -67,7 +85,7 @@ test('VProgressLinear.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should render component with css color and match snapshot', () => {
-    const wrapper = mount(VProgressLinear, {
+    const wrapper = mountFunction({
       propsData: {
         value: 33,
         color: '#336699'
@@ -78,7 +96,7 @@ test('VProgressLinear.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should render component with color and background opacity and match snapshot', () => {
-    const wrapper = mount(VProgressLinear, {
+    const wrapper = mountFunction({
       propsData: {
         value: 33,
         color: 'orange',
@@ -90,7 +108,7 @@ test('VProgressLinear.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should render component with color and background color and match snapshot', () => {
-    const wrapper = mount(VProgressLinear, {
+    const wrapper = mountFunction({
       propsData: {
         value: 33,
         color: 'orange',
@@ -102,7 +120,7 @@ test('VProgressLinear.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should render component with color and background color and opacity and match snapshot', () => {
-    const wrapper = mount(VProgressLinear, {
+    const wrapper = mountFunction({
       propsData: {
         value: 33,
         color: 'orange',
@@ -115,7 +133,7 @@ test('VProgressLinear.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should render indeterminate progress and match snapshot', () => {
-    const wrapper = mount(VProgressLinear, {
+    const wrapper = mountFunction({
       propsData: {
         indeterminate: true
       }
@@ -125,7 +143,7 @@ test('VProgressLinear.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should render indeterminate progress with query prop and match snapshot', () => {
-    const wrapper = mount(VProgressLinear, {
+    const wrapper = mountFunction({
       propsData: {
         indeterminate: true
       }
@@ -135,7 +153,7 @@ test('VProgressLinear.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should render component with buffer value and match snapshot', async () => {
-    const wrapper = mount(VProgressLinear, {
+    const wrapper = mountFunction({
       propsData: {
         value: 33,
         bufferValue: 80
@@ -152,7 +170,7 @@ test('VProgressLinear.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should render component with buffer value and value > buffer value and match snapshot', () => {
-    const wrapper = mount(VProgressLinear, {
+    const wrapper = mountFunction({
       propsData: {
         value: 90,
         bufferValue: 80
@@ -163,7 +181,7 @@ test('VProgressLinear.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should render default slot content', () => {
-    const wrapper = mount(VProgressLinear, {
+    const wrapper = mountFunction({
       propsData: {
         value: 90,
         bufferValue: 80
@@ -174,6 +192,6 @@ test('VProgressLinear.js', ({ mount, compileToFunctions }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('.foobar').length).toBe(1)
+    expect(wrapper.findAll('.foobar')).toHaveLength(1)
   })
 })

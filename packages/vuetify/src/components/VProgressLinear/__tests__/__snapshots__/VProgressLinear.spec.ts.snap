@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VProgressLinear.js should render component and match snapshot 1`] = `
+exports[`VProgressLinear.ts should render component and match snapshot 1`] = `
 
 <div role="progressbar"
      aria-valuemin="0"
@@ -23,7 +23,7 @@ exports[`VProgressLinear.js should render component and match snapshot 1`] = `
 
 `;
 
-exports[`VProgressLinear.js should render component with buffer value and match snapshot 1`] = `
+exports[`VProgressLinear.ts should render component with buffer value and match snapshot 1`] = `
 
 <div role="progressbar"
      aria-valuemin="0"
@@ -48,7 +48,7 @@ exports[`VProgressLinear.js should render component with buffer value and match 
 
 `;
 
-exports[`VProgressLinear.js should render component with buffer value and match snapshot 2`] = `
+exports[`VProgressLinear.ts should render component with buffer value and match snapshot 2`] = `
 
 <div role="progressbar"
      aria-valuemin="0"
@@ -73,7 +73,7 @@ exports[`VProgressLinear.js should render component with buffer value and match 
 
 `;
 
-exports[`VProgressLinear.js should render component with buffer value and value > buffer value and match snapshot 1`] = `
+exports[`VProgressLinear.ts should render component with buffer value and value > buffer value and match snapshot 1`] = `
 
 <div role="progressbar"
      aria-valuemin="0"
@@ -98,7 +98,7 @@ exports[`VProgressLinear.js should render component with buffer value and value 
 
 `;
 
-exports[`VProgressLinear.js should render component with color and background color and match snapshot 1`] = `
+exports[`VProgressLinear.ts should render component with color and background color and match snapshot 1`] = `
 
 <div role="progressbar"
      aria-valuemin="0"
@@ -121,7 +121,7 @@ exports[`VProgressLinear.js should render component with color and background co
 
 `;
 
-exports[`VProgressLinear.js should render component with color and background color and opacity and match snapshot 1`] = `
+exports[`VProgressLinear.ts should render component with color and background color and opacity and match snapshot 1`] = `
 
 <div role="progressbar"
      aria-valuemin="0"
@@ -144,7 +144,7 @@ exports[`VProgressLinear.js should render component with color and background co
 
 `;
 
-exports[`VProgressLinear.js should render component with color and background opacity and match snapshot 1`] = `
+exports[`VProgressLinear.ts should render component with color and background opacity and match snapshot 1`] = `
 
 <div role="progressbar"
      aria-valuemin="0"
@@ -167,7 +167,7 @@ exports[`VProgressLinear.js should render component with color and background op
 
 `;
 
-exports[`VProgressLinear.js should render component with color and match snapshot 1`] = `
+exports[`VProgressLinear.ts should render component with color and match snapshot 1`] = `
 
 <div role="progressbar"
      aria-valuemin="0"
@@ -190,7 +190,7 @@ exports[`VProgressLinear.js should render component with color and match snapsho
 
 `;
 
-exports[`VProgressLinear.js should render component with css color and match snapshot 1`] = `
+exports[`VProgressLinear.ts should render component with css color and match snapshot 1`] = `
 
 <div role="progressbar"
      aria-valuemin="0"
@@ -213,7 +213,7 @@ exports[`VProgressLinear.js should render component with css color and match sna
 
 `;
 
-exports[`VProgressLinear.js should render default slot content 1`] = `
+exports[`VProgressLinear.ts should render default slot content 1`] = `
 
 <div role="progressbar"
      aria-valuemin="0"
@@ -243,7 +243,7 @@ exports[`VProgressLinear.js should render default slot content 1`] = `
 
 `;
 
-exports[`VProgressLinear.js should render inactive component and match snapshot 1`] = `
+exports[`VProgressLinear.ts should render inactive component and match snapshot 1`] = `
 
 <div role="progressbar"
      aria-valuemin="0"
@@ -268,7 +268,7 @@ exports[`VProgressLinear.js should render inactive component and match snapshot 
 
 `;
 
-exports[`VProgressLinear.js should render indeterminate progress and match snapshot 1`] = `
+exports[`VProgressLinear.ts should render indeterminate progress and match snapshot 1`] = `
 
 <div role="progressbar"
      aria-valuemin="0"
@@ -292,7 +292,7 @@ exports[`VProgressLinear.js should render indeterminate progress and match snaps
 
 `;
 
-exports[`VProgressLinear.js should render indeterminate progress with query prop and match snapshot 1`] = `
+exports[`VProgressLinear.ts should render indeterminate progress with query prop and match snapshot 1`] = `
 
 <div role="progressbar"
      aria-valuemin="0"
