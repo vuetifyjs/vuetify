@@ -44,7 +44,7 @@ const MockScopedLabel = {
 }
 
 describe('VTreeViewNode.ts', () => {
-  type Instance = ExtractVue<typeof VTreeviewNode>
+  type Instance = InstanceType<typeof VTreeviewNode>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   let treeview
 
