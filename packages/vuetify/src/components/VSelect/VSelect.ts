@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_text-fields.styl'
+import '../VTextField/VTextField.sass'
 import '../../stylus/components/_select.styl'
 
 // Components

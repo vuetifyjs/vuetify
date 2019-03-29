@@ -1,48 +1,41 @@
-@import '../bootstrap'
-@import '../theme'
+@import '../../styles/styles.sass'
 
-v-text-field($material)
+@mixin text-field-theme($material)
   & > .v-input__control > .v-input__slot:before
-    border-color: $material.input-bottom-line
+    border-color: map-get($material, 'input-bottom-line')
 
   &:not(.v-input--has-state) > .v-input__control > .v-input__slot:hover:before
-    border-color: $material.text.primary
+    border-color: map-deep-get($material, 'text', 'primary')
 
   &.v-input--is-disabled > .v-input__control > .v-input__slot:before
-    border-image: repeating-linear-gradient(
-      to right,
-      $material.text.disabled 0px,
-      $material.text.disabled 2px,
-      transparent 2px,
-      transparent 4px
-    ) 1 repeat
+    border-image: repeating-linear-gradient(to right, #{map-deep-get($material, 'text', 'disabled')} 0px, #{map-deep-get($material, 'text', 'disabled')} 2px, transparent 2px, transparent 4px) 1 repeat
 
     .v-text-field__prefix,
     .v-text-field__suffix
-      color: $material.text.disabled
+      color: map-deep-get($material, 'text', 'disabled')
 
   &__prefix,
   &__suffix
-    color: $material.text.secondary
+    color: map-deep-get($material, 'text', 'secondary')
 
   &--solo > .v-input__control > .v-input__slot
     border-radius: 2px
-    background: $material.cards
+    background: map-get($material, 'cards')
 
   &--solo-inverted.v-text-field--solo
     & > .v-input__control > .v-input__slot
-      background: rgba($material.inputs.solo-inverted)
+      background: map-deep-get($material, 'inputs', 'solo-inverted')
 
     &.v-input--is-focused > .v-input__control > .v-input__slot
-      background: rgba($material.inputs.solo-inverted-focused)
+      background: map-deep-get($material, 'inputs', 'solo-inverted-focused')
 
       .v-label,
       input
-          color: $material.inputs.solo-inverted-focused-text
+          color: map-deep-get($material, 'inputs', 'solo-inverted-focused-text')
 
   &--box
     & > .v-input__control > .v-input__slot
-      background: $material.text-fields.box
+      background: map-deep-get($material, 'text-fields', 'box')
 
     .v-text-field__prefix
       max-height: 32px
@@ -56,60 +49,19 @@ v-text-field($material)
         transition: $primary-transition
 
     &:not(.v-input--is-focused) > .v-input__control > .v-input__slot:hover
-      background: $material.text-fields.box-hover
+      background: map-deep-get($material, 'text-fields', 'box-hover')
 
   &--outline
     & > .v-input__control > .v-input__slot
-      border: 2px solid $material.text.secondary
+      border: 2px solid map-deep-get($material, 'text', 'secondary')
 
     &:not(.v-input--is-focused):not(.v-input--has-state) > .v-input__control > .v-input__slot:hover
-      border: 2px solid $material.text.primary
+      border: 2px solid map-deep-get($material, 'text', 'primary')
 
-v-text-field-rtl()
-  .v-label
-    transform-origin: top right
-
-  .v-counter
-    margin-left: 0
-    margin-right: 8px
-
-  &--enclosed
-    .v-input__append-outer
-      margin-left: 0
-      margin-right: 16px
-
-    .v-input__prepend-outer
-      margin-left: 16px
-      margin-right: 0
-
-  &--reverse
-    input
-      text-align: left
-
-    .v-label
-      transform-origin: top left
-
-  &__prefix
-    text-align: left
-    padding-right: 0
-    padding-left: 4px
-
-  &__suffix
-    padding-left: 0
-    padding-right: 4px
-
-  &--reverse
-    .v-text-field__prefix
-      text-align: right
-      padding-left: 0
-      padding-right: 4px
-
-    .v-text-field__suffix
-      padding-left: 0
-      padding-right: 4px
-
-theme(v-text-field, "v-text-field")
-rtl(v-text-field-rtl, "v-text-field")
+.v-text-field.theme--light
+  +text-field-theme($material-light)
+.v-text-field.theme--dark
+  +text-field-theme($material-dark)
 
 .v-text-field
   padding-top: $text-field-active-label-height
@@ -319,7 +271,7 @@ rtl(v-text-field-rtl, "v-text-field")
       padding: 0
 
     &:not(.v-text-field--solo-flat) > .v-input__control > .v-input__slot
-      elevation(2)
+      +elevation(2)
 
     .v-text-field__slot
       align-items: center
@@ -338,3 +290,46 @@ rtl(v-text-field-rtl, "v-text-field")
 
   &.v-input--has-state > .v-input__control > .v-input__slot:before
     border-color: currentColor
+
+  +rtl()
+    .v-label
+      transform-origin: top right
+
+    .v-counter
+      margin-left: 0
+      margin-right: 8px
+
+    &--enclosed
+      .v-input__append-outer
+        margin-left: 0
+        margin-right: 16px
+
+      .v-input__prepend-outer
+        margin-left: 16px
+        margin-right: 0
+
+    &--reverse
+      input
+        text-align: left
+
+      .v-label
+        transform-origin: top left
+
+    &__prefix
+      text-align: left
+      padding-right: 0
+      padding-left: 4px
+
+    &__suffix
+      padding-left: 0
+      padding-right: 4px
+
+    &--reverse
+      .v-text-field__prefix
+        text-align: right
+        padding-left: 0
+        padding-right: 4px
+
+      .v-text-field__suffix
+        padding-left: 0
+        padding-right: 4px
