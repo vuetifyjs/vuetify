@@ -21,6 +21,10 @@
       "header": "### Grouped rows",
       "desc": "Using the `group-by` and `group-desc` props you can group rows on an item property. The `show-group-by` prop will show a group button in the default header."
     },
+    "headers": {
+      "header": "### Slot: items and headers",
+      "desc": "The `items` and `headers` slots can accept either a collection of <kbd>td/th</kbd> tags, or if you want control of the entire row, a <kbd>tr</kbd> tag. In the latter case, you have to manually specify a `key` on the row regardless of the `item-key` value."
+    },
     "multiSort": {
       "header": "### Sort on multiple columns",
       "desc": "Using the `multi-sort´ prop will enable you to sort on multiple columns at the same time. When enabled, you can pass arrays to both `sort-by` and `sort-desc` to programmatically control the sorting, instead of single values."
