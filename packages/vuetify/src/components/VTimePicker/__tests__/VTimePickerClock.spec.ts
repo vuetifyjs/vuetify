@@ -1,7 +1,10 @@
-import VTimePickerClock from '@/components/VTimePicker/VTimePickerClock'
-import { test, touch } from '@/test'
+import VTimePickerClock from '../VTimePickerClock'
+import { touch } from '../../../../test'
+import { mount } from '@vue/test-utils'
 
-test('VTimePickerClock.js', ({ mount }) => {
+describe('VTimePickerClock.js', () => {
+  (window as any).TouchEvent = Event
+
   function createBoundingRect (wrapper) {
     wrapper.vm.$refs.clock.getBoundingClientRect = () => {
       return {
@@ -36,7 +39,6 @@ test('VTimePickerClock.js', ({ mount }) => {
         allowedValues: n => n % 2,
         max: 59,
         min: 0,
-        size: 280,
         step: 5,
         value: 10
       }
@@ -52,7 +54,6 @@ test('VTimePickerClock.js', ({ mount }) => {
         disabled: true,
         max: 59,
         min: 0,
-        size: 280,
         step: 5,
         value: 10
       }
@@ -68,7 +69,6 @@ test('VTimePickerClock.js', ({ mount }) => {
         double: true,
         max: 59,
         min: 0,
-        size: 280,
         step: 5,
         value: 10
       }
