@@ -3,7 +3,7 @@ import { test } from '@/test'
 import VTimePicker, { selectingTimes } from '@/components/VTimePicker/VTimePicker'
 
 test('VTimePicker.js', ({ mount }) => {
-  [true, false].forEach(useSecondsValue => {
+  [true, false].forEach(useSecondsValue => { // eslint-disable-line max-statements
     const useSecondsDesc = (useSecondsValue ? '. with useSeconds' : '')
     it('should accept a value' + useSecondsDesc, async () => {
       const wrapper = mount(VTimePicker, {
@@ -192,7 +192,7 @@ test('VTimePicker.js', ({ mount }) => {
       expect(wrapper.html()).toMatchSnapshot()
     })
 
-    it('should set input hour when setting hour in 12hr mode' + useSecondsDesc, () => {
+    it('should set input hour when setting hour in 12hr mode' + useSecondsDesc, () => { // eslint-disable-line max-statements
       const wrapper = mount(VTimePicker, {
         propsData: {
           value: '01:23pm',
@@ -240,7 +240,7 @@ test('VTimePicker.js', ({ mount }) => {
       expect(wrapper.vm.inputSecond).toBe(44)
     })
 
-    it('should set properly input time' + useSecondsDesc, () => {
+    it('should set properly input time' + useSecondsDesc, () => { // eslint-disable-line max-statements
       const wrapper = mount(VTimePicker, {
         propsData: {
           format: '24hr',
@@ -254,14 +254,14 @@ test('VTimePicker.js', ({ mount }) => {
       expect(wrapper.vm.inputSecond).toBe(0)
 
       wrapper.vm.setInputData(null)
-      expect(wrapper.vm.inputHour).toBe(null)
-      expect(wrapper.vm.inputMinute).toBe(null)
-      expect(wrapper.vm.inputSecond).toBe(null)
+      expect(wrapper.vm.inputHour).toBeNull()
+      expect(wrapper.vm.inputMinute).toBeNull()
+      expect(wrapper.vm.inputSecond).toBeNull()
 
       wrapper.vm.setInputData('')
-      expect(wrapper.vm.inputHour).toBe(null)
-      expect(wrapper.vm.inputMinute).toBe(null)
-      expect(wrapper.vm.inputSecond).toBe(null)
+      expect(wrapper.vm.inputHour).toBeNull()
+      expect(wrapper.vm.inputMinute).toBeNull()
+      expect(wrapper.vm.inputSecond).toBeNull()
 
       wrapper.vm.setInputData('12:34am')
       expect(wrapper.vm.inputHour).toBe(0)
@@ -351,14 +351,14 @@ test('VTimePicker.js', ({ mount }) => {
 
       clock.$emit('change', 1)
       expect(clickHour).toHaveBeenCalledTimes(1)
-      expect(clickHour).toBeCalledWith(1)
+      expect(clickHour).toHaveBeenCalledWith(1)
       expect(clickMinute).toHaveBeenCalledTimes(0)
       expect(clickSecond).toHaveBeenCalledTimes(0)
 
       clock.$emit('change', 59)
       expect(clickHour).toHaveBeenCalledTimes(1)
       expect(clickMinute).toHaveBeenCalledTimes(1)
-      expect(clickMinute).toBeCalledWith(59)
+      expect(clickMinute).toHaveBeenCalledWith(59)
       expect(clickSecond).toHaveBeenCalledTimes(0)
 
       if (useSecondsValue) {
@@ -366,7 +366,7 @@ test('VTimePicker.js', ({ mount }) => {
         expect(clickHour).toHaveBeenCalledTimes(1)
         expect(clickMinute).toHaveBeenCalledTimes(1)
         expect(clickSecond).toHaveBeenCalledTimes(1)
-        expect(clickSecond).toBeCalledWith(45)
+        expect(clickSecond).toHaveBeenCalledWith(45)
       }
     })
 
@@ -436,7 +436,7 @@ test('VTimePicker.js', ({ mount }) => {
       expect(wrapper.find('.v-picker__actions .scoped-slot')).toHaveLength(1)
     })
 
-    it('should calculate allowed seconds/minute/hour callback' + useSecondsDesc, async () => {
+    it('should calculate allowed seconds/minute/hour callback' + useSecondsDesc, async () => { // eslint-disable-line max-statements
       const wrapper = mount(VTimePicker, {
         propsData: {
           value: '10:00:00',
@@ -551,7 +551,7 @@ test('VTimePicker.js', ({ mount }) => {
       wrapper.vm.setInputData(useSecondsValue ? '01:23:45' : '01:23')
       expect(wrapper.vm.inputSecond).toBe(useSecondsValue ? 45 : 0)
       wrapper.vm.setInputData(null)
-      expect(wrapper.vm.inputSecond).toBe(null)
+      expect(wrapper.vm.inputSecond).toBeNull()
     })
 
     it('should update when emit input' + useSecondsDesc, () => {
@@ -565,7 +565,7 @@ test('VTimePicker.js', ({ mount }) => {
       const currentValue = jest.fn()
       wrapper.vm.$on('input', currentValue)
       wrapper.vm.emitValue()
-      expect(currentValue).toBeCalledWith(useSecondsValue ? '13:23:45' : '13:23')
+      expect(currentValue).toHaveBeenCalledWith(useSecondsValue ? '13:23:45' : '13:23')
     })
 
     it('should update selecting when set selectingSecond/selectingMinute/selectingHour' + useSecondsDesc, () => {
