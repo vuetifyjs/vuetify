@@ -40,24 +40,30 @@
     "weather": {
       "header": "### Weather card",
       "desc": "Using [v-list-items](/components/lists) and a [v-slider](/components/sliders), we are able to create a unique weather card. The list components ensure that we have consistent spacing and functionality while the slider component allows us to provide a useful interface of selection to the user."
+    },
+    "advanced": {
+      "header": "### Advanced",
+      "desc": "Using `v-list-item` and `v-img` allows us to create unique card layouts in an advanced setting"
     }
   },
   "cardMediaWarning": "`v-card-media` is deprecated, use `v-img` instead.",
   "props": {
+    "alt": "Components.Images.props.alt",
+    "aspectRatio": "Components.Images.props.aspectRatio",
     "contain": "Change the background-size to contain.",
     "flat": "Removes card box shadow",
+    "gradient": "Components.Images.props.gradient",
     "height": "Manually define the height of the card",
     "hover": "Apply a higher elevation on hover",
     "img": "Specifies an image background",
+    "lazySrc": "Components.Images.props.lazySrc",
+    "link": "Applies styles as if element were a link",
+    "outlined": "Removes card elevation shadow and adds a 1px border",
+    "position": "Components.Images.props.position",
     "primaryTitle": "Applies primary title specific padding.",
     "raised": "Specifies a higher default elevation",
-    "src": "The image to display as a background.",
-    "alt": "Components.Images.props.alt",
-    "aspectRatio": "Components.Images.props.aspectRatio",
-    "gradient": "Components.Images.props.gradient",
-    "lazySrc": "Components.Images.props.lazySrc",
-    "position": "Components.Images.props.position",
     "sizes": "Components.Images.props.sizes",
+    "src": "The image to display as a background.",
     "srcset": "Components.Images.props.srcset",
     "transition": "Components.Images.props.transition"
   }

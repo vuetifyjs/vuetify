@@ -23,7 +23,6 @@
           "value": [
             "v-card",
             "v-card-actions",
-            "v-card-media",
             "v-card-text",
             "v-card-title"
           ]
@@ -44,7 +43,8 @@
             "customActions",
             "twitterCard",
             "loading",
-            "weather"
+            "weather",
+            "advanced"
           ]
         }
       ]
