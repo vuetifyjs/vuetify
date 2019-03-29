@@ -1,5 +1,5 @@
 import VTimePickerTitle from '../VTimePickerTitle'
-import { selectingTimes } from '../VTimePicker'
+import { SelectingTimes } from '../VTimePicker'
 import {
   mount,
   Wrapper,
@@ -69,7 +69,7 @@ describe('VTimePickerTitle.ts', () => {
           minute: 13,
           second: 25,
           period: 'pm',
-          selecting: selectingTimes.hour,
+          selecting: SelectingTimes.Hour,
           useSeconds: useSecondsValue
         }
       })
@@ -142,17 +142,17 @@ describe('VTimePickerTitle.ts', () => {
       wrapper.vm.$on('update:selecting', selecting)
 
       wrapper.findAll('.v-time-picker-title__time .v-picker__title__btn').wrappers[1].trigger('click')
-      expect(selecting).toHaveBeenCalledWith(selectingTimes.minute)
+      expect(selecting).toHaveBeenCalledWith(SelectingTimes.Minute)
       wrapper.findAll('.v-time-picker-title__time .v-picker__title__btn').wrappers[0].trigger('click')
-      expect(selecting).toHaveBeenCalledWith(selectingTimes.hour)
+      expect(selecting).toHaveBeenCalledWith(SelectingTimes.Hour)
       if (useSecondsValue) {
         wrapper.findAll('.v-time-picker-title__time .v-picker__title__btn').wrappers[2].trigger('click')
-        expect(selecting).toHaveBeenCalledWith(selectingTimes.second)
+        expect(selecting).toHaveBeenCalledWith(SelectingTimes.Second)
       }
-      wrapper.setProps({ selecting: selectingTimes.hour })
+      wrapper.setProps({ selecting: SelectingTimes.Hour })
       await wrapper.vm.$nextTick()
       wrapper.findAll('.v-time-picker-title__time .v-picker__title__btn').wrappers[1].trigger('click')
-      expect(selecting).toHaveBeenCalledWith(selectingTimes.minute)
+      expect(selecting).toHaveBeenCalledWith(SelectingTimes.Minute)
     })
 
     it('should emit event when clicked on readonly hours/minutes' + useSecondsDesc, async () => {
@@ -170,7 +170,7 @@ describe('VTimePickerTitle.ts', () => {
       wrapper.vm.$on('update:selecting', selecting)
 
       wrapper.find('.v-time-picker-title__time .v-picker__title__btn').trigger('click')
-      expect(selecting).toHaveBeenCalledWith(selectingTimes.hour)
+      expect(selecting).toHaveBeenCalledWith(SelectingTimes.Hour)
     })
   })
 })

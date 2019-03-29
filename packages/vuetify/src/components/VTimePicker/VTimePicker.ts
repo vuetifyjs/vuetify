@@ -18,13 +18,13 @@ const rangeHours24 = createRange(24)
 const rangeHours12am = createRange(12)
 const rangeHours12pm = rangeHours12am.map(v => v + 12)
 const range60 = createRange(60)
-const selectingTimes: {
-  hour: 1
-  minute: 2
-  second: 3
-} = { hour: 1, minute: 2, second: 3 }
+enum SelectingTimes {
+  Hour = 1,
+  Minute = 2,
+  Second = 3
+}
 const selectingNames = { 1: 'hour', 2: 'minute', 3: 'second' }
-export { selectingTimes }
+export { SelectingTimes }
 
 type Period = 'am' | 'pm'
 
@@ -63,33 +63,33 @@ export default mixins(
       lazyInputMinute: null as number | null,
       lazyInputSecond: null as number | null,
       period: 'am' as Period,
-      selecting: selectingTimes.hour as 1 | 2 | 3
+      selecting: SelectingTimes.Hour
     }
   },
 
   computed: {
     selectingHour: {
       get () {
-        return this.selecting === selectingTimes.hour
+        return this.selecting === SelectingTimes.Hour
       },
       set (v: boolean) {
-        this.selecting = selectingTimes.hour
+        this.selecting = SelectingTimes.Hour
       }
     },
     selectingMinute: {
       get () {
-        return this.selecting === selectingTimes.minute
+        return this.selecting === SelectingTimes.Minute
       },
       set (v: boolean) {
-        this.selecting = selectingTimes.minute
+        this.selecting = SelectingTimes.Minute
       }
     },
     selectingSecond: {
       get () {
-        return this.selecting === selectingTimes.second
+        return this.selecting === SelectingTimes.Second
       },
       set (v: boolean) {
-        this.selecting = selectingTimes.second
+        this.selecting = SelectingTimes.Second
       }
     },
     isAllowedHourCb () {
@@ -202,9 +202,9 @@ export default mixins(
       return hour % 12 + (period === 'pm' ? 12 : 0)
     },
     onInput (value: number) {
-      if (this.selecting === selectingTimes.hour) {
+      if (this.selecting === SelectingTimes.Hour) {
         this.inputHour = this.isAmPm ? this.convert12to24(value, this.period) : value
-      } else if (this.selecting === selectingTimes.minute) {
+      } else if (this.selecting === SelectingTimes.Minute) {
         this.inputMinute = value
       } else {
         this.inputSecond = value
@@ -214,12 +214,12 @@ export default mixins(
     onChange (value: number) {
       this.$emit(`click:${selectingNames[this.selecting]}`, value)
 
-      const emitChange = this.selecting === (this.useSeconds ? selectingTimes.second : selectingTimes.minute)
+      const emitChange = this.selecting === (this.useSeconds ? SelectingTimes.Second : SelectingTimes.Minute)
 
-      if (this.selecting === selectingTimes.hour) {
-        this.selecting = selectingTimes.minute
-      } else if (this.useSeconds && this.selecting === selectingTimes.minute) {
-        this.selecting = selectingTimes.second
+      if (this.selecting === SelectingTimes.Hour) {
+        this.selecting = SelectingTimes.Minute
+      } else if (this.useSeconds && this.selecting === SelectingTimes.Minute) {
+        this.selecting = SelectingTimes.Second
       }
 
       if (this.inputHour === this.lazyInputHour &&
@@ -257,28 +257,28 @@ export default mixins(
       return this.$createElement(VTimePickerClock, {
         props: {
           allowedValues:
-            this.selecting === selectingTimes.hour
+            this.selecting === SelectingTimes.Hour
               ? this.isAllowedHourCb
-              : (this.selecting === selectingTimes.minute
+              : (this.selecting === SelectingTimes.Minute
                 ? this.isAllowedMinuteCb
                 : this.isAllowedSecondCb),
           color: this.color,
           dark: this.dark,
           disabled: this.disabled,
-          double: this.selecting === selectingTimes.hour && !this.isAmPm,
-          format: this.selecting === selectingTimes.hour
+          double: this.selecting === SelectingTimes.Hour && !this.isAmPm,
+          format: this.selecting === SelectingTimes.Hour
             ? (this.isAmPm ? this.convert24to12 : (val: number) => val)
             : (val: number) => pad(val, 2),
           light: this.light,
-          max: this.selecting === selectingTimes.hour ? (this.isAmPm && this.period === 'am' ? 11 : 23) : 59,
-          min: this.selecting === selectingTimes.hour && this.isAmPm && this.period === 'pm' ? 12 : 0,
+          max: this.selecting === SelectingTimes.Hour ? (this.isAmPm && this.period === 'am' ? 11 : 23) : 59,
+          min: this.selecting === SelectingTimes.Hour && this.isAmPm && this.period === 'pm' ? 12 : 0,
           readonly: this.readonly,
           scrollable: this.scrollable,
           size: Number(this.width) - ((!this.fullWidth && this.landscape) ? 80 : 20),
-          step: this.selecting === selectingTimes.hour ? 1 : 5,
-          value: this.selecting === selectingTimes.hour
+          step: this.selecting === SelectingTimes.Hour ? 1 : 5,
+          value: this.selecting === SelectingTimes.Hour
             ? this.inputHour
-            : (this.selecting === selectingTimes.minute
+            : (this.selecting === SelectingTimes.Minute
               ? this.inputMinute
               : this.inputSecond)
         },
