@@ -1,25 +1,27 @@
-@import '../bootstrap'
-@import '../theme'
+@import '../../styles/styles.sass'
 
-v-select($material)
+@mixin select-theme($material)
   // Needs an explicit color to override
   // higher level color
   .v-select__selections
-    color: $material.text.primary
+    color: map-deep-get($material, 'text', 'primary')
 
   &.v-input--is-disabled
     .v-select__selections
-      color: $material.text.disabled
+      color: map-deep-get($material, 'text', 'disabled')
 
   .v-chip--disabled,
   .v-select__selection--disabled
-    color: $material.text.disabled
+    color: map-deep-get($material, 'text', 'disabled')
 
   &.v-text-field--solo-inverted.v-input--is-focused
     .v-select__selections
-      color: $material.inputs.solo-inverted-focused-text
+      color: map-deep-get($material, 'inputs', 'solo-inverted-focused-text')
 
-theme(v-select, 'v-select')
+.v-select.theme--light
+  +select-theme($material-light)
+.v-select.theme--dark
+  +select-theme($material-dark)
 
 .v-select
   position: relative // For **attach** prop

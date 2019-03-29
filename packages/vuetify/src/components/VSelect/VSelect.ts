@@ -1,6 +1,6 @@
 // Styles
 import '../VTextField/VTextField.sass'
-import '../../stylus/components/_select.styl'
+import './VSelect.sass'
 
 // Components
 import VChip from '../VChip'
