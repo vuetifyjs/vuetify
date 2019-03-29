@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VCardText.vue should render component and match snapshot 1`] = `
+
+<div class="v-card__text">
+</div>
+
+`;
+
+exports[`VCardText.vue should render component with slotted content 1`] = `
+
+<div class="v-card__text">
+  <span>
+    default
+  </span>
+</div>
+
+`;

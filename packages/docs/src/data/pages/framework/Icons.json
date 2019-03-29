@@ -40,6 +40,50 @@
         },
         {
           "type": "heading",
+          "lang": "installMDI"
+        },
+        {
+          "type": "markup",
+          "value": "bash_yarn_install_mdi"
+        },
+        {
+          "type": "text",
+          "lang": "installMDIText1"
+        },
+        {
+          "type": "markup",
+          "value": "js_import_mdi"
+        },
+        {
+          "type": "heading",
+          "lang": "installMDISvg"
+        },
+        {
+          "type": "text",
+          "lang": "installMDISvgText1"
+        },
+        {
+          "type": "markup",
+          "value": "bash_yarn_install_mdi_svg"
+        },
+        {
+          "type": "text",
+          "lang": "installMDISvgText2"
+        },
+        {
+          "type": "markup",
+          "value": "js_import_mdi_svg"
+        },
+        {
+          "type": "text",
+          "lang": "installMDISvgText3"
+        },
+        {
+          "type": "markup",
+          "value": "html_mdi_svg"
+        },
+        {
+          "type": "heading",
           "lang": "installMD"
         },
         {
@@ -65,22 +109,6 @@
         {
           "type": "markup",
           "value": "js_import_material_icons"
-        },
-        {
-          "type": "heading",
-          "lang": "installMDI"
-        },
-        {
-          "type": "markup",
-          "value": "bash_yarn_install_mdi"
-        },
-        {
-          "type": "text",
-          "lang": "installMDIText1"
-        },
-        {
-          "type": "markup",
-          "value": "js_import_mdi"
         },
         {
           "type": "heading",

@@ -12,6 +12,7 @@ import Themeable from '../../mixins/themeable'
 import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots } from '../../util/helpers'
 import { DataProps } from '../VData/VData'
 import { PropValidator } from 'vue/types/options'
+import { breaking, removed } from '../../util/console'
 
 /* @vue/component */
 export default mixins(Themeable).extend({
@@ -91,6 +92,35 @@ export default mixins(Themeable).extend({
     }
   },
 
+  created () {
+    const breakingProps = [
+      ['disable-initial-sort', 'sort-by'],
+      ['filter', 'custom-filter'],
+      ['pagination', 'options'],
+      ['total-items', 'server-items-length'],
+      ['hide-actions', 'hide-default-footer'],
+      ['rows-per-page-items', 'footer-props.items-per-page-options'],
+      ['rows-per-page-text', 'footer-props.items-per-page-text'],
+      ['prev-icon', 'footer-props.prev-icon'],
+      ['next-icon', 'footer-props.next-icon']
+    ]
+
+    breakingProps.forEach(([original, replacement]) => {
+      if (this.$attrs.hasOwnProperty(original)) breaking(original, replacement)
+    })
+
+    const removedProps = [
+      'expand',
+      'content-class',
+      'content-props',
+      'content-tag'
+    ]
+
+    removedProps.forEach(prop => {
+      if (this.$attrs.hasOwnProperty(prop)) removed(prop)
+    })
+  },
+
   methods: {
     toggleSelectAll (value: boolean): void {
       this.internalCurrentItems.forEach((item: any) => {
@@ -168,7 +198,15 @@ export default mixins(Themeable).extend({
       const empty = this.genEmpty(props.pagination.itemsLength)
       if (empty) return [empty]
 
-      if (this.$scopedSlots.default) return this.$scopedSlots.default(props)
+      if (this.$scopedSlots.default) {
+        return this.$scopedSlots.default({
+          ...props,
+          isSelected: this.isSelected,
+          select: this.select,
+          isExpanded: this.isExpanded,
+          expand: this.expand
+        })
+      }
 
       if (this.$scopedSlots.item) {
         return props.items.map((item: any) => this.$scopedSlots.item!(this.createItemProps(item)))

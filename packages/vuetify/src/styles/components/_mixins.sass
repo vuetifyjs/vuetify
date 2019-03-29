@@ -1,0 +1,5 @@
+@mixin selection-control-theme($material)
+  &.v-input--is-disabled
+    .v-icon
+      // needed for helper override
+      color: map-deep-get($material, 'buttons', 'disabled') !important

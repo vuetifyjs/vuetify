@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_steppers.styl'
+import './VStepper.sass'
 
 // Components
 import VStepperStep from './VStepperStep'

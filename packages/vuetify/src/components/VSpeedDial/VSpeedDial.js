@@ -1,4 +1,4 @@
-import '../../stylus/components/_speed-dial.styl'
+import './VSpeedDial.sass'
 
 import Toggleable from '../../mixins/toggleable'
 import Positionable from '../../mixins/positionable'

@@ -1,4 +1,4 @@
-import '../../stylus/components/_progress-circular.styl'
+import './VProgressCircular.sass'
 
 // Mixins
 import Colorable from '../../mixins/colorable'

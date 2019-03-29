@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_range-sliders.styl'
+import './VRangeSlider.sass'
 
 // Components
 import VSlider from '../VSlider'

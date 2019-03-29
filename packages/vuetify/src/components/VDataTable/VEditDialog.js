@@ -1,4 +1,4 @@
-import '../../stylus/components/_small-dialog.styl'
+import './VEditDialog.sass'
 
 // Mixins
 import Returnable from '../../mixins/returnable'
