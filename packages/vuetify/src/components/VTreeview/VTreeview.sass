@@ -1,0 +1,94 @@
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+@import './_mixins.sass'
+
+/* Theme */
+.v-treeview.theme--light
+  +treeview-theme($material-light)
+.v-treeview.theme--dark
+  +treeview-theme($material-dark)
+
+.v-treeview
+  > .v-treeview-node
+    margin-left: 0
+
+    &--leaf
+      margin-left: $treeview-direct-leaf-node-x-margin
+
+  &-node
+    margin-left: $treeview-node-x-margin
+
+    &--excluded
+      display: none
+
+    &--click
+      > .v-treeview-node__root,
+      > .v-treeview-node__root > .v-treeview-node__content > *
+        cursor: pointer
+        user-select: none
+
+    &--leaf
+      margin-left: $treeview-leaf-node-x-margin
+
+    &__root
+      display: flex
+      align-items: center
+      height: 34px
+
+    &__content
+      display: flex
+      flex-grow: 1
+      flex-shrink: 0
+      align-items: center
+
+      // TODO: this is temporary fix for d-flex * shenanigans
+      .v-btn
+        flex-grow: 0 !important
+        flex-shrink: 1 !important
+
+    &__label
+      font-size: $treeview-label-font-size
+      margin-left: $treeview-label-margin-left
+      flex-grow: 1
+      flex-shrink: 0
+
+      .v-icon
+        padding-right: $treeview-label-icon-padding-right
+
+    &__checkbox
+      user-select: none
+
+    &__toggle
+      user-select: none
+      transform: rotate(-90deg)
+
+      &--open
+        transform: none
+
+      &--loading
+        animation: progress-circular-rotate 1s linear infinite
+
+    &__children
+      transition: all $treeview-transition
+
+  +rtl()
+    > .v-treeview-node
+      margin-right: 0
+
+      &--leaf
+        margin-right: $treeview-direct-leaf-node-x-margin
+        margin-left: 0
+
+    &-node
+      margin-right: $treeview-node-x-margin
+      margin-left: 0
+
+      &--leaf
+        margin-right: $treeview-leaf-node-x-margin
+        margin-left: 0
+
+      &__toggle
+        transform: rotate(90deg)
+
+        &--open
+          transform: none

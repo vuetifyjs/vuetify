@@ -20,9 +20,8 @@ exports[`VRadioGroup.vue should be in error when v-radio-group is 1`] = `
             <div class="v-input--selection-controls__ripple error--text">
             </div>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light error--text"
+               class="v-icon mdi mdi-radiobox-blank theme--light error--text"
             >
-              radio_button_unchecked
             </i>
           </div>
           <label aria-hidden="true"
@@ -62,9 +61,8 @@ exports[`VRadioGroup.vue should be in error when v-radio-group is 2`] = `
             <div class="v-input--selection-controls__ripple">
             </div>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon mdi mdi-radiobox-blank theme--light"
             >
-              radio_button_unchecked
             </i>
           </div>
           <label aria-hidden="true"

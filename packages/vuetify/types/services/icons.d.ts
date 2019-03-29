@@ -10,7 +10,7 @@ export interface VuetifyIconOptions {
    * fa: <a href="https://fontawesome.com/get-started/web-fonts-with-css">FontAwesome 5</a>
    * fa4: <a href="">FontAwesome 4</a> TODO: link
    */
-  iconfont: 'md' | 'mdi' | 'fa' | 'fa4' // TODO: camelCase
+  iconfont: 'mdi' | 'mdiSvg' | 'md' | 'fa' | 'fa4' // TODO: camelCase
   values?: Partial<VuetifyIcons>
 }
 
@@ -22,8 +22,6 @@ export type VuetifyIconComponent = {
 export type VuetifyIcon = string | VuetifyIconComponent
 
 export interface VuetifyIcons {
-  [name: string]: VuetifyIcon
-
   complete: VuetifyIcon
   cancel: VuetifyIcon
   close: VuetifyIcon
@@ -50,4 +48,5 @@ export interface VuetifyIcons {
   ratingEmpty: VuetifyIcon
   ratingFull: VuetifyIcon
   ratingHalf: VuetifyIcon
+  [name: string]: VuetifyIcon
 }
