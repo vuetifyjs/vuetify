@@ -145,7 +145,11 @@ function rippleHide (e: Event) {
   const element = e.currentTarget as HTMLElement | null
   if (!element) return
 
-  window.setTimeout(() => { element._ripple!.touched = false })
+  window.setTimeout(() => {
+    if (element._ripple) {
+      element._ripple.touched = false
+    }
+  })
   ripples.hide(element)
 }
 
