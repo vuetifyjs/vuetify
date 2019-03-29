@@ -27,7 +27,7 @@
     },
     "multiSort": {
       "header": "### Sort on multiple columns",
-      "desc": "Using the `multi-sort´ prop will enable you to sort on multiple columns at the same time. When enabled, you can pass arrays to both `sort-by` and `sort-desc` to programmatically control the sorting, instead of single values."
+      "desc": "Using the `multi-sort` prop will enable you to sort on multiple columns at the same time. When enabled, you can pass arrays to both `sort-by` and `sort-desc` to programmatically control the sorting, instead of single values."
     },
     "customizeRows": {
       "header": "### Customizing default rows",
@@ -67,7 +67,7 @@
     },
     "headerless": {
       "header": "### Remove default header and footer",
-      "desc": "You can apply the `hide-headers` and `hide-actions` props to remove the default header and footer respectively."
+      "desc": "You can apply the `hide-default-headers` and `hide-default-footer` props to remove the default header and footer respectively."
     },
     "editdialog": {
       "header": "### Inline Editing",
