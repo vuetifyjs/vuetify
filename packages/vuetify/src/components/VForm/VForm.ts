@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_forms.styl'
+import './VForm.sass'
 
 // Components
 import VInput from '../VInput/VInput'
