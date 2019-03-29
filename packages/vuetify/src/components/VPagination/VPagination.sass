@@ -1,24 +1,10 @@
-@import '../bootstrap'
-@import '../theme'
+@import '../../styles/styles.sass'
+@import './_mixins.sass'
 
-v-pagination($material)
-  .v-pagination__item
-    background: $material.cards
-    color: $material.fg-color
-    width: auto
-    min-width: 34px
-    padding: 0 5px
-
-    &--active
-      color: $material.text.theme
-
-  .v-pagination__navigation
-    background: $material.cards
-
-    .v-icon
-      color: rgba($material.fg-color, $material.active-icon-percent)
-
-theme(v-pagination, "v-pagination")
+.v-pagination.theme--light
+  +pagination-theme($material-light)
+.v-pagination.theme--dark
+  +pagination-theme($material-dark)
 
 .v-pagination
   align-items: center
@@ -43,7 +29,7 @@ theme(v-pagination, "v-pagination")
     opacity: .6
 
   &__item
-    elevation(2)
+    +elevation(2)
     border-radius: 4px
     font-size: 14px
     background: transparent
@@ -51,13 +37,13 @@ theme(v-pagination, "v-pagination")
     width: 34px
     margin: .3rem
     text-decoration: none
-    transition: .3s $transition.linear-out-slow-in
+    transition: .3s map-get($transition, 'linear-out-slow-in')
 
     &--active
-      elevation(4)
+      +elevation(4)
 
   &__navigation
-    elevation(2)
+    +elevation(2)
     display: inline-flex
     justify-content: center
     align-items: center
