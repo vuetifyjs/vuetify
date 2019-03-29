@@ -1,10 +1,27 @@
-import { test } from '@/test'
-import VProgressCircular from '@/components/VProgressCircular'
+// Components
+import VProgressCircular from '../VProgressCircular'
+
+// Utilities
+import {
+  mount,
+  Wrapper
+} from '@vue/test-utils'
 import { compileToFunctions } from 'vue-template-compiler'
 
-test('VProgressCircular.js', ({ mount }) => {
+describe('VProgressCircular.ts', () => {
+  type Instance = InstanceType<typeof VProgressCircular>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+
+  beforeEach(() => {
+    mountFunction = (options = {}) => {
+      return mount(VProgressCircular, {
+        ...options
+      })
+    }
+  })
+
   it('should render component and match snapshot', () => {
-    const wrapper = mount(VProgressCircular, {
+    const wrapper = mountFunction({
       propsData: {
         value: 33
       },
@@ -49,7 +66,7 @@ test('VProgressCircular.js', ({ mount }) => {
   })
 
   it('should render component with color prop and match snapshot', () => {
-    const wrapper = mount(VProgressCircular, {
+    const wrapper = mountFunction({
       propsData: {
         value: 33,
         color: 'orange lighten-1'
@@ -60,7 +77,7 @@ test('VProgressCircular.js', ({ mount }) => {
   })
 
   it('should render component with button prop and match snapshot', () => {
-    const wrapper = mount(VProgressCircular, {
+    const wrapper = mountFunction({
       propsData: {
         value: 33,
         button: true
@@ -71,7 +88,7 @@ test('VProgressCircular.js', ({ mount }) => {
   })
 
   it('should render component with rotate prop and match snapshot', () => {
-    const wrapper = mount(VProgressCircular, {
+    const wrapper = mountFunction({
       propsData: {
         value: 33,
         rotate: 29
@@ -82,7 +99,7 @@ test('VProgressCircular.js', ({ mount }) => {
   })
 
   it('should render component with size prop and match snapshot', () => {
-    const wrapper = mount(VProgressCircular, {
+    const wrapper = mountFunction({
       propsData: {
         value: 33,
         size: 17
@@ -93,7 +110,7 @@ test('VProgressCircular.js', ({ mount }) => {
   })
 
   it('should render component with indeterminate prop and match snapshot', () => {
-    const wrapper = mount(VProgressCircular, {
+    const wrapper = mountFunction({
       propsData: {
         indeterminate: true
       }
@@ -103,7 +120,7 @@ test('VProgressCircular.js', ({ mount }) => {
   })
 
   it('should render component with width prop and match snapshot', () => {
-    const wrapper = mount(VProgressCircular, {
+    const wrapper = mountFunction({
       propsData: {
         value: 33,
         width: 13
@@ -114,7 +131,7 @@ test('VProgressCircular.js', ({ mount }) => {
   })
 
   it('should render component with fill prop and match snapshot', () => {
-    const wrapper = mount(VProgressCircular, {
+    const wrapper = mountFunction({
       propsData: {
         value: 33,
         fill: 'green lighten-1'
