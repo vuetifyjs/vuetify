@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xs-center">
+  <div class="text-xs-center" style="height: 500px;">
     <v-btn
       color="deep-purple accent-4"
       class="white--text"
@@ -9,7 +9,7 @@
       <v-icon right>mdi-open-in-new</v-icon>
     </v-btn>
 
-    <v-overlay :value="overlay">
+    <v-overlay :value="overlay" absolute>
       <v-progress-circular indeterminate size="64"></v-progress-circular>
     </v-overlay>
   </div>
