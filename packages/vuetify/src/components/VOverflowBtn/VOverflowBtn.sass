@@ -1,26 +1,8 @@
-@import '../bootstrap'
-@import '../theme'
+@import '../../styles/styles.sass'
+@import './_mixins.sass'
 
-v-overflow-btn($material)
-  .v-input__control,
-  .v-input__slot
-    &::before
-      background-color: $material.dividers !important // override v-text-field bottom border
-
-  &--segmented,
-  &--editable:hover,
-  &--editable.v-input--is-focused,
-  &--editable.v-select--is-menu-active
-    .v-input__append-inner
-      border-left: 1px solid $material.dividers
-
-  &:hover,
-  &.v-input--is-focused,
-  &.v-select--is-menu-active
-    .v-input__slot
-      background: $material.cards
-
-theme(v-overflow-btn, "v-overflow-btn")
+.v-overflow-btn.theme--light
+  +overflow-btn-theme($material-light)
 
 .v-overflow-btn
   margin-top: 12px
@@ -40,7 +22,7 @@ theme(v-overflow-btn, "v-overflow-btn")
     margin-left: 16px
 
   .v-input__slot
-    transition: .3s $transition.swing
+    transition: .3s map-get($transition, 'swing')
 
     &::after
       content: none
