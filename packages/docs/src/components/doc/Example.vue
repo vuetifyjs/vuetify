@@ -66,7 +66,7 @@
                 :light="active"
                 class="mr-0"
                 depressed
-                round
+                rounded
                 @click="toggle"
               >
                 {{ section }}
