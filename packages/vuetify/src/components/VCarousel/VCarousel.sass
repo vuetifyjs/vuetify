@@ -1,21 +1,10 @@
-@import '../bootstrap'
-
-v-carousel-rtl()
-  &__prev
-    left: auto
-    right: 5px
-
-  &__next
-    left: 5px
-    right: auto
-
-rtl(v-carousel-rtl, "v-carousel")
+@import '../../styles/styles.sass'
 
 .v-carousel
   width: 100%
   position: relative
   overflow: hidden
-  elevation(2)
+  +elevation(2)
 
   &__prev,
   &__next
@@ -34,12 +23,6 @@ rtl(v-carousel-rtl, "v-carousel")
 
       &:hover
         background: none
-
-  &__prev
-    left: 5px
-
-  &__next
-    right: 5px
 
   &__controls
     background: rgba(0, 0, 0, .5)
@@ -74,3 +57,18 @@ rtl(v-carousel-rtl, "v-carousel")
 
         .v-icon
           opacity: .8
+
+  &__prev
+    left: 5px
+
+  &__next
+    right: 5px
+
+  +rtl()
+    &__prev
+      left: auto
+      right: 5px
+
+    &__next
+      left: 5px
+      right: auto
