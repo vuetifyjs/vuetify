@@ -1,0 +1,19 @@
+@import '../../styles/styles.sass'
+@import './_mixins.sass'
+
+/* Theme */
+.v-input--range-slider.theme--light
+  +range-slider-theme($material-light)
+.v-input--range-slider.theme--dark
+  +range-slider-theme($material-dark)
+
+/** Input Group */
+.v-input--range-slider
+  &.v-input--is-disabled
+    .v-slider__track-fill
+      display: none
+
+    &.v-input--slider
+      .v-slider.v-slider
+        .v-slider__thumb
+          border-color: transparent
