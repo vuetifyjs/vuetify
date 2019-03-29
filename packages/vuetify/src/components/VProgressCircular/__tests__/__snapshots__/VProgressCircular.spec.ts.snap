@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VProgressCircular.js should render component and match snapshot 1`] = `
+exports[`VProgressCircular.ts should render component and match snapshot 1`] = `
 
 <div role="progressbar"
      aria-valuemin="0"
@@ -42,7 +42,7 @@ exports[`VProgressCircular.js should render component and match snapshot 1`] = `
 
 `;
 
-exports[`VProgressCircular.js should render component with button prop and match snapshot 1`] = `
+exports[`VProgressCircular.ts should render component with button prop and match snapshot 1`] = `
 
 <div role="progressbar"
      aria-valuemin="0"
@@ -81,7 +81,7 @@ exports[`VProgressCircular.js should render component with button prop and match
 
 `;
 
-exports[`VProgressCircular.js should render component with color prop and match snapshot 1`] = `
+exports[`VProgressCircular.ts should render component with color prop and match snapshot 1`] = `
 
 <div role="progressbar"
      aria-valuemin="0"
@@ -120,7 +120,7 @@ exports[`VProgressCircular.js should render component with color prop and match 
 
 `;
 
-exports[`VProgressCircular.js should render component with fill prop and match snapshot 1`] = `
+exports[`VProgressCircular.ts should render component with fill prop and match snapshot 1`] = `
 
 <div role="progressbar"
      aria-valuemin="0"
@@ -128,6 +128,7 @@ exports[`VProgressCircular.js should render component with fill prop and match s
      aria-valuenow="33"
      class="v-progress-circular"
      style="height: 32px; width: 32px;"
+     fill="green lighten-1"
 >
   <svg xmlns="http://www.w3.org/2000/svg"
        viewbox="22.857142857142858 22.857142857142858 45.714285714285715 45.714285714285715"
@@ -159,7 +160,7 @@ exports[`VProgressCircular.js should render component with fill prop and match s
 
 `;
 
-exports[`VProgressCircular.js should render component with indeterminate prop and match snapshot 1`] = `
+exports[`VProgressCircular.ts should render component with indeterminate prop and match snapshot 1`] = `
 
 <div role="progressbar"
      aria-valuemin="0"
@@ -187,7 +188,7 @@ exports[`VProgressCircular.js should render component with indeterminate prop an
 
 `;
 
-exports[`VProgressCircular.js should render component with rotate prop and match snapshot 1`] = `
+exports[`VProgressCircular.ts should render component with rotate prop and match snapshot 1`] = `
 
 <div role="progressbar"
      aria-valuemin="0"
@@ -226,7 +227,7 @@ exports[`VProgressCircular.js should render component with rotate prop and match
 
 `;
 
-exports[`VProgressCircular.js should render component with size prop and match snapshot 1`] = `
+exports[`VProgressCircular.ts should render component with size prop and match snapshot 1`] = `
 
 <div role="progressbar"
      aria-valuemin="0"
@@ -265,7 +266,7 @@ exports[`VProgressCircular.js should render component with size prop and match s
 
 `;
 
-exports[`VProgressCircular.js should render component with width prop and match snapshot 1`] = `
+exports[`VProgressCircular.ts should render component with width prop and match snapshot 1`] = `
 
 <div role="progressbar"
      aria-valuemin="0"
