@@ -1,0 +1,10 @@
+@import '../tools/_elevation.sass';
+
+$z: 6;
+@while $z > 0 {
+  .elevation-#{z} {
+    @include elevation($z, true)
+  }
+
+  $z: $z - 1;
+}
