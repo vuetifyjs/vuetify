@@ -1,3 +1,5 @@
+@import './_variables.scss'
+
 .v-autocomplete
   &.v-input > .v-input__control > .v-input__slot
     cursor: text
@@ -13,7 +15,7 @@
   // selections padding
   &.v-text-field--enclosed:not(.v-text-field--solo):not(.v-text-field--single-line)
     .v-select__slot > input
-      margin-top: 24px
+      margin-top: $autocomplete-enclosed-input-margin-top
 
   &:not(.v-input--is-disabled).v-select.v-text-field
     input
