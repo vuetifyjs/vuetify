@@ -1,4 +1,4 @@
-import '../../stylus/components/_pickers.styl'
+import './VPicker.styl'
 import '../VCard/VCard.sass'
 
 // Mixins
