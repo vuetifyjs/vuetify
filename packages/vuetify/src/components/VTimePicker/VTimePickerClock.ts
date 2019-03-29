@@ -1,4 +1,4 @@
-import './VTimePickerClock.styl'
+import './VTimePickerClock.sass'
 
 // Mixins
 import Colorable from '../../mixins/colorable'

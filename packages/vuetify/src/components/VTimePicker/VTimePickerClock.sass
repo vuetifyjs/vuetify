@@ -1,27 +1,12 @@
-@import '../../stylus/bootstrap'
-@import '../../stylus/theme'
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+@import './_mixins.sass'
 
-/** Themes */
-v-time-picker-clock($material)
-  background: $material.picker.clock
-
-  .v-time-picker-clock__item--disabled
-    color: $material.buttons.disabled
-
-    &.v-time-picker-clock__item--active
-      color: $material-dark.buttons.disabled
-
-  &--indeterminate
-    .v-time-picker-clock__hand
-      background-color: $material.picker.indeterminateTime
-
-      &:after
-        color: $material.picker.indeterminateTime
-
-    .v-time-picker-clock__item--active
-        background-color: $material.picker.indeterminateTime
-
-theme(v-time-picker-clock, "v-time-picker-clock")
+// Theme
+.v-time-picker-clock.theme--light
+  +time-picker-clock-theme($material-light)
+.v-time-picker-clock.theme--dark
+  +time-picker-clock-theme($material-dark)
 
 .v-time-picker-clock
   border-radius: 100%
@@ -120,7 +105,7 @@ theme(v-time-picker-clock, "v-time-picker-clock")
     width: $time-picker-indicator-size
 
   &--active
-    color: $shades.white
+    color: map-get($shades, 'white')
     cursor: default
     z-index: 2
 
