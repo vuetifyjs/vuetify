@@ -22,8 +22,6 @@ export type VuetifyIconComponent = {
 export type VuetifyIcon = string | VuetifyIconComponent
 
 export interface VuetifyIcons {
-  [name: string]: VuetifyIcon
-
   complete: VuetifyIcon
   cancel: VuetifyIcon
   close: VuetifyIcon
@@ -50,4 +48,5 @@ export interface VuetifyIcons {
   ratingEmpty: VuetifyIcon
   ratingFull: VuetifyIcon
   ratingHalf: VuetifyIcon
+  [name: string]: VuetifyIcon
 }

@@ -7,10 +7,18 @@
       :items-per-page="5"
       hide-default-footer
       class="elevation-1"
-      @pageCount="pageCount = $event"
+      @page-count="pageCount = $event"
     ></v-data-table>
     <div class="text-xs-center pt-2">
       <v-pagination v-model="page" :length="pageCount"></v-pagination>
+      <v-text-field
+        :value="itemsPerPage"
+        label="Items per page"
+        type="number"
+        min="-1"
+        max="15"
+        @input="itemsPerPage = $event"
+      ></v-text-field>
     </div>
   </div>
 </template>
@@ -21,6 +29,7 @@
       return {
         page: 1,
         pageCount: 0,
+        itemsPerPage: 10,
         headers: [
           {
             text: 'Dessert (100g serving)',

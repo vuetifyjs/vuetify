@@ -1,5 +1,5 @@
 {
-  "header": "Data iterator",
+  "header": "Data iterators",
   "headerText": "El componente `v-data-iterator` se utiliza para mostrar datos, y comparte la mayor parte de su funcionalidad con el componente `v-data-table`. Algunas características incluyen ordenamiento, búsqueda, paginación y selección.",
   "examples": {
     "simple": {

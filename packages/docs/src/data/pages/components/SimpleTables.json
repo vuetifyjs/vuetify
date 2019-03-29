@@ -21,8 +21,7 @@
         {
           "type": "api",
           "value": [
-            "v-data-table",
-            "v-edit-dialog"
+            "v-simple-table"
           ]
         }
       ]
@@ -33,23 +32,10 @@
         {
           "type": "examples",
           "value": [
-            "slots",
-            "select",
-            "expand",
-            "group",
-            "multiSort",
-            "search",
-            "customizeRows",
-            "customizeFooter",
-            "progress",
-            "footer",
-            "paginate",
-            "sort",
-            "server",
-            "headerless",
-            "editdialog",
-            "crud",
-            "virtualized"
+            "height",
+            "fixedHeader",
+            "dense",
+            "dark"
           ]
         }
       ]
@@ -60,8 +46,8 @@
         {
           "type": "up-next",
           "value": [
-            "components/data-iterator",
-            "components/paginations",
+            "components/data-iterators",
+            "components/data-tables",
             "components/lists"
           ]
         }

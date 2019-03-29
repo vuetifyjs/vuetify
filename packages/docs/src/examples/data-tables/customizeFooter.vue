@@ -1,18 +1,22 @@
 <template>
-  <v-data-table
-    :headers="headers"
-    :items="desserts"
-    class="elevation-1"
-    :items-per-page="5"
-    :header-props="{ sortIcon: 'mdi-menu-up' }"
-    :footer-props="{ prevIcon: 'mdi-menu-left', nextIcon: 'mdi-menu-right' }"
-  ></v-data-table>
+  <div>
+    <v-switch v-model="showFirstLastPage" label="Show first/last page icons"></v-switch>
+    <v-switch v-model="showCurrentPage" label="Show current page"></v-switch>
+    <v-data-table
+      :headers="headers"
+      :items="desserts"
+      :footer-props="{ showFirstLastPage, showCurrentPage }"
+      class="elevation-1"
+    ></v-data-table>
+  </div>
 </template>
 
 <script>
   export default {
     data () {
       return {
+        showFirstLastPage: true,
+        showCurrentPage: true,
         headers: [
           {
             text: 'Dessert (100g serving)',
@@ -112,9 +116,3 @@
     }
   }
 </script>
-
-<codepen-resources lang="json">
-  {
-    "css": ["https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css"]
-  }
-</codepen-resources>

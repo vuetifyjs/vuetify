@@ -1,38 +1,11 @@
 <template>
   <v-data-table
-    v-model="selected"
     :headers="headers"
     :items="desserts"
-    :options.sync="options"
-    show-select
-    item-key="name"
-    hide-default-header
     class="elevation-1"
   >
-    <template v-slot:header="{ props, on }">
-      <thead>
-        <tr>
-          <th>
-            <!-- <v-checkbox
-              :input-value="props.all"
-              :indeterminate="props.indeterminate"
-              primary
-              hide-details
-              @click.stop="toggleAll"
-            ></v-checkbox> -->
-            checkbox
-          </th>
-          <th
-            v-for="header in props.headers"
-            :key="header.text"
-            :class="['column sortable', options.sortDesc ? 'desc' : 'asc', header.value === options.sortBy ? 'active' : '']"
-            @click="on.sort(header.value)"
-          >
-            <v-icon small>arrow_upward</v-icon>
-            {{ header.text }}
-          </th>
-        </tr>
-      </thead>
+    <template v-slot:header.column.name="{ header }">
+      {{ header.text.toUpperCase() }}
     </template>
   </v-data-table>
 </template>
@@ -40,10 +13,6 @@
 <script>
   export default {
     data: () => ({
-      options: {
-        sortBy: 'name'
-      },
-      selected: [],
       headers: [
         {
           text: 'Dessert (100g serving)',
@@ -138,21 +107,6 @@
           iron: '6%'
         }
       ]
-    }),
-
-    methods: {
-      toggleAll () {
-        if (this.selected.length) this.selected = []
-        else this.selected = this.desserts.slice()
-      },
-      changeSort (column) {
-        if (this.options.sortBy === column) {
-          this.options.descending = !this.options.descending
-        } else {
-          this.options.sortBy = column
-          this.options.descending = false
-        }
-      }
-    }
+    })
   }
 </script>

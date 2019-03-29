@@ -4,17 +4,8 @@
     :items="desserts"
     class="elevation-1"
   >
-    <template slot="headerCell" slot-scope="props">
-      <v-tooltip bottom>
-        <template v-slot:activator="{ on }">
-          <span v-on="on">
-            {{ props.header.text }}
-          </span>
-        </template>
-        <span>
-          {{ props.header.text }}
-        </span>
-      </v-tooltip>
+    <template v-slot:item.column.calories="{ item }">
+      <v-chip :color="getColor(item.calories)" dark>{{ item.calories }}</v-chip>
     </template>
   </v-data-table>
 </template>
@@ -118,6 +109,13 @@
             iron: '6%'
           }
         ]
+      }
+    },
+    methods: {
+      getColor (calories) {
+        if (calories > 400) return 'red'
+        else if (calories > 200) return 'orange'
+        else return 'green'
       }
     }
   }
