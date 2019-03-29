@@ -1,11 +1,5 @@
-@import '../bootstrap'
-
-v-snack-rtl()
-  &__content
-    .v-btn
-      margin: 0 24px 0 0
-
-rtl(v-snack-rtl, "v-snack")
+@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 .v-snack
   position: fixed
@@ -56,6 +50,9 @@ rtl(v-snack-rtl, "v-snack")
       &__content
         margin: -2px
 
+      +rtl()
+        margin: 0 24px 0 0
+
       &::before
         display: none
 
@@ -84,15 +81,7 @@ rtl(v-snack-rtl, "v-snack")
   &--auto-height &__content
     height: auto
 
-v-snack-sm-and-up-rtl()
-  @media $display-breakpoints.sm-and-up
-    &__content .v-btn:first-of-type
-      margin-left: 0
-      margin-right: 42px
-
-rtl(v-snack-sm-and-up-rtl, "v-snack")
-
-@media $display-breakpoints.sm-and-up
+@media #{map-get($display-breakpoints, 'sm-and-up')}
   .v-snack
     &__wrapper
       width: auto
@@ -106,20 +95,26 @@ rtl(v-snack-sm-and-up-rtl, "v-snack")
       .v-snack--right &
         margin-right: 0
 
-    &--left, &--right
+    &--left,
+    &--right
       margin: 0 $snackbar-corner-offset
-      &^[0]--top
+
+      &.v-snack--top
         transform: translateY($snackbar-corner-offset)
-      &^[0]--bottom
+      &.v-snack--bottom
         transform: translateY(0 - $snackbar-corner-offset)
 
     &__content .v-btn:first-of-type
       margin-left: 42px
 
+      +rtl()
+        margin-left: 0
+        margin-right: 42px
+
 .v-snack-transition
   &-enter-active,
   &-leave-active
-    transition: transform .4s $transition.swing
+    transition: transform .4s map-get($transition, 'swing')
     .v-snack__content
       transition: opacity .3s linear .1s
 
