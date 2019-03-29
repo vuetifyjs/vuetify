@@ -1,3 +1,6 @@
+// Styles
+import './VRipple.sass'
+
 import { VNode, VNodeDirective } from 'vue'
 import { consoleWarn } from '../../util/console'
 
