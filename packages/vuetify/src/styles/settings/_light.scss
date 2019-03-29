@@ -5,6 +5,15 @@ $material-light: (
   ),
   'app-bar': map-get($grey, 'lighten-4'),
   'background': map-get($grey, 'lighten-5'),
+  'calendar': (
+    'background-color': map-get($shades, 'white'),
+    'outside-background-color': #f7f7f7,
+    'line-color': map-get($grey, 'lighten-2'),
+    'interval-color': map-get($grey, 'darken-3'),
+    'interval-line-color': map-get($grey, 'lighten-2'),
+    'text-color': map-get($shades, 'black'),
+    'past-color': rgba(map-get($shades, 'black'), .38)
+  ),
   'cards': map-get($shades, 'white'),
   'chips': map-get($grey, 'lighten-2'),
   'dividers': rgba(map-get($shades, 'black'), 0.12),

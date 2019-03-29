@@ -1,0 +1,52 @@
+@mixin calendar-daily-theme($material)
+  background-color: map-deep-get($material, 'calendar', 'background-color')
+
+  .v-calendar-daily__intervals-head
+    border-right: map-deep-get($material, 'calendar', 'line-color') 1px solid
+
+  .v-calendar-daily_head-day
+    border-right: map-deep-get($material, 'calendar', 'line-color') 1px solid
+    border-bottom: map-deep-get($material, 'calendar', 'line-color') 1px solid
+    color: map-deep-get($material, 'calendar', 'text-color')
+
+    &.v-past
+      .v-calendar-daily_head-weekday,
+      .v-calendar-daily_head-day-label
+        color: map-deep-get($material, 'calendar', 'past-color')
+
+  .v-calendar-daily__intervals-body
+    border-right: map-deep-get($material, 'calendar', 'line-color') 1px solid
+
+    .v-calendar-daily__interval-text
+      color: map-deep-get($material, 'calendar', 'interval-color') 1px solid
+
+  .v-calendar-daily__day
+    border-right: map-deep-get($material, 'calendar', 'line-color') 1px solid
+    border-bottom: map-deep-get($material, 'calendar', 'line-color') 1px solid
+
+  .v-calendar-daily__day-interval
+    border-top: map-deep-get($material, 'calendar', 'line-color') 1px solid
+
+    &:first-child
+      border-top: none !important
+
+@mixin calendar-weekly-theme($material)
+  background-color: map-deep-get($material, 'calendar', 'background-color')
+
+  .v-calendar-weekly__head-weekday
+    border-right: map-deep-get($material, 'calendar', 'line-color') 1px solid
+    color: map-deep-get($material, 'calendar', 'text-color')
+
+    &.v-past
+      color: map-deep-get($material, 'calendar', 'past-color')
+
+    &.v-outside
+      background-color: map-deep-get($material, 'calendar', 'outside-background-color')
+
+  .v-calendar-weekly__day
+    border-right: map-deep-get($material, 'calendar', 'line-color') 1px solid
+    border-bottom: map-deep-get($material, 'calendar', 'line-color') 1px solid
+    color: map-deep-get($material, 'calendar', 'text-color')
+
+    &.v-outside
+      background-color: map-deep-get($material, 'calendar', 'outside-background-color')
