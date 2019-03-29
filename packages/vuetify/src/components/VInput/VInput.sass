@@ -1,24 +1,11 @@
-@import '../bootstrap'
-@import '../theme'
+@import '../../styles/styles.sass'
+@import './_mixins.sass'
 
 /* Theme */
-v-input($material)
-  &:not(.v-input--is-disabled)
-    input,
-    textarea
-      color: $material.text.primary
-
-  input::placeholder,
-  textarea::placeholder
-    color: $material.text.disabled
-
-  &--is-disabled
-    .v-label,
-    input,
-    textarea
-      color: $material.text.disabled
-
-theme(v-input, "v-input")
+.v-input.theme--light
+  +input-theme($material-light)
+.v-input.theme--dark
+  +input-theme($material-dark)
 
 .v-input
   align-items: flex-start
@@ -109,4 +96,4 @@ theme(v-input, "v-input")
 
   &--has-state
     &.error--text .v-label
-      animation: shake .6s $transition.swing
+      animation: shake .6s map-get($transition, 'swing')
