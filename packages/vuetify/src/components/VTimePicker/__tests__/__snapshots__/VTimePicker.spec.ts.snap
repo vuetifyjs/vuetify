@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VTimePicker.js should accept a date object for a value 1`] = `
+exports[`VTimePicker.ts should accept a date object for a value 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--light">
   <div class="v-picker__title primary">
@@ -126,7 +126,7 @@ exports[`VTimePicker.js should accept a date object for a value 1`] = `
 
 `;
 
-exports[`VTimePicker.js should accept a date object for a value. with useSeconds 1`] = `
+exports[`VTimePicker.ts should accept a date object for a value. with useSeconds 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--light">
   <div class="v-picker__title primary">
@@ -258,7 +258,7 @@ exports[`VTimePicker.js should accept a date object for a value. with useSeconds
 
 `;
 
-exports[`VTimePicker.js should accept a value 1`] = `
+exports[`VTimePicker.ts should accept a value 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--light">
   <div class="v-picker__title primary">
@@ -384,7 +384,7 @@ exports[`VTimePicker.js should accept a value 1`] = `
 
 `;
 
-exports[`VTimePicker.js should accept a value. with useSeconds 1`] = `
+exports[`VTimePicker.ts should accept a value. with useSeconds 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--light">
   <div class="v-picker__title primary">
@@ -516,7 +516,7 @@ exports[`VTimePicker.js should accept a value. with useSeconds 1`] = `
 
 `;
 
-exports[`VTimePicker.js should change am/pm when updated from model 1`] = `
+exports[`VTimePicker.ts should change am/pm when updated from model 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--light">
   <div class="v-picker__title primary">
@@ -533,10 +533,10 @@ exports[`VTimePicker.js should change am/pm when updated from model 1`] = `
         </div>
       </div>
       <div class="v-time-picker-title__ampm">
-        <div class="v-picker__title__btn v-picker__title__btn--active">
+        <div class="v-picker__title__btn">
           am
         </div>
-        <div class="v-picker__title__btn">
+        <div class="v-picker__title__btn v-picker__title__btn--active">
           pm
         </div>
       </div>
@@ -642,7 +642,7 @@ exports[`VTimePicker.js should change am/pm when updated from model 1`] = `
 
 `;
 
-exports[`VTimePicker.js should change am/pm when updated from model. with useSeconds 1`] = `
+exports[`VTimePicker.ts should change am/pm when updated from model. with useSeconds 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--light">
   <div class="v-picker__title primary">
@@ -661,14 +661,14 @@ exports[`VTimePicker.js should change am/pm when updated from model. with useSec
           :
         </span>
         <div class="v-picker__title__btn">
-          00
+          12
         </div>
       </div>
       <div class="v-time-picker-title__ampm">
-        <div class="v-picker__title__btn v-picker__title__btn--active">
+        <div class="v-picker__title__btn">
           am
         </div>
-        <div class="v-picker__title__btn">
+        <div class="v-picker__title__btn v-picker__title__btn--active">
           pm
         </div>
       </div>
@@ -774,7 +774,7 @@ exports[`VTimePicker.js should change am/pm when updated from model. with useSec
 
 `;
 
-exports[`VTimePicker.js should render colored time picker 1`] = `
+exports[`VTimePicker.ts should render colored time picker 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--light">
   <div class="v-picker__title orange darken-1">
@@ -900,7 +900,7 @@ exports[`VTimePicker.js should render colored time picker 1`] = `
 
 `;
 
-exports[`VTimePicker.js should render colored time picker, header 1`] = `
+exports[`VTimePicker.ts should render colored time picker, header 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--light">
   <div class="v-picker__title orange darken-1">
@@ -1026,7 +1026,7 @@ exports[`VTimePicker.js should render colored time picker, header 1`] = `
 
 `;
 
-exports[`VTimePicker.js should render colored time picker, header. with useSeconds 1`] = `
+exports[`VTimePicker.ts should render colored time picker, header. with useSeconds 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--light">
   <div class="v-picker__title orange darken-1">
@@ -1158,7 +1158,7 @@ exports[`VTimePicker.js should render colored time picker, header. with useSecon
 
 `;
 
-exports[`VTimePicker.js should render colored time picker. with useSeconds 1`] = `
+exports[`VTimePicker.ts should render colored time picker. with useSeconds 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--light">
   <div class="v-picker__title orange darken-1">
@@ -1290,7 +1290,7 @@ exports[`VTimePicker.js should render colored time picker. with useSeconds 1`] =
 
 `;
 
-exports[`VTimePicker.js should render dark time picker 1`] = `
+exports[`VTimePicker.ts should render dark time picker 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--dark">
   <div class="v-picker__title">
@@ -1416,7 +1416,7 @@ exports[`VTimePicker.js should render dark time picker 1`] = `
 
 `;
 
-exports[`VTimePicker.js should render dark time picker. with useSeconds 1`] = `
+exports[`VTimePicker.ts should render dark time picker. with useSeconds 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--dark">
   <div class="v-picker__title">
@@ -1548,7 +1548,7 @@ exports[`VTimePicker.js should render dark time picker. with useSeconds 1`] = `
 
 `;
 
-exports[`VTimePicker.js should render disabled component 1`] = `
+exports[`VTimePicker.ts should render disabled component 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--light">
   <div class="v-picker__title primary">
@@ -1674,7 +1674,7 @@ exports[`VTimePicker.js should render disabled component 1`] = `
 
 `;
 
-exports[`VTimePicker.js should render disabled component. with useSeconds 1`] = `
+exports[`VTimePicker.ts should render disabled component. with useSeconds 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--light">
   <div class="v-picker__title primary">
@@ -1806,7 +1806,7 @@ exports[`VTimePicker.js should render disabled component. with useSeconds 1`] = 
 
 `;
 
-exports[`VTimePicker.js should render landscape component 1`] = `
+exports[`VTimePicker.ts should render landscape component 1`] = `
 
 <div class="v-picker v-card v-picker--time v-picker--landscape theme--light">
   <div class="v-picker__title v-picker__title--landscape primary">
@@ -1932,7 +1932,7 @@ exports[`VTimePicker.js should render landscape component 1`] = `
 
 `;
 
-exports[`VTimePicker.js should render landscape component. with useSeconds 1`] = `
+exports[`VTimePicker.ts should render landscape component. with useSeconds 1`] = `
 
 <div class="v-picker v-card v-picker--time v-picker--landscape theme--light">
   <div class="v-picker__title v-picker__title--landscape primary">
