@@ -24,6 +24,7 @@ export default Selectable.extend({
   directives: { Touch },
 
   props: {
+    inset: Boolean,
     loading: {
       type: [Boolean, String],
       default: false
@@ -38,7 +39,8 @@ export default Selectable.extend({
     classes (): object {
       return {
         'v-input--selection-controls v-input--switch': true,
-        'v-input--switch--flat': this.flat
+        'v-input--switch--flat': this.flat,
+        'v-input--switch--inset': this.inset
       }
     },
     attrs (): object {
