@@ -1,4 +1,4 @@
-@import '../bootstrap'
+@import '../../styles/styles.sass'
 
 .v-speed-dial
   position: relative
@@ -18,7 +18,7 @@
 
   &--top
     &:not(.v-speed-dial--absolute)
-      top: $grid-gutters.lg
+      top: map-get($grid-gutters, 'lg')
 
     &.v-speed-dial--absolute
       top: 50%
@@ -26,17 +26,17 @@
 
   &--bottom
     &:not(.v-speed-dial--absolute)
-      bottom: $grid-gutters.lg
+      bottom: map-get($grid-gutters, 'lg')
 
     &.v-speed-dial--absolute
       bottom: 50%
       transform: translateY(50%)
 
   &--left
-    left: $grid-gutters.lg
+    left: map-get($grid-gutters, 'lg')
 
   &--right
-    right: $grid-gutters.lg
+    right: map-get($grid-gutters, 'lg')
 
   &--direction
     &-left,
