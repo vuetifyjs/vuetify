@@ -19,16 +19,10 @@
       "type": "section",
       "children": [
         {
-          "type": "alert",
-          "lang": "cardMediaWarning",
-          "value": "warning"
-        },
-        {
           "type": "api",
           "value": [
             "v-card",
             "v-card-actions",
-            "v-card-media",
             "v-card-text",
             "v-card-title"
           ]
@@ -41,11 +35,17 @@
         {
           "type": "examples",
           "value": [
+            "intermediate",
+            "infoCard",
             "mediaWithText",
+            "outlined",
             "horizontal",
             "grids",
             "customActions",
-            "twitterCard"
+            "twitterCard",
+            "loading",
+            "weather",
+            "advanced"
           ]
         }
       ]

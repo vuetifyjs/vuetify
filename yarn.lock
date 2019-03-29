@@ -1301,6 +1301,11 @@
   resolved "https://registry.yarnpkg.com/@mdi/font/-/font-3.5.95.tgz#422d1982566b4a0577b457cd0acc2168ee8343c3"
   integrity sha512-WHSJ0TJ70qkn+EPsW9w22pQU+kjEnRZlfN4N7xsFFmKa6VhpdQcwTWqj9PDH3oq6Be2p0IW/VDURJvPWDnBAUw==
 
+"@mdi/js@^3.5.95":
+  version "3.5.95"
+  resolved "https://registry.yarnpkg.com/@mdi/js/-/js-3.5.95.tgz#0aafcb9db89a128bb152ade440839f738561d5ac"
+  integrity sha512-CEUeJAHhI7eDDZbcQUZcYFuCB4sEuxm1B5IxxvVVeZEGbnnDMCqS8V8K3peXfc4OUd2HNIOikKsmjBYnX3iaZg==
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"

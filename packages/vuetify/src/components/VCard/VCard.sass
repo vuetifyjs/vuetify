@@ -1,0 +1,114 @@
+@import '../../styles/styles.sass'
+@import './_mixins.sass'
+
+// Theme
+.v-card.theme--light
+  +card-theme($material-light)
+.v-card.theme--dark
+  +card-theme($material-dark)
+
+// Block
+.v-card
+  +elevation(2)
+  outline: none
+  text-decoration: none
+  transition-property: box-shadow, opacity
+  will-change: box-shadow, opacity
+
+  > *:first-child:not(.v-btn):not(.v-chip),
+  > .v-card__progress + *:not(.v-btn):not(.v-chip),
+    border-top-left-radius: inherit
+    border-top-right-radius: inherit
+
+  > *:last-child:not(.v-btn):not(.v-chip)
+    border-bottom-left-radius: inherit
+    border-bottom-right-radius: inherit
+
+// Element
+.v-card__progress
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  overflow: hidden
+
+  > .v-progress-linear
+    margin: 0
+
+.v-card__title
+  align-items: center
+  display: flex
+  flex-wrap: wrap
+  font-size: map-deep-get($headings, 'h5', 'size')
+  font-weight: map-deep-get($headings, 'h5', 'weight')
+  letter-spacing: map-deep-get($headings, 'h5', 'letter-spacing')
+  line-height: map-deep-get($headings, 'h5', 'line-height')
+  padding: 16px 16px 8px
+
+  + .v-card__text
+    padding-top: 0
+
+.v-card__text
+  font-size: map-deep-get($headings, 'subtitle-2', 'size')
+  line-height: map-deep-get($headings, 'subtitle-2', 'line-height')
+  letter-spacing: map-deep-get($headings, 'subtitle-2', 'letter-spacing')
+  padding: 16px
+  width: 100%
+
+.v-card__actions
+  align-items: center
+  display: flex
+  padding: 8px
+
+  .v-btn.v-size--default
+    padding: 0 8px
+
+    + .v-btn
+      margin-left: 8px
+
+      +rtl()
+        margin-left: 0
+        margin-right: 8px
+
+// Modifier
+.v-card--flat
+  +elevation(0)
+
+.v-card--hover
+  cursor: pointer
+  transition: box-shadow .4s cubic-bezier(.25, .8, .25, 1)
+
+  &:hover
+    +elevation(8)
+
+.v-card--link
+  cursor: pointer
+
+  // https://github.com/vuetifyjs/vuetify/issues/3925
+  .v-chip
+    cursor: pointer
+
+  &:focus:before
+    opacity: 0.08
+
+  &:before
+    background: currentColor
+    bottom: 0
+    content: ''
+    left: 0
+    opacity: 0
+    position: absolute
+    right: 0
+    top: 0
+    transition: .2s opacity map-get($transition, 'fast-in-slow-out')
+
+.v-card--disabled
+  opacity: 0.6
+  pointer-events: none
+  user-select: none
+
+.v-card--outlined
+  box-shadow: none
+
+.v-card--raised
+  +elevation(8)

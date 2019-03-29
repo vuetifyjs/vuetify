@@ -10,18 +10,20 @@ library.add(faBars, faVuejs)
 
 Vue.use(Vuetify, {
   icons: {
-    // set menu to light (default is solid)
-    'menu': {
-      component: FontAwesomeIcon,
-      props: {
-        icon: ['fal', 'bars']
-      }
-    },
-    // reusable custom icon
-    'vuejs': {
-      component: FontAwesomeIcon,
-      props: {
-        icon: ['fab', 'vuejs']
+    values: {
+      // set menu to light (default is solid)
+      menu: {
+        component: FontAwesomeIcon,
+        props: {
+          icon: ['fal', 'bars']
+        }
+      },
+      // reusable custom icon
+      vuejs: {
+        component: FontAwesomeIcon,
+        props: {
+          icon: ['fab', 'vuejs']
+        }
       }
     }
   }

@@ -98,7 +98,7 @@
     </v-expand-transition>
     <v-sheet
       :dark="dark"
-      tile
+      color="transparent"
     >
       <v-card-text>
         <div data-app="true">
