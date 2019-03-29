@@ -29,8 +29,8 @@ describe('VFlex.ts', () => {
       }
     }))
 
-    expect(wrapper.attributes('foo')).toBe(false)
-    expect(wrapper.attributes('bar')).toBe(false)
+    expect(wrapper.attributes('foo')).toBeUndefined()
+    expect(wrapper.attributes('bar')).toBeUndefined()
     expect(wrapper.classes('foo')).toBe(true)
     expect(wrapper.classes('bar')).toBe(false)
   })
