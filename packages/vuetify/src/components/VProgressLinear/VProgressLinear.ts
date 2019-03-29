@@ -1,4 +1,4 @@
-import '../../stylus/components/_progress-linear.styl'
+import './VProgressLinear.sass'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
