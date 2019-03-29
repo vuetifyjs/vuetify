@@ -1,6 +1,7 @@
 <template>
   <v-card class="mb-5">
     <v-toolbar
+      color="grey lighten-3"
       dense
       flat
     >
@@ -9,9 +10,7 @@
         color="warning"
         small
       >
-        <v-avatar>
-          <v-icon>mdi-star</v-icon>
-        </v-avatar>
+        <v-icon left>mdi-star</v-icon>
         <span>New in <strong>{{ newIn }}</strong></span>
       </v-chip>
       <v-spacer />
@@ -41,6 +40,17 @@
         <v-icon>mdi-code-tags</v-icon>
       </v-btn>
     </v-toolbar>
+
+    <doc-codepen ref="codepen" :pen="parsed" />
+
+    <v-sheet :dark="dark">
+      <v-card-text>
+        <div data-app="true">
+          <component :is="component" />
+        </div>
+      </v-card-text>
+    </v-sheet>
+
     <v-expand-transition v-if="parsed">
       <v-card
         v-if="expand"
@@ -62,9 +72,10 @@
             >
               <v-btn
                 slot-scope="{ active, toggle }"
-                :color="active ? 'white' : 'transparent'"
-                :light="active"
-                class="mr-0"
+                active-class="grey darken-2 white--text"
+                :color="!active ? 'transparent' : ''"
+                :input-value="active"
+                class="mr-2"
                 depressed
                 rounded
                 @click="toggle"
@@ -96,17 +107,6 @@
         </v-window>
       </v-card>
     </v-expand-transition>
-    <v-sheet
-      :dark="dark"
-      color="transparent"
-    >
-      <v-card-text>
-        <div data-app="true">
-          <component :is="component" />
-        </div>
-      </v-card-text>
-    </v-sheet>
-    <doc-codepen ref="codepen" :pen="parsed" />
   </v-card>
 </template>
 
