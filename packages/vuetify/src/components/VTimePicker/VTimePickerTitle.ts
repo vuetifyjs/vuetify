@@ -1,4 +1,4 @@
-import '../../stylus/components/_time-picker-title.styl'
+import './VTimePickerTitle.styl'
 
 // Mixins
 import PickerButton from '../../mixins/picker-button'
