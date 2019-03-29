@@ -1,4 +1,4 @@
-@import '../bootstrap'
+@import '../../styles/styles.sass'
 
 .v-parallax
   position: relative
@@ -23,11 +23,11 @@
     display: none
     transform: translate(-50%, 0)
     will-change: transform
-    transition: .3s opacity $transition.swing
+    transition: .3s opacity map-get($transition, 'swing')
     z-index: 1
 
   &__content
-    color: $shades.white
+    color: map-get($shades, 'white')
     height: 100%
     z-index: 2
     position: relative
