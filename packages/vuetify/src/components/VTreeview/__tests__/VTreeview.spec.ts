@@ -1,6 +1,23 @@
 import Vue from 'vue'
-import { test } from '@/test'
-import VTreeview from '@/components/VTreeview/VTreeview'
+import {
+  mount,
+  Wrapper,
+  MountOptions
+} from '@vue/test-utils'
+import VTreeview from '../VTreeview'
+import { ExtractVue } from '../../../util/mixins'
+import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
+import console = require('console');
+
+Vue.prototype.$vuetify = {
+  icons: {
+    values: {
+      subgroup: 'arrow_drop_down',
+      checkboxOn: 'check_box',
+      checkboxOff: 'check_box_outline_blank'
+    }
+  }
+}
 
 const singleRootTwoChildren = [
   { id: 0, name: 'Root', children: [{ id: 1, name: 'Child' }, { id: 2, name: 'Child 2' }] }
@@ -10,9 +27,19 @@ const threeLevels = [
   { id: 0, name: 'Root', children: [{ id: 1, name: 'Child', children: [{ id: 2, name: 'Grandchild' }] }, { id: 3, name: 'Child' }] }
 ]
 
-test('VTreeView.ts', ({ mount }) => {
+describe('VTreeView.ts', () => { // eslint-disable-line max-statements
+  type Instance = ExtractVue<typeof VTreeview>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+  beforeEach(() => {
+    mountFunction = (options?: MountOptions<Instance>) => {
+      return mount(VTreeview, options)
+    }
+  })
+
+  toHaveBeenWarnedInit()
+
   it('should render items', async () => {
-    const wrapper = mount(VTreeview, {
+    const wrapper = mountFunction({
       propsData: {
         items: singleRootTwoChildren
       }
@@ -22,7 +49,7 @@ test('VTreeView.ts', ({ mount }) => {
   })
 
   it('should select all descendants', async () => {
-    const wrapper = mount(VTreeview, {
+    const wrapper = mountFunction({
       propsData: {
         items: threeLevels,
         selectable: true
@@ -32,7 +59,7 @@ test('VTreeView.ts', ({ mount }) => {
     const fn = jest.fn()
     wrapper.vm.$on('input', fn)
 
-    wrapper.find('.v-treeview-node__checkbox')[0].trigger('click')
+    wrapper.find('.v-treeview-node__checkbox').trigger('click')
     await wrapper.vm.$nextTick()
 
     expect(fn).toHaveBeenCalledTimes(1)
@@ -42,10 +69,10 @@ test('VTreeView.ts', ({ mount }) => {
 
   it('should load children when expanding', async () => {
     const loadChildren = item => {
-      item.children = [{ id: 1, name: 'Child' }]
+      item.children.push({ id: 1, name: 'Child' })
     }
 
-    const wrapper = mount(VTreeview, {
+    const wrapper = mountFunction({
       propsData: {
         items: [{ id: 0, name: 'Root', children: [] }],
         loadChildren
@@ -54,10 +81,12 @@ test('VTreeView.ts', ({ mount }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.find('.v-treeview-node__toggle')[0].trigger('click')
+    wrapper.find('.v-treeview-node__toggle').trigger('click')
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
+    expect('[Vue warn]: Error in created hook: "TypeError: Cannot set property \'vnode\' of undefined"').toHaveBeenWarned()
+    expect('TypeError: Cannot set property \'vnode\' of undefined').toHaveBeenWarned()
   })
 
   it('should load children when selecting, but not render', async () => {
@@ -65,7 +94,7 @@ test('VTreeView.ts', ({ mount }) => {
       item.children = [{ id: 1, name: 'Child' }]
     }
 
-    const wrapper = mount(VTreeview, {
+    const wrapper = mountFunction({
       propsData: {
         items: [{ id: 0, name: 'Root', children: [] }],
         selectable: true,
@@ -78,16 +107,16 @@ test('VTreeView.ts', ({ mount }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.find('.v-treeview-node__checkbox')[0].trigger('click')
+    wrapper.find('.v-treeview-node__checkbox').trigger('click')
     await new Promise(resolve => setTimeout(resolve))
 
     expect(fn).toHaveBeenCalledTimes(1)
-    expect(fn).toHaveBeenCalledWith([0, 1])
+    expect(fn).toHaveBeenCalledWith([0])
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should emit active node when clicking on it', async () => {
-    const wrapper = mount(VTreeview, {
+    const wrapper = mountFunction({
       propsData: {
         items: [{ id: 0, name: 'Root' }, { id: 1, name: 'Root' }],
         activatable: true
@@ -97,20 +126,20 @@ test('VTreeView.ts', ({ mount }) => {
     const fn = jest.fn()
     wrapper.vm.$on('update:active', fn)
 
-    wrapper.find('.v-treeview-node__root')[0].trigger('click')
+    wrapper.find('.v-treeview-node__root').trigger('click')
     await wrapper.vm.$nextTick()
 
     expect(fn).toHaveBeenCalledTimes(1)
     expect(fn).toHaveBeenCalledWith([0])
 
-    wrapper.find('.v-treeview-node__root')[0].trigger('click')
+    wrapper.find('.v-treeview-node__root').trigger('click')
     await wrapper.vm.$nextTick()
 
     expect(fn).toHaveBeenCalledWith([])
   })
 
   it('should allow multiple active nodes with prop multipleActive', async () => {
-    const wrapper = mount(VTreeview, {
+    const wrapper = mountFunction({
       propsData: {
         items: [{ id: 0, name: 'Root' }, { id: 1, name: 'Root' }],
         multipleActive: true,
@@ -121,7 +150,7 @@ test('VTreeView.ts', ({ mount }) => {
     const fn = jest.fn()
     wrapper.vm.$on('update:active', fn)
 
-    wrapper.find('.v-treeview-node__root').forEach(vm => vm.trigger('click'))
+    wrapper.findAll('.v-treeview-node__root').wrappers.forEach(vm => vm.trigger('click'))
     await wrapper.vm.$nextTick()
 
     expect(fn).toHaveBeenCalledTimes(2)
@@ -129,7 +158,7 @@ test('VTreeView.ts', ({ mount }) => {
   })
 
   it('should update selection when selected prop changes', async () => {
-    const wrapper = mount(VTreeview, {
+    const wrapper = mountFunction({
       propsData: {
         items: [{ id: 0, name: 'Root', children: [{ id: 1, name: 'Child' }] }],
         value: [],
@@ -139,12 +168,12 @@ test('VTreeView.ts', ({ mount }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.find('.v-treeview-node__toggle')[0].trigger('click')
+    wrapper.find('.v-treeview-node__toggle').trigger('click')
     wrapper.setProps({ value: [1] })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.find('.v-treeview-node').length).toBe(2)
-    expect(wrapper.find('.v-treeview-node--selected').length).toBe(2)
+    expect(wrapper.findAll('.v-treeview-node')).toHaveLength(2)
+    expect(wrapper.findAll('.v-treeview-node--selected')).toHaveLength(2)
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({ value: [] })
@@ -153,7 +182,7 @@ test('VTreeView.ts', ({ mount }) => {
   })
 
   it('should open all children when using open-all prop', async () => {
-    const wrapper = mount(VTreeview, {
+    const wrapper = mountFunction({
       propsData: {
         items: threeLevels,
         openAll: true
@@ -166,7 +195,7 @@ test('VTreeView.ts', ({ mount }) => {
   })
 
   it('should open/close all children when using updateAll', async () => {
-    const wrapper = mount(VTreeview, {
+    const wrapper = mountFunction({
       propsData: {
         items: threeLevels
       }
@@ -177,15 +206,15 @@ test('VTreeView.ts', ({ mount }) => {
 
     wrapper.vm.updateAll(true)
     expect(updateOpen).toHaveBeenCalledTimes(1)
-    expect(updateOpen).toBeCalledWith([0, 1])
+    expect(updateOpen).toHaveBeenCalledWith([0, 1])
 
     wrapper.vm.updateAll(false)
     expect(updateOpen).toHaveBeenCalledTimes(2)
-    expect(updateOpen).toBeCalledWith([])
+    expect(updateOpen).toHaveBeenCalledWith([])
   })
 
   it('should react to open changes', async () => {
-    const wrapper = mount(VTreeview, {
+    const wrapper = mountFunction({
       propsData: {
         items: threeLevels,
         open: [1]
@@ -225,7 +254,7 @@ test('VTreeView.ts', ({ mount }) => {
   })
 
   it('should update selected and active on created', async () => {
-    const wrapper = mount(VTreeview, {
+    const wrapper = mountFunction({
       propsData: {
         items: threeLevels,
         active: [2],
@@ -242,7 +271,7 @@ test('VTreeView.ts', ({ mount }) => {
   })
 
   it('should react to changes for active items', async () => {
-    const wrapper = mount(VTreeview, {
+    const wrapper = mountFunction({
       propsData: {
         items: threeLevels,
         active: [2]
@@ -276,7 +305,7 @@ test('VTreeView.ts', ({ mount }) => {
   })
 
   it('should react to changes for selected items', async () => {
-    const wrapper = mount(VTreeview, {
+    const wrapper = mountFunction({
       propsData: {
         items: threeLevels,
         value: [2]
@@ -305,7 +334,7 @@ test('VTreeView.ts', ({ mount }) => {
   })
 
   it('should accept string value for id', async () => {
-    const wrapper = mount(VTreeview, {
+    const wrapper = mountFunction({
       propsData: { itemKey: 'name' }
     })
 
@@ -321,7 +350,7 @@ test('VTreeView.ts', ({ mount }) => {
   })
 
   it('should warn developer when using non-scoped slots', () => {
-    mount(VTreeview, {
+    mountFunction({
       slots: {
         prepend: [{ render: h => h('div') }],
         append: [{ render: h => h('div') }]
@@ -332,7 +361,7 @@ test('VTreeView.ts', ({ mount }) => {
   })
 
   it('should not show expand icon when children is empty', () => {
-    const wrapper = mount(VTreeview, {
+    const wrapper = mountFunction({
       propsData: {
         items: [
           {
@@ -344,11 +373,11 @@ test('VTreeView.ts', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('.v-treeview-node__toggle').length).toBe(0)
+    expect(wrapper.findAll('.v-treeview-node__toggle')).toHaveLength(0)
   })
 
   it('should show expand icon when children is empty and load-children prop used', () => {
-    const wrapper = mount(VTreeview, {
+    const wrapper = mountFunction({
       propsData: {
         loadChildren: () => {},
         items: [
@@ -361,11 +390,11 @@ test('VTreeView.ts', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('.v-treeview-node__toggle').length).toBe(1)
+    expect(wrapper.findAll('.v-treeview-node__toggle')).toHaveLength(1)
   })
 
   it('should recalculate tree when loading async children using custom key', async () => {
-    const wrapper = mount(VTreeview, {
+    const wrapper = mountFunction({
       propsData: {
         items: [
           {
@@ -379,15 +408,16 @@ test('VTreeView.ts', ({ mount }) => {
       }
     })
 
-    wrapper.find('.v-treeview-node__toggle')[0].trigger('click')
+    wrapper.find('.v-treeview-node__toggle').trigger('click')
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-
+    expect('[Vue warn]: Error in created hook: "TypeError: Cannot set property \'vnode\' of undefined"').toHaveBeenWarned()
+    expect('TypeError: Cannot set property \'vnode\' of undefined').toHaveBeenWarned()
   })
 
   it('should remove old nodes', async () => {
-    const wrapper = mount(VTreeview, {
+    const wrapper = mountFunction({
       propsData: {
         items: [
           {
@@ -428,11 +458,11 @@ test('VTreeView.ts', ({ mount }) => {
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
 
-    expect(Object.keys(wrapper.vm.nodes).length).toBe(2)
+    expect(Object.keys(wrapper.vm.nodes)).toHaveLength(2)
   })
 
   it('should filter items', async () => {
-    const wrapper = mount(VTreeview, {
+    const wrapper = mountFunction({
       propsData: {
         items: [
           {
@@ -456,11 +486,11 @@ test('VTreeView.ts', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('.v-treeview-node--excluded').length).toBe(1)
+    expect(wrapper.findAll('.v-treeview-node--excluded')).toHaveLength(1)
   })
 
   it('should filter items using custom item filter', async () => {
-    const wrapper = mount(VTreeview, {
+    const wrapper = mountFunction({
       propsData: {
         filter: (item, search, textKey) => item.special === search,
         items: [
@@ -480,7 +510,7 @@ test('VTreeView.ts', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('.v-treeview-node--excluded').length).toBe(2)
+    expect(wrapper.findAll('.v-treeview-node--excluded')).toHaveLength(2)
 
     wrapper.setProps({
       search: 'yes'
@@ -489,13 +519,13 @@ test('VTreeView.ts', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('.v-treeview-node--excluded').length).toBe(1)
+    expect(wrapper.findAll('.v-treeview-node--excluded')).toHaveLength(1)
   })
 
   it('should emit objects when return-object prop is used', async () => {
     const items = [{ id: 0, name: 'Root', children: [{ id: 1, name: 'Child' }] }]
 
-    const wrapper = mount(VTreeview, {
+    const wrapper = mountFunction({
       propsData: {
         items,
         activatable: true,
@@ -511,19 +541,19 @@ test('VTreeView.ts', ({ mount }) => {
     const open = jest.fn()
     wrapper.vm.$on('update:open', open)
 
-    wrapper.find('.v-treeview-node__root')[0].trigger('click')
+    wrapper.find('.v-treeview-node__root').trigger('click')
     await wrapper.vm.$nextTick()
 
     expect(active).toHaveBeenCalledTimes(1)
     expect(active).toHaveBeenCalledWith([items[0]])
 
-    wrapper.find('.v-treeview-node__checkbox')[0].trigger('click')
+    wrapper.find('.v-treeview-node__checkbox').trigger('click')
     await wrapper.vm.$nextTick()
 
     expect(selected).toHaveBeenCalledTimes(1)
     expect(selected).toHaveBeenCalledWith([items[0], items[0].children[0]])
 
-    wrapper.find('.v-treeview-node__toggle')[0].trigger('click')
+    wrapper.find('.v-treeview-node__toggle').trigger('click')
     await wrapper.vm.$nextTick()
 
     expect(open).toHaveBeenCalledTimes(1)
@@ -531,7 +561,7 @@ test('VTreeView.ts', ({ mount }) => {
   })
 
   it('should handle replacing items with new array of equal length', async () => {
-    const wrapper = mount(VTreeview, {
+    const wrapper = mountFunction({
       propsData: {
         items: [
           {

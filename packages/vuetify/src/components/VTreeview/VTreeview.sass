@@ -1,48 +1,22 @@
-@import '../bootstrap'
-@import '../theme'
+@import '../../styles/styles.sass'
+@import './_variables.sass'
+@import './_mixins.sass'
 
 /* Theme */
-v-treeview($material)
-  color: $material.text.primary
-
-  &--hoverable .v-treeview-node__root:hover,
-  .v-treeview-node--active
-    background: $material.dividers
-
-v-treeview-rtl()
-  > .v-treeview-node
-    margin-right: 0
-
-    &--leaf
-      margin-right: 24px
-      margin-left: 0
-
-  &-node
-    margin-right: 26px
-    margin-left: 0
-
-    &--leaf
-      margin-right: 50px
-      margin-left: 0
-
-    &__toggle
-      transform: rotate(90deg)
-
-      &--open
-        transform: none
-
-theme(v-treeview, "v-treeview")
-rtl(v-treeview-rtl, "v-treeview")
+.v-treeview.theme--light
+  +treeview-theme($material-light)
+.v-treeview.theme--dark
+  +treeview-theme($material-dark)
 
 .v-treeview
   > .v-treeview-node
     margin-left: 0
 
     &--leaf
-      margin-left: 24px
+      margin-left: $treeview-direct-leaf-node-x-margin
 
   &-node
-    margin-left: 26px
+    margin-left: $treeview-node-x-margin
 
     &--excluded
       display: none
@@ -54,7 +28,7 @@ rtl(v-treeview-rtl, "v-treeview")
         user-select: none
 
     &--leaf
-      margin-left: 50px
+      margin-left: $treeview-leaf-node-x-margin
 
     &__root
       display: flex
@@ -73,13 +47,13 @@ rtl(v-treeview-rtl, "v-treeview")
         flex-shrink: 1 !important
 
     &__label
-      font-size: 1.2rem
-      margin-left: 6px
+      font-size: $treeview-label-font-size
+      margin-left: $treeview-label-margin-left
       flex-grow: 1
       flex-shrink: 0
 
       .v-icon
-        padding-right: 8px
+        padding-right: $treeview-label-icon-padding-right
 
     &__checkbox
       user-select: none
@@ -96,3 +70,25 @@ rtl(v-treeview-rtl, "v-treeview")
 
     &__children
       transition: all $treeview-transition
+
+  +rtl()
+    > .v-treeview-node
+      margin-right: 0
+
+      &--leaf
+        margin-right: $treeview-direct-leaf-node-x-margin
+        margin-left: 0
+
+    &-node
+      margin-right: $treeview-node-x-margin
+      margin-left: 0
+
+      &--leaf
+        margin-right: $treeview-leaf-node-x-margin
+        margin-left: 0
+
+      &__toggle
+        transform: rotate(90deg)
+
+        &--open
+          transform: none
