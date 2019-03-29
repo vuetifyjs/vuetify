@@ -1,12 +1,14 @@
-@import '../bootstrap'
-@import '../theme'
+@import '../../styles/styles.sass'
 
-v-date-picker-table($material)
+@mixin date-picker-table-theme($material)
   th,
   .v-date-picker-table--date__week
-    color: $material.text.disabled
+    color: map-deep-get($material, 'text', 'disabled')
 
-theme(v-date-picker-table, "v-date-picker-table")
+.v-date-picker-table.theme--light
+  +date-picker-table-theme($material-light)
+.v-date-picker-table.theme--dark
+  +date-picker-table-theme($material-dark)
 
 .v-date-picker-table
   position: relative
@@ -36,7 +38,7 @@ theme(v-date-picker-table, "v-date-picker-table")
     font-size: 12px
 
     &.v-btn--active
-      color: $shades.white
+      color: map-get($shades, 'white')
 
 .v-date-picker-table--month
   td
