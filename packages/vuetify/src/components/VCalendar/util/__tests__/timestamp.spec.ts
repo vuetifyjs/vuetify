@@ -446,11 +446,11 @@ describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-state
   // TODO Create a test that doesn't fail when
   // the day changes or ignore the code it
   // covers
-  it.skip('should create native locale formatter', () => {
-    expect(createNativeLocaleFormatter('en-US', () => {})(parseTimestamp('2019-02-08'))).toBe('2/8/2019')
-    expect(createNativeLocaleFormatter('en-UK', () => {})(parseTimestamp('2019-02-08'))).toBe('2/8/2019')
-    expect(createNativeLocaleFormatter('ru-RU', () => {})(parseTimestamp('2019-02-08'))).toBe('2019-2-8')
-  })
+  // it.skip('should create native locale formatter', () => {
+  //   expect(createNativeLocaleFormatter('en-US', () => {})(parseTimestamp('2019-02-08'))).toBe('2/8/2019')
+  //   expect(createNativeLocaleFormatter('en-UK', () => {})(parseTimestamp('2019-02-08'))).toBe('2/8/2019')
+  //   expect(createNativeLocaleFormatter('ru-RU', () => {})(parseTimestamp('2019-02-08'))).toBe('2019-2-8')
+  // })
 
   it('should return emptyFormatter if Intl isn\'t defined', () => {
     const intl = global.Intl
