@@ -17,8 +17,7 @@ const cssLoaders = [
   // TODO: remove style-loader: https://github.com/webpack-contrib/mini-css-extract-plugin/issues/34
   extractCSS ? MiniCssExtractPlugin.loader : 'style-loader',
   { loader: 'css-loader', options: { sourceMap: !isProd } },
-  { loader: 'postcss-loader', options: { sourceMap: !isProd } },
-  { loader: 'stylus-loader', options: { sourceMap: !isProd } }
+  { loader: 'postcss-loader', options: { sourceMap: !isProd } }
 ]
 
 const sassLoaders = [
@@ -44,10 +43,6 @@ exports.config = {
   },
   module: {
     rules: [
-      {
-        test: /\.styl(us)?$/,
-        use: cssLoaders
-      },
       {
         test: /\.s(a|c)ss$/,
         use: sassLoaders
