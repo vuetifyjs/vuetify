@@ -42,6 +42,14 @@
           <v-switch v-model="model53" disabled loading color="warning" />
         </v-layout>
       </core-section>
+
+      <core-title>Inset</core-title>
+      <core-section>
+        <v-layout justify-space-around>
+          <v-switch v-model="model61" color="red" inset />
+          <v-switch v-model="model62" color="blue" inset />
+        </v-layout>
+      </core-section>
     </v-layout>
   </v-container>
 </template>
@@ -60,7 +68,9 @@
       model4: false,
       model51: true,
       model52: false,
-      model53: true
+      model53: true,
+      model61: true,
+      model62: false
     })
   }
 </script>
