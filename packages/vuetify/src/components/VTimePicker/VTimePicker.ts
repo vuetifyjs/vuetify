@@ -4,6 +4,7 @@ import VTimePickerClock from './VTimePickerClock'
 
 // Mixins
 import Picker from '../../mixins/picker'
+import PickerButton from '../../mixins/picker-button'
 
 // Utils
 import { createRange } from '../../util/helpers'
@@ -29,7 +30,8 @@ export { SelectingTimes }
 type Period = 'am' | 'pm'
 
 export default mixins(
-  Picker
+  Picker,
+  PickerButton
 /* @vue/component */
 ).extend({
   name: 'v-time-picker',
@@ -51,7 +53,8 @@ export default mixins(
     readonly: Boolean,
     scrollable: Boolean,
     useSeconds: Boolean,
-    value: null as any as PropValidator<any>
+    value: null as any as PropValidator<any>,
+    ampmInTitle: Boolean
   },
 
   data () {
@@ -154,6 +157,7 @@ export default mixins(
 
   mounted () {
     this.setInputData(this.value)
+    this.$on('update:period', this.setPeriod)
   },
 
   methods: {
@@ -289,16 +293,27 @@ export default mixins(
         ref: 'clock'
       })
     },
+    genClockAmPm () {
+      return this.$createElement('div', this.setTextColor(this.color || 'primary', {
+        staticClass: 'v-time-picker-clock__ampm'
+      }), [
+        this.genPickerButton('period', 'am', 'AM', this.disabled || this.readonly),
+        this.genPickerButton('period', 'pm', 'PM', this.disabled || this.readonly)
+      ])
+    },
     genPickerBody () {
       return this.$createElement('div', {
         staticClass: 'v-time-picker-clock__container',
         key: this.selecting
-      }, [this.genClock()])
+      }, [
+        !this.ampmInTitle && this.isAmPm && this.genClockAmPm(),
+        this.genClock()
+      ])
     },
     genPickerTitle () {
       return this.$createElement(VTimePickerTitle, {
         props: {
-          ampm: this.isAmPm,
+          ampm: this.ampmInTitle && this.isAmPm,
           disabled: this.disabled,
           hour: this.inputHour,
           minute: this.inputMinute,

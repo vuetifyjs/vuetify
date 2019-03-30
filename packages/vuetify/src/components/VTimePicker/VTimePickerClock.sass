@@ -15,12 +15,26 @@
   user-select: none
   width: 100%
   padding-top: 100%
+  flex: 1 0 auto
 
   &__container
     display: flex
-    align-items: center
+    flex-direction: column
     justify-content: center
     padding: $time-picker-clock-padding
+
+  &__ampm
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-items: flex-end
+    position: absolute
+    width: 100%
+    height: 100%
+    top: 0
+    left: 0
+    margin: 0
+    padding: 10px
 
   &__hand
     height: $time-picker-clock-hand-height
@@ -111,3 +125,11 @@
 
   &--disabled
     pointer-events: none
+
+.v-picker--landscape
+  .v-time-picker-clock
+    &__container
+      flex-direction: row
+
+    &__ampm
+      flex-direction: column

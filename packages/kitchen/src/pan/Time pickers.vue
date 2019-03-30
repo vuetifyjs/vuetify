@@ -42,6 +42,39 @@
       </core-section>
 
       <core-title>
+        With AM/PM switch in title
+      </core-title>
+      <core-section>
+        <v-layout
+          row
+          justify-space-around
+          align-center
+          wrap
+        >
+          <v-time-picker
+            value="9:41"
+            ampm-in-title
+          />
+          <v-time-picker
+            value="9:41"
+            ampm-in-title
+            landscape
+          />
+          <v-time-picker
+            value="9:41"
+            ampm-in-title
+            disabled
+          />
+          <v-time-picker
+            value="9:41"
+            ampm-in-title
+            landscape
+            disabled
+          />
+        </v-layout>
+      </core-section>
+
+      <core-title>
         Colors
       </core-title>
       <core-section>

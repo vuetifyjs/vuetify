@@ -3,6 +3,8 @@ import './VTimePickerClock.sass'
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
+
+// Types
 import mixins, { ExtractVue } from '../../util/mixins'
 import Vue, { VNode } from 'vue'
 
@@ -34,6 +36,7 @@ export default mixins<options &
 
   props: {
     allowedValues: Function,
+    ampm: Boolean,
     disabled: Boolean,
     double: Boolean,
     format: {
