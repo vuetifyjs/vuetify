@@ -1,12 +1,24 @@
 import Vue from 'vue'
-import { test } from '@/test'
-import VTimePicker, { selectingTimes } from '@/components/VTimePicker/VTimePicker'
+import VTimePicker, { SelectingTimes } from '../VTimePicker'
+import {
+  mount,
+  MountOptions,
+  Wrapper
+} from '@vue/test-utils'
 
-test('VTimePicker.js', ({ mount }) => {
-  [true, false].forEach(useSecondsValue => {
+describe('VTimePicker.ts', () => {
+  type Instance = InstanceType<typeof VTimePicker>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+  beforeEach(() => {
+    mountFunction = (options?: MountOptions<Instance>) => {
+      return mount(VTimePicker, options)
+    }
+  });
+
+  [true, false].forEach(useSecondsValue => { // eslint-disable-line max-statements
     const useSecondsDesc = (useSecondsValue ? '. with useSeconds' : '')
     it('should accept a value' + useSecondsDesc, async () => {
-      const wrapper = mount(VTimePicker, {
+      const wrapper = mountFunction({
         propsData: {
           value: '09:12:34',
           useSeconds: useSecondsValue
@@ -17,7 +29,7 @@ test('VTimePicker.js', ({ mount }) => {
       expect(wrapper.vm.selectingHour).toBe(true)
       expect(wrapper.vm.selectingMinute).toBe(false)
       expect(wrapper.vm.selectingSecond).toBe(false)
-      expect(wrapper.vm.selecting).toBe(selectingTimes.hour)
+      expect(wrapper.vm.selecting).toBe(SelectingTimes.Hour)
       expect(wrapper.vm.inputHour).toBe(9)
       expect(wrapper.vm.inputMinute).toBe(12)
       expect(wrapper.vm.inputSecond).toBe(34)
@@ -25,7 +37,7 @@ test('VTimePicker.js', ({ mount }) => {
     })
 
     it('should render landscape component' + useSecondsDesc, async () => {
-      var wrapper = mount(VTimePicker, {
+      var wrapper = mountFunction({
         propsData: {
           value: '09:12:34',
           landscape: true,
@@ -38,7 +50,7 @@ test('VTimePicker.js', ({ mount }) => {
     })
 
     it('should render disabled component' + useSecondsDesc, async () => {
-      var wrapper = mount(VTimePicker, {
+      var wrapper = mountFunction({
         propsData: {
           disabled: true,
           value: '09:12:34',
@@ -51,19 +63,19 @@ test('VTimePicker.js', ({ mount }) => {
     })
 
     it('should render component without a title' + useSecondsDesc, () => {
-      const wrapper = mount(VTimePicker, {
+      const wrapper = mountFunction({
         propsData: {
           value: '09:12:34',
           noTitle: true,
           useSeconds: useSecondsValue
         }
       })
-      expect(wrapper.find('.v-picker__title')).toHaveLength(0)
+      expect(wrapper.findAll('.v-picker__title').wrappers).toHaveLength(0)
     })
 
     it('should accept a date object for a value' + useSecondsDesc, async () => {
       const now = new Date('2017-01-01 12:00 AM')
-      const wrapper = mount(VTimePicker, {
+      const wrapper = mountFunction({
         propsData: {
           value: now,
           useSeconds: useSecondsValue
@@ -79,7 +91,7 @@ test('VTimePicker.js', ({ mount }) => {
     })
 
     it('should change am/pm when updated from model' + useSecondsDesc, async () => {
-      const wrapper = mount(VTimePicker, {
+      const wrapper = mountFunction({
         propsData: {
           value: '9:00am',
           useSeconds: useSecondsValue
@@ -98,7 +110,7 @@ test('VTimePicker.js', ({ mount }) => {
     })
 
     it('should set picker to pm when given Date after noon' + useSecondsDesc, () => {
-      const wrapper = mount(VTimePicker, {
+      const wrapper = mountFunction({
         propsData: {
           value: new Date('2017-01-01 12:00 PM'),
           useSeconds: useSecondsValue
@@ -112,7 +124,7 @@ test('VTimePicker.js', ({ mount }) => {
     })
 
     it('should set picker to pm when given string with PM in it' + useSecondsDesc, () => {
-      const wrapper = mount(VTimePicker, {
+      const wrapper = mountFunction({
         propsData: {
           value: '1:00 PM',
           useSeconds: useSecondsValue
@@ -126,7 +138,7 @@ test('VTimePicker.js', ({ mount }) => {
     })
 
     it('should set picker to pm when given string with pm in it' + useSecondsDesc, () => {
-      const wrapper = mount(VTimePicker, {
+      const wrapper = mountFunction({
         propsData: {
           value: '1:00 pm',
           useSeconds: useSecondsValue
@@ -140,7 +152,7 @@ test('VTimePicker.js', ({ mount }) => {
     })
 
     it('should set picker to am when given Date before noon' + useSecondsDesc, () => {
-      const wrapper = mount(VTimePicker, {
+      const wrapper = mountFunction({
         propsData: {
           value: new Date('2017-01-01 1:00 AM'),
           useSeconds: useSecondsValue
@@ -154,7 +166,7 @@ test('VTimePicker.js', ({ mount }) => {
     })
 
     it('should render colored time picker' + useSecondsDesc, async () => {
-      const wrapper = mount(VTimePicker, {
+      const wrapper = mountFunction({
         propsData: {
           value: '09:00:00',
           color: 'orange darken-1',
@@ -167,7 +179,7 @@ test('VTimePicker.js', ({ mount }) => {
     })
 
     it('should render colored time picker, header' + useSecondsDesc, async () => {
-      const wrapper = mount(VTimePicker, {
+      const wrapper = mountFunction({
         propsData: {
           value: '09:00:00',
           color: 'primary',
@@ -181,7 +193,7 @@ test('VTimePicker.js', ({ mount }) => {
     })
 
     it('should render dark time picker' + useSecondsDesc, async () => {
-      const wrapper = mount(VTimePicker, {
+      const wrapper = mountFunction({
         propsData: {
           dark: true,
           useSeconds: useSecondsValue
@@ -192,8 +204,8 @@ test('VTimePicker.js', ({ mount }) => {
       expect(wrapper.html()).toMatchSnapshot()
     })
 
-    it('should set input hour when setting hour in 12hr mode' + useSecondsDesc, () => {
-      const wrapper = mount(VTimePicker, {
+    it('should set input hour when setting hour in 12hr mode' + useSecondsDesc, () => { // eslint-disable-line max-statements
+      const wrapper = mountFunction({
         propsData: {
           value: '01:23pm',
           format: 'ampm',
@@ -201,47 +213,45 @@ test('VTimePicker.js', ({ mount }) => {
         }
       })
 
-      const clock = wrapper.vm.$refs.clock
-
-      clock.$emit('input', 7)
+      wrapper.vm.onInput(7)
       expect(wrapper.vm.inputHour).toBe(19)
 
       wrapper.setProps({ format: '24hr' })
-      clock.$emit('input', 8)
+      wrapper.vm.onInput(8)
       expect(wrapper.vm.inputHour).toBe(8)
 
-      wrapper.vm.selecting = selectingTimes.minute
-      clock.$emit('input', 33)
+      wrapper.vm.selecting = SelectingTimes.Minute
+      wrapper.vm.onInput(33)
       expect(wrapper.vm.inputHour).toBe(8)
       expect(wrapper.vm.inputMinute).toBe(33)
       expect(wrapper.vm.inputSecond).toBe(0)
 
       // with seconds
-      wrapper.vm.selecting = selectingTimes.hour
+      wrapper.vm.selecting = SelectingTimes.Hour
       wrapper.setProps({ format: 'ampm' })
       wrapper.setProps({ value: '01:23:45pm' })
-      clock.$emit('input', 7)
+      wrapper.vm.onInput(7)
       expect(wrapper.vm.inputHour).toBe(19)
 
       wrapper.setProps({ format: '24hr' })
-      clock.$emit('input', 8)
+      wrapper.vm.onInput(8)
       expect(wrapper.vm.inputHour).toBe(8)
 
-      wrapper.vm.selecting = selectingTimes.minute
-      clock.$emit('input', 33)
+      wrapper.vm.selecting = SelectingTimes.Minute
+      wrapper.vm.onInput(33)
       expect(wrapper.vm.inputHour).toBe(8)
       expect(wrapper.vm.inputMinute).toBe(33)
       expect(wrapper.vm.inputSecond).toBe(45)
 
-      wrapper.vm.selecting = selectingTimes.second
-      clock.$emit('input', 44)
+      wrapper.vm.selecting = SelectingTimes.Second
+      wrapper.vm.onInput(44)
       expect(wrapper.vm.inputHour).toBe(8)
       expect(wrapper.vm.inputMinute).toBe(33)
       expect(wrapper.vm.inputSecond).toBe(44)
     })
 
-    it('should set properly input time' + useSecondsDesc, () => {
-      const wrapper = mount(VTimePicker, {
+    it('should set properly input time' + useSecondsDesc, () => { // eslint-disable-line max-statements
+      const wrapper = mountFunction({
         propsData: {
           format: '24hr',
           useSeconds: useSecondsValue
@@ -254,14 +264,14 @@ test('VTimePicker.js', ({ mount }) => {
       expect(wrapper.vm.inputSecond).toBe(0)
 
       wrapper.vm.setInputData(null)
-      expect(wrapper.vm.inputHour).toBe(null)
-      expect(wrapper.vm.inputMinute).toBe(null)
-      expect(wrapper.vm.inputSecond).toBe(null)
+      expect(wrapper.vm.inputHour).toBeNull()
+      expect(wrapper.vm.inputMinute).toBeNull()
+      expect(wrapper.vm.inputSecond).toBeNull()
 
       wrapper.vm.setInputData('')
-      expect(wrapper.vm.inputHour).toBe(null)
-      expect(wrapper.vm.inputMinute).toBe(null)
-      expect(wrapper.vm.inputSecond).toBe(null)
+      expect(wrapper.vm.inputHour).toBeNull()
+      expect(wrapper.vm.inputMinute).toBeNull()
+      expect(wrapper.vm.inputSecond).toBeNull()
 
       wrapper.vm.setInputData('12:34am')
       expect(wrapper.vm.inputHour).toBe(0)
@@ -284,7 +294,7 @@ test('VTimePicker.js', ({ mount }) => {
     })
 
     it('should update hour when changing period' + useSecondsDesc, async () => {
-      const wrapper = mount(VTimePicker, {
+      const wrapper = mountFunction({
         propsData: {
           value: '15:34',
           useSeconds: useSecondsValue
@@ -309,7 +319,7 @@ test('VTimePicker.js', ({ mount }) => {
     })
 
     it('should change selecting when hour/minute/second is selected' + useSecondsDesc, () => {
-      const wrapper = mount(VTimePicker, {
+      const wrapper = mountFunction({
         propsData: {
           value: '01:23pm',
           format: 'ampm',
@@ -317,22 +327,20 @@ test('VTimePicker.js', ({ mount }) => {
         }
       })
 
-      const clock = wrapper.vm.$refs.clock
-
-      clock.$emit('change')
-      expect(wrapper.vm.selecting).toBe(selectingTimes.minute)
+      wrapper.vm.onChange(-1)
+      expect(wrapper.vm.selecting).toBe(SelectingTimes.Minute)
       expect(wrapper.vm.selectingHour).toBe(false)
       expect(wrapper.vm.selectingMinute).toBe(true)
       expect(wrapper.vm.selectingSecond).toBe(false)
-      clock.$emit('change')
-      expect(wrapper.vm.selecting).toBe(useSecondsValue ? selectingTimes.second : selectingTimes.minute)
+      wrapper.vm.onChange(-1)
+      expect(wrapper.vm.selecting).toBe(useSecondsValue ? SelectingTimes.Second : SelectingTimes.Minute)
       expect(wrapper.vm.selectingHour).toBe(false)
       expect(wrapper.vm.selectingMinute).toBe(!useSecondsValue)
       expect(wrapper.vm.selectingSecond).toBe(useSecondsValue)
     })
 
     it('should emit click:XXX event on change' + useSecondsDesc, () => {
-      const wrapper = mount(VTimePicker, {
+      const wrapper = mountFunction({
         propsData: {
           value: '01:23:45pm',
           format: 'ampm',
@@ -340,7 +348,6 @@ test('VTimePicker.js', ({ mount }) => {
         }
       })
 
-      const clock = wrapper.vm.$refs.clock
       const clickHour = jest.fn()
       const clickMinute = jest.fn()
       const clickSecond = jest.fn()
@@ -349,29 +356,29 @@ test('VTimePicker.js', ({ mount }) => {
       wrapper.vm.$on('click:minute', clickMinute)
       wrapper.vm.$on('click:second', clickSecond)
 
-      clock.$emit('change', 1)
+      wrapper.vm.onChange(1)
       expect(clickHour).toHaveBeenCalledTimes(1)
-      expect(clickHour).toBeCalledWith(1)
+      expect(clickHour).toHaveBeenCalledWith(1)
       expect(clickMinute).toHaveBeenCalledTimes(0)
       expect(clickSecond).toHaveBeenCalledTimes(0)
 
-      clock.$emit('change', 59)
+      wrapper.vm.onChange(59)
       expect(clickHour).toHaveBeenCalledTimes(1)
       expect(clickMinute).toHaveBeenCalledTimes(1)
-      expect(clickMinute).toBeCalledWith(59)
+      expect(clickMinute).toHaveBeenCalledWith(59)
       expect(clickSecond).toHaveBeenCalledTimes(0)
 
       if (useSecondsValue) {
-        clock.$emit('change', 45)
+        wrapper.vm.onChange(45)
         expect(clickHour).toHaveBeenCalledTimes(1)
         expect(clickMinute).toHaveBeenCalledTimes(1)
         expect(clickSecond).toHaveBeenCalledTimes(1)
-        expect(clickSecond).toBeCalledWith(45)
+        expect(clickSecond).toHaveBeenCalledWith(45)
       }
     })
 
     it('should change selecting when clicked in title' + useSecondsDesc, () => {
-      const wrapper = mount(VTimePicker, {
+      const wrapper = mountFunction({
         propsData: {
           value: '01:23pm',
           format: 'ampm',
@@ -381,24 +388,24 @@ test('VTimePicker.js', ({ mount }) => {
 
       const title = wrapper.vm.$refs.title
 
-      expect(wrapper.vm.selecting).toBe(selectingTimes.hour)
+      expect(wrapper.vm.selecting).toBe(SelectingTimes.Hour)
       expect(wrapper.vm.selectingHour).toBe(true)
       expect(wrapper.vm.selectingMinute).toBe(false)
       expect(wrapper.vm.selectingSecond).toBe(false)
-      title.$emit('update:selecting', selectingTimes.minute)
-      expect(wrapper.vm.selecting).toBe(selectingTimes.minute)
+      title.$emit('update:selecting', SelectingTimes.Minute)
+      expect(wrapper.vm.selecting).toBe(SelectingTimes.Minute)
       expect(wrapper.vm.selectingHour).toBe(false)
       expect(wrapper.vm.selectingMinute).toBe(true)
       expect(wrapper.vm.selectingSecond).toBe(false)
-      title.$emit('update:selecting', selectingTimes.second)
-      expect(wrapper.vm.selecting).toBe(selectingTimes.second)
+      title.$emit('update:selecting', SelectingTimes.Second)
+      expect(wrapper.vm.selecting).toBe(SelectingTimes.Second)
       expect(wrapper.vm.selectingHour).toBe(false)
       expect(wrapper.vm.selectingMinute).toBe(false)
       expect(wrapper.vm.selectingSecond).toBe(true)
     })
 
     it('should change period when clicked in title' + useSecondsDesc, () => {
-      const wrapper = mount(VTimePicker, {
+      const wrapper = mountFunction({
         propsData: {
           value: '01:23pm',
           format: 'ampm',
@@ -433,11 +440,11 @@ test('VTimePicker.js', ({ mount }) => {
       })
 
       const wrapper = mount(component)
-      expect(wrapper.find('.v-picker__actions .scoped-slot')).toHaveLength(1)
+      expect(wrapper.findAll('.v-picker__actions .scoped-slot').wrappers).toHaveLength(1)
     })
 
-    it('should calculate allowed seconds/minute/hour callback' + useSecondsDesc, async () => {
-      const wrapper = mount(VTimePicker, {
+    it('should calculate allowed seconds/minute/hour callback' + useSecondsDesc, async () => { // eslint-disable-line max-statements
+      const wrapper = mountFunction({
         propsData: {
           value: '10:00:00',
           allowedSeconds: value => value === 0 || (value >= 30 && value <= 40),
@@ -538,8 +545,114 @@ test('VTimePicker.js', ({ mount }) => {
       expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
     })
 
+    it('should calculate allowed seconds/minute/hour callback from array' + useSecondsDesc, async () => { // eslint-disable-line max-statements
+      const allowedHours = [ 9, 10, 12 ]
+      const allowedMinutes = [ 30, 35 ]
+      const allowedSeconds = [ 0, 30 ]
+
+      const wrapper = mountFunction({
+        propsData: {
+          value: '10:00:00',
+          allowedSeconds,
+          allowedMinutes,
+          allowedHours,
+          min: '9:31',
+          max: '12:30',
+          useSeconds: useSecondsValue
+        }
+      })
+
+      expect(wrapper.vm.isAllowedHourCb(8)).toBe(false)
+      expect(wrapper.vm.isAllowedHourCb(9)).toBe(true)
+      expect(wrapper.vm.isAllowedHourCb(10)).toBe(true)
+      expect(wrapper.vm.isAllowedHourCb(11)).toBe(false)
+      expect(wrapper.vm.isAllowedHourCb(12)).toBe(true)
+      expect(wrapper.vm.isAllowedHourCb(13)).toBe(false)
+
+      wrapper.vm.inputHour = 8
+      expect(wrapper.vm.isAllowedMinuteCb(30)).toBe(false)
+      expect(wrapper.vm.isAllowedMinuteCb(31)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+      wrapper.vm.inputMinute = 30
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+      wrapper.vm.inputMinute = 31
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+
+      wrapper.vm.inputHour = 9
+      wrapper.vm.inputMinute = 0
+      expect(wrapper.vm.isAllowedMinuteCb(30)).toBe(false)
+      expect(wrapper.vm.isAllowedMinuteCb(31)).toBe(false)
+      expect(wrapper.vm.isAllowedMinuteCb(35)).toBe(true)
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+      wrapper.vm.inputMinute = 30
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+      wrapper.vm.inputMinute = 31
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+      wrapper.vm.inputMinute = 35
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(true)
+
+      wrapper.vm.inputHour = 10
+      wrapper.vm.inputMinute = 0
+      expect(wrapper.vm.isAllowedMinuteCb(30)).toBe(true)
+      expect(wrapper.vm.isAllowedMinuteCb(31)).toBe(false)
+      expect(wrapper.vm.isAllowedMinuteCb(35)).toBe(true)
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(true)
+      wrapper.vm.inputMinute = 30
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(true)
+      wrapper.vm.inputMinute = 31
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+      wrapper.vm.inputMinute = 35
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(true)
+
+      wrapper.vm.inputHour = 11
+      wrapper.vm.inputMinute = 0
+      expect(wrapper.vm.isAllowedMinuteCb(30)).toBe(false)
+      expect(wrapper.vm.isAllowedMinuteCb(31)).toBe(false)
+      expect(wrapper.vm.isAllowedMinuteCb(35)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+      wrapper.vm.inputMinute = 30
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+      wrapper.vm.inputMinute = 31
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+      wrapper.vm.inputMinute = 35
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+
+      wrapper.vm.inputHour = 12
+      wrapper.vm.inputMinute = 0
+      expect(wrapper.vm.isAllowedMinuteCb(30)).toBe(true)
+      expect(wrapper.vm.isAllowedMinuteCb(31)).toBe(false)
+      expect(wrapper.vm.isAllowedMinuteCb(35)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(true)
+      wrapper.vm.inputMinute = 30
+      expect(wrapper.vm.isAllowedSecondCb(0)).toBe(true)
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+      wrapper.vm.inputMinute = 31
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+      wrapper.vm.inputMinute = 35
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+    })
+
     it('should update inputSecond when called setInputData' + useSecondsDesc, () => {
-      const wrapper = mount(VTimePicker, {
+      const wrapper = mountFunction({
         propsData: {
           useSeconds: useSecondsValue
         }
@@ -551,11 +664,11 @@ test('VTimePicker.js', ({ mount }) => {
       wrapper.vm.setInputData(useSecondsValue ? '01:23:45' : '01:23')
       expect(wrapper.vm.inputSecond).toBe(useSecondsValue ? 45 : 0)
       wrapper.vm.setInputData(null)
-      expect(wrapper.vm.inputSecond).toBe(null)
+      expect(wrapper.vm.inputSecond).toBeNull()
     })
 
     it('should update when emit input' + useSecondsDesc, () => {
-      const wrapper = mount(VTimePicker, {
+      const wrapper = mountFunction({
         propsData: {
           value: '01:23:45pm',
           format: 'ampm',
@@ -565,27 +678,27 @@ test('VTimePicker.js', ({ mount }) => {
       const currentValue = jest.fn()
       wrapper.vm.$on('input', currentValue)
       wrapper.vm.emitValue()
-      expect(currentValue).toBeCalledWith(useSecondsValue ? '13:23:45' : '13:23')
+      expect(currentValue).toHaveBeenCalledWith(useSecondsValue ? '13:23:45' : '13:23')
     })
 
     it('should update selecting when set selectingSecond/selectingMinute/selectingHour' + useSecondsDesc, () => {
-      const wrapper = mount(VTimePicker, {
+      const wrapper = mountFunction({
         propsData: {
           useSeconds: useSecondsValue
         }
       })
       wrapper.vm.selectingHour = true
-      expect(wrapper.vm.selecting).toBe(selectingTimes.hour)
+      expect(wrapper.vm.selecting).toBe(SelectingTimes.Hour)
       expect(wrapper.vm.selectingMinute).toBe(false)
       expect(wrapper.vm.selectingSecond).toBe(false)
 
       wrapper.vm.selectingMinute = true
-      expect(wrapper.vm.selecting).toBe(selectingTimes.minute)
+      expect(wrapper.vm.selecting).toBe(SelectingTimes.Minute)
       expect(wrapper.vm.selectingHour).toBe(false)
       expect(wrapper.vm.selectingSecond).toBe(false)
 
       wrapper.vm.selectingSecond = true
-      expect(wrapper.vm.selecting).toBe(selectingTimes.second)
+      expect(wrapper.vm.selecting).toBe(SelectingTimes.Second)
       expect(wrapper.vm.selectingHour).toBe(false)
       expect(wrapper.vm.selectingMinute).toBe(false)
     })

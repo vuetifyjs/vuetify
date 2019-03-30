@@ -42,6 +42,39 @@
       </core-section>
 
       <core-title>
+        With AM/PM switch in title
+      </core-title>
+      <core-section>
+        <v-layout
+          row
+          justify-space-around
+          align-center
+          wrap
+        >
+          <v-time-picker
+            value="9:41"
+            ampm-in-title
+          />
+          <v-time-picker
+            value="9:41"
+            ampm-in-title
+            landscape
+          />
+          <v-time-picker
+            value="9:41"
+            ampm-in-title
+            disabled
+          />
+          <v-time-picker
+            value="9:41"
+            ampm-in-title
+            landscape
+            disabled
+          />
+        </v-layout>
+      </core-section>
+
+      <core-title>
         Colors
       </core-title>
       <core-section>
@@ -137,84 +170,6 @@
             format="24hr"
           />
         </v-layout>
-      </core-section>
-
-      <core-title>
-        In dialog
-      </core-title>
-      <core-section center>
-        <v-dialog
-          ref="dialog"
-          v-model="modal"
-          :return-value.sync="time1"
-          persistent
-          full-width
-          width="290px"
-        >
-          <template #activator>
-            <v-text-field
-              v-model="time1"
-              label="Picker in dialog"
-              prepend-icon="mdi-clock-outline"
-              readonly
-            />
-          </template>
-          <v-time-picker
-            v-if="modal"
-            v-model="time1"
-            value="9:41"
-            full-width
-          >
-            <v-spacer />
-            <v-btn
-              flat
-              color="primary"
-              @click="modal = false"
-            >
-              Cancel
-            </v-btn>
-            <v-btn
-              flat
-              color="primary"
-              @click="$refs.dialog.save(time1)"
-            >
-              OK
-            </v-btn>
-          </v-time-picker>
-        </v-dialog>
-      </core-section>
-
-      <core-title>
-        In menu
-      </core-title>
-      <core-section center>
-        <v-menu
-          ref="menu"
-          v-model="menu"
-          :close-on-content-click="false"
-          :nudge-right="40"
-          :return-value.sync="time2"
-          transition="scale-transition"
-          offset-y
-          full-width
-          max-width="290px"
-          min-width="290px"
-        >
-          <template #activator>
-            <v-text-field
-              v-model="time2"
-              label="Picker in menu"
-              prepend-icon="mdi-clock-outline"
-              readonly
-            />
-          </template>
-          <v-time-picker
-            v-if="menu"
-            v-model="time2"
-            full-width
-            @change="$refs.menu.save(time2)"
-          />
-        </v-menu>
       </core-section>
 
       <core-title>
@@ -390,8 +345,10 @@
         </v-layout>
       </core-section>
 
+      <sub-header>With seconds</sub-header>
+
       <core-title>
-        With seconds
+        Simple
       </core-title>
       <core-section center>
         <v-time-picker
@@ -409,6 +366,86 @@
           use-seconds
           :allowed-seconds="v => v <= 40 && v >= 15"
         />
+      </core-section>
+
+      <sub-header>As popup</sub-header>
+
+      <core-title>
+        In dialog
+      </core-title>
+      <core-section center>
+        <v-dialog
+          ref="dialog"
+          v-model="modal"
+          :return-value.sync="time1"
+          persistent
+          full-width
+          width="290px"
+        >
+          <template #activator>
+            <v-text-field
+              v-model="time1"
+              label="Picker in dialog"
+              prepend-icon="mdi-clock-outline"
+              readonly
+            />
+          </template>
+          <v-time-picker
+            v-if="modal"
+            v-model="time1"
+            value="9:41"
+            full-width
+          >
+            <v-spacer />
+            <v-btn
+              flat
+              color="primary"
+              @click="modal = false"
+            >
+              Cancel
+            </v-btn>
+            <v-btn
+              flat
+              color="primary"
+              @click="$refs.dialog.save(time1)"
+            >
+              OK
+            </v-btn>
+          </v-time-picker>
+        </v-dialog>
+      </core-section>
+
+      <core-title>
+        In menu
+      </core-title>
+      <core-section center>
+        <v-menu
+          ref="menu"
+          v-model="menu"
+          :close-on-content-click="false"
+          :nudge-right="40"
+          :return-value.sync="time2"
+          transition="scale-transition"
+          offset-y
+          full-width
+          max-width="290px"
+          min-width="290px"
+        >
+          <template #activator>
+            <v-text-field
+              v-model="time2"
+              label="Picker in menu"
+              prepend-icon="mdi-clock-outline"
+              readonly
+            />
+          </template>
+          <v-time-picker
+            v-if="menu"
+            v-model="time2"
+            full-width
+            @change="$refs.menu.save(time2)"
+          />
+        </v-menu>
       </core-section>
     </v-layout>
   </v-container>
