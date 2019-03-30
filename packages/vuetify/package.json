@@ -15,7 +15,6 @@
   "unpkg": "dist/vuetify.js",
   "types": "types/index.d.ts",
   "sideEffects": [
-    "*.styl",
     "*.sass",
     "*.scss",
     "*.css"
