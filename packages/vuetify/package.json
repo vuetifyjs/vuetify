@@ -60,7 +60,7 @@
     "eslint-loader": "^2.1.2",
     "eslint-plugin-jest": "^22.4.1",
     "file-loader": "^3.0.1",
-    "fork-ts-checker-webpack-plugin": "^1.0.0",
+    "fork-ts-checker-webpack-plugin": "^0.5.2",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "happypack": "^5.0.1",
     "identity-obj-proxy": "^3.0.0",
