@@ -1,5 +1,5 @@
 import '../../styles/components/_selection-controls.sass'
-import '../../stylus/components/_switch.styl'
+import './VSwitch.sass'
 
 // Mixins
 import Selectable from '../../mixins/selectable'
@@ -14,30 +14,43 @@ import VProgressCircular from '../VProgressCircular/VProgressCircular'
 // Helpers
 import { keyCodes } from '../../util/helpers'
 
+// Types
+import { VNode, VNodeData } from 'vue'
+
 /* @vue/component */
-export default {
+export default Selectable.extend({
   name: 'v-switch',
 
   directives: { Touch },
 
-  mixins: [
-    Selectable
-  ],
-
   props: {
+    inset: Boolean,
     loading: {
       type: [Boolean, String],
+      default: false
+    },
+    flat: {
+      type: Boolean,
       default: false
     }
   },
 
   computed: {
-    classes () {
+    classes (): object {
       return {
-        'v-input--selection-controls v-input--switch': true
+        'v-input--selection-controls v-input--switch': true,
+        'v-input--switch--flat': this.flat,
+        'v-input--switch--inset': this.inset
       }
     },
-    switchData () {
+    attrs (): object {
+      return {
+        'aria-checked': String(this.isActive),
+        'aria-disabled': String(this.disabled),
+        'role': 'switch'
+      }
+    },
+    switchData (): VNodeData {
       return this.setTextColor(this.loading ? undefined : this.computedColor, {
         class: this.themeClasses
       })
@@ -45,17 +58,20 @@ export default {
   },
 
   methods: {
-    genDefaultSlot () {
+    genDefaultSlot (): (VNode | null)[] {
       return [
         this.genSwitch(),
         this.genLabel()
       ]
     },
-    genSwitch () {
+    genSwitch (): VNode {
       return this.$createElement('div', {
         staticClass: 'v-input--selection-controls__input'
       }, [
-        this.genInput('checkbox', this.$attrs),
+        this.genInput('checkbox', {
+          ...this.$attrs,
+          ...this.attrs
+        }),
         this.genRipple(this.setTextColor(this.computedColor, {
           directives: [{
             name: 'touch',
@@ -75,7 +91,7 @@ export default {
         }, [this.genProgress()])
       ])
     },
-    genProgress () {
+    genProgress (): VNode {
       return this.$createElement(VFabTransition, {}, [
         this.loading === false
           ? null
@@ -97,11 +113,11 @@ export default {
     onSwipeRight () {
       if (!this.isActive) this.onChange()
     },
-    onKeydown (e) {
+    onKeydown (e: KeyboardEvent) {
       if (
         (e.keyCode === keyCodes.left && this.isActive) ||
         (e.keyCode === keyCodes.right && !this.isActive)
       ) this.onChange()
     }
   }
-}
+})

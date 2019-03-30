@@ -46,8 +46,8 @@ $material-light: (
   ),
   'selection-controls': (
     'thumb': (
-      'inactive': map-get($grey, 'lighten-5'),
-      'disabled': map-get($grey, 'lighten-1')
+      'inactive': map-get($shades, 'white'),
+      'disabled': map-get($grey, 'lighten-5')
     ),
     'track': (
       'inactive': rgba(map-get($shades, 'black'), 0.38),
