@@ -1,3 +1,4 @@
+// Types
 import Vue from 'vue'
 
 export interface VuetifyServiceContract {
