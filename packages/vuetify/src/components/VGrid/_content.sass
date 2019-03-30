@@ -1,8 +1,11 @@
-@import '../bootstrap'
-@import '../browsers'
+@import '../../styles/styles.sass'
+
+@mixin firefox()
+  @-moz-document url-prefix()
+    @content
 
 .v-content
-  bootable()
+  +bootable()
 
   display: flex
   flex: 1 0 auto
