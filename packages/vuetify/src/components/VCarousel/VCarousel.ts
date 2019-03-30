@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_carousel.styl'
+import './VCarousel.sass'
 
 // Extensions
 import VWindow from '../VWindow/VWindow'

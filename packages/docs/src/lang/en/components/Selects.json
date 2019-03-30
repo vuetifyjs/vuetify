@@ -61,7 +61,7 @@
     "openOnClear": "When using the **clearable** prop, once cleared, the select menu will either open or stay open, depending on the current state",
     "overflow": "Creates an overflow button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "returnObject": "Changes the selection behavior to return the object directly rather than the value specified with **item-value**",
-    "searchInput": "Bound when using the autocomplete prop. Use the **.sync** modifier to catch user input from the autocomplete search input",
+    "searchInput": "Use the **.sync** modifier to catch user input from the search input",
     "segmented": "Creates a segmented button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "smallChips": "Changes display of selections to chips with the **small** property",
     "tags": "Tagging functionality, allows the user to create new values not available from the **items** prop",

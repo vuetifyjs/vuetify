@@ -1,14 +1,14 @@
 import './VDataFooter.sass'
 
-// Helpers
-import { DataOptions, DataPaginaton } from '../VData/VData'
-import { PropValidator } from 'vue/types/options'
-import Vue, { VNode, VNodeChildrenArrayContents } from 'vue'
+// Components
 import VSelect from '../VSelect/VSelect'
 import VIcon from '../VIcon'
 import VBtn from '../VBtn'
 
-// Styles
+// Types
+import Vue, { VNode, VNodeChildrenArrayContents } from 'vue'
+import { DataOptions, DataPaginaton } from '../VData/VData'
+import { PropValidator } from 'vue/types/options'
 
 export default Vue.extend({
   name: 'v-data-footer',
@@ -44,11 +44,11 @@ export default Vue.extend({
     },
     itemsPerPageText: {
       type: String,
-      default: '$vuetify.dataIterator.itemsPerPageText'
+      default: '$vuetify.dataFooter.itemsPerPageText'
     },
     itemsPerPageAllText: {
       type: String,
-      default: '$vuetify.dataIterator.itemsPerPageAll'
+      default: '$vuetify.dataFooter.itemsPerPageAll'
     },
     showFirstLastPage: Boolean,
     showCurrentPage: Boolean,
@@ -167,43 +167,48 @@ export default Vue.extend({
       }, [this.$createElement(VIcon, icon)])
     },
     genIcons () {
-      const icons: VNodeChildrenArrayContents = []
+      const before: VNodeChildrenArrayContents = []
+      const after: VNodeChildrenArrayContents = []
 
-      icons.push(this.genIcon(
+      before.push(this.genIcon(
         this.onPreviousPage,
         this.options.page === 1,
-        'Previous page',
+        this.$vuetify.lang.t('$vuetify.dataFooter.prevPage'),
         this.$vuetify.rtl ? this.nextIcon : this.prevIcon
       ))
 
-      if (this.showCurrentPage) {
-        icons.push(this.$createElement('span', [this.options.page.toString()]))
-      }
-
-      icons.push(this.genIcon(
+      after.push(this.genIcon(
         this.onNextPage,
         this.disableNextPageIcon,
-        'Next page',
+        this.$vuetify.lang.t('$vuetify.dataFooter.nextPage'),
         this.$vuetify.rtl ? this.prevIcon : this.nextIcon
       ))
 
       if (this.showFirstLastPage) {
-        icons.unshift(this.genIcon(
+        before.unshift(this.genIcon(
           this.onFirstPage,
           this.options.page === 1,
-          'First page',
+          this.$vuetify.lang.t('$vuetify.dataFooter.firstPage'),
           this.$vuetify.rtl ? this.lastIcon : this.firstIcon
         ))
 
-        icons.push(this.genIcon(
+        after.push(this.genIcon(
           this.onLastPage,
           this.options.page === this.pagination.pageCount || this.options.itemsPerPage === -1,
-          'Last page',
+          this.$vuetify.lang.t('$vuetify.dataFooter.lastPage'),
           this.$vuetify.rtl ? this.firstIcon : this.lastIcon
         ))
       }
 
-      return icons
+      return [
+        this.$createElement('div', {
+          staticClass: 'v-data-footer__icons-before'
+        }, before),
+        this.showCurrentPage && this.$createElement('span', [this.options.page.toString()]),
+        this.$createElement('div', {
+          staticClass: 'v-data-footer__icons-after'
+        }, after)
+      ]
     }
   },
 

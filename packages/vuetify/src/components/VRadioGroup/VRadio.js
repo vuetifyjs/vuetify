@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_radios.styl'
+import './VRadio.sass'
 
 // Components
 import VIcon from '../VIcon'

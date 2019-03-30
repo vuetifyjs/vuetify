@@ -2,7 +2,11 @@
   background-color: map-get($material, 'cards')
   color: map-deep-get($material, 'text', 'primary')
 
-  &.v-data-table--fixed
+  colgroup
+    .divider
+      border-right: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+
+  &.v-data-table--fixed-header
     thead th
       background: white
       border-bottom: 0px !important
@@ -24,11 +28,6 @@
       &.active
         background: map-deep-get($material, 'table', 'active')
 
-  // This should be own mixin for footer component
-    // .v-table__footer
-    //   .v-row
-    //     border-top: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
-
 @mixin data-table-theme($material)
   tbody
     tr
@@ -43,6 +42,9 @@
 
         &.expanded__content
           box-shadow: inset 0px 4px 8px -5px rgba(50, 50, 50, 0.75), inset 0px -4px 8px -5px rgba(50, 50, 50, 0.75)
+
+  .v-data-footer
+    border-top: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
 
 @mixin data-table-header-theme($material)
   .v-data-table-header

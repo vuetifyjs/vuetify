@@ -1,0 +1,18 @@
+@mixin overflow-btn-theme($material)
+  .v-input__control,
+  .v-input__slot
+    &::before
+      background-color: map-get($material, 'dividers') !important // override v-text-field bottom border
+
+  &--segmented,
+  &--editable:hover,
+  &--editable.v-input--is-focused,
+  &--editable.v-select--is-menu-active
+    .v-input__append-inner
+      border-left: 1px solid map-get($material, 'dividers')
+
+  &:hover,
+  &.v-input--is-focused,
+  &.v-select--is-menu-active
+    .v-input__slot
+      background: map-get($material, 'cards')
