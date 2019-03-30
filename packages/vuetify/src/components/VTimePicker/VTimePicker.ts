@@ -28,6 +28,7 @@ const selectingNames = { 1: 'hour', 2: 'minute', 3: 'second' }
 export { SelectingTimes }
 
 type Period = 'am' | 'pm'
+type AllowFunction = (val: number) => boolean
 
 export default mixins(
   Picker,
@@ -37,9 +38,15 @@ export default mixins(
   name: 'v-time-picker',
 
   props: {
-    allowedHours: Function,
-    allowedMinutes: Function,
-    allowedSeconds: Function,
+    allowedHours: {
+      type: Function
+    } as PropValidator<AllowFunction>,
+    allowedMinutes: {
+      type: Function
+    } as PropValidator<AllowFunction>,
+    allowedSeconds: {
+      type: Function
+    } as PropValidator<AllowFunction>,
     disabled: Boolean,
     format: {
       type: String,
@@ -108,7 +115,7 @@ export default mixins(
       }
     },
     isAllowedMinuteCb () {
-      const isHourAllowed = !this.allowedHours || this.allowedHours(this.inputHour)
+      const isHourAllowed = !this.allowedHours || !this.inputHour || this.allowedHours(this.inputHour)
       if (!this.min && !this.max) {
         return isHourAllowed ? this.allowedMinutes : () => false
       }
@@ -127,8 +134,8 @@ export default mixins(
       }
     },
     isAllowedSecondCb () {
-      const isHourAllowed = !this.allowedHours || this.allowedHours(this.inputHour)
-      const isMinuteAllowed = !this.allowedMinutes || this.allowedMinutes(this.inputMinute)
+      const isHourAllowed = !this.allowedHours || !this.inputHour || this.allowedHours(this.inputHour)
+      const isMinuteAllowed = !this.allowedMinutes || !this.inputMinute || this.allowedMinutes(this.inputMinute)
       if (!this.min && !this.max) {
         return isHourAllowed && isMinuteAllowed ? this.allowedSeconds : () => false
       }
