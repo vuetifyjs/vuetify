@@ -39,14 +39,14 @@ export default mixins(
 
   props: {
     allowedHours: {
-      type: Function
-    } as PropValidator<AllowFunction>,
+      type: [ Function, Array ]
+    } as PropValidator<AllowFunction | number[]>,
     allowedMinutes: {
-      type: Function
-    } as PropValidator<AllowFunction>,
+      type: [ Function, Array ]
+    } as PropValidator<AllowFunction | number[]>,
     allowedSeconds: {
-      type: Function
-    } as PropValidator<AllowFunction>,
+      type: [ Function, Array ]
+    } as PropValidator<AllowFunction | number[]>,
     disabled: Boolean,
     format: {
       type: String,
@@ -102,8 +102,16 @@ export default mixins(
         this.selecting = SelectingTimes.Second
       }
     },
-    isAllowedHourCb () {
-      if (!this.min && !this.max) return this.allowedHours
+    isAllowedHourCb (): AllowFunction {
+      let cb: AllowFunction
+
+      if (this.allowedHours instanceof Array) {
+        cb = (val: number) => (this.allowedHours as number[]).includes(val)
+      } else {
+        cb = this.allowedHours
+      }
+
+      if (!this.min && !this.max) return cb
 
       const minHour = this.min ? Number(this.min.split(':')[0]) : 0
       const maxHour = this.max ? Number(this.max.split(':')[0]) : 23
@@ -111,13 +119,21 @@ export default mixins(
       return (val: number) => {
         return val >= minHour * 1 &&
           val <= maxHour * 1 &&
-          (!this.allowedHours || this.allowedHours(val))
+          (!cb || cb(val))
       }
     },
-    isAllowedMinuteCb () {
-      const isHourAllowed = !this.allowedHours || !this.inputHour || this.allowedHours(this.inputHour)
+    isAllowedMinuteCb (): AllowFunction {
+      let cb: AllowFunction
+
+      const isHourAllowed = !this.isAllowedHourCb || !this.inputHour || this.isAllowedHourCb(this.inputHour)
+      if (this.allowedMinutes instanceof Array) {
+        cb = (val: number) => (this.allowedMinutes as number[]).includes(val)
+      } else {
+        cb = this.allowedMinutes
+      }
+
       if (!this.min && !this.max) {
-        return isHourAllowed ? this.allowedMinutes : () => false
+        return isHourAllowed ? cb : () => false
       }
 
       const [minHour, minMinute] = this.min ? this.min.split(':').map(Number) : [0, 0]
@@ -130,14 +146,23 @@ export default mixins(
         return time >= minTime &&
           time <= maxTime &&
           isHourAllowed &&
-          (!this.allowedMinutes || this.allowedMinutes(val))
+          (!cb || cb(val))
       }
     },
-    isAllowedSecondCb () {
-      const isHourAllowed = !this.allowedHours || !this.inputHour || this.allowedHours(this.inputHour)
-      const isMinuteAllowed = !this.allowedMinutes || !this.inputMinute || this.allowedMinutes(this.inputMinute)
+    isAllowedSecondCb (): AllowFunction {
+      let cb: AllowFunction
+
+      const isHourAllowed = !this.isAllowedHourCb || !this.inputHour || this.isAllowedHourCb(this.inputHour)
+      const isMinuteAllowed = isHourAllowed && (!this.isAllowedMinuteCb || !this.inputMinute || this.isAllowedMinuteCb(this.inputMinute))
+
+      if (this.allowedSeconds instanceof Array) {
+        cb = (val: number) => (this.allowedSeconds as number[]).includes(val)
+      } else {
+        cb = this.allowedSeconds
+      }
+
       if (!this.min && !this.max) {
-        return isHourAllowed && isMinuteAllowed ? this.allowedSeconds : () => false
+        return isMinuteAllowed ? cb : () => false
       }
 
       const [minHour, minMinute, minSecond] = this.min ? this.min.split(':').map(Number) : [0, 0, 0]
@@ -149,8 +174,8 @@ export default mixins(
         const time = 3600 * this.inputHour! + 60 * this.inputMinute! + val
         return time >= minTime &&
           time <= maxTime &&
-          isHourAllowed && isMinuteAllowed &&
-          (!this.allowedSeconds || this.allowedSeconds(val))
+          isMinuteAllowed &&
+          (!cb || cb(val))
       }
     },
     isAmPm () {

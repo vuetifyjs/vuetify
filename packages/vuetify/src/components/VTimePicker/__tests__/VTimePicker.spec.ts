@@ -545,6 +545,112 @@ describe('VTimePicker.ts', () => {
       expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
     })
 
+    it('should calculate allowed seconds/minute/hour callback from array' + useSecondsDesc, async () => { // eslint-disable-line max-statements
+      const allowedHours = [ 9, 10, 12 ]
+      const allowedMinutes = [ 30, 35 ]
+      const allowedSeconds = [ 0, 30 ]
+
+      const wrapper = mountFunction({
+        propsData: {
+          value: '10:00:00',
+          allowedSeconds,
+          allowedMinutes,
+          allowedHours,
+          min: '9:31',
+          max: '12:30',
+          useSeconds: useSecondsValue
+        }
+      })
+
+      expect(wrapper.vm.isAllowedHourCb(8)).toBe(false)
+      expect(wrapper.vm.isAllowedHourCb(9)).toBe(true)
+      expect(wrapper.vm.isAllowedHourCb(10)).toBe(true)
+      expect(wrapper.vm.isAllowedHourCb(11)).toBe(false)
+      expect(wrapper.vm.isAllowedHourCb(12)).toBe(true)
+      expect(wrapper.vm.isAllowedHourCb(13)).toBe(false)
+
+      wrapper.vm.inputHour = 8
+      expect(wrapper.vm.isAllowedMinuteCb(30)).toBe(false)
+      expect(wrapper.vm.isAllowedMinuteCb(31)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+      wrapper.vm.inputMinute = 30
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+      wrapper.vm.inputMinute = 31
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+
+      wrapper.vm.inputHour = 9
+      wrapper.vm.inputMinute = 0
+      expect(wrapper.vm.isAllowedMinuteCb(30)).toBe(false)
+      expect(wrapper.vm.isAllowedMinuteCb(31)).toBe(false)
+      expect(wrapper.vm.isAllowedMinuteCb(35)).toBe(true)
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+      wrapper.vm.inputMinute = 30
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+      wrapper.vm.inputMinute = 31
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+      wrapper.vm.inputMinute = 35
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(true)
+
+      wrapper.vm.inputHour = 10
+      wrapper.vm.inputMinute = 0
+      expect(wrapper.vm.isAllowedMinuteCb(30)).toBe(true)
+      expect(wrapper.vm.isAllowedMinuteCb(31)).toBe(false)
+      expect(wrapper.vm.isAllowedMinuteCb(35)).toBe(true)
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(true)
+      wrapper.vm.inputMinute = 30
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(true)
+      wrapper.vm.inputMinute = 31
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+      wrapper.vm.inputMinute = 35
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(true)
+
+      wrapper.vm.inputHour = 11
+      wrapper.vm.inputMinute = 0
+      expect(wrapper.vm.isAllowedMinuteCb(30)).toBe(false)
+      expect(wrapper.vm.isAllowedMinuteCb(31)).toBe(false)
+      expect(wrapper.vm.isAllowedMinuteCb(35)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+      wrapper.vm.inputMinute = 30
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+      wrapper.vm.inputMinute = 31
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+      wrapper.vm.inputMinute = 35
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+
+      wrapper.vm.inputHour = 12
+      wrapper.vm.inputMinute = 0
+      expect(wrapper.vm.isAllowedMinuteCb(30)).toBe(true)
+      expect(wrapper.vm.isAllowedMinuteCb(31)).toBe(false)
+      expect(wrapper.vm.isAllowedMinuteCb(35)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(true)
+      wrapper.vm.inputMinute = 30
+      expect(wrapper.vm.isAllowedSecondCb(0)).toBe(true)
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+      wrapper.vm.inputMinute = 31
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+      wrapper.vm.inputMinute = 35
+      expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+    })
+
     it('should update inputSecond when called setInputData' + useSecondsDesc, () => {
       const wrapper = mountFunction({
         propsData: {
