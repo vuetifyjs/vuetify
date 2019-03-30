@@ -1,21 +1,21 @@
-@import '../bootstrap'
+@import '../../styles/styles.sass'
 
 .container
   flex: 1 1 100%
   margin: auto
-  padding: $grid-gutters.xl
+  padding: map-get($grid-gutters, 'xl')
   width: 100%
 
   &.grow-shrink-0
-    flex-grow: 0;
-    flex-shrink: 0;
+    flex-grow: 0
+    flex-shrink: 0
 
-  for $size, $width in $container-max-widths
+  @each $size, $width in $container-max-widths
     @media only screen and (min-width: $width)
-      max-width: ($width * 0.9375) // Credit to bootstrap
+      max-width: $width * 0.9375 // Credit to bootstrap
 
-  @media $display-breakpoints.sm-and-down
-    padding: $grid-gutters.lg
+  @media #{map-get($display-breakpoints, 'sm-and-down')}
+    padding: map-get($grid-gutters, 'lg')
 
   &.fluid
     max-width: 100%
@@ -29,28 +29,28 @@
       flex: 1 1 auto
 
       &.grow-shrink-0
-        flex-grow: 0;
-        flex-shrink: 0;
+        flex-grow: 0
+        flex-shrink: 0
 
   &.grid-list
-    for $size, $gutter in $grid-gutters
-      &-{$size}
+    @each $size, $gutter in $grid-gutters
+      &-#{$size}
         .layout
           .flex
-            padding: ($gutter / 2)
+            padding: $gutter / 2
 
         .layout:only-child
-          margin: -($gutter / 2)
+          margin: -$gutter / 2
 
         .layout:not(:only-child)
-          margin: auto -($gutter / 2)
+          margin: auto -$gutter / 2
 
         *:not(:only-child)
           .layout:first-child
-            margin-top: -($gutter / 2)
+            margin-top: -$gutter / 2
 
           .layout:last-child
-            margin-bottom: -($gutter / 2)
+            margin-bottom: -$gutter / 2
 
 .layout
   display: flex
@@ -78,24 +78,30 @@
     flex-wrap: wrap
 
   &.grow-shrink-0
-    flex-grow: 0;
-    flex-shrink: 0;
+    flex-grow: 0
+    flex-shrink: 0
 
-for $size, $width in $grid-breakpoints
-  @media all and (min-width: $width)
-    for n in (1..$grid-columns)
-      .flex.{$size}{n}
-        flex-basis: (n / $grid-columns * 100)%
+@each $size, $width in $grid-breakpoints
+  @media all and (min-width: #{$width})
+    $n: $grid-columns
+    @while $n > 0
+      .flex.#{$size}#{$n}
+        flex-basis: $n / $grid-columns * 100%
         flex-grow: 0
-        max-width: (n / $grid-columns * 100)%
+        max-width: $n / $grid-columns * 100%
 
-      .flex.order-{$size}{n}
-        order: n
+      .flex.order-#{$size}#{$n}
+        order: $n
 
-    for n in (0..$grid-columns)
-      .flex.offset-{$size}{n}
+      $n: $n - 1
+
+    $m: $grid-columns
+    @while $m >= 0
+      .flex.offset-#{$size}#{$m}
         // Offsets can only ever work in row layouts
-        margin-left: (n / $grid-columns * 100)%
+        margin-left: $m / $grid-columns * 100%
+
+      $m: $m - 1
 
 .flex,
 .child-flex > *
@@ -103,8 +109,8 @@ for $size, $width in $grid-breakpoints
   max-width: 100%
 
   &.grow-shrink-0
-    flex-grow: 0;
-    flex-shrink: 0;
+    flex-grow: 0
+    flex-shrink: 0
 
 .align
   &-start
@@ -222,8 +228,8 @@ for $size, $width in $grid-breakpoints
     flex: 1 1 auto !important
 
     &.grow-shrink-0
-      flex-grow: 0;
-      flex-shrink: 0;
+      flex-grow: 0
+      flex-shrink: 0
 
 .d-block
   display: block !important

@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VTimePicker.js should accept a date object for a value 1`] = `
+exports[`VTimePicker.ts should accept a date object for a value 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--light">
   <div class="v-picker__title primary">
     <div class="v-time-picker-title">
       <div class="v-time-picker-title__time">
         <div class="v-picker__title__btn v-picker__title__btn--active">
-          12
+          00
         </div>
         <span>
           :
@@ -16,20 +16,20 @@ exports[`VTimePicker.js should accept a date object for a value 1`] = `
           00
         </div>
       </div>
-      <div class="v-time-picker-title__ampm">
-        <div class="v-picker__title__btn v-picker__title__btn--active">
-          am
-        </div>
-        <div class="v-picker__title__btn">
-          pm
-        </div>
-      </div>
     </div>
   </div>
   <div class="v-picker__body theme--light"
        style="width: 290px;"
   >
     <div class="v-time-picker-clock__container">
+      <div class="v-time-picker-clock__ampm primary--text">
+        <div class="v-picker__title__btn v-picker__title__btn--active">
+          AM
+        </div>
+        <div class="v-picker__title__btn">
+          PM
+        </div>
+      </div>
       <div class="v-time-picker-clock theme--light">
         <div class="v-time-picker-clock__inner">
           <div class="v-time-picker-clock__hand accent">
@@ -126,19 +126,13 @@ exports[`VTimePicker.js should accept a date object for a value 1`] = `
 
 `;
 
-exports[`VTimePicker.js should accept a date object for a value. with useSeconds 1`] = `
+exports[`VTimePicker.ts should accept a date object for a value. with useSeconds 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--light">
   <div class="v-picker__title primary">
     <div class="v-time-picker-title">
       <div class="v-time-picker-title__time">
         <div class="v-picker__title__btn v-picker__title__btn--active">
-          12
-        </div>
-        <span>
-          :
-        </span>
-        <div class="v-picker__title__btn">
           00
         </div>
         <span>
@@ -147,13 +141,11 @@ exports[`VTimePicker.js should accept a date object for a value. with useSeconds
         <div class="v-picker__title__btn">
           00
         </div>
-      </div>
-      <div class="v-time-picker-title__ampm">
-        <div class="v-picker__title__btn v-picker__title__btn--active">
-          am
-        </div>
+        <span>
+          :
+        </span>
         <div class="v-picker__title__btn">
-          pm
+          00
         </div>
       </div>
     </div>
@@ -162,6 +154,14 @@ exports[`VTimePicker.js should accept a date object for a value. with useSeconds
        style="width: 290px;"
   >
     <div class="v-time-picker-clock__container">
+      <div class="v-time-picker-clock__ampm primary--text">
+        <div class="v-picker__title__btn v-picker__title__btn--active">
+          AM
+        </div>
+        <div class="v-picker__title__btn">
+          PM
+        </div>
+      </div>
       <div class="v-time-picker-clock theme--light">
         <div class="v-time-picker-clock__inner">
           <div class="v-time-picker-clock__hand accent">
@@ -258,14 +258,14 @@ exports[`VTimePicker.js should accept a date object for a value. with useSeconds
 
 `;
 
-exports[`VTimePicker.js should accept a value 1`] = `
+exports[`VTimePicker.ts should accept a value 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--light">
   <div class="v-picker__title primary">
     <div class="v-time-picker-title">
       <div class="v-time-picker-title__time">
         <div class="v-picker__title__btn v-picker__title__btn--active">
-          9
+          09
         </div>
         <span>
           :
@@ -274,20 +274,20 @@ exports[`VTimePicker.js should accept a value 1`] = `
           12
         </div>
       </div>
-      <div class="v-time-picker-title__ampm">
-        <div class="v-picker__title__btn v-picker__title__btn--active">
-          am
-        </div>
-        <div class="v-picker__title__btn">
-          pm
-        </div>
-      </div>
     </div>
   </div>
   <div class="v-picker__body theme--light"
        style="width: 290px;"
   >
     <div class="v-time-picker-clock__container">
+      <div class="v-time-picker-clock__ampm primary--text">
+        <div class="v-picker__title__btn v-picker__title__btn--active">
+          AM
+        </div>
+        <div class="v-picker__title__btn">
+          PM
+        </div>
+      </div>
       <div class="v-time-picker-clock theme--light">
         <div class="v-time-picker-clock__inner">
           <div class="v-time-picker-clock__hand accent">
@@ -384,14 +384,14 @@ exports[`VTimePicker.js should accept a value 1`] = `
 
 `;
 
-exports[`VTimePicker.js should accept a value. with useSeconds 1`] = `
+exports[`VTimePicker.ts should accept a value. with useSeconds 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--light">
   <div class="v-picker__title primary">
     <div class="v-time-picker-title">
       <div class="v-time-picker-title__time">
         <div class="v-picker__title__btn v-picker__title__btn--active">
-          9
+          09
         </div>
         <span>
           :
@@ -406,20 +406,20 @@ exports[`VTimePicker.js should accept a value. with useSeconds 1`] = `
           34
         </div>
       </div>
-      <div class="v-time-picker-title__ampm">
-        <div class="v-picker__title__btn v-picker__title__btn--active">
-          am
-        </div>
-        <div class="v-picker__title__btn">
-          pm
-        </div>
-      </div>
     </div>
   </div>
   <div class="v-picker__body theme--light"
        style="width: 290px;"
   >
     <div class="v-time-picker-clock__container">
+      <div class="v-time-picker-clock__ampm primary--text">
+        <div class="v-picker__title__btn v-picker__title__btn--active">
+          AM
+        </div>
+        <div class="v-picker__title__btn">
+          PM
+        </div>
+      </div>
       <div class="v-time-picker-clock theme--light">
         <div class="v-time-picker-clock__inner">
           <div class="v-time-picker-clock__hand accent">
@@ -516,14 +516,14 @@ exports[`VTimePicker.js should accept a value. with useSeconds 1`] = `
 
 `;
 
-exports[`VTimePicker.js should change am/pm when updated from model 1`] = `
+exports[`VTimePicker.ts should change am/pm when updated from model 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--light">
   <div class="v-picker__title primary">
     <div class="v-time-picker-title">
       <div class="v-time-picker-title__time">
         <div class="v-picker__title__btn v-picker__title__btn--active">
-          9
+          21
         </div>
         <span>
           :
@@ -532,20 +532,20 @@ exports[`VTimePicker.js should change am/pm when updated from model 1`] = `
           00
         </div>
       </div>
-      <div class="v-time-picker-title__ampm">
-        <div class="v-picker__title__btn v-picker__title__btn--active">
-          am
-        </div>
-        <div class="v-picker__title__btn">
-          pm
-        </div>
-      </div>
     </div>
   </div>
   <div class="v-picker__body theme--light"
        style="width: 290px;"
   >
     <div class="v-time-picker-clock__container">
+      <div class="v-time-picker-clock__ampm primary--text">
+        <div class="v-picker__title__btn">
+          AM
+        </div>
+        <div class="v-picker__title__btn v-picker__title__btn--active">
+          PM
+        </div>
+      </div>
       <div class="v-time-picker-clock theme--light">
         <div class="v-time-picker-clock__inner">
           <div class="v-time-picker-clock__hand accent">
@@ -642,14 +642,14 @@ exports[`VTimePicker.js should change am/pm when updated from model 1`] = `
 
 `;
 
-exports[`VTimePicker.js should change am/pm when updated from model. with useSeconds 1`] = `
+exports[`VTimePicker.ts should change am/pm when updated from model. with useSeconds 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--light">
   <div class="v-picker__title primary">
     <div class="v-time-picker-title">
       <div class="v-time-picker-title__time">
         <div class="v-picker__title__btn v-picker__title__btn--active">
-          9
+          21
         </div>
         <span>
           :
@@ -661,15 +661,7 @@ exports[`VTimePicker.js should change am/pm when updated from model. with useSec
           :
         </span>
         <div class="v-picker__title__btn">
-          00
-        </div>
-      </div>
-      <div class="v-time-picker-title__ampm">
-        <div class="v-picker__title__btn v-picker__title__btn--active">
-          am
-        </div>
-        <div class="v-picker__title__btn">
-          pm
+          12
         </div>
       </div>
     </div>
@@ -678,6 +670,14 @@ exports[`VTimePicker.js should change am/pm when updated from model. with useSec
        style="width: 290px;"
   >
     <div class="v-time-picker-clock__container">
+      <div class="v-time-picker-clock__ampm primary--text">
+        <div class="v-picker__title__btn">
+          AM
+        </div>
+        <div class="v-picker__title__btn v-picker__title__btn--active">
+          PM
+        </div>
+      </div>
       <div class="v-time-picker-clock theme--light">
         <div class="v-time-picker-clock__inner">
           <div class="v-time-picker-clock__hand accent">
@@ -774,14 +774,14 @@ exports[`VTimePicker.js should change am/pm when updated from model. with useSec
 
 `;
 
-exports[`VTimePicker.js should render colored time picker 1`] = `
+exports[`VTimePicker.ts should render colored time picker 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--light">
   <div class="v-picker__title orange darken-1">
     <div class="v-time-picker-title">
       <div class="v-time-picker-title__time">
         <div class="v-picker__title__btn v-picker__title__btn--active">
-          9
+          09
         </div>
         <span>
           :
@@ -790,20 +790,20 @@ exports[`VTimePicker.js should render colored time picker 1`] = `
           00
         </div>
       </div>
-      <div class="v-time-picker-title__ampm">
-        <div class="v-picker__title__btn v-picker__title__btn--active">
-          am
-        </div>
-        <div class="v-picker__title__btn">
-          pm
-        </div>
-      </div>
     </div>
   </div>
   <div class="v-picker__body theme--light"
        style="width: 290px;"
   >
     <div class="v-time-picker-clock__container">
+      <div class="v-time-picker-clock__ampm orange--text text--darken-1">
+        <div class="v-picker__title__btn v-picker__title__btn--active">
+          AM
+        </div>
+        <div class="v-picker__title__btn">
+          PM
+        </div>
+      </div>
       <div class="v-time-picker-clock theme--light">
         <div class="v-time-picker-clock__inner">
           <div class="v-time-picker-clock__hand orange darken-1">
@@ -900,14 +900,14 @@ exports[`VTimePicker.js should render colored time picker 1`] = `
 
 `;
 
-exports[`VTimePicker.js should render colored time picker, header 1`] = `
+exports[`VTimePicker.ts should render colored time picker, header 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--light">
   <div class="v-picker__title orange darken-1">
     <div class="v-time-picker-title">
       <div class="v-time-picker-title__time">
         <div class="v-picker__title__btn v-picker__title__btn--active">
-          9
+          09
         </div>
         <span>
           :
@@ -916,20 +916,20 @@ exports[`VTimePicker.js should render colored time picker, header 1`] = `
           00
         </div>
       </div>
-      <div class="v-time-picker-title__ampm">
-        <div class="v-picker__title__btn v-picker__title__btn--active">
-          am
-        </div>
-        <div class="v-picker__title__btn">
-          pm
-        </div>
-      </div>
     </div>
   </div>
   <div class="v-picker__body theme--light"
        style="width: 290px;"
   >
     <div class="v-time-picker-clock__container">
+      <div class="v-time-picker-clock__ampm primary--text">
+        <div class="v-picker__title__btn v-picker__title__btn--active">
+          AM
+        </div>
+        <div class="v-picker__title__btn">
+          PM
+        </div>
+      </div>
       <div class="v-time-picker-clock theme--light">
         <div class="v-time-picker-clock__inner">
           <div class="v-time-picker-clock__hand primary">
@@ -1026,14 +1026,14 @@ exports[`VTimePicker.js should render colored time picker, header 1`] = `
 
 `;
 
-exports[`VTimePicker.js should render colored time picker, header. with useSeconds 1`] = `
+exports[`VTimePicker.ts should render colored time picker, header. with useSeconds 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--light">
   <div class="v-picker__title orange darken-1">
     <div class="v-time-picker-title">
       <div class="v-time-picker-title__time">
         <div class="v-picker__title__btn v-picker__title__btn--active">
-          9
+          09
         </div>
         <span>
           :
@@ -1046,14 +1046,6 @@ exports[`VTimePicker.js should render colored time picker, header. with useSecon
         </span>
         <div class="v-picker__title__btn">
           00
-        </div>
-      </div>
-      <div class="v-time-picker-title__ampm">
-        <div class="v-picker__title__btn v-picker__title__btn--active">
-          am
-        </div>
-        <div class="v-picker__title__btn">
-          pm
         </div>
       </div>
     </div>
@@ -1062,6 +1054,14 @@ exports[`VTimePicker.js should render colored time picker, header. with useSecon
        style="width: 290px;"
   >
     <div class="v-time-picker-clock__container">
+      <div class="v-time-picker-clock__ampm primary--text">
+        <div class="v-picker__title__btn v-picker__title__btn--active">
+          AM
+        </div>
+        <div class="v-picker__title__btn">
+          PM
+        </div>
+      </div>
       <div class="v-time-picker-clock theme--light">
         <div class="v-time-picker-clock__inner">
           <div class="v-time-picker-clock__hand primary">
@@ -1158,14 +1158,14 @@ exports[`VTimePicker.js should render colored time picker, header. with useSecon
 
 `;
 
-exports[`VTimePicker.js should render colored time picker. with useSeconds 1`] = `
+exports[`VTimePicker.ts should render colored time picker. with useSeconds 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--light">
   <div class="v-picker__title orange darken-1">
     <div class="v-time-picker-title">
       <div class="v-time-picker-title__time">
         <div class="v-picker__title__btn v-picker__title__btn--active">
-          9
+          09
         </div>
         <span>
           :
@@ -1178,14 +1178,6 @@ exports[`VTimePicker.js should render colored time picker. with useSeconds 1`] =
         </span>
         <div class="v-picker__title__btn">
           00
-        </div>
-      </div>
-      <div class="v-time-picker-title__ampm">
-        <div class="v-picker__title__btn v-picker__title__btn--active">
-          am
-        </div>
-        <div class="v-picker__title__btn">
-          pm
         </div>
       </div>
     </div>
@@ -1194,6 +1186,14 @@ exports[`VTimePicker.js should render colored time picker. with useSeconds 1`] =
        style="width: 290px;"
   >
     <div class="v-time-picker-clock__container">
+      <div class="v-time-picker-clock__ampm orange--text text--darken-1">
+        <div class="v-picker__title__btn v-picker__title__btn--active">
+          AM
+        </div>
+        <div class="v-picker__title__btn">
+          PM
+        </div>
+      </div>
       <div class="v-time-picker-clock theme--light">
         <div class="v-time-picker-clock__inner">
           <div class="v-time-picker-clock__hand orange darken-1">
@@ -1290,7 +1290,7 @@ exports[`VTimePicker.js should render colored time picker. with useSeconds 1`] =
 
 `;
 
-exports[`VTimePicker.js should render dark time picker 1`] = `
+exports[`VTimePicker.ts should render dark time picker 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--dark">
   <div class="v-picker__title">
@@ -1306,20 +1306,20 @@ exports[`VTimePicker.js should render dark time picker 1`] = `
           --
         </div>
       </div>
-      <div class="v-time-picker-title__ampm">
-        <div class="v-picker__title__btn v-picker__title__btn--active">
-          am
-        </div>
-        <div class="v-picker__title__btn">
-          pm
-        </div>
-      </div>
     </div>
   </div>
   <div class="v-picker__body theme--dark"
        style="width: 290px;"
   >
     <div class="v-time-picker-clock__container">
+      <div class="v-time-picker-clock__ampm primary--text">
+        <div class="v-picker__title__btn v-picker__title__btn--active">
+          AM
+        </div>
+        <div class="v-picker__title__btn">
+          PM
+        </div>
+      </div>
       <div class="v-time-picker-clock v-time-picker-clock--indeterminate theme--dark">
         <div class="v-time-picker-clock__inner">
           <div class="v-time-picker-clock__hand">
@@ -1416,7 +1416,7 @@ exports[`VTimePicker.js should render dark time picker 1`] = `
 
 `;
 
-exports[`VTimePicker.js should render dark time picker. with useSeconds 1`] = `
+exports[`VTimePicker.ts should render dark time picker. with useSeconds 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--dark">
   <div class="v-picker__title">
@@ -1438,20 +1438,20 @@ exports[`VTimePicker.js should render dark time picker. with useSeconds 1`] = `
           --
         </div>
       </div>
-      <div class="v-time-picker-title__ampm">
-        <div class="v-picker__title__btn v-picker__title__btn--active">
-          am
-        </div>
-        <div class="v-picker__title__btn">
-          pm
-        </div>
-      </div>
     </div>
   </div>
   <div class="v-picker__body theme--dark"
        style="width: 290px;"
   >
     <div class="v-time-picker-clock__container">
+      <div class="v-time-picker-clock__ampm primary--text">
+        <div class="v-picker__title__btn v-picker__title__btn--active">
+          AM
+        </div>
+        <div class="v-picker__title__btn">
+          PM
+        </div>
+      </div>
       <div class="v-time-picker-clock v-time-picker-clock--indeterminate theme--dark">
         <div class="v-time-picker-clock__inner">
           <div class="v-time-picker-clock__hand">
@@ -1548,14 +1548,14 @@ exports[`VTimePicker.js should render dark time picker. with useSeconds 1`] = `
 
 `;
 
-exports[`VTimePicker.js should render disabled component 1`] = `
+exports[`VTimePicker.ts should render disabled component 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--light">
   <div class="v-picker__title primary">
     <div class="v-time-picker-title">
       <div class="v-time-picker-title__time">
         <div class="v-picker__title__btn v-picker__title__btn--active v-picker__title__btn--readonly">
-          9
+          09
         </div>
         <span>
           :
@@ -1564,20 +1564,20 @@ exports[`VTimePicker.js should render disabled component 1`] = `
           12
         </div>
       </div>
-      <div class="v-time-picker-title__ampm">
-        <div class="v-picker__title__btn v-picker__title__btn--active v-picker__title__btn--readonly">
-          am
-        </div>
-        <div class="v-picker__title__btn v-picker__title__btn--readonly">
-          pm
-        </div>
-      </div>
     </div>
   </div>
   <div class="v-picker__body theme--light"
        style="width: 290px;"
   >
     <div class="v-time-picker-clock__container">
+      <div class="v-time-picker-clock__ampm primary--text">
+        <div class="v-picker__title__btn v-picker__title__btn--active v-picker__title__btn--readonly">
+          AM
+        </div>
+        <div class="v-picker__title__btn v-picker__title__btn--readonly">
+          PM
+        </div>
+      </div>
       <div class="v-time-picker-clock theme--light">
         <div class="v-time-picker-clock__inner">
           <div class="v-time-picker-clock__hand accent">
@@ -1674,14 +1674,14 @@ exports[`VTimePicker.js should render disabled component 1`] = `
 
 `;
 
-exports[`VTimePicker.js should render disabled component. with useSeconds 1`] = `
+exports[`VTimePicker.ts should render disabled component. with useSeconds 1`] = `
 
 <div class="v-picker v-card v-picker--time theme--light">
   <div class="v-picker__title primary">
     <div class="v-time-picker-title">
       <div class="v-time-picker-title__time">
         <div class="v-picker__title__btn v-picker__title__btn--active v-picker__title__btn--readonly">
-          9
+          09
         </div>
         <span>
           :
@@ -1696,20 +1696,20 @@ exports[`VTimePicker.js should render disabled component. with useSeconds 1`] = 
           34
         </div>
       </div>
-      <div class="v-time-picker-title__ampm">
-        <div class="v-picker__title__btn v-picker__title__btn--active v-picker__title__btn--readonly">
-          am
-        </div>
-        <div class="v-picker__title__btn v-picker__title__btn--readonly">
-          pm
-        </div>
-      </div>
     </div>
   </div>
   <div class="v-picker__body theme--light"
        style="width: 290px;"
   >
     <div class="v-time-picker-clock__container">
+      <div class="v-time-picker-clock__ampm primary--text">
+        <div class="v-picker__title__btn v-picker__title__btn--active v-picker__title__btn--readonly">
+          AM
+        </div>
+        <div class="v-picker__title__btn v-picker__title__btn--readonly">
+          PM
+        </div>
+      </div>
       <div class="v-time-picker-clock theme--light">
         <div class="v-time-picker-clock__inner">
           <div class="v-time-picker-clock__hand accent">
@@ -1806,14 +1806,14 @@ exports[`VTimePicker.js should render disabled component. with useSeconds 1`] = 
 
 `;
 
-exports[`VTimePicker.js should render landscape component 1`] = `
+exports[`VTimePicker.ts should render landscape component 1`] = `
 
 <div class="v-picker v-card v-picker--time v-picker--landscape theme--light">
   <div class="v-picker__title v-picker__title--landscape primary">
     <div class="v-time-picker-title">
       <div class="v-time-picker-title__time">
         <div class="v-picker__title__btn v-picker__title__btn--active">
-          9
+          09
         </div>
         <span>
           :
@@ -1822,20 +1822,20 @@ exports[`VTimePicker.js should render landscape component 1`] = `
           12
         </div>
       </div>
-      <div class="v-time-picker-title__ampm">
-        <div class="v-picker__title__btn v-picker__title__btn--active">
-          am
-        </div>
-        <div class="v-picker__title__btn">
-          pm
-        </div>
-      </div>
     </div>
   </div>
   <div class="v-picker__body theme--light"
        style="width: 290px;"
   >
     <div class="v-time-picker-clock__container">
+      <div class="v-time-picker-clock__ampm primary--text">
+        <div class="v-picker__title__btn v-picker__title__btn--active">
+          AM
+        </div>
+        <div class="v-picker__title__btn">
+          PM
+        </div>
+      </div>
       <div class="v-time-picker-clock theme--light">
         <div class="v-time-picker-clock__inner">
           <div class="v-time-picker-clock__hand accent">
@@ -1932,14 +1932,14 @@ exports[`VTimePicker.js should render landscape component 1`] = `
 
 `;
 
-exports[`VTimePicker.js should render landscape component. with useSeconds 1`] = `
+exports[`VTimePicker.ts should render landscape component. with useSeconds 1`] = `
 
 <div class="v-picker v-card v-picker--time v-picker--landscape theme--light">
   <div class="v-picker__title v-picker__title--landscape primary">
     <div class="v-time-picker-title">
       <div class="v-time-picker-title__time">
         <div class="v-picker__title__btn v-picker__title__btn--active">
-          9
+          09
         </div>
         <span>
           :
@@ -1954,20 +1954,20 @@ exports[`VTimePicker.js should render landscape component. with useSeconds 1`] =
           34
         </div>
       </div>
-      <div class="v-time-picker-title__ampm">
-        <div class="v-picker__title__btn v-picker__title__btn--active">
-          am
-        </div>
-        <div class="v-picker__title__btn">
-          pm
-        </div>
-      </div>
     </div>
   </div>
   <div class="v-picker__body theme--light"
        style="width: 290px;"
   >
     <div class="v-time-picker-clock__container">
+      <div class="v-time-picker-clock__ampm primary--text">
+        <div class="v-picker__title__btn v-picker__title__btn--active">
+          AM
+        </div>
+        <div class="v-picker__title__btn">
+          PM
+        </div>
+      </div>
       <div class="v-time-picker-clock theme--light">
         <div class="v-time-picker-clock__inner">
           <div class="v-time-picker-clock__hand accent">

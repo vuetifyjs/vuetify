@@ -1,7 +1,10 @@
-import VTimePickerClock from '@/components/VTimePicker/VTimePickerClock'
-import { test, touch } from '@/test'
+import VTimePickerClock from '../VTimePickerClock'
+import { touch } from '../../../../test'
+import { mount } from '@vue/test-utils'
 
-test('VTimePickerClock.js', ({ mount }) => {
+describe('VTimePickerClock.js', () => {
+  (window as any).TouchEvent = Event
+
   function createBoundingRect (wrapper) {
     wrapper.vm.$refs.clock.getBoundingClientRect = () => {
       return {
@@ -36,7 +39,6 @@ test('VTimePickerClock.js', ({ mount }) => {
         allowedValues: n => n % 2,
         max: 59,
         min: 0,
-        size: 280,
         step: 5,
         value: 10
       }
@@ -52,7 +54,6 @@ test('VTimePickerClock.js', ({ mount }) => {
         disabled: true,
         max: 59,
         min: 0,
-        size: 280,
         step: 5,
         value: 10
       }
@@ -68,7 +69,6 @@ test('VTimePickerClock.js', ({ mount }) => {
         double: true,
         max: 59,
         min: 0,
-        size: 280,
         step: 5,
         value: 10
       }
@@ -90,7 +90,7 @@ test('VTimePickerClock.js', ({ mount }) => {
     const input = jest.fn()
     wrapper.vm.$on('input', input)
     wrapper.trigger('wheel')
-    expect(input).toBeCalledWith(3)
+    expect(input).toHaveBeenCalledWith(3)
   })
 
   it('should not emit input event on wheel if readonly and scrollable', () => {
@@ -107,7 +107,7 @@ test('VTimePickerClock.js', ({ mount }) => {
     const input = jest.fn()
     wrapper.vm.$on('input', input)
     wrapper.trigger('wheel')
-    expect(input).not.toBeCalled()
+    expect(input).not.toHaveBeenCalled()
   })
 
   it('should emit input event on wheel if scrollable and has allowedValues', () => {
@@ -124,7 +124,7 @@ test('VTimePickerClock.js', ({ mount }) => {
     const input = jest.fn()
     wrapper.vm.$on('input', input)
     wrapper.trigger('wheel')
-    expect(input).toBeCalledWith(9)
+    expect(input).toHaveBeenCalledWith(9)
   })
 
   it('should not emit input event on wheel if not scrollable', () => {
@@ -140,7 +140,7 @@ test('VTimePickerClock.js', ({ mount }) => {
     const input = jest.fn()
     wrapper.vm.$on('input', input)
     wrapper.trigger('wheel')
-    expect(input).not.toBeCalled()
+    expect(input).not.toHaveBeenCalled()
   })
 
   it('should emit change event on mouseup/touchend', () => {
@@ -157,10 +157,10 @@ test('VTimePickerClock.js', ({ mount }) => {
 
     wrapper.vm.valueOnMouseUp = 55
     wrapper.trigger('mouseup')
-    expect(change).toBeCalledWith(55)
+    expect(change).toHaveBeenCalledWith(55)
 
     wrapper.trigger('touchend')
-    expect(change).toBeCalledWith(55)
+    expect(change).toHaveBeenCalledWith(55)
   })
 
   it('should not emit change event on mouseup/touchend if readonly', () => {
@@ -178,10 +178,10 @@ test('VTimePickerClock.js', ({ mount }) => {
 
     wrapper.vm.valueOnMouseUp = 55
     wrapper.trigger('mouseup')
-    expect(change).not.toBeCalled()
+    expect(change).not.toHaveBeenCalled()
 
     wrapper.trigger('touchend')
-    expect(change).not.toBeCalled()
+    expect(change).not.toHaveBeenCalled()
   })
 
   it('should emit change event on mouseleave', () => {
@@ -197,12 +197,12 @@ test('VTimePickerClock.js', ({ mount }) => {
     wrapper.vm.$on('change', change)
 
     wrapper.trigger('mouseleave')
-    expect(change).not.toBeCalled()
+    expect(change).not.toHaveBeenCalled()
 
     wrapper.vm.isDragging = true
     wrapper.vm.valueOnMouseUp = 58
     wrapper.trigger('mouseleave')
-    expect(change).toBeCalledWith(58)
+    expect(change).toHaveBeenCalledWith(58)
   })
 
   it('should calculate angle', () => {
@@ -239,7 +239,7 @@ test('VTimePickerClock.js', ({ mount }) => {
     wrapper.vm.$on('input', input)
     touch(wrapper).start(0, 0).move(141, 0)
 
-    expect(input).not.toBeCalled()
+    expect(input).not.toHaveBeenCalled()
   })
 
   it('should change with touch move', () => {
@@ -260,18 +260,18 @@ test('VTimePickerClock.js', ({ mount }) => {
     wrapper.vm.$on('input', input)
 
     finger.move(300, 150)
-    expect(input).toBeCalledWith(1)
+    expect(input).toHaveBeenCalledWith(1)
     finger.move(150, 250)
-    expect(input).toBeCalledWith(2)
+    expect(input).toHaveBeenCalledWith(2)
     finger.move(150, 249)
-    expect(input).toBeCalledWith(6)
+    expect(input).toHaveBeenCalledWith(6)
 
     // edge case
     finger.move(120, 0)
-    expect(input).toBeCalledWith(0)
+    expect(input).toHaveBeenCalledWith(0)
     finger.move(135, 90)
-    expect(input).toBeCalledWith(4)
+    expect(input).toHaveBeenCalledWith(4)
     finger.move(90, 135)
-    expect(input).toBeCalledWith(7)
+    expect(input).toHaveBeenCalledWith(7)
   })
 })

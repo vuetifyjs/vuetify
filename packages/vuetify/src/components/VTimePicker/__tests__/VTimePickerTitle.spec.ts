@@ -1,12 +1,24 @@
-import VTimePickerTitle from '@/components/VTimePicker/VTimePickerTitle'
-import { selectingTimes } from '@/components/VTimePicker/VTimePicker'
-import { test } from '@/test'
+import VTimePickerTitle from '../VTimePickerTitle'
+import { SelectingTimes } from '../VTimePicker'
+import {
+  mount,
+  Wrapper,
+  MountOptions
+} from '@vue/test-utils'
 
-test('VTimePickerTitle.js', ({ mount }) => {
+describe('VTimePickerTitle.ts', () => {
+  type Instance = InstanceType<typeof VTimePickerTitle>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+  beforeEach(() => {
+    mountFunction = (options?: MountOptions<Instance>) => {
+      return mount(VTimePickerTitle, options)
+    }
+  });
+
   [true, false].forEach(useSecondsValue => {
     const useSecondsDesc = (useSecondsValue ? '. with useSeconds' : '')
     it('should render component in 24hr' + useSecondsDesc, () => {
-      const wrapper = mount(VTimePickerTitle, {
+      const wrapper = mountFunction({
         propsData: {
           hour: 14,
           minute: 13,
@@ -21,7 +33,7 @@ test('VTimePickerTitle.js', ({ mount }) => {
     })
 
     it('should render disabled component' + useSecondsDesc, () => {
-      const wrapper = mount(VTimePickerTitle, {
+      const wrapper = mountFunction({
         propsData: {
           disabled: true,
           hour: 14,
@@ -36,7 +48,7 @@ test('VTimePickerTitle.js', ({ mount }) => {
     })
 
     it('should render component in 12hr' + useSecondsDesc, () => {
-      const wrapper = mount(VTimePickerTitle, {
+      const wrapper = mountFunction({
         propsData: {
           hour: 14,
           minute: 13,
@@ -51,13 +63,13 @@ test('VTimePickerTitle.js', ({ mount }) => {
     })
 
     it('should render component when selecting hour' + useSecondsDesc, () => {
-      const wrapper = mount(VTimePickerTitle, {
+      const wrapper = mountFunction({
         propsData: {
           hour: 14,
           minute: 13,
           second: 25,
           period: 'pm',
-          selecting: selectingTimes.hour,
+          selecting: SelectingTimes.Hour,
           useSeconds: useSecondsValue
         }
       })
@@ -66,7 +78,7 @@ test('VTimePickerTitle.js', ({ mount }) => {
     })
 
     it('should emit event when clicked on am/pm' + useSecondsDesc, async () => {
-      const wrapper = mount(VTimePickerTitle, {
+      const wrapper = mountFunction({
         propsData: {
           hour: 14,
           minute: 13,
@@ -80,10 +92,10 @@ test('VTimePickerTitle.js', ({ mount }) => {
       const period = jest.fn()
       wrapper.vm.$on('update:period', period)
 
-      wrapper.find('.v-time-picker-title__ampm .v-picker__title__btn--active')[0].trigger('click')
-      expect(period).not.toBeCalled()
-      wrapper.find('.v-time-picker-title__ampm .v-picker__title__btn:not(.v-picker__title__btn--active)')[0].trigger('click')
-      expect(period).toBeCalledWith('am')
+      wrapper.find('.v-time-picker-title__ampm .v-picker__title__btn--active').trigger('click')
+      expect(period).not.toHaveBeenCalled()
+      wrapper.find('.v-time-picker-title__ampm .v-picker__title__btn:not(.v-picker__title__btn--active)').trigger('click')
+      expect(period).toHaveBeenCalledWith('am')
 
       wrapper.setProps({
         hour: 2,
@@ -91,12 +103,12 @@ test('VTimePickerTitle.js', ({ mount }) => {
         second: 35,
         period: 'am'
       })
-      wrapper.find('.v-time-picker-title__ampm .v-picker__title__btn:not(.v-picker__title__btn--active)')[0].trigger('click')
-      expect(period).toBeCalledWith('pm')
+      wrapper.find('.v-time-picker-title__ampm .v-picker__title__btn:not(.v-picker__title__btn--active)').trigger('click')
+      expect(period).toHaveBeenCalledWith('pm')
     })
 
     it('should not emit event when clicked on readonly am/pm' + useSecondsDesc, async () => {
-      const wrapper = mount(VTimePickerTitle, {
+      const wrapper = mountFunction({
         propsData: {
           hour: 14,
           minute: 13,
@@ -111,12 +123,12 @@ test('VTimePickerTitle.js', ({ mount }) => {
       const period = jest.fn()
       wrapper.vm.$on('update:period', period)
 
-      wrapper.find('.v-time-picker-title__ampm .v-picker__title__btn:not(.v-picker__title__btn--active)')[0].trigger('click')
-      expect(period).not.toBeCalled()
+      wrapper.find('.v-time-picker-title__ampm .v-picker__title__btn:not(.v-picker__title__btn--active)').trigger('click')
+      expect(period).not.toHaveBeenCalled()
     })
 
     it('should emit event when clicked on hours/minutes/seconds' + useSecondsDesc, async () => {
-      const wrapper = mount(VTimePickerTitle, {
+      const wrapper = mountFunction({
         propsData: {
           hour: 14,
           minute: 13,
@@ -129,22 +141,22 @@ test('VTimePickerTitle.js', ({ mount }) => {
       const selecting = jest.fn()
       wrapper.vm.$on('update:selecting', selecting)
 
-      wrapper.find('.v-time-picker-title__time .v-picker__title__btn')[1].trigger('click')
-      expect(selecting).toBeCalledWith(selectingTimes.minute)
-      wrapper.find('.v-time-picker-title__time .v-picker__title__btn')[0].trigger('click')
-      expect(selecting).toBeCalledWith(selectingTimes.hour)
+      wrapper.findAll('.v-time-picker-title__time .v-picker__title__btn').wrappers[1].trigger('click')
+      expect(selecting).toHaveBeenCalledWith(SelectingTimes.Minute)
+      wrapper.findAll('.v-time-picker-title__time .v-picker__title__btn').wrappers[0].trigger('click')
+      expect(selecting).toHaveBeenCalledWith(SelectingTimes.Hour)
       if (useSecondsValue) {
-        wrapper.find('.v-time-picker-title__time .v-picker__title__btn')[2].trigger('click')
-        expect(selecting).toBeCalledWith(selectingTimes.second)
+        wrapper.findAll('.v-time-picker-title__time .v-picker__title__btn').wrappers[2].trigger('click')
+        expect(selecting).toHaveBeenCalledWith(SelectingTimes.Second)
       }
-      wrapper.setProps({ selecting: selectingTimes.hour })
+      wrapper.setProps({ selecting: SelectingTimes.Hour })
       await wrapper.vm.$nextTick()
-      wrapper.find('.v-time-picker-title__time .v-picker__title__btn')[1].trigger('click')
-      expect(selecting).toBeCalledWith(selectingTimes.minute)
+      wrapper.findAll('.v-time-picker-title__time .v-picker__title__btn').wrappers[1].trigger('click')
+      expect(selecting).toHaveBeenCalledWith(SelectingTimes.Minute)
     })
 
     it('should emit event when clicked on readonly hours/minutes' + useSecondsDesc, async () => {
-      const wrapper = mount(VTimePickerTitle, {
+      const wrapper = mountFunction({
         propsData: {
           hour: 14,
           minute: 13,
@@ -157,8 +169,8 @@ test('VTimePickerTitle.js', ({ mount }) => {
       const selecting = jest.fn()
       wrapper.vm.$on('update:selecting', selecting)
 
-      wrapper.find('.v-time-picker-title__time .v-picker__title__btn')[0].trigger('click')
-      expect(selecting).toBeCalledWith(selectingTimes.hour)
+      wrapper.find('.v-time-picker-title__time .v-picker__title__btn').trigger('click')
+      expect(selecting).toHaveBeenCalledWith(SelectingTimes.Hour)
     })
   })
 })

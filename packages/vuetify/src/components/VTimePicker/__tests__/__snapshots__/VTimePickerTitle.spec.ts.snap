@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VTimePickerTitle.js should render component in 12hr 1`] = `
+exports[`VTimePickerTitle.ts should render component in 12hr 1`] = `
 
 <div class="v-time-picker-title">
   <div class="v-time-picker-title__time">
@@ -26,7 +26,7 @@ exports[`VTimePickerTitle.js should render component in 12hr 1`] = `
 
 `;
 
-exports[`VTimePickerTitle.js should render component in 12hr. with useSeconds 1`] = `
+exports[`VTimePickerTitle.ts should render component in 12hr. with useSeconds 1`] = `
 
 <div class="v-time-picker-title">
   <div class="v-time-picker-title__time">
@@ -58,7 +58,7 @@ exports[`VTimePickerTitle.js should render component in 12hr. with useSeconds 1`
 
 `;
 
-exports[`VTimePickerTitle.js should render component in 24hr 1`] = `
+exports[`VTimePickerTitle.ts should render component in 24hr 1`] = `
 
 <div class="v-time-picker-title">
   <div class="v-time-picker-title__time">
@@ -76,7 +76,7 @@ exports[`VTimePickerTitle.js should render component in 24hr 1`] = `
 
 `;
 
-exports[`VTimePickerTitle.js should render component in 24hr. with useSeconds 1`] = `
+exports[`VTimePickerTitle.ts should render component in 24hr. with useSeconds 1`] = `
 
 <div class="v-time-picker-title">
   <div class="v-time-picker-title__time">
@@ -100,7 +100,7 @@ exports[`VTimePickerTitle.js should render component in 24hr. with useSeconds 1`
 
 `;
 
-exports[`VTimePickerTitle.js should render component when selecting hour 1`] = `
+exports[`VTimePickerTitle.ts should render component when selecting hour 1`] = `
 
 <div class="v-time-picker-title">
   <div class="v-time-picker-title__time">
@@ -118,7 +118,7 @@ exports[`VTimePickerTitle.js should render component when selecting hour 1`] = `
 
 `;
 
-exports[`VTimePickerTitle.js should render component when selecting hour. with useSeconds 1`] = `
+exports[`VTimePickerTitle.ts should render component when selecting hour. with useSeconds 1`] = `
 
 <div class="v-time-picker-title">
   <div class="v-time-picker-title__time">
@@ -142,7 +142,7 @@ exports[`VTimePickerTitle.js should render component when selecting hour. with u
 
 `;
 
-exports[`VTimePickerTitle.js should render disabled component 1`] = `
+exports[`VTimePickerTitle.ts should render disabled component 1`] = `
 
 <div class="v-time-picker-title">
   <div class="v-time-picker-title__time">
@@ -168,7 +168,7 @@ exports[`VTimePickerTitle.js should render disabled component 1`] = `
 
 `;
 
-exports[`VTimePickerTitle.js should render disabled component. with useSeconds 1`] = `
+exports[`VTimePickerTitle.ts should render disabled component. with useSeconds 1`] = `
 
 <div class="v-time-picker-title">
   <div class="v-time-picker-title__time">

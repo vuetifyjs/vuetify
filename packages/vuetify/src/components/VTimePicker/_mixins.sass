@@ -1,0 +1,18 @@
+@mixin time-picker-clock-theme($material)
+  background: map-deep-get($material, 'picker', 'clock')
+
+  .v-time-picker-clock__item--disabled
+    color: map-deep-get($material, 'buttons', 'disabled')
+
+    &.v-time-picker-clock__item--active
+      color: map-deep-get($material-dark, 'buttons', 'disabled')
+
+  &--indeterminate
+    .v-time-picker-clock__hand
+      background-color: map-deep-get($material, 'picker', 'indeterminateTime')
+
+      &:after
+        color: map-deep-get($material, 'picker', 'indeterminateTime')
+
+    .v-time-picker-clock__item--active
+        background-color: map-deep-get($material, 'picker', 'indeterminateTime')

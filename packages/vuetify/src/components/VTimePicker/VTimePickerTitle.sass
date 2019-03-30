@@ -1,7 +1,8 @@
-@import '../bootstrap'
+@import '../../styles/styles.sass'
+@import './_variables.scss'
 
 .v-time-picker-title
-  color: $shades.white
+  color: $time-picker-title-color
   display: flex
   line-height: 1
   justify-content: flex-end
@@ -13,16 +14,16 @@
   span
     align-items: center
     display: inline-flex
-    height: 70px
-    font-size: 70px
+    height: $time-picker-title-btn-height
+    font-size: $time-picker-title-btn-height
     justify-content: center
 
 .v-time-picker-title__ampm
   align-self: flex-end
   display: flex
   flex-direction: column
-  font-size: 16px
-  margin: 8px 0 6px 8px
+  font-size: $time-picker-ampm-title-font-size
+  margin: $time-picker-ampm-title-margin
   text-transform: uppercase
 
   div:only-child
@@ -39,10 +40,10 @@
 
     .v-picker__title__btn,
     span
-      height: 55px
-      font-size: 55px
+      height: $time-picker-landscape-title-btn-height
+      font-size: $time-picker-landscape-title-btn-height
 
   .v-time-picker-title__ampm
-    margin: 16px 0 0
+    margin: $time-picker-landscape-ampm-title-margin
     align-self: initial
     text-align: center
