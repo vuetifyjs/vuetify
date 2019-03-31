@@ -1,19 +1,52 @@
-import { test } from '@/test'
+// Components
+import VStepperContent from '../VStepperContent'
 import {
   VTabTransition,
   VTabReverseTransition
-} from '@/components/transitions'
-import VStepperContent from '@/components/VStepper/VStepperContent'
+} from '../../transitions'
+
+// Utilities
+import {
+  createLocalVue,
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+import { rafPolyfill } from '../../../../test'
+
+import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
 
 const tip = '[Vuetify] The v-stepper-content component must be used inside a v-stepper'
 
-test('VStepperContent.js', ({ mount }) => {
+describe('VStepperContent.ts', () => {
+  type Instance = InstanceType<typeof VStepperContent>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+  let localVue: typeof Vue
+
+  rafPolyfill(window)
+
+  beforeEach(() => {
+    localVue = createLocalVue()
+
+    mountFunction = (options = {}) => {
+      return mount(VStepperContent, {
+        localVue,
+        ...options,
+      })
+    }
+  })
+
+  toHaveBeenWarnedInit()
+
   it('should set height to auto', async () => {
-    const wrapper = mount(VStepperContent, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: { step: 0 },
       provide: {
-        isVertical: false
+        isVertical: false,
+        stepper: {
+          register: () => {},
+          unregister: () => {}
+        }
       }
     })
 
@@ -28,10 +61,14 @@ test('VStepperContent.js', ({ mount }) => {
   })
 
   it('should use reverse transition', () => {
-    const wrapper = mount(VStepperContent, {
+    const wrapper = mountFunction({
       propsData: { step: 1 },
       provide: {
-        isVertical: false
+        isVertical: false,
+        stepper: {
+          register: () => {},
+          unregister: () => {}
+        }
       }
     })
 
@@ -44,13 +81,17 @@ test('VStepperContent.js', ({ mount }) => {
   })
 
   it('should accept a custom height', async () => {
-    const wrapper = mount(VStepperContent, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
         step: 1
       },
       provide: {
-        isVertical: false
+        isVertical: false,
+        stepper: {
+          register: () => {},
+          unregister: () => {}
+        }
       }
     })
 
@@ -65,7 +106,7 @@ test('VStepperContent.js', ({ mount }) => {
       isVertical: true
     })
     await wrapper.vm.$nextTick()
-    const stepWrapper = wrapper.find('.v-stepper__wrapper')[0]
+    const stepWrapper = wrapper.find('.v-stepper__wrapper')
 
     expect(stepWrapper.element.style.height).toBe('auto')
 
@@ -91,10 +132,14 @@ test('VStepperContent.js', ({ mount }) => {
   })
 
   it('should toggle isActive state', () => {
-    const wrapper = mount(VStepperContent, {
+    const wrapper = mountFunction({
       propsData: { step: 1 },
       provide: {
-        isVertical: false
+        isVertical: false,
+        stepper: {
+          register: () => {},
+          unregister: () => {}
+        }
       }
     })
 
@@ -116,11 +161,15 @@ test('VStepperContent.js', ({ mount }) => {
   })
 
   it('should set height', async () => {
-    const wrapper = mount(VStepperContent, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: { step: 1 },
       provide: {
-        isVertical: false
+        isVertical: false,
+        stepper: {
+          register: () => {},
+          unregister: () => {}
+        }
       }
     })
 
@@ -146,11 +195,15 @@ test('VStepperContent.js', ({ mount }) => {
   })
 
   it('should set height only if isActive', async () => {
-    const wrapper = mount(VStepperContent, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: { step: 1 },
       provide: {
-        isVertical: false
+        isVertical: false,
+        stepper: {
+          register: () => {},
+          unregister: () => {}
+        }
       }
     })
 
@@ -172,15 +225,19 @@ test('VStepperContent.js', ({ mount }) => {
   })
 
   it('should reset height', async () => {
-    const wrapper = mount(VStepperContent, {
+    const wrapper = mountFunction({
       propsData: { step: 1 },
       provide: {
-        isVertical: false
+        isVertical: false,
+        stepper: {
+          register: () => {},
+          unregister: () => {}
+        }
       }
     })
 
     const onTransition = jest.fn()
-    const stepWrapper = wrapper.find('.v-stepper__wrapper')[0]
+    const stepWrapper = wrapper.find('.v-stepper__wrapper')
 
     expect(wrapper.vm.height).toBe(0)
 

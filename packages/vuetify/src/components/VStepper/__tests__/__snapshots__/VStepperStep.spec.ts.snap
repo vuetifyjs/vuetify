@@ -1,12 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VStepperStep.js should accept a custom color 1`] = `
+exports[`VStepperStep.ts should accept a custom color 1`] = `
 
 <div class="v-stepper__step v-stepper__step--inactive v-stepper__step--complete">
   <span class="v-stepper__step__step pink">
     <i aria-hidden="true"
-       class="v-icon mdi mdi-check theme--light"
+       class="v-icon material-icons theme--light"
     >
+      $vuetify.icons.complete
     </i>
   </span>
   <div class="v-stepper__label">
@@ -15,15 +16,16 @@ exports[`VStepperStep.js should accept a custom color 1`] = `
 
 `;
 
-exports[`VStepperStep.js should accept a custom css color 1`] = `
+exports[`VStepperStep.ts should accept a custom css color 1`] = `
 
 <div class="v-stepper__step v-stepper__step--inactive v-stepper__step--complete">
   <span class="v-stepper__step__step"
         style="background-color: rgb(170, 187, 204); border-color: #aabbcc;"
   >
     <i aria-hidden="true"
-       class="v-icon mdi mdi-check theme--light"
+       class="v-icon material-icons theme--light"
     >
+      $vuetify.icons.complete
     </i>
   </span>
   <div class="v-stepper__label">

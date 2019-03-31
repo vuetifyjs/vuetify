@@ -1,12 +1,32 @@
-import { test } from '@/test'
-import VStepperStep from '@/components//VStepper/VStepperStep'
+// Components
+import VStepperStep from '../VStepperStep'
+
+// Utilities
+import {
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+
+import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
 
 const tip = '[Vuetify] The v-stepper-step component must be used inside a v-stepper'
 const warning = '[Vue warn]: Injection "stepClick" not found'
 
-test('VStepperStep.js', ({ mount }) => {
+describe('VStepperStep.ts', () => {
+  type Instance = InstanceType<typeof VStepperStep>
+  let mountFunction: (options?: object) => Wrapper<Instance>
+
+  beforeEach(() => {
+    mountFunction = (options = {}) => {
+      return mount(VStepperStep, {
+        ...options
+      })
+    }
+  })
+  toHaveBeenWarnedInit()
+
   it('should accept a custom color', async () => {
-    const wrapper = mount(VStepperStep, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
         color: 'pink',
@@ -20,7 +40,7 @@ test('VStepperStep.js', ({ mount }) => {
   })
 
   it('should accept a custom css color', async () => {
-    const wrapper = mount(VStepperStep, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
         color: '#aabbcc',
