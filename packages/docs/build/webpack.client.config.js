@@ -47,7 +47,8 @@ const config = merge(base, {
             options: {
               sourceMap: true,
               implementation: require("sass"),
-              fiber: require("fibers")
+              fiber: require("fibers"),
+              indentedSyntax: true
             }
           }
         ]
