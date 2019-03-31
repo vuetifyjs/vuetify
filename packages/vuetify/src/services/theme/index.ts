@@ -104,7 +104,7 @@ export class Theme extends Service {
   public init (root: Vue, ssrContext?: any): void {
     if (this.disabled) return
 
-    const meta = (root as any).$meta
+    const meta = root.$meta
     this.ssr = Boolean(ssrContext || meta)
 
     /* istanbul ignore else */
@@ -169,31 +169,29 @@ export class Theme extends Service {
       this.styleEl.setAttribute('nonce', options.cspNonce)
     }
 
-    // Asserts that document could
-    // be null typescript is hard
-    document!.head!.appendChild(this.styleEl)
+    document.head.appendChild(this.styleEl)
   }
 
   private initNuxt (root: Vue) {
     const options = this.options || {}
+    const metaInfo = {
+      style: [
+        {
+          cssText: this.generatedStyles,
+          type: 'text/css',
+          id: 'vuetify-theme-stylesheet',
+          nonce: options.cspNonce
+        }
+      ]
+    }
 
-    ;(root as any).$children.push({
+    root.$children.push({
       $children: [],
       $options: {
-        head: () => {
-          return {
-            style: [
-              {
-                cssText: this.generatedStyles,
-                type: 'text/css',
-                id: 'vuetify-theme-stylesheet',
-                nonce: options.cspNonce
-              }
-            ]
-          }
-        }
+        head: () => metaInfo, // TODO: vue-meta 2.0 $meta.getOptions()
+        metaInfo: () => metaInfo
       }
-    })
+    } as any)
   }
 
   private initSSR (ssrContext?: any) {
@@ -207,7 +205,7 @@ export class Theme extends Service {
   get currentTheme () {
     const target = this.dark ? 'dark' : 'light'
 
-    return this.themes![target]
+    return this.themes[target]
   }
 
   get generatedStyles (): string {
