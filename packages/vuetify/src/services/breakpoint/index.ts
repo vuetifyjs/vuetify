@@ -2,7 +2,6 @@
 import { Service } from '../service'
 
 // Types
-import Vue from 'vue'
 import { VuetifyBreakpointOptions } from 'vuetify/types/services/breakpoint'
 
 export class Breakpoint extends Service {
