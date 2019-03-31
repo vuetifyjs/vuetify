@@ -7,7 +7,7 @@
   "optionsDirectivesNotice": "The options object that you pass as the second argument to `Vue.use` can also include both a _directives_ and a _transitions_ property.",
   "importText2": "You can also import components in .vue files, as seen below. When doing so it's important that you import all named exports, and then destructure them in components. Otherwise child components such as `v-card-text` or `v-expansion-panel` will not be available.",
   "styleHeader": "## Required styles",
-  "styleText1": "To obtain all the required styles, we need to import them in Sass. In order for webpack to handle this, you will need to install `node-sass` and the `sass-loader` from **npm**.",
+  "styleText1": "To obtain all the required styles, we need to import them in Sass. In order for webpack to handle this, you will need to install `sass` and the `sass-loader` from **npm**.",
   "stylusDetailNotice": "For a more detailed explanation on how to setup your application to handle Sass, please navigate to the [theme page](/framework/theme#modifying-sass-variables).",
   "styleText2": "Now you will need to require the Sass from the entry point of your application. This is the same place where you're importing Vue and Vuetify (usually `main.js` or `app.js`). Keep in mind, requiring this in your main `App.vue` can cause slow load times as it is re-processed when you make updates.",
   "loaderHeader": "## vuetify-loader",
