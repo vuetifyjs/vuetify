@@ -21,10 +21,21 @@ const cssLoaders = [
 ]
 
 const sassLoaders = [
-  extractCSS ? MiniCssExtractPlugin.loader : 'style-loader',
-  { loader: 'css-loader' },
-  { loader: 'postcss-loader', options: { sourceMap: !isProd } },
-  { loader: 'sass-loader' }
+  ...cssLoaders,
+  { loader: 'sass-loader', options: {
+    implementation: require('sass'),
+    fiber: require('fibers'),
+    indentedSyntax: true
+  } }
+]
+
+const scssLoaders = [
+  ...cssLoaders,
+  { loader: 'sass-loader', options: {
+    implementation: require('sass'),
+    fiber: require('fibers'),
+    indentedSyntax: false
+  } }
 ]
 
 const plugins = [
@@ -44,8 +55,12 @@ exports.config = {
   module: {
     rules: [
       {
-        test: /\.s(a|c)ss$/,
+        test: /\.sass$/,
         use: sassLoaders
+      },
+      {
+        test: /\.scss$/,
+        use: scssLoaders
       }
     ]
   },
