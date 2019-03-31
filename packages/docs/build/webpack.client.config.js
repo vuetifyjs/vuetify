@@ -45,7 +45,9 @@ const config = merge(base, {
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: true
+              sourceMap: true,
+              implementation: require("sass"),
+              fiber: require("fibers")
             }
           }
         ]
