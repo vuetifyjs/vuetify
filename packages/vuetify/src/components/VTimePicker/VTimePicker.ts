@@ -125,7 +125,7 @@ export default mixins(
     isAllowedMinuteCb (): AllowFunction {
       let cb: AllowFunction
 
-      const isHourAllowed = !this.isAllowedHourCb || !this.inputHour || this.isAllowedHourCb(this.inputHour)
+      const isHourAllowed = !this.isAllowedHourCb || this.inputHour === null || this.isAllowedHourCb(this.inputHour)
       if (this.allowedMinutes instanceof Array) {
         cb = (val: number) => (this.allowedMinutes as number[]).includes(val)
       } else {
@@ -152,8 +152,12 @@ export default mixins(
     isAllowedSecondCb (): AllowFunction {
       let cb: AllowFunction
 
-      const isHourAllowed = !this.isAllowedHourCb || !this.inputHour || this.isAllowedHourCb(this.inputHour)
-      const isMinuteAllowed = isHourAllowed && (!this.isAllowedMinuteCb || !this.inputMinute || this.isAllowedMinuteCb(this.inputMinute))
+      const isHourAllowed = !this.isAllowedHourCb || this.inputHour === null || this.isAllowedHourCb(this.inputHour)
+      const isMinuteAllowed = isHourAllowed &&
+        (!this.isAllowedMinuteCb ||
+          this.inputMinute === null ||
+          this.isAllowedMinuteCb(this.inputMinute)
+        )
 
       if (this.allowedSeconds instanceof Array) {
         cb = (val: number) => (this.allowedSeconds as number[]).includes(val)
