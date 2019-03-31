@@ -11,7 +11,6 @@ import { VueConstructor } from 'vue'
 import * as services from './services'
 
 // Styles
-import './stylus/app.styl'
 import './styles/main.sass'
 
 export default class Vuetify {

@@ -16,8 +16,6 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.5.1",
     "@vue/cli-service": "^3.5.1",
-    "babel-eslint": "^10.0.1",
-    "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.2"
+    "babel-eslint": "^10.0.1"
   }
 }
