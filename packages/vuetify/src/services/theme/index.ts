@@ -104,7 +104,7 @@ export class Theme extends Service {
   public init (root: Vue, ssrContext?: any): void {
     if (this.disabled) return
 
-    const meta = root.$meta
+    const meta = (root as any).$meta // TODO: don't import public types from /src
     this.ssr = Boolean(ssrContext || meta)
 
     /* istanbul ignore else */
@@ -188,8 +188,8 @@ export class Theme extends Service {
     root.$children.push({
       $children: [],
       $options: {
-        head: () => metaInfo, // TODO: vue-meta 2.0 $meta.getOptions()
-        metaInfo: () => metaInfo
+        metaInfo, // TODO: vue-meta 2.0 $meta.getOptions()
+        head: metaInfo
       }
     } as any)
   }
