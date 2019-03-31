@@ -185,4 +185,21 @@ describe('Theme.ts', () => {
     expect(ssrContext.head).toBeTruthy()
     expect(ssrContext.head).toMatchSnapshot()
   })
+
+  it('should add fake child element for nuxt ssr support', () => {
+    const theme = new Theme(mock)
+    ;(instance as any).$meta = {}
+
+    expect(instance.$children).toHaveLength(0)
+
+    theme.init(instance)
+
+    expect(instance.$children).toHaveLength(1)
+
+    const options = instance.$children[0].$options as any
+    const head = options.head()
+
+    expect(head).toBeTruthy()
+    expect(head).toMatchSnapshot()
+  })
 })
