@@ -134,9 +134,10 @@ describe('VAutocomplete.ts', () => {
     await wrapper.vm.$nextTick()
 
     const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
 
     input.trigger('focus')
-    input.element.value = 2
+    element.value = '2'
     input.trigger('input')
 
     expect(wrapper.vm.internalSearch).toBe('2')
@@ -151,7 +152,7 @@ describe('VAutocomplete.ts', () => {
     expect(wrapper.vm.internalSearch).toBe(1)
 
     input.trigger('focus')
-    input.element.value = 3
+    element.value = '3'
     input.trigger('input')
     input.trigger('blur')
 
@@ -199,18 +200,6 @@ describe('VAutocomplete.ts', () => {
     expect(wrapper.vm.computedItems).toHaveLength(5)
   })
 
-  it('should show input when focused and autocomplete', async () => {
-    const wrapper = mountFunction()
-
-    const input = wrapper.find('input')
-
-    expect(wrapper.find('input').element.style.display).toBe('none')
-
-    wrapper.trigger('focus')
-
-    expect(wrapper.find('input').element.style.display).toBe('block')
-  })
-
   it('should not filter text with no items', async () => {
     const wrapper = mountFunction({
       propsData: {
@@ -227,7 +216,7 @@ describe('VAutocomplete.ts', () => {
 
     const tile = wrapper.find('.v-list-item__title')
 
-    expect(tile.text()).toBe('No data available')
+    expect(tile.text()).toBe('$vuetify.noDataText')
   })
 
   it('should not display menu when tab focused', async () => {

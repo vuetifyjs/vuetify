@@ -70,7 +70,7 @@ describe('VAutocomplete.ts', () => {
     const chips = wrapper.find('.v-chip')
     const input = wrapper.find('input')
 
-    expect(chips[0].element.classList.contains('v-chip--disabled')).toBe(true)
+    expect(chips.element.classList.contains('v-chip--disabled')).toBe(true)
 
     input.trigger('focus')
     input.trigger('keydown.left')
