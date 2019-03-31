@@ -208,13 +208,14 @@ describe('Theme.ts', () => {
     expect(spy).toHaveBeenCalledTimes(1)
 
     theme.themes.light.primary = '#000000'
-
     await instance.$nextTick()
 
     theme.themes.dark.secondary = '#000000'
-
     await instance.$nextTick()
 
-    expect(spy).toHaveBeenCalledTimes(3)
+    theme.currentTheme.accent = '#000000'
+    await instance.$nextTick()
+
+    expect(spy).toHaveBeenCalledTimes(4)
   })
 })
