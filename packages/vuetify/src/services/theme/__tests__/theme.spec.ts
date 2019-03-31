@@ -175,9 +175,6 @@ describe('Theme.ts', () => {
       ...mock
     })
     const spy = jest.spyOn(theme, 'applyTheme')
-
-    theme.init(instance)
-
     const ssrContext = { head: '' }
     theme.init(instance, ssrContext)
 
@@ -201,5 +198,24 @@ describe('Theme.ts', () => {
 
     expect(head).toBeTruthy()
     expect(head).toMatchSnapshot()
+  })
+
+  it('should react to theme changes', async () => {
+    const theme = new Theme(mock)
+    const spy = jest.spyOn(theme, 'applyTheme')
+    theme.init(instance)
+
+    expect(spy).toHaveBeenCalledTimes(1)
+
+    theme.themes.light.primary = '#000000'
+    await instance.$nextTick()
+
+    theme.themes.dark.secondary = '#000000'
+    await instance.$nextTick()
+
+    theme.currentTheme.accent = '#000000'
+    await instance.$nextTick()
+
+    expect(spy).toHaveBeenCalledTimes(4)
   })
 })

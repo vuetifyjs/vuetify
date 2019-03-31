@@ -43,7 +43,7 @@ export class Theme extends Service {
   public defaults: VuetifyThemes = this.themes
 
   private isDark = null as boolean | null
-  private ssr = false
+  private vueInstance = null as Vue | null
 
   constructor (options: Partial<VuetifyThemeOptions> = {}) {
     super()
@@ -104,18 +104,17 @@ export class Theme extends Service {
   public init (root: Vue, ssrContext?: any): void {
     if (this.disabled) return
 
-    const meta = (root as any).$meta // TODO: don't import public types from /src
-    this.ssr = Boolean(ssrContext || meta)
+    const meta = Boolean((root as any).$meta) // TODO: don't import public types from /src
+    const ssr = Boolean(ssrContext)
 
     /* istanbul ignore else */
     if (meta) {
       this.initNuxt(root)
-    } else if (this.ssr) {
+    } else if (ssr) {
       this.initSSR(ssrContext)
-    } else if (typeof document !== 'undefined') {
-      // Client-side
-      this.applyTheme()
     }
+
+    this.initTheme()
   }
 
   // Allows for you to set target theme
@@ -134,7 +133,6 @@ export class Theme extends Service {
   // Check for existence of style element
   private checkStyleElement (): boolean {
     /* istanbul ignore next */
-    if (this.ssr) return false // SSR
     if (this.styleEl) return true
 
     this.genStyleElement() // If doesn't have it, create it
@@ -158,6 +156,8 @@ export class Theme extends Service {
   // Generate the style element
   // if applicable
   private genStyleElement (): void {
+    if (typeof document === 'undefined') return
+
     /* istanbul ignore next */
     const options = this.options || {}
 
@@ -201,6 +201,30 @@ export class Theme extends Service {
     const nonce = options.cspNonce ? ` nonce="${options.cspNonce}"` : ''
     ssrContext.head = ssrContext.head || ''
     ssrContext.head += `<style type="text/css" id="vuetify-theme-stylesheet"${nonce}>${this.generatedStyles}</style>`
+  }
+
+  private initTheme () {
+    // Only watch for reactivity on client side
+    if (typeof document === 'undefined') return
+
+    // If we get here somehow, ensure
+    // existing instance is removed
+    if (this.vueInstance) this.vueInstance.$destroy()
+
+    // Use Vue instance to track reactivity
+    // TODO: Update to use RFC if merged
+    // https://github.com/vuejs/rfcs/blob/advanced-reactivity-api/active-rfcs/0000-advanced-reactivity-api.md
+    this.vueInstance = new Vue({
+      data: { themes: this.themes },
+
+      watch: {
+        themes: {
+          immediate: true,
+          deep: true,
+          handler: () => this.applyTheme()
+        }
+      }
+    })
   }
 
   get currentTheme () {
