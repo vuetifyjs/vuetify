@@ -1,14 +1,19 @@
 <template>
   <v-app>
-    <router-view />
+    <v-fade-transition appear>
+      <div v-if="isBooted">
+        <router-view />
 
-    <core-toolbar v-if="hasToolbar" />
+        <core-toolbar v-if="hasToolbar" />
+      </div>
+    </v-fade-transition>
   </v-app>
 </template>
 
 <script>
   // Mixins
   import Meta from '@/mixins/meta'
+  import SSRBootable from 'vuetify/lib/mixins/ssr-bootable'
 
   // Utilities
   import { waitForReadystate } from '@/util/helpers'
@@ -19,7 +24,10 @@
   const fallbackLocale = languages.find(lang => lang.fallback === true).locale
 
   export default {
-    mixins: [Meta],
+    mixins: [
+      Meta,
+      SSRBootable
+    ],
 
     data: () => ({
       availableLocales: languages.map(lang => lang.alternate || lang.locale),
