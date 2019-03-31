@@ -562,6 +562,7 @@ describe('VTimePicker.ts', () => {
         }
       })
 
+      expect(wrapper.vm.isAllowedHourCb(0)).toBe(false)
       expect(wrapper.vm.isAllowedHourCb(8)).toBe(false)
       expect(wrapper.vm.isAllowedHourCb(9)).toBe(true)
       expect(wrapper.vm.isAllowedHourCb(10)).toBe(true)
@@ -597,6 +598,7 @@ describe('VTimePicker.ts', () => {
       wrapper.vm.inputMinute = 35
       expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
       expect(wrapper.vm.isAllowedSecondCb(30)).toBe(true)
+      expect(wrapper.vm.isAllowedSecondCb(0)).toBe(true)
 
       wrapper.vm.inputHour = 10
       wrapper.vm.inputMinute = 0
@@ -604,7 +606,8 @@ describe('VTimePicker.ts', () => {
       expect(wrapper.vm.isAllowedMinuteCb(31)).toBe(false)
       expect(wrapper.vm.isAllowedMinuteCb(35)).toBe(true)
       expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
-      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(true)
+      expect(wrapper.vm.isAllowedSecondCb(0)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
       wrapper.vm.inputMinute = 30
       expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
       expect(wrapper.vm.isAllowedSecondCb(30)).toBe(true)
@@ -638,7 +641,8 @@ describe('VTimePicker.ts', () => {
       expect(wrapper.vm.isAllowedMinuteCb(31)).toBe(false)
       expect(wrapper.vm.isAllowedMinuteCb(35)).toBe(false)
       expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
-      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(true)
+      expect(wrapper.vm.isAllowedSecondCb(0)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
       wrapper.vm.inputMinute = 30
       expect(wrapper.vm.isAllowedSecondCb(0)).toBe(true)
       expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
@@ -648,6 +652,13 @@ describe('VTimePicker.ts', () => {
       expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
       wrapper.vm.inputMinute = 35
       expect(wrapper.vm.isAllowedSecondCb(29)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
+
+      wrapper.vm.inputHour = 0
+      expect(wrapper.vm.isAllowedMinuteCb(30)).toBe(false)
+      expect(wrapper.vm.isAllowedMinuteCb(35)).toBe(false)
+      expect(wrapper.vm.isAllowedMinuteCb(50)).toBe(false)
+      expect(wrapper.vm.isAllowedSecondCb(0)).toBe(false)
       expect(wrapper.vm.isAllowedSecondCb(30)).toBe(false)
     })
 
