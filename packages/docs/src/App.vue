@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-fade-transition appear>
-      <div v-if="isBooted">
+      <div v-show="isBooted">
         <router-view />
 
         <core-toolbar v-if="hasToolbar" />
