@@ -1,12 +1,10 @@
 <template>
   <v-app>
-    <v-fade-transition appear>
-      <div v-show="isBooted">
-        <router-view />
-
-        <core-toolbar v-if="hasToolbar" />
-      </div>
+    <v-fade-transition>
+      <router-view v-if="isBooted" />
     </v-fade-transition>
+
+    <core-toolbar v-if="hasToolbar" />
   </v-app>
 </template>
 
