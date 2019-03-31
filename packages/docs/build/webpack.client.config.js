@@ -37,6 +37,18 @@ const config = merge(base, {
             options: { sourceMap: false } // stylus-loader sucks at sourcemaps
           }
         ]
+      },
+      {
+        test: /\.s(a|c)ss$/,
+        use: [
+          ...cssLoaders,
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
       }
     ]
   },
