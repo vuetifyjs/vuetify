@@ -190,7 +190,8 @@ export class Theme extends Service {
       $options: {
         metaInfo, // TODO: vue-meta 2.0 $meta.getOptions()
         head: metaInfo
-      }
+      },
+      $vnode: { data: {} }
     } as any)
   }
 
