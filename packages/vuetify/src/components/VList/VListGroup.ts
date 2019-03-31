@@ -88,7 +88,7 @@ export default baseMixins.extend<options>().extend({
     $route: 'onRouteChange'
   },
 
-  mounted () {
+  created () {
     this.list && this.list.register(this)
 
     if (this.group &&
