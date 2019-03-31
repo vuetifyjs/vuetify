@@ -1,0 +1,78 @@
+@import '../../styles/styles.sass'
+@import './_mixins.sass'
+@import './_variables.sass'
+
+// Theme
+.v-input--switch.theme--light
+  +switch-theme($material-light)
+.v-input--switch.theme--dark
+  +switch-theme($material-dark)
+
+.v-input--switch
+  +rtl()
+    .v-input--selection-controls__ripple
+      left: auto
+      right: $switch-ripple-x
+
+    &.v-input--is-dirty
+      .v-input--selection-controls__ripple,
+      .v-input--switch__thumb
+        transform: translate(-$switch-dirty-offset-x, 0)
+
+  &__track,
+  &__thumb
+    background-color: currentColor
+    pointer-events: none
+    transition: inherit
+
+  &__track
+    border-radius: $switch-track-border-radius
+    width: $switch-track-width
+    height: $switch-track-height
+    left: $switch-track-x
+    position: absolute
+    opacity: $switch-track-opacity
+    right: $switch-track-x
+    top: $switch-track-top
+
+  &__thumb
+    border-radius: 50%
+    top: $switch-thumb-top
+    height: $switch-thumb-height
+    position: relative
+    width: $switch-thumb-width
+    display: flex
+    justify-content: center
+    align-items: center
+    transition: $primary-transition
+
+  .v-input--selection-controls__input
+    width: 38px
+
+  .v-input--selection-controls__ripple
+    left: $switch-ripple-x
+    top: $switch-ripple-top
+
+  &.v-input--is-dirty
+    &.v-input--is-disabled
+      opacity: $switch-disabled-opacity
+
+    .v-input--selection-controls__ripple,
+    .v-input--switch__thumb
+      transform: translate($switch-dirty-offset-x, 0)
+
+  &:not(&--flat):not(&--inset)
+    .v-input--switch__thumb
+      +elevation($switch-thumb-elevation)
+
+  &--inset
+    .v-input--switch__track,
+    .v-input--selection-controls__input
+      width: 48px
+
+    .v-input--switch__track
+      border-radius: 14px
+      height: 28px
+      left: -4px
+      opacity: .32
+      top: calc(50% - 14px)

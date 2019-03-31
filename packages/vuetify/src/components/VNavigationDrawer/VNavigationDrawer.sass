@@ -1,0 +1,73 @@
+@import '../../styles/styles.sass'
+@import './_mixins.sass'
+
+// Theme
+.v-navigation-drawer.theme--light
+  +navigation-drawer-theme($material-light)
+.v-navigation-drawer.theme--dark
+  +navigation-drawer-theme($material-dark)
+
+.v-navigation-drawer
+  +bootable()
+
+  display: block
+  left: 0
+  max-width: 100%
+  overflow-y: auto
+  overflow-x: hidden
+  pointer-events: auto
+  top: 0
+  will-change: transform
+  -webkit-overflow-scrolling: touch
+
+  &[data-booted="true"]
+    transition-property: transform, width
+
+  &__border
+    position: absolute
+    right: 0
+    top: 0
+    height: 100%
+    width: 1px
+
+  &.v-navigation-drawer--right
+    &:after
+      left: 0
+      right: initial
+
+  &--right
+    left: auto
+    right: 0
+
+    > .v-navigation-drawer__border
+      right: auto
+      left: 0
+
+  &--absolute,
+  &--fixed
+    z-index: 6
+
+  &--absolute
+    position: absolute
+
+  &--clipped
+    z-index: 4
+
+  &--fixed
+    position: fixed
+
+  &--floating:after
+    display: none
+
+  &--mini-variant
+    overflow: hidden
+
+  &--temporary,
+  &--is-mobile
+    z-index: 6
+
+    &:not(.v-navigation-drawer--close)
+      +elevation(16)
+
+  .v-list
+    background: inherit

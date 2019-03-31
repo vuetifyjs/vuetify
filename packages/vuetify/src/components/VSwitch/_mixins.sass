@@ -1,0 +1,13 @@
+@mixin switch-theme($material)
+  .v-input--switch__thumb
+    color: map-deep-get($material, 'selection-controls', 'thumb', 'inactive')
+
+  .v-input--switch__track
+    color: map-deep-get($material, 'selection-controls', 'track', 'inactive')
+
+  &.v-input--is-disabled:not(.v-input--is-dirty)
+    .v-input--switch__thumb
+      color: map-deep-get($material, 'selection-controls', 'thumb', 'disabled') !important
+
+    .v-input--switch__track
+      color: map-deep-get($material, 'selection-controls', 'track', 'disabled') !important

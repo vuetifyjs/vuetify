@@ -1,9 +1,22 @@
 import Vue, { Component, PluginFunction, PluginObject, VueConstructor, DirectiveFunction, DirectiveOptions } from 'vue'
-import { VuetifyLangOptions as VuetifyLanguage } from './services/lang'
 import './lib'
 import './alacarte'
 import './colors'
-import { VuetifyThemeOptions } from 'vuetify/types/services/theme'
+
+// Services
+import { Application } from '../src/services/application'
+import { Breakpoint } from '../src/services/breakpoint'
+import { Goto } from '../src/services/goto'
+import { Icons } from '../src/services/icons'
+import { Lang } from '../src/services/lang'
+import { Theme } from '../src/services/theme'
+
+// Service Options
+import { VuetifyBreakpointOptions } from './services/breakpoint'
+import { VuetifyGoToOptions } from './services/goto'
+import { VuetifyIconOptions } from './services/icons'
+import { VuetifyLangOptions } from './services/lang'
+import { VuetifyThemeOptions } from './services/theme'
 
 declare const Vuetify: Vuetify
 export default Vuetify
@@ -12,7 +25,9 @@ export interface Vuetify {
   version: string
 }
 
-export type ComponentOrPack = Component & { $_vuetify_subcomponents?: Record<string, ComponentOrPack> }
+export type ComponentOrPack = Component & {
+  $_vuetify_subcomponents?: Record<string, ComponentOrPack>
+}
 
 export interface VuetifyUseOptions {
   transitions?: Record<string, VueConstructor>
@@ -26,19 +41,18 @@ export interface VuetifyUseOptions {
    *
    * @example &lt;v-icon&gt;$vuetify.icons.(name)&lt;/v-icon&gt;
    */
-  icons?: Partial<VuetifyIcons>
-  lang?: Partial<VuetifyLanguage>
+  icons?: Partial<VuetifyIconOptions>
+  lang?: Partial<VuetifyLangOptions>
   rtl?: boolean
 }
 
 export interface VuetifyObject extends Vue {
-  readonly breakpoint: Readonly<VuetifyBreakpoint>
+  readonly breakpoint: InstanceType<typeof Breakpoint>
   readonly goTo: <T extends string | number | HTMLElement | Vue>(target: T, options?: VuetifyGoToOptions) => Promise<T>
-  readonly t: VuetifyLanguage['t']
-  application: VuetifyApplication
-  theme: VuetifyThemeOptions
-  icons: VuetifyIcons
-  lang: VuetifyLanguage
+  application: InstanceType<typeof Application>
+  theme: InstanceType<typeof Theme>
+  icons: InstanceType<typeof Icons>
+  lang: InstanceType<typeof Lang>
   rtl: boolean
 }
 
@@ -48,109 +62,14 @@ declare module 'vue/types/vue' {
   }
 }
 
-export type VuetifyIconComponent = {
-  component: Component | string
-  props?: object
-}
-export type VuetifyIcon = string | VuetifyIconComponent
-
-export interface VuetifyIcons {
-  [name: string]: VuetifyIcon
-
-  complete: VuetifyIcon
-  cancel: VuetifyIcon
-  close: VuetifyIcon
-  delete: VuetifyIcon
-  clear: VuetifyIcon
-  success: VuetifyIcon
-  info: VuetifyIcon
-  warning: VuetifyIcon
-  error: VuetifyIcon
-  prev: VuetifyIcon
-  next: VuetifyIcon
-  checkboxOn: VuetifyIcon
-  checkboxOff: VuetifyIcon
-  checkboxIndeterminate: VuetifyIcon
-  delimiter: VuetifyIcon
-  sort: VuetifyIcon
-  expand: VuetifyIcon
-  menu: VuetifyIcon
-  subgroup: VuetifyIcon
-  dropdown: VuetifyIcon
-  radioOn: VuetifyIcon
-  radioOff: VuetifyIcon
-  edit: VuetifyIcon
-  ratingEmpty: VuetifyIcon
-  ratingFull: VuetifyIcon
-  ratingHalf: VuetifyIcon
-}
-
-export interface VuetifyApplication {
-  bar: number
-  bottom: number
-  footer: number
-  left: number
-  right: number
-  top: number
-  register (uid: number, target: string, value: number): void
-  unregister (uid: number, target: string): void
-  update (target: string): void
-}
-
-export interface VuetifyBreakpointThresholds {
-  xs: number
-  sm: number
-  md: number
-  lg: number
-}
-
-export interface VuetifyBreakpointOptions {
-  thresholds: VuetifyBreakpointThresholds
-  scrollbarWidth: number
-}
-
-export interface VuetifyBreakpoint {
-  height: number
-  lg: boolean
-  lgAndDown: boolean
-  lgAndUp: boolean
-  lgOnly: boolean
-  md: boolean
-  mdAndDown: boolean
-  mdAndUp: boolean
-  mdOnly: boolean
-  name: string
-  sm: boolean
-  smAndDown: boolean
-  smAndUp: boolean
-  smOnly: boolean
-  width: number
-  xl: boolean
-  xlOnly: boolean
-  xs: boolean
-  xsOnly: boolean
-  thresholds: VuetifyBreakpointThresholds
-  scrollbarWidth: number
-}
-
-export type VuetifyGoToEasing =
-  ((t: number) => number) |
-  'linear' |
-  'easeInQuad' |
-  'easeOutQuad' |
-  'easeInOutQuad' |
-  'easeInCubic' |
-  'easeOutCubic' |
-  'easeInOutCubic' |
-  'easeInQuart' |
-  'easeOutQuart' |
-  'easeInOutQuart' |
-  'easeInQuint' |
-  'easeOutQuint' |
-  'easeInOutQuint'
-
-export interface VuetifyGoToOptions {
-  duration?: number
-  offset?: number
-  easing?: VuetifyGoToEasing
+declare module 'vue/types/options' {
+  export interface ComponentOptions<
+    V extends Vue,
+    Data=DefaultData<V>,
+    Methods=DefaultMethods<V>,
+    Computed=DefaultComputed,
+    PropsDef=PropsDefinition<DefaultProps>,
+    Props=DefaultProps> {
+    vuetify?: any
+  }
 }

@@ -1,4 +1,4 @@
-import '../../stylus/components/_snackbars.styl'
+import './VSnackbar.sass'
 
 import Colorable from '../../mixins/colorable'
 import Toggleable from '../../mixins/toggleable'

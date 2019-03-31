@@ -1,0 +1,26 @@
+@import '../../styles/styles.sass'
+
+@mixin radio-theme($material)
+  &--is-disabled
+    label
+      color: map-deep-get($material, 'text', 'disabled')
+
+    .v-icon
+      // needed for helper override
+      color: map-deep-get($material, 'buttons', 'disabled') !important
+
+// Theme
+.v-radio.theme--light
+  +radio-theme($material-light)
+.v-radio.theme--dark
+  +radio-theme($material-dark)
+
+.v-radio
+  align-items: center
+  display: flex
+  height: auto
+  margin-right: 16px
+  outline: none
+
+  &--is-disabled
+    pointer-events: none

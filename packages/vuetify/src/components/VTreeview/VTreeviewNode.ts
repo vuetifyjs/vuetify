@@ -297,6 +297,9 @@ export default mixins<options>(
         'v-treeview-node--click': this.openOnClick,
         'v-treeview-node--selected': this.isSelected,
         'v-treeview-node--excluded': this.treeview.isExcluded(this.key)
+      },
+      attrs: {
+        'aria-expanded': String(this.isOpen)
       }
     }, children)
   }

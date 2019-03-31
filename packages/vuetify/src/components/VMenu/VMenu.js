@@ -1,4 +1,4 @@
-import '../../stylus/components/_menus.styl'
+import './VMenu.sass'
 
 import Vue from 'vue'
 

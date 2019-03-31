@@ -245,6 +245,8 @@ export default baseMixins.extend({
         if (el) return el
       }
 
+      consoleError('No activator found')
+
       return null
     },
     genActivator () {
