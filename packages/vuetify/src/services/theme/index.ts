@@ -135,7 +135,7 @@ export class Theme extends Service {
         themes: {
           immediate: true,
           deep: true,
-          handler: () => this.applyTheme.call(this)
+          handler: () => this.applyTheme()
         }
       }
     })
