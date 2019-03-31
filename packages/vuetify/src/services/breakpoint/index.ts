@@ -2,42 +2,43 @@
 import { Service } from '../service'
 
 // Types
+import Vue from 'vue'
 import { VuetifyBreakpointOptions } from 'vuetify/types/services/breakpoint'
 
 export class Breakpoint extends Service {
-  static property = 'breakpoint'
+  public static property = 'breakpoint'
 
   // Public
-  xs = false
-  sm = false
-  md = false
-  lg = false
-  xl = false
+  public xs = false
+  public sm = false
+  public md = false
+  public lg = false
+  public xl = false
 
-  xsOnly = false
-  smOnly = false
-  smAndDown = false
-  smAndUp = false
-  mdOnly = false
-  mdAndDown = false
-  mdAndUp = false
-  lgOnly = false
-  lgAndDown = false
-  lgAndUp = false
-  xlOnly = false
+  public xsOnly = false
+  public smOnly = false
+  public smAndDown = false
+  public smAndUp = false
+  public mdOnly = false
+  public mdAndDown = false
+  public mdAndUp = false
+  public lgOnly = false
+  public lgAndDown = false
+  public lgAndUp = false
+  public xlOnly = false
 
-  name = ''
+  public name = ''
 
-  height = 0
-  width = 0
+  public height = 0
+  public width = 0
 
-  thresholds = {
+  public thresholds = {
     xs: 600,
     sm: 960,
     md: 1280,
     lg: 1920
   }
-  scrollbarWidth = 16
+  public scrollbarWidth = 16
 
   private resizeTimeout = 0
 
@@ -51,21 +52,10 @@ export class Breakpoint extends Service {
       options.scrollBarWidth ||
       this.scrollbarWidth
     )
-
     this.init()
   }
 
-  onResize () {
-    clearTimeout(this.resizeTimeout)
-
-    // Added debounce to match what
-    // v-resize used to do but was
-    // removed due to a memory leak
-    // https://github.com/vuetifyjs/vuetify/pull/2997
-    this.resizeTimeout = window.setTimeout(this.update.bind(this), 200)
-  }
-
-  init () {
+  public init () {
     /* istanbul ignore if */
     if (typeof window === 'undefined') return
 
@@ -78,8 +68,18 @@ export class Breakpoint extends Service {
     this.update()
   }
 
+  private onResize () {
+    clearTimeout(this.resizeTimeout)
+
+    // Added debounce to match what
+    // v-resize used to do but was
+    // removed due to a memory leak
+    // https://github.com/vuetifyjs/vuetify/pull/2997
+    this.resizeTimeout = window.setTimeout(this.update.bind(this), 200)
+  }
+
   /* eslint-disable-next-line max-statements */
-  update () {
+  private update () {
     const height = this.getClientHeight()
     const width = this.getClientWidth()
 
