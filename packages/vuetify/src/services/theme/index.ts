@@ -6,6 +6,7 @@ import { Service } from '../service'
 import * as ThemeUtils from './utils'
 
 // Types
+import Vue from 'vue'
 import {
   VuetifyParsedTheme,
   VuetifyThemeOptions,
@@ -90,33 +91,7 @@ export class Theme extends Service {
   public applyTheme (): void {
     if (this.disabled) return this.clearCss()
 
-    const options = this.options || {}
-    const parsedTheme = this.parsedTheme
-
-    let css: string | null = ''
-
-    // Theme cache get
-    if (options.themeCache != null) {
-      this.css = options.themeCache.get(parsedTheme) || this.css
-    }
-
-    // Generate styles
-    css = ThemeUtils.genStyles(
-      parsedTheme,
-      options.customProperties
-    )
-
-    // Minify theme
-    if (options.minifyTheme != null) {
-      css = options.minifyTheme(css)
-    }
-
-    // Theme cache set
-    if (options.themeCache != null) {
-      options.themeCache.set(parsedTheme, css)
-    }
-
-    this.css = css
+    this.css = this.generatedStyles
   }
 
   public clearCss (): void {
@@ -126,18 +101,17 @@ export class Theme extends Service {
   // Initialize theme for SSR and SPA
   // Attach to ssrContext head or
   // apply new theme to document
-  public init (ssrContext?: any): void {
+  public init (root: Vue, ssrContext?: any): void {
     if (this.disabled) return
 
-    this.ssr = Boolean(ssrContext)
+    const meta = (root as any).$meta // TODO: don't import public types from /src
+    this.ssr = Boolean(ssrContext || meta)
 
     /* istanbul ignore else */
-    if (this.ssr) {
-      const options = this.options || {}
-      // SSR
-      const nonce = options.cspNonce ? ` nonce="${options.cspNonce}"` : ''
-      ssrContext.head = ssrContext.head || ''
-      ssrContext.head += `<style type="text/css" id="vuetify-theme-stylesheet"${nonce}>${this.generatedStyles}</style>`
+    if (meta) {
+      this.initNuxt(root)
+    } else if (this.ssr) {
+      this.initSSR(ssrContext)
     } else if (typeof document !== 'undefined') {
       // Client-side
       this.applyTheme()
@@ -195,15 +169,44 @@ export class Theme extends Service {
       this.styleEl.setAttribute('nonce', options.cspNonce)
     }
 
-    // Asserts that document could
-    // be null typescript is hard
-    document!.head!.appendChild(this.styleEl)
+    document.head.appendChild(this.styleEl)
+  }
+
+  private initNuxt (root: Vue) {
+    const options = this.options || {}
+    const metaInfo = {
+      style: [
+        {
+          cssText: this.generatedStyles,
+          type: 'text/css',
+          id: 'vuetify-theme-stylesheet',
+          nonce: options.cspNonce
+        }
+      ]
+    }
+
+    root.$children.push({
+      $children: [],
+      $options: {
+        metaInfo, // TODO: vue-meta 2.0 $meta.getOptions()
+        head: metaInfo
+      },
+      $vnode: { data: {} }
+    } as any)
+  }
+
+  private initSSR (ssrContext?: any) {
+    const options = this.options || {}
+    // SSR
+    const nonce = options.cspNonce ? ` nonce="${options.cspNonce}"` : ''
+    ssrContext.head = ssrContext.head || ''
+    ssrContext.head += `<style type="text/css" id="vuetify-theme-stylesheet"${nonce}>${this.generatedStyles}</style>`
   }
 
   get currentTheme () {
     const target = this.dark ? 'dark' : 'light'
 
-    return this.themes![target]
+    return this.themes[target]
   }
 
   get generatedStyles (): string {

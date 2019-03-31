@@ -212,58 +212,57 @@
   }
 </script>
 
-<style lang="stylus">
-  @import '~vuetify/src/stylus/settings/_variables.styl'
+<style lang="sass">
+@import '~vuetify/src/styles/settings/_variables.scss'
 
-  #snackbars, #data-tables
-    .component-example .application--example
-      z-index: auto
+#snackbars, #data-tables
+  .component-example .application--example
+    z-index: auto
 
-  .v-example__container
-    height: 100%
-    max-height: calc(100vh - 275px)
-    overflow-y: auto
+.v-example__container
+  height: 100%
+  max-height: calc(100vh - 275px)
+  overflow-y: auto
 
-  .v-example:not(:first-child) .v-example__container {
-    border-left: 1px solid rgba(#FFF, .12)
-  }
+.v-example:not(:first-child) .v-example__container
+  border-left: 1px solid rgba(#FFF, .12)
 
-  .component-example
-    // margin-bottom: 32px
+.component-example
+  // margin-bottom: 32px
 
-    .application--example
-      position: relative
-      transition: .3s $transition.swing
-      overflow: hidden
-      z-index: 0
+  .application--example
+    position: relative
+    transition: .3s map-get($transition, 'swing')
+    overflow: hidden
+    z-index: 0
 
-      > div,
-      > form,
-      > footer
-        width: 100%
+    > div,
+    > form,
+    > footer
+      width: 100%
 
-    .component-example__panel
-      .v-expansion-panel__body
-        border: none
+  .component-example__panel
+    .v-expansion-panel__body
+      border: none
 
-      .v-tab, .markup
-        height: 100%
+    .v-tab, .markup
+      height: 100%
 
-      .v-tabs
-        border: none
-        max-height: 500px
-        overflow-y: auto
+    .v-tabs
+      border: none
+      max-height: 500px
+      overflow-y: auto
 
-      > li
-        border: none
+    > li
+      border: none
 
-    .justify
-      text-align: justify
+  .justify
+    text-align: justify
 
-    aside.v-navigation-drawer,
-    .v-overlay
-      z-index: 1
+  aside.v-navigation-drawer,
+  .v-overlay
+    z-index: 1
 
-    nav.v-toolbar
-      z-index: 0
+  nav.v-toolbar
+    z-index: 0
 </style>
