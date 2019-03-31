@@ -197,7 +197,7 @@ describe('Theme.ts', () => {
     expect(instance.$children).toHaveLength(1)
 
     const options = instance.$children[0].$options as any
-    const head = options.head()
+    const head = options.head
 
     expect(head).toBeTruthy()
     expect(head).toMatchSnapshot()
