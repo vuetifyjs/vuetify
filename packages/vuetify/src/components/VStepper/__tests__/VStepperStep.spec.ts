@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 // Components
 import VStepperStep from '../VStepperStep'
 
@@ -8,6 +10,14 @@ import {
 } from '@vue/test-utils'
 
 import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
+
+Vue.prototype.$vuetify = {
+  icons: {
+    values: {
+      complete: 'mdi-check'
+    }
+  }
+}
 
 const tip = '[Vuetify] The v-stepper-step component must be used inside a v-stepper'
 const warning = '[Vue warn]: Injection "stepClick" not found'
