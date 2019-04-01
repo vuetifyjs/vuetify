@@ -94,13 +94,6 @@ export default VAutocomplete.extend({
           }
         }
       }, [itemObj.text])
-    },
-    setSelectedItems () {
-      if (this.internalValue == null) {
-        this.selectedItems = []
-      } else {
-        this.selectedItems = [this.internalValue]
-      }
     }
   }
 })
