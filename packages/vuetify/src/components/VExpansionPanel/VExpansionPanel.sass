@@ -1,12 +1,21 @@
 @import '../../styles/styles.sass'
 @import './_variables.scss'
-@import './_mixins.sass'
 
 // Theme
-.v-expansion-panels.theme--light
-  +expansion-panel-theme($material-light)
-.v-expansion-panels.theme--dark
-  +expansion-panel-theme($material-dark)
++theme(v-expansion-panel) using ($material)
+  background-color: map-get($material, 'cards')
+  color: map-deep-get($material, 'text', 'primary')
+
+  &::after
+    border-color: map-get($material, 'dividers')
+
+  .v-expansion-panel-header
+    .v-expansion-panel-header__icon
+      .v-icon
+        color: map-deep-get($material, 'icons', 'active')
+
+  &--disabled
+    color: map-deep-get($material, 'text', 'disabled')
 
 // Block
 .v-expansion-panels

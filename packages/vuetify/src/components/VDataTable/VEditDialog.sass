@@ -1,16 +1,12 @@
 @import '../../styles/styles.sass'
 
-@mixin small-dialog-theme($material)
++theme(v-small-dialog) using ($material)
   a
     color: rgba(map-get($material, 'fg-color'), map-get($material, 'primary-text-percent'))
 
-  .v-small-dialog__content, .v-small-dialog__actions
+  &__content,
+  &__actions
     background: map-get($material, 'cards')
-
-.v-small-dialog.theme--light
-  +small-dialog-theme($material-light)
-.v-small-dialog.theme--dark
-  +small-dialog-theme($material-dark)
 
 .v-small-dialog
   display: block

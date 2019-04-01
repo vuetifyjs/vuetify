@@ -1,17 +1,12 @@
 @import '../../styles/styles.sass'
 @import './_variables.scss'
-@import './_mixins.sass'
 
 // Theme
-.v-picker__title.theme--light
-  +picker-title-theme($material-light)
-.v-picker__title.theme--dark
-  +picker-title-theme($material-dark)
++theme(v-picker__title) using ($material)
+  background: map-deep-get($material, 'picker', 'title')
 
-.v-picker__body.theme--light
-  +picker-body-theme($material-light)
-.v-picker__body.theme--dark
-  +picker-body-theme($material-dark)
++theme(v-picker__body) using ($material)
+  background: map-deep-get($material, 'picker', 'body')
 
 .v-picker
   border-radius: $picker-border-radius

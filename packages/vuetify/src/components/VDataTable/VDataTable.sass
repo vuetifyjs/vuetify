@@ -1,13 +1,25 @@
 // Imports
 @import '../../styles/styles.sass'
 @import './_variables.scss'
-@import './_mixins.sass'
 
 // Theme
-.v-data-table.theme--light
-  +data-table-theme($material-light)
-.v-data-table.theme--dark
-  +data-table-theme($material-dark)
++theme(v-data-table) using ($material)
+  tbody
+    tr
+      &:hover:not(.v-data-table__expand-row)
+        background: map-deep-get($material, 'table', 'hover')
+
+      &.expanded
+        border-bottom: 0
+
+        &.expanded__row
+          background: map-deep-get($material, 'table', 'active')
+
+        &.expanded__content
+          box-shadow: inset 0px 4px 8px -5px rgba(50, 50, 50, 0.75), inset 0px -4px 8px -5px rgba(50, 50, 50, 0.75)
+
+  .v-data-footer
+    border-top: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
 
 .v-data-table__mobile-row
   display: block

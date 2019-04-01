@@ -1,6 +1,5 @@
 // Imports
 @import '../../styles/styles.sass'
-@import './_mixins.sass'
 @import './_variables.scss'
 
 // Theme
@@ -14,10 +13,10 @@
   &.info
     color: map-deep-get($material-dark, 'text', 'primary')
 
-.v-chip.theme--light
-  +chip-theme($material-light)
-.v-chip.theme--dark
-  +chip-theme($material-dark)
++theme(v-chip) using ($material)
+  background: map-get($material, 'chips')
+  border-color: map-get($material, 'dividers')
+  color: map-deep-get($material, 'text', 'primary')
 
 // Block
 .v-chip

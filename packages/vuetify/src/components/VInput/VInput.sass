@@ -1,11 +1,21 @@
 @import '../../styles/styles.sass'
-@import './_mixins.sass'
 
 /* Theme */
-.v-input.theme--light
-  +input-theme($material-light)
-.v-input.theme--dark
-  +input-theme($material-dark)
++theme(v-input) using ($material)
+  &:not(.v-input--is-disabled)
+    input,
+    textarea
+      color: map-deep-get($material, 'text', 'primary')
+
+  input::placeholder,
+  textarea::placeholder
+    color: map-deep-get($material, 'text', 'disabled')
+
+  &--is-disabled
+    .v-label,
+    input,
+    textarea
+      color: map-deep-get($material, 'text', 'disabled')
 
 .v-input
   align-items: flex-start
