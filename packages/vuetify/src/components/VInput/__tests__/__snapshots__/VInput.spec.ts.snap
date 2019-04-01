@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VInput.js should apply theme to label, counter, messages and icons 1`] = `
+exports[`VInput.ts should apply theme to label, counter, messages and icons 1`] = `
 
 <div class="v-input theme--light">
   <div class="v-input__prepend-outer">
@@ -22,11 +22,14 @@ exports[`VInput.js should apply theme to label, counter, messages and icons 1`] 
       </label>
     </div>
     <div class="v-messages theme--light">
-      <div class="v-messages__wrapper">
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
         <div class="v-messages__message">
           bar
         </div>
-      </div>
+      </span>
     </div>
   </div>
   <div class="v-input__append-outer">
@@ -42,37 +45,46 @@ exports[`VInput.js should apply theme to label, counter, messages and icons 1`] 
 
 `;
 
-exports[`VInput.js should be in an error state 1`] = `
+exports[`VInput.ts should be in an error state 1`] = `
 
 <div class="v-input v-input--has-state theme--light error--text">
   <div class="v-input__control">
     <div class="v-input__slot">
     </div>
     <div class="v-messages theme--light error--text">
-      <div class="v-messages__wrapper">
-      </div>
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
     </div>
   </div>
 </div>
 
 `;
 
-exports[`VInput.js should be in an error state 2`] = `
+exports[`VInput.ts should be in an error state 2`] = `
 
 <div class="v-input v-input--has-state theme--light error--text">
   <div class="v-input__control">
     <div class="v-input__slot">
     </div>
     <div class="v-messages theme--light error--text">
-      <div class="v-messages__wrapper">
-      </div>
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+        <div class="v-messages__message">
+          required
+        </div>
+      </span>
     </div>
   </div>
 </div>
 
 `;
 
-exports[`VInput.js should generate an icon and match snapshot 1`] = `
+exports[`VInput.ts should generate an icon and match snapshot 1`] = `
 
 <div class="v-input theme--light">
   <div class="v-input__prepend-outer">
@@ -88,23 +100,29 @@ exports[`VInput.js should generate an icon and match snapshot 1`] = `
     <div class="v-input__slot">
     </div>
     <div class="v-messages theme--light">
-      <div class="v-messages__wrapper">
-      </div>
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
     </div>
   </div>
 </div>
 
 `;
 
-exports[`VInput.js should generate an icon and match snapshot 2`] = `
+exports[`VInput.ts should generate an icon and match snapshot 2`] = `
 
 <div class="v-input theme--light">
   <div class="v-input__control">
     <div class="v-input__slot">
     </div>
     <div class="v-messages theme--light">
-      <div class="v-messages__wrapper">
-      </div>
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
     </div>
   </div>
   <div class="v-input__append-outer">
@@ -120,15 +138,18 @@ exports[`VInput.js should generate an icon and match snapshot 2`] = `
 
 `;
 
-exports[`VInput.js should generate append and prepend slots 1`] = `
+exports[`VInput.ts should generate append and prepend slots 1`] = `
 
 <div class="v-input theme--light">
   <div class="v-input__control">
     <div class="v-input__slot">
     </div>
     <div class="v-messages theme--light">
-      <div class="v-messages__wrapper">
-      </div>
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
     </div>
   </div>
   <div class="v-input__append-outer">
@@ -140,7 +161,7 @@ exports[`VInput.js should generate append and prepend slots 1`] = `
 
 `;
 
-exports[`VInput.js should generate append and prepend slots 2`] = `
+exports[`VInput.ts should generate append and prepend slots 2`] = `
 
 <div class="v-input theme--light">
   <div class="v-input__prepend-outer">
@@ -152,15 +173,18 @@ exports[`VInput.js should generate append and prepend slots 2`] = `
     <div class="v-input__slot">
     </div>
     <div class="v-messages theme--light">
-      <div class="v-messages__wrapper">
-      </div>
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
     </div>
   </div>
 </div>
 
 `;
 
-exports[`VInput.js should not generate input details 1`] = `
+exports[`VInput.ts should not generate input details 1`] = `
 
 <div class="v-input v-input--hide-details theme--light">
   <div class="v-input__control">
@@ -171,7 +195,7 @@ exports[`VInput.js should not generate input details 1`] = `
 
 `;
 
-exports[`VInput.js should render a label 1`] = `
+exports[`VInput.ts should render a label 1`] = `
 
 <div class="v-input theme--light">
   <div class="v-input__control">
@@ -184,15 +208,18 @@ exports[`VInput.js should render a label 1`] = `
       </label>
     </div>
     <div class="v-messages theme--light">
-      <div class="v-messages__wrapper">
-      </div>
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
     </div>
   </div>
 </div>
 
 `;
 
-exports[`VInput.js should render a label 2`] = `
+exports[`VInput.ts should render a label 2`] = `
 
 <div class="v-input theme--light">
   <div class="v-input__control">
@@ -207,8 +234,11 @@ exports[`VInput.js should render a label 2`] = `
       </label>
     </div>
     <div class="v-messages theme--light">
-      <div class="v-messages__wrapper">
-      </div>
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
     </div>
   </div>
 </div>

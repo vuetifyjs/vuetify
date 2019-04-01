@@ -1,9 +1,21 @@
-import VInput from '@/components/VInput'
-import { test } from '@/test'
+import VInput from '../VInput'
+import {
+  mount,
+  MountOptions,
+  Wrapper
+} from '@vue/test-utils'
 
-test('VInput.js', ({ mount }) => {
+describe('VInput.ts', () => {
+  type Instance = InstanceType<typeof VInput>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+  beforeEach(() => {
+    mountFunction = (options?: MountOptions<Instance>) => {
+      return mount(VInput, options)
+    }
+  })
+
   it('should have hint', () => {
-    const wrapper = mount(VInput, {
+    const wrapper = mountFunction({
       propsData: {
         hint: 'foo'
       }
@@ -19,7 +31,7 @@ test('VInput.js', ({ mount }) => {
   })
 
   it('should emit an input update', () => {
-    const wrapper = mount(VInput)
+    const wrapper = mountFunction()
 
     const input = jest.fn()
     wrapper.vm.$on('input', input)
@@ -34,10 +46,10 @@ test('VInput.js', ({ mount }) => {
     const el = slot => ({
       render: h => h('div', slot)
     })
-    const wrapper = mount(VInput, {
+    const wrapper = mountFunction({
       slots: { 'append': [el('append')] }
     })
-    const wrapper2 = mount(VInput, {
+    const wrapper2 = mountFunction({
       slots: { 'prepend': [el('prepend')] }
     })
 
@@ -46,7 +58,7 @@ test('VInput.js', ({ mount }) => {
   })
 
   it('should generate an icon and match snapshot', () => {
-    const wrapper = mount(VInput, {
+    const wrapper = mountFunction({
       propsData: {
         prependIcon: 'list'
       }
@@ -63,7 +75,7 @@ test('VInput.js', ({ mount }) => {
   })
 
   it('should not generate input details', () => {
-    const wrapper = mount(VInput, {
+    const wrapper = mountFunction({
       propsData: {
         hideDetails: true
       }
@@ -75,7 +87,7 @@ test('VInput.js', ({ mount }) => {
 
   it('should invoke callback', () => {
     const cb = jest.fn()
-    const wrapper = mount(VInput, {
+    const wrapper = mountFunction({
       propsData: {
         prependIcon: 'list',
         appendIcon: 'search'
@@ -88,17 +100,15 @@ test('VInput.js', ({ mount }) => {
 
     const click = jest.fn()
     wrapper.vm.$on('click', click)
-    wrapper.vm.$on('click:prepend', cb)
-    wrapper.vm.$on('click:append', cb)
 
-    const prepend = wrapper.find('.v-icon')[0]
-    const append = wrapper.find('.v-icon')[1]
-    const slot = wrapper.first('.v-input__slot')
+    const prepend = wrapper.findAll('.v-icon').wrappers[0]
+    const append = wrapper.findAll('.v-icon').wrappers[1]
+    const slot = wrapper.find('.v-input__slot')
 
     prepend.trigger('click')
-    expect(cb.mock.calls.length).toBe(1)
+    expect(cb).toHaveBeenCalledTimes(1)
     append.trigger('click')
-    expect(cb.mock.calls.length).toBe(2)
+    expect(cb).toHaveBeenCalledTimes(2)
     expect(click).not.toHaveBeenCalled()
 
     slot.trigger('click')
@@ -106,9 +116,9 @@ test('VInput.js', ({ mount }) => {
   })
 
   it('should accept a custom height', () => {
-    const wrapper = mount(VInput)
+    const wrapper = mountFunction()
 
-    const inputWrapper = wrapper.first('.v-input__slot')
+    const inputWrapper = wrapper.find('.v-input__slot')
     expect(inputWrapper.element.style.height).toBe('')
     expect(wrapper.vm.height).toBe(undefined)
 
@@ -119,7 +129,7 @@ test('VInput.js', ({ mount }) => {
   })
 
   it('should update lazyValue when value is updated', () => {
-    const wrapper = mount(VInput, {
+    const wrapper = mountFunction({
       propsData: {
         value: 'foo'
       }
@@ -136,7 +146,7 @@ test('VInput.js', ({ mount }) => {
     const onClick = jest.fn()
     const onMouseDown = jest.fn()
     const onMouseUp = jest.fn()
-    const wrapper = mount(VInput, {
+    const wrapper = mountFunction({
       methods: {
         onClick,
         onMouseDown,
@@ -144,7 +154,7 @@ test('VInput.js', ({ mount }) => {
       }
     })
 
-    const slot = wrapper.first('.v-input__slot')
+    const slot = wrapper.find('.v-input__slot')
 
     wrapper.trigger('click')
     wrapper.trigger('mousedown')
@@ -159,7 +169,7 @@ test('VInput.js', ({ mount }) => {
   })
 
   it('should be in an error state', async () => {
-    const wrapper = mount(VInput, {
+    const wrapper = mountFunction({
       propsData: { error: true }
     })
 
@@ -170,7 +180,7 @@ test('VInput.js', ({ mount }) => {
   })
 
   it('should be disabled', () => {
-    const wrapper = mount(VInput)
+    const wrapper = mountFunction()
 
     expect(wrapper.vm.isDisabled).toBe(false)
 
@@ -191,7 +201,7 @@ test('VInput.js', ({ mount }) => {
   })
 
   it('should render a label', () => {
-    const wrapper = mount(VInput, {
+    const wrapper = mountFunction({
       propsData: { label: 'foo' }
     })
 
@@ -199,7 +209,7 @@ test('VInput.js', ({ mount }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    const wrapper2 = mount(VInput, {
+    const wrapper2 = mountFunction({
       slots: {
         label: [{ render: h => h('div', 'foo') }]
       }
@@ -209,7 +219,7 @@ test('VInput.js', ({ mount }) => {
   })
 
   it('should apply theme to label, counter, messages and icons', () => {
-    const wrapper = mount(VInput, {
+    const wrapper = mountFunction({
       propsData: {
         label: 'foo',
         hint: 'bar',
