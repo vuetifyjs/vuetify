@@ -1,13 +1,13 @@
 // Imports
 @import '../../styles/styles.sass'
 @import './_variables.scss'
-@import './_mixins.sass'
 
 // Theme
-.v-icon.theme--light
-  +icon-theme($material-light)
-.v-icon.theme--dark
-  +icon-theme($material-dark)
++theme(v-icon) using ($material)
+  color: map-deep-get($material, 'icons', 'active')
+
+  &--disabled
+    color: map-deep-get($material, 'icons', 'inactive') !important
 
 .v-icon
   align-items: center

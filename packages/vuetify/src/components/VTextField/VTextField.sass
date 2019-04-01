@@ -1,6 +1,6 @@
 @import '../../styles/styles.sass'
 
-@mixin text-field-theme($material)
++theme(v-text-field) using ($material)
   & > .v-input__control > .v-input__slot:before
     border-color: map-get($material, 'input-bottom-line')
 
@@ -57,11 +57,6 @@
 
     &:not(.v-input--is-focused):not(.v-input--has-state) > .v-input__control > .v-input__slot:hover
       border: 2px solid map-deep-get($material, 'text', 'primary')
-
-.v-text-field.theme--light
-  +text-field-theme($material-light)
-.v-text-field.theme--dark
-  +text-field-theme($material-dark)
 
 .v-text-field
   padding-top: $text-field-active-label-height

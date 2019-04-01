@@ -1,13 +1,8 @@
 @import '../../styles/styles.sass'
 
 /* Theme */
-@mixin messages-theme($material)
++theme(v-messages) using ($material)
   color: map-deep-get($material, 'text', 'secondary')
-
-.v-messages.theme--light
-  +messages-theme($material-light)
-.v-messages.theme--dark
-  +messages-theme($material-dark)
 
 .v-messages
   flex: 1 1 auto

@@ -1,12 +1,20 @@
 @import '../../styles/styles.sass'
-@import './_mixins.sass'
 @import './_variables.sass'
 
 // Theme
-.v-input--switch.theme--light
-  +switch-theme($material-light)
-.v-input--switch.theme--dark
-  +switch-theme($material-dark)
++theme(v-input--switch) using ($material)
+  .v-input--switch__thumb
+    color: map-deep-get($material, 'selection-controls', 'thumb', 'inactive')
+
+  .v-input--switch__track
+    color: map-deep-get($material, 'selection-controls', 'track', 'inactive')
+
+  &.v-input--is-disabled:not(.v-input--is-dirty)
+    .v-input--switch__thumb
+      color: map-deep-get($material, 'selection-controls', 'thumb', 'disabled') !important
+
+    .v-input--switch__track
+      color: map-deep-get($material, 'selection-controls', 'track', 'disabled') !important
 
 .v-input--switch
   +rtl()

@@ -1,11 +1,11 @@
 @import '../styles.sass'
-@import './_mixins.sass'
 
 // Theme
-.v-input--selection-controls.theme--light
-  +selection-control-theme($material-light)
-.v-input--selection-controls.theme--dark
-  +selection-control-theme($material-dark)
++theme(v-input--selection-controls) using ($material)
+  &.v-input--is-disabled
+    .v-icon
+      // needed for helper override
+      color: map-deep-get($material, 'buttons', 'disabled') !important
 
 .v-input--selection-controls
   margin-top: $input-top-spacing
