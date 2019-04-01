@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VRangeSlider.vue should render a vertical slider 1`] = `
+exports[`VRangeSlider.ts should render a vertical slider 1`] = `
 
 <div class="v-input v-input--range-slider v-input__slider v-input__slider--vertical v-input--is-label-active v-input--is-dirty theme--light">
   <div class="v-input__control">
@@ -51,15 +51,18 @@ exports[`VRangeSlider.vue should render a vertical slider 1`] = `
       </div>
     </div>
     <div class="v-messages theme--light">
-      <div class="v-messages__wrapper">
-      </div>
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
     </div>
   </div>
 </div>
 
 `;
 
-exports[`VRangeSlider.vue should render disabled slider 1`] = `
+exports[`VRangeSlider.ts should render disabled slider 1`] = `
 
 <div class="v-input v-input--range-slider v-input__slider v-input--is-label-active v-input--is-dirty v-input--is-disabled theme--light">
   <div class="v-input__control">
@@ -112,8 +115,11 @@ exports[`VRangeSlider.vue should render disabled slider 1`] = `
       </div>
     </div>
     <div class="v-messages theme--light">
-      <div class="v-messages__wrapper">
-      </div>
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
     </div>
   </div>
 </div>

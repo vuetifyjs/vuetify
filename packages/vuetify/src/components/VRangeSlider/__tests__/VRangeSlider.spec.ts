@@ -1,26 +1,46 @@
-import { test } from '@/test'
-import VRangeSlider from '@/components/VRangeSlider'
+import VRangeSlider from '../VRangeSlider'
+import {
+  mount,
+  MountOptions,
+  Wrapper
+} from '@vue/test-utils'
 
+describe('VRangeSlider.ts', () => {
+  type Instance = InstanceType<typeof VRangeSlider>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 
-test('VRangeSlider.vue', ({ mount }) => {
   let el
   beforeEach(() => {
     el = document.createElement('div')
     el.setAttribute('data-app', 'true')
     document.body.appendChild(el)
+
+    mountFunction = (options?: MountOptions<Instance>) => {
+      return mount(VRangeSlider, {
+        ...options,
+        mocks: {
+          $vuetify: {
+            rtl: false,
+            theme: {
+              dark: false
+            }
+          }
+        }
+      })
+    }
   })
   afterEach(() => {
     document.body.removeChild(el)
   })
 
   it('should provide a default value if non provided', async () => {
-    const wrapper = mount(VRangeSlider)
+    const wrapper = mountFunction()
 
     expect(wrapper.vm.lazyValue).toEqual([0, 0])
   })
 
   it('should round values and swap order if needed', () => {
-    const wrapper = mount(VRangeSlider, {
+    const wrapper = mountFunction({
       propsData: {
         value: [0, 0]
       }
@@ -33,11 +53,11 @@ test('VRangeSlider.vue', ({ mount }) => {
 
     wrapper.vm.internalValue = [1.01, 2.99]
 
-    expect(input).toBeCalledWith([1, 3])
+    expect(input).toHaveBeenCalledWith([1, 3])
 
     wrapper.vm.internalValue = [4.5, 2.99]
 
-    expect(input).toBeCalledWith([3, 5])
+    expect(input).toHaveBeenCalledWith([3, 5])
 
     wrapper.setData({ activeThumb: 1 })
 
@@ -45,23 +65,23 @@ test('VRangeSlider.vue', ({ mount }) => {
 
     wrapper.vm.internalValue = [5, 1.1]
 
-    expect(input).toBeCalledWith([1, 5])
+    expect(input).toHaveBeenCalledWith([1, 5])
     expect(wrapper.vm.activeThumb).toBe(0)
 
-    wrapper.setProps({ value: [1, 5 ]})
+    wrapper.setProps({ value: [1, 5] })
     wrapper.vm.internalValue = [1, 5]
 
-    expect(input).not.toBeCalledWith()
+    expect(input).not.toHaveBeenCalledWith()
   })
 
   it('should change value on key down', () => {
     const setInternalValue = jest.fn()
-    const wrapper = mount(VRangeSlider, {
+    const wrapper = mountFunction({
       methods: { setInternalValue }
     })
-    const input = wrapper.first('.v-slider__thumb-container')
+    const input = wrapper.find('.v-slider__thumb-container')
 
-    expect(wrapper.vm.activeThumb).toBe(null)
+    expect(wrapper.vm.activeThumb).toBeNull()
     input.trigger('focus')
     expect(wrapper.vm.activeThumb).toBe(0)
     input.trigger('keydown.up')
@@ -69,7 +89,7 @@ test('VRangeSlider.vue', ({ mount }) => {
     expect(setInternalValue).toHaveBeenCalledTimes(1)
 
     wrapper.setData({ activeThumb: null })
-    expect(wrapper.vm.activeThumb).toBe(null)
+    expect(wrapper.vm.activeThumb).toBeNull()
 
     input.trigger('keydown.esc')
 
@@ -77,7 +97,7 @@ test('VRangeSlider.vue', ({ mount }) => {
   })
 
   it('should return index of closest value', () => {
-    const wrapper = mount(VRangeSlider)
+    const wrapper = mountFunction()
 
     expect(wrapper.vm.getIndexOfClosestValue([0, 25], 23)).toBe(1)
     expect(wrapper.vm.getIndexOfClosestValue([0, 25], 5)).toBe(0)
@@ -86,23 +106,23 @@ test('VRangeSlider.vue', ({ mount }) => {
   })
 
   it('should call on drag', async () => {
-    const wrapper = mount(VRangeSlider)
+    const wrapper = mountFunction()
 
-    expect(wrapper.vm.isActive).toBe(false)
-    expect(wrapper.vm.activeThumb).toBe(null)
+    expect(wrapper.vm.isActive).toBeFalsy()
+    expect(wrapper.vm.activeThumb).toBeNull()
 
-    const container = wrapper.first('.v-slider__thumb-container')
+    const container = wrapper.find('.v-slider__thumb-container')
 
     container.trigger('mousedown')
 
-    expect(wrapper.vm.isActive).toBe(true)
+    expect(wrapper.vm.isActive).toBeTruthy()
     expect(wrapper.vm.activeThumb).toBe(0)
   })
 
   it('should react to a track click', () => {
     const setInternalValue = jest.fn()
     const getIndexOfClosestValue = jest.fn()
-    const wrapper = mount(VRangeSlider, {
+    const wrapper = mountFunction({
       methods: {
         getIndexOfClosestValue,
         setInternalValue
@@ -112,27 +132,27 @@ test('VRangeSlider.vue', ({ mount }) => {
     // Will return false for isInsideTrack
     wrapper.vm.onMouseMove({})
 
-    expect(setInternalValue).not.toBeCalled()
-    expect(getIndexOfClosestValue).not.toBeCalled()
+    expect(setInternalValue).not.toHaveBeenCalled()
+    expect(getIndexOfClosestValue).not.toHaveBeenCalled()
 
     // Will return true for isInsideTrack
     wrapper.vm.onMouseMove({
       clientX: 0
     })
 
-    expect(getIndexOfClosestValue).not.toBeCalled()
+    expect(getIndexOfClosestValue).not.toHaveBeenCalled()
     expect(setInternalValue).toHaveBeenCalledTimes(1)
 
     wrapper.vm.onMouseMove({
       clientX: 0
     }, true)
 
-    expect(getIndexOfClosestValue).toBeCalled()
+    expect(getIndexOfClosestValue).toHaveBeenCalled()
     expect(setInternalValue).toHaveBeenCalledTimes(2)
   })
 
   it('should set internal value', () => {
-    const wrapper = mount(VRangeSlider)
+    const wrapper = mountFunction()
 
     expect(wrapper.vm.internalValue).toEqual([0, 0])
 
@@ -149,7 +169,7 @@ test('VRangeSlider.vue', ({ mount }) => {
 
     expect(wrapper.vm.internalValue).toEqual([0, 5])
 
-    wrapper.setProps({ value: [5, 10]})
+    wrapper.setProps({ value: [5, 10] })
 
     expect(wrapper.vm.internalValue).toEqual([5, 10])
 
@@ -164,7 +184,7 @@ test('VRangeSlider.vue', ({ mount }) => {
   })
 
   it('should return the proper styles', () => {
-    const wrapper = mount(VRangeSlider)
+    const wrapper = mountFunction()
 
     let styles = wrapper.vm.trackFillStyles
 
@@ -182,7 +202,7 @@ test('VRangeSlider.vue', ({ mount }) => {
   })
 
   it('should render a vertical slider', async () => {
-    const wrapper = mount(VRangeSlider, {
+    const wrapper = mountFunction({
       propsData: {
         vertical: true
       }
@@ -192,7 +212,7 @@ test('VRangeSlider.vue', ({ mount }) => {
   })
 
   it('should render disabled slider', async () => {
-    const wrapper = mount(VRangeSlider, {
+    const wrapper = mountFunction({
       propsData: {
         disabled: true
       }
