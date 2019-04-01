@@ -36,7 +36,7 @@ describe('VInput.ts', () => {
     const input = jest.fn()
     wrapper.vm.$on('input', input)
 
-    expect(wrapper.vm.lazyValue).toBe(undefined)
+    expect(wrapper.vm.lazyValue).toBeUndefined()
     wrapper.vm.internalValue = 'foo'
     expect(input).toHaveBeenCalledWith('foo')
     expect(wrapper.vm.lazyValue).toBe('foo')
@@ -81,7 +81,7 @@ describe('VInput.ts', () => {
       }
     })
 
-    expect(wrapper.vm.genMessages()).toBe(null)
+    expect(wrapper.vm.genMessages()).toBeNull()
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -112,7 +112,7 @@ describe('VInput.ts', () => {
     expect(click).not.toHaveBeenCalled()
 
     slot.trigger('click')
-    expect(click).toBeCalled()
+    expect(click).toHaveBeenCalled()
   })
 
   it('should accept a custom height', () => {
@@ -120,7 +120,7 @@ describe('VInput.ts', () => {
 
     const inputWrapper = wrapper.find('.v-input__slot')
     expect(inputWrapper.element.style.height).toBe('')
-    expect(wrapper.vm.height).toBe(undefined)
+    expect(wrapper.vm.height).toBeUndefined()
 
     wrapper.setProps({ height: 10 })
     expect(inputWrapper.element.style.height).toBe('10px')
