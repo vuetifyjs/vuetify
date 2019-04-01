@@ -1,21 +1,32 @@
-import { test } from '@/test'
-import { keyCodes } from '@/util/helpers'
-import VTextarea from '@/components/VTextarea'
-import Vue from 'vue'
+import { keyCodes } from '../../../util/helpers'
+import VTextarea from '../VTextarea'
+import {
+  mount,
+  MountOptions,
+  Wrapper
+} from '@vue/test-utils'
 
-test('VTextarea.vue', ({ mount }) => {
+describe('VTextarea.ts', () => {
+  type Instance = InstanceType<typeof VTextarea>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+  beforeEach(() => {
+    mountFunction = (options?: MountOptions<Instance>) => {
+      return mount(VTextarea, options)
+    }
+  })
+
   it('should calculate element height when using auto-grow prop', async () => {
-    const wrapper = mount(VTextarea, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
         value: '',
         autoGrow: true
       }
     })
-    const input = jest.fn(value => wrapper.setData({ value }))
+    const input = jest.fn(value => wrapper.setProps({ value }))
     wrapper.vm.$on('input', input)
 
-    const el = wrapper.find('textarea')[0]
+    const el = wrapper.findAll('textarea').wrappers[0]
 
     el.trigger('focus')
     await wrapper.vm.$nextTick()
@@ -29,14 +40,14 @@ test('VTextarea.vue', ({ mount }) => {
   })
 
   it('should watch lazy value', async () => {
-    const wrapper = mount(VTextarea)
+    const wrapper = mountFunction()
 
     const calculateInputHeight = jest.fn()
     wrapper.setMethods({ calculateInputHeight })
 
     wrapper.vm.lazyValue = 'foo'
 
-    expect(calculateInputHeight).not.toBeCalled()
+    expect(calculateInputHeight).not.toHaveBeenCalled()
 
     wrapper.setProps({ autoGrow: true })
 
@@ -45,13 +56,13 @@ test('VTextarea.vue', ({ mount }) => {
     // wait for watcher
     await wrapper.vm.$nextTick()
 
-    expect(calculateInputHeight).toBeCalled()
+    expect(calculateInputHeight).toHaveBeenCalled()
   })
 
   it('should calculate height on mounted', async () => {
     const calculateInputHeight = jest.fn()
 
-    const wrapper = mount(VTextarea, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
         autoGrow: true
@@ -60,33 +71,33 @@ test('VTextarea.vue', ({ mount }) => {
     })
 
     await new Promise(resolve => setTimeout(resolve, 0))
-    expect(calculateInputHeight).toBeCalled()
+    expect(calculateInputHeight).toHaveBeenCalled()
   })
 
   it('should stop propagation', async () => {
-    const wrapper = mount(VTextarea)
+    const wrapper = mountFunction()
 
     const stopPropagation = jest.fn()
     const onKeyDown = {
       keyCode: keyCodes.enter,
       stopPropagation
-   }
+    }
     wrapper.vm.onKeyDown(onKeyDown)
 
-    expect(stopPropagation).not.toBeCalled()
+    expect(stopPropagation).not.toHaveBeenCalled()
 
     wrapper.setData({ isFocused: true })
 
     wrapper.vm.onKeyDown(onKeyDown)
 
-    expect(stopPropagation).toBeCalled()
+    expect(stopPropagation).toHaveBeenCalled()
   })
 
   it('should render no-resize the same if already auto-grow', () => {
     const wrappers = [
       { autoGrow: true, outline: false },
       { autoGrow: true, outline: true }
-    ].map(propsData => mount(VTextarea,{ propsData }))
+    ].map(propsData => mountFunction({ propsData }))
 
     wrappers.forEach(async wrapper => {
       await wrapper.vm.$nextTick()
@@ -102,9 +113,9 @@ test('VTextarea.vue', ({ mount }) => {
   })
 
   it('should emit keydown event', () => {
-    const wrapper = mount(VTextarea)
+    const wrapper = mountFunction()
     const keydown = jest.fn()
-    const textarea = wrapper.first('textarea')
+    const textarea = wrapper.find('textarea')
     wrapper.vm.$on('keydown', keydown)
 
     textarea.trigger('focus')
@@ -112,6 +123,6 @@ test('VTextarea.vue', ({ mount }) => {
     textarea.trigger('input')
     textarea.trigger('keydown.enter')
 
-    expect(keydown).toBeCalled()
+    expect(keydown).toHaveBeenCalled()
   })
 })
