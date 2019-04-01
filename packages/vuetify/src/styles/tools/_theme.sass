@@ -1,0 +1,5 @@
+@mixin theme ($component)
+  .theme--light.#{$component}
+    @content($material-light)
+  .theme--dark.#{$component}
+    @content($material-dark)

@@ -1,0 +1,46 @@
+@import '../../styles/styles.sass'
+
++theme(v-date-picker-header) using ($material)
+  .v-date-picker-header__value:not(.v-date-picker-header__value--disabled)
+    button:not(:hover):not(:focus)
+      color: map-deep-get($material, 'text', 'primary')
+
+  .v-date-picker-header__value--disabled
+    button
+      color: map-deep-get($material, 'text', 'disabled')
+
+.v-date-picker-header
+  padding: 4px 16px
+
+  align-items: center
+  display: flex
+  justify-content: space-between
+  position: relative
+
+  .v-btn
+    margin: 0
+    z-index: auto
+
+  .v-icon
+    cursor: pointer
+    user-select: none
+
+.v-date-picker-header__value
+  flex: 1
+  text-align: center
+  position: relative
+  overflow: hidden
+
+  div
+    transition: $primary-transition
+    width: 100%
+
+  button
+    cursor: pointer
+    font-weight: bold
+    outline: none
+    padding: 0.5rem
+    transition: $primary-transition
+
+.v-date-picker-header--disabled
+  pointer-events: none

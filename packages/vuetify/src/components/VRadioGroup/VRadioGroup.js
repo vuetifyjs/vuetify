@@ -1,6 +1,6 @@
 // Styles
-import '../../stylus/components/_selection-controls.styl'
-import '../../stylus/components/_radio-group.styl'
+import '../../styles/components/_selection-controls.sass'
+import './VRadioGroup.sass'
 
 // Components
 import VInput from '../VInput'

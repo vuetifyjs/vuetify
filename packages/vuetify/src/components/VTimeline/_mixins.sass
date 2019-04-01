@@ -1,15 +1,3 @@
-@mixin timeline-theme($material)
-  &:before
-    background: map-get($material, 'dividers')
-
-  .v-timeline-item
-    &__dot
-      background: map-get($material, 'cards')
-
-    .v-card
-      &:before
-        border-right-color: $shadow-key-ambient-opacity
-
 @mixin timeline-dots($dot-size, $inner-dot-size)
   height: $dot-size
   left: calc(50% - #{$dot-size / 2})

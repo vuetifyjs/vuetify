@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_selection-controls.styl'
+import '../../styles/components/_selection-controls.sass'
 
 // Components
 import VIcon from '../VIcon'

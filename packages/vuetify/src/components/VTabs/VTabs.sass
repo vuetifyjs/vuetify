@@ -1,13 +1,14 @@
 // Imports
 @import '../../styles/styles.sass'
 @import './_variables.scss'
-@import './_mixins.sass'
 
-.v-tabs-bar.theme--light
-  +tabs-theme($material-light)
++theme(v-tabs) using ($material)
+  .v-tab:not(.v-tab--active),
+  .v-tab:not(.v-tab--active) > .v-icon,
+  .v-tab--disabled
+    color: map-get($material, 'tabs')
+
 .v-tabs-bar.theme--dark
-  +tabs-theme($material-dark)
-
   .v-tab.v-tab--active:not(.v-tab--disabled),
   .v-tabs-slider-wrapper
     color: map-deep-get($material-dark, 'text', 'primary')

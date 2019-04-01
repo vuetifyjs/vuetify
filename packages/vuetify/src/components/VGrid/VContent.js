@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_content.styl'
+import './_content.sass'
 
 // Mixins
 import SSRBootable from '../../mixins/ssr-bootable'

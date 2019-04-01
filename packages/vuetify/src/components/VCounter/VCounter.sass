@@ -1,12 +1,9 @@
 @import '../../styles/styles.sass'
 @import './_variables.scss'
-@import './_mixins.sass'
 
 /* Theme */
-.v-counter.theme--light
-  +counter-theme($material-light)
-.v-counter.theme--dark
-  +counter-theme($material-dark)
++theme(v-counter) using ($material)
+  color: map-deep-get($material, 'text', 'secondary')
 
 .v-counter
   flex: 0 1 auto

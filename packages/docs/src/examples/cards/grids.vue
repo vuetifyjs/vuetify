@@ -1,63 +1,72 @@
 <template>
-  <v-layout justify-center>
-    <v-flex xs12 sm6>
-      <v-toolbar color="indigo" dark>
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
-        <v-toolbar-title>Discover</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-btn icon>
-          <v-icon>search</v-icon>
-        </v-btn>
-      </v-toolbar>
+  <v-card
+    class="mx-auto"
+    max-width="400"
+  >
+    <v-system-bar color="indigo darken-2"></v-system-bar>
 
-      <v-card>
-        <v-container
-          fluid
-          grid-list-md
+    <v-toolbar
+      color="indigo"
+      dark
+    >
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+
+      <v-toolbar-title>Discover</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-btn icon>
+        <v-icon>search</v-icon>
+      </v-btn>
+    </v-toolbar>
+
+    <v-container
+      fluid
+      grid-list-md
+      pa-2
+    >
+      <v-layout
+        row
+        wrap
+      >
+        <v-flex
+          v-for="card in cards"
+          :key="card.title"
+          v-bind="{ [`xs${card.flex}`]: true }"
         >
-          <v-layout row wrap>
-            <v-flex
-              v-for="card in cards"
-              :key="card.title"
-              v-bind="{ [`xs${card.flex}`]: true }"
+          <v-card>
+            <v-img
+              :src="card.src"
+              class="white--text"
+              height="200px"
+              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
             >
-              <v-card>
-                <v-img
-                  :src="card.src"
-                  height="200px"
-                >
-                  <v-container
-                    fill-height
-                    fluid
-                    pa-2
-                  >
-                    <v-layout fill-height>
-                      <v-flex xs12 align-end flexbox>
-                        <span class="headline white--text" v-text="card.title"></span>
-                      </v-flex>
-                    </v-layout>
-                  </v-container>
-                </v-img>
+              <v-card-title
+                class="fill-height align-end"
+                v-text="card.title"
+              ></v-card-title>
+            </v-img>
 
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn icon>
-                    <v-icon>favorite</v-icon>
-                  </v-btn>
-                  <v-btn icon>
-                    <v-icon>bookmark</v-icon>
-                  </v-btn>
-                  <v-btn icon>
-                    <v-icon>share</v-icon>
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </v-card>
-    </v-flex>
-  </v-layout>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+
+              <v-btn icon>
+                <v-icon>favorite</v-icon>
+              </v-btn>
+
+              <v-btn icon>
+                <v-icon>bookmark</v-icon>
+              </v-btn>
+
+              <v-btn icon>
+                <v-icon>share</v-icon>
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </v-card>
 </template>
 
 <script>

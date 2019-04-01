@@ -1,0 +1,34 @@
+@import '../../styles/styles.sass'
+
+.v-date-picker-title
+  display: flex
+  justify-content: space-between
+  flex-direction: column
+  flex-wrap: wrap
+  line-height: 1
+
+  +rtl()
+    .v-picker__title__btn
+      text-align: right
+
+  &__year
+      align-items: center
+      display: inline-flex
+      font-size: 14px
+      font-weight: 500
+      margin-bottom: 8px
+
+  &__date
+      font-size: 34px
+      text-align: left
+      font-weight: 500
+      position: relative
+      overflow: hidden
+      padding-bottom: 8px
+      margin-bottom: -8px
+
+      > div
+        position: relative
+
+  &--disabled
+    pointer-events: none

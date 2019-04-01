@@ -19,6 +19,6 @@
   "events": {
     "blur": "Событие когда input blurred",
     "change": "Событие когда select изменён путём взаимодействия с пользователем",
-    "update:error": "`update.sync` событие"
+    "update:error": "`error.sync` событие"
   }
 }

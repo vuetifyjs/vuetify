@@ -26,7 +26,6 @@
             "~components": "components",
             "~directives": "directives",
             "~mixins": "mixins",
-            "~stylus": "stylus",
             "~scss": "scss",
             "~util": "util"
           }
@@ -43,13 +42,11 @@
         }]
       ],
       "plugins": [
-        "./build/babel-transform-stylus-paths.js",
         "./build/babel-transform-sass-paths.js"
       ]
     },
     "lib": {
       "plugins": [
-        "./build/babel-transform-stylus-paths.js",
         "./build/babel-transform-sass-paths.js"
       ]
     }

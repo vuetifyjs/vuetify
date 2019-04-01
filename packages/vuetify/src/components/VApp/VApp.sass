@@ -1,5 +1,19 @@
 @import '../../styles/styles.sass'
-@import './_mixins.sass'
+
+// Theme
++theme(application) using ($material)
+  background: map-get($material, 'background')
+  color: map-deep-get($material, 'text', 'primary')
+
+  .text
+    &--primary
+      color: map-deep-get($material, 'text', 'primary') !important
+
+    &--secondary
+      color: map-deep-get($material, 'text', 'secondary') !important
+
+    &--disabled
+      color: map-deep-get($material, 'text', 'disabled') !important
 
 .application
   display: flex
@@ -19,12 +33,8 @@
     max-width: 100%
     position: relative
 
-.application.theme--light
-  +application-theme($material-light)
-.application.theme--dark
-  +application-theme($material-dark)
-
-@include firefox()
+// Firefox overrides
+@-moz-document url-prefix()
   @media print
     .application
       display: block
