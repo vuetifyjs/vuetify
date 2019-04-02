@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VStepperStep.js should accept a custom color 1`] = `
+exports[`VStepperStep.ts should accept a custom color 1`] = `
 
 <div class="v-stepper__step v-stepper__step--inactive v-stepper__step--complete">
   <span class="v-stepper__step__step pink">
@@ -15,7 +15,7 @@ exports[`VStepperStep.js should accept a custom color 1`] = `
 
 `;
 
-exports[`VStepperStep.js should accept a custom css color 1`] = `
+exports[`VStepperStep.ts should accept a custom css color 1`] = `
 
 <div class="v-stepper__step v-stepper__step--inactive v-stepper__step--complete">
   <span class="v-stepper__step__step"
