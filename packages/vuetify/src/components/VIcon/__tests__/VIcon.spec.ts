@@ -190,6 +190,18 @@ describe('VIcon', () => {
     })
   })
 
+  it('should use an <i> tag if none provided', () => {
+    const wrapper = mountFunction()
+
+    expect(wrapper.element.localName).toBe('i')
+  })
+
+  it('sets tag from from prop if provided', () => {
+    const wrapper = mountFunction({ props: { tag: 'span' } })
+
+    expect(wrapper.element.localName).toBe('span')
+  })
+
   describe('for component icon', () => {
     const getTestComponent = () => ({
       props: ['name'],
