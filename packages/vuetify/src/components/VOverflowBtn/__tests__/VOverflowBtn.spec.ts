@@ -86,8 +86,6 @@ describe('VOverflowBtn.js', () => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should invoke item callback', () => {
