@@ -1,28 +1,58 @@
-import VApp from '@/components/VApp'
-import VNavigationDrawer from '@/components/VNavigationDrawer'
-import { test, resizeWindow } from '@/test'
+import { Application } from '../../../services/application'
+import VNavigationDrawer from '../VNavigationDrawer'
+import { resizeWindow, rafPolyfill } from '../../../../test'
+import {
+  mount,
+  MountOptions,
+  Wrapper
+} from '@vue/test-utils'
 
 beforeEach(() => resizeWindow(1920, 1080))
 
-test('VNavigationDrawer', ({ mount }) => {
-  // v-app is needed to initialise $vuetify.application
-  const app = mount(VApp)
+describe('VNavigationDrawer', () => {
+  type Instance = InstanceType<typeof VNavigationDrawer>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+
+  beforeEach(() => {
+    mountFunction = (options?: MountOptions<Instance>) => {
+      return mount(VNavigationDrawer, {
+        ...options,
+        mocks: {
+          $vuetify: {
+            rtl: false,
+            theme: {
+              dark: false
+            },
+            breakpoint: {
+              width: 1920
+            },
+            application: new Application()
+          }
+        }
+      })
+    }
+  })
+
+  rafPolyfill(window)
 
   it('should become temporary when the window resizes', async () => {
-    const wrapper = mount(VNavigationDrawer)
+    const wrapper = mountFunction()
 
     expect(wrapper.vm.isActive).toBe(true)
     await resizeWindow(1200)
+    wrapper.vm.$vuetify.breakpoint.width = 1200
     expect(wrapper.vm.isActive).toBe(false)
     expect(wrapper.vm.overlay).toBeFalsy()
   })
 
   it('should not resize the content when temporary', async () => {
-    const wrapper = mount(VNavigationDrawer, { propsData: {
-      app: true,
-      temporary: true,
-      value: true
-    }})
+    const wrapper = mountFunction({
+      propsData: {
+        app: true,
+        temporary: true,
+        value: true
+      }
+    })
 
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.$vuetify.application.left).toBe(0)
@@ -30,11 +60,11 @@ test('VNavigationDrawer', ({ mount }) => {
   })
 
   it('should not resize the content when permanent and stateless', async () => {
-    const wrapper = mount(VNavigationDrawer, { propsData: {
+    const wrapper = mountFunction({ propsData: {
       app: true,
       permanent: true,
       stateless: true
-    }})
+    } })
 
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.$vuetify.application.left).toBe(300)
@@ -45,7 +75,7 @@ test('VNavigationDrawer', ({ mount }) => {
   })
 
   it('should not resize the content when permanent and resize watcher is disabled', async () => {
-    const wrapper = mount(VNavigationDrawer, {
+    const wrapper = mountFunction({
       propsData: {
         app: true,
         permanent: true,
@@ -62,7 +92,7 @@ test('VNavigationDrawer', ({ mount }) => {
   })
 
   it('should stay active when resizing a temporary drawer', async () => {
-    const wrapper = mount(VNavigationDrawer, {
+    const wrapper = mountFunction({
       propsData: {
         app: true,
         temporary: true,
@@ -82,7 +112,7 @@ test('VNavigationDrawer', ({ mount }) => {
   })
 
   it('should open when changed to permanent', async () => {
-    const wrapper = mount(VNavigationDrawer, {
+    const wrapper = mountFunction({
       propsData: {
         value: null
       }
@@ -96,7 +126,7 @@ test('VNavigationDrawer', ({ mount }) => {
   })
 
   it('should not close when value changes and permanent', async () => {
-    const wrapper = mount(VNavigationDrawer, {
+    const wrapper = mountFunction({
       propsData: {
         permanent: true,
         value: true
@@ -111,9 +141,9 @@ test('VNavigationDrawer', ({ mount }) => {
   })
 
   it('should update content padding when temporary state is changed', async () => {
-    const wrapper = mount(VNavigationDrawer, { propsData: {
+    const wrapper = mountFunction({ propsData: {
       app: true
-    }})
+    } })
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.$vuetify.application.left).toBe(300)
@@ -126,10 +156,11 @@ test('VNavigationDrawer', ({ mount }) => {
   })
 
   it('should update content padding when permanent state is changed', async () => {
-    await resizeWindow(800)
-    const wrapper = mount(VNavigationDrawer, { propsData: {
+    const wrapper = mountFunction({ propsData: {
       app: true
-    }})
+    } })
+    await resizeWindow(800)
+    wrapper.vm.$vuetify.breakpoint.width = 800
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.$vuetify.application.left).toBe(0)
@@ -142,9 +173,9 @@ test('VNavigationDrawer', ({ mount }) => {
   })
 
   it('should update content padding when miniVariant is changed', async () => {
-    const wrapper = mount(VNavigationDrawer, { propsData: {
+    const wrapper = mountFunction({ propsData: {
       app: true
-    }})
+    } })
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.$vuetify.application.left).toBe(300)
@@ -158,17 +189,19 @@ test('VNavigationDrawer', ({ mount }) => {
 
   it('should not remain mobile when temporary is toggled', async () => {
     await resizeWindow(800)
-    const wrapper = mount(VNavigationDrawer, { propsData: {
+    const wrapper = mountFunction({ propsData: {
       temporary: true
-    }})
+    } })
 
     await resizeWindow(1920)
     expect(wrapper.vm.isMobile).toBe(false)
   })
 
   it('should stay closed when mobile and temporary is enabled', async () => {
+    const wrapper = mountFunction()
     await resizeWindow(800)
-    const wrapper = mount(VNavigationDrawer)
+    wrapper.vm.$vuetify.breakpoint.width = 800
+    await wrapper.vm.$nextTick()
     const input = jest.fn(value => wrapper.setProps({ value }))
     wrapper.vm.$on('input', input)
 
@@ -181,19 +214,20 @@ test('VNavigationDrawer', ({ mount }) => {
 
   it('should update content padding when mobile is toggled', async () => {
     const input = jest.fn()
-    const wrapper = mount(VNavigationDrawer, { propsData: {
+    const wrapper = mountFunction({ propsData: {
       app: true,
       fixed: true,
       value: true
-    }})
+    } })
     await wrapper.vm.$nextTick()
 
     wrapper.vm.$on('input', input)
     expect(wrapper.vm.$vuetify.application.left).toBe(300)
     await resizeWindow(800)
+    wrapper.vm.$vuetify.breakpoint.width = 800
     expect(wrapper.vm.$vuetify.application.left).toBe(0)
     expect(wrapper.vm.isActive).toBe(false)
-    expect(input).toBeCalledWith(false)
+    expect(input).toHaveBeenCalledWith(false)
     wrapper.setProps({ value: false })
     await wrapper.vm.$nextTick()
     wrapper.setProps({ value: true })
@@ -201,17 +235,19 @@ test('VNavigationDrawer', ({ mount }) => {
     expect(wrapper.vm.isActive).toBe(true)
     expect(wrapper.vm.$vuetify.application.left).toBe(0)
     await resizeWindow(1920)
+    wrapper.vm.$vuetify.breakpoint.width = 1920
     expect(wrapper.vm.isActive).toBe(true)
     expect(wrapper.vm.isMobile).toBe(false)
     expect(wrapper.vm.$vuetify.application.left).toBe(300)
   })
 
   it('should not have marginTop when temporary / isMobile', async () => {
-    const wrapper = mount(VNavigationDrawer, {
+    const wrapper = mountFunction({
       propsData: {
         app: true
       }
     })
+    wrapper.vm.$vuetify.application.bar = 0
 
     expect(wrapper.vm.marginTop).toBe(0)
 
@@ -222,10 +258,12 @@ test('VNavigationDrawer', ({ mount }) => {
     expect(wrapper.vm.marginTop).toBe(24)
 
     await resizeWindow(640)
+    wrapper.vm.$vuetify.breakpoint.width = 640
 
     expect(wrapper.vm.marginTop).toBe(0)
 
     await resizeWindow(1980)
+    wrapper.vm.$vuetify.breakpoint.width = 1980
 
     expect(wrapper.vm.marginTop).toBe(24)
 
