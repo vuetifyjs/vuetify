@@ -158,8 +158,8 @@ try {
     }
   })
 
-  window.addEventListener('testListener', () => {}, testListenerOpts)
-  window.removeEventListener('testListener', () => {}, testListenerOpts)
+  window.addEventListener('testListener', testListenerOpts, testListenerOpts)
+  window.removeEventListener('testListener', testListenerOpts, testListenerOpts)
 } catch (e) { console.warn(e) }
 export { passiveSupported }
 
