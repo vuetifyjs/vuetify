@@ -1,6 +1,5 @@
 <template>
   <v-menu
-    attach
     bottom
     left
     offset-y

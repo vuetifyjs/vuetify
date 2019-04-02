@@ -55,8 +55,6 @@ test('VOverflowBtn', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-
-    expect(warning).toHaveBeenTipped()
   })
 
   it('should invoke item callback', () => {

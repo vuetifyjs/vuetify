@@ -4,7 +4,7 @@
     :items="desserts"
     class="elevation-1"
   >
-    <template v-slot:headerCell="props">
+    <template slot="headerCell" slot-scope="props">
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
           <span v-on="on">

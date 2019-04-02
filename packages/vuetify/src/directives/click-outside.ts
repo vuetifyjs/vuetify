@@ -45,32 +45,11 @@ function directive (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirec
   // Check if it's a click outside our elements, and then if our callback returns true.
   // Non-toggleable components should take action in their callback and return falsy.
   // Toggleable can return true if it wants to deactivate.
-  // Note that, because we're in the capture phase, this callback will occure before
+  // Note that, because we're in the capture phase, this callback will occur before
   // the bubbling click event on any outside elements.
-  !clickedInEls(e, elements) && setTimeout(() => {
+  !elements.some(el => el.contains(e.target as Node)) && setTimeout(() => {
     isActive(e) && binding.value && binding.value(e)
   }, 0)
-}
-
-function clickedInEls (e: PointerEvent, elements: HTMLElement[]): boolean {
-  // Get position of click
-  const { clientX: x, clientY: y } = e
-  // Loop over all included elements to see if click was in any of them
-  for (const el of elements) {
-    if (clickedInEl(el, x, y)) return true
-  }
-
-  return false
-}
-
-function clickedInEl (el: HTMLElement, x: number, y: number): boolean {
-  // Get bounding rect for element
-  // (we're in capturing event and we want to check for multiple elements,
-  //  so can't use target.)
-  const b = el.getBoundingClientRect()
-  // Check if the click was in the element's bounding rect
-
-  return x >= b.left && x <= b.right && y >= b.top && y <= b.bottom
 }
 
 export default {
