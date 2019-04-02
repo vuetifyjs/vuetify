@@ -1,13 +1,37 @@
 // Imports
 @import '../../styles/styles.sass'
 @import './_variables.scss'
-@import './_mixins.sass'
 
 // Theme
-.v-data-table.theme--light
-  +simple-table-theme($material-light)
-.v-data-table.theme--dark
-  +simple-table-theme($material-dark)
++theme(v-data-table) using ($material)
+  background-color: map-get($material, 'cards')
+  color: map-deep-get($material, 'text', 'primary')
+
+  colgroup
+    .divider
+      border-right: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+
+  &.v-data-table--fixed-header
+    thead th
+      background: white
+      border-bottom: 0px !important
+      box-shadow: inset 0 -1px 0 rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+
+  thead
+    tr
+      &:last-child th
+        border-bottom: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+
+      th
+        color: rgba(map-get($material, 'text-color'), map-get($material, 'secondary-text-percent'))
+
+  tbody
+    tr
+      &:not(:last-child)
+        border-bottom: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+
+      &.active
+        background: map-deep-get($material, 'table', 'active')
 
 // Block
 .v-data-table

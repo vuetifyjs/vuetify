@@ -1,10 +1,19 @@
 @import '../../styles/styles.sass'
-@import './_mixins.sass'
 
-.v-pagination.theme--light
-  +pagination-theme($material-light)
-.v-pagination.theme--dark
-  +pagination-theme($material-dark)
+// Theme
++theme(v-pagination) using ($material)
+  .v-pagination__item
+    background: map-get($material, 'cards')
+    color: map-deep-get($material, 'text', 'primary')
+    min-width: 34px
+    padding: 0 5px
+    width: auto
+
+    &--active
+      color: map-deep-get($material, 'text', 'theme')
+
+  .v-pagination__navigation
+    background: map-get($material, 'cards')
 
 .v-pagination
   align-items: center

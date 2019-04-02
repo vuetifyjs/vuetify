@@ -1,6 +1,6 @@
 @import '../../styles/styles.sass'
 
-@mixin stepper-theme($material)
++theme(v-stepper) using ($material)
   background: map-get($material, 'bg-color')
 
   .v-stepper__step
@@ -53,11 +53,6 @@
   &--vertical
     .v-stepper__content:not(:last-child)
       border-left: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
-
-.v-stepper.theme--light
-  +stepper-theme($material-light)
-.v-stepper.theme--dark
-  +stepper-theme($material-dark)
 
 .v-stepper
   overflow: hidden

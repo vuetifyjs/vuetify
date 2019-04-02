@@ -1,12 +1,25 @@
 @import '../../styles/styles.sass'
 @import './_variables.scss'
-@import './_mixins.sass'
 
 // Theme
-.v-time-picker-clock.theme--light
-  +time-picker-clock-theme($material-light)
-.v-time-picker-clock.theme--dark
-  +time-picker-clock-theme($material-dark)
++theme(v-time-picker-clock) using ($material)
+  background: map-deep-get($material, 'picker', 'clock')
+
+  .v-time-picker-clock__item--disabled
+    color: map-deep-get($material, 'buttons', 'disabled')
+
+    &.v-time-picker-clock__item--active
+      color: map-deep-get($material-dark, 'buttons', 'disabled')
+
+  &--indeterminate
+    .v-time-picker-clock__hand
+    background-color: map-deep-get($material, 'picker', 'indeterminateTime')
+
+    &:after
+      color: map-deep-get($material, 'picker', 'indeterminateTime')
+
+    .v-time-picker-clock__item--active
+      background-color: map-deep-get($material, 'picker', 'indeterminateTime')
 
 .v-time-picker-clock
   border-radius: 100%

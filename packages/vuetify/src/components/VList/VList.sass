@@ -3,9 +3,7 @@
 @import './_mixins.sass'
 
 // Theme
-.v-list.theme--light
-  +list-theme($material-light)
-
+.v-list
   &.primary,
   &.secondary,
   &.accent,
@@ -16,8 +14,16 @@
     > .v-list-item
       color: map-deep-get($material-dark, 'text', 'primary')
 
-.v-list.theme--dark
-  +list-theme($material-dark)
++theme(v-list) using ($material)
+  background: map-get($material, 'cards')
+  color: map-deep-get($material, 'text','primary')
+
+  .v-list--disabled
+    color: map-deep-get($material, 'text', 'disabled')
+
+  .v-list-group--active:before,
+  .v-list-group--active:after
+    background: map-get($material, 'dividers')
 
 // Block
 .v-list

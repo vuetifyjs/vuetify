@@ -1,6 +1,6 @@
 @import '../../styles/styles.sass'
 
-@mixin date-picker-header-theme($material)
++theme(v-date-picker-header) using ($material)
   .v-date-picker-header__value:not(.v-date-picker-header__value--disabled)
     button:not(:hover):not(:focus)
       color: map-deep-get($material, 'text', 'primary')
@@ -8,11 +8,6 @@
   .v-date-picker-header__value--disabled
     button
       color: map-deep-get($material, 'text', 'disabled')
-
-.v-date-picker-header.theme--light
-  +date-picker-header-theme($material-light)
-.v-date-picker-header.theme--dark
-  +date-picker-header-theme($material-dark)
 
 .v-date-picker-header
   padding: 4px 16px

@@ -1,11 +1,15 @@
 @import '../../styles/styles.sass'
-@import './_mixins.sass'
 
 // Theme
-.v-card.theme--light
-  +card-theme($material-light)
-.v-card.theme--dark
-  +card-theme($material-dark)
++theme(v-card) using ($material)
+  background-color: map-get($material, 'cards')
+  color: map-deep-get($material, 'text', 'primary')
+
+  .v-card__text
+    color: map-deep-get($material, 'text', 'secondary')
+
+  &.v-card--outlined
+    border: 1px solid map-get($material, 'dividers')
 
 // Block
 .v-card

@@ -7,7 +7,6 @@ import {
 import VTreeview from '../VTreeview'
 import { ExtractVue } from '../../../util/mixins'
 import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
-import console = require('console');
 
 Vue.prototype.$vuetify = {
   icons: {
