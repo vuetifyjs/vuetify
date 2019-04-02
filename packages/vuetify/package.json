@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue.js 2 Semantic Component Framework",
-  "version": "1.5.8",
+  "version": "1.5.9",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
