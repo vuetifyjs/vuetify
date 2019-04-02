@@ -39,7 +39,7 @@ const VIcon = mixins(
       type: String,
       required: false,
       default: 'i'
-    },
+    }
   },
 
   computed: {
