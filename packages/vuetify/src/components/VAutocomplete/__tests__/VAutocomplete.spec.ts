@@ -71,11 +71,12 @@ describe('VAutocomplete.ts', () => {
     })
 
     const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
 
     const update = jest.fn()
     wrapper.vm.$on('update:searchInput', update)
 
-    input.element.value = 'test'
+    element.value = 'test'
     input.trigger('input')
 
     await wrapper.vm.$nextTick()
@@ -476,6 +477,7 @@ describe('VAutocomplete.ts', () => {
     })
 
     const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
 
     expect(wrapper.vm.isMenuActive).toBe(false)
 
@@ -497,7 +499,7 @@ describe('VAutocomplete.ts', () => {
     // Skip menu activation
     wrapper.setData({ isMenuActive: true })
 
-    input.element.value = 'foo'
+    element.value = 'foo'
     input.trigger('input')
 
     wrapper.setProps({ hideSelected: true })

@@ -94,7 +94,9 @@ describe('VAutocomplete.ts', () => {
     })
 
     const input = wrapper.find('input')
-    input.element.value = 'foo'
+    const element = input.element as HTMLInputElement
+
+    element.value = 'foo'
     input.trigger('input')
 
     expect(wrapper.vm.filteredItems).toHaveLength(1)
@@ -110,8 +112,10 @@ describe('VAutocomplete.ts', () => {
     const wrapper = mountFunction()
 
     const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
+
     input.trigger('focus')
-    input.element.value = 'foo'
+    element.value = 'foo'
     input.trigger('input')
 
     expect(wrapper.vm.menuCanShow).toBe(true)
@@ -173,9 +177,10 @@ describe('VAutocomplete.ts', () => {
     const wrapper = mountFunction()
 
     const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
 
     input.trigger('focus')
-    input.element.value = 'foo'
+    element.value = 'foo'
     input.trigger('input')
 
     expect(wrapper.vm.internalSearch).toBe('foo')
@@ -187,7 +192,7 @@ describe('VAutocomplete.ts', () => {
 
     expect(wrapper.vm.internalSearch).toBe('')
 
-    input.element.value = 'bar'
+    element.value = 'bar'
     input.trigger('input')
 
     expect(wrapper.vm.internalSearch).toBe('')
@@ -202,8 +207,9 @@ describe('VAutocomplete.ts', () => {
 
     const icon = wrapper.find('.v-input__append-inner .v-icon')
     const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
 
-    input.element.value = 'foobar'
+    element.value = 'foobar'
     input.trigger('input')
 
     expect(wrapper.vm.internalSearch).toBe('foobar')
@@ -234,11 +240,12 @@ describe('VAutocomplete.ts', () => {
     })
 
     const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
 
     await wrapper.vm.$nextTick()
     wrapper.setProps({ items: [{ text: 'foo', value: 1 }] })
     await wrapper.vm.$nextTick()
-    expect(input.element.value).toBe('foo')
+    expect(element.value).toBe('foo')
   })
 
   it('should show menu when items are added for the first time and hide-no-data is enabled', async () => {
@@ -361,10 +368,12 @@ describe('VAutocomplete.ts', () => {
     })
 
     const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
+
     input.trigger('focus')
     await wrapper.vm.$nextTick()
 
-    input.element.value = 2
+    element.value = '2'
     input.trigger('input')
     await wrapper.vm.$nextTick()
 
@@ -382,9 +391,10 @@ describe('VAutocomplete.ts', () => {
     await wrapper.vm.$nextTick()
 
     const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
 
     input.trigger('focus')
-    input.element.value = 't'
+    element.value = 't'
     input.trigger('input')
     wrapper.vm.selectItem('Trevor Hansen')
 
