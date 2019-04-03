@@ -1,9 +1,9 @@
 {
   "color": "info",
   "close": true,
-  "id": "book-consulting",
-  "text": "Book now",
-  "msg": "💖 Schedule time with John",
-  "href": "/getting-started/consulting-and-support",
+  "id": "productivity-in-vue-part-3-697d6407498e",
+  "text": "Read Article",
+  "msg": "📰 Productivity in Vue—**Part 3**",
+  "href": "https://medium.com/vuetify/productivity-in-vue-part-3-697d6407498e",
   "timeout": 0
 }
