@@ -1,11 +1,11 @@
 @import '../../styles/styles.sass'
-@import './_mixins.sass'
 
-/* Theme */
-.v-input--range-slider.theme--light
-  +range-slider-theme($material-light)
-.v-input--range-slider.theme--dark
-  +range-slider-theme($material-dark)
+// Theme
++theme(v-input--range-slider) using ($material)
+  &.v-input--slider.v-input--is-disabled
+    .v-slider.v-slider
+      .v-slider__thumb
+        background: map-deep-get($material, 'selection-controls', 'thumb', 'disabled')
 
 /** Input Group */
 .v-input--range-slider

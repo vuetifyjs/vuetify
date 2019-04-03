@@ -4,10 +4,17 @@
 @import './_mixins.sass'
 
 // Theme
-.v-timeline.theme--light
-  +timeline-theme($material-light)
-.v-timeline.theme--dark
-  +timeline-theme($material-dark)
++theme(v-timeline) using ($material)
+  &::before
+    background: map-get($material, 'dividers')
+
+  .v-timeline-item
+    &__dot
+      background: map-get($material, 'cards')
+
+    .v-card
+      &::before
+        border-right-color: $shadow-key-ambient-opacity
 
 // Elements
 .v-timeline

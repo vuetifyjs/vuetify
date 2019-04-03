@@ -1,15 +1,10 @@
 @import '../../styles/styles.sass'
 
-@mixin textarea-theme($material)
++theme(v-textarea) using ($material)
   &.v-text-field--solo-inverted.v-text-field--solo
     &.v-input--is-focused
       textarea
         color: map-deep-get($material, 'inputs', 'solo-inverted-focused-text')
-
-.v-textarea.theme--light
-  +textarea-theme($material-light)
-.v-textarea.theme--dark
-  +textarea-theme($material-dark)
 
 .v-textarea
   textarea

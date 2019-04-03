@@ -1,13 +1,13 @@
 // Imports
 @import '../../styles/styles.sass'
 @import './_variables.scss'
-@import './_mixins.sass'
 
 // Theme
-.v-slider.theme--light
-  @include slider-theme($material-light)
-.v-slider.theme--dark
-  @include slider-theme($material-dark)
++theme(v-slider) using ($material)
+  .v-slider__track-background,
+  .v-slider__track-fill,
+  .v-slider__thumb
+    background: map-deep-get($material, 'slider', 'inactive')
 
 // Block
 .v-slider

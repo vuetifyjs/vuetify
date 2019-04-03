@@ -1,11 +1,10 @@
 ﻿@import '../../styles/styles.sass'
 @import './_variables'
-@import './_mixins'
 
-.v-breadcrumbs.theme--light
-  +breadcrumbs-theme($material-light)
-.v-breadcrumbs.theme--dark
-  +breadcrumbs-theme($material-dark)
+// Theme
++theme(v-breadcrumbs) using ($material)
+  .v-breadcrumbs__divider, .v-breadcrumbs__item--disabled
+    color: map-deep-get($material, 'text', 'disabled')
 
 // Block
 .v-breadcrumbs

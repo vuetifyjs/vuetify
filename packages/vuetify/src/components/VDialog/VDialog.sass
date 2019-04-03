@@ -1,6 +1,5 @@
 @import '../../styles/styles.sass'
 @import './_variables.scss'
-@import './_mixins.sass'
 
 // Block
 .v-dialog
@@ -79,3 +78,13 @@
     > .v-card__text
       overflow-y: auto
       backface-visibility: hidden
+
+@keyframes animate-dialog
+  0%
+    transform: scale(1)
+
+  50%
+    transform: scale(1.03)
+
+  100%
+    transform: scale(1)

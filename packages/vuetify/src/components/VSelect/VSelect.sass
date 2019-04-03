@@ -1,6 +1,7 @@
 @import '../../styles/styles.sass'
 
-@mixin select-theme($material)
+// Theme
++theme(v-select) using ($material)
   // Needs an explicit color to override
   // higher level color
   .v-select__selections
@@ -17,11 +18,6 @@
   &.v-text-field--solo-inverted.v-input--is-focused
     .v-select__selections
       color: map-deep-get($material, 'inputs', 'solo-inverted-focused-text')
-
-.v-select.theme--light
-  +select-theme($material-light)
-.v-select.theme--dark
-  +select-theme($material-dark)
 
 .v-select
   position: relative // For **attach** prop

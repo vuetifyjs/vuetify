@@ -1,12 +1,13 @@
 @import '../../styles/styles.sass'
 @import './_variables.scss'
-@import './_mixins.sass'
 
-/* Theme */
-.v-treeview.theme--light
-  +treeview-theme($material-light)
-.v-treeview.theme--dark
-  +treeview-theme($material-dark)
+// Theme
++theme(v-treeview) using ($material)
+  color: map-deep-get($material, 'text', 'primary')
+
+  &--hoverable .v-treeview-node__root:hover,
+  .v-treeview-node--active
+    background: map-get($material, 'dividers')
 
 .v-treeview
   > .v-treeview-node

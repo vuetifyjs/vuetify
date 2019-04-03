@@ -1,11 +1,15 @@
 @import '../../styles/styles.sass'
-@import './_mixins.sass'
 
 // Theme
-.v-navigation-drawer.theme--light
-  +navigation-drawer-theme($material-light)
-.v-navigation-drawer.theme--dark
-  +navigation-drawer-theme($material-dark)
++theme(v-navigation-drawer) using ($material)
+  background-color: map-get($material, 'cards')
+
+  &:not(.v-navigation-drawer--floating)
+    .v-navigation-drawer__border
+      background-color: map-get($material, 'dividers')
+
+  .v-divider
+    border-color: map-get($material, 'dividers')
 
 .v-navigation-drawer
   +bootable()
