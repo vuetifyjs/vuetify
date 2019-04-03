@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
+exports[`VDatePicker.ts should match snapshot with colored picker & header 1`] = `
 
 <div class="v-picker v-card v-picker--date theme--light">
   <div class="v-picker__title orange darken-1">
@@ -369,7 +369,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
 
 `;
 
-exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
+exports[`VDatePicker.ts should match snapshot with colored picker 1`] = `
 
 <div class="v-picker v-card v-picker--date theme--light">
   <div class="v-picker__title orange darken-1">
@@ -738,7 +738,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
 
 `;
 
-exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
+exports[`VDatePicker.ts should match snapshot with dark theme 1`] = `
 
 <div class="v-picker v-card v-picker--date theme--dark">
   <div class="v-picker__title">
@@ -1118,7 +1118,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
 
 `;
 
-exports[`VDatePicker.js should match snapshot with default settings 1`] = `
+exports[`VDatePicker.ts should match snapshot with default settings 1`] = `
 
 <div class="v-picker v-card v-picker--date theme--light">
   <div class="v-picker__title primary">
@@ -1498,7 +1498,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
 
 `;
 
-exports[`VDatePicker.js should match snapshot with year icon 1`] = `
+exports[`VDatePicker.ts should match snapshot with year icon 1`] = `
 
 <div class="v-picker__title primary">
   <div class="v-date-picker-title">
@@ -1520,7 +1520,7 @@ exports[`VDatePicker.js should match snapshot with year icon 1`] = `
 
 `;
 
-exports[`VDatePicker.js should render component with min/max props 1`] = `
+exports[`VDatePicker.ts should render component with min/max props 1`] = `
 
 <div class="v-picker v-card v-picker--date theme--light">
   <div class="v-picker__title primary">
@@ -1916,7 +1916,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
 
 `;
 
-exports[`VDatePicker.js should render component with min/max props 2`] = `
+exports[`VDatePicker.ts should render component with min/max props 2`] = `
 
 <div class="v-picker v-card v-picker--date theme--light">
   <div class="v-picker__title primary">
@@ -2478,7 +2478,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
 
 `;
 
-exports[`VDatePicker.js should render component with min/max props 3`] = `
+exports[`VDatePicker.ts should render component with min/max props 3`] = `
 
 <div class="v-picker v-card v-picker--date theme--light">
   <div class="v-picker__title primary">
@@ -3047,7 +3047,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
 
 `;
 
-exports[`VDatePicker.js should render disabled picker 1`] = `
+exports[`VDatePicker.ts should render disabled picker 1`] = `
 
 <div class="v-picker v-card v-picker--date theme--light">
   <div class="v-picker__title primary">
@@ -3460,7 +3460,7 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
 
 `;
 
-exports[`VDatePicker.js should render readonly picker 1`] = `
+exports[`VDatePicker.ts should render readonly picker 1`] = `
 
 <div class="v-picker v-card v-picker--date theme--light">
   <div class="v-picker__title primary">

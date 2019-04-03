@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VDatePicker.js should match snapshot with allowed dates as array 1`] = `
+exports[`VDatePicker.ts should match snapshot with allowed dates as array 1`] = `
 
 <tbody>
   <tr>
@@ -131,7 +131,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates as array 1`] = 
 
 `;
 
-exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
+exports[`VDatePicker.ts should match snapshot with colored picker & header 1`] = `
 
 <div class="v-picker v-card v-picker--date theme--light">
   <div class="v-picker__title orange darken-1">
@@ -307,7 +307,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
 
 `;
 
-exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
+exports[`VDatePicker.ts should match snapshot with colored picker 1`] = `
 
 <div class="v-picker v-card v-picker--date theme--light">
   <div class="v-picker__title orange darken-1">
@@ -483,7 +483,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
 
 `;
 
-exports[`VDatePicker.js should match snapshot with month formatting functions 1`] = `
+exports[`VDatePicker.ts should match snapshot with month formatting functions 1`] = `
 
 <tbody>
   <tr>
@@ -606,7 +606,7 @@ exports[`VDatePicker.js should match snapshot with month formatting functions 1`
 
 `;
 
-exports[`VDatePicker.js should match snapshot with pick-month prop 1`] = `
+exports[`VDatePicker.ts should match snapshot with pick-month prop 1`] = `
 
 <div class="v-picker v-card v-picker--date theme--light">
   <div class="v-picker__title primary">

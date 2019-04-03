@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VDatePickerYears.js should render component and match snapshot 1`] = `
+exports[`VDatePickerYears.ts should render component and match snapshot 1`] = `
 
 <ul class="v-date-picker-years">
   <li class>

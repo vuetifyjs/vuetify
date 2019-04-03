@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VDatePickerMonthTable.js should render component and match snapshot (multiple) 1`] = `
+exports[`VDatePickerMonthTable.ts should render component and match snapshot (multiple) 1`] = `
 
 <div class="v-date-picker-table v-date-picker-table--month theme--light">
   <table>
@@ -127,7 +127,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot (mu
 
 `;
 
-exports[`VDatePickerMonthTable.js should render component and match snapshot 1`] = `
+exports[`VDatePickerMonthTable.ts should render component and match snapshot 1`] = `
 
 <div class="v-date-picker-table v-date-picker-table--month theme--light">
   <table>
@@ -254,7 +254,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
 
 `;
 
-exports[`VDatePickerMonthTable.js should render component with events (array) and match snapshot 1`] = `
+exports[`VDatePickerMonthTable.ts should render component with events (array) and match snapshot 1`] = `
 
 <div class="v-date-picker-table v-date-picker-table--month theme--light">
   <table>
@@ -389,7 +389,7 @@ exports[`VDatePickerMonthTable.js should render component with events (array) an
 
 `;
 
-exports[`VDatePickerMonthTable.js should render component with events (function) and match snapshot 1`] = `
+exports[`VDatePickerMonthTable.ts should render component with events (function) and match snapshot 1`] = `
 
 <div class="v-date-picker-table v-date-picker-table--month theme--light">
   <table>
@@ -524,7 +524,7 @@ exports[`VDatePickerMonthTable.js should render component with events (function)
 
 `;
 
-exports[`VDatePickerMonthTable.js should render component with events colored by function and match snapshot 1`] = `
+exports[`VDatePickerMonthTable.ts should render component with events colored by function and match snapshot 1`] = `
 
 <div class="v-date-picker-table v-date-picker-table--month theme--light">
   <table>
@@ -659,7 +659,7 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
 
 `;
 
-exports[`VDatePickerMonthTable.js should render component with events colored by object and match snapshot 1`] = `
+exports[`VDatePickerMonthTable.ts should render component with events colored by object and match snapshot 1`] = `
 
 <div class="v-date-picker-table v-date-picker-table--month theme--light">
   <table>

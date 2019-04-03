@@ -1,9 +1,21 @@
-import { test } from '@/test'
-import VDatePickerTitle from '@/components/VDatePicker/VDatePickerTitle'
+import VDatePickerTitle from '../VDatePickerTitle'
+import {
+  mount,
+  MountOptions,
+  Wrapper
+} from '@vue/test-utils'
 
-test('VDatePickerTitle.js', ({ mount }) => {
+describe('VDatePickerTitle.ts', () => {
+  type Instance = InstanceType<typeof VDatePickerTitle>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+  beforeEach(() => {
+    mountFunction = (options?: MountOptions<Instance>) => {
+      return mount(VDatePickerTitle, options)
+    }
+  })
+
   it('should render component and match snapshot', () => {
-    const wrapper = mount(VDatePickerTitle, {
+    const wrapper = mountFunction({
       propsData: {
         year: '1234',
         date: '2005-11-01'
@@ -14,7 +26,7 @@ test('VDatePickerTitle.js', ({ mount }) => {
   })
 
   it('should render disabled component and match snapshot', () => {
-    const wrapper = mount(VDatePickerTitle, {
+    const wrapper = mountFunction({
       propsData: {
         year: '1234',
         date: '2005-11-01',
@@ -26,7 +38,7 @@ test('VDatePickerTitle.js', ({ mount }) => {
   })
 
   it('should render readonly component and match snapshot', () => {
-    const wrapper = mount(VDatePickerTitle, {
+    const wrapper = mountFunction({
       propsData: {
         year: '1234',
         date: '2005-11-01',
@@ -38,7 +50,7 @@ test('VDatePickerTitle.js', ({ mount }) => {
   })
 
   it('should render component when selecting year and match snapshot', () => {
-    const wrapper = mount(VDatePickerTitle, {
+    const wrapper = mountFunction({
       propsData: {
         year: '1234',
         date: '2005-11-01',
@@ -50,7 +62,7 @@ test('VDatePickerTitle.js', ({ mount }) => {
   })
 
   it('should render year icon', () => {
-    const wrapper = mount(VDatePickerTitle, {
+    const wrapper = mountFunction({
       propsData: {
         year: '1234',
         yearIcon: 'year',
@@ -58,11 +70,11 @@ test('VDatePickerTitle.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.find('.v-date-picker-title__year')[0].html()).toMatchSnapshot()
+    expect(wrapper.findAll('.v-date-picker-title__year').wrappers[0].html()).toMatchSnapshot()
   })
 
   it('should emit input event on year/date click', () => {
-    const wrapper = mount(VDatePickerTitle, {
+    const wrapper = mountFunction({
       propsData: {
         year: '1234',
         yearIcon: 'year',
@@ -73,19 +85,19 @@ test('VDatePickerTitle.js', ({ mount }) => {
     const input = jest.fn(value => wrapper.setProps({ selectingYear: value }))
     wrapper.vm.$on('update:selectingYear', input)
 
-    wrapper.find('.v-date-picker-title__date')[0].trigger('click')
-    expect(input).not.toBeCalled()
-    wrapper.find('.v-date-picker-title__year')[0].trigger('click')
-    expect(input).toBeCalledWith(true)
-    wrapper.find('.v-date-picker-title__date')[0].trigger('click')
-    expect(input).toBeCalledWith(false)
-    wrapper.find('.v-date-picker-title__year')[0].trigger('click')
-    wrapper.find('.v-date-picker-title__year')[0].trigger('click')
-    expect(input).toBeCalledWith(false)
+    wrapper.findAll('.v-date-picker-title__date').wrappers[0].trigger('click')
+    expect(input).not.toHaveBeenCalled()
+    wrapper.findAll('.v-date-picker-title__year').wrappers[0].trigger('click')
+    expect(input).toHaveBeenCalledWith(true)
+    wrapper.findAll('.v-date-picker-title__date').wrappers[0].trigger('click')
+    expect(input).toHaveBeenCalledWith(false)
+    wrapper.findAll('.v-date-picker-title__year').wrappers[0].trigger('click')
+    wrapper.findAll('.v-date-picker-title__year').wrappers[0].trigger('click')
+    expect(input).toHaveBeenCalledWith(false)
   })
 
   it('should have the correct transition', () => {
-    const wrapper = mount(VDatePickerTitle, {
+    const wrapper = mountFunction({
       propsData: {
         year: '2018',
         date: 'Tue, Mar 3',

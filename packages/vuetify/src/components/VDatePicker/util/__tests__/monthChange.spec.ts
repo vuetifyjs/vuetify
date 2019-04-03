@@ -1,7 +1,6 @@
-import monthChange from '@/components/VDatePicker/util/monthChange'
-import { test } from '@/test'
+import monthChange from '../monthChange'
 
-test('VDatePicker/util/monthChange.js', ({ mount }) => {
+describe('VDatePicker/util/monthChange.ts', () => {
   it('should change month', () => {
     expect(monthChange('2000-01', -1)).toBe('1999-12')
     expect(monthChange('2000-01', +1)).toBe('2000-02')
