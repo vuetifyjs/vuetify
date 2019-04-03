@@ -6,7 +6,6 @@ import {
   mount,
   Wrapper
 } from '@vue/test-utils'
-import { compileToFunctions } from 'vue-template-compiler'
 
 describe('VDialog.ts', () => {
   type Instance = InstanceType<typeof VDialog>
