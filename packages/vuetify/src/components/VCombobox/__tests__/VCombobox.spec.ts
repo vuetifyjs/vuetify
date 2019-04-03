@@ -123,12 +123,13 @@ describe('VCombobox.ts', () => {
 
     const change = jest.fn()
     const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
 
     wrapper.vm.$on('change', change)
     wrapper.vm.$on('input', change)
 
     input.trigger('focus')
-    input.element.value = 'foo'
+    element.value = 'foo'
     input.trigger('input')
     input.trigger('keydown.enter')
 
@@ -136,7 +137,7 @@ describe('VCombobox.ts', () => {
     expect(change).toHaveBeenCalledTimes(2)
     expect(wrapper.vm.internalValue).toBe('foo')
 
-    input.element.value = ''
+    element.value = ''
     input.trigger('input')
     input.trigger('keydown.tab')
 
@@ -165,6 +166,7 @@ describe('VCombobox.ts', () => {
     const wrapper = mountFunction()
 
     const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
@@ -172,7 +174,7 @@ describe('VCombobox.ts', () => {
     input.trigger('focus')
     await wrapper.vm.$nextTick()
 
-    input.element.value = 'foo'
+    element.value = 'foo'
     input.trigger('input')
 
     input.trigger('keydown.tab')
@@ -181,7 +183,7 @@ describe('VCombobox.ts', () => {
     input.trigger('keydown.esc')
     expect(wrapper.vm.isMenuActive).toBe(false)
 
-    input.element.value = ''
+    element.value = ''
     input.trigger('input')
 
     await wrapper.vm.$nextTick()
@@ -227,11 +229,13 @@ describe('VCombobox.ts', () => {
     })
 
     const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
+
     const event = jest.fn()
     wrapper.vm.$on('input', event)
 
     input.trigger('focus')
-    input.element.value = 'Programming'
+    element.value = 'Programming'
     input.trigger('input')
     wrapper.vm.selectItem(items[0])
 

@@ -53,9 +53,10 @@ describe('VCombobox.ts', () => {
     const { wrapper, change } = createMultipleCombobox({})
 
     const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
 
     input.trigger('focus')
-    input.element.value = 'foo'
+    element.value = 'foo'
     input.trigger('input')
     input.trigger('keydown.enter')
 
@@ -110,10 +111,11 @@ describe('VCombobox.ts', () => {
     })
 
     const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
     const menu = wrapper.find('.v-menu')
 
     input.trigger('focus')
-    input.element.value = 'b'
+    element.value = 'b'
     input.trigger('input')
     menu.trigger('keydown.down')
 
@@ -155,11 +157,12 @@ describe('VCombobox.ts', () => {
     })
 
     const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
 
     input.trigger('focus')
     await wrapper.vm.$nextTick()
 
-    input.element.value = 'ba'
+    element.value = 'ba'
     input.trigger('input')
     await wrapper.vm.$nextTick()
     input.trigger('keydown.enter')
@@ -175,9 +178,10 @@ describe('VCombobox.ts', () => {
     })
 
     const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
 
     input.trigger('focus')
-    input.element.value = 'b'
+    element.value = 'b'
     input.trigger('input')
     input.trigger('keydown.left')
 
@@ -191,11 +195,12 @@ describe('VCombobox.ts', () => {
     })
 
     const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
 
     input.trigger('focus')
     await wrapper.vm.$nextTick()
 
-    input.element.value = 'foo'
+    element.value = 'foo'
     input.trigger('input')
     input.trigger('keydown.tab')
     await wrapper.vm.$nextTick()
@@ -207,9 +212,10 @@ describe('VCombobox.ts', () => {
     const { wrapper, change } = createMultipleCombobox({})
 
     const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
 
     input.trigger('focus')
-    input.element.value = 'bar'
+    element.value = 'bar'
     input.trigger('input')
     input.trigger('keydown.tab')
 
@@ -223,6 +229,7 @@ describe('VCombobox.ts', () => {
     })
 
     const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
 
     input.trigger('focus')
     input.trigger('keydown.left')
@@ -235,7 +242,8 @@ describe('VCombobox.ts', () => {
     wrapper.vm.selectedIndex = -1
     await wrapper.vm.$nextTick()
 
-    input.element.value = 'baz'
+    element.value = 'baz'
+
     input.trigger('input')
     input.trigger('keydown.enter')
 
@@ -253,6 +261,7 @@ describe('VCombobox.ts', () => {
     })
 
     const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
     const chip = wrapper.findAll('.v-chip').at(1)
     const close = chip.find('.v-chip__close')
 
@@ -262,7 +271,7 @@ describe('VCombobox.ts', () => {
     expect(change).toHaveBeenCalledWith(['foo'])
     expect(wrapper.vm.selectedIndex).toBe(-1)
 
-    input.element.value = 'baz'
+    element.value = 'baz'
     input.trigger('input')
     expect(wrapper.vm.internalSearch).toBe('baz')
     input.trigger('keydown.enter')
@@ -280,6 +289,7 @@ describe('VCombobox.ts', () => {
     })
 
     const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
 
     input.trigger('focus')
     expect(wrapper.vm.selectedIndex).toBe(-1)
@@ -289,7 +299,7 @@ describe('VCombobox.ts', () => {
 
     expect(wrapper.vm.internalSearch).toBeUndefined()
     input.trigger('keydown.right')
-    input.element.value = 'fizz'
+    element.value = 'fizz'
     input.trigger('input')
 
     expect(wrapper.vm.internalSearch).toBe('fizz')
@@ -304,35 +314,36 @@ describe('VCombobox.ts', () => {
     await wrapper.vm.$nextTick()
 
     const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
     input.trigger('focus')
 
-    input.element.value = 'foo,'
+    element.value = 'foo,'
     input.trigger('input')
 
     await wrapper.vm.$nextTick()
     expect(change).toHaveBeenCalledTimes(0)
 
-    input.element.value += ' '
+    element.value += ' '
     input.trigger('input')
 
     await wrapper.vm.$nextTick()
     expect(change).toHaveBeenCalledTimes(1)
     expect(change).toHaveBeenCalledWith(['foo'])
-    expect(input.element.value).toBe('')
+    expect(element.value).toBe('')
 
-    input.element.value = 'foo,barba'
+    element.value = 'foo,barba'
     input.trigger('input')
 
     await wrapper.vm.$nextTick()
     expect(change).toHaveBeenCalledTimes(1)
 
-    input.element.value += 'z'
+    element.value += 'z'
     input.trigger('input')
 
     await wrapper.vm.$nextTick()
     expect(change).toHaveBeenCalledTimes(2)
     expect(change).toHaveBeenCalledWith(['foo', 'foo,bar'])
-    expect(input.element.value).toBe('')
+    expect(element.value).toBe('')
   })
 
   it('should allow the editing of an existing value', async () => {
@@ -345,6 +356,7 @@ describe('VCombobox.ts', () => {
     const internal = jest.fn()
     const chip = wrapper.find('.v-chip')
     const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
 
     wrapper.vm.$on('change', change)
     wrapper.vm.$watch('internalValue', internal)
@@ -357,7 +369,7 @@ describe('VCombobox.ts', () => {
     expect(wrapper.vm.editingIndex).toBe(0)
     expect(wrapper.vm.internalSearch).toBe('foo')
 
-    input.element.value = 'foobar'
+    element.value = 'foobar'
     input.trigger('input')
     input.trigger('keydown.enter')
 
@@ -380,9 +392,10 @@ describe('VCombobox.ts', () => {
     })
 
     const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
 
     input.trigger('focus')
-    input.element.value = 'foo'
+    element.value = 'foo'
     input.trigger('input')
     input.trigger('keydown.tab')
 
@@ -390,7 +403,7 @@ describe('VCombobox.ts', () => {
     expect(updateTags).toHaveBeenCalledTimes(1)
 
     input.trigger('focus')
-    input.element.value = 'fizz'
+    element.value = 'fizz'
     input.trigger('input')
     input.trigger('keydown.down')
 
