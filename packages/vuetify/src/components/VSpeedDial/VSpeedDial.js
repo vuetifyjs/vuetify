@@ -65,7 +65,7 @@ export default {
     if (this.isActive) {
       let btnCount = 0
       children = (this.$slots.default || []).map((b, i) => {
-        if (b.tag && b.componentOptions.Ctor.options.name === 'v-btn') {
+        if (b.tag && typeof b.componentOptions !== 'undefined' && b.componentOptions.Ctor.options.name === 'v-btn') {
           btnCount++
           return h('div', {
             style: {
