@@ -1,0 +1,57 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/data-tables.html"
+  },
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [
+            "v-simple-table"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "height",
+            "fixedHeader",
+            "dense",
+            "dark"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/data-iterators",
+            "components/data-tables",
+            "components/lists"
+          ]
+        }
+      ]
+    }
+  ]
+}

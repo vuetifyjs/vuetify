@@ -1,5 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VIcon for component icon should render an svg icon 1`] = `
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewbox="0 0 24 24"
+     height="24"
+     width="24"
+     role="icon"
+     class="v-icon v-icon--svg theme--light"
+>
+  <path d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z">
+  </path>
+</svg>
+
+`;
+
+exports[`VIcon for component icon should render an svg icon 2`] = `
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewbox="0 0 24 24"
+     height="36px"
+     width="36px"
+     role="icon"
+     class="v-icon v-icon--svg theme--light"
+     style="font-size: 36px; height: 36px; width: 36px;"
+>
+  <path d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z">
+  </path>
+</svg>
+
+`;
+
 exports[`VIcon for component icon should render component 1`] = `
 
 <div class="v-icon test-component v-icon--is-component theme--light"

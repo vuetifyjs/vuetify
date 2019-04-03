@@ -4,5 +4,7 @@ import Vue from 'vue'
 import Vuetify from 'vuetify'
 
 Vue.use(Vuetify, {
- iconfont: 'fa4'
+  icons: {
+    iconfont: 'fa4'
+  }
 })

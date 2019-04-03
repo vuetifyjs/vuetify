@@ -14,10 +14,9 @@ exports[`VCarousel.ts should render component in RTL mode and match snapshot 1`]
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon material-icons theme--dark"
+           class="v-icon mdi mdi-chevron-right theme--dark"
            style="font-size: 46px;"
         >
-          chevron_right
         </i>
       </span>
     </button>
@@ -29,10 +28,9 @@ exports[`VCarousel.ts should render component in RTL mode and match snapshot 1`]
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon material-icons theme--dark"
+           class="v-icon mdi mdi-chevron-left theme--dark"
            style="font-size: 46px;"
         >
-          chevron_left
         </i>
       </span>
     </button>
@@ -59,10 +57,9 @@ exports[`VCarousel.ts should render component with custom duration between image
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon material-icons theme--dark"
+           class="v-icon mdi mdi-chevron-left theme--dark"
            style="font-size: 46px;"
         >
-          chevron_left
         </i>
       </span>
     </button>
@@ -74,10 +71,9 @@ exports[`VCarousel.ts should render component with custom duration between image
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon material-icons theme--dark"
+           class="v-icon mdi mdi-chevron-right theme--dark"
            style="font-size: 46px;"
         >
-          chevron_right
         </i>
       </span>
     </button>
@@ -120,10 +116,9 @@ exports[`VCarousel.ts should render component with custom icon and match snapsho
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon material-icons theme--dark"
+           class="v-icon mdi mdi-chevron-left theme--dark"
            style="font-size: 46px;"
         >
-          chevron_left
         </i>
       </span>
     </button>
@@ -135,10 +130,9 @@ exports[`VCarousel.ts should render component with custom icon and match snapsho
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon material-icons theme--dark"
+           class="v-icon mdi mdi-chevron-right theme--dark"
            style="font-size: 46px;"
         >
-          chevron_right
         </i>
       </span>
     </button>
@@ -204,10 +198,9 @@ exports[`VCarousel.ts should render component with custom next icon and match sn
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon material-icons theme--dark"
+           class="v-icon mdi mdi-chevron-left theme--dark"
            style="font-size: 46px;"
         >
-          chevron_left
         </i>
       </span>
     </button>
@@ -264,10 +257,9 @@ exports[`VCarousel.ts should render component with custom prev icon and match sn
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon material-icons theme--dark"
+           class="v-icon mdi mdi-chevron-right theme--dark"
            style="font-size: 46px;"
         >
-          chevron_right
         </i>
       </span>
     </button>
@@ -294,10 +286,9 @@ exports[`VCarousel.ts should render component with image cycling off and match s
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon material-icons theme--dark"
+           class="v-icon mdi mdi-chevron-left theme--dark"
            style="font-size: 46px;"
         >
-          chevron_left
         </i>
       </span>
     </button>
@@ -309,10 +300,9 @@ exports[`VCarousel.ts should render component with image cycling off and match s
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon material-icons theme--dark"
+           class="v-icon mdi mdi-chevron-right theme--dark"
            style="font-size: 46px;"
         >
-          chevron_right
         </i>
       </span>
     </button>
@@ -355,10 +345,9 @@ exports[`VCarousel.ts should render component with selected active item 1`] = `
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon material-icons theme--dark"
+           class="v-icon mdi mdi-chevron-left theme--dark"
            style="font-size: 46px;"
         >
-          chevron_left
         </i>
       </span>
     </button>
@@ -370,10 +359,9 @@ exports[`VCarousel.ts should render component with selected active item 1`] = `
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon material-icons theme--dark"
+           class="v-icon mdi mdi-chevron-right theme--dark"
            style="font-size: 46px;"
         >
-          chevron_right
         </i>
       </span>
     </button>
@@ -386,10 +374,9 @@ exports[`VCarousel.ts should render component with selected active item 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--dark"
+             class="v-icon mdi mdi-circle theme--dark"
              style="font-size: 18px;"
           >
-            fiber_manual_record
           </i>
         </span>
       </button>
@@ -399,10 +386,9 @@ exports[`VCarousel.ts should render component with selected active item 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--dark"
+             class="v-icon mdi mdi-circle theme--dark"
              style="font-size: 18px;"
           >
-            fiber_manual_record
           </i>
         </span>
       </button>
@@ -412,10 +398,9 @@ exports[`VCarousel.ts should render component with selected active item 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--dark"
+             class="v-icon mdi mdi-circle theme--dark"
              style="font-size: 18px;"
           >
-            fiber_manual_record
           </i>
         </span>
       </button>
@@ -455,10 +440,9 @@ exports[`VCarousel.ts should render component without delimiters 1`] = `
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon material-icons theme--dark"
+           class="v-icon mdi mdi-chevron-left theme--dark"
            style="font-size: 46px;"
         >
-          chevron_left
         </i>
       </span>
     </button>
@@ -470,10 +454,9 @@ exports[`VCarousel.ts should render component without delimiters 1`] = `
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon material-icons theme--dark"
+           class="v-icon mdi mdi-chevron-right theme--dark"
            style="font-size: 46px;"
         >
-          chevron_right
         </i>
       </span>
     </button>
@@ -496,10 +479,9 @@ exports[`VCarousel.ts should render component without next icon and match snapsh
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon material-icons theme--dark"
+           class="v-icon mdi mdi-chevron-left theme--dark"
            style="font-size: 46px;"
         >
-          chevron_left
         </i>
       </span>
     </button>
@@ -526,10 +508,9 @@ exports[`VCarousel.ts should render component without prev icon and match snapsh
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon material-icons theme--dark"
+           class="v-icon mdi mdi-chevron-right theme--dark"
            style="font-size: 46px;"
         >
-          chevron_right
         </i>
       </span>
     </button>

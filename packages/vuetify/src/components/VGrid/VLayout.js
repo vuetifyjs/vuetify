@@ -1,4 +1,4 @@
-import '../../stylus/components/_grid.styl'
+import './_grid.sass'
 
 import Grid from './grid'
 

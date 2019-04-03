@@ -17,19 +17,16 @@ import VProgressLinear from '../VProgressLinear'
 import VRow from './VRow'
 import VRowGroup from './VRowGroup'
 import VSimpleCheckbox from '../VCheckbox/VSimpleCheckbox'
+import VSimpleTable from './VSimpleTable'
+import VMobileRow from './VMobileRow'
 
 // Helpers
 import { deepEqual, getObjectValueByPath, compareFn, getPrefixedScopedSlots } from '../../util/helpers'
-import VSimpleTable from './VSimpleTable'
-import VMobileRow from './VMobileRow'
+import { breaking } from '../../util/console'
 
 /* @vue/component */
 export default VDataIterator.extend({
   name: 'v-data-table',
-
-  provide (): object {
-    return { dataTable: this }
-  },
 
   props: {
     headers: {
@@ -49,7 +46,12 @@ export default VDataIterator.extend({
     dense: Boolean,
     headerProps: Object,
     calculateWidths: Boolean,
-    fixedHeader: Boolean
+    fixedHeader: Boolean,
+    headersLength: Number,
+    expandIcon: {
+      type: String,
+      default: '$vuetify.icons.expand'
+    }
   },
 
   data () {
@@ -62,6 +64,7 @@ export default VDataIterator.extend({
 
   computed: {
     computedHeaders (): TableHeader[] {
+      if (!this.headers) return []
       const headers = this.headers.filter(h => h.value === undefined || !this.internalGroupBy.find(v => v === h.value))
 
       this.showSelect && headers.unshift({ text: '', value: 'data-table-select', sortable: false, width: '1px' })
@@ -69,9 +72,24 @@ export default VDataIterator.extend({
 
       return headers
     },
+    computedHeadersLength (): number {
+      return this.headersLength || this.computedHeaders.length
+    },
     isMobile (): boolean {
       return this.$vuetify.breakpoint.width < this.mobileBreakpoint
     }
+  },
+
+  created () {
+    const breakingProps = [
+      ['sort-icon', 'header-props.sort-icon'],
+      ['hide-headers', 'hide-default-hedader'],
+      ['select-all', 'show-select']
+    ]
+
+    breakingProps.forEach(([original, replacement]) => {
+      if (this.$attrs.hasOwnProperty(original)) breaking(original, replacement)
+    })
   },
 
   mounted () {
@@ -97,7 +115,7 @@ export default VDataIterator.extend({
       this.widths = Array.from(this.$el.querySelectorAll('th')).map(e => e.clientWidth)
     },
     customFilterWithColumns (items: any[], search: string) {
-      const filterableHeaders = this.headers.filter(h => !!h.filter)
+      const filterableHeaders = this.computedHeaders.filter(h => !!h.filter)
       if (filterableHeaders.length) {
         items = items.filter(i => filterableHeaders.every(h => h.filter!(getObjectValueByPath(i, h.value), this.search, i)))
       }
@@ -146,13 +164,15 @@ export default VDataIterator.extend({
       const th = this.$createElement('th', {
         staticClass: 'column',
         attrs: {
-          colspan: this.computedHeaders.length
+          colspan: this.computedHeadersLength
         }
       }, [progress])
 
-      return this.$createElement('tr', {
+      const tr = this.$createElement('tr', {
         staticClass: 'v-data-table__progress'
       }, [th])
+
+      return this.$createElement('thead', [tr])
     },
     genHeaders (props: DataProps) {
       const data = {
@@ -160,18 +180,22 @@ export default VDataIterator.extend({
           ...this.headerProps,
           headers: this.computedHeaders,
           options: props.options,
-          mobile: this.isMobile
+          mobile: this.isMobile,
+          showGroupBy: this.showGroupBy,
+          someItems: this.someItems,
+          everyItem: this.everyItem
         },
         on: {
           sort: props.sort,
-          group: props.group
+          group: props.group,
+          'toggle-select-all': this.toggleSelectAll
         }
       }
 
       const children: VNodeChildrenArrayContents = [this.genSlots('header', data)]
 
       if (!this.hideDefaultHeader) {
-        const scopedSlots = getPrefixedScopedSlots('header.', this.$scopedSlots)
+        const scopedSlots = getPrefixedScopedSlots('header.column.', this.$scopedSlots)
         children.push(this.$createElement(VDataTableHeader, {
           ...data,
           scopedSlots
@@ -186,7 +210,7 @@ export default VDataIterator.extend({
       return this.$createElement('tr', [
         this.$createElement('td', {
           attrs: {
-            colspan: this.computedHeaders.length
+            colspan: this.computedHeadersLength
           }
         }, content)
       ])
@@ -253,7 +277,7 @@ export default VDataIterator.extend({
         const column = this.$createElement('td', {
           staticClass: 'text-xs-left',
           attrs: {
-            colspan: this.computedHeaders.length
+            colspan: this.computedHeadersLength
           }
         }, [toggle, `${props.options.groupBy[0]}: ${group}`, remove])
 
@@ -339,7 +363,7 @@ export default VDataIterator.extend({
             'v-data-table__expand-icon--active': expanded
           },
           ...data
-        }, ['$vuetify.icons.expand']) // TODO: prop?
+        }, [this.expandIcon])
       }
 
       return this.$createElement(this.isMobile ? VMobileRow : VRow, {
@@ -354,25 +378,28 @@ export default VDataIterator.extend({
       })
     },
     genBody (props: DataProps): VNode | string | VNodeChildren {
+      const data = {
+        ...props,
+        headers: this.computedHeaders
+      }
+
       if (this.$scopedSlots.body) {
-        return this.$scopedSlots.body!({
-          ...props,
-          headers: this.computedHeaders
-        })
+        return this.$scopedSlots.body!(data)
       }
 
       return this.$createElement('tbody', [
-        this.genSlots('body.prepend', props),
+        this.genSlots('body.prepend', data),
         this.genItems(props.items, props),
-        this.genSlots('body.append', props)
+        this.genSlots('body.append', data)
       ])
     },
     genFooters (props: DataProps) {
       const data = {
         props: {
-          ...this.footerProps,
           options: props.options,
-          pagination: props.pagination
+          pagination: props.pagination,
+          itemsPerPageText: '$vuetify.dataTable.itemsPerPageText',
+          ...this.footerProps
         },
         on: {
           'update:options': (value: any) => props.updateOptions(value)

@@ -1,13 +1,12 @@
 // Imports
 @import '../../styles/styles.sass'
 @import './_variables.scss'
-@import './_mixins.sass'
 
 // Theme
-.v-alert.theme--light
-  +alert-theme($material-light)
-.v-alert.theme--dark
-  +alert-theme($material-dark)
++theme(v-alert) using ($material)
+  .v-alert--prominent .v-alert__icon
+    &:after
+      background: map-get($material, 'dividers')
 
 // Block
 .v-alert

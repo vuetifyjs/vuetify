@@ -1,10 +1,11 @@
 <template>
   <div class="text-xs-center">
     <v-bottom-sheet inset>
-      <template v-slot:activator>
+      <template v-slot:activator="{ on }">
         <v-btn
           color="red"
           dark
+          v-on="on"
         >
           Show player
         </v-btn>
@@ -25,23 +26,26 @@
 
             <v-spacer></v-spacer>
 
-            <v-list-item-action>
+            <v-list-item-icon>
               <v-btn icon>
                 <v-icon>fast_rewind</v-icon>
               </v-btn>
-            </v-list-item-action>
+            </v-list-item-icon>
 
-            <v-list-item-action :class="{ 'mx-5': $vuetify.breakpoint.mdAndUp }">
+            <v-list-item-icon :class="{ 'mx-5': $vuetify.breakpoint.mdAndUp }">
               <v-btn icon>
                 <v-icon>pause</v-icon>
               </v-btn>
-            </v-list-item-action>
+            </v-list-item-icon>
 
-            <v-list-item-action :class="{ 'mr-3': $vuetify.breakpoint.mdAndUp }">
+            <v-list-item-icon
+              class="ml-0"
+              :class="{ 'mr-3': $vuetify.breakpoint.mdAndUp }"
+            >
               <v-btn icon>
                 <v-icon>fast_forward</v-icon>
               </v-btn>
-            </v-list-item-action>
+            </v-list-item-icon>
           </v-list-item>
         </v-list>
       </v-card>

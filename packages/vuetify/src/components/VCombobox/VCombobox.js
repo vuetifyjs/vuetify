@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_autocompletes.styl'
+import '../VAutocomplete/VAutocomplete.sass'
 
 // Extensions
 import VSelect from '../VSelect/VSelect'

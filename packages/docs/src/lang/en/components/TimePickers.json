@@ -38,7 +38,8 @@
       "max": "Maximum allowed time",
       "readonly": "Puts picker in readonly state",
       "useSeconds": "Toggles the use of seconds in picker",
-      "value": "Time picker model (ISO 8601 format, 24hr hh:mm)"
+      "value": "Time picker model (ISO 8601 format, 24hr hh:mm)",
+      "ampmInTitle": "Place AM/PM switch in title, not near the clock."
     }
   }
 }
