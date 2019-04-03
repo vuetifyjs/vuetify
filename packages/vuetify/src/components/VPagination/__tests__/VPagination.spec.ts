@@ -1,10 +1,34 @@
-import { test } from '@/test'
-import VPagination from '@/components/VPagination'
+import VPagination from '../VPagination'
+import {
+  mount,
+  MountOptions,
+  Wrapper
+} from '@vue/test-utils'
+import Vue from 'vue'
 
-test('VPagination.vue', ({ mount }) => {
-  it('emits an event when next or previous is clicked', async () => {
+Vue.prototype.$vuetify = {
+  rtl: false,
+  icons: {
+    values: {
+      next: 'mdi-chevron-right',
+      prev: 'mdi-chevron-left'
+    }
+  }
+}
+
+describe('VPagination.ts', () => {
+  type Instance = InstanceType<typeof VPagination>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+  beforeEach(() => {
     jest.useFakeTimers()
-    const wrapper = mount(VPagination, {
+
+    mountFunction = (options?: MountOptions<Instance>) => {
+      return mount(VPagination, options)
+    }
+  })
+
+  it('emits an event when next or previous is clicked', async () => {
+    const wrapper = mountFunction({
       propsData: {
         length: 5,
         value: 2
@@ -17,21 +41,20 @@ test('VPagination.vue', ({ mount }) => {
     const previous = jest.fn()
     const next = jest.fn()
 
-    wrapper.instance().$on('previous', previous)
-    wrapper.instance().$on('next', next)
+    wrapper.vm.$on('previous', previous)
+    wrapper.vm.$on('next', next)
 
-    const navigation = wrapper.find('.v-pagination__navigation')
+    const navigation = wrapper.findAll('.v-pagination__navigation').wrappers
     navigation[0].trigger('click')
     navigation[1].trigger('click')
 
-    expect(next).toBeCalled()
-    expect(previous).toBeCalled()
+    expect(next).toHaveBeenCalled()
+    expect(previous).toHaveBeenCalled()
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render component in RTL mode and match snapshot', async () => {
-    jest.useFakeTimers()
-    const wrapper = mount(VPagination, {
+    const wrapper = mountFunction({
       propsData: {
         length: 5,
         value: 2
@@ -45,8 +68,7 @@ test('VPagination.vue', ({ mount }) => {
   })
 
   it('emits an event when pagination item is clicked', async () => {
-    jest.useFakeTimers()
-    const wrapper = mount(VPagination, {
+    const wrapper = mountFunction({
       propsData: {
         length: 5,
         value: 2
@@ -58,17 +80,16 @@ test('VPagination.vue', ({ mount }) => {
 
     const cb = jest.fn()
 
-    wrapper.instance().$on('input', cb)
+    wrapper.vm.$on('input', cb)
 
-    const navigation = wrapper.find('.v-pagination__item')
+    const navigation = wrapper.findAll('.v-pagination__item').wrappers
     navigation[1].trigger('click')
 
-    expect(cb).toBeCalledWith(2)
+    expect(cb).toHaveBeenCalledWith(2)
   })
 
   it('should render disabled buttons with length equals to 0', async () => {
-    jest.useFakeTimers()
-    const wrapper = mount(VPagination, {
+    const wrapper = mountFunction({
       propsData: {
         length: 0,
         value: 1
@@ -80,8 +101,7 @@ test('VPagination.vue', ({ mount }) => {
   })
 
   it('should watch the value', async () => {
-    jest.useFakeTimers()
-    const wrapper = mount(VPagination, {
+    const wrapper = mountFunction({
       propsData: {
         length: 5,
         value: 1
@@ -97,8 +117,7 @@ test('VPagination.vue', ({ mount }) => {
   })
 
   it('should only render start and end of range if length is big', async () => {
-    jest.useFakeTimers()
-    const wrapper = mount(VPagination, {
+    const wrapper = mountFunction({
       propsData: {
         length: 100
       }
@@ -108,12 +127,11 @@ test('VPagination.vue', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('.v-pagination__more').length).toEqual(1)
+    expect(wrapper.findAll('.v-pagination__more').wrappers).toHaveLength(1)
   })
 
   it('should only render middle of range if length is big and value is somewhere in the middle', async () => {
-    jest.useFakeTimers()
-    const wrapper = mount(VPagination, {
+    const wrapper = mountFunction({
       propsData: {
         length: 100,
         value: 50
@@ -124,12 +142,11 @@ test('VPagination.vue', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('.v-pagination__more').length).toEqual(2)
+    expect(wrapper.findAll('.v-pagination__more').wrappers).toHaveLength(2)
   })
 
   it('should only render start of range if value is equals "left"', async () => {
-    jest.useFakeTimers()
-    const wrapper = mount(VPagination, {
+    const wrapper = mountFunction({
       propsData: {
         length: 100,
         totalVisible: 5
@@ -143,12 +160,11 @@ test('VPagination.vue', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('.v-pagination__more').length).toEqual(1)
+    expect(wrapper.findAll('.v-pagination__more').wrappers).toHaveLength(1)
   })
 
   it('should only render end of range if value is equals "right"', async () => {
-    jest.useFakeTimers()
-    const wrapper = mount(VPagination, {
+    const wrapper = mountFunction({
       propsData: {
         length: 100,
         totalVisible: 5
@@ -164,12 +180,11 @@ test('VPagination.vue', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('.v-pagination__more').length).toEqual(1)
+    expect(wrapper.findAll('.v-pagination__more').wrappers).toHaveLength(1)
   })
 
   it('should use totalVisible prop if defined', async () => {
-    jest.useFakeTimers()
-    const wrapper = mount(VPagination, {
+    const wrapper = mountFunction({
       propsData: {
         length: 100,
         value: 50,
@@ -181,12 +196,12 @@ test('VPagination.vue', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('.v-pagination__more').length).toEqual(2)
-    expect(wrapper.find('.v-pagination__item').length).toEqual(8)
+    expect(wrapper.findAll('.v-pagination__more').wrappers).toHaveLength(2)
+    expect(wrapper.findAll('.v-pagination__item').wrappers).toHaveLength(8)
   })
 
   it('should set from to 1 if <= 0', () => {
-    const wrapper = mount(VPagination)
+    const wrapper = mountFunction()
 
     expect(wrapper.vm.range(1, 2)).toEqual([1, 2])
     expect(wrapper.vm.range(0, 2)).toEqual([1, 2])
@@ -200,7 +215,7 @@ test('VPagination.vue', ({ mount }) => {
       render: h => h('div', [h(VPagination)])
     })
 
-    const pagination = wrapper.first(VPagination.options)
+    const pagination = wrapper.find(VPagination.options)
 
     expect(pagination.vm.maxButtons).toBe(0)
 
