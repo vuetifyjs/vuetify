@@ -160,6 +160,8 @@ export default baseMixins.extend({
       // If we made it here, the click is outside
       // and is active. If persistent, and the
       // click is on the overlay, animate
+      this.$emit('click:outside')
+
       if (this.persistent) {
         if (!this.noClickAnimation &&
           this.overlay === target
