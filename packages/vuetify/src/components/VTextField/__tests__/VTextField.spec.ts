@@ -1,24 +1,43 @@
-import { test } from '@/test'
-import Vue from 'vue/dist/vue.common'
-import VTextField from '@/components/VTextField/VTextField'
-import VProgressLinear from '@/components/VProgressLinear'
+import Vue from 'vue'
+import VTextField from '../VTextField'
+import VProgressLinear from '../../VProgressLinear'
+import {
+  mount,
+  MountOptions,
+  Wrapper
+} from '@vue/test-utils'
 
-test('VTextField.js', ({ mount }) => {
+describe('VTextField.ts', () => { // eslint-disable-line max-statements
+  type Instance = InstanceType<typeof VTextField>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+  beforeEach(() => {
+    mountFunction = (options?: MountOptions<Instance>) => {
+      return mount(VTextField, {
+        mocks: {
+          $vuetify: {
+            rtl: false
+          }
+        },
+        ...options
+      })
+    }
+  })
+
   it('should render component and match snapshot', () => {
-    const wrapper = mount(VTextField)
+    const wrapper = mountFunction()
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should pass required attr to the input', () => {
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       attrs: {
         required: true
       }
     })
 
-    const input = wrapper.find('input')[0]
-    expect(input.getAttribute('required')).toBe('required')
+    const input = wrapper.findAll('input').wrappers[0]
+    expect(input.element.getAttribute('required')).toBe('required')
   })
 
   it('should pass events to internal input field', () => {
@@ -30,38 +49,38 @@ test('VTextField.js', ({ mount }) => {
     }
     const wrapper = mount(component)
 
-    const input = wrapper.find('input')[0]
+    const input = wrapper.findAll('input').wrappers[0]
     input.trigger('keyUp', { keyCode: 65 })
 
-    expect(keyup).toBeCalled()
+    expect(keyup).toHaveBeenCalled()
   })
 
   it('should render aria-label attribute on text field element with label value and no id', () => {
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       propsData: {
         label: 'Test'
       },
       attrs: {}
     })
 
-    const inputGroup = wrapper.find('input')[0]
-    expect(inputGroup.getAttribute('aria-label')).toBe('Test')
+    const inputGroup = wrapper.findAll('input').wrappers[0]
+    expect(inputGroup.element.getAttribute('aria-label')).toBe('Test')
   })
 
   it('should not render aria-label attribute on text field element with no label value or id', () => {
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       propsData: {
         label: null
       },
       attrs: {}
     })
 
-    const inputGroup = wrapper.find('input')[0]
+    const inputGroup = wrapper.findAll('input').wrappers[0]
     expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
   })
 
   it('should not render aria-label attribute on text field element with id', () => {
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       propsData: {
         label: 'Test'
       },
@@ -70,22 +89,22 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const inputGroup = wrapper.find('input')[0]
+    const inputGroup = wrapper.findAll('input').wrappers[0]
     expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
   })
 
   it('should start out as invalid', () => {
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       propsData: {
-        rules: [(v) => !!v || 'Required']
+        rules: [v => !!v || 'Required']
       }
     })
 
-    expect(wrapper.data().valid).toEqual(false)
+    expect(wrapper.vm.valid).toEqual(false)
   })
 
   it('should start validating on input', async () => {
-    const wrapper = mount(VTextField)
+    const wrapper = mountFunction()
 
     expect(wrapper.vm.shouldValidate).toEqual(false)
     wrapper.setProps({ value: 'asd' })
@@ -94,7 +113,7 @@ test('VTextField.js', ({ mount }) => {
   })
 
   it('should not start validating on input if validate-on-blur prop is set', async () => {
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       propsData: {
         validateOnBlur: true
       }
@@ -107,7 +126,7 @@ test('VTextField.js', ({ mount }) => {
   })
 
   it('should not display counter when set to false/undefined/null', async () => {
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       propsData: {
         counter: true
       },
@@ -116,47 +135,47 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.find('.v-counter')[0]).not.toBe(undefined)
+    expect(wrapper.findAll('.v-counter').wrappers[0]).not.toBeUndefined()
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({ counter: false })
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('.v-counter')[0]).toBe(undefined)
+    expect(wrapper.findAll('.v-counter').wrappers[0]).toBeUndefined()
 
     wrapper.setProps({ counter: undefined })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.find('.v-counter')[0]).toBe(undefined)
+    expect(wrapper.findAll('.v-counter').wrappers[0]).toBeUndefined()
 
     wrapper.setProps({ counter: null })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.find('.v-counter')[0]).toBe(undefined)
+    expect(wrapper.findAll('.v-counter').wrappers[0]).toBeUndefined()
   })
 
   it('should have readonly attribute', () => {
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       propsData: {
         readonly: true
       }
     })
 
-    const input = wrapper.find('input')[0]
+    const input = wrapper.findAll('input').wrappers[0]
 
-    expect(input.getAttribute('readonly')).toBe('readonly')
+    expect(input.element.getAttribute('readonly')).toBe('readonly')
   })
 
   it('should clear input value', async () => {
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       propsData: {
         clearable: true,
         value: 'foo'
       }
     })
 
-    const clear = wrapper.find('.v-input__icon--clear .v-icon')[0]
+    const clear = wrapper.findAll('.v-input__icon--clear .v-icon').wrappers[0]
     const input = jest.fn()
     wrapper.vm.$on('input', input)
 
@@ -171,34 +190,32 @@ test('VTextField.js', ({ mount }) => {
 
   it('should not clear input if not clearable and has appended icon (with callback)', async () => {
     const click = jest.fn()
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       propsData: {
         value: 'foo',
-        appendIcon: 'block',
+        appendIcon: 'block'
       },
       listeners: {
         'click:append': click
       }
     })
 
-    wrapper.vm.$on('click:append', click)
-
-    const icon = wrapper.find('.v-input__icon--append .v-icon')[0]
+    const icon = wrapper.findAll('.v-input__icon--append .v-icon').wrappers[0]
     icon.trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalValue).toBe('foo')
-    expect(click.mock.calls).toHaveLength(1)
+    expect(click).toHaveBeenCalledTimes(1)
   })
 
   it('should not clear input if not clearable and has appended icon (without callback)', async () => {
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       propsData: {
         value: 'foo',
-        appendIcon: 'block',
+        appendIcon: 'block'
       }
     })
 
-    const icon = wrapper.find('.v-input__icon--append .v-icon')[0]
+    const icon = wrapper.findAll('.v-input__icon--append .v-icon').wrappers[0]
     icon.trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalValue).toBe('foo')
@@ -206,14 +223,14 @@ test('VTextField.js', ({ mount }) => {
 
   it('should start validating on blur', async () => {
     const rule = jest.fn().mockReturnValue(true)
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       propsData: {
         rules: [rule],
         validateOnBlur: true
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     expect(wrapper.vm.shouldValidate).toEqual(false)
 
     // Rules are called once on mount
@@ -235,13 +252,13 @@ test('VTextField.js', ({ mount }) => {
   })
 
   it('should keep its value on blur', async () => {
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       propsData: {
         value: 'asd'
       }
     })
 
-    const input = wrapper.find('input')[0]
+    const input = wrapper.findAll('input').wrappers[0]
 
     input.element.value = 'fgh'
     input.trigger('input')
@@ -251,9 +268,9 @@ test('VTextField.js', ({ mount }) => {
   })
 
   it('should update if value is changed externally', async () => {
-    const wrapper = mount(VTextField, {})
+    const wrapper = mountFunction({})
 
-    const input = wrapper.find('input')[0]
+    const input = wrapper.findAll('input').wrappers[0]
 
     wrapper.setProps({ value: 'fgh' })
     expect(input.element.value).toBe('fgh')
@@ -271,7 +288,7 @@ test('VTextField.js', ({ mount }) => {
       render (h) {
         return h(VTextField, {
           on: {
-            input: (i) => value = i,
+            input: i => value = i,
             change
           },
           props: { value }
@@ -280,7 +297,7 @@ test('VTextField.js', ({ mount }) => {
     }
     const wrapper = mount(component)
 
-    const input = wrapper.find('input')[0]
+    const input = wrapper.findAll('input').wrappers[0]
 
     input.trigger('focus')
     await wrapper.vm.$nextTick()
@@ -291,12 +308,12 @@ test('VTextField.js', ({ mount }) => {
     input.trigger('blur')
     await wrapper.vm.$nextTick()
 
-    expect(change).toBeCalledWith('fgh')
+    expect(change).toHaveBeenCalledWith('fgh')
     expect(change.mock.calls).toHaveLength(1)
   })
 
   it('should not make prepend icon clearable', () => {
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       propsData: {
         prependIcon: 'check',
         appendIcon: 'check',
@@ -305,7 +322,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const prepend = wrapper.find('.v-input__icon--append .v-icon')[0]
+    const prepend = wrapper.findAll('.v-input__icon--append .v-icon').wrappers[0]
     expect(prepend.text()).toBe('check')
     expect(prepend.element.classList).not.toContain('input-group__icon-cb')
   })
@@ -326,7 +343,7 @@ test('VTextField.js', ({ mount }) => {
     }
     const wrapper = mount(component)
 
-    const input = wrapper.find('input')[0]
+    const input = wrapper.findAll('input').wrappers[0]
 
     input.trigger('focus')
     await wrapper.vm.$nextTick()
@@ -337,7 +354,7 @@ test('VTextField.js', ({ mount }) => {
   })
 
   it('should render component with async loading and match snapshot', () => {
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       propsData: {
         loading: true
       }
@@ -359,7 +376,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       propsData: {
         loading: true
       },
@@ -372,7 +389,7 @@ test('VTextField.js', ({ mount }) => {
   })
 
   it('should display the number 0', async () => {
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       propsData: { value: 0 }
     })
 
@@ -380,7 +397,7 @@ test('VTextField.js', ({ mount }) => {
   })
 
   it('should reset internal change on blur and keydown', async () => {
-    const wrapper = mount(VTextField)
+    const wrapper = mountFunction()
 
     wrapper.setProps({ value: 'foo' })
     wrapper.vm.internalChange = true
@@ -388,7 +405,7 @@ test('VTextField.js', ({ mount }) => {
     wrapper.vm.onBlur()
     expect(wrapper.vm.internalChange).toBe(false)
 
-    wrapper.first('input').trigger('keydown')
+    wrapper.find('input').trigger('keydown')
 
     expect(wrapper.vm.internalChange).toBe(true)
   })
@@ -396,7 +413,7 @@ test('VTextField.js', ({ mount }) => {
   it('should emit input when externally set value was modified internally', async () => {
     let value = '33'
     const input = jest.fn()
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       propsData: {
         value,
         mask: '##',
@@ -404,7 +421,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    wrapper.vm.$on('input', (v) => {
+    wrapper.vm.$on('input', v => {
       value = v
     })
     wrapper.vm.$on('input', input)
@@ -413,7 +430,7 @@ test('VTextField.js', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(value).toBe('44')
-    expect(input).toBeCalled()
+    expect(input).toHaveBeenCalled()
   })
 
   it('should mask value if return-masked-value is true', async () => {
@@ -427,14 +444,14 @@ test('VTextField.js', ({ mount }) => {
           props: {
             value,
             returnMaskedValue: true,
-            mask: '#-#',
+            mask: '#-#'
           }
         })
       }
     }
 
     const wrapper = mount(component)
-    const input = wrapper.find('input')[0]
+    const input = wrapper.findAll('input').wrappers[0]
 
     expect(value).toBe('4-4')
 
@@ -458,14 +475,14 @@ test('VTextField.js', ({ mount }) => {
           props: {
             value,
             returnMaskedValue: false,
-            mask: '#-#',
+            mask: '#-#'
           }
         })
       }
     }
 
     const wrapper = mount(component)
-    const input = wrapper.find('input')[0]
+    const input = wrapper.findAll('input').wrappers[0]
 
     expect(value).toBe('44')
 
@@ -489,7 +506,7 @@ test('VTextField.js', ({ mount }) => {
           props: {
             value,
             returnMaskedValue: true,
-            mask: 'date',
+            mask: 'date'
           }
         })
       }
@@ -501,18 +518,18 @@ test('VTextField.js', ({ mount }) => {
   })
 
   it('should allow switching mask', async () => {
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       propsData: {
         mask: '#-#-#',
         value: '1-2-3'
       }
     })
 
-    const input = wrapper.find('input')[0]
+    const input = wrapper.findAll('input').wrappers[0]
 
     expect(input.element.value).toBe('1-2-3')
 
-    wrapper.setProps({ mask: '#.#.#'})
+    wrapper.setProps({ mask: '#.#.#' })
     await wrapper.vm.$nextTick()
 
     expect(input.element.value).toBe('1.2.3')
@@ -524,7 +541,7 @@ test('VTextField.js', ({ mount }) => {
   })
 
   it('should autofocus', async () => {
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
         autofocus: true
@@ -539,33 +556,33 @@ test('VTextField.js', ({ mount }) => {
     expect(wrapper.vm.isFocused).toBe(true)
     wrapper.vm.onClick()
 
-    expect(focus.mock.calls.length).toBe(0)
+    expect(focus.mock.calls).toHaveLength(0)
 
     wrapper.setData({ isFocused: false })
 
     wrapper.vm.onClick()
-    expect(focus.mock.calls.length).toBe(1)
+    expect(focus.mock.calls).toHaveLength(1)
 
     wrapper.setProps({ disabled: true })
 
     wrapper.setData({ isFocused: false })
 
     wrapper.vm.onClick()
-    expect(focus.mock.calls.length).toBe(1)
+    expect(focus.mock.calls).toHaveLength(1)
 
     wrapper.setProps({ disabled: false })
 
     wrapper.vm.onClick()
-    expect(focus.mock.calls.length).toBe(2)
+    expect(focus.mock.calls).toHaveLength(2)
 
     delete wrapper.vm.$refs.input
 
     wrapper.vm.onFocus()
-    expect(focus.mock.calls.length).toBe(2)
+    expect(focus.mock.calls).toHaveLength(2)
   })
 
   it('should have prefix and suffix', () => {
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       propsData: {
         prefix: '$',
         suffix: '.com'
@@ -577,7 +594,7 @@ test('VTextField.js', ({ mount }) => {
 
   it('should use a custom clear callback', async () => {
     const clear = jest.fn()
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       propsData: {
         clearable: true,
         value: 'foo'
@@ -589,30 +606,30 @@ test('VTextField.js', ({ mount }) => {
 
     wrapper.vm.$on('click:clear', clear)
 
-    wrapper.first('.v-input__icon--clear .v-icon').trigger('click')
+    wrapper.find('.v-input__icon--clear .v-icon').trigger('click')
 
-    expect(clear).toBeCalled()
+    expect(clear).toHaveBeenCalled()
   })
 
   it('should not generate label', () => {
-    const wrapper = mount(VTextField)
+    const wrapper = mountFunction()
 
-    expect(wrapper.vm.genLabel()).toBe(null)
+    expect(wrapper.vm.genLabel()).toBeNull()
 
     wrapper.setProps({ singleLine: true })
 
-    expect(wrapper.vm.genLabel()).toBe(null)
+    expect(wrapper.vm.genLabel()).toBeNull()
 
     wrapper.setProps({ placeholder: 'foo' })
 
-    expect(wrapper.vm.genLabel()).toBe(null)
+    expect(wrapper.vm.genLabel()).toBeNull()
 
     wrapper.setProps({
       placeholder: undefined,
       value: 'bar'
     })
 
-    expect(wrapper.vm.genLabel()).toBe(null)
+    expect(wrapper.vm.genLabel()).toBeNull()
 
     wrapper.setProps({
       label: 'bar',
@@ -623,7 +640,7 @@ test('VTextField.js', ({ mount }) => {
   })
 
   it('should propagate id to label for attribute', () => {
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       propsData: {
         label: 'foo',
         id: 'bar'
@@ -636,24 +653,24 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const label = wrapper.first('label')
+    const label = wrapper.find('label')
 
     expect(label.element.getAttribute('for')).toBe('bar')
   })
 
   it('should render an appended outer icon', () => {
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       propsData: {
         appendOuterIcon: 'search'
       }
     })
 
-    expect(wrapper.first('.v-input__icon--append-outer .v-icon').element.innerHTML).toBe('search')
+    expect(wrapper.find('.v-input__icon--append-outer .v-icon').element.innerHTML).toBe('search')
   })
 
   // TODO: revisit this, it seems correct in practice because of onBlur()
   it.skip('should reset internal change', async () => {
-    const wrapper = mount(VTextField)
+    const wrapper = mountFunction()
 
     wrapper.setData({ internalChange: true })
 
@@ -665,7 +682,7 @@ test('VTextField.js', ({ mount }) => {
   })
 
   it('should have correct max value', async () => {
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       attrs: {
         maxlength: 25
       },
@@ -674,7 +691,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const counter = wrapper.first('.v-counter')
+    const counter = wrapper.find('.v-counter')
 
     expect(counter.element.innerHTML).toBe('0 / 25')
 
@@ -684,7 +701,7 @@ test('VTextField.js', ({ mount }) => {
   })
 
   it('should set bad input on input', () => {
-    const wrapper = mount(VTextField)
+    const wrapper = mountFunction()
 
     expect(wrapper.vm.badInput).toBeFalsy()
 
@@ -708,30 +725,30 @@ test('VTextField.js', ({ mount }) => {
   })
 
   it('should set input autocomplete attr', () => {
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       propsData: {
         browserAutocomplete: 'off'
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     expect(input.element.autocomplete).toBe('off')
   })
 
   it('should not apply id to root element', () => {
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       attrs: { id: 'foo' }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     expect(wrapper.element.id).toBe('')
     expect(input.element.id).toBe('foo')
   })
 
   it('should fire change event when pressing enter', () => {
-    const wrapper = mount(VTextField)
-    const input = wrapper.first('input')
+    const wrapper = mountFunction()
+    const input = wrapper.find('input')
     const change = jest.fn()
 
     wrapper.vm.$on('change', change)
@@ -746,7 +763,7 @@ test('VTextField.js', ({ mount }) => {
   })
 
   it('should have focus and blur methods', () => {
-    const wrapper = mount(VTextField)
+    const wrapper = mountFunction()
     const focus = jest.fn()
     const blur = jest.fn()
     wrapper.vm.$on('focus', focus)
@@ -761,13 +778,12 @@ test('VTextField.js', ({ mount }) => {
 
   it('should activate label when using dirtyTypes', async () => {
     const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       propsData: {
         label: 'Foobar'
       }
     })
-    const label = wrapper.first('.v-label')
-
+    const label = wrapper.find('.v-label')
 
     for (const type of dirtyTypes) {
       wrapper.setProps({ type })
@@ -787,7 +803,7 @@ test('VTextField.js', ({ mount }) => {
   })
 
   it('should apply theme to label, counter, messages and icons', () => {
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       propsData: {
         counter: true,
         label: 'foo',
@@ -807,11 +823,11 @@ test('VTextField.js', ({ mount }) => {
   // https://github.com/vuetifyjs/vuetify/issues/5018
   it('should not focus input when mousedown did not originate from input', () => {
     const focus = jest.fn()
-    const wrapper = mount(VTextField, {
+    const wrapper = mountFunction({
       methods: { focus }
     })
 
-    const input = wrapper.first('.v-input__slot')
+    const input = wrapper.find('.v-input__slot')
     input.trigger('mousedown')
     input.trigger('mouseup')
     input.trigger('mouseup')
