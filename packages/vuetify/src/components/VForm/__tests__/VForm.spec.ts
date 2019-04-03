@@ -81,6 +81,7 @@ describe('VForm.ts', () => {
   })
 
   // TODO: Figure out how to test this with the updated v-form
+  /*
   it.skip('should only watch children if not lazy', async () => {
     const wrapper = mountFunction({
       propsData: {
@@ -110,6 +111,7 @@ describe('VForm.ts', () => {
 
     expect(Object.keys(wrapper.vm.errorBag)).toHaveLength(1)
   })
+  */
 
   it('should emit input when calling validate on lazy-validated form', async () => {
     const wrapper = mountFunction({

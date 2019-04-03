@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VDatePickerHeader.js should render component and match snapshot 1`] = `
+exports[`VDatePickerHeader.ts should render component and match snapshot 1`] = `
 
 <div class="v-date-picker-header theme--light">
   <button type="button"
@@ -34,7 +34,7 @@ exports[`VDatePickerHeader.js should render component and match snapshot 1`] = `
 
 `;
 
-exports[`VDatePickerHeader.js should render component in RTL mode and match snapshot 1`] = `
+exports[`VDatePickerHeader.ts should render component in RTL mode and match snapshot 1`] = `
 
 <div class="v-date-picker-header theme--light">
   <button type="button"
@@ -68,7 +68,7 @@ exports[`VDatePickerHeader.js should render component in RTL mode and match snap
 
 `;
 
-exports[`VDatePickerHeader.js should render component with default slot and match snapshot 1`] = `
+exports[`VDatePickerHeader.ts should render component with default slot and match snapshot 1`] = `
 
 <div class="v-date-picker-header theme--light">
   <button type="button"
@@ -104,7 +104,7 @@ exports[`VDatePickerHeader.js should render component with default slot and matc
 
 `;
 
-exports[`VDatePickerHeader.js should render disabled component and match snapshot 1`] = `
+exports[`VDatePickerHeader.ts should render disabled component and match snapshot 1`] = `
 
 <div class="v-date-picker-header v-date-picker-header--disabled theme--light">
   <button disabled="disabled"
@@ -140,7 +140,7 @@ exports[`VDatePickerHeader.js should render disabled component and match snapsho
 
 `;
 
-exports[`VDatePickerHeader.js should render readonly component and match snapshot 1`] = `
+exports[`VDatePickerHeader.ts should render readonly component and match snapshot 1`] = `
 
 <div class="v-date-picker-header theme--light">
   <button type="button"

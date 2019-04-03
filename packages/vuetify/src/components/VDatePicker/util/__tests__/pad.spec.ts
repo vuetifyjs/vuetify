@@ -1,7 +1,6 @@
-import pad from '@/components/VDatePicker/util/pad'
-import { test } from '@/test'
+import pad from '../pad'
 
-test('VDatePicker/util/pad.js', ({ mount }) => {
+describe('VDatePicker/util/pad.ts', () => {
   it('should pad 1-digit numbers', () => {
     expect(pad(0)).toBe('00')
     expect(pad('3', 3)).toBe('003')

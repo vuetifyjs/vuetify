@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VDatePickerTitle.js should render component and match snapshot 1`] = `
+exports[`VDatePickerTitle.ts should render component and match snapshot 1`] = `
 
 <div class="v-date-picker-title">
   <div class="v-picker__title__btn v-date-picker-title__year">
@@ -15,7 +15,7 @@ exports[`VDatePickerTitle.js should render component and match snapshot 1`] = `
 
 `;
 
-exports[`VDatePickerTitle.js should render component when selecting year and match snapshot 1`] = `
+exports[`VDatePickerTitle.ts should render component when selecting year and match snapshot 1`] = `
 
 <div class="v-date-picker-title">
   <div class="v-picker__title__btn v-date-picker-title__year v-picker__title__btn--active">
@@ -30,7 +30,7 @@ exports[`VDatePickerTitle.js should render component when selecting year and mat
 
 `;
 
-exports[`VDatePickerTitle.js should render disabled component and match snapshot 1`] = `
+exports[`VDatePickerTitle.ts should render disabled component and match snapshot 1`] = `
 
 <div class="v-date-picker-title v-date-picker-title--disabled">
   <div class="v-picker__title__btn v-date-picker-title__year">
@@ -45,7 +45,7 @@ exports[`VDatePickerTitle.js should render disabled component and match snapshot
 
 `;
 
-exports[`VDatePickerTitle.js should render readonly component and match snapshot 1`] = `
+exports[`VDatePickerTitle.ts should render readonly component and match snapshot 1`] = `
 
 <div class="v-date-picker-title">
   <div class="v-picker__title__btn v-date-picker-title__year">
@@ -60,7 +60,7 @@ exports[`VDatePickerTitle.js should render readonly component and match snapshot
 
 `;
 
-exports[`VDatePickerTitle.js should render year icon 1`] = `
+exports[`VDatePickerTitle.ts should render year icon 1`] = `
 
 <div class="v-picker__title__btn v-date-picker-title__year">
   1234
