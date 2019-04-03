@@ -34,7 +34,12 @@ const VIcon = mixins(
     disabled: Boolean,
     left: Boolean,
     right: Boolean,
-    dense: Boolean
+    dense: Boolean,
+    tag: {
+      type: String,
+      required: false,
+      default: 'i'
+    }
   },
 
   computed: {
@@ -112,7 +117,7 @@ const VIcon = mixins(
 
       this.applyColors(data)
 
-      return h('i', data, newChildren)
+      return h(this.tag, data, newChildren)
     },
     renderSvgIcon (icon: string, h: CreateElement): VNode {
       const data = this.getDefaultData()
