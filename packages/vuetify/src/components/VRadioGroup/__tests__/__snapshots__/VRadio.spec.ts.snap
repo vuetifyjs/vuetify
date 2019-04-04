@@ -1,31 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VRadio.vue should not render aria-label attribute with no label value on input group 1`] = `
+exports[`VRadio.ts should not render aria-label attribute with no label value on input group 1`] = `
 
 <div class="v-radio theme--light">
   <div class="v-input--selection-controls__input">
     <input aria-checked="false"
            role="radio"
            type="radio"
-           name="name"
     >
     <div class="v-input--selection-controls__ripple">
     </div>
     <i aria-hidden="true"
-       class="v-icon mdi mdi-radiobox-blank theme--light"
+       class="v-icon material-icons theme--light"
     >
+      $vuetify.icons.radioOff
     </i>
   </div>
-  <label aria-hidden="true"
-         class="v-label theme--light"
-         style="left: 0px; position: relative;"
-  >
-  </label>
 </div>
 
 `;
 
-exports[`VRadio.vue should render aria-label attribute with label value on input group 1`] = `
+exports[`VRadio.ts should render aria-label attribute with label value on input group 1`] = `
 
 <div class="v-radio theme--light">
   <div class="v-input--selection-controls__input">
@@ -33,13 +28,13 @@ exports[`VRadio.vue should render aria-label attribute with label value on input
            aria-checked="false"
            role="radio"
            type="radio"
-           name="name"
     >
     <div class="v-input--selection-controls__ripple">
     </div>
     <i aria-hidden="true"
-       class="v-icon mdi mdi-radiobox-blank theme--light"
+       class="v-icon material-icons theme--light"
     >
+      $vuetify.icons.radioOff
     </i>
   </div>
   <label aria-hidden="true"
@@ -52,7 +47,7 @@ exports[`VRadio.vue should render aria-label attribute with label value on input
 
 `;
 
-exports[`VRadio.vue should render proper input name 1`] = `
+exports[`VRadio.ts should render proper input name 1`] = `
 
 <div class="v-radio theme--light">
   <div class="v-input--selection-controls__input">
@@ -64,69 +59,36 @@ exports[`VRadio.vue should render proper input name 1`] = `
     <div class="v-input--selection-controls__ripple">
     </div>
     <i aria-hidden="true"
-       class="v-icon mdi mdi-radiobox-blank theme--light"
+       class="v-icon material-icons theme--light"
     >
+      $vuetify.icons.radioOff
     </i>
   </div>
-  <label aria-hidden="true"
-         class="v-label theme--light"
-         style="left: 0px; position: relative;"
-  >
-  </label>
 </div>
 
 `;
 
-exports[`VRadio.vue should render role and aria-checked attributes on input group 1`] = `
+exports[`VRadio.ts should render role and aria-checked attributes on input group 1`] = `
 
-<div class="v-radio theme--light accent--text">
+<div class="v-radio theme--light">
   <div class="v-input--selection-controls__input">
     <input aria-checked="true"
            role="radio"
            type="radio"
-           name="name"
     >
     <div class="v-input--selection-controls__ripple accent--text">
     </div>
     <i aria-hidden="true"
-       class="v-icon mdi mdi-radiobox-blank theme--light accent--text"
+       class="v-icon material-icons theme--light accent--text"
     >
+      $vuetify.icons.radioOn
     </i>
   </div>
-  <label aria-hidden="true"
-         class="v-label theme--light"
-         style="left: 0px; position: relative;"
-  >
-  </label>
 </div>
 
 `;
 
-exports[`VRadio.vue should render themed component 1`] = `
-
-<div class="v-radio theme--light">
-  <div class="v-input--selection-controls__input">
-    <input aria-checked="false"
-           role="radio"
-           type="radio"
-    >
-    <div class="v-input--selection-controls__ripple">
-    </div>
-    <i aria-hidden="true"
-       class="v-icon mdi mdi-radiobox-blank theme--light"
-    >
-    </i>
-  </div>
-  <label aria-hidden="true"
-         class="v-label theme--light"
-         style="left: 0px; position: relative;"
-  >
-  </label>
-</div>
-
-`;
-
-exports[`VRadio.vue should use custom icons 1`] = `
+exports[`VRadio.ts should use custom icons 1`] = `
 
 <div class="v-radio theme--light">
   <div class="v-input--selection-controls__input">
@@ -142,18 +104,13 @@ exports[`VRadio.vue should use custom icons 1`] = `
       bar
     </i>
   </div>
-  <label aria-hidden="true"
-         class="v-label theme--light"
-         style="left: 0px; position: relative;"
-  >
-  </label>
 </div>
 
 `;
 
-exports[`VRadio.vue should use custom icons 2`] = `
+exports[`VRadio.ts should use custom icons 2`] = `
 
-<div class="v-radio theme--light accent--text">
+<div class="v-radio theme--light">
   <div class="v-input--selection-controls__input">
     <input aria-checked="true"
            role="radio"
@@ -164,14 +121,9 @@ exports[`VRadio.vue should use custom icons 2`] = `
     <i aria-hidden="true"
        class="v-icon material-icons theme--light accent--text"
     >
-      bar
+      foo
     </i>
   </div>
-  <label aria-hidden="true"
-         class="v-label theme--light"
-         style="left: 0px; position: relative;"
-  >
-  </label>
 </div>
 
 `;
