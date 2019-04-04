@@ -48,7 +48,6 @@ export default VWindow.extend({
       type: Boolean,
       default: true
     },
-    showArrowsOnHover: Boolean,
     mandatory: {
       type: Boolean,
       default: true
@@ -65,9 +64,9 @@ export default VWindow.extend({
   computed: {
     classes (): object {
       return {
+        ...VWindow.options.computed.classes.call(this),
         'v-carousel': true,
-        'v-carousel--hide-delimiter-background': this.hideDelimiterBackground,
-        'v-carousel--show-arrows-on-hover': this.showArrowsOnHover
+        'v-carousel--hide-delimiter-background': this.hideDelimiterBackground
       }
     },
     isDark (): boolean {

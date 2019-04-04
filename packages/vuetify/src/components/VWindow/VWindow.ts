@@ -47,6 +47,7 @@ export default BaseItemGroup.extend({
       default: undefined
     },
     showArrows: Boolean,
+    showArrowsOnHover: Boolean,
     touch: Object,
     touchless: Boolean,
     value: {
@@ -66,6 +67,12 @@ export default BaseItemGroup.extend({
   },
 
   computed: {
+    classes (): object {
+      return {
+        ...BaseItemGroup.options.computed.classes.call(this),
+        'v-window--show-arrows-on-hover': this.showArrowsOnHover
+      }
+    },
     computedTransition (): string {
       if (!this.isBooted) return ''
 

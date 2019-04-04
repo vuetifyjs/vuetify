@@ -44,6 +44,22 @@
       left: 0
       right: auto
 
+  &--show-arrows-on-hover
+    .v-window__next,
+    .v-window__prev
+      transition: .2s transform map-get($transition, 'swing')
+
+    .v-window__prev
+      transform: translateX(-200%)
+
+    .v-window__next
+      transform: translateX(200%)
+
+    &:hover
+      .v-window__next,
+      .v-window__prev
+        transform: translateX(0)
+
   &-x-transition,
   &-x-reverse-transition,
   &-y-transition,
