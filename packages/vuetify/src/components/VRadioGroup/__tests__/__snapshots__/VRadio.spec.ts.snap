@@ -49,7 +49,7 @@ exports[`VRadio.ts should render aria-label attribute with label value on input 
 
 exports[`VRadio.ts should render proper input name 1`] = `
 
-<div class="v-radio theme--light accent--text">
+<div class="v-radio theme--light">
   <div class="v-input--selection-controls__input">
     <input aria-checked="false"
            role="radio"

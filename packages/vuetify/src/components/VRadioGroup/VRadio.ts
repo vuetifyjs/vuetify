@@ -75,10 +75,9 @@ export default baseMixins.extend<options>().extend({
       }
     },
     computedColor (): string | false {
-      const color = this.radioGroup &&
-        this.radioGroup.validationState
+      const color = (this.radioGroup || {}).validationState
 
-      return this.isActive ? this.color : color || false
+      return this.isActive ? this.color : (color || false)
     },
     computedIcon (): string {
       return this.isActive
@@ -89,7 +88,7 @@ export default baseMixins.extend<options>().extend({
       return VInput.options.computed.hasLabel.call(this)
     },
     hasState (): boolean {
-      return this.radioGroup && this.radioGroup.hasState
+      return (this.radioGroup || {}).hasState
     },
     isDisabled (): boolean {
       return this.disabled || !!(this.radioGroup || {}).disabled
@@ -122,7 +121,7 @@ export default baseMixins.extend<options>().extend({
           for: this.id
         },
         props: {
-          color: (this.radioGroup && this.radioGroup.validationState) || false,
+          color: ((this.radioGroup || {}).validationState) || false,
           focused: this.hasState
         }
       }, getSlot(this, 'label') || this.label)
@@ -159,7 +158,7 @@ export default baseMixins.extend<options>().extend({
   render (h): VNode {
     let color
 
-    if (this.radioGroup && !this.radioGroup.hasError) {
+    if ((this.radioGroup || {}).hasError) {
       color = this.color
     }
 
