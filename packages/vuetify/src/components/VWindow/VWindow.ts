@@ -46,10 +46,7 @@ export default BaseItemGroup.extend({
       type: Boolean,
       default: undefined
     },
-    showArrows: {
-      type: Boolean,
-      default: true
-    },
+    showArrows: Boolean,
     touch: Object,
     touchless: Boolean,
     value: {
