@@ -12,6 +12,9 @@
       class="hidden-sm-and-down"
       v-text="$t('Vuetify.AppToolbar.store')"
     />
+    <v-icon class="hidden-sm-and-down" right>
+      mdi-open-in-new
+    </v-icon>
     <v-icon class="hidden-md-and-up">mdi-store</v-icon>
   </v-btn>
 </template>

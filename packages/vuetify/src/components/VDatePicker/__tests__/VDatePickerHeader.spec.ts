@@ -185,6 +185,7 @@ describe('VDatePickerHeader.ts', () => {
     expect(wrapper.vm.calculateChange(+1)).toBe('2006')
   })
 
+  // eslint-disable-next-line jest/no-disabled-tests
   it.skip('should watch value and run transition', async () => {
     const wrapper = mountFunction({
       propsData: {
@@ -200,6 +201,7 @@ describe('VDatePickerHeader.ts', () => {
     expect(wrapper.findAll('.v-date-picker-header__value div').wrappers[0].classes('tab-transition-enter-active')).toBe(true)
   })
 
+  // eslint-disable-next-line jest/no-disabled-tests
   it.skip('should watch value and run reverse transition', async () => {
     const wrapper = mountFunction({
       propsData: {

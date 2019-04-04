@@ -43,7 +43,7 @@
 
     <div class="text-xs-center">
       <a
-        href="https://madewithvuejs.com?ref=vuetifyjs.com"
+        href="https://madewithvuejs.com/vuetify?ref=vuetifyjs.com"
         target="_blank"
         rel="noopener"
         @click="$ga.event('home', 'click', ' mwvjs')"

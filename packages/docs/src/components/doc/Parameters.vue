@@ -304,7 +304,6 @@
 
     .mono
       font-family: 'Roboto Mono', monospace
-      white-space: pre
       font-weight: 500
 
     .header

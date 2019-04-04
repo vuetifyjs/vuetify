@@ -5,12 +5,12 @@
 +theme(v-list-item) using ($material)
   color: map-deep-get($material, 'text', 'primary')
 
-  &__mask
+  .v-list-item__mask
     color: map-deep-get($material, 'text', 'disabled')
     background: map-deep-get($material, 'expansion-panels', 'focus')
 
-  &__subtitle,
-  &__action-text
+  .v-list-item__subtitle,
+  .v-list-item__action-text
     color: map-deep-get($material, 'text', 'secondary')
 
 // Block

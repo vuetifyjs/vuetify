@@ -35,8 +35,8 @@ describe('VOverflowBtn.js', () => {
 
   toHaveBeenWarnedInit()
   const warning = 'items must contain both a text and callback property'
-
-  it('segmented - should warn when item has no callback', async () => {
+  // eslint-disable-next-line jest/no-disabled-tests
+  it.skip('segmented - should warn when item has no callback', async () => {
     const items = [
       { text: 'Hello' },
       { text: 'Hello' }

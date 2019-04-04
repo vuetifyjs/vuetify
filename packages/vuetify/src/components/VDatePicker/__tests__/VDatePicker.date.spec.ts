@@ -272,6 +272,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
   // TODO: This fails in different ways for multiple people
   // Avoriaz/Jsdom (?) doesn't fully support date formatting using locale
   // This should be tested in browser env
+  // eslint-disable-next-line jest/no-disabled-tests
   it.skip('should match snapshot with locale', () => {
     const wrapper = mountFunction({
       propsData: {
@@ -519,6 +520,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     expect(update).toHaveBeenCalledWith('2017-09')
   })
 
+  // eslint-disable-next-line jest/no-disabled-tests
   it.skip('should render component with min/max props', async () => { // TODO: fix this one
     const wrapper = mountFunction({
       propsData: {
