@@ -39,5 +39,11 @@ describe('VData.ts', () => {
     })
 
     expect(wrapper.vm.itemsLength).toBe(2)
+
+    wrapper.setProps({
+      serverItemsLength: 10
+    })
+
+    expect(wrapper.vm.itemsLength).toBe(10)
   })
 })
