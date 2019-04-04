@@ -28,10 +28,7 @@ export default VWindow.extend({
       type: Boolean,
       default: true
     },
-    cycle: {
-      type: Boolean,
-      default: true
-    },
+    cycle: Boolean,
     delimiterIcon: {
       type: String,
       default: '$vuetify.icons.delimiter'
