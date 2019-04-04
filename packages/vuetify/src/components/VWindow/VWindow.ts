@@ -2,6 +2,8 @@
 import './VWindow.sass'
 
 // Components
+import VBtn from '../VBtn'
+import VIcon from '../VIcon'
 import { BaseItemGroup } from '../VItemGroup/VItemGroup'
 
 // Directives
@@ -27,13 +29,26 @@ export default BaseItemGroup.extend({
       type: String,
       default: 'v-window-item--active'
     },
+    continuous: Boolean,
     mandatory: {
       type: Boolean,
       default: true
     },
+    nextIcon: {
+      type: [Boolean, String],
+      default: '$vuetify.icons.next'
+    },
+    prevIcon: {
+      type: [Boolean, String],
+      default: '$vuetify.icons.prev'
+    },
     reverse: {
       type: Boolean,
       default: undefined
+    },
+    showArrows: {
+      type: Boolean,
+      default: true
     },
     touch: Object,
     touchless: Boolean,
@@ -45,6 +60,7 @@ export default BaseItemGroup.extend({
 
   data () {
     return {
+      changedByDelimiters: false,
       internalHeight: undefined as undefined | string,
       isActive: false,
       isBooted: false,
@@ -68,6 +84,12 @@ export default BaseItemGroup.extend({
         this.items.find(item => !item.disabled)
       )
     },
+    hasNext (): boolean {
+      return this.continuous || this.internalIndex < this.items.length - 1
+    },
+    hasPrev (): boolean {
+      return this.continuous || this.internalIndex > 0
+    },
     internalIndex (): number {
       return this.items.findIndex((item, i) => {
         return this.internalValue === this.getValue(item, i)
@@ -90,6 +112,12 @@ export default BaseItemGroup.extend({
 
   methods: {
     genContainer (): VNode {
+      const children = [this.$slots.default]
+
+      if (this.showArrows) {
+        children.push(this.genIcons())
+      }
+
       return this.$createElement('div', {
         staticClass: 'v-window__container',
         class: {
@@ -98,7 +126,62 @@ export default BaseItemGroup.extend({
         style: {
           height: this.internalHeight
         }
-      }, this.$slots.default)
+      }, children)
+    },
+    genIcon (
+      direction: 'prev' | 'next',
+      icon: string,
+      fn: () => void
+    ) {
+      const capitalDirection = direction.charAt(0).toUpperCase() + direction.slice(1)
+
+      if (!(this as any)[`has${capitalDirection}`]) return null
+
+      return this.$createElement('div', {
+        staticClass: `v-window__${direction}`
+      }, [
+        this.$createElement(VBtn, {
+          props: {
+            icon: true
+          },
+          attrs: {
+            'aria-label': this.$vuetify.lang.t(`$vuetify.carousel.${direction}`)
+          },
+          on: {
+            click: () => {
+              this.changedByDelimiters = true
+              fn()
+            }
+          }
+        }, [
+          this.$createElement(VIcon, {
+            props: { 'size': '46px' }
+          }, icon)
+        ])
+      ])
+    },
+    genIcons () {
+      const icons = []
+
+      const prevIcon = this.$vuetify.rtl
+        ? this.nextIcon
+        : this.prevIcon
+
+      if (prevIcon && typeof prevIcon === 'string') {
+        const icon = this.genIcon('prev', prevIcon, this.prev)
+        icon && icons.push(icon)
+      }
+
+      const nextIcon = this.$vuetify.rtl
+        ? this.prevIcon
+        : this.nextIcon
+
+      if (nextIcon && typeof nextIcon === 'string') {
+        const icon = this.genIcon('next', nextIcon, this.next)
+        icon && icons.push(icon)
+      }
+
+      return icons
     },
     getNextIndex (index: number): number {
       const nextIndex = (index + 1) % this.items.length
@@ -137,6 +220,11 @@ export default BaseItemGroup.extend({
       this.internalValue = this.getValue(item, lastIndex)
     },
     updateReverse (val: number, oldVal: number) {
+      if (this.changedByDelimiters) {
+        this.changedByDelimiters = false
+        return
+      }
+
       this.isReverse = val < oldVal
     }
   },

@@ -6,24 +6,6 @@
   overflow: hidden
   +elevation(2)
 
-  &__prev,
-  &__next
-    position: absolute
-    top: 50%
-    z-index: 1
-    transform: translateY(-50%)
-
-    .v-btn
-      margin: 0
-      height: auto
-      width: auto
-
-      i
-        font-size: 48px
-
-      &:hover
-        background: none
-
   &__controls
     background: rgba(0, 0, 0, .5)
     align-items: center
@@ -58,17 +40,19 @@
         .v-icon
           opacity: .8
 
-  &__prev
-    left: 5px
+// Modifier
+.v-carousel--show-arrows-on-hover
+  .v-window__next,
+  .v-window__prev
+    transition: .2s transform map-get($transition, 'swing')
 
-  &__next
-    right: 5px
+  .v-window__prev
+    transform: translateX(-200%)
 
-  +rtl()
-    &__prev
-      left: auto
-      right: 5px
+  .v-window__next
+    transform: translateX(200%)
 
-    &__next
-      left: 5px
-      right: auto
+  &:hover
+    .v-window__next,
+    .v-window__prev
+      transform: translateX(0)
