@@ -40,7 +40,6 @@ describe('VRadio.ts', () => {
     inputGroup = wrapper.find('input')
     expect(inputGroup.element.getAttribute('aria-checked')).toBe('true')
     expect(wrapper.html()).toMatchSnapshot()
-
   })
 
   it('should render aria-label attribute with label value on input group', () => {
@@ -53,7 +52,6 @@ describe('VRadio.ts', () => {
     const inputGroup = wrapper.find('input')
     expect(inputGroup.element.getAttribute('aria-label')).toBe('Test')
     expect(wrapper.html()).toMatchSnapshot()
-
   })
 
   it('should not render aria-label attribute with no label value on input group', () => {
@@ -72,7 +70,6 @@ describe('VRadio.ts', () => {
     const inputGroup = wrapper.find('input')
     expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
     expect(wrapper.html()).toMatchSnapshot()
-
   })
 
   it('should render proper input name', () => {
