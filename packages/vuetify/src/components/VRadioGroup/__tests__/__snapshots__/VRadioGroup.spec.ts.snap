@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VRadioGroup.ts should match snapshot 1`] = `
+
+<div class="v-item-group v-input--selection-controls v-input--radio-group v-input--radio-group--column">
+</div>
+
+`;
