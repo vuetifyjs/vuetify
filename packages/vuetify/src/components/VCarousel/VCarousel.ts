@@ -225,6 +225,7 @@ export default VWindow.extend({
       directives: [] as VNodeDirective[]
     }
 
+    /* istanbul ignore else */
     if (!this.touchless) {
       data.directives.push({
         name: 'touch',
