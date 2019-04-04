@@ -10,23 +10,15 @@ import { BaseItemGroup } from '../VItemGroup/VItemGroup'
 import Comparable from '../../mixins/comparable'
 import mixins from '../../util/mixins'
 
-// Types
-import { VNode } from 'vue'
-
 const baseMixins = mixins(
   Comparable,
-  VInput,
-  BaseItemGroup
+  BaseItemGroup,
+  VInput
 )
 
 /* @vue/component */
 export default baseMixins.extend({
   name: 'v-radio-group',
-
-  model: {
-    prop: 'value',
-    event: 'change'
-  },
 
   provide () {
     return {
@@ -71,10 +63,16 @@ export default baseMixins.extend({
           role: 'radiogroup'
         }
       }, VInput.options.methods.genDefaultSlot.call(this))
-    }
-  },
+    },
+    genInputSlot () {
+      const render = VInput.options.methods.genInputSlot.call(this)
 
-  render (h): VNode {
-    return VInput.options.render.call(this, h)
+      delete render.data!.on!.click
+
+      return render
+    },
+    onClick (item: any) {
+      BaseItemGroup.options.methods.onClick.call(this, item)
+    }
   }
 })
