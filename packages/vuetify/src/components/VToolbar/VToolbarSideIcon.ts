@@ -9,10 +9,10 @@ import { VNode } from 'vue'
 
 /* @vue/component */
 export default VAppBarNavIcon.extend({
-  name: 'v-app-bar-nav-icon',
+  name: 'v-toolbar-side-icon',
 
   render (h, context): VNode {
-    deprecate('<v-app-bar-nav-icon>', '<v-app-bar-nav-icon>', this)
+    deprecate('<v-toolbar-side-icon>', '<v-app-bar-nav-icon>', this)
 
     return VAppBarNavIcon.options.render.call(this, h, context)
   }
