@@ -84,7 +84,7 @@ export default baseMixins.extend<options>().extend({
         ? this.onIcon
         : this.offIcon
     },
-    hasLabel () {
+    hasLabel (): boolean {
       return VInput.options.computed.hasLabel.call(this)
     },
     hasState (): boolean {
@@ -152,7 +152,7 @@ export default baseMixins.extend<options>().extend({
 
       this.toggle()
     },
-    onKeydown () {}
+    onKeydown () {} // Override default with noop
   },
 
   render (h): VNode {

@@ -4,18 +4,17 @@ import VRadio from '../VRadio'
 // Utilities
 import {
   mount,
+  MountOptions,
   Wrapper
 } from '@vue/test-utils'
 
 describe('VRadio.ts', () => {
   type Instance = InstanceType<typeof VRadio>
-  let mountFunction: (options?: object) => Wrapper<Instance>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 
   beforeEach(() => {
     mountFunction = (options = {}) => {
-      return mount(VRadio, {
-        ...options
-      })
+      return mount(VRadio, options)
     }
   })
 
@@ -136,15 +135,15 @@ describe('VRadio.ts', () => {
   it('should check/uncheck the internal input', () => {
     const wrapper = mountFunction()
 
-    expect(wrapper.vm.$refs.input.checked).toBe(false)
+    expect(wrapper.vm.$refs.input.checked).toBeFalsy()
 
     wrapper.setData({ isActive: true })
 
-    expect(wrapper.vm.$refs.input.checked).toBe(true)
+    expect(wrapper.vm.$refs.input.checked).toBeTruthy()
 
     wrapper.setData({ isActive: false })
 
-    expect(wrapper.vm.$refs.input.checked).toBe(false)
+    expect(wrapper.vm.$refs.input.checked).toBeFalsy()
   })
 
   it('should set focused state', () => {
