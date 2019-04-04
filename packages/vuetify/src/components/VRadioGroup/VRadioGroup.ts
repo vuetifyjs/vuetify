@@ -11,6 +11,8 @@ import Comparable from '../../mixins/comparable'
 import mixins from '../../util/mixins'
 
 // Types
+import { VNode } from 'vue'
+
 const baseMixins = mixins(
   Comparable,
   VInput,
@@ -70,5 +72,9 @@ export default baseMixins.extend({
         }
       }, VInput.options.methods.genDefaultSlot.call(this))
     }
+  },
+
+  render (h): VNode {
+    return VInput.options.render.call(this, h)
   }
 })
