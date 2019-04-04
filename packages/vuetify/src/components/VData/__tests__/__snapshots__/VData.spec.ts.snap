@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VData.ts should render with scopedProps 1`] = `
+
+<div>
+  test
+</div>
+
+`;
