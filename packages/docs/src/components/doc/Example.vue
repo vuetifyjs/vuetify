@@ -41,16 +41,6 @@
       </v-btn>
     </v-toolbar>
 
-    <doc-codepen ref="codepen" :pen="parsed" />
-
-    <v-sheet :dark="dark">
-      <v-card-text>
-        <div data-app="true">
-          <component :is="component" />
-        </div>
-      </v-card-text>
-    </v-sheet>
-
     <v-expand-transition v-if="parsed">
       <v-card
         v-if="expand"
@@ -94,6 +84,7 @@
               v-if="parsed[section]"
               :key="`window-${i}`"
               :value="section"
+              eager
             >
               <div :class="($vuetify.breakpoint.smAndUp) ? 'v-example__container' : ''">
                 <doc-markup
@@ -107,6 +98,16 @@
         </v-window>
       </v-card>
     </v-expand-transition>
+
+    <doc-codepen ref="codepen" :pen="parsed" />
+
+    <v-sheet :dark="dark" tile flat>
+      <v-card-text>
+        <div data-app="true">
+          <component :is="component" />
+        </div>
+      </v-card-text>
+    </v-sheet>
   </v-card>
 </template>
 
