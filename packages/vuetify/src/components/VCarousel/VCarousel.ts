@@ -39,6 +39,7 @@ export default VWindow.extend({
     },
     hideControls: Boolean,
     hideDelimiters: Boolean,
+    hideDelimiterBackground: Boolean,
     interval: {
       type: [Number, String],
       default: 6000,
@@ -65,6 +66,7 @@ export default VWindow.extend({
   computed: {
     classes (): object {
       return {
+        'v-carousel--hide-delimiter-background': this.hideDelimiterBackground,
         'v-carousel--show-arrows-on-hover': this.showArrowsOnHover
       }
     },
