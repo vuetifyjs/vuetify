@@ -18,7 +18,6 @@ import { deprecate } from '../../util/console'
 
 // Types
 import { VNode } from 'vue'
-import { VNodeDirective } from 'vue/types/vnode'
 
 export default VWindow.extend({
   name: 'v-carousel',
@@ -66,6 +65,7 @@ export default VWindow.extend({
   computed: {
     classes (): object {
       return {
+        'v-carousel': true,
         'v-carousel--hide-delimiter-background': this.hideDelimiterBackground,
         'v-carousel--show-arrows-on-hover': this.showArrowsOnHover
       }
@@ -155,31 +155,14 @@ export default VWindow.extend({
   },
 
   render (h): VNode {
-    const children = []
-    const data = {
-      staticClass: 'v-window v-carousel',
-      class: this.classes,
-      style: {
-        height: convertToUnit(this.height)
-      },
-      directives: [] as VNodeDirective[]
-    }
+    const render = VWindow.options.render.call(this, h)
 
-    /* istanbul ignore else */
-    if (!this.touchless) {
-      data.directives.push({
-        name: 'touch',
-        value: {
-          left: this.next,
-          right: this.prev
-        }
-      } as VNodeDirective)
-    }
+    render.data!.style = `height: ${convertToUnit(this.height)};`
 
     if (!this.hideDelimiters) {
-      children.push(this.genDelimiters())
+      render.children!.push(this.genDelimiters())
     }
 
-    return h('div', data, [this.genContainer(), children])
+    return render
   }
 })

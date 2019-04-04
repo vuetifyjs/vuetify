@@ -229,6 +229,7 @@ export default BaseItemGroup.extend({
   render (h): VNode {
     const data = {
       staticClass: 'v-window',
+      class: this.classes,
       directives: [] as VNodeDirective[]
     }
 
