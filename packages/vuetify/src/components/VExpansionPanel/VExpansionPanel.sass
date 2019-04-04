@@ -2,20 +2,21 @@
 @import './_variables.scss'
 
 // Theme
-+theme(v-expansion-panel) using ($material)
-  background-color: map-get($material, 'cards')
-  color: map-deep-get($material, 'text', 'primary')
++theme(v-expansion-panels) using ($material)
+  .v-expansion-panel
+    background-color: map-get($material, 'cards')
+    color: map-deep-get($material, 'text', 'primary')
 
-  &::after
-    border-color: map-get($material, 'dividers')
+    &--disabled
+      color: map-deep-get($material, 'text', 'disabled')
+
+    &:not(:first-child)::after
+      border-color: map-get($material, 'dividers')
 
   .v-expansion-panel-header
     .v-expansion-panel-header__icon
       .v-icon
         color: map-deep-get($material, 'icons', 'active')
-
-  &--disabled
-    color: map-deep-get($material, 'text', 'disabled')
 
 // Block
 .v-expansion-panels
