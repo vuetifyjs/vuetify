@@ -1,0 +1,44 @@
+{
+  "events": [
+    {
+      "name": "input",
+      "value": "string"
+    },
+    {
+      "name": "change",
+      "value": "string"
+    },
+    {
+      "name": "click:prepend",
+      "value": "Event"
+    },
+    {
+      "name": "click:append",
+      "value": "Event"
+    },
+    {
+      "name": "click:clear",
+      "value": "Event"
+    },
+    {
+      "name": "click:append-outer",
+      "value": "Event"
+    },
+    {
+      "name": "click:prepend-inner",
+      "value": "Event"
+    },
+    {
+      "name": "update:error",
+      "value": "boolean"
+    }
+  ],
+  "slots": [
+    "append",
+    "prepend",
+    "default",
+    "append-outer",
+    "prepend-inner",
+    "label"
+  ]
+}

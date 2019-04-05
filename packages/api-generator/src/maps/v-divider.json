@@ -1,0 +1,12 @@
+{
+  "props": [
+    {
+      "name": "dark",
+      "source": "themeable"
+    },
+    {
+      "name": "light",
+      "source": "themeable"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "slots": [
+    "append",
+    "prepend",
+    "default",
+    "label"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "slots": [
+    "divider"
+  ],
+  "scopedSlots": [
+    {
+      "name": "item",
+      "props": {
+        "item": "any[]"
+      }
+    }
+  ]
+}

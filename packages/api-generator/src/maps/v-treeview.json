@@ -1,0 +1,43 @@
+{
+  "scopedSlots": [
+    {
+      "name": "prepend",
+      "props": {
+        "item": "any",
+        "leaf": "boolean",
+        "selected": "boolean",
+        "indeterminate": "boolean",
+        "active": "boolean",
+        "open": "boolean"
+      }
+    },
+    {
+      "name": "label",
+      "props": {
+        "item": "any",
+        "leaf": "boolean",
+        "selected": "boolean",
+        "indeterminate": "boolean",
+        "active": "boolean",
+        "open": "boolean"
+      }
+    },
+    {
+      "name": "append",
+      "props": {
+        "item": "any",
+        "leaf": "boolean",
+        "selected": "boolean",
+        "indeterminate": "boolean",
+        "active": "boolean",
+        "open": "boolean"
+      }
+    }
+  ],
+  "functions": [
+    {
+      "name": "updateAll",
+      "signature": "(val: boolean): void"
+    }
+  ]
+}

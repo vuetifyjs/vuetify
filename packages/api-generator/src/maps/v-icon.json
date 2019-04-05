@@ -1,0 +1,13 @@
+{
+  "slots": [
+    "default"
+  ],
+  "props": [
+    {
+      "name": "dense",
+      "type": "boolean",
+      "default": "false",
+      "source": null
+    }
+  ]
+}

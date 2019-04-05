@@ -4,10 +4,12 @@ const fs = require('fs')
 const map = require('./map')
 const deepmerge = require('deepmerge')
 
+console.log(Object.keys(map).length)
+
 function arrayMerge (a, b) {
   const arr = a.slice()
   for (let i = 0; i < b.length; i++) {
-    const found = a.findIndex(item => item.name == b[i].name)
+    const found = a.findIndex(item => item.name === b[i].name)
     if (found >= 0) {
       arr[found] = deepmerge(a[found], b[i])
     } else {

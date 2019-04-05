@@ -1,0 +1,54 @@
+{
+  "events": [
+    {
+      "name": "input",
+      "value": "number"
+    },
+    {
+      "name": "change",
+      "value": "number"
+    },
+    {
+      "name": "start",
+      "value": "number"
+    },
+    {
+      "name": "end",
+      "value": "number"
+    },
+    {
+      "name": "click:prepend",
+      "value": "Event"
+    },
+    {
+      "name": "click:append",
+      "value": "Event"
+    },
+    {
+      "name": "update:error",
+      "value": "boolean"
+    }
+  ],
+  "slots": [
+    {
+      "name": "append",
+      "source": "v-input"
+    },
+    {
+      "name": "prepend",
+      "source": "v-input"
+    },
+    {
+      "name": "label",
+      "source": "v-input"
+    }
+  ],
+  "scopedSlots": [
+    {
+      "name": "thumb-label",
+      "props": {
+        "value": "number | string"
+      }
+    }
+  ]
+}

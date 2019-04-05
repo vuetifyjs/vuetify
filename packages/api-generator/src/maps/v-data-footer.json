@@ -1,0 +1,11 @@
+{
+  "slots": [
+    "pageText"
+  ],
+  "events": [
+    {
+      "name": "update:options",
+      "value": "Event"
+    }
+  ]
+}

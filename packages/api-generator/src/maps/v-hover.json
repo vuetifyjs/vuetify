@@ -1,0 +1,10 @@
+{
+  "scopedSlots": [
+    {
+      "name": "default",
+      "props": {
+        "hover": "boolean"
+      }
+    }
+  ]
+}

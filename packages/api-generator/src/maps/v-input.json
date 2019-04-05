@@ -1,0 +1,17 @@
+{
+  "events": [
+    {
+      "name": "click:prepend",
+      "value": "Event"
+    },
+    {
+      "name": "click:append",
+      "value": "Event"
+    }
+  ],
+  "slots": [
+    "append",
+    "prepend",
+    "default"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "slots": [
+    "append",
+    "prepend",
+    "default",
+    "label"
+  ],
+  "events": [
+    {
+      "name": "change",
+      "value": "any"
+    },
+    {
+      "name": "update:error",
+      "value": "boolean"
+    }
+  ]
+}

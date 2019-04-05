@@ -1,0 +1,815 @@
+{
+  "scopedSlots": [
+    {
+      "name": "day",
+      "props": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean"
+      }
+    },
+    {
+      "name": "dayBody",
+      "props": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean",
+        "timeToY": "(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number"
+      }
+    },
+    {
+      "name": "dayHeader",
+      "props": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean"
+      }
+    },
+    {
+      "name": "dayLabel",
+      "props": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean"
+      }
+    },
+    {
+      "name": "dayMonth",
+      "props": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean"
+      }
+    },
+    {
+      "name": "interval",
+      "props": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean",
+        "timeToY": "(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number"
+      }
+    }
+  ],
+  "functions": [
+    {
+      "name": "updateTimes",
+      "signature": "(): void"
+    },
+    {
+      "name": "next",
+      "signature": "(amount: number = 1): void"
+    },
+    {
+      "name": "prev",
+      "signature": "(amount: number = 1): void"
+    },
+    {
+      "name": "move",
+      "signature": "(amount: number = 1): void"
+    },
+    {
+      "name": "timeToY",
+      "signature": "(time: number | string | { hour: number, minute: number }, clamp: boolean = true): number | false"
+    },
+    {
+      "name": "minutesToPixels",
+      "signature": "(minutes: number): number"
+    },
+    {
+      "name": "scrollToTime",
+      "signature": "(time: number | string | { hour: number, minute: number }): boolean"
+    }
+  ],
+  "events": [
+    {
+      "name": "input",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean"
+      }
+    },
+    {
+      "name": "moved",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean"
+      }
+    },
+    {
+      "name": "change",
+      "value": {
+        "start": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean"
+      },
+        "end": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean"
+      }
+      }
+    },
+    {
+      "name": "click:date",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean",
+        "timeToY": "(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number"
+      }
+    },
+    {
+      "name": "contextmenu:date",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean",
+        "timeToY": "(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number"
+      }
+    },
+    {
+      "name": "click:day",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean",
+        "timeToY": "(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number"
+      }
+    },
+    {
+      "name": "contextmenu:day",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean",
+        "timeToY": "(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number"
+      }
+    },
+    {
+      "name": "mousedown:day",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean",
+        "timeToY": "(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number"
+      }
+    },
+    {
+      "name": "mousemove:day",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean",
+        "timeToY": "(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number"
+      }
+    },
+    {
+      "name": "mouseup:day",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean",
+        "timeToY": "(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number"
+      }
+    },
+    {
+      "name": "mouseenter:day",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean",
+        "timeToY": "(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number"
+      }
+    },
+    {
+      "name": "mouseleave:day",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean",
+        "timeToY": "(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number"
+      }
+    },
+    {
+      "name": "touchstart:day",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean",
+        "timeToY": "(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number"
+      }
+    },
+    {
+      "name": "touchmove:day",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean",
+        "timeToY": "(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number"
+      }
+    },
+    {
+      "name": "touchend:day",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean",
+        "timeToY": "(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number"
+      }
+    },
+    {
+      "name": "click:time",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean",
+        "timeToY": "(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number"
+      }
+    },
+    {
+      "name": "contextmenu:time",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean",
+        "timeToY": "(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number"
+      }
+    },
+    {
+      "name": "mousedown:time",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean",
+        "timeToY": "(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number"
+      }
+    },
+    {
+      "name": "mousemove:time",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean",
+        "timeToY": "(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number"
+      }
+    },
+    {
+      "name": "mouseup:time",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean",
+        "timeToY": "(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number"
+      }
+    },
+    {
+      "name": "mouseenter:time",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean",
+        "timeToY": "(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number"
+      }
+    },
+    {
+      "name": "mouseleave:time",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean",
+        "timeToY": "(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number"
+      }
+    },
+    {
+      "name": "touchstart:time",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean",
+        "timeToY": "(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number"
+      }
+    },
+    {
+      "name": "touchmove:time",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean",
+        "timeToY": "(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number"
+      }
+    },
+    {
+      "name": "touchend:time",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean",
+        "timeToY": "(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number"
+      }
+    },
+    {
+      "name": "click:interval",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean"
+      }
+    },
+    {
+      "name": "contextmenu:interval",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean"
+      }
+    },
+    {
+      "name": "mousedown:interval",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean"
+      }
+    },
+    {
+      "name": "mousemove:interval",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean"
+      }
+    },
+    {
+      "name": "mouseup:interval",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean"
+      }
+    },
+    {
+      "name": "mouseenter:interval",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean"
+      }
+    },
+    {
+      "name": "mouseleave:interval",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean"
+      }
+    },
+    {
+      "name": "touchstart:interval",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean"
+      }
+    },
+    {
+      "name": "touchmove:interval",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean"
+      }
+    },
+    {
+      "name": "touchend:interval",
+      "value": {
+        "date": "string",
+        "time": "string",
+        "year": "number",
+        "month": "number",
+        "day": "number",
+        "hour": "number",
+        "minute": "number",
+        "weekday": "number",
+        "hasDay": "boolean",
+        "hasTime": "boolean",
+        "past": "boolean",
+        "present": "boolean",
+        "future": "boolean"
+      }
+    }
+  ]
+}
