@@ -171,6 +171,7 @@ export default BaseItemGroup.extend({
         ? this.nextIcon
         : this.prevIcon
 
+      /* istanbul ignore else */
       if (prevIcon && typeof prevIcon === 'string') {
         const icon = this.genIcon('prev', prevIcon, this.prev)
         icon && icons.push(icon)
@@ -180,6 +181,7 @@ export default BaseItemGroup.extend({
         ? this.prevIcon
         : this.nextIcon
 
+      /* istanbul ignore else */
       if (nextIcon && typeof nextIcon === 'string') {
         const icon = this.genIcon('next', nextIcon, this.next)
         icon && icons.push(icon)
