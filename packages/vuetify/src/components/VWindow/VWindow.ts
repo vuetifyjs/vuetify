@@ -135,10 +135,6 @@ export default BaseItemGroup.extend({
       icon: string,
       fn: () => void
     ) {
-      const capitalDirection = direction.charAt(0).toUpperCase() + direction.slice(1)
-
-      if (!(this as any)[`has${capitalDirection}`]) return null
-
       return this.$createElement('div', {
         staticClass: `v-window__${direction}`
       }, [
@@ -170,7 +166,11 @@ export default BaseItemGroup.extend({
         : this.prevIcon
 
       /* istanbul ignore else */
-      if (prevIcon && typeof prevIcon === 'string') {
+      if (
+        this.hasPrev &&
+        prevIcon &&
+        typeof prevIcon === 'string'
+      ) {
         const icon = this.genIcon('prev', prevIcon, this.prev)
         icon && icons.push(icon)
       }
@@ -180,7 +180,11 @@ export default BaseItemGroup.extend({
         : this.nextIcon
 
       /* istanbul ignore else */
-      if (nextIcon && typeof nextIcon === 'string') {
+      if (
+        this.hasNext &&
+        nextIcon &&
+        typeof nextIcon === 'string'
+      ) {
         const icon = this.genIcon('next', nextIcon, this.next)
         icon && icons.push(icon)
       }
