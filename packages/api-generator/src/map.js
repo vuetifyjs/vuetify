@@ -17,7 +17,6 @@ const getMapData = async () => {
   const dir = 'src/maps'
   let maps = {}
   await asyncForEach(fs.readdirSync(dir), async mapFile => {
-    console.log(mapFile)
     const compMap = await JSON.parse(
       fs.readFileSync(`${dir}/${mapFile}`, 'utf-8')
     )
