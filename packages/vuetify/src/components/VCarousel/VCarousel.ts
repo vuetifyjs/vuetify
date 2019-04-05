@@ -41,10 +41,7 @@ export default VWindow.extend({
     hideDelimiters: Boolean,
     hideDelimiterBackground: Boolean,
     progress: Boolean,
-    progressColor: {
-      type: String,
-      default: 'primary'
-    },
+    progressColor: String,
     interval: {
       type: [Number, String],
       default: 6000,
