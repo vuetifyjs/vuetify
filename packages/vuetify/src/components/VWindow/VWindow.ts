@@ -77,9 +77,7 @@ export default BaseItemGroup.extend({
       if (!this.isBooted) return ''
 
       const axis = this.vertical ? 'y' : 'x'
-      const direction = this.internalReverse === !this.$vuetify.rtl
-        ? '-reverse'
-        : ''
+      const direction = this.internalReverse ? '-reverse' : ''
 
       return `v-window-${axis}${direction}-transition`
     },
@@ -206,7 +204,7 @@ export default BaseItemGroup.extend({
       return prevIndex
     },
     next () {
-      this.isReverse = false
+      this.isReverse = this.$vuetify.rtl
 
       if (!this.hasActiveItems) return
 
@@ -216,7 +214,7 @@ export default BaseItemGroup.extend({
       this.internalValue = this.getValue(item, nextIndex)
     },
     prev () {
-      this.isReverse = true
+      this.isReverse = !this.$vuetify.rtl
 
       if (!this.hasActiveItems) return
 
@@ -244,8 +242,12 @@ export default BaseItemGroup.extend({
 
     if (!this.touchless) {
       const value = this.touch || {
-        left: this.next,
-        right: this.prev
+        left: () => {
+          this.$vuetify.rtl ? this.prev() : this.next()
+        },
+        right: () => {
+          this.$vuetify.rtl ? this.next() : this.prev()
+        }
       }
 
       data.directives.push({
