@@ -279,4 +279,47 @@ describe('VWindow.ts', () => {
     expect(wrapper.vm.hasNext).toBe(true)
     expect(wrapper.vm.hasPrev).toBe(true)
   })
+
+  it('should skip disabled items and go to the next available', () => {
+    const props = {
+      disabled: {
+        type: Boolean,
+        default: true
+      }
+    }
+    const wrapper = mountFunction({
+      slots: {
+        default: [
+          { extends: VWindowItem },
+          { extends: VWindowItem, props },
+          { extends: VWindowItem, props },
+          { extends: VWindowItem }
+        ]
+      }
+    })
+
+    expect(wrapper.vm.internalIndex).toBe(0)
+
+    wrapper.vm.next()
+
+    expect(wrapper.vm.internalIndex).toBe(3)
+  })
+
+  it('should ignore touch events', () => {
+    const wrapper = mountFunction({
+      propsData: { touchless: true },
+      slots: {
+        default: [
+          { extends: VWindowItem },
+          { extends: VWindowItem }
+        ]
+      }
+    })
+
+    expect(wrapper.vm.internalIndex).toBe(0)
+
+    touch(wrapper).start(0, 0).end(200, 0)
+
+    expect(wrapper.vm.internalIndex).toBe(0)
+  })
 })

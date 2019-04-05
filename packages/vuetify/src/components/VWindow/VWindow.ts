@@ -206,6 +206,7 @@ export default BaseItemGroup.extend({
     next () {
       this.isReverse = this.$vuetify.rtl
 
+      /* istanbul ignore if */
       if (!this.hasActiveItems) return
 
       const nextIndex = this.getNextIndex(this.internalIndex)
@@ -216,6 +217,7 @@ export default BaseItemGroup.extend({
     prev () {
       this.isReverse = !this.$vuetify.rtl
 
+      /* istanbul ignore if */
       if (!this.hasActiveItems) return
 
       const lastIndex = this.getPrevIndex(this.internalIndex)
