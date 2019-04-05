@@ -159,7 +159,7 @@ export default BaseItemGroup.extend({
           }
         }, [
           this.$createElement(VIcon, {
-            props: { 'size': '46px' }
+            props: { size: '32px' }
           }, icon)
         ])
       ])
