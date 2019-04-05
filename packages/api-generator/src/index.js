@@ -4,8 +4,6 @@ const fs = require('fs')
 const map = require('./map')
 const deepmerge = require('deepmerge')
 
-console.log(Object.keys(map).length)
-
 function arrayMerge (a, b) {
   const arr = a.slice()
   for (let i = 0; i < b.length; i++) {
