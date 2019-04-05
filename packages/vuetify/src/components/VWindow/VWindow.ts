@@ -119,7 +119,7 @@ export default BaseItemGroup.extend({
       const children = [this.$slots.default]
 
       if (this.showArrows) {
-        children.push(this.genIcons())
+        children.push(this.genControlIcons())
       }
 
       return this.$createElement('div', {
@@ -164,7 +164,7 @@ export default BaseItemGroup.extend({
         ])
       ])
     },
-    genIcons () {
+    genControlIcons () {
       const icons = []
 
       const prevIcon = this.$vuetify.rtl

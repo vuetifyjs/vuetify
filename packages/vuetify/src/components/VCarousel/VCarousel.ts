@@ -19,6 +19,7 @@ import { deprecate } from '../../util/console'
 
 // Types
 import { VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
 
 export default VWindow.extend({
   name: 'v-carousel',
@@ -54,7 +55,11 @@ export default VWindow.extend({
     mandatory: {
       type: Boolean,
       default: true
-    }
+    },
+    verticalDelimiters: {
+      type: String,
+      default: undefined
+    } as PropValidator<'' | 'left' | 'right'>
   },
 
   data () {
@@ -69,11 +74,15 @@ export default VWindow.extend({
       return {
         ...VWindow.options.computed.classes.call(this),
         'v-carousel': true,
-        'v-carousel--hide-delimiter-background': this.hideDelimiterBackground
+        'v-carousel--hide-delimiter-background': this.hideDelimiterBackground,
+        'v-carousel--vertical-delimiters': this.isVertical
       }
     },
     isDark (): boolean {
       return this.dark || !this.light
+    },
+    isVertical (): boolean {
+      return this.verticalDelimiters != null
     }
   },
 
@@ -105,9 +114,18 @@ export default VWindow.extend({
   },
 
   methods: {
+    genControlIcons () {
+      if (this.isVertical) return null
+
+      return VWindow.options.methods.genControlIcons.call(this)
+    },
     genDelimiters (): VNode {
       return this.$createElement('div', {
-        staticClass: 'v-carousel__controls'
+        staticClass: 'v-carousel__controls',
+        style: {
+          left: this.verticalDelimiters === 'left' && this.isVertical ? 0 : 'auto',
+          right: this.verticalDelimiters === 'right' ? 0 : 'auto'
+        }
       }, [this.genItems()])
     },
     genItems (): VNode {
