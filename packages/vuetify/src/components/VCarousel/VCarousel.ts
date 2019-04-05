@@ -7,6 +7,7 @@ import VWindow from '../VWindow/VWindow'
 // Components
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'
+import VProgressLinear from '../VProgressLinear'
 
 // Mixins
 // TODO: Move this into core components v2.0
@@ -39,6 +40,11 @@ export default VWindow.extend({
     hideControls: Boolean,
     hideDelimiters: Boolean,
     hideDelimiterBackground: Boolean,
+    progress: Boolean,
+    progressColor: {
+      type: String,
+      default: 'primary'
+    },
     interval: {
       type: [Number, String],
       default: 6000,
@@ -139,6 +145,15 @@ export default VWindow.extend({
         }
       }, children)
     },
+    genProgress () {
+      return this.$createElement(VProgressLinear, {
+        staticClass: 'v-carousel__progress',
+        props: {
+          color: this.progressColor,
+          value: (this.internalIndex + 1) / this.items.length * 100
+        }
+      })
+    },
     restartTimeout () {
       this.slideTimeout && clearTimeout(this.slideTimeout)
       this.slideTimeout = undefined
@@ -160,6 +175,10 @@ export default VWindow.extend({
 
     if (!this.hideDelimiters) {
       render.children!.push(this.genDelimiters())
+    }
+
+    if (this.progress || this.progressColor) {
+      render.children!.push(this.genProgress())
     }
 
     return render
