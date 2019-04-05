@@ -63,4 +63,52 @@ describe('VDataIterator.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should render valid no-data, loading and no-results states', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: [],
+        serverItemsLength: 0
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({
+      loading: true,
+      items: [ 'foo' ]
+    })
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({
+      loading: false,
+      search: true
+    })
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should create valid item slot scope', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: [ 'foo', 'bar' ]
+      },
+      scopedSlots: {
+        item: '<div slot-scope="item">{{ JSON.stringify(item) }}</div>'
+      }
+    })
+
+    expect(wrapper.vm.createItemProps('bar')).toMatchSnapshot()
+
+    wrapper.vm.createItemProps('foo').expand.on.input(true)
+    expect(wrapper.vm.isExpanded('foo')).toBeTruthy()
+    wrapper.vm.createItemProps('foo').expand.on.input(false)
+    expect(wrapper.vm.isExpanded('foo')).toBeFalsy()
+
+    wrapper.vm.createItemProps('bar').select.on.input(true)
+    expect(wrapper.vm.isSelected('bar')).toBeTruthy()
+    wrapper.vm.createItemProps('bar').select.on.input(false)
+    expect(wrapper.vm.isSelected('bar')).toBeFalsy()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
