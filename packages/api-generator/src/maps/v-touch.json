@@ -1,9 +1,0 @@
-{
-  "options": [
-    {
-      "name": "value",
-      "default": "{}",
-      "type": "Object"
-    }
-  ]
-}
