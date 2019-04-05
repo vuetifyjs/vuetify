@@ -104,6 +104,7 @@ export default VWindow.extend({
   },
 
   created () {
+    /* istanbul ignore if */
     if (this.hideControls) {
       deprecate('hide-controls', ':show-arrows="false"', this)
     }
@@ -188,10 +189,12 @@ export default VWindow.extend({
 
     render.data!.style = `height: ${convertToUnit(this.height)};`
 
+    /* istanbul ignore else */
     if (!this.hideDelimiters) {
       render.children!.push(this.genDelimiters())
     }
 
+    /* istanbul ignore else */
     if (this.progress || this.progressColor) {
       render.children!.push(this.genProgress())
     }
