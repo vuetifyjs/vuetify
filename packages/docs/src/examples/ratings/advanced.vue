@@ -51,9 +51,11 @@
         v-model="dialog"
         width="400"
       >
-        <v-icon slot="activator">
-          mdi-share-variant
-        </v-icon>
+        <template v-slot:activator="{ on }">
+          <v-icon v-on="on">
+            mdi-share-variant
+          </v-icon>
+        </template>
         <v-card>
           <v-card-title>
             <span class="title font-weight-bold">Share</span>
@@ -106,12 +108,12 @@
         length="10"
         readonly
       >
-        <v-icon
-          slot="item"
-          slot-scope="props"
-          :color="props.isFilled ? 'purple darken-4' : ''"
-          v-text="`mdi-numeric-${props.index}-box`"
-        ></v-icon>
+        <template v-slot:item="props">
+          <v-icon
+            :color="props.isFilled ? 'purple darken-4' : ''"
+            v-text="`mdi-numeric-${props.index}-box`"
+          ></v-icon>
+        </template>
       </v-rating>
     </v-card-actions>
     <div class="pa-3 pt-0 caption">

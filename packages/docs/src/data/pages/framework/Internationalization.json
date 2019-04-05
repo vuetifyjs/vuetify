@@ -27,6 +27,9 @@
           "lang": "availableLocalesText"
         },
         {
+          "type": "locales"
+        },
+        {
           "type": "markup",
           "value": "js_vuetify_custom_locale"
         }

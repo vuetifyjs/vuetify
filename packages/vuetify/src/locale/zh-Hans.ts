@@ -10,5 +10,9 @@ export default {
   dataTable: {
     rowsPerPageText: '每页行数：'
   },
-  noDataText: '无可用数据'
+  noDataText: '无可用数据',
+  carousel: {
+    prev: '以前的视觉',
+    next: '下一个视觉'
+  }
 }

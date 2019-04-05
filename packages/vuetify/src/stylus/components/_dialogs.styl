@@ -67,12 +67,14 @@
       margin 0 !important
       padding 0 !important
 
-  &--scrollable
+  &--scrollable,
+  &--scrollable > form
     display: flex
 
     > .v-card
       display: flex
       flex: 1 1 100%
+      max-width: 100%
       flex-direction: column
 
       > .v-card__title

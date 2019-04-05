@@ -1,14 +1,14 @@
 <template>
   <div class="text-xs-center">
     <v-bottom-sheet inset>
-      <v-btn
-        slot="activator"
-        color="red"
-        dark
-      >
-        Show player
-      </v-btn>
-
+      <template v-slot:activator>
+        <v-btn
+          color="red"
+          dark
+        >
+          Show player
+        </v-btn>
+      </template>
       <v-card tile>
         <v-progress-linear
           :value="50"

@@ -16,7 +16,7 @@ exports[`VDatePickerHeader.js should render component and match snapshot 1`] = `
   </button>
   <div class="v-date-picker-header__value">
     <div class="accent--text">
-      <button>
+      <button type="button">
         November 2005
       </button>
     </div>
@@ -52,7 +52,7 @@ exports[`VDatePickerHeader.js should render component in RTL mode and match snap
   </button>
   <div class="v-date-picker-header__value">
     <div class="accent--text">
-      <button>
+      <button type="button">
         November 2005
       </button>
     </div>
@@ -88,7 +88,7 @@ exports[`VDatePickerHeader.js should render component with default slot and matc
   </button>
   <div class="v-date-picker-header__value">
     <div class="accent--text">
-      <button>
+      <button type="button">
         <span>
           foo
         </span>
@@ -127,7 +127,7 @@ exports[`VDatePickerHeader.js should render disabled component and match snapsho
   </button>
   <div class="v-date-picker-header__value v-date-picker-header__value--disabled">
     <div>
-      <button>
+      <button type="button">
         November 2005
       </button>
     </div>
@@ -164,7 +164,7 @@ exports[`VDatePickerHeader.js should render readonly component and match snapsho
   </button>
   <div class="v-date-picker-header__value">
     <div class="accent--text">
-      <button>
+      <button type="button">
         November 2005
       </button>
     </div>

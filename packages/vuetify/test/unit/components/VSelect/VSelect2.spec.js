@@ -398,7 +398,6 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
   })
 
   it('should set selected index', async () => {
-    const onFocus = jest.fn()
     const wrapper = mount(VSelect, {
       propsData: {
         chips: true,
@@ -406,8 +405,7 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
         multiple: true,
         items: ['foo', 'bar', 'fizz', 'buzz'],
         value: ['foo', 'bar', 'fizz', 'buzz']
-      },
-      methods: { onFocus }
+      }
     })
 
     expect(wrapper.vm.selectedIndex).toBe(-1)
@@ -416,12 +414,10 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
     foo.trigger('click')
 
     expect(wrapper.vm.selectedIndex).toBe(0)
-    expect(onFocus).toHaveBeenCalledTimes(1)
 
     wrapper.find('.v-chip--select-multi')[1].trigger('click')
 
     expect(wrapper.vm.selectedIndex).toBe(1)
-    expect(onFocus).toHaveBeenCalledTimes(2)
 
     wrapper.setProps({ disabled: true })
 
@@ -430,7 +426,6 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
     wrapper.first('.v-chip--select-multi').trigger('click')
 
     expect(wrapper.vm.selectedIndex).toBe(1)
-    expect(onFocus).toHaveBeenCalledTimes(2)
   })
 
   it('should not duplicate items after items update when caching is turned on', async () => {

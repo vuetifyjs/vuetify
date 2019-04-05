@@ -7,7 +7,7 @@
     select-all
     class="elevation-1"
   >
-    <template slot="items" slot-scope="props">
+    <template v-slot:items="props">
       <td>
         <v-checkbox
           v-model="props.selected"

@@ -6,7 +6,7 @@
       solo
       @keydown.enter="create"
     >
-      <v-fade-transition slot="append">
+      <v-fade-transition v-slot:append>
         <v-icon
           v-if="task"
           @click="create"
@@ -69,12 +69,13 @@
                 v-model="task.done"
                 color="info darken-3"
               >
-                <div
-                  slot="label"
-                  :class="task.done && 'grey--text' || 'text--primary'"
-                  class="ml-3"
-                  v-text="task.text"
-                ></div>
+                <template v-slot:label>
+                  <div
+                    :class="task.done && 'grey--text' || 'text--primary'"
+                    class="ml-3"
+                    v-text="task.text"
+                  ></div>
+                </template>
               </v-checkbox>
             </v-list-tile-action>
 

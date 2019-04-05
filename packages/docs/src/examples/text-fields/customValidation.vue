@@ -68,14 +68,16 @@
               v-if="formHasErrors"
               left
             >
-              <v-btn
-                slot="activator"
-                icon
-                class="my-0"
-                @click="resetForm"
-              >
-                <v-icon>refresh</v-icon>
-              </v-btn>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  icon
+                  class="my-0"
+                  @click="resetForm"
+                  v-on="on"
+                >
+                  <v-icon>refresh</v-icon>
+                </v-btn>
+              </template>
               <span>Refresh form</span>
             </v-tooltip>
           </v-slide-x-reverse-transition>

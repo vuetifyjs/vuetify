@@ -11,10 +11,7 @@
         thumb-size="64"
         ticks="always"
       >
-        <template
-          slot="thumb-label"
-          slot-scope="props"
-        >
+        <template v-slot:thumb-label="props">
           <span>
             {{ season(props.value) }}
           </span>

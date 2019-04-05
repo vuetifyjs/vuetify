@@ -6,8 +6,11 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
   const app = document.createElement('div')
   app.setAttribute('data-app', true)
   document.body.appendChild(app)
-  const backspace = new Event('keydown')
-  backspace.keyCode = keyCodes.delete
+  const backspaceEvent = () => {
+    const backspace = new Event('keydown')
+    backspace.keyCode = keyCodes.delete
+    return backspace
+  }
 
   function createMultipleCombobox (propsData) {
     const change = jest.fn()
@@ -70,7 +73,7 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
     expect(change).toHaveBeenCalledWith(['foo'])
     expect(wrapper.vm.selectedIndex).toBe(0)
 
-    input.element.dispatchEvent(backspace) // Avoriaz doesn't wrap keydown.backspace
+    input.element.dispatchEvent(backspaceEvent()) // Avoriaz doesn't wrap keydown.backspace
     await wrapper.vm.$nextTick()
     expect(change).toHaveBeenCalledWith([])
     expect(wrapper.vm.selectedIndex).toBe(-1)

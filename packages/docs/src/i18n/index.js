@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
-import enUS from '@/lang/en-US'
+import en from '@/lang/en'
+import languages from '@/data/i18n/languages.json'
 
 Vue.use(VueI18n)
 
 export function createI18n (ssrContext, router) {
-  const fallbackLocale = 'en-US'
+  const fallbackLocale = 'en'
   const loadedLanguages = []
   const globalLanguages = {}
 
@@ -20,7 +21,7 @@ export function createI18n (ssrContext, router) {
   // ssr or document then what happens when it's not loaded?
   const i18n = new VueI18n({
     locale,
-    messages: { [fallbackLocale]: enUS },
+    messages: { en },
     fallbackLocale
   })
 
@@ -36,13 +37,16 @@ export function createI18n (ssrContext, router) {
 
   function loadLanguageAsync (lang) {
     if (!loadedLanguages.includes(lang)) {
-      return import(/* webpackChunkName: "lang-[request]" */ `@/lang/${lang}`).then(msgs => {
+      const { locale } = languages.find(l => lang === l.alternate || lang === l.locale) || {}
+      if (!locale) return Promise.reject(new Error('Language not found'))
+      return import(/* webpackChunkName: "lang-[request]" */ `@/lang/${locale}`).then(msgs => {
         loadedLanguages.push(lang)
         globalLanguages[lang] = msgs.default
         i18n.setLocaleMessage(lang, globalLanguages[lang])
         return Promise.resolve(setI18nLanguage(lang))
       }).catch(err => {
         console.log(err)
+        throw err
       })
     }
     return Promise.resolve(setI18nLanguage(lang))
@@ -53,7 +57,7 @@ export function createI18n (ssrContext, router) {
       to.params.lang
     )
       .then(() => next())
-      .catch(() => next('/en'))
+      .catch(() => next('/' + fallbackLocale))
   })
 
   return i18n

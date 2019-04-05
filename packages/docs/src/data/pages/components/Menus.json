@@ -28,6 +28,7 @@
           "value": [
             "absolute",
             "absoluteWithoutActivator",
+            "menuActivatorTooltip",
             "hover",
             "menus",
             "customTransition",

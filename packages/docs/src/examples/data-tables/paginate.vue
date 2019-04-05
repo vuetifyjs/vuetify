@@ -4,10 +4,11 @@
       :headers="headers"
       :items="desserts"
       :search="search"
+      hide-actions
       :pagination.sync="pagination"
       class="elevation-1"
     >
-      <template slot="items" slot-scope="props">
+      <template v-slot:items="props">
         <td>{{ props.item.name }}</td>
         <td class="text-xs-right">{{ props.item.calories }}</td>
         <td class="text-xs-right">{{ props.item.fat }}</td>

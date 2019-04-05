@@ -62,7 +62,7 @@ test('VListGroup.js', ({ mount }) => {
     const listClick = jest.fn()
     const wrapper = mount(VListGroup, {
       provide: {
-        listClick: listClick,
+        listClick,
         list: {
           register: () => {},
           unregister: () => {}

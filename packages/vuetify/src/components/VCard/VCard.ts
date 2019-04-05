@@ -37,7 +37,7 @@ export default mixins(
       }
     },
     styles (): object {
-      const style = {
+      const style: Dictionary<string> = {
         ...VSheet.options.computed.styles.call(this)
       }
 

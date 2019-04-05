@@ -324,38 +324,6 @@ export const camelize = (str: string): string => {
   return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : '')
 }
 
-export function filterTreeItems (
-  item: any,
-  search: string,
-  idKey: string,
-  textKey: string,
-  childrenKey: string,
-  excluded: Set<string | number>
-): boolean {
-  const text = getObjectValueByPath(item, textKey)
-
-  if (text.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) > -1) {
-    return true
-  }
-
-  const children = getObjectValueByPath(item, childrenKey)
-
-  if (children) {
-    let match = false
-    for (let i = 0; i < children.length; i++) {
-      if (filterTreeItems(children[i], search, idKey, textKey, childrenKey, excluded)) {
-        match = true
-      }
-    }
-
-    if (match) return true
-  }
-
-  excluded.add(getObjectValueByPath(item, idKey))
-
-  return false
-}
-
 /**
  * Returns the set difference of B and A, i.e. the set of elements in B but not in A
  */
@@ -372,4 +340,18 @@ export function arrayDiff (a: any[], b: any[]): any[] {
  */
 export function upperFirst (str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
+/**
+ * Returns:
+ *  - 'normal' for old style slots - `<template slot="default">`
+ *  - 'scoped' for old style scoped slots (`<template slot="default" slot-scope="data">`) or bound v-slot (`#default="data"`)
+ *  - 'v-slot' for unbound v-slot (`#default`) - only if the third param is true, otherwise counts as scoped
+ */
+export function getSlotType<T extends boolean = false> (vm: Vue, name: string, split?: T): (T extends true ? 'v-slot' : never) | 'normal' | 'scoped' | void {
+  if (vm.$slots[name] && vm.$scopedSlots[name] && (vm.$scopedSlots[name] as any).name) {
+    return split ? 'v-slot' as any : 'scoped'
+  }
+  if (vm.$slots[name]) return 'normal'
+  if (vm.$scopedSlots[name]) return 'scoped'
 }

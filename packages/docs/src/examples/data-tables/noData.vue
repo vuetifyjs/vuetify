@@ -4,7 +4,7 @@
     :items="desserts"
     class="elevation-1"
   >
-    <template slot="no-data">
+    <template v-slot:no-data>
       <v-alert :value="true" color="error" icon="warning">
         Sorry, nothing to display here :(
       </v-alert>

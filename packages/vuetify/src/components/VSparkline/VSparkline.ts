@@ -63,6 +63,10 @@ export default mixins<options &
       type: String,
       default: 'ease'
     },
+    autoLineWidth: {
+      type: Boolean,
+      default: false
+    },
     color: {
       type: String,
       default: 'primary'
@@ -113,6 +117,10 @@ export default mixins<options &
     width: {
       type: [Number, String],
       default: 300
+    },
+    labelSize: {
+      type: [Number, String],
+      default: 7
     }
   },
 
@@ -121,16 +129,31 @@ export default mixins<options &
   }),
 
   computed: {
+    parsedPadding (): number {
+      return Number(this.padding)
+    },
+    parsedWidth (): number {
+      return Number(this.width)
+    },
+    totalBars (): number {
+      return this.value.length
+    },
+    _lineWidth (): number {
+      if (this.autoLineWidth && this.type !== 'trend') {
+        const totalPadding = this.parsedPadding * (this.totalBars + 1)
+        return (this.parsedWidth - totalPadding) / this.totalBars
+      } else {
+        return Number(this.lineWidth) || 4
+      }
+    },
     boundary (): Boundary {
-      const padding = Number(this.padding)
       const height = Number(this.height)
-      const width = Number(this.width)
 
       return {
-        minX: padding,
-        minY: padding,
-        maxX: width - padding,
-        maxY: height - padding
+        minX: this.parsedPadding,
+        minY: this.parsedPadding,
+        maxX: this.parsedWidth - this.parsedPadding,
+        maxY: height - this.parsedPadding
       }
     },
     hasLabels (): boolean {
@@ -164,7 +187,7 @@ export default mixins<options &
       return labels
     },
     points (): Point[] {
-      return genPoints(this.value.slice(), this.boundary)
+      return genPoints(this.value.slice(), this.boundary, this.type)
     },
     textY (): number {
       return this.boundary.maxY + 6
@@ -274,27 +297,30 @@ export default mixins<options &
       }, [children])
     },
     genBar () {
-      if (!this.value || this.value.length < 2) return undefined as never
-      const { width, height, padding, lineWidth } = this
-      const viewWidth = width || this.value.length * Number(padding) * 2
+      if (!this.value || this.totalBars < 2) return undefined as never
+      const { width, height, parsedPadding, _lineWidth } = this
+      const viewWidth = width || this.totalBars * parsedPadding * 2
       const viewHeight = height || 75
       const boundary: Boundary = {
-        minX: Number(padding),
-        minY: Number(padding),
-        maxX: Number(viewWidth) - Number(padding),
-        maxY: Number(viewHeight) - Number(padding)
+        minX: parsedPadding,
+        minY: parsedPadding,
+        maxX: Number(viewWidth) - parsedPadding,
+        maxY: Number(viewHeight) - parsedPadding
       }
       const props = {
         ...this.$props
       }
 
-      props.points = genPoints(this.value, boundary)
+      props.points = genPoints(this.value, boundary, this.type)
 
       const totalWidth = boundary.maxX / (props.points.length - 1)
 
       props.boundary = boundary
-      props.lineWidth = lineWidth || (totalWidth - Number(padding || 5))
-      props.offsetX = (totalWidth - props.lineWidth) / 2
+      props.lineWidth = _lineWidth || (totalWidth - Number(parsedPadding || 5))
+      props.offsetX = 0
+      if (!this.autoLineWidth) {
+        props.offsetX = ((boundary.maxX / this.totalBars) / 2) - boundary.minX
+      }
 
       return this.$createElement('svg', {
         attrs: {
@@ -304,8 +330,8 @@ export default mixins<options &
         }
       }, [
         this.genGradient(),
-        this.genClipPath(props.offsetX, 'sparkline-bar-' + this._uid),
-        this.showLabels ? this.genBarLabels(props as BarText) : undefined as never,
+        this.genClipPath(props.offsetX, props.lineWidth, 'sparkline-bar-' + this._uid),
+        this.hasLabels ? this.genBarLabels(props as BarText) : undefined as never,
         this.$createElement('g', {
           attrs: {
             transform: `scale(1,-1) translate(0,-${boundary.maxY})`,
@@ -324,7 +350,7 @@ export default mixins<options &
         ])
       ])
     },
-    genClipPath (offsetX: number, id: string) {
+    genClipPath (offsetX: number, lineWidth: number, id: string) {
       const { maxY } = this.boundary
       const rounding = typeof this.smooth === 'number'
         ? this.smooth
@@ -334,12 +360,12 @@ export default mixins<options &
         attrs: {
           id: `${id}-clip`
         }
-      }, this.points.map(item =>
-        this.$createElement('rect', {
+      }, this.points.map(item => {
+        return this.$createElement('rect', {
           attrs: {
-            x: item.x - offsetX,
+            x: item.x + offsetX,
             y: 0,
-            width: this.lineWidth,
+            width: lineWidth,
             height: Math.max(maxY - item.y, 0),
             rx: rounding,
             ry: rounding
@@ -355,16 +381,17 @@ export default mixins<options &
             }
           }) : undefined as never
         ])
-      ))
+      }))
     },
     genBarLabels (props: BarText): VNode {
-      const offsetX = (props.offsetX || 0) / 2
+      const offsetX = props.offsetX || 0
 
       const children = props.points.map(item => (
         this.$createElement('text', {
           attrs: {
-            x: item.x - offsetX * -0.45 - 10,
-            y: props.boundary.maxY + 10
+            x: item.x + offsetX + this._lineWidth / 2,
+            y: props.boundary.maxY + (Number(this.labelSize) || 7),
+            'font-size': Number(this.labelSize) || 7
           }
         }, item.value.toString())
       ))
@@ -374,7 +401,7 @@ export default mixins<options &
     genTrend () {
       return this.$createElement('svg', this.setTextColor(this.color, {
         attrs: {
-          'stroke-width': this.lineWidth || 1,
+          'stroke-width': this._lineWidth || 1,
           width: '100%',
           height: '25%',
           viewBox: `0 0 ${this.width} ${this.height}`
@@ -388,7 +415,7 @@ export default mixins<options &
   },
 
   render (h): VNode {
-    if (this.value.length < 2) return undefined as never
+    if (this.totalBars < 2) return undefined as never
 
     return this.type === 'trend'
       ? this.genTrend()

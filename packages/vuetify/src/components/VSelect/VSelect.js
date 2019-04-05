@@ -307,16 +307,10 @@ export default VTextField.extend({
         this.readonly ||
         this.getDisabled(item)
       )
-      const focus = (e, cb) => {
-        if (isDisabled) return
-
-        e.stopPropagation()
-        this.onFocus()
-        cb && cb()
-      }
 
       return this.$createElement(VChip, {
         staticClass: 'v-chip--select-multi',
+        attrs: { tabindex: -1 },
         props: {
           close: this.deletableChips && !isDisabled,
           disabled: isDisabled,
@@ -325,11 +319,12 @@ export default VTextField.extend({
         },
         on: {
           click: e => {
-            focus(e, () => {
-              this.selectedIndex = index
-            })
+            if (isDisabled) return
+
+            e.stopPropagation()
+
+            this.selectedIndex = index
           },
-          focus,
           input: () => this.onChipInput(item)
         },
         key: this.getValue(item)
@@ -539,11 +534,12 @@ export default VTextField.extend({
     onChipInput (item) {
       if (this.multiple) this.selectItem(item)
       else this.setValue(null)
-
       // If all items have been deleted,
       // open `v-menu`
       if (this.selectedItems.length === 0) {
         this.isMenuActive = true
+      } else {
+        this.isMenuActive = false
       }
       this.selectedIndex = -1
     },
@@ -578,9 +574,11 @@ export default VTextField.extend({
       this.keyboardLookupPrefix += e.key.toLowerCase()
       this.keyboardLookupLastTime = now
 
-      const item = this.allItems.find(item => this.getText(item).toLowerCase().startsWith(this.keyboardLookupPrefix))
-      if (item !== undefined) {
+      const index = this.allItems.findIndex(item => this.getText(item).toLowerCase().startsWith(this.keyboardLookupPrefix))
+      const item = this.allItems[index]
+      if (index !== -1) {
         this.setValue(this.returnObject ? item : this.getValue(item))
+        setTimeout(() => this.setMenuIndex(index))
       }
     },
     onKeyDown (e) {
@@ -712,8 +710,9 @@ export default VTextField.extend({
       this.selectedItems = selectedItems
     },
     setValue (value) {
-      value !== this.internalValue && this.$emit('change', value)
+      const oldValue = this.internalValue
       this.internalValue = value
+      value !== oldValue && this.$emit('change', value)
     }
   }
 })

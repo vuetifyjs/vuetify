@@ -10,5 +10,9 @@ export default {
   dataTable: {
     rowsPerPageText: 'Redova po stranici:'
   },
-  noDataText: 'Nema dostupnih podataka'
+  noDataText: 'Nema dostupnih podataka',
+  carousel: {
+    prev: 'Prethodna slika',
+    next: 'Sljedeća vizuala'
+  }
 }

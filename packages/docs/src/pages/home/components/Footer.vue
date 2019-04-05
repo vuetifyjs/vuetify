@@ -66,16 +66,17 @@
               hide-details
               label="Email Address"
             >
-              <v-btn
-                slot="append"
-                type="submit"
-                color="secondary"
-                name="member[subscribe]"
-                value="Subscribe"
-                @click="email = ''"
-              >
-                Subscribe
-              </v-btn>
+              <template v-slot:append>
+                <v-btn
+                  type="submit"
+                  color="secondary"
+                  name="member[subscribe]"
+                  value="Subscribe"
+                  @click="email = ''"
+                >
+                  Subscribe
+                </v-btn>
+              </template>
             </v-text-field>
           </v-form>
           <div class="text-xs-center caption">

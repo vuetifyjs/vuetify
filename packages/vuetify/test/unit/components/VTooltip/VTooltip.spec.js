@@ -54,6 +54,23 @@ test('VTooltip.js', ({ mount, compileToFunctions }) => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
+  it('should render component with min/max width and match snapshot', async () => {
+    const wrapper = mount(VTooltip, {
+      propsData: {
+        value: true,
+        minWidth: 100,
+        maxWidth: 200
+      },
+      slots: {
+        activator: [compileToFunctions('<span>activator</span>')],
+        default: [compileToFunctions('<span>content</span>')]
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
   it('should render component with zIndex prop and match snapshot', async () => {
     const wrapper = mount(VTooltip, {
       propsData: {

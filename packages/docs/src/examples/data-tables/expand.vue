@@ -14,7 +14,7 @@
       :expand="expand"
       item-key="name"
     >
-      <template slot="items" slot-scope="props">
+      <template v-slot:items="props">
         <tr @click="props.expanded = !props.expanded">
           <td>{{ props.item.name }}</td>
           <td class="text-xs-right">{{ props.item.calories }}</td>
@@ -24,7 +24,7 @@
           <td class="text-xs-right">{{ props.item.iron }}</td>
         </tr>
       </template>
-      <template slot="expand" slot-scope="props">
+      <template v-slot:expand="props">
         <v-card flat>
           <v-card-text>Peek-a-boo!</v-card-text>
         </v-card>

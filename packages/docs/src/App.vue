@@ -12,18 +12,33 @@
 
   // Utilities
   import { waitForReadystate } from '@/util/helpers'
-
   import { mapState } from 'vuex'
+
+  import languages from '@/data/i18n/languages.json'
+
+  const fallbackLocale = languages.find(lang => lang.fallback === true).locale
 
   export default {
     mixins: [Meta],
 
+    data: () => ({
+      availableLocales: languages.map(lang => lang.alternate || lang.locale),
+      languages
+    }),
+
     computed: {
       ...mapState('app', ['isLoading']),
       ...mapState('route', ['hash', 'name']),
+      languageIsValid () {
+        return this.availableLocales.includes(this.$route.params.lang)
+      },
       hasToolbar () {
-        return this.name !== 'Layouts'
+        return this.languageIsValid && this.name !== 'Layouts'
       }
+    },
+
+    created () {
+      if (!this.languageIsValid) this.$router.push(`/${fallbackLocale}`)
     },
 
     async mounted () {

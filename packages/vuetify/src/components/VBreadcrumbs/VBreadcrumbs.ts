@@ -85,12 +85,15 @@ export default mixins(
     genItems () {
       const items = []
       const hasSlot = !!this.$scopedSlots.item
+      const keys = []
 
       for (let i = 0; i < this.items.length; i++) {
         const item = this.items[i]
 
+        keys.push(item.text)
+
         if (hasSlot) items.push(this.$scopedSlots.item!({ item }))
-        else items.push(this.$createElement(VBreadcrumbsItem, { key: item.text, props: item }, [item.text]))
+        else items.push(this.$createElement(VBreadcrumbsItem, { key: keys.join('.'), props: item }, [item.text]))
 
         if (i < this.items.length - 1) items.push(this.genDivider())
       }

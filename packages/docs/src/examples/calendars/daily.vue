@@ -6,22 +6,16 @@
           color="primary"
           type="day"
         >
-          <template
-            slot="dayHeader"
-            slot-scope="{ present }"
-          >
-            <div
+          <template v-slot:dayHeader="{ present }">
+            <template
               v-if="present"
               class="text-xs-center"
             >
               Today
-            </div>
+            </template>
           </template>
 
-          <template
-            slot="interval"
-            slot-scope="{ hour }"
-          >
+          <template v-slot:interval="{ hour }">
             <div
               class="text-xs-center"
             >

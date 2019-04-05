@@ -11,6 +11,11 @@
           ></v-text-field>
 
           <v-text-field
+            label="Prepend inner"
+            prepend-inner-icon="place"
+          ></v-text-field>
+
+          <v-text-field
             label="Append"
             append-icon="place"
           ></v-text-field>
@@ -28,6 +33,12 @@
             solo
             label="Prepend"
             prepend-icon="place"
+          ></v-text-field>
+
+          <v-text-field
+            solo
+            label="Prepend inner"
+            prepend-inner-icon="place"
           ></v-text-field>
 
           <v-text-field
@@ -50,6 +61,12 @@
             box
             label="Prepend"
             prepend-icon="place"
+          ></v-text-field>
+
+          <v-text-field
+            box
+            label="Prepend inner"
+            prepend-inner-icon="place"
           ></v-text-field>
 
           <v-text-field
@@ -72,6 +89,12 @@
             outline
             label="Prepend"
             prepend-icon="place"
+          ></v-text-field>
+
+          <v-text-field
+            outline
+            label="Prepend inner"
+            prepend-inner-icon="place"
           ></v-text-field>
 
           <v-text-field

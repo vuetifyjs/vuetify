@@ -8,13 +8,15 @@
           <v-spacer></v-spacer>
 
           <v-menu bottom left>
-            <v-btn
-              slot="activator"
-              dark
-              icon
-            >
-              <v-icon>more_vert</v-icon>
-            </v-btn>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                dark
+                icon
+                v-on="on"
+              >
+                <v-icon>more_vert</v-icon>
+              </v-btn>
+            </template>
 
             <v-list>
               <v-list-tile

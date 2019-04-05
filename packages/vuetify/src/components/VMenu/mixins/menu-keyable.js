@@ -41,7 +41,10 @@ export default {
   methods: {
     onKeyDown (e) {
       if (e.keyCode === keyCodes.esc) {
-        this.isActive = false
+        // Wait for dependent elements to close first
+        setTimeout(() => { this.isActive = false })
+        const activator = this.getActivator()
+        this.$nextTick(() => activator && activator.focus())
       } else if (e.keyCode === keyCodes.tab) {
         setTimeout(() => {
           if (!this.$refs.content.contains(document.activeElement)) {
@@ -53,13 +56,6 @@ export default {
       }
     },
     changeListIndex (e) {
-      if ([
-        keyCodes.down,
-        keyCodes.up,
-        keyCodes.enter
-      ].includes(e.keyCode)
-      ) e.preventDefault()
-
       // For infinite scroll and autocomplete, re-evaluate children
       this.getTiles()
 
@@ -71,7 +67,9 @@ export default {
         this.listIndex--
       } else if (e.keyCode === keyCodes.enter && this.listIndex !== -1) {
         this.tiles[this.listIndex].click()
-      }
+      } else { return }
+      // One of the conditions was met, prevent default action (#2988)
+      e.preventDefault()
     },
     getTiles () {
       this.tiles = this.$refs.content.querySelectorAll('.v-list__tile')

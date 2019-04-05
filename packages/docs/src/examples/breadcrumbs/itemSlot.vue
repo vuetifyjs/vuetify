@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-breadcrumbs :items="items">
-      <template slot="item" slot-scope="props">
+      <template v-slot:item="props">
         <a :href="props.item.href" :class="[props.item.disabled && 'disabled']">{{ props.item.text.toUpperCase() }}</a>
       </template>
     </v-breadcrumbs>

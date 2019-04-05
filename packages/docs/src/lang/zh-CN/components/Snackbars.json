@@ -1,20 +1,20 @@
 {
-  "header": "小吃吧",
-  "headerText": "`v-snackbar`组件用于向用户显示快速消息，小吃吧支持定位、删除延迟和回调。",
+  "header": "Snackbars",
+  "headerText": "`v-snackbar`组件用于向用户显示快速消息，Snackbars 支持定位、消失延迟和回调。",
   "components": ["v-snackbar"],
   "examples": {
     "position": {
       "header": "位置",
-      "desc": "标准小吃吧对于引起用户对刚发生的一些功能的注意力是有用的。"
+      "desc": "标准 Snackbars 有利于使用户注意到一些刚发生的活动。"
     },
     "contextual": {
       "header": "上下文",
-      "desc": "您可以在小吃吧上应用一个色彩，以更好的适应您的实现。"
+      "desc": "您可以为 Snackbars 应用一种色彩，以更好地适应您的实现。"
     }
   },
   "props": {
-    "multiLine": "识小吃吧更高（移动设备）",
-    "timeout": "等待小吃吧自动隐藏的时间",
-    "vertical": "垂直折叠小吃店的内容（移动设备）"
+    "multiLine": "使 Snackbars 的高度动态变化（移动设备）",
+    "timeout": "等待 Snackbars 自动隐藏的时间。使用 0 来保持永久开启。",
+    "vertical": "垂直折叠 Snackbars 的内容（移动设备）"
   }
 }

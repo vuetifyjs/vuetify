@@ -43,6 +43,32 @@ test('VSwitch.js', ({ mount }) => {
     expect(change).toHaveBeenCalledTimes(2)
   })
 
+  it('should emit change event on key events', async () => {
+    const wrapper = mount(VSwitch, {
+      props: {
+        inputValue: false
+      }
+    })
+
+    const change = jest.fn()
+    const input = wrapper.first('input')
+    wrapper.vm.$on('change', change)
+
+    input.trigger('keydown.left')
+    expect(change).not.toBeCalled()
+
+    input.trigger('keydown.right')
+    expect(change).toBeCalledWith(true)
+    expect(change).toHaveBeenCalledTimes(1)
+
+    input.trigger('keydown.right')
+    expect(change).toHaveBeenCalledTimes(1)
+
+    input.trigger('keydown.left')
+    expect(change).toBeCalledWith(false)
+    expect(change).toHaveBeenCalledTimes(2)
+  })
+
   it('should not emit change event on swipe when not active', async () => {
     const wrapper = mount(VSwitch, {
       props: {
@@ -58,5 +84,15 @@ test('VSwitch.js', ({ mount }) => {
     wrapper.setProps({ inputValue: true })
     touch(wrapper.first('.v-input--selection-controls__ripple')).start(0, 0).end(20, 0)
     expect(change).not.toBeCalled()
+  })
+
+  it('should render element with loader and match the snapshot', async () => {
+    const wrapper = mount(VSwitch, {
+      props: {
+        loading: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

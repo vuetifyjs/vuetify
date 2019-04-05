@@ -3,7 +3,7 @@
     <v-btn
       color="primary"
       dark
-      @click="dialog = true"
+      @click.stop="dialog = true"
     >
       Open Dialog
     </v-btn>

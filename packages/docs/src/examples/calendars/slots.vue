@@ -7,23 +7,23 @@
           :value="today"
           color="primary"
         >
-          <v-layout
-            slot="day"
-            slot-scope="{ present, past, date }"
-            fill-height
-          >
-            <template v-if="past && tracked[date]">
-              <v-sheet
-                v-for="(percent, i) in tracked[date]"
-                :key="i"
-                :title="category[i]"
-                :color="colors[i]"
-                :width="`${percent}%`"
-                height="100%"
-                tile
-              ></v-sheet>
-            </template>
-          </v-layout>
+          <template v-slot:day="{ present, past, date }">
+            <v-layout
+              fill-height
+            >
+              <template v-if="past && tracked[date]">
+                <v-sheet
+                  v-for="(percent, i) in tracked[date]"
+                  :key="i"
+                  :title="category[i]"
+                  :color="colors[i]"
+                  :width="`${percent}%`"
+                  height="100%"
+                  tile
+                ></v-sheet>
+              </template>
+            </v-layout>
+          </template>
         </v-calendar>
       </v-sheet>
     </v-flex>

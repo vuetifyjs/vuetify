@@ -17,6 +17,14 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     expect(header.text()).toBe('November 2005')
   })
 
+  it('should work with year < 1000', () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: '0005-11-01',
+      }
+    })
+  })
+
   it('should display the correct year when model is null', () => {
     const wrapper = mount(VDatePicker, {
       propsData: {

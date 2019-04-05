@@ -15,7 +15,9 @@
           >
             <v-icon>add</v-icon>
           </v-btn>
-          <v-toolbar-title slot="extension" class="white--text">My files</v-toolbar-title>
+          <template v-slot:extension>
+            <v-toolbar-title class="white--text">My files</v-toolbar-title>
+          </template>
           <v-spacer></v-spacer>
           <v-btn icon>
             <v-icon>search</v-icon>

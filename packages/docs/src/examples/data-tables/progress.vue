@@ -5,8 +5,8 @@
     :loading="true"
     class="elevation-1"
   >
-    <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
-    <template slot="items" slot-scope="props">
+    <v-progress-linear v-slot:progress color="blue" indeterminate></v-progress-linear>
+    <template v-slot:items="props">
       <td>{{ props.item.name }}</td>
       <td class="text-xs-right">{{ props.item.calories }}</td>
       <td class="text-xs-right">{{ props.item.fat }}</td>

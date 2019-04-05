@@ -31,14 +31,7 @@ export default VSelect.extend({
     filter: {
       type: Function,
       default: (item, queryText, itemText) => {
-        const hasValue = val => val != null ? val : ''
-
-        const text = hasValue(itemText)
-        const query = hasValue(queryText)
-
-        return text.toString()
-          .toLowerCase()
-          .indexOf(query.toString().toLowerCase()) > -1
+        return itemText.toLocaleLowerCase().indexOf(queryText.toLocaleLowerCase()) > -1
       }
     },
     hideNoData: Boolean,
@@ -90,9 +83,9 @@ export default VSelect.extend({
       return this.getText(this.selectedItem).toString().length
     },
     filteredItems () {
-      if (!this.isSearching || this.noFilter) return this.allItems
+      if (!this.isSearching || this.noFilter || this.internalSearch == null) return this.allItems
 
-      return this.allItems.filter(i => this.filter(i, this.internalSearch, this.getText(i)))
+      return this.allItems.filter(item => this.filter(item, this.internalSearch.toString(), this.getText(item).toString()))
     },
     internalSearch: {
       get () {
@@ -198,6 +191,9 @@ export default VSelect.extend({
     },
     internalSearch (val) {
       this.onInternalSearchChanged(val)
+    },
+    itemText () {
+      this.updateSelf()
     }
   },
 
@@ -345,12 +341,18 @@ export default VSelect.extend({
       // has had time to update
       this.$nextTick(() => {
         this.internalSearch = (
-          !this.selectedItems.length ||
-          this.multiple ||
-          this.hasSlot
+          this.multiple &&
+          this.internalSearch &&
+          this.isMenuActive
         )
-          ? null
-          : this.getText(this.selectedItem)
+          ? this.internalSearch
+          : (
+            !this.selectedItems.length ||
+            this.multiple ||
+            this.hasSlot
+          )
+            ? null
+            : this.getText(this.selectedItem)
       })
     },
     updateSelf () {

@@ -3,9 +3,13 @@ import { test } from '@/test'
 
 test('VDatePicker/util/createNativeLocaleFormatter.js', ({ mount }) => {
   it('should format dates', () => {
-
     const formatter = createNativeLocaleFormatter(undefined, { day: 'numeric', timeZone: 'UTC' })
     expect(formatter('2013-2-07')).toBe('7')
+  })
+
+  it('should format date with year < 1000', () => {
+    const formatter = createNativeLocaleFormatter(undefined, { year: 'numeric', timeZone: 'UTC' })
+    expect(formatter('13-2-07')).toBe('13')
   })
 
   it('should format dates if Intl is not defined', () => {

@@ -10,5 +10,9 @@ export default {
   dataTable: {
     rowsPerPageText: 'Filas por página:'
   },
-  noDataText: 'Ningún dato disponible'
+  noDataText: 'Ningún dato disponible',
+  carousel: {
+    prev: 'Visual previo',
+    next: 'Siguiente visual'
+  }
 }
