@@ -107,19 +107,17 @@
   }
 </script>
 
-<style lang="stylus">
-  .app-table-of-contents {
-    list-style-type: none !important;
-    margin: 0;
-    padding: 32px 0 0;
-    text-align: left;
-    width: 100%;
+<style lang="sass">
+.app-table-of-contents
+  list-style-type: none !important
+  margin: 0
+  padding: 32px 0 0
+  text-align: left
+  width: 100%
 
-    li a {
-      border-left: 2px solid transparent;
-      padding-left: 16px;
-      text-decoration: none;
-      transition: color .1s ease-in;
-    }
-  }
+  li a
+    border-left: 2px solid transparent
+    padding-left: 16px
+    text-decoration: none
+    transition: color .1s ease-in
 </style>

@@ -57,9 +57,9 @@
   }
 </script>
 
-<style lang="stylus" scoped>
-  .portrait.v-card
-    margin: 0 auto
-    max-width: 600px
-    width: 100%
+<style lang="sass" scoped>
+.portrait.v-card
+  margin: 0 auto
+  max-width: 600px
+  width: 100%
 </style>

@@ -295,25 +295,24 @@
   }
 </script>
 
-<style lang="stylus">
-  .component-parameters
-    font-size: 14px
+<style lang="sass">
+.component-parameters
+  font-size: 14px
 
-    p
-      margin-bottom: 0
+  p
+    margin-bottom: 0
 
-    .mono
-      font-family: 'Roboto Mono', monospace
-      font-weight: 500
+  .mono
+    font-family: 'Roboto Mono', monospace
+    font-weight: 500
 
-    .header
-      font-family: 'Roboto Mono', monospace
-      font-size: 0.8rem
+  .header
+    font-family: 'Roboto Mono', monospace
+    font-size: 0.8rem
 
-    .justify
-      text-align: justify
+  .justify
+    text-align: justify
 
-    .name
-      color: #bd4147
-
+  .name
+    color: #bd4147
 </style>
