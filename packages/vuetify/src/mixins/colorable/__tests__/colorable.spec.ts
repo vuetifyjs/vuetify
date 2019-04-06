@@ -1,12 +1,25 @@
-import { test } from '@/test'
-import Colorable from '@/mixins/colorable'
+import Colorable from '../'
+import {
+  mount,
+  MountOptions,
+  Wrapper
+} from '@vue/test-utils'
 
-test('colorable.js', ({ mount }) => {
+describe('colorable.ts', () => {
+  const Mock = Colorable.extend({
+    render: h => h('div')
+  })
+
+  type Instance = InstanceType<typeof Mock>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+  beforeEach(() => {
+    mountFunction = (options?: MountOptions<Instance>) => {
+      return mount(Mock, options)
+    }
+  })
+
   it('should compute data with background theme color', async () => {
-    const wrapper = mount({
-      mixins: [ Colorable ],
-      render: h => h('div')
-    })
+    const wrapper = mountFunction()
 
     expect(wrapper.vm.setBackgroundColor('foo', {})).toEqual({
       class: {
@@ -21,10 +34,7 @@ test('colorable.js', ({ mount }) => {
   })
 
   it('should compute data with text theme color', async () => {
-    const wrapper = mount({
-      mixins: [ Colorable ],
-      render: h => h('div')
-    })
+    const wrapper = mountFunction()
 
     expect(wrapper.vm.setTextColor('foo', {})).toEqual({
       class: {
@@ -40,10 +50,7 @@ test('colorable.js', ({ mount }) => {
   })
 
   it('should compute data with background css color', async () => {
-    const wrapper = mount({
-      mixins: [ Colorable ],
-      render: h => h('div')
-    })
+    const wrapper = mountFunction()
 
     expect(wrapper.vm.setBackgroundColor('#01f', {})).toEqual({
       style: {
@@ -60,10 +67,7 @@ test('colorable.js', ({ mount }) => {
   })
 
   it('should compute data with text css color', async () => {
-    const wrapper = mount({
-      mixins: [ Colorable ],
-      render: h => h('div')
-    })
+    const wrapper = mountFunction()
 
     expect(wrapper.vm.setTextColor('#01f', {})).toEqual({
       style: {
