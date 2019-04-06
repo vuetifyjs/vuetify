@@ -128,6 +128,5 @@ describe('VDataIterator.ts', () => {
 
     expect(wrapper.vm.everyItem).toBe(false)
     expect(wrapper.vm.someItems).toBe(false)
-
   })
 })
