@@ -7,6 +7,7 @@ import {
   Wrapper
 } from '@vue/test-utils'
 
+// eslint-disable-next-line max-statements
 describe('VDialog.ts', () => {
   type Instance = InstanceType<typeof VDialog>
   let mountFunction: (options?: object) => Wrapper<Instance>

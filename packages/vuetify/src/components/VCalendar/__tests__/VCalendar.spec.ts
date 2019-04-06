@@ -98,14 +98,4 @@ describe('VCalendar', () => {
 
     expect(wrapper.vm.parsedValue.date).toBe('2019-01-29')
   })
-
-  it('should calculate end', async () => {
-    const wrapper = mountFunction({
-      propsData: {
-        end: '2018-12-04'
-      }
-    })
-
-    expect(wrapper.vm.parsedValue.date).toEqual(new Date().toISOString().split('T')[0])
-  })
 })
