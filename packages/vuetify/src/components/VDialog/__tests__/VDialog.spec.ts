@@ -7,6 +7,7 @@ import {
   Wrapper
 } from '@vue/test-utils'
 
+// eslint-disable-next-line max-statements
 describe('VDialog.ts', () => {
   type Instance = InstanceType<typeof VDialog>
   let mountFunction: (options?: object) => Wrapper<Instance>
@@ -283,5 +284,14 @@ describe('VDialog.ts', () => {
     expect(input).toHaveBeenCalledWith(true)
     wrapper.vm.closeConditional(new Event('click'))
     expect(clickOutside).toHaveBeenCalled()
+  })
+
+  // Ensure dialog opens up when provided a default value
+  it('should set model active before mounted', () => {
+    const wrapper = mountFunction({
+      propsData: { value: true }
+    })
+
+    expect(wrapper.vm.isActive).toBe(true)
   })
 })
