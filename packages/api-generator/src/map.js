@@ -11,7 +11,6 @@ const asyncForEach = async (array, callback) => {
 const getMapData = async () => {
   let maps = {}
   await asyncForEach(fs.readdirSync('./src/maps'), async mapFile => {
-    console.log(mapFile)
     const compMap = require(`./maps/${mapFile}`)
     maps = Object.assign(maps, compMap)
   })
