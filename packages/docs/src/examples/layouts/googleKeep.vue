@@ -116,8 +116,8 @@
   }
 </script>
 
-<style lang="stylus">
-  #keep
-    .v-navigation-drawer__border
-      display: none
+<style lang="sass">
+#keep
+  .v-navigation-drawer__border
+    display: none
 </style>

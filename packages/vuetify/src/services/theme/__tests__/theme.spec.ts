@@ -218,4 +218,28 @@ describe('Theme.ts', () => {
 
     expect(spy).toHaveBeenCalledTimes(4)
   })
+
+  it('should reset themes', async () => {
+    const theme = new Theme(mock)
+    const spy = jest.spyOn(theme, 'applyTheme')
+    theme.init(instance)
+
+    expect(theme.generatedStyles).toMatchSnapshot()
+    theme.resetThemes()
+    expect(theme.generatedStyles).toMatchSnapshot()
+    expect(spy).toHaveBeenCalledTimes(2)
+  })
+
+  it('should set theme', () => {
+    const theme = new Theme(mock)
+    const spy = jest.spyOn(theme, 'applyTheme')
+    theme.init(instance)
+
+    expect(theme.generatedStyles).toMatchSnapshot()
+    theme.setTheme('light', { accent: '#c0ffee' })
+    expect(theme.generatedStyles).toMatchSnapshot()
+    theme.setTheme('dark', { accent: '#c0ffee' })
+    expect(theme.generatedStyles).toMatchSnapshot()
+    expect(spy).toHaveBeenCalledTimes(3)
+  })
 })

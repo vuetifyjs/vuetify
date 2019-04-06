@@ -88,14 +88,11 @@
   }
 </script>
 
-<style lang="stylus">
-.v-data-iterator--faq {
-  p {
-    margin: 0;
-  }
-}
+<style lang="sass">
+.v-data-iterator--faq
+  p
+    margin: 0
 
-.text-decoration-none {
-  text-decoration: none;
-}
+.text-decoration-none
+  text-decoration: none
 </style>

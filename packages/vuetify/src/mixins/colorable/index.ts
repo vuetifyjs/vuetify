@@ -16,11 +16,15 @@ export default Vue.extend({
   methods: {
     setBackgroundColor (color?: string | false, data: VNodeData = {}): VNodeData {
       if (typeof data.style === 'string') {
+        // istanbul ignore next
         consoleError('style must be an object', this)
+        // istanbul ignore next
         return data
       }
       if (typeof data.class === 'string') {
+        // istanbul ignore next
         consoleError('class must be an object', this)
+        // istanbul ignore next
         return data
       }
       if (isCssColor(color)) {
@@ -41,11 +45,15 @@ export default Vue.extend({
 
     setTextColor (color?: string | false, data: VNodeData = {}): VNodeData {
       if (typeof data.style === 'string') {
+        // istanbul ignore next
         consoleError('style must be an object', this)
+        // istanbul ignore next
         return data
       }
       if (typeof data.class === 'string') {
+        // istanbul ignore next
         consoleError('class must be an object', this)
+        // istanbul ignore next
         return data
       }
       if (isCssColor(color)) {
