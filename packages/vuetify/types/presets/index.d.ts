@@ -1,14 +1,13 @@
+import { VuetifyBreakpointOptions } from 'vuetify/types/services/breakpoint'
 import { VuetifyIconOptions } from 'vuetify/types/services/icons'
+import { VuetifyLangOptions } from 'vuetify/types/services/lang'
 import { VuetifyThemeOptions } from 'vuetify/types/services/theme'
 
 export interface VuetifyPreset {
   [name: string]: any
 
-  ssr?: boolean
-  locale?: {
-    lang?: string
-    rtl?: boolean
-  }
-  icons: VuetifyIconOptions
-  theme: VuetifyThemeOptions
+  breakpoint?: VuetifyBreakpointOptions
+  locale?: VuetifyLangOptions
+  icons?: VuetifyIconOptions
+  theme?: VuetifyThemeOptions
 }

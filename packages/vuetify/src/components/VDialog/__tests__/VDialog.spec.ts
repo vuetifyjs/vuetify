@@ -284,4 +284,13 @@ describe('VDialog.ts', () => {
     wrapper.vm.closeConditional(new Event('click'))
     expect(clickOutside).toHaveBeenCalled()
   })
+
+  // Ensure dialog opens up when provided a default value
+  it('should set model active before mounted', () => {
+    const wrapper = mountFunction({
+      propsData: { value: true }
+    })
+
+    expect(wrapper.vm.isActive).toBe(true)
+  })
 })
