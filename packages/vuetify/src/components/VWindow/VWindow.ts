@@ -2,6 +2,8 @@
 import './VWindow.sass'
 
 // Components
+import VBtn from '../VBtn'
+import VIcon from '../VIcon'
 import { BaseItemGroup } from '../VItemGroup/VItemGroup'
 
 // Directives
@@ -27,14 +29,25 @@ export default BaseItemGroup.extend({
       type: String,
       default: 'v-window-item--active'
     },
+    continuous: Boolean,
     mandatory: {
       type: Boolean,
       default: true
+    },
+    nextIcon: {
+      type: [Boolean, String],
+      default: '$vuetify.icons.next'
+    },
+    prevIcon: {
+      type: [Boolean, String],
+      default: '$vuetify.icons.prev'
     },
     reverse: {
       type: Boolean,
       default: undefined
     },
+    showArrows: Boolean,
+    showArrowsOnHover: Boolean,
     touch: Object,
     touchless: Boolean,
     value: {
@@ -45,6 +58,7 @@ export default BaseItemGroup.extend({
 
   data () {
     return {
+      changedByDelimiters: false,
       internalHeight: undefined as undefined | string,
       isActive: false,
       isBooted: false,
@@ -53,13 +67,17 @@ export default BaseItemGroup.extend({
   },
 
   computed: {
+    classes (): object {
+      return {
+        ...BaseItemGroup.options.computed.classes.call(this),
+        'v-window--show-arrows-on-hover': this.showArrowsOnHover
+      }
+    },
     computedTransition (): string {
       if (!this.isBooted) return ''
 
       const axis = this.vertical ? 'y' : 'x'
-      const direction = this.internalReverse === !this.$vuetify.rtl
-        ? '-reverse'
-        : ''
+      const direction = this.internalReverse ? '-reverse' : ''
 
       return `v-window-${axis}${direction}-transition`
     },
@@ -67,6 +85,12 @@ export default BaseItemGroup.extend({
       return Boolean(
         this.items.find(item => !item.disabled)
       )
+    },
+    hasNext (): boolean {
+      return this.continuous || this.internalIndex < this.items.length - 1
+    },
+    hasPrev (): boolean {
+      return this.continuous || this.internalIndex > 0
     },
     internalIndex (): number {
       return this.items.findIndex((item, i) => {
@@ -90,6 +114,12 @@ export default BaseItemGroup.extend({
 
   methods: {
     genContainer (): VNode {
+      const children = [this.$slots.default]
+
+      if (this.showArrows) {
+        children.push(this.genControlIcons())
+      }
+
       return this.$createElement('div', {
         staticClass: 'v-window__container',
         class: {
@@ -98,7 +128,68 @@ export default BaseItemGroup.extend({
         style: {
           height: this.internalHeight
         }
-      }, this.$slots.default)
+      }, children)
+    },
+    genIcon (
+      direction: 'prev' | 'next',
+      icon: string,
+      fn: () => void
+    ) {
+      return this.$createElement('div', {
+        staticClass: `v-window__${direction}`
+      }, [
+        this.$createElement(VBtn, {
+          props: {
+            icon: true
+          },
+          attrs: {
+            'aria-label': this.$vuetify.lang.t(`$vuetify.carousel.${direction}`)
+          },
+          on: {
+            click: () => {
+              this.changedByDelimiters = true
+              fn()
+            }
+          }
+        }, [
+          this.$createElement(VIcon, {
+            props: { size: 40 }
+          }, icon)
+        ])
+      ])
+    },
+    genControlIcons () {
+      const icons = []
+
+      const prevIcon = this.$vuetify.rtl
+        ? this.nextIcon
+        : this.prevIcon
+
+      /* istanbul ignore else */
+      if (
+        this.hasPrev &&
+        prevIcon &&
+        typeof prevIcon === 'string'
+      ) {
+        const icon = this.genIcon('prev', prevIcon, this.prev)
+        icon && icons.push(icon)
+      }
+
+      const nextIcon = this.$vuetify.rtl
+        ? this.prevIcon
+        : this.nextIcon
+
+      /* istanbul ignore else */
+      if (
+        this.hasNext &&
+        nextIcon &&
+        typeof nextIcon === 'string'
+      ) {
+        const icon = this.genIcon('next', nextIcon, this.next)
+        icon && icons.push(icon)
+      }
+
+      return icons
     },
     getNextIndex (index: number): number {
       const nextIndex = (index + 1) % this.items.length
@@ -117,8 +208,9 @@ export default BaseItemGroup.extend({
       return prevIndex
     },
     next () {
-      this.isReverse = false
+      this.isReverse = this.$vuetify.rtl
 
+      /* istanbul ignore if */
       if (!this.hasActiveItems) return
 
       const nextIndex = this.getNextIndex(this.internalIndex)
@@ -127,8 +219,9 @@ export default BaseItemGroup.extend({
       this.internalValue = this.getValue(item, nextIndex)
     },
     prev () {
-      this.isReverse = true
+      this.isReverse = !this.$vuetify.rtl
 
+      /* istanbul ignore if */
       if (!this.hasActiveItems) return
 
       const lastIndex = this.getPrevIndex(this.internalIndex)
@@ -137,6 +230,11 @@ export default BaseItemGroup.extend({
       this.internalValue = this.getValue(item, lastIndex)
     },
     updateReverse (val: number, oldVal: number) {
+      if (this.changedByDelimiters) {
+        this.changedByDelimiters = false
+        return
+      }
+
       this.isReverse = val < oldVal
     }
   },
@@ -144,13 +242,18 @@ export default BaseItemGroup.extend({
   render (h): VNode {
     const data = {
       staticClass: 'v-window',
+      class: this.classes,
       directives: [] as VNodeDirective[]
     }
 
     if (!this.touchless) {
       const value = this.touch || {
-        left: this.next,
-        right: this.prev
+        left: () => {
+          this.$vuetify.rtl ? this.prev() : this.next()
+        },
+        right: () => {
+          this.$vuetify.rtl ? this.next() : this.prev()
+        }
       }
 
       data.directives.push({

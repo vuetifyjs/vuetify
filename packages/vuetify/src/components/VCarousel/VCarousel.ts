@@ -7,6 +7,7 @@ import VWindow from '../VWindow/VWindow'
 // Components
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'
+import VProgressLinear from '../VProgressLinear'
 
 // Mixins
 // TODO: Move this into core components v2.0
@@ -18,16 +19,17 @@ import { deprecate } from '../../util/console'
 
 // Types
 import { VNode } from 'vue'
-import { VNodeDirective } from 'vue/types/vnode'
+import { PropValidator } from 'vue/types/options'
 
 export default VWindow.extend({
   name: 'v-carousel',
 
   props: {
-    cycle: {
+    continuous: {
       type: Boolean,
       default: true
     },
+    cycle: Boolean,
     delimiterIcon: {
       type: String,
       default: '$vuetify.icons.delimiter'
@@ -38,48 +40,54 @@ export default VWindow.extend({
     },
     hideControls: Boolean,
     hideDelimiters: Boolean,
+    hideDelimiterBackground: Boolean,
+    progress: Boolean,
+    progressColor: String,
     interval: {
       type: [Number, String],
       default: 6000,
       validator: (value: string | number) => value > 0
     },
+    showArrows: {
+      type: Boolean,
+      default: true
+    },
     mandatory: {
       type: Boolean,
       default: true
     },
-    nextIcon: {
-      type: [Boolean, String],
-      default: '$vuetify.icons.next'
-    },
-    prevIcon: {
-      type: [Boolean, String],
-      default: '$vuetify.icons.prev'
-    }
+    verticalDelimiters: {
+      type: String,
+      default: undefined
+    } as PropValidator<'' | 'left' | 'right'>
   },
 
   data () {
     return {
-      changedByDelimiters: false,
       internalHeight: this.height,
       slideTimeout: undefined as number | undefined
     }
   },
 
   computed: {
+    classes (): object {
+      return {
+        ...VWindow.options.computed.classes.call(this),
+        'v-carousel': true,
+        'v-carousel--hide-delimiter-background': this.hideDelimiterBackground,
+        'v-carousel--vertical-delimiters': this.isVertical
+      }
+    },
     isDark (): boolean {
       return this.dark || !this.light
+    },
+    isVertical (): boolean {
+      return this.verticalDelimiters != null
     }
   },
 
   watch: {
-    internalValue (val) {
-      this.restartTimeout()
-      /* @deprecate */
-      /* istanbul ignore else */
-      if (!this.$listeners['input']) return
-
-      this.$emit('input', val)
-    },
+    internalValue: 'restartTimeout',
     interval: 'restartTimeout',
     height (val, oldVal) {
       if (val === oldVal || !val) return
@@ -95,69 +103,31 @@ export default VWindow.extend({
     }
   },
 
-  mounted () {
-    /* @deprecate */
-    /* istanbul ignore next */
-    if (this.$listeners['input']) {
-      deprecate('@input', '@change', this)
+  created () {
+    /* istanbul ignore if */
+    if (this.hideControls) {
+      deprecate('hide-controls', ':show-arrows="false"', this)
     }
+  },
+
+  mounted () {
     this.startTimeout()
   },
 
   methods: {
+    genControlIcons () {
+      if (this.isVertical) return null
+
+      return VWindow.options.methods.genControlIcons.call(this)
+    },
     genDelimiters (): VNode {
       return this.$createElement('div', {
-        staticClass: 'v-carousel__controls'
+        staticClass: 'v-carousel__controls',
+        style: {
+          left: this.verticalDelimiters === 'left' && this.isVertical ? 0 : 'auto',
+          right: this.verticalDelimiters === 'right' ? 0 : 'auto'
+        }
       }, [this.genItems()])
-    },
-    genIcon (
-      direction: 'prev' | 'next',
-      icon: string,
-      fn: () => void
-    ): VNode {
-      return this.$createElement('div', {
-        staticClass: `v-carousel__${direction}`
-      }, [
-        this.$createElement(VBtn, {
-          props: {
-            icon: true
-          },
-          attrs: {
-            'aria-label': this.$vuetify.lang.t(`$vuetify.carousel.${direction}`)
-          },
-          on: {
-            click: () => {
-              this.changedByDelimiters = true
-              fn()
-            }
-          }
-        }, [
-          this.$createElement(VIcon, {
-            props: { 'size': '46px' }
-          }, icon)
-        ])
-      ])
-    },
-    genIcons (): VNode[] {
-      const icons = []
-
-      const prevIcon = this.$vuetify.rtl
-        ? this.nextIcon
-        : this.prevIcon
-
-      if (prevIcon && typeof prevIcon === 'string') {
-        icons.push(this.genIcon('prev', prevIcon, this.prev))
-      }
-
-      const nextIcon = this.$vuetify.rtl
-        ? this.prevIcon
-        : this.nextIcon
-
-      if (nextIcon && typeof nextIcon === 'string') {
-        icons.push(this.genIcon('next', nextIcon, this.next))
-      }
-
-      return icons
     },
     genItems (): VNode {
       const length = this.items.length
@@ -165,9 +135,7 @@ export default VWindow.extend({
 
       for (let i = 0; i < length; i++) {
         const child = this.$createElement(VBtn, {
-          class: {
-            'v-carousel__controls__item': true
-          },
+          staticClass: 'v-carousel__controls__item',
           props: {
             icon: true,
             small: true,
@@ -193,6 +161,15 @@ export default VWindow.extend({
         }
       }, children)
     },
+    genProgress () {
+      return this.$createElement(VProgressLinear, {
+        staticClass: 'v-carousel__progress',
+        props: {
+          color: this.progressColor,
+          value: (this.internalIndex + 1) / this.items.length * 100
+        }
+      })
+    },
     restartTimeout () {
       this.slideTimeout && clearTimeout(this.slideTimeout)
       this.slideTimeout = undefined
@@ -204,46 +181,24 @@ export default VWindow.extend({
       if (!this.cycle) return
 
       this.slideTimeout = window.setTimeout(this.next, +this.interval > 0 ? +this.interval : 6000)
-    },
-    updateReverse (val: number, oldVal: number) {
-      if (this.changedByDelimiters) {
-        this.changedByDelimiters = false
-        return
-      }
-
-      VWindow.options.methods.updateReverse.call(this, val, oldVal)
     }
   },
 
   render (h): VNode {
-    const children = []
-    const data = {
-      staticClass: 'v-window v-carousel',
-      style: {
-        height: convertToUnit(this.height)
-      },
-      directives: [] as VNodeDirective[]
+    const render = VWindow.options.render.call(this, h)
+
+    render.data!.style = `height: ${convertToUnit(this.height)};`
+
+    /* istanbul ignore else */
+    if (!this.hideDelimiters) {
+      render.children!.push(this.genDelimiters())
     }
 
     /* istanbul ignore else */
-    if (!this.touchless) {
-      data.directives.push({
-        name: 'touch',
-        value: {
-          left: this.next,
-          right: this.prev
-        }
-      } as VNodeDirective)
+    if (this.progress || this.progressColor) {
+      render.children!.push(this.genProgress())
     }
 
-    if (!this.hideControls) {
-      children.push(this.genIcons())
-    }
-
-    if (!this.hideDelimiters) {
-      children.push(this.genDelimiters())
-    }
-
-    return h('div', data, [this.genContainer(), children])
+    return render
   }
 })

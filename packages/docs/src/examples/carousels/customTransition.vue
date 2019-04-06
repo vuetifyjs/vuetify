@@ -4,8 +4,8 @@
       v-for="(item,i) in items"
       :key="i"
       :src="item.src"
-      reverse-transition="fade"
-      transition="fade"
+      reverse-transition="fade-transition"
+      transition="fade-transition"
     ></v-carousel-item>
   </v-carousel>
 </template>
@@ -32,16 +32,3 @@
     }
   }
 </script>
-
-<style lang="sass">
-#example-custom-transition
-  .fade
-    &-enter-active, &-leave-active, &-leave-to
-      transition: .3s ease-out
-      position: absolute
-      top: 0
-      left: 0
-
-    &-enter, &-leave, &-leave-to
-      opacity: 0
-</style>
