@@ -93,21 +93,21 @@
   }
 </script>
 
-<style lang="stylus">
-  #app-toolbar
-    .v-toolbar__title
-      margin-left .5em
+<style lang="sass">
+#app-toolbar
+  .v-toolbar__title
+    margin-left .5em
+    font-weight 300
+    font-size 21px
+    position relative
+    top 1px
+
+  .v-toolbar__items
+    .v-btn
+      text-transform capitalize
+      font-size 16px
       font-weight 300
-      font-size 21px
-      position relative
-      top 1px
 
-    .v-toolbar__items
-      .v-btn
-        text-transform capitalize
-        font-size 16px
-        font-weight 300
-
-    .v-toolbar__extension
-      padding: 0
+  .v-toolbar__extension
+    padding: 0
 </style>

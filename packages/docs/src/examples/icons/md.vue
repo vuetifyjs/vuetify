@@ -58,9 +58,9 @@
   </v-container>
 </template>
 
-<style lang="stylus">
-  .group
-    display: flex
-    flex: 1
-    justify-content: space-around
+<style lang="sass">
+.group
+  display: flex
+  flex: 1
+  justify-content: space-around
 </style>

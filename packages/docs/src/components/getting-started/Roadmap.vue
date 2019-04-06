@@ -106,8 +106,8 @@
   }
 </script>
 
-<style lang="stylus">
-  #roadmap .v-timeline-item__body
-    p
-      margin: 0
+<style lang="sass">
+#roadmap .v-timeline-item__body
+  p
+    margin: 0
 </style>
