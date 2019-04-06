@@ -102,6 +102,16 @@ exports[`VDataIterator.ts should create valid item slot scope 2`] = `
 
 `;
 
+exports[`VDataIterator.ts should hide footer 1`] = `
+
+<div class="v-data-iterator">
+  <div>
+    No data available
+  </div>
+</div>
+
+`;
+
 exports[`VDataIterator.ts should render and match snapshot 1`] = `
 
 <div class="v-data-iterator">

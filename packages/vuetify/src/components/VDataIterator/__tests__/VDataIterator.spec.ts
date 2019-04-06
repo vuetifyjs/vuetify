@@ -111,4 +111,134 @@ describe('VDataIterator.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should select all', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: [ { id: 'foo' }, { id: 'bar' } ]
+      }
+    })
+
+    expect(wrapper.vm.isSelected({ id: 'foo' })).toBeFalsy()
+    expect(wrapper.vm.isSelected({ id: 'bar' })).toBeFalsy()
+
+    wrapper.vm.toggleSelectAll(true)
+    expect(wrapper.vm.isSelected({ id: 'foo' })).toBeTruthy()
+    expect(wrapper.vm.isSelected({ id: 'bar' })).toBeTruthy()
+
+    wrapper.vm.toggleSelectAll(false)
+    expect(wrapper.vm.isSelected({ id: 'foo' })).toBeFalsy()
+    expect(wrapper.vm.isSelected({ id: 'bar' })).toBeFalsy()
+  })
+
+  it('should update expansion', () => {
+    const mock = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        items: [ { id: 'foo' }, { id: 'bar' } ]
+      }
+    })
+    wrapper.vm.$watch('expansion', mock)
+
+    wrapper.setProps({
+      expanded: [ { id: 'foo' } ]
+    })
+    expect(mock).toHaveBeenLastCalledWith({ foo: true }, {})
+
+    wrapper.setProps({
+      expanded: [ { id: 'bar' } ]
+    })
+    expect(mock).toHaveBeenLastCalledWith({ bar: true }, { foo: true })
+  })
+
+  it('should update selection', () => {
+    const mock = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        items: [ { id: 'foo' }, { id: 'bar' } ]
+      }
+    })
+    wrapper.vm.$watch('selection', mock)
+
+    wrapper.setProps({
+      value: [ { id: 'foo' } ]
+    })
+    expect(mock).toHaveBeenLastCalledWith({ foo: true }, {})
+
+    wrapper.setProps({
+      value: [ { id: 'bar' } ]
+    })
+    expect(mock).toHaveBeenLastCalledWith({ bar: true }, { foo: true })
+  })
+
+  it('should check if all items are selected', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: [ { id: 'foo' }, { id: 'bar' } ]
+      }
+    })
+
+    wrapper.setProps({
+      value: [ { id: 'foo' } ]
+    })
+    expect(wrapper.vm.everyItem).toBeFalsy()
+
+    wrapper.setProps({
+      value: [ { id: 'bar' } ]
+    })
+    expect(wrapper.vm.everyItem).toBeFalsy()
+
+    wrapper.setProps({
+      value: [ { id: 'foo' }, { id: 'bar' } ]
+    })
+    expect(wrapper.vm.everyItem).toBeTruthy()
+
+    wrapper.setProps({
+      items: []
+    })
+    expect(wrapper.vm.everyItem).toBeFalsy()
+  })
+
+  it('should check if some items are selected', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: [ { id: 'foo' }, { id: 'bar' } ]
+      }
+    })
+
+    wrapper.setProps({
+      value: [ { id: 'foo' } ]
+    })
+    expect(wrapper.vm.someItems).toBeTruthy()
+
+    wrapper.setProps({
+      value: [ { id: 'bar' } ]
+    })
+    expect(wrapper.vm.someItems).toBeTruthy()
+
+    wrapper.setProps({
+      value: [ { id: 'foo' }, { id: 'bar' } ]
+    })
+    expect(wrapper.vm.someItems).toBeTruthy()
+
+    wrapper.setProps({
+      value: []
+    })
+    expect(wrapper.vm.someItems).toBeFalsy()
+
+    wrapper.setProps({
+      items: []
+    })
+    expect(wrapper.vm.someItems).toBeFalsy()
+  })
+
+  it('should hide footer', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        hideDefaultFooter: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
