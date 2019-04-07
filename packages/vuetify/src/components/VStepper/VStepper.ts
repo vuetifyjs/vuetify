@@ -7,16 +7,19 @@ import VStepperContent from './VStepperContent'
 
 // Mixins
 import { provide as RegistrableProvide } from '../../mixins/registrable'
+import Proxyable from '../../mixins/proxyable'
 import Themeable from '../../mixins/themeable'
 
 // Utilities
 import mixins from '../../util/mixins'
+import { deprecate } from '../../util/console'
 
 // Types
 import { VNode } from 'vue'
 
 const baseMixins = mixins(
   RegistrableProvide('stepper'),
+  Proxyable,
   Themeable
 )
 
@@ -37,13 +40,11 @@ export default baseMixins.extend({
   props: {
     nonLinear: Boolean,
     altLabels: Boolean,
-    vertical: Boolean,
-    value: [Number, String]
+    vertical: Boolean
   },
 
   data () {
     return {
-      inputValue: null as any,
       isBooted: false,
       steps: [] as VStepperStepInstance[],
       content: [] as VStepperContentInstance[],
@@ -64,25 +65,33 @@ export default baseMixins.extend({
   },
 
   watch: {
-    inputValue (val, prev) {
+    internalValue (val, prev) {
       this.isReverse = Number(val) < Number(prev)
       for (let index = this.steps.length; --index >= 0;) {
-        this.steps[index].toggle(this.inputValue)
+        this.steps[index].toggle(this.internalValue as any)
       }
       for (let index = this.content.length; --index >= 0;) {
-        this.content[index].toggle(this.inputValue, this.isReverse)
+        this.content[index].toggle(this.internalValue as any, this.isReverse)
       }
 
-      this.$emit('input', this.inputValue)
       prev && (this.isBooted = true)
-    },
-    value () {
-      this.$nextTick(() => (this.inputValue = this.value))
+
+      /* istanbul ignore if */
+      if (this.$listeners.input) {
+        this.$emit('input', val)
+      }
+    }
+  },
+
+  created () {
+    /* istanbul ignore if */
+    if (this.$listeners.input) {
+      deprecate('input', 'change', this)
     }
   },
 
   mounted () {
-    this.inputValue = this.value || this.steps[0].step || 1
+    this.internalLazyValue = this.value || this.steps[0].step || 1
   },
 
   methods: {
@@ -103,7 +112,7 @@ export default baseMixins.extend({
       }
     },
     stepClick (step: string | number) {
-      this.$nextTick(() => (this.inputValue = step))
+      this.$nextTick(() => (this.internalValue = step))
     }
   },
 
