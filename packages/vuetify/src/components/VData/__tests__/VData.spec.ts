@@ -213,4 +213,54 @@ describe('VData.ts', () => {
     expect('[Vue warn]: The computed property "pageStart" is already defined in data.').toHaveBeenWarned()
     expect('[Vue warn]: The computed property "pageStop" is already defined in data.').toHaveBeenWarned()
   })
+
+  it('should conditionally sort items', () => {
+    const items = [
+      { text: 'Foo', id: 1 },
+      { text: 'Bar', id: 2 },
+      { text: 'Fizz', id: 3 },
+      { text: 'Buzz', id: 4 },
+      { text: 'Fizzbuzz', id: 5 }
+    ]
+    const wrapper = mountFunction({
+      propsData: { items }
+    })
+
+    expect(wrapper.vm.computedItems).toEqual(items)
+
+    wrapper.setProps({ sortBy: 'text' })
+
+    expect(wrapper.vm.computedItems[0]).toEqual(items[1])
+
+    wrapper.setProps({ disableSort: true })
+
+    expect(wrapper.vm.computedItems).toEqual(items)
+  })
+
+  it('should conditionally paginate items', () => {
+    const items = [
+      { text: 'Foo', id: 1 },
+      { text: 'Bar', id: 2 },
+      { text: 'Fizz', id: 3 },
+      { text: 'Buzz', id: 4 },
+      { text: 'Fizzbuzz', id: 5 }
+    ]
+    const wrapper = mountFunction({
+      propsData: { items }
+    })
+
+    expect(wrapper.vm.computedItems).toEqual(items)
+
+    wrapper.setProps({ itemsPerPage: 2 })
+
+    expect(wrapper.vm.computedItems).toHaveLength(2)
+    expect(wrapper.vm.computedItems).toEqual([
+      items[0],
+      items[1]
+    ])
+
+    wrapper.setProps({ disablePagination: true })
+
+    expect(wrapper.vm.computedItems).toHaveLength(5)
+  })
 })
