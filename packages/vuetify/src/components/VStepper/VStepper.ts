@@ -9,20 +9,22 @@ import VStepperContent from './VStepperContent'
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 import Themeable from '../../mixins/themeable'
 
-// Util
+// Utilities
 import mixins from '../../util/mixins'
 
 // Types
 import { VNode } from 'vue'
 
+const baseMixins = mixins(
+  RegistrableProvide('stepper'),
+  Themeable
+)
+
 type VStepperStepInstance = InstanceType<typeof VStepperStep>
 type VStepperContentInstance = InstanceType<typeof VStepperContent>
 
-export default mixins(
-  RegistrableProvide('stepper'),
-  Themeable
 /* @vue/component */
-).extend({
+export default baseMixins.extend({
   name: 'v-stepper',
 
   provide (): object {
@@ -52,7 +54,6 @@ export default mixins(
   computed: {
     classes (): object {
       return {
-        'v-stepper': true,
         'v-stepper--is-booted': this.isBooted,
         'v-stepper--vertical': this.vertical,
         'v-stepper--alt-labels': this.altLabels,
@@ -108,7 +109,8 @@ export default mixins(
 
   render (h): VNode {
     return h('div', {
-      'class': this.classes
+      staticClass: 'v-stepper',
+      class: this.classes
     }, this.$slots.default)
   }
 })
