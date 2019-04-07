@@ -1,3 +1,4 @@
+// Styles
 import './VEditDialog.sass'
 
 // Mixins
@@ -7,14 +8,17 @@ import Themeable from '../../mixins/themeable'
 // Utils
 import { keyCodes } from '../../util/helpers'
 
+// Component
 import VBtn from '../VBtn'
 import VMenu from '../VMenu'
 
-/* @vue/component */
-export default {
-  name: 'v-edit-dialog',
+// Types
+import { VNode, VNodeChildren } from 'vue'
+import mixins from '../../util/mixins'
 
-  mixins: [Returnable, Themeable],
+/* @vue/component */
+export default mixins(Returnable, Themeable).extend({
+  name: 'v-edit-dialog',
 
   props: {
     cancelText: {
@@ -55,10 +59,10 @@ export default {
       this.$emit('cancel')
     },
     focus () {
-      const input = this.$refs.content.querySelector('input')
+      const input = (this.$refs.content as Element).querySelector('input')
       input && input.focus()
     },
-    genButton (fn, text) {
+    genButton (fn: Function, text: VNodeChildren): VNode {
       return this.$createElement(VBtn, {
         props: {
           text: true,
@@ -68,7 +72,7 @@ export default {
         on: { click: fn }
       }, text)
     },
-    genActions () {
+    genActions (): VNode {
       return this.$createElement('div', {
         'class': 'v-small-dialog__actions'
       }, [
@@ -79,11 +83,11 @@ export default {
         }, this.saveText)
       ])
     },
-    genContent () {
+    genContent (): VNode {
       return this.$createElement('div', {
         on: {
-          keydown: e => {
-            const input = this.$refs.content.querySelector('input')
+          keydown: (e: KeyboardEvent) => {
+            const input = (this.$refs.content as Element).querySelector('input')
             e.keyCode === keyCodes.esc && this.cancel()
             if (e.keyCode === keyCodes.enter && input) {
               this.save(input.value)
@@ -96,7 +100,7 @@ export default {
     }
   },
 
-  render (h) {
+  render (h): VNode {
     return h(VMenu, {
       staticClass: 'v-small-dialog',
       class: this.themeClasses,
@@ -113,7 +117,7 @@ export default {
         dark: this.dark
       },
       on: {
-        input: val => (this.isActive = val)
+        input: (val: boolean) => (this.isActive = val)
       }
     }, [
       h('a', {
@@ -123,4 +127,4 @@ export default {
       this.large ? this.genActions() : null
     ])
   }
-}
+})

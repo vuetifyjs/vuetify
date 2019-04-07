@@ -1,39 +1,19 @@
 @import '../../styles/styles.sass'
 
 .v-carousel
-  width: 100%
-  position: relative
   overflow: hidden
-  +elevation(2)
-
-  &__prev,
-  &__next
-    position: absolute
-    top: 50%
-    z-index: 1
-    transform: translateY(-50%)
-
-    .v-btn
-      margin: 0
-      height: auto
-      width: auto
-
-      i
-        font-size: 48px
-
-      &:hover
-        background: none
+  position: relative
+  width: 100%
 
   &__controls
-    background: rgba(0, 0, 0, .5)
     align-items: center
+    background: rgba(0, 0, 0, .3)
     bottom: 0
     display: flex
-    justify-content: center
-    left: 0
-    position: absolute
     height: 50px
+    justify-content: center
     list-style-type: none
+    position: absolute
     width: 100%
     z-index: 1
 
@@ -41,11 +21,10 @@
       flex: 0 1 auto
 
     &__item
-      margin: 0 8px !important
+      margin: 0 8px
 
       .v-icon
         opacity: .5
-        transition: $primary-transition
 
       &--active
         .v-icon
@@ -58,17 +37,25 @@
         .v-icon
           opacity: .8
 
-  &__prev
-    left: 5px
+// Element
+.v-carousel__progress
+  margin: 0
+  position: absolute
+  bottom: 0
+  left: 0
+  right: 0
 
-  &__next
-    right: 5px
+.v-carousel .v-window-item
+  display: block
+  height: inherit
+  text-decoration: none
 
-  +rtl()
-    &__prev
-      left: auto
-      right: 5px
+// Modifier
+.v-carousel--hide-delimiter-background
+  .v-carousel__controls
+    background: transparent
 
-    &__next
-      left: 5px
-      right: auto
+.v-carousel--vertical-delimiters
+  .v-carousel__controls
+    height: 100% !important
+    width: 50px
