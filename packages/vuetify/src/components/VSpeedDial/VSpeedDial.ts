@@ -1,27 +1,33 @@
+// Styles
 import './VSpeedDial.sass'
 
+// Mixins
 import Toggleable from '../../mixins/toggleable'
 import Positionable from '../../mixins/positionable'
 import Transitionable from '../../mixins/transitionable'
 
+// Directives
 import ClickOutside from '../../directives/click-outside'
 
+// Types
+import mixins from '../../util/mixins'
+import { VNode, VNodeData } from 'vue'
+import { PropValidator } from 'vue/types/options'
+
 /* @vue/component */
-export default {
+export default mixins(Positionable, Toggleable, Transitionable).extend({
   name: 'v-speed-dial',
 
   directives: { ClickOutside },
-
-  mixins: [Positionable, Toggleable, Transitionable],
 
   props: {
     direction: {
       type: String,
       default: 'top',
-      validator: val => {
+      validator: (val: string) => {
         return ['top', 'right', 'bottom', 'left'].includes(val)
       }
-    },
+    } as PropValidator<'top' | 'right' | 'bottom' | 'left'>,
     openOnHover: Boolean,
     transition: {
       type: String,
@@ -30,7 +36,7 @@ export default {
   },
 
   computed: {
-    classes () {
+    classes (): object {
       return {
         'v-speed-dial': true,
         'v-speed-dial--top': this.top,
@@ -44,9 +50,9 @@ export default {
     }
   },
 
-  render (h) {
-    let children = []
-    const data = {
+  render (h): VNode {
+    let children: VNode[] = []
+    const data: VNodeData = {
       'class': this.classes,
       directives: [{
         name: 'click-outside',
@@ -58,14 +64,14 @@ export default {
     }
 
     if (this.openOnHover) {
-      data.on.mouseenter = () => (this.isActive = true)
-      data.on.mouseleave = () => (this.isActive = false)
+      data.on!.mouseenter = () => (this.isActive = true)
+      data.on!.mouseleave = () => (this.isActive = false)
     }
 
     if (this.isActive) {
       let btnCount = 0
       children = (this.$slots.default || []).map((b, i) => {
-        if (b.tag && b.componentOptions.Ctor.options.name === 'v-btn') {
+        if (b.tag && b.componentOptions!.Ctor.options.name === 'v-btn') {
           btnCount++
           return h('div', {
             style: {
@@ -92,4 +98,4 @@ export default {
 
     return h('div', data, [this.$slots.activator, list])
   }
-}
+})
