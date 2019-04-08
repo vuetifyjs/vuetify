@@ -1,6 +1,9 @@
 // Styles
 import './VNavigationDrawer.sass'
 
+// Components
+import VImg, { srcObject } from '../VImg/VImg'
+
 // Mixins
 import Applicationable from '../../mixins/applicationable'
 import Colorable from '../../mixins/colorable'
@@ -71,6 +74,10 @@ export default baseMixins.extend({
     permanent: Boolean,
     openOnHover: Boolean,
     right: Boolean,
+    src: {
+      type: [String, Object],
+      default: ''
+    } as PropValidator<string | srcObject>,
     stateless: Boolean,
     temporary: Boolean,
     touchless: Boolean,
@@ -262,6 +269,21 @@ export default baseMixins.extend({
     closeConditional () {
       return this.isActive && this.reactsToClick
     },
+    genBackground () {
+      const props = {
+        height: '100%',
+        width: '100%',
+        src: this.src
+      }
+
+      const image = this.$scopedSlots.img
+        ? this.$scopedSlots.img({ props })
+        : this.$createElement(VImg, { props })
+
+      return this.$createElement('div', {
+        staticClass: 'v-navigation-drawer__image'
+      }, [image])
+    },
     genDirectives () {
       const directives = [{
         name: 'click-outside',
@@ -364,6 +386,15 @@ export default baseMixins.extend({
   },
 
   render (h): VNode {
+    const children = [
+      this.genPrepend(),
+      this.genContent(),
+      this.genAppend(),
+      this.genBorder()
+    ]
+
+    if (this.src || this.$scopedSlots.img) children.unshift(this.genBackground())
+
     return h('aside', this.setBackgroundColor(this.color, {
       class: this.classes,
       style: this.styles,
@@ -386,11 +417,6 @@ export default baseMixins.extend({
           window.dispatchEvent(resizeEvent)
         }
       }
-    }), [
-      this.genPrepend(),
-      this.genContent(),
-      this.genAppend(),
-      this.genBorder()
-    ])
+    }), children)
   }
 })
