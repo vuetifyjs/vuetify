@@ -61,7 +61,7 @@ export default baseMixins.extend({
     miniVariant: Boolean,
     miniVariantWidth: {
       type: [Number, String],
-      default: 80
+      default: 56
     },
     mobileBreakPoint: {
       type: [Number, String],
@@ -94,6 +94,9 @@ export default baseMixins.extend({
      */
     applicationProperty (): string {
       return this.right ? 'right' : 'left'
+    },
+    calculatedWidth (): string | number {
+      return this.miniVariant ? this.miniVariantWidth : this.width
     },
     calculatedTransform (): number {
       if (this.isActive) return 0
@@ -181,7 +184,7 @@ export default baseMixins.extend({
         marginTop: convertToUnit(this.marginTop),
         maxHeight: this.maxHeight != null ? `calc(100% - ${convertToUnit(this.maxHeight)})` : undefined,
         transform: `translateX(${convertToUnit(this.calculatedTransform, '%')})`,
-        width: convertToUnit(this.width)
+        width: convertToUnit(this.calculatedWidth)
       }
 
       return styles
@@ -346,7 +349,9 @@ export default baseMixins.extend({
         !this.$el
       ) return 0
 
-      return this.$el.clientWidth
+      const width = Number(this.calculatedWidth)
+
+      return isNaN(width) ? this.$el.clientWidth : width
     }
   },
 
