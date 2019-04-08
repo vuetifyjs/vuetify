@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_navigation-drawer.styl'
+import './VNavigationDrawer.sass'
 
 // Mixins
 import Applicationable from '../../mixins/applicationable'

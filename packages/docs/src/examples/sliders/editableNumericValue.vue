@@ -85,8 +85,8 @@
   }
 </script>
 
-<style lang="stylus">
-  .e4
-    width: 400px
-    margin: auto
+<style lang="sass">
+.e4
+  width: 400px
+  margin: auto
 </style>

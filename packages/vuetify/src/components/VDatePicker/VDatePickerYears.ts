@@ -1,4 +1,4 @@
-import '../../stylus/components/_date-picker-years.styl'
+import './VDatePickerYears.sass'
 
 // Mixins
 import Colorable from '../../mixins/colorable'

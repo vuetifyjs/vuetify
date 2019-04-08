@@ -1,0 +1,81 @@
+@import '../../styles/styles.sass'
+
++theme(v-date-picker-table) using ($material)
+  th,
+  .v-date-picker-table--date__week
+    color: map-deep-get($material, 'text', 'disabled')
+
+.v-date-picker-table
+  position: relative
+  padding: 0 12px
+  height: 242px
+
+  table
+    transition: $primary-transition
+    top: 0
+    table-layout: fixed
+    width: 100%
+
+  td, th
+    text-align: center
+    position: relative
+
+  th
+    font-size: 12px
+
+  &--date .v-btn
+    height: 32px
+    width: 32px
+
+  .v-btn
+    z-index: auto
+    margin: 0
+    font-size: 12px
+
+    &.v-btn--active
+      color: map-get($shades, 'white')
+
+.v-date-picker-table--month
+  td
+    width: 33.333333%
+    height: 56px
+    vertical-align: middle
+    text-align: center
+
+    .v-btn
+      margin: 0 auto
+      max-width: 160px
+      min-width: 40px
+      width: 100%
+
+.v-date-picker-table--date
+  th
+    padding: 8px 0
+    font-weight: 600
+
+  td
+    width: 45px
+
+.v-date-picker-table__events
+  height: 8px
+  left: 0
+  position: absolute
+  text-align: center
+  white-space: pre
+  width: 100%
+
+  > div
+    border-radius: 50%
+    display: inline-block
+    height: 8px
+    margin: 0 1px
+    width: 8px
+
+.v-date-picker-table--date .v-date-picker-table__events
+  bottom: 6px
+
+.v-date-picker-table--month .v-date-picker-table__events
+  bottom: 8px
+
+.v-date-picker-table--disabled
+  pointer-events: none

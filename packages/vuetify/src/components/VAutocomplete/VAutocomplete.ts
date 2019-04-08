@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_autocompletes.styl'
+import './VAutocomplete.sass'
 
 // Extensions
 import VSelect, { defaultMenuProps as VSelectMenuProps } from '../VSelect/VSelect'
@@ -318,6 +318,7 @@ export default baseMixins.extend<options>().extend({
       ) return
 
       const target = e.target as HTMLInputElement
+      const value = target.value
 
       // If typing and menu is not currently active
       if (target.value) {
@@ -326,7 +327,7 @@ export default baseMixins.extend<options>().extend({
       }
 
       this.mask && this.resetSelections(target)
-      this.internalSearch = target.value
+      this.internalSearch = value
       this.badInput = target.validity && target.validity.badInput
     },
     onKeyDown (e: KeyboardEvent) {

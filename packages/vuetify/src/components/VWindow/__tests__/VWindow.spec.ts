@@ -5,13 +5,14 @@ import VWindowItem from '../VWindowItem'
 // Utilities
 import {
   mount,
+  MountOptions,
   Wrapper
 } from '@vue/test-utils'
 import { touch } from '../../../../test'
 
 describe('VWindow.ts', () => {
   type Instance = InstanceType<typeof VWindow>
-  let mountFunction: (options?: object) => Wrapper<Instance>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 
   (global as any).requestAnimationFrame = cb => cb()
 
@@ -20,7 +21,12 @@ describe('VWindow.ts', () => {
       return mount(VWindow, {
         ...options,
         mocks: {
-          $vuetify: { rtl: false }
+          $vuetify: {
+            lang: {
+              t: str => str
+            },
+            rtl: false
+          }
         }
       })
     }
@@ -92,25 +98,25 @@ describe('VWindow.ts', () => {
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.internalValue).toBe(0)
+    expect(wrapper.vm.internalIndex).toBe(0)
 
     wrapper.vm.next()
-    expect(wrapper.vm.internalValue).toBe(1)
+    expect(wrapper.vm.internalIndex).toBe(1)
 
     wrapper.vm.next()
-    expect(wrapper.vm.internalValue).toBe(2)
+    expect(wrapper.vm.internalIndex).toBe(2)
 
     wrapper.vm.next()
-    expect(wrapper.vm.internalValue).toBe(0)
+    expect(wrapper.vm.internalIndex).toBe(0)
 
     wrapper.vm.prev()
-    expect(wrapper.vm.internalValue).toBe(2)
+    expect(wrapper.vm.internalIndex).toBe(2)
 
     wrapper.vm.prev()
-    expect(wrapper.vm.internalValue).toBe(1)
+    expect(wrapper.vm.internalIndex).toBe(1)
 
     wrapper.vm.prev()
-    expect(wrapper.vm.internalValue).toBe(0)
+    expect(wrapper.vm.internalIndex).toBe(0)
   })
 
   it('should update model when internal index is greater than item count', async () => {
@@ -129,18 +135,18 @@ describe('VWindow.ts', () => {
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.internalValue).toBe(2)
+    expect(wrapper.vm.internalIndex).toBe(2)
 
     const [item1, item2, item3] = wrapper.findAll(VWindowItem).wrappers
 
     item3.destroy()
-    expect(wrapper.vm.internalValue).toBe(1)
+    expect(wrapper.vm.internalIndex).toBe(1)
 
     item2.destroy()
-    expect(wrapper.vm.internalValue).toBe(0)
+    expect(wrapper.vm.internalIndex).toBe(0)
 
     item1.destroy()
-    expect(wrapper.vm.internalValue).toBeUndefined()
+    expect(wrapper.vm.internalIndex).toBe(-1)
   })
 
   it('should react to touch', async () => {
@@ -159,23 +165,23 @@ describe('VWindow.ts', () => {
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.internalValue).toBe(1)
+    expect(wrapper.vm.internalIndex).toBe(1)
     touch(wrapper).start(0, 0).end(200, 0)
-    expect(wrapper.vm.internalValue).toBe(0)
+    expect(wrapper.vm.internalIndex).toBe(0)
 
     touch(wrapper).start(0, 0).end(200, 0)
-    expect(wrapper.vm.internalValue).toBe(4)
+    expect(wrapper.vm.internalIndex).toBe(4)
 
     touch(wrapper).start(200, 0).end(0, 0)
-    expect(wrapper.vm.internalValue).toBe(0)
+    expect(wrapper.vm.internalIndex).toBe(0)
 
     wrapper.setProps({ value: 4 })
     touch(wrapper).start(200, 0).end(0, 0)
-    expect(wrapper.vm.internalValue).toBe(0)
+    expect(wrapper.vm.internalIndex).toBe(0)
 
     wrapper.setProps({ value: 0 })
     touch(wrapper).start(0, 0).end(200, 0)
-    expect(wrapper.vm.internalValue).toBe(4)
+    expect(wrapper.vm.internalIndex).toBe(4)
   })
 
   it('should accept a custom touch object', async () => {
@@ -226,10 +232,94 @@ describe('VWindow.ts', () => {
       }
     })
 
-    expect(wrapper.vm.internalValue).toBe(1)
+    expect(wrapper.vm.internalIndex).toBe(1)
     touch(wrapper).start(0, 0).end(200, 0)
-    expect(wrapper.vm.internalValue).toBe(2)
+    expect(wrapper.vm.internalIndex).toBe(2)
     touch(wrapper).start(0, 0).end(200, 0)
-    expect(wrapper.vm.internalValue).toBe(1)
+    expect(wrapper.vm.internalIndex).toBe(1)
+  })
+
+  it('should generate and show arrows', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        showArrows: true
+      },
+      slots: {
+        default: [
+          { extends: VWindowItem },
+          { extends: VWindowItem },
+          { extends: VWindowItem },
+          { extends: VWindowItem }
+        ]
+      }
+    })
+
+    const next = wrapper.find('.v-window__next .v-btn')
+
+    expect(wrapper.vm.hasNext).toBe(true)
+    expect(wrapper.vm.hasPrev).toBe(false)
+
+    next.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.hasNext).toBe(true)
+    expect(wrapper.vm.hasPrev).toBe(true)
+
+    next.trigger('click')
+    next.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.hasNext).toBe(false)
+    expect(wrapper.vm.hasPrev).toBe(true)
+
+    wrapper.setProps({ continuous: true })
+
+    expect(wrapper.vm.hasNext).toBe(true)
+    expect(wrapper.vm.hasPrev).toBe(true)
+  })
+
+  it('should skip disabled items and go to the next available', () => {
+    const props = {
+      disabled: {
+        type: Boolean,
+        default: true
+      }
+    }
+    const wrapper = mountFunction({
+      slots: {
+        default: [
+          { extends: VWindowItem },
+          { extends: VWindowItem, props },
+          { extends: VWindowItem, props },
+          { extends: VWindowItem }
+        ]
+      }
+    })
+
+    expect(wrapper.vm.internalIndex).toBe(0)
+
+    wrapper.vm.next()
+
+    expect(wrapper.vm.internalIndex).toBe(3)
+  })
+
+  it('should ignore touch events', () => {
+    const wrapper = mountFunction({
+      propsData: { touchless: true },
+      slots: {
+        default: [
+          { extends: VWindowItem },
+          { extends: VWindowItem }
+        ]
+      }
+    })
+
+    expect(wrapper.vm.internalIndex).toBe(0)
+
+    touch(wrapper).start(0, 0).end(200, 0)
+
+    expect(wrapper.vm.internalIndex).toBe(0)
   })
 })

@@ -5,6 +5,7 @@ import Vuetify from './framework'
 export default Vuetify
 
 const install = Vuetify.install
+
 Vuetify.install = (Vue, args) => {
   install.call(Vuetify, Vue, {
     components,

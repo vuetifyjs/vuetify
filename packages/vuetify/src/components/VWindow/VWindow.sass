@@ -9,6 +9,54 @@
     &--is-active
       overflow: hidden
 
+  &__prev,
+  &__next
+    background: rgba(0, 0, 0, .3)
+    border-radius: 50%
+    position: absolute
+    margin: 0 16px
+    top: calc(50% - 20px)
+    z-index: 1
+
+    .v-btn
+      margin: 0
+      height: auto
+      width: auto
+
+      &:hover
+        background: none
+
+  &__prev
+    left: 0
+
+  &__next
+    right: 0
+
+  +rtl()
+    &__prev
+      left: auto
+      right: 0
+
+    &__next
+      left: 0
+      right: auto
+
+  &--show-arrows-on-hover
+    .v-window__next,
+    .v-window__prev
+      transition: .2s transform map-get($transition, 'swing')
+
+    .v-window__prev
+      transform: translateX(-200%)
+
+    .v-window__next
+      transform: translateX(200%)
+
+    &:hover
+      .v-window__next,
+      .v-window__prev
+        transform: translateX(0)
+
   &-x-transition,
   &-x-reverse-transition,
   &-y-transition,

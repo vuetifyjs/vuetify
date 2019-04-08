@@ -69,7 +69,7 @@ export default baseMixins.extend({
       activatedBy: null as EventTarget | null,
       animate: false,
       animateTimeout: -1,
-      isActive: false,
+      isActive: !!this.value,
       stackMinZIndex: 200
     }
   },
@@ -160,6 +160,8 @@ export default baseMixins.extend({
       // If we made it here, the click is outside
       // and is active. If persistent, and the
       // click is on the overlay, animate
+      this.$emit('click:outside')
+
       if (this.persistent) {
         if (!this.noClickAnimation &&
           this.overlay === target
@@ -244,6 +246,8 @@ export default baseMixins.extend({
         const el = activator && activator.elm
         if (el) return el
       }
+
+      consoleError('No activator found')
 
       return null
     },

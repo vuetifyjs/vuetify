@@ -29,7 +29,8 @@
             "closable",
             "icon",
             "transition",
-            "outline"
+            "outline",
+            "playground"
           ]
         }
       ]

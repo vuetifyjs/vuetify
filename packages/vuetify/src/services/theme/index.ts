@@ -6,6 +6,7 @@ import { Service } from '../service'
 import * as ThemeUtils from './utils'
 
 // Types
+import Vue from 'vue'
 import {
   VuetifyParsedTheme,
   VuetifyThemeOptions,
@@ -42,7 +43,7 @@ export class Theme extends Service {
   public defaults: VuetifyThemes = this.themes
 
   private isDark = null as boolean | null
-  private ssr = false
+  private vueInstance = null as Vue | null
 
   constructor (options: Partial<VuetifyThemeOptions> = {}) {
     super()
@@ -90,33 +91,7 @@ export class Theme extends Service {
   public applyTheme (): void {
     if (this.disabled) return this.clearCss()
 
-    const options = this.options || {}
-    const parsedTheme = this.parsedTheme
-
-    let css: string | null = ''
-
-    // Theme cache get
-    if (options.themeCache != null) {
-      this.css = options.themeCache.get(parsedTheme) || this.css
-    }
-
-    // Generate styles
-    css = ThemeUtils.genStyles(
-      parsedTheme,
-      options.customProperties
-    )
-
-    // Minify theme
-    if (options.minifyTheme != null) {
-      css = options.minifyTheme(css)
-    }
-
-    // Theme cache set
-    if (options.themeCache != null) {
-      options.themeCache.set(parsedTheme, css)
-    }
-
-    this.css = css
+    this.css = this.generatedStyles
   }
 
   public clearCss (): void {
@@ -126,22 +101,20 @@ export class Theme extends Service {
   // Initialize theme for SSR and SPA
   // Attach to ssrContext head or
   // apply new theme to document
-  public init (ssrContext?: any): void {
+  public init (root: Vue, ssrContext?: any): void {
     if (this.disabled) return
 
-    this.ssr = Boolean(ssrContext)
+    const meta = Boolean((root as any).$meta) // TODO: don't import public types from /src
+    const ssr = Boolean(ssrContext)
 
     /* istanbul ignore else */
-    if (this.ssr) {
-      const options = this.options || {}
-      // SSR
-      const nonce = options.cspNonce ? ` nonce="${options.cspNonce}"` : ''
-      ssrContext.head = ssrContext.head || ''
-      ssrContext.head += `<style type="text/css" id="vuetify-theme-stylesheet"${nonce}>${this.generatedStyles}</style>`
-    } else if (typeof document !== 'undefined') {
-      // Client-side
-      this.applyTheme()
+    if (meta) {
+      this.initNuxt(root)
+    } else if (ssr) {
+      this.initSSR(ssrContext)
     }
+
+    this.initTheme()
   }
 
   // Allows for you to set target theme
@@ -160,7 +133,6 @@ export class Theme extends Service {
   // Check for existence of style element
   private checkStyleElement (): boolean {
     /* istanbul ignore next */
-    if (this.ssr) return false // SSR
     if (this.styleEl) return true
 
     this.genStyleElement() // If doesn't have it, create it
@@ -184,6 +156,8 @@ export class Theme extends Service {
   // Generate the style element
   // if applicable
   private genStyleElement (): void {
+    if (typeof document === 'undefined') return
+
     /* istanbul ignore next */
     const options = this.options || {}
 
@@ -195,15 +169,68 @@ export class Theme extends Service {
       this.styleEl.setAttribute('nonce', options.cspNonce)
     }
 
-    // Asserts that document could
-    // be null typescript is hard
-    document!.head!.appendChild(this.styleEl)
+    document.head.appendChild(this.styleEl)
+  }
+
+  private initNuxt (root: Vue) {
+    const options = this.options || {}
+    const metaInfo = {
+      style: [
+        {
+          cssText: this.generatedStyles,
+          type: 'text/css',
+          id: 'vuetify-theme-stylesheet',
+          nonce: options.cspNonce
+        }
+      ]
+    }
+
+    root.$children.push({
+      $children: [],
+      $options: {
+        metaInfo, // TODO: vue-meta 2.0 $meta.getOptions()
+        head: metaInfo
+      },
+      $vnode: { data: {} }
+    } as any)
+  }
+
+  private initSSR (ssrContext?: any) {
+    const options = this.options || {}
+    // SSR
+    const nonce = options.cspNonce ? ` nonce="${options.cspNonce}"` : ''
+    ssrContext.head = ssrContext.head || ''
+    ssrContext.head += `<style type="text/css" id="vuetify-theme-stylesheet"${nonce}>${this.generatedStyles}</style>`
+  }
+
+  private initTheme () {
+    // Only watch for reactivity on client side
+    if (typeof document === 'undefined') return
+
+    // If we get here somehow, ensure
+    // existing instance is removed
+    if (this.vueInstance) this.vueInstance.$destroy()
+
+    // Use Vue instance to track reactivity
+    // TODO: Update to use RFC if merged
+    // https://github.com/vuejs/rfcs/blob/advanced-reactivity-api/active-rfcs/0000-advanced-reactivity-api.md
+    this.vueInstance = new Vue({
+      data: { themes: this.themes },
+
+      watch: {
+        themes: {
+          immediate: true,
+          deep: true,
+          handler: () => this.applyTheme()
+        }
+      }
+    })
   }
 
   get currentTheme () {
     const target = this.dark ? 'dark' : 'light'
 
-    return this.themes![target]
+    return this.themes[target]
   }
 
   get generatedStyles (): string {

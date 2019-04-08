@@ -42,6 +42,7 @@
             "switchesArray",
             "switchesStates",
             "switchesColors",
+            "switchesFlat",
             "labelSlot"
           ]
         }

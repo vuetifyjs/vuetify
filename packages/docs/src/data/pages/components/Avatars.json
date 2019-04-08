@@ -26,8 +26,9 @@
         {
           "type": "examples",
           "value": [
+            "profile",
             "advanced",
-            "iconAndText"
+            "playground"
           ]
         }
       ]

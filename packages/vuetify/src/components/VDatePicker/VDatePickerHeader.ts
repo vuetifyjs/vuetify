@@ -1,4 +1,4 @@
-import '../../stylus/components/_date-picker-header.styl'
+import './VDatePickerHeader.sass'
 
 // Components
 import VBtn from '../VBtn'

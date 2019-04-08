@@ -43,10 +43,10 @@
   }
 </script>
 
-<style lang="stylus">
-  .checklist
-    max-width: 600px
+<style lang="sass">
+.checklist
+  max-width: 600px
 
-    > :nth-child(odd)
-      background: #eee
+  > :nth-child(odd)
+    background: #eee
 </style>

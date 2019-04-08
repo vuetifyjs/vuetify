@@ -86,8 +86,8 @@
   }
 </script>
 
-<style lang="stylus">
-  #consulting
-    .v-list-item
-      height: 32px !important
+<style lang="sass">
+#consulting
+  .v-list-item
+    height: 32px !important
 </style>

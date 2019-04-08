@@ -128,12 +128,12 @@
   }
 </script>
 
-<style lang="stylus">
-  .page
-    max-width: 1185px;
+<style lang="sass">
+.page
+  max-width: 1185px
 
-  #components-navigation-drawers
-    .v-sheet,
-    .v-card
-      overflow: hidden;
+#components-navigation-drawers
+  .v-sheet,
+  .v-card
+    overflow: hidden
 </style>
