@@ -122,10 +122,12 @@ export default mixins(
         (!this.isMobile && !this.temporary)
     },
     isMobile (): boolean {
-      return !this.stateless &&
+      return (
+        !this.stateless &&
         !this.permanent &&
         !this.temporary &&
         this.$vuetify.breakpoint.width < parseInt(this.mobileBreakPoint, 10)
+      )
     },
     marginTop (): number {
       if (!this.hasApp) return 0
@@ -162,13 +164,13 @@ export default mixins(
         !this.permanent &&
         !this.temporary
     },
+    reactsToResize (): boolean {
+      return !this.disableResizeWatcher && !this.stateless
+    },
     reactsToRoute (): boolean {
       return !this.disableRouteWatcher &&
         !this.stateless &&
         (this.temporary || this.isMobile)
-    },
-    resizeIsDisabled (): boolean {
-      return this.disableResizeWatcher || this.stateless
     },
     showOverlay (): boolean {
       return this.isActive &&
@@ -177,10 +179,10 @@ export default mixins(
     styles (): object {
       const styles = {
         height: convertToUnit(this.height),
-        marginTop: `${this.marginTop}px`,
-        maxHeight: this.maxHeight != null ? `calc(100% - ${+this.maxHeight}px)` : undefined,
-        transform: `translateX(${this.calculatedTransform}px)`,
-        width: `${this.calculatedWidth}px`
+        marginTop: convertToUnit(this.marginTop),
+        maxHeight: this.maxHeight != null ? `calc(100% - ${convertToUnit(this.maxHeight)})` : undefined,
+        transform: `translateX(${convertToUnit(this.calculatedTransform)})`,
+        width: convertToUnit(this.calculatedWidth)
       }
 
       return styles
@@ -208,7 +210,7 @@ export default mixins(
         this.removeOverlay()
 
       if (prev == null ||
-        this.resizeIsDisabled ||
+        !this.reactsToResize ||
         !this.reactsToMobile
       ) return
 
@@ -318,17 +320,19 @@ export default mixins(
      * Update the application layout
      */
     updateApplication () {
-      return !this.isActive ||
+      if (
+        !this.isActive ||
         this.temporary ||
         this.isMobile
-        ? 0
-        : this.calculatedWidth
+      ) return 0
+
+      return this.calculatedWidth
     }
   },
 
   render (h): VNode {
-    const data = {
-      'class': this.classes,
+    return h('aside', {
+      class: this.classes,
       style: this.styles,
       directives: this.genDirectives(),
       on: {
@@ -347,9 +351,7 @@ export default mixins(
           window.dispatchEvent(resizeEvent)
         }
       }
-    }
-
-    return h('aside', data, [
+    }, [
       this.$slots.default,
       h('div', { 'class': 'v-navigation-drawer__border' })
     ])
