@@ -1,16 +1,36 @@
-import { test } from '@/test'
-import Applicationable from '@/mixins/applicationable'
+import {
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+import Applicationable from '../'
+import { ComponentOptions } from 'vue'
+import { Application } from '../../../services/application'
 
-test('applicationable.js', ({ mount }) => {
+describe('applicationable.js', () => {
+  let mountFunction: (options?: ComponentOptions<any>) => Wrapper<any>
+  beforeEach(() => {
+    mountFunction = (options?: ComponentOptions<any>) => {
+      return mount({
+        render: h => h('div'),
+        ...options
+      }, {
+        mocks: {
+          $vuetify: {
+            application: new Application()
+          }
+        }
+      })
+    }
+  })
+
   it('should update application on mount', async () => {
     const updateApplication = jest.fn()
-    const wrapper = mount({
-      mixins: [Applicationable()],
+    const wrapper = mountFunction({
+      mixins: [Applicationable('left')],
       computed: {
         applicationProperty: () => 'left'
       },
-      methods: { updateApplication },
-      render: h => h('div')
+      methods: { updateApplication }
     })
 
     wrapper.setProps({ app: true })
@@ -21,13 +41,12 @@ test('applicationable.js', ({ mount }) => {
   it('should update application on app prop change', async () => {
     const updateApplication = jest.fn()
     const removeApplication = jest.fn()
-    const wrapper = mount({
-      mixins: [Applicationable()],
+    const wrapper = mountFunction({
+      mixins: [Applicationable('left')],
       computed: {
         applicationProperty: () => 'left'
       },
-      methods: { updateApplication, removeApplication },
-      render: h => h('div')
+      methods: { updateApplication, removeApplication }
     })
 
     wrapper.setProps({ app: true })
@@ -41,13 +60,12 @@ test('applicationable.js', ({ mount }) => {
   })
 
   it('should bind watchers passed through factory', () => {
-    const wrapper = mount({
+    const wrapper = mountFunction({
       data: () => ({
         foo: 1,
         bar: 2
       }),
-      mixins: [ Applicationable(null, ['foo', 'bar']) ],
-      render: h => h('div')
+      mixins: [ Applicationable(null, ['foo', 'bar']) ]
     })
 
     expect(wrapper.vm._watchers).toHaveLength(6)
@@ -55,13 +73,12 @@ test('applicationable.js', ({ mount }) => {
 
   it('should call to remove application on destroy', async () => {
     const removeApplication = jest.fn()
-    const wrapper = mount({
-      mixins: [Applicationable()],
+    const wrapper = mountFunction({
+      mixins: [Applicationable('left')],
       computed: {
         applicationProperty: () => 'left'
       },
-      methods: { removeApplication },
-      render: h => h('div')
+      methods: { removeApplication }
     })
 
     wrapper.setProps({ app: true })
@@ -71,8 +88,8 @@ test('applicationable.js', ({ mount }) => {
   })
 
   it('should update application with dynamic property', async () => {
-    const wrapper = mount({
-      mixins: [ Applicationable() ],
+    const wrapper = mountFunction({
+      mixins: [ Applicationable('top') ],
       computed: {
         applicationProperty () {
           return 'top'
@@ -82,8 +99,7 @@ test('applicationable.js', ({ mount }) => {
         updateApplication () {
           return 30
         }
-      },
-      render: h => h('div')
+      }
     })
 
     wrapper.setProps({ app: true })
@@ -92,14 +108,13 @@ test('applicationable.js', ({ mount }) => {
   })
 
   it('should remove designated value from application', async () => {
-    const wrapper = mount({
+    const wrapper = mountFunction({
       mixins: [ Applicationable('footer') ],
       methods: {
         updateApplication () {
           return 30
         }
-      },
-      render: h => h('div')
+      }
     })
 
     wrapper.setProps({ app: true })
