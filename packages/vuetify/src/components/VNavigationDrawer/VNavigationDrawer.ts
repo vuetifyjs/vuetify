@@ -27,6 +27,7 @@ const baseMixins = mixins(
     'isActive',
     'isMobile',
     'miniVariant',
+    'openOnHover',
     'permanent',
     'right',
     'temporary',
@@ -68,6 +69,7 @@ export default baseMixins.extend({
       default: 1264
     },
     permanent: Boolean,
+    openOnHover: Boolean,
     right: Boolean,
     stateless: Boolean,
     temporary: Boolean,
@@ -81,6 +83,7 @@ export default baseMixins.extend({
 
   data: () => ({
     isActive: false,
+    isMouseover: false,
     touchArea: {
       left: 0,
       right: 0
@@ -96,7 +99,12 @@ export default baseMixins.extend({
       return this.right ? 'right' : 'left'
     },
     calculatedWidth (): string | number {
-      return this.miniVariant ? this.miniVariantWidth : this.width
+      if (
+        (this.openOnHover && !this.isMouseover) ||
+        this.miniVariant
+      ) return this.miniVariantWidth
+
+      return this.width
     },
     calculatedTransform (): number {
       if (this.isActive) return 0
@@ -112,7 +120,7 @@ export default baseMixins.extend({
         'v-navigation-drawer--fixed': !this.absolute && (this.app || this.fixed),
         'v-navigation-drawer--floating': this.floating,
         'v-navigation-drawer--is-mobile': this.isMobile,
-        'v-navigation-drawer--mini-variant': this.miniVariant,
+        'v-navigation-drawer--mini-variant': this.miniVariant || this.openOnHover,
         'v-navigation-drawer--open': this.isActive,
         'v-navigation-drawer--right': this.right,
         'v-navigation-drawer--temporary': this.temporary,
@@ -366,6 +374,8 @@ export default baseMixins.extend({
 
           this.$emit('update:miniVariant', false)
         },
+        mouseenter: () => (this.isMouseover = true),
+        mouseleave: () => (this.isMouseover = false),
         transitionend: (e: Event) => {
           if (e.target !== e.currentTarget) return
           this.$emit('transitionend', e)
