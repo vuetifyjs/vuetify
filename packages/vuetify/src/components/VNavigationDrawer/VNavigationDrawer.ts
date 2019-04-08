@@ -3,6 +3,7 @@ import './VNavigationDrawer.sass'
 
 // Mixins
 import Applicationable from '../../mixins/applicationable'
+import Colorable from '../../mixins/colorable'
 import Dependent from '../../mixins/dependent'
 import Overlayable from '../../mixins/overlayable'
 import SSRBootable from '../../mixins/ssr-bootable'
@@ -27,6 +28,7 @@ export default mixins(
     'right',
     'width'
   ]),
+  Colorable,
   Dependent,
   Overlayable,
   SSRBootable,
@@ -359,7 +361,7 @@ export default mixins(
   },
 
   render (h): VNode {
-    return h('aside', {
+    return h('aside', this.setBackgroundColor(this.color, {
       class: this.classes,
       style: this.styles,
       directives: this.genDirectives(),
@@ -379,7 +381,7 @@ export default mixins(
           window.dispatchEvent(resizeEvent)
         }
       }
-    }, [
+    }), [
       this.genPrepend(),
       this.genContent(),
       this.genAppend(),
