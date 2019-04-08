@@ -38,9 +38,9 @@
   },
   "devDependencies": {
     "@types/jest": "^22.2.3",
-    "@types/node": "^11.9.4",
+    "@types/node": "^11.11.4",
     "@vue/test-utils": "^1.0.0-beta.29",
-    "autoprefixer": "^9.4.8",
+    "autoprefixer": "^9.5.0",
     "avoriaz": "^6.3.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
@@ -53,13 +53,13 @@
     "babel-preset-env": "^1.7.0",
     "concurrently": "^4.1.0",
     "cross-env": "^5.2.0",
-    "css-loader": "^2.1.0",
+    "css-loader": "^2.1.1",
     "css-mqpacker": "^7.0.0",
     "cssnano": "^4.1.10",
     "eslint-loader": "^2.1.2",
-    "eslint-plugin-jest": "^22.3.0",
+    "eslint-plugin-jest": "^22.4.1",
     "file-loader": "^3.0.1",
-    "fork-ts-checker-webpack-plugin": "^0.5.2",
+    "fork-ts-checker-webpack-plugin": "^1.0.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "happypack": "^5.0.1",
     "identity-obj-proxy": "^3.0.0",
@@ -78,10 +78,10 @@
     "url-loader": "^1.1.2",
     "vue-router": "^3.0.2",
     "vuetify-loader": "^1.2.1",
-    "webpack-dev-server": "^3.2.0"
+    "webpack-dev-server": "^3.2.1"
   },
   "peerDependencies": {
-    "vue": "^2.5.18"
+    "vue": "^2.6.4"
   },
   "publishConfig": {
     "access": "public"

@@ -1,4 +1,4 @@
-import '../../stylus/components/_images.styl'
+import './VImg.sass'
 
 // Types
 import { VNode } from 'vue'
