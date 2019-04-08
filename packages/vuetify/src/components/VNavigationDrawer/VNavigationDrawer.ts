@@ -94,16 +94,7 @@ export default baseMixins.extend({
     calculatedTransform (): number {
       if (this.isActive) return 0
 
-      return this.right
-        ? this.calculatedWidth
-        : -this.calculatedWidth
-    },
-    calculatedWidth (): number {
-      return parseInt(
-        this.miniVariant
-          ? this.miniVariantWidth
-          : this.width
-      )
+      return this.right ? 100 : -100
     },
     classes (): object {
       return {
@@ -185,8 +176,8 @@ export default baseMixins.extend({
         height: convertToUnit(this.height),
         marginTop: convertToUnit(this.marginTop),
         maxHeight: this.maxHeight != null ? `calc(100% - ${convertToUnit(this.maxHeight)})` : undefined,
-        transform: `translateX(${convertToUnit(this.calculatedTransform)})`,
-        width: convertToUnit(this.calculatedWidth)
+        transform: `translateX(${convertToUnit(this.calculatedTransform, '%')})`,
+        width: convertToUnit(this.width)
       }
 
       return styles
@@ -355,10 +346,11 @@ export default baseMixins.extend({
       if (
         !this.isActive ||
         this.temporary ||
-        this.isMobile
+        this.isMobile ||
+        !this.$el
       ) return 0
 
-      return this.calculatedWidth
+      return this.$el.clientWidth
     }
   },
 
