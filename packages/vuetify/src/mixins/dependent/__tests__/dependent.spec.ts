@@ -1,7 +1,6 @@
-// import dependent from '@/mixins/dependent'
-import { test } from '@/test'
-import dependent from '@/mixins/dependent'
-import toggleable from '@/mixins/toggleable'
+import dependent from '../'
+import toggleable from '../../toggleable'
+import { mount } from '@vue/test-utils'
 
 function genDependentMixin () {
   return {
@@ -22,10 +21,10 @@ function genDependentMixin () {
   }
 }
 
-test('dependent.js', ({ mount }) => {
-  const el = document.createElement('div')
-  el.setAttribute('data-app', true)
-  document.body.appendChild(el)
+describe('dependent.js', () => {
+  beforeEach(() => {
+    document.body.setAttribute('data-app', 'true')
+  })
 
   it('should set open dependents value to false when deactivated', async () => {
     const mock = { isActive: true }
