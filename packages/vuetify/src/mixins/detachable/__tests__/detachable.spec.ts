@@ -1,11 +1,10 @@
-import { test } from '@/test'
-import VApp from '@/components/VApp'
-import Detachable from '@/mixins/detachable'
+import VApp from '../../../components/VApp'
+import Detachable from '../'
+import { mount } from '@vue/test-utils'
+import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
 
-const Mock = () => ({
+const Mock = Detachable.extend({
   name: 'mock',
-
-  mixins: [Detachable],
 
   render (h) {
     const content = h('div', {
@@ -19,19 +18,29 @@ const Mock = () => ({
   }
 })
 
-test('detachable.js', ({ mount }) => {
+describe('detachable.ts', () => {
+  toHaveBeenWarnedInit()
+
   it('should detach to app', async () => {
-    const localMock = Mock()
+    const localMock = Mock
     const wrapper = mount(VApp, {
       attachToDocument: true,
       slots: {
         default: [{
           render: h => h(localMock)
         }]
+      },
+      mocks: {
+        $vuetify: {
+          rtl: false,
+          theme: {
+            dark: false
+          }
+        }
       }
     })
 
-    const detach = wrapper.find(localMock)[0]
+    const detach = wrapper.find(localMock)
 
     expect(detach.vm.hasDetached).toBe(false)
 
@@ -39,17 +48,25 @@ test('detachable.js', ({ mount }) => {
   })
 
   it('should not detach when lazy', async () => {
-    const localMock = Mock()
+    const localMock = Mock
     const wrapper = mount(VApp, {
       attachToDocument: true,
       slots: {
         default: [{
           render: h => h(localMock)
         }]
+      },
+      mocks: {
+        $vuetify: {
+          rtl: false,
+          theme: {
+            dark: false
+          }
+        }
       }
     })
 
-    const detach = wrapper.find(localMock)[0]
+    const detach = wrapper.find(localMock)
 
     expect(detach.vm.hasDetached).toBe(false)
 
@@ -57,8 +74,8 @@ test('detachable.js', ({ mount }) => {
   })
 
   it('should attach and detach', () => {
-    const localMock = Mock()
-    const elementMock = mount(Mock())
+    const localMock = Mock
+    const elementMock = mount(Mock)
     const wrapper = mount(localMock, {
       attachToDocument: true,
       propsData: {
