@@ -263,4 +263,114 @@ describe('VDataTable.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should render with grouped rows', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems,
+        itemsPerPage: 5,
+        groupBy: ['protein']
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render with group scoped slot', () => {
+    const vm = new Vue()
+
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems,
+        itemsPerPage: 5,
+        groupBy: ['protein']
+      },
+      scopedSlots: {
+        group: props => vm.$createElement('div', [ JSON.stringify(props) ])
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render loading state', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        loading: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    const wrapper2 = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        loading: true
+      },
+      slots: {
+        progress: '<div class="progress">50%</div>'
+      }
+    })
+
+    expect(wrapper2.html()).toMatchSnapshot()
+  })
+
+  it('should calculate widths', () => {
+    const wrapper = mountFunction({
+      render: h => h('div', [
+        h('th'),
+        h('th'),
+        h('th')
+      ])
+    })
+
+    wrapper.vm.calcWidths()
+    expect(wrapper.vm.widths).toEqual([ 0, 0, 0 ])
+  })
+
+  it('should filter headers', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: [
+          {
+            text: 'Dessert (100g serving)',
+            align: 'left',
+            sortable: false,
+            value: 'name',
+            filter: () => true
+          },
+          {
+            text: 'Calories',
+            value: 'calories',
+            filter: () => false
+          },
+          {
+            text: 'Fat (g)',
+            value: 'fat',
+            filter: () => true
+          },
+          {
+            text: 'Carbs (g)',
+            value: 'carbs',
+            filter: () => false
+          },
+          {
+            text: 'Protein (g)',
+            value: 'protein',
+            filter: () => false
+          },
+          {
+            text: 'Iron (%)',
+            value: 'iron',
+            filter: () => true
+          }
+        ],
+        items: testItems
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

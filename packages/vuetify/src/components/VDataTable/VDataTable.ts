@@ -259,7 +259,7 @@ export default VDataIterator.extend({
             small: true
           },
           on: {
-            click: () => this.$set(this.openCache, group, !this.openCache[group])
+            click: /* istanbul ignore next */ () => this.$set(this.openCache, group, !this.openCache[group])
           }
         }, [this.$createElement(VIcon, [isOpen ? 'remove' : 'add'])])
 
@@ -270,7 +270,7 @@ export default VDataIterator.extend({
             small: true
           },
           on: {
-            click: () => props.updateOptions({ groupBy: [], groupDesc: [] })
+            click: /* istanbul ignore next */ () => props.updateOptions({ groupBy: [], groupDesc: [] })
           }
         }, [this.$createElement(VIcon, ['close'])])
 
