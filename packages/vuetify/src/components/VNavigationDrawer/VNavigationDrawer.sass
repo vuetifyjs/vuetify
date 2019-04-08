@@ -23,9 +23,9 @@
   top: 0
   will-change: transform
   -webkit-overflow-scrolling: touch
-
-  &[data-booted="true"]
-    transition-property: transform, width
+  transition-duration: 0.2s
+  transition-timing-function: map-get($transition, 'fast-out-slow-in')
+  transition-property: transform, width
 
   &__border
     position: absolute
