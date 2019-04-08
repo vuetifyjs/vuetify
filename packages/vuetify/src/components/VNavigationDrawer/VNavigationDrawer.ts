@@ -22,7 +22,7 @@ import mixins from '../../util/mixins'
 import { VNode } from 'vue/types/vnode'
 import { PropValidator } from 'vue/types/options'
 
-export default mixins(
+const baseMixins = mixins(
   Applicationable('left', [
     'miniVariant',
     'right',
@@ -33,8 +33,10 @@ export default mixins(
   Overlayable,
   SSRBootable,
   Themeable
+)
+
 /* @vue/component */
-).extend({
+export default baseMixins.extend({
   name: 'v-navigation-drawer',
 
   directives: {
