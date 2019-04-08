@@ -66,7 +66,7 @@ export default mixins(
     touchless: Boolean,
     width: {
       type: [Number, String],
-      default: 300
+      default: 256
     },
     value: { required: false } as PropValidator<any>
   },
