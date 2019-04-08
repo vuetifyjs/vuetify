@@ -14,7 +14,7 @@ import Resize from '../../directives/resize'
 import Touch, { TouchWrapper } from '../../directives/touch'
 
 // Utilities
-import { convertToUnit } from '../../util/helpers'
+import { convertToUnit, getSlot } from '../../util/helpers'
 import mixins from '../../util/mixins'
 
 // TYpes
@@ -47,7 +47,7 @@ export default mixins(
     disableResizeWatcher: Boolean,
     height: {
       type: [Number, String],
-      default: '100%'
+      default: '100vh'
     },
     floating: Boolean,
     miniVariant: Boolean,
@@ -281,6 +281,34 @@ export default mixins(
 
       return directives
     },
+    genAppend () {
+      const slot = getSlot(this, 'append')
+
+      if (!slot) return slot
+
+      return this.$createElement('div', {
+        staticClass: 'v-navigation-drawer__append'
+      }, slot)
+    },
+    genPrepend () {
+      const slot = getSlot(this, 'prepend')
+
+      if (!slot) return slot
+
+      return this.$createElement('div', {
+        staticClass: 'v-navigation-drawer__prepend'
+      }, slot)
+    },
+    genContent () {
+      return this.$createElement('div', {
+        staticClass: 'v-navigation-drawer__content'
+      }, this.$slots.default)
+    },
+    genBorder () {
+      return this.$createElement('div', {
+        staticClass: 'v-navigation-drawer__border'
+      })
+    },
     /**
      * Sets state before mount to avoid
      * entry transitions in SSR
@@ -352,8 +380,10 @@ export default mixins(
         }
       }
     }, [
-      this.$slots.default,
-      h('div', { 'class': 'v-navigation-drawer__border' })
+      this.genPrepend(),
+      this.genContent(),
+      this.genAppend(),
+      this.genBorder()
     ])
   }
 })
