@@ -333,7 +333,7 @@ export default VDataIterator.extend({
             value: this.isSelected(item)
           },
           on: {
-            input: (v: any) => this.select(item, v)
+            input: /* istanbul ignore next */ (v: any) => this.select(item, v)
           }
         }
 
