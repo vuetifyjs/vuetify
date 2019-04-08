@@ -1,7 +1,7 @@
-import { test } from '@/test'
-import Elevatable from '@/mixins/elevatable'
+import { mount } from '@vue/test-utils'
+import Elevatable from '../'
 
-test('elevatable.js', ({ mount }) => {
+describe('elevatable.ts', () => {
   it('generate elevation classes', () => {
     const wrapper = mount({
       mixins: [ Elevatable ],
