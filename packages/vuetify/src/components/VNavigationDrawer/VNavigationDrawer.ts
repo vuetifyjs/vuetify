@@ -24,8 +24,12 @@ import { PropValidator } from 'vue/types/options'
 
 const baseMixins = mixins(
   Applicationable('left', [
+    'isActive',
+    'isMobile',
     'miniVariant',
+    'permanent',
     'right',
+    'temporary',
     'width'
   ]),
   Colorable,
@@ -192,7 +196,6 @@ export default baseMixins.extend({
     },
     isActive (val) {
       this.$emit('input', val)
-      this.callUpdate()
     },
     /**
      * When mobile changes, adjust the active state
@@ -210,21 +213,14 @@ export default baseMixins.extend({
       ) return
 
       this.isActive = !val
-      this.callUpdate()
     },
     permanent (val) {
       // If enabling prop enable the drawer
-      if (val) {
-        this.isActive = true
-      }
-      this.callUpdate()
+      if (val) this.isActive = true
     },
     showOverlay (val) {
       if (val) this.genOverlay()
       else this.removeOverlay()
-    },
-    temporary () {
-      this.callUpdate()
     },
     value (val) {
       if (this.permanent) return
