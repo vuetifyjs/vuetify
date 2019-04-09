@@ -1,16 +1,26 @@
-import { test } from '@/test'
-import Proxyable, { factory as Proxy } from '@/mixins/proxyable'
+import Proxyable, { factory as Proxy } from '../'
+import {
+  mount,
+  MountOptions,
+  Wrapper
+} from '@vue/test-utils'
 
-const Mock = {
-  mixins: [Proxyable],
+describe('proxyable.ts', () => {
+  const Mock = Proxyable.extend({
+    render: h => h('div')
+  })
 
-  render: h => h('div')
-}
+  type Instance = InstanceType<typeof Mock>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+  beforeEach(() => {
+    mountFunction = (options?: MountOptions<Instance>) => {
+      return mount(Mock, options)
+    }
+  })
 
-test('proxyable.ts', ({ mount }) => {
   it('should watch prop and emit event', async () => {
     const change = jest.fn()
-    const wrapper = mount(Mock, {
+    const wrapper = mountFunction({
       propsData: { value: 'foo' }
     })
 
