@@ -44,7 +44,7 @@ exports[`VBanner.ts should render component with icon 1`] = `
   <div class="v-banner__wrapper">
     <div class="v-banner__content">
       <div class="v-avatar v-banner__icon"
-           style="height: 40px; width: 40px;"
+           style="height: 40px; min-width: 40px; width: 40px;"
       >
         <i aria-hidden="true"
            class="v-icon mdi mdi-plus theme--light"
@@ -67,7 +67,7 @@ exports[`VBanner.ts should render component with icon slot 1`] = `
   <div class="v-banner__wrapper">
     <div class="v-banner__content">
       <div class="v-avatar v-banner__icon"
-           style="height: 40px; width: 40px;"
+           style="height: 40px; min-width: 40px; width: 40px;"
       >
         <span>
           icon
