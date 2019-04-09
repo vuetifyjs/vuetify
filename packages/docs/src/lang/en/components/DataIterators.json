@@ -8,6 +8,10 @@
     "slots": {
       "header": "### Slots",
       "desc": "The `v-data-iterator` has both a header and footer slot for adding extra content"
+    },
+    "expand": {
+      "header": "### Expand",
+      "desc": "The `v-data-iterator` has internal state for both selection and expansion, just like `v-data-table`. In this example we use the methods `isExpanded` and `expand` available on the default scoped slot."
     }
   },
   "props": {
