@@ -4,10 +4,20 @@ import {
   getNestedValue,
   getPropertyFromItem,
   convertToUnit,
-  getSlotType
+  getSlotType,
+  arrayDiff
 } from '../helpers'
 
 describe('helpers', () => {
+  it('should return set difference of arrays A and B', () => {
+    expect(arrayDiff(['one', 'two'], ['one'])).toEqual([])
+    expect(arrayDiff(['one'], ['one', 'two'])).toEqual(['two'])
+    expect(arrayDiff([], [])).toEqual([])
+    expect(arrayDiff([], ['one'])).toEqual(['one'])
+    expect(arrayDiff(['one'], ['two'])).toEqual(['two'])
+    expect(arrayDiff(['one', 'two'], ['one', 'three'])).toEqual(['three'])
+  })
+
   it('should pass comparison', () => { // eslint-disable-line max-statements
     // Null
     expect(deepEqual(null, null)).toEqual(true)
