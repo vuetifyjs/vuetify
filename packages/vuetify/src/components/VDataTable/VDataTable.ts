@@ -304,7 +304,7 @@ export default VDataIterator.extend({
       return items.map((item: any) => this.$scopedSlots.item!(this.createItemProps(item)))
     },
     genDefaultRows (items: any[], props: DataProps) {
-      return this.$scopedSlots['item.expanded']
+      return this.$scopedSlots['expanded-item']
         ? items.map(item => this.genDefaultExpandedRow(item))
         : items.map(item => this.genDefaultSimpleRow(item))
     },
@@ -313,7 +313,7 @@ export default VDataIterator.extend({
       const headerRow = this.genDefaultSimpleRow(item, isExpanded ? 'expanded expanded__row' : null)
       const expandedRow = this.$createElement('tr', {
         staticClass: 'expanded expanded__content'
-      }, [this.$scopedSlots['item.expanded']!({ item, headers: this.computedHeaders })])
+      }, [this.$scopedSlots['expanded-item']!({ item, headers: this.computedHeaders })])
 
       return this.$createElement(VRowGroup, {
         props: {
