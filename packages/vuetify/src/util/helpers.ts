@@ -152,14 +152,16 @@ export function addOnceEventListener (el: EventTarget, event: string, cb: () => 
 
 let passiveSupported = false
 try {
-  const testListenerOpts = Object.defineProperty({}, 'passive', {
-    get: () => {
-      passiveSupported = true
-    }
-  })
+  if (typeof window !== 'undefined') {
+    const testListenerOpts = Object.defineProperty({}, 'passive', {
+      get: () => {
+        passiveSupported = true
+      }
+    })
 
-  window.addEventListener('testListener', testListenerOpts, testListenerOpts)
-  window.removeEventListener('testListener', testListenerOpts, testListenerOpts)
+    window.addEventListener('testListener', testListenerOpts, testListenerOpts)
+    window.removeEventListener('testListener', testListenerOpts, testListenerOpts)
+  }
 } catch (e) { console.warn(e) }
 export { passiveSupported }
 
