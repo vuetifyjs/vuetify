@@ -20,6 +20,10 @@ export default mixins(Themeable).extend({
 
   props: {
     ...VData.options.props, // TODO: filter out props not used
+    itemKey: {
+      type: String,
+      default: 'id'
+    },
     value: {
       type: Array,
       default: () => []

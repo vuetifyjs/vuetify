@@ -43,10 +43,6 @@ export default Vue.extend({
       type: Array as PropType<any[]>,
       default: () => []
     },
-    itemKey: {
-      type: String,
-      default: 'id'
-    },
     options: {
       type: Object,
       default: () => ({})
