@@ -116,7 +116,7 @@ export default baseMixins.extend({
     },
     calculatedTransform (): number {
       if (this.isActive) return 0
-      if (this.bottom) return 100
+      if (this.bottom && this.isMobile) return 100
       return this.right ? 100 : -100
     },
     classes (): object {
@@ -129,8 +129,10 @@ export default baseMixins.extend({
         'v-navigation-drawer--fixed': !this.absolute && (this.app || this.fixed),
         'v-navigation-drawer--floating': this.floating,
         'v-navigation-drawer--is-mobile': this.isMobile,
+        'v-navigation-drawer--is-mouseover': this.isMouseover,
         'v-navigation-drawer--mini-variant': this.miniVariant || this.openOnHover,
         'v-navigation-drawer--open': this.isActive,
+        'v-navigation-drawer--open-on-hover': this.openOnHover,
         'v-navigation-drawer--right': this.right,
         'v-navigation-drawer--temporary': this.temporary,
         ...this.themeClasses
@@ -246,10 +248,10 @@ export default baseMixins.extend({
     value (val) {
       if (this.permanent) return
 
-      // TODO: referring to this directly causes type errors
-      // all over the place for some reason
-      const _this = this as any
-      if (val == null) return _this.init()
+      if (val == null) {
+        this.init()
+        return
+      }
 
       if (val !== this.isActive) this.isActive = val
     }
@@ -271,6 +273,15 @@ export default baseMixins.extend({
     },
     closeConditional () {
       return this.isActive && this.reactsToClick
+    },
+    genAppend () {
+      const slot = getSlot(this, 'append')
+
+      if (!slot) return slot
+
+      return this.$createElement('div', {
+        staticClass: 'v-navigation-drawer__append'
+      }, slot)
     },
     genBackground () {
       const props = {
@@ -308,15 +319,6 @@ export default baseMixins.extend({
 
       return directives
     },
-    genAppend () {
-      const slot = getSlot(this, 'append')
-
-      if (!slot) return slot
-
-      return this.$createElement('div', {
-        staticClass: 'v-navigation-drawer__append'
-      }, slot)
-    },
     genPrepend () {
       const slot = getSlot(this, 'prepend')
 
@@ -351,16 +353,6 @@ export default baseMixins.extend({
         this.isActive = !this.isMobile
       }
     },
-    swipeRight (e: TouchWrapper) {
-      if (this.isActive && !this.right) return
-      this.calculateTouchArea()
-
-      if (Math.abs(e.touchendX - e.touchstartX) < 100) return
-      if (!this.right &&
-        e.touchstartX <= this.touchArea.left
-      ) this.isActive = true
-      else if (this.right && this.isActive) this.isActive = false
-    },
     swipeLeft (e: TouchWrapper) {
       if (this.isActive && this.right) return
       this.calculateTouchArea()
@@ -370,6 +362,16 @@ export default baseMixins.extend({
         e.touchstartX >= this.touchArea.right
       ) this.isActive = true
       else if (!this.right && this.isActive) this.isActive = false
+    },
+    swipeRight (e: TouchWrapper) {
+      if (this.isActive && !this.right) return
+      this.calculateTouchArea()
+
+      if (Math.abs(e.touchendX - e.touchstartX) < 100) return
+      if (!this.right &&
+        e.touchstartX <= this.touchArea.left
+      ) this.isActive = true
+      else if (this.right && this.isActive) this.isActive = false
     },
     /**
      * Update the application layout
