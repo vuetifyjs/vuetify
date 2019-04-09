@@ -4,7 +4,7 @@
     :items="desserts"
     class="elevation-1"
   >
-    <template v-slot:item.column.calories="{ item }">
+    <template v-slot:item.calories="{ item }">
       <v-chip :color="getColor(item.calories)" dark>{{ item.calories }}</v-chip>
     </template>
   </v-data-table>
