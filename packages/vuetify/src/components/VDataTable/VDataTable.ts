@@ -195,7 +195,7 @@ export default VDataIterator.extend({
       const children: VNodeChildrenArrayContents = [this.genSlots('header', data)]
 
       if (!this.hideDefaultHeader) {
-        const scopedSlots = getPrefixedScopedSlots('header.column.', this.$scopedSlots)
+        const scopedSlots = getPrefixedScopedSlots('header.', this.$scopedSlots)
         children.push(this.$createElement(VDataTableHeader, {
           ...data,
           scopedSlots
@@ -337,8 +337,8 @@ export default VDataIterator.extend({
           }
         }
 
-        const slot = scopedSlots['column.data-table-select']
-        scopedSlots['column.data-table-select'] = slot ? () => slot(data) : () => this.$createElement(VSimpleCheckbox, {
+        const slot = scopedSlots['data-table-select']
+        scopedSlots['data-table-select'] = slot ? () => slot(data) : () => this.$createElement(VSimpleCheckbox, {
           staticClass: 'v-data-table__checkbox',
           ...data
         })
@@ -356,8 +356,8 @@ export default VDataIterator.extend({
           }
         }
 
-        const slot = scopedSlots['column.data-table-expand']
-        scopedSlots['column.data-table-expand'] = slot ? () => slot(data) : () => this.$createElement(VIcon, {
+        const slot = scopedSlots['data-table-expand']
+        scopedSlots['data-table-expand'] = slot ? () => slot(data) : () => this.$createElement(VIcon, {
           staticClass: 'v-data-table__expand-icon',
           class: {
             'v-data-table__expand-icon--active': expanded
