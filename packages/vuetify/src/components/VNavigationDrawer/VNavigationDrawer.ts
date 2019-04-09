@@ -54,6 +54,7 @@ export default baseMixins.extend({
   },
 
   props: {
+    bottom: Boolean,
     clipped: Boolean,
     disableRouteWatcher: Boolean,
     disableResizeWatcher: Boolean,
@@ -115,13 +116,14 @@ export default baseMixins.extend({
     },
     calculatedTransform (): number {
       if (this.isActive) return 0
-
+      if (this.bottom) return 100
       return this.right ? 100 : -100
     },
     classes (): object {
       return {
         'v-navigation-drawer': true,
         'v-navigation-drawer--absolute': this.absolute,
+        'v-navigation-drawer--bottom': this.bottom,
         'v-navigation-drawer--clipped': this.clipped,
         'v-navigation-drawer--close': !this.isActive,
         'v-navigation-drawer--fixed': !this.absolute && (this.app || this.fixed),
@@ -194,11 +196,12 @@ export default baseMixins.extend({
         (this.isMobile || this.temporary)
     },
     styles (): object {
+      const translate = this.bottom && this.isMobile ? 'translateY' : 'translateX'
       const styles = {
         height: convertToUnit(this.height),
         marginTop: convertToUnit(this.marginTop),
         maxHeight: this.maxHeight != null ? `calc(100% - ${convertToUnit(this.maxHeight)})` : undefined,
-        transform: `translateX(${convertToUnit(this.calculatedTransform, '%')})`,
+        transform: `${translate}(${convertToUnit(this.calculatedTransform, '%')})`,
         width: convertToUnit(this.calculatedWidth)
       }
 
