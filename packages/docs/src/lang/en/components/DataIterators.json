@@ -16,6 +16,7 @@
   },
   "props": {
     "v-data-iterator": {
+      "itemKey": "The property on each item that is used as a unique key",
       "value": "Used for selection",
       "singleSelect": "Changes selection mode to single select",
       "expanded": "Array of expanded items. Can be used with `.sync` modifier",
@@ -46,9 +47,10 @@
   "scopedSlots": {
     "v-data-iterator": {
       "footer": "Defines a footer below the items",
-      "footer.pageText": "This slot is forwarded to the default footer. See the `v-data-footer` API for more information",
+      "footer.page-text": "This slot is forwarded to the default footer. See the `v-data-footer` API for more information",
       "default": "The default slot. Use this to render your items",
-      "header": "Defines a header above the items"
+      "header": "Defines a header above the items",
+      "item": "Slot for each item"
     }
   },
   "slots": {
@@ -60,7 +62,7 @@
       "no-results": "Defines content for when `search` is provided but no results are found"
     },
     "v-data-footer": {
-      "pageText": "Defines content for the items-per-page text"
+      "page-text": "Defines content for the items-per-page text"
     }
   },
   "events": {
