@@ -329,6 +329,7 @@ export default VDataIterator.extend({
 
       if (this.showSelect) {
         const data = {
+          item,
           props: {
             value: this.isSelected(item)
           },
@@ -348,6 +349,7 @@ export default VDataIterator.extend({
 
       if (this.showExpand) {
         const data = {
+          item,
           props: {
             expanded
           },
