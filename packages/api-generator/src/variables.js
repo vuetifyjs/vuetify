@@ -291,8 +291,6 @@ module.exports = {
   inputSlots,
   inputEvents,
   sharedGridProps,
-  dataFooterSlots,
-  dataFooterEvents,
   validatableEvents,
   textEvents,
   textFieldSlots,

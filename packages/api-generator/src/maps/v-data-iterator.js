@@ -1,4 +1,5 @@
 const { DataEvents, DataProps, DataDefaultScopedSlotProps } = require('./v-data')
+const { DataFooterPageTextScopedProps } = require('./v-data-footer')
 
 const DataIteratorProps = [
   { name: 'value', source: 'v-data-iterator' },
@@ -26,10 +27,36 @@ const DataIteratorSlots = [
   { name: 'no-results', source: 'data-iterator' }
 ]
 
+const DataIteratorItemScopedProps = {
+  item: 'any',
+  select: {
+    props: {
+      value: 'boolean'
+    },
+    on: {
+      input: '(v: boolean) => void'
+    }
+  },
+  expand: {
+    props: {
+      value: 'boolean'
+    },
+    on: {
+      input: '(v: boolean) => void'
+    }
+  }
+}
+
 const DataIteratorScopedSlots = [
   {
     name: 'default',
-    props: DataDefaultScopedSlotProps,
+    props: {
+      ...DataDefaultScopedSlotProps,
+      isSelected: 'boolean',
+      select: '(item: any, value: boolean): void',
+      isExpanded: 'boolean',
+      expand: '(item: any, value: boolean): void'
+    },
     source: 'data-iterator'
   },
   {
@@ -38,8 +65,18 @@ const DataIteratorScopedSlots = [
     source: 'data-iterator'
   },
   {
+    name: 'footer.page-text',
+    props: DataFooterPageTextScopedProps,
+    source: 'data-iterator'
+  },
+  {
     name: 'header',
     props: DataDefaultScopedSlotProps,
+    source: 'data-iterator'
+  },
+  {
+    name: 'item',
+    props: DataIteratorItemScopedProps,
     source: 'data-iterator'
   }
 ]

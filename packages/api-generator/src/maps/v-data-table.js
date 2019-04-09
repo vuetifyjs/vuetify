@@ -1,5 +1,6 @@
-const { DataDefaultScopedSlotProps, DataOptions, DataPagination, DataProps } = require('./v-data')
+const { DataDefaultScopedSlotProps, DataOptions, DataProps } = require('./v-data')
 const { DataIteratorEvents, DataIteratorProps } = require('./v-data-iterator')
+const { DataFooterPageTextScopedProps } = require('./v-data-footer')
 
 const TableHeader = {
   text: 'string',
@@ -17,33 +18,74 @@ const DataTableEvents = [].concat(DataIteratorEvents)
 
 const DataTableHeaderScopedProps = {
   props: {
+    headers: 'TableHeader[]',
     options: DataOptions,
-    pagination: DataPagination
-    // TOOD: Also the rest of v-data-footer props
+    mobile: 'boolean',
+    showGroupBy: 'boolean',
+    someItems: 'boolean',
+    everyItem: 'boolean'
   },
   on: {
-    'update:options': '(value: any): void'
+    sort: DataDefaultScopedSlotProps.sort,
+    group: DataDefaultScopedSlotProps.group,
+    'toggle-select-all': '(value: boolean): void'
+  }
+}
+
+const DataTableHeaderColumnScopedProps = {
+  header: 'TableHeader'
+}
+
+const DataTableItemColumnScopedProps = {
+  item: 'any',
+  header: 'TableHeader',
+  value: 'any'
+}
+
+const DataTableSelectScopedProps = {
+  item: 'any',
+  props: {
+    value: 'boolean'
   },
-  widths: 'number[]',
-  headers: 'TableHeader[]' // TODO: expand this?
+  on: {
+    input: '(value: boolean): void'
+  }
+}
+
+const DataTableExpandScopedProps = {
+  item: 'any',
+  props: {
+    expanded: 'boolean'
+  },
+  on: {
+    click: '(value: boolean): void'
+  }
+}
+
+const DataTableExpandedItemScopedProps = {
+  item: 'any',
+  headers: 'TableHeader[]'
 }
 
 const DataTableSlots = [
-  { name: 'body.append', props: DataDefaultScopedSlotProps },
   { name: 'body.prepend', props: DataDefaultScopedSlotProps },
   { name: 'body', props: DataDefaultScopedSlotProps },
   { name: 'footer', props: DataDefaultScopedSlotProps },
+  { name: 'footer.page-text', props: DataFooterPageTextScopedProps },
   { name: 'header', props: DataTableHeaderScopedProps },
+  { name: 'header.data-table-select', props: DataTableSelectScopedProps },
+  { name: 'header.data-table-expand', props: DataTableExpandScopedProps },
+  { name: 'header.<name>', props: DataTableHeaderColumnScopedProps },
   { name: 'top', props: DataDefaultScopedSlotProps },
   { name: 'progress', props: DataDefaultScopedSlotProps },
   { name: 'group', props: DataDefaultScopedSlotProps },
   { name: 'group.header', props: DataDefaultScopedSlotProps },
   { name: 'group.summary', props: DataDefaultScopedSlotProps },
   { name: 'item', props: DataDefaultScopedSlotProps },
-  { name: 'item.dataTableSelect', props: DataDefaultScopedSlotProps },
-  { name: 'item.dataTableExpand', props: DataDefaultScopedSlotProps },
-  { name: 'item.column.<name>', props: DataDefaultScopedSlotProps },
-  { name: 'item.expanded', props: DataDefaultScopedSlotProps }
+  { name: 'item.data-table-select', props: DataTableSelectScopedProps },
+  { name: 'item.data-table-expand', props: DataTableExpandScopedProps },
+  { name: 'item.<name>', props: DataTableItemColumnScopedProps },
+  { name: 'expanded-item', props: DataTableExpandedItemScopedProps }
 ]
 
 module.exports = {
