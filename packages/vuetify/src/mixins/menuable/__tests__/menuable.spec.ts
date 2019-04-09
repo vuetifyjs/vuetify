@@ -1,12 +1,25 @@
-import { test } from '@/test'
-import Menuable from '@/mixins/menuable'
+import Menuable from '../'
+import {
+  mount,
+  MountOptions,
+  Wrapper
+} from '@vue/test-utils'
 
-test('menuable.js', ({ mount }) => {
+describe('menuable.ts', () => {
+  const Mock = Menuable.extend({
+    render: h => h('div')
+  })
+
+  type Instance = InstanceType<typeof Mock>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+  beforeEach(() => {
+    mountFunction = (options?: MountOptions<Instance>) => {
+      return mount(Mock, options)
+    }
+  })
+
   it('should bind custom activator', () => {
-    const wrapper = mount({
-      mixins: [Menuable],
-      render: h => h('div')
-    }, {
+    const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
         activator: 'body'
@@ -18,12 +31,10 @@ test('menuable.js', ({ mount }) => {
 
   it('should update dimensions when activated', async () => {
     const sneakPeek = jest.fn()
-    const wrapper = mount({
-      mixins: [Menuable],
+    const wrapper = mountFunction({
       methods: {
         sneakPeek
-      },
-      render: h => h('div')
+      }
     })
 
     wrapper.vm.updateDimensions()
@@ -32,14 +43,11 @@ test('menuable.js', ({ mount }) => {
   })
 
   it('should apply maxWidth in left calculations when offset', async () => {
-    const wrapper = mount({
-      mixins: [Menuable],
+    const wrapper = mountFunction({
       props: {
         offsetY: Boolean,
         offsetX: Boolean
       },
-      render: h => h('div')
-    }, {
       propsData: {
         attach: true,
         left: true,
