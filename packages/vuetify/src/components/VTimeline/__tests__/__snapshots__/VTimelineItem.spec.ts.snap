@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VTimelineItem.js should conditionally render an icon or icon slot 1`] = `
+exports[`VTimelineItem.ts should conditionally render an icon or icon slot 1`] = `
 
 <div class="v-timeline-item theme--light">
   <div class="v-timeline-item__body">
@@ -18,7 +18,7 @@ exports[`VTimelineItem.js should conditionally render an icon or icon slot 1`] =
 
 `;
 
-exports[`VTimelineItem.js should conditionally render an icon or icon slot 2`] = `
+exports[`VTimelineItem.ts should conditionally render an icon or icon slot 2`] = `
 
 <div class="v-timeline-item theme--light">
   <div class="v-timeline-item__body">
@@ -38,7 +38,7 @@ exports[`VTimelineItem.js should conditionally render an icon or icon slot 2`] =
 
 `;
 
-exports[`VTimelineItem.js should conditionally render dot 1`] = `
+exports[`VTimelineItem.ts should conditionally render dot 1`] = `
 
 <div class="v-timeline-item theme--light">
   <div class="v-timeline-item__body">
@@ -49,7 +49,7 @@ exports[`VTimelineItem.js should conditionally render dot 1`] = `
 
 `;
 
-exports[`VTimelineItem.js should conditionally render dot 2`] = `
+exports[`VTimelineItem.ts should conditionally render dot 2`] = `
 
 <div class="v-timeline-item theme--light">
   <div class="v-timeline-item__body">
@@ -64,7 +64,7 @@ exports[`VTimelineItem.js should conditionally render dot 2`] = `
 
 `;
 
-exports[`VTimelineItem.js should render opposite slot 1`] = `
+exports[`VTimelineItem.ts should render opposite slot 1`] = `
 
 <div class="v-timeline-item theme--light">
   <div class="v-timeline-item__body">

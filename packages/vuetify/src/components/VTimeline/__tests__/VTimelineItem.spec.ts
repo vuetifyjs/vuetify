@@ -1,9 +1,21 @@
-import { test } from '@/test'
-import VTimelineItem from '@/components/VTimeline/VTimelineItem'
+import VTimelineItem from '../VTimelineItem'
+import {
+  mount,
+  MountOptions,
+  Wrapper
+} from '@vue/test-utils'
 
-test('VTimelineItem.js', ({ mount }) => {
+describe('VTimelineItem.ts', () => {
+  type Instance = InstanceType<typeof VTimelineItem>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+  beforeEach(() => {
+    mountFunction = (options?: MountOptions<Instance>) => {
+      return mount(VTimelineItem, options)
+    }
+  })
+
   it('should conditionally render dot', () => {
-    const wrapper = mount(VTimelineItem, {
+    const wrapper = mountFunction({
       propsData: {
         hideDot: true
       },
@@ -22,7 +34,7 @@ test('VTimelineItem.js', ({ mount }) => {
   })
 
   it('should conditionally render an icon or icon slot', () => {
-    expect(mount(VTimelineItem, {
+    expect(mountFunction({
       slots: {
         icon: [{
           render: h => h('div', 'foo')
@@ -35,7 +47,7 @@ test('VTimelineItem.js', ({ mount }) => {
       }
     }).html()).toMatchSnapshot()
 
-    expect(mount(VTimelineItem, {
+    expect(mountFunction({
       propsData: { icon: 'foo' },
       provide: {
         timeline: {
@@ -46,7 +58,7 @@ test('VTimelineItem.js', ({ mount }) => {
   })
 
   it('should render opposite slot', () => {
-    const wrapper = mount(VTimelineItem, {
+    const wrapper = mountFunction({
       slots: {
         opposite: [{
           render: h => h('div', 'foo')

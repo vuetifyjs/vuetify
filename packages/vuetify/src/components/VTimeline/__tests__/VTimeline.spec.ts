@@ -1,7 +1,7 @@
-import { test } from '@/test'
-import VTimeline from '@/components/VTimeline/VTimeline'
+import VTimeline from '../VTimeline'
+import { mount } from '@vue/test-utils'
 
-test('VTimeline.js', ({ mount }) => {
+describe('VTimeline.ts', () => {
   it('should match snapshot', () => {
     const wrapper = mount(VTimeline)
 
