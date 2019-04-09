@@ -1,4 +1,10 @@
-const { dataFooterSlots, dataFooterEvents } = require('../variables')
+const dataFooterSlots = [
+  { name: 'pageText' }
+]
+
+const dataFooterEvents = [
+  { name: 'update:options' }
+]
 
 module.exports = {
   'v-data-footer': {
