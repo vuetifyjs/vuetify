@@ -28,34 +28,6 @@ export default VSheet.extend({
   }),
 
   methods: {
-    genControls () {
-      return this.$createElement('div', {
-        staticClass: 'v-color-picker__controls'
-      }, [
-        this.$createElement(VColorPickerPreview, {
-          props: {
-            value: this.internalValue
-          },
-          on: {
-            'update:hue': (v: number) => this.$set(this.internalValue, 0, v),
-            'update:alpha': (v: number) => this.$set(this.internalValue, 3, v)
-          }
-        }),
-        this.genEdit()
-      ])
-    },
-    genEdit () {
-      return this.$createElement(VColorPickerRgba, {
-        props: {
-          value: HSVAtoRGBA(this.internalValue)
-        },
-        on: {
-          input: (v: RGBA) => {
-            this.internalValue = RGBAtoHSVA(v)
-          }
-        }
-      })
-    },
     genCanvas () {
       return this.$createElement(VColorPickerCanvas, {
         props: {
@@ -71,6 +43,37 @@ export default VSheet.extend({
               this.internalValue[3]
             ]
           }
+        }
+      })
+    },
+    genControls () {
+      return this.$createElement('div', {
+        staticClass: 'v-color-picker__controls'
+      }, [
+        this.genPreview(),
+        this.genEdit()
+      ])
+    },
+    genEdit () {
+      return this.$createElement(VColorPickerRgba, {
+        props: {
+          value: HSVAtoRGBA(this.internalValue)
+        },
+        on: {
+          input: (v: RGBA) => {
+            this.internalValue = RGBAtoHSVA(v)
+          }
+        }
+      })
+    },
+    genPreview () {
+      return this.$createElement(VColorPickerPreview, {
+        props: {
+          value: this.internalValue
+        },
+        on: {
+          'update:hue': (v: number) => this.$set(this.internalValue, 0, v),
+          'update:alpha': (v: number) => this.$set(this.internalValue, 3, v)
         }
       })
     }
