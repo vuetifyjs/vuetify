@@ -98,15 +98,6 @@
       { "text": "cards", "to": "cards" },
       { "text": "carousels", "to": "carousels" },
       { "text": "chips", "to": "chips" },
-      {
-        "group": "components",
-        "text": "tables",
-        "children": [
-          { "text": "dataIterators", "to": "data-iterators", "updated": true },
-          { "text": "simpleTables", "to": "simple-tables", "new": true },
-          { "text": "dataTables", "to": "data-tables", "updated": true }
-        ]
-      },
       { "text": "dialogs", "to": "dialogs" },
       { "text": "dividers", "to": "dividers" },
       { "text": "expansionPanels", "to": "expansion-panels" },
@@ -170,6 +161,15 @@
       { "text": "sparklines", "to": "sparklines", "updated": true },
       { "text": "steppers", "to": "steppers" },
       { "text": "subheaders", "to": "subheaders" },
+      {
+        "group": "components",
+        "text": "tables",
+        "children": [
+          { "text": "dataIterators", "to": "data-iterators", "updated": true },
+          { "text": "simpleTables", "to": "simple-tables", "new": true },
+          { "text": "dataTables", "to": "data-tables", "updated": true }
+        ]
+      },
       { "text": "tabs", "to": "tabs" },
       { "text": "timelines", "to": "timelines" },
       { "text": "tooltips", "to": "tooltips" },
