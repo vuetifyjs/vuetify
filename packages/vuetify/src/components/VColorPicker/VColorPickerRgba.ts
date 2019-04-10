@@ -36,7 +36,12 @@ export default Vue.extend({
       const el = e.target as HTMLInputElement
       this.$set(this.rgba, index, parseInt(el.value || 0, 10))
     },
-    genInput (target: string, value: number, change: (e: Event) => void, float: boolean = false): VNode {
+    genInput (
+      target: string,
+      value: number,
+      change: (e: Event) => void,
+      float = false
+    ): VNode {
       return this.$createElement('div', {
         staticClass: 'v-color-picker__input'
       }, [
@@ -44,9 +49,7 @@ export default Vue.extend({
           domProps: {
             value: float ? value : parseInt(value, 10)
           },
-          on: {
-            change
-          }
+          on: { change }
         }),
         this.$createElement('span', target.toUpperCase())
       ])
@@ -54,13 +57,15 @@ export default Vue.extend({
   },
 
   render (h): VNode {
-    return this.$createElement('div', {
+    const [r, g, b, a] = this.rgba
+
+    return h('div', {
       staticClass: 'v-color-picker__edit'
     }, [
-      this.genInput('r', this.rgba[0], (e: Event) => this.updateValue(e, 0)),
-      this.genInput('g', this.rgba[1], (e: Event) => this.updateValue(e, 1)),
-      this.genInput('b', this.rgba[2], (e: Event) => this.updateValue(e, 2)),
-      this.genInput('a', this.rgba[3], (e: Event) => this.updateValue(e, 3), true)
+      this.genInput('r', r, (e: Event) => this.updateValue(e, 0)),
+      this.genInput('g', g, (e: Event) => this.updateValue(e, 1)),
+      this.genInput('b', b, (e: Event) => this.updateValue(e, 2)),
+      this.genInput('a', a, (e: Event) => this.updateValue(e, 3), true)
     ])
   }
 })
