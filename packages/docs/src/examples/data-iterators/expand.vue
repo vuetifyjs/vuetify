@@ -24,9 +24,9 @@
               </v-card-title>
               <v-switch
                 :input-value="isExpanded(item)"
-                @change="(v) => expand(item, v)"
                 :label="isExpanded(item) ? 'Expanded' : 'Closed'"
                 class="pl-3 mt-0"
+                @change="(v) => expand(item, v)"
               ></v-switch>
               <v-divider></v-divider>
               <v-list v-if="isExpanded(item)" dense>
