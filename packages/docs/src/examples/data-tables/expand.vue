@@ -3,12 +3,13 @@
   <v-data-table
     :headers="headers"
     :items="desserts"
+    :single-expand="expand"
+    :expanded.sync="expanded"
     item-key="name"
     show-expand
-    :single-expand="expand"
     class="elevation-1"
   >
-    <template #top>
+    <template v-slot:top>
       <v-toolbar flat color="white">
         <v-toolbar-title>Expandable Table</v-toolbar-title>
         <v-spacer></v-spacer>
@@ -17,7 +18,7 @@
         </v-btn>
       </v-toolbar>
     </template>
-    <template #item.expanded="{ headers }">
+    <template v-slot:item.expanded="{ headers }">
       <td :colspan="headers.length">Peek-a-boo!</td>
     </template>
   </v-data-table>
@@ -27,6 +28,7 @@
   export default {
     data () {
       return {
+        expanded: [],
         expand: false,
         headers: [
           {

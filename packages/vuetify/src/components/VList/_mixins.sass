@@ -1,34 +1,5 @@
-@mixin list-theme($material)
-  background: map-get($material, 'cards')
-  color: map-deep-get($material, 'text','primary')
-
-  .v-list--disabled
-    color: map-deep-get($material, 'text', 'disabled')
-
-  .v-list-group--active:before,
-  .v-list-group--active:after
-    background: map-get($material, 'dividers')
-
 @mixin list-shaped($size)
   .v-list-item,
   .v-list-item:before
     border-bottom-right-radius: #{$size * 0.6666666666666667}
     border-top-right-radius: #{$size * 0.6666666666666667}
-
-@mixin list-item-theme($material)
-  color: map-deep-get($material, 'text', 'primary')
-
-  &.v-list-item__mask
-    color: map-deep-get($material, 'text', 'disabled')
-    background: map-deep-get($material, 'expansion-panels', 'focus')
-
-  .v-list-item__subtitle,
-  .v-list-item__action-text
-    color: map-deep-get($material, 'text', 'secondary')
-
-@mixin list-rtl()
-  &__item
-    &__title
-      text-align: right
-    &__content
-      text-align: right

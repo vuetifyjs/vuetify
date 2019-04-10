@@ -60,31 +60,27 @@
   }
 </script>
 
-<style lang="stylus">
-.core-goto {
-  position: relative;
-  text-decoration: none;
+<style lang="sass">
+.core-goto
+  position: relative
+  text-decoration: none
 
-  &.tag-H1 .v-icon {
-    font-size: 32px;
-  }
-  &.tag-H2 .v-icon {
-    font-size: 24px;
-  }
-  &.tag-H3 .v-icon {
-    font-size: 16px;
-  }
+  &.tag-H1 .v-icon
+    font-size: 32px
 
-  .v-icon {
-    position: absolute;
-    left: 100%;
-    top: 50%;
-    transform: translateY(-50%);
-    vertical-align: middle;
-  }
+  &.tag-H2 .v-icon
+    font-size: 24px
 
-  p {
-    margin-bottom: 0 !important;
-  }
-}
+  &.tag-H3 .v-icon
+    font-size: 16px
+
+  .v-icon
+    position: absolute
+    left: 100%
+    top: 50%
+    transform: translateY(-50%)
+    vertical-align: middle
+
+  p
+    margin-bottom: 0 !important
 </style>

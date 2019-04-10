@@ -59,8 +59,8 @@
     "description": "Get ready for automatic treeshaking. Use only the components you need. Single component importing only pulls in what you use.",
     "keywords": "a la carte, a-la-carte, vuetify single import, vuetify import, component importing"
   },
-  "framework/default-markup": {
-    "title": "Default Markup",
+  "framework/application": {
+    "title": "Application service",
     "description": "Vuetify comes equipped with a default markup that makes it easy to create layouts for any application.",
     "keywords": "default layout, default markup, vuetify default layout"
   },

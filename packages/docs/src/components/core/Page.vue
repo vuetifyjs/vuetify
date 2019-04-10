@@ -13,6 +13,12 @@
         </v-flex>
         <v-spacer />
         <v-flex
+          v-if="structure.file"
+          shrink
+        >
+          <core-file-btn :link="structure.file" />
+        </v-flex>
+        <v-flex
           v-if="structure.mdSpec"
           shrink
         >
@@ -128,12 +134,12 @@
   }
 </script>
 
-<style lang="stylus">
-  .page
-    max-width: 1185px;
+<style lang="sass">
+.page
+  max-width: 1185px
 
-  #components-navigation-drawers
-    .v-sheet,
-    .v-card
-      overflow: hidden;
+#components-navigation-drawers
+  .v-sheet,
+  .v-card
+    overflow: hidden
 </style>

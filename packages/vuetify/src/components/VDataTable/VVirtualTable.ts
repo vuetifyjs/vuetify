@@ -93,13 +93,6 @@ export default mixins<options &
         height: `${height}px`
       }
     },
-    setScrollTop () {
-      const table = this.$refs.table as Element
-      table.scrollTop = this.scrollTop
-
-      const scroller = this.$refs.scroller as Element
-      scroller.scrollTop = this.scrollTop
-    },
     genBody () {
       if (this.cachedItems === null || this.chunkIndex !== this.oldChunk) {
         this.cachedItems = this.genItems()

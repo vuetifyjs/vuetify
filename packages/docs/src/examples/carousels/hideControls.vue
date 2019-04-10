@@ -1,5 +1,5 @@
 <template>
-  <v-carousel hide-controls>
+  <v-carousel :show-arrows="false">
     <v-carousel-item
       v-for="(item,i) in items"
       :key="i"

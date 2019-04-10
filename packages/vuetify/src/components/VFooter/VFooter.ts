@@ -4,6 +4,7 @@ import './VFooter.sass'
 // Mixins
 import Applicationable from '../../mixins/applicationable'
 import VSheet from '../VSheet/VSheet'
+import SSRBootable from '../../mixins/ssr-bootable'
 
 // Utilities
 import mixins from '../../util/mixins'
@@ -18,7 +19,8 @@ export default mixins(
   Applicationable('footer', [
     'height',
     'inset'
-  ])
+  ]),
+  SSRBootable
 ).extend({
   name: 'v-footer',
 

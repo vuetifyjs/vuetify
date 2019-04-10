@@ -1,0 +1,31 @@
+{
+  "header": "# Simple tables",
+  "headerText": "The `v-simple-table` component is a simple wrapper component around the `<table>` element. Inside the component you can use all the regular table elements such as ´<thead>`, `<tbody>`, `<tr>`, etc.",
+  "examples": {
+    "usage": {
+      "desc": "The simple table is a wrapper component around the `<table>` element."
+    },
+    "height": {
+      "header": "### Fixed height",
+      "desc": "Use the `height` prop to set a fixed height of the table."
+    },
+    "fixedHeader": {
+      "header": "### Fixed header",
+      "desc": "Use the `fixed-header` prop together with `height` to fix the header to the top of the table."
+    },
+    "dense": {
+      "header": "### Dense table",
+      "desc": "You can show a dense version of the table by using the `dense` prop."
+    },
+    "dark": {
+      "header": "### Dark theme",
+      "desc": "Use `dark` prop to switch table to the dark theme."
+    }
+  },
+  "props": {
+    "v-simple-table": {
+      "dense": "Decreases paddings to render a dense table",
+      "fixedHeader": "Sets table header to fixed mode"
+    }
+  }
+}

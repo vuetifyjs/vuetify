@@ -1,13 +1,25 @@
 // Imports
 @import '../../styles/styles.sass'
 @import './_variables.scss'
-@import './_mixins.sass'
 
 // Theme
-.v-data-table.theme--light
-  +data-table-header-theme($material-light)
-.v-data-table.theme--dark
-  +data-table-header-theme($material-dark)
++theme(v-data-table-header) using ($material)
+  th.sortable
+    .v-icon
+      color: rgba(map-get($material, 'fg-color'), map-get($material, 'disabledORhints-text-percent'))
+
+    &:hover
+      color: rgba(map-get($material, 'fg-color'), map-get($material, 'primary-text-percent'))
+
+    &.active
+      color: rgba(map-get($material, 'fg-color'), map-get($material, 'primary-text-percent'))
+
+      .v-icon
+        color: rgba(map-get($material, 'fg-color'), map-get($material, 'primary-text-percent'))
+
+  &__sort-badge
+    background-color: rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+    color: map-deep-get($material, 'text', 'primary')
 
 // Block
 .v-data-table-header

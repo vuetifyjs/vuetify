@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { VNode, VNodeDirective, FunctionalComponentOptions } from 'vue/types'
-import { VuetifyIcon } from 'vuetify'
+import { VuetifyIcon } from 'vuetify/types/services/icons'
 
 export function createSimpleFunctional (
   c: string,
@@ -150,6 +150,30 @@ export function addOnceEventListener (el: EventTarget, event: string, cb: () => 
   el.addEventListener(event, once, false)
 }
 
+let passiveSupported = false
+try {
+  if (typeof window !== 'undefined') {
+    const testListenerOpts = Object.defineProperty({}, 'passive', {
+      get: () => {
+        passiveSupported = true
+      }
+    })
+
+    window.addEventListener('testListener', testListenerOpts, testListenerOpts)
+    window.removeEventListener('testListener', testListenerOpts, testListenerOpts)
+  }
+} catch (e) { console.warn(e) }
+export { passiveSupported }
+
+export function addPassiveEventListener (
+  el: EventTarget,
+  event: string,
+  cb: EventHandlerNonNull | (() => void),
+  options: {}
+): void {
+  el.addEventListener(event, cb, passiveSupported ? options : false)
+}
+
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
   const last = path.length - 1
 
@@ -252,13 +276,6 @@ export function filterObjectOnKeys<T, K extends keyof T> (obj: T, keys: K[]): { 
   }
 
   return filtered
-}
-
-export function filterChildren (array: VNode[] = [], tag: string): VNode[] {
-  return array.filter(child => {
-    return child.componentOptions &&
-      child.componentOptions.Ctor.options.name === tag
-  })
 }
 
 export function convertToUnit (str: string | number | null | undefined, unit = 'px'): string | undefined {

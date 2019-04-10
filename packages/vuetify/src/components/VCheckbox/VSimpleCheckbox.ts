@@ -1,5 +1,7 @@
 import './VSimpleCheckbox.sass'
 
+import ripple from '../../directives/ripple'
+
 import Vue, { VNode, VNodeDirective } from 'vue'
 import { VIcon } from '../VIcon'
 
@@ -11,6 +13,10 @@ export default Vue.extend({
   name: 'v-simple-checkbox',
 
   functional: true,
+
+  directives: {
+    ripple
+  },
 
   props: {
     ...Colorable.options.props,

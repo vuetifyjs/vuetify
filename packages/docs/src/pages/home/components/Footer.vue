@@ -177,32 +177,32 @@
   }
 </script>
 
-<style lang="stylus">
-  #footer
-    a
-      opacity: .8
-      text-decoration: none
+<style lang="sass">
+#footer
+  a
+    opacity: .8
+    text-decoration: none
 
-      &:hover
-        color: #FFF
-        opacity: 1
+    &:hover
+      color: #FFF
+      opacity: 1
 
-    .v-text-field--rounded
-      margin-bottom: 16px
+  .v-text-field--rounded
+    margin-bottom: 16px
 
-      .v-input__slot
-        border-radius: 28px
+    .v-input__slot
+      border-radius: 28px
 
-      .v-text-field__slot,
-      .v-label
-        padding-left: 8px
+    .v-text-field__slot,
+    .v-label
+      padding-left: 8px
 
-      .v-btn
-        margin: 0
-        border-top-right-radius: 28px
-        border-bottom-right-radius: 28px
-        box-shadow: none
-        height: 48px
-        margin-right: -12px
-        padding-top: 2px
+    .v-btn
+      margin: 0
+      border-top-right-radius: 28px
+      border-bottom-right-radius: 28px
+      box-shadow: none
+      height: 48px
+      margin-right: -12px
+      padding-top: 2px
 </style>

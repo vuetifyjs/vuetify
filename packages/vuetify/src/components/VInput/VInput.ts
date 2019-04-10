@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_inputs.styl'
+import './VInput.sass'
 
 // Components
 import VIcon from '../VIcon'

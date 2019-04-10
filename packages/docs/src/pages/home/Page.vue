@@ -28,11 +28,11 @@
   }
 </script>
 
-<style lang="stylus">
-  #home
-    .v-card {
-      border-radius: 6px;
-    }
-  .mono
-    font-family: 'Roboto Mono', monospace !important
+<style lang="sass">
+#home
+  .v-card
+    border-radius: 6px
+
+.mono
+  font-family: 'Roboto Mono', monospace !important
 </style>

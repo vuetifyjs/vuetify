@@ -1,11 +1,8 @@
 @import '../../styles/styles.sass'
-@import './_mixins.sass'
 
 // Theme
-.v-overlay.theme--light
-  +overlay-theme($material-light)
-.v-overlay.theme--dark
-  +overlay-theme($material-dark)
++theme(v-overlay) using ($material)
+  color: map-deep-get($material, 'text', 'primary')
 
 // Block
 .v-overlay

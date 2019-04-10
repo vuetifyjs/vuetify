@@ -81,9 +81,9 @@ export default mixins(
 
   methods: {
     genLabel () {
-      if (!this.hasLabel) return null
-
       const label = VInput.options.methods.genLabel.call(this)
+
+      if (!label) return label
 
       label!.data!.on = { click: this.onChange }
 

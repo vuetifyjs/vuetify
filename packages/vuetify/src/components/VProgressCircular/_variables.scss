@@ -1,0 +1,5 @@
+$progress-circular-rotate-animation: progress-circular-rotate 1.4s linear infinite !default;
+$progress-circular-rotate-dash: progress-circular-dash 1.4s ease-in-out infinite !default;
+$process-circular-intermediate-svg-transition: all .2s ease-in-out !default;
+$progress-circular-underlay-stroke: rgba(map-get($shades, 'black'), 0.1) !default;
+$progress-circular-overlay-transition: all .6s ease-in-out !default;

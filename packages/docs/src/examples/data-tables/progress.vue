@@ -6,7 +6,7 @@
     class="elevation-1"
   >
     <template v-slot:progress>
-      <v-progress-linear color="green" indeterminate></v-progress-linear>
+      <v-progress-linear color="green" :height="4" indeterminate></v-progress-linear>
     </template>
   </v-data-table>
 </template>

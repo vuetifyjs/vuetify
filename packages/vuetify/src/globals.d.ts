@@ -12,6 +12,7 @@ import {
   ThisTypedComponentOptionsWithArrayProps,
   ThisTypedComponentOptionsWithRecordProps
 } from 'vue/types/options'
+import { MetaInfo } from 'vue-meta/types'
 import { TouchStoredHandlers } from './directives/touch'
 
 declare global {
@@ -70,6 +71,12 @@ declare module 'vue/types/vnode' {
       expression: string
       value: any
     }
+  }
+}
+
+declare module 'vue/types/options' {
+  interface ComponentOptions<V extends Vue> {
+    head?: MetaInfo | (() => MetaInfo)
   }
 }
 
