@@ -35,7 +35,7 @@ export default Vue.extend({
   },
 
   methods: {
-    genAlpha () {
+    genAlpha (): VNode {
       return this.genTrack({
         class: {
           'v-color-picker__alpha': true
@@ -54,7 +54,7 @@ export default Vue.extend({
         }
       })
     },
-    genColor () {
+    genColor (): VNode {
       return this.$createElement('div', {
         staticClass: 'v-color-picker__color'
       }, [
@@ -62,7 +62,7 @@ export default Vue.extend({
         this.genAlpha()
       ])
     },
-    genDot () {
+    genDot (): VNode {
       return this.$createElement('div', {
         staticClass: 'v-color-picker__dot',
         style: {
@@ -70,7 +70,7 @@ export default Vue.extend({
         }
       })
     },
-    genHue () {
+    genHue (): VNode {
       return this.genTrack({
         class: {
           'v-color-picker__hue': true
@@ -89,7 +89,7 @@ export default Vue.extend({
         }
       })
     },
-    genTrack (options: object) {
+    genTrack (options: object): VNode {
       return this.$createElement(VSlider, {
         staticClass: 'v-color-picker__track',
         ...options
