@@ -19,27 +19,25 @@ export default Vue.extend({
   }),
 
   watch: {
+    alphaValue (val: number) {
+      this.$emit('update:alpha', val)
+    },
+    hueValue (val: number) {
+      this.$emit('update:hue', val)
+    },
     value: {
       handler (v: HSVA) {
         this.hueValue = v[0]
         this.alphaValue = v[3]
       },
       immediate: true
-    },
-    hueValue (v: number) {
-      this.$emit('update:hue', v)
-    },
-    alphaValue (v: number) {
-      this.$emit('update:alpha', v)
     }
   },
 
   methods: {
     genAlpha (): VNode {
       return this.genTrack({
-        class: {
-          'v-color-picker__alpha': true
-        },
+        staticClass: 'v-color-picker__alpha',
         props: {
           thumbColor: 'grey lighten-2',
           hideDetails: true,
@@ -72,9 +70,7 @@ export default Vue.extend({
     },
     genHue (): VNode {
       return this.genTrack({
-        class: {
-          'v-color-picker__hue': true
-        },
+        staticClass: 'v-color-picker__hue',
         props: {
           thumbColor: 'grey lighten-2',
           hideDetails: true,
