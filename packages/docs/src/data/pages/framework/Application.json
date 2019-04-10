@@ -1,9 +1,26 @@
 {
   "title": "header",
+  "titleText": "headerText",
   "children": [
     {
       "type": "section",
       "children": [
+        {
+          "type": "heading",
+          "lang": "header2"
+        },
+        {
+          "type": "markup",
+          "value": "ts_application_service_structure"
+        },
+        {
+          "type": "text",
+          "lang": "headerText2"
+        },
+        {
+          "type": "markup",
+          "value": "js_application_service_property_reference"
+        },
         {
           "type": "heading",
           "lang": "appHeader"

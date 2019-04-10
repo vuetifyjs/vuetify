@@ -22,25 +22,32 @@
       { "text": "aLaCarte", "to": "a-la-carte" },
       { "text": "grid", "to": "grid" },
       { "text": "gridLists", "to": "grid-lists" },
-      { "text": "icons", "to": "icons" },
-      { "text": "i18n", "to": "internationalization" },
+      {
+        "group": "framework",
+        "text": "services",
+        "children": [
+          { "text": "application", "to": "application" },
+          { "text": "breakpoints", "to": "breakpoints" },
+          { "text": "icons", "to": "icons" },
+          { "text": "i18n", "to": "internationalization" },
+          { "text": "scroll", "to": "scroll" },
+          { "text": "theme", "to": "theme" }
+        ]
+      },
       {
         "group": "framework",
         "text": "layout",
         "children": [
-          { "text": "defaultMarkup", "to": "default-markup"},
           { "text": "aspectRatios", "to": "aspect-ratios" },
-          { "text": "breakpoints", "to": "breakpoints" },
           { "text": "preMadeLayouts", "to": "pre-made-layouts" }
         ]
       },
       {
         "group": "framework",
-        "text": "stylesAndThemes",
+        "text": "styles",
         "children": [
           { "text": "colors", "to": "colors" },
           { "text": "content", "to": "content" },
-          { "text": "theme", "to": "theme" },
           { "text": "typography", "to": "typography" }
         ]
       },
@@ -58,7 +65,6 @@
         "group": "framework",
         "text": "motion",
         "children": [
-          { "text": "scroll", "to": "scroll", "updated": true },
           { "text": "transitions", "to": "transitions" }
         ]
       }
