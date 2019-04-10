@@ -57,9 +57,18 @@
   display: flex
   margin-bottom: 24px
 
-.v-color-picker__saturation
-  border: 1px solid grey
+.v-color-picker__canvas
+  position: relative
+  overflow: hidden
   height: 150px
+
+.v-color-picker__canvas-dot
+  position: absolute
+  width: 15px
+  height: 15px
+  background: transparent
+  border-radius: 50%
+  box-shadow: 0px 0px 0px 1.5px rgba(255,255,255,1), inset 0px 0px 1px 1.5px rgba(0,0,0,0.3)
 
 .v-color-picker__track
   position: relative

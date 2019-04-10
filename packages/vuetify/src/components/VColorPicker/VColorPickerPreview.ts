@@ -3,14 +3,36 @@ import VSlider from '../VSlider/VSlider'
 
 // Types
 import Vue, { VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
+import { HSVAtoRGBA, HSVA } from '../../util/colorUtils'
 
 export default Vue.extend({
   name: 'v-color-picker-preview',
+
+  props: {
+    value: Array as PropValidator<HSVA>
+  },
 
   data: () => ({
     alphaValue: 0,
     hueValue: 0
   }),
+
+  watch: {
+    value: {
+      handler (v: HSVA) {
+        this.hueValue = v[0]
+        this.alphaValue = v[3]
+      },
+      immediate: true
+    },
+    hueValue (v: number) {
+      this.$emit('update:hue', v)
+    },
+    alphaValue (v: number) {
+      this.$emit('update:alpha', v)
+    }
+  },
 
   methods: {
     genAlpha () {
@@ -20,11 +42,14 @@ export default Vue.extend({
         },
         props: {
           thumbColor: 'grey lighten-2',
-          hideDetails: true
+          hideDetails: true,
+          value: this.alphaValue * 100,
+          min: 0,
+          max: 100
         },
         on: {
-          change: (val: number) => {
-            this.alphaValue = val
+          input: (val: number) => {
+            this.alphaValue = val / 100
           }
         }
       })
@@ -39,7 +64,10 @@ export default Vue.extend({
     },
     genDot () {
       return this.$createElement('div', {
-        staticClass: 'v-color-picker__dot'
+        staticClass: 'v-color-picker__dot',
+        style: {
+          background: `rgba(${HSVAtoRGBA(this.value).join(', ')})`
+        }
       })
     },
     genHue () {
@@ -50,10 +78,12 @@ export default Vue.extend({
         props: {
           thumbColor: 'grey lighten-2',
           hideDetails: true,
-          value: this.hueValue
+          value: this.hueValue,
+          min: 0,
+          max: 360
         },
         on: {
-          change: (val: number) => {
+          input: (val: number) => {
             this.hueValue = val
           }
         }

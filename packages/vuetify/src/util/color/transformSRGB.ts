@@ -1,4 +1,5 @@
 import { RGB, XYZ } from '../colorUtils'
+import { clamp } from '../../util/helpers'
 
 // For converting XYZ to sRGB
 const srgbForwardMatrix = [
@@ -27,10 +28,6 @@ const srgbReverseTransform = (C: number): number => (
     ? C / 12.92
     : ((C + 0.055) / 1.055) ** 2.4
 )
-
-function clamp (value: number): number {
-  return Math.max(0, Math.min(1, value))
-}
 
 export function fromXYZ (xyz: XYZ): RGB {
   const rgb = Array(3)
