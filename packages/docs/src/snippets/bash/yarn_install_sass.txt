@@ -1,5 +1,3 @@
-$ yarn add node-sass sass-loader style-loader css-loader -D
+yarn add sass sass-loader fibers deepmerge -D
 // OR
-$ npm i node-sass sass-loader style-loader css-loader --save-dev
-
-// Replace node-sass with sass to use Dart Sass
+npm install sass sass-loader fibers deepmerge --dev

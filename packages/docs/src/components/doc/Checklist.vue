@@ -6,9 +6,9 @@
           <doc-markdown :code="item" />
         </v-list-item-title>
       </v-list-item-content>
-      <v-list-item-action>
+      <v-list-item-icon>
         <v-icon color="success">check</v-icon>
-      </v-list-item-action>
+      </v-list-item-icon>
     </v-list-item>
   </v-list>
 </template>
@@ -49,4 +49,7 @@
 
   > :nth-child(odd)
     background: #eee
+
+  p
+    margin-bottom: 0
 </style>

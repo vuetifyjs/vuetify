@@ -34,9 +34,9 @@
           @click.native="item.value = !item.value"
         >
           <v-card-title class="py-0 pr-2">
-            <span
+            <doc-markdown
               class="body-2"
-              v-text="item.title"
+              :code="item.title"
             />
             <v-spacer />
             <v-btn
