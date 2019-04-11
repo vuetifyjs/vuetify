@@ -16,8 +16,14 @@ export default Vue.extend({
   },
 
   computed: {
+    hsva (): HSVA {
+      return HSVAtoRGBA(this.color)
+    },
+    rgb (): string {
+      return `rgb(${this.hsva.slice(0, 3).join(', ')})`
+    },
     rgba (): string {
-      return `rgba(${HSVAtoRGBA(this.color).join(', ')})`
+      return `rgba(${this.hsva.join(', ')})`
     }
   },
 
@@ -31,6 +37,9 @@ export default Vue.extend({
           value: this.alpha * 100,
           min: 0,
           max: 100
+        },
+        style: {
+          backgroundImage: `linear-gradient(to right, transparent, ${this.rgb})`
         },
         on: {
           input: (val: number) => this.$emit('update:alpha', val / 100)
