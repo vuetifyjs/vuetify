@@ -29,6 +29,7 @@ Object {
   "sort": "mdi-arrow-up",
   "subgroup": "mdi-menu-down",
   "success": "mdi-check-circle",
+  "unfold": "mdi-unfold-more-horizontal",
   "warning": "mdi-exclamation",
 }
 `;
@@ -62,6 +63,7 @@ Object {
   "sort": "fa fa-sort-up",
   "subgroup": "fa fa-caret-down",
   "success": "fa fa-check-circle",
+  "unfold": "fa fa-angle-double-down",
   "warning": "fa fa-exclamation",
 }
 `;
