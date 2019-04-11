@@ -2425,14 +2425,6 @@ autoprefixer@^9.4.8, autoprefixer@^9.5.0:
     postcss "^7.0.14"
     postcss-value-parser "^3.3.1"
 
-avoriaz@^6.3.0:
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/avoriaz/-/avoriaz-6.3.0.tgz#ede148cf0be06f792ff8253a68e0e0483b27c2de"
-  integrity sha512-NjqjZ7hj5DZx5tQ1aZ6Fot9F1kQCNHdNQcdnaKR1CbRwPR2k4ntQrp06Wc9ScfB6EGl+NDEk0Lh1WTZ8Me/9Zw==
-  dependencies:
-    lodash "^4.17.4"
-    vue-add-globals "^2.0.0"
-
 aws-sign2@~0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.7.0.tgz#b46e890934a9591f2d2f6f86d7e6a9f1b3fe76a8"
@@ -13107,11 +13099,6 @@ vscode-uri@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/vscode-uri/-/vscode-uri-1.0.6.tgz#6b8f141b0bbc44ad7b07e94f82f168ac7608ad4d"
   integrity sha512-sLI2L0uGov3wKVb9EB+vIQBl9tVP90nqRvxSoJ35vI3NjxE8jfsE5DSOhWgSunHSZmKS4OCi2jrtfxK7uyp2ww==
-
-vue-add-globals@^2.0.0:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/vue-add-globals/-/vue-add-globals-2.0.1.tgz#c9fba6faac44f679ec15d5a9637f518b181fc44d"
-  integrity sha512-NvpO+te1DsZfZq9ecPR6lJrsVm+d+R2yTgQZUEme9zS23Q+wfGYojIPgBkr7Z0ZCv3OpbEG+xd/3KSiB856QOg==
 
 vue-analytics@^5.16.4:
   version "5.16.4"
