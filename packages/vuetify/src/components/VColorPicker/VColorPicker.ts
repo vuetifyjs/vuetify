@@ -8,9 +8,11 @@ import VSheet from '../VSheet/VSheet'
 import VColorPickerPreview from './VColorPickerPreview'
 import VColorPickerCanvas from './VColorPickerCanvas'
 
+// Utilities
+import { colorEqual, HSVA, HSVAtoRGBA } from '../../util/colorUtils'
+
 // Types
 import { VNode } from 'vue'
-import { HSVA, colorEqual } from '../../util/colorUtils'
 import VColorPickerEdit from './VColorPickerEdit'
 
 export default VSheet.extend({
@@ -27,20 +29,48 @@ export default VSheet.extend({
     internalValue: [0, 1, 1, 1] as HSVA
   }),
 
+  computed: {
+    alpha (): number {
+      return this.internalValue[3]
+    },
+    hsva (): HSVA {
+      return HSVAtoRGBA(this.internalValue)
+    },
+    hue (): number {
+      return this.internalValue[0]
+    },
+    parsedHsva (): number[] {
+      const [h, s, v, a] = this.hsva
+
+      return [
+        parseInt(h),
+        parseInt(s),
+        parseInt(v),
+        a
+      ]
+    },
+    rgb (): string {
+      return `rgb(${this.parsedHsva.slice(0, 3).join(', ')})`
+    },
+    rgba (): string {
+      return `rgba(${this.parsedHsva.join(', ')})`
+    }
+  },
+
   methods: {
     genCanvas () {
       return this.$createElement(VColorPickerCanvas, {
         props: {
-          hue: this.internalValue[0],
+          hue: this.hue,
           value: this.internalValue.slice(1, 3)
         },
         on: {
           input: (v: any) => {
             this.internalValue = [
-              this.internalValue[0],
+              this.hue,
               v[0],
               v[1],
-              this.internalValue[3]
+              this.alpha
             ]
           }
         }
@@ -64,7 +94,8 @@ export default VSheet.extend({
             // If saturation is zero then we try
             // to reuse old hue value, otherwise
             // the canvas hue will revert to red
-            const oldHue = this.internalValue[0]
+            const oldHue = this.hue
+
             if (value[1] === 0) {
               value[0] = value[0] || oldHue
             }
@@ -77,8 +108,11 @@ export default VSheet.extend({
     genPreview () {
       return this.$createElement(VColorPickerPreview, {
         props: {
-          hue: this.internalValue[0],
-          alpha: this.internalValue[3],
+          alpha: this.alpha,
+          hsva: this.hsva,
+          hue: this.hue,
+          rgb: this.rgb,
+          rgba: this.rgba,
           color: this.internalValue.slice()
         },
         on: {

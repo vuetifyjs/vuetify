@@ -1,10 +1,12 @@
 // Components
 import VSlider from '../VSlider/VSlider'
 
+// Utilities
+import { HSVA } from '../../util/colorUtils'
+
 // Types
 import Vue, { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
-import { HSVAtoRGBA, HSVA } from '../../util/colorUtils'
 
 export default Vue.extend({
   name: 'v-color-picker-preview',
@@ -12,19 +14,10 @@ export default Vue.extend({
   props: {
     alpha: Number,
     color: Array as PropValidator<HSVA>,
+    hsva: Array as PropValidator<HSVA>,
+    rgb: String,
+    rgba: String,
     hue: Number
-  },
-
-  computed: {
-    hsva (): HSVA {
-      return HSVAtoRGBA(this.color)
-    },
-    rgb (): string {
-      return `rgb(${this.hsva.slice(0, 3).join(', ')})`
-    },
-    rgba (): string {
-      return `rgba(${this.hsva.join(', ')})`
-    }
   },
 
   methods: {
