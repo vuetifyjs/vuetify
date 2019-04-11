@@ -156,7 +156,14 @@
           { "text": "timePickers", "to": "time-pickers" }
         ]
       },
-      { "text": "progress", "to": "progress" },
+      {
+        "group": "components",
+        "text": "progress",
+        "children": [
+          { "text": "progressCircular", "to": "progress-circular" },
+          { "text": "progressLinear", "to": "progress-linear" }
+        ]
+      },
       { "text": "ratings", "to": "ratings" },
       { "text": "sheets", "to": "sheets" },
       { "text": "snackbars", "to": "snackbars" },
