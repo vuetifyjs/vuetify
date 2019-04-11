@@ -9,32 +9,12 @@ import {
   mount,
   Wrapper
 } from '@vue/test-utils'
-
-// Simulate touch
-function touch (element) {
-  const createTrigger = eventName => (clientX, clientY) => {
-    const touches = [{ clientX, clientY }]
-    const event = new Event(eventName)
-
-    event.touches = touches
-    event.changedTouches = touches
-    element.element.dispatchEvent(event)
-
-    return touch(element)
-  }
-
-  return {
-    start: createTrigger('touchstart'),
-    move: createTrigger('touchmove'),
-    end: createTrigger('touchend')
-  }
-}
+import { touch } from '@/test'
 
 describe('touch.ts', () => {
   let mountFunction: (value?: object) => Wrapper<Vue>
 
   beforeEach(() => {
-
     mountFunction = (value = {}) => {
       return mount(Vue.component('test', {
         directives: { Touch },
