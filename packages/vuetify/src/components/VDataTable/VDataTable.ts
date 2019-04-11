@@ -21,7 +21,7 @@ import VSimpleTable from './VSimpleTable'
 import VMobileRow from './VMobileRow'
 
 // Helpers
-import { deepEqual, getObjectValueByPath, compareFn, getPrefixedScopedSlots } from '../../util/helpers'
+import { deepEqual, getObjectValueByPath, compareFn, getPrefixedScopedSlots, getSlot } from '../../util/helpers'
 import { breaking } from '../../util/console'
 
 /* @vue/component */
@@ -138,7 +138,7 @@ export default VDataIterator.extend({
     genCaption (props: DataProps) {
       if (this.caption) return [this.$createElement('caption', [this.caption])]
 
-      return this.genSlots('caption', props)
+      return getSlot(this, 'caption', props, true)
     },
     genColgroup (props: DataProps) {
       return this.$createElement('colgroup', this.computedHeaders.map(header => {
@@ -192,7 +192,7 @@ export default VDataIterator.extend({
         }
       }
 
-      const children: VNodeChildrenArrayContents = [this.genSlots('header', data)]
+      const children: VNodeChildrenArrayContents = [getSlot(this, 'header', data)]
 
       if (!this.hideDefaultHeader) {
         const scopedSlots = getPrefixedScopedSlots('header.', this.$scopedSlots)
@@ -390,9 +390,9 @@ export default VDataIterator.extend({
       }
 
       return this.$createElement('tbody', [
-        this.genSlots('body.prepend', data),
+        getSlot(this, 'body.prepend', data, true),
         this.genItems(props.items, props),
-        this.genSlots('body.append', data)
+        getSlot(this, 'body.append', data, true)
       ])
     },
     genFooters (props: DataProps) {
@@ -411,7 +411,7 @@ export default VDataIterator.extend({
       }
 
       const children: VNodeChildren = [
-        this.genSlots('footer', data)
+        getSlot(this, 'footer', data, true)
       ]
 
       if (!this.hideDefaultFooter) {
@@ -448,7 +448,7 @@ export default VDataIterator.extend({
       return this.$createElement(VSimpleTable, {
         props: simpleProps
       }, [
-        this.proxySlot('top', this.genSlots('top', props)),
+        this.proxySlot('top', getSlot(this, 'top', props, true)),
         this.genCaption(props),
         this.genColgroup(props),
         this.genHeaders(props),

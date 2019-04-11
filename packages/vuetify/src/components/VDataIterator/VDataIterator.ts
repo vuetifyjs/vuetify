@@ -9,7 +9,7 @@ import mixins from '../../util/mixins'
 import Themeable from '../../mixins/themeable'
 
 // Helpers
-import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots } from '../../util/helpers'
+import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot } from '../../util/helpers'
 import { DataProps } from '../VData/VData'
 import { PropValidator } from 'vue/types/options'
 import { breaking, removed } from '../../util/console'
@@ -239,19 +239,14 @@ export default mixins(Themeable).extend({
         ...data
       })
     },
-    genSlots (slot: string, props: any = {}): VNodeChildren {
-      if (this.$scopedSlots[slot]) return this.$scopedSlots[slot]!(props)
-      else if (this.$slots[slot]) return this.$slots[slot]
-      return []
-    },
     genDefaultScopedSlot (props: any) {
       return this.$createElement('div', {
         staticClass: 'v-data-iterator'
       }, [
-        this.genSlots('header', props),
+        getSlot(this, 'header', props, true),
         this.genItems(props),
         this.genFooter(props),
-        this.genSlots('footer', props)
+        getSlot(this, 'footer', props, true)
       ]) as any
     }
   },
