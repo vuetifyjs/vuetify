@@ -28,7 +28,8 @@ const icons: VuetifyIcons = {
   ratingFull: 'fa fa-star',
   ratingHalf: 'fa fa-star-half-o',
   first: 'fa fa-step-backward',
-  last: 'fa fa-step-forward'
+  last: 'fa fa-step-forward',
+  unfold: 'fa fa-angle-double-down'
 }
 
 export default icons

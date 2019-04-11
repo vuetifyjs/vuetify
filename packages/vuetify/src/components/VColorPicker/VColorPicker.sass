@@ -1,5 +1,14 @@
 @import '../../styles/styles.sass'
 
++theme(v-color-picker) using ($material)
+  .v-color-picker__input
+    input
+      border-color: map-get($material, 'dividers')
+
+    span
+      color: map-deep-get($material, 'text', 'secondary')
+      font-size: 0.75rem
+
 // Block
 .v-color-picker
   +elevation(2)
@@ -47,9 +56,13 @@
     margin-right: 8px
 
   input
-    border: 1px solid grey
+    border-radius: 4px
+    border-style: solid
+    border-width: thin
+    margin-bottom: 8px
     min-width: 0
     outline: none
+    text-align: center
     width: 100%
 
 .v-color-picker__preview
