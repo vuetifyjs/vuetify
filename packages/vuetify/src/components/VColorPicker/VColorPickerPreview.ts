@@ -87,7 +87,7 @@ export default Vue.extend({
     },
     genTrack (options: object): VNode {
       return this.$createElement(VSlider, {
-        staticClass: 'v-color-picker__track',
+        class: 'v-color-picker__track',
         ...options
       })
     }
