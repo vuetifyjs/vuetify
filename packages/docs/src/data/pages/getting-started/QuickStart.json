@@ -104,8 +104,16 @@
           "lang": "existingText4"
         },
         {
+          "type": "markup",
+          "value": "js_vue_options_vuetify"
+        },
+        {
           "type": "text",
           "lang": "existingText5"
+        },
+        {
+          "type": "text",
+          "lang": "existingText6"
         },
         {
           "type": "markup",
@@ -117,7 +125,7 @@
         },
         {
           "type": "text",
-          "lang": "existingText6"
+          "lang": "existingText7"
         },
         {
           "type": "alert",
