@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "directives/resize",
   "children": [
     {
       "type": "section",

@@ -7,15 +7,18 @@
     <v-layout>
       <v-flex shrink>
         <v-avatar
-          tile
-          size="164"
+          :size="$vuetify.breakpoint.smAndUp ? 164 : 128"
           color="grey"
+          tile
         >
           <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
         </v-avatar>
       </v-flex>
       <v-flex>
-        <v-img src="https://cdn.vuetifyjs.com/images/cards/server-room.jpg">
+        <v-img
+          height="100%"
+          src="https://cdn.vuetifyjs.com/images/cards/server-room.jpg"
+        >
           <v-layout
             align-end
             fill-height

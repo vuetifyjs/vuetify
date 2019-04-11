@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VSystemBar",
   "mdSpec": {
     "version": "1",
     "link": "https://material.io/archive/guidelines/components/toolbars.html"
