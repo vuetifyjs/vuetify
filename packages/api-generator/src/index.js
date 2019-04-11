@@ -1,7 +1,7 @@
 const Vue = require('vue')
 const Vuetify = require('vuetify')
 const fs = require('fs')
-const { getMapData } = require('./map')
+const map = require('./map')
 const deepmerge = require('deepmerge')
 
 const hyphenateRE = /\B([A-Z])/g
@@ -134,155 +134,145 @@ function parseMixins (component) {
   return mixins.sort((a, b) => a > b)
 }
 
-// eslint-disable-next-line max-statements
-async function run () {
-  const map = await getMapData()
-  const components = {}
-  const directives = {}
+const components = {}
+const directives = {}
 
-  const installedComponents = Vue.options._base.options.components
-  const installedDirectives = Vue.options._base.options.directives
+const installedComponents = Vue.options._base.options.components
+const installedDirectives = Vue.options._base.options.directives
 
-  const componentNameRegex = /^(?:V[A-Z]|v-[a-z])/
-  for (const name in installedComponents) {
-    if (!componentNameRegex.test(name)) continue
+const componentNameRegex = /^(?:V[A-Z]|v-[a-z])/
+for (const name in installedComponents) {
+  if (!componentNameRegex.test(name)) continue
 
-    let component = installedComponents[name]
+  let component = installedComponents[name]
 
-    if (component.options.$_wrapperFor) {
-      component = component.options.$_wrapperFor
-    }
-
-    const kebabName = hyphenate(name)
-    let options = parseComponent(component)
-
-    if (map[kebabName]) {
-      options = deepmerge(options, map[kebabName], { arrayMerge })
-    }
-
-    components[kebabName] = options
+  if (component.options.$_wrapperFor) {
+    component = component.options.$_wrapperFor
   }
 
-  for (const key of ['Ripple', 'Resize', 'Scroll', 'Touch']) {
-    if (!installedDirectives[key]) continue
+  const kebabName = hyphenate(name)
+  let options = parseComponent(component)
 
-    const lowerCaseVersion = key.toLowerCase()
-    const vKey = `v-${lowerCaseVersion}`
-    const directive = map[vKey]
-    directive.type = getPropDefault(directive.default, directive.type)
-    directives[vKey] = directive
+  if (map[kebabName]) {
+    options = deepmerge(options, map[kebabName], { arrayMerge })
   }
 
-  function writeApiFile (obj, file) {
-    const stream = fs.createWriteStream(file)
+  components[kebabName] = options
+}
 
-    const comment = `/*
-   * THIS FILE HAS BEEN AUTOMATICALLY GENERATED USING THE API-GENERATOR TOOL.
-   *
-   * CHANGES MADE TO THIS FILE WILL BE LOST!
-   */
+for (const key of ['Ripple', 'Resize', 'Scroll', 'Touch']) {
+  if (!installedDirectives[key]) continue
 
-  `
+  const lowerCaseVersion = key.toLowerCase()
+  const vKey = `v-${lowerCaseVersion}`
+  const directive = map[vKey]
+  directive.type = getPropDefault(directive.default, directive.type)
+  directives[vKey] = directive
+}
 
-    stream.once('open', () => {
-      stream.write(comment)
-      stream.write('module.exports = ')
-      stream.write(JSON.stringify(obj, null, 2).replace(/'/g, '').replace(/"/g, '\''))
-      stream.write('\n')
-      stream.end()
-    })
+function writeApiFile (obj, file) {
+  const stream = fs.createWriteStream(file)
+
+  const comment = `/*
+  * THIS FILE HAS BEEN AUTOMATICALLY GENERATED USING THE API-GENERATOR TOOL.
+  *
+  * CHANGES MADE TO THIS FILE WILL BE LOST!
+  */
+
+`
+
+  stream.once('open', () => {
+    stream.write(comment)
+    stream.write('module.exports = ')
+    stream.write(JSON.stringify(obj, null, 2).replace(/'/g, '').replace(/"/g, '\''))
+    stream.write('\n')
+    stream.end()
+  })
+}
+
+function writeJsonFile (obj, file) {
+  const stream = fs.createWriteStream(file)
+
+  stream.once('open', () => {
+    stream.write(JSON.stringify(obj, null, 2))
+    stream.end()
+  })
+}
+
+function writePlainFile (content, file) {
+  const stream = fs.createWriteStream(file)
+
+  stream.once('open', () => {
+    stream.write(content)
+    stream.end()
+  })
+}
+
+const tags = Object.keys(components).reduce((t, k) => {
+  t[k] = {
+    attributes: components[k].props.map(p => p.name.replace(/([A-Z])/g, g => `-${g[0].toLowerCase()}`)).sort(),
+    description: ''
   }
 
-  function writeJsonFile (obj, file) {
-    const stream = fs.createWriteStream(file)
+  return t
+}, {})
 
-    stream.once('open', () => {
-      stream.write(JSON.stringify(obj, null, 2))
-      stream.end()
-    })
-  }
+const attributes = Object.keys(components).reduce((attrs, k) => {
+  const tmp = components[k].props.reduce((a, prop) => {
+    let type = prop.type
 
-  function writePlainFile (content, file) {
-    const stream = fs.createWriteStream(file)
+    if (!type) type = ''
+    else if (Array.isArray(type)) type = type.map(t => t.toLowerCase()).join('|')
+    else type = type.toLowerCase()
 
-    stream.once('open', () => {
-      stream.write(content)
-      stream.end()
-    })
-  }
+    const name = prop.name.replace(/([A-Z])/g, g => `-${g[0].toLowerCase()}`)
 
-  const tags = Object.keys(components).reduce((t, k) => {
-    t[k] = {
-      attributes: components[k].props.map(p => p.name.replace(/([A-Z])/g, g => `-${g[0].toLowerCase()}`)).sort(),
+    a[`${k}/${name}`] = {
+      type,
       description: ''
     }
 
-    return t
+    return a
   }, {})
 
-  const attributes = Object.keys(components).reduce((attrs, k) => {
-    const tmp = components[k].props.reduce((a, prop) => {
-      let type = prop.type
+  return Object.assign(attrs, tmp)
+}, {})
 
-      if (!type) type = ''
-      else if (Array.isArray(type)) type = type.map(t => t.toLowerCase()).join('|')
-      else type = type.toLowerCase()
+const fakeComponents = ts => {
+  const imports = [
+    `import Vue from 'vue'`
+  ]
+  if (ts) imports.push(`import { PropValidator } from 'vue/types/options'`)
+  const inspection = ts ? '' : `// noinspection JSUnresolvedFunction\n`
 
-      const name = prop.name.replace(/([A-Z])/g, g => `-${g[0].toLowerCase()}`)
-
-      a[`${k}/${name}`] = {
-        type,
-        description: ''
-      }
-
-      return a
-    }, {})
-
-    return Object.assign(attrs, tmp)
-  }, {})
-
-  const fakeComponents = ts => {
-    const imports = [
-      `import Vue from 'vue'`
-    ]
-    if (ts) imports.push(`import { PropValidator } from 'vue/types/options'`)
-    const inspection = ts ? '' : `// noinspection JSUnresolvedFunction\n`
-
-    return `${imports.join('\n')}\n\n` + Object.keys(components).map(component => {
-      const propType = type => {
-        if (type === 'any' || typeof type === 'undefined') return ts ? 'null as any as PropValidator<any>' : 'null'
-        if (Array.isArray(type)) return `[${type.map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(',')}]`
-        return type.charAt(0).toUpperCase() + type.slice(1)
-      }
-      const quoteProp = name => name.match(/-/) ? `'${name}'` : name
-      const componentProps = components[component].props
-      componentProps.sort((a, b) => {
-        if (a.name < b.name) return -1
-        return a.name === b.name ? 0 : 1
-      })
-      let props = componentProps.map(prop => `    ${quoteProp(prop.name)}: ${propType(prop.type)}`).join(',\n')
-      if (props) props = `\n  props: {\n${props}\n  }\n`
-      return `${inspection}Vue.component('${component}', {${props}})`
-    }).join('\n')
-  }
-
-  if (!fs.existsSync('dist')) {
-    fs.mkdirSync('dist', 0o755)
-  }
-
-  writeJsonFile(tags, 'dist/tags.json')
-  writeJsonFile(attributes, 'dist/attributes.json')
-  writePlainFile(fakeComponents(false), 'dist/fakeComponents.js')
-  writePlainFile(fakeComponents(true), 'dist/fakeComponents.ts')
-
-  components['$vuetify'] = map['$vuetify']
-  components['internationalization'] = map['internationalization']
-
-  writeApiFile({ ...components, ...directives }, 'dist/api.js')
+  return `${imports.join('\n')}\n\n` + Object.keys(components).map(component => {
+    const propType = type => {
+      if (type === 'any' || typeof type === 'undefined') return ts ? 'null as any as PropValidator<any>' : 'null'
+      if (Array.isArray(type)) return `[${type.map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(',')}]`
+      return type.charAt(0).toUpperCase() + type.slice(1)
+    }
+    const quoteProp = name => name.match(/-/) ? `'${name}'` : name
+    const componentProps = components[component].props
+    componentProps.sort((a, b) => {
+      if (a.name < b.name) return -1
+      return a.name === b.name ? 0 : 1
+    })
+    let props = componentProps.map(prop => `    ${quoteProp(prop.name)}: ${propType(prop.type)}`).join(',\n')
+    if (props) props = `\n  props: {\n${props}\n  }\n`
+    return `${inspection}Vue.component('${component}', {${props}})`
+  }).join('\n')
 }
 
-try {
-  run()
-} catch (e) {
-  console.error(e)
+if (!fs.existsSync('dist')) {
+  fs.mkdirSync('dist', 0o755)
 }
+
+writeJsonFile(tags, 'dist/tags.json')
+writeJsonFile(attributes, 'dist/attributes.json')
+writePlainFile(fakeComponents(false), 'dist/fakeComponents.js')
+writePlainFile(fakeComponents(true), 'dist/fakeComponents.ts')
+
+components['$vuetify'] = map['$vuetify']
+components['internationalization'] = map['internationalization']
+
+writeApiFile({ ...components, ...directives }, 'dist/api.js')
