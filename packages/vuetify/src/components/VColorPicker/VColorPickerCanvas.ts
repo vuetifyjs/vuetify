@@ -1,7 +1,7 @@
 // Types
 import Vue, { VNode } from 'vue'
-import { clamp, deepEqual } from '../../util/helpers'
-import { HSVA } from '../../util/colorUtils'
+import { clamp } from '../../util/helpers'
+import { HSVA, colorEqual } from '../../util/colorUtils'
 import { PropValidator } from 'vue/types/options'
 
 function renderHsv (canvas: HTMLCanvasElement, hue: number) {
@@ -34,28 +34,40 @@ export default Vue.extend({
     }
   },
 
-  data: () => ({
-    boundingRect: {} as ClientRect,
-    dotX: 0,
-    dotY: 0,
-    dragging: false,
-    internalValue: [0, 0]
-  }),
+  data () {
+    return {
+      boundingRect: {
+        width: 0,
+        height: 0,
+        left: 0,
+        top: 0
+      } as ClientRect,
+      dotX: 0,
+      dotY: 0,
+      dragging: false,
+      internalValue: this.value
+    }
+  },
+
+  computed: {
+    dotPosition (): [number, number] {
+      return [
+        this.internalValue[0] * this.boundingRect.width,
+        (1 - this.internalValue[1]) * this.boundingRect.height
+      ]
+    }
+  },
 
   watch: {
     hue (v: number) {
       this.updateCanvas()
     },
-    value: {
-      handler (v: HSVA) {
-        if (deepEqual(this.internalValue, v)) return
-        this.internalValue = v
-      },
-      immediate: true
+    value (v: HSVA) {
+      if (colorEqual(v, this.internalValue)) return
+      this.internalValue = v.slice()
+      this.updateCanvas()
     },
     internalValue (v: any) {
-      this.updateCanvas()
-      this.updateDot()
       this.$emit('input', v)
     }
   },
@@ -65,7 +77,6 @@ export default Vue.extend({
 
     this.$nextTick(() => {
       this.updateCanvas()
-      this.updateDot()
     })
   },
 
@@ -84,10 +95,6 @@ export default Vue.extend({
     },
     updateCanvas () {
       renderHsv(this.$refs.canvas as HTMLCanvasElement, this.hue)
-    },
-    updateDot () {
-      this.dotX = this.internalValue[0] * this.boundingRect.width
-      this.dotY = (1 - this.internalValue[1]) * this.boundingRect.height
     },
     updateBoundingRect () {
       this.boundingRect = this.$el.getBoundingClientRect()
@@ -125,8 +132,8 @@ export default Vue.extend({
         style: {
           width: `${this.dotSize}px`,
           height: `${this.dotSize}px`,
-          top: `${this.dotY - (this.dotSize / 2)}px`,
-          left: `${this.dotX - (this.dotSize / 2)}px`
+          top: `${this.dotPosition[1] - (this.dotSize / 2)}px`,
+          left: `${this.dotPosition[0] - (this.dotSize / 2)}px`
         }
       })
     }

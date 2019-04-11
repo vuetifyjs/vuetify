@@ -10,8 +10,8 @@ import VColorPickerCanvas from './VColorPickerCanvas'
 
 // Types
 import { VNode } from 'vue'
-import { HSVA, HSVAtoRGBA, RGBA, RGBAtoHSVA } from '../../util/colorUtils'
-import VColorPickerRgba from './VColorPickerRgba'
+import { HSVA, colorEqual } from '../../util/colorUtils'
+import VColorPickerEdit from './VColorPickerEdit'
 
 export default VSheet.extend({
   name: 'v-color-picker',
@@ -24,7 +24,7 @@ export default VSheet.extend({
   },
 
   data: () => ({
-    internalValue: [0, 0, 0, 1] as HSVA
+    internalValue: [0, 1, 1, 1] as HSVA
   }),
 
   methods: {
@@ -55,21 +55,21 @@ export default VSheet.extend({
       ])
     },
     genEdit () {
-      return this.$createElement(VColorPickerRgba, {
+      return this.$createElement(VColorPickerEdit, {
         props: {
-          value: HSVAtoRGBA(this.internalValue)
+          color: this.internalValue.slice()
         },
         on: {
-          input: (v: RGBA) => {
+          'update:color': (value: HSVA) => {
             // If saturation is zero then we try
             // to reuse old hue value, otherwise
             // the canvas hue will revert to red
             const oldHue = this.internalValue[0]
-            const newHsva = RGBAtoHSVA(v)
-            if (newHsva[1] === 0) {
-              newHsva[0] = newHsva[0] || oldHue
+            if (value[1] === 0) {
+              value[0] = value[0] || oldHue
             }
-            this.internalValue = newHsva
+            if (colorEqual(value, this.internalValue)) return
+            this.internalValue = value
           }
         }
       })
@@ -79,7 +79,7 @@ export default VSheet.extend({
         props: {
           hue: this.internalValue[0],
           alpha: this.internalValue[3],
-          color: this.internalValue
+          color: this.internalValue.slice()
         },
         on: {
           'update:hue': (v: number) => this.$set(this.internalValue, 0, v),

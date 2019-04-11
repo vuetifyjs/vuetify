@@ -5,6 +5,7 @@ export type XYZ = [number, number, number]
 export type LAB = [number, number, number]
 export type HSVA = [number, number, number, number]
 export type RGBA = [number, number, number, number]
+export type HSLA = [number, number, number, number]
 export type Color = string | number | {}
 
 export function colorToInt (color: Color): RGB {
@@ -90,10 +91,29 @@ export function RGBAtoHSVA (color: RGBA): HSVA {
   if (h < 0) h = h + 360
 
   const s = max === 0 ? 0 : (max - min) / max
-
   return [h, s, max, color[3]]
 }
 
-export function RGBAtoInt (rgba: RGBA): number {
-  return (rgba[0] << 24) + (rgba[1] << 16) + (rgba[2] << 8) + rgba[3]
+export function HSVAtoHSLA (hsva: HSVA): HSLA {
+  const [h, s, v, a] = hsva
+
+  const l = v - (v * s / 2)
+
+  const sprime = l === 1 || l === 0 ? 0 : (v - l) / Math.min(l, 1 - l)
+
+  return [h, sprime, l, a]
+}
+
+export function HSLAtoHSVA (hsla: HSLA): HSVA {
+  const [h, s, l, a] = hsla
+
+  const v = l + s * Math.min(l, 1 - l)
+
+  const sprime = v === 0 ? 0 : 2 - (2 * l / v)
+
+  return [h, sprime, v, a]
+}
+
+export function colorEqual (c1: number[], c2: number[], epsilon: number = Math.pow(2, -52)) {
+  return c1.every((c, i) => Math.abs(c - c2[i]) < epsilon)
 }

@@ -473,6 +473,6 @@ export function getSlot (vm: Vue, name = 'default', data?: object, optional = fa
   return undefined
 }
 
-export function clamp (value: number, min: number = 0, max: number = 1): number {
+export function clamp (value: number, min: number = 0, max: number = 1) {
   return Math.max(min, Math.min(max, value))
 }

@@ -15,6 +15,12 @@ export default Vue.extend({
     hue: Number
   },
 
+  computed: {
+    rgba (): string {
+      return `rgba(${HSVAtoRGBA(this.color).join(', ')})`
+    }
+  },
+
   methods: {
     genAlpha (): VNode {
       return this.genTrack({
@@ -43,7 +49,7 @@ export default Vue.extend({
       return this.$createElement('div', {
         staticClass: 'v-color-picker__dot',
         style: {
-          background: `rgba(${HSVAtoRGBA(this.color).join(', ')})`
+          background: this.rgba
         }
       })
     },
@@ -54,6 +60,7 @@ export default Vue.extend({
           thumbColor: 'grey lighten-2',
           hideDetails: true,
           value: this.hue,
+          step: 0,
           min: 0,
           max: 360
         },
