@@ -76,6 +76,10 @@
     "crud": {
       "header": "### CRUD Actions",
       "desc": "`v-data-table` with CRUD actions using a `v-dialog` component for editing each row"
+    },
+    "virtualized": {
+      "header": "### Virtualized rows",
+      "desc": "Using the `virtual-rows` prop will virtualize the rendering of the rows, which can increase the performance of the data-table when you have a large number of rows."
     }
   },
   "props": {
