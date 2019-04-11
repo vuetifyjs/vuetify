@@ -14,6 +14,7 @@ import Themeable from '../../mixins/themeable'
 import Transitionable from '../../mixins/transitionable'
 
 // Types
+import { PropValidator } from 'vue/types/options'
 import { VNodeData } from 'vue'
 import { VNode } from 'vue/types'
 import mixins from '../../util/mixins'
@@ -46,7 +47,12 @@ export default mixins(
     },
     dense: Boolean,
     dismissible: Boolean,
-    icon: String,
+    icon: {
+      type: [Boolean, String],
+      validator (val: boolean | string) {
+        return typeof val === 'string' || val === false
+      }
+    },
     outline: Boolean,
     outlined: Boolean,
     prominent: Boolean,
@@ -142,6 +148,7 @@ export default mixins(
       return this.color || this.type
     },
     computedIcon (): string | false {
+      if (!this.icon) return false
       if (this.icon != null) return this.icon
 
       switch (this.type) {
