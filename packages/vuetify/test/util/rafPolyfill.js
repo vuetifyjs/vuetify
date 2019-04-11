@@ -1,17 +1,3 @@
-import toHaveBeenWarnedInit from '@/test/util/to-have-been-warned'
-toHaveBeenWarnedInit()
-
-export function functionalContext(context = {}, children = []) {
-  if (!Array.isArray(children)) children = [children]
-  return {
-    context: Object.assign({
-      data: {},
-      props: {}
-    }, context),
-    children
-  }
-}
-
 //requestAnimationFrame polyfill | Milos Djakonovic ( @Miloshio ) | MIT | https://github.com/milosdjakonovic/requestAnimationFrame-polyfill
 export function rafPolyfill(w) {
   /**
@@ -132,37 +118,4 @@ export function rafPolyfill(w) {
   }
 
   return runAllTimers
-}
-
-export function touch(element) {
-  const createTrigger = eventName => (clientX, clientY) => {
-    const touches = [{ clientX, clientY }]
-    const event = new Event(eventName)
-
-    event.touches = touches
-    event.changedTouches = touches
-    element.element.dispatchEvent(event)
-
-    return touch(element)
-  }
-
-  return {
-    start: createTrigger('touchstart'),
-    move: createTrigger('touchmove'),
-    end: createTrigger('touchend')
-  }
-}
-
-export const resizeWindow = (width = global.innerWidth, height = global.innerHeight) => {
-  global.innerWidth = width
-  global.innerHeight = height
-  global.dispatchEvent(new Event('resize'))
-  return new Promise(resolve => setTimeout(resolve, 200))
-}
-
-export const scrollWindow = (y) => {
-  global.pageYOffset = y
-  global.dispatchEvent(new Event('scroll'))
-
-  return new Promise(resolve => setTimeout(resolve, 200))
 }

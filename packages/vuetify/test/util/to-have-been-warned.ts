@@ -1,9 +1,8 @@
-﻿// From Vue, slightly modified
-
+// From Vue, slightly modified
 function noop() { }
 
 if (typeof console === 'undefined') {
-  window.console = {
+  (window as any).console = {
     warn: noop,
     error: noop
   }
@@ -12,12 +11,12 @@ if (typeof console === 'undefined') {
 // avoid info messages during test
 console.info = noop
 
-const asserted = []
+const asserted: string[] = []
 
-function createCompareFn (spy) {
-  const hasWarned = msg => {
+function createCompareFn (spy: any) {
+  const hasWarned = (msg: string) => {
     for (const args of spy.calls.allArgs()) {
-      if (args.some(arg => (
+      if (args.some((arg: any) => (
         arg.toString().includes(msg)
       ))) return true
     }
@@ -25,7 +24,7 @@ function createCompareFn (spy) {
   }
 
   return {
-    compare: msg => {
+    compare: (msg: string) => {
       asserted.push(msg)
       const warned = Array.isArray(msg)
         ? msg.some(hasWarned)
@@ -54,8 +53,8 @@ function toHaveBeenWarnedInit() {
 
   afterEach(done => {
     for (const type of ['error', 'warn']) {
-      const warned = msg => asserted.some(assertedMsg => msg.toString().includes(assertedMsg))
-      for (const args of console[type].calls.allArgs()) {
+      const warned = (msg: string) => asserted.some(assertedMsg => msg.toString().includes(assertedMsg))
+      for (const args of (console as any)[type].calls.allArgs()) {
         if (!warned(args[0])) {
           done.fail(`Unexpected console.${type} message: ${args[0]}`)
           return
