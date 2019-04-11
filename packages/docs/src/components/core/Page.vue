@@ -13,6 +13,12 @@
         </v-flex>
         <v-spacer />
         <v-flex
+          v-if="structure.file"
+          shrink
+        >
+          <core-file-btn :link="structure.file" />
+        </v-flex>
+        <v-flex
           v-if="structure.mdSpec"
           shrink
         >

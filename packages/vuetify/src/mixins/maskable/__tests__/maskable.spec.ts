@@ -1,14 +1,26 @@
-import { test } from '@/test'
-import Maskable from '@/mixins/maskable'
+import Maskable from '../'
+import {
+  mount,
+  MountOptions,
+  Wrapper
+} from '@vue/test-utils'
 
 const Mock = Maskable.extend({
   render: h => h('div')
 })
 
-test('maskable.js', ({ mount }) => {
+describe('maskable.ts', () => {
+  type Instance = InstanceType<typeof Mock>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+  beforeEach(() => {
+    mountFunction = (options?: MountOptions<Instance>) => {
+      return mount(Mock, options)
+    }
+  })
+
   it('should not mask text beforeMount', async () => {
     const maskText = jest.spyOn(Mock.options.methods, 'maskText')
-    mount(Mock, {
+    mountFunction({
       propsData: {
         returnMaskedValue: true,
         value: 'foo'
@@ -17,7 +29,7 @@ test('maskable.js', ({ mount }) => {
 
     expect(maskText).not.toHaveBeenCalled()
 
-    mount(Mock, {
+    mountFunction({
       propsData: {
         mask: 'credit-card',
         returnMaskedValue: true,
@@ -27,7 +39,7 @@ test('maskable.js', ({ mount }) => {
 
     expect(maskText).toHaveBeenCalled()
 
-    mount(Mock, {
+    mountFunction({
       propsData: {
         mask: 'credit-card',
         returnMaskedValue: true,
@@ -37,7 +49,7 @@ test('maskable.js', ({ mount }) => {
 
     expect(maskText).toHaveBeenCalledTimes(2)
 
-    mount(Mock, {
+    mountFunction({
       propsData: {
         mask: 'date',
         returnMaskedValue: true,
@@ -49,40 +61,41 @@ test('maskable.js', ({ mount }) => {
   })
 
   it('should reset selections', async () => {
-    const wrapper = mount({
-      mixins: [Maskable],
+    const wrapper = mountFunction({
       render (h) {
         return h('input', {
           domProps: {
             value: this.value
           }
         })
-      }
-    }, {
+      },
       propsData: {
         mock: 'credit-card',
         value: '632'
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     // no selection end
-    wrapper.vm.resetSelections(input)
+    wrapper.vm.resetSelections(input.element)
     expect(wrapper.vm.selection).toBe(0)
     expect(wrapper.vm.lazySelection).toBe(0)
 
-    input.selectionEnd = 3
+    input.element.selectionEnd = 3
 
-    wrapper.vm.resetSelections(input)
+    wrapper.vm.resetSelections(input.element)
 
     expect(wrapper.vm.selection).toBe(3)
     expect(wrapper.vm.lazySelection).toBe(3)
   })
 
   it('should set selection range', async () => {
-    const wrapper = mount({
-      mixins: [Maskable],
+    const wrapper = mountFunction({
+      propsData: {
+        mask: 'credit-card',
+        value: '4444'
+      },
       render (h) {
         return h('input', {
           ref: 'input',
@@ -90,11 +103,6 @@ test('maskable.js', ({ mount }) => {
             value: this.value
           }
         })
-      }
-    }, {
-      propsData: {
-        mask: 'credit-card',
-        value: '4444'
       }
     })
 

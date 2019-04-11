@@ -1,20 +1,33 @@
-import { test } from '@/test'
-import Validatable from '@/mixins/validatable'
+import Validatable from '../'
+import {
+  mount,
+  MountOptions,
+  Wrapper
+} from '@vue/test-utils'
+import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
 
-const Mock = {
-  mixins: [Validatable],
+describe('validatable.ts', () => {
+  const Mock = Validatable.extend({
+    render: h => h('div')
+  })
 
-  render: h => h('div')
-}
+  type Instance = InstanceType<typeof Mock>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+  beforeEach(() => {
+    mountFunction = (options?: MountOptions<Instance>) => {
+      return mount(Mock, options)
+    }
+  })
 
-test('validatable.js', ({ mount }) => {
+  toHaveBeenWarnedInit()
+
   it('should register/unregister with injected form is available', () => {
     const form = {
       register: jest.fn(),
       unregister: jest.fn()
     }
 
-    const wrapper = mount(Mock, {
+    const wrapper = mountFunction({
       provide: { form }
     })
 
@@ -26,7 +39,7 @@ test('validatable.js', ({ mount }) => {
   })
 
   it('should manually set isResetting', () => {
-    const wrapper = mount(Mock)
+    const wrapper = mountFunction()
 
     expect(wrapper.vm.isResetting).toBe(false)
 
@@ -38,7 +51,7 @@ test('validatable.js', ({ mount }) => {
   ;[true, false].forEach(returns => {
     it('should reset valid flag on resetValidation - ' + String(returns), async () => {
       jest.useFakeTimers()
-      const wrapper = mount(Mock, {
+      const wrapper = mountFunction({
         propsData: {
           rules: [() => returns || String(returns)]
         }
@@ -58,7 +71,7 @@ test('validatable.js', ({ mount }) => {
 
   /* eslint-disable-next-line max-statements */
   it('should manually validate', () => {
-    const wrapper = mount(Mock)
+    const wrapper = mountFunction()
 
     expect(wrapper.vm.errorBucket).toEqual([])
 
@@ -129,7 +142,7 @@ test('validatable.js', ({ mount }) => {
     }
 
     const validate = jest.fn()
-    const wrapper = mount(Mock, {
+    const wrapper = mountFunction({
       propsData: {
         readonly: true,
         validateOnBlur: true
@@ -163,7 +176,7 @@ test('validatable.js', ({ mount }) => {
   })
 
   it('should have success', () => {
-    const wrapper = mount(Mock)
+    const wrapper = mountFunction()
 
     expect(wrapper.vm.hasSuccess).toBe(false)
 
@@ -182,7 +195,7 @@ test('validatable.js', ({ mount }) => {
 
   /* eslint-disable-next-line max-statements */
   it('should have messages', () => {
-    const wrapper = mount(Mock)
+    const wrapper = mountFunction()
 
     expect(wrapper.vm.hasMessages).toBe(false)
 
@@ -238,25 +251,25 @@ test('validatable.js', ({ mount }) => {
   })
 
   it('should have state', () => {
-    const wrapper = mount(Mock)
+    const wrapper = mountFunction()
 
     expect(wrapper.vm.hasState).toBe(false)
 
-    wrapper.setData({ success: true })
+    wrapper.setProps({ success: true })
 
     expect(wrapper.vm.hasState).toBe(true)
 
-    wrapper.setData({ success: false, error: true })
+    wrapper.setProps({ success: false, error: true })
 
     expect(wrapper.vm.hasState).toBe(true)
 
-    wrapper.setData({ error: false })
+    wrapper.setProps({ error: false })
 
     expect(wrapper.vm.hasState).toBe(false)
   })
 
   it('should return validation state', () => {
-    const wrapper = mount(Mock)
+    const wrapper = mountFunction()
 
     expect(wrapper.vm.validationState).toBeUndefined()
 
@@ -272,7 +285,7 @@ test('validatable.js', ({ mount }) => {
   })
 
   it('should return a sliced amount based on error count', () => {
-    const wrapper = mount(Mock, {
+    const wrapper = mountFunction({
       propsData: {
         errorMessages: [
           'foobar',
@@ -290,7 +303,7 @@ test('validatable.js', ({ mount }) => {
 
   it('should validate when internalValue changes', async () => {
     const validate = jest.fn()
-    const wrapper = mount(Mock, {
+    const wrapper = mountFunction({
       methods: { validate }
     })
 
@@ -305,7 +318,7 @@ test('validatable.js', ({ mount }) => {
   })
 
   it('should update values when resetting after timeout', async () => {
-    const wrapper = mount(Mock)
+    const wrapper = mountFunction()
 
     wrapper.setData({
       hasInput: true,
@@ -329,7 +342,7 @@ test('validatable.js', ({ mount }) => {
   })
 
   it('should emit error update when value changes and shouldValidate', async () => {
-    const wrapper = mount(Mock)
+    const wrapper = mountFunction()
 
     const onError = jest.fn()
 
@@ -347,7 +360,7 @@ test('validatable.js', ({ mount }) => {
   })
 
   it('should reset validation and internalValue', async () => {
-    const wrapper = mount(Mock, {
+    const wrapper = mountFunction({
       propsData: {
         value: 'foobar'
       }
@@ -369,7 +382,7 @@ test('validatable.js', ({ mount }) => {
 
   // https://github.com/vuetifyjs/vuetify/issues/6025
   it('should accept null for external messages', () => {
-    const wrapper = mount(Mock, {
+    const wrapper = mountFunction({
       propsData: {
         errorMessages: ['Foobar']
       }

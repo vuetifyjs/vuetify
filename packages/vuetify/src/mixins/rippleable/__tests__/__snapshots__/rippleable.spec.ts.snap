@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`menuable.js should match snapshot 1`] = `
+exports[`rippleable.ts should match snapshot 1`] = `
 
 <div class="v-input--selection-controls__ripple">
 </div>
