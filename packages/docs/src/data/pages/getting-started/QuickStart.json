@@ -104,20 +104,16 @@
           "lang": "existingText4"
         },
         {
-          "type": "markup",
-          "value": "js_import_vuetify_css"
-        },
-        {
-          "type": "markup",
-          "value": "stylus_import_vuetify_css"
-        },
-        {
           "type": "text",
           "lang": "existingText5"
         },
         {
           "type": "markup",
           "value": "html_material_font"
+        },
+        {
+          "type": "markup",
+          "value": "js_import_mdi"
         },
         {
           "type": "text",
