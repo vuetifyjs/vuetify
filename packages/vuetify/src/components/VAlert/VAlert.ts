@@ -14,7 +14,6 @@ import Themeable from '../../mixins/themeable'
 import Transitionable from '../../mixins/transitionable'
 
 // Types
-import { PropValidator } from 'vue/types/options'
 import { VNodeData } from 'vue'
 import { VNode } from 'vue/types'
 import mixins from '../../util/mixins'
@@ -147,7 +146,7 @@ export default mixins(
     computedColor (): string {
       return this.color || this.type
     },
-    computedIcon (): string | false {
+    computedIcon (): string | boolean {
       if (!this.icon) return false
       if (this.icon != null) return this.icon
 
