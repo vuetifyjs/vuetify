@@ -10,28 +10,9 @@ export default Vue.extend({
   name: 'v-color-picker-preview',
 
   props: {
-    value: Array as PropValidator<HSVA>
-  },
-
-  data: () => ({
-    alphaValue: 0,
-    hueValue: 0
-  }),
-
-  watch: {
-    alphaValue (val: number) {
-      this.$emit('update:alpha', val)
-    },
-    hueValue (val: number) {
-      this.$emit('update:hue', val)
-    },
-    value: {
-      handler (v: HSVA) {
-        this.hueValue = v[0]
-        this.alphaValue = v[3]
-      },
-      immediate: true
-    }
+    alpha: Number,
+    color: Array as PropValidator<HSVA>,
+    hue: Number
   },
 
   methods: {
@@ -41,14 +22,12 @@ export default Vue.extend({
         props: {
           thumbColor: 'grey lighten-2',
           hideDetails: true,
-          value: this.alphaValue * 100,
+          value: this.alpha * 100,
           min: 0,
           max: 100
         },
         on: {
-          input: (val: number) => {
-            this.alphaValue = val / 100
-          }
+          input: (val: number) => this.$emit('update:alpha', val / 100)
         }
       })
     },
@@ -64,7 +43,7 @@ export default Vue.extend({
       return this.$createElement('div', {
         staticClass: 'v-color-picker__dot',
         style: {
-          background: `rgba(${HSVAtoRGBA(this.value).join(', ')})`
+          background: `rgba(${HSVAtoRGBA(this.color).join(', ')})`
         }
       })
     },
@@ -74,14 +53,12 @@ export default Vue.extend({
         props: {
           thumbColor: 'grey lighten-2',
           hideDetails: true,
-          value: this.hueValue,
+          value: this.hue,
           min: 0,
           max: 360
         },
         on: {
-          input: (val: number) => {
-            this.hueValue = val
-          }
+          input: (val: number) => this.$emit('update:hue', val)
         }
       })
     },

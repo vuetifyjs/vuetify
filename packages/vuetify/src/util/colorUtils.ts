@@ -49,7 +49,7 @@ export function colorToHex (color: Color): string {
 }
 
 /**
- * Converts HSVA to RGBA. Based on formula from https://en.wikipedia.org/wiki/HSL_and_HSV#RGB_to_HSL_and_HSV
+ * Converts HSVA to RGBA. Based on formula from https://en.wikipedia.org/wiki/HSL_and_HSV
  *
  * @param color HSVA color as an array [0-360, 0-1, 0-1, 0-1]
  */
@@ -65,6 +65,11 @@ export function HSVAtoRGBA (color: HSVA): RGBA {
   return [...hsv, color[3]] as RGBA
 }
 
+/**
+ * Converts RGBA to HSVA. Based on formula from https://en.wikipedia.org/wiki/HSL_and_HSV
+ *
+ * @param color RGBA color as an array [0-255, 0-255, 0-255, 0-1]
+ */
 export function RGBAtoHSVA (color: RGBA): HSVA {
   const [r, g, b] = color.map(v => v / 255)
   const max = Math.max(r, g, b)

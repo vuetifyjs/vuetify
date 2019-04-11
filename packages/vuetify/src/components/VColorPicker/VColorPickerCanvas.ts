@@ -61,7 +61,7 @@ export default Vue.extend({
   },
 
   mounted () {
-    this.boundingRect = this.$el.getBoundingClientRect()
+    this.updateBoundingRect()
 
     this.$nextTick(() => {
       this.updateCanvas()
@@ -89,11 +89,16 @@ export default Vue.extend({
       this.dotX = this.internalValue[0] * this.boundingRect.width
       this.dotY = (1 - this.internalValue[1]) * this.boundingRect.height
     },
+    updateBoundingRect () {
+      this.boundingRect = this.$el.getBoundingClientRect()
+    },
     handleClick (e: MouseEvent) {
+      this.updateBoundingRect()
       const [x, y] = this.getLocalPosition(e.clientX, e.clientY)
       this.updateInternalValue(x, y)
     },
     handleMouseDown (e: MouseEvent) {
+      this.updateBoundingRect()
       window.addEventListener('mousemove', this.handleMouseMove)
       window.addEventListener('mouseup', this.handleMouseUp)
     },

@@ -61,7 +61,15 @@ export default VSheet.extend({
         },
         on: {
           input: (v: RGBA) => {
-            this.internalValue = RGBAtoHSVA(v)
+            // If saturation is zero then we try
+            // to reuse old hue value, otherwise
+            // the canvas hue will revert to red
+            const oldHue = this.internalValue[0]
+            const newHsva = RGBAtoHSVA(v)
+            if (newHsva[1] === 0) {
+              newHsva[0] = newHsva[0] || oldHue
+            }
+            this.internalValue = newHsva
           }
         }
       })
@@ -69,7 +77,9 @@ export default VSheet.extend({
     genPreview () {
       return this.$createElement(VColorPickerPreview, {
         props: {
-          value: this.internalValue
+          hue: this.internalValue[0],
+          alpha: this.internalValue[3],
+          color: this.internalValue
         },
         on: {
           'update:hue': (v: number) => this.$set(this.internalValue, 0, v),
