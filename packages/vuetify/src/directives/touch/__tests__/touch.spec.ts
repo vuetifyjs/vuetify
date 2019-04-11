@@ -6,7 +6,6 @@ import Vue from 'vue'
 
 // Utilities
 import {
-  createLocalVue,
   mount,
   Wrapper
 } from '@vue/test-utils'
@@ -33,13 +32,11 @@ function touch (element) {
 
 describe('touch.ts', () => {
   let mountFunction: (value?: object) => Wrapper<Vue>
-  let localVue: typeof Vue
 
   beforeEach(() => {
-    localVue = createLocalVue()
 
     mountFunction = (value = {}) => {
-      return mount(localVue.component('test', {
+      return mount(Vue.component('test', {
         directives: { Touch },
         render: h => h('div', {
           directives: [{
