@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VProgressLinear",
   "mdSpec": {
     "version": "2",
     "link": "https://material.io/design/components/progress-indicators.html"
@@ -21,7 +22,6 @@
         {
           "type": "api",
           "value": [
-            "v-progress-circular",
             "v-progress-linear"
           ]
         }
@@ -33,15 +33,10 @@
         {
           "type": "examples",
           "value": [
-            "circularColored",
-            "circularIndeterminate",
-            "circularSizeAndWidth",
-            "circularRotate",
             "linearDeterminate",
             "linearIndeterminate",
             "linearBuffer",
             "linearQueryIndeterminateAndDeterminate",
-            "linearCustomHeightAndContextualColors",
             "linearCustomColors"
           ]
         }
@@ -54,7 +49,7 @@
           "type": "up-next",
           "value": [
             "components/cards",
-            "components/data-tables",
+            "components/progress-circular",
             "components/lists"
           ]
         }

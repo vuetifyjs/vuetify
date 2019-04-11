@@ -480,11 +480,8 @@ export default mixins<options &
       this.isActive = false
     },
     onMouseMove (e: MouseEvent) {
-      const { value, isInsideTrack } = this.parseMouseMove(e)
-
-      if (isInsideTrack) {
-        this.internalValue = value
-      }
+      const { value } = this.parseMouseMove(e)
+      this.internalValue = value
     },
     onKeyDown (e: KeyboardEvent) {
       if (this.disabled || this.readonly) return
