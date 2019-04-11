@@ -1,49 +1,5 @@
-import Vue from 'vue'
-import { mount, shallow } from 'avoriaz'
-import Vuetify from '@/'
 import toHaveBeenWarnedInit from '@/test/util/to-have-been-warned'
-import { compileToFunctions } from 'vue-template-compiler'
 toHaveBeenWarnedInit()
-
-export function test(name, cb) {
-  Vuetify.install(Vue)
-/*
-  const app = document.createElement('div')
-  app.setAttribute('data-app', true)
-  document.body.appendChild(app)
-*/
-
-  const runAllTimers = rafPolyfill(window)
-
-  // Very naive polyfill for performance.now()
-  window.performance = { now: () => (new Date()).getTime() }
-
-  describe(name, () => cb({
-    functionalContext,
-    mount (component, options) {
-      if (component.options) {
-        component = component.options
-      }
-      return mount(component, {
-        ...options,
-        vuetify: new Vuetify()
-      })
-    },
-    shallow (component, options) {
-      if (component.options) {
-        component = component.options
-      }
-      return shallow(component, {
-        ...options,
-        vuetify: new Vuetify()
-      })
-    },
-    compileToFunctions,
-    runAllTimers
-  }))
-}
-
-test.skip = describe.skip
 
 export function functionalContext(context = {}, children = []) {
   if (!Array.isArray(children)) children = [children]
