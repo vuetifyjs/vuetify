@@ -128,7 +128,7 @@ export default Vue.extend({
           `#${this.internalColor.join('')}`,
           (e: Event) => {
             const el = e.target as HTMLInputElement
-            const newVal = padEnd(el.value, 8)
+            const newVal = padEnd(padEnd(el.value, 7), 9, 'F')
             if (newVal.indexOf('#') < 0) return
             this.internalColor = chunk(newVal.split('#')[1], 2)
           }
