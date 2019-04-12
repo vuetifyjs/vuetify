@@ -37,6 +37,14 @@
     "nested": {
       "header": "### Nested lists",
       "desc": "List tiles can be nested a second level for even more options for your navigation"
+    },
+    "right": {
+      "header": "### Right positioned",
+      "desc": "Navigation drawers can also be positioned on the right side of your application (or an element). This is also useful for creating a side-sheet with auxillary information that may not have any navigation links."
+    },
+    "background": {
+      "header": "### Backgrounds",
+      "desc": "Apply a custom background to your drawer. If you need to customize `v-img`'s properties you can use the scoped **img** slot."
     }
   },
   "props": {

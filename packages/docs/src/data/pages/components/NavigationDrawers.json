@@ -38,7 +38,9 @@
             "temporary",
             "dark",
             "combined",
-            "nested"
+            "nested",
+            "right",
+            "background"
           ]
         }
       ]
