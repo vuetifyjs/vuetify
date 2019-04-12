@@ -123,9 +123,9 @@ export default Vue.extend({
         case 'hex': return this.genInput(
           this.currentMode.name,
           {
-            maxlength: 8
+            maxlength: 9
           },
-          this.internalColor.join(''),
+          `#${this.internalColor.join('')}`,
           (e: Event) => {
             const el = e.target as HTMLInputElement
             const newVal = padEnd(el.value, 8)
