@@ -106,19 +106,6 @@ export default baseMixins.extend({
     applicationProperty (): string {
       return this.right ? 'right' : 'left'
     },
-    calculatedWidth (): string | number {
-      if (
-        (this.openOnHover && !this.isMouseover) ||
-        this.miniVariant
-      ) return this.miniVariantWidth
-
-      return this.width
-    },
-    calculatedTransform (): number {
-      if (this.isActive) return 0
-      if (this.bottom && this.isMobile) return 100
-      return this.right ? 100 : -100
-    },
     classes (): object {
       return {
         'v-navigation-drawer': true,
@@ -138,6 +125,43 @@ export default baseMixins.extend({
         ...this.themeClasses
       }
     },
+    computedMaxHeight (): number | null {
+      if (!this.hasApp) return null
+
+      const computedMaxHeight = (
+        this.$vuetify.application.bottom +
+        this.$vuetify.application.footer +
+        this.$vuetify.application.bar
+      )
+
+      if (!this.clipped) return computedMaxHeight
+
+      return computedMaxHeight + this.$vuetify.application.top
+    },
+    computedTop (): number {
+      if (!this.hasApp) return 0
+
+      let computedTop = this.$vuetify.application.bar
+
+      computedTop += this.clipped
+        ? this.$vuetify.application.top
+        : 0
+
+      return computedTop
+    },
+    computedTransform (): number {
+      if (this.isActive) return 0
+      if (this.bottom && this.isMobile) return 100
+      return this.right ? 100 : -100
+    },
+    computedWidth (): string | number {
+      if (
+        (this.openOnHover && !this.isMouseover) ||
+        this.miniVariant
+      ) return this.miniVariantWidth
+
+      return this.width
+    },
     hasApp (): boolean {
       return this.app &&
         (!this.isMobile && !this.temporary)
@@ -149,30 +173,6 @@ export default baseMixins.extend({
         !this.temporary &&
         this.$vuetify.breakpoint.width < parseInt(this.mobileBreakPoint, 10)
       )
-    },
-    marginTop (): number {
-      if (!this.hasApp) return 0
-
-      let marginTop = this.$vuetify.application.bar
-
-      marginTop += this.clipped
-        ? this.$vuetify.application.top
-        : 0
-
-      return marginTop
-    },
-    maxHeight (): number | null {
-      if (!this.hasApp) return null
-
-      const maxHeight = (
-        this.$vuetify.application.bottom +
-        this.$vuetify.application.footer +
-        this.$vuetify.application.bar
-      )
-
-      if (!this.clipped) return maxHeight
-
-      return maxHeight + this.$vuetify.application.top
     },
     reactsToClick (): boolean {
       return !this.stateless &&
@@ -201,10 +201,12 @@ export default baseMixins.extend({
       const translate = this.bottom && this.isMobile ? 'translateY' : 'translateX'
       const styles = {
         height: convertToUnit(this.height),
-        marginTop: convertToUnit(this.marginTop),
-        maxHeight: this.maxHeight != null ? `calc(100% - ${convertToUnit(this.maxHeight)})` : undefined,
-        transform: `${translate}(${convertToUnit(this.calculatedTransform, '%')})`,
-        width: convertToUnit(this.calculatedWidth)
+        top: convertToUnit(this.computedTop),
+        maxHeight: this.computedMaxHeight != null
+          ? `calc(100% - ${convertToUnit(this.computedMaxHeight)})`
+          : undefined,
+        transform: `${translate}(${convertToUnit(this.computedTransform, '%')})`,
+        width: convertToUnit(this.computedWidth)
       }
 
       return styles
@@ -263,8 +265,11 @@ export default baseMixins.extend({
 
   methods: {
     calculateTouchArea () {
-      if (!this.$el.parentNode) return
-      const parentRect = (this.$el.parentNode as Element).getBoundingClientRect()
+      const parent = this.$el.parentNode as Element
+
+      if (!parent) return
+
+      const parentRect = parent.getBoundingClientRect()
 
       this.touchArea = {
         left: parentRect.left + 50,
@@ -384,7 +389,7 @@ export default baseMixins.extend({
         !this.$el
       ) return 0
 
-      const width = Number(this.calculatedWidth)
+      const width = Number(this.computedWidth)
 
       return isNaN(width) ? this.$el.clientWidth : width
     }
