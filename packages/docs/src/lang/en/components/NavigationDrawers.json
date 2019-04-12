@@ -65,5 +65,8 @@
   },
   "events": {
     "update:miniVariant": "The `mini-variant.sync` event"
+  },
+  "scopedSlots": {
+    "img": "Used to modify `v-img` properties when using the **src** prop"
   }
 }
