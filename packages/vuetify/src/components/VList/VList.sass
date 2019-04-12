@@ -43,21 +43,23 @@
     height: $list-dense-subheader-height
     padding: 0 8px
 
-.v-list--nav
-  padding-left: 8px
-  padding-right: 8px
-
+.v-list-nav,
+.v-list--rounded
   .v-list-item:not(:last-child):not(:only-child)
     margin-bottom: 8px
-
-  .v-list-item,
-  .v-list-item:before
-    border-radius: 4px
 
   &.v-list--dense .v-list-item,
   .v-list-item--dense
     &:not(:last-child):not(:only-child)
       margin-bottom: 4px
+
+.v-list--nav
+  padding-left: 8px
+  padding-right: 8px
+
+  .v-list-item,
+  .v-list-item:before
+    border-radius: 4px
 
 .v-list--shaped
   padding-right: 8px
@@ -72,6 +74,16 @@
   +rtl()
     padding-left: 8px
     padding-right: 0
+
+.v-list--rounded
+  padding: 8px
+  +list-rounded($list-item-min-height)
+
+  &.v-list--two-line
+    +list-rounded($list-item-two-line-min-height)
+
+  &.v-list--three-line
+    +list-rounded($list-item-three-line-min-height)
 
 .v-list--subheader
   padding-top: 0
