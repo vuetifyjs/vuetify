@@ -4,7 +4,6 @@ import {
   MountOptions,
   Wrapper
 } from '@vue/test-utils'
-import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
 
 describe('validatable.ts', () => {
   const Mock = Validatable.extend({
@@ -18,8 +17,6 @@ describe('validatable.ts', () => {
       return mount(Mock, options)
     }
   })
-
-  toHaveBeenWarnedInit()
 
   it('should register/unregister with injected form is available', () => {
     const form = {

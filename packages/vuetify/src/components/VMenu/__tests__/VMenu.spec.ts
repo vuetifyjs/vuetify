@@ -5,7 +5,6 @@ import VCard from '../../VCard/VCard'
 
 // Utilities
 import { compileToFunctions } from 'vue-template-compiler'
-import { rafPolyfill } from '../../../../test'
 import {
   mount,
   Wrapper
@@ -14,8 +13,6 @@ import {
 describe('VMenu.ts', () => {
   type Instance = InstanceType<typeof VMenu>
   let mountFunction: (options?: object) => Wrapper<Instance>
-
-  rafPolyfill(window)
 
   beforeEach(() => {
     mountFunction = (options = {}) => {
@@ -128,7 +125,6 @@ describe('VMenu.ts', () => {
   })
 
   // TODO: figure out how to simulate tab focus
-  // eslint-disable-next-line jest/no-disabled-tests
   it.skip('should not close on tab if child is focused', async () => {
     const wrapper = mount({
       render: h => h('div', [

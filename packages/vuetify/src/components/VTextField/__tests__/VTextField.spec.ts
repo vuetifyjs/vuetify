@@ -669,7 +669,6 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
   })
 
   // TODO: revisit this, it seems correct in practice because of onBlur()
-  // eslint-disable-next-line jest/no-disabled-tests
   it.skip('should reset internal change', async () => {
     const wrapper = mountFunction()
 

@@ -1,7 +1,6 @@
 import VApp from '../../../components/VApp'
 import Detachable from '../'
 import { mount } from '@vue/test-utils'
-import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
 
 const Mock = Detachable.extend({
   name: 'mock',
@@ -19,8 +18,6 @@ const Mock = Detachable.extend({
 })
 
 describe('detachable.ts', () => {
-  toHaveBeenWarnedInit()
-
   it('should detach to app', async () => {
     const localMock = Mock
     const wrapper = mount(VApp, {

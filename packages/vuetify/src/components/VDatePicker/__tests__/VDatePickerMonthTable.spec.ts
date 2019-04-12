@@ -46,7 +46,6 @@ describe('VDatePickerMonthTable.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  // eslint-disable-next-line jest/no-disabled-tests
   it.skip('should watch tableDate value and run transition', async () => { // TODO: make this one work
     const wrapper = mountFunction({
       propsData: {
@@ -63,7 +62,6 @@ describe('VDatePickerMonthTable.ts', () => {
     expect(wrapper.findAll('table').wrappers[0].element.className).toBe('tab-transition-enter tab-transition-enter-active')
   })
 
-  // eslint-disable-next-line jest/no-disabled-tests
   it.skip('should watch tableDate value and run reverse transition', async () => { // TODO: make this one work
     const wrapper = mountFunction({
       propsData: {
@@ -143,7 +141,6 @@ describe('VDatePickerMonthTable.ts', () => {
   })
 
   // TODO
-  // eslint-disable-next-line jest/no-disabled-tests
   it.skip('should emit tableDate event when swiped', () => {
     const wrapper = mountFunction({
       propsData: {

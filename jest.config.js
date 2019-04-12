@@ -1,7 +1,11 @@
 module.exports = {
   verbose: false,
+  testEnvironment: 'jest-environment-jsdom-fourteen',
   roots: [
     '<rootDir>/src'
+  ],
+  setupFilesAfterEnv: [
+    '<rootDir>/test/index.ts'
   ],
   moduleFileExtensions: [
     'ts',
@@ -21,7 +25,6 @@ module.exports = {
     '\\.(sass|scss)$': 'jest-css-modules',
     '.*\\.(j|t)s$': 'ts-jest'
   },
-  mapCoverage: true,
   collectCoverageFrom: [
     'src/**/*.{js,ts,tsx}',
     '!**/*.d.ts'
@@ -40,7 +43,12 @@ module.exports = {
   ],
   globals: {
     'ts-jest': {
-      'useBabelrc': true
+      babelConfig: true,
+      tsConfig: '<rootDir>/tsconfig.test.json',
+      diagnostics: false
+      // diagnostics: {
+      //   warnOnly: true
+      // }
     }
   }
 }

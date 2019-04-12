@@ -10,13 +10,11 @@ import {
   Wrapper
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../util/mixins'
-import { rafPolyfill, scrollWindow } from '../../../../test'
+import { scrollWindow } from '../../../../test'
 
 describe('AppBar.ts', () => {
   type Instance = ExtractVue<typeof VAppBar>
   let mountFunction: (options?: object) => Wrapper<Instance>
-
-  rafPolyfill(window)
 
   beforeEach(() => {
     mountFunction = (options = {}) => {

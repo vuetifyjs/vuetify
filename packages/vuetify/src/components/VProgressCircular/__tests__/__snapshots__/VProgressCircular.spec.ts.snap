@@ -11,6 +11,7 @@ exports[`VProgressCircular.ts should render component and match snapshot 1`] = `
 >
   <svg xmlns="http://www.w3.org/2000/svg"
        viewbox="22.857142857142858 22.857142857142858 45.714285714285715 45.714285714285715"
+       style="transform: rotate(0deg);"
   >
     <circle fill="transparent"
             cx="45.714285714285715"
@@ -53,6 +54,7 @@ exports[`VProgressCircular.ts should render component with button prop and match
 >
   <svg xmlns="http://www.w3.org/2000/svg"
        viewbox="22.857142857142858 22.857142857142858 45.714285714285715 45.714285714285715"
+       style="transform: rotate(0deg);"
   >
     <circle fill="transparent"
             cx="45.714285714285715"
@@ -92,6 +94,7 @@ exports[`VProgressCircular.ts should render component with color prop and match 
 >
   <svg xmlns="http://www.w3.org/2000/svg"
        viewbox="22.857142857142858 22.857142857142858 45.714285714285715 45.714285714285715"
+       style="transform: rotate(0deg);"
   >
     <circle fill="transparent"
             cx="45.714285714285715"
@@ -132,6 +135,7 @@ exports[`VProgressCircular.ts should render component with fill prop and match s
 >
   <svg xmlns="http://www.w3.org/2000/svg"
        viewbox="22.857142857142858 22.857142857142858 45.714285714285715 45.714285714285715"
+       style="transform: rotate(0deg);"
   >
     <circle fill="transparent"
             cx="45.714285714285715"
@@ -170,6 +174,7 @@ exports[`VProgressCircular.ts should render component with indeterminate prop an
 >
   <svg xmlns="http://www.w3.org/2000/svg"
        viewbox="22.857142857142858 22.857142857142858 45.714285714285715 45.714285714285715"
+       style="transform: rotate(0deg);"
   >
     <circle fill="transparent"
             cx="45.714285714285715"
@@ -199,6 +204,7 @@ exports[`VProgressCircular.ts should render component with rotate prop and match
 >
   <svg xmlns="http://www.w3.org/2000/svg"
        viewbox="22.857142857142858 22.857142857142858 45.714285714285715 45.714285714285715"
+       style="transform: rotate(29deg);"
   >
     <circle fill="transparent"
             cx="45.714285714285715"
@@ -238,6 +244,7 @@ exports[`VProgressCircular.ts should render component with size prop and match s
 >
   <svg xmlns="http://www.w3.org/2000/svg"
        viewbox="26.153846153846157 26.153846153846157 52.307692307692314 52.307692307692314"
+       style="transform: rotate(0deg);"
   >
     <circle fill="transparent"
             cx="52.307692307692314"
@@ -277,6 +284,7 @@ exports[`VProgressCircular.ts should render component with width prop and match 
 >
   <svg xmlns="http://www.w3.org/2000/svg"
        viewbox="33.68421052631579 33.68421052631579 67.36842105263158 67.36842105263158"
+       style="transform: rotate(0deg);"
   >
     <circle fill="transparent"
             cx="67.36842105263158"

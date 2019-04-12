@@ -6,13 +6,10 @@ import {
   mount,
   Wrapper
 } from '@vue/test-utils'
-import { rafPolyfill } from '../../../../test'
 
 describe('VCombobox.ts', () => {
   type Instance = InstanceType<typeof VCombobox>
   let mountFunction: (options?: object) => Wrapper<Instance>
-
-  rafPolyfill(window)
 
   beforeEach(() => {
     document.body.setAttribute('data-app', 'true')
@@ -249,7 +246,6 @@ describe('VCombobox.ts', () => {
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/5008
-  // eslint-disable-next-line jest/no-disabled-tests
   it.skip('should select item if menu index is greater than -1', async () => {
     const wrapper = mountFunction({
       propsData: {

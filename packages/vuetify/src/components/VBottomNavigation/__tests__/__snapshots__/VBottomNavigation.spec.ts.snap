@@ -10,7 +10,7 @@ Object {
 exports[`VBottomNavigation.ts should be visible with a true value 2`] = `
 
 <div class="v-item-group v-bottom-navigation theme--light"
-     style="height: 56px;"
+     style="height: 56px; transform: none;"
 >
   <button type="button"
           class="v-btn v-btn--contained theme--light v-size--default"
@@ -38,7 +38,7 @@ Object {
 exports[`VBottomNavigation.ts should be visible with a true value 4`] = `
 
 <div class="v-item-group v-bottom-navigation theme--light"
-     style="height: 56px;"
+     style="height: 56px; transform: translateY(100%);"
 >
   <button type="button"
           class="v-btn v-btn--contained theme--light v-size--default"
