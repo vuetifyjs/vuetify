@@ -1,4 +1,5 @@
 import { consoleWarn } from './console'
+import { chunk, padEnd } from './helpers'
 
 export type ColorInt = number
 export type RGB = [number, number, number]
@@ -154,4 +155,16 @@ export function HexToHSVA (hex: Hex): HSVA {
 
 export function HSVAtoHex (hsva: HSVA): Hex {
   return RGBAtoHex(HSVAtoRGBA(hsva))
+}
+
+export function parseHex (hex: string): Hex {
+  if (hex.startsWith('#')) {
+    hex = hex.slice(1)
+  }
+
+  if (hex.length === 6) {
+    return chunk(padEnd(hex, 8, 'F'), 2) as Hex
+  } else {
+    return chunk(padEnd(padEnd(hex, 6), 8, 'F'), 2) as Hex
+  }
 }

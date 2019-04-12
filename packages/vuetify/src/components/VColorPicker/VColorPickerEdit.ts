@@ -3,8 +3,7 @@ import VBtn from '../VBtn'
 import VIcon from '../VIcon'
 
 // Helpers
-import { RGBAtoHSVA, HSVAtoRGBA, HSVA, HSVAtoHSLA, HSLAtoHSVA, colorEqual, HexToHSVA, HSVAtoHex } from '../../util/colorUtils'
-import { padEnd, chunk } from '../../util/helpers'
+import { RGBAtoHSVA, HSVAtoRGBA, HSVA, HSVAtoHSLA, HSLAtoHSVA, colorEqual, HexToHSVA, HSVAtoHex, parseHex } from '../../util/colorUtils'
 
 // Types
 import Vue, { VNode } from 'vue'
@@ -120,34 +119,37 @@ export default Vue.extend({
     },
     genInputs (): VNode[] | VNode {
       switch (this.currentMode.name) {
-        case 'hex': return this.genInput(
-          this.currentMode.name,
-          {
-            maxlength: 9
-          },
-          `#${this.internalColor.join('')}`,
-          (e: Event) => {
-            const el = e.target as HTMLInputElement
-            const newVal = padEnd(padEnd(el.value, 7), 9, 'F')
-            if (newVal.indexOf('#') < 0) return
-            this.internalColor = chunk(newVal.split('#')[1], 2)
-          }
-        )
-        default: return this.currentMode.inputs.map(([target, index, max, type]) => this.genInput(
-          target,
-          {
-            type: 'number',
-            min: 0,
-            max,
-            step: type === 'float' ? '0.01' : type === 'int' ? '1' : undefined
-          },
-          this.getValue(this.internalColor[index], type),
-          (e: Event) => {
-            const el = e.target as HTMLInputElement
-            const newVal = this.parseValue(el.value || '0', type)
-            this.internalColor = this.internalColor.map((oldVal: number, i: number) => i === index ? newVal : oldVal)
-          }
-        ))
+        case 'hex': {
+          const value = this.internalColor[3] === 'FF' ? this.internalColor.slice(0, -1) : this.internalColor
+          return this.genInput(
+            this.currentMode.name,
+            {
+              maxlength: 9
+            },
+            `#${value.join('')}`,
+            (e: Event) => {
+              const el = e.target as HTMLInputElement
+              this.internalColor = parseHex(el.value)
+            }
+          )
+        }
+        default: {
+          return this.currentMode.inputs.map(([target, index, max, type]) => this.genInput(
+            target,
+            {
+              type: 'number',
+              min: 0,
+              max,
+              step: type === 'float' ? '0.01' : type === 'int' ? '1' : undefined
+            },
+            this.getValue(this.internalColor[index], type),
+            (e: Event) => {
+              const el = e.target as HTMLInputElement
+              const newVal = this.parseValue(el.value || '0', type)
+              this.internalColor = this.internalColor.map((oldVal: number, i: number) => i === index ? newVal : oldVal)
+            }
+          ))
+        }
       }
     },
     genSwitch (): VNode {
