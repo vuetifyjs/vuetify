@@ -35,7 +35,9 @@ describe('VNavigationDrawer', () => {
   })
 
   it('should become temporary when the window resizes', async () => {
-    const wrapper = mountFunction()
+    const wrapper = mountFunction({
+      propsData: { app: true }
+    })
 
     expect(wrapper.vm.isActive).toBe(true)
     await resizeWindow(1200)
@@ -197,7 +199,9 @@ describe('VNavigationDrawer', () => {
   })
 
   it('should stay closed when mobile and temporary is enabled', async () => {
-    const wrapper = mountFunction()
+    const wrapper = mountFunction({
+      propsData: { app: true }
+    })
     await resizeWindow(800)
     wrapper.vm.$vuetify.breakpoint.width = 800
     await wrapper.vm.$nextTick()
