@@ -92,10 +92,9 @@ export default baseMixins.extend({
   data: () => ({
     isActive: false,
     isMouseover: false,
-    touch: {
-      isPanning: false,
-      length: null as number | null,
-      width: null as number | null
+    touchArea: {
+      left: 0,
+      right: 0
     }
   }),
 
@@ -116,11 +115,8 @@ export default baseMixins.extend({
       return this.width
     },
     calculatedTransform (): number {
-      if (this.bottom && this.isMobile) return 100
-      if (this.touch.isPanning && this.touch.length != null) {
-        return this.touch.length
-      }
       if (this.isActive) return 0
+      if (this.bottom && this.isMobile) return 100
       return this.right ? 100 : -100
     },
     classes (): object {
@@ -249,15 +245,6 @@ export default baseMixins.extend({
       if (val) this.genOverlay()
       else this.removeOverlay()
     },
-    'touch.length' (val) {
-      const opacity = (100 - Math.abs(val)) / 100
-
-      if (parseInt(opacity)) (this.isActive = true)
-      else if (this.isActive) this.isActive = false
-      // if (!this.overlay) this.genOverlay()
-
-      // this.overlay.opacity = opacity * 0.46
-    },
     value (val) {
       if (this.permanent) return
 
@@ -275,6 +262,15 @@ export default baseMixins.extend({
   },
 
   methods: {
+    calculateTouchArea () {
+      if (!this.$el.parentNode) return
+      const parentRect = (this.$el.parentNode as Element).getBoundingClientRect()
+
+      this.touchArea = {
+        left: parentRect.left + 50,
+        right: parentRect.right - 50
+      }
+    },
     closeConditional () {
       return this.isActive && this.reactsToClick
     },
@@ -316,9 +312,8 @@ export default baseMixins.extend({
         name: 'touch',
         value: {
           parent: true,
-          end: this.onTouchend,
-          start: this.onTouchstart,
-          move: this.onTouchmove
+          left: this.swipeLeft,
+          right: this.swipeRight
         }
       } as any)
 
@@ -358,31 +353,25 @@ export default baseMixins.extend({
         this.isActive = !this.isMobile
       }
     },
-    onTouchend () {
-      this.$el.style.transitionProperty = ''
+    swipeLeft (e: TouchWrapper) {
+      if (this.isActive && this.right) return
+      this.calculateTouchArea()
 
-      const panning = 100 - Math.abs(this.touch.length || 0)
-
-      if (panning < 50) {
-        this.touch.length = -100
-      } else (this.touch.length = 0)
-
-      this.touch.isPanning = false
+      if (Math.abs(e.touchendX - e.touchstartX) < 100) return
+      if (this.right &&
+        e.touchstartX >= this.touchArea.right
+      ) this.isActive = true
+      else if (!this.right && this.isActive) this.isActive = false
     },
-    onTouchmove (e: TouchWrapper) {
-      if (
-        !this.touch.isPanning &&
-        this.touch.length === -100
-      ) return
+    swipeRight (e: TouchWrapper) {
+      if (this.isActive && !this.right) return
+      this.calculateTouchArea()
 
-      this.touch.width = this.touch.width || this.$el.clientWidth
-      this.touch.length = Math.min((1 - e.touchmoveX / this.touch.width) * -100, 0)
-    },
-    onTouchstart (e: TouchWrapper) {
-      if (!this.isActive && e.touchstartX > 25) return
-
-      this.$el.style.transitionProperty = 'box-shadow'
-      this.touch.isPanning = true
+      if (Math.abs(e.touchendX - e.touchstartX) < 100) return
+      if (!this.right &&
+        e.touchstartX <= this.touchArea.left
+      ) this.isActive = true
+      else if (this.right && this.isActive) this.isActive = false
     },
     /**
      * Update the application layout
