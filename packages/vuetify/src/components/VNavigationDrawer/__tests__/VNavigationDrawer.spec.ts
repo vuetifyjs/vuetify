@@ -180,7 +180,7 @@ describe('VNavigationDrawer', () => {
     expect(wrapper.vm.$vuetify.application.left).toBe(256)
 
     wrapper.setProps({ miniVariant: true })
-    expect(wrapper.vm.$vuetify.application.left).toBe(56)
+    expect(wrapper.vm.$vuetify.application.left).toBe(80)
 
     wrapper.setProps({ miniVariant: false })
     expect(wrapper.vm.$vuetify.application.left).toBe(256)
@@ -351,7 +351,7 @@ describe('VNavigationDrawer', () => {
     })
 
     expect(wrapper.vm.isMouseover).toBe(false)
-    expect(wrapper.vm.computedWidth).toBe(56)
+    expect(wrapper.vm.computedWidth).toBe(80)
 
     wrapper.trigger('mouseenter')
     expect(wrapper.vm.isMouseover).toBe(true)
@@ -359,6 +359,6 @@ describe('VNavigationDrawer', () => {
 
     wrapper.trigger('mouseleave')
     expect(wrapper.vm.isMouseover).toBe(false)
-    expect(wrapper.vm.computedWidth).toBe(56)
+    expect(wrapper.vm.computedWidth).toBe(80)
   })
 })
