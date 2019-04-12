@@ -365,4 +365,66 @@ describe('VNavigationDrawer', () => {
     expect(wrapper.vm.isMouseover).toBe(false)
     expect(wrapper.vm.computedWidth).toBe(80)
   })
+
+  it('should clip top', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        app: true,
+        clipped: true
+      }
+    })
+
+    wrapper.vm.$vuetify.application.bottom = 20
+    wrapper.vm.$vuetify.application.top = 40
+
+    expect(wrapper.vm.computedMaxHeight).toBe(60)
+  })
+
+  it('should close when route changes on mobile', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        app: true,
+        disableRouteWatcher: true
+      }
+    })
+
+    expect(wrapper.vm.isActive).toBe(true)
+
+    wrapper.vm.onRouteChange()
+    expect(wrapper.vm.isActive).toBe(true)
+
+    wrapper.setProps({
+      disableRouteWatcher: false,
+      stateless: true
+    })
+
+    wrapper.vm.onRouteChange()
+    expect(wrapper.vm.isActive).toBe(true)
+
+    wrapper.setProps({
+      stateless: false,
+      temporary: true
+    })
+
+    wrapper.vm.onRouteChange()
+    expect(wrapper.vm.isActive).toBe(false)
+
+    wrapper.setProps({
+      temporary: false,
+      value: true
+    })
+    await wrapper.vm.$nextTick() // Wait for value watcher to fire
+
+    expect(wrapper.vm.isActive).toBe(true)
+
+    wrapper.vm.onRouteChange()
+    expect(wrapper.vm.isActive).toBe(true)
+
+    await resizeWindow(400)
+    wrapper.vm.$vuetify.breakpoint.width = 400
+    await wrapper.vm.$nextTick()
+
+    wrapper.vm.onRouteChange()
+    expect(wrapper.vm.isActive).toBe(false)
+  })
 })

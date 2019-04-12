@@ -217,11 +217,7 @@ export default baseMixins.extend({
   },
 
   watch: {
-    $route () {
-      if (this.reactsToRoute && this.closeConditional()) {
-        this.isActive = false
-      }
-    },
+    $route: 'onRouteChange',
     isActive (val) {
       this.$emit('input', val)
     },
@@ -385,6 +381,11 @@ export default baseMixins.extend({
         this.isActive = this.value
       } else if (!this.temporary) {
         this.isActive = !this.isMobile
+      }
+    },
+    onRouteChange () {
+      if (this.reactsToRoute && this.closeConditional()) {
+        this.isActive = false
       }
     },
     swipeLeft (e: TouchWrapper) {
