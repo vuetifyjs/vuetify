@@ -299,7 +299,7 @@ export default baseMixins.extend({
       }
 
       const image = this.$scopedSlots.img
-        ? this.$scopedSlots.img({ props })
+        ? this.$scopedSlots.img(props)
         : this.$createElement(VImg, { props })
 
       return this.$createElement('div', {
