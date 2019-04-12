@@ -2,7 +2,7 @@
 import VSlider from '../VSlider/VSlider'
 
 // Utilities
-import { HSVA } from '../../util/colorUtils'
+import { HSVA, RGBA, RGBtoCSS, RGBAtoCSS, RGB } from '../../util/colorUtils'
 
 // Types
 import Vue, { VNode } from 'vue'
@@ -14,9 +14,7 @@ export default Vue.extend({
   props: {
     alpha: Number,
     color: Array as PropValidator<HSVA>,
-    hsva: Array as PropValidator<HSVA>,
-    rgb: String,
-    rgba: String,
+    rgba: Array as PropValidator<RGBA>,
     hue: Number
   },
 
@@ -32,7 +30,7 @@ export default Vue.extend({
           max: 100
         },
         style: {
-          backgroundImage: `linear-gradient(to right, transparent, ${this.rgb})`
+          backgroundImage: `linear-gradient(to right, transparent, ${RGBtoCSS(this.rgba.slice(0, -1) as RGB)})`
         },
         on: {
           input: (val: number) => this.$emit('update:alpha', val / 100)
@@ -49,11 +47,18 @@ export default Vue.extend({
     },
     genDot (): VNode {
       return this.$createElement('div', {
-        staticClass: 'v-color-picker__dot',
-        style: {
-          background: this.rgba
-        }
-      })
+        staticClass: 'v-color-picker__dot'
+      }, [
+        this.$createElement('div', {
+          staticClass: 'v-color-picker__dot-background'
+        }),
+        this.$createElement('div', {
+          staticClass: 'v-color-picker__dot-foreground',
+          style: {
+            background: RGBAtoCSS(this.rgba)
+          }
+        })
+      ])
     },
     genHue (): VNode {
       return this.genTrack({

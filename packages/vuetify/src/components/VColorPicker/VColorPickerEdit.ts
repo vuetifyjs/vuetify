@@ -2,10 +2,13 @@
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'
 
+// Helpers
+import { RGBAtoHSVA, HSVAtoRGBA, HSVA, HSVAtoHSLA, HSLAtoHSVA, colorEqual, HexToHSVA, HSVAtoHex } from '../../util/colorUtils'
+import { padEnd, chunk } from '../../util/helpers'
+
 // Types
 import Vue, { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
-import { RGBAtoHSVA, HSVAtoRGBA, HSVA, HSVAtoHSLA, HSLAtoHSVA, colorEqual } from '../../util/colorUtils'
 
 type Input = [string, number, number, string]
 
@@ -24,7 +27,7 @@ export default Vue.extend({
   },
 
   data: () => ({
-    internalColor: [0, 0, 0, 1],
+    internalColor: [0, 0, 0, 1] as any[],
     modes: [
       {
         name: 'rgba',
@@ -47,6 +50,11 @@ export default Vue.extend({
         ],
         from: HSLAtoHSVA,
         to: HSVAtoHSLA
+      },
+      {
+        name: 'hex',
+        from: HexToHSVA,
+        to: HSVAtoHex
       }
     ] as Mode[],
     mode: 'rgba'
@@ -76,6 +84,11 @@ export default Vue.extend({
   },
 
   methods: {
+    getValue (v: any, type: string) {
+      if (type === 'float') return Math.round(v * 100) / 100
+      else if (type === 'int') return Math.round(v)
+      else return 0
+    },
     parseValue (v: string, type: string) {
       if (type === 'float') return parseFloat(v)
       else if (type === 'int') return parseInt(v, 10) || 0
@@ -88,36 +101,52 @@ export default Vue.extend({
       this.mode = newMode.name
       this.internalColor = newMode.to(value)
     },
-    genInput (target: string, index: number, maxlength: number, type: string): VNode {
-      const value: number = this.internalColor[index]
-
+    genInput (target: string, attrs: any, value: any, change: (e: Event) => void): VNode {
       return this.$createElement('div', {
         staticClass: 'v-color-picker__input'
       }, [
         this.$createElement('input', {
           key: target,
-          attrs: {
-            // type: type !== 'hex' ? 'number' : 'text',
-            max: type !== 'hex' && maxlength,
-            maxlength: type === 'hex' && maxlength,
-            step: type === 'float' ? '0.01' : type === 'int' ? '1' : undefined
-          },
+          attrs,
           domProps: {
-            value: type === 'int' ? Math.round(value) : Math.round(value * 100) / 100
+            value
           },
           on: {
-            change: (e: Event) => {
-              const el = e.target as HTMLInputElement
-              const newVal = this.parseValue(el.value || '0', type)
-              this.internalColor = this.internalColor.map((oldVal: number, i: number) => i === index ? newVal : oldVal)
-            }
+            change
           }
         }),
         this.$createElement('span', target.toUpperCase())
       ])
     },
-    genInputs (): VNode[] {
-      return this.currentMode.inputs.map(input => this.genInput(...input))
+    genInputs (): VNode[] | VNode {
+      switch (this.currentMode.name) {
+        case 'hex': return this.genInput(
+          this.currentMode.name,
+          {
+            maxlength: 8
+          },
+          this.internalColor.join(''),
+          (e: Event) => {
+            const el = e.target as HTMLInputElement
+            const newVal = padEnd(el.value, 8)
+            this.internalColor = chunk(newVal, 2)
+          }
+        )
+        default: return this.currentMode.inputs.map(([target, index, max, type]) => this.genInput(
+          target,
+          {
+            type: 'number',
+            max,
+            step: type === 'float' ? '0.01' : type === 'int' ? '1' : undefined
+          },
+          this.getValue(this.internalColor[index], type),
+          (e: Event) => {
+            const el = e.target as HTMLInputElement
+            const newVal = this.parseValue(el.value || '0', type)
+            this.internalColor = this.internalColor.map((oldVal: number, i: number) => i === index ? newVal : oldVal)
+          }
+        ))
+      }
     },
     genSwitch (): VNode {
       return this.$createElement(VBtn, {

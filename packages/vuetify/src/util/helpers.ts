@@ -473,6 +473,20 @@ export function getSlot (vm: Vue, name = 'default', data?: object, optional = fa
   return undefined
 }
 
-export function clamp (value: number, min: number = 0, max: number = 1) {
+export function clamp (value: number, min = 0, max = 1) {
   return Math.max(min, Math.min(max, value))
+}
+
+export function padEnd (str: string, length: number, char = '0') {
+  return str + char.repeat(Math.max(0, length - str.length))
+}
+
+export function chunk (str: string, size = 1) {
+  const chunked = []
+  let index = 0
+  while (index < str.length) {
+    chunked.push(str.substr(index, size))
+    index += size
+  }
+  return chunked
 }

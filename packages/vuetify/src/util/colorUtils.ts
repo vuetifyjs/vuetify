@@ -1,14 +1,16 @@
 import { consoleWarn } from './console'
 
-export type RGB = number
+export type ColorInt = number
+export type RGB = [number, number, number]
 export type XYZ = [number, number, number]
 export type LAB = [number, number, number]
 export type HSVA = [number, number, number, number]
 export type RGBA = [number, number, number, number]
 export type HSLA = [number, number, number, number]
+export type Hex = [string, string, string, string]
 export type Color = string | number | {}
 
-export function colorToInt (color: Color): RGB {
+export function colorToInt (color: Color): ColorInt {
   let rgb
 
   if (typeof color === 'number') {
@@ -37,7 +39,7 @@ export function colorToInt (color: Color): RGB {
   return rgb
 }
 
-export function intToHex (color: RGB): string {
+export function intToHex (color: ColorInt): string {
   let hexColor: string = color.toString(16)
 
   if (hexColor.length < 6) hexColor = '0'.repeat(6 - hexColor.length) + hexColor
@@ -116,4 +118,40 @@ export function HSLAtoHSVA (hsla: HSLA): HSVA {
 
 export function colorEqual (c1: number[], c2: number[], epsilon: number = Math.pow(2, -52)) {
   return c1.every((c, i) => Math.abs(c - c2[i]) < epsilon)
+}
+
+export function RGBAtoCSS (rgba: RGBA): string {
+  return `rgba(${rgba.join(', ')})`
+}
+
+export function RGBtoCSS (rgb: RGB): string {
+  return RGBAtoCSS([...rgb, 1] as RGBA)
+}
+
+export function RGBAtoHex (rgba: RGBA): Hex {
+  const toHex = (v: number) => {
+    const h = Math.round(v).toString(16)
+    return ('00'.substr(0, 2 - h.length) + h).toUpperCase()
+  }
+
+  return [
+    ...rgba.slice(0, -1).map(toHex),
+    toHex(rgba[3] * 255)
+  ] as Hex
+}
+
+export function HexToRGBA (hex: Hex): RGBA {
+  return [
+    ...hex.slice(0, -1).map(h => parseInt(h, 16)),
+    Math.round((parseInt(hex[3], 16) / 255) * 100) / 100
+  ] as RGBA
+}
+
+export function HexToHSVA (hex: Hex): HSVA {
+  const rgba = HexToRGBA(hex)
+  return RGBAtoHSVA(rgba)
+}
+
+export function HSVAtoHex (hsva: HSVA): Hex {
+  return RGBAtoHex(HSVAtoRGBA(hsva))
 }

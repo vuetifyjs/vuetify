@@ -33,27 +33,11 @@ export default VSheet.extend({
     alpha (): number {
       return this.internalValue[3]
     },
-    hsva (): HSVA {
+    rgba (): HSVA {
       return HSVAtoRGBA(this.internalValue)
     },
     hue (): number {
       return this.internalValue[0]
-    },
-    parsedHsva (): number[] {
-      const [h, s, v, a] = this.hsva
-
-      return [
-        parseInt(h),
-        parseInt(s),
-        parseInt(v),
-        a
-      ]
-    },
-    rgb (): string {
-      return `rgb(${this.parsedHsva.slice(0, 3).join(', ')})`
-    },
-    rgba (): string {
-      return `rgba(${this.parsedHsva.join(', ')})`
     }
   },
 
@@ -109,9 +93,7 @@ export default VSheet.extend({
       return this.$createElement(VColorPickerPreview, {
         props: {
           alpha: this.alpha,
-          hsva: this.hsva,
           hue: this.hue,
-          rgb: this.rgb,
           rgba: this.rgba,
           color: this.internalValue.slice()
         },
