@@ -313,14 +313,16 @@ export default baseMixins.extend({
         }
       }]
 
-      !this.touchless && directives.push({
-        name: 'touch',
-        value: {
-          parent: true,
-          left: this.swipeLeft,
-          right: this.swipeRight
-        }
-      } as any)
+      if (!this.touchless && !this.stateless) {
+        directives.push({
+          name: 'touch',
+          value: {
+            parent: true,
+            left: this.swipeLeft,
+            right: this.swipeRight
+          }
+        } as any)
+      }
 
       return directives
     },
