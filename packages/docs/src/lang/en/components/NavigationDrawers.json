@@ -1,11 +1,11 @@
 {
   "header": "# Navigation drawer",
-  "headerText": "The `v-navigation-drawer` component is what your users will utilize to navigate through the application. The navigation-drawer is pre-configured to work with or without **vue-router** right out the box.",
+  "headerText": "The `v-navigation-drawer` component is what your users will utilize to navigate through the application. The navigation-drawer is pre-configured to work with or without **vue-router** right out the box. For the purpose of display, some examples are wrapped in a `v-card` element. Within your application you will generally place the `v-navigation-drawer` as a direct child of `v-app`.",
   "examples": {
     "usage": {
       "desc": "The navigation drawer is primarily used to house links to the pages in your application. Using `null` as the starting value for its `v-model` will initialize the drawer as closed on mobile and as open on desktop."
     },
-    "permanentClipped": {
+    "colored": {
       "header": "### Colored drawer",
       "desc": "Navigation drawers can be customized to fit any application's design. While any component can be used within a drawer, the primary ones you will use are `v-list`, all of the **list** children components and `v-divider`"
     },
