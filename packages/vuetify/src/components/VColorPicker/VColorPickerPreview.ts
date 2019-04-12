@@ -25,15 +25,16 @@ export default Vue.extend({
         props: {
           thumbColor: 'grey lighten-2',
           hideDetails: true,
-          value: this.alpha * 100,
+          value: this.alpha,
+          step: 0.01,
           min: 0,
-          max: 100
+          max: 1
         },
         style: {
           backgroundImage: `linear-gradient(to right, transparent, ${RGBtoCSS(this.rgba.slice(0, -1) as RGB)})`
         },
         on: {
-          input: (val: number) => this.$emit('update:alpha', val / 100)
+          input: (val: number) => this.$emit('update:alpha', val)
         }
       })
     },
