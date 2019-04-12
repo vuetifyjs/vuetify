@@ -129,7 +129,8 @@ export default Vue.extend({
           (e: Event) => {
             const el = e.target as HTMLInputElement
             const newVal = padEnd(el.value, 8)
-            this.internalColor = chunk(newVal, 2)
+            if (newVal.indexOf('#') < 0) return
+            this.internalColor = chunk(newVal.split('#')[1], 2)
           }
         )
         default: return this.currentMode.inputs.map(([target, index, max, type]) => this.genInput(
