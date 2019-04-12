@@ -60,7 +60,9 @@ export default baseMixins.extend({
     disableResizeWatcher: Boolean,
     height: {
       type: [Number, String],
-      default: '100vh'
+      default () {
+        return this.app ? '100vh' : '100%'
+      }
     },
     floating: Boolean,
     miniVariant: Boolean,
@@ -180,7 +182,8 @@ export default baseMixins.extend({
         (this.isMobile || this.temporary)
     },
     reactsToMobile (): boolean {
-      return !this.disableResizeWatcher &&
+      return this.app &&
+        !this.disableResizeWatcher &&
         !this.stateless &&
         !this.permanent &&
         !this.temporary
