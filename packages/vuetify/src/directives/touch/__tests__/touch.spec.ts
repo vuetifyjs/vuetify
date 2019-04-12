@@ -9,7 +9,7 @@ import {
   mount,
   Wrapper
 } from '@vue/test-utils'
-import { touch } from '@/test'
+import { touch } from '../../../../test'
 
 describe('touch.ts', () => {
   let mountFunction: (value?: object) => Wrapper<Vue>
