@@ -136,6 +136,7 @@ export default Vue.extend({
           target,
           {
             type: 'number',
+            min: 0,
             max,
             step: type === 'float' ? '0.01' : type === 'int' ? '1' : undefined
           },
