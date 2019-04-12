@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VAutocomplete",
   "mdSpec": {
     "version": "1",
     "link": "https://material.io/archive/guidelines/components/text-fields.html"

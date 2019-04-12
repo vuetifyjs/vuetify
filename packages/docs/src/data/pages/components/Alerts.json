@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VAlert",
   "children": [
     {
       "type": "section",

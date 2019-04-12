@@ -193,9 +193,9 @@ export default VSlider.extend({
 
       if (isInsideTrack) {
         if (trackClick) this.activeThumb = this.getIndexOfClosestValue(this.internalValue, value)
-
-        this.setInternalValue(value)
       }
+
+      this.setInternalValue(value)
     },
     onKeyDown (e: KeyboardEvent) {
       if (this.activeThumb === null) return

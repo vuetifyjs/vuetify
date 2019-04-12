@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VCard",
   "mdSpec": {
     "version": "2",
     "link": "https://material.io/design/components/cards.html"

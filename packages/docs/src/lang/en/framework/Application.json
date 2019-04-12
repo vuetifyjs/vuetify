@@ -1,5 +1,8 @@
 {
-  "header": "# Default Markup",
+  "header": "# Application",
+  "headerText": "The **application service** is used to configure your Vuetify layout. It does so through a special **app** prop that exists on certain layout components such as [v-navigation-drawer](/components/navigation-drawers) and [v-toolbar](/components/toolbars).",
+  "header2": "## Application service object",
+  "headerText2": "These values are automatically updated when you add new components with the **app** prop. They are not editable and exist in a _READONLY_ state. You can access these values by referencing the application property on the **$vuetify** object.",
   "appHeader": "## All about _app_",
   "appText": "In Vuetify, the `v-app` component and the **app** help bootstrap your application with the proper sizing around `v-content`. This allows you to create truly unique interfaces without the hassle of managing your layout. The `v-app` component is **REQUIRED** for all applications. This is the mount point for many of Vuetify's components and functionality.",
   "markupHeader": "## Default application markup",
