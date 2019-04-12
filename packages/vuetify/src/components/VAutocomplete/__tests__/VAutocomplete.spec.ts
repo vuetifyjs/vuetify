@@ -413,7 +413,7 @@ describe('VAutocomplete.ts', () => {
     wrapper.setData({ isMenuActive: false })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.lazySearch).toBeNull()
+    expect(wrapper.vm.lazySearch).toBeUndefined()
   })
 
   it('should select input text on focus', async () => {

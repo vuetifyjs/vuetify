@@ -14,7 +14,7 @@ export type Registrable<T extends string, C extends VueConstructor | null = null
 }>
 
 export function inject<
-T extends string, C extends VueConstructor | null = null
+  T extends string, C extends VueConstructor | null = null
 > (namespace: T, child?: string, parent?: string): Registrable<T, C> {
   const defaultImpl = child && parent ? {
     register: generateWarning(child, parent),

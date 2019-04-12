@@ -9,6 +9,7 @@ import VTextField from '../VTextField/VTextField'
 import VMenu from '../VMenu/VMenu'
 
 // Utilities
+import { PropType } from 'vue'
 import { keyCodes } from '../../util/helpers'
 import mixins, { ExtractVue } from '../../util/mixins'
 
@@ -53,6 +54,7 @@ export default baseMixins.extend<options>().extend({
     hideNoData: Boolean,
     noFilter: Boolean,
     searchInput: {
+      type: String as PropType<string | undefined>,
       default: undefined
     },
     menuProps: {
@@ -68,7 +70,7 @@ export default baseMixins.extend<options>().extend({
   data () {
     return {
       attrsInput: null,
-      lazySearch: this.searchInput as null | undefined
+      lazySearch: this.searchInput
     }
   },
 
@@ -79,29 +81,29 @@ export default baseMixins.extend<options>().extend({
         'v-autocomplete--is-selecting-index': this.selectedIndex > -1
       })
     },
-    computedItems () {
+    computedItems (): object[] {
       return this.filteredItems
     },
-    selectedValues () {
+    selectedValues (): object[] {
       return this.selectedItems.map(item => this.getValue(item))
     },
-    hasDisplayedItems () {
+    hasDisplayedItems (): boolean {
       return this.hideSelected
         ? this.filteredItems.some(item => !this.hasItem(item))
         : this.filteredItems.length > 0
     },
-    currentRange () {
+    currentRange (): number {
       if (this.selectedItem == null) return 0
 
       return this.getText(this.selectedItem).toString().length
     },
-    filteredItems () {
+    filteredItems (): object[] {
       if (!this.isSearching || this.noFilter || this.internalSearch == null) return this.allItems
 
       return this.allItems.filter(item => this.filter(item, this.internalSearch.toString(), this.getText(item).toString()))
     },
     internalSearch: {
-      get () {
+      get (): string | undefined {
         return this.lazySearch
       },
       set (val: any) {
@@ -110,13 +112,13 @@ export default baseMixins.extend<options>().extend({
         this.$emit('update:searchInput', val)
       }
     },
-    isAnyValueAllowed () {
+    isAnyValueAllowed (): boolean {
       return false
     },
-    isDirty () {
+    isDirty (): boolean {
       return this.searchIsDirty || this.selectedItems.length > 0
     },
-    isSearching () {
+    isSearching (): boolean {
       if (this.multiple) return this.searchIsDirty
 
       return (
@@ -124,12 +126,12 @@ export default baseMixins.extend<options>().extend({
         this.internalSearch !== this.getText(this.selectedItem)
       )
     },
-    menuCanShow () {
+    menuCanShow (): boolean {
       if (!this.isFocused) return false
 
       return this.hasDisplayedItems || !this.hideNoData
     },
-    $_menuProps () {
+    $_menuProps (): object {
       const props = VSelect.options.computed.$_menuProps.call(this)
       props.contentClass = `v-autocomplete__content ${props.contentClass || ''}`.trim()
       return {
@@ -137,11 +139,11 @@ export default baseMixins.extend<options>().extend({
         ...props
       }
     },
-    searchIsDirty () {
+    searchIsDirty (): boolean {
       return this.internalSearch != null &&
         this.internalSearch !== ''
     },
-    selectedItem () {
+    selectedItem (): any {
       if (this.multiple) return null
 
       return this.selectedItems.find(i => {
@@ -179,7 +181,7 @@ export default baseMixins.extend<options>().extend({
     isMenuActive (val) {
       if (val || !this.hasSlot) return
 
-      this.lazySearch = null
+      this.lazySearch = undefined
     },
     items (val, oldVal) {
       // If we are focused, the menu
@@ -195,7 +197,7 @@ export default baseMixins.extend<options>().extend({
         val.length
       ) this.activateMenu()
     },
-    searchInput (val) {
+    searchInput (val: string) {
       this.lazySearch = val
     },
     internalSearch: 'onInternalSearchChanged',
