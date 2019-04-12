@@ -32,13 +32,14 @@ export default VSlider.extend({
   },
 
   computed: {
-    classes () {
-      return Object.assign({}, {
+    classes (): object {
+      return {
+        ...VSlider.options.computed.classes.call(this),
         'v-input--range-slider': true
-      }, VSlider.options.computed.classes.call(this))
+      }
     },
     internalValue: {
-      get () {
+      get (): number[] {
         return this.lazyValue
       },
       set (val: number[]) {
@@ -63,12 +64,12 @@ export default VSlider.extend({
         this.validate()
       }
     },
-    inputWidth () {
+    inputWidth (): number[] {
       return this.internalValue.map((v: number) => (
         this.roundValue(v) - this.minValue) / (this.maxValue - this.minValue) * 100
       )
     },
-    trackFillStyles () {
+    trackFillStyles (): Partial<CSSStyleDeclaration> {
       const styles = VSlider.options.computed.trackFillStyles.call(this)
       const fillPercent = Math.abs(this.inputWidth[0] - this.inputWidth[1])
       const dir = this.vertical ? 'height' : 'width'

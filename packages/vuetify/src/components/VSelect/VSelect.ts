@@ -103,9 +103,6 @@ export default baseMixins.extend<options>().extend({
     multiple: Boolean,
     openOnClear: Boolean,
     returnObject: Boolean,
-    searchInput: {
-      default: null
-    },
     smallChips: Boolean
   },
 

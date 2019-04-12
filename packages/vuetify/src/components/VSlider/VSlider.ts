@@ -68,8 +68,8 @@ export default mixins<options &
     ticks: {
       type: [Boolean, String],
       default: false,
-      validator: (v: any) => typeof v === 'boolean' || v === 'always'
-    },
+      validator: v => typeof v === 'boolean' || v === 'always'
+    } as PropValidator<boolean | 'always'>,
     tickLabels: {
       type: Array,
       default: () => ([])
@@ -85,8 +85,8 @@ export default mixins<options &
     thumbLabel: {
       type: [Boolean, String],
       default: null,
-      validator: (v: any) => typeof v === 'boolean' || v === 'always'
-    },
+      validator: v => typeof v === 'boolean' || v === 'always'
+    } as PropValidator<boolean | 'always' | null>,
     thumbSize: {
       type: [Number, String],
       default: 32
@@ -109,7 +109,7 @@ export default mixins<options &
   }),
 
   computed: {
-    classes () {
+    classes (): object {
       return {
         'v-input__slider': true,
         'v-input__slider--vertical': this.vertical,
@@ -117,7 +117,7 @@ export default mixins<options &
       }
     },
     internalValue: {
-      get () {
+      get (): number {
         return this.lazyValue
       },
       set (val: number) {
@@ -150,13 +150,13 @@ export default mixins<options &
 
       return value
     },
-    trackFillStyles () {
+    trackFillStyles (): Partial<CSSStyleDeclaration> {
       const startDir = this.vertical ? 'bottom' : 'left'
       const endDir = this.vertical ? 'top' : 'right'
       const valueDir = this.vertical ? 'height' : 'width'
 
-      const start = this.$vuetify.rtl ? 'auto' : 0
-      const end = this.$vuetify.rtl ? 0 : 'auto'
+      const start = this.$vuetify.rtl ? 'auto' : '0'
+      const end = this.$vuetify.rtl ? '0' : 'auto'
       const value = this.disabled ? `calc(${this.inputWidth}% - 10px)` : `${this.inputWidth}%`
 
       return {
@@ -166,7 +166,7 @@ export default mixins<options &
         [valueDir]: value
       }
     },
-    trackStyles () {
+    trackStyles (): Partial<CSSStyleDeclaration> {
       const startDir = this.vertical ? this.$vuetify.rtl ? 'bottom' : 'top' : this.$vuetify.rtl ? 'left' : 'right'
       const endDir = this.vertical ? 'height' : 'width'
 
@@ -179,29 +179,28 @@ export default mixins<options &
         [endDir]: end
       }
     },
-    showTicks () {
+    showTicks (): boolean {
       return this.tickLabels.length > 0 ||
-        (!this.disabled && this.stepNumeric && !!this.ticks)
+        !!(!this.disabled && this.stepNumeric && this.ticks)
     },
-    numTicks () {
+    numTicks (): number {
       return Math.ceil((this.maxValue - this.minValue) / this.stepNumeric)
     },
-    showThumbLabel () {
-      return !this.disabled && (
-        !!this.thumbLabel ||
-        this.thumbLabel === '' ||
+    showThumbLabel (): boolean {
+      return !this.disabled && !!(
+        this.thumbLabel ||
         this.$scopedSlots['thumb-label']
       )
     },
-    computedColor () {
+    computedColor (): string | false {
       if (this.disabled) return false
       return this.validationState || this.color
     },
-    computedTrackColor () {
+    computedTrackColor (): string | false {
       if (this.disabled) return false
       return this.validationState || this.trackColor
     },
-    computedThumbColor () {
+    computedThumbColor (): string | false {
       if (this.disabled) return false
       return this.validationState || this.thumbColor || this.color
     }
