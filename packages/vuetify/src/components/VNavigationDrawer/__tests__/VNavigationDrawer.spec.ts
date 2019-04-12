@@ -1,6 +1,7 @@
 import { Application } from '../../../services/application'
 import VNavigationDrawer from '../VNavigationDrawer'
 import { resizeWindow } from '../../../../test'
+
 import {
   mount,
   MountOptions,
@@ -280,5 +281,84 @@ describe('VNavigationDrawer', () => {
     wrapper.setProps({ app: true })
 
     expect(wrapper.vm.computedTop).toBe(24)
+  })
+
+  it('should react to mini-variant clicks', () => {
+    const update = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        miniVariant: true
+      },
+      listeners: {
+        'update:miniVariant': update
+      }
+    })
+
+    wrapper.trigger('click')
+
+    expect(update).toHaveBeenCalled()
+  })
+
+  it('should react to open / close from touch events', async () => {
+    const wrapper = mountFunction({
+      attachToDocument: true,
+      propsData: { value: false }
+    })
+    const element = wrapper.vm.$el.parentElement
+
+    expect(wrapper.vm.isActive).toBe(false)
+
+    touch({ element }).start(0, 0).end(200, 0)
+    expect(wrapper.vm.isActive).toBe(true)
+
+    // A consecutive swipe should keep the same state
+    touch({ element }).start(0, 0).end(200, 0)
+    expect(wrapper.vm.isActive).toBe(true)
+
+    touch({ element }).start(200, 0).end(0, 0)
+    expect(wrapper.vm.isActive).toBe(false)
+
+    // A consecutive swipe should keep the same state
+    touch({ element }).start(200, 0).end(0, 0)
+    expect(wrapper.vm.isActive).toBe(false)
+
+    // Swipe is not long enough
+    touch({ element }).start(0, 0).end(99, 0)
+    expect(wrapper.vm.isActive).toBe(false)
+
+    wrapper.setProps({ right: true })
+
+    // Swipe is not long enough
+    touch({ element }).start(1920, 0).end(1821, 0)
+    expect(wrapper.vm.isActive).toBe(false)
+
+    touch({ element }).start(1920, 0).end(1720, 0)
+    expect(wrapper.vm.isActive).toBe(true)
+
+    // A consecutive swipe should keep the same state
+    touch({ element }).start(1920, 0).end(1720, 0)
+    expect(wrapper.vm.isActive).toBe(true)
+
+    touch({ element }).start(1720, 0).end(1920, 0)
+    expect(wrapper.vm.isActive).toBe(false)
+  })
+
+  it('should activate and expand on hover', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        openOnHover: true
+      }
+    })
+
+    expect(wrapper.vm.isMouseover).toBe(false)
+    expect(wrapper.vm.computedWidth).toBe(56)
+
+    wrapper.trigger('mouseenter')
+    expect(wrapper.vm.isMouseover).toBe(true)
+    expect(wrapper.vm.computedWidth).toBe(256)
+
+    wrapper.trigger('mouseleave')
+    expect(wrapper.vm.isMouseover).toBe(false)
+    expect(wrapper.vm.computedWidth).toBe(56)
   })
 })
