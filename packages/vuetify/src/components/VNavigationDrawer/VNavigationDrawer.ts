@@ -22,7 +22,7 @@ import { convertToUnit, getSlot } from '../../util/helpers'
 import mixins from '../../util/mixins'
 
 // TYpes
-import { VNode } from 'vue/types/vnode'
+import { VNode, VNodeDirective } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
 const baseMixins = mixins(
@@ -303,7 +303,7 @@ export default baseMixins.extend({
         staticClass: 'v-navigation-drawer__image'
       }, [image])
     },
-    genDirectives () {
+    genDirectives (): VNodeDirective[] {
       const directives = [{
         name: 'click-outside',
         value: () => (this.isActive = false),
@@ -323,6 +323,30 @@ export default baseMixins.extend({
       } as any)
 
       return directives
+    },
+    genListeners () {
+      const on: Record<string, (e: Event) => void> = {
+        transitionend: (e: Event) => {
+          if (e.target !== e.currentTarget) return
+          this.$emit('transitionend', e)
+
+          // IE11 does not support new Event('resize')
+          const resizeEvent = document.createEvent('UIEvents')
+          resizeEvent.initUIEvent('resize', true, false, window, 0)
+          window.dispatchEvent(resizeEvent)
+        }
+      }
+
+      if (this.miniVariant) {
+        on.click = () => this.$emit('update:miniVariant', false)
+      }
+
+      if (this.openOnHover) {
+        on.mouseenter = () => (this.isMouseover = true)
+        on.mouseleave = () => (this.isMouseover = false)
+      }
+
+      return on
     },
     genPrepend () {
       const slot = getSlot(this, 'prepend')
@@ -409,24 +433,7 @@ export default baseMixins.extend({
       class: this.classes,
       style: this.styles,
       directives: this.genDirectives(),
-      on: {
-        click: () => {
-          if (!this.miniVariant) return
-
-          this.$emit('update:miniVariant', false)
-        },
-        mouseenter: () => (this.isMouseover = true),
-        mouseleave: () => (this.isMouseover = false),
-        transitionend: (e: Event) => {
-          if (e.target !== e.currentTarget) return
-          this.$emit('transitionend', e)
-
-          // IE11 does not support new Event('resize')
-          const resizeEvent = document.createEvent('UIEvents')
-          resizeEvent.initUIEvent('resize', true, false, window, 0)
-          window.dispatchEvent(resizeEvent)
-        }
-      }
+      on: this.genListeners()
     }), children)
   }
 })
