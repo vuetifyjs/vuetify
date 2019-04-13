@@ -3,11 +3,12 @@ import VBtn from '../VBtn'
 import VIcon from '../VIcon'
 
 // Helpers
-import { RGBAtoHSVA, HSVAtoRGBA, HSVA, HSVAtoHSLA, HSLAtoHSVA, colorEqual, HexToHSVA, HSVAtoHex, parseHex } from '../../util/colorUtils'
+import { parseHex } from '../../util/colorUtils'
 
 // Types
 import Vue, { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
+import { VColorPickerColor, fromRgba, fromHex, fromHsla } from './util'
 
 type Input = [string, number, number, string]
 
@@ -15,18 +16,16 @@ type Mode = {
   name: string
   inputs: Input[]
   from: Function
-  to: Function
 }
 
 export default Vue.extend({
   name: 'v-color-picker-edit',
 
   props: {
-    color: Array as PropValidator<HSVA>
+    color: Object as PropValidator<VColorPickerColor>
   },
 
   data: () => ({
-    internalColor: [0, 0, 0, 1] as any[],
     modes: [
       {
         name: 'rgba',
@@ -36,8 +35,7 @@ export default Vue.extend({
           ['b', 2, 255, 'int'],
           ['a', 3, 1, 'float']
         ],
-        from: RGBAtoHSVA,
-        to: HSVAtoRGBA
+        from: fromRgba
       },
       {
         name: 'hsla',
@@ -47,13 +45,11 @@ export default Vue.extend({
           ['l', 2, 1, 'float'],
           ['a', 3, 1, 'float']
         ],
-        from: HSLAtoHSVA,
-        to: HSVAtoHSLA
+        from: fromHsla
       },
       {
         name: 'hex',
-        from: HexToHSVA,
-        to: HSVAtoHex
+        from: fromHex
       }
     ] as Mode[],
     mode: 'rgba'
@@ -63,22 +59,6 @@ export default Vue.extend({
     currentMode (): Mode {
       const index = this.modes.findIndex(m => m.name === this.mode)
       return this.modes[index]
-    }
-  },
-
-  watch: {
-    color: {
-      handler (v: number[]) {
-        this.internalColor = this.currentMode.to(v)
-      },
-      immediate: true
-    },
-    internalColor: {
-      handler (v: number[]) {
-        const hsva = this.currentMode.from(v)
-        if (colorEqual(hsva, this.color)) return
-        this.$emit('update:color', hsva)
-      }
     }
   },
 
@@ -94,13 +74,11 @@ export default Vue.extend({
       else return 0
     },
     changeMode () {
-      const value = this.currentMode.from(this.internalColor)
       const index = this.modes.findIndex(m => m.name === this.mode)
       const newMode = this.modes[(index + 1) % this.modes.length]
       this.mode = newMode.name
-      this.internalColor = newMode.to(value)
     },
-    genInput (target: string, attrs: any, value: any, change: (e: Event) => void): VNode {
+    genInput (target: string, attrs: any, value: any, on: any): VNode {
       return this.$createElement('div', {
         staticClass: 'v-color-picker__input'
       }, [
@@ -110,9 +88,7 @@ export default Vue.extend({
           domProps: {
             value
           },
-          on: {
-            change
-          }
+          on
         }),
         this.$createElement('span', target.toUpperCase())
       ])
@@ -120,35 +96,44 @@ export default Vue.extend({
     genInputs (): VNode[] | VNode {
       switch (this.currentMode.name) {
         case 'hex': {
-          const value = this.internalColor[3] === 'FF' ? this.internalColor.slice(0, -1) : this.internalColor
+          const hex = this.color.hex
+          const value = hex[3] === 'FF' ? hex.slice(0, -1) : hex
           return this.genInput(
             this.currentMode.name,
             {
               maxlength: 9
             },
             `#${value.join('')}`,
-            (e: Event) => {
-              const el = e.target as HTMLInputElement
-              this.internalColor = parseHex(el.value)
+            {
+              change: (e: Event) => {
+                const el = e.target as HTMLInputElement
+                this.$emit('update:color', this.currentMode.from(parseHex(el.value)))
+              }
             }
           )
         }
         default: {
-          return this.currentMode.inputs.map(([target, index, max, type]) => this.genInput(
-            target,
-            {
-              type: 'number',
-              min: 0,
-              max,
-              step: type === 'float' ? '0.01' : type === 'int' ? '1' : undefined
-            },
-            this.getValue(this.internalColor[index], type),
-            (e: Event) => {
-              const el = e.target as HTMLInputElement
-              const newVal = this.parseValue(el.value || '0', type)
-              this.internalColor = this.internalColor.map((oldVal: number, i: number) => i === index ? newVal : oldVal)
-            }
-          ))
+          return this.currentMode.inputs.map(([target, index, max, type]) => {
+            const value = this.color[this.currentMode.name as keyof VColorPickerColor] as any[]
+            return this.genInput(
+              target,
+              {
+                type: 'number',
+                min: 0,
+                max,
+                step: type === 'float' ? '0.01' : type === 'int' ? '1' : undefined
+              },
+              this.getValue(value[index], type),
+              {
+                input: (e: Event) => {
+                  const el = e.target as HTMLInputElement
+                  const newVal = this.parseValue(el.value || '0', type)
+
+                  this.$emit('update:color', this.currentMode.from(value.map((oldVal: number, i: number) => i === index ? newVal : oldVal)))
+                }
+              }
+            )
+          })
         }
       }
     },

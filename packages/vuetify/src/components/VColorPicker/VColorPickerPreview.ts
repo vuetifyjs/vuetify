@@ -2,20 +2,18 @@
 import VSlider from '../VSlider/VSlider'
 
 // Utilities
-import { HSVA, RGBA, RGBtoCSS, RGBAtoCSS, RGB } from '../../util/colorUtils'
+import { HSVA, RGBtoCSS, RGBAtoCSS, RGB } from '../../util/colorUtils'
 
 // Types
 import Vue, { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
+import { VColorPickerColor, fromHsva } from './util'
 
 export default Vue.extend({
   name: 'v-color-picker-preview',
 
   props: {
-    alpha: Number,
-    color: Array as PropValidator<HSVA>,
-    rgba: Array as PropValidator<RGBA>,
-    hue: Number
+    color: Object as PropValidator<VColorPickerColor>
   },
 
   methods: {
@@ -25,16 +23,16 @@ export default Vue.extend({
         props: {
           thumbColor: 'grey lighten-2',
           hideDetails: true,
-          value: this.alpha,
+          value: this.color.alpha,
           step: 0.01,
           min: 0,
           max: 1
         },
         style: {
-          backgroundImage: `linear-gradient(to right, transparent, ${RGBtoCSS(this.rgba.slice(0, -1) as RGB)})`
+          backgroundImage: `linear-gradient(to right, transparent, ${RGBtoCSS(this.color.rgba.slice(0, -1) as RGB)})`
         },
         on: {
-          input: (val: number) => this.$emit('update:alpha', val)
+          input: (val: number) => this.$emit('update:color', fromHsva([...this.color.hsva.slice(0, -1), val] as HSVA))
         }
       })
     },
@@ -56,7 +54,7 @@ export default Vue.extend({
         this.$createElement('div', {
           staticClass: 'v-color-picker__dot-foreground',
           style: {
-            background: RGBAtoCSS(this.rgba)
+            background: RGBAtoCSS(this.color.rgba)
           }
         })
       ])
@@ -67,13 +65,12 @@ export default Vue.extend({
         props: {
           thumbColor: 'grey lighten-2',
           hideDetails: true,
-          value: this.hue,
-          step: 0,
+          value: this.color.hue,
           min: 0,
           max: 360
         },
         on: {
-          input: (val: number) => this.$emit('update:hue', val)
+          input: (val: number) => this.$emit('update:color', fromHsva([val, ...this.color.hsva.slice(1)] as HSVA))
         }
       })
     },

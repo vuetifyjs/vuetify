@@ -7,18 +7,24 @@ import VSheet from '../VSheet/VSheet'
 // Components
 import VColorPickerPreview from './VColorPickerPreview'
 import VColorPickerCanvas from './VColorPickerCanvas'
+import VColorPickerEdit from './VColorPickerEdit'
 
-// Utilities
-import { colorEqual, HSVA, HSVAtoRGBA } from '../../util/colorUtils'
+// Helpers
+import { VColorPickerColor, parseColor, fromRgba } from './util'
 
 // Types
 import { VNode } from 'vue'
-import VColorPickerEdit from './VColorPickerEdit'
+import { PropValidator } from 'vue/types/options'
 
 export default VSheet.extend({
   name: 'v-color-picker',
 
   props: {
+    hideCanvas: Boolean,
+    hideInputs: Boolean,
+    value: {
+      type: [Object, String]
+    } as PropValidator<string | VColorPickerColor>,
     width: {
       type: [Number, String],
       default: 300
@@ -26,80 +32,60 @@ export default VSheet.extend({
   },
 
   data: () => ({
-    internalValue: [0, 1, 1, 1] as HSVA
+    internalValue: fromRgba([255, 0, 0, 1])
   }),
 
-  computed: {
-    alpha (): number {
-      return this.internalValue[3]
+  watch: {
+    value: {
+      handler (v: VColorPickerColor) {
+        this.internalValue = parseColor(v)
+      },
+      immediate: true
     },
-    rgba (): HSVA {
-      return HSVAtoRGBA(this.internalValue)
-    },
-    hue (): number {
-      return this.internalValue[0]
+    internalValue (v: any[]) {
+      this.$emit('input', v)
     }
   },
 
   methods: {
-    genCanvas () {
+    updateColor (v: VColorPickerColor) {
+      this.internalValue = v
+    },
+    genCanvas (): VNode {
       return this.$createElement(VColorPickerCanvas, {
         props: {
-          hue: this.hue,
-          value: this.internalValue.slice(1, 3)
+          color: this.internalValue
         },
         on: {
-          input: (v: any) => {
-            this.internalValue = [
-              this.hue,
-              v[0],
-              v[1],
-              this.alpha
-            ]
-          }
+          'update:color': this.updateColor
         }
       })
     },
-    genControls () {
+    genControls (): VNode {
       return this.$createElement('div', {
         staticClass: 'v-color-picker__controls'
       }, [
         this.genPreview(),
-        this.genEdit()
+        !this.hideInputs && this.genEdit()
       ])
     },
-    genEdit () {
+    genEdit (): VNode {
       return this.$createElement(VColorPickerEdit, {
         props: {
-          color: this.internalValue.slice()
+          color: this.internalValue
         },
         on: {
-          'update:color': (value: HSVA) => {
-            // If saturation is zero then we try
-            // to reuse old hue value, otherwise
-            // the canvas hue will revert to red
-            const oldHue = this.hue
-
-            if (value[1] === 0) {
-              value[0] = value[0] || oldHue
-            }
-            if (colorEqual(value, this.internalValue)) return
-            this.internalValue = value
-          }
+          'update:color': this.updateColor
         }
       })
     },
-    genPreview () {
+    genPreview (): VNode {
       return this.$createElement(VColorPickerPreview, {
         props: {
-          alpha: this.alpha,
-          hue: this.hue,
-          rgba: this.rgba,
-          color: this.internalValue.slice()
+          color: this.internalValue
         },
         on: {
-          'update:hue': (v: number) => this.$set(this.internalValue, 0, v),
-          'update:alpha': (v: number) => this.$set(this.internalValue, 3, v)
+          'update:color': this.updateColor
         }
       })
     }
@@ -111,7 +97,7 @@ export default VSheet.extend({
       class: this.classes,
       style: this.styles
     }, [
-      this.genCanvas(),
+      !this.hideCanvas && this.genCanvas(),
       this.genControls()
     ])
   }

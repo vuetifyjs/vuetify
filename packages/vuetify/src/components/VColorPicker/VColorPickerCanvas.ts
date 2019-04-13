@@ -1,8 +1,9 @@
 // Types
 import Vue, { VNode } from 'vue'
 import { clamp } from '../../util/helpers'
-import { HSVA, colorEqual } from '../../util/colorUtils'
+import { HSVA } from '../../util/colorUtils'
 import { PropValidator } from 'vue/types/options'
+import { fromHsva, VColorPickerColor } from './util'
 
 function renderHsv (canvas: HTMLCanvasElement, hue: number) {
   const ctx = canvas.getContext('2d')
@@ -26,8 +27,7 @@ export default Vue.extend({
   name: 'v-color-picker-canvas',
 
   props: {
-    hue: Number,
-    value: Array as PropValidator<number[]>,
+    color: Object as PropValidator<VColorPickerColor>,
     dotSize: {
       type: Number,
       default: 10
@@ -45,30 +45,26 @@ export default Vue.extend({
       dotX: 0,
       dotY: 0,
       dragging: false,
-      internalValue: this.value
+      internalValue: this.color
     }
   },
 
   computed: {
     dotPosition (): [number, number] {
       return [
-        this.internalValue[0] * this.boundingRect.width,
-        (1 - this.internalValue[1]) * this.boundingRect.height
+        this.internalValue.hsva[1] * this.boundingRect.width,
+        (1 - this.internalValue.hsva[2]) * this.boundingRect.height
       ]
     }
   },
 
   watch: {
-    hue (v: number) {
+    color (v: VColorPickerColor) {
+      this.internalValue = v
       this.updateCanvas()
     },
-    value (v: HSVA) {
-      if (colorEqual(v, this.internalValue)) return
-      this.internalValue = v.slice()
-      this.updateCanvas()
-    },
-    internalValue (v: any) {
-      this.$emit('input', v)
+    internalValue (v: VColorPickerColor) {
+      this.$emit('update:color', v)
     }
   },
 
@@ -88,13 +84,17 @@ export default Vue.extend({
       ]
     },
     updateInternalValue (x: number, y: number) {
-      this.internalValue = [
-        x / this.boundingRect.width,
-        1 - y / this.boundingRect.height
-      ]
+      this.internalValue = fromHsva([
+        this.internalValue.hue,
+        ...[
+          x / this.boundingRect.width,
+          1 - y / this.boundingRect.height
+        ].map(v => Math.round(v * 1000) / 1000),
+        this.internalValue.alpha
+      ] as HSVA)
     },
     updateCanvas () {
-      renderHsv(this.$refs.canvas as HTMLCanvasElement, this.hue)
+      renderHsv(this.$refs.canvas as HTMLCanvasElement, this.internalValue.hue)
     },
     updateBoundingRect () {
       this.boundingRect = this.$el.getBoundingClientRect()
@@ -105,6 +105,9 @@ export default Vue.extend({
       this.updateInternalValue(x, y)
     },
     handleMouseDown (e: MouseEvent) {
+      // To prevent selection while moving cursor
+      e.preventDefault()
+
       this.updateBoundingRect()
       window.addEventListener('mousemove', this.handleMouseMove)
       window.addEventListener('mouseup', this.handleMouseUp)
