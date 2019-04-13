@@ -95,7 +95,7 @@ declare module 'vue/types/vue' {
       data: VNodeData,
       tag: string,
       value: Dictionary<any> | Dictionary<any>[],
-      asProp: boolean,
+      asProp?: boolean,
       isSync?: boolean
     ): VNodeData
 

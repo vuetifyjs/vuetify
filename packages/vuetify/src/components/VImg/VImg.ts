@@ -55,7 +55,7 @@ export default VResponsive.extend({
 
   computed: {
     computedAspectRatio (): number {
-      return this.normalisedSrc.aspect
+      return Number(this.normalisedSrc.aspect || this.calculatedAspectRatio)
     },
     normalisedSrc (): srcObject {
       return typeof this.src === 'string'
@@ -63,13 +63,12 @@ export default VResponsive.extend({
           src: this.src,
           srcset: this.srcset,
           lazySrc: this.lazySrc,
-          aspect: Number(this.aspectRatio || this.calculatedAspectRatio)
-        }
-        : {
+          aspect: Number(this.aspectRatio)
+        } : {
           src: this.src.src,
           srcset: this.srcset || this.src.srcset,
           lazySrc: this.lazySrc || this.src.lazySrc,
-          aspect: Number(this.aspectRatio || this.src.aspect || this.calculatedAspectRatio)
+          aspect: Number(this.aspectRatio || this.src.aspect)
         }
     },
     __cachedImage (): VNode | [] {
@@ -189,9 +188,12 @@ export default VResponsive.extend({
     },
     genContent () {
       const content: VNode = VResponsive.options.methods.genContent.call(this)
-      this._b(content.data!, 'div', {
-        style: { width: `${this.naturalWidth}px` }
-      }, false)
+      if (this.naturalWidth) {
+        this._b(content.data!, 'div', {
+          style: { width: `${this.naturalWidth}px` }
+        })
+      }
+
       return content
     },
     __genPlaceholder (): VNode | void {
