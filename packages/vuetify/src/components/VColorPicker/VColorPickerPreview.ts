@@ -30,7 +30,9 @@ export default Vue.extend({
           max: 1
         },
         style: {
-          backgroundImage: `linear-gradient(to right, transparent, ${RGBtoCSS(this.color.rgba.slice(0, -1) as RGB)})`
+          backgroundImage: !this.disabled
+            ? `linear-gradient(to right, transparent, ${RGBtoCSS(this.color.rgba.slice(0, -1) as RGB)})`
+            : undefined
         },
         on: {
           input: (val: number) => this.$emit('update:color', fromHsva([...this.color.hsva.slice(0, -1), val] as HSVA))

@@ -20,7 +20,7 @@
       margin: 0
 
 // Element
-.v-color-picker__alpha
+.v-color-picker__alpha:not(.v-input--is-disabled)
   .v-slider
     border-radius: 5px
     background: $checkerboard
@@ -61,7 +61,9 @@
 
 .v-color-picker__hue
   margin-bottom: 24px
-  background: linear-gradient(to right, #F00 0%, #FF0 16.66%, #0F0 33.33%, #0FF 50%, #00F 66.66%, #F0F 83.33%, #F00 100%)
+
+  &:not(.v-input--is-disabled)
+    background: linear-gradient(to right, #F00 0%, #FF0 16.66%, #0F0 33.33%, #0FF 50%, #00F 66.66%, #F0F 83.33%, #F00 100%)
 
 .v-color-picker__input
   width: 100%
@@ -108,8 +110,9 @@
   .v-slider
     min-height: 10px
 
-  .v-slider__thumb
-    +elevation(3)
+  &:not(.v-input--is-disabled)
+    .v-slider__thumb
+      +elevation(3)
 
-  .v-slider__track-container
-    opacity: 0
+    .v-slider__track-container
+      opacity: 0
