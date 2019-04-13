@@ -1,6 +1,11 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VIcon",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/iconography/system-icons.html"
+  },
   "children": [
     {
       "type": "section",
@@ -26,11 +31,12 @@
         {
           "type": "examples",
           "value": [
+            "md",
             "fontAwesome",
-            "mdi",
             "color",
             "buttons",
-            "clickable"
+            "clickable",
+            "mdiSvg"
           ]
         }
       ]

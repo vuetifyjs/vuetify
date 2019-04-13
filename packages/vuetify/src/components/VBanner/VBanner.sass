@@ -1,0 +1,135 @@
+// Imports
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+
+// Theme
++theme(v-banner) using ($material)
+  .v-banner__wrapper
+    border-bottom: 1px solid map-get($material, 'dividers')
+
+// Block
+.v-banner
+  //
+
+// Element
+.v-banner__actions
+  align-items: center
+  align-self: flex-end
+  display: flex
+  flex: 1 0 auto
+  justify-content: flex-end
+  margin-left: 90px
+  margin-bottom: -8px
+
+  & > * // Margin between actions
+    margin-left: 8px
+
+    +rtl()
+      margin-left: 0
+      margin-right: 8px
+
+  +rtl()
+    margin-left: 0
+    margin-right: 90px
+
+.v-banner__content
+  align-items: center
+  display: flex
+  flex: 1 1 auto
+  overflow: hidden
+
+.v-banner__text
+  line-height: 20px
+
+.v-banner__icon
+  display: inline-flex
+  margin-right: 24px
+  flex: 0 0 auto
+
+  +rtl()
+    margin-left: 24px
+    margin-right: 0
+
+.v-banner__wrapper
+  align-items: center
+  display: flex
+  flex: 1 1 auto
+  padding: 16px 8px 16px 24px
+
+  +rtl()
+    padding-right: 24px
+    padding-left: 8px
+
+// Modifiers
+.v-banner--single-line
+  .v-banner__actions
+    margin-bottom: 0
+
+  .v-banner__text
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+
+  .v-banner__wrapper
+    padding-top: 8px
+    padding-bottom: 8px
+
+.v-banner--has-icon
+  .v-banner__wrapper
+    padding-left: 16px
+
+    +rtl()
+      padding-left: 8px
+      padding-right: 16px
+
+.v-banner--is-mobile
+  .v-banner__actions
+    flex: 1 0 100%
+    margin-left: 0
+    margin-right: 0
+    padding-top: 12px
+
+  .v-banner__wrapper
+    flex-wrap: wrap
+    padding-left: 16px
+    padding-top: 16px
+
+    +rtl()
+      padding-left: 0
+      padding-right: 16px
+
+  &.v-banner--has-icon
+    .v-banner__wrapper
+      padding-top: 24px
+
+  &.v-banner--single-line
+    .v-banner__actions
+      flex: initial
+      margin-left: 36px
+      padding-top: 0
+
+      +rtl()
+        margin-left: 0
+        margin-right: 36px
+
+    .v-banner__wrapper
+      flex-wrap: nowrap
+      padding-top: 10px
+
+  .v-banner__icon
+    margin-right: 16px
+
+    +rtl()
+      margin-right: 0
+      margin-left: 16px
+
+  .v-banner__content
+    padding-right: 8px
+
+    +rtl()
+      padding-left: 8px
+      padding-right: 0
+
+    .v-banner__wrapper
+      flex-wrap: nowrap
+      padding-top: 10px

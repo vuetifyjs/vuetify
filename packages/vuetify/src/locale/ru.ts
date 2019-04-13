@@ -1,4 +1,5 @@
 export default {
+  close: 'Закрыть',
   dataIterator: {
     rowsPerPageText: 'Записей на странице:',
     rowsPerPageAll: 'Все',

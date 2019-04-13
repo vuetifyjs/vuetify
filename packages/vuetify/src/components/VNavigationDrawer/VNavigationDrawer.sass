@@ -1,0 +1,77 @@
+@import '../../styles/styles.sass'
+
+// Theme
++theme(v-navigation-drawer) using ($material)
+  background-color: map-get($material, 'cards')
+
+  &:not(.v-navigation-drawer--floating)
+    .v-navigation-drawer__border
+      background-color: map-get($material, 'dividers')
+
+  .v-divider
+    border-color: map-get($material, 'dividers')
+
+.v-navigation-drawer
+  +bootable()
+
+  display: block
+  left: 0
+  max-width: 100%
+  overflow-y: auto
+  overflow-x: hidden
+  pointer-events: auto
+  top: 0
+  will-change: transform
+  -webkit-overflow-scrolling: touch
+  transition-duration: 0.2s
+  transition-timing-function: map-get($transition, 'fast-out-slow-in')
+  transition-property: transform, width
+
+  &__border
+    position: absolute
+    right: 0
+    top: 0
+    height: 100%
+    width: 1px
+
+  &.v-navigation-drawer--right
+    &:after
+      left: 0
+      right: initial
+
+  &--right
+    left: auto
+    right: 0
+
+    > .v-navigation-drawer__border
+      right: auto
+      left: 0
+
+  &--absolute,
+  &--fixed
+    z-index: 6
+
+  &--absolute
+    position: absolute
+
+  &--clipped
+    z-index: 4
+
+  &--fixed
+    position: fixed
+
+  &--floating:after
+    display: none
+
+  &--mini-variant
+    overflow: hidden
+
+  &--temporary,
+  &--is-mobile
+    z-index: 6
+
+    &:not(.v-navigation-drawer--close)
+      +elevation(16)
+
+  .v-list
+    background: inherit

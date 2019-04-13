@@ -1,0 +1,19 @@
+@import '../../styles/styles.sass'
+
+// Theme
++theme(v-input--range-slider) using ($material)
+  &.v-input--slider.v-input--is-disabled
+    .v-slider.v-slider
+      .v-slider__thumb
+        background: map-deep-get($material, 'selection-controls', 'thumb', 'disabled')
+
+/** Input Group */
+.v-input--range-slider
+  &.v-input--is-disabled
+    .v-slider__track-fill
+      display: none
+
+    &.v-input--slider
+      .v-slider.v-slider
+        .v-slider__thumb
+          border-color: transparent

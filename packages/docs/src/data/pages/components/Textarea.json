@@ -1,6 +1,11 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VTextArea",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/text-fields.html"
+  },
   "children": [
     {
       "type": "section",

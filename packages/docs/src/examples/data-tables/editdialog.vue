@@ -8,7 +8,6 @@
         <td>
           <v-edit-dialog
             :return-value.sync="props.item.name"
-            lazy
             @save="save"
             @cancel="cancel"
             @open="open"
@@ -33,7 +32,6 @@
           <v-edit-dialog
             :return-value.sync="props.item.iron"
             large
-            lazy
             persistent
             @save="save"
             @cancel="cancel"
@@ -61,7 +59,7 @@
 
     <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
       {{ snackText }}
-      <v-btn flat @click="snack = false">Close</v-btn>
+      <v-btn text @click="snack = false">Close</v-btn>
     </v-snackbar>
   </div>
 </template>

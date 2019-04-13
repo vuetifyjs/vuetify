@@ -1,0 +1,42 @@
+@mixin timeline-dots($dot-size, $inner-dot-size)
+  height: $dot-size
+  left: calc(50% - #{$dot-size / 2})
+  width: $dot-size
+
+  .v-timeline-item__inner-dot
+    height: $inner-dot-size
+    margin: #{($dot-size - $inner-dot-size) / 2}
+    width: $inner-dot-size
+
+@mixin timeline-wedge-align($direction)
+  .v-timeline-item__body
+    > .v-card:before, .v-card:after
+      transform: rotate(if($direction == right, 180deg, 0))
+      #{$direction}: -($timeline-wedge-size)
+      #{if($direction == left, right, left)}: initial
+
+    +rtl()
+      > .v-card:before, .v-card:after
+        transform: rotate(if($direction == right, 0, 180deg))
+        #{$direction}: initial
+        #{if($direction == left, right, left)}: -($timeline-wedge-size)
+
+@mixin timeline-item-align($direction)
+  flex-direction: if($direction == left, row-reverse, row)
+
+  .v-timeline-item__opposite
+    text-align: if($direction == left, right, left)
+
+  +rtl()
+    .v-timeline-item__opposite
+      text-align: if($direction == left, left, right)
+
+@mixin timeline-line-align($center, $first, $second)
+  &:before
+    #{$first}: calc(#{$center} - #{$timeline-line-width / 2})
+    #{$second}: initial
+
+  +rtl()
+    &:before
+      #{$first}: initial
+      #{$second}: calc(#{$center} - #{$timeline-line-width / 2})

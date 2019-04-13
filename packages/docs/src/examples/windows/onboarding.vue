@@ -28,7 +28,7 @@
 
     <v-card-actions class="justify-space-between">
       <v-btn
-        flat
+        text
         @click="prev"
       >
         <v-icon>mdi-chevron-left</v-icon>
@@ -53,7 +53,7 @@
         </v-item>
       </v-item-group>
       <v-btn
-        flat
+        text
         @click="next"
       >
         <v-icon>mdi-chevron-right</v-icon>

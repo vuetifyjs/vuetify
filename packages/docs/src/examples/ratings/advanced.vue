@@ -69,24 +69,24 @@
             </v-btn>
           </v-card-title>
           <v-list>
-            <v-list-tile @click="">
-              <v-list-tile-action>
+            <v-list-item @click="">
+              <v-list-item-action>
                 <v-icon color="indigo">mdi-facebook-box</v-icon>
-              </v-list-tile-action>
+              </v-list-item-action>
               <v-card-title>Facebook</v-card-title>
-            </v-list-tile>
-            <v-list-tile @click="">
-              <v-list-tile-action>
+            </v-list-item>
+            <v-list-item @click="">
+              <v-list-item-action>
                 <v-icon color="cyan">mdi-twitter-box</v-icon>
-              </v-list-tile-action>
+              </v-list-item-action>
               <v-card-title>Twitter</v-card-title>
-            </v-list-tile>
-            <v-list-tile @click="">
-              <v-list-tile-action>
+            </v-list-item>
+            <v-list-item @click="">
+              <v-list-item-action>
                 <v-icon>mdi-email</v-icon>
-              </v-list-tile-action>
+              </v-list-item-action>
               <v-card-title>Email</v-card-title>
-            </v-list-tile>
+            </v-list-item>
           </v-list>
           <v-text-field
             ref="link"

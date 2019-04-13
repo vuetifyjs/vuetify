@@ -1,6 +1,11 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VChip",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/chips.html"
+  },
   "children": [
     {
       "type": "section",
@@ -26,11 +31,16 @@
         {
           "type": "examples",
           "value": [
+            "playground",
+            "photos",
+            "actionChips",
+            "filtering",
             "colored",
             "icon",
             "outline",
             "label",
             "closable",
+            "expandable",
             "inSelects"
           ]
         }

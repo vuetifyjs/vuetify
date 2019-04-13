@@ -1,0 +1,2 @@
+// index.js or main.js
+import './sass'

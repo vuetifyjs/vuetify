@@ -11,20 +11,26 @@ Vuetify.install(Vue, {
 
 Vuetify.install(Vue, {
   theme: {
-    primary: '#123456',
-    accent: '#123456',
-    secondary: '#123456',
-    info: '#123456',
-    warning: '#123456',
-    error: '#123456',
-    success: '#123456',
-
-    'something-else': '#123456',
-    'as-number': 123456
+    options: {
+      cspNonce: 'asdf123'
+    },
+    themes: {
+      light: {
+        primary: '#123456',
+        accent: '#123456',
+        secondary: '#123456',
+        info: '#123456',
+        warning: '#123456',
+        error: '#123456',
+        success: '#123456'
+      }
+    } as any
   },
-  iconfont: 'fa',
   icons: {
-    cancel: 'custom icon'
+    iconfont: 'fa',
+    values: {
+      cancel: 'custom icon'
+    }
   },
   rtl: true,
   lang: {
@@ -33,8 +39,5 @@ Vuetify.install(Vue, {
         noDataText: ''
       }
     }
-  },
-  options: {
-    cspNonce: 'asdf123'
   }
 })

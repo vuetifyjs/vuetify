@@ -1,7 +1,7 @@
 <template>
   <v-card class="mb-5">
     <v-toolbar
-      card
+      color="grey lighten-3"
       dense
       flat
     >
@@ -10,9 +10,7 @@
         color="warning"
         small
       >
-        <v-avatar>
-          <v-icon>mdi-star</v-icon>
-        </v-avatar>
+        <v-icon left>mdi-star</v-icon>
         <span>New in <strong>{{ newIn }}</strong></span>
       </v-chip>
       <v-spacer />
@@ -42,6 +40,7 @@
         <v-icon>mdi-code-tags</v-icon>
       </v-btn>
     </v-toolbar>
+
     <v-expand-transition v-if="parsed">
       <v-card
         v-if="expand"
@@ -63,11 +62,12 @@
             >
               <v-btn
                 slot-scope="{ active, toggle }"
-                :color="active ? 'white' : 'transparent'"
-                :light="active"
-                class="mr-0"
+                active-class="grey darken-2 white--text"
+                :color="!active ? 'transparent' : ''"
+                :input-value="active"
+                class="mr-2"
                 depressed
-                round
+                rounded
                 @click="toggle"
               >
                 {{ section }}
@@ -84,6 +84,7 @@
               v-if="parsed[section]"
               :key="`window-${i}`"
               :value="section"
+              eager
             >
               <div :class="($vuetify.breakpoint.smAndUp) ? 'v-example__container' : ''">
                 <doc-markup
@@ -97,17 +98,16 @@
         </v-window>
       </v-card>
     </v-expand-transition>
-    <v-sheet
-      :dark="dark"
-      tile
-    >
+
+    <doc-codepen ref="codepen" :pen="parsed" />
+
+    <v-sheet :dark="dark" tile flat>
       <v-card-text>
         <div data-app="true">
           <component :is="component" />
         </div>
       </v-card-text>
     </v-sheet>
-    <doc-codepen ref="codepen" :pen="parsed" />
   </v-card>
 </template>
 
@@ -213,58 +213,57 @@
   }
 </script>
 
-<style lang="stylus">
-  @import '~vuetify/src/stylus/settings/_variables.styl'
+<style lang="sass">
+@import '~vuetify/src/styles/settings/_variables.scss'
 
-  #snackbars, #data-tables
-    .component-example .application--example
-      z-index: auto
+#snackbars, #data-tables
+  .component-example .application--example
+    z-index: auto
 
-  .v-example__container
-    height: 100%
-    max-height: calc(100vh - 275px)
-    overflow-y: auto
+.v-example__container
+  height: 100%
+  max-height: calc(100vh - 275px)
+  overflow-y: auto
 
-  .v-example:not(:first-child) .v-example__container {
-    border-left: 1px solid rgba(#FFF, .12)
-  }
+.v-example:not(:first-child) .v-example__container
+  border-left: 1px solid rgba(#FFF, .12)
 
-  .component-example
-    // margin-bottom: 32px
+.component-example
+  // margin-bottom: 32px
 
-    .application--example
-      position: relative
-      transition: .3s $transition.swing
-      overflow: hidden
-      z-index: 0
+  .application--example
+    position: relative
+    transition: .3s map-get($transition, 'swing')
+    overflow: hidden
+    z-index: 0
 
-      > div,
-      > form,
-      > footer
-        width: 100%
+    > div,
+    > form,
+    > footer
+      width: 100%
 
-    .component-example__panel
-      .v-expansion-panel__body
-        border: none
+  .component-example__panel
+    .v-expansion-panel__body
+      border: none
 
-      .v-tabs__item, .markup
-        height: 100%
+    .v-tab, .markup
+      height: 100%
 
-      .v-tabs__items
-        border: none
-        max-height: 500px
-        overflow-y: auto
+    .v-tabs
+      border: none
+      max-height: 500px
+      overflow-y: auto
 
-      > li
-        border: none
+    > li
+      border: none
 
-    .justify
-      text-align: justify
+  .justify
+    text-align: justify
 
-    aside.v-navigation-drawer,
-    .v-overlay
-      z-index: 1
+  aside.v-navigation-drawer,
+  .v-overlay
+    z-index: 1
 
-    nav.v-toolbar
-      z-index: 0
+  nav.v-toolbar
+    z-index: 0
 </style>

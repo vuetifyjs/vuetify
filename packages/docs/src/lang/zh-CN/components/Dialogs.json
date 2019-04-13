@@ -44,7 +44,7 @@
     "fullWidth": "指定模态框强制100%宽度",
     "fullscreen": "改变布局全屏显示",
     "hideOverlay": "隐藏遮罩",
-    "lazy": "Mixins.Bootable.props.lazy",
+    "eager": "Mixins.Bootable.props.eager",
     "maxWidth": "内容的最大宽度",
     "origin": "Mixins.Transitionable.props.origin",
     "persistent": "点击对话框外部不能使其关闭",

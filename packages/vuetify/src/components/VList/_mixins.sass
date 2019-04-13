@@ -1,0 +1,12 @@
+@mixin list-shaped($size)
+  .v-list-item,
+  .v-list-item:before,
+  .v-ripple__container
+    border-bottom-right-radius: #{$size * 0.6666666666666667} !important
+    border-top-right-radius: #{$size * 0.6666666666666667} !important
+
+@mixin list-rounded($size)
+  .v-list-item,
+  .v-list-item:before,
+  .v-ripple__container
+    border-radius: #{$size * 0.6666666666666667} !important

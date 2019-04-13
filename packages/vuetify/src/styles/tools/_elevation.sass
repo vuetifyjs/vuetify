@@ -1,0 +1,6 @@
+@mixin elevation($z, $important: false)
+  box-shadow: map-get($shadow-key-umbra, $z), map-get($shadow-key-penumbra, $z), map-get($shadow-key-ambient, $z) if($important, !important, null)
+
+@mixin elevationTransition($duration: 280ms, $easing: cubic-bezier(0.4, 0, 0.2, 1))
+  transition: box-shadow $duration $easing
+  will-change: box-shadow

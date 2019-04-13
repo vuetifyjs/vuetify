@@ -1,42 +1,52 @@
 <template>
   <div class="text-xs-center">
-    <div class="text-xs-center">
-      <v-btn
-        v-if="!chip1 && !chip2 && !chip3 && !chip4"
-        color="primary"
-        dark
-        @click="chip1 = true, chip2 = true, chip3 = true, chip4= true"
-      >
-        Reset Chips
-      </v-btn>
-    </div>
+    <v-btn
+      v-if="!chip1 && !chip2 && !chip3 && !chip4"
+      color="primary"
+      dark
+      @click="chip1 = true, chip2 = true, chip3 = true, chip4= true"
+    >
+      Reset Chips
+    </v-btn>
 
     <v-chip
-      v-model="chip1"
-      close
-    >Closable</v-chip>
+      v-if="chip1"
+      class="ma-2"
+      @click:close="chip1 = false"
+    >
+      Closable
+    </v-chip>
 
     <v-chip
-      v-model="chip2"
-      close
+      v-if="chip2"
+      class="ma-2"
       color="red"
       text-color="white"
-    >Remove</v-chip>
+      @click:close="chip2 = false"
+    >
+      Remove
+    </v-chip>
 
     <v-chip
-      v-model="chip3"
-      close
+      v-if="chip3"
+      class="ma-2"
       color="green"
-      outline
-    >Success</v-chip>
+      outlined
+      @click:close="chip3 = false"
+    >
+      Success
+    </v-chip>
 
     <v-chip
-      v-model="chip4"
-      close
+      v-if="chip4"
+      class="ma-2"
       color="orange"
       label
-      outline
-    >Complete</v-chip>
+      outlined
+      @click:close="chip4 = false"
+    >
+      Complete
+    </v-chip>
   </div>
 </template>
 

@@ -5,7 +5,7 @@
     "v-toolbar",
     "v-toolbar-title",
     "v-toolbar-items",
-    "v-toolbar-side-icon",
+    "v-app-bar-nav-icon",
     "v-system-bar"
   ],
   "examples": {

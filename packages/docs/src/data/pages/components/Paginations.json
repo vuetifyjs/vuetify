@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VPagination",
   "children": [
     {
       "type": "section",

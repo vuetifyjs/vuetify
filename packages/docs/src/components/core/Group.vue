@@ -6,7 +6,11 @@
     no-action
   >
     <template v-slot:activator>
-      <core-item :text="item.text" />
+      <v-list-item-content class="v-list-group__activator">
+        <v-list-item-title>
+          <doc-markdown>{{ item.text }}</doc-markdown>
+        </v-list-item-title>
+      </v-list-item-content>
     </template>
     <template v-for="(child, i) in children">
       <core-sub-group
@@ -79,3 +83,9 @@
     }
   }
 </script>
+
+<style>
+.v-list-group__activator p {
+  margin-bottom: 0;
+}
+</style>

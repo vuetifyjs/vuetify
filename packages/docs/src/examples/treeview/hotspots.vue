@@ -1,8 +1,8 @@
 <template>
   <v-card>
     <v-toolbar
-      card
       color="grey lighten-3"
+      flat
     >
       <v-icon>mdi-silverware</v-icon>
       <v-toolbar-title>Local hotspots</v-toolbar-title>
@@ -67,7 +67,7 @@
 
     <v-card-actions>
       <v-btn
-        flat
+        text
         @click="tree = []"
       >
         Reset

@@ -1,0 +1,52 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "file": "components/VSlideGroup",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [
+            "v-slide-group",
+            "v-slide-item"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "carousel"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/icons",
+            "components/carousels",
+            "components/tabs"
+          ]
+        }
+      ]
+    }
+  ]
+}

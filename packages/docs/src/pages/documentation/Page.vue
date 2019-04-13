@@ -23,6 +23,8 @@
   import 'prismjs/components/prism-json.js'
   import 'prismjs/components/prism-stylus.js'
   import 'prismjs/components/prism-typescript.js'
+  import 'prismjs/components/prism-sass.js'
+  import 'prismjs/components/prism-scss.js'
 
   // Utilities
   import kebabCase from 'lodash/kebabCase'
@@ -67,12 +69,3 @@
     }
   }
 </script>
-
-<style scoped>
-  @media (min-width: 1264px) {
-    .v-content:not([data-booted="true"]) {
-      padding-left: 300px !important;
-      padding-right: 210px !important;
-    }
-  }
-</style>

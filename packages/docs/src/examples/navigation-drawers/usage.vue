@@ -2,30 +2,30 @@
   <v-navigation-drawer permanent>
     <v-toolbar flat>
       <v-list>
-        <v-list-tile>
-          <v-list-tile-title class="title">
+        <v-list-item>
+          <v-list-item-title class="title">
             Application
-          </v-list-tile-title>
-        </v-list-tile>
+          </v-list-item-title>
+        </v-list-item>
       </v-list>
     </v-toolbar>
 
     <v-divider></v-divider>
 
     <v-list dense class="pt-0">
-      <v-list-tile
+      <v-list-item
         v-for="item in items"
         :key="item.title"
         @click=""
       >
-        <v-list-tile-action>
+        <v-list-item-action>
           <v-icon>{{ item.icon }}</v-icon>
-        </v-list-tile-action>
+        </v-list-item-action>
 
-        <v-list-tile-content>
-          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
+        <v-list-item-content>
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>

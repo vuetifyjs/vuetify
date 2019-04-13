@@ -1,9 +1,9 @@
 <template>
-  <v-bottom-nav
+  <v-bottom-navigation
     :value="true"
     app
     height="48"
   >
     <slot />
-  </v-bottom-nav>
+  </v-bottom-navigation>
 </template>

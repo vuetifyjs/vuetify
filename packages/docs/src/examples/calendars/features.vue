@@ -56,7 +56,6 @@
         :return-value.sync="start"
         transition="scale-transition"
         min-width="290px"
-        lazy
         offset-y
         full-width
       >
@@ -76,14 +75,14 @@
         >
           <v-spacer></v-spacer>
           <v-btn
-            flat
+            text
             color="primary"
             @click="startMenu = false"
           >
             Cancel
           </v-btn>
           <v-btn
-            flat
+            text
             color="primary"
             @click="$refs.startMenu.save(start)"
           >
@@ -100,7 +99,6 @@
         :return-value.sync="end"
         transition="scale-transition"
         min-width="290px"
-        lazy
         offset-y
         full-width
       >
@@ -120,14 +118,14 @@
         >
           <v-spacer></v-spacer>
           <v-btn
-            flat
+            text
             color="primary"
             @click="endMenu = false"
           >
             Cancel
           </v-btn>
           <v-btn
-            flat
+            text
             color="primary"
             @click="$refs.endMenu.save(end)"
           >
@@ -143,7 +141,6 @@
         :return-value.sync="now"
         transition="scale-transition"
         min-width="290px"
-        lazy
         offset-y
         full-width
       >
@@ -163,14 +160,14 @@
         >
           <v-spacer></v-spacer>
           <v-btn
-            flat
+            text
             color="primary"
             @click="nowMenu = false"
           >
             Cancel
           </v-btn>
           <v-btn
-            flat
+            text
             color="primary"
             @click="$refs.nowMenu.save(now)"
           >

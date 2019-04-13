@@ -4,7 +4,7 @@
       <v-flex xs12 sm12 md6 offset-md3>
         <v-card>
           <v-toolbar extended>
-            <v-toolbar-side-icon></v-toolbar-side-icon>
+            <v-app-bar-nav-icon></v-app-bar-nav-icon>
             <v-fab-transition>
               <v-btn
                 v-show="!hidden"

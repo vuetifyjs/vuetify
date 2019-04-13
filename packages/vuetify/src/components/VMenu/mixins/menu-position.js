@@ -14,7 +14,7 @@ export default {
   methods: {
     calcScrollPosition () {
       const $el = this.$refs.content
-      const activeTile = $el.querySelector('.v-list__tile--active')
+      const activeTile = $el.querySelector('.v-list-item--active')
       const maxScrollTop = $el.scrollHeight - $el.offsetHeight
 
       return activeTile
@@ -28,7 +28,7 @@ export default {
     },
     calcTopAuto () {
       const $el = this.$refs.content
-      const activeTile = $el.querySelector('.v-list__tile--active')
+      const activeTile = $el.querySelector('.v-list-item--active')
 
       if (!activeTile) {
         this.selectedIndex = null
@@ -41,7 +41,7 @@ export default {
       this.selectedIndex = Array.from(this.tiles).indexOf(activeTile)
 
       const tileDistanceFromMenuTop = activeTile.offsetTop - this.calcScrollPosition()
-      const firstTileOffsetTop = $el.querySelector('.v-list__tile').offsetTop
+      const firstTileOffsetTop = $el.querySelector('.v-list-item').offsetTop
 
       return this.computedTop - tileDistanceFromMenuTop - firstTileOffsetTop
     }

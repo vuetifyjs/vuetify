@@ -69,7 +69,7 @@ export default CalendarBase.extend({
       const shortHourOptions = { timeZone: 'UTC', hour12: true, hour: 'numeric' }
 
       return createNativeLocaleFormatter(
-        this.locale,
+        this.currentLocale,
         (tms, short) => short ? (tms.minute === 0 ? shortHourOptions : shortOptions) : longOptions
       )
     }

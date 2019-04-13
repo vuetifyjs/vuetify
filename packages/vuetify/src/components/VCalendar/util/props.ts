@@ -32,10 +32,6 @@ export default {
     dayFormat: {
       type: Function, // VTimestampFormatter,
       default: null
-    },
-    locale: {
-      type: String,
-      default: 'en-us'
     }
   },
   intervals: {
@@ -110,6 +106,6 @@ export default {
   }
 }
 
-function validateNumber (input: any): boolean {
+export function validateNumber (input: any): boolean {
   return isFinite(parseInt(input))
 }

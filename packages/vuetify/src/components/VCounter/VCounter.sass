@@ -1,0 +1,12 @@
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+
+/* Theme */
++theme(v-counter) using ($material)
+  color: map-deep-get($material, 'text', 'secondary')
+
+.v-counter
+  flex: 0 1 auto
+  font-size: $counter-font-size
+  min-height: $counter-min-height
+  line-height: 1

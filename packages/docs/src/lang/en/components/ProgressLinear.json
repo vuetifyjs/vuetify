@@ -1,0 +1,44 @@
+{
+  "header": "# Progress Linear",
+  "headerText": "The `v-progress-linear` component is used to convey data visually to users. They can also represent an indeterminate amount, such as loading or processing.",
+  "examples": {
+    "usage": {
+      "desc": "By default, progress circular uses the applications secondary color."
+    },
+    "linearDeterminate": {
+      "header": "### Determinate",
+      "desc": "The progress linear component can have a determinate state modified by `v-model`."
+    },
+    "linearIndeterminate": {
+      "header": "### Indeterminate",
+      "desc": "Just as with the progress circular component, progress linear has an indeterminate state."
+    },
+    "linearBuffer": {
+      "header": "### Buffer",
+      "desc": "A buffer state represents two values simultaneously. The primary value is controled by the model, whereas the buffer is controlled by the `buffer-value` prop."
+    },
+    "linearQueryIndeterminateAndDeterminate": {
+      "header": "### Query Indeterminate and Determinate",
+      "desc": "To query state is controlled by the truthiness of indeterminate with the query prop set to true."
+    },
+    "linearCustomHeightAndContextualColors": {
+      "header": "### Custom height and contextual colors",
+      "desc": "A custom height or contextual color can be applied to a progress bar. The bars primary color is your applications primary color."
+    },
+    "linearCustomColors": {
+      "header": "### Custom colors",
+      "desc": "You can also set the color using the props `color` and `background-color`."
+    }
+  },
+  "props": {
+    "active": "Components.ProgressCircular.props.active",
+    "backgroundColor": "Components.ProgressCircular.props.backgroundColor",
+    "backgroundOpacity": "Components.ProgressCircular.props.backgroundOpacity",
+    "bufferValue": "Components.ProgressCircular.props.bufferValue",
+    "fill": "Components.ProgressCircular.props.fill",
+    "indeterminate": "Components.ProgressCircular.props.indeterminate",
+    "query": "Animates like **indeterminate** prop but inverse",
+    "size": "Components.ProgressCircular.props.size",
+    "value": "Components.ProgressCircular.props.value"
+  }
+}

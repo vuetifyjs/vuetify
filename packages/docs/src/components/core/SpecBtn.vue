@@ -1,0 +1,43 @@
+<template>
+  <v-tooltip left bottom>
+    <v-btn
+      slot="activator"
+      :href="link"
+      icon
+      target="_blank"
+      rel="noopener"
+      aria-label="Material Design Specification"
+    >
+      <v-badge
+        right
+        overlap
+        color="transparent"
+      >
+        <span
+          v-if="version"
+          slot="badge"
+          class="caption black--text font-weight-black pl-2"
+        >
+          {{ version }}
+        </span>
+        <v-icon>mdi-material-design</v-icon>
+      </v-badge>
+    </v-btn>
+    <span>Material Design Specification</span>
+  </v-tooltip>
+</template>
+
+<script>
+  export default {
+    props: {
+      link: {
+        type: String,
+        default: 'https://material.io/design/'
+      },
+      version: {
+        type: String,
+        default: ''
+      }
+    }
+  }
+</script>

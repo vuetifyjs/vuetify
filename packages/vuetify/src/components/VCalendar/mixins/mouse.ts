@@ -66,6 +66,7 @@ export default Vue.extend({
         }
 
         if (key in on) {
+          /* istanbul ignore next */
           if (Array.isArray(on[key])) {
             (on[key] as MouseHandler[]).push(handler)
           } else {

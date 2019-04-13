@@ -27,7 +27,7 @@
         v-model="value"
         step="10"
         ticks="always"
-        tick-size="2"
+        tick-size="4"
       ></v-slider>
     </v-card-text>
 
@@ -40,7 +40,7 @@
         :max="3"
         step="1"
         ticks="always"
-        tick-size="2"
+        tick-size="4"
       ></v-slider>
     </v-card-text>
   </v-card>

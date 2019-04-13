@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VAlert.ts should be dismissible 1`] = `
+
+<div class="v-alert v-sheet theme--light"
+     style="display: none;"
+>
+  <div class="v-alert__content">
+  </div>
+  <button type="button"
+          class="v-alert__dismissible v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
+          aria-label="$vuetify.close"
+  >
+    <span class="v-btn__content">
+      <i aria-hidden="true"
+         class="v-icon material-icons theme--light"
+      >
+        $vuetify.icons.cancel
+      </i>
+    </span>
+  </button>
+</div>
+
+`;
+
+exports[`VAlert.ts should be open by default 1`] = `
+
+<div class="v-alert v-sheet theme--light">
+  <div class="v-alert__content">
+  </div>
+</div>
+
+`;
+
+exports[`VAlert.ts should be open by default 2`] = `
+
+<div class="v-alert v-sheet theme--light"
+     style="display: none;"
+>
+  <div class="v-alert__content">
+  </div>
+</div>
+
+`;
+
+exports[`VAlert.ts should have a close icon 1`] = `
+
+<div class="v-alert v-sheet theme--light">
+  <div class="v-alert__content">
+  </div>
+  <button type="button"
+          class="v-alert__dismissible v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
+          aria-label="$vuetify.close"
+  >
+    <span class="v-btn__content">
+      <i aria-hidden="true"
+         class="v-icon material-icons theme--light"
+      >
+        $vuetify.icons.cancel
+      </i>
+    </span>
+  </button>
+</div>
+
+`;
