@@ -8,17 +8,18 @@ import VAutocomplete from '../VAutocomplete/VAutocomplete'
 // Utils
 import { keyCodes } from '../../util/helpers'
 
-/* @vue/component */
-export default {
-  name: 'v-combobox',
+// Types
+import { PropValidator } from 'vue/types/options'
 
-  extends: VAutocomplete,
+/* @vue/component */
+export default VAutocomplete.extend({
+  name: 'v-combobox',
 
   props: {
     delimiters: {
       type: Array,
       default: () => ([])
-    },
+    } as PropValidator<any[]>,
     returnObject: {
       type: Boolean,
       default: true
@@ -30,18 +31,18 @@ export default {
   }),
 
   computed: {
-    counterValue () {
+    counterValue (): number {
       return this.multiple
         ? this.selectedItems.length
         : (this.internalSearch || '').toString().length
     },
-    hasSlot () {
+    hasSlot (): boolean {
       return VSelect.options.computed.hasSlot.call(this) || this.multiple
     },
-    isAnyValueAllowed () {
+    isAnyValueAllowed (): boolean {
       return true
     },
-    menuCanShow () {
+    menuCanShow (): boolean {
       if (!this.isFocused) return false
 
       return this.hasDisplayedItems ||
@@ -53,7 +54,7 @@ export default {
     onFilteredItemsChanged () {
       // nop
     },
-    onInternalSearchChanged (val) {
+    onInternalSearchChanged (val: any) {
       if (
         val &&
         this.multiple &&
@@ -68,38 +69,41 @@ export default {
 
       this.updateMenuDimensions()
     },
-    genChipSelection (item, index) {
+    genChipSelection (item: object, index: number) {
       const chip = VSelect.options.methods.genChipSelection.call(this, item, index)
 
       // Allow user to update an existing value
       if (this.multiple) {
-        chip.componentOptions.listeners.dblclick = () => {
-          this.editingIndex = index
-          this.internalSearch = this.getText(item)
-          this.selectedIndex = -1
+        chip.componentOptions!.listeners! = {
+          ...chip.componentOptions!.listeners!,
+          dblclick: () => {
+            this.editingIndex = index
+            this.internalSearch = this.getText(item)
+            this.selectedIndex = -1
+          }
         }
       }
 
       return chip
     },
-    onChipInput (item) {
+    onChipInput (item: object) {
       VSelect.options.methods.onChipInput.call(this, item)
 
       this.editingIndex = -1
     },
     // Requires a manual definition
     // to overwrite removal in v-autocomplete
-    onEnterDown (e) {
+    onEnterDown (e: Event) {
       e.preventDefault()
 
-      VSelect.options.methods.onEnterDown.call(this)
+      VSelect.options.methods.onEnterDown.call(this, e)
 
       // If has menu index, let v-select-list handle
       if (this.getMenuIndex() > -1) return
 
       this.updateSelf()
     },
-    onKeyDown (e) {
+    onKeyDown (e: KeyboardEvent) {
       const keyCode = e.keyCode
 
       VSelect.options.methods.onKeyDown.call(this, e)
@@ -119,7 +123,7 @@ export default {
       // proper location
       this.changeSelectedIndex(keyCode)
     },
-    onTabDown (e) {
+    onTabDown (e: KeyboardEvent) {
       // When adding tags, if searching and
       // there is not a filtered options,
       // add the value to the tags list
@@ -135,7 +139,7 @@ export default {
 
       VAutocomplete.options.methods.onTabDown.call(this, e)
     },
-    selectItem (item) {
+    selectItem (item: object) {
       // Currently only supports items:<string[]>
       if (this.editingIndex > -1) {
         this.updateEditing()
@@ -152,8 +156,8 @@ export default {
         this.selectedItems = this.multiple ? this.internalValue : [this.internalValue]
       }
     },
-    setValue (value = this.internalSearch) {
-      VSelect.options.methods.setValue.call(this, value)
+    setValue (value?: any) {
+      VSelect.options.methods.setValue.call(this, value || this.internalSearch)
     },
     updateEditing () {
       const value = this.internalValue.slice()
@@ -215,4 +219,4 @@ export default {
       this.internalSearch = null
     }
   }
-}
+})
