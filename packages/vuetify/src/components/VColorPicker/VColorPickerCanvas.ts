@@ -108,6 +108,8 @@ export default Vue.extend({
       this.updateInternalValue(x, y)
     },
     handleMouseDown (e: MouseEvent) {
+      if (this.disabled) return
+
       // To prevent selection while moving cursor
       e.preventDefault()
 
