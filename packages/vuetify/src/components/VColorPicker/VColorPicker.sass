@@ -13,6 +13,9 @@
 .v-color-picker
   +elevation(2)
 
+  &--flat
+    +elevation(0)
+
   .v-input__slider
     border-radius: 5px
 
@@ -116,3 +119,7 @@
 
     .v-slider__track-container
       opacity: 0
+
+.v-color-picker--flat
+  .v-color-picker__track:not(.v-input--is-disabled) .v-slider__thumb // High specifity
+    +elevation(0)

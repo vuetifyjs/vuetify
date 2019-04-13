@@ -34,12 +34,22 @@ export default VSheet.extend({
       type: String,
       default: 'hex',
       validator: (v: string) => Object.keys(modes).includes(v)
-    }
+    },
+    flat: Boolean
   },
 
   data: () => ({
     internalValue: fromRgba([255, 0, 0, 1])
   }),
+
+  computed: {
+    pickerClasses (): object {
+      return {
+        ...this.classes,
+        'v-color-picker--flat': this.flat
+      }
+    }
+  },
 
   watch: {
     value: {
@@ -105,7 +115,7 @@ export default VSheet.extend({
   render (h): VNode {
     return h('div', {
       staticClass: 'v-color-picker',
-      class: this.classes,
+      class: this.pickerClasses,
       style: this.styles
     }, [
       !this.hideCanvas && this.genCanvas(),
