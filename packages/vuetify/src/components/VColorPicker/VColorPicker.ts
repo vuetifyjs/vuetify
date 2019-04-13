@@ -20,22 +20,23 @@ export default VSheet.extend({
   name: 'v-color-picker',
 
   props: {
+    disabled: Boolean,
+    flat: Boolean,
     hideCanvas: Boolean,
     hideInputs: Boolean,
+    hideModeSwitch: Boolean,
+    mode: {
+      type: String,
+      default: 'hex',
+      validator: (v: string) => Object.keys(modes).includes(v)
+    },
     value: {
       type: [Object, String]
     } as PropValidator<string | VColorPickerColor>,
     width: {
       type: [Number, String],
       default: 300
-    },
-    disabled: Boolean,
-    mode: {
-      type: String,
-      default: 'hex',
-      validator: (v: string) => Object.keys(modes).includes(v)
-    },
-    flat: Boolean
+    }
   },
 
   data: () => ({
@@ -91,6 +92,7 @@ export default VSheet.extend({
         props: {
           color: this.internalValue,
           disabled: this.disabled,
+          hideModeSwitch: this.hideModeSwitch,
           mode: this.mode
         },
         on: {

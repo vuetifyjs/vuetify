@@ -48,6 +48,7 @@ export default Vue.extend({
   props: {
     color: Object as PropValidator<VColorPickerColor>,
     disabled: Boolean,
+    hideModeSwitch: Boolean,
     mode: String
   },
 
@@ -172,7 +173,7 @@ export default Vue.extend({
       staticClass: 'v-color-picker__edit'
     }, [
       this.genInputs(),
-      this.genSwitch()
+      !this.hideModeSwitch && this.genSwitch()
     ])
   }
 })
