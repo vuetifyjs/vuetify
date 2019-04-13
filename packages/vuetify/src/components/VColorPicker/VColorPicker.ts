@@ -28,7 +28,8 @@ export default VSheet.extend({
     width: {
       type: [Number, String],
       default: 300
-    }
+    },
+    disabled: Boolean
   },
 
   data: () => ({
@@ -54,7 +55,8 @@ export default VSheet.extend({
     genCanvas (): VNode {
       return this.$createElement(VColorPickerCanvas, {
         props: {
-          color: this.internalValue
+          color: this.internalValue,
+          disabled: this.disabled
         },
         on: {
           'update:color': this.updateColor
@@ -72,7 +74,8 @@ export default VSheet.extend({
     genEdit (): VNode {
       return this.$createElement(VColorPickerEdit, {
         props: {
-          color: this.internalValue
+          color: this.internalValue,
+          disabled: this.disabled
         },
         on: {
           'update:color': this.updateColor
@@ -82,7 +85,8 @@ export default VSheet.extend({
     genPreview (): VNode {
       return this.$createElement(VColorPickerPreview, {
         props: {
-          color: this.internalValue
+          color: this.internalValue,
+          disabled: this.disabled
         },
         on: {
           'update:color': this.updateColor

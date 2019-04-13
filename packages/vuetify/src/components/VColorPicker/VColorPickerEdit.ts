@@ -22,7 +22,8 @@ export default Vue.extend({
   name: 'v-color-picker-edit',
 
   props: {
-    color: Object as PropValidator<VColorPickerColor>
+    color: Object as PropValidator<VColorPickerColor>,
+    disabled: Boolean
   },
 
   data: () => ({
@@ -101,7 +102,8 @@ export default Vue.extend({
           return this.genInput(
             this.currentMode.name,
             {
-              maxlength: 9
+              maxlength: 9,
+              disabled: this.disabled
             },
             `#${value.join('')}`,
             {
@@ -121,7 +123,8 @@ export default Vue.extend({
                 type: 'number',
                 min: 0,
                 max,
-                step: type === 'float' ? '0.01' : type === 'int' ? '1' : undefined
+                step: type === 'float' ? '0.01' : type === 'int' ? '1' : undefined,
+                disabled: this.disabled
               },
               this.getValue(value[index], type),
               {
@@ -141,7 +144,8 @@ export default Vue.extend({
       return this.$createElement(VBtn, {
         props: {
           small: true,
-          icon: true
+          icon: true,
+          disabled: this.disabled
         },
         on: {
           click: this.changeMode

@@ -31,7 +31,8 @@ export default Vue.extend({
     dotSize: {
       type: Number,
       default: 10
-    }
+    },
+    disabled: Boolean
   },
 
   data () {
@@ -100,6 +101,8 @@ export default Vue.extend({
       this.boundingRect = this.$el.getBoundingClientRect()
     },
     handleClick (e: MouseEvent) {
+      if (this.disabled) return
+
       this.updateBoundingRect()
       const [x, y] = this.getLocalPosition(e.clientX, e.clientY)
       this.updateInternalValue(x, y)
@@ -113,6 +116,8 @@ export default Vue.extend({
       window.addEventListener('mouseup', this.handleMouseUp)
     },
     handleMouseMove (e: MouseEvent) {
+      if (this.disabled) return
+
       const [x, y] = this.getLocalPosition(e.clientX, e.clientY)
       this.updateInternalValue(x, y)
     },
@@ -137,6 +142,9 @@ export default Vue.extend({
           height: convertToUnit(this.dotSize),
           top: convertToUnit(this.dotPosition[1] - (this.dotSize / 2)),
           left: convertToUnit(this.dotPosition[0] - (this.dotSize / 2))
+        },
+        class: {
+          'v-color-picker__canvas-dot--disabled': this.disabled
         }
       })
     }

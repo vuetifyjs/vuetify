@@ -5,7 +5,7 @@ import VSlider from '../VSlider/VSlider'
 import { HSVA, RGBtoCSS, RGBAtoCSS, RGB } from '../../util/colorUtils'
 
 // Types
-import Vue, { VNode } from 'vue'
+import Vue, { VNode, VNodeData } from 'vue'
 import { PropValidator } from 'vue/types/options'
 import { VColorPickerColor, fromHsva } from './util'
 
@@ -13,7 +13,8 @@ export default Vue.extend({
   name: 'v-color-picker-preview',
 
   props: {
-    color: Object as PropValidator<VColorPickerColor>
+    color: Object as PropValidator<VColorPickerColor>,
+    disabled: Boolean
   },
 
   methods: {
@@ -74,10 +75,14 @@ export default Vue.extend({
         }
       })
     },
-    genTrack (options: object): VNode {
+    genTrack (options: VNodeData): VNode {
       return this.$createElement(VSlider, {
         class: 'v-color-picker__track',
-        ...options
+        ...options,
+        props: {
+          disabled: this.disabled,
+          ...options.props
+        }
       })
     }
   },
