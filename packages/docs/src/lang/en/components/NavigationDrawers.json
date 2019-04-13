@@ -45,6 +45,10 @@
     "background": {
       "header": "### Backgrounds",
       "desc": "Apply a custom background to your drawer. If you need to customize `v-img`'s properties you can use the scoped **img** slot."
+    },
+    "bottom-drawer": {
+      "header": "### Bottom drawer",
+      "desc": "Bottom drawers change the position of the drawer from the left or right to the bottom of the page.."
     }
   },
   "props": {
