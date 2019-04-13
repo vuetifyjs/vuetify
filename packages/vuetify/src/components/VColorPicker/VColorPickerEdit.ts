@@ -50,7 +50,8 @@ export default Vue.extend({
     hideModeSwitch: Boolean,
     mode: {
       type: String,
-      default: 'rgba'
+      default: 'rgba',
+      validator: (v: string) => Object.keys(modes).includes(v)
     }
   },
 
@@ -112,11 +113,11 @@ export default Vue.extend({
     },
     genInputs (): VNode[] | VNode {
       switch (this.internalMode) {
-        case 'hex': {
+        case 'hexa': {
           const hex = this.color.hexa
           const value = hex.endsWith('FF') ? hex.substr(0, 6) : hex
           return this.genInput(
-            this.internalMode,
+            'hex',
             {
               maxlength: 9,
               disabled: this.disabled

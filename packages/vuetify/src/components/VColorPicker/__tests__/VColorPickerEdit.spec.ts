@@ -4,7 +4,7 @@ import {
   MountOptions,
   Wrapper
 } from '@vue/test-utils'
-import { fromRgba, fromHex, fromHsla } from '../util'
+import { fromRgba } from '../util'
 
 describe('VColorPickerEdit.ts', () => {
   type Instance = InstanceType<typeof VColorPickerEdit>
@@ -15,12 +15,12 @@ describe('VColorPickerEdit.ts', () => {
     }
   })
 
-  it('should work in HEX mode', () => {
+  it('should emit event when input changes', () => {
     const update = jest.fn()
     const wrapper = mountFunction({
       propsData: {
-        color: fromRgba([ 0, 0, 0, 0 ]),
-        mode: 'hex'
+        color: fromRgba({ r: 0, g: 0, b: 0, a: 0 }),
+        mode: 'hexa'
       },
       listeners: {
         'update:color': update
@@ -28,18 +28,18 @@ describe('VColorPickerEdit.ts', () => {
     })
 
     const input = wrapper.find('input')
-    ;(input.element as HTMLInputElement).value = '#12345678'
+    const el = input.element as HTMLInputElement
+    el.value = '#12345678'
     input.trigger('change')
-    expect(update).toHaveBeenLastCalledWith(fromHex([ '12', '34', '56', '78' ]))
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(update).toHaveBeenCalledTimes(1)
   })
 
   it('should work in RGBA mode', () => {
     const update = jest.fn()
     const wrapper = mountFunction({
       propsData: {
-        color: fromRgba([ 0, 0, 0, 0 ]),
+        color: fromRgba({ r: 0, g: 0, b: 0, a: 0 }),
         mode: 'rgba'
       },
       listeners: {
@@ -48,30 +48,23 @@ describe('VColorPickerEdit.ts', () => {
     })
 
     const inputs = wrapper.findAll('input').wrappers
-    ;(inputs[0].element as HTMLInputElement).value = '123'
-    inputs[0].trigger('input')
-    expect(update).toHaveBeenLastCalledWith(fromRgba([ 123, 0, 0, 0 ]))
 
-    ;(inputs[1].element as HTMLInputElement).value = '456'
-    inputs[1].trigger('input')
-    expect(update).toHaveBeenLastCalledWith(fromRgba([ 0, 456, 0, 0 ]))
+    for (let i = 0; i < inputs.length; i++) {
+      const input = inputs[i]
+      const el = input.element as HTMLInputElement
 
-    ;(inputs[2].element as HTMLInputElement).value = '789'
-    inputs[2].trigger('input')
-    expect(update).toHaveBeenLastCalledWith(fromRgba([ 0, 0, 789, 0 ]))
+      el.value = `${i}`
+      input.trigger('input')
+    }
 
-    ;(inputs[3].element as HTMLInputElement).value = '222'
-    inputs[3].trigger('input')
-    expect(update).toHaveBeenLastCalledWith(fromRgba([ 0, 0, 0, 222 ]))
-
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(update).toHaveBeenCalledTimes(4)
   })
 
   it('should work in HSLA mode', () => {
     const update = jest.fn()
     const wrapper = mountFunction({
       propsData: {
-        color: fromRgba([ 0, 0, 0, 0 ]),
+        color: fromRgba({ r: 0, g: 0, b: 0, a: 0 }),
         mode: 'hsla'
       },
       listeners: {
@@ -80,29 +73,22 @@ describe('VColorPickerEdit.ts', () => {
     })
 
     const inputs = wrapper.findAll('input').wrappers
-    ;(inputs[0].element as HTMLInputElement).value = '123'
-    inputs[0].trigger('input')
-    expect(update).toHaveBeenLastCalledWith(fromHsla([ 123, 0, 0, 0 ]))
 
-    ;(inputs[1].element as HTMLInputElement).value = '456'
-    inputs[1].trigger('input')
-    expect(update).toHaveBeenLastCalledWith(fromHsla([ 0, 456, 0, 0 ]))
+    for (let i = 0; i < inputs.length; i++) {
+      const input = inputs[i]
+      const el = input.element as HTMLInputElement
 
-    ;(inputs[2].element as HTMLInputElement).value = '789'
-    inputs[2].trigger('input')
-    expect(update).toHaveBeenLastCalledWith(fromHsla([ 0, 0, 789, 0 ]))
+      el.value = `${i}`
+      input.trigger('input')
+    }
 
-    ;(inputs[3].element as HTMLInputElement).value = '222'
-    inputs[3].trigger('input')
-    expect(update).toHaveBeenLastCalledWith(fromHsla([ 0, 0, 0, 222 ]))
-
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(update).toHaveBeenCalledTimes(4)
   })
 
   it('should render with disabled', () => {
     const wrapper = mountFunction({
       propsData: {
-        color: fromRgba([ 0, 0, 0, 0 ]),
+        color: fromRgba({ r: 0, g: 0, b: 0, a: 0 }),
         mode: 'rgba',
         disabled: true
       }
@@ -112,38 +98,40 @@ describe('VColorPickerEdit.ts', () => {
   })
 
   it('should change mode', () => {
-    const update = jest.fn()
-    const watch = jest.fn()
     const wrapper = mountFunction({
       propsData: {
-        color: fromRgba([ 0, 0, 0, 0 ]),
-        mode: 'hex'
-      },
-      listeners: {
-        'update:mode': update
-      },
-      watch: {
-        internalMode: watch
+        color: fromRgba({ r: 0, g: 0, b: 0, a: 0 }),
+        mode: 'hexa'
       }
     })
 
     const changeMode = wrapper.find('.v-btn')
 
     changeMode.trigger('click')
-    expect(update).toHaveBeenLastCalledWith('rgba')
-    expect(watch).toHaveBeenLastCalledWith('rgba', 'hex')
+    expect(wrapper.html()).toMatchSnapshot()
 
     changeMode.trigger('click')
-    expect(update).toHaveBeenLastCalledWith('hsla')
-    expect(watch).toHaveBeenLastCalledWith('hsla', 'rgba')
+    expect(wrapper.html()).toMatchSnapshot()
 
     changeMode.trigger('click')
-    expect(update).toHaveBeenLastCalledWith('hex')
-    expect(watch).toHaveBeenLastCalledWith('hex', 'hsla')
+    expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({
       mode: 'hsla'
     })
-    expect(watch).toHaveBeenLastCalledWith('hsla', 'hex')
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should hide mode switch button', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        color: fromRgba({ r: 0, g: 0, b: 0, a: 0 }),
+        mode: 'rgba',
+        hideModeSwitch: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('.v-btn').exists()).toBe(false)
   })
 })
