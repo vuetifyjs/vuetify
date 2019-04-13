@@ -34,7 +34,7 @@ export default mixins(Colorable).extend({
     data.style = {
       height: size,
       width: size,
-      ...data.style
+      ...data.style as object
     }
 
     return h('div', Colorable.options.methods.setBackgroundColor(props.color, data), children)
