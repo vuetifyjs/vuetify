@@ -153,7 +153,7 @@ export default baseMixins.extend({
     },
     computedTransform (): number {
       if (this.isActive) return 0
-      if (this.bottom && this.isMobile) return 100
+      if (this.isBottom) return 100
       return this.right ? 100 : -100
     },
     computedWidth (): string | number {
@@ -168,11 +168,13 @@ export default baseMixins.extend({
       return this.app &&
         (!this.isMobile && !this.temporary)
     },
+    isBottom (): boolean {
+      return this.bottom && this.isMobile
+    },
     isMobile (): boolean {
       return (
         !this.stateless &&
         !this.permanent &&
-        !this.temporary &&
         this.$vuetify.breakpoint.width < parseInt(this.mobileBreakPoint, 10)
       )
     },
@@ -201,10 +203,10 @@ export default baseMixins.extend({
         (this.isMobile || this.temporary)
     },
     styles (): object {
-      const translate = this.bottom && this.isMobile ? 'translateY' : 'translateX'
+      const translate = this.isBottom ? 'translateY' : 'translateX'
       const styles = {
         height: convertToUnit(this.height),
-        top: convertToUnit(this.computedTop),
+        top: !this.isBottom ? convertToUnit(this.computedTop) : 'auto',
         maxHeight: this.computedMaxHeight != null
           ? `calc(100% - ${convertToUnit(this.computedMaxHeight)})`
           : undefined,
