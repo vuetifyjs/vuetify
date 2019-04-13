@@ -46,9 +46,6 @@ module.exports = {
       babelConfig: true,
       tsConfig: '<rootDir>/tsconfig.test.json',
       diagnostics: false
-      // diagnostics: {
-      //   warnOnly: true
-      // }
     }
   }
 }
