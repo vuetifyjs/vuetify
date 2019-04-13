@@ -5,7 +5,7 @@ import '../../stylus/components/_counters.styl'
 import Themeable, { functionalThemeClasses } from '../../mixins/themeable'
 
 // Types
-import { VNode, RenderContext } from 'vue'
+import { VNode } from 'vue'
 import mixins from '../../util/mixins'
 
 /* @vue/component */
@@ -22,11 +22,11 @@ export default mixins(Themeable).extend({
     max: [Number, String]
   },
 
-  render (h, ctx: RenderContext): VNode {
+  render (h, ctx): VNode {
     const { props } = ctx
     const max = parseInt(props.max, 10)
     const value = parseInt(props.value, 10)
-    const content = max ? `${value} / ${max}` : props.value
+    const content = max ? `${value} / ${max}` : String(props.value)
     const isGreater = max && (value > max)
 
     return h('div', {
