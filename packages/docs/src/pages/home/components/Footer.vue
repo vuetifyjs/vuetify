@@ -192,6 +192,7 @@
 
     .v-input__slot
       border-radius: 28px
+      padding-right: 0
 
     .v-text-field__slot,
     .v-label
@@ -203,6 +204,5 @@
       border-bottom-right-radius: 28px
       box-shadow: none
       height: 48px
-      margin-right: -12px
       padding-top: 2px
 </style>
