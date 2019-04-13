@@ -1,6 +1,6 @@
 // Types
 import Vue, { VNode } from 'vue'
-import { clamp } from '../../util/helpers'
+import { clamp, convertToUnit } from '../../util/helpers'
 import { HSVA } from '../../util/colorUtils'
 import { PropValidator } from 'vue/types/options'
 import { fromHsva, VColorPickerColor } from './util'
@@ -133,10 +133,10 @@ export default Vue.extend({
       return this.$createElement('div', {
         staticClass: 'v-color-picker__canvas-dot',
         style: {
-          width: `${this.dotSize}px`,
-          height: `${this.dotSize}px`,
-          top: `${this.dotPosition[1] - (this.dotSize / 2)}px`,
-          left: `${this.dotPosition[0] - (this.dotSize / 2)}px`
+          width: convertToUnit(this.dotSize),
+          height: convertToUnit(this.dotSize),
+          top: convertToUnit(this.dotPosition[1] - (this.dotSize / 2)),
+          left: convertToUnit(this.dotPosition[0] - (this.dotSize / 2))
         }
       })
     }
