@@ -170,6 +170,9 @@ export function parseHex (hex: string): Hex {
 
   if (hex.length === 6) {
     return chunk(padEnd(hex, 8, 'F'), 2) as Hex
+  } else if (hex.length === 3) {
+    const val = hex.split('').map(x => x + x).join('')
+    return chunk(padEnd(val, 8, 'F'), 2) as Hex
   } else {
     return chunk(padEnd(padEnd(hex, 6), 8, 'F'), 2) as Hex
   }
