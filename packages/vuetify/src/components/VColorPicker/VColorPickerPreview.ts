@@ -2,7 +2,7 @@
 import VSlider from '../VSlider/VSlider'
 
 // Utilities
-import { HSVA, RGBtoCSS, RGBAtoCSS, RGB } from '../../util/colorUtils'
+import { RGBtoCSS, RGBAtoCSS } from '../../util/colorUtils'
 
 // Types
 import Vue, { VNode, VNodeData } from 'vue'
@@ -25,17 +25,17 @@ export default Vue.extend({
           thumbColor: 'grey lighten-2',
           hideDetails: true,
           value: this.color.alpha,
-          step: 0.01,
+          step: 0,
           min: 0,
           max: 1
         },
         style: {
           backgroundImage: !this.disabled
-            ? `linear-gradient(to right, transparent, ${RGBtoCSS(this.color.rgba.slice(0, -1) as RGB)})`
+            ? `linear-gradient(to right, transparent, ${RGBtoCSS(this.color.rgba)})`
             : undefined
         },
         on: {
-          input: (val: number) => this.$emit('update:color', fromHsva([...this.color.hsva.slice(0, -1), val] as HSVA))
+          input: (val: number) => this.color.alpha !== val && this.$emit('update:color', fromHsva({ ...this.color.hsva, a: val }))
         }
       })
     },
@@ -69,11 +69,12 @@ export default Vue.extend({
           thumbColor: 'grey lighten-2',
           hideDetails: true,
           value: this.color.hue,
+          step: 0,
           min: 0,
           max: 360
         },
         on: {
-          input: (val: number) => this.$emit('update:color', fromHsva([val, ...this.color.hsva.slice(1)] as HSVA))
+          input: (val: number) => this.color.hue !== val && this.$emit('update:color', fromHsva({ ...this.color.hsva, h: val }))
         }
       })
     },

@@ -8,39 +8,38 @@ import { parseHex } from '../../util/colorUtils'
 // Types
 import Vue, { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
-import { VColorPickerColor, fromRgba, fromHex, fromHsla } from './util'
+import { VColorPickerColor, fromRgba, fromHexa, fromHsla } from './util'
 
-type Input = [string, number, number, string]
+type Input = [string, number, string]
 
 export type Mode = {
-  name: string
-  inputs: Input[]
+  inputs?: Input[]
   from: Function
 }
 
 export const modes = {
   rgba: {
     inputs: [
-      ['r', 0, 255, 'int'],
-      ['g', 1, 255, 'int'],
-      ['b', 2, 255, 'int'],
-      ['a', 3, 1, 'float']
+      ['r', 255, 'int'],
+      ['g', 255, 'int'],
+      ['b', 255, 'int'],
+      ['a', 1, 'float']
     ],
     from: fromRgba
   },
   hsla: {
     inputs: [
-      ['h', 0, 360, 'int'],
-      ['s', 1, 1, 'float'],
-      ['l', 2, 1, 'float'],
-      ['a', 3, 1, 'float']
+      ['h', 360, 'int'],
+      ['s', 1, 'float'],
+      ['l', 1, 'float'],
+      ['a', 1, 'float']
     ],
     from: fromHsla
   },
-  hex: {
-    from: fromHex
+  hexa: {
+    from: fromHexa
   }
-} as { [key: string]: any }
+} as { [key: string]: Mode }
 
 export default Vue.extend({
   name: 'v-color-picker-edit',
@@ -49,13 +48,18 @@ export default Vue.extend({
     color: Object as PropValidator<VColorPickerColor>,
     disabled: Boolean,
     hideModeSwitch: Boolean,
-    mode: String
+    mode: {
+      type: String,
+      default: 'rgba'
+    }
   },
 
-  data: () => ({
-    modes,
-    internalMode: 'hex'
-  }),
+  data () {
+    return {
+      modes,
+      internalMode: this.mode
+    }
+  },
 
   computed: {
     currentMode (): Mode {
@@ -109,15 +113,15 @@ export default Vue.extend({
     genInputs (): VNode[] | VNode {
       switch (this.internalMode) {
         case 'hex': {
-          const hex = this.color.hex
-          const value = hex[3] === 'FF' ? hex.slice(0, -1) : hex
+          const hex = this.color.hexa
+          const value = hex.endsWith('FF') ? hex.substr(0, 6) : hex
           return this.genInput(
             this.internalMode,
             {
               maxlength: 9,
               disabled: this.disabled
             },
-            `#${value.join('')}`,
+            `#${value}`,
             {
               change: (e: Event) => {
                 const el = e.target as HTMLInputElement
@@ -127,8 +131,8 @@ export default Vue.extend({
           )
         }
         default: {
-          return this.currentMode.inputs.map(([target, index, max, type]) => {
-            const value = this.color[this.internalMode as keyof VColorPickerColor] as any[]
+          return this.currentMode.inputs!.map(([target, max, type]) => {
+            const value = this.color[this.internalMode as keyof VColorPickerColor] as any
             return this.genInput(
               target,
               {
@@ -138,13 +142,16 @@ export default Vue.extend({
                 step: type === 'float' ? '0.01' : type === 'int' ? '1' : undefined,
                 disabled: this.disabled
               },
-              this.getValue(value[index], type),
+              this.getValue(value[target], type),
               {
                 input: (e: Event) => {
                   const el = e.target as HTMLInputElement
                   const newVal = this.parseValue(el.value || '0', type)
 
-                  this.$emit('update:color', this.currentMode.from(value.map((oldVal: number, i: number) => i === index ? newVal : oldVal)))
+                  this.$emit('update:color', this.currentMode.from(
+                    Object.assign({}, value, { [target]: newVal }),
+                    this.color.alpha
+                  ))
                 }
               }
             )

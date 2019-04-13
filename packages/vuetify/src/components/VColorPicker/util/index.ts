@@ -11,12 +11,14 @@ import {
   HSVAtoHSLA,
   RGBAtoHex,
   HSLAtoHSVA,
-  parseHex
+  parseHex,
+  Hexa
 } from '../../../util/colorUtils'
 
 export interface VColorPickerColor {
   alpha: number
   hex: Hex
+  hexa: Hexa
   hsla: HSLA
   hsva: HSVA
   hue: number
@@ -24,48 +26,56 @@ export interface VColorPickerColor {
 }
 
 export function fromHsva (hsva: HSVA) {
+  hsva = { ...hsva }
+  const hexa = HSVAtoHex(hsva)
   return {
-    alpha: hsva[3],
-    hex: HSVAtoHex(hsva),
+    alpha: hsva.a,
+    hex: hexa.substr(0, 6),
+    hexa,
     hsla: HSVAtoHSLA(hsva),
     hsva,
-    hue: hsva[0],
+    hue: hsva.h,
     rgba: HSVAtoRGBA(hsva)
   }
 }
 
 export function fromHsla (hsla: HSLA) {
   const hsva = HSLAtoHSVA(hsla)
+  const hexa = HSVAtoHex(hsva)
   return {
-    alpha: hsva[3],
-    hex: HSVAtoHex(hsva),
+    alpha: hsva.a,
+    hex: hexa.substr(0, 6),
+    hexa,
     hsla,
     hsva,
-    hue: hsva[0],
+    hue: hsva.h,
     rgba: HSVAtoRGBA(hsva)
   }
 }
 
 export function fromRgba (rgba: RGBA) {
   const hsva = RGBAtoHSVA(rgba)
+  const hexa = RGBAtoHex(rgba)
   return {
-    alpha: hsva[3],
-    hex: RGBAtoHex(rgba),
+    alpha: hsva.a,
+    hex: hexa.substr(0, 6),
+    hexa,
     hsla: HSVAtoHSLA(hsva),
     hsva,
-    hue: hsva[0],
+    hue: hsva.h,
     rgba
   }
 }
 
-export function fromHex (hex: Hex) {
-  const hsva = HexToHSVA(hex)
+export function fromHexa (hexa: Hexa) {
+  const hsva = HexToHSVA(hexa)
   return {
-    alpha: hsva[3],
-    hex,
+    alpha: hsva.a,
+    hex: hexa.substr(0, 6),
+    hexa,
     hsla: HSVAtoHSLA(hsva),
     hsva,
-    hue: hsva[0],
+    hue: hsva.h,
     rgba: HSVAtoRGBA(hsva)
   }
 }
@@ -75,10 +85,10 @@ function has (obj: object, key: string[]) {
 }
 
 export function parseColor (color: any) {
-  if (!color) return fromRgba([255, 0, 0, 1])
+  if (!color) return fromRgba({ r: 255, g: 0, b: 0, a: 1 })
 
   if (typeof color === 'string') {
-    return fromHex(parseHex(color))
+    return fromHexa(parseHex(color))
   }
 
   if (typeof color === 'object') {
@@ -87,28 +97,13 @@ export function parseColor (color: any) {
     const a = color.hasOwnProperty('a') ? parseFloat(color.a) : 1
 
     if (has(color, ['r', 'g', 'b'])) {
-      return fromRgba([
-        parseInt(color.r, 10),
-        parseInt(color.g, 10),
-        parseInt(color.b, 10),
-        a
-      ])
+      return fromRgba({ ...color, a })
     } else if (has(color, ['h', 's', 'l'])) {
-      return fromHsla([
-        parseInt(color.h, 10),
-        parseFloat(color.s),
-        parseFloat(color.l),
-        a
-      ])
+      return fromHsla({ ...color, a })
     } else if (has(color, ['h', 's', 'v'])) {
-      return fromHsva([
-        parseInt(color.h, 10),
-        parseFloat(color.s),
-        parseFloat(color.v),
-        a
-      ])
+      return fromHsva({ ...color, a })
     }
   }
 
-  return fromRgba([255, 0, 0, 1])
+  return fromRgba({ r: 255, g: 0, b: 0, a: 1 })
 }

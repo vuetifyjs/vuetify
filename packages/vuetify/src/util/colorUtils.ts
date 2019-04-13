@@ -2,13 +2,13 @@ import { consoleWarn } from './console'
 import { chunk, padEnd } from './helpers'
 
 export type ColorInt = number
-export type RGB = [number, number, number]
 export type XYZ = [number, number, number]
 export type LAB = [number, number, number]
-export type HSVA = [number, number, number, number]
-export type RGBA = [number, number, number, number]
-export type HSLA = [number, number, number, number]
-export type Hex = [string, string, string, string]
+export type HSVA = { h: number, s: number, v: number, a: number }
+export type RGBA = { r: number, g: number, b: number, a: number }
+export type HSLA = { h: number, s: number, l: number, a: number }
+export type Hex = string
+export type Hexa = string
 export type Color = string | number | {}
 
 export function colorToInt (color: Color): ColorInt {
@@ -58,15 +58,15 @@ export function colorToHex (color: Color): string {
  * @param color HSVA color as an array [0-360, 0-1, 0-1, 0-1]
  */
 export function HSVAtoRGBA (hsva: HSVA): RGBA {
-  const [h, s, v, a] = hsva
+  const { h, s, v, a } = hsva
   const f = (n: number) => {
     const k = (n + (h / 60)) % 6
     return v - v * s * Math.max(Math.min(k, 4 - k, 1), 0)
   }
 
-  const hsv = [f(5), f(3), f(1)].map(v => Math.round(v * 255))
+  const rgb = [f(5), f(3), f(1)].map(v => Math.round(v * 255))
 
-  return [...hsv, a] as RGBA
+  return { r: rgb[0], g: rgb[1], b: rgb[2], a }
 }
 
 /**
@@ -75,9 +75,11 @@ export function HSVAtoRGBA (hsva: HSVA): RGBA {
  * @param color RGBA color as an array [0-255, 0-255, 0-255, 0-1]
  */
 export function RGBAtoHSVA (rgba: RGBA): HSVA {
-  if (!rgba) return [0, 1, 1, 1]
+  if (!rgba) return { h: 0, s: 1, v: 1, a: 1 }
 
-  const [r, g, b] = rgba.map(v => v / 255)
+  const r = rgba.r / 255
+  const g = rgba.g / 255
+  const b = rgba.b / 255
   const max = Math.max(r, g, b)
   const min = Math.min(r, g, b)
 
@@ -96,41 +98,37 @@ export function RGBAtoHSVA (rgba: RGBA): HSVA {
   if (h < 0) h = h + 360
 
   const s = max === 0 ? 0 : (max - min) / max
-  const hsv = [h, s, max].map(v => Math.round(v * 1000) / 1000)
-  return [...hsv, rgba[3]] as HSVA
+  const hsv = [h, s, max]
+
+  return { h: hsv[0], s: hsv[1], v: hsv[2], a: rgba.a }
 }
 
 export function HSVAtoHSLA (hsva: HSVA): HSLA {
-  const [h, s, v, a] = hsva
+  const { h, s, v, a } = hsva
 
   const l = v - (v * s / 2)
 
   const sprime = l === 1 || l === 0 ? 0 : (v - l) / Math.min(l, 1 - l)
 
-  return [h, sprime, l, a]
+  return { h, s: sprime, l, a }
 }
 
-export function HSLAtoHSVA (hsla: HSLA): HSVA {
-  const [h, s, l, a] = hsla
+export function HSLAtoHSVA (hsl: HSLA): HSVA {
+  const { h, s, l, a } = hsl
 
   const v = l + s * Math.min(l, 1 - l)
 
   const sprime = v === 0 ? 0 : 2 - (2 * l / v)
 
-  return [h, sprime, v, a]
-}
-
-export function colorEqual (c1: number[], c2: number[], epsilon: number = Math.pow(2, -52)) {
-  if (!c1 || !c2) return false
-  return c1.every((c, i) => Math.abs(c - c2[i]) < epsilon)
+  return { h, s: sprime, v, a }
 }
 
 export function RGBAtoCSS (rgba: RGBA): string {
-  return `rgba(${rgba.join(', ')})`
+  return `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`
 }
 
-export function RGBtoCSS (rgb: RGB): string {
-  return RGBAtoCSS([...rgb, 1] as RGBA)
+export function RGBtoCSS (rgba: RGBA): string {
+  return RGBAtoCSS({ ...rgba, a: 1 })
 }
 
 export function RGBAtoHex (rgba: RGBA): Hex {
@@ -140,21 +138,27 @@ export function RGBAtoHex (rgba: RGBA): Hex {
   }
 
   return [
-    ...rgba.slice(0, -1).map(toHex),
-    toHex(rgba[3] * 255)
-  ] as Hex
+    toHex(rgba.r),
+    toHex(rgba.g),
+    toHex(rgba.b),
+    toHex(Math.round(rgba.a * 255))
+  ].join('')
 }
 
 export function HexToRGBA (hex: Hex): RGBA {
-  return [
-    ...hex.slice(0, -1).map(h => parseInt(h, 16)),
-    Math.round((parseInt(hex[3], 16) / 255) * 1000) / 1000
-  ] as RGBA
+  const rgba = chunk(hex, 2).map(c => parseInt(c, 16))
+
+  return {
+    r: rgba[0],
+    g: rgba[1],
+    b: rgba[2],
+    a: Math.round((rgba[3] / 255) * 100) / 100
+  }
 }
 
 export function HexToHSVA (hex: Hex): HSVA {
-  const rgba = HexToRGBA(hex)
-  return RGBAtoHSVA(rgba)
+  const rgb = HexToRGBA(hex)
+  return RGBAtoHSVA(rgb)
 }
 
 export function HSVAtoHex (hsva: HSVA): Hex {
@@ -168,12 +172,13 @@ export function parseHex (hex: string): Hex {
 
   hex = hex.replace(/([^0-9a-f])/gi, 'F')
 
+  if (hex.length === 3) {
+    hex = hex.split('').map(x => x + x).join('')
+  }
+
   if (hex.length === 6) {
-    return chunk(padEnd(hex, 8, 'F'), 2) as Hex
-  } else if (hex.length === 3) {
-    const val = hex.split('').map(x => x + x).join('')
-    return chunk(padEnd(val, 8, 'F'), 2) as Hex
+    return padEnd(hex, 8, 'F')
   } else {
-    return chunk(padEnd(padEnd(hex, 6), 8, 'F'), 2) as Hex
+    return padEnd(padEnd(hex, 6), 8, 'F')
   }
 }

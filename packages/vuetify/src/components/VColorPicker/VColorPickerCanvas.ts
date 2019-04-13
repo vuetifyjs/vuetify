@@ -1,9 +1,10 @@
+// Helpers
+import { clamp, convertToUnit, throttle } from '../../util/helpers'
+import { fromHsva, VColorPickerColor } from './util'
+
 // Types
 import Vue, { VNode } from 'vue'
-import { clamp, convertToUnit } from '../../util/helpers'
-import { HSVA } from '../../util/colorUtils'
 import { PropValidator } from 'vue/types/options'
-import { fromHsva, VColorPickerColor } from './util'
 
 function renderHsv (canvas: HTMLCanvasElement, hue: number) {
   const ctx = canvas.getContext('2d')
@@ -53,8 +54,8 @@ export default Vue.extend({
   computed: {
     dotPosition (): [number, number] {
       return [
-        this.internalValue.hsva[1] * this.boundingRect.width,
-        (1 - this.internalValue.hsva[2]) * this.boundingRect.height
+        this.internalValue.hsva.s * this.boundingRect.width,
+        (1 - this.internalValue.hsva.v) * this.boundingRect.height
       ]
     }
   },
@@ -85,14 +86,17 @@ export default Vue.extend({
       ]
     },
     updateInternalValue (x: number, y: number) {
-      this.internalValue = fromHsva([
-        this.internalValue.hue,
-        ...[
-          x / this.boundingRect.width,
-          1 - y / this.boundingRect.height
-        ].map(v => Math.round(v * 1000) / 1000),
-        this.internalValue.alpha
-      ] as HSVA)
+      const [s, v] = [
+        x / this.boundingRect.width,
+        1 - y / this.boundingRect.height
+      ]
+
+      this.internalValue = fromHsva({
+        h: this.internalValue.hue,
+        s,
+        v,
+        a: this.internalValue.alpha
+      })
     },
     updateCanvas () {
       renderHsv(this.$refs.canvas as HTMLCanvasElement, this.internalValue.hue)
@@ -117,12 +121,17 @@ export default Vue.extend({
       window.addEventListener('mousemove', this.handleMouseMove)
       window.addEventListener('mouseup', this.handleMouseUp)
     },
-    handleMouseMove (e: MouseEvent) {
+    handleMouseMove: throttle(function (e: MouseEvent) {
+      // TODO: I could not find a way to type this
+      // @ts-ignore
       if (this.disabled) return
 
+      // @ts-ignore
       const [x, y] = this.getLocalPosition(e.clientX, e.clientY)
+
+      // @ts-ignore
       this.updateInternalValue(x, y)
-    },
+    }, 25),
     handleMouseUp (e: MouseEvent) {
       window.removeEventListener('mousemove', this.handleMouseMove)
       window.removeEventListener('mouseup', this.handleMouseUp)

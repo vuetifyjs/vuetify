@@ -27,12 +27,12 @@ export default VSheet.extend({
     hideModeSwitch: Boolean,
     mode: {
       type: String,
-      default: 'hex',
+      default: 'rgba',
       validator: (v: string) => Object.keys(modes).includes(v)
     },
     value: {
       type: [Object, String]
-    } as PropValidator<string | VColorPickerColor>,
+    } as PropValidator<VColorPickerColor>,
     width: {
       type: [Number, String],
       default: 300
@@ -40,7 +40,7 @@ export default VSheet.extend({
   },
 
   data: () => ({
-    internalValue: fromRgba([255, 0, 0, 1])
+    internalValue: fromRgba({ r: 255, g: 0, b: 0, a: 1 })
   }),
 
   computed: {
@@ -59,8 +59,11 @@ export default VSheet.extend({
       },
       immediate: true
     },
-    internalValue (v: any[]) {
-      this.$emit('input', v)
+    internalValue: {
+      handler (v: VColorPickerColor) {
+        this.$emit('input', v)
+      },
+      deep: true
     }
   },
 
