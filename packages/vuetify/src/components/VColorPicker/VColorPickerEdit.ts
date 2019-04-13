@@ -68,6 +68,10 @@ export default Vue.extend({
     }
   },
 
+  created () {
+    this.internalMode = this.mode
+  },
+
   methods: {
     getValue (v: any, type: string) {
       if (type === 'float') return Math.round(v * 100) / 100
