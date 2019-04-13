@@ -60,7 +60,7 @@ export default baseMixins.extend({
     disableResizeWatcher: Boolean,
     height: {
       type: [Number, String],
-      default () {
+      default (): string {
         return this.app ? '100vh' : '100%'
       }
     },
