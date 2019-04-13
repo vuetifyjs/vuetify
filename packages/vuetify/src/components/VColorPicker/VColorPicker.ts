@@ -7,7 +7,7 @@ import VSheet from '../VSheet/VSheet'
 // Components
 import VColorPickerPreview from './VColorPickerPreview'
 import VColorPickerCanvas from './VColorPickerCanvas'
-import VColorPickerEdit from './VColorPickerEdit'
+import VColorPickerEdit, { Mode, modes } from './VColorPickerEdit'
 
 // Helpers
 import { VColorPickerColor, parseColor, fromRgba } from './util'
@@ -29,7 +29,12 @@ export default VSheet.extend({
       type: [Number, String],
       default: 300
     },
-    disabled: Boolean
+    disabled: Boolean,
+    mode: {
+      type: String,
+      default: 'hex',
+      validator: (v: string) => Object.keys(modes).includes(v)
+    }
   },
 
   data: () => ({
@@ -75,10 +80,12 @@ export default VSheet.extend({
       return this.$createElement(VColorPickerEdit, {
         props: {
           color: this.internalValue,
-          disabled: this.disabled
+          disabled: this.disabled,
+          mode: this.mode
         },
         on: {
-          'update:color': this.updateColor
+          'update:color': this.updateColor,
+          'update:mode': (v: Mode) => this.$emit('update:mode', v)
         }
       })
     },

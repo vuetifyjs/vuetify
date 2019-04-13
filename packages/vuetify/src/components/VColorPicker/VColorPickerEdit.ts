@@ -12,54 +12,62 @@ import { VColorPickerColor, fromRgba, fromHex, fromHsla } from './util'
 
 type Input = [string, number, number, string]
 
-type Mode = {
+export type Mode = {
   name: string
   inputs: Input[]
   from: Function
 }
+
+export const modes = {
+  rgba: {
+    inputs: [
+      ['r', 0, 255, 'int'],
+      ['g', 1, 255, 'int'],
+      ['b', 2, 255, 'int'],
+      ['a', 3, 1, 'float']
+    ],
+    from: fromRgba
+  },
+  hsla: {
+    inputs: [
+      ['h', 0, 360, 'int'],
+      ['s', 1, 1, 'float'],
+      ['l', 2, 1, 'float'],
+      ['a', 3, 1, 'float']
+    ],
+    from: fromHsla
+  },
+  hex: {
+    from: fromHex
+  }
+} as { [key: string]: any }
 
 export default Vue.extend({
   name: 'v-color-picker-edit',
 
   props: {
     color: Object as PropValidator<VColorPickerColor>,
-    disabled: Boolean
+    disabled: Boolean,
+    mode: String
   },
 
   data: () => ({
-    modes: [
-      {
-        name: 'rgba',
-        inputs: [
-          ['r', 0, 255, 'int'],
-          ['g', 1, 255, 'int'],
-          ['b', 2, 255, 'int'],
-          ['a', 3, 1, 'float']
-        ],
-        from: fromRgba
-      },
-      {
-        name: 'hsla',
-        inputs: [
-          ['h', 0, 360, 'int'],
-          ['s', 1, 1, 'float'],
-          ['l', 2, 1, 'float'],
-          ['a', 3, 1, 'float']
-        ],
-        from: fromHsla
-      },
-      {
-        name: 'hex',
-        from: fromHex
-      }
-    ] as Mode[],
-    mode: 'rgba'
+    modes,
+    internalMode: 'hex'
   }),
 
   computed: {
     currentMode (): Mode {
-      const index = this.modes.findIndex(m => m.name === this.mode)
-      return this.modes[index]
+      return this.modes[this.internalMode]
+    }
+  },
+
+  watch: {
+    mode (mode) {
+      this.internalMode = mode
+    },
+    internalMode (mode) {
+      this.$emit('update:mode', mode)
     }
   },
 
@@ -75,9 +83,10 @@ export default Vue.extend({
       else return 0
     },
     changeMode () {
-      const index = this.modes.findIndex(m => m.name === this.mode)
-      const newMode = this.modes[(index + 1) % this.modes.length]
-      this.mode = newMode.name
+      const modes = Object.keys(this.modes)
+      const index = modes.indexOf(this.internalMode)
+      const newMode = modes[(index + 1) % modes.length]
+      this.internalMode = newMode
     },
     genInput (target: string, attrs: any, value: any, on: any): VNode {
       return this.$createElement('div', {
@@ -95,12 +104,12 @@ export default Vue.extend({
       ])
     },
     genInputs (): VNode[] | VNode {
-      switch (this.currentMode.name) {
+      switch (this.internalMode) {
         case 'hex': {
           const hex = this.color.hex
           const value = hex[3] === 'FF' ? hex.slice(0, -1) : hex
           return this.genInput(
-            this.currentMode.name,
+            this.internalMode,
             {
               maxlength: 9,
               disabled: this.disabled
@@ -116,7 +125,7 @@ export default Vue.extend({
         }
         default: {
           return this.currentMode.inputs.map(([target, index, max, type]) => {
-            const value = this.color[this.currentMode.name as keyof VColorPickerColor] as any[]
+            const value = this.color[this.internalMode as keyof VColorPickerColor] as any[]
             return this.genInput(
               target,
               {
