@@ -345,13 +345,10 @@ export default baseMixins.extend<options>().extend({
           focus,
           'click:close': () => this.onChipInput(item)
         },
-        key: this.getValue(item)
+        key: JSON.stringify(this.getValue(item))
       }, this.getText(item))
     },
     genCommaSelection (item: object, index: number, last: boolean) {
-      // Item may be an object
-      // TODO: Remove JSON.stringify
-      const key = JSON.stringify(this.getValue(item))
       const color = index === this.selectedIndex && this.color
       const isDisabled = (
         this.disabled ||
@@ -363,7 +360,7 @@ export default baseMixins.extend<options>().extend({
         'class': {
           'v-select__selection--disabled': isDisabled
         },
-        key
+        key: JSON.stringify(this.getValue(item))
       }), `${this.getText(item)}${last ? '' : ', '}`)
     },
     genDefaultSlot (): (VNode | VNode[] | null)[] {
