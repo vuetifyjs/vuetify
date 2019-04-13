@@ -18,8 +18,8 @@ import Filterable from '../../mixins/filterable'
 import ClickOutside from '../../directives/click-outside'
 
 // Utilities
-import { camelize, getPropertyFromItem, keyCodes } from '../../util/helpers'
-import { consoleError, consoleWarn } from '../../util/console'
+import { getPropertyFromItem, keyCodes } from '../../util/helpers'
+import { consoleError } from '../../util/console'
 import mixins, { ExtractVue } from '../../util/mixins'
 import { PropValidator } from 'vue/types/options'
 import { VNode, VNodeDirective } from 'vue'
@@ -430,51 +430,6 @@ export default baseMixins.extend<options>().extend({
     genMenu (): VNode {
       const props = this.$_menuProps
       props.activator = this.$refs['input-slot']
-
-      // Deprecate using menu props directly
-      // TODO: remove (2.0)
-      const inheritedProps = Object.keys(VMenu.options.props)
-
-      const deprecatedProps = Object.keys(this.$attrs).reduce<string[]>((acc, attr) => {
-        if (inheritedProps.includes(camelize(attr))) acc.push(attr)
-        return acc
-      }, [])
-
-      for (const prop of deprecatedProps) {
-        props[camelize(prop)] = this.$attrs[prop]
-      }
-
-      if (process.env.NODE_ENV !== 'production') {
-        if (deprecatedProps.length) {
-          const multiple = deprecatedProps.length > 1
-          let replacement = deprecatedProps.reduce<any>((acc, p) => {
-            acc[camelize(p)] = this.$attrs[p]
-            return acc
-          }, {})
-          const props = deprecatedProps.map((p: any) => `'${p}'`).join(', ')
-          const separator = multiple ? '\n' : '\''
-
-          const onlyBools = Object.keys(replacement).every(prop => {
-            const propType = (VMenu.options.props as { [key: string]: any })[prop]
-            const value = replacement[prop]
-            return value === true || ((propType.type || propType) === Boolean && value === '')
-          })
-
-          if (onlyBools) {
-            replacement = Object.keys(replacement).join(', ')
-          } else {
-            replacement = JSON.stringify(replacement, null, multiple ? 2 : 0)
-              .replace(/"([^(")"]+)":/g, '$1:')
-              .replace(/"/g, '\'')
-          }
-
-          consoleWarn(
-            `${props} ${multiple ? 'are' : 'is'} deprecated, use ` +
-            `${separator}${onlyBools ? '' : ':'}menu-props="${replacement}"${separator} instead`,
-            this
-          )
-        }
-      }
 
       // Attach to root el so that
       // menu covers prepend/append icons
