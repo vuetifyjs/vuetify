@@ -9,7 +9,6 @@ import {
   mount,
   Wrapper
 } from '@vue/test-utils'
-import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
 
 describe('VHover.ts', () => {
   let mountFunction: (options?: object) => Wrapper<Vue>
@@ -21,8 +20,6 @@ describe('VHover.ts', () => {
       })
     }
   })
-
-  toHaveBeenWarnedInit()
 
   it('should change class when hovered', async () => {
     const vm = new Vue()

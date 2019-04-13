@@ -7,7 +7,6 @@ import {
   Wrapper
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../util/mixins'
-import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
 
 describe('VOverflowBtn.js', () => {
   type Instance = ExtractVue<typeof VOverflowBtn>
@@ -33,9 +32,8 @@ describe('VOverflowBtn.js', () => {
     }
   })
 
-  toHaveBeenWarnedInit()
   const warning = 'items must contain both a text and callback property'
-  // eslint-disable-next-line jest/no-disabled-tests
+
   it.skip('segmented - should warn when item has no callback', async () => {
     const items = [
       { text: 'Hello' },

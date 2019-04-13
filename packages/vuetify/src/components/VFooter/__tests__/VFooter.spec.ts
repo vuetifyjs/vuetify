@@ -6,13 +6,10 @@ import {
   mount,
   Wrapper
 } from '@vue/test-utils'
-import { rafPolyfill } from '../../../../test'
 
 describe('VFooter.ts', () => {
   type Instance = InstanceType<typeof VFooter>
   let mountFunction: (options?: object) => Wrapper<Instance>
-
-  rafPolyfill(window)
 
   beforeEach(() => {
     mountFunction = (options = {}) => {

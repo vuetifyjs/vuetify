@@ -1,11 +1,8 @@
 import { colorToInt, intToHex } from '../colorUtils'
 import * as transformSRGB from '../color/transformSRGB'
 import * as transformCIELAB from '../color/transformCIELAB'
-import toHaveBeenWarnedInit from '../../../test/util/to-have-been-warned'
 
 describe('colorToInt', () => {
-  toHaveBeenWarnedInit()
-
   it('should convert a hex string to a number', () => {
     expect(colorToInt('#123456')).toBe(0x123456)
     expect(colorToInt('#abc')).toBe(0xaabbcc)

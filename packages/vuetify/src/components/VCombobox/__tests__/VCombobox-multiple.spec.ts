@@ -6,14 +6,11 @@ import {
   mount,
   Wrapper
 } from '@vue/test-utils'
-import { rafPolyfill } from '../../../../test'
 import { keyCodes } from '../../../util/helpers'
 
 describe('VCombobox.ts', () => {
   type Instance = InstanceType<typeof VCombobox>
   let mountFunction: (options?: object) => Wrapper<Instance>
-
-  rafPolyfill(window)
 
   beforeEach(() => {
     document.body.setAttribute('data-app', 'true')
@@ -171,7 +168,6 @@ describe('VCombobox.ts', () => {
     expect(change).toHaveBeenCalledWith(['ba'])
   })
 
-  // eslint-disable-next-line jest/no-disabled-tests
   it.skip('should add a tag on left arrow and select the previous tag', async () => {
     const { wrapper, change } = createMultipleCombobox({
       value: ['foo'],

@@ -1,6 +1,6 @@
 import { Application } from '../../../services/application'
 import VNavigationDrawer from '../VNavigationDrawer'
-import { resizeWindow, rafPolyfill } from '../../../../test'
+import { resizeWindow } from '../../../../test'
 import {
   mount,
   MountOptions,
@@ -32,8 +32,6 @@ describe('VNavigationDrawer', () => {
       })
     }
   })
-
-  rafPolyfill(window)
 
   it('should become temporary when the window resizes', async () => {
     const wrapper = mountFunction()

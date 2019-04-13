@@ -1,9 +1,6 @@
 import { consoleWarn, consoleError } from '../console'
-import toHaveBeenWarnedInit from '../../../test/util/to-have-been-warned'
 
 describe('console', () => {
-  toHaveBeenWarnedInit()
-
   it('should generate a warning', () => {
     consoleWarn('foo')
     expect('[Vuetify] foo').toHaveBeenTipped()

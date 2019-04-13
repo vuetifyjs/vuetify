@@ -37,11 +37,10 @@
   },
   "devDependencies": {
     "@mdi/js": "^3.5.95",
-    "@types/jest": "^22.2.3",
+    "@types/jest": "^24.0.11",
     "@types/node": "^11.11.4",
     "@vue/test-utils": "^1.0.0-beta.29",
     "autoprefixer": "^9.5.0",
-    "avoriaz": "^6.3.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",

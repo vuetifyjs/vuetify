@@ -9,8 +9,6 @@ import {
   Wrapper
 } from '@vue/test-utils'
 
-import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
-
 Vue.prototype.$vuetify = {
   icons: {
     values: {
@@ -33,7 +31,6 @@ describe('VStepperStep.ts', () => {
       })
     }
   })
-  toHaveBeenWarnedInit()
 
   it('should accept a custom color', async () => {
     const wrapper = mountFunction({

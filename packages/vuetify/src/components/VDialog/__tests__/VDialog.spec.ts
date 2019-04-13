@@ -12,7 +12,6 @@ describe('VDialog.ts', () => {
   type Instance = InstanceType<typeof VDialog>
   let mountFunction: (options?: object) => Wrapper<Instance>
   let el
-  (global as any).requestAnimationFrame = cb => cb()
 
   beforeEach(() => {
     el = document.createElement('div')

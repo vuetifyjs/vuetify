@@ -6,7 +6,6 @@ import {
   mount,
   Wrapper
 } from '@vue/test-utils'
-import { rafPolyfill } from '../../../../test'
 
 describe('.ts', () => {
   type Instance = InstanceType<typeof VSelect>
@@ -16,8 +15,6 @@ describe('.ts', () => {
   (global as any).performance = {
     now: () => {}
   }
-  rafPolyfill(window)
-
   beforeEach(() => {
     mountFunction = (options = {}) => {
       el = document.createElement('div')

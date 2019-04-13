@@ -7,13 +7,10 @@ import {
   Wrapper
 } from '@vue/test-utils'
 import { keyCodes } from '../../../util/helpers'
-import { rafPolyfill } from '../../../../test'
 
 describe('VAutocomplete.ts', () => {
   type Instance = InstanceType<typeof VAutocomplete>
   let mountFunction: (options?: object) => Wrapper<Instance>
-
-  rafPolyfill(window)
 
   beforeEach(() => {
     document.body.setAttribute('data-app', 'true')

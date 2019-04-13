@@ -18,7 +18,6 @@ describe('VChipGroup.ts', () => {
   let mountFunction: (options?: object) => Wrapper<Vue>
   let router: Router
   let localVue: typeof Vue
-  (global as any).requestAnimationFrame = cb => cb()
 
   beforeEach(() => {
     router = new Router()
