@@ -65,9 +65,6 @@ export default Vue.extend({
   watch: {
     mode (mode) {
       this.internalMode = mode
-    },
-    internalMode (mode) {
-      this.$emit('update:mode', mode)
     }
   },
 
@@ -87,6 +84,7 @@ export default Vue.extend({
       const index = modes.indexOf(this.internalMode)
       const newMode = modes[(index + 1) % modes.length]
       this.internalMode = newMode
+      this.$emit('update:mode', newMode)
     },
     genInput (target: string, attrs: any, value: any, on: any): VNode {
       return this.$createElement('div', {
