@@ -1,10 +1,17 @@
-import colors from 'vuetify/es5/util/colors'
+import colors from 'vuetify/lib/util/colors'
 
-Vue.use(Vuetify, {
+const vuetify = new Vuetify({
   theme: {
-    primary: colors.purple,
-    secondary: colors.grey.darken1,
-    accent: colors.shades.black,
-    error: colors.red.accent3
+    themes: {
+      light: {
+        primary: colors.purple,
+        secondary: colors.grey.darken1,
+        accent: colors.shades.black,
+        error: colors.red.accent3
+      },
+      dark: {
+        primary: colors.blue.lighten3
+      }
+    }
   }
 })
