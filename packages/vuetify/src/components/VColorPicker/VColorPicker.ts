@@ -40,6 +40,10 @@ export default VSheet.extend({
     dotSize: {
       type: Number,
       default: 10
+    },
+    canvasHeight: {
+      type: Number,
+      default: 150
     }
   },
 
@@ -80,7 +84,9 @@ export default VSheet.extend({
         props: {
           color: this.internalValue,
           disabled: this.disabled,
-          dotSize: this.dotSize
+          dotSize: this.dotSize,
+          width: this.width,
+          height: this.canvasHeight
         },
         on: {
           'update:color': this.updateColor

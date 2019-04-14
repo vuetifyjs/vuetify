@@ -1,12 +1,15 @@
 // Styles
 import './VColorPickerCanvas.sass'
 
+// Mixins
+import Measurable from '../../mixins/measurable'
+
 // Helpers
 import { clamp, convertToUnit, throttle } from '../../util/helpers'
 import { fromHsva, VColorPickerColor } from './util'
 
 // Types
-import Vue, { VNode } from 'vue'
+import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
 function renderHsv (canvas: HTMLCanvasElement, hue: number) {
@@ -27,7 +30,7 @@ function renderHsv (canvas: HTMLCanvasElement, hue: number) {
   ctx.fillRect(0, 0, canvas.width, canvas.height)
 }
 
-export default Vue.extend({
+export default Measurable.extend({
   name: 'v-color-picker-canvas',
 
   props: {
@@ -170,7 +173,8 @@ export default Vue.extend({
       on: {
         click: this.handleClick,
         mousedown: this.handleMouseDown
-      }
+      },
+      style: this.measurableStyles
     }, [
       this.genCanvas(),
       this.genDot()
