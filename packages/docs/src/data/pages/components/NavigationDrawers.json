@@ -41,7 +41,8 @@
             "nested",
             "right",
             "background",
-            "bottom-drawer"
+            "bottom-drawer",
+            "open-on-hover"
           ]
         }
       ]

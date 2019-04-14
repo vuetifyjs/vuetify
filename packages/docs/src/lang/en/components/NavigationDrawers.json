@@ -49,6 +49,10 @@
     "bottom-drawer": {
       "header": "### Bottom drawer",
       "desc": "Bottom drawers change the position of the drawer from the left or right to the bottom of the page.."
+    },
+    "open-on-hover": {
+      "header": "### Open on hover",
+      "desc": "Places the component in **mini-variant** mode and expands once hovered. Does not alter the content area."
     }
   },
   "props": {
