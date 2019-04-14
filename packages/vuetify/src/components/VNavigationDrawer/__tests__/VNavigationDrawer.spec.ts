@@ -350,7 +350,7 @@ describe('VNavigationDrawer', () => {
   it('should activate and expand on hover', () => {
     const wrapper = mountFunction({
       propsData: {
-        openOnHover: true
+        expandOnHover: true
       }
     })
 
