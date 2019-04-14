@@ -1,6 +1,6 @@
 import { Application } from '../../../services/application'
 import VNavigationDrawer from '../VNavigationDrawer'
-import { resizeWindow } from '../../../../test'
+import { resizeWindow, touch } from '../../../../test'
 
 import {
   mount,
