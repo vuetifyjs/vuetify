@@ -36,6 +36,10 @@ export default VSheet.extend({
     width: {
       type: [Number, String],
       default: 300
+    },
+    dotSize: {
+      type: Number,
+      default: 10
     }
   },
 
@@ -75,7 +79,8 @@ export default VSheet.extend({
       return this.$createElement(VColorPickerCanvas, {
         props: {
           color: this.internalValue,
-          disabled: this.disabled
+          disabled: this.disabled,
+          dotSize: this.dotSize
         },
         on: {
           'update:color': this.updateColor
