@@ -177,7 +177,7 @@ To get started with Vuetify, you can follow one of these simple set-up instructi
 
 #### One Click Quick-start
 
-Looking to dive right in with zero setup and downtime? Check out our [CodePen.io One Minute Quickstart](http://template.vuetifyjs.com/)
+Looking to dive right in with zero setup and downtime? Check out our [CodePen.io One Minute Quickstart](https://template.vuetifyjs.com/)
 
 #### Vue CLI-3 Installation
 
