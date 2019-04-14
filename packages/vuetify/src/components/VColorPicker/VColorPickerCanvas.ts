@@ -12,24 +12,6 @@ import { fromHsva, VColorPickerColor } from './util'
 import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
-function renderHsv (canvas: HTMLCanvasElement, hue: number) {
-  const ctx = canvas.getContext('2d')
-
-  if (!ctx) return
-
-  const saturationGradient = ctx.createLinearGradient(0, 0, canvas.width, 0)
-  saturationGradient.addColorStop(0, 'white')
-  saturationGradient.addColorStop(1, `hsla(${hue}, 100%, 50%, 1)`)
-  ctx.fillStyle = saturationGradient
-  ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-  const valueGradient = ctx.createLinearGradient(0, 0, 0, canvas.height)
-  valueGradient.addColorStop(0, 'transparent')
-  valueGradient.addColorStop(1, 'black')
-  ctx.fillStyle = valueGradient
-  ctx.fillRect(0, 0, canvas.width, canvas.height)
-}
-
 export default Measurable.extend({
   name: 'v-color-picker-canvas',
 
@@ -82,12 +64,11 @@ export default Measurable.extend({
     }
   },
 
-  mounted () {
+  async mounted () {
     this.updateBoundingRect()
 
-    this.$nextTick(() => {
-      this.updateCanvas()
-    })
+    await this.$nextTick()
+    this.updateCanvas()
   },
 
   methods: {
@@ -111,7 +92,22 @@ export default Measurable.extend({
       })
     },
     updateCanvas () {
-      renderHsv(this.$refs.canvas as HTMLCanvasElement, this.internalValue.hue)
+      const canvas = this.$refs.canvas as HTMLCanvasElement
+      const ctx = canvas.getContext('2d')
+
+      if (!ctx) return
+
+      const saturationGradient = ctx.createLinearGradient(0, 0, canvas.width, 0)
+      saturationGradient.addColorStop(0, 'white')
+      saturationGradient.addColorStop(1, `hsla(${this.internalValue.hue}, 100%, 50%, 1)`)
+      ctx.fillStyle = saturationGradient
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+      const valueGradient = ctx.createLinearGradient(0, 0, 0, canvas.height)
+      valueGradient.addColorStop(0, 'transparent')
+      valueGradient.addColorStop(1, 'black')
+      ctx.fillStyle = valueGradient
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
     },
     updateBoundingRect () {
       this.boundingRect = this.$el.getBoundingClientRect()
@@ -124,10 +120,10 @@ export default Measurable.extend({
       this.updateInternalValue(x, y)
     },
     handleMouseDown (e: MouseEvent) {
-      if (this.disabled) return
-
       // To prevent selection while moving cursor
       e.preventDefault()
+
+      if (this.disabled) return
 
       this.updateBoundingRect()
       window.addEventListener('mousemove', this.handleMouseMove)
@@ -144,7 +140,7 @@ export default Measurable.extend({
       // @ts-ignore
       this.updateInternalValue(x, y)
     }, 25),
-    handleMouseUp (e: MouseEvent) {
+    handleMouseUp () {
       window.removeEventListener('mousemove', this.handleMouseMove)
       window.removeEventListener('mouseup', this.handleMouseUp)
     },
@@ -160,14 +156,14 @@ export default Measurable.extend({
     genDot (): VNode {
       return this.$createElement('div', {
         staticClass: 'v-color-picker__canvas-dot',
+        class: {
+          'v-color-picker__canvas-dot--disabled': this.disabled
+        },
         style: {
           width: convertToUnit(this.dotSize),
           height: convertToUnit(this.dotSize),
-          top: convertToUnit(this.dotPosition[1] - (this.dotSize / 2)),
-          left: convertToUnit(this.dotPosition[0] - (this.dotSize / 2))
-        },
-        class: {
-          'v-color-picker__canvas-dot--disabled': this.disabled
+          left: convertToUnit(this.dotPosition[0] - (this.dotSize / 2)),
+          top: convertToUnit(this.dotPosition[1] - (this.dotSize / 2))
         }
       })
     }
@@ -176,11 +172,11 @@ export default Measurable.extend({
   render (h): VNode {
     return h('div', {
       staticClass: 'v-color-picker__canvas',
+      style: this.measurableStyles,
       on: {
         click: this.handleClick,
         mousedown: this.handleMouseDown
-      },
-      style: this.measurableStyles
+      }
     }, [
       this.genCanvas(),
       this.genDot()
