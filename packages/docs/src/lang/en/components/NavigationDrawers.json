@@ -57,9 +57,11 @@
   },
   "props": {
     "absolute": "Mixins.Positionable.props.absolute",
+    "bottom": "Expands from the bottom of the screen on mobile devices",
     "clipped": "A clipped drawer rests under the application toolbar",
     "disableResizeWatcher": "Will automatically open/close drawer when resized depending if mobile or desktop.",
     "disableRouteWatcher": "Disables opening of navigation drawer when route changes",
+    "expandOnHover": "Collapses the drawer to a **mini-variant** until hovering with the mouse",
     "fixed": "Mixins.Positionable.props.fixed",
     "floating": "A floating drawer has no visible container (no border-right)",
     "hideOverlay": "Hide the display of the overlay",
@@ -67,6 +69,7 @@
     "miniVariant": "Condenses navigation drawer width, also accepts the **.sync** modifier. With this, the drawer will re-open when clicking it",
     "permanent": "The drawer remains visible regardless of screen size",
     "right": "Places the navigation drawer on the right",
+    "src": "Components.Toolbars.props.src",
     "stateless": "Remove all automated state functionality (resize, mobile, route) and manually control the drawer state",
     "temporary": "A temporary drawer sits above its application and uses a scrim (overlay) to darken the background",
     "touchless": "Disable mobile touch functionality"

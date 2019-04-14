@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-navigation-drawer
-      open-on-hover
+      expand-on-hover
     >
       <template v-slot:prepend>
         <v-list>

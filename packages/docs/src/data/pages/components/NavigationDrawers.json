@@ -42,7 +42,7 @@
             "right",
             "background",
             "bottom-drawer",
-            "open-on-hover"
+            "expand-on-hover"
           ]
         }
       ]

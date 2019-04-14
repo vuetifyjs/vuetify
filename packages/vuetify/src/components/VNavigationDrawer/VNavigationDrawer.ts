@@ -30,7 +30,7 @@ const baseMixins = mixins(
     'isActive',
     'isMobile',
     'miniVariant',
-    'openOnHover',
+    'expandOnHover',
     'permanent',
     'right',
     'temporary',
@@ -75,7 +75,7 @@ export default baseMixins.extend({
       default: 1264
     },
     permanent: Boolean,
-    openOnHover: Boolean,
+    expandOnHover: Boolean,
     right: Boolean,
     src: {
       type: [String, Object],
@@ -119,9 +119,9 @@ export default baseMixins.extend({
         'v-navigation-drawer--floating': this.floating,
         'v-navigation-drawer--is-mobile': this.isMobile,
         'v-navigation-drawer--is-mouseover': this.isMouseover,
-        'v-navigation-drawer--mini-variant': this.miniVariant || (this.openOnHover && !this.isMouseover),
+        'v-navigation-drawer--mini-variant': this.miniVariant || (this.expandOnHover && !this.isMouseover),
         'v-navigation-drawer--open': this.isActive,
-        'v-navigation-drawer--open-on-hover': this.openOnHover,
+        'v-navigation-drawer--open-on-hover': this.expandOnHover,
         'v-navigation-drawer--right': this.right,
         'v-navigation-drawer--temporary': this.temporary,
         ...this.themeClasses
@@ -158,7 +158,7 @@ export default baseMixins.extend({
     },
     computedWidth (): string | number {
       if (
-        (this.openOnHover && !this.isMouseover) ||
+        (this.expandOnHover && !this.isMouseover) ||
         this.miniVariant
       ) return this.miniVariantWidth
 
@@ -344,7 +344,7 @@ export default baseMixins.extend({
         on.click = () => this.$emit('update:miniVariant', false)
       }
 
-      if (this.openOnHover) {
+      if (this.expandOnHover) {
         on.mouseenter = () => (this.isMouseover = true)
         on.mouseleave = () => (this.isMouseover = false)
       }
