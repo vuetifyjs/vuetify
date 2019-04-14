@@ -1,3 +1,6 @@
+// Styles
+import './VColorPickerPreview.sass'
+
 // Components
 import VSlider from '../VSlider/VSlider'
 

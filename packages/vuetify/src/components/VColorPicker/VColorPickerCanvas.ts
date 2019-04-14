@@ -1,3 +1,6 @@
+// Styles
+import './VColorPickerCanvas.sass'
+
 // Helpers
 import { clamp, convertToUnit, throttle } from '../../util/helpers'
 import { fromHsva, VColorPickerColor } from './util'

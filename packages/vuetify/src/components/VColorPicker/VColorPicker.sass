@@ -1,5 +1,4 @@
 @import '../../styles/styles.sass'
-@import './_variables.scss'
 
 +theme(v-color-picker) using ($material)
   .v-color-picker__input input
@@ -13,114 +12,15 @@
 .v-color-picker
   +elevation(2)
 
-  &--flat
-    +elevation(0)
-
-  .v-input__slider
-    border-radius: 5px
-
-    .v-slider
-      margin: 0
-
 // Element
-.v-color-picker__alpha:not(.v-input--is-disabled)
-  .v-slider
-    border-radius: 5px
-    background: $checkerboard
-
-.v-color-picker__color
-  display: flex
-  flex: 1 0 auto
-  flex-direction: column
-
 .v-color-picker__controls
   display: flex
   flex-direction: column
   padding: 16px
 
-.v-color-picker__dot
-  position: relative
-  height: 30px
-  margin-right: 24px
-  width: 30px
-
-.v-color-picker__dot-foreground
-  border-radius: 50%
-  position: absolute
-  top: 0
-  left: 0
-  width: 100%
-  height: 100%
-
-.v-color-picker__dot-background
-  border-radius: 50%
-  width: 100%
-  height: 100%
-  background: $checkerboard
-
-.v-color-picker__edit
-  margin-top: 24px
-  display: flex
-
-.v-color-picker__hue
-  margin-bottom: 24px
-
-  &:not(.v-input--is-disabled)
-    background: linear-gradient(to right, #F00 0%, #FF0 16.66%, #0F0 33.33%, #0FF 50%, #00F 66.66%, #F0F 83.33%, #F00 100%)
-
-.v-color-picker__input
-  width: 100%
-  display: flex
-  flex-wrap: wrap
-  justify-content: center
-  text-align: center
-
-  &:not(:last-child)
-    margin-right: 8px
-
-  input
-    border-radius: 4px
-    margin-bottom: 8px
-    min-width: 0
-    outline: none
-    text-align: center
-    width: 100%
-    height: 28px
-
-.v-color-picker__preview
-  align-items: center
-  display: flex
-
-.v-color-picker__canvas
-  position: relative
-  overflow: hidden
-  height: 150px
-
-.v-color-picker__canvas-dot
-  position: absolute
-  width: 15px
-  height: 15px
-  background: transparent
-  border-radius: 50%
-  box-shadow: 0px 0px 0px 1.5px rgba(255,255,255,1), inset 0px 0px 1px 1.5px rgba(0,0,0,0.3)
-
-  &--disabled
-    box-shadow: 0px 0px 0px 1.5px rgba(255,255,255,0.7), inset 0px 0px 1px 1.5px rgba(0,0,0,0.3)
-
-.v-color-picker__track
-  position: relative
-  width: 100%
-
-  .v-slider
-    min-height: 10px
-
-  &:not(.v-input--is-disabled)
-    .v-slider__thumb
-      +elevation(3)
-
-    .v-slider__track-container
-      opacity: 0
-
+// Modifier
 .v-color-picker--flat
+  +elevation(0)
+
   .v-color-picker__track:not(.v-input--is-disabled) .v-slider__thumb // High specifity
     +elevation(0)
