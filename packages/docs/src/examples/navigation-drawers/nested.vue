@@ -45,7 +45,9 @@
           >
             <template v-slot:activator>
               <v-list-item>
-                <v-list-item-title>Admin</v-list-item-title>
+                <v-list-item-content>
+                  <v-list-item-title>Admin</v-list-item-title>
+                </v-list-item-content>
               </v-list-item>
             </template>
 
@@ -67,7 +69,9 @@
           >
             <template v-slot:activator>
               <v-list-item>
-                <v-list-item-title>Actions</v-list-item-title>
+                <v-list-item-content>
+                  <v-list-item-title>Actions</v-list-item-title>
+                </v-list-item-content>
               </v-list-item>
             </template>
             <v-list-item
