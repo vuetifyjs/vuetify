@@ -73,6 +73,12 @@ export default Measurable.extend({
     },
     internalValue (v: VColorPickerColor) {
       this.$emit('update:color', v)
+    },
+    async measurableStyles () {
+      await this.$nextTick()
+      this.updateBoundingRect()
+      await this.$nextTick()
+      this.updateCanvas()
     }
   },
 
