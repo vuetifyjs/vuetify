@@ -21,7 +21,7 @@ import Touch, { TouchWrapper } from '../../directives/touch'
 import { convertToUnit, getSlot } from '../../util/helpers'
 import mixins from '../../util/mixins'
 
-// TYpes
+// Types
 import { VNode, VNodeDirective } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
@@ -92,7 +92,6 @@ export default baseMixins.extend({
   },
 
   data: () => ({
-    isActive: false,
     isMouseover: false,
     touchArea: {
       left: 0,
@@ -165,8 +164,10 @@ export default baseMixins.extend({
       return this.width
     },
     hasApp (): boolean {
-      return this.app &&
+      return (
+        this.app &&
         (!this.isMobile && !this.temporary)
+      )
     },
     isBottom (): boolean {
       return this.bottom && this.isMobile
@@ -179,28 +180,36 @@ export default baseMixins.extend({
       )
     },
     reactsToClick (): boolean {
-      return !this.stateless &&
-        !this.permanent &&
-        (this.isMobile || this.temporary)
-    },
-    reactsToMobile (): boolean {
-      return this.app &&
-        !this.disableResizeWatcher &&
+      return (
         !this.stateless &&
         !this.permanent &&
+        (this.isMobile || this.temporary)
+      )
+    },
+    reactsToMobile (): boolean {
+      return (
+        this.app &&
+        !this.disableResizeWatcher &&
+        !this.permanent &&
+        !this.stateless &&
         !this.temporary
+      )
     },
     reactsToResize (): boolean {
       return !this.disableResizeWatcher && !this.stateless
     },
     reactsToRoute (): boolean {
-      return !this.disableRouteWatcher &&
+      return (
+        !this.disableRouteWatcher &&
         !this.stateless &&
         (this.temporary || this.isMobile)
+      )
     },
     showOverlay (): boolean {
-      return this.isActive &&
+      return (
+        this.isActive &&
         (this.isMobile || this.temporary)
+      )
     },
     styles (): object {
       const translate = this.isBottom ? 'translateY' : 'translateX'
@@ -281,13 +290,7 @@ export default baseMixins.extend({
       return this.isActive && this.reactsToClick
     },
     genAppend () {
-      const slot = getSlot(this, 'append')
-
-      if (!slot) return slot
-
-      return this.$createElement('div', {
-        staticClass: 'v-navigation-drawer__append'
-      }, slot)
+      return this.genPosition('append')
     },
     genBackground () {
       const props = {
@@ -351,14 +354,17 @@ export default baseMixins.extend({
 
       return on
     },
-    genPrepend () {
-      const slot = getSlot(this, 'prepend')
+    genPosition (name: 'prepend' | 'append') {
+      const slot = getSlot(this, name)
 
       if (!slot) return slot
 
       return this.$createElement('div', {
-        staticClass: 'v-navigation-drawer__prepend'
+        staticClass: `v-navigation-drawer__${name}`
       }, slot)
+    },
+    genPrepend () {
+      return this.genPosition('prepend')
     },
     genContent () {
       return this.$createElement('div', {
@@ -370,10 +376,6 @@ export default baseMixins.extend({
         staticClass: 'v-navigation-drawer__border'
       })
     },
-    /**
-     * Sets state before mount to avoid
-     * entry transitions in SSR
-     */
     init () {
       if (this.permanent) {
         this.isActive = true
@@ -416,8 +418,8 @@ export default baseMixins.extend({
     updateApplication () {
       if (
         !this.isActive ||
-        this.temporary ||
         this.isMobile ||
+        this.temporary ||
         !this.$el
       ) return 0
 
@@ -435,7 +437,7 @@ export default baseMixins.extend({
       this.genBorder()
     ]
 
-    if (this.src || this.$scopedSlots.img) children.unshift(this.genBackground())
+    if (this.src || getSlot(this, 'img')) children.unshift(this.genBackground())
 
     return h('aside', this.setBackgroundColor(this.color, {
       class: this.classes,
