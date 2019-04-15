@@ -13,7 +13,7 @@
     border-radius: 5px
     background: $checkerboard
 
-.v-color-picker__color
+.v-color-picker__sliders
   display: flex
   flex: 1 0 auto
   flex-direction: column
@@ -23,20 +23,13 @@
   height: 30px
   margin-right: 24px
   width: 30px
-
-.v-color-picker__dot-foreground
-  border-radius: 50%
-  position: absolute
-  top: 0
-  left: 0
-  width: 100%
-  height: 100%
-
-.v-color-picker__dot-background
-  border-radius: 50%
-  width: 100%
-  height: 100%
   background: $checkerboard
+  border-radius: 50%
+  overflow: hidden
+
+  > div
+    width: 100%
+    height: 100%
 
 .v-color-picker__hue
   margin-bottom: 24px

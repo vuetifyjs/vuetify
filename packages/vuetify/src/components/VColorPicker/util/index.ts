@@ -25,12 +25,12 @@ export interface VColorPickerColor {
   rgba: RGBA
 }
 
-export function fromHsva (hsva: HSVA) {
+export function fromHSVA (hsva: HSVA) {
   hsva = { ...hsva }
   const hexa = HSVAtoHex(hsva)
   return {
     alpha: hsva.a,
-    hex: hexa.substr(0, 6),
+    hex: hexa.substr(0, 7),
     hexa,
     hsla: HSVAtoHSLA(hsva),
     hsva,
@@ -39,12 +39,12 @@ export function fromHsva (hsva: HSVA) {
   }
 }
 
-export function fromHsla (hsla: HSLA) {
+export function fromHSLA (hsla: HSLA) {
   const hsva = HSLAtoHSVA(hsla)
   const hexa = HSVAtoHex(hsva)
   return {
     alpha: hsva.a,
-    hex: hexa.substr(0, 6),
+    hex: hexa.substr(0, 7),
     hexa,
     hsla,
     hsva,
@@ -53,12 +53,12 @@ export function fromHsla (hsla: HSLA) {
   }
 }
 
-export function fromRgba (rgba: RGBA) {
+export function fromRGBA (rgba: RGBA) {
   const hsva = RGBAtoHSVA(rgba)
   const hexa = RGBAtoHex(rgba)
   return {
     alpha: hsva.a,
-    hex: hexa.substr(0, 6),
+    hex: hexa.substr(0, 7),
     hexa,
     hsla: HSVAtoHSLA(hsva),
     hsva,
@@ -71,7 +71,7 @@ export function fromHexa (hexa: Hexa) {
   const hsva = HexToHSVA(hexa)
   return {
     alpha: hsva.a,
-    hex: hexa.substr(0, 6),
+    hex: hexa.substr(0, 7),
     hexa,
     hsla: HSVAtoHSLA(hsva),
     hsva,
@@ -80,12 +80,16 @@ export function fromHexa (hexa: Hexa) {
   }
 }
 
+export function fromHex (hex: Hex) {
+  return fromHexa(parseHex(hex))
+}
+
 function has (obj: object, key: string[]) {
   return key.every(k => obj.hasOwnProperty(k))
 }
 
 export function parseColor (color: any) {
-  if (!color) return fromRgba({ r: 255, g: 0, b: 0, a: 1 })
+  if (!color) return fromRGBA({ r: 255, g: 0, b: 0, a: 1 })
 
   if (typeof color === 'string') {
     return fromHexa(parseHex(color))
@@ -97,13 +101,13 @@ export function parseColor (color: any) {
     const a = color.hasOwnProperty('a') ? parseFloat(color.a) : 1
 
     if (has(color, ['r', 'g', 'b'])) {
-      return fromRgba({ ...color, a })
+      return fromRGBA({ ...color, a })
     } else if (has(color, ['h', 's', 'l'])) {
-      return fromHsla({ ...color, a })
+      return fromHSLA({ ...color, a })
     } else if (has(color, ['h', 's', 'v'])) {
-      return fromHsva({ ...color, a })
+      return fromHSVA({ ...color, a })
     }
   }
 
-  return fromRgba({ r: 255, g: 0, b: 0, a: 1 })
+  return fromRGBA({ r: 255, g: 0, b: 0, a: 1 })
 }

@@ -137,16 +137,16 @@ export function RGBAtoHex (rgba: RGBA): Hex {
     return ('00'.substr(0, 2 - h.length) + h).toUpperCase()
   }
 
-  return [
+  return `#${[
     toHex(rgba.r),
     toHex(rgba.g),
     toHex(rgba.b),
     toHex(Math.round(rgba.a * 255))
-  ].join('')
+  ].join('')}`
 }
 
 export function HexToRGBA (hex: Hex): RGBA {
-  const rgba = chunk(hex, 2).map(c => parseInt(c, 16))
+  const rgba = chunk(hex.slice(1), 2).map((c: string) => parseInt(c, 16))
 
   return {
     r: rgba[0],
@@ -177,8 +177,10 @@ export function parseHex (hex: string): Hex {
   }
 
   if (hex.length === 6) {
-    return padEnd(hex, 8, 'F')
+    hex = padEnd(hex, 8, 'F')
   } else {
-    return padEnd(padEnd(hex, 6), 8, 'F')
+    hex = padEnd(padEnd(hex, 6), 8, 'F')
   }
+
+  return `#${hex}`.toUpperCase()
 }

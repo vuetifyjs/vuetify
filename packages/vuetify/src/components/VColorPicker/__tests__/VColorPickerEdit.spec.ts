@@ -4,7 +4,7 @@ import {
   MountOptions,
   Wrapper
 } from '@vue/test-utils'
-import { fromRgba } from '../util'
+import { fromRGBA } from '../util'
 
 describe('VColorPickerEdit.ts', () => {
   type Instance = InstanceType<typeof VColorPickerEdit>
@@ -19,7 +19,7 @@ describe('VColorPickerEdit.ts', () => {
     const update = jest.fn()
     const wrapper = mountFunction({
       propsData: {
-        color: fromRgba({ r: 0, g: 0, b: 0, a: 0 }),
+        color: fromRGBA({ r: 0, g: 0, b: 0, a: 0 }),
         mode: 'hexa'
       },
       listeners: {
@@ -39,7 +39,7 @@ describe('VColorPickerEdit.ts', () => {
     const update = jest.fn()
     const wrapper = mountFunction({
       propsData: {
-        color: fromRgba({ r: 0, g: 0, b: 0, a: 0 }),
+        color: fromRGBA({ r: 0, g: 0, b: 0, a: 0 }),
         mode: 'rgba'
       },
       listeners: {
@@ -64,7 +64,7 @@ describe('VColorPickerEdit.ts', () => {
     const update = jest.fn()
     const wrapper = mountFunction({
       propsData: {
-        color: fromRgba({ r: 0, g: 0, b: 0, a: 0 }),
+        color: fromRGBA({ r: 0, g: 0, b: 0, a: 0 }),
         mode: 'hsla'
       },
       listeners: {
@@ -88,7 +88,7 @@ describe('VColorPickerEdit.ts', () => {
   it('should render with disabled', () => {
     const wrapper = mountFunction({
       propsData: {
-        color: fromRgba({ r: 0, g: 0, b: 0, a: 0 }),
+        color: fromRGBA({ r: 0, g: 0, b: 0, a: 0 }),
         mode: 'rgba',
         disabled: true
       }
@@ -100,7 +100,7 @@ describe('VColorPickerEdit.ts', () => {
   it('should change mode', () => {
     const wrapper = mountFunction({
       propsData: {
-        color: fromRgba({ r: 0, g: 0, b: 0, a: 0 }),
+        color: fromRGBA({ r: 0, g: 0, b: 0, a: 0 }),
         mode: 'hexa'
       }
     })
@@ -125,7 +125,7 @@ describe('VColorPickerEdit.ts', () => {
   it('should hide mode switch button', () => {
     const wrapper = mountFunction({
       propsData: {
-        color: fromRgba({ r: 0, g: 0, b: 0, a: 0 }),
+        color: fromRGBA({ r: 0, g: 0, b: 0, a: 0 }),
         mode: 'rgba',
         hideModeSwitch: true
       }

@@ -2,8 +2,8 @@ import { parseColor } from '../'
 
 const red = {
   alpha: 1,
-  hex: 'FF0000',
-  hexa: 'FF0000FF',
+  hex: '#FF0000',
+  hexa: '#FF0000FF',
   hsla: { h: 0, s: 1, l: 0.5, a: 1 },
   hsva: { h: 0, s: 1, v: 1, a: 1 },
   hue: 0,
@@ -17,13 +17,13 @@ describe('VColorPicker/util/parseColor', () => {
   })
 
   it('should parse hex string', () => {
-    expect(parseColor('#FF00FF').hexa).toEqual('FF00FFFF')
-    expect(parseColor('FF00FF05').hexa).toEqual('FF00FF05')
+    expect(parseColor('#FF00FF').hexa).toEqual('#FF00FFFF')
+    expect(parseColor('FF00FF05').hexa).toEqual('#FF00FF05')
   })
 
   it('should try to parse color if invalid hex string passed', () => {
-    expect(parseColor('#00gi').hex).toEqual('00FF00')
-    expect(parseColor('#00gi').hexa).toEqual('00FF00FF')
+    expect(parseColor('#00gi').hex).toEqual('#00FF00')
+    expect(parseColor('#00gi').hexa).toEqual('#00FF00FF')
   })
 
   it('should parse rgb object', () => {

@@ -10,7 +10,7 @@ import { RGBtoCSS, RGBAtoCSS } from '../../util/colorUtils'
 // Types
 import Vue, { VNode, VNodeData } from 'vue'
 import { PropValidator } from 'vue/types/options'
-import { VColorPickerColor, fromHsva } from './util'
+import { VColorPickerColor, fromHSVA } from './util'
 
 export default Vue.extend({
   name: 'v-color-picker-preview',
@@ -38,13 +38,13 @@ export default Vue.extend({
             : undefined
         },
         on: {
-          input: (val: number) => this.color.alpha !== val && this.$emit('update:color', fromHsva({ ...this.color.hsva, a: val }))
+          input: (val: number) => this.color.alpha !== val && this.$emit('update:color', fromHSVA({ ...this.color.hsva, a: val }))
         }
       })
     },
-    genColor (): VNode {
+    genSliders (): VNode {
       return this.$createElement('div', {
-        staticClass: 'v-color-picker__color'
+        staticClass: 'v-color-picker__sliders'
       }, [
         this.genHue(),
         this.genAlpha()
@@ -55,10 +55,6 @@ export default Vue.extend({
         staticClass: 'v-color-picker__dot'
       }, [
         this.$createElement('div', {
-          staticClass: 'v-color-picker__dot-background'
-        }),
-        this.$createElement('div', {
-          staticClass: 'v-color-picker__dot-foreground',
           style: {
             background: RGBAtoCSS(this.color.rgba)
           }
@@ -77,7 +73,7 @@ export default Vue.extend({
           max: 360
         },
         on: {
-          input: (val: number) => this.color.hue !== val && this.$emit('update:color', fromHsva({ ...this.color.hsva, h: val }))
+          input: (val: number) => this.color.hue !== val && this.$emit('update:color', fromHSVA({ ...this.color.hsva, h: val }))
         }
       })
     },
@@ -98,7 +94,7 @@ export default Vue.extend({
       staticClass: 'v-color-picker__preview'
     }, [
       this.genDot(),
-      this.genColor()
+      this.genSliders()
     ])
   }
 })

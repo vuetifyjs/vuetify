@@ -11,7 +11,7 @@ import { parseHex } from '../../util/colorUtils'
 // Types
 import Vue, { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
-import { VColorPickerColor, fromRgba, fromHexa, fromHsla } from './util'
+import { VColorPickerColor, fromRGBA, fromHexa, fromHSLA } from './util'
 
 type Input = [string, number, string]
 
@@ -28,7 +28,7 @@ export const modes = {
       ['b', 255, 'int'],
       ['a', 1, 'float']
     ],
-    from: fromRgba
+    from: fromRGBA
   },
   hsla: {
     inputs: [
@@ -37,7 +37,7 @@ export const modes = {
       ['l', 1, 'float'],
       ['a', 1, 'float']
     ],
-    from: fromHsla
+    from: fromHSLA
   },
   hexa: {
     from: fromHexa
@@ -118,14 +118,14 @@ export default Vue.extend({
       switch (this.internalMode) {
         case 'hexa': {
           const hex = this.color.hexa
-          const value = hex.endsWith('FF') ? hex.substr(0, 6) : hex
+          const value = hex.endsWith('FF') ? hex.substr(0, 7) : hex
           return this.genInput(
             'hex',
             {
               maxlength: 9,
               disabled: this.disabled
             },
-            `#${value}`,
+            value,
             {
               change: (e: Event) => {
                 const el = e.target as HTMLInputElement

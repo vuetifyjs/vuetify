@@ -1,27 +1,35 @@
 // Styles
 import './VColorPickerCanvas.sass'
 
-// Mixins
-import Measurable from '../../mixins/measurable'
-
 // Helpers
 import { clamp, convertToUnit, throttle } from '../../util/helpers'
-import { fromHsva, VColorPickerColor } from './util'
+import { fromHSVA, VColorPickerColor, fromRGBA } from './util'
 
 // Types
-import { VNode } from 'vue'
+import Vue, { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
-export default Measurable.extend({
+export default Vue.extend({
   name: 'v-color-picker-canvas',
 
   props: {
-    color: Object as PropValidator<VColorPickerColor>,
+    color: {
+      type: Object,
+      default: () => fromRGBA({ r: 255, g: 0, b: 0, a: 1 })
+    } as PropValidator<VColorPickerColor>,
+    disabled: Boolean,
     dotSize: {
       type: Number,
       default: 10
     },
-    disabled: Boolean
+    height: {
+      type: [Number, String],
+      default: 150
+    },
+    width: {
+      type: [Number, String],
+      default: 300
+    }
   },
 
   data () {
@@ -31,67 +39,45 @@ export default Measurable.extend({
         height: 0,
         left: 0,
         top: 0
-      } as ClientRect,
-      dotX: 0,
-      dotY: 0,
-      dragging: false,
-      internalValue: this.color
+      } as ClientRect
     }
   },
 
   computed: {
-    dotPosition (): [number, number] {
-      return [
-        this.internalValue.hsva.s * this.boundingRect.width,
-        (1 - this.internalValue.hsva.v) * this.boundingRect.height
-      ]
+    dot (): { x: number, y: number} {
+      if (!this.color) return { x: 0, y: 0 }
+
+      return {
+        x: this.color.hsva.s * parseInt(this.width, 10),
+        y: (1 - this.color.hsva.v) * parseInt(this.height, 10)
+      }
     }
   },
 
   watch: {
     color (v: VColorPickerColor) {
-      this.internalValue = v
-      this.updateCanvas()
-    },
-    internalValue (v: VColorPickerColor) {
-      this.$emit('update:color', v)
-    },
-    async measurableStyles () {
-      await this.$nextTick()
-      this.updateBoundingRect()
-      await this.$nextTick()
       this.updateCanvas()
     }
   },
 
-  async mounted () {
-    this.updateBoundingRect()
-
-    await this.$nextTick()
+  mounted () {
     this.updateCanvas()
   },
 
   methods: {
-    getLocalPosition (x: number, y: number): number[] {
-      return [
-        clamp(x - this.boundingRect.left, 0, this.boundingRect.width),
-        clamp(y - this.boundingRect.top, 0, this.boundingRect.height)
-      ]
-    },
-    updateInternalValue (x: number, y: number) {
-      const [s, v] = [
-        x / this.boundingRect.width,
-        1 - y / this.boundingRect.height
-      ]
+    emitColor (x: number, y: number) {
+      const { left, top, width, height } = this.boundingRect
 
-      this.internalValue = fromHsva({
-        h: this.internalValue.hue,
-        s,
-        v,
-        a: this.internalValue.alpha
-      })
+      this.$emit('update:color', fromHSVA({
+        h: this.color.hue,
+        s: clamp(x - left, 0, width) / width,
+        v: 1 - clamp(y - top, 0, height) / height,
+        a: this.color.alpha
+      }))
     },
     updateCanvas () {
+      if (!this.color) return
+
       const canvas = this.$refs.canvas as HTMLCanvasElement
       const ctx = canvas.getContext('2d')
 
@@ -99,7 +85,7 @@ export default Measurable.extend({
 
       const saturationGradient = ctx.createLinearGradient(0, 0, canvas.width, 0)
       saturationGradient.addColorStop(0, 'white')
-      saturationGradient.addColorStop(1, `hsla(${this.internalValue.hue}, 100%, 50%, 1)`)
+      saturationGradient.addColorStop(1, `hsla(${this.color.hue}, 100%, 50%, 1)`)
       ctx.fillStyle = saturationGradient
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
@@ -109,15 +95,11 @@ export default Measurable.extend({
       ctx.fillStyle = valueGradient
       ctx.fillRect(0, 0, canvas.width, canvas.height)
     },
-    updateBoundingRect () {
-      this.boundingRect = this.$el.getBoundingClientRect()
-    },
     handleClick (e: MouseEvent) {
       if (this.disabled) return
 
-      this.updateBoundingRect()
-      const [x, y] = this.getLocalPosition(e.clientX, e.clientY)
-      this.updateInternalValue(x, y)
+      this.boundingRect = this.$el.getBoundingClientRect()
+      this.emitColor(e.clientX, e.clientY)
     },
     handleMouseDown (e: MouseEvent) {
       // To prevent selection while moving cursor
@@ -125,7 +107,8 @@ export default Measurable.extend({
 
       if (this.disabled) return
 
-      this.updateBoundingRect()
+      this.boundingRect = this.$el.getBoundingClientRect()
+
       window.addEventListener('mousemove', this.handleMouseMove)
       window.addEventListener('mouseup', this.handleMouseUp)
     },
@@ -135,10 +118,7 @@ export default Measurable.extend({
       if (this.disabled) return
 
       // @ts-ignore
-      const [x, y] = this.getLocalPosition(e.clientX, e.clientY)
-
-      // @ts-ignore
-      this.updateInternalValue(x, y)
+      this.emitColor(e.clientX, e.clientY)
     }, 25),
     handleMouseUp () {
       window.removeEventListener('mousemove', this.handleMouseMove)
@@ -148,8 +128,8 @@ export default Measurable.extend({
       return this.$createElement('canvas', {
         ref: 'canvas',
         attrs: {
-          width: this.boundingRect.width,
-          height: this.boundingRect.height
+          width: this.width,
+          height: this.height
         }
       })
     },
@@ -162,8 +142,8 @@ export default Measurable.extend({
         style: {
           width: convertToUnit(this.dotSize),
           height: convertToUnit(this.dotSize),
-          left: convertToUnit(this.dotPosition[0] - (this.dotSize / 2)),
-          top: convertToUnit(this.dotPosition[1] - (this.dotSize / 2))
+          left: convertToUnit(this.dot.x - (this.dotSize / 2)),
+          top: convertToUnit(this.dot.y - (this.dotSize / 2))
         }
       })
     }
@@ -172,7 +152,10 @@ export default Measurable.extend({
   render (h): VNode {
     return h('div', {
       staticClass: 'v-color-picker__canvas',
-      style: this.measurableStyles,
+      style: {
+        width: convertToUnit(this.width),
+        height: convertToUnit(this.height)
+      },
       on: {
         click: this.handleClick,
         mousedown: this.handleMouseDown

@@ -8,9 +8,10 @@ import VSheet from '../VSheet/VSheet'
 import VColorPickerPreview from './VColorPickerPreview'
 import VColorPickerCanvas from './VColorPickerCanvas'
 import VColorPickerEdit, { Mode, modes } from './VColorPickerEdit'
+import VColorPickerSwatches from './VColorPickerSwatches'
 
 // Helpers
-import { VColorPickerColor, parseColor, fromRgba } from './util'
+import { VColorPickerColor, parseColor, fromRGBA } from './util'
 
 // Types
 import { VNode } from 'vue'
@@ -20,6 +21,10 @@ export default VSheet.extend({
   name: 'v-color-picker',
 
   props: {
+    canvasHeight: {
+      type: [String, Number],
+      default: 150
+    },
     disabled: Boolean,
     flat: Boolean,
     hideCanvas: Boolean,
@@ -30,6 +35,8 @@ export default VSheet.extend({
       default: 'rgba',
       validator: (v: string) => Object.keys(modes).includes(v)
     },
+    showSwatches: Boolean,
+    swatches: Array as PropValidator<string[][]>,
     value: {
       type: [Object, String]
     } as PropValidator<VColorPickerColor>,
@@ -40,15 +47,11 @@ export default VSheet.extend({
     dotSize: {
       type: Number,
       default: 10
-    },
-    canvasHeight: {
-      type: Number,
-      default: 150
     }
   },
 
   data: () => ({
-    internalValue: fromRgba({ r: 255, g: 0, b: 0, a: 1 })
+    internalValue: fromRGBA({ r: 255, g: 0, b: 0, a: 1 })
   }),
 
   computed: {
@@ -125,6 +128,18 @@ export default VSheet.extend({
           'update:color': this.updateColor
         }
       })
+    },
+    genSwatches (): VNode {
+      return this.$createElement(VColorPickerSwatches, {
+        props: {
+          swatches: this.swatches,
+          color: this.internalValue,
+          height: 150
+        },
+        on: {
+          'update:color': (v: VColorPickerColor) => this.internalValue = v
+        }
+      })
     }
   },
 
@@ -135,7 +150,8 @@ export default VSheet.extend({
       style: this.styles
     }, [
       !this.hideCanvas && this.genCanvas(),
-      this.genControls()
+      this.genControls(),
+      this.showSwatches && this.genSwatches()
     ])
   }
 })
