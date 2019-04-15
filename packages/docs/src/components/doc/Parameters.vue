@@ -90,7 +90,6 @@
 <script>
   // Utilities
   import {
-    mapGetters,
     mapState
   } from 'vuex'
   import { getObjectValueByPath } from 'vuetify/es5/util/helpers'
