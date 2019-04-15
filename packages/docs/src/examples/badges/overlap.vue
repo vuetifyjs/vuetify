@@ -5,11 +5,14 @@
       left
       overlap
     >
-      <v-icon
-        slot="badge"
-        dark
-        small
-      >done</v-icon>
+      <template v-slot:badge>
+        <v-icon
+          dark
+          small
+        >
+          done
+        </v-icon>
+      </template>
       <v-icon
         color="grey lighten-1"
         large
@@ -22,11 +25,14 @@
       overlap
       color="orange"
     >
-      <v-icon
-        slot="badge"
-        dark
-        small
-      >notifications</v-icon>
+      <template v-slot:badge>
+        <v-icon
+          dark
+          small
+        >
+          notifications
+        </v-icon>
+      </template>
       <v-icon
         large
         color="grey darken-1"

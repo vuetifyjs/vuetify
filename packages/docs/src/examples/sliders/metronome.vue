@@ -61,21 +61,23 @@
         min="40"
         max="218"
       >
-        <v-icon
-          slot="prepend"
-          :color="color"
-          @click="decrement"
-        >
-          mdi-minus
-        </v-icon>
+        <template v-slot:prepend>
+          <v-icon
+            :color="color"
+            @click="decrement"
+          >
+            mdi-minus
+          </v-icon>
+        </template>
 
-        <v-icon
-          slot="append"
-          :color="color"
-          @click="increment"
-        >
-          mdi-plus
-        </v-icon>
+        <template v-slot:append>
+          <v-icon
+            :color="color"
+            @click="increment"
+          >
+            mdi-plus
+          </v-icon>
+        </template>
       </v-slider>
     </v-card-text>
   </v-card>

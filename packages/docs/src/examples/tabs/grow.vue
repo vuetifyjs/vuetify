@@ -19,21 +19,22 @@
         <v-icon>more_vert</v-icon>
       </v-btn>
 
-      <v-tabs
-        slot="extension"
-        v-model="tab"
-        color="cyan"
-        grow
-      >
-        <v-tabs-slider color="yellow"></v-tabs-slider>
-
-        <v-tab
-          v-for="item in items"
-          :key="item"
+      <template v-slot:extension>
+        <v-tabs
+          v-model="tab"
+          color="cyan"
+          grow
         >
-          {{ item }}
-        </v-tab>
-      </v-tabs>
+          <v-tabs-slider color="yellow"></v-tabs-slider>
+
+          <v-tab
+            v-for="item in items"
+            :key="item"
+          >
+            {{ item }}
+          </v-tab>
+        </v-tabs>
+      </template>
     </v-toolbar>
 
     <v-tabs-items v-model="tab">

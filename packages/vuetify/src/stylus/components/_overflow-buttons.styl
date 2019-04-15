@@ -6,7 +6,13 @@ v-overflow-btn($material)
   .v-input__slot
     &::before
       background-color: $material.dividers !important // override v-text-field bottom border
-
+  
+  &.v-text-field--outline
+    .v-input__control,
+    .v-input__slot
+      &::before
+        background-color: transparent !important // override v-text-field top border;
+  
   &--segmented,
   &--editable:hover,
   &--editable.v-input--is-focused,

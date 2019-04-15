@@ -1,13 +1,15 @@
 <template>
   <div class="text-xs-center">
     <v-menu offset-y>
-      <v-btn
-        slot="activator"
-        color="primary"
-        dark
-      >
-        Dropdown
-      </v-btn>
+      <template v-slot:activator="{ on }">
+        <v-btn
+          color="primary"
+          dark
+          v-on="on"
+        >
+          Dropdown
+        </v-btn>
+      </template>
       <v-list>
         <v-list-tile
           v-for="(item, index) in items"

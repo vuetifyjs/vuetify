@@ -13,7 +13,7 @@
     },
     "iconAndText": {
       "header": "아이콘과 텍스트 (Icon and Text)",
-      "desc": "아바타 컴포넌트는 이미지 대신 `v-icon` 컴포넌트와 텍스트도 사용할 수 있습니다. Mix and match functionality to create something unique."
+      "desc": "아바타 컴포넌트는 이미지 대신 `v-icon` 컴포넌트와 텍스트도 사용할 수 있습니다. 기능들을 조합하여 독특한 것을 만들 수 있습니다."
     }
   }
 }

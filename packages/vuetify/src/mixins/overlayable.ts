@@ -2,7 +2,7 @@
 import '../stylus/components/_overlay.styl'
 
 // Utilities
-import { keyCodes } from '../util/helpers'
+import { keyCodes, addPassiveEventListener } from '../util/helpers'
 
 // Types
 import Vue from 'vue'
@@ -161,7 +161,7 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
     },
     checkPath (e: WheelEvent) {
       const path = e.path || this.composedPath(e)
-      const delta = e.deltaY || -e.wheelDelta
+      const delta = e.deltaY
 
       if (e.type === 'keydown' && path[0] === document.body) {
         const dialog = this.$refs.dialog
@@ -211,7 +211,7 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
       if (this.$vuetify.breakpoint.smAndDown) {
         document.documentElement!.classList.add('overflow-y-hidden')
       } else {
-        window.addEventListener('wheel', this.scrollListener as EventHandlerNonNull, { passive: false })
+        addPassiveEventListener(window, 'wheel', this.scrollListener as EventHandlerNonNull, { passive: false })
         window.addEventListener('keydown', this.scrollListener as EventHandlerNonNull)
       }
     },

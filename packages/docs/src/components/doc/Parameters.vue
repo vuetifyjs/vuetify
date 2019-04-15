@@ -16,10 +16,7 @@
       content-tag="v-layout"
       content-class="wrap"
     >
-      <template
-        slot="item"
-        slot-scope="{ item }"
-      >
+      <template v-slot:item="{ item }">
         <v-flex xs12 grey lighten-2 mt-2>
           <v-layout wrap px-2 py-1>
             <v-flex
@@ -273,7 +270,7 @@
         else return value
       },
       genTypescriptDef (obj) {
-        return JSON.stringify(obj, null, 2).replace(/"(.*)":\s"(.*)",?/g, '$1: $2')
+        return JSON.stringify(obj, null, 2).replace(/"(.*)":\s"(.*)"?/g, '$1: $2')
       },
       genHeaderName (header, item) {
         let name = header

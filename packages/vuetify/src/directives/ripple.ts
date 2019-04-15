@@ -72,7 +72,7 @@ const ripple = {
     el.appendChild(container)
 
     const computed = window.getComputedStyle(el)
-    if (computed.position === 'static') {
+    if (computed && computed.position === 'static') {
       el.style.position = 'relative'
       el.dataset.previousPosition = 'static'
     }
@@ -130,16 +130,27 @@ function isRippleEnabled (value: any): value is true {
 function rippleShow (e: MouseEvent | TouchEvent) {
   const value: RippleOptions = {}
   const element = e.currentTarget as HTMLElement
-  if (!element) return
-  value.center = element._ripple!.centered
-  if (element._ripple!.class) {
-    value.class = element._ripple!.class
+  if (!element || !element._ripple || element._ripple.touched) return
+  if (isTouchEvent(e)) {
+    element._ripple.touched = true
+  }
+  value.center = element._ripple.centered
+  if (element._ripple.class) {
+    value.class = element._ripple.class
   }
   ripple.show(e, element, value)
 }
 
 function rippleHide (e: Event) {
-  ripple.hide(e.currentTarget as HTMLElement | null)
+  const element = e.currentTarget as HTMLElement | null
+  if (!element) return
+
+  window.setTimeout(() => {
+    if (element._ripple) {
+      element._ripple.touched = false
+    }
+  })
+  ripple.hide(element)
 }
 
 function updateRipple (el: HTMLElement, binding: VNodeDirective, wasEnabled: boolean) {
@@ -160,30 +171,28 @@ function updateRipple (el: HTMLElement, binding: VNodeDirective, wasEnabled: boo
     el._ripple.circle = value.circle
   }
   if (enabled && !wasEnabled) {
-    if (navigator.maxTouchPoints) {
-      el.addEventListener('touchstart', rippleShow, false)
-      el.addEventListener('touchend', rippleHide, false)
-      el.addEventListener('touchcancel', rippleHide, false)
-    } else {
-      el.addEventListener('mousedown', rippleShow, false)
-      el.addEventListener('mouseup', rippleHide, false)
-      el.addEventListener('mouseleave', rippleHide, false)
-      // Anchor tags can be dragged, causes other hides to fail - #1537
-      el.addEventListener('dragstart', rippleHide, false)
-    }
+    el.addEventListener('touchstart', rippleShow, { passive: true })
+    el.addEventListener('touchend', rippleHide, { passive: true })
+    el.addEventListener('touchcancel', rippleHide)
+
+    el.addEventListener('mousedown', rippleShow)
+    el.addEventListener('mouseup', rippleHide)
+    el.addEventListener('mouseleave', rippleHide)
+    // Anchor tags can be dragged, causes other hides to fail - #1537
+    el.addEventListener('dragstart', rippleHide, { passive: true })
   } else if (!enabled && wasEnabled) {
     removeListeners(el)
   }
 }
 
 function removeListeners (el: HTMLElement) {
-  el.removeEventListener('mousedown', rippleShow, false)
-  el.removeEventListener('touchstart', rippleHide, false)
-  el.removeEventListener('touchend', rippleHide, false)
-  el.removeEventListener('touchcancel', rippleHide, false)
-  el.removeEventListener('mouseup', rippleHide, false)
-  el.removeEventListener('mouseleave', rippleHide, false)
-  el.removeEventListener('dragstart', rippleHide, false)
+  el.removeEventListener('mousedown', rippleShow)
+  el.removeEventListener('touchstart', rippleHide)
+  el.removeEventListener('touchend', rippleHide)
+  el.removeEventListener('touchcancel', rippleHide)
+  el.removeEventListener('mouseup', rippleHide)
+  el.removeEventListener('mouseleave', rippleHide)
+  el.removeEventListener('dragstart', rippleHide)
 }
 
 function directive (el: HTMLElement, binding: VNodeDirective, node: VNode) {
@@ -191,7 +200,8 @@ function directive (el: HTMLElement, binding: VNodeDirective, node: VNode) {
 
   // warn if an inline element is used, waiting for el to be in the DOM first
   node.context && node.context.$nextTick(() => {
-    if (window.getComputedStyle(el).display === 'inline') {
+    const computed = window.getComputedStyle(el)
+    if (computed && computed.display === 'inline') {
       const context = (node as any).fnOptions ? [(node as any).fnOptions, node.context] : [node.componentInstance]
       consoleWarn('v-ripple can only be used on block-level elements', ...context)
     }

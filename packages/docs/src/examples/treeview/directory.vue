@@ -19,12 +19,14 @@
           open-on-click
           transition
         >
-          <v-icon
-            v-if="!item.children"
-            slot="prepend"
-            slot-scope="{ item, active }"
-            :color="active ? 'primary' : ''"
-          >mdi-account</v-icon>
+          <template v-slot:prepend="{ item, active }">
+            <v-icon
+              v-if="!item.children"
+              :color="active ? 'primary' : ''"
+            >
+              mdi-account
+            </v-icon>
+          </template>
         </v-treeview>
       </v-flex>
       <v-flex

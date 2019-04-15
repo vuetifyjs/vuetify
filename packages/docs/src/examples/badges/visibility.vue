@@ -21,7 +21,9 @@
           color="cyan"
           left
         >
-          <span slot="badge">6</span>
+          <template v-slot:badge>
+            <span>6</span>
+          </template>
           <v-icon
             large
             color="grey lighten-1"
@@ -32,7 +34,9 @@
           v-model="show"
           color="purple"
         >
-          <span slot="badge">6</span>
+          <template v-slot:badge>
+            <span>6</span>
+          </template>
           <v-icon large color="grey">mail</v-icon>
         </v-badge>
       </v-flex>

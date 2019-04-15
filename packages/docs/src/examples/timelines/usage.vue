@@ -6,7 +6,9 @@
       color="red lighten-2"
       large
     >
-      <span slot="opposite">Tus eu perfecto</span>
+      <template v-slot:opposite>
+        <span>Tus eu perfecto</span>
+      </template>
       <v-card class="elevation-2">
         <v-card-title class="headline">Lorem ipsum</v-card-title>
         <v-card-text>

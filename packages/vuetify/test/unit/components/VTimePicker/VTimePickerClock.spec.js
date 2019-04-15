@@ -2,6 +2,34 @@ import VTimePickerClock from '@/components/VTimePicker/VTimePickerClock'
 import { test, touch } from '@/test'
 
 test('VTimePickerClock.js', ({ mount }) => {
+  function createBoundingRect (wrapper) {
+    wrapper.vm.$refs.clock.getBoundingClientRect = () => {
+      return {
+        width: 300,
+        height: 300,
+        top: 0,
+        left: 0,
+        right: 300,
+        bottom: 300,
+        x: 0,
+        y: 0
+      }
+    }
+
+    wrapper.vm.$refs.innerClock.getBoundingClientRect = () => {
+      return {
+        width: 246,
+        height: 246,
+        top: 0,
+        left: 0,
+        right: 246,
+        bottom: 246,
+        x: 0,
+        y: 0
+      }
+    }
+  }
+
   it('should render component', () => {
     const wrapper = mount(VTimePickerClock, {
       propsData: {
@@ -195,6 +223,25 @@ test('VTimePickerClock.js', ({ mount }) => {
     expect(angle({ x: 2, y: 0 })).toBe(135)
   })
 
+  it('should not emit input event when clicked disabled value (#5897)', () => {
+    const wrapper = mount(VTimePickerClock, {
+      propsData: {
+        allowedValues: value => value >= 59 && value <= 60,
+        min: 0,
+        max: 59,
+        size: 320
+      }
+    })
+
+    createBoundingRect(wrapper)
+
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
+    touch(wrapper).start(0, 0).move(141, 0)
+
+    expect(input).not.toBeCalled()
+  })
+
   it('should change with touch move', () => {
     const wrapper = mount(VTimePickerClock, {
       propsData: {
@@ -206,31 +253,7 @@ test('VTimePickerClock.js', ({ mount }) => {
       }
     })
 
-    wrapper.vm.$refs.clock.getBoundingClientRect = () => {
-      return {
-        width: 300,
-        height: 300,
-        top: 0,
-        left: 0,
-        right: 300,
-        bottom: 300,
-        x: 0,
-        y: 0
-      }
-    }
-
-    wrapper.vm.$refs.innerClock.getBoundingClientRect = () => {
-      return {
-        width: 246,
-        height: 246,
-        top: 0,
-        left: 0,
-        right: 246,
-        bottom: 246,
-        x: 0,
-        y: 0
-      }
-    }
+    createBoundingRect(wrapper)
 
     const input = jest.fn()
     const finger = touch(wrapper).start(0, 0)

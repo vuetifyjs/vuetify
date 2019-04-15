@@ -26,10 +26,7 @@
           multiple
           chips
         >
-          <template
-            slot="selection"
-            slot-scope="data"
-          >
+          <template v-slot:selection="data">
             <v-chip
               :key="JSON.stringify(data.item)"
               :selected="data.selected"

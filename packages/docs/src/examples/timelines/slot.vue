@@ -6,11 +6,12 @@
       :color="year.color"
       small
     >
-      <span
-        slot="opposite"
-        :class="`headline font-weight-bold ${year.color}--text`"
-        v-text="year.year"
-      ></span>
+      <template v-slot:opposite>
+        <span
+          :class="`headline font-weight-bold ${year.color}--text`"
+          v-text="year.year"
+        ></span>
+      </template>
       <div class="py-3">
         <h2 :class="`headline font-weight-light mb-3 ${year.color}--text`">Lorem ipsum</h2>
         <div>

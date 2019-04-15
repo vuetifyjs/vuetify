@@ -44,16 +44,17 @@
       :open-on-hover="hover"
       :transition="transition"
     >
-      <v-btn
-        slot="activator"
-        v-model="fab"
-        color="blue darken-2"
-        dark
-        fab
-      >
-        <v-icon>account_circle</v-icon>
-        <v-icon>close</v-icon>
-      </v-btn>
+      <template v-slot:activator>
+        <v-btn
+          v-model="fab"
+          color="blue darken-2"
+          dark
+          fab
+        >
+          <v-icon>account_circle</v-icon>
+          <v-icon>close</v-icon>
+        </v-btn>
+      </template>
       <v-btn
         fab
         dark

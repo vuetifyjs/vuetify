@@ -1,6 +1,6 @@
 {
   "header": "# Form",
-  "headerText": "When it comes to form validation, Vuetify has a multitude of integrations and baked in functionality. Want to use a 3rd party validation plugin? Out of the box you can use [Vee-validate](https://github.com/baianat/Vee-validate) and [vuelidate](https://github.com/monterail/vuelidate).",
+  "headerText": "When it comes to form validation, Vuetify has a multitude of integrations and baked in functionality. Want to use a 3rd party validation plugin? Out of the box you can use [Vee-validate](https://github.com/baianat/Vee-validate) and [vuelidate](https://github.com/vuelidate/vuelidate).",
   "examples": {
     "usage": {
       "desc": "The internal `v-form` component makes it easy to add validation to form inputs. All input components have a `rules` prop which takes an array of functions. These functions allow you to specify conditions in which the field is _valid_ or _invalid_. Whenever the value of an input is changed, each function in the array will receive the new value. If a function returns false or a string, validation has failed."
@@ -15,7 +15,7 @@
     },
     "vuelidate": {
       "header": "### Vuelidate",
-      "desc": "**vuelidate** is a simple, lightweight model-based validation for Vue.js. [Documentation](https://monterail.github.io/vuelidate/#getting-started)"
+      "desc": "**vuelidate** is a simple, lightweight model-based validation for Vue.js. [Documentation](https://vuelidate.netlify.com/)"
     },
     "veeValidate": {
       "header": "### Vee-validate",

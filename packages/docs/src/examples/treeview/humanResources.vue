@@ -28,10 +28,7 @@
         :filter="filter"
         :open.sync="open"
       >
-        <template
-          slot="prepend"
-          slot-scope="{ item }"
-        >
+        <template v-slot:prepend="{ item }">
           <v-icon
             v-if="item.children"
             v-text="`mdi-${item.id === 1 ? 'home-variant' : 'folder-network'}`"

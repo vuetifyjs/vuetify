@@ -64,5 +64,13 @@
     "sliderColor": "Changes the background color of an auto-generated `v-tabs-slider`",
     "touchless": "Components.NavigationDrawers.props.touchless",
     "transition": "Mixins.Transitionable.props.transition"
+  },
+  "events": {
+    "v-tabs": {
+      "change" : "Emitted when tab is changed by user interaction"
+    },
+    "v-tabs-items": {
+      "change" : "Emitted when user swipes between tabs."
+    }
   }
 }

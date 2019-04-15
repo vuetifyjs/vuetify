@@ -12,17 +12,11 @@ import {
   VTimestamp,
   VTimestampFormatter,
   parseTimestamp,
-  copyTimestamp,
   getWeekdaySkips,
-  findWeekday,
-  prevDay,
-  updateWeekday,
-  updateFormatted,
-  updateRelative,
-  daysInMonth,
   createDayList,
   createNativeLocaleFormatter,
-  DAY_MIN
+  getStartOfWeek,
+  getEndOfWeek
 } from '../util/timestamp'
 
 /* @vue/component */
@@ -86,32 +80,10 @@ export default mixins(Colorable, Themeable, Times, Mouse).extend({
       }
     },
     getStartOfWeek (timestamp: VTimestamp): VTimestamp {
-      const start = copyTimestamp(timestamp)
-      findWeekday(start, this.weekdays[0], prevDay)
-      updateFormatted(start)
-      updateRelative(start, this.times.today, start.hasTime)
-      return start
+      return getStartOfWeek(timestamp, this.weekdays, this.times.today)
     },
     getEndOfWeek (timestamp: VTimestamp): VTimestamp {
-      const end = copyTimestamp(timestamp)
-      findWeekday(end, this.weekdays[this.weekdays.length - 1])
-      updateFormatted(end)
-      updateRelative(end, this.times.today, end.hasTime)
-      return end
-    },
-    getStartOfMonth (timestamp: VTimestamp): VTimestamp {
-      const start = copyTimestamp(timestamp)
-      start.day = DAY_MIN
-      updateWeekday(start)
-      updateFormatted(start)
-      return start
-    },
-    getEndOfMonth (timestamp: VTimestamp): VTimestamp {
-      const end = copyTimestamp(timestamp)
-      end.day = daysInMonth(end.year, end.month)
-      updateWeekday(end)
-      updateFormatted(end)
-      return end
+      return getEndOfWeek(timestamp, this.weekdays, this.times.today)
     }
   }
 })

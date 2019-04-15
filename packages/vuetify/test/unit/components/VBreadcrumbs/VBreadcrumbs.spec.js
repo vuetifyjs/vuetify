@@ -37,6 +37,28 @@ test('VBreadcrumbs.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should not complain about identical keys', () => {
+    const { render } = compileToFunctions(`
+      <v-breadcrumbs :items="items"></v-breadcrumbs>
+    `)
+
+    const component = Vue.component('test', {
+      components: {
+        VBreadcrumbs, VBreadcrumbsItem
+      },
+      data: () => ({
+        items: [
+          { text: 'a' },
+          { text: 'a' }
+        ]
+      }),
+      render
+    })
+    const wrapper = mount(component)
+
+    expect(`Duplicate keys detected: 'a'`).not.toHaveBeenWarned()
+  })
+
   it('should use slot to render items if present', () => {
     const { render } = compileToFunctions(`
       <v-breadcrumbs :items="items">

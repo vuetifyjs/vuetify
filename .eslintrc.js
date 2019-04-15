@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
   parserOptions: {
-    parser: 'eslint-plugin-typescript/parser',
+    parser: '@typescript-eslint/parser',
     ecmaVersion: 2017,
     sourceType: 'module'
   },
@@ -15,7 +15,7 @@ module.exports = {
     es6: true
   },
   plugins: [
-    'typescript'
+    '@typescript-eslint'
   ],
   rules: {
     // allow paren-less arrow functions
@@ -95,12 +95,12 @@ module.exports = {
         // https://github.com/eslint/typescript-eslint-parser/issues/457
         // enabled in tslint instead
         'no-unused-vars': 'off',
-        // 'typescript/no-unused-vars': 'error',
+        // '@typescript-eslint/no-unused-vars': 'error',
 
         'no-redeclare': 'error',
-        'typescript/prefer-namespace-keyword': 'error',
-        'typescript/adjacent-overload-signatures': 'error',
-        'typescript/member-delimiter-style': ['error', {
+        '@typescript-eslint/prefer-namespace-keyword': 'error',
+        '@typescript-eslint/adjacent-overload-signatures': 'error',
+        '@typescript-eslint/member-delimiter-style': ['error', {
           multiline: {
             delimiter: 'none'
           },
@@ -108,8 +108,8 @@ module.exports = {
             delimiter: 'comma'
           }
         }],
-        'typescript/member-ordering': 'error',
-        'typescript/type-annotation-spacing': 'error'
+        '@typescript-eslint/member-ordering': 'error',
+        '@typescript-eslint/type-annotation-spacing': 'error'
       }
     }
   ]

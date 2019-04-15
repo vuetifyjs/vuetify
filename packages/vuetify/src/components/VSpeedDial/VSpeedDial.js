@@ -63,10 +63,20 @@ export default {
     }
 
     if (this.isActive) {
+      let btnCount = 0
       children = (this.$slots.default || []).map((b, i) => {
-        b.key = i
-
-        return b
+        if (b.tag && typeof b.componentOptions !== 'undefined' && b.componentOptions.Ctor.options.name === 'v-btn') {
+          btnCount++
+          return h('div', {
+            style: {
+              transitionDelay: btnCount * 0.05 + 's'
+            },
+            key: i
+          }, [b])
+        } else {
+          b.key = i
+          return b
+        }
       })
     }
 

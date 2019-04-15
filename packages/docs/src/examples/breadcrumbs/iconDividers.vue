@@ -1,11 +1,15 @@
 <template>
   <div>
     <v-breadcrumbs :items="items">
-      <v-icon slot="divider">forward</v-icon>
+      <template v-slot:divider>
+        <v-icon>forward</v-icon>
+      </template>
     </v-breadcrumbs>
 
     <v-breadcrumbs :items="items">
-      <v-icon slot="divider">chevron_right</v-icon>
+      <template v-slot:divider>
+        <v-icon>chevron_right</v-icon>
+      </template>
     </v-breadcrumbs>
   </div>
 </template>

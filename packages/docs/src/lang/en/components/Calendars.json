@@ -48,7 +48,7 @@
     "v-model": "Sets the `value` property but also updates it when the link of a day is clicked.",
     "weekdayFormat": "Formats day of the week string that appears in the header to specified locale",
     "monthFormat": "Formats month string that appears in a day to specified locale",
-    "intervalFormat": "Formats time of day string that appears in the interval gutter of the `day` view to specified locale",
+    "intervalFormat": "Formats time of day string that appears in the interval gutter of the `day` and `week` view to specified locale",
     "intervalStyle": "Returns CSS styling to apply to the interval.",
     "showIntervalLabel": "Checks if a given day and time should be displayed in the interval gutter of the `day` view.",
     "dayFormat": "Formats day of the month string that appears in a day to a specified locale"

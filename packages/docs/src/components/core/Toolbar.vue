@@ -42,7 +42,6 @@
             page: 'quick-start'
           }
         }"
-        class="hidden-xs-only"
         flat
         style="min-width: 48px;"
       >

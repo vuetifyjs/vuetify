@@ -22,7 +22,9 @@ import {
   copyTimestamp,
   updateFormatted,
   updateWeekday,
-  updateRelative
+  updateRelative,
+  getStartOfMonth,
+  getEndOfMonth
 } from './util/timestamp'
 
 // Calendars
@@ -68,8 +70,8 @@ export default CalendarBase.extend({
       switch (this.type) {
         case 'month':
           component = VCalendarMonthly
-          start = this.getStartOfMonth(around)
-          end = this.getEndOfMonth(around)
+          start = getStartOfMonth(around)
+          end = getEndOfMonth(around)
           break
         case 'week':
           component = VCalendarDaily
@@ -195,7 +197,7 @@ export default CalendarBase.extend({
         ...this.$listeners,
         'click:date': (day: VTimestamp) => {
           if (this.$listeners['input']) {
-            this.$emit('input', day)
+            this.$emit('input', day.date)
           }
           if (this.$listeners['click:date']) {
             this.$emit('click:date', day)

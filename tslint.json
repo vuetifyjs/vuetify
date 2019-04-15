@@ -2,12 +2,9 @@
   "defaultSeverity": "error",
   "extends": "typestrict",
   "linterOptions": {
-    "include": [
-      "./src/**/*.ts"
-    ],
     "exclude": [
       "**/*.spec.js",
-      "./node_modules/**/*"
+      "**/node_modules/**/*"
     ]
   },
   "jsRules": {},

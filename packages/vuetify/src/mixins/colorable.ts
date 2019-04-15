@@ -16,7 +16,7 @@ export default Vue.extend({
     setBackgroundColor (color?: string | false, data: VNodeData = {}): VNodeData {
       if (isCssColor(color)) {
         data.style = {
-          ...data.style,
+          ...data.style as object,
           'background-color': `${color}`,
           'border-color': `${color}`
         }
@@ -33,7 +33,7 @@ export default Vue.extend({
     setTextColor (color?: string | false, data: VNodeData = {}): VNodeData {
       if (isCssColor(color)) {
         data.style = {
-          ...data.style,
+          ...data.style as object,
           'color': `${color}`,
           'caret-color': `${color}`
         }

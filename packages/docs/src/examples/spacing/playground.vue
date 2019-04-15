@@ -21,8 +21,10 @@
           class="pr-2"
           v-model="paddingDirection"
         )
-          strong(slot="prepend").primary--text p
-          div(slot="append-outer") -
+          template(v-slot:prepend)
+            strong().primary--text p
+          template(v-slot:append-outer)
+            div() -
 
         v-select(
           :items="sizes.slice(1)"
@@ -40,8 +42,10 @@
           class="pr-2"
           v-model="marginDirection"
         )
-          strong(slot="prepend").primary--text m
-          div(slot="append-outer") -
+          template(v-slot:prepend)
+            strong().primary--text m
+          template(v-slot:append-outer)
+            div() -
 
         v-select(
           :items="sizes"

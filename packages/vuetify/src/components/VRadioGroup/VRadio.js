@@ -104,7 +104,7 @@ export default {
           for: this.id
         },
         props: {
-          color: this.radio.validationState || false,
+          color: this.radio.validationState || '',
           dark: this.dark,
           focused: this.hasState,
           light: this.light

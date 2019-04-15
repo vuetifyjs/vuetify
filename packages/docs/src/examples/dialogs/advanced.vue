@@ -5,7 +5,9 @@
       <v-btn color="primary" dark @click="dialog2 = true">Open Dialog 2</v-btn>
       <v-btn color="primary" dark @click="dialog3 = true">Open Dialog 3</v-btn>
       <v-menu bottom offset-y>
-        <v-btn slot="activator">A Menu</v-btn>
+        <template v-slot:activator="{ on }">
+          <v-btn v-on="on">A Menu</v-btn>
+        </template>
         <v-list>
           <v-list-tile v-for="(item, i) in items" :key="i" @click="">
             <v-list-tile-title>{{ item.title }}</v-list-tile-title>
@@ -30,9 +32,11 @@
               <v-btn dark flat @click="dialog = false">Save</v-btn>
             </v-toolbar-items>
             <v-menu bottom right offset-y>
-              <v-btn slot="activator" dark icon>
-                <v-icon>more_vert</v-icon>
-              </v-btn>
+              <template v-slot:activator="{ on }">
+                <v-btn dark icon v-on="on">
+                  <v-icon>more_vert</v-icon>
+                </v-btn>
+              </template>
               <v-list>
                 <v-list-tile v-for="(item, i) in items" :key="i" @click="">
                   <v-list-tile-title>{{ item.title }}</v-list-tile-title>
@@ -43,7 +47,9 @@
           <v-card-text>
             <v-btn color="primary" dark @click="dialog2 = !dialog2">Open Dialog 2</v-btn>
             <v-tooltip right>
-              <v-btn slot="activator">Tool Tip Activator</v-btn>
+              <template v-slot:activator="{ on }">
+                <v-btn v-on="on">Tool Tip Activator</v-btn>
+              </template>
               Tool Tip
             </v-tooltip>
             <v-list three-line subheader>
@@ -121,9 +127,11 @@
             <span>Dialog 3</span>
             <v-spacer></v-spacer>
             <v-menu bottom left>
-              <v-btn slot="activator" icon>
-                <v-icon>more_vert</v-icon>
-              </v-btn>
+              <template v-slot:activator="{ on }">
+                <v-btn icon v-on="on">
+                  <v-icon>more_vert</v-icon>
+                </v-btn>
+              </template>
               <v-list>
                 <v-list-tile v-for="(item, i) in items" :key="i" @click="">
                   <v-list-tile-title>{{ item.title }}</v-list-tile-title>

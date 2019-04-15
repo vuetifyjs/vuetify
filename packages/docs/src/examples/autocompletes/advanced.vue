@@ -20,7 +20,7 @@
       label="Search for a coin..."
       solo
     >
-      <template slot="no-data">
+      <template v-slot:no-data>
         <v-list-tile>
           <v-list-tile-title>
             Search for your favorite
@@ -28,10 +28,7 @@
           </v-list-tile-title>
         </v-list-tile>
       </template>
-      <template
-        slot="selection"
-        slot-scope="{ item, selected }"
-      >
+      <template v-slot:selection="{ item, selected }">
         <v-chip
           :selected="selected"
           color="blue-grey"
@@ -41,10 +38,7 @@
           <span v-text="item.name"></span>
         </v-chip>
       </template>
-      <template
-        slot="item"
-        slot-scope="{ item }"
-      >
+      <template v-slot:item="{ item }">
         <v-list-tile-avatar
           color="indigo"
           class="headline font-weight-light white--text"
@@ -60,16 +54,17 @@
         </v-list-tile-action>
       </template>
     </v-autocomplete>
-    <v-tabs
-      slot="extension"
-      :hide-slider="!model"
-      color="transparent"
-      slider-color="blue-grey"
-    >
-      <v-tab :disabled="!model">News</v-tab>
-      <v-tab :disabled="!model">Trading</v-tab>
-      <v-tab :disabled="!model">Blog</v-tab>
-    </v-tabs>
+    <template v-slot:extension>
+      <v-tabs
+        :hide-slider="!model"
+        color="transparent"
+        slider-color="blue-grey"
+      >
+        <v-tab :disabled="!model">News</v-tab>
+        <v-tab :disabled="!model">Trading</v-tab>
+        <v-tab :disabled="!model">Blog</v-tab>
+      </v-tabs>
+    </template>
   </v-toolbar>
 </template>
 

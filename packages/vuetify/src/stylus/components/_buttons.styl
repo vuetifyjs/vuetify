@@ -67,6 +67,10 @@ theme(button, "v-btn")
     &:before
       background-color: currentColor
 
+  &:hover::before
+    @media (hover: none)
+      background-color: transparent
+
   &__content
     align-items: center
     border-radius: inherit
@@ -151,7 +155,7 @@ theme(button, "v-btn")
       border-radius: 50%
 
     .v-btn__content
-      :not(:only-child)
+      > :not(:only-child)
         transition: $primary-transition
 
         &:first-child
@@ -171,7 +175,7 @@ theme(button, "v-btn")
 
     &.v-btn--active
       .v-btn__content
-        :not(:only-child)
+        > :not(:only-child)
           &:first-child
             opacity: 0
             transform: rotate(45deg)

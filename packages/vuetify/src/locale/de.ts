@@ -10,5 +10,9 @@ export default {
   dataTable: {
     rowsPerPageText: 'Zeilen pro Seite:'
   },
-  noDataText: 'Keine Daten vorhanden'
+  noDataText: 'Keine Daten vorhanden',
+  carousel: {
+    prev: 'Vorheriges visuelles',
+    next: 'Nächstes Bild'
+  }
 }

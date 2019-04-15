@@ -859,4 +859,35 @@ test('VAutocomplete.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.selectedItems.length).toBe(1)
     expect(wrapper.vm.internalSearch).toBe('t')
   })
+
+  it('should update render dynamically when itemText changes', async () => {
+    const wrapper = mount(VAutocomplete, {
+      propsData: {
+        returnObject: true,
+        itemText: 'labels.1033',
+        items: [
+          {
+            id: 1,
+            labels: { '1033': 'ID 1 English', '1036': 'ID 1 French' }
+          },
+          {
+            id: 2,
+            labels: { '1033': 'ID 2 English', '1036': 'ID 2 French' }
+          },
+        ],
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
+    wrapper.vm.selectItem(wrapper.vm.items[0])
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.internalSearch).toEqual('ID 1 English')
+
+    wrapper.setProps({ itemText: 'labels.1036' })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.computedItems).toHaveLength(2)
+    expect(wrapper.vm.internalSearch).toEqual('ID 1 French')
+  })
 })

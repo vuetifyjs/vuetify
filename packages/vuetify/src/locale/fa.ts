@@ -10,5 +10,9 @@ export default {
   dataTable: {
     rowsPerPageText: 'ردیف در صفحه:'
   },
-  noDataText: 'اطلاعاتی یافت نشد'
+  noDataText: 'اطلاعاتی یافت نشد',
+  carousel: {
+    prev: 'تصویر قبلی',
+    next: 'بعدی بصری'
+  }
 }

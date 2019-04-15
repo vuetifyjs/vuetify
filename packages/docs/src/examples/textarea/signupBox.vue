@@ -79,7 +79,7 @@
         :rules="[rules.required]"
         color="deep-purple"
       >
-        <template slot="label">
+        <template v-slot:label>
           I agree to the&nbsp;
           <a href="#" @click.stop.prevent="dialog = true">Terms of Service</a>
           &nbsp;and&nbsp;

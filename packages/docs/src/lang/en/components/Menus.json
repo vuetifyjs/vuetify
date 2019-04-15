@@ -16,6 +16,11 @@
       "desc": "Menus can also be used without an activator by using `absolute` together with the props `position-x` and `position-y`. Try right-clicking anywhere on the image.",
       "uninverted": true
     },
+    "menuActivatorTooltip": {
+      "header": "### Menu with activator and tooltip",
+      "desc": "With the new `v-slot` syntax, nested activators such as those seen with a `v-menu` and `v-tooltip` attached to the same activator button, need a particular setup in order to function correctly. **Note: this same syntax is used for other nested activators such as `v-dialog` w/ `v-tooltip`.**",
+      "uninverted": true
+    },
     "hover": {
       "header": "### Hover",
       "desc": "Menus can be accessed using hover instead of clicking with the `open-on-hover` prop.",

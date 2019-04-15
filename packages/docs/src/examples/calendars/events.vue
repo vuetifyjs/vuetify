@@ -7,10 +7,7 @@
           :value="today"
           color="primary"
         >
-          <template
-            slot="day"
-            slot-scope="{ date }"
-          >
+          <template v-slot:day="{ date }">
             <template v-for="event in eventsMap[date]">
               <v-menu
                 :key="event.title"
@@ -18,13 +15,15 @@
                 full-width
                 offset-x
               >
-                <div
-                  v-if="!event.time"
-                  slot="activator"
-                  v-ripple
-                  class="my-event"
-                  v-html="event.title"
-                ></div>
+                <template v-slot:activator="{ on }">
+                  <div
+                    v-if="!event.time"
+                    v-ripple
+                    class="my-event"
+                    v-on="on"
+                    v-html="event.title"
+                  ></div>
+                </template>
                 <v-card
                   color="grey lighten-4"
                   min-width="350px"

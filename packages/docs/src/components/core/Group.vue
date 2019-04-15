@@ -5,10 +5,9 @@
     :sub-group="subGroup"
     no-action
   >
-    <core-item
-      slot="activator"
-      :text="item.text"
-    />
+    <template v-slot:activator>
+      <core-item :text="item.text" />
+    </template>
     <template v-for="(child, i) in children">
       <core-sub-group
         v-if="child.group != null"

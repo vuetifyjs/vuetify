@@ -6,7 +6,7 @@
         <v-flex xs12 sm6>
           <v-text-field
             v-model="password"
-            :append-icon="show1 ? 'visibility_off' : 'visibility'"
+            :append-icon="show1 ? 'visibility' : 'visibility_off'"
             :rules="[rules.required, rules.min]"
             :type="show1 ? 'text' : 'password'"
             name="input-10-1"
@@ -19,7 +19,7 @@
 
         <v-flex xs12 sm6>
           <v-text-field
-            :append-icon="show2 ? 'visibility_off' : 'visibility'"
+            :append-icon="show2 ? 'visibility' : 'visibility_off'"
             :rules="[rules.required, rules.min]"
             :type="show2 ? 'text' : 'password'"
             name="input-10-2"
@@ -33,7 +33,7 @@
 
         <v-flex xs12 sm6>
           <v-text-field
-            :append-icon="show3 ? 'visibility_off' : 'visibility'"
+            :append-icon="show3 ? 'visibility' : 'visibility_off'"
             :rules="[rules.required, rules.min]"
             :type="show3 ? 'text' : 'password'"
             name="input-10-2"
@@ -47,7 +47,7 @@
 
         <v-flex xs12 sm6>
           <v-text-field
-            :append-icon="show4 ? 'visibility_off' : 'visibility'"
+            :append-icon="show4 ? 'visibility' : 'visibility_off'"
             :rules="[rules.required, rules.emailMatch]"
             :type="show4 ? 'text' : 'password'"
             name="input-10-2"

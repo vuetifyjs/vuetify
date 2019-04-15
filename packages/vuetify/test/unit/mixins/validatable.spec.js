@@ -36,7 +36,7 @@ test('validatable.js', ({ mount }) => {
   })
 
   ;[true, false].forEach(returns => {
-    it.only('should reset valid flag on resetValidation - ' + String(returns), async () => {
+    it('should reset valid flag on resetValidation - ' + String(returns), async () => {
       jest.useFakeTimers()
       const wrapper = mount(Mock, {
         propsData: {
