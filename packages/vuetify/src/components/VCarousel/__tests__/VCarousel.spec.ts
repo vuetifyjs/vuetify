@@ -45,14 +45,14 @@ describe('VCarousel.ts', () => {
 
     wrapper.setProps({ cycle: true })
 
-    await new Promise(resolve => window.requestAnimationFrame(resolve))
+    await new Promise<void>(resolve => window.requestAnimationFrame(resolve))
 
     expect(wrapper.vm.slideTimeout).toBeTruthy()
     expect(restartTimeout).toHaveBeenCalled()
 
     wrapper.setProps({ cycle: false })
 
-    await new Promise(resolve => window.requestAnimationFrame(resolve))
+    await new Promise<void>(resolve => window.requestAnimationFrame(resolve))
 
     expect(wrapper.vm.slideTimeout).toBeUndefined()
   })

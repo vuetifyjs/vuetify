@@ -37,14 +37,14 @@ export const resizeWindow = (width = window.innerWidth, height = window.innerHei
   (window as any).innerWidth = width
   ;(window as any).innerHeight = height
   window.dispatchEvent(new Event('resize'))
-  return new Promise(resolve => setTimeout(resolve, 200))
+  return new Promise<void>(resolve => setTimeout(resolve, 200))
 }
 
 export const scrollWindow = (y: number) => {
   (window as any).pageYOffset = y
   window.dispatchEvent(new Event('scroll'))
 
-  return new Promise(resolve => setTimeout(resolve, 200))
+  return new Promise<void>(resolve => setTimeout(resolve, 200))
 }
 
 toHaveBeenWarnedInit()

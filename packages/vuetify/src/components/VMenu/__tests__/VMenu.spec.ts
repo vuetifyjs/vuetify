@@ -82,7 +82,7 @@ describe('VMenu.ts', () => {
 
     wrapper.setProps({ value: true })
 
-    await new Promise(resolve => requestAnimationFrame(resolve))
+    await new Promise<void>(resolve => requestAnimationFrame(resolve))
 
     expect(content.attributes('style')).toMatchSnapshot()
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
@@ -110,7 +110,7 @@ describe('VMenu.ts', () => {
     wrapper.vm.isActive = true
     await wrapper.vm.$nextTick()
     wrapper.trigger(`keydown.tab`)
-    await new Promise(resolve => setTimeout(resolve))
+    await new Promise<void>(resolve => setTimeout(resolve))
     expect(wrapper.vm.isActive).toBe(false)
 
     wrapper.setProps({ disableKeys: true })

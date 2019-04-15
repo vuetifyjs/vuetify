@@ -179,14 +179,14 @@ describe('VStepperContent.ts', () => {
 
     expect(wrapper.vm.height).toBe(0)
 
-    await new Promise(resolve => setTimeout(resolve, 450))
+    await new Promise<void>(resolve => setTimeout(resolve, 450))
 
     expect(wrapper.vm.height).toBe('auto')
 
     wrapper.setData({ isActive: false })
     await wrapper.vm.$nextTick()
 
-    await new Promise(resolve => setTimeout(resolve, 10))
+    await new Promise<void>(resolve => setTimeout(resolve, 10))
 
     expect(wrapper.vm.height).toBe(0)
   })
@@ -215,7 +215,7 @@ describe('VStepperContent.ts', () => {
     wrapper.setData({ isActive: false })
     await wrapper.vm.$nextTick()
 
-    await new Promise(resolve => setTimeout(resolve, 450))
+    await new Promise<void>(resolve => setTimeout(resolve, 450))
 
     expect(wrapper.vm.height).toBe(0)
   })

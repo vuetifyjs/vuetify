@@ -38,14 +38,14 @@ describe('VHover.ts', () => {
 
     div.trigger('mouseenter')
 
-    await new Promise(resolve => setTimeout(resolve, 0))
+    await new Promise<void>(resolve => setTimeout(resolve, 0))
 
     expect(div.element.classList.contains('fizzbuzz')).toBe(true)
 
     div.trigger('mouseleave')
 
     // Wait for runDelay
-    await new Promise(resolve => setTimeout(resolve, 200))
+    await new Promise<void>(resolve => setTimeout(resolve, 200))
 
     expect(div.element.classList.contains('fizzbuzz')).toBe(false)
   })
@@ -71,14 +71,14 @@ describe('VHover.ts', () => {
 
     div.trigger('mouseenter')
 
-    await new Promise(resolve => setTimeout(resolve, 0))
+    await new Promise<void>(resolve => setTimeout(resolve, 0))
 
     expect(div.classes('fizzbuzz')).toBe(true)
 
     div.trigger('mouseleave')
 
     // Wait for runDelay
-    await new Promise(resolve => setTimeout(resolve, 200))
+    await new Promise<void>(resolve => setTimeout(resolve, 200))
 
     expect(div.classes('fizzbuzz')).toBe(true)
   })
