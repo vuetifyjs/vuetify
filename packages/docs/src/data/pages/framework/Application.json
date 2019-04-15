@@ -10,6 +10,10 @@
           "lang": "header2"
         },
         {
+          "type": "text",
+          "lang": "headerText1"
+        },
+        {
           "type": "markup",
           "value": "ts_application_service_structure"
         },
@@ -41,6 +45,10 @@
         {
           "type": "text",
           "lang": "markupText"
+        },
+        {
+          "type": "text",
+          "lang": "markupText2"
         },
         {
           "type": "markup",
