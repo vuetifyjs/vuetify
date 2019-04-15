@@ -68,7 +68,7 @@
     align-items: stretch
 
     .v-btn
-      &.v-btn //specificity
+      &.v-btn // Higher specificity
         justify-content: flex-end
         padding: 0
         margin-left: 0
@@ -101,6 +101,7 @@
 
       &.v-snack--top
         transform: translateY($snackbar-corner-offset)
+
       &.v-snack--bottom
         transform: translateY(0 - $snackbar-corner-offset)
 
@@ -115,6 +116,7 @@
   &-enter-active,
   &-leave-active
     transition: transform .4s map-get($transition, 'swing')
+
     .v-snack__content
       transition: opacity .3s linear .1s
 
@@ -132,5 +134,6 @@
     &.v-snack.v-snack--top
       // Extra 8px to hide the bottom shadow
       transform: translateY(calc(-100% - 8px))
+
     &.v-snack.v-snack--bottom
       transform: translateY(100%)
