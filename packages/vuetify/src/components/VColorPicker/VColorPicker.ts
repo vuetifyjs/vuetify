@@ -1,10 +1,8 @@
 // Styles
 import './VColorPicker.sass'
 
-// Extensions
-import VSheet from '../VSheet/VSheet'
-
 // Components
+import VSheet from '../VSheet/VSheet'
 import VColorPickerPreview from './VColorPickerPreview'
 import VColorPickerCanvas from './VColorPickerCanvas'
 import VColorPickerEdit, { Mode, modes } from './VColorPickerEdit'
@@ -14,10 +12,10 @@ import VColorPickerSwatches from './VColorPickerSwatches'
 import { VColorPickerColor, parseColor, fromRGBA } from './util'
 
 // Types
-import { VNode } from 'vue'
+import Vue, { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
-export default VSheet.extend({
+export default Vue.extend({
   name: 'v-color-picker',
 
   props: {
@@ -53,15 +51,6 @@ export default VSheet.extend({
   data: () => ({
     internalValue: fromRGBA({ r: 255, g: 0, b: 0, a: 1 })
   }),
-
-  computed: {
-    pickerClasses (): object {
-      return {
-        ...this.classes,
-        'v-color-picker--flat': this.flat
-      }
-    }
-  },
 
   watch: {
     value: {
@@ -144,10 +133,14 @@ export default VSheet.extend({
   },
 
   render (h): VNode {
-    return h('div', {
+    return h(VSheet, {
       staticClass: 'v-color-picker',
-      class: this.pickerClasses,
-      style: this.styles
+      class: {
+        'v-color-picker--flat': this.flat
+      },
+      props: {
+        maxWidth: this.width
+      }
     }, [
       !this.hideCanvas && this.genCanvas(),
       this.genControls(),
