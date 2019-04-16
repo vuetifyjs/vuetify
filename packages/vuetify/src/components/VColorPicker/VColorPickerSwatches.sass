@@ -2,11 +2,12 @@
 @import './_variables.scss'
 
 .v-color-picker__swatches
-  display: flex
-  flex-wrap: wrap
-  justify-content: center
   overflow-y: auto
-  margin: 8px 0px
+
+  > div
+    display: flex
+    flex-wrap: wrap
+    padding: 8px
 
 .v-color-picker__swatch
   display: flex

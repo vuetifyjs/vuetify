@@ -93,6 +93,8 @@ export default Vue.extend({
         width: convertToUnit(this.width),
         height: convertToUnit(this.height)
       }
-    }, this.genSwatches())
+    }, [
+      this.$createElement('div', this.genSwatches())
+    ])
   }
 })
