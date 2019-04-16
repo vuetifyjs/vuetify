@@ -24,6 +24,10 @@ export default Vue.extend({
       default: 150
     },
     disabled: Boolean,
+    dotSize: {
+      type: [Number, String],
+      default: 10
+    },
     flat: Boolean,
     hideCanvas: Boolean,
     hideInputs: Boolean,
@@ -35,16 +39,16 @@ export default Vue.extend({
     },
     showSwatches: Boolean,
     swatches: Array as PropValidator<string[][]>,
+    swatchesMaxHeight: {
+      type: [Number, String],
+      default: 150
+    },
     value: {
       type: [Object, String]
     } as PropValidator<VColorPickerColor>,
     width: {
       type: [Number, String],
       default: 300
-    },
-    dotSize: {
-      type: Number,
-      default: 10
     }
   },
 
@@ -123,7 +127,7 @@ export default Vue.extend({
         props: {
           swatches: this.swatches,
           color: this.internalValue,
-          height: 150
+          maxHeight: this.swatchesMaxHeight
         },
         on: {
           'update:color': (v: VColorPickerColor) => this.internalValue = v

@@ -19,7 +19,7 @@ export default Vue.extend({
     } as PropValidator<VColorPickerColor>,
     disabled: Boolean,
     dotSize: {
-      type: Number,
+      type: [Number, String],
       default: 10
     },
     height: {
@@ -142,8 +142,8 @@ export default Vue.extend({
         style: {
           width: convertToUnit(this.dotSize),
           height: convertToUnit(this.dotSize),
-          left: convertToUnit(this.dot.x - (this.dotSize / 2)),
-          top: convertToUnit(this.dot.y - (this.dotSize / 2))
+          left: convertToUnit(this.dot.x - (parseInt(this.dotSize, 10) / 2)),
+          top: convertToUnit(this.dot.y - (parseInt(this.dotSize, 10) / 2))
         }
       })
     }
