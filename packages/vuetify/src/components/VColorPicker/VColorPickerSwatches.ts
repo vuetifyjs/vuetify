@@ -47,8 +47,8 @@ export default Vue.extend({
       default: () => parseDefaultColors(colors)
     } as PropValidator<string[][]>,
     color: Object as PropValidator<VColorPickerColor>,
-    width: [Number, String],
-    height: [Number, String]
+    maxWidth: [Number, String],
+    maxHeight: [Number, String]
   },
 
   methods: {
@@ -90,8 +90,8 @@ export default Vue.extend({
     return h('div', {
       staticClass: 'v-color-picker__swatches',
       style: {
-        width: convertToUnit(this.width),
-        height: convertToUnit(this.height)
+        maxWidth: convertToUnit(this.maxWidth),
+        maxHeight: convertToUnit(this.maxHeight)
       }
     }, [
       this.$createElement('div', this.genSwatches())
