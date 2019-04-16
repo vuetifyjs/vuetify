@@ -1,0 +1,67 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "file": "components/VColorPicker",
+  "supplemental": [
+    "Color"
+  ],
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [ "v-color-picker" ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "supplemental",
+          "value": [
+            {
+              "type": "components-color"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "swatches",
+            "inputs",
+            "canvas"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/autocompletes",
+            "components/forms",
+            "components/selects"
+          ]
+        }
+      ]
+    }
+  ]
+}
