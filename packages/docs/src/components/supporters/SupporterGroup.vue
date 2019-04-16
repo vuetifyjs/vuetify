@@ -7,7 +7,7 @@
     <v-flex
       font-weight-medium
       grey--text
-      tag="h3"
+      tag="h4"
       xs12
       v-text="title"
     />

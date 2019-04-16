@@ -4,8 +4,8 @@
     class="text-xs-center py-4"
     flat
   >
-    <v-subtitle-1
-      class="title font-weight-regular"
+    <h4
+      class="font-weight-medium grey--text"
       v-text="$t('Vuetify.Home.madeWithVuetify')"
     />
 
