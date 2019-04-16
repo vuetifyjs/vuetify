@@ -92,6 +92,8 @@ export function parseColor (color: any) {
   if (!color) return fromRGBA({ r: 255, g: 0, b: 0, a: 1 })
 
   if (typeof color === 'string') {
+    if (color === 'transparent') return fromHexa('#00000000')
+
     return fromHexa(parseHex(color))
   }
 

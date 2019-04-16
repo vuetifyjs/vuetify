@@ -1,5 +1,6 @@
 import { consoleWarn } from './console'
 import { chunk, padEnd } from './helpers'
+import { toXYZ } from './color/transformSRGB'
 
 export type ColorInt = number
 export type XYZ = [number, number, number]
@@ -182,5 +183,22 @@ export function parseHex (hex: string): Hex {
     hex = padEnd(padEnd(hex, 6), 8, 'F')
   }
 
-  return `#${hex}`.toUpperCase()
+  return `#${hex}`.toUpperCase().substr(0, 9)
+}
+
+export function RGBtoInt (rgba: RGBA): ColorInt {
+  return (rgba.r << 16) + (rgba.g << 8) + rgba.b
+}
+
+/**
+ * Returns the contrast ratio (1-21) between two colors.
+ *
+ * @param c1 First color
+ * @param c2 Second color
+ */
+export function contrastRatio (c1: RGBA, c2: RGBA): number {
+  const [, y1] = toXYZ(RGBtoInt(c1))
+  const [, y2] = toXYZ(RGBtoInt(c2))
+
+  return (Math.max(y1, y2) + 0.05) / (Math.min(y1, y2) + 0.05)
 }

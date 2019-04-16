@@ -6,12 +6,13 @@ import VIcon from '../VIcon'
 
 // Helpers
 import colors from '../../util/colors'
-import { VColorPickerColor, fromHex } from './util'
+import { VColorPickerColor, fromHex, parseColor } from './util'
 import { convertToUnit, deepEqual } from '../../util/helpers'
 
 // Types
 import Vue, { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
+import { contrastRatio } from '../../util/colorUtils'
 
 function parseDefaultColors (colors: Record<string, Record<string, string>>) {
   return Object.keys(colors).map(key => {
@@ -25,7 +26,8 @@ function parseDefaultColors (colors: Record<string, Record<string, string>>) {
       color.lighten1,
       color.lighten2,
       color.lighten3,
-      color.lighten4
+      color.lighten4,
+      color.lighten5
     ] : [
       color.black,
       color.white,
@@ -33,6 +35,8 @@ function parseDefaultColors (colors: Record<string, Record<string, string>>) {
     ]
   })
 }
+
+const white = fromHex('#FFFFFF')
 
 export default Vue.extend({
   name: 'v-color-picker-swatches',
@@ -55,10 +59,10 @@ export default Vue.extend({
           background: color
         }
       }, [
-        deepEqual(this.color, fromHex(color)) && this.$createElement(VIcon, {
+        deepEqual(this.color, parseColor(color)) && this.$createElement(VIcon, {
           props: {
             small: true,
-            dark: true
+            dark: contrastRatio(this.color.rgba, white.rgba) > 2 && this.color.alpha > 0.5
           }
         }, '$vuetify.icons.success')
       ])
