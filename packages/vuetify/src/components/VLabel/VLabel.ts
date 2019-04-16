@@ -8,6 +8,7 @@ import Themeable, { functionalThemeClasses } from '../../mixins/themeable'
 // Types
 import { VNode } from 'vue'
 import mixins from '../../util/mixins'
+import { PropValidator } from 'vue/types/options'
 
 // Helpers
 import { convertToUnit } from '../../util/helpers'
@@ -21,9 +22,9 @@ export default mixins(Themeable).extend({
   props: {
     absolute: Boolean,
     color: {
-      type: String,
+      type: [Boolean, String],
       default: 'primary'
-    },
+    } as PropValidator<false | string>,
     disabled: Boolean,
     focused: Boolean,
     for: String,
