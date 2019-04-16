@@ -153,7 +153,7 @@ describe('VForm.ts', () => {
     expect(Object.keys(wrapper.vm.errorBag)).toHaveLength(1)
 
     wrapper.vm.reset()
-    await new Promise<void>(resolve => setTimeout(resolve, 0))
+    await new Promise(resolve => setTimeout(resolve, 0))
     expect(Object.keys(wrapper.vm.errorBag)).toHaveLength(0)
   })
 

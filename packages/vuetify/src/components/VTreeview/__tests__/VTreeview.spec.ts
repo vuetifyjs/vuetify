@@ -104,7 +104,7 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.find('.v-treeview-node__checkbox').trigger('click')
-    await new Promise<void>(resolve => setTimeout(resolve))
+    await new Promise(resolve => setTimeout(resolve))
 
     expect(fn).toHaveBeenCalledTimes(1)
     expect(fn).toHaveBeenCalledWith([0])
