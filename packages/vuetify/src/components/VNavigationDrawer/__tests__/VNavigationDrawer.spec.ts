@@ -1,6 +1,7 @@
 import { Application } from '../../../services/application'
 import VNavigationDrawer from '../VNavigationDrawer'
-import { resizeWindow } from '../../../../test'
+import { resizeWindow, touch } from '../../../../test'
+
 import {
   mount,
   MountOptions,
@@ -34,7 +35,9 @@ describe('VNavigationDrawer', () => {
   })
 
   it('should become temporary when the window resizes', async () => {
-    const wrapper = mountFunction()
+    const wrapper = mountFunction({
+      propsData: { app: true }
+    })
 
     expect(wrapper.vm.isActive).toBe(true)
     await resizeWindow(1200)
@@ -65,10 +68,10 @@ describe('VNavigationDrawer', () => {
     } })
 
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    expect(wrapper.vm.$vuetify.application.left).toBe(256)
 
     await resizeWindow(1200)
-    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    expect(wrapper.vm.$vuetify.application.left).toBe(256)
     expect(wrapper.vm.overlay).toBeFalsy()
   })
 
@@ -82,10 +85,10 @@ describe('VNavigationDrawer', () => {
     })
 
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    expect(wrapper.vm.$vuetify.application.left).toBe(256)
 
     await resizeWindow(1200)
-    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    expect(wrapper.vm.$vuetify.application.left).toBe(256)
     expect(wrapper.vm.overlay).toBeFalsy()
   })
 
@@ -144,13 +147,13 @@ describe('VNavigationDrawer', () => {
     } })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    expect(wrapper.vm.$vuetify.application.left).toBe(256)
 
     wrapper.setProps({ temporary: true })
     expect(wrapper.vm.$vuetify.application.left).toBe(0)
 
     wrapper.setProps({ temporary: false })
-    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    expect(wrapper.vm.$vuetify.application.left).toBe(256)
   })
 
   it('should update content padding when permanent state is changed', async () => {
@@ -164,7 +167,7 @@ describe('VNavigationDrawer', () => {
     expect(wrapper.vm.$vuetify.application.left).toBe(0)
 
     wrapper.setProps({ permanent: true })
-    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    expect(wrapper.vm.$vuetify.application.left).toBe(256)
 
     wrapper.setProps({ permanent: false })
     expect(wrapper.vm.$vuetify.application.left).toBe(0)
@@ -176,13 +179,13 @@ describe('VNavigationDrawer', () => {
     } })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    expect(wrapper.vm.$vuetify.application.left).toBe(256)
 
     wrapper.setProps({ miniVariant: true })
     expect(wrapper.vm.$vuetify.application.left).toBe(80)
 
     wrapper.setProps({ miniVariant: false })
-    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    expect(wrapper.vm.$vuetify.application.left).toBe(256)
   })
 
   it('should not remain mobile when temporary is toggled', async () => {
@@ -196,7 +199,9 @@ describe('VNavigationDrawer', () => {
   })
 
   it('should stay closed when mobile and temporary is enabled', async () => {
-    const wrapper = mountFunction()
+    const wrapper = mountFunction({
+      propsData: { app: true }
+    })
     await resizeWindow(800)
     wrapper.vm.$vuetify.breakpoint.width = 800
     await wrapper.vm.$nextTick()
@@ -220,7 +225,7 @@ describe('VNavigationDrawer', () => {
     await wrapper.vm.$nextTick()
 
     wrapper.vm.$on('input', input)
-    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    expect(wrapper.vm.$vuetify.application.left).toBe(256)
     await resizeWindow(800)
     wrapper.vm.$vuetify.breakpoint.width = 800
     expect(wrapper.vm.$vuetify.application.left).toBe(0)
@@ -236,7 +241,7 @@ describe('VNavigationDrawer', () => {
     wrapper.vm.$vuetify.breakpoint.width = 1920
     expect(wrapper.vm.isActive).toBe(true)
     expect(wrapper.vm.isMobile).toBe(false)
-    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    expect(wrapper.vm.$vuetify.application.left).toBe(256)
   })
 
   it('should not have marginTop when temporary / isMobile', async () => {
@@ -247,38 +252,179 @@ describe('VNavigationDrawer', () => {
     })
     wrapper.vm.$vuetify.application.bar = 0
 
-    expect(wrapper.vm.marginTop).toBe(0)
+    expect(wrapper.vm.computedTop).toBe(0)
 
     wrapper.vm.$vuetify.application.bar = 24
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.marginTop).toBe(24)
+    expect(wrapper.vm.computedTop).toBe(24)
 
     await resizeWindow(640)
     wrapper.vm.$vuetify.breakpoint.width = 640
 
-    expect(wrapper.vm.marginTop).toBe(0)
+    expect(wrapper.vm.computedTop).toBe(0)
 
     await resizeWindow(1980)
     wrapper.vm.$vuetify.breakpoint.width = 1980
 
-    expect(wrapper.vm.marginTop).toBe(24)
+    expect(wrapper.vm.computedTop).toBe(24)
 
     wrapper.setProps({ temporary: true })
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.marginTop).toBe(0)
+    expect(wrapper.vm.computedTop).toBe(0)
 
     wrapper.setProps({ app: false, temporary: false })
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.marginTop).toBe(0)
+    expect(wrapper.vm.computedTop).toBe(0)
 
     wrapper.setProps({ app: true })
 
-    expect(wrapper.vm.marginTop).toBe(24)
+    expect(wrapper.vm.computedTop).toBe(24)
+  })
+
+  it('should react to mini-variant clicks', () => {
+    const update = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        miniVariant: true
+      },
+      listeners: {
+        'update:miniVariant': update
+      }
+    })
+
+    wrapper.trigger('click')
+
+    expect(update).toHaveBeenCalled()
+  })
+
+  it('should react to open / close from touch events', async () => {
+    const wrapper = mountFunction({
+      attachToDocument: true,
+      propsData: { value: false }
+    })
+    const element = wrapper.vm.$el.parentElement
+
+    expect(wrapper.vm.isActive).toBe(false)
+
+    touch({ element }).start(0, 0).end(200, 0)
+    expect(wrapper.vm.isActive).toBe(true)
+
+    // A consecutive swipe should keep the same state
+    touch({ element }).start(0, 0).end(200, 0)
+    expect(wrapper.vm.isActive).toBe(true)
+
+    touch({ element }).start(200, 0).end(0, 0)
+    expect(wrapper.vm.isActive).toBe(false)
+
+    // A consecutive swipe should keep the same state
+    touch({ element }).start(200, 0).end(0, 0)
+    expect(wrapper.vm.isActive).toBe(false)
+
+    // Swipe is not long enough
+    touch({ element }).start(0, 0).end(99, 0)
+    expect(wrapper.vm.isActive).toBe(false)
+
+    wrapper.setProps({ right: true })
+
+    // Swipe is not long enough
+    touch({ element }).start(1920, 0).end(1821, 0)
+    expect(wrapper.vm.isActive).toBe(false)
+
+    touch({ element }).start(1920, 0).end(1720, 0)
+    expect(wrapper.vm.isActive).toBe(true)
+
+    // A consecutive swipe should keep the same state
+    touch({ element }).start(1920, 0).end(1720, 0)
+    expect(wrapper.vm.isActive).toBe(true)
+
+    touch({ element }).start(1720, 0).end(1920, 0)
+    expect(wrapper.vm.isActive).toBe(false)
+  })
+
+  it('should activate and expand on hover', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        expandOnHover: true
+      }
+    })
+
+    expect(wrapper.vm.isMouseover).toBe(false)
+    expect(wrapper.vm.computedWidth).toBe(80)
+
+    wrapper.trigger('mouseenter')
+    expect(wrapper.vm.isMouseover).toBe(true)
+    expect(wrapper.vm.computedWidth).toBe(256)
+
+    wrapper.trigger('mouseleave')
+    expect(wrapper.vm.isMouseover).toBe(false)
+    expect(wrapper.vm.computedWidth).toBe(80)
+  })
+
+  it('should clip top', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        app: true,
+        clipped: true
+      }
+    })
+
+    wrapper.vm.$vuetify.application.bottom = 20
+    wrapper.vm.$vuetify.application.top = 40
+
+    expect(wrapper.vm.computedMaxHeight).toBe(60)
+  })
+
+  it('should close when route changes on mobile', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        app: true,
+        disableRouteWatcher: true
+      }
+    })
+
+    expect(wrapper.vm.isActive).toBe(true)
+
+    wrapper.vm.onRouteChange()
+    expect(wrapper.vm.isActive).toBe(true)
+
+    wrapper.setProps({
+      disableRouteWatcher: false,
+      stateless: true
+    })
+
+    wrapper.vm.onRouteChange()
+    expect(wrapper.vm.isActive).toBe(true)
+
+    wrapper.setProps({
+      stateless: false,
+      temporary: true
+    })
+
+    wrapper.vm.onRouteChange()
+    expect(wrapper.vm.isActive).toBe(false)
+
+    wrapper.setProps({
+      temporary: false,
+      value: true
+    })
+    await wrapper.vm.$nextTick() // Wait for value watcher to fire
+
+    expect(wrapper.vm.isActive).toBe(true)
+
+    wrapper.vm.onRouteChange()
+    expect(wrapper.vm.isActive).toBe(true)
+
+    await resizeWindow(400)
+    wrapper.vm.$vuetify.breakpoint.width = 400
+    await wrapper.vm.$nextTick()
+
+    wrapper.vm.onRouteChange()
+    expect(wrapper.vm.isActive).toBe(false)
   })
 })

@@ -1,8 +1,9 @@
 <template>
   <v-navigation-drawer
     v-model="inputValue"
-    clipped
+    :width="300"
     app
+    clipped
   >
     <v-container
       fluid

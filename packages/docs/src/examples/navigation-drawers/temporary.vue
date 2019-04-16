@@ -1,10 +1,10 @@
 <template>
-  <v-layout
-    wrap
-    style="height: 200px;"
-  >
-    <v-container>
-      <v-layout justify-center>
+  <v-card height="400">
+    <v-container fill-height>
+      <v-layout
+        align-center
+        justify-center
+      >
         <v-btn
           color="pink"
           dark
@@ -20,29 +20,28 @@
       absolute
       temporary
     >
-      <v-list class="pa-1">
-        <v-list-item>
-          <v-list-item-avatar>
-            <img src="https://randomuser.me/api/portraits/men/85.jpg">
-          </v-list-item-avatar>
+      <v-list-item>
+        <v-list-item-avatar>
+          <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
+        </v-list-item-avatar>
 
-          <v-list-item-content>
-            <v-list-item-title>John Leider</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
+        <v-list-item-content>
+          <v-list-item-title>John Leider</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
 
-      <v-list class="pt-0" dense>
-        <v-divider></v-divider>
+      <v-divider></v-divider>
+
+      <v-list dense>
 
         <v-list-item
           v-for="item in items"
           :key="item.title"
-          @click=""
+          link
         >
-          <v-list-item-action>
+          <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
+          </v-list-item-icon>
 
           <v-list-item-content>
             <v-list-item-title>{{ item.title }}</v-list-item-title>
@@ -50,7 +49,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-  </v-layout>
+  </v-card>
 </template>
 
 <script>

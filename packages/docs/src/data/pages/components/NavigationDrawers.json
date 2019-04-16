@@ -31,14 +31,18 @@
         {
           "type": "examples",
           "value": [
-            "permanentClipped",
+            "colored",
             "permanentFloating",
             "persistent",
             "mini",
             "temporary",
             "dark",
             "combined",
-            "nested"
+            "nested",
+            "right",
+            "background",
+            "bottom-drawer",
+            "expand-on-hover"
           ]
         }
       ]

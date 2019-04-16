@@ -1,25 +1,29 @@
 <template>
   <v-card
     class="pa-5"
-    color="indigo"
+    color="indigo darken-2"
     flat
   >
-    <v-card class="d-inline-block elevation-12">
+    <v-card
+      elevation="12"
+      width="256"
+    >
       <v-navigation-drawer
         floating
         permanent
-        stateless
-        value="true"
       >
-        <v-list dense>
+        <v-list
+          dense
+          rounded
+        >
           <v-list-item
             v-for="item in items"
             :key="item.title"
-            @click=""
+            link
           >
-            <v-list-item-action>
+            <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-action>
+            </v-list-item-icon>
 
             <v-list-item-content>
               <v-list-item-title>{{ item.title }}</v-list-item-title>
@@ -38,8 +42,7 @@
         items: [
           { title: 'Home', icon: 'dashboard' },
           { title: 'About', icon: 'question_answer' }
-        ],
-        right: null
+        ]
       }
     }
   }
