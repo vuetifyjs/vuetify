@@ -52,7 +52,7 @@ export default function goTo (
   // Cannot be tested properly in jsdom
   // tslint:disable-next-line:promise-must-complete
   /* istanbul ignore next */
-  return new Promise(resolve => requestAnimationFrame(function step (currentTime: number) {
+  return new Promise<number>(resolve => requestAnimationFrame(function step (currentTime: number) {
     const timeElapsed = currentTime - startTime
     const progress = Math.abs(settings.duration ? Math.min(timeElapsed / settings.duration, 1) : 1)
 

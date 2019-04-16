@@ -331,7 +331,7 @@ describe('validatable.ts', () => {
     await wrapper.vm.$nextTick()
 
     // Wait for watcher's timeout
-    await new Promise(resolve => setTimeout(resolve, 0))
+    await new Promise<void>(resolve => setTimeout(resolve, 0))
 
     expect(wrapper.vm.hasInput).toBe(false)
     expect(wrapper.vm.hasFocused).toBe(false)

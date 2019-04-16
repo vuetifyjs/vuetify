@@ -58,12 +58,12 @@ describe('VWindowItem.ts', () => {
     const el = document.createElement('div')
     expect(wrapper.vm.internalHeight).toBeUndefined()
     item.vm.onEnter(el)
-    await new Promise(resolve => window.requestAnimationFrame(resolve))
+    await new Promise<void>(resolve => window.requestAnimationFrame(resolve))
     expect(wrapper.vm.internalHeight).toBe('0px')
 
     // After enter
     item.vm.onAfterEnter()
-    await new Promise(resolve => window.requestAnimationFrame(resolve))
+    await new Promise<void>(resolve => window.requestAnimationFrame(resolve))
     expect(wrapper.vm.internalHeight).toBeUndefined()
     expect(wrapper.vm.isActive).toBeFalsy()
 
@@ -81,7 +81,7 @@ describe('VWindowItem.ts', () => {
 
     item.vm.onAfterEnter()
 
-    await new Promise(resolve => requestAnimationFrame(resolve))
+    await new Promise<void>(resolve => requestAnimationFrame(resolve))
 
     expect(wrapper.vm.isActive).toBeTruthy()
   })
@@ -172,7 +172,7 @@ describe('VWindowItem.ts', () => {
 
     wrapper.vm.onEnter(wrapper.$el, done)
 
-    await new Promise(resolve => requestAnimationFrame(resolve))
+    await new Promise<void>(resolve => requestAnimationFrame(resolve))
 
     expect(done).toHaveBeenCalled()
   })
