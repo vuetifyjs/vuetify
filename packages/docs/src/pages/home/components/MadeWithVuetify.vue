@@ -9,7 +9,10 @@
       v-text="$t('Vuetify.Home.madeWithVuetify')"
     />
 
-    <v-container grid-list-xl mb-3>
+    <v-container
+      grid-list-xl
+      mb-3
+    >
       <v-layout
         align-center
         fill-height
@@ -23,20 +26,49 @@
           sm6
           md4
         >
-          <v-card
-            :href="`${feature.url}?ref=vuetifyjs.com`"
-            elevation="24"
-            target="_blank"
-            rel="noopener"
-            @click="$ga.event('home', 'click', 'mwvjs', feature.title)"
-          >
-            <v-img
-              :alt="feature.title"
-              :src="feature.image"
-              height="300px"
-              width="100%"
-            />
-          </v-card>
+          <v-hover>
+            <template v-slot:default="{ hover }">
+              <v-card
+                elevation="24"
+                @click="$ga.event('home', 'click', 'mwvjs', feature.title)"
+              >
+                <v-img
+                  :alt="feature.title"
+                  :src="feature.image"
+                  height="300px"
+                  width="100%"
+                >
+                  <v-fade-transition>
+                    <v-overlay
+                      v-show="hover"
+                      absolute
+                      opacity="0.9"
+                    >
+                      <h3
+                        class="headline mb-2"
+                        v-text="feature.title"
+                      />
+                      <div
+                        class="overline grey--text mb-5 px-4"
+                        v-text="feature.teaser"
+                      />
+                      <v-btn
+                        :title="`Link to ${feature.title}`"
+                        :href="`${feature.url}?ref=vuetifyjs.com`"
+                        color="success"
+                        fab
+                        large
+                        target="_blank"
+                        rel="noopener"
+                      >
+                        <v-icon>mdi-open-in-new</v-icon>
+                      </v-btn>
+                    </v-overlay>
+                  </v-fade-transition>
+                </v-img>
+              </v-card>
+            </template>
+          </v-hover>
         </v-flex>
       </v-layout>
     </v-container>
@@ -68,9 +100,6 @@
     computed: {
       computedFeatured () {
         return this.featured.slice(0, 6)
-      },
-      features () {
-        return this.$t('Vuetify.Home.features', this.$i18n.fallbackLocale)
       }
     },
 
