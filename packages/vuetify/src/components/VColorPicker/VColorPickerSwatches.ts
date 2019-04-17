@@ -54,7 +54,6 @@ export default Vue.extend({
   methods: {
     genColor (color: string) {
       const content = this.$createElement('div', {
-        staticClass: 'v-color-picker__color-foreground',
         style: {
           background: color
         }
