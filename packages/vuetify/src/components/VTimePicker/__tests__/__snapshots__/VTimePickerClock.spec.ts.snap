@@ -1,286 +1,279 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VTimePickerClock.js should render component 1`] = `
-<div class="v-time-picker-clock theme--light">
-  <div class="v-time-picker-clock__inner">
-    <div class="v-time-picker-clock__hand accent"
-         style="transform: rotate(60deg) scaleY(1);"
-    >
+exports[`VTimePickerClock.ts should render hours in 24hr format 1`] = `
+<div class="v-time-picker-clock v-time-picker-clock--indeterminate theme--light">
+  <div class="v-time-picker-clock__outer">
+    <div class="v-time-picker-clock__inner">
+      <div class="v-time-picker-clock__hand"
+           style="transform: rotate(0deg) scaleY(1);"
+      >
+      </div>
+      <span class="v-time-picker-clock__item v-time-picker-clock__item--active"
+            style="left: 50%; top: 0%;"
+      >
+        <span>
+          00
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 75%; top: 6.698729810778062%;"
+      >
+        <span>
+          01
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 93.30127018922192%; top: 24.999999999999993%;"
+      >
+        <span>
+          02
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 100%; top: 50%;"
+      >
+        <span>
+          03
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 93.30127018922194%; top: 74.99999999999999%;"
+      >
+        <span>
+          04
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 75.00000000000001%; top: 93.30127018922192%;"
+      >
+        <span>
+          05
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 50.00000000000001%; top: 100%;"
+      >
+        <span>
+          06
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 25.000000000000014%; top: 93.30127018922194%;"
+      >
+        <span>
+          07
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 6.698729810778076%; top: 75.00000000000003%;"
+      >
+        <span>
+          08
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 0%; top: 50.00000000000001%;"
+      >
+        <span>
+          09
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 6.6987298107780475%; top: 25.000000000000032%;"
+      >
+        <span>
+          10
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 24.99999999999998%; top: 6.698729810778083%;"
+      >
+        <span>
+          11
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 49.99999999999999%; top: 19%;"
+      >
+        <span>
+          12
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 65.49999999999997%; top: 23.153212482682388%;"
+      >
+        <span>
+          13
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 76.84678751731758%; top: 34.499999999999986%;"
+      >
+        <span>
+          14
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 81%; top: 49.999999999999964%;"
+      >
+        <span>
+          15
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 76.84678751731761%; top: 65.49999999999997%;"
+      >
+        <span>
+          16
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 65.50000000000004%; top: 76.84678751731758%;"
+      >
+        <span>
+          17
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 50.000000000000014%; top: 81%;"
+      >
+        <span>
+          18
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 34.50000000000003%; top: 76.84678751731761%;"
+      >
+        <span>
+          19
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 23.153212482682427%; top: 65.50000000000004%;"
+      >
+        <span>
+          20
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 19%; top: 50.000000000000014%;"
+      >
+        <span>
+          21
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 23.153212482682385%; top: 34.50000000000003%;"
+      >
+        <span>
+          22
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 34.49999999999996%; top: 23.153212482682427%;"
+      >
+        <span>
+          23
+        </span>
+      </span>
     </div>
-    <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
-          style="left: 50%; top: 0%;"
-    >
-      <span>
-        0
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item"
-          style="left: 75%; top: 6.698729810778062%;"
-    >
-      <span>
-        5
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item v-time-picker-clock__item--active v-time-picker-clock__item--disabled accent"
-          style="left: 93.30127018922192%; top: 24.999999999999993%;"
-    >
-      <span>
-        10
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item"
-          style="left: 100%; top: 50%;"
-    >
-      <span>
-        15
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
-          style="left: 93.30127018922194%; top: 74.99999999999999%;"
-    >
-      <span>
-        20
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item"
-          style="left: 75.00000000000001%; top: 93.30127018922192%;"
-    >
-      <span>
-        25
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
-          style="left: 50.00000000000001%; top: 100%;"
-    >
-      <span>
-        30
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item"
-          style="left: 25.000000000000014%; top: 93.30127018922194%;"
-    >
-      <span>
-        35
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
-          style="left: 6.698729810778076%; top: 75.00000000000003%;"
-    >
-      <span>
-        40
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item"
-          style="left: 0%; top: 50.00000000000001%;"
-    >
-      <span>
-        45
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
-          style="left: 6.6987298107780475%; top: 25.000000000000032%;"
-    >
-      <span>
-        50
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item"
-          style="left: 24.99999999999998%; top: 6.698729810778083%;"
-    >
-      <span>
-        55
-      </span>
-    </span>
   </div>
 </div>
 `;
 
-exports[`VTimePickerClock.js should render component with double prop 1`] = `
-<div class="v-time-picker-clock theme--light">
-  <div class="v-time-picker-clock__inner">
-    <div class="v-time-picker-clock__hand accent"
-         style="transform: rotate(120deg) scaleY(1);"
-    >
+exports[`VTimePickerClock.ts should render hours in ampm format 1`] = `
+<div class="v-time-picker-clock v-time-picker-clock--indeterminate theme--light">
+  <div class="v-time-picker-clock__outer">
+    <div class="v-time-picker-clock__inner">
+      <div class="v-time-picker-clock__hand"
+           style="transform: rotate(0deg) scaleY(1);"
+      >
+      </div>
+      <span class="v-time-picker-clock__item v-time-picker-clock__item--active"
+            style="left: 50%; top: 0%;"
+      >
+        <span>
+          12
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 75%; top: 6.698729810778062%;"
+      >
+        <span>
+          1
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 93.30127018922192%; top: 24.999999999999993%;"
+      >
+        <span>
+          2
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 100%; top: 50%;"
+      >
+        <span>
+          3
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 93.30127018922194%; top: 74.99999999999999%;"
+      >
+        <span>
+          4
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 75.00000000000001%; top: 93.30127018922192%;"
+      >
+        <span>
+          5
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 50.00000000000001%; top: 100%;"
+      >
+        <span>
+          6
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 25.000000000000014%; top: 93.30127018922194%;"
+      >
+        <span>
+          7
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 6.698729810778076%; top: 75.00000000000003%;"
+      >
+        <span>
+          8
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 0%; top: 50.00000000000001%;"
+      >
+        <span>
+          9
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 6.6987298107780475%; top: 25.000000000000032%;"
+      >
+        <span>
+          10
+        </span>
+      </span>
+      <span class="v-time-picker-clock__item"
+            style="left: 24.99999999999998%; top: 6.698729810778083%;"
+      >
+        <span>
+          11
+        </span>
+      </span>
     </div>
-    <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
-          style="left: 50%; top: 0%;"
-    >
-      <span>
-        0
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item"
-          style="left: 93.30127018922192%; top: 24.999999999999993%;"
-    >
-      <span>
-        5
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item v-time-picker-clock__item--active v-time-picker-clock__item--disabled accent"
-          style="left: 93.30127018922194%; top: 74.99999999999999%;"
-    >
-      <span>
-        10
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item"
-          style="left: 50.00000000000001%; top: 100%;"
-    >
-      <span>
-        15
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
-          style="left: 6.698729810778076%; top: 75.00000000000003%;"
-    >
-      <span>
-        20
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item"
-          style="left: 6.6987298107780475%; top: 25.000000000000032%;"
-    >
-      <span>
-        25
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
-          style="left: 49.99999999999999%; top: 19%;"
-    >
-      <span>
-        30
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item"
-          style="left: 76.84678751731758%; top: 34.499999999999986%;"
-    >
-      <span>
-        35
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
-          style="left: 76.84678751731761%; top: 65.49999999999997%;"
-    >
-      <span>
-        40
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item"
-          style="left: 50.000000000000014%; top: 81%;"
-    >
-      <span>
-        45
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
-          style="left: 23.153212482682427%; top: 65.50000000000004%;"
-    >
-      <span>
-        50
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item"
-          style="left: 23.153212482682385%; top: 34.50000000000003%;"
-    >
-      <span>
-        55
-      </span>
-    </span>
-  </div>
-</div>
-`;
-
-exports[`VTimePickerClock.js should render disabled component 1`] = `
-<div class="v-time-picker-clock theme--light">
-  <div class="v-time-picker-clock__inner">
-    <div class="v-time-picker-clock__hand accent"
-         style="transform: rotate(60deg) scaleY(1);"
-    >
-    </div>
-    <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
-          style="left: 50%; top: 0%;"
-    >
-      <span>
-        0
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
-          style="left: 75%; top: 6.698729810778062%;"
-    >
-      <span>
-        5
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item v-time-picker-clock__item--active v-time-picker-clock__item--disabled accent"
-          style="left: 93.30127018922192%; top: 24.999999999999993%;"
-    >
-      <span>
-        10
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
-          style="left: 100%; top: 50%;"
-    >
-      <span>
-        15
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
-          style="left: 93.30127018922194%; top: 74.99999999999999%;"
-    >
-      <span>
-        20
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
-          style="left: 75.00000000000001%; top: 93.30127018922192%;"
-    >
-      <span>
-        25
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
-          style="left: 50.00000000000001%; top: 100%;"
-    >
-      <span>
-        30
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
-          style="left: 25.000000000000014%; top: 93.30127018922194%;"
-    >
-      <span>
-        35
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
-          style="left: 6.698729810778076%; top: 75.00000000000003%;"
-    >
-      <span>
-        40
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
-          style="left: 0%; top: 50.00000000000001%;"
-    >
-      <span>
-        45
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
-          style="left: 6.6987298107780475%; top: 25.000000000000032%;"
-    >
-      <span>
-        50
-      </span>
-    </span>
-    <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
-          style="left: 24.99999999999998%; top: 6.698729810778083%;"
-    >
-      <span>
-        55
-      </span>
-    </span>
   </div>
 </div>
 `;

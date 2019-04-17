@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VTimePickerTitle.ts should render component in 12hr 1`] = `
+exports[`VTimePickerTitle.ts should render ampm buttons 1`] = `
 <div class="v-time-picker-title">
   <div class="v-time-picker-title__time">
     <div class="v-picker__title__btn">
@@ -14,40 +14,10 @@ exports[`VTimePickerTitle.ts should render component in 12hr 1`] = `
     </div>
   </div>
   <div class="v-time-picker-title__ampm">
-    <div class="v-picker__title__btn">
+    <div class="v-picker__title__btn v-picker__title__btn--active">
       AM
     </div>
-    <div class="v-picker__title__btn v-picker__title__btn--active">
-      PM
-    </div>
-  </div>
-</div>
-`;
-
-exports[`VTimePickerTitle.ts should render component in 12hr. with useSeconds 1`] = `
-<div class="v-time-picker-title">
-  <div class="v-time-picker-title__time">
     <div class="v-picker__title__btn">
-      2
-    </div>
-    <span>
-      :
-    </span>
-    <div class="v-picker__title__btn">
-      13
-    </div>
-    <span>
-      :
-    </span>
-    <div class="v-picker__title__btn">
-      25
-    </div>
-  </div>
-  <div class="v-time-picker-title__ampm">
-    <div class="v-picker__title__btn">
-      AM
-    </div>
-    <div class="v-picker__title__btn v-picker__title__btn--active">
       PM
     </div>
   </div>
@@ -70,61 +40,17 @@ exports[`VTimePickerTitle.ts should render component in 24hr 1`] = `
 </div>
 `;
 
-exports[`VTimePickerTitle.ts should render component in 24hr. with useSeconds 1`] = `
+exports[`VTimePickerTitle.ts should render component in ampm 1`] = `
 <div class="v-time-picker-title">
   <div class="v-time-picker-title__time">
     <div class="v-picker__title__btn">
-      14
+      2
     </div>
     <span>
       :
     </span>
     <div class="v-picker__title__btn">
       13
-    </div>
-    <span>
-      :
-    </span>
-    <div class="v-picker__title__btn">
-      25
-    </div>
-  </div>
-</div>
-`;
-
-exports[`VTimePickerTitle.ts should render component when selecting hour 1`] = `
-<div class="v-time-picker-title">
-  <div class="v-time-picker-title__time">
-    <div class="v-picker__title__btn v-picker__title__btn--active">
-      14
-    </div>
-    <span>
-      :
-    </span>
-    <div class="v-picker__title__btn">
-      13
-    </div>
-  </div>
-</div>
-`;
-
-exports[`VTimePickerTitle.ts should render component when selecting hour. with useSeconds 1`] = `
-<div class="v-time-picker-title">
-  <div class="v-time-picker-title__time">
-    <div class="v-picker__title__btn v-picker__title__btn--active">
-      14
-    </div>
-    <span>
-      :
-    </span>
-    <div class="v-picker__title__btn">
-      13
-    </div>
-    <span>
-      :
-    </span>
-    <div class="v-picker__title__btn">
-      25
     </div>
   </div>
 </div>
@@ -143,42 +69,42 @@ exports[`VTimePickerTitle.ts should render disabled component 1`] = `
       13
     </div>
   </div>
-  <div class="v-time-picker-title__ampm">
-    <div class="v-picker__title__btn v-picker__title__btn--readonly">
-      AM
-    </div>
-    <div class="v-picker__title__btn v-picker__title__btn--active v-picker__title__btn--readonly">
-      PM
-    </div>
-  </div>
 </div>
 `;
 
-exports[`VTimePickerTitle.ts should render disabled component. with useSeconds 1`] = `
+exports[`VTimePickerTitle.ts should render seconds 1`] = `
 <div class="v-time-picker-title">
   <div class="v-time-picker-title__time">
-    <div class="v-picker__title__btn v-picker__title__btn--readonly">
+    <div class="v-picker__title__btn">
       2
     </div>
     <span>
       :
     </span>
-    <div class="v-picker__title__btn v-picker__title__btn--readonly">
+    <div class="v-picker__title__btn">
       13
     </div>
     <span>
       :
     </span>
-    <div class="v-picker__title__btn v-picker__title__btn--readonly">
-      --
+    <div class="v-picker__title__btn">
+      30
     </div>
   </div>
-  <div class="v-time-picker-title__ampm">
-    <div class="v-picker__title__btn v-picker__title__btn--readonly">
-      AM
+</div>
+`;
+
+exports[`VTimePickerTitle.ts should render with selectMode from mount 1`] = `
+<div class="v-time-picker-title">
+  <div class="v-time-picker-title__time">
+    <div class="v-picker__title__btn">
+      2
     </div>
-    <div class="v-picker__title__btn v-picker__title__btn--active v-picker__title__btn--readonly">
-      PM
+    <span>
+      :
+    </span>
+    <div class="v-picker__title__btn v-picker__title__btn--active">
+      13
     </div>
   </div>
 </div>

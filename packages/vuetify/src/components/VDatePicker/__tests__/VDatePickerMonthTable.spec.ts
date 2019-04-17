@@ -5,10 +5,15 @@ import {
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
+import { createNativeLocaleFormatter } from '../util'
+import { touch } from '../../../../test'
 
 describe('VDatePickerMonthTable.ts', () => {
   type Instance = InstanceType<typeof VDatePickerMonthTable>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+
+  const dateFormat = createNativeLocaleFormatter('en-US', { month: 'short', timeZone: 'UTC' }, { start: 5, length: 2 })
+
   beforeEach(() => {
     mountFunction = (options?: MountOptions<Instance>) => {
       return mount(VDatePickerMonthTable, {
@@ -25,9 +30,24 @@ describe('VDatePickerMonthTable.ts', () => {
   it('should render component and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2005',
-        current: '2005-05',
-        value: '2005-11',
+        dateFormat,
+        showCurrent: '2005-05',
+        pickerDate: '2005-01',
+        value: ['2005-11'],
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render component with disabled months and match snapshot', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        dateFormat,
+        showCurrent: '2005-05',
+        pickerDate: '2005-01',
+        value: ['2005-11'],
+        allowedDates: v => ['2005-05', '2005-01'].includes(v),
       },
     })
 
@@ -37,145 +57,114 @@ describe('VDatePickerMonthTable.ts', () => {
   it('should render component and match snapshot (multiple)', () => {
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2005',
-        current: '2005-05',
-        value: ['2005-11', '2005-10'],
+        dateFormat,
+        showCurrent: '2005-05',
+        pickerDate: '2005-01',
+        value: ['2005-10', '2005-11'],
       },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it.skip('should watch tableDate value and run transition', async () => { // TODO: make this one work
-    const wrapper = mountFunction({
-      propsData: {
-        tableDate: '2005',
-        current: '2005-05',
-        value: '2005-11',
-      },
-    })
-
-    wrapper.setProps({
-      tableDate: '2006',
-    })
-    await wrapper.vm.$nextTick()
-    expect(wrapper.findAll('table').at(0).element.className).toBe('tab-transition-enter tab-transition-enter-active')
-  })
-
-  it.skip('should watch tableDate value and run reverse transition', async () => { // TODO: make this one work
-    const wrapper = mountFunction({
-      propsData: {
-        tableDate: '2005',
-        current: '2005-05',
-        value: '2005-11',
-      },
-    })
-
-    wrapper.setProps({
-      tableDate: '2004',
-    })
-    await wrapper.vm.$nextTick()
-    expect(wrapper.findAll('table').at(0).element.className).toBe('tab-reverse-transition-enter tab-reverse-transition-enter-active')
-  })
-
   it('should emit event when month button is clicked', () => {
+    const month = jest.fn()
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2005',
+        dateFormat,
+        pickerDate: '2005-01',
         current: '2005-05',
-        value: '2005-11',
+        value: ['2005-11'],
+      },
+      listeners: {
+        'update:month': month,
       },
     })
 
-    const input = jest.fn()
-    wrapper.vm.$on('input', input)
-
-    wrapper.findAll('tbody button').at(0).trigger('click')
-    expect(input).toHaveBeenCalledWith('2005-01')
+    wrapper.find('tbody button').trigger('click')
+    expect(month).toHaveBeenCalledWith('2005-01')
   })
 
   it('should not emit event when disabled month button is clicked', () => {
+    const month = jest.fn()
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2005',
+        dateFormat,
+        pickerDate: '2005-01',
         current: '2005-05',
-        value: '2005-11',
+        value: ['2005-11'],
         allowedDates: () => false,
       },
+      listeners: {
+        'update:month': month,
+      },
     })
 
-    const input = jest.fn()
-    wrapper.vm.$on('input', input)
-
-    wrapper.findAll('tbody button').at(0).trigger('click')
-    expect(input).not.toHaveBeenCalled()
+    wrapper.find('tbody button').trigger('click')
+    expect(month).not.toHaveBeenCalled()
   })
 
-  it('should emit tableDate event when scrolled and scrollable', () => {
+  it('should emit pickerDate event when scrolled and scrollable', () => {
+    const date = jest.fn()
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2005',
+        dateFormat,
+        pickerDate: '2005-01',
+        current: '2005-05',
+        value: ['2005-11'],
         scrollable: true,
       },
+      listeners: {
+        'update:pickerDate': date,
+      },
     })
-
-    const tableDate = jest.fn()
-    wrapper.vm.$on('update:table-date', tableDate)
 
     wrapper.trigger('wheel')
-    expect(tableDate).toHaveBeenCalledWith('2006')
+    expect(date).toHaveBeenCalledWith('2006-01')
   })
 
-  it('should not emit tableDate event when scrolled and not scrollable', () => {
+  it('should not emit pickerDate event when scrolled and not scrollable', () => {
+    const pickerDate = jest.fn()
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2005',
+        dateFormat,
+        pickerDate: '2005-01',
+      },
+      listeners: {
+        'update:pickerDate': pickerDate,
       },
     })
-
-    const tableDate = jest.fn()
-    wrapper.vm.$on('update:table-date', tableDate)
 
     wrapper.trigger('wheel')
-    expect(tableDate).not.toHaveBeenCalled()
+    expect(pickerDate).not.toHaveBeenCalled()
   })
 
-  // TODO
-  it.skip('should emit tableDate event when swiped', () => {
+  it('should emit pickerDate event when swiped', () => {
+    const pickerDate = jest.fn()
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2005',
+        dateFormat,
+        pickerDate: '2005-01',
+      },
+      listeners: {
+        'update:pickerDate': pickerDate,
       },
     })
 
-    const tableDate = jest.fn()
-    wrapper.vm.$on('update:table-date', tableDate)
+    touch(wrapper).start(0, 0).end(50, 0)
 
-    wrapper.trigger('touchstart')
-    wrapper.trigger('touchend')
-    expect(tableDate).toHaveBeenCalledWith(2006)
-  })
+    expect(pickerDate).toHaveBeenCalledWith('2004-01')
 
-  it('should change tableDate when touch is called', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        tableDate: '2005',
-      },
-    })
+    touch(wrapper).start(50, 0).end(0, 0)
 
-    const tableDate = jest.fn()
-    wrapper.vm.$on('update:table-date', tableDate)
-
-    wrapper.vm.touch(1, wrapper.vm.calculateTableDate)
-    expect(tableDate).toHaveBeenCalledWith('2006')
-    wrapper.vm.touch(-1, wrapper.vm.calculateTableDate)
-    expect(tableDate).toHaveBeenCalledWith('2004')
+    expect(pickerDate).toHaveBeenCalledWith('2006-01')
   })
 
   it('should render component with events (array) and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2005',
+        dateFormat,
+        pickerDate: '2005-01',
         events: ['2005-07', '2005-11'],
         eventColor: 'red',
       },
@@ -187,7 +176,8 @@ describe('VDatePickerMonthTable.ts', () => {
   it('should render component with events (function) and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2005',
+        dateFormat,
+        pickerDate: '2005-01',
         events: date => date === '2005-07' || date === '2005-11',
         eventColor: 'red',
       },
@@ -199,7 +189,8 @@ describe('VDatePickerMonthTable.ts', () => {
   it('should render component with events colored by object and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2005',
+        dateFormat,
+        pickerDate: '2005-01',
         events: ['2005-07', '2005-11'],
         eventColor: { '2005-07': 'red', '2005-11': 'blue lighten-1' },
       },
@@ -211,7 +202,8 @@ describe('VDatePickerMonthTable.ts', () => {
   it('should render component with events colored by function and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2005',
+        dateFormat,
+        pickerDate: '2005-01',
         events: ['2005-07', '2005-11'],
         eventColor: date => ({ '2005-07': 'red', '2005-11': 'blue lighten-1' }[date]),
       },

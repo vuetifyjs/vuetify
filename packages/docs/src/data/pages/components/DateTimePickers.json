@@ -1,0 +1,52 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "file": "components/VDateTimePicker",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [
+            "v-date-time-picker",
+            "v-date-picker",
+            "v-time-picker"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/date-pickers",
+            "components/time-pickers",
+            "components/color-pickers"
+          ]
+        }
+      ]
+    }
+  ]
+}

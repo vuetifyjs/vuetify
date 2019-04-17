@@ -34,8 +34,7 @@ export default mixins<options &
     format: Function as PropType<DatePickerFormatter | undefined>,
     min: [Number, String],
     max: [Number, String],
-    readonly: Boolean,
-    value: [Number, String],
+    value: Array as PropType<string[]>,
   },
 
   data () {
@@ -50,43 +49,54 @@ export default mixins<options &
     },
   },
 
+  watch: {
+    value: 'scrollToFirstActiveYear',
+  },
+
   mounted () {
-    setTimeout(() => {
-      const activeItem = this.$el.getElementsByClassName('active')[0]
-      if (activeItem) {
-        this.$el.scrollTop = activeItem.offsetTop - this.$el.offsetHeight / 2 + activeItem.offsetHeight / 2
-      } else if (this.min && !this.max) {
-        this.$el.scrollTop = this.$el.scrollHeight
-      } else if (!this.min && this.max) {
-        this.$el.scrollTop = 0
-      } else {
-        this.$el.scrollTop = this.$el.scrollHeight / 2 - this.$el.offsetHeight / 2
-      }
-    })
+    this.scrollToFirstActiveYear()
   },
 
   methods: {
+    scrollToFirstActiveYear () {
+      setTimeout(() => {
+        const activeItem = this.$el.getElementsByClassName('active')[0]
+        if (activeItem) {
+          this.$el.scrollTop = activeItem.offsetTop - this.$el.offsetHeight / 2 + activeItem.offsetHeight / 2
+        } else if (this.min && !this.max) {
+          this.$el.scrollTop = this.$el.scrollHeight
+        } else if (!this.min && this.max) {
+          this.$el.scrollTop = 0
+        } else {
+          this.$el.scrollTop = this.$el.scrollHeight / 2 - this.$el.offsetHeight / 2
+        }
+      })
+    },
     genYearItem (year: number): VNode {
       const formatted = this.formatter(`${year}`)
-      const active = parseInt(this.value, 10) === year
+      const active = this.value && !!this.value.find(date => parseInt(date, 10) === year)
       const color = active && (this.color || 'primary')
 
       return this.$createElement('li', this.setTextColor(color, {
         key: year,
-        class: { active },
+        class: active ? { active } : undefined,
         on: {
-          click: () => this.$emit('input', year),
+          click: () => this.$emit('input', String(year)),
         },
       }), formatted)
     },
 
     genYearItems (): VNode[] {
       const children = []
-      const selectedYear = this.value ? parseInt(this.value, 10) : new Date().getFullYear()
-      const maxYear = this.max ? parseInt(this.max, 10) : (selectedYear + 100)
-      const minYear = Math.min(maxYear, this.min ? parseInt(this.min, 10) : (selectedYear - 100))
+      const selectedYears = this.value && this.value.length
+        ? this.value.map(date => parseInt(date, 10))
+        : [new Date().getFullYear()]
+      const maxYear = Math.max(...selectedYears)
+      const minYear = Math.min(...selectedYears)
+      const lastYear = this.max ? parseInt(this.max, 10) : (maxYear + 100)
+      const firstYear = Math.min(lastYear, this.min ? parseInt(this.min, 10) : (minYear - 100))
 
-      for (let year = maxYear; year >= minYear; year--) {
+      for (let year = lastYear; year >= firstYear; year--) {
         children.push(this.genYearItem(year))
       }
 

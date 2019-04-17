@@ -2,40 +2,32 @@ import './VDatePickerTitle.sass'
 
 // Components
 import VIcon from '../VIcon'
-
-// Mixins
-import PickerButton from '../../mixins/picker-button'
-
-// Utils
-import mixins from '../../util/mixins'
+import { genPickerButton } from '../VPicker/VPicker'
 
 // Types
-import { VNode } from 'vue'
+import Vue, { VNode, PropType } from 'vue'
+import { DatePickerTitleDateFormatter, DatePickerFormatter, DatePickerType } from 'types'
+import { PropValidator } from 'vue/types/options'
+import { DatePickerEnum } from './VDate'
 
-export default mixins(
-  PickerButton
 /* @vue/component */
-).extend({
+export default Vue.extend({
   name: 'v-date-picker-title',
 
+  inheritAttrs: false,
+
   props: {
-    date: {
-      type: String,
-      default: '',
-    },
+    dayFormat: Function as PropValidator<DatePickerTitleDateFormatter>,
+    yearFormat: Function as PropValidator<DatePickerFormatter>,
+    value: Array as PropValidator<string[]>,
     disabled: Boolean,
     readonly: Boolean,
     selectingYear: Boolean,
-    value: {
-      type: String,
-    },
-    year: {
-      type: [Number, String],
-      default: '',
-    },
+    landscape: Boolean,
     yearIcon: {
       type: String,
     },
+    type: String as PropType<DatePickerType>,
   },
 
   data: () => ({
@@ -46,11 +38,25 @@ export default mixins(
     computedTransition (): string {
       return this.isReversing ? 'picker-reverse-transition' : 'picker-transition'
     },
+    date (): string {
+      return this.dayFormat(this.value, this.type)
+    },
+    year (): string {
+      return this.value && this.value.length ? this.yearFormat(this.value[0]) : '-'
+    },
+    key (): string | undefined {
+      return this.value && this.value.length ? this.value[0] : undefined
+    },
   },
 
   watch: {
-    value (val: string, prev: string) {
-      this.isReversing = val < prev
+    value (val: string[], prev: string[]) {
+      let isReversing = false
+
+      if (val && val.length > 1 && prev) isReversing = val.length < prev.length
+      else if (val && prev) isReversing = val[0] < prev[0]
+
+      this.isReversing = isReversing
     },
   },
 
@@ -58,15 +64,23 @@ export default mixins(
     genYearIcon (): VNode {
       return this.$createElement(VIcon, {
         props: {
+          small: true,
           dark: true,
         },
       }, this.yearIcon)
     },
-    getYearBtn (): VNode {
-      return this.genPickerButton('selectingYear', true, [
-        String(this.year),
-        this.yearIcon ? this.genYearIcon() : null,
-      ], false, 'v-date-picker-title__year')
+    genYearBtn (): VNode {
+      return genPickerButton(
+        this.$createElement,
+        [
+          String(this.year),
+          this.yearIcon ? this.genYearIcon() : null,
+        ],
+        () => this.$emit('update:activePicker', DatePickerEnum.Year),
+        this.selectingYear === true,
+        false,
+        'v-date-picker-title__year'
+      )
     },
     genTitleText (): VNode {
       return this.$createElement('transition', {
@@ -76,12 +90,19 @@ export default mixins(
       }, [
         this.$createElement('div', {
           domProps: { innerHTML: this.date || '&nbsp;' },
-          key: this.value,
+          key: this.key,
         }),
       ])
     },
     genTitleDate (): VNode {
-      return this.genPickerButton('selectingYear', false, [this.genTitleText()], false, 'v-date-picker-title__date')
+      return genPickerButton(
+        this.$createElement,
+        [this.genTitleText()],
+        () => this.$emit('update:activePicker', DatePickerEnum.Date),
+        this.selectingYear === false,
+        false,
+        'v-date-picker-title__date'
+      )
     },
   },
 
@@ -92,7 +113,7 @@ export default mixins(
         'v-date-picker-title--disabled': this.disabled,
       },
     }, [
-      this.getYearBtn(),
+      this.genYearBtn(),
       this.genTitleDate(),
     ])
   },

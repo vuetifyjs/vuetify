@@ -1,39 +1,71 @@
 import './VPicker.sass'
 import '../VCard/VCard.sass'
 
+// Components
+import VPickerBtn from './VPickerBtn'
+
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
+import mixins from '../../util/mixins'
 
 // Helpers
 import { convertToUnit } from '../../util/helpers'
 
 // Types
-import { VNode } from 'vue/types'
-import mixins from '../../util/mixins'
+import { VNode, CreateElement, VNodeChildren } from 'vue/types'
+
+export function genPickerButton (
+  h: CreateElement,
+  children: VNodeChildren,
+  click: () => void,
+  active: Boolean,
+  readonly = false,
+  staticClass = ''
+) {
+  return h(VPickerBtn, {
+    staticClass,
+    props: {
+      active,
+      readonly,
+    },
+    on: {
+      click,
+    },
+  }, children)
+}
+
+const minWidth = 290
 
 /* @vue/component */
 export default mixins(Colorable, Themeable).extend({
   name: 'v-picker',
 
+  inheritAttrs: false,
+
   props: {
+    headerColor: String,
+    noTitle: Boolean,
     fullWidth: Boolean,
     landscape: Boolean,
-    noTitle: Boolean,
     transition: {
-      type: String,
+      type: [String, Boolean],
       default: 'fade-transition',
     },
     width: {
       type: [Number, String],
-      default: 290,
+      default: minWidth,
     },
   },
 
   computed: {
     computedTitleColor (): string | false {
       const defaultTitleColor = this.isDark ? false : (this.color || 'primary')
-      return this.color || defaultTitleColor
+      return this.headerColor || defaultTitleColor
+    },
+    computedWidth (): number {
+      if (!this.width || parseInt(this.width, 10) < minWidth) return minWidth
+      else return parseInt(this.width, 10)
     },
   },
 
@@ -47,6 +79,8 @@ export default mixins(Colorable, Themeable).extend({
       }), this.$slots.title)
     },
     genBodyTransition () {
+      if (!this.transition) return this.$slots.default
+
       return this.$createElement('transition', {
         props: {
           name: this.transition,
@@ -61,7 +95,7 @@ export default mixins(Colorable, Themeable).extend({
           ...this.themeClasses,
         },
         style: this.fullWidth ? undefined : {
-          width: convertToUnit(this.width),
+          width: convertToUnit(this.computedWidth),
         },
       }, [
         this.genBodyTransition(),
@@ -86,9 +120,9 @@ export default mixins(Colorable, Themeable).extend({
         ...this.themeClasses,
       },
     }, [
-      this.$slots.title ? this.genTitle() : null,
+      this.$slots.title && !this.noTitle && this.genTitle(),
       this.genBody(),
-      this.$slots.actions ? this.genActions() : null,
+      this.$slots.actions && this.genActions(),
     ])
   },
 })

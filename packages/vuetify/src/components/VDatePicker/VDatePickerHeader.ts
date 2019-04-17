@@ -10,12 +10,13 @@ import Localable from '../../mixins/localable'
 import Themeable from '../../mixins/themeable'
 
 // Utils
-import { createNativeLocaleFormatter, monthChange } from './util'
+import { monthChange } from './util'
 import mixins from '../../util/mixins'
 
 // Types
 import { VNode, PropType } from 'vue'
-import { DatePickerFormatter } from 'types'
+import { DatePickerFormatter, DatePickerType } from 'types'
+import { DatePickerEnum } from './VDate'
 
 export default mixins(
   Colorable,
@@ -25,9 +26,12 @@ export default mixins(
 ).extend({
   name: 'v-date-picker-header',
 
+  inheritAttrs: false,
+
   props: {
     disabled: Boolean,
-    format: Function as PropType<DatePickerFormatter | undefined>,
+    yearFormat: Function as PropType<DatePickerFormatter>,
+    monthFormat: Function as PropType<DatePickerFormatter>,
     min: String,
     max: String,
     nextIcon: {
@@ -39,10 +43,12 @@ export default mixins(
       default: '$prev',
     },
     readonly: Boolean,
+    /** value is string formatted as year-month (e.g. 2005-11) */
     value: {
-      type: [Number, String],
+      type: String,
       required: true,
     },
+    activePicker: String as PropType<DatePickerType>,
   },
 
   data () {
@@ -52,13 +58,18 @@ export default mixins(
   },
 
   computed: {
+    isMonthPicker (): boolean {
+      return this.activePicker === DatePickerEnum.Month
+    },
+    isDatePicker (): boolean {
+      return this.activePicker === DatePickerEnum.Date
+    },
     formatter (): DatePickerFormatter {
-      if (this.format) {
-        return this.format
-      } else if (String(this.value).split('-')[1]) {
-        return createNativeLocaleFormatter(this.currentLocale, { month: 'long', year: 'numeric', timeZone: 'UTC' }, { length: 7 })
-      } else {
-        return createNativeLocaleFormatter(this.currentLocale, { year: 'numeric', timeZone: 'UTC' }, { length: 4 })
+      const fn = (v: string) => v
+      switch (this.activePicker) {
+        case DatePickerEnum.Date: return this.monthFormat || fn
+        case DatePickerEnum.Month: return this.yearFormat || fn
+        default: return fn
       }
     },
   },
@@ -71,48 +82,50 @@ export default mixins(
 
   methods: {
     genBtn (change: number) {
+      const newDate = this.calculateChange(this.value, change, this.activePicker)
       const disabled = this.disabled ||
-        (change < 0 && this.min && this.calculateChange(change) < this.min) ||
-        (change > 0 && this.max && this.calculateChange(change) > this.max)
+        (change < 0 && this.min && newDate < this.min) ||
+        (change > 0 && this.max && newDate > this.max)
 
       return this.$createElement(VBtn, {
         props: {
           dark: this.dark,
           disabled,
           icon: true,
+          small: true,
           light: this.light,
         },
         nativeOn: {
           click: (e: Event) => {
             e.stopPropagation()
-            this.$emit('input', this.calculateChange(change))
+            this.$emit(`update:pickerDate`, newDate)
           },
         },
       }, [
         this.$createElement(VIcon, ((change < 0) === !this.$vuetify.rtl) ? this.prevIcon : this.nextIcon),
       ])
     },
-    calculateChange (sign: number) {
-      const [year, month] = String(this.value).split('-').map(Number)
+    calculateChange (value: string, sign: number, activePicker: DatePickerType) {
+      const [year] = value.split('-').map(Number)
 
-      if (month == null) {
-        return `${year + sign}`
-      } else {
-        return monthChange(String(this.value), sign)
+      switch (activePicker) {
+        case DatePickerEnum.Date: return monthChange(value, sign)
+        case DatePickerEnum.Month: return `${year + sign}`
+        default: return value
       }
     },
     genHeader () {
       const color = !this.disabled && (this.color || 'accent')
       const header = this.$createElement('div', this.setTextColor(color, {
-        key: String(this.value),
+        key: this.value,
       }), [this.$createElement('button', {
         attrs: {
           type: 'button',
         },
         on: {
-          click: () => this.$emit('toggle'),
+          click: () => this.$emit('update:activePicker', this.isDatePicker ? DatePickerEnum.Month : DatePickerEnum.Year),
         },
-      }, [this.$slots.default || this.formatter(String(this.value))])])
+      }, [this.$slots.default || this.formatter(this.value)])])
 
       const transition = this.$createElement('transition', {
         props: {

@@ -138,7 +138,8 @@
         "children": [
           { "text": "colorPickers", "to": "color-pickers" },
           { "text": "datePickers", "to": "date-pickers" },
-          { "text": "timePickers", "to": "time-pickers" }
+          { "text": "timePickers", "to": "time-pickers" },
+          { "text": "dateTimePickers", "to": "date-time-pickers" }
         ]
       },
       {

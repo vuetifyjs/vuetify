@@ -1,0 +1,10 @@
+{
+  "props": {
+    "fullWidth": "Picker will use all available width",
+    "headerColor": "Background color of the picker header",
+    "landscape": "Orients the picker horizontally",
+    "hideHeader": "Hides the picker header",
+    "transition": "???",
+    "width": "Width of picker"
+  }
+}

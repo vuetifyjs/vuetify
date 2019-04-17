@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import VTimePickerTitle from '../VTimePickerTitle'
-import { SelectingTimes } from '../VTimePicker'
 import { Lang } from '../../../services/lang'
 import {
   mount,
   Wrapper,
   MountOptions,
 } from '@vue/test-utils'
+import { TimePickerEnum } from '../VTime'
 
 Vue.prototype.$vuetify = {
   lang: new Lang(),
@@ -19,164 +19,228 @@ describe('VTimePickerTitle.ts', () => {
     mountFunction = (options?: MountOptions<Instance>) => {
       return mount(VTimePickerTitle, options)
     }
-  });
+  })
 
-  [true, false].forEach(useSecondsValue => {
-    const useSecondsDesc = (useSecondsValue ? '. with useSeconds' : '')
-    it('should render component in 24hr' + useSecondsDesc, () => {
-      const wrapper = mountFunction({
-        propsData: {
+  it('should render component in 24hr', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        time: {
           hour: 14,
           minute: 13,
-          second: 25,
-          period: 'pm',
-          ampm: false,
-          useSeconds: useSecondsValue,
         },
-      })
-
-      expect(wrapper.html()).toMatchSnapshot()
+        format: '24hr',
+      },
     })
 
-    it('should render disabled component' + useSecondsDesc, () => {
-      const wrapper = mountFunction({
-        propsData: {
-          disabled: true,
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render component in ampm', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        time: {
           hour: 14,
           minute: 13,
-          period: 'pm',
-          ampm: true,
-          useSeconds: useSecondsValue,
         },
-      })
-
-      expect(wrapper.html()).toMatchSnapshot()
+      },
     })
 
-    it('should render component in 12hr' + useSecondsDesc, () => {
-      const wrapper = mountFunction({
-        propsData: {
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render seconds', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        time: {
           hour: 14,
           minute: 13,
-          second: 25,
-          period: 'pm',
-          ampm: true,
-          useSeconds: useSecondsValue,
+          second: 30,
         },
-      })
-
-      expect(wrapper.html()).toMatchSnapshot()
+        useSeconds: true,
+      },
     })
 
-    it('should render component when selecting hour' + useSecondsDesc, () => {
-      const wrapper = mountFunction({
-        propsData: {
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render ampm buttons', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        time: {
           hour: 14,
           minute: 13,
-          second: 25,
-          period: 'pm',
-          selecting: SelectingTimes.Hour,
-          useSeconds: useSecondsValue,
         },
-      })
-
-      expect(wrapper.html()).toMatchSnapshot()
-    })
-
-    it('should emit event when clicked on am/pm' + useSecondsDesc, async () => {
-      const wrapper = mountFunction({
-        propsData: {
-          hour: 14,
-          minute: 13,
-          second: 25,
-          period: 'pm',
-          ampm: true,
-          useSeconds: useSecondsValue,
-        },
-      })
-
-      const period = jest.fn()
-      wrapper.vm.$on('update:period', period)
-
-      wrapper.find('.v-time-picker-title__ampm .v-picker__title__btn--active').trigger('click')
-      expect(period).not.toHaveBeenCalled()
-      wrapper.find('.v-time-picker-title__ampm .v-picker__title__btn:not(.v-picker__title__btn--active)').trigger('click')
-      expect(period).toHaveBeenCalledWith('am')
-
-      wrapper.setProps({
-        hour: 2,
-        minute: 13,
-        second: 35,
         period: 'am',
-      })
-      wrapper.find('.v-time-picker-title__ampm .v-picker__title__btn:not(.v-picker__title__btn--active)').trigger('click')
-      expect(period).toHaveBeenCalledWith('pm')
+        showAmPm: true,
+      },
     })
 
-    it('should not emit event when clicked on readonly am/pm' + useSecondsDesc, async () => {
-      const wrapper = mountFunction({
-        propsData: {
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should emit event when clicking hour, minute, second', async () => {
+    const selectMode = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        time: {
           hour: 14,
           minute: 13,
-          second: 25,
-          period: 'pm',
-          ampm: true,
-          readonly: true,
-          useSeconds: useSecondsValue,
+          second: 30,
         },
-      })
-
-      const period = jest.fn()
-      wrapper.vm.$on('update:period', period)
-
-      wrapper.find('.v-time-picker-title__ampm .v-picker__title__btn:not(.v-picker__title__btn--active)').trigger('click')
-      expect(period).not.toHaveBeenCalled()
+        useSeconds: true,
+        format: '24hr',
+      },
+      listeners: {
+        'update:selectMode': selectMode,
+      },
     })
 
-    it('should emit event when clicked on hours/minutes/seconds' + useSecondsDesc, async () => {
-      const wrapper = mountFunction({
-        propsData: {
+    const buttons = wrapper.findAll('.v-time-picker-title__time .v-picker__title__btn')
+
+    buttons.at(0).element.click()
+    await wrapper.vm.$nextTick()
+
+    expect(selectMode).toHaveBeenCalledWith(TimePickerEnum.Hour)
+
+    buttons.at(1).element.click()
+    await wrapper.vm.$nextTick()
+
+    expect(selectMode).toHaveBeenCalledWith(TimePickerEnum.Minute)
+
+    buttons.at(2).element.click()
+    await wrapper.vm.$nextTick()
+
+    expect(selectMode).toHaveBeenCalledWith(TimePickerEnum.Second)
+  })
+
+  it('should render disabled component', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        time: {
           hour: 14,
           minute: 13,
-          second: 25,
-          period: 'pm',
-          useSeconds: useSecondsValue,
         },
-      })
-
-      const selecting = jest.fn()
-      wrapper.vm.$on('update:selecting', selecting)
-
-      wrapper.findAll('.v-time-picker-title__time .v-picker__title__btn').at(1).trigger('click')
-      expect(selecting).toHaveBeenCalledWith(SelectingTimes.Minute)
-      wrapper.findAll('.v-time-picker-title__time .v-picker__title__btn').at(0).trigger('click')
-      expect(selecting).toHaveBeenCalledWith(SelectingTimes.Hour)
-      if (useSecondsValue) {
-        wrapper.findAll('.v-time-picker-title__time .v-picker__title__btn').at(2).trigger('click')
-        expect(selecting).toHaveBeenCalledWith(SelectingTimes.Second)
-      }
-      wrapper.setProps({ selecting: SelectingTimes.Hour })
-      await wrapper.vm.$nextTick()
-      wrapper.findAll('.v-time-picker-title__time .v-picker__title__btn').at(1).trigger('click')
-      expect(selecting).toHaveBeenCalledWith(SelectingTimes.Minute)
+        disabled: true,
+      },
     })
 
-    it('should emit event when clicked on readonly hours/minutes' + useSecondsDesc, async () => {
-      const wrapper = mountFunction({
-        propsData: {
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render with selectMode from mount', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        time: {
           hour: 14,
           minute: 13,
-          period: 'pm',
-          readonly: true,
-          useSeconds: useSecondsValue,
         },
-      })
-
-      const selecting = jest.fn()
-      wrapper.vm.$on('update:selecting', selecting)
-
-      wrapper.find('.v-time-picker-title__time .v-picker__title__btn').trigger('click')
-      expect(selecting).toHaveBeenCalledWith(SelectingTimes.Hour)
+        selectMode: TimePickerEnum.Minute,
+      },
     })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should emit event when clicking ampm buttons', async () => {
+    const period = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        time: {
+          hour: 14,
+          minute: 13,
+        },
+        period: 'am',
+        showAmPm: true,
+      },
+      listeners: {
+        'update:period': period,
+      },
+    })
+
+    const buttons = wrapper.findAll('.v-time-picker-title__ampm .v-picker__title__btn')
+    buttons.at(1).element.click()
+    await wrapper.vm.$nextTick()
+
+    expect(period).toHaveBeenCalledWith('pm')
+
+    wrapper.setProps({
+      period: 'pm',
+    })
+    await wrapper.vm.$nextTick()
+
+    buttons.at(0).element.click()
+    await wrapper.vm.$nextTick()
+
+    expect(period).toHaveBeenCalledWith('am')
+  })
+
+  it('should not emit event from ampm buttons when readonly', async () => {
+    const period = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        time: {
+          hour: 14,
+          minute: 13,
+        },
+        period: 'am',
+        showAmPm: true,
+        readonly: true,
+      },
+      listeners: {
+        'update:period': period,
+      },
+    })
+
+    const buttons = wrapper.findAll('.v-time-picker-title__ampm .v-picker__title__btn')
+    buttons.at(1).element.click()
+    await wrapper.vm.$nextTick()
+
+    expect(period).not.toHaveBeenCalled()
+
+    wrapper.setProps({
+      period: 'pm',
+    })
+    await wrapper.vm.$nextTick()
+
+    buttons.at(0).element.click()
+    await wrapper.vm.$nextTick()
+
+    expect(period).not.toHaveBeenCalled()
+  })
+
+  it('should still emit event when clicking hour, minute, second when readonly', async () => {
+    const selectMode = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        time: {
+          hour: 14,
+          minute: 13,
+          second: 30,
+        },
+        readonly: true,
+        useSeconds: true,
+        format: '24hr',
+      },
+      listeners: {
+        'update:selectMode': selectMode,
+      },
+    })
+
+    const buttons = wrapper.findAll('.v-time-picker-title__time .v-picker__title__btn')
+
+    buttons.at(0).element.click()
+    await wrapper.vm.$nextTick()
+
+    expect(selectMode).toHaveBeenCalledWith(TimePickerEnum.Hour)
+
+    buttons.at(1).element.click()
+    await wrapper.vm.$nextTick()
+
+    expect(selectMode).toHaveBeenCalledWith(TimePickerEnum.Minute)
+
+    buttons.at(2).element.click()
+    await wrapper.vm.$nextTick()
+
+    expect(selectMode).toHaveBeenCalledWith(TimePickerEnum.Second)
   })
 })

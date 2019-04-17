@@ -127,9 +127,31 @@ export type DatePickerEvents = string[] | ((date: string) => boolean | DatePicke
 
 export type DatePickerEventColors = DatePickerEventColorValue | Record<string, DatePickerEventColorValue> | ((date: string) => DatePickerEventColorValue)
 
-export type DatePickerType = 'date' | 'month'
-
 export type DatePickerMultipleFormatter = (date: string[]) => string
+
+export type DatePickerValue = string | string[] | undefined
+
+export type DatePickerType = 'date' | 'month' | 'year'
+
+export type DatePickerTitleDateFormatter = (date: string | string[], type: string) => string
+
+export type DateEventColorValue = string | string[]
+export type DateEvents = string[] | ((date: string) => boolean | DateEventColorValue) | Record<string, DateEventColorValue>
+export type DateEventColors = DateEventColorValue | Record<string, DateEventColorValue> | ((date: string) => DateEventColorValue)
+
+export type TimePickerType = 'hour' | 'minute' | 'second'
+
+export type Format = 'ampm' | '24hr'
+export type Period = 'am' | 'pm'
+export type TimePickerAllowFunction = (val: number) => boolean
+
+export type TimePickerAllowed = TimePickerAllowFunction | number[]
+
+export interface Time {
+  hour: number | null
+  minute: number | null
+  second: number | null
+}
 
 export interface TouchHandlers {
   start?: (wrapperEvent: TouchEvent & TouchWrapper) => void
@@ -201,6 +223,6 @@ export interface DataTableHeader<T extends any = any> {
 }
 
 export type DataItemsPerPageOption = (number | {
-  text: string;
-  value: number;
-});
+  text: string
+  value: number
+})

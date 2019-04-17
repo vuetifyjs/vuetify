@@ -45,7 +45,7 @@ exports[`VDatePickerMonthTable.ts should render component and match snapshot (mu
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-size--default v-btn--outlined theme--light accent--text"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               May
@@ -170,7 +170,7 @@ exports[`VDatePickerMonthTable.ts should render component and match snapshot 1`]
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-size--default v-btn--outlined theme--light accent--text"
+                  class="v-btn v-size--default v-btn--text theme--light"
           >
             <div class="v-btn__content">
               May
@@ -238,6 +238,141 @@ exports[`VDatePickerMonthTable.ts should render component and match snapshot 1`]
         <td>
           <button type="button"
                   class="v-btn v-size--default v-btn--text theme--light"
+          >
+            <div class="v-btn__content">
+              Dec
+            </div>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
+exports[`VDatePickerMonthTable.ts should render component with disabled months and match snapshot 1`] = `
+<div class="v-date-picker-table v-date-picker-table--month theme--light">
+  <table>
+    <tbody>
+      <tr>
+        <td>
+          <button type="button"
+                  class="v-btn v-size--default v-btn--text theme--light"
+          >
+            <div class="v-btn__content">
+              Jan
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-size--default v-btn--flat v-btn--text v-btn--disabled theme--light"
+                  disabled
+          >
+            <div class="v-btn__content">
+              Feb
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-size--default v-btn--flat v-btn--text v-btn--disabled theme--light"
+                  disabled
+          >
+            <div class="v-btn__content">
+              Mar
+            </div>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button type="button"
+                  class="v-btn v-size--default v-btn--flat v-btn--text v-btn--disabled theme--light"
+                  disabled
+          >
+            <div class="v-btn__content">
+              Apr
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-size--default v-btn--text theme--light"
+          >
+            <div class="v-btn__content">
+              May
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-size--default v-btn--flat v-btn--text v-btn--disabled theme--light"
+                  disabled
+          >
+            <div class="v-btn__content">
+              Jun
+            </div>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button type="button"
+                  class="v-btn v-size--default v-btn--flat v-btn--text v-btn--disabled theme--light"
+                  disabled
+          >
+            <div class="v-btn__content">
+              Jul
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-size--default v-btn--flat v-btn--text v-btn--disabled theme--light"
+                  disabled
+          >
+            <div class="v-btn__content">
+              Aug
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-size--default v-btn--flat v-btn--text v-btn--disabled theme--light"
+                  disabled
+          >
+            <div class="v-btn__content">
+              Sep
+            </div>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button type="button"
+                  class="v-btn v-size--default v-btn--flat v-btn--text v-btn--disabled theme--light"
+                  disabled
+          >
+            <div class="v-btn__content">
+              Oct
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-size--default v-btn--active v-btn--flat v-btn--disabled theme--light accent"
+                  disabled
+          >
+            <div class="v-btn__content">
+              Nov
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-size--default v-btn--flat v-btn--text v-btn--disabled theme--light"
+                  disabled
           >
             <div class="v-btn__content">
               Dec

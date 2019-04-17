@@ -6,9 +6,12 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
+const dateFormat = v => parseInt(v.slice(-2), 10)
+
 describe('VDatePickerDateTable.ts', () => {
   type Instance = InstanceType<typeof VDatePickerDateTable>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+
   beforeEach(() => {
     mountFunction = (options?: MountOptions<Instance>) => {
       return mount(VDatePickerDateTable, {
@@ -23,12 +26,12 @@ describe('VDatePickerDateTable.ts', () => {
     }
   })
 
-  it('should render component and match snapshot', () => {
+  it('should render default component and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2005-05',
-        current: '2005-07',
-        value: '2005-11-03',
+        dateFormat,
+        pickerDate: '2005-05',
+        value: ['2005-11-03'],
       },
     })
 
@@ -38,9 +41,9 @@ describe('VDatePickerDateTable.ts', () => {
   it('should render readonly component and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2005-05',
-        current: '2005-07',
-        value: '2005-11-03',
+        dateFormat,
+        pickerDate: '2005-05',
+        value: [],
         readonly: true,
       },
     })
@@ -51,9 +54,9 @@ describe('VDatePickerDateTable.ts', () => {
   it('should render disabled component and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2005-05',
-        current: '2005-07',
-        value: '2005-11-03',
+        dateFormat,
+        pickerDate: '2005-05',
+        value: ['2005-11-03'],
         disabled: true,
       },
     })
@@ -64,10 +67,9 @@ describe('VDatePickerDateTable.ts', () => {
   it('should render component with showWeek and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2018-02',
-        current: '2005-07',
-        value: null,
-        firstDayOfWeek: 2,
+        dateFormat,
+        pickerDate: '2018-02',
+        value: [],
         showWeek: true,
       },
     })
@@ -77,11 +79,9 @@ describe('VDatePickerDateTable.ts', () => {
   it('should render component and match snapshot for multiple selection', () => {
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2005-05',
-        current: '2005-07',
-        multiple: true,
-        selectedDates: ['2005-11-03', '2005-11-05', '2005-11-08'],
-        value: '2005-11-03',
+        dateFormat,
+        pickerDate: '2005-11',
+        value: ['2005-11-03', '2005-11-05'],
       },
     })
 
@@ -91,9 +91,9 @@ describe('VDatePickerDateTable.ts', () => {
   it('should render component with events (array) and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2005-05',
-        current: '2005-07',
-        value: '2005-11-03',
+        dateFormat,
+        pickerDate: '2005-05',
+        value: [],
         events: ['2005-05-03'],
         eventColor: 'red',
       },
@@ -105,9 +105,9 @@ describe('VDatePickerDateTable.ts', () => {
   it('should render component with events (function) and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2005-05',
-        current: '2005-07',
-        value: '2005-11-03',
+        dateFormat,
+        pickerDate: '2005-05',
+        value: [],
         events: date => date === '2005-05-03',
         eventColor: 'red',
       },
@@ -119,9 +119,9 @@ describe('VDatePickerDateTable.ts', () => {
   it('should render component with events colored by object and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2005-05',
-        current: '2005-07',
-        value: '2005-11-03',
+        dateFormat,
+        pickerDate: '2005-05',
+        value: [],
         events: ['2005-05-03', '2005-05-04'],
         eventColor: { '2005-05-03': 'red', '2005-05-04': 'blue lighten-1' },
       },
@@ -133,9 +133,9 @@ describe('VDatePickerDateTable.ts', () => {
   it('should render component with events colored by function and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2005-05',
-        current: '2005-07',
-        value: '2005-11-03',
+        dateFormat,
+        pickerDate: '2005-05',
+        value: [],
         events: ['2005-05-03', '2005-05-04'],
         eventColor: date => ({ '2005-05-03': 'red' }[date]),
       },
@@ -147,9 +147,9 @@ describe('VDatePickerDateTable.ts', () => {
   it('should match snapshot with first day of week', function () {
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2005-05',
-        current: '2005-07',
-        value: '2005-11-03',
+        dateFormat,
+        pickerDate: '2005-05',
+        value: ['2005-11-03'],
         firstDayOfWeek: 2,
       },
     })
@@ -157,44 +157,13 @@ describe('VDatePickerDateTable.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it.skip('should watch tableDate value and run transition', async () => {
-    const wrapper = mountFunction({
-      propsData: {
-        tableDate: '2005-05',
-        current: '2005-07',
-        value: '2005-11-03',
-      },
-    })
-
-    wrapper.setProps({
-      tableDate: '2005-06',
-    })
-    await wrapper.vm.$nextTick()
-    expect(wrapper.findAll('table').at(0).element.className).toBe('tab-transition-enter tab-transition-enter-active')
-  })
-
-  it.skip('should watch tableDate value and run reverse transition', async () => {
-    const wrapper = mountFunction({
-      propsData: {
-        tableDate: '2005-05',
-        current: '2005-07',
-        value: '2005-11-03',
-      },
-    })
-
-    wrapper.setProps({
-      tableDate: '2005-04',
-    })
-    await wrapper.vm.$nextTick()
-    expect(wrapper.findAll('table').at(0).element.className).toBe('tab-reverse-transition-enter tab-reverse-transition-enter-active')
-  })
-
   it('should emit event when date button is clicked', () => {
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2005-05',
+        dateFormat,
+        pickerDate: '2005-05',
         current: '2005-07',
-        value: '2005-11-03',
+        value: ['2005-11-03'],
       },
     })
 
@@ -208,9 +177,9 @@ describe('VDatePickerDateTable.ts', () => {
   it('should not emit event when disabled month button is clicked', () => {
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2005-05',
-        current: '2005-07',
-        value: '2005-11-03',
+        dateFormat,
+        pickerDate: '2005-05',
+        value: ['2005-11-03'],
         allowedDates: () => false,
       },
     })
@@ -222,64 +191,53 @@ describe('VDatePickerDateTable.ts', () => {
     expect(input).not.toHaveBeenCalled()
   })
 
-  it('should emit tableDate event when scrolled and scrollable', () => {
+  it('should emit pickerDate event when scrolled and scrollable', () => {
+    const date = jest.fn()
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2005-05',
+        dateFormat,
+        pickerDate: '2005-01',
+        current: '2005-05',
+        value: ['2005-11'],
         scrollable: true,
       },
-    })
-
-    const tableDate = jest.fn()
-    wrapper.vm.$on('update:table-date', tableDate)
-
-    wrapper.trigger('wheel')
-    expect(tableDate).toHaveBeenCalledWith('2005-06')
-  })
-
-  it('should not emit tableDate event when scrolled and not scrollable', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        tableDate: '2005-05',
+      listeners: {
+        'update:pickerDate': date,
       },
     })
 
-    const tableDate = jest.fn()
-    wrapper.vm.$on('update:table-date', tableDate)
+    wrapper.trigger('wheel')
+    expect(date).toHaveBeenCalledWith('2005-02')
+  })
+
+  it('should not emit pickerDate event when scrolled and not scrollable', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        dateFormat,
+        pickerDate: '2005-05',
+      },
+    })
+
+    const pickerDate = jest.fn()
+    wrapper.vm.$on('pickerDate', pickerDate)
 
     wrapper.trigger('wheel')
-    expect(tableDate).not.toHaveBeenCalled()
+    expect(pickerDate).not.toHaveBeenCalled()
   })
 
   // TODO
-  it.skip('should emit tableDate event when swiped', () => {
+  it.skip('should emit pickerDate event when swiped', () => {
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2005-05',
+        pickerDate: '2005-05',
       },
     })
 
-    const tableDate = jest.fn()
-    wrapper.vm.$on('update:table-date', tableDate)
+    const pickerDate = jest.fn()
+    wrapper.vm.$on('pickerDate', pickerDate)
 
     wrapper.trigger('touchstart')
     wrapper.trigger('touchend')
-    expect(tableDate).toHaveBeenCalledWith('2005-06')
-  })
-
-  it('should change tableDate when touch is called', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        tableDate: '2005-05',
-      },
-    })
-
-    const tableDate = jest.fn()
-    wrapper.vm.$on('update:table-date', tableDate)
-
-    wrapper.vm.touch(1, wrapper.vm.calculateTableDate)
-    expect(tableDate).toHaveBeenCalledWith('2005-06')
-    wrapper.vm.touch(-1, wrapper.vm.calculateTableDate)
-    expect(tableDate).toHaveBeenCalledWith('2005-04')
+    expect(pickerDate).toHaveBeenCalledWith('2005-06')
   })
 })

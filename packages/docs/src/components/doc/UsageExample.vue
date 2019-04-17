@@ -95,7 +95,6 @@
         <v-divider />
 
         <v-responsive
-          max-height="300"
           class="overflow-y-auto py-3"
         >
           <v-col

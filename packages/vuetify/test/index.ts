@@ -14,16 +14,34 @@ export function functionalContext (context: ComponentOptions<Vue> = {}, children
   }
 }
 
-export function touch (element: Wrapper<any>) {
+export function mouse (wrapper: Wrapper<any>) {
+  const createTrigger = (eventName: string) => (clientX: number, clientY: number) => {
+    const event = new Event(eventName)
+    ;(event as any).clientX = clientX
+    ;(event as any).clientY = clientY
+
+    wrapper.element.dispatchEvent(event)
+
+    return mouse(wrapper)
+  }
+
+  return {
+    click: createTrigger('click'),
+    mousedown: createTrigger('mousedown'),
+    mouseup: createTrigger('mouseup'),
+  }
+}
+
+export function touch (wrapper: Wrapper<any>) {
   const createTrigger = (eventName: string) => (clientX: number, clientY: number) => {
     const touches = [{ clientX, clientY }]
     const event = new Event(eventName)
 
     ;(event as any).touches = touches
     ;(event as any).changedTouches = touches
-    element.element.dispatchEvent(event)
+    wrapper.element.dispatchEvent(event)
 
-    return touch(element)
+    return touch(wrapper)
   }
 
   return {

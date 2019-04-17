@@ -2,12 +2,11 @@
 import DatePickerTable from './mixins/date-picker-table'
 
 // Utils
-import { pad, createNativeLocaleFormatter } from './util'
+import { pad } from './util'
 import mixins from '../../util/mixins'
 
 // Types
 import { VNode } from 'vue'
-import { DatePickerFormatter } from 'types'
 
 export default mixins(
   DatePickerTable
@@ -15,15 +14,20 @@ export default mixins(
 ).extend({
   name: 'v-date-picker-month-table',
 
-  computed: {
-    formatter (): DatePickerFormatter {
-      return this.format || createNativeLocaleFormatter(this.currentLocale, { month: 'short', timeZone: 'UTC' }, { start: 5, length: 2 })
-    },
-  },
-
   methods: {
-    calculateTableDate (delta: number) {
-      return `${parseInt(this.tableDate, 10) + Math.sign(delta || 1)}`
+    calculatePickerDate (delta: number) {
+      return `${this.displayedYear + Math.sign(delta || 1)}-${pad(this.displayedMonth)}`
+    },
+    genButtonEvents (value: string, isAllowed: boolean) {
+      if (this.disabled) return undefined
+
+      return {
+        click: () => {
+          isAllowed && this.$emit('update:month', value)
+          this.$emit(`click:month`, value)
+        },
+        dblclick: () => this.$emit(`dblclick:month`, value),
+      }
     },
     genTBody () {
       const children = []
@@ -37,7 +41,7 @@ export default mixins(
           return this.$createElement('td', {
             key: month,
           }, [
-            this.genButton(date, false, 'month', this.formatter),
+            this.genButton(date, false, this.dayFormat),
           ])
         })
 
@@ -53,6 +57,6 @@ export default mixins(
   render (): VNode {
     return this.genTable('v-date-picker-table v-date-picker-table--month', [
       this.genTBody(),
-    ], this.calculateTableDate)
+    ])
   },
 })

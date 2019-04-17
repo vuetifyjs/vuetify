@@ -2,7 +2,8 @@
 
 // Theme
 +theme(v-time-picker-clock) using ($material)
-  background: map-deep-get($material, 'picker', 'clock')
+  .v-time-picker-clock__outer
+    background: map-deep-get($material, 'picker', 'clock')
 
   .v-time-picker-clock__item--disabled
     color: map-deep-get($material, 'buttons', 'disabled')
@@ -13,6 +14,7 @@
   &--indeterminate
     .v-time-picker-clock__hand
       background-color: map-deep-get($material, 'picker', 'indeterminateTime')
+      border-color: map-deep-get($material, 'picker', 'indeterminateTime')
 
     &:after
       color: map-deep-get($material, 'picker', 'indeterminateTime')
@@ -21,19 +23,10 @@
       background-color: map-deep-get($material, 'picker', 'indeterminateTime')
 
 .v-time-picker-clock
-  border-radius: 100%
-  position: relative
+  padding: 10px
+  padding: $time-picker-clock-padding
   transition: $primary-transition
   user-select: none
-  width: 100%
-  padding-top: 100%
-  flex: 1 0 auto
-
-  &__container
-    display: flex
-    flex-direction: column
-    justify-content: center
-    padding: $time-picker-clock-padding
 
   &__ampm
     display: flex
@@ -48,43 +41,55 @@
     margin: 0
     padding: $time-picker-ampm-padding
 
-  &__hand
-    height: $time-picker-clock-hand-height
-    width: $time-picker-clock-hand-width
-    bottom: 50%
-    left: $time-picker-clock-hand-left
-    transform-origin: center bottom
+.v-time-picker-clock__outer
+  width: 100%
+  height: 100%
+  border-radius: 100%
+  position: relative
+  display: flex
+  flex-direction: column
+  justify-content: center
+
+.v-time-picker-clock__hand
+  height: calc(50% - #{$time-picker-clock-end-size / 2})
+  width: $time-picker-clock-hand-width
+  bottom: 50%
+  left: calc(50% - #{$time-picker-clock-hand-width / 2})
+  transform-origin: center bottom
+  position: absolute
+  will-change: transform
+  z-index: 1
+
+  &:before
+    background: transparent
+    border-width: $time-picker-clock-end-border-width
+    border-style: solid
+    border-color: inherit
+    border-radius: 100%
+    width: $time-picker-clock-end-size
+    height: $time-picker-clock-end-size
+    content: ''
     position: absolute
-    will-change: transform
-    z-index: 1
+    top: -$time-picker-clock-end-size / 2
+    left: 50%
+    transform: translate(-50%, -50%)
 
-    &:before
-      background: transparent
-      border: $time-picker-clock-end-border
-      border-radius: 100%
-      width: $time-picker-clock-end-size
-      height: $time-picker-clock-end-size
-      content: ''
-      position: absolute
-      top: $time-picker-clock-end-top
-      left: 50%
-      transform: translate(-50%, -50%)
+  &:after
+    content: ''
+    position: absolute
+    height: $time-picker-clock-center-size
+    width: $time-picker-clock-center-size
+    top: 100%
+    left: 50%
+    border-radius: 100%
+    border-width: $time-picker-clock-end-border-width
+    border-style: solid
+    border-color: inherit
+    background-color: inherit
+    transform: translate(-50%, -50%)
 
-    &:after
-      content: ''
-      position: absolute
-      height: $time-picker-clock-center-size
-      width: $time-picker-clock-center-size
-      top: 100%
-      left: 50%
-      border-radius: 100%
-      border-style: solid
-      border-color: inherit
-      background-color: inherit
-      transform: translate(-50%, -50%)
-
-    &--inner:after
-      height: $time-picker-clock-inner-hand-height
+  &--inner:after
+    height: $time-picker-clock-inner-hand-height
 
 .v-picker--full-width
   .v-time-picker-clock__container

@@ -63,6 +63,7 @@ declare module 'vuetify/lib' {
   const VDatePickerDateTable: Component
   const VDatePickerMonthTable: Component
   const VDatePickerYears: Component
+  const VDateTimePicker: Component
   const VDialog: Component
   const VDivider: Component
   const VExpansionPanels: Component
@@ -231,6 +232,7 @@ declare module 'vuetify/lib' {
     VDatePickerDateTable,
     VDatePickerMonthTable,
     VDatePickerYears,
+    VDateTimePicker,
     VDialog,
     VDivider,
     VExpansionPanels,
@@ -358,6 +360,6 @@ declare module 'vuetify/lib/directives' {
     Ripple,
     Resize,
     Scroll,
-    Touch
+    Touch,
   }
 }

@@ -8,6 +8,7 @@ import {
 describe('VDatePickerYears.ts', () => {
   type Instance = InstanceType<typeof VDatePickerYears>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+
   beforeEach(() => {
     mountFunction = (options?: MountOptions<Instance>) => {
       return mount(VDatePickerYears, {
@@ -27,7 +28,7 @@ describe('VDatePickerYears.ts', () => {
   it('should render component and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        value: '2000',
+        value: ['2000'],
       },
     })
 
@@ -37,13 +38,13 @@ describe('VDatePickerYears.ts', () => {
   it('should respect min/max props', async () => {
     const wrapper = mountFunction({
       propsData: {
-        min: 1234,
-        max: 1238,
+        min: '1990',
+        max: '2010',
+        value: ['2000'],
       },
     })
 
-    expect(wrapper.findAll('li:first-child').at(0).element.textContent).toBe('1238')
-    expect(wrapper.findAll('li:last-child').at(0).element.textContent).toBe('1234')
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should not allow min to be greater then max', async () => {
@@ -53,23 +54,23 @@ describe('VDatePickerYears.ts', () => {
         max: 1234,
       },
     })
-    expect(wrapper.findAll('li')).toHaveLength(1)
-    expect(wrapper.findAll('li').at(0).element.textContent).toBe('1234')
-    expect(wrapper.findAll('li').at(0).element.textContent).toBe('1234')
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should emit event on year click', async () => {
+    const input = jest.fn()
     const wrapper = mountFunction({
       propsData: {
-        value: 1999,
+        value: ['1999'],
+      },
+      listeners: {
+        input,
       },
     })
 
-    const input = jest.fn()
-    wrapper.vm.$on('input', input)
-
     wrapper.findAll('li.active + li').at(0).trigger('click')
-    expect(input).toHaveBeenCalledWith(1998)
+    expect(input).toHaveBeenCalledWith('1998')
   })
 
   it('should format years', async () => {
@@ -81,6 +82,6 @@ describe('VDatePickerYears.ts', () => {
       },
     })
 
-    expect(wrapper.findAll('li').at(0).element.textContent).toBe('(1001)')
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

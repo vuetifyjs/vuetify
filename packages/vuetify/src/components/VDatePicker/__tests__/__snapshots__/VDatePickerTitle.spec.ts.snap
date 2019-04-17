@@ -3,11 +3,11 @@
 exports[`VDatePickerTitle.ts should render component and match snapshot 1`] = `
 <div class="v-date-picker-title">
   <div class="v-picker__title__btn v-date-picker-title__year">
-    1234
+    2005
   </div>
   <div class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active">
     <div>
-      2005-11-01
+      11-01
     </div>
   </div>
 </div>
@@ -16,11 +16,11 @@ exports[`VDatePickerTitle.ts should render component and match snapshot 1`] = `
 exports[`VDatePickerTitle.ts should render component when selecting year and match snapshot 1`] = `
 <div class="v-date-picker-title">
   <div class="v-picker__title__btn v-date-picker-title__year v-picker__title__btn--active">
-    1234
+    2005
   </div>
   <div class="v-picker__title__btn v-date-picker-title__date">
     <div>
-      2005-11-01
+      11-01
     </div>
   </div>
 </div>
@@ -29,11 +29,11 @@ exports[`VDatePickerTitle.ts should render component when selecting year and mat
 exports[`VDatePickerTitle.ts should render disabled component and match snapshot 1`] = `
 <div class="v-date-picker-title v-date-picker-title--disabled">
   <div class="v-picker__title__btn v-date-picker-title__year">
-    1234
+    2005
   </div>
   <div class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active">
     <div>
-      2005-11-01
+      11-01
     </div>
   </div>
 </div>
@@ -42,23 +42,31 @@ exports[`VDatePickerTitle.ts should render disabled component and match snapshot
 exports[`VDatePickerTitle.ts should render readonly component and match snapshot 1`] = `
 <div class="v-date-picker-title">
   <div class="v-picker__title__btn v-date-picker-title__year">
-    1234
+    2005
   </div>
   <div class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active">
     <div>
-      2005-11-01
+      11-01
     </div>
   </div>
 </div>
 `;
 
 exports[`VDatePickerTitle.ts should render year icon 1`] = `
-<div class="v-picker__title__btn v-date-picker-title__year">
-  1234
-  <i aria-hidden="true"
-     class="v-icon notranslate material-icons theme--dark"
-  >
-    year
-  </i>
+<div class="v-date-picker-title">
+  <div class="v-picker__title__btn v-date-picker-title__year">
+    2005
+    <i aria-hidden="true"
+       class="v-icon notranslate material-icons theme--dark"
+       style="font-size: 16px;"
+    >
+      year
+    </i>
+  </div>
+  <div class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active">
+    <div>
+      11-01
+    </div>
+  </div>
 </div>
 `;

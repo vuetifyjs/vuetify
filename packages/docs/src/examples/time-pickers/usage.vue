@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center">
-    <v-time-picker v-model="picker"></v-time-picker>
+    <v-time-picker v-model="time"></v-time-picker>
   </v-row>
 </template>
 
@@ -8,7 +8,9 @@
   export default {
     data () {
       return {
-        picker: null,
+        time: null,
+        landscape: false,
+        ampmInTitle: false,
       }
     },
   }
