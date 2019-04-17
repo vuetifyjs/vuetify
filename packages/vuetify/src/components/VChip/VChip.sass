@@ -161,12 +161,15 @@
   border-radius: $chip-label-border-radius !important
 
 .v-chip.v-chip--outlined
-  background-color: transparent !important
   border-width: $icon-outlined-border-width
   border-style: solid
 
   .v-icon
     color: inherit
+
+  // Needs increased specificity
+  &.v-chip
+    background-color: transparent !important
 
 // Needs increased specificity
 // to overwrite theme color
