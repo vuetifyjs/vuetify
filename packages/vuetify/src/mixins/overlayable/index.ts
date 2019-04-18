@@ -68,9 +68,11 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
       this.overlay = overlay
     },
     genOverlay () {
-      if (!this.overlay) this.createOverlay()
-
       this.hideScroll()
+
+      if (this.hideOverlay) return
+
+      if (!this.overlay) this.createOverlay()
 
       requestAnimationFrame(() => {
         if (!this.overlay) return

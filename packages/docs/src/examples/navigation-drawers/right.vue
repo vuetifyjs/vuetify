@@ -1,14 +1,18 @@
 <template>
   <v-card height="350px">
-    <v-navigation-drawer permanent>
+    <v-navigation-drawer
+      absolute
+      permanent
+      right
+    >
       <template v-slot:prepend>
         <v-list-item two-line>
           <v-list-item-avatar>
-            <img src="https://randomuser.me/api/portraits/men/81.jpg">
+            <img src="https://randomuser.me/api/portraits/women/81.jpg">
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title>John Leider</v-list-item-title>
+            <v-list-item-title>Jane Smith</v-list-item-title>
             <v-list-item-subtitle>Logged In</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -16,11 +20,7 @@
 
       <v-divider></v-divider>
 
-      <v-list
-        dense
-        nav
-        shaped
-      >
+      <v-list dense>
         <v-list-item
           v-for="item in items"
           :key="item.title"

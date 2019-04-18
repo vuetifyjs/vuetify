@@ -72,7 +72,6 @@
                   color="secondary"
                   name="member[subscribe]"
                   value="Subscribe"
-                  @click="email = ''"
                 >
                   Subscribe
                 </v-btn>

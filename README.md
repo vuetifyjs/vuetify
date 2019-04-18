@@ -161,25 +161,60 @@ Harness the power of the [Vuetify community](https://community.vuetifyjs.com) an
 
 ###### Browser Support
 
-Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using polyfills). From mobile to laptop to desktop, you can rest assured that your application will work as expected. Interested in the bleeding edge? Try the vue-cli Webpack SSR (Server side rendered) template and build websites optimized for SEO.
+Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using polyfills). From mobile📱 to laptop 💻 to desktop 🖥, you can rest assured that your application will work as expected.
+
+Interested in the bleeding edge? Try the vue-cli Webpack SSR (Server side rendered) template and build websites optimized for SEO.
+
+For more information about IE11 and Safari 9+ polyfills, visit our [Quick Start Guide](https://vuetifyjs.com/en/getting-started/quick-start#ie11-safari-9-support)
 
 ### Documentation
 
-Link to <a href="https://vuetifyjs.com?ref=github" target="_blank">Vuetify documentation</a>.
+To view our docs 📑, get support 🤯 and the store 🛒 visit us at <a href="https://vuetifyjs.com?ref=github" target="_blank">vuetifyjs.com</a>.
 
-### One Click Quick-start
+### Getting Started
 
-[Codepen link](https://codepen.io/johnjleider/pen/jYZwVZ)
+To get started with Vuetify, you can follow one of these simple set-up instructions.
 
-### Vue CLI-3 Installation
+#### One Click Quick-start
+
+Looking to dive right in with zero setup and downtime? Check out our [CodePen.io One Minute Quickstart](https://template.vuetifyjs.com/)
+
+#### Vue CLI-3 Installation
+
+Setting up Vuetify with Vue's CLI is really easy 👌.
+
+(Unsure of how to install Vue's CLI on your system? Check out the official [Installation Instructions](https://cli.vuejs.org/guide/installation.html) or our [Quick Start Guide](https://vuetifyjs.com/en/getting-started/quick-start))
+
+If you're setting up a new project, first create it using the CLI's `create` command.
 
 ``` bash
 vue create my-app
-# THEN
+```
+
+If you are adding Vuetify to an existing Vue CLI 3 project, navigate to your project's root inside your terminal.
+
+```bash
+cd /path/to/project
+```
+
+Now, add Vuetify as a plugin with the CLI's `add` utility.
+
+```bash
 vue add vuetify
 ```
 
-### Ecosystem
+Note that you can also find and install Vuetify through Vue's UI!
+
+Navigate to your project folder, or create a new Vue CLI app, then run the following command.
+
+```bash
+vue ui
+```
+
+Once the UI launches in your browser, click the `+ Add plugin` button on the top right corner of your screen.
+On the next screen, search for `Vuetify` on the list, select it, and install it using the `Install vue-cli-plugin-vuetify` button on the bottom right.
+
+#### Vue CLI 3 Ecosystem 🌎
 
 <table>
   <thead>
@@ -245,7 +280,9 @@ vue add vuetify
   </tbody>
 </table>
 
-### Manual Installation
+#### Manual Installation Through Package Managers
+
+Looking to add Vuetify to your project directly as a node module? You can easily accomplish this by using `yarn` or `npm` package managers 📦.
 
 ``` bash
 yarn add vuetify
@@ -253,37 +290,56 @@ yarn add vuetify
 npm install vuetify
 ```
 
-```javascript
-// main.js
-import Vue from 'vue'
-import Vuetify from 'vuetify'
+Once you have the library installed, we need to hook it up to Vue.
 
-Vue.use(Vuetify)
+Fire up your favorite IDE, and head to the file in which you are importing Vue to your project and creating your application.
+
+```javascript
+import Vue from 'vue'
+import Vuetify from 'vuetify' // Import Vuetify to your project
+
+Vue.use(Vuetify) // Add Vuetify as a plugin
 ```
 
-For including styles, you can either place the below styles in your `index.html`.
+For including styles 🎨, you can either place the below styles in your `index.html` (if using the CLI) or directly at your app's entry point.
+
 ```html
-<!-- index.html -->
 <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
 ```
-Or you can import it to your webpack entry point:
+Or you can import it to your webpack entry point file. This is _usually_ your `main.js` file.
+
 ```javascript
-// main.js
-require('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons')
-require('vuetify/dist/vuetify.min.css')
+import 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons'
+import 'vuetify/dist/vuetify.min.css'
 ```
 For more information, please visit the <a href="https://vuetifyjs.com/getting-started/quick-start">quick-start guide</a>.
 
+#### Manual Installation Through CDN
+
+To use Vuetify in your project by directly importing it through CDNs (Content Delivery Networks), add the following code to the `<head>` of your HTML document.
+
+```html
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+```
+
+Don't forget to add both Vuetify and the main Vue library to your HTML file before the closing `</body>` tag.
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+```
+
 ### Community Support
 
-Ask your support questions on the [Vuetify Discord Community](https://community.vuetifyjs.com/).
+Ask your support questions on the [Vuetify Discord Community 💬](https://community.vuetifyjs.com/).
 
-Frequently asked questions and Gotchas on the [FAQ Guide](https://vuetifyjs.com/vuetify/frequently-asked-questions)
+Frequently asked questions and Gotchas on the [FAQ Guide ❓](https://vuetifyjs.com/vuetify/frequently-asked-questions)
 
 ### Contributing
 
-Developers interested in contributing should read the [Code of Conduct](./CODE_OF_CONDUCT.md).
+Developers interested in contributing should read the [Code of Conduct 👩‍💻👨‍💻](./CODE_OF_CONDUCT.md).
 
 > Please do **not** ask general questions in an issue. Issues are only to report bugs, suggest
   enhancements, or request new features. For general questions and discussions, ask in the [Vuetify Discord Community](https://community.vuetifyjs.com/).
@@ -304,7 +360,7 @@ We also have a list of [help wanted](https://github.com/vuetifyjs/vuetify/labels
 
 ###### Contributors
 
-This project exists thanks to all the people who contribute.
+This project exists thanks to all the people who contribute 😍!
 
 <a href="https://github.com/vuetifyjs/vuetify/graphs/contributors"><img src="https://opencollective.com/vuetify/contributors.svg?width=890&button=false" /></a>
 

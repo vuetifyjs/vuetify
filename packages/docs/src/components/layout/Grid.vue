@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mb-5">
+  <v-card class="mb-5" outlined>
     <v-simple-table>
       <caption class="pa-3">Material Design Viewport Breakpoints</caption>
 
