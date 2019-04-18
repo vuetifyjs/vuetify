@@ -144,17 +144,11 @@ const VIcon = mixins(
 
       this.applyColors(data)
 
-      return h('svg', data, [this.renderSvgIconPath(icon, h)])
-    },
-    renderSvgIconPath (icon: string, h: CreateElement): VNode {
-      // svg prefix is svg-
-      const pathD = icon.slice(4 - icon.length)
-
-      return h('path', {
+      return h('svg', data, [h('path', {
         attrs: {
-          d: pathD
+          d: icon
         }
-      })
+      })])
     },
     renderSvgIconComponent (icon: VuetifyIconComponent, h: CreateElement): VNode {
       const data = this.getDefaultData()
@@ -182,7 +176,7 @@ const VIcon = mixins(
     const icon = this.getIcon()
 
     if (typeof icon === 'string') {
-      if (icon.indexOf('svg-') === 0) {
+      if (icon[0] === 'M' && icon[icon.length - 1] === 'Z') {
         return this.renderSvgIcon(icon, h)
       }
       return this.renderFontIcon(icon, h)
