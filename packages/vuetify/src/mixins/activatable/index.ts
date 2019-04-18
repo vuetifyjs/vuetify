@@ -4,10 +4,12 @@ import Toggleable from '../toggleable'
 
 // Utilities
 import mixins from '../../util/mixins'
-import { getSlot } from '../../util/helpers'
+import { getSlot, getSlotType } from '../../util/helpers'
+import { consoleError } from '../../util/console'
 
 // Types
 import { PropValidator } from 'vue/types/options'
+import { VNode } from 'vue'
 
 const baseMixins = mixins(
   Delayable,
@@ -30,6 +32,17 @@ export default baseMixins.extend({
     internalActivator: Boolean
   },
 
+  data: () => ({
+    activatorElement: null as null | HTMLElement,
+    activatorNode: [] as VNode[]
+  }),
+
+  mounted () {
+    if (getSlotType(this, 'activator', true) === 'v-slot') {
+      consoleError(`The activator slot must be bound, try '<template v-slot:activator="{ on }"><v-btn v-on="on>'`, this)
+    }
+  },
+
   methods: {
     genActivator () {
       const listeners: Record<string, (e: Event) => void> = {}
@@ -41,9 +54,16 @@ export default baseMixins.extend({
         listeners.click = this.onClick
       }
 
-      return getSlot(this, 'activator', { on: listeners })
+      const node = getSlot(this, 'activator', { on: listeners }) || []
+
+      this.activatorNode = node
+
+      return node
     },
     getActivator (e?: Event): HTMLElement | null {
+      // If we've already fetched the activator, re-use
+      if (this.activatorElement) return this.activatorElement
+
       let activator = null
 
       if (this.activator) {
@@ -56,9 +76,9 @@ export default baseMixins.extend({
         activator = e.currentTarget || e.target
       }
 
-      if (!activator) return null
+      this.activatorElement = activator as HTMLElement
 
-      return activator as HTMLElement
+      return this.activatorElement
     },
     onClick (e: Event) {
       if (this.disabled) return

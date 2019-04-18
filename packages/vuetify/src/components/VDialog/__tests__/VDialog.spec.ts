@@ -133,15 +133,20 @@ describe('VDialog.ts', () => {
   it('should open dialog on activator click', async () => {
     const input = jest.fn()
     const wrapper = mountFunction({
-      slots: {
-        activator: ['<span>activator</span>']
+      scopedSlots: {
+        activator ({ on }) {
+          return this.$createElement('div', {
+            staticClass: 'activator',
+            on
+          })
+        }
       }
     })
 
     wrapper.vm.$on('input', input)
 
     expect(wrapper.vm.isActive).toBe(false)
-    wrapper.find('.v-dialog__activator').trigger('click')
+    wrapper.find('div.activator').trigger('click')
     expect(wrapper.vm.isActive).toBe(true)
     await wrapper.vm.$nextTick()
     expect(input).toHaveBeenCalledWith(true)
@@ -153,15 +158,20 @@ describe('VDialog.ts', () => {
       propsData: {
         disabled: true
       },
-      slots: {
-        activator: ['<span>activator</span>']
+      scopedSlots: {
+        activator ({ on }) {
+          return this.$createElement('div', {
+            staticClass: 'activator',
+            on
+          })
+        }
       }
     })
 
     wrapper.vm.$on('input', input)
 
     expect(wrapper.vm.isActive).toBe(false)
-    wrapper.find('.v-dialog__activator').trigger('click')
+    wrapper.find('div.activator').trigger('click')
     expect(wrapper.vm.isActive).toBe(false)
     await wrapper.vm.$nextTick()
     expect(input).not.toHaveBeenCalled()
@@ -172,8 +182,8 @@ describe('VDialog.ts', () => {
       propsData: {
         value: false
       },
-      slots: {
-        activator: ['<span>activator</span>']
+      scopedSlots: {
+        activator: '<span>activator</span>'
       }
     })
 
@@ -221,17 +231,22 @@ describe('VDialog.ts', () => {
     expect(document.documentElement.className).toContain('overflow-y-hidden')
   })
 
-  it('should not attach event handlers to the activator container if disabled', async () => {
+  it('should not respond to events if disabled', async () => {
     const wrapper = mountFunction({
       propsData: {
         disabled: true
       },
-      slots: {
-        activator: ['<button></button>']
+      scopedSlots: {
+        activator ({ on }) {
+          return this.$createElement('div', {
+            staticClass: 'activator',
+            on
+          })
+        }
       }
     })
 
-    const activator = wrapper.find('.v-dialog__activator')
+    const activator = wrapper.find('div.activator')
     activator.trigger('click')
 
     expect(wrapper.vm.isActive).toBe(false)
@@ -244,8 +259,8 @@ describe('VDialog.ts', () => {
     expect(wrapper.element.style.display).toBe('block')
 
     const wrapper2 = mountFunction({
-      slots: {
-        activator: ['<div></div>']
+      scopedSlots: {
+        activator: '<div></div>'
       }
     })
     expect(wrapper2.element.style.display).toBe('inline-block')
@@ -268,8 +283,13 @@ describe('VDialog.ts', () => {
     const input = jest.fn()
     const clickOutside = jest.fn()
     const wrapper = mountFunction({
-      slots: {
-        activator: ['<span>activator</span>']
+      scopedSlots: {
+        activator ({ on }) {
+          return this.$createElement('div', {
+            staticClass: 'activator',
+            on
+          })
+        }
       }
     })
 
@@ -277,7 +297,7 @@ describe('VDialog.ts', () => {
     wrapper.vm.$on('click:outside', clickOutside)
 
     expect(wrapper.vm.isActive).toBe(false)
-    wrapper.find('.v-dialog__activator').trigger('click')
+    wrapper.find('div.activator').trigger('click')
     expect(wrapper.vm.isActive).toBe(true)
     await wrapper.vm.$nextTick()
     expect(input).toHaveBeenCalledWith(true)
