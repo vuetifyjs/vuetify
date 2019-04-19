@@ -5,7 +5,6 @@ exports[`VTabs.ts should render generic elements in the tab container 1`] = `
 <div class="v-tabs">
   <div role="tablist"
        class="v-item-group v-slide-group theme--light v-tabs-bar primary--text"
-       data-booted="true"
   >
     <div class="v-slide-group__wrapper">
       <div class="v-slide-group__content v-tabs-bar__content">

@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VCarousel",
   "children": [
     {
       "type": "section",

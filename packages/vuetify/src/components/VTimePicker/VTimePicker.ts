@@ -79,7 +79,7 @@ export default mixins(
 
   computed: {
     selectingHour: {
-      get () {
+      get (): boolean {
         return this.selecting === SelectingTimes.Hour
       },
       set (v: boolean) {
@@ -87,7 +87,7 @@ export default mixins(
       }
     },
     selectingMinute: {
-      get () {
+      get (): boolean {
         return this.selecting === SelectingTimes.Minute
       },
       set (v: boolean) {
@@ -95,7 +95,7 @@ export default mixins(
       }
     },
     selectingSecond: {
-      get () {
+      get (): boolean {
         return this.selecting === SelectingTimes.Second
       },
       set (v: boolean) {
@@ -182,7 +182,7 @@ export default mixins(
           (!cb || cb(val))
       }
     },
-    isAmPm () {
+    isAmPm (): boolean {
       return this.format === 'ampm'
     }
   },

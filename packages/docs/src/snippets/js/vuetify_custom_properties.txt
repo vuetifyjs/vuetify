@@ -1,7 +1,9 @@
 // src/plugins/vuetify.js
 
-Vue.use(Vuetify, {
-  options: {
-    customProperties: true
+export default new Vuetify({
+  theme: {
+    options: {
+      customProperties: true
+    }
   }
 })

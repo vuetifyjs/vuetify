@@ -62,12 +62,22 @@
     .v-list-item__icon.v-list-group__header__prepend-icon .v-icon
       transform: rotate(-180deg)
 
-.v-list-group--no-action > .v-list-group__items > div > .v-list-item
-  padding-left: 72px
+.v-list-group--no-action
+  > .v-list-group__items > div > .v-list-item
+    padding-left: 72px
+
+  &.v-list-group--sub-group
+    > .v-list-group__items > div > .v-list-item
+      padding-left: 88px
 
 .v-list--dense
   .v-list-group--sub-group .v-list-group__header
     padding-left: 24px
 
-  .v-list-group--no-action > .v-list-group__items > div > .v-list-item
-    padding-left: 64px
+  .v-list-group--no-action
+    > .v-list-group__items > div > .v-list-item
+      padding-left: 64px
+
+    &.v-list-group--sub-group
+      > .v-list-group__items > div > .v-list-item
+        padding-left: 80px

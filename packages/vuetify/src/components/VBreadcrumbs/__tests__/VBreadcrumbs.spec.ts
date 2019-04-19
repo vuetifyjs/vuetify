@@ -8,7 +8,6 @@ import {
   mount,
   Wrapper
 } from '@vue/test-utils'
-import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
 
 describe('VBreadcrumbs.ts', () => {
   type Instance = InstanceType<typeof VBreadcrumbs>
@@ -21,8 +20,6 @@ describe('VBreadcrumbs.ts', () => {
       })
     }
   })
-
-  toHaveBeenWarnedInit()
 
   it('should have breadcrumbs classes', () => {
     const wrapper = mount(VBreadcrumbs)

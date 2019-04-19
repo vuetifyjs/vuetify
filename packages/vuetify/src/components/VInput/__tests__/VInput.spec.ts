@@ -189,13 +189,13 @@ describe('VInput.ts', () => {
     expect(wrapper.vm.isDisabled).toBe(true)
 
     wrapper.setProps({
-      disabled: undefined,
+      disabled: false,
       readonly: true
     })
 
     expect(wrapper.vm.isDisabled).toBe(true)
 
-    wrapper.setProps({ readonly: undefined })
+    wrapper.setProps({ readonly: false })
 
     expect(wrapper.vm.isDisabled).toBe(false)
   })

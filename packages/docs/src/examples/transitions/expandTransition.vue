@@ -1,48 +1,56 @@
 <template>
-  <div class="text-xs-center">
-    <v-layout justify-space-around>
+  <v-layout
+    justify-center
+    wrap
+    style="min-height: 160px;"
+  >
+    <v-flex shrink>
       <v-btn
-        dark
+        class="my-3"
         color="primary"
         @click="expand = !expand"
-      >Expand Transition</v-btn>
+      >
+        Expand Transition
+      </v-btn>
 
-      <v-flex shrink>
-        <v-expand-x-transition>
-          <div v-show="expand" style="white-space: nowrap">
-            <v-btn text>
-              <v-icon>star_border</v-icon>
-            </v-btn>
-            <v-btn text>
-              <v-icon>settings</v-icon>
-            </v-btn>
-            <v-btn text>
-              <v-icon>power</v-icon>
-            </v-btn>
-          </div>
-        </v-expand-x-transition>
-      </v-flex>
-    </v-layout>
+      <v-expand-transition>
+        <v-card
+          v-show="expand"
+          height="100"
+          width="100"
+          class="mx-auto"
+        ></v-card>
+      </v-expand-transition>
+    </v-flex>
 
-    <v-expand-transition>
-      <div v-show="expand">
-        <v-btn text>
-          <v-icon>star_border</v-icon>
-        </v-btn>
-        <v-btn text>
-          <v-icon>settings</v-icon>
-        </v-btn>
-        <v-btn text>
-          <v-icon>power</v-icon>
-        </v-btn>
-      </div>
-    </v-expand-transition>
-  </div>
+    <div class="mx-3 hidden-sm-and-down"></div>
+
+    <v-flex shrink>
+      <v-btn
+        class="my-3"
+        color="secondary"
+        @click="expand2 = !expand2"
+      >
+        Expand X Transition
+      </v-btn>
+
+      <v-expand-x-transition>
+        <v-card
+          v-show="expand2"
+          height="100"
+          width="100"
+          class="mx-auto"
+        ></v-card>
+      </v-expand-x-transition>
+    </v-flex>
+  </v-layout>
 </template>
+
 <script>
   export default {
     data: () => ({
-      expand: false
+      expand: false,
+      expand2: false
     })
   }
 </script>

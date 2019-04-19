@@ -90,7 +90,6 @@
 <script>
   // Utilities
   import {
-    mapGetters,
     mapState
   } from 'vuex'
   import { getObjectValueByPath } from 'vuetify/es5/util/helpers'
@@ -99,6 +98,15 @@
   import pluralize from 'pluralize'
 
   export default {
+    inject: {
+      overrideNamespace: {
+        default: null
+      },
+      overridePage: {
+        default: null
+      }
+    },
+
     props: {
       target: {
         type: String,
@@ -127,10 +135,6 @@
     },
 
     computed: {
-      ...mapGetters('documentation', [
-        'namespace',
-        'page'
-      ]),
       ...mapState('documentation', ['deprecatedIn', 'newIn']),
       computedItems () {
         const items = []
@@ -188,6 +192,12 @@
         return this.computedItems.filter(item => {
           return item.description.indexOf('MISSING DESCRIPTION') > -1
         }).map(item => item.name)
+      },
+      namespace () {
+        return this.overrideNamespace || this.$store.getters['documentation/namespace']
+      },
+      page () {
+        return this.overridePage || this.$store.getters['documentation/page']
       }
     },
 
@@ -275,7 +285,7 @@
         else return value
       },
       genTypescriptDef (obj) {
-        return JSON.stringify(obj, null, 2).replace(/"(.*)":\s"(.*)",?/g, '$1: $2')
+        return JSON.stringify(obj, null, 2).replace(/"(.*)":\s"(.*)"?/g, '$1: $2')
       },
       genHeaderName (header, item) {
         let name = header

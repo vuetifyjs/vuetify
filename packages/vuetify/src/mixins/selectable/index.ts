@@ -68,7 +68,7 @@ export default mixins(
 
       return this.valueComparator(input, this.trueValue)
     },
-    isDirty () {
+    isDirty (): boolean {
       return this.isActive
     }
   },

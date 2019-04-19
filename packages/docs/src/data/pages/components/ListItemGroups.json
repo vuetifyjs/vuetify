@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VListItemGroup",
   "children": [
     {
       "type": "section",

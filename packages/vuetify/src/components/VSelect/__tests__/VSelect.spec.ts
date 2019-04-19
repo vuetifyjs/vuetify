@@ -15,14 +15,11 @@ import {
   mount,
   Wrapper
 } from '@vue/test-utils'
-import { rafPolyfill } from '../../../../test'
 
 describe('VSelect.ts', () => {
   type Instance = InstanceType<typeof VSelect>
   let mountFunction: (options?: object) => Wrapper<Instance>
   let el
-
-  rafPolyfill(window)
 
   beforeEach(() => {
     el = document.createElement('div')

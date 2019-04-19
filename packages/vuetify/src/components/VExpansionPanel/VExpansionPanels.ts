@@ -8,7 +8,7 @@ import VExpansionPanel from './VExpansionPanel'
 // Utilities
 import { breaking } from '../../util/console'
 
-type VExpansionPanelInstance = InstanceType<typeof VExpansionPanel>
+interface VExpansionPanelInstance extends InstanceType<typeof VExpansionPanel> {}
 
 /* @vue/component */
 export default BaseItemGroup.extend({

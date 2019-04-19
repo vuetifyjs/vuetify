@@ -7,13 +7,10 @@ import {
   Wrapper
 } from '@vue/test-utils'
 import { compileToFunctions } from 'vue-template-compiler'
-import { rafPolyfill } from '../../../../test'
 
 describe('VAutocomplete.ts', () => {
   type Instance = InstanceType<typeof VAutocomplete>
   let mountFunction: (options?: object) => Wrapper<Instance>
-
-  rafPolyfill(window)
 
   beforeEach(() => {
     document.body.setAttribute('data-app', 'true')
@@ -46,7 +43,6 @@ describe('VAutocomplete.ts', () => {
 
     expect(wrapper.vm.isMenuActive).toBe(false)
     const slot = wrapper.find('.v-input__slot')
-    const item = wrapper.find('.v-list-item')
     slot.trigger('click')
 
     expect(wrapper.vm.isMenuActive).toBe(true)
@@ -108,7 +104,6 @@ describe('VAutocomplete.ts', () => {
     expect(wrapper.vm.filteredItems).toHaveLength(2)
   })
 
-  // eslint-disable-next-line jest/no-disabled-tests
   it.skip('should hide menu when no data', async () => {
     const wrapper = mountFunction()
 

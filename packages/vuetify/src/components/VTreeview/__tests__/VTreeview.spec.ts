@@ -6,7 +6,6 @@ import {
 } from '@vue/test-utils'
 import VTreeview from '../VTreeview'
 import { ExtractVue } from '../../../util/mixins'
-import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
 
 Vue.prototype.$vuetify = {
   icons: {
@@ -34,8 +33,6 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
       return mount(VTreeview, options)
     }
   })
-
-  toHaveBeenWarnedInit()
 
   it('should render items', async () => {
     const wrapper = mountFunction({

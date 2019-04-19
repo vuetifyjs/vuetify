@@ -1,0 +1,59 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "file": "components/VProgressLinear",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/progress-indicators.html"
+  },
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [
+            "v-progress-linear"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "linearDeterminate",
+            "linearIndeterminate",
+            "linearBuffer",
+            "linearQueryIndeterminateAndDeterminate",
+            "linearCustomColors"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/cards",
+            "components/progress-circular",
+            "components/lists"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -67,20 +67,36 @@
       "value": false
     },
     {
-      "type": "site",
+      "type": "release",
       "complete": false,
-      "title": "Vuetify Snips",
+      "title": "v2.0 Release **(Arcadia)**",
       "caption": "Q2 2019",
-      "text": "Website dedicated to creating and sharing Vuetify snippets.",
+      "text": "A complete rebuild of the framework core. Improving the layout and theme systems, platform integration, accessibility and performance. Fully modular and automatic tree-shaking from the vuetify-loader.",
+      "value": true
+    },
+    {
+      "type": "release",
+      "complete": false,
+      "title": "v2.1 Release **(Vanguard)**",
+      "caption": "Q3 2019",
+      "text": "Vuetify components will be pre-configurable through Vuetify options as framework wide defaults. This will allow you to set global settings such as **no-ripples** or all inputs are of **outline** type and even set all cards to become **tile**s.",
       "value": false
     },
     {
       "type": "release",
       "complete": false,
-      "title": "v2.0 Release",
-      "caption": "Q2 2019",
-      "text": "A complete rebuild of the framework core. Improving the layout and theme systems, platform integration, accessibility and performance. Fully modular and automatic tree-shaking from the vuetify-loader.",
-      "value": true
+      "title": "v2.2 Release **(Tigris)**",
+      "caption": "Q4 2019",
+      "text": "The introduction of Vuetify Presets. Will include the entire Material Design Studies collection and be user customizable. For more information on Google's studies, please [navigate here](https://material.io/design/material-studies/about-our-material-studies.html).",
+      "value": false
+    },
+    {
+      "type": "site",
+      "complete": false,
+      "title": "Vuetify Snips",
+      "caption": "TBD",
+      "text": "Website dedicated to creating and sharing Vuetify snippets.",
+      "value": false
     }
   ]
 }

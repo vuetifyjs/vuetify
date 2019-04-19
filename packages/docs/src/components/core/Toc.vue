@@ -38,6 +38,7 @@
       activeIndex: 0,
       currentOffset: 0,
       list: [],
+      routeTimeout: null,
       timeout: null
     }),
 
@@ -45,7 +46,8 @@
       '$route.path': {
         immediate: true,
         handler () {
-          setTimeout(this.genList, 50)
+          clearTimeout(this.routeTimeout)
+          this.routeTimeout = setTimeout(this.genList, 200)
         }
       }
     },

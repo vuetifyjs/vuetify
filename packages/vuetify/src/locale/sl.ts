@@ -12,7 +12,7 @@ export default {
   },
   noDataText: 'Ni podatkov',
   carousel: {
-    prev: 'Prejšnji vizualni prikaz',
-    next: 'Naslednja vizuala'
+    prev: 'Prejšnji prikaz',
+    next: 'Naslednji prikaz'
   }
 }

@@ -33,7 +33,6 @@ describe('.ts', () => {
   })
 
   // TODO: wat
-  // eslint-disable-next-line jest/no-disabled-tests
   it.skip('should generate a header', () => {
     const wrapper = mount(VSelectList)
 

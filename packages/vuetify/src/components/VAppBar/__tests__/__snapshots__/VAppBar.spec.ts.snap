@@ -3,14 +3,14 @@
 exports[`AppBar.ts should render with background 1`] = `
 
 <nav class="v-sheet v-sheet--tile theme--light v-toolbar v-app-bar"
-     style="margin-top: 0px; left: 0px; right: 0px;"
+     style="margin-top: 0px; transform: translateY(0px); left: 0px; right: 0px;"
 >
   <div class="v-toolbar__image">
     <div class="v-responsive v-image"
          style="height: 64px;"
     >
-      <div class="v-image__image v-image__image--cover"
-           style="background-image: url(/test.jpg); background-position: center center;"
+      <div class="v-image__image v-image__image--preload v-image__image--cover"
+           style="background-position: center center;"
            name="fade-transition"
            mode="in-out"
       >

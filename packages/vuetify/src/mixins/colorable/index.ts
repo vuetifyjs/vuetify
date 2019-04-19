@@ -29,7 +29,7 @@ export default Vue.extend({
       }
       if (isCssColor(color)) {
         data.style = {
-          ...data.style,
+          ...data.style as object,
           'background-color': `${color}`,
           'border-color': `${color}`
         }
@@ -58,7 +58,7 @@ export default Vue.extend({
       }
       if (isCssColor(color)) {
         data.style = {
-          ...data.style,
+          ...data.style as object,
           'color': `${color}`,
           'caret-color': `${color}`
         }

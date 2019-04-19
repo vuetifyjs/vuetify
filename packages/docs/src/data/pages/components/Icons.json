@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VIcon",
   "mdSpec": {
     "version": "2",
     "link": "https://material.io/design/iconography/system-icons.html"
