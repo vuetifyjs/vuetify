@@ -53,7 +53,7 @@ export default mixins<options &
     },
     disabled: Boolean,
     inverseLabel: Boolean,
-    reversed: Boolean,
+    reverse: Boolean,
     min: {
       type: [Number, String],
       default: 0
@@ -207,7 +207,7 @@ export default mixins<options &
       return this.validationState || this.thumbColor || this.color
     },
     decreasing () {
-      return this.$vuetify.rtl ? !this.reversed : this.reversed
+      return this.$vuetify.rtl ? !this.reverse : this.reverse
     }
   },
 

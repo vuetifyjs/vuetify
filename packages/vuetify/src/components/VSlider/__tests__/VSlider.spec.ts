@@ -553,4 +553,16 @@ describe('VSlider.ts', () => {
 
     expect(parseKeyDown).toHaveBeenCalled()
   })
+
+  it('should be decreasing when reverse is set', async () => {
+    const wrapper = mountFunction({
+      propsData: { reverse: true }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.vm.$vuetify.rtl = true
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
