@@ -1,12 +1,11 @@
 <template>
-  <v-tooltip left>
+  <v-tooltip left bottom>
     <v-btn
       slot="activator"
       :href="link"
       icon
       target="_blank"
       rel="noopener"
-      class="mt-2"
       aria-label="Material Design Specification"
     >
       <v-badge

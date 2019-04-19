@@ -1,9 +1,4 @@
 /build/
-*.styl
-
-# Tests
-/test
-/types/test
 
 # Built files
 /es5/

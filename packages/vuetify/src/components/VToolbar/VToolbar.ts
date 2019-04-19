@@ -75,16 +75,13 @@ export default VSheet.extend({
         'v-toolbar--collapsed': this.isCollapsed,
         'v-toolbar--dense': this.dense,
         'v-toolbar--extended': this.isExtended,
+        'v-toolbar--flat': this.flat,
         'v-toolbar--floating': this.floating,
-        'v-toolbar--prominent': this.isProminent,
-        'elevation-0': this.isFlat
+        'v-toolbar--prominent': this.isProminent
       }
     },
     isCollapsed (): boolean {
       return this.collapse
-    },
-    isFlat (): boolean {
-      return this.flat
     },
     isProminent (): boolean {
       return this.prominent

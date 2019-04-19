@@ -1,0 +1,58 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "file": "components/VProgressCircular",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/progress-indicators.html"
+  },
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [
+            "v-progress-circular"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "circularColored",
+            "circularIndeterminate",
+            "circularSizeAndWidth",
+            "circularRotate"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/cards",
+            "components/progress-linear",
+            "components/lists"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_overflow-buttons.styl'
+import './VOverflowBtn.sass'
 
 // Extensions
 import VSelect from '../VSelect/VSelect'
@@ -94,13 +94,6 @@ export default VAutocomplete.extend({
           }
         }
       }, [itemObj.text])
-    },
-    setSelectedItems () {
-      if (this.internalValue == null) {
-        this.selectedItems = []
-      } else {
-        this.selectedItems = [this.internalValue]
-      }
     }
   }
 })

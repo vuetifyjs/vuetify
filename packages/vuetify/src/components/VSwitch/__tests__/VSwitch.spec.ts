@@ -11,7 +11,7 @@ import { touch } from '../../../../test'
 // Types
 import { ExtractVue } from '../../../util/mixins'
 
-describe('VSwitch.js', () => {
+describe('VSwitch.ts', () => {
   type Instance = ExtractVue<typeof VSwitch>
   let mountFunction: (options?: object) => Wrapper<Instance>
 
@@ -31,18 +31,16 @@ describe('VSwitch.js', () => {
       }
     })
 
-    let ripple = wrapper.findAll('.v-input--selection-controls__ripple')
-
-    expect(ripple).toHaveLength(0)
+    expect(wrapper.findAll('.v-input--selection-controls__ripple').wrappers).toHaveLength(0)
 
     wrapper.setProps({ ripple: true })
 
     await wrapper.vm.$nextTick()
 
-    ripple = wrapper.find('.v-input--selection-controls__ripple')
+    const ripple = wrapper.find('.v-input--selection-controls__ripple')
 
-    expect(ripple.element._ripple.enabled).toBe(true)
-    expect(ripple.element._ripple.centered).toBe(true)
+    expect((ripple.element as any)._ripple.enabled).toBe(true)
+    expect((ripple.element as any)._ripple.centered).toBe(true)
   })
 
   it('should emit change event on swipe', async () => {

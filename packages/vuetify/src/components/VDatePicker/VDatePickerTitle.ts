@@ -1,4 +1,4 @@
-import '../../stylus/components/_date-picker-title.styl'
+import './VDatePickerTitle.sass'
 
 // Components
 import VIcon from '../VIcon'

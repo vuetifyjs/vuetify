@@ -11,6 +11,7 @@
     <v-alert
       type="error"
       dense
+      :icon="false"
     >
       This is an error alert with no icon.
     </v-alert>

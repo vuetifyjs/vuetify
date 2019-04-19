@@ -15,15 +15,12 @@ import {
   Wrapper
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../util/mixins'
-import { rafPolyfill } from '../../../../test/index'
 
 describe('VWindowItem.ts', () => {
   type Instance = ExtractVue<typeof VWindowItem>
   let mountFunction: (options?: object) => Wrapper<Instance>
   let router: Router
   let localVue: typeof Vue
-
-  rafPolyfill(global)
 
   beforeEach(() => {
     router = new Router()

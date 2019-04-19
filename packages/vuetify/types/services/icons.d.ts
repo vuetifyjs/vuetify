@@ -1,8 +1,5 @@
-import { Icons } from '../../src/services/icons'
-
-export interface VuetifyIconService {
-  new (options?: VuetifyIconOptions): Icons
-}
+// Types
+import { Component } from 'vue'
 
 export interface VuetifyIconOptions {
   /**
@@ -13,40 +10,43 @@ export interface VuetifyIconOptions {
    * fa: <a href="https://fontawesome.com/get-started/web-fonts-with-css">FontAwesome 5</a>
    * fa4: <a href="">FontAwesome 4</a> TODO: link
    */
-  iconfont: 'md' | 'mdi' | 'fa' | 'fa4' // TODO: camelCase
-  values?: VuetifyIcons
+  iconfont: 'mdi' | 'mdiSvg' | 'md' | 'fa' | 'fa4' // TODO: camelCase
+  values?: Partial<VuetifyIcons>
 }
 
-export interface VuetifyIconSets {
-  [key: string]: VuetifyIcons
+export type VuetifyIconComponent = {
+  component: Component | string
+  props?: object
 }
+
+export type VuetifyIcon = string | VuetifyIconComponent
 
 export interface VuetifyIcons {
-  cancel?: string
-  clear?: string
-  close?: string
-  complete?: string
-  delete?: string // delete (e.g. v-chip close)
-  success?: string
-  info?: string
-  warning?: string
-  error?: string
-  prev?: string
-  next?: string
-  checkboxOn?: string
-  checkboxOff?: string
-  checkboxIndeterminate?: string
-  delimiter?: string // for carousel
-  sort?: string
-  expand?: string
-  menu?: string
-  subgroup?: string
-  dropdown?: string
-  radioOn?: string
-  radioOff?: string
-  edit?: string
-  ratingEmpty?: string
-  ratingFull?: string
-  ratingHalf?: string
-  loading?: string
+  complete: VuetifyIcon
+  cancel: VuetifyIcon
+  close: VuetifyIcon
+  delete: VuetifyIcon
+  clear: VuetifyIcon
+  success: VuetifyIcon
+  info: VuetifyIcon
+  warning: VuetifyIcon
+  error: VuetifyIcon
+  prev: VuetifyIcon
+  next: VuetifyIcon
+  checkboxOn: VuetifyIcon
+  checkboxOff: VuetifyIcon
+  checkboxIndeterminate: VuetifyIcon
+  delimiter: VuetifyIcon
+  sort: VuetifyIcon
+  expand: VuetifyIcon
+  menu: VuetifyIcon
+  subgroup: VuetifyIcon
+  dropdown: VuetifyIcon
+  radioOn: VuetifyIcon
+  radioOff: VuetifyIcon
+  edit: VuetifyIcon
+  ratingEmpty: VuetifyIcon
+  ratingFull: VuetifyIcon
+  ratingHalf: VuetifyIcon
+  [name: string]: VuetifyIcon
 }

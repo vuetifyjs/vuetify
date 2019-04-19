@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VCarousel",
   "children": [
     {
       "type": "section",
@@ -29,6 +30,7 @@
         {
           "type": "examples",
           "value": [
+            "cycle",
             "customTransition",
             "customIcons",
             "hideControls",

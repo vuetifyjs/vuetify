@@ -1,6 +1,5 @@
 // Imports
 @import '../../styles/styles.sass'
-@import './_mixins.sass'
 @import './_variables.scss'
 
 // Theme
@@ -14,10 +13,10 @@
   &.info
     color: map-deep-get($material-dark, 'text', 'primary')
 
-.v-chip.theme--light
-  +chip-theme($material-light)
-.v-chip.theme--dark
-  +chip-theme($material-dark)
++theme(v-chip) using ($material)
+  background: map-get($material, 'chips')
+  border-color: map-get($material, 'dividers')
+  color: map-deep-get($material, 'text', 'primary')
 
 // Block
 .v-chip
@@ -49,6 +48,7 @@
   // Important is needed to account for new avatar structure
   .v-avatar
     height: $chip-avatar-size !important
+    min-width: $chip-avatar-size !important
     width: $chip-avatar-size !important
 
   .v-icon
@@ -161,12 +161,15 @@
   border-radius: $chip-label-border-radius !important
 
 .v-chip.v-chip--outlined
-  background-color: transparent !important
   border-width: $icon-outlined-border-width
   border-style: solid
 
   .v-icon
     color: inherit
+
+  // Needs increased specificity
+  &.v-chip
+    background-color: transparent !important
 
 // Needs increased specificity
 // to overwrite theme color

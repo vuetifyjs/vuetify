@@ -22,11 +22,11 @@
   }
 </script>
 
-<style lang="stylus">
-  .app-alert
-    a
-      color: #fff
+<style lang="sass">
+.app-alert
+  a
+    color: #fff
 
-    p
-      margin: 0 !important
+  p
+    margin: 0 !important
 </style>

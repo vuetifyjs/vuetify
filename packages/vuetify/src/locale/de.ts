@@ -12,7 +12,7 @@ export default {
   },
   noDataText: 'Keine Daten vorhanden',
   carousel: {
-    prev: 'Vorheriges visuelles',
+    prev: 'Vorheriges Bild',
     next: 'Nächstes Bild'
   }
 }

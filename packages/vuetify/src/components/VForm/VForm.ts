@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_forms.styl'
+import './VForm.sass'
 
 // Components
 import VInput from '../VInput/VInput'
@@ -127,9 +127,7 @@ export default RegistrableProvide('form').extend({
         novalidate: true,
         ...this.$attrs
       },
-      on: {
-        submit: (e: Event) => this.$emit('submit', e)
-      }
+      on: this.$listeners
     }, this.$slots.default)
   }
 })

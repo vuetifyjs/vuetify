@@ -1,13 +1,11 @@
 // Imports
 @import '../../styles/styles.sass'
 @import './_variables.scss'
-@import './_mixins.sass'
 
 // Theme
-.v-banner.theme--light
-  +banner-theme($material-light)
-.v-banner.theme--dark
-  +banner-theme($material-dark)
++theme(v-banner) using ($material)
+  .v-banner__wrapper
+    border-bottom: 1px solid map-get($material, 'dividers')
 
 // Block
 .v-banner

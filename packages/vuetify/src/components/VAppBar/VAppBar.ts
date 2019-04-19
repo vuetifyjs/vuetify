@@ -28,6 +28,8 @@ const baseMixins = mixins(
   Applicationable('top', [
     'clippedLeft',
     'clippedRight',
+    'computedHeight',
+    'computedTransform',
     'invertedScroll',
     'isExtended',
     'isProminent',
@@ -227,7 +229,7 @@ export default baseMixins.extend({
     updateApplication (): number {
       return this.invertedScroll
         ? 0
-        : this.$el ? this.$el.clientHeight : 0
+        : this.computedHeight + this.computedTransform
     },
     thresholdMet () {
       if (this.invertedScroll) {

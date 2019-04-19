@@ -28,7 +28,9 @@ Vuetify.install(Vue, {
   },
   icons: {
     iconfont: 'fa',
-    cancel: 'custom icon'
+    values: {
+      cancel: 'custom icon'
+    }
   },
   rtl: true,
   lang: {

@@ -16,16 +16,20 @@ export default Vue.extend({
   methods: {
     setBackgroundColor (color?: string | false, data: VNodeData = {}): VNodeData {
       if (typeof data.style === 'string') {
+        // istanbul ignore next
         consoleError('style must be an object', this)
+        // istanbul ignore next
         return data
       }
       if (typeof data.class === 'string') {
+        // istanbul ignore next
         consoleError('class must be an object', this)
+        // istanbul ignore next
         return data
       }
       if (isCssColor(color)) {
         data.style = {
-          ...data.style,
+          ...data.style as object,
           'background-color': `${color}`,
           'border-color': `${color}`
         }
@@ -41,16 +45,20 @@ export default Vue.extend({
 
     setTextColor (color?: string | false, data: VNodeData = {}): VNodeData {
       if (typeof data.style === 'string') {
+        // istanbul ignore next
         consoleError('style must be an object', this)
+        // istanbul ignore next
         return data
       }
       if (typeof data.class === 'string') {
+        // istanbul ignore next
         consoleError('class must be an object', this)
+        // istanbul ignore next
         return data
       }
       if (isCssColor(color)) {
         data.style = {
-          ...data.style,
+          ...data.style as object,
           'color': `${color}`,
           'caret-color': `${color}`
         }

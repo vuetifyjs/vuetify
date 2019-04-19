@@ -2,7 +2,7 @@
 import VOverlay from '../../components/VOverlay'
 
 // Utilities
-import { keyCodes, addOnceEventListener } from '../../util/helpers'
+import { keyCodes, addOnceEventListener, addPassiveEventListener } from '../../util/helpers'
 
 // Types
 import Vue from 'vue'
@@ -68,9 +68,11 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
       this.overlay = overlay
     },
     genOverlay () {
-      if (!this.overlay) this.createOverlay()
-
       this.hideScroll()
+
+      if (this.hideOverlay) return
+
+      if (!this.overlay) this.createOverlay()
 
       requestAnimationFrame(() => {
         if (!this.overlay) return
@@ -153,7 +155,8 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
 
       if (e.type === 'keydown' && path[0] === document.body) {
         const dialog = this.$refs.dialog
-        const selected = window.getSelection().anchorNode as Element
+        // getSelection returns null in firefox in some edge cases, can be ignored
+        const selected = window.getSelection()!.anchorNode as Element
         if (dialog && this.hasScrollbar(dialog) && this.isInside(selected, dialog)) {
           return this.shouldScroll(dialog, delta)
         }
@@ -199,7 +202,7 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
       if (this.$vuetify.breakpoint.smAndDown) {
         document.documentElement!.classList.add('overflow-y-hidden')
       } else {
-        window.addEventListener('wheel', this.scrollListener as EventHandlerNonNull, { passive: false })
+        addPassiveEventListener(window, 'wheel', this.scrollListener as EventHandlerNonNull, { passive: false })
         window.addEventListener('keydown', this.scrollListener as EventHandlerNonNull)
       }
     },

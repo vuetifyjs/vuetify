@@ -1,6 +1,15 @@
 // src/index.js
+
 import Vue from 'vue'
 import Vuetify from 'vuetify'
-import theme from './theme'
+import light from './theme'
 
-Vue.use(Vuetify, { theme })
+Vue.use(Vuetify)
+
+export default new Vuetify({
+  theme: {
+    themes: {
+      light
+    }
+  }
+})

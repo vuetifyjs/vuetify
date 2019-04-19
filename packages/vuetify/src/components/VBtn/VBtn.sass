@@ -1,7 +1,6 @@
 // Imports
 @import '../../styles/styles.sass'
 @import './_variables.scss'
-@import './_mixins.sass'
 
 // Theme
 .v-btn:not(.v-btn--outline)
@@ -14,10 +13,27 @@
   &.info
     color: map-deep-get($material-dark, 'text', 'primary')
 
-.v-btn.theme--light
-  +btn-theme($material-light)
-.v-btn.theme--dark
-  +btn-theme($material-dark)
++theme(v-btn) using ($material)
+  color: map-deep-get($material, 'text', 'primary')
+
+  &.v-btn--disabled
+    color: map-deep-get($material, 'buttons', 'disabled') !important
+
+    .v-icon,
+    .v-btn__loading
+      color: map-deep-get($material, 'buttons', 'disabled') !important
+
+    &:not(.v-btn--flat):not(.v-btn--outline)
+      background-color: map-deep-get($material, 'buttons', 'focused') !important
+
+  &:not(.v-btn--flat)
+    background-color: map-get($material, 'app-bar')
+
+  &.v-btn--outline.v-btn--text
+    border-color: map-get($material, 'dividers')
+
+  &.v-btn--icon
+    color: map-deep-get($material, 'icons', 'active')
 
 // Block
 .v-btn
@@ -28,7 +44,6 @@
   font-size: $btn-font-size
   font-weight: $btn-font-weight
   letter-spacing: $btn-letter-spacing
-  line-height: $btn-line-height
   justify-content: center
   max-width: 100%
   outline: 0
@@ -109,6 +124,8 @@
   .v-icon--left,
   .v-icon--right
     font-size: $btn-icon-font-size
+    height: $btn-icon-font-size
+    width: $btn-icon-font-size
 
   .v-icon--left
     margin-left: -6px
@@ -176,9 +193,6 @@
     &.v-size--#{$name}
       height: #{$size}px
       width: #{$size}px
-
-      .v-icon
-        font-size: #{round($size / 1.5)}px
 
       &.v-btn--absolute
         &.v-btn--bottom

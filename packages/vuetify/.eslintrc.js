@@ -22,6 +22,7 @@ module.exports = {
       }
     }],
     'local-rules/no-render-string-reference': 'error',
+    'jest/no-disabled-tests': 'off',
     'jest/no-large-snapshots': 'warn',
     'jest/prefer-spy-on': 'warn',
     'jest/prefer-to-be-null': 'warn',

@@ -1,53 +1,38 @@
 <template>
-  <v-container grid-list-md>
-    <v-layout row wrap>
-      <v-flex xs12 sm6 md4>
-        <v-slider
-          v-model="slider"
-          :min="16"
-          :max="256"
-          label="Size"
-          thumb-label
-        ></v-slider>
+  <v-layout
+    align-center
+    justify-space-around
+    wrap
+  >
+    <v-avatar color="indigo">
+      <v-icon dark>account_circle</v-icon>
+    </v-avatar>
 
-        <v-switch
-          v-model="tile"
-          label="Tile"
-        ></v-switch>
-      </v-flex>
-
-      <v-flex
-        xs12
-        sm6
-        md8
-        align-center
-        justify-center
-        layout
-        text-xs-center
+    <v-avatar>
+      <img
+        src="https://cdn.vuetifyjs.com/images/john.jpg"
+        alt="John"
       >
-        <v-avatar
-          :tile="tile"
-          :size="avatarSize"
-          color="grey lighten-4"
-        >
-          <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar">
-        </v-avatar>
-      </v-flex>
-    </v-layout>
-  </v-container>
+    </v-avatar>
+
+    <v-badge overlap>
+      <template v-slot:badge>
+        <span>3</span>
+      </template>
+
+      <v-avatar
+        color="purple red--after"
+      >
+        <v-icon dark>notifications</v-icon>
+      </v-avatar>
+    </v-badge>
+
+    <v-avatar color="teal">
+      <span class="white--text headline">C</span>
+    </v-avatar>
+
+    <v-avatar color="red">
+      <span class="white--text headline">J</span>
+    </v-avatar>
+  </v-layout>
 </template>
-
-<script>
-  export default {
-    data: () => ({
-      slider: 56,
-      tile: false
-    }),
-
-    computed: {
-      avatarSize () {
-        return `${this.slider}px`
-      }
-    }
-  }
-</script>

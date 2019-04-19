@@ -69,8 +69,8 @@ export default mixins<options &
     ticks: {
       type: [Boolean, String],
       default: false,
-      validator: (v: any) => typeof v === 'boolean' || v === 'always'
-    },
+      validator: v => typeof v === 'boolean' || v === 'always'
+    } as PropValidator<boolean | 'always'>,
     tickLabels: {
       type: Array,
       default: () => ([])
@@ -86,8 +86,8 @@ export default mixins<options &
     thumbLabel: {
       type: [Boolean, String],
       default: null,
-      validator: (v: any) => typeof v === 'boolean' || v === 'always'
-    },
+      validator: v => typeof v === 'boolean' || v === 'always'
+    } as PropValidator<boolean | 'always' | null>,
     thumbSize: {
       type: [Number, String],
       default: 32
@@ -110,7 +110,7 @@ export default mixins<options &
   }),
 
   computed: {
-    classes () {
+    classes (): object {
       return {
         'v-input__slider': true,
         'v-input__slider--vertical': this.vertical,
@@ -118,7 +118,7 @@ export default mixins<options &
       }
     },
     internalValue: {
-      get () {
+      get (): number {
         return this.lazyValue
       },
       set (val: number) {
@@ -151,13 +151,14 @@ export default mixins<options &
 
       return value
     },
-    trackFillStyles () {
+    trackFillStyles (): Partial<CSSStyleDeclaration> {
       const startDir = this.vertical ? 'bottom' : 'left'
       const endDir = this.vertical ? 'top' : 'right'
       const valueDir = this.vertical ? 'height' : 'width'
 
       const start = this.decreasing ? 'auto' : 0
       const end = this.decreasing ? 0 : 'auto'
+
       const value = this.disabled ? `calc(${this.inputWidth}% - 10px)` : `${this.inputWidth}%`
 
       return {
@@ -167,8 +168,10 @@ export default mixins<options &
         [valueDir]: value
       }
     },
+
     trackStyles () {
       const startDir = this.vertical ? this.decreasing ? 'bottom' : 'top' : this.decreasing ? 'left' : 'right'
+
       const endDir = this.vertical ? 'height' : 'width'
 
       const start = '0px'
@@ -180,29 +183,28 @@ export default mixins<options &
         [endDir]: end
       }
     },
-    showTicks () {
+    showTicks (): boolean {
       return this.tickLabels.length > 0 ||
-        (!this.disabled && this.stepNumeric && !!this.ticks)
+        !!(!this.disabled && this.stepNumeric && this.ticks)
     },
-    numTicks () {
+    numTicks (): number {
       return Math.ceil((this.maxValue - this.minValue) / this.stepNumeric)
     },
-    showThumbLabel () {
-      return !this.disabled && (
-        !!this.thumbLabel ||
-        this.thumbLabel === '' ||
+    showThumbLabel (): boolean {
+      return !this.disabled && !!(
+        this.thumbLabel ||
         this.$scopedSlots['thumb-label']
       )
     },
-    computedColor () {
+    computedColor (): string | false {
       if (this.disabled) return false
       return this.validationState || this.color
     },
-    computedTrackColor () {
+    computedTrackColor (): string | false {
       if (this.disabled) return false
       return this.validationState || this.trackColor
     },
-    computedThumbColor () {
+    computedThumbColor (): string | false {
       if (this.disabled) return false
       return this.validationState || this.thumbColor || this.color
     },
@@ -484,11 +486,8 @@ export default mixins<options &
       this.isActive = false
     },
     onMouseMove (e: MouseEvent) {
-      const { value, isInsideTrack } = this.parseMouseMove(e)
-
-      if (isInsideTrack) {
-        this.internalValue = value
-      }
+      const { value } = this.parseMouseMove(e)
+      this.internalValue = value
     },
     onKeyDown (e: KeyboardEvent) {
       if (this.disabled || this.readonly) return

@@ -73,22 +73,18 @@
   }
 </script>
 
-<style lang="stylus">
-h4.markdown > p {
-  margin-bottom: 0;
-}
+<style lang="sass">
+h4.markdown > p
+  margin-bottom: 0
 
-.markdown--link {
-  text-decoration: none;
+.markdown--link
+  text-decoration: none
 
-  &:hover {
-    opacity: 0.8;
-  }
+  &:hover
+    opacity: 0.8
 
-  .v-icon {
-    font-size: 14px;
-    margin-left: 4px;
-    vertical-align: baseline;
-  }
-}
+  .v-icon
+    font-size: 14px
+    margin-left: 4px
+    vertical-align: baseline
 </style>

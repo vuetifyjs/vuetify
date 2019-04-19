@@ -1,15 +1,15 @@
 @import '../../styles/styles.sass'
 @import './_variables.scss'
-@import './_mixins.sass'
 
 // Theme
-.v-bottom-navigation.theme--light
-  +bottom-nav-theme($material-light)
-.v-bottom-navigation.theme--dark
-  +bottom-nav-theme($material-dark)
++theme(v-bottom-navigation) using ($material)
+  background-color: map-get($material, 'cards')
 
-  .v-btn.v-btn--active
-    color: map-deep-get($material-dark, 'text', 'primary')
+  .v-btn
+    color: map-deep-get($material, 'text', 'secondary') !important
+
+    &--active
+      color: map-deep-get($material, 'text', 'primary') !important
 
 // Block
 .v-item-group.v-bottom-navigation

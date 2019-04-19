@@ -1,12 +1,10 @@
 @import '../../styles/styles.sass'
-@import './_mixins.sass'
 @import './_variables.scss'
 
 // Theme
-.v-footer.theme--light
-  +footer-theme($material-light)
-.v-footer.theme--dark
-  +footer-theme($material-dark)
++theme(v-footer) using ($material)
+  background-color: map-get($material, 'app-bar')
+  color: map-deep-get($material, 'text', 'primary')
 
 // Block
 .v-footer
@@ -15,7 +13,10 @@
   flex: 0 1 auto !important // Don't let devs break their code
   flex-wrap: wrap
   padding: $footer-padding
-  transition: background-color .2s map-get($transition, 'fast-out-slow-in')
+  transition-duration: 0.2s
+  transition-property: background-color, left, right
+  transition-timing-function: map-get($transition, 'fast-out-slow-in')
+  +bootable()
 
 // Modifier
 .v-footer--absolute,

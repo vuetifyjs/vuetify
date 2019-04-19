@@ -61,12 +61,12 @@
   }
 </script>
 
-<style lang="stylus">
-  .browser-icon--split
-    position: absolute
+<style lang="sass">
+.browser-icon--split
+  position: absolute
 
-    &:nth-child(1)
-      clip: rect(0px 21px 40px 0px)
-    &:nth-child(2)
-      clip: rect(0px 40px 40px 22px)
+  &:nth-child(1)
+    clip: rect(0px 21px 40px 0px)
+  &:nth-child(2)
+    clip: rect(0px 40px 40px 22px)
 </style>

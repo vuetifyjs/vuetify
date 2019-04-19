@@ -1,11 +1,8 @@
 @import '../../styles/styles.sass'
 @import './_variables.scss'
-@import './_mixins.sass'
 
-.v-divider.theme--light
-  +divider-theme($material-light)
-.v-alert.theme--dark
-  +divider-theme($material-dark)
++theme(v-divider) using ($material)
+  border-color: map-get($material, 'dividers')
 
 .v-divider
   display: block

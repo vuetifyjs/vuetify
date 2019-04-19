@@ -1,9 +1,5 @@
 import { Theme } from '../../src/services/theme'
 
-export interface VuetifyThemeService {
-  new (options?: VuetifyThemeOptions): Theme
-}
-
 export interface VuetifyThemeOptions {
   dark?: boolean
   disable?: boolean

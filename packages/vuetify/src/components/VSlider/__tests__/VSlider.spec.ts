@@ -6,7 +6,6 @@ import {
   mount,
   Wrapper
 } from '@vue/test-utils'
-import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
 
 /* eslint-disable max-statements */
 describe('VSlider.ts', () => {
@@ -33,8 +32,6 @@ describe('VSlider.ts', () => {
   afterEach(() => {
     document.body.removeChild(el)
   })
-
-  toHaveBeenWarnedInit()
 
   it('should match a snapshot', () => {
     const wrapper = mountFunction()

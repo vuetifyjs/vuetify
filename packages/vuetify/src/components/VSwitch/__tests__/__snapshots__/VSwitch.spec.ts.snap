@@ -1,14 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VSwitch.js should render element with loader and match the snapshot 1`] = `
+exports[`VSwitch.ts should render element with loader and match the snapshot 1`] = `
 
 <div class="v-input v-input--selection-controls v-input--switch theme--light">
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-input--selection-controls__input">
         <input aria-checked="false"
-               role="checkbox"
+               role="switch"
                type="checkbox"
+               aria-disabled="false"
+               value
         >
         <div class="v-input--selection-controls__ripple">
         </div>
@@ -23,6 +25,7 @@ exports[`VSwitch.js should render element with loader and match the snapshot 1`]
           >
             <svg xmlns="http://www.w3.org/2000/svg"
                  viewbox="22.857142857142858 22.857142857142858 45.714285714285715 45.714285714285715"
+                 style="transform: rotate(0deg);"
             >
               <circle fill="transparent"
                       cx="45.714285714285715"
