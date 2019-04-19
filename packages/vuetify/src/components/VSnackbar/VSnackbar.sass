@@ -27,12 +27,13 @@
     background-color: $snackbar-background-color
     pointer-events: auto
     width: 100%
+    min-width: 344px
     +elevation(6)
 
   &__content
     width: 100%
     height: 48px
-    padding: 14px 24px
+    padding: 16px 24px
     display: flex
     align-items: center
     justify-content: space-between
@@ -42,7 +43,7 @@
       color: $snackbar-color
       flex: 0 0 auto
       padding: 8px
-      margin: 0 0 0 24px
+      margin: 0 -16px 0 24px
       height: auto
       min-width: auto
       width: auto
@@ -51,7 +52,7 @@
         margin: -2px
 
       +rtl()
-        margin: 0 24px 0 0
+        margin: 0 24px 0 -16px
 
       &::before
         display: none
@@ -86,7 +87,6 @@
     &__wrapper
       width: auto
       max-width: 568px
-      min-width: 288px
       margin: 0 auto
       border-radius: 2px
 
