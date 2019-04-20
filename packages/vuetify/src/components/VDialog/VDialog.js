@@ -188,7 +188,7 @@ export default {
       if (e.keyCode === keyCodes.esc && !this.getOpenDependents().length) {
         if (!this.persistent) {
           this.isActive = false
-          const activator = this.getActivator()
+          const activator = this.getActivator(e)
           this.$nextTick(() => activator && activator.focus())
         } else if (!this.noClickAnimation) {
           this.animateClick()
