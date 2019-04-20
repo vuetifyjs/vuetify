@@ -9,7 +9,6 @@ import { convertToUnit } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
 
 const baseMixins = mixins(
   Stackable,
@@ -32,16 +31,9 @@ export default baseMixins.extend<options>().extend({
   name: 'menuable',
 
   props: {
-    activator: {
-      default: null,
-      validator: (val: string | object) => {
-        return ['string', 'object'].includes(typeof val)
-      }
-    } as PropValidator<string | HTMLElement>,
     allowOverflow: Boolean,
     light: Boolean,
     dark: Boolean,
-    disabled: Boolean,
     maxWidth: {
       type: [Number, String],
       default: 'auto'
