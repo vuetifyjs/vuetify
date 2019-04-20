@@ -4,6 +4,7 @@ import Stackable from '../stackable'
 
 // Utilities
 import mixins, { ExtractVue } from '../../util/mixins'
+import { convertToUnit } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
@@ -122,7 +123,7 @@ export default baseMixins.extend<options>().extend({
     computedLeft () {
       const a = this.dimensions.activator
       const c = this.dimensions.content
-      const activatorLeft = (this.isAttached ? a.offsetLeft : a.left) || 0
+      const activatorLeft = (this.attach !== false ? a.offsetLeft : a.left) || 0
       const minWidth = Math.max(a.width, c.width)
       let left = 0
       left += this.left ? activatorLeft - (minWidth - a.width) : activatorLeft
@@ -144,7 +145,7 @@ export default baseMixins.extend<options>().extend({
       let top = 0
 
       if (this.top) top += a.height - c.height
-      if (this.isAttached) top += a.offsetTop
+      if (this.attach !== false) top += a.offsetTop
       else top += a.top + this.pageYOffset
       if (this.offsetY) top += this.top ? -a.height : a.height
       if (this.nudgeTop) top -= parseInt(this.nudgeTop)
@@ -154,9 +155,6 @@ export default baseMixins.extend<options>().extend({
     },
     hasActivator (): boolean {
       return !!this.$slots.activator || !!this.$scopedSlots.activator || !!this.activator || !!this.inputActivator
-    },
-    isAttached (): boolean {
-      return this.attach !== false
     }
   },
 
@@ -174,11 +172,11 @@ export default baseMixins.extend<options>().extend({
   },
 
   beforeMount () {
-    this.checkForWindow()
+    this.hasWindow = typeof window !== 'undefined'
   },
 
   methods: {
-    absolutePosition () {
+    absolutePosition (): object {
       return {
         offsetTop: 0,
         offsetLeft: 0,
@@ -193,16 +191,14 @@ export default baseMixins.extend<options>().extend({
     },
     activate () {},
     calcLeft (menuWidth: number) {
-      return `${this.isAttached
+      return convertToUnit(this.attach !== false
         ? this.computedLeft
-        : this.calcXOverflow(this.computedLeft, menuWidth)
-      }px`
+        : this.calcXOverflow(this.computedLeft, menuWidth))
     },
     calcTop () {
-      return `${this.isAttached
+      return convertToUnit(this.attach !== false
         ? this.computedTop
-        : this.calcYOverflow(this.computedTop)
-      }px`
+        : this.calcYOverflow(this.computedTop))
     },
     calcXOverflow (left: number, menuWidth: number) {
       const xOverflow = left + menuWidth - this.pageWidth + 12
@@ -251,11 +247,6 @@ export default baseMixins.extend<options>().extend({
       this.isContentActive = false
 
       this.deactivate()
-    },
-    checkForWindow () {
-      if (!this.hasWindow) {
-        this.hasWindow = typeof window !== 'undefined'
-      }
     },
     checkForPageYOffset () {
       if (this.hasWindow) {
@@ -340,7 +331,7 @@ export default baseMixins.extend<options>().extend({
       const rect = this.getRoundedBoundedClientRect(el)
 
       // Account for activator margin
-      if (this.isAttached) {
+      if (this.attach !== false) {
         const style = window.getComputedStyle(el)
 
         rect.left = parseInt(style.marginLeft!)
@@ -353,7 +344,7 @@ export default baseMixins.extend<options>().extend({
       requestAnimationFrame(() => {
         const el = this.$refs.content
 
-        if (!el || this.isShown(el)) {
+        if (!el || el.style.display !== 'none') {
           cb()
           return
         }
@@ -369,11 +360,8 @@ export default baseMixins.extend<options>().extend({
         resolve()
       }))
     },
-    isShown (el: HTMLElement) {
-      return el.style.display !== 'none'
-    },
     updateDimensions () {
-      this.checkForWindow()
+      this.hasWindow = typeof window !== 'undefined'
       this.checkActivatorFixed()
       this.checkForPageYOffset()
       this.pageWidth = document.documentElement.clientWidth
@@ -389,7 +377,7 @@ export default baseMixins.extend<options>().extend({
 
         dimensions.activator = this.measure(activator)
         dimensions.activator.offsetLeft = activator.offsetLeft
-        if (this.isAttached) {
+        if (this.attach !== false) {
           // account for css padding causing things to not line up
           // this is mostly for v-autocomplete, hopefully it won't break anything
           dimensions.activator.offsetTop = activator.offsetTop

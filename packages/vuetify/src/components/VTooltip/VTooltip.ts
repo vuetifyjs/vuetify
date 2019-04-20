@@ -57,7 +57,7 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
     calculatedLeft (): string {
       const { activator, content } = this.dimensions
       const unknown = !this.bottom && !this.left && !this.top && !this.right
-      const activatorLeft = this.isAttached ? activator.offsetLeft : activator.left
+      const activatorLeft = this.attach !== false ? activator.offsetLeft : activator.left
       let left = 0
 
       if (this.top || this.bottom || unknown) {
@@ -81,7 +81,7 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
     },
     calculatedTop (): string {
       const { activator, content } = this.dimensions
-      const activatorTop = this.isAttached ? activator.offsetTop : activator.top
+      const activatorTop = this.attach !== false ? activator.offsetTop : activator.top
       let top = 0
 
       if (this.top || this.bottom) {
