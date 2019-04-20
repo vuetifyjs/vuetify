@@ -4,11 +4,12 @@ import './_content.sass'
 // Mixins
 import SSRBootable from '../../mixins/ssr-bootable'
 
-/* @vue/component */
-export default {
-  name: 'v-content',
+// Types
+import { VNode } from 'vue'
 
-  mixins: [SSRBootable],
+/* @vue/component */
+export default SSRBootable.extend({
+  name: 'v-content',
 
   props: {
     tag: {
@@ -18,7 +19,7 @@ export default {
   },
 
   computed: {
-    styles () {
+    styles (): object {
       const {
         bar, top, right, footer, insetFooter, bottom, left
       } = this.$vuetify.application
@@ -32,7 +33,7 @@ export default {
     }
   },
 
-  render (h) {
+  render (h): VNode {
     const data = {
       staticClass: 'v-content',
       style: this.styles,
@@ -47,4 +48,4 @@ export default {
       )
     ])
   }
-}
+})
