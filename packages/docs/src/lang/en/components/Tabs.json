@@ -73,7 +73,7 @@
     "nextIcon": "Right pagination icon",
     "reverseTransition": "Components.Windows.props.reverseTransition",
     "right": "Aligns tabs to the right",
-    "showArrows": "Always show pagination arrows",
+    "showArrows": "Show pagination arrows if the tab items overflow their container. For mobile devices, arrows will only display when using this prop.",
     "sliderColor": "Changes the background color of an auto-generated `v-tabs-slider`",
     "touchless": "Components.NavigationDrawers.props.touchless",
     "transition": "Mixins.Transitionable.props.transition"

@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VAlert",
   "children": [
     {
       "type": "section",
@@ -29,7 +30,8 @@
             "closable",
             "icon",
             "transition",
-            "outline"
+            "outline",
+            "playground"
           ]
         }
       ]

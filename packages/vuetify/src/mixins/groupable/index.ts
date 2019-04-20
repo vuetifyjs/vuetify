@@ -20,7 +20,8 @@ export function factory<T extends string, C extends VueConstructor | null = null
   child?: string,
   parent?: string
 ): Groupable<T, C> {
-  return RegistrableInject<T, C>(namespace, child, parent).extend({
+  // TODO: ts 3.4 broke directly returning this
+  const R = RegistrableInject<T, C>(namespace, child, parent).extend({
     name: 'groupable',
 
     props: {
@@ -65,6 +66,8 @@ export function factory<T extends string, C extends VueConstructor | null = null
       }
     }
   })
+
+  return R
 }
 
 /* eslint-disable-next-line no-redeclare */

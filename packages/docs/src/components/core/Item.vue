@@ -123,10 +123,8 @@
   }
 </script>
 
-<style lang="stylus">
-.v-list-item--doc {
-  p {
-    margin-bottom: 0;
-  }
-}
+<style lang="sass">
+.v-list-item--doc
+  p
+    margin-bottom: 0
 </style>

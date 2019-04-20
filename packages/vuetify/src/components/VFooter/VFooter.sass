@@ -13,7 +13,10 @@
   flex: 0 1 auto !important // Don't let devs break their code
   flex-wrap: wrap
   padding: $footer-padding
-  transition: background-color .2s map-get($transition, 'fast-out-slow-in')
+  transition-duration: 0.2s
+  transition-property: background-color, left, right
+  transition-timing-function: map-get($transition, 'fast-out-slow-in')
+  +bootable()
 
 // Modifier
 .v-footer--absolute,

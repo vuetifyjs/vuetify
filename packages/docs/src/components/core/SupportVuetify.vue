@@ -49,27 +49,23 @@
   </v-card>
 </template>
 
-<style lang="stylus" scoped>
-  .patreon {
-    color: #052D49;
-    flex: 0 0 auto;
-    font-weight: 900;
-    letter-spacing: 6px !important;
-  }
+<style lang="sass" scoped>
+.patreon
+  color: #052D49
+  flex: 0 0 auto
+  font-weight: 900
+  letter-spacing: 6px !important
 
-  .patreon-bar {
-    background-color: #052D49;
-    height: 80px;
-    flex: 0 1 6px;
-  }
+.patreon-bar
+  background-color: #052D49
+  height: 80px
+  flex: 0 1 6px
 
-  .patreon-bar-horizontal {
-    border-bottom: 6px solid #052D49;
-    width: 100%;
-    flex-shrink: 1;
-  }
+.patreon-bar-horizontal
+  border-bottom: 6px solid #052D49
+  width: 100%
+  flex-shrink: 1
 
-  .patreon-caption {
-    color: #052D49;
-  }
+.patreon-caption
+  color: #052D49
 </style>

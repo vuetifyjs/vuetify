@@ -46,7 +46,12 @@ export default mixins(
     },
     dense: Boolean,
     dismissible: Boolean,
-    icon: String,
+    icon: {
+      type: [Boolean, String],
+      validator (val: boolean | string) {
+        return typeof val === 'string' || val === false
+      }
+    },
     outline: Boolean,
     outlined: Boolean,
     prominent: Boolean,
@@ -141,7 +146,8 @@ export default mixins(
     computedColor (): string {
       return this.color || this.type
     },
-    computedIcon (): string | false {
+    computedIcon (): string | boolean {
+      if (!this.icon) return false
       if (this.icon != null) return this.icon
 
       switch (this.type) {
@@ -165,10 +171,10 @@ export default mixins(
     hasText (): boolean {
       return this.text || this.hasOutline
     },
-    iconColor () {
+    iconColor (): string | undefined {
       return this.hasColoredIcon ? this.computedColor : undefined
     },
-    isDark () {
+    isDark (): boolean {
       if (
         this.type &&
         !this.coloredBorder &&

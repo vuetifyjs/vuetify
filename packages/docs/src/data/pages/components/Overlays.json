@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VOverlay",
   "children": [
     {
       "type": "section",

@@ -116,14 +116,11 @@ export default mixins<options &
         'v-text-field--placeholder': this.placeholder
       }
     },
-    counterValue () {
+    counterValue (): number {
       return (this.internalValue || '').toString().length
     },
-    directivesInput () {
-      return []
-    },
     internalValue: {
-      get () {
+      get (): any {
         return this.lazyValue
       },
       set (val: any) {
@@ -136,12 +133,12 @@ export default mixins<options &
         }
       }
     },
-    isDirty () {
+    isDirty (): boolean {
       return (this.lazyValue != null &&
         this.lazyValue.toString().length > 0) ||
         this.badInput
     },
-    isEnclosed () {
+    isEnclosed (): boolean {
       return (
         this.box ||
         this.isSolo ||
@@ -149,40 +146,40 @@ export default mixins<options &
         this.fullWidth
       )
     },
-    isLabelActive () {
+    isLabelActive (): boolean {
       return this.isDirty || dirtyTypes.includes(this.type)
     },
-    isSingle () {
+    isSingle (): boolean {
       return this.isSolo || this.singleLine
     },
-    isSolo () {
+    isSolo (): boolean {
       return this.solo || this.soloInverted
     },
-    labelPosition () {
+    labelPosition (): Record<'left' | 'right', string | number | undefined> {
       const offset = (this.prefix && !this.labelValue) ? this.prefixWidth : 0
 
-      return (!this.$vuetify.rtl !== !this.reverse) ? {
-        left: 'auto',
-        right: offset
-      } : {
+      return (this.$vuetify.rtl === this.reverse) ? {
         left: offset,
         right: 'auto'
+      } : {
+        left: 'auto',
+        right: offset
       }
     },
-    showLabel () {
+    showLabel (): boolean {
       return this.hasLabel && (!this.isSingle || (!this.isLabelActive && !this.placeholder && !this.prefixLabel))
     },
-    labelValue () {
+    labelValue (): boolean {
       return !this.isSingle &&
         Boolean(this.isFocused || this.isLabelActive || this.placeholder || this.prefixLabel)
     },
-    prefixWidth () {
+    prefixWidth (): number | undefined {
       if (!this.prefix && !this.$refs.prefix) return
 
       return this.$refs.prefix.offsetWidth
     },
-    prefixLabel () {
-      return (this.prefix && !this.value)
+    prefixLabel (): boolean {
+      return !!(this.prefix && !this.value)
     }
   },
 

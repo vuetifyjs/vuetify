@@ -17,7 +17,16 @@
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
   <script>
-    new Vue({ el: '#app' })
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify({
+        icons: {
+          // The default iconfont of `mdi` requires a build process
+          // Here we opt to use Google's Material Icon font library
+          iconfont: 'md'
+        }
+      })
+    })
   </script>
 </body>
 </html>

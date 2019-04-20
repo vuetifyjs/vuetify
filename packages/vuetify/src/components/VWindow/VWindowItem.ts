@@ -86,6 +86,17 @@ export default baseMixins.extend<options>().extend(
     genDefaultSlot () {
       return this.$slots.default
     },
+    genWindowItem () {
+      return this.$createElement('div', {
+        staticClass: 'v-window-item',
+        class: this.classes,
+        directives: [{
+          name: 'show',
+          value: this.isActive
+        }],
+        on: this.$listeners
+      }, this.showLazyContent(this.genDefaultSlot()))
+    },
     onAfterEnter () {
       if (this.wasCancelled) {
         this.wasCancelled = false
@@ -138,16 +149,6 @@ export default baseMixins.extend<options>().extend(
   },
 
   render (h): VNode {
-    const div = h('div', {
-      staticClass: 'v-window-item',
-      class: this.classes,
-      directives: [{
-        name: 'show',
-        value: this.isActive
-      }],
-      on: this.$listeners
-    }, this.showLazyContent(this.genDefaultSlot()))
-
     return h('transition', {
       props: {
         name: this.computedTransition
@@ -159,6 +160,6 @@ export default baseMixins.extend<options>().extend(
         enter: this.onEnter,
         enterCancelled: this.onEnterCancelled
       }
-    }, [div])
+    }, [this.genWindowItem()])
   }
 })

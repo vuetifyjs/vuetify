@@ -14,7 +14,6 @@ import {
   mount,
   Wrapper
 } from '@vue/test-utils'
-import { rafPolyfill } from '../../../../test'
 
 const tip = '[Vuetify] The v-stepper-content component must be used inside a v-stepper'
 
@@ -22,8 +21,6 @@ describe('VStepperContent.ts', () => {
   type Instance = InstanceType<typeof VStepperContent>
   let mountFunction: (options?: object) => Wrapper<Instance>
   let localVue: typeof Vue
-
-  rafPolyfill(window)
 
   beforeEach(() => {
     localVue = createLocalVue()
@@ -260,6 +257,7 @@ describe('VStepperContent.ts', () => {
 
     wrapper.destroy()
   })
+
   it('should tip when not used with v-stepper', () => {
     const wrapper = mountFunction({
       propsData: { step: 1 },

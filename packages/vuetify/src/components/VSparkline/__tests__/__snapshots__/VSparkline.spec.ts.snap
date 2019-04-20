@@ -9,7 +9,7 @@ exports[`VSparkline.ts should render component and match a snapshot 1`] = `
      class="primary--text"
 >
   <defs>
-    <lineargradient id="1"
+    <linearGradient id="1"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -19,7 +19,7 @@ exports[`VSparkline.ts should render component and match a snapshot 1`] = `
             stop-color="primary"
       >
       </stop>
-    </lineargradient>
+    </linearGradient>
   </defs>
   <path id="1"
         d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
@@ -38,7 +38,7 @@ exports[`VSparkline.ts should render component with bars and auto-line-width and
      viewbox="0 0 300 75"
 >
   <defs>
-    <lineargradient id="19"
+    <linearGradient id="19"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -48,9 +48,9 @@ exports[`VSparkline.ts should render component with bars and auto-line-width and
             stop-color="primary"
       >
       </stop>
-    </lineargradient>
+    </linearGradient>
   </defs>
-  <clippath id="sparkline-bar-19-clip">
+  <clipPath id="sparkline-bar-19-clip">
     <rect x="8"
           y="0"
           width="89.33333333333333"
@@ -75,7 +75,7 @@ exports[`VSparkline.ts should render component with bars and auto-line-width and
           ry="0"
     >
     </rect>
-  </clippath>
+  </clipPath>
   <g transform="scale(1,-1) translate(0,-67)"
      clip-path="url(#sparkline-bar-19-clip)"
      fill="url(#19)"
@@ -98,7 +98,7 @@ exports[`VSparkline.ts should render component with bars and auto-line-width wit
      viewbox="0 0 300 75"
 >
   <defs>
-    <lineargradient id="25"
+    <linearGradient id="25"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -108,9 +108,9 @@ exports[`VSparkline.ts should render component with bars and auto-line-width wit
             stop-color="primary"
       >
       </stop>
-    </lineargradient>
+    </linearGradient>
   </defs>
-  <clippath id="sparkline-bar-25-clip">
+  <clipPath id="sparkline-bar-25-clip">
     <rect x="12"
           y="0"
           width="84"
@@ -135,7 +135,7 @@ exports[`VSparkline.ts should render component with bars and auto-line-width wit
           ry="0"
     >
     </rect>
-  </clippath>
+  </clipPath>
   <g transform="scale(1,-1) translate(0,-63)"
      clip-path="url(#sparkline-bar-25-clip)"
      fill="url(#25)"
@@ -158,7 +158,7 @@ exports[`VSparkline.ts should render component with bars and custom label size a
      viewbox="0 0 300 75"
 >
   <defs>
-    <lineargradient id="27"
+    <linearGradient id="27"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -168,9 +168,9 @@ exports[`VSparkline.ts should render component with bars and custom label size a
             stop-color="primary"
       >
       </stop>
-    </lineargradient>
+    </linearGradient>
   </defs>
-  <clippath id="sparkline-bar-27-clip">
+  <clipPath id="sparkline-bar-27-clip">
     <rect x="48.666666666666664"
           y="0"
           width="4"
@@ -195,7 +195,7 @@ exports[`VSparkline.ts should render component with bars and custom label size a
           ry="0"
     >
     </rect>
-  </clippath>
+  </clipPath>
   <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
     <text x="50.666666666666664"
           y="82"
@@ -238,7 +238,7 @@ exports[`VSparkline.ts should render component with bars and custom padding and 
      viewbox="0 0 300 75"
 >
   <defs>
-    <lineargradient id="23"
+    <linearGradient id="23"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -248,9 +248,9 @@ exports[`VSparkline.ts should render component with bars and custom padding and 
             stop-color="primary"
       >
       </stop>
-    </lineargradient>
+    </linearGradient>
   </defs>
-  <clippath id="sparkline-bar-23-clip">
+  <clipPath id="sparkline-bar-23-clip">
     <rect x="48"
           y="0"
           width="4"
@@ -275,7 +275,7 @@ exports[`VSparkline.ts should render component with bars and custom padding and 
           ry="0"
     >
     </rect>
-  </clippath>
+  </clipPath>
   <g transform="scale(1,-1) translate(0,-63)"
      clip-path="url(#sparkline-bar-23-clip)"
      fill="url(#23)"
@@ -298,7 +298,7 @@ exports[`VSparkline.ts should render component with bars and gradient and match 
      viewbox="0 0 300 75"
 >
   <defs>
-    <lineargradient id="15"
+    <linearGradient id="15"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -316,9 +316,9 @@ exports[`VSparkline.ts should render component with bars and gradient and match 
             stop-color="#000"
       >
       </stop>
-    </lineargradient>
+    </linearGradient>
   </defs>
-  <clippath id="sparkline-bar-15-clip">
+  <clipPath id="sparkline-bar-15-clip">
     <rect x="48.666666666666664"
           y="0"
           width="4"
@@ -343,7 +343,7 @@ exports[`VSparkline.ts should render component with bars and gradient and match 
           ry="0"
     >
     </rect>
-  </clippath>
+  </clipPath>
   <g transform="scale(1,-1) translate(0,-67)"
      clip-path="url(#sparkline-bar-15-clip)"
      fill="url(#15)"
@@ -366,7 +366,7 @@ exports[`VSparkline.ts should render component with bars and labels and match a 
      viewbox="0 0 300 75"
 >
   <defs>
-    <lineargradient id="17"
+    <linearGradient id="17"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -376,9 +376,9 @@ exports[`VSparkline.ts should render component with bars and labels and match a 
             stop-color="primary"
       >
       </stop>
-    </lineargradient>
+    </linearGradient>
   </defs>
-  <clippath id="sparkline-bar-17-clip">
+  <clipPath id="sparkline-bar-17-clip">
     <rect x="48.666666666666664"
           y="0"
           width="4"
@@ -403,7 +403,7 @@ exports[`VSparkline.ts should render component with bars and labels and match a 
           ry="0"
     >
     </rect>
-  </clippath>
+  </clipPath>
   <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
     <text x="50.666666666666664"
           y="74"
@@ -446,7 +446,7 @@ exports[`VSparkline.ts should render component with bars and line width and matc
      viewbox="0 0 300 75"
 >
   <defs>
-    <lineargradient id="21"
+    <linearGradient id="21"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -456,9 +456,9 @@ exports[`VSparkline.ts should render component with bars and line width and matc
             stop-color="primary"
       >
       </stop>
-    </lineargradient>
+    </linearGradient>
   </defs>
-  <clippath id="sparkline-bar-21-clip">
+  <clipPath id="sparkline-bar-21-clip">
     <rect x="48.666666666666664"
           y="0"
           width="8"
@@ -483,7 +483,7 @@ exports[`VSparkline.ts should render component with bars and line width and matc
           ry="0"
     >
     </rect>
-  </clippath>
+  </clipPath>
   <g transform="scale(1,-1) translate(0,-67)"
      clip-path="url(#sparkline-bar-21-clip)"
      fill="url(#21)"
@@ -506,7 +506,7 @@ exports[`VSparkline.ts should render component with bars and match a snapshot 1`
      viewbox="0 0 300 75"
 >
   <defs>
-    <lineargradient id="13"
+    <linearGradient id="13"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -516,9 +516,9 @@ exports[`VSparkline.ts should render component with bars and match a snapshot 1`
             stop-color="primary"
       >
       </stop>
-    </lineargradient>
+    </linearGradient>
   </defs>
-  <clippath id="sparkline-bar-13-clip">
+  <clipPath id="sparkline-bar-13-clip">
     <rect x="48.666666666666664"
           y="0"
           width="4"
@@ -543,7 +543,7 @@ exports[`VSparkline.ts should render component with bars and match a snapshot 1`
           ry="0"
     >
     </rect>
-  </clippath>
+  </clipPath>
   <g transform="scale(1,-1) translate(0,-67)"
      clip-path="url(#sparkline-bar-13-clip)"
      fill="url(#13)"
@@ -568,7 +568,7 @@ exports[`VSparkline.ts should render component with gradient and match a snapsho
      class="primary--text"
 >
   <defs>
-    <lineargradient id="9"
+    <linearGradient id="9"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -586,7 +586,7 @@ exports[`VSparkline.ts should render component with gradient and match a snapsho
             stop-color="#000"
       >
       </stop>
-    </lineargradient>
+    </linearGradient>
   </defs>
   <path id="9"
         d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
@@ -607,7 +607,7 @@ exports[`VSparkline.ts should render component with line width and match a snaps
      class="primary--text"
 >
   <defs>
-    <lineargradient id="7"
+    <linearGradient id="7"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -617,7 +617,7 @@ exports[`VSparkline.ts should render component with line width and match a snaps
             stop-color="primary"
       >
       </stop>
-    </lineargradient>
+    </linearGradient>
   </defs>
   <path id="7"
         d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
@@ -638,7 +638,7 @@ exports[`VSparkline.ts should render component with padding and match a snapshot
      class="primary--text"
 >
   <defs>
-    <lineargradient id="3"
+    <linearGradient id="3"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -648,7 +648,7 @@ exports[`VSparkline.ts should render component with padding and match a snapshot
             stop-color="primary"
       >
       </stop>
-    </lineargradient>
+    </linearGradient>
   </defs>
   <path id="3"
         d="M20 54.186036511627904L150 49.30232558139535S150 49.30232558139535 150 49.30232558139535L280 20.813963488372092"
@@ -669,7 +669,7 @@ exports[`VSparkline.ts should render component with string labels and match a sn
      class="primary--text"
 >
   <defs>
-    <lineargradient id="11"
+    <linearGradient id="11"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -679,7 +679,7 @@ exports[`VSparkline.ts should render component with string labels and match a sn
             stop-color="primary"
       >
       </stop>
-    </lineargradient>
+    </linearGradient>
   </defs>
   <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
     <text x="8"
@@ -717,7 +717,7 @@ exports[`VSparkline.ts should render component with string labels and match a sn
      class="primary--text"
 >
   <defs>
-    <lineargradient id="11"
+    <linearGradient id="11"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -727,7 +727,7 @@ exports[`VSparkline.ts should render component with string labels and match a sn
             stop-color="primary"
       >
       </stop>
-    </lineargradient>
+    </linearGradient>
   </defs>
   <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
     <text x="8"
@@ -765,7 +765,7 @@ exports[`VSparkline.ts should render component with string labels and match a sn
      class="primary--text"
 >
   <defs>
-    <lineargradient id="11"
+    <linearGradient id="11"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -775,7 +775,7 @@ exports[`VSparkline.ts should render component with string labels and match a sn
             stop-color="primary"
       >
       </stop>
-    </lineargradient>
+    </linearGradient>
   </defs>
   <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
     <text x="8"
@@ -813,7 +813,7 @@ exports[`VSparkline.ts should render smooth component and match a snapshot 1`] =
      class="primary--text"
 >
   <defs>
-    <lineargradient id="5"
+    <linearGradient id="5"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -823,7 +823,7 @@ exports[`VSparkline.ts should render smooth component and match a snapshot 1`] =
             stop-color="primary"
       >
       </stop>
-    </lineargradient>
+    </linearGradient>
   </defs>
   <path id="5"
         d="M8 65.62789697674418L130.03352731272736 58.55291889055212S150 57.395348837209305 168.94587032678325 50.98800948606565L292 9.372103023255814"

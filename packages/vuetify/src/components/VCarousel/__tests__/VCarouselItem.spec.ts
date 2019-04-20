@@ -4,7 +4,6 @@ import {
   Wrapper
 } from '@vue/test-utils'
 import VCarouselItem from '../VCarouselItem'
-import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
 
 const imageSrc = 'https://vuetifyjs.com/static/doc-images/cards/sunshine.jpg'
 const warning = '[Vuetify] The v-window-item component must be used inside a v-window'
@@ -17,8 +16,6 @@ describe('VCarouselItem.ts', () => {
       return mount(VCarouselItem, options)
     }
   })
-
-  toHaveBeenWarnedInit()
 
   it('should throw warning when not used inside v-carousel', () => {
     const wrapper = mountFunction({

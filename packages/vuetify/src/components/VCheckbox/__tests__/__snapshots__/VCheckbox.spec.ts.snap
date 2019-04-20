@@ -6,6 +6,7 @@ exports[`VCheckbox.ts should be disabled 1`] = `
        disabled="disabled"
        role="checkbox"
        type="checkbox"
+       value
 >
 
 `;
@@ -19,6 +20,7 @@ exports[`VCheckbox.ts should render themed component 1`] = `
         <input aria-checked="false"
                role="checkbox"
                type="checkbox"
+               value
         >
         <div class="v-input--selection-controls__ripple">
         </div>
@@ -50,6 +52,7 @@ exports[`VCheckbox.ts should use custom icons 1`] = `
         <input aria-checked="mixed"
                role="checkbox"
                type="checkbox"
+               value="fizz"
         >
         <div class="v-input--selection-controls__ripple">
         </div>
@@ -81,6 +84,7 @@ exports[`VCheckbox.ts should use custom icons 2`] = `
         <input aria-checked="mixed"
                role="checkbox"
                type="checkbox"
+               value="fizz"
         >
         <div class="v-input--selection-controls__ripple">
         </div>
@@ -112,6 +116,7 @@ exports[`VCheckbox.ts should use custom icons 3`] = `
         <input aria-checked="mixed"
                role="checkbox"
                type="checkbox"
+               value="buzz"
         >
         <div class="v-input--selection-controls__ripple accent--text">
         </div>

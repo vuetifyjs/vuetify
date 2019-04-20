@@ -69,7 +69,7 @@ export default baseMixins.extend({
       activatedBy: null as EventTarget | null,
       animate: false,
       animateTimeout: -1,
-      isActive: false,
+      isActive: !!this.value,
       stackMinZIndex: 200
     }
   },

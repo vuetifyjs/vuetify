@@ -90,7 +90,6 @@
 <script>
   // Utilities
   import {
-    mapGetters,
     mapState
   } from 'vuex'
   import { getObjectValueByPath } from 'vuetify/es5/util/helpers'
@@ -99,6 +98,15 @@
   import pluralize from 'pluralize'
 
   export default {
+    inject: {
+      overrideNamespace: {
+        default: null
+      },
+      overridePage: {
+        default: null
+      }
+    },
+
     props: {
       target: {
         type: String,
@@ -127,10 +135,6 @@
     },
 
     computed: {
-      ...mapGetters('documentation', [
-        'namespace',
-        'page'
-      ]),
       ...mapState('documentation', ['deprecatedIn', 'newIn']),
       computedItems () {
         const items = []
@@ -188,6 +192,12 @@
         return this.computedItems.filter(item => {
           return item.description.indexOf('MISSING DESCRIPTION') > -1
         }).map(item => item.name)
+      },
+      namespace () {
+        return this.overrideNamespace || this.$store.getters['documentation/namespace']
+      },
+      page () {
+        return this.overridePage || this.$store.getters['documentation/page']
       }
     },
 
@@ -275,7 +285,7 @@
         else return value
       },
       genTypescriptDef (obj) {
-        return JSON.stringify(obj, null, 2).replace(/"(.*)":\s"(.*)",?/g, '$1: $2')
+        return JSON.stringify(obj, null, 2).replace(/"(.*)":\s"(.*)"?/g, '$1: $2')
       },
       genHeaderName (header, item) {
         let name = header
@@ -295,26 +305,24 @@
   }
 </script>
 
-<style lang="stylus">
-  .component-parameters
-    font-size: 14px
+<style lang="sass">
+.component-parameters
+  font-size: 14px
 
-    p
-      margin-bottom: 0
+  p
+    margin-bottom: 0
 
-    .mono
-      font-family: 'Roboto Mono', monospace
-      white-space: pre
-      font-weight: 500
+  .mono
+    font-family: 'Roboto Mono', monospace
+    font-weight: 500
 
-    .header
-      font-family: 'Roboto Mono', monospace
-      font-size: 0.8rem
+  .header
+    font-family: 'Roboto Mono', monospace
+    font-size: 0.8rem
 
-    .justify
-      text-align: justify
+  .justify
+    text-align: justify
 
-    .name
-      color: #bd4147
-
+  .name
+    color: #bd4147
 </style>

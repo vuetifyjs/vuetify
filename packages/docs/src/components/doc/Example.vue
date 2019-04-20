@@ -1,5 +1,9 @@
 <template>
-  <v-card class="mb-5">
+  <v-card
+    :loading="loading"
+    :min-height="loading ? 200 : undefined"
+    class="mb-5"
+  >
     <v-toolbar
       color="grey lighten-3"
       dense
@@ -41,19 +45,9 @@
       </v-btn>
     </v-toolbar>
 
-    <doc-codepen ref="codepen" :pen="parsed" />
-
-    <v-sheet :dark="dark">
-      <v-card-text>
-        <div data-app="true">
-          <component :is="component" />
-        </div>
-      </v-card-text>
-    </v-sheet>
-
     <v-expand-transition v-if="parsed">
       <v-card
-        v-if="expand"
+        v-show="expand"
         color="#2d2d2d"
         dark
         flat
@@ -66,15 +60,14 @@
         >
           <template v-for="(section, i) in sections">
             <v-item
-              v-if="parsed[section]"
               :key="`item-${i}`"
               :value="section"
             >
               <v-btn
                 slot-scope="{ active, toggle }"
-                active-class="grey darken-2 white--text"
                 :color="!active ? 'transparent' : ''"
                 :input-value="active"
+                active-class="grey darken-2 white--text"
                 class="mr-2"
                 depressed
                 rounded
@@ -91,9 +84,9 @@
         <v-window v-model="selected">
           <template v-for="(section, i) in sections">
             <v-window-item
-              v-if="parsed[section]"
               :key="`window-${i}`"
               :value="section"
+              eager
             >
               <div :class="($vuetify.breakpoint.smAndUp) ? 'v-example__container' : ''">
                 <doc-markup
@@ -107,6 +100,16 @@
         </v-window>
       </v-card>
     </v-expand-transition>
+
+    <doc-codepen ref="codepen" :pen="parsed" />
+
+    <v-sheet :dark="dark" tile flat>
+      <v-card-text>
+        <div data-app="true">
+          <component :is="component" />
+        </div>
+      </v-card-text>
+    </v-sheet>
   </v-card>
 </template>
 
@@ -130,8 +133,8 @@
       component: undefined,
       dark: false,
       expand: false,
+      loading: true,
       parsed: undefined,
-      sections: ['template', 'style', 'script'],
       selected: 'template',
       branch: process.env.NODE_ENV === 'production' ? 'master' : 'dev'
     }),
@@ -151,6 +154,9 @@
       },
       newIn () {
         return this.internalValue.newIn
+      },
+      sections () {
+        return ['template', 'style', 'script'].filter(section => this.parsed[section])
       }
     },
 
@@ -158,12 +164,16 @@
       this.expand = Boolean(this.internalValue.show)
     },
 
-    mounted () {
+    async mounted () {
+      await this.$nextTick()
+
       import(
         /* webpackChunkName: "examples" */
         /* webpackMode: "lazy-once" */
         `../../examples/${this.file}.vue`
-      ).then(comp => (this.component = comp.default))
+      )
+        .then(comp => (this.component = comp.default))
+        .finally(() => (this.loading = false))
 
       import(
         /* webpackChunkName: "examples-source" */

@@ -6,7 +6,7 @@ import Colorable from '../../mixins/colorable'
 import Themeable, { functionalThemeClasses } from '../../mixins/themeable'
 
 // Types
-import { VNode, RenderContext } from 'vue'
+import { VNode } from 'vue'
 import mixins from '../../util/mixins'
 
 // Helpers
@@ -21,7 +21,7 @@ export default mixins(Themeable).extend({
   props: {
     absolute: Boolean,
     color: {
-      type: [Boolean, String],
+      type: String,
       default: 'primary'
     },
     disabled: Boolean,
@@ -38,7 +38,7 @@ export default mixins(Themeable).extend({
     value: Boolean
   },
 
-  render (h, ctx: RenderContext): VNode {
+  render (h, ctx): VNode {
     const { children, listeners, props } = ctx
     const data = {
       staticClass: 'v-label',
