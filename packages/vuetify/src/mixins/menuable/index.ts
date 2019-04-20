@@ -1,6 +1,7 @@
 // Mixins
 import Positionable from '../positionable'
 import Stackable from '../stackable'
+import Activatable from '../activatable'
 
 // Utilities
 import mixins, { ExtractVue } from '../../util/mixins'
@@ -12,7 +13,8 @@ import { PropValidator } from 'vue/types/options'
 
 const baseMixins = mixins(
   Stackable,
-  Positionable
+  Positionable,
+  Activatable
 )
 
 interface options extends ExtractVue<typeof baseMixins> {

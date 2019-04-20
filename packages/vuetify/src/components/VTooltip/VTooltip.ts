@@ -185,7 +185,7 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
 
       if (getSlotType(this, 'activator') === 'scoped') {
         const activator = this.$scopedSlots.activator!({ on: listeners })
-        this.activatorNode = activator || null
+        this.activatorNode = activator!
         return activator
       }
 

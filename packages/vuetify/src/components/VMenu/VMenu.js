@@ -179,6 +179,38 @@ export default Vue.extend({
   },
 
   methods: {
+    genActivator () {
+      if (!this.$slots.activator && !this.$scopedSlots.activator) return null
+
+      const listeners = {}
+
+      if (!this.disabled) {
+        if (this.openOnHover) {
+          listeners.mouseenter = this.mouseEnterHandler
+          listeners.mouseleave = this.mouseLeaveHandler
+        } else if (this.openOnClick) {
+          listeners.click = this.activatorClickHandler
+        }
+      }
+
+      if (getSlotType(this, 'activator') === 'scoped') {
+        listeners.keydown = this.onKeyDown
+        const activator = this.$scopedSlots.activator({ on: listeners })
+        this.activatorNode = activator
+        return activator
+      }
+
+      return this.$createElement('div', {
+        staticClass: 'v-menu__activator',
+        'class': {
+          'v-menu__activator--active': this.hasJustFocused || this.isActive,
+          'v-menu__activator--disabled': this.disabled
+        },
+        ref: 'activator',
+        on: listeners
+      }, this.$slots.activator)
+    },
+
     activate () {
       // This exists primarily for v-select
       // helps determine which tiles to activate
