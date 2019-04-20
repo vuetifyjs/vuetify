@@ -39,26 +39,45 @@ export default baseMixins.extend({
 
   mounted () {
     if (getSlotType(this, 'activator', true) === 'v-slot') {
-      consoleError(`The activator slot must be bound, try '<template v-slot:activator="{ on }"><v-btn v-on="on>'`, this)
+      consoleError(`The activator slot must be bound, try '<template v-slot:activator="{ on }"><v-btn v-on="on">'`, this)
     }
   },
 
   methods: {
     genActivator () {
-      const listeners: Record<string, (e: Event) => void> = {}
-
-      if (this.activateOnHover) {
-        listeners.mouseenter = this.onMouseenter
-        listeners.mouseleave = this.onMouseleave
-      } else {
-        listeners.click = this.onClick
-      }
-
-      const node = getSlot(this, 'activator', { on: listeners }) || []
+      const node = getSlot(this, 'activator', {
+        on: this.genActivatorListeners()
+      }) || []
 
       this.activatorNode = node
 
       return node
+    },
+    genActivatorListeners () {
+      if (this.disabled) return {}
+
+      const listeners: Record<string, (e: MouseEvent) => void> = {}
+
+      if (this.activateOnHover) {
+        listeners.mouseenter = (e: MouseEvent) => {
+          this.getActivator(e)
+          this.runDelay('open')
+        }
+        listeners.mouseleave = (e: MouseEvent) => {
+          this.getActivator(e)
+          this.runDelay('close')
+        }
+      } else {
+        listeners.click = (e: MouseEvent) => {
+          const activator = this.getActivator(e)
+
+          if (activator) activator.focus()
+
+          this.isActive = !this.isActive
+        }
+      }
+
+      return listeners
     },
     getActivator (e?: Event): HTMLElement | null {
       // If we've already fetched the activator, re-use
@@ -79,29 +98,6 @@ export default baseMixins.extend({
       this.activatorElement = activator as HTMLElement
 
       return this.activatorElement
-    },
-    onClick (e: Event) {
-      if (this.disabled) return
-
-      const activator = this.getActivator(e)
-
-      if (activator) activator.focus()
-
-      this.isActive = !this.isActive
-    },
-    onMouseenter () {
-      if (this.disabled) return
-
-      this.runDelay('open', () => {
-        this.isActive = true
-      })
-    },
-    onMouseleave () {
-      if (this.disabled) return
-
-      this.runDelay('close', () => {
-        this.isActive = false
-      })
     }
   }
 })
