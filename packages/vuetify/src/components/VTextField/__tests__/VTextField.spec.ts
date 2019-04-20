@@ -135,24 +135,24 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
       }
     })
 
-    expect(wrapper.findAll('.v-counter').at(0)).not.toBeUndefined()
+    expect(wrapper.findAll('.v-counter').wrappers[0]).not.toBeUndefined()
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({ counter: false })
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.findAll('.v-counter').at(0)).toBeUndefined()
+    expect(wrapper.findAll('.v-counter').wrappers[0]).toBeUndefined()
 
     wrapper.setProps({ counter: undefined })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.findAll('.v-counter').at(0)).toBeUndefined()
+    expect(wrapper.findAll('.v-counter').wrappers[0]).toBeUndefined()
 
     wrapper.setProps({ counter: null })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.findAll('.v-counter').at(0)).toBeUndefined()
+    expect(wrapper.findAll('.v-counter').wrappers[0]).toBeUndefined()
   })
 
   it('should have readonly attribute', () => {
