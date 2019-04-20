@@ -36,7 +36,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
       }
     })
 
-    const input = wrapper.findAll('input').wrappers[0]
+    const input = wrapper.findAll('input').at(0)
     expect(input.element.getAttribute('required')).toBe('required')
   })
 
@@ -49,7 +49,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     }
     const wrapper = mount(component)
 
-    const input = wrapper.findAll('input').wrappers[0]
+    const input = wrapper.findAll('input').at(0)
     input.trigger('keyUp', { keyCode: 65 })
 
     expect(keyup).toHaveBeenCalled()
@@ -63,7 +63,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
       attrs: {}
     })
 
-    const inputGroup = wrapper.findAll('input').wrappers[0]
+    const inputGroup = wrapper.findAll('input').at(0)
     expect(inputGroup.element.getAttribute('aria-label')).toBe('Test')
   })
 
@@ -75,7 +75,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
       attrs: {}
     })
 
-    const inputGroup = wrapper.findAll('input').wrappers[0]
+    const inputGroup = wrapper.findAll('input').at(0)
     expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
   })
 
@@ -89,7 +89,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
       }
     })
 
-    const inputGroup = wrapper.findAll('input').wrappers[0]
+    const inputGroup = wrapper.findAll('input').at(0)
     expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
   })
 
@@ -135,24 +135,24 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
       }
     })
 
-    expect(wrapper.findAll('.v-counter').wrappers[0]).not.toBeUndefined()
+    expect(wrapper.findAll('.v-counter').at(0)).not.toBeUndefined()
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({ counter: false })
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.findAll('.v-counter').wrappers[0]).toBeUndefined()
+    expect(wrapper.findAll('.v-counter').at(0)).toBeUndefined()
 
     wrapper.setProps({ counter: undefined })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.findAll('.v-counter').wrappers[0]).toBeUndefined()
+    expect(wrapper.findAll('.v-counter').at(0)).toBeUndefined()
 
     wrapper.setProps({ counter: null })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.findAll('.v-counter').wrappers[0]).toBeUndefined()
+    expect(wrapper.findAll('.v-counter').at(0)).toBeUndefined()
   })
 
   it('should have readonly attribute', () => {
@@ -162,7 +162,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
       }
     })
 
-    const input = wrapper.findAll('input').wrappers[0]
+    const input = wrapper.findAll('input').at(0)
 
     expect(input.element.getAttribute('readonly')).toBe('readonly')
   })
@@ -175,7 +175,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
       }
     })
 
-    const clear = wrapper.findAll('.v-input__icon--clear .v-icon').wrappers[0]
+    const clear = wrapper.findAll('.v-input__icon--clear .v-icon').at(0)
     const input = jest.fn()
     wrapper.vm.$on('input', input)
 
@@ -200,7 +200,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
       }
     })
 
-    const icon = wrapper.findAll('.v-input__icon--append .v-icon').wrappers[0]
+    const icon = wrapper.findAll('.v-input__icon--append .v-icon').at(0)
     icon.trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalValue).toBe('foo')
@@ -215,7 +215,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
       }
     })
 
-    const icon = wrapper.findAll('.v-input__icon--append .v-icon').wrappers[0]
+    const icon = wrapper.findAll('.v-input__icon--append .v-icon').at(0)
     icon.trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalValue).toBe('foo')
@@ -258,7 +258,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
       }
     })
 
-    const input = wrapper.findAll('input').wrappers[0]
+    const input = wrapper.findAll('input').at(0)
 
     input.element.value = 'fgh'
     input.trigger('input')
@@ -270,7 +270,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
   it('should update if value is changed externally', async () => {
     const wrapper = mountFunction({})
 
-    const input = wrapper.findAll('input').wrappers[0]
+    const input = wrapper.findAll('input').at(0)
 
     wrapper.setProps({ value: 'fgh' })
     expect(input.element.value).toBe('fgh')
@@ -297,7 +297,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     }
     const wrapper = mount(component)
 
-    const input = wrapper.findAll('input').wrappers[0]
+    const input = wrapper.findAll('input').at(0)
 
     input.trigger('focus')
     await wrapper.vm.$nextTick()
@@ -322,7 +322,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
       }
     })
 
-    const prepend = wrapper.findAll('.v-input__icon--append .v-icon').wrappers[0]
+    const prepend = wrapper.findAll('.v-input__icon--append .v-icon').at(0)
     expect(prepend.text()).toBe('check')
     expect(prepend.element.classList).not.toContain('input-group__icon-cb')
   })
@@ -343,7 +343,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     }
     const wrapper = mount(component)
 
-    const input = wrapper.findAll('input').wrappers[0]
+    const input = wrapper.findAll('input').at(0)
 
     input.trigger('focus')
     await wrapper.vm.$nextTick()
@@ -451,7 +451,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     }
 
     const wrapper = mount(component)
-    const input = wrapper.findAll('input').wrappers[0]
+    const input = wrapper.findAll('input').at(0)
 
     expect(value).toBe('4-4')
 
@@ -482,7 +482,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     }
 
     const wrapper = mount(component)
-    const input = wrapper.findAll('input').wrappers[0]
+    const input = wrapper.findAll('input').at(0)
 
     expect(value).toBe('44')
 
@@ -525,7 +525,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
       }
     })
 
-    const input = wrapper.findAll('input').wrappers[0]
+    const input = wrapper.findAll('input').at(0)
 
     expect(input.element.value).toBe('1-2-3')
 
