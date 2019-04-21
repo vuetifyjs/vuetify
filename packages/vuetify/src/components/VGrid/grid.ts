@@ -1,6 +1,9 @@
-export default function Grid (name) {
+// Types
+import Vue, { VNode } from 'vue'
+
+export default function VGrid (name: string) {
   /* @vue/component */
-  return {
+  return Vue.extend({
     name: `v-${name}`,
 
     functional: true,
@@ -13,7 +16,7 @@ export default function Grid (name) {
       }
     },
 
-    render: (h, { props, data, children }) => {
+    render (h, { props, data, children }): VNode {
       data.staticClass = (`${name} ${data.staticClass || ''}`).trim()
 
       const { attrs } = data
@@ -30,7 +33,7 @@ export default function Grid (name) {
           // add back data attributes like data-test="foo" but do not
           // add them as classes
           if (key.startsWith('data-')) {
-            data.attrs[key] = value
+            data.attrs![key] = value
             return false
           }
 
@@ -47,5 +50,5 @@ export default function Grid (name) {
 
       return h(props.tag, data, children)
     }
-  }
+  })
 }
