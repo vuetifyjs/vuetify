@@ -260,36 +260,6 @@ export default baseMixins.extend<options>().extend({
       this.activatorFixed = false
     },
     deactivate () {},
-    getActivator (e?: Event): HTMLElement | null {
-      if (this.inputActivator) {
-        return this.$el.querySelector('.v-input__slot')
-      }
-
-      if (this.activator) {
-        return typeof this.activator === 'string'
-          ? document.querySelector(this.activator)
-          : this.activator
-      }
-
-      if (this.$refs.activator) {
-        return this.$refs.activator.children.length > 0
-          ? this.$refs.activator.children[0] as HTMLElement
-          : this.$refs.activator
-      }
-
-      if (e) this.activatedBy = e.currentTarget || e.target
-
-      if (this.activatedBy) return this.activatedBy as HTMLElement
-
-      if (this.activatorNode) {
-        const activator = Array.isArray(this.activatorNode) ? this.activatorNode[0] : this.activatorNode
-        const el = activator && activator.elm
-
-        if (el) return el as HTMLElement
-      }
-
-      return null
-    },
     getInnerHeight () {
       if (!this.hasWindow) return 0
 
