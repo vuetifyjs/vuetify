@@ -34,13 +34,15 @@ describe('VMenu.ts', () => {
         value: false,
         fullWidth: true
       },
+      scopedSlots: {
+        activator: '<button v-on="props.on"></button>'
+      },
       slots: {
-        activator: [VBtn],
         default: [VCard]
       }
     })
 
-    const activator = wrapper.findAll('.v-menu__activator').at(0)
+    const activator = wrapper.find('button')
     const input = jest.fn()
     wrapper.vm.$on('input', input)
     activator.trigger('click')
@@ -57,12 +59,15 @@ describe('VMenu.ts', () => {
       propsData: {
         value: false
       },
+      scopedSlots: {
+        activator: '<button v-on="props.on"></button>'
+      },
       slots: {
-        activator: [VBtn]
+        default: '<span class="content"></span>'
       }
     })
 
-    const content = wrapper.findAll('.v-menu__content').at(0)
+    const content = wrapper.find('.v-menu__content')
 
     const getBoundingClientRect = () => {
       return {
@@ -77,7 +82,7 @@ describe('VMenu.ts', () => {
       }
     }
 
-    wrapper.vm.$refs.activator.querySelector('.v-btn').getBoundingClientRect = getBoundingClientRect
+    wrapper.find('button').element.getBoundingClientRect = getBoundingClientRect
     wrapper.vm.$refs.content.getBoundingClientRect = getBoundingClientRect
 
     wrapper.setProps({ value: true })
@@ -93,12 +98,12 @@ describe('VMenu.ts', () => {
       propsData: {
         disabled: true
       },
-      slots: {
-        activator: [compileToFunctions('<button></button>')]
+      scopedSlots: {
+        activator: '<button v-on="props.on"></button>'
       }
     })
 
-    const activator = wrapper.find('.v-menu__activator')
+    const activator = wrapper.find('button')
     activator.trigger('click')
 
     expect(wrapper.vm.isActive).toBe(false)
