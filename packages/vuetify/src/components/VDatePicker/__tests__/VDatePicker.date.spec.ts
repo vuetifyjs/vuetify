@@ -40,8 +40,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
       }
     })
 
-    const title = wrapper.findAll('.v-date-picker-title__date').wrappers[0]
-    const header = wrapper.findAll('.v-date-picker-header__value div').wrappers[0]
+    const title = wrapper.findAll('.v-date-picker-title__date').at(0)
+    const header = wrapper.findAll('.v-date-picker-header__value div').at(0)
 
     expect(title.text()).toBe('Tue, Nov 1')
     expect(header.text()).toBe('November 2005')
@@ -63,7 +63,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
       }
     })
 
-    const year = wrapper.findAll('.v-date-picker-title__year').wrappers[0]
+    const year = wrapper.findAll('.v-date-picker-title__year').at(0)
 
     expect(year.text()).toBe('2013')
   })
@@ -113,7 +113,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const change = jest.fn()
     wrapper.vm.$on('change', change)
 
-    wrapper.findAll('.v-date-picker-table--date tbody tr+tr td:first-child button').wrappers[0].trigger('click')
+    wrapper.findAll('.v-date-picker-table--date tbody tr+tr td:first-child button').at(0).trigger('click')
     expect(input).toHaveBeenCalledWith('2013-05-05')
     expect(change).toHaveBeenCalledWith('2013-05-05')
   })
@@ -131,7 +131,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     })
 
     wrapper.vm.$on('input', cb)
-    wrapper.findAll('.v-date-picker-table--month button').wrappers[0].trigger('click')
+    wrapper.findAll('.v-date-picker-table--month button').at(0).trigger('click')
     expect(cb).not.toHaveBeenCalled()
   })
 
@@ -152,7 +152,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const change = jest.fn()
     wrapper.vm.$on('change', input)
 
-    wrapper.findAll('.v-date-picker-years li.active + li').wrappers[0].trigger('click')
+    wrapper.findAll('.v-date-picker-years li.active + li').at(0).trigger('click')
     expect(input).toHaveBeenCalledWith('2012-05-13')
     expect(change).not.toHaveBeenCalled()
   })
@@ -170,7 +170,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     })
 
     wrapper.vm.$on('input', cb)
-    wrapper.findAll('.v-date-picker-years li.active + li').wrappers[0].trigger('click')
+    wrapper.findAll('.v-date-picker-years li.active + li').at(0).trigger('click')
     expect(cb).not.toHaveBeenCalled()
   })
 
@@ -184,7 +184,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     })
 
     wrapper.vm.$on('input', cb)
-    wrapper.findAll('.v-date-picker-table--date tbody tr+tr td:first-child button').wrappers[0].trigger('click')
+    wrapper.findAll('.v-date-picker-table--date tbody tr+tr td:first-child button').at(0).trigger('click')
     expect(cb.mock.calls[0][0]).toHaveLength(3)
     expect(cb.mock.calls[0][0][2]).toBe('2013-05-05')
     expect(cb.mock.calls[0][0]).toEqual(
@@ -202,7 +202,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     })
 
     wrapper.vm.$on('input', cb)
-    wrapper.findAll('.v-date-picker-table--date tbody tr+tr td:first-child button').wrappers[0].trigger('click')
+    wrapper.findAll('.v-date-picker-table--date tbody tr+tr td:first-child button').at(0).trigger('click')
     expect(cb.mock.calls[0][0]).toHaveLength(2)
     expect(cb.mock.calls[0][0]).toEqual(expect.arrayContaining(['2013-05-07', '2013-05-08']))
     expect(cb.mock.calls[0][0]).not.toEqual(expect.arrayContaining(['2013-05-05']))
@@ -216,7 +216,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
       }
     })
 
-    wrapper.findAll('.v-date-picker-table--date').wrappers[0].trigger('wheel')
+    wrapper.findAll('.v-date-picker-table--date').at(0).trigger('wheel')
     expect(wrapper.vm.tableDate).toBe('2013-06')
   })
 
@@ -228,7 +228,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
       }
     })
 
-    const table = wrapper.findAll('.v-date-picker-table--date').wrappers[0]
+    const table = wrapper.findAll('.v-date-picker-table--date').at(0)
     touch(table).start(0, 0).end(20, 0)
     expect(wrapper.vm.tableDate).toBe('2013-04')
 
@@ -294,9 +294,9 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
       }
     })
 
-    expect(wrapper.findAll('.v-date-picker-title__date').wrappers[0].text()).toBe('(2005-11-01)')
-    expect(wrapper.findAll('.v-date-picker-header__value').wrappers[0].text()).toBe('(2005-11)')
-    expect(wrapper.findAll('.v-date-picker-table--date th').wrappers[1].text()).toBe('W')
+    expect(wrapper.findAll('.v-date-picker-title__date').at(0).text()).toBe('(2005-11-01)')
+    expect(wrapper.findAll('.v-date-picker-header__value').at(0).text()).toBe('(2005-11)')
+    expect(wrapper.findAll('.v-date-picker-table--date th').at(1).text()).toBe('W')
   })
 
   it('should match snapshot with colored picker & header', () => {
@@ -330,7 +330,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
       }
     })
 
-    expect(wrapper.findAll('.v-picker__title').wrappers[0].html()).toMatchSnapshot()
+    expect(wrapper.findAll('.v-picker__title').at(0).html()).toMatchSnapshot()
   })
 
   it('should match change month when clicked on header arrow buttons', () => {
@@ -356,7 +356,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
       }
     })
 
-    const button = wrapper.findAll('.v-date-picker-header__value button').wrappers[0]
+    const button = wrapper.findAll('.v-date-picker-header__value button').at(0)
 
     button.trigger('click')
     expect(wrapper.vm.activePicker).toBe('MONTH')
@@ -388,11 +388,11 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
 
     expect(wrapper.vm.activePicker).toBe('YEAR')
 
-    wrapper.findAll('.v-date-picker-title__date').wrappers[0].trigger('click')
+    wrapper.findAll('.v-date-picker-title__date').at(0).trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.activePicker).toBe('DATE')
 
-    wrapper.findAll('.v-date-picker-title__year').wrappers[0].trigger('click')
+    wrapper.findAll('.v-date-picker-title__year').at(0).trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.activePicker).toBe('YEAR')
   })
@@ -408,7 +408,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
       }
     })
 
-    wrapper.findAll('.v-date-picker-years li.active + li').wrappers[0].trigger('click')
+    wrapper.findAll('.v-date-picker-years li.active + li').at(0).trigger('click')
     expect(wrapper.vm.activePicker).toBe('MONTH')
     expect(wrapper.vm.tableDate).toBe('2004-11')
   })
@@ -558,7 +558,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const change = jest.fn()
     wrapper.vm.$on('change', change)
 
-    wrapper.findAll('tbody tr td button').wrappers[0].trigger('click')
+    wrapper.findAll('tbody tr td button').at(0).trigger('click')
     wrapper.vm.$nextTick()
     expect(change).not.toHaveBeenCalled()
     expect(input).toHaveBeenCalledWith('2013-01-07')
@@ -580,7 +580,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const change = jest.fn()
     wrapper.vm.$on('change', change)
 
-    wrapper.findAll('tbody tr td button').wrappers[0].trigger('click')
+    wrapper.findAll('tbody tr td button').at(0).trigger('click')
     wrapper.vm.$nextTick()
     expect(change).not.toHaveBeenCalled()
     expect(input).not.toHaveBeenCalled()
@@ -596,12 +596,12 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
 
     const click = jest.fn()
     wrapper.vm.$on(`click:date`, click)
-    wrapper.findAll('.v-date-picker-table--date tbody tr+tr td:first-child button').wrappers[0].trigger('click')
+    wrapper.findAll('.v-date-picker-table--date tbody tr+tr td:first-child button').at(0).trigger('click')
     expect(click).toHaveBeenCalledWith('2013-05-05')
 
     const dblclick = jest.fn()
     wrapper.vm.$on(`dblclick:date`, dblclick)
-    wrapper.findAll('.v-date-picker-table--date tbody tr+tr td:first-child button').wrappers[0].trigger('dblclick')
+    wrapper.findAll('.v-date-picker-table--date tbody tr+tr td:first-child button').at(0).trigger('dblclick')
     expect(dblclick).toHaveBeenCalledWith('2013-05-05')
   })
 })
