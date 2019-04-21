@@ -54,7 +54,7 @@ describe('activatable.ts', () => {
 
     const wrapper = mountFunction({
       propsData: {
-        activateOnHover: true
+        openOnHover: true
       },
       scopedSlots: {
         activator: props => vm.$createElement('button', props)

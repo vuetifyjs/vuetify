@@ -21,7 +21,6 @@ export default baseMixins.extend({
   name: 'activatable',
 
   props: {
-    activateOnHover: Boolean,
     activator: {
       default: null,
       validator: (val: string | object) => {
@@ -29,7 +28,8 @@ export default baseMixins.extend({
       }
     } as PropValidator<string | HTMLElement>,
     disabled: Boolean,
-    internalActivator: Boolean
+    internalActivator: Boolean,
+    openOnHover: Boolean
   },
 
   data: () => ({
@@ -58,7 +58,7 @@ export default baseMixins.extend({
 
       const listeners: Record<string, (e: MouseEvent) => void> = {}
 
-      if (this.activateOnHover) {
+      if (this.openOnHover) {
         listeners.mouseenter = (e: MouseEvent) => {
           this.getActivator(e)
           this.runDelay('open')
