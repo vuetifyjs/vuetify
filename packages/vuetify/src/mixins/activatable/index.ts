@@ -38,7 +38,9 @@ export default baseMixins.extend({
   }),
 
   mounted () {
-    if (getSlotType(this, 'activator', true) !== 'scoped') {
+    const slotType = getSlotType(this, 'activator', true)
+
+    if (slotType && ['v-slot', 'normal'].includes(slotType)) {
       consoleError(`The activator slot must be bound, try '<template v-slot:activator="{ on }"><v-btn v-on="on">'`, this)
     }
   },
