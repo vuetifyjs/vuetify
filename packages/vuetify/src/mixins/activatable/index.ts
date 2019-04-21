@@ -37,6 +37,13 @@ export default baseMixins.extend({
     activatorNode: [] as VNode[]
   }),
 
+  watch: {
+    activator () {
+      this.activatorElement = null
+      this.getActivator()
+    }
+  },
+
   mounted () {
     const slotType = getSlotType(this, 'activator', true)
 

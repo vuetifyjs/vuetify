@@ -152,19 +152,6 @@ export default Vue.extend({
   },
 
   watch: {
-    activator (newActivator, oldActivator) {
-      this.removeActivatorEvents(oldActivator)
-      this.addActivatorEvents(newActivator)
-    },
-    disabled (disabled) {
-      if (!this.activator) return
-
-      if (disabled) {
-        this.removeActivatorEvents(this.activator)
-      } else {
-        this.addActivatorEvents(this.activator)
-      }
-    },
     isContentActive (val) {
       this.hasJustFocused = val
     }
