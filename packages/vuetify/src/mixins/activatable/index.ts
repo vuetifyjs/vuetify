@@ -85,19 +85,16 @@ export default baseMixins.extend({
 
       let activator = null
 
-      // User supplied activator
       if (this.activator) {
         const target = this.internalActivator ? this.$el : document
 
         activator = typeof this.activator === 'string'
           ? target.querySelector(this.activator)
           : this.activator
-        // User supplied scoped slot
-      } else if (this.activatorNode.length) {
-        activator = this.activatorNode[0].elm
-        // Fallback if event provided
       } else if (e) {
         activator = e.currentTarget || e.target
+      } else if (this.activatorNode.length) {
+        activator = this.activatorNode[0].elm
       }
 
       this.activatorElement = activator as HTMLElement
