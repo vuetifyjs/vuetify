@@ -1,6 +1,7 @@
 import './VTooltip.sass'
 
 // Mixins
+import Activatable from '../../mixins/activatable'
 import Colorable from '../../mixins/colorable'
 import Delayable from '../../mixins/delayable'
 import Dependent from '../../mixins/dependent'
@@ -37,6 +38,10 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
     openDelay: {
       type: [Number, String],
       default: 0
+    },
+    openOnHover: {
+      type: Boolean,
+      default: true
     },
     tag: {
       type: String,
@@ -157,42 +162,25 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
     deactivate () {
       this.runDelay('close')
     },
-    genActivator () {
-      const listeners = this.disabled ? undefined : {
-        mouseenter: (e: Event) => {
-          this.getActivator(e)
-          this.runDelay('open')
-        },
-        focus: (e: Event) => {
-          this.getActivator(e)
-          this.runDelay('open')
-        },
-        mouseleave: (e: Event) => {
-          this.getActivator(e)
-          this.runDelay('close')
-        },
-        blur: (e: Event) => {
+    genActivatorListeners () {
+      const listeners = Activatable.options.methods.genActivatorListeners.call(this)
+
+      listeners.focus = (e: Event) => {
+        this.getActivator(e)
+        this.runDelay('open')
+      }
+      listeners.blur = (e: Event) => {
+        this.getActivator(e)
+        this.runDelay('close')
+      }
+      listeners.keydown = (e: KeyboardEvent) => {
+        if (e.keyCode === keyCodes.esc) {
           this.getActivator(e)
           this.runDelay('close')
-        },
-        keydown: (e: KeyboardEvent) => {
-          if (e.keyCode === keyCodes.esc) {
-            this.getActivator(e)
-            this.runDelay('close')
-          }
         }
       }
 
-      if (getSlotType(this, 'activator') === 'scoped') {
-        const activator = this.$scopedSlots.activator!({ on: listeners })
-        this.activatorNode = activator!
-        return activator
-      }
-
-      return this.$createElement('span', {
-        on: listeners,
-        ref: 'activator'
-      }, this.$slots.activator)
+      return listeners
     }
   },
 
