@@ -38,7 +38,7 @@ export default baseMixins.extend({
   }),
 
   mounted () {
-    if (getSlotType(this, 'activator', true) === 'v-slot') {
+    if (getSlotType(this, 'activator', true) !== 'scoped') {
       consoleError(`The activator slot must be bound, try '<template v-slot:activator="{ on }"><v-btn v-on="on">'`, this)
     }
   },
@@ -56,7 +56,7 @@ export default baseMixins.extend({
     genActivatorListeners () {
       if (this.disabled) return {}
 
-      const listeners: Record<string, (e: MouseEvent) => void> = {}
+      const listeners: Record<string, (e: MouseEvent & KeyboardEvent) => void> = {}
 
       if (this.openOnHover) {
         listeners.mouseenter = (e: MouseEvent) => {
