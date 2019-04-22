@@ -194,7 +194,7 @@ describe('VDataTable.ts', () => {
     const expand = jest.spyOn(wrapper.vm, 'expand')
 
     expect(wrapper.html()).toMatchSnapshot()
-    const expandIcon = wrapper.findAll('.v-data-table__expand-icon').wrappers[0]
+    const expandIcon = wrapper.findAll('.v-data-table__expand-icon').at(0)
     expandIcon.trigger('click')
     expect(expand).toHaveBeenCalledWith({ calories: 159, carbs: 24, fat: 6, iron: '1%', name: 'Frozen Yogurt', protein: 4 }, true)
     expect(wrapper.html()).toMatchSnapshot()
