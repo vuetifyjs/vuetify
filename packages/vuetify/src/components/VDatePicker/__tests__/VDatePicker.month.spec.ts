@@ -52,7 +52,7 @@ describe('VDatePicker.ts', () => {
     const change = jest.fn()
     wrapper.vm.$on('change', input)
 
-    wrapper.findAll('.v-date-picker-years li.active + li').wrappers[0].trigger('click')
+    wrapper.findAll('.v-date-picker-years li.active + li').at(0).trigger('click')
     expect(input).toHaveBeenCalledWith('2012-05')
     expect(change).not.toHaveBeenCalled()
   })
@@ -72,7 +72,7 @@ describe('VDatePicker.ts', () => {
     })
 
     wrapper.vm.$on('input', cb)
-    wrapper.findAll('.v-date-picker-years li.active + li').wrappers[0].trigger('click')
+    wrapper.findAll('.v-date-picker-years li.active + li').at(0).trigger('click')
     expect(cb).not.toHaveBeenCalled()
   })
 
@@ -86,7 +86,7 @@ describe('VDatePicker.ts', () => {
     })
 
     wrapper.vm.$on('input', cb)
-    wrapper.findAll('.v-date-picker-table--month button').wrappers[0].trigger('click')
+    wrapper.findAll('.v-date-picker-table--month button').at(0).trigger('click')
     expect(cb).toHaveBeenCalledWith('2013-01')
   })
 
@@ -99,7 +99,7 @@ describe('VDatePicker.ts', () => {
       }
     })
 
-    wrapper.findAll('.v-date-picker-table--month').wrappers[0].trigger('wheel')
+    wrapper.findAll('.v-date-picker-table--month').at(0).trigger('wheel')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.tableDate).toBe('2014')
   })
@@ -124,7 +124,7 @@ describe('VDatePicker.ts', () => {
       }
     })
 
-    expect(wrapper.findAll('.v-date-picker-table--month tbody').wrappers[0].html()).toMatchSnapshot()
+    expect(wrapper.findAll('.v-date-picker-table--month tbody').at(0).html()).toMatchSnapshot()
   })
 
   it('should match snapshot with month formatting functions', () => {
@@ -136,7 +136,7 @@ describe('VDatePicker.ts', () => {
       }
     })
 
-    expect(wrapper.findAll('.v-date-picker-table--month tbody').wrappers[0].html()).toMatchSnapshot()
+    expect(wrapper.findAll('.v-date-picker-table--month tbody').at(0).html()).toMatchSnapshot()
   })
 
   it('should match snapshot with colored picker & header', () => {
@@ -189,7 +189,7 @@ describe('VDatePicker.ts', () => {
       }
     })
 
-    const button = wrapper.findAll('.v-date-picker-header__value button').wrappers[0]
+    const button = wrapper.findAll('.v-date-picker-header__value button').at(0)
 
     button.trigger('click')
     expect(wrapper.vm.activePicker).toBe('YEAR')
@@ -207,7 +207,7 @@ describe('VDatePicker.ts', () => {
       activePicker: 'YEAR'
     })
 
-    wrapper.findAll('.v-date-picker-years li.active + li').wrappers[0].trigger('click')
+    wrapper.findAll('.v-date-picker-years li.active + li').at(0).trigger('click')
     expect(wrapper.vm.activePicker).toBe('MONTH')
     expect(wrapper.vm.tableDate).toBe('2004')
   })
@@ -248,12 +248,12 @@ describe('VDatePicker.ts', () => {
 
     const click = jest.fn()
     wrapper.vm.$on(`click:month`, click)
-    wrapper.findAll('.v-date-picker-table--month tbody tr+tr td:first-child button').wrappers[0].trigger('click')
+    wrapper.findAll('.v-date-picker-table--month tbody tr+tr td:first-child button').at(0).trigger('click')
     expect(click).toHaveBeenCalledWith('2013-04')
 
     const dblclick = jest.fn()
     wrapper.vm.$on(`dblclick:month`, dblclick)
-    wrapper.findAll('.v-date-picker-table--month tbody tr+tr td:first-child button').wrappers[0].trigger('dblclick')
+    wrapper.findAll('.v-date-picker-table--month tbody tr+tr td:first-child button').at(0).trigger('dblclick')
     expect(dblclick).toHaveBeenCalledWith('2013-04')
   })
 })
