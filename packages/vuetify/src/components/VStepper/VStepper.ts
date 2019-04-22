@@ -65,21 +65,17 @@ export default baseMixins.extend({
   },
 
   watch: {
-    internalValue (val, prev) {
-      this.isReverse = Number(val) < Number(prev)
-      for (let index = this.steps.length; --index >= 0;) {
-        this.steps[index].toggle(this.internalValue as any)
-      }
-      for (let index = this.content.length; --index >= 0;) {
-        this.content[index].toggle(this.internalValue as any, this.isReverse)
-      }
+    internalValue (val, oldVal) {
+      this.isReverse = Number(val) < Number(oldVal)
 
-      prev && (this.isBooted = true)
+      oldVal && (this.isBooted = true)
 
       /* istanbul ignore if */
       if (this.$listeners.input) {
         this.$emit('input', val)
       }
+
+      this.updateView()
     }
   },
 
@@ -91,7 +87,8 @@ export default baseMixins.extend({
   },
 
   mounted () {
-    this.internalLazyValue = this.value || this.steps[0].step || 1
+    this.internalLazyValue = this.value || (this.steps[0] || {}).step || 1
+    this.updateView()
   },
 
   methods: {
@@ -113,6 +110,14 @@ export default baseMixins.extend({
     },
     stepClick (step: string | number) {
       this.$nextTick(() => (this.internalValue = step))
+    },
+    updateView () {
+      for (let index = this.steps.length; --index >= 0;) {
+        this.steps[index].toggle(this.internalValue as any)
+      }
+      for (let index = this.content.length; --index >= 0;) {
+        this.content[index].toggle(this.internalValue as any, this.isReverse)
+      }
     }
   },
 
