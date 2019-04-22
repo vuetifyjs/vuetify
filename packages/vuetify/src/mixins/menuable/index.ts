@@ -60,6 +60,7 @@ export default baseMixins.extend<options>().extend({
       default: 0
     },
     offsetOverflow: Boolean,
+    openOnClick: Boolean,
     positionX: {
       type: Number,
       default: null
@@ -260,6 +261,22 @@ export default baseMixins.extend<options>().extend({
       this.activatorFixed = false
     },
     deactivate () {},
+    genActivatorListeners () {
+      const listeners = Activatable.options.methods.genActivatorListeners.call(this)
+
+      const onClick = listeners.click
+
+      listeners.click = (e: MouseEvent & KeyboardEvent) => {
+        if (this.openOnClick) {
+          onClick && onClick(e)
+        }
+
+        this.absoluteX = e.clientX
+        this.absoluteY = e.clientY
+      }
+
+      return listeners
+    },
     getInnerHeight () {
       if (!this.hasWindow) return 0
 
