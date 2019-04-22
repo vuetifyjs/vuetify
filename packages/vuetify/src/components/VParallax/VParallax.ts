@@ -5,18 +5,20 @@ import './VParallax.sass'
 import Translatable from '../../mixins/translatable'
 
 // Types
-import Vue from 'vue'
 import { VNode, VNodeData } from 'vue/types/vnode'
-import mixins, { ExtractVue } from '../../util/mixins'
+import mixins from '../../util/mixins'
 
-interface options extends Vue {
+const baseMixins = mixins(
+  Translatable
+)
+interface options extends InstanceType<typeof baseMixins> {
   $refs: {
     img: HTMLImageElement
   }
 }
 
 /* @vue/component */
-export default mixins<options & ExtractVue<typeof Translatable>>(Translatable).extend({
+export default baseMixins.extend<options>().extend({
   name: 'v-parallax',
 
   props: {
@@ -45,12 +47,6 @@ export default mixins<options & ExtractVue<typeof Translatable>>(Translatable).e
     }
   },
 
-  watch: {
-    parallax () {
-      this.isBooted = true
-    }
-  },
-
   mounted () {
     this.init()
   },
@@ -70,6 +66,8 @@ export default mixins<options & ExtractVue<typeof Translatable>>(Translatable).e
           this.listeners()
         }, false)
       }
+
+      this.isBooted = true
     },
     objHeight () {
       return this.$refs.img.naturalHeight
