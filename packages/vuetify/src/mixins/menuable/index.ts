@@ -171,7 +171,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   methods: {
-    absolutePosition (): object {
+    absolutePosition () {
       return {
         offsetTop: 0,
         offsetLeft: 0,
