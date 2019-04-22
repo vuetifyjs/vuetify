@@ -1,5 +1,6 @@
 import VDialog from '@/components/VDialog'
 import { test } from '@/test'
+import { keyCodes } from '@/util/helpers'
 import Vue from 'vue'
 
 test('VDialog.js', ({ mount, compileToFunctions }) => {
@@ -249,6 +250,19 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
     const dialog = wrapper3.first(VDialog)
     expect(dialog.hasStyle('display', 'inline-block')).toBe(true)
     expect(dialog.vm.hasActivator).toBe(true)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should close dialog on escape keydown', () => {
+    const wrapper = mount(VDialog, {
+      propsData: { value: true }
+    })
+
+    const escape = new Event('keydown')
+    escape.keyCode = keyCodes.esc
+    wrapper.vm.$refs.content.dispatchEvent(escape)
+    expect(wrapper.vm.isActive).toBe(false)
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
