@@ -24,9 +24,11 @@
         <td class="text-xs-right">{{ props.item.protein }}</td>
         <td class="text-xs-right">{{ props.item.iron }}</td>
       </template>
-      <v-alert v-slot:no-results :value="true" color="error" icon="warning">
-        Your search for "{{ search }}" found no results.
-      </v-alert>
+      <template v-slot:no-results>
+        <v-alert :value="true" color="error" icon="warning">
+          Your search for "{{ search }}" found no results.
+        </v-alert>
+      </template>
     </v-data-table>
   </v-card>
 </template>

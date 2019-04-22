@@ -1,9 +1,5 @@
 daysUntilLock: 365
-lockComment: >
-  This thread has been automatically locked since there has not been
-  any recent activity after it was closed. Please open a [new issue](https://issues.vuetifyjs.com) for
-  related bugs.
-  Please direct any non-bug questions to our [Discord](https://community.vuetifyjs.com)
+lockComment: false
 
 pulls:
   daysUntilLock: 30

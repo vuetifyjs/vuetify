@@ -11,7 +11,7 @@
           type="week"
         >
           <!-- the events at the top (all-day) -->
-          <template v-slot:dayHeadere="{ date }">
+          <template v-slot:dayHeader="{ date }">
             <template v-for="event in eventsMap[date]">
               <!-- all day events don't have time -->
               <div
