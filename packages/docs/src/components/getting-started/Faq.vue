@@ -24,8 +24,9 @@
         <v-data-iterator
           :items="gotchas"
           :search.sync="search"
-          content-class="v-data-iterator--faq"
+          class="v-data-iterator--faq"
           hide-default-footer
+          disable-pagination
         >
           <template v-slot:item="{ item: gotcha, index }">
             <div class="mb-5">
