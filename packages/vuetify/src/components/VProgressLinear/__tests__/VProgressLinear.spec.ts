@@ -194,4 +194,21 @@ describe('VProgressLinear.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
     expect(wrapper.findAll('.foobar')).toHaveLength(1)
   })
+
+  it('should respond to click events', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        reactive: true
+      }
+    })
+
+    const bar = wrapper.find('.v-progress-linear__bar')
+    wrapper.vm.$refs.bar.getBoundingClientRect = () => ({ width: 1000 })
+
+    expect(wrapper.vm.internalLazyValue).toBe(0)
+
+    bar.trigger('click', { offsetX: 200 })
+
+    expect(wrapper.vm.internalLazyValue).toBe(20)
+  })
 })

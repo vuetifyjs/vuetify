@@ -1,7 +1,14 @@
 import './VProgressLinear.sass'
 
+// Components
+import {
+  VFadeTransition,
+  VSlideXTransition
+} from '../transitions'
+
 // Mixins
 import Colorable from '../../mixins/colorable'
+import Proxyable from '../../mixins/proxyable'
 
 // Utilities
 import { convertToUnit } from '../../util/helpers'
@@ -11,13 +18,19 @@ import mixins from '../../util/mixins'
 import { FunctionalComponentOptions } from 'vue/types'
 import { VNode } from 'vue'
 
-import {
-  VFadeTransition,
-  VSlideXTransition
-} from '../transitions'
+const baseMixins = mixins(
+  Colorable,
+  Proxyable
+)
+
+interface options extends InstanceType<typeof baseMixins> {
+  $refs: {
+    bar: HTMLElement
+  }
+}
 
 /* @vue/component */
-export default mixins(Colorable).extend({
+export default baseMixins.extend<options>().extend({
   name: 'v-progress-linear',
 
   props: {
@@ -47,11 +60,18 @@ export default mixins(Colorable).extend({
     },
     indeterminate: Boolean,
     query: Boolean,
+    reactive: Boolean,
     rounded: Boolean,
     striped: Boolean,
     value: {
       type: [Number, String],
       default: 0
+    }
+  },
+
+  data () {
+    return {
+      internalLazyValue: this.value || 0
     }
   },
 
@@ -87,9 +107,9 @@ export default mixins(Colorable).extend({
       return parseFloat(this.bufferValue)
     },
     normalizedValue (): number {
-      if (this.value < 0) return 0
-      if (this.value > 100) return 100
-      return parseFloat(this.value)
+      if (this.internalLazyValue < 0) return 0
+      if (this.internalLazyValue > 100) return 100
+      return parseFloat(this.internalLazyValue)
     },
     styles (): object {
       const styles: Record<string, any> = {}
@@ -128,7 +148,15 @@ export default mixins(Colorable).extend({
 
       return this.$createElement('div', {
         staticClass: 'v-progress-linear__bar',
-        style: this.styles
+        style: this.styles,
+        on: !this.reactive ? undefined : {
+          click: (e: MouseEvent) => {
+            const { width } = this.$refs.bar.getBoundingClientRect()
+
+            this.internalValue = e.offsetX / width * 100
+          }
+        },
+        ref: 'bar'
       }, [
         this.$createElement(this.computedTransition, children)
       ])
