@@ -32,9 +32,6 @@ describe('menuable.ts', () => {
   it('should update dimensions when activated', async () => {
     const sneakPeek = jest.fn()
     const wrapper = mountFunction({
-      propsData: {
-        activator: 'body'
-      },
       methods: {
         sneakPeek
       }
@@ -52,7 +49,6 @@ describe('menuable.ts', () => {
         offsetX: Boolean
       },
       propsData: {
-        activator: 'body',
         attach: true,
         left: true,
         offsetX: true,
