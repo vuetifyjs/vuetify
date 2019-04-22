@@ -165,6 +165,12 @@
       "href": "https://www.browserstack.com/",
       "logo": "sponsors/browser-stack.png",
       "type": "Service Sponsor"
+    },
+    {
+      "name": "Crowdin",
+      "href": "https://www.crowdin.com/",
+      "logo": "sponsors/crowdin.png",
+      "type": "Service Sponsor"
     }
   ]
 }
