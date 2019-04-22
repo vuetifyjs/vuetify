@@ -42,7 +42,7 @@ export default mixins(Colorable).extend({
     },
     height: {
       type: [Number, String],
-      default: 7
+      default: 4
     },
     indeterminate: Boolean,
     query: Boolean,

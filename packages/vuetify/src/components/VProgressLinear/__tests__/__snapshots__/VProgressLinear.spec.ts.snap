@@ -7,10 +7,10 @@ exports[`VProgressLinear.ts should render component and match snapshot 1`] = `
      aria-valuemax="100"
      aria-valuenow="33"
      class="v-progress-linear"
-     style="height: 7px;"
+     style="height: 4px;"
 >
   <div class="v-progress-linear__background primary"
-       style="height: 7px; opacity: 0.3; width: 100%;"
+       style="height: 4px; opacity: 0.3; width: 100%;"
   >
   </div>
   <div class="v-progress-linear__bar">
@@ -30,10 +30,10 @@ exports[`VProgressLinear.ts should render component with buffer value and match 
      aria-valuemax="80"
      aria-valuenow="33"
      class="v-progress-linear"
-     style="height: 7px;"
+     style="height: 4px;"
 >
   <div class="v-progress-linear__background primary"
-       style="height: 7px; opacity: 0.3; width: 80%;"
+       style="height: 4px; opacity: 0.3; width: 80%;"
   >
   </div>
   <div class="v-progress-linear__bar"
@@ -55,10 +55,10 @@ exports[`VProgressLinear.ts should render component with buffer value and match 
      aria-valuemax="0"
      aria-valuenow="33"
      class="v-progress-linear"
-     style="height: 7px;"
+     style="height: 4px;"
 >
   <div class="v-progress-linear__background primary"
-       style="height: 7px; opacity: 0.3; width: 0%;"
+       style="height: 4px; opacity: 0.3; width: 0%;"
   >
   </div>
   <div class="v-progress-linear__bar"
@@ -80,10 +80,10 @@ exports[`VProgressLinear.ts should render component with buffer value and value 
      aria-valuemax="80"
      aria-valuenow="90"
      class="v-progress-linear"
-     style="height: 7px;"
+     style="height: 4px;"
 >
   <div class="v-progress-linear__background primary"
-       style="height: 7px; opacity: 0.3; width: 80%;"
+       style="height: 4px; opacity: 0.3; width: 80%;"
   >
   </div>
   <div class="v-progress-linear__bar"
@@ -105,10 +105,10 @@ exports[`VProgressLinear.ts should render component with color and background co
      aria-valuemax="100"
      aria-valuenow="33"
      class="v-progress-linear"
-     style="height: 7px;"
+     style="height: 4px;"
 >
   <div class="v-progress-linear__background blue"
-       style="height: 7px; opacity: 1; width: 100%;"
+       style="height: 4px; opacity: 1; width: 100%;"
   >
   </div>
   <div class="v-progress-linear__bar">
@@ -128,10 +128,10 @@ exports[`VProgressLinear.ts should render component with color and background co
      aria-valuemax="100"
      aria-valuenow="33"
      class="v-progress-linear"
-     style="height: 7px;"
+     style="height: 4px;"
 >
   <div class="v-progress-linear__background blue"
-       style="height: 7px; opacity: 0.5; width: 100%;"
+       style="height: 4px; opacity: 0.5; width: 100%;"
   >
   </div>
   <div class="v-progress-linear__bar">
@@ -151,10 +151,10 @@ exports[`VProgressLinear.ts should render component with color and background op
      aria-valuemax="100"
      aria-valuenow="33"
      class="v-progress-linear"
-     style="height: 7px;"
+     style="height: 4px;"
 >
   <div class="v-progress-linear__background orange"
-       style="height: 7px; opacity: 0.5; width: 100%;"
+       style="height: 4px; opacity: 0.5; width: 100%;"
   >
   </div>
   <div class="v-progress-linear__bar">
@@ -174,10 +174,10 @@ exports[`VProgressLinear.ts should render component with color and match snapsho
      aria-valuemax="100"
      aria-valuenow="33"
      class="v-progress-linear"
-     style="height: 7px;"
+     style="height: 4px;"
 >
   <div class="v-progress-linear__background orange"
-       style="height: 7px; opacity: 0.3; width: 100%;"
+       style="height: 4px; opacity: 0.3; width: 100%;"
   >
   </div>
   <div class="v-progress-linear__bar">
@@ -197,10 +197,10 @@ exports[`VProgressLinear.ts should render component with css color and match sna
      aria-valuemax="100"
      aria-valuenow="33"
      class="v-progress-linear"
-     style="height: 7px;"
+     style="height: 4px;"
 >
   <div class="v-progress-linear__background"
-       style="height: 7px; opacity: 0.3; width: 100%; background-color: rgb(51, 102, 153); border-color: #336699;"
+       style="height: 4px; opacity: 0.3; width: 100%; background-color: rgb(51, 102, 153); border-color: #336699;"
   >
   </div>
   <div class="v-progress-linear__bar">
@@ -220,10 +220,10 @@ exports[`VProgressLinear.ts should render default slot content 1`] = `
      aria-valuemax="80"
      aria-valuenow="90"
      class="v-progress-linear"
-     style="height: 7px;"
+     style="height: 4px;"
 >
   <div class="v-progress-linear__background primary"
-       style="height: 7px; opacity: 0.3; width: 80%;"
+       style="height: 4px; opacity: 0.3; width: 80%;"
   >
   </div>
   <div class="v-progress-linear__bar"
@@ -250,7 +250,7 @@ exports[`VProgressLinear.ts should render inactive component and match snapshot 
      aria-valuemax="100"
      aria-valuenow="33"
      class="v-progress-linear"
-     style="height: 7px;"
+     style="height: 4px;"
 >
   <div class="v-progress-linear__background primary"
        style="height: 0px; opacity: 0.3; width: 100%;"
@@ -274,10 +274,10 @@ exports[`VProgressLinear.ts should render indeterminate progress and match snaps
      aria-valuemin="0"
      aria-valuemax="100"
      class="v-progress-linear"
-     style="height: 7px;"
+     style="height: 4px;"
 >
   <div class="v-progress-linear__background primary"
-       style="height: 7px; opacity: 0.3; width: 100%;"
+       style="height: 4px; opacity: 0.3; width: 100%;"
   >
   </div>
   <div class="v-progress-linear__bar">
@@ -298,10 +298,10 @@ exports[`VProgressLinear.ts should render indeterminate progress with query prop
      aria-valuemin="0"
      aria-valuemax="100"
      class="v-progress-linear"
-     style="height: 7px;"
+     style="height: 4px;"
 >
   <div class="v-progress-linear__background primary"
-       style="height: 7px; opacity: 0.3; width: 100%;"
+       style="height: 4px; opacity: 0.3; width: 100%;"
   >
   </div>
   <div class="v-progress-linear__bar">
