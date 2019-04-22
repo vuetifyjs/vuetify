@@ -131,6 +131,13 @@
       "logo": "backers/datantify.png",
       "type": "Patron",
       "pledge": "Gold ($50)"
+    },
+    {
+      "name": "NoteRiot",
+      "href": "https://note.riot.ai/",
+      "logo": "backers/note-riot.png",
+      "type": "Patron",
+      "pledge": "Gold ($50)"
     }
   ],
   "affiliates": [
