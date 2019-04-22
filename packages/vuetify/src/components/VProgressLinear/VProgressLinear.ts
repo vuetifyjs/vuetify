@@ -46,6 +46,7 @@ export default mixins(Colorable).extend({
     },
     indeterminate: Boolean,
     query: Boolean,
+    rounded: Boolean,
     striped: Boolean,
     value: {
       type: [Number, String],
@@ -68,6 +69,7 @@ export default mixins(Colorable).extend({
     classes (): object {
       return {
         'v-progress-linear--query': this.query,
+        'v-progress-linear--rounded': this.rounded,
         'v-progress-linear--striped': this.striped
       }
     },
