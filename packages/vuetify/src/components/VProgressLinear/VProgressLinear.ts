@@ -46,6 +46,7 @@ export default mixins(Colorable).extend({
     },
     indeterminate: Boolean,
     query: Boolean,
+    striped: Boolean,
     value: {
       type: [Number, String],
       default: 0
@@ -64,7 +65,12 @@ export default mixins(Colorable).extend({
         width: `${this.normalizedBufer}%`
       }
     },
-
+    classes (): object {
+      return {
+        'v-progress-linear--query': this.query,
+        'v-progress-linear--striped': this.striped
+      }
+    },
     effectiveWidth (): number {
       if (!this.normalizedBufer) {
         return 0
@@ -170,9 +176,7 @@ export default mixins(Colorable).extend({
         'aria-valuemax': this.normalizedBufer,
         'aria-valuenow': this.indeterminate ? undefined : this.normalizedValue
       },
-      class: {
-        'v-progress-linear--query': this.query
-      },
+      class: this.classes,
       style: {
         height: convertToUnit(this.height)
       },
