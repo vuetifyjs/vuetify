@@ -3,12 +3,13 @@ import './VProgressLinear.sass'
 // Mixins
 import Colorable from '../../mixins/colorable'
 
-// Helpers
+// Utilities
 import { convertToUnit } from '../../util/helpers'
 import mixins from '../../util/mixins'
 
 // Types
-import { CreateElement, VNode } from 'vue'
+import { FunctionalComponentOptions } from 'vue/types'
+import { VNode } from 'vue'
 
 import {
   VFadeTransition,
@@ -73,38 +74,23 @@ export default mixins(Colorable).extend({
         'v-progress-linear--striped': this.striped
       }
     },
+    computedTransition (): FunctionalComponentOptions {
+      return this.indeterminate ? VFadeTransition : VSlideXTransition
+    },
     effectiveWidth (): number {
-      if (!this.normalizedBufer) {
-        return 0
-      }
-
+      if (!this.normalizedBufer) return 0
       return +this.normalizedValue * 100 / +this.normalizedBufer
     },
-
     normalizedBufer (): number {
-      if (this.bufferValue < 0) {
-        return 0
-      }
-
-      if (this.bufferValue > 100) {
-        return 100
-      }
-
+      if (this.bufferValue < 0) return 0
+      if (this.bufferValue > 100) return 100
       return parseFloat(this.bufferValue)
     },
-
     normalizedValue (): number {
-      if (this.value < 0) {
-        return 0
-      }
-
-      if (this.value > 100) {
-        return 100
-      }
-
+      if (this.value < 0) return 0
+      if (this.value > 100) return 100
       return parseFloat(this.value)
     },
-
     styles (): object {
       const styles: Record<string, any> = {}
 
@@ -113,7 +99,7 @@ export default mixins(Colorable).extend({
       }
 
       if (!this.indeterminate && parseFloat(this.normalizedBufer) !== 100) {
-        styles.width = `${this.normalizedBufer}%`
+        styles.width = convertToUnit(this.normalizedBufer, '%')
       }
 
       return styles
@@ -121,55 +107,59 @@ export default mixins(Colorable).extend({
   },
 
   methods: {
-    genDeterminate (h: CreateElement): VNode {
-      return h('div', this.setBackgroundColor(this.color, {
-        ref: 'front',
+    genBackground () {
+      return this.$createElement('div', this.setBackgroundColor(this.backgroundColor || this.color, {
+        staticClass: 'v-progress-linear__background',
+        style: this.backgroundStyle
+      }))
+    },
+    genDeterminate () {
+      return this.$createElement('div', this.setBackgroundColor(this.color, {
         staticClass: `v-progress-linear__bar__determinate`,
         style: {
-          width: `${this.effectiveWidth}%`
+          width: convertToUnit(this.effectiveWidth, '%')
         }
       }))
     },
-    genBar (h: CreateElement, name: string): VNode {
-      return h('div', this.setBackgroundColor(this.color, {
+    genBar () {
+      const children = [
+        this.indeterminate ? this.genIndeterminate() : this.genDeterminate()
+      ]
+
+      return this.$createElement('div', {
+        staticClass: 'v-progress-linear__bar',
+        style: this.styles
+      }, [
+        this.$createElement(this.computedTransition, children)
+      ])
+    },
+    genContent () {
+      return this.$slots.default && this.$createElement('div', {
+        staticClass: 'v-progress-linear__content'
+      }, this.$slots.default)
+    },
+    genProgressBar (name: 'long' | 'short') {
+      return this.$createElement('div', this.setBackgroundColor(this.color, {
         staticClass: 'v-progress-linear__bar__indeterminate',
         class: {
           [name]: true
         }
       }))
     },
-    genIndeterminate (h: CreateElement): VNode {
-      return h('div', {
-        ref: 'front',
+    genIndeterminate () {
+      return this.$createElement('div', {
         staticClass: 'v-progress-linear__bar__indeterminate',
         class: {
           'v-progress-linear__bar__indeterminate--active': this.active
         }
       }, [
-        this.genBar(h, 'long'),
-        this.genBar(h, 'short')
+        this.genProgressBar('long'),
+        this.genProgressBar('short')
       ])
     }
   },
 
   render (h): VNode {
-    const fade = h(VFadeTransition, this.indeterminate ? [this.genIndeterminate(h)] : [])
-    const slide = h(VSlideXTransition, this.indeterminate ? [] : [this.genDeterminate(h)])
-
-    const bar = h('div', {
-      staticClass: 'v-progress-linear__bar',
-      style: this.styles
-    }, [fade, slide])
-
-    const background = h('div', this.setBackgroundColor(this.backgroundColor || this.color, {
-      staticClass: 'v-progress-linear__background',
-      style: this.backgroundStyle
-    }))
-
-    const content = this.$slots.default && h('div', {
-      staticClass: 'v-progress-linear__content'
-    }, this.$slots.default)
-
     return h('div', {
       staticClass: 'v-progress-linear',
       attrs: {
@@ -184,9 +174,9 @@ export default mixins(Colorable).extend({
       },
       on: this.$listeners
     }, [
-      background,
-      bar,
-      content
+      this.genBackground(),
+      this.genBar(),
+      this.genContent()
     ])
   }
 })
