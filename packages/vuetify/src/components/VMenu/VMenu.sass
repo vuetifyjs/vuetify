@@ -31,6 +31,12 @@
     &--active
       pointer-events: none
 
+    &--auto
+      .v-list-item
+        transition-property: transform, opacity
+        transition-duration: .3s
+        transition-timing-function: map-get($transition, 'fast-in-fast-out')
+
     &--fixed
       position: fixed
 

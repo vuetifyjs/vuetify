@@ -15,7 +15,6 @@ import { ExtractVue } from '../../../util/mixins'
 describe('VTabsBar.ts', () => {
   type Instance = ExtractVue<typeof VTabsBar>
   let mountFunction: (options?: object) => Wrapper<Instance>
-  (global as any).requestAnimationFrame = cb => cb()
 
   beforeEach(() => {
     mountFunction = (options = {}) => {

@@ -2,6 +2,9 @@
   "header": "# Motion",
   "headerText": "Smooth animations help make a UI feel great. Using Vue's transition system and re-usable functional components, you can easily control the motion of your application. Most components can have their transition altered through the <code>transition</code> prop.",
   "examples": {
+    "usage": {
+      "desc": "Vuetify comes with over 10 custom css animations that can be applied to numerous components or your own custom use-case"
+    },
     "slideXTransitions": {
       "header": "### Slide X transitions",
       "desc": "Slide x transitions move along the horizontal axis."
@@ -9,6 +12,14 @@
     "slideYTransitions": {
       "header": "### Slide Y transitions",
       "desc": "Animations use the application's <code>$primary-transition</code>."
+    },
+    "scrollXTransitions": {
+      "header": "### Scroll X transitions",
+      "desc": "Scroll X transitions continue along the horizontal axis."
+    },
+    "scrollYTransitions": {
+      "header": "### Scroll Y transitions",
+      "desc": "Scroll Y transitions continue along the vertical axis."
     },
     "scaleTransition": {
       "header": "### Scale transition",

@@ -69,3 +69,9 @@
     }
   }
 </script>
+
+<style lang="sass">
+  #components-navigation-drawers
+    .v-navigation-drawer
+      height: 100% !important
+</style>

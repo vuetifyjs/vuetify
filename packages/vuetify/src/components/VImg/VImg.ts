@@ -48,13 +48,14 @@ export default VResponsive.extend({
       currentSrc: '', // Set from srcset
       image: null as HTMLImageElement | null,
       isLoading: true,
-      calculatedAspectRatio: undefined as number | undefined
+      calculatedAspectRatio: undefined as number | undefined,
+      naturalWidth: undefined as number | undefined
     }
   },
 
   computed: {
     computedAspectRatio (): number {
-      return this.normalisedSrc.aspect
+      return Number(this.normalisedSrc.aspect || this.calculatedAspectRatio)
     },
     normalisedSrc (): srcObject {
       return typeof this.src === 'string'
@@ -62,13 +63,12 @@ export default VResponsive.extend({
           src: this.src,
           srcset: this.srcset,
           lazySrc: this.lazySrc,
-          aspect: Number(this.aspectRatio || this.calculatedAspectRatio)
-        }
-        : {
+          aspect: Number(this.aspectRatio)
+        } : {
           src: this.src.src,
           srcset: this.srcset || this.src.srcset,
           lazySrc: this.lazySrc || this.src.lazySrc,
-          aspect: Number(this.aspectRatio || this.src.aspect || this.calculatedAspectRatio)
+          aspect: Number(this.aspectRatio || this.src.aspect)
         }
     },
     __cachedImage (): VNode | [] {
@@ -177,6 +177,7 @@ export default VResponsive.extend({
         const { naturalHeight, naturalWidth } = img
 
         if (naturalHeight || naturalWidth) {
+          this.naturalWidth = naturalWidth
           this.calculatedAspectRatio = naturalWidth / naturalHeight
         } else {
           timeout != null && setTimeout(poll, timeout)
@@ -184,6 +185,16 @@ export default VResponsive.extend({
       }
 
       poll()
+    },
+    genContent () {
+      const content: VNode = VResponsive.options.methods.genContent.call(this)
+      if (this.naturalWidth) {
+        this._b(content.data!, 'div', {
+          style: { width: `${this.naturalWidth}px` }
+        })
+      }
+
+      return content
     },
     __genPlaceholder (): VNode | void {
       if (this.$slots.placeholder) {

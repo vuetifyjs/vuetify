@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VDataTable",
   "mdSpec": {
     "version": "2",
     "link": "https://material.io/design/components/data-tables.html"

@@ -20,7 +20,7 @@ import { deprecate } from '../../util/console'
 import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
-import Vue, { VNode, VNodeData } from 'vue'
+import Vue, { VNode, VNodeData, VNodeDirective, PropType } from 'vue'
 interface options extends Vue {
   /* eslint-disable-next-line camelcase */
   $_modelEvent: string
@@ -59,19 +59,19 @@ export default mixins<options &
     prependIcon: String,
     /** @deprecated */
     prependIconCb: Function,
-    value: { required: false }
+    value: null as any as PropType<any>
   },
 
   data () {
     return {
       attrsInput: {},
-      lazyValue: this.value as any,
+      lazyValue: this.value,
       hasMouseDown: false
     }
   },
 
   computed: {
-    classes: () => ({}),
+    classes: (): object => ({}),
     classesInput (): object {
       return {
         ...this.classes,
@@ -86,15 +86,15 @@ export default mixins<options &
         ...this.themeClasses
       }
     },
-    directivesInput () {
+    directivesInput (): VNodeDirective[] {
       return []
     },
-    hasHint () {
+    hasHint (): boolean {
       return !this.hasMessages &&
-        this.hint &&
+        !!this.hint &&
         (this.persistentHint || this.isFocused)
     },
-    hasLabel () {
+    hasLabel (): boolean {
       return Boolean(this.$slots.label || this.label)
     },
     // Proxy for `lazyValue`
@@ -102,7 +102,7 @@ export default mixins<options &
     // to function without
     // a provided model
     internalValue: {
-      get () {
+      get (): any {
         return this.lazyValue
       },
       set (val: any) {
@@ -110,13 +110,13 @@ export default mixins<options &
         this.$emit(this.$_modelEvent, val)
       }
     },
-    isDirty () {
+    isDirty (): boolean {
       return !!this.lazyValue
     },
-    isDisabled () {
-      return Boolean(this.disabled || this.readonly)
+    isDisabled (): boolean {
+      return this.disabled || this.readonly
     },
-    isLabelActive () {
+    isLabelActive (): boolean {
       return this.isDirty
     }
   },

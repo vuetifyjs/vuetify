@@ -6,7 +6,6 @@ import {
   mount,
   Wrapper
 } from '@vue/test-utils'
-import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
 
 describe('VImg.ts', () => {
   type Instance = InstanceType<typeof VImg>
@@ -19,8 +18,6 @@ describe('VImg.ts', () => {
       })
     }
   })
-
-  toHaveBeenWarnedInit()
 
   const LOAD_FAILURE_SRC = 'LOAD_FAILURE_SRC'
   const LOAD_SUCCESS_SRC = 'LOAD_SUCCESS_SRC'

@@ -119,38 +119,6 @@ describe('VRangeSlider.ts', () => {
     expect(wrapper.vm.activeThumb).toBe(0)
   })
 
-  it('should react to a track click', () => {
-    const setInternalValue = jest.fn()
-    const getIndexOfClosestValue = jest.fn()
-    const wrapper = mountFunction({
-      methods: {
-        getIndexOfClosestValue,
-        setInternalValue
-      }
-    })
-
-    // Will return false for isInsideTrack
-    wrapper.vm.onMouseMove({})
-
-    expect(setInternalValue).not.toHaveBeenCalled()
-    expect(getIndexOfClosestValue).not.toHaveBeenCalled()
-
-    // Will return true for isInsideTrack
-    wrapper.vm.onMouseMove({
-      clientX: 0
-    })
-
-    expect(getIndexOfClosestValue).not.toHaveBeenCalled()
-    expect(setInternalValue).toHaveBeenCalledTimes(1)
-
-    wrapper.vm.onMouseMove({
-      clientX: 0
-    }, true)
-
-    expect(getIndexOfClosestValue).toHaveBeenCalled()
-    expect(setInternalValue).toHaveBeenCalledTimes(2)
-  })
-
   it('should set internal value', () => {
     const wrapper = mountFunction()
 

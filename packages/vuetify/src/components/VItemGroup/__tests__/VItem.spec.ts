@@ -11,8 +11,6 @@ import {
   Wrapper
 } from '@vue/test-utils'
 
-import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
-
 const itemWarning = '[Vuetify] The v-item component must be used inside a v-item-group'
 
 describe('VItem', () => {
@@ -30,8 +28,6 @@ describe('VItem', () => {
       })
     }
   })
-
-  toHaveBeenWarnedInit()
 
   it('should warn if missing default scopedSlot', () => {
     mountFunction()

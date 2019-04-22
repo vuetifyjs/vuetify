@@ -424,7 +424,7 @@ exports[`VSlider.ts should render component with thumbLabel and match a snapshot
                style="display: none;"
           >
             <div class="v-slider__thumb-label primary"
-                 style="height: 32px; width: 32px;"
+                 style="height: 32px; width: 32px; transform: translateY(-20%) translateY(-12px) translateX(-50%) rotate(45deg);"
             >
               <div>
                 <span>
@@ -484,7 +484,7 @@ exports[`VSlider.ts should render component with thumbLabel and match a snapshot
                style
           >
             <div class="v-slider__thumb-label primary"
-                 style="height: 32px; width: 32px;"
+                 style="height: 32px; width: 32px; transform: translateY(-20%) translateY(-12px) translateX(-50%) rotate(45deg);"
             >
               <div>
                 <span>

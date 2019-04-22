@@ -121,7 +121,7 @@ export default baseMixins.extend<options>().extend({
           for: this.id
         },
         props: {
-          color: ((this.radioGroup || {}).validationState) || false,
+          color: ((this.radioGroup || {}).validationState) || '',
           focused: this.hasState
         }
       }, getSlot(this, 'label') || this.label)

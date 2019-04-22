@@ -46,7 +46,6 @@ describe('VDatePickerMonthTable.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  // eslint-disable-next-line jest/no-disabled-tests
   it.skip('should watch tableDate value and run transition', async () => { // TODO: make this one work
     const wrapper = mountFunction({
       propsData: {
@@ -60,10 +59,9 @@ describe('VDatePickerMonthTable.ts', () => {
       tableDate: '2006'
     })
     await wrapper.vm.$nextTick()
-    expect(wrapper.findAll('table').wrappers[0].element.className).toBe('tab-transition-enter tab-transition-enter-active')
+    expect(wrapper.findAll('table').at(0).element.className).toBe('tab-transition-enter tab-transition-enter-active')
   })
 
-  // eslint-disable-next-line jest/no-disabled-tests
   it.skip('should watch tableDate value and run reverse transition', async () => { // TODO: make this one work
     const wrapper = mountFunction({
       propsData: {
@@ -77,7 +75,7 @@ describe('VDatePickerMonthTable.ts', () => {
       tableDate: '2004'
     })
     await wrapper.vm.$nextTick()
-    expect(wrapper.findAll('table').wrappers[0].element.className).toBe('tab-reverse-transition-enter tab-reverse-transition-enter-active')
+    expect(wrapper.findAll('table').at(0).element.className).toBe('tab-reverse-transition-enter tab-reverse-transition-enter-active')
   })
 
   it('should emit event when month button is clicked', () => {
@@ -92,7 +90,7 @@ describe('VDatePickerMonthTable.ts', () => {
     const input = jest.fn()
     wrapper.vm.$on('input', input)
 
-    wrapper.findAll('tbody button').wrappers[0].trigger('click')
+    wrapper.findAll('tbody button').at(0).trigger('click')
     expect(input).toHaveBeenCalledWith('2005-01')
   })
 
@@ -109,7 +107,7 @@ describe('VDatePickerMonthTable.ts', () => {
     const input = jest.fn()
     wrapper.vm.$on('input', input)
 
-    wrapper.findAll('tbody button').wrappers[0].trigger('click')
+    wrapper.findAll('tbody button').at(0).trigger('click')
     expect(input).not.toHaveBeenCalled()
   })
 
@@ -143,7 +141,6 @@ describe('VDatePickerMonthTable.ts', () => {
   })
 
   // TODO
-  // eslint-disable-next-line jest/no-disabled-tests
   it.skip('should emit tableDate event when swiped', () => {
     const wrapper = mountFunction({
       propsData: {

@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "directives/touch",
   "children": [
     {
       "type": "section",

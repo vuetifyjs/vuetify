@@ -37,6 +37,7 @@ export default mixins(
     styles (): object {
       return {
         height: convertToUnit(this.size),
+        minWidth: convertToUnit(this.size),
         width: convertToUnit(this.size),
         ...this.measurableStyles
       }

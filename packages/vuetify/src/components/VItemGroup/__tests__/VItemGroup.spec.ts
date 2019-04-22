@@ -12,7 +12,6 @@ import {
   Wrapper
 } from '@vue/test-utils'
 import { ExtractVue } from './../../../util/mixins'
-import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
 
 const vm = new Vue()
 const defaultSlot = ({ toggle }) => vm.$createElement('div', { on: { click: toggle } }, 'foobar')
@@ -42,8 +41,6 @@ describe('VItemGroup', () => {
       })
     }
   })
-
-  toHaveBeenWarnedInit()
 
   it('should warn if using multiple prop without an array value', () => {
     mountFunction({

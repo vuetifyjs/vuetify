@@ -174,8 +174,7 @@ export default VWindow.extend({
       this.slideTimeout && clearTimeout(this.slideTimeout)
       this.slideTimeout = undefined
 
-      const raf = requestAnimationFrame || setTimeout
-      raf(this.startTimeout)
+      window.requestAnimationFrame(this.startTimeout)
     },
     startTimeout () {
       if (!this.cycle) return
