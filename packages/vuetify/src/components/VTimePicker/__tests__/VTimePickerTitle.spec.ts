@@ -141,17 +141,17 @@ describe('VTimePickerTitle.ts', () => {
       const selecting = jest.fn()
       wrapper.vm.$on('update:selecting', selecting)
 
-      wrapper.findAll('.v-time-picker-title__time .v-picker__title__btn').wrappers[1].trigger('click')
+      wrapper.findAll('.v-time-picker-title__time .v-picker__title__btn').at(1).trigger('click')
       expect(selecting).toHaveBeenCalledWith(SelectingTimes.Minute)
-      wrapper.findAll('.v-time-picker-title__time .v-picker__title__btn').wrappers[0].trigger('click')
+      wrapper.findAll('.v-time-picker-title__time .v-picker__title__btn').at(0).trigger('click')
       expect(selecting).toHaveBeenCalledWith(SelectingTimes.Hour)
       if (useSecondsValue) {
-        wrapper.findAll('.v-time-picker-title__time .v-picker__title__btn').wrappers[2].trigger('click')
+        wrapper.findAll('.v-time-picker-title__time .v-picker__title__btn').at(2).trigger('click')
         expect(selecting).toHaveBeenCalledWith(SelectingTimes.Second)
       }
       wrapper.setProps({ selecting: SelectingTimes.Hour })
       await wrapper.vm.$nextTick()
-      wrapper.findAll('.v-time-picker-title__time .v-picker__title__btn').wrappers[1].trigger('click')
+      wrapper.findAll('.v-time-picker-title__time .v-picker__title__btn').at(1).trigger('click')
       expect(selecting).toHaveBeenCalledWith(SelectingTimes.Minute)
     })
 

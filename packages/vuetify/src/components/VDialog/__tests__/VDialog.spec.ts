@@ -293,4 +293,15 @@ describe('VDialog.ts', () => {
 
     expect(wrapper.vm.isActive).toBe(true)
   })
+
+  it('should close dialog on escape keydown', () => {
+    const wrapper = mountFunction({
+      propsData: { value: true }
+    })
+
+    expect(wrapper.vm.isActive).toBe(true)
+    const content = wrapper.find('.v-dialog__content')
+    content.trigger('keydown.esc')
+    expect(wrapper.vm.isActive).toBe(false)
+  })
 })

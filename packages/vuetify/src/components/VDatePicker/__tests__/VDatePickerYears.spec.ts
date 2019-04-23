@@ -42,8 +42,8 @@ describe('VDatePickerYears.ts', () => {
       }
     })
 
-    expect(wrapper.findAll('li:first-child').wrappers[0].element.textContent).toBe('1238')
-    expect(wrapper.findAll('li:last-child').wrappers[0].element.textContent).toBe('1234')
+    expect(wrapper.findAll('li:first-child').at(0).element.textContent).toBe('1238')
+    expect(wrapper.findAll('li:last-child').at(0).element.textContent).toBe('1234')
   })
 
   it('should not allow min to be greater then max', async () => {
@@ -54,8 +54,8 @@ describe('VDatePickerYears.ts', () => {
       }
     })
     expect(wrapper.findAll('li')).toHaveLength(1)
-    expect(wrapper.findAll('li').wrappers[0].element.textContent).toBe('1234')
-    expect(wrapper.findAll('li').wrappers[0].element.textContent).toBe('1234')
+    expect(wrapper.findAll('li').at(0).element.textContent).toBe('1234')
+    expect(wrapper.findAll('li').at(0).element.textContent).toBe('1234')
   })
 
   it('should emit event on year click', async () => {
@@ -68,7 +68,7 @@ describe('VDatePickerYears.ts', () => {
     const input = jest.fn()
     wrapper.vm.$on('input', input)
 
-    wrapper.findAll('li.active + li').wrappers[0].trigger('click')
+    wrapper.findAll('li.active + li').at(0).trigger('click')
     expect(input).toHaveBeenCalledWith(1998)
   })
 
@@ -81,6 +81,6 @@ describe('VDatePickerYears.ts', () => {
       }
     })
 
-    expect(wrapper.findAll('li').wrappers[0].element.textContent).toBe('(1001)')
+    expect(wrapper.findAll('li').at(0).element.textContent).toBe('(1001)')
   })
 })

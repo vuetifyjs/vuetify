@@ -13,7 +13,7 @@
           xs12
           md4
         >
-          <v-sheet color="grey lighten-3">
+          <v-card color="grey lighten-3" outlined>
             <v-list
               class="pa-0"
               two-line
@@ -33,7 +33,7 @@
                 </v-list-item-action>
               </core-item>
             </v-list>
-          </v-sheet>
+          </v-card>
         </v-flex>
       </v-layout>
     </v-container>
