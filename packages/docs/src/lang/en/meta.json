@@ -389,10 +389,15 @@
     "description": "Time Picker component for the Vuetify framework.",
     "keywords": "vuetify, picker, time picker, component"
   },
-  "components/progress": {
-    "title": "Progress",
-    "description": "Progress components for the Vuetify framework.",
-    "keywords": "progress"
+  "components/progress-circular": {
+    "title": "Progress Circular",
+    "description": "The v-progress-circular component is useful for displaying numerical data in a circle.",
+    "keywords": "progress, circular progress, circle progress"
+  },
+  "components/progress-linear": {
+    "title": "Progress Linear",
+    "description": "The v-progress-linear component is useful for displaying numerical data in a straight line.",
+    "keywords": "progress, linear progress, line progress"
   },
   "components/ratings": {
     "title": "Ratings",
