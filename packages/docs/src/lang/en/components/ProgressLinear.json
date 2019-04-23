@@ -42,7 +42,10 @@
     "fill": "Components.ProgressCircular.props.fill",
     "indeterminate": "Components.ProgressCircular.props.indeterminate",
     "query": "Animates like **indeterminate** prop but inverse",
+    "reactive": "Make the progress reactive to changes. Clicking on the component will change its value",
+    "rounded": "Adds a border radius to the progress component",
     "size": "Components.ProgressCircular.props.size",
+    "striped": "Adds a stripe background to the filled portion of the progress component",
     "value": "Components.ProgressCircular.props.value"
   }
 }
