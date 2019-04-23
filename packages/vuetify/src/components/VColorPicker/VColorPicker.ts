@@ -59,7 +59,7 @@ export default Vue.extend({
   watch: {
     value: {
       handler (v: VColorPickerColor) {
-        this.internalValue = parseColor(v)
+        this.updateColor(parseColor(v))
       },
       immediate: true
     },
@@ -130,7 +130,7 @@ export default Vue.extend({
           maxHeight: this.swatchesMaxHeight
         },
         on: {
-          'update:color': (v: VColorPickerColor) => this.internalValue = v
+          'update:color': this.updateColor
         }
       })
     }
