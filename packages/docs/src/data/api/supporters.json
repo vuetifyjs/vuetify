@@ -59,6 +59,13 @@
       "logo": "backers/digital-maas.svg",
       "type": "Patron",
       "pledge": "Palladium ($250)"
+    },
+    {
+      "name": "Fractal Industries",
+      "href": "https://www.fractalindustries.com/",
+      "logo": "backers/fractal-industries.png",
+      "type": "Patron",
+      "pledge": "Palladium ($250)"
     }
   ],
   "gold": [
@@ -126,9 +133,30 @@
       "pledge": "Gold ($50)"
     },
     {
+      "name": "Custom Essay Meister",
+      "href": "https://www.customessaymeister.com/",
+      "logo": "backers/essay-meister.svg",
+      "type": "Patron",
+      "pledge": "Gold ($50)"
+    },
+    {
       "name": "Datantify",
       "href": "https://datantify.com/",
       "logo": "backers/datantify.png",
+      "type": "Patron",
+      "pledge": "Gold ($50)"
+    },
+    {
+      "name": "NoteRiot",
+      "href": "https://note.riot.ai/",
+      "logo": "backers/note-riot.png",
+      "type": "Patron",
+      "pledge": "Gold ($50)"
+    },
+    {
+      "name": "blokt",
+      "href": "https://blokt.com/",
+      "logo": "backers/blokt.png",
       "type": "Patron",
       "pledge": "Gold ($50)"
     }
