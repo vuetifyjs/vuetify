@@ -62,18 +62,13 @@ export default Vue.extend({
         this.updateColor(parseColor(v))
       },
       immediate: true
-    },
-    internalValue: {
-      handler (v: VColorPickerColor) {
-        this.$emit('input', v)
-      },
-      deep: true
     }
   },
 
   methods: {
     updateColor (v: VColorPickerColor) {
       this.internalValue = v
+      this.$emit('input', v)
     },
     genCanvas (): VNode {
       return this.$createElement(VColorPickerCanvas, {
