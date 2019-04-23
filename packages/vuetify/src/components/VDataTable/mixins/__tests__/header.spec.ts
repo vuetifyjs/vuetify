@@ -5,7 +5,6 @@ import {
   Wrapper
 } from '@vue/test-utils'
 import { wrapInArray } from '../../../../util/helpers'
-import toHaveBeenWarnedInit from '../../../../../test/util/to-have-been-warned'
 
 describe('VDataTable/header.ts', () => {
   type Instance = InstanceType<typeof Header>
@@ -24,8 +23,6 @@ describe('VDataTable/header.ts', () => {
       })
     }
   })
-
-  toHaveBeenWarnedInit()
 
   it('should generate sort icon', async () => {
     const wrapper = mountFunction({

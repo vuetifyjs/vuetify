@@ -4,7 +4,6 @@ import {
   MountOptions,
   Wrapper
 } from '@vue/test-utils'
-import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
 
 describe('VData.ts', () => {
   type Instance = InstanceType<typeof VData>
@@ -14,8 +13,6 @@ describe('VData.ts', () => {
       return mount(VData, options)
     }
   })
-
-  toHaveBeenWarnedInit()
 
   it('should render with scopedProps', async () => {
     const wrapper = mountFunction({
