@@ -4,17 +4,17 @@
       indeterminate
       color="yellow darken-2"
     ></v-progress-linear>
-
+    <br>
     <v-progress-linear
       indeterminate
       color="green"
     ></v-progress-linear>
-
+    <br>
     <v-progress-linear
       indeterminate
       color="teal"
     ></v-progress-linear>
-
+    <br>
     <v-progress-linear
       indeterminate
       color="cyan"
