@@ -3,6 +3,7 @@
     :loading="loading"
     :min-height="loading ? 200 : undefined"
     class="mb-5"
+    outlined
   >
     <v-toolbar
       color="grey lighten-3"

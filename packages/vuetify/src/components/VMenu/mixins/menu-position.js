@@ -43,7 +43,7 @@ export default {
       const tileDistanceFromMenuTop = activeTile.offsetTop - this.calcScrollPosition()
       const firstTileOffsetTop = $el.querySelector('.v-list-item').offsetTop
 
-      return this.computedTop - tileDistanceFromMenuTop - firstTileOffsetTop
+      return this.computedTop - tileDistanceFromMenuTop - firstTileOffsetTop - 1
     }
   }
 }
