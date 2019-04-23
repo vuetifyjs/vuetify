@@ -259,7 +259,7 @@ export default VDataIterator.extend({
             small: true
           },
           on: {
-            click: () => this.$set(this.openCache, group, !this.openCache[group])
+            click: /* istanbul ignore next */ () => this.$set(this.openCache, group, !this.openCache[group])
           }
         }, [this.$createElement(VIcon, [isOpen ? 'remove' : 'add'])])
 
@@ -270,7 +270,7 @@ export default VDataIterator.extend({
             small: true
           },
           on: {
-            click: () => props.updateOptions({ groupBy: [], groupDesc: [] })
+            click: /* istanbul ignore next */ () => props.updateOptions({ groupBy: [], groupDesc: [] })
           }
         }, [this.$createElement(VIcon, ['close'])])
 
@@ -333,7 +333,7 @@ export default VDataIterator.extend({
             value: this.isSelected(item)
           },
           on: {
-            input: (v: any) => this.select(item, v)
+            input: /* istanbul ignore next */ (v: any) => this.select(item, v)
           }
         }
 
@@ -402,7 +402,7 @@ export default VDataIterator.extend({
           ...this.footerProps
         },
         on: {
-          'update:options': (value: any) => props.updateOptions(value)
+          'update:options': /* istanbul ignore next */ (value: any) => props.updateOptions(value)
         },
         widths: this.widths,
         headers: this.computedHeaders
@@ -467,22 +467,22 @@ export default VDataIterator.extend({
         customSort: this.customSortWithHeaders
       },
       on: {
-        'update:options': (v: DataOptions, old: DataOptions) => {
+        'update:options': /* istanbul ignore next */ (v: DataOptions, old: DataOptions) => {
           this.internalGroupBy = v.groupBy || []
           !deepEqual(v, old) && this.$emit('update:options', v)
         },
-        'update:page': (v: number) => this.$emit('update:page', v),
-        'update:items-per-page': (v: number) => this.$emit('update:items-per-page', v),
-        'update:sort-by': (v: string | string[]) => this.$emit('update:sort-by', v),
-        'update:sort-desc': (v: boolean | boolean[]) => this.$emit('update:sort-desc', v),
-        'update:group-by': (v: string | string[]) => this.$emit('update:group-by', v),
-        'update:group-desc': (v: boolean | boolean[]) => this.$emit('update:group-desc', v),
-        'pagination': (v: DataPaginaton, old: DataPaginaton) => !deepEqual(v, old) && this.$emit('pagination', v),
-        'current-items': (v: any[]) => {
+        'update:page': /* istanbul ignore next */ (v: number) => this.$emit('update:page', v),
+        'update:items-per-page': /* istanbul ignore next */ (v: number) => this.$emit('update:items-per-page', v),
+        'update:sort-by': /* istanbul ignore next */ (v: string | string[]) => this.$emit('update:sort-by', v),
+        'update:sort-desc': /* istanbul ignore next */ (v: boolean | boolean[]) => this.$emit('update:sort-desc', v),
+        'update:group-by': /* istanbul ignore next */ (v: string | string[]) => this.$emit('update:group-by', v),
+        'update:group-desc': /* istanbul ignore next */ (v: boolean | boolean[]) => this.$emit('update:group-desc', v),
+        'pagination': /* istanbul ignore next */ (v: DataPaginaton, old: DataPaginaton) => !deepEqual(v, old) && this.$emit('pagination', v),
+        'current-items': /* istanbul ignore next */ (v: any[]) => {
           this.internalCurrentItems = v
           this.$emit('current-items', v)
         },
-        'page-count': (v: number) => this.$emit('page-count', v)
+        'page-count': /* istanbul ignore next */ (v: number) => this.$emit('page-count', v)
       },
       scopedSlots: {
         default: this.genDefaultScopedSlot as any

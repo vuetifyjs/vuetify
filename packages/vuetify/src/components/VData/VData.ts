@@ -191,7 +191,12 @@ export default Vue.extend({
     options: {
       handler (options: DataOptions, old: DataOptions) {
         if (deepEqual(options, old)) return
-        this.updateOptions(options)
+
+        // Causes issues with vue-test-util scoped
+        // -slots if not called in the $nextTick
+        this.$nextTick(() => {
+          this.updateOptions(options)
+        })
       },
       deep: true,
       immediate: true
