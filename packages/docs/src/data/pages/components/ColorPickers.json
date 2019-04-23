@@ -31,7 +31,8 @@
           "type": "supplemental",
           "value": [
             {
-              "type": "components-color"
+              "type": "markup",
+              "value": "ts_color_picker_model"
             }
           ]
         }
