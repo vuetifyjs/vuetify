@@ -28,6 +28,10 @@
     "linearCustomColors": {
       "header": "### Custom colors",
       "desc": "You can also set the color using the props `color` and `background-color`."
+    },
+    "rounded": {
+      "header": "### Rounded",
+      "desc": "The **rounded** prop is an alternative style that adds a border radius to the progress component."
     }
   },
   "props": {
