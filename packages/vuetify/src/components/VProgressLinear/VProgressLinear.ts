@@ -8,6 +8,7 @@ import {
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import { factory as PositionableFactory } from '../../mixins/positionable'
 import Proxyable from '../../mixins/proxyable'
 
 // Utilities
@@ -20,6 +21,7 @@ import { VNode } from 'vue'
 
 const baseMixins = mixins(
   Colorable,
+  PositionableFactory(['absolute', 'fixed', 'top', 'bottom']),
   Proxyable
 )
 
@@ -89,6 +91,8 @@ export default baseMixins.extend<options>().extend({
     },
     classes (): object {
       return {
+        'v-progress-linear--absolute': this.absolute,
+        'v-progress-linear--fixed': this.fixed,
         'v-progress-linear--query': this.query,
         'v-progress-linear--rounded': this.rounded,
         'v-progress-linear--striped': this.striped
@@ -198,7 +202,9 @@ export default baseMixins.extend<options>().extend({
       },
       class: this.classes,
       style: {
-        height: convertToUnit(this.height)
+        bottom: this.bottom ? 0 : undefined,
+        height: convertToUnit(this.height),
+        top: this.top ? 0 : undefined
       },
       on: this.$listeners
     }, [
