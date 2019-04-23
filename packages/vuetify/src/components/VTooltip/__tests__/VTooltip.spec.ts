@@ -2,11 +2,8 @@ import VTooltip from '../VTooltip'
 import {
   mount
 } from '@vue/test-utils'
-import { rafPolyfill } from '../../../../test'
 
 describe('VTooltip', () => {
-  rafPolyfill(window)
-
   type Instance = ExtractVue<typeof VTooltip>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

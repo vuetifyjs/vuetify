@@ -4,7 +4,7 @@
     <v-color-picker hide-mode-switch></v-color-picker>
     <v-layout column style="flex: 0 0 auto">
       <v-color-picker :mode.sync="mode"></v-color-picker>
-      <v-select :items="modes" v-model="mode" style="max-width: 300px"></v-select>
+      <v-select v-model="mode" :items="modes" style="max-width: 300px"></v-select>
     </v-layout>
   </v-layout>
 </template>
@@ -17,4 +17,3 @@
     })
   }
 </script>
-

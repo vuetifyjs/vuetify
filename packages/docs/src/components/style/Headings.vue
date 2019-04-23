@@ -37,7 +37,6 @@
         ['subtitle-2', 'Medium 14sp', '500'],
         ['body-1', 'Regular 16sp', '400'],
         ['body-2', 'Regular 14sp', '500'],
-        ['button', 'Medium 14sp', '500'],
         ['caption', 'Regular 12sp', '400'],
         ['overline', 'Regular 10sp', '500']
       ]

@@ -1,9 +1,5 @@
 /build/
 
-# Tests
-/test
-/types/test
-
 # Built files
 /es5/
 /lib/

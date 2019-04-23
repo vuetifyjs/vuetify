@@ -6,13 +6,11 @@ import {
   mount,
   Wrapper
 } from '@vue/test-utils'
-import { rafPolyfill, scrollWindow } from '../../../../test'
+import { scrollWindow } from '../../../../test'
 
 describe('Scrollable.ts', () => {
   type Instance = InstanceType<typeof Scrollable>
   let mountFunction: (options?: object) => Wrapper<Instance>
-
-  rafPolyfill(window)
 
   beforeEach(() => {
     const Mock = {

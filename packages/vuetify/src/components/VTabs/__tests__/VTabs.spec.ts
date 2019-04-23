@@ -24,7 +24,6 @@ const TabsItemsMock = {
 describe('VTabs.ts', () => {
   type Instance = ExtractVue<typeof VTabs>
   let mountFunction: (options?: object) => Wrapper<Instance>
-  (global as any).requestAnimationFrame = cb => cb && cb()
 
   beforeEach(() => {
     mountFunction = (options = {}) => {

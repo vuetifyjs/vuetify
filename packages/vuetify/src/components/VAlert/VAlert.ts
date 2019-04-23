@@ -171,10 +171,10 @@ export default mixins(
     hasText (): boolean {
       return this.text || this.hasOutline
     },
-    iconColor () {
+    iconColor (): string | undefined {
       return this.hasColoredIcon ? this.computedColor : undefined
     },
-    isDark () {
+    isDark (): boolean {
       if (
         this.type &&
         !this.coloredBorder &&

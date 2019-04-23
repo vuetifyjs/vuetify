@@ -14,8 +14,6 @@ describe('VWindow.ts', () => {
   type Instance = InstanceType<typeof VWindow>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 
-  (global as any).requestAnimationFrame = cb => cb()
-
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VWindow, {

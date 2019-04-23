@@ -101,8 +101,8 @@ describe('VInput.ts', () => {
     const click = jest.fn()
     wrapper.vm.$on('click', click)
 
-    const prepend = wrapper.findAll('.v-icon').wrappers[0]
-    const append = wrapper.findAll('.v-icon').wrappers[1]
+    const prepend = wrapper.findAll('.v-icon').at(0)
+    const append = wrapper.findAll('.v-icon').at(1)
     const slot = wrapper.find('.v-input__slot')
 
     prepend.trigger('click')
@@ -189,13 +189,13 @@ describe('VInput.ts', () => {
     expect(wrapper.vm.isDisabled).toBe(true)
 
     wrapper.setProps({
-      disabled: undefined,
+      disabled: false,
       readonly: true
     })
 
     expect(wrapper.vm.isDisabled).toBe(true)
 
-    wrapper.setProps({ readonly: undefined })
+    wrapper.setProps({ readonly: false })
 
     expect(wrapper.vm.isDisabled).toBe(false)
   })

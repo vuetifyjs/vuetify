@@ -212,19 +212,19 @@
         },
         {
           "type": "markup",
-          "value": "js_webpack_sass"
+          "value": "sass_import_vuetify_css"
+        },
+        {
+          "type": "text",
+          "lang": "sassText3a"
+        },
+        {
+          "type": "markup",
+          "value": "js_vue_config_sass_variables"
         },
         {
           "type": "text",
           "lang": "sassText4"
-        },
-        {
-          "type": "markup",
-          "value": "sass_import_vuetify_css"
-        },
-        {
-          "type": "markup",
-          "value": "js_import_vuetify_sass"
         },
         {
           "type": "alert",
@@ -234,18 +234,6 @@
         {
           "type": "text",
           "lang": "sassText5"
-        },
-        {
-          "type": "heading",
-          "lang": "sassHeader3"
-        },
-        {
-          "type": "text",
-          "lang": "sassText6"
-        },
-        {
-          "type": "markup",
-          "value": "sass_changing_variables"
         }
       ]
     },

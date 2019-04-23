@@ -7,6 +7,7 @@ exports[`VRadio.ts should not render aria-label attribute with no label value on
     <input aria-checked="false"
            role="radio"
            type="radio"
+           value
     >
     <div class="v-input--selection-controls__ripple">
     </div>
@@ -28,6 +29,7 @@ exports[`VRadio.ts should render aria-label attribute with label value on input 
            aria-checked="false"
            role="radio"
            type="radio"
+           value
     >
     <div class="v-input--selection-controls__ripple">
     </div>
@@ -55,6 +57,7 @@ exports[`VRadio.ts should render proper input name 1`] = `
            role="radio"
            type="radio"
            name="name"
+           value
     >
     <div class="v-input--selection-controls__ripple">
     </div>
@@ -75,6 +78,7 @@ exports[`VRadio.ts should render role and aria-checked attributes on input group
     <input aria-checked="true"
            role="radio"
            type="radio"
+           value
     >
     <div class="v-input--selection-controls__ripple accent--text">
     </div>
@@ -95,6 +99,7 @@ exports[`VRadio.ts should use custom icons 1`] = `
     <input aria-checked="false"
            role="radio"
            type="radio"
+           value
     >
     <div class="v-input--selection-controls__ripple">
     </div>
@@ -115,6 +120,7 @@ exports[`VRadio.ts should use custom icons 2`] = `
     <input aria-checked="true"
            role="radio"
            type="radio"
+           value
     >
     <div class="v-input--selection-controls__ripple accent--text">
     </div>

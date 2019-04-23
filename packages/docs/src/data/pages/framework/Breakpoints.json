@@ -7,14 +7,15 @@
   },
   "children": [
     {
-      "type": "layout-grid"
-    },
-    {
       "type": "section",
       "children": [
         {
           "type": "heading",
           "lang": "breakpointHeader"
+        },
+        {
+          "type": "markup",
+          "value": "ts_breakpoint_service_structure"
         },
         {
           "type": "text",
@@ -23,6 +24,21 @@
         {
           "type": "markup",
           "value": "js_breakpoint_example1"
+        },
+        {
+          "type": "layout-grid"
+        },
+        {
+          "type": "heading",
+          "lang": "breakpointHeader1a"
+        },
+        {
+          "type": "text",
+          "lang": "customizeThresholdsText1"
+        },
+        {
+          "type": "markup",
+          "value": "js_vuetify_thresholds"
         },
         {
           "type": "text",
@@ -39,31 +55,6 @@
         {
           "type": "markup",
           "value": "html_breakpoint_example1"
-        },
-        {
-          "type": "text",
-          "lang": "breakpointText4"
-        },
-        {
-          "type": "markup",
-          "value": "ts_breakpoint_example1"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "heading",
-          "lang": "customizeThresholdsHeader"
-        },
-        {
-          "type": "text",
-          "lang": "customizeThresholdsText1"
-        },
-        {
-          "type": "markup",
-          "value": "js_breakpoint_example3"
         }
       ]
     },
