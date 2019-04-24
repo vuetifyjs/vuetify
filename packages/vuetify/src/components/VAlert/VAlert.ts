@@ -190,8 +190,8 @@ export default mixins(
     genAlert (): VNode {
       const children = [
         this.$slots.prepend || this.__cachedIcon,
-        this.__cachedBorder,
         this.genContent(),
+        this.__cachedBorder,
         this.$slots.append,
         this.$scopedSlots.close
           ? this.$scopedSlots.close({ toggle: this.toggle })
