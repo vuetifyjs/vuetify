@@ -47,6 +47,7 @@ export default mixins(
     dense: Boolean,
     dismissible: Boolean,
     icon: {
+      default: '',
       type: [Boolean, String],
       validator (val: boolean | string) {
         return typeof val === 'string' || val === false
@@ -147,8 +148,8 @@ export default mixins(
       return this.color || this.type
     },
     computedIcon (): string | boolean {
-      if (!this.icon) return false
-      if (this.icon != null) return this.icon
+      if (this.icon === false) return false
+      if (typeof this.icon === 'string' && this.icon) return this.icon
 
       switch (this.type) {
         case 'info': return '$vuetify.icons.info'
