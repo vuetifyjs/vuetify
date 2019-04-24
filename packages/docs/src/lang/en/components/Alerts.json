@@ -5,9 +5,9 @@
     "usage": {
       "desc": "Alerts in their simplist form displays a message with default theme and style."
     },
-    "closable": {
-      "header": "### Closable",
-      "desc": "Using `v-model`, you can control the state of the Alert. If you don't want to assign a v-model and just display the alert, you can simply assign the prop `value`."
+    "dismissible": {
+      "header": "### Dismissible",
+      "desc": "The `dismissible` prop adds a close button to the end of the alert component. Clicking this button will set its value to false and effectively hide the alert. You can restore the alert by binding `v-model` and setting it to true."
     },
     "icon": {
       "header": "### Custom Icon / No Icon",

@@ -27,7 +27,7 @@
         {
           "type": "examples",
           "value": [
-            "simple/closable",
+            "simple/dismissible",
             "simple/icon",
             "simple/transition",
             "simple/outline"
