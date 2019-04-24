@@ -85,6 +85,7 @@ export default mixins(Returnable, Themeable).extend({
     },
     genContent (): VNode {
       return this.$createElement('div', {
+        staticClass: 'v-small-dialog__content',
         on: {
           keydown: (e: KeyboardEvent) => {
             const input = (this.$refs.content as Element).querySelector('input')
@@ -105,7 +106,7 @@ export default mixins(Returnable, Themeable).extend({
       staticClass: 'v-small-dialog',
       class: this.themeClasses,
       props: {
-        contentClass: 'v-small-dialog__content',
+        contentClass: 'v-small-dialog__menu-content',
         transition: this.transition,
         origin: 'top right',
         right: true,
@@ -118,11 +119,16 @@ export default mixins(Returnable, Themeable).extend({
       },
       on: {
         input: (val: boolean) => (this.isActive = val)
+      },
+      scopedSlots: {
+        activator: ({ on }) => {
+          return h('span', {
+            staticClass: 'v-small-dialog__activator',
+            on
+          }, this.$slots.default)
+        }
       }
     }, [
-      h('a', {
-        slot: 'activator'
-      }, this.$slots.default),
       this.genContent(),
       this.large ? this.genActions() : null
     ])
