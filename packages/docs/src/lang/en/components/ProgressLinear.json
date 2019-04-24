@@ -32,6 +32,10 @@
     "rounded": {
       "header": "### Rounded",
       "desc": "The **rounded** prop is an alternative style that adds a border radius to the progress component."
+    },
+    "loader": {
+      "header": "### Toolbar loader",
+      "desc": "Using the **absolute** prop we are able to position the `v-progress-linear` component at the bottom of the `v-toolbar` one. We also use the **active** prop which allows us to control the visibility of the progress."
     }
   },
   "props": {
