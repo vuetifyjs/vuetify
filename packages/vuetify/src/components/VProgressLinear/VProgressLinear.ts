@@ -64,6 +64,7 @@ export default baseMixins.extend<options>().extend({
     query: Boolean,
     reactive: Boolean,
     rounded: Boolean,
+    stream: Boolean,
     striped: Boolean,
     value: {
       type: [Number, String],
@@ -78,6 +79,44 @@ export default baseMixins.extend<options>().extend({
   },
 
   computed: {
+    __cachedBackground (): VNode {
+      return this.$createElement('div', this.setBackgroundColor(this.backgroundColor || this.color, {
+        staticClass: 'v-progress-linear__background',
+        style: this.backgroundStyle
+      }))
+    },
+    __cachedBarType (): VNode {
+      return this.indeterminate ? this.__cachedIndeterminate : this.__cachedDeterminate
+    },
+    __cachedDeterminate (): VNode {
+      return this.$createElement('div', this.setBackgroundColor(this.color, {
+        staticClass: `v-progress-linear__bar__determinate`,
+        style: {
+          width: convertToUnit(this.effectiveWidth, '%')
+        }
+      }))
+    },
+    __cachedIndeterminate (): VNode {
+      return this.$createElement('div', {
+        staticClass: 'v-progress-linear__bar__indeterminate',
+        class: {
+          'v-progress-linear__bar__indeterminate--active': this.active
+        }
+      }, [
+        this.genProgressBar('long'),
+        this.genProgressBar('short')
+      ])
+    },
+    __cachedStream (): VNode | null {
+      if (!this.stream) return null
+
+      return this.$createElement('div', {
+        staticClass: 'v-progress-linear__stream',
+        style: {
+          width: convertToUnit(100 - this.normalizedBufer, '%')
+        }
+      })
+    },
     backgroundStyle (): object {
       const backgroundOpacity = this.backgroundOpacity == null
         ? (this.backgroundColor ? 1 : 0.3)
@@ -86,7 +125,7 @@ export default baseMixins.extend<options>().extend({
       return {
         height: this.active ? convertToUnit(this.height) : 0,
         opacity: backgroundOpacity,
-        width: `${this.normalizedBufer}%`
+        width: convertToUnit(this.normalizedBufer, '%')
       }
     },
     classes (): object {
@@ -131,25 +170,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   methods: {
-    genBackground () {
-      return this.$createElement('div', this.setBackgroundColor(this.backgroundColor || this.color, {
-        staticClass: 'v-progress-linear__background',
-        style: this.backgroundStyle
-      }))
-    },
-    genDeterminate () {
-      return this.$createElement('div', this.setBackgroundColor(this.color, {
-        staticClass: `v-progress-linear__bar__determinate`,
-        style: {
-          width: convertToUnit(this.effectiveWidth, '%')
-        }
-      }))
-    },
     genBar () {
-      const children = [
-        this.indeterminate ? this.genIndeterminate() : this.genDeterminate()
-      ]
-
       return this.$createElement('div', {
         staticClass: 'v-progress-linear__bar',
         style: this.styles,
@@ -162,7 +183,7 @@ export default baseMixins.extend<options>().extend({
         },
         ref: 'bar'
       }, [
-        this.$createElement(this.computedTransition, children)
+        this.$createElement(this.computedTransition, [this.__cachedBarType])
       ])
     },
     genContent () {
@@ -177,17 +198,6 @@ export default baseMixins.extend<options>().extend({
           [name]: true
         }
       }))
-    },
-    genIndeterminate () {
-      return this.$createElement('div', {
-        staticClass: 'v-progress-linear__bar__indeterminate',
-        class: {
-          'v-progress-linear__bar__indeterminate--active': this.active
-        }
-      }, [
-        this.genProgressBar('long'),
-        this.genProgressBar('short')
-      ])
     }
   },
 
@@ -208,7 +218,8 @@ export default baseMixins.extend<options>().extend({
       },
       on: this.$listeners
     }, [
-      this.genBackground(),
+      this.__cachedStream,
+      this.__cachedBackground,
       this.genBar(),
       this.genContent()
     ])
