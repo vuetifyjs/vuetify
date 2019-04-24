@@ -1,6 +1,6 @@
 {
   "header": "# Alert",
-  "headerText": "The `v-alert` component is used to convey important information to the user through the use contextual types icons and color. These default types come in in 4 variations: **success**, **info**, **warning** and **error**. Default icons are assigned which help represent different actions each type portrays. Many parts of an alert such as `border`, `icon`, and `color` can also be customized to fit almost any situation",
+  "headerText": "The `v-alert` component is used to convey important information to the user through the use contextual types icons and color. These default types come in in 4 variations: **success**, **info**, **warning**, and **error**. Default icons are assigned which help represent different actions each type portrays. Many parts of an alert such as `border`, `icon`, and `color` can also be customized to fit almost any situation",
   "examples": {
     "usage": {
       "desc": "Alerts in their simplist form displays a message with default theme and style."
@@ -17,13 +17,21 @@
       "header": "### Playground",
       "desc": "Explore the vraious options of `v-alert`."
     },
+    "outlined": {
+      "header": "### Outlined",
+      "desc": "The `outlined` prop inverts the style of an alert, inheriting its background color from the current theme background and inheriting its border color from the components applied color."
+    },
     "transition": {
       "header": "### Display transition",
       "desc": "You can apply a custom transition to the show/hide of the alert."
     },
-    "outline": {
-      "header": "### Outline",
-      "desc": "Outline alerts inherit their borders from the current color applied."
+    "type": {
+      "header": "### Type",
+      "desc": "The `type` prop provides 4 default `v-alert` styles: **success**, **info**, **warning**, and **error**. Each of these styles provide a default icon and color. The default colors can be configured globally by customizing Vuetify's theme."
+    },
+    "twitter": {
+      "header": "### Twitter alert",
+      "desc": "By combining `color`, `dismissible`, `border`, `elevation`, `icon`, and `color-border` props you can create stylish custom alerts such as this twitter notification."
     }
   },
   "props": {

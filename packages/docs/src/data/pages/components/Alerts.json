@@ -30,7 +30,9 @@
             "simple/dismissible",
             "simple/icon",
             "simple/outlined",
-            "simple/transition"
+            "simple/transition",
+            "simple/type",
+            "intermediate/twitter"
           ]
         }
       ]
