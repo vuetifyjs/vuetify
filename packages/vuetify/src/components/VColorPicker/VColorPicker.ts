@@ -10,12 +10,14 @@ import VColorPickerSwatches from './VColorPickerSwatches'
 
 // Helpers
 import { VColorPickerColor, parseColor, fromRGBA } from './util'
+import mixins from '../../util/mixins'
+import Themeable from '../../mixins/themeable'
 
 // Types
-import Vue, { VNode } from 'vue'
+import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
-export default Vue.extend({
+export default mixins(Themeable).extend({
   name: 'v-color-picker',
 
   props: {
@@ -120,6 +122,8 @@ export default Vue.extend({
     genSwatches (): VNode {
       return this.$createElement(VColorPickerSwatches, {
         props: {
+          dark: this.dark,
+          light: this.light,
           swatches: this.swatches,
           color: this.internalValue,
           maxHeight: this.swatchesMaxHeight
@@ -135,7 +139,8 @@ export default Vue.extend({
     return h(VSheet, {
       staticClass: 'v-color-picker',
       class: {
-        'v-color-picker--flat': this.flat
+        'v-color-picker--flat': this.flat,
+        ...this.themeClasses
       },
       props: {
         maxWidth: this.width
