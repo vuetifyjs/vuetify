@@ -39,7 +39,8 @@
             "linearQueryIndeterminateAndDeterminate",
             "linearCustomColors",
             "rounded",
-            "loader"
+            "loader",
+            "stream"
           ]
         }
       ]

@@ -36,6 +36,10 @@
     "loader": {
       "header": "### Toolbar loader",
       "desc": "Using the **absolute** prop we are able to position the `v-progress-linear` component at the bottom of the `v-toolbar` one. We also use the **active** prop which allows us to control the visibility of the progress."
+    },
+    "stream": {
+      "header": "### Stream",
+      "desc": "The **stream** property works with **buffer-value** to convey to the user that there is some action taking place. You can use any combination of **buffer-value** and **value** to achieve your design."
     }
   },
   "props": {
