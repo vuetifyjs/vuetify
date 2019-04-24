@@ -25,7 +25,7 @@ exports[`VParallax.ts should use alt tag when supplied 1`] = `
   <div class="v-parallax__image-container">
     <img alt="name"
          class="v-parallax__image"
-         style="display: block; opacity: 0; transform: translate(-50%, 0px);"
+         style="display: block; opacity: 1; transform: translate(-50%, 0px);"
     >
   </div>
   <div class="v-parallax__content">
@@ -42,7 +42,7 @@ exports[`VParallax.ts should use empty alt tag when not supplied 1`] = `
   <div class="v-parallax__image-container">
     <img alt
          class="v-parallax__image"
-         style="display: block; opacity: 0; transform: translate(-50%, 0px);"
+         style="display: block; opacity: 1; transform: translate(-50%, 0px);"
     >
   </div>
   <div class="v-parallax__content">
