@@ -206,7 +206,7 @@ export default Vue.extend({
   render (h) {
     const data = {
       staticClass: 'v-menu',
-      class: { 'v-menu--inline': !this.fullWidth && this.$slots.activator },
+      class: { 'v-menu--inline': !this.fullWidth && (this.$slots.activator || this.$scopedSlots.activator) },
       directives: [{
         arg: 500,
         name: 'resize',
