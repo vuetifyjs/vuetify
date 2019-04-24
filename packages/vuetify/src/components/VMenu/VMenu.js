@@ -22,9 +22,8 @@ import ClickOutside from '../../directives/click-outside'
 import Resize from '../../directives/resize'
 
 // Helpers
-import { convertToUnit, getSlotType } from '../../util/helpers'
+import { convertToUnit } from '../../util/helpers'
 import ThemeProvider from '../../util/ThemeProvider'
-import { consoleError } from '../../util/console'
 
 /* @vue/component */
 export default Vue.extend({
@@ -152,19 +151,6 @@ export default Vue.extend({
   },
 
   watch: {
-    activator (newActivator, oldActivator) {
-      this.removeActivatorEvents(oldActivator)
-      this.addActivatorEvents(newActivator)
-    },
-    disabled (disabled) {
-      if (!this.activator) return
-
-      if (disabled) {
-        this.removeActivatorEvents(this.activator)
-      } else {
-        this.addActivatorEvents(this.activator)
-      }
-    },
     isContentActive (val) {
       this.hasJustFocused = val
     }
@@ -172,10 +158,6 @@ export default Vue.extend({
 
   mounted () {
     this.isActive && this.activate()
-
-    if (getSlotType(this, 'activator', true) === 'v-slot') {
-      consoleError(`v-tooltip's activator slot must be bound, try '<template #activator="data"><v-btn v-on="data.on>'`, this)
-    }
   },
 
   methods: {
