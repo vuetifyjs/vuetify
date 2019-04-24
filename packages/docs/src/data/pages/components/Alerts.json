@@ -27,10 +27,10 @@
         {
           "type": "examples",
           "value": [
-            "closable",
-            "icon",
-            "transition",
-            "outline"
+            "simple/closable",
+            "simple/icon",
+            "simple/transition",
+            "simple/outline"
           ]
         }
       ]
