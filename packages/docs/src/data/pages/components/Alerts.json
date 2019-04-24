@@ -30,9 +30,17 @@
             "closable",
             "icon",
             "transition",
-            "outline",
-            "playground"
+            "outline"
           ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "playground",
+          "value": "playground"
         }
       ]
     },
