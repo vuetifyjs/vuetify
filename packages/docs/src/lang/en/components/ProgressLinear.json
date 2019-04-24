@@ -49,6 +49,7 @@
     "reactive": "Make the progress reactive to changes. Clicking on the component will change its value",
     "rounded": "Adds a border radius to the progress component",
     "size": "Components.ProgressCircular.props.size",
+    "stream": "An alternative style for portraying loading that works in tandem with **buffer-value**",
     "striped": "Adds a stripe background to the filled portion of the progress component",
     "value": "Components.ProgressCircular.props.value"
   }
