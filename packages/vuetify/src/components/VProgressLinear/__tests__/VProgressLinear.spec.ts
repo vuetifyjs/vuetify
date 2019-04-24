@@ -202,12 +202,11 @@ describe('VProgressLinear.ts', () => {
       }
     })
 
-    const bar = wrapper.find('.v-progress-linear__bar')
-    wrapper.vm.$refs.bar.getBoundingClientRect = () => ({ width: 1000 })
+    wrapper.vm.$el.getBoundingClientRect = () => ({ width: 1000 })
 
     expect(wrapper.vm.internalLazyValue).toBe(0)
 
-    bar.trigger('click', { offsetX: 200 })
+    wrapper.trigger('click', { offsetX: 200 })
 
     expect(wrapper.vm.internalLazyValue).toBe(20)
   })

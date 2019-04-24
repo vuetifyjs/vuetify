@@ -27,7 +27,7 @@ const baseMixins = mixins(
 
 interface options extends InstanceType<typeof baseMixins> {
   $refs: {
-    bar: HTMLElement
+    buffer: HTMLElement
   }
 }
 
@@ -85,22 +85,25 @@ export default baseMixins.extend<options>().extend({
         style: this.backgroundStyle
       }))
     },
+    __cachedBar (): VNode {
+      return this.$createElement(this.computedTransition, [this.__cachedBarType])
+    },
     __cachedBarType (): VNode {
       return this.indeterminate ? this.__cachedIndeterminate : this.__cachedDeterminate
     },
     __cachedDeterminate (): VNode {
       return this.$createElement('div', this.setBackgroundColor(this.color, {
-        staticClass: `v-progress-linear__bar__determinate`,
+        staticClass: `v-progress-linear__determinate`,
         style: {
-          width: convertToUnit(this.effectiveWidth, '%')
+          width: convertToUnit(this.normalizedValue, '%')
         }
       }))
     },
     __cachedIndeterminate (): VNode {
       return this.$createElement('div', {
-        staticClass: 'v-progress-linear__bar__indeterminate',
+        staticClass: 'v-progress-linear__indeterminate',
         class: {
-          'v-progress-linear__bar__indeterminate--active': this.active
+          'v-progress-linear__indeterminate--active': this.active
         }
       }, [
         this.genProgressBar('long'),
@@ -110,12 +113,12 @@ export default baseMixins.extend<options>().extend({
     __cachedStream (): VNode | null {
       if (!this.stream) return null
 
-      return this.$createElement('div', {
+      return this.$createElement('div', this.setTextColor(this.color, {
         staticClass: 'v-progress-linear__stream',
         style: {
           width: convertToUnit(100 - this.normalizedBufer, '%')
         }
-      })
+      }))
     },
     backgroundStyle (): object {
       const backgroundOpacity = this.backgroundOpacity == null
@@ -123,7 +126,6 @@ export default baseMixins.extend<options>().extend({
         : parseFloat(this.backgroundOpacity)
 
       return {
-        height: this.active ? convertToUnit(this.height) : 0,
         opacity: backgroundOpacity,
         width: convertToUnit(this.normalizedBufer, '%')
       }
@@ -139,10 +141,6 @@ export default baseMixins.extend<options>().extend({
     },
     computedTransition (): FunctionalComponentOptions {
       return this.indeterminate ? VFadeTransition : VSlideXTransition
-    },
-    effectiveWidth (): number {
-      if (!this.normalizedBufer) return 0
-      return +this.normalizedValue * 100 / +this.normalizedBufer
     },
     normalizedBufer (): number {
       if (this.bufferValue < 0) return 0
@@ -170,21 +168,11 @@ export default baseMixins.extend<options>().extend({
   },
 
   methods: {
-    genBar () {
+    genBuffer () {
       return this.$createElement('div', {
-        staticClass: 'v-progress-linear__bar',
-        style: this.styles,
-        on: !this.reactive ? undefined : {
-          click: (e: MouseEvent) => {
-            const { width } = this.$refs.bar.getBoundingClientRect()
-
-            this.internalValue = e.offsetX / width * 100
-          }
-        },
-        ref: 'bar'
-      }, [
-        this.$createElement(this.computedTransition, [this.__cachedBarType])
-      ])
+        staticClass: 'v-progress-linear__buffer',
+        style: this.styles
+      })
     },
     genContent () {
       return this.$slots.default && this.$createElement('div', {
@@ -193,7 +181,7 @@ export default baseMixins.extend<options>().extend({
     },
     genProgressBar (name: 'long' | 'short') {
       return this.$createElement('div', this.setBackgroundColor(this.color, {
-        staticClass: 'v-progress-linear__bar__indeterminate',
+        staticClass: 'v-progress-linear__indeterminate',
         class: {
           [name]: true
         }
@@ -202,7 +190,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   render (h): VNode {
-    return h('div', {
+    const data = {
       staticClass: 'v-progress-linear',
       attrs: {
         'role': 'progressbar',
@@ -213,14 +201,26 @@ export default baseMixins.extend<options>().extend({
       class: this.classes,
       style: {
         bottom: this.bottom ? 0 : undefined,
-        height: convertToUnit(this.height),
+        height: this.active ? convertToUnit(this.height) : 0,
         top: this.top ? 0 : undefined
-      },
-      on: this.$listeners
-    }, [
+      }
+    }
+
+    if (this.reactive) {
+      this._g(data, {
+        click: (e: MouseEvent) => {
+          const { width } = this.$el.getBoundingClientRect()
+
+          this.internalValue = e.offsetX / width * 100
+        }
+      })
+    }
+
+    return h('div', data, [
       this.__cachedStream,
       this.__cachedBackground,
-      this.genBar(),
+      this.genBuffer(),
+      this.__cachedBar,
       this.genContent()
     ])
   }
