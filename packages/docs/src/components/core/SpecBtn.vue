@@ -1,28 +1,30 @@
 <template>
   <v-tooltip left bottom>
-    <v-btn
-      slot="activator"
-      :href="link"
-      icon
-      target="_blank"
-      rel="noopener"
-      aria-label="Material Design Specification"
-    >
-      <v-badge
-        right
-        overlap
-        color="transparent"
+    <template #activator="{ on }">
+      <v-btn
+        :href="link"
+        icon
+        target="_blank"
+        rel="noopener"
+        aria-label="Material Design Specification"
+        v-on="on"
       >
-        <span
-          v-if="version"
-          slot="badge"
-          class="caption black--text font-weight-black pl-2"
+        <v-badge
+          right
+          overlap
+          color="transparent"
         >
-          {{ version }}
-        </span>
-        <v-icon>mdi-material-design</v-icon>
-      </v-badge>
-    </v-btn>
+          <span
+            v-if="version"
+            slot="badge"
+            class="caption black--text font-weight-black pl-2"
+          >
+            {{ version }}
+          </span>
+          <v-icon>mdi-material-design</v-icon>
+        </v-badge>
+      </v-btn>
+    </template>
     <span>Material Design Specification</span>
   </v-tooltip>
 </template>
