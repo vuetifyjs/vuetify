@@ -1,8 +1,8 @@
 <template>
   <v-alert
     type="info"
-    icon="new_releases"
+    outlined
   >
-    I'm an info alert with a custom icon.
+    This is an outlined info alert.
   </v-alert>
 </template>

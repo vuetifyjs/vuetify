@@ -29,8 +29,8 @@
           "value": [
             "simple/dismissible",
             "simple/icon",
-            "simple/transition",
-            "simple/outline"
+            "simple/outlined",
+            "simple/transition"
           ]
         }
       ]
