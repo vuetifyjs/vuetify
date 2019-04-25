@@ -12,7 +12,7 @@
     </v-alert>
     <v-alert
       prominent
-      outline
+      outlined
       type="info"
     >
       I'm a prominent alert with outlined and type info

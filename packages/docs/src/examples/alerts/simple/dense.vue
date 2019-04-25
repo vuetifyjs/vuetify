@@ -5,7 +5,7 @@
     </v-alert>
     <v-alert
       dense
-      outline
+      outlined
     >
       I'm a dense alert with outlined
     </v-alert>
