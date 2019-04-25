@@ -187,7 +187,7 @@ export default mixins(
   },
 
   methods: {
-    genAlert (): VNode {
+    genWrapper (): VNode {
       const children = [
         this.$slots.prepend || this.__cachedIcon,
         this.genContent(),
@@ -197,6 +197,19 @@ export default mixins(
           ? this.$scopedSlots.close({ toggle: this.toggle })
           : this.__cachedDismissible
       ]
+
+      const data: VNodeData = {
+        staticClass: 'v-alert__wrapper'
+      }
+
+      return this.$createElement('div', data, children)
+    },
+    genContent (): VNode {
+      return this.$createElement('div', {
+        staticClass: 'v-alert__content'
+      }, this.$slots.default)
+    },
+    genAlert (): VNode {
       let data: VNodeData = {
         staticClass: 'v-alert',
         class: this.classes,
@@ -212,12 +225,7 @@ export default mixins(
         data = setColor(this.computedColor, data)
       }
 
-      return this.$createElement('div', data, children)
-    },
-    genContent (): VNode {
-      return this.$createElement('div', {
-        staticClass: 'v-alert__content'
-      }, this.$slots.default)
+      return this.$createElement('div', data, [this.genWrapper()])
     },
     /** @public */
     toggle () {

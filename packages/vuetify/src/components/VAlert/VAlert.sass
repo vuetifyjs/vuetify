@@ -10,7 +10,6 @@
 
 // Block
 .v-alert
-  display: flex
   font-size: $alert-font-size
   margin-bottom: $alert-margin
   padding: $alert-padding
@@ -102,29 +101,25 @@
   margin-bottom: -6px
 
 .v-alert__icon
+  align-self: flex-start
   border-radius: 50%
   height: $alert-icon-size
+  margin-right: 16px
   min-width: $alert-icon-size
   position: relative
+
+  +rtl()
+    margin-right: 0
+    margin-left: 16px
 
   &.v-icon
     font-size: $alert-icon-size
 
+.v-alert__wrapper
+  align-items: center
+  display: flex
+
 // Modifiers
-.v-alert--border
-  @each $direction in ['top', 'right', 'bottom', 'left']
-    &-#{$direction}
-      padding-#{$direction}: 1.5 * $alert-padding
-
-  +rtl()
-    &-left
-      padding-right: 1.5 * $alert-padding
-      padding-left: $alert-padding
-
-    &-right
-      padding-left: 1.5 * $alert-padding
-      padding-right: $alert-padding
-
 .v-alert--dense
   padding-top: $alert-padding / 2
   padding-bottom: $alert-padding / 2
@@ -140,9 +135,8 @@
     color: inherit !important
 
 .v-alert--prominent
-  align-items: center
-
   .v-alert__icon
+    align-self: center
     height: $alert-promient-icon-size
     min-width: $alert-promient-icon-size
 
