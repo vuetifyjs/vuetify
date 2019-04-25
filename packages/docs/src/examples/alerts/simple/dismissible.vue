@@ -3,6 +3,7 @@
     <v-alert
       v-model="alert"
       dismissible
+      close-text="Close Alert"
       type="info"
     >
       I'm a dismissable alert

@@ -19,7 +19,7 @@
     },
     "dismissible": {
       "header": "### Dismissible",
-      "desc": "The `dismissible` prop adds a close button to the end of the alert component. Clicking this button will set its value to false and effectively hide the alert. You can restore the alert by binding `v-model` and setting it to true. Applying the `closed-label` prop will apply *aria-label* for this type of alert."
+      "desc": "The `dismissible` prop adds a close button to the end of the alert component. Clicking this button will set its value to false and effectively hide the alert. You can restore the alert by binding `v-model` and setting it to true. Applying the `close-label` prop will apply *aria-label* for this type of alert."
     },
     "icon": {
       "header": "### Icon",
