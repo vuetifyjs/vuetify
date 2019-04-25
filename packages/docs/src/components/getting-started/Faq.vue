@@ -24,17 +24,18 @@
         <v-data-iterator
           :items="gotchas"
           :search.sync="search"
-          content-class="v-data-iterator--faq"
+          class="v-data-iterator--faq"
           hide-default-footer
+          disable-pagination
         >
           <template v-slot:item="{ item: gotcha, index }">
             <div class="mb-5">
               <core-goto :id="`question-${index + 1}`">
                 <doc-markdown :code="gotcha.q" />
               </core-goto>
-              <v-paper
+              <v-card
                 class="pa-3"
-                elevation="1"
+                outlined
               >
                 <doc-markdown :code="gotcha.a" />
 
@@ -48,7 +49,7 @@
                   :value="gotcha.s"
                   class="mb-0 mt-3"
                 />
-              </v-paper>
+              </v-card>
             </div>
           </template>
         </v-data-iterator>

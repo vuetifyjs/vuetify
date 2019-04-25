@@ -1,0 +1,531 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VDataIterator.ts should create valid item slot scope 1`] = `
+Object {
+  "expand": Object {
+    "on": Object {
+      "input": [Function],
+    },
+    "props": Object {
+      "value": false,
+    },
+  },
+  "item": "bar",
+  "select": Object {
+    "on": Object {
+      "input": [Function],
+    },
+    "props": Object {
+      "value": false,
+    },
+  },
+}
+`;
+
+exports[`VDataIterator.ts should create valid item slot scope 2`] = `
+
+<div class="v-data-iterator">
+  <div>
+    {"item":"foo","select":{"props":{"value":false},"on":{}},"expand":{"props":{"value":false},"on":{}}}
+  </div>
+  <div>
+    {"item":"bar","select":{"props":{"value":false},"on":{}},"expand":{"props":{"value":false},"on":{}}}
+  </div>
+  <div class="v-data-footer">
+    <div class="v-data-footer__select">
+      Items per page:
+      <div role="combobox"
+           class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+      >
+        <div class="v-input__control">
+          <div class="v-input__slot">
+            <div class="v-select__slot">
+              <div class="v-select__selections">
+                <div class="v-select__selection v-select__selection--comma">
+                  10
+                </div>
+                <input aria-label="$vuetify.dataFooter.itemsPerPageText"
+                       autocomplete="on"
+                       readonly="readonly"
+                       type="text"
+                       aria-readonly="false"
+                >
+              </div>
+              <div class="v-input__append-inner">
+                <div class="v-input__icon v-input__icon--append">
+                  <i aria-hidden="true"
+                     class="v-icon mdi mdi-menu-down theme--light"
+                  >
+                  </i>
+                </div>
+              </div>
+            </div>
+            <div class="v-menu">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-data-footer__pagination">
+      1-2 of 2
+    </div>
+    <div class="v-data-footer__icons-before">
+      <button disabled="disabled"
+              type="button"
+              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              aria-label="Previous page"
+      >
+        <span class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon mdi mdi-chevron-left theme--light"
+          >
+          </i>
+        </span>
+      </button>
+    </div>
+    <div class="v-data-footer__icons-after">
+      <button disabled="disabled"
+              type="button"
+              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              aria-label="Next page"
+      >
+        <span class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon mdi mdi-chevron-right theme--light"
+          >
+          </i>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDataIterator.ts should hide footer 1`] = `
+
+<div class="v-data-iterator">
+  <div>
+    No data available
+  </div>
+</div>
+
+`;
+
+exports[`VDataIterator.ts should render and match snapshot 1`] = `
+
+<div class="v-data-iterator">
+  <div>
+    No data available
+  </div>
+  <div class="v-data-footer">
+    <div class="v-data-footer__select">
+      Items per page:
+      <div role="combobox"
+           class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+      >
+        <div class="v-input__control">
+          <div class="v-input__slot">
+            <div class="v-select__slot">
+              <div class="v-select__selections">
+                <div class="v-select__selection v-select__selection--comma">
+                  10
+                </div>
+                <input aria-label="$vuetify.dataFooter.itemsPerPageText"
+                       autocomplete="on"
+                       readonly="readonly"
+                       type="text"
+                       aria-readonly="false"
+                >
+              </div>
+              <div class="v-input__append-inner">
+                <div class="v-input__icon v-input__icon--append">
+                  <i aria-hidden="true"
+                     class="v-icon mdi mdi-menu-down theme--light"
+                  >
+                  </i>
+                </div>
+              </div>
+            </div>
+            <div class="v-menu">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-data-footer__pagination">
+      –
+    </div>
+    <div class="v-data-footer__icons-before">
+      <button disabled="disabled"
+              type="button"
+              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              aria-label="Previous page"
+      >
+        <span class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon mdi mdi-chevron-left theme--light"
+          >
+          </i>
+        </span>
+      </button>
+    </div>
+    <div class="v-data-footer__icons-after">
+      <button disabled="disabled"
+              type="button"
+              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              aria-label="Next page"
+      >
+        <span class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon mdi mdi-chevron-right theme--light"
+          >
+          </i>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDataIterator.ts should render and match snapshot with data 1`] = `
+
+<div class="v-data-iterator">
+  <p>
+    {
+  "items": [
+    "foo",
+    "bar",
+    "baz",
+    "qux"
+  ],
+  "options": {
+    "page": 1,
+    "itemsPerPage": 10,
+    "sortBy": [],
+    "sortDesc": [],
+    "groupBy": [],
+    "groupDesc": [],
+    "mustSort": false,
+    "multiSort": false
+  },
+  "pagination": {
+    "page": 1,
+    "itemsPerPage": 10,
+    "pageStart": 0,
+    "pageStop": 4,
+    "pageCount": 1,
+    "itemsLength": 4
+  },
+  "groupedItems": {
+    "undefined": [
+      "foo",
+      "bar",
+      "baz",
+      "qux"
+    ]
+  }
+}
+  </p>
+  <div class="v-data-footer">
+    <div class="v-data-footer__select">
+      Items per page:
+      <div role="combobox"
+           class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+      >
+        <div class="v-input__control">
+          <div class="v-input__slot">
+            <div class="v-select__slot">
+              <div class="v-select__selections">
+                <div class="v-select__selection v-select__selection--comma">
+                  10
+                </div>
+                <input aria-label="$vuetify.dataFooter.itemsPerPageText"
+                       autocomplete="on"
+                       readonly="readonly"
+                       type="text"
+                       aria-readonly="false"
+                >
+              </div>
+              <div class="v-input__append-inner">
+                <div class="v-input__icon v-input__icon--append">
+                  <i aria-hidden="true"
+                     class="v-icon mdi mdi-menu-down theme--light"
+                  >
+                  </i>
+                </div>
+              </div>
+            </div>
+            <div class="v-menu">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-data-footer__pagination">
+      1-4 of 4
+    </div>
+    <div class="v-data-footer__icons-before">
+      <button disabled="disabled"
+              type="button"
+              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              aria-label="Previous page"
+      >
+        <span class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon mdi mdi-chevron-left theme--light"
+          >
+          </i>
+        </span>
+      </button>
+    </div>
+    <div class="v-data-footer__icons-after">
+      <button disabled="disabled"
+              type="button"
+              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              aria-label="Next page"
+      >
+        <span class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon mdi mdi-chevron-right theme--light"
+          >
+          </i>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDataIterator.ts should render valid no-data, loading and no-results states 1`] = `
+
+<div class="v-data-iterator">
+  <div>
+    No data available
+  </div>
+  <div class="v-data-footer">
+    <div class="v-data-footer__select">
+      Items per page:
+      <div role="combobox"
+           class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+      >
+        <div class="v-input__control">
+          <div class="v-input__slot">
+            <div class="v-select__slot">
+              <div class="v-select__selections">
+                <div class="v-select__selection v-select__selection--comma">
+                  10
+                </div>
+                <input aria-label="$vuetify.dataFooter.itemsPerPageText"
+                       autocomplete="on"
+                       readonly="readonly"
+                       type="text"
+                       aria-readonly="false"
+                >
+              </div>
+              <div class="v-input__append-inner">
+                <div class="v-input__icon v-input__icon--append">
+                  <i aria-hidden="true"
+                     class="v-icon mdi mdi-menu-down theme--light"
+                  >
+                  </i>
+                </div>
+              </div>
+            </div>
+            <div class="v-menu">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-data-footer__pagination">
+      –
+    </div>
+    <div class="v-data-footer__icons-before">
+      <button disabled="disabled"
+              type="button"
+              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              aria-label="Previous page"
+      >
+        <span class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon mdi mdi-chevron-left theme--light"
+          >
+          </i>
+        </span>
+      </button>
+    </div>
+    <div class="v-data-footer__icons-after">
+      <button disabled="disabled"
+              type="button"
+              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              aria-label="Next page"
+      >
+        <span class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon mdi mdi-chevron-right theme--light"
+          >
+          </i>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDataIterator.ts should render valid no-data, loading and no-results states 2`] = `
+
+<div class="v-data-iterator">
+  <div>
+    Loading items...
+  </div>
+  <div class="v-data-footer">
+    <div class="v-data-footer__select">
+      Items per page:
+      <div role="combobox"
+           class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+      >
+        <div class="v-input__control">
+          <div class="v-input__slot">
+            <div class="v-select__slot">
+              <div class="v-select__selections">
+                <div class="v-select__selection v-select__selection--comma">
+                  10
+                </div>
+                <input aria-label="$vuetify.dataFooter.itemsPerPageText"
+                       autocomplete="on"
+                       readonly="readonly"
+                       type="text"
+                       aria-readonly="false"
+                >
+              </div>
+              <div class="v-input__append-inner">
+                <div class="v-input__icon v-input__icon--append">
+                  <i aria-hidden="true"
+                     class="v-icon mdi mdi-menu-down theme--light"
+                  >
+                  </i>
+                </div>
+              </div>
+            </div>
+            <div class="v-menu">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-data-footer__pagination">
+      –
+    </div>
+    <div class="v-data-footer__icons-before">
+      <button disabled="disabled"
+              type="button"
+              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              aria-label="Previous page"
+      >
+        <span class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon mdi mdi-chevron-left theme--light"
+          >
+          </i>
+        </span>
+      </button>
+    </div>
+    <div class="v-data-footer__icons-after">
+      <button disabled="disabled"
+              type="button"
+              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              aria-label="Next page"
+      >
+        <span class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon mdi mdi-chevron-right theme--light"
+          >
+          </i>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDataIterator.ts should render valid no-data, loading and no-results states 3`] = `
+
+<div class="v-data-iterator">
+  <div>
+    No matching records found
+  </div>
+  <div class="v-data-footer">
+    <div class="v-data-footer__select">
+      Items per page:
+      <div role="combobox"
+           class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+      >
+        <div class="v-input__control">
+          <div class="v-input__slot">
+            <div class="v-select__slot">
+              <div class="v-select__selections">
+                <div class="v-select__selection v-select__selection--comma">
+                  10
+                </div>
+                <input aria-label="$vuetify.dataFooter.itemsPerPageText"
+                       autocomplete="on"
+                       readonly="readonly"
+                       type="text"
+                       aria-readonly="false"
+                >
+              </div>
+              <div class="v-input__append-inner">
+                <div class="v-input__icon v-input__icon--append">
+                  <i aria-hidden="true"
+                     class="v-icon mdi mdi-menu-down theme--light"
+                  >
+                  </i>
+                </div>
+              </div>
+            </div>
+            <div class="v-menu">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-data-footer__pagination">
+      –
+    </div>
+    <div class="v-data-footer__icons-before">
+      <button disabled="disabled"
+              type="button"
+              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              aria-label="Previous page"
+      >
+        <span class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon mdi mdi-chevron-left theme--light"
+          >
+          </i>
+        </span>
+      </button>
+    </div>
+    <div class="v-data-footer__icons-after">
+      <button disabled="disabled"
+              type="button"
+              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              aria-label="Next page"
+      >
+        <span class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon mdi mdi-chevron-right theme--light"
+          >
+          </i>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+
+`;

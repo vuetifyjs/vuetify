@@ -1,5 +1,5 @@
 language: node_js
-node_js: 'node'
+node_js: '11.14.0'
 
 notifications:
   webhooks: https://www.travisbuddy.com/?insertMode=update&only=failed,errored
