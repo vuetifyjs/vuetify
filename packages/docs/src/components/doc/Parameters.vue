@@ -7,83 +7,92 @@
       <strong>MISSING ITEMS:</strong>
       {{ missingItems.join(', ') }}
     </div>
-    <v-data-iterator
-      :search="search"
-      :items="computedItems"
-      sort-by="name"
-      :items-per-page="-1"
-      class="component-parameters pa-2"
-      hide-default-footer
-    >
-      <template #default="{ items }">
-        <v-flex
-          v-for="item in items"
-          :key="item.name"
-          xs12
-          grey
-          lighten-2
-          mt-2
-        >
-          <v-layout wrap px-2 py-1>
-            <v-flex
-              v-for="(header, i) in headers"
-              :key="header.value"
-              :class="header.class"
-            >
-              <div
-                class="header grey--text text--darken-2"
-                v-text="genHeaderName(header.value, item)"
-              />
-              <div :class="['mono', header.value]">
-                <span v-text="item[header.value]" />
-                <template v-if="i === 0">
-                  <v-chip
-                    v-if="item.newIn"
-                    x-small
-                    label
-                    text-color="white"
-                    color="primary"
-                  >
-                    New in — v{{ item.newIn }}
-                  </v-chip>
-                  <v-chip
-                    v-else-if="item.deprecatedIn"
-                    x-small
-                    label
-                    color="red lighten-3"
-                  >
-                    Deprecated in — v{{ item.deprecatedIn }}
-                  </v-chip>
-                </template>
-              </div>
-            </v-flex>
-          </v-layout>
-          <v-layout
+    <div v-for="(groupItems, group) in computedItems" :key="group">
+      <v-sheet
+        color="accent lighten-4"
+        tile
+        class="subtitle font-weight-medium pl-3 text-xs-center"
+      >
+        {{ group }}
+      </v-sheet>
+      <v-data-iterator
+        :search="search"
+        :items="groupItems"
+        sort-by="name"
+        :items-per-page="-1"
+        class="component-parameters px-2 pt-0 pb-3"
+        hide-default-footer
+      >
+        <template #default="{ items }">
+          <v-flex
+            v-for="item in items"
+            :key="item.name"
+            xs12
             grey
-            lighten-4
-            pa-2
-            wrap
+            lighten-2
+            mt-2
           >
-            <v-flex grey--text text--darken-3 xs12>
-              <doc-markdown
-                :code="item.description"
-                class="justify"
-              />
-            </v-flex>
-            <v-flex>
-              <!-- eslint-disable -->
-              <doc-markup
-                v-if="item.example"
-                class="mt-2 mb-0"
-                lang="ts"
-                value="example"
-              >{{ genTypescriptDef(item.example) }}</doc-markup>
-              <!-- eslint-enable -->
-            </v-flex>
-          </v-layout>
-        </v-flex>
-      </template>
-    </v-data-iterator>
+            <v-layout wrap px-2 py-1>
+              <v-flex
+                v-for="(header, i) in headers"
+                :key="header.value"
+                :class="header.class"
+              >
+                <div
+                  class="header grey--text text--darken-2"
+                  v-text="genHeaderName(header.value, item)"
+                />
+                <div :class="['mono', header.value]">
+                  <span v-text="item[header.value]" />
+                  <template v-if="i === 0">
+                    <v-chip
+                      v-if="item.newIn"
+                      x-small
+                      label
+                      text-color="white"
+                      color="primary"
+                    >
+                      New in — v{{ item.newIn }}
+                    </v-chip>
+                    <v-chip
+                      v-else-if="item.deprecatedIn"
+                      x-small
+                      label
+                      color="red lighten-3"
+                    >
+                      Deprecated in — v{{ item.deprecatedIn }}
+                    </v-chip>
+                  </template>
+                </div>
+              </v-flex>
+            </v-layout>
+            <v-layout
+              grey
+              lighten-4
+              pa-2
+              wrap
+            >
+              <v-flex grey--text text--darken-3 xs12>
+                <doc-markdown
+                  :code="item.description"
+                  class="justify"
+                />
+              </v-flex>
+              <v-flex>
+                <!-- eslint-disable -->
+                <doc-markup
+                  v-if="item.example"
+                  class="mt-2 mb-0"
+                  lang="ts"
+                  value="example"
+                >{{ genTypescriptDef(item.example) }}</doc-markup>
+                <!-- eslint-enable -->
+              </v-flex>
+            </v-layout>
+          </v-flex>
+        </template>
+      </v-data-iterator>
+    </div>
   </div>
 </template>
 
@@ -137,9 +146,21 @@
     computed: {
       ...mapState('documentation', ['deprecatedIn', 'newIn']),
       computedItems () {
-        const items = []
+        const self = upperFirst(camelCase(this.target))
+        const items = {
+          [self]: [],
+          ...this.items.reduce((result, { source }) => {
+            if (source) {
+              result[upperFirst(camelCase(source))] = []
+            }
+            return result
+          }, {})
+        }
 
         for (const item of this.items) {
+          const source = (item.source)
+            ? upperFirst(camelCase(item.source))
+            : upperFirst(camelCase(this.target))
           const newItem = item !== Object(item)
             ? { name: item }
             : Object.assign({}, item)
@@ -181,7 +202,7 @@
             )
           }
 
-          items.push(newItem)
+          items[source].push(newItem)
         }
 
         return items
@@ -189,9 +210,11 @@
       missingItems () {
         if (process.env.NODE_ENV !== 'development') return []
 
-        return this.computedItems.filter(item => {
-          return item.description.indexOf('MISSING DESCRIPTION') > -1
-        }).map(item => item.name)
+        return Object.keys(this.computedItems).map(group => {
+          return this.computedItems[group].filter(item => {
+            return item.description.indexOf('MISSING DESCRIPTION') > -1
+          }).map(item => item.name)
+        }).flat()
       },
       namespace () {
         return this.overrideNamespace || this.$store.getters['documentation/namespace']
