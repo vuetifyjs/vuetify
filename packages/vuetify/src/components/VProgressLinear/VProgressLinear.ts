@@ -112,7 +112,7 @@ export default baseMixins.extend({
       return this.$createElement('div', this.setTextColor(this.color, {
         staticClass: 'v-progress-linear__stream',
         style: {
-          width: convertToUnit(100 - this.normalizedBufer, '%')
+          width: convertToUnit(100 - this.normalizedBuffer, '%')
         }
       }))
     },
@@ -123,7 +123,7 @@ export default baseMixins.extend({
 
       return {
         opacity: backgroundOpacity,
-        width: convertToUnit(this.normalizedBufer, '%')
+        width: convertToUnit(this.normalizedBuffer, '%')
       }
     },
     classes (): object {
@@ -139,7 +139,7 @@ export default baseMixins.extend({
     computedTransition (): FunctionalComponentOptions {
       return this.indeterminate ? VFadeTransition : VSlideXTransition
     },
-    normalizedBufer (): number {
+    normalizedBuffer (): number {
       return this.normalize(this.bufferValue)
     },
     normalizedValue (): number {
@@ -152,8 +152,8 @@ export default baseMixins.extend({
         styles.height = 0
       }
 
-      if (!this.indeterminate && parseFloat(this.normalizedBufer) !== 100) {
-        styles.width = convertToUnit(this.normalizedBufer, '%')
+      if (!this.indeterminate && parseFloat(this.normalizedBuffer) !== 100) {
+        styles.width = convertToUnit(this.normalizedBuffer, '%')
       }
 
       return styles
@@ -197,7 +197,7 @@ export default baseMixins.extend({
       attrs: {
         'role': 'progressbar',
         'aria-valuemin': 0,
-        'aria-valuemax': this.normalizedBufer,
+        'aria-valuemax': this.normalizedBuffer,
         'aria-valuenow': this.indeterminate ? undefined : this.normalizedValue
       },
       class: this.classes,
