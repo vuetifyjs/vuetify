@@ -29,6 +29,14 @@
       "header": "### Outlined",
       "desc": "The `outlined` prop inverts the style of an alert, inheriting its background color from the current theme background and inheriting its border color from the components applied color."
     },
+    "prominent": {
+      "header": "### Prominent",
+      "desc": "The `prominent` prop provides a more pronounced alert by increasing the height and applying a halo to the icon. When applying both `prominent` and `dense` together, the alert will take on the appearance of a normal alert but with the `prominent` icon effects."
+    },
+    "text": {
+      "header": "### Text",
+      "desc": "The `text` prop is a simple alert variant that applies a transparent background and the colors from props `color` and `type` to its text. Similiar to other styled props, `text` can be combined with other props like `dense`, `prominent`, and `outlined` to effectively color the text."
+    },
     "transition": {
       "header": "### Transition",
       "desc": "The `transition` prop allows you to apply a transition to the alert which is viewable when the component hides and shows. You can use any of Vuetifies prebuilt transitions found [here](/framework/transitions#motion) or you may [create your own](/framework/transitions#create-your-own)."

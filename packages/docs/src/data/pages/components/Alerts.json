@@ -33,6 +33,8 @@
             "simple/dismissible",
             "simple/icon",
             "simple/outlined",
+            "simple/prominent",
+            "simple/text",
             "simple/transition",
             "simple/type",
             "complex/twitter"
