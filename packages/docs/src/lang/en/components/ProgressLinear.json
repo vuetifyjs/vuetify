@@ -44,6 +44,10 @@
     "striped": {
       "header": "### Striped",
       "desc": "This applies a striped background over the value portion of the `v-progress-linear`."
+    },
+    "slot": {
+      "header": "### Slots and Scoped Slots",
+      "desc": "The `v-progress-linear` component can be made responsive to user input with the **reactive** prop. You can use a default **scoped slot** or bind a local model to display inside of the progress. If you are looking for advanced features on a linear type component, check out [v-slider](/components/sliders)."
     }
   },
   "props": {

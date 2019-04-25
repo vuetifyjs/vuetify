@@ -2,6 +2,9 @@
 @import './_mixins.sass'
 @import './_variables.scss'
 
++theme(v-progress-linear) using ($material)
+  color: map-deep-get($material, 'text', 'primary')
+
 // Block
 .v-progress-linear
   background: transparent
@@ -32,6 +35,7 @@
   display: flex
   height: 100%
   left: 0
+  justify-content: center
   position: absolute
   top: 0
   width: 100%

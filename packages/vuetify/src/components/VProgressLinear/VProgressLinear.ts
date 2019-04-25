@@ -10,9 +10,10 @@ import {
 import Colorable from '../../mixins/colorable'
 import { factory as PositionableFactory } from '../../mixins/positionable'
 import Proxyable from '../../mixins/proxyable'
+import Themeable from '../../mixins/themeable'
 
 // Utilities
-import { convertToUnit } from '../../util/helpers'
+import { convertToUnit, getSlot } from '../../util/helpers'
 import mixins from '../../util/mixins'
 
 // Types
@@ -22,7 +23,8 @@ import { VNode } from 'vue'
 const baseMixins = mixins(
   Colorable,
   PositionableFactory(['absolute', 'fixed', 'top', 'bottom']),
-  Proxyable
+  Proxyable,
+  Themeable
 )
 
 interface options extends InstanceType<typeof baseMixins> {
@@ -136,7 +138,8 @@ export default baseMixins.extend<options>().extend({
         'v-progress-linear--fixed': this.fixed,
         'v-progress-linear--query': this.query,
         'v-progress-linear--rounded': this.rounded,
-        'v-progress-linear--striped': this.striped
+        'v-progress-linear--striped': this.striped,
+        ...this.themeClasses
       }
     },
     computedTransition (): FunctionalComponentOptions {
@@ -175,9 +178,13 @@ export default baseMixins.extend<options>().extend({
       })
     },
     genContent () {
-      return this.$slots.default && this.$createElement('div', {
+      const slot = getSlot(this, 'default', { value: this.internalLazyValue })
+
+      if (!slot) return null
+
+      return this.$createElement('div', {
         staticClass: 'v-progress-linear__content'
-      }, this.$slots.default)
+      }, slot)
     },
     genProgressBar (name: 'long' | 'short') {
       return this.$createElement('div', this.setBackgroundColor(this.color, {

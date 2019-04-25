@@ -41,7 +41,8 @@
             "rounded",
             "loader",
             "stream",
-            "striped"
+            "striped",
+            "slot"
           ]
         }
       ]
