@@ -205,17 +205,15 @@ export default baseMixins.extend({
         bottom: this.bottom ? 0 : undefined,
         height: this.active ? convertToUnit(this.height) : 0,
         top: this.top ? 0 : undefined
-      }
-    }
-
-    if (this.reactive) {
-      this._g(data, {
+      },
+      on: !this.reactive ? this.$listeners : {
+        ...this.$listeners,
         click: (e: MouseEvent) => {
           const { width } = this.$el.getBoundingClientRect()
 
           this.internalValue = e.offsetX / width * 100
         }
-      })
+      }
     }
 
     return h('div', data, [
