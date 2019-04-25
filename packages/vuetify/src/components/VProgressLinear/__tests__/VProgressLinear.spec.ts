@@ -202,12 +202,27 @@ describe('VProgressLinear.ts', () => {
       }
     })
 
-    wrapper.vm.$el.getBoundingClientRect = () => ({ width: 1000 })
+    const rect = wrapper.vm.$el.getBoundingClientRect()
+
+    wrapper.vm.$el.getBoundingClientRect = () => ({
+      ...rect,
+      width: 1000
+    })
 
     expect(wrapper.vm.internalLazyValue).toBe(0)
 
     wrapper.trigger('click', { offsetX: 200 })
 
     expect(wrapper.vm.internalLazyValue).toBe(20)
+  })
+
+  it('should render a stream component', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        stream: true
+      }
+    })
+
+    expect(wrapper.find('.v-progress-linear__stream')).toBeTruthy()
   })
 })
