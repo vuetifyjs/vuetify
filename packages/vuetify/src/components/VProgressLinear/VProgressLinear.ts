@@ -140,14 +140,10 @@ export default baseMixins.extend({
       return this.indeterminate ? VFadeTransition : VSlideXTransition
     },
     normalizedBufer (): number {
-      if (this.bufferValue < 0) return 0
-      if (this.bufferValue > 100) return 100
-      return parseFloat(this.bufferValue)
+      return this.normalize(this.bufferValue)
     },
     normalizedValue (): number {
-      if (this.internalLazyValue < 0) return 0
-      if (this.internalLazyValue > 100) return 100
-      return parseFloat(this.internalLazyValue)
+      return this.normalize(this.internalLazyValue)
     },
     styles (): object {
       const styles: Record<string, any> = {}
@@ -187,6 +183,11 @@ export default baseMixins.extend({
           [name]: true
         }
       }))
+    },
+    normalize (value: string | number) {
+      if (value < 0) return 0
+      if (value > 100) return 100
+      return parseFloat(value)
     }
   },
 
