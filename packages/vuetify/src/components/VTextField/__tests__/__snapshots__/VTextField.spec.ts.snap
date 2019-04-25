@@ -187,7 +187,7 @@ exports[`VTextField.ts should render component with async loading and custom pro
       <div role="progressbar"
            aria-valuemin="0"
            aria-valuemax="100"
-           class="v-progress-linear"
+           class="v-progress-linear theme--light"
            style="height: 7px;"
       >
         <div class="v-progress-linear__background orange"
@@ -229,7 +229,7 @@ exports[`VTextField.ts should render component with async loading and match snap
       <div role="progressbar"
            aria-valuemin="0"
            aria-valuemax="100"
-           class="v-progress-linear v-progress-linear--absolute"
+           class="v-progress-linear v-progress-linear--absolute theme--light"
            style="height: 2px;"
       >
         <div class="v-progress-linear__background primary"
