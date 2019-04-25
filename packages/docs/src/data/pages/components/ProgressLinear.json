@@ -40,7 +40,8 @@
             "linearCustomColors",
             "rounded",
             "loader",
-            "stream"
+            "stream",
+            "striped"
           ]
         }
       ]

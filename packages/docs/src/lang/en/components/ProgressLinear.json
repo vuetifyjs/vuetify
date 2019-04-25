@@ -40,6 +40,10 @@
     "stream": {
       "header": "### Stream",
       "desc": "The **stream** property works with **buffer-value** to convey to the user that there is some action taking place. You can use any combination of **buffer-value** and **value** to achieve your design."
+    },
+    "striped": {
+      "header": "### Striped",
+      "desc": "This applies a striped background over the value portion of the `v-progress-linear`."
     }
   },
   "props": {
