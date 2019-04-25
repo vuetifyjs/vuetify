@@ -28,6 +28,7 @@
           "type": "examples",
           "value": [
             "simple/border",
+            "simple/colored-border",
             "simple/dismissible",
             "simple/icon",
             "simple/outlined",
