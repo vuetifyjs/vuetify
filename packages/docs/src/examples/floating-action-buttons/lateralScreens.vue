@@ -1,7 +1,23 @@
 <template>
-  <div id="lateral">
+  <v-card id="lateral">
     <v-toolbar dark tabs flat color="indigo">
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-fab-transition>
+        <v-btn
+          :key="activeFab.icon"
+          v-model="fab"
+          :color="activeFab.color"
+          fab
+          dark
+          small
+          absolute
+          bottom
+          right
+        >
+          <v-icon>{{ activeFab.icon }}</v-icon>
+          <v-icon>close</v-icon>
+        </v-btn>
+      </v-fab-transition>
       <v-toolbar-title>Page title</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon>
@@ -23,32 +39,19 @@
         </v-tabs>
       </template>
     </v-toolbar>
-    <v-tabs-items v-model="tabs">
-      <v-tab-item
-        v-for="content in ['one', 'two', 'three']"
-        :key="content"
-        :value="content"
-      >
-        <v-card height="200px" flat>
-        </v-card>
-      </v-tab-item>
-    </v-tabs-items>
-    <v-fab-transition>
-      <v-btn
-        :key="activeFab.icon"
-        v-model="fab"
-        :color="activeFab.color"
-        dark
-        fab
-        fixed
-        bottom
-        left
-      >
-        <v-icon>{{ activeFab.icon }}</v-icon>
-        <v-icon>close</v-icon>
-      </v-btn>
-    </v-fab-transition>
-  </div>
+    <v-card-text>
+      <v-tabs-items v-model="tabs">
+        <v-tab-item
+          v-for="content in ['one', 'two', 'three']"
+          :key="content"
+          :value="content"
+        >
+          <v-card height="200px" flat>
+          </v-card>
+        </v-tab-item>
+      </v-tabs-items>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
