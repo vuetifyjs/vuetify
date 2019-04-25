@@ -137,6 +137,7 @@ export default baseMixins.extend({
         'v-progress-linear--absolute': this.absolute,
         'v-progress-linear--fixed': this.fixed,
         'v-progress-linear--query': this.query,
+        'v-progress-linear--reactive': this.reactive,
         'v-progress-linear--rounded': this.rounded,
         'v-progress-linear--striped': this.striped,
         ...this.themeClasses
