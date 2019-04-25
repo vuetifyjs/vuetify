@@ -33,13 +33,6 @@
   ],
   "palladium": [
     {
-      "name": "Eikos Partners",
-      "logo": "backers/eikos-partners.png",
-      "href": "http://www.eikospartners.com/",
-      "type": "Patron",
-      "pledge": "Palladium ($250)"
-    },
-    {
       "name": "rateGenius",
       "href": "https://application.rategenius.com/",
       "logo": "backers/rate-genius.png",
@@ -136,13 +129,6 @@
       "name": "Custom Essay Meister",
       "href": "https://www.customessaymeister.com/",
       "logo": "backers/essay-meister.svg",
-      "type": "Patron",
-      "pledge": "Gold ($50)"
-    },
-    {
-      "name": "Datantify",
-      "href": "https://datantify.com/",
-      "logo": "backers/datantify.png",
       "type": "Patron",
       "pledge": "Gold ($50)"
     },
