@@ -27,14 +27,8 @@ const baseMixins = mixins(
   Themeable
 )
 
-interface options extends InstanceType<typeof baseMixins> {
-  $refs: {
-    buffer: HTMLElement
-  }
-}
-
 /* @vue/component */
-export default baseMixins.extend<options>().extend({
+export default baseMixins.extend({
   name: 'v-progress-linear',
 
   props: {
