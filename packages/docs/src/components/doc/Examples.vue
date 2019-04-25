@@ -40,7 +40,6 @@
         return this.value.map(example => {
           const path = example === Object(example) ? example.file : example
           const file = path.split('/').pop()
-          console.log(file)
           return {
             header: `${this.namespace}.${this.page}.examples.${file}.header`,
             desc: `${this.namespace}.${this.page}.examples.${file}.desc`
