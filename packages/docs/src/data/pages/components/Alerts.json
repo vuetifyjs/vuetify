@@ -27,6 +27,7 @@
         {
           "type": "examples",
           "value": [
+            "simple/border",
             "simple/dismissible",
             "simple/icon",
             "simple/outlined",
