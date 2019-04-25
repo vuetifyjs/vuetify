@@ -29,6 +29,7 @@
           "value": [
             "simple/border",
             "simple/colored-border",
+            "simple/dense",
             "simple/dismissible",
             "simple/icon",
             "simple/outlined",
