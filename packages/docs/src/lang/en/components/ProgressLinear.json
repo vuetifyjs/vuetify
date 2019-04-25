@@ -64,5 +64,8 @@
     "stream": "An alternative style for portraying loading that works in tandem with **buffer-value**",
     "striped": "Adds a stripe background to the filled portion of the progress component",
     "value": "Components.ProgressCircular.props.value"
+  },
+  "scopedSlots": {
+    "default": "Provides the current value of the component"
   }
 }
