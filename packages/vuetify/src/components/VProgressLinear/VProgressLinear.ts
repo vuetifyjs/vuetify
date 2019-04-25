@@ -87,6 +87,12 @@ export default baseMixins.extend({
     __cachedBarType (): VNode {
       return this.indeterminate ? this.__cachedIndeterminate : this.__cachedDeterminate
     },
+    __cachedBuffer (): VNode {
+      return this.$createElement('div', {
+        staticClass: 'v-progress-linear__buffer',
+        style: this.styles
+      })
+    },
     __cachedDeterminate (): VNode {
       return this.$createElement('div', this.setBackgroundColor(this.color, {
         staticClass: `v-progress-linear__determinate`,
@@ -161,12 +167,6 @@ export default baseMixins.extend({
   },
 
   methods: {
-    genBuffer () {
-      return this.$createElement('div', {
-        staticClass: 'v-progress-linear__buffer',
-        style: this.styles
-      })
-    },
     genContent () {
       const slot = getSlot(this, 'default', { value: this.internalLazyValue })
 
@@ -221,7 +221,7 @@ export default baseMixins.extend({
     return h('div', data, [
       this.__cachedStream,
       this.__cachedBackground,
-      this.genBuffer(),
+      this.__cachedBuffer,
       this.__cachedBar,
       this.genContent()
     ])
