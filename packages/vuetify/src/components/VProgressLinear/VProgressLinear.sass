@@ -1,5 +1,4 @@
 @import '../../styles/styles.sass'
-@import './_mixins.sass'
 @import './_variables.scss'
 
 +theme(v-progress-linear) using ($material)
@@ -119,3 +118,51 @@
       animation: query-short
       animation-duration: 2s
       animation-iteration-count: infinite
+
+@keyframes indeterminate
+  0%
+    left: -90%
+    right: 100%
+  60%
+    left: -90%
+    right: 100%
+  100%
+    left: 100%
+    right: -35%
+
+@keyframes indeterminate-short
+  0%
+    left: -200%
+    right: 100%
+  60%
+    left: 107%
+    right: -8%
+  100%
+    left: 107%
+    right: -8%
+
+@keyframes query
+  0%
+    right: -90%
+    left: 100%
+  60%
+    right: -90%
+    left: 100%
+  100%
+    right: 100%
+    left: -35%
+
+@keyframes query-short
+  0%
+    right: -200%
+    left: 100%
+  60%
+    right: 107%
+    left: -8%
+  100%
+    right: 107%
+    left: -8%
+
+@keyframes stream
+  to
+    transform: translateX(-8px)
