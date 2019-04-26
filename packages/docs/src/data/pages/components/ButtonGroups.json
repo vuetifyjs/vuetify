@@ -31,8 +31,8 @@
         {
           "type": "examples",
           "value": [
-            "appBar",
-            "qwerty"
+            "intermediate/appBar",
+            "intermediate/qwerty"
           ]
         }
       ]
