@@ -24,6 +24,7 @@
       <v-container grid-list-md>
         <v-slider v-model="minWidth" label="Min width" min="10" max="300"></v-slider>
         <v-slider v-model="minHeight" label="Min height" min="10" max="300"></v-slider>
+        <v-slider v-model="elevation" label="Elevation" min="0" max="24"></v-slider>
         <v-layout wrap>
           <v-flex
             xs12
@@ -72,7 +73,8 @@
       types: ['block', 'depressed', 'fab', 'outline', 'round', 'text'],
       text: 'Customize me',
       minWidth: undefined,
-      minHeight: undefined
+      minHeight: undefined,
+      elevation: 2
     }),
 
     computed: {
@@ -86,7 +88,8 @@
       options () {
         const options = {
           color: this.color,
-          [this.size]: true
+          [this.size]: true,
+          elevation: this.elevation
         }
 
         if (this.type) {
