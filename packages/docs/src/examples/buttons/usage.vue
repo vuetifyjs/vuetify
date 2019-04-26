@@ -22,6 +22,8 @@
 
     <v-flex xs12>
       <v-container grid-list-md>
+        <v-slider v-model="minWidth" label="Min width" min="10" max="300"></v-slider>
+        <v-slider v-model="minHeight" label="Min height" min="10" max="300"></v-slider>
         <v-layout wrap>
           <v-flex
             xs12
@@ -68,7 +70,9 @@
       sizes: ['x-small', 'small', 'medium', 'large', 'x-large'],
       type: [],
       types: ['block', 'depressed', 'fab', 'outline', 'round', 'text'],
-      text: 'Customize me'
+      text: 'Customize me',
+      minWidth: undefined,
+      minHeight: undefined
     }),
 
     computed: {
@@ -87,6 +91,13 @@
 
         if (this.type) {
           for (const type of this.type) options[type] = true
+        }
+
+        if (this.minWidth) {
+          options.minWidth = this.minWidth
+        }
+        if (this.minHeight) {
+          options.minHeight = this.minHeight
         }
 
         return options
