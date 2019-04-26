@@ -28,6 +28,26 @@
     "linearCustomColors": {
       "header": "### Custom colors",
       "desc": "You can also set the color using the props `color` and `background-color`."
+    },
+    "rounded": {
+      "header": "### Rounded",
+      "desc": "The **rounded** prop is an alternative style that adds a border radius to the progress component."
+    },
+    "loader": {
+      "header": "### Toolbar loader",
+      "desc": "Using the **absolute** prop we are able to position the `v-progress-linear` component at the bottom of the `v-toolbar` one. We also use the **active** prop which allows us to control the visibility of the progress."
+    },
+    "stream": {
+      "header": "### Stream",
+      "desc": "The **stream** property works with **buffer-value** to convey to the user that there is some action taking place. You can use any combination of **buffer-value** and **value** to achieve your design."
+    },
+    "striped": {
+      "header": "### Striped",
+      "desc": "This applies a striped background over the value portion of the `v-progress-linear`."
+    },
+    "slot": {
+      "header": "### Slots and Scoped Slots",
+      "desc": "The `v-progress-linear` component will be responsive to user input when using **v-model**. You can use a default **scoped slot** or bind a local model to display inside of the progress. If you are looking for advanced features on a linear type component, check out [v-slider](/components/sliders)."
     }
   },
   "props": {
@@ -38,7 +58,13 @@
     "fill": "Components.ProgressCircular.props.fill",
     "indeterminate": "Components.ProgressCircular.props.indeterminate",
     "query": "Animates like **indeterminate** prop but inverse",
+    "rounded": "Adds a border radius to the progress component",
     "size": "Components.ProgressCircular.props.size",
+    "stream": "An alternative style for portraying loading that works in tandem with **buffer-value**",
+    "striped": "Adds a stripe background to the filled portion of the progress component",
     "value": "Components.ProgressCircular.props.value"
+  },
+  "scopedSlots": {
+    "default": "Provides the current value of the component"
   }
 }
