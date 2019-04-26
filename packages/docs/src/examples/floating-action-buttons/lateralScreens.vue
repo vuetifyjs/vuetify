@@ -5,7 +5,6 @@
       <v-fab-transition>
         <v-btn
           :key="activeFab.icon"
-          v-model="fab"
           :color="activeFab.color"
           fab
           dark
@@ -15,7 +14,6 @@
           right
         >
           <v-icon>{{ activeFab.icon }}</v-icon>
-          <v-icon>close</v-icon>
         </v-btn>
       </v-fab-transition>
       <v-toolbar-title>Page title</v-toolbar-title>
