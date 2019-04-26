@@ -161,7 +161,8 @@ export default {
           avatar,
           disabled,
           ripple: true,
-          value
+          value,
+          color: this.color
         }
       }
 

@@ -78,8 +78,7 @@ export default mixins(
     }
 
     data.attrs = Object.assign({}, data.attrs, this.$attrs)
-
-    return h('div', this.setTextColor(!this.disabled && this.color, {
+    return h('div', this.setTextColor(!this.disabled && this.isActive && this.color, {
       class: this.listClasses,
       attrs: {
         disabled: this.disabled,
