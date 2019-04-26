@@ -18,6 +18,9 @@
       <span v-else>
         {{ text }}
       </span>
+      <template v-slot:loader v-if="customLoad">
+        Loading...
+      </template>
     </v-btn>
 
     <v-flex xs12>
@@ -57,6 +60,22 @@
               multiple
             ></v-select>
           </v-flex>
+          <v-flex
+            xs6
+          >
+            <v-checkbox
+              v-model="loading"
+              label="Loading"
+            ></v-checkbox>
+          </v-flex>
+          <v-flex
+            xs6
+          >
+            <v-checkbox
+              v-model="customLoad"
+              label="Custom loader"
+            ></v-checkbox>
+          </v-flex>
         </v-layout>
       </v-container>
     </v-flex>
@@ -74,7 +93,9 @@
       text: 'Customize me',
       minWidth: undefined,
       minHeight: undefined,
-      elevation: 2
+      elevation: 2,
+      loading: false,
+      customLoad: false
     }),
 
     computed: {
@@ -89,7 +110,8 @@
         const options = {
           color: this.color,
           [this.size]: true,
-          elevation: this.elevation
+          elevation: this.elevation,
+          loading: this.loading
         }
 
         if (this.type) {
