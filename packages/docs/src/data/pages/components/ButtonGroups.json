@@ -32,8 +32,7 @@
           "type": "examples",
           "value": [
             "appBar",
-            "qwerty",
-            "togglePictures"
+            "qwerty"
           ]
         }
       ]
