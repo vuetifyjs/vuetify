@@ -42,6 +42,7 @@ export default mixins(
         'v-card--flat': this.flat,
         'v-card--hover': this.hover,
         'v-card--link': this.isLink,
+        'v-card--loading': this.loading,
         'v-card--disabled': this.loading || this.disabled,
         'v-card--outlined': this.outlined,
         'v-card--raised': this.raised,
