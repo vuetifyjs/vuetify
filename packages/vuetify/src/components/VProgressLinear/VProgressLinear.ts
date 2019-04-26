@@ -58,7 +58,6 @@ export default baseMixins.extend({
     },
     indeterminate: Boolean,
     query: Boolean,
-    reactive: Boolean,
     rounded: Boolean,
     stream: Boolean,
     striped: Boolean,
@@ -152,6 +151,9 @@ export default baseMixins.extend({
     normalizedValue (): number {
       return this.normalize(this.internalLazyValue)
     },
+    reactive (): boolean {
+      return Boolean(this.$listeners.change)
+    },
     styles (): object {
       const styles: Record<string, any> = {}
 
@@ -177,6 +179,15 @@ export default baseMixins.extend({
         staticClass: 'v-progress-linear__content'
       }, slot)
     },
+    genListeners () {
+      const listeners = this.$listeners
+
+      if (this.reactive) {
+        listeners.click = this.onClick
+      }
+
+      return listeners
+    },
     genProgressBar (name: 'long' | 'short') {
       return this.$createElement('div', this.setBackgroundColor(this.color, {
         staticClass: 'v-progress-linear__indeterminate',
@@ -184,6 +195,13 @@ export default baseMixins.extend({
           [name]: true
         }
       }))
+    },
+    onClick (e: MouseEvent) {
+      if (!this.reactive) return
+
+      const { width } = this.$el.getBoundingClientRect()
+
+      this.internalValue = e.offsetX / width * 100
     },
     normalize (value: string | number) {
       if (value < 0) return 0
@@ -207,14 +225,7 @@ export default baseMixins.extend({
         height: this.active ? convertToUnit(this.height) : 0,
         top: this.top ? 0 : undefined
       },
-      on: !this.reactive ? this.$listeners : {
-        ...this.$listeners,
-        click: (e: MouseEvent) => {
-          const { width } = this.$el.getBoundingClientRect()
-
-          this.internalValue = e.offsetX / width * 100
-        }
-      }
+      on: this.genListeners()
     }
 
     return h('div', data, [

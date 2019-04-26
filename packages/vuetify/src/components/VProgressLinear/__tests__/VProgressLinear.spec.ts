@@ -196,10 +196,13 @@ describe('VProgressLinear.ts', () => {
   })
 
   it('should respond to click events', () => {
+    const change = jest.fn()
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
-        reactive: true
-      }
+        value: 0
+      },
+      listeners: { change }
     })
 
     const rect = wrapper.vm.$el.getBoundingClientRect()
