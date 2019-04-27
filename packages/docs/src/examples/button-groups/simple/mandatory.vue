@@ -26,7 +26,7 @@
   export default {
     data () {
       return {
-        toggle_exclusive: 2
+        toggle_exclusive: undefined
       }
     }
   }
