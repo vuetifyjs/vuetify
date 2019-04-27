@@ -27,10 +27,10 @@
         {
           "type": "examples",
           "value": [
-            "overlap",
-            "inline",
-            "icon",
-            "visibility"
+            "simple/overlap",
+            "simple/inline",
+            "simple/icon",
+            "intermediate/visibility"
           ]
         }
       ]
