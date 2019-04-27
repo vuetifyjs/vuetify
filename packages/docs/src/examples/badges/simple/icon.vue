@@ -2,7 +2,7 @@
   <div class="text-xs-center">
     <v-badge left color="purple">
       <template v-slot:badge>
-        <v-icon dark small>mdi-adjust</v-icon>
+        <v-icon dark>mdi-adjust</v-icon>
       </template>
       <span>
         MDI icon
@@ -13,7 +13,7 @@
 
     <v-badge color="orange">
       <template v-slot:badge>
-        <v-icon dark small>fas fa-fighter-jet</v-icon>
+        <v-icon dark>fas fa-fighter-jet</v-icon>
       </template>
       <span>
         Font Awesome icon
