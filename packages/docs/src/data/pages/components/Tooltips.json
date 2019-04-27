@@ -31,8 +31,8 @@
         {
           "type": "examples",
           "value": [
-            "alignment",
-            "visibility"
+            "simple/alignment",
+            "simple/visibility"
           ]
         }
       ]
