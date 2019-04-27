@@ -16,6 +16,10 @@
     "rounded": {
       "header": "### Rounded buttons",
       "desc": "You can make `VBtnToggle` round using the `rounded` prop."
+    },
+    "mandatory": {
+      "header": "### Mandatory",
+      "desc": "`mandatory` `VBtnToggle` always has value."
     }
   },
   "props": {
