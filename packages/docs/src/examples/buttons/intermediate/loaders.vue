@@ -48,6 +48,17 @@
         </span>
       </template>
     </v-btn>
+
+    <v-btn
+      :loading="loading5"
+      :disabled="loading5"
+      color="blue-grey"
+      class="mx-2 white--text"
+      fab
+      @click="loader = 'loading5'"
+    >
+      <v-icon dark>cloud_upload</v-icon>
+    </v-btn>
   </div>
 </template>
 
@@ -98,7 +109,8 @@
         loading: false,
         loading2: false,
         loading3: false,
-        loading4: false
+        loading4: false,
+        loading5: false
       }
     },
     watch: {
