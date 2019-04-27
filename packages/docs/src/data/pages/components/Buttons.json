@@ -40,11 +40,11 @@
             "simple/dropdown",
             "simple/icon",
             "simple/floating",
-            "simple/loaders",
             "simple/sizing",
             "simple/outline",
             "simple/round",
-            "simple/block"
+            "simple/block",
+            "intermediate/loaders"
           ]
         }
       ]
