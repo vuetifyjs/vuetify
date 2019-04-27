@@ -27,9 +27,9 @@
         {
           "type": "examples",
           "value": [
-            "profile",
-            "advanced",
-            "playground"
+            "simple/variations",
+            "intermediate/profile",
+            "complex/advanced"
           ]
         }
       ]
