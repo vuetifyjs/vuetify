@@ -33,6 +33,7 @@
         {
           "type": "examples",
           "value": [
+            "simple/anatomy",
             "simple/dense",
             "simple/prominent",
             "simple/img",

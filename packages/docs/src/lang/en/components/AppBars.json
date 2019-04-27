@@ -3,6 +3,10 @@
   "headerText": "The `v-app-bar` component is pivotal to any gui, as it generally is the primary source of site navigation. The toolbar component works great in conjunction with a navigation drawer for hiding links and presenting an activator to open the sidebar on mobile.",
   "examples": {
     "usage": {
+      "desc": "The `VAppBar` component is used for application-wide actions and information."
+    },
+    "anatomy": {
+      "header": "### Anatomy",
       "desc": "An **app-bar** is composed of 5 parts. The **container**, **navigation icon** (optional), **title** (optional), **action items** (optional) and an **overflow menu** (optional)"
     },
     "dense": {
