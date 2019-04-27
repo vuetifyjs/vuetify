@@ -41,7 +41,8 @@
             "simple/elevate-on-scroll",
             "simple/inverted-scroll",
             "intermediate/scroll-threshold",
-            "complex/img-fade"
+            "complex/img-fade",
+            "complex/menu"
           ]
         }
       ]
