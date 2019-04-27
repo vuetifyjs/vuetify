@@ -35,6 +35,7 @@ export default Vue.extend<colorable>().extend({
 
       return this.$slots.progress || this.$createElement(VProgressLinear, {
         props: {
+          absolute: true,
           color: (this.loading === true || this.loading === '')
             ? (this.color || 'primary')
             : this.loading,

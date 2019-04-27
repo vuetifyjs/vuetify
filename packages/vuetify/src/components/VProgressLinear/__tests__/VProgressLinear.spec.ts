@@ -194,4 +194,38 @@ describe('VProgressLinear.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
     expect(wrapper.findAll('.foobar')).toHaveLength(1)
   })
+
+  it('should respond to click events', () => {
+    const change = jest.fn()
+    const wrapper = mountFunction({
+      attachToDocument: true,
+      propsData: {
+        value: 0
+      },
+      listeners: { change }
+    })
+
+    const rect = wrapper.vm.$el.getBoundingClientRect()
+
+    wrapper.vm.$el.getBoundingClientRect = () => ({
+      ...rect,
+      width: 1000
+    })
+
+    expect(wrapper.vm.internalLazyValue).toBe(0)
+
+    wrapper.trigger('click', { offsetX: 200 })
+
+    expect(wrapper.vm.internalLazyValue).toBe(20)
+  })
+
+  it('should render a stream component', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        stream: true
+      }
+    })
+
+    expect(wrapper.find('.v-progress-linear__stream')).toBeTruthy()
+  })
 })

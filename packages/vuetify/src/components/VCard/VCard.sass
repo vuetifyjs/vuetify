@@ -29,14 +29,10 @@
 
 // Element
 .v-card__progress
-  position: absolute
   top: 0
   left: 0
   right: 0
   overflow: hidden
-
-  > .v-progress-linear
-    margin: 0
 
 .v-card__title
   align-items: center
@@ -109,6 +105,9 @@
   opacity: 0.6
   pointer-events: none
   user-select: none
+
+.v-card--loading
+  overflow: hidden
 
 .v-card--outlined
   box-shadow: none

@@ -27,12 +27,27 @@
         {
           "type": "examples",
           "value": [
-            "closable",
-            "icon",
-            "transition",
-            "outline",
-            "playground"
+            "simple/border",
+            "simple/colored-border",
+            "simple/dense",
+            "simple/dismissible",
+            "simple/icon",
+            "simple/outlined",
+            "simple/prominent",
+            "simple/text",
+            "simple/transition",
+            "simple/type",
+            "complex/twitter"
           ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "playground",
+          "value": "playground"
         }
       ]
     },
