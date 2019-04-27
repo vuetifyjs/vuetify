@@ -20,6 +20,10 @@
     "mandatory": {
       "header": "### Mandatory",
       "desc": "`mandatory` `VBtnToggle` always has value."
+    },
+    "multiple": {
+      "header": "### Multiple",
+      "desc": "`multiple` `VBtnToggle` allows user to select mutiple variants and returns value as an array."
     }
   },
   "props": {

@@ -33,6 +33,7 @@
           "value": [
             "simple/rounded",
             "simple/mandatory",
+            "simple/multiple",
             "intermediate/appBar",
             "intermediate/qwerty"
           ]
