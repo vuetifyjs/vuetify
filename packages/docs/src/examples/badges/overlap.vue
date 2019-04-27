@@ -6,10 +6,7 @@
       overlap
     >
       <template v-slot:badge>
-        <v-icon
-          dark
-          small
-        >
+        <v-icon dark>
           done
         </v-icon>
       </template>
@@ -26,10 +23,7 @@
       color="orange"
     >
       <template v-slot:badge>
-        <v-icon
-          dark
-          small
-        >
+        <v-icon dark>
           notifications
         </v-icon>
       </template>
