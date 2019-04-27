@@ -35,8 +35,8 @@
           "value": [
             "simple/small",
             "simple/displayAnimation",
-            "intermediate/lateralScreens",
-            "intermediate/speedDial"
+            "intermediate/speedDial",
+            "complex/lateralScreens"
           ]
         }
       ]
