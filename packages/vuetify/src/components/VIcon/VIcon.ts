@@ -176,7 +176,7 @@ const VIcon = mixins(
     const icon = this.getIcon()
 
     if (typeof icon === 'string') {
-      if (icon.startsWith('M') && icon.endsWith('Z')) {
+      if (/^[mzlhvcsqta]\s*[-+.0-9][^mlhvzcsqta]+/i.test(icon) && /[\dz]$/i.test(icon) && icon.length > 4) {
         return this.renderSvgIcon(icon, h)
       }
       return this.renderFontIcon(icon, h)
