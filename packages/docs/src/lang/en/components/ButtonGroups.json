@@ -12,6 +12,10 @@
     "qwerty": {
       "header": "### Selected action",
       "desc": "Group similar actions and design your own WYSIWYG component."
+    },
+    "rounded": {
+      "header": "### Rounded buttons",
+      "desc": "You can make `VBtnToggle` round using the `rounded` prop."
     }
   },
   "props": {
