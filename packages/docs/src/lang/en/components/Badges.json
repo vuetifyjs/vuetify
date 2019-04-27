@@ -20,6 +20,10 @@
     "visibility": {
       "header": "### Visibility",
       "desc": "The visibility of badges can be controlled using `v-model`."
+    },
+    "hover": {
+      "header": "### Show-on-hover",
+      "desc": "You can do many things with visibility control, for example, show badge on hover."
     }
   },
   "props": {

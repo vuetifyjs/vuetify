@@ -30,7 +30,8 @@
             "simple/overlap",
             "simple/inline",
             "simple/icon",
-            "intermediate/visibility"
+            "intermediate/visibility",
+            "intermediate/hover"
           ]
         }
       ]
