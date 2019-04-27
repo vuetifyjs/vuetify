@@ -22,6 +22,10 @@ function isFontAwesome5 (iconType: string): boolean {
   return ['fas', 'far', 'fal', 'fab'].some(val => iconType.includes(val))
 }
 
+function isSvgPath (icon: string): boolean {
+  return (/^[mzlhvcsqta]\s*[-+.0-9][^mlhvzcsqta]+/i.test(icon) && /[\dz]$/i.test(icon) && icon.length > 4)
+}
+
 const VIcon = mixins(
   Colorable,
   Sizeable,
@@ -176,7 +180,7 @@ const VIcon = mixins(
     const icon = this.getIcon()
 
     if (typeof icon === 'string') {
-      if (/^[mzlhvcsqta]\s*[-+.0-9][^mlhvzcsqta]+/i.test(icon) && /[\dz]$/i.test(icon) && icon.length > 4) {
+      if (isSvgPath(icon)) {
         return this.renderSvgIcon(icon, h)
       }
       return this.renderFontIcon(icon, h)
