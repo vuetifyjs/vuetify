@@ -35,9 +35,17 @@
             "simple/weekly",
             "simple/daily",
             "intermediate/slots",
-            "intermediate/events",
-            "complex/features"
+            "intermediate/events"
           ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "playground",
+          "value": "playground"
         }
       ]
     },
