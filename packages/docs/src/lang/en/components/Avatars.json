@@ -5,6 +5,10 @@
     "usage": {
       "desc": "Avatars in their simplist form display content within a circular container."
     },
+    "default": {
+      "header": "### Default slot",
+      "desc": "The `v-avatar` default slot will accept the `v-icon` component, an image, or text. Mix and match these with other props to create something unique."
+    },
     "profile": {
       "header": "### Profile Card",
       "desc": "Using the **tile** prop, we can create a sleek hardlined profile card."
@@ -12,10 +16,6 @@
     "advanced": {
       "header": "### Advanced usage",
       "desc": "Combining an avatar with other components allows you to build beautiful user interfaces right out of the box."
-    },
-    "variations": {
-      "header": "### Icon and text",
-      "desc": "An avatar accepts the `v-icon` component, an image or text. Mix and match functionality to create something unique."
     }
   }
 }
