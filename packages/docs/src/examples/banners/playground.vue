@@ -22,7 +22,9 @@
           :icon-color="iconColor"
           :elevation="elevation"
         >
-          One line message text string with two actions on tablet / Desktop
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis magnam necessitatibus possimus sapiente laboriosam ducimus atque maxime quibusdam, facilis velit assumenda, quod nisi aliquid corrupti maiores doloribus soluta optio blanditiis.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis magnam necessitatibus possimus sapiente laboriosam ducimus atque maxime quibusdam, facilis velit assumenda, quod nisi aliquid corrupti maiores doloribus soluta optio blanditiis.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis magnam necessitatibus possimus sapiente laboriosam ducimus atque maxime quibusdam, facilis velit assumenda, quod nisi aliquid corrupti maiores doloribus soluta optio blanditiis.
 
           <template #actions>
             <v-btn
