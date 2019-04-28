@@ -27,9 +27,11 @@
         {
           "type": "examples",
           "value": [
+            "simple/bottom",
+            "simple/left",
             "simple/overlap",
-            "simple/inline",
             "simple/icon",
+            "simple/inline",
             "intermediate/visibility",
             "intermediate/hover"
           ]
