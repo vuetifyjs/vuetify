@@ -31,9 +31,17 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "simple/anatomy",
             "simple/dense",
             "simple/prominent",
             "simple/img",
