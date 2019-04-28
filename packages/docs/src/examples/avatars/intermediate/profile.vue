@@ -7,6 +7,7 @@
     <v-layout>
       <v-flex shrink>
         <v-avatar
+          class="profile"
           :size="$vuetify.breakpoint.smAndUp ? 164 : 128"
           color="grey"
           tile
@@ -38,3 +39,10 @@
     </v-layout>
   </v-card>
 </template>
+
+<style>
+.profile {
+  position: absolute;
+  z-index: 1;
+}
+</style>
