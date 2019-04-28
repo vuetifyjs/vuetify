@@ -27,6 +27,8 @@
         {
           "type": "examples",
           "value": [
+            "simple/size",
+            "simple/tile",
             "intermediate/default",
             "intermediate/profile",
             "complex/advanced"
