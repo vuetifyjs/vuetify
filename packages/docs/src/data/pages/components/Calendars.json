@@ -32,11 +32,11 @@
         {
           "type": "examples",
           "value": [
-            "slots",
-            "events",
-            "weekly",
-            "daily",
-            "features"
+            "simple/weekly",
+            "simple/daily",
+            "intermediate/slots",
+            "intermediate/events",
+            "complex/features"
           ]
         }
       ]
