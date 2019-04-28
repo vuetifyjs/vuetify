@@ -33,7 +33,8 @@
             "simple/icon",
             "simple/inline",
             "simple/visibility",
-            "intermediate/hover"
+            "intermediate/hover",
+            "complex/dynamic"
           ]
         }
       ]

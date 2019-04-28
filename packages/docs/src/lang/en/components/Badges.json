@@ -32,6 +32,10 @@
     "hover": {
       "header": "### Show-on-hover",
       "desc": "You can do many things with visibility control, for example, show badge on hover."
+    },
+    "dynamic": {
+      "header": "### Dynamic notifications",
+      "desc": "You can incorporate badges with dynamic content to make things such as a notification system."
     }
   },
   "props": {
