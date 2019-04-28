@@ -32,7 +32,7 @@
             "simple/overlap",
             "simple/icon",
             "simple/inline",
-            "intermediate/visibility",
+            "simple/visibility",
             "intermediate/hover"
           ]
         }
