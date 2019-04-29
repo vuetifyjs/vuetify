@@ -1,6 +1,5 @@
+// Styles
 import './VMenu.sass'
-
-import Vue from 'vue'
 
 // Mixins
 import Delayable from '../../mixins/delayable'
@@ -15,15 +14,29 @@ import Themeable from '../../mixins/themeable'
 import ClickOutside from '../../directives/click-outside'
 import Resize from '../../directives/resize'
 
-// Helpers
+// Utilities
+import mixins from '../../util/mixins'
 import { convertToUnit, keyCodes } from '../../util/helpers'
 import ThemeProvider from '../../util/ThemeProvider'
 
+// Types
+import { VNode, VNodeDirective, VNodeData } from 'vue'
+
+const baseMixins = mixins(
+  Dependent,
+  Delayable,
+  Detachable,
+  Menuable,
+  Returnable,
+  Toggleable,
+  Themeable
+)
+
 /* @vue/component */
-export default Vue.extend({
+export default baseMixins.extend({
   name: 'v-menu',
 
-  provide () {
+  provide (): object {
     return {
       // Pass theme through to default slot
       theme: this.theme
@@ -34,16 +47,6 @@ export default Vue.extend({
     ClickOutside,
     Resize
   },
-
-  mixins: [
-    Dependent,
-    Delayable,
-    Detachable,
-    Menuable,
-    Returnable,
-    Toggleable,
-    Themeable
-  ],
 
   props: {
     auto: Boolean,
@@ -58,7 +61,10 @@ export default Vue.extend({
     disabled: Boolean,
     disableKeys: Boolean,
     fullWidth: Boolean,
-    maxHeight: { default: 'auto' },
+    maxHeight: {
+      type: [Number, String],
+      default: 'auto'
+    },
     openOnClick: {
       type: Boolean,
       default: true
@@ -82,37 +88,38 @@ export default Vue.extend({
       defaultOffset: 8,
       hasJustFocused: false,
       listIndex: -1,
-      resizeTimeout: null,
-      tiles: []
+      resizeTimeout: 0,
+      selectedIndex: null as null | number,
+      tiles: [] as HTMLElement[]
     }
   },
 
   computed: {
-    calculatedLeft () {
+    calculatedLeft (): string {
       const menuWidth = Math.max(this.dimensions.content.width, parseFloat(this.calculatedMinWidth))
 
-      if (!this.auto) return this.calcLeft(menuWidth)
+      if (!this.auto) return this.calcLeft(menuWidth) || '0'
 
-      return `${this.calcXOverflow(this.calcLeftAuto(), menuWidth)}px`
+      return convertToUnit(this.calcXOverflow(this.calcLeftAuto(), menuWidth)) || '0'
     },
-    calculatedMaxHeight () {
-      return this.auto ? '200px' : convertToUnit(this.maxHeight)
+    calculatedMaxHeight (): string {
+      const height = this.auto
+        ? '200px'
+        : convertToUnit(this.maxHeight)
+
+      return height || '0'
     },
-    calculatedMaxWidth () {
-      return isNaN(this.maxWidth)
-        ? this.maxWidth
-        : `${this.maxWidth}px`
+    calculatedMaxWidth (): string {
+      return convertToUnit(this.maxWidth) || '0'
     },
-    calculatedMinWidth () {
+    calculatedMinWidth (): string {
       if (this.minWidth) {
-        return isNaN(this.minWidth)
-          ? this.minWidth
-          : `${this.minWidth}px`
+        return convertToUnit(this.minWidth) || '0'
       }
 
       const minWidth = Math.min(
         this.dimensions.activator.width +
-        this.nudgeWidth +
+        Number(this.nudgeWidth) +
         (this.auto ? 16 : 0),
         Math.max(this.pageWidth - 24, 0)
       )
@@ -121,17 +128,19 @@ export default Vue.extend({
         ? minWidth
         : parseInt(this.calculatedMaxWidth)
 
-      return `${Math.min(
+      return convertToUnit(Math.min(
         calculatedMaxWidth,
         minWidth
-      )}px`
+      )) || '0'
     },
-    calculatedTop () {
-      if (!this.auto || this.isAttached) return this.calcTop()
+    calculatedTop (): string {
+      const top = !this.auto
+        ? this.calcTop()
+        : convertToUnit(this.calcYOverflow(this.calculatedTopAuto))
 
-      return `${this.calcYOverflow(this.calculatedTopAuto)}px`
+      return top || '0'
     },
-    styles () {
+    styles (): object {
       return {
         maxHeight: this.calculatedMaxHeight,
         minWidth: this.calculatedMinWidth,
@@ -188,7 +197,7 @@ export default Vue.extend({
     },
     calcScrollPosition () {
       const $el = this.$refs.content
-      const activeTile = $el.querySelector('.v-list-item--active')
+      const activeTile = $el.querySelector('.v-list-item--active') as HTMLElement
       const maxScrollTop = $el.scrollHeight - $el.offsetHeight
 
       return activeTile
@@ -196,13 +205,11 @@ export default Vue.extend({
         : $el.scrollTop
     },
     calcLeftAuto () {
-      if (this.isAttached) return 0
-
       return parseInt(this.dimensions.activator.left - this.defaultOffset * 2)
     },
     calcTopAuto () {
       const $el = this.$refs.content
-      const activeTile = $el.querySelector('.v-list-item--active')
+      const activeTile = $el.querySelector('.v-list-item--active') as HTMLElement | null
 
       if (!activeTile) {
         this.selectedIndex = null
@@ -215,11 +222,11 @@ export default Vue.extend({
       this.selectedIndex = Array.from(this.tiles).indexOf(activeTile)
 
       const tileDistanceFromMenuTop = activeTile.offsetTop - this.calcScrollPosition()
-      const firstTileOffsetTop = $el.querySelector('.v-list-item').offsetTop
+      const firstTileOffsetTop = ($el.querySelector('.v-list-item') as HTMLElement).offsetTop
 
       return this.computedTop - tileDistanceFromMenuTop - firstTileOffsetTop - 1
     },
-    changeListIndex (e) {
+    changeListIndex (e: KeyboardEvent) {
       // For infinite scroll and autocomplete, re-evaluate children
       this.getTiles()
 
@@ -235,12 +242,14 @@ export default Vue.extend({
       // One of the conditions was met, prevent default action (#2988)
       e.preventDefault()
     },
-    closeConditional (e) {
+    closeConditional (e: Event) {
+      const target = e.target as HTMLElement
+
       return this.isActive &&
         this.closeOnClick &&
-        !this.$refs.content.contains(e.target)
+        !this.$refs.content.contains(target)
     },
-    genTransition () {
+    genTransition (): VNode {
       if (!this.transition) return this.genContent()
 
       return this.$createElement('transition', {
@@ -249,25 +258,27 @@ export default Vue.extend({
         }
       }, [this.genContent()])
     },
-    genDirectives () {
-      // Do not add click outside for hover menu
-      const directives = !this.openOnHover && this.closeOnClick ? [{
-        name: 'click-outside',
-        value: () => { this.isActive = false },
-        args: {
-          closeConditional: this.closeConditional,
-          include: () => [this.$el, ...this.getOpenDependentElements()]
-        }
-      }] : []
-
-      directives.push({
+    genDirectives (): VNodeDirective[] {
+      const directives: VNodeDirective[] = [{
         name: 'show',
         value: this.isContentActive
-      })
+      }]
+
+      // Do not add click outside for hover menu
+      if (!this.openOnHover && this.closeOnClick) {
+        directives.push({
+          name: 'click-outside',
+          value: () => { this.isActive = false },
+          args: {
+            closeConditional: this.closeConditional,
+            include: () => [this.$el, ...this.getOpenDependentElements()]
+          }
+        } as any)
+      }
 
       return directives
     },
-    genContent () {
+    genContent (): VNode {
       const options = {
         attrs: this.getScopeIdAttrs(),
         staticClass: 'v-menu__content',
@@ -282,22 +293,36 @@ export default Vue.extend({
         directives: this.genDirectives(),
         ref: 'content',
         on: {
-          click: e => {
+          click: (e: Event) => {
             e.stopPropagation()
-            if (e.target.getAttribute('disabled')) return
+
+            const target = e.target as HTMLElement
+
+            if (target.getAttribute('disabled')) return
             if (this.closeOnContentClick) this.isActive = false
           },
           keydown: this.onKeyDown
         }
+      } as VNodeData
+
+      if (!this.disabled && this.openOnHover) {
+        options.on = options.on || {}
+        options.on.mouseenter = this.mouseEnterHandler
       }
 
-      !this.disabled && this.openOnHover && (options.on.mouseenter = this.mouseEnterHandler)
-      this.openOnHover && (options.on.mouseleave = this.mouseLeaveHandler)
+      if (this.openOnHover) {
+        options.on = options.on || {}
+        options.on.mouseleave = this.mouseLeaveHandler
+      }
 
-      return this.$createElement('div', options, this.showLazyContent(this.$slots.default))
+      return this.$createElement(
+        'div',
+        options,
+        this.showLazyContent(this.$slots.default)
+      )
     },
     getTiles () {
-      this.tiles = this.$refs.content.querySelectorAll('.v-list-item')
+      this.tiles = Array.from(this.$refs.content.querySelectorAll('.v-list-item'))
     },
     mouseEnterHandler () {
       this.runDelay('open', () => {
@@ -307,10 +332,10 @@ export default Vue.extend({
         this.isActive = true
       })
     },
-    mouseLeaveHandler (e) {
+    mouseLeaveHandler (e: MouseEvent) {
       // Prevent accidental re-activation
       this.runDelay('close', () => {
-        if (this.$refs.content.contains(e.relatedTarget)) return
+        if (this.$refs.content.contains(e.relatedTarget as HTMLElement)) return
 
         requestAnimationFrame(() => {
           this.isActive = false
@@ -318,7 +343,7 @@ export default Vue.extend({
         })
       })
     },
-    onKeyDown (e) {
+    onKeyDown (e: KeyboardEvent) {
       if (e.keyCode === keyCodes.esc) {
         // Wait for dependent elements to close first
         setTimeout(() => { this.isActive = false })
@@ -349,16 +374,18 @@ export default Vue.extend({
       // set, causing it to not size properly
       // hacky but will revisit in the future
       clearTimeout(this.resizeTimeout)
-      this.resizeTimeout = setTimeout(this.updateDimensions, 100)
+      this.resizeTimeout = window.setTimeout(this.updateDimensions, 100)
     }
   },
 
-  render (h) {
+  render (h): VNode {
     const data = {
       staticClass: 'v-menu',
-      class: { 'v-menu--inline': !this.fullWidth && (this.$slots.activator || this.$scopedSlots.activator) },
+      class: {
+        'v-menu--inline': !this.fullWidth && (this.$slots.activator || this.$scopedSlots.activator)
+      },
       directives: [{
-        arg: 500,
+        arg: '500',
         name: 'resize',
         value: this.onResize
       }],
