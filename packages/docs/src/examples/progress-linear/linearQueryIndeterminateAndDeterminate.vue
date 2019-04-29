@@ -1,10 +1,12 @@
 <template>
-  <v-progress-linear
-    v-model="value"
-    :active="show"
-    :indeterminate="query"
-    :query="true"
-  ></v-progress-linear>
+  <div style="min-height: 4px;">
+    <v-progress-linear
+      v-model="value"
+      :active="show"
+      :indeterminate="query"
+      :query="true"
+    ></v-progress-linear>
+  </div>
 </template>
 
 <script>

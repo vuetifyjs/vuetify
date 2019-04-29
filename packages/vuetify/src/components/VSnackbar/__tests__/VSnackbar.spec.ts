@@ -4,21 +4,17 @@ import VSnackbar from '../VSnackbar'
 // Utilities
 import {
   mount,
+  MountOptions,
   Wrapper
 } from '@vue/test-utils'
 
-// Types
-import { ExtractVue } from '../../../util/mixins'
-
 describe('VSnackbar.ts', () => {
-  type Instance = ExtractVue<typeof VSnackbar>
-  let mountFunction: (options?: object) => Wrapper<Instance>
+  type Instance = InstanceType<typeof VSnackbar>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 
   beforeEach(() => {
-    mountFunction = (options = {}) => {
-      return mount(VSnackbar, {
-        ...options
-      })
+    mountFunction = (options = {} as MountOptions<Instance>) => {
+      return mount(VSnackbar, options)
     }
   })
 

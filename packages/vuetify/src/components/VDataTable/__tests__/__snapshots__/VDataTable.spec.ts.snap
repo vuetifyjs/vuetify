@@ -293,19 +293,19 @@ exports[`VDataTable.ts should render loading state 1`] = `
             <div role="progressbar"
                  aria-valuemin="0"
                  aria-valuemax="100"
-                 class="v-progress-linear"
+                 class="v-progress-linear theme--light"
                  style="height: 2px;"
             >
               <div class="v-progress-linear__background primary"
-                   style="height: 2px; opacity: 0.3; width: 100%;"
+                   style="opacity: 0.3; width: 100%;"
               >
               </div>
-              <div class="v-progress-linear__bar">
-                <div class="v-progress-linear__bar__indeterminate v-progress-linear__bar__indeterminate--active">
-                  <div class="v-progress-linear__bar__indeterminate long primary">
-                  </div>
-                  <div class="v-progress-linear__bar__indeterminate short primary">
-                  </div>
+              <div class="v-progress-linear__buffer">
+              </div>
+              <div class="v-progress-linear__indeterminate v-progress-linear__indeterminate--active">
+                <div class="v-progress-linear__indeterminate long primary">
+                </div>
+                <div class="v-progress-linear__indeterminate short primary">
                 </div>
               </div>
             </div>

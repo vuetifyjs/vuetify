@@ -48,24 +48,24 @@ exports[`VCard.vue should render component and match snapshot 1`] = `
 
 exports[`VCard.vue should render loading card 1`] = `
 
-<div class="v-card v-card--disabled v-sheet theme--light">
+<div class="v-card v-card--loading v-card--disabled v-sheet theme--light">
   <div class="v-card__progress">
     <div role="progressbar"
          aria-valuemin="0"
          aria-valuemax="100"
-         class="v-progress-linear"
+         class="v-progress-linear v-progress-linear--absolute theme--light"
          style="height: 4px;"
     >
       <div class="v-progress-linear__background primary"
-           style="height: 4px; opacity: 0.3; width: 100%;"
+           style="opacity: 0.3; width: 100%;"
       >
       </div>
-      <div class="v-progress-linear__bar">
-        <div class="v-progress-linear__bar__indeterminate v-progress-linear__bar__indeterminate--active">
-          <div class="v-progress-linear__bar__indeterminate long primary">
-          </div>
-          <div class="v-progress-linear__bar__indeterminate short primary">
-          </div>
+      <div class="v-progress-linear__buffer">
+      </div>
+      <div class="v-progress-linear__indeterminate v-progress-linear__indeterminate--active">
+        <div class="v-progress-linear__indeterminate long primary">
+        </div>
+        <div class="v-progress-linear__indeterminate short primary">
         </div>
       </div>
     </div>
