@@ -8,19 +8,20 @@
   position: relative
 
   &__badge
-    color: $badge-color
-    display: flex
-    position: absolute
-    font-size: $badge-font-size
-    top: -($badge-height / 2)
-    right: -($badge-width)
-    border-radius: $badge-border-radius
-    height: $badge-height
-    width: $badge-width
-    justify-content: center
     align-items: center
+    border-radius: $badge-border-radius
+    color: $badge-color
+    display: inline-flex
     flex-direction: row
     flex-wrap: wrap
+    font-size: $badge-font-size
+    height: $badge-height
+    justify-content: center
+    min-width: $badge-width
+    padding: 0 4px
+    position: absolute
+    right: -($badge-width)
+    top: -($badge-height / 2)
     transition: $primary-transition
 
     .v-icon
@@ -44,6 +45,7 @@
   &--left
     .v-badge__badge
       left: -($badge-width)
+      right: initial
 
   &--bottom
     .v-badge__badge

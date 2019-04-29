@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VRowGroup.ts should render with "column.summary" slot 1`] = `
+
+<tr class="v-row-group__summary">
+  <div>
+  </div>
+</tr>
+
+`;
+
+exports[`VRowGroup.ts should render with "row.summary" slot 1`] = `
+
+<div>
+</div>
+
+`;

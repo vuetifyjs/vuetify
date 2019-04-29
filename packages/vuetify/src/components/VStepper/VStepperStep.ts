@@ -3,36 +3,30 @@ import VIcon from '../VIcon'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
-import { inject as RegistrableInject, Registrable } from '../../mixins/registrable'
+import { inject as RegistrableInject } from '../../mixins/registrable'
 
 // Directives
 import Ripple from '../../directives/ripple'
 
-// Util
-import mixins, { ExtractVue } from '../../util/mixins'
+// Utilities
+import mixins from '../../util/mixins'
 
 // Types
-import Vue, { VNode } from 'vue'
+import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
 type VuetifyStepperRuleValidator = () => string | false
 
-interface options extends Vue {
-  stepClick: (step: number | string) => void
-}
-
-export default mixins<options &
-/* eslint-disable indent */
-  ExtractVue<[
-    typeof Colorable,
-    Registrable<'stepper'>
-  ]>
-/* eslint-enable indent */
->(
+const baseMixins = mixins(
   Colorable,
   RegistrableInject('stepper', 'v-stepper-step', 'v-stepper')
+)
+
+interface options extends InstanceType<typeof baseMixins> {
+  stepClick: (step: number | string) => void
+}
 /* @vue/component */
-).extend({
+export default baseMixins.extend<options>().extend({
   name: 'v-stepper-step',
 
   directives: { Ripple },
@@ -75,13 +69,11 @@ export default mixins<options &
   computed: {
     classes (): object {
       return {
-        'v-stepper__step': true,
         'v-stepper__step--active': this.isActive,
         'v-stepper__step--editable': this.editable,
         'v-stepper__step--inactive': this.isInactive,
-        'v-stepper__step--error': this.hasError,
-        'v-stepper__step--complete': this.complete,
-        'error--text': this.hasError
+        'v-stepper__step--error error--text': this.hasError,
+        'v-stepper__step--complete': this.complete
       }
     },
     hasError (): boolean {
@@ -107,6 +99,38 @@ export default mixins<options &
         this.stepClick(this.step)
       }
     },
+    genIcon (icon: string) {
+      return this.$createElement(VIcon, icon)
+    },
+    genLabel () {
+      return this.$createElement('div', {
+        staticClass: 'v-stepper__label'
+      }, this.$slots.default)
+    },
+    genStep () {
+      const color = (!this.hasError && (this.complete || this.isActive)) ? this.color : false
+
+      return this.$createElement('span', this.setBackgroundColor(color, {
+        staticClass: 'v-stepper__step__step'
+      }), this.genStepContent())
+    },
+    genStepContent () {
+      const children = []
+
+      if (this.hasError) {
+        children.push(this.genIcon(this.errorIcon))
+      } else if (this.complete) {
+        if (this.editable) {
+          children.push(this.genIcon(this.editIcon))
+        } else {
+          children.push(this.genIcon(this.completeIcon))
+        }
+      } else {
+        children.push(String(this.step))
+      }
+
+      return children
+    },
     toggle (step: number | string) {
       this.isActive = step.toString() === this.step.toString()
       this.isInactive = Number(step) < Number(this.step)
@@ -114,37 +138,17 @@ export default mixins<options &
   },
 
   render (h): VNode {
-    const data = {
-      'class': this.classes,
+    return h('div', {
+      staticClass: 'v-stepper__step',
+      class: this.classes,
       directives: [{
         name: 'ripple',
         value: this.editable
       }],
       on: { click: this.click }
-    }
-    let stepContent
-
-    if (this.hasError) {
-      stepContent = [h(VIcon, {}, this.errorIcon)]
-    } else if (this.complete) {
-      if (this.editable) {
-        stepContent = [h(VIcon, {}, this.editIcon)]
-      } else {
-        stepContent = [h(VIcon, {}, this.completeIcon)]
-      }
-    } else {
-      stepContent = String(this.step)
-    }
-
-    const color = (!this.hasError && (this.complete || this.isActive)) ? this.color : false
-    const step = h('span', this.setBackgroundColor(color, {
-      staticClass: 'v-stepper__step__step'
-    }), stepContent)
-
-    const label = h('div', {
-      staticClass: 'v-stepper__label'
-    }, this.$slots.default)
-
-    return h('div', data, [step, label])
+    }, [
+      this.genStep(),
+      this.genLabel()
+    ])
   }
 })

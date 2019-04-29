@@ -210,10 +210,6 @@ export default baseMixins.extend<options>().extend({
 
     if (this.btnToggle) data.ref = 'link'
 
-    const render = h(tag, setColor(this.color, data), children)
-
-    if (this.isFlat) return render
-
-    return render
+    return h(tag, setColor(this.color, data), children)
   }
 })

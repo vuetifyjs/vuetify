@@ -20,8 +20,10 @@ describe('VTooltip', () => {
       propsData: {
         openDelay: 0
       },
+      scopedSlots: {
+        activator: '<span>activator</span>'
+      },
       slots: {
-        activator: '<span>activator</span>',
         default: '<span>content</span>'
       }
     })
@@ -40,8 +42,10 @@ describe('VTooltip', () => {
       propsData: {
         eager: true
       },
+      scopedSlots: {
+        activator: '<span>activator</span>'
+      },
       slots: {
-        activator: '<span>activator</span>',
         default: '<span>content</span>'
       }
     })
@@ -54,8 +58,10 @@ describe('VTooltip', () => {
       propsData: {
         value: true
       },
+      scopedSlots: {
+        activator: '<span>activator</span>'
+      },
       slots: {
-        activator: '<span>activator</span>',
         default: '<span>content</span>'
       }
     })
@@ -71,8 +77,10 @@ describe('VTooltip', () => {
         minWidth: 100,
         maxWidth: 200
       },
+      scopedSlots: {
+        activator: '<span>activator</span>'
+      },
       slots: {
-        activator: '<span>activator</span>',
         default: '<span>content</span>'
       }
     })
@@ -97,26 +105,28 @@ describe('VTooltip', () => {
         openDelay: 123,
         closeDelay: 321
       },
+      scopedSlots: {
+        activator: '<span v-on="props.on" class="activator">activator</span>'
+      },
       slots: {
-        activator: '<span>activator</span>',
-        default: '<span>content</span>'
+        default: '<span class="content">content</span>'
       }
     })
 
-    const activator = wrapper.find('.v-tooltip__content + span')
+    const activator = wrapper.find('.activator')
     const cb = jest.fn()
     wrapper.vm.$on('input', cb)
 
     activator.trigger('mouseenter')
     jest.runAllTimers()
     await wrapper.vm.$nextTick()
-    expect(setTimeout.mock.calls[0][1]).toBe(123)
+    expect((setTimeout as any).mock.calls[0][1]).toBe(123)
     expect(cb).toHaveBeenCalledWith(true)
 
     activator.trigger('mouseleave')
     jest.runAllTimers()
     await wrapper.vm.$nextTick()
-    expect(setTimeout.mock.calls[1][1]).toBe(321)
+    expect((setTimeout as any).mock.calls[1][1]).toBe(321)
     expect(cb).toHaveBeenCalledWith(false)
   })
 })

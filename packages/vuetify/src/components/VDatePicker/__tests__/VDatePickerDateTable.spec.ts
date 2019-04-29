@@ -170,7 +170,7 @@ describe('VDatePickerDateTable.ts', () => {
       tableDate: '2005-06'
     })
     await wrapper.vm.$nextTick()
-    expect(wrapper.findAll('table').wrappers[0].element.className).toBe('tab-transition-enter tab-transition-enter-active')
+    expect(wrapper.findAll('table').at(0).element.className).toBe('tab-transition-enter tab-transition-enter-active')
   })
 
   it.skip('should watch tableDate value and run reverse transition', async () => {
@@ -186,7 +186,7 @@ describe('VDatePickerDateTable.ts', () => {
       tableDate: '2005-04'
     })
     await wrapper.vm.$nextTick()
-    expect(wrapper.findAll('table').wrappers[0].element.className).toBe('tab-reverse-transition-enter tab-reverse-transition-enter-active')
+    expect(wrapper.findAll('table').at(0).element.className).toBe('tab-reverse-transition-enter tab-reverse-transition-enter-active')
   })
 
   it('should emit event when date button is clicked', () => {
@@ -201,7 +201,7 @@ describe('VDatePickerDateTable.ts', () => {
     const input = jest.fn()
     wrapper.vm.$on('input', input)
 
-    wrapper.findAll('tbody button').wrappers[0].trigger('click')
+    wrapper.findAll('tbody button').at(0).trigger('click')
     expect(input).toHaveBeenCalledWith('2005-05-01')
   })
 
@@ -218,7 +218,7 @@ describe('VDatePickerDateTable.ts', () => {
     const input = jest.fn()
     wrapper.vm.$on('input', input)
 
-    wrapper.findAll('tbody button').wrappers[0].trigger('click')
+    wrapper.findAll('tbody button').at(0).trigger('click')
     expect(input).not.toHaveBeenCalled()
   })
 

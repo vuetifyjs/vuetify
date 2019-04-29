@@ -21,7 +21,7 @@ import VSimpleTable from './VSimpleTable'
 import VMobileRow from './VMobileRow'
 
 // Helpers
-import { deepEqual, getObjectValueByPath, compareFn, getPrefixedScopedSlots } from '../../util/helpers'
+import { deepEqual, getObjectValueByPath, compareFn, getPrefixedScopedSlots, getSlot } from '../../util/helpers'
 import { breaking } from '../../util/console'
 
 /* @vue/component */
@@ -138,7 +138,7 @@ export default VDataIterator.extend({
     genCaption (props: DataProps) {
       if (this.caption) return [this.$createElement('caption', [this.caption])]
 
-      return this.genSlots('caption', props)
+      return getSlot(this, 'caption', props, true)
     },
     genColgroup (props: DataProps) {
       return this.$createElement('colgroup', this.computedHeaders.map(header => {
@@ -192,10 +192,10 @@ export default VDataIterator.extend({
         }
       }
 
-      const children: VNodeChildrenArrayContents = [this.genSlots('header', data)]
+      const children: VNodeChildrenArrayContents = [getSlot(this, 'header', data)]
 
       if (!this.hideDefaultHeader) {
-        const scopedSlots = getPrefixedScopedSlots('header.column.', this.$scopedSlots)
+        const scopedSlots = getPrefixedScopedSlots('header.', this.$scopedSlots)
         children.push(this.$createElement(VDataTableHeader, {
           ...data,
           scopedSlots
@@ -259,7 +259,7 @@ export default VDataIterator.extend({
             small: true
           },
           on: {
-            click: () => this.$set(this.openCache, group, !this.openCache[group])
+            click: /* istanbul ignore next */ () => this.$set(this.openCache, group, !this.openCache[group])
           }
         }, [this.$createElement(VIcon, [isOpen ? 'remove' : 'add'])])
 
@@ -270,7 +270,7 @@ export default VDataIterator.extend({
             small: true
           },
           on: {
-            click: () => props.updateOptions({ groupBy: [], groupDesc: [] })
+            click: /* istanbul ignore next */ () => props.updateOptions({ groupBy: [], groupDesc: [] })
           }
         }, [this.$createElement(VIcon, ['close'])])
 
@@ -304,7 +304,7 @@ export default VDataIterator.extend({
       return items.map((item: any) => this.$scopedSlots.item!(this.createItemProps(item)))
     },
     genDefaultRows (items: any[], props: DataProps) {
-      return this.$scopedSlots['item.expanded']
+      return this.$scopedSlots['expanded-item']
         ? items.map(item => this.genDefaultExpandedRow(item))
         : items.map(item => this.genDefaultSimpleRow(item))
     },
@@ -313,7 +313,7 @@ export default VDataIterator.extend({
       const headerRow = this.genDefaultSimpleRow(item, isExpanded ? 'expanded expanded__row' : null)
       const expandedRow = this.$createElement('tr', {
         staticClass: 'expanded expanded__content'
-      }, [this.$scopedSlots['item.expanded']!({ item, headers: this.computedHeaders })])
+      }, [this.$scopedSlots['expanded-item']!({ item, headers: this.computedHeaders })])
 
       return this.$createElement(VRowGroup, {
         props: {
@@ -329,16 +329,17 @@ export default VDataIterator.extend({
 
       if (this.showSelect) {
         const data = {
+          item,
           props: {
             value: this.isSelected(item)
           },
           on: {
-            input: (v: any) => this.select(item, v)
+            input: /* istanbul ignore next */ (v: any) => this.select(item, v)
           }
         }
 
-        const slot = scopedSlots['column.data-table-select']
-        scopedSlots['column.data-table-select'] = slot ? () => slot(data) : () => this.$createElement(VSimpleCheckbox, {
+        const slot = scopedSlots['data-table-select']
+        scopedSlots['data-table-select'] = slot ? () => slot(data) : () => this.$createElement(VSimpleCheckbox, {
           staticClass: 'v-data-table__checkbox',
           ...data
         })
@@ -348,6 +349,7 @@ export default VDataIterator.extend({
 
       if (this.showExpand) {
         const data = {
+          item,
           props: {
             expanded
           },
@@ -356,8 +358,8 @@ export default VDataIterator.extend({
           }
         }
 
-        const slot = scopedSlots['column.data-table-expand']
-        scopedSlots['column.data-table-expand'] = slot ? () => slot(data) : () => this.$createElement(VIcon, {
+        const slot = scopedSlots['data-table-expand']
+        scopedSlots['data-table-expand'] = slot ? () => slot(data) : () => this.$createElement(VIcon, {
           staticClass: 'v-data-table__expand-icon',
           class: {
             'v-data-table__expand-icon--active': expanded
@@ -388,9 +390,9 @@ export default VDataIterator.extend({
       }
 
       return this.$createElement('tbody', [
-        this.genSlots('body.prepend', data),
+        getSlot(this, 'body.prepend', data, true),
         this.genItems(props.items, props),
-        this.genSlots('body.append', data)
+        getSlot(this, 'body.append', data, true)
       ])
     },
     genFooters (props: DataProps) {
@@ -402,14 +404,14 @@ export default VDataIterator.extend({
           ...this.footerProps
         },
         on: {
-          'update:options': (value: any) => props.updateOptions(value)
+          'update:options': /* istanbul ignore next */ (value: any) => props.updateOptions(value)
         },
         widths: this.widths,
         headers: this.computedHeaders
       }
 
       const children: VNodeChildren = [
-        this.genSlots('footer', data)
+        getSlot(this, 'footer', data, true)
       ]
 
       if (!this.hideDefaultFooter) {
@@ -446,7 +448,7 @@ export default VDataIterator.extend({
       return this.$createElement(VSimpleTable, {
         props: simpleProps
       }, [
-        this.proxySlot('top', this.genSlots('top', props)),
+        this.proxySlot('top', getSlot(this, 'top', props, true)),
         this.genCaption(props),
         this.genColgroup(props),
         this.genHeaders(props),
@@ -467,22 +469,22 @@ export default VDataIterator.extend({
         customSort: this.customSortWithHeaders
       },
       on: {
-        'update:options': (v: DataOptions, old: DataOptions) => {
+        'update:options': /* istanbul ignore next */ (v: DataOptions, old: DataOptions) => {
           this.internalGroupBy = v.groupBy || []
           !deepEqual(v, old) && this.$emit('update:options', v)
         },
-        'update:page': (v: number) => this.$emit('update:page', v),
-        'update:items-per-page': (v: number) => this.$emit('update:items-per-page', v),
-        'update:sort-by': (v: string | string[]) => this.$emit('update:sort-by', v),
-        'update:sort-desc': (v: boolean | boolean[]) => this.$emit('update:sort-desc', v),
-        'update:group-by': (v: string | string[]) => this.$emit('update:group-by', v),
-        'update:group-desc': (v: boolean | boolean[]) => this.$emit('update:group-desc', v),
-        'pagination': (v: DataPaginaton, old: DataPaginaton) => !deepEqual(v, old) && this.$emit('pagination', v),
-        'current-items': (v: any[]) => {
+        'update:page': /* istanbul ignore next */ (v: number) => this.$emit('update:page', v),
+        'update:items-per-page': /* istanbul ignore next */ (v: number) => this.$emit('update:items-per-page', v),
+        'update:sort-by': /* istanbul ignore next */ (v: string | string[]) => this.$emit('update:sort-by', v),
+        'update:sort-desc': /* istanbul ignore next */ (v: boolean | boolean[]) => this.$emit('update:sort-desc', v),
+        'update:group-by': /* istanbul ignore next */ (v: string | string[]) => this.$emit('update:group-by', v),
+        'update:group-desc': /* istanbul ignore next */ (v: boolean | boolean[]) => this.$emit('update:group-desc', v),
+        'pagination': /* istanbul ignore next */ (v: DataPaginaton, old: DataPaginaton) => !deepEqual(v, old) && this.$emit('pagination', v),
+        'current-items': /* istanbul ignore next */ (v: any[]) => {
           this.internalCurrentItems = v
           this.$emit('current-items', v)
         },
-        'page-count': (v: number) => this.$emit('page-count', v)
+        'page-count': /* istanbul ignore next */ (v: number) => this.$emit('page-count', v)
       },
       scopedSlots: {
         default: this.genDefaultScopedSlot as any

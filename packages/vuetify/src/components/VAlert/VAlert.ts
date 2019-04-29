@@ -47,6 +47,7 @@ export default mixins(
     dense: Boolean,
     dismissible: Boolean,
     icon: {
+      default: '',
       type: [Boolean, String],
       validator (val: boolean | string) {
         return typeof val === 'string' || val === false
@@ -147,8 +148,8 @@ export default mixins(
       return this.color || this.type
     },
     computedIcon (): string | boolean {
-      if (!this.icon) return false
-      if (this.icon != null) return this.icon
+      if (this.icon === false) return false
+      if (typeof this.icon === 'string' && this.icon) return this.icon
 
       switch (this.type) {
         case 'info': return '$vuetify.icons.info'
@@ -186,16 +187,29 @@ export default mixins(
   },
 
   methods: {
-    genAlert (): VNode {
+    genWrapper (): VNode {
       const children = [
         this.$slots.prepend || this.__cachedIcon,
-        this.__cachedBorder,
         this.genContent(),
+        this.__cachedBorder,
         this.$slots.append,
         this.$scopedSlots.close
           ? this.$scopedSlots.close({ toggle: this.toggle })
           : this.__cachedDismissible
       ]
+
+      const data: VNodeData = {
+        staticClass: 'v-alert__wrapper'
+      }
+
+      return this.$createElement('div', data, children)
+    },
+    genContent (): VNode {
+      return this.$createElement('div', {
+        staticClass: 'v-alert__content'
+      }, this.$slots.default)
+    },
+    genAlert (): VNode {
       let data: VNodeData = {
         staticClass: 'v-alert',
         class: this.classes,
@@ -211,12 +225,7 @@ export default mixins(
         data = setColor(this.computedColor, data)
       }
 
-      return this.$createElement('div', data, children)
-    },
-    genContent (): VNode {
-      return this.$createElement('div', {
-        staticClass: 'v-alert__content'
-      }, this.$slots.default)
+      return this.$createElement('div', data, [this.genWrapper()])
     },
     /** @public */
     toggle () {

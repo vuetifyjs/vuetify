@@ -26,7 +26,7 @@ describe('VTextarea.ts', () => {
     const input = jest.fn(value => wrapper.setProps({ value }))
     wrapper.vm.$on('input', input)
 
-    const el = wrapper.findAll('textarea').wrappers[0]
+    const el = wrapper.findAll('textarea').at(0)
 
     el.trigger('focus')
     await wrapper.vm.$nextTick()
