@@ -1,5 +1,5 @@
 <template>
-  <v-icon>svg-{{ svgPath }}</v-icon>
+  <v-icon>{{ svgPath }}</v-icon>
 </template>
 
 <script>

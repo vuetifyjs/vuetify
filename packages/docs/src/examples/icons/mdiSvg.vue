@@ -3,17 +3,17 @@
     align-center
     justify-center
   >
-    <v-icon>svg-{{ icons.mdiAccount }}</v-icon>
+    <v-icon>{{ icons.mdiAccount }}</v-icon>
     <div class="mx-2"></div>
-    <v-icon>svg-{{ icons.mdiPencil }}</v-icon>
+    <v-icon>{{ icons.mdiPencil }}</v-icon>
     <div class="mx-2"></div>
-    <v-icon>svg-{{ icons.mdiShareVariant }}</v-icon>
+    <v-icon>{{ icons.mdiShareVariant }}</v-icon>
     <div class="mx-2"></div>
     <v-btn
       color="primary"
       depressed
     >
-      <v-icon left>svg-{{ icons.mdiDelete }}</v-icon>
+      <v-icon left>{{ icons.mdiDelete }}</v-icon>
       Delete
     </v-btn>
   </v-layout>

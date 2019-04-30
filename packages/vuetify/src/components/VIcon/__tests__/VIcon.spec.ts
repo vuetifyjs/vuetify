@@ -294,7 +294,7 @@ describe('VIcon', () => {
     })
 
     it('should render an svg icon', () => {
-      const wrapper = mountFunction({}, 'svg-M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z')
+      const wrapper = mountFunction({}, 'M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z')
 
       expect(wrapper.html()).toMatchSnapshot()
 
