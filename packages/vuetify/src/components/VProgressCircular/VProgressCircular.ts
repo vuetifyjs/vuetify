@@ -130,6 +130,11 @@ export default Colorable.extend({
           viewBox: `${this.viewBoxSize} ${this.viewBoxSize} ${2 * this.viewBoxSize} ${2 * this.viewBoxSize}`
         }
       }, children)
+    },
+    genInfo (): VNode {
+      return this.$createElement('div', {
+        staticClass: 'v-progress-circular__info'
+      }, this.$slots.default)
     }
   },
 
@@ -147,9 +152,7 @@ export default Colorable.extend({
       on: this.$listeners
     }), [
       this.genSvg(),
-      h('div', {
-        staticClass: 'v-progress-circular__info'
-      }, this.$slots.default)
+      this.genInfo()
     ])
   }
 })
