@@ -7,7 +7,7 @@
       <template v-slot:activator="{ on }">
         <v-btn
           class="mx-2"
-          color="primary"
+          color="info"
           dark
           v-on="on"
         >
@@ -24,7 +24,7 @@
       <template v-slot:activator="{ on }">
         <v-btn
           class="mx-2"
-          color="primary"
+          color="info"
           dark
           v-on="on"
         >
