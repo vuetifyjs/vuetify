@@ -32,6 +32,7 @@
           "type": "examples",
           "value": [
             "simple/alignment",
+            "simple/nudge",
             "simple/visibility",
             "simple/color",
             "simple/transition"

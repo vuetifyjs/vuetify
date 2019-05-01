@@ -9,6 +9,10 @@
       "header": "### Alignment",
       "desc": "Tooltip can be aligned to any of the four sides of the activator element"
     },
+    "nudge": {
+      "header": "### Nudge",
+      "desc": "Tooltip can be aligned to any nudge of the four sides of the activator element."
+    },
     "visibility": {
       "header": "### Visibility",
       "desc": "Tooltip visibility can be programmatically changed using `v-model`."
