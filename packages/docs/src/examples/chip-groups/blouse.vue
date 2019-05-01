@@ -21,6 +21,7 @@
       <v-chip-group
         v-model="selection"
         active-class="deep-purple--text text--accent-4"
+        mandatory
       >
         <v-chip v-for="size in sizes" :key="size" :value="size">
           {{ size }}

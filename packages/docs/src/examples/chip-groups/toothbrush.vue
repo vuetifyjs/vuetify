@@ -22,6 +22,7 @@
       <v-chip-group
         v-model="selection"
         active-class="deep-purple--text text--accent-4"
+        mandatory
       >
         <v-chip>Extra Soft</v-chip>
         <v-chip>Soft</v-chip>
