@@ -5,7 +5,14 @@
       transition="scale-transition"
     >
       <template v-slot:activator="{ on }">
-        <v-btn class="mx-2" color="primary" dark v-on="on">Scale</v-btn>
+        <v-btn
+          class="mx-2"
+          color="primary"
+          dark
+          v-on="on"
+        >
+          Scale
+        </v-btn>
       </template>
       <span>scale transtion</span>
     </v-tooltip>
@@ -15,7 +22,14 @@
       transition="fade-transition"
     >
       <template v-slot:activator="{ on }">
-        <v-btn class="mx-2" color="primary" dark v-on="on">Fade</v-btn>
+        <v-btn
+          class="mx-2"
+          color="primary"
+          dark
+          v-on="on"
+        >
+          Fade
+        </v-btn>
       </template>
       <span>fade transtion</span>
     </v-tooltip>
