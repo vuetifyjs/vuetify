@@ -6,7 +6,6 @@ import {
   mount,
   Wrapper
 } from '@vue/test-utils'
-import { compileToFunctions } from 'vue-template-compiler'
 
 describe('VProgressCircular.ts', () => {
   type Instance = InstanceType<typeof VProgressCircular>
@@ -14,9 +13,7 @@ describe('VProgressCircular.ts', () => {
 
   beforeEach(() => {
     mountFunction = (options = {}) => {
-      return mount(VProgressCircular, {
-        ...options
-      })
+      return mount(VProgressCircular, options)
     }
   })
 
@@ -26,7 +23,7 @@ describe('VProgressCircular.ts', () => {
         value: 33
       },
       slots: {
-        default: [compileToFunctions('<span>content</span>')]
+        default: '<span>content</span>'
       }
     })
 

@@ -43,10 +43,6 @@ export default Vue.extend({
       type: Array as PropType<any[]>,
       default: () => []
     },
-    itemKey: {
-      type: String,
-      default: 'id'
-    },
     options: {
       type: Object,
       default: () => ({})
@@ -164,8 +160,6 @@ export default Vue.extend({
         items = this.paginateItems(items)
       }
 
-      this.$emit('current-items', items)
-
       return items
     },
     groupedItems (): Record<string, any[]> {
@@ -261,6 +255,12 @@ export default Vue.extend({
     pageCount: {
       handler (pageCount: number) {
         this.$emit('page-count', pageCount)
+      },
+      immediate: true
+    },
+    computedItems: {
+      handler (computedItems: any[]) {
+        this.$emit('current-items', computedItems)
       },
       immediate: true
     }
