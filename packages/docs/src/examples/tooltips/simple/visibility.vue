@@ -18,7 +18,7 @@
         class="mt-5"
       >
         <v-tooltip
-          v-model="show"
+          :value="show"
           top
         >
           <template v-slot:activator="{ on }">
