@@ -16,6 +16,10 @@
     "color": {
       "header": "### Color",
       "desc": "Tooltip can be control specified color."
+    },
+    "transition": {
+      "header": "### Transition",
+      "desc": "The `transition` prop allows you to apply a transition to the tooltip which is viewable when the component hides and shows. You can use any of Vuetifies prebuilt transitions found [here](/framework/transitions#motion) or you may [create your own](/framework/transitions#create-your-own)."
     }
   },
   "props": {
