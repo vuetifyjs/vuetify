@@ -12,6 +12,10 @@
     "visibility": {
       "header": "### Visibility",
       "desc": "Tooltip visibility can be programmatically changed using `v-model`."
+    },
+    "color": {
+      "header": "### Color",
+      "desc": "Tooltip can be control specified color."
     }
   },
   "props": {
