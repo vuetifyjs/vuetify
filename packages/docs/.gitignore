@@ -9,3 +9,6 @@ npm-debug.log
 yarn-error.log
 *.swp
 .node-version
+# cypress
+cypress/screenshots
+cypress/videos

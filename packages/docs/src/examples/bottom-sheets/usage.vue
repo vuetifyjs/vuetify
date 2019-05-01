@@ -5,6 +5,7 @@
         <v-btn
           color="purple"
           dark
+          data-cy-btn="usage"
         >
           Click me
         </v-btn>

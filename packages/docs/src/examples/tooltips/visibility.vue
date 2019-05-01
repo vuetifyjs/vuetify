@@ -7,14 +7,14 @@
       wrap
     >
       <v-flex xs12>
-        <v-btn @click="show = !show">toggle</v-btn>
+        <v-btn @click="show = !show" data-cy-btn="tooltip">toggle</v-btn>
       </v-flex>
 
       <v-flex xs12 class="mt-5">
         <v-tooltip v-model="show" top>
           <template v-slot:activator="{ on }">
             <v-btn icon v-on="on">
-              <v-icon color="grey lighten-1">shopping_cart</v-icon>
+              <v-icon color="grey lighten-1" data-cy-btn="tooltip">shopping_cart</v-icon>
             </v-btn>
           </template>
           <span>Programmatic tooltip</span>

@@ -5,6 +5,7 @@
         <v-btn
           color="red"
           dark
+           data-cy-btn="inset"
         >
           Show player
         </v-btn>

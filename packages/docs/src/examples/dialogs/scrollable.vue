@@ -2,7 +2,7 @@
   <v-layout row justify-center>
     <v-dialog v-model="dialog" scrollable max-width="300px">
       <template v-slot:activator="{ on }">
-        <v-btn color="primary" dark v-on="on">Open Dialog</v-btn>
+        <v-btn color="primary" dark v-on="on" data-cy-btn="dialog">Open Dialog</v-btn>
       </template>
       <v-card>
         <v-card-title>Select Country</v-card-title>
@@ -31,7 +31,7 @@
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
+          <v-btn color="blue darken-1" flat @click="dialog = false" data-cy-btn="dialog-close">Close</v-btn>
           <v-btn color="blue darken-1" flat @click="dialog = false">Save</v-btn>
         </v-card-actions>
       </v-card>

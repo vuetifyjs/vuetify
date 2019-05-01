@@ -1,9 +1,9 @@
 <template>
   <div>
     <v-layout row justify-center>
-      <v-btn color="primary" dark @click="dialog = true">Open Dialog 1</v-btn>
-      <v-btn color="primary" dark @click="dialog2 = true">Open Dialog 2</v-btn>
-      <v-btn color="primary" dark @click="dialog3 = true">Open Dialog 3</v-btn>
+      <v-btn color="primary" dark @click="dialog = true" data-cy-btn="dialog">Open Dialog 1</v-btn>
+      <v-btn color="primary" dark @click="dialog2 = true" data-cy-btn="dialog">Open Dialog 2</v-btn>
+      <v-btn color="primary" dark @click="dialog3 = true" data-cy-btn="dialog">Open Dialog 3</v-btn>
       <v-menu bottom offset-y>
         <template v-slot:activator="{ on }">
           <v-btn v-on="on">A Menu</v-btn>
@@ -23,7 +23,7 @@
       >
         <v-card tile>
           <v-toolbar card dark color="primary">
-            <v-btn icon dark @click="dialog = false">
+            <v-btn icon dark @click="dialog = false" data-cy-btn="dialog-close">
               <v-icon>close</v-icon>
             </v-btn>
             <v-toolbar-title>Settings</v-toolbar-title>
@@ -117,7 +117,7 @@
             ></v-select>
           </v-card-text>
           <v-card-actions>
-            <v-btn color="primary" flat @click="dialog2=false">Close</v-btn>
+            <v-btn color="primary" flat @click="dialog2=false" data-cy-btn="dialog-close">Close</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -140,7 +140,7 @@
             </v-menu>
           </v-card-title>
           <v-card-actions>
-            <v-btn color="primary" flat @click="dialog3=false">Close</v-btn>
+            <v-btn color="primary" flat @click="dialog3=false" data-cy-btn="dialog-close">Close</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>

@@ -5,6 +5,7 @@
       :class="`elevation-${hover ? 12 : 2}`"
       class="mx-auto"
       width="344"
+      data-cy-card="usage"
     >
       <v-img
         :aspect-ratio="16/9"

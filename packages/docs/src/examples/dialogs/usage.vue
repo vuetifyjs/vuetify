@@ -9,6 +9,7 @@
           color="red lighten-2"
           dark
           v-on="on"
+          data-cy-btn="dialog"
         >
           Click Me
         </v-btn>
@@ -34,6 +35,7 @@
             color="primary"
             flat
             @click="dialog = false"
+            data-cy-btn="dialog-close"
           >
             I accept
           </v-btn>

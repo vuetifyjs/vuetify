@@ -5,6 +5,7 @@
       class="mx-auto"
       color="grey lighten-4"
       max-width="600"
+      data-cy-card="transition"
     >
       <v-img
         :aspect-ratio="16/9"

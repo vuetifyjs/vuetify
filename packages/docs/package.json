@@ -8,7 +8,9 @@
     "dev": "cross-env NODE_OPTIONS=--max_old_space_size=8192 node server",
     "start": "cross-env NODE_ENV=production node server",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --config build/webpack.prod.config.js --progress --hide-modules",
-    "lint": "eslint --ext .js,.vue,.json src"
+    "lint": "eslint --ext .js,.vue,.json src",
+    "cypress:run": "cypress run",
+    "cypress:visual": "server-test start http-get://localhost:8095/en/ cypress:run"
   },
   "engines": {
     "node": ">=7.0",
@@ -50,6 +52,7 @@
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
+    "@applitools/eyes-cypress": "^3.6.10",
     "@mdi/font": "^3.2.89",
     "autoprefixer": "^9.4.7",
     "babel-core": "^6.26.3",
@@ -64,6 +67,7 @@
     "babel-register": "^6.26.0",
     "concurrently": "^4.1.0",
     "css-loader": "^2.1.0",
+    "cypress": "^3.2.0",
     "deepmerge": "^2.2.1",
     "diff-json": "^0.1.11",
     "docsearch.js": "^2.6.2",
@@ -86,6 +90,7 @@
     "script-ext-html-webpack-plugin": "^2.0.1",
     "simple-git": "^1.92.0",
     "source-map-loader": "^0.2.4",
+    "start-server-and-test": "^1.9.0",
     "style-loader": "^0.23.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",

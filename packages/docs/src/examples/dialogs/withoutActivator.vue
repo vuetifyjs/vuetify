@@ -4,6 +4,7 @@
       color="primary"
       dark
       @click.stop="dialog = true"
+      data-cy-btn="dialog"
     >
       Open Dialog
     </v-btn>
@@ -34,6 +35,7 @@
             color="green darken-1"
             flat="flat"
             @click="dialog = false"
+            data-cy-btn="dialog-close"
           >
             Agree
           </v-btn>
