@@ -17,7 +17,6 @@ import Ripple from '../../directives/ripple'
 
 // Utilities
 import { keyCodes } from '../../util/helpers'
-import { deprecate } from '../../util/console'
 import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
@@ -56,8 +55,6 @@ export default mixins<options &
 
   props: {
     appendOuterIcon: String,
-    /** @deprecated */
-    appendOuterIconCb: Function,
     autofocus: Boolean,
     box: Boolean,
     browserAutocomplete: String,
@@ -66,7 +63,6 @@ export default mixins<options &
       type: String,
       default: '$vuetify.icons.clear'
     },
-    clearIconCb: Function,
     color: {
       type: String,
       default: 'primary'
@@ -79,8 +75,6 @@ export default mixins<options &
     placeholder: String,
     prefix: String,
     prependInnerIcon: String,
-    /** @deprecated */
-    prependInnerIconCb: Function,
     reverse: Boolean,
     singleLine: Boolean,
     solo: Boolean,
@@ -276,12 +270,10 @@ export default mixins<options &
 
       const icon = !this.isDirty ? '' : 'clear'
 
-      if (this.clearIconCb) deprecate(':clear-icon-cb', '@click:clear', this)
-
       return this.genSlot('append', 'inner', [
         this.genIcon(
           icon,
-          (!this.$listeners['click:clear'] && this.clearIconCb) || this.clearableCallback
+          this.clearableCallback
         )
       ])
     },

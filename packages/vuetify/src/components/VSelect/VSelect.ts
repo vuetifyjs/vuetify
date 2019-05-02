@@ -62,7 +62,6 @@ export default baseMixins.extend<options>().extend({
       type: String,
       default: '$vuetify.icons.dropdown'
     },
-    appendIconCb: Function,
     attach: {
       default: false
     } as PropValidator<string | boolean | Element | VNode>,

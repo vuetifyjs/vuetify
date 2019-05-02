@@ -151,7 +151,6 @@ export default mixins<options &
     ) {
       const icon = (this as any)[`${type}Icon`]
       const eventName = `click:${kebabCase(type)}`
-      cb = cb || (this as any)[`${type}IconCb`]
 
       const data: VNodeData = {
         props: {
