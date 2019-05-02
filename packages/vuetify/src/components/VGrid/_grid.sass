@@ -28,10 +28,6 @@
       height: 100%
       flex: 1 1 auto
 
-      &.grow-shrink-0
-        flex-grow: 0
-        flex-shrink: 0
-
   &.grid-list
     @each $size, $gutter in $grid-gutters
       &-#{$size}
@@ -77,10 +73,6 @@
   &.wrap
     flex-wrap: wrap
 
-  &.grow-shrink-0
-    flex-grow: 0
-    flex-shrink: 0
-
 @each $size, $width in $grid-breakpoints
   @media all and (min-width: #{$width})
     $n: $grid-columns
@@ -107,10 +99,6 @@
 .child-flex > *
   flex: 1 1 auto
   max-width: 100%
-
-  &.grow-shrink-0
-    flex-grow: 0
-    flex-shrink: 0
 
 .align
   &-start
@@ -213,6 +201,10 @@
   white-space: nowrap
   overflow: hidden
   text-overflow: ellipsis
+
+.grow-shrink-0
+  flex-grow: 0
+  flex-shrink: 0
 
 // Display helpers
 .d-flex
