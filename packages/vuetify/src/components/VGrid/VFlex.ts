@@ -1,3 +1,3 @@
-import Grid from './grid'
+import factory from './grid'
 
-export default Grid('flex')
+export default factory('flex')
