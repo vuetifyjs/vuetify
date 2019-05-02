@@ -13,14 +13,10 @@ describe('VContainer.ts', () => {
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 
   beforeEach(() => {
-    mountFunction = (options = {}) => {
-      return mount(VContainer, {
-        ...options
-      })
-    }
+    mountFunction = (options = {}) => mount(VContainer, options)
   })
 
-  it('should work', () => {
+  it('should render', () => {
     const wrapper = mountFunction()
 
     expect(wrapper.html()).toMatchSnapshot()

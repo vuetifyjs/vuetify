@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VContainer.ts should work 1`] = `
+exports[`VContainer.ts should render 1`] = `
 
 <div class="container">
 </div>
