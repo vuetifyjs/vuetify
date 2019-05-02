@@ -13,14 +13,10 @@ describe('VFlex.ts', () => {
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 
   beforeEach(() => {
-    mountFunction = (options = {}) => {
-      return mount(VFlex, {
-        ...options
-      })
-    }
+    mountFunction = (options = {}) => mount(VFlex, options)
   })
 
-  it('should work', () => {
+  it('should render', () => {
     const wrapper = mountFunction()
 
     expect(wrapper.html()).toMatchSnapshot()
