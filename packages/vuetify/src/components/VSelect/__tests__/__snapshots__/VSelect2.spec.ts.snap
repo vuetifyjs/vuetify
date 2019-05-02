@@ -3,7 +3,7 @@
 exports[`.ts should be clearable with prop, dirty and multi select 1`] = `
 
 <div role="combobox"
-     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty theme--light"
+     class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
 >
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -57,7 +57,7 @@ exports[`.ts should be clearable with prop, dirty and multi select 1`] = `
 exports[`.ts should be clearable with prop, dirty and single select 1`] = `
 
 <div role="combobox"
-     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty theme--light"
+     class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
 >
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -111,7 +111,7 @@ exports[`.ts should be clearable with prop, dirty and single select 1`] = `
 exports[`.ts should use scoped slot for selection generation 1`] = `
 
 <div role="combobox"
-     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty theme--light"
+     class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
 >
   <div class="v-input__control">
     <div class="v-input__slot">

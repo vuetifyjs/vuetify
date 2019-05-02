@@ -66,10 +66,8 @@ export default mixins<options &
   },
 
   computed: {
-    classes: (): object => ({}),
-    classesInput (): object {
+    classes (): object {
       return {
-        ...this.classes,
         'v-input--has-state': this.hasState,
         'v-input--hide-details': this.hideDetails,
         'v-input--is-label-active': this.isLabelActive,
@@ -290,7 +288,7 @@ export default mixins<options &
     return h('div', this.setTextColor(this.validationState, {
       staticClass: 'v-input',
       attrs: this.attrsInput,
-      'class': this.classesInput
+      class: this.classes
     }), this.genContent())
   }
 })

@@ -111,6 +111,7 @@ export default mixins<options &
   computed: {
     classes (): object {
       return {
+        ...VInput.options.computed.classes.call(this),
         'v-input__slider': true,
         'v-input__slider--vertical': this.vertical,
         'v-input__slider--inverse-label': this.inverseLabel

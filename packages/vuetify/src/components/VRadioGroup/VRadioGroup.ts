@@ -48,6 +48,7 @@ export default baseMixins.extend({
   computed: {
     classes (): object {
       return {
+        ...VInput.options.computed.classes.call(this),
         'v-input--selection-controls v-input--radio-group': true,
         'v-input--radio-group--column': this.column && !this.row,
         'v-input--radio-group--row': this.row

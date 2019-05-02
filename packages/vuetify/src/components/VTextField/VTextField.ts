@@ -102,6 +102,7 @@ export default mixins<options &
   computed: {
     classes (): object {
       return {
+        ...VInput.options.computed.classes.call(this),
         'v-text-field': true,
         'v-text-field--full-width': this.fullWidth,
         'v-text-field--prefix': this.prefix,
