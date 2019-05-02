@@ -43,6 +43,7 @@
         {
           "type": "examples",
           "value": [
+            "simple/column",
             "intermediate/toothbrush",
             "intermediate/blouse",
             "complex/filterResults"
