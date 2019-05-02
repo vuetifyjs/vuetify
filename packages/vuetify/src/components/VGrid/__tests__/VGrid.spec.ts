@@ -1,4 +1,3 @@
-
 // Components
 import Grid from '../grid'
 
@@ -8,20 +7,19 @@ import {
   Wrapper
 } from '@vue/test-utils'
 
+// Types
+import { VNodeData } from 'vue'
+
 const Mock = Grid('test')
 
 describe('VGrid.ts', () => {
   type Instance = InstanceType<typeof Mock>
-  let mountFunction: (options?: object) => Wrapper<Instance>
+  let mountFunction: (options?: VNodeData) => Wrapper<Instance>
 
   beforeEach(() => {
-    mountFunction = (options = {}) => {
-      return mount(Mock, {
-        context: {
-          ...options
-        }
-      })
-    }
+    mountFunction = (options = {}) => mount(Mock, {
+      context: options
+    })
   })
 
   it('should conditionally apply if boolean is used', () => {
