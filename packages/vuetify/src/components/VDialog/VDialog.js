@@ -148,16 +148,17 @@ export default {
     closeConditional (e) {
       // If the dialog content contains
       // the click event, or if the
-      // dialog is not active
-      if (!this.isActive || this.$refs.content.contains(e.target)) return false
+      // dialog is not active, or if
+      // the click is not on the overlay
+      if (!this.isActive ||
+        this.$refs.content.contains(e.target) ||
+        this.overlay !== e.target
+      ) return false
 
       // If we made it here, the click is outside
-      // and is active. If persistent, and the
-      // click is on the overlay, animate
+      // and is active. If persistent, animate
       if (this.persistent) {
-        if (!this.noClickAnimation &&
-          this.overlay === e.target
-        ) this.animateClick()
+        if (!this.noClickAnimation) this.animateClick()
 
         return false
       }
