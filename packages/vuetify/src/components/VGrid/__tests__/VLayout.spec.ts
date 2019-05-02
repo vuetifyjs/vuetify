@@ -13,14 +13,10 @@ describe('VLayout.ts', () => {
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 
   beforeEach(() => {
-    mountFunction = (options = {}) => {
-      return mount(VLayout, {
-        ...options
-      })
-    }
+    mountFunction = (options = {}) => mount(VLayout, options)
   })
 
-  it('should work', () => {
+  it('should render', () => {
     const wrapper = mountFunction()
 
     expect(wrapper.html()).toMatchSnapshot()

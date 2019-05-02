@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VLayout.ts should work 1`] = `
+exports[`VLayout.ts should render 1`] = `
 
 <div class="layout">
 </div>
