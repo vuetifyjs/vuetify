@@ -280,8 +280,7 @@ export default mixins<options &
       return this.genSlot('append', 'inner', [
         this.genIcon(
           icon,
-          (!this.$listeners['click:clear'] && this.clearIconCb) || this.clearableCallback,
-          false
+          (!this.$listeners['click:clear'] && this.clearIconCb) || this.clearableCallback
         )
       ])
     },
