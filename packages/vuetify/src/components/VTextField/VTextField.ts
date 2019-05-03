@@ -17,10 +17,10 @@ import Ripple from '../../directives/ripple'
 
 // Utilities
 import { keyCodes } from '../../util/helpers'
-import mixins, { ExtractVue } from '../../util/mixins'
 import { deprecate } from '../../util/console'
 
 // Types
+import mixins, { ExtractVue } from '../../util/mixins'
 import { VNode } from 'vue/types'
 import Vue from 'vue'
 
@@ -115,10 +115,6 @@ export default mixins<options &
     },
     counterValue (): number {
       return (this.internalValue || '').toString().length
-    },
-    // TODO: remove deprecated
-    hasOutline (): boolean {
-      return this.outline || this.outlined
     },
     internalValue: {
       get (): any {
@@ -279,7 +275,7 @@ export default mixins<options &
     genClearIcon () {
       if (!this.clearable) return null
 
-      const icon = !this.isDirty ? '' : 'clear'
+      const icon = this.isDirty ? 'clear' : ''
 
       return this.genSlot('append', 'inner', [
         this.genIcon(
@@ -334,7 +330,7 @@ export default mixins<options &
       const listeners = Object.assign({}, this.$listeners)
       delete listeners['change'] // Change should not be bound externally
 
-      const data = {
+      return this.$createElement('input', {
         style: {},
         domProps: {
           value: this.maskText(this.lazyValue)
@@ -357,9 +353,7 @@ export default mixins<options &
           keydown: this.onKeyDown
         }),
         ref: 'input'
-      }
-
-      return this.$createElement('input', data)
+      })
     },
     genMessages () {
       if (this.hideDetails) return null
