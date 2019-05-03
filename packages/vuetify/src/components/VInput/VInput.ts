@@ -16,10 +16,11 @@ import {
   convertToUnit,
   kebabCase
 } from '../../util/helpers'
-import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
 import Vue, { VNode, VNodeData, PropType } from 'vue'
+import mixins, { ExtractVue } from '../../util/mixins'
+
 interface options extends Vue {
   /* eslint-disable-next-line camelcase */
   $_modelEvent: string
@@ -85,7 +86,7 @@ export default mixins<options &
         (this.persistentHint || this.isFocused)
     },
     hasLabel (): boolean {
-      return Boolean(this.$slots.label || this.label)
+      return !!(this.$slots.label || this.label)
     },
     // Proxy for `lazyValue`
     // This allows an input
@@ -180,7 +181,7 @@ export default mixins<options &
 
       return this.$createElement('div', {
         staticClass: `v-input__icon v-input__icon--${kebabCase(type)}`,
-        key: `${type}${icon}`
+        key: type + icon
       }, [
         this.$createElement(
           VIcon,
