@@ -18,6 +18,7 @@ import Ripple from '../../directives/ripple'
 // Utilities
 import { keyCodes } from '../../util/helpers'
 import mixins, { ExtractVue } from '../../util/mixins'
+import { deprecate } from '../../util/console'
 
 // Types
 import { VNode } from 'vue/types'
@@ -72,6 +73,7 @@ export default mixins<options &
     fullWidth: Boolean,
     label: String,
     outline: Boolean,
+    outlined: Boolean,
     placeholder: String,
     prefix: String,
     prependInnerIcon: String,
@@ -113,6 +115,10 @@ export default mixins<options &
     },
     counterValue (): number {
       return (this.internalValue || '').toString().length
+    },
+    // TODO: remove deprecated
+    hasOutline (): boolean {
+      return this.outline || this.outlined
     },
     internalValue: {
       get (): any {
@@ -201,6 +207,11 @@ export default mixins<options &
         })
       } else this.lazyValue = val
     }
+  },
+
+  created () {
+    /* istanbul ignore if */
+    if (this.outline) deprecate('outline', 'outlined')
   },
 
   mounted () {

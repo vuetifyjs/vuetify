@@ -27,7 +27,7 @@
       </v-flex>
       <v-flex xs6>
         <v-textarea
-          outline
+          outlined
           name="input-7-4"
           label="Outline textarea"
           value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
