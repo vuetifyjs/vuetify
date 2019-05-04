@@ -26,20 +26,20 @@ interface options extends Vue {
   $_modelEvent: string
 }
 
-export default mixins<options &
-/* eslint-disable indent */
+const baseMixins = mixins<options &
   ExtractVue<[
     typeof Colorable,
     typeof Themeable,
     typeof Validatable
   ]>
-/* eslint-enable indent */
 >(
   Colorable,
   Themeable,
   Validatable
-  /* @vue/component */
-).extend({
+)
+
+/* @vue/component */
+export default baseMixins.extend({
   name: 'v-input',
 
   props: {
