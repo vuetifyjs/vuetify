@@ -32,22 +32,22 @@ interface options extends Vue {
   }
 }
 
-const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
-
-/* @vue/component */
-export default mixins<options &
-/* eslint-disable indent */
+const baseMixins = mixins<options &
   ExtractVue<[
     typeof VInput,
     typeof Maskable,
     typeof Loadable
   ]>
-/* eslint-enable indent */
 >(
   VInput,
   Maskable,
   Loadable
-).extend({
+)
+
+const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
+
+/* @vue/component */
+export default baseMixins.extend({
   name: 'v-text-field',
 
   directives: { Ripple },
