@@ -133,8 +133,8 @@ export default VSelect.extend<options>().extend({
       return this.hasDisplayedItems || !this.hideNoData
     },
     $_menuProps (): object {
-      const props = VSelect.options.computed.$_menuProps.call(this)
-      props.contentClass = `v-autocomplete__content ${props.contentClass || ''}`.trim()
+      const props = VSelect.options.computed.$_menuProps.call(this);
+      (props as any).contentClass = `v-autocomplete__content ${(props as any).contentClass || ''}`.trim()
       return {
         ...defaultMenuProps,
         ...props
