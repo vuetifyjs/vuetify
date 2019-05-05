@@ -82,10 +82,13 @@ rtl(v-list-rtl, "v-list")
       width: 100%
 
     &__title
-      height: 24px
+      min-height: 24px
       line-height: 24px
       position: relative
       text-align: left
+
+      > .v-badge
+        margin-top: 16px
 
     &__sub-title
       font-size: $list-sub-title-font-size
