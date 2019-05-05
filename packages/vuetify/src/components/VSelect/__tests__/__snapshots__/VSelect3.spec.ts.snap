@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`.ts should add color to selected index 1`] = `
+exports[`VSelect.ts should add color to selected index 1`] = `
 
 <div role="combobox"
      class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"

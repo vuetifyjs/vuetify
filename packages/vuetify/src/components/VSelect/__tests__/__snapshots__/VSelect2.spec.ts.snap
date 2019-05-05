@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`.ts should be clearable with prop, dirty and multi select 1`] = `
+exports[`VSelect.ts should be clearable with prop, dirty and multi select 1`] = `
 
 <div role="combobox"
      class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
@@ -54,7 +54,7 @@ exports[`.ts should be clearable with prop, dirty and multi select 1`] = `
 
 `;
 
-exports[`.ts should be clearable with prop, dirty and single select 1`] = `
+exports[`VSelect.ts should be clearable with prop, dirty and single select 1`] = `
 
 <div role="combobox"
      class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
@@ -108,7 +108,7 @@ exports[`.ts should be clearable with prop, dirty and single select 1`] = `
 
 `;
 
-exports[`.ts should use scoped slot for selection generation 1`] = `
+exports[`VSelect.ts should use scoped slot for selection generation 1`] = `
 
 <div role="combobox"
      class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
@@ -153,7 +153,7 @@ exports[`.ts should use scoped slot for selection generation 1`] = `
 
 `;
 
-exports[`.ts should use slotted append-item 1`] = `
+exports[`VSelect.ts should use slotted append-item 1`] = `
 
 <div role="list"
      class="v-list v-sheet v-sheet--tile theme--light"
@@ -176,7 +176,7 @@ exports[`.ts should use slotted append-item 1`] = `
 
 `;
 
-exports[`.ts should use slotted prepend-item 1`] = `
+exports[`VSelect.ts should use slotted prepend-item 1`] = `
 
 <div role="list"
      class="v-list v-sheet v-sheet--tile theme--light"

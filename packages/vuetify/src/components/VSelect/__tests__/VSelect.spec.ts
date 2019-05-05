@@ -2,7 +2,6 @@
 import Vue from 'vue'
 
 // Components
-// import { test } from '@/test'
 import VSelect from '../VSelect'
 import {
   VListTile,
@@ -26,7 +25,6 @@ describe('VSelect.ts', () => {
     el.setAttribute('data-app', 'true')
     document.body.appendChild(el)
     mountFunction = (options = {}) => {
-      let localVue: typeof Vue
       return mount(VSelect, {
         ...options,
         mocks: {
