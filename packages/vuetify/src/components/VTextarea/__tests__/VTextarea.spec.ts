@@ -62,7 +62,7 @@ describe('VTextarea.ts', () => {
   it('should calculate height on mounted', async () => {
     const calculateInputHeight = jest.fn()
 
-    const wrapper = mountFunction({
+    mountFunction({
       attachToDocument: true,
       propsData: {
         autoGrow: true
