@@ -47,11 +47,11 @@ export default Selectable.extend({
       return {
         'aria-checked': String(this.isActive),
         'aria-disabled': String(this.disabled),
-        'role': 'switch'
+        role: 'switch'
       }
     },
     switchData (): VNodeData {
-      return this.setTextColor(this.loading ? undefined : this.computedColor, {
+      return this.setTextColor(this.loading && this.computedColor, {
         class: this.themeClasses
       })
     }
