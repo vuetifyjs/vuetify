@@ -28,6 +28,10 @@ module.exports = {
     events: [
       {
         name: 'input',
+        value: 'string | object'
+      },
+      {
+        name: 'update:color',
         value: VColorPickerColor
       },
       {

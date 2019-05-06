@@ -4,8 +4,6 @@ import {
   MountOptions,
   Wrapper
 } from '@vue/test-utils'
-import { fromRGBA } from '../util'
-import { exportAllDeclaration } from 'babel-types';
 
 describe('VColorPicker.ts', () => {
   type Instance = InstanceType<typeof VColorPicker>
@@ -59,9 +57,8 @@ describe('VColorPicker.ts', () => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('.v-color-picker__swatches').exists()).toBe(true);
+    expect(wrapper.find('.v-color-picker__swatches').exists()).toBe(true)
   })
-
 
   it('should hide canvas', () => {
     const wrapper = mountFunction({
@@ -71,7 +68,7 @@ describe('VColorPicker.ts', () => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('.v-color-picker__canvas').exists()).toBe(false);
+    expect(wrapper.find('.v-color-picker__canvas').exists()).toBe(false)
   })
 
   it('should hide inputs', () => {
@@ -82,7 +79,7 @@ describe('VColorPicker.ts', () => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('.v-color-picker__edit').exists()).toBe(false);
+    expect(wrapper.find('.v-color-picker__edit').exists()).toBe(false)
   })
 
   it('should return hex if given hex', async () => {
@@ -100,7 +97,7 @@ describe('VColorPicker.ts', () => {
     const input = wrapper.find('.v-color-picker__input input')
     const el = input.element as HTMLInputElement
 
-    el.value = "255"
+    el.value = '255'
     input.trigger('input')
 
     await wrapper.vm.$nextTick()
@@ -123,7 +120,7 @@ describe('VColorPicker.ts', () => {
     const input = wrapper.find('.v-color-picker__input input')
     const el = input.element as HTMLInputElement
 
-    el.value = "255"
+    el.value = '255'
     input.trigger('input')
 
     await wrapper.vm.$nextTick()

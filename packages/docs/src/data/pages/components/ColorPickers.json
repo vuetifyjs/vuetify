@@ -2,9 +2,6 @@
   "title": "header",
   "titleText": "headerText",
   "file": "components/VColorPicker",
-  "supplemental": [
-    "Color"
-  ],
   "children": [
     {
       "type": "section",
@@ -28,22 +25,9 @@
       "type": "section",
       "children": [
         {
-          "type": "supplemental",
-          "value": [
-            {
-              "type": "markup",
-              "value": "ts_color_picker_model"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
           "type": "examples",
           "value": [
+            "model",
             "swatches",
             "inputs",
             "canvas"
