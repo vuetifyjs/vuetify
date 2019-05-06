@@ -8,7 +8,10 @@ import { BaseItemGroup } from '../VItemGroup/VItemGroup'
 
 // Mixins
 import Comparable from '../../mixins/comparable'
+
+// Types
 import mixins from '../../util/mixins'
+import { PropValidator } from 'vue/types/options'
 
 const baseMixins = mixins(
   Comparable,
@@ -42,12 +45,13 @@ export default baseMixins.extend({
     // force default to null
     value: {
       default: null
-    }
+    } as PropValidator<any>
   },
 
   computed: {
     classes (): object {
       return {
+        ...VInput.options.computed.classes.call(this),
         'v-input--selection-controls v-input--radio-group': true,
         'v-input--radio-group--column': this.column && !this.row,
         'v-input--radio-group--row': this.row
@@ -71,8 +75,6 @@ export default baseMixins.extend({
 
       return render
     },
-    onClick (item: any) {
-      BaseItemGroup.options.methods.onClick.call(this, item)
-    }
+    onClick: BaseItemGroup.options.methods.onClick
   }
 })

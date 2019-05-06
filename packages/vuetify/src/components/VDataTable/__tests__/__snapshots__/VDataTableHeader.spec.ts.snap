@@ -498,7 +498,7 @@ exports[`VDataTableHeader.ts mobile should render 1`] = `
     <th colspan="6">
       <div class="v-data-table-header-mobile__wrapper">
         <div role="combobox"
-             class="v-input v-text-field v-select v-input--hide-details theme--light"
+             class="v-input v-input--hide-details theme--light v-text-field v-select"
         >
           <div class="v-input__control">
             <div class="v-input__slot">
@@ -555,7 +555,7 @@ exports[`VDataTableHeader.ts mobile should render with dataTableSelect header 1`
           </i>
         </div>
         <div role="combobox"
-             class="v-input v-text-field v-select v-input--hide-details theme--light"
+             class="v-input v-input--hide-details theme--light v-text-field v-select"
         >
           <div class="v-input__control">
             <div class="v-input__slot">
@@ -603,7 +603,7 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
     <th colspan="6">
       <div class="v-data-table-header-mobile__wrapper">
         <div role="combobox"
-             class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+             class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
         >
           <div class="v-input__control">
             <div class="v-input__slot">
@@ -665,7 +665,7 @@ exports[`VDataTableHeader.ts mobile should work with showGroupBy 1`] = `
     <th colspan="6">
       <div class="v-data-table-header-mobile__wrapper">
         <div role="combobox"
-             class="v-input v-text-field v-select v-input--hide-details theme--light"
+             class="v-input v-input--hide-details theme--light v-text-field v-select"
         >
           <div class="v-input__control">
             <div class="v-input__slot">
@@ -713,7 +713,7 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
     <th colspan="6">
       <div class="v-data-table-header-mobile__wrapper">
         <div role="combobox"
-             class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+             class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
         >
           <div class="v-input__control">
             <div class="v-input__slot">
@@ -775,7 +775,7 @@ exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
     <th colspan="6">
       <div class="v-data-table-header-mobile__wrapper">
         <div role="combobox"
-             class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+             class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
         >
           <div class="v-input__control">
             <div class="v-input__slot">

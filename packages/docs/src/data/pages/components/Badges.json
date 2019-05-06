@@ -27,11 +27,24 @@
         {
           "type": "examples",
           "value": [
-            "overlap",
-            "inline",
-            "icon",
-            "visibility"
+            "simple/bottom",
+            "simple/left",
+            "simple/overlap",
+            "simple/icon",
+            "simple/inline",
+            "simple/visibility",
+            "intermediate/hover",
+            "complex/dynamic"
           ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "playground",
+          "value": "playground"
         }
       ]
     },

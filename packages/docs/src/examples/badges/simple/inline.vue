@@ -11,7 +11,7 @@
 
     <v-badge color="green">
       <template v-slot:badge>
-        <v-icon dark small>list</v-icon>
+        <v-icon dark>list</v-icon>
       </template>
       <span>Lists</span>
     </v-badge>

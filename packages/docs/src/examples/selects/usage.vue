@@ -20,7 +20,7 @@
         <v-select
           :items="items"
           label="Outline style"
-          outline
+          outlined
         ></v-select>
       </v-flex>
 
