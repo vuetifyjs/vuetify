@@ -49,7 +49,7 @@
         <v-flex xs12 sm6 md3>
           <v-text-field
             label="Outline"
-            outline
+            outlined
           ></v-text-field>
         </v-flex>
 
@@ -57,7 +57,7 @@
           <v-text-field
             label="Outline"
             placeholder="Placeholder"
-            outline
+            outlined
           ></v-text-field>
         </v-flex>
 

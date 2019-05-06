@@ -51,8 +51,8 @@
           dark
           fab
         >
-          <v-icon>account_circle</v-icon>
-          <v-icon>close</v-icon>
+          <v-icon v-if="fab">close</v-icon>
+          <v-icon v-else>account_circle</v-icon>
         </v-btn>
       </template>
       <v-btn

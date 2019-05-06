@@ -1,6 +1,3 @@
-// Libraries
-import { VNode } from 'vue'
-
 // Styles
 import '../VCard/VCard.sass'
 
@@ -25,7 +22,10 @@ import {
   escapeHTML,
   getPropertyFromItem
 } from '../../util/helpers'
+
+// Types
 import mixins from '../../util/mixins'
+import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
 /* @vue/component */
@@ -68,7 +68,7 @@ export default mixins(Colorable, Themeable).extend({
   },
 
   computed: {
-    parsedItems (): any {
+    parsedItems (): any[] {
       return this.selectedItems.map(item => this.getValue(item))
     },
     tileActiveClass (): string {
@@ -77,7 +77,7 @@ export default mixins(Colorable, Themeable).extend({
     staticNoDataTile (): VNode {
       const tile = {
         on: {
-          mousedown: (e: MouseEvent) => e.preventDefault() // Prevent onBlur from being called
+          mousedown: (e: Event) => e.preventDefault() // Prevent onBlur from being called
         }
       }
 
@@ -91,7 +91,7 @@ export default mixins(Colorable, Themeable).extend({
     genAction (item: object, inputValue: any): VNode {
       const data = {
         on: {
-          click: (e: MouseEvent) => {
+          click: (e: Event) => {
             e.stopPropagation()
             this.$emit('select', item)
           }
@@ -142,7 +142,7 @@ export default mixins(Colorable, Themeable).extend({
     },
     genTile (
       item: object,
-      disabled = null as unknown as boolean,
+      disabled = null as null | boolean,
       avatar = false,
       value = false
     ): VNode | VNode[] | undefined {
@@ -157,7 +157,7 @@ export default mixins(Colorable, Themeable).extend({
 
       const tile = {
         on: {
-          mousedown: (e: MouseEvent) => {
+          mousedown: (e: Event) => {
             // Prevent onBlur from being called
             e.preventDefault()
           },
@@ -240,7 +240,7 @@ export default mixins(Colorable, Themeable).extend({
 
     return this.$createElement('div', {
       staticClass: 'v-select-list v-card',
-      'class': this.themeClasses
+      class: this.themeClasses
     }, [
       this.$createElement(VList, {
         props: {
