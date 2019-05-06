@@ -9,7 +9,7 @@ import VColorPickerEdit, { Mode, modes } from './VColorPickerEdit'
 import VColorPickerSwatches from './VColorPickerSwatches'
 
 // Helpers
-import { VColorPickerColor, parseColor, fromRGBA } from './util'
+import { VColorPickerColor, parseColor, fromRGBA, extractColor } from './util'
 import mixins from '../../util/mixins'
 import Themeable from '../../mixins/themeable'
 
@@ -47,7 +47,7 @@ export default mixins(Themeable).extend({
     },
     value: {
       type: [Object, String]
-    } as PropValidator<VColorPickerColor>,
+    },
     width: {
       type: [Number, String],
       default: 300
@@ -60,17 +60,22 @@ export default mixins(Themeable).extend({
 
   watch: {
     value: {
-      handler (v: VColorPickerColor) {
-        this.updateColor(parseColor(v))
+      handler (color: any) {
+        this.updateColor(parseColor(color, this.internalValue))
       },
       immediate: true
     }
   },
 
   methods: {
-    updateColor (v: VColorPickerColor) {
-      this.internalValue = v
-      this.$emit('input', v)
+    updateColor (color: VColorPickerColor) {
+      this.internalValue = color
+      const value = extractColor(this.internalValue, this.value)
+
+      if (value !== this.value) {
+        this.$emit('input', value)
+        this.$emit('update:color', this.internalValue)
+      }
     },
     genCanvas (): VNode {
       return this.$createElement(VColorPickerCanvas, {

@@ -84,14 +84,14 @@ export default Vue.extend({
       if (!ctx) return
 
       const saturationGradient = ctx.createLinearGradient(0, 0, canvas.width, 0)
-      saturationGradient.addColorStop(0, 'white')
+      saturationGradient.addColorStop(0, 'hsla(0, 0%, 100%, 1)') // white
       saturationGradient.addColorStop(1, `hsla(${this.color.hue}, 100%, 50%, 1)`)
       ctx.fillStyle = saturationGradient
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
       const valueGradient = ctx.createLinearGradient(0, 0, 0, canvas.height)
-      valueGradient.addColorStop(0, 'transparent')
-      valueGradient.addColorStop(1, 'black')
+      valueGradient.addColorStop(0, 'hsla(0, 0%, 100%, 0)') // transparent
+      valueGradient.addColorStop(1, 'hsla(0, 0%, 0%, 1)') // black
       ctx.fillStyle = valueGradient
       ctx.fillRect(0, 0, canvas.width, canvas.height)
     },
@@ -119,7 +119,7 @@ export default Vue.extend({
 
       // @ts-ignore
       this.emitColor(e.clientX, e.clientY)
-    }, 25),
+    }, 40),
     handleMouseUp () {
       window.removeEventListener('mousemove', this.handleMouseMove)
       window.removeEventListener('mouseup', this.handleMouseUp)

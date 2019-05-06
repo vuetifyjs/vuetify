@@ -61,7 +61,7 @@ export default mixins(Themeable).extend({
           background: color
         }
       }, [
-        deepEqual(this.color, parseColor(color)) && this.$createElement(VIcon, {
+        deepEqual(this.color, parseColor(color, null)) && this.$createElement(VIcon, {
           props: {
             small: true,
             dark: contrastRatio(this.color.rgba, white) > 2 && this.color.alpha > 0.5,

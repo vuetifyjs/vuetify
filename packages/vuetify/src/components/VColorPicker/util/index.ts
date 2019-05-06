@@ -25,7 +25,7 @@ export interface VColorPickerColor {
   rgba: RGBA
 }
 
-export function fromHSVA (hsva: HSVA) {
+export function fromHSVA (hsva: HSVA): VColorPickerColor {
   hsva = { ...hsva }
   const hexa = HSVAtoHex(hsva)
   return {
@@ -39,7 +39,7 @@ export function fromHSVA (hsva: HSVA) {
   }
 }
 
-export function fromHSLA (hsla: HSLA) {
+export function fromHSLA (hsla: HSLA): VColorPickerColor {
   const hsva = HSLAtoHSVA(hsla)
   const hexa = HSVAtoHex(hsva)
   return {
@@ -53,7 +53,7 @@ export function fromHSLA (hsla: HSLA) {
   }
 }
 
-export function fromRGBA (rgba: RGBA) {
+export function fromRGBA (rgba: RGBA): VColorPickerColor {
   const hsva = RGBAtoHSVA(rgba)
   const hexa = RGBAtoHex(rgba)
   return {
@@ -67,7 +67,7 @@ export function fromRGBA (rgba: RGBA) {
   }
 }
 
-export function fromHexa (hexa: Hexa) {
+export function fromHexa (hexa: Hexa): VColorPickerColor {
   const hsva = HexToHSVA(hexa)
   return {
     alpha: hsva.a,
@@ -80,7 +80,7 @@ export function fromHexa (hexa: Hexa) {
   }
 }
 
-export function fromHex (hex: Hex) {
+export function fromHex (hex: Hex): VColorPickerColor {
   return fromHexa(parseHex(hex))
 }
 
@@ -88,13 +88,16 @@ function has (obj: object, key: string[]) {
   return key.every(k => obj.hasOwnProperty(k))
 }
 
-export function parseColor (color: any) {
+export function parseColor (color: any, oldColor: VColorPickerColor | null) {
   if (!color) return fromRGBA({ r: 255, g: 0, b: 0, a: 1 })
 
   if (typeof color === 'string') {
     if (color === 'transparent') return fromHexa('#00000000')
 
-    return fromHexa(parseHex(color))
+    const hex = parseHex(color)
+
+    if (oldColor && hex === oldColor.hexa) return oldColor
+    else return fromHexa(hex)
   }
 
   if (typeof color === 'object') {
@@ -103,13 +106,30 @@ export function parseColor (color: any) {
     const a = color.hasOwnProperty('a') ? parseFloat(color.a) : 1
 
     if (has(color, ['r', 'g', 'b'])) {
-      return fromRGBA({ ...color, a })
+      if (oldColor && color === oldColor.rgba) return oldColor
+      else return fromRGBA({ ...color, a })
     } else if (has(color, ['h', 's', 'l'])) {
-      return fromHSLA({ ...color, a })
+      if (oldColor && color === oldColor.hsla) return oldColor
+      else return fromHSLA({ ...color, a })
     } else if (has(color, ['h', 's', 'v'])) {
-      return fromHSVA({ ...color, a })
+      if (oldColor && color === oldColor.hsva) return oldColor
+      else return fromHSVA({ ...color, a })
     }
   }
 
   return fromRGBA({ r: 255, g: 0, b: 0, a: 1 })
+}
+
+export function extractColor (color: VColorPickerColor, input: any) {
+  if (typeof input === 'string') {
+    return input.length === 7 ? color.hex : color.hexa
+  }
+
+  if (typeof input === 'object') {
+    if (has(input, ['r', 'g', 'b'])) return color.rgba
+    else if (has(input, ['h', 's', 'l'])) return color.hsla
+    else if (has(input, ['h', 's', 'v'])) return color.hsva
+  }
+
+  return color
 }
