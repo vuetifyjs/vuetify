@@ -1,9 +1,12 @@
+// Styles
 import './VSnackbar.sass'
 
+// Mixins
 import Colorable from '../../mixins/colorable'
 import Toggleable from '../../mixins/toggleable'
 import { factory as PositionableFactory } from '../../mixins/positionable'
 
+// Types
 import mixins from '../../util/mixins'
 import { VNode } from 'vue'
 
@@ -26,11 +29,9 @@ export default mixins(
     vertical: Boolean
   },
 
-  data () {
-    return {
-      activeTimeout: -1
-    }
-  },
+  data: () => ({
+    activeTimeout: -1
+  }),
 
   computed: {
     classes (): object {
@@ -73,8 +74,8 @@ export default mixins(
   render (h): VNode {
     return h('transition', {
       attrs: { name: 'v-snack-transition' }
-    }, this.isActive && [
-      h('div', {
+    }, [
+      this.isActive && h('div', {
         staticClass: 'v-snack',
         class: this.classes,
         on: this.$listeners

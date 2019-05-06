@@ -31,17 +31,27 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "dense",
-            "prominent",
-            "img",
-            "img-fade",
-            "hide",
-            "scroll-threshold",
-            "collapse",
-            "elevate-on-scroll",
-            "inverted-scroll"
+            "simple/dense",
+            "simple/prominent",
+            "simple/img",
+            "simple/hide",
+            "simple/collapse",
+            "simple/elevate-on-scroll",
+            "simple/inverted-scroll",
+            "intermediate/scroll-threshold",
+            "complex/img-fade",
+            "complex/menu"
           ]
         }
       ]

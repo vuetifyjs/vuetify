@@ -34,18 +34,27 @@
         {
           "type": "examples",
           "value": [
-            "flat",
-            "raised",
-            "depressed",
-            "dropdown",
-            "icon",
-            "floating",
-            "loaders",
-            "sizing",
-            "outline",
-            "round",
-            "block"
+            "simple/flat",
+            "simple/raised",
+            "simple/depressed",
+            "simple/dropdown",
+            "simple/icon",
+            "simple/floating",
+            "simple/sizing",
+            "simple/outline",
+            "simple/round",
+            "simple/block",
+            "intermediate/loaders"
           ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "playground",
+          "value": "playground"
         }
       ]
     },

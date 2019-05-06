@@ -4,6 +4,11 @@ const fs = require('fs')
 const map = require('./map')
 const deepmerge = require('deepmerge')
 
+const hyphenateRE = /\B([A-Z])/g
+function hyphenate (str) {
+  return str.replace(hyphenateRE, '-$1').toLowerCase()
+}
+
 function arrayMerge (a, b) {
   const arr = a.slice()
   for (let i = 0; i < b.length; i++) {
@@ -135,11 +140,6 @@ const directives = {}
 const installedComponents = Vue.options._base.options.components
 const installedDirectives = Vue.options._base.options.directives
 
-const hyphenateRE = /\B([A-Z])/g
-const hyphenate = str => {
-  return str.replace(hyphenateRE, '-$1').toLowerCase()
-}
-
 const componentNameRegex = /^(?:V[A-Z]|v-[a-z])/
 for (const name in installedComponents) {
   if (!componentNameRegex.test(name)) continue
@@ -174,17 +174,18 @@ function writeApiFile (obj, file) {
   const stream = fs.createWriteStream(file)
 
   const comment = `/*
- * THIS FILE HAS BEEN AUTOMATICALLY GENERATED USING THE API-GENERATOR TOOL.
- *
- * CHANGES MADE TO THIS FILE WILL BE LOST!
- */
+  * THIS FILE HAS BEEN AUTOMATICALLY GENERATED USING THE API-GENERATOR TOOL.
+  *
+  * CHANGES MADE TO THIS FILE WILL BE LOST!
+  */
 
 `
 
   stream.once('open', () => {
     stream.write(comment)
     stream.write('module.exports = ')
-    stream.write(JSON.stringify(obj, null, 2))
+    stream.write(JSON.stringify(obj, null, 2).replace(/'/g, '').replace(/"/g, '\''))
+    stream.write('\n')
     stream.end()
   })
 }

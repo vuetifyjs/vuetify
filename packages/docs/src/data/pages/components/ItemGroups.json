@@ -30,7 +30,8 @@
         {
           "type": "examples",
           "value": [
-            "post"
+            "post",
+            "togglePictures"
           ]
         }
       ]

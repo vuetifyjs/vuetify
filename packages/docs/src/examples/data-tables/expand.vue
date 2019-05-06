@@ -18,7 +18,7 @@
         </v-btn>
       </v-toolbar>
     </template>
-    <template v-slot:item.expanded="{ headers }">
+    <template v-slot:expanded-item="{ headers }">
       <td :colspan="headers.length">Peek-a-boo!</td>
     </template>
   </v-data-table>

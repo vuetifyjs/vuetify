@@ -36,7 +36,7 @@ describe('VRow.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render with regular slots', () => {
+  it.skip('should render with regular slots', () => {
     const wrapper = mountFunction({
       context: {
         props: {
@@ -58,7 +58,7 @@ describe('VRow.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render with scoped slots', () => {
+  it.skip('should render with scoped slots', () => {
     const vm = new Vue()
     const wrapper = mountFunction({
       context: {

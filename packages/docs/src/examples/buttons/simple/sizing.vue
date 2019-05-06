@@ -3,30 +3,30 @@
     <v-layout row wrap align-center>
       <v-flex xs12 sm6>
         <div class="text-xs-center">
-          <div>
+          <div class="my-2">
             <v-btn small color="primary" dark>Small Button</v-btn>
           </div>
-          <div>
+          <div class="my-2">
             <v-btn color="warning" dark>Normal Button</v-btn>
           </div>
-          <div>
+          <div class="my-2">
             <v-btn color="error" dark large>Large Button</v-btn>
           </div>
         </div>
       </v-flex>
       <v-flex xs12 sm6>
         <div class="text-xs-center">
-          <div>
+          <div class="my-2">
             <v-btn color="primary" fab small dark>
               <v-icon>edit</v-icon>
             </v-btn>
           </div>
-          <div>
+          <div class="my-2">
             <v-btn color="warning" fab dark>
               <v-icon>account_circle</v-icon>
             </v-btn>
           </div>
-          <div>
+          <div class="my-2">
             <v-btn color="error" fab large dark>
               <v-icon>alarm</v-icon>
             </v-btn>

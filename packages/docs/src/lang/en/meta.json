@@ -409,6 +409,11 @@
     "description": "The v-sheet component is the baseline paper element in Vuetify.",
     "keywords": "sheet, components"
   },
+  "components/simple-tables": {
+    "title": "Simple tables",
+    "description": "The v-simple-table component is a lightweight wrapper around the table element",
+    "keywords": "components, simple, table, data"
+  },
   "components/sliders": {
     "title": "Slider Component",
     "description": "The v-slider component is a better visualization of the number input. It is used for gathering numerical user data.",

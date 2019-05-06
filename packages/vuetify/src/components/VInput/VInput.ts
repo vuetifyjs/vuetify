@@ -16,36 +16,34 @@ import {
   convertToUnit,
   kebabCase
 } from '../../util/helpers'
-import { deprecate } from '../../util/console'
-import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
-import Vue, { VNode, VNodeData, VNodeDirective, PropType } from 'vue'
+import Vue, { VNode, VNodeData, PropType } from 'vue'
+import mixins, { ExtractVue } from '../../util/mixins'
+
 interface options extends Vue {
   /* eslint-disable-next-line camelcase */
   $_modelEvent: string
 }
 
-export default mixins<options &
-/* eslint-disable indent */
+const baseMixins = mixins<options &
   ExtractVue<[
     typeof Colorable,
     typeof Themeable,
     typeof Validatable
   ]>
-/* eslint-enable indent */
 >(
   Colorable,
   Themeable,
   Validatable
-  /* @vue/component */
-).extend({
+)
+
+/* @vue/component */
+export default baseMixins.extend({
   name: 'v-input',
 
   props: {
     appendIcon: String,
-    /** @deprecated */
-    appendIconCb: Function,
     backgroundColor: {
       type: String,
       default: ''
@@ -57,8 +55,6 @@ export default mixins<options &
     loading: Boolean,
     persistentHint: Boolean,
     prependIcon: String,
-    /** @deprecated */
-    prependIconCb: Function,
     value: null as any as PropType<any>
   },
 
@@ -71,10 +67,8 @@ export default mixins<options &
   },
 
   computed: {
-    classes: (): object => ({}),
-    classesInput (): object {
+    classes (): object {
       return {
-        ...this.classes,
         'v-input--has-state': this.hasState,
         'v-input--hide-details': this.hideDetails,
         'v-input--is-label-active': this.isLabelActive,
@@ -86,16 +80,13 @@ export default mixins<options &
         ...this.themeClasses
       }
     },
-    directivesInput (): VNodeDirective[] {
-      return []
-    },
     hasHint (): boolean {
       return !this.hasMessages &&
         !!this.hint &&
         (this.persistentHint || this.isFocused)
     },
     hasLabel (): boolean {
-      return Boolean(this.$slots.label || this.label)
+      return !!(this.$slots.label || this.label)
     },
     // Proxy for `lazyValue`
     // This allows an input
@@ -155,19 +146,12 @@ export default mixins<options &
         this.$slots.default
       ]
     },
-    // TODO: remove shouldDeprecate (2.0), used for clearIcon
     genIcon (
       type: string,
-      cb?: (e: Event) => void,
-      shouldDeprecate = true
+      cb?: (e: Event) => void
     ) {
       const icon = (this as any)[`${type}Icon`]
       const eventName = `click:${kebabCase(type)}`
-      cb = cb || (this as any)[`${type}IconCb`]
-
-      if (shouldDeprecate && type && cb) {
-        deprecate(`:${type}-icon-cb`, `@${eventName}`, this)
-      }
 
       const data: VNodeData = {
         props: {
@@ -197,7 +181,7 @@ export default mixins<options &
 
       return this.$createElement('div', {
         staticClass: `v-input__icon v-input__icon--${kebabCase(type)}`,
-        key: `${type}${icon}`
+        key: type + icon
       }, [
         this.$createElement(
           VIcon,
@@ -210,7 +194,6 @@ export default mixins<options &
       return this.$createElement('div', this.setBackgroundColor(this.backgroundColor, {
         staticClass: 'v-input__slot',
         style: { height: convertToUnit(this.height) },
-        directives: this.directivesInput,
         on: {
           click: this.onClick,
           mousedown: this.onMouseDown,
@@ -305,7 +288,7 @@ export default mixins<options &
     return h('div', this.setTextColor(this.validationState, {
       staticClass: 'v-input',
       attrs: this.attrsInput,
-      'class': this.classesInput
+      class: this.classes
     }), this.genContent())
   }
 })

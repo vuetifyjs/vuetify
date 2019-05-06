@@ -28,7 +28,7 @@ export default Vue.extend({
       const children = []
       const value = getObjectValueByPath(props.item, header.value)
 
-      const slotName = `column.${header.value}`
+      const slotName = header.value
       const scopedSlot = data.scopedSlots && data.scopedSlots[slotName]
       const regularSlot = computedSlots[slotName]
 
