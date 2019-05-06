@@ -1,6 +1,11 @@
 <template>
-  <div id="lateral">
-    <v-toolbar dark tabs flat color="indigo">
+  <v-card id="lateral">
+    <v-toolbar
+      dark
+      tabs
+      flat
+      color="indigo"
+    >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
       <v-toolbar-title>Page title</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -23,33 +28,46 @@
         </v-tabs>
       </template>
     </v-toolbar>
-    <v-tabs-items v-model="tabs">
-      <v-tab-item
-        v-for="content in ['one', 'two', 'three']"
-        :key="content"
-        :value="content"
-      >
-        <v-card height="200px" flat>
-        </v-card>
-      </v-tab-item>
-    </v-tabs-items>
+    <v-card-text>
+      <v-tabs-items v-model="tabs">
+        <v-tab-item
+          v-for="content in ['one', 'two', 'three']"
+          :key="content"
+          :value="content"
+        >
+          <v-card
+            height="200px"
+            flat
+          >
+          </v-card>
+        </v-tab-item>
+      </v-tabs-items>
+    </v-card-text>
     <v-fab-transition>
       <v-btn
         :key="activeFab.icon"
-        v-model="fab"
         :color="activeFab.color"
-        dark
         fab
-        fixed
+        large
+        dark
         bottom
         left
+        class="v-btn--example"
       >
         <v-icon>{{ activeFab.icon }}</v-icon>
-        <v-icon>close</v-icon>
       </v-btn>
     </v-fab-transition>
-  </div>
+  </v-card>
 </template>
+
+<style>
+  /* This is for documentation purposes and will not be needed in your application */
+  #lateral .v-btn--example {
+    bottom: 0;
+    position: absolute;
+    margin: 0 0 16px 16px;
+  }
+</style>
 
 <script>
   export default {
@@ -62,7 +80,7 @@
     computed: {
       activeFab () {
         switch (this.tabs) {
-          case 'one': return { 'color': 'indigo', icon: 'share' }
+          case 'one': return { 'color': 'success', icon: 'share' }
           case 'two': return { 'color': 'red', icon: 'edit' }
           case 'three': return { 'color': 'green', icon: 'keyboard_arrow_up' }
           default: return {}
@@ -71,14 +89,3 @@
     }
   }
 </script>
-
-<style>
-  /* This is for documentation purposes and will not be needed in your application */
-  #lateral .v-speed-dial,
-  #lateral .v-btn--floating {
-    position: absolute;
-  }
-  #lateral .v-btn--floating {
-    margin: 0 0 16px 16px;
-  }
-</style>

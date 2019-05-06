@@ -1,6 +1,7 @@
 <template>
   <div class="text-xs-center">
     <v-btn
+      class="mx-2"
       :loading="loading"
       :disabled="loading"
       color="secondary"
@@ -13,7 +14,7 @@
       :loading="loading3"
       :disabled="loading3"
       color="blue-grey"
-      class="white--text"
+      class="mx-2 white--text"
       @click="loader = 'loading3'"
     >
       Upload
@@ -21,6 +22,7 @@
     </v-btn>
 
     <v-btn
+      class="mx-2"
       :loading="loading2"
       :disabled="loading2"
       color="success"
@@ -33,6 +35,7 @@
     </v-btn>
 
     <v-btn
+      class="mx-2"
       :loading="loading4"
       :disabled="loading4"
       color="info"
@@ -44,6 +47,17 @@
           <v-icon light>cached</v-icon>
         </span>
       </template>
+    </v-btn>
+
+    <v-btn
+      :loading="loading5"
+      :disabled="loading5"
+      color="blue-grey"
+      class="mx-2 white--text"
+      fab
+      @click="loader = 'loading5'"
+    >
+      <v-icon dark>cloud_upload</v-icon>
     </v-btn>
   </div>
 </template>
@@ -95,7 +109,8 @@
         loading: false,
         loading2: false,
         loading3: false,
-        loading4: false
+        loading4: false,
+        loading5: false
       }
     },
     watch: {
