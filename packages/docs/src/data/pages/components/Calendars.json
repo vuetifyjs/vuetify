@@ -30,13 +30,8 @@
       "type": "section",
       "children": [
         {
-          "type": "examples",
-          "value": [
-            "simple/weekly",
-            "simple/daily",
-            "intermediate/slots",
-            "complex/events"
-          ]
+          "type": "playground",
+          "value": "playground"
         }
       ]
     },
@@ -44,8 +39,13 @@
       "type": "section",
       "children": [
         {
-          "type": "playground",
-          "value": "playground"
+          "type": "examples",
+          "value": [
+            "simple/weekly",
+            "simple/daily",
+            "intermediate/slots",
+            "complex/events"
+          ]
         }
       ]
     },
