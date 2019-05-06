@@ -1,12 +1,47 @@
 <template>
   <div>
-    <v-layout row wrap justify-space-around>
-      <v-switch v-model="sticky" label="Sticky"></v-switch>
-      <v-switch v-model="singleLine" label="Single-line"></v-switch>
-      <v-select v-model="icon" :items="icons" label="Icon" style="max-width: 250px;"></v-select>
-      <v-select v-model="color" :items="colors" label="Color" style="max-width: 250px;"></v-select>
-      <v-select v-model="iconColor" :items="colors" label="Icon color" style="max-width: 250px;"></v-select>
-      <v-slider v-model="elevation" label="Elevation" min="0" max="24" style="width: 100%;"></v-slider>
+    <v-layout
+      row
+      wrap
+      justify-space-around
+    >
+      <v-switch
+        v-model="sticky"
+        label="Sticky"
+      ></v-switch>
+      <v-switch
+        v-model="singleLine"
+        label="Single-line"
+      ></v-switch>
+      <v-select
+        v-model="icon"
+        :items="icons"
+        label="Icon"
+        style="max-width: 250px;"
+        clearable
+      ></v-select>
+      <v-select
+        v-model="color"
+        :items="colors"
+        label="Color"
+        style="max-width: 250px;"
+        clearable
+      ></v-select>
+      <v-select
+        v-model="iconColor"
+        :items="colors"
+        label="Icon color"
+        style="max-width: 250px;"
+        clearable
+      ></v-select>
+      <v-slider
+        v-model="elevation"
+        label="Elevation"
+        min="0"
+        max="24"
+        style="width: 100%;"
+        clearable
+      ></v-slider>
     </v-layout>
 
     <v-sheet
