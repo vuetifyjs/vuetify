@@ -57,6 +57,7 @@ export default baseMixins.extend({
   props: {
     appendOuterIcon: String,
     autofocus: Boolean,
+    /** @deprecated */
     box: Boolean,
     browserAutocomplete: String,
     clearable: Boolean,
@@ -69,6 +70,7 @@ export default baseMixins.extend({
       default: 'primary'
     },
     counter: [Boolean, Number, String],
+    filled: Boolean,
     flat: Boolean,
     fullWidth: Boolean,
     label: String,
@@ -106,7 +108,7 @@ export default baseMixins.extend({
         'v-text-field--solo': this.isSolo,
         'v-text-field--solo-inverted': this.soloInverted,
         'v-text-field--solo-flat': this.flat,
-        'v-text-field--box': this.box,
+        'v-text-field--filled': this.filled,
         'v-text-field--enclosed': this.isEnclosed,
         'v-text-field--reverse': this.reverse,
         'v-text-field--outline': this.outline,
@@ -137,7 +139,7 @@ export default baseMixins.extend({
     },
     isEnclosed (): boolean {
       return (
-        this.box ||
+        this.filled ||
         this.isSolo ||
         this.outline ||
         this.fullWidth
@@ -208,6 +210,7 @@ export default baseMixins.extend({
   created () {
     /* istanbul ignore if */
     if (this.outline) deprecate('outline', 'outlined')
+    if (this.box) deprecate('box', 'filled')
   },
 
   mounted () {
