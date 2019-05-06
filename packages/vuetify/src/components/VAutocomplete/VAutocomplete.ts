@@ -221,7 +221,7 @@ export default VSelect.extend<options>().extend({
     },
     updateMenuDimensions () {
       // Type from menuable is not making it through
-      this.isMenuActive && this.$refs.menu && (this.$refs.menu as any).updateDimensions()
+      this.isMenuActive && this.$refs.menu && this.$refs.menu.updateDimensions()
     },
     changeSelectedIndex (keyCode: number) {
       // Do not allow changing of selectedIndex
