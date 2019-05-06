@@ -31,6 +31,11 @@ export default mixins(Colorable).extend({
       default: 4
     },
 
+    lineCap: {
+      type: String,
+      default: 'butt'
+    },
+
     value: {
       type: [Number, String],
       default: 0
@@ -110,7 +115,8 @@ export default mixins(Colorable).extend({
           r: this.radius,
           'stroke-width': this.strokeWidth,
           'stroke-dasharray': this.strokeDashArray,
-          'stroke-dashoffset': offset
+          'stroke-dashoffset': offset,
+          'stroke-linecap': this.lineCap
         }
       })
     },
