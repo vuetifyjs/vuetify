@@ -6,7 +6,6 @@
           <v-app-bar-nav-icon></v-app-bar-nav-icon>
           <v-btn
             fab
-            small
             color="cyan accent-2"
             bottom
             left
@@ -15,9 +14,7 @@
           >
             <v-icon>add</v-icon>
           </v-btn>
-          <template v-slot:extension>
-            <v-toolbar-title class="white--text">My files</v-toolbar-title>
-          </template>
+          <v-toolbar-title class="white--text">My files</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn icon>
             <v-icon>search</v-icon>
