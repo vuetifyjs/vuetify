@@ -51,7 +51,7 @@ export default Selectable.extend({
       }
     },
     switchData (): VNodeData {
-      return this.setTextColor(this.loading && this.computedColor, {
+      return this.setTextColor(this.loading ? undefined : this.computedColor, {
         class: this.themeClasses
       })
     }
