@@ -18,9 +18,9 @@ import Ripple from '../../directives/ripple'
 // Utilities
 import { keyCodes } from '../../util/helpers'
 import { deprecate } from '../../util/console'
-import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
+import mixins, { ExtractVue } from '../../util/mixins'
 import { VNode } from 'vue/types'
 import Vue from 'vue'
 
@@ -32,22 +32,22 @@ interface options extends Vue {
   }
 }
 
-const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
-
-/* @vue/component */
-export default mixins<options &
-/* eslint-disable indent */
+const baseMixins = mixins<options &
   ExtractVue<[
     typeof VInput,
     typeof Maskable,
     typeof Loadable
   ]>
-/* eslint-enable indent */
 >(
   VInput,
   Maskable,
   Loadable
-).extend({
+)
+
+const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
+
+/* @vue/component */
+export default baseMixins.extend({
   name: 'v-text-field',
 
   directives: { Ripple },
@@ -56,8 +56,6 @@ export default mixins<options &
 
   props: {
     appendOuterIcon: String,
-    /** @deprecated */
-    appendOuterIconCb: Function,
     autofocus: Boolean,
     box: Boolean,
     browserAutocomplete: String,
@@ -66,7 +64,6 @@ export default mixins<options &
       type: String,
       default: '$vuetify.icons.clear'
     },
-    clearIconCb: Function,
     color: {
       type: String,
       default: 'primary'
@@ -76,11 +73,10 @@ export default mixins<options &
     fullWidth: Boolean,
     label: String,
     outline: Boolean,
+    outlined: Boolean,
     placeholder: String,
     prefix: String,
     prependInnerIcon: String,
-    /** @deprecated */
-    prependInnerIconCb: Function,
     reverse: Boolean,
     singleLine: Boolean,
     solo: Boolean,
@@ -102,6 +98,7 @@ export default mixins<options &
   computed: {
     classes (): object {
       return {
+        ...VInput.options.computed.classes.call(this),
         'v-text-field': true,
         'v-text-field--full-width': this.fullWidth,
         'v-text-field--prefix': this.prefix,
@@ -208,6 +205,11 @@ export default mixins<options &
     }
   },
 
+  created () {
+    /* istanbul ignore if */
+    if (this.outline) deprecate('outline', 'outlined')
+  },
+
   mounted () {
     this.autofocus && this.onFocus()
   },
@@ -273,15 +275,12 @@ export default mixins<options &
     genClearIcon () {
       if (!this.clearable) return null
 
-      const icon = !this.isDirty ? '' : 'clear'
-
-      if (this.clearIconCb) deprecate(':clear-icon-cb', '@click:clear', this)
+      const icon = this.isDirty ? 'clear' : ''
 
       return this.genSlot('append', 'inner', [
         this.genIcon(
           icon,
-          (!this.$listeners['click:clear'] && this.clearIconCb) || this.clearableCallback,
-          false
+          this.clearableCallback
         )
       ])
     },
@@ -331,7 +330,7 @@ export default mixins<options &
       const listeners = Object.assign({}, this.$listeners)
       delete listeners['change'] // Change should not be bound externally
 
-      const data = {
+      return this.$createElement('input', {
         style: {},
         domProps: {
           value: this.maskText(this.lazyValue)
@@ -354,9 +353,7 @@ export default mixins<options &
           keydown: this.onKeyDown
         }),
         ref: 'input'
-      }
-
-      return this.$createElement('input', data)
+      })
     },
     genMessages () {
       if (this.hideDetails) return null

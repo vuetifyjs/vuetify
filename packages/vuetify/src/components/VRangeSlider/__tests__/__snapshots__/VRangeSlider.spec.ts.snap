@@ -2,7 +2,7 @@
 
 exports[`VRangeSlider.ts should render a vertical slider 1`] = `
 
-<div class="v-input v-input__slider v-input__slider--vertical v-input--range-slider v-input--is-label-active v-input--is-dirty theme--light">
+<div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-input__slider v-input__slider--vertical v-input--range-slider">
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-slider v-slider--vertical theme--light">
@@ -64,7 +64,7 @@ exports[`VRangeSlider.ts should render a vertical slider 1`] = `
 
 exports[`VRangeSlider.ts should render disabled slider 1`] = `
 
-<div class="v-input v-input__slider v-input--range-slider v-input--is-label-active v-input--is-dirty v-input--is-disabled theme--light">
+<div class="v-input v-input--is-label-active v-input--is-dirty v-input--is-disabled theme--light v-input__slider v-input--range-slider">
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-slider v-slider--horizontal v-slider--disabled theme--light">

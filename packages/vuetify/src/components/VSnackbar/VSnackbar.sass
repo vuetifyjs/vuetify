@@ -2,56 +2,58 @@
 @import './_variables.scss'
 
 .v-snack
-  position: fixed
-  display: flex
   align-items: center
   color: $snackbar-color
-  pointer-events: none
-  z-index: 1000
+  display: flex
   font-size: 14px
-  left: 0
-  right: 0
+  left: 8px
+  pointer-events: none
+  position: fixed
+  right: 8px
+  z-index: 1000
 
   &--absolute
     position: absolute
 
   &--top
-    top: 0
+    top: 8px
 
   &--bottom
-    bottom: 0
+    bottom: 8px
 
   &__wrapper
-    display: flex
     align-items: center
     background-color: $snackbar-background-color
+    border-radius: 4px
+    display: flex
+    min-width: 344px
     pointer-events: auto
     width: 100%
     +elevation(6)
 
   &__content
-    width: 100%
-    height: 48px
-    padding: 14px 24px
-    display: flex
     align-items: center
+    display: flex
+    height: 48px
     justify-content: space-between
     overflow: hidden
+    padding: 16px 24px
+    width: 100%
 
-    .v-btn
+    .v-btn.v-btn
       color: $snackbar-color
       flex: 0 0 auto
-      padding: 8px
-      margin: 0 0 0 24px
       height: auto
+      margin: 0 -16px 0 24px
       min-width: auto
+      padding: 8px
       width: auto
 
       &__content
         margin: -2px
 
       +rtl()
-        margin: 0 24px 0 0
+        margin: 0 24px 0 -16px
 
       &::before
         display: none
@@ -61,16 +63,16 @@
     padding: 24px
 
   &--vertical &__content
-    height: 112px
-    padding: 24px 24px 14px
-    flex-direction: column
     // https://stackoverflow.com/questions/35111090/text-in-a-flex-container-doesnt-wrap-in-ie11
     align-items: stretch
+    flex-direction: column
+    height: 112px
+    padding: 24px 24px 14px
 
     .v-btn
-      &.v-btn //specificity
-        justify-content: flex-end
-        padding: 0
+      &.v-btn // Higher specificity
+        align-self: flex-end
+        justify-self: flex-end
         margin-left: 0
         margin-top: 24px
 
@@ -86,9 +88,7 @@
     &__wrapper
       width: auto
       max-width: 568px
-      min-width: 288px
       margin: 0 auto
-      border-radius: 2px
 
       .v-snack--left &
         margin-left: 0
@@ -101,6 +101,7 @@
 
       &.v-snack--top
         transform: translateY($snackbar-corner-offset)
+
       &.v-snack--bottom
         transform: translateY(0 - $snackbar-corner-offset)
 
@@ -115,6 +116,7 @@
   &-enter-active,
   &-leave-active
     transition: transform .4s map-get($transition, 'swing')
+
     .v-snack__content
       transition: opacity .3s linear .1s
 
@@ -131,6 +133,7 @@
   &-leave-to
     &.v-snack.v-snack--top
       // Extra 8px to hide the bottom shadow
-      transform: translateY(calc(-100% - 8px))
+      transform: translateY(calc(-100% - 24px))
+
     &.v-snack.v-snack--bottom
       transform: translateY(100%)

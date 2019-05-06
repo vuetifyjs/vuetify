@@ -10,7 +10,7 @@ import {
   Wrapper
 } from '@vue/test-utils'
 
-describe('.ts', () => {
+describe('VSelectList.ts', () => {
   type Instance = InstanceType<typeof VSelectList>
   let mountFunction: (options?: object) => Wrapper<Instance>
 
@@ -62,19 +62,6 @@ describe('.ts', () => {
   it('should display no-data-text when item slot is provided', async () => {
     const vm = new Vue()
     const itemSlot = () => vm.$createElement('div', ['this is not ok'])
-    const component = Vue.component('test', {
-      render (h) {
-        return h(VSelectList, {
-          props: {
-            items: [],
-            noDataText: 'this is ok'
-          },
-          scopedSlots: {
-            item: itemSlot
-          }
-        })
-      }
-    })
 
     const wrapper = mountFunction()
     await wrapper.vm.$nextTick()

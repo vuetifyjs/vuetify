@@ -5,6 +5,8 @@
   position: relative
   display: inline-flex
   vertical-align: middle
+  justify-content: center
+  align-items: center
 
   svg
     width: 100%
@@ -26,7 +28,7 @@
     .v-progress-circular__overlay
       animation: $progress-circular-rotate-dash
       stroke-linecap: round
-      stroke-dasharray: 80,200
+      stroke-dasharray: 80, 200
       stroke-dashoffset: 0px
 
   &__underlay
@@ -38,25 +40,19 @@
     z-index: 2
     transition: $progress-circular-overlay-transition
 
-  &__info
-    position: absolute
-    top: 50%
-    left: 50%
-    transform: translate(-50%, -50%)
+@keyframes progress-circular-dash
+  0%
+    stroke-dasharray: 1, 200
+    stroke-dashoffset: 0px
 
-  @keyframes progress-circular-dash
-    0%
-      stroke-dasharray: 1,200
-      stroke-dashoffset: 0px
+  50%
+    stroke-dasharray: 100, 200
+    stroke-dashoffset: -15px
 
-    50%
-      stroke-dasharray: 100,200
-      stroke-dashoffset: -15px
+  100%
+    stroke-dasharray: 100, 200
+    stroke-dashoffset: -125px
 
-    100%
-      stroke-dasharray: 100,200
-      stroke-dashoffset: -125px
-
-  @keyframes progress-circular-rotate
-    100%
-      transform: rotate(360deg)
+@keyframes progress-circular-rotate
+  100%
+    transform: rotate(360deg)
