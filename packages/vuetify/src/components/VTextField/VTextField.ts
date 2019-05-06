@@ -139,11 +139,14 @@ export default baseMixins.extend({
     },
     isEnclosed (): boolean {
       return (
-        this.filled ||
+        this.isFilled ||
         this.isSolo ||
         this.outline ||
         this.fullWidth
       )
+    },
+    isFilled (): boolean {
+      return this.box || this.filled
     },
     isLabelActive (): boolean {
       return this.isDirty || dirtyTypes.includes(this.type)
