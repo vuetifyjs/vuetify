@@ -1,14 +1,17 @@
+// Styles
 import './VProgressCircular.sass'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
-import mixins from '../../util/mixins'
+
+// Utils
+import { convertToUnit } from '../../util/helpers'
 
 // Types
-import { CreateElement, VNode, VNodeChildrenArrayContents } from 'vue'
+import { VNode, VNodeChildren } from 'vue'
 
 /* @vue/component */
-export default mixins(Colorable).extend({
+export default Colorable.extend({
   name: 'v-progress-circular',
 
   props: {
@@ -36,6 +39,10 @@ export default mixins(Colorable).extend({
       default: 0
     }
   },
+
+  data: () => ({
+    radius: 20
+  }),
 
   computed: {
     calculatedSize (): number {
@@ -65,10 +72,6 @@ export default mixins(Colorable).extend({
       return parseFloat(this.value)
     },
 
-    radius (): number {
-      return 20
-    },
-
     strokeDashArray (): number {
       return Math.round(this.circumference * 1000) / 1000
     },
@@ -83,8 +86,8 @@ export default mixins(Colorable).extend({
 
     styles (): object {
       return {
-        height: `${this.calculatedSize}px`,
-        width: `${this.calculatedSize}px`
+        height: convertToUnit(this.calculatedSize),
+        width: convertToUnit(this.calculatedSize)
       }
     },
 
@@ -100,8 +103,8 @@ export default mixins(Colorable).extend({
   },
 
   methods: {
-    genCircle (h: CreateElement, name: string, offset: string | number): VNode {
-      return h('circle', {
+    genCircle (name: string, offset: string | number): VNode {
+      return this.$createElement('circle', {
         class: `v-progress-circular__${name}`,
         attrs: {
           fill: 'transparent',
@@ -114,30 +117,32 @@ export default mixins(Colorable).extend({
         }
       })
     },
-    genSvg (h: CreateElement): VNode {
+    genSvg (): VNode {
       const children = [
-        this.indeterminate || this.genCircle(h, 'underlay', 0),
-        this.genCircle(h, 'overlay', this.strokeDashOffset)
-      ] as VNodeChildrenArrayContents
+        this.indeterminate || this.genCircle('underlay', 0),
+        this.genCircle('overlay', this.strokeDashOffset)
+      ] as VNodeChildren
 
-      return h('svg', {
+      return this.$createElement('svg', {
         style: this.svgStyles,
         attrs: {
           xmlns: 'http://www.w3.org/2000/svg',
           viewBox: `${this.viewBoxSize} ${this.viewBoxSize} ${2 * this.viewBoxSize} ${2 * this.viewBoxSize}`
         }
       }, children)
+    },
+    genInfo (): VNode {
+      return this.$createElement('div', {
+        staticClass: 'v-progress-circular__info'
+      }, this.$slots.default)
     }
   },
 
   render (h): VNode {
-    const info = h('div', { staticClass: 'v-progress-circular__info' }, this.$slots.default)
-    const svg = this.genSvg(h)
-
     return h('div', this.setTextColor(this.color, {
       staticClass: 'v-progress-circular',
       attrs: {
-        'role': 'progressbar',
+        role: 'progressbar',
         'aria-valuemin': 0,
         'aria-valuemax': 100,
         'aria-valuenow': this.indeterminate ? undefined : this.normalizedValue
@@ -145,6 +150,9 @@ export default mixins(Colorable).extend({
       class: this.classes,
       style: this.styles,
       on: this.$listeners
-    }), [svg, info])
+    }), [
+      this.genSvg(),
+      this.genInfo()
+    ])
   }
 })

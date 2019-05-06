@@ -8,7 +8,6 @@
   },
   "props": {
     "appendIcon": "crwdns12494:0crwdne12494:0",
-    "appendIconCb": "crwdns12496:0crwdne12496:0",
     "backgroundColor": "crwdns12498:0crwdne12498:0",
     "hideDetails": "crwdns12500:0crwdne12500:0",
     "hint": "crwdns12502:0crwdne12502:0",
@@ -17,7 +16,6 @@
     "persistentHint": "crwdns12508:0crwdne12508:0",
     "placeholder": "crwdns12510:0crwdne12510:0",
     "prependIcon": "crwdns12512:0crwdne12512:0",
-    "prependIconCb": "crwdns12514:0crwdne12514:0",
     "required": "crwdns12516:0crwdne12516:0",
     "tabindex": "crwdns12518:0crwdne12518:0",
     "toggleKeys": "crwdns12520:0crwdne12520:0",

@@ -40,7 +40,7 @@
             :rules="rules"
             counter="25"
             label="Outline"
-            outline
+            outlined
           ></v-text-field>
         </v-flex>
 

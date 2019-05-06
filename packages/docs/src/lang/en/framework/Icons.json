@@ -14,7 +14,7 @@
   "installMDISvg": "### Install Material Design Icons (JS SVG)",
   "installMDISvgText1": "Use the SVG Path's as designated in [@mdi/js](https://www.npmjs.com/package/@mdi/js). This is the recommended installation when optimizing your application for production. You **ONLY** need to include this if you plan on using more than the default icons.",
   "installMDISvgText2": "Specify the **mdiSvg** iconfont:",
-  "installMDISvgText3": "You can custom import only the icons you use granting a much smaller bundle size. Keep in mind you must prefix the path with `svg-`.",
+  "installMDISvgText3": "You can custom import only the icons you use granting a much smaller bundle size.",
   "installFA": "### Install Font Awesome 5 Icons",
   "installFAText1": "The easiest way to get started with **FontAwesome** is to use a cdn. Within the head of your main `index.html` place this snippet:",
   "installFAText2": "To install locally you can pull in the [Free](https://fontawesome.com/) version of **FontAwesome** using your preferred package manager:",

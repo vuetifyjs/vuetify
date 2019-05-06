@@ -5,6 +5,7 @@
         <p>Overflow</p>
 
         <v-overflow-btn
+          class="my-2"
           :items="dropdown_font"
           label="Overflow Btn"
           target="#dropdown-example"
@@ -15,6 +16,7 @@
         <p>Segmented</p>
 
         <v-overflow-btn
+          class="my-2"
           :items="dropdown_icon"
           label="Segmented Btn"
           segmented
@@ -26,6 +28,7 @@
         <p>Editable</p>
 
         <v-overflow-btn
+          class="my-2"
           :items="dropdown_edit"
           label="Editable Btn"
           editable
