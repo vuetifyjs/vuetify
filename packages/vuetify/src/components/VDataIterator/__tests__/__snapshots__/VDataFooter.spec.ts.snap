@@ -6,7 +6,7 @@ exports[`VDataFooter.ts should render and match snapshot 1`] = `
   <div class="v-data-footer__select">
     Items per page:
     <div role="combobox"
-         class="v-input v-text-field v-select v-input--hide-details theme--light"
+         class="v-input v-input--hide-details theme--light v-text-field v-select"
     >
       <div class="v-input__control">
         <div class="v-input__slot">
@@ -73,7 +73,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
   <div class="v-data-footer__select">
     Items per page:
     <div role="combobox"
-         class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+         class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
     >
       <div class="v-input__control">
         <div class="v-input__slot">
@@ -165,7 +165,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
   <div class="v-data-footer__select">
     Items per page:
     <div role="combobox"
-         class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+         class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
     >
       <div class="v-input__control">
         <div class="v-input__slot">
@@ -257,7 +257,7 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
   <div class="v-data-footer__select">
     Items per page:
     <div role="combobox"
-         class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+         class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
     >
       <div class="v-input__control">
         <div class="v-input__slot">
@@ -327,7 +327,7 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
   <div class="v-data-footer__select">
     Items per page:
     <div role="combobox"
-         class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+         class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
     >
       <div class="v-input__control">
         <div class="v-input__slot">

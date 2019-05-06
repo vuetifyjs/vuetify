@@ -51,9 +51,7 @@ export default VAutocomplete.extend({
   },
 
   methods: {
-    onFilteredItemsChanged () {
-      // nop
-    },
+    onFilteredItemsChanged: () => {},
     onInternalSearchChanged (val: any) {
       if (
         val &&
