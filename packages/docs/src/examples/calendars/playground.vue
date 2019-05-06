@@ -43,6 +43,18 @@
         v-model="dark"
         label="Dark"
       ></v-checkbox>
+      <v-checkbox
+        v-model="shortIntervals"
+        label="Short intervals"
+      ></v-checkbox>
+      <v-checkbox
+        v-model="shortMonths"
+        label="Short months"
+      ></v-checkbox>
+      <v-checkbox
+        v-model="shortWeekdays"
+        label="Short weekdays"
+      ></v-checkbox>
       <v-select
         v-model="color"
         :items="colorOptions"
@@ -228,6 +240,9 @@
           :interval-height="intervals.height"
           :interval-style="intervalStyle"
           :show-interval-label="showIntervalLabel"
+          :short-intervals="shortIntervals"
+          :short-months="shortMonths"
+          :short-weekdays="shortWeekdays"
           :color="color"
         >
           <template v-slot:day="day">
@@ -365,7 +380,10 @@
         { text: 'Blue Gray', value: 'blue-gray' },
         { text: 'Gray', value: 'gray' },
         { text: 'Black', value: 'black' }
-      ]
+      ],
+      shortIntervals: true,
+      shortMonths: false,
+      shortWeekdays: false
     }),
     computed: {
       intervalStyle () {
