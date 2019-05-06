@@ -160,7 +160,7 @@
     flex: 1 1 auto
     position: relative
 
-  &--field,
+  &--filled,
   &--full-width,
   &--outline
     position: relative
@@ -172,7 +172,7 @@
     input
       margin-top: 22px
 
-  &--field,
+  &--filled,
   &--full-width
     &.v-text-field--single-line
       input
@@ -198,7 +198,7 @@
       &--active
         transform: translateY(-6px) scale(.75)
 
-  &--field > .v-input__control > .v-input__slot
+  &--filled > .v-input__control > .v-input__slot
     border-top-left-radius: 4px
     border-top-right-radius: 4px
 
@@ -210,7 +210,7 @@
     margin: 0
     padding: 0
 
-    &:not(.v-text-field--field)
+    &:not(.v-text-field--filled)
       .v-progress-linear__background
         display: none
 
