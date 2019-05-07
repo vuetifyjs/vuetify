@@ -81,6 +81,7 @@ export default baseMixins.extend({
     prependInnerIcon: String,
     reverse: Boolean,
     singleLine: Boolean,
+    shaped: Boolean,
     solo: Boolean,
     soloInverted: Boolean,
     suffix: String,
@@ -112,7 +113,8 @@ export default baseMixins.extend({
         'v-text-field--enclosed': this.isEnclosed,
         'v-text-field--reverse': this.reverse,
         'v-text-field--outline': this.outline,
-        'v-text-field--placeholder': this.placeholder
+        'v-text-field--placeholder': this.placeholder,
+        'v-text-field--shaped': this.shaped
       }
     },
     counterValue (): number {

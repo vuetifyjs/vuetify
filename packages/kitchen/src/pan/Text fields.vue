@@ -105,6 +105,60 @@
               outline
             />
           </v-flex>
+
+          <v-flex
+            xs12
+            sm6
+            md3
+          >
+            <v-text-field
+              class="ma-2"
+              label="Filled & shaped"
+              filled
+              shaped
+            />
+          </v-flex>
+
+          <v-flex
+            xs12
+            sm6
+            md3
+          >
+            <v-text-field
+              class="ma-2"
+              label="Filled & shaped"
+              placeholder="Placeholder"
+              filled
+              shaped
+            />
+          </v-flex>
+
+          <v-flex
+            xs12
+            sm6
+            md3
+          >
+            <v-text-field
+              class="ma-2"
+              label="Outline & shaped"
+              outline
+              shaped
+            />
+          </v-flex>
+
+          <v-flex
+            xs12
+            sm6
+            md3
+          >
+            <v-text-field
+              class="ma-2"
+              label="Outline & shaped"
+              placeholder="Placeholder"
+              outline
+              shaped
+            />
+          </v-flex>
         </v-layout>
       </core-section>
 
