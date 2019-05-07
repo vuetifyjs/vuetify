@@ -63,6 +63,7 @@
     "friendly-errors-webpack-plugin": "^1.7.0",
     "happypack": "^5.0.1",
     "identity-obj-proxy": "^3.0.0",
+    "jest-canvas-mock": "^2.0.0",
     "mini-css-extract-plugin": "^0.5.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-loader": "^3.0.0",
