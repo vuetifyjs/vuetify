@@ -27,10 +27,21 @@
         {
           "type": "examples",
           "value": [
-            "profile",
-            "advanced",
-            "playground"
+            "simple/size",
+            "simple/tile",
+            "intermediate/default",
+            "intermediate/profile",
+            "complex/advanced"
           ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "playground",
+          "value": "playground"
         }
       ]
     },

@@ -33,9 +33,9 @@
               <core-goto :id="`question-${index + 1}`">
                 <doc-markdown :code="gotcha.q" />
               </core-goto>
-              <v-paper
+              <v-card
                 class="pa-3"
-                elevation="1"
+                outlined
               >
                 <doc-markdown :code="gotcha.a" />
 
@@ -49,7 +49,7 @@
                   :value="gotcha.s"
                   class="mb-0 mt-3"
                 />
-              </v-paper>
+              </v-card>
             </div>
           </template>
         </v-data-iterator>

@@ -98,7 +98,7 @@
     "clearIcon": "Applied when using **clearable** and the input is dirty",
     "counter": "Creates counter for input length; if no number is specified, it defaults to 25. Does not apply any validation.",
     "flat": "Mixins.Soloable.props.flat",
-    "fullWidth": "Desginates input type as full-width",
+    "fullWidth": "Designates input type as full-width",
     "multiLine": "Turns into textarea",
     "noResize": "Removes the resize handle, only applies to **multi-line** and **textarea** props",
     "outline": "Applies the outline style to the input",

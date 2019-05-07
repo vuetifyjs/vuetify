@@ -140,8 +140,8 @@ export default Vue.extend({
           ? itemsLength
           : this.pagination.pageStop
 
-        children = this.$scopedSlots.pageText
-          ? [this.$scopedSlots.pageText({ pageStart, pageStop, itemsLength })]
+        children = this.$scopedSlots['page-text']
+          ? [this.$scopedSlots['page-text']!({ pageStart, pageStop, itemsLength })]
           : [`${pageStart}-${pageStop} of ${itemsLength}`]
       }
 

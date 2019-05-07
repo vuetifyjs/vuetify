@@ -30,7 +30,7 @@
           <v-text-field
             label="Outline"
             single-line
-            outline
+            outlined
           ></v-text-field>
         </v-flex>
 

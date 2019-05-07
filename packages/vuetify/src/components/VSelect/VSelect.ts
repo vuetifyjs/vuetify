@@ -20,6 +20,8 @@ import ClickOutside from '../../directives/click-outside'
 // Utilities
 import { getPropertyFromItem, keyCodes } from '../../util/helpers'
 import { consoleError } from '../../util/console'
+
+// Types
 import mixins, { ExtractVue } from '../../util/mixins'
 import { PropValidator } from 'vue/types/options'
 import { VNode, VNodeDirective } from 'vue'
@@ -62,7 +64,6 @@ export default baseMixins.extend<options>().extend({
       type: String,
       default: '$vuetify.icons.dropdown'
     },
-    appendIconCb: Function,
     attach: {
       default: false
     } as PropValidator<string | boolean | Element | VNode>,
@@ -133,12 +134,13 @@ export default baseMixins.extend<options>().extend({
       return this.filterDuplicates(this.cachedItems.concat(this.items))
     },
     classes (): object {
-      return Object.assign({}, VTextField.options.computed.classes.call(this), {
+      return {
+        ...VTextField.options.computed.classes.call(this),
         'v-select': true,
         'v-select--chips': this.hasChips,
         'v-select--chips--small': this.smallChips,
         'v-select--is-menu-active': this.isMenuActive
-      })
+      }
     },
     /* Used by other components to overwrite */
     computedItems (): object[] {
@@ -149,14 +151,14 @@ export default baseMixins.extend<options>().extend({
         ? this.selectedItems.length
         : (this.getText(this.selectedItems[0]) || '').toString().length
     },
-    directives (): object[] | undefined {
+    directives (): VNodeDirective[] | undefined {
       return this.isFocused ? [{
         name: 'click-outside',
         value: this.blur,
         args: {
           closeConditional: this.closeConditional
         }
-      }] : undefined
+      } as VNodeDirective] : undefined
     },
     dynamicHeight () {
       return 'auto'
@@ -205,15 +207,13 @@ export default baseMixins.extend<options>().extend({
       return this.$createElement(VSelectList, this.listData)
     },
     virtualizedItems (): object[] {
-      return this.$_menuProps.auto
+      return (this.$_menuProps as any).auto
         ? this.computedItems
         : this.computedItems.slice(0, this.lastItem)
     },
-    menuCanShow (): boolean { return true },
-    $_menuProps (): any {
-      let normalisedProps
-
-      normalisedProps = typeof this.menuProps === 'string'
+    menuCanShow: () => true,
+    $_menuProps (): object {
+      let normalisedProps = typeof this.menuProps === 'string'
         ? this.menuProps.split(',')
         : this.menuProps
 
@@ -293,11 +293,11 @@ export default baseMixins.extend<options>().extend({
     closeConditional (e: Event) {
       return (
         // Click originates from outside the menu content
-        !!this.content &&
+        this.content &&
         !this.content.contains(e.target) &&
 
         // Click originates from outside the element
-        !!this.$el &&
+        this.$el &&
         !this.$el.contains(e.target as Node) &&
         e.target !== this.$el
       )
@@ -357,7 +357,7 @@ export default baseMixins.extend<options>().extend({
 
       return this.$createElement('div', this.setTextColor(color, {
         staticClass: 'v-select__selection v-select__selection--comma',
-        'class': {
+        class: {
           'v-select__selection--disabled': isDisabled
         },
         key: JSON.stringify(this.getValue(item))
@@ -380,7 +380,7 @@ export default baseMixins.extend<options>().extend({
       return [
         this.$createElement('div', {
           staticClass: 'v-select__slot',
-          directives: this.directives as VNodeDirective[]
+          directives: this.directives
         }, [
           this.genLabel(),
           this.prefix ? this.genAffix('prefix') : null,
@@ -425,7 +425,7 @@ export default baseMixins.extend<options>().extend({
       }, slots)
     },
     genMenu (): VNode {
-      const props = this.$_menuProps
+      const props = this.$_menuProps as any
       props.activator = this.$refs['input-slot']
 
       // Attach to root el so that

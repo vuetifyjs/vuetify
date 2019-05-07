@@ -33,7 +33,7 @@
           <v-text-field
             v-model="message4"
             label="Outline"
-            outline
+            outlined
             clearable
           ></v-text-field>
         </v-flex>

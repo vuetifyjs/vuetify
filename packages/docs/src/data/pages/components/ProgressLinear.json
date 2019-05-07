@@ -37,7 +37,12 @@
             "linearIndeterminate",
             "linearBuffer",
             "linearQueryIndeterminateAndDeterminate",
-            "linearCustomColors"
+            "linearCustomColors",
+            "rounded",
+            "loader",
+            "stream",
+            "striped",
+            "slot"
           ]
         }
       ]

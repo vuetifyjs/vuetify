@@ -34,19 +34,28 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "intermediate",
-            "infoCard",
-            "mediaWithText",
-            "outlined",
-            "horizontal",
-            "grids",
-            "customActions",
-            "twitterCard",
-            "loading",
-            "weather",
-            "advanced"
+            "simple/outlined",
+            "intermediate/intermediate",
+            "intermediate/infoCard",
+            "intermediate/mediaWithText",
+            "intermediate/grids",
+            "complex/horizontal",
+            "complex/customActions",
+            "complex/twitterCard",
+            "complex/loading",
+            "complex/weather",
+            "complex/advanced"
           ]
         }
       ]

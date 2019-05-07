@@ -1,6 +1,7 @@
 import './VDialog.sass'
 
 // Mixins
+import Activatable from '../../mixins/activatable'
 import Dependent from '../../mixins/dependent'
 import Detachable from '../../mixins/detachable'
 import Overlayable from '../../mixins/overlayable'
@@ -12,15 +13,15 @@ import Toggleable from '../../mixins/toggleable'
 import ClickOutside from '../../directives/click-outside'
 
 // Helpers
-import { convertToUnit, keyCodes, getSlotType } from '../../util/helpers'
+import { convertToUnit, keyCodes } from '../../util/helpers'
 import ThemeProvider from '../../util/ThemeProvider'
-import { consoleError } from '../../util/console'
 import mixins from '../../util/mixins'
 
 // Types
 import { VNode } from 'vue'
 
 const baseMixins = mixins(
+  Activatable,
   Dependent,
   Detachable,
   Overlayable,
@@ -129,12 +130,6 @@ export default baseMixins.extend({
     })
   },
 
-  mounted () {
-    if (getSlotType(this, 'activator', true) === 'v-slot') {
-      consoleError(`v-dialog's activator slot must be bound, try '<template #activator="data"><v-btn v-on="data.on>'`, this)
-    }
-  },
-
   beforeDestroy () {
     if (typeof window !== 'undefined') this.unbind()
   },
@@ -225,57 +220,6 @@ export default baseMixins.extend({
         const focusable = this.$refs.content.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
         focusable.length && (focusable[0] as HTMLElement).focus()
       }
-    },
-    getActivator (e?: Event) {
-      const activator = this.$refs.activator as HTMLElement
-
-      if (activator) {
-        return activator.children.length > 0
-          ? activator.children[0]
-          : activator
-      }
-
-      if (e) {
-        this.activatedBy = e.currentTarget || e.target
-      }
-
-      if (this.activatedBy) return this.activatedBy
-
-      if (this.activatorNode) {
-        const activator = Array.isArray(this.activatorNode) ? this.activatorNode[0] : this.activatorNode
-        const el = activator && activator.elm
-        if (el) return el
-      }
-
-      return null
-    },
-    genActivator () {
-      if (!this.hasActivator) return null
-
-      const listeners = this.disabled ? undefined : {
-        click: (e: Event) => {
-          e.stopPropagation()
-          this.getActivator(e)
-          if (!this.disabled) this.isActive = !this.isActive
-        }
-      }
-
-      if (getSlotType(this, 'activator') === 'scoped') {
-        const activator = this.$scopedSlots.activator!({ on: listeners }) || null
-
-        this.activatorNode = activator
-
-        return activator
-      }
-
-      return this.$createElement('div', {
-        staticClass: 'v-dialog__activator',
-        class: {
-          'v-dialog__activator--disabled': this.disabled
-        },
-        ref: 'activator',
-        on: listeners
-      }, this.$slots.activator)
     }
   },
 
