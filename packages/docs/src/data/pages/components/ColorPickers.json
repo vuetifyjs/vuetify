@@ -25,12 +25,21 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "model",
-            "swatches",
-            "inputs",
-            "canvas"
+            "simple/model",
+            "intermediate/swatches",
+            "intermediate/inputs",
+            "intermediate/canvas"
           ]
         }
       ]
