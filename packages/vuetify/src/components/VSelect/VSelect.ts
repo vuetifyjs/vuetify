@@ -378,6 +378,7 @@ export default baseMixins.extend<options>().extend({
       }
 
       return [
+        this.genFieldset(),
         this.$createElement('div', {
           staticClass: 'v-select__slot',
           directives: this.directives
