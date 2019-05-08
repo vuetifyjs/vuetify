@@ -29,19 +29,27 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "playground",
-            "photos",
-            "actionChips",
-            "filtering",
-            "colored",
-            "icon",
-            "outline",
-            "label",
-            "closable",
-            "expandable",
-            "inSelects"
+            "simple/colored",
+            "simple/icon",
+            "simple/outline",
+            "simple/label",
+            "simple/closable",
+            "intermediate/actionChips",
+            "intermediate/inSelects",
+            "complex/photos",
+            "complex/filtering",
+            "complex/expandable"
           ]
         }
       ]
