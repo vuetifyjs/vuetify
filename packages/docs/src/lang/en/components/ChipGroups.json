@@ -21,6 +21,10 @@
     "column": {
       "header": "### Column",
       "desc": "Chip groups with `column` prop can wrap their chips."
+    },
+    "mandatory": {
+      "header": "### Mandatory",
+      "desc": "Chip groups with `mandatory` prop must always have a value selected."
     }
   },
   "props": {
