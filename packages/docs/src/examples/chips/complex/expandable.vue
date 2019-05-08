@@ -17,15 +17,17 @@
         transition="scale-transition"
         origin="top left"
       >
-        <v-chip
-          slot="activator"
-          pill
-        >
-          <v-avatar left>
-            <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
-          </v-avatar>
-          John Leider
-        </v-chip>
+        <template #activator="{ on }">
+          <v-chip
+            v-on="on"
+            pill
+          >
+            <v-avatar left>
+              <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
+            </v-avatar>
+            John Leider
+          </v-chip>
+        </template>
         <v-card width="300">
           <v-list dark>
             <v-list-item>
