@@ -52,11 +52,12 @@
       background: map-deep-get($material, 'text-fields', 'filled-hover')
 
   &--outlined
-    & > .v-input__control > .v-input__slot
-      border: 2px solid map-deep-get($material, 'text', 'secondary')
+    fieldset
+      border-color: map-deep-get($material, 'text-fields', 'outlined')
 
-    &:not(.v-input--is-focused):not(.v-input--has-state) > .v-input__control > .v-input__slot:hover
-      border: 2px solid map-deep-get($material, 'text', 'primary')
+    &:not(.v-input--is-focused):not(.v-input--has-state):hover
+      fieldset
+        border-color: map-deep-get($material, 'text-fields', 'outlined-hover')
 
 .v-text-field
   padding-top: $text-field-active-label-height
@@ -173,28 +174,14 @@
       align-items: stretch
       min-height: 56px
 
+  &--filled,
+  &--full-width
     input
       margin-top: 22px
 
-  &--filled,
-  &--full-width
     &.v-text-field--single-line
       input
         margin-top: 12px
-
-    .v-label
-      top: 18px
-
-      &--active
-        transform: translateY(-6px) scale(.75)
-
-  &--outlined
-    &.v-text-field--single-line
-      input
-        margin-top: 10px
-
-      .v-label
-        top: 16px
 
     .v-label
       top: 18px
@@ -254,9 +241,41 @@
     margin-bottom: 16px
     transition: border $primary-transition
 
+    input
+      margin-top: 12px
+
+    .v-label
+      top: 18px
+
+      &--active
+        transform: translateY(-24px) scale(.75)
+
+    fieldset
+      border-radius: 4px
+      border-width: 1px
+      border-style: solid
+      padding-left: 8px
+      position: absolute
+      top: -5px
+      bottom: 0
+      left: 0
+      right: 0
+      transition-property: border, border-width
+      transition-duration: 0.3s
+      transition-timing-function: map-get($transition, 'fast-in-fast-out')
+
+    legend
+      line-height: 11px
+      padding: 0
+      text-align: left
+      transition: width $primary-transition
+
+    &.v-text-field--rounded
+      legend
+        margin-left: 12px
+
     & > .v-input__control > .v-input__slot
       background: transparent !important
-      border-radius: 4px
 
     .v-text-field__prefix
       margin-top: 22px
@@ -273,14 +292,18 @@
         margin-top: 22px
         transition: $primary-transition
 
-    &.v-input--is-focused, &.v-input--has-state
-      & > .v-input__control > .v-input__slot
-        border: 2px solid currentColor
-        transition: border $primary-transition
+    &.v-input--is-focused,
+    &.v-input--has-state
+      fieldset
+        border-color: currentColor
+        border-width: 2px
 
-  &--rounded > .v-input__control > .v-input__slot
-    border-radius: 100px
-    padding-left: 24px !important
+  &--rounded
+    fieldset
+      border-radius: 28px
+
+    > .v-input__control > .v-input__slot
+      padding-left: 24px !important
 
   &--shaped > .v-input__control > .v-input__slot
     border-top-left-radius: 16px

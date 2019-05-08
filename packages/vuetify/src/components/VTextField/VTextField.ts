@@ -16,7 +16,7 @@ import Loadable from '../../mixins/loadable'
 import Ripple from '../../directives/ripple'
 
 // Utilities
-import { keyCodes } from '../../util/helpers'
+import { convertToUnit, keyCodes } from '../../util/helpers'
 import { deprecate, consoleWarn } from '../../util/console'
 
 // Types
@@ -26,6 +26,7 @@ import Vue from 'vue'
 
 interface options extends Vue {
   $refs: {
+    label: HTMLElement
     input: HTMLInputElement
     prefix: HTMLElement
     suffix: HTMLElement
@@ -93,8 +94,10 @@ export default baseMixins.extend({
 
   data: () => ({
     badInput: false,
+    labelWidth: 0,
     initialValue: null,
     internalChange: false,
+    isBooted: false,
     isClearing: false
   }),
 
@@ -109,7 +112,7 @@ export default baseMixins.extend({
         'v-text-field--solo': this.isSolo,
         'v-text-field--solo-inverted': this.soloInverted,
         'v-text-field--solo-flat': this.flat,
-        'v-text-field--filled': this.filled,
+        'v-text-field--filled': this.isFilled,
         'v-text-field--enclosed': this.isEnclosed,
         'v-text-field--reverse': this.reverse,
         'v-text-field--outlined': this.outlined,
@@ -189,6 +192,7 @@ export default baseMixins.extend({
   },
 
   watch: {
+    labelValue: 'setLabelWidth',
     isFocused (val) {
       // Sets validationState from validatable
       this.hasColor = val
@@ -221,6 +225,8 @@ export default baseMixins.extend({
 
   mounted () {
     this.autofocus && this.onFocus()
+    this.setLabelWidth()
+    setTimeout(() => (this.isBooted = true), 0)
   },
 
   methods: {
@@ -309,11 +315,32 @@ export default baseMixins.extend({
     },
     genDefaultSlot () {
       return [
+        this.genFieldset(),
         this.genTextFieldSlot(),
         this.genClearIcon(),
         this.genIconSlot(),
         this.genProgress()
       ]
+    },
+    genFieldset () {
+      if (!this.outlined) return null
+
+      const width = this.labelValue || this.isDirty ? this.labelWidth : 0
+      const span = this.$createElement('span', {
+        domProps: { innerHTML: '&#8203;' }
+      })
+      const legend = this.$createElement('legend', {
+        style: {
+          transition: this.isBooted ? undefined : 'none',
+          width: convertToUnit(width)
+        }
+      }, [span])
+
+      return this.$createElement('fieldset', {
+        attrs: {
+          'aria-hidden': true
+        }
+      }, [legend])
     },
     genLabel () {
       if (!this.showLabel) return null
@@ -443,6 +470,11 @@ export default baseMixins.extend({
       if (this.hasMouseDown) this.focus()
 
       VInput.options.methods.onMouseUp.call(this, e)
+    },
+    setLabelWidth () {
+      if (!this.outlined || !this.$refs.label) return
+
+      this.labelWidth = this.$refs.label.offsetWidth * 0.75 + 6
     }
   }
 })

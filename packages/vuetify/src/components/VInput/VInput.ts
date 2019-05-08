@@ -170,7 +170,7 @@ export default baseMixins.extend({
               this.$emit(eventName, e)
               cb && cb(e)
             },
-            // Container has mouseup event that will
+            // Container has g event that will
             // trigger menu open if enclosed
             mouseup: (e: Event) => {
               e.preventDefault()
