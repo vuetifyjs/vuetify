@@ -11,7 +11,7 @@ exports[`VSelect.ts should escape items in menu 1`] = `
 exports[`VSelect.ts should only show items if they are in items 1`] = `
 
 <div role="combobox"
-     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty theme--light"
+     class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
 >
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -56,7 +56,7 @@ exports[`VSelect.ts should only show items if they are in items 1`] = `
 exports[`VSelect.ts should only show items if they are in items 2`] = `
 
 <div role="combobox"
-     class="v-input v-text-field v-select theme--light"
+     class="v-input theme--light v-text-field v-select"
 >
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -98,7 +98,7 @@ exports[`VSelect.ts should only show items if they are in items 2`] = `
 exports[`VSelect.ts should only show items if they are in items 3`] = `
 
 <div role="combobox"
-     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty theme--light"
+     class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
 >
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -143,7 +143,7 @@ exports[`VSelect.ts should only show items if they are in items 3`] = `
 exports[`VSelect.ts should only show items if they are in items 4`] = `
 
 <div role="combobox"
-     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty theme--light"
+     class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
 >
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -191,7 +191,7 @@ exports[`VSelect.ts should only show items if they are in items 4`] = `
 exports[`VSelect.ts should render v-select correctly when not using scope slot 1`] = `
 
 <div role="combobox"
-     class="v-input v-text-field v-select theme--light"
+     class="v-input theme--light v-text-field v-select"
 >
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -233,7 +233,7 @@ exports[`VSelect.ts should render v-select correctly when not using scope slot 1
 exports[`VSelect.ts should render v-select correctly when not using v-list-item in item scope slot 1`] = `
 
 <div role="combobox"
-     class="v-input v-text-field v-select theme--light"
+     class="v-input theme--light v-text-field v-select"
 >
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -275,7 +275,7 @@ exports[`VSelect.ts should render v-select correctly when not using v-list-item 
 exports[`VSelect.ts should render v-select correctly when using v-list-item in item scope slot 1`] = `
 
 <div role="combobox"
-     class="v-input v-text-field v-select theme--light"
+     class="v-input theme--light v-text-field v-select"
 >
   <div class="v-input__control">
     <div class="v-input__slot">

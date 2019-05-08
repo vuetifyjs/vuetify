@@ -5,7 +5,7 @@
         <v-flex xs12>
           <v-text-field
             v-model="message"
-            outline
+            outlined
             clearable
             label="Message"
             type="text"

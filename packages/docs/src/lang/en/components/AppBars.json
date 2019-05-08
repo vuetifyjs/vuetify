@@ -3,7 +3,7 @@
   "headerText": "The `v-app-bar` component is pivotal to any gui, as it generally is the primary source of site navigation. The toolbar component works great in conjunction with a navigation drawer for hiding links and presenting an activator to open the sidebar on mobile.",
   "examples": {
     "usage": {
-      "desc": "An **app-bar** is composed of 5 parts. The **container**, **navigation icon** (optional), **title** (optional), **action items** (optional) and an **overflow menu** (optional)"
+      "desc": "The `VAppBar` component is used for application-wide actions and information."
     },
     "dense": {
       "header": "### Dense",
@@ -40,6 +40,10 @@
     "inverted-scroll": {
       "header": "### Inverted scrolling",
       "desc": "When using the **inverted-scroll** property, the bar will hide until the user scrolls past the designated threshold. Once past the threshold, the `v-app-bar` will continue to display until the users scrolls up past the threshold. If no **scroll-threshold** value is supplied a default value of _0_ will be used."
+    },
+    "menu": {
+      "header": "### With menu",
+      "desc": "You can easily extend the functionality of app bar by adding `VMenu` there. Click on last icon to see it in action."
     }
   },
   "props": {

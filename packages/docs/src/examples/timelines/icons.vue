@@ -17,7 +17,7 @@
           <v-btn
             :color="item.color"
             class="mx-0"
-            outline
+            outlined
           >
             Button
           </v-btn>

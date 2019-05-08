@@ -1,0 +1,16 @@
+@import '../../styles/styles.sass'
+
+.v-color-picker__canvas
+  position: relative
+  overflow: hidden
+
+.v-color-picker__canvas-dot
+  position: absolute
+  width: 15px
+  height: 15px
+  background: transparent
+  border-radius: 50%
+  box-shadow: 0px 0px 0px 1.5px rgba(255,255,255,1), inset 0px 0px 1px 1.5px rgba(0,0,0,0.3)
+
+  &--disabled
+    box-shadow: 0px 0px 0px 1.5px rgba(255,255,255,0.7), inset 0px 0px 1px 1.5px rgba(0,0,0,0.3)

@@ -29,13 +29,22 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "single-line",
-            "two-line",
-            "icon-slot",
-            "icon-event",
-            "scoped-slots"
+            "simple/single-line",
+            "simple/two-line",
+            "intermediate/icon-slot",
+            "intermediate/icon-event",
+            "intermediate/scoped-slots"
           ]
         }
       ]

@@ -3,7 +3,7 @@
   "headerText": "The `v-btn` component replaces the standard html button with a material design theme and a multitude of options. Any color helper class can be used to alter the background or text color.",
   "examples": {
     "usage": {
-      "desc": ""
+      "desc": "Buttons in their simplist form contain uppercase text, a slight elevation, hover effect, and a ripple effect on click."
     },
     "flat": {
       "header": "### Flat",

@@ -89,7 +89,7 @@
             <v-text-field
               class="ma-2"
               label="Outline"
-              outline
+              outlined
             />
           </v-flex>
 
@@ -102,7 +102,7 @@
               class="ma-2"
               label="Outline"
               placeholder="Placeholder"
-              outline
+              outlined
             />
           </v-flex>
         </v-layout>
@@ -159,7 +159,7 @@
               class="ma-2"
               label="Outline"
               single-line
-              outline
+              outlined
             />
           </v-flex>
         </v-layout>
@@ -257,7 +257,7 @@
               class="ma-2"
               value="John Doe"
               label="Outline"
-              outline
+              outlined
               disabled
             />
           </v-flex>
@@ -270,7 +270,7 @@
               class="ma-2"
               value="John Doe"
               label="Outline"
-              outline
+              outlined
               readonly
             />
           </v-flex>
@@ -366,21 +366,21 @@
           >
             <v-text-field
               class="ma-2"
-              outline
+              outlined
               label="Prepend"
               prepend-icon="mdi-map-marker"
             />
 
             <v-text-field
               class="ma-2"
-              outline
+              outlined
               label="Append"
               append-icon="mdi-map-marker"
             />
 
             <v-text-field
               class="ma-2"
-              outline
+              outlined
               label="Append outer"
               append-outer-icon="mdi-map-marker"
             />
@@ -442,7 +442,7 @@
               v-model="message4"
               class="ma-2"
               label="Outline"
-              outline
+              outlined
               clearable
             />
           </v-flex>
@@ -462,7 +462,7 @@
       <core-section>
         <v-text-field
           v-model="message5"
-          outline
+          outlined
           clearable
           label="Message"
           type="text"
@@ -539,7 +539,7 @@
       <core-section>
         <v-text-field
           v-model="message6"
-          outline
+          outlined
           clearable
           label="Message"
           type="text"
@@ -643,7 +643,7 @@
               class="ma-2"
               counter="25"
               label="Outline"
-              outline
+              outlined
             />
           </v-flex>
         </v-layout>
@@ -881,7 +881,7 @@
               label="Your product or service"
               value="Grocery delivery"
               hint="For example, flowers or used cars"
-              outline
+              outlined
             />
           </v-flex>
 
@@ -894,7 +894,7 @@
               label="Your landing page"
               hint="www.example.com/page"
               persistent-hint
-              outline
+              outlined
             />
           </v-flex>
         </v-layout>
@@ -984,7 +984,7 @@
               v-model="first"
               class="ma-2"
               label="First Name"
-              outline
+              outlined
             />
           </v-flex>
 
@@ -996,7 +996,7 @@
               v-model="last"
               class="ma-2"
               label="Last Name"
-              outline
+              outlined
             />
           </v-flex>
         </v-layout>
