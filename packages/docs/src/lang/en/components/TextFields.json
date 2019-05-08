@@ -12,6 +12,10 @@
       "header": "### Single line",
       "desc": "Single line text fields do not float their label on focus or with data."
     },
+    "shaped": {
+      "header": "### Shaped",
+      "desc": "`shaped` text fields are rounded if they're `outline` and have higher `border-radius` if `filled`."
+    },
     "disabledAndReadonly": {
       "header": "### Disabled and readonly",
       "desc": "Text fields can be `disabled` or `readonly`."
@@ -114,7 +118,8 @@
     "textarea": "Textarea text field with alternate style",
     "toggleKeys": "Array of key codes that will toggle the input (if it supports toggling)",
     "type": "Sets input type",
-    "value": "Components.Inputs.props.value"
+    "value": "Components.Inputs.props.value",
+    "shaped": "Round if `outline` and increase `border-radius` if `filled`. Must be used with either `outline` or `filled`"
   },
   "slots": {
     "append": "Components.Inputs.slots.append",
