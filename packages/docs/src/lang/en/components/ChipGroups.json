@@ -25,6 +25,10 @@
     "mandatory": {
       "header": "### Mandatory",
       "desc": "Chip groups with `mandatory` prop must always have a value selected."
+    },
+    "multiple": {
+      "header": "### Multiple",
+      "desc": "Chip groups with `multiple` prop can have many values selected."
     }
   },
   "props": {

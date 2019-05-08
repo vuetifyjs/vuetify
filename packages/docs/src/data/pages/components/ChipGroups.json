@@ -45,6 +45,7 @@
           "value": [
             "simple/column",
             "simple/mandatory",
+            "simple/multiple",
             "intermediate/toothbrush",
             "intermediate/blouse",
             "complex/filterResults"
