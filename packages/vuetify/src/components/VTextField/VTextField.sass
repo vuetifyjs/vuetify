@@ -252,16 +252,17 @@
 
     fieldset
       border-radius: 4px
-      border-width: 1px
       border-style: solid
-      padding-left: 8px
-      position: absolute
-      top: -5px
+      border-width: 1px
       bottom: 0
       left: 0
+      padding-left: 8px
+      pointer-events: none
+      position: absolute
       right: 0
-      transition-property: border, border-width
+      top: -5px
       transition-duration: 0.3s
+      transition-property: border, border-width
       transition-timing-function: map-get($transition, 'fast-in-fast-out')
 
     legend
