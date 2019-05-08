@@ -51,7 +51,7 @@
     &:not(.v-input--is-focused) > .v-input__control > .v-input__slot:hover
       background: map-deep-get($material, 'text-fields', 'filled-hover')
 
-  &--outline
+  &--outlined
     & > .v-input__control > .v-input__slot
       border: 2px solid map-deep-get($material, 'text', 'secondary')
 
@@ -165,7 +165,7 @@
 
   &--filled,
   &--full-width,
-  &--outline
+  &--outlined
     position: relative
 
     & > .v-input__control > .v-input__slot
@@ -187,7 +187,7 @@
       &--active
         transform: translateY(-6px) scale(.75)
 
-  &--outline
+  &--outlined
     &.v-text-field--single-line
       input
         margin-top: 10px
@@ -201,7 +201,7 @@
       &--active
         transform: translateY(-6px) scale(.75)
 
-  &--shaped.v-text-field--outline .v-input__slot
+  &--shaped.v-text-field--outlined .v-input__slot
     border-radius: 100px !important
 
     .v-label--active
@@ -257,14 +257,14 @@
       flex-direction: row-reverse
 
   &--solo,
-  &--outline,
+  &--outlined,
   &--full-width
     & > .v-input__control > .v-input__slot
       &:before,
       &:after
         display: none
 
-  &--outline
+  &--outlined
     margin-bottom: 16px
     transition: border $primary-transition
 

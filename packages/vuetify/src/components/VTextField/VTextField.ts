@@ -74,7 +74,6 @@ export default baseMixins.extend({
     flat: Boolean,
     fullWidth: Boolean,
     label: String,
-    outline: Boolean,
     outlined: Boolean,
     placeholder: String,
     prefix: String,
@@ -112,7 +111,7 @@ export default baseMixins.extend({
         'v-text-field--filled': this.filled,
         'v-text-field--enclosed': this.isEnclosed,
         'v-text-field--reverse': this.reverse,
-        'v-text-field--outline': this.outline,
+        'v-text-field--outlined': this.outlined,
         'v-text-field--placeholder': this.placeholder,
         'v-text-field--shaped': this.shaped
       }
@@ -143,7 +142,7 @@ export default baseMixins.extend({
       return (
         this.isFilled ||
         this.isSolo ||
-        this.outline ||
+        this.outlined ||
         this.fullWidth
       )
     },
@@ -214,9 +213,8 @@ export default baseMixins.extend({
 
   created () {
     /* istanbul ignore if */
-    if (this.outline) deprecate('outline', 'outlined')
     if (this.box) deprecate('box', 'filled')
-    if (this.shaped && !(this.filled || this.outline)) consoleWarn('shaped should be used with either filled or outline', this)
+    if (this.shaped && !(this.filled || this.outlined)) consoleWarn('shaped should be used with either filled or outlined', this)
   },
 
   mounted () {
