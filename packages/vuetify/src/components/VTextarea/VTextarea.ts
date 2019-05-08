@@ -6,7 +6,6 @@ import VTextField from '../VTextField/VTextField'
 
 // Utilities
 import mixins, { ExtractVue } from '../../util/mixins'
-import { consoleInfo } from '../../util/console'
 
 // Types
 import Vue from 'vue'
@@ -17,14 +16,14 @@ interface options extends Vue {
   }
 }
 
-/* @vue/component */
-export default mixins<options &
-/* eslint-disable indent */
+const baseMixins = mixins<options &
   ExtractVue<typeof VTextField>
-/* eslint-enable indent */
 >(
   VTextField
-).extend({
+)
+
+/* @vue/component */
+export default baseMixins.extend({
   name: 'v-textarea',
 
   props: {
@@ -67,25 +66,19 @@ export default mixins<options &
     setTimeout(() => {
       this.autoGrow && this.calculateInputHeight()
     }, 0)
-
-    // TODO: remove (2.0)
-    if (this.autoGrow && this.noResize) {
-      consoleInfo('"no-resize" is now implied when using "auto-grow", and can be removed', this)
-    }
   },
 
   methods: {
     calculateInputHeight () {
       const input = this.$refs.input
+      if (!input) return
 
-      if (input) {
-        input.style.height = '0'
-        const height = input.scrollHeight
-        const minHeight = parseInt(this.rows, 10) * parseFloat(this.rowHeight)
-        // This has to be done ASAP, waiting for Vue
-        // to update the DOM causes ugly layout jumping
-        input.style.height = Math.max(minHeight, height) + 'px'
-      }
+      input.style.height = '0'
+      const height = input.scrollHeight
+      const minHeight = parseInt(this.rows, 10) * parseFloat(this.rowHeight)
+      // This has to be done ASAP, waiting for Vue
+      // to update the DOM causes ugly layout jumping
+      input.style.height = Math.max(minHeight, height) + 'px'
     },
     genInput () {
       const input = VTextField.options.methods.genInput.call(this)
@@ -104,9 +97,7 @@ export default mixins<options &
       // Prevents closing of a
       // dialog when pressing
       // enter
-      if (this.isFocused &&
-        e.keyCode === 13
-      ) {
+      if (this.isFocused && e.keyCode === 13) {
         e.stopPropagation()
       }
 

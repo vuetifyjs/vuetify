@@ -274,6 +274,11 @@
     "description": "Chip Group component for Vuetify Framework.",
     "keywords": "chip, chip-group, chip group, grouped chips"
   },
+  "components/color-pickers": {
+    "title": "Color pickers",
+    "description": "The v-color-picker component allows users to select a color using a number of different inputs",
+    "keyword": "components, color picker, color"
+  },
   "components/combobox": {
     "title": "Combobox Component",
     "description": "The v-combobox component provides type-ahead autocomplete functionality and allows user to provide a custom value.",

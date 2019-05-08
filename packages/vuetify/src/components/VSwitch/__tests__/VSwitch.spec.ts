@@ -4,6 +4,7 @@ import VSwitch from '../VSwitch'
 // Utilities
 import {
   mount,
+  MountOptions,
   Wrapper
 } from '@vue/test-utils'
 import { touch } from '../../../../test'
@@ -13,13 +14,11 @@ import { ExtractVue } from '../../../util/mixins'
 
 describe('VSwitch.ts', () => {
   type Instance = ExtractVue<typeof VSwitch>
-  let mountFunction: (options?: object) => Wrapper<Instance>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 
   beforeEach(() => {
     mountFunction = (options = {}) => {
-      return mount(VSwitch, {
-        ...options
-      })
+      return mount(VSwitch, options)
     }
   })
 
@@ -45,7 +44,7 @@ describe('VSwitch.ts', () => {
 
   it('should emit change event on swipe', async () => {
     const wrapper = mountFunction({
-      props: {
+      propsData: {
         inputValue: false
       }
     })
@@ -64,7 +63,7 @@ describe('VSwitch.ts', () => {
 
   it('should emit change event on key events', async () => {
     const wrapper = mountFunction({
-      props: {
+      propsData: {
         inputValue: false
       }
     })
@@ -90,7 +89,7 @@ describe('VSwitch.ts', () => {
 
   it('should not emit change event on swipe when not active', async () => {
     const wrapper = mountFunction({
-      props: {
+      propsData: {
         inputValue: false
       }
     })
@@ -107,7 +106,7 @@ describe('VSwitch.ts', () => {
 
   it('should render element with loader and match the snapshot', async () => {
     const wrapper = mountFunction({
-      props: {
+      propsData: {
         loading: true
       }
     })

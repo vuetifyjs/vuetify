@@ -98,6 +98,7 @@
       { "text": "cards", "to": "cards" },
       { "text": "carousels", "to": "carousels" },
       { "text": "chips", "to": "chips" },
+      { "text": "colorPickers", "to": "color-pickers", "new": true },
       { "text": "dialogs", "to": "dialogs" },
       { "text": "dividers", "to": "dividers" },
       { "text": "expansionPanels", "to": "expansion-panels" },

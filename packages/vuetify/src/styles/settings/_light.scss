@@ -84,6 +84,9 @@ $material-light: (
     'indeterminateTime': map-get($grey, 'lighten-1'),
     'title': map-get($grey, 'lighten-2')
   ),
+  'color-picker': (
+    'checkerboard': rgba(map-get($shades, 'white'), 0)
+  ),
   'bg-color': map-get($shades, 'white'),
   'fg-color': map-get($shades, 'black'),
   'text-color': map-get($shades, 'black'),

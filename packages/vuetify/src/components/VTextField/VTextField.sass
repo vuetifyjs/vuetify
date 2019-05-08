@@ -172,9 +172,25 @@
     input
       margin-top: 22px
 
+  &--box,
+  &--full-width
     &.v-text-field--single-line
       input
         margin-top: 12px
+
+    .v-label
+      top: 18px
+
+      &--active
+        transform: translateY(-6px) scale(.75)
+
+  &--outline
+    &.v-text-field--single-line
+      input
+        margin-top: 10px
+
+      .v-label
+        top: 16px
 
     .v-label
       top: 18px
