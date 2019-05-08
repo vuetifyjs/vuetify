@@ -79,6 +79,7 @@ export default baseMixins.extend({
     prefix: String,
     prependInnerIcon: String,
     reverse: Boolean,
+    rounded: Boolean,
     singleLine: Boolean,
     shaped: Boolean,
     solo: Boolean,
@@ -113,6 +114,7 @@ export default baseMixins.extend({
         'v-text-field--reverse': this.reverse,
         'v-text-field--outlined': this.outlined,
         'v-text-field--placeholder': this.placeholder,
+        'v-text-field--rounded': this.rounded,
         'v-text-field--shaped': this.shaped
       }
     },
