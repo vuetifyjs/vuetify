@@ -27,7 +27,7 @@
         {
           "type": "examples",
           "value": [
-            "elevation"
+            "simple/elevation"
           ]
         }
       ]
