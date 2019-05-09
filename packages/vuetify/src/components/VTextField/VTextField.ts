@@ -20,11 +20,15 @@ import { convertToUnit, keyCodes } from '../../util/helpers'
 import { deprecate, consoleWarn } from '../../util/console'
 
 // Types
-import mixins, { ExtractVue } from '../../util/mixins'
+import mixins from '../../util/mixins'
 import { VNode } from 'vue/types'
-import Vue from 'vue'
 
-interface options extends Vue {
+const baseMixins = mixins(
+  VInput,
+  Maskable,
+  Loadable
+)
+interface options extends InstanceType<typeof baseMixins> {
   $refs: {
     label: HTMLElement
     input: HTMLInputElement
@@ -34,22 +38,10 @@ interface options extends Vue {
   }
 }
 
-const baseMixins = mixins<options &
-  ExtractVue<[
-    typeof VInput,
-    typeof Maskable,
-    typeof Loadable
-  ]>
->(
-  VInput,
-  Maskable,
-  Loadable
-)
-
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
 /* @vue/component */
-export default baseMixins.extend({
+export default baseMixins.extend<options>().extend({
   name: 'v-text-field',
 
   directives: { Ripple },
