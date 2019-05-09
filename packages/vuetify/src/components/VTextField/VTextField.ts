@@ -28,6 +28,7 @@ interface options extends Vue {
   $refs: {
     label: HTMLElement
     input: HTMLInputElement
+    'prepend-inner': HTMLElement
     prefix: HTMLElement
     suffix: HTMLElement
   }
@@ -95,6 +96,8 @@ export default baseMixins.extend({
   data: () => ({
     badInput: false,
     labelWidth: 0,
+    prefixWidth: 0,
+    prependWidth: 0,
     initialValue: null,
     internalChange: false,
     isBooted: false,
@@ -113,6 +116,7 @@ export default baseMixins.extend({
         'v-text-field--solo-inverted': this.soloInverted,
         'v-text-field--solo-flat': this.flat,
         'v-text-field--filled': this.isFilled,
+        'v-text-field--is-booted': this.isBooted,
         'v-text-field--enclosed': this.isEnclosed,
         'v-text-field--reverse': this.reverse,
         'v-text-field--outlined': this.outlined,
@@ -164,7 +168,9 @@ export default baseMixins.extend({
       return this.solo || this.soloInverted
     },
     labelPosition (): Record<'left' | 'right', string | number | undefined> {
-      const offset = (this.prefix && !this.labelValue) ? this.prefixWidth : 0
+      let offset = (this.prefix && !this.labelValue) ? this.prefixWidth : 0
+
+      if (this.labelValue && this.prependWidth) offset -= this.prependWidth
 
       return (this.$vuetify.rtl === this.reverse) ? {
         left: offset,
@@ -175,19 +181,11 @@ export default baseMixins.extend({
       }
     },
     showLabel (): boolean {
-      return this.hasLabel && (!this.isSingle || (!this.isLabelActive && !this.placeholder && !this.prefixLabel))
+      return this.hasLabel && (!this.isSingle || (!this.isLabelActive && !this.placeholder))
     },
     labelValue (): boolean {
       return !this.isSingle &&
-        Boolean(this.isFocused || this.isLabelActive || this.placeholder || this.prefixLabel)
-    },
-    prefixWidth (): number | undefined {
-      if (!this.prefix && !this.$refs.prefix) return
-
-      return this.$refs.prefix.offsetWidth
-    },
-    prefixLabel (): boolean {
-      return !!(this.prefix && !this.value)
+        Boolean(this.isFocused || this.isLabelActive || this.placeholder)
     }
   },
 
@@ -226,7 +224,9 @@ export default baseMixins.extend({
   mounted () {
     this.autofocus && this.onFocus()
     this.setLabelWidth()
-    setTimeout(() => (this.isBooted = true), 0)
+    this.setPrefixWidth()
+    this.setPrependWidth()
+    requestAnimationFrame(() => (this.isBooted = true))
   },
 
   methods: {
@@ -331,7 +331,6 @@ export default baseMixins.extend({
       })
       const legend = this.$createElement('legend', {
         style: {
-          transition: this.isBooted ? undefined : 'none',
           width: convertToUnit(width)
         }
       }, [span])
@@ -475,6 +474,16 @@ export default baseMixins.extend({
       if (!this.outlined || !this.$refs.label) return
 
       this.labelWidth = this.$refs.label.offsetWidth * 0.75 + 6
+    },
+    setPrefixWidth () {
+      if (!this.$refs.prefix) return
+
+      this.prefixWidth = this.$refs.prefix.offsetWidth
+    },
+    setPrependWidth () {
+      if (!this.$refs['prepend-inner']) return
+
+      this.prependWidth = this.$refs['prepend-inner'].offsetWidth
     }
   }
 })

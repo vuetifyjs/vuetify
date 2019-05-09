@@ -165,6 +165,11 @@
     flex: 1 1 auto
     position: relative
 
+  &:not(.v-text-field--is-booted)
+    .v-label,
+    legend
+      transition: none
+
   &--filled,
   &--full-width,
   &--outlined
@@ -279,7 +284,6 @@
       background: transparent !important
 
     .v-text-field__prefix
-      margin-top: 22px
       max-height: 32px
 
     .v-input__prepend-outer,
@@ -290,7 +294,6 @@
     &.v-input--is-focused,
     &.v-text-field--placeholder
       .v-text-field__prefix
-        margin-top: 22px
         transition: $primary-transition
 
     &.v-input--is-focused,
