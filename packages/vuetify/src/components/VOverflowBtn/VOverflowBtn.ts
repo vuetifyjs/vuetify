@@ -6,8 +6,10 @@ import VSelect from '../VSelect/VSelect'
 import VAutocomplete from '../VAutocomplete'
 import VTextField from '../VTextField/VTextField'
 
+// Components
 import VBtn from '../VBtn'
 
+// Utilities
 import { consoleWarn } from '../../util/console'
 
 /* @vue/component */
@@ -16,32 +18,27 @@ export default VAutocomplete.extend({
 
   props: {
     segmented: Boolean,
-    editable: Boolean,
-    transition: VSelect.options.props.transition
+    editable: Boolean
   },
 
   computed: {
-    classes () {
-      return Object.assign(VAutocomplete.options.computed.classes.call(this), {
+    classes (): object {
+      return {
+        ...VAutocomplete.options.computed.classes.call(this),
         'v-overflow-btn': true,
         'v-overflow-btn--segmented': this.segmented,
         'v-overflow-btn--editable': this.editable
-      })
+      }
     },
-    isAnyValueAllowed () {
+    isAnyValueAllowed (): boolean {
       return this.editable ||
         VAutocomplete.options.computed.isAnyValueAllowed.call(this)
     },
-    isSingle () {
+    isSingle (): true {
       return true
     },
-    computedItems () {
+    computedItems (): object[] {
       return this.segmented ? this.allItems : this.filteredItems
-    },
-    $_menuProps () {
-      const props = VAutocomplete.options.computed.$_menuProps.call(this)
-      props.transition = props.transition || 'v-menu-transition'
-      return props
     }
   },
 
@@ -51,7 +48,7 @@ export default VAutocomplete.extend({
         ? VAutocomplete.options.methods.genSelections.call(this)
         : VSelect.options.methods.genSelections.call(this) // Override v-autocomplete's override
     },
-    genCommaSelection (item, index, last) {
+    genCommaSelection (item: any, index: number, last: boolean) {
       return this.segmented
         ? this.genSegmentedBtn(item)
         : VSelect.options.methods.genCommaSelection.call(this, item, index, last)
@@ -59,8 +56,9 @@ export default VAutocomplete.extend({
     genInput () {
       const input = VTextField.options.methods.genInput.call(this)
 
-      input.data.domProps.value = this.editable ? this.internalSearch : ''
-      input.data.attrs.readonly = !this.isAnyValueAllowed
+      input.data = input.data || {}
+      input.data.domProps!.value = this.editable ? this.internalSearch : ''
+      input.data.attrs!.readonly = !this.isAnyValueAllowed
 
       return input
     },
@@ -71,12 +69,14 @@ export default VAutocomplete.extend({
 
       if (!label) return label
 
+      label.data = label.data || {}
+
       // Reset previously set styles from parent
       label.data.style = {}
 
       return label
     },
-    genSegmentedBtn (item) {
+    genSegmentedBtn (item: any) {
       const itemValue = this.getValue(item)
       const itemObj = this.computedItems.find(i => this.getValue(i) === itemValue) || item
 
@@ -88,7 +88,7 @@ export default VAutocomplete.extend({
       return this.$createElement(VBtn, {
         props: { text: true },
         on: {
-          click (e) {
+          click (e: Event) {
             e.stopPropagation()
             itemObj.callback(e)
           }
