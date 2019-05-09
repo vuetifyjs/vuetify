@@ -19,7 +19,6 @@
     color: map-deep-get($material, 'text', 'secondary')
 
   &--solo > .v-input__control > .v-input__slot
-    border-radius: 2px
     background: map-get($material, 'cards')
 
   &--solo-inverted.v-text-field--solo
@@ -39,13 +38,12 @@
 
     .v-text-field__prefix
       max-height: 32px
-      margin-top: 22px
+      margin-top: 20px
 
     &.v-input--is-dirty,
     &.v-input--is-focused,
     &.v-text-field--placeholder
       .v-text-field__prefix
-        margin-top: 22px
         transition: $primary-transition
 
     &:not(.v-input--is-focused) > .v-input__control > .v-input__slot:hover
@@ -206,6 +204,11 @@
     margin: 0
     padding: 0
 
+    &.v-text-field--single-line
+      .v-text-field__prefix,
+      .v-text-field__suffix
+        margin-top: 0
+
     &:not(.v-text-field--filled)
       .v-progress-linear__background
         display: none
@@ -303,11 +306,16 @@
         border-width: 2px
 
   &--rounded
-    fieldset
-      border-radius: 28px
+    &.v-text-field--outlined
+      fieldset
+        border-radius: 28px
 
     > .v-input__control > .v-input__slot
+      border-radius: 28px !important
       padding-left: 24px !important
+
+  &--solo > .v-input__control > .v-input__slot
+    border-radius: 4px
 
   &--shaped > .v-input__control > .v-input__slot
     border-top-left-radius: 16px

@@ -481,7 +481,7 @@ export default baseMixins.extend({
       this.prefixWidth = this.$refs.prefix.offsetWidth
     },
     setPrependWidth () {
-      if (!this.$refs['prepend-inner']) return
+      if (!this.outlined || !this.$refs['prepend-inner']) return
 
       this.prependWidth = this.$refs['prepend-inner'].offsetWidth
     }
