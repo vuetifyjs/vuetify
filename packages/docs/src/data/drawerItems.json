@@ -85,8 +85,8 @@
         "text": "bars",
         "children": [
           { "text": "appBars", "to": "app-bars", "new": true },
-          { "text": "toolbars", "to": "toolbars", "updated": true },
-          { "text": "systemBars", "to": "system-bars", "updated": true }
+          { "text": "toolbars", "to": "toolbars" },
+          { "text": "systemBars", "to": "system-bars" }
         ]
       },
       { "text": "bottomNavigation", "to": "bottom-navigation" },
@@ -94,11 +94,10 @@
       { "text": "breadcrumbs", "to": "breadcrumbs" },
       { "text": "buttons", "to": "buttons" },
       { "text": "fabs", "to": "floating-action-buttons" },
-      { "text": "calendars", "to": "calendars", "new": true },
+      { "text": "calendars", "to": "calendars" },
       { "text": "cards", "to": "cards" },
       { "text": "carousels", "to": "carousels" },
       { "text": "chips", "to": "chips" },
-      { "text": "colorPickers", "to": "color-pickers", "new": true },
       { "text": "dialogs", "to": "dialogs" },
       { "text": "dividers", "to": "dividers" },
       { "text": "expansionPanels", "to": "expansion-panels" },
@@ -108,9 +107,9 @@
         "text": "groups",
         "children": [
           { "text": "buttonGroups", "to": "button-groups" },
-          { "text": "chipGroups", "to": "chip-groups" },
+          { "text": "chipGroups", "to": "chip-groups", "new": true },
           { "text": "itemGroups", "to": "item-groups" },
-          { "text": "listItemGroups", "to": "list-item-groups" },
+          { "text": "listItemGroups", "to": "list-item-groups", "new": true },
           { "text": "slideGroups", "to": "slide-groups" },
           { "text": "windows", "to": "windows" }
         ]
@@ -144,6 +143,7 @@
         "group": "components",
         "text": "pickers",
         "children": [
+          { "text": "colorPickers", "to": "color-pickers", "new": true },
           { "text": "datePickers", "to": "date-pickers" },
           { "text": "timePickers", "to": "time-pickers" }
         ]
@@ -159,22 +159,22 @@
       { "text": "ratings", "to": "ratings" },
       { "text": "sheets", "to": "sheets" },
       { "text": "snackbars", "to": "snackbars" },
-      { "text": "sparklines", "to": "sparklines", "updated": true },
+      { "text": "sparklines", "to": "sparklines" },
       { "text": "steppers", "to": "steppers" },
       { "text": "subheaders", "to": "subheaders" },
       {
         "group": "components",
         "text": "tables",
         "children": [
-          { "text": "dataIterators", "to": "data-iterators", "updated": true },
+          { "text": "dataIterators", "to": "data-iterators" },
           { "text": "simpleTables", "to": "simple-tables", "new": true },
-          { "text": "dataTables", "to": "data-tables", "updated": true }
+          { "text": "dataTables", "to": "data-tables" }
         ]
       },
       { "text": "tabs", "to": "tabs" },
       { "text": "timelines", "to": "timelines" },
       { "text": "tooltips", "to": "tooltips" },
-      { "text": "treeview", "to": "treeview", "updated": true }
+      { "text": "treeview", "to": "treeview" }
     ]
   },
   {
