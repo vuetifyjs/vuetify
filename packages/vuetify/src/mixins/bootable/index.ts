@@ -1,6 +1,6 @@
 
 // Utilities
-import { breaking } from '../../util/console'
+import { removed } from '../../util/console'
 
 // Types
 import Vue, { VNode } from 'vue'
@@ -42,7 +42,7 @@ export default Vue.extend<Vue & Toggleable>().extend({
 
   created () {
     if ('lazy' in this.$attrs) {
-      breaking('lazy', 'eager', this)
+      removed('lazy', this)
     }
   },
 
