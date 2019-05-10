@@ -13,7 +13,7 @@ exports[`VColorPicker.ts should change canvas height 1`] = `
     >
     </canvas>
     <div class="v-color-picker__canvas-dot"
-         style="width: 10px; height: 10px; left: 295px; top: -5px;"
+         style="width: 10px; height: 10px; transform: translate(295px, -5px);"
     >
     </div>
   </div>
@@ -309,7 +309,7 @@ exports[`VColorPicker.ts should hide inputs 1`] = `
     >
     </canvas>
     <div class="v-color-picker__canvas-dot"
-         style="width: 10px; height: 10px; left: 295px; top: -5px;"
+         style="width: 10px; height: 10px; transform: translate(295px, -5px);"
     >
     </div>
   </div>
@@ -410,7 +410,7 @@ exports[`VColorPicker.ts should render color picker 1`] = `
     >
     </canvas>
     <div class="v-color-picker__canvas-dot"
-         style="width: 10px; height: 10px; left: 295px; top: -5px;"
+         style="width: 10px; height: 10px; transform: translate(295px, -5px);"
     >
     </div>
   </div>
@@ -564,7 +564,7 @@ exports[`VColorPicker.ts should show swatches 1`] = `
     >
     </canvas>
     <div class="v-color-picker__canvas-dot"
-         style="width: 10px; height: 10px; left: 295px; top: -5px;"
+         style="width: 10px; height: 10px; transform: translate(295px, -5px);"
     >
     </div>
   </div>
