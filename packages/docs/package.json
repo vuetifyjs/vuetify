@@ -10,10 +10,6 @@
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --config build/webpack.prod.config.js --progress --hide-modules",
     "lint": "eslint --ext .js,.vue,.json src"
   },
-  "engines": {
-    "node": ">=7.0",
-    "npm": ">=4.0"
-  },
   "dependencies": {
     "@vuetify/api-generator": "^2.0.0-alpha.19",
     "babel-polyfill": "^6.26.0",
