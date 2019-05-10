@@ -234,7 +234,7 @@ export default {
         if (el) return el
       }
 
-      consoleError('No activator found')
+      return null
     },
     genActivator () {
       if (!this.hasActivator) return null

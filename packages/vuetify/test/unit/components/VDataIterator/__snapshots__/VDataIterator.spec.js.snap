@@ -47,7 +47,9 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
                     <div role="list"
                          class="v-list theme--light"
                     >
-                      <div role="listitem">
+                      <div role="listitem"
+                           class="primary--text"
+                      >
                         <a class="v-list__tile v-list__tile--link v-list__tile--active theme--light primary--text">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
@@ -186,7 +188,9 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
                     <div role="list"
                          class="v-list theme--light"
                     >
-                      <div role="listitem">
+                      <div role="listitem"
+                           class="primary--text"
+                      >
                         <a class="v-list__tile v-list__tile--link v-list__tile--active theme--light primary--text">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
@@ -316,7 +320,9 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
                     <div role="list"
                          class="v-list theme--light"
                     >
-                      <div role="listitem">
+                      <div role="listitem"
+                           class="primary--text"
+                      >
                         <a class="v-list__tile v-list__tile--link v-list__tile--active theme--light primary--text">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
@@ -450,7 +456,9 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
                     <div role="list"
                          class="v-list theme--light"
                     >
-                      <div role="listitem">
+                      <div role="listitem"
+                           class="primary--text"
+                      >
                         <a class="v-list__tile v-list__tile--link v-list__tile--active theme--light primary--text">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">

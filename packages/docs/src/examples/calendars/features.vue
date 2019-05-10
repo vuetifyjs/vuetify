@@ -234,12 +234,13 @@
           :color="color"
         >
           <template v-slot:day="day">
-            <div
+            <v-sheet
               v-if="day.day % 3 === 0"
-              class="day"
+              :color="color"
+              class="white--text pa-1"
             >
               day slot {{ day.date }}
-            </div>
+            </v-sheet>
           </template>
           <template v-slot:header="day">
             <div
