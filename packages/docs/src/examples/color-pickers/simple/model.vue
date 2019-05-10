@@ -1,0 +1,68 @@
+<template>
+  <v-container grid-list-xl>
+    <v-layout wrap>
+      <v-flex
+        xs12
+        md4
+      >
+        <v-btn
+          v-for="t in types"
+          :key="t"
+          class="my-3"
+          block
+          @click="type = t"
+        >{{ t }}</v-btn>
+      </v-flex>
+      <v-flex
+        d-flex
+        justify-center
+      >
+        <v-color-picker v-model="color"></v-color-picker>
+      </v-flex>
+      <v-flex
+        xs12
+        md4
+      >
+        <v-sheet
+          dark
+          class="pa-3"
+        >
+          <pre>{{ showColor }}</pre>
+        </v-sheet>
+      </v-flex>
+    </v-layout>
+  </v-container>
+</template>
+
+<script>
+  export default {
+    data: () => ({
+      types: ['hex', 'hexa', 'rgba', 'hsla', 'hsva'],
+      type: 'hex',
+      hex: '#FF00FF',
+      hexa: '#FF00FFFF',
+      rgba: { r: 255, g: 0, b: 255, a: 1 },
+      hsla: { h: 300, s: 1, l: 0.5, a: 1 },
+      hsva: { h: 300, s: 1, v: 1, a: 1 }
+    }),
+
+    computed: {
+      color: {
+        get () {
+          return this[this.type]
+        },
+        set (v) {
+          this[this.type] = v
+        }
+      },
+      showColor () {
+        if (typeof this.color === 'string') return this.color
+
+        return JSON.stringify(Object.keys(this.color).reduce((color, key) => {
+          color[key] = Number(this.color[key].toFixed(2))
+          return color
+        }, {}), null, 2)
+      }
+    }
+  }
+</script>

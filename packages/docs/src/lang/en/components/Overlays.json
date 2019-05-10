@@ -1,0 +1,22 @@
+{
+  "header": "# Overlays",
+  "headerText": "The `v-overlay` component is used to provide emphasis on a particular element or parts of it. It signals to the user of a state change within the application and can be used for creating loaders, dialogs and more.",
+  "examples": {
+    "usage": {
+      "desc": "In its simplest form, the `v-overlay` component will add a dimmed layer over your application."
+    },
+    "loader": {
+      "header": "### Loader",
+      "desc": "Using the `v-overlay` as a background, add a progress component to easily create a custom loader."
+    },
+    "advanced": {
+      "header": "### Advanced",
+      "desc": "Using the [v-hover](/components/hover), we are able to add a nice scrim over the information card with additional actions the user can take."
+    }
+  },
+  "props": {
+    "absolute": "Mixins.Positionable.props.absolute",
+    "opacity": "Sets the overlay opacity",
+    "zIndex": "Mixins.Menuable.props.zIndex"
+  }
+}

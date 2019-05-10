@@ -1,11 +1,40 @@
 <template>
   <div class="text-xs-center">
-    <v-chip label>Label</v-chip>
-
-    <v-chip label color="pink" text-color="white">
-      <v-icon left>label</v-icon>Tags
+    <v-chip
+      class="ma-2"
+      label
+    >
+      Label
     </v-chip>
 
-    <v-chip label outline color="red">Outline</v-chip>
+    <v-chip
+      class="ma-2"
+      color="pink"
+      label
+      text-color="white"
+    >
+      <v-icon left>label</v-icon>
+      Tags
+    </v-chip>
+
+    <v-chip
+      class="ma-2"
+      color="primary"
+      label
+    >
+      <v-icon left>mdi-account-circle-outline</v-icon>
+      John Leider
+    </v-chip>
+
+    <v-chip
+      class="ma-2"
+      close
+      color="cyan"
+      label
+      text-color="white"
+    >
+      <v-icon left>mdi-twitter</v-icon>
+      New Tweets
+    </v-chip>
   </div>
 </template>

@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <v-card>
     <v-toolbar
-      color="cyan"
+      color="deep-purple accent-4"
       dark
-      tabs
+      flat
     >
-      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title>Page title</v-toolbar-title>
 
@@ -22,9 +22,8 @@
       <template v-slot:extension>
         <v-tabs
           v-model="currentItem"
-          color="transparent"
           fixed-tabs
-          slider-color="yellow"
+          slider-color="white"
         >
           <v-tab
             v-for="item in items"
@@ -37,23 +36,27 @@
           <v-menu
             v-if="more.length"
             bottom
-            class="v-tabs__div"
             left
           >
-            <template v-slot:activator="{ on }">
-              <a class="v-tabs__item" v-on="on">
+            <template #activator="{ on }">
+              <v-btn
+                text
+                class="align-self-center mr-3"
+                v-on="on"
+              >
                 more
-                <v-icon>arrow_drop_down</v-icon>
-              </a>
+                <v-icon right>arrow_drop_down</v-icon>
+              </v-btn>
             </template>
+
             <v-list class="grey lighten-3">
-              <v-list-tile
+              <v-list-item
                 v-for="item in more"
                 :key="item"
                 @click="addItem(item)"
               >
                 {{ item }}
-              </v-list-tile>
+              </v-list-item>
             </v-list>
           </v-menu>
         </v-tabs>
@@ -74,7 +77,7 @@
         </v-card>
       </v-tab-item>
     </v-tabs-items>
-  </div>
+  </v-card>
 </template>
 
 <script>

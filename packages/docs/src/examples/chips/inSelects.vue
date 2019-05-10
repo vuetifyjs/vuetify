@@ -2,20 +2,20 @@
   <v-combobox
     v-model="chips"
     :items="items"
-    label="Your favorite hobbies"
     chips
     clearable
+    label="Your favorite hobbies"
+    multiple
     prepend-icon="filter_list"
     solo
-    multiple
   >
-    <template v-slot:selection="data">
+    <template v-slot:selection="{ item, selected, select }">
       <v-chip
-        :selected="data.selected"
-        close
-        @input="remove(data.item)"
+        :input-value="selected"
+        @click="select"
+        @click:close="remove(item)"
       >
-        <strong>{{ data.item }}</strong>&nbsp;
+        <strong>{{ item }}</strong>&nbsp;
         <span>(interest)</span>
       </v-chip>
     </template>

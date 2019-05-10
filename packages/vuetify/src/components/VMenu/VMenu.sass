@@ -1,0 +1,83 @@
+@import '../../styles/styles.sass'
+
+.v-menu
+  display: block
+  vertical-align: middle
+
+  &--inline
+    display: inline-block
+
+  &__activator
+    align-items: center
+    cursor: pointer
+    display: flex
+
+    *
+      cursor: pointer
+
+  &__content
+    position: absolute
+    display: inline-block
+    border-radius: 2px
+    max-width: 80%
+    overflow-y: auto
+    overflow-x: hidden
+    contain: content
+    // This is required for an issue on Chrome 65
+    // that prevents scrolling after a menu is opened
+    will-change: transform
+    +elevation(8)
+
+    &--active
+      pointer-events: none
+
+    &--auto
+      .v-list-item
+        transition-property: transform, opacity
+        transition-duration: .3s
+        transition-timing-function: map-get($transition, 'fast-in-fast-out')
+
+    &--fixed
+      position: fixed
+
+    & > .card
+      contain: content
+      backface-visibility: hidden
+
+  > .v-menu__content
+    max-width: none
+
+  &-transition
+    &-enter
+      .v-list-item
+        min-width: 0
+        pointer-events: none
+    &-enter-to
+      .v-list-item
+        pointer-events: auto
+        transition-delay: .1s
+
+    &-leave-active,
+    &-leave-to
+      pointer-events: none
+
+    &-enter,
+    &-leave-to
+      opacity: 0
+
+    &-enter-active,
+    &-leave-active
+      transition: all .3s map-get($transition, 'fast-in-fast-out')
+
+.v-menu-transition-enter
+  &.v-menu__content--auto
+    transition: none !important
+
+    .v-list-item
+      opacity: 0
+      transform: translateY(-15px)
+
+    .v-list-item--active
+      opacity: 1
+      transform: none !important
+      pointer-events: auto

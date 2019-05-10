@@ -1,13 +1,17 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/motion/understanding-motion.html"
+  },
   "children": [
     {
       "type": "section",
       "children": [
         {
           "type": "usage",
-          "value": "slideXTransitions"
+          "value": "usage"
         }
       ]
     },
@@ -40,6 +44,8 @@
           "value": [
             "slideXTransitions",
             "slideYTransitions",
+            "scrollXTransitions",
+            "scrollYTransitions",
             "scaleTransition",
             "fadeTransition",
             "expandTransition",

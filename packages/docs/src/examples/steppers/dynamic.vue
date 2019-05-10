@@ -54,7 +54,7 @@
             Continue
           </v-btn>
 
-          <v-btn flat>Cancel</v-btn>
+          <v-btn text>Cancel</v-btn>
         </v-stepper-content>
       </v-stepper-items>
     </v-stepper>

@@ -12,10 +12,10 @@
       app
     ></v-navigation-drawer>
     <v-toolbar :clipped-left="primaryDrawer.clipped" app absolute>
-      <v-toolbar-side-icon
+      <v-app-bar-nav-icon
         v-if="primaryDrawer.type !== 'permanent'"
         @click.stop="primaryDrawer.model = !primaryDrawer.model"
-      ></v-toolbar-side-icon>
+      ></v-app-bar-nav-icon>
       <v-toolbar-title>Vuetify</v-toolbar-title>
     </v-toolbar>
     <v-content>
@@ -52,8 +52,8 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn flat>Cancel</v-btn>
-                <v-btn flat color="primary">Submit</v-btn>
+                <v-btn text>Cancel</v-btn>
+                <v-btn text color="primary">Submit</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>

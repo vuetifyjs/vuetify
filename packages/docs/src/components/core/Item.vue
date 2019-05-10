@@ -1,12 +1,12 @@
 <template>
-  <v-list-tile
+  <v-list-item
     :to="path"
     v-bind="customAttrs"
-    class="v-list__tile--doc"
+    class="v-list-item--doc"
     ripple
     v-on="$listeners"
   >
-    <v-list-tile-avatar
+    <v-list-item-avatar
       v-if="avatar"
       :color="avatarColor"
     >
@@ -14,34 +14,34 @@
         dark
         v-text="avatar"
       />
-    </v-list-tile-avatar>
-    <v-list-tile-action v-else-if="icon">
+    </v-list-item-avatar>
+    <v-list-item-icon v-else-if="icon">
       <v-icon v-text="icon" />
-    </v-list-tile-action>
-    <v-list-tile-content>
-      <v-list-tile-title>
+    </v-list-item-icon>
+    <v-list-item-content>
+      <v-list-item-title>
         <span
           v-if="noMarkdown"
           v-text="text"
         />
         <doc-markdown v-else>{{ text }}</doc-markdown>
-      </v-list-tile-title>
-      <v-list-tile-sub-title v-if="subtext">
+      </v-list-item-title>
+      <v-list-item-subtitle v-if="subtext">
         <span
           v-if="noMarkdown"
           v-text="subtext"
         />
         <doc-markdown v-else>{{ subtext }}</doc-markdown>
-      </v-list-tile-sub-title>
-    </v-list-tile-content>
+      </v-list-item-subtitle>
+    </v-list-item-content>
     <v-chip
       v-if="chip"
       :color="chipColor"
-      class="v-chip--x-small"
-      dark
+      x-small
+      text-color="white"
     >{{ chip }}</v-chip>
     <slot />
-  </v-list-tile>
+  </v-list-item>
 </template>
 
 <script>
@@ -123,20 +123,8 @@
   }
 </script>
 
-<style lang="stylus">
-.v-list__tile--doc {
-  p {
-    margin-bottom: 0;
-  }
-
-  .v-chip--x-small {
-    font-size: 10px;
-    height: 16px;
-
-    .v-chip__content {
-      line-height: 1;
-      padding: 8px;
-    }
-  }
-}
+<style lang="sass">
+.v-list-item--doc
+  p
+    margin-bottom: 0
 </style>

@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_calendar-weekly.styl'
+import './VCalendarWeekly.sass'
 
 // Types
 import { VNode, VNodeChildren } from 'vue'
@@ -70,7 +70,7 @@ export default CalendarBase.extend({
       const shortOptions = { timeZone: 'UTC', month: 'short' }
 
       return createNativeLocaleFormatter(
-        this.locale,
+        this.currentLocale,
         (_tms, short) => short ? shortOptions : longOptions
       )
     }

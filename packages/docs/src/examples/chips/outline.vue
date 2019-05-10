@@ -1,11 +1,41 @@
 <template>
   <div class="text-xs-center">
-    <v-chip outline color="secondary">Outline</v-chip>
+    <v-chip
+      class="ma-2"
+      color="success"
+      outlined
+    >
+      <v-icon left>mdi-server-plus</v-icon>
+      Server Status
+    </v-chip>
 
-    <v-chip outline color="primary">Colored</v-chip>
+    <v-chip
+      class="ma-2"
+      color="primary"
+      outlined
+      pill
+    >
+      User Account
+      <v-icon right>mdi-account-outline</v-icon>
+    </v-chip>
 
-    <v-chip outline color="red">
-      <v-icon left>build</v-icon>Icon
+    <v-chip
+      class="ma-2"
+      color="deep-purple accent-4"
+      outlined
+    >
+      <v-icon left>build</v-icon>
+      Update Settings
+    </v-chip>
+
+    <v-chip
+      class="ma-2"
+      close
+      color="indigo darken-3"
+      outlined
+    >
+      <v-icon left>mdi-fire</v-icon>
+      New Posts Available
     </v-chip>
   </div>
 </template>

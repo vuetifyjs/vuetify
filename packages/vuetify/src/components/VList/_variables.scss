@@ -1,0 +1,19 @@
+$avatar-margin-x: 16px !default;
+
+$list-dense-subheader-font-size: 0.75rem !default;
+$list-dense-subheader-height: 40px !default;
+
+$list-item-avatar-margin-y: 8px !default;
+$list-item-avatar-horizontal-margin-x: -16px !default;
+
+$list-item-icon-margin-y: 16px !default;
+
+$list-item-min-height: 48px !default;
+$list-item-two-line-min-height: 64px !default;
+$list-item-three-line-min-height: 88px !default;
+
+$list-item-title-font-size: map-deep-get($headings, 'subtitle-1', 'size') !default;
+$list-item-subtitle-font-size: map-deep-get($headings, 'subtitle-2', 'size') !default;
+
+$list-item-dense-title-font-size: 0.8125rem !default;
+$list-item-dense-title-font-weight: 500 !default;

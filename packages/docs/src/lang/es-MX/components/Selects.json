@@ -79,7 +79,7 @@
         "tags": "Funcionalidad de _tagging_, que permite al usuario crear nuevos valors no disponibles desde la prop **items**"
     },
     "slots": {
-        "item": "_Scoped slot_ para indicar el markup de un _list-tile_",
+        "item": "_Scoped slot_ para indicar el markup de un _list-item_",
         "selection": "_Scoped slot_ para indicar el markup de los elementos seleccionados"
     }
 }

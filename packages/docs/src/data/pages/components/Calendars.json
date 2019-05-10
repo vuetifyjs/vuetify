@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VCalendar",
   "children": [
     {
       "type": "section",
@@ -29,13 +30,21 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "slots",
-            "events",
-            "weekly",
-            "daily",
-            "features"
+            "simple/weekly",
+            "simple/daily",
+            "intermediate/slots",
+            "complex/events"
           ]
         }
       ]

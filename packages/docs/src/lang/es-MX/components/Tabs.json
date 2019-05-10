@@ -36,7 +36,7 @@
             },
             "alignWithTitle": {
                 "header": "Alinear tabs con el título del toolbar",
-                "desc": "Hace que los `v-tabs` se alineen con el componente `v-toolbar-title` (`v-toolbar-side-icon` o `v-btn` deben utilizarse en un `v-toolbar`). Tal vez no funcione si el texto del tab se salta a la siguiente línea (_wrapped_)."
+                "desc": "Hace que los `v-tabs` se alineen con el componente `v-toolbar-title` (`v-app-bar-nav-icon` o `v-btn` deben utilizarse en un `v-toolbar`). Tal vez no funcione si el texto del tab se salta a la siguiente línea (_wrapped_)."
             },
             "grow": {
                 "header": "Grow",

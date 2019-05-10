@@ -75,7 +75,7 @@
   "props": {
     "v-edit-dialog": {
       "cancelText": "**large** prop을 사용할때 나오는 취소(cancel) 버튼의 기본 텍스트를 설정",
-      "lazy": "Mixins.Bootable.props.lazy",
+      "eager": "Mixins.Bootable.props.eager",
       "large": "대화찰(dialog)에 서브밋(submit)과 취소(cancel) 버튼을 추가합니다.",
       "saveText": "**large** prop을 사용할때 나오는 저장(save) 버튼의 기본 텍스트를 설정",
       "transition": "Mixins.Transitionable.props.transition"

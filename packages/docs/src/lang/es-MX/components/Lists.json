@@ -3,14 +3,14 @@
     "headerText": "El componente `v-list` se utiliza para mostrar información. Puede contener un avatar, contenido, acciones, subheaders y mucho más. Las listas pueden contener componentes hijos y se usan en el sidebar.",
     "components": [
         "v-list",
-        "v-list-tile",
-        "v-list-tile-title",
-        "v-list-tile-sub-title",
-        "v-list-tile-content",
-        "v-list-tile-action",
-        "v-list-tile-avatar",
+        "v-list-item",
+        "v-list-item-title",
+        "v-list-item-subtitle",
+        "v-list-item-content",
+        "v-list-item-action",
+        "v-list-item-avatar",
         "v-list-group",
-        "v-list-tile-action-text"
+        "v-list-item-action-text"
     ],
     "examples": [
         {
@@ -44,7 +44,7 @@
             },
             "titleSubtitleActionsAndActionText": {
                 "header": "Título y subtítulo, acciones y un _action-text_",
-                "desc": "Una lista puede contener una pila dentro de una acción. _Ripple_ y las props del _router_ pueden pasarse al componente principal v-list, al v-list-tile o como una propiedad en el arreglo de elementos que compondrán la lista."
+                "desc": "Una lista puede contener una pila dentro de una acción. _Ripple_ y las props del _router_ pueden pasarse al componente principal v-list, al v-list-item o como una propiedad en el arreglo de elementos que compondrán la lista."
             },
             "actionTitleAndSubtitle": {
                 "header": "Acción con título y subtítulo",
@@ -61,8 +61,8 @@
         "dense": "Reduce la altura máxima de los _list tiles_",
         "expand": "Sólo colapsará cuando explícitamente se cierre",
         "subheader": "Quita el _padding_ de arriba. Utilizado cuando el hermano anterior es un encabezado",
-        "threeLine": "Incrementa el alto del _list-tile_ para cuando hay tres líneas",
-        "twoLine": "Incrementa el alto del _list-tile_ para cuando hay dos líneas",
+        "threeLine": "Incrementa el alto del _list-item_ para cuando hay tres líneas",
+        "twoLine": "Incrementa el alto del _list-item_ para cuando hay dos líneas",
         "inactive": "Si se especifica, el _list tile_ no será desplegado como un link incluso si tiene las props to/href o un @click"
     }
 }

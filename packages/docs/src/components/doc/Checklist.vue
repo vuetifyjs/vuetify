@@ -1,15 +1,15 @@
 <template>
   <v-list class="checklist">
-    <v-list-tile v-for="(item, index) in items" :key="index">
-      <v-list-tile-content>
-        <v-list-tile-title>
+    <v-list-item v-for="(item, index) in items" :key="index">
+      <v-list-item-content>
+        <v-list-item-title>
           <doc-markdown :code="item" />
-        </v-list-tile-title>
-      </v-list-tile-content>
-      <v-list-tile-action>
+        </v-list-item-title>
+      </v-list-item-content>
+      <v-list-item-icon>
         <v-icon color="success">check</v-icon>
-      </v-list-tile-action>
-    </v-list-tile>
+      </v-list-item-icon>
+    </v-list-item>
   </v-list>
 </template>
 
@@ -43,10 +43,13 @@
   }
 </script>
 
-<style lang="stylus">
-  .checklist
-    max-width: 600px
+<style lang="sass">
+.checklist
+  max-width: 600px
 
-    > :nth-child(odd)
-      background: #eee
+  > :nth-child(odd)
+    background: #eee
+
+  p
+    margin-bottom: 0
 </style>

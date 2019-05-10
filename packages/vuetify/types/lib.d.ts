@@ -17,7 +17,8 @@ declare module 'vuetify/lib' {
   const VAutocomplete: Component
   const VAvatar: Component
   const VBadge: Component
-  const VBottomNav: Component
+  const VBanner: Component
+  const VBottomNavigation: Component
   const VBottomSheet: Component
   const VBottomSheetTransition: Component
   const VBreadcrumbs: Component
@@ -67,7 +68,6 @@ declare module 'vuetify/lib' {
   const VInput: Component
   const VItem: Component
   const VItemGroup: Component
-  const VJumbotron: Component
   const VLabel: Component
   const VLayout: Component
   const VList: Component
@@ -94,7 +94,6 @@ declare module 'vuetify/lib' {
   const VRangeSlider: Component
   const VRating: Component
   const VResponsive: Component
-  const VRowExpandTransition: Component
   const VScaleTransition: Component
   const VScrollXReverseTransition: Component
   const VScrollXTransition: Component
@@ -151,7 +150,8 @@ declare module 'vuetify/lib' {
     VAutocomplete,
     VAvatar,
     VBadge,
-    VBottomNav,
+    VBanner,
+    VBottomNavigation,
     VBottomSheet,
     VBottomSheetTransition,
     VBreadcrumbs,
@@ -201,7 +201,6 @@ declare module 'vuetify/lib' {
     VInput,
     VItem,
     VItemGroup,
-    VJumbotron,
     VLabel,
     VLayout,
     VList,
@@ -228,7 +227,6 @@ declare module 'vuetify/lib' {
     VRangeSlider,
     VRating,
     VResponsive,
-    VRowExpandTransition,
     VScaleTransition,
     VScrollXReverseTransition,
     VScrollXTransition,

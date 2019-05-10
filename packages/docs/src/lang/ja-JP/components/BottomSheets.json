@@ -1,6 +1,6 @@
 {
   "header": "Bottom sheet",
-  "headerText": "Bottom sheet はスクリーンの下部からスライドするように修飾された `v-dialog` で `v-bottom-nav` と似ています。 ボトムナビゲーションコンポーネントは、ボタンと特定のアプリケーションレベルのアクション用ですが、 Bottom sheet にはなんでも含めることができます。",
+  "headerText": "Bottom sheet はスクリーンの下部からスライドするように修飾された `v-dialog` で `v-bottom-navigation` と似ています。 ボトムナビゲーションコンポーネントは、ボタンと特定のアプリケーションレベルのアクション用ですが、 Bottom sheet にはなんでも含めることができます。",
   "components": ["v-bottom-sheet"],
   "examples": {
     "standard": {
@@ -15,7 +15,7 @@
   "props": {
     "disabled": "ダイアログを開けなくします。",
     "inset": "ダイアログの最大の横幅を 70% に縮小します。",
-    "lazy": "Mixins.Bootable.props.lazy",
+    "eager": "Mixins.Bootable.props.eager",
     "maxWidth": "シートのコンテナの最大の横幅を指定します。"
   }
 }

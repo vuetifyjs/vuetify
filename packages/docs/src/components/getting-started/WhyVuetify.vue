@@ -119,7 +119,7 @@
           more: 'https://material.io/design/'
         },
         {
-          color: 'red darken-3',
+          color: 'warning',
           title: vm.$t('GettingStarted.WhyVuetify.continuous'),
           subtitle: vm.$t('GettingStarted.WhyVuetify.updates'),
           caption: vm.$t('GettingStarted.WhyVuetify.updatesCaption'),

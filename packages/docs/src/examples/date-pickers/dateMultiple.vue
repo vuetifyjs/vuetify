@@ -13,7 +13,6 @@
         :close-on-content-click="false"
         :nudge-right="40"
         :return-value.sync="dates"
-        lazy
         transition="scale-transition"
         offset-y
         full-width
@@ -33,8 +32,8 @@
         </template>
         <v-date-picker v-model="dates" multiple no-title scrollable>
           <v-spacer></v-spacer>
-          <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
-          <v-btn flat color="primary" @click="$refs.menu.save(dates)">OK</v-btn>
+          <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
+          <v-btn text color="primary" @click="$refs.menu.save(dates)">OK</v-btn>
         </v-date-picker>
       </v-menu>
     </v-flex>

@@ -9,7 +9,7 @@
     <template #activator="{ on: menu }">
       <v-btn
         :aria-label="$t('Vuetify.AppToolbar.support')"
-        flat
+        text
         style="min-width: 48px"
         v-on="menu"
       >
@@ -21,7 +21,10 @@
         <v-icon class="hidden-md-and-up">mdi-comment-question</v-icon>
       </v-btn>
     </template>
-    <v-list dense>
+    <v-list
+      dense
+      nav
+    >
       <v-subheader v-text="$t('Vuetify.AppToolbar.getHelp')" />
       <core-item
         v-for="support in supports"

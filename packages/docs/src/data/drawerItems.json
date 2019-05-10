@@ -22,25 +22,32 @@
       { "text": "aLaCarte", "to": "a-la-carte" },
       { "text": "grid", "to": "grid" },
       { "text": "gridLists", "to": "grid-lists" },
-      { "text": "icons", "to": "icons" },
-      { "text": "i18n", "to": "internationalization" },
+      {
+        "group": "framework",
+        "text": "services",
+        "children": [
+          { "text": "application", "to": "application" },
+          { "text": "breakpoints", "to": "breakpoints" },
+          { "text": "icons", "to": "icons" },
+          { "text": "i18n", "to": "internationalization" },
+          { "text": "scroll", "to": "scroll" },
+          { "text": "theme", "to": "theme" }
+        ]
+      },
       {
         "group": "framework",
         "text": "layout",
         "children": [
-          { "text": "defaultMarkup", "to": "default-markup"},
           { "text": "aspectRatios", "to": "aspect-ratios" },
-          { "text": "breakpoints", "to": "breakpoints" },
           { "text": "preMadeLayouts", "to": "pre-made-layouts" }
         ]
       },
       {
         "group": "framework",
-        "text": "stylesAndThemes",
+        "text": "styles",
         "children": [
           { "text": "colors", "to": "colors" },
           { "text": "content", "to": "content" },
-          { "text": "theme", "to": "theme" },
           { "text": "typography", "to": "typography" }
         ]
       },
@@ -58,7 +65,6 @@
         "group": "framework",
         "text": "motion",
         "children": [
-          { "text": "scroll", "to": "scroll", "updated": true },
           { "text": "transitions", "to": "transitions" }
         ]
       }
@@ -73,6 +79,16 @@
       { "text": "alerts", "to": "alerts" },
       { "text": "avatars", "to": "avatars" },
       { "text": "badges", "to": "badges" },
+      { "text": "banners", "to": "banners", "new": true },
+      {
+        "group": "components",
+        "text": "bars",
+        "children": [
+          { "text": "appBars", "to": "app-bars", "new": true },
+          { "text": "toolbars", "to": "toolbars", "updated": true },
+          { "text": "systemBars", "to": "system-bars", "updated": true }
+        ]
+      },
       { "text": "bottomNavigation", "to": "bottom-navigation" },
       { "text": "bottomSheets", "to": "bottom-sheets" },
       { "text": "breadcrumbs", "to": "breadcrumbs" },
@@ -82,8 +98,7 @@
       { "text": "cards", "to": "cards" },
       { "text": "carousels", "to": "carousels" },
       { "text": "chips", "to": "chips" },
-      { "text": "dataIterator", "to": "data-iterator" },
-      { "text": "dataTables", "to": "data-tables" },
+      { "text": "colorPickers", "to": "color-pickers", "new": true },
       { "text": "dialogs", "to": "dialogs" },
       { "text": "dividers", "to": "dividers" },
       { "text": "expansionPanels", "to": "expansion-panels" },
@@ -93,7 +108,10 @@
         "text": "groups",
         "children": [
           { "text": "buttonGroups", "to": "button-groups" },
+          { "text": "chipGroups", "to": "chip-groups" },
           { "text": "itemGroups", "to": "item-groups" },
+          { "text": "listItemGroups", "to": "list-item-groups" },
+          { "text": "slideGroups", "to": "slide-groups" },
           { "text": "windows", "to": "windows" }
         ]
       },
@@ -116,10 +134,10 @@
           { "text": "textFields", "to": "text-fields" }
         ]
       },
-      { "text": "jumbotrons", "to": "jumbotrons", "deprecated": true },
       { "text": "lists", "to": "lists" },
       { "text": "menus", "to": "menus" },
       { "text": "navigationDrawers", "to": "navigation-drawers" },
+      { "text": "overlays", "to": "overlays", "new": true },
       { "text": "paginations", "to": "paginations" },
       { "text": "parallax", "to": "parallax" },
       {
@@ -130,16 +148,31 @@
           { "text": "timePickers", "to": "time-pickers" }
         ]
       },
-      { "text": "progress", "to": "progress" },
+      {
+        "group": "components",
+        "text": "progress",
+        "children": [
+          { "text": "progressCircular", "to": "progress-circular" },
+          { "text": "progressLinear", "to": "progress-linear" }
+        ]
+      },
       { "text": "ratings", "to": "ratings" },
       { "text": "sheets", "to": "sheets" },
       { "text": "snackbars", "to": "snackbars" },
       { "text": "sparklines", "to": "sparklines", "updated": true },
       { "text": "steppers", "to": "steppers" },
       { "text": "subheaders", "to": "subheaders" },
+      {
+        "group": "components",
+        "text": "tables",
+        "children": [
+          { "text": "dataIterators", "to": "data-iterators", "updated": true },
+          { "text": "simpleTables", "to": "simple-tables", "new": true },
+          { "text": "dataTables", "to": "data-tables", "updated": true }
+        ]
+      },
       { "text": "tabs", "to": "tabs" },
       { "text": "timelines", "to": "timelines" },
-      { "text": "toolbars", "to": "toolbars" },
       { "text": "tooltips", "to": "tooltips" },
       { "text": "treeview", "to": "treeview", "updated": true }
     ]

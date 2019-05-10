@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VAvatar",
   "children": [
     {
       "type": "section",
@@ -26,9 +27,21 @@
         {
           "type": "examples",
           "value": [
-            "advanced",
-            "iconAndText"
+            "simple/size",
+            "simple/tile",
+            "intermediate/default",
+            "intermediate/profile",
+            "complex/advanced"
           ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "playground",
+          "value": "playground"
         }
       ]
     },
