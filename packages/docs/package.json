@@ -32,7 +32,6 @@
     "moment": "^2.24.0",
     "node-fetch": "^2.3.0",
     "pluralize": "^7.0.0",
-    "rollbar": "^2.5.4",
     "route-cache": "^0.4.4",
     "serve-favicon": "^2.5.0",
     "vee-validate": "^2.2.0",
