@@ -12,6 +12,10 @@
     "expand": {
       "header": "### Expand",
       "desc": "`v-data-iterator` can leverage the power of the `expand` prop and `props.expanded` inside the item slot to control the visibility of item data."
+    },
+    "filter": {
+      "header": "### Filter",
+      "desc": "`v-data-iterator` can receive filters"
     }
   },
   "props": {

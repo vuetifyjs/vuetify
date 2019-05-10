@@ -27,7 +27,8 @@
           "type": "examples",
           "value": [
             "slots",
-            "expand"
+            "expand",
+            "filter"
           ]
         }
       ]
