@@ -145,6 +145,13 @@
       "logo": "backers/blokt.png",
       "type": "Patron",
       "pledge": "Gold ($50)"
+    },
+    {
+      "name": "Loomio",
+      "href": "https://www.loomio.org/",
+      "logo": "backers/loomio.svg",
+      "type": "Patron",
+      "pledge": "Gold ($50)"
     }
   ],
   "affiliates": [
