@@ -15,7 +15,7 @@
     },
     "filter": {
       "header": "### Filter",
-      "desc": "The `v-data-iterator` can receive filters and pagination options."
+      "desc": "Order, filters and pagination can be controlled externally by using the individual props"
     }
   },
   "props": {
