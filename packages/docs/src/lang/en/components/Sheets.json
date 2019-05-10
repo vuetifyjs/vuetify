@@ -8,6 +8,10 @@
     "elevation": {
       "header": "### Using elevation",
       "desc": "Sheets can accept a custom elevation between **0 and 24** (0 is default)."
+    },
+    "tile": {
+      "header": "### Tile",
+      "desc": "Sheets can accept a `tile` property which makes them rectangular (no `border-radius`)."
     }
   },
   "props": {

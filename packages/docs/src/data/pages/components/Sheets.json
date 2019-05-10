@@ -36,7 +36,8 @@
         {
           "type": "examples",
           "value": [
-            "simple/elevation"
+            "simple/elevation",
+            "simple/tile"
           ]
         }
       ]
