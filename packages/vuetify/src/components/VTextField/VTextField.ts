@@ -210,7 +210,9 @@ export default baseMixins.extend<options>().extend({
   created () {
     /* istanbul ignore if */
     if (this.box) deprecate('box', 'filled')
-    if (this.shaped && !(this.filled || this.outlined)) consoleWarn('shaped should be used with either filled or outlined', this)
+    if (this.shaped && !(this.isFilled || this.outlined || this.isSolo)) {
+      consoleWarn('shaped should be used with either filled or outlined', this)
+    }
   },
 
   mounted () {
