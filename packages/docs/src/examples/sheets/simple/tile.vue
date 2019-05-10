@@ -1,6 +1,6 @@
 <template>
   <v-container grid-list-xl>
-    <v-layout wrap>
+    <v-layout wrap justify-space-around>
       <v-flex
         v-for="tile in [false, true]"
         :key="tile"
