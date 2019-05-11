@@ -12,6 +12,10 @@
     "tile": {
       "header": "### Tile",
       "desc": "Sheets can accept a `tile` property which makes them rectangular (no `border-radius`)."
+    },
+    "colors-sizes": {
+      "header": "### Colors & sizes",
+      "desc": "Sheets and components based on then can have different sizes and colors."
     }
   },
   "props": {

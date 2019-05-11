@@ -37,7 +37,8 @@
           "type": "examples",
           "value": [
             "simple/elevation",
-            "simple/tile"
+            "simple/tile",
+            "intermediate/colors-sizes"
           ]
         }
       ]
