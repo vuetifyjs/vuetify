@@ -20,7 +20,7 @@
           :style="{
             borderColor: activeIndex === i ? 'inherit' : null
           }"
-          class="mb-3 d-block"
+          class="mb-3 d-block subtitle-2"
           @click.stop.prevent="goTo(item.target)"
           v-text="item.text"
         />
@@ -47,7 +47,7 @@
         immediate: true,
         handler () {
           clearTimeout(this.routeTimeout)
-          this.routeTimeout = setTimeout(this.genList, 200)
+          this.routeTimeout = setTimeout(this.genList, 300)
         }
       }
     },
