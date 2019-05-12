@@ -42,7 +42,7 @@
           "value": [
             "simple/colored",
             "simple/icon",
-            "simple/outline",
+            "simple/outlined",
             "simple/label",
             "simple/closable",
             "intermediate/actionChips",

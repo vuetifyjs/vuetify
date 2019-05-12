@@ -14,8 +14,8 @@
       "header": "### Icon",
       "desc": "Chips can use text or any icon available in the Material Icons font library."
     },
-    "outline": {
-      "header": "### Outline",
+    "outlined": {
+      "header": "### Outlined",
       "desc": "Outlined chips inherit their border color from the current text color."
     },
     "label": {
