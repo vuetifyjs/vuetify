@@ -21,31 +21,39 @@ export default {
       }
     },
     mouseEnterHandler () {
-      this.runDelay('open', () => {
-        if (this.hasJustFocused) return
+      if (this.openOnHover) {
+        this.runDelay('open', () => {
+          if (this.hasJustFocused) return
 
-        this.hasJustFocused = true
-        this.isActive = true
-      })
+          this.hasJustFocused = true
+          this.isActive = true
+        })
+      }
     },
     mouseLeaveHandler (e) {
-      // Prevent accidental re-activation
-      this.runDelay('close', () => {
-        if (this.$refs.content.contains(e.relatedTarget)) return
+      if (this.openOnHover) {
+        // Prevent accidental re-activation
+        this.runDelay('close', () => {
+          if (this.$refs.content.contains(e.relatedTarget)) return
 
-        requestAnimationFrame(() => {
-          this.isActive = false
-          this.callDeactivate()
+          requestAnimationFrame(() => {
+            this.isActive = false
+            this.callDeactivate()
+          })
         })
-      })
+      }
     },
     addActivatorEvents (activator = null) {
       if (!activator || this.disabled) return
       activator.addEventListener('click', this.activatorClickHandler)
+      activator.addEventListener('mouseenter', this.mouseEnterHandler)
+      activator.addEventListener('mouseleave', this.mouseLeaveHandler)
     },
     removeActivatorEvents (activator = null) {
       if (!activator) return
       activator.removeEventListener('click', this.activatorClickHandler)
+      activator.removeEventListener('mouseenter', this.mouseEnterHandler)
+      activator.removeEventListener('mouseleave', this.mouseLeaveHandler)
     }
   }
 }
