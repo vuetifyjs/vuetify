@@ -273,7 +273,7 @@ export default baseMixins.extend({
       return input
     },
     genClearIcon () {
-      if (!this.clearable || this.readonly) return null
+      if (!this.clearable) return null
 
       const icon = this.isDirty ? 'clear' : ''
 
