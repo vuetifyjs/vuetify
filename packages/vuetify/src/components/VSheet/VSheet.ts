@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_sheet.styl'
+import './VSheet.sass'
 
 // Mixins
 import Colorable from '../../mixins/colorable'

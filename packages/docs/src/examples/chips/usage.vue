@@ -1,30 +1,49 @@
 <template>
-  <v-container fluid class="pa-0">
-    <v-layout row wrap>
-      <v-flex md6 sm12>
-        <div class="text-xs-center">
-          <v-chip close>Example Chip</v-chip>
-        </div>
-        <div class="text-xs-center">
-          <v-chip>Example Chip</v-chip>
-        </div>
-      </v-flex>
-      <v-flex md6 sm12 xs12>
-        <div class="text-xs-center">
-          <v-chip close>
-            <v-avatar>
-              <img src="https://randomuser.me/api/portraits/men/35.jpg" alt="trevor">
-            </v-avatar>
-            Trevor Hansen
-          </v-chip>
-        </div>
-        <div class="text-xs-center">
-          <v-chip>
-            <v-avatar class="teal">A</v-avatar>
-            ANZ Bank
-          </v-chip>
-        </div>
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <div
+    id="chip-usage-example"
+    class="text-xs-center"
+  >
+    <v-chip>Default</v-chip>
+
+    <v-chip
+      color="red lighten-2"
+      text-color="white"
+    >
+      <v-avatar
+        left
+        color="white"
+        class="text--primary"
+      >
+        V
+      </v-avatar>
+      Letter
+    </v-chip>
+
+    <v-chip
+      color="primary"
+      pill
+    >
+      Pill Chip
+      <v-avatar
+        color="primary darken-2"
+        right
+      >
+        $
+      </v-avatar>
+    </v-chip>
+
+    <v-chip
+      label
+      color="deep-purple accent-4"
+      text-color="white"
+    >
+      Label
+    </v-chip>
+  </div>
 </template>
+
+<style>
+  #chip-usage-example .v-chip {
+    margin: 8px;
+  }
+</style>

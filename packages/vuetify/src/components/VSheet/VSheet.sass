@@ -1,0 +1,26 @@
+// Imports
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+
+// Theme
++theme(v-sheet) using ($material)
+  background-color: map-get($material, 'cards')
+  border-color: map-get($material, 'cards')
+  color: map-deep-get($material, 'text', 'primary')
+
+.v-sheet
+  display: block
+  border-radius: $sheet-border-radius
+  position: relative
+  +elevationTransition()
+
+  > *:first-child:not(.v-btn):not(.v-chip)
+    border-top-left-radius: inherit
+    border-top-right-radius: inherit
+
+  > *:last-child:not(.v-btn):not(.v-chip)
+    border-bottom-left-radius: inherit
+    border-bottom-right-radius: inherit
+
+  &--tile
+    border-radius: 0

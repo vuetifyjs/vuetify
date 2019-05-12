@@ -8,7 +8,7 @@
     <template #activator="{ on: menu }">
       <v-btn
         class="hidden-md-and-down"
-        flat
+        text
         v-on="menu"
       >
         <span
@@ -20,7 +20,10 @@
     </template>
 
     <v-card>
-      <v-list dense>
+      <v-list
+        dense
+        nav
+      >
         <v-subheader v-text="$t('Vuetify.AppToolbar.documentation')" />
         <core-item
           v-for="(archive, i) in archives"

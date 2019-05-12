@@ -17,13 +17,13 @@
       offset-y
     >
       <v-list>
-        <v-list-tile
+        <v-list-item
           v-for="(item, index) in items"
           :key="index"
           @click=""
         >
-          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-        </v-list-tile>
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item>
       </v-list>
     </v-menu>
   </div>
@@ -57,9 +57,9 @@
   }
 </script>
 
-<style lang="stylus" scoped>
-  .portrait.v-card
-    margin: 0 auto
-    max-width: 600px
-    width: 100%
+<style lang="sass" scoped>
+.portrait.v-card
+  margin: 0 auto
+  max-width: 600px
+  width: 100%
 </style>

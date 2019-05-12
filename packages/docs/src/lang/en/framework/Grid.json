@@ -36,7 +36,7 @@
     },
     "growShrink": {
       "header": "### Grow and Shrink",
-      "desc": "Flex components can utilize the `grow` and `shrink` props to automatically fill available space in a row or shrink to only use the space needed for its contents.",
+      "desc": "By default, flex components will automatically fill the available space in a row or column. They will also shrink relative to the rest of the flex items in the flex container when there isn't enough space in the row or column. To disable the grow behavior, use the `shrink` attribute. To disable the shrink behavior, use the `grow` attribute. To disable both the grow and shrink behavior, use the `grow-shrink-0` attribute.",
       "uninverted": true
     },
     "nestedGrid": {
@@ -87,6 +87,7 @@
       "alignSelfBaseline": "Apply `align-self: baseline`\n\n[MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/align-self)",
       "grow": "Apply `flex-grow: 1`\n\n[MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow)",
       "shrink": "Apply `flex-shrink: 1`\n\n[MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink)",
+      "grow-shrink-0": "Apply `flex-grow: 0` and `flex-shrink: 0`\n\n[MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow)",
       "offset-(size)(0-12)": "offset-xs: extra small, offset-sm: small, offset-md: medium, offset-lg: large, offset-xl: extra large. Example: offset-xs3",
       "order-(size)(1-12)": "order-xs: extra small, order-sm: small, order-md: medium, order-lg: large, order-xl: extra large. Example: order-xs3",
       "(size)(1-12)": "xs: extra small, sm: small, md: medium, lg: large, xl: extra large - 1 through 12"

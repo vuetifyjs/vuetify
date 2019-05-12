@@ -17,7 +17,7 @@ export default mixins(
 
   computed: {
     formatter (): DatePickerFormatter {
-      return this.format || createNativeLocaleFormatter(this.locale, { month: 'short', timeZone: 'UTC' }, { start: 5, length: 2 })
+      return this.format || createNativeLocaleFormatter(this.currentLocale, { month: 'short', timeZone: 'UTC' }, { start: 5, length: 2 })
     }
   },
 

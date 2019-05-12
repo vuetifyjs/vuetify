@@ -1,0 +1,43 @@
+@import '../../styles/styles.sass'
+
+// Theme
++theme(v-overlay) using ($material)
+  color: map-deep-get($material, 'text', 'primary')
+
+// Block
+.v-overlay
+  align-items: center
+  border-radius: inherit
+  display: flex
+  justify-content: center
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  pointer-events: none
+  transition: $primary-transition
+
+// Element
+.v-overlay__content
+  position: relative
+
+.v-overlay__scrim
+  border-radius: inherit
+  bottom: 0
+  height: 100%
+  left: 0
+  position: absolute
+  right: 0
+  top: 0
+  transition: .3s cubic-bezier(.25,.8,.50,1)
+  width: 100%
+  will-change: opacity
+
+// Modifier
+.v-overlay--absolute
+  position: absolute
+
+.v-overlay--active
+  pointer-events: auto
+  touch-action: none

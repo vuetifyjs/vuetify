@@ -35,7 +35,7 @@
             chips
             label="Chips"
             multiple
-            outline
+            outlined
           ></v-select>
         </v-flex>
         <v-flex xs12 sm6>

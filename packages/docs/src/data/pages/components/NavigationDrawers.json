@@ -1,6 +1,11 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VNavigationDrawer",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/navigation-drawer.html"
+  },
   "children": [
     {
       "type": "section",
@@ -26,14 +31,18 @@
         {
           "type": "examples",
           "value": [
-            "permanentClipped",
+            "colored",
             "permanentFloating",
             "persistent",
             "mini",
             "temporary",
             "dark",
             "combined",
-            "nested"
+            "nested",
+            "right",
+            "background",
+            "bottom-drawer",
+            "expand-on-hover"
           ]
         }
       ]

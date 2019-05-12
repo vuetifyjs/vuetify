@@ -1,0 +1,9 @@
+{
+  bar: number
+  bottom: number
+  footer: number
+  footerInset: number
+  left: number
+  right: number
+  top: number
+}

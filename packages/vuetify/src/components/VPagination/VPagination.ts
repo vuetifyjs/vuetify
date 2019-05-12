@@ -1,4 +1,4 @@
-import '../../stylus/components/_pagination.styl'
+import './VPagination.sass'
 
 import VIcon from '../VIcon'
 

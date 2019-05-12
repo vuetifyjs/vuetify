@@ -12,6 +12,7 @@ import {
   ThisTypedComponentOptionsWithArrayProps,
   ThisTypedComponentOptionsWithRecordProps
 } from 'vue/types/options'
+import { MetaInfo } from 'vue-meta/types'
 import { TouchStoredHandlers } from './directives/touch'
 
 declare global {
@@ -73,6 +74,12 @@ declare module 'vue/types/vnode' {
   }
 }
 
+declare module 'vue/types/options' {
+  interface ComponentOptions<V extends Vue> {
+    head?: MetaInfo | (() => MetaInfo)
+  }
+}
+
 declare module 'vue/types/vue' {
   export type OptionsVue<Instance extends Vue, Data, Methods, Computed, Props, Options = {}> = VueConstructor<
     CombinedVueInstance<Instance, Data, Methods, Computed, Props> & Vue,
@@ -84,7 +91,13 @@ declare module 'vue/types/vue' {
     _isDestroyed: boolean
 
     /** bindObjectProps */
-    _b (data: VNodeData, tag: string, value: Dictionary<any> | Dictionary<any>[], asProp?: boolean, isSync?: boolean): VNodeData
+    _b (
+      data: VNodeData,
+      tag: string,
+      value: Dictionary<any> | Dictionary<any>[],
+      asProp?: boolean,
+      isSync?: boolean
+    ): VNodeData
 
     /** bindObjectListeners */
      _g (data: VNodeData, value: {}): VNodeData

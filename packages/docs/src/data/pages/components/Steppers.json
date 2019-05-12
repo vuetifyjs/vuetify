@@ -1,6 +1,11 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VStepper",
+  "mdSpec": {
+    "version": "1",
+    "link": "https://material.io/archive/guidelines/components/steppers.html"
+  },
   "children": [
     {
       "type": "section",

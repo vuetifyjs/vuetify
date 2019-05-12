@@ -11,6 +11,7 @@
       fixed
       bottom
       right
+      large
       color="red"
       @click="toTop"
     >

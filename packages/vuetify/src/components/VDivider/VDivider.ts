@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_dividers.styl'
+import './VDivider.sass'
 
 // Types
 import { VNode } from 'vue'

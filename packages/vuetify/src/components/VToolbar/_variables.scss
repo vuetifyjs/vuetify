@@ -1,0 +1,10 @@
+$toolbar-btn-icon-size: 48px !default;
+$toolbar-content-padding-y: 4px !default;
+$toolbar-content-padding-x: 16px !default;
+$toolbar-title-padding: 20px !default;
+$toolbar-transition: 0.2s map-get($transition, 'fast-out-slow-in') transform,
+                     0.2s map-get($transition, 'fast-out-slow-in') background-color,
+                     0.2s map-get($transition, 'fast-out-slow-in') left,
+                     0.2s map-get($transition, 'fast-out-slow-in') right,
+                     280ms map-get($transition, 'fast-out-slow-in') box-shadow,
+                     0.25s map-get($transition, 'fast-out-slow-in') width !default;

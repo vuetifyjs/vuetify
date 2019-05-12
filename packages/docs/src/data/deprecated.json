@@ -1,5 +1,18 @@
 {
   "props": {
+    "v-alert": {
+      "outline": "2.0"
+    },
+    "v-expansion-panels": {
+      "expand": false
+    },
+    "v-bottom-navigation": {
+      "active": false
+    },
+    "v-chip": {
+      "outline": "2.0",
+      "selected": "2.0"
+    },
     "v-text-field": {
       "textarea": "1.1",
       "append-icon-cb": false,
@@ -8,17 +21,8 @@
       "prepend-inner-icon-cb": false,
       "clear-icon-cb": false
     },
-    "v-textarea": {
-      "append-icon-cb": false,
-      "append-outer-icon-cb": false,
-      "prepend-icon-cb": false,
-      "prepend-inner-icon-cb": false,
-      "clear-icon-cb": false
-    },
     "v-select": {
       "autocomplete": "1.1",
-      "search-input": false,
-      "filter": false,
       "combobox": "1.1",
       "tags": "1.1",
       "editable": "1.1",
@@ -30,10 +34,6 @@
       "prepend-icon-cb": false,
       "prepend-inner-icon-cb": false,
       "clear-icon-cb": false
-    },
-    "v-breadcrumbs": {
-      "justify-center": "1.2",
-      "justify-end": "1.2"
     },
     "v-autocomplete": {
       "activator": false,
@@ -101,9 +101,6 @@
     "v-range-slider": {
       "append-icon-cb": false,
       "prepend-icon-cb": false
-    },
-    "v-data-iterator": {
-      "loading": false
     }
   }
 }

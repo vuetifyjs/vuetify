@@ -37,13 +37,10 @@ Vue.component('theme', {
     // Can't do this, some components rely on the pre-defined values
     // this.$vuetify.theme = { primary: 123 }
 
-    Object.assign(this.$vuetify.theme, {
+    Object.assign(this.$vuetify.theme.themes.light, {
       primary: 123
     })
 
-    this.$vuetify.theme = {
-      ...this.$vuetify.theme,
-      primary: 132
-    }
+    this.$vuetify.theme.themes.light.primary = 132
   }
 })

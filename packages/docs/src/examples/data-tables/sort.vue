@@ -3,21 +3,12 @@
     <v-data-table
       :headers="headers"
       :items="desserts"
-      :search="search"
-      :pagination.sync="pagination"
+      :sort-by.sync="sortBy"
+      :sort-desc.sync="descending"
       class="elevation-1"
-    >
-      <template v-slot:items="props">
-        <td>{{ props.item.name }}</td>
-        <td class="text-xs-right">{{ props.item.calories }}</td>
-        <td class="text-xs-right">{{ props.item.fat }}</td>
-        <td class="text-xs-right">{{ props.item.carbs }}</td>
-        <td class="text-xs-right">{{ props.item.protein }}</td>
-        <td class="text-xs-right">{{ props.item.iron }}</td>
-      </template>
-    </v-data-table>
+    ></v-data-table>
     <div class="text-xs-center pt-2">
-      <v-btn color="primary" @click="toggleOrder">Toggle sort order</v-btn>
+      <v-btn color="primary" class="mr-2" @click="toggleOrder">Toggle sort order</v-btn>
       <v-btn color="primary" @click="nextSort">Sort next column</v-btn>
     </div>
   </div>
@@ -27,16 +18,12 @@
   export default {
     data () {
       return {
-        search: '',
-        pagination: {
-          sortBy: 'fat'
-        },
-        selected: [],
+        sortBy: 'fat',
+        descending: false,
         headers: [
           {
             text: 'Dessert (100g serving)',
             align: 'left',
-            sortable: false,
             value: 'name'
           },
           { text: 'Calories', value: 'calories' },
@@ -131,13 +118,12 @@
     },
     methods: {
       toggleOrder () {
-        this.pagination.descending = !this.pagination.descending
+        this.descending = !this.descending
       },
       nextSort () {
-        let index = this.headers.findIndex(h => h.value === this.pagination.sortBy)
+        let index = this.headers.findIndex(h => h.value === this.sortBy)
         index = (index + 1) % this.headers.length
-        index = index === 0 ? index + 1 : index
-        this.pagination.sortBy = this.headers[index].value
+        this.sortBy = this.headers[index].value
       }
     }
   }

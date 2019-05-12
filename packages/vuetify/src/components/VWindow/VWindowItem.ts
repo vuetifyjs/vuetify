@@ -10,22 +10,22 @@ import Touch from '../../directives/touch'
 
 // Utilities
 import { convertToUnit } from '../../util/helpers'
-import { ExtractVue } from './../../util/mixins'
-import mixins from '../../util/mixins'
+import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
-import Vue, { VNode } from 'vue'
+import { VNode } from 'vue'
 
-type VBaseWindow = InstanceType<typeof VWindow>
-
-interface options extends Vue {
-  $el: HTMLElement
-  windowGroup: VBaseWindow
-}
-
-export default mixins<options & ExtractVue<[typeof Bootable]>>(
+const baseMixins = mixins(
   Bootable,
   GroupableFactory('windowGroup', 'v-window-item', 'v-window')
+)
+
+interface options extends ExtractVue<typeof baseMixins> {
+  $el: HTMLElement
+  windowGroup: InstanceType<typeof VWindow>
+}
+
+export default baseMixins.extend<options>().extend(
   /* @vue/component */
 ).extend({
   name: 'v-window-item',
@@ -35,6 +35,7 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
   },
 
   props: {
+    disabled: Boolean,
     reverseTransition: {
       type: [Boolean, String],
       default: undefined
@@ -57,6 +58,9 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
   },
 
   computed: {
+    classes (): object {
+      return this.groupClasses
+    },
     computedTransition (): string | boolean {
       if (!this.windowGroup.internalReverse) {
         return typeof this.transition !== 'undefined'
@@ -81,6 +85,17 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
   methods: {
     genDefaultSlot () {
       return this.$slots.default
+    },
+    genWindowItem () {
+      return this.$createElement('div', {
+        staticClass: 'v-window-item',
+        class: this.classes,
+        directives: [{
+          name: 'show',
+          value: this.isActive
+        }],
+        on: this.$listeners
+      }, this.showLazyContent(this.genDefaultSlot()))
     },
     onAfterEnter () {
       if (this.wasCancelled) {
@@ -134,15 +149,6 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
   },
 
   render (h): VNode {
-    const div = h('div', {
-      staticClass: 'v-window-item',
-      directives: [{
-        name: 'show',
-        value: this.isActive
-      }],
-      on: this.$listeners
-    }, this.showLazyContent(this.genDefaultSlot()))
-
     return h('transition', {
       props: {
         name: this.computedTransition
@@ -154,6 +160,6 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
         enter: this.onEnter,
         enterCancelled: this.onEnterCancelled
       }
-    }, [div])
+    }, [this.genWindowItem()])
   }
 })

@@ -53,6 +53,10 @@
       "header": "### Switches - Colors",
       "desc": "Switches can be colored by using any of the builtin colors and contextual names using the `color` prop."
     },
+    "switchesFlat": {
+      "header": "### Switches - Flat",
+      "desc": "You can make switch render without elevation of thumb using `flat` property."
+    },
     "labelSlot": {
       "header": "### Label slot",
       "desc": "Selection controls' labels can be defined in `label` slot - that will allow to use HTML content"
@@ -60,15 +64,18 @@
   },
   "props": {
     "column": "Displays radio buttons in column",
-    "mandatory": "Forces a selection on a `v-radio` child",
-    "name": "Sets the component's name attribute",
-    "onIcon": "The icon used when active",
-    "offIcon": "The icon used when inactive",
-    "row": "Displays radio buttons in row",
+    "flat": "Display component without elevation. Default elevation for thumb is 4dp, `flat` resets it",
     "indeterminate": "Sets an indeterminate state for the checkbox",
     "indeterminateIcon": "The icon used when in an indeterminate state",
     "inputValue": "The **v-model** bound value",
+    "inset": "Enlarge the `v-switch` track to encompass the thumb",
+    "loading": "Displays circular progress bar. Can either be a String which specifies which color is applied to the progress bar (any material color or theme color - primary, secondary, success, info, warning, error) or a Boolean which uses the component color (set by color prop - if it's supported by the component) or the primary color",
+    "mandatory": "Forces a selection on a `v-radio` child",
     "multiple": "Changes expected model to an array",
+    "name": "Sets the component's name attribute",
+    "offIcon": "The icon used when inactive",
+    "onIcon": "The icon used when active",
+    "row": "Displays radio buttons in row",
     "value": "Sets the value of the selection control component",
     "v-radio": {
       "disabled": "Mixins.Validatable.props.disabled",

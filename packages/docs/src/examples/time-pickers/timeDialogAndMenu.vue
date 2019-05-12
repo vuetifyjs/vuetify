@@ -7,7 +7,6 @@
         :close-on-content-click="false"
         :nudge-right="40"
         :return-value.sync="time"
-        lazy
         transition="scale-transition"
         offset-y
         full-width
@@ -38,7 +37,6 @@
         v-model="modal2"
         :return-value.sync="time"
         persistent
-        lazy
         full-width
         width="290px"
       >
@@ -57,8 +55,8 @@
           full-width
         >
           <v-spacer></v-spacer>
-          <v-btn flat color="primary" @click="modal2 = false">Cancel</v-btn>
-          <v-btn flat color="primary" @click="$refs.dialog.save(time)">OK</v-btn>
+          <v-btn text color="primary" @click="modal2 = false">Cancel</v-btn>
+          <v-btn text color="primary" @click="$refs.dialog.save(time)">OK</v-btn>
         </v-time-picker>
       </v-dialog>
     </v-flex>

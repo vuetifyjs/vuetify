@@ -9,5 +9,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon) // Register component global
 library.add(fas) // Include needed icons.
 
 Vue.use(Vuetify, {
-  iconfont: 'faSvg',
+  icons: {
+    iconfont: 'faSvg'
+  }
 })

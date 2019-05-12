@@ -7,19 +7,22 @@
         <v-flex class="pr-3">
           <v-slider
             v-model="slider"
+            class="align-center"
             :max="max"
             :min="min"
-          ></v-slider>
-        </v-flex>
-
-        <v-flex shrink style="width: 60px">
-          <v-text-field
-            v-model="slider"
-            class="mt-0"
             hide-details
-            single-line
-            type="number"
-          ></v-text-field>
+          >
+            <template #append>
+              <v-text-field
+                v-model="slider"
+                class="mt-0 pt-0"
+                hide-details
+                single-line
+                type="number"
+                style="width: 60px"
+              ></v-text-field>
+            </template>
+          </v-slider>
         </v-flex>
       </v-layout>
     </v-card-text>
@@ -28,36 +31,35 @@
 
     <v-card-text>
       <v-layout row>
-        <v-flex
-          shrink
-          style="width: 60px"
-        >
-          <v-text-field
-            v-model="range[0]"
-            class="mt-0"
-            hide-details
-            single-line
-            type="number"
-          ></v-text-field>
-        </v-flex>
         <v-flex class="px-3">
           <v-range-slider
             v-model="range"
             :max="max"
             :min="min"
-          ></v-range-slider>
-        </v-flex>
-        <v-flex
-          shrink
-          style="width: 60px"
-        >
-          <v-text-field
-            v-model="range[1]"
-            class="mt-0"
             hide-details
-            single-line
-            type="number"
-          ></v-text-field>
+            class="align-center"
+          >
+            <template #prepend>
+              <v-text-field
+                v-model="range[0]"
+                class="mt-0 pt-0"
+                hide-details
+                single-line
+                type="number"
+                style="width: 60px"
+              ></v-text-field>
+            </template>
+            <template #append>
+              <v-text-field
+                v-model="range[1]"
+                class="mt-0 pt-0"
+                hide-details
+                single-line
+                type="number"
+                style="width: 60px"
+              ></v-text-field>
+            </template>
+          </v-range-slider>
         </v-flex>
       </v-layout>
     </v-card-text>

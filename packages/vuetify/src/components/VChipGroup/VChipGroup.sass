@@ -1,0 +1,25 @@
+@import './_variables.sass'
+
+// Block
+.v-chip-group
+  .v-chip
+    margin: $chip-group-margin
+
+  .v-chip--selected
+    &.v-chip--no-color
+      &:after
+        opacity: .08
+
+      &:focus:after
+        opacity: .16
+
+// Element
+.v-chip-group .v-slide-group__content
+  padding: $chip-group-content-padding
+
+// Modifiers
+.v-chip-group--column
+  .v-slide-group__content
+    white-space: normal
+    flex-wrap: wrap
+    max-width: 100%

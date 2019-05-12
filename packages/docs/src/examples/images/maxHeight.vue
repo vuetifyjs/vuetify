@@ -55,7 +55,7 @@
       </v-layout>
 
       <v-layout v-else key="1" justify-center>
-        <v-btn flat @click="show = true">Load images</v-btn>
+        <v-btn text @click="show = true">Load images</v-btn>
       </v-layout>
     </v-fade-transition>
   </v-container>

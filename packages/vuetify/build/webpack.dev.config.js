@@ -21,7 +21,7 @@ module.exports = merge(baseWebpackConfig, {
   resolve: {
     alias: {
       vuetify: resolve('../src'),
-      'vue$': 'vue/dist/vue.esm.js'
+      vue$: 'vue/dist/vue.esm.js'
     }
   },
   module: {

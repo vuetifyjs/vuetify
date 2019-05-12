@@ -1,0 +1,25 @@
+@import '../../styles/styles.sass'
+
+// Transition
+.bottom-sheet-transition
+  &-enter
+    transform: translateY(100%)
+
+  &-leave-to
+    transform: translateY(100%)
+
+// Block
+.v-bottom-sheet.v-dialog
+  align-self: flex-end
+  border-radius: 0
+  flex: 1 0 100%
+  margin: 0
+  min-width: 100%
+  overflow: visible
+
+  &.v-bottom-sheet--inset
+    max-width: 70%
+    min-width: 0
+
+    @media #{map-get($display-breakpoints, 'xs-only')}
+      max-width: none

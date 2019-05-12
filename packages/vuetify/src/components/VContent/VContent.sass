@@ -1,0 +1,22 @@
+@import '../../styles/styles.sass'
+
+@mixin firefox()
+  @-moz-document url-prefix()
+    @content
+
+.v-content
+  +bootable()
+
+  display: flex
+  flex: 1 0 auto
+  max-width: 100%
+  transition: 0.2s map-get($transition, 'fast-out-slow-in')
+
+  &__wrap
+    flex: 1 1 auto
+    max-width: 100%
+    position: relative
+
+  +firefox()
+    @media print
+      display: block

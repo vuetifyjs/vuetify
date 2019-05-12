@@ -1,4 +1,4 @@
-import '../../stylus/components/_icons.styl'
+import './VIcon.sass'
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Sizeable from '../../mixins/sizeable'
@@ -8,7 +8,7 @@ import { convertToUnit, keys, remapInternalIcon } from '../../util/helpers'
 // Types
 import Vue, { CreateElement, VNode, VNodeChildren, VNodeData } from 'vue'
 import mixins from '../../util/mixins'
-import { VuetifyIcon, VuetifyIconComponent } from 'vuetify'
+import { VuetifyIcon, VuetifyIconComponent } from 'vuetify/types/services/icons'
 
 enum SIZE_MAP {
   small = '16px',
@@ -22,6 +22,10 @@ function isFontAwesome5 (iconType: string): boolean {
   return ['fas', 'far', 'fal', 'fab'].some(val => iconType.includes(val))
 }
 
+function isSvgPath (icon: string): boolean {
+  return (/^[mzlhvcsqta]\s*[-+.0-9][^mlhvzcsqta]+/i.test(icon) && /[\dz]$/i.test(icon) && icon.length > 4)
+}
+
 const VIcon = mixins(
   Colorable,
   Sizeable,
@@ -33,7 +37,19 @@ const VIcon = mixins(
   props: {
     disabled: Boolean,
     left: Boolean,
-    right: Boolean
+    right: Boolean,
+    dense: Boolean,
+    tag: {
+      type: String,
+      required: false,
+      default: 'i'
+    }
+  },
+
+  computed: {
+    medium () {
+      return false
+    }
   },
 
   methods: {
@@ -63,7 +79,8 @@ const VIcon = mixins(
           'v-icon--disabled': this.disabled,
           'v-icon--left': this.left,
           'v-icon--link': this.$listeners.click || this.$listeners['!click'],
-          'v-icon--right': this.right
+          'v-icon--right': this.right,
+          'v-icon--dense': this.dense
         },
         attrs: {
           'aria-hidden': true,
@@ -104,9 +121,40 @@ const VIcon = mixins(
 
       this.applyColors(data)
 
-      return h('i', data, newChildren)
+      return h(this.tag, data, newChildren)
     },
-    renderSvgIcon (icon: VuetifyIconComponent, h: CreateElement): VNode {
+    renderSvgIcon (icon: string, h: CreateElement): VNode {
+      const data = this.getDefaultData()
+      data.class['v-icon--svg'] = true
+
+      data.attrs = {
+        xmlns: 'http://www.w3.org/2000/svg',
+        viewBox: '0 0 24 24',
+        height: '24',
+        width: '24',
+        role: 'icon'
+      }
+
+      const fontSize = this.getSize()
+      if (fontSize) {
+        data.style = {
+          fontSize,
+          height: fontSize,
+          width: fontSize
+        }
+        data.attrs.height = fontSize
+        data.attrs.width = fontSize
+      }
+
+      this.applyColors(data)
+
+      return h('svg', data, [h('path', {
+        attrs: {
+          d: icon
+        }
+      })])
+    },
+    renderSvgIconComponent (icon: VuetifyIconComponent, h: CreateElement): VNode {
       const data = this.getDefaultData()
       data.class['v-icon--is-component'] = true
 
@@ -132,10 +180,13 @@ const VIcon = mixins(
     const icon = this.getIcon()
 
     if (typeof icon === 'string') {
+      if (isSvgPath(icon)) {
+        return this.renderSvgIcon(icon, h)
+      }
       return this.renderFontIcon(icon, h)
     }
 
-    return this.renderSvgIcon(icon, h)
+    return this.renderSvgIconComponent(icon, h)
   }
 })
 

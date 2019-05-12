@@ -26,6 +26,7 @@ export function getComponent (type) {
     case 'markup': return 'doc-markup'
     case 'markdown': return 'doc-markdown'
     case 'parameters': return 'doc-parameters'
+    case 'playground': return 'doc-playground'
     case 'section': return 'doc-section'
     case 'supplemental': return 'doc-supplemental'
     case 'tree': return 'doc-tree'

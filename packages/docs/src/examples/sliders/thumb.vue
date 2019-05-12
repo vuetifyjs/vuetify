@@ -18,30 +18,10 @@
       </v-flex>
 
       <v-flex xs12>
-        <v-subheader class="pl-0">Custom thumb color</v-subheader>
-        <v-slider
-          v-model="slider"
-          thumb-color="red"
-          thumb-label="always"
-        ></v-slider>
-      </v-flex>
-
-      <v-flex xs12>
         <v-subheader class="pl-0">Custom thumb size</v-subheader>
         <v-slider
           v-model="slider"
           :thumb-size="24"
-          thumb-label="always"
-        ></v-slider>
-      </v-flex>
-
-      <v-flex xs12>
-        <v-subheader class="pl-0">Always dirty</v-subheader>
-        <v-slider
-          v-model="slider"
-          always-dirty
-          hint="Try set it to '0'"
-          persistent-hint
           thumb-label="always"
         ></v-slider>
       </v-flex>
@@ -53,19 +33,7 @@
   export default {
     data () {
       return {
-        slider: 45,
-        selectedSeason: 0
-      }
-    },
-
-    methods: {
-      season (val) {
-        switch (val) {
-          case 0: return 'Winter'
-          case 1: return 'Spring'
-          case 2: return 'Summer'
-          case 3: return 'Fall'
-        }
+        slider: 45
       }
     }
   }
