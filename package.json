@@ -21,7 +21,7 @@
   },
   "engines": {
     "node": ">= 10",
-    "yarn": ">= 1.13.0"
+    "yarn": ">= 1.12.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^1.6.0",
