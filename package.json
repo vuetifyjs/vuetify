@@ -19,6 +19,10 @@
     "postinstall": "node scripts/post-install.js",
     "postversion": "node scripts/post-release-merge.js"
   },
+  "engines": {
+    "node": ">= 10",
+    "yarn": ">= 1.12.0"
+  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^1.6.0",
     "@typescript-eslint/parser": "^1.6.0",
