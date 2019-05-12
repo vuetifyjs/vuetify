@@ -490,25 +490,3 @@ export function chunk (str: string, size = 1) {
   }
   return chunked
 }
-
-export function throttle (fn: Function, limit: number) {
-  let timeoutId: any
-  let lastRan: number
-
-  return function (...args: any[]) {
-    if (!lastRan) {
-      // @ts-ignore
-      fn.apply(this, args)
-      lastRan = Date.now()
-    } else {
-      clearTimeout(timeoutId)
-      timeoutId = setTimeout(() => {
-        if (Date.now() - lastRan >= limit) {
-          // @ts-ignore
-          fn.apply(this, args)
-          lastRan = Date.now()
-        }
-      }, limit - (Date.now() - lastRan))
-    }
-  }
-}

@@ -19,31 +19,55 @@
         <span>New in <strong>{{ newIn }}</strong></span>
       </v-chip>
       <v-spacer />
-      <v-btn
-        icon
-        @click="dark = !dark"
-      >
-        <v-icon>mdi-invert-colors</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click="sendToCodepen"
-      >
-        <v-icon>mdi-codepen</v-icon>
-      </v-btn>
-      <v-btn
-        :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/docs/src/examples/${file}.vue`"
-        icon
-        target="_blank"
-      >
-        <v-icon>mdi-github-circle</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click="expand = !expand"
-      >
-        <v-icon>mdi-code-tags</v-icon>
-      </v-btn>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn
+            icon
+            @click="dark = !dark"
+            v-on="on"
+          >
+            <v-icon>mdi-invert-colors</v-icon>
+          </v-btn>
+        </template>
+        Invert colors
+      </v-tooltip>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn
+            icon
+            @click="sendToCodepen"
+            v-on="on"
+          >
+            <v-icon>mdi-codepen</v-icon>
+          </v-btn>
+        </template>
+        Edit in Codepen
+      </v-tooltip>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn
+            :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/docs/src/examples/${file}.vue`"
+            icon
+            target="_blank"
+            v-on="on"
+          >
+            <v-icon>mdi-github-circle</v-icon>
+          </v-btn>
+        </template>
+        View on Github
+      </v-tooltip>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn
+            icon
+            @click="expand = !expand"
+            v-on="on"
+          >
+            <v-icon>mdi-code-tags</v-icon>
+          </v-btn>
+        </template>
+        View Source
+      </v-tooltip>
     </v-toolbar>
 
     <v-expand-transition v-if="parsed">
