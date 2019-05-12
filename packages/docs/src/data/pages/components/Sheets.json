@@ -25,9 +25,20 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "elevation"
+            "simple/elevation",
+            "simple/tile",
+            "intermediate/colors-sizes"
           ]
         }
       ]

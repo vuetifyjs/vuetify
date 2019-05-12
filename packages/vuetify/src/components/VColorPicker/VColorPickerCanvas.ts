@@ -2,7 +2,7 @@
 import './VColorPickerCanvas.sass'
 
 // Helpers
-import { clamp, convertToUnit, throttle } from '../../util/helpers'
+import { clamp, convertToUnit } from '../../util/helpers'
 import { fromHSVA, VColorPickerColor, fromRGBA } from './util'
 
 // Types
@@ -55,9 +55,7 @@ export default Vue.extend({
   },
 
   watch: {
-    color (v: VColorPickerColor) {
-      this.updateCanvas()
-    }
+    'color.hue': 'updateCanvas'
   },
 
   mounted () {
@@ -112,14 +110,11 @@ export default Vue.extend({
       window.addEventListener('mousemove', this.handleMouseMove)
       window.addEventListener('mouseup', this.handleMouseUp)
     },
-    handleMouseMove: throttle(function (e: MouseEvent) {
-      // TODO: I could not find a way to type this
-      // @ts-ignore
+    handleMouseMove (e: MouseEvent) {
       if (this.disabled) return
 
-      // @ts-ignore
       this.emitColor(e.clientX, e.clientY)
-    }, 40),
+    },
     handleMouseUp () {
       window.removeEventListener('mousemove', this.handleMouseMove)
       window.removeEventListener('mouseup', this.handleMouseUp)
@@ -134,6 +129,10 @@ export default Vue.extend({
       })
     },
     genDot (): VNode {
+      const radius = parseInt(this.dotSize, 10) / 2
+      const x = convertToUnit(this.dot.x - radius)
+      const y = convertToUnit(this.dot.y - radius)
+
       return this.$createElement('div', {
         staticClass: 'v-color-picker__canvas-dot',
         class: {
@@ -142,8 +141,7 @@ export default Vue.extend({
         style: {
           width: convertToUnit(this.dotSize),
           height: convertToUnit(this.dotSize),
-          left: convertToUnit(this.dot.x - (parseInt(this.dotSize, 10) / 2)),
-          top: convertToUnit(this.dot.y - (parseInt(this.dotSize, 10) / 2))
+          transform: `translate(${x}, ${y})`
         }
       })
     }
