@@ -31,12 +31,12 @@
         {
           "type": "examples",
           "value": [
-            "md",
-            "fontAwesome",
-            "color",
-            "buttons",
-            "clickable",
-            "mdiSvg"
+            "simple/md",
+            "simple/fontAwesome",
+            "simple/color",
+            "intermediate/buttons",
+            "intermediate/clickable",
+            "intermediate/mdiSvg"
           ]
         }
       ]
