@@ -128,7 +128,7 @@ export default mixins(
         ...VSheet.options.computed.classes.call(this),
         'v-alert--border': Boolean(this.border),
         'v-alert--dense': this.dense,
-        'v-alert--outline': this.hasOutline,
+        'v-alert--outlined': this.hasOutline,
         'v-alert--prominent': this.prominent,
         'v-alert--text': this.text
       }
