@@ -83,7 +83,7 @@ export default mixins(
         'v-btn--text': isSelected === isCurrent,
         'v-btn--rounded': isFloating,
         'v-btn--disabled': !isAllowed || this.disabled,
-        'v-btn--outline': isCurrent && !isSelected,
+        'v-btn--outlined': isCurrent && !isSelected,
         ...this.themeClasses
       }
     },

@@ -9,7 +9,7 @@
       <span class="title">Logs</span>
       <v-spacer></v-spacer>
       <v-btn
-        :outline="interval == null"
+        :outlined="interval == null"
         :color="interval == null ? 'white' : 'primary'"
         dark
         depressed

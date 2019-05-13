@@ -7,7 +7,7 @@
     >
       <v-btn
         fab
-        outline
+        outlined
         small
         absolute
         left
@@ -20,7 +20,7 @@
       </v-btn>
       <v-btn
         fab
-        outline
+        outlined
         small
         absolute
         right
