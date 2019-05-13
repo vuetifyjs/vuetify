@@ -29,7 +29,6 @@ export default baseMixins.extend({
   props: {
     autoGrow: Boolean,
     noResize: Boolean,
-    outline: Boolean,
     rowHeight: {
       type: [Number, String],
       default: 24,
