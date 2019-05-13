@@ -16,38 +16,32 @@ import Loadable from '../../mixins/loadable'
 import Ripple from '../../directives/ripple'
 
 // Utilities
-import { keyCodes } from '../../util/helpers'
-import { deprecate } from '../../util/console'
+import { convertToUnit, keyCodes } from '../../util/helpers'
+import { deprecate, consoleWarn } from '../../util/console'
 
 // Types
-import mixins, { ExtractVue } from '../../util/mixins'
+import mixins from '../../util/mixins'
 import { VNode } from 'vue/types'
-import Vue from 'vue'
 
-interface options extends Vue {
+const baseMixins = mixins(
+  VInput,
+  Maskable,
+  Loadable
+)
+interface options extends InstanceType<typeof baseMixins> {
   $refs: {
+    label: HTMLElement
     input: HTMLInputElement
+    'prepend-inner': HTMLElement
     prefix: HTMLElement
     suffix: HTMLElement
   }
 }
 
-const baseMixins = mixins<options &
-  ExtractVue<[
-    typeof VInput,
-    typeof Maskable,
-    typeof Loadable
-  ]>
->(
-  VInput,
-  Maskable,
-  Loadable
-)
-
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
 /* @vue/component */
-export default baseMixins.extend({
+export default baseMixins.extend<options>().extend({
   name: 'v-text-field',
 
   directives: { Ripple },
@@ -57,6 +51,7 @@ export default baseMixins.extend({
   props: {
     appendOuterIcon: String,
     autofocus: Boolean,
+    /** @deprecated */
     box: Boolean,
     browserAutocomplete: String,
     clearable: Boolean,
@@ -69,16 +64,18 @@ export default baseMixins.extend({
       default: 'primary'
     },
     counter: [Boolean, Number, String],
+    filled: Boolean,
     flat: Boolean,
     fullWidth: Boolean,
     label: String,
-    outline: Boolean,
     outlined: Boolean,
     placeholder: String,
     prefix: String,
     prependInnerIcon: String,
     reverse: Boolean,
+    rounded: Boolean,
     singleLine: Boolean,
+    shaped: Boolean,
     solo: Boolean,
     soloInverted: Boolean,
     suffix: String,
@@ -90,8 +87,12 @@ export default baseMixins.extend({
 
   data: () => ({
     badInput: false,
+    labelWidth: 0,
+    prefixWidth: 0,
+    prependWidth: 0,
     initialValue: null,
     internalChange: false,
+    isBooted: false,
     isClearing: false
   }),
 
@@ -106,11 +107,14 @@ export default baseMixins.extend({
         'v-text-field--solo': this.isSolo,
         'v-text-field--solo-inverted': this.soloInverted,
         'v-text-field--solo-flat': this.flat,
-        'v-text-field--box': this.box,
+        'v-text-field--filled': this.isFilled,
+        'v-text-field--is-booted': this.isBooted,
         'v-text-field--enclosed': this.isEnclosed,
         'v-text-field--reverse': this.reverse,
-        'v-text-field--outline': this.outline,
-        'v-text-field--placeholder': this.placeholder
+        'v-text-field--outlined': this.outlined,
+        'v-text-field--placeholder': this.placeholder,
+        'v-text-field--rounded': this.rounded,
+        'v-text-field--shaped': this.shaped
       }
     },
     counterValue (): number {
@@ -137,11 +141,14 @@ export default baseMixins.extend({
     },
     isEnclosed (): boolean {
       return (
-        this.box ||
+        this.isFilled ||
         this.isSolo ||
-        this.outline ||
+        this.outlined ||
         this.fullWidth
       )
+    },
+    isFilled (): boolean {
+      return this.box || this.filled
     },
     isLabelActive (): boolean {
       return this.isDirty || dirtyTypes.includes(this.type)
@@ -153,7 +160,9 @@ export default baseMixins.extend({
       return this.solo || this.soloInverted
     },
     labelPosition (): Record<'left' | 'right', string | number | undefined> {
-      const offset = (this.prefix && !this.labelValue) ? this.prefixWidth : 0
+      let offset = (this.prefix && !this.labelValue) ? this.prefixWidth : 0
+
+      if (this.labelValue && this.prependWidth) offset -= this.prependWidth
 
       return (this.$vuetify.rtl === this.reverse) ? {
         left: offset,
@@ -164,23 +173,16 @@ export default baseMixins.extend({
       }
     },
     showLabel (): boolean {
-      return this.hasLabel && (!this.isSingle || (!this.isLabelActive && !this.placeholder && !this.prefixLabel))
+      return this.hasLabel && (!this.isSingle || (!this.isLabelActive && !this.placeholder))
     },
     labelValue (): boolean {
       return !this.isSingle &&
-        Boolean(this.isFocused || this.isLabelActive || this.placeholder || this.prefixLabel)
-    },
-    prefixWidth (): number | undefined {
-      if (!this.prefix && !this.$refs.prefix) return
-
-      return this.$refs.prefix.offsetWidth
-    },
-    prefixLabel (): boolean {
-      return !!(this.prefix && !this.value)
+        Boolean(this.isFocused || this.isLabelActive || this.placeholder)
     }
   },
 
   watch: {
+    labelValue: 'setLabelWidth',
     isFocused (val) {
       // Sets validationState from validatable
       this.hasColor = val
@@ -207,11 +209,18 @@ export default baseMixins.extend({
 
   created () {
     /* istanbul ignore if */
-    if (this.outline) deprecate('outline', 'outlined')
+    if (this.box) deprecate('box', 'filled')
+    if (this.shaped && !(this.isFilled || this.outlined || this.isSolo)) {
+      consoleWarn('shaped should be used with either filled or outlined', this)
+    }
   },
 
   mounted () {
     this.autofocus && this.onFocus()
+    this.setLabelWidth()
+    this.setPrefixWidth()
+    this.setPrependWidth()
+    requestAnimationFrame(() => (this.isBooted = true))
   },
 
   methods: {
@@ -300,11 +309,31 @@ export default baseMixins.extend({
     },
     genDefaultSlot () {
       return [
+        this.genFieldset(),
         this.genTextFieldSlot(),
         this.genClearIcon(),
         this.genIconSlot(),
         this.genProgress()
       ]
+    },
+    genFieldset () {
+      if (!this.outlined) return null
+
+      const width = this.labelValue || this.isDirty ? this.labelWidth : 0
+      const span = this.$createElement('span', {
+        domProps: { innerHTML: '&#8203;' }
+      })
+      const legend = this.$createElement('legend', {
+        style: {
+          width: convertToUnit(width)
+        }
+      }, [span])
+
+      return this.$createElement('fieldset', {
+        attrs: {
+          'aria-hidden': true
+        }
+      }, [legend])
     },
     genLabel () {
       if (!this.showLabel) return null
@@ -434,6 +463,21 @@ export default baseMixins.extend({
       if (this.hasMouseDown) this.focus()
 
       VInput.options.methods.onMouseUp.call(this, e)
+    },
+    setLabelWidth () {
+      if (!this.outlined || !this.$refs.label) return
+
+      this.labelWidth = this.$refs.label.offsetWidth * 0.75 + 6
+    },
+    setPrefixWidth () {
+      if (!this.$refs.prefix) return
+
+      this.prefixWidth = this.$refs.prefix.offsetWidth
+    },
+    setPrependWidth () {
+      if (!this.outlined || !this.$refs['prepend-inner']) return
+
+      this.prependWidth = this.$refs['prepend-inner'].offsetWidth
     }
   }
 })

@@ -20,6 +20,7 @@
       "textarea": "1.1",
       "append-icon-cb": false,
       "append-outer-icon-cb": false,
+      "box": false,
       "prepend-icon-cb": false,
       "prepend-inner-icon-cb": false,
       "clear-icon-cb": false

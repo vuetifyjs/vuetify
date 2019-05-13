@@ -22,7 +22,7 @@
           <v-select
             v-model="value"
             :items="items"
-            box
+            filled
             chips
             label="Chips"
             multiple

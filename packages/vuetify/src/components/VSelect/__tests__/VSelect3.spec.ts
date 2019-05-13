@@ -366,7 +366,7 @@ describe('VSelect.ts', () => {
     expect(wrapper.vm.isMenuActive).toBe(true)
 
     wrapper.setData({ isMenuActive: false })
-    wrapper.setProps({ soloInverted: false, outline: true })
+    wrapper.setProps({ soloInverted: false, outlined: true })
     wrapper.vm.hasMouseDown = true
     wrapper.find('.v-input__slot').trigger('mouseup')
 
