@@ -3,6 +3,9 @@
     "v-alert": {
       "outline": "2.0"
     },
+    "v-btn": {
+      "outline": "2.0"
+    },
     "v-expansion-panels": {
       "expand": false
     },

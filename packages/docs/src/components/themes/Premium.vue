@@ -89,7 +89,7 @@
                 :href="`${template.url}?ref=vuetifyjs.com`"
                 color="primary"
                 text
-                outline
+                outlined
                 target="_blank"
                 rel="noopener"
                 @click="$ga.event('themes', 'click', template.title)"
