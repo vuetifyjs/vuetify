@@ -15,7 +15,9 @@
         ></v-divider>
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="500px">
-          <v-btn slot="activator" color="primary" dark class="mb-2">New Item</v-btn>
+          <template v-slot:activator="{ on }">
+            <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
+          </template>
           <v-card>
             <v-card-title>
               <span class="headline">{{ formTitle }}</span>
