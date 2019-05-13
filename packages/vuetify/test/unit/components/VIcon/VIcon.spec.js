@@ -61,7 +61,7 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     const wrapper = mount(VIcon, context)
 
     expect(wrapper.element.style.fontSize).toBe('112px')
- })
+  })
 
   it('should render a left aligned component', () => {
     const context = functionalContext({ props: { left: true } }, 'add')
@@ -101,18 +101,24 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should allow the use of v-text', () => {
-    const wrapper = mount(VIcon, functionalContext({
-      domProps: { textContent: 'fa-home' }
-    }))
+    const wrapper = mount(
+      VIcon,
+      functionalContext({
+        domProps: { textContent: 'fa-home' }
+      })
+    )
 
     expect(wrapper.text()).toBe('')
     expect(wrapper.element.className).toBe('v-icon fa fa-home theme--light')
   })
 
   it('should allow the use of v-html', () => {
-    const wrapper = mount(VIcon, functionalContext({
-      domProps: { innerHTML: 'fa-home' }
-    }))
+    const wrapper = mount(
+      VIcon,
+      functionalContext({
+        domProps: { innerHTML: 'fa-home' }
+      })
+    )
 
     expect(wrapper.text()).toBe('')
     expect(wrapper.element.className).toBe('v-icon fa fa-home theme--light')
@@ -135,9 +141,13 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
   })
 
   it('set font size from helper prop', async () => {
-    const iconFactory = size => mount(VIcon, functionalContext({
-      props: { [size]: true }
-    }))
+    const iconFactory = size =>
+      mount(
+        VIcon,
+        functionalContext({
+          props: { [size]: true }
+        })
+      )
 
     const small = iconFactory('small')
     expect(small.html()).toMatchSnapshot()
@@ -153,20 +163,23 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should have proper classname', () => {
-    const wrapper = mount(VIcon, functionalContext({
-      props: {
-        color: 'primary'
-      },
-      domProps: {
-        innerHTML: 'fa-lock'
-      }
-    }))
+    const wrapper = mount(
+      VIcon,
+      functionalContext({
+        props: {
+          color: 'primary'
+        },
+        domProps: {
+          innerHTML: 'fa-lock'
+        }
+      })
+    )
 
     expect(wrapper.element.className).toBe('v-icon fa fa-lock theme--light primary--text')
   })
 
   it('should be a link', () => {
-    let clickHandler = jest.fn()
+    const clickHandler = jest.fn()
     const context = functionalContext({ on: { click: clickHandler } }, 'add')
     const wrapper = mount(VIcon, context)
     wrapper.trigger('click')
@@ -179,9 +192,13 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     const getTestComponent = () => ({
       props: ['name'],
       render (h) {
-        return h('div', {
-          class: 'test-component'
-        }, this.name)
+        return h(
+          'div',
+          {
+            class: 'test-component'
+          },
+          this.name
+        )
       }
     })
 
@@ -217,9 +234,16 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     })
 
     it('should set font size from helper prop', async () => {
-      const iconFactory = size => mount(VIcon, functionalContext({
-        props: { [size]: true }
-      }, '$vuetify.icons.testIcon'))
+      const iconFactory = size =>
+        mount(
+          VIcon,
+          functionalContext(
+            {
+              props: { [size]: true }
+            },
+            '$vuetify.icons.testIcon'
+          )
+        )
 
       const small = iconFactory('small')
       expect(small.html()).toMatchSnapshot()
@@ -248,13 +272,15 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
       expect(wrapper.element.classList).toContain('v-icon--right')
     })
 
-    it('should be a link', () => {
-      let clickHandler = jest.fn()
+    it('should be an accessible link', () => {
+      const clickHandler = jest.fn()
       const context = functionalContext({ on: { click: clickHandler } }, '$vuetify.icons.testIcon')
       const wrapper = mount(VIcon, context)
       wrapper.trigger('click')
-  
+
       expect(wrapper.element.classList).toContain('v-icon--link')
+      expect(wrapper.element.getAttribute('aria-hidden')).toBeFalsy()
+      expect(wrapper.element.getAttribute('role')).toBe('button')
       expect(clickHandler).toBeCalled()
     })
 

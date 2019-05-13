@@ -57,16 +57,18 @@ const VIcon = mixins(
     },
     // Component data for both font and svg icon.
     getDefaultData (): VNodeData {
+      const hasClickListener = Boolean(this.$listeners.click || this.$listeners['!click'])
       const data: VNodeData = {
         staticClass: 'v-icon',
         class: {
           'v-icon--disabled': this.disabled,
           'v-icon--left': this.left,
-          'v-icon--link': this.$listeners.click || this.$listeners['!click'],
+          'v-icon--link': hasClickListener,
           'v-icon--right': this.right
         },
         attrs: {
-          'aria-hidden': true,
+          'aria-hidden': !hasClickListener,
+          role: hasClickListener ? 'button' : null,
           ...this.$attrs
         },
         on: this.$listeners
@@ -151,9 +153,7 @@ export default Vue.extend({
 
     // Support usage of v-text and v-html
     if (data.domProps) {
-      iconName = data.domProps.textContent ||
-        data.domProps.innerHTML ||
-        iconName
+      iconName = data.domProps.textContent || data.domProps.innerHTML || iconName
 
       // Remove nodes so it doesn't
       // overwrite our changes
