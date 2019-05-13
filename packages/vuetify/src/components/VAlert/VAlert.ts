@@ -74,11 +74,6 @@ export default mixins(
     }
   },
 
-  created () {
-    /* istanbul ignore if */
-    if (this.outline) deprecate('outline', 'outlined')
-  },
-
   computed: {
     __cachedBorder (): VNode | null {
       if (!this.border) return null
@@ -184,6 +179,11 @@ export default mixins(
 
       return Themeable.options.computed.isDark.call(this)
     }
+  },
+
+  created () {
+    /* istanbul ignore if */
+    if (this.outline) deprecate('outline', 'outlined')
   },
 
   methods: {
