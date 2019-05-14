@@ -5,15 +5,11 @@ import './VAutocomplete.sass'
 import VSelect, { defaultMenuProps as VSelectMenuProps } from '../VSelect/VSelect'
 import VTextField from '../VTextField/VTextField'
 
-// Components
-import VMenu from '../VMenu/VMenu'
-
 // Utilities
 import { keyCodes } from '../../util/helpers'
 
 // Types
 import { PropType } from 'vue'
-import { ExtractVue } from '../../util/mixins'
 
 const defaultMenuProps = {
   ...VSelectMenuProps,
@@ -22,17 +18,8 @@ const defaultMenuProps = {
   transition: false
 }
 
-interface options extends ExtractVue<typeof VSelect> {
-  $refs: {
-    menu: InstanceType<typeof VMenu>
-    input: HTMLInputElement
-    prefix: HTMLElement
-    suffix: HTMLElement
-  }
-}
-
 /* @vue/component */
-export default VSelect.extend<options>().extend({
+export default VSelect.extend({
   name: 'v-autocomplete',
 
   props: {

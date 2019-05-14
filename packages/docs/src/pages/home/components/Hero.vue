@@ -57,7 +57,7 @@
               color="white"
               href="https://github.com/vuetifyjs/vuetify"
               large
-              outline
+              outlined
             >
               <v-icon left>mdi-github-circle</v-icon>
               Github
@@ -66,7 +66,7 @@
               :block="$vuetify.breakpoint.xsOnly"
               class="ma-2"
               color="grey lighten-3"
-              outline
+              outlined
               href="https://community.vuetifyjs.com"
               large
               rel="noopener"
