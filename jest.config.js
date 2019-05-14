@@ -1,9 +1,11 @@
 module.exports = {
   verbose: false,
+  testEnvironment: 'jest-environment-jsdom-fourteen',
   roots: [
-    '<rootDir>/src',
-    '<rootDir>/test/unit',
-    '<rootDir>/test/integration'
+    '<rootDir>/src'
+  ],
+  setupFilesAfterEnv: [
+    '<rootDir>/test/index.ts'
   ],
   moduleFileExtensions: [
     'ts',
@@ -15,13 +17,14 @@ module.exports = {
   moduleNameMapper: {
     '^@/test$': '<rootDir>/test/index.js',
     '^@/test/(.*)$': '<rootDir>/test/$1',
-    '^@/(.*)$': '<rootDir>/src/$1'
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '\\.(css|sass|scss)$': 'identity-obj-proxy'
   },
   transform: {
     '\\.(styl)$': 'jest-css-modules',
+    '\\.(sass|scss)$': 'jest-css-modules',
     '.*\\.(j|t)s$': 'ts-jest'
   },
-  mapCoverage: true,
   collectCoverageFrom: [
     'src/**/*.{js,ts,tsx}',
     '!**/*.d.ts'
@@ -32,9 +35,17 @@ module.exports = {
   snapshotSerializers: [
     'jest-serializer-html'
   ],
+  testMatch: [
+    // Default
+    '**/test/**/*.js',
+    '**/__tests__/**/*.spec.js',
+    '**/__tests__/**/*.spec.ts'
+  ],
   globals: {
     'ts-jest': {
-      'useBabelrc': true
+      babelConfig: true,
+      tsConfig: '<rootDir>/tsconfig.test.json',
+      diagnostics: false
     }
   }
 }

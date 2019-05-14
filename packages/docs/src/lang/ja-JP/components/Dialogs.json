@@ -47,7 +47,7 @@
     "fullWidth": "モーダルの幅が100%となるよう強制的に指定します。",
     "fullscreen": "フルスクリーン表示になるようレイアウトを変更します。",
     "hideOverlay": "前面以外の表示を隠します。Hide the display of the overlay",
-    "lazy": "Mixins.Bootable.props.lazy",
+    "eager": "Mixins.Bootable.props.eager",
     "maxWidth": "コンテンツの最大幅を指定します。",
     "origin": "Mixins.Transitionable.props.origin",
     "persistent": "ダイアログの外側をクリックしてもダイアログを消しません。",

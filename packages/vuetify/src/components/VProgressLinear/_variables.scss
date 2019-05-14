@@ -1,0 +1,11 @@
+$progress-linear-stripe-gradient: linear-gradient(
+  135deg,
+  hsla(0, 0%, 100%, .25) 25%,
+  transparent 0,
+  transparent 50%,
+  hsla(0, 0%, 100%, .25) 0,
+  hsla(0, 0%, 100%, .25) 75%,
+  transparent 0,
+  transparent
+) !default;
+$progress-linear-stripe-background-size: 40px 40px !default;

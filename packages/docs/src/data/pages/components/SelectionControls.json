@@ -1,6 +1,10 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/selection-controls.html"
+  },
   "children": [
     {
       "type": "section",
@@ -38,6 +42,7 @@
             "switchesArray",
             "switchesStates",
             "switchesColors",
+            "switchesFlat",
             "labelSlot"
           ]
         }

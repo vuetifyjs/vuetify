@@ -1,0 +1,168 @@
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+
++theme(v-progress-linear) using ($material)
+  color: map-deep-get($material, 'text', 'primary')
+
+// Block
+.v-progress-linear
+  background: transparent
+  overflow: hidden
+  position: relative
+  transition: .2s map-get($transition, 'fast-in-slow-out')
+  width: 100%
+
+// Element
+.v-progress-linear__buffer
+  height: inherit
+  left: 0
+  position: absolute
+  top: 0
+  transition: inherit
+  width: 100%
+  z-index: 1
+
+.v-progress-linear__background
+  bottom: 0
+  left: 0
+  position: absolute
+  top: 0
+  transition: inherit
+
+.v-progress-linear__content
+  align-items: center
+  display: flex
+  height: 100%
+  left: 0
+  justify-content: center
+  position: absolute
+  top: 0
+  width: 100%
+  z-index: 2
+
+.v-progress-linear__determinate
+  height: inherit
+  transition: inherit
+
+.v-progress-linear__indeterminate
+  .long, .short
+    background-color: inherit
+    bottom: 0
+    height: inherit
+    left: 0
+    position: absolute
+    top: 0
+    width: auto
+    will-change: left, right
+
+  &--active .long
+    animation: indeterminate
+    animation-duration: 2.2s
+    animation-iteration-count: infinite
+
+  &--active .short
+    animation: indeterminate-short
+    animation-duration: 2.2s
+    animation-iteration-count: infinite
+
+.v-progress-linear__stream
+  animation: stream .25s infinite linear
+  border-color: currentColor
+  border-top: 4px dotted
+  bottom: 0
+  opacity: .3
+  pointer-events: none
+  position: absolute
+  right: -8px
+  top: calc(50% - 2px)
+  transition: inherit
+
+.v-progress-linear__wrapper
+  overflow: hidden
+  position: relative
+  transition: inherit
+
+// Modifier
+.v-progress-linear--absolute,
+.v-progress-linear--fixed
+  left: 0
+  z-index: 1
+
+.v-progress-linear--absolute
+  position: absolute
+
+.v-progress-linear--fixed
+  position: fixed
+
+.v-progress-linear--reactive
+  .v-progress-linear__content
+    pointer-events: none
+
+.v-progress-linear--rounded
+  border-radius: 4px
+
+.v-progress-linear--striped
+  .v-progress-linear__determinate
+    background-image: $progress-linear-stripe-gradient
+    background-size: $progress-linear-stripe-background-size
+    background-repeat: repeat-x
+
+.v-progress-linear--query
+  .v-progress-linear__indeterminate
+    &--active .long
+      animation: query
+      animation-duration: 2s
+      animation-iteration-count: infinite
+
+    &--active .short
+      animation: query-short
+      animation-duration: 2s
+      animation-iteration-count: infinite
+
+@keyframes indeterminate
+  0%
+    left: -90%
+    right: 100%
+  60%
+    left: -90%
+    right: 100%
+  100%
+    left: 100%
+    right: -35%
+
+@keyframes indeterminate-short
+  0%
+    left: -200%
+    right: 100%
+  60%
+    left: 107%
+    right: -8%
+  100%
+    left: 107%
+    right: -8%
+
+@keyframes query
+  0%
+    right: -90%
+    left: 100%
+  60%
+    right: -90%
+    left: 100%
+  100%
+    right: 100%
+    left: -35%
+
+@keyframes query-short
+  0%
+    right: -200%
+    left: 100%
+  60%
+    right: 107%
+    left: -8%
+  100%
+    right: 107%
+    left: -8%
+
+@keyframes stream
+  to
+    transform: translateX(-8px)

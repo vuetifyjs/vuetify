@@ -8,6 +8,22 @@
     "appBar": {
       "header": "### In toolbar",
       "desc": "Easily integrate customized button solutions with a `v-toolbar`"
+    },
+    "qwerty": {
+      "header": "### Selected action",
+      "desc": "Group similar actions and design your own WYSIWYG component."
+    },
+    "rounded": {
+      "header": "### Rounded buttons",
+      "desc": "You can make `VBtnToggle` round using the `rounded` prop."
+    },
+    "mandatory": {
+      "header": "### Mandatory",
+      "desc": "`mandatory` `VBtnToggle` always has value."
+    },
+    "multiple": {
+      "header": "### Multiple",
+      "desc": "`multiple` `VBtnToggle` allows user to select mutiple variants and returns value as an array."
     }
   },
   "props": {

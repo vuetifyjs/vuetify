@@ -24,7 +24,7 @@
             />
             <v-card-text>
               <h3
-                class="subheading font-weight-bold mb-2"
+                class="subheading font-weight-bold mb-2 text--primary"
                 v-text="feature.title"
               />
               <p

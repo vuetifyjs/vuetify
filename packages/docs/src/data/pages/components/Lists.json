@@ -1,6 +1,11 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VList",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/lists.html"
+  },
   "children": [
     {
       "type": "section",
@@ -18,14 +23,14 @@
           "type": "api",
           "value": [
             "v-list",
-            "v-list-tile",
+            "v-list-item",
             "v-list-group",
-            "v-list-tile-action",
-            "v-list-tile-avatar",
-            "v-list-tile-content",
-            "v-list-tile-title",
-            "v-list-tile-sub-title",
-            "v-list-tile-action-text"
+            "v-list-item-action",
+            "v-list-item-avatar",
+            "v-list-item-content",
+            "v-list-item-title",
+            "v-list-item-subtitle",
+            "v-list-item-action-text"
           ]
         }
       ]
@@ -44,7 +49,9 @@
             "cardList",
             "titleSubtitleActionsAndActionText",
             "actionTitleAndSubtitle",
-            "expansionLists"
+            "expansionLists",
+            "nav",
+            "shaped"
           ]
         }
       ]

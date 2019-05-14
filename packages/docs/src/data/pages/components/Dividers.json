@@ -1,6 +1,11 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VDivider",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/dividers.html"
+  },
   "children": [
     {
       "type": "section",

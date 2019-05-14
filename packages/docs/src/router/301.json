@@ -44,9 +44,8 @@
   "/components/radios": "/components/selection-controls",
   "/components/slide-toggles": "/components/selection-controls",
   "/components/buttons-and-indicators": "/components/buttons",
-  "/components/progress-circular": "/components/progress",
-  "/components/progress-linear": "/components/progress",
   "/framework/pre-defined": "/framework/pre-made-layouts",
   "/framework/pre-made": "/framework/pre-made-layouts",
-  "/framework/pre-defined-layouts": "/framework/pre-made-layouts"
+  "/framework/pre-defined-layouts": "/framework/pre-made-layouts",
+  "/components/data-iterator": "/components/data-iterators"
 }

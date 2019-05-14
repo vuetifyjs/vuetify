@@ -35,7 +35,7 @@
     },
     "alignWithTitle": {
       "header": "与工具栏标题对齐选项卡",
-      "desc": "使`v-tabs`和`v-toolbar-title`组件已知（`v-toolbar-side-icon`或`v-btn`必须在`v-toolbar`中使用）。如果标签文本被包装，可能无法正常工作。"
+      "desc": "使`v-tabs`和`v-toolbar-title`组件已知（`v-app-bar-nav-icon`或`v-btn`必须在`v-toolbar`中使用）。如果标签文本被包装，可能无法正常工作。"
     },
     "grow": {
       "header": "长大",

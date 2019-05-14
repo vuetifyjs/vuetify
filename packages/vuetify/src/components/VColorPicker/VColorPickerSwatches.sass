@@ -1,0 +1,34 @@
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+
+.v-color-picker__swatches
+  overflow-y: auto
+
+  > div
+    display: flex
+    flex-wrap: wrap
+    padding: 8px
+
+.v-color-picker__swatch
+  display: flex
+  flex-direction: column
+  margin-bottom: $color-picker-swatch-margin-bottom
+
+.v-color-picker__color
+  position: relative
+  height: $color-picker-swatch-color-height
+  max-height: $color-picker-swatch-color-height
+  width: $color-picker-swatch-color-width
+  margin: $color-picker-swatch-color-margin
+  border-radius: $color-picker-swatch-color-border-radius
+  user-select: none
+  overflow: hidden
+  background: $color-picker-checkerboard
+  cursor: pointer
+
+  > div
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 100%
+    height: 100%

@@ -86,25 +86,25 @@
         <v-flex xs12 sm6>
 
           <v-text-field
-            outline
+            outlined
             label="Prepend"
             prepend-icon="place"
           ></v-text-field>
 
           <v-text-field
-            outline
+            outlined
             label="Prepend inner"
             prepend-inner-icon="place"
           ></v-text-field>
 
           <v-text-field
-            outline
+            outlined
             label="Append"
             append-icon="place"
           ></v-text-field>
 
           <v-text-field
-            outline
+            outlined
             label="Append outer"
             append-outer-icon="place"
           ></v-text-field>

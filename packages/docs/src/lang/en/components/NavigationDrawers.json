@@ -1,49 +1,67 @@
 {
   "header": "# Navigation drawer",
-  "headerText": "The `v-navigation-drawer` component is what your users will utilize to navigate through the application. The navigation-drawer is pre-configured to work with or without **vue-router** right out the box.",
+  "headerText": "The `v-navigation-drawer` component is what your users will utilize to navigate through the application. The navigation-drawer is pre-configured to work with or without **vue-router** right out the box. For the purpose of display, some examples are wrapped in a `v-card` element. Within your application you will generally place the `v-navigation-drawer` as a direct child of `v-app`.",
   "examples": {
     "usage": {
-      "desc": "The navigation drawer is primarily used to house links to the pages in your application. Using `null` as the starting value for its `v-model` will initialize the drawer as closed on mobile and as open on desktop."
+      "desc": "The navigation drawer is primarily used to house links to the pages in your application. Using `null` as the starting value for its `v-model` will initialize the drawer as closed on mobile and as open on desktop. It is common to pair drawers with the [v-list](/components/lists) component using the **nav** property."
     },
-    "permanentClipped": {
+    "colored": {
       "header": "### Colored drawer",
-      "desc": "Navigation drawers can be customized to fit any application's design. While any component can be used within a drawer, the primary ones you will use are `v-list`, all of the **list** children components and `v-divider`"
+      "desc": "Navigation drawers can be customized to fit any application's design. Here we apply a custom background color and an appended content area using the **append** slot."
     },
     "permanentFloating": {
       "header": "### Permanent floating drawer",
-      "desc": "A navigation drawer can be placed inside of a card and float over the content background."
+      "desc": "By default, a navigation drawer has a 1px right border that separates it from content. In this example we want to detach the drawer from the left side and let it float on its own. The **floating** property removes the right border (or left if using **right**)."
     },
     "persistent": {
       "header": "### Avatars",
-      "desc": "Since drawers support the `v-list` component, you can easily create customized dashboard solutions."
+      "desc": "When setting up drawer lists you will typically pair the **nav** prop with **dense**. This will lower the font-size of the list items and reduce the vertical space that they take up."
     },
     "mini": {
       "header": "### Mini",
-      "desc": "The navigation drawer also has a mini-variant which can be controlled using the prop `mini-variant.sync`."
+      "desc": "When using the **mini-variant** prop, the drawer will shrink (default 80px) and hide everything inside of `v-list` except the first element. In this example we use the **.sync** modifier that allows us to tie the expanding/contracting of the drawer programmatically."
     },
     "temporary": {
       "header": "### Temporary",
-      "desc": "A temporary drawer sits above its application and uses a scrim (overlay) to darken the background. This drawer behavior is mimicked on the persistent drawer when on mobile. Clicking outside of the drawer will cause it to close."
+      "desc": "A temporary drawer sits above its application and uses a scrim (overlay) to darken the background. This drawer behavior is mimicked by default when on mobile. Clicking outside of the drawer will cause it to close."
     },
     "dark": {
       "header": "### Dark theme",
-      "desc": "Vuetify also supports the dark application theme. This will not override components that have default themes so in some cases it will be necessary to manually set the dark theme accents.",
+      "desc": "The `v-navigation-drawer` also supports the dark variant.",
       "uninverted": true
     },
     "combined": {
       "header": "### Combined drawers",
-      "desc": "Drawers are flexible and are easily adapted to any use-case."
+      "desc": "In this example we define a custom width to accommodate our nested drawer. Using `v-layout` we ensure that the drawer and list stack horizontally next to each other."
     },
     "nested": {
       "header": "### Nested lists",
-      "desc": "List tiles can be nested a second level for even more options for your navigation"
+      "desc": "Using the `v-list-group` component you can create up to **2** levels in depth using the **sub-group** prop. For more information on `v-list`, [navigate here](/components/lists)."
+    },
+    "right": {
+      "header": "### Right positioned",
+      "desc": "Navigation drawers can also be positioned on the right side of your application (or an element). This is also useful for creating a side-sheet with auxillary information that may not have any navigation links. When using **RTL** you must explicitly define **right** for your drawer."
+    },
+    "background": {
+      "header": "### Backgrounds",
+      "desc": "Apply a custom background to your drawer. If you need to customize `v-img`'s properties you can use the scoped **img** scoped slot."
+    },
+    "bottom-drawer": {
+      "header": "### Bottom drawer",
+      "desc": "Using the **bottom** prop, we are able to relocate our drawer on mobile devices to come from the bottom of the screen. This is an alternative style and only activates once the **mobile-break-point** is met."
+    },
+    "expand-on-hover": {
+      "header": "### Expand on hover",
+      "desc": "Places the component in **mini-variant** mode and expands once hovered. Does not alter the content area. Width can be controlled with the **mini-variant-width** property."
     }
   },
   "props": {
     "absolute": "Mixins.Positionable.props.absolute",
+    "bottom": "Expands from the bottom of the screen on mobile devices",
     "clipped": "A clipped drawer rests under the application toolbar",
     "disableResizeWatcher": "Will automatically open/close drawer when resized depending if mobile or desktop.",
     "disableRouteWatcher": "Disables opening of navigation drawer when route changes",
+    "expandOnHover": "Collapses the drawer to a **mini-variant** until hovering with the mouse",
     "fixed": "Mixins.Positionable.props.fixed",
     "floating": "A floating drawer has no visible container (no border-right)",
     "hideOverlay": "Hide the display of the overlay",
@@ -51,11 +69,15 @@
     "miniVariant": "Condenses navigation drawer width, also accepts the **.sync** modifier. With this, the drawer will re-open when clicking it",
     "permanent": "The drawer remains visible regardless of screen size",
     "right": "Places the navigation drawer on the right",
+    "src": "Components.Toolbars.props.src",
     "stateless": "Remove all automated state functionality (resize, mobile, route) and manually control the drawer state",
     "temporary": "A temporary drawer sits above its application and uses a scrim (overlay) to darken the background",
     "touchless": "Disable mobile touch functionality"
   },
   "events": {
     "update:miniVariant": "The `mini-variant.sync` event"
+  },
+  "scopedSlots": {
+    "img": "Used to modify `v-img` properties when using the **src** prop"
   }
 }

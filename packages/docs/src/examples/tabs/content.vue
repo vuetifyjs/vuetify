@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <v-card>
     <v-toolbar
       color="cyan"
       dark
-      tabs
+      flat
     >
-      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title>Page title</v-toolbar-title>
 
@@ -23,7 +23,6 @@
         <v-tabs
           v-model="model"
           centered
-          color="cyan"
           slider-color="yellow"
         >
           <v-tab
@@ -48,7 +47,7 @@
         </v-card>
       </v-tab-item>
     </v-tabs-items>
-  </div>
+  </v-card>
 </template>
 
 <script>

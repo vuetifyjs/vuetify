@@ -1,17 +1,22 @@
 <template>
-  <v-card height="200px" flat>
+  <v-card
+    class="mx-auto"
+    height="200"
+    flat
+    max-width="500"
+  >
     <div class="headline text-xs-center pa-5">
       Active: {{ bottomNav }}
     </div>
-    <v-bottom-nav
-      :active.sync="bottomNav"
-      :value="true"
+    <v-bottom-navigation
+      v-model="bottomNav"
       absolute
-      color="transparent"
+      color="white"
+      grow
     >
       <v-btn
         color="teal"
-        flat
+        text
         value="recent"
       >
         <span>Recent</span>
@@ -20,7 +25,7 @@
 
       <v-btn
         color="teal"
-        flat
+        text
         value="favorites"
       >
         <span>Favorites</span>
@@ -29,13 +34,13 @@
 
       <v-btn
         color="teal"
-        flat
+        text
         value="nearby"
       >
         <span>Nearby</span>
         <v-icon>place</v-icon>
       </v-btn>
-    </v-bottom-nav>
+    </v-bottom-navigation>
   </v-card>
 </template>
 

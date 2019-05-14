@@ -1,28 +1,12 @@
-import { colorToInt, intToHex, colorToHex, RGB } from './colorUtils'
+import { colorToInt, intToHex, colorToHex, ColorInt } from './colorUtils'
 import * as sRGB from './color/transformSRGB'
 import * as LAB from './color/transformCIELAB'
-import { VuetifyTheme } from 'vuetify/types'
+import { VuetifyParsedTheme, VuetifyThemeVariant } from 'vuetify/types/services/theme'
 
-interface ParsedThemeItem {
-  base: string
-  lighten5: string
-  lighten4: string
-  lighten3: string
-  lighten2: string
-  lighten1: string
-  darken1: string
-  darken2: string
-  darken3: string
-  darken4: string
-
-  [name: string]: string
-}
-
-interface ParsedTheme {
-  [name: string]: ParsedThemeItem
-}
-
-export function parse (theme: VuetifyTheme | Record<string, number | string>, isItem = false): ParsedTheme {
+export function parse (
+  theme: VuetifyThemeVariant | Record<string, number | string>,
+  isItem = false
+): VuetifyParsedTheme {
   const colors = Object.keys(theme)
   const parsedTheme: any = {}
 
@@ -79,7 +63,7 @@ const genColorVariableName = (name: string, variant = 'base'): string => `--v-${
 
 const genColorVariable = (name: string, variant = 'base'): string => `var(${genColorVariableName(name, variant)})`
 
-export function genStyles (theme: ParsedTheme, cssVar = false): string {
+export function genStyles (theme: VuetifyParsedTheme, cssVar = false): string {
   const colors = Object.keys(theme)
 
   if (!colors.length) return ''
@@ -117,7 +101,7 @@ export function genStyles (theme: ParsedTheme, cssVar = false): string {
   return variablesCss + css
 }
 
-export function genVariations (name: string, value: RGB): Record<string, string> {
+export function genVariations (name: string, value: ColorInt): Record<string, string> {
   const values: Record<string, string> = {
     base: intToHex(value)
   }
@@ -133,13 +117,13 @@ export function genVariations (name: string, value: RGB): Record<string, string>
   return values
 }
 
-function lighten (value: RGB, amount: number): RGB {
+function lighten (value: ColorInt, amount: number): ColorInt {
   const lab = LAB.fromXYZ(sRGB.toXYZ(value))
   lab[0] = lab[0] + amount * 10
   return sRGB.fromXYZ(LAB.toXYZ(lab))
 }
 
-function darken (value: RGB, amount: number): RGB {
+function darken (value: ColorInt, amount: number): ColorInt {
   const lab = LAB.fromXYZ(sRGB.toXYZ(value))
   lab[0] = lab[0] - amount * 10
   return sRGB.fromXYZ(LAB.toXYZ(lab))

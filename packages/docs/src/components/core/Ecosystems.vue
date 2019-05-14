@@ -8,7 +8,7 @@
     <template #activator="{ on: menu }">
       <v-btn
         :aria-label="$t('Vuetify.AppToolbar.ecosystem')"
-        flat
+        text
         style="min-width: 48px"
         v-on="menu"
       >
@@ -22,8 +22,8 @@
     </template>
 
     <v-list
-      light
       dense
+      nav
     >
       <v-subheader v-text="$t('Vuetify.AppToolbar.quickLinks')" />
       <core-item

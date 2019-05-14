@@ -2,9 +2,11 @@ import Vue from 'vue'
 import Vuetify from 'vuetify'
 
 Vue.use(Vuetify, {
-  iconfont: 'fa',
   icons: {
-    'cancel': 'fas fa-ban',
-    'menu': 'fas fa-ellipsis-v'
+    iconfont: 'fa',
+    values: {
+      cancel: 'fas fa-ban',
+      menu: 'fas fa-ellipsis-v'
+    }
   }
 })

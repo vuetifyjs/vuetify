@@ -80,6 +80,7 @@
         return this.additionalScript + script +
           `new Vue({
   el: '#app',
+  vuetify: new Vuetify(),
   ${component}
 })`
       },

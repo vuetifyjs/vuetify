@@ -1,0 +1,157 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VData.ts should group items 1`] = `
+Object {
+  "groupBy": Array [
+    "foo",
+  ],
+  "groupDesc": Array [
+    false,
+  ],
+  "page": 1,
+}
+`;
+
+exports[`VData.ts should group items 2`] = `
+Object {
+  "groupBy": Array [
+    "bar",
+  ],
+  "groupDesc": Array [
+    false,
+  ],
+  "page": 1,
+}
+`;
+
+exports[`VData.ts should group items 3`] = `
+Object {
+  "groupBy": Array [
+    "baz",
+  ],
+}
+`;
+
+exports[`VData.ts should group items 4`] = `
+Object {
+  "groupBy": Array [
+    "baz",
+  ],
+  "groupDesc": Array [
+    false,
+  ],
+  "page": 1,
+}
+`;
+
+exports[`VData.ts should render with scopedProps 1`] = `
+
+<div>
+  test
+</div>
+
+`;
+
+exports[`VData.ts should sort items 1`] = `
+Object {
+  "page": 1,
+  "sortBy": Array [
+    "foo",
+  ],
+  "sortDesc": Array [
+    false,
+  ],
+}
+`;
+
+exports[`VData.ts should sort items 2`] = `
+Object {
+  "page": 1,
+  "sortBy": Array [
+    "bar",
+  ],
+  "sortDesc": Array [
+    false,
+  ],
+}
+`;
+
+exports[`VData.ts should sort items 3`] = `
+Object {
+  "sortBy": Array [
+    "baz",
+  ],
+}
+`;
+
+exports[`VData.ts should sort items 4`] = `
+Object {
+  "page": 1,
+  "sortBy": Array [
+    "baz",
+  ],
+  "sortDesc": Array [
+    false,
+  ],
+}
+`;
+
+exports[`VData.ts should sort items by array 1`] = `
+Object {
+  "sortBy": Array [
+    "foo",
+    "test",
+  ],
+  "sortDesc": Array [
+    false,
+    false,
+  ],
+}
+`;
+
+exports[`VData.ts should sort items by array 2`] = `
+Object {
+  "sortBy": Array [
+    "bar",
+    "test",
+  ],
+  "sortDesc": Array [
+    false,
+    false,
+  ],
+}
+`;
+
+exports[`VData.ts should sort items by array 3`] = `
+Object {
+  "sortBy": Array [
+    "baz",
+  ],
+}
+`;
+
+exports[`VData.ts should sort items by array 4`] = `
+Object {
+  "sortBy": Array [
+    "baz",
+    "test",
+  ],
+  "sortDesc": Array [
+    false,
+    false,
+  ],
+}
+`;
+
+exports[`VData.ts should sort items by array 5`] = `
+Object {
+  "sortBy": Array [
+    "foo",
+    "test",
+  ],
+  "sortDesc": Array [
+    false,
+    false,
+  ],
+}
+`;

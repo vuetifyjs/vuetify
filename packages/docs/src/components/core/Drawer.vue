@@ -1,20 +1,21 @@
 <template>
   <v-navigation-drawer
     v-model="inputValue"
-    clipped
+    :width="300"
     app
+    clipped
   >
     <v-container
       fluid
       pb-0
     >
       <div class="text-xs-center">
-        <h4 class="body-2 font-weight-bold grey--text">Premiere sponsor</h4>
+        <h4 class="font-weight-medium grey--text">Premiere sponsor</h4>
         <supporters-patron
           v-if="supporters.special && supporters.special.length"
           :value="supporters.special[0]"
           :href="supporters.special[0].href"
-          class="mb-4"
+          class="mb-3"
           large
         />
         <!-- <span class="d-block mb-3 caption grey--text text--lighten-1">
@@ -22,7 +23,6 @@
         </span> -->
 
         <supporters-sponsor-btn
-          large
           class="mb-4"
           href="https://www.patreon.com/join/vuetify"
         />
@@ -64,9 +64,10 @@
       </a>
     </v-layout>
     <v-list
-      class="pa-0"
+      class="py-0"
       dense
       expand
+      nav
     >
       <template v-for="(item, i) in items">
         <v-subheader
@@ -230,50 +231,51 @@
   }
 </script>
 
-<style lang="stylus">
-  @import '~vuetify/src/stylus/settings/_elevations.styl'
+<style lang="sass">
+@import '~vuetify/src/styles/settings/_elevations.scss'
+@import '~vuetify/src/styles/tools/_elevation.sass'
 
-  .algolia-autocomplete
-    flex: 1 1 auto
-    position: fixed !important
+.algolia-autocomplete
+  flex: 1 1 auto
+  position: fixed !important
 
-  .v-chip--x-small
-    font-family: 'Roboto', sans-serif
-    font-size: 10px
-    font-weight: 400 !important
-    height: 16px
+.v-chip--x-small
+  font-family: 'Roboto', sans-serif
+  font-size: 10px
+  font-weight: 400 !important
+  height: 16px
 
-    .v-chip__content
-      line-height: 1
-      padding: 8px
+  .v-chip__content
+    line-height: 1
+    padding: 8px
 
-  #search
-    width: 100%
+#search
+  width: 100%
 
-  #app
-    .algolia-autocomplete > span
-      left: -16px !important
-      top: 18px !important
-      elevation(6)
+#app
+  .algolia-autocomplete > span
+    left: -16px !important
+    top: 18px !important
+    @include elevation(6)
 
-      .ds-dataset-1
-        border: none !important
+    .ds-dataset-1
+      border: none !important
 
-  #app-drawer
-    img.logo
-      margin 40px 0 15px
+#app-drawer
+  img.logo
+    margin: 40px 0 15px
 
-    .diamond-sponsor
-      // todo trim down actual image file dimensions
-      height: 30px
-      margin-bottom 0.25em
+  .diamond-sponsor
+    // todo trim down actual image file dimensions
+    height: 30px
+    margin-bottom: 0.25em
 
-      aside.v-navigation-drawer ul li
-        font-size 14px
-        color: #373737
+    aside.v-navigation-drawer ul li
+      font-size: 14px
+      color: #373737
 
-      &-label
-        color #676767
-        margin: 24px 0 16px 0
-        font-size 13px
+    &-label
+      color: #676767
+      margin: 24px 0 16px 0
+      font-size: 13px
 </style>

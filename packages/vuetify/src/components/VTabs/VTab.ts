@@ -1,0 +1,123 @@
+// Mixins
+import { factory as GroupableFactory } from '../../mixins/groupable'
+import Routable from '../../mixins/routable'
+import Themeable from '../../mixins/themeable'
+
+// Utilities
+import { keyCodes } from './../../util/helpers'
+import { getObjectValueByPath } from '../../util/helpers'
+import mixins from '../../util/mixins'
+import { ExtractVue } from './../../util/mixins'
+
+// Types
+import { VNode } from 'vue/types'
+
+const baseMixins = mixins(
+  Routable,
+  // Must be after routable
+  // to overwrite activeClass
+  GroupableFactory('tabsBar'),
+  Themeable
+)
+
+interface options extends ExtractVue<typeof baseMixins> {
+  $el: HTMLElement
+}
+
+export default baseMixins.extend<options>().extend(
+  /* @vue/component */
+).extend({
+  name: 'v-tab',
+
+  props: {
+    ripple: {
+      type: [Boolean, Object],
+      default: true
+    }
+  },
+
+  computed: {
+    classes (): object {
+      return {
+        'v-tab': true,
+        'v-tab--disabled': this.disabled,
+        ...this.groupClasses
+      }
+    },
+    value (): any {
+      let to = this.to || this.href || ''
+
+      if (this.$router &&
+        this.to === Object(this.to)
+      ) {
+        const resolve = this.$router.resolve(
+          this.to,
+          this.$route,
+          this.append
+        )
+
+        to = resolve.href
+      }
+
+      return to.replace('#', '')
+    }
+  },
+
+  watch: {
+    $route: 'onRouteChange'
+  },
+
+  mounted () {
+    this.onRouteChange()
+  },
+
+  methods: {
+    click (e: KeyboardEvent | MouseEvent): void {
+      // If user provides an
+      // actual link, do not
+      // prevent default
+      if (this.href &&
+        this.href.indexOf('#') > -1
+      ) e.preventDefault()
+
+      if (e.detail) this.$el.blur()
+
+      this.$emit('click', e)
+
+      this.to || this.toggle()
+    },
+    onRouteChange () {
+      if (!this.to || !this.$refs.link) return
+
+      const path = `_vnode.data.class.${this.activeClass}`
+
+      this.$nextTick(() => {
+        if (getObjectValueByPath(this.$refs.link, path)) {
+          this.toggle()
+        }
+      })
+    }
+  },
+
+  render (h): VNode {
+    const { tag, data } = this.generateRouteLink(this.classes)
+
+    data.attrs = {
+      ...data.attrs,
+      'aria-selected': String(this.isActive),
+      role: 'tab',
+      tabindex: 0
+    }
+    data.on = {
+      ...data.on,
+      keydown: (e: KeyboardEvent) => {
+        if (e.keyCode === keyCodes.enter) this.click(e)
+
+        this.$emit('keydown', e)
+      }
+    }
+    data.ref = 'link'
+
+    return h(tag, data, this.$slots.default)
+  }
+})

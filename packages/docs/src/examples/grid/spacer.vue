@@ -1,6 +1,6 @@
 <template>
   <v-toolbar dark color="primary">
-    <v-toolbar-side-icon></v-toolbar-side-icon>
+    <v-app-bar-nav-icon></v-app-bar-nav-icon>
     <v-toolbar-title class="white--text">Title</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-btn icon>

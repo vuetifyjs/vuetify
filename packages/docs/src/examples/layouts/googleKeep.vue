@@ -24,7 +24,7 @@
               </v-subheader>
             </v-flex>
             <v-flex xs6 class="text-xs-right">
-              <v-btn small flat>edit</v-btn>
+              <v-btn small text>edit</v-btn>
             </v-flex>
           </v-layout>
           <v-divider
@@ -33,25 +33,25 @@
             dark
             class="my-3"
           ></v-divider>
-          <v-list-tile
+          <v-list-item
             v-else
             :key="i"
             @click=""
           >
-            <v-list-tile-action>
+            <v-list-item-action>
               <v-icon>{{ item.icon }}</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title class="grey--text">
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title class="grey--text">
                 {{ item.text }}
-              </v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
         </template>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar color="amber" app absolute clipped-left>
-      <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <span class="title ml-3 mr-5">Google&nbsp;<span class="font-weight-light">Keep</span></span>
       <v-text-field
         solo-inverted
@@ -116,8 +116,8 @@
   }
 </script>
 
-<style lang="stylus">
-  #keep
-    .v-navigation-drawer__border
-      display: none
+<style lang="sass">
+#keep
+  .v-navigation-drawer__border
+    display: none
 </style>

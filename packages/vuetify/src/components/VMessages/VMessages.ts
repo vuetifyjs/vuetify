@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_messages.styl'
+import './VMessages.sass'
 
 // Mixins
 import Colorable from '../../mixins/colorable'

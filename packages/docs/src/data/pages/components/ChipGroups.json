@@ -1,0 +1,58 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "file": "components/VChipGroup",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/chips.html#input-chips"
+  },
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [
+            "v-chip-group",
+            "v-chip"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "toothbrush",
+            "filterResults",
+            "blouse"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/chips",
+            "components/slide-groups",
+            "components/item-groups"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,11 +1,12 @@
 <template>
   <v-card
-    class="hide-overflow"
-    height="200px"
+    class="hide-overflow mx-auto"
+    height="200"
+    max-width="500"
   >
     <v-card-text class="text-xs-center">
       <v-btn
-        flat
+        text
         color="primary"
         @click="showNav = !showNav"
       >
@@ -13,27 +14,28 @@
       </v-btn>
     </v-card-text>
 
-    <v-bottom-nav
-      :active.sync="activeBtn"
-      :value="showNav"
+    <v-bottom-navigation
+      :input-value="showNav"
+      :value="activeBtn"
       absolute
-      color="transparent"
+      color="white"
+      horizontal
     >
-      <v-btn flat color="teal">
+      <v-btn text color="teal">
         <span>Recents</span>
         <v-icon>history</v-icon>
       </v-btn>
 
-      <v-btn flat color="teal">
+      <v-btn text color="teal">
         <span>Favorites</span>
         <v-icon>favorite</v-icon>
       </v-btn>
 
-      <v-btn flat color="teal">
+      <v-btn text color="teal">
         <span>Nearby</span>
         <v-icon>place</v-icon>
       </v-btn>
-    </v-bottom-nav>
+    </v-bottom-navigation>
   </v-card>
 </template>
 

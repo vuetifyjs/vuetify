@@ -6,8 +6,8 @@
       "desc": "Easily change the elevation of a card."
     },
     "transition": {
-      "header": "Transitions",
-      "desc": "### Create highly customized components that respond to user interaction."
+      "header": "### Transitions",
+      "desc": "Create highly customized components that respond to user interaction."
     }
   },
   "props": {

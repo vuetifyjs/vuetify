@@ -1,4 +1,4 @@
-import '../../stylus/components/_responsive.styl'
+import './VResponsive.sass'
 
 // Mixins
 import Measurable, { NumberOrNumberString } from '../../mixins/measurable'

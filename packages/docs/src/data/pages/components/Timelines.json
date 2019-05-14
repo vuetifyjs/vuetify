@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VTimeline",
   "children": [
     {
       "type": "section",
@@ -35,6 +36,7 @@
             "color",
             "slot",
             "alert",
+            "reverse",
             "advanced"
           ]
         }
