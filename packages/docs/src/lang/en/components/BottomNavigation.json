@@ -16,6 +16,10 @@
     "grow": {
       "header": "### Grow",
       "desc": "If `v-bottom-navigation` has `grow` property, buttons within it grow to fill available space."
+    },
+    "hideOnScroll": {
+      "header": "### Hide on scroll",
+      "desc": "Hide-on-scroll hides `v-bottom-navigation` when target element is scrolled."
     }
   },
   "props": {
