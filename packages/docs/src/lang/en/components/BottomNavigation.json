@@ -12,6 +12,10 @@
     "toggle": {
       "header": "### Toggle",
       "desc": "As with other Vuetify components, you can control the display state with `v-model`."
+    },
+    "grow": {
+      "header": "### Grow",
+      "desc": "If `v-bottom-navigation` has `grow` property, buttons within it grow to fill available space."
     }
   },
   "props": {

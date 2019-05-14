@@ -32,7 +32,8 @@
           "type": "examples",
           "value": [
             "simple/toggle",
-            "simple/colorAndShift"
+            "simple/colorAndShift",
+            "simple/grow"
           ]
         }
       ]
