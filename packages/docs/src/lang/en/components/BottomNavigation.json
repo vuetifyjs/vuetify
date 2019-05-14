@@ -20,6 +20,10 @@
     "hideOnScroll": {
       "header": "### Hide on scroll",
       "desc": "Hide-on-scroll hides `v-bottom-navigation` when target element is scrolled."
+    },
+    "scrollThreshold": {
+      "header": "### Scroll threshold",
+      "desc": "`scroll-threshold` property allows you to customize the threshold you can scroll before `v-bottom-navigation` disappears."
     }
   },
   "props": {

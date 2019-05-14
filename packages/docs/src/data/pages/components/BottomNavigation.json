@@ -34,7 +34,8 @@
             "simple/toggle",
             "simple/colorAndShift",
             "simple/grow",
-            "intermediate/hideOnScroll"
+            "intermediate/hideOnScroll",
+            "intermediate/scrollThreshold"
           ]
         }
       ]
