@@ -91,7 +91,7 @@
       size: 'medium',
       sizes: ['x-small', 'small', 'medium', 'large', 'x-large'],
       type: [],
-      types: ['block', 'depressed', 'fab', 'outline', 'round', 'text'],
+      types: ['block', 'depressed', 'fab', 'outlined', 'round', 'text'],
       text: 'Customize me',
       minWidth: undefined,
       minHeight: undefined,

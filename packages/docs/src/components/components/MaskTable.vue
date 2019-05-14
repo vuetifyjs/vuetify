@@ -1,37 +1,35 @@
 <template>
   <v-card class="mb-5">
-    <v-table-overflow>
-      <table class="v-table">
-        <caption class="mt-3">
-          <strong>Mask legend</strong>
-        </caption>
-        <thead>
-          <tr class="text-xs-left">
-            <th>Mask</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="(row, i) in masks"
-            :key="i"
-          >
-            <template v-if="row.header">
-              <td colspan="2">
-                <strong v-text="row.text" />
-              </td>
-            </template>
-            <template v-else>
-              <td
-                v-for="(mask, j) in row"
-                :key="j"
-                v-text="mask"
-              />
-            </template>
-          </tr>
-        </tbody>
-      </table>
-    </v-table-overflow>
+    <v-simple-table class="v-table">
+      <caption class="mt-3">
+        <strong>Mask legend</strong>
+      </caption>
+      <thead>
+        <tr class="text-xs-left">
+          <th>Mask</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          v-for="(row, i) in masks"
+          :key="i"
+        >
+          <template v-if="row.header">
+            <td colspan="2">
+              <strong v-text="row.text" />
+            </td>
+          </template>
+          <template v-else>
+            <td
+              v-for="(mask, j) in row"
+              :key="j"
+              v-text="mask"
+            />
+          </template>
+        </tr>
+      </tbody>
+    </v-simple-table>
   </v-card>
 </template>
 
