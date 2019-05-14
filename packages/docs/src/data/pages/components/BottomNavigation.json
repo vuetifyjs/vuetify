@@ -31,8 +31,8 @@
         {
           "type": "examples",
           "value": [
-            "colorAndShift",
-            "toggle"
+            "simple/toggle",
+            "simple/colorAndShift"
           ]
         }
       ]
