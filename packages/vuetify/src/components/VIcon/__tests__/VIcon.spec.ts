@@ -206,13 +206,9 @@ describe('VIcon', () => {
     const getTestComponent = () => ({
       props: ['name'],
       render (h) {
-        return h(
-          'div',
-          {
-            class: 'test-component'
-          },
-          this.name
-        )
+        return h('div', {
+          class: 'test-component'
+        }, this.name)
       }
     })
 

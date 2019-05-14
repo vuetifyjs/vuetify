@@ -204,7 +204,9 @@ export default Vue.extend({
 
     // Support usage of v-text and v-html
     if (data.domProps) {
-      iconName = data.domProps.textContent || data.domProps.innerHTML || iconName
+      iconName = data.domProps.textContent ||
+        data.domProps.innerHTML ||
+        iconName
 
       // Remove nodes so it doesn't
       // overwrite our changes
