@@ -18,28 +18,22 @@ import {
 } from '../../util/helpers'
 
 // Types
-import Vue, { VNode, VNodeData, PropType } from 'vue'
-import mixins, { ExtractVue } from '../../util/mixins'
+import { VNode, VNodeData, PropType } from 'vue'
+import mixins from '../../util/mixins'
 
-interface options extends Vue {
-  /* eslint-disable-next-line camelcase */
-  $_modelEvent: string
-}
-
-const baseMixins = mixins<options &
-  ExtractVue<[
-    typeof Colorable,
-    typeof Themeable,
-    typeof Validatable
-  ]>
->(
+const baseMixins = mixins(
   Colorable,
   Themeable,
   Validatable
 )
 
+interface options extends InstanceType<typeof baseMixins> {
+  /* eslint-disable-next-line camelcase */
+  $_modelEvent: string
+}
+
 /* @vue/component */
-export default baseMixins.extend({
+export default baseMixins.extend<options>().extend({
   name: 'v-input',
 
   props: {
@@ -170,7 +164,7 @@ export default baseMixins.extend({
               this.$emit(eventName, e)
               cb && cb(e)
             },
-            // Container has mouseup event that will
+            // Container has g event that will
             // trigger menu open if enclosed
             mouseup: (e: Event) => {
               e.preventDefault()

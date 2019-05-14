@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-toolbar
-      card
+      flat
       color="pink"
       dark
     >

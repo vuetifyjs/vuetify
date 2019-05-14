@@ -11,8 +11,8 @@
       <v-flex xs12 sm6 d-flex>
         <v-select
           :items="items"
-          box
-          label="Box style"
+          filled
+          label="Filled style"
         ></v-select>
       </v-flex>
 

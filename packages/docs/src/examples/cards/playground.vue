@@ -1,15 +1,15 @@
 <template>
   <div>
     <v-layout row wrap justify-space-around>
-      <v-switch label="Flat" v-model="flat"></v-switch>
-      <v-switch label="Outlined" v-model="outlined"></v-switch>
-      <v-switch label="Raised" v-model="raised"></v-switch>
-      <v-switch label="Loading" v-model="loading"></v-switch>
-      <v-switch label="With media" v-model="media"></v-switch>
-      <v-switch label="With actions" v-model="actions"></v-switch>
-      <v-slider label="Elevation" v-model="elevation" min="0" max="24"></v-slider>
-      <v-slider label="Width" v-model="width" min="210" max="1000"></v-slider>
-      <v-slider label="Height" v-model="height" min="320" max="1000"></v-slider>
+      <v-switch v-model="flat" label="Flat"></v-switch>
+      <v-switch v-model="outlined" label="Outlined"></v-switch>
+      <v-switch v-model="raised" label="Raised"></v-switch>
+      <v-switch v-model="loading" label="Loading"></v-switch>
+      <v-switch v-model="media" label="With media"></v-switch>
+      <v-switch v-model="actions" label="With actions"></v-switch>
+      <v-slider v-model="elevation" label="Elevation" min="0" max="24"></v-slider>
+      <v-slider v-model="width" label="Width" min="210" max="1000"></v-slider>
+      <v-slider v-model="height" label="Height" min="320" max="1000"></v-slider>
     </v-layout>
 
     <v-card
@@ -38,7 +38,7 @@
           <v-icon>mdi-heart</v-icon>
         </v-btn>
         <v-btn text>Click</v-btn>
-        <v-btn outline>Click</v-btn>
+        <v-btn outlined>Click</v-btn>
       </v-card-actions>
     </v-card>
   </div>
