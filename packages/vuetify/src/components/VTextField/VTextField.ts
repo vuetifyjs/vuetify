@@ -319,21 +319,11 @@ export default baseMixins.extend<options>().extend({
     genFieldset () {
       if (!this.outlined) return null
 
-      const width = this.labelValue || this.isDirty ? this.labelWidth : 0
-      const span = this.$createElement('span', {
-        domProps: { innerHTML: '&#8203;' }
-      })
-      const legend = this.$createElement('legend', {
-        style: {
-          width: convertToUnit(width)
-        }
-      }, [span])
-
       return this.$createElement('fieldset', {
         attrs: {
           'aria-hidden': true
         }
-      }, [legend])
+      }, [this.genLegend()])
     },
     genLabel () {
       if (!this.showLabel) return null
@@ -354,6 +344,18 @@ export default baseMixins.extend<options>().extend({
       }
 
       return this.$createElement(VLabel, data, this.$slots.label || this.label)
+    },
+    genLegend () {
+      const width = !this.singleLine && (this.labelValue || this.isDirty) ? this.labelWidth : 0
+      const span = this.$createElement('span', {
+        domProps: { innerHTML: '&#8203;' }
+      })
+
+      return this.$createElement('legend', {
+        style: {
+          width: convertToUnit(width)
+        }
+      }, [span])
     },
     genInput () {
       const listeners = Object.assign({}, this.$listeners)
