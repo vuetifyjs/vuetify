@@ -58,7 +58,7 @@
       transform: rotate(0);
     }
     to {
-      transform: rotate(360deg);
+      transform: rotate(-360deg);
     }
   }
   @-webkit-keyframes loader {
@@ -66,7 +66,7 @@
       transform: rotate(0);
     }
     to {
-      transform: rotate(360deg);
+      transform: rotate(-360deg);
     }
   }
   @-o-keyframes loader {
@@ -74,7 +74,7 @@
       transform: rotate(0);
     }
     to {
-      transform: rotate(360deg);
+      transform: rotate(-360deg);
     }
   }
   @keyframes loader {
@@ -82,7 +82,7 @@
       transform: rotate(0);
     }
     to {
-      transform: rotate(360deg);
+      transform: rotate(-360deg);
     }
   }
 </style>
