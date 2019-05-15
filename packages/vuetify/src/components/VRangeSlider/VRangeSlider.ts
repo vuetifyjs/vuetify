@@ -11,6 +11,7 @@ import {
 } from '../../util/helpers'
 
 // Types
+import { VNode, VNodeChildrenArrayContents } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
 /* @vue/component */
@@ -83,7 +84,7 @@ export default VSlider.extend({
   },
 
   methods: {
-    getTrackStyle (startLength: number, endLength: number, startPadding = 0, endPadding = 0) {
+    getTrackStyle (startLength: number, endLength: number, startPadding = 0, endPadding = 0): Partial<CSSStyleDeclaration> {
       const startDir = this.vertical ? this.$vuetify.rtl ? 'top' : 'bottom' : this.$vuetify.rtl ? 'right' : 'left'
       const endDir = this.vertical ? 'height' : 'width'
 
@@ -100,7 +101,7 @@ export default VSlider.extend({
       if (Math.abs(arr[0] - v) < Math.abs(arr[1] - v)) return 0
       else return 1
     },
-    genInput () {
+    genInput (): VNode[] {
       return createRange(2).map(i => {
         const input = VSlider.options.methods.genInput.call(this)
 
@@ -111,7 +112,7 @@ export default VSlider.extend({
         return input
       })
     },
-    genTrackContainer () {
+    genTrackContainer (): VNode {
       const children = []
 
       if (this.disabled) {
@@ -146,7 +147,7 @@ export default VSlider.extend({
         ref: 'track'
       }, children)
     },
-    genChildren () {
+    genChildren (): VNodeChildrenArrayContents {
       return [
         this.genInput(),
         this.genTrackContainer(),

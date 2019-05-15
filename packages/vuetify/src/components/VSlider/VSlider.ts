@@ -206,7 +206,7 @@ export default mixins<options &
       if (this.disabled) return false
       return this.validationState || this.thumbColor || this.color
     },
-    decreasing () {
+    decreasing (): boolean {
       return this.$vuetify.rtl ? !this.reverse : this.reverse
     }
   },
