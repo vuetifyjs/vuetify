@@ -241,7 +241,7 @@ export default mixins<options &
   },
 
   methods: {
-    genDefaultSlot (): VNodeChildrenArrayContents {
+    genDefaultSlot () {
       const children: VNodeChildrenArrayContents = [this.genLabel()]
       const slider = this.genSlider()
       this.inverseLabel
@@ -252,7 +252,7 @@ export default mixins<options &
 
       return children
     },
-    genSlider (): VNode {
+    genSlider () {
       return this.$createElement('div', {
         class: {
           'v-slider': true,
@@ -273,7 +273,7 @@ export default mixins<options &
         }
       }, this.genChildren())
     },
-    genChildren (): VNodeChildrenArrayContents {
+    genChildren () {
       return [
         this.genInput(),
         this.genTrackContainer(),
@@ -288,7 +288,7 @@ export default mixins<options &
         )
       ]
     },
-    genInput (): VNode {
+    genInput () {
       return this.$createElement('input', {
         attrs: {
           value: this.internalValue,
@@ -300,7 +300,7 @@ export default mixins<options &
         // on: this.genListeners(), // TODO: do we need to attach the listeners to input?
       })
     },
-    genTrackContainer (): VNode {
+    genTrackContainer () {
       const children = [
         this.$createElement('div', this.setBackgroundColor(this.computedTrackColor, {
           staticClass: 'v-slider__track-background',
@@ -317,7 +317,7 @@ export default mixins<options &
         ref: 'track'
       }, children)
     },
-    genSteps (): VNode | null {
+    genSteps () {
       if (!this.step || !this.showTicks) return null
 
       const tickSize = parseFloat(this.tickSize)
@@ -406,12 +406,12 @@ export default mixins<options &
         }
       }), children)
     },
-    genThumbLabelContent (value: number | string): ScopedSlotChildren {
+    genThumbLabelContent (value: number | string) {
       return this.$scopedSlots['thumb-label']
         ? this.$scopedSlots['thumb-label']!({ value })
         : [this.$createElement('span', [String(value)])]
     },
-    genThumbLabel (content: ScopedSlotChildren): VNode {
+    genThumbLabel (content: ScopedSlotChildren) {
       const size = convertToUnit(this.thumbSize)
 
       const transform = this.vertical
@@ -439,12 +439,12 @@ export default mixins<options &
         ])
       ])
     },
-    genThumb (): VNode {
+    genThumb () {
       return this.$createElement('div', this.setBackgroundColor(this.computedThumbColor, {
         staticClass: 'v-slider__thumb'
       }))
     },
-    getThumbContainerStyles (width: number): object {
+    getThumbContainerStyles (width: number) {
       const direction = this.vertical ? 'top' : 'left'
       let value = this.decreasing ? 100 - width : width
       value = this.vertical ? 100 - value : value
