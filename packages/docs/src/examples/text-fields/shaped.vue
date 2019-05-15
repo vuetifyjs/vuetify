@@ -7,7 +7,8 @@
           <v-text-field
             v-model="first"
             label="First Name"
-            filled
+            outlined
+            shaped
           ></v-text-field>
         </v-flex>
 
@@ -16,6 +17,7 @@
             v-model="last"
             label="Last Name"
             filled
+            shaped
           ></v-text-field>
         </v-flex>
 
