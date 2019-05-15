@@ -41,8 +41,8 @@ export class Theme extends Service {
     }
   }
   public defaults: VuetifyThemes = this.themes
+  public isDark = null as boolean | null
 
-  private isDark = null as boolean | null
   private vueInstance = null as Vue | null
 
   constructor (options: Partial<VuetifyThemeOptions> = {}) {

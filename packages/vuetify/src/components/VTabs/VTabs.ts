@@ -30,6 +30,11 @@ interface options extends ExtractVue<typeof baseMixins> {
   $refs: {
     items: InstanceType<typeof VTabsBar>
   }
+  $options: {
+    propsData?: {
+      color?: string
+    }
+  }
 }
 
 export default baseMixins.extend<options>().extend({
@@ -118,6 +123,11 @@ export default baseMixins.extend<options>().extend({
         transition: this.slider.left != null ? null : 'none',
         width: convertToUnit(this.slider.width)
       }
+    },
+    computedColor (): string {
+      const hasColorProp = this.$options.propsData && this.$options.propsData.color
+      if (this.$vuetify.theme.isDark && !hasColorProp) return 'white'
+      else return this.color
     }
   },
 
@@ -174,7 +184,7 @@ export default baseMixins.extend<options>().extend({
       return true
     },
     genBar (items: VNode[], slider: VNode | null) {
-      return this.$createElement(VTabsBar, this.setTextColor(this.color, {
+      return this.$createElement(VTabsBar, this.setTextColor(this.computedColor, {
         staticClass: this.backgroundColor,
         style: {
           height: this.height ? {
