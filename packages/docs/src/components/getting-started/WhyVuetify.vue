@@ -78,7 +78,7 @@
                 <v-btn
                   :href="philosophy.more"
                   color="white"
-                  outline
+                  outlined
                   rel="noopener"
                   small
                   target="_blank"

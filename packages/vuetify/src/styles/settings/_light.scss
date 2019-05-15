@@ -65,8 +65,10 @@ $material-light: (
     'color': map-get($shades, 'black')
   ),
   'text-fields': (
-    'box': rgba(map-get($shades, 'black'), 0.06),
-    'box-hover': rgba(map-get($shades, 'black'), 0.12)
+    'filled': rgba(map-get($shades, 'black'), 0.06),
+    'filled-hover': rgba(map-get($shades, 'black'), 0.12),
+    'outlined': rgba(map-get($shades, 'black'), 0.24),
+    'outlined-hover': rgba(map-get($shades, 'black'), 0.86)
   ),
   'input-bottom-line': rgba(map-get($shades, 'black'), 0.42),
   'stepper': (
