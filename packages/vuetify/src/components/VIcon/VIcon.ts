@@ -73,17 +73,19 @@ const VIcon = mixins(
     },
     // Component data for both font and svg icon.
     getDefaultData (): VNodeData {
+      const hasClickListener = Boolean(this.$listeners.click || this.$listeners['!click'])
       const data: VNodeData = {
         staticClass: 'v-icon',
         class: {
           'v-icon--disabled': this.disabled,
           'v-icon--left': this.left,
-          'v-icon--link': this.$listeners.click || this.$listeners['!click'],
+          'v-icon--link': hasClickListener,
           'v-icon--right': this.right,
           'v-icon--dense': this.dense
         },
         attrs: {
-          'aria-hidden': true,
+          'aria-hidden': !hasClickListener,
+          role: hasClickListener ? 'button' : null,
           ...this.$attrs
         },
         on: this.$listeners
