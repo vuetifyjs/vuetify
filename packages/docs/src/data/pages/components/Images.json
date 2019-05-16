@@ -34,6 +34,7 @@
             "simple/containCover",
             "simple/maxHeight",
             "simple/ratio",
+            "simple/placeholder",
             "intermediate/gradients",
             "intermediate/grid"
           ]

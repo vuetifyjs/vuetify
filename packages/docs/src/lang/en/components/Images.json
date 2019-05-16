@@ -24,6 +24,10 @@
     "grid": {
       "header": "### Grid",
       "desc": "You can use `v-img` to make, for example, a picture gallery."
+    },
+    "placeholder": {
+      "header": "### Placeholder",
+      "desc": "`v-img` has a special `placeholder` slot for placeholder to display while image's loading. Note: the example below has bad src which won't load for you to see placeholder."
     }
   },
   "props": {
