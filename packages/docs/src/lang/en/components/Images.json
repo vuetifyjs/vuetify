@@ -20,6 +20,10 @@
     "gradients": {
       "header": "### Gradients",
       "desc": "The `gradient` prop can be used to apply a simple gradient overlay to the image. More complex gradients should be written as a class on the content slot instead."
+    },
+    "grid": {
+      "header": "### Grid",
+      "desc": "You can use `v-img` to make, for example, a picture gallery."
     }
   },
   "props": {

@@ -34,7 +34,8 @@
             "simple/containCover",
             "simple/maxHeight",
             "simple/ratio",
-            "intermediate/gradients"
+            "intermediate/gradients",
+            "intermediate/grid"
           ]
         }
       ]
