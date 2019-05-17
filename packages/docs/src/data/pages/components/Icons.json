@@ -45,7 +45,7 @@
             "simple/color",
             "intermediate/buttons",
             "intermediate/clickable",
-            "intermediate/mdiSvg"
+            "complex/mdiSvg"
           ]
         }
       ]
