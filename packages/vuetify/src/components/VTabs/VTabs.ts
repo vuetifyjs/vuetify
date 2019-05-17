@@ -32,11 +32,6 @@ interface options extends ExtractVue<typeof baseMixins> {
   $refs: {
     items: InstanceType<typeof VTabsBar>
   }
-  $options: {
-    propsData?: {
-      color?: string
-    }
-  }
 }
 
 export default baseMixins.extend<options>().extend({
