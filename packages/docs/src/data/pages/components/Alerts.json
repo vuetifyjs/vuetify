@@ -25,6 +25,15 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
             "simple/border",
@@ -39,15 +48,6 @@
             "simple/type",
             "complex/twitter"
           ]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "playground",
-          "value": "playground"
         }
       ]
     },
