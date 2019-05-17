@@ -64,7 +64,7 @@
             <v-text-field
               v-model="name"
               :disabled="isUpdating"
-              box
+              filled
               color="blue-grey lighten-2"
               label="Name"
             ></v-text-field>
@@ -73,7 +73,7 @@
             <v-text-field
               v-model="title"
               :disabled="isUpdating"
-              box
+              filled
               color="blue-grey lighten-2"
               label="Title"
             ></v-text-field>
@@ -83,7 +83,7 @@
               v-model="friends"
               :disabled="isUpdating"
               :items="people"
-              box
+              filled
               chips
               color="blue-grey lighten-2"
               label="Select"

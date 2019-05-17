@@ -31,10 +31,12 @@
         {
           "type": "examples",
           "value": [
-            "containCover",
-            "maxHeight",
-            "ratio",
-            "gradients"
+            "simple/containCover",
+            "simple/maxHeight",
+            "simple/ratio",
+            "simple/placeholder",
+            "intermediate/gradients",
+            "intermediate/grid"
           ]
         }
       ]

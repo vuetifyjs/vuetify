@@ -9,7 +9,7 @@
         <p>The page you were looking for does not exist</p>
         <v-btn
           :to="`/${lang}/getting-started/quick-start`"
-          outline
+          outlined
           color="primary"
         >
           Get me out of here!
