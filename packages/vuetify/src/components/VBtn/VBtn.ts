@@ -57,6 +57,7 @@ export default baseMixins.extend<options>().extend({
     icon: Boolean,
     loading: Boolean,
     outline: Boolean,
+    outlined: Boolean,
     ripple: {
       type: [Boolean, Object],
       default: null
@@ -84,7 +85,7 @@ export default baseMixins.extend<options>().extend({
         'v-btn--block': this.block,
         'v-btn--bottom': this.bottom,
         'v-btn--contained': this.contained,
-        'v-btn--depressed': (this.depressed && !this.flat) || this.outline,
+        'v-btn--depressed': (this.depressed && !this.flat) || this.hasOutline,
         'v-btn--disabled': this.disabled,
         'v-btn--fab': this.fab || this.icon,
         'v-btn--fixed': this.fixed,
@@ -92,7 +93,7 @@ export default baseMixins.extend<options>().extend({
         'v-btn--icon': this.icon,
         'v-btn--left': this.left,
         'v-btn--loading': this.loading,
-        'v-btn--outline': this.outline,
+        'v-btn--outlined': this.hasOutline,
         'v-btn--right': this.right,
         'v-btn--round': this.isRound,
         'v-btn--rounded': this.round || this.rounded,
@@ -119,12 +120,16 @@ export default baseMixins.extend<options>().extend({
       if (this.disabled) return false
       else return this.ripple !== null ? this.ripple : defaultRipple
     },
+    // TODO: remove deprecated
+    hasOutline (): boolean {
+      return this.outline || this.outlined
+    },
     isFlat (): boolean {
       return Boolean(
         this.icon ||
         this.text ||
         this.flat ||
-        this.outline
+        this.hasOutline
       )
     },
     isRound (): boolean {
@@ -149,6 +154,8 @@ export default baseMixins.extend<options>().extend({
     if (this.flat) deprecate('flat', 'text', this)
     /* istanbul ignore next */
     if (this.round) deprecate('round', 'rounded', this)
+    /* istanbul ignore next */
+    if (this.outline) deprecate('outline', 'outlined', this)
   },
 
   methods: {

@@ -5,7 +5,7 @@ import './VTextarea.sass'
 import VTextField from '../VTextField/VTextField'
 
 // Utilities
-import mixins, { ExtractVue } from '../../util/mixins'
+import mixins from '../../util/mixins'
 
 // Types
 import Vue from 'vue'
@@ -17,7 +17,7 @@ interface options extends Vue {
 }
 
 const baseMixins = mixins<options &
-  ExtractVue<typeof VTextField>
+  InstanceType<typeof VTextField>
 >(
   VTextField
 )
@@ -29,7 +29,6 @@ export default baseMixins.extend({
   props: {
     autoGrow: Boolean,
     noResize: Boolean,
-    outline: Boolean,
     rowHeight: {
       type: [Number, String],
       default: 24,

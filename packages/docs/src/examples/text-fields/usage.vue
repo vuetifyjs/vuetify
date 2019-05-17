@@ -34,7 +34,7 @@
         <v-flex xs12 sm6 md3>
           <v-text-field
             label="Box"
-            box
+            filled
           ></v-text-field>
         </v-flex>
 
@@ -42,7 +42,7 @@
           <v-text-field
             label="Box"
             placeholder="Placeholder"
-            box
+            filled
           ></v-text-field>
         </v-flex>
 

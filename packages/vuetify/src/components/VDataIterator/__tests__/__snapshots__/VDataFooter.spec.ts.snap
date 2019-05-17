@@ -264,7 +264,7 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
           <div class="v-select__slot">
             <div class="v-select__selections">
               <div class="v-select__selection v-select__selection--comma">
-                10
+                100
               </div>
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
                      autocomplete="on"
@@ -305,8 +305,9 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
     </button>
   </div>
   <div class="v-data-footer__icons-after">
-    <button type="button"
-            class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+    <button disabled="disabled"
+            type="button"
+            class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
             aria-label="Next page"
     >
       <span class="v-btn__content">
