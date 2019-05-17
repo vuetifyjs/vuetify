@@ -163,14 +163,14 @@ describe('VBtn.ts', () => {
     expect(wrapper.classes('v-btn--text')).toBe(true)
   })
 
-  it('should have v-btn--outline and v-btn--depressed classes when using outline prop', () => {
+  it('should have v-btn--outlined and v-btn--depressed classes when using outlined prop', () => {
     const wrapper = mountFunction({
       propsData: {
-        outline: true
+        outlined: true
       }
     })
 
-    expect(wrapper.classes('v-btn--outline')).toBe(true)
+    expect(wrapper.classes('v-btn--outlined')).toBe(true)
     expect(wrapper.classes('v-btn--depressed')).toBe(true)
   })
 

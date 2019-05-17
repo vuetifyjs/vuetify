@@ -5,7 +5,7 @@
     :href="href"
     :target="href ? '_blank' : undefined"
     color="primary"
-    outline
+    outlined
     rel="noopener"
     v-on="$listeners"
   >

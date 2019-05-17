@@ -3,7 +3,7 @@
 @import './_variables.scss'
 
 // Theme
-.v-btn:not(.v-btn--outline)
+.v-btn:not(.v-btn--outlined)
   &.primary,
   &.secondary,
   &.accent,
@@ -23,13 +23,13 @@
     .v-btn__loading
       color: map-deep-get($material, 'buttons', 'disabled') !important
 
-    &:not(.v-btn--flat):not(.v-btn--outline)
+    &:not(.v-btn--flat):not(.v-btn--outlined)
       background-color: map-deep-get($material, 'buttons', 'focused') !important
 
   &:not(.v-btn--flat)
     background-color: map-get($material, 'app-bar')
 
-  &.v-btn--outline.v-btn--text
+  &.v-btn--outlined.v-btn--text
     border-color: map-get($material, 'dividers')
 
   &.v-btn--icon
@@ -224,19 +224,19 @@
   .v-btn__content
     opacity: 0
 
-.v-btn--outline
+.v-btn--outlined
   border: $btn-outline-border-width solid currentColor
 
   &:before
     border-radius: 0
 
-.v-btn--outline,
+.v-btn--outlined,
 .v-btn--round
   .v-btn__content
     .v-icon
       color: currentColor
 
-.v-btn--outline,
+.v-btn--outlined,
 .v-btn--flat,
 .v-btn--text
   background-color: transparent !important

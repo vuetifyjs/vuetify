@@ -33,6 +33,7 @@
       "large": "Large size button",
       "loading": "Adds a loading icon animation",
       "outline": "Button will have an outline",
+      "outlined": "Button will have an outline",
       "round": "Button will be round on the sides",
       "small": "Small size button",
       "type": "Set the button's type attribute"

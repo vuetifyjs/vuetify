@@ -22,7 +22,7 @@ import { getPropertyFromItem, keyCodes } from '../../util/helpers'
 import { consoleError } from '../../util/console'
 
 // Types
-import mixins, { ExtractVue } from '../../util/mixins'
+import mixins from '../../util/mixins'
 import { PropValidator } from 'vue/types/options'
 import { VNode, VNodeDirective } from 'vue'
 
@@ -42,10 +42,12 @@ const baseMixins = mixins(
   Filterable
 )
 
-interface options extends ExtractVue<typeof baseMixins> {
+interface options extends InstanceType<typeof baseMixins> {
   $refs: {
     menu: InstanceType<typeof VMenu>
+    label: HTMLElement
     input: HTMLInputElement
+    'prepend-inner': HTMLElement
     prefix: HTMLElement
     suffix: HTMLElement
   }
@@ -378,6 +380,7 @@ export default baseMixins.extend<options>().extend({
       }
 
       return [
+        this.genFieldset(),
         this.$createElement('div', {
           staticClass: 'v-select__slot',
           directives: this.directives

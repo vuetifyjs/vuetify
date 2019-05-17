@@ -174,25 +174,18 @@ export class Theme extends Service {
 
   private initNuxt (root: Vue) {
     const options = this.options || {}
-    const metaInfo = {
-      style: [
-        {
-          cssText: this.generatedStyles,
-          type: 'text/css',
-          id: 'vuetify-theme-stylesheet',
-          nonce: options.cspNonce
-        }
-      ]
-    }
-
-    root.$children.push({
-      $children: [],
-      $options: {
-        metaInfo, // TODO: vue-meta 2.0 $meta.getOptions()
-        head: metaInfo
-      },
-      $vnode: { data: {} }
-    } as any)
+    root.$children.push(new Vue({
+      head: {
+        style: [
+          {
+            cssText: this.generatedStyles,
+            type: 'text/css',
+            id: 'vuetify-theme-stylesheet',
+            nonce: options.cspNonce
+          }
+        ]
+      }
+    } as any))
   }
 
   private initSSR (ssrContext?: any) {

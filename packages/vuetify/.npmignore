@@ -10,4 +10,6 @@
 !/es5/**/*
 
 # Keep types
+!/types/services/*.d.ts
+!/types/presets/*.d.ts
 !/types/*.d.ts
