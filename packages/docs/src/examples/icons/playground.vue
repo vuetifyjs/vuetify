@@ -1,11 +1,35 @@
 <template>
-  <v-layout row wrap justify-space-around>
-    <v-select v-model="icon" :items="icons"></v-select>
-    <v-select v-model="color" :items="colors"></v-select>
-    <v-layout class="fw" justify-center>
-      <v-icon :color="color">{{ icon }}</v-icon>
+  <v-container grid-list-xl>
+    <v-layout
+      wrap
+      justify-space-around
+    >
+      <v-flex
+        xs12
+        md6
+      >
+        <v-select
+          v-model="icon"
+          :items="icons"
+        ></v-select>
+      </v-flex>
+      <v-flex
+        xs12
+        md6
+      >
+        <v-select
+          v-model="color"
+          :items="colors"
+        ></v-select>
+      </v-flex>
+      <v-flex
+        xs12
+        text-xs-center
+      >
+        <v-icon :color="color">{{ icon }}</v-icon>
+      </v-flex>
     </v-layout>
-  </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -32,12 +56,6 @@
     })
   }
 </script>
-
-<style scoped>
-.v-select, .fw {
-  min-width: 100%;
-}
-</style>
 
 <codepen-resources lang="json">
   {
