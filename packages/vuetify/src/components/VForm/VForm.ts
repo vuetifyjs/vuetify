@@ -127,7 +127,9 @@ export default RegistrableProvide('form').extend({
         novalidate: true,
         ...this.$attrs
       },
-      on: this.$listeners
+      on: {
+        submit: (e: Event) => this.$emit('submit', e)
+      }
     }, this.$slots.default)
   }
 })

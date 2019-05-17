@@ -278,13 +278,15 @@ describe('VIcon', () => {
       expect(wrapper.element.classList).toContain('v-icon--right')
     })
 
-    it('should be a link', () => {
+    it('should be an accessible link', () => {
       const clickHandler = jest.fn()
       const wrapper = mountFunction({ on: { click: clickHandler } }, '$vuetify.icons.testIcon')
       wrapper.trigger('click')
 
       expect(wrapper.element.classList).toContain('v-icon--link')
       expect(clickHandler).toHaveBeenCalled()
+      expect(wrapper.element.getAttribute('aria-hidden')).toBeFalsy()
+      expect(wrapper.element.getAttribute('role')).toBe('button')
     })
 
     it('should trim name', () => {

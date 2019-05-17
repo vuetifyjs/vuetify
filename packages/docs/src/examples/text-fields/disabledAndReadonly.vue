@@ -41,7 +41,7 @@
           <v-text-field
             value="John Doe"
             label="Box"
-            box
+            filled
             disabled
           ></v-text-field>
         </v-flex>
@@ -50,7 +50,7 @@
           <v-text-field
             value="John Doe"
             label="Box"
-            box
+            filled
             readonly
           ></v-text-field>
         </v-flex>
