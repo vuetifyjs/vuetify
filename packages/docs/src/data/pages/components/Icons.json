@@ -29,14 +29,23 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "md",
-            "fontAwesome",
-            "color",
-            "buttons",
-            "clickable",
-            "mdiSvg"
+            "simple/md",
+            "simple/fontAwesome",
+            "simple/color",
+            "intermediate/buttons",
+            "intermediate/clickable",
+            "complex/mdiSvg"
           ]
         }
       ]

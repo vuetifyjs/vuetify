@@ -370,7 +370,7 @@ export function groupByProperty (xs: any[], key: string): Record<string, any[]> 
   }, {})
 }
 
-export function wrapInArray<T> (v: T | T[]): T[] { return Array.isArray(v) ? v : [v] }
+export function wrapInArray<T> (v: T | T[] | null | undefined): T[] { return v != null ? Array.isArray(v) ? v : [v] : [] }
 
 export type compareFn<T = any> = (a: T, b: T) => number
 
