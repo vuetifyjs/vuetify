@@ -116,6 +116,7 @@ describe('VSlideGroup.ts', () => {
     expect(wrapper.vm.computeCenteredOffset(960, 20)).toBe(0)
   })
 
+  // TODO: Unsure what we're actually testing, willChange not found in jest 24
   it.skip('should call on touch methods', async () => {
     const wrapper = mountFunction({
       data: () => ({
