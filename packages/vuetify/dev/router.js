@@ -3,6 +3,9 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
+const rootComponent = {
+  template: `<div class="title">Root page</div>`
+}
 const component1 = {
   template: `<div class="title">Page 1</div>`
 }
@@ -12,6 +15,11 @@ const component2 = {
 
 const router = new Router({
   routes: [
+    {
+      path: '/',
+      name: 'root',
+      component: rootComponent
+    },
     {
       path: '/page1',
       name: 'Page 1',

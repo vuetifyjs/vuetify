@@ -1,9 +1,11 @@
-function createMessage (message: string, vm?: any, parent?: any): string | void {
+import Vue, { Component } from 'vue'
+
+const createMessage = ((message: string, vm?: any, parent?: any) => {
   if (parent) {
     vm = {
       _isVue: true,
       $parent: parent,
-      $options: vm
+      $options: vm && (vm.options || vm)
     }
   }
 
@@ -17,19 +19,19 @@ function createMessage (message: string, vm?: any, parent?: any): string | void 
   return `[Vuetify] ${message}` + (
     vm ? generateComponentTrace(vm) : ''
   )
-}
+}) as (message: string, vm?: Component | Vue, parent?: Vue) => string | void
 
-export function consoleInfo (message: string, vm?: any, parent?: any): void {
+export function consoleInfo (message: string, vm?: Component | Vue, parent?: Vue): void {
   const newMessage = createMessage(message, vm, parent)
   newMessage != null && console.info(newMessage)
 }
 
-export function consoleWarn (message: string, vm?: any, parent?: any): void {
+export function consoleWarn (message: string, vm?: Component | Vue, parent?: Vue): void {
   const newMessage = createMessage(message, vm, parent)
   newMessage != null && console.warn(newMessage)
 }
 
-export function consoleError (message: string, vm?: any, parent?: any): void {
+export function consoleError (message: string, vm?: Component | Vue, parent?: Vue): void {
   const newMessage = createMessage(message, vm, parent)
   newMessage != null && console.error(newMessage)
 }

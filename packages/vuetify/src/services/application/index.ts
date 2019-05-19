@@ -3,6 +3,7 @@ import { Service } from '../service'
 
 // Types
 import { TargetPropValues, TargetProp } from 'vuetify/types/services/application'
+import { VTabs } from '../../components'
 
 export class Application extends Service {
   static property = 'application'
@@ -24,6 +25,8 @@ export class Application extends Service {
     bottom: {},
     footer: {}
   }
+
+  _tabs?: InstanceType<typeof VTabs>
 
   register (
     uid: number,

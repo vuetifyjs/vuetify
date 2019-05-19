@@ -14,6 +14,7 @@ import {
 } from 'vue/types/options'
 import { MetaInfo } from 'vue-meta/types'
 import { TouchStoredHandlers } from './directives/touch'
+import { VTabs } from './components'
 
 declare global {
   interface Window {
@@ -89,6 +90,7 @@ declare module 'vue/types/vue' {
   export interface Vue {
     _uid: number
     _isDestroyed: boolean
+    _isMounted: boolean
 
     /** bindObjectProps */
     _b (
@@ -133,5 +135,11 @@ declare module 'vue/types/vue' {
     extend<Options, PropNames extends string = never> (definition: FunctionalComponentOptions<Record<PropNames, any>, PropNames[]> & Options): OptionsVue<V, {}, {}, {}, Record<PropNames, any>, Options>
     extend<Props, Options> (definition: FunctionalComponentOptions<Props, RecordPropsDefinition<Props>> & Options): OptionsVue<V, {}, {}, {}, Props, Options>
     extend<V extends Vue = Vue> (options?: ComponentOptions<V> & Options): OptionsVue<V, {}, {}, {}, {}, Options>
+  }
+}
+
+declare module 'vue-router/types/router' {
+  interface VueRouter {
+    match (raw: string | Location, current?: Route, redirectedFrom?: Route): Route
   }
 }

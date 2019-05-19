@@ -45,6 +45,7 @@ export default baseMixins.extend<options>().extend({
       default: 'v-tab--active'
     },
     alignWithTitle: Boolean,
+    app: Boolean,
     backgroundColor: String,
     centered: Boolean,
     color: {
@@ -134,10 +135,22 @@ export default baseMixins.extend<options>().extend({
     '$vuetify.rtl': 'onResize'
   },
 
+  created () {
+    if (this.app) {
+      this.$vuetify.application._tabs = this
+    }
+  },
+
   mounted () {
     this.$nextTick(() => {
       window.setTimeout(this.callSlider, 30)
     })
+  },
+
+  destroyed () {
+    if (this.$vuetify.application._tabs === this) {
+      this.$vuetify.application._tabs = undefined
+    }
   },
 
   methods: {
