@@ -113,7 +113,7 @@ describe('VSlideGroup.ts', () => {
     expect(wrapper.vm.computeCenteredOffset(10, 20)).toBe(-500)
     expect(wrapper.vm.computeCenteredOffset(400, 20)).toBe(-340)
     expect(wrapper.vm.computeCenteredOffset(600, 20)).toBe(-140)
-    expect(wrapper.vm.computeCenteredOffset(960, 20)).toBe(0)
+    expect(wrapper.vm.computeCenteredOffset(960, 20)).toBe(-0)
   })
 
   // TODO: Unsure what we're actually testing, willChange not found in jest 24
