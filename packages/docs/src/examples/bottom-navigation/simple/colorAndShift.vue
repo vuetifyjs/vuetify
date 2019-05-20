@@ -6,7 +6,7 @@
     tile
   >
     <v-bottom-navigation
-      :active.sync="bottomNav"
+      v-model="bottomNav"
       :color="color"
       absolute
       dark

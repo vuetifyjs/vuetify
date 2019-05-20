@@ -9,7 +9,7 @@
       Active: {{ bottomNav }}
     </div>
     <v-bottom-navigation
-      :active.sync="bottomNav"
+      v-model="bottomNav"
       absolute
       color="white"
       grow
