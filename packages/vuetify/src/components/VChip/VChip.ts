@@ -172,7 +172,8 @@ export default mixins(
 
     data.attrs = {
       ...data.attrs,
-      draggable: this.draggable ? 'true' : undefined
+      draggable: this.draggable ? 'true' : undefined,
+      tabindex: this.chipGroup && !this.disabled ? 0 : data.attrs!.tabindex
     }
     data = this.setBackgroundColor(this.color, data)
 

@@ -15,5 +15,10 @@ export default BaseItemGroup.extend({
     classes (): object {
       return BaseItemGroup.options.computed.classes.call(this)
     }
+  },
+
+  methods: {
+    // Isn't being passed down through types
+    genData: BaseItemGroup.options.methods.genData
   }
 })

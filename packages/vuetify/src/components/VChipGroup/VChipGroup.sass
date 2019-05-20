@@ -5,13 +5,15 @@
   .v-chip
     margin: $chip-group-margin
 
-  .v-chip--selected
+  .v-chip--active
+    color: inherit
+
     &.v-chip--no-color
       &:after
-        opacity: .08
+        opacity: .22
 
       &:focus:after
-        opacity: .16
+        opacity: .32
 
 // Element
 .v-chip-group .v-slide-group__content

@@ -9,6 +9,7 @@ import VListItemIcon from './VListItemIcon'
 
 // Mixins
 import Bootable from '../../mixins/bootable'
+import Colorable from '../../mixins/colorable'
 import Toggleable from '../../mixins/toggleable'
 import { inject as RegistrableInject } from '../../mixins/registrable'
 
@@ -28,6 +29,7 @@ import { Route } from 'vue-router'
 
 const baseMixins = mixins(
   Bootable,
+  Colorable,
   RegistrableInject('list'),
   Toggleable
 )
@@ -48,13 +50,14 @@ export default baseMixins.extend<options>().extend({
   directives: { Ripple },
 
   props: {
-    activeClass: {
-      type: String,
-      default: 'primary--text'
-    },
+    activeClass: String,
     appendIcon: {
       type: String,
       default: '$vuetify.icons.expand'
+    },
+    color: {
+      type: String,
+      default: 'primary'
     },
     disabled: Boolean,
     group: String,
@@ -126,7 +129,7 @@ export default baseMixins.extend<options>().extend({
       ])
     },
     genHeader (): VNode {
-      return this.$createElement(VListItem, {
+      return this.$createElement(VListItem, this.setTextColor(this.isActive && this.color, {
         staticClass: 'v-list-group__header',
         class: {
           [this.activeClass]: this.isActive
@@ -143,7 +146,7 @@ export default baseMixins.extend<options>().extend({
             if (e.keyCode === keyCodes.enter) this.click()
           }
         }
-      }, [
+      }), [
         this.genPrependIcon(),
         this.$slots.activator,
         this.genAppendIcon()
@@ -200,10 +203,10 @@ export default baseMixins.extend<options>().extend({
   },
 
   render (h): VNode {
-    return h('div', {
+    return h('div', this.setTextColor(this.isActive && this.color, {
       staticClass: 'v-list-group',
       class: this.classes
-    }, [
+    }), [
       this.genHeader(),
       h(VExpandTransition, [this.genItems()])
     ])
