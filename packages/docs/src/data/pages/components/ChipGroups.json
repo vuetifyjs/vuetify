@@ -32,11 +32,23 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "toothbrush",
-            "filterResults",
-            "blouse"
+            "simple/column",
+            "simple/mandatory",
+            "simple/multiple",
+            "intermediate/toothbrush",
+            "intermediate/blouse",
+            "complex/filterResults"
           ]
         }
       ]

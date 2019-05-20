@@ -3,6 +3,7 @@ import mixins from '../../util/mixins'
 import VSelect from '../VSelect/VSelect'
 import VChip from '../VChip'
 import header from './mixins/header'
+import { wrapInArray } from '../../util/helpers'
 
 export default mixins(header).extend({
   name: 'v-data-table-header-mobile',
@@ -31,8 +32,6 @@ export default mixins(header).extend({
           click: (e: MouseEvent) => {
             e.stopPropagation()
             this.$emit('sort', props.item.value)
-            // this.dataTable.resetExpanded()
-            // this.dataTable.sort(props.item.value)
           }
         }
       }, children)
@@ -41,7 +40,7 @@ export default mixins(header).extend({
       return this.$createElement(VSelect, {
         props: {
           label: 'Sort by',
-          items: this.headers.filter(h => h.value !== 'dataTableSelect'),
+          items: this.headers.filter(h => h.value !== 'data-table-select'),
           hideDetails: true,
           multiple: this.options.multiSort,
           value: this.options.multiSort ? this.options.sortBy : this.options.sortBy[0]
@@ -59,8 +58,17 @@ export default mixins(header).extend({
   render (h): VNode {
     const children: VNodeChildrenArrayContents = []
 
-    if (this.headers.find(header => header.value === 'dataTableSelect')) {
-      children.push(this.genSelectAll())
+    const header = this.headers.find(h => h.value === 'data-table-select')
+    if (header) {
+      children.push(this.$createElement('div', {
+        class: [
+          'v-data-table-header-mobile__select',
+          ...wrapInArray(header.class)
+        ],
+        attrs: {
+          width: header.width
+        }
+      }, [this.genSelectAll()]))
     }
 
     children.push(this.genSortSelect())

@@ -56,7 +56,6 @@ describe('VDataFooter.ts', () => {
       }
     })
 
-    expect(wrapper.vm.isCustomItemsPerPage).toBeTruthy()
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -65,7 +64,7 @@ describe('VDataFooter.ts', () => {
       propsData: {
         options: {
           page: 4,
-          itemsPerPage: 10
+          itemsPerPage: 100
         },
         pagination: {
           page: 4,
@@ -78,7 +77,6 @@ describe('VDataFooter.ts', () => {
       }
     })
 
-    expect(wrapper.vm.isCustomItemsPerPage).toBeFalsy()
     expect(wrapper.html()).toMatchSnapshot()
   })
 
