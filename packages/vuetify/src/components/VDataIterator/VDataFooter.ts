@@ -62,29 +62,25 @@ export default Vue.extend({
         this.options.page * this.options.itemsPerPage >= this.pagination.itemsLength ||
         this.pagination.pageStop < 0
     },
-    isCustomItemsPerPage (): boolean {
-      for (let i = 0; i < this.itemsPerPageOptions.length; i++) {
-        if (this.options.itemsPerPage === this.itemsPerPageOptions[i]) return false
-      }
-
-      return true
-    },
     computedItemsPerPageOptions (): any[] {
-      const itemsPerPageOptions = this.itemsPerPageOptions.slice()
+      const itemsPerPageOptions = this.itemsPerPageOptions.map(option => {
+        if (typeof option === 'object') return option
+        else return this.genItemsPerPageOption(option)
+      })
 
-      if (this.isCustomItemsPerPage) {
-        itemsPerPageOptions.push(this.options.itemsPerPage)
+      const customItemsPerPage = !itemsPerPageOptions.find(option => option.value === this.options.itemsPerPage)
+
+      if (customItemsPerPage) {
+        itemsPerPageOptions.push(this.genItemsPerPageOption(this.options.itemsPerPage))
 
         itemsPerPageOptions.sort((a, b) => {
-          if (a === -1) return 1
-          else if (b === -1) return -1
-          else return a - b
+          if (a.value === -1) return 1
+          else if (b.value === -1) return -1
+          else return a.value - b.value
         })
       }
 
-      return itemsPerPageOptions.map(value => ({
-        text: value === -1 ? this.$vuetify.lang.t(this.itemsPerPageAllText) : String(value), value
-      }))
+      return itemsPerPageOptions
     }
   },
 
@@ -106,6 +102,12 @@ export default Vue.extend({
     },
     onChangeItemsPerPage (itemsPerPage: number) {
       this.updateOptions({ itemsPerPage, page: 1 })
+    },
+    genItemsPerPageOption (option: number) {
+      return {
+        text: option === -1 ? this.$vuetify.lang.t(this.itemsPerPageAllText) : String(option),
+        value: option
+      }
     },
     genItemsPerPageSelect () {
       return this.$createElement('div', {

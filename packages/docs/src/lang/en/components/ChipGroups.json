@@ -17,6 +17,18 @@
     "blouse": {
       "header": "### Blouse product card",
       "desc": "The `v-chip` component can have an explicit value used for its model. This gets passed to the `v-chip-group` component and is useful for when you don't want to use the chips index as their values."
+    },
+    "column": {
+      "header": "### Column",
+      "desc": "Chip groups with `column` prop can wrap their chips."
+    },
+    "mandatory": {
+      "header": "### Mandatory",
+      "desc": "Chip groups with `mandatory` prop must always have a value selected."
+    },
+    "multiple": {
+      "header": "### Multiple",
+      "desc": "Chip groups with `multiple` prop can have many values selected."
     }
   },
   "props": {

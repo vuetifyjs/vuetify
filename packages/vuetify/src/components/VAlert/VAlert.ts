@@ -74,11 +74,6 @@ export default mixins(
     }
   },
 
-  created () {
-    /* istanbul ignore if */
-    if (this.outline) deprecate('outline', 'outlined')
-  },
-
   computed: {
     __cachedBorder (): VNode | null {
       if (!this.border) return null
@@ -133,7 +128,7 @@ export default mixins(
         ...VSheet.options.computed.classes.call(this),
         'v-alert--border': Boolean(this.border),
         'v-alert--dense': this.dense,
-        'v-alert--outline': this.hasOutline,
+        'v-alert--outlined': this.hasOutline,
         'v-alert--prominent': this.prominent,
         'v-alert--text': this.text
       }
@@ -184,6 +179,11 @@ export default mixins(
 
       return Themeable.options.computed.isDark.call(this)
     }
+  },
+
+  created () {
+    /* istanbul ignore if */
+    if (this.outline) deprecate('outline', 'outlined')
   },
 
   methods: {

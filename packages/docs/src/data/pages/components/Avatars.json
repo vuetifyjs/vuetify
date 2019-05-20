@@ -25,6 +25,15 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
             "simple/size",
@@ -33,15 +42,6 @@
             "intermediate/profile",
             "complex/advanced"
           ]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "playground",
-          "value": "playground"
         }
       ]
     },

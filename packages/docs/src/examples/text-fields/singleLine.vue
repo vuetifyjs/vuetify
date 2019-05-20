@@ -22,7 +22,7 @@
           <v-text-field
             label="Box"
             single-line
-            box
+            filled
           ></v-text-field>
         </v-flex>
 
