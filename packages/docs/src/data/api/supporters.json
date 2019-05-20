@@ -1,13 +1,4 @@
 {
-  "special": [
-    {
-      "type": "Sponsor",
-      "name": "Segment",
-      "href": "https://segment.com/?utm_source=devflight&utm_medium=sponsorship",
-      "logo": "backers/segment.png",
-      "pledge": "Premiere Sponsor"
-    }
-  ],
   "diamond": [
     {
       "type": "Patron",
