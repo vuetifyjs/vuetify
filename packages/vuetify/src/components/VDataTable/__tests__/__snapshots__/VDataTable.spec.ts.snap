@@ -850,8 +850,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
       </button>
     </div>
     <div class="v-data-footer__icons-after">
-      <button tabindex="0"
-              type="button"
+      <button type="button"
               class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
@@ -1031,8 +1030,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
       </button>
     </div>
     <div class="v-data-footer__icons-after">
-      <button tabindex="0"
-              type="button"
+      <button type="button"
               class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
@@ -1311,8 +1309,7 @@ exports[`VDataTable.ts should render with data 1`] = `
       </button>
     </div>
     <div class="v-data-footer__icons-after">
-      <button tabindex="0"
-              type="button"
+      <button type="button"
               class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
@@ -1487,8 +1484,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
       </button>
     </div>
     <div class="v-data-footer__icons-after">
-      <button tabindex="0"
-              type="button"
+      <button type="button"
               class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
@@ -1767,8 +1763,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
       </button>
     </div>
     <div class="v-data-footer__icons-after">
-      <button tabindex="0"
-              type="button"
+      <button type="button"
               class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
@@ -1877,8 +1872,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
           <td colspan="5"
               class="text-xs-left"
           >
-            <button tabindex="0"
-                    type="button"
+            <button type="button"
                     class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
@@ -1890,8 +1884,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               </span>
             </button>
             protein: 0
-            <button tabindex="0"
-                    type="button"
+            <button type="button"
                     class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
@@ -1942,8 +1935,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
           <td colspan="5"
               class="text-xs-left"
           >
-            <button tabindex="0"
-                    type="button"
+            <button type="button"
                     class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
@@ -1955,8 +1947,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               </span>
             </button>
             protein: 4
-            <button tabindex="0"
-                    type="button"
+            <button type="button"
                     class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
@@ -1990,8 +1981,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
           <td colspan="5"
               class="text-xs-left"
           >
-            <button tabindex="0"
-                    type="button"
+            <button type="button"
                     class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
@@ -2003,8 +1993,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               </span>
             </button>
             protein: 3.9
-            <button tabindex="0"
-                    type="button"
+            <button type="button"
                     class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
@@ -2038,8 +2027,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
           <td colspan="5"
               class="text-xs-left"
           >
-            <button tabindex="0"
-                    type="button"
+            <button type="button"
                     class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
@@ -2051,8 +2039,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               </span>
             </button>
             protein: 4.3
-            <button tabindex="0"
-                    type="button"
+            <button type="button"
                     class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
@@ -2140,8 +2127,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
       </button>
     </div>
     <div class="v-data-footer__icons-after">
-      <button tabindex="0"
-              type="button"
+      <button type="button"
               class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
@@ -2335,8 +2321,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
       </button>
     </div>
     <div class="v-data-footer__icons-after">
-      <button tabindex="0"
-              type="button"
+      <button type="button"
               class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
@@ -2615,8 +2600,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
       </button>
     </div>
     <div class="v-data-footer__icons-after">
-      <button tabindex="0"
-              type="button"
+      <button type="button"
               class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
@@ -2943,8 +2927,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
       </button>
     </div>
     <div class="v-data-footer__icons-after">
-      <button tabindex="0"
-              type="button"
+      <button type="button"
               class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
@@ -3271,8 +3254,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
       </button>
     </div>
     <div class="v-data-footer__icons-after">
-      <button tabindex="0"
-              type="button"
+      <button type="button"
               class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
@@ -3626,8 +3608,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
       </button>
     </div>
     <div class="v-data-footer__icons-after">
-      <button tabindex="0"
-              type="button"
+      <button type="button"
               class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >

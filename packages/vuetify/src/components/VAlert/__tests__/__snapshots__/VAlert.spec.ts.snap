@@ -8,8 +8,7 @@ exports[`VAlert.ts should be dismissible 1`] = `
   <div class="v-alert__wrapper">
     <div class="v-alert__content">
     </div>
-    <button tabindex="0"
-            type="button"
+    <button type="button"
             class="v-alert__dismissible v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
             aria-label="$vuetify.close"
     >
@@ -56,8 +55,7 @@ exports[`VAlert.ts should have a close icon 1`] = `
   <div class="v-alert__wrapper">
     <div class="v-alert__content">
     </div>
-    <button tabindex="0"
-            type="button"
+    <button type="button"
             class="v-alert__dismissible v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
             aria-label="$vuetify.close"
     >

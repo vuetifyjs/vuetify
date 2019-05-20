@@ -74,7 +74,7 @@ export default Vue.extend({
       const data: VNodeData = {
         attrs: {
           disabled: this.disabled,
-          tabindex: this.isClickable ? (this.$attrs.tabindex || 0) : undefined
+          tabindex: 'tabindex' in this.$attrs ? this.$attrs.tabindex : undefined
         },
         class: classes,
         style: styles,
