@@ -79,8 +79,7 @@ export default baseMixins.extend<options>().extend({
     classes (): any {
       return {
         'v-btn': true,
-        [this.activeClass]: this.isActive,
-        [this.proxyClass]: this.isActive,
+        ...Routable.options.computed.classes.call(this),
         'v-btn--absolute': this.absolute,
         'v-btn--block': this.block,
         'v-btn--bottom': this.bottom,
@@ -189,7 +188,7 @@ export default baseMixins.extend<options>().extend({
       this.loading && this.genLoader()
     ]
     const setColor = !this.isFlat ? this.setBackgroundColor : this.setTextColor
-    const { tag, data } = this.generateRouteLink(this.classes, this.styles)
+    const { tag, data } = this.generateRouteLink()
 
     if (tag === 'button') data.attrs!.type = this.type
 

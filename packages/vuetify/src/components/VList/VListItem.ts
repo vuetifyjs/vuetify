@@ -72,8 +72,7 @@ export default baseMixins.extend<options>().extend({
     classes (): object {
       return {
         'v-list-item': true,
-        [this.activeClass]: this.isActive,
-        [this.proxyClass]: this.isActive,
+        ...Routable.options.computed.classes.call(this),
         'v-list-item--dense': this.dense,
         'v-list-item--disabled': this.disabled,
         'v-list-item--link': this.isClickable && !this.inactive,
@@ -109,7 +108,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   render (h): VNode {
-    let { tag, data } = this.generateRouteLink(this.classes)
+    let { tag, data } = this.generateRouteLink()
 
     data.attrs = {
       ...data.attrs,

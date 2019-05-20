@@ -39,6 +39,7 @@ export default mixins(
     classes (): object {
       return {
         'v-card': true,
+        ...Routable.options.computed.classes.call(this),
         'v-card--flat': this.flat,
         'v-card--hover': this.hover,
         'v-card--link': this.isClickable,
@@ -75,7 +76,7 @@ export default mixins(
   },
 
   render (h): VNode {
-    const { tag, data } = this.generateRouteLink(this.classes)
+    const { tag, data } = this.generateRouteLink()
 
     data.style = this.styles
 

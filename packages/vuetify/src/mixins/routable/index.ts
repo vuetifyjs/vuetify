@@ -37,10 +37,17 @@ export default Vue.extend({
   },
 
   data: () => ({
+    isActive: false,
     proxyClass: ''
   }),
 
   computed: {
+    classes (): object {
+      return {
+        [this.activeClass]: this.isActive,
+        [this.proxyClass]: this.isActive
+      }
+    },
     computedRipple (): RippleOptions | boolean {
       return this.ripple != null ? this.ripple : !this.disabled && this.isClickable
     },
@@ -56,6 +63,9 @@ export default Vue.extend({
     },
     isLink (): boolean {
       return this.to || this.href || this.link
+    },
+    styles (): object {
+      return {}
     }
   },
 
@@ -67,7 +77,7 @@ export default Vue.extend({
     click (e: MouseEvent): void {
       this.$emit('click', e)
     },
-    generateRouteLink (classes: object, styles: object = {}) {
+    generateRouteLink () {
       let exact = this.exact
       let tag
 
@@ -76,8 +86,8 @@ export default Vue.extend({
           disabled: this.disabled,
           tabindex: 'tabindex' in this.$attrs ? this.$attrs.tabindex : undefined
         },
-        class: classes,
-        style: styles,
+        class: this.classes,
+        style: this.styles,
         props: {},
         directives: [{
           name: 'ripple',

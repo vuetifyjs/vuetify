@@ -83,8 +83,7 @@ export default mixins(
     classes (): object {
       return {
         'v-chip': true,
-        [this.activeClass]: this.isActive,
-        [this.proxyClass]: this.isActive,
+        ...Routable.options.computed.classes.call(this),
         'v-chip--clickable': this.isClickable,
         'v-chip--disabled': this.disabled,
         'v-chip--draggable': this.draggable,
@@ -169,7 +168,7 @@ export default mixins(
 
   render (h): VNode {
     const children = [this.genContent()]
-    let { tag, data } = this.generateRouteLink(this.classes)
+    let { tag, data } = this.generateRouteLink()
 
     data.attrs = {
       ...data.attrs,
