@@ -2640,6 +2640,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               scope="col"
               aria-label
               aria-sort="none"
+              width="1px"
               class="text-xs-left"
           >
             <span>
@@ -2966,6 +2967,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               scope="col"
               aria-label
               aria-sort="none"
+              width="1px"
               class="text-xs-left"
           >
             <span>
@@ -3292,6 +3294,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               scope="col"
               aria-label
               aria-sort="none"
+              width="1px"
               class="text-xs-left"
           >
             <div class="v-data-table__checkbox v-simple-checkbox">

@@ -61,6 +61,9 @@
   &:focus:before
     opacity: $tabs-item-focus-opacity
 
+  &:not(.v-tab-disabled)
+    cursor: pointer
+
 .v-tabs-slider
   background-color: currentColor
   height: $tabs-slider-height

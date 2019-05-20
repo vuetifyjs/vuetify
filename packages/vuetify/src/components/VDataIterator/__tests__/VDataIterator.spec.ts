@@ -241,4 +241,27 @@ describe('VDataIterator.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should emit selection when toggling all', async () => {
+    const fn = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        itemKey: 'id',
+        items: [
+          { id: 'a' },
+          { id: 'b' },
+          { id: 'c' }
+        ]
+      },
+      listeners: {
+        'input': fn
+      }
+    })
+
+    wrapper.vm.toggleSelectAll(true)
+
+    await wrapper.vm.$nextTick()
+
+    expect(fn).toHaveBeenCalled()
+  })
 })
