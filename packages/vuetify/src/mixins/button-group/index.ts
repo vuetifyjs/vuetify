@@ -11,13 +11,6 @@ export default BaseItemGroup.extend({
     }
   },
 
-  props: {
-    activeClass: {
-      type: String,
-      default: 'v-btn--active'
-    }
-  },
-
   computed: {
     classes (): object {
       return BaseItemGroup.options.computed.classes.call(this)

@@ -9,10 +9,6 @@ export default ButtonGroup.extend({
   name: 'v-btn-toggle',
 
   props: {
-    activeClass: {
-      type: String,
-      default: 'v-btn--active'
-    },
     rounded: Boolean
   },
 

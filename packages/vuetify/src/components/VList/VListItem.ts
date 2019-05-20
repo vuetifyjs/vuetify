@@ -6,10 +6,10 @@ import Colorable from '../../mixins/colorable'
 import Routable from '../../mixins/routable'
 import { factory as GroupableFactory } from '../../mixins/groupable'
 import Themeable from '../../mixins/themeable'
-import Toggleable from '../../mixins/toggleable'
+import { factory as ToggleableFactory } from '../../mixins/toggleable'
 
 // Directives
-import Ripple, { RippleOptions } from '../../directives/ripple'
+import Ripple from '../../directives/ripple'
 
 // Utilities
 import { keyCodes } from './../../util/helpers'
@@ -23,10 +23,10 @@ import { removed } from '../../util/console'
 
 const baseMixins = mixins(
   Colorable,
-  GroupableFactory('listItemGroup'),
   Routable,
   Themeable,
-  Toggleable
+  GroupableFactory('listItemGroup'),
+  ToggleableFactory('inputValue')
 )
 
 interface options extends ExtractVue<typeof baseMixins> {
@@ -55,13 +55,13 @@ export default baseMixins.extend<options>().extend({
     dense: Boolean,
     inactive: Boolean,
     link: Boolean,
-    ripple: {
-      type: [Boolean, Object],
-      default: null
+    tag: {
+      type: String,
+      default: 'div'
     },
     threeLine: Boolean,
     twoLine: Boolean,
-    value: { default: null }
+    value: null as any as PropValidator<any>
   },
 
   data: () => ({
@@ -72,29 +72,21 @@ export default baseMixins.extend<options>().extend({
     classes (): object {
       return {
         'v-list-item': true,
-        'v-list-item--active': this.isActive,
+        [this.activeClass]: this.isActive,
+        [this.proxyClass]: this.isActive,
         'v-list-item--dense': this.dense,
         'v-list-item--disabled': this.disabled,
-        'v-list-item--link': this.isLink && !this.inactive,
+        'v-list-item--link': this.isClickable && !this.inactive,
         'v-list-item--three-line': this.threeLine,
         'v-list-item--two-line': this.twoLine,
         ...this.themeClasses,
         [this.activeClass]: this.isActive
       }
     },
-    computedRipple (): RippleOptions | boolean {
-      if (this.disabled) return false
-      return this.ripple !== null ? this.ripple : this.isLink
-    },
-    isLink (): boolean {
-      const hasClick = this.$listeners && (this.$listeners.click || this.$listeners['!click'])
-
+    isClickable (): boolean {
       return Boolean(
-        this.href ||
-        this.to ||
-        this.listItemGroup ||
-        this.link ||
-        hasClick
+        Routable.options.computed.isClickable.call(this) ||
+        this.listItemGroup
       )
     }
   },
@@ -117,19 +109,13 @@ export default baseMixins.extend<options>().extend({
   },
 
   render (h): VNode {
-    const isRouteLink = !this.inactive && this.isLink
-    const { tag, data } = isRouteLink ? this.generateRouteLink(this.classes) : {
-      tag: this.tag || 'div',
-      data: {
-        class: this.classes
-      }
-    }
+    let { tag, data } = this.generateRouteLink(this.classes)
 
     data.attrs = {
       ...data.attrs,
       'aria-selected': String(this.isActive),
       role: 'listitem',
-      tabindex: tag === 'a' ? 0 : -1
+      tabindex: tag === 'a' && this.isClickable ? 0 : -1
     }
     data.on = {
       ...data.on,
@@ -141,7 +127,6 @@ export default baseMixins.extend<options>().extend({
         this.$emit('keydown', e)
       }
     }
-    data.ref = 'link'
 
     const children = this.$scopedSlots.default
       ? this.$scopedSlots.default({
@@ -149,6 +134,8 @@ export default baseMixins.extend<options>().extend({
         toggle: this.toggle
       })
       : this.$slots.default
+
+    tag = this.inactive ? 'div' : tag
 
     return h(tag, this.setBackgroundColor(this.color, data), children)
   }

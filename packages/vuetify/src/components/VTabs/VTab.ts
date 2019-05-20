@@ -5,7 +5,6 @@ import Themeable from '../../mixins/themeable'
 
 // Utilities
 import { keyCodes } from './../../util/helpers'
-import { getObjectValueByPath } from '../../util/helpers'
 import mixins from '../../util/mixins'
 import { ExtractVue } from './../../util/mixins'
 
@@ -63,10 +62,6 @@ export default baseMixins.extend<options>().extend(
     }
   },
 
-  watch: {
-    $route: 'onRouteChange'
-  },
-
   mounted () {
     this.onRouteChange()
   },
@@ -85,17 +80,6 @@ export default baseMixins.extend<options>().extend(
       this.$emit('click', e)
 
       this.to || this.toggle()
-    },
-    onRouteChange () {
-      if (!this.to || !this.$refs.link) return
-
-      const path = `_vnode.data.class.${this.activeClass}`
-
-      this.$nextTick(() => {
-        if (getObjectValueByPath(this.$refs.link, path)) {
-          this.toggle()
-        }
-      })
     }
   },
 
@@ -116,7 +100,6 @@ export default baseMixins.extend<options>().extend(
         this.$emit('keydown', e)
       }
     }
-    data.ref = 'link'
 
     return h(tag, data, this.$slots.default)
   }

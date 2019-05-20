@@ -17,7 +17,7 @@ export default BaseSlideGroup.extend({
   props: {
     activeClass: {
       type: String,
-      default: 'grey lighten-1'
+      default: 'black--text'
     },
     choice: Boolean,
     column: Boolean,

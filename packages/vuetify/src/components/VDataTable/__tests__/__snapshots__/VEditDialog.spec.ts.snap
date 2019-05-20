@@ -16,14 +16,16 @@ exports[`VEditDialog.ts should render 1`] = `
 exports[`VEditDialog.ts should render actions 1`] = `
 
 <div class="v-small-dialog__actions">
-  <button type="button"
+  <button tabindex="0"
+          type="button"
           class="v-btn v-btn--flat v-btn--text theme--light v-size--default primary--text"
   >
     <span class="v-btn__content">
       Cancel
     </span>
   </button>
-  <button type="button"
+  <button tabindex="0"
+          type="button"
           class="v-btn v-btn--flat v-btn--text theme--light v-size--default primary--text"
   >
     <span class="v-btn__content">
@@ -36,7 +38,8 @@ exports[`VEditDialog.ts should render actions 1`] = `
 
 exports[`VEditDialog.ts should render button 1`] = `
 
-<button type="button"
+<button tabindex="0"
+        type="button"
         class="v-btn v-btn--flat v-btn--text theme--light v-size--default primary--text"
 >
   <span class="v-btn__content">

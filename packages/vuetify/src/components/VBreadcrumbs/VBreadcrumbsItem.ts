@@ -13,6 +13,10 @@ export default mixins(Routable).extend({
     activeClass: {
       type: String,
       default: 'v-breadcrumbs__item--disabled'
+    },
+    ripple: {
+      type: Boolean,
+      default: false
     }
   },
 

@@ -1,7 +1,11 @@
 import Vue, { VNodeData } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
+// Directives
 import Ripple, { RippleOptions } from '../../directives/ripple'
+
+// Utilities
+import { getObjectValueByPath } from '../../util/helpers'
 
 export default Vue.extend({
   name: 'routable',
@@ -19,19 +23,44 @@ export default Vue.extend({
       default: undefined
     } as PropValidator<boolean | undefined>,
     exactActiveClass: String,
+    link: Boolean,
     href: [String, Object],
     to: [String, Object],
     nuxt: Boolean,
     replace: Boolean,
-    ripple: [Boolean, Object],
+    ripple: {
+      type: [Boolean, Object],
+      default: null
+    },
     tag: String,
     target: String
   },
 
+  data: () => ({
+    proxyClass: ''
+  }),
+
   computed: {
     computedRipple (): RippleOptions | boolean {
-      return (this.ripple && !this.disabled) ? this.ripple : false
+      return this.ripple != null ? this.ripple : !this.disabled && this.isClickable
+    },
+    isClickable (): boolean {
+      if (this.disabled) return false
+
+      return Boolean(
+        this.isLink ||
+        this.$listeners.click ||
+        this.$listeners['!click'] ||
+        this.$attrs.tabindex
+      )
+    },
+    isLink (): boolean {
+      return this.to || this.href || this.link
     }
+  },
+
+  watch: {
+    $route: 'onRouteChange'
   },
 
   methods: {
@@ -43,7 +72,10 @@ export default Vue.extend({
       let tag
 
       const data: VNodeData = {
-        attrs: { disabled: this.disabled },
+        attrs: {
+          disabled: this.disabled,
+          tabindex: this.isClickable ? (this.$attrs.tabindex || 0) : undefined
+        },
         class: classes,
         style: styles,
         props: {},
@@ -54,7 +86,8 @@ export default Vue.extend({
         [this.to ? 'nativeOn' : 'on']: {
           ...this.$listeners,
           click: this.click
-        }
+        },
+        ref: 'link'
       }
 
       if (typeof this.exact === 'undefined') {
@@ -68,10 +101,9 @@ export default Vue.extend({
         let activeClass = this.activeClass
         let exactActiveClass = this.exactActiveClass || activeClass
 
-        // TODO: apply only in VListTile
-        if ((this as any).proxyClass) {
-          activeClass += ' ' + (this as any).proxyClass
-          exactActiveClass += ' ' + (this as any).proxyClass
+        if (this.proxyClass) {
+          activeClass = `${activeClass} ${this.proxyClass}`.trim()
+          exactActiveClass = `${exactActiveClass} ${this.proxyClass}`.trim()
         }
 
         tag = this.nuxt ? 'nuxt-link' : 'router-link'
@@ -92,6 +124,20 @@ export default Vue.extend({
       if (this.target) data.attrs!.target = this.target
 
       return { tag, data }
-    }
+    },
+    onRouteChange () {
+      if (!this.to || !this.$refs.link) return
+      const activeClass = `${this.activeClass} ${this.proxyClass || ''}`.trim()
+
+      const path = `_vnode.data.class.${activeClass}`
+
+      this.$nextTick(() => {
+        /* istanbul ignore else */
+        if (getObjectValueByPath(this.$refs.link, path)) {
+          this.toggle()
+        }
+      })
+    },
+    toggle: () => { /* noop */ }
   }
 })

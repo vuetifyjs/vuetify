@@ -2,7 +2,8 @@
 
 exports[`VBtn.ts should render an <a> tag when using href prop 1`] = `
 
-<a href="http://www.google.com"
+<a tabindex="0"
+   href="http://www.google.com"
    class="v-btn v-btn--contained theme--light v-size--default"
 >
   <span class="v-btn__content">
