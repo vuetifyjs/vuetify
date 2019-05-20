@@ -7,7 +7,7 @@
     <v-card-text class="text-xs-center">
       <v-btn
         text
-        color="primary"
+        color="deep-purple accent-4"
         @click="showNav = !showNav"
       >
         Toggle Nav
@@ -18,20 +18,21 @@
       :input-value="showNav"
       :value="activeBtn"
       absolute
-      color="white"
+      color="deep-purple accent-4"
+      dark
       horizontal
     >
-      <v-btn text color="teal">
+      <v-btn>
         <span>Recents</span>
         <v-icon>history</v-icon>
       </v-btn>
 
-      <v-btn text color="teal">
+      <v-btn>
         <span>Favorites</span>
         <v-icon>favorite</v-icon>
       </v-btn>
 
-      <v-btn text color="teal">
+      <v-btn>
         <span>Nearby</span>
         <v-icon>place</v-icon>
       </v-btn>

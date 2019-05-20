@@ -7,7 +7,7 @@
     <v-card-text class="text-xs-center">
       <v-btn
         text
-        color="primary"
+        color="teal"
         @click="grow = !grow"
       >
         Grow
@@ -17,7 +17,6 @@
     <v-bottom-navigation
       :grow="grow"
       absolute
-      color="white"
       horizontal
     >
       <v-btn text color="teal">

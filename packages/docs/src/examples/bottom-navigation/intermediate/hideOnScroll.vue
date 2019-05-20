@@ -8,20 +8,19 @@
       scroll-target="#scroll-area-1"
       hide-on-scroll
       absolute
-      color="white"
       horizontal
     >
-      <v-btn text color="teal">
+      <v-btn text color="deep-purple accent-4">
         <span>Recents</span>
         <v-icon>history</v-icon>
       </v-btn>
 
-      <v-btn text color="teal">
+      <v-btn text color="deep-purple accent-4">
         <span>Favorites</span>
         <v-icon>favorite</v-icon>
       </v-btn>
 
-      <v-btn text color="teal">
+      <v-btn text color="deep-purple accent-4">
         <span>Nearby</span>
         <v-icon>place</v-icon>
       </v-btn>

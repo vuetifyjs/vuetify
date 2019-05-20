@@ -12,17 +12,17 @@
       color="white"
       horizontal
     >
-      <v-btn text color="teal">
+      <v-btn>
         <span>Recents</span>
         <v-icon>history</v-icon>
       </v-btn>
 
-      <v-btn text color="teal">
+      <v-btn>
         <span>Favorites</span>
         <v-icon>favorite</v-icon>
       </v-btn>
 
-      <v-btn text color="teal">
+      <v-btn>
         <span>Nearby</span>
         <v-icon>place</v-icon>
       </v-btn>
