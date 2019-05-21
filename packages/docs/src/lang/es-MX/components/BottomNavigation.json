@@ -1,6 +1,6 @@
 {
   "header": "Bottom Nav",
-  "headerText": "El componente `v-bottom-nav` es una alternativa al sidebar. Se usa principalmente en móviles y viene en dos variantes: íconos y texto y _recorrer_",
+  "headerText": "El componente `v-bottom-navigation` es una alternativa al sidebar. Se usa principalmente en móviles y viene en dos variantes: íconos y texto y _recorrer_",
   "examples": {
     "iconsAndText": {
       "header": "Íconos y texto",

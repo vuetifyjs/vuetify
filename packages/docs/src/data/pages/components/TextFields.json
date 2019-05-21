@@ -1,6 +1,11 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VTextField",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/text-fields.html"
+  },
   "children": [
     {
       "type": "section",
@@ -40,6 +45,7 @@
           "type": "examples",
           "value": [
             "singleLine",
+            "shaped",
             "disabledAndReadonly",
             "icon",
             "clearable",

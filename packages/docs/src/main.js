@@ -12,6 +12,7 @@ import '@/plugins'
 import { createStore } from '@/store/index'
 import { createRouter } from '@/router/index'
 import { createI18n } from '@/i18n/index'
+import { createVuetify } from '@/vuetify/index'
 import { sync } from 'vuex-router-sync'
 
 // Application
@@ -28,6 +29,7 @@ export async function createApp ({
   const store = createStore()
   const router = createRouter()
   const i18n = createI18n(ssrContext, router)
+  const vuetify = createVuetify(ssrContext)
 
   store.state.app.currentVersion = Vuetify.version
 
@@ -43,6 +45,7 @@ export async function createApp ({
     store,
     ssrContext,
     i18n,
+    vuetify,
     render: h => h(App)
   })
 

@@ -1,6 +1,11 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VSlider",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/sliders.html"
+  },
   "children": [
     {
       "type": "section",
@@ -29,16 +34,15 @@
         {
           "type": "examples",
           "value": [
+            "minMax",
+            "icons",
+            "vertical",
             "thumb",
             "customThumb",
             "ticks",
-            "discrete",
-            "icons",
-            "editableNumericValue",
             "customColors",
             "validation",
             "range",
-            "minMax",
             "metronome"
           ]
         }

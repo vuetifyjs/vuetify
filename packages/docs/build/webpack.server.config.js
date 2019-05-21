@@ -32,7 +32,7 @@ module.exports = merge(base, {
       {
         // TODO: maybe don't use MiniCssExtractPlugin? It really doesn't like SSR
         // https://github.com/webpack-contrib/mini-css-extract-plugin/issues/90
-        test: /\.(css|styl(us)?)$/,
+        test: /\.(css|styl(us)?|s(a|c)ss)$/,
         use: 'null-loader'
       }
     ]

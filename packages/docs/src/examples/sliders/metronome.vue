@@ -4,7 +4,7 @@
     max-width="600"
   >
     <v-toolbar
-      card
+      flat
       dense
     >
       <v-toolbar-title>
@@ -57,11 +57,12 @@
       <v-slider
         v-model="bpm"
         :color="color"
+        track-color="grey"
         always-dirty
         min="40"
         max="218"
       >
-        <template v-slot:prepend>
+        <template #prepend>
           <v-icon
             :color="color"
             @click="decrement"
@@ -70,7 +71,7 @@
           </v-icon>
         </template>
 
-        <template v-slot:append>
+        <template #append>
           <v-icon
             :color="color"
             @click="increment"

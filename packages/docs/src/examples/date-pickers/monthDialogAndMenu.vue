@@ -7,7 +7,6 @@
         :close-on-content-click="false"
         :nudge-right="40"
         :return-value.sync="date"
-        lazy
         transition="scale-transition"
         offset-y
         full-width
@@ -30,8 +29,8 @@
           scrollable
         >
           <v-spacer></v-spacer>
-          <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
-          <v-btn flat color="primary" @click="$refs.menu.save(date)">OK</v-btn>
+          <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
+          <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
         </v-date-picker>
       </v-menu>
     </v-flex>
@@ -42,7 +41,6 @@
         v-model="modal"
         :return-value.sync="date"
         persistent
-        lazy
         full-width
         width="290px"
       >
@@ -57,8 +55,8 @@
         </template>
         <v-date-picker v-model="date" type="month" scrollable>
           <v-spacer></v-spacer>
-          <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
-          <v-btn flat color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
+          <v-btn text color="primary" @click="modal = false">Cancel</v-btn>
+          <v-btn text color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
         </v-date-picker>
       </v-dialog>
     </v-flex>

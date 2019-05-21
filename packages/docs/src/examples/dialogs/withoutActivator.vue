@@ -24,7 +24,7 @@
 
           <v-btn
             color="green darken-1"
-            flat="flat"
+            text
             @click="dialog = false"
           >
             Disagree
@@ -32,7 +32,7 @@
 
           <v-btn
             color="green darken-1"
-            flat="flat"
+            text
             @click="dialog = false"
           >
             Agree

@@ -74,7 +74,7 @@
     "valueComparator": ""
   },
   "slots": {
-    "item": "Область видимости для обозначения разметки для list-tile",
+    "item": "Область видимости для обозначения разметки для list-item",
     "no-data": "Mixins.Filterable.slots.noData",
     "selection": "Область видимости для обозначения разметки для выбранных элементов"
   },

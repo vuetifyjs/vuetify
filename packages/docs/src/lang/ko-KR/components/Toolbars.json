@@ -8,7 +8,7 @@
   "examples": {
     "usage": {
       "header": "사용법 (Usage)",
-      "desc": "툴바는 여러 방법으로 쓰일 수 있는 유연한 컨테이너 입니다. 기본적으로 툴바는 데스크탑에서 64px, 세로 모바일에서 56px, 가로 모바일에서 48px 높이를 가집니다. 툴바와 함께 쓰일 수 있는 `v-toolbar-side-icon`, `v-toolbar-title`, `v-toolbar-items` 같은 여러 헬퍼 컴포넌트가 있습니다."
+      "desc": "툴바는 여러 방법으로 쓰일 수 있는 유연한 컨테이너 입니다. 기본적으로 툴바는 데스크탑에서 64px, 세로 모바일에서 56px, 가로 모바일에서 48px 높이를 가집니다. 툴바와 함께 쓰일 수 있는 `v-app-bar-nav-icon`, `v-toolbar-title`, `v-toolbar-items` 같은 여러 헬퍼 컴포넌트가 있습니다."
     },
     "appBar": {
       "header": "앱바 (App bar)",

@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_labels.styl'
+import './VLabel.sass'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
@@ -56,7 +56,8 @@ export default mixins(Themeable).extend({
         left: convertToUnit(props.left),
         right: convertToUnit(props.right),
         position: props.absolute ? 'absolute' : 'relative'
-      }
+      },
+      ref: 'label'
     }
 
     return h('label', Colorable.options.methods.setTextColor(props.focused && props.color, data), children)

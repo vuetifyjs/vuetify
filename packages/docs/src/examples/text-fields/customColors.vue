@@ -83,11 +83,11 @@
         </v-layout>
       </v-container>
       <v-card-actions>
-        <v-btn flat @click="resetForm">Cancel</v-btn>
+        <v-btn text @click="resetForm">Cancel</v-btn>
         <v-spacer></v-spacer>
         <v-btn
           :disabled="!formIsValid"
-          flat
+          text
           color="primary"
           type="submit"
         >Register</v-btn>
@@ -102,7 +102,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-            flat
+            text
             color="purple"
             @click="terms = false"
           >Ok</v-btn>
@@ -118,7 +118,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-            flat
+            text
             color="purple"
             @click="conditions = false"
           >Ok</v-btn>

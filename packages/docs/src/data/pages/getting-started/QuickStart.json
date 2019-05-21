@@ -105,23 +105,27 @@
         },
         {
           "type": "markup",
-          "value": "js_import_vuetify_css"
-        },
-        {
-          "type": "markup",
-          "value": "stylus_import_vuetify_css"
+          "value": "js_vue_options_vuetify"
         },
         {
           "type": "text",
           "lang": "existingText5"
         },
         {
+          "type": "text",
+          "lang": "existingText6"
+        },
+        {
           "type": "markup",
           "value": "html_material_font"
         },
         {
+          "type": "markup",
+          "value": "js_import_mdi"
+        },
+        {
           "type": "text",
-          "lang": "existingText6"
+          "lang": "existingText7"
         },
         {
           "type": "alert",

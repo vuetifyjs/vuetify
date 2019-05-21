@@ -5,34 +5,30 @@ import {
 } from '../transitions'
 
 // Mixins
-import { Registrable, inject as RegistrableInject } from '../../mixins/registrable'
+import { inject as RegistrableInject } from '../../mixins/registrable'
 
 // Helpers
 import { convertToUnit } from '../../util/helpers'
 
-// Util
-import mixins, { ExtractVue } from '../../util/mixins'
+// Utilities
+import mixins from '../../util/mixins'
 
 // Types
-import Vue, { VNode, FunctionalComponentOptions, VNodeData } from 'vue'
+import { VNode, FunctionalComponentOptions, VNodeData } from 'vue'
 
-interface options extends Vue {
+const baseMixins = mixins(
+  RegistrableInject('stepper', 'v-stepper-content', 'v-stepper')
+)
+
+interface options extends InstanceType<typeof baseMixins> {
   $refs: {
     wrapper: HTMLElement
   }
   isVerticalProvided: boolean
 }
 
-export default mixins<options &
-/* eslint-disable indent */
-  ExtractVue<[
-    Registrable<'stepper'>
-  ]>
-/* eslint-enable indent */
->(
-  RegistrableInject('stepper', 'v-stepper-content', 'v-stepper')
 /* @vue/component */
-).extend({
+export default baseMixins.extend<options>().extend({
   name: 'v-stepper-content',
 
   inject: {
@@ -60,11 +56,6 @@ export default mixins<options &
   },
 
   computed: {
-    classes (): object {
-      return {
-        'v-stepper__content': true
-      }
-    },
     computedTransition (): FunctionalComponentOptions {
       return this.isReverse
         ? VTabReverseTransition
@@ -75,11 +66,6 @@ export default mixins<options &
 
       return {
         height: convertToUnit(this.height)
-      }
-    },
-    wrapperClasses (): object {
-      return {
-        'v-stepper__wrapper': true
       }
     }
   },
@@ -150,11 +136,11 @@ export default mixins<options &
   },
 
   render (h): VNode {
-    const contentData: VNodeData = {
-      'class': this.classes
-    }
+    const contentData = {
+      staticClass: 'v-stepper__content'
+    } as VNodeData
     const wrapperData = {
-      'class': this.wrapperClasses,
+      staticClass: 'v-stepper__wrapper',
       style: this.styles,
       ref: 'wrapper'
     }

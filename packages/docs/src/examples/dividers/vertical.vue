@@ -16,25 +16,25 @@
     <v-spacer></v-spacer>
 
     <v-toolbar-items>
-      <v-btn flat>
+      <v-btn text>
         News
       </v-btn>
 
       <v-divider vertical></v-divider>
 
-      <v-btn flat>
+      <v-btn text>
         Blog
       </v-btn>
 
       <v-divider vertical></v-divider>
 
-      <v-btn flat>
+      <v-btn text>
         Music
       </v-btn>
 
       <v-divider vertical></v-divider>
     </v-toolbar-items>
 
-    <v-toolbar-side-icon></v-toolbar-side-icon>
+    <v-app-bar-nav-icon></v-app-bar-nav-icon>
   </v-toolbar>
 </template>

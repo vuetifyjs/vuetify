@@ -75,7 +75,7 @@
   "props": {
     "v-edit-dialog": {
       "cancelText": "为取消按钮设置默认文本，当使用了 `large` 属性时（即有提交和取消按钮的对话框）。",
-      "lazy": "Mixins.Bootable.props.lazy",
+      "eager": "Mixins.Bootable.props.eager",
       "large": "附加一个提交和取消按钮到对话框",
       "saveText": "为保存按钮设置默认文本，当使用了 `large` 属性时。",
       "transition": "Mixins.Transitionable.props.transition"

@@ -1,6 +1,6 @@
 {
-  "header": "# Bottom nav",
-  "headerText": "The `v-bottom-nav` is an alternative to the sidebar. It is primarily used on mobile and comes in two variants, icons and text, and shift.",
+  "header": "# Bottom navigation",
+  "headerText": "The `v-bottom-navigation` is an alternative to the sidebar. It is primarily used on mobile and comes in two variants, icons and text, and shift.",
   "examples": {
     "usage": {
       "desc": "While the bottom nav is meant to be used with the `vue-router`, you can also programmatically control the active state of the buttons by using the `active.sync` prop. You can change a button's value by using its `value` attribute."
@@ -15,12 +15,16 @@
     }
   },
   "props": {
-    "active": "Holds the value of the currently active button. If the button has no value supplied, its index will be used instead. This prop supports the **.sync** modifier.",
     "absolute": "Mixins.Positionable.props.absolute",
+    "activeClass": "Components.ItemGroups.props.activeClass",
     "fixed": "Mixins.Positionable.props.fixed",
+    "grow": "Force `v-btn`s to take up all available space",
+    "hideOnScroll": "Will transition the navigation off screen when scrolling up",
+    "horizontal": "Uses an alternative horizontal styling for `v-btn`",
+    "inputValue": "Holds the value of the currently active button. If the button has no value supplied, its index will be used instead. This prop supports the **.sync** modifier.",
     "mandatory": "Components.ItemGroups.props.mandatory"
   },
   "events": {
-    "update:active": "The event used for `active.sync`"
+    "update:inputValue": "The event used for `input-value.sync`"
   }
 }

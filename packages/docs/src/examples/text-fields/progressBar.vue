@@ -13,6 +13,7 @@
           v-if="custom"
           :value="progress"
           :color="color"
+          absolute
           height="7"
         ></v-progress-linear>
       </template>

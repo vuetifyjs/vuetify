@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { VNode, VNodeDirective, FunctionalComponentOptions } from 'vue/types'
-import { VuetifyIcon } from 'vuetify'
+import { VuetifyIcon } from 'vuetify/types/services/icons'
 
 export function createSimpleFunctional (
   c: string,
@@ -102,7 +102,7 @@ export function createSimpleTransition (
 
 export function createJavaScriptTransition (
   name: string,
-  functions: Record<string, () => any>,
+  functions: Record<string, any>,
   mode = 'in-out'
 ): FunctionalComponentOptions {
   return {
@@ -278,13 +278,6 @@ export function filterObjectOnKeys<T, K extends keyof T> (obj: T, keys: K[]): { 
   return filtered
 }
 
-export function filterChildren (array: VNode[] = [], tag: string): VNode[] {
-  return array.filter(child => {
-    return child.componentOptions &&
-      child.componentOptions.Ctor.options.name === tag
-  })
-}
-
 export function convertToUnit (str: string | number | null | undefined, unit = 'px'): string | undefined {
   if (str == null || str === '') {
     return undefined
@@ -323,7 +316,7 @@ export const keyCodes = Object.freeze({
   pagedown: 34
 })
 
-const ICONS_PREFIX = '$vuetify.icons.'
+const ICONS_PREFIX = '$vuetify.'
 
 // This remaps internal names like '$vuetify.icons.cancel'
 // to the current name or component for that icon.
@@ -332,8 +325,12 @@ export function remapInternalIcon (vm: Vue, iconName: string): VuetifyIcon {
     return iconName
   }
 
-  // Now look up icon indirection name, e.g. '$vuetify.icons.cancel'
-  return getObjectValueByPath(vm, iconName, iconName)
+  // Get the target icon name
+  const iconPath = `$vuetify.icons.values.${iconName.split('.').pop()}`
+
+  // Now look up icon indirection name,
+  // e.g. '$vuetify.icons.values.cancel'
+  return getObjectValueByPath(vm, iconPath, iconName)
 }
 
 export function keys<O> (o: O) {
@@ -366,6 +363,78 @@ export function upperFirst (str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
+export function groupByProperty (xs: any[], key: string): Record<string, any[]> {
+  return xs.reduce((rv, x) => {
+    (rv[x[key]] = rv[x[key]] || []).push(x)
+    return rv
+  }, {})
+}
+
+export function wrapInArray<T> (v: T | T[] | null | undefined): T[] { return v != null ? Array.isArray(v) ? v : [v] : [] }
+
+export type compareFn<T = any> = (a: T, b: T) => number
+
+export function sortItems (
+  items: any[],
+  sortBy: string[],
+  sortDesc: boolean[],
+  locale: string,
+  customSorters?: Record<string, compareFn>
+) {
+  if (sortBy === null || !sortBy.length) return items
+
+  return items.sort((a, b) => {
+    for (let i = 0; i < sortBy.length; i++) {
+      const sortKey = sortBy[i]
+
+      let sortA = getObjectValueByPath(a, sortKey)
+      let sortB = getObjectValueByPath(b, sortKey)
+
+      if (sortDesc[i]) {
+        [sortA, sortB] = [sortB, sortA]
+      }
+
+      if (customSorters && customSorters[sortKey]) return customSorters[sortKey](sortA, sortB)
+
+      // Check if both cannot be evaluated
+      if (sortA === null && sortB === null) {
+        return 0
+      }
+
+      [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())
+
+      if (sortA !== sortB) {
+        if (!isNaN(sortA) && !isNaN(sortB)) return Number(sortA) - Number(sortB)
+        return sortA.localeCompare(sortB, locale)
+      }
+    }
+
+    return 0
+  })
+}
+
+export function searchItems (items: any[], search: string) {
+  if (!search) return items
+  search = search.toString().toLowerCase()
+  if (search.trim() === '') return items
+
+  return items.filter(i => Object.keys(i).some(j => {
+    const val = i[j]
+    return val != null &&
+      typeof val !== 'boolean' &&
+      val.toString().toLowerCase().indexOf(search) !== -1
+  }))
+}
+
+export function getTextAlignment (align: string | undefined, rtl: boolean): string {
+  align = align || 'start'
+
+  if (align === 'start') align = rtl ? 'right' : 'left'
+  else if (align === 'end') align = rtl ? 'left' : 'right'
+
+  return `text-xs-${align}`
+}
+
 /**
  * Returns:
  *  - 'normal' for old style slots - `<template slot="default">`
@@ -378,4 +447,46 @@ export function getSlotType<T extends boolean = false> (vm: Vue, name: string, s
   }
   if (vm.$slots[name]) return 'normal'
   if (vm.$scopedSlots[name]) return 'scoped'
+}
+
+export function debounce (fn: Function, delay: number) {
+  let timeoutId = 0 as any
+  return (...args: any[]) => {
+    clearTimeout(timeoutId)
+    timeoutId = setTimeout(() => fn(...args), delay)
+  }
+}
+
+export function getPrefixedScopedSlots (prefix: string, scopedSlots: any) {
+  return Object.keys(scopedSlots).filter(k => k.startsWith(prefix)).reduce((obj: any, k: string) => {
+    obj[k.replace(prefix, '')] = scopedSlots[k]
+    return obj
+  }, {})
+}
+
+export function getSlot (vm: Vue, name = 'default', data?: object, optional = false) {
+  if (vm.$scopedSlots[name]) {
+    return vm.$scopedSlots[name]!(data)
+  } else if (vm.$slots[name] && (!data || optional)) {
+    return vm.$slots[name]
+  }
+  return undefined
+}
+
+export function clamp (value: number, min = 0, max = 1) {
+  return Math.max(min, Math.min(max, value))
+}
+
+export function padEnd (str: string, length: number, char = '0') {
+  return str + char.repeat(Math.max(0, length - str.length))
+}
+
+export function chunk (str: string, size = 1) {
+  const chunked = []
+  let index = 0
+  while (index < str.length) {
+    chunked.push(str.substr(index, size))
+    index += size
+  }
+  return chunked
 }

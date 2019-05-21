@@ -7,7 +7,7 @@
           <v-text-field
             v-model="first"
             label="First Name"
-            box
+            filled
           ></v-text-field>
         </v-flex>
 
@@ -15,7 +15,7 @@
           <v-text-field
             v-model="last"
             label="Last Name"
-            box
+            filled
           ></v-text-field>
         </v-flex>
 

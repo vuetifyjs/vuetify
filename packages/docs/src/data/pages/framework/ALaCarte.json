@@ -6,89 +6,58 @@
       "type": "section",
       "children": [
         {
-          "type": "heading",
-          "lang": "importHeader"
-        },
-        {
           "type": "alert",
-          "lang": "webpackVersionWarning",
+          "lang": "treeshakeWarning",
           "value": "warning"
         },
         {
+          "type": "heading",
+          "lang": "loaderHeader1"
+        },
+        {
           "type": "text",
-          "lang": "importText1"
+          "lang": "loaderText1a"
+        },
+        {
+          "type": "heading",
+          "lang": "loaderHeader2"
+        },
+        {
+          "type": "text",
+          "lang": "loaderText2a"
         },
         {
           "type": "markup",
-          "value": "js_a_la_carte"
+          "value": "js_a_la_carte_register"
         },
         {
           "type": "alert",
-          "lang": "optionsDirectivesNotice",
+          "lang": "optionsInfo",
           "value": "info"
         },
         {
+          "type": "heading",
+          "lang": "loaderHeader3"
+        },
+        {
           "type": "text",
-          "lang": "importText2"
+          "lang": "loaderText3a"
         },
         {
           "type": "markup",
-          "value": "js_a_la_carte_destructuring"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
+          "value": "js_a_la_carte_vue_config"
+        },
         {
           "type": "heading",
-          "lang": "styleHeader"
+          "lang": "loaderHeader4"
         },
         {
           "type": "text",
-          "lang": "styleText1"
-        },
-        {
-          "type": "markup",
-          "value": "bash_yarn_install_stylus"
-        },
-        {
-          "type": "text",
-          "lang": "styleText2"
-        },
-        {
-          "type": "markup",
-          "value": "js_import_stylus"
-        },
-        {
-          "type": "alert",
-          "lang": "stylusDetailNotice",
-          "value": "info"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "heading",
-          "lang": "loaderHeader"
-        },
-        {
-          "type": "text",
-          "lang": "loaderText1"
-        },
-        {
-          "type": "markup",
-          "value": "js_plugin_vuetify"
+          "lang": "loaderText4a"
         },
         {
           "type": "markup",
           "value": "js_a_la_carte_webpack"
-        },
-        {
-          "type": "text",
-          "lang": "loaderText2"
         }
       ]
     },
@@ -97,19 +66,66 @@
       "children": [
         {
           "type": "heading",
-          "lang": "loaderLimitationsHeader"
+          "lang": "loaderHeader5"
         },
         {
           "type": "text",
-          "lang": "loaderLimitationsText1"
+          "lang": "loaderText5a"
+        },
+        {
+          "type": "markup",
+          "value": "bash_yarn_install_sass"
+        },
+        {
+          "type": "alert",
+          "lang": "sassInfo",
+          "value": "info"
+        },
+        {
+          "type": "text",
+          "lang": "loaderText5b"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "loaderHeader6"
+        },
+        {
+          "type": "text",
+          "lang": "loaderText6a"
+        },
+        {
+          "type": "markup",
+          "value": "js_vuetify_loader_vue_config"
+        },
+        {
+          "type": "markup",
+          "value": "js_vuetify_loader_webpack"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "loaderHeader7"
+        },
+        {
+          "type": "text",
+          "lang": "loaderText7a"
         },
         {
           "type": "heading",
-          "lang": "loaderLimitationsDynamicHeader"
+          "lang": "loaderHeader8"
         },
         {
           "type": "text",
-          "lang": "loaderLimitationsDynamicText1"
+          "lang": "loaderText8a"
         },
         {
           "type": "markup",
@@ -121,7 +137,7 @@
         },
         {
           "type": "text",
-          "lang": "loaderLimitationsDynamicText2"
+          "lang": "loaderText8b"
         },
         {
           "type": "markup",
@@ -129,11 +145,36 @@
         },
         {
           "type": "heading",
-          "lang": "loaderLimitationsFunctionalHeader"
+          "lang": "loaderHeader9"
         },
         {
           "type": "text",
-          "lang": "loaderLimitationsFunctionalText1"
+          "lang": "loaderText9a"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "loaderHeader10"
+        },
+        {
+          "type": "text",
+          "lang": "loaderText10a"
+        },
+        {
+          "type": "markup",
+          "value": "js_a_la_carte"
+        },
+        {
+          "type": "text",
+          "lang": "loaderText10b"
+        },
+        {
+          "type": "markup",
+          "value": "js_a_la_carte_destructuring"
         }
       ]
     },

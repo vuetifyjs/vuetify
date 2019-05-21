@@ -10,14 +10,20 @@
     <v-data-iterator
       :search="search"
       :items="computedItems"
-      :pagination.sync="pagination"
+      sort-by="name"
+      :items-per-page="-1"
       class="component-parameters pa-2"
-      hide-actions
-      content-tag="v-layout"
-      content-class="wrap"
+      hide-default-footer
     >
-      <template v-slot:item="{ item }">
-        <v-flex xs12 grey lighten-2 mt-2>
+      <template #default="{ items }">
+        <v-flex
+          v-for="item in items"
+          :key="item.name"
+          xs12
+          grey
+          lighten-2
+          mt-2
+        >
           <v-layout wrap px-2 py-1>
             <v-flex
               v-for="(header, i) in headers"
@@ -33,16 +39,17 @@
                 <template v-if="i === 0">
                   <v-chip
                     v-if="item.newIn"
-                    class="v-chip--x-small"
-                    dark
+                    x-small
+                    label
+                    text-color="white"
                     color="primary"
                   >
                     New in — v{{ item.newIn }}
                   </v-chip>
                   <v-chip
                     v-else-if="item.deprecatedIn"
-                    class="v-chip--x-small"
-                    dark
+                    x-small
+                    label
                     color="red lighten-3"
                   >
                     Deprecated in — v{{ item.deprecatedIn }}
@@ -83,7 +90,6 @@
 <script>
   // Utilities
   import {
-    mapGetters,
     mapState
   } from 'vuex'
   import { getObjectValueByPath } from 'vuetify/es5/util/helpers'
@@ -92,6 +98,15 @@
   import pluralize from 'pluralize'
 
   export default {
+    inject: {
+      overrideNamespace: {
+        default: null
+      },
+      overridePage: {
+        default: null
+      }
+    },
+
     props: {
       target: {
         type: String,
@@ -119,18 +134,7 @@
       }
     },
 
-    data: () => ({
-      pagination: {
-        sortBy: 'name',
-        rowsPerPage: -1
-      }
-    }),
-
     computed: {
-      ...mapGetters('documentation', [
-        'namespace',
-        'page'
-      ]),
       ...mapState('documentation', ['deprecatedIn', 'newIn']),
       computedItems () {
         const items = []
@@ -188,6 +192,12 @@
         return this.computedItems.filter(item => {
           return item.description.indexOf('MISSING DESCRIPTION') > -1
         }).map(item => item.name)
+      },
+      namespace () {
+        return this.overrideNamespace || this.$store.getters['documentation/namespace']
+      },
+      page () {
+        return this.overridePage || this.$store.getters['documentation/page']
       }
     },
 
@@ -210,6 +220,8 @@
         const specialDesc = `${composite}.${this.type}['${this.target}']['${name}']`
         // Components.Inputs.props.value
         const componentDesc = `${this.namespace}.${camelSource}.${this.type}['${name}']`
+        // Components.Inputs.props.inputs.value
+        const componentNestedDesc = `${this.namespace}.${camelSource}.${this.type}['${item.source}']['${name}']`
         // Components.Alerts.props.value
         const selfDesc = `${composite}.${this.type}['${name}']`
         // Mixins.Bootable.props.value
@@ -223,6 +235,9 @@
         } else if (this.$te(componentDesc)) {
           description = this.$t(componentDesc)
           devPrepend = `**COMPONENT (${item.source})** - `
+        } else if (this.$te(componentNestedDesc)) {
+          description = this.$t(componentNestedDesc)
+          devPrepend = `**COMPONENT NESTED (${item.source})** - `
         } else if (this.$te(selfDesc)) {
           description = this.$t(selfDesc)
           devPrepend = `**SELF** - `
@@ -290,23 +305,24 @@
   }
 </script>
 
-<style lang="stylus">
-  .component-parameters
-    p
-      margin-bottom: 0
+<style lang="sass">
+.component-parameters
+  font-size: 14px
 
-    .mono
-      font-family: 'Roboto Mono', monospace
-      font-weight: 500
+  p
+    margin-bottom: 0
 
-    .header
-      font-family: 'Roboto Mono', monospace
-      font-size: 0.8rem
+  .mono
+    font-family: 'Roboto Mono', monospace
+    font-weight: 500
 
-    .justify
-      text-align: justify
+  .header
+    font-family: 'Roboto Mono', monospace
+    font-size: 0.8rem
 
-    .name
-      color: #bd4147
+  .justify
+    text-align: justify
 
+  .name
+    color: #bd4147
 </style>

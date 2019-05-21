@@ -23,7 +23,7 @@
         <v-flex xs12 sm6>
           <v-text-field
             v-model="message3"
-            box
+            filled
             label="Box"
             clearable
           ></v-text-field>
@@ -33,7 +33,7 @@
           <v-text-field
             v-model="message4"
             label="Outline"
-            outline
+            outlined
             clearable
           ></v-text-field>
         </v-flex>

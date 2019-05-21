@@ -1,10 +1,11 @@
-import '../../../stylus/components/_date-picker-table.styl'
+import '../VDatePickerTable.sass'
 
 // Directives
 import Touch, { TouchWrapper } from '../../../directives/touch'
 
 // Mixins
 import Colorable from '../../../mixins/colorable'
+import Localable from '../../../mixins/localable'
 import Themeable from '../../../mixins/themeable'
 
 // Utils
@@ -21,6 +22,7 @@ type CalculateTableDateFunction = (v: number) => string
 
 export default mixins(
   Colorable,
+  Localable,
   Themeable
 /* @vue/component */
 ).extend({
@@ -39,10 +41,6 @@ export default mixins(
       type: [Array, Function, Object, String],
       default: () => 'warning'
     } as any as PropValidator<DateEventColors>,
-    locale: {
-      type: String,
-      default: 'en-us'
-    },
     min: String,
     max: String,
     readonly: Boolean,
@@ -79,13 +77,13 @@ export default mixins(
   methods: {
     genButtonClasses (isAllowed: boolean, isFloating: boolean, isSelected: boolean, isCurrent: boolean) {
       return {
+        'v-size--default': !isFloating,
         'v-btn--active': isSelected,
-        'v-btn--flat': !isSelected,
-        'v-btn--icon': isSelected && isAllowed && isFloating,
-        'v-btn--floating': isFloating,
-        'v-btn--depressed': !isFloating && isSelected,
-        'v-btn--disabled': !isAllowed || (this.disabled && isSelected),
-        'v-btn--outline': isCurrent && !isSelected,
+        'v-btn--flat': !isAllowed || this.disabled,
+        'v-btn--text': isSelected === isCurrent,
+        'v-btn--rounded': isFloating,
+        'v-btn--disabled': !isAllowed || this.disabled,
+        'v-btn--outlined': isCurrent && !isSelected,
         ...this.themeClasses
       }
     },

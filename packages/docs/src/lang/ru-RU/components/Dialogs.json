@@ -44,7 +44,7 @@
     "fullWidth": "Указывает, что модальное действие 100% ширины",
     "fullscreen": "Изменение макета для полноэкранного отображения",
     "hideOverlay": "Скрыть отображение наложения",
-    "lazy": "Mixins.Bootable.props.lazy",
+    "eager": "Mixins.Bootable.props.eager",
     "maxWidth": "Максимальная ширина содержимого",
     "origin": "Mixins.Transitionable.props.origin",
     "persistent": "Клик снаружи не отменяет диалог",

@@ -29,7 +29,7 @@
             v-model="title"
             :rules="rules"
             counter="25"
-            box
+            filled
             label="Box"
           ></v-text-field>
         </v-flex>
@@ -40,7 +40,7 @@
             :rules="rules"
             counter="25"
             label="Outline"
-            outline
+            outlined
           ></v-text-field>
         </v-flex>
 

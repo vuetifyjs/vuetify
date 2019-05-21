@@ -22,7 +22,7 @@
           <v-text-field
             label="Box"
             single-line
-            box
+            filled
           ></v-text-field>
         </v-flex>
 
@@ -30,7 +30,7 @@
           <v-text-field
             label="Outline"
             single-line
-            outline
+            outlined
           ></v-text-field>
         </v-flex>
 

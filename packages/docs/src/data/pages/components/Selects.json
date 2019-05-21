@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VSelect",
   "children": [
     {
       "type": "section",

@@ -24,7 +24,7 @@
     </v-btn>
     <v-btn
       :ripple="{ class: 'red--text' }"
-      flat
+      text
     >
       With red ripple
     </v-btn>

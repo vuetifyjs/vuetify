@@ -1,4 +1,4 @@
-import goTo from 'vuetify/es5/components/Vuetify/goTo'
+import goTo from 'vuetify/es5/services/goto'
 import { waitForReadystate } from '../util/helpers'
 
 export default async function (to, from, savedPosition) {
