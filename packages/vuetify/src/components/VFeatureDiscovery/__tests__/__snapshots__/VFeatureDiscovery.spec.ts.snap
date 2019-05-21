@@ -7,9 +7,11 @@ exports[`FeatureDiscovery.ts should render correctly 1`] = `
      style="left: -164.3826898599915px; top: -164.3826898599915px; height: 700px; width: 700px;"
 >
   <div class="v-feature-discovery__backdrop primary"
-       style="padding-right: 15%;"
+       style="transform-origin: calc(50% - 185.6173101400085px) calc(50% - 185.6173101400085px); justify-content: flex-end; padding-right: 15%;"
   >
-    <div class="v-feature-discovery__content white--text">
+    <div class="v-feature-discovery__content white--text"
+         style="justify-content: flex-end;"
+    >
       <div class="v-feature-discovery__wrapper">
         <div class="v-feature-discovery__title">
         </div>
@@ -38,9 +40,11 @@ exports[`FeatureDiscovery.ts should render correctly when flat 1`] = `
      style="left: -164.3826898599915px; top: -164.3826898599915px; height: 700px; width: 700px;"
 >
   <div class="v-feature-discovery__backdrop primary"
-       style="padding-right: 15%;"
+       style="transform-origin: calc(50% - 185.6173101400085px) calc(50% - 185.6173101400085px); justify-content: flex-end; padding-right: 15%;"
   >
-    <div class="v-feature-discovery__content white--text">
+    <div class="v-feature-discovery__content white--text"
+         style="justify-content: flex-end;"
+    >
       <div class="v-feature-discovery__wrapper">
         <div class="v-feature-discovery__title">
         </div>
@@ -68,9 +72,11 @@ exports[`FeatureDiscovery.ts should toggle 1`] = `
      style="left: -164.3826898599915px; top: -164.3826898599915px; height: 700px; width: 700px;"
 >
   <div class="v-feature-discovery__backdrop primary"
-       style="padding-right: 15%;"
+       style="transform-origin: calc(50% - 185.6173101400085px) calc(50% - 185.6173101400085px); justify-content: flex-end; padding-right: 15%;"
   >
-    <div class="v-feature-discovery__content white--text">
+    <div class="v-feature-discovery__content white--text"
+         style="justify-content: flex-end;"
+    >
       <div class="v-feature-discovery__wrapper">
         <div class="v-feature-discovery__title">
         </div>
@@ -103,9 +109,11 @@ exports[`FeatureDiscovery.ts should toggle 2`] = `
      aria-hidden="true"
 >
   <div class="v-feature-discovery__backdrop primary"
-       style="padding-right: 15%;"
+       style="transform-origin: calc(50% - 185.6173101400085px) calc(50% - 185.6173101400085px); justify-content: flex-end; padding-right: 15%;"
   >
-    <div class="v-feature-discovery__content white--text">
+    <div class="v-feature-discovery__content white--text"
+         style="justify-content: flex-end;"
+    >
       <div class="v-feature-discovery__wrapper">
         <div class="v-feature-discovery__title">
         </div>
