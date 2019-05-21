@@ -129,10 +129,13 @@ export default baseMixins.extend<options>().extend({
       ])
     },
     genHeader (): VNode {
-      return this.$createElement(VListItem, this.setTextColor(this.isActive && this.color, {
+      return this.$createElement(VListItem, {
         staticClass: 'v-list-group__header',
         class: {
-          [this.activeClass]: this.isActive
+          [this.activeClass || '']: this.isActive
+        },
+        props: {
+          inputValue: this.isActive
         },
         directives: [{
           name: 'ripple',
@@ -146,7 +149,7 @@ export default baseMixins.extend<options>().extend({
             if (e.keyCode === keyCodes.enter) this.click()
           }
         }
-      }), [
+      }, [
         this.genPrependIcon(),
         this.$slots.activator,
         this.genAppendIcon()

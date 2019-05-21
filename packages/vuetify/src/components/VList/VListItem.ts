@@ -47,7 +47,7 @@ export default baseMixins.extend<options>().extend({
     activeClass: {
       type: String,
       default (): string | undefined {
-        if (!this.listItemGroup) return 'primary--text'
+        if (!this.listItemGroup) return ''
 
         return this.listItemGroup.activeClass
       }
@@ -136,6 +136,6 @@ export default baseMixins.extend<options>().extend({
 
     tag = this.inactive ? 'div' : tag
 
-    return h(tag, this.setBackgroundColor(this.color, data), children)
+    return h(tag, this.setTextColor(this.color, data), children)
   }
 })

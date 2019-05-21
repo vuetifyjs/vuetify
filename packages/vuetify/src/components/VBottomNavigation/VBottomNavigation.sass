@@ -4,6 +4,7 @@
 // Theme
 +theme(v-bottom-navigation) using ($material)
   background-color: map-get($material, 'cards')
+  color: map-deep-get($material, 'text', 'primary')
 
   .v-btn:not(.v-btn--active)
     color: map-deep-get($material, 'text', 'secondary') !important
@@ -44,6 +45,8 @@
         line-height: 1.2
 
     &.v-btn--active
+      color: inherit
+
       &:not(:hover):before
         opacity: 0
 

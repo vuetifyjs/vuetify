@@ -1,4 +1,10 @@
+@import '../../styles/styles.sass'
 @import './_variables.sass'
+
+// Theme
++theme(v-chip-group) using ($material)
+  .v-chip:not(.v-chip--active)
+    color: map-deep-get($material, 'text', 'primary') !important
 
 // Block
 .v-chip-group
