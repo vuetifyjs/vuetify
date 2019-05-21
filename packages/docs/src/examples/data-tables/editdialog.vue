@@ -1,35 +1,33 @@
 <template>
-  <div>
-      <v-data-table
-        :headers="headers"
-        :items="desserts"
-      >
-        <template v-slot:item.name="{ item }">
-          <v-edit-dialog
-            :return-value.sync="item.name"
-            @save="save"
-            @cancel="cancel"
-            @open="open"
-            @close="close"
-          > {{ item.name }}
-            <template v-slot:input>
-              <v-text-field
-                v-model="item.name"
-                :rules="[max25chars]"
-                label="Edit"
-                single-line
-                counter
-              ></v-text-field>
-            </template>
-          </v-edit-dialog>
+  <v-data-table
+    :headers="headers"
+    :items="desserts"
+  >
+    <template v-slot:item.name="{ item }">
+      <v-edit-dialog
+        :return-value.sync="item.name"
+        @save="save"
+        @cancel="cancel"
+        @open="open"
+        @close="close"
+      > {{ item.name }}
+        <template v-slot:input>
+          <v-text-field
+            v-model="item.name"
+            :rules="[max25chars]"
+            label="Edit"
+            single-line
+            counter
+          ></v-text-field>
         </template>
-      </v-data-table>
-  
-      <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
-        {{ snackText }}
-        <v-btn text @click="snack = false">Close</v-btn>
-      </v-snackbar>
-    </div>
+      </v-edit-dialog>
+    </template>
+  </v-data-table>
+
+  <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
+    {{ snackText }}
+    <v-btn text @click="snack = false">Close</v-btn>
+  </v-snackbar>
 </template>
 
 <script>
