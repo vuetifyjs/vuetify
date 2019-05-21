@@ -1,22 +1,20 @@
 <template>
   <div>
-    <v-data-table
-      :headers="headers"
-      :items="desserts"
-    >
-      <template v-slot:items="props">
-        <td>
+      <v-data-table
+        :headers="headers"
+        :items="desserts"
+      >
+        <template v-slot:item.name="{ item }">
           <v-edit-dialog
-            :return-value.sync="props.item.name"
-            lazy
+            :return-value.sync="item.name"
             @save="save"
             @cancel="cancel"
             @open="open"
             @close="close"
-          > {{ props.item.name }}
+          > {{ item.name }}
             <template v-slot:input>
               <v-text-field
-                v-model="props.item.name"
+                v-model="item.name"
                 :rules="[max25chars]"
                 label="Edit"
                 single-line
@@ -24,46 +22,14 @@
               ></v-text-field>
             </template>
           </v-edit-dialog>
-        </td>
-        <td class="text-xs-right">{{ props.item.calories }}</td>
-        <td class="text-xs-right">{{ props.item.fat }}</td>
-        <td class="text-xs-right">{{ props.item.carbs }}</td>
-        <td class="text-xs-right">{{ props.item.protein }}</td>
-        <td class="text-xs-right">
-          <v-edit-dialog
-            :return-value.sync="props.item.iron"
-            large
-            lazy
-            persistent
-            @save="save"
-            @cancel="cancel"
-            @open="open"
-            @close="close"
-          >
-            <div>{{ props.item.iron }}</div>
-            <template v-slot:input>
-              <div class="mt-3 title">Update Iron</div>
-            </template>
-            <template v-slot:input>
-              <v-text-field
-                v-model="props.item.iron"
-                :rules="[max25chars]"
-                label="Edit"
-                single-line
-                counter
-                autofocus
-              ></v-text-field>
-            </template>
-          </v-edit-dialog>
-        </td>
-      </template>
-    </v-data-table>
-
-    <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
-      {{ snackText }}
-      <v-btn flat @click="snack = false">Close</v-btn>
-    </v-snackbar>
-  </div>
+        </template>
+      </v-data-table>
+  
+      <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
+        {{ snackText }}
+        <v-btn text @click="snack = false">Close</v-btn>
+      </v-snackbar>
+    </div>
 </template>
 
 <script>
