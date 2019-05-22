@@ -44,7 +44,7 @@
             "simple/icon",
             "simple/outlined",
             "simple/label",
-            "simple/closable",
+            "intermediate/closable",
             "intermediate/actionChips",
             "intermediate/inSelects",
             "complex/photos",
