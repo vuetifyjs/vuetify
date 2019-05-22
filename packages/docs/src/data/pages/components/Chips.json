@@ -45,6 +45,7 @@
             "simple/outlined",
             "simple/label",
             "simple/sizes",
+            "simple/draggable",
             "intermediate/closable",
             "intermediate/actionChips",
             "intermediate/inSelects",

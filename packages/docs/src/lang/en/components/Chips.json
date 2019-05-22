@@ -51,6 +51,10 @@
     "sizes": {
       "header": "### Sizes",
       "desc": "`v-chip` component can have various sizes from `x-small` to `x-large`."
+    },
+    "draggable": {
+      "header": "### Draggable",
+      "desc": "`draggable` `v-chip` component can be dragged by mouse."
     }
   },
   "props": {
