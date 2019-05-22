@@ -32,7 +32,7 @@ export default mixins(header).extend({
         ...wrapInArray(header.class)
       ]
 
-      if (header.value === 'data-table-select') {
+      if (header.value === 'data-table-select' && !this.singleSelect) {
         children.push(this.genSelectAll())
       } else {
         children.push(this.$scopedSlots[header.value]
