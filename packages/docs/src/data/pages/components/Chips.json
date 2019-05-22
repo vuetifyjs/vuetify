@@ -44,6 +44,7 @@
             "simple/icon",
             "simple/outlined",
             "simple/label",
+            "simple/sizes",
             "intermediate/closable",
             "intermediate/actionChips",
             "intermediate/inSelects",

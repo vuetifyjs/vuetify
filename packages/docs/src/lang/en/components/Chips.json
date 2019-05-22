@@ -51,6 +51,10 @@
     "playground": {
       "header": "### Playground",
       "desc": "Explore the various options available to the `v-chip` component."
+    },
+    "sizes": {
+      "header": "### Sizes",
+      "desc": "`v-chip` component can have various sizes from `x-small` to `x-large`."
     }
   },
   "props": {
