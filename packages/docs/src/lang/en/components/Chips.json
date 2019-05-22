@@ -55,6 +55,10 @@
     "draggable": {
       "header": "### Draggable",
       "desc": "`draggable` `v-chip` component can be dragged by mouse."
+    },
+    "filter": {
+      "header": "### Filter",
+      "desc": "`v-chip` component has `filter` option which shows an additional icon to you if chip is active. It can be customized using `filter-icon`."
     }
   },
   "props": {

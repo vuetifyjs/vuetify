@@ -46,6 +46,7 @@
             "simple/label",
             "simple/sizes",
             "simple/draggable",
+            "simple/filter",
             "intermediate/closable",
             "intermediate/actionChips",
             "intermediate/inSelects",
