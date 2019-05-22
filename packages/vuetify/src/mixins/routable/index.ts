@@ -1,4 +1,6 @@
 import Vue, { VNodeData } from 'vue'
+
+// Types
 import { PropValidator } from 'vue/types/options'
 
 // Directives
