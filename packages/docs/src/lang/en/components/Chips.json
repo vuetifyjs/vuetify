@@ -59,6 +59,10 @@
     "filter": {
       "header": "### Filter",
       "desc": "`v-chip` component has `filter` option which shows an additional icon to you if chip is active. It can be customized using `filter-icon`."
+    },
+    "noRipple": {
+      "header": "### No ripple",
+      "desc": "`v-chip` can be rendered without ripple if `ripple` prop is set to `false`."
     }
   },
   "props": {

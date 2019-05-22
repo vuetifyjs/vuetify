@@ -47,6 +47,7 @@
             "simple/sizes",
             "simple/draggable",
             "simple/filter",
+            "simple/noRipple",
             "intermediate/closable",
             "intermediate/actionChips",
             "intermediate/inSelects",
