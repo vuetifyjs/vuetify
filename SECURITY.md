@@ -2,13 +2,13 @@
 
 ## Supported Versions
 
-These ranges of versions are supported at the moment. You can use them in your projects surely:
+These ranges of versions are supported at the moment. You can use them in your projects safely:
 
 |  Version  | Supported          |
 | --------- | ------------------ |
-| > 1.4.x   | :white_check_mark: |
+| > 1.4.x   | :heavy_check_mark: |
 | < 1.4.x   | :x:                |
-|   2.x.x   | :white_check_mark: |
+|   2.x.x   | :heavy_check_mark: |
 
 ## Reporting a Vulnerability
 
