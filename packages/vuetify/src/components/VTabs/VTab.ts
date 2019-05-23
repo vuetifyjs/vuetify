@@ -35,10 +35,15 @@ export default baseMixins.extend<options>().extend(
     }
   },
 
+  data: () => ({
+    proxyClass: 'v-tab--active'
+  }),
+
   computed: {
     classes (): object {
       return {
         'v-tab': true,
+        ...Routable.options.computed.classes.call(this),
         'v-tab--disabled': this.disabled,
         ...this.groupClasses
       }
