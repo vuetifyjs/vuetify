@@ -168,7 +168,7 @@ export default mixins(Colorable, Themeable).extend({
           avatar,
           disabled,
           ripple: true,
-          value
+          inputValue: value
         }
       }
 
