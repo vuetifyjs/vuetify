@@ -46,7 +46,6 @@ export default Vue.extend({
   computed: {
     classes (): object {
       return {
-        [this.activeClass]: this.to ? undefined : this.isActive,
         [this.proxyClass]: this.isActive
       }
     },
