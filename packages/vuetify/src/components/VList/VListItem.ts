@@ -78,8 +78,7 @@ export default baseMixins.extend<options>().extend({
         'v-list-item--link': this.isClickable && !this.inactive,
         'v-list-item--three-line': this.threeLine,
         'v-list-item--two-line': this.twoLine,
-        ...this.themeClasses,
-        [this.activeClass]: this.isActive
+        ...this.themeClasses
       }
     },
     isClickable (): boolean {
