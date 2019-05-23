@@ -46,7 +46,7 @@ export default Vue.extend({
   computed: {
     classes (): object {
       return {
-        [this.activeClass]: this.isActive,
+        [this.activeClass]: this.to ? undefined : this.isActive,
         [this.proxyClass]: this.isActive
       }
     },
@@ -66,9 +66,7 @@ export default Vue.extend({
     isLink (): boolean {
       return this.to || this.href || this.link
     },
-    styles (): object {
-      return {}
-    }
+    styles: () => ({})
   },
 
   watch: {
@@ -138,7 +136,7 @@ export default Vue.extend({
       return { tag, data }
     },
     onRouteChange () {
-      if (!this.to || !this.$refs.link) return
+      if (!this.to || !this.$refs.link || !this.$route) return
       const activeClass = `${this.activeClass} ${this.proxyClass || ''}`.trim()
 
       const path = `_vnode.data.class.${activeClass}`

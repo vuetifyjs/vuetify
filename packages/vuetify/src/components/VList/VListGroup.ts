@@ -50,7 +50,10 @@ export default baseMixins.extend<options>().extend({
   directives: { Ripple },
 
   props: {
-    activeClass: String,
+    activeClass: {
+      type: String,
+      default: ''
+    },
     appendIcon: {
       type: String,
       default: '$vuetify.icons.expand'
@@ -132,7 +135,7 @@ export default baseMixins.extend<options>().extend({
       return this.$createElement(VListItem, {
         staticClass: 'v-list-group__header',
         class: {
-          [this.activeClass || '']: this.isActive
+          [this.activeClass]: this.isActive
         },
         props: {
           inputValue: this.isActive
