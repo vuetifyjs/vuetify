@@ -11,16 +11,14 @@ export default BaseItemGroup.extend({
     }
   },
 
-  props: {
-    activeClass: {
-      type: String,
-      default: 'v-btn--active'
-    }
-  },
-
   computed: {
     classes (): object {
       return BaseItemGroup.options.computed.classes.call(this)
     }
+  },
+
+  methods: {
+    // Isn't being passed down through types
+    genData: BaseItemGroup.options.methods.genData
   }
 })

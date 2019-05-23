@@ -1,7 +1,19 @@
+// Styles
+import './VListItemGroup.sass'
+
 // Extensions
 import { BaseItemGroup } from '../VItemGroup/VItemGroup'
 
-export default BaseItemGroup.extend({
+// Mixins
+import Colorable from '../../mixins/colorable'
+
+// Utilities
+import mixins from '../../util/mixins'
+
+export default mixins(
+  BaseItemGroup,
+  Colorable
+).extend({
   name: 'v-list-item-group',
 
   provide () {
@@ -10,10 +22,20 @@ export default BaseItemGroup.extend({
     }
   },
 
-  props: {
-    activeClass: {
-      type: String,
-      default: 'primary--text'
+  computed: {
+    classes (): object {
+      return {
+        ...BaseItemGroup.options.computed.classes.call(this),
+        'v-list-item-group': true
+      }
+    }
+  },
+
+  methods: {
+    genData (): object {
+      return this.setTextColor(this.color, {
+        ...BaseItemGroup.options.methods.genData.call(this)
+      })
     }
   }
 })

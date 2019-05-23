@@ -3,7 +3,9 @@
 
 // Theme
 +theme(v-list-item) using ($material)
-  color: map-deep-get($material, 'text', 'primary')
+
+  &:not(.v-list-item--active)
+    color: map-deep-get($material, 'text', 'primary') !important
 
   .v-list-item__mask
     color: map-deep-get($material, 'text', 'disabled')
@@ -25,17 +27,6 @@
   position: relative
   text-decoration: none
   user-select: none
-
-  &:before
-    background-color: currentColor
-    bottom: 0
-    content: ''
-    left: 0
-    opacity: 0
-    position: absolute
-    right: 0
-    top: 0
-    transition: $primary-transition
 
 // Element
 .v-list-item__action
@@ -170,13 +161,21 @@
 .v-list-item--link
   cursor: pointer
 
-.v-list-item--link,
-.v-list-group__header
-  &:hover:before
-    opacity: 0.04
+  &:before
+    background-color: currentColor
+    bottom: 0
+    content: ''
+    left: 0
+    opacity: 0
+    position: absolute
+    right: 0
+    top: 0
+    transition: $primary-transition
 
-  &:focus:before
-    opacity: 0.12
+  &:hover,
+  &:focus
+    &:before
+      opacity: 0.2
 
 .v-list-item--active
   .v-icon
@@ -185,10 +184,9 @@
   &:before
     opacity: 0.12
 
-  &:hover,
-  &:focus
-    &:before
-      opacity: 0.2
+.v-list-item--highlighted
+  &:before
+    opacity: .32
 
 .v-list-item__action--stack
   align-items: flex-end

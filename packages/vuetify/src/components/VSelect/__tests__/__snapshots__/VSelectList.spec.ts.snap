@@ -6,9 +6,9 @@ exports[`VSelectList.ts should display falsy items 1`] = `
   <div role="list"
        class="v-list v-sheet v-sheet--tile theme--light"
   >
-    <div aria-selected="false"
+    <div tabindex="-1"
+         aria-selected="false"
          role="listitem"
-         tabindex="-1"
          class="v-list-item v-list-item--link theme--light"
     >
       <div class="v-list-item__content">
@@ -17,9 +17,9 @@ exports[`VSelectList.ts should display falsy items 1`] = `
         </div>
       </div>
     </div>
-    <div aria-selected="false"
+    <div tabindex="-1"
+         aria-selected="false"
          role="listitem"
-         tabindex="-1"
          class="v-list-item v-list-item--link theme--light"
     >
       <div class="v-list-item__content">
@@ -28,9 +28,9 @@ exports[`VSelectList.ts should display falsy items 1`] = `
         </div>
       </div>
     </div>
-    <div aria-selected="false"
+    <div tabindex="-1"
+         aria-selected="false"
          role="listitem"
-         tabindex="-1"
          class="v-list-item v-list-item--link theme--light"
     >
       <div class="v-list-item__content">
@@ -39,9 +39,9 @@ exports[`VSelectList.ts should display falsy items 1`] = `
         </div>
       </div>
     </div>
-    <div aria-selected="false"
+    <div tabindex="-1"
+         aria-selected="false"
          role="listitem"
-         tabindex="-1"
          class="v-list-item v-list-item--link theme--light"
     >
       <div class="v-list-item__content">
@@ -50,9 +50,9 @@ exports[`VSelectList.ts should display falsy items 1`] = `
         </div>
       </div>
     </div>
-    <div aria-selected="false"
+    <div tabindex="-1"
+         aria-selected="false"
          role="listitem"
-         tabindex="-1"
          class="v-list-item v-list-item--link theme--light"
     >
       <div class="v-list-item__content">
@@ -71,9 +71,9 @@ exports[`VSelectList.ts should display no-data-text when item slot is provided 1
   <div role="list"
        class="v-list v-sheet v-sheet--tile theme--light"
   >
-    <div aria-selected="false"
+    <div tabindex="-1"
+         aria-selected="false"
          role="listitem"
-         tabindex="-1"
          class="v-list-item theme--light"
     >
       <div class="v-list-item__content">
@@ -97,9 +97,9 @@ exports[`VSelectList.ts should generate children 1`] = `
       true
     </div>
     <hr class="v-divider theme--light">
-    <div aria-selected="false"
+    <div tabindex="-1"
+         aria-selected="false"
          role="listitem"
-         tabindex="-1"
          class="v-list-item v-list-item--link theme--light"
     >
       <div class="v-list-item__content">
