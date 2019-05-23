@@ -91,7 +91,10 @@ export const BaseSlideGroup = mixins<options &
       return this.genTransition('prev')
     },
     classes (): object {
-      return BaseItemGroup.options.computed.classes.call(this)
+      return {
+        ...BaseItemGroup.options.computed.classes.call(this),
+        'v-slide-group': true
+      }
     },
     hasAffixes (): Boolean {
       return (
@@ -150,6 +153,15 @@ export const BaseSlideGroup = mixins<options &
         staticClass: 'v-slide-group__content',
         ref: 'content'
       }, this.$slots.default)
+    },
+    genData (): object {
+      return {
+        class: this.classes,
+        directives: [{
+          name: 'resize',
+          value: this.onResize
+        }]
+      }
     },
     genIcon (location: 'prev' | 'next'): VNode | null {
       let icon = location
@@ -324,14 +336,7 @@ export const BaseSlideGroup = mixins<options &
   },
 
   render (h): VNode {
-    return h('div', {
-      staticClass: 'v-item-group v-slide-group',
-      class: this.classes,
-      directives: [{
-        name: 'resize',
-        value: this.onResize
-      }]
-    }, [
+    return h('div', this.genData(), [
       this.genPrev(),
       this.genWrapper(),
       this.genNext()

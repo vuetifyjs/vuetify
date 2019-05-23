@@ -10,17 +10,11 @@
       pb-0
     >
       <div class="text-xs-center">
-        <h4 class="font-weight-medium grey--text">Premiere sponsor</h4>
-        <supporters-patron
-          v-if="supporters.special && supporters.special.length"
-          :value="supporters.special[0]"
-          :href="supporters.special[0].href"
-          class="mb-3"
-          large
-        />
-        <!-- <span class="d-block mb-3 caption grey--text text--lighten-1">
+        <h4 class="body-2 font-weight-bold grey--text">Premiere sponsor</h4>
+
+        <span class="d-block mb-3 caption grey--text text--lighten-1">
           One spot available
-        </span> -->
+        </span>
 
         <supporters-sponsor-btn
           class="mb-4"
