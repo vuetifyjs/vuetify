@@ -49,6 +49,7 @@ export const BaseItemGroup = mixins(
   computed: {
     classes (): Record<string, boolean> {
       return {
+        'v-item-group': true,
         ...this.themeClasses
       }
     },
@@ -99,6 +100,11 @@ export const BaseItemGroup = mixins(
   },
 
   methods: {
+    genData (): object {
+      return {
+        class: this.classes
+      }
+    },
     getValue (item: GroupableInstance, i: number): unknown {
       return item.value == null || item.value === ''
         ? i
@@ -235,10 +241,7 @@ export const BaseItemGroup = mixins(
   },
 
   render (h): VNode {
-    return h('div', {
-      staticClass: 'v-item-group',
-      class: this.classes
-    }, this.$slots.default)
+    return h('div', this.genData(), this.$slots.default)
   }
 })
 
