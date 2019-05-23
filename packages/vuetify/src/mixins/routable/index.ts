@@ -45,9 +45,14 @@ export default Vue.extend({
 
   computed: {
     classes (): object {
-      return {
-        [this.proxyClass]: this.isActive
-      }
+      const classes: Record<string, boolean> = {}
+
+      if (this.to) return classes
+
+      if (this.activeClass) classes[this.activeClass] = this.isActive
+      if (this.proxyClass) classes[this.proxyClass] = this.isActive
+
+      return classes
     },
     computedRipple (): RippleOptions | boolean {
       return this.ripple != null ? this.ripple : !this.disabled && this.isClickable
