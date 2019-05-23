@@ -15,7 +15,7 @@ export default mixins(Routable).extend({
       default: 'v-breadcrumbs__item--disabled'
     },
     ripple: {
-      type: Boolean,
+      type: [Boolean, Object],
       default: false
     }
   },
