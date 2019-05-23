@@ -9,6 +9,9 @@ import {
   Wrapper
 } from '@vue/test-utils'
 
+// Types
+import { GroupableInstance } from '../../VItemGroup/VItemGroup'
+
 describe('VSlideGroup.ts', () => {
   type Instance = ExtractVue<typeof VSlideGroup>
   let mountFunction: (options?: object) => Wrapper<Instance>
@@ -77,43 +80,29 @@ describe('VSlideGroup.ts', () => {
 
   it('should compute centered position for active element', async () => {
     const wrapper = mountFunction()
-
-    wrapper.setData({
-      widths: {
+    const testOffset = (offsetLeft: number, clientWidth: number, rtl: boolean, expectedOffset: number) => {
+      const offset = wrapper.vm.computeCenteredOffset({
+        $el: {
+          offsetLeft,
+          clientWidth
+        } as Pick<HTMLElement, 'offsetLeft' | 'clientWidth'>
+      } as GroupableInstance, {
         content: 1000,
         wrapper: 500
-      }
-    })
+      }, rtl)
 
-    expect(wrapper.vm.computeCenteredOffset(10, 20)).toBe(0)
-    expect(wrapper.vm.computeCenteredOffset(400, 20)).toBe(160)
-    expect(wrapper.vm.computeCenteredOffset(600, 20)).toBe(360)
-    expect(wrapper.vm.computeCenteredOffset(960, 20)).toBe(500)
-  })
+      expect(offset).toBe(expectedOffset)
+    }
 
-  it('should compute centered position for active element in rtl mode', async () => {
-    const wrapper = mountFunction({
-      mocks: {
-        $vuetify: {
-          breakpoint: {
-            width: 1920
-          },
-          rtl: true
-        }
-      }
-    })
-
-    wrapper.setData({
-      widths: {
-        content: 1000,
-        wrapper: 500
-      }
-    })
-
-    expect(wrapper.vm.computeCenteredOffset(10, 20)).toBe(-500)
-    expect(wrapper.vm.computeCenteredOffset(400, 20)).toBe(-340)
-    expect(wrapper.vm.computeCenteredOffset(600, 20)).toBe(-140)
-    expect(wrapper.vm.computeCenteredOffset(960, 20)).toBe(-0)
+    testOffset(10, 20, false, 0)
+    testOffset(400, 20, false, 160)
+    testOffset(600, 20, false, 360)
+    testOffset(960, 20, false, 500)
+    // RTL
+    testOffset(10, 20, true, -500)
+    testOffset(400, 20, true, -340)
+    testOffset(600, 20, true, -140)
+    testOffset(960, 20, true, -0)
   })
 
   // TODO: Unsure what we're actually testing, willChange not found in jest 24
