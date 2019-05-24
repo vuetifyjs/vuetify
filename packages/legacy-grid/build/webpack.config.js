@@ -34,7 +34,7 @@ const scssLoaders = [
   } }
 ]
 
-module.exports = {
+module.exports = () => ({
   mode: isProd ? 'production' : 'development',
   resolve: {
     extensions: ['*', '.js', '.json', '.vue', '.ts']
@@ -79,7 +79,7 @@ module.exports = {
           'babel-loader',
           {
             loader: 'ts-loader',
-            options: { happyPackMode: true }
+            options: { transpileOnly: true }
           }
         ],
         exclude: /node_modules/
@@ -98,4 +98,4 @@ module.exports = {
     hints: false
   },
   stats: { children: false }
-}
+})

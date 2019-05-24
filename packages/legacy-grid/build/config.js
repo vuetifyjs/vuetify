@@ -45,7 +45,7 @@ const builds = {
 }
 
 function genConfig (opts) {
-  const config = merge({}, base, opts.config)
+  const config = merge(base(), opts.config)
 
   config.plugins = config.plugins.concat([
     new webpack.DefinePlugin({
