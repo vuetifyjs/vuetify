@@ -24,8 +24,8 @@
   position: relative
   user-select: none
 
-  > .v-list-item
-    padding: 0
+  &.v-list-item--active:not(:hover):before
+    display: none
 
 .v-list-group__items
   flex: 1 1 auto

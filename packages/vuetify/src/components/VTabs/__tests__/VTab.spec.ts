@@ -74,7 +74,7 @@ describe('VTab.ts', () => {
     // explicitly mock class added
     // by vue router
     ;(wrapper.vm.$refs.link as any)._vnode.data = {
-      class: { 'bar': true }
+      class: { 'bar v-tab--active': true }
     }
     ;(wrapper.vm as any).$route.path = '/foo'
 

@@ -19,6 +19,7 @@
   display: inline-flex
 
   > .v-btn.v-btn
+    background-color: transparent !important
     border-radius: 0
     border-style: solid
     border-width: thin
@@ -38,6 +39,9 @@
 
     &:after
       display: none
+
+    &--active
+      color: inherit
 
 // Modifiers
 .v-btn-toggle--rounded

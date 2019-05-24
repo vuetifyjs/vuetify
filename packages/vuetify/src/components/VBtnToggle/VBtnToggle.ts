@@ -3,16 +3,19 @@ import './VBtnToggle.sass'
 
 // Mixins
 import ButtonGroup from '../../mixins/button-group'
+import Colorable from '../../mixins/colorable'
+
+// Utilities
+import mixins from '../../util/mixins'
 
 /* @vue/component */
-export default ButtonGroup.extend({
+export default mixins(
+  ButtonGroup,
+  Colorable
+).extend({
   name: 'v-btn-toggle',
 
   props: {
-    activeClass: {
-      type: String,
-      default: 'v-btn--active'
-    },
     rounded: Boolean
   },
 
@@ -23,6 +26,14 @@ export default ButtonGroup.extend({
         'v-btn-toggle': true,
         'v-btn-toggle--rounded': this.rounded
       }
+    }
+  },
+
+  methods: {
+    genData () {
+      return this.setTextColor(this.color, {
+        ...ButtonGroup.options.methods.genData.call(this)
+      })
     }
   }
 })

@@ -27,7 +27,8 @@
         >
           <v-chip
             slot-scope="{ active, toggle }"
-            :selected="active"
+            active-class="purple--text"
+            :input-value="active"
             @click="toggle"
           >
             Tag {{ n }}
