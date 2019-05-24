@@ -26,7 +26,7 @@
       I'm v-chip
     </v-chip>
 
-    <v-switch label="Active" v-model="active"></v-switch>
+    <v-switch v-model="active" label="Active"></v-switch>
   </v-layout>
 </template>
 
