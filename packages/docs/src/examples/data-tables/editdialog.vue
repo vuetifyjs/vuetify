@@ -4,7 +4,7 @@
       :headers="headers"
       :items="desserts"
     >
-      <template v-slot:items="props">
+      <template v-slot:item.name="{ item }">
         <v-edit-dialog
           :return-value.sync="item.name"
           @save="save"
