@@ -3,7 +3,7 @@
     <v-card-text>
       <v-layout column align-center>
         <p>Rounded</p>
-        <v-btn-toggle rounded v-model="toggle_exclusive">
+        <v-btn-toggle v-model="toggle_exclusive" rounded>
           <v-btn>
             <v-icon>format_align_left</v-icon>
           </v-btn>
