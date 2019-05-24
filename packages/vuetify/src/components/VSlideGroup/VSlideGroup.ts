@@ -6,7 +6,7 @@ import VIcon from '../VIcon'
 import { VFadeTransition } from '../transitions'
 
 // Extensions
-import { BaseItemGroup } from '../VItemGroup/VItemGroup'
+import { BaseItemGroup, GroupableInstance } from '../VItemGroup/VItemGroup'
 
 // Directives
 import Resize from '../../directives/resize'
@@ -21,6 +21,11 @@ import Vue, { VNode } from 'vue'
 interface TouchEvent {
   touchstartX: number
   touchmoveX: number
+}
+
+interface Widths {
+  content: number
+  wrapper: number
 }
 
 interface options extends Vue {
@@ -50,6 +55,7 @@ export const BaseSlideGroup = mixins<options &
       type: String,
       default: 'v-slide-item--active'
     },
+    centerActive: Boolean,
     nextIcon: {
       type: String,
       default: '$vuetify.icons.next'
@@ -269,27 +275,43 @@ export const BaseSlideGroup = mixins<options &
       this.isOverflowing && fn(e)
     },
     scrollIntoView () {
-      /* istanbul ignore next */
-      if (!this.selectedItem) return
-      if (!this.isOverflowing) {
-        (this.scrollOffset = 0)
+      if (!this.selectedItem) {
         return
       }
 
-      const totalWidth = this.widths.wrapper + this.scrollOffset
-      const { clientWidth, offsetLeft } = this.selectedItem.$el as HTMLElement
-      const itemOffset = clientWidth + offsetLeft
-      let additionalOffset = clientWidth * 0.3
-
-      if (this.selectedItem === this.items[this.items.length - 1]) {
-        additionalOffset = 0 // don't add an offset if selecting the last tab
+      if (this.centerActive) {
+        this.scrollOffset = this.computeCenteredOffset(this.selectedItem, this.widths, this.$vuetify.rtl)
+      } else if (this.isOverflowing) {
+        this.scrollOffset = this.calculateUpdatedOffset(this.selectedItem, this.widths, this.scrollOffset)
+      } else {
+        this.scrollOffset = 0
       }
+    },
+    calculateUpdatedOffset (selectedItem: GroupableInstance, widths: Widths, currentScrollOffset: number): number {
+      const { offsetLeft, clientWidth } = selectedItem.$el as HTMLElement
+
+      const totalWidth = widths.wrapper + currentScrollOffset
+      const itemOffset = clientWidth + offsetLeft
+      const additionalOffset = clientWidth * 0.3
 
       /* istanbul ignore else */
-      if (offsetLeft < this.scrollOffset) {
-        this.scrollOffset = Math.max(offsetLeft - additionalOffset, 0)
+      if (offsetLeft < currentScrollOffset) {
+        return Math.max(offsetLeft - additionalOffset, 0)
       } else if (totalWidth < itemOffset) {
-        this.scrollOffset -= totalWidth - itemOffset - additionalOffset
+        return Math.min(currentScrollOffset - (totalWidth - itemOffset - additionalOffset), widths.content - widths.wrapper)
+      } else {
+        return currentScrollOffset
+      }
+    },
+    computeCenteredOffset (selectedItem: GroupableInstance, widths: Widths, rtl: boolean): number {
+      const { offsetLeft, clientWidth } = selectedItem.$el as HTMLElement
+
+      if (rtl) {
+        const offsetCentered = widths.content - offsetLeft - clientWidth / 2 - widths.wrapper / 2
+        return -Math.min(widths.content - widths.wrapper, Math.max(0, offsetCentered))
+      } else {
+        const offsetCentered = offsetLeft + clientWidth / 2 - widths.wrapper / 2
+        return Math.min(widths.content - widths.wrapper, Math.max(0, offsetCentered))
       }
     },
     scrollTo /* istanbul ignore next */ (location: 'prev' | 'next') {
