@@ -224,17 +224,16 @@ export const BaseSlideGroup = mixins<options &
     newOffset /* istanbul ignore next */ (direction: 'prev' | 'next') {
       // Force reflow
       const clientWidth = this.$refs.wrapper.clientWidth
+      const sign = this.$vuetify.rtl ? -1 : 1
 
       if (direction === 'prev') {
-        return Math.max(this.scrollOffset - clientWidth, 0)
+        return sign * Math.max(sign * this.scrollOffset - clientWidth, 0)
       }
 
-      const min = Math.min(
-        this.scrollOffset + clientWidth,
+      return sign * Math.min(
+        sign * this.scrollOffset + clientWidth,
         this.$refs.content.clientWidth - clientWidth
       )
-
-      return this.$vuetify.rtl ? -min : min
     },
     onAffixClick (location: 'prev' | 'next') {
       this.$emit(`click:${location}`)
@@ -282,26 +281,32 @@ export const BaseSlideGroup = mixins<options &
       if (this.centerActive) {
         this.scrollOffset = this.computeCenteredOffset(this.selectedItem, this.widths, this.$vuetify.rtl)
       } else if (this.isOverflowing) {
-        this.scrollOffset = this.calculateUpdatedOffset(this.selectedItem, this.widths, this.scrollOffset)
+        this.scrollOffset = this.calculateUpdatedOffset(this.selectedItem, this.widths, this.$vuetify.rtl, this.scrollOffset)
       } else {
         this.scrollOffset = 0
       }
     },
-    calculateUpdatedOffset (selectedItem: GroupableInstance, widths: Widths, currentScrollOffset: number): number {
-      const { offsetLeft, clientWidth } = selectedItem.$el as HTMLElement
+    calculateUpdatedOffset (selectedItem: GroupableInstance, widths: Widths, rtl: boolean, currentScrollOffset: number): number {
+      const clientWidth = selectedItem.$el.clientWidth
+      const offsetLeft = rtl
+        ? (widths.content - (selectedItem.$el as HTMLElement).offsetLeft - clientWidth)
+        : (selectedItem.$el as HTMLElement).offsetLeft
+
+      if (rtl) {
+        currentScrollOffset = -currentScrollOffset
+      }
 
       const totalWidth = widths.wrapper + currentScrollOffset
       const itemOffset = clientWidth + offsetLeft
       const additionalOffset = clientWidth * 0.3
 
-      /* istanbul ignore else */
       if (offsetLeft < currentScrollOffset) {
-        return Math.max(offsetLeft - additionalOffset, 0)
+        currentScrollOffset = Math.max(offsetLeft - additionalOffset, 0)
       } else if (totalWidth < itemOffset) {
-        return Math.min(currentScrollOffset - (totalWidth - itemOffset - additionalOffset), widths.content - widths.wrapper)
-      } else {
-        return currentScrollOffset
+        currentScrollOffset = Math.min(currentScrollOffset - (totalWidth - itemOffset - additionalOffset), widths.content - widths.wrapper)
       }
+
+      return rtl ? -currentScrollOffset : currentScrollOffset
     },
     computeCenteredOffset (selectedItem: GroupableInstance, widths: Widths, rtl: boolean): number {
       const { offsetLeft, clientWidth } = selectedItem.$el as HTMLElement
