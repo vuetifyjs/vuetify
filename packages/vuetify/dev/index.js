@@ -4,7 +4,7 @@ import Vuetify from 'vuetify'
 import router from './router'
 import '@mdi/font/css/materialdesignicons.css'
 
-// Vue.config.performance = true
+Vue.config.performance = true
 
 Vue.use(Vuetify)
 

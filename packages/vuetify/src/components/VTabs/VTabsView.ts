@@ -1,6 +1,5 @@
 import Vue, { VNode } from 'vue'
 import { consoleWarn } from '../../util/console'
-// import { VWindow } from '../VWindow'
 import VTabsItems from './VTabsItems'
 import VTabItem from './VTabItem'
 
@@ -47,29 +46,6 @@ const VTabsView = Vue.extend({
         }
       }, [h(parent.$router.match(item.value).matched[0].components[props.name])])
     }))
-    // if (oldVal && newVal && oldVal !== newVal) {
-    //   const oldIdx = items.findIndex(tab => tab.value === oldVal)
-    //   const newIdx = items.findIndex(tab => tab.value === newVal)
-    //   console.log({
-    //     oldVal,
-    //     newVal,
-    //     oldIdx,
-    //     newIdx
-    //   })
-
-    //   h(VWindow, {
-    //     props: {
-    //       mandatory: ctx.props.mandatory,
-    //       reverse: oldIdx > newIdx
-    //     }
-    //   }, [
-    //     //
-    //   ])
-    // }
-
-    // return h('transition', {
-    //   // attrs: { name: tabs.currentTransition }
-    // }, [view])
   }
 })
 
