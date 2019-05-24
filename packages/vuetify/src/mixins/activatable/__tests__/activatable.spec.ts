@@ -52,7 +52,13 @@ describe('activatable.ts', () => {
   it('should pass value to the activator slot', () => {
     const wrapper = mountFunction({
       scopedSlots: {
-        activator: ({ on, value }) => vm.$createElement('button', { on }, [String(value)])
+        activator: scope => vm.$createElement('button', {
+          on: {
+            click () {
+              scope.value = !scope.value
+            }
+          }
+        }, [String(scope.value)])
       },
       render (h) {
         return h('div', [ this.genActivator() ])
