@@ -49,6 +49,24 @@ describe('activatable.ts', () => {
     expect(wrapper.vm.isActive).toBeTruthy()
   })
 
+  it('should pass value to the activator slot', () => {
+    const wrapper = mountFunction({
+      scopedSlots: {
+        activator: ({ on, value }) => vm.$createElement('button', { on }, [String(value)])
+      },
+      render (h) {
+        return h('div', [ this.genActivator() ])
+      }
+    })
+
+    expect(wrapper.find('button').text()).toBe('false')
+
+    const btn = wrapper.find('button')
+    btn.trigger('click')
+
+    expect(wrapper.find('button').text()).toBe('true')
+  })
+
   it('should render activator slot with hover', async () => {
     const runDelay = jest.fn()
 

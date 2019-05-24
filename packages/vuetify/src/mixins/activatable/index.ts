@@ -55,7 +55,8 @@ export default baseMixins.extend({
   methods: {
     genActivator () {
       const node = getSlot(this, 'activator', {
-        on: this.genActivatorListeners()
+        on: this.genActivatorListeners(),
+        value: this.isActive
       }) || []
 
       this.activatorNode = node
