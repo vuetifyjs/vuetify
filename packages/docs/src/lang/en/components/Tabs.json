@@ -39,7 +39,7 @@
     },
     "centerActive": {
       "header": "### Centered active tab",
-      "desc": "Active tab be always centered"
+      "desc": "Active tab is always centered"
     },
     "overflowToMenu": {
       "header": "### With menu",
