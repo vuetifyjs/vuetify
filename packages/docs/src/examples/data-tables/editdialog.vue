@@ -22,6 +22,8 @@
             ></v-text-field>
           </template>
         </v-edit-dialog>
+      </template>
+      <template v-slot:item.iron="{ item }">
         <v-edit-dialog
           :return-value.sync="item.iron"
           large
