@@ -37,21 +37,6 @@ export default baseMixins.extend({
     activatorNode: [] as VNode[]
   }),
 
-  computed: {
-    valueProxy (): object {
-      const self = this
-
-      return {
-        get value () {
-          return self.isActive
-        },
-        set value (isActive: boolean) {
-          self.isActive = isActive
-        }
-      }
-    }
-  },
-
   watch: {
     activator () {
       this.activatorElement = null
@@ -68,18 +53,28 @@ export default baseMixins.extend({
   },
 
   methods: {
+    getValueProxy (): object {
+      const self = this
+      return {
+        get value () {
+          return self.isActive
+        },
+        set value (isActive: boolean) {
+          self.isActive = isActive
+        }
+      }
+    },
     genActivator () {
-      const node = getSlot(this, 'activator', {
-        on: this.genActivatorListeners(),
-        ...this.valueProxy
-      }) || []
+      const node = getSlot(this, 'activator', Object.assign(this.getValueProxy(), {
+        on: this.genActivatorListeners()
+      })) || []
 
       this.activatorNode = node
 
       return node
     },
     getContentSlot () {
-      return getSlot(this, 'default', this.valueProxy, true)
+      return getSlot(this, 'default', this.getValueProxy(), true)
     },
     genActivatorListeners () {
       if (this.disabled) return {}
