@@ -30,7 +30,12 @@
       "children": [
         {
           "type": "examples",
-          "value": [ "api", "scopedSlots", "customFilter", "asynchronous", "advanced" ]
+          "value": [
+            "simple/api",
+            "simple/customFilter",
+            "intermediate/scopedSlots",
+            "intermediate/asynchronous",
+            "intermediate/advanced" ]
         }
       ]
     },
