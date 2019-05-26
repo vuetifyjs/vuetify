@@ -45,6 +45,10 @@
             "desktop",
             "alignWithTitle",
             "grow",
+            {
+              "file": "centerActive",
+              "newIn": "2.0"
+            },
             "overflowToMenu",
             "pagination",
             "icons",

@@ -9,6 +9,9 @@ import {
   Wrapper
 } from '@vue/test-utils'
 
+// Types
+import { GroupableInstance } from '../../VItemGroup/VItemGroup'
+
 describe('VSlideGroup.ts', () => {
   type Instance = ExtractVue<typeof VSlideGroup>
   let mountFunction: (options?: object) => Wrapper<Instance>
@@ -73,6 +76,33 @@ describe('VSlideGroup.ts', () => {
     wrapper.vm.$vuetify.breakpoint.width = 700
 
     expect(wrapper.vm.isMobile).toBe(true)
+  })
+
+  it('should compute centered position for active element', async () => {
+    const wrapper = mountFunction()
+    const testOffset = (offsetLeft: number, clientWidth: number, rtl: boolean, expectedOffset: number) => {
+      const offset = wrapper.vm.computeCenteredOffset({
+        $el: {
+          offsetLeft,
+          clientWidth
+        } as Pick<HTMLElement, 'offsetLeft' | 'clientWidth'>
+      } as GroupableInstance, {
+        content: 1000,
+        wrapper: 500
+      }, rtl)
+
+      expect(offset).toBe(expectedOffset)
+    }
+
+    testOffset(10, 20, false, 0)
+    testOffset(400, 20, false, 160)
+    testOffset(600, 20, false, 360)
+    testOffset(960, 20, false, 500)
+    // RTL
+    testOffset(10, 20, true, -500)
+    testOffset(400, 20, true, -340)
+    testOffset(600, 20, true, -140)
+    testOffset(960, 20, true, -0)
   })
 
   // TODO: Unsure what we're actually testing, willChange not found in jest 24
