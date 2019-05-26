@@ -43,8 +43,7 @@ describe('activatable.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
     expect(wrapper.vm.isActive).toBeFalsy()
 
-    const btn = wrapper.find('button')
-    btn.trigger('click')
+    wrapper.find('button').trigger('click')
 
     expect(wrapper.vm.isActive).toBeTruthy()
   })
@@ -67,8 +66,7 @@ describe('activatable.ts', () => {
 
     expect(wrapper.find('button').text()).toBe('false')
 
-    const btn = wrapper.find('button')
-    btn.trigger('click')
+    wrapper.find('button').trigger('click')
 
     expect(wrapper.find('button').text()).toBe('true')
   })
