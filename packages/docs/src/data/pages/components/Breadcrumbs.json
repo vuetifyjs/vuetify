@@ -30,8 +30,8 @@
         {
           "type": "examples",
           "value": [
-            "iconDividers",
-            "itemSlot"
+            "intermediate/iconDividers",
+            "intermediate/itemSlot"
           ]
         }
       ]
