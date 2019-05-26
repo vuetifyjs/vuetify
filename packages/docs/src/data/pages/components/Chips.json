@@ -29,19 +29,31 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "playground",
-            "photos",
-            "actionChips",
-            "filtering",
-            "colored",
-            "icon",
-            "outline",
-            "label",
-            "closable",
-            "expandable",
-            "inSelects"
+            "simple/colored",
+            "simple/icon",
+            "simple/outlined",
+            "simple/label",
+            "simple/sizes",
+            "simple/draggable",
+            "simple/filter",
+            "simple/noRipple",
+            "intermediate/closable",
+            "intermediate/actionChips",
+            "intermediate/inSelects",
+            "complex/photos",
+            "complex/filtering",
+            "complex/expandable"
           ]
         }
       ]

@@ -57,8 +57,12 @@
   vertical-align: middle
   white-space: nowrap
 
-  &:before,
-  &:after
+  &:hover,
+  &:focus
+    &:before
+      opacity: 0.2
+
+  &:before
     border-radius: inherit
     bottom: 0
     color: inherit
@@ -82,21 +86,6 @@
         height: #{$size}px
         min-width: #{round($size * 1.777777777777778)}px // default ratio
         padding: 0 #{$size / 2}px
-
-  &.v-btn--active,
-  &:focus
-    &:before
-      opacity: 0.12
-
-    &:after
-      opacity: 1
-
-  &:hover
-    &:before
-      opacity: 0.06
-
-    &:after
-      opacity: 1
 
   +rtl()
     .v-icon--left
@@ -146,6 +135,13 @@
   width: 100%
 
 // Modifiers
+.v-btn--active
+  .v-icon
+    color: inherit
+
+  &:before
+    opacity: 0.12
+
 .v-btn--absolute
   position: absolute
 

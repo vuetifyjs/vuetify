@@ -127,10 +127,14 @@ export default mixins(Themeable).extend({
 
   methods: {
     toggleSelectAll (value: boolean): void {
+      const selection = Object.assign({}, this.selection)
+
       this.internalCurrentItems.forEach((item: any) => {
         const key = getObjectValueByPath(item, this.itemKey)
-        this.$set(this.selection, key, value)
+        selection[key] = value
       })
+
+      this.selection = selection
     },
     isSelected (item: any): boolean {
       return this.selection[getObjectValueByPath(item, this.itemKey)] || false
