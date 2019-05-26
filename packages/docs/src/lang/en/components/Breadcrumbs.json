@@ -12,6 +12,10 @@
     "itemSlot": {
       "header": "### Item slot",
       "desc": "You can use the scoped `item` slot to customize each breadcrumb."
+    },
+    "large": {
+      "header": "### Large",
+      "desc": "Large breadcrumbs have larger font size."
     }
   },
   "props": {
