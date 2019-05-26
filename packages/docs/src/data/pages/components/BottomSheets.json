@@ -31,7 +31,8 @@
         {
           "type": "examples",
           "value": [
-            "simple/inset"
+            "simple/inset",
+            "simple/persistent"
           ]
         }
       ]

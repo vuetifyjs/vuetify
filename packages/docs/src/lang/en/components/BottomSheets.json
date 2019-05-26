@@ -8,6 +8,10 @@
     "inset": {
       "header": "### Inset bottom sheets",
       "desc": "Bottom sheets can be inset, reducing their maximum width on desktop to 70%. This can be further reduced manually using the `width` prop. We also showcase dynamic class binding using the Vuetify breakpoint object."
+    },
+    "persistent": {
+      "header": "### Persistent",
+      "desc": "Persistent bottom sheets can't be closed by clicking outside them."
     }
   },
   "props": {
