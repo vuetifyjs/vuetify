@@ -112,6 +112,20 @@
     flex-grow: 0
     flex-shrink: 0
 
+// VForm automatically sets grid-list-lg on containers
+.v-form
+  > .container
+    padding: map-get($grid-gutters, 'lg')
+
+    > .layout > .flex
+      padding: (map-get($grid-gutters, 'lg') / 2)
+
+    > .layout:only-child
+      margin: -(map-get($grid-gutters, 'lg') / 2)
+
+    > .layout:not(:only-child)
+      margin: auto -(map-get($grid-gutters, 'lg') / 2)
+
 .align
   &-start
     align-items: flex-start !important
