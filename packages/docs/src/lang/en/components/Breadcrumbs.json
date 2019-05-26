@@ -16,6 +16,10 @@
     "large": {
       "header": "### Large",
       "desc": "Large breadcrumbs have larger font size."
+    },
+    "divider": {
+      "header": "### Custom divider",
+      "desc": "Breadcrumbs separator can be set using `divider` property."
     }
   },
   "props": {
