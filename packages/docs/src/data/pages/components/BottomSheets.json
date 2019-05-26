@@ -32,7 +32,8 @@
           "type": "examples",
           "value": [
             "simple/inset",
-            "simple/persistent"
+            "simple/persistent",
+            "simple/model"
           ]
         }
       ]

@@ -12,6 +12,10 @@
     "persistent": {
       "header": "### Persistent",
       "desc": "Persistent bottom sheets can't be closed by clicking outside them."
+    },
+    "model": {
+      "header": "### `v-model` control",
+      "desc": "Bottom sheets can be controlled using `v-model`. You can use it to close them or if you can't use `activator` slot."
     }
   },
   "props": {
