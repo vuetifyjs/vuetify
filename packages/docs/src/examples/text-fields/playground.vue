@@ -6,6 +6,9 @@
     <v-flex xs12 sm6 class="pa-1">
       <v-text-field v-model="hint" label="Hint"></v-text-field>
     </v-flex>
+    <v-flex xs12 class="pa-1">
+      <v-text-field v-model="placeholder" label="Placeholder"></v-text-field>
+    </v-flex>
     <v-switch v-model="shaped" class="ma-1" label="Shaped" :disabled="!outlined && !filled"></v-switch>
     <v-switch v-model="outlined" class="ma-1" label="Outlined"></v-switch>
     <v-switch v-model="rounded" class="ma-1" label="Rounded"></v-switch>
@@ -27,6 +30,7 @@
         v-model="model"
         :label="label"
         :hint="hint"
+        :placeholder="placeholder"
         :shaped="shaped"
         :outlined="outlined"
         :rounded="rounded"
@@ -52,6 +56,7 @@
       model: 'I\'m a text field',
       label: 'Hey!',
       hint: 'Customize me!',
+      placeholder: '',
       shaped: false,
       outlined: false,
       rounded: false,
