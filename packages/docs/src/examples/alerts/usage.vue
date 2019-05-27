@@ -11,7 +11,7 @@
       :value="true"
       type="info"
     >
-      This is a info alert.
+      This is an info alert.
     </v-alert>
 
     <v-alert
@@ -25,7 +25,7 @@
       :value="true"
       type="error"
     >
-      This is a error alert.
+      This is an error alert.
     </v-alert>
   </div>
 </template>
