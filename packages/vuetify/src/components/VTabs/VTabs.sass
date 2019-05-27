@@ -90,6 +90,19 @@
   .v-tabs-slider-wrapper + *
     margin-left: auto
 
+  +rtl()
+    .v-tabs-bar__content > *:last-child
+      margin-right: 0
+      margin-left: auto
+
+    .v-tabs-bar__content > *:first-child:not(.v-tabs-slider-wrapper)
+      margin-left: 0
+      margin-right: auto
+
+    .v-tabs-slider-wrapper + *
+      margin-left: 0
+      margin-right: auto
+
 .v-tabs--fixed-tabs
   .v-tab
     flex: 1 1 auto

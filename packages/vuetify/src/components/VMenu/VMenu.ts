@@ -318,7 +318,7 @@ export default baseMixins.extend({
       return this.$createElement(
         'div',
         options,
-        this.showLazyContent(this.$slots.default)
+        this.showLazyContent(this.getContentSlot())
       )
     },
     getTiles () {
