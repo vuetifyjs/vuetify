@@ -1,13 +1,9 @@
 <template>
-  <v-card
-    class="hide-overflow mx-auto"
-    height="200"
-    max-width="500"
-  >
+  <div class="hide-overflow">
     <v-card-text class="text-xs-center">
       <v-btn
         text
-        color="deep-purple accent-4"
+        color="deep-purple"
         @click="showNav = !showNav"
       >
         Toggle Nav
@@ -17,10 +13,8 @@
     <v-bottom-navigation
       :input-value="showNav"
       :value="activeBtn"
-      absolute
-      color="deep-purple accent-4"
+      color="deep-purple"
       dark
-      horizontal
     >
       <v-btn>
         <span>Recents</span>
@@ -37,7 +31,7 @@
         <v-icon>place</v-icon>
       </v-btn>
     </v-bottom-navigation>
-  </v-card>
+  </div>
 </template>
 
 <script>
