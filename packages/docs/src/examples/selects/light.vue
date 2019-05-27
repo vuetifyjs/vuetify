@@ -22,7 +22,7 @@
           <v-select
             v-model="value"
             :items="items"
-            box
+            filled
             chips
             label="Chips"
             multiple
@@ -35,7 +35,7 @@
             chips
             label="Chips"
             multiple
-            outline
+            outlined
           ></v-select>
         </v-flex>
         <v-flex xs12 sm6>

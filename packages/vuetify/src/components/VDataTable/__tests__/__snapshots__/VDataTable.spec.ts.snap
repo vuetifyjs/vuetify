@@ -110,7 +110,7 @@ exports[`VDataTable.ts should filter headers 1`] = `
     <div class="v-data-footer__select">
       Rows per page:
       <div role="combobox"
-           class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
       >
         <div class="v-input__control">
           <div class="v-input__slot">
@@ -204,7 +204,7 @@ exports[`VDataTable.ts should render 1`] = `
     <div class="v-data-footer__select">
       Rows per page:
       <div role="combobox"
-           class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
       >
         <div class="v-input__control">
           <div class="v-input__slot">
@@ -325,7 +325,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
     <div class="v-data-footer__select">
       Rows per page:
       <div role="combobox"
-           class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
       >
         <div class="v-input__control">
           <div class="v-input__slot">
@@ -521,7 +521,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
     <div class="v-data-footer__select">
       Rows per page:
       <div role="combobox"
-           class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
       >
         <div class="v-input__control">
           <div class="v-input__slot">
@@ -799,7 +799,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
     <div class="v-data-footer__select">
       Rows per page:
       <div role="combobox"
-           class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
       >
         <div class="v-input__control">
           <div class="v-input__slot">
@@ -979,7 +979,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
     <div class="v-data-footer__select">
       Rows per page:
       <div role="combobox"
-           class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
       >
         <div class="v-input__control">
           <div class="v-input__slot">
@@ -1258,7 +1258,7 @@ exports[`VDataTable.ts should render with data 1`] = `
     <div class="v-data-footer__select">
       Rows per page:
       <div role="combobox"
-           class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
       >
         <div class="v-input__control">
           <div class="v-input__slot">
@@ -1433,7 +1433,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
     <div class="v-data-footer__select">
       Rows per page:
       <div role="combobox"
-           class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
       >
         <div class="v-input__control">
           <div class="v-input__slot">
@@ -1712,7 +1712,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
     <div class="v-data-footer__select">
       Rows per page:
       <div role="combobox"
-           class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
       >
         <div class="v-input__control">
           <div class="v-input__slot">
@@ -2076,7 +2076,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
     <div class="v-data-footer__select">
       Rows per page:
       <div role="combobox"
-           class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
       >
         <div class="v-input__control">
           <div class="v-input__slot">
@@ -2270,7 +2270,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
     <div class="v-data-footer__select">
       Rows per page:
       <div role="combobox"
-           class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
       >
         <div class="v-input__control">
           <div class="v-input__slot">
@@ -2549,7 +2549,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
     <div class="v-data-footer__select">
       Rows per page:
       <div role="combobox"
-           class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
       >
         <div class="v-input__control">
           <div class="v-input__slot">
@@ -2640,6 +2640,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               scope="col"
               aria-label
               aria-sort="none"
+              width="1px"
               class="text-xs-left"
           >
             <span>
@@ -2735,7 +2736,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
       <tbody>
         <tr>
           <td class="text-xs-left">
-            <i aria-hidden="true"
+            <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
@@ -2762,7 +2763,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         </tr>
         <tr>
           <td class="text-xs-left">
-            <i aria-hidden="true"
+            <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
@@ -2789,7 +2790,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         </tr>
         <tr>
           <td class="text-xs-left">
-            <i aria-hidden="true"
+            <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
@@ -2816,7 +2817,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         </tr>
         <tr>
           <td class="text-xs-left">
-            <i aria-hidden="true"
+            <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
@@ -2843,7 +2844,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         </tr>
         <tr>
           <td class="text-xs-left">
-            <i aria-hidden="true"
+            <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
@@ -2875,7 +2876,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
     <div class="v-data-footer__select">
       Rows per page:
       <div role="combobox"
-           class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
       >
         <div class="v-input__control">
           <div class="v-input__slot">
@@ -2966,6 +2967,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               scope="col"
               aria-label
               aria-sort="none"
+              width="1px"
               class="text-xs-left"
           >
             <span>
@@ -3061,7 +3063,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
       <tbody>
         <tr>
           <td class="text-xs-left">
-            <i aria-hidden="true"
+            <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light v-data-table__expand-icon--active"
             >
               $vuetify.icons.expand
@@ -3088,7 +3090,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         </tr>
         <tr>
           <td class="text-xs-left">
-            <i aria-hidden="true"
+            <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light v-data-table__expand-icon--active"
             >
               $vuetify.icons.expand
@@ -3115,7 +3117,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         </tr>
         <tr>
           <td class="text-xs-left">
-            <i aria-hidden="true"
+            <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light v-data-table__expand-icon--active"
             >
               $vuetify.icons.expand
@@ -3142,7 +3144,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         </tr>
         <tr>
           <td class="text-xs-left">
-            <i aria-hidden="true"
+            <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light v-data-table__expand-icon--active"
             >
               $vuetify.icons.expand
@@ -3169,7 +3171,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         </tr>
         <tr>
           <td class="text-xs-left">
-            <i aria-hidden="true"
+            <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light v-data-table__expand-icon--active"
             >
               $vuetify.icons.expand
@@ -3201,7 +3203,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
     <div class="v-data-footer__select">
       Rows per page:
       <div role="combobox"
-           class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
       >
         <div class="v-input__control">
           <div class="v-input__slot">
@@ -3292,6 +3294,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               scope="col"
               aria-label
               aria-sort="none"
+              width="1px"
               class="text-xs-left"
           >
             <div class="v-data-table__checkbox v-simple-checkbox">
@@ -3554,7 +3557,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
     <div class="v-data-footer__select">
       Rows per page:
       <div role="combobox"
-           class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
       >
         <div class="v-input__control">
           <div class="v-input__slot">

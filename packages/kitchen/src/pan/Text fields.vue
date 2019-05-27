@@ -63,8 +63,8 @@
           >
             <v-text-field
               class="ma-2"
-              label="Box"
-              box
+              label="Filled"
+              filled
             />
           </v-flex>
 
@@ -75,9 +75,9 @@
           >
             <v-text-field
               class="ma-2"
-              label="Box"
+              label="Filled"
               placeholder="Placeholder"
-              box
+              filled
             />
           </v-flex>
 
@@ -89,7 +89,7 @@
             <v-text-field
               class="ma-2"
               label="Outline"
-              outline
+              outlined
             />
           </v-flex>
 
@@ -102,7 +102,61 @@
               class="ma-2"
               label="Outline"
               placeholder="Placeholder"
-              outline
+              outlined
+            />
+          </v-flex>
+
+          <v-flex
+            xs12
+            sm6
+            md3
+          >
+            <v-text-field
+              class="ma-2"
+              label="Filled & shaped"
+              filled
+              shaped
+            />
+          </v-flex>
+
+          <v-flex
+            xs12
+            sm6
+            md3
+          >
+            <v-text-field
+              class="ma-2"
+              label="Filled & shaped"
+              placeholder="Placeholder"
+              filled
+              shaped
+            />
+          </v-flex>
+
+          <v-flex
+            xs12
+            sm6
+            md3
+          >
+            <v-text-field
+              class="ma-2"
+              label="Outline & shaped"
+              outlined
+              shaped
+            />
+          </v-flex>
+
+          <v-flex
+            xs12
+            sm6
+            md3
+          >
+            <v-text-field
+              class="ma-2"
+              label="Outline & shaped"
+              placeholder="Placeholder"
+              outlined
+              shaped
             />
           </v-flex>
         </v-layout>
@@ -145,9 +199,9 @@
           >
             <v-text-field
               class="ma-2"
-              label="Box"
+              label="Filled"
               single-line
-              box
+              filled
             />
           </v-flex>
 
@@ -159,7 +213,7 @@
               class="ma-2"
               label="Outline"
               single-line
-              outline
+              outlined
             />
           </v-flex>
         </v-layout>
@@ -230,8 +284,8 @@
             <v-text-field
               class="ma-2"
               value="John Doe"
-              label="Box"
-              box
+              label="Filled"
+              filled
               disabled
             />
           </v-flex>
@@ -243,8 +297,8 @@
             <v-text-field
               class="ma-2"
               value="John Doe"
-              label="Box"
-              box
+              label="Filled"
+              filled
               readonly
             />
           </v-flex>
@@ -257,7 +311,7 @@
               class="ma-2"
               value="John Doe"
               label="Outline"
-              outline
+              outlined
               disabled
             />
           </v-flex>
@@ -270,7 +324,7 @@
               class="ma-2"
               value="John Doe"
               label="Outline"
-              outline
+              outlined
               readonly
             />
           </v-flex>
@@ -340,21 +394,21 @@
           >
             <v-text-field
               class="ma-2"
-              box
+              filled
               label="Prepend"
               prepend-icon="mdi-map-marker"
             />
 
             <v-text-field
               class="ma-2"
-              box
+              filled
               label="Append"
               append-icon="mdi-map-marker"
             />
 
             <v-text-field
               class="ma-2"
-              box
+              filled
               label="Append outer"
               append-outer-icon="mdi-map-marker"
             />
@@ -366,21 +420,21 @@
           >
             <v-text-field
               class="ma-2"
-              outline
+              outlined
               label="Prepend"
               prepend-icon="mdi-map-marker"
             />
 
             <v-text-field
               class="ma-2"
-              outline
+              outlined
               label="Append"
               append-icon="mdi-map-marker"
             />
 
             <v-text-field
               class="ma-2"
-              outline
+              outlined
               label="Append outer"
               append-outer-icon="mdi-map-marker"
             />
@@ -428,8 +482,8 @@
             <v-text-field
               v-model="message3"
               class="ma-2"
-              box
-              label="Box"
+              filled
+              label="Filled"
               clearable
             />
           </v-flex>
@@ -442,7 +496,7 @@
               v-model="message4"
               class="ma-2"
               label="Outline"
-              outline
+              outlined
               clearable
             />
           </v-flex>
@@ -462,7 +516,7 @@
       <core-section>
         <v-text-field
           v-model="message5"
-          outline
+          outlined
           clearable
           label="Message"
           type="text"
@@ -539,7 +593,7 @@
       <core-section>
         <v-text-field
           v-model="message6"
-          outline
+          outlined
           clearable
           label="Message"
           type="text"
@@ -628,8 +682,8 @@
               :rules="rules"
               class="ma-2"
               counter="25"
-              box
-              label="Box"
+              filled
+              label="Filled"
             />
           </v-flex>
 
@@ -643,7 +697,7 @@
               class="ma-2"
               counter="25"
               label="Outline"
-              outline
+              outlined
             />
           </v-flex>
         </v-layout>
@@ -855,7 +909,7 @@
               label="Your product or service"
               value="Grocery delivery"
               hint="For example, flowers or used cars"
-              box
+              filled
             />
           </v-flex>
 
@@ -868,7 +922,7 @@
               label="Your landing page"
               hint="www.example.com/page"
               persistent-hint
-              box
+              filled
             />
           </v-flex>
 
@@ -881,7 +935,7 @@
               label="Your product or service"
               value="Grocery delivery"
               hint="For example, flowers or used cars"
-              outline
+              outlined
             />
           </v-flex>
 
@@ -894,14 +948,14 @@
               label="Your landing page"
               hint="www.example.com/page"
               persistent-hint
-              outline
+              outlined
             />
           </v-flex>
         </v-layout>
       </core-section>
 
       <core-title>
-        Box design
+        Filled design
       </core-title>
       <core-section>
         <v-layout
@@ -916,7 +970,7 @@
               v-model="first"
               class="ma-2"
               label="First Name"
-              box
+              filled
             />
           </v-flex>
 
@@ -928,7 +982,7 @@
               v-model="last"
               class="ma-2"
               label="Last Name"
-              box
+              filled
             />
           </v-flex>
         </v-layout>
@@ -984,7 +1038,7 @@
               v-model="first"
               class="ma-2"
               label="First Name"
-              outline
+              outlined
             />
           </v-flex>
 
@@ -996,7 +1050,7 @@
               v-model="last"
               class="ma-2"
               label="Last Name"
-              outline
+              outlined
             />
           </v-flex>
         </v-layout>

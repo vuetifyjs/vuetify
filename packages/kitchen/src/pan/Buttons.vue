@@ -332,27 +332,27 @@
       </core-title>
       <core-section>
         <v-btn
-          outline
+          outlined
           small
         >
           Outline
         </v-btn>
         <v-btn
-          outline
+          outlined
           small
           color="primary"
         >
           Primary
         </v-btn>
         <v-btn
-          outline
+          outlined
           small
           color="error"
         >
           Error
         </v-btn>
         <v-btn
-          outline
+          outlined
           small
           disabled
         >
@@ -361,23 +361,23 @@
       </core-section>
 
       <core-section>
-        <v-btn outline>
+        <v-btn outlined>
           Outline
         </v-btn>
         <v-btn
-          outline
+          outlined
           color="primary"
         >
           Primary
         </v-btn>
         <v-btn
-          outline
+          outlined
           color="error"
         >
           Error
         </v-btn>
         <v-btn
-          outline
+          outlined
           disabled
         >
           Disabled
@@ -386,27 +386,27 @@
 
       <core-section>
         <v-btn
-          outline
+          outlined
           large
         >
           Outline
         </v-btn>
         <v-btn
-          outline
+          outlined
           large
           color="primary"
         >
           Primary
         </v-btn>
         <v-btn
-          outline
+          outlined
           large
           color="error"
         >
           Error
         </v-btn>
         <v-btn
-          outline
+          outlined
           large
           disabled
         >
@@ -418,14 +418,14 @@
       </core-title>
       <core-section>
         <v-btn
-          outline
+          outlined
           round
           small
         >
           Rounded
         </v-btn>
         <v-btn
-          outline
+          outlined
           round
           small
           color="primary"
@@ -433,7 +433,7 @@
           Primary
         </v-btn>
         <v-btn
-          outline
+          outlined
           round
           small
           color="error"
@@ -441,7 +441,7 @@
           Error
         </v-btn>
         <v-btn
-          outline
+          outlined
           round
           small
           disabled
@@ -452,27 +452,27 @@
 
       <core-section>
         <v-btn
-          outline
+          outlined
           round
         >
           Rounded
         </v-btn>
         <v-btn
-          outline
+          outlined
           round
           color="primary"
         >
           Primary
         </v-btn>
         <v-btn
-          outline
+          outlined
           round
           color="error"
         >
           Error
         </v-btn>
         <v-btn
-          outline
+          outlined
           round
           disabled
         >
@@ -482,14 +482,14 @@
 
       <core-section>
         <v-btn
-          outline
+          outlined
           round
           large
         >
           Rounded
         </v-btn>
         <v-btn
-          outline
+          outlined
           round
           large
           color="primary"
@@ -497,7 +497,7 @@
           Primary
         </v-btn>
         <v-btn
-          outline
+          outlined
           round
           large
           color="error"
@@ -505,7 +505,7 @@
           Error
         </v-btn>
         <v-btn
-          outline
+          outlined
           round
           large
           disabled
@@ -516,14 +516,14 @@
       <!-- Outline -->
       <core-section>
         <v-btn
-          outline
+          outlined
           small
           text
         >
           Outline
         </v-btn>
         <v-btn
-          outline
+          outlined
           small
           text
           color="primary"
@@ -531,7 +531,7 @@
           Primary
         </v-btn>
         <v-btn
-          outline
+          outlined
           small
           text
           color="error"
@@ -539,7 +539,7 @@
           Error
         </v-btn>
         <v-btn
-          outline
+          outlined
           small
           text
           disabled
@@ -551,26 +551,26 @@
       <core-section>
         <v-btn
           text
-          outline
+          outlined
         >
           Outline
         </v-btn>
         <v-btn
-          outline
+          outlined
           text
           color="primary"
         >
           Primary
         </v-btn>
         <v-btn
-          outline
+          outlined
           text
           color="error"
         >
           Error
         </v-btn>
         <v-btn
-          outline
+          outlined
           text
           disabled
         >
@@ -580,14 +580,14 @@
 
       <core-section>
         <v-btn
-          outline
+          outlined
           large
           text
         >
           Outline
         </v-btn>
         <v-btn
-          outline
+          outlined
           large
           text
           color="primary"
@@ -595,7 +595,7 @@
           Primary
         </v-btn>
         <v-btn
-          outline
+          outlined
           large
           text
           color="error"
@@ -603,7 +603,7 @@
           Error
         </v-btn>
         <v-btn
-          outline
+          outlined
           large
           text
           disabled
@@ -614,7 +614,7 @@
       <!-- Rounded with Outline -->
       <core-section>
         <v-btn
-          outline
+          outlined
           text
           round
           small
@@ -622,7 +622,7 @@
           Rounded
         </v-btn>
         <v-btn
-          outline
+          outlined
           text
           round
           small
@@ -631,7 +631,7 @@
           Primary
         </v-btn>
         <v-btn
-          outline
+          outlined
           text
           round
           small
@@ -640,7 +640,7 @@
           Error
         </v-btn>
         <v-btn
-          outline
+          outlined
           text
           round
           small
@@ -652,14 +652,14 @@
 
       <core-section>
         <v-btn
-          outline
+          outlined
           text
           round
         >
           Rounded
         </v-btn>
         <v-btn
-          outline
+          outlined
           text
           round
           color="primary"
@@ -667,7 +667,7 @@
           Primary
         </v-btn>
         <v-btn
-          outline
+          outlined
           text
           round
           color="error"
@@ -675,7 +675,7 @@
           Error
         </v-btn>
         <v-btn
-          outline
+          outlined
           text
           round
           disabled
@@ -686,7 +686,7 @@
 
       <core-section>
         <v-btn
-          outline
+          outlined
           text
           round
           large
@@ -694,7 +694,7 @@
           Rounded
         </v-btn>
         <v-btn
-          outline
+          outlined
           text
           round
           large
@@ -703,7 +703,7 @@
           Primary
         </v-btn>
         <v-btn
-          outline
+          outlined
           text
           round
           large
@@ -712,7 +712,7 @@
           Error
         </v-btn>
         <v-btn
-          outline
+          outlined
           text
           round
           large
@@ -894,14 +894,14 @@
       </core-title>
       <core-section>
         <v-btn
-          outline
+          outlined
           fab
           small
         >
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
         <v-btn
-          outline
+          outlined
           fab
           small
           color="primary"
@@ -909,7 +909,7 @@
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
         <v-btn
-          outline
+          outlined
           fab
           small
           color="error"
@@ -917,7 +917,7 @@
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
         <v-btn
-          outline
+          outlined
           fab
           small
           disabled
@@ -928,27 +928,27 @@
 
       <core-section>
         <v-btn
-          outline
+          outlined
           fab
         >
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
         <v-btn
-          outline
+          outlined
           fab
           color="primary"
         >
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
         <v-btn
-          outline
+          outlined
           fab
           color="error"
         >
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
         <v-btn
-          outline
+          outlined
           fab
           disabled
         >
@@ -958,14 +958,14 @@
 
       <core-section>
         <v-btn
-          outline
+          outlined
           fab
           large
         >
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
         <v-btn
-          outline
+          outlined
           fab
           large
           color="primary"
@@ -973,7 +973,7 @@
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
         <v-btn
-          outline
+          outlined
           fab
           large
           color="error"
@@ -981,7 +981,7 @@
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
         <v-btn
-          outline
+          outlined
           fab
           large
           disabled
@@ -1039,13 +1039,13 @@
         </v-btn>
       </core-section>
       <core-title>
-        Left & right icons, loader with outline
+        Left & right icons, loader with outlined
       </core-title>
       <core-section>
         <v-btn
           :loading="loading"
           :disabled="loading"
-          outline
+          outlined
           color="blue-grey"
           class="white--text"
           @click="loading = true"
@@ -1060,7 +1060,7 @@
         </v-btn>
         <v-btn
           :loading="loading"
-          outline
+          outlined
           color="blue-grey"
           class="white--text"
           @click="loading = true"
@@ -1074,7 +1074,7 @@
           </v-icon>
         </v-btn>
         <v-btn
-          outline
+          outlined
           loading
           disabled
           color="blue-grey"
@@ -1180,14 +1180,14 @@
       </core-title>
       <core-section>
         <v-btn
-          outline
+          outlined
           block
           small
         >
           Block
         </v-btn>
         <v-btn
-          outline
+          outlined
           block
           small
           color="primary"
@@ -1195,7 +1195,7 @@
           Primary
         </v-btn>
         <v-btn
-          outline
+          outlined
           block
           small
           color="error"
@@ -1203,7 +1203,7 @@
           Error
         </v-btn>
         <v-btn
-          outline
+          outlined
           block
           small
           disabled
@@ -1214,27 +1214,27 @@
 
       <core-section>
         <v-btn
-          outline
+          outlined
           block
         >
           Block
         </v-btn>
         <v-btn
-          outline
+          outlined
           block
           color="primary"
         >
           Primary
         </v-btn>
         <v-btn
-          outline
+          outlined
           block
           color="error"
         >
           Error
         </v-btn>
         <v-btn
-          outline
+          outlined
           block
           disabled
         >
@@ -1244,14 +1244,14 @@
 
       <core-section>
         <v-btn
-          outline
+          outlined
           block
           large
         >
           Block
         </v-btn>
         <v-btn
-          outline
+          outlined
           block
           large
           color="primary"
@@ -1259,7 +1259,7 @@
           Primary
         </v-btn>
         <v-btn
-          outline
+          outlined
           block
           large
           color="error"
@@ -1267,7 +1267,7 @@
           Error
         </v-btn>
         <v-btn
-          outline
+          outlined
           block
           large
           disabled

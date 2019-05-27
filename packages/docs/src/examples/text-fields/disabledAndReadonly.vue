@@ -41,7 +41,7 @@
           <v-text-field
             value="John Doe"
             label="Box"
-            box
+            filled
             disabled
           ></v-text-field>
         </v-flex>
@@ -50,7 +50,7 @@
           <v-text-field
             value="John Doe"
             label="Box"
-            box
+            filled
             readonly
           ></v-text-field>
         </v-flex>
@@ -59,7 +59,7 @@
           <v-text-field
             value="John Doe"
             label="Outline"
-            outline
+            outlined
             disabled
           ></v-text-field>
         </v-flex>
@@ -68,7 +68,7 @@
           <v-text-field
             value="John Doe"
             label="Outline"
-            outline
+            outlined
             readonly
           ></v-text-field>
         </v-flex>

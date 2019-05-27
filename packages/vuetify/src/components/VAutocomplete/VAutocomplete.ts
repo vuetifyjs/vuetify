@@ -5,13 +5,11 @@ import './VAutocomplete.sass'
 import VSelect, { defaultMenuProps as VSelectMenuProps } from '../VSelect/VSelect'
 import VTextField from '../VTextField/VTextField'
 
-// Components
-import VMenu from '../VMenu/VMenu'
-
 // Utilities
-import { PropType } from 'vue'
 import { keyCodes } from '../../util/helpers'
-import mixins, { ExtractVue } from '../../util/mixins'
+
+// Types
+import { PropType } from 'vue'
 
 const defaultMenuProps = {
   ...VSelectMenuProps,
@@ -20,20 +18,8 @@ const defaultMenuProps = {
   transition: false
 }
 
-// Types
-const baseMixins = mixins(VSelect)
-
-interface options extends ExtractVue<typeof baseMixins> {
-  $refs: {
-    menu: InstanceType<typeof VMenu>
-    input: HTMLInputElement
-    prefix: HTMLElement
-    suffix: HTMLElement
-  }
-}
-
 /* @vue/component */
-export default baseMixins.extend<options>().extend({
+export default VSelect.extend({
   name: 'v-autocomplete',
 
   props: {
@@ -76,10 +62,11 @@ export default baseMixins.extend<options>().extend({
 
   computed: {
     classes (): object {
-      return Object.assign({}, VSelect.options.computed.classes.call(this), {
+      return {
+        ...VSelect.options.computed.classes.call(this),
         'v-autocomplete': true,
         'v-autocomplete--is-selecting-index': this.selectedIndex > -1
-      })
+      }
     },
     computedItems (): object[] {
       return this.filteredItems
@@ -95,12 +82,12 @@ export default baseMixins.extend<options>().extend({
     currentRange (): number {
       if (this.selectedItem == null) return 0
 
-      return this.getText(this.selectedItem).toString().length
+      return String(this.getText(this.selectedItem)).length
     },
     filteredItems (): object[] {
       if (!this.isSearching || this.noFilter || this.internalSearch == null) return this.allItems
 
-      return this.allItems.filter(item => this.filter(item, this.internalSearch.toString(), this.getText(item).toString()))
+      return this.allItems.filter(item => this.filter(item, String(this.internalSearch), String(this.getText(item))))
     },
     internalSearch: {
       get (): string | undefined {
@@ -119,9 +106,10 @@ export default baseMixins.extend<options>().extend({
       return this.searchIsDirty || this.selectedItems.length > 0
     },
     isSearching (): boolean {
-      if (this.multiple) return this.searchIsDirty
-
       return (
+        this.multiple &&
+        this.searchIsDirty
+      ) || (
         this.searchIsDirty &&
         this.internalSearch !== this.getText(this.selectedItem)
       )
@@ -132,8 +120,8 @@ export default baseMixins.extend<options>().extend({
       return this.hasDisplayedItems || !this.hideNoData
     },
     $_menuProps (): object {
-      const props = VSelect.options.computed.$_menuProps.call(this)
-      props.contentClass = `v-autocomplete__content ${props.contentClass || ''}`.trim()
+      const props = VSelect.options.computed.$_menuProps.call(this);
+      (props as any).contentClass = `v-autocomplete__content ${(props as any).contentClass || ''}`.trim()
       return {
         ...defaultMenuProps,
         ...props
@@ -153,7 +141,8 @@ export default baseMixins.extend<options>().extend({
     listData () {
       const data = VSelect.options.computed.listData.call(this) as any
 
-      Object.assign(data.props, {
+      data.props = {
+        ...data.props,
         items: this.virtualizedItems,
         noFilter: (
           this.noFilter ||
@@ -161,7 +150,7 @@ export default baseMixins.extend<options>().extend({
           !this.filteredItems.length
         ),
         searchInput: this.internalSearch
-      })
+      }
 
       return data
     }
@@ -210,8 +199,6 @@ export default baseMixins.extend<options>().extend({
 
   methods: {
     onFilteredItemsChanged (val: never[]) {
-      this.setMenuIndex(-1)
-
       this.$nextTick(() => {
         this.setMenuIndex(val.length > 0 && (val.length === 1 || this.autoSelectFirst) ? 0 : -1)
       })
@@ -220,12 +207,8 @@ export default baseMixins.extend<options>().extend({
       this.updateMenuDimensions()
     },
     updateMenuDimensions () {
-      if (this.isMenuActive &&
-        this.$refs.menu
-      ) {
-        // Type from menuable is not making it through
-        (this.$refs.menu as any).updateDimensions()
-      }
+      // Type from menuable is not making it through
+      this.isMenuActive && this.$refs.menu && this.$refs.menu.updateDimensions()
     },
     changeSelectedIndex (keyCode: number) {
       // Do not allow changing of selectedIndex
@@ -239,18 +222,22 @@ export default baseMixins.extend<options>().extend({
         keyCodes.delete
       ].includes(keyCode)) return
 
-      const indexes = this.selectedItems.length - 1
+      const index = this.selectedItems.length - 1
 
       if (keyCode === keyCodes.left) {
-        this.selectedIndex = this.selectedIndex === -1
-          ? indexes
-          : this.selectedIndex - 1
+        if (this.selectedIndex === -1) {
+          this.selectedIndex = index
+        } else {
+          this.selectedIndex--
+        }
       } else if (keyCode === keyCodes.right) {
-        this.selectedIndex = this.selectedIndex >= indexes
-          ? -1
-          : this.selectedIndex + 1
+        if (this.selectedIndex >= index) {
+          this.selectedIndex = -1
+        } else {
+          this.selectedIndex++
+        }
       } else if (this.selectedIndex === -1) {
-        this.selectedIndex = indexes
+        this.selectedIndex = index
         return
       }
 
@@ -262,7 +249,7 @@ export default baseMixins.extend<options>().extend({
       ].includes(keyCode) &&
         !this.getDisabled(currentItem)
       ) {
-        const newIndex = this.selectedIndex === indexes
+        const newIndex = this.selectedIndex === index
           ? this.selectedIndex - 1
           : this.selectedItems[this.selectedIndex + 1]
             ? this.selectedIndex
@@ -358,25 +345,22 @@ export default baseMixins.extend<options>().extend({
       // Wait for nextTick so selectedItem
       // has had time to update
       this.$nextTick(() => {
-        this.internalSearch = (
-          this.multiple &&
-          this.internalSearch &&
-          this.isMenuActive
-        )
-          ? this.internalSearch
-          : (
+        if (
+          !this.multiple ||
+          !this.internalSearch ||
+          !this.isMenuActive
+        ) {
+          this.internalSearch = (
             !this.selectedItems.length ||
             this.multiple ||
             this.hasSlot
           )
             ? null
             : this.getText(this.selectedItem)
+        }
       })
     },
     updateSelf () {
-      this.updateAutocomplete()
-    },
-    updateAutocomplete () {
       if (!this.searchIsDirty &&
         !this.internalValue
       ) return

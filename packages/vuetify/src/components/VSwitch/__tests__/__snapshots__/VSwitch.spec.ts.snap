@@ -2,7 +2,7 @@
 
 exports[`VSwitch.ts should render element with loader and match the snapshot 1`] = `
 
-<div class="v-input v-input--selection-controls v-input--switch theme--light">
+<div class="v-input v-input--is-loading theme--light v-input--selection-controls v-input--switch">
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-input--selection-controls__input">
@@ -20,7 +20,7 @@ exports[`VSwitch.ts should render element with loader and match the snapshot 1`]
           <div role="progressbar"
                aria-valuemin="0"
                aria-valuemax="100"
-               class="v-progress-circular v-progress-circular--indeterminate"
+               class="v-progress-circular v-progress-circular--indeterminate accent--text"
                style="height: 16px; width: 16px;"
           >
             <svg xmlns="http://www.w3.org/2000/svg"

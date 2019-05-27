@@ -76,20 +76,6 @@
 
 <br>
 
-<h4 align="center"><b>Premiere Sponsor</b></h4>
-
-<table>
-  <tbody>
-    <tr>
-      <td>
-        <a href="https://segment.com/?utm_source=devflight&utm_medium=sponsorship">
-          <img height="50px" src="https://cdn.vuetifyjs.com/images/backers/segment.png">
-        </a>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
 <h4 align="center"><b>Diamond Sponsors</b></h4>
 
 <table>

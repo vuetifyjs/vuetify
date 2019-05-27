@@ -370,7 +370,7 @@ export function groupByProperty (xs: any[], key: string): Record<string, any[]> 
   }, {})
 }
 
-export function wrapInArray<T> (v: T | T[]): T[] { return Array.isArray(v) ? v : [v] }
+export function wrapInArray<T> (v: T | T[] | null | undefined): T[] { return v != null ? Array.isArray(v) ? v : [v] : [] }
 
 export type compareFn<T = any> = (a: T, b: T) => number
 
@@ -471,4 +471,22 @@ export function getSlot (vm: Vue, name = 'default', data?: object, optional = fa
     return vm.$slots[name]
   }
   return undefined
+}
+
+export function clamp (value: number, min = 0, max = 1) {
+  return Math.max(min, Math.min(max, value))
+}
+
+export function padEnd (str: string, length: number, char = '0') {
+  return str + char.repeat(Math.max(0, length - str.length))
+}
+
+export function chunk (str: string, size = 1) {
+  const chunked = []
+  let index = 0
+  while (index < str.length) {
+    chunked.push(str.substr(index, size))
+    index += size
+  }
+  return chunked
 }

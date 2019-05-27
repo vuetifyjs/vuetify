@@ -39,6 +39,7 @@ export default mixins(
       type: String,
       default: 'v-btn--active'
     },
+    backgroundColor: String,
     grow: Boolean,
     hideOnScroll: Boolean,
     horizontal: Boolean,
@@ -105,12 +106,14 @@ export default mixins(
         : 0
     },
     updateValue (val: any) {
+      this.$emit('change', val)
+      // TODO: deprecate
       this.$emit('update:active', val)
     }
   },
 
   render (h): VNode {
-    const data = this.setBackgroundColor(this.color, {
+    const data = this.setBackgroundColor(this.backgroundColor, {
       staticClass: 'v-bottom-navigation',
       class: this.classes,
       style: this.styles,
@@ -136,6 +139,6 @@ export default mixins(
       })
     }
 
-    return h(ButtonGroup, data, this.$slots.default)
+    return h(ButtonGroup, this.setTextColor(this.color, data), this.$slots.default)
   }
 })

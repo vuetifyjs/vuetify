@@ -16,10 +16,10 @@ import Selectable from '../../mixins/selectable'
 
 // Utilities
 import { getSlot } from '../../util/helpers'
-import mixins from '../../util/mixins'
 
 // Types
-import { VNode } from 'vue'
+import { VNode, VNodeData } from 'vue'
+import mixins from '../../util/mixins'
 
 const baseMixins = mixins(
   Colorable,
@@ -84,9 +84,7 @@ export default baseMixins.extend<options>().extend({
         ? this.onIcon
         : this.offIcon
     },
-    hasLabel (): boolean {
-      return VInput.options.computed.hasLabel.call(this)
-    },
+    hasLabel: VInput.options.computed.hasLabel,
     hasState (): boolean {
       return (this.radioGroup || {}).hasState
     },
@@ -152,20 +150,18 @@ export default baseMixins.extend<options>().extend({
 
       this.toggle()
     },
-    onKeydown () {} // Override default with noop
+    onKeydown: () => {} // Override default with noop
   },
 
   render (h): VNode {
-    let color
-
-    if ((this.radioGroup || {}).hasError) {
-      color = this.color
-    }
-
-    const data = this.setTextColor(color, {
+    let data = {
       staticClass: 'v-radio',
       class: this.classes
-    })
+    } as VNodeData
+
+    if ((this.radioGroup || {}).hasError) {
+      data = this.setTextColor(this.color, data)
+    }
 
     return h('div', data, [
       this.genRadio(),

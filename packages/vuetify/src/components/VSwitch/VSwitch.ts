@@ -1,8 +1,10 @@
+// Styles
 import '../../styles/components/_selection-controls.sass'
 import './VSwitch.sass'
 
 // Mixins
 import Selectable from '../../mixins/selectable'
+import VInput from '../VInput'
 
 // Directives
 import Touch from '../../directives/touch'
@@ -38,6 +40,7 @@ export default Selectable.extend({
   computed: {
     classes (): object {
       return {
+        ...VInput.options.computed.classes.call(this),
         'v-input--selection-controls v-input--switch': true,
         'v-input--switch--flat': this.flat,
         'v-input--switch--inset': this.inset
@@ -47,7 +50,7 @@ export default Selectable.extend({
       return {
         'aria-checked': String(this.isActive),
         'aria-disabled': String(this.disabled),
-        'role': 'switch'
+        role: 'switch'
       }
     },
     switchData (): VNodeData {

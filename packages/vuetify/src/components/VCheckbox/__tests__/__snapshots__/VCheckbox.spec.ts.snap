@@ -13,7 +13,7 @@ exports[`VCheckbox.ts should be disabled 1`] = `
 
 exports[`VCheckbox.ts should render themed component 1`] = `
 
-<div class="v-input v-input--selection-controls v-input--checkbox theme--light">
+<div class="v-input v-input--selection-controls v-input--checkbox">
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-input--selection-controls__input">
@@ -45,7 +45,7 @@ exports[`VCheckbox.ts should render themed component 1`] = `
 
 exports[`VCheckbox.ts should use custom icons 1`] = `
 
-<div class="v-input v-input--selection-controls v-input--checkbox theme--light">
+<div class="v-input v-input--selection-controls v-input--checkbox">
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-input--selection-controls__input">
@@ -77,7 +77,7 @@ exports[`VCheckbox.ts should use custom icons 1`] = `
 
 exports[`VCheckbox.ts should use custom icons 2`] = `
 
-<div class="v-input v-input--selection-controls v-input--checkbox theme--light">
+<div class="v-input v-input--selection-controls v-input--checkbox">
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-input--selection-controls__input">
@@ -109,7 +109,7 @@ exports[`VCheckbox.ts should use custom icons 2`] = `
 
 exports[`VCheckbox.ts should use custom icons 3`] = `
 
-<div class="v-input v-input--selection-controls v-input--checkbox v-input--is-label-active v-input--is-dirty theme--light">
+<div class="v-input v-input--selection-controls v-input--checkbox">
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-input--selection-controls__input">

@@ -4,10 +4,9 @@ import {
   MountOptions
 } from '@vue/test-utils'
 import VCheckbox from '../VCheckbox'
-import { ExtractVue } from '../../../util/mixins'
 
 describe('VCheckbox.ts', () => { // eslint-disable-line max-statements
-  type Instance = ExtractVue<typeof VCheckbox>
+  type Instance = InstanceType<typeof VCheckbox>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {
     mountFunction = (options?: MountOptions<Instance>) => {
@@ -157,12 +156,12 @@ describe('VCheckbox.ts', () => { // eslint-disable-line max-statements
 
     const ripple = wrapper.find('.v-input--selection-controls__ripple')
 
-    expect((ripple.element as any)._ripple.enabled).toBe(true)
-    expect((ripple.element as any)._ripple.centered).toBe(true)
+    expect((ripple.element as any)._ripple.enabled).toBeTruthy()
+    expect((ripple.element as any)._ripple.centered).toBeTruthy()
 
     wrapper.setProps({ disabled: true })
 
-    expect(wrapper.contains('.v-input--selection-controls__ripple')).toBe(true)
+    expect(wrapper.contains('.v-input--selection-controls__ripple')).toBeTruthy()
   })
 
   it('should not render ripple when ripple prop is false', () => {
@@ -187,8 +186,8 @@ describe('VCheckbox.ts', () => { // eslint-disable-line max-statements
 
     const ripple = wrapper.find('.v-input--selection-controls__ripple')
 
-    expect((ripple.element as any)._ripple.enabled).toBe(true)
-    expect((ripple.element as any)._ripple.centered).toBe(true)
+    expect((ripple.element as any)._ripple.enabled).toBeTruthy()
+    expect((ripple.element as any)._ripple.centered).toBeTruthy()
   })
 
   it('should return a value when toggled on with a specified object value', () => {

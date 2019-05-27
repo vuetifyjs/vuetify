@@ -31,9 +31,11 @@
         {
           "type": "examples",
           "value": [
-            "appBar",
-            "qwerty",
-            "togglePictures"
+            "simple/rounded",
+            "simple/mandatory",
+            "simple/multiple",
+            "intermediate/appBar",
+            "intermediate/qwerty"
           ]
         }
       ]

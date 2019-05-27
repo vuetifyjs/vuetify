@@ -2,7 +2,7 @@
 
 exports[`VRadioGroup.ts should match snapshot 1`] = `
 
-<div class="v-input v-input--selection-controls v-input--radio-group v-input--radio-group--column theme--light">
+<div class="v-input theme--light v-input--selection-controls v-input--radio-group v-input--radio-group--column">
   <div class="v-input__control">
     <div class="v-input__slot"
          style="height: auto;"
