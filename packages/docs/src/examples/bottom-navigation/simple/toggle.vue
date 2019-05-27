@@ -1,6 +1,6 @@
 <template>
   <div class="hide-overflow">
-    <v-card-text class="text-xs-center">
+    <div class="text-xs-center mb-2">
       <v-btn
         text
         color="deep-purple"
@@ -8,7 +8,7 @@
       >
         Toggle Nav
       </v-btn>
-    </v-card-text>
+    </div>
 
     <v-bottom-navigation
       :input-value="showNav"

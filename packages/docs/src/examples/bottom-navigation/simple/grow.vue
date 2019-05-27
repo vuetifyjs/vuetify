@@ -1,10 +1,6 @@
 <template>
-  <v-card
-    class="hide-overflow mx-auto"
-    height="200"
-    max-width="700"
-  >
-    <v-card-text class="text-xs-center">
+  <div class="hide-overflow">
+    <div class="text-xs-center mb-2">
       <v-btn
         text
         color="teal"
@@ -12,35 +8,37 @@
       >
         Grow
       </v-btn>
-    </v-card-text>
+    </div>
 
     <v-bottom-navigation
+      :value="activeBtn"
       :grow="grow"
-      absolute
+      color="teal"
       horizontal
     >
-      <v-btn text color="teal">
+      <v-btn>
         <span>Recents</span>
         <v-icon>history</v-icon>
       </v-btn>
 
-      <v-btn text color="teal">
+      <v-btn>
         <span>Favorites</span>
         <v-icon>favorite</v-icon>
       </v-btn>
 
-      <v-btn text color="teal">
+      <v-btn>
         <span>Nearby</span>
         <v-icon>place</v-icon>
       </v-btn>
     </v-bottom-navigation>
-  </v-card>
+  </div>
 </template>
 
 <script>
   export default {
     data () {
       return {
+        activeBtn: 1,
         grow: false
       }
     }
