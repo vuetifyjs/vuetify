@@ -42,29 +42,38 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "singleLine",
-            "shaped",
-            "disabledAndReadonly",
-            "icon",
-            "clearable",
-            "iconEvents",
-            "iconSlots",
-            "labelSlot",
-            "characterCounter",
-            "password",
-            "validation",
-            "fullWidthWithCharacterCounter",
-            "hint",
-            "prefixesAndSuffixes",
-            "customValidation",
-            "box",
-            "solo",
-            "outline",
-            "customColors",
-            "masks",
-            "progressBar"
+            "simple/singleLine",
+            "simple/shaped",
+            "simple/disabledAndReadonly",
+            "simple/icon",
+            "simple/clearable",
+            "simple/characterCounter",
+            "simple/password",
+            "simple/box",
+            "simple/solo",
+            "simple/outline",
+            "simple/customColors",
+            "simple/masks",
+            "simple/hint",
+            "simple/prefixesAndSuffixes",
+            "intermediate/iconEvents",
+            "intermediate/iconSlots",
+            "intermediate/labelSlot",
+            "intermediate/validation",
+            "intermediate/fullWidthWithCharacterCounter",
+            "intermediate/progressBar",
+            "complex/customValidation"
           ]
         }
       ]
