@@ -199,7 +199,7 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
         value: this.isContentActive
       }],
       ref: 'content'
-    }), this.showLazyContent(this.$slots.default))
+    }), this.showLazyContent(this.getContentSlot()))
 
     return h(this.tag, {
       staticClass: 'v-tooltip',

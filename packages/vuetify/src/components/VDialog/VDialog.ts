@@ -254,7 +254,7 @@ export default baseMixins.extend({
 
     children.push(this.genActivator())
 
-    let dialog = h('div', data, this.showLazyContent(this.$slots.default))
+    let dialog = h('div', data, this.showLazyContent(this.getContentSlot()))
     if (this.transition) {
       dialog = h('transition', {
         props: {

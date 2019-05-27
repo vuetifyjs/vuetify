@@ -19,6 +19,13 @@
     "*.scss",
     "*.css"
   ],
+  "files": [
+    "src/",
+    "dist/",
+    "lib/",
+    "es5/",
+    "types/"
+  ],
   "scripts": {
     "watch": "cross-env TARGET=development webpack --config build/config.js --progress --hide-modules --watch",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --hot",

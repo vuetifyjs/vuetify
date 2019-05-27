@@ -3,7 +3,7 @@
   "headerText": "The `v-chip` component is used to convey small pieces of information. Using the `close` property, the chip becomes interactive, allowing user interaction. This component is used by the [v-chip-group](/components/chip-groups) for advanced selection options.",
   "examples": {
     "usage": {
-      "desc": "Chips come in 4 primary variations. Regular, with icon, with portrait and closeable.",
+      "desc": "Chips come in the following variations: Default, closeable, filter, outlined, pill. The default slot of `v-chip` will also accept avatars and icons alongside text.",
       "uninverted": true
     },
     "colored": {
@@ -14,8 +14,8 @@
       "header": "### Icon",
       "desc": "Chips can use text or any icon available in the Material Icons font library."
     },
-    "outline": {
-      "header": "### Outline",
+    "outlined": {
+      "header": "### Outlined",
       "desc": "Outlined chips inherit their border color from the current text color."
     },
     "label": {
@@ -24,7 +24,7 @@
     },
     "closable": {
       "header": "### Closable",
-      "desc": "Closable chips can be controlled with a v-model. Listen to the `input` event if you want to know when a chip has been closed.",
+      "desc": "Closable chips can be controlled with a v-model. Listen to the `click:close` event if you want to know when a chip has been closed.",
       "uninverted": true
     },
     "inSelects": {
@@ -48,9 +48,21 @@
       "header": "### Expandable",
       "desc": "Chips can be combined with `v-menu` to enable a specific set of actions for a chip."
     },
-    "playground": {
-      "header": "### Playground",
-      "desc": "Explore the various options available to the `v-chip` component."
+    "sizes": {
+      "header": "### Sizes",
+      "desc": "`v-chip` component can have various sizes from `x-small` to `x-large`."
+    },
+    "draggable": {
+      "header": "### Draggable",
+      "desc": "`draggable` `v-chip` component can be dragged by mouse."
+    },
+    "filter": {
+      "header": "### Filter",
+      "desc": "`v-chip` component has `filter` option which shows an additional icon to you if chip is active. It can be customized using `filter-icon`."
+    },
+    "noRipple": {
+      "header": "### No ripple",
+      "desc": "`v-chip` can be rendered without ripple if `ripple` prop is set to `false`."
     }
   },
   "props": {

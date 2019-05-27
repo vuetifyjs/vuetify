@@ -23,6 +23,11 @@ interface TouchEvent {
   touchmoveX: number
 }
 
+interface Widths {
+  content: number
+  wrapper: number
+}
+
 interface options extends Vue {
   $refs: {
     content: HTMLElement
@@ -50,6 +55,7 @@ export const BaseSlideGroup = mixins<options &
       type: String,
       default: 'v-slide-item--active'
     },
+    centerActive: Boolean,
     nextIcon: {
       type: String,
       default: '$vuetify.icons.next'
@@ -85,7 +91,10 @@ export const BaseSlideGroup = mixins<options &
       return this.genTransition('prev')
     },
     classes (): object {
-      return BaseItemGroup.options.computed.classes.call(this)
+      return {
+        ...BaseItemGroup.options.computed.classes.call(this),
+        'v-slide-group': true
+      }
     },
     hasAffixes (): Boolean {
       return (
@@ -145,6 +154,15 @@ export const BaseSlideGroup = mixins<options &
         ref: 'content'
       }, this.$slots.default)
     },
+    genData (): object {
+      return {
+        class: this.classes,
+        directives: [{
+          name: 'resize',
+          value: this.onResize
+        }]
+      }
+    },
     genIcon (location: 'prev' | 'next'): VNode | null {
       let icon = location
 
@@ -203,20 +221,12 @@ export const BaseSlideGroup = mixins<options &
         ref: 'wrapper'
       }, [this.genContent()])
     },
-    newOffset /* istanbul ignore next */ (direction: 'prev' | 'next') {
-      // Force reflow
-      const clientWidth = this.$refs.wrapper.clientWidth
+    calculateNewOffset (direction: 'prev' | 'next', widths: Widths, rtl: boolean, currentScrollOffset: number) {
+      const sign = rtl ? -1 : 1
+      const newAbosluteOffset = sign * currentScrollOffset +
+        (direction === 'prev' ? -1 : 1) * widths.wrapper
 
-      if (direction === 'prev') {
-        return Math.max(this.scrollOffset - clientWidth, 0)
-      }
-
-      const min = Math.min(
-        this.scrollOffset + clientWidth,
-        this.$refs.content.clientWidth - clientWidth
-      )
-
-      return this.$vuetify.rtl ? -min : min
+      return sign * Math.max(Math.min(newAbosluteOffset, widths.content - widths.wrapper), 0)
     },
     onAffixClick (location: 'prev' | 'next') {
       this.$emit(`click:${location}`)
@@ -256,37 +266,69 @@ export const BaseSlideGroup = mixins<options &
     overflowCheck (e: TouchEvent, fn: (e: TouchEvent) => void) {
       this.isOverflowing && fn(e)
     },
-    scrollIntoView () {
-      /* istanbul ignore next */
-      if (!this.selectedItem) return
-      if (!this.isOverflowing) {
-        (this.scrollOffset = 0)
+    scrollIntoView /* istanbul ignore next */ () {
+      if (!this.selectedItem) {
         return
       }
 
-      const totalWidth = this.widths.wrapper + this.scrollOffset
-      const { clientWidth, offsetLeft } = this.selectedItem.$el as HTMLElement
-      const itemOffset = clientWidth + offsetLeft
-      let additionalOffset = clientWidth * 0.3
+      if (this.centerActive) {
+        this.scrollOffset = this.calculateCenteredOffset(
+          this.selectedItem.$el as HTMLElement,
+          this.widths,
+          this.$vuetify.rtl
+        )
+      } else if (this.isOverflowing) {
+        this.scrollOffset = this.calculateUpdatedOffset(
+          this.selectedItem.$el as HTMLElement,
+          this.widths,
+          this.$vuetify.rtl,
+          this.scrollOffset
+        )
+      } else {
+        this.scrollOffset = 0
+      }
+    },
+    calculateUpdatedOffset (selectedElement: HTMLElement, widths: Widths, rtl: boolean, currentScrollOffset: number): number {
+      const clientWidth = selectedElement.clientWidth
+      const offsetLeft = rtl
+        ? (widths.content - selectedElement.offsetLeft - clientWidth)
+        : selectedElement.offsetLeft
 
-      if (this.selectedItem === this.items[this.items.length - 1]) {
-        additionalOffset = 0 // don't add an offset if selecting the last tab
+      if (rtl) {
+        currentScrollOffset = -currentScrollOffset
       }
 
-      /* istanbul ignore else */
-      if (offsetLeft < this.scrollOffset) {
-        this.scrollOffset = Math.max(offsetLeft - additionalOffset, 0)
+      const totalWidth = widths.wrapper + currentScrollOffset
+      const itemOffset = clientWidth + offsetLeft
+      const additionalOffset = clientWidth * 0.3
+
+      if (offsetLeft < currentScrollOffset) {
+        currentScrollOffset = Math.max(offsetLeft - additionalOffset, 0)
       } else if (totalWidth < itemOffset) {
-        this.scrollOffset -= totalWidth - itemOffset - additionalOffset
+        currentScrollOffset = Math.min(currentScrollOffset - (totalWidth - itemOffset - additionalOffset), widths.content - widths.wrapper)
+      }
+
+      return rtl ? -currentScrollOffset : currentScrollOffset
+    },
+    calculateCenteredOffset (selectedElement: HTMLElement, widths: Widths, rtl: boolean): number {
+      const { offsetLeft, clientWidth } = selectedElement
+
+      if (rtl) {
+        const offsetCentered = widths.content - offsetLeft - clientWidth / 2 - widths.wrapper / 2
+        return -Math.min(widths.content - widths.wrapper, Math.max(0, offsetCentered))
+      } else {
+        const offsetCentered = offsetLeft + clientWidth / 2 - widths.wrapper / 2
+        return Math.min(widths.content - widths.wrapper, Math.max(0, offsetCentered))
       }
     },
     scrollTo /* istanbul ignore next */ (location: 'prev' | 'next') {
-      this.scrollOffset = this.newOffset(location)
+      this.scrollOffset = this.calculateNewOffset(location, {
+        // Force reflow
+        content: this.$refs.content ? this.$refs.content.clientWidth : 0,
+        wrapper: this.$refs.wrapper ? this.$refs.wrapper.clientWidth : 0
+      }, this.$vuetify.rtl, this.scrollOffset)
     },
-    setOverflow () {
-      this.isOverflowing = this.widths.wrapper < this.widths.content
-    },
-    setWidths () {
+    setWidths /* istanbul ignore next */  () {
       window.requestAnimationFrame(() => {
         const { content, wrapper } = this.$refs
 
@@ -295,21 +337,15 @@ export const BaseSlideGroup = mixins<options &
           wrapper: wrapper ? wrapper.clientWidth : 0
         }
 
-        this.setOverflow()
+        this.isOverflowing = this.widths.wrapper < this.widths.content
+
         this.scrollIntoView()
       })
     }
   },
 
   render (h): VNode {
-    return h('div', {
-      staticClass: 'v-item-group v-slide-group',
-      class: this.classes,
-      directives: [{
-        name: 'resize',
-        value: this.onResize
-      }]
-    }, [
+    return h('div', this.genData(), [
       this.genPrev(),
       this.genWrapper(),
       this.genNext()
