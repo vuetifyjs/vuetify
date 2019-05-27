@@ -29,19 +29,6 @@
       "type": "section",
       "children": [
         {
-          "type": "supplemental",
-          "value": [
-            {
-              "type": "components-mask-table"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
           "type": "examples",
           "value": [ "api", "scopedSlots", "customFilter", "asynchronous", "advanced" ]
         }
