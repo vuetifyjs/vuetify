@@ -19,6 +19,7 @@ import VRowGroup from './VRowGroup'
 import VSimpleCheckbox from '../VCheckbox/VSimpleCheckbox'
 import VSimpleTable from './VSimpleTable'
 import VMobileRow from './VMobileRow'
+import ripple from '../../directives/ripple'
 
 // Helpers
 import { deepEqual, getObjectValueByPath, compareFn, getPrefixedScopedSlots, getSlot } from '../../util/helpers'
@@ -27,6 +28,10 @@ import { breaking } from '../../util/console'
 /* @vue/component */
 export default VDataIterator.extend({
   name: 'v-data-table',
+
+  directives: {
+    ripple
+  },
 
   props: {
     headers: {
