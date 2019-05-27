@@ -30,11 +30,11 @@
         {
           "type": "examples",
           "value": [
-            "cycle",
-            "customTransition",
-            "customIcons",
-            "hideControls",
-            "hideDelimiters"
+            "simple/cycle",
+            "simple/customTransition",
+            "simple/customIcons",
+            "simple/hideControls",
+            "simple/hideDelimiters"
           ]
         }
       ]
