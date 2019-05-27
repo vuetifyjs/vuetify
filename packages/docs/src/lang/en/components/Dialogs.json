@@ -36,8 +36,8 @@
       "uninverted": true
     },
     "advanced": {
-      "header": "### Simple dialogs",
-      "desc": "Choosing an option immediately closes the menu. Touching outside of the dialog, or pressing Back, cancels the action and closes the dialog.",
+      "header": "### Nested dialogs",
+      "desc": "Dialogs can be nested: you can open one dialog from another.",
       "uninverted": true
     },
     "loader": {
