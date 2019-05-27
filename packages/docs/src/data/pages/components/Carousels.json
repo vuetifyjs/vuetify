@@ -34,7 +34,8 @@
             "simple/customTransition",
             "simple/customIcons",
             "simple/hideControls",
-            "simple/hideDelimiters"
+            "simple/hideDelimiters",
+            "intermediate/model"
           ]
         }
       ]
