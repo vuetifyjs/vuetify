@@ -39,7 +39,11 @@
       "children": [
         {
           "type": "examples",
-          "value": [ "noData", "advanced", "comboboxMultiple" ]
+          "value": [
+            "simple/comboboxMultiple",
+            "intermediate/noData",
+            "intermediate/advanced"
+          ]
         }
       ]
     },
