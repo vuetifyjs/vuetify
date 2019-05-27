@@ -315,7 +315,6 @@ export default VSelect.extend({
         if (!this.isAnyValueAllowed) this.setMenuIndex(0)
       }
 
-      this.mask && this.resetSelections(target)
       this.internalSearch = value
       this.badInput = target.validity && target.validity.badInput
     },

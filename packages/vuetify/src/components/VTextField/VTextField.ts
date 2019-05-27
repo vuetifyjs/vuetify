@@ -9,7 +9,6 @@ import VCounter from '../VCounter'
 import VLabel from '../VLabel'
 
 // Mixins
-import Maskable from '../../mixins/maskable'
 import Loadable from '../../mixins/loadable'
 
 // Directives
@@ -25,7 +24,6 @@ import { VNode } from 'vue/types'
 
 const baseMixins = mixins(
   VInput,
-  Maskable,
   Loadable
 )
 interface options extends InstanceType<typeof baseMixins> {
@@ -125,13 +123,8 @@ export default baseMixins.extend<options>().extend({
         return this.lazyValue
       },
       set (val: any) {
-        if (this.mask && val !== this.lazyValue) {
-          this.lazyValue = this.unmaskText(this.maskText(this.unmaskText(val)))
-          this.setSelectionRange()
-        } else {
-          this.lazyValue = val
-          this.$emit('input', this.lazyValue)
-        }
+        this.lazyValue = val
+        this.$emit('input', this.lazyValue)
       }
     },
     isDirty (): boolean {
@@ -195,16 +188,7 @@ export default baseMixins.extend<options>().extend({
       }
     },
     value (val) {
-      if (this.mask && !this.internalChange) {
-        const masked = this.maskText(this.unmaskText(val))
-        this.lazyValue = this.unmaskText(masked)
-
-        // Emit when the externally set value was modified internally
-        String(val) !== this.lazyValue && this.$nextTick(() => {
-          this.$refs.input.value = masked
-          this.$emit('input', this.lazyValue)
-        })
-      } else this.lazyValue = val
+      this.lazyValue = val
     }
   },
 
@@ -365,11 +349,10 @@ export default baseMixins.extend<options>().extend({
       return this.$createElement('input', {
         style: {},
         domProps: {
-          value: this.maskText(this.lazyValue)
+          value: this.lazyValue
         },
         attrs: {
           'aria-label': (!this.$attrs || !this.$attrs.id) && this.label, // Label `for` will be set if we have an id
-          maxlength: this.mask ? this.masked.length : undefined,
           ...this.$attrs,
           autocomplete: this.browserAutocomplete,
           autofocus: this.autofocus,
@@ -442,7 +425,6 @@ export default baseMixins.extend<options>().extend({
     onInput (e: Event) {
       const target = e.target as HTMLInputElement
       this.internalChange = true
-      this.mask && this.resetSelections(target)
       this.internalValue = target.value
       this.badInput = target.validity && target.validity.badInput
     },
