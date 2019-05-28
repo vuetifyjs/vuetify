@@ -29,6 +29,7 @@ import { breaking } from '../../util/console'
 export default VDataIterator.extend({
   name: 'v-data-table',
 
+  // https://github.com/vuejs/vue/issues/6872
   directives: {
     ripple
   },

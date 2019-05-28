@@ -27,6 +27,7 @@ interface options extends Vue {
 }
 
 export default mixins<options>().extend({
+  // https://github.com/vuejs/vue/issues/6872
   directives: {
     ripple
   },
