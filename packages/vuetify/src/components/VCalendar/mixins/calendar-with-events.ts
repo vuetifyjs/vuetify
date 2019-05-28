@@ -1,5 +1,5 @@
 // Styles
-import '../../../stylus/components/_calendar-events.styl'
+import './calendar-with-events.sass'
 
 // Types
 import { VNode, VNodeData } from 'vue'
