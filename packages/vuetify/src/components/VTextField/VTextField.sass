@@ -346,9 +346,14 @@
       border-radius: 28px
       padding: 0 24px !important
 
-  &--shaped > .v-input__control > .v-input__slot
-    border-top-left-radius: 16px
-    border-top-right-radius: 16px
+  &--shaped
+    &.v-text-field--outlined
+      fieldset
+        border-radius: 16px 16px 0 0
+
+    > .v-input__control > .v-input__slot
+      border-top-left-radius: 16px
+      border-top-right-radius: 16px
 
   &.v-text-field--solo
     .v-label

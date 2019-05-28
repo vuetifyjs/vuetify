@@ -1,42 +1,37 @@
 <template>
-  <v-card
-    class="hide-overflow mx-auto"
-    height="200"
-    max-width="500"
-  >
-    <v-card-text class="text-xs-center">
+  <div class="hide-overflow">
+    <div class="text-xs-center mb-2">
       <v-btn
         text
-        color="primary"
+        color="deep-purple"
         @click="showNav = !showNav"
       >
         Toggle Nav
       </v-btn>
-    </v-card-text>
+    </div>
 
     <v-bottom-navigation
       :input-value="showNav"
       :value="activeBtn"
-      absolute
-      color="white"
-      horizontal
+      color="deep-purple"
+      dark
     >
-      <v-btn text color="teal">
+      <v-btn>
         <span>Recents</span>
         <v-icon>history</v-icon>
       </v-btn>
 
-      <v-btn text color="teal">
+      <v-btn>
         <span>Favorites</span>
         <v-icon>favorite</v-icon>
       </v-btn>
 
-      <v-btn text color="teal">
+      <v-btn>
         <span>Nearby</span>
         <v-icon>place</v-icon>
       </v-btn>
     </v-bottom-navigation>
-  </v-card>
+  </div>
 </template>
 
 <script>

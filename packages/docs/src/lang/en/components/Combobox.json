@@ -1,9 +1,6 @@
 {
   "header": "# Combobox",
   "headerText": "Combobox info coming soon",
-  "supplemental": [
-    "MaskTable"
-  ],
   "examples": {
     "usage": {
       "desc": "With Combobox, you can allow a user to create new values that may not be present in a provided items list."

@@ -5,7 +5,7 @@
     </v-alert>
 
     <v-alert type="info">
-      I'm a info alert.
+      I'm an info alert.
     </v-alert>
 
     <v-alert type="warning">
@@ -13,7 +13,7 @@
     </v-alert>
 
     <v-alert type="error">
-      I'm a error alert.
+      I'm an error alert.
     </v-alert>
   </div>
 </template>

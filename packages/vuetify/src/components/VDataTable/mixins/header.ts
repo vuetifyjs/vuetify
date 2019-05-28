@@ -2,6 +2,7 @@ import { VDataTable } from '../'
 import { DataOptions } from '../../VData/VData'
 import VIcon from '../../VIcon'
 import VSimpleCheckbox from '../../VCheckbox/VSimpleCheckbox'
+import ripple from '../../../directives/ripple'
 
 import Vue, { PropType } from 'vue'
 import mixins from '../../../util/mixins'
@@ -27,6 +28,11 @@ interface options extends Vue {
 }
 
 export default mixins<options>().extend({
+  // https://github.com/vuejs/vue/issues/6872
+  directives: {
+    ripple
+  },
+
   props: {
     headers: {
       type: Array as PropType<TableHeader[]>,
@@ -51,7 +57,8 @@ export default mixins<options>().extend({
     },
     everyItem: Boolean,
     someItems: Boolean,
-    showGroupBy: Boolean
+    showGroupBy: Boolean,
+    singleSelect: Boolean
   },
 
   methods: {
