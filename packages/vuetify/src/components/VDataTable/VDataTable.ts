@@ -22,8 +22,30 @@ import VMobileRow from './VMobileRow'
 import ripple from '../../directives/ripple'
 
 // Helpers
-import { deepEqual, getObjectValueByPath, compareFn, getPrefixedScopedSlots, getSlot } from '../../util/helpers'
+import { deepEqual, getObjectValueByPath, compareFn, getPrefixedScopedSlots, getSlot, defaultFilter } from '../../util/helpers'
 import { breaking } from '../../util/console'
+
+function filterFn (item: any, search: string | null) {
+  return (header: TableHeader) => {
+    const value = getObjectValueByPath(item, header.value)
+    return header.filter ? header.filter(value, search, item) : defaultFilter(value, search)
+  }
+}
+
+function searchTableItems (
+  items: any[],
+  search: string | null,
+  headersWithCustomFilters: TableHeader[],
+  headersWithoutCustomFilters: TableHeader[]
+) {
+  let filtered = items
+  search = typeof search === 'string' ? search.trim() : null
+  if (search) {
+    filtered = items.filter(item => headersWithoutCustomFilters.some(filterFn(item, search)))
+  }
+
+  return filtered.filter(item => headersWithCustomFilters.every(filterFn(item, search)))
+}
 
 /* @vue/component */
 export default VDataIterator.extend({
@@ -57,7 +79,11 @@ export default VDataIterator.extend({
     expandIcon: {
       type: String,
       default: '$vuetify.icons.expand'
-    }
+    },
+    customFilter: {
+      type: Function,
+      default: searchTableItems
+    } as PropValidator<(items: any[], search: string, exclusiveHeaders: TableHeader[], nonExclusiveHeaders: TableHeader[]) => any[]>
   },
 
   data () {
@@ -93,13 +119,25 @@ export default VDataIterator.extend({
     },
     isMobile (): boolean {
       return this.$vuetify.breakpoint.width < this.mobileBreakpoint
+    },
+    columnSorters (): Record<string, compareFn> {
+      return this.computedHeaders.reduce<Record<string, compareFn>>((acc, header) => {
+        if (header.sort) acc[header.value] = header.sort
+        return acc
+      }, {})
+    },
+    headersWithCustomFilters (): TableHeader[] {
+      return this.computedHeaders.filter(header => header.filter)
+    },
+    headersWithoutCustomFilters (): TableHeader[] {
+      return this.computedHeaders.filter(header => !header.filter)
     }
   },
 
   created () {
     const breakingProps = [
       ['sort-icon', 'header-props.sort-icon'],
-      ['hide-headers', 'hide-default-hedader'],
+      ['hide-headers', 'hide-default-header'],
       ['select-all', 'show-select']
     ]
 
@@ -131,20 +169,10 @@ export default VDataIterator.extend({
       this.widths = Array.from(this.$el.querySelectorAll('th')).map(e => e.clientWidth)
     },
     customFilterWithColumns (items: any[], search: string) {
-      const filterableHeaders = this.computedHeaders.filter(h => !!h.filter)
-      if (filterableHeaders.length) {
-        items = items.filter(i => filterableHeaders.every(h => h.filter!(getObjectValueByPath(i, h.value), this.search, i)))
-      }
-
-      return this.customFilter(items, search)
+      return this.customFilter(items, search, this.headersWithCustomFilters, this.headersWithoutCustomFilters)
     },
     customSortWithHeaders (items: any[], sortBy: string[], sortDesc: boolean[], locale: string) {
-      const customSorters = this.computedHeaders.reduce<Record<string, compareFn>>((acc, header) => {
-        if (header.sort) acc[header.value] = header.sort
-        return acc
-      }, {})
-
-      return this.customSort(items, sortBy, sortDesc, locale, customSorters)
+      return this.customSort(items, sortBy, sortDesc, locale, this.columnSorters)
     },
     createItemProps (item: any) {
       const props = VDataIterator.options.methods.createItemProps.call(this, item)

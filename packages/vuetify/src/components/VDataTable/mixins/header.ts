@@ -16,7 +16,8 @@ export interface TableHeader {
   divider?: boolean
   class?: string | string[]
   width?: string | number
-  filter?: (value: any, search: string, item: any) => boolean
+  filter?: (value: any, search: string | null, item: any) => boolean
+  filterExclusive?: boolean
   sort?: compareFn
 }
 
