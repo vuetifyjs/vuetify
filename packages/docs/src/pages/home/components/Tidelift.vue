@@ -27,10 +27,10 @@
   </a>
 </template>
 
-<style lang="stylus">
-  .v-tidelift
-    position: absolute !important
-    right: -24px
-    text-decoration: none
-    top: 0
+<style lang="sass">
+.v-tidelift
+  position: absolute !important
+  right: -24px
+  text-decoration: none
+  top: 0
 </style>

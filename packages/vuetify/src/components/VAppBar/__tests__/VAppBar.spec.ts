@@ -10,13 +10,11 @@ import {
   Wrapper
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../util/mixins'
-import { rafPolyfill, scrollWindow } from '../../../../test'
+import { scrollWindow } from '../../../../test'
 
 describe('AppBar.ts', () => {
   type Instance = ExtractVue<typeof VAppBar>
   let mountFunction: (options?: object) => Wrapper<Instance>
-
-  rafPolyfill(window)
 
   beforeEach(() => {
     mountFunction = (options = {}) => {
@@ -225,6 +223,28 @@ describe('AppBar.ts', () => {
 
     wrapper.setProps({ scrollOffScreen: false })
 
+    expect(wrapper.vm.hideShadow).toBe(false)
+  })
+
+  it('should work with hide-on-scroll and elevate-on-scroll', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        hideOnScroll: true,
+        elevateOnScroll: true
+      }
+    })
+
+    expect(wrapper.vm.computedTransform).toBe(0)
+    expect(wrapper.vm.hideShadow).toBe(true)
+
+    await scrollWindow(1000)
+
+    expect(wrapper.vm.computedTransform).toBe(-64)
+    expect(wrapper.vm.hideShadow).toBe(true)
+
+    await scrollWindow(600)
+
+    expect(wrapper.vm.computedTransform).toBe(0)
     expect(wrapper.vm.hideShadow).toBe(false)
   })
 })

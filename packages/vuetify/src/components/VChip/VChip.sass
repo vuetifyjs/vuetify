@@ -1,6 +1,5 @@
 // Imports
 @import '../../styles/styles.sass'
-@import './_mixins.sass'
 @import './_variables.scss'
 
 // Theme
@@ -14,10 +13,9 @@
   &.info
     color: map-deep-get($material-dark, 'text', 'primary')
 
-.v-chip.theme--light
-  +chip-theme($material-light)
-.v-chip.theme--dark
-  +chip-theme($material-dark)
++theme(v-chip) using ($material)
+  border-color: map-get($material, 'dividers')
+  color: map-deep-get($material, 'text', 'primary')
 
 // Block
 .v-chip
@@ -28,18 +26,19 @@
   outline: none
   padding: 0 12px
   position: relative
+  text-decoration: none
   transition-duration: $chip-transition-duration
   transition-property: box-shadow, opacity, background
   transition-timing-function: $chip-transition-fn
   vertical-align: middle
 
-  &:after
+  &:before
     background-color: currentColor
     bottom: 0
     border-radius: inherit
     content: ''
     left: 0
-    opacity: 0
+    opacity: 0.12
     position: absolute
     pointer-events: none
     right: 0
@@ -49,6 +48,7 @@
   // Important is needed to account for new avatar structure
   .v-avatar
     height: $chip-avatar-size !important
+    min-width: $chip-avatar-size !important
     width: $chip-avatar-size !important
 
   .v-icon
@@ -102,6 +102,19 @@
   height: 100%
 
 // Modifiers
+.v-chip--active
+  .v-icon
+    color: inherit
+
+  &:before
+    opacity: 0.22
+
+.v-chip--link
+  &:hover,
+  &:focus
+    &:before
+      opacity: 0.32
+
 .v-chip--clickable
   cursor: pointer
 
@@ -161,12 +174,21 @@
   border-radius: $chip-label-border-radius !important
 
 .v-chip.v-chip--outlined
-  background-color: transparent !important
   border-width: $icon-outlined-border-width
   border-style: solid
 
+  &:not(.v-chip--active):before
+    opacity: 0
+
+  &.v-chip--active:before
+    opacity: 0.08
+
   .v-icon
     color: inherit
+
+  // Needs increased specificity
+  &.v-chip
+    background-color: transparent !important
 
 // Needs increased specificity
 // to overwrite theme color

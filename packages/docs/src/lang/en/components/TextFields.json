@@ -1,9 +1,6 @@
 {
   "header": "# Text field",
   "headerText": "Text fields components are used for collecting user provided information.",
-  "supplemental": [
-    "MaskTable"
-  ],
   "examples": {
     "usage": {
       "desc": "A simple text field with placeholder and/or label."
@@ -11,6 +8,10 @@
     "singleLine": {
       "header": "### Single line",
       "desc": "Single line text fields do not float their label on focus or with data."
+    },
+    "shaped": {
+      "header": "### Shaped",
+      "desc": "`shaped` text fields are rounded if they're `outline` and have higher `border-radius` if `filled`."
     },
     "disabledAndReadonly": {
       "header": "### Disabled and readonly",
@@ -81,8 +82,8 @@
       "desc": "You can optionally change a text field into any color in the Material design palette. Below is an example implementation of a custom form with validation."
     },
     "masks": {
-      "header": "### Masks",
-      "desc": "Text fields can validate against character masks. Using either a pre-made or custom rules, you can optionally format and validate specific character sets. Note that **masks work only with text fields**, using them with date/number/file etc inputs may end up in unexpected behaviour or exception."
+      "header": "### Masks (using vue-the-mask)",
+      "desc": "You can add masking functionality using a 3rd party library such as vue-the-mask."
     },
     "progressBar": {
       "header": "### Progress bar",
@@ -93,19 +94,20 @@
     "appendOuterIcon": "Appends an icon to the outside the component's input, uses same syntax as `v-icon`",
     "autoGrow": "Auto-grows the input. This option requires the use of **v-model**",
     "autofocus": "Enables autofocus",
-    "box": "Applies the alternate box input style",
+    "filled": "Applies the alternate filled input style",
     "browserAutocomplete": "Configures the default `<input>` autocomplete attribute",
     "clearIcon": "Applied when using **clearable** and the input is dirty",
     "counter": "Creates counter for input length; if no number is specified, it defaults to 25. Does not apply any validation.",
     "flat": "Mixins.Soloable.props.flat",
-    "fullWidth": "Desginates input type as full-width",
+    "fullWidth": "Designates input type as full-width",
     "multiLine": "Turns into textarea",
     "noResize": "Removes the resize handle, only applies to **multi-line** and **textarea** props",
-    "outline": "Applies the outline style to the input",
+    "outlined": "Applies the outline style to the input",
     "placeholder": "Sets the input’s placeholder text",
     "prefix": "Displays prefix text",
     "prependInnerIcon": "Prepends an icon inside the component's input, uses the same syntax as `v-icon`",
     "reverse": "Reverses the input orientation",
+    "rounded": "Adds a border radius to the input",
     "rows": "Controls the number of rows in a textarea",
     "rowHeight": "Designate a custom _row-height_. Used for determining input height when using **multi-line** or **textarea** props",
     "solo": "Mixins.Soloable.props.solo",
@@ -114,7 +116,8 @@
     "textarea": "Textarea text field with alternate style",
     "toggleKeys": "Array of key codes that will toggle the input (if it supports toggling)",
     "type": "Sets input type",
-    "value": "Components.Inputs.props.value"
+    "value": "Components.Inputs.props.value",
+    "shaped": "Round if `outline` and increase `border-radius` if `filled`. Must be used with either `outline` or `filled`"
   },
   "slots": {
     "append": "Components.Inputs.slots.append",

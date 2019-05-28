@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VTimepicker",
   "mdSpec": {
     "version": "1",
     "link": "https://material.io/archive/guidelines/components/pickers.html#pickers-time-pickers"

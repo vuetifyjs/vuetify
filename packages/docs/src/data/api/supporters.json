@@ -24,13 +24,6 @@
   ],
   "palladium": [
     {
-      "name": "Eikos Partners",
-      "logo": "backers/eikos-partners.png",
-      "href": "http://www.eikospartners.com/",
-      "type": "Patron",
-      "pledge": "Palladium ($250)"
-    },
-    {
       "name": "rateGenius",
       "href": "https://application.rategenius.com/",
       "logo": "backers/rate-genius.png",
@@ -48,6 +41,13 @@
       "name": "DigitalMaas",
       "href": "https://www.digitalmaas.com/",
       "logo": "backers/digital-maas.svg",
+      "type": "Patron",
+      "pledge": "Palladium ($250)"
+    },
+    {
+      "name": "Fractal Industries",
+      "href": "https://www.fractalindustries.com/",
+      "logo": "backers/fractal-industries.png",
       "type": "Patron",
       "pledge": "Palladium ($250)"
     }
@@ -117,9 +117,30 @@
       "pledge": "Gold ($50)"
     },
     {
-      "name": "Datantify",
-      "href": "https://datantify.com/",
-      "logo": "backers/datantify.png",
+      "name": "Custom Essay Meister",
+      "href": "https://www.customessaymeister.com/",
+      "logo": "backers/essay-meister.svg",
+      "type": "Patron",
+      "pledge": "Gold ($50)"
+    },
+    {
+      "name": "NoteRiot",
+      "href": "https://note.riot.ai/",
+      "logo": "backers/note-riot.png",
+      "type": "Patron",
+      "pledge": "Gold ($50)"
+    },
+    {
+      "name": "blokt",
+      "href": "https://blokt.com/",
+      "logo": "backers/blokt.png",
+      "type": "Patron",
+      "pledge": "Gold ($50)"
+    },
+    {
+      "name": "Loomio",
+      "href": "https://www.loomio.org/",
+      "logo": "backers/loomio.svg",
       "type": "Patron",
       "pledge": "Gold ($50)"
     }
@@ -155,6 +176,12 @@
       "name": "Browserstack",
       "href": "https://www.browserstack.com/",
       "logo": "sponsors/browser-stack.png",
+      "type": "Service Sponsor"
+    },
+    {
+      "name": "Crowdin",
+      "href": "https://www.crowdin.com/",
+      "logo": "sponsors/crowdin.png",
       "type": "Service Sponsor"
     }
   ]

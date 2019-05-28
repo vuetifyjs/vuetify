@@ -1,10 +1,11 @@
 // Styles
-import '../../stylus/components/_cards.styl'
+import './VCard.sass'
 
 // Extensions
 import VSheet from '../VSheet'
 
 // Mixins
+import Loadable from '../../mixins/loadable'
 import Routable from '../../mixins/routable'
 
 // Helpers
@@ -15,6 +16,7 @@ import { VNode } from 'vue'
 
 /* @vue/component */
 export default mixins(
+  Loadable,
   Routable,
   VSheet
 ).extend({
@@ -24,6 +26,12 @@ export default mixins(
     flat: Boolean,
     hover: Boolean,
     img: String,
+    link: Boolean,
+    loaderHeight: {
+      type: [Number, String],
+      default: 4
+    },
+    outlined: Boolean,
     raised: Boolean
   },
 
@@ -31,8 +39,14 @@ export default mixins(
     classes (): object {
       return {
         'v-card': true,
+        ...Routable.options.computed.classes.call(this),
         'v-card--flat': this.flat,
         'v-card--hover': this.hover,
+        'v-card--link': this.isClickable,
+        'v-card--loading': this.loading,
+        'v-card--disabled': this.loading || this.disabled,
+        'v-card--outlined': this.outlined,
+        'v-card--raised': this.raised,
         ...VSheet.options.computed.classes.call(this)
       }
     },
@@ -49,11 +63,31 @@ export default mixins(
     }
   },
 
+  methods: {
+    genProgress () {
+      const render = Loadable.options.methods.genProgress.call(this)
+
+      if (!render) return null
+
+      return this.$createElement('div', {
+        staticClass: 'v-card__progress'
+      }, [render])
+    }
+  },
+
   render (h): VNode {
-    const { tag, data } = this.generateRouteLink(this.classes)
+    const { tag, data } = this.generateRouteLink()
 
     data.style = this.styles
 
-    return h(tag, this.setBackgroundColor(this.color, data), this.$slots.default)
+    if (this.isClickable) {
+      data.attrs = data.attrs || {}
+      data.attrs.tabindex = 0
+    }
+
+    return h(tag, this.setBackgroundColor(this.color, data), [
+      this.genProgress(),
+      this.$slots.default
+    ])
   }
 })

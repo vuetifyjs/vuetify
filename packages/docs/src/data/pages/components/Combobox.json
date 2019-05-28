@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VCombobox",
   "children": [
     {
       "type": "section",
@@ -17,19 +18,6 @@
         {
           "type": "api",
           "value": [ "v-combobox" ]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "supplemental",
-          "value": [
-            {
-              "type": "components-mask-table"
-            }
-          ]
         }
       ]
     },

@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VDataTable",
   "mdSpec": {
     "version": "2",
     "link": "https://material.io/design/components/data-tables.html"
@@ -33,22 +34,23 @@
         {
           "type": "examples",
           "value": [
-            "noData",
-            "headers",
-            "headerCell",
+            "slots",
+            "select",
+            "expand",
+            "group",
+            "multiSort",
+            "search",
+            "customizeRows",
+            "customizeFooter",
             "progress",
             "footer",
-            "expand",
-            "pageText",
-            "select",
-            "search",
-            "customIcons",
             "paginate",
             "sort",
             "server",
             "headerless",
             "editdialog",
-            "crud"
+            "crud",
+            "virtualized"
           ]
         }
       ]

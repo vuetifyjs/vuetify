@@ -15,9 +15,9 @@
         v-text="avatar"
       />
     </v-list-item-avatar>
-    <v-list-item-action v-else-if="icon">
+    <v-list-item-icon v-else-if="icon">
       <v-icon v-text="icon" />
-    </v-list-item-action>
+    </v-list-item-icon>
     <v-list-item-content>
       <v-list-item-title>
         <span
@@ -123,10 +123,8 @@
   }
 </script>
 
-<style lang="stylus">
-.v-list-item--doc {
-  p {
-    margin-bottom: 0;
-  }
-}
+<style lang="sass">
+.v-list-item--doc
+  p
+    margin-bottom: 0
 </style>

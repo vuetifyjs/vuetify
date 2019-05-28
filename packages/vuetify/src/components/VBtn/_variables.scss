@@ -1,8 +1,7 @@
 $btn-border-radius: 4px !default;
-$btn-font-size: map-deep-get($headings, 'button', 'size') !default;
-$btn-font-weight: map-deep-get($headings, 'button', 'weight') !default;
-$btn-letter-spacing: map-deep-get($headings, 'button', 'letter-spacing') !default;
-$btn-line-height: map-deep-get($headings, 'button', 'line-height') !default;
+$btn-font-size: .875rem !default;
+$btn-font-weight: 500 !default;
+$btn-letter-spacing: .0892857143em !default;
 $btn-icon-font-size: 18px !default;
 $btn-icon-padding: 12px !default;
 $btn-outline-border-width: thin !default;

@@ -85,8 +85,8 @@
       ProvideProvider: {
         provide () {
           return {
-            namespace: this.namespace,
-            page: this.page
+            overrideNamespace: this.namespace,
+            overridePage: this.page
           }
         },
 

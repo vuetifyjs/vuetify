@@ -28,6 +28,8 @@ const baseMixins = mixins(
   Applicationable('top', [
     'clippedLeft',
     'clippedRight',
+    'computedHeight',
+    'computedTransform',
     'invertedScroll',
     'isExtended',
     'isProminent',
@@ -156,7 +158,10 @@ export default baseMixins.extend({
       return this.computedOriginalHeight - (this.dense ? 48 : 56)
     },
     computedTransform (): number {
-      if (!this.canScroll || this.elevateOnScroll) return 0
+      if (
+        !this.canScroll ||
+        (this.elevateOnScroll && this.currentScroll === 0)
+      ) return 0
 
       if (this.isActive) return 0
 
@@ -165,7 +170,10 @@ export default baseMixins.extend({
         : -this.computedContentHeight
     },
     hideShadow (): boolean {
-      if (this.elevateOnScroll) return this.currentScroll === 0
+      if (this.elevateOnScroll) {
+        return this.currentScroll === 0 ||
+          this.computedTransform < 0
+      }
 
       return (
         !this.isExtended ||
@@ -221,7 +229,7 @@ export default baseMixins.extend({
     updateApplication (): number {
       return this.invertedScroll
         ? 0
-        : this.$el ? this.$el.clientHeight : 0
+        : this.computedHeight + this.computedTransform
     },
     thresholdMet () {
       if (this.invertedScroll) {

@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_breadcrumbs.styl'
+import './VBreadcrumbs.sass'
 
 // Types
 import { VNode } from 'vue'
@@ -12,7 +12,6 @@ import { VBreadcrumbsDivider, VBreadcrumbsItem } from '.'
 import Themeable from '../../mixins/themeable'
 
 // Utils
-import { deprecate } from '../../util/console'
 import mixins from '../../util/mixins'
 
 export default mixins(
@@ -30,25 +29,16 @@ export default mixins(
       type: Array,
       default: () => ([])
     } as PropValidator<any[]>,
-    large: Boolean,
-    justifyCenter: Boolean,
-    justifyEnd: Boolean
+    large: Boolean
   },
 
   computed: {
     classes (): object {
       return {
         'v-breadcrumbs--large': this.large,
-        'justify-center': this.justifyCenter,
-        'justify-end': this.justifyEnd,
         ...this.themeClasses
       }
     }
-  },
-
-  mounted () {
-    if (this.justifyCenter) deprecate('justify-center', 'class="justify-center"', this)
-    if (this.justifyEnd) deprecate('justify-end', 'class="justify-end"', this)
   },
 
   methods: {

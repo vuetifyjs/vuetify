@@ -1,7 +1,10 @@
 // Contracts
 import { VuetifyServiceContract } from 'vuetify/types/services/index'
 
+// Types
+import Vue from 'vue'
+
 export class Service implements VuetifyServiceContract {
   framework = {}
-  init (ssrContext?: object) {}
+  init (root: Vue, ssrContext?: object) {}
 }

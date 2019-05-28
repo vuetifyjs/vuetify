@@ -26,7 +26,10 @@ const icons: VuetifyIcons = {
   edit: 'fas fa-edit',
   ratingEmpty: 'far fa-star',
   ratingFull: 'fas fa-star',
-  ratingHalf: 'fas fa-star-half'
+  ratingHalf: 'fas fa-star-half',
+  first: 'fas fa-step-backward',
+  last: 'fas fa-step-forward',
+  unfold: 'fas fa-arrows-alt-v'
 }
 
 export default icons

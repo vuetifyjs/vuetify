@@ -2,16 +2,8 @@
 @import '../../styles/styles.sass'
 @import './_variables.sass'
 
-// first function, should move to global functions
-// does a deep map-get
-@function map-deep-get($map, $keys...)
-  @each $key in $keys
-    $map: map-get($map, $key)
-
-  @return $map
-
-// Mixins
-@mixin button-toggle-theme($material)
+// Theme
++theme(v-btn-toggle) using ($material)
   .v-btn.v-btn
     border-color: map-get($material, 'dividers') !important
 
@@ -21,17 +13,13 @@
     .v-icon
       color: map-deep-get($material, 'toggle-buttons', 'color')
 
-.v-btn-toggle.theme--light
-  +button-toggle-theme($material-light)
-.v-btn-toggle.theme--dark
-  +button-toggle-theme($material-dark)
-
 // Block
 .v-btn-toggle
   border-radius: 2px
   display: inline-flex
 
   > .v-btn.v-btn
+    background-color: transparent !important
     border-radius: 0
     border-style: solid
     border-width: thin
@@ -51,6 +39,9 @@
 
     &:after
       display: none
+
+    &--active
+      color: inherit
 
 // Modifiers
 .v-btn-toggle--rounded

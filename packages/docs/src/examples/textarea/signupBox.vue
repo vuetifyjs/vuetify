@@ -44,7 +44,7 @@
       <v-text-field
         v-model="password"
         :rules="[rules.password, rules.length(6)]"
-        box
+        filled
         color="deep-purple"
         counter="6"
         label="Password"
@@ -53,15 +53,14 @@
       ></v-text-field>
       <v-text-field
         v-model="phone"
-        box
+        filled
         color="deep-purple"
         label="Phone number"
-        mask="phone"
       ></v-text-field>
       <v-text-field
         v-model="email"
         :rules="[rules.email]"
-        box
+        filled
         color="deep-purple"
         label="Email address"
         type="email"
@@ -69,7 +68,7 @@
       <v-textarea
         v-model="bio"
         auto-grow
-        box
+        filled
         color="deep-purple"
         label="Bio"
         rows="1"

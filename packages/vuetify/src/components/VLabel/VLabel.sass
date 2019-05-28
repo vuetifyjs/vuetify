@@ -1,16 +1,11 @@
 @import '../../styles/styles.sass'
 
-@mixin label-theme($material)
+// Theme
++theme(v-label) using ($material)
   color: map-deep-get($material, 'text', 'secondary')
 
   &--is-disabled
     color: map-deep-get($material, 'text', 'disabled')
-
-// Theme
-.v-label.theme--light
-  +label-theme($material-light)
-.v-label.theme--dark
-  +label-theme($material-dark)
 
 .v-label
   font-size: 16px

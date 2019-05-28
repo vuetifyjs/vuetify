@@ -28,7 +28,7 @@
     }
   },
   "props": {
-    "v-expansion-panel": {
+    "v-expansion-panels": {
       "expand": "다른 패널을 선택해도 확장된 패널이 열려있도록 설정",
       "focusable": "확장패널의 헤더가 포커스 가능하도록 설정",
       "inset": "확장패널을 인셋(inset) 스타일로 엽니다.",

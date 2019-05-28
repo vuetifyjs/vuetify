@@ -34,9 +34,9 @@
           @click.native="item.value = !item.value"
         >
           <v-card-title class="py-0 pr-2">
-            <span
+            <doc-markdown
               class="body-2"
-              v-text="item.title"
+              :code="item.title"
             />
             <v-spacer />
             <v-btn
@@ -106,8 +106,8 @@
   }
 </script>
 
-<style lang="stylus">
-  #roadmap .v-timeline-item__body
-    p
-      margin: 0
+<style lang="sass">
+#roadmap .v-timeline-item__body
+  p
+    margin: 0
 </style>

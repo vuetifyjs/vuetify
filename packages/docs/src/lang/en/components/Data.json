@@ -1,7 +1,6 @@
 {
   "props": {
     "items": "The array of items to display",
-    "itemKey": "The property on each item that is used as a unique key",
     "options": "A combined object for options. See example below for definition",
     "sortBy": "Changes which item property (or properties) should be used for sort order. Can be used with `.sync` modifier",
     "sortDesc": "Changes which direction sorting is done. Can be used with `.sync` modifier",

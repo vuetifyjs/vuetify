@@ -33,10 +33,10 @@
         {
           "type": "examples",
           "value": [
-            "small",
-            "displayAnimation",
-            "lateralScreens",
-            "speedDial"
+            "simple/small",
+            "simple/displayAnimation",
+            "intermediate/speedDial",
+            "complex/lateralScreens"
           ]
         }
       ]

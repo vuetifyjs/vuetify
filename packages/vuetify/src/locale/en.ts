@@ -1,12 +1,8 @@
 export default {
   close: 'Close',
   dataIterator: {
-    itemsPerPageText: 'Items per page:',
-    itemsPerPageAll: 'All',
     pageText: '{0}-{1} of {2}',
     noResultsText: 'No matching records found',
-    nextPage: 'Next page',
-    prevPage: 'Previous page',
     loadingText: 'Loading items...'
   },
   dataTable: {
@@ -17,8 +13,13 @@ export default {
       sortNone: ': Not sorted. Activate to sort ascending.'
     }
   },
-  calendar: {
-    moreEvents: '{0} more'
+  dataFooter: {
+    itemsPerPageText: 'Items per page:',
+    itemsPerPageAll: 'All',
+    nextPage: 'Next page',
+    prevPage: 'Previous page',
+    firstPage: 'First page',
+    lastPage: 'Last page'
   },
   noDataText: 'No data available',
   carousel: {

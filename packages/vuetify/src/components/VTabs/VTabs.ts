@@ -9,6 +9,7 @@ import VTabsSlider from './VTabsSlider'
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Proxyable from '../../mixins/proxyable'
+import Themeable from '../../mixins/themeable'
 
 // Directives
 import Resize from '../../directives/resize'
@@ -23,7 +24,8 @@ import { VNode } from 'vue/types'
 
 const baseMixins = mixins(
   Colorable,
-  Proxyable
+  Proxyable,
+  Themeable
 )
 
 interface options extends ExtractVue<typeof baseMixins> {
@@ -42,16 +44,12 @@ export default baseMixins.extend<options>().extend({
   props: {
     activeClass: {
       type: String,
-      default: 'v-tab--active'
+      default: ''
     },
     alignWithTitle: Boolean,
     backgroundColor: String,
     centered: Boolean,
-    color: {
-      type: String,
-      default: 'primary'
-    },
-    dark: Boolean,
+    centerActive: Boolean,
     fixedTabs: Boolean,
     grow: Boolean,
     height: {
@@ -60,7 +58,6 @@ export default baseMixins.extend<options>().extend({
     },
     hideSlider: Boolean,
     iconsAndText: Boolean,
-    light: Boolean,
     mobileBreakPoint: {
       type: [Number, String],
       default: 1264
@@ -103,7 +100,8 @@ export default baseMixins.extend<options>().extend({
         'v-tabs--grow': this.grow,
         'v-tabs--icons-and-text': this.iconsAndText,
         'v-tabs--right': this.right,
-        'v-tabs--vertical': this.vertical
+        'v-tabs--vertical': this.vertical,
+        ...this.themeClasses
       }
     },
     isReversed (): boolean {
@@ -118,12 +116,18 @@ export default baseMixins.extend<options>().extend({
         transition: this.slider.left != null ? null : 'none',
         width: convertToUnit(this.slider.width)
       }
+    },
+    computedColor (): string {
+      if (this.color) return this.color
+      else if (this.isDark) return 'white'
+      else return 'primary'
     }
   },
 
   watch: {
     alignWithTitle: 'callSlider',
     centered: 'callSlider',
+    centerActive: 'callSlider',
     fixedTabs: 'callSlider',
     grow: 'callSlider',
     right: 'callSlider',
@@ -174,7 +178,7 @@ export default baseMixins.extend<options>().extend({
       return true
     },
     genBar (items: VNode[], slider: VNode | null) {
-      return this.$createElement(VTabsBar, this.setTextColor(this.color, {
+      return this.$createElement(VTabsBar, this.setTextColor(this.computedColor, {
         staticClass: this.backgroundColor,
         style: {
           height: this.height ? {
@@ -183,6 +187,7 @@ export default baseMixins.extend<options>().extend({
         },
         props: {
           activeClass: this.activeClass,
+          centerActive: this.centerActive,
           dark: this.dark,
           light: this.light,
           mandatory: !this.optional,

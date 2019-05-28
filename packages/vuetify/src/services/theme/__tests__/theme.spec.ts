@@ -2,6 +2,7 @@
 import { Theme } from '../index'
 
 // Types
+import Vue from 'vue'
 import {
   VuetifyParsedTheme,
   VuetifyThemeVariant
@@ -22,6 +23,7 @@ const FillVariant = (variant: Partial<VuetifyThemeVariant> = {}) => {
 
 describe('Theme.ts', () => {
   let mock: any
+  let instance: Vue
 
   beforeEach(() => {
     const style = document.getElementById('vuetify-theme-stylesheet')
@@ -37,12 +39,14 @@ describe('Theme.ts', () => {
         light: FillVariant()
       }
     }
+
+    instance = new Vue()
   })
 
   it('should disable theme colors', () => {
     const theme = new Theme({ disable: true })
 
-    theme.init()
+    theme.init(instance)
 
     expect(theme.styleEl).toBeFalsy()
   })
@@ -58,7 +62,7 @@ describe('Theme.ts', () => {
       }
     })
 
-    theme.init()
+    theme.init(instance)
 
     const style = document.getElementById('vuetify-theme-stylesheet')
     const html = style!.innerHTML
@@ -80,7 +84,7 @@ describe('Theme.ts', () => {
       }
     })
 
-    theme.init()
+    theme.init(instance)
 
     const style = document.getElementById('vuetify-theme-stylesheet')
     const html = style!.innerHTML
@@ -128,7 +132,7 @@ describe('Theme.ts', () => {
     theme.applyTheme()
 
     expect(themeCache.get).toHaveBeenCalledTimes(2)
-    expect(themeCache.set).toHaveBeenCalledTimes(2)
+    expect(themeCache.set).toHaveBeenCalledTimes(1)
     expect(theme.generatedStyles).toMatchSnapshot()
   })
 
@@ -142,7 +146,7 @@ describe('Theme.ts', () => {
       }
     })
 
-    theme.init()
+    theme.init(instance)
 
     const style = document.getElementById('vuetify-theme-stylesheet')
     const html = style!.innerHTML
@@ -160,7 +164,7 @@ describe('Theme.ts', () => {
       }
     })
 
-    theme.init()
+    theme.init(instance)
 
     const style = document.getElementById('vuetify-theme-stylesheet')
     expect(style!.getAttribute('nonce')).toBe('foobar')
@@ -171,17 +175,71 @@ describe('Theme.ts', () => {
       ...mock
     })
     const spy = jest.spyOn(theme, 'applyTheme')
-
-    theme.init()
-
-    // maybe disable coverage? ??? there are coverage data in console
-    // computer not letting me add more watchers so I need it for the coverage report
-
     const ssrContext = { head: '' }
-    theme.init(ssrContext)
+    theme.init(instance, ssrContext)
 
     expect(spy).toHaveBeenCalledTimes(1)
     expect(ssrContext.head).toBeTruthy()
     expect(ssrContext.head).toMatchSnapshot()
+  })
+
+  it('should add fake child element for nuxt ssr support', () => {
+    const theme = new Theme(mock)
+    ;(instance as any).$meta = {}
+
+    expect(instance.$children).toHaveLength(0)
+
+    theme.init(instance)
+
+    expect(instance.$children).toHaveLength(1)
+
+    const options = instance.$children[0].$options as any
+    const head = options.head
+
+    expect(head).toBeTruthy()
+    expect(head).toMatchSnapshot()
+  })
+
+  it('should react to theme changes', async () => {
+    const theme = new Theme(mock)
+    const spy = jest.spyOn(theme, 'applyTheme')
+    theme.init(instance)
+
+    expect(spy).toHaveBeenCalledTimes(1)
+
+    theme.themes.light.primary = '#000000'
+    await instance.$nextTick()
+
+    theme.themes.dark.secondary = '#000000'
+    await instance.$nextTick()
+
+    theme.currentTheme.accent = '#000000'
+    await instance.$nextTick()
+
+    expect(spy).toHaveBeenCalledTimes(4)
+  })
+
+  it('should reset themes', async () => {
+    const theme = new Theme(mock)
+    const spy = jest.spyOn(theme, 'applyTheme')
+    theme.init(instance)
+
+    expect(theme.generatedStyles).toMatchSnapshot()
+    theme.resetThemes()
+    expect(theme.generatedStyles).toMatchSnapshot()
+    expect(spy).toHaveBeenCalledTimes(2)
+  })
+
+  it('should set theme', () => {
+    const theme = new Theme(mock)
+    const spy = jest.spyOn(theme, 'applyTheme')
+    theme.init(instance)
+
+    expect(theme.generatedStyles).toMatchSnapshot()
+    theme.setTheme('light', { accent: '#c0ffee' })
+    expect(theme.generatedStyles).toMatchSnapshot()
+    theme.setTheme('dark', { accent: '#c0ffee' })
+    expect(theme.generatedStyles).toMatchSnapshot()
+    expect(spy).toHaveBeenCalledTimes(3)
   })
 })

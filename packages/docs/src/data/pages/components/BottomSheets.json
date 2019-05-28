@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VBottomSheet",
   "mdSpec": {
     "version": "2",
     "link": "https://material.io/design/components/sheets-bottom.html"

@@ -2,19 +2,22 @@
   <v-data-table
     :headers="headers"
     :items="desserts"
+    sort-by="calories"
     class="elevation-1"
   >
-    <template #top>
+    <template v-slot:top>
       <v-toolbar flat color="white">
         <v-toolbar-title>My CRUD</v-toolbar-title>
         <v-divider
-          class="mx-2"
+          class="mx-3"
           inset
           vertical
         ></v-divider>
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="500px">
-          <v-btn slot="activator" color="primary" dark class="mb-2">New Item</v-btn>
+          <template v-slot:activator="{ on }">
+            <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
+          </template>
           <v-card>
             <v-card-title>
               <span class="headline">{{ formTitle }}</span>
@@ -51,17 +54,17 @@
         </v-dialog>
       </v-toolbar>
     </template>
-    <template #item.action="props">
+    <template v-slot:item.action="{ item }">
       <v-icon
         small
         class="mr-2"
-        @click="editItem(props.item)"
+        @click="editItem(item)"
       >
         edit
       </v-icon>
       <v-icon
         small
-        @click="deleteItem(props.item)"
+        @click="deleteItem(item)"
       >
         delete
       </v-icon>

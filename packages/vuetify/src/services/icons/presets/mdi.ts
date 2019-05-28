@@ -26,7 +26,10 @@ const icons: VuetifyIcons = {
   edit: 'mdi-pencil',
   ratingEmpty: 'mdi-star-outline',
   ratingFull: 'mdi-star',
-  ratingHalf: 'mdi-star-half'
+  ratingHalf: 'mdi-star-half',
+  first: 'mdi-page-first',
+  last: 'mdi-page-last',
+  unfold: 'mdi-unfold-more-horizontal'
 }
 
 export default icons

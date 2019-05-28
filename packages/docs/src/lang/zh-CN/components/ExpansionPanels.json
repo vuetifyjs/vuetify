@@ -28,7 +28,7 @@
     }
   },
   "props": {
-    "v-expansion-panel": {
+    "v-expansion-panels": {
       "expand": "选择另一个时，将扩展面板打开",
       "focusable": "使扩展面板标题可以调焦",
       "inset": "使扩展面板以嵌入的样式打开",

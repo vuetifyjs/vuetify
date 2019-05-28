@@ -1,13 +1,25 @@
 // Imports
 @import '../../styles/styles.sass'
 @import './_variables.scss'
-@import './_mixins.sass'
 
 // Theme
-.v-data-table.theme--light
-  +data-table-header-theme($material-light)
-.v-data-table.theme--dark
-  +data-table-header-theme($material-dark)
++theme(v-data-table-header) using ($material)
+  th.sortable
+    .v-icon
+      color: rgba(map-get($material, 'fg-color'), map-get($material, 'disabledORhints-text-percent'))
+
+    &:hover
+      color: rgba(map-get($material, 'fg-color'), map-get($material, 'primary-text-percent'))
+
+    &.active
+      color: rgba(map-get($material, 'fg-color'), map-get($material, 'primary-text-percent'))
+
+      .v-icon
+        color: rgba(map-get($material, 'fg-color'), map-get($material, 'primary-text-percent'))
+
+  &__sort-badge
+    background-color: rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+    color: map-deep-get($material, 'text', 'primary')
 
 // Block
 .v-data-table-header
@@ -49,7 +61,7 @@
   height: 18px
   width: 18px
 
-// Modifiers
+// Mobile
 .v-data-table-header-mobile
   th
     height: initial
@@ -57,8 +69,22 @@
 .v-data-table-header-mobile__wrapper
   display: flex
 
-  .v-simple-checkbox
-    margin-right: 24px
-
   .v-select
     margin-bottom: 8px
+    margin-left: 16px
+
+    .v-chip
+      height: 24px
+
+    .v-chip__close
+      i
+        font-size: 18px
+
+      &.desc i
+        transform: rotate(-180deg)
+
+.v-data-table-header-mobile__select
+  min-width: 56px
+  display: flex
+  align-items: center
+  justify-content: center

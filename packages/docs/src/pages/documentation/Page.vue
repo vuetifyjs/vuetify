@@ -70,11 +70,8 @@
   }
 </script>
 
-<style scoped>
-  @media (min-width: 1264px) {
-    .v-content:not([data-booted="true"]) {
-      padding-left: 300px !important;
-      padding-right: 210px !important;
-    }
-  }
+<style lang="sass">
+  #components-navigation-drawers
+    .v-navigation-drawer
+      height: 100% !important
 </style>

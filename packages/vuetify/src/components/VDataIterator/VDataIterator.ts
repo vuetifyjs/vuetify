@@ -9,9 +9,10 @@ import mixins from '../../util/mixins'
 import Themeable from '../../mixins/themeable'
 
 // Helpers
-import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots } from '../../util/helpers'
+import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot } from '../../util/helpers'
 import { DataProps } from '../VData/VData'
 import { PropValidator } from 'vue/types/options'
+import { breaking, removed } from '../../util/console'
 
 /* @vue/component */
 export default mixins(Themeable).extend({
@@ -19,6 +20,10 @@ export default mixins(Themeable).extend({
 
   props: {
     ...VData.options.props, // TODO: filter out props not used
+    itemKey: {
+      type: String,
+      default: 'id'
+    },
     value: {
       type: Array,
       default: () => []
@@ -91,12 +96,45 @@ export default mixins(Themeable).extend({
     }
   },
 
+  created () {
+    const breakingProps = [
+      ['disable-initial-sort', 'sort-by'],
+      ['filter', 'custom-filter'],
+      ['pagination', 'options'],
+      ['total-items', 'server-items-length'],
+      ['hide-actions', 'hide-default-footer'],
+      ['rows-per-page-items', 'footer-props.items-per-page-options'],
+      ['rows-per-page-text', 'footer-props.items-per-page-text'],
+      ['prev-icon', 'footer-props.prev-icon'],
+      ['next-icon', 'footer-props.next-icon']
+    ]
+
+    breakingProps.forEach(([original, replacement]) => {
+      if (this.$attrs.hasOwnProperty(original)) breaking(original, replacement)
+    })
+
+    const removedProps = [
+      'expand',
+      'content-class',
+      'content-props',
+      'content-tag'
+    ]
+
+    removedProps.forEach(prop => {
+      if (this.$attrs.hasOwnProperty(prop)) removed(prop)
+    })
+  },
+
   methods: {
     toggleSelectAll (value: boolean): void {
+      const selection = Object.assign({}, this.selection)
+
       this.internalCurrentItems.forEach((item: any) => {
         const key = getObjectValueByPath(item, this.itemKey)
-        this.$set(this.selection, key, value)
+        selection[key] = value
       })
+
+      this.selection = selection
     },
     isSelected (item: any): boolean {
       return this.selection[getObjectValueByPath(item, this.itemKey)] || false
@@ -168,7 +206,15 @@ export default mixins(Themeable).extend({
       const empty = this.genEmpty(props.pagination.itemsLength)
       if (empty) return [empty]
 
-      if (this.$scopedSlots.default) return this.$scopedSlots.default(props)
+      if (this.$scopedSlots.default) {
+        return this.$scopedSlots.default({
+          ...props,
+          isSelected: this.isSelected,
+          select: this.select,
+          isExpanded: this.isExpanded,
+          expand: this.expand
+        })
+      }
 
       if (this.$scopedSlots.item) {
         return props.items.map((item: any) => this.$scopedSlots.item!(this.createItemProps(item)))
@@ -186,7 +232,7 @@ export default mixins(Themeable).extend({
           pagination: props.pagination
         },
         on: {
-          'update:options': (value: any) => props.updateOptions(value)
+          'update:options': /* istanbul ignore next */ (value: any) => props.updateOptions(value)
         }
       }
 
@@ -197,19 +243,14 @@ export default mixins(Themeable).extend({
         ...data
       })
     },
-    genSlots (slot: string, props: any = {}): VNodeChildren {
-      if (this.$scopedSlots[slot]) return this.$scopedSlots[slot]!(props)
-      else if (this.$slots[slot]) return this.$slots[slot]
-      return []
-    },
     genDefaultScopedSlot (props: any) {
       return this.$createElement('div', {
         staticClass: 'v-data-iterator'
       }, [
-        this.genSlots('header', props),
+        getSlot(this, 'header', props, true),
         this.genItems(props),
         this.genFooter(props),
-        this.genSlots('footer', props)
+        getSlot(this, 'footer', props, true)
       ]) as any
     }
   },
@@ -218,15 +259,15 @@ export default mixins(Themeable).extend({
     return this.$createElement(VData, {
       props: this.$props,
       on: {
-        'update:options': (v: any, old: any) => !deepEqual(v, old) && this.$emit('update:options', v),
-        'update:page': (v: any) => this.$emit('update:page', v),
-        'update:items-per-page': (v: any) => this.$emit('update:items-per-page', v),
-        'update:sort-by': (v: any) => this.$emit('update:sort-by', v),
-        'update:sort-desc': (v: any) => this.$emit('update:sort-desc', v),
-        'update:group-by': (v: any) => this.$emit('update:group-by', v),
-        'update:group-desc': (v: any) => this.$emit('update:group-desc', v),
-        'pagination': (v: any, old: any) => !deepEqual(v, old) && this.$emit('pagination', v),
-        'current-items': (v: any[]) => {
+        'update:options': /* istanbul ignore next */ (v: any, old: any) => !deepEqual(v, old) && this.$emit('update:options', v),
+        'update:page': /* istanbul ignore next */ (v: any) => this.$emit('update:page', v),
+        'update:items-per-page': /* istanbul ignore next */ (v: any) => this.$emit('update:items-per-page', v),
+        'update:sort-by': /* istanbul ignore next */ (v: any) => this.$emit('update:sort-by', v),
+        'update:sort-desc': /* istanbul ignore next */ (v: any) => this.$emit('update:sort-desc', v),
+        'update:group-by': /* istanbul ignore next */ (v: any) => this.$emit('update:group-by', v),
+        'update:group-desc': /* istanbul ignore next */ (v: any) => this.$emit('update:group-desc', v),
+        'pagination': /* istanbul ignore next */ (v: any, old: any) => !deepEqual(v, old) && this.$emit('pagination', v),
+        'current-items': /* istanbul ignore next */ (v: any[]) => {
           this.internalCurrentItems = v
           this.$emit('current-items', v)
         }

@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VTabs",
   "mdSpec": {
     "version": "2",
     "link": "https://material.io/design/components/tabs.html"
@@ -44,6 +45,10 @@
             "desktop",
             "alignWithTitle",
             "grow",
+            {
+              "file": "centerActive",
+              "newIn": "2.0"
+            },
             "overflowToMenu",
             "pagination",
             "icons",

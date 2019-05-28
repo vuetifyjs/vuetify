@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_app.styl'
+import './VApp.sass'
 
 // Mixins
 import Themeable from '../../mixins/themeable'

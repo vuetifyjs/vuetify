@@ -1,16 +1,16 @@
 // Imports
 @import '../../styles/styles.sass'
 @import './_variables.scss'
-@import './_mixins.sass'
 
-.v-tabs-bar.theme--light
-  +tabs-theme($material-light)
++theme(v-tabs) using ($material)
+  .v-tab:not(.v-tab--active),
+  .v-tab:not(.v-tab--active) > .v-icon,
+  .v-tab--disabled
+    color: map-get($material, 'tabs')
+
 .v-tabs-bar.theme--dark
-  +tabs-theme($material-dark)
-
-  .v-tab.v-tab--active:not(.v-tab--disabled),
-  .v-tabs-slider-wrapper
-    color: map-deep-get($material-dark, 'text', 'primary')
+  .v-tab:not(.v-tab--active):not(.v-tab--disabled)
+    opacity: .7
 
 // Block
 .v-tabs
@@ -61,6 +61,9 @@
   &:focus:before
     opacity: $tabs-item-focus-opacity
 
+  &:not(.v-tab-disabled)
+    cursor: pointer
+
 .v-tabs-slider
   background-color: currentColor
   height: $tabs-slider-height
@@ -86,6 +89,19 @@
 
   .v-tabs-slider-wrapper + *
     margin-left: auto
+
+  +rtl()
+    .v-tabs-bar__content > *:last-child
+      margin-right: 0
+      margin-left: auto
+
+    .v-tabs-bar__content > *:first-child:not(.v-tabs-slider-wrapper)
+      margin-left: 0
+      margin-right: auto
+
+    .v-tabs-slider-wrapper + *
+      margin-left: 0
+      margin-right: auto
 
 .v-tabs--fixed-tabs
   .v-tab

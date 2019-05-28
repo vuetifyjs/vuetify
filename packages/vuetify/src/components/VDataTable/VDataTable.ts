@@ -17,19 +17,16 @@ import VProgressLinear from '../VProgressLinear'
 import VRow from './VRow'
 import VRowGroup from './VRowGroup'
 import VSimpleCheckbox from '../VCheckbox/VSimpleCheckbox'
-
-// Helpers
-import { deepEqual, getObjectValueByPath, compareFn, getPrefixedScopedSlots } from '../../util/helpers'
 import VSimpleTable from './VSimpleTable'
 import VMobileRow from './VMobileRow'
+
+// Helpers
+import { deepEqual, getObjectValueByPath, compareFn, getPrefixedScopedSlots, getSlot } from '../../util/helpers'
+import { breaking } from '../../util/console'
 
 /* @vue/component */
 export default VDataIterator.extend({
   name: 'v-data-table',
-
-  provide (): object {
-    return { dataTable: this }
-  },
 
   props: {
     headers: {
@@ -49,7 +46,12 @@ export default VDataIterator.extend({
     dense: Boolean,
     headerProps: Object,
     calculateWidths: Boolean,
-    fixedHeader: Boolean
+    fixedHeader: Boolean,
+    headersLength: Number,
+    expandIcon: {
+      type: String,
+      default: '$vuetify.icons.expand'
+    }
   },
 
   data () {
@@ -62,16 +64,42 @@ export default VDataIterator.extend({
 
   computed: {
     computedHeaders (): TableHeader[] {
+      if (!this.headers) return []
       const headers = this.headers.filter(h => h.value === undefined || !this.internalGroupBy.find(v => v === h.value))
+      const defaultHeader = { text: '', sortable: false, width: '1px' }
 
-      this.showSelect && headers.unshift({ text: '', value: 'data-table-select', sortable: false, width: '1px' })
-      this.showExpand && headers.unshift({ text: '', value: 'data-table-expand', sortable: false, width: '1px' })
+      if (this.showSelect) {
+        const index = headers.findIndex(h => h.value === 'data-table-select')
+        if (index < 0) headers.unshift({ ...defaultHeader, value: 'data-table-select' })
+        else headers.splice(index, 1, { ...defaultHeader, ...headers[index] })
+      }
+
+      if (this.showExpand) {
+        const index = headers.findIndex(h => h.value === 'data-table-expand')
+        if (index < 0) headers.unshift({ ...defaultHeader, value: 'data-table-expand' })
+        else headers.splice(index, 1, { ...defaultHeader, ...headers[index] })
+      }
 
       return headers
+    },
+    computedHeadersLength (): number {
+      return this.headersLength || this.computedHeaders.length
     },
     isMobile (): boolean {
       return this.$vuetify.breakpoint.width < this.mobileBreakpoint
     }
+  },
+
+  created () {
+    const breakingProps = [
+      ['sort-icon', 'header-props.sort-icon'],
+      ['hide-headers', 'hide-default-hedader'],
+      ['select-all', 'show-select']
+    ]
+
+    breakingProps.forEach(([original, replacement]) => {
+      if (this.$attrs.hasOwnProperty(original)) breaking(original, replacement)
+    })
   },
 
   mounted () {
@@ -97,7 +125,7 @@ export default VDataIterator.extend({
       this.widths = Array.from(this.$el.querySelectorAll('th')).map(e => e.clientWidth)
     },
     customFilterWithColumns (items: any[], search: string) {
-      const filterableHeaders = this.headers.filter(h => !!h.filter)
+      const filterableHeaders = this.computedHeaders.filter(h => !!h.filter)
       if (filterableHeaders.length) {
         items = items.filter(i => filterableHeaders.every(h => h.filter!(getObjectValueByPath(i, h.value), this.search, i)))
       }
@@ -120,7 +148,7 @@ export default VDataIterator.extend({
     genCaption (props: DataProps) {
       if (this.caption) return [this.$createElement('caption', [this.caption])]
 
-      return this.genSlots('caption', props)
+      return getSlot(this, 'caption', props, true)
     },
     genColgroup (props: DataProps) {
       return this.$createElement('colgroup', this.computedHeaders.map(header => {
@@ -146,13 +174,15 @@ export default VDataIterator.extend({
       const th = this.$createElement('th', {
         staticClass: 'column',
         attrs: {
-          colspan: this.computedHeaders.length
+          colspan: this.computedHeadersLength
         }
       }, [progress])
 
-      return this.$createElement('tr', {
+      const tr = this.$createElement('tr', {
         staticClass: 'v-data-table__progress'
       }, [th])
+
+      return this.$createElement('thead', [tr])
     },
     genHeaders (props: DataProps) {
       const data = {
@@ -160,15 +190,19 @@ export default VDataIterator.extend({
           ...this.headerProps,
           headers: this.computedHeaders,
           options: props.options,
-          mobile: this.isMobile
+          mobile: this.isMobile,
+          showGroupBy: this.showGroupBy,
+          someItems: this.someItems,
+          everyItem: this.everyItem
         },
         on: {
           sort: props.sort,
-          group: props.group
+          group: props.group,
+          'toggle-select-all': this.toggleSelectAll
         }
       }
 
-      const children: VNodeChildrenArrayContents = [this.genSlots('header', data)]
+      const children: VNodeChildrenArrayContents = [getSlot(this, 'header', data)]
 
       if (!this.hideDefaultHeader) {
         const scopedSlots = getPrefixedScopedSlots('header.', this.$scopedSlots)
@@ -186,7 +220,7 @@ export default VDataIterator.extend({
       return this.$createElement('tr', [
         this.$createElement('td', {
           attrs: {
-            colspan: this.computedHeaders.length
+            colspan: this.computedHeadersLength
           }
         }, content)
       ])
@@ -235,7 +269,7 @@ export default VDataIterator.extend({
             small: true
           },
           on: {
-            click: () => this.$set(this.openCache, group, !this.openCache[group])
+            click: /* istanbul ignore next */ () => this.$set(this.openCache, group, !this.openCache[group])
           }
         }, [this.$createElement(VIcon, [isOpen ? 'remove' : 'add'])])
 
@@ -246,14 +280,14 @@ export default VDataIterator.extend({
             small: true
           },
           on: {
-            click: () => props.updateOptions({ groupBy: [], groupDesc: [] })
+            click: /* istanbul ignore next */ () => props.updateOptions({ groupBy: [], groupDesc: [] })
           }
         }, [this.$createElement(VIcon, ['close'])])
 
         const column = this.$createElement('td', {
           staticClass: 'text-xs-left',
           attrs: {
-            colspan: this.computedHeaders.length
+            colspan: this.computedHeadersLength
           }
         }, [toggle, `${props.options.groupBy[0]}: ${group}`, remove])
 
@@ -280,7 +314,7 @@ export default VDataIterator.extend({
       return items.map((item: any) => this.$scopedSlots.item!(this.createItemProps(item)))
     },
     genDefaultRows (items: any[], props: DataProps) {
-      return this.$scopedSlots['item.expanded']
+      return this.$scopedSlots['expanded-item']
         ? items.map(item => this.genDefaultExpandedRow(item))
         : items.map(item => this.genDefaultSimpleRow(item))
     },
@@ -289,7 +323,7 @@ export default VDataIterator.extend({
       const headerRow = this.genDefaultSimpleRow(item, isExpanded ? 'expanded expanded__row' : null)
       const expandedRow = this.$createElement('tr', {
         staticClass: 'expanded expanded__content'
-      }, [this.$scopedSlots['item.expanded']!({ item, headers: this.computedHeaders })])
+      }, [this.$scopedSlots['expanded-item']!({ item, headers: this.computedHeaders })])
 
       return this.$createElement(VRowGroup, {
         props: {
@@ -305,16 +339,17 @@ export default VDataIterator.extend({
 
       if (this.showSelect) {
         const data = {
+          item,
           props: {
             value: this.isSelected(item)
           },
           on: {
-            input: (v: any) => this.select(item, v)
+            input: /* istanbul ignore next */ (v: any) => this.select(item, v)
           }
         }
 
-        const slot = scopedSlots['column.data-table-select']
-        scopedSlots['column.data-table-select'] = slot ? () => slot(data) : () => this.$createElement(VSimpleCheckbox, {
+        const slot = scopedSlots['data-table-select']
+        scopedSlots['data-table-select'] = slot ? () => slot(data) : () => this.$createElement(VSimpleCheckbox, {
           staticClass: 'v-data-table__checkbox',
           ...data
         })
@@ -324,6 +359,7 @@ export default VDataIterator.extend({
 
       if (this.showExpand) {
         const data = {
+          item,
           props: {
             expanded
           },
@@ -332,14 +368,14 @@ export default VDataIterator.extend({
           }
         }
 
-        const slot = scopedSlots['column.data-table-expand']
-        scopedSlots['column.data-table-expand'] = slot ? () => slot(data) : () => this.$createElement(VIcon, {
+        const slot = scopedSlots['data-table-expand']
+        scopedSlots['data-table-expand'] = slot ? () => slot(data) : () => this.$createElement(VIcon, {
           staticClass: 'v-data-table__expand-icon',
           class: {
             'v-data-table__expand-icon--active': expanded
           },
           ...data
-        }, ['$vuetify.icons.expand']) // TODO: prop?
+        }, [this.expandIcon])
       }
 
       return this.$createElement(this.isMobile ? VMobileRow : VRow, {
@@ -354,35 +390,38 @@ export default VDataIterator.extend({
       })
     },
     genBody (props: DataProps): VNode | string | VNodeChildren {
+      const data = {
+        ...props,
+        headers: this.computedHeaders
+      }
+
       if (this.$scopedSlots.body) {
-        return this.$scopedSlots.body!({
-          ...props,
-          headers: this.computedHeaders
-        })
+        return this.$scopedSlots.body!(data)
       }
 
       return this.$createElement('tbody', [
-        this.genSlots('body.prepend', props),
+        getSlot(this, 'body.prepend', data, true),
         this.genItems(props.items, props),
-        this.genSlots('body.append', props)
+        getSlot(this, 'body.append', data, true)
       ])
     },
     genFooters (props: DataProps) {
       const data = {
         props: {
-          ...this.footerProps,
           options: props.options,
-          pagination: props.pagination
+          pagination: props.pagination,
+          itemsPerPageText: '$vuetify.dataTable.itemsPerPageText',
+          ...this.footerProps
         },
         on: {
-          'update:options': (value: any) => props.updateOptions(value)
+          'update:options': /* istanbul ignore next */ (value: any) => props.updateOptions(value)
         },
         widths: this.widths,
         headers: this.computedHeaders
       }
 
       const children: VNodeChildren = [
-        this.genSlots('footer', data)
+        getSlot(this, 'footer', data, true)
       ]
 
       if (!this.hideDefaultFooter) {
@@ -419,7 +458,7 @@ export default VDataIterator.extend({
       return this.$createElement(VSimpleTable, {
         props: simpleProps
       }, [
-        this.proxySlot('top', this.genSlots('top', props)),
+        this.proxySlot('top', getSlot(this, 'top', props, true)),
         this.genCaption(props),
         this.genColgroup(props),
         this.genHeaders(props),
@@ -440,22 +479,22 @@ export default VDataIterator.extend({
         customSort: this.customSortWithHeaders
       },
       on: {
-        'update:options': (v: DataOptions, old: DataOptions) => {
+        'update:options': /* istanbul ignore next */ (v: DataOptions, old: DataOptions) => {
           this.internalGroupBy = v.groupBy || []
           !deepEqual(v, old) && this.$emit('update:options', v)
         },
-        'update:page': (v: number) => this.$emit('update:page', v),
-        'update:items-per-page': (v: number) => this.$emit('update:items-per-page', v),
-        'update:sort-by': (v: string | string[]) => this.$emit('update:sort-by', v),
-        'update:sort-desc': (v: boolean | boolean[]) => this.$emit('update:sort-desc', v),
-        'update:group-by': (v: string | string[]) => this.$emit('update:group-by', v),
-        'update:group-desc': (v: boolean | boolean[]) => this.$emit('update:group-desc', v),
-        'pagination': (v: DataPaginaton, old: DataPaginaton) => !deepEqual(v, old) && this.$emit('pagination', v),
-        'current-items': (v: any[]) => {
+        'update:page': /* istanbul ignore next */ (v: number) => this.$emit('update:page', v),
+        'update:items-per-page': /* istanbul ignore next */ (v: number) => this.$emit('update:items-per-page', v),
+        'update:sort-by': /* istanbul ignore next */ (v: string | string[]) => this.$emit('update:sort-by', v),
+        'update:sort-desc': /* istanbul ignore next */ (v: boolean | boolean[]) => this.$emit('update:sort-desc', v),
+        'update:group-by': /* istanbul ignore next */ (v: string | string[]) => this.$emit('update:group-by', v),
+        'update:group-desc': /* istanbul ignore next */ (v: boolean | boolean[]) => this.$emit('update:group-desc', v),
+        'pagination': /* istanbul ignore next */ (v: DataPaginaton, old: DataPaginaton) => !deepEqual(v, old) && this.$emit('pagination', v),
+        'current-items': /* istanbul ignore next */ (v: any[]) => {
           this.internalCurrentItems = v
           this.$emit('current-items', v)
         },
-        'page-count': (v: number) => this.$emit('page-count', v)
+        'page-count': /* istanbul ignore next */ (v: number) => this.$emit('page-count', v)
       },
       scopedSlots: {
         default: this.genDefaultScopedSlot as any

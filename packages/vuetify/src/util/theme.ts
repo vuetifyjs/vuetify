@@ -1,4 +1,4 @@
-import { colorToInt, intToHex, colorToHex, RGB } from './colorUtils'
+import { colorToInt, intToHex, colorToHex, ColorInt } from './colorUtils'
 import * as sRGB from './color/transformSRGB'
 import * as LAB from './color/transformCIELAB'
 import { VuetifyParsedTheme, VuetifyThemeVariant } from 'vuetify/types/services/theme'
@@ -101,7 +101,7 @@ export function genStyles (theme: VuetifyParsedTheme, cssVar = false): string {
   return variablesCss + css
 }
 
-export function genVariations (name: string, value: RGB): Record<string, string> {
+export function genVariations (name: string, value: ColorInt): Record<string, string> {
   const values: Record<string, string> = {
     base: intToHex(value)
   }
@@ -117,13 +117,13 @@ export function genVariations (name: string, value: RGB): Record<string, string>
   return values
 }
 
-function lighten (value: RGB, amount: number): RGB {
+function lighten (value: ColorInt, amount: number): ColorInt {
   const lab = LAB.fromXYZ(sRGB.toXYZ(value))
   lab[0] = lab[0] + amount * 10
   return sRGB.fromXYZ(LAB.toXYZ(lab))
 }
 
-function darken (value: RGB, amount: number): RGB {
+function darken (value: ColorInt, amount: number): ColorInt {
   const lab = LAB.fromXYZ(sRGB.toXYZ(value))
   lab[0] = lab[0] - amount * 10
   return sRGB.fromXYZ(LAB.toXYZ(lab))

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { VNode, VNodeDirective, FunctionalComponentOptions } from 'vue/types'
-import { VuetifyIcon } from 'vuetify'
+import { VuetifyIcon } from 'vuetify/types/services/icons'
 
 export function createSimpleFunctional (
   c: string,
@@ -102,7 +102,7 @@ export function createSimpleTransition (
 
 export function createJavaScriptTransition (
   name: string,
-  functions: Record<string, () => any>,
+  functions: Record<string, any>,
   mode = 'in-out'
 ): FunctionalComponentOptions {
   return {
@@ -148,6 +148,30 @@ export function addOnceEventListener (el: EventTarget, event: string, cb: () => 
   }
 
   el.addEventListener(event, once, false)
+}
+
+let passiveSupported = false
+try {
+  if (typeof window !== 'undefined') {
+    const testListenerOpts = Object.defineProperty({}, 'passive', {
+      get: () => {
+        passiveSupported = true
+      }
+    })
+
+    window.addEventListener('testListener', testListenerOpts, testListenerOpts)
+    window.removeEventListener('testListener', testListenerOpts, testListenerOpts)
+  }
+} catch (e) { console.warn(e) }
+export { passiveSupported }
+
+export function addPassiveEventListener (
+  el: EventTarget,
+  event: string,
+  cb: EventHandlerNonNull | (() => void),
+  options: {}
+): void {
+  el.addEventListener(event, cb, passiveSupported ? options : false)
 }
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
@@ -254,13 +278,6 @@ export function filterObjectOnKeys<T, K extends keyof T> (obj: T, keys: K[]): { 
   return filtered
 }
 
-export function filterChildren (array: VNode[] = [], tag: string): VNode[] {
-  return array.filter(child => {
-    return child.componentOptions &&
-      child.componentOptions.Ctor.options.name === tag
-  })
-}
-
 export function convertToUnit (str: string | number | null | undefined, unit = 'px'): string | undefined {
   if (str == null || str === '') {
     return undefined
@@ -353,7 +370,7 @@ export function groupByProperty (xs: any[], key: string): Record<string, any[]> 
   }, {})
 }
 
-export function wrapInArray<T> (v: T | T[]): T[] { return Array.isArray(v) ? v : [v] }
+export function wrapInArray<T> (v: T | T[] | null | undefined): T[] { return v != null ? Array.isArray(v) ? v : [v] : [] }
 
 export type compareFn<T = any> = (a: T, b: T) => number
 
@@ -454,4 +471,22 @@ export function getSlot (vm: Vue, name = 'default', data?: object, optional = fa
     return vm.$slots[name]
   }
   return undefined
+}
+
+export function clamp (value: number, min = 0, max = 1) {
+  return Math.max(min, Math.min(max, value))
+}
+
+export function padEnd (str: string, length: number, char = '0') {
+  return str + char.repeat(Math.max(0, length - str.length))
+}
+
+export function chunk (str: string, size = 1) {
+  const chunked = []
+  let index = 0
+  while (index < str.length) {
+    chunked.push(str.substr(index, size))
+    index += size
+  }
+  return chunked
 }

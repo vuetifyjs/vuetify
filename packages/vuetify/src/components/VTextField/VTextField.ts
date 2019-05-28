@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_text-fields.styl'
+import './VTextField.sass'
 
 // Extensions
 import VInput from '../VInput'
@@ -9,24 +9,28 @@ import VCounter from '../VCounter'
 import VLabel from '../VLabel'
 
 // Mixins
-import Maskable from '../../mixins/maskable'
 import Loadable from '../../mixins/loadable'
 
 // Directives
 import Ripple from '../../directives/ripple'
 
 // Utilities
-import { keyCodes } from '../../util/helpers'
-import { deprecate } from '../../util/console'
-import mixins, { ExtractVue } from '../../util/mixins'
+import { convertToUnit, keyCodes } from '../../util/helpers'
+import { deprecate, consoleWarn } from '../../util/console'
 
 // Types
+import mixins from '../../util/mixins'
 import { VNode } from 'vue/types'
-import Vue from 'vue'
 
-interface options extends Vue {
+const baseMixins = mixins(
+  VInput,
+  Loadable
+)
+interface options extends InstanceType<typeof baseMixins> {
   $refs: {
+    label: HTMLElement
     input: HTMLInputElement
+    'prepend-inner': HTMLElement
     prefix: HTMLElement
     suffix: HTMLElement
   }
@@ -35,19 +39,7 @@ interface options extends Vue {
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
 /* @vue/component */
-export default mixins<options &
-/* eslint-disable indent */
-  ExtractVue<[
-    typeof VInput,
-    typeof Maskable,
-    typeof Loadable
-  ]>
-/* eslint-enable indent */
->(
-  VInput,
-  Maskable,
-  Loadable
-).extend({
+export default baseMixins.extend<options>().extend({
   name: 'v-text-field',
 
   directives: { Ripple },
@@ -56,9 +48,8 @@ export default mixins<options &
 
   props: {
     appendOuterIcon: String,
-    /** @deprecated */
-    appendOuterIconCb: Function,
     autofocus: Boolean,
+    /** @deprecated */
     box: Boolean,
     browserAutocomplete: String,
     clearable: Boolean,
@@ -66,23 +57,23 @@ export default mixins<options &
       type: String,
       default: '$vuetify.icons.clear'
     },
-    clearIconCb: Function,
     color: {
       type: String,
       default: 'primary'
     },
     counter: [Boolean, Number, String],
+    filled: Boolean,
     flat: Boolean,
     fullWidth: Boolean,
     label: String,
-    outline: Boolean,
+    outlined: Boolean,
     placeholder: String,
     prefix: String,
     prependInnerIcon: String,
-    /** @deprecated */
-    prependInnerIconCb: Function,
     reverse: Boolean,
+    rounded: Boolean,
     singleLine: Boolean,
+    shaped: Boolean,
     solo: Boolean,
     soloInverted: Boolean,
     suffix: String,
@@ -94,14 +85,19 @@ export default mixins<options &
 
   data: () => ({
     badInput: false,
+    labelWidth: 0,
+    prefixWidth: 0,
+    prependWidth: 0,
     initialValue: null,
     internalChange: false,
+    isBooted: false,
     isClearing: false
   }),
 
   computed: {
     classes (): object {
       return {
+        ...VInput.options.computed.classes.call(this),
         'v-text-field': true,
         'v-text-field--full-width': this.fullWidth,
         'v-text-field--prefix': this.prefix,
@@ -109,84 +105,78 @@ export default mixins<options &
         'v-text-field--solo': this.isSolo,
         'v-text-field--solo-inverted': this.soloInverted,
         'v-text-field--solo-flat': this.flat,
-        'v-text-field--box': this.box,
+        'v-text-field--filled': this.isFilled,
+        'v-text-field--is-booted': this.isBooted,
         'v-text-field--enclosed': this.isEnclosed,
         'v-text-field--reverse': this.reverse,
-        'v-text-field--outline': this.outline,
-        'v-text-field--placeholder': this.placeholder
+        'v-text-field--outlined': this.outlined,
+        'v-text-field--placeholder': this.placeholder,
+        'v-text-field--rounded': this.rounded,
+        'v-text-field--shaped': this.shaped
       }
     },
-    counterValue () {
+    counterValue (): number {
       return (this.internalValue || '').toString().length
     },
-    directivesInput () {
-      return []
-    },
     internalValue: {
-      get () {
+      get (): any {
         return this.lazyValue
       },
       set (val: any) {
-        if (this.mask) {
-          this.lazyValue = this.unmaskText(this.maskText(this.unmaskText(val)))
-          this.setSelectionRange()
-        } else {
-          this.lazyValue = val
-          this.$emit('input', this.lazyValue)
-        }
+        this.lazyValue = val
+        this.$emit('input', this.lazyValue)
       }
     },
-    isDirty () {
+    isDirty (): boolean {
       return (this.lazyValue != null &&
         this.lazyValue.toString().length > 0) ||
         this.badInput
     },
-    isEnclosed () {
+    isEnclosed (): boolean {
       return (
-        this.box ||
+        this.isFilled ||
         this.isSolo ||
-        this.outline ||
+        this.outlined ||
         this.fullWidth
       )
     },
-    isLabelActive () {
+    isFilled (): boolean {
+      return this.box || this.filled
+    },
+    isLabelActive (): boolean {
       return this.isDirty || dirtyTypes.includes(this.type)
     },
-    isSingle () {
+    isSingle (): boolean {
       return this.isSolo || this.singleLine
     },
-    isSolo () {
+    isSolo (): boolean {
       return this.solo || this.soloInverted
     },
-    labelPosition () {
-      const offset = (this.prefix && !this.labelValue) ? this.prefixWidth : 0
+    labelPosition (): Record<'left' | 'right', string | number | undefined> {
+      let offset = (this.prefix && !this.labelValue) ? this.prefixWidth : 0
 
-      return (!this.$vuetify.rtl !== !this.reverse) ? {
-        left: 'auto',
-        right: offset
-      } : {
+      if (this.labelValue && this.prependWidth) offset -= this.prependWidth
+
+      return (this.$vuetify.rtl === this.reverse) ? {
         left: offset,
         right: 'auto'
+      } : {
+        left: 'auto',
+        right: offset
       }
     },
-    showLabel () {
-      return this.hasLabel && (!this.isSingle || (!this.isLabelActive && !this.placeholder && !this.prefixLabel))
+    showLabel (): boolean {
+      return this.hasLabel && (!this.isSingle || (!this.isLabelActive && !this.placeholder))
     },
-    labelValue () {
+    labelValue (): boolean {
       return !this.isSingle &&
-        Boolean(this.isFocused || this.isLabelActive || this.placeholder || this.prefixLabel)
-    },
-    prefixWidth () {
-      if (!this.prefix && !this.$refs.prefix) return
-
-      return this.$refs.prefix.offsetWidth
-    },
-    prefixLabel () {
-      return (this.prefix && !this.value)
+        Boolean(this.isFocused || this.isLabelActive || this.placeholder)
     }
   },
 
   watch: {
+    labelValue: 'setLabelWidth',
+    outlined: 'setLabelWidth',
     isFocused (val) {
       // Sets validationState from validatable
       this.hasColor = val
@@ -198,21 +188,24 @@ export default mixins<options &
       }
     },
     value (val) {
-      if (this.mask && !this.internalChange) {
-        const masked = this.maskText(this.unmaskText(val))
-        this.lazyValue = this.unmaskText(masked)
+      this.lazyValue = val
+    }
+  },
 
-        // Emit when the externally set value was modified internally
-        String(val) !== this.lazyValue && this.$nextTick(() => {
-          this.$refs.input.value = masked
-          this.$emit('input', this.lazyValue)
-        })
-      } else this.lazyValue = val
+  created () {
+    /* istanbul ignore if */
+    if (this.box) deprecate('box', 'filled')
+    if (this.shaped && !(this.isFilled || this.outlined || this.isSolo)) {
+      consoleWarn('shaped should be used with either filled or outlined', this)
     }
   },
 
   mounted () {
     this.autofocus && this.onFocus()
+    this.setLabelWidth()
+    this.setPrefixWidth()
+    this.setPrependWidth()
+    requestAnimationFrame(() => (this.isBooted = true))
   },
 
   methods: {
@@ -276,15 +269,12 @@ export default mixins<options &
     genClearIcon () {
       if (!this.clearable) return null
 
-      const icon = !this.isDirty ? '' : 'clear'
-
-      if (this.clearIconCb) deprecate(':clear-icon-cb', '@click:clear', this)
+      const icon = this.isDirty ? 'clear' : ''
 
       return this.genSlot('append', 'inner', [
         this.genIcon(
           icon,
-          (!this.$listeners['click:clear'] && this.clearIconCb) || this.clearableCallback,
-          false
+          this.clearableCallback
         )
       ])
     },
@@ -304,11 +294,21 @@ export default mixins<options &
     },
     genDefaultSlot () {
       return [
+        this.genFieldset(),
         this.genTextFieldSlot(),
         this.genClearIcon(),
         this.genIconSlot(),
         this.genProgress()
       ]
+    },
+    genFieldset () {
+      if (!this.outlined) return null
+
+      return this.$createElement('fieldset', {
+        attrs: {
+          'aria-hidden': true
+        }
+      }, [this.genLegend()])
     },
     genLabel () {
       if (!this.showLabel) return null
@@ -330,18 +330,29 @@ export default mixins<options &
 
       return this.$createElement(VLabel, data, this.$slots.label || this.label)
     },
+    genLegend () {
+      const width = !this.singleLine && (this.labelValue || this.isDirty) ? this.labelWidth : 0
+      const span = this.$createElement('span', {
+        domProps: { innerHTML: '&#8203;' }
+      })
+
+      return this.$createElement('legend', {
+        style: {
+          width: convertToUnit(width)
+        }
+      }, [span])
+    },
     genInput () {
       const listeners = Object.assign({}, this.$listeners)
       delete listeners['change'] // Change should not be bound externally
 
-      const data = {
+      return this.$createElement('input', {
         style: {},
         domProps: {
-          value: this.maskText(this.lazyValue)
+          value: this.lazyValue
         },
         attrs: {
           'aria-label': (!this.$attrs || !this.$attrs.id) && this.label, // Label `for` will be set if we have an id
-          maxlength: this.mask ? this.masked.length : undefined,
           ...this.$attrs,
           autocomplete: this.browserAutocomplete,
           autofocus: this.autofocus,
@@ -357,9 +368,7 @@ export default mixins<options &
           keydown: this.onKeyDown
         }),
         ref: 'input'
-      }
-
-      return this.$createElement('input', data)
+      })
     },
     genMessages () {
       if (this.hideDetails) return null
@@ -416,7 +425,6 @@ export default mixins<options &
     onInput (e: Event) {
       const target = e.target as HTMLInputElement
       this.internalChange = true
-      this.mask && this.resetSelections(target)
       this.internalValue = target.value
       this.badInput = target.validity && target.validity.badInput
     },
@@ -440,6 +448,21 @@ export default mixins<options &
       if (this.hasMouseDown) this.focus()
 
       VInput.options.methods.onMouseUp.call(this, e)
+    },
+    setLabelWidth () {
+      if (!this.outlined || !this.$refs.label) return
+
+      this.labelWidth = this.$refs.label.offsetWidth * 0.75 + 6
+    },
+    setPrefixWidth () {
+      if (!this.$refs.prefix) return
+
+      this.prefixWidth = this.$refs.prefix.offsetWidth
+    },
+    setPrependWidth () {
+      if (!this.outlined || !this.$refs['prepend-inner']) return
+
+      this.prependWidth = this.$refs['prepend-inner'].offsetWidth
     }
   }
 })

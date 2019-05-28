@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_calendar-weekly.styl'
+import './VCalendarWeekly.sass'
 
 // Types
 import { VNode, VNodeChildren } from 'vue'

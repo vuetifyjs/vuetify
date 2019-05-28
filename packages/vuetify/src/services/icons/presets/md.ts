@@ -27,7 +27,10 @@ const icons: VuetifyIcons = {
   ratingEmpty: 'star_border',
   ratingFull: 'star',
   ratingHalf: 'star_half',
-  loading: 'cached'
+  loading: 'cached',
+  first: 'first_page',
+  last: 'last_page',
+  unfold: 'unfold_more'
 }
 
 export default icons

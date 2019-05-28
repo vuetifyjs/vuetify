@@ -59,8 +59,8 @@
     "description": "Get ready for automatic treeshaking. Use only the components you need. Single component importing only pulls in what you use.",
     "keywords": "a la carte, a-la-carte, vuetify single import, vuetify import, component importing"
   },
-  "framework/default-markup": {
-    "title": "Default Markup",
+  "framework/application": {
+    "title": "Application service",
     "description": "Vuetify comes equipped with a default markup that makes it easy to create layouts for any application.",
     "keywords": "default layout, default markup, vuetify default layout"
   },
@@ -274,6 +274,11 @@
     "description": "Chip Group component for Vuetify Framework.",
     "keywords": "chip, chip-group, chip group, grouped chips"
   },
+  "components/color-pickers": {
+    "title": "Color pickers",
+    "description": "The v-color-picker component allows users to select a color using a number of different inputs",
+    "keyword": "components, color picker, color"
+  },
   "components/combobox": {
     "title": "Combobox Component",
     "description": "The v-combobox component provides type-ahead autocomplete functionality and allows user to provide a custom value.",
@@ -364,6 +369,11 @@
     "description": "Coming soon",
     "keywords": "overflow button, components"
   },
+  "components/overlays": {
+    "title": "Overlay Component",
+    "description": "Overlay component for the Vuetify Framework",
+    "keywords": "overlay, components"
+  },
   "components/paginations": {
     "title": "Pagination Component",
     "description": "The v-pagination component is used to separate long sets of data so that it is easier for a user to consume information.",
@@ -384,10 +394,15 @@
     "description": "Time Picker component for the Vuetify framework.",
     "keywords": "vuetify, picker, time picker, component"
   },
-  "components/progress": {
-    "title": "Progress",
-    "description": "Progress components for the Vuetify framework.",
-    "keywords": "progress"
+  "components/progress-circular": {
+    "title": "Progress Circular",
+    "description": "The v-progress-circular component is useful for displaying numerical data in a circle.",
+    "keywords": "progress, circular progress, circle progress"
+  },
+  "components/progress-linear": {
+    "title": "Progress Linear",
+    "description": "The v-progress-linear component is useful for displaying numerical data in a straight line.",
+    "keywords": "progress, linear progress, line progress"
   },
   "components/ratings": {
     "title": "Ratings",
@@ -398,6 +413,11 @@
     "title": "Sheet Component",
     "description": "The v-sheet component is the baseline paper element in Vuetify.",
     "keywords": "sheet, components"
+  },
+  "components/simple-tables": {
+    "title": "Simple tables",
+    "description": "The v-simple-table component is a lightweight wrapper around the table element",
+    "keywords": "components, simple, table, data"
   },
   "components/sliders": {
     "title": "Slider Component",

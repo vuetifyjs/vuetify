@@ -36,12 +36,6 @@
           avatar: 'avatarStyle=Transparent&topType=LongHairStraight&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Surprised&eyebrowType=DefaultNatural&mouthType=Smile&skinColor=Light'
         },
         {
-          title: 'assistant',
-          name: 'Rachel Luna',
-          email: 'rachel@vuetifyjs.com',
-          avatar: 'avatarStyle=Transparent&topType=LongHairCurvy&accessoriesType=Round&hairColor=BrownDark&facialHairType=Blank&clotheType=ShirtScoopNeck&clotheColor=Heather&eyeType=Side&eyebrowType=RaisedExcited&mouthType=Default&skinColor=Light'
-        },
-        {
           title: 'keeper',
           name: 'Kael Watts-Deuchar',
           github: 'kaelwd',

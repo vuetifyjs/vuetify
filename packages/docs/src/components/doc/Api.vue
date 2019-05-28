@@ -1,7 +1,7 @@
 <template>
   <div>
     <doc-heading>Generic.Pages.api</doc-heading>
-    <v-card>
+    <v-card outlined>
       <v-tabs
         v-model="tab"
         :slider-color="computedTabs.length ? 'primary' : 'transparent'"
@@ -44,6 +44,7 @@
       </v-card-text>
 
       <v-tabs-items
+        :key="current"
         v-model="tab"
         touchless
         class="white"

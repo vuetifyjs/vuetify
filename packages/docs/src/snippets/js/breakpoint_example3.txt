@@ -1,8 +1,0 @@
-Vue.use(Vuetify, {
-  breakpoint: {
-    thresholds: {
-      xs: 360
-    },
-    scrollbarWidth: 10
-  }
-})

@@ -1,14 +1,14 @@
 import './VDataFooter.sass'
 
-// Helpers
-import { DataOptions, DataPaginaton } from '../VData/VData'
-import { PropValidator } from 'vue/types/options'
-import Vue, { VNode, VNodeChildrenArrayContents } from 'vue'
+// Components
 import VSelect from '../VSelect/VSelect'
 import VIcon from '../VIcon'
 import VBtn from '../VBtn'
 
-// Styles
+// Types
+import Vue, { VNode, VNodeChildrenArrayContents } from 'vue'
+import { DataOptions, DataPaginaton } from '../VData/VData'
+import { PropValidator } from 'vue/types/options'
 
 export default Vue.extend({
   name: 'v-data-footer',
@@ -44,11 +44,11 @@ export default Vue.extend({
     },
     itemsPerPageText: {
       type: String,
-      default: '$vuetify.dataIterator.itemsPerPageText'
+      default: '$vuetify.dataFooter.itemsPerPageText'
     },
     itemsPerPageAllText: {
       type: String,
-      default: '$vuetify.dataIterator.itemsPerPageAll'
+      default: '$vuetify.dataFooter.itemsPerPageAll'
     },
     showFirstLastPage: Boolean,
     showCurrentPage: Boolean,
@@ -62,29 +62,25 @@ export default Vue.extend({
         this.options.page * this.options.itemsPerPage >= this.pagination.itemsLength ||
         this.pagination.pageStop < 0
     },
-    isCustomItemsPerPage (): boolean {
-      for (let i = 0; i < this.itemsPerPageOptions.length; i++) {
-        if (this.options.itemsPerPage === this.itemsPerPageOptions[i]) return false
-      }
-
-      return true
-    },
     computedItemsPerPageOptions (): any[] {
-      const itemsPerPageOptions = this.itemsPerPageOptions.slice()
+      const itemsPerPageOptions = this.itemsPerPageOptions.map(option => {
+        if (typeof option === 'object') return option
+        else return this.genItemsPerPageOption(option)
+      })
 
-      if (this.isCustomItemsPerPage) {
-        itemsPerPageOptions.push(this.options.itemsPerPage)
+      const customItemsPerPage = !itemsPerPageOptions.find(option => option.value === this.options.itemsPerPage)
+
+      if (customItemsPerPage) {
+        itemsPerPageOptions.push(this.genItemsPerPageOption(this.options.itemsPerPage))
 
         itemsPerPageOptions.sort((a, b) => {
-          if (a === -1) return 1
-          else if (b === -1) return -1
-          else return a - b
+          if (a.value === -1) return 1
+          else if (b.value === -1) return -1
+          else return a.value - b.value
         })
       }
 
-      return itemsPerPageOptions.map(value => ({
-        text: value === -1 ? this.$vuetify.lang.t(this.itemsPerPageAllText) : String(value), value
-      }))
+      return itemsPerPageOptions
     }
   },
 
@@ -106,6 +102,12 @@ export default Vue.extend({
     },
     onChangeItemsPerPage (itemsPerPage: number) {
       this.updateOptions({ itemsPerPage, page: 1 })
+    },
+    genItemsPerPageOption (option: number) {
+      return {
+        text: option === -1 ? this.$vuetify.lang.t(this.itemsPerPageAllText) : String(option),
+        value: option
+      }
     },
     genItemsPerPageSelect () {
       return this.$createElement('div', {
@@ -140,8 +142,8 @@ export default Vue.extend({
           ? itemsLength
           : this.pagination.pageStop
 
-        children = this.$scopedSlots.pageText
-          ? [this.$scopedSlots.pageText({ pageStart, pageStop, itemsLength })]
+        children = this.$scopedSlots['page-text']
+          ? [this.$scopedSlots['page-text']!({ pageStart, pageStop, itemsLength })]
           : [`${pageStart}-${pageStop} of ${itemsLength}`]
       }
 
@@ -167,43 +169,48 @@ export default Vue.extend({
       }, [this.$createElement(VIcon, icon)])
     },
     genIcons () {
-      const icons: VNodeChildrenArrayContents = []
+      const before: VNodeChildrenArrayContents = []
+      const after: VNodeChildrenArrayContents = []
 
-      icons.push(this.genIcon(
+      before.push(this.genIcon(
         this.onPreviousPage,
         this.options.page === 1,
-        'Previous page',
+        this.$vuetify.lang.t('$vuetify.dataFooter.prevPage'),
         this.$vuetify.rtl ? this.nextIcon : this.prevIcon
       ))
 
-      if (this.showCurrentPage) {
-        icons.push(this.$createElement('span', [this.options.page.toString()]))
-      }
-
-      icons.push(this.genIcon(
+      after.push(this.genIcon(
         this.onNextPage,
         this.disableNextPageIcon,
-        'Next page',
+        this.$vuetify.lang.t('$vuetify.dataFooter.nextPage'),
         this.$vuetify.rtl ? this.prevIcon : this.nextIcon
       ))
 
       if (this.showFirstLastPage) {
-        icons.unshift(this.genIcon(
+        before.unshift(this.genIcon(
           this.onFirstPage,
           this.options.page === 1,
-          'First page',
+          this.$vuetify.lang.t('$vuetify.dataFooter.firstPage'),
           this.$vuetify.rtl ? this.lastIcon : this.firstIcon
         ))
 
-        icons.push(this.genIcon(
+        after.push(this.genIcon(
           this.onLastPage,
           this.options.page === this.pagination.pageCount || this.options.itemsPerPage === -1,
-          'Last page',
+          this.$vuetify.lang.t('$vuetify.dataFooter.lastPage'),
           this.$vuetify.rtl ? this.firstIcon : this.lastIcon
         ))
       }
 
-      return icons
+      return [
+        this.$createElement('div', {
+          staticClass: 'v-data-footer__icons-before'
+        }, before),
+        this.showCurrentPage && this.$createElement('span', [this.options.page.toString()]),
+        this.$createElement('div', {
+          staticClass: 'v-data-footer__icons-after'
+        }, after)
+      ]
     }
   },
 

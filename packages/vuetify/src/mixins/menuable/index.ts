@@ -1,18 +1,19 @@
 // Mixins
 import Positionable from '../positionable'
 import Stackable from '../stackable'
+import Activatable from '../activatable'
 
 // Utilities
-import { consoleError } from '../../util/console'
 import mixins, { ExtractVue } from '../../util/mixins'
+import { convertToUnit } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
 
 const baseMixins = mixins(
   Stackable,
-  Positionable
+  Positionable,
+  Activatable
 )
 
 interface options extends ExtractVue<typeof baseMixins> {
@@ -30,16 +31,9 @@ export default baseMixins.extend<options>().extend({
   name: 'menuable',
 
   props: {
-    activator: {
-      default: null,
-      validator: (val: string | object) => {
-        return ['string', 'object'].includes(typeof val)
-      }
-    } as PropValidator<string | HTMLElement>,
     allowOverflow: Boolean,
     light: Boolean,
     dark: Boolean,
-    disabled: Boolean,
     maxWidth: {
       type: [Number, String],
       default: 'auto'
@@ -66,6 +60,7 @@ export default baseMixins.extend<options>().extend({
       default: 0
     },
     offsetOverflow: Boolean,
+    openOnClick: Boolean,
     positionX: {
       type: Number,
       default: null
@@ -84,6 +79,7 @@ export default baseMixins.extend<options>().extend({
     absoluteX: 0,
     absoluteY: 0,
     activatedBy: null as EventTarget | null,
+    activatorFixed: false,
     activatorNode: null as null | VNode | VNode[],
     dimensions: {
       activator: {
@@ -122,7 +118,7 @@ export default baseMixins.extend<options>().extend({
     computedLeft () {
       const a = this.dimensions.activator
       const c = this.dimensions.content
-      const activatorLeft = (this.isAttached ? a.offsetLeft : a.left) || 0
+      const activatorLeft = (this.attach !== false ? a.offsetLeft : a.left) || 0
       const minWidth = Math.max(a.width, c.width)
       let left = 0
       left += this.left ? activatorLeft - (minWidth - a.width) : activatorLeft
@@ -144,7 +140,7 @@ export default baseMixins.extend<options>().extend({
       let top = 0
 
       if (this.top) top += a.height - c.height
-      if (this.isAttached) top += a.offsetTop
+      if (this.attach !== false) top += a.offsetTop
       else top += a.top + this.pageYOffset
       if (this.offsetY) top += this.top ? -a.height : a.height
       if (this.nudgeTop) top -= parseInt(this.nudgeTop)
@@ -154,9 +150,6 @@ export default baseMixins.extend<options>().extend({
     },
     hasActivator (): boolean {
       return !!this.$slots.activator || !!this.$scopedSlots.activator || !!this.activator || !!this.inputActivator
-    },
-    isAttached (): boolean {
-      return this.attach !== false
     }
   },
 
@@ -174,7 +167,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   beforeMount () {
-    this.checkForWindow()
+    this.hasWindow = typeof window !== 'undefined'
   },
 
   methods: {
@@ -193,16 +186,14 @@ export default baseMixins.extend<options>().extend({
     },
     activate () {},
     calcLeft (menuWidth: number) {
-      return `${this.isAttached
+      return convertToUnit(this.attach !== false
         ? this.computedLeft
-        : this.calcXOverflow(this.computedLeft, menuWidth)
-      }px`
+        : this.calcXOverflow(this.computedLeft, menuWidth))
     },
     calcTop () {
-      return `${this.isAttached
+      return convertToUnit(this.attach !== false
         ? this.computedTop
-        : this.calcYOverflow(this.computedTop)
-      }px`
+        : this.calcYOverflow(this.computedTop))
     },
     calcXOverflow (left: number, menuWidth: number) {
       const xOverflow = left + menuWidth - this.pageWidth + 12
@@ -252,47 +243,39 @@ export default baseMixins.extend<options>().extend({
 
       this.deactivate()
     },
-    checkForWindow () {
-      if (!this.hasWindow) {
-        this.hasWindow = typeof window !== 'undefined'
-      }
-    },
     checkForPageYOffset () {
       if (this.hasWindow) {
-        this.pageYOffset = this.getOffsetTop()
+        this.pageYOffset = this.activatorFixed ? 0 : this.getOffsetTop()
       }
     },
+    checkActivatorFixed () {
+      if (this.attach !== false) return
+      let el = this.getActivator()
+      while (el) {
+        if (window.getComputedStyle(el).position === 'fixed') {
+          this.activatorFixed = true
+          return
+        }
+        el = el.offsetParent as HTMLElement
+      }
+      this.activatorFixed = false
+    },
     deactivate () {},
-    getActivator (e?: Event): HTMLElement | null {
-      if (this.inputActivator) {
-        return this.$el.querySelector('.v-input__slot')
+    genActivatorListeners () {
+      const listeners = Activatable.options.methods.genActivatorListeners.call(this)
+
+      const onClick = listeners.click
+
+      listeners.click = (e: MouseEvent & KeyboardEvent) => {
+        if (this.openOnClick) {
+          onClick && onClick(e)
+        }
+
+        this.absoluteX = e.clientX
+        this.absoluteY = e.clientY
       }
 
-      if (this.activator) {
-        return typeof this.activator === 'string'
-          ? document.querySelector(this.activator)
-          : this.activator
-      }
-
-      if (this.$refs.activator) {
-        return this.$refs.activator.children.length > 0
-          ? this.$refs.activator.children[0] as HTMLElement
-          : this.$refs.activator
-      }
-
-      if (e) this.activatedBy = e.currentTarget || e.target
-
-      if (this.activatedBy) return this.activatedBy as HTMLElement
-
-      if (this.activatorNode) {
-        const activator = Array.isArray(this.activatorNode) ? this.activatorNode[0] : this.activatorNode
-        const el = activator && activator.elm
-
-        if (el) return el as HTMLElement
-      }
-
-      consoleError('No activator found')
-      return null
+      return listeners
     },
     getInnerHeight () {
       if (!this.hasWindow) return 0
@@ -329,7 +312,7 @@ export default baseMixins.extend<options>().extend({
       const rect = this.getRoundedBoundedClientRect(el)
 
       // Account for activator margin
-      if (this.isAttached) {
+      if (this.attach !== false) {
         const style = window.getComputedStyle(el)
 
         rect.left = parseInt(style.marginLeft!)
@@ -342,7 +325,7 @@ export default baseMixins.extend<options>().extend({
       requestAnimationFrame(() => {
         const el = this.$refs.content
 
-        if (!el || this.isShown(el)) {
+        if (!el || el.style.display !== 'none') {
           cb()
           return
         }
@@ -358,11 +341,9 @@ export default baseMixins.extend<options>().extend({
         resolve()
       }))
     },
-    isShown (el: HTMLElement) {
-      return el.style.display !== 'none'
-    },
     updateDimensions () {
-      this.checkForWindow()
+      this.hasWindow = typeof window !== 'undefined'
+      this.checkActivatorFixed()
       this.checkForPageYOffset()
       this.pageWidth = document.documentElement.clientWidth
 
@@ -377,7 +358,7 @@ export default baseMixins.extend<options>().extend({
 
         dimensions.activator = this.measure(activator)
         dimensions.activator.offsetLeft = activator.offsetLeft
-        if (this.isAttached) {
+        if (this.attach !== false) {
           // account for css padding causing things to not line up
           // this is mostly for v-autocomplete, hopefully it won't break anything
           dimensions.activator.offsetTop = activator.offsetTop

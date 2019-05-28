@@ -190,6 +190,18 @@ describe('VIcon', () => {
     })
   })
 
+  it('should use an <i> tag if none provided', () => {
+    const wrapper = mountFunction()
+
+    expect(wrapper.element.localName).toBe('i')
+  })
+
+  it('sets tag from from prop if provided', () => {
+    const wrapper = mountFunction({ props: { tag: 'span' } })
+
+    expect(wrapper.element.localName).toBe('span')
+  })
+
   describe('for component icon', () => {
     const getTestComponent = () => ({
       props: ['name'],
@@ -266,19 +278,31 @@ describe('VIcon', () => {
       expect(wrapper.element.classList).toContain('v-icon--right')
     })
 
-    it('should be a link', () => {
+    it('should be an accessible link', () => {
       const clickHandler = jest.fn()
       const wrapper = mountFunction({ on: { click: clickHandler } }, '$vuetify.icons.testIcon')
       wrapper.trigger('click')
 
       expect(wrapper.element.classList).toContain('v-icon--link')
       expect(clickHandler).toHaveBeenCalled()
+      expect(wrapper.element.getAttribute('aria-hidden')).toBeFalsy()
+      expect(wrapper.element.getAttribute('role')).toBe('button')
     })
 
     it('should trim name', () => {
       const wrapper = mountFunction({}, ' add ')
 
       expect(wrapper.text()).toBe('add')
+    })
+
+    it('should render an svg icon', () => {
+      const wrapper = mountFunction({}, 'M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z')
+
+      expect(wrapper.html()).toMatchSnapshot()
+
+      wrapper.setProps({ large: true })
+
+      expect(wrapper.html()).toMatchSnapshot()
     })
   })
 })

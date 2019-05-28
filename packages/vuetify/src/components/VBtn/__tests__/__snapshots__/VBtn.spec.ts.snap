@@ -60,6 +60,7 @@ exports[`VBtn.ts should render component with loader and match snapshot 1`] = `
     >
       <svg xmlns="http://www.w3.org/2000/svg"
            viewbox="21.904761904761905 21.904761904761905 43.80952380952381 43.80952380952381"
+           style="transform: rotate(0deg);"
       >
         <circle fill="transparent"
                 cx="43.80952380952381"

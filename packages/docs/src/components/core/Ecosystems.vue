@@ -1,6 +1,5 @@
 <template>
   <v-menu
-    attach
     bottom
     left
     offset-y
@@ -23,8 +22,8 @@
     </template>
 
     <v-list
-      light
       dense
+      nav
     >
       <v-subheader v-text="$t('Vuetify.AppToolbar.quickLinks')" />
       <core-item

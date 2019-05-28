@@ -1,12 +1,11 @@
 // Styles
-import '../../stylus/components/_textarea.styl'
+import './VTextarea.sass'
 
 // Extensions
 import VTextField from '../VTextField/VTextField'
 
 // Utilities
-import mixins, { ExtractVue } from '../../util/mixins'
-import { consoleInfo } from '../../util/console'
+import mixins from '../../util/mixins'
 
 // Types
 import Vue from 'vue'
@@ -17,20 +16,19 @@ interface options extends Vue {
   }
 }
 
-/* @vue/component */
-export default mixins<options &
-/* eslint-disable indent */
-  ExtractVue<typeof VTextField>
-/* eslint-enable indent */
+const baseMixins = mixins<options &
+  InstanceType<typeof VTextField>
 >(
   VTextField
-).extend({
+)
+
+/* @vue/component */
+export default baseMixins.extend({
   name: 'v-textarea',
 
   props: {
     autoGrow: Boolean,
     noResize: Boolean,
-    outline: Boolean,
     rowHeight: {
       type: [Number, String],
       default: 24,
@@ -67,25 +65,19 @@ export default mixins<options &
     setTimeout(() => {
       this.autoGrow && this.calculateInputHeight()
     }, 0)
-
-    // TODO: remove (2.0)
-    if (this.autoGrow && this.noResize) {
-      consoleInfo('"no-resize" is now implied when using "auto-grow", and can be removed', this)
-    }
   },
 
   methods: {
     calculateInputHeight () {
       const input = this.$refs.input
+      if (!input) return
 
-      if (input) {
-        input.style.height = '0'
-        const height = input.scrollHeight
-        const minHeight = parseInt(this.rows, 10) * parseFloat(this.rowHeight)
-        // This has to be done ASAP, waiting for Vue
-        // to update the DOM causes ugly layout jumping
-        input.style.height = Math.max(minHeight, height) + 'px'
-      }
+      input.style.height = '0'
+      const height = input.scrollHeight
+      const minHeight = parseInt(this.rows, 10) * parseFloat(this.rowHeight)
+      // This has to be done ASAP, waiting for Vue
+      // to update the DOM causes ugly layout jumping
+      input.style.height = Math.max(minHeight, height) + 'px'
     },
     genInput () {
       const input = VTextField.options.methods.genInput.call(this)
@@ -104,9 +96,7 @@ export default mixins<options &
       // Prevents closing of a
       // dialog when pressing
       // enter
-      if (this.isFocused &&
-        e.keyCode === 13
-      ) {
+      if (this.isFocused && e.keyCode === 13) {
         e.stopPropagation()
       }
 

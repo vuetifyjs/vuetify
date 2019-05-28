@@ -19,11 +19,7 @@
     },
     "daily": {
       "header": "### Daily",
-      "desc": "This is an example of calendar with content in each `interval` slot and a type of `day`."
-    },
-    "features": {
-      "header": "### Features",
-      "desc": "This example allows you to explore many of the features of the `v-calendar` component."
+      "desc": "This is an example of calendar with content in each interval slot and a type of `day`."
     }
   },
   "props": {

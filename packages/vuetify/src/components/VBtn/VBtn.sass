@@ -1,10 +1,9 @@
 // Imports
 @import '../../styles/styles.sass'
 @import './_variables.scss'
-@import './_mixins.sass'
 
 // Theme
-.v-btn:not(.v-btn--outline)
+.v-btn:not(.v-btn--outlined)
   &.primary,
   &.secondary,
   &.accent,
@@ -14,10 +13,27 @@
   &.info
     color: map-deep-get($material-dark, 'text', 'primary')
 
-.v-btn.theme--light
-  +btn-theme($material-light)
-.v-btn.theme--dark
-  +btn-theme($material-dark)
++theme(v-btn) using ($material)
+  color: map-deep-get($material, 'text', 'primary')
+
+  &.v-btn--disabled
+    color: map-deep-get($material, 'buttons', 'disabled') !important
+
+    .v-icon,
+    .v-btn__loading
+      color: map-deep-get($material, 'buttons', 'disabled') !important
+
+    &:not(.v-btn--flat):not(.v-btn--outlined)
+      background-color: map-deep-get($material, 'buttons', 'focused') !important
+
+  &:not(.v-btn--flat)
+    background-color: map-get($material, 'app-bar')
+
+  &.v-btn--outlined.v-btn--text
+    border-color: map-get($material, 'dividers')
+
+  &.v-btn--icon
+    color: map-deep-get($material, 'icons', 'active')
 
 // Block
 .v-btn
@@ -28,7 +44,6 @@
   font-size: $btn-font-size
   font-weight: $btn-font-weight
   letter-spacing: $btn-letter-spacing
-  line-height: $btn-line-height
   justify-content: center
   max-width: 100%
   outline: 0
@@ -42,8 +57,12 @@
   vertical-align: middle
   white-space: nowrap
 
-  &:before,
-  &:after
+  &:hover,
+  &:focus
+    &:before
+      opacity: 0.2
+
+  &:before
     border-radius: inherit
     bottom: 0
     color: inherit
@@ -67,21 +86,6 @@
         height: #{$size}px
         min-width: #{round($size * 1.777777777777778)}px // default ratio
         padding: 0 #{$size / 2}px
-
-  &.v-btn--active,
-  &:focus
-    &:before
-      opacity: 0.12
-
-    &:after
-      opacity: 1
-
-  &:hover
-    &:before
-      opacity: 0.06
-
-    &:after
-      opacity: 1
 
   +rtl()
     .v-icon--left
@@ -109,6 +113,8 @@
   .v-icon--left,
   .v-icon--right
     font-size: $btn-icon-font-size
+    height: $btn-icon-font-size
+    width: $btn-icon-font-size
 
   .v-icon--left
     margin-left: -6px
@@ -129,6 +135,13 @@
   width: 100%
 
 // Modifiers
+.v-btn--active
+  .v-icon
+    color: inherit
+
+  &:before
+    opacity: 0.12
+
 .v-btn--absolute
   position: absolute
 
@@ -177,9 +190,6 @@
       height: #{$size}px
       width: #{$size}px
 
-      .v-icon
-        font-size: #{round($size / 1.5)}px
-
       &.v-btn--absolute
         &.v-btn--bottom
           bottom: -#{$size / 2}px
@@ -210,19 +220,19 @@
   .v-btn__content
     opacity: 0
 
-.v-btn--outline
+.v-btn--outlined
   border: $btn-outline-border-width solid currentColor
 
   &:before
     border-radius: 0
 
-.v-btn--outline,
+.v-btn--outlined,
 .v-btn--round
   .v-btn__content
     .v-icon
       color: currentColor
 
-.v-btn--outline,
+.v-btn--outlined,
 .v-btn--flat,
 .v-btn--text
   background-color: transparent !important
