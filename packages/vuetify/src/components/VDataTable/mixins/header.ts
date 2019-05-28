@@ -56,7 +56,8 @@ export default mixins<options>().extend({
     },
     everyItem: Boolean,
     someItems: Boolean,
-    showGroupBy: Boolean
+    showGroupBy: Boolean,
+    singleSelect: Boolean
   },
 
   methods: {

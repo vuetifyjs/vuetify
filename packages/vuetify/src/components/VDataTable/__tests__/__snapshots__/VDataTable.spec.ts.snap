@@ -1,185 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VDataTable.ts should filter headers 1`] = `
-
-<div class="v-data-table theme--light">
-  <div class="v-data-table__wrapper">
-    <table>
-      <colgroup>
-        <col class>
-        <col class>
-        <col class>
-        <col class>
-        <col class>
-        <col class>
-      </colgroup>
-      <thead class="v-data-table-header">
-        <tr>
-          <th role="columnheader"
-              scope="col"
-              aria-label="Dessert (100g serving)"
-              aria-sort="none"
-              class="text-xs-left"
-          >
-            <span>
-              Dessert (100g serving)
-            </span>
-          </th>
-          <th role="columnheader"
-              scope="col"
-              aria-label="Calories: Not sorted. Activate to sort ascending."
-              aria-sort="none"
-              class="text-xs-left sortable"
-          >
-            <span>
-              Calories
-            </span>
-            <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
-            >
-              $vuetify.icons.sort
-            </i>
-          </th>
-          <th role="columnheader"
-              scope="col"
-              aria-label="Fat (g): Not sorted. Activate to sort ascending."
-              aria-sort="none"
-              class="text-xs-left sortable"
-          >
-            <span>
-              Fat (g)
-            </span>
-            <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
-            >
-              $vuetify.icons.sort
-            </i>
-          </th>
-          <th role="columnheader"
-              scope="col"
-              aria-label="Carbs (g): Not sorted. Activate to sort ascending."
-              aria-sort="none"
-              class="text-xs-left sortable"
-          >
-            <span>
-              Carbs (g)
-            </span>
-            <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
-            >
-              $vuetify.icons.sort
-            </i>
-          </th>
-          <th role="columnheader"
-              scope="col"
-              aria-label="Protein (g): Not sorted. Activate to sort ascending."
-              aria-sort="none"
-              class="text-xs-left sortable"
-          >
-            <span>
-              Protein (g)
-            </span>
-            <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
-            >
-              $vuetify.icons.sort
-            </i>
-          </th>
-          <th role="columnheader"
-              scope="col"
-              aria-label="Iron (%): Not sorted. Activate to sort ascending."
-              aria-sort="none"
-              class="text-xs-left sortable"
-          >
-            <span>
-              Iron (%)
-            </span>
-            <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
-            >
-              $vuetify.icons.sort
-            </i>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-  </div>
-  <div class="v-data-footer">
-    <div class="v-data-footer__select">
-      Rows per page:
-      <div role="combobox"
-           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-      >
-        <div class="v-input__control">
-          <div class="v-input__slot">
-            <div class="v-select__slot">
-              <div class="v-select__selections">
-                <div class="v-select__selection v-select__selection--comma">
-                  10
-                </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       autocomplete="on"
-                       readonly="readonly"
-                       type="text"
-                       aria-readonly="false"
-                >
-              </div>
-              <div class="v-input__append-inner">
-                <div class="v-input__icon v-input__icon--append">
-                  <i aria-hidden="true"
-                     class="v-icon material-icons theme--light"
-                  >
-                    $vuetify.icons.dropdown
-                  </i>
-                </div>
-              </div>
-            </div>
-            <div class="v-menu">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="v-data-footer__pagination">
-      –
-    </div>
-    <div class="v-data-footer__icons-before">
-      <button disabled="disabled"
-              type="button"
-              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="Previous page"
-      >
-        <span class="v-btn__content">
-          <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
-          >
-            $vuetify.icons.prev
-          </i>
-        </span>
-      </button>
-    </div>
-    <div class="v-data-footer__icons-after">
-      <button disabled="disabled"
-              type="button"
-              class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
-              aria-label="Next page"
-      >
-        <span class="v-btn__content">
-          <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
-          >
-            $vuetify.icons.next
-          </i>
-        </span>
-      </button>
-    </div>
-  </div>
-</div>
-
-`;
-
 exports[`VDataTable.ts should render 1`] = `
 
 <div class="v-data-table theme--light">
@@ -971,7 +791,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
         </tr>
       </thead>
       <div>
-        {"items":[{"name":"Frozen Yogurt","calories":159,"fat":6,"carbs":24,"protein":4,"iron":"1%"},{"name":"Ice cream sandwich","calories":237,"fat":9,"carbs":37,"protein":4.3,"iron":"1%"},{"name":"Eclair","calories":262,"fat":16,"carbs":23,"protein":6,"iron":"7%"},{"name":"Cupcake","calories":305,"fat":3.7,"carbs":67,"protein":4.3,"iron":"8%"},{"name":"Gingerbread","calories":356,"fat":16,"carbs":49,"protein":3.9,"iron":"16%"}],"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":[],"groupDesc":[],"mustSort":false,"multiSort":false},"pagination":{"page":1,"itemsPerPage":5,"pageStart":0,"pageStop":5,"pageCount":2,"itemsLength":10},"groupedItems":{"undefined":[{"name":"Frozen Yogurt","calories":159,"fat":6,"carbs":24,"protein":4,"iron":"1%"},{"name":"Ice cream sandwich","calories":237,"fat":9,"carbs":37,"protein":4.3,"iron":"1%"},{"name":"Eclair","calories":262,"fat":16,"carbs":23,"protein":6,"iron":"7%"},{"name":"Cupcake","calories":305,"fat":3.7,"carbs":67,"protein":4.3,"iron":"8%"},{"name":"Gingerbread","calories":356,"fat":16,"carbs":49,"protein":3.9,"iron":"16%"}]},"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}]}
+        5
       </div>
     </table>
   </div>
@@ -1513,7 +1333,6 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
         <col class>
         <col class>
         <col class>
-        <col class>
       </colgroup>
       <thead class="v-data-table-header">
         <tr>
@@ -1526,21 +1345,6 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             <span>
               Dessert (100g serving)
             </span>
-          </th>
-          <th role="columnheader"
-              scope="col"
-              aria-label="Calories: Not sorted. Activate to sort ascending."
-              aria-sort="none"
-              class="text-xs-left sortable"
-          >
-            <span>
-              Calories
-            </span>
-            <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
-            >
-              $vuetify.icons.sort
-            </i>
           </th>
           <th role="columnheader"
               scope="col"
@@ -1605,12 +1409,38 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
         </tr>
       </thead>
       <tbody>
+        <tr class="v-row-group__header">
+          <td colspan="5"
+              class="text-xs-left"
+          >
+            <button type="button"
+                    class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+            >
+              <span class="v-btn__content">
+                <i aria-hidden="true"
+                   class="v-icon material-icons theme--light"
+                >
+                  remove
+                </i>
+              </span>
+            </button>
+            calories: 159
+            <button type="button"
+                    class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+            >
+              <span class="v-btn__content">
+                <i aria-hidden="true"
+                   class="v-icon material-icons theme--light"
+                >
+                  close
+                </i>
+              </span>
+            </button>
+          </td>
+        </tr>
         <tr>
           <td class="text-xs-left">
             Frozen Yogurt
-          </td>
-          <td class="text-xs-left">
-            159
           </td>
           <td class="text-xs-left">
             6
@@ -1625,12 +1455,43 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             1%
           </td>
         </tr>
+        <tr class="v-row-group__summary">
+          <div>
+            summary
+          </div>
+        </tr>
+        <tr class="v-row-group__header">
+          <td colspan="5"
+              class="text-xs-left"
+          >
+            <button type="button"
+                    class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+            >
+              <span class="v-btn__content">
+                <i aria-hidden="true"
+                   class="v-icon material-icons theme--light"
+                >
+                  remove
+                </i>
+              </span>
+            </button>
+            calories: 237
+            <button type="button"
+                    class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+            >
+              <span class="v-btn__content">
+                <i aria-hidden="true"
+                   class="v-icon material-icons theme--light"
+                >
+                  close
+                </i>
+              </span>
+            </button>
+          </td>
+        </tr>
         <tr>
           <td class="text-xs-left">
             Ice cream sandwich
-          </td>
-          <td class="text-xs-left">
-            237
           </td>
           <td class="text-xs-left">
             9
@@ -1645,12 +1506,43 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             1%
           </td>
         </tr>
+        <tr class="v-row-group__summary">
+          <div>
+            summary
+          </div>
+        </tr>
+        <tr class="v-row-group__header">
+          <td colspan="5"
+              class="text-xs-left"
+          >
+            <button type="button"
+                    class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+            >
+              <span class="v-btn__content">
+                <i aria-hidden="true"
+                   class="v-icon material-icons theme--light"
+                >
+                  remove
+                </i>
+              </span>
+            </button>
+            calories: 262
+            <button type="button"
+                    class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+            >
+              <span class="v-btn__content">
+                <i aria-hidden="true"
+                   class="v-icon material-icons theme--light"
+                >
+                  close
+                </i>
+              </span>
+            </button>
+          </td>
+        </tr>
         <tr>
           <td class="text-xs-left">
             Eclair
-          </td>
-          <td class="text-xs-left">
-            262
           </td>
           <td class="text-xs-left">
             16
@@ -1665,12 +1557,43 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             7%
           </td>
         </tr>
+        <tr class="v-row-group__summary">
+          <div>
+            summary
+          </div>
+        </tr>
+        <tr class="v-row-group__header">
+          <td colspan="5"
+              class="text-xs-left"
+          >
+            <button type="button"
+                    class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+            >
+              <span class="v-btn__content">
+                <i aria-hidden="true"
+                   class="v-icon material-icons theme--light"
+                >
+                  remove
+                </i>
+              </span>
+            </button>
+            calories: 305
+            <button type="button"
+                    class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+            >
+              <span class="v-btn__content">
+                <i aria-hidden="true"
+                   class="v-icon material-icons theme--light"
+                >
+                  close
+                </i>
+              </span>
+            </button>
+          </td>
+        </tr>
         <tr>
           <td class="text-xs-left">
             Cupcake
-          </td>
-          <td class="text-xs-left">
-            305
           </td>
           <td class="text-xs-left">
             3.7
@@ -1685,12 +1608,43 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             8%
           </td>
         </tr>
+        <tr class="v-row-group__summary">
+          <div>
+            summary
+          </div>
+        </tr>
+        <tr class="v-row-group__header">
+          <td colspan="5"
+              class="text-xs-left"
+          >
+            <button type="button"
+                    class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+            >
+              <span class="v-btn__content">
+                <i aria-hidden="true"
+                   class="v-icon material-icons theme--light"
+                >
+                  remove
+                </i>
+              </span>
+            </button>
+            calories: 356
+            <button type="button"
+                    class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+            >
+              <span class="v-btn__content">
+                <i aria-hidden="true"
+                   class="v-icon material-icons theme--light"
+                >
+                  close
+                </i>
+              </span>
+            </button>
+          </td>
+        </tr>
         <tr>
           <td class="text-xs-left">
             Gingerbread
-          </td>
-          <td class="text-xs-left">
-            356
           </td>
           <td class="text-xs-left">
             16
@@ -1704,6 +1658,11 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
           <td class="text-xs-left">
             16%
           </td>
+        </tr>
+        <tr class="v-row-group__summary">
+          <div>
+            summary
+          </div>
         </tr>
       </tbody>
     </table>
@@ -2442,7 +2401,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class="expanded expanded__row">
           <td class="text-xs-left">
             Frozen Yogurt
           </td>
@@ -2462,7 +2421,12 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
             1%
           </td>
         </tr>
-        <tr>
+        <tr class="expanded expanded__content">
+          <div>
+            expanded
+          </div>
+        </tr>
+        <tr class="expanded expanded__row">
           <td class="text-xs-left">
             Ice cream sandwich
           </td>
@@ -2482,7 +2446,12 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
             1%
           </td>
         </tr>
-        <tr>
+        <tr class="expanded expanded__content">
+          <div>
+            expanded
+          </div>
+        </tr>
+        <tr class="expanded expanded__row">
           <td class="text-xs-left">
             Eclair
           </td>
@@ -2502,7 +2471,12 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
             7%
           </td>
         </tr>
-        <tr>
+        <tr class="expanded expanded__content">
+          <div>
+            expanded
+          </div>
+        </tr>
+        <tr class="expanded expanded__row">
           <td class="text-xs-left">
             Cupcake
           </td>
@@ -2522,7 +2496,12 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
             8%
           </td>
         </tr>
-        <tr>
+        <tr class="expanded expanded__content">
+          <div>
+            expanded
+          </div>
+        </tr>
+        <tr class="expanded expanded__row">
           <td class="text-xs-left">
             Gingerbread
           </td>
@@ -2541,6 +2520,11 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
           <td class="text-xs-left">
             16%
           </td>
+        </tr>
+        <tr class="expanded expanded__content">
+          <div>
+            expanded
+          </div>
         </tr>
       </tbody>
     </table>
@@ -3091,7 +3075,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         <tr>
           <td class="text-xs-left">
             <i role="button"
-               class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light v-data-table__expand-icon--active"
+               class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
             </i>
@@ -3118,7 +3102,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         <tr>
           <td class="text-xs-left">
             <i role="button"
-               class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light v-data-table__expand-icon--active"
+               class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
             </i>
@@ -3145,7 +3129,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         <tr>
           <td class="text-xs-left">
             <i role="button"
-               class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light v-data-table__expand-icon--active"
+               class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
             </i>
@@ -3172,7 +3156,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         <tr>
           <td class="text-xs-left">
             <i role="button"
-               class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light v-data-table__expand-icon--active"
+               class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
             </i>
