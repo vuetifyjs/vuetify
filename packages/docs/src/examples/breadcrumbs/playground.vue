@@ -9,7 +9,7 @@
     </v-layout>
 
     <v-breadcrumbs :items="items" :large="large" :divider="divider">
-      <template v-slot:divider v-if="customDiv">
+      <template v-if="customDiv" v-slot:divider>
         <v-icon>chevron_right</v-icon>
       </template>
     </v-breadcrumbs>
