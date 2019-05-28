@@ -70,10 +70,6 @@
   }
 </script>
 
-<<<<<<< HEAD:packages/docs/src/examples/calendars/weekly.vue
-<style scoped>
-
-=======
 <style lang="sass" scoped>
 .my-event
   overflow: hidden
@@ -95,5 +91,4 @@
     position: absolute
     right: 4px
     margin-right: 0px
->>>>>>> next:packages/docs/src/examples/calendars/simple/weekly.vue
 </style>
