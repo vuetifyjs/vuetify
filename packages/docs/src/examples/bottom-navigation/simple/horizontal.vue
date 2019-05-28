@@ -1,18 +1,21 @@
 <template>
   <v-bottom-navigation
-    v-model="bottomNav"
+    :value="activeBtn"
+    color="deep-purple"
+    horizontal
+    dark
   >
-    <v-btn value="recent">
-      <span>Recent</span>
+    <v-btn>
+      <span>Recents</span>
       <v-icon>history</v-icon>
     </v-btn>
 
-    <v-btn value="favorites">
+    <v-btn>
       <span>Favorites</span>
       <v-icon>favorite</v-icon>
     </v-btn>
 
-    <v-btn value="nearby">
+    <v-btn>
       <span>Nearby</span>
       <v-icon>place</v-icon>
     </v-btn>
@@ -23,7 +26,7 @@
   export default {
     data () {
       return {
-        bottomNav: 'recent'
+        activeBtn: 1
       }
     }
   }
