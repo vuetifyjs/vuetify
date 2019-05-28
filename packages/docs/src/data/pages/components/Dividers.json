@@ -31,12 +31,12 @@
         {
           "type": "examples",
           "value": [
-            "lightAndDark",
-            "inset",
-            "subheaders",
-            "dividerList",
-            "dividerListPortrait",
-            "vertical"
+            "simple/lightAndDark",
+            "simple/inset",
+            "simple/subheaders",
+            "simple/dividerList",
+            "simple/dividerListPortrait",
+            "simple/vertical"
           ]
         }
       ]
