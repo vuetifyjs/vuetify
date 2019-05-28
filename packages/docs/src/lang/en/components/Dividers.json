@@ -3,7 +3,7 @@
   "headerText": "The `v-divider` component is used to separate sections of lists.",
   "examples": {
     "usage": {
-      "desc": "Full bleed dividers extend the entire content width."
+      "desc": "Dividers in their simplest form display a horizontal line with default theme."
     },
     "lightAndDark": {
       "header": "### Light and dark",
