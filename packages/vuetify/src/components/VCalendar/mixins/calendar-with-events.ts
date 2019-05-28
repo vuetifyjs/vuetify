@@ -149,7 +149,7 @@ export default CalendarBase.extend({
 
         if (hide) {
           more.style.display = ''
-          more.innerHTML = this.$vuetify.t(this.eventMoreText, hidden)
+          more.innerHTML = this.$vuetify.lang.t(this.eventMoreText, hidden)
         } else {
           more.style.display = 'none'
         }
