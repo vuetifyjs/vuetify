@@ -61,8 +61,6 @@ describe('VDataTable/header.ts', () => {
       someItems: true
     })
     expect(wrapper.html()).toMatchSnapshot()
-
-    expect('[Vue warn]: Failed to resolve directive: ripple').toHaveBeenWarned()
   })
 
   it('should generate select scoped slot', async () => {

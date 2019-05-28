@@ -55,6 +55,20 @@
       </v-avatar>
       Confirmed
     </v-chip>
+
+    <v-chip
+      class="ma-2"
+      close
+      color="teal"
+      text-color="white"
+      close-icon="mdi-delete"
+      @click:close="close"
+    >
+      <v-avatar left>
+        <v-icon>check_circle</v-icon>
+      </v-avatar>
+      Confirmed
+    </v-chip>
   </div>
 </template>
 

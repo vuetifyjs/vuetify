@@ -2,7 +2,6 @@
   "header": "文本框",
   "headerText": "文本框组件用于收集用户提供的信息。",
   "components": ["v-text-field"],
-  "supplemental": ["MaskTable"],
   "examples": {
     "label": {
       "header": "带标签",

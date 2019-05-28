@@ -1,10 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VBtn.ts should be removable 1`] = `
+exports[`VChip.ts should be removable 1`] = `
 
-<span tabindex="-1"
-      class="v-chip v-chip--no-color v-chip--removable theme--light v-size--default"
->
+<span class="v-chip v-chip--no-color v-chip--removable theme--light v-size--default">
   <span class="v-chip__content">
     <i role="button"
        class="v-icon v-chip__close v-icon--link v-icon--right material-icons theme--light"
@@ -16,11 +14,9 @@ exports[`VBtn.ts should be removable 1`] = `
 
 `;
 
-exports[`VBtn.ts should have a v-chip class 1`] = `
+exports[`VChip.ts should have a v-chip class 1`] = `
 
-<span tabindex="-1"
-      class="v-chip v-chip--no-color theme--light v-size--default"
->
+<span class="v-chip v-chip--no-color theme--light v-size--default">
   <span class="v-chip__content">
   </span>
 </span>

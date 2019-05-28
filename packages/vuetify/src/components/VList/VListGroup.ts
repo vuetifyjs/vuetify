@@ -9,6 +9,7 @@ import VListItemIcon from './VListItemIcon'
 
 // Mixins
 import Bootable from '../../mixins/bootable'
+import Colorable from '../../mixins/colorable'
 import Toggleable from '../../mixins/toggleable'
 import { inject as RegistrableInject } from '../../mixins/registrable'
 
@@ -28,6 +29,7 @@ import { Route } from 'vue-router'
 
 const baseMixins = mixins(
   Bootable,
+  Colorable,
   RegistrableInject('list'),
   Toggleable
 )
@@ -50,11 +52,15 @@ export default baseMixins.extend<options>().extend({
   props: {
     activeClass: {
       type: String,
-      default: 'primary--text'
+      default: ''
     },
     appendIcon: {
       type: String,
       default: '$vuetify.icons.expand'
+    },
+    color: {
+      type: String,
+      default: 'primary'
     },
     disabled: Boolean,
     group: String,
@@ -131,6 +137,9 @@ export default baseMixins.extend<options>().extend({
         class: {
           [this.activeClass]: this.isActive
         },
+        props: {
+          inputValue: this.isActive
+        },
         directives: [{
           name: 'ripple',
           value: this.ripple
@@ -200,10 +209,10 @@ export default baseMixins.extend<options>().extend({
   },
 
   render (h): VNode {
-    return h('div', {
+    return h('div', this.setTextColor(this.isActive && this.color, {
       staticClass: 'v-list-group',
       class: this.classes
-    }, [
+    }), [
       this.genHeader(),
       h(VExpandTransition, [this.genItems()])
     ])
