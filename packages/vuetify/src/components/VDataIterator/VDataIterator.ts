@@ -70,7 +70,7 @@ export default mixins(Themeable).extend({
     value: {
       handler (value: any[]) {
         this.selection = value.reduce((selection, item) => {
-          selection[getObjectValueByPath(item, this.itemKey)] = item
+          selection[getObjectValueByPath(item, this.itemKey)] = true
           return selection
         }, {})
       },
