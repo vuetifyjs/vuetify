@@ -1,14 +1,24 @@
 {
   "name": "vuetify",
-  "description": "Vue.js 2 Semantic Component Framework",
+  "description": "Vue.js Material Component Framework",
   "version": "1.5.14",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
   },
   "license": "MIT",
-  "homepage": "http://vuetifyjs.com",
-  "repository": "vuetifyjs/vuetify",
+  "homepage": "https://vuetifyjs.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vuetifyjs/vuetify.git",
+    "directory": "packages/vuetify"
+  },
+  "keywords": [
+    "vuetify"
+  ],
+  "bugs": {
+    "url": "https://github.com/vuetifyjs/vuetify/issues"
+  },
   "main": "dist/vuetify.js",
   "module": "dist/vuetify.js",
   "jsdelivr": "dist/vuetify.js",
