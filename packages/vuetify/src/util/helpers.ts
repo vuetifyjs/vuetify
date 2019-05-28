@@ -413,7 +413,7 @@ export function sortItems (
   })
 }
 
-export type filterFn = (value: any, search: string, item: any) => boolean
+export type FilterFn = (value: any, search: string, item: any) => boolean
 
 export function defaultFilter (value: any, search: string | null) {
   return value != null &&
