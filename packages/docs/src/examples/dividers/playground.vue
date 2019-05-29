@@ -13,8 +13,6 @@
         vertical
       ></v-divider>
 
-      <span class="subheading">My Home</span>
-
       <v-spacer></v-spacer>
 
       <v-toolbar-items>
@@ -36,26 +34,74 @@
 
         <v-divider :inset="inset" vertical></v-divider>
       </v-toolbar-items>
+
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
     </v-toolbar>
 
     <v-layout v-else row>
       <v-flex xs12 sm6 offset-sm3>
         <v-card :dark="dark">
           <v-list>
-            <v-list-item>
-              I'm a list item
+            <v-list-item @click="">
+              <v-list-item-action>
+                <v-icon>move_to_inbox</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>I'm a list item</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item @click="">
+              <v-list-item-action>
+                <v-icon>move_to_inbox</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>I'm a list item</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item @click="">
+              <v-list-item-action>
+                <v-icon>move_to_inbox</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>I'm a list item</v-list-item-title>
+              </v-list-item-content>
             </v-list-item>
 
             <v-divider :inset="inset"></v-divider>
 
-            <v-list-item>
-              I'm a list item
+            <v-subheader>Subheader</v-subheader>
+
+            <v-list-item @click="">
+              <v-list-item-action>
+                <v-icon>folder</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>I'm a list item</v-list-item-title>
+              </v-list-item-content>
             </v-list-item>
 
             <v-divider :inset="inset"></v-divider>
 
-            <v-list-item>
-              I'm a list item
+            <v-list-item @click="">
+              <v-list-item-action>
+                <v-icon>folder</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>I'm a list item</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-divider :inset="inset"></v-divider>
+
+            <v-list-item @click="">
+              <v-list-item-action>
+                <v-icon>folder</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>I'm a list item</v-list-item-title>
+              </v-list-item-content>
             </v-list-item>
           </v-list>
         </v-card>
@@ -95,15 +141,12 @@
 <script>
   export default {
     data: () => ({
+      dark: false,
       inset: false,
       items: [
         'default',
         'vertical'
       ],
-      items2: [
-
-      ],
-      dark: false,
       variant: 'default'
     })
   }
