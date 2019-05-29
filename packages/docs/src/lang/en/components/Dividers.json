@@ -14,6 +14,10 @@
       "header": "### Inset dividers",
       "desc": "Inset dividers are moved 72px to the right. This will cause them to line up with list items."
     },
+    "vertical": {
+      "header": "### Vertical dividers",
+      "desc": "Vertical dividers give you even more tools for unique layouts."
+    },
     "subheaders": {
       "header": "### Subheaders and dividers",
       "desc": "Subheaders can be lined up with inset dividers by using the same prop."
@@ -25,10 +29,6 @@
     "dividerListPortrait": {
       "header": "### Dividers in Portrait View",
       "desc": "Create custom cards to fit any use-case"
-    },
-    "vertical": {
-      "header": "### Vertical dividers",
-      "desc": "Vertical dividers give you even more tools for unique layouts."
     }
   },
   "props": {
