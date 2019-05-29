@@ -8,6 +8,10 @@
     "carousel": {
       "header": "### Pseudo Carousel",
       "desc": "Customize the slide group to creatively display information on sheets. Using the selection, we can display auxillary information easily for the user."
+    },
+    "centerActive": {
+      "header": "### Centered active item",
+      "desc": "Active item is always centered"
     }
   },
   "props": {

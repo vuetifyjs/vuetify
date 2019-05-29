@@ -10,18 +10,24 @@ describe('VData.ts', () => {
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {
     mountFunction = (options?: MountOptions<Instance>) => {
-      return mount(VData, options)
+      return mount(VData, {
+        ...options,
+        sync: false
+      })
     }
   })
 
-  it('should render with scopedProps', async () => {
+  it('should render data through default scoped slot', async () => {
     const wrapper = mountFunction({
-      computed: {
-        scopedProps: () => 'test'
+      propsData: {
+        items: [
+          { id: 1, text: 'foo' },
+          { id: 2, text: 'bar' }
+        ]
       },
       scopedSlots: {
         default (data) {
-          return this.$createElement('div', [ data ])
+          return this.$createElement('div', data.items.map(item => this.$createElement('div', [item.text])))
         }
       }
     })
@@ -31,187 +37,171 @@ describe('VData.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should compute length', () => {
+  it('should ignore items length if using server-items-length', async () => {
+    const render = jest.fn()
     const wrapper = mountFunction({
       propsData: {
-        items: [ 'foo', 'bar' ]
+        items: [
+          { id: 1, text: 'foo' },
+          { id: 2, text: 'bar' }
+        ]
+      },
+      scopedSlots: {
+        default: render
       }
     })
 
-    expect(wrapper.vm.itemsLength).toBe(2)
+    await wrapper.vm.$nextTick()
+    expect(render).toHaveBeenCalledWith(expect.objectContaining({
+      pagination: expect.objectContaining({
+        itemsLength: 2
+      })
+    }))
 
     wrapper.setProps({
       serverItemsLength: 10
     })
 
-    expect(wrapper.vm.itemsLength).toBe(10)
+    await wrapper.vm.$nextTick()
+    expect(render).toHaveBeenCalledWith(expect.objectContaining({
+      pagination: expect.objectContaining({
+        itemsLength: 10
+      })
+    }))
   })
 
-  it('should group items', () => {
-    const updateOptions = jest.fn()
+  it('should group items', async () => {
+    const render = jest.fn()
+    const items = [
+      { id: 1, text: 'foo', baz: 'one' },
+      { id: 2, text: 'bar', baz: 'two' },
+      { id: 3, text: 'baz', baz: 'one' }
+    ]
 
     const wrapper = mountFunction({
-      methods: {
-        updateOptions
+      propsData: {
+        items,
+        groupBy: ['baz']
+      },
+      scopedSlots: {
+        default: render
       }
     })
 
-    wrapper.vm.group('foo')
-    expect(updateOptions.mock.calls[0][0]).toMatchSnapshot()
-
-    wrapper.vm.group('bar')
-    expect(updateOptions.mock.calls[1][0]).toMatchSnapshot()
-
-    wrapper.setProps({
-      groupBy: [ 'baz' ]
-    })
-    wrapper.vm.group('baz')
-    expect(updateOptions.mock.calls[2][0]).toMatchSnapshot()
-    wrapper.vm.group('qux')
-    expect(updateOptions.mock.calls[3][0]).toMatchSnapshot()
+    expect(render).toBeCalledWith(expect.objectContaining({
+      groupedItems: {
+        one: [items[0], items[2]],
+        two: [items[1]]
+      }
+    }))
   })
 
   it('should sort items', () => {
-    const updateOptions = jest.fn()
+    const render = jest.fn()
+
+    const unsorted = [
+      { id: 1, text: 'c' },
+      { id: 2, text: 'a' },
+      { id: 3, text: 'd' },
+      { id: 4, text: 'b' }
+    ]
+
+    const sorted = [
+      { id: 2, text: 'a' },
+      { id: 4, text: 'b' },
+      { id: 1, text: 'c' },
+      { id: 3, text: 'd' }
+    ]
 
     const wrapper = mountFunction({
-      methods: {
-        updateOptions
-      }
-    })
-
-    wrapper.vm.sort('foo')
-    expect(updateOptions.mock.calls[0][0]).toMatchSnapshot()
-
-    wrapper.vm.sort('bar')
-    expect(updateOptions.mock.calls[1][0]).toMatchSnapshot()
-
-    wrapper.setProps({
-      sortBy: [ 'baz' ]
-    })
-    wrapper.vm.sort('baz')
-    expect(updateOptions.mock.calls[2][0]).toMatchSnapshot()
-    wrapper.vm.sort('qux')
-    expect(updateOptions.mock.calls[3][0]).toMatchSnapshot()
-  })
-
-  it('should sort items by array', () => {
-    const updateOptions = jest.fn()
-
-    const wrapper = mountFunction({
-      methods: {
-        updateOptions
-      }
-    })
-
-    wrapper.vm.sortArray([ 'foo', 'test' ])
-    expect(updateOptions.mock.calls[0][0]).toMatchSnapshot()
-
-    wrapper.vm.sortArray([ 'bar', 'test' ])
-    expect(updateOptions.mock.calls[1][0]).toMatchSnapshot()
-
-    wrapper.setProps({
-      sortBy: [ 'baz' ]
-    })
-    wrapper.vm.sortArray([ 'baz', 'test' ])
-    expect(updateOptions.mock.calls[2][0]).toMatchSnapshot()
-    wrapper.vm.sortArray([ 'qux', 'test' ])
-    expect(updateOptions.mock.calls[3][0]).toMatchSnapshot()
-
-    wrapper.vm.sort([ 'foo', 'test' ]) // sort should call sortArray
-    expect(updateOptions.mock.calls[0][0]).toMatchSnapshot()
-  })
-
-  it('watchers should work', () => { // eslint-disable-line max-statements
-    const updateOptions = jest.fn()
-    const multiSort = jest.fn()
-    const mustSort = jest.fn()
-    const itemsPerPage = jest.fn()
-    const page = jest.fn()
-
-    const wrapper = mountFunction({
-      methods: {
-        updateOptions
+      propsData: {
+        items: unsorted,
+        sortBy: ['text']
       },
-      listeners: {
-        'update:multi-sort': multiSort,
-        'update:must-sort': mustSort,
-        'update:items-per-page': itemsPerPage,
-        'update:page': page
+      scopedSlots: {
+        default: render
       }
     })
 
-    wrapper.setProps({
-      multiSort: true
+    expect(render).toHaveBeenCalledWith(expect.objectContaining({
+      items: sorted
+    }))
+  })
+
+  it('should sort items by multiple properties', async () => {
+    const render = jest.fn()
+
+    const unsorted = [
+      { id: 1, foo: 'a', bar: 'b' },
+      { id: 2, foo: 'b', bar: 'b' },
+      { id: 3, foo: 'b', bar: 'a' },
+      { id: 4, foo: 'a', bar: 'a' }
+    ]
+
+    const sorted = [
+      { id: 4, foo: 'a', bar: 'a' },
+      { id: 1, foo: 'a', bar: 'b' },
+      { id: 3, foo: 'b', bar: 'a' },
+      { id: 2, foo: 'b', bar: 'b' }
+    ]
+
+    const wrapper = mountFunction({
+      propsData: {
+        items: unsorted,
+        sortBy: ['foo']
+      },
+      scopedSlots: {
+        default: render
+      }
     })
-    expect(updateOptions).toHaveBeenLastCalledWith({ multiSort: true })
-    wrapper.vm.internalOptions.multiSort = true
-    expect(multiSort).toHaveBeenLastCalledWith(true)
+
+    await wrapper.vm.$nextTick()
 
     wrapper.setProps({
-      mustSort: true
+      sortBy: ['foo', 'bar']
     })
-    expect(updateOptions).toHaveBeenLastCalledWith({ mustSort: true })
-    wrapper.vm.internalOptions.mustSort = true
-    expect(mustSort).toHaveBeenLastCalledWith(true)
+    await wrapper.vm.$nextTick()
 
-    wrapper.setProps({
-      itemsPerPage: 1337
-    })
-    expect(updateOptions).toHaveBeenLastCalledWith({ itemsPerPage: 1337 })
-    wrapper.vm.internalOptions.itemsPerPage = 1337
-    expect(itemsPerPage).toHaveBeenLastCalledWith(1337)
-
-    wrapper.setProps({
-      sortDesc: true
-    })
-    expect(updateOptions).toHaveBeenLastCalledWith({ sortDesc: [ true ] })
-    wrapper.setProps({
-      sortDesc: [ false, true, true ]
-    })
-    expect(updateOptions).toHaveBeenLastCalledWith({ sortDesc: [ false, true, true ] })
-
-    wrapper.setProps({
-      groupDesc: true
-    })
-    expect(updateOptions).toHaveBeenLastCalledWith({ groupDesc: [ true ] })
-    wrapper.setProps({
-      groupDesc: [ false, true, true ]
-    })
-    expect(updateOptions).toHaveBeenLastCalledWith({ groupDesc: [ false, true, true ] })
-
-    wrapper.setProps({
-      page: 123
-    })
-    expect(updateOptions).toHaveBeenLastCalledWith({ page: 123 })
-    wrapper.vm.internalOptions.page = 123
-    expect(page).toHaveBeenLastCalledWith(123)
+    expect(render).toHaveBeenCalledWith(expect.objectContaining({
+      items: sorted
+    }))
   })
 
   it('should paginate items', () => {
-    const test = [ 'foo', 'bar', 'baz', 'qux', 'fizz', 'buzz', 'foobar', 'barbaz', 'fizzbuzz', 1, 2, 3, 4, 5 ]
+    const render = jest.fn()
+
+    const items = [
+      { id: 1, foo: 'a' },
+      { id: 2, foo: 'b' },
+      { id: 3, foo: 'c' },
+      { id: 4, foo: 'd' },
+      { id: 5, foo: 'e' },
+      { id: 6, foo: 'f' },
+      { id: 7, foo: 'g' },
+      { id: 8, foo: 'h' },
+      { id: 9, foo: 'i' },
+      { id: 10, foo: 'j' }
+    ]
 
     const wrapper = mountFunction({
-      data: () => ({
-        pageStart: 1,
-        pageStop: 10
-      })
+      propsData: {
+        items,
+        itemsPerPage: 5,
+        page: 2
+      },
+      scopedSlots: {
+        default: render
+      }
     })
 
-    expect(wrapper.vm.paginateItems(test)).toEqual([ 'bar', 'baz', 'qux', 'fizz', 'buzz', 'foobar', 'barbaz', 'fizzbuzz', 1 ])
-    wrapper.vm.pageStart = 3
-    wrapper.vm.pageStop = 7
-    expect(wrapper.vm.paginateItems(test)).toEqual([ 'qux', 'fizz', 'buzz', 'foobar' ])
-    wrapper.vm.pageStart = 17
-    wrapper.vm.internalOptions.page = 10
-    expect(wrapper.vm.paginateItems(test)).toEqual([])
-    expect(wrapper.vm.internalOptions.page).toBe(1)
-
-    expect('[Vue warn]: The computed property "pageStart" is already defined in data.').toHaveBeenWarned()
-    expect('[Vue warn]: The computed property "pageStop" is already defined in data.').toHaveBeenWarned()
+    expect(render).toHaveBeenCalledWith(expect.objectContaining({
+      items: items.slice(5)
+    }))
   })
 
-  it('should conditionally sort items', () => {
+  it('should not sort items if disableSort is active', () => {
+    const render = jest.fn()
+
     const items = [
       { text: 'Foo', id: 1 },
       { text: 'Bar', id: 2 },
@@ -219,22 +209,25 @@ describe('VData.ts', () => {
       { text: 'Buzz', id: 4 },
       { text: 'Fizzbuzz', id: 5 }
     ]
+
     const wrapper = mountFunction({
-      propsData: { items }
+      propsData: {
+        items,
+        sortBy: ['text'],
+        disableSort: true
+      },
+      scopedSlots: {
+        default: render
+      }
     })
 
-    expect(wrapper.vm.computedItems).toEqual(items)
-
-    wrapper.setProps({ sortBy: 'text' })
-
-    expect(wrapper.vm.computedItems[0]).toEqual(items[1])
-
-    wrapper.setProps({ disableSort: true })
-
-    expect(wrapper.vm.computedItems).toEqual(items)
+    expect(render).toHaveBeenCalledWith(expect.objectContaining({
+      items
+    }))
   })
 
-  it('should conditionally paginate items', () => {
+  it('should conditionally paginate items', async () => {
+    const render = jest.fn()
     const items = [
       { text: 'Foo', id: 1 },
       { text: 'Bar', id: 2 },
@@ -242,22 +235,145 @@ describe('VData.ts', () => {
       { text: 'Buzz', id: 4 },
       { text: 'Fizzbuzz', id: 5 }
     ]
+
     const wrapper = mountFunction({
-      propsData: { items }
+      propsData: { items },
+      scopedSlots: {
+        default: render
+      }
     })
 
-    expect(wrapper.vm.computedItems).toEqual(items)
+    expect(render).toHaveBeenCalledWith(expect.objectContaining({
+      items
+    }))
 
     wrapper.setProps({ itemsPerPage: 2 })
+    await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.computedItems).toHaveLength(2)
-    expect(wrapper.vm.computedItems).toEqual([
-      items[0],
-      items[1]
-    ])
+    expect(render).toHaveBeenCalledWith(expect.objectContaining({
+      items: items.slice(0, 2)
+    }))
 
     wrapper.setProps({ disablePagination: true })
+    await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.computedItems).toHaveLength(5)
+    expect(render).toHaveBeenCalledWith(expect.objectContaining({
+      items
+    }))
+  })
+
+  it('should toggle sorting', async () => {
+    const unsorted = [
+      { id: 1, text: 'c' },
+      { id: 2, text: 'a' },
+      { id: 3, text: 'd' },
+      { id: 4, text: 'b' }
+    ]
+
+    const wrapper = mountFunction({
+      propsData: {
+        items: unsorted
+      },
+      scopedSlots: {
+        default (props) {
+          const items = props.items.map(item => this.$createElement('div', [item.text]))
+          return this.$createElement('div', {
+            attrs: {
+              id: 'wrapper'
+            },
+            on: {
+              click: () => props.sort('text')
+            }
+          }, items)
+        }
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    const el = wrapper.find('#wrapper').element
+    el.click()
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    el.click()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should toggle sorting on multiple properties', async () => {
+    const unsorted = [
+      { id: 1, text: 'c', group: 'foo' },
+      { id: 2, text: 'a', group: 'bar' },
+      { id: 3, text: 'd', group: 'foo' },
+      { id: 4, text: 'b', group: 'bar' }
+    ]
+
+    const wrapper = mountFunction({
+      propsData: {
+        items: unsorted
+      },
+      scopedSlots: {
+        default (props) {
+          const items = props.items.map(item => this.$createElement('div', [`${item.group}-${item.text}`]))
+          return this.$createElement('div', {
+            attrs: {
+              id: 'wrapper'
+            },
+            on: {
+              click: () => props.sort(['group', 'text'])
+            }
+          }, items)
+        }
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    const el = wrapper.find('#wrapper').element
+    el.click()
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should toggle grouping', async () => {
+    const unsorted = [
+      { id: 1, text: 'c', group: 'foo' },
+      { id: 2, text: 'a', group: 'bar' },
+      { id: 3, text: 'd', group: 'foo' },
+      { id: 4, text: 'b', group: 'bar' }
+    ]
+
+    const wrapper = mountFunction({
+      propsData: {
+        items: unsorted
+      },
+      scopedSlots: {
+        default (props) {
+          const items = props.groupedItems
+            ? Object.keys(props.groupedItems)
+            : props.items.map(item => item.text)
+
+          return this.$createElement('div', {
+            attrs: {
+              id: 'wrapper'
+            },
+            on: {
+              click: () => props.group('group')
+            }
+          }, items.map(item => this.$createElement('div', [item])))
+        }
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    const el = wrapper.find('#wrapper').element
+    el.click()
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

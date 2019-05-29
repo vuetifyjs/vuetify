@@ -1,7 +1,6 @@
 {
   "header": "Text field",
   "headerText": "Os componentes Text fields são usados para colecionar informação provida pelo usuário.",
-  "supplemental": ["MaskTable"],
   "examples": {
     "usage": {
       "header": "Text-field padrão",

@@ -31,8 +31,13 @@
         {
           "type": "examples",
           "value": [
-            "colorAndShift",
-            "toggle"
+            "simple/color",
+            "simple/grow",
+            "simple/horizontal",
+            "simple/shift",
+            "simple/toggle",
+            "intermediate/hideOnScroll",
+            "intermediate/scrollThreshold"
           ]
         }
       ]
