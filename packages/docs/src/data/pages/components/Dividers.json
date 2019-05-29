@@ -42,10 +42,10 @@
           "value": [
             "simple/lightAndDark",
             "simple/inset",
-            "simple/subheaders",
-            "simple/dividerList",
-            "simple/dividerListPortrait",
-            "simple/vertical"
+            "simple/vertical",
+            "intermediate/subheaders",
+            "intermediate/dividerList",
+            "intermediate/dividerListPortrait"
           ]
         }
       ]
