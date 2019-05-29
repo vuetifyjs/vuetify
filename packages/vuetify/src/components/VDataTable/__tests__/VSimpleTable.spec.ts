@@ -4,7 +4,6 @@ import {
   Wrapper,
   MountOptions
 } from '@vue/test-utils'
-import Vue from 'vue'
 
 describe('VSimpleTable.ts', () => {
   type Instance = InstanceType<typeof VSimpleTable>

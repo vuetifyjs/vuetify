@@ -6,7 +6,7 @@ import VIcon from '../VIcon'
 import { VFadeTransition } from '../transitions'
 
 // Extensions
-import { BaseItemGroup, GroupableInstance } from '../VItemGroup/VItemGroup'
+import { BaseItemGroup } from '../VItemGroup/VItemGroup'
 
 // Directives
 import Resize from '../../directives/resize'
@@ -221,20 +221,12 @@ export const BaseSlideGroup = mixins<options &
         ref: 'wrapper'
       }, [this.genContent()])
     },
-    newOffset /* istanbul ignore next */ (direction: 'prev' | 'next') {
-      // Force reflow
-      const clientWidth = this.$refs.wrapper.clientWidth
+    calculateNewOffset (direction: 'prev' | 'next', widths: Widths, rtl: boolean, currentScrollOffset: number) {
+      const sign = rtl ? -1 : 1
+      const newAbosluteOffset = sign * currentScrollOffset +
+        (direction === 'prev' ? -1 : 1) * widths.wrapper
 
-      if (direction === 'prev') {
-        return Math.max(this.scrollOffset - clientWidth, 0)
-      }
-
-      const min = Math.min(
-        this.scrollOffset + clientWidth,
-        this.$refs.content.clientWidth - clientWidth
-      )
-
-      return this.$vuetify.rtl ? -min : min
+      return sign * Math.max(Math.min(newAbosluteOffset, widths.content - widths.wrapper), 0)
     },
     onAffixClick (location: 'prev' | 'next') {
       this.$emit(`click:${location}`)
@@ -274,37 +266,52 @@ export const BaseSlideGroup = mixins<options &
     overflowCheck (e: TouchEvent, fn: (e: TouchEvent) => void) {
       this.isOverflowing && fn(e)
     },
-    scrollIntoView () {
+    scrollIntoView /* istanbul ignore next */ () {
       if (!this.selectedItem) {
         return
       }
 
       if (this.centerActive) {
-        this.scrollOffset = this.computeCenteredOffset(this.selectedItem, this.widths, this.$vuetify.rtl)
+        this.scrollOffset = this.calculateCenteredOffset(
+          this.selectedItem.$el as HTMLElement,
+          this.widths,
+          this.$vuetify.rtl
+        )
       } else if (this.isOverflowing) {
-        this.scrollOffset = this.calculateUpdatedOffset(this.selectedItem, this.widths, this.scrollOffset)
+        this.scrollOffset = this.calculateUpdatedOffset(
+          this.selectedItem.$el as HTMLElement,
+          this.widths,
+          this.$vuetify.rtl,
+          this.scrollOffset
+        )
       } else {
         this.scrollOffset = 0
       }
     },
-    calculateUpdatedOffset (selectedItem: GroupableInstance, widths: Widths, currentScrollOffset: number): number {
-      const { offsetLeft, clientWidth } = selectedItem.$el as HTMLElement
+    calculateUpdatedOffset (selectedElement: HTMLElement, widths: Widths, rtl: boolean, currentScrollOffset: number): number {
+      const clientWidth = selectedElement.clientWidth
+      const offsetLeft = rtl
+        ? (widths.content - selectedElement.offsetLeft - clientWidth)
+        : selectedElement.offsetLeft
+
+      if (rtl) {
+        currentScrollOffset = -currentScrollOffset
+      }
 
       const totalWidth = widths.wrapper + currentScrollOffset
       const itemOffset = clientWidth + offsetLeft
       const additionalOffset = clientWidth * 0.3
 
-      /* istanbul ignore else */
       if (offsetLeft < currentScrollOffset) {
-        return Math.max(offsetLeft - additionalOffset, 0)
+        currentScrollOffset = Math.max(offsetLeft - additionalOffset, 0)
       } else if (totalWidth < itemOffset) {
-        return Math.min(currentScrollOffset - (totalWidth - itemOffset - additionalOffset), widths.content - widths.wrapper)
-      } else {
-        return currentScrollOffset
+        currentScrollOffset = Math.min(currentScrollOffset - (totalWidth - itemOffset - additionalOffset), widths.content - widths.wrapper)
       }
+
+      return rtl ? -currentScrollOffset : currentScrollOffset
     },
-    computeCenteredOffset (selectedItem: GroupableInstance, widths: Widths, rtl: boolean): number {
-      const { offsetLeft, clientWidth } = selectedItem.$el as HTMLElement
+    calculateCenteredOffset (selectedElement: HTMLElement, widths: Widths, rtl: boolean): number {
+      const { offsetLeft, clientWidth } = selectedElement
 
       if (rtl) {
         const offsetCentered = widths.content - offsetLeft - clientWidth / 2 - widths.wrapper / 2
@@ -315,12 +322,13 @@ export const BaseSlideGroup = mixins<options &
       }
     },
     scrollTo /* istanbul ignore next */ (location: 'prev' | 'next') {
-      this.scrollOffset = this.newOffset(location)
+      this.scrollOffset = this.calculateNewOffset(location, {
+        // Force reflow
+        content: this.$refs.content ? this.$refs.content.clientWidth : 0,
+        wrapper: this.$refs.wrapper ? this.$refs.wrapper.clientWidth : 0
+      }, this.$vuetify.rtl, this.scrollOffset)
     },
-    setOverflow () {
-      this.isOverflowing = this.widths.wrapper < this.widths.content
-    },
-    setWidths () {
+    setWidths /* istanbul ignore next */  () {
       window.requestAnimationFrame(() => {
         const { content, wrapper } = this.$refs
 
@@ -329,7 +337,8 @@ export const BaseSlideGroup = mixins<options &
           wrapper: wrapper ? wrapper.clientWidth : 0
         }
 
-        this.setOverflow()
+        this.isOverflowing = this.widths.wrapper < this.widths.content
+
         this.scrollIntoView()
       })
     }
