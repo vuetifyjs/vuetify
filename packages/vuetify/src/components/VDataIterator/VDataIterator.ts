@@ -70,7 +70,7 @@ export default mixins(Themeable).extend({
     value: {
       handler (value: any[]) {
         this.selection = value.reduce((selection, item) => {
-          selection[getObjectValueByPath(item, this.itemKey)] = true
+          selection[getObjectValueByPath(item, this.itemKey)] = item
           return selection
         }, {})
       },
@@ -140,7 +140,7 @@ export default mixins(Themeable).extend({
       this.selection = selection
     },
     isSelected (item: any): boolean {
-      return this.selection[getObjectValueByPath(item, this.itemKey)] || false
+      return !!this.selection[getObjectValueByPath(item, this.itemKey)] || false
     },
     select (item: any, value = true, emit = true): void {
       const selection = this.singleSelect ? {} : Object.assign({}, this.selection)
