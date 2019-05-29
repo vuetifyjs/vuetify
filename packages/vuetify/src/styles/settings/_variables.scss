@@ -11,8 +11,11 @@ $grid-breakpoints: (
   'lg': 1280px - 16px,
   'xl': 1920px - 16px
 ) !default;
-$grid-gutter: 8px !default;
+$grid-gutter: 24px !default;
+$form-grid-gutter: 8px !default;
 $grid-columns: 12 !default;
+
+$container-padding-x: $grid-gutter / 2 !default;
 
 $grid-gutters: (
   'xs': $grid-gutter / 4,

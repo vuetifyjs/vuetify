@@ -1,10 +1,13 @@
+// Types
 import Vue, { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 import { TableHeader } from './mixins/header'
-import { getObjectValueByPath } from '../../util/helpers'
+
+// Utils
+import { getObjectValueByPath, getTextAlignment } from '../../util/helpers'
 
 export default Vue.extend({
-  name: 'v-row',
+  name: 'row',
 
   functional: true,
 
@@ -19,15 +22,15 @@ export default Vue.extend({
 
     const columns: VNode[] = props.headers.map((header: TableHeader) => {
       const classes = {
-        'v-data-table__mobile-row': true
+        [getTextAlignment(header.align, props.rtl)]: true
       }
 
       const children = []
       const value = getObjectValueByPath(props.item, header.value)
 
-      const scopeName = `column.${header.value}`
-      const scopedSlot = data.scopedSlots && data.scopedSlots[scopeName]
-      const regularSlot = computedSlots[scopeName]
+      const slotName = header.value
+      const scopedSlot = data.scopedSlots && data.scopedSlots[slotName]
+      const regularSlot = computedSlots[slotName]
 
       if (scopedSlot) {
         children.push(scopedSlot({ item: props.item, header, value }))
@@ -39,12 +42,7 @@ export default Vue.extend({
 
       return h('td', {
         class: classes
-      }, [
-        h('div', { staticClass: 'v-data-table__mobile-row__wrapper' }, [
-          header.value !== 'dataTableSelect' && h('div', { staticClass: 'v-data-table__mobile-row__header' }, [header.text]),
-          h('div', { staticClass: 'v-data-table__mobile-row__cell' }, children)
-        ])
-      ])
+      }, children)
     })
 
     return h('tr', data, columns)
