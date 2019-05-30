@@ -18,8 +18,8 @@
       "desc": "Vertical dividers can also be paired with the inset property for even more options."
     },
     "subheaders": {
-      "header": "### Subheaders and dividers",
-      "desc": "Inset dividers and subheaders can help break up content and can be lined up with one another by using the same prop."
+      "header": "### Dividers and subheaders",
+      "desc": "Dividers and subheaders can help break up content and can be lined up with one another by using the same inset prop."
     },
     "dividerListPortrait": {
       "header": "### Dividers in Portrait View",
