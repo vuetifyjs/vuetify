@@ -1,9 +1,9 @@
 <template>
   <div class="text-xs-center">
     <v-menu>
-      <template #activator="{ on: menu }">
+      <template v-slot:activator="{ on: menu }">
         <v-tooltip bottom>
-          <template #activator="{ on: tooltip }">
+          <template v-slot:activator="{ on: tooltip }">
             <v-btn
               color="primary"
               dark
