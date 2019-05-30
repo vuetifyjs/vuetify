@@ -88,7 +88,7 @@ describe('VData.ts', () => {
       }
     })
 
-    expect(render).toBeCalledWith(expect.objectContaining({
+    expect(render).toHaveBeenCalledWith(expect.objectContaining({
       groupedItems: {
         one: [items[0], items[2]],
         two: [items[1]]
