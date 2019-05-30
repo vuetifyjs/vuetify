@@ -83,7 +83,11 @@ export default mixins<options>().extend({
       })
     },
     genSortIcon () {
-      return this.$createElement(VIcon, [this.sortIcon])
+      return this.$createElement(VIcon, {
+        props: {
+          size: 18
+        }
+      }, [this.sortIcon])
     }
   }
 })
