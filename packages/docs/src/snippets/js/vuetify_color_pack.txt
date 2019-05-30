@@ -2,7 +2,7 @@
 
 // Libraries
 import Vue from 'vue'
-import Vuetify from 'vuetify'
+import Vuetify from 'vuetify/lib'
 
 // Helpers
 import colors from 'vuetify/es5/util/colors'
