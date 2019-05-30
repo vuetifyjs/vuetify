@@ -551,16 +551,56 @@ describe('VSlider.ts', () => {
     expect(parseKeyDown).toHaveBeenCalled()
   })
 
-  // https://github.com/vuetifyjs/vuetify/issues/7320
-  it('should set correct value when using negative min and a value of 0', () => {
+  it('should set value to min value if given a NaN', () => {
+    const input = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        min: -20,
+        max: 20
+      },
+      listeners: {
+        input
+      }
+    })
+
+    expect(input).toHaveBeenCalledWith(-20)
+  })
+
+  it('should correctly handle initial value of zero (#7320)', () => {
+    const input = jest.fn()
     const wrapper = mountFunction({
       propsData: {
         min: -20,
         max: 20,
         value: 0
+      },
+      listeners: {
+        input
       }
     })
 
-    expect(wrapper.vm.internalValue).toBe(0)
+    expect(input).not.toHaveBeenCalledWith(-20)
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should correctly handle setting value to zero (#7320)', () => {
+    const input = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        min: -20,
+        max: 20,
+        value: 10
+      },
+      listeners: {
+        input
+      }
+    })
+
+    wrapper.setProps({
+      value: 0
+    })
+
+    expect(input).not.toHaveBeenCalledWith(-20)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })
