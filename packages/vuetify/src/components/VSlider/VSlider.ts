@@ -122,10 +122,11 @@ export default mixins<options &
         return this.lazyValue
       },
       set (val: number) {
+        val = isNaN(val) ? 0 : val
         // Round value to ensure the
         // entire slider range can
         // be selected with step
-        const value = this.roundValue(Math.min(Math.max(val || this.minValue, this.minValue), this.maxValue))
+        const value = this.roundValue(Math.min(Math.max(val, this.minValue), this.maxValue))
 
         if (value === this.lazyValue) return
 

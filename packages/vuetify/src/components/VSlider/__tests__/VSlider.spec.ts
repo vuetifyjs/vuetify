@@ -550,4 +550,17 @@ describe('VSlider.ts', () => {
 
     expect(parseKeyDown).toHaveBeenCalled()
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/7320
+  it('should set correct value when using negative min and a value of 0', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        min: -20,
+        max: 20,
+        value: 0
+      }
+    })
+
+    expect(wrapper.vm.internalValue).toBe(0)
+  })
 })
