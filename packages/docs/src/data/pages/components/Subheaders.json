@@ -31,9 +31,9 @@
         {
           "type": "examples",
           "value": [
-            "grid",
-            "menu",
-            "social"
+            "simple/grid",
+            "simple/menu",
+            "intermediate/social"
           ]
         }
       ]
