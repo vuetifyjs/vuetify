@@ -3,7 +3,6 @@
     <v-toolbar
       v-if="variant === 'vertical'"
       color="gray"
-      :dark="dark"
     >
       <v-toolbar-title>Title</v-toolbar-title>
 
@@ -40,7 +39,7 @@
 
     <v-layout v-else row>
       <v-flex xs12 sm6 offset-sm3>
-        <v-card :dark="dark">
+        <v-card>
           <v-list>
             <v-list-item @click="">
               <v-list-item-action>
@@ -108,9 +107,9 @@
       </v-flex>
     </v-layout>
     <v-layout
+      class="mt-5"
       align-center
       justify-center
-      class="mt-5"
     >
       <v-flex
         xs12
@@ -121,16 +120,14 @@
           :items="items"
           clearable
           label="Variant"
+          light
         ></v-select>
         <template>
-          <v-switch
-            v-model="dark"
-            :label="`Light/Dark Theme`"
-          ></v-switch>
           <v-checkbox
             v-model="inset"
             hide-details
             label="Inset"
+            light
           ></v-checkbox>
         </template>
       </v-flex>
@@ -141,7 +138,6 @@
 <script>
   export default {
     data: () => ({
-      dark: false,
       inset: false,
       items: [
         'default',
