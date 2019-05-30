@@ -1,50 +1,50 @@
 <template>
-  <v-layout row>
-    <v-flex xs12 sm6 offset-sm3>
+  <v-layout justify-center>
+    <v-flex xs12 sm8 md6>
       <v-card>
-        <v-toolbar color="light-blue" dark>
+        <v-toolbar color="orange lighten-1" dark>
           <v-app-bar-nav-icon></v-app-bar-nav-icon>
-          <v-toolbar-title>My files</v-toolbar-title>
+
+          <v-toolbar-title>Message Board</v-toolbar-title>
+
           <v-spacer></v-spacer>
-          <v-btn dark icon>
+
+          <v-btn icon>
             <v-icon>search</v-icon>
           </v-btn>
-          <v-btn dark icon>
-            <v-icon>view_module</v-icon>
-          </v-btn>
         </v-toolbar>
-        <v-list two-line subheader>
-          <v-subheader inset>Folders</v-subheader>
-          <v-list-item v-for="item in items" :key="item.title" @click="">
-            <v-list-item-avatar>
-              <v-icon :class="[item.iconClass]">{{ item.icon }}</v-icon>
-            </v-list-item-avatar>
-            <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-              <v-list-item-subtitle>{{ item.subtitle }}</v-list-item-subtitle>
-            </v-list-item-content>
-            <v-list-item-action>
-              <v-btn icon>
-                <v-icon color="grey lighten-1">info</v-icon>
-              </v-btn>
-            </v-list-item-action>
-          </v-list-item>
-          <v-divider inset></v-divider>
-          <v-subheader inset>Files</v-subheader>
-          <v-list-item v-for="item in items2" :key="item.title" @click="">
-            <v-list-item-avatar>
-              <v-icon :class="[item.iconClass]">{{ item.icon }}</v-icon>
-            </v-list-item-avatar>
-            <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-              <v-list-item-subtitle>{{ item.subtitle }}</v-list-item-subtitle>
-            </v-list-item-content>
-            <v-list-item-action>
-              <v-btn icon>
-                <v-icon color="grey lighten-1">info</v-icon>
-              </v-btn>
-            </v-list-item-action>
-          </v-list-item>
+
+        <v-list two-line>
+          <template v-for="(item, index) in items">
+            <v-subheader
+              v-if="item.header"
+              :key="item.header"
+              inset
+            >
+              {{ item.header }}
+            </v-subheader>
+
+            <v-divider
+              v-else-if="item.divider"
+              :key="index"
+              inset
+            ></v-divider>
+
+            <v-list-item
+              v-else
+              :key="item.title"
+              ripple
+              @click=""
+            >
+              <v-list-item-avatar>
+                <img :src="item.avatar">
+              </v-list-item-avatar>
+              <v-list-item-content>
+                <v-list-item-title v-html="item.title"></v-list-item-title>
+                <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </template>
         </v-list>
       </v-card>
     </v-flex>
@@ -56,13 +56,67 @@
     data () {
       return {
         items: [
-          { icon: 'folder', iconClass: 'grey lighten-1 white--text', title: 'Photos', subtitle: 'Jan 9, 2014' },
-          { icon: 'folder', iconClass: 'grey lighten-1 white--text', title: 'Recipes', subtitle: 'Jan 17, 2014' },
-          { icon: 'folder', iconClass: 'grey lighten-1 white--text', title: 'Work', subtitle: 'Jan 28, 2014' }
-        ],
-        items2: [
-          { icon: 'assignment', iconClass: 'blue white--text', title: 'Vacation itinerary', subtitle: 'Jan 20, 2014' },
-          { icon: 'call_to_action', iconClass: 'amber white--text', title: 'Kitchen remodel', subtitle: 'Jan 10, 2014' }
+          {
+            header: 'Today'
+          },
+          { divider: true },
+          {
+            avatar: 'https://picsum.photos/250/300?image=660',
+            title: 'Meeting @ Noon',
+            subtitle:
+              "<span class='text--primary'>Spike Lee</span> &mdash; I'll be in your neighborhood"
+          },
+          {
+            avatar: 'https://picsum.photos/250/300?image=821',
+            title: 'Summer BBQ <span class="grey--text text--lighten-1"></span>',
+            subtitle:
+              "<span class='text--primary'>to Operations support</span> &mdash; Wish I could come."
+          },
+          {
+            avatar: 'https://picsum.photos/250/300?image=783',
+            title: 'Yes yes',
+            subtitle:
+              "<span class='text--primary'>Bella</span> &mdash; Do you have Paris recommendations"
+          },
+          {
+            header: 'Yesterday'
+          },
+          { divider: true },
+          {
+            avatar: 'https://picsum.photos/250/300?image=1006',
+            title: 'Dinner tonight?',
+            subtitle:
+              "<span class='text--primary'>LaToya</span> &mdash; Do you want to hang out?"
+          },
+          {
+            avatar: 'https://picsum.photos/250/300?image=146',
+            title: 'So long',
+            subtitle:
+              "<span class='text--primary'>Nancy</span> &mdash; Do you see what time it is?"
+          },
+          {
+            header: 'Last Week'
+          },
+          { divider: true },
+          {
+            avatar: 'https://picsum.photos/250/300?image=1008',
+            title: 'Breakfast?',
+            subtitle:
+              "<span class='text--primary'>LaToya</span> &mdash; Do you want to hang out?"
+          },
+          {
+            avatar: 'https://picsum.photos/250/300?image=839',
+            title:
+              'Winter Porridge <span class="grey--text text--lighten-1"></span>',
+            subtitle:
+              "<span class='text--primary'>cc: Daniel</span> &mdash; Tell me more..."
+          },
+          {
+            avatar: 'https://picsum.photos/250/300?image=145',
+            title: 'Oui oui',
+            subtitle:
+              "<span class='text--primary'>Nancy</span> &mdash; Do you see what time it is?"
+          }
         ]
       }
     }
