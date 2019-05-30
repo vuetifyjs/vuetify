@@ -5,3 +5,5 @@ import Vuetify, { VLayout } from 'vuetify/lib'
 Vue.use(Vuetify, {
   components: { VLayout }
 })
+
+export default new Vuetify({ ... })
