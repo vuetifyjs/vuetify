@@ -1,12 +1,14 @@
 <template>
   <v-toolbar
-    color="purple"
+    color="teal"
     dark
   >
     <v-toolbar-title>Title</v-toolbar-title>
 
     <v-divider
       class="mx-3"
+      inset
+      light
       vertical
     ></v-divider>
 
@@ -19,19 +21,31 @@
         News
       </v-btn>
 
-      <v-divider vertical></v-divider>
+      <v-divider
+        inset
+        light
+        vertical
+      ></v-divider>
 
       <v-btn text>
         Blog
       </v-btn>
 
-      <v-divider vertical></v-divider>
+      <v-divider
+        inset
+        light
+        vertical
+      ></v-divider>
 
       <v-btn text>
         Music
       </v-btn>
 
-      <v-divider vertical></v-divider>
+      <v-divider
+        inset
+        light
+        vertical
+      ></v-divider>
     </v-toolbar-items>
 
     <v-app-bar-nav-icon></v-app-bar-nav-icon>
