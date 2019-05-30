@@ -29,14 +29,23 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "lightAndDark",
-            "inset",
-            "subheaders",
-            "dividerList",
-            "dividerListPortrait",
-            "vertical"
+            "simple/lightAndDark",
+            "simple/inset",
+            "simple/vertical",
+            "intermediate/subheaders",
+            "intermediate/dividerList",
+            "intermediate/dividerListPortrait"
           ]
         }
       ]

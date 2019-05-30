@@ -179,7 +179,6 @@
                 type="tel"
                 prepend-icon="phone"
                 placeholder="(000) 000 - 0000"
-                mask="phone"
               ></v-text-field>
             </v-flex>
             <v-flex xs12>

@@ -59,7 +59,7 @@ export default mixins(header).extend({
     const children: VNodeChildrenArrayContents = []
 
     const header = this.headers.find(h => h.value === 'data-table-select')
-    if (header) {
+    if (header && !this.singleSelect) {
       children.push(this.$createElement('div', {
         class: [
           'v-data-table-header-mobile__select',

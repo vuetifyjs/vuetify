@@ -140,6 +140,27 @@
           </v-slide-group>
         </v-sheet>
       </core-section>
+
+      <core-title>Centered active tab</core-title>
+      <core-section>
+        <v-slide-group
+          center-active
+        >
+          <v-slide-item
+            v-for="n in 25"
+            :key="n"
+            #default="{ toggle }"
+          >
+            <v-btn
+              depressed
+              rounded
+              @click="toggle"
+            >
+              Options {{ n }}
+            </v-btn>
+          </v-slide-item>
+        </v-slide-group>
+      </core-section>
     </v-layout>
   </v-container>
 </template>
