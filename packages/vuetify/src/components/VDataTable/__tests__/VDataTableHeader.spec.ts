@@ -110,10 +110,10 @@ describe('VDataTableHeader.ts', () => {
       })
 
       if (isMobile) {
-        it('should render with dataTableSelect header', () => {
+        it('should render with data-table-select header', () => {
           const wrapper = mountFunction({
             propsData: {
-              headers: [ ...testHeaders, { text: 'test', value: 'dataTableSelect' } ]
+              headers: [ ...testHeaders, { text: 'test', value: 'data-table-select' } ]
             }
           })
 
@@ -131,6 +131,25 @@ describe('VDataTableHeader.ts', () => {
 
           select.vm.$emit('change', 'test')
           expect(sort).toHaveBeenLastCalledWith('test')
+        })
+
+        it('should apply header class and width for select-all column', () => {
+          const wrapper = mount(VDataTableHeader, {
+            propsData: {
+              mobile: isMobile,
+              headers: [
+                {
+                  value: 'data-table-select',
+                  width: '100px',
+                  class: 'foo'
+                }
+              ]
+            }
+          })
+
+          const foo = wrapper.find('.foo')
+          expect(foo.exists()).toBe(true)
+          expect(foo.attributes().width).toBe('100px')
         })
       }
     })

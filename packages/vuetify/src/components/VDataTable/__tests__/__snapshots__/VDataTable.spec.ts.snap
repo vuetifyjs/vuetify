@@ -2640,6 +2640,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               scope="col"
               aria-label
               aria-sort="none"
+              width="1px"
               class="text-xs-left"
           >
             <span>
@@ -2735,7 +2736,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
       <tbody>
         <tr>
           <td class="text-xs-left">
-            <i aria-hidden="true"
+            <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
@@ -2762,7 +2763,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         </tr>
         <tr>
           <td class="text-xs-left">
-            <i aria-hidden="true"
+            <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
@@ -2789,7 +2790,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         </tr>
         <tr>
           <td class="text-xs-left">
-            <i aria-hidden="true"
+            <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
@@ -2816,7 +2817,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         </tr>
         <tr>
           <td class="text-xs-left">
-            <i aria-hidden="true"
+            <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
@@ -2843,7 +2844,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         </tr>
         <tr>
           <td class="text-xs-left">
-            <i aria-hidden="true"
+            <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
@@ -2966,6 +2967,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               scope="col"
               aria-label
               aria-sort="none"
+              width="1px"
               class="text-xs-left"
           >
             <span>
@@ -3061,7 +3063,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
       <tbody>
         <tr>
           <td class="text-xs-left">
-            <i aria-hidden="true"
+            <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light v-data-table__expand-icon--active"
             >
               $vuetify.icons.expand
@@ -3088,7 +3090,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         </tr>
         <tr>
           <td class="text-xs-left">
-            <i aria-hidden="true"
+            <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light v-data-table__expand-icon--active"
             >
               $vuetify.icons.expand
@@ -3115,7 +3117,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         </tr>
         <tr>
           <td class="text-xs-left">
-            <i aria-hidden="true"
+            <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light v-data-table__expand-icon--active"
             >
               $vuetify.icons.expand
@@ -3142,7 +3144,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         </tr>
         <tr>
           <td class="text-xs-left">
-            <i aria-hidden="true"
+            <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light v-data-table__expand-icon--active"
             >
               $vuetify.icons.expand
@@ -3169,7 +3171,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         </tr>
         <tr>
           <td class="text-xs-left">
-            <i aria-hidden="true"
+            <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light v-data-table__expand-icon--active"
             >
               $vuetify.icons.expand
@@ -3292,6 +3294,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               scope="col"
               aria-label
               aria-sort="none"
+              width="1px"
               class="text-xs-left"
           >
             <div class="v-data-table__checkbox v-simple-checkbox">

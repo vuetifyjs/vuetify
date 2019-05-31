@@ -4,29 +4,28 @@
     max-width="400"
   >
     <v-card-title>
-      <h2 class="display-1">Toothbrush</h2>
+      <h2 class="display-1">Shirt Blouse</h2>
       <v-spacer></v-spacer>
-      <span class="title">$4.99</span>
+      <span class="title">$44.50</span>
     </v-card-title>
 
     <v-card-text>
-      Our company takes pride in making handmade brushes.
-      Our toothbrushes are available in 4 different bristel types, from extra soft to hard.
+      Our blouses are available in 8 colors. You can custom order a built-in arch support for any of the models.
     </v-card-text>
 
     <v-divider class="mx-3"></v-divider>
 
     <v-card-text>
-      <span class="subheading">Select type</span>
+      <span class="subheading">Select size</span>
 
       <v-chip-group
         v-model="selection"
         active-class="deep-purple--text text--accent-4"
+        mandatory
       >
-        <v-chip>Extra Soft</v-chip>
-        <v-chip>Soft</v-chip>
-        <v-chip>Medium</v-chip>
-        <v-chip>Hard</v-chip>
+        <v-chip v-for="size in sizes" :key="size" :value="size">
+          {{ size }}
+        </v-chip>
       </v-chip-group>
     </v-card-text>
 
@@ -45,7 +44,10 @@
 <script>
   export default {
     data: () => ({
-      selection: 2
+      selection: '08',
+      sizes: [
+        '04', '06', '08', '10', '12', '14'
+      ]
     })
   }
 </script>

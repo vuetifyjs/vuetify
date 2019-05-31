@@ -61,7 +61,7 @@
   height: 18px
   width: 18px
 
-// Modifiers
+// Mobile
 .v-data-table-header-mobile
   th
     height: initial
@@ -69,8 +69,22 @@
 .v-data-table-header-mobile__wrapper
   display: flex
 
-  .v-simple-checkbox
-    margin-right: 24px
-
   .v-select
     margin-bottom: 8px
+    margin-left: 16px
+
+    .v-chip
+      height: 24px
+
+    .v-chip__close
+      i
+        font-size: 18px
+
+      &.desc i
+        transform: rotate(-180deg)
+
+.v-data-table-header-mobile__select
+  min-width: 56px
+  display: flex
+  align-items: center
+  justify-content: center

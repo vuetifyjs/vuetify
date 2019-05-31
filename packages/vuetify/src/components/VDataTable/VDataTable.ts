@@ -66,9 +66,19 @@ export default VDataIterator.extend({
     computedHeaders (): TableHeader[] {
       if (!this.headers) return []
       const headers = this.headers.filter(h => h.value === undefined || !this.internalGroupBy.find(v => v === h.value))
+      const defaultHeader = { text: '', sortable: false, width: '1px' }
 
-      this.showSelect && headers.unshift({ text: '', value: 'data-table-select', sortable: false, width: '1px' })
-      this.showExpand && headers.unshift({ text: '', value: 'data-table-expand', sortable: false, width: '1px' })
+      if (this.showSelect) {
+        const index = headers.findIndex(h => h.value === 'data-table-select')
+        if (index < 0) headers.unshift({ ...defaultHeader, value: 'data-table-select' })
+        else headers.splice(index, 1, { ...defaultHeader, ...headers[index] })
+      }
+
+      if (this.showExpand) {
+        const index = headers.findIndex(h => h.value === 'data-table-expand')
+        if (index < 0) headers.unshift({ ...defaultHeader, value: 'data-table-expand' })
+        else headers.splice(index, 1, { ...defaultHeader, ...headers[index] })
+      }
 
       return headers
     },

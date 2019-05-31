@@ -105,6 +105,8 @@ export default mixins(
         : 0
     },
     updateValue (val: any) {
+      this.$emit('change', val)
+      // TODO: deprecate
       this.$emit('update:active', val)
     }
   },
