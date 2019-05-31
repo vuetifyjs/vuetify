@@ -7,7 +7,7 @@
           dark
           v-on="on"
         >
-          Show player
+          Open Player
         </v-btn>
       </template>
       <v-card tile>

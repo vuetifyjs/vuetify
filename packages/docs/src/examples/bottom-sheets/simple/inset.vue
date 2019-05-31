@@ -1,13 +1,13 @@
 <template>
   <div class="text-xs-center">
-    <v-bottom-sheet v-model="sheet">
+    <v-bottom-sheet inset>
       <template v-slot:activator="{ on }">
         <v-btn
-          color="purple"
+          color="orange"
           dark
           v-on="on"
         >
-          Open Usage
+          Open Inset
         </v-btn>
       </template>
       <v-sheet class="text-xs-center" height="200px">
@@ -17,7 +17,7 @@
           color="red"
           @click="sheet = !sheet"
         >close</v-btn>
-        <div>The basic usage of v-bottom-sheet. Almost any content can be placed inside this component</div>
+        <div>This is a bottom sheet using the inset prop</div>
       </v-sheet>
     </v-bottom-sheet>
   </div>
