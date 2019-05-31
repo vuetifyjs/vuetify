@@ -5,7 +5,7 @@ import path from 'path'
 describe('locale.ts', () => {
   it('should have listed all available locales in index.ts', async () => {
     const imported = Object.keys(locales)
-    const dir = fs.readdirSync(path.resolve(__dirname, '..')).filter(filename => !['gr.ts', 'index.ts', '__tests__'].includes(filename))
+    const dir = fs.readdirSync(path.resolve(__dirname, '..')).filter(filename => !['index.ts', '__tests__'].includes(filename))
 
     expect(dir).toHaveLength(imported.length)
 
