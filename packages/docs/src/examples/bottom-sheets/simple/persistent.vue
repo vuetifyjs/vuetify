@@ -1,33 +1,24 @@
 <template>
   <div class="text-xs-center">
-    <v-bottom-sheet persistent v-model="sheet">
+    <v-bottom-sheet v-model="sheet" persistent>
       <template v-slot:activator="{ on }">
         <v-btn
-          color="purple"
+          color="green"
           dark
           v-on="on"
         >
-          Click me
+          Open Persistent
         </v-btn>
       </template>
-      <v-list>
-        <v-subheader>Open in</v-subheader>
-        <v-list-item
-          v-for="tile in tiles"
-          :key="tile.title"
-          @click="sheet = false"
-        >
-          <v-list-item-avatar>
-            <v-avatar size="32px" tile>
-              <img
-                :src="`https://cdn.vuetifyjs.com/images/bottom-sheets/${tile.img}`"
-                :alt="tile.title"
-              >
-            </v-avatar>
-          </v-list-item-avatar>
-          <v-list-item-title>{{ tile.title }}</v-list-item-title>
-        </v-list-item>
-      </v-list>
+      <v-sheet class="text-xs-center" height="200px">
+        <v-btn
+          class="mt-4"
+          flat
+          color="red"
+          @click="sheet = !sheet"
+        >close</v-btn>
+        <div>This is a bottom sheet using the persistent prop</div>
+      </v-sheet>
     </v-bottom-sheet>
   </div>
 </template>
@@ -35,14 +26,7 @@
 <script>
   export default {
     data: () => ({
-      sheet: false,
-      tiles: [
-        { img: 'keep.png', title: 'Keep' },
-        { img: 'inbox.png', title: 'Inbox' },
-        { img: 'hangouts.png', title: 'Hangouts' },
-        { img: 'messenger.png', title: 'Messenger' },
-        { img: 'google.png', title: 'Google+' }
-      ]
+      sheet: false
     })
   }
 </script>
