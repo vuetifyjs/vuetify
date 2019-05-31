@@ -9,9 +9,6 @@ import {
   Wrapper
 } from '@vue/test-utils'
 
-// Types
-import { GroupableInstance } from '../../VItemGroup/VItemGroup'
-
 describe('VSlideGroup.ts', () => {
   type Instance = ExtractVue<typeof VSlideGroup>
   let mountFunction: (options?: object) => Wrapper<Instance>
@@ -78,15 +75,66 @@ describe('VSlideGroup.ts', () => {
     expect(wrapper.vm.isMobile).toBe(true)
   })
 
-  it('should compute centered position for active element', async () => {
-    const wrapper = mountFunction()
-    const testOffset = (offsetLeft: number, clientWidth: number, rtl: boolean, expectedOffset: number) => {
-      const offset = wrapper.vm.computeCenteredOffset({
-        $el: {
-          offsetLeft,
-          clientWidth
-        } as Pick<HTMLElement, 'offsetLeft' | 'clientWidth'>
-      } as GroupableInstance, {
+  it('should compute newOffset for active element', async () => {
+    const { calculateNewOffset } = mountFunction().vm
+    let currentOffset = 0
+    const testOffsetAndUpdate = (direction: 'prev' | 'next', rtl: boolean, expectedOffset: number) => {
+      currentOffset = calculateNewOffset(direction, {
+        content: 1000,
+        wrapper: 400
+      }, rtl, currentOffset)
+
+      expect(currentOffset).toBe(expectedOffset)
+    }
+
+    testOffsetAndUpdate('next', false, 400)
+    testOffsetAndUpdate('next', false, 600)
+    testOffsetAndUpdate('next', false, 600)
+    testOffsetAndUpdate('prev', false, 200)
+    testOffsetAndUpdate('prev', false, 0)
+    testOffsetAndUpdate('prev', false, 0)
+    // RTL
+    currentOffset = 0
+    testOffsetAndUpdate('next', true, -400)
+    testOffsetAndUpdate('next', true, -600)
+    testOffsetAndUpdate('next', true, -600)
+    testOffsetAndUpdate('prev', true, -200)
+    testOffsetAndUpdate('prev', true, -0)
+    testOffsetAndUpdate('prev', true, -0)
+  })
+
+  it('should compute updatedOffset for active element', async () => {
+    const { calculateUpdatedOffset } = mountFunction().vm
+    const testOffset = (offsetLeft: number, rtl: boolean, expectedOffset: number) => {
+      const offset = calculateUpdatedOffset({
+        offsetLeft,
+        clientWidth: 20
+      } as HTMLElement, {
+        content: 1000,
+        wrapper: 500
+      }, rtl, 0)
+
+      expect(offset).toBe(expectedOffset)
+    }
+
+    testOffset(10, false, 0)
+    testOffset(400, false, 0)
+    testOffset(600, false, 126)
+    testOffset(960, false, 486)
+    // RTL
+    testOffset(10, true, -496)
+    testOffset(400, true, -106)
+    testOffset(600, true, 0)
+    testOffset(960, true, 0)
+  })
+
+  it('should compute centeredOffset for active element', async () => {
+    const { calculateCenteredOffset } = mountFunction().vm
+    const testOffset = (offsetLeft: number, rtl: boolean, expectedOffset: number) => {
+      const offset = calculateCenteredOffset({
+        offsetLeft,
+        clientWidth: 20
+      } as HTMLElement, {
         content: 1000,
         wrapper: 500
       }, rtl)
@@ -94,15 +142,15 @@ describe('VSlideGroup.ts', () => {
       expect(offset).toBe(expectedOffset)
     }
 
-    testOffset(10, 20, false, 0)
-    testOffset(400, 20, false, 160)
-    testOffset(600, 20, false, 360)
-    testOffset(960, 20, false, 500)
+    testOffset(10, false, 0)
+    testOffset(400, false, 160)
+    testOffset(600, false, 360)
+    testOffset(960, false, 500)
     // RTL
-    testOffset(10, 20, true, -500)
-    testOffset(400, 20, true, -340)
-    testOffset(600, 20, true, -140)
-    testOffset(960, 20, true, -0)
+    testOffset(10, true, -500)
+    testOffset(400, true, -340)
+    testOffset(600, true, -140)
+    testOffset(960, true, -0)
   })
 
   // TODO: Unsure what we're actually testing, willChange not found in jest 24

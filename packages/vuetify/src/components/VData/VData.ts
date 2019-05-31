@@ -29,8 +29,7 @@ export interface DataProps {
   updateOptions: (obj: any) => void
   sort: (value: string) => void
   group: (value: string) => void
-  groupedItems: Record<string, any[]>
-  // loading?: boolean
+  groupedItems: Record<string, any[]> | null
 }
 
 export default Vue.extend({
@@ -130,6 +129,9 @@ export default Vue.extend({
 
       return Math.min(this.itemsLength, this.internalOptions.page * this.internalOptions.itemsPerPage)
     },
+    isGrouped (): boolean {
+      return !!this.internalOptions.groupBy.length
+    },
     pagination (): DataPaginaton {
       return {
         page: this.internalOptions.page,
@@ -162,8 +164,8 @@ export default Vue.extend({
 
       return items
     },
-    groupedItems (): Record<string, any[]> {
-      return groupByProperty(this.computedItems, this.internalOptions.groupBy[0])
+    groupedItems (): Record<string, any[]> | null {
+      return this.isGrouped ? groupByProperty(this.computedItems, this.internalOptions.groupBy[0]) : null
     },
     scopedProps (): DataProps {
       const props = {
@@ -186,11 +188,7 @@ export default Vue.extend({
       handler (options: DataOptions, old: DataOptions) {
         if (deepEqual(options, old)) return
 
-        // Causes issues with vue-test-util scoped
-        // -slots if not called in the $nextTick
-        this.$nextTick(() => {
-          this.updateOptions(options)
-        })
+        this.updateOptions(options)
       },
       deep: true,
       immediate: true
@@ -329,10 +327,11 @@ export default Vue.extend({
       this.updateOptions({ sortBy, sortDesc })
     },
     updateOptions (options: any) {
-      this.internalOptions = Object.assign({}, this.internalOptions, {
+      this.internalOptions = {
+        ...this.internalOptions,
         ...options,
         page: Math.max(1, Math.min(options.page || this.internalOptions.page, this.pageCount))
-      })
+      }
     },
     sortItems (items: any[]) {
       const sortBy = this.internalOptions.groupBy.concat(this.internalOptions.sortBy)

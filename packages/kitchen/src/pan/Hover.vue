@@ -8,7 +8,7 @@
       </core-title>
       <core-section>
         <v-hover #default="{ hover }">
-          <v-sheet>
+          <v-sheet data-cy-flex="hover">
             {{ hover }}
           </v-sheet>
         </v-hover>
@@ -19,7 +19,7 @@
       </core-title>
       <core-section>
         <v-hover disabled #default="{ hover }">
-          <v-sheet>
+          <v-sheet data-cy-flex="hover">
             {{ hover }}
           </v-sheet>
         </v-hover>
@@ -34,7 +34,7 @@
           close-delay="100"
           #default="{ hover }"
         >
-          <v-sheet>
+          <v-sheet data-cy-flex="hover">
             {{ hover }}
           </v-sheet>
         </v-hover>

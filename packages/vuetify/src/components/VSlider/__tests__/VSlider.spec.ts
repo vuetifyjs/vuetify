@@ -550,4 +550,57 @@ describe('VSlider.ts', () => {
 
     expect(parseKeyDown).toHaveBeenCalled()
   })
+
+  it('should set value to min value if given a NaN', () => {
+    const input = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        min: -20,
+        max: 20
+      },
+      listeners: {
+        input
+      }
+    })
+
+    expect(input).toHaveBeenCalledWith(-20)
+  })
+
+  it('should correctly handle initial value of zero (#7320)', () => {
+    const input = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        min: -20,
+        max: 20,
+        value: 0
+      },
+      listeners: {
+        input
+      }
+    })
+
+    expect(input).not.toHaveBeenCalledWith(-20)
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should correctly handle setting value to zero (#7320)', () => {
+    const input = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        min: -20,
+        max: 20,
+        value: 10
+      },
+      listeners: {
+        input
+      }
+    })
+
+    wrapper.setProps({
+      value: 0
+    })
+
+    expect(input).not.toHaveBeenCalledWith(-20)
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

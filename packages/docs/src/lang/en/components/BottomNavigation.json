@@ -5,13 +5,33 @@
     "usage": {
       "desc": "While the bottom nav is meant to be used with the `vue-router`, you can also programmatically control the active state of the buttons by using the `active.sync` prop. You can change a button's value by using its `value` attribute."
     },
-    "colorAndShift": {
-      "header": "### Color & shift",
-      "desc": "When using a colored background, it is recommended to use the `light` prop. The `shift` prop will hide the button text until active. Keep in mind, `v-btn` text is required to be wrapped in a `<span>` tag."
+    "color": {
+      "header": "### Color",
+      "desc": "The `color` prop applys a color to the background the bottom navigation. It is recommended to use the `light` and `dark` props to properly contrast text color."
+    },
+    "grow": {
+      "header": "### Grow",
+      "desc": "If `v-bottom-navigation` has `grow` property, buttons within it grow to fill available space."
+    },
+    "horizontal": {
+      "header": "### Horizontal",
+      "desc": "The `horizontal` prop, places nav text next to the icon as appose to beneath it."
+    },
+    "shift": {
+      "header": "### Shift",
+      "desc": "The `shift` prop will hide the button text until active. For this to work, `v-btn` text is required to be wrapped in a `<span>` tag."
     },
     "toggle": {
       "header": "### Toggle",
       "desc": "As with other Vuetify components, you can control the display state with `v-model`."
+    },
+    "hideOnScroll": {
+      "header": "### Hide on scroll",
+      "desc": "Hide-on-scroll hides `v-bottom-navigation` when target element is scrolled."
+    },
+    "scrollThreshold": {
+      "header": "### Scroll threshold",
+      "desc": "`scroll-threshold` property allows you to customize the threshold you can scroll before `v-bottom-navigation` disappears."
     }
   },
   "props": {

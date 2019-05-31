@@ -15,6 +15,7 @@
               <v-btn
                 color="primary"
                 dark
+                data-cy-btn="tooltip"
               >
                 Left
               </v-btn>
@@ -29,6 +30,7 @@
               <v-btn
                 color="primary"
                 dark
+                data-cy-btn="tooltip"
               >
                 Top
               </v-btn>
@@ -43,6 +45,7 @@
               <v-btn
                 color="primary"
                 dark
+                data-cy-btn="tooltip"
               >
                 Bottom
               </v-btn>
@@ -57,6 +60,7 @@
               <v-btn
                 color="primary"
                 dark
+                data-cy-btn="tooltip"
               >
                 Right
               </v-btn>
@@ -76,7 +80,7 @@
           align-center
         >
           <v-flex xs12>
-            <v-btn @click="show = !show">
+            <v-btn @click="show = !show" data-cy-btn="tooltip">
               toggle
             </v-btn>
           </v-flex>
@@ -95,7 +99,7 @@
                 <v-btn
                   icon
                 >
-                  <v-icon color="grey lighten-1">
+                  <v-icon color="grey lighten-1" data-cy-btn="tooltip">
                     mdi-cart
                   </v-icon>
                 </v-btn>

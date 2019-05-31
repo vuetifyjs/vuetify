@@ -24,6 +24,10 @@
     "hideControls": {
       "header": "### Hide controls",
       "desc": "You can hide the carousel navigation controls with `:show-arrow=\"false\"`."
+    },
+    "model": {
+      "header": "### `v-model` control",
+      "desc": "You can control carousel with model."
     }
   },
   "props": {
