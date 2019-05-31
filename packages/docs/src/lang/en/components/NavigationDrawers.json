@@ -77,6 +77,10 @@
   "events": {
     "update:miniVariant": "The `mini-variant.sync` event"
   },
+  "slots": {
+    "append": "A slot at the bottom of the drawer",
+    "prepend": "A slot at the top of the drawer"
+  },
   "scopedSlots": {
     "img": "Used to modify `v-img` properties when using the **src** prop"
   }
