@@ -328,7 +328,7 @@ export default mixins<options &
       if (this.vertical) range.reverse()
 
       const ticks = range.map(i => {
-        const index = this.decreasing ? this.maxValue - i : i
+        const index = this.decreasing ? this.numTicks - i : i
         const children = []
 
         if (this.tickLabels[index]) {
