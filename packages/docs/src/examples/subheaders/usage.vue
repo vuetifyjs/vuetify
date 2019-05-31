@@ -1,3 +1,3 @@
 <template>
-  <v-subheader>I'm a subheader</v-subheader>
+  <v-subheader>Subheader</v-subheader>
 </template>
