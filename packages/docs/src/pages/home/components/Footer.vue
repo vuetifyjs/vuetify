@@ -57,13 +57,12 @@
             <v-text-field
               id="member_email"
               v-model="email"
-              class="v-text-field--rounded"
               color="secondary"
               type="email"
               name="member[email]"
               solo
               flat
-              hide-details
+              rounded
               label="Email Address"
             >
               <template v-slot:append>
@@ -187,20 +186,11 @@
       opacity: 1
 
   .v-text-field--rounded
-    margin-bottom: 16px
-
     .v-input__slot
-      border-radius: 28px
-      padding-right: 0
-
-    .v-text-field__slot,
-    .v-label
-      padding-left: 8px
+      padding-right: 0 !important
 
     .v-btn
-      margin: 0
-      border-top-right-radius: 28px
-      border-bottom-right-radius: 28px
+      border-radius: 0 28px 28px 0
       box-shadow: none
       height: 48px
       padding-top: 2px
