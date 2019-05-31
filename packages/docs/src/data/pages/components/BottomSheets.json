@@ -42,7 +42,9 @@
           "value": [
             "simple/persistent",
             "simple/model",
-            "intermediate/inset"
+            "simple/inset",
+            "complex/player",
+            "complex/open-in-list"
           ]
         }
       ]
