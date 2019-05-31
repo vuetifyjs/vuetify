@@ -25,6 +25,7 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
       </span>
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 18px;"
       >
         $vuetify.icons.sort
       </i>
@@ -40,6 +41,7 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
       </span>
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 18px;"
       >
         $vuetify.icons.sort
       </i>
@@ -55,6 +57,7 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
       </span>
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 18px;"
       >
         $vuetify.icons.sort
       </i>
@@ -70,6 +73,7 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
       </span>
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 18px;"
       >
         $vuetify.icons.sort
       </i>
@@ -85,6 +89,7 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
       </span>
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 18px;"
       >
         $vuetify.icons.sort
       </i>
@@ -119,6 +124,7 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
       </span>
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 18px;"
       >
         $vuetify.icons.sort
       </i>
@@ -134,6 +140,7 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
       </span>
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 18px;"
       >
         $vuetify.icons.sort
       </i>
@@ -149,6 +156,7 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
       </span>
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 18px;"
       >
         $vuetify.icons.sort
       </i>
@@ -164,6 +172,7 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
       </span>
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 18px;"
       >
         $vuetify.icons.sort
       </i>
@@ -179,6 +188,7 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
       </span>
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 18px;"
       >
         $vuetify.icons.sort
       </i>
@@ -219,6 +229,7 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
       </span>
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 18px;"
       >
         $vuetify.icons.sort
       </i>
@@ -237,6 +248,7 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
       </span>
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 18px;"
       >
         $vuetify.icons.sort
       </i>
@@ -255,6 +267,7 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
       </span>
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 18px;"
       >
         $vuetify.icons.sort
       </i>
@@ -273,6 +286,7 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
       </span>
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 18px;"
       >
         $vuetify.icons.sort
       </i>
@@ -291,6 +305,7 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
       </span>
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 18px;"
       >
         $vuetify.icons.sort
       </i>
@@ -328,6 +343,7 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
       </span>
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 18px;"
       >
         $vuetify.icons.sort
       </i>
@@ -343,6 +359,7 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
       </span>
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 18px;"
       >
         $vuetify.icons.sort
       </i>
@@ -358,6 +375,7 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
       </span>
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 18px;"
       >
         $vuetify.icons.sort
       </i>
@@ -373,6 +391,7 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
       </span>
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 18px;"
       >
         $vuetify.icons.sort
       </i>
@@ -388,6 +407,7 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
       </span>
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 18px;"
       >
         $vuetify.icons.sort
       </i>
@@ -422,6 +442,7 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
       </span>
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 18px;"
       >
         $vuetify.icons.sort
       </i>
@@ -437,6 +458,7 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
       </span>
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 18px;"
       >
         $vuetify.icons.sort
       </i>
@@ -452,6 +474,7 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
       </span>
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 18px;"
       >
         $vuetify.icons.sort
       </i>
@@ -467,6 +490,7 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
       </span>
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 18px;"
       >
         $vuetify.icons.sort
       </i>
@@ -482,6 +506,7 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
       </span>
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 18px;"
       >
         $vuetify.icons.sort
       </i>
@@ -623,6 +648,7 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
                       <div class="v-chip__close sortable active desc">
                         <i aria-hidden="true"
                            class="v-icon material-icons theme--light"
+                           style="font-size: 18px;"
                         >
                           $vuetify.icons.sort
                         </i>
@@ -731,6 +757,7 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
                       <div class="v-chip__close sortable active desc">
                         <i aria-hidden="true"
                            class="v-icon material-icons theme--light"
+                           style="font-size: 18px;"
                         >
                           $vuetify.icons.sort
                         </i>
@@ -791,6 +818,7 @@ exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
                       <div class="v-chip__close sortable active asc">
                         <i aria-hidden="true"
                            class="v-icon material-icons theme--light"
+                           style="font-size: 18px;"
                         >
                           $vuetify.icons.sort
                         </i>

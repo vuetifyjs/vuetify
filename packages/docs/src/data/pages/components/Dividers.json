@@ -40,11 +40,10 @@
         {
           "type": "examples",
           "value": [
-            "simple/lightAndDark",
             "simple/inset",
             "simple/vertical",
+            "simple/verticalInset",
             "intermediate/subheaders",
-            "intermediate/dividerList",
             "intermediate/dividerListPortrait"
           ]
         }

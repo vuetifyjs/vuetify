@@ -251,6 +251,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -266,6 +267,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -281,6 +283,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -296,6 +299,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -311,6 +315,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -440,6 +445,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
               </span>
               <i aria-hidden="true"
                  class="v-icon material-icons theme--light"
+                 style="font-size: 18px;"
               >
                 $vuetify.icons.sort
               </i>
@@ -455,6 +461,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
               </span>
               <i aria-hidden="true"
                  class="v-icon material-icons theme--light"
+                 style="font-size: 18px;"
               >
                 $vuetify.icons.sort
               </i>
@@ -470,6 +477,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
               </span>
               <i aria-hidden="true"
                  class="v-icon material-icons theme--light"
+                 style="font-size: 18px;"
               >
                 $vuetify.icons.sort
               </i>
@@ -485,6 +493,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
               </span>
               <i aria-hidden="true"
                  class="v-icon material-icons theme--light"
+                 style="font-size: 18px;"
               >
                 $vuetify.icons.sort
               </i>
@@ -500,6 +509,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
               </span>
               <i aria-hidden="true"
                  class="v-icon material-icons theme--light"
+                 style="font-size: 18px;"
               >
                 $vuetify.icons.sort
               </i>
@@ -724,6 +734,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -739,6 +750,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -754,6 +766,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -769,6 +782,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -784,6 +798,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -904,6 +919,7 @@ exports[`VDataTable.ts should render with data 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -919,6 +935,7 @@ exports[`VDataTable.ts should render with data 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -934,6 +951,7 @@ exports[`VDataTable.ts should render with data 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -949,6 +967,7 @@ exports[`VDataTable.ts should render with data 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -964,6 +983,7 @@ exports[`VDataTable.ts should render with data 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -1182,6 +1202,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -1197,6 +1218,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -1212,6 +1234,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -1227,6 +1250,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -1357,6 +1381,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -1372,6 +1397,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -1387,6 +1413,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -1402,6 +1429,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -1775,6 +1803,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -1790,6 +1819,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -1805,6 +1835,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -1820,6 +1851,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -2140,6 +2172,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -2155,6 +2188,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -2170,6 +2204,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -2185,6 +2220,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -2200,6 +2236,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -2334,6 +2371,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -2349,6 +2387,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -2364,6 +2403,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -2379,6 +2419,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -2394,6 +2435,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -2651,6 +2693,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -2666,6 +2709,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -2681,6 +2725,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -2696,6 +2741,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -2711,6 +2757,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -2978,6 +3025,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -2993,6 +3041,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -3008,6 +3057,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -3023,6 +3073,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -3038,6 +3089,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -3312,6 +3364,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -3327,6 +3380,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -3342,6 +3396,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -3357,6 +3412,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>
@@ -3372,6 +3428,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
             </span>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 18px;"
             >
               $vuetify.icons.sort
             </i>

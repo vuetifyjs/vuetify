@@ -181,9 +181,7 @@ export default baseMixins.extend<options>().extend({
       return this.$createElement(VTabsBar, this.setTextColor(this.computedColor, {
         staticClass: this.backgroundColor,
         style: {
-          height: this.height ? {
-            height: convertToUnit(this.height)
-          } : null
+          height: convertToUnit(this.height)
         },
         props: {
           activeClass: this.activeClass,
