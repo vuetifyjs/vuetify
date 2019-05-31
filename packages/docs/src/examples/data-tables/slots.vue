@@ -29,11 +29,11 @@
         </thead>
       </template>
 
-      <template v-if="isEnabled('item.data-table-select')" v-slot:item.column.data-table-select="{ on, props }">
+      <template v-if="isEnabled('item.data-table-select')" v-slot:item.data-table-select="{ on, props }">
         <v-simple-checkbox color="green" v-bind="props" v-on="on"></v-simple-checkbox>
       </template>
 
-      <template v-if="isEnabled('item.<name>')" v-slot:item.column.name="{ item }">
+      <template v-if="isEnabled('item.<name>')" v-slot:item.name="{ item }">
         {{ item.name.toUpperCase() }}
       </template>
 
@@ -175,8 +175,8 @@
           'top',
           'header.data-table-select',
           'header',
-          'item.column.data-table-select',
-          'item.column.<name>',
+          'item.data-table-select',
+          'item.<name>',
           'body.prepend',
           'body',
           'body.append',
@@ -202,7 +202,7 @@
 
     computed: {
       showSelect () {
-        return this.isEnabled('header.data-table-select') || this.isEnabled('item.column.data-table-select')
+        return this.isEnabled('header.data-table-select') || this.isEnabled('item.data-table-select')
       }
     },
 

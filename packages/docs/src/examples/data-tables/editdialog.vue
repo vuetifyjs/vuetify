@@ -4,56 +4,50 @@
       :headers="headers"
       :items="desserts"
     >
-      <template v-slot:items="props">
-        <td>
-          <v-edit-dialog
-            :return-value.sync="props.item.name"
-            @save="save"
-            @cancel="cancel"
-            @open="open"
-            @close="close"
-          > {{ props.item.name }}
-            <template v-slot:input>
-              <v-text-field
-                v-model="props.item.name"
-                :rules="[max25chars]"
-                label="Edit"
-                single-line
-                counter
-              ></v-text-field>
-            </template>
-          </v-edit-dialog>
-        </td>
-        <td class="text-xs-right">{{ props.item.calories }}</td>
-        <td class="text-xs-right">{{ props.item.fat }}</td>
-        <td class="text-xs-right">{{ props.item.carbs }}</td>
-        <td class="text-xs-right">{{ props.item.protein }}</td>
-        <td class="text-xs-right">
-          <v-edit-dialog
-            :return-value.sync="props.item.iron"
-            large
-            persistent
-            @save="save"
-            @cancel="cancel"
-            @open="open"
-            @close="close"
-          >
-            <div>{{ props.item.iron }}</div>
-            <template v-slot:input>
-              <div class="mt-3 title">Update Iron</div>
-            </template>
-            <template v-slot:input>
-              <v-text-field
-                v-model="props.item.iron"
-                :rules="[max25chars]"
-                label="Edit"
-                single-line
-                counter
-                autofocus
-              ></v-text-field>
-            </template>
-          </v-edit-dialog>
-        </td>
+      <template v-slot:item.name="props">
+        <v-edit-dialog
+          :return-value.sync="props.item.name"
+          @save="save"
+          @cancel="cancel"
+          @open="open"
+          @close="close"
+        > {{ props.item.name }}
+          <template v-slot:input>
+            <v-text-field
+              v-model="props.item.name"
+              :rules="[max25chars]"
+              label="Edit"
+              single-line
+              counter
+            ></v-text-field>
+          </template>
+        </v-edit-dialog>
+      </template>
+      <template v-slot:item.iron="props">
+        <v-edit-dialog
+          :return-value.sync="props.item.iron"
+          large
+          persistent
+          @save="save"
+          @cancel="cancel"
+          @open="open"
+          @close="close"
+        >
+          <div>{{ props.item.iron }}</div>
+          <template v-slot:input>
+            <div class="mt-3 title">Update Iron</div>
+          </template>
+          <template v-slot:input>
+            <v-text-field
+              v-model="props.item.iron"
+              :rules="[max25chars]"
+              label="Edit"
+              single-line
+              counter
+              autofocus
+            ></v-text-field>
+          </template>
+        </v-edit-dialog>
       </template>
     </v-data-table>
 
