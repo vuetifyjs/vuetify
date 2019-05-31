@@ -22,9 +22,9 @@
       <template v-if="isEnabled('header')" v-slot:header="{ props: { headers } }">
         <thead>
           <tr>
-            <td :colspan="headers.length">
+            <th :colspan="headers.length">
               This is a header
-            </td>
+            </th>
           </tr>
         </thead>
       </template>
