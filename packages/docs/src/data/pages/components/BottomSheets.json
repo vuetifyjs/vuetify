@@ -40,9 +40,9 @@
         {
           "type": "examples",
           "value": [
-            "simple/inset",
             "simple/persistent",
-            "simple/model"
+            "simple/model",
+            "intermediate/inset"
           ]
         }
       ]
