@@ -1,7 +1,7 @@
-// src/index.js
+// src/plugins/vuetify.js
 
 import Vue from 'vue'
-import Vuetify from 'vuetify'
+import Vuetify from 'vuetify/lib'
 import light from './theme'
 
 Vue.use(Vuetify)

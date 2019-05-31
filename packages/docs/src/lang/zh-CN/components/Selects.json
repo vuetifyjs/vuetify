@@ -2,7 +2,6 @@
   "header": "选择器",
   "headerText": "选择器组件用于从选项列表中收集用户提供的信息。",
   "components": ["v-select"],
-  "supplemental": ["MaskTable"],
   "examples": {
     "light": {
       "header": "亮色主题",

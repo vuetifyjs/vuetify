@@ -2,7 +2,6 @@
   "header": "# Текстовое поле",
   "headerText": "Компоненты текстовых полей используются для сбора предоставленной пользователем информации.",
   "components": ["v-text-field"],
-  "supplemental": ["MaskTable"],
   "examples": {
     "label": {
       "header": "### С меткой",

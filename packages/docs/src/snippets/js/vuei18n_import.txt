@@ -28,7 +28,9 @@ const i18n = new VueI18n({
   messages, // set locale messages
 })
 
-Vue.use(Vuetify, {
+Vue.use(Vuetify)
+
+export default new Vuetify({
   lang: {
     t: (key, ...params) => i18n.t(key, params)
   }

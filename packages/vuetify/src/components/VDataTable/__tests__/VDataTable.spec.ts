@@ -129,6 +129,7 @@ describe('VDataTable.ts', () => {
             }
           }
         },
+        sync: false,
         ...options
       })
     }
@@ -153,8 +154,6 @@ describe('VDataTable.ts', () => {
   })
 
   it('should render with body slot', () => {
-    const vm = new Vue()
-
     const wrapper = mountFunction({
       propsData: {
         headers: testHeaders,
@@ -162,7 +161,9 @@ describe('VDataTable.ts', () => {
         itemsPerPage: 5
       },
       scopedSlots: {
-        body: props => vm.$createElement('div', [ JSON.stringify(props) ])
+        body (props) {
+          return this.$createElement('div', [props.items.length])
+        }
       }
     })
 
@@ -182,21 +183,28 @@ describe('VDataTable.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render with showExpand', () => {
+  it('should render with showExpand', async () => {
+    const expand = jest.fn()
     const wrapper = mountFunction({
       propsData: {
         headers: testHeaders,
+        itemKey: 'name',
         items: testItems,
         itemsPerPage: 5,
         showExpand: true
+      },
+      listeners: {
+        'update:expanded': expand
       }
     })
-    const expand = jest.spyOn(wrapper.vm, 'expand')
+    // const expand = jest.spyOn(wrapper.vm, 'expand')
 
     expect(wrapper.html()).toMatchSnapshot()
     const expandIcon = wrapper.findAll('.v-data-table__expand-icon').at(0)
     expandIcon.trigger('click')
-    expect(expand).toHaveBeenCalledWith({ calories: 159, carbs: 24, fat: 6, iron: '1%', name: 'Frozen Yogurt', protein: 4 }, true)
+
+    await wrapper.vm.$nextTick()
+    expect(expand).toHaveBeenCalledWith(testItems.slice(0, 1))
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -213,19 +221,22 @@ describe('VDataTable.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render with item.expanded scoped slot', () => {
+  it('should render with item.expanded scoped slot', async () => {
     const vm = new Vue()
 
     const wrapper = mountFunction({
       propsData: {
         headers: testHeaders,
         items: testItems,
-        itemsPerPage: 5
+        itemsPerPage: 5,
+        expanded: testItems
       },
       scopedSlots: {
-        'item.expanded': props => vm.$createElement('div', [ JSON.stringify(props) ])
+        'expanded-item': props => vm.$createElement('div', ['expanded'])
       }
     })
+
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
   })
@@ -237,10 +248,11 @@ describe('VDataTable.ts', () => {
       propsData: {
         headers: testHeaders,
         items: testItems,
-        itemsPerPage: 5
+        itemsPerPage: 5,
+        groupBy: 'calories'
       },
       scopedSlots: {
-        'group.summary': props => vm.$createElement('div', [ JSON.stringify(props) ])
+        'group.summary': props => vm.$createElement('div', ['summary'])
       }
     })
 
@@ -315,62 +327,5 @@ describe('VDataTable.ts', () => {
     })
 
     expect(wrapper2.html()).toMatchSnapshot()
-  })
-
-  it('should calculate widths', () => {
-    const wrapper = mountFunction({
-      render: h => h('div', [
-        h('th'),
-        h('th'),
-        h('th')
-      ])
-    })
-
-    wrapper.vm.calcWidths()
-    expect(wrapper.vm.widths).toEqual([ 0, 0, 0 ])
-  })
-
-  it('should filter headers', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        headers: [
-          {
-            text: 'Dessert (100g serving)',
-            align: 'left',
-            sortable: false,
-            value: 'name',
-            filter: () => true
-          },
-          {
-            text: 'Calories',
-            value: 'calories',
-            filter: () => false
-          },
-          {
-            text: 'Fat (g)',
-            value: 'fat',
-            filter: () => true
-          },
-          {
-            text: 'Carbs (g)',
-            value: 'carbs',
-            filter: () => false
-          },
-          {
-            text: 'Protein (g)',
-            value: 'protein',
-            filter: () => false
-          },
-          {
-            text: 'Iron (%)',
-            value: 'iron',
-            filter: () => true
-          }
-        ],
-        items: testItems
-      }
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
   })
 })

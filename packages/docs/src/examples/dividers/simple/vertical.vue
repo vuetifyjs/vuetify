@@ -7,7 +7,6 @@
 
     <v-divider
       class="mx-3"
-      inset
       vertical
     ></v-divider>
 

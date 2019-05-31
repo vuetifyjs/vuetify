@@ -56,7 +56,6 @@
         filled
         color="deep-purple"
         label="Phone number"
-        mask="phone"
       ></v-text-field>
       <v-text-field
         v-model="email"
