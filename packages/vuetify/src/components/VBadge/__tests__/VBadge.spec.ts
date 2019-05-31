@@ -90,4 +90,37 @@ describe('VBadge.ts', () => {
     expect(badge.classes('green')).toBeTruthy()
     expect(badge.classes('lighten-1')).toBeTruthy()
   })
+
+  it('should render component with transition element', () => {
+    const transitionStub = {
+      name: 'transition',
+      render: jest.fn()
+    }
+
+    mountFunction({
+      stubs: {
+        transition: transitionStub
+      }
+    })
+
+    expect(transitionStub.render).toHaveBeenCalled()
+  })
+
+  it('should render component without transition element', () => {
+    const transitionStub = {
+      name: 'transition',
+      render: jest.fn()
+    }
+
+    mountFunction({
+      propsData: {
+        transition: ''
+      },
+      stubs: {
+        transition: transitionStub
+      }
+    })
+
+    expect(transitionStub.render).not.toHaveBeenCalled()
+  })
 })

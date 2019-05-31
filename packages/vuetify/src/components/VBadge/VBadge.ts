@@ -60,13 +60,13 @@ export default mixins(
       'class': this.classes
     }, [
       this.$slots.default,
-      h('transition', {
+      this.transition ? h('transition', {
         props: {
           name: this.transition,
           origin: this.origin,
           mode: this.mode
         }
-      }, badge)
+      }, badge) : badge
     ])
   }
 })
