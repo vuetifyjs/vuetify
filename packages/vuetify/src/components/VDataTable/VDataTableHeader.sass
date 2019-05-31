@@ -29,25 +29,24 @@
       cursor: pointer
       outline: 0
 
-      i
-        font-size: 18px
+      .v-icon
         display: inline-block
         opacity: 0
         transition: .3s map-get($transition, 'swing')
 
       &:focus,
       &:hover
-        i
+        .v-icon
           opacity: .6
 
     &.active
       transform: none
 
-      i
+      .v-icon
         opacity: 1
 
       &.desc
-        i
+        .v-icon
           transform: rotate(-180deg)
 
 .v-data-table-header__sort-badge
@@ -76,11 +75,8 @@
     .v-chip
       height: 24px
 
-    .v-chip__close
-      i
-        font-size: 18px
-
-      &.desc i
+    .v-chip__close.desc
+      .v-icon
         transform: rotate(-180deg)
 
 .v-data-table-header-mobile__select

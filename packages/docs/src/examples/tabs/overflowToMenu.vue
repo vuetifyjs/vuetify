@@ -38,7 +38,7 @@
             bottom
             left
           >
-            <template #activator="{ on }">
+            <template v-slot:activator="{ on }">
               <v-btn
                 text
                 class="align-self-center mr-3"

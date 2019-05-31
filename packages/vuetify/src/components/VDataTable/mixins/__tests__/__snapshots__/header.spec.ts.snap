@@ -82,6 +82,7 @@ exports[`VDataTable/header.ts should generate sort icon 1`] = `
 
 <i aria-hidden="true"
    class="v-icon mdi mdi-sort theme--light"
+   style="font-size: 18px;"
 >
 </i>
 

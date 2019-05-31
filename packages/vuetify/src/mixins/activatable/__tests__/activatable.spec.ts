@@ -43,10 +43,32 @@ describe('activatable.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
     expect(wrapper.vm.isActive).toBeFalsy()
 
-    const btn = wrapper.find('button')
-    btn.trigger('click')
+    wrapper.find('button').trigger('click')
 
     expect(wrapper.vm.isActive).toBeTruthy()
+  })
+
+  it('should pass value to the activator slot', () => {
+    const wrapper = mountFunction({
+      scopedSlots: {
+        activator: scope => vm.$createElement('button', {
+          on: {
+            click () {
+              scope.value = !scope.value
+            }
+          }
+        }, [String(scope.value)])
+      },
+      render (h) {
+        return h('div', [ this.genActivator() ])
+      }
+    })
+
+    expect(wrapper.find('button').text()).toBe('false')
+
+    wrapper.find('button').trigger('click')
+
+    expect(wrapper.find('button').text()).toBe('true')
   })
 
   it('should render activator slot with hover', async () => {

@@ -25,19 +25,6 @@
       "type": "section",
       "children": [
         {
-          "type": "supplemental",
-          "value": [
-            {
-              "type": "components-mask-table"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
           "type": "examples",
           "value": [ "noData", "advanced", "comboboxMultiple" ]
         }
