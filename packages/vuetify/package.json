@@ -33,7 +33,7 @@
     "build:dist": "rimraf dist && cross-env NODE_ENV=production webpack --config build/config.js --progress --hide-modules",
     "tsc": "tsc",
     "build:lib": "node build/build-lib.js",
-    "debug:test": "cross-env NODE_ENV=test node --inspect --inspect-brk ./node_modules/jest/bin/jest.js --no-cache -i --verbose",
+    "debug:test": "cross-env NODE_ENV=test node --inspect --inspect-brk ../../node_modules/jest/bin/jest.js --no-cache -i --verbose",
     "test": "node build/run-tests.js",
     "test:unix": "cross-env NODE_ENV=test jest",
     "test:win32": "cross-env NODE_ENV=test jest -i",
