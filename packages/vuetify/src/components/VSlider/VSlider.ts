@@ -553,7 +553,8 @@ export default mixins<options &
       if ([left, right, down, up].includes(e.keyCode)) {
         this.keyPressed += 1
 
-        const increase = this.decreasing ? [left, up] : [right, up]
+        const increase = this.decreasing ? this.vertical ? [right, down] : [left, up]
+          : this.vertical ? [right, up] : [right, up]
         const direction = increase.includes(e.keyCode) ? 1 : -1
         const multiplier = e.shiftKey ? 3 : (e.ctrlKey ? 2 : 1)
 
