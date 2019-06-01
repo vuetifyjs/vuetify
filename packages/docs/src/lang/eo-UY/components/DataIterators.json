@@ -1,26 +1,79 @@
 {
-  "header": "crwdns11756:0crwdne11756:0",
-  "headerText": "crwdns11758:0crwdne11758:0",
-  "examples": {
-    "usage": {
-      "desc": "crwdns11760:0crwdne11760:0"
-    },
-    "slots": {
-      "header": "crwdns11762:0crwdne11762:0",
-      "desc": "crwdns11764:0crwdne11764:0"
-    }
-  },
-  "props": {
-    "contentClass": "crwdns11766:0crwdne11766:0",
-    "contentProps": "crwdns11768:0crwdne11768:0",
-    "contentTag": "crwdns11770:0crwdne11770:0",
-    "nextIcon": "crwdns11772:0crwdne11772:0",
-    "prevIcon": "crwdns11774:0crwdne11774:0"
-  },
-  "slots": {
-    "header": "crwdns11776:0crwdne11776:0"
-  },
-  "events": {
-    "update:pagination": "crwdns11778:0crwdne11778:0"
-  }
+	"header": "crwdns28728:0crwdne28728:0",
+	"headerText": "crwdns28730:0crwdne28730:0",
+	"examples": {
+		"usage": {
+			"desc": "crwdns28732:0crwdne28732:0"
+		},
+		"slots": {
+			"header": "crwdns28734:0crwdne28734:0",
+			"desc": "crwdns28736:0crwdne28736:0"
+		},
+		"expand": {
+			"header": "crwdns35996:0crwdne35996:0",
+			"desc": "crwdns35998:0crwdne35998:0"
+		}
+	},
+	"props": {
+		"v-data-iterator": {
+			"itemKey": "crwdns36000:0crwdne36000:0",
+			"value": "crwdns28738:0crwdne28738:0",
+			"singleSelect": "crwdns28740:0crwdne28740:0",
+			"expanded": "crwdns28742:0crwdne28742:0",
+			"singleExpand": "crwdns28744:0crwdne28744:0",
+			"loading": "crwdns28746:0crwdne28746:0",
+			"loadingText": "crwdns28748:0crwdne28748:0",
+			"noResultsText": "crwdns28750:0crwdne28750:0",
+			"noDataText": "crwdns28752:0crwdne28752:0",
+			"hideDefaultFooter": "crwdns28754:0crwdne28754:0",
+			"footerProps": "crwdns28756:0crwdne28756:0"
+		},
+		"v-data-footer": {
+			"options": "crwdns28758:0crwdne28758:0",
+			"pagination": "crwdns28760:0crwdne28760:0",
+			"itemsPerPageOptions": "crwdns28762:0crwdne28762:0",
+			"prevIcon": "crwdns28764:0crwdne28764:0",
+			"nextIcon": "crwdns28766:0crwdne28766:0",
+			"firstIcon": "crwdns28768:0crwdne28768:0",
+			"lastIcon": "crwdns28770:0crwdne28770:0",
+			"itemsPerPageText": "crwdns28772:0crwdne28772:0",
+			"itemsPerPageAllText": "crwdns28774:0crwdne28774:0",
+			"showFirstLastPage": "crwdns28776:0crwdne28776:0",
+			"showCurrentPage": "crwdns28778:0crwdne28778:0",
+			"disablePagination": "crwdns28780:0crwdne28780:0",
+			"disableItemsPerPage": "crwdns28782:0crwdne28782:0"
+		}
+	},
+	"scopedSlots": {
+		"v-data-iterator": {
+			"footer": "crwdns28784:0crwdne28784:0",
+			"footer.page-text": "crwdns36002:0crwdne36002:0",
+			"default": "crwdns28788:0crwdne28788:0",
+			"header": "crwdns28790:0crwdne28790:0",
+			"item": "crwdns36004:0crwdne36004:0"
+		}
+	},
+	"slots": {
+		"v-data-iterator": {
+			"header": "crwdns28792:0crwdne28792:0",
+			"footer": "crwdns28794:0crwdne28794:0",
+			"loading": "crwdns28796:0crwdne28796:0",
+			"no-data": "crwdns28798:0crwdne28798:0",
+			"no-results": "crwdns28800:0crwdne28800:0"
+		},
+		"v-data-footer": {
+			"page-text": "crwdns36006:0crwdne36006:0"
+		}
+	},
+	"events": {
+		"v-data-iterator": {
+			"input": "crwdns28804:0crwdne28804:0",
+			"update:expanded": "crwdns28806:0crwdne28806:0",
+			"item-selected": "crwdns28808:0crwdne28808:0",
+			"item-expanded": "crwdns28810:0crwdne28810:0"
+		},
+		"v-data-footer": {
+			"update:options": "crwdns28812:0crwdne28812:0"
+		}
+	}
 }
