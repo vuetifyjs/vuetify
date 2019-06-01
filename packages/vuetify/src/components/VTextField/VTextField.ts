@@ -89,7 +89,6 @@ export default baseMixins.extend<options>().extend({
     prefixWidth: 0,
     prependWidth: 0,
     initialValue: null,
-    internalChange: false,
     isBooted: false,
     isClearing: false
   }),
@@ -398,11 +397,6 @@ export default baseMixins.extend<options>().extend({
     },
     onBlur (e?: Event) {
       this.isFocused = false
-      // Reset internalChange state
-      // to allow external change
-      // to persist
-      this.internalChange = false
-
       this.$emit('blur', e)
     },
     onClick () {
@@ -424,13 +418,10 @@ export default baseMixins.extend<options>().extend({
     },
     onInput (e: Event) {
       const target = e.target as HTMLInputElement
-      this.internalChange = true
       this.internalValue = target.value
       this.badInput = target.validity && target.validity.badInput
     },
     onKeyDown (e: KeyboardEvent) {
-      this.internalChange = true
-
       if (e.keyCode === keyCodes.enter) this.$emit('change', this.internalValue)
 
       this.$emit('keydown', e)

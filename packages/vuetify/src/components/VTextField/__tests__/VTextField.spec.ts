@@ -396,20 +396,6 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     expect(wrapper.vm.$refs.input.value).toBe('0')
   })
 
-  it('should reset internal change on blur and keydown', async () => {
-    const wrapper = mountFunction()
-
-    wrapper.setProps({ value: 'foo' })
-    wrapper.vm.internalChange = true
-    expect(wrapper.vm.internalChange).toBe(true)
-    wrapper.vm.onBlur()
-    expect(wrapper.vm.internalChange).toBe(false)
-
-    wrapper.find('input').trigger('keydown')
-
-    expect(wrapper.vm.internalChange).toBe(true)
-  })
-
   it('should autofocus', async () => {
     const wrapper = mountFunction({
       attachToDocument: true,
@@ -536,19 +522,6 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     })
 
     expect(wrapper.find('.v-input__icon--append-outer .v-icon').element.innerHTML).toBe('search')
-  })
-
-  // TODO: revisit this, it seems correct in practice because of onBlur()
-  it.skip('should reset internal change', async () => {
-    const wrapper = mountFunction()
-
-    wrapper.setData({ internalChange: true })
-
-    expect(wrapper.vm.internalChange).toBe(true)
-
-    wrapper.setProps({ value: 'foo' })
-
-    expect(wrapper.vm.internalChange).toBe(false)
   })
 
   it('should have correct max value', async () => {
