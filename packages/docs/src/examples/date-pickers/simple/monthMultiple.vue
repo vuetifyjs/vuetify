@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <v-layout row justify-center>
     <v-date-picker
       v-model="months"
       type="month"
       multiple
     ></v-date-picker>
-  </div>
+  </v-layout>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-layout row justify-center>
     <v-date-picker
       v-model="date"
       :allowed-dates="allowedMonths"
@@ -8,7 +8,7 @@
       min="2017-06"
       max="2019-10"
     ></v-date-picker>
-  </div>
+  </v-layout>
 </template>
 
 <script>

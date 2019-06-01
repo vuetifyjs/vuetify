@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-layout column align-center>
     <v-date-picker
       v-model="date"
       width="290"
@@ -11,7 +11,7 @@
       landscape
       class="mt-3"
     ></v-date-picker>
-  </div>
+  </v-layout>
 </template>
 
 <script>
