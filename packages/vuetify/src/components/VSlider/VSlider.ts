@@ -231,7 +231,7 @@ export default mixins<options &
   // value watcher, causes issues
   // with vue-test-utils
   beforeMount () {
-    this.internalValue = this.value
+    this.internalValue = this.reverse ? this.maxValue : this.value
   },
 
   mounted () {
