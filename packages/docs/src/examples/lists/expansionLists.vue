@@ -26,12 +26,10 @@
         :prepend-icon="item.action"
         no-action
       >
-        <template #activator>
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title v-text="item.title"></v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+        <template v-slot:activator>
+          <v-list-item-content>
+            <v-list-item-title v-text="item.title"></v-list-item-title>
+          </v-list-item-content>
         </template>
 
         <v-list-item

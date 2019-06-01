@@ -2,10 +2,10 @@
 
 exports[`VListItem.ts should render with <a> when using href prop 1`] = `
 
-<a href="http://www.google.com"
+<a tabindex="0"
+   href="http://www.google.com"
    aria-selected="false"
    role="listitem"
-   tabindex="0"
    class="v-list-item v-list-item--link theme--light"
 >
 </a>
@@ -14,9 +14,9 @@ exports[`VListItem.ts should render with <a> when using href prop 1`] = `
 
 exports[`VListItem.ts should render with a div when href and to are not used 1`] = `
 
-<div aria-selected="false"
+<div tabindex="-1"
+     aria-selected="false"
      role="listitem"
-     tabindex="-1"
      class="v-list-item theme--light"
 >
 </div>

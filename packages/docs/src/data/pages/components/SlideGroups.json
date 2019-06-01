@@ -30,7 +30,8 @@
         {
           "type": "examples",
           "value": [
-            "carousel"
+            "carousel",
+            "centerActive"
           ]
         }
       ]

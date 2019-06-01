@@ -37,7 +37,7 @@
 
       if (!this.code) {
         if (this.$slots.default) {
-          code = this.$slots.default[0].text
+          code = this.$slots.default[0].text.trim()
         }
 
         if (code.indexOf('.') > -1) {
