@@ -4,7 +4,7 @@
       <v-subheader :inset="inset">Subheader</v-subheader>
 
       <v-list>
-        <v-template v-for="(item, index) in items">
+        <v-template v-for="(item, index) in items" :key="index">
           <v-list-item
             v-if="item.action"
             :key="item.title"
@@ -44,14 +44,14 @@
         },
         {
           action: 'label',
-          title: 'list item',
+          title: 'list item'
         },
         {
           divider: true
         },
         {
           action: 'label',
-          title: 'list item',
+          title: 'list item'
         }
       ]
     })
