@@ -28,10 +28,21 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "iconDividers",
-            "itemSlot"
+            "simple/large",
+            "simple/divider",
+            "intermediate/iconDividers",
+            "intermediate/itemSlot"
           ]
         }
       ]

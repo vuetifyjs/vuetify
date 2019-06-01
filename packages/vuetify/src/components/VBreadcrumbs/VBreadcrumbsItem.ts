@@ -13,6 +13,10 @@ export default mixins(Routable).extend({
     activeClass: {
       type: String,
       default: 'v-breadcrumbs__item--disabled'
+    },
+    ripple: {
+      type: [Boolean, Object],
+      default: false
     }
   },
 
@@ -26,7 +30,7 @@ export default mixins(Routable).extend({
   },
 
   render (h): VNode {
-    const { tag, data } = this.generateRouteLink(this.classes)
+    const { tag, data } = this.generateRouteLink()
 
     return h('li', [
       h(tag, data, this.$slots.default)

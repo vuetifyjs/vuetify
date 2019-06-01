@@ -37,6 +37,10 @@
       "header": "### Grow",
       "desc": "The **grow** prop will make the tab items take up all available space up to a maximum width of 300px."
     },
+    "centerActive": {
+      "header": "### Centered active tab",
+      "desc": "Active tab is always centered"
+    },
     "overflowToMenu": {
       "header": "### With menu",
       "desc": "You can use a menu to hold additional tabs, swapping them out on the fly."
@@ -62,6 +66,7 @@
     "activeClass": "Mixins.BaseItemGroup.props.activeClass",
     "alignWithTitle": "Make `v-tabs` lined up with the toolbar title",
     "backgroundColor": "Changes the background color of `v-tabs-bar`.",
+    "centerActive": "Forces the selected tab to be centered",
     "cycle": "Will reset to first or last tab when swiping left or right if at the end of indexes",
     "dark": "Mixins.Themeable.props.dark",
     "grow": "Force `v-tab`'s to take up all available space",

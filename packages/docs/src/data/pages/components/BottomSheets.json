@@ -29,9 +29,22 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "inset"
+            "simple/persistent",
+            "simple/model",
+            "simple/inset",
+            "complex/player",
+            "complex/open-in-list"
           ]
         }
       ]

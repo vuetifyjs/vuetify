@@ -1,10 +1,10 @@
 {
   "props": {
     "v-alert": {
-      "outline": "2.0"
+      "outline": false
     },
     "v-btn": {
-      "outline": "2.0"
+      "outline": false
     },
     "v-expansion-panels": {
       "expand": false
@@ -13,74 +13,21 @@
       "active": false
     },
     "v-chip": {
-      "outline": "2.0",
-      "selected": "2.0"
+      "outline": false,
+      "selected": false
+    },
+    "v-textarea": {
+      "box": false
     },
     "v-text-field": {
-      "textarea": "1.1",
-      "append-icon-cb": false,
-      "append-outer-icon-cb": false,
-      "box": false,
-      "prepend-icon-cb": false,
-      "prepend-inner-icon-cb": false,
-      "clear-icon-cb": false
+      "box": false
     },
     "v-select": {
-      "autocomplete": "1.1",
-      "combobox": "1.1",
-      "tags": "1.1",
-      "editable": "1.1",
-      "overflow": "1.1",
-      "segmented": "1.1",
-      "multi-line": "1.1",
-      "append-icon-cb": false,
-      "append-outer-icon-cb": false,
-      "prepend-icon-cb": false,
-      "prepend-inner-icon-cb": false,
-      "clear-icon-cb": false
+      "box": false
     },
     "v-autocomplete": {
       "activator": false,
-      "closeOnClick": false,
-      "closeOnContentClick": false,
-      "combobox": false,
-      "delimiters": false,
-      "nudgeBottom": false,
-      "nudgeLeft": false,
-      "nudgeRight": false,
-      "nudgeTop": false,
-      "nudgeWidth": false,
-      "offsetX": false,
-      "offsetY": false,
-      "transition": false,
-      "append-icon-cb": false,
-      "append-outer-icon-cb": false,
-      "prepend-icon-cb": false,
-      "prepend-inner-icon-cb": false,
-      "clear-icon-cb": false
-    },
-    "v-combobox": {
-      "activator": false,
-      "closeOnClick": false,
-      "closeOnContentClick": false,
-      "combobox": false,
-      "delimiters": false,
-      "nudgeBottom": false,
-      "nudgeLeft": false,
-      "nudgeRight": false,
-      "nudgeTop": false,
-      "nudgeWidth": false,
-      "offsetX": false,
-      "offsetY": false,
-      "transition": false,
-      "append-icon-cb": false,
-      "append-outer-icon-cb": false,
-      "prepend-icon-cb": false,
-      "prepend-inner-icon-cb": false,
-      "clear-icon-cb": false
-    },
-    "v-overflow-btn": {
-      "activator": false,
+      "box": false,
       "closeOnClick": false,
       "closeOnContentClick": false,
       "combobox": false,
@@ -94,17 +41,37 @@
       "offsetY": false,
       "transition": false
     },
-    "v-input": {
-      "append-icon-cb": false,
-      "prepend-icon-cb": false
+    "v-combobox": {
+      "activator": false,
+      "box": false,
+      "closeOnClick": false,
+      "closeOnContentClick": false,
+      "combobox": false,
+      "delimiters": false,
+      "nudgeBottom": false,
+      "nudgeLeft": false,
+      "nudgeRight": false,
+      "nudgeTop": false,
+      "nudgeWidth": false,
+      "offsetX": false,
+      "offsetY": false,
+      "transition": false
     },
-    "v-slider": {
-      "append-icon-cb": false,
-      "prepend-icon-cb": false
-    },
-    "v-range-slider": {
-      "append-icon-cb": false,
-      "prepend-icon-cb": false
+    "v-overflow-btn": {
+      "activator": false,
+      "box": false,
+      "closeOnClick": false,
+      "closeOnContentClick": false,
+      "combobox": false,
+      "delimiters": false,
+      "nudgeBottom": false,
+      "nudgeLeft": false,
+      "nudgeRight": false,
+      "nudgeTop": false,
+      "nudgeWidth": false,
+      "offsetX": false,
+      "offsetY": false,
+      "transition": false
     }
   }
 }

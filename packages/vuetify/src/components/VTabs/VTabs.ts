@@ -44,11 +44,12 @@ export default baseMixins.extend<options>().extend({
   props: {
     activeClass: {
       type: String,
-      default: 'v-tab--active'
+      default: ''
     },
     alignWithTitle: Boolean,
     backgroundColor: String,
     centered: Boolean,
+    centerActive: Boolean,
     fixedTabs: Boolean,
     grow: Boolean,
     height: {
@@ -126,6 +127,7 @@ export default baseMixins.extend<options>().extend({
   watch: {
     alignWithTitle: 'callSlider',
     centered: 'callSlider',
+    centerActive: 'callSlider',
     fixedTabs: 'callSlider',
     grow: 'callSlider',
     right: 'callSlider',
@@ -179,12 +181,11 @@ export default baseMixins.extend<options>().extend({
       return this.$createElement(VTabsBar, this.setTextColor(this.computedColor, {
         staticClass: this.backgroundColor,
         style: {
-          height: this.height ? {
-            height: convertToUnit(this.height)
-          } : null
+          height: convertToUnit(this.height)
         },
         props: {
           activeClass: this.activeClass,
+          centerActive: this.centerActive,
           dark: this.dark,
           light: this.light,
           mandatory: !this.optional,

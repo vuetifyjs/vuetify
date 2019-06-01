@@ -152,6 +152,16 @@
         </v-tabs>
       </core-section>
 
+      <core-title>Centered active tab</core-title>
+      <core-section>
+        <v-tabs center-active>
+          <v-tab
+            v-for="i in 30"
+            :key="i"
+          >Item {{ i }}</v-tab>
+        </v-tabs>
+      </core-section>
+
       <core-title>Icons and text</core-title>
       <core-section>
         <v-tabs
