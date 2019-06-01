@@ -80,7 +80,7 @@
           align-center
         >
           <v-flex xs12>
-            <v-btn @click="show = !show" data-cy-btn="tooltip">
+            <v-btn data-cy-btn="tooltip" @click="show = !show">
               toggle
             </v-btn>
           </v-flex>
