@@ -7,7 +7,7 @@
     },
     "inset": {
       "header": "### Inset subheaders",
-      "desc": "Inset subheaders are moved 72px to the right. This gives you the option to line up subheaders with list item content."
+      "desc": "Inset subheaders are moved 72px to the right. This gives you the option to line them up with list items and inset dividers."
     },
     "grid": {
       "header": "### Grid subheaders",

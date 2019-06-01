@@ -37,9 +37,9 @@
 </template>
 
 <script>
-export default {
-  data: () => ({
-    inset: false
-  })
-}
+  export default {
+    data: () => ({
+      inset: false
+    })
+  }
 </script>
