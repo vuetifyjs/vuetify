@@ -1,44 +1,55 @@
 {
-  "header": "crwdns14794:0crwdne14794:0",
-  "headerText": "crwdns14796:0crwdne14796:0",
-  "examples": {
-    "slideXTransitions": {
-      "header": "crwdns14798:0crwdne14798:0",
-      "desc": "crwdns14800:0crwdne14800:0"
-    },
-    "slideYTransitions": {
-      "header": "crwdns14802:0crwdne14802:0",
-      "desc": "crwdns14804:0$primarycrwdne14804:0"
-    },
-    "scaleTransition": {
-      "header": "crwdns14806:0crwdne14806:0",
-      "desc": "crwdns14808:0crwdne14808:0"
-    },
-    "fadeTransition": {
-      "header": "crwdns14810:0crwdne14810:0",
-      "desc": "crwdns14812:0crwdne14812:0"
-    },
-    "expandTransition": {
-      "header": "crwdns14814:0crwdne14814:0",
-      "desc": "crwdns14816:0crwdne14816:0"
-    },
-    "customOrigin": {
-      "header": "crwdns14818:0crwdne14818:0",
-      "desc": "crwdns14820:0crwdne14820:0"
-    },
-    "todo": {
-      "header": "crwdns14822:0crwdne14822:0",
-      "desc": "crwdns14824:0crwdne14824:0"
-    }
-  },
-  "createYourOwnHeader": "crwdns14826:0crwdne14826:0",
-  "createYourOwnText1": "crwdns14828:0crwdne14828:0",
-  "createYourOwnText2": "crwdns14830:0crwdne14830:0",
-  "props": {
-    "group": "crwdns14832:0crwdne14832:0",
-    "hideOnLeave": "crwdns14834:0crwdne14834:0",
-    "leaveAbsolute": "crwdns14836:0[FLIP]crwdne14836:0",
-    "mode": "crwdns14838:0crwdne14838:0",
-    "origin": "crwdns14840:0crwdne14840:0"
-  }
+	"header": "crwdns24360:0crwdne24360:0",
+	"headerText": "crwdns24362:0crwdne24362:0",
+	"examples": {
+		"usage": {
+			"desc": "crwdns24364:0crwdne24364:0"
+		},
+		"slideXTransitions": {
+			"header": "crwdns24366:0crwdne24366:0",
+			"desc": "crwdns24368:0crwdne24368:0"
+		},
+		"slideYTransitions": {
+			"header": "crwdns24370:0crwdne24370:0",
+			"desc": "crwdns24372:0$primarycrwdne24372:0"
+		},
+		"scrollXTransitions": {
+			"header": "crwdns24374:0crwdne24374:0",
+			"desc": "crwdns24376:0crwdne24376:0"
+		},
+		"scrollYTransitions": {
+			"header": "crwdns24378:0crwdne24378:0",
+			"desc": "crwdns24380:0crwdne24380:0"
+		},
+		"scaleTransition": {
+			"header": "crwdns24382:0crwdne24382:0",
+			"desc": "crwdns24384:0crwdne24384:0"
+		},
+		"fadeTransition": {
+			"header": "crwdns24386:0crwdne24386:0",
+			"desc": "crwdns24388:0crwdne24388:0"
+		},
+		"expandTransition": {
+			"header": "crwdns24390:0crwdne24390:0",
+			"desc": "crwdns24392:0crwdne24392:0"
+		},
+		"customOrigin": {
+			"header": "crwdns24394:0crwdne24394:0",
+			"desc": "crwdns24396:0crwdne24396:0"
+		},
+		"todo": {
+			"header": "crwdns24398:0crwdne24398:0",
+			"desc": "crwdns24400:0crwdne24400:0"
+		}
+	},
+	"createYourOwnHeader": "crwdns24402:0crwdne24402:0",
+	"createYourOwnText1": "crwdns24404:0crwdne24404:0",
+	"createYourOwnText2": "crwdns24406:0crwdne24406:0",
+	"props": {
+		"group": "crwdns24408:0crwdne24408:0",
+		"hideOnLeave": "crwdns24410:0crwdne24410:0",
+		"leaveAbsolute": "crwdns24412:0[FLIP]crwdne24412:0",
+		"mode": "crwdns24414:0crwdne24414:0",
+		"origin": "crwdns24416:0crwdne24416:0"
+	}
 }

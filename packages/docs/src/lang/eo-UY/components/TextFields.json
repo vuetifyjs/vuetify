@@ -1,124 +1,137 @@
 {
-  "header": "crwdns13576:0crwdne13576:0",
-  "headerText": "crwdns13578:0crwdne13578:0",
-  "supplemental": [
-    "crwdns13580:0crwdne13580:0"
-  ],
-  "examples": {
-    "usage": {
-      "desc": "crwdns13582:0crwdne13582:0"
-    },
-    "singleLine": {
-      "header": "crwdns13584:0crwdne13584:0",
-      "desc": "crwdns13586:0crwdne13586:0"
-    },
-    "disabledAndReadonly": {
-      "header": "crwdns13588:0crwdne13588:0",
-      "desc": "crwdns13590:0crwdne13590:0"
-    },
-    "icon": {
-      "header": "crwdns13592:0crwdne13592:0",
-      "desc": "crwdns13594:0crwdne13594:0"
-    },
-    "clearable": {
-      "header": "crwdns13596:0crwdne13596:0",
-      "desc": "crwdns13598:0crwdne13598:0"
-    },
-    "iconEvents": {
-      "header": "crwdns13600:0crwdne13600:0",
-      "desc": "crwdns13602:0crwdne13602:0"
-    },
-    "iconSlots": {
-      "header": "crwdns13604:0crwdne13604:0",
-      "desc": "crwdns13606:0crwdne13606:0"
-    },
-    "labelSlot": {
-      "header": "crwdns13608:0crwdne13608:0",
-      "desc": "crwdns13610:0crwdne13610:0"
-    },
-    "characterCounter": {
-      "header": "crwdns13612:0crwdne13612:0",
-      "desc": "crwdns13614:0crwdne13614:0"
-    },
-    "password": {
-      "header": "crwdns13616:0crwdne13616:0",
-      "desc": "crwdns13618:0crwdne13618:0"
-    },
-    "validation": {
-      "header": "crwdns13620:0crwdne13620:0",
-      "desc": "crwdns13622:0crwdne13622:0"
-    },
-    "fullWidthWithCharacterCounter": {
-      "header": "crwdns13624:0crwdne13624:0",
-      "desc": "crwdns13626:0crwdne13626:0"
-    },
-    "hint": {
-      "header": "crwdns13628:0crwdne13628:0",
-      "desc": "crwdns13630:0crwdne13630:0"
-    },
-    "prefixesAndSuffixes": {
-      "header": "crwdns13632:0crwdne13632:0",
-      "desc": "crwdns13634:0crwdne13634:0"
-    },
-    "customValidation": {
-      "header": "crwdns13636:0crwdne13636:0",
-      "desc": "crwdns13638:0[vuelidate]crwdnd13638:0[vee-validation]crwdne13638:0"
-    },
-    "box": {
-      "header": "crwdns13640:0crwdne13640:0",
-      "desc": "crwdns13642:0crwdne13642:0"
-    },
-    "solo": {
-      "header": "crwdns13644:0crwdne13644:0",
-      "desc": "crwdns13646:0crwdne13646:0"
-    },
-    "outline": {
-      "header": "crwdns13648:0crwdne13648:0",
-      "desc": "crwdns13650:0crwdne13650:0"
-    },
-    "customColors": {
-      "header": "crwdns13652:0crwdne13652:0",
-      "desc": "crwdns13654:0crwdne13654:0"
-    },
-    "masks": {
-      "header": "crwdns13656:0crwdne13656:0",
-      "desc": "crwdns13658:0crwdne13658:0"
-    },
-    "progressBar": {
-      "header": "crwdns13660:0crwdne13660:0",
-      "desc": "crwdns13662:0crwdne13662:0"
-    }
-  },
-  "props": {
-    "appendOuterIcon": "crwdns13664:0crwdne13664:0",
-    "autoGrow": "crwdns13668:0crwdne13668:0",
-    "autofocus": "crwdns13670:0crwdne13670:0",
-    "box": "crwdns13672:0crwdne13672:0",
-    "browserAutocomplete": "crwdns13674:0crwdne13674:0",
-    "clearIcon": "crwdns13676:0crwdne13676:0",
-    "counter": "crwdns13680:0crwdne13680:0",
-    "flat": "crwdns13682:0crwdne13682:0",
-    "fullWidth": "crwdns13684:0crwdne13684:0",
-    "multiLine": "crwdns13686:0crwdne13686:0",
-    "noResize": "crwdns13688:0crwdne13688:0",
-    "outline": "crwdns13690:0crwdne13690:0",
-    "placeholder": "crwdns13692:0crwdne13692:0",
-    "prefix": "crwdns13694:0crwdne13694:0",
-    "prependInnerIcon": "crwdns13696:0crwdne13696:0",
-    "reverse": "crwdns13700:0crwdne13700:0",
-    "rows": "crwdns13702:0crwdne13702:0",
-    "rowHeight": "crwdns13704:0crwdne13704:0",
-    "solo": "crwdns13706:0crwdne13706:0",
-    "soloInverted": "crwdns13708:0crwdne13708:0",
-    "suffix": "crwdns13710:0crwdne13710:0",
-    "textarea": "crwdns13712:0crwdne13712:0",
-    "toggleKeys": "crwdns13714:0crwdne13714:0",
-    "type": "crwdns13716:0crwdne13716:0"
-  },
-  "events": {
-    "change": "crwdns13718:0crwdne13718:0",
-    "click:append-outer": "crwdns13720:0crwdne13720:0",
-    "click:prepend-inner": "crwdns13722:0crwdne13722:0",
-    "update:error": "crwdns13724:0crwdne13724:0"
-  }
+	"header": "crwdns27196:0crwdne27196:0",
+	"headerText": "crwdns27198:0crwdne27198:0",
+	"examples": {
+		"usage": {
+			"desc": "crwdns27202:0crwdne27202:0"
+		},
+		"singleLine": {
+			"header": "crwdns27204:0crwdne27204:0",
+			"desc": "crwdns27206:0crwdne27206:0"
+		},
+		"shaped": {
+			"header": "crwdns35898:0crwdne35898:0",
+			"desc": "crwdns35900:0crwdne35900:0"
+		},
+		"disabledAndReadonly": {
+			"header": "crwdns27208:0crwdne27208:0",
+			"desc": "crwdns27210:0crwdne27210:0"
+		},
+		"icon": {
+			"header": "crwdns27212:0crwdne27212:0",
+			"desc": "crwdns27214:0crwdne27214:0"
+		},
+		"clearable": {
+			"header": "crwdns27216:0crwdne27216:0",
+			"desc": "crwdns27218:0crwdne27218:0"
+		},
+		"iconEvents": {
+			"header": "crwdns27220:0crwdne27220:0",
+			"desc": "crwdns27222:0crwdne27222:0"
+		},
+		"iconSlots": {
+			"header": "crwdns27224:0crwdne27224:0",
+			"desc": "crwdns27226:0crwdne27226:0"
+		},
+		"labelSlot": {
+			"header": "crwdns27228:0crwdne27228:0",
+			"desc": "crwdns27230:0crwdne27230:0"
+		},
+		"characterCounter": {
+			"header": "crwdns27232:0crwdne27232:0",
+			"desc": "crwdns27234:0crwdne27234:0"
+		},
+		"password": {
+			"header": "crwdns27236:0crwdne27236:0",
+			"desc": "crwdns27238:0crwdne27238:0"
+		},
+		"validation": {
+			"header": "crwdns27240:0crwdne27240:0",
+			"desc": "crwdns27242:0crwdne27242:0"
+		},
+		"fullWidthWithCharacterCounter": {
+			"header": "crwdns27244:0crwdne27244:0",
+			"desc": "crwdns27246:0crwdne27246:0"
+		},
+		"hint": {
+			"header": "crwdns27248:0crwdne27248:0",
+			"desc": "crwdns27250:0crwdne27250:0"
+		},
+		"prefixesAndSuffixes": {
+			"header": "crwdns27252:0crwdne27252:0",
+			"desc": "crwdns27254:0crwdne27254:0"
+		},
+		"customValidation": {
+			"header": "crwdns27256:0crwdne27256:0",
+			"desc": "crwdns27258:0[vuelidate]crwdnd27258:0[vee-validation]crwdne27258:0"
+		},
+		"box": {
+			"header": "crwdns27260:0crwdne27260:0",
+			"desc": "crwdns27262:0crwdne27262:0"
+		},
+		"solo": {
+			"header": "crwdns27264:0crwdne27264:0",
+			"desc": "crwdns27266:0crwdne27266:0"
+		},
+		"outline": {
+			"header": "crwdns27268:0crwdne27268:0",
+			"desc": "crwdns27270:0crwdne27270:0"
+		},
+		"customColors": {
+			"header": "crwdns27272:0crwdne27272:0",
+			"desc": "crwdns27274:0crwdne27274:0"
+		},
+		"masks": {
+			"header": "crwdns35902:0crwdne35902:0",
+			"desc": "crwdns35904:0crwdne35904:0"
+		},
+		"progressBar": {
+			"header": "crwdns27280:0crwdne27280:0",
+			"desc": "crwdns27282:0crwdne27282:0"
+		}
+	},
+	"props": {
+		"appendOuterIcon": "crwdns27284:0crwdne27284:0",
+		"autoGrow": "crwdns27286:0crwdne27286:0",
+		"autofocus": "crwdns27288:0crwdne27288:0",
+		"filled": "crwdns35906:0crwdne35906:0",
+		"browserAutocomplete": "crwdns27292:0crwdne27292:0",
+		"clearIcon": "crwdns27294:0crwdne27294:0",
+		"counter": "crwdns27296:0crwdne27296:0",
+		"flat": "crwdns27298:0crwdne27298:0",
+		"fullWidth": "crwdns35908:0crwdne35908:0",
+		"multiLine": "crwdns27302:0crwdne27302:0",
+		"noResize": "crwdns27304:0crwdne27304:0",
+		"outlined": "crwdns35910:0crwdne35910:0",
+		"placeholder": "crwdns27308:0crwdne27308:0",
+		"prefix": "crwdns27310:0crwdne27310:0",
+		"prependInnerIcon": "crwdns27312:0crwdne27312:0",
+		"reverse": "crwdns27314:0crwdne27314:0",
+		"rounded": "crwdns35912:0crwdne35912:0",
+		"rows": "crwdns27316:0crwdne27316:0",
+		"rowHeight": "crwdns27318:0crwdne27318:0",
+		"solo": "crwdns27320:0crwdne27320:0",
+		"soloInverted": "crwdns27322:0crwdne27322:0",
+		"suffix": "crwdns27324:0crwdne27324:0",
+		"textarea": "crwdns27326:0crwdne27326:0",
+		"toggleKeys": "crwdns27328:0crwdne27328:0",
+		"type": "crwdns27330:0crwdne27330:0",
+		"value": "crwdns27332:0crwdne27332:0",
+		"shaped": "crwdns35914:0crwdne35914:0"
+	},
+	"slots": {
+		"append": "crwdns27334:0crwdne27334:0",
+		"append-outer": "crwdns27336:0crwdne27336:0",
+		"prepend": "crwdns27338:0crwdne27338:0",
+		"prepend-inner": "crwdns27340:0crwdne27340:0"
+	},
+	"events": {
+		"change": "crwdns27342:0crwdne27342:0",
+		"click:append": "crwdns27344:0crwdne27344:0",
+		"click:append-outer": "crwdns27346:0crwdne27346:0",
+		"click:clear": "crwdns27348:0crwdne27348:0",
+		"click:prepend": "crwdns27350:0crwdne27350:0",
+		"click:prepend-inner": "crwdns27352:0crwdne27352:0",
+		"update:error": "crwdns27354:0crwdne27354:0"
+	}
 }
