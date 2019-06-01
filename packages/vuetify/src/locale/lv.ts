@@ -17,6 +17,9 @@ export default {
       sortNone: ': Nav sakārtots. Aktivizēt, lai sakārtotu augošā secībā.'
     }
   },
+  datePicker: {
+    itemsSelected: '{0} izvēlēts'
+  },
   noDataText: 'Nav pieejamu datu',
   carousel: {
     prev: 'Iepriekšējais slaids',

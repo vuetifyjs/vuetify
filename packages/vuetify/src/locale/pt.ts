@@ -10,6 +10,9 @@ export default {
   dataTable: {
     rowsPerPageText: 'Linhas por página:'
   },
+  datePicker: {
+    itemsSelected: '{0} selecionados'
+  },
   noDataText: 'Não há dados disponíveis',
   carousel: {
     prev: 'Visual anterior',

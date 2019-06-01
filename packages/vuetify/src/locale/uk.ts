@@ -10,6 +10,9 @@ export default {
   dataTable: {
     rowsPerPageText: 'Рядків на сторінці:'
   },
+  datePicker: {
+    itemsSelected: '{0} вибрано'
+  },
   noDataText: 'Немає даних для відображення',
   carousel: {
     prev: 'Попередній візуальний',

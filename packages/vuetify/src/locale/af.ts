@@ -10,6 +10,9 @@ export default {
   dataTable: {
     rowsPerPageText: 'Rye per bladsy:'
   },
+  datePicker: {
+    itemsSelected: '{0} gekies'
+  },
   noDataText: 'Geen data is beskikbaar nie',
   carousel: {
     prev: 'Vorige visuele',

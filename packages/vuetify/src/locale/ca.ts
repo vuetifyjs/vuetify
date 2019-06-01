@@ -10,6 +10,9 @@ export default {
   dataTable: {
     rowsPerPageText: 'Files per pàgina:'
   },
+  datePicker: {
+    itemsSelected: '{0} seleccionats'
+  },
   noDataText: 'Sense dades',
   carousel: {
     prev: 'Visualització prèvia',

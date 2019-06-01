@@ -10,6 +10,9 @@ export default {
   dataTable: {
     rowsPerPageText: 'Редова по страници:'
   },
+  datePicker: {
+    itemsSelected: '{0} одабрано'
+  },
   noDataText: 'Нема доступних података',
   carousel: {
     prev: 'Превиоус висуал',

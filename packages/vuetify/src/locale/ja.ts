@@ -10,6 +10,9 @@ export default {
   dataTable: {
     rowsPerPageText: '1ページあたりの行数：'
   },
+  datePicker: {
+    itemsSelected: '{0}日付選択'
+  },
   noDataText: 'データはありません。',
   carousel: {
     prev: '前のビジュアル',

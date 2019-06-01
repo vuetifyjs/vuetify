@@ -10,6 +10,9 @@ export default {
   dataTable: {
     rowsPerPageText: 'الصفوف لكل صفحة:'
   },
+  datePicker: {
+    itemsSelected: '{0} المحدد'
+  },
   noDataText: 'لا توجد بيانات متاحة',
   carousel: {
     prev: 'الصورة السابقة',

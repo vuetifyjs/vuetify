@@ -10,6 +10,9 @@ export default {
   dataTable: {
     rowsPerPageText: 'Sayfa başına satır:'
   },
+  datePicker: {
+    itemsSelected: '{0} seçildi'
+  },
   noDataText: 'Uygun veri yok',
   carousel: {
     prev: 'Önceki görsel',

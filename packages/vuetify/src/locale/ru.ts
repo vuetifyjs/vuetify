@@ -11,6 +11,9 @@ export default {
   dataTable: {
     rowsPerPageText: 'Строк на странице:'
   },
+  datePicker: {
+    itemsSelected: '{0} выбран'
+  },
   noDataText: 'Отсутствуют данные',
   carousel: {
     prev: 'Предыдущий визуальный',

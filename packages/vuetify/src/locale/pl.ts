@@ -10,6 +10,9 @@ export default {
   dataTable: {
     rowsPerPageText: 'Wierszy na stronie:'
   },
+  datePicker: {
+    itemsSelected: '{0} dat(y)'
+  },
   noDataText: 'Brak danych',
   carousel: {
     prev: 'Poprzedni obraz',

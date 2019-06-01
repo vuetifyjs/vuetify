@@ -10,6 +10,9 @@ export default {
   dataTable: {
     rowsPerPageText: 'Γραμμές ανά σελίδα:'
   },
+  datePicker: {
+    itemsSelected: '{0} επιλεγμένα'
+  },
   noDataText: 'Χωρίς δεδομένα',
   carousel: {
     prev: 'הקודם חזותי',

@@ -10,6 +10,9 @@ export default {
   dataTable: {
     rowsPerPageText: 'Rânduri pe pagină:'
   },
+  datePicker: {
+    itemsSelected: '{0} selectate'
+  },
   noDataText: 'Nu există date disponibile',
   carousel: {
     prev: 'Anterior vizual',

@@ -10,6 +10,9 @@ export default {
   dataTable: {
     rowsPerPageText: 'ردیف در صفحه:'
   },
+  datePicker: {
+    itemsSelected: '{0} انتخاب شده است'
+  },
   noDataText: 'اطلاعاتی یافت نشد',
   carousel: {
     prev: 'تصویر قبلی',

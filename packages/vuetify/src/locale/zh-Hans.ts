@@ -10,6 +10,9 @@ export default {
   dataTable: {
     rowsPerPageText: '每页行数：'
   },
+  datePicker: {
+    itemsSelected: '{0}选中'
+  },
   noDataText: '无可用数据',
   carousel: {
     prev: '以前的视觉',

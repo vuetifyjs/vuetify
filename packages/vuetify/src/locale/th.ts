@@ -10,6 +10,9 @@ export default {
   dataTable: {
     rowsPerPageText: 'แถวต่อหน้า:'
   },
+  datePicker: {
+    itemsSelected: 'เลือก {0} วัน'
+  },
   noDataText: 'ไม่มีข้อมูล',
   carousel: {
     prev: 'ภาพก่อนหน้า',

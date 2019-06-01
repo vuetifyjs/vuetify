@@ -10,6 +10,9 @@ export default {
   dataTable: {
     rowsPerPageText: 'Elem oldalanként:'
   },
+  datePicker: {
+    itemsSelected: '{0} kiválaszta/-ott'
+  },
   noDataText: 'Nincs elérhető adat',
   carousel: {
     prev: 'Korábbi vizuális',

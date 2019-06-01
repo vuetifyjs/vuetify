@@ -10,6 +10,9 @@ export default {
   dataTable: {
     rowsPerPageText: 'Ridu leheküljel:'
   },
+  datePicker: {
+    itemsSelected: '{0} valitud'
+  },
   noDataText: 'Andmed puuduvad',
   carousel: {
     prev: 'Eelmine visuaalne',

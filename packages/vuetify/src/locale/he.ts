@@ -10,6 +10,9 @@ export default {
   dataTable: {
     rowsPerPageText: 'שורות לעמוד:'
   },
+  datePicker: {
+    itemsSelected: '{0} נבחרו'
+  },
   noDataText: 'אין נתונים זמינים',
   carousel: {
     prev: 'מצג קודם',

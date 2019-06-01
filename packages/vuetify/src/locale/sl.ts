@@ -10,6 +10,9 @@ export default {
   dataTable: {
     rowsPerPageText: 'Vrstic na stran:'
   },
+  datePicker: {
+    itemsSelected: '{0} izbrano/-ih'
+  },
   noDataText: 'Ni podatkov',
   carousel: {
     prev: 'Prejšnji prikaz',
