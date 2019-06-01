@@ -1,68 +1,94 @@
 {
-  "header": "crwdns13434:0crwdne13434:0",
-  "headerText": "crwdns13436:0crwdne13436:0",
-  "examples": {
-    "usage": {
-      "desc": "crwdns13438:0crwdne13438:0"
-    },
-    "fixedTabs": {
-      "header": "crwdns13440:0crwdne13440:0",
-      "desc": "crwdns13442:0crwdne13442:0"
-    },
-    "right": {
-      "header": "crwdns13444:0crwdne13444:0",
-      "desc": "crwdns13446:0crwdne13446:0"
-    },
-    "content": {
-      "header": "crwdns13448:0crwdne13448:0",
-      "desc": "crwdns13450:0crwdne13450:0"
-    },
-    "search": {
-      "header": "crwdns13452:0crwdne13452:0",
-      "desc": "crwdns13454:0crwdne13454:0"
-    },
-    "iconsAndText": {
-      "header": "crwdns13456:0crwdne13456:0",
-      "desc": "crwdns13458:0crwdne13458:0"
-    },
-    "desktop": {
-      "header": "crwdns13460:0crwdne13460:0",
-      "desc": "crwdns13462:0crwdne13462:0"
-    },
-    "alignWithTitle": {
-      "header": "crwdns13464:0crwdne13464:0",
-      "desc": "crwdns13466:0crwdne13466:0"
-    },
-    "grow": {
-      "header": "crwdns13468:0crwdne13468:0",
-      "desc": "crwdns13470:0crwdne13470:0"
-    },
-    "overflowToMenu": {
-      "header": "crwdns13472:0crwdne13472:0",
-      "desc": "crwdns13474:0crwdne13474:0"
-    },
-    "pagination": {
-      "header": "crwdns13476:0crwdne13476:0",
-      "desc": "crwdns13478:0crwdne13478:0"
-    },
-    "icons": {
-      "header": "crwdns13480:0crwdne13480:0",
-      "desc": "crwdns13482:0crwdne13482:0"
-    }
-  },
-  "props": {
-    "alignWithTitle": "crwdns13484:0crwdne13484:0",
-    "cycle": "crwdns13486:0crwdne13486:0",
-    "grow": "crwdns13488:0crwdne13488:0",
-    "hideSlider": "crwdns13490:0crwdne13490:0",
-    "iconsAndText": "crwdns13492:0crwdne13492:0",
-    "prevIcon": "crwdns13494:0crwdne13494:0",
-    "nextIcon": "crwdns13496:0crwdne13496:0",
-    "reverseTransition": "crwdns13498:0crwdne13498:0",
-    "right": "crwdns13500:0crwdne13500:0",
-    "showArrows": "crwdns13502:0crwdne13502:0",
-    "sliderColor": "crwdns13504:0crwdne13504:0",
-    "touchless": "crwdns13506:0crwdne13506:0",
-    "transition": "crwdns13508:0crwdne13508:0"
-  }
+	"header": "crwdns27624:0crwdne27624:0",
+	"headerText": "crwdns27626:0crwdne27626:0",
+	"examples": {
+		"usage": {
+			"desc": "crwdns27628:0[v-item-group]crwdne27628:0"
+		},
+		"fixedTabs": {
+			"header": "crwdns27630:0crwdne27630:0",
+			"desc": "crwdns27632:0crwdne27632:0"
+		},
+		"right": {
+			"header": "crwdns27634:0crwdne27634:0",
+			"desc": "crwdns27636:0crwdne27636:0"
+		},
+		"content": {
+			"header": "crwdns27638:0crwdne27638:0",
+			"desc": "crwdns27640:0crwdne27640:0"
+		},
+		"dynamicHeight": {
+			"header": "crwdns27642:0crwdne27642:0",
+			"desc": "crwdns27644:0crwdne27644:0"
+		},
+		"iconsAndText": {
+			"header": "crwdns27646:0crwdne27646:0",
+			"desc": "crwdns27648:0crwdne27648:0"
+		},
+		"desktop": {
+			"header": "crwdns27650:0crwdne27650:0",
+			"desc": "crwdns27652:0crwdne27652:0"
+		},
+		"alignWithTitle": {
+			"header": "crwdns27654:0crwdne27654:0",
+			"desc": "crwdns27656:0crwdne27656:0"
+		},
+		"grow": {
+			"header": "crwdns27658:0crwdne27658:0",
+			"desc": "crwdns27660:0crwdne27660:0"
+		},
+		"centerActive": {
+			"header": "crwdns35936:0crwdne35936:0",
+			"desc": "crwdns35938:0crwdne35938:0"
+		},
+		"overflowToMenu": {
+			"header": "crwdns27662:0crwdne27662:0",
+			"desc": "crwdns27664:0crwdne27664:0"
+		},
+		"pagination": {
+			"header": "crwdns27666:0crwdne27666:0",
+			"desc": "crwdns27668:0crwdne27668:0"
+		},
+		"icons": {
+			"header": "crwdns27670:0crwdne27670:0",
+			"desc": "crwdns27672:0crwdne27672:0"
+		},
+		"dynamic": {
+			"header": "crwdns27674:0crwdne27674:0",
+			"desc": "crwdns27676:0crwdne27676:0"
+		},
+		"vertical": {
+			"header": "crwdns27678:0crwdne27678:0",
+			"desc": "crwdns27680:0crwdne27680:0"
+		}
+	},
+	"props": {
+		"activeClass": "crwdns27682:0crwdne27682:0",
+		"alignWithTitle": "crwdns27684:0crwdne27684:0",
+		"backgroundColor": "crwdns27686:0crwdne27686:0",
+		"centerActive": "crwdns35940:0crwdne35940:0",
+		"cycle": "crwdns27688:0crwdne27688:0",
+		"dark": "crwdns27690:0crwdne27690:0",
+		"grow": "crwdns27692:0crwdne27692:0",
+		"hideSlider": "crwdns27694:0crwdne27694:0",
+		"iconsAndText": "crwdns27696:0crwdne27696:0",
+		"light": "crwdns27698:0crwdne27698:0",
+		"optional": "crwdns27700:0crwdne27700:0",
+		"prevIcon": "crwdns27702:0crwdne27702:0",
+		"nextIcon": "crwdns27704:0crwdne27704:0",
+		"reverseTransition": "crwdns27706:0crwdne27706:0",
+		"right": "crwdns27708:0crwdne27708:0",
+		"showArrows": "crwdns27710:0crwdne27710:0",
+		"sliderColor": "crwdns27712:0crwdne27712:0",
+		"touchless": "crwdns27714:0crwdne27714:0",
+		"transition": "crwdns27716:0crwdne27716:0"
+	},
+	"events": {
+		"v-tabs": {
+			"change": "crwdns27718:0crwdne27718:0"
+		},
+		"v-tabs-items": {
+			"change": "crwdns27720:0crwdne27720:0"
+		}
+	}
 }
