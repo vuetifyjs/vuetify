@@ -41,7 +41,7 @@
       multiple: false,
       disabled: false,
       readonly: false,
-      focusable: false
-    })
+      focusable: false,
+    }),
   }
 </script>
