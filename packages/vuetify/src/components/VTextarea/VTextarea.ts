@@ -57,7 +57,7 @@ export default baseMixins.extend({
 
   watch: {
     lazyValue () {
-      !this.internalChange && this.autoGrow && this.$nextTick(this.calculateInputHeight)
+      this.autoGrow && this.$nextTick(this.calculateInputHeight)
     }
   },
 
@@ -100,7 +100,6 @@ export default baseMixins.extend({
         e.stopPropagation()
       }
 
-      this.internalChange = true
       this.$emit('keydown', e)
     }
   }

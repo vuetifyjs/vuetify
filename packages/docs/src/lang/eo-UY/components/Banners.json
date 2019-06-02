@@ -1,0 +1,34 @@
+{
+	"header": "crwdns28188:0crwdne28188:0",
+	"headerText": "crwdns28190:0crwdne28190:0",
+	"examples": {
+		"usage": {
+			"desc": "crwdns28192:0crwdne28192:0"
+		},
+		"single-line": {
+			"header": "crwdns28194:0crwdne28194:0",
+			"desc": "crwdns28196:0crwdne28196:0"
+		},
+		"two-line": {
+			"header": "crwdns28198:0crwdne28198:0",
+			"desc": "crwdns28200:0crwdne28200:0"
+		},
+		"icon-slot": {
+			"header": "crwdns28202:0crwdne28202:0",
+			"desc": "crwdns28204:0crwdne28204:0"
+		},
+		"icon-event": {
+			"header": "crwdns28206:0crwdne28206:0",
+			"desc": "crwdns28208:0crwdne28208:0"
+		},
+		"scoped-slots": {
+			"header": "crwdns28210:0crwdne28210:0",
+			"desc": "crwdns28212:0crwdne28212:0"
+		}
+	},
+	"props": {
+		"icon": "crwdns28214:0crwdne28214:0",
+		"iconColor": "crwdns28216:0crwdne28216:0",
+		"sticky": "crwdns28218:0crwdne28218:0"
+	}
+}
