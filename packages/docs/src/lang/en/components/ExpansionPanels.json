@@ -21,6 +21,10 @@
       "header": "### Inset",
       "desc": "**inset** expansion-panel becomes smaller when activated."
     },
+    "accordion": {
+      "header": "### Accordion",
+      "desc": "**accordion** expansion-panel hasn't got margins around active panel."
+    },
     "customIcons": {
       "header": "### Custom icon",
       "desc": "Expand action icon can be customized with `expand-icon` prop or the `actions` slot."
