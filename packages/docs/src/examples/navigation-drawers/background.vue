@@ -35,8 +35,8 @@
       items: [
         ['mdi-email', 'Inbox'],
         ['mdi-account-supervisor-circle', 'Supervisors'],
-        ['mdi-clock-start', 'Clock-in']
-      ]
-    })
+        ['mdi-clock-start', 'Clock-in'],
+      ],
+    }),
   }
 </script>

@@ -34,7 +34,7 @@ export function createRouter () {
         children: [
           ...Object.keys(redirects).map(k => ({
             path: k.replace(/^\//, ''),
-            redirect: () => redirects[k].replace(/^\//, '')
+            redirect: () => redirects[k].replace(/^\//, ''),
           })),
           {
             path: '',
@@ -42,7 +42,7 @@ export function createRouter () {
             component: () => import(
               /* webpackChunkName: "home" */
               '@/pages/home/Page.vue'
-            )
+            ),
           },
           {
             path: 'examples/layouts/:page',
@@ -51,7 +51,7 @@ export function createRouter () {
             component: () => import(
               /* webpackChunkName: "layouts" */
               '@/views/Layouts.vue'
-            )
+            ),
           },
           {
             path: ':namespace/:page/:section?',
@@ -59,12 +59,12 @@ export function createRouter () {
             props: route => ({
               namespace: route.params.namespace,
               page: route.params.page,
-              lang: route.params.lang
+              lang: route.params.lang,
             }),
             component: () => import(
               /* webpackChunkName: "documentation" */
               '@/pages/documentation/Page.vue'
-            )
+            ),
           },
           {
             path: '*',
@@ -73,9 +73,9 @@ export function createRouter () {
               if (!languageRegex.test(lang)) lang = `/${fallbackLocale}`
 
               return `${lang}`
-            }
-          }
-        ]
+            },
+          },
+        ],
       },
       {
         path: '*',
@@ -84,9 +84,9 @@ export function createRouter () {
           if (!languageRegex.test(lang)) lang = `/${fallbackLocale}`
 
           return `${lang}/404`
-        }
-      }
-    ]
+        },
+      },
+    ],
   })
 
   Vue.use(VueAnalytics, {
@@ -94,13 +94,13 @@ export function createRouter () {
     router,
     autoTracking: {
       page: process.env.NODE_ENV !== 'development',
-      pageviewOnLoad: false
+      pageviewOnLoad: false,
     },
     debug: process.env.DEBUG ? {
       enabled: true,
       trace: false,
-      sendHitTask: true
-    } : false
+      sendHitTask: true,
+    } : false,
   })
 
   return router

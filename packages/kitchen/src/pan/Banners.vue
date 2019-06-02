@@ -238,13 +238,13 @@
       v1: true,
       v2: true,
       v3: true,
-      v4: true
+      v4: true,
     }),
 
     methods: {
       alert () {
         alert('Clicked on icon')
-      }
-    }
+      },
+    },
   }
 </script>

@@ -27,8 +27,8 @@
   export default {
     data () {
       return {
-        value: 15
+        value: 15,
       }
-    }
+    },
   }
 </script>

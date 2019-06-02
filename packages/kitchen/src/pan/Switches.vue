@@ -70,7 +70,7 @@
       model52: false,
       model53: true,
       model61: true,
-      model62: false
-    })
+      model62: false,
+    }),
   }
 </script>

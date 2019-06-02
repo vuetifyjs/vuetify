@@ -40,7 +40,7 @@
 
     data: () => ({
       meals,
-      meal: ''
-    })
+      meal: '',
+    }),
   }
 </script>

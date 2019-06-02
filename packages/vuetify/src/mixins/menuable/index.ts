@@ -36,43 +36,43 @@ export default baseMixins.extend<options>().extend({
     dark: Boolean,
     maxWidth: {
       type: [Number, String],
-      default: 'auto'
+      default: 'auto',
     },
     minWidth: [Number, String],
     nudgeBottom: {
       type: [Number, String],
-      default: 0
+      default: 0,
     },
     nudgeLeft: {
       type: [Number, String],
-      default: 0
+      default: 0,
     },
     nudgeRight: {
       type: [Number, String],
-      default: 0
+      default: 0,
     },
     nudgeTop: {
       type: [Number, String],
-      default: 0
+      default: 0,
     },
     nudgeWidth: {
       type: [Number, String],
-      default: 0
+      default: 0,
     },
     offsetOverflow: Boolean,
     openOnClick: Boolean,
     positionX: {
       type: Number,
-      default: null
+      default: null,
     },
     positionY: {
       type: Number,
-      default: null
+      default: null,
     },
     zIndex: {
       type: [Number, String],
-      default: null
-    }
+      default: null,
+    },
   },
 
   data: () => ({
@@ -91,7 +91,7 @@ export default baseMixins.extend<options>().extend({
         height: 0,
         offsetTop: 0,
         scrollHeight: 0,
-        offsetLeft: 0
+        offsetLeft: 0,
       },
       content: {
         top: 0,
@@ -101,8 +101,8 @@ export default baseMixins.extend<options>().extend({
         width: 0,
         height: 0,
         offsetTop: 0,
-        scrollHeight: 0
-      }
+        scrollHeight: 0,
+      },
     },
     hasJustFocused: false,
     hasWindow: false,
@@ -111,7 +111,7 @@ export default baseMixins.extend<options>().extend({
     pageWidth: 0,
     pageYOffset: 0,
     stackClass: 'v-menu__content--active',
-    stackMinZIndex: 6
+    stackMinZIndex: 6,
   }),
 
   computed: {
@@ -150,7 +150,7 @@ export default baseMixins.extend<options>().extend({
     },
     hasActivator (): boolean {
       return !!this.$slots.activator || !!this.$scopedSlots.activator || !!this.activator || !!this.inputActivator
-    }
+    },
   },
 
   watch: {
@@ -163,7 +163,7 @@ export default baseMixins.extend<options>().extend({
       val ? this.callActivate() : this.callDeactivate()
     },
     positionX: 'updateDimensions',
-    positionY: 'updateDimensions'
+    positionY: 'updateDimensions',
   },
 
   beforeMount () {
@@ -181,7 +181,7 @@ export default baseMixins.extend<options>().extend({
         left: this.positionX || this.absoluteX,
         right: this.positionX || this.absoluteX,
         height: 0,
-        width: 0
+        width: 0,
       }
     },
     activate () {},
@@ -303,7 +303,7 @@ export default baseMixins.extend<options>().extend({
         bottom: Math.round(rect.bottom),
         right: Math.round(rect.right),
         width: Math.round(rect.width),
-        height: Math.round(rect.height)
+        height: Math.round(rect.height),
       }
     },
     measure (el: HTMLElement) {
@@ -373,6 +373,6 @@ export default baseMixins.extend<options>().extend({
 
         this.dimensions = dimensions
       })
-    }
-  }
+    },
+  },
 })

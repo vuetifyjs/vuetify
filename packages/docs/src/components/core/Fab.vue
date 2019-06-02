@@ -23,18 +23,18 @@
 <script>
   // Utilities
   import {
-    mapState
+    mapState,
   } from 'vuex'
 
   export default {
     name: 'AppFab',
 
     data: () => ({
-      fab: false
+      fab: false,
     }),
 
     computed: {
-      ...mapState('snackbar', ['value'])
+      ...mapState('snackbar', ['value']),
     },
 
     methods: {
@@ -50,7 +50,7 @@
       toTop () {
         this.$router.push({ hash: '' })
         this.$vuetify.goTo(0)
-      }
-    }
+      },
+    },
   }
 </script>

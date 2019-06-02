@@ -47,8 +47,8 @@
   export default {
     data: () => ({
       items: [
-        'All', 'Family', 'Friends', 'Coworkers'
-      ]
-    })
+        'All', 'Family', 'Friends', 'Coworkers',
+      ],
+    }),
   }
 </script>

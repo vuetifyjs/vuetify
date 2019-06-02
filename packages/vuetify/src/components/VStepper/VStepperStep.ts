@@ -36,33 +36,33 @@ export default baseMixins.extend<options>().extend({
   props: {
     color: {
       type: String,
-      default: 'primary'
+      default: 'primary',
     },
     complete: Boolean,
     completeIcon: {
       type: String,
-      default: '$vuetify.icons.complete'
+      default: '$vuetify.icons.complete',
     },
     editIcon: {
       type: String,
-      default: '$vuetify.icons.edit'
+      default: '$vuetify.icons.edit',
     },
     errorIcon: {
       type: String,
-      default: '$vuetify.icons.error'
+      default: '$vuetify.icons.error',
     },
     editable: Boolean,
     rules: {
       type: Array,
-      default: () => []
+      default: () => [],
     } as PropValidator<VuetifyStepperRuleValidator[]>,
-    step: [Number, String]
+    step: [Number, String],
   },
 
   data () {
     return {
       isActive: false,
-      isInactive: true
+      isInactive: true,
     }
   },
 
@@ -73,12 +73,12 @@ export default baseMixins.extend<options>().extend({
         'v-stepper__step--editable': this.editable,
         'v-stepper__step--inactive': this.isInactive,
         'v-stepper__step--error error--text': this.hasError,
-        'v-stepper__step--complete': this.complete
+        'v-stepper__step--complete': this.complete,
       }
     },
     hasError (): boolean {
       return this.rules.some(validate => validate() !== true)
-    }
+    },
   },
 
   mounted () {
@@ -104,14 +104,14 @@ export default baseMixins.extend<options>().extend({
     },
     genLabel () {
       return this.$createElement('div', {
-        staticClass: 'v-stepper__label'
+        staticClass: 'v-stepper__label',
       }, this.$slots.default)
     },
     genStep () {
       const color = (!this.hasError && (this.complete || this.isActive)) ? this.color : false
 
       return this.$createElement('span', this.setBackgroundColor(color, {
-        staticClass: 'v-stepper__step__step'
+        staticClass: 'v-stepper__step__step',
       }), this.genStepContent())
     },
     genStepContent () {
@@ -134,7 +134,7 @@ export default baseMixins.extend<options>().extend({
     toggle (step: number | string) {
       this.isActive = step.toString() === this.step.toString()
       this.isInactive = Number(step) < Number(this.step)
-    }
+    },
   },
 
   render (h): VNode {
@@ -143,12 +143,12 @@ export default baseMixins.extend<options>().extend({
       class: this.classes,
       directives: [{
         name: 'ripple',
-        value: this.editable
+        value: this.editable,
       }],
-      on: { click: this.click }
+      on: { click: this.click },
     }, [
       this.genStep(),
-      this.genLabel()
+      this.genLabel(),
     ])
-  }
+  },
 })

@@ -27,9 +27,9 @@
   export default {
     data () {
       return {
-        toggle_exclusive: []
+        toggle_exclusive: [],
       }
-    }
+    },
   }
 
 </script>

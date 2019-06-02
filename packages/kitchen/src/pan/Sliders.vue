@@ -242,11 +242,11 @@
       labels: ['spring', 'summer', 'fall', 'winter'],
       valid: 0,
       rules: [
-        v => v < 20 || 'Value too big!'
+        v => v < 20 || 'Value too big!',
       ],
       basicRange: [0, 20],
-      basicRangeDisabled: [10, 40]
-    })
+      basicRangeDisabled: [10, 40],
+    }),
   }
 </script>
 

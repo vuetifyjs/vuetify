@@ -11,5 +11,5 @@ export default Vue.extend({
     data.staticClass = (`v-list-item__icon ${data.staticClass || ''}`).trim()
 
     return h('div', data, children)
-  }
+  },
 })

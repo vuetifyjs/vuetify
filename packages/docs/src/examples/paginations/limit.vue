@@ -12,8 +12,8 @@
   export default {
     data () {
       return {
-        page: 1
+        page: 1,
       }
-    }
+    },
   }
 </script>

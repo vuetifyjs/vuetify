@@ -1563,14 +1563,14 @@
     name: 'Buttons',
 
     data: () => ({
-      loading: false
+      loading: false,
     }),
 
     watch: {
       loading (val) {
         val && setTimeout(() => (this.loading = false), 2000)
-      }
-    }
+      },
+    },
   }
 </script>
 

@@ -22,7 +22,7 @@ export class Application extends Service {
     insetFooter: {},
     right: {},
     bottom: {},
-    footer: {}
+    footer: {},
   }
 
   register (

@@ -14,7 +14,7 @@ import Validatable from '../../mixins/validatable'
 // Utilities
 import {
   convertToUnit,
-  kebabCase
+  kebabCase,
 } from '../../util/helpers'
 
 // Types
@@ -40,7 +40,7 @@ export default baseMixins.extend<options>().extend({
     appendIcon: String,
     backgroundColor: {
       type: String,
-      default: ''
+      default: '',
     },
     height: [Number, String],
     hideDetails: Boolean,
@@ -49,14 +49,14 @@ export default baseMixins.extend<options>().extend({
     loading: Boolean,
     persistentHint: Boolean,
     prependIcon: String,
-    value: null as any as PropType<any>
+    value: null as any as PropType<any>,
   },
 
   data () {
     return {
       attrsInput: {},
       lazyValue: this.value,
-      hasMouseDown: false
+      hasMouseDown: false,
     }
   },
 
@@ -71,7 +71,7 @@ export default baseMixins.extend<options>().extend({
         'v-input--is-focused': this.isFocused,
         'v-input--is-loading': this.loading !== false && this.loading !== undefined,
         'v-input--is-readonly': this.readonly,
-        ...this.themeClasses
+        ...this.themeClasses,
       }
     },
     hasHint (): boolean {
@@ -93,7 +93,7 @@ export default baseMixins.extend<options>().extend({
       set (val: any) {
         this.lazyValue = val
         this.$emit(this.$_modelEvent, val)
-      }
+      },
     },
     isDirty (): boolean {
       return !!this.lazyValue
@@ -103,13 +103,13 @@ export default baseMixins.extend<options>().extend({
     },
     isLabelActive (): boolean {
       return this.isDirty
-    }
+    },
   },
 
   watch: {
     value (val) {
       this.lazyValue = val
-    }
+    },
   },
 
   beforeCreate () {
@@ -123,21 +123,21 @@ export default baseMixins.extend<options>().extend({
       return [
         this.genPrependSlot(),
         this.genControl(),
-        this.genAppendSlot()
+        this.genAppendSlot(),
       ]
     },
     genControl () {
       return this.$createElement('div', {
-        staticClass: 'v-input__control'
+        staticClass: 'v-input__control',
       }, [
         this.genInputSlot(),
-        this.genMessages()
+        this.genMessages(),
       ])
     },
     genDefaultSlot () {
       return [
         this.genLabel(),
-        this.$slots.default
+        this.$slots.default,
       ]
     },
     genIcon (
@@ -152,7 +152,7 @@ export default baseMixins.extend<options>().extend({
           color: this.validationState,
           dark: this.dark,
           disabled: this.disabled,
-          light: this.light
+          light: this.light,
         },
         on: !(this.$listeners[eventName] || cb)
           ? undefined
@@ -169,19 +169,19 @@ export default baseMixins.extend<options>().extend({
             mouseup: (e: Event) => {
               e.preventDefault()
               e.stopPropagation()
-            }
-          }
+            },
+          },
       }
 
       return this.$createElement('div', {
         staticClass: `v-input__icon v-input__icon--${kebabCase(type)}`,
-        key: type + icon
+        key: type + icon,
       }, [
         this.$createElement(
           VIcon,
           data,
           icon
-        )
+        ),
       ])
     },
     genInputSlot () {
@@ -191,9 +191,9 @@ export default baseMixins.extend<options>().extend({
         on: {
           click: this.onClick,
           mousedown: this.onMouseDown,
-          mouseup: this.onMouseUp
+          mouseup: this.onMouseUp,
         },
-        ref: 'input-slot'
+        ref: 'input-slot',
       }), [this.genDefaultSlot()])
     },
     genLabel () {
@@ -205,8 +205,8 @@ export default baseMixins.extend<options>().extend({
           dark: this.dark,
           focused: this.hasState,
           for: this.$attrs.id,
-          light: this.light
-        }
+          light: this.light,
+        },
       }, this.$slots.label || this.label)
     },
     genMessages () {
@@ -221,8 +221,8 @@ export default baseMixins.extend<options>().extend({
           color: this.hasHint ? '' : this.validationState,
           dark: this.dark,
           light: this.light,
-          value: (this.hasMessages || this.hasHint) ? messages : []
-        }
+          value: (this.hasMessages || this.hasHint) ? messages : [],
+        },
       })
     },
     genSlot (
@@ -236,7 +236,7 @@ export default baseMixins.extend<options>().extend({
 
       return this.$createElement('div', {
         staticClass: `v-input__${ref}`,
-        ref
+        ref,
       }, slot)
     },
     genPrependSlot () {
@@ -275,14 +275,14 @@ export default baseMixins.extend<options>().extend({
     onMouseUp (e: Event) {
       this.hasMouseDown = false
       this.$emit('mouseup', e)
-    }
+    },
   },
 
   render (h): VNode {
     return h('div', this.setTextColor(this.validationState, {
       staticClass: 'v-input',
       attrs: this.attrsInput,
-      class: this.classes
+      class: this.classes,
     }), this.genContent())
-  }
+  },
 })

@@ -5,7 +5,7 @@ import { clamp } from '../../util/helpers'
 const srgbForwardMatrix = [
   [3.2406, -1.5372, -0.4986],
   [-0.9689, 1.8758, 0.0415],
-  [0.0557, -0.2040, 1.0570]
+  [0.0557, -0.2040, 1.0570],
 ]
 
 // Forward gamma adjust
@@ -19,7 +19,7 @@ const srgbForwardTransform = (C: number): number => (
 const srgbReverseMatrix = [
   [0.4124, 0.3576, 0.1805],
   [0.2126, 0.7152, 0.0722],
-  [0.0193, 0.1192, 0.9505]
+  [0.0193, 0.1192, 0.9505],
 ]
 
 // Reverse gamma adjust

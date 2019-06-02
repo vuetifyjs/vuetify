@@ -31,14 +31,14 @@ export function factory<T extends string, C extends VueConstructor | null = null
           if (!this[namespace]) return undefined
 
           return this[namespace].activeClass
-        }
+        },
       } as any as PropValidator<string>,
-      disabled: Boolean
+      disabled: Boolean,
     },
 
     data () {
       return {
-        isActive: false
+        isActive: false,
       }
     },
 
@@ -47,9 +47,9 @@ export function factory<T extends string, C extends VueConstructor | null = null
         if (!this.activeClass) return {}
 
         return {
-          [this.activeClass]: this.isActive
+          [this.activeClass]: this.isActive,
         }
-      }
+      },
     },
 
     created () {
@@ -63,8 +63,8 @@ export function factory<T extends string, C extends VueConstructor | null = null
     methods: {
       toggle () {
         this.$emit('change')
-      }
-    }
+      },
+    },
   })
 
   return R

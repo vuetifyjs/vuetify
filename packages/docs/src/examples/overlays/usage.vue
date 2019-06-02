@@ -21,7 +21,7 @@
 <script>
   export default {
     data: () => ({
-      overlay: false
-    })
+      overlay: false,
+    }),
   }
 </script>

@@ -74,7 +74,7 @@
     data: () => ({
       fab: false,
       hidden: false,
-      tabs: null
+      tabs: null,
     }),
 
     computed: {
@@ -85,7 +85,7 @@
           case 'three': return { 'color': 'green', icon: 'keyboard_arrow_up' }
           default: return {}
         }
-      }
-    }
+      },
+    },
   }
 </script>

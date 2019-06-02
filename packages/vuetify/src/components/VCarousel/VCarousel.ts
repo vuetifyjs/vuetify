@@ -27,16 +27,16 @@ export default VWindow.extend({
   props: {
     continuous: {
       type: Boolean,
-      default: true
+      default: true,
     },
     cycle: Boolean,
     delimiterIcon: {
       type: String,
-      default: '$vuetify.icons.delimiter'
+      default: '$vuetify.icons.delimiter',
     },
     height: {
       type: [Number, String],
-      default: 500
+      default: 500,
     },
     hideControls: Boolean,
     hideDelimiters: Boolean,
@@ -46,26 +46,26 @@ export default VWindow.extend({
     interval: {
       type: [Number, String],
       default: 6000,
-      validator: (value: string | number) => value > 0
+      validator: (value: string | number) => value > 0,
     },
     showArrows: {
       type: Boolean,
-      default: true
+      default: true,
     },
     mandatory: {
       type: Boolean,
-      default: true
+      default: true,
     },
     verticalDelimiters: {
       type: String,
-      default: undefined
-    } as PropValidator<'' | 'left' | 'right'>
+      default: undefined,
+    } as PropValidator<'' | 'left' | 'right'>,
   },
 
   data () {
     return {
       internalHeight: this.height,
-      slideTimeout: undefined as number | undefined
+      slideTimeout: undefined as number | undefined,
     }
   },
 
@@ -75,7 +75,7 @@ export default VWindow.extend({
         ...VWindow.options.computed.classes.call(this),
         'v-carousel': true,
         'v-carousel--hide-delimiter-background': this.hideDelimiterBackground,
-        'v-carousel--vertical-delimiters': this.isVertical
+        'v-carousel--vertical-delimiters': this.isVertical,
       }
     },
     isDark (): boolean {
@@ -83,7 +83,7 @@ export default VWindow.extend({
     },
     isVertical (): boolean {
       return this.verticalDelimiters != null
-    }
+    },
   },
 
   watch: {
@@ -100,7 +100,7 @@ export default VWindow.extend({
         clearTimeout(this.slideTimeout)
         this.slideTimeout = undefined
       }
-    }
+    },
   },
 
   created () {
@@ -125,8 +125,8 @@ export default VWindow.extend({
         staticClass: 'v-carousel__controls',
         style: {
           left: this.verticalDelimiters === 'left' && this.isVertical ? 0 : 'auto',
-          right: this.verticalDelimiters === 'right' ? 0 : 'auto'
-        }
+          right: this.verticalDelimiters === 'right' ? 0 : 'auto',
+        },
       }, [this.genItems()])
     },
     genItems (): VNode {
@@ -139,12 +139,12 @@ export default VWindow.extend({
           props: {
             icon: true,
             small: true,
-            value: this.getValue(this.items[i], i)
-          }
+            value: this.getValue(this.items[i], i),
+          },
         }, [
           this.$createElement(VIcon, {
-            props: { size: 18 }
-          }, this.delimiterIcon)
+            props: { size: 18 },
+          }, this.delimiterIcon),
         ])
 
         children.push(child)
@@ -152,13 +152,13 @@ export default VWindow.extend({
 
       return this.$createElement(ButtonGroup, {
         props: {
-          value: this.internalValue
+          value: this.internalValue,
         },
         on: {
           change: (val: any) => {
             this.internalValue = val
-          }
-        }
+          },
+        },
       }, children)
     },
     genProgress () {
@@ -166,8 +166,8 @@ export default VWindow.extend({
         staticClass: 'v-carousel__progress',
         props: {
           color: this.progressColor,
-          value: (this.internalIndex + 1) / this.items.length * 100
-        }
+          value: (this.internalIndex + 1) / this.items.length * 100,
+        },
       })
     },
     restartTimeout () {
@@ -180,7 +180,7 @@ export default VWindow.extend({
       if (!this.cycle) return
 
       this.slideTimeout = window.setTimeout(this.next, +this.interval > 0 ? +this.interval : 6000)
-    }
+    },
   },
 
   render (h): VNode {
@@ -199,5 +199,5 @@ export default VWindow.extend({
     }
 
     return render
-  }
+  },
 })

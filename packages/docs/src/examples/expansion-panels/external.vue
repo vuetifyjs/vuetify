@@ -28,7 +28,7 @@
     data () {
       return {
         panel: [],
-        items: 5
+        items: 5,
       }
     },
     methods: {
@@ -40,7 +40,7 @@
       // Reset the panel
       none () {
         this.panel = []
-      }
-    }
+      },
+    },
   }
 </script>

@@ -29,8 +29,8 @@
     methods: {
       next () {
         alert('You clicked next!')
-      }
-    }
+      },
+    },
   }
 </script>
 

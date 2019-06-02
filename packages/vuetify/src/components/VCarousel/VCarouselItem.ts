@@ -27,10 +27,10 @@ export default baseMixins.extend({
           staticClass: 'v-carousel__item',
           props: {
             ...this.$attrs,
-            height: this.windowGroup.internalHeight
+            height: this.windowGroup.internalHeight,
           },
-          on: this.$listeners
-        }, this.$slots.default)
+          on: this.$listeners,
+        }, this.$slots.default),
       ]
     },
     genWindowItem () {
@@ -39,7 +39,7 @@ export default baseMixins.extend({
       data.staticClass = 'v-window-item'
       data.directives!.push({
         name: 'show',
-        value: this.isActive
+        value: this.isActive,
       })
 
       return this.$createElement(tag, data, this.showLazyContent(this.genDefaultSlot()))
@@ -48,6 +48,6 @@ export default baseMixins.extend({
     onEnter () { /* noop */ },
     onAfterEnter () { /* noop */ },
     onBeforeLeave () { /* noop */ },
-    onEnterCancelled () { /* noop */ }
-  }
+    onEnterCancelled () { /* noop */ },
+  },
 })

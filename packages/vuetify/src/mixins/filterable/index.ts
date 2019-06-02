@@ -7,7 +7,7 @@ export default Vue.extend({
   props: {
     noDataText: {
       type: String,
-      default: '$vuetify.noDataText'
-    }
-  }
+      default: '$vuetify.noDataText',
+    },
+  },
 })

@@ -3,7 +3,7 @@ import './VProgressLinear.sass'
 // Components
 import {
   VFadeTransition,
-  VSlideXTransition
+  VSlideXTransition,
 } from '../transitions'
 
 // Mixins
@@ -34,27 +34,27 @@ export default baseMixins.extend({
   props: {
     active: {
       type: Boolean,
-      default: true
+      default: true,
     },
     backgroundColor: {
       type: String,
-      default: null
+      default: null,
     },
     backgroundOpacity: {
       type: [Number, String],
-      default: null
+      default: null,
     },
     bufferValue: {
       type: [Number, String],
-      default: 100
+      default: 100,
     },
     color: {
       type: String,
-      default: 'primary'
+      default: 'primary',
     },
     height: {
       type: [Number, String],
-      default: 4
+      default: 4,
     },
     indeterminate: Boolean,
     query: Boolean,
@@ -63,13 +63,13 @@ export default baseMixins.extend({
     striped: Boolean,
     value: {
       type: [Number, String],
-      default: 0
-    }
+      default: 0,
+    },
   },
 
   data () {
     return {
-      internalLazyValue: this.value || 0
+      internalLazyValue: this.value || 0,
     }
   },
 
@@ -77,7 +77,7 @@ export default baseMixins.extend({
     __cachedBackground (): VNode {
       return this.$createElement('div', this.setBackgroundColor(this.backgroundColor || this.color, {
         staticClass: 'v-progress-linear__background',
-        style: this.backgroundStyle
+        style: this.backgroundStyle,
       }))
     },
     __cachedBar (): VNode {
@@ -89,26 +89,26 @@ export default baseMixins.extend({
     __cachedBuffer (): VNode {
       return this.$createElement('div', {
         staticClass: 'v-progress-linear__buffer',
-        style: this.styles
+        style: this.styles,
       })
     },
     __cachedDeterminate (): VNode {
       return this.$createElement('div', this.setBackgroundColor(this.color, {
         staticClass: `v-progress-linear__determinate`,
         style: {
-          width: convertToUnit(this.normalizedValue, '%')
-        }
+          width: convertToUnit(this.normalizedValue, '%'),
+        },
       }))
     },
     __cachedIndeterminate (): VNode {
       return this.$createElement('div', {
         staticClass: 'v-progress-linear__indeterminate',
         class: {
-          'v-progress-linear__indeterminate--active': this.active
-        }
+          'v-progress-linear__indeterminate--active': this.active,
+        },
       }, [
         this.genProgressBar('long'),
-        this.genProgressBar('short')
+        this.genProgressBar('short'),
       ])
     },
     __cachedStream (): VNode | null {
@@ -117,8 +117,8 @@ export default baseMixins.extend({
       return this.$createElement('div', this.setTextColor(this.color, {
         staticClass: 'v-progress-linear__stream',
         style: {
-          width: convertToUnit(100 - this.normalizedBuffer, '%')
-        }
+          width: convertToUnit(100 - this.normalizedBuffer, '%'),
+        },
       }))
     },
     backgroundStyle (): object {
@@ -128,7 +128,7 @@ export default baseMixins.extend({
 
       return {
         opacity: backgroundOpacity,
-        width: convertToUnit(this.normalizedBuffer, '%')
+        width: convertToUnit(this.normalizedBuffer, '%'),
       }
     },
     classes (): object {
@@ -139,7 +139,7 @@ export default baseMixins.extend({
         'v-progress-linear--reactive': this.reactive,
         'v-progress-linear--rounded': this.rounded,
         'v-progress-linear--striped': this.striped,
-        ...this.themeClasses
+        ...this.themeClasses,
       }
     },
     computedTransition (): FunctionalComponentOptions {
@@ -166,7 +166,7 @@ export default baseMixins.extend({
       }
 
       return styles
-    }
+    },
   },
 
   methods: {
@@ -176,7 +176,7 @@ export default baseMixins.extend({
       if (!slot) return null
 
       return this.$createElement('div', {
-        staticClass: 'v-progress-linear__content'
+        staticClass: 'v-progress-linear__content',
       }, slot)
     },
     genListeners () {
@@ -192,8 +192,8 @@ export default baseMixins.extend({
       return this.$createElement('div', this.setBackgroundColor(this.color, {
         staticClass: 'v-progress-linear__indeterminate',
         class: {
-          [name]: true
-        }
+          [name]: true,
+        },
       }))
     },
     onClick (e: MouseEvent) {
@@ -207,7 +207,7 @@ export default baseMixins.extend({
       if (value < 0) return 0
       if (value > 100) return 100
       return parseFloat(value)
-    }
+    },
   },
 
   render (h): VNode {
@@ -217,15 +217,15 @@ export default baseMixins.extend({
         'role': 'progressbar',
         'aria-valuemin': 0,
         'aria-valuemax': this.normalizedBuffer,
-        'aria-valuenow': this.indeterminate ? undefined : this.normalizedValue
+        'aria-valuenow': this.indeterminate ? undefined : this.normalizedValue,
       },
       class: this.classes,
       style: {
         bottom: this.bottom ? 0 : undefined,
         height: this.active ? convertToUnit(this.height) : 0,
-        top: this.top ? 0 : undefined
+        top: this.top ? 0 : undefined,
       },
-      on: this.genListeners()
+      on: this.genListeners(),
     }
 
     return h('div', data, [
@@ -233,7 +233,7 @@ export default baseMixins.extend({
       this.__cachedBackground,
       this.__cachedBuffer,
       this.__cachedBar,
-      this.genContent()
+      this.genContent(),
     ])
-  }
+  },
 })

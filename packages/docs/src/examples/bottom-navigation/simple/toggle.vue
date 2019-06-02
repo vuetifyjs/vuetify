@@ -39,8 +39,8 @@
     data () {
       return {
         activeBtn: 1,
-        showNav: true
+        showNav: true,
       }
-    }
+    },
   }
 </script>

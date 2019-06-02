@@ -25,18 +25,18 @@ export default baseMixins.extend({
 
   provide () {
     return {
-      radioGroup: this
+      radioGroup: this,
     }
   },
 
   props: {
     column: {
       type: Boolean,
-      default: true
+      default: true,
     },
     height: {
       type: [Number, String],
-      default: 'auto'
+      default: 'auto',
     },
     name: String,
     row: Boolean,
@@ -44,8 +44,8 @@ export default baseMixins.extend({
     // will match valueComparator
     // force default to null
     value: {
-      default: null
-    } as PropValidator<any>
+      default: null,
+    } as PropValidator<any>,
   },
 
   computed: {
@@ -54,9 +54,9 @@ export default baseMixins.extend({
         ...VInput.options.computed.classes.call(this),
         'v-input--selection-controls v-input--radio-group': true,
         'v-input--radio-group--column': this.column && !this.row,
-        'v-input--radio-group--row': this.row
+        'v-input--radio-group--row': this.row,
       }
-    }
+    },
   },
 
   methods: {
@@ -64,8 +64,8 @@ export default baseMixins.extend({
       return this.$createElement('div', {
         staticClass: 'v-input--radio-group__input',
         attrs: {
-          role: 'radiogroup'
-        }
+          role: 'radiogroup',
+        },
       }, VInput.options.methods.genDefaultSlot.call(this))
     },
     genInputSlot () {
@@ -75,6 +75,6 @@ export default baseMixins.extend({
 
       return render
     },
-    onClick: BaseItemGroup.options.methods.onClick
-  }
+    onClick: BaseItemGroup.options.methods.onClick,
+  },
 })

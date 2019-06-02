@@ -23,7 +23,7 @@ Vue.config.performance = process.env.NODE_ENV === 'development'
 // Expose a factory function that creates a fresh set of store, router,
 // app instances on each call (which is called for each SSR request)
 export async function createApp ({
-  start = () => {}
+  start = () => {},
 } = {}, ssrContext) {
   // create store and router instances
   const store = createStore()
@@ -46,7 +46,7 @@ export async function createApp ({
     ssrContext,
     i18n,
     vuetify,
-    render: h => h(App)
+    render: h => h(App),
   })
 
   // expose the app, the router and the store.

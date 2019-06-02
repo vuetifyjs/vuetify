@@ -25,7 +25,7 @@
   export default {
     data: () => ({
       value: '',
-      custom: true
+      custom: true,
     }),
     computed: {
       progress () {
@@ -33,7 +33,7 @@
       },
       color () {
         return ['error', 'warning', 'success'][Math.floor(this.progress / 40)]
-      }
-    }
+      },
+    },
   }
 </script>

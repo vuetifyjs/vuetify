@@ -5,14 +5,14 @@ export default {
     pageText: '{0}-{1} من {2}',
     noResultsText: 'لا توجد سجلات مطابقة',
     nextPage: 'الصفحة التالية',
-    prevPage: 'الصفحة السابقة'
+    prevPage: 'الصفحة السابقة',
   },
   dataTable: {
-    rowsPerPageText: 'الصفوف لكل صفحة:'
+    rowsPerPageText: 'الصفوف لكل صفحة:',
   },
   noDataText: 'لا توجد بيانات متاحة',
   carousel: {
     prev: 'الصورة السابقة',
-    next: 'البصري التالي'
-  }
+    next: 'البصري التالي',
+  },
 }

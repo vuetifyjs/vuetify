@@ -47,6 +47,6 @@
   export default {
     name: 'Hover',
 
-    data: () => ({})
+    data: () => ({}),
   }
 </script>

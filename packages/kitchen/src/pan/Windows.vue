@@ -337,7 +337,7 @@
       length4: 3,
       window4: 0,
       length5: 3,
-      window5: 0
-    })
+      window5: 0,
+    }),
   }
 </script>

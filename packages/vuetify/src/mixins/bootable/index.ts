@@ -21,23 +21,23 @@ export default Vue.extend<Vue & Toggleable>().extend({
   name: 'bootable',
 
   props: {
-    eager: Boolean
+    eager: Boolean,
   },
 
   data: () => ({
-    isBooted: false
+    isBooted: false,
   }),
 
   computed: {
     hasContent (): boolean | undefined {
       return this.isBooted || this.eager || this.isActive
-    }
+    },
   },
 
   watch: {
     isActive () {
       this.isBooted = true
-    }
+    },
   },
 
   created () {
@@ -49,6 +49,6 @@ export default Vue.extend<Vue & Toggleable>().extend({
   methods: {
     showLazyContent (content?: VNode[]): VNode[] | undefined {
       return this.hasContent ? content : undefined
-    }
-  }
+    },
+  },
 })

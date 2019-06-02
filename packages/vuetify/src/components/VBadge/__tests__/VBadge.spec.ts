@@ -4,7 +4,7 @@ import VBadge from '../VBadge'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 import { compileToFunctions } from 'vue-template-compiler'
 
@@ -25,8 +25,8 @@ describe('VBadge.ts', () => {
     const wrapper = mountFunction({
       slots: {
         badge: [compileToFunctions('<span>content</span>')],
-        default: [compileToFunctions('<span>element</span>')]
-      }
+        default: [compileToFunctions('<span>element</span>')],
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -35,12 +35,12 @@ describe('VBadge.ts', () => {
   it('should render component with with value=false and match snapshot', async () => {
     const wrapper = mountFunction({
       propsData: {
-        value: false
+        value: false,
       },
       slots: {
         badge: [compileToFunctions('<span>content</span>')],
-        default: [compileToFunctions('<span>element</span>')]
-      }
+        default: [compileToFunctions('<span>element</span>')],
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -49,8 +49,8 @@ describe('VBadge.ts', () => {
   it('should render component with bottom prop', () => {
     const wrapper = mountFunction({
       propsData: {
-        bottom: true
-      }
+        bottom: true,
+      },
     })
 
     expect(wrapper.classes('v-badge--bottom')).toBeTruthy()
@@ -59,8 +59,8 @@ describe('VBadge.ts', () => {
   it('should render component with left prop', () => {
     const wrapper = mountFunction({
       propsData: {
-        left: true
-      }
+        left: true,
+      },
     })
 
     expect(wrapper.classes('v-badge--left')).toBeTruthy()
@@ -69,8 +69,8 @@ describe('VBadge.ts', () => {
   it('should render component with overlap prop', () => {
     const wrapper = mountFunction({
       propsData: {
-        overlap: true
-      }
+        overlap: true,
+      },
     })
 
     expect(wrapper.classes('v-badge--overlap')).toBeTruthy()
@@ -79,11 +79,11 @@ describe('VBadge.ts', () => {
   it('should render component with color prop', () => {
     const wrapper = mountFunction({
       propsData: {
-        color: 'green lighten-1'
+        color: 'green lighten-1',
       },
       slots: {
-        badge: [compileToFunctions('<span>content</span>')]
-      }
+        badge: [compileToFunctions('<span>content</span>')],
+      },
     })
 
     const badge = wrapper.find('.v-badge__badge')
@@ -94,13 +94,13 @@ describe('VBadge.ts', () => {
   it('should render component with transition element', () => {
     const transitionStub = {
       name: 'transition',
-      render: jest.fn()
+      render: jest.fn(),
     }
 
     mountFunction({
       stubs: {
-        transition: transitionStub
-      }
+        transition: transitionStub,
+      },
     })
 
     expect(transitionStub.render).toHaveBeenCalled()
@@ -109,16 +109,16 @@ describe('VBadge.ts', () => {
   it('should render component without transition element', () => {
     const transitionStub = {
       name: 'transition',
-      render: jest.fn()
+      render: jest.fn(),
     }
 
     mountFunction({
       propsData: {
-        transition: ''
+        transition: '',
       },
       stubs: {
-        transition: transitionStub
-      }
+        transition: transitionStub,
+      },
     })
 
     expect(transitionStub.render).not.toHaveBeenCalled()

@@ -4,7 +4,7 @@ import VAutocomplete from '../VAutocomplete'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 import { keyCodes } from '../../../util/helpers'
 
@@ -21,13 +21,13 @@ describe('VAutocomplete.ts', () => {
         mocks: {
           $vuetify: {
             lang: {
-              t: (val: string) => val
+              t: (val: string) => val,
             },
             theme: {
-              dark: false
-            }
-          }
-        }
+              dark: false,
+            },
+          },
+        },
       })
     }
   })
@@ -35,8 +35,8 @@ describe('VAutocomplete.ts', () => {
   it('should allow changing of browser autocomplete', async () => {
     const wrapper = mountFunction({
       propsData: {
-        browserAutocomplete: 'on'
-      }
+        browserAutocomplete: 'on',
+      },
     })
 
     const input = wrapper.find('input')
@@ -53,8 +53,8 @@ describe('VAutocomplete.ts', () => {
   it('should have explicit tabindex passed through when autocomplete', () => {
     const wrapper = mountFunction({
       attrs: {
-        tabindex: 10
-      }
+        tabindex: 10,
+      },
     })
 
     expect(wrapper.vm.$refs.input.tabIndex).toBe(10)
@@ -64,7 +64,7 @@ describe('VAutocomplete.ts', () => {
   it('should emit search input changes', async () => {
     const wrapper = mountFunction({
       propsData: {
-      }
+      },
     })
 
     const input = wrapper.find('input')
@@ -83,7 +83,7 @@ describe('VAutocomplete.ts', () => {
 
   it('should filter autocomplete search results', async () => {
     const wrapper = mountFunction({
-      propsData: { items: ['foo', 'bar'] }
+      propsData: { items: ['foo', 'bar'] },
     })
 
     wrapper.setData({ internalSearch: 'foo' })
@@ -95,8 +95,8 @@ describe('VAutocomplete.ts', () => {
   it('should filter numeric primitives', () => {
     const wrapper = mountFunction({
       propsData: {
-        items: [1, 2]
-      }
+        items: [1, 2],
+      },
     })
 
     wrapper.setData({ internalSearch: 1 })
@@ -109,8 +109,8 @@ describe('VAutocomplete.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         items: [1, 2, 3, 4],
-        multiple: true
-      }
+        multiple: true,
+      },
     })
 
     wrapper.vm.isMenuActive = true
@@ -125,8 +125,8 @@ describe('VAutocomplete.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         items: [1, 2, 3, 4],
-        multiple: true
-      }
+        multiple: true,
+      },
     })
 
     await wrapper.vm.$nextTick()
@@ -142,7 +142,7 @@ describe('VAutocomplete.ts', () => {
 
     wrapper.setProps({
       multiple: false,
-      value: 1
+      value: 1,
     })
 
     await wrapper.vm.$nextTick()
@@ -173,8 +173,8 @@ describe('VAutocomplete.ts', () => {
         returnObject: true,
         itemText: 'text',
         itemValue: 'id',
-        items: []
-      }
+        items: [],
+      },
     })
 
     wrapper.setProps({ items: [{ id: 1, text: 'A' }] })
@@ -187,8 +187,8 @@ describe('VAutocomplete.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         cacheItems: true,
-        items: [1, 2, 3, 4]
-      }
+        items: [1, 2, 3, 4],
+      },
     })
 
     expect(wrapper.vm.computedItems).toHaveLength(4)
@@ -201,8 +201,8 @@ describe('VAutocomplete.ts', () => {
   it('should not filter text with no items', async () => {
     const wrapper = mountFunction({
       propsData: {
-        items: ['foo', 'bar']
-      }
+        items: ['foo', 'bar'],
+      },
     })
 
     await wrapper.vm.$nextTick()
@@ -221,8 +221,8 @@ describe('VAutocomplete.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         items: [1, 2],
-        value: 1
-      }
+        value: 1,
+      },
     })
 
     const input = wrapper.find('input')
@@ -240,8 +240,8 @@ describe('VAutocomplete.ts', () => {
       propsData: {
         items: ['foo', 'bar', 'fizz'],
         multiple: true,
-        value: ['foo', 'bar', 'fizz']
-      }
+        value: ['foo', 'bar', 'fizz'],
+      },
     })
 
     await wrapper.vm.$nextTick()
@@ -339,8 +339,8 @@ describe('VAutocomplete.ts', () => {
     const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
-        items: ['foo', 'bar', 'fizz']
-      }
+        items: ['foo', 'bar', 'fizz'],
+      },
     })
 
     const slot = wrapper.find('.v-input__slot')
@@ -379,15 +379,15 @@ describe('VAutocomplete.ts', () => {
       propsData: {
         items: ['foo', 'bar', 'fizz'],
         multiple: true,
-        value: ['foo']
-      }
+        value: ['foo'],
+      },
     })
 
     expect(wrapper.vm.selectedItem).toBeNull()
 
     wrapper.setProps({
       multiple: false,
-      value: 'foo'
+      value: 'foo',
     })
 
     expect(wrapper.vm.selectedItem).toBe('foo')
@@ -398,8 +398,8 @@ describe('VAutocomplete.ts', () => {
       propsData: {
         chips: true,
         items: ['foo', 'bar', 'fizz'],
-        searchInput: 'foo'
-      }
+        searchInput: 'foo',
+      },
     })
 
     expect(wrapper.vm.lazySearch).toBe('foo')
@@ -438,7 +438,7 @@ describe('VAutocomplete.ts', () => {
     const onFocus = jest.fn()
     const wrapper = mountFunction({
       propsData: { disabled: true },
-      methods: { onFocus }
+      methods: { onFocus },
     })
     const slot = wrapper.find('.v-input__slot')
 
@@ -469,8 +469,8 @@ describe('VAutocomplete.ts', () => {
         activateMenu,
         changeSelectedIndex,
         onEscDown,
-        onTabDown
-      }
+        onTabDown,
+      },
     })
 
     const input = wrapper.find('input')

@@ -18,7 +18,7 @@ export default context => {
     const {
       app,
       router,
-      store
+      store,
     } = await createApp(undefined, context)
 
     // set router's location
@@ -37,10 +37,10 @@ export default context => {
           if (component.asyncData) {
             return component.asyncData({
               store,
-              route: router.currentRoute
+              route: router.currentRoute,
             })
           }
-        })
+        }),
       ]).then(() => {
         isDev && console.log(`data pre-fetch: ${Date.now() - s}ms`)
         // After all preFetch hooks are resolved, our store is now

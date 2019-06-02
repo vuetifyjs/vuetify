@@ -29,7 +29,7 @@ const icons: VuetifyIcons = {
   ratingHalf: 'mdi-star-half',
   first: 'mdi-page-first',
   last: 'mdi-page-last',
-  unfold: 'mdi-unfold-more-horizontal'
+  unfold: 'mdi-unfold-more-horizontal',
 }
 
 export default icons

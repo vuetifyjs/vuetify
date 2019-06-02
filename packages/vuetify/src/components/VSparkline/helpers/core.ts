@@ -26,7 +26,7 @@ export function genPoints (
         (value - minValue) * gridY +
         +(index === totalPoints - 1) * 0.00001 -
         +(index === 0) * 0.00001,
-      value
+      value,
     }
   })
 }

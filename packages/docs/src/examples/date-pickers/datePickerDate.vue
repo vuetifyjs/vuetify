@@ -29,17 +29,17 @@
         'New power plant opened',
         'Rocket launch announced',
         'Global warming discussion cancelled',
-        'Company changed its location'
-      ]
+        'Company changed its location',
+      ],
     }),
     watch: {
       pickerDate (val) {
         this.notes = [
           this.allNotes[Math.floor(Math.random() * 5)],
           this.allNotes[Math.floor(Math.random() * 5)],
-          this.allNotes[Math.floor(Math.random() * 5)]
+          this.allNotes[Math.floor(Math.random() * 5)],
         ].filter((value, index, self) => self.indexOf(value) === index)
-      }
-    }
+      },
+    },
   }
 </script>

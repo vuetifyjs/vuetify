@@ -199,7 +199,7 @@
     '?accessoriesType=Sunglasses&avatarStyle=Circle&clotheColor=Gray02&clotheType=ShirtScoopNeck&eyeType=EyeRoll&eyebrowType=RaisedExcited&facialHairColor=Red&facialHairType=BeardMagestic&hairColor=Red&hatColor=White&mouthType=Twinkle&skinColor=DarkBrown&topType=LongHairBun',
     '?accessoriesType=Prescription02&avatarStyle=Circle&clotheColor=Black&clotheType=ShirtVNeck&eyeType=Surprised&eyebrowType=Angry&facialHairColor=Blonde&facialHairType=Blank&hairColor=Blonde&hatColor=PastelOrange&mouthType=Smile&skinColor=Black&topType=LongHairNotTooLong',
     '?accessoriesType=Round&avatarStyle=Circle&clotheColor=PastelOrange&clotheType=Overall&eyeType=Close&eyebrowType=AngryNatural&facialHairColor=Blonde&facialHairType=Blank&graphicType=Pizza&hairColor=Black&hatColor=PastelBlue&mouthType=Serious&skinColor=Light&topType=LongHairBigHair',
-    '?accessoriesType=Kurt&avatarStyle=Circle&clotheColor=Gray01&clotheType=BlazerShirt&eyeType=Surprised&eyebrowType=Default&facialHairColor=Red&facialHairType=Blank&graphicType=Selena&hairColor=Red&hatColor=Blue02&mouthType=Twinkle&skinColor=Pale&topType=LongHairCurly'
+    '?accessoriesType=Kurt&avatarStyle=Circle&clotheColor=Gray01&clotheType=BlazerShirt&eyeType=Surprised&eyebrowType=Default&facialHairColor=Red&facialHairType=Blank&graphicType=Selena&hairColor=Red&hatColor=Blue02&mouthType=Twinkle&skinColor=Pale&topType=LongHairCurly',
   ]
 
   const pause = ms => new Promise(resolve => setTimeout(resolve, ms))
@@ -217,15 +217,15 @@
         pdf: 'mdi-file-pdf',
         png: 'mdi-file-image',
         txt: 'mdi-file-document-outline',
-        xls: 'mdi-file-excel'
+        xls: 'mdi-file-excel',
       },
       tree1: [],
       items1: [
         {
-          name: '.git'
+          name: '.git',
         },
         {
-          name: 'node_modules'
+          name: 'node_modules',
         },
         {
           name: 'public',
@@ -234,43 +234,43 @@
               name: 'static',
               children: [{
                 name: 'logo.png',
-                file: 'png'
-              }]
+                file: 'png',
+              }],
             },
             {
               name: 'favicon.ico',
-              file: 'png'
+              file: 'png',
             },
             {
               name: 'index.html',
-              file: 'html'
-            }
-          ]
+              file: 'html',
+            },
+          ],
         },
         {
           name: '.gitignore',
-          file: 'txt'
+          file: 'txt',
         },
         {
           name: 'babel.config.js',
-          file: 'js'
+          file: 'js',
         },
         {
           name: 'package.json',
-          file: 'json'
+          file: 'json',
         },
         {
           name: 'README.md',
-          file: 'md'
+          file: 'md',
         },
         {
           name: 'vue.config.js',
-          file: 'js'
+          file: 'js',
         },
         {
           name: 'yarn.lock',
-          file: 'txt'
-        }
+          file: 'txt',
+        },
       ],
       active2: [],
       avatar2: null,
@@ -285,15 +285,15 @@
         pdf: 'mdi-file-pdf',
         png: 'mdi-file-image',
         txt: 'mdi-file-document-outline',
-        xls: 'mdi-file-excel'
+        xls: 'mdi-file-excel',
       },
       tree3: [],
       items3: [
         {
-          name: '.git'
+          name: '.git',
         },
         {
-          name: 'node_modules'
+          name: 'node_modules',
         },
         {
           name: 'public',
@@ -302,47 +302,47 @@
               name: 'static',
               children: [{
                 name: 'logo.png',
-                file: 'png'
-              }]
+                file: 'png',
+              }],
             },
             {
               name: 'favicon.ico',
-              file: 'png'
+              file: 'png',
             },
             {
               name: 'index.html',
               file: 'html',
-              changed: true
-            }
-          ]
+              changed: true,
+            },
+          ],
         },
         {
           name: '.gitignore',
-          file: 'txt'
+          file: 'txt',
         },
         {
           name: 'babel.config.js',
-          file: 'js'
+          file: 'js',
         },
         {
           name: 'package.json',
           file: 'json',
-          changed: true
+          changed: true,
         },
         {
           name: 'README.md',
-          file: 'md'
+          file: 'md',
         },
         {
           name: 'vue.config.js',
-          file: 'js'
+          file: 'js',
         },
         {
           name: 'yarn.lock',
           file: 'txt',
-          changed: true
-        }
-      ]
+          changed: true,
+        },
+      ],
     }),
 
     computed: {
@@ -350,8 +350,8 @@
         return [
           {
             name: 'Users',
-            children: this.users2
-          }
+            children: this.users2,
+          },
         ]
       },
       selected2 () {
@@ -360,11 +360,11 @@
         const id = this.active2[0]
 
         return this.users2.find(user => user.id === id)
-      }
+      },
     },
 
     watch: {
-      selected2: 'randomAvatar2'
+      selected2: 'randomAvatar2',
     },
 
     methods: {
@@ -380,7 +380,7 @@
       },
       randomAvatar2 () {
         this.avatar2 = avatars[Math.floor(Math.random() * avatars.length)]
-      }
-    }
+      },
+    },
   }
 </script>

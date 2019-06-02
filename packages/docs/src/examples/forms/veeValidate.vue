@@ -50,7 +50,7 @@
 
   export default {
     $_veeValidate: {
-      validator: 'new'
+      validator: 'new',
     },
 
     data: () => ({
@@ -61,25 +61,25 @@
         'Item 1',
         'Item 2',
         'Item 3',
-        'Item 4'
+        'Item 4',
       ],
       checkbox: null,
       dictionary: {
         attributes: {
-          email: 'E-mail Address'
+          email: 'E-mail Address',
           // custom attributes
         },
         custom: {
           name: {
             required: () => 'Name can not be empty',
-            max: 'The name field may not be greater than 10 characters'
+            max: 'The name field may not be greater than 10 characters',
             // custom messages
           },
           select: {
-            required: 'Select field is required'
-          }
-        }
-      }
+            required: 'Select field is required',
+          },
+        },
+      },
     }),
 
     mounted () {
@@ -96,8 +96,8 @@
         this.select = null
         this.checkbox = null
         this.$validator.reset()
-      }
-    }
+      },
+    },
   }
 </script>
 

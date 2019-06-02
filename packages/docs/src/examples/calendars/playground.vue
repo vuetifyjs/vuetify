@@ -283,7 +283,7 @@
     first: 0,
     minutes: 60,
     count: 24,
-    height: 40
+    height: 40,
   }
 
   const stylings = {
@@ -301,14 +301,14 @@
 
       return {
         backgroundColor: inactive ? (dark ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0.05)') : undefined,
-        borderTop: startOfHour ? undefined : '1px dashed ' + mid
+        borderTop: startOfHour ? undefined : '1px dashed ' + mid,
       }
     },
     past (interval) {
       return {
-        backgroundColor: interval.past ? (this.dark ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0.05)') : undefined
+        backgroundColor: interval.past ? (this.dark ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0.05)') : undefined,
       }
-    }
+    },
   }
 
   export default {
@@ -328,32 +328,32 @@
         { text: 'Week', value: 'week' },
         { text: 'Month', value: 'month' },
         { text: 'Custom Daily', value: 'custom-daily' },
-        { text: 'Custom Weekly', value: 'custom-weekly' }
+        { text: 'Custom Weekly', value: 'custom-weekly' },
       ],
       weekdays: weekdaysDefault,
       weekdaysOptions: [
         { text: 'Sunday - Saturday', value: weekdaysDefault },
         { text: 'Mon, Wed, Fri', value: [1, 3, 5] },
         { text: 'Mon - Fri', value: [1, 2, 3, 4, 5] },
-        { text: 'Mon - Sun', value: [1, 2, 3, 4, 5, 6, 0] }
+        { text: 'Mon - Sun', value: [1, 2, 3, 4, 5, 6, 0] },
       ],
       intervals: intervalsDefault,
       intervalsOptions: [
         { text: 'Default', value: intervalsDefault },
-        { text: 'Workday', value: { first: 16, minutes: 30, count: 20, height: 40 } }
+        { text: 'Workday', value: { first: 16, minutes: 30, count: 20, height: 40 } },
       ],
       maxDays: 7,
       maxDaysOptions: [
         { text: '7 days', value: 7 },
         { text: '5 days', value: 5 },
         { text: '4 days', value: 4 },
-        { text: '3 days', value: 3 }
+        { text: '3 days', value: 3 },
       ],
       styleInterval: 'default',
       styleIntervalOptions: [
         { text: 'Default', value: 'default' },
         { text: 'Workday', value: 'workday' },
-        { text: 'Past', value: 'past' }
+        { text: 'Past', value: 'past' },
       ],
       color: 'primary',
       colorOptions: [
@@ -379,11 +379,11 @@
         { text: 'Brown', value: 'brown' },
         { text: 'Blue Gray', value: 'blue-gray' },
         { text: 'Gray', value: 'gray' },
-        { text: 'Black', value: 'black' }
+        { text: 'Black', value: 'black' },
       ],
       shortIntervals: true,
       shortMonths: false,
-      shortWeekdays: false
+      shortWeekdays: false,
     }),
     computed: {
       intervalStyle () {
@@ -391,20 +391,20 @@
       },
       hasIntervals () {
         return this.type in {
-          'week': 1, 'day': 1, '4day': 1, 'custom-daily': 1
+          'week': 1, 'day': 1, '4day': 1, 'custom-daily': 1,
         }
       },
       hasEnd () {
         return this.type in {
-          'custom-weekly': 1, 'custom-daily': 1
+          'custom-weekly': 1, 'custom-daily': 1,
         }
-      }
+      },
     },
     methods: {
       showIntervalLabel (interval) {
         return interval.minute === 0
-      }
-    }
+      },
+    },
   }
 </script>
 

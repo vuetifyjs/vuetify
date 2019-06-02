@@ -33,14 +33,14 @@ export default baseMixins.extend({
   provide (): object {
     return {
       stepClick: this.stepClick,
-      isVertical: this.vertical
+      isVertical: this.vertical,
     }
   },
 
   props: {
     nonLinear: Boolean,
     altLabels: Boolean,
-    vertical: Boolean
+    vertical: Boolean,
   },
 
   data () {
@@ -48,7 +48,7 @@ export default baseMixins.extend({
       isBooted: false,
       steps: [] as VStepperStepInstance[],
       content: [] as VStepperContentInstance[],
-      isReverse: false
+      isReverse: false,
     }
   },
 
@@ -59,9 +59,9 @@ export default baseMixins.extend({
         'v-stepper--vertical': this.vertical,
         'v-stepper--alt-labels': this.altLabels,
         'v-stepper--non-linear': this.nonLinear,
-        ...this.themeClasses
+        ...this.themeClasses,
       }
-    }
+    },
   },
 
   watch: {
@@ -76,7 +76,7 @@ export default baseMixins.extend({
       }
 
       this.updateView()
-    }
+    },
   },
 
   created () {
@@ -118,13 +118,13 @@ export default baseMixins.extend({
       for (let index = this.content.length; --index >= 0;) {
         this.content[index].toggle(this.internalValue as any, this.isReverse)
       }
-    }
+    },
   },
 
   render (h): VNode {
     return h('div', {
       staticClass: 'v-stepper',
-      class: this.classes
+      class: this.classes,
     }, this.$slots.default)
-  }
+  },
 })

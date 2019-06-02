@@ -37,7 +37,7 @@
     data: () => ({
       skill: 20,
       knowledge: 33,
-      power: 78
-    })
+      power: 78,
+    }),
   }
 </script>

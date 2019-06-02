@@ -25,28 +25,28 @@ export default mixins(
     error: Boolean,
     errorCount: {
       type: [Number, String],
-      default: 1
+      default: 1,
     },
     errorMessages: {
       type: [String, Array],
-      default: () => []
+      default: () => [],
     } as PropValidator<VuetifyMessage>,
     messages: {
       type: [String, Array],
-      default: () => []
+      default: () => [],
     } as PropValidator<VuetifyMessage>,
     readonly: Boolean,
     rules: {
       type: Array,
-      default: () => []
+      default: () => [],
     } as PropValidator<VuetifyRuleValidations>,
     success: Boolean,
     successMessages: {
       type: [String, Array],
-      default: () => []
+      default: () => [],
     } as PropValidator<VuetifyMessage>,
     validateOnBlur: Boolean,
-    value: { required: false }
+    value: { required: false },
   },
 
   data () {
@@ -58,7 +58,7 @@ export default mixins(
       isFocused: false,
       isResetting: false,
       lazyValue: this.value,
-      valid: false
+      valid: false,
     }
   },
 
@@ -107,7 +107,7 @@ export default mixins(
         this.lazyValue = val
 
         this.$emit('input', val)
-      }
+      },
     },
     shouldValidate (): boolean {
       if (this.externalError) return true
@@ -136,7 +136,7 @@ export default mixins(
       } else if (this.shouldValidate) {
         return this.errorBucket
       } else return []
-    }
+    },
   },
 
   watch: {
@@ -145,7 +145,7 @@ export default mixins(
         if (deepEqual(newVal, oldVal)) return
         this.validate()
       },
-      deep: true
+      deep: true,
     },
     internalValue () {
       // If it's the first time we're setting input,
@@ -180,7 +180,7 @@ export default mixins(
     },
     value (val) {
       this.lazyValue = val
-    }
+    },
   },
 
   beforeMount () {
@@ -234,6 +234,6 @@ export default mixins(
       this.valid = errorBucket.length === 0
 
       return this.valid
-    }
-  }
+    },
+  },
 })

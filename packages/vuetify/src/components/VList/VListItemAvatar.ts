@@ -12,8 +12,8 @@ export default VAvatar.extend({
     horizontal: Boolean,
     size: {
       type: [Number, String],
-      default: 40
-    }
+      default: 40,
+    },
   },
 
   computed: {
@@ -21,9 +21,9 @@ export default VAvatar.extend({
       return {
         'v-list-item__avatar--horizontal': this.horizontal,
         ...VAvatar.options.computed.classes.call(this),
-        'v-avatar--tile': this.tile || this.horizontal
+        'v-avatar--tile': this.tile || this.horizontal,
       }
-    }
+    },
   },
 
   render (h): VNode {
@@ -33,5 +33,5 @@ export default VAvatar.extend({
     render.data.staticClass += ' v-list-item__avatar'
 
     return render
-  }
+  },
 })

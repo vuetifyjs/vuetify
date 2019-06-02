@@ -5,7 +5,7 @@ import { Theme } from '../index'
 import Vue from 'vue'
 import {
   VuetifyParsedTheme,
-  VuetifyThemeVariant
+  VuetifyThemeVariant,
 } from 'vuetify/types/services/theme'
 
 const FillVariant = (variant: Partial<VuetifyThemeVariant> = {}) => {
@@ -17,7 +17,7 @@ const FillVariant = (variant: Partial<VuetifyThemeVariant> = {}) => {
     info: '#2196F3',
     success: '#4CAF50',
     warning: '#FFC107',
-    ...variant
+    ...variant,
   }
 }
 
@@ -36,8 +36,8 @@ describe('Theme.ts', () => {
       default: 'light',
       themes: {
         dark: FillVariant(),
-        light: FillVariant()
-      }
+        light: FillVariant(),
+      },
     }
 
     instance = new Vue()
@@ -57,9 +57,9 @@ describe('Theme.ts', () => {
         light: FillVariant({
           primary: '#000001',
           secondary: '#000002',
-          accent: '#000003'
-        })
-      }
+          accent: '#000003',
+        }),
+      },
     })
 
     theme.init(instance)
@@ -79,9 +79,9 @@ describe('Theme.ts', () => {
       themes: {
         light: FillVariant(),
         dark: FillVariant({
-          primary: '#FFFFFF'
-        })
-      }
+          primary: '#FFFFFF',
+        }),
+      },
     })
 
     theme.init(instance)
@@ -116,14 +116,14 @@ describe('Theme.ts', () => {
       get: jest.fn(() => cache),
       set: jest.fn((obj: VuetifyParsedTheme) => {
         cache = obj
-      })
+      }),
     }
 
     const theme = new Theme({
       ...mock,
       options: {
-        themeCache
-      }
+        themeCache,
+      },
     })
 
     expect(theme.generatedStyles).toMatchSnapshot()
@@ -142,8 +142,8 @@ describe('Theme.ts', () => {
     const theme = new Theme({
       ...mock,
       options: {
-        minifyTheme
-      }
+        minifyTheme,
+      },
     })
 
     theme.init(instance)
@@ -160,8 +160,8 @@ describe('Theme.ts', () => {
     const theme = new Theme({
       ...mock,
       options: {
-        cspNonce: 'foobar'
-      }
+        cspNonce: 'foobar',
+      },
     })
 
     theme.init(instance)
@@ -172,7 +172,7 @@ describe('Theme.ts', () => {
 
   it('should initialize the theme', () => {
     const theme = new Theme({
-      ...mock
+      ...mock,
     })
     const spy = jest.spyOn(theme, 'applyTheme')
     const ssrContext = { head: '' }

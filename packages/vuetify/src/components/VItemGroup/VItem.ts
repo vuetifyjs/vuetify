@@ -14,18 +14,18 @@ export const BaseItem = Vue.extend({
   props: {
     activeClass: String,
     value: {
-      required: false
-    }
+      required: false,
+    },
   },
 
   data: () => ({
-    isActive: false
+    isActive: false,
   }),
 
   methods: {
     toggle () {
       this.isActive = !this.isActive
-    }
+    },
   },
 
   render (): VNode {
@@ -41,7 +41,7 @@ export const BaseItem = Vue.extend({
     if (this.$scopedSlots.default) {
       element = this.$scopedSlots.default({
         active: this.isActive,
-        toggle: this.toggle
+        toggle: this.toggle,
       })
     }
 
@@ -56,16 +56,16 @@ export const BaseItem = Vue.extend({
     }
 
     element.data = this._b(element.data || {}, element.tag!, {
-      class: { [this.activeClass]: this.isActive }
+      class: { [this.activeClass]: this.isActive },
     })
 
     return element
-  }
+  },
 })
 
 export default mixins(
   BaseItem,
   GroupableFactory('itemGroup', 'v-item', 'v-item-group')
 ).extend({
-  name: 'v-item'
+  name: 'v-item',
 })
