@@ -45,6 +45,7 @@ export default baseMixins.extend<options>().extend({
     height: [Number, String],
     hideDetails: Boolean,
     hint: String,
+    id: String,
     label: String,
     loading: Boolean,
     persistentHint: Boolean,
@@ -204,7 +205,7 @@ export default baseMixins.extend<options>().extend({
           color: this.validationState,
           dark: this.dark,
           focused: this.hasState,
-          for: this.$attrs.id,
+          for: this.id,
           light: this.light,
         },
       }, this.$slots.label || this.label)
