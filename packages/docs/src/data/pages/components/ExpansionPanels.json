@@ -36,12 +36,12 @@
         {
           "type": "examples",
           "value": [
-            "external",
-            "disabledAndReadonly",
-            "popout",
-            "customIcons",
-            "focusable",
-            "advanced"
+            "simple/external",
+            "simple/disabledAndReadonly",
+            "simple/popout",
+            "simple/focusable",
+            "intermedaite/customIcons",
+            "complex/advanced"
           ]
         }
       ]
