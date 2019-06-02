@@ -1,45 +1,46 @@
 {
-  "header": "crwdns12246:0crwdne12246:0",
-  "headerText": "crwdns12248:0crwdne12248:0",
-  "examples": {
-    "usage": {
-      "desc": "crwdns12250:0crwdne12250:0"
-    },
-    "small": {
-      "header": "crwdns12252:0crwdne12252:0",
-      "desc": "crwdns12254:0crwdne12254:0"
-    },
-    "displayAnimation": {
-      "header": "crwdns12256:0crwdne12256:0",
-      "desc": "crwdns12258:0crwdne12258:0"
-    },
-    "lateralScreens": {
-      "header": "crwdns12260:0crwdne12260:0",
-      "desc": "crwdns12262:0crwdne12262:0"
-    },
-    "speedDial": {
-      "header": "crwdns12264:0crwdne12264:0",
-      "desc": "crwdns12266:0crwdne12266:0"
-    }
-  },
-  "props": {
-    "v-btn": {
-      "block": "crwdns12268:0crwdne12268:0",
-      "depressed": "crwdns12270:0crwdne12270:0",
-      "fab": "crwdns12272:0crwdne12272:0",
-      "flat": "crwdns12274:0crwdne12274:0",
-      "icon": "crwdns12276:0crwdne12276:0",
-      "inputValue": "crwdns12278:0crwdne12278:0",
-      "large": "crwdns12280:0crwdne12280:0",
-      "loading": "crwdns12282:0crwdne12282:0",
-      "outline": "crwdns12284:0crwdne12284:0",
-      "round": "crwdns12286:0crwdne12286:0",
-      "small": "crwdns12288:0crwdne12288:0",
-      "type": "crwdns12290:0crwdne12290:0"
-    },
-    "v-speed-dial": {
-      "direction": "crwdns12292:0crwdne12292:0",
-      "openOnHover": "crwdns12294:0crwdne12294:0"
-    }
-  }
+	"header": "crwdns28622:0crwdne28622:0",
+	"headerText": "crwdns28624:0crwdne28624:0",
+	"examples": {
+		"usage": {
+			"desc": "crwdns28626:0crwdne28626:0"
+		},
+		"small": {
+			"header": "crwdns28628:0crwdne28628:0",
+			"desc": "crwdns28630:0crwdne28630:0"
+		},
+		"displayAnimation": {
+			"header": "crwdns28632:0crwdne28632:0",
+			"desc": "crwdns28634:0crwdne28634:0"
+		},
+		"lateralScreens": {
+			"header": "crwdns28636:0crwdne28636:0",
+			"desc": "crwdns28638:0crwdne28638:0"
+		},
+		"speedDial": {
+			"header": "crwdns28640:0crwdne28640:0",
+			"desc": "crwdns28642:0crwdne28642:0"
+		}
+	},
+	"props": {
+		"v-btn": {
+			"block": "crwdns28644:0crwdne28644:0",
+			"depressed": "crwdns28646:0crwdne28646:0",
+			"fab": "crwdns28648:0crwdne28648:0",
+			"flat": "crwdns28650:0crwdne28650:0",
+			"icon": "crwdns28652:0crwdne28652:0",
+			"inputValue": "crwdns28654:0crwdne28654:0",
+			"large": "crwdns28656:0crwdne28656:0",
+			"loading": "crwdns28658:0crwdne28658:0",
+			"outline": "crwdns28660:0crwdne28660:0",
+			"outlined": "crwdns35978:0crwdne35978:0",
+			"round": "crwdns28662:0crwdne28662:0",
+			"small": "crwdns28664:0crwdne28664:0",
+			"type": "crwdns28666:0crwdne28666:0"
+		},
+		"v-speed-dial": {
+			"direction": "crwdns28668:0crwdne28668:0",
+			"openOnHover": "crwdns28670:0crwdne28670:0"
+		}
+	}
 }

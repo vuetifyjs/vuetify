@@ -1,0 +1,17 @@
+{
+	"header": "crwdns25510:0crwdne25510:0",
+	"headerText": "crwdns25512:0[v-item-group]crwdne25512:0",
+	"examples": {
+		"usage": {
+			"desc": "crwdns25514:0crwdne25514:0"
+		},
+		"selectionControls": {
+			"header": "crwdns25516:0crwdne25516:0",
+			"desc": "crwdns25518:0crwdne25518:0"
+		},
+		"flat": {
+			"header": "crwdns25520:0crwdne25520:0",
+			"desc": "crwdns25522:0crwdne25522:0"
+		}
+	}
+}

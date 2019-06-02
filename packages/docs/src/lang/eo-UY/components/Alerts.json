@@ -1,31 +1,66 @@
 {
-  "header": "crwdns11062:0crwdne11062:0",
-  "headerText": "crwdns11064:0crwdne11064:0",
-  "examples": {
-    "usage": {
-      "desc": "crwdns11066:0crwdne11066:0"
-    },
-    "closable": {
-      "header": "crwdns11068:0crwdne11068:0",
-      "desc": "crwdns11070:0crwdne11070:0"
-    },
-    "icon": {
-      "header": "crwdns11072:0crwdne11072:0",
-      "desc": "crwdns11074:0crwdne11074:0"
-    },
-    "transition": {
-      "header": "crwdns11076:0crwdne11076:0",
-      "desc": "crwdns11078:0crwdne11078:0"
-    },
-    "outline": {
-      "header": "crwdns11080:0crwdne11080:0",
-      "desc": "crwdns11082:0crwdne11082:0"
-    }
-  },
-  "props": {
-    "dismissible": "crwdns11084:0crwdne11084:0",
-    "icon": "crwdns11086:0crwdne11086:0",
-    "outline": "crwdns11088:0crwdne11088:0",
-    "type": "crwdns11090:0crwdne11090:0"
-  }
+	"header": "crwdns25462:0crwdne25462:0",
+	"headerText": "crwdns35638:0crwdne35638:0",
+	"examples": {
+		"usage": {
+			"desc": "crwdns35640:0crwdne35640:0"
+		},
+		"border": {
+			"header": "crwdns35642:0crwdne35642:0",
+			"desc": "crwdns35644:0crwdne35644:0"
+		},
+		"colored-border": {
+			"header": "crwdns35646:0crwdne35646:0",
+			"desc": "crwdns35648:0crwdne35648:0"
+		},
+		"dense": {
+			"header": "crwdns35650:0crwdne35650:0",
+			"desc": "crwdns35652:0crwdne35652:0"
+		},
+		"dismissible": {
+			"header": "crwdns35654:0crwdne35654:0",
+			"desc": "crwdns35656:0crwdne35656:0"
+		},
+		"icon": {
+			"header": "crwdns35658:0crwdne35658:0",
+			"desc": "crwdns35660:0crwdne35660:0"
+		},
+		"outlined": {
+			"header": "crwdns35662:0crwdne35662:0",
+			"desc": "crwdns35664:0crwdne35664:0"
+		},
+		"prominent": {
+			"header": "crwdns35666:0crwdne35666:0",
+			"desc": "crwdns35668:0crwdne35668:0"
+		},
+		"text": {
+			"header": "crwdns35670:0crwdne35670:0",
+			"desc": "crwdns35672:0crwdne35672:0"
+		},
+		"transition": {
+			"header": "crwdns35674:0crwdne35674:0",
+			"desc": "crwdns35676:0[here]crwdne35676:0"
+		},
+		"type": {
+			"header": "crwdns35678:0crwdne35678:0",
+			"desc": "crwdns35680:0crwdne35680:0"
+		},
+		"twitter": {
+			"header": "crwdns35682:0crwdne35682:0",
+			"desc": "crwdns35684:0crwdne35684:0"
+		}
+	},
+	"props": {
+		"border": "crwdns35686:0crwdne35686:0",
+		"coloredBorder": "crwdns35688:0crwdne35688:0",
+		"closeLabel": "crwdns35690:0crwdne35690:0",
+		"dense": "crwdns35692:0crwdne35692:0",
+		"dismissible": "crwdns35694:0crwdne35694:0",
+		"icon": "crwdns35696:0crwdne35696:0",
+		"outline": "crwdns35698:0crwdne35698:0",
+		"outlined": "crwdns35700:0crwdne35700:0",
+		"prominent": "crwdns35702:0crwdne35702:0",
+		"text": "crwdns35704:0crwdne35704:0",
+		"type": "crwdns25508:0crwdne25508:0"
+	}
 }
