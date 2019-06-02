@@ -14,8 +14,8 @@
       "desc": "Both the expansion-panel and its content supports the `disabled` and `readonly` props."
     },
     "popout": {
-      "header": "### Popout, Inset & Accordion",
-      "desc": "The expansion-panel also has three alternative designs you can activate with the props **popout**, **inset** and **accordion**. Each displays expanded content differently."
+      "header": "### Popout",
+      "desc": "The expansion-panel also has **popout** design. With it, expansion-panel is enlargened when activated."
     },
     "customIcons": {
       "header": "### Custom icon",
