@@ -16,7 +16,7 @@
         value: 0,
         query: false,
         show: true,
-        interval: 0
+        interval: 0,
       }
     },
 
@@ -46,7 +46,7 @@
             this.value += 25
           }, 1000)
         }, 2500)
-      }
-    }
+      },
+    },
   }
 </script>

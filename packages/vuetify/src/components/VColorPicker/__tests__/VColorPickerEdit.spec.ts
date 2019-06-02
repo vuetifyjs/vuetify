@@ -2,7 +2,7 @@ import VColorPickerEdit from '../VColorPickerEdit'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 import { fromRGBA } from '../util'
 
@@ -20,11 +20,11 @@ describe('VColorPickerEdit.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         color: fromRGBA({ r: 0, g: 0, b: 0, a: 0 }),
-        mode: 'hexa'
+        mode: 'hexa',
       },
       listeners: {
-        'update:color': update
-      }
+        'update:color': update,
+      },
     })
 
     const input = wrapper.find('input')
@@ -40,11 +40,11 @@ describe('VColorPickerEdit.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         color: fromRGBA({ r: 0, g: 0, b: 0, a: 0 }),
-        mode: 'rgba'
+        mode: 'rgba',
       },
       listeners: {
-        'update:color': update
-      }
+        'update:color': update,
+      },
     })
 
     const inputs = wrapper.findAll('input').wrappers
@@ -65,11 +65,11 @@ describe('VColorPickerEdit.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         color: fromRGBA({ r: 0, g: 0, b: 0, a: 0 }),
-        mode: 'hsla'
+        mode: 'hsla',
       },
       listeners: {
-        'update:color': update
-      }
+        'update:color': update,
+      },
     })
 
     const inputs = wrapper.findAll('input').wrappers
@@ -90,8 +90,8 @@ describe('VColorPickerEdit.ts', () => {
       propsData: {
         color: fromRGBA({ r: 0, g: 0, b: 0, a: 0 }),
         mode: 'rgba',
-        disabled: true
-      }
+        disabled: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -101,8 +101,8 @@ describe('VColorPickerEdit.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         color: fromRGBA({ r: 0, g: 0, b: 0, a: 0 }),
-        mode: 'hexa'
-      }
+        mode: 'hexa',
+      },
     })
 
     const changeMode = wrapper.find('.v-btn')
@@ -117,7 +117,7 @@ describe('VColorPickerEdit.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({
-      mode: 'hsla'
+      mode: 'hsla',
     })
     expect(wrapper.html()).toMatchSnapshot()
   })
@@ -127,8 +127,8 @@ describe('VColorPickerEdit.ts', () => {
       propsData: {
         color: fromRGBA({ r: 0, g: 0, b: 0, a: 0 }),
         mode: 'rgba',
-        hideModeSwitch: true
-      }
+        hideModeSwitch: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()

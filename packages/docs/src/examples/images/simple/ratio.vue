@@ -43,9 +43,9 @@
         { divider: true },
         { icon: 'mail', title: 'All mail' },
         { icon: 'delete', title: 'Trash' },
-        { icon: 'error', title: 'Spam' }
-      ]
-    })
+        { icon: 'error', title: 'Spam' },
+      ],
+    }),
   }
 </script>
 

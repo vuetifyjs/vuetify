@@ -6,6 +6,6 @@ export { VWindow, VWindowItem }
 export default {
   $_vuetify_subcomponents: {
     VWindow,
-    VWindowItem
-  }
+    VWindowItem,
+  },
 }

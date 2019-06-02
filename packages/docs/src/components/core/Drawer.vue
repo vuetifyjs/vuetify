@@ -96,7 +96,7 @@
   // Utilities
   import {
     mapMutations,
-    mapState
+    mapState,
   } from 'vuex'
   import kebabCase from 'lodash/kebabCase'
   import drawerItems from '@/data/drawerItems.json'
@@ -107,7 +107,7 @@
       docSearch: {},
       isSearching: false,
       drawerItems,
-      search: ''
+      search: '',
     }),
 
     computed: {
@@ -115,7 +115,7 @@
       children () {
         return this.item.children.map(item => ({
           ...item,
-          to: `${this.item.group}/${item.to}`
+          to: `${this.item.group}/${item.to}`,
         }))
       },
       group () {
@@ -129,11 +129,11 @@
         },
         set (val) {
           this.setDrawer(val)
-        }
+        },
       },
       items () {
         return this.drawerItems.map(this.addLanguagePrefix)
-      }
+      },
     },
 
     watch: {
@@ -162,7 +162,7 @@
           this.docSearch.autocomplete.autocomplete.close()
           this.docSearch.autocomplete.autocomplete.setVal('')
         }
-      }
+      },
     },
 
     mounted () {
@@ -187,7 +187,7 @@
         const { children, subtext, ...props } = item
         const newItem = {
           ...props,
-          text: `Vuetify.AppDrawer.${item.text}`
+          text: `Vuetify.AppDrawer.${item.text}`,
         }
 
         if (children) {
@@ -208,7 +208,7 @@
           autocompleteOptions: {
             appendTo: '#app',
             hint: false,
-            debug: true
+            debug: true,
           },
           indexName: 'vuetifyjs',
           inputSelector: '#search',
@@ -218,10 +218,10 @@
             vm.search = ''
             vm.isSearching = false
             vm.$router.push(loc.pop())
-          }
+          },
         })
-      }
-    }
+      },
+    },
   }
 </script>
 

@@ -62,7 +62,7 @@
   // Utilities
   import {
     mapMutations,
-    mapState
+    mapState,
   } from 'vuex'
   import languages from '@/data/i18n/languages.json'
 
@@ -70,14 +70,14 @@
     name: 'CoreToolbar',
 
     data: vm => ({
-      languages
+      languages,
     }),
 
     computed: {
       ...mapState('route', ['name', 'params']),
       isHome () {
         return this.name === 'home/Home'
-      }
+      },
     },
 
     methods: {
@@ -88,8 +88,8 @@
           .slice(2)
           .join('/')
         window.location.href = `${window.location.origin}/releases/${release}/#/${path}`
-      }
-    }
+      },
+    },
   }
 </script>
 

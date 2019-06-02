@@ -39,47 +39,47 @@ export default baseMixins.extend({
   provide (): object {
     return {
       // Pass theme through to default slot
-      theme: this.theme
+      theme: this.theme,
     }
   },
 
   directives: {
     ClickOutside,
-    Resize
+    Resize,
   },
 
   props: {
     auto: Boolean,
     closeOnClick: {
       type: Boolean,
-      default: true
+      default: true,
     },
     closeOnContentClick: {
       type: Boolean,
-      default: true
+      default: true,
     },
     disabled: Boolean,
     disableKeys: Boolean,
     fullWidth: Boolean,
     maxHeight: {
       type: [Number, String],
-      default: 'auto'
+      default: 'auto',
     },
     openOnClick: {
       type: Boolean,
-      default: true
+      default: true,
     },
     offsetX: Boolean,
     offsetY: Boolean,
     openOnHover: Boolean,
     origin: {
       type: String,
-      default: 'top left'
+      default: 'top left',
     },
     transition: {
       type: [Boolean, String],
-      default: 'v-menu-transition'
-    }
+      default: 'v-menu-transition',
+    },
   },
 
   data () {
@@ -90,7 +90,7 @@ export default baseMixins.extend({
       listIndex: -1,
       resizeTimeout: 0,
       selectedIndex: null as null | number,
-      tiles: [] as HTMLElement[]
+      tiles: [] as HTMLElement[],
     }
   },
 
@@ -148,9 +148,9 @@ export default baseMixins.extend({
         top: this.calculatedTop,
         left: this.calculatedLeft,
         transformOrigin: this.origin,
-        zIndex: this.zIndex || this.activeZIndex
+        zIndex: this.zIndex || this.activeZIndex,
       }
-    }
+    },
   },
 
   watch: {
@@ -169,7 +169,7 @@ export default baseMixins.extend({
 
       prev in this.tiles &&
         this.tiles[prev].classList.remove('v-list-item--highlighted')
-    }
+    },
   },
 
   mounted () {
@@ -254,14 +254,14 @@ export default baseMixins.extend({
 
       return this.$createElement('transition', {
         props: {
-          name: this.transition
-        }
+          name: this.transition,
+        },
       }, [this.genContent()])
     },
     genDirectives (): VNodeDirective[] {
       const directives: VNodeDirective[] = [{
         name: 'show',
-        value: this.isContentActive
+        value: this.isContentActive,
       }]
 
       // Do not add click outside for hover menu
@@ -271,8 +271,8 @@ export default baseMixins.extend({
           value: () => { this.isActive = false },
           args: {
             closeConditional: this.closeConditional,
-            include: () => [this.$el, ...this.getOpenDependentElements()]
-          }
+            include: () => [this.$el, ...this.getOpenDependentElements()],
+          },
         } as any)
       }
 
@@ -287,7 +287,7 @@ export default baseMixins.extend({
           'v-menu__content--auto': this.auto,
           'v-menu__content--fixed': this.activatorFixed,
           'menuable__content__active': this.isActive,
-          [this.contentClass.trim()]: true
+          [this.contentClass.trim()]: true,
         },
         style: this.styles,
         directives: this.genDirectives(),
@@ -301,8 +301,8 @@ export default baseMixins.extend({
             if (target.getAttribute('disabled')) return
             if (this.closeOnContentClick) this.isActive = false
           },
-          keydown: this.onKeyDown
-        }
+          keydown: this.onKeyDown,
+        },
       } as VNodeData
 
       if (!this.disabled && this.openOnHover) {
@@ -375,23 +375,23 @@ export default baseMixins.extend({
       // hacky but will revisit in the future
       clearTimeout(this.resizeTimeout)
       this.resizeTimeout = window.setTimeout(this.updateDimensions, 100)
-    }
+    },
   },
 
   render (h): VNode {
     const data = {
       staticClass: 'v-menu',
       class: {
-        'v-menu--inline': !this.fullWidth && (this.$slots.activator || this.$scopedSlots.activator)
+        'v-menu--inline': !this.fullWidth && (this.$slots.activator || this.$scopedSlots.activator),
       },
       directives: [{
         arg: '500',
         name: 'resize',
-        value: this.onResize
+        value: this.onResize,
       }],
       on: this.disableKeys ? undefined : {
-        keydown: this.onKeyDown
-      }
+        keydown: this.onKeyDown,
+      },
     }
 
     return h('div', data, [
@@ -400,9 +400,9 @@ export default baseMixins.extend({
         props: {
           root: true,
           light: this.light,
-          dark: this.dark
-        }
-      }, [this.genTransition()])
+          dark: this.dark,
+        },
+      }, [this.genTransition()]),
     ])
-  }
+  },
 })

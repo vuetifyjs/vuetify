@@ -12,7 +12,7 @@ export default Themeable.extend({
 
   props: {
     inset: Boolean,
-    vertical: Boolean
+    vertical: Boolean,
   },
 
   render (h): VNode {
@@ -21,10 +21,10 @@ export default Themeable.extend({
         'v-divider': true,
         'v-divider--inset': this.inset,
         'v-divider--vertical': this.vertical,
-        ...this.themeClasses
+        ...this.themeClasses,
       },
       attrs: this.$attrs,
-      on: this.$listeners
+      on: this.$listeners,
     })
-  }
+  },
 })

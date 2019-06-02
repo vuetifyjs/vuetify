@@ -42,7 +42,7 @@
         'mdi-tilde',
         'mdi-tennis',
         'mdi-mouse',
-        'fas fa-lock'
+        'fas fa-lock',
       ],
       icon: 'mdi-tennis',
       colors: [
@@ -50,10 +50,10 @@
         'red',
         'teal lighten-2',
         'primary',
-        'grey'
+        'grey',
       ],
-      color: 'primary'
-    })
+      color: 'primary',
+    }),
   }
 </script>
 

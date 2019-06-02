@@ -41,9 +41,9 @@
         ['ENTANGLED', 'display-4 font-weight-black', 'Black'],
         ['Cardstock 80lb ultra-bright orange', 'display-1 font-weight-medium', 'Medium'],
         ['STATIONERY', 'display-4 font-weight-thin', 'Thin'],
-        ['POSITION, MOMENTUM & SPIN', 'display-2 font-weight-light', 'Condensed Light']
-      ]
-    })
+        ['POSITION, MOMENTUM & SPIN', 'display-2 font-weight-light', 'Condensed Light'],
+      ],
+    }),
 
   }
 </script>

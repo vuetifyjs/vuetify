@@ -22,7 +22,7 @@ export default function (expandedParentClass = '', x = false) {
         transition: el.style.transition,
         visibility: el.style.visibility,
         overflow: el.style.overflow,
-        [sizeProperty]: el.style[sizeProperty]
+        [sizeProperty]: el.style[sizeProperty],
       }
     },
 
@@ -57,7 +57,7 @@ export default function (expandedParentClass = '', x = false) {
         transition: '',
         visibility: '',
         overflow: el.style.overflow,
-        [sizeProperty]: el.style[sizeProperty]
+        [sizeProperty]: el.style[sizeProperty],
       }
 
       el.style.overflow = 'hidden'
@@ -68,7 +68,7 @@ export default function (expandedParentClass = '', x = false) {
     },
 
     afterLeave,
-    leaveCancelled: afterLeave
+    leaveCancelled: afterLeave,
   }
 
   function afterLeave (el: HTMLExpandElement) {

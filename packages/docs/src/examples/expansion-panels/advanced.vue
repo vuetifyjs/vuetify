@@ -202,9 +202,9 @@
         name: '',
         location: null,
         start: null,
-        end: null
+        end: null,
       },
-      locations: ['Australia', 'Barbados', 'Chile', 'Denmark', 'Equador', 'France']
-    })
+      locations: ['Australia', 'Barbados', 'Chile', 'Denmark', 'Equador', 'France'],
+    }),
   }
 </script>

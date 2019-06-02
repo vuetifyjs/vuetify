@@ -3,25 +3,25 @@ import { parseTimestamp, VTimestamp } from '../../util/timestamp'
 import {
   mount,
   Wrapper,
-  MountOptions
+  MountOptions,
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../../util/mixins'
 
 const Mock = CalendarWithIntervals.extend({
-  render: h => h('div')
+  render: h => h('div'),
 })
 
 const createMouseEvent = (x, y) => ({
   clientX: x,
   clientY: y,
-  currentTarget: document.body
+  currentTarget: document.body,
 })
 const createTouchEvent = (x, y) => ({
   touches: [{
     clientX: x,
-    clientY: y
+    clientY: y,
   }],
-  currentTarget: document.body
+  currentTarget: document.body,
 })
 
 describe('calendar-with-intervals.ts', () => {
@@ -34,10 +34,10 @@ describe('calendar-with-intervals.ts', () => {
         mocks: {
           $vuetify: {
             lang: {
-              current: 'en-US'
-            }
-          }
-        }
+              current: 'en-US',
+            },
+          },
+        },
       })
     }
   })
@@ -48,8 +48,8 @@ describe('calendar-with-intervals.ts', () => {
         firstInterval: '1',
         intervalMinutes: '30',
         intervalCount: '10',
-        intervalHeight: '20'
-      }
+        intervalHeight: '20',
+      },
     })
 
     expect(wrapper.vm.parsedFirstInterval).toBeDefined()
@@ -66,8 +66,8 @@ describe('calendar-with-intervals.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         firstInterval: '2',
-        intervalMinutes: '30'
-      }
+        intervalMinutes: '30',
+      },
     })
 
     expect(wrapper.vm.firstMinute).toBeDefined()
@@ -78,8 +78,8 @@ describe('calendar-with-intervals.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         intervalCount: '10',
-        intervalHeight: '20'
-      }
+        intervalHeight: '20',
+      },
     })
 
     expect(wrapper.vm.bodyHeight).toBeDefined()
@@ -90,8 +90,8 @@ describe('calendar-with-intervals.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         start: '2019-01-29',
-        end: '2019-02-04'
-      }
+        end: '2019-02-04',
+      },
     })
 
     expect(wrapper.vm.days).toBeDefined()
@@ -102,7 +102,7 @@ describe('calendar-with-intervals.ts', () => {
 
     wrapper.setProps({
       start: '2019-01-29',
-      end: '2019-02-02'
+      end: '2019-02-02',
     })
 
     expect(wrapper.vm.days).toBeDefined()
@@ -116,8 +116,8 @@ describe('calendar-with-intervals.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         start: '2019-01-29',
-        end: '2019-02-04'
-      }
+        end: '2019-02-04',
+      },
     })
 
     expect(wrapper.vm.intervals).toBeDefined()
@@ -129,7 +129,7 @@ describe('calendar-with-intervals.ts', () => {
 
     wrapper.setProps({
       start: '2019-01-29',
-      end: '2019-02-02'
+      end: '2019-02-02',
     })
 
     expect(wrapper.vm.intervals).toBeDefined()
@@ -162,8 +162,8 @@ describe('calendar-with-intervals.ts', () => {
     const intervalFormat = x => x
     const wrapper = mountFunction({
       propsData: {
-        intervalFormat
-      }
+        intervalFormat,
+      },
     })
 
     expect(wrapper.vm.intervalFormatter).toBeDefined()
@@ -194,7 +194,7 @@ describe('calendar-with-intervals.ts', () => {
       firstInterval: 5,
       intervalCount: 5,
       intervalMinutes: 10,
-      bodyHeight: 400
+      bodyHeight: 400,
     })
 
     expect(wrapper.vm.timeToY('08:30')).toBe(200)
@@ -214,8 +214,8 @@ describe('calendar-with-intervals.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         intervalMinutes: 5,
-        bodyHeight: 200
-      }
+        bodyHeight: 200,
+      },
     })
 
     expect(wrapper.vm.minutesToPixels).toBeDefined()
@@ -228,7 +228,7 @@ describe('calendar-with-intervals.ts', () => {
 
     wrapper.setProps({
       intervalMinutes: 10,
-      bodyHeight: 400
+      bodyHeight: 400,
     })
 
     expect(wrapper.vm.minutesToPixels(5)).toBe(20)
@@ -240,9 +240,9 @@ describe('calendar-with-intervals.ts', () => {
     const wrapper = mountFunction({
       render: h => h('div', [
         h('div', {
-          ref: 'scrollArea'
-        })
-      ])
+          ref: 'scrollArea',
+        }),
+      ]),
     })
 
     wrapper.vm.scrollToTime('8:30')
@@ -254,7 +254,7 @@ describe('calendar-with-intervals.ts', () => {
 
     wrapper.setProps({
       intervalMinutes: 5,
-      bodyHeight: 200
+      bodyHeight: 200,
     })
 
     wrapper.vm.scrollToTime('8:30')
@@ -266,7 +266,7 @@ describe('calendar-with-intervals.ts', () => {
 
     wrapper.setProps({
       intervalMinutes: 30,
-      bodyHeight: 1700
+      bodyHeight: 1700,
     })
 
     wrapper.vm.scrollToTime('8:30')
@@ -312,8 +312,8 @@ describe('calendar-with-intervals.ts', () => {
       propsData: {
         start: '2019-01-29',
         end: '2019-02-04',
-        firstInterval: 5
-      }
+        firstInterval: 5,
+      },
     })
     expect(typeof wrapper.vm.showIntervalLabelDefault).toBe('function')
     expect(wrapper.vm.showIntervalLabelDefault({})).toBeFalsy()

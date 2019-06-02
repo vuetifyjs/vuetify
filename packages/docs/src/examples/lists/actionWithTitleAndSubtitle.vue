@@ -87,8 +87,8 @@
       return {
         notifications: false,
         sound: true,
-        widgets: false
+        widgets: false,
       }
-    }
+    },
   }
 </script>

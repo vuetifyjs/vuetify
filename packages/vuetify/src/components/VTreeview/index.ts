@@ -6,6 +6,6 @@ export { VTreeview, VTreeviewNode }
 export default {
   $_vuetify_subcomponents: {
     VTreeview,
-    VTreeviewNode
-  }
+    VTreeviewNode,
+  },
 }

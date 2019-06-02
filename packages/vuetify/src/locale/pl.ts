@@ -3,15 +3,15 @@ export default {
   dataIterator: {
     pageText: '{0}-{1} z {2}',
     noResultsText: 'Nie znaleziono danych odpowiadających wyszukiwaniu',
-    loadingText: 'Wczytywanie danych...'
+    loadingText: 'Wczytywanie danych...',
   },
   dataTable: {
     itemsPerPageText: 'Wierszy na stronie:',
     ariaLabel: {
       sortDescending: ': Sortowanie malejąco. Kliknij aby zmienić.',
       sortAscending: ': Sortowanie rosnąco. Kliknij aby zmienić.',
-      sortNone: ': Bez sortowania. Kliknij aby posortować rosnąco.'
-    }
+      sortNone: ': Bez sortowania. Kliknij aby posortować rosnąco.',
+    },
   },
   dataFooter: {
     itemsPerPageText: 'Pozycji na stronie:',
@@ -19,11 +19,11 @@ export default {
     nextPage: 'Nastęna strona',
     prevPage: 'Poprzednia strona',
     firstPage: 'Pierwsza strona',
-    lastPage: 'Ostatnia strona'
+    lastPage: 'Ostatnia strona',
   },
   noDataText: 'Brak danych',
   carousel: {
     prev: 'Poprzedni obraz',
-    next: 'Następny obraz'
-  }
+    next: 'Następny obraz',
+  },
 }

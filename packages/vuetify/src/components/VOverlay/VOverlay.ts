@@ -24,23 +24,23 @@ export default mixins(
     absolute: Boolean,
     color: {
       type: String,
-      default: '#212121'
+      default: '#212121',
     },
     dark: {
       type: Boolean,
-      default: true
+      default: true,
     },
     opacity: {
       type: [Number, String],
-      default: 0.46
+      default: 0.46,
     },
     zIndex: {
       type: [Number, String],
-      default: 5
+      default: 5,
     },
     value: {
-      default: true
-    }
+      default: true,
+    },
   },
 
   computed: {
@@ -48,8 +48,8 @@ export default mixins(
       const data = this.setBackgroundColor(this.color, {
         staticClass: 'v-overlay__scrim',
         style: {
-          opacity: this.computedOpacity
-        }
+          opacity: this.computedOpacity,
+        },
       })
 
       return this.$createElement('div', data)
@@ -58,7 +58,7 @@ export default mixins(
       return {
         'v-overlay--absolute': this.absolute,
         'v-overlay--active': this.isActive,
-        ...this.themeClasses
+        ...this.themeClasses,
       }
     },
     computedOpacity (): number {
@@ -66,17 +66,17 @@ export default mixins(
     },
     styles (): object {
       return {
-        zIndex: this.zIndex
+        zIndex: this.zIndex,
       }
-    }
+    },
   },
 
   methods: {
     genContent () {
       return this.$createElement('div', {
-        staticClass: 'v-overlay__content'
+        staticClass: 'v-overlay__content',
       }, this.$slots.default)
-    }
+    },
   },
 
   render (h): VNode {
@@ -87,7 +87,7 @@ export default mixins(
     return h('div', {
       staticClass: 'v-overlay',
       class: this.classes,
-      style: this.styles
+      style: this.styles,
     }, children)
-  }
+  },
 })

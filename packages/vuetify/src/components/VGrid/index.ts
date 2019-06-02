@@ -1,5 +1,5 @@
 import {
-  createSimpleFunctional
+  createSimpleFunctional,
 } from '../../util/helpers'
 import VContainer from './VContainer'
 import VFlex from './VFlex'
@@ -11,7 +11,7 @@ export {
   VContainer,
   VFlex,
   VLayout,
-  VSpacer
+  VSpacer,
 }
 
 export default {
@@ -19,6 +19,6 @@ export default {
     VContainer,
     VFlex,
     VLayout,
-    VSpacer
-  }
+    VSpacer,
+  },
 }

@@ -76,17 +76,17 @@
       socials: [
         {
           icon: 'fab fa-facebook',
-          color: 'indigo'
+          color: 'indigo',
         },
         {
           icon: 'fab fa-linkedin',
-          color: 'cyan darken-1'
+          color: 'cyan darken-1',
         },
         {
           icon: 'fab fa-instagram',
-          color: 'red lighten-3'
-        }
-      ]
+          color: 'red lighten-3',
+        },
+      ],
     }),
 
     methods: {
@@ -95,8 +95,8 @@
         const max = 560
 
         return Math.floor(Math.random() * (max - min + 1)) + min
-      }
-    }
+      },
+    },
   }
 </script>
 

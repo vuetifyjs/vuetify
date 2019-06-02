@@ -18,13 +18,13 @@
 
   const cssResources = [
     'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons',
-    `https://cdn.jsdelivr.net/npm/vuetify@${version}/dist/vuetify.min.css`
+    `https://cdn.jsdelivr.net/npm/vuetify@${version}/dist/vuetify.min.css`,
   ]
 
   const jsResources = [
     'https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js',
     'https://cdn.jsdelivr.net/npm/vue/dist/vue.js',
-    `https://cdn.jsdelivr.net/npm/vuetify@${version}/dist/vuetify.min.js`
+    `https://cdn.jsdelivr.net/npm/vuetify@${version}/dist/vuetify.min.js`,
   ]
 
   export default {
@@ -33,12 +33,12 @@
     props: {
       pen: {
         type: Object,
-        default: () => ({})
+        default: () => ({}),
       },
       title: {
         type: String,
-        default: title
-      }
+        default: title,
+      },
     },
 
     computed: {
@@ -87,7 +87,7 @@
       style () {
         return {
           content: (this.pen.style || '').replace(/(<style.*?>|<\/style>)/g, '').replace(/\n {2}/g, '\n').trim(),
-          language: /<style.*lang=["'](.*)["'].*>/.exec(this.pen.style || '')
+          language: /<style.*lang=["'](.*)["'].*>/.exec(this.pen.style || ''),
         }
       },
       template () {
@@ -120,17 +120,17 @@
           js: this.script,
           js_pre_processor: 'babel',
           js_external: [...this.additionalResources.js, ...jsResources].join(';'),
-          editors: this.editors
+          editors: this.editors,
         }
 
         return JSON.stringify(data)
-      }
+      },
     },
 
     methods: {
       submit () {
         this.$el.submit()
-      }
-    }
+      },
+    },
   }
 </script>

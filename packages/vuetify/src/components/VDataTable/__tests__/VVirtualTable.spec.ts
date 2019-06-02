@@ -2,7 +2,7 @@ import VVirtualTable from '../VVirtualTable'
 import {
   mount,
   Wrapper,
-  MountOptions
+  MountOptions,
 } from '@vue/test-utils'
 import Vue from 'vue'
 
@@ -20,11 +20,11 @@ describe('VVirtualTable.ts', () => {
 
     const wrapper = mountFunction({
       propsData: {
-        itemsLength: 10
+        itemsLength: 10,
       },
       scopedSlots: {
-        items: props => vm.$createElement('div', { staticClass: 'test' }, [ JSON.stringify(props) ])
-      }
+        items: props => vm.$createElement('div', { staticClass: 'test' }, [ JSON.stringify(props) ]),
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -34,8 +34,8 @@ describe('VVirtualTable.ts', () => {
     const scrollTop = jest.fn()
     const wrapper = mountFunction({
       scopedSlots: {
-        items: '<div></div>'
-      }
+        items: '<div></div>',
+      },
     })
     wrapper.vm.$watch('scrollTop', scrollTop)
 
@@ -48,11 +48,11 @@ describe('VVirtualTable.ts', () => {
   it('should compute height', () => {
     const wrapper = mountFunction({
       propsData: {
-        itemsLength: 10
+        itemsLength: 10,
       },
       scopedSlots: {
-        items: '<div></div>'
-      }
+        items: '<div></div>',
+      },
     })
 
     expect(wrapper.vm.totalHeight).toBe(528)

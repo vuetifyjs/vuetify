@@ -10,6 +10,6 @@ export default {
     VExpansionPanels,
     VExpansionPanel,
     VExpansionPanelHeader,
-    VExpansionPanelContent
-  }
+    VExpansionPanelContent,
+  },
 }

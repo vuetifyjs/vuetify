@@ -8,7 +8,7 @@ const availableProps = {
   fixed: Boolean,
   left: Boolean,
   right: Boolean,
-  top: Boolean
+  top: Boolean,
 }
 type props = Record<keyof typeof availableProps, boolean>
 
@@ -19,7 +19,7 @@ export function factory (selected: undefined): OptionsVue<Vue, {}, {}, {}, props
 export function factory (selected: any[] = []): any {
   return Vue.extend({
     name: 'positionable',
-    props: selected.length ? filterObjectOnKeys(availableProps, selected) : availableProps
+    props: selected.length ? filterObjectOnKeys(availableProps, selected) : availableProps,
   })
 }
 

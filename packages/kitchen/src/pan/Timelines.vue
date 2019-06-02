@@ -206,7 +206,7 @@
   export default {
     name: 'Timelines',
 
-    data: () => ({})
+    data: () => ({}),
   }
 </script>
 

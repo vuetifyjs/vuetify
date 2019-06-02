@@ -15,7 +15,7 @@ export default mixins(
   name: 'v-subheader',
 
   props: {
-    inset: Boolean
+    inset: Boolean,
   },
 
   render (h): VNode {
@@ -23,10 +23,10 @@ export default mixins(
       staticClass: 'v-subheader',
       class: {
         'v-subheader--inset': this.inset,
-        ...this.themeClasses
+        ...this.themeClasses,
       },
       attrs: this.$attrs,
-      on: this.$listeners
+      on: this.$listeners,
     }, this.$slots.default)
-  }
+  },
 })

@@ -98,7 +98,7 @@
     ['red', 'orange', 'yellow'],
     ['purple', 'violet'],
     ['#00c6ff', '#F0F', '#FF0'],
-    ['#f72047', '#ffd200', '#1feaea']
+    ['#f72047', '#ffd200', '#1feaea'],
   ]
 
   export default {
@@ -109,7 +109,7 @@
       padding: 8,
       radius: 10,
       value: [0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0],
-      width: 2
-    })
+      width: 2,
+    }),
   }
 </script>

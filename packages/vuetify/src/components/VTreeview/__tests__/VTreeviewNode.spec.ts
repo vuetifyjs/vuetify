@@ -3,15 +3,15 @@ import VTreeviewNode from '../VTreeviewNode'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 Vue.prototype.$vuetify = {
   icons: {
     values: {
-      subgroup: 'arrow_drop_down'
-    }
-  }
+      subgroup: 'arrow_drop_down',
+    },
+  },
 }
 
 const singleRootTwoChildren = { id: 0, name: 'Root', children: [{ id: 1, name: 'Child' }, { id: 2, name: 'Child 2' }] }
@@ -25,9 +25,9 @@ const Mock = {
   render: h => h(VTreeviewNode, {
     scopedSlots: {
       prepend: defaultSlot,
-      append: defaultSlot
-    }
-  })
+      append: defaultSlot,
+    },
+  }),
 }
 
 const MockScopedLabel = {
@@ -35,12 +35,12 @@ const MockScopedLabel = {
 
   render: h => h(VTreeviewNode, {
     props: {
-      item: singleRootTwoChildren
+      item: singleRootTwoChildren,
     },
     scopedSlots: {
-      label: props => vm.$createElement('div', [props.item.name.toUpperCase()])
-    }
-  })
+      label: props => vm.$createElement('div', [props.item.name.toUpperCase()]),
+    },
+  }),
 }
 
 describe('VTreeViewNode.ts', () => {
@@ -52,7 +52,7 @@ describe('VTreeViewNode.ts', () => {
     treeview = {
       register: jest.fn(),
       unregister: jest.fn(),
-      isExcluded: () => false
+      isExcluded: () => false,
     }
 
     mountFunction = (options?: MountOptions<Instance>) => {
@@ -62,7 +62,7 @@ describe('VTreeViewNode.ts', () => {
 
   it('should return indeterminate icon', async () => {
     const wrapper = mountFunction({
-      provide: { treeview }
+      provide: { treeview },
     })
 
     expect(wrapper.vm.computedIcon).toBe('$vuetify.icons.checkboxOff')
@@ -74,7 +74,7 @@ describe('VTreeViewNode.ts', () => {
 
   it('should use scoped slots', () => {
     const wrapper = mount(Mock, {
-      provide: { treeview }
+      provide: { treeview },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -83,7 +83,7 @@ describe('VTreeViewNode.ts', () => {
   it('should generate a transition element', () => {
     const wrapper = mountFunction({
       propsData: { transition: true },
-      provide: { treeview }
+      provide: { treeview },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -91,7 +91,7 @@ describe('VTreeViewNode.ts', () => {
 
   it('should use label slot', () => {
     const wrapper = mount(MockScopedLabel, {
-      provide: { treeview }
+      provide: { treeview },
     })
 
     expect(wrapper.html()).toMatchSnapshot()

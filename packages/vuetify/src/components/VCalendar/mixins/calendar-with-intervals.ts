@@ -13,7 +13,7 @@ import {
   updateMinutes,
   createDayList,
   createIntervalList,
-  createNativeLocaleFormatter
+  createNativeLocaleFormatter,
 } from '../util/timestamp'
 
 /* @vue/component */
@@ -72,7 +72,7 @@ export default CalendarBase.extend({
         this.currentLocale,
         (tms, short) => short ? (tms.minute === 0 ? shortHourOptions : shortOptions) : longOptions
       )
-    }
+    },
   },
 
   methods: {
@@ -141,6 +141,6 @@ export default CalendarBase.extend({
       }
 
       return y
-    }
-  }
+    },
+  },
 })

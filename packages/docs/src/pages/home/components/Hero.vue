@@ -88,7 +88,7 @@
   export default {
     components: {
       Feature: () => import('./Feature'),
-      Tidelift: () => import('./Tidelift')
-    }
+      Tidelift: () => import('./Tidelift'),
+    },
   }
 </script>

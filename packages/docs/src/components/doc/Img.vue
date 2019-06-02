@@ -21,8 +21,8 @@
     props: {
       value: {
         type: String,
-        default: undefined
-      }
+        default: undefined,
+      },
     },
 
     computed: {
@@ -34,7 +34,7 @@
         }
 
         return `https://cdn.vuetifyjs.com/images/${this.value}`
-      }
-    }
+      },
+    },
   }
 </script>

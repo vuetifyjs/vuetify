@@ -7,7 +7,7 @@ import VSlider from '../VSlider'
 // Helpers
 import {
   createRange,
-  deepEqual
+  deepEqual,
 } from '../../util/helpers'
 
 // Types
@@ -20,14 +20,14 @@ export default VSlider.extend({
   props: {
     value: {
       type: Array,
-      default: () => ([0, 0])
-    } as PropValidator<number[]>
+      default: () => ([0, 0]),
+    } as PropValidator<number[]>,
   },
 
   data () {
     return {
       activeThumb: null as null | number,
-      lazyValue: this.value
+      lazyValue: this.value,
     }
   },
 
@@ -35,7 +35,7 @@ export default VSlider.extend({
     classes (): object {
       return {
         ...VSlider.options.computed.classes.call(this),
-        'v-input--range-slider': true
+        'v-input--range-slider': true,
       }
     },
     internalValue: {
@@ -62,7 +62,7 @@ export default VSlider.extend({
         if (!deepEqual(value, this.value)) this.$emit('input', value)
 
         this.validate()
-      }
+      },
     },
     inputWidth (): number[] {
       return this.internalValue.map((v: number) => (
@@ -79,7 +79,7 @@ export default VSlider.extend({
       styles[start] = `${this.inputWidth[0]}%`
 
       return styles
-    }
+    },
   },
 
   methods: {
@@ -93,7 +93,7 @@ export default VSlider.extend({
       return {
         transition: this.trackTransition,
         [startDir]: start,
-        [endDir]: end
+        [endDir]: end,
       }
     },
     getIndexOfClosestValue (arr: number[], v: number) {
@@ -119,31 +119,31 @@ export default VSlider.extend({
         const sections: [number, number, number, number][] = [
           [0, this.inputWidth[0], 0, -disabledPadding],
           [this.inputWidth[0], Math.abs(this.inputWidth[1] - this.inputWidth[0]), disabledPadding, disabledPadding * -2],
-          [this.inputWidth[1], Math.abs(100 - this.inputWidth[1]), disabledPadding, 0]
+          [this.inputWidth[1], Math.abs(100 - this.inputWidth[1]), disabledPadding, 0],
         ]
 
         if (this.$vuetify.rtl) sections.reverse()
 
         children.push(...sections.map(section => this.$createElement('div', this.setBackgroundColor(this.computedTrackColor, {
           staticClass: 'v-slider__track-background',
-          style: this.getTrackStyle(...section)
+          style: this.getTrackStyle(...section),
         }))))
       } else {
         children.push(
           this.$createElement('div', this.setBackgroundColor(this.computedTrackColor, {
             staticClass: 'v-slider__track-background',
-            style: this.getTrackStyle(0, 100)
+            style: this.getTrackStyle(0, 100),
           })),
           this.$createElement('div', this.setBackgroundColor(this.computedColor, {
             staticClass: 'v-slider__track-fill',
-            style: this.trackFillStyles
+            style: this.trackFillStyles,
           }))
         )
       }
 
       return this.$createElement('div', {
         staticClass: 'v-slider__track-container',
-        ref: 'track'
+        ref: 'track',
       }, children)
     },
     genChildren () {
@@ -168,7 +168,7 @@ export default VSlider.extend({
           const isFocused = this.isFocused && this.activeThumb === index
 
           return this.genThumbContainer(value, valueWidth, isActive, isFocused, onDrag, onFocus, `thumb_${index}`)
-        })
+        }),
       ]
     },
     onFocus (index: number) {
@@ -213,6 +213,6 @@ export default VSlider.extend({
         if (i === this.activeThumb) return value
         else return Number(v)
       })
-    }
-  }
+    },
+  },
 })

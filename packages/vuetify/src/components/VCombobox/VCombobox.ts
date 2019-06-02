@@ -18,16 +18,16 @@ export default VAutocomplete.extend({
   props: {
     delimiters: {
       type: Array,
-      default: () => ([])
+      default: () => ([]),
     } as PropValidator<any[]>,
     returnObject: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
 
   data: () => ({
-    editingIndex: -1
+    editingIndex: -1,
   }),
 
   computed: {
@@ -47,7 +47,7 @@ export default VAutocomplete.extend({
 
       return this.hasDisplayedItems ||
         (!!this.$slots['no-data'] && !this.hideNoData)
-    }
+    },
   },
 
   methods: {
@@ -78,7 +78,7 @@ export default VAutocomplete.extend({
             this.editingIndex = index
             this.internalSearch = this.getText(item)
             this.selectedIndex = -1
-          }
+          },
         }
       }
 
@@ -215,6 +215,6 @@ export default VAutocomplete.extend({
 
       this.selectItem(this.internalSearch)
       this.internalSearch = null
-    }
-  }
+    },
+  },
 })

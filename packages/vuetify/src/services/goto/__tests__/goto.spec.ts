@@ -17,7 +17,7 @@ describe('$vuetify.goTo', () => {
 
   beforeEach(() => {
     framework = {
-      application: new Application()
+      application: new Application(),
     }
 
     goTo.framework = framework

@@ -8,7 +8,7 @@ import VItem from '../VItem'
 import {
   createLocalVue,
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 const itemWarning = '[Vuetify] The v-item component must be used inside a v-item-group'
@@ -24,7 +24,7 @@ describe('VItem', () => {
     mountFunction = (options = {}) => {
       return mount(VItem, {
         localVue,
-        ...options
+        ...options,
       })
     }
   })
@@ -42,9 +42,9 @@ describe('VItem', () => {
 
       render: h => h(VItem, {
         scopedSlots: {
-          default: () => '<div>foo</div>'
-        }
-      })
+          default: () => '<div>foo</div>',
+        },
+      }),
     }
 
     mount(Mock)
@@ -60,9 +60,9 @@ describe('VItem', () => {
       render: h => h(VItem, {
         props: { activeClass: 'foo' },
         scopedSlots: {
-          default: () => h('div')
-        }
-      })
+          default: () => h('div'),
+        },
+      }),
     }
 
     const wrapper = mount(Mock)

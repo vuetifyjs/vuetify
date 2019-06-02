@@ -3,7 +3,7 @@ import { Lang } from '../../../services/lang'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 import Vue from 'vue'
 
@@ -14,9 +14,9 @@ Vue.prototype.$vuetify = {
       next: 'mdi-chevron-right',
       dropdown: 'mdi-menu-down',
       first: 'mdi-page-first',
-      last: 'mdi-page-last'
-    }
-  }
+      last: 'mdi-page-last',
+    },
+  },
 }
 
 describe('VDataFooter.ts', () => {
@@ -31,11 +31,11 @@ describe('VDataFooter.ts', () => {
           $vuetify: {
             lang: new Lang(),
             theme: {
-              dark: false
-            }
-          }
+              dark: false,
+            },
+          },
         },
-        ...options
+        ...options,
       })
     }
   })
@@ -44,16 +44,16 @@ describe('VDataFooter.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         options: {
-          page: 4
+          page: 4,
         },
         pagination: {
           page: 4,
           pageStart: 1,
           pageStop: 10,
           pageCount: 10,
-          itemsLength: 100
-        }
-      }
+          itemsLength: 100,
+        },
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -64,7 +64,7 @@ describe('VDataFooter.ts', () => {
       propsData: {
         options: {
           page: 4,
-          itemsPerPage: 100
+          itemsPerPage: 100,
         },
         pagination: {
           page: 4,
@@ -72,9 +72,9 @@ describe('VDataFooter.ts', () => {
           pageStart: 1,
           pageStop: 10,
           pageCount: 10,
-          itemsLength: 100
-        }
-      }
+          itemsLength: 100,
+        },
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -85,7 +85,7 @@ describe('VDataFooter.ts', () => {
       propsData: {
         options: {
           page: 4,
-          itemsPerPage: 10
+          itemsPerPage: 10,
         },
         pagination: {
           page: 4,
@@ -93,19 +93,19 @@ describe('VDataFooter.ts', () => {
           pageStart: 1,
           pageStop: 10,
           pageCount: 10,
-          itemsLength: 100
+          itemsLength: 100,
         },
-        showFirstLastPage: true
+        showFirstLastPage: true,
       },
       mocks: {
         $vuetify: {
           rtl: true,
           lang: new Lang(),
           theme: {
-            dark: false
-          }
-        }
-      }
+            dark: false,
+          },
+        },
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -116,7 +116,7 @@ describe('VDataFooter.ts', () => {
       propsData: {
         options: {
           page: 4,
-          itemsPerPage: 10
+          itemsPerPage: 10,
         },
         pagination: {
           page: 4,
@@ -124,10 +124,10 @@ describe('VDataFooter.ts', () => {
           pageStart: 1,
           pageStop: 10,
           pageCount: 10,
-          itemsLength: 100
+          itemsLength: 100,
         },
-        showFirstLastPage: true
-      }
+        showFirstLastPage: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -140,7 +140,7 @@ describe('VDataFooter.ts', () => {
       propsData: {
         options: {
           page: 4,
-          itemsPerPage: 10
+          itemsPerPage: 10,
         },
         pagination: {
           page: 4,
@@ -148,12 +148,12 @@ describe('VDataFooter.ts', () => {
           pageStart: 1,
           pageStop: 10,
           pageCount: 10,
-          itemsLength: 100
-        }
+          itemsLength: 100,
+        },
       },
       listeners: {
-        'update:options': mock
-      }
+        'update:options': mock,
+      },
     })
 
     wrapper.vm.onNextPage()
@@ -175,7 +175,7 @@ describe('VDataFooter.ts', () => {
       propsData: {
         options: {
           page: 4,
-          itemsPerPage: 10
+          itemsPerPage: 10,
         },
         pagination: {
           page: 4,
@@ -183,10 +183,10 @@ describe('VDataFooter.ts', () => {
           pageStart: 1,
           pageStop: 10,
           pageCount: 10,
-          itemsLength: 100
+          itemsLength: 100,
         },
-        showCurrentPage: true
-      }
+        showCurrentPage: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()

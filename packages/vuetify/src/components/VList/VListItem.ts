@@ -38,7 +38,7 @@ export default baseMixins.extend<options>().extend({
   name: 'v-list-item',
 
   directives: {
-    Ripple
+    Ripple,
   },
 
   inheritAttrs: false,
@@ -50,22 +50,22 @@ export default baseMixins.extend<options>().extend({
         if (!this.listItemGroup) return ''
 
         return this.listItemGroup.activeClass
-      }
+      },
     } as any as PropValidator<string>,
     dense: Boolean,
     inactive: Boolean,
     link: Boolean,
     tag: {
       type: String,
-      default: 'div'
+      default: 'div',
     },
     threeLine: Boolean,
     twoLine: Boolean,
-    value: null as any as PropValidator<any>
+    value: null as any as PropValidator<any>,
   },
 
   data: () => ({
-    proxyClass: 'v-list-item--active'
+    proxyClass: 'v-list-item--active',
   }),
 
   computed: {
@@ -78,7 +78,7 @@ export default baseMixins.extend<options>().extend({
         'v-list-item--link': this.isClickable && !this.inactive,
         'v-list-item--three-line': this.threeLine,
         'v-list-item--two-line': this.twoLine,
-        ...this.themeClasses
+        ...this.themeClasses,
       }
     },
     isClickable (): boolean {
@@ -86,7 +86,7 @@ export default baseMixins.extend<options>().extend({
         Routable.options.computed.isClickable.call(this) ||
         this.listItemGroup
       )
-    }
+    },
   },
 
   created () {
@@ -103,7 +103,7 @@ export default baseMixins.extend<options>().extend({
       this.$emit('click', e)
 
       this.to || this.toggle()
-    }
+    },
   },
 
   render (h): VNode {
@@ -113,7 +113,7 @@ export default baseMixins.extend<options>().extend({
       ...data.attrs,
       'aria-selected': String(this.isActive),
       role: 'listitem',
-      tabindex: tag === 'a' && this.isClickable ? 0 : -1
+      tabindex: tag === 'a' && this.isClickable ? 0 : -1,
     }
     data.on = {
       ...data.on,
@@ -123,18 +123,18 @@ export default baseMixins.extend<options>().extend({
         if (e.keyCode === keyCodes.enter) this.click(e)
 
         this.$emit('keydown', e)
-      }
+      },
     }
 
     const children = this.$scopedSlots.default
       ? this.$scopedSlots.default({
         active: this.isActive,
-        toggle: this.toggle
+        toggle: this.toggle,
       })
       : this.$slots.default
 
     tag = this.inactive ? 'div' : tag
 
     return h(tag, this.setTextColor(this.color, data), children)
-  }
+  },
 })

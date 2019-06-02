@@ -3,7 +3,7 @@ import {
   ComponentOptions,
   RecordPropsDefinition,
   ThisTypedComponentOptionsWithArrayProps,
-  ThisTypedComponentOptionsWithRecordProps
+  ThisTypedComponentOptionsWithRecordProps,
 } from 'vue/types/options'
 import { Vue } from 'vue/types/vue'
 import { FunctionalComponentOptions } from 'vue'

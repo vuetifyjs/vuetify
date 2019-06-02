@@ -25,7 +25,7 @@
     data: () => ({
       arrayEvents: null,
       date1: new Date().toISOString().substr(0, 7),
-      date2: new Date().toISOString().substr(0, 7)
+      date2: new Date().toISOString().substr(0, 7),
     }),
 
     mounted () {
@@ -43,7 +43,7 @@
         if ([1, 3, 7].includes(month)) return true
         if ([2, 5, 12].includes(month)) return ['error', 'purple', 'rgba(0, 128, 0, 0.5)']
         return false
-      }
-    }
+      },
+    },
   }
 </script>

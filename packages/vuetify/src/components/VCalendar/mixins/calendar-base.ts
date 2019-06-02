@@ -17,7 +17,7 @@ import {
   createDayList,
   createNativeLocaleFormatter,
   getStartOfWeek,
-  getEndOfWeek
+  getEndOfWeek,
 } from '../util/timestamp'
 
 export default mixins(
@@ -74,7 +74,7 @@ export default mixins(
         this.currentLocale,
         (_tms, short) => short ? shortOptions : longOptions
       )
-    }
+    },
   },
 
   methods: {
@@ -83,7 +83,7 @@ export default mixins(
         'v-present': timestamp.present,
         'v-past': timestamp.past,
         'v-future': timestamp.future,
-        'v-outside': outside
+        'v-outside': outside,
       }
     },
     getStartOfWeek (timestamp: VTimestamp): VTimestamp {
@@ -91,6 +91,6 @@ export default mixins(
     },
     getEndOfWeek (timestamp: VTimestamp): VTimestamp {
       return getEndOfWeek(timestamp, this.weekdays, this.times.today)
-    }
-  }
+    },
+  },
 })

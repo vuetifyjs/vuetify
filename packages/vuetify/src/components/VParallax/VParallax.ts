@@ -24,17 +24,17 @@ export default baseMixins.extend<options>().extend({
   props: {
     alt: {
       type: String,
-      default: ''
+      default: '',
     },
     height: {
       type: [String, Number],
-      default: 500
+      default: 500,
     },
-    src: String
+    src: String,
   },
 
   data: () => ({
-    isBooted: false
+    isBooted: false,
   }),
 
   computed: {
@@ -42,9 +42,9 @@ export default baseMixins.extend<options>().extend({
       return {
         display: 'block',
         opacity: this.isBooted ? 1 : 0,
-        transform: `translate(-50%, ${this.parallax}px)`
+        transform: `translate(-50%, ${this.parallax}px)`,
       }
-    }
+    },
   },
 
   mounted () {
@@ -71,7 +71,7 @@ export default baseMixins.extend<options>().extend({
     },
     objHeight () {
       return this.$refs.img.naturalHeight
-    }
+    },
   },
 
   render (h): VNode {
@@ -80,27 +80,27 @@ export default baseMixins.extend<options>().extend({
       style: this.styles,
       attrs: {
         src: this.src,
-        alt: this.alt
+        alt: this.alt,
       },
-      ref: 'img'
+      ref: 'img',
     }
 
     const container = h('div', {
-      staticClass: 'v-parallax__image-container'
+      staticClass: 'v-parallax__image-container',
     }, [
-      h('img', imgData)
+      h('img', imgData),
     ])
 
     const content = h('div', {
-      staticClass: 'v-parallax__content'
+      staticClass: 'v-parallax__content',
     }, this.$slots.default)
 
     return h('div', {
       staticClass: 'v-parallax',
       style: {
-        height: `${this.height}px`
+        height: `${this.height}px`,
       },
-      on: this.$listeners
+      on: this.$listeners,
     }, [container, content])
-  }
+  },
 })

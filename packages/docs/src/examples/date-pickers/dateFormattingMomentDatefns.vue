@@ -58,7 +58,7 @@
     data: () => ({
       date: new Date().toISOString().substr(0, 10),
       menu1: false,
-      menu2: false
+      menu2: false,
     }),
 
     computed: {
@@ -67,8 +67,8 @@
       },
       computedDateFormattedDatefns () {
         return this.date ? format(this.date, 'dddd, MMMM Do YYYY') : ''
-      }
-    }
+      },
+    },
   }
 </script>
 

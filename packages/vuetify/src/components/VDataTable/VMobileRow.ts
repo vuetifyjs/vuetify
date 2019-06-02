@@ -11,7 +11,7 @@ export default Vue.extend({
   props: {
     headers: Array as PropValidator<TableHeader[]>,
     item: Object,
-    rtl: Boolean
+    rtl: Boolean,
   },
 
   render (h, { props, slots, data }): VNode {
@@ -19,7 +19,7 @@ export default Vue.extend({
 
     const columns: VNode[] = props.headers.map((header: TableHeader) => {
       const classes = {
-        'v-data-table__mobile-row': true
+        'v-data-table__mobile-row': true,
       }
 
       const children = []
@@ -38,15 +38,15 @@ export default Vue.extend({
       }
 
       return h('td', {
-        class: classes
+        class: classes,
       }, [
         h('div', { staticClass: 'v-data-table__mobile-row__wrapper' }, [
           header.value !== 'dataTableSelect' && h('div', { staticClass: 'v-data-table__mobile-row__header' }, [header.text]),
-          h('div', { staticClass: 'v-data-table__mobile-row__cell' }, children)
-        ])
+          h('div', { staticClass: 'v-data-table__mobile-row__cell' }, children),
+        ]),
       ])
     })
 
     return h('tr', data, columns)
-  }
+  },
 })

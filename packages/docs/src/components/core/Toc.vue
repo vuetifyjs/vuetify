@@ -39,7 +39,7 @@
       currentOffset: 0,
       list: [],
       routeTimeout: null,
-      timeout: null
+      timeout: null,
     }),
 
     watch: {
@@ -48,8 +48,8 @@
         handler () {
           clearTimeout(this.routeTimeout)
           this.routeTimeout = setTimeout(this.genList, 300)
-        }
-      }
+        },
+      },
     },
 
     methods: {
@@ -70,7 +70,7 @@
           list.push({
             item,
             text: item.innerText,
-            target: `#${item.id}`
+            target: `#${item.id}`,
           })
         }
 
@@ -104,8 +104,8 @@
         clearTimeout(this.timeout)
 
         this.timeout = setTimeout(this.findActiveIndex, 10)
-      }
-    }
+      },
+    },
   }
 </script>
 

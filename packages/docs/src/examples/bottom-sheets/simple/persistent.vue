@@ -26,7 +26,7 @@
 <script>
   export default {
     data: () => ({
-      sheet: false
-    })
+      sheet: false,
+    }),
   }
 </script>

@@ -17,53 +17,53 @@
           {
             text: 'Dessert (100g serving)',
             align: 'left',
-            value: 'name'
+            value: 'name',
           },
-          { text: 'Category', value: 'category' }
+          { text: 'Category', value: 'category' },
         ],
         desserts: [
           {
             name: 'Frozen Yogurt',
-            category: 'Ice cream'
+            category: 'Ice cream',
           },
           {
             name: 'Ice cream sandwich',
-            category: 'Ice cream'
+            category: 'Ice cream',
           },
           {
             name: 'Eclair',
-            category: 'Cookie'
+            category: 'Cookie',
           },
           {
             name: 'Cupcake',
-            category: 'Pastry'
+            category: 'Pastry',
           },
           {
             name: 'Gingerbread',
-            category: 'Cookie'
+            category: 'Cookie',
           },
           {
             name: 'Jelly bean',
-            category: 'Candy'
+            category: 'Candy',
           },
           {
             name: 'Lollipop',
-            category: 'Candy'
+            category: 'Candy',
           },
           {
             name: 'Honeycomb',
-            category: 'Toffee'
+            category: 'Toffee',
           },
           {
             name: 'Donut',
-            category: 'Pastry'
+            category: 'Pastry',
           },
           {
             name: 'KitKat',
-            category: 'Candy'
-          }
-        ]
+            category: 'Candy',
+          },
+        ],
       }
-    }
+    },
   }
 </script>

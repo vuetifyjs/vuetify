@@ -125,7 +125,7 @@
       color: '',
       icon: '',
       value: false,
-      variant: []
+      variant: [],
     }),
 
     watch: {
@@ -133,7 +133,7 @@
         if (val.includes('filter')) {
           this.value = true
         }
-      }
-    }
+      },
+    },
   }
 </script>

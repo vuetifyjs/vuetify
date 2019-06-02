@@ -5,9 +5,9 @@ const typography = name => ({
 
   render (h) {
     return h('div', {
-      staticClass: name
+      staticClass: name,
     }, this.$slots.default)
-  }
+  },
 })
 
 Vue.component('v-headline', typography('headline'))

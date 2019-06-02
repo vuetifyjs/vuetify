@@ -26,13 +26,13 @@ export default mixins(Positionable, Toggleable, Transitionable).extend({
       default: 'top',
       validator: (val: string) => {
         return ['top', 'right', 'bottom', 'left'].includes(val)
-      }
+      },
     } as PropValidator<'top' | 'right' | 'bottom' | 'left'>,
     openOnHover: Boolean,
     transition: {
       type: String,
-      default: 'scale-transition'
-    }
+      default: 'scale-transition',
+    },
   },
 
   computed: {
@@ -45,9 +45,9 @@ export default mixins(Positionable, Toggleable, Transitionable).extend({
         'v-speed-dial--left': this.left,
         'v-speed-dial--absolute': this.absolute,
         'v-speed-dial--fixed': this.fixed,
-        [`v-speed-dial--direction-${this.direction}`]: true
+        [`v-speed-dial--direction-${this.direction}`]: true,
       }
-    }
+    },
   },
 
   render (h): VNode {
@@ -56,11 +56,11 @@ export default mixins(Positionable, Toggleable, Transitionable).extend({
       'class': this.classes,
       directives: [{
         name: 'click-outside',
-        value: () => (this.isActive = false)
+        value: () => (this.isActive = false),
       }],
       on: {
-        click: () => (this.isActive = !this.isActive)
-      }
+        click: () => (this.isActive = !this.isActive),
+      },
     }
 
     if (this.openOnHover) {
@@ -75,9 +75,9 @@ export default mixins(Positionable, Toggleable, Transitionable).extend({
           btnCount++
           return h('div', {
             style: {
-              transitionDelay: btnCount * 0.05 + 's'
+              transitionDelay: btnCount * 0.05 + 's',
             },
-            key: i
+            key: i,
           }, [b])
         } else {
           b.key = i
@@ -92,10 +92,10 @@ export default mixins(Positionable, Toggleable, Transitionable).extend({
         name: this.transition,
         mode: this.mode,
         origin: this.origin,
-        tag: 'div'
-      }
+        tag: 'div',
+      },
     }, children)
 
     return h('div', data, [this.$slots.activator, list])
-  }
+  },
 })

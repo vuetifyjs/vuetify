@@ -17,14 +17,14 @@ export default Measurable.extend({
     },
     styles (): object {
       return this.measurableStyles
-    }
+    },
   },
 
   render (h): VNode {
     return h('div', {
       staticClass: 'v-card__text',
       class: this.classes,
-      style: this.styles
+      style: this.styles,
     }, getSlot(this))
-  }
+  },
 })

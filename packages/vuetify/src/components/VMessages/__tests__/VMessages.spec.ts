@@ -4,7 +4,7 @@ import VMessages from '../VMessages'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 // Types
@@ -17,7 +17,7 @@ describe('VMessages.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VMessages, {
-        ...options
+        ...options,
       })
     }
   })
@@ -31,8 +31,8 @@ describe('VMessages.ts', () => {
   it('should show messages', async () => {
     const wrapper = mountFunction({
       propsData: {
-        value: ['foo', 'bar']
-      }
+        value: ['foo', 'bar'],
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -46,8 +46,8 @@ describe('VMessages.ts', () => {
   it('should allow HTML', () => {
     const wrapper = mountFunction({
       propsData: {
-        value: ['<a href="#">a link</a>']
-      }
+        value: ['<a href="#">a link</a>'],
+      },
     })
     expect(wrapper.html()).toMatchSnapshot()
   })

@@ -24,13 +24,13 @@ export default mixins(
     // TODO: change this to closeDelay to match other API in delayable.js
     timeout: {
       type: Number,
-      default: 6000
+      default: 6000,
     },
-    vertical: Boolean
+    vertical: Boolean,
   },
 
   data: () => ({
-    activeTimeout: -1
+    activeTimeout: -1,
   }),
 
   computed: {
@@ -44,15 +44,15 @@ export default mixins(
         'v-snack--multi-line': this.multiLine && !this.vertical,
         'v-snack--right': this.right,
         'v-snack--top': this.top,
-        'v-snack--vertical': this.vertical
+        'v-snack--vertical': this.vertical,
       }
-    }
+    },
   },
 
   watch: {
     isActive () {
       this.setTimeout()
-    }
+    },
   },
 
   mounted () {
@@ -68,26 +68,26 @@ export default mixins(
           this.isActive = false
         }, this.timeout)
       }
-    }
+    },
   },
 
   render (h): VNode {
     return h('transition', {
-      attrs: { name: 'v-snack-transition' }
+      attrs: { name: 'v-snack-transition' },
     }, [
       this.isActive && h('div', {
         staticClass: 'v-snack',
         class: this.classes,
-        on: this.$listeners
+        on: this.$listeners,
       }, [
         h('div', this.setBackgroundColor(this.color, {
-          staticClass: 'v-snack__wrapper'
+          staticClass: 'v-snack__wrapper',
         }), [
           h('div', {
-            staticClass: 'v-snack__content'
-          }, this.$slots.default)
-        ])
-      ])
+            staticClass: 'v-snack__content',
+          }, this.$slots.default),
+        ]),
+      ]),
     ])
-  }
+  },
 })

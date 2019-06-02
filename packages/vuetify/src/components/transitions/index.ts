@@ -1,6 +1,6 @@
 import {
   createSimpleTransition,
-  createJavaScriptTransition
+  createJavaScriptTransition,
 } from '../../util/helpers'
 
 import ExpandTransitionGenerator from './expand-transition'
@@ -52,6 +52,6 @@ export default {
     VTabReverseTransition,
     VTabTransition,
     VExpandTransition,
-    VExpandXTransition
-  }
+    VExpandXTransition,
+  },
 }
