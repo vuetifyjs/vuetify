@@ -48,6 +48,7 @@
             "simple/external",
             "simple/disabledAndReadonly",
             "simple/popout",
+            "simple/inset",
             "simple/focusable",
             "intermediate/customIcons",
             "complex/advanced"

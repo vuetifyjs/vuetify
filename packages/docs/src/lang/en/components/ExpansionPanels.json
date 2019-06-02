@@ -17,6 +17,10 @@
       "header": "### Popout",
       "desc": "The expansion-panel also has **popout** design. With it, expansion-panel is enlargened when activated."
     },
+    "inset": {
+      "header": "### Inset",
+      "desc": "**inset** expansion-panel becomes smaller when activated."
+    },
     "customIcons": {
       "header": "### Custom icon",
       "desc": "Expand action icon can be customized with `expand-icon` prop or the `actions` slot."
