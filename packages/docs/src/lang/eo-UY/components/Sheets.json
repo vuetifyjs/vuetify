@@ -1,17 +1,25 @@
 {
-  "header": "crwdns13182:0crwdne13182:0",
-  "headerText": "crwdns13184:0crwdne13184:0",
-  "examples": {
-    "usage": {
-      "desc": "crwdns13186:0crwdne13186:0"
-    },
-    "elevation": {
-      "header": "crwdns13188:0crwdne13188:0",
-      "desc": "crwdns13190:0crwdne13190:0"
-    }
-  },
-  "props": {
-    "tag": "crwdns13192:0crwdne13192:0",
-    "tile": "crwdns13194:0crwdne13194:0"
-  }
+	"header": "crwdns25276:0crwdne25276:0",
+	"headerText": "crwdns25278:0crwdne25278:0",
+	"examples": {
+		"usage": {
+			"desc": "crwdns35628:0crwdne35628:0"
+		},
+		"elevation": {
+			"header": "crwdns25282:0crwdne25282:0",
+			"desc": "crwdns25284:0crwdne25284:0"
+		},
+		"tile": {
+			"header": "crwdns35630:0crwdne35630:0",
+			"desc": "crwdns35632:0crwdne35632:0"
+		},
+		"colors-sizes": {
+			"header": "crwdns35634:0crwdne35634:0",
+			"desc": "crwdns35636:0crwdne35636:0"
+		}
+	},
+	"props": {
+		"tag": "crwdns25286:0crwdne25286:0",
+		"tile": "crwdns25288:0crwdne25288:0"
+	}
 }

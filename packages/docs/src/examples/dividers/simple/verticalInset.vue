@@ -1,7 +1,7 @@
 <template>
   <v-toolbar
     color="teal"
-    dark
+    light
   >
     <v-toolbar-title>Title</v-toolbar-title>
 
@@ -23,7 +23,6 @@
 
       <v-divider
         inset
-        light
         vertical
       ></v-divider>
 
@@ -33,7 +32,6 @@
 
       <v-divider
         inset
-        light
         vertical
       ></v-divider>
 
@@ -43,7 +41,6 @@
 
       <v-divider
         inset
-        light
         vertical
       ></v-divider>
     </v-toolbar-items>

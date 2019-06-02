@@ -1,36 +1,43 @@
 {
-  "header": "crwdns13292:0crwdne13292:0",
-  "headerText": "crwdns13294:0crwdne13294:0",
-  "examples": {
-    "playground": {
-      "header": "crwdns13296:0crwdne13296:0",
-      "desc": "crwdns13298:0crwdne13298:0"
-    },
-    "heartRate": {
-      "header": "crwdns13300:0crwdne13300:0",
-      "desc": "crwdns13302:0crwdne13302:0"
-    },
-    "dashboardCard": {
-      "header": "crwdns13304:0crwdne13304:0",
-      "desc": "crwdns13306:0crwdne13306:0"
-    },
-    "salesCard": {
-      "header": "crwdns13308:0crwdne13308:0",
-      "desc": "crwdns13310:0crwdne13310:0"
-    }
-  },
-  "props": {
-    "autoDraw": "crwdns13312:0crwdne13312:0",
-    "autoDrawDuration": "crwdns13314:0crwdne13314:0",
-    "autoDrawEasing": "crwdns13316:0crwdne13316:0",
-    "data": "crwdns13318:0crwdne13318:0",
-    "gradient": "crwdns13320:0crwdne13320:0",
-    "gradientDirection": "crwdns13322:0crwdne13322:0",
-    "labels": "crwdns13324:0crwdne13324:0",
-    "lineWidth": "crwdns13326:0crwdne13326:0",
-    "padding": "crwdns13328:0crwdne13328:0",
-    "showLabels": "crwdns13330:0crwdne13330:0",
-    "smooth": "crwdns13332:0crwdne13332:0",
-    "type": "crwdns13334:0crwdne13334:0"
-  }
+	"header": "crwdns25408:0crwdne25408:0",
+	"headerText": "crwdns25410:0crwdne25410:0",
+	"examples": {
+		"playground": {
+			"header": "crwdns25412:0crwdne25412:0",
+			"desc": "crwdns25414:0crwdne25414:0"
+		},
+		"heartRate": {
+			"header": "crwdns25416:0crwdne25416:0",
+			"desc": "crwdns25418:0crwdne25418:0"
+		},
+		"dashboardCard": {
+			"header": "crwdns25420:0crwdne25420:0",
+			"desc": "crwdns25422:0crwdne25422:0"
+		},
+		"salesCard": {
+			"header": "crwdns25424:0crwdne25424:0",
+			"desc": "crwdns25426:0crwdne25426:0"
+		},
+		"fill": {
+			"header": "crwdns25428:0crwdne25428:0",
+			"desc": "crwdns25430:0crwdne25430:0"
+		}
+	},
+	"props": {
+		"autoDraw": "crwdns25432:0crwdne25432:0",
+		"autoDrawDuration": "crwdns25434:0crwdne25434:0",
+		"autoDrawEasing": "crwdns25436:0crwdne25436:0",
+		"autoLineWidth": "crwdns25438:0crwdne25438:0",
+		"data": "crwdns25440:0crwdne25440:0",
+		"fill": "crwdns25442:0crwdne25442:0",
+		"gradient": "crwdns25444:0crwdne25444:0",
+		"gradientDirection": "crwdns25446:0crwdne25446:0",
+		"labels": "crwdns25448:0crwdne25448:0",
+		"labelSize": "crwdns25450:0crwdne25450:0",
+		"lineWidth": "crwdns25452:0crwdne25452:0",
+		"padding": "crwdns25454:0crwdne25454:0",
+		"showLabels": "crwdns25456:0crwdne25456:0",
+		"smooth": "crwdns25458:0crwdne25458:0",
+		"type": "crwdns25460:0crwdne25460:0"
+	}
 }

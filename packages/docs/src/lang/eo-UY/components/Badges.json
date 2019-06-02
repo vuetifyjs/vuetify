@@ -1,30 +1,46 @@
 {
-  "header": "crwdns11178:0crwdne11178:0",
-  "headerText": "crwdns11180:0crwdne11180:0",
-  "examples": {
-    "usage": {
-      "desc": "crwdns11182:0crwdne11182:0"
-    },
-    "overlap": {
-      "header": "crwdns11184:0crwdne11184:0",
-      "desc": "crwdns11186:0crwdne11186:0"
-    },
-    "inline": {
-      "header": "crwdns11188:0crwdne11188:0",
-      "desc": "crwdns11190:0crwdne11190:0"
-    },
-    "icon": {
-      "header": "crwdns11192:0crwdne11192:0",
-      "desc": "crwdns11194:0crwdne11194:0"
-    },
-    "visibility": {
-      "header": "crwdns11196:0crwdne11196:0",
-      "desc": "crwdns11198:0crwdne11198:0"
-    }
-  },
-  "props": {
-    "bottom": "crwdns11200:0crwdne11200:0",
-    "left": "crwdns11202:0crwdne11202:0",
-    "transition": "crwdns11204:0crwdne11204:0"
-  }
+	"header": "crwdns28220:0crwdne28220:0",
+	"headerText": "crwdns35946:0crwdne35946:0",
+	"examples": {
+		"usage": {
+			"desc": "crwdns35948:0crwdne35948:0"
+		},
+		"bottom": {
+			"header": "crwdns35950:0crwdne35950:0",
+			"desc": "crwdns35952:0crwdne35952:0"
+		},
+		"left": {
+			"header": "crwdns35954:0crwdne35954:0",
+			"desc": "crwdns35956:0crwdne35956:0"
+		},
+		"overlap": {
+			"header": "crwdns28226:0crwdne28226:0",
+			"desc": "crwdns35958:0crwdne35958:0"
+		},
+		"visibility": {
+			"header": "crwdns28238:0crwdne28238:0",
+			"desc": "crwdns35960:0crwdne35960:0"
+		},
+		"inline": {
+			"header": "crwdns28230:0crwdne28230:0",
+			"desc": "crwdns28232:0crwdne28232:0"
+		},
+		"icon": {
+			"header": "crwdns28234:0crwdne28234:0",
+			"desc": "crwdns28236:0crwdne28236:0"
+		},
+		"hover": {
+			"header": "crwdns35962:0crwdne35962:0",
+			"desc": "crwdns35964:0crwdne35964:0"
+		},
+		"dynamic": {
+			"header": "crwdns35966:0crwdne35966:0",
+			"desc": "crwdns35968:0crwdne35968:0"
+		}
+	},
+	"props": {
+		"bottom": "crwdns28242:0crwdne28242:0",
+		"left": "crwdns28244:0crwdne28244:0",
+		"transition": "crwdns28246:0crwdne28246:0"
+	}
 }
