@@ -11,8 +11,8 @@
               width="100%"
             />
             <v-card-text>
-              <h3 class="subheading font-weight-bold mb-2 text--primary" v-text="feature.title"/>
-              <p class="mb-2" v-text="feature.text"/>
+              <h3 class="subheading font-weight-bold mb-2 text--primary" v-text="feature.title" />
+              <p class="mb-2" v-text="feature.text" />
             </v-card-text>
           </v-card>
         </v-flex>
@@ -22,33 +22,33 @@
 </template>
 
 <script>
-export default {
-  data: () => ({
-    // TODO: Move this to somewhere in data
-    features: [
-      {
-        key: 'community',
-        src: 'feature3.png'
-      },
-      {
-        key: 'components',
-        src: 'feature2.png'
-      },
-      {
-        key: 'scaffolding',
-        src: 'feature1.png'
-      }
-    ]
-  }),
+  export default {
+    data: () => ({
+      // TODO: Move this to somewhere in data
+      features: [
+        {
+          key: 'community',
+          src: 'feature3.png'
+        },
+        {
+          key: 'components',
+          src: 'feature2.png'
+        },
+        {
+          key: 'scaffolding',
+          src: 'feature1.png'
+        }
+      ]
+    }),
 
-  computed: {
-    computedFeatures () {
-      return this.features.map(feature => ({
-        text: this.$t(`Vuetify.Home.features.${feature.key}.text`),
-        title: this.$t(`Vuetify.Home.features.${feature.key}.title`),
-        src: feature.src
-      }))
+    computed: {
+      computedFeatures () {
+        return this.features.map(feature => ({
+          text: this.$t(`Vuetify.Home.features.${feature.key}.text`),
+          title: this.$t(`Vuetify.Home.features.${feature.key}.title`),
+          src: feature.src
+        }))
+      }
     }
   }
-}
 </script>
