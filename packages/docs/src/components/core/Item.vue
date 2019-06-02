@@ -51,44 +51,44 @@
     props: {
       avatar: {
         type: String,
-        default: undefined
+        default: undefined,
       },
       avatarColor: {
         type: String,
-        default: undefined
+        default: undefined,
       },
       text: {
         type: String,
-        default: ''
+        default: '',
       },
       href: {
         type: String,
-        default: undefined
+        default: undefined,
       },
       name: {
         type: String,
-        default: ''
+        default: '',
       },
       icon: {
         type: [Boolean, String],
-        default: false
+        default: false,
       },
       chip: {
         type: String,
-        default: ''
+        default: '',
       },
       noMarkdown: {
         type: Boolean,
-        default: false
+        default: false,
       },
       subtext: {
         type: String,
-        default: undefined
+        default: undefined,
       },
       to: {
         type: String,
-        default: undefined
-      }
+        default: undefined,
+      },
     },
 
     computed: {
@@ -99,7 +99,7 @@
       },
       customAttrs () {
         const attrs = {
-          ...this.$attrs
+          ...this.$attrs,
         }
 
         if (this.href) {
@@ -116,10 +116,10 @@
         const lang = this.$route.params.lang || this.$i18n.fallbackLocale
 
         return {
-          path: `/${lang}/${this.to}`
+          path: `/${lang}/${this.to}`,
         }
-      }
-    }
+      },
+    },
   }
 </script>
 

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 import VTextField from '../../VTextField'
 import VBtn from '../../VBtn'
@@ -11,9 +11,9 @@ import VForm from '../VForm'
 const inputOne = Vue.component('input-one', {
   render (h) {
     return h(VTextField, {
-      props: [v => !!v || 'Required']
+      props: [v => !!v || 'Required'],
     })
-  }
+  },
 })
 
 describe('VForm.ts', () => {
@@ -32,12 +32,12 @@ describe('VForm.ts', () => {
       render (h) {
         return h(VForm, {
           on: {
-            submit
-          }
+            submit,
+          },
         }, [
-          h('button', ['Submit'])
+          h('button', ['Submit']),
         ])
-      }
+      },
     })
 
     const wrapper = mount(component)
@@ -67,8 +67,8 @@ describe('VForm.ts', () => {
   it('should register input child', async () => {
     const wrapper = mountFunction({
       slots: {
-        default: [VTextField]
-      }
+        default: [VTextField],
+      },
     })
 
     await wrapper.vm.$nextTick()
@@ -112,19 +112,19 @@ describe('VForm.ts', () => {
   it('should emit input when calling validate on lazy-validated form', async () => {
     const wrapper = mountFunction({
       propsData: {
-        lazyValidation: true
+        lazyValidation: true,
       },
       slots: {
         default: [{
           render (h) {
             return h(VTextField, {
               props: {
-                rules: [v => v === 1 || 'Error']
-              }
+                rules: [v => v === 1 || 'Error'],
+              },
             })
-          }
-        }]
-      }
+          },
+        }],
+      },
     })
 
     const value = jest.fn()
@@ -140,8 +140,8 @@ describe('VForm.ts', () => {
   it('resetValidation should work', async () => {
     const wrapper = mountFunction({
       slots: {
-        default: [VTextField]
-      }
+        default: [VTextField],
+      },
     })
 
     expect(Object.keys(wrapper.vm.errorBag)).toHaveLength(1)
@@ -160,8 +160,8 @@ describe('VForm.ts', () => {
   it('should register and unregister items', () => {
     const wrapper = mountFunction({
       slots: {
-        default: [VTextField]
-      }
+        default: [VTextField],
+      },
     })
 
     expect(wrapper.vm.inputs).toHaveLength(1)
@@ -196,8 +196,8 @@ describe('VForm.ts', () => {
     const wrapper = mountFunction({
       methods: { resetErrorBag },
       slots: {
-        default: [VTextField]
-      }
+        default: [VTextField],
+      },
     })
 
     const spy = jest.spyOn(wrapper.vm.inputs[0], 'resetValidation')

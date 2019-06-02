@@ -60,9 +60,9 @@
           'Programming',
           'Design',
           'Vue',
-          'Vuetify'
-        ]
+          'Vuetify',
+        ],
       }
-    }
+    },
   }
 </script>

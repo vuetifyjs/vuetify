@@ -114,7 +114,7 @@
           src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-material-kit.png',
           free: false,
           url: 'https://store.vuetifyjs.com/product/material-kit-theme',
-          demoUrl: ['https://material-kit.vuetifyjs.com']
+          demoUrl: ['https://material-kit.vuetifyjs.com'],
         },
         {
           title: vm.$t('Themes.Premium.templates.alpha.title'),
@@ -126,8 +126,8 @@
             ['Construction', 'https://alpha-construction.vuetifyjs.com'],
             ['Creative', 'https://alpha-creative.vuetifyjs.com'],
             ['SaaS', 'https://alpha-saas.vuetifyjs.com'],
-            ['Ecommerce', 'https://alpha-ecommerce.vuetifyjs.com']
-          ]
+            ['Ecommerce', 'https://alpha-ecommerce.vuetifyjs.com'],
+          ],
         },
         {
           title: vm.$t('Themes.Premium.templates.dashboard.title'),
@@ -135,7 +135,7 @@
           src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-admin-dashboard.jpg',
           free: true,
           url: 'https://www.creative-tim.com/product/vuetify-material-dashboard',
-          demoUrl: ['https://demos.creative-tim.com/vuetify-material-dashboard/#/dashboard']
+          demoUrl: ['https://demos.creative-tim.com/vuetify-material-dashboard/#/dashboard'],
         },
         {
           title: vm.$t('Themes.Premium.templates.freelancer.title'),
@@ -143,7 +143,7 @@
           src: 'https://cdn.vuetifyjs.com/images/starter/freelancer.png',
           free: true,
           url: 'https://github.com/vuetifyjs/theme-freelancer',
-          demoUrl: []
+          demoUrl: [],
         },
         {
           title: vm.$t('Themes.Premium.templates.parallax.title'),
@@ -151,7 +151,7 @@
           src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-parallax-starter.png',
           free: true,
           url: 'https://github.com/vuetifyjs/parallax-starter',
-          demoUrl: ['/themes/parallax-starter']
+          demoUrl: ['/themes/parallax-starter'],
         },
         {
           title: vm.$t('Themes.Premium.templates.blog.title'),
@@ -159,10 +159,10 @@
           src: 'https://cdn.vuetifyjs.com/images/starter/blog.png',
           free: true,
           url: 'https://github.com/vuetifyjs/theme-blog',
-          demoUrl: ['https://free-blog.vuetifyjs.com']
-        }
-      ]
-    })
+          demoUrl: ['https://free-blog.vuetifyjs.com'],
+        },
+      ],
+    }),
   }
 </script>
 

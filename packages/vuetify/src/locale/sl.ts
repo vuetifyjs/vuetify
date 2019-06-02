@@ -5,14 +5,14 @@ export default {
     pageText: '{0}-{1} od {2}',
     noResultsText: 'Ni iskanega zapisa',
     nextPage: 'Naslednja stran',
-    prevPage: 'Prejšnja stran'
+    prevPage: 'Prejšnja stran',
   },
   dataTable: {
-    rowsPerPageText: 'Vrstic na stran:'
+    rowsPerPageText: 'Vrstic na stran:',
   },
   noDataText: 'Ni podatkov',
   carousel: {
     prev: 'Prejšnji prikaz',
-    next: 'Naslednji prikaz'
-  }
+    next: 'Naslednji prikaz',
+  },
 }

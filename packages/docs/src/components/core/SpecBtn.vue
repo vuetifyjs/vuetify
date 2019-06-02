@@ -34,12 +34,12 @@
     props: {
       link: {
         type: String,
-        default: 'https://material.io/design/'
+        default: 'https://material.io/design/',
       },
       version: {
         type: String,
-        default: ''
-      }
-    }
+        default: '',
+      },
+    },
   }
 </script>

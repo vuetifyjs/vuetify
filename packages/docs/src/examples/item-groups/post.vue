@@ -55,6 +55,6 @@
   export default {
     data: () => ({
       //
-    })
+    }),
   }
 </script>

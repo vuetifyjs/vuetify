@@ -30,7 +30,7 @@
   export default {
     data () {
       return {
-        bottomNav: 3
+        bottomNav: 3,
       }
     },
 
@@ -42,7 +42,7 @@
           case 2: return 'brown'
           case 3: return 'indigo'
         }
-      }
-    }
+      },
+    },
   }
 </script>

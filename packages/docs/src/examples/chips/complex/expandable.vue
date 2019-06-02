@@ -80,7 +80,7 @@
 <script>
   export default {
     data: () => ({
-      menu: false
-    })
+      menu: false,
+    }),
   }
 </script>

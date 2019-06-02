@@ -35,8 +35,8 @@
         { 'class': '' },
         { 'class': '', dark: true },
         { 'class': 'primary', dark: true },
-        { 'class': 'elevation-0' }
-      ]
-    })
+        { 'class': 'elevation-0' },
+      ],
+    }),
   }
 </script>

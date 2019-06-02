@@ -2,14 +2,14 @@ import Rippleable from '../'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('rippleable.ts', () => {
   const Mock = Rippleable.extend({
     render () {
       return this.genRipple()
-    }
+    },
   })
 
   type Instance = InstanceType<typeof Mock>
@@ -24,8 +24,8 @@ describe('rippleable.ts', () => {
     const onChange = jest.fn()
     const wrapper = mountFunction({
       methods: {
-        onChange
-      }
+        onChange,
+      },
     })
 
     wrapper.trigger('click')

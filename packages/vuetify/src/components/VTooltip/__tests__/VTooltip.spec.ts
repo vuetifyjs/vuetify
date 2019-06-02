@@ -1,6 +1,6 @@
 import VTooltip from '../VTooltip'
 import {
-  mount
+  mount,
 } from '@vue/test-utils'
 
 describe('VTooltip', () => {
@@ -18,20 +18,20 @@ describe('VTooltip', () => {
   it('should render component and match snapshot', async () => {
     const wrapper = mountFunction({
       propsData: {
-        openDelay: 0
+        openDelay: 0,
       },
       scopedSlots: {
-        activator: '<span>activator</span>'
+        activator: '<span>activator</span>',
       },
       slots: {
-        default: '<span>content</span>'
-      }
+        default: '<span>content</span>',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({
-      value: true
+      value: true,
     })
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
@@ -40,14 +40,14 @@ describe('VTooltip', () => {
   it('should render component with custom eager and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        eager: true
+        eager: true,
       },
       scopedSlots: {
-        activator: '<span>activator</span>'
+        activator: '<span>activator</span>',
       },
       slots: {
-        default: '<span>content</span>'
-      }
+        default: '<span>content</span>',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -56,14 +56,14 @@ describe('VTooltip', () => {
   it('should render component with value=true and match snapshot', async () => {
     const wrapper = mountFunction({
       propsData: {
-        value: true
+        value: true,
       },
       scopedSlots: {
-        activator: '<span>activator</span>'
+        activator: '<span>activator</span>',
       },
       slots: {
-        default: '<span>content</span>'
-      }
+        default: '<span>content</span>',
+      },
     })
 
     expect(wrapper.vm.isActive).toBe(true)
@@ -75,14 +75,14 @@ describe('VTooltip', () => {
       propsData: {
         value: true,
         minWidth: 100,
-        maxWidth: 200
+        maxWidth: 200,
       },
       scopedSlots: {
-        activator: '<span>activator</span>'
+        activator: '<span>activator</span>',
       },
       slots: {
-        default: '<span>content</span>'
-      }
+        default: '<span>content</span>',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -91,8 +91,8 @@ describe('VTooltip', () => {
   it('should render component with zIndex prop and match snapshot', async () => {
     const wrapper = mountFunction({
       propsData: {
-        zIndex: 42
-      }
+        zIndex: 42,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -103,14 +103,14 @@ describe('VTooltip', () => {
     const wrapper = mountFunction({
       propsData: {
         openDelay: 123,
-        closeDelay: 321
+        closeDelay: 321,
       },
       scopedSlots: {
-        activator: '<span v-on="props.on" class="activator">activator</span>'
+        activator: '<span v-on="props.on" class="activator">activator</span>',
       },
       slots: {
-        default: '<span class="content">content</span>'
-      }
+        default: '<span class="content">content</span>',
+      },
     })
 
     const activator = wrapper.find('.activator')

@@ -4,7 +4,7 @@ export default Vue.extend({
   name: 'translatable',
 
   props: {
-    height: Number
+    height: Number,
   },
 
   data: () => ({
@@ -14,13 +14,13 @@ export default Vue.extend({
     percentScrolled: 0,
     scrollTop: 0,
     windowHeight: 0,
-    windowBottom: 0
+    windowBottom: 0,
   }),
 
   computed: {
     imgHeight (): number {
       return this.objHeight()
-    }
+    },
   },
 
   beforeDestroy () {
@@ -55,6 +55,6 @@ export default Vue.extend({
       )
 
       this.parallax = Math.round(this.parallaxDist * this.percentScrolled)
-    }
-  }
+    },
+  },
 })

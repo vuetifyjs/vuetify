@@ -428,7 +428,7 @@
       model: '2019-03',
       modelMM: '2019-03',
       months: ['2019-01', '2019-03', '2020-05', '2020-07'],
-      landscape: false
+      landscape: false,
     }),
 
     methods: {
@@ -437,7 +437,7 @@
         if ([1, 3, 12].includes(parseInt(month, 10))) return true
         if ([5, 6, 11].includes(parseInt(month, 10))) return ['red', '#00f']
         return false
-      }
-    }
+      },
+    },
   }
 </script>

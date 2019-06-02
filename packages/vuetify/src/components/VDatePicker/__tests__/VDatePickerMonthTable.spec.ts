@@ -3,7 +3,7 @@ import { Lang } from '../../../services/lang'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VDatePickerMonthTable.ts', () => {
@@ -15,9 +15,9 @@ describe('VDatePickerMonthTable.ts', () => {
         ...options,
         mocks: {
           $vuetify: {
-            lang: new Lang()
-          }
-        }
+            lang: new Lang(),
+          },
+        },
       })
     }
   })
@@ -27,8 +27,8 @@ describe('VDatePickerMonthTable.ts', () => {
       propsData: {
         tableDate: '2005',
         current: '2005-05',
-        value: '2005-11'
-      }
+        value: '2005-11',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -39,8 +39,8 @@ describe('VDatePickerMonthTable.ts', () => {
       propsData: {
         tableDate: '2005',
         current: '2005-05',
-        value: ['2005-11', '2005-10']
-      }
+        value: ['2005-11', '2005-10'],
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -51,12 +51,12 @@ describe('VDatePickerMonthTable.ts', () => {
       propsData: {
         tableDate: '2005',
         current: '2005-05',
-        value: '2005-11'
-      }
+        value: '2005-11',
+      },
     })
 
     wrapper.setProps({
-      tableDate: '2006'
+      tableDate: '2006',
     })
     await wrapper.vm.$nextTick()
     expect(wrapper.findAll('table').at(0).element.className).toBe('tab-transition-enter tab-transition-enter-active')
@@ -67,12 +67,12 @@ describe('VDatePickerMonthTable.ts', () => {
       propsData: {
         tableDate: '2005',
         current: '2005-05',
-        value: '2005-11'
-      }
+        value: '2005-11',
+      },
     })
 
     wrapper.setProps({
-      tableDate: '2004'
+      tableDate: '2004',
     })
     await wrapper.vm.$nextTick()
     expect(wrapper.findAll('table').at(0).element.className).toBe('tab-reverse-transition-enter tab-reverse-transition-enter-active')
@@ -83,8 +83,8 @@ describe('VDatePickerMonthTable.ts', () => {
       propsData: {
         tableDate: '2005',
         current: '2005-05',
-        value: '2005-11'
-      }
+        value: '2005-11',
+      },
     })
 
     const input = jest.fn()
@@ -100,8 +100,8 @@ describe('VDatePickerMonthTable.ts', () => {
         tableDate: '2005',
         current: '2005-05',
         value: '2005-11',
-        allowedDates: () => false
-      }
+        allowedDates: () => false,
+      },
     })
 
     const input = jest.fn()
@@ -115,8 +115,8 @@ describe('VDatePickerMonthTable.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         tableDate: '2005',
-        scrollable: true
-      }
+        scrollable: true,
+      },
     })
 
     const tableDate = jest.fn()
@@ -129,8 +129,8 @@ describe('VDatePickerMonthTable.ts', () => {
   it('should not emit tableDate event when scrolled and not scrollable', () => {
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2005'
-      }
+        tableDate: '2005',
+      },
     })
 
     const tableDate = jest.fn()
@@ -144,8 +144,8 @@ describe('VDatePickerMonthTable.ts', () => {
   it.skip('should emit tableDate event when swiped', () => {
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2005'
-      }
+        tableDate: '2005',
+      },
     })
 
     const tableDate = jest.fn()
@@ -159,8 +159,8 @@ describe('VDatePickerMonthTable.ts', () => {
   it('should change tableDate when touch is called', () => {
     const wrapper = mountFunction({
       propsData: {
-        tableDate: '2005'
-      }
+        tableDate: '2005',
+      },
     })
 
     const tableDate = jest.fn()
@@ -177,8 +177,8 @@ describe('VDatePickerMonthTable.ts', () => {
       propsData: {
         tableDate: '2005',
         events: ['2005-07', '2005-11'],
-        eventColor: 'red'
-      }
+        eventColor: 'red',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -189,8 +189,8 @@ describe('VDatePickerMonthTable.ts', () => {
       propsData: {
         tableDate: '2005',
         events: date => date === '2005-07' || date === '2005-11',
-        eventColor: 'red'
-      }
+        eventColor: 'red',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -201,8 +201,8 @@ describe('VDatePickerMonthTable.ts', () => {
       propsData: {
         tableDate: '2005',
         events: ['2005-07', '2005-11'],
-        eventColor: { '2005-07': 'red', '2005-11': 'blue lighten-1' }
-      }
+        eventColor: { '2005-07': 'red', '2005-11': 'blue lighten-1' },
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -213,8 +213,8 @@ describe('VDatePickerMonthTable.ts', () => {
       propsData: {
         tableDate: '2005',
         events: ['2005-07', '2005-11'],
-        eventColor: date => ({ '2005-07': 'red', '2005-11': 'blue lighten-1' }[date])
-      }
+        eventColor: date => ({ '2005-07': 'red', '2005-11': 'blue lighten-1' }[date]),
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()

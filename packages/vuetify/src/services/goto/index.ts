@@ -5,7 +5,7 @@ import { Service } from '../service'
 import * as easingPatterns from './easing-patterns'
 import {
   getContainer,
-  getOffset
+  getOffset,
 } from './util'
 
 // Types
@@ -23,7 +23,7 @@ export default function goTo (
     offset: 0,
     easing: 'easeInOutCubic',
     appOffset: true,
-    ..._settings
+    ..._settings,
   }
   const container = getContainer(settings.container)
 

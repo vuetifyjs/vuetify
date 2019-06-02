@@ -43,8 +43,8 @@
   export default {
     data () {
       return {
-        e13: 2
+        e13: 2,
       }
-    }
+    },
   }
 </script>

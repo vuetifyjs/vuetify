@@ -14,30 +14,30 @@ export default SSRBootable.extend({
   props: {
     tag: {
       type: String,
-      default: 'main'
-    }
+      default: 'main',
+    },
   },
 
   computed: {
     styles (): object {
       const {
-        bar, top, right, footer, insetFooter, bottom, left
+        bar, top, right, footer, insetFooter, bottom, left,
       } = this.$vuetify.application
 
       return {
         paddingTop: `${top + bar}px`,
         paddingRight: `${right}px`,
         paddingBottom: `${footer + insetFooter + bottom}px`,
-        paddingLeft: `${left}px`
+        paddingLeft: `${left}px`,
       }
-    }
+    },
   },
 
   render (h): VNode {
     const data = {
       staticClass: 'v-content',
       style: this.styles,
-      ref: 'content'
+      ref: 'content',
     }
 
     return h(this.tag, data, [
@@ -45,7 +45,7 @@ export default SSRBootable.extend({
         'div',
         { staticClass: 'v-content__wrap' },
         this.$slots.default
-      )
+      ),
     ])
-  }
+  },
 })

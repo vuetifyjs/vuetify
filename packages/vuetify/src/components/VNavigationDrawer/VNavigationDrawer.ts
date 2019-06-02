@@ -34,7 +34,7 @@ const baseMixins = mixins(
     'permanent',
     'right',
     'temporary',
-    'width'
+    'width',
   ]),
   Colorable,
   Dependent,
@@ -50,7 +50,7 @@ export default baseMixins.extend({
   directives: {
     ClickOutside,
     Resize,
-    Touch
+    Touch,
   },
 
   props: {
@@ -62,41 +62,41 @@ export default baseMixins.extend({
       type: [Number, String],
       default (): string {
         return this.app ? '100vh' : '100%'
-      }
+      },
     },
     floating: Boolean,
     miniVariant: Boolean,
     miniVariantWidth: {
       type: [Number, String],
-      default: 80
+      default: 80,
     },
     mobileBreakPoint: {
       type: [Number, String],
-      default: 1264
+      default: 1264,
     },
     permanent: Boolean,
     expandOnHover: Boolean,
     right: Boolean,
     src: {
       type: [String, Object],
-      default: ''
+      default: '',
     } as PropValidator<string | srcObject>,
     stateless: Boolean,
     temporary: Boolean,
     touchless: Boolean,
     width: {
       type: [Number, String],
-      default: 256
+      default: 256,
     },
-    value: { required: false } as PropValidator<any>
+    value: { required: false } as PropValidator<any>,
   },
 
   data: () => ({
     isMouseover: false,
     touchArea: {
       left: 0,
-      right: 0
-    }
+      right: 0,
+    },
   }),
 
   computed: {
@@ -123,7 +123,7 @@ export default baseMixins.extend({
         'v-navigation-drawer--open-on-hover': this.expandOnHover,
         'v-navigation-drawer--right': this.right,
         'v-navigation-drawer--temporary': this.temporary,
-        ...this.themeClasses
+        ...this.themeClasses,
       }
     },
     computedMaxHeight (): number | null {
@@ -220,11 +220,11 @@ export default baseMixins.extend({
           ? `calc(100% - ${convertToUnit(this.computedMaxHeight)})`
           : undefined,
         transform: `${translate}(${convertToUnit(this.computedTransform, '%')})`,
-        width: convertToUnit(this.computedWidth)
+        width: convertToUnit(this.computedWidth),
       }
 
       return styles
-    }
+    },
   },
 
   watch: {
@@ -266,7 +266,7 @@ export default baseMixins.extend({
       }
 
       if (val !== this.isActive) this.isActive = val
-    }
+    },
   },
 
   beforeMount () {
@@ -283,7 +283,7 @@ export default baseMixins.extend({
 
       this.touchArea = {
         left: parentRect.left + 50,
-        right: parentRect.right - 50
+        right: parentRect.right - 50,
       }
     },
     closeConditional () {
@@ -296,7 +296,7 @@ export default baseMixins.extend({
       const props = {
         height: '100%',
         width: '100%',
-        src: this.src
+        src: this.src,
       }
 
       const image = this.$scopedSlots.img
@@ -304,7 +304,7 @@ export default baseMixins.extend({
         : this.$createElement(VImg, { props })
 
       return this.$createElement('div', {
-        staticClass: 'v-navigation-drawer__image'
+        staticClass: 'v-navigation-drawer__image',
       }, [image])
     },
     genDirectives (): VNodeDirective[] {
@@ -313,8 +313,8 @@ export default baseMixins.extend({
         value: () => (this.isActive = false),
         args: {
           closeConditional: this.closeConditional,
-          include: this.getOpenDependentElements
-        }
+          include: this.getOpenDependentElements,
+        },
       }]
 
       if (!this.touchless && !this.stateless) {
@@ -323,8 +323,8 @@ export default baseMixins.extend({
           value: {
             parent: true,
             left: this.swipeLeft,
-            right: this.swipeRight
-          }
+            right: this.swipeRight,
+          },
         } as any)
       }
 
@@ -340,7 +340,7 @@ export default baseMixins.extend({
           const resizeEvent = document.createEvent('UIEvents')
           resizeEvent.initUIEvent('resize', true, false, window, 0)
           window.dispatchEvent(resizeEvent)
-        }
+        },
       }
 
       if (this.miniVariant) {
@@ -360,7 +360,7 @@ export default baseMixins.extend({
       if (!slot) return slot
 
       return this.$createElement('div', {
-        staticClass: `v-navigation-drawer__${name}`
+        staticClass: `v-navigation-drawer__${name}`,
       }, slot)
     },
     genPrepend () {
@@ -368,12 +368,12 @@ export default baseMixins.extend({
     },
     genContent () {
       return this.$createElement('div', {
-        staticClass: 'v-navigation-drawer__content'
+        staticClass: 'v-navigation-drawer__content',
       }, this.$slots.default)
     },
     genBorder () {
       return this.$createElement('div', {
-        staticClass: 'v-navigation-drawer__border'
+        staticClass: 'v-navigation-drawer__border',
       })
     },
     init () {
@@ -426,7 +426,7 @@ export default baseMixins.extend({
       const width = Number(this.computedWidth)
 
       return isNaN(width) ? this.$el.clientWidth : width
-    }
+    },
   },
 
   render (h): VNode {
@@ -434,7 +434,7 @@ export default baseMixins.extend({
       this.genPrepend(),
       this.genContent(),
       this.genAppend(),
-      this.genBorder()
+      this.genBorder(),
     ]
 
     if (this.src || getSlot(this, 'img')) children.unshift(this.genBackground())
@@ -443,7 +443,7 @@ export default baseMixins.extend({
       class: this.classes,
       style: this.styles,
       directives: this.genDirectives(),
-      on: this.genListeners()
+      on: this.genListeners(),
     }), children)
-  }
+  },
 })

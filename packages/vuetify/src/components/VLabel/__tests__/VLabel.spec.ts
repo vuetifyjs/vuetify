@@ -8,7 +8,7 @@ import VLabel from '../VLabel'
 import {
   createLocalVue,
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VLabel', () => {
@@ -22,8 +22,8 @@ describe('VLabel', () => {
       return mount(VLabel, {
         localVue,
         context: {
-          ...ctx
-        }
+          ...ctx,
+        },
       })
     }
   })
@@ -32,8 +32,8 @@ describe('VLabel', () => {
     const wrapper = mountFunction({
       props: {
         color: 'pink',
-        focused: true
-      }
+        focused: true,
+      },
     })
 
     expect(wrapper.classes('pink--text')).toBe(true)
@@ -42,8 +42,8 @@ describe('VLabel', () => {
   it('should position itself absolutely', () => {
     const wrapper = mountFunction({
       props: {
-        absolute: true
-      }
+        absolute: true,
+      },
     })
 
     expect(wrapper.element.style.position).toBe('absolute')

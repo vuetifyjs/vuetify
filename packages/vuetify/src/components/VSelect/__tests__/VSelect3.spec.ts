@@ -4,7 +4,7 @@ import VSelect from '../VSelect'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VSelect.ts', () => {
@@ -22,13 +22,13 @@ describe('VSelect.ts', () => {
         mocks: {
           $vuetify: {
             lang: {
-              t: (val: string) => val
+              t: (val: string) => val,
             },
             theme: {
-              dark: false
-            }
-          }
-        }
+              dark: false,
+            },
+          },
+        },
       })
     }
   })
@@ -70,8 +70,8 @@ describe('VSelect.ts', () => {
   it('should disable v-list-item', async () => {
     const wrapper = mountFunction({
       propsData: {
-        items: [{ text: 'foo', disabled: true, id: 0 }]
-      }
+        items: [{ text: 'foo', disabled: true, id: 0 }],
+      },
     })
 
     const selectItem = jest.fn()
@@ -84,7 +84,7 @@ describe('VSelect.ts', () => {
     expect(selectItem).not.toHaveBeenCalled()
 
     wrapper.setProps({
-      items: [{ text: 'foo', disabled: false, id: 0 }]
+      items: [{ text: 'foo', disabled: false, id: 0 }],
     })
 
     await wrapper.vm.$nextTick()
@@ -100,7 +100,7 @@ describe('VSelect.ts', () => {
 
     wrapper.setData({
       isMenuActive: true,
-      isFocused: true
+      isFocused: true,
     })
 
     expect(wrapper.vm.isMenuActive).toBe(true)
@@ -125,9 +125,9 @@ describe('VSelect.ts', () => {
         chips: true,
         deletableChips: true,
         items: ['foo'],
-        value: 'foo'
+        value: 'foo',
       },
-      methods: { selectItem }
+      methods: { selectItem },
     })
 
     const input = jest.fn()
@@ -143,7 +143,7 @@ describe('VSelect.ts', () => {
     wrapper.setProps({
       items: ['foo', 'bar'],
       multiple: true,
-      value: ['foo', 'bar']
+      value: ['foo', 'bar'],
     })
     wrapper.vm.$on('change', change)
     await wrapper.vm.$nextTick()
@@ -163,8 +163,8 @@ describe('VSelect.ts', () => {
         deletableChips: true,
         multiple: true,
         items: ['foo', 'bar', 'fizz', 'buzz'],
-        value: ['foo', 'bar', 'fizz', 'buzz']
-      }
+        value: ['foo', 'bar', 'fizz', 'buzz'],
+      },
     })
 
     expect(wrapper.vm.selectedIndex).toBe(-1)
@@ -192,8 +192,8 @@ describe('VSelect.ts', () => {
         returnObject: true,
         itemText: 'text',
         itemValue: 'id',
-        items: []
-      }
+        items: [],
+      },
     })
 
     wrapper.setProps({ items: [{ id: 1, text: 'A' }] })
@@ -206,8 +206,8 @@ describe('VSelect.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         cacheItems: true,
-        items: []
-      }
+        items: [],
+      },
     })
 
     wrapper.setProps({ items: ['bar', 'baz'] })
@@ -227,8 +227,8 @@ describe('VSelect.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         cacheItems: true,
-        items: [1, 2, 3, 4]
-      }
+        items: [1, 2, 3, 4],
+      },
     })
 
     expect(wrapper.vm.computedItems).toHaveLength(4)
@@ -241,8 +241,8 @@ describe('VSelect.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         prefix: '$',
-        suffix: 'lbs'
-      }
+        suffix: 'lbs',
+      },
     })
 
     expect(wrapper.find('.v-text-field__prefix').element.innerHTML).toBe('$')
@@ -262,8 +262,8 @@ describe('VSelect.ts', () => {
       propsData: {
         clearable: true,
         items: ['foo'],
-        value: 'foo'
-      }
+        value: 'foo',
+      },
     })
 
     wrapper.vm.$on('click:clear', clearIconCb)
@@ -278,11 +278,11 @@ describe('VSelect.ts', () => {
       propsData: {
         items: [
           { text: 'foo', value: { id: { subid: 1 } } },
-          { text: 'foo', value: { id: { subid: 2 } } }
+          { text: 'foo', value: { id: { subid: 2 } } },
         ],
         multiple: false,
-        value: { id: { subid: 2 } }
-      }
+        value: { id: { subid: 2 } },
+      },
     })
 
     const selections = wrapper.findAll('.v-select__selection')
@@ -295,8 +295,8 @@ describe('VSelect.ts', () => {
       propsData: {
         multiple: true,
         items: ['foo', 'bar'],
-        value: ['foo']
-      }
+        value: ['foo'],
+      },
     })
 
     wrapper.vm.selectedIndex = 0
@@ -308,7 +308,7 @@ describe('VSelect.ts', () => {
 
   it('should not react to click when disabled', async () => {
     const wrapper = mountFunction({
-      propsData: { items: ['foo', 'bar'] }
+      propsData: { items: ['foo', 'bar'] },
     })
 
     const slot = wrapper.find('.v-input__slot')
@@ -376,8 +376,8 @@ describe('VSelect.ts', () => {
   it('should return full items if using auto prop', async () => {
     const wrapper = mountFunction({
       propsData: {
-        items: [...Array(100).keys()]
-      }
+        items: [...Array(100).keys()],
+      },
     })
 
     expect(wrapper.vm.virtualizedItems).toHaveLength(20)
@@ -391,9 +391,9 @@ describe('VSelect.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         items: [{
-          text: 'foo'
-        }]
-      }
+          text: 'foo',
+        }],
+      },
     })
 
     expect(wrapper.vm.getValue(wrapper.vm.items[0])).toBe('foo')
@@ -403,9 +403,9 @@ describe('VSelect.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         items: [
-          { text: 'Foo', value: ['bar'] }
-        ]
-      }
+          { text: 'Foo', value: ['bar'] },
+        ],
+      },
     })
 
     const input = jest.fn()
@@ -417,7 +417,7 @@ describe('VSelect.ts', () => {
 
     expect(input).toHaveBeenCalledWith(['bar'])
     expect(wrapper.vm.selectedItems).toEqual([
-      { text: 'Foo', value: ['bar'] }
+      { text: 'Foo', value: ['bar'] },
     ])
   })
 })

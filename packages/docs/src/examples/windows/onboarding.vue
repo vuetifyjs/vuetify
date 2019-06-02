@@ -66,7 +66,7 @@
   export default {
     data: () => ({
       length: 3,
-      onboarding: 0
+      onboarding: 0,
     }),
 
     methods: {
@@ -79,8 +79,8 @@
         this.onboarding = this.onboarding - 1 < 0
           ? this.length - 1
           : this.onboarding - 1
-      }
-    }
+      },
+    },
   }
 </script>
 

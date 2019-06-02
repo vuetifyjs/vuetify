@@ -62,7 +62,7 @@
           'secondary',
           'yellow darken-4',
           'red lighten-2',
-          'orange darken-1'
+          'orange darken-1',
         ],
         cycle: false,
         slides: [
@@ -70,10 +70,10 @@
           'Second',
           'Third',
           'Fourth',
-          'Fifth'
-        ]
+          'Fifth',
+        ],
       }
-    }
+    },
   }
 </script>
 

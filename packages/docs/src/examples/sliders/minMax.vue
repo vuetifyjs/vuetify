@@ -73,8 +73,8 @@
         min: -50,
         max: 90,
         slider: 40,
-        range: [-20, 70]
+        range: [-20, 70],
       }
-    }
+    },
   }
 </script>

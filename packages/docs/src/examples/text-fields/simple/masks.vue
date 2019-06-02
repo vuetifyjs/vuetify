@@ -14,11 +14,11 @@
 
   export default {
     directives: {
-      mask
+      mask,
     },
     data: () => ({
       mask: '####-####-####-####',
-      value: '4444444444444444'
-    })
+      value: '4444444444444444',
+    }),
   }
 </script>

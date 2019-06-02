@@ -141,9 +141,9 @@
       inset: false,
       items: [
         'default',
-        'vertical'
+        'vertical',
       ],
-      variant: 'default'
-    })
+      variant: 'default',
+    }),
   }
 </script>

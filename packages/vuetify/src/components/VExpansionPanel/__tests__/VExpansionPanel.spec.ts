@@ -6,7 +6,7 @@ import VExpansionPanelContent from '../VExpansionPanelContent'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VExpansionPanel', () => {
@@ -19,16 +19,16 @@ describe('VExpansionPanel', () => {
         slots: {
           default: [
             VExpansionPanelHeader,
-            VExpansionPanelContent
-          ]
+            VExpansionPanelContent,
+          ],
         },
         provide: {
           expansionPanels: {
             register: () => {},
-            unregister: () => {}
-          }
+            unregister: () => {},
+          },
         },
-        ...options
+        ...options,
       })
     }
   })
@@ -38,7 +38,7 @@ describe('VExpansionPanel', () => {
     const toggle = jest.fn()
     const wrapper = mountFunction({
       propsData: { readonly: true },
-      methods: { toggle }
+      methods: { toggle },
     })
 
     wrapper.vm.$on('click', click)
@@ -97,12 +97,12 @@ describe('VExpansionPanel', () => {
         default: [
           {
             render: h => h(VExpansionPanelHeader, {
-              props: { hideActions: true }
-            })
+              props: { hideActions: true },
+            }),
           },
-          VExpansionPanelContent
-        ]
-      }
+          VExpansionPanelContent,
+        ],
+      },
     })
 
     const wrapper2 = mountFunction()

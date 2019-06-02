@@ -16,44 +16,44 @@ export default Vue.extend({
   props: {
     options: {
       type: Object,
-      required: true
+      required: true,
     } as PropValidator<DataOptions>,
     pagination: {
       type: Object,
-      required: true
+      required: true,
     } as PropValidator<DataPaginaton>,
     itemsPerPageOptions: {
       type: Array,
-      default: () => ([5, 10, 15, -1])
+      default: () => ([5, 10, 15, -1]),
     } as PropValidator<any[]>,
     prevIcon: {
       type: String,
-      default: '$vuetify.icons.prev'
+      default: '$vuetify.icons.prev',
     },
     nextIcon: {
       type: String,
-      default: '$vuetify.icons.next'
+      default: '$vuetify.icons.next',
     },
     firstIcon: {
       type: String,
-      default: '$vuetify.icons.first'
+      default: '$vuetify.icons.first',
     },
     lastIcon: {
       type: String,
-      default: '$vuetify.icons.last'
+      default: '$vuetify.icons.last',
     },
     itemsPerPageText: {
       type: String,
-      default: '$vuetify.dataFooter.itemsPerPageText'
+      default: '$vuetify.dataFooter.itemsPerPageText',
     },
     itemsPerPageAllText: {
       type: String,
-      default: '$vuetify.dataFooter.itemsPerPageAll'
+      default: '$vuetify.dataFooter.itemsPerPageAll',
     },
     showFirstLastPage: Boolean,
     showCurrentPage: Boolean,
     disablePagination: Boolean,
-    disableItemsPerPage: Boolean
+    disableItemsPerPage: Boolean,
   },
 
   computed: {
@@ -81,7 +81,7 @@ export default Vue.extend({
       }
 
       return itemsPerPageOptions
-    }
+    },
   },
 
   methods: {
@@ -106,17 +106,17 @@ export default Vue.extend({
     genItemsPerPageOption (option: number) {
       return {
         text: option === -1 ? this.$vuetify.lang.t(this.itemsPerPageAllText) : String(option),
-        value: option
+        value: option,
       }
     },
     genItemsPerPageSelect () {
       return this.$createElement('div', {
-        staticClass: 'v-data-footer__select'
+        staticClass: 'v-data-footer__select',
       }, [
         this.$vuetify.lang.t(this.itemsPerPageText),
         this.$createElement(VSelect, {
           attrs: {
-            'aria-label': this.itemsPerPageText
+            'aria-label': this.itemsPerPageText,
           },
           props: {
             disabled: this.disableItemsPerPage,
@@ -124,12 +124,12 @@ export default Vue.extend({
             value: this.options.itemsPerPage,
             hideDetails: true,
             auto: true,
-            minWidth: '75px'
+            minWidth: '75px',
           },
           on: {
-            input: this.onChangeItemsPerPage
-          }
-        })
+            input: this.onChangeItemsPerPage,
+          },
+        }),
       ])
     },
     genPaginationInfo () {
@@ -148,7 +148,7 @@ export default Vue.extend({
       }
 
       return this.$createElement('div', {
-        'class': 'v-data-footer__pagination'
+        'class': 'v-data-footer__pagination',
       }, children)
     },
     genIcon (click: Function, disabled: boolean, label: string, icon: string): VNode {
@@ -156,16 +156,16 @@ export default Vue.extend({
         props: {
           disabled: disabled || this.disablePagination,
           icon: true,
-          text: true
+          text: true,
           // dark: this.dark, // TODO: add mixin
           // light: this.light // TODO: add mixin
         },
         on: {
-          click
+          click,
         },
         attrs: {
-          'aria-label': label // TODO: Localization
-        }
+          'aria-label': label, // TODO: Localization
+        },
       }, [this.$createElement(VIcon, icon)])
     },
     genIcons () {
@@ -204,23 +204,23 @@ export default Vue.extend({
 
       return [
         this.$createElement('div', {
-          staticClass: 'v-data-footer__icons-before'
+          staticClass: 'v-data-footer__icons-before',
         }, before),
         this.showCurrentPage && this.$createElement('span', [this.options.page.toString()]),
         this.$createElement('div', {
-          staticClass: 'v-data-footer__icons-after'
-        }, after)
+          staticClass: 'v-data-footer__icons-after',
+        }, after),
       ]
-    }
+    },
   },
 
   render (): VNode {
     return this.$createElement('div', {
-      staticClass: 'v-data-footer'
+      staticClass: 'v-data-footer',
     }, [
       this.genItemsPerPageSelect(),
       this.genPaginationInfo(),
-      this.genIcons()
+      this.genIcons(),
     ])
-  }
+  },
 })

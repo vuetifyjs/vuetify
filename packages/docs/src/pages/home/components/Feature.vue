@@ -28,17 +28,17 @@
       features: [
         {
           key: 'community',
-          src: 'feature3.png'
+          src: 'feature3.png',
         },
         {
           key: 'components',
-          src: 'feature2.png'
+          src: 'feature2.png',
         },
         {
           key: 'scaffolding',
-          src: 'feature1.png'
-        }
-      ]
+          src: 'feature1.png',
+        },
+      ],
     }),
 
     computed: {
@@ -46,9 +46,9 @@
         return this.features.map(feature => ({
           text: this.$t(`Vuetify.Home.features.${feature.key}.text`),
           title: this.$t(`Vuetify.Home.features.${feature.key}.title`),
-          src: feature.src
+          src: feature.src,
         }))
-      }
-    }
+      },
+    },
   }
 </script>

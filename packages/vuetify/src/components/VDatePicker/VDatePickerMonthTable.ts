@@ -18,7 +18,7 @@ export default mixins(
   computed: {
     formatter (): DatePickerFormatter {
       return this.format || createNativeLocaleFormatter(this.currentLocale, { month: 'short', timeZone: 'UTC' }, { start: 5, length: 2 })
-    }
+    },
   },
 
   methods: {
@@ -35,24 +35,24 @@ export default mixins(
           const month = row * cols.length + col
           const date = `${this.displayedYear}-${pad(month + 1)}`
           return this.$createElement('td', {
-            key: month
+            key: month,
           }, [
-            this.genButton(date, false, 'month', this.formatter)
+            this.genButton(date, false, 'month', this.formatter),
           ])
         })
 
         children.push(this.$createElement('tr', {
-          key: row
+          key: row,
         }, tds))
       }
 
       return this.$createElement('tbody', children)
-    }
+    },
   },
 
   render (): VNode {
     return this.genTable('v-date-picker-table v-date-picker-table--month', [
-      this.genTBody()
+      this.genTBody(),
     ], this.calculateTableDate)
-  }
+  },
 })

@@ -14,7 +14,7 @@ export default {
     newIn,
     namespace: null,
     page: null,
-    structure: null
+    structure: null,
   },
 
   getters: {
@@ -25,10 +25,10 @@ export default {
     page (state, getters, rootState) {
       if (!rootState || !rootState.route || !rootState.route.params) return undefined
       return upperFirst(camelCase(rootState.route.params.page))
-    }
+    },
   },
 
   mutations: {
-    setStructure: set('structure')
-  }
+    setStructure: set('structure'),
+  },
 }

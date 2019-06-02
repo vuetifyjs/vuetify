@@ -23,7 +23,7 @@
 
     data: () => ({
       availableLocales: languages.map(lang => lang.alternate || lang.locale),
-      languages
+      languages,
     }),
 
     computed: {
@@ -34,7 +34,7 @@
       },
       hasToolbar () {
         return this.languageIsValid && this.name !== 'Layouts'
-      }
+      },
     },
 
     created () {
@@ -48,7 +48,7 @@
       await waitForReadystate()
 
       this.$vuetify.goTo(this.hash)
-    }
+    },
   }
 </script>
 

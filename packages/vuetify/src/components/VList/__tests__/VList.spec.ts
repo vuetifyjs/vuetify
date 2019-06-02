@@ -4,7 +4,7 @@ import VList from '../VList'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 // Types
@@ -17,7 +17,7 @@ describe('VList.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VList, {
-        ...options
+        ...options,
       })
     }
   })
@@ -31,8 +31,8 @@ describe('VList.ts', () => {
   it('should render a dense component and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        dense: true
-      }
+        dense: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -41,8 +41,8 @@ describe('VList.ts', () => {
   it('should render a subheader component and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        subheader: true
-      }
+        subheader: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -51,8 +51,8 @@ describe('VList.ts', () => {
   it('should render a threeLine component and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        threeLine: true
-      }
+        threeLine: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -61,8 +61,8 @@ describe('VList.ts', () => {
   it('should render a twoLine component and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        twoLine: true
-      }
+        twoLine: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()

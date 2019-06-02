@@ -3,7 +3,7 @@ import { install } from './install'
 // Types
 import {
   VuetifyService,
-  VuetifyServiceContract
+  VuetifyServiceContract,
 } from 'vuetify/types/services'
 import { VuetifyPreset } from 'vuetify/types/presets'
 import Vue from 'vue'

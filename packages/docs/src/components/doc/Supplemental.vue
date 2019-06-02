@@ -10,8 +10,8 @@
     props: {
       value: {
         type: Array,
-        default: () => ([])
-      }
-    }
+        default: () => ([]),
+      },
+    },
   }
 </script>

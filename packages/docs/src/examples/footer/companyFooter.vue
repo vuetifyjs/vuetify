@@ -41,8 +41,8 @@
         'Team',
         'Services',
         'Blog',
-        'Contact Us'
-      ]
-    })
+        'Contact Us',
+      ],
+    }),
   }
 </script>

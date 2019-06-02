@@ -41,8 +41,8 @@
   export default {
     data: () => ({
       reviews: 413,
-      value: 4.5
-    })
+      value: 4.5,
+    }),
   }
 </script>
 

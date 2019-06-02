@@ -15,5 +15,5 @@ export default VAppBarNavIcon.extend({
     deprecate('<v-toolbar-side-icon>', '<v-app-bar-nav-icon>', this)
 
     return VAppBarNavIcon.options.render.call(this, h, context)
-  }
+  },
 })

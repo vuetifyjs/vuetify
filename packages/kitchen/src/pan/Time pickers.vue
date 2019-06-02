@@ -459,7 +459,7 @@
       modal: false,
       menu: false,
       time1: '9:41',
-      time2: '9:41'
-    })
+      time2: '9:41',
+    }),
   }
 </script>

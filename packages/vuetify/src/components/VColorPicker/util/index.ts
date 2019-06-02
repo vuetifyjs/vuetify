@@ -12,7 +12,7 @@ import {
   RGBAtoHex,
   HSLAtoHSVA,
   parseHex,
-  Hexa
+  Hexa,
 } from '../../../util/colorUtils'
 
 export interface VColorPickerColor {
@@ -35,7 +35,7 @@ export function fromHSVA (hsva: HSVA): VColorPickerColor {
     hsla: HSVAtoHSLA(hsva),
     hsva,
     hue: hsva.h,
-    rgba: HSVAtoRGBA(hsva)
+    rgba: HSVAtoRGBA(hsva),
   }
 }
 
@@ -49,7 +49,7 @@ export function fromHSLA (hsla: HSLA): VColorPickerColor {
     hsla,
     hsva,
     hue: hsva.h,
-    rgba: HSVAtoRGBA(hsva)
+    rgba: HSVAtoRGBA(hsva),
   }
 }
 
@@ -63,7 +63,7 @@ export function fromRGBA (rgba: RGBA): VColorPickerColor {
     hsla: HSVAtoHSLA(hsva),
     hsva,
     hue: hsva.h,
-    rgba
+    rgba,
   }
 }
 
@@ -76,7 +76,7 @@ export function fromHexa (hexa: Hexa): VColorPickerColor {
     hsla: HSVAtoHSLA(hsva),
     hsva,
     hue: hsva.h,
-    rgba: HSVAtoRGBA(hsva)
+    rgba: HSVAtoRGBA(hsva),
   }
 }
 

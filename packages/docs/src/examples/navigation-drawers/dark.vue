@@ -80,10 +80,10 @@
         drawer: null,
         items: [
           { title: 'Home', icon: 'dashboard' },
-          { title: 'About', icon: 'question_answer' }
+          { title: 'About', icon: 'question_answer' },
         ],
-        mini: false
+        mini: false,
       }
-    }
+    },
   }
 </script>

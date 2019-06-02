@@ -3,12 +3,12 @@ import Mouse from '../mouse'
 import {
   mount,
   Wrapper,
-  MountOptions
+  MountOptions,
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../../util/mixins'
 
 const Mock = Mouse.extend({
-  render: h => h('div')
+  render: h => h('div'),
 })
 
 describe('mouse.ts', () => {
@@ -24,8 +24,8 @@ describe('mouse.ts', () => {
     const noop = e => e
     const wrapper = mount(Mock, {
       listeners: {
-        click: noop
-      }
+        click: noop,
+      },
     })
 
     expect(typeof wrapper.vm.getMouseEventHandlers({ click: { event: 'click' } }, noop).click).toBe('function')
@@ -35,8 +35,8 @@ describe('mouse.ts', () => {
     const noop = e => e
     const wrapper = mount(Mock, {
       listeners: {
-        click: noop
-      }
+        click: noop,
+      },
     })
 
     expect(typeof wrapper.vm.getDefaultMouseEventHandlers('', noop).click).toBe('function')
@@ -47,8 +47,8 @@ describe('mouse.ts', () => {
     const fn = jest.fn()
     const wrapper = mount(Mock, {
       listeners: {
-        click: fn
-      }
+        click: fn,
+      },
     })
 
     const { click } = wrapper.vm.getMouseEventHandlers({ click: { event: 'click' } }, () => {})
@@ -60,8 +60,8 @@ describe('mouse.ts', () => {
     const fn = jest.fn()
     const wrapper = mount(Mock, {
       listeners: {
-        click: fn
-      }
+        click: fn,
+      },
     })
     const event = { preventDefault: () => {} }
     const spy = jest.spyOn(event, 'preventDefault')
@@ -76,8 +76,8 @@ describe('mouse.ts', () => {
     const fn = jest.fn()
     const wrapper = mount(Mock, {
       listeners: {
-        click: fn
-      }
+        click: fn,
+      },
     })
     const event = { stopPropagation: () => {} }
     const spy = jest.spyOn(event, 'stopPropagation')

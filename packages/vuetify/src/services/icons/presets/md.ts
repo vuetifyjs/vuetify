@@ -30,7 +30,7 @@ const icons: VuetifyIcons = {
   loading: 'cached',
   first: 'first_page',
   last: 'last_page',
-  unfold: 'unfold_more'
+  unfold: 'unfold_more',
 }
 
 export default icons

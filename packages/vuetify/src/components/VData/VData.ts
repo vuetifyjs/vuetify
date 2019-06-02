@@ -40,45 +40,45 @@ export default Vue.extend({
   props: {
     items: {
       type: Array as PropType<any[]>,
-      default: () => []
+      default: () => [],
     },
     options: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
     sortBy: {
       type: [String, Array] as PropType<string | string[]>,
-      default: () => []
+      default: () => [],
     },
     sortDesc: {
       type: [Boolean, Array] as PropType<boolean | boolean[]>,
-      default: () => []
+      default: () => [],
     },
     customSort: {
       type: Function as any as PropType<typeof sortItems>,
-      default: sortItems
+      default: sortItems,
     },
     mustSort: Boolean,
     multiSort: Boolean,
     page: {
       type: Number,
-      default: 1
+      default: 1,
     },
     itemsPerPage: {
       type: Number,
-      default: 10
+      default: 10,
     },
     groupBy: {
       type: [String, Array] as PropType<string | string[]>,
-      default: () => []
+      default: () => [],
     },
     groupDesc: {
       type: [Boolean, Array] as PropType<boolean | boolean[]>,
-      default: () => []
+      default: () => [],
     },
     locale: {
       type: String,
-      default: 'en-US'
+      default: 'en-US',
     },
     disableSort: Boolean,
     disablePagination: Boolean,
@@ -86,12 +86,12 @@ export default Vue.extend({
     search: String,
     customFilter: {
       type: Function as any as PropType<typeof searchItems>,
-      default: searchItems
+      default: searchItems,
     },
     serverItemsLength: {
       type: Number,
-      default: -1
-    }
+      default: -1,
+    },
   },
 
   data () {
@@ -104,8 +104,8 @@ export default Vue.extend({
         groupBy: wrapInArray(this.groupBy),
         groupDesc: wrapInArray(this.groupDesc),
         mustSort: this.mustSort,
-        multiSort: this.multiSort
-      } as DataOptions
+        multiSort: this.multiSort,
+      } as DataOptions,
     }
   },
 
@@ -139,7 +139,7 @@ export default Vue.extend({
         pageStart: this.pageStart,
         pageStop: this.pageStop,
         pageCount: this.pageCount,
-        itemsLength: this.itemsLength
+        itemsLength: this.itemsLength,
       }
     },
     filteredItems (): any[] {
@@ -176,11 +176,11 @@ export default Vue.extend({
         options: this.internalOptions,
         updateOptions: this.updateOptions,
         pagination: this.pagination,
-        groupedItems: this.groupedItems
+        groupedItems: this.groupedItems,
       }
 
       return props
-    }
+    },
   },
 
   watch: {
@@ -191,7 +191,7 @@ export default Vue.extend({
         this.updateOptions(options)
       },
       deep: true,
-      immediate: true
+      immediate: true,
     },
     internalOptions: {
       handler (options: DataOptions, old: DataOptions) {
@@ -200,7 +200,7 @@ export default Vue.extend({
         this.$emit('pagination', this.pagination)
       },
       deep: true,
-      immediate: true
+      immediate: true,
     },
     page (page: number) {
       this.updateOptions({ page })
@@ -254,14 +254,14 @@ export default Vue.extend({
       handler (pageCount: number) {
         this.$emit('page-count', pageCount)
       },
-      immediate: true
+      immediate: true,
     },
     computedItems: {
       handler (computedItems: any[]) {
         this.$emit('current-items', computedItems)
       },
-      immediate: true
-    }
+      immediate: true,
+    },
   },
 
   methods: {
@@ -330,7 +330,7 @@ export default Vue.extend({
       this.internalOptions = {
         ...this.internalOptions,
         ...options,
-        page: Math.max(1, Math.min(options.page || this.internalOptions.page, this.pageCount))
+        page: Math.max(1, Math.min(options.page || this.internalOptions.page, this.pageCount)),
       }
     },
     sortItems (items: any[]) {
@@ -344,10 +344,10 @@ export default Vue.extend({
       if (items.length < this.pageStart) this.internalOptions.page = 1
 
       return items.slice(this.pageStart, this.pageStop)
-    }
+    },
   },
 
   render (): VNode {
     return this.$scopedSlots.default && this.$scopedSlots.default(this.scopedProps) as any
-  }
+  },
 })

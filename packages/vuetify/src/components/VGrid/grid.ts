@@ -12,8 +12,8 @@ export default function VGrid (name: string) {
       id: String,
       tag: {
         type: String,
-        default: 'div'
-      }
+        default: 'div',
+      },
     },
 
     render (h, { props, data, children }): VNode {
@@ -49,6 +49,6 @@ export default function VGrid (name: string) {
       }
 
       return h(props.tag, data, children)
-    }
+    },
   })
 }

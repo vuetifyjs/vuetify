@@ -39,7 +39,7 @@
 <script>
   export default {
     data: () => ({
-      rating: 4.5
-    })
+      rating: 4.5,
+    }),
   }
 </script>

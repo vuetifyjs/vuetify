@@ -15,7 +15,7 @@ export default Vue.extend({
   functional: true,
 
   directives: {
-    ripple
+    ripple,
   },
 
   props: {
@@ -24,22 +24,22 @@ export default Vue.extend({
     disabled: Boolean,
     ripple: {
       type: Boolean,
-      default: true
+      default: true,
     },
     value: Boolean,
     indeterminate: Boolean,
     indeterminateIcon: {
       type: String,
-      default: '$vuetify.icons.checkboxIndeterminate'
+      default: '$vuetify.icons.checkboxIndeterminate',
     },
     onIcon: {
       type: String,
-      default: '$vuetify.icons.checkboxOn'
+      default: '$vuetify.icons.checkboxOn',
     },
     offIcon: {
       type: String,
-      default: '$vuetify.icons.checkboxOff'
-    }
+      default: '$vuetify.icons.checkboxOff',
+    },
   },
 
   render (h, { props, data }): VNode {
@@ -50,8 +50,8 @@ export default Vue.extend({
         staticClass: 'v-input--selection-controls__ripple',
         directives: [{
           name: 'ripple',
-          value: { center: true }
-        }] as VNodeDirective[]
+          value: { center: true },
+        }] as VNodeDirective[],
       }))
 
       children.push(ripple)
@@ -65,13 +65,13 @@ export default Vue.extend({
       props: {
         disabled: props.disabled,
         dark: props.dark,
-        light: props.light
-      }
+        light: props.light,
+      },
     }), icon))
 
     const classes = {
       'v-simple-checkbox': true,
-      'v-simple-checkbox--disabled': props.disabled
+      'v-simple-checkbox--disabled': props.disabled,
     }
 
     return h('div', {
@@ -82,8 +82,8 @@ export default Vue.extend({
           if (data.on && data.on.input && !props.disabled) {
             wrapInArray(data.on.input).forEach(f => f(!props.value))
           }
-        }
-      }
+        },
+      },
     }, children)
-  }
+  },
 })
