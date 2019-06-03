@@ -2,7 +2,7 @@
 import '../VCard/VCard.sass'
 
 // Components
-import VCheckbox from '../VCheckbox'
+import VSimpleCheckbox from '../VCheckbox/VSimpleCheckbox'
 import VDivider from '../VDivider'
 import VSubheader from '../VSubheader'
 import {
@@ -99,10 +99,10 @@ export default mixins(Colorable, Themeable).extend({
       }
 
       return this.$createElement(VListItemAction, data, [
-        this.$createElement(VCheckbox, {
+        this.$createElement(VSimpleCheckbox, {
           props: {
             color: this.color,
-            inputValue,
+            value: inputValue,
           },
         }),
       ])
@@ -124,6 +124,11 @@ export default mixins(Colorable, Themeable).extend({
     },
     genHighlight (text: string): string {
       return `<span class="v-list__item__mask">${escapeHTML(text)}</span>`
+    },
+    genLabelledBy (item: object) {
+      const text = this.getText(item).split(' ').join('-')
+
+      return `${this._uid}-list-${text}`
     },
     getMaskedCharacters (text: string): {
       start: string
@@ -156,6 +161,10 @@ export default mixins(Colorable, Themeable).extend({
       }
 
       const tile = {
+        attrs: {
+          'aria-labelledby': this.genLabelledBy(item),
+          role: 'option',
+        },
         on: {
           mousedown: (e: Event) => {
             // Prevent onBlur from being called
@@ -193,6 +202,7 @@ export default mixins(Colorable, Themeable).extend({
 
       return this.$createElement(VListItemContent,
         [this.$createElement(VListItemTitle, {
+          attrs: { id: this.genLabelledBy(item) },
           domProps: { innerHTML },
         })]
       )
@@ -243,9 +253,12 @@ export default mixins(Colorable, Themeable).extend({
       class: this.themeClasses,
     }, [
       this.$createElement(VList, {
-        props: {
-          dense: this.dense,
+        attrs: {
+          id: this.$attrs.id,
+          role: 'listbox',
+          tabindex: -1,
         },
+        props: { dense: this.dense },
       }, children),
     ])
   },

@@ -55,7 +55,6 @@ export default VSelect.extend({
 
   data () {
     return {
-      attrsInput: null,
       lazySearch: this.searchInput,
     }
   },
@@ -275,11 +274,18 @@ export default VSelect.extend({
       input.data = input.data || {}
       input.data.attrs = input.data.attrs || {}
       input.data.domProps = input.data.domProps || {}
-
-      input.data.attrs.role = 'combobox'
       input.data.domProps.value = this.internalSearch
 
       return input
+    },
+    genInputSlot () {
+      const slot = VSelect.options.methods.genInputSlot.call(this)
+
+      slot.data = slot.data || {}
+      slot.data.attrs = slot.data.attrs || {}
+      slot.data.attrs.role = 'combobox'
+
+      return slot
     },
     genSelections () {
       return this.hasSlot || this.multiple

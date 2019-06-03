@@ -111,7 +111,6 @@ export default baseMixins.extend<options>().extend({
 
   data () {
     return {
-      attrsInput: { role: 'combobox' },
       cachedItems: this.cacheItems ? this.items : [],
       content: null as any,
       isBooted: false,
@@ -143,6 +142,11 @@ export default baseMixins.extend<options>().extend({
         'v-select--chips--small': this.smallChips,
         'v-select--is-menu-active': this.isMenuActive,
       }
+    },
+    computedId (): string {
+      const id = this.$attrs.id || 'computed'
+
+      return `${id}-${this._uid}`
     },
     /* Used by other components to overwrite */
     computedItems (): object[] {
@@ -176,10 +180,15 @@ export default baseMixins.extend<options>().extend({
     },
     listData (): object {
       const scopeId = this.$vnode && (this.$vnode.context!.$options as { [key: string]: any })._scopeId
+      const attrs = scopeId ? {
+        [scopeId]: true,
+      } : {}
+
       return {
-        attrs: scopeId ? {
-          [scopeId]: true,
-        } : null,
+        attrs: {
+          ...attrs,
+          id: this.computedId,
+        },
         props: {
           action: this.multiple,
           color: this.color,
@@ -401,7 +410,7 @@ export default baseMixins.extend<options>().extend({
 
       input.data!.domProps!.value = null
       input.data!.attrs!.readonly = true
-      input.data!.attrs!['aria-readonly'] = String(this.readonly)
+      input.data!.attrs!['aria-readonly'] = 'true'
       input.data!.on!.keypress = this.onKeyPress
 
       return input
@@ -413,9 +422,10 @@ export default baseMixins.extend<options>().extend({
       render.data.attrs = render.data.attrs || {}
       render.data.attrs = {
         ...render.data.attrs,
-        'aria-role': 'button',
-        'aria-haspopup': true,
+        role: 'button',
+        'aria-haspopup': 'listbox',
         'aria-expanded': String(this.isMenuActive),
+        'aria-owns': this.computedId,
       }
 
       return render
@@ -459,6 +469,7 @@ export default baseMixins.extend<options>().extend({
       }
 
       return this.$createElement(VMenu, {
+        attrs: { role: undefined },
         props,
         on: {
           input: (val: boolean) => {
@@ -565,7 +576,11 @@ export default baseMixins.extend<options>().extend({
       this.keyboardLookupPrefix += e.key.toLowerCase()
       this.keyboardLookupLastTime = now
 
-      const index = this.allItems.findIndex(item => this.getText(item).toLowerCase().startsWith(this.keyboardLookupPrefix))
+      const index = this.allItems.findIndex(item => {
+        const text = (this.getText(item) || '').toString()
+
+        return text.toLowerCase().startsWith(this.keyboardLookupPrefix)
+      })
       const item = this.allItems[index]
       if (index !== -1) {
         this.setValue(this.returnObject ? item : this.getValue(item))

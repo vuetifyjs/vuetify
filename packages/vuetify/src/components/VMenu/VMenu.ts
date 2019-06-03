@@ -302,7 +302,7 @@ export default baseMixins.extend({
       const options = {
         attrs: {
           ...this.getScopeIdAttrs(),
-          role: 'menu',
+          role: 'role' in this.$attrs ? this.$attrs.role : 'menu',
         },
         staticClass: 'v-menu__content',
         'class': {

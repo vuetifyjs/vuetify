@@ -114,22 +114,17 @@ export default baseMixins.extend<options>().extend({
     genAttrs () {
       let attrs: Record<string, any> = {
         'aria-disabled': this.disabled ? true : undefined,
+        'aria-selected': String(this.isActive),
         tabindex: this.isClickable && !this.disabled ? 0 : -1,
+        ...this.$attrs,
       }
 
-      if (this.listItemGroup) {
-        attrs = {
-          ...attrs,
-          'aria-selected': String(this.isActive),
-          role: 'listitem',
-        }
-      }
-
-      if (this.isInMenu) {
-        attrs = {
-          ...attrs,
-          role: this.isClickable ? 'menuitem' : undefined,
-        }
+      if (this.$attrs.role) {
+        // do nothing, role already provided
+      } else if (this.listItemGroup) {
+        attrs.role = 'listitem'
+      } else if (this.isInMenu) {
+        attrs.role = this.isClickable ? 'menuitem' : undefined,
       }
 
       return attrs
