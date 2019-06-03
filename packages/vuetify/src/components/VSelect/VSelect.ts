@@ -406,6 +406,20 @@ export default baseMixins.extend<options>().extend({
 
       return input
     },
+    genInputSlot (): VNode {
+      const render = VTextField.options.methods.genInputSlot.call(this)
+
+      render.data = render.data || {}
+      render.data.attrs = render.data.attrs || {}
+      render.data.attrs = {
+        ...render.data.attrs,
+        'aria-role': 'button',
+        'aria-haspopup': true,
+        'aria-expanded': String(this.isMenuActive),
+      }
+
+      return render
+    },
     genList (): VNode {
       // If there's no slots, we can use a cached VNode to improve performance
       if (this.$slots['no-data'] || this.$slots['prepend-item'] || this.$slots['append-item']) {
