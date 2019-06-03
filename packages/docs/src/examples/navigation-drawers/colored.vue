@@ -41,9 +41,9 @@
         items: [
           { title: 'Dashboard', icon: 'dashboard' },
           { title: 'Account', icon: 'account_box' },
-          { title: 'Admin', icon: 'gavel' }
-        ]
+          { title: 'Admin', icon: 'gavel' },
+        ],
       }
-    }
+    },
   }
 </script>

@@ -23,7 +23,7 @@ export default Vue.extend({
 
   props: {
     scrollTarget: String,
-    scrollThreshold: [String, Number]
+    scrollThreshold: [String, Number],
   },
 
   data: () => ({
@@ -33,7 +33,7 @@ export default Vue.extend({
     isScrollingUp: false,
     previousScroll: 0,
     savedScroll: 0,
-    target: null as Element | null
+    target: null as Element | null,
   }),
 
   computed: {
@@ -53,7 +53,7 @@ export default Vue.extend({
       return this.scrollThreshold
         ? Number(this.scrollThreshold)
         : 300
-    }
+    },
   },
 
   watch: {
@@ -62,7 +62,7 @@ export default Vue.extend({
     },
     isActive () {
       this.savedScroll = 0
-    }
+    },
   },
 
   mounted () {
@@ -99,6 +99,6 @@ export default Vue.extend({
      * scrolling in any direction
      * has exceeded the threshold
      */
-    thresholdMet () { /* noop */ }
-  }
+    thresholdMet () { /* noop */ },
+  },
 })

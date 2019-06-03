@@ -46,7 +46,7 @@
 <script>
   export default {
     data: () => ({
-      selection: 2
-    })
+      selection: 2,
+    }),
   }
 </script>

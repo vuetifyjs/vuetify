@@ -75,7 +75,7 @@
       fav: true,
       menu: false,
       message: false,
-      hints: true
-    })
+      hints: true,
+    }),
   }
 </script>

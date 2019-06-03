@@ -36,8 +36,8 @@
         { text: 'Small (4px)', value: 'sm' },
         { text: 'Medium (8px)', value: 'md' },
         { text: 'Large (16px)', value: 'lg' },
-        { text: 'Extra large (24px)', value: 'xl' }
-      ]
-    })
+        { text: 'Extra large (24px)', value: 'xl' },
+      ],
+    }),
   }
 </script>

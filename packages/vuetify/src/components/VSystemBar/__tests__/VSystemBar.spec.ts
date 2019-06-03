@@ -8,7 +8,7 @@ import VSystemBar from '../VSystemBar'
 import {
   createLocalVue,
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VSystemBar.ts', () => {
@@ -22,11 +22,11 @@ describe('VSystemBar.ts', () => {
           $vuetify: {
             application: {
               register: () => {},
-              unregister: () => {}
-            }
-          }
+              unregister: () => {},
+            },
+          },
         },
-        ...options
+        ...options,
       })
     }
   })
@@ -35,8 +35,8 @@ describe('VSystemBar.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         app: true,
-        height: 56
-      }
+        height: 56,
+      },
     })
 
     expect(wrapper.vm.computedHeight).toBe(56)

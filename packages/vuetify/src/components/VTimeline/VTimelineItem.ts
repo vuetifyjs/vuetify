@@ -30,7 +30,7 @@ export default baseMixins.extend<options>().extend({
   props: {
     color: {
       type: String,
-      default: 'primary'
+      default: 'primary',
     },
     fillDot: Boolean,
     hideDot: Boolean,
@@ -39,19 +39,19 @@ export default baseMixins.extend<options>().extend({
     large: Boolean,
     left: Boolean,
     right: Boolean,
-    small: Boolean
+    small: Boolean,
   },
 
   computed: {
     hasIcon (): boolean {
       return !!this.icon || !!this.$slots.icon
-    }
+    },
   },
 
   methods: {
     genBody () {
       return this.$createElement('div', {
-        staticClass: 'v-timeline-item__body'
+        staticClass: 'v-timeline-item__body',
       }, this.$slots.default)
     },
     genIcon (): VNode | VNode[] {
@@ -63,8 +63,8 @@ export default baseMixins.extend<options>().extend({
         props: {
           color: this.iconColor,
           dark: !this.theme.isDark,
-          small: this.small
-        }
+          small: this.small,
+        },
       }, this.icon)
     },
     genInnerDot () {
@@ -72,7 +72,7 @@ export default baseMixins.extend<options>().extend({
 
       return this.$createElement('div', {
         staticClass: 'v-timeline-item__inner-dot',
-        ...data
+        ...data,
       }, [this.hasIcon && this.genIcon()])
     },
     genDot () {
@@ -80,8 +80,8 @@ export default baseMixins.extend<options>().extend({
         staticClass: 'v-timeline-item__dot',
         class: {
           'v-timeline-item__dot--small': this.small,
-          'v-timeline-item__dot--large': this.large
-        }
+          'v-timeline-item__dot--large': this.large,
+        },
       }, [this.genInnerDot()])
     },
     genDivider () {
@@ -90,20 +90,20 @@ export default baseMixins.extend<options>().extend({
       if (!this.hideDot) children.push(this.genDot())
 
       return this.$createElement('div', {
-        staticClass: 'v-timeline-item__divider'
+        staticClass: 'v-timeline-item__divider',
       }, children)
     },
     genOpposite () {
       return this.$createElement('div', {
-        staticClass: 'v-timeline-item__opposite'
+        staticClass: 'v-timeline-item__opposite',
       }, this.$slots.opposite)
-    }
+    },
   },
 
   render (h): VNode {
     const children = [
       this.genBody(),
-      this.genDivider()
+      this.genDivider(),
     ]
 
     if (this.$slots.opposite) children.push(this.genOpposite())
@@ -114,8 +114,8 @@ export default baseMixins.extend<options>().extend({
         'v-timeline-item--fill-dot': this.fillDot,
         'v-timeline-item--before': this.timeline.reverse ? this.right : this.left,
         'v-timeline-item--after': this.timeline.reverse ? this.left : this.right,
-        ...this.themeClasses
-      }
+        ...this.themeClasses,
+      },
     }, children)
-  }
+  },
 })

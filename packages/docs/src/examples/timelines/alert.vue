@@ -50,13 +50,13 @@
     'info',
     'warning',
     'error',
-    'success'
+    'success',
   ]
   const ICONS = {
     info: 'mdi-information',
     warning: 'mdi-alert',
     error: 'mdi-alert-circle',
-    success: 'mdi-check-circle'
+    success: 'mdi-check-circle',
   }
 
   export default {
@@ -66,10 +66,10 @@
         {
           id: 1,
           color: 'info',
-          icon: ICONS['info']
-        }
+          icon: ICONS['info'],
+        },
       ],
-      nonce: 2
+      nonce: 2,
     }),
 
     beforeDestroy () {
@@ -89,7 +89,7 @@
         this.items.unshift({
           id: this.nonce++,
           color,
-          icon
+          icon,
         })
 
         if (this.nonce > 6) {
@@ -101,7 +101,7 @@
 
         return {
           color,
-          icon: this.genIcon(color)
+          icon: this.genIcon(color),
         }
       },
       genColor () {
@@ -116,8 +116,8 @@
       stop () {
         clearInterval(this.interval)
         this.interval = null
-      }
-    }
+      },
+    },
   }
 </script>
 

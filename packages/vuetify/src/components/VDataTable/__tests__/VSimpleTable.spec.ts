@@ -2,7 +2,7 @@ import VSimpleTable from '../VSimpleTable'
 import {
   mount,
   Wrapper,
-  MountOptions
+  MountOptions,
 } from '@vue/test-utils'
 
 describe('VSimpleTable.ts', () => {
@@ -20,8 +20,8 @@ describe('VSimpleTable.ts', () => {
         default: `
           <tr><th>Foo</th><th>Bar</th></tr>
           <tr><td>baz</td><td>qux</td></tr>
-        `
-      }
+        `,
+      },
     })
 
     expect(wrapper.findAll('.v-data-table')).toHaveLength(1)
@@ -37,8 +37,8 @@ describe('VSimpleTable.ts', () => {
             <tr><th>Foo</th><th>Bar</th></tr>
             <tr><td>baz</td><td>qux</td></tr>
           </table>
-        `
-      }
+        `,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -48,8 +48,8 @@ describe('VSimpleTable.ts', () => {
     const wrapper = mountFunction({
       slots: {
         top: '<div class="top">Header</div>',
-        bottom: '<div class="bottom">Footer</div>'
-      }
+        bottom: '<div class="bottom">Footer</div>',
+      },
     })
 
     expect(wrapper.findAll('.top')).toHaveLength(1)
@@ -63,11 +63,11 @@ describe('VSimpleTable.ts', () => {
         default: `
           <tr><th>Foo</th><th>Bar</th></tr>
           <tr><td>baz</td><td>qux</td></tr>
-        `
+        `,
       },
       propsData: {
-        height: 1000
-      }
+        height: 1000,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -77,30 +77,30 @@ describe('VSimpleTable.ts', () => {
     const wrapper = mountFunction()
 
     wrapper.setProps({
-      dense: true
+      dense: true,
     })
     expect(wrapper.vm.classes).toMatchObject({
-      'v-data-table--dense': true
+      'v-data-table--dense': true,
     })
     wrapper.setProps({
-      dark: true
+      dark: true,
     })
     expect(wrapper.vm.classes).toMatchObject({
       'theme--dark': true,
-      'theme--light': false
+      'theme--light': false,
     })
     wrapper.setProps({
-      fixedHeader: true
+      fixedHeader: true,
     })
     expect(wrapper.vm.classes).toMatchObject({
-      'v-data-table--fixed-header': true
+      'v-data-table--fixed-header': true,
     })
     wrapper.setProps({
       fixedHeader: false,
-      height: 1000
+      height: 1000,
     })
     expect(wrapper.vm.classes).toMatchObject({
-      'v-data-table--fixed-height': true
+      'v-data-table--fixed-height': true,
     })
   })
 })

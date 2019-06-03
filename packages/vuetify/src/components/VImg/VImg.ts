@@ -27,7 +27,7 @@ export default VResponsive.extend({
     contain: Boolean,
     src: {
       type: [String, Object],
-      default: ''
+      default: '',
     } as PropValidator<string | srcObject>,
     gradient: String,
     lazySrc: String,
@@ -35,12 +35,12 @@ export default VResponsive.extend({
     sizes: String,
     position: {
       type: String,
-      default: 'center center'
+      default: 'center center',
     },
     transition: {
       type: [Boolean, String],
-      default: 'fade-transition'
-    }
+      default: 'fade-transition',
+    },
   },
 
   data () {
@@ -49,7 +49,7 @@ export default VResponsive.extend({
       image: null as HTMLImageElement | null,
       isLoading: true,
       calculatedAspectRatio: undefined as number | undefined,
-      naturalWidth: undefined as number | undefined
+      naturalWidth: undefined as number | undefined,
     }
   },
 
@@ -63,12 +63,12 @@ export default VResponsive.extend({
           src: this.src,
           srcset: this.srcset,
           lazySrc: this.lazySrc,
-          aspect: Number(this.aspectRatio)
+          aspect: Number(this.aspectRatio),
         } : {
           src: this.src.src,
           srcset: this.srcset || this.src.srcset,
           lazySrc: this.lazySrc || this.src.lazySrc,
-          aspect: Number(this.aspectRatio || this.src.aspect)
+          aspect: Number(this.aspectRatio || this.src.aspect),
         }
     },
     __cachedImage (): VNode | [] {
@@ -85,13 +85,13 @@ export default VResponsive.extend({
         class: {
           'v-image__image--preload': this.isLoading,
           'v-image__image--contain': this.contain,
-          'v-image__image--cover': !this.contain
+          'v-image__image--cover': !this.contain,
         },
         style: {
           backgroundImage: backgroundImage.join(', '),
-          backgroundPosition: this.position
+          backgroundPosition: this.position,
         },
-        key: +this.isLoading
+        key: +this.isLoading,
       })
 
       if (!this.transition) return image
@@ -99,10 +99,10 @@ export default VResponsive.extend({
       return this.$createElement('transition', {
         attrs: {
           name: this.transition,
-          mode: 'in-out'
-        }
+          mode: 'in-out',
+        },
       }, [image])
-    }
+    },
   },
 
   watch: {
@@ -110,7 +110,7 @@ export default VResponsive.extend({
       if (!this.isLoading) this.init()
       else this.loadImage()
     },
-    '$vuetify.breakpoint.width': 'getSrc'
+    '$vuetify.breakpoint.width': 'getSrc',
   },
 
   mounted () {
@@ -190,7 +190,7 @@ export default VResponsive.extend({
       const content: VNode = VResponsive.options.methods.genContent.call(this)
       if (this.naturalWidth) {
         this._b(content.data!, 'div', {
-          style: { width: `${this.naturalWidth}px` }
+          style: { width: `${this.naturalWidth}px` },
         })
       }
 
@@ -200,17 +200,17 @@ export default VResponsive.extend({
       if (this.$slots.placeholder) {
         const placeholder = this.isLoading
           ? [this.$createElement('div', {
-            staticClass: 'v-image__placeholder'
+            staticClass: 'v-image__placeholder',
           }, this.$slots.placeholder)]
           : []
 
         if (!this.transition) return placeholder[0]
 
         return this.$createElement('transition', {
-          attrs: { name: this.transition }
+          attrs: { name: this.transition },
         }, placeholder)
       }
-    }
+    },
   },
 
   render (h): VNode {
@@ -220,16 +220,16 @@ export default VResponsive.extend({
 
     node.data!.attrs = {
       role: this.alt ? 'img' : undefined,
-      'aria-label': this.alt
+      'aria-label': this.alt,
     }
 
     node.children = [
       this.__cachedSizer,
       this.__cachedImage,
       this.__genPlaceholder(),
-      this.genContent()
+      this.genContent(),
     ] as VNode[]
 
     return h(node.tag, node.data, node.children)
-  }
+  },
 })

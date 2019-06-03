@@ -1,6 +1,6 @@
 import {
   genStyles,
-  parse
+  parse,
 } from '../utils'
 
 describe('theme-utilities.ts', () => {
@@ -18,14 +18,14 @@ describe('theme-utilities.ts', () => {
         darken1: '#0169dc',
         darken2: '#c28fd0',
         darken3: '#fbe002',
-        darken4: '#33303a'
-      }
+        darken4: '#33303a',
+      },
     }
   })
   it('should parse a theme or theme item', () => {
     const theme = {
       primary: '#000',
-      secondary: '#fff'
+      secondary: '#fff',
     }
 
     expect(parse(theme)).toMatchSnapshot()

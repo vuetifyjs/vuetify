@@ -35,10 +35,10 @@ const wrapper = Vue.extend({
     scrollTarget: String,
     scrollThreshold: {
       type: Number,
-      default: 300
+      default: 300,
     },
     /* @deprecated */
-    tabs: Boolean
+    tabs: Boolean,
   },
 
   render (h, { props, data, slots }): VNode { // eslint-disable-line max-statements
@@ -107,14 +107,14 @@ const wrapper = Vue.extend({
     }
 
     return h(VToolbar, data, children)
-  }
+  },
 })
 
 export {
   wrapper as VToolbar,
   VToolbarSideIcon,
   VToolbarTitle,
-  VToolbarItems
+  VToolbarItems,
 }
 
 export default {
@@ -122,6 +122,6 @@ export default {
     VToolbar,
     VToolbarItems,
     VToolbarTitle,
-    VToolbarSideIcon
-  }
+    VToolbarSideIcon,
+  },
 }

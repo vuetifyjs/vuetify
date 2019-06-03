@@ -10,5 +10,5 @@ export default mixins(
   GroupableFactory('slideGroup')
   /* @vue/component */
 ).extend({
-  name: 'v-slide-item'
+  name: 'v-slide-item',
 })

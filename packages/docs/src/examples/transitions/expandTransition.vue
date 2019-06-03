@@ -50,7 +50,7 @@
   export default {
     data: () => ({
       expand: false,
-      expand2: false
-    })
+      expand2: false,
+    }),
   }
 </script>

@@ -5,14 +5,14 @@ export default {
     pageText: '{0}-{1} 共 {2} 條',
     noResultsText: '沒有找到匹配記錄',
     nextPage: '下一頁',
-    prevPage: '上一頁'
+    prevPage: '上一頁',
   },
   dataTable: {
-    rowsPerPageText: '每頁行數：'
+    rowsPerPageText: '每頁行數：',
   },
   noDataText: '無可用數據',
   carousel: {
     prev: '以前的視覺',
-    next: '下一個視覺'
-  }
+    next: '下一個視覺',
+  },
 }

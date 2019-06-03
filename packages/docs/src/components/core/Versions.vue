@@ -49,13 +49,13 @@
 <script>
   // Utilities
   import {
-    mapState
+    mapState,
   } from 'vuex'
 
   export default {
     computed: {
       ...mapState('app', [
-        'currentVersion'
+        'currentVersion',
       ]),
       archives () {
         return [
@@ -63,20 +63,20 @@
             icon: 'mdi-rocket',
             text: 'v2.0.0',
             subtext: this.$t('Vuetify.AppToolbar.next'),
-            href: 'https://next.vuetifyjs.com'
+            href: 'https://next.vuetifyjs.com',
           },
           {
             icon: 'mdi-package',
             text: 'v1.0.x',
             subtext: this.$t('Vuetify.AppToolbar.archived'),
-            href: 'https://v1.vuetifyjs.com'
+            href: 'https://v1.vuetifyjs.com',
           },
           {
             icon: 'mdi-developer-board',
             text: this.$t('Vuetify.AppToolbar.inDev'),
             subtext: this.$t('Vuetify.AppToolbar.dev'),
-            href: 'https://dev.vuetifyjs.com'
-          }
+            href: 'https://dev.vuetifyjs.com',
+          },
         ]
       },
       releases () {
@@ -85,13 +85,13 @@
             icon: 'mdi-star-box',
             href: `https://github.com/vuetifyjs/vuetify/releases/${this.version}`,
             text: this.$t('Vuetify.AppToolbar.current'),
-            subtext: this.version
-          }
+            subtext: this.version,
+          },
         ]
       },
       version () {
         return `v${this.currentVersion}`
-      }
-    }
+      },
+    },
   }
 </script>

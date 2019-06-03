@@ -38,8 +38,8 @@
     data () {
       return {
         show: false,
-        messages: 0
+        messages: 0,
       }
-    }
+    },
   }
 </script>

@@ -12,7 +12,7 @@ const red = Object.freeze({
   accent1: '#ff8a80',
   accent2: '#ff5252',
   accent3: '#ff1744',
-  accent4: '#d50000'
+  accent4: '#d50000',
 })
 
 const pink = Object.freeze({
@@ -29,7 +29,7 @@ const pink = Object.freeze({
   accent1: '#ff80ab',
   accent2: '#ff4081',
   accent3: '#f50057',
-  accent4: '#c51162'
+  accent4: '#c51162',
 })
 
 const purple = Object.freeze({
@@ -46,7 +46,7 @@ const purple = Object.freeze({
   accent1: '#ea80fc',
   accent2: '#e040fb',
   accent3: '#d500f9',
-  accent4: '#aa00ff'
+  accent4: '#aa00ff',
 })
 
 const deepPurple = Object.freeze({
@@ -63,7 +63,7 @@ const deepPurple = Object.freeze({
   accent1: '#b388ff',
   accent2: '#7c4dff',
   accent3: '#651fff',
-  accent4: '#6200ea'
+  accent4: '#6200ea',
 })
 
 const indigo = Object.freeze({
@@ -80,7 +80,7 @@ const indigo = Object.freeze({
   accent1: '#8c9eff',
   accent2: '#536dfe',
   accent3: '#3d5afe',
-  accent4: '#304ffe'
+  accent4: '#304ffe',
 })
 
 const blue = Object.freeze({
@@ -97,7 +97,7 @@ const blue = Object.freeze({
   accent1: '#82b1ff',
   accent2: '#448aff',
   accent3: '#2979ff',
-  accent4: '#2962ff'
+  accent4: '#2962ff',
 })
 
 const lightBlue = Object.freeze({
@@ -114,7 +114,7 @@ const lightBlue = Object.freeze({
   accent1: '#80d8ff',
   accent2: '#40c4ff',
   accent3: '#00b0ff',
-  accent4: '#0091ea'
+  accent4: '#0091ea',
 })
 
 const cyan = Object.freeze({
@@ -131,7 +131,7 @@ const cyan = Object.freeze({
   accent1: '#84ffff',
   accent2: '#18ffff',
   accent3: '#00e5ff',
-  accent4: '#00b8d4'
+  accent4: '#00b8d4',
 })
 
 const teal = Object.freeze({
@@ -148,7 +148,7 @@ const teal = Object.freeze({
   accent1: '#a7ffeb',
   accent2: '#64ffda',
   accent3: '#1de9b6',
-  accent4: '#00bfa5'
+  accent4: '#00bfa5',
 })
 
 const green = Object.freeze({
@@ -165,7 +165,7 @@ const green = Object.freeze({
   accent1: '#b9f6ca',
   accent2: '#69f0ae',
   accent3: '#00e676',
-  accent4: '#00c853'
+  accent4: '#00c853',
 })
 
 const lightGreen = Object.freeze({
@@ -182,7 +182,7 @@ const lightGreen = Object.freeze({
   accent1: '#ccff90',
   accent2: '#b2ff59',
   accent3: '#76ff03',
-  accent4: '#64dd17'
+  accent4: '#64dd17',
 })
 
 const lime = Object.freeze({
@@ -199,7 +199,7 @@ const lime = Object.freeze({
   accent1: '#f4ff81',
   accent2: '#eeff41',
   accent3: '#c6ff00',
-  accent4: '#aeea00'
+  accent4: '#aeea00',
 })
 
 const yellow = Object.freeze({
@@ -216,7 +216,7 @@ const yellow = Object.freeze({
   accent1: '#ffff8d',
   accent2: '#ffff00',
   accent3: '#ffea00',
-  accent4: '#ffd600'
+  accent4: '#ffd600',
 })
 
 const amber = Object.freeze({
@@ -233,7 +233,7 @@ const amber = Object.freeze({
   accent1: '#ffe57f',
   accent2: '#ffd740',
   accent3: '#ffc400',
-  accent4: '#ffab00'
+  accent4: '#ffab00',
 })
 
 const orange = Object.freeze({
@@ -250,7 +250,7 @@ const orange = Object.freeze({
   accent1: '#ffd180',
   accent2: '#ffab40',
   accent3: '#ff9100',
-  accent4: '#ff6d00'
+  accent4: '#ff6d00',
 })
 
 const deepOrange = Object.freeze({
@@ -267,7 +267,7 @@ const deepOrange = Object.freeze({
   accent1: '#ff9e80',
   accent2: '#ff6e40',
   accent3: '#ff3d00',
-  accent4: '#dd2c00'
+  accent4: '#dd2c00',
 })
 
 const brown = Object.freeze({
@@ -280,7 +280,7 @@ const brown = Object.freeze({
   darken1: '#6d4c41',
   darken2: '#5d4037',
   darken3: '#4e342e',
-  darken4: '#3e2723'
+  darken4: '#3e2723',
 })
 
 const blueGrey = Object.freeze({
@@ -293,7 +293,7 @@ const blueGrey = Object.freeze({
   darken1: '#546e7a',
   darken2: '#455a64',
   darken3: '#37474f',
-  darken4: '#263238'
+  darken4: '#263238',
 })
 
 const grey = Object.freeze({
@@ -306,13 +306,13 @@ const grey = Object.freeze({
   darken1: '#757575',
   darken2: '#616161',
   darken3: '#424242',
-  darken4: '#212121'
+  darken4: '#212121',
 })
 
 const shades = Object.freeze({
   black: '#000000',
   white: '#ffffff',
-  transparent: 'transparent'
+  transparent: 'transparent',
 })
 
 export default Object.freeze({
@@ -335,5 +335,5 @@ export default Object.freeze({
   brown,
   blueGrey,
   grey,
-  shades
+  shades,
 })

@@ -5,7 +5,7 @@ import VContainer from '../VContainer'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VContainer.ts', () => {
@@ -15,7 +15,7 @@ describe('VContainer.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VContainer, {
-        ...options
+        ...options,
       })
     }
   })

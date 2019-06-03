@@ -6,16 +6,16 @@ const DEFAULT_SNACKBAR = Object.freeze({
   msg: '',
   text: 'Close',
   to: false,
-  timeout: 6000
+  timeout: 6000,
 })
 
 export default {
   namespaced: true,
   state: {
     snackbar: {
-      ...DEFAULT_SNACKBAR
+      ...DEFAULT_SNACKBAR,
     },
-    value: false
+    value: false,
   },
   mutations: {
     setSnackbar: (state, payload) => {
@@ -25,9 +25,9 @@ export default {
         msg: '',
         text: 'Close',
         to: false,
-        timeout: 6000
+        timeout: 6000,
       }, payload)
     },
-    setValue: set('value')
-  }
+    setValue: set('value'),
+  },
 }

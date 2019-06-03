@@ -64,11 +64,11 @@
       return {
         items: [
           { title: 'Home', icon: 'dashboard' },
-          { title: 'About', icon: 'question_answer' }
+          { title: 'About', icon: 'question_answer' },
         ],
         links: ['Home', 'Contacts', 'Settings'],
-        mini: true
+        mini: true,
       }
-    }
+    },
   }
 </script>

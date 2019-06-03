@@ -21,7 +21,7 @@ export default mixins(
   props: {
     alignTop: Boolean,
     dense: Boolean,
-    reverse: Boolean
+    reverse: Boolean,
   },
 
   computed: {
@@ -30,15 +30,15 @@ export default mixins(
         'v-timeline--align-top': this.alignTop,
         'v-timeline--dense': this.dense,
         'v-timeline--reverse': this.reverse,
-        ...this.themeClasses
+        ...this.themeClasses,
       }
-    }
+    },
   },
 
   render (h): VNode {
     return h('div', {
       staticClass: 'v-timeline',
-      'class': this.classes
+      'class': this.classes,
     }, this.$slots.default)
-  }
+  },
 })

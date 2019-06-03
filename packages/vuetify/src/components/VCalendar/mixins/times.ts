@@ -4,7 +4,7 @@ import {
   VTimestamp,
   validateTimestamp,
   parseTimestamp,
-  parseDate
+  parseDate,
 } from '../util/timestamp'
 
 export default Vue.extend({
@@ -13,25 +13,25 @@ export default Vue.extend({
   props: {
     now: {
       type: String,
-      validator: validateTimestamp
-    }
+      validator: validateTimestamp,
+    },
   },
 
   data: () => ({
     times: {
       now: parseTimestamp('0000-00-00 00:00') as VTimestamp,
-      today: parseTimestamp('0000-00-00') as VTimestamp
-    }
+      today: parseTimestamp('0000-00-00') as VTimestamp,
+    },
   }),
 
   computed: {
     parsedNow (): VTimestamp | null {
       return this.now ? parseTimestamp(this.now) : null
-    }
+    },
   },
 
   watch: {
-    parsedNow: 'updateTimes'
+    parsedNow: 'updateTimes',
   },
 
   created () {
@@ -69,6 +69,6 @@ export default Vue.extend({
         target.minute = now.minute
         target.time = now.time
       }
-    }
-  }
+    },
+  },
 })

@@ -17,7 +17,7 @@ export default Vue.extend({
 
   props: {
     color: Object as PropValidator<VColorPickerColor>,
-    disabled: Boolean
+    disabled: Boolean,
   },
 
   methods: {
@@ -30,35 +30,35 @@ export default Vue.extend({
           value: this.color.alpha,
           step: 0,
           min: 0,
-          max: 1
+          max: 1,
         },
         style: {
           backgroundImage: !this.disabled
             ? `linear-gradient(to right, transparent, ${RGBtoCSS(this.color.rgba)})`
-            : undefined
+            : undefined,
         },
         on: {
-          input: (val: number) => this.color.alpha !== val && this.$emit('update:color', fromHSVA({ ...this.color.hsva, a: val }))
-        }
+          input: (val: number) => this.color.alpha !== val && this.$emit('update:color', fromHSVA({ ...this.color.hsva, a: val })),
+        },
       })
     },
     genSliders (): VNode {
       return this.$createElement('div', {
-        staticClass: 'v-color-picker__sliders'
+        staticClass: 'v-color-picker__sliders',
       }, [
         this.genHue(),
-        this.genAlpha()
+        this.genAlpha(),
       ])
     },
     genDot (): VNode {
       return this.$createElement('div', {
-        staticClass: 'v-color-picker__dot'
+        staticClass: 'v-color-picker__dot',
       }, [
         this.$createElement('div', {
           style: {
-            background: RGBAtoCSS(this.color.rgba)
-          }
-        })
+            background: RGBAtoCSS(this.color.rgba),
+          },
+        }),
       ])
     },
     genHue (): VNode {
@@ -70,11 +70,11 @@ export default Vue.extend({
           value: this.color.hue,
           step: 0,
           min: 0,
-          max: 360
+          max: 360,
         },
         on: {
-          input: (val: number) => this.color.hue !== val && this.$emit('update:color', fromHSVA({ ...this.color.hsva, h: val }))
-        }
+          input: (val: number) => this.color.hue !== val && this.$emit('update:color', fromHSVA({ ...this.color.hsva, h: val })),
+        },
       })
     },
     genTrack (options: VNodeData): VNode {
@@ -83,18 +83,18 @@ export default Vue.extend({
         ...options,
         props: {
           disabled: this.disabled,
-          ...options.props
-        }
+          ...options.props,
+        },
       })
-    }
+    },
   },
 
   render (h): VNode {
     return h('div', {
-      staticClass: 'v-color-picker__preview'
+      staticClass: 'v-color-picker__preview',
     }, [
       this.genDot(),
-      this.genSliders()
+      this.genSliders(),
     ])
-  }
+  },
 })

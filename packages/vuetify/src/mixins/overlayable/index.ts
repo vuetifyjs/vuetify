@@ -28,12 +28,12 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
   name: 'overlayable',
 
   props: {
-    hideOverlay: Boolean
+    hideOverlay: Boolean,
   },
 
   data () {
     return {
-      overlay: null as InstanceType<typeof VOverlay> | null
+      overlay: null as InstanceType<typeof VOverlay> | null,
     }
   },
 
@@ -41,7 +41,7 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
     hideOverlay (value) {
       if (value) this.removeOverlay()
       else this.genOverlay()
-    }
+    },
   },
 
   beforeDestroy () {
@@ -53,8 +53,8 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
       const overlay = new VOverlay({
         propsData: {
           absolute: this.absolute,
-          value: false
-        }
+          value: false,
+        },
       })
 
       overlay.$mount()
@@ -210,6 +210,6 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
       document.documentElement!.classList.remove('overflow-y-hidden')
       window.removeEventListener('wheel', this.scrollListener as EventHandlerNonNull)
       window.removeEventListener('keydown', this.scrollListener as EventHandlerNonNull)
-    }
-  }
+    },
+  },
 })

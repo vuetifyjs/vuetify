@@ -646,8 +646,8 @@
       alertClosable: true,
       alertTransition: true,
       alertTransition2: true,
-      alertOutline: true
-    })
+      alertOutline: true,
+    }),
   }
 </script>
 

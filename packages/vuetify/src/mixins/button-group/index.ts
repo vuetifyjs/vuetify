@@ -7,18 +7,18 @@ export default BaseItemGroup.extend({
 
   provide (): object {
     return {
-      btnToggle: this
+      btnToggle: this,
     }
   },
 
   computed: {
     classes (): object {
       return BaseItemGroup.options.computed.classes.call(this)
-    }
+    },
   },
 
   methods: {
     // Isn't being passed down through types
-    genData: BaseItemGroup.options.methods.genData
-  }
+    genData: BaseItemGroup.options.methods.genData,
+  },
 })

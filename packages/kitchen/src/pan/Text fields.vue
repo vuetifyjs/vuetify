@@ -1195,7 +1195,7 @@
       rules1: {
         required: value => !!value || 'Required.',
         min: v => v.length >= 8 || 'Min 8 characters',
-        emailMatch: () => ('The email and password you entered don\'t match')
+        emailMatch: () => ('The email and password you entered don\'t match'),
       },
       title1: 'Preliminary report',
       email: '',
@@ -1206,7 +1206,7 @@
           // eslint-disable-next-line max-len
           const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
           return pattern.test(value) || 'Invalid e-mail.'
-        }
+        },
       },
       selected: ['Trevor Handsen'],
       items: ['Trevor Handsen', 'Alex Nelson'],
@@ -1216,7 +1216,7 @@
       mask: 'credit-card',
       value: '4444444444444444',
       value1: '',
-      value2: ''
+      value2: '',
     }),
     computed: {
       progress () {
@@ -1227,7 +1227,7 @@
       },
       message () {
         return ['Too short', 'Weak', 'Strong'][Math.floor(this.progress / 40)]
-      }
+      },
     },
 
     methods: {
@@ -1238,7 +1238,7 @@
           this.loading = false
           this.message5 = 'You\'ve clicked me!'
         }, 2000)
-      }
-    }
+      },
+    },
   }
 </script>

@@ -18,7 +18,7 @@ export default mixins(
   VSheet,
   Applicationable('footer', [
     'height',
-    'inset'
+    'inset',
   ]),
   SSRBootable
 ).extend({
@@ -27,14 +27,14 @@ export default mixins(
   props: {
     height: {
       default: 'auto',
-      type: [Number, String]
+      type: [Number, String],
     },
     inset: Boolean,
     padless: Boolean,
     tile: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
 
   computed: {
@@ -47,7 +47,7 @@ export default mixins(
         'v-footer--absolute': this.absolute,
         'v-footer--fixed': !this.absolute && (this.app || this.fixed),
         'v-footer--padless': this.padless,
-        'v-footer--inset': this.inset
+        'v-footer--inset': this.inset,
       }
     },
     computedBottom (): number | undefined {
@@ -86,9 +86,9 @@ export default mixins(
         height: isNaN(height) ? height : convertToUnit(height),
         left: convertToUnit(this.computedLeft),
         right: convertToUnit(this.computedRight),
-        bottom: convertToUnit(this.computedBottom)
+        bottom: convertToUnit(this.computedBottom),
       }
-    }
+    },
   },
 
   methods: {
@@ -98,16 +98,16 @@ export default mixins(
       return isNaN(height)
         ? this.$el ? this.$el.clientHeight : 0
         : height
-    }
+    },
   },
 
   render (h): VNode {
     const data = this.setBackgroundColor(this.color, {
       staticClass: 'v-footer',
       class: this.classes,
-      style: this.styles
+      style: this.styles,
     })
 
     return h('footer', data, this.$slots.default)
-  }
+  },
 })

@@ -22,8 +22,8 @@ export default mixins(header).extend({
           'sortable': true,
           'active': beingSorted,
           'asc': beingSorted && !isDesc,
-          'desc': beingSorted && isDesc
-        }
+          'desc': beingSorted && isDesc,
+        },
       }, [this.genSortIcon()]))
 
       return this.$createElement(VChip, {
@@ -32,8 +32,8 @@ export default mixins(header).extend({
           click: (e: MouseEvent) => {
             e.stopPropagation()
             this.$emit('sort', props.item.value)
-          }
-        }
+          },
+        },
       }, children)
     },
     genSortSelect () {
@@ -43,16 +43,16 @@ export default mixins(header).extend({
           items: this.headers.filter(h => h.value !== 'data-table-select'),
           hideDetails: true,
           multiple: this.options.multiSort,
-          value: this.options.multiSort ? this.options.sortBy : this.options.sortBy[0]
+          value: this.options.multiSort ? this.options.sortBy : this.options.sortBy[0],
         },
         on: {
-          change: (v: string | string[]) => this.$emit('sort', v)
+          change: (v: string | string[]) => this.$emit('sort', v),
         },
         scopedSlots: {
-          selection: props => this.genSortChip(props) as any // TODO: whyyy?
-        }
+          selection: props => this.genSortChip(props) as any, // TODO: whyyy?
+        },
       })
-    }
+    },
   },
 
   render (h): VNode {
@@ -63,11 +63,11 @@ export default mixins(header).extend({
       children.push(this.$createElement('div', {
         class: [
           'v-data-table-header-mobile__select',
-          ...wrapInArray(header.class)
+          ...wrapInArray(header.class),
         ],
         attrs: {
-          width: header.width
-        }
+          width: header.width,
+        },
       }, [this.genSelectAll()]))
     }
 
@@ -75,14 +75,14 @@ export default mixins(header).extend({
 
     const th = h('th', {
       attrs: {
-        colspan: this.headers.length
-      }
+        colspan: this.headers.length,
+      },
     }, [h('div', { staticClass: 'v-data-table-header-mobile__wrapper' }, children)])
 
     const tr = h('tr', [th])
 
     return h('thead', {
-      staticClass: 'v-data-table-header v-data-table-header-mobile'
+      staticClass: 'v-data-table-header v-data-table-header-mobile',
     }, [tr])
-  }
+  },
 })

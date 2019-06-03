@@ -77,13 +77,13 @@
         { name: 'Google Contacts', href: '/examples/layouts/googleContacts' },
         { name: 'Google Keep', href: '/examples/layouts/googleKeep' },
         { name: 'Google Youtube', href: '/examples/layouts/googleYoutube' },
-        { name: 'Sandbox', href: '/examples/layouts/sandbox' }
-      ]
+        { name: 'Sandbox', href: '/examples/layouts/sandbox' },
+      ],
     }),
     methods: {
       genSrc (name) {
         return `https://cdn.vuetifyjs.com/images/layouts/${name.toLowerCase().replace(' ', '-')}.png`
-      }
-    }
+      },
+    },
   }
 </script>

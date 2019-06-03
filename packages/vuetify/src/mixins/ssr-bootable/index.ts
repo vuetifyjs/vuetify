@@ -12,7 +12,7 @@ export default Vue.extend({
   name: 'ssr-bootable',
 
   data: () => ({
-    isBooted: false
+    isBooted: false,
   }),
 
   mounted () {
@@ -23,5 +23,5 @@ export default Vue.extend({
       this.$el.setAttribute('data-booted', 'true')
       this.isBooted = true
     })
-  }
+  },
 })

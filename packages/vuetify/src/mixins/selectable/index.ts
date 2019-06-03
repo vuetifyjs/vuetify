@@ -18,13 +18,13 @@ export default mixins(
 
   model: {
     prop: 'inputValue',
-    event: 'change'
+    event: 'change',
   },
 
   props: {
     color: {
       type: String,
-      default: 'accent'
+      default: 'accent',
     },
     id: String,
     inputValue: null as any,
@@ -32,14 +32,14 @@ export default mixins(
     trueValue: null as any,
     multiple: {
       type: Boolean,
-      default: null
+      default: null,
     },
-    label: String
+    label: String,
   },
 
   data () {
     return {
-      lazyValue: this.inputValue
+      lazyValue: this.inputValue,
     }
   },
 
@@ -70,13 +70,13 @@ export default mixins(
     },
     isDirty (): boolean {
       return this.isActive
-    }
+    },
   },
 
   watch: {
     inputValue (val) {
       this.lazyValue = val
-    }
+    },
   },
 
   methods: {
@@ -97,19 +97,19 @@ export default mixins(
           disabled: this.isDisabled,
           id: this.id,
           role: type,
-          type
+          type,
         }, attrs),
         domProps: {
           value: this.value,
-          checked: this.isActive
+          checked: this.isActive,
         },
         on: {
           blur: this.onBlur,
           change: this.onChange,
           focus: this.onFocus,
-          keydown: this.onKeydown
+          keydown: this.onKeydown,
         },
-        ref: 'input'
+        ref: 'input',
       })
     },
     onBlur () {
@@ -148,6 +148,6 @@ export default mixins(
       this.isFocused = true
     },
     /** @abstract */
-    onKeydown (e: Event) {}
-  }
+    onKeydown (e: Event) {},
+  },
 })

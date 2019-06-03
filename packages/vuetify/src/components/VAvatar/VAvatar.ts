@@ -21,9 +21,9 @@ export default mixins(
     right: Boolean,
     size: {
       type: [Number, String],
-      default: 48
+      default: 48,
     },
-    tile: Boolean
+    tile: Boolean,
   },
 
   computed: {
@@ -31,7 +31,7 @@ export default mixins(
       return {
         'v-avatar--left': this.left,
         'v-avatar--right': this.right,
-        'v-avatar--tile': this.tile
+        'v-avatar--tile': this.tile,
       }
     },
     styles (): object {
@@ -39,9 +39,9 @@ export default mixins(
         height: convertToUnit(this.size),
         minWidth: convertToUnit(this.size),
         width: convertToUnit(this.size),
-        ...this.measurableStyles
+        ...this.measurableStyles,
       }
-    }
+    },
   },
 
   render (h): VNode {
@@ -49,9 +49,9 @@ export default mixins(
       staticClass: 'v-avatar',
       class: this.classes,
       style: this.styles,
-      on: this.$listeners
+      on: this.$listeners,
     }
 
     return h('div', this.setBackgroundColor(this.color, data), this.$slots.default)
-  }
+  },
 })

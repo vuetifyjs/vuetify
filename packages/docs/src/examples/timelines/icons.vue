@@ -33,22 +33,22 @@
       items: [
         {
           color: 'red lighten-2',
-          icon: 'mdi-star'
+          icon: 'mdi-star',
         },
         {
           color: 'purple darken-1',
-          icon: 'mdi-book-variant'
+          icon: 'mdi-book-variant',
         },
         {
           color: 'green lighten-1',
-          icon: 'mdi-airballoon'
+          icon: 'mdi-airballoon',
         },
         {
           color: 'indigo',
-          icon: 'mdi-buffer'
-        }
-      ]
-    })
+          icon: 'mdi-buffer',
+        },
+      ],
+    }),
   }
 </script>
 

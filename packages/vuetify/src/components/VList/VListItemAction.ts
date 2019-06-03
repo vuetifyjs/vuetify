@@ -15,5 +15,5 @@ export default Vue.extend({
     if (filteredChild.length > 1) data.staticClass += ' v-list-item__action--stack'
 
     return h('div', data, children)
-  }
+  },
 })

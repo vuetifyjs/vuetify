@@ -78,7 +78,7 @@
       paddingDirection: 'a',
       paddingSize: '2',
       marginDirection: 'a',
-      marginSize: '2'
+      marginSize: '2',
     }),
     computed: {
       computedPadding () {
@@ -86,8 +86,8 @@
       },
       computedMargin () {
         return `m${this.marginDirection}-${this.marginSize}`
-      }
-    }
+      },
+    },
   }
 </script>
 

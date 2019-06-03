@@ -11,20 +11,20 @@
     name: 'Bootstrapper',
 
     computed: {
-      ...mapState('app', ['component'])
+      ...mapState('app', ['component']),
     },
 
     watch: {
       '$route.params': {
         immediate: true,
-        handler: 'load'
-      }
+        handler: 'load',
+      },
     },
 
     methods: {
       ...mapMutations('app', [
         'setComponent',
-        'setRaw'
+        'setRaw',
       ]),
       load (params) {
         const component = params.component
@@ -37,7 +37,7 @@
 
         import(`!raw-loader!@/pan/${component}.vue`)
           .then(res => this.setRaw(res.default))
-      }
-    }
+      },
+    },
   }
 </script>

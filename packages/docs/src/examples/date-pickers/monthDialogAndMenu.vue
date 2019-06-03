@@ -68,7 +68,7 @@
     data: () => ({
       date: new Date().toISOString().substr(0, 7),
       menu: false,
-      modal: false
-    })
+      modal: false,
+    }),
   }
 </script>

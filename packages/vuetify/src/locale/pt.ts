@@ -5,14 +5,14 @@ export default {
     pageText: '{0}-{1} de {2}',
     noResultsText: 'Nenhum dado encontrado',
     nextPage: 'Próxima página',
-    prevPage: 'Página anterior'
+    prevPage: 'Página anterior',
   },
   dataTable: {
-    rowsPerPageText: 'Linhas por página:'
+    rowsPerPageText: 'Linhas por página:',
   },
   noDataText: 'Não há dados disponíveis',
   carousel: {
     prev: 'Visual anterior',
-    next: 'Próximo visual'
-  }
+    next: 'Próximo visual',
+  },
 }

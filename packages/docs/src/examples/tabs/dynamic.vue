@@ -24,13 +24,13 @@
   export default {
     data: () => ({
       length: 15,
-      tab: null
+      tab: null,
     }),
 
     watch: {
       length (val) {
         this.tab = val - 1
-      }
-    }
+      },
+    },
   }
 </script>

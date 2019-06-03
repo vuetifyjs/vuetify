@@ -31,7 +31,7 @@
       return {
         value: 10,
         bufferValue: 20,
-        interval: 0
+        interval: 0,
       }
     },
 
@@ -42,7 +42,7 @@
         this.value = 0
         this.bufferValue = 10
         this.startBuffer()
-      }
+      },
     },
 
     mounted () {
@@ -61,7 +61,7 @@
           this.value += Math.random() * (15 - 5) + 5
           this.bufferValue += Math.random() * (15 - 5) + 6
         }, 2000)
-      }
-    }
+      },
+    },
   }
 </script>

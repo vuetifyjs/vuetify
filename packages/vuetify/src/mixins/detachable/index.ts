@@ -36,17 +36,17 @@ export default mixins<options &
   props: {
     attach: {
       default: false,
-      validator: validateAttachTarget
+      validator: validateAttachTarget,
     } as PropOptions<boolean | string | Element>,
     contentClass: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
 
   data: () => ({
     activatorNode: null as null | VNode | VNode[],
-    hasDetached: false
+    hasDetached: false,
   }),
 
   watch: {
@@ -54,7 +54,7 @@ export default mixins<options &
       this.hasDetached = false
       this.initDetach()
     },
-    hasContent: 'initDetach'
+    hasContent: 'initDetach',
   },
 
   beforeMount () {
@@ -110,7 +110,7 @@ export default mixins<options &
       const scopeId = getObjectValueByPath(this.$vnode, 'context.$options._scopeId')
 
       return scopeId && {
-        [scopeId]: ''
+        [scopeId]: '',
       }
     },
     initDetach () {
@@ -147,6 +147,6 @@ export default mixins<options &
       )
 
       this.hasDetached = true
-    }
-  }
+    },
+  },
 })

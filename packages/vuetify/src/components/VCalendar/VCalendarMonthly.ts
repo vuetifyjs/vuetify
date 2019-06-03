@@ -20,7 +20,7 @@ export default VCalendarWeekly.extend({
     },
     parsedEnd (): VTimestamp {
       return getEndOfMonth(parseTimestamp(this.end) as VTimestamp)
-    }
-  }
+    },
+  },
 
 })

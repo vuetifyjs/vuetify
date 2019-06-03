@@ -10,7 +10,7 @@ Vuetify.install = (Vue, args) => {
   install.call(Vuetify, Vue, {
     components,
     directives,
-    ...args
+    ...args,
   })
 }
 

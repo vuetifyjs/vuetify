@@ -91,6 +91,6 @@
 
 <script>
   export default {
-    name: 'Theme'
+    name: 'Theme',
   }
 </script>

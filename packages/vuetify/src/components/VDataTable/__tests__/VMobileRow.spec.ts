@@ -2,7 +2,7 @@ import VMobileRow from '../VMobileRow'
 import {
   mount,
   Wrapper,
-  MountOptions
+  MountOptions,
 } from '@vue/test-utils'
 import Vue from 'vue'
 
@@ -21,14 +21,14 @@ describe('VRow.ts', () => {
         props: {
           headers: [
             { text: 'Petrol', value: 'petrol' },
-            { text: 'Diesel', value: 'diesel' }
+            { text: 'Diesel', value: 'diesel' },
           ],
           item: {
             petrol: 0.68,
-            diesel: 0.65
-          }
-        }
-      }
+            diesel: 0.65,
+          },
+        },
+      },
     })
 
     expect(wrapper.findAll('tr')).toHaveLength(1)
@@ -42,14 +42,14 @@ describe('VRow.ts', () => {
         props: {
           headers: [
             { text: 'Petrol', value: 'petrol' },
-            { text: 'Diesel', value: 'diesel' }
-          ]
-        }
+            { text: 'Diesel', value: 'diesel' },
+          ],
+        },
       },
       slots: {
         'column.petrol': '<p class="test">$0.68</p>',
-        'column.diesel': '<p class="test">$0.65</p>'
-      }
+        'column.diesel': '<p class="test">$0.65</p>',
+      },
     })
 
     expect(wrapper.findAll('tr')).toHaveLength(1)
@@ -65,18 +65,18 @@ describe('VRow.ts', () => {
         props: {
           headers: [
             { text: 'Petrol', value: 'petrol' },
-            { text: 'Diesel', value: 'diesel' }
+            { text: 'Diesel', value: 'diesel' },
           ],
           item: {
             petrol: 0.68,
-            diesel: 0.65
-          }
-        }
+            diesel: 0.65,
+          },
+        },
       },
       scopedSlots: {
         'column.petrol': props => vm.$createElement('p', { staticClass: `test ${props.header.value}` }, [ props.value ]),
-        'column.diesel': props => vm.$createElement('p', { staticClass: `test ${props.header.value}` }, [ props.value ])
-      }
+        'column.diesel': props => vm.$createElement('p', { staticClass: `test ${props.header.value}` }, [ props.value ]),
+      },
     })
 
     expect(wrapper.findAll('tr')).toHaveLength(1)

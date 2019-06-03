@@ -4,7 +4,7 @@ import VSubheader from '../VSubheader'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VSubheader.ts', () => {
@@ -14,14 +14,14 @@ describe('VSubheader.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VSubheader, {
-        ...options
+        ...options,
       })
     }
   })
 
   it('should have custom class', () => {
     const wrapper = mount({
-      render: h => h(VSubheader, { staticClass: 'foo' })
+      render: h => h(VSubheader, { staticClass: 'foo' }),
     })
 
     expect(wrapper.element.classList.contains('foo')).toBe(true)
@@ -30,7 +30,7 @@ describe('VSubheader.ts', () => {
 
   it('should be light', () => {
     const wrapper = mountFunction({
-      propsData: { light: true }
+      propsData: { light: true },
     })
 
     expect(wrapper.element.classList.contains('theme--light')).toBe(true)
@@ -39,7 +39,7 @@ describe('VSubheader.ts', () => {
 
   it('should be dark', () => {
     const wrapper = mountFunction({
-      propsData: { dark: true }
+      propsData: { dark: true },
     })
 
     expect(wrapper.element.classList.contains('theme--dark')).toBe(true)
@@ -48,7 +48,7 @@ describe('VSubheader.ts', () => {
 
   it('should be inset', () => {
     const wrapper = mountFunction({
-      propsData: { inset: true }
+      propsData: { inset: true },
     })
 
     expect(wrapper.element.classList.contains('v-subheader--inset')).toBe(true)

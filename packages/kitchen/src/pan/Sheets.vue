@@ -121,7 +121,7 @@
     name: 'Sheets',
 
     data: () => ({
-      colors: [ 'red', 'teal', 'primary', 'error', 'warning', 'success', 'yellow darken-2', 'info' ]
-    })
+      colors: [ 'red', 'teal', 'primary', 'error', 'warning', 'success', 'yellow darken-2', 'info' ],
+    }),
   }
 </script>

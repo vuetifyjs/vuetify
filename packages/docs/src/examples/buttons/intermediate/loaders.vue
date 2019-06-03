@@ -110,7 +110,7 @@
         loading2: false,
         loading3: false,
         loading4: false,
-        loading5: false
+        loading5: false,
       }
     },
     watch: {
@@ -121,7 +121,7 @@
         setTimeout(() => (this[l] = false), 3000)
 
         this.loader = null
-      }
-    }
+      },
+    },
   }
 </script>

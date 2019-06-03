@@ -2,7 +2,7 @@ export default {
   data: () => ({
     meta: {},
     _description: {},
-    _keywords: {}
+    _keywords: {},
   }),
 
   computed: {
@@ -14,7 +14,7 @@ export default {
     },
     keywords () {
       return this.meta.keywords
-    }
+    },
   },
 
   watch: {
@@ -27,8 +27,8 @@ export default {
         document.title = `${this.title} — Vuetify.js`
         this._description.setAttribute('content', this.description)
         this._keywords.setAttribute('content', this.keywords)
-      }
-    }
+      },
+    },
   },
 
   created () {
@@ -68,6 +68,6 @@ export default {
         console.warn('Falling back to english meta for ' + (path || '/'))
       }
       return fallbackmeta[path]
-    }
-  }
+    },
+  },
 }

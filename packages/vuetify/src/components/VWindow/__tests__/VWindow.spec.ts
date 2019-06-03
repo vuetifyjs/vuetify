@@ -6,7 +6,7 @@ import VWindowItem from '../VWindowItem'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 import { touch } from '../../../../test'
 
@@ -21,11 +21,11 @@ describe('VWindow.ts', () => {
         mocks: {
           $vuetify: {
             lang: {
-              t: str => str
+              t: str => str,
             },
-            rtl: false
-          }
-        }
+            rtl: false,
+          },
+        },
       })
     }
   })
@@ -50,14 +50,14 @@ describe('VWindow.ts', () => {
   it('should set reverse', async () => {
     const wrapper = mountFunction({
       propsData: {
-        value: 0
+        value: 0,
       },
       slots: {
         default: [
           VWindowItem,
-          VWindowItem
-        ]
-      }
+          VWindowItem,
+        ],
+      },
     })
 
     // Reverse implicitly set by changed index
@@ -89,9 +89,9 @@ describe('VWindow.ts', () => {
         default: [
           VWindowItem,
           VWindowItem,
-          VWindowItem
-        ]
-      }
+          VWindowItem,
+        ],
+      },
     })
 
     await wrapper.vm.$nextTick()
@@ -120,15 +120,15 @@ describe('VWindow.ts', () => {
   it('should update model when internal index is greater than item count', async () => {
     const wrapper = mountFunction({
       propsData: {
-        value: 2
+        value: 2,
       },
       slots: {
         default: [
           VWindowItem,
           VWindowItem,
-          VWindowItem
-        ]
-      }
+          VWindowItem,
+        ],
+      },
     })
 
     await wrapper.vm.$nextTick()
@@ -156,9 +156,9 @@ describe('VWindow.ts', () => {
           VWindowItem,
           VWindowItem,
           VWindowItem,
-          VWindowItem
-        ]
-      }
+          VWindowItem,
+        ],
+      },
     })
 
     await wrapper.vm.$nextTick()
@@ -189,7 +189,7 @@ describe('VWindow.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         touch: fns,
-        value: 1
+        value: 1,
       },
       slots: {
         default: [
@@ -197,9 +197,9 @@ describe('VWindow.ts', () => {
           VWindowItem,
           VWindowItem,
           VWindowItem,
-          VWindowItem
-        ]
-      }
+          VWindowItem,
+        ],
+      },
     })
 
     await wrapper.vm.$nextTick()
@@ -220,14 +220,14 @@ describe('VWindow.ts', () => {
             props: {
               disabled: {
                 type: Boolean,
-                default: true
-              }
-            }
+                default: true,
+              },
+            },
           },
           VWindowItem,
-          VWindowItem
-        ]
-      }
+          VWindowItem,
+        ],
+      },
     })
 
     expect(wrapper.vm.internalIndex).toBe(1)
@@ -240,16 +240,16 @@ describe('VWindow.ts', () => {
   it('should generate and show arrows', async () => {
     const wrapper = mountFunction({
       propsData: {
-        showArrows: true
+        showArrows: true,
       },
       slots: {
         default: [
           { extends: VWindowItem },
           { extends: VWindowItem },
           { extends: VWindowItem },
-          { extends: VWindowItem }
-        ]
-      }
+          { extends: VWindowItem },
+        ],
+      },
     })
 
     const next = wrapper.find('.v-window__next .v-btn')
@@ -282,8 +282,8 @@ describe('VWindow.ts', () => {
     const props = {
       disabled: {
         type: Boolean,
-        default: true
-      }
+        default: true,
+      },
     }
     const wrapper = mountFunction({
       slots: {
@@ -291,9 +291,9 @@ describe('VWindow.ts', () => {
           { extends: VWindowItem },
           { extends: VWindowItem, props },
           { extends: VWindowItem, props },
-          { extends: VWindowItem }
-        ]
-      }
+          { extends: VWindowItem },
+        ],
+      },
     })
 
     expect(wrapper.vm.internalIndex).toBe(0)
@@ -309,9 +309,9 @@ describe('VWindow.ts', () => {
       slots: {
         default: [
           { extends: VWindowItem },
-          { extends: VWindowItem }
-        ]
-      }
+          { extends: VWindowItem },
+        ],
+      },
     })
 
     expect(wrapper.vm.internalIndex).toBe(0)

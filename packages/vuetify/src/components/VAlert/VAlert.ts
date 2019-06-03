@@ -35,14 +35,14 @@ export default mixins(
           'top',
           'right',
           'bottom',
-          'left'
+          'left',
         ].includes(val)
-      }
+      },
     },
     coloredBorder: Boolean,
     closeLabel: {
       type: String,
-      default: '$vuetify.close'
+      default: '$vuetify.close',
     },
     dense: Boolean,
     dismissible: Boolean,
@@ -51,7 +51,7 @@ export default mixins(
       type: [Boolean, String],
       validator (val: boolean | string) {
         return typeof val === 'string' || val === false
-      }
+      },
     },
     outline: Boolean,
     outlined: Boolean,
@@ -64,14 +64,14 @@ export default mixins(
           'info',
           'error',
           'success',
-          'warning'
+          'warning',
         ].includes(val)
-      }
+      },
     },
     value: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
 
   computed: {
@@ -81,8 +81,8 @@ export default mixins(
       let data: VNodeData = {
         staticClass: 'v-alert__border',
         class: {
-          [`v-alert__border--${this.border}`]: true
-        }
+          [`v-alert__border--${this.border}`]: true,
+        },
       }
 
       if (this.coloredBorder) {
@@ -101,18 +101,18 @@ export default mixins(
         staticClass: 'v-alert__dismissible',
         props: {
           color,
-          icon: true
+          icon: true,
         },
         attrs: {
-          'aria-label': this.$vuetify.lang.t(this.closeLabel)
+          'aria-label': this.$vuetify.lang.t(this.closeLabel),
         },
         on: {
-          click: () => (this.isActive = false)
-        }
+          click: () => (this.isActive = false),
+        },
       }, [
         this.$createElement(VIcon, {
-          props: { color }
-        }, '$vuetify.icons.cancel')
+          props: { color },
+        }, '$vuetify.icons.cancel'),
       ])
     },
     __cachedIcon (): VNode | null {
@@ -120,7 +120,7 @@ export default mixins(
 
       return this.$createElement(VIcon, {
         staticClass: 'v-alert__icon',
-        props: { color: this.iconColor }
+        props: { color: this.iconColor },
       }, this.computedIcon)
     },
     classes (): object {
@@ -130,7 +130,7 @@ export default mixins(
         'v-alert--dense': this.dense,
         'v-alert--outlined': this.hasOutline,
         'v-alert--prominent': this.prominent,
-        'v-alert--text': this.text
+        'v-alert--text': this.text,
       }
 
       if (this.border) {
@@ -178,7 +178,7 @@ export default mixins(
       ) return true
 
       return Themeable.options.computed.isDark.call(this)
-    }
+    },
   },
 
   created () {
@@ -195,18 +195,18 @@ export default mixins(
         this.$slots.append,
         this.$scopedSlots.close
           ? this.$scopedSlots.close({ toggle: this.toggle })
-          : this.__cachedDismissible
+          : this.__cachedDismissible,
       ]
 
       const data: VNodeData = {
-        staticClass: 'v-alert__wrapper'
+        staticClass: 'v-alert__wrapper',
       }
 
       return this.$createElement('div', data, children)
     },
     genContent (): VNode {
       return this.$createElement('div', {
-        staticClass: 'v-alert__content'
+        staticClass: 'v-alert__content',
       }, this.$slots.default)
     },
     genAlert (): VNode {
@@ -216,8 +216,8 @@ export default mixins(
         style: this.styles,
         directives: [{
           name: 'show',
-          value: this.isActive
-        }]
+          value: this.isActive,
+        }],
       }
 
       if (!this.coloredBorder) {
@@ -230,7 +230,7 @@ export default mixins(
     /** @public */
     toggle () {
       this.isActive = !this.isActive
-    }
+    },
   },
 
   render (h): VNode {
@@ -242,8 +242,8 @@ export default mixins(
       props: {
         name: this.transition,
         origin: this.origin,
-        mode: this.mode
-      }
+        mode: this.mode,
+      },
     }, [render])
-  }
+  },
 })

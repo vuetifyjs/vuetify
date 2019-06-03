@@ -108,11 +108,11 @@
         'border',
         'outlined',
         'dense',
-        'prominent'
+        'prominent',
       ],
       show: true,
       type: 'success',
-      variant: null
+      variant: null,
     }),
 
     computed: {
@@ -127,7 +127,7 @@
         }
 
         return attrs
-      }
-    }
+      },
+    },
   }
 </script>

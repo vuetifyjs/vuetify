@@ -6,6 +6,6 @@ export { VCarousel, VCarouselItem }
 export default {
   $_vuetify_subcomponents: {
     VCarousel,
-    VCarouselItem
-  }
+    VCarouselItem,
+  },
 }

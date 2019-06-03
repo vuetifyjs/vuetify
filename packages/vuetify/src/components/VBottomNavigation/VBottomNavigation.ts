@@ -21,7 +21,7 @@ import { VNode } from 'vue'
 export default mixins(
   Applicationable('bottom', [
     'height',
-    'inputValue'
+    'inputValue',
   ]),
   Colorable,
   Measurable,
@@ -37,7 +37,7 @@ export default mixins(
     active: [Number, String],
     activeClass: {
       type: String,
-      default: 'v-btn--active'
+      default: 'v-btn--active',
     },
     backgroundColor: String,
     grow: Boolean,
@@ -46,18 +46,18 @@ export default mixins(
     mandatory: Boolean,
     height: {
       type: [Number, String],
-      default: 56
+      default: 56,
     },
     shift: Boolean,
     inputValue: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
 
   data () {
     return {
-      isActive: this.inputValue
+      isActive: this.inputValue,
     }
   },
 
@@ -77,15 +77,15 @@ export default mixins(
         'v-bottom-navigation--grow': this.grow,
         'v-bottom-navigation--fixed': !this.absolute && (this.app || this.fixed),
         'v-bottom-navigation--horizontal': this.horizontal,
-        'v-bottom-navigation--shift': this.shift
+        'v-bottom-navigation--shift': this.shift,
       }
     },
     styles (): object {
       return {
         ...this.measurableStyles,
-        transform: this.isActive ? 'none' : 'translateY(100%)'
+        transform: this.isActive ? 'none' : 'translateY(100%)',
       }
-    }
+    },
   },
 
   created () {
@@ -109,7 +109,7 @@ export default mixins(
       this.$emit('change', val)
       // TODO: deprecate
       this.$emit('update:active', val)
-    }
+    },
   },
 
   render (h): VNode {
@@ -124,9 +124,9 @@ export default mixins(
           this.value !== undefined ||
           this.active !== undefined
         ),
-        value: this.internalValue || this.active
+        value: this.internalValue || this.active,
       },
-      on: { change: this.updateValue }
+      on: { change: this.updateValue },
     })
 
     if (this.canScroll) {
@@ -135,10 +135,10 @@ export default mixins(
       data.directives.push({
         arg: this.scrollTarget,
         name: 'scroll',
-        value: this.onScroll
+        value: this.onScroll,
       })
     }
 
     return h(ButtonGroup, this.setTextColor(this.color, data), this.$slots.default)
-  }
+  },
 })

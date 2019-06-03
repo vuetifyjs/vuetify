@@ -4,7 +4,7 @@ import VMenu from '../../VMenu'
 import {
   mount,
   Wrapper,
-  MountOptions
+  MountOptions,
 } from '@vue/test-utils'
 import { keyCodes } from '../../../util/helpers'
 
@@ -19,11 +19,11 @@ describe('VEditDialog.ts', () => {
         mocks: {
           $vuetify: {
             theme: {
-              dark: false
-            }
-          }
+              dark: false,
+            },
+          },
         },
-        ...options
+        ...options,
       })
     }
   })
@@ -38,8 +38,8 @@ describe('VEditDialog.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         cancelText: 'I don\'t want to modify that!',
-        saveText: 'Save it!'
-      }
+        saveText: 'Save it!',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -54,8 +54,8 @@ describe('VEditDialog.ts', () => {
     const wrapper = mountFunction({
       listeners: {
         open,
-        close
-      }
+        close,
+      },
     })
 
     wrapper.vm.isActive = true
@@ -75,8 +75,8 @@ describe('VEditDialog.ts', () => {
     const wrapper = mountFunction({
       listeners: {
         open,
-        close
-      }
+        close,
+      },
     })
 
     const menu = wrapper.find(VMenu)
@@ -96,17 +96,17 @@ describe('VEditDialog.ts', () => {
     const wrapper = mountFunction({
       methods: {
         cancel,
-        save
+        save,
       },
       render () {
         return this.genContent()
       },
       slots: {
-        input: '<input class="test" />'
+        input: '<input class="test" />',
       },
       listeners: {
-        save: saveEvent
-      }
+        save: saveEvent,
+      },
     })
 
     const input = wrapper.vm.$refs.content as HTMLElement
@@ -129,7 +129,7 @@ describe('VEditDialog.ts', () => {
     const wrapper = mountFunction({
       render () {
         return this.genButton(fn, 'test')
-      }
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -145,8 +145,8 @@ describe('VEditDialog.ts', () => {
         return this.genContent()
       },
       slots: {
-        input: '<input class="test" />'
-      }
+        input: '<input class="test" />',
+      },
     })
 
     const input = wrapper.find('input.test')
@@ -162,14 +162,14 @@ describe('VEditDialog.ts', () => {
 
     const wrapper = mountFunction({
       methods: {
-        save
+        save,
       },
       render () {
         return this.genActions()
       },
       listeners: {
-        save: saveEvent
-      }
+        save: saveEvent,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -184,11 +184,11 @@ describe('VEditDialog.ts', () => {
     const cancel = jest.fn()
     const wrapper = mountFunction({
       listeners: {
-        cancel
+        cancel,
       },
       data: () => ({
-        isActive: true
-      })
+        isActive: true,
+      }),
     })
 
     wrapper.vm.cancel()

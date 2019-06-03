@@ -41,27 +41,27 @@ export default mixins<options &
     double: Boolean,
     format: {
       type: Function,
-      default: (val: string | number) => val
+      default: (val: string | number) => val,
     },
     max: {
       type: Number,
-      required: true
+      required: true,
     },
     min: {
       type: Number,
-      required: true
+      required: true,
     },
     scrollable: Boolean,
     readonly: Boolean,
     rotate: {
       type: Number,
-      default: 0
+      default: 0,
     },
     step: {
       type: Number,
-      default: 1
+      default: 1,
     },
-    value: Number
+    value: Number,
   },
 
   data () {
@@ -69,7 +69,7 @@ export default mixins<options &
       inputValue: this.value,
       isDragging: false,
       valueOnMouseDown: null as number | null,
-      valueOnMouseUp: null as number | null
+      valueOnMouseUp: null as number | null,
     }
   },
 
@@ -91,13 +91,13 @@ export default mixins<options &
     },
     roundCount (): number {
       return this.double ? (this.count / 2) : this.count
-    }
+    },
   },
 
   watch: {
     value (value) {
       this.inputValue = value
-    }
+    },
   },
 
   methods: {
@@ -133,10 +133,10 @@ export default mixins<options &
           staticClass: 'v-time-picker-clock__item',
           'class': {
             'v-time-picker-clock__item--active': value === this.displayedValue,
-            'v-time-picker-clock__item--disabled': this.disabled || !this.isAllowed(value)
+            'v-time-picker-clock__item--disabled': this.disabled || !this.isAllowed(value),
           },
           style: this.getTransform(value),
-          domProps: { innerHTML: `<span>${this.format(value)}</span>` }
+          domProps: { innerHTML: `<span>${this.format(value)}</span>` },
         })))
       }
 
@@ -149,25 +149,25 @@ export default mixins<options &
       return this.$createElement('div', this.setBackgroundColor(color, {
         staticClass: 'v-time-picker-clock__hand',
         'class': {
-          'v-time-picker-clock__hand--inner': this.isInner(this.value)
+          'v-time-picker-clock__hand--inner': this.isInner(this.value),
         },
         style: {
-          transform: `rotate(${angle}deg) ${scale}`
-        }
+          transform: `rotate(${angle}deg) ${scale}`,
+        },
       }))
     },
     getTransform (i: number) {
       const { x, y } = this.getPosition(i)
       return {
         left: `${50 + x * 50}%`,
-        top: `${50 + y * 50}%`
+        top: `${50 + y * 50}%`,
       }
     },
     getPosition (value: number) {
       const rotateRadians = this.rotate * Math.PI / 180
       return {
         x: Math.sin((value - this.min) * this.degrees + rotateRadians) * this.handScale(value),
-        y: -Math.cos((value - this.min) * this.degrees + rotateRadians) * this.handScale(value)
+        y: -Math.cos((value - this.min) * this.degrees + rotateRadians) * this.handScale(value),
       }
     },
     onMouseDown (e: MouseEvent | TouchEvent) {
@@ -231,7 +231,7 @@ export default mixins<options &
     angle (center: Point, p1: Point) {
       const value = 2 * Math.atan2(p1.y - center.y - this.euclidean(center, p1), p1.x - center.x)
       return Math.abs(value * 180 / Math.PI)
-    }
+    },
   },
 
   render (h): VNode {
@@ -239,7 +239,7 @@ export default mixins<options &
       staticClass: 'v-time-picker-clock',
       class: {
         'v-time-picker-clock--indeterminate': this.value == null,
-        ...this.themeClasses
+        ...this.themeClasses,
       },
       on: (this.readonly || this.disabled) ? undefined : Object.assign({
         mousedown: this.onMouseDown,
@@ -248,21 +248,21 @@ export default mixins<options &
         touchstart: this.onMouseDown,
         touchend: this.onMouseUp,
         mousemove: this.onDragMove,
-        touchmove: this.onDragMove
+        touchmove: this.onDragMove,
       }, this.scrollable ? {
-        wheel: this.wheel
+        wheel: this.wheel,
       } : {}),
-      ref: 'clock'
+      ref: 'clock',
     }
 
     return h('div', data, [
       h('div', {
         staticClass: 'v-time-picker-clock__inner',
-        ref: 'innerClock'
+        ref: 'innerClock',
       }, [
         this.genHand(),
-        this.genValues()
-      ])
+        this.genValues(),
+      ]),
     ])
-  }
+  },
 })

@@ -7,19 +7,19 @@
     props: {
       scriptId: {
         type: String,
-        default: '_carbonads_js'
+        default: '_carbonads_js',
       },
       src: {
         type: String,
-        default: '//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=vuetifyjscom'
-      }
+        default: '//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=vuetifyjscom',
+      },
     },
 
     methods: {
       serve () {
         window._carbonads && window._carbonads.refresh()
-      }
-    }
+      },
+    },
   }
 </script>
 
