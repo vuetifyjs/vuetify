@@ -24,11 +24,11 @@
         const array = Object.keys(locales).map(localeCode => ({
           localeCode,
           localeName: ISO6391.getName(localeCode.substr(0, 2)),
-          localeNativeName: localeCode === 'en' ? '' : ISO6391.getNativeName(localeCode.substr(0, 2))
+          localeNativeName: localeCode === 'en' ? '' : ISO6391.getNativeName(localeCode.substr(0, 2)),
         }))
         array.sort((a, b) => (a.localeCode < b.localeCode ? -1 : (a.localeCode > b.localeCode ? 1 : 0)))
         return array
-      }
-    }
+      },
+    },
   }
 </script>

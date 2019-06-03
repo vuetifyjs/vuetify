@@ -107,11 +107,11 @@
             props: {
               color: 'rgba(0, 0, 0, .36)',
               dark: true,
-              height: 50
-            }
+              height: 50,
+            },
           }, children)
-        }
-      }
-    }
+        },
+      },
+    },
   }
 </script>

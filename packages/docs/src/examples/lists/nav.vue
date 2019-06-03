@@ -29,7 +29,7 @@
         nav
         dense
       >
-        <v-list-item-group v-model="item">
+        <v-list-item-group v-model="item" color="primary">
           <v-list-item
             v-for="(item, i) in items"
             :key="i"
@@ -59,8 +59,8 @@
         { text: 'Recent', icon: 'mdi-history' },
         { text: 'Offline', icon: 'mdi-check-circle' },
         { text: 'Uploads', icon: 'mdi-upload' },
-        { text: 'Backups', icon: 'mdi-cloud-upload' }
-      ]
-    })
+        { text: 'Backups', icon: 'mdi-cloud-upload' },
+      ],
+    }),
   }
 </script>

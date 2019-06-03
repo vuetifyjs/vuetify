@@ -94,13 +94,13 @@
 <script>
   export default {
     data: () => ({
-      featured: []
+      featured: [],
     }),
 
     computed: {
       computedFeatured () {
         return this.featured.slice(0, 6)
-      }
+      },
     },
 
     // TODO: Remove when v-img
@@ -115,8 +115,8 @@
           method: 'get',
           headers: {
             'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json'
-          }
+            'Content-Type': 'application/json',
+          },
         })
           .then(res => res.json())
           .then(res => {
@@ -147,7 +147,7 @@
           array[randomIndex] = temporaryValue
         }
         return array
-      }
-    }
+      },
+    },
   }
 </script>

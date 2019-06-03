@@ -8,6 +8,6 @@ export default {
   $_vuetify_subcomponents: {
     VTimePicker,
     VTimePickerClock,
-    VTimePickerTitle
-  }
+    VTimePickerTitle,
+  },
 }

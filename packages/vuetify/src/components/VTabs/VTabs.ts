@@ -38,42 +38,43 @@ export default baseMixins.extend<options>().extend({
   name: 'v-tabs',
 
   directives: {
-    Resize
+    Resize,
   },
 
   props: {
     activeClass: {
       type: String,
-      default: 'v-tab--active'
+      default: '',
     },
     alignWithTitle: Boolean,
     backgroundColor: String,
     centered: Boolean,
+    centerActive: Boolean,
     fixedTabs: Boolean,
     grow: Boolean,
     height: {
       type: [Number, String],
-      default: undefined
+      default: undefined,
     },
     hideSlider: Boolean,
     iconsAndText: Boolean,
     mobileBreakPoint: {
       type: [Number, String],
-      default: 1264
+      default: 1264,
     },
     nextIcon: {
       type: String,
-      default: '$vuetify.icons.next'
+      default: '$vuetify.icons.next',
     },
     optional: Boolean,
     prevIcon: {
       type: String,
-      default: '$vuetify.icons.prev'
+      default: '$vuetify.icons.prev',
     },
     right: Boolean,
     showArrows: Boolean,
     sliderColor: String,
-    vertical: Boolean
+    vertical: Boolean,
   },
 
   data () {
@@ -84,9 +85,9 @@ export default baseMixins.extend<options>().extend({
         left: null as null | number,
         right: null as null | number,
         top: null as null | number,
-        width: null as null | number
+        width: null as null | number,
       },
-      transitionTime: 300
+      transitionTime: 300,
     }
   },
 
@@ -100,7 +101,7 @@ export default baseMixins.extend<options>().extend({
         'v-tabs--icons-and-text': this.iconsAndText,
         'v-tabs--right': this.right,
         'v-tabs--vertical': this.vertical,
-        ...this.themeClasses
+        ...this.themeClasses,
       }
     },
     isReversed (): boolean {
@@ -113,19 +114,20 @@ export default baseMixins.extend<options>().extend({
         right: this.isReversed ? convertToUnit(this.slider.right) : undefined,
         top: this.vertical ? convertToUnit(this.slider.top) : undefined,
         transition: this.slider.left != null ? null : 'none',
-        width: convertToUnit(this.slider.width)
+        width: convertToUnit(this.slider.width),
       }
     },
     computedColor (): string {
       if (this.color) return this.color
       else if (this.isDark) return 'white'
       else return 'primary'
-    }
+    },
   },
 
   watch: {
     alignWithTitle: 'callSlider',
     centered: 'callSlider',
+    centerActive: 'callSlider',
     fixedTabs: 'callSlider',
     grow: 'callSlider',
     right: 'callSlider',
@@ -133,7 +135,7 @@ export default baseMixins.extend<options>().extend({
     vertical: 'callSlider',
     '$vuetify.application.left': 'onResize',
     '$vuetify.application.right': 'onResize',
-    '$vuetify.rtl': 'onResize'
+    '$vuetify.rtl': 'onResize',
   },
 
   mounted () {
@@ -169,7 +171,7 @@ export default baseMixins.extend<options>().extend({
           left: this.vertical ? 0 : el.offsetLeft,
           right: this.vertical ? 0 : el.offsetLeft + el.offsetWidth,
           top: el.offsetTop,
-          width: this.vertical ? 2 : el.scrollWidth
+          width: this.vertical ? 2 : el.scrollWidth,
         }
       })
 
@@ -179,12 +181,11 @@ export default baseMixins.extend<options>().extend({
       return this.$createElement(VTabsBar, this.setTextColor(this.computedColor, {
         staticClass: this.backgroundColor,
         style: {
-          height: this.height ? {
-            height: convertToUnit(this.height)
-          } : null
+          height: convertToUnit(this.height),
         },
         props: {
           activeClass: this.activeClass,
+          centerActive: this.centerActive,
           dark: this.dark,
           light: this.light,
           mandatory: !this.optional,
@@ -192,18 +193,18 @@ export default baseMixins.extend<options>().extend({
           nextIcon: this.nextIcon,
           prevIcon: this.prevIcon,
           showArrows: this.showArrows,
-          value: this.internalValue
+          value: this.internalValue,
         },
         on: {
           'call:slider': this.callSlider,
           change: (val: any) => {
             this.internalValue = val
-          }
+          },
         },
-        ref: 'items'
+        ref: 'items',
       }), [
         this.genSlider(slider),
-        items
+        items,
       ])
     },
     genItems (items: VNode | null, item: VNode[]) {
@@ -217,13 +218,13 @@ export default baseMixins.extend<options>().extend({
 
       return this.$createElement(VTabsItems, {
         props: {
-          value: this.internalValue
+          value: this.internalValue,
         },
         on: {
           change: (val: any) => {
             this.internalValue = val
-          }
-        }
+          },
+        },
       }, item)
     },
     genSlider (slider: VNode | null) {
@@ -231,13 +232,13 @@ export default baseMixins.extend<options>().extend({
 
       if (!slider) {
         slider = this.$createElement(VTabsSlider, {
-          props: { color: this.sliderColor }
+          props: { color: this.sliderColor },
         })
       }
 
       return this.$createElement('div', {
         staticClass: 'v-tabs-slider-wrapper',
-        style: this.sliderStyles
+        style: this.sliderStyles,
       }, [slider])
     },
     onResize () {
@@ -280,7 +281,7 @@ export default baseMixins.extend<options>().extend({
        * item: array of `v-tab-item`
        */
       return { tab, slider, items, item }
-    }
+    },
   },
 
   render (h): VNode {
@@ -292,11 +293,11 @@ export default baseMixins.extend<options>().extend({
       directives: [{
         name: 'resize',
         modifiers: { quiet: true },
-        value: this.onResize
-      }]
+        value: this.onResize,
+      }],
     }, [
       this.genBar(tab, slider),
-      this.genItems(items, item)
+      this.genItems(items, item),
     ])
-  }
+  },
 })

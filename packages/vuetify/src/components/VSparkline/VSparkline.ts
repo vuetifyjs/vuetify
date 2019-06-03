@@ -57,75 +57,75 @@ export default mixins<options &
     autoDraw: Boolean,
     autoDrawDuration: {
       type: Number,
-      default: 2000
+      default: 2000,
     },
     autoDrawEasing: {
       type: String,
-      default: 'ease'
+      default: 'ease',
     },
     autoLineWidth: {
       type: Boolean,
-      default: false
+      default: false,
     },
     color: {
       type: String,
-      default: 'primary'
+      default: 'primary',
     },
     fill: {
       type: Boolean,
-      default: false
+      default: false,
     },
     gradient: {
       type: Array as Prop<string[]>,
-      default: () => ([])
+      default: () => ([]),
     },
     gradientDirection: {
       type: String as Prop<'top' | 'bottom' | 'left' | 'right'>,
       validator: (val: string) => ['top', 'bottom', 'left', 'right'].includes(val),
-      default: 'top'
+      default: 'top',
     },
     height: {
       type: [String, Number],
-      default: 75
+      default: 75,
     },
     labels: {
       type: Array as Prop<SparklineItem[]>,
-      default: () => ([])
+      default: () => ([]),
     },
     lineWidth: {
       type: [String, Number],
-      default: 4
+      default: 4,
     },
     padding: {
       type: [String, Number],
-      default: 8
+      default: 8,
     },
     smooth: {
       type: [Boolean, Number, String],
-      default: false
+      default: false,
     },
     showLabels: Boolean,
     type: {
       type: String,
       default: 'trend',
-      validator: (val: string) => ['trend', 'bar'].includes(val)
+      validator: (val: string) => ['trend', 'bar'].includes(val),
     } as PropValidator<'trend' | 'bar'>,
     value: {
       type: Array as Prop<SparklineItem[]>,
-      default: () => ([])
+      default: () => ([]),
     },
     width: {
       type: [Number, String],
-      default: 300
+      default: 300,
     },
     labelSize: {
       type: [Number, String],
-      default: 7
-    }
+      default: 7,
+    },
   },
 
   data: () => ({
-    lastLength: 0
+    lastLength: 0,
   }),
 
   computed: {
@@ -153,7 +153,7 @@ export default mixins<options &
         minX: this.parsedPadding,
         minY: this.parsedPadding,
         maxX: this.parsedWidth - this.parsedPadding,
-        maxY: height - this.parsedPadding
+        maxY: height - this.parsedPadding,
       }
     },
     hasLabels (): boolean {
@@ -180,7 +180,7 @@ export default mixins<options &
 
         labels.push({
           ...item,
-          value: String(value)
+          value: String(value),
         })
       }
 
@@ -191,7 +191,7 @@ export default mixins<options &
     },
     textY (): number {
       return this.boundary.maxY + 6
-    }
+    },
   },
 
   watch: {
@@ -221,8 +221,8 @@ export default mixins<options &
           }
           this.lastLength = length
         })
-      }
-    }
+      },
+    },
   },
 
   methods: {
@@ -239,8 +239,8 @@ export default mixins<options &
         this.$createElement('stop', {
           attrs: {
             offset: index / len,
-            'stop-color': color || this.color || 'currentColor'
-          }
+            'stop-color': color || this.color || 'currentColor',
+          },
         })
       )
 
@@ -251,9 +251,9 @@ export default mixins<options &
             x1: +(gradientDirection === 'left'),
             y1: +(gradientDirection === 'top'),
             x2: +(gradientDirection === 'right'),
-            y2: +(gradientDirection === 'bottom')
-          }
-        }, stops)
+            y2: +(gradientDirection === 'bottom'),
+          },
+        }, stops),
       ])
     },
     genG (children: VNode[]) {
@@ -262,8 +262,8 @@ export default mixins<options &
           fontSize: '8',
           textAnchor: 'middle',
           dominantBaseline: 'mathematical',
-          fill: this.color || 'currentColor'
-        }
+          fill: this.color || 'currentColor',
+        },
       }, children)
     },
     genLabels () {
@@ -279,9 +279,9 @@ export default mixins<options &
           id: this._uid,
           d: genPath(this.points.slice(), radius, this.fill, Number(this.height)),
           fill: this.fill ? `url(#${this._uid})` : 'none',
-          stroke: this.fill ? 'none' : `url(#${this._uid})`
+          stroke: this.fill ? 'none' : `url(#${this._uid})`,
         },
-        ref: 'path'
+        ref: 'path',
       })
     },
     genText (item: SparklineText, index: number) {
@@ -292,8 +292,8 @@ export default mixins<options &
       return this.$createElement('text', {
         attrs: {
           x: item.x,
-          y: this.textY
-        }
+          y: this.textY,
+        },
       }, [children])
     },
     genBar () {
@@ -305,10 +305,10 @@ export default mixins<options &
         minX: parsedPadding,
         minY: parsedPadding,
         maxX: Number(viewWidth) - parsedPadding,
-        maxY: Number(viewHeight) - parsedPadding
+        maxY: Number(viewHeight) - parsedPadding,
       }
       const props = {
-        ...this.$props
+        ...this.$props,
       }
 
       props.points = genPoints(this.value, boundary, this.type)
@@ -326,8 +326,8 @@ export default mixins<options &
         attrs: {
           width: '100%',
           height: '25%',
-          viewBox: `0 0 ${viewWidth} ${viewHeight}`
-        }
+          viewBox: `0 0 ${viewWidth} ${viewHeight}`,
+        },
       }, [
         this.genGradient(),
         this.genClipPath(props.offsetX, props.lineWidth, 'sparkline-bar-' + this._uid),
@@ -336,18 +336,18 @@ export default mixins<options &
           attrs: {
             transform: `scale(1,-1) translate(0,-${boundary.maxY})`,
             'clip-path': `url(#sparkline-bar-${this._uid}-clip)`,
-            fill: `url(#${this._uid})`
-          }
+            fill: `url(#${this._uid})`,
+          },
         }, [
           this.$createElement('rect', {
             attrs: {
               x: 0,
               y: 0,
               width: viewWidth,
-              height: viewHeight
-            }
-          })
-        ])
+              height: viewHeight,
+            },
+          }),
+        ]),
       ])
     },
     genClipPath (offsetX: number, lineWidth: number, id: string) {
@@ -358,8 +358,8 @@ export default mixins<options &
 
       return this.$createElement('clipPath', {
         attrs: {
-          id: `${id}-clip`
-        }
+          id: `${id}-clip`,
+        },
       }, this.points.map(item => {
         return this.$createElement('rect', {
           attrs: {
@@ -368,8 +368,8 @@ export default mixins<options &
             width: lineWidth,
             height: Math.max(maxY - item.y, 0),
             rx: rounding,
-            ry: rounding
-          }
+            ry: rounding,
+          },
         }, [
           this.autoDraw ? this.$createElement('animate', {
             attrs: {
@@ -377,9 +377,9 @@ export default mixins<options &
               from: 0,
               to: maxY - item.y,
               dur: `${this.autoDrawDuration}ms`,
-              fill: 'freeze'
-            }
-          }) : undefined as never
+              fill: 'freeze',
+            },
+          }) : undefined as never,
         ])
       }))
     },
@@ -391,8 +391,8 @@ export default mixins<options &
           attrs: {
             x: item.x + offsetX + this._lineWidth / 2,
             y: props.boundary.maxY + (Number(this.labelSize) || 7),
-            'font-size': Number(this.labelSize) || 7
-          }
+            'font-size': Number(this.labelSize) || 7,
+          },
         }, item.value.toString())
       ))
 
@@ -404,14 +404,14 @@ export default mixins<options &
           'stroke-width': this._lineWidth || 1,
           width: '100%',
           height: '25%',
-          viewBox: `0 0 ${this.width} ${this.height}`
-        }
+          viewBox: `0 0 ${this.width} ${this.height}`,
+        },
       }), [
         this.genGradient(),
         this.genLabels(),
-        this.genPath()
+        this.genPath(),
       ])
-    }
+    },
   },
 
   render (h): VNode {
@@ -420,5 +420,5 @@ export default mixins<options &
     return this.type === 'trend'
       ? this.genTrend()
       : this.genBar()
-  }
+  },
 })

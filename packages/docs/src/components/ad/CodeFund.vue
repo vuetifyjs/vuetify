@@ -7,19 +7,19 @@
     props: {
       id: {
         type: String,
-        default: 'codefund_ad'
+        default: 'codefund_ad',
       },
       src: {
         type: String,
-        default: '//codefund.io/scripts/50bda123-f278-4574-88e2-c7401f869261/embed.js'
-      }
+        default: '//codefund.io/scripts/50bda123-f278-4574-88e2-c7401f869261/embed.js',
+      },
     },
 
     methods: {
       serve () {
         window._codefund.serve()
-      }
-    }
+      },
+    },
   }
 </script>
 

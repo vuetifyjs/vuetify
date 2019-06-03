@@ -6,7 +6,7 @@ import VSelect from '../../VSelect/VSelect'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 import Vue from 'vue'
 
@@ -15,21 +15,21 @@ const testHeaders = [
     text: 'Dessert (100g serving)',
     align: 'left',
     sortable: false,
-    value: 'name'
+    value: 'name',
   },
   { text: 'Calories', value: 'calories' },
   { text: 'Fat (g)', value: 'fat' },
   { text: 'Carbs (g)', value: 'carbs' },
   { text: 'Protein (g)', value: 'protein' },
-  { text: 'Iron (%)', value: 'iron' }
+  { text: 'Iron (%)', value: 'iron' },
 ]
 
 Vue.prototype.$vuetify = {
   rtl: false,
   lang: new Lang(),
   theme: {
-    dark: false
-  }
+    dark: false,
+  },
 }
 Vue.directive('ripple', ripple)
 
@@ -48,8 +48,8 @@ describe('VDataTableHeader.ts', () => {
             propsData: {
               headers: testHeaders,
               mobile: isMobile,
-              ...(options || {}).propsData
-            }
+              ...(options || {}).propsData,
+            },
           })
         }
       })
@@ -62,8 +62,8 @@ describe('VDataTableHeader.ts', () => {
       it('should work with showGroupBy', () => {
         const wrapper = mountFunction({
           propsData: {
-            showGroupBy: true
-          }
+            showGroupBy: true,
+          },
         })
 
         expect(wrapper.html()).toMatchSnapshot()
@@ -75,9 +75,9 @@ describe('VDataTableHeader.ts', () => {
             options: {
               multiSort: true,
               sortBy: [ 'iron' ],
-              sortDesc: [ true ]
-            }
-          }
+              sortDesc: [ true ],
+            },
+          },
         })
 
         expect(wrapper.html()).toMatchSnapshot()
@@ -88,9 +88,9 @@ describe('VDataTableHeader.ts', () => {
           propsData: {
             options: {
               sortBy: [ 'iron' ],
-              sortDesc: [ true ]
-            }
-          }
+              sortDesc: [ true ],
+            },
+          },
         })
 
         expect(wrapper.html()).toMatchSnapshot()
@@ -101,20 +101,20 @@ describe('VDataTableHeader.ts', () => {
           propsData: {
             options: {
               sortBy: [ 'iron', 'carbs' ],
-              sortDesc: [ false, true ]
-            }
-          }
+              sortDesc: [ false, true ],
+            },
+          },
         })
 
         expect(wrapper.html()).toMatchSnapshot()
       })
 
       if (isMobile) {
-        it('should render with dataTableSelect header', () => {
+        it('should render with data-table-select header', () => {
           const wrapper = mountFunction({
             propsData: {
-              headers: [ ...testHeaders, { text: 'test', value: 'dataTableSelect' } ]
-            }
+              headers: [ ...testHeaders, { text: 'test', value: 'data-table-select' } ],
+            },
           })
 
           expect(wrapper.html()).toMatchSnapshot()
@@ -124,13 +124,32 @@ describe('VDataTableHeader.ts', () => {
           const sort = jest.fn()
           const wrapper = mountFunction({
             listeners: {
-              sort
-            }
+              sort,
+            },
           })
           const select = wrapper.find(VSelect)
 
           select.vm.$emit('change', 'test')
           expect(sort).toHaveBeenLastCalledWith('test')
+        })
+
+        it('should apply header class and width for select-all column', () => {
+          const wrapper = mount(VDataTableHeader, {
+            propsData: {
+              mobile: isMobile,
+              headers: [
+                {
+                  value: 'data-table-select',
+                  width: '100px',
+                  class: 'foo',
+                },
+              ],
+            },
+          })
+
+          const foo = wrapper.find('.foo')
+          expect(foo.exists()).toBe(true)
+          expect(foo.attributes().width).toBe('100px')
         })
       }
     })

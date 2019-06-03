@@ -24,7 +24,7 @@ import {
   updateWeekday,
   updateRelative,
   getStartOfMonth,
-  getEndOfMonth
+  getEndOfMonth,
 } from './util/timestamp'
 
 // Calendars
@@ -47,12 +47,12 @@ export default CalendarBase.extend({
   props: {
     ...props.calendar,
     ...props.weeks,
-    ...props.intervals
+    ...props.intervals,
   },
 
   data: () => ({
     lastStart: null as VTimestamp | null,
-    lastEnd: null as VTimestamp | null
+    lastEnd: null as VTimestamp | null,
   }),
 
   computed: {
@@ -102,11 +102,11 @@ export default CalendarBase.extend({
       }
 
       return { component, start, end, maxDays }
-    }
+    },
   },
 
   watch: {
-    renderProps: 'checkChange'
+    renderProps: 'checkChange',
   },
 
   methods: {
@@ -179,7 +179,7 @@ export default CalendarBase.extend({
       } else {
         return false
       }
-    }
+    },
   },
 
   render (h): VNode {
@@ -191,7 +191,7 @@ export default CalendarBase.extend({
         ...this.$props,
         start: start.date,
         end: end.date,
-        maxDays
+        maxDays,
       },
       on: {
         ...this.$listeners,
@@ -202,9 +202,9 @@ export default CalendarBase.extend({
           if (this.$listeners['click:date']) {
             this.$emit('click:date', day)
           }
-        }
+        },
       },
-      scopedSlots: this.$scopedSlots
+      scopedSlots: this.$scopedSlots,
     })
-  }
+  },
 })

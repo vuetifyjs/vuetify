@@ -8,20 +8,20 @@ import VBtn from '../../VBtn/VBtn'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 function createBtn (val = null) {
   const options = {
     attrs: {},
-    props: { text: true }
+    props: { text: true },
   }
   if (val) options.attrs = { value: val }
 
   return Vue.component('test', {
     render (h) {
       return h(VBtn, options)
-    }
+    },
   })
 }
 
@@ -37,11 +37,11 @@ describe('VBottomNavigation.ts', () => {
             application: {
               bottom: 0,
               register: () => {},
-              unregister: () => {}
-            }
-          }
+              unregister: () => {},
+            },
+          },
         },
-        ...options
+        ...options,
       })
     }
   })
@@ -50,8 +50,8 @@ describe('VBottomNavigation.ts', () => {
     const wrapper = mountFunction({
       propsData: { inputValue: true },
       slots: {
-        default: [VBtn, VBtn]
-      }
+        default: [VBtn, VBtn],
+      },
     })
 
     expect(wrapper.vm.styles).toMatchSnapshot()
@@ -66,11 +66,11 @@ describe('VBottomNavigation.ts', () => {
   it('should update application when height or inputValue changes', () => {
     const wrapper = mountFunction({
       propsData: {
-        app: true
+        app: true,
       },
       slots: {
-        default: [VBtn, VBtn]
-      }
+        default: [VBtn, VBtn],
+      },
     })
 
     const spy = jest.spyOn(wrapper.vm, 'updateApplication')
@@ -89,8 +89,8 @@ describe('VBottomNavigation.ts', () => {
     const update = jest.fn()
     const wrapper = mountFunction({
       slots: {
-        default: [VBtn, VBtn]
-      }
+        default: [VBtn, VBtn],
+      },
     })
 
     wrapper.vm.$on('update:active', update)

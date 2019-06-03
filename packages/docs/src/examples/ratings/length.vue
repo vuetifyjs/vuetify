@@ -71,8 +71,8 @@
       hover: true,
       length: 5,
       rating: 2,
-      readonly: false
-    })
+      readonly: false,
+    }),
   }
 </script>
 

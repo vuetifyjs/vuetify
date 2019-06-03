@@ -12,8 +12,8 @@ export default Vue.extend({
   props: {
     ripple: {
       type: [Boolean, Object],
-      default: true
-    }
+      default: true,
+    },
   },
 
   methods: {
@@ -25,14 +25,14 @@ export default Vue.extend({
       data.directives = data.directives || []
       data.directives.push({
         name: 'ripple',
-        value: { center: true }
+        value: { center: true },
       } as VNodeDirective)
       data.on = Object.assign({
-        click: this.onChange
+        click: this.onChange,
       }, this.$listeners)
 
       return this.$createElement('div', data)
     },
-    onChange () {}
-  }
+    onChange () {},
+  },
 })

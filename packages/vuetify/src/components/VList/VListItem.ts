@@ -6,10 +6,10 @@ import Colorable from '../../mixins/colorable'
 import Routable from '../../mixins/routable'
 import { factory as GroupableFactory } from '../../mixins/groupable'
 import Themeable from '../../mixins/themeable'
-import Toggleable from '../../mixins/toggleable'
+import { factory as ToggleableFactory } from '../../mixins/toggleable'
 
 // Directives
-import Ripple, { RippleOptions } from '../../directives/ripple'
+import Ripple from '../../directives/ripple'
 
 // Utilities
 import { keyCodes } from './../../util/helpers'
@@ -23,10 +23,10 @@ import { removed } from '../../util/console'
 
 const baseMixins = mixins(
   Colorable,
-  GroupableFactory('listItemGroup'),
   Routable,
   Themeable,
-  Toggleable
+  GroupableFactory('listItemGroup'),
+  ToggleableFactory('inputValue')
 )
 
 interface options extends ExtractVue<typeof baseMixins> {
@@ -38,7 +38,7 @@ export default baseMixins.extend<options>().extend({
   name: 'v-list-item',
 
   directives: {
-    Ripple
+    Ripple,
   },
 
   inheritAttrs: false,
@@ -47,56 +47,46 @@ export default baseMixins.extend<options>().extend({
     activeClass: {
       type: String,
       default (): string | undefined {
-        if (!this.listItemGroup) return 'primary--text'
+        if (!this.listItemGroup) return ''
 
         return this.listItemGroup.activeClass
-      }
+      },
     } as any as PropValidator<string>,
     dense: Boolean,
     inactive: Boolean,
     link: Boolean,
-    ripple: {
-      type: [Boolean, Object],
-      default: null
+    tag: {
+      type: String,
+      default: 'div',
     },
     threeLine: Boolean,
     twoLine: Boolean,
-    value: { default: null }
+    value: null as any as PropValidator<any>,
   },
 
   data: () => ({
-    proxyClass: 'v-list-item--active'
+    proxyClass: 'v-list-item--active',
   }),
 
   computed: {
     classes (): object {
       return {
         'v-list-item': true,
-        'v-list-item--active': this.isActive,
+        ...Routable.options.computed.classes.call(this),
         'v-list-item--dense': this.dense,
         'v-list-item--disabled': this.disabled,
-        'v-list-item--link': this.isLink && !this.inactive,
+        'v-list-item--link': this.isClickable && !this.inactive,
         'v-list-item--three-line': this.threeLine,
         'v-list-item--two-line': this.twoLine,
         ...this.themeClasses,
-        [this.activeClass]: this.isActive
       }
     },
-    computedRipple (): RippleOptions | boolean {
-      if (this.disabled) return false
-      return this.ripple !== null ? this.ripple : this.isLink
-    },
-    isLink (): boolean {
-      const hasClick = this.$listeners && (this.$listeners.click || this.$listeners['!click'])
-
+    isClickable (): boolean {
       return Boolean(
-        this.href ||
-        this.to ||
-        this.listItemGroup ||
-        this.link ||
-        hasClick
+        Routable.options.computed.isClickable.call(this) ||
+        this.listItemGroup
       )
-    }
+    },
   },
 
   created () {
@@ -113,23 +103,17 @@ export default baseMixins.extend<options>().extend({
       this.$emit('click', e)
 
       this.to || this.toggle()
-    }
+    },
   },
 
   render (h): VNode {
-    const isRouteLink = !this.inactive && this.isLink
-    const { tag, data } = isRouteLink ? this.generateRouteLink(this.classes) : {
-      tag: this.tag || 'div',
-      data: {
-        class: this.classes
-      }
-    }
+    let { tag, data } = this.generateRouteLink()
 
     data.attrs = {
       ...data.attrs,
       'aria-selected': String(this.isActive),
       role: 'listitem',
-      tabindex: tag === 'a' ? 0 : -1
+      tabindex: tag === 'a' && this.isClickable ? 0 : -1,
     }
     data.on = {
       ...data.on,
@@ -139,17 +123,18 @@ export default baseMixins.extend<options>().extend({
         if (e.keyCode === keyCodes.enter) this.click(e)
 
         this.$emit('keydown', e)
-      }
+      },
     }
-    data.ref = 'link'
 
     const children = this.$scopedSlots.default
       ? this.$scopedSlots.default({
         active: this.isActive,
-        toggle: this.toggle
+        toggle: this.toggle,
       })
       : this.$slots.default
 
-    return h(tag, this.setBackgroundColor(this.color, data), children)
-  }
+    tag = this.inactive ? 'div' : tag
+
+    return h(tag, this.setTextColor(this.color, data), children)
+  },
 })

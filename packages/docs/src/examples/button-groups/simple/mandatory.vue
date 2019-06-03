@@ -3,7 +3,7 @@
     <v-card-text>
       <v-layout column align-center>
         <p>Mandatory</p>
-        <v-btn-toggle mandatory v-model="toggle_exclusive">
+        <v-btn-toggle v-model="toggle_exclusive" mandatory>
           <v-btn>
             <v-icon>format_align_left</v-icon>
           </v-btn>
@@ -26,9 +26,9 @@
   export default {
     data () {
       return {
-        toggle_exclusive: undefined
+        toggle_exclusive: undefined,
       }
-    }
+    },
   }
 
 </script>

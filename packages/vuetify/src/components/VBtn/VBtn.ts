@@ -15,7 +15,6 @@ import Routable from '../../mixins/routable'
 import Sizeable from '../../mixins/sizeable'
 
 // Utilities
-import { getObjectValueByPath } from '../../util/helpers'
 import { deprecate } from '../../util/console'
 
 // Types
@@ -44,10 +43,10 @@ export default baseMixins.extend<options>().extend({
     activeClass: {
       type: String,
       default (): string | undefined {
-        if (!this.btnToggle) return 'v-btn--active'
+        if (!this.btnToggle) return ''
 
         return this.btnToggle.activeClass
-      }
+      },
     } as any as PropValidator<string>,
     block: Boolean,
     depressed: Boolean,
@@ -58,29 +57,29 @@ export default baseMixins.extend<options>().extend({
     loading: Boolean,
     outline: Boolean,
     outlined: Boolean,
-    ripple: {
-      type: [Boolean, Object],
-      default: null
-    },
     round: Boolean,
     rounded: Boolean,
     tag: {
       type: String,
-      default: 'button'
+      default: 'button',
     },
     text: Boolean,
     type: {
       type: String,
-      default: 'button'
+      default: 'button',
     },
-    value: null as any as PropValidator<any>
+    value: null as any as PropValidator<any>,
   },
+
+  data: () => ({
+    proxyClass: 'v-btn--active',
+  }),
 
   computed: {
     classes (): any {
       return {
         'v-btn': true,
-        [this.activeClass]: this.isActive,
+        ...Routable.options.computed.classes.call(this),
         'v-btn--absolute': this.absolute,
         'v-btn--block': this.block,
         'v-btn--bottom': this.bottom,
@@ -103,7 +102,7 @@ export default baseMixins.extend<options>().extend({
         ...this.themeClasses,
         ...this.groupClasses,
         ...this.elevationClasses,
-        ...this.sizeableClasses
+        ...this.sizeableClasses,
       }
     },
     contained (): boolean {
@@ -118,7 +117,7 @@ export default baseMixins.extend<options>().extend({
     computedRipple (): RippleOptions | boolean {
       const defaultRipple = this.icon || this.fab ? { circle: true } : true
       if (this.disabled) return false
-      else return this.ripple !== null ? this.ripple : defaultRipple
+      else return this.ripple != null ? this.ripple : defaultRipple
     },
     // TODO: remove deprecated
     hasOutline (): boolean {
@@ -140,13 +139,9 @@ export default baseMixins.extend<options>().extend({
     },
     styles (): object {
       return {
-        ...this.measurableStyles
+        ...this.measurableStyles,
       }
-    }
-  },
-
-  watch: {
-    '$route': 'onRouteChange'
+    },
   },
 
   created () {
@@ -170,44 +165,30 @@ export default baseMixins.extend<options>().extend({
       this.btnToggle && this.toggle()
     },
     genContent (): VNode {
-      return this.$createElement(
-        'span',
-        { 'class': 'v-btn__content' },
-        this.$slots.default
-      )
+      return this.$createElement('span', {
+        staticClass: 'v-btn__content',
+      }, this.$slots.default)
     },
     genLoader (): VNode {
       return this.$createElement('span', {
-        class: 'v-btn__loader'
+        class: 'v-btn__loader',
       }, this.$slots.loader || [this.$createElement(VProgressCircular, {
         props: {
           indeterminate: true,
           size: 23,
-          width: 2
-        }
+          width: 2,
+        },
       })])
     },
-    onRouteChange () {
-      if (!this.to || !this.$refs.link) return
-
-      const path = `_vnode.data.class.${this.activeClass}`
-
-      this.$nextTick(() => {
-        /* istanbul ignore else */
-        if (getObjectValueByPath(this.$refs.link, path)) {
-          this.toggle()
-        }
-      })
-    }
   },
 
   render (h): VNode {
     const children = [
       this.genContent(),
-      this.loading && this.genLoader()
+      this.loading && this.genLoader(),
     ]
     const setColor = !this.isFlat ? this.setBackgroundColor : this.setTextColor
-    const { tag, data } = this.generateRouteLink(this.classes, this.styles)
+    const { tag, data } = this.generateRouteLink()
 
     if (tag === 'button') data.attrs!.type = this.type
 
@@ -215,8 +196,6 @@ export default baseMixins.extend<options>().extend({
       ? this.value
       : JSON.stringify(this.value)
 
-    if (this.btnToggle) data.ref = 'link'
-
     return h(tag, setColor(this.color, data), children)
-  }
+  },
 })

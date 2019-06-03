@@ -13,7 +13,7 @@ describe('VTabsSlider.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VTabsSlider, {
-        ...options
+        ...options,
       })
     }
   })
@@ -21,8 +21,8 @@ describe('VTabsSlider.ts', () => {
   it('should render a tabs slider', () => {
     const wrapper = mountFunction({
       propsData: {
-        color: 'blue lighten-1'
-      }
+        color: 'blue lighten-1',
+      },
     })
 
     expect(wrapper.element.classList).toContain('blue')

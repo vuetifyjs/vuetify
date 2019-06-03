@@ -25,8 +25,8 @@
       elevation: 4,
       colors: ['white', 'gray darken-2', 'warning', 'error', 'success', 'teal'],
       color: 'white',
-      tile: false
-    })
+      tile: false,
+    }),
   }
 </script>
 

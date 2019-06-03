@@ -1,27 +1,27 @@
 {
-  "header": "crwdns13926:0crwdne13926:0",
-  "headerText": "crwdns13928:0crwdne13928:0",
-  "examples": {
-    "usage": {
-      "desc": "crwdns13930:0crwdne13930:0"
-    },
-    "alignment": {
-      "header": "crwdns13932:0crwdne13932:0",
-      "desc": "crwdns13934:0crwdne13934:0"
-    },
-    "visibility": {
-      "header": "crwdns13936:0crwdne13936:0",
-      "desc": "crwdns13938:0crwdne13938:0"
-    }
-  },
-  "props": {
-    "closeDelay": "crwdns13940:0crwdne13940:0",
-    "dark": "crwdns13942:0crwdne13942:0",
-    "debounce": "crwdns13944:0crwdne13944:0",
-    "disabled": "crwdns13946:0crwdne13946:0",
-    "light": "crwdns13948:0crwdne13948:0",
-    "openDelay": "crwdns13950:0crwdne13950:0",
-    "tag": "crwdns13952:0crwdne13952:0",
-    "transition": "crwdns13954:0crwdne13954:0"
-  }
+	"header": "crwdns25666:0crwdne25666:0",
+	"headerText": "crwdns25668:0crwdne25668:0",
+	"examples": {
+		"usage": {
+			"desc": "crwdns25670:0crwdne25670:0"
+		},
+		"alignment": {
+			"header": "crwdns25672:0crwdne25672:0",
+			"desc": "crwdns25674:0crwdne25674:0"
+		},
+		"visibility": {
+			"header": "crwdns25676:0crwdne25676:0",
+			"desc": "crwdns25678:0crwdne25678:0"
+		}
+	},
+	"props": {
+		"closeDelay": "crwdns25680:0crwdne25680:0",
+		"dark": "crwdns25682:0crwdne25682:0",
+		"debounce": "crwdns25684:0crwdne25684:0",
+		"disabled": "crwdns25686:0crwdne25686:0",
+		"light": "crwdns25688:0crwdne25688:0",
+		"openDelay": "crwdns25690:0crwdne25690:0",
+		"tag": "crwdns25692:0crwdne25692:0",
+		"transition": "crwdns25694:0crwdne25694:0"
+	}
 }

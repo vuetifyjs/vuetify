@@ -30,15 +30,15 @@
         pdf: 'mdi-file-pdf',
         png: 'mdi-file-image',
         txt: 'mdi-file-document-outline',
-        xls: 'mdi-file-excel'
+        xls: 'mdi-file-excel',
       },
       tree: [],
       items: [
         {
-          name: '.git'
+          name: '.git',
         },
         {
-          name: 'node_modules'
+          name: 'node_modules',
         },
         {
           name: 'public',
@@ -47,45 +47,45 @@
               name: 'static',
               children: [{
                 name: 'logo.png',
-                file: 'png'
-              }]
+                file: 'png',
+              }],
             },
             {
               name: 'favicon.ico',
-              file: 'png'
+              file: 'png',
             },
             {
               name: 'index.html',
-              file: 'html'
-            }
-          ]
+              file: 'html',
+            },
+          ],
         },
         {
           name: '.gitignore',
-          file: 'txt'
+          file: 'txt',
         },
         {
           name: 'babel.config.js',
-          file: 'js'
+          file: 'js',
         },
         {
           name: 'package.json',
-          file: 'json'
+          file: 'json',
         },
         {
           name: 'README.md',
-          file: 'md'
+          file: 'md',
         },
         {
           name: 'vue.config.js',
-          file: 'js'
+          file: 'js',
         },
         {
           name: 'yarn.lock',
-          file: 'txt'
-        }
-      ]
-    })
+          file: 'txt',
+        },
+      ],
+    }),
   }
 </script>
 

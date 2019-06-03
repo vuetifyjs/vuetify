@@ -29,10 +29,10 @@ export default mixins(
         staticClass: `v-picker__title__btn ${staticClass}`.trim(),
         'class': {
           'v-picker__title__btn--active': active,
-          'v-picker__title__btn--readonly': readonly
+          'v-picker__title__btn--readonly': readonly,
         },
-        on: (active || readonly) ? undefined : { click }
+        on: (active || readonly) ? undefined : { click },
       }, Array.isArray(content) ? content : [content])
-    }
-  }
+    },
+  },
 })

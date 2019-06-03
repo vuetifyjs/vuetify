@@ -29,39 +29,30 @@ export default mixins(
     link: Boolean,
     loaderHeight: {
       type: [Number, String],
-      default: 4
+      default: 4,
     },
     outlined: Boolean,
-    raised: Boolean
+    raised: Boolean,
   },
 
   computed: {
     classes (): object {
       return {
         'v-card': true,
+        ...Routable.options.computed.classes.call(this),
         'v-card--flat': this.flat,
         'v-card--hover': this.hover,
-        'v-card--link': this.isLink,
+        'v-card--link': this.isClickable,
         'v-card--loading': this.loading,
         'v-card--disabled': this.loading || this.disabled,
         'v-card--outlined': this.outlined,
         'v-card--raised': this.raised,
-        ...VSheet.options.computed.classes.call(this)
+        ...VSheet.options.computed.classes.call(this),
       }
-    },
-    isLink (): boolean {
-      const hasClick = this.$listeners && (this.$listeners.click || this.$listeners['!click'])
-
-      return Boolean(
-        this.href ||
-        this.to ||
-        this.link ||
-        hasClick
-      )
     },
     styles (): object {
       const style: Dictionary<string> = {
-        ...VSheet.options.computed.styles.call(this)
+        ...VSheet.options.computed.styles.call(this),
       }
 
       if (this.img) {
@@ -69,7 +60,7 @@ export default mixins(
       }
 
       return style
-    }
+    },
   },
 
   methods: {
@@ -79,24 +70,24 @@ export default mixins(
       if (!render) return null
 
       return this.$createElement('div', {
-        staticClass: 'v-card__progress'
+        staticClass: 'v-card__progress',
       }, [render])
-    }
+    },
   },
 
   render (h): VNode {
-    const { tag, data } = this.generateRouteLink(this.classes)
+    const { tag, data } = this.generateRouteLink()
 
     data.style = this.styles
 
-    if (this.isLink) {
+    if (this.isClickable) {
       data.attrs = data.attrs || {}
       data.attrs.tabindex = 0
     }
 
     return h(tag, this.setBackgroundColor(this.color, data), [
       this.genProgress(),
-      this.$slots.default
+      this.$slots.default,
     ])
-  }
+  },
 })

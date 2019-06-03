@@ -26,12 +26,10 @@
         :prepend-icon="item.action"
         no-action
       >
-        <template #activator>
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title v-text="item.title"></v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+        <template v-slot:activator>
+          <v-list-item-content>
+            <v-list-item-title v-text="item.title"></v-list-item-title>
+          </v-list-item-content>
         </template>
 
         <v-list-item
@@ -57,8 +55,8 @@
             action: 'local_activity',
             title: 'Attractions',
             items: [
-              { title: 'List Item' }
-            ]
+              { title: 'List Item' },
+            ],
           },
           {
             action: 'restaurant',
@@ -67,46 +65,46 @@
             items: [
               { title: 'Breakfast & brunch' },
               { title: 'New American' },
-              { title: 'Sushi' }
-            ]
+              { title: 'Sushi' },
+            ],
           },
           {
             action: 'school',
             title: 'Education',
             items: [
-              { title: 'List Item' }
-            ]
+              { title: 'List Item' },
+            ],
           },
           {
             action: 'directions_run',
             title: 'Family',
             items: [
-              { title: 'List Item' }
-            ]
+              { title: 'List Item' },
+            ],
           },
           {
             action: 'healing',
             title: 'Health',
             items: [
-              { title: 'List Item' }
-            ]
+              { title: 'List Item' },
+            ],
           },
           {
             action: 'content_cut',
             title: 'Office',
             items: [
-              { title: 'List Item' }
-            ]
+              { title: 'List Item' },
+            ],
           },
           {
             action: 'local_offer',
             title: 'Promotions',
             items: [
-              { title: 'List Item' }
-            ]
-          }
-        ]
+              { title: 'List Item' },
+            ],
+          },
+        ],
       }
-    }
+    },
   }
 </script>

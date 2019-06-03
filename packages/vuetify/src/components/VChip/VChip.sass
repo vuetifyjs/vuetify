@@ -14,7 +14,6 @@
     color: map-deep-get($material-dark, 'text', 'primary')
 
 +theme(v-chip) using ($material)
-  background: map-get($material, 'chips')
   border-color: map-get($material, 'dividers')
   color: map-deep-get($material, 'text', 'primary')
 
@@ -27,18 +26,19 @@
   outline: none
   padding: 0 12px
   position: relative
+  text-decoration: none
   transition-duration: $chip-transition-duration
   transition-property: box-shadow, opacity, background
   transition-timing-function: $chip-transition-fn
   vertical-align: middle
 
-  &:after
+  &:before
     background-color: currentColor
     bottom: 0
     border-radius: inherit
     content: ''
     left: 0
-    opacity: 0
+    opacity: 0.12
     position: absolute
     pointer-events: none
     right: 0
@@ -102,6 +102,19 @@
   height: 100%
 
 // Modifiers
+.v-chip--active
+  .v-icon
+    color: inherit
+
+  &:before
+    opacity: 0.22
+
+.v-chip--link
+  &:hover,
+  &:focus
+    &:before
+      opacity: 0.32
+
 .v-chip--clickable
   cursor: pointer
 
@@ -163,6 +176,12 @@
 .v-chip.v-chip--outlined
   border-width: $icon-outlined-border-width
   border-style: solid
+
+  &:not(.v-chip--active):before
+    opacity: 0
+
+  &.v-chip--active:before
+    opacity: 0.08
 
   .v-icon
     color: inherit

@@ -16,7 +16,7 @@ import { VNode } from 'vue/types'
 export default mixins(
   Applicationable('bar', [
     'height',
-    'window'
+    'window',
   ]),
   Colorable,
   Themeable
@@ -28,7 +28,7 @@ export default mixins(
     height: [Number, String],
     lightsOut: Boolean,
     status: Boolean,
-    window: Boolean
+    window: Boolean,
   },
 
   computed: {
@@ -39,7 +39,7 @@ export default mixins(
         'v-system-bar--fixed': !this.absolute && (this.app || this.fixed),
         'v-system-bar--status': this.status,
         'v-system-bar--window': this.window,
-        ...this.themeClasses
+        ...this.themeClasses,
       }
     },
     computedHeight (): number | string {
@@ -51,9 +51,9 @@ export default mixins(
     },
     styles (): object {
       return {
-        height: convertToUnit(this.computedHeight)
+        height: convertToUnit(this.computedHeight),
       }
-    }
+    },
   },
 
   methods: {
@@ -61,16 +61,16 @@ export default mixins(
       return this.$el
         ? this.$el.clientHeight
         : this.computedHeight
-    }
+    },
   },
 
   render (h): VNode {
     const data = {
       staticClass: 'v-system-bar',
       class: this.classes,
-      style: this.styles
+      style: this.styles,
     }
 
     return h('div', this.setBackgroundColor(this.color, data), getSlot(this))
-  }
+  },
 })

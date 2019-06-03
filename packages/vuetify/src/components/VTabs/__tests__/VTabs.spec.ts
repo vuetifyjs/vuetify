@@ -8,7 +8,7 @@ import VTabsSlider from '../VTabsSlider'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 // Types
@@ -18,7 +18,7 @@ import { ExtractVue } from './../../../util/mixins'
 // components with no render fn
 const TabsItemsMock = {
   name: 'v-tabs-items',
-  render: () => {}
+  render: () => {},
 }
 
 describe('VTabs.ts', () => {
@@ -31,10 +31,10 @@ describe('VTabs.ts', () => {
         mocks: {
           $vuetify: {
             application: { left: 0, right: 0 },
-            breakpoint: {}
-          }
+            breakpoint: {},
+          },
         },
-        ...options
+        ...options,
       })
     }
   })
@@ -60,10 +60,10 @@ describe('VTabs.ts', () => {
         default: [{
           name: 'v-tabs-slider',
           render: h => h(VTabsSlider, {
-            props: { color: 'pink' }
-          })
-        }]
-      }
+            props: { color: 'pink' },
+          }),
+        }],
+      },
     })
 
     const slider = wrapper.find(VTabsSlider)
@@ -74,8 +74,8 @@ describe('VTabs.ts', () => {
     const wrapper = mountFunction({
       propsData: { value: 'foo' },
       slots: {
-        default: [VTabItem]
-      }
+        default: [VTabItem],
+      },
     })
 
     expect(wrapper.findAll(TabsItemsMock)).toHaveLength(1)
@@ -85,11 +85,11 @@ describe('VTabs.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         hideSlider: true,
-        value: 0
+        value: 0,
       },
       slots: {
-        default: [VTab]
-      }
+        default: [VTab],
+      },
     })
 
     const slider = wrapper.findAll('.v-tabs-slider')
@@ -100,18 +100,18 @@ describe('VTabs.ts', () => {
     const component = {
       render (h) {
         return h(VTabs, {
-          props: { hideSlider: true }
+          props: { hideSlider: true },
         }, [
-          h('div', { staticClass: 'test-element' }, ['foobar'])
+          h('div', { staticClass: 'test-element' }, ['foobar']),
         ])
-      }
+      },
     }
     const wrapper = mount(component, {
       mocks: {
         $vuetify: {
-          breakpoint: {}
-        }
-      }
+          breakpoint: {},
+        },
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -119,7 +119,7 @@ describe('VTabs.ts', () => {
 
   it('should update input value when changed externally', async () => {
     const wrapper = mountFunction({
-      propsData: { value: 'foo' }
+      propsData: { value: 'foo' },
     })
 
     wrapper.setProps({ value: 'bar' })
@@ -130,17 +130,17 @@ describe('VTabs.ts', () => {
   it('should reset the tabs slider', async () => {
     const wrapper = mountFunction({
       propsData: {
-        value: 0
+        value: 0,
       },
       data: () => ({
         slider: {
           left: 100,
-          width: 100
-        }
+          width: 100,
+        },
       }),
       slots: {
-        default: [VTab]
-      }
+        default: [VTab],
+      },
     })
 
     wrapper.vm.callSlider()

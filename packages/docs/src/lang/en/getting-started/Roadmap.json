@@ -15,7 +15,7 @@
       "complete": true,
       "title": "v1.0 Release",
       "caption": "February 2018",
-      "text": "The officialy v1.0 release party. After 18 months and kaels sanity, we rolled into our first **MAJOR** release.",
+      "text": "The official v1.0 release party. After 18 months and Kael's sanity, we rolled into our first **MAJOR** release.",
       "value": false
     },
     {
@@ -23,7 +23,7 @@
       "complete": true,
       "title": "v1.1 Release",
       "caption": "June 2018",
-      "text": "A complete rebuild of all form functionality. Abstracted features from components like `v-select` into new implementations, `v-autocomplete`, `v-combobox`, etc. First official support of **RTL** support.",
+      "text": "A complete rebuild of all form functionality. Abstracted features from components like `v-select` into new implementations, `v-autocomplete`, `v-combobox`, etc. First official support of **RTL**.",
       "value": false
     },
     {
@@ -55,7 +55,7 @@
       "complete": true,
       "title": "v1.4 Release",
       "caption": "December 2018",
-      "text": "Add new component `v-sparkline` and a abstracting `v-toolbar`'s functionality into multiple components. `v-calendar` has been delayed till future release.",
+      "text": "Add new component `v-sparkline` and abstract `v-toolbar`'s functionality into multiple components.",
       "value": false
     },
     {
@@ -63,7 +63,7 @@
       "complete": true,
       "title": "v1.5 Release",
       "caption": "February 2019",
-      "text": "Add new component `v-calendar`. Improve functionality of `v-sparkline` with a **bar** variant and fill. Improve `v-treeview` and prepare for LTS.",
+      "text": "Add new component `v-calendar`. Improve functionality of `v-sparkline` with new **bar** and **fill** props. Improve `v-treeview` and prepare for LTS.",
       "value": false
     },
     {
@@ -71,7 +71,7 @@
       "complete": false,
       "title": "v2.0 Release **(Arcadia)**",
       "caption": "Q2 2019",
-      "text": "A complete rebuild of the framework core. Improving the layout and theme systems, platform integration, accessibility and performance. Fully modular and automatic tree-shaking from the vuetify-loader.",
+      "text": "A complete rebuild of the framework core. Improving the layout and theme systems, platform integration, accessibility and performance. Fully modular and automatic tree-shaking from the [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader).",
       "value": true
     },
     {
@@ -79,7 +79,7 @@
       "complete": false,
       "title": "v2.1 Release **(Vanguard)**",
       "caption": "Q3 2019",
-      "text": "Vuetify components will be pre-configurable through Vuetify options as framework wide defaults. This will allow you to set global settings such as **no-ripples** or all inputs are of **outline** type and even set all cards to become **tile**s.",
+      "text": "Vuetify components will be pre-configurable through framework wide defaults. This will allow you to set global settings such as **no-ripples** or all inputs are of **outline** type and even set all cards to become **tile**s.",
       "value": false
     },
     {

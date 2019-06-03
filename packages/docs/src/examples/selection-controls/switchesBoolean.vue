@@ -10,8 +10,8 @@
     data () {
       return {
         switch1: true,
-        switch2: false
+        switch2: false,
       }
-    }
+    },
   }
 </script>

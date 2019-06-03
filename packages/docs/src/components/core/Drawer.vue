@@ -10,17 +10,11 @@
       pb-0
     >
       <div class="text-xs-center">
-        <h4 class="font-weight-medium grey--text">Premiere sponsor</h4>
-        <supporters-patron
-          v-if="supporters.special && supporters.special.length"
-          :value="supporters.special[0]"
-          :href="supporters.special[0].href"
-          class="mb-3"
-          large
-        />
-        <!-- <span class="d-block mb-3 caption grey--text text--lighten-1">
+        <h4 class="body-2 font-weight-bold grey--text">Premiere sponsor</h4>
+
+        <span class="d-block mb-3 caption grey--text text--lighten-1">
           One spot available
-        </span> -->
+        </span>
 
         <supporters-sponsor-btn
           class="mb-4"
@@ -102,7 +96,7 @@
   // Utilities
   import {
     mapMutations,
-    mapState
+    mapState,
   } from 'vuex'
   import kebabCase from 'lodash/kebabCase'
   import drawerItems from '@/data/drawerItems.json'
@@ -113,7 +107,7 @@
       docSearch: {},
       isSearching: false,
       drawerItems,
-      search: ''
+      search: '',
     }),
 
     computed: {
@@ -121,7 +115,7 @@
       children () {
         return this.item.children.map(item => ({
           ...item,
-          to: `${this.item.group}/${item.to}`
+          to: `${this.item.group}/${item.to}`,
         }))
       },
       group () {
@@ -135,11 +129,11 @@
         },
         set (val) {
           this.setDrawer(val)
-        }
+        },
       },
       items () {
         return this.drawerItems.map(this.addLanguagePrefix)
-      }
+      },
     },
 
     watch: {
@@ -168,7 +162,7 @@
           this.docSearch.autocomplete.autocomplete.close()
           this.docSearch.autocomplete.autocomplete.setVal('')
         }
-      }
+      },
     },
 
     mounted () {
@@ -193,7 +187,7 @@
         const { children, subtext, ...props } = item
         const newItem = {
           ...props,
-          text: `Vuetify.AppDrawer.${item.text}`
+          text: `Vuetify.AppDrawer.${item.text}`,
         }
 
         if (children) {
@@ -214,7 +208,7 @@
           autocompleteOptions: {
             appendTo: '#app',
             hint: false,
-            debug: true
+            debug: true,
           },
           indexName: 'vuetifyjs',
           inputSelector: '#search',
@@ -224,10 +218,10 @@
             vm.search = ''
             vm.isSearching = false
             vm.$router.push(loc.pop())
-          }
+          },
         })
-      }
-    }
+      },
+    },
   }
 </script>
 

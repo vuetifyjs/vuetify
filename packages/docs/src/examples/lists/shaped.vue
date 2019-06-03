@@ -7,7 +7,7 @@
     <v-navigation-drawer>
       <v-list shaped>
         <v-subheader>REPORTS</v-subheader>
-        <v-list-item-group v-model="item">
+        <v-list-item-group v-model="item" color="primary">
           <v-list-item
             v-for="(item, i) in items"
             :key="i"
@@ -34,8 +34,8 @@
         { text: 'Audience', icon: 'mdi-account' },
         { text: 'Acquisition', icon: 'mdi-axis-z-arrow' },
         { text: 'Behavior', icon: 'mdi-desktop-classic' },
-        { text: 'Conversions', icon: 'mdi-flag' }
-      ]
-    })
+        { text: 'Conversions', icon: 'mdi-flag' },
+      ],
+    }),
   }
 </script>

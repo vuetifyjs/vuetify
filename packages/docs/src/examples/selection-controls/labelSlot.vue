@@ -52,8 +52,8 @@
       return {
         checkbox: false,
         radios: 'Duckduckgo',
-        switchMe: false
+        switchMe: false,
       }
-    }
+    },
   }
 </script>

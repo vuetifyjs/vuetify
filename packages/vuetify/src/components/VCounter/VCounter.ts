@@ -17,9 +17,9 @@ export default mixins(Themeable).extend({
   props: {
     value: {
       type: [Number, String],
-      default: ''
+      default: '',
     },
-    max: [Number, String]
+    max: [Number, String],
   },
 
   render (h, ctx): VNode {
@@ -33,8 +33,8 @@ export default mixins(Themeable).extend({
       staticClass: 'v-counter',
       class: {
         'error--text': isGreater,
-        ...functionalThemeClasses(ctx)
-      }
+        ...functionalThemeClasses(ctx),
+      },
     }, content)
-  }
+  },
 })

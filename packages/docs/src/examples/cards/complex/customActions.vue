@@ -46,7 +46,7 @@
 <script>
   export default {
     data: () => ({
-      show: false
-    })
+      show: false,
+    }),
   }
 </script>

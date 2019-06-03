@@ -44,24 +44,24 @@
         {
           href: 'https://community.vuetifyjs.com/',
           icon: 'mdi-discord',
-          text: vm.$t('Vuetify.AppToolbar.community')
+          text: vm.$t('Vuetify.AppToolbar.community'),
         },
         {
           href: 'https://issues.vuetifyjs.com',
           icon: 'mdi-bug',
-          text: vm.$t('Vuetify.AppToolbar.bug')
+          text: vm.$t('Vuetify.AppToolbar.bug'),
         },
         {
           href: 'https://github.com/vuetifyjs/vuetify/issues',
           icon: 'mdi-github-face',
-          text: vm.$t('Vuetify.AppToolbar.issues')
+          text: vm.$t('Vuetify.AppToolbar.issues'),
         },
         {
           href: 'https://stackoverflow.com/search?q=vuetify',
           icon: 'mdi-stack-overflow',
-          text: vm.$t('Vuetify.AppToolbar.stack')
-        }
-      ]
-    })
+          text: vm.$t('Vuetify.AppToolbar.stack'),
+        },
+      ],
+    }),
   }
 </script>

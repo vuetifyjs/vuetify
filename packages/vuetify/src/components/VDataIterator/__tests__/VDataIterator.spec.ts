@@ -3,7 +3,7 @@ import { Lang } from '../../../services/lang'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 import Vue from 'vue'
 
@@ -14,9 +14,9 @@ Vue.prototype.$vuetify = {
       next: 'mdi-chevron-right',
       dropdown: 'mdi-menu-down',
       first: 'mdi-page-first',
-      last: 'mdi-page-last'
-    }
-  }
+      last: 'mdi-page-last',
+    },
+  },
 }
 
 describe('VDataIterator.ts', () => {
@@ -31,11 +31,12 @@ describe('VDataIterator.ts', () => {
           $vuetify: {
             lang: new Lang(),
             theme: {
-              dark: false
-            }
-          }
+              dark: false,
+            },
+          },
         },
-        ...options
+        sync: false,
+        ...options,
       })
     }
   })
@@ -53,190 +54,265 @@ describe('VDataIterator.ts', () => {
           'foo',
           'bar',
           'baz',
-          'qux'
-        ]
+          'qux',
+        ],
       },
       scopedSlots: {
-        default: '<p slot-scope="item">{{ item }}</p>'
-      }
+        item (props) {
+          return this.$createElement('div', [props.item])
+        },
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render valid no-data, loading and no-results states', () => {
+  it('should render valid no-data, loading and no-results states', async () => {
     const wrapper = mountFunction({
       propsData: {
         items: [],
-        serverItemsLength: 0
-      }
+        serverItemsLength: 0,
+      },
     })
 
+    await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({
       loading: true,
-      items: [ 'foo' ]
+      items: [],
     })
+    await wrapper.vm.$nextTick()
+
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({
       loading: false,
-      search: true
+      items: ['foo'],
+      search: 'something',
     })
+    await wrapper.vm.$nextTick()
+
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should create valid item slot scope', () => {
+  it('should emit when selection happens', async () => {
+    const input = jest.fn()
     const wrapper = mountFunction({
       propsData: {
-        items: [ 'foo', 'bar' ]
+        itemKey: 'id',
+        items: [
+          { id: 1, text: 'foo' },
+          { id: 2, text: 'bar' },
+        ],
+      },
+      listeners: {
+        input,
       },
       scopedSlots: {
-        item: '<div slot-scope="item">{{ JSON.stringify(item) }}</div>'
-      }
+        item (props) {
+          return this.$createElement('div', {
+            attrs: {
+              id: props.item.text,
+            },
+            on: {
+              click: () => props.select.on.input(true),
+            },
+          }, [props.item.text])
+        },
+      },
     })
 
-    expect(wrapper.vm.createItemProps('bar')).toMatchSnapshot()
+    const foo = wrapper.find('#foo')
+    foo.element.click()
 
-    wrapper.vm.createItemProps('foo').expand.on.input(true)
-    expect(wrapper.vm.isExpanded('foo')).toBeTruthy()
-    wrapper.vm.createItemProps('foo').expand.on.input(false)
-    expect(wrapper.vm.isExpanded('foo')).toBeFalsy()
+    await wrapper.vm.$nextTick()
 
-    wrapper.vm.createItemProps('bar').select.on.input(true)
-    expect(wrapper.vm.isSelected('bar')).toBeTruthy()
-    wrapper.vm.createItemProps('bar').select.on.input(false)
-    expect(wrapper.vm.isSelected('bar')).toBeFalsy()
-
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(input).toHaveBeenCalledWith([{ id: 1, text: 'foo' }])
   })
 
-  it('should select all', () => {
+  it('should emit when expansion happens', async () => {
+    const input = jest.fn()
     const wrapper = mountFunction({
       propsData: {
-        items: [ { id: 'foo' }, { id: 'bar' } ]
-      }
+        itemKey: 'id',
+        items: [
+          { id: 1, text: 'foo' },
+          { id: 2, text: 'bar' },
+        ],
+      },
+      listeners: {
+        'update:expanded': input,
+      },
+      scopedSlots: {
+        item (props) {
+          return this.$createElement('div', {
+            attrs: {
+              id: props.item.text,
+            },
+            on: {
+              click: () => props.expand.on.input(true),
+            },
+          }, [props.item.text])
+        },
+      },
     })
 
-    expect(wrapper.vm.isSelected({ id: 'foo' })).toBeFalsy()
-    expect(wrapper.vm.isSelected({ id: 'bar' })).toBeFalsy()
+    const foo = wrapper.find('#bar')
+    foo.element.click()
 
-    wrapper.vm.toggleSelectAll(true)
-    expect(wrapper.vm.isSelected({ id: 'foo' })).toBeTruthy()
-    expect(wrapper.vm.isSelected({ id: 'bar' })).toBeTruthy()
+    await wrapper.vm.$nextTick()
 
-    wrapper.vm.toggleSelectAll(false)
-    expect(wrapper.vm.isSelected({ id: 'foo' })).toBeFalsy()
-    expect(wrapper.vm.isSelected({ id: 'bar' })).toBeFalsy()
+    expect(input).toHaveBeenCalledWith([{ id: 2, text: 'bar' }])
   })
 
-  it('should update expansion', () => {
+  it('should select all', async () => {
+    const input = jest.fn()
+    const items = [
+      { id: 'foo' },
+      { id: 'bar' },
+    ]
+
+    const wrapper = mountFunction({
+      propsData: {
+        items,
+      },
+      listeners: {
+        input,
+      },
+      scopedSlots: {
+        header (props) {
+          return this.$createElement('div', {
+            attrs: {
+              id: 'header',
+            },
+            on: {
+              click: () => props.toggleSelectAll(true),
+            },
+          })
+        },
+      },
+    })
+
+    const header = wrapper.find('#header')
+    header.element.click()
+
+    await wrapper.vm.$nextTick()
+
+    expect(input).toHaveBeenCalledWith(items)
+  })
+
+  it('should update expansion from the outside', async () => {
     const mock = jest.fn()
     const wrapper = mountFunction({
       propsData: {
-        items: [ { id: 'foo' }, { id: 'bar' } ]
-      }
+        items: [
+          { id: 'foo' },
+          { id: 'bar' },
+        ],
+      },
+      listeners: {
+        'update:expanded': mock,
+      },
     })
-    wrapper.vm.$watch('expansion', mock)
 
     wrapper.setProps({
-      expanded: [ { id: 'foo' } ]
+      expanded: [{ id: 'foo' }],
     })
-    expect(mock).toHaveBeenLastCalledWith({ foo: true }, {})
+    await wrapper.vm.$nextTick()
+    expect(mock).toHaveBeenLastCalledWith([{ id: 'foo' }])
 
     wrapper.setProps({
-      expanded: [ { id: 'bar' } ]
+      expanded: [{ id: 'bar' }],
     })
-    expect(mock).toHaveBeenLastCalledWith({ bar: true }, { foo: true })
+    await wrapper.vm.$nextTick()
+    expect(mock).toHaveBeenLastCalledWith([{ id: 'bar' }])
   })
 
-  it('should update selection', () => {
+  it('should update selection from the outside', async () => {
     const mock = jest.fn()
     const wrapper = mountFunction({
       propsData: {
-        items: [ { id: 'foo' }, { id: 'bar' } ]
-      }
+        items: [
+          { id: 'foo' },
+          { id: 'bar' },
+        ],
+      },
+      listeners: {
+        input: mock,
+      },
     })
-    wrapper.vm.$watch('selection', mock)
 
     wrapper.setProps({
-      value: [ { id: 'foo' } ]
+      value: [{ id: 'foo' }],
     })
-    expect(mock).toHaveBeenLastCalledWith({ foo: true }, {})
+    await wrapper.vm.$nextTick()
+    expect(mock).toHaveBeenLastCalledWith([{ id: 'foo' }])
 
     wrapper.setProps({
-      value: [ { id: 'bar' } ]
+      value: [{ id: 'bar' }],
     })
-    expect(mock).toHaveBeenLastCalledWith({ bar: true }, { foo: true })
+    await wrapper.vm.$nextTick()
+    expect(mock).toHaveBeenLastCalledWith([{ id: 'bar' }])
   })
 
-  it('should check if all items are selected', () => {
+  it('should check if all items are selected', async () => {
+    const render = jest.fn()
+    const items = [
+      { id: 'foo' }, { id: 'bar' },
+    ]
+
     const wrapper = mountFunction({
       propsData: {
-        items: [ { id: 'foo' }, { id: 'bar' } ]
-      }
+        items,
+      },
+      scopedSlots: {
+        header: render,
+      },
     })
 
     wrapper.setProps({
-      value: [ { id: 'foo' } ]
+      value: items,
     })
-    expect(wrapper.vm.everyItem).toBeFalsy()
+    await wrapper.vm.$nextTick()
 
-    wrapper.setProps({
-      value: [ { id: 'bar' } ]
-    })
-    expect(wrapper.vm.everyItem).toBeFalsy()
-
-    wrapper.setProps({
-      value: [ { id: 'foo' }, { id: 'bar' } ]
-    })
-    expect(wrapper.vm.everyItem).toBeTruthy()
-
-    wrapper.setProps({
-      items: []
-    })
-    expect(wrapper.vm.everyItem).toBeFalsy()
+    expect(render).toHaveBeenLastCalledWith(expect.objectContaining({
+      everyItem: true,
+      someItems: true,
+    }))
   })
 
-  it('should check if some items are selected', () => {
+  it('should check if some items are selected', async () => {
+    const render = jest.fn()
+    const items = [
+      { id: 'foo' }, { id: 'bar' },
+    ]
+
     const wrapper = mountFunction({
       propsData: {
-        items: [ { id: 'foo' }, { id: 'bar' } ]
-      }
+        items,
+      },
+      scopedSlots: {
+        header: render,
+      },
     })
 
     wrapper.setProps({
-      value: [ { id: 'foo' } ]
+      value: items.slice(1),
     })
-    expect(wrapper.vm.someItems).toBeTruthy()
+    await wrapper.vm.$nextTick()
 
-    wrapper.setProps({
-      value: [ { id: 'bar' } ]
-    })
-    expect(wrapper.vm.someItems).toBeTruthy()
-
-    wrapper.setProps({
-      value: [ { id: 'foo' }, { id: 'bar' } ]
-    })
-    expect(wrapper.vm.someItems).toBeTruthy()
-
-    wrapper.setProps({
-      value: []
-    })
-    expect(wrapper.vm.someItems).toBeFalsy()
-
-    wrapper.setProps({
-      items: []
-    })
-    expect(wrapper.vm.someItems).toBeFalsy()
+    expect(render).toHaveBeenLastCalledWith(expect.objectContaining({
+      everyItem: false,
+      someItems: true,
+    }))
   })
 
   it('should hide footer', () => {
     const wrapper = mountFunction({
       propsData: {
-        hideDefaultFooter: true
-      }
+        hideDefaultFooter: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()

@@ -79,9 +79,9 @@
       return {
         red: 64,
         green: 128,
-        blue: 0
+        blue: 0,
       }
-    }
+    },
   }
 </script>
 

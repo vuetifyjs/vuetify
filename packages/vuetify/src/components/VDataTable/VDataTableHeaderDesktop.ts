@@ -2,7 +2,7 @@
 import { VNode } from 'vue'
 import mixins from '../../util/mixins'
 import header, { TableHeader } from './mixins/header'
-import { getTextAlignment } from '../../util/helpers'
+import { getTextAlignment, wrapInArray } from '../../util/helpers'
 
 export default mixins(header).extend({
   name: 'v-data-table-header-desktop',
@@ -11,10 +11,11 @@ export default mixins(header).extend({
     genGroupByToggle (header: TableHeader) {
       return this.$createElement('span', {
         on: {
-          click: () => this.$emit('group', header.value)
-        }
+          click: () => this.$emit('group', header.value),
+        },
       }, ['group'])
     },
+    // eslint-disable-next-line max-statements
     genHeader (header: TableHeader) {
       const listeners: any = {}
       const children = []
@@ -22,14 +23,16 @@ export default mixins(header).extend({
         role: 'columnheader',
         scope: 'col',
         'aria-label': header.text || '',
-        'aria-sort': 'none'
+        'aria-sort': 'none',
+        width: header.width,
       }
 
-      let classes = {
-        [getTextAlignment(header.align, this.$vuetify.rtl)]: true
-      }
+      const classes = [
+        getTextAlignment(header.align, this.$vuetify.rtl),
+        ...wrapInArray(header.class),
+      ]
 
-      if (header.value === 'data-table-select') {
+      if (header.value === 'data-table-select' && !this.singleSelect) {
         children.push(this.genSelectAll())
       } else {
         children.push(this.$scopedSlots[header.value]
@@ -44,15 +47,12 @@ export default mixins(header).extend({
           const beingSorted = sortIndex >= 0
           const isDesc = this.options.sortDesc[sortIndex]
 
-          classes = {
-            ...classes,
-            'sortable': true,
-            'active': beingSorted,
-            'asc': beingSorted && !isDesc,
-            'desc': beingSorted && isDesc
-          }
+          classes.push('sortable')
 
           if (beingSorted) {
+            classes.push('active')
+            classes.push(isDesc ? 'desc' : 'asc')
+
             attrs['aria-sort'] = isDesc ? 'descending' : 'ascending'
             attrs['aria-label'] += isDesc
               ? this.$vuetify.lang.t('$vuetify.dataTable.ariaLabel.sortDescending')
@@ -77,16 +77,16 @@ export default mixins(header).extend({
       return this.$createElement('th', {
         attrs,
         class: classes,
-        on: listeners
+        on: listeners,
       }, children)
-    }
+    },
   },
 
   render (): VNode {
     return this.$createElement('thead', {
-      staticClass: 'v-data-table-header'
+      staticClass: 'v-data-table-header',
     }, [
-      this.$createElement('tr', this.headers.map(header => this.genHeader(header)))
+      this.$createElement('tr', this.headers.map(header => this.genHeader(header))),
     ])
-  }
+  },
 })

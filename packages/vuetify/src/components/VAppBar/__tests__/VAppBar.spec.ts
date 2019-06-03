@@ -7,7 +7,7 @@ import VAppBar from '../VAppBar'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../util/mixins'
 import { scrollWindow } from '../../../../test'
@@ -24,12 +24,12 @@ describe('AppBar.ts', () => {
             application: {
               top: 0,
               register: () => {},
-              unregister: () => {}
+              unregister: () => {},
             },
-            breakpoint: {}
-          }
+            breakpoint: {},
+          },
         },
-        ...options
+        ...options,
       })
     }
   })
@@ -57,7 +57,7 @@ describe('AppBar.ts', () => {
   it('should scroll off screen', async () => {
     const wrapper = mountFunction({
       attachToDocument: true,
-      propsData: { hideOnScroll: true, scrollThreshold: 300 }
+      propsData: { hideOnScroll: true, scrollThreshold: 300 },
     })
 
     expect(wrapper.vm.isActive).toBe(true)
@@ -96,8 +96,8 @@ describe('AppBar.ts', () => {
   it('should set active based on value', async () => {
     const wrapper = mountFunction({
       propsData: {
-        hideOnScroll: true
-      }
+        hideOnScroll: true,
+      },
     })
 
     expect(wrapper.vm.isActive).toBe(true)
@@ -109,8 +109,8 @@ describe('AppBar.ts', () => {
   it('should set margin top', () => {
     const wrapper = mountFunction({
       propsData: {
-        app: true
-      }
+        app: true,
+      },
     })
 
     Vue.set(wrapper.vm.$vuetify.application, 'bar', 24)
@@ -120,8 +120,8 @@ describe('AppBar.ts', () => {
   it('should set isActive false when created and vertical-scroll', () => {
     const wrapper = mountFunction({
       propsData: {
-        invertedScroll: true
-      }
+        invertedScroll: true,
+      },
     })
 
     expect(wrapper.vm.isActive).toBe(false)
@@ -130,8 +130,8 @@ describe('AppBar.ts', () => {
   it('should hide shadow when using elevate-on-scroll', () => {
     const wrapper = mountFunction({
       propsData: {
-        elevateOnScroll: true
-      }
+        elevateOnScroll: true,
+      },
     })
 
     expect(wrapper.vm.hideShadow).toBe(true)
@@ -144,8 +144,8 @@ describe('AppBar.ts', () => {
   it('should collapse-on-scroll', () => {
     const wrapper = mountFunction({
       propsData: {
-        collapseOnScroll: true
-      }
+        collapseOnScroll: true,
+      },
     })
 
     wrapper.setData({ currentScroll: 0 })
@@ -158,14 +158,14 @@ describe('AppBar.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         shrinkOnScroll: false,
-        prominent: false
-      }
+        prominent: false,
+      },
     })
 
     expect(wrapper.vm.computedFontSize).toBeUndefined()
     wrapper.setProps({
       shrinkOnScroll: true,
-      prominent: true
+      prominent: true,
     })
     expect(wrapper.vm.computedFontSize).toBeDefined()
     expect(wrapper.vm.computedFontSize).toBe(1.5)
@@ -174,8 +174,8 @@ describe('AppBar.ts', () => {
   it('should render with background', () => {
     const wrapper = mountFunction({
       propsData: {
-        src: '/test.jpg'
-      }
+        src: '/test.jpg',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -185,8 +185,8 @@ describe('AppBar.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         src: '/test.jpg',
-        fadeImgOnScroll: true
-      }
+        fadeImgOnScroll: true,
+      },
     })
 
     expect(wrapper.vm.computedOpacity).toBe(1)
@@ -206,8 +206,8 @@ describe('AppBar.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         hideOnScroll: true,
-        extended: true
-      }
+        extended: true,
+      },
     })
 
     expect(wrapper.vm.computedTransform).toBe(0)
@@ -230,8 +230,8 @@ describe('AppBar.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         hideOnScroll: true,
-        elevateOnScroll: true
-      }
+        elevateOnScroll: true,
+      },
     })
 
     expect(wrapper.vm.computedTransform).toBe(0)

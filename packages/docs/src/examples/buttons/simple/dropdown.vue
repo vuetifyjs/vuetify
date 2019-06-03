@@ -46,15 +46,15 @@
       dropdown_icon: [
         { text: 'list', callback: () => console.log('list') },
         { text: 'favorite', callback: () => console.log('favorite') },
-        { text: 'delete', callback: () => console.log('delete') }
+        { text: 'delete', callback: () => console.log('delete') },
       ],
       dropdown_edit: [
         { text: '100%' },
         { text: '75%' },
         { text: '50%' },
         { text: '25%' },
-        { text: '0%' }
-      ]
-    })
+        { text: '0%' },
+      ],
+    }),
   }
 </script>

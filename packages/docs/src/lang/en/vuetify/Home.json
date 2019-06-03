@@ -1,20 +1,20 @@
 {
   "becomeSponsor": "Become a Sponsor",
   "callout": "Material Design<br>Component Framework",
-  "features": [
-    {
+  "features": {
+    "community": {
       "text": "When you run into a roadblock, you need assistance right away. Vuetify offers support in our massive community on Discord.",
       "title": "Vibrant Community"
     },
-    {
+    "components": {
       "text": "Be prepared for an armada of specialized components at your disposal. With over 80 in total, there is a solution to any situation.",
       "title": "Semantic Material Components"
     },
-    {
+    "scaffolding": {
       "text": "Vuetify supports the future of Vue tooling through its vue-cli-3 plugin. With one command you are ready to start building your next great idea.",
       "title": "Ready-Made Project Scaffolding"
     }
-  ],
+  },
   "getHelp": "Get Help",
   "getStarted": "Get Started",
   "github": "Github",

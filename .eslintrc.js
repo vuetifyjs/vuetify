@@ -28,6 +28,7 @@ module.exports = {
     }],
     'max-statements': ['error', 24],
     'no-console': 'off',
+    'comma-dangle': ['error', 'always-multiline'],
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-return-assign': 'off',

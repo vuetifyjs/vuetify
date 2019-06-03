@@ -42,6 +42,6 @@ export function install (Vue: VueConstructor, args: VuetifyUseOptions = {}) {
       } else {
         this.$vuetify = (options.parent && options.parent.$vuetify) || this
       }
-    }
+    },
   })
 }

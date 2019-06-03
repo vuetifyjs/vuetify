@@ -21,8 +21,8 @@
     props: {
       link: {
         type: String,
-        default: ''
-      }
-    }
+        default: '',
+      },
+    },
   }
 </script>

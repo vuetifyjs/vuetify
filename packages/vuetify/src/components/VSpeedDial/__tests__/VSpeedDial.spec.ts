@@ -5,7 +5,7 @@ import VBtn from '../../VBtn/VBtn'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 import { compileToFunctions } from 'vue-template-compiler'
 
@@ -16,7 +16,7 @@ describe('VSpeedDial.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VSpeedDial, {
-        ...options
+        ...options,
       })
     }
   })
@@ -30,9 +30,9 @@ describe('VSpeedDial.ts', () => {
   it('should render active component and match snapshot', () => {
     const wrapper = mountFunction({
       slots: {
-        default: [compileToFunctions('<span>test</span>')]
+        default: [compileToFunctions('<span>test</span>')],
       },
-      data: () => ({ isActive: true })
+      data: () => ({ isActive: true }),
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -41,8 +41,8 @@ describe('VSpeedDial.ts', () => {
   it('should render component with custom direction and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        direction: 'right'
-      }
+        direction: 'right',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -59,8 +59,8 @@ describe('VSpeedDial.ts', () => {
   it('should activate on hover', () => {
     const wrapper = mountFunction({
       propsData: {
-        openOnHover: true
-      }
+        openOnHover: true,
+      },
     })
 
     expect(wrapper.vm.isActive).toBe(false)
@@ -73,9 +73,9 @@ describe('VSpeedDial.ts', () => {
   it('should wrap v-btn component with div tag', () => {
     const wrapper = mount(VSpeedDial, {
       slots: {
-        default: [VBtn]
+        default: [VBtn],
       },
-      data: () => ({ isActive: true })
+      data: () => ({ isActive: true }),
     })
 
     expect(wrapper.findAll('.v-speed-dial__list div button')).toHaveLength(1)

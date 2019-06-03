@@ -107,14 +107,14 @@
     data: () => ({
       admins: [
         ['Management', 'people_outline'],
-        ['Settings', 'settings']
+        ['Settings', 'settings'],
       ],
       cruds: [
         ['Create', 'add'],
         ['Read', 'insert_drive_file'],
         ['Update', 'update'],
-        ['Delete', 'delete']
-      ]
-    })
+        ['Delete', 'delete'],
+      ],
+    }),
   }
 </script>

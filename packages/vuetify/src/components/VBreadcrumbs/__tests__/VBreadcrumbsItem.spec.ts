@@ -4,7 +4,7 @@ import VBreadcrumbsItem from '../VBreadcrumbsItem'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VBreadcrumbsItem.ts', () => {
@@ -14,7 +14,7 @@ describe('VBreadcrumbsItem.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VBreadcrumbsItem, {
-        ...options
+        ...options,
       })
     }
   })

@@ -57,7 +57,7 @@
   export default {
     name: 'Parallaxes',
 
-    data: () => ({})
+    data: () => ({}),
   }
 </script>
 

@@ -8,7 +8,7 @@ export default VWindow.extend({
   props: {
     mandatory: {
       type: Boolean,
-      default: false
-    }
-  }
+      default: false,
+    },
+  },
 })

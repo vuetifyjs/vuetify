@@ -2,7 +2,7 @@ import VDatePickerTitle from '../VDatePickerTitle'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VDatePickerTitle.ts', () => {
@@ -18,8 +18,8 @@ describe('VDatePickerTitle.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         year: '1234',
-        date: '2005-11-01'
-      }
+        date: '2005-11-01',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -30,8 +30,8 @@ describe('VDatePickerTitle.ts', () => {
       propsData: {
         year: '1234',
         date: '2005-11-01',
-        disabled: true
-      }
+        disabled: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -42,8 +42,8 @@ describe('VDatePickerTitle.ts', () => {
       propsData: {
         year: '1234',
         date: '2005-11-01',
-        readonly: true
-      }
+        readonly: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -54,8 +54,8 @@ describe('VDatePickerTitle.ts', () => {
       propsData: {
         year: '1234',
         date: '2005-11-01',
-        selectingYear: true
-      }
+        selectingYear: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -66,8 +66,8 @@ describe('VDatePickerTitle.ts', () => {
       propsData: {
         year: '1234',
         yearIcon: 'year',
-        date: '2005-11-01'
-      }
+        date: '2005-11-01',
+      },
     })
 
     expect(wrapper.findAll('.v-date-picker-title__year').at(0).html()).toMatchSnapshot()
@@ -78,8 +78,8 @@ describe('VDatePickerTitle.ts', () => {
       propsData: {
         year: '1234',
         yearIcon: 'year',
-        date: '2005-11-01'
-      }
+        date: '2005-11-01',
+      },
     })
 
     const input = jest.fn(value => wrapper.setProps({ selectingYear: value }))
@@ -101,22 +101,22 @@ describe('VDatePickerTitle.ts', () => {
       propsData: {
         year: '2018',
         date: 'Tue, Mar 3',
-        value: '2018-03-03'
-      }
+        value: '2018-03-03',
+      },
     })
 
     expect(wrapper.vm.isReversing).toBe(false)
 
     wrapper.setProps({
       date: 'Wed, Mar 4',
-      value: '2018-03-04'
+      value: '2018-03-04',
     })
 
     expect(wrapper.vm.isReversing).toBe(false)
 
     wrapper.setProps({
       date: 'Wed, Mar 3',
-      value: '2018-03-03'
+      value: '2018-03-03',
     })
 
     expect(wrapper.vm.isReversing).toBe(true)

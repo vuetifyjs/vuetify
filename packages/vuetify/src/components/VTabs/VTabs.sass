@@ -50,6 +50,7 @@
     content: ''
     left: 0
     opacity: 0
+    pointer-events: none
     position: absolute
     right: 0
     top: 0
@@ -60,6 +61,9 @@
 
   &:focus:before
     opacity: $tabs-item-focus-opacity
+
+  &:not(.v-tab-disabled)
+    cursor: pointer
 
 .v-tabs-slider
   background-color: currentColor
@@ -86,6 +90,19 @@
 
   .v-tabs-slider-wrapper + *
     margin-left: auto
+
+  +rtl()
+    .v-tabs-bar__content > *:last-child
+      margin-right: 0
+      margin-left: auto
+
+    .v-tabs-bar__content > *:first-child:not(.v-tabs-slider-wrapper)
+      margin-left: 0
+      margin-right: auto
+
+    .v-tabs-slider-wrapper + *
+      margin-left: 0
+      margin-right: auto
 
 .v-tabs--fixed-tabs
   .v-tab

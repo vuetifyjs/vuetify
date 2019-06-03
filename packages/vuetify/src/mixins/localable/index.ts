@@ -4,12 +4,12 @@ export default Vue.extend({
   name: 'localable',
 
   props: {
-    locale: String
+    locale: String,
   },
 
   computed: {
     currentLocale (): string {
       return this.locale || this.$vuetify.lang.current
-    }
-  }
+    },
+  },
 })

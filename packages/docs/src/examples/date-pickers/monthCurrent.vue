@@ -14,8 +14,8 @@
     data () {
       return {
         month1: new Date().toISOString().substr(0, 7),
-        month2: '2013-09'
+        month2: '2013-09',
       }
-    }
+    },
   }
 </script>

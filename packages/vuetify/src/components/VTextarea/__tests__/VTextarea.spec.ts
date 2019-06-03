@@ -3,7 +3,7 @@ import VTextarea from '../VTextarea'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VTextarea.ts', () => {
@@ -20,8 +20,8 @@ describe('VTextarea.ts', () => {
       attachToDocument: true,
       propsData: {
         value: '',
-        autoGrow: true
-      }
+        autoGrow: true,
+      },
     })
     const input = jest.fn(value => wrapper.setProps({ value }))
     wrapper.vm.$on('input', input)
@@ -65,9 +65,9 @@ describe('VTextarea.ts', () => {
     mountFunction({
       attachToDocument: true,
       propsData: {
-        autoGrow: true
+        autoGrow: true,
       },
-      methods: { calculateInputHeight }
+      methods: { calculateInputHeight },
     })
 
     await new Promise(resolve => setTimeout(resolve, 0))
@@ -80,7 +80,7 @@ describe('VTextarea.ts', () => {
     const stopPropagation = jest.fn()
     const onKeyDown = {
       keyCode: keyCodes.enter,
-      stopPropagation
+      stopPropagation,
     }
     wrapper.vm.onKeyDown(onKeyDown)
 
@@ -96,7 +96,7 @@ describe('VTextarea.ts', () => {
   it('should render no-resize the same if already auto-grow', () => {
     const wrappers = [
       { autoGrow: true, outlined: false },
-      { autoGrow: true, outlined: true }
+      { autoGrow: true, outlined: true },
     ].map(propsData => mountFunction({ propsData }))
 
     wrappers.forEach(async wrapper => {

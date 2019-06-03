@@ -5,7 +5,7 @@ import VRadioGroup from '../VRadioGroup'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VRadioGroup.ts', () => {

@@ -8,13 +8,13 @@ import Activatable from '../'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
 
 describe('activatable.ts', () => {
   const Mock = Activatable.extend({
-    render: h => h('div')
+    render: h => h('div'),
   })
   type Instance = InstanceType<typeof Mock>
   let vm: InstanceType<typeof Vue>
@@ -33,20 +33,42 @@ describe('activatable.ts', () => {
   it('should render activator slot with listeners', () => {
     const wrapper = mountFunction({
       scopedSlots: {
-        activator: props => vm.$createElement('button', props)
+        activator: props => vm.$createElement('button', props),
       },
       render (h) {
         return h('div', [ this.genActivator() ])
-      }
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
     expect(wrapper.vm.isActive).toBeFalsy()
 
-    const btn = wrapper.find('button')
-    btn.trigger('click')
+    wrapper.find('button').trigger('click')
 
     expect(wrapper.vm.isActive).toBeTruthy()
+  })
+
+  it('should pass value to the activator slot', () => {
+    const wrapper = mountFunction({
+      scopedSlots: {
+        activator: scope => vm.$createElement('button', {
+          on: {
+            click () {
+              scope.value = !scope.value
+            },
+          },
+        }, [String(scope.value)]),
+      },
+      render (h) {
+        return h('div', [ this.genActivator() ])
+      },
+    })
+
+    expect(wrapper.find('button').text()).toBe('false')
+
+    wrapper.find('button').trigger('click')
+
+    expect(wrapper.find('button').text()).toBe('true')
   })
 
   it('should render activator slot with hover', async () => {
@@ -54,17 +76,17 @@ describe('activatable.ts', () => {
 
     const wrapper = mountFunction({
       propsData: {
-        openOnHover: true
+        openOnHover: true,
       },
       scopedSlots: {
-        activator: props => vm.$createElement('button', props)
+        activator: props => vm.$createElement('button', props),
       },
       render (h) {
         return h('div', [ this.genActivator() ])
       },
       methods: {
-        runDelay
-      }
+        runDelay,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -81,11 +103,11 @@ describe('activatable.ts', () => {
   it('should warn when activator hasn\'t got a scope', () => {
     mountFunction({
       slots: {
-        activator: '<div></div>'
+        activator: '<div></div>',
       },
       scopedSlots: {
-        activator: '<div></div>'
-      }
+        activator: '<div></div>',
+      },
     })
 
     expect(`The activator slot must be bound, try '<template v-slot:activator="{ on }"><v-btn v-on="on">'`).toHaveBeenWarned()

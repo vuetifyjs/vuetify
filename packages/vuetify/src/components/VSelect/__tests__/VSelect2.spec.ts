@@ -5,7 +5,7 @@ import VSelect from '../VSelect'
 import { keyCodes } from '../../../util/helpers'
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VSelect.ts', () => {
@@ -23,13 +23,13 @@ describe('VSelect.ts', () => {
         mocks: {
           $vuetify: {
             lang: {
-              t: (val: string) => val
+              t: (val: string) => val,
             },
             theme: {
-              dark: false
-            }
-          }
-        }
+              dark: false,
+            },
+          },
+        },
       })
     }
   })
@@ -37,13 +37,13 @@ describe('VSelect.ts', () => {
   it('should use slotted prepend-item', () => {
     const wrapper = mountFunction({
       propsData: {
-        items: ['foo']
+        items: ['foo'],
       },
       slots: {
         'prepend-item': [{
-          render: h => h('div', 'foo')
-        }]
-      }
+          render: h => h('div', 'foo'),
+        }],
+      },
     })
 
     const list = wrapper.find('.v-list')
@@ -55,13 +55,13 @@ describe('VSelect.ts', () => {
   it('should use slotted append-item', () => {
     const wrapper = mountFunction({
       propsData: {
-        items: ['foo']
+        items: ['foo'],
       },
       slots: {
         'append-item': [{
-          render: h => h('div', 'foo')
-        }]
-      }
+          render: h => h('div', 'foo'),
+        }],
+      },
     })
 
     const list = wrapper.find('.v-list')
@@ -76,15 +76,15 @@ describe('VSelect.ts', () => {
         return h(VSelect, {
           attrs: {
             items: ['foo', 'bar'],
-            value: 'foo'
+            value: 'foo',
           },
           scopedSlots: {
             selection: ({ item }) => {
               return h('div', item + ' - from slot')
-            }
-          }
+            },
+          },
         })
-      }
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -95,9 +95,9 @@ describe('VSelect.ts', () => {
       propsData: {
         items: ['foo', 'bar'],
         'menu-props': {
-          offsetY: true
-        }
-      }
+          offsetY: true,
+        },
+      },
     })
 
     const icon = wrapper.find('.v-icon')
@@ -127,8 +127,8 @@ describe('VSelect.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         items: ['foo'],
-        value: 'foo'
-      }
+        value: 'foo',
+      },
     })
 
     expect(wrapper.vm.counterValue).toBe(3)
@@ -136,8 +136,8 @@ describe('VSelect.ts', () => {
     wrapper.setProps({
       items: [{
         text: 'foobarbaz',
-        value: 'foo'
-      }]
+        value: 'foo',
+      }],
     })
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.counterValue).toBe(9)
@@ -145,7 +145,7 @@ describe('VSelect.ts', () => {
     wrapper.setProps({
       items: ['foo', 'bar', 'baz'],
       multiple: true,
-      value: ['foo', 'bar']
+      value: ['foo', 'bar'],
     })
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.counterValue).toBe(2)
@@ -156,8 +156,8 @@ describe('VSelect.ts', () => {
       attachToDocument: true,
       propsData: {
         attach: true,
-        items: ['foo', 'bar']
-      }
+        items: ['foo', 'bar'],
+      },
     })
 
     const change = jest.fn()
@@ -180,8 +180,8 @@ describe('VSelect.ts', () => {
   it('should not emit change event when clicked on the selected item', async () => {
     const wrapper = mountFunction({
       propsData: {
-        items: ['foo', 'bar']
-      }
+        items: ['foo', 'bar'],
+      },
     })
 
     const change = jest.fn()
@@ -201,8 +201,8 @@ describe('VSelect.ts', () => {
     const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
-        items: ['foo', 'bar']
-      }
+        items: ['foo', 'bar'],
+      },
     })
 
     const input = wrapper.find('input')
@@ -224,8 +224,8 @@ describe('VSelect.ts', () => {
       attachToDocument: true,
       propsData: {
         items: ['foo', 'bar'],
-        readonly: true
-      }
+        readonly: true,
+      },
     })
 
     const input = wrapper.find('input')
@@ -247,8 +247,8 @@ describe('VSelect.ts', () => {
       propsData: {
         clearable: true,
         items: ['foo', 'bar'],
-        value: 'foo'
-      }
+        value: 'foo',
+      },
     })
 
     const clear = wrapper.find('.v-icon')
@@ -272,8 +272,8 @@ describe('VSelect.ts', () => {
       propsData: {
         clearable: true,
         items: [1, 2],
-        value: 1
-      }
+        value: 1,
+      },
     })
 
     const clear = wrapper.find('.v-icon')
@@ -295,8 +295,8 @@ describe('VSelect.ts', () => {
         clearable: true,
         items: [1, 2],
         multiple: true,
-        value: [1]
-      }
+        value: [1],
+      },
     })
 
     const clear = wrapper.find('.v-icon')
@@ -319,23 +319,23 @@ describe('VSelect.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         items,
-        value: 'foo'
-      }
+        value: 'foo',
+      },
     })
 
     const wrapper2 = mountFunction({
       propsData: {
         items,
         multiple: true,
-        value: ['foo', 'bar']
-      }
+        value: ['foo', 'bar'],
+      },
     })
 
     const wrapper3 = mountFunction({
       propsData: {
         items,
-        value: null
-      }
+        value: null,
+      },
     })
 
     expect(wrapper.vm.selectedItems).toHaveLength(1)
@@ -350,11 +350,11 @@ describe('VSelect.ts', () => {
       propsData: {
         items: [
           { text: 'foo', value: { id: 1 } },
-          { text: 'foo', value: { id: 2 } }
+          { text: 'foo', value: { id: 2 } },
         ],
         multiple: true,
-        value: [{ id: 1 }]
-      }
+        value: [{ id: 1 }],
+      },
     })
 
     await wrapper.vm.$nextTick()
@@ -371,11 +371,11 @@ describe('VSelect.ts', () => {
       propsData: {
         items: [
           { text: 'bar', value: { id: 1 } },
-          { text: 'foo', value: { id: 2 } }
+          { text: 'foo', value: { id: 2 } },
         ],
         multiple: true,
-        value: [{ id: 1 }]
-      }
+        value: [{ id: 1 }],
+      },
     })
 
     expect(wrapper.vm.selectedItems).toHaveLength(1)
@@ -392,8 +392,8 @@ describe('VSelect.ts', () => {
         clearable: true,
         openOnClear: true,
         items: [1],
-        value: 1
-      }
+        value: 1,
+      },
     })
 
     const clear = wrapper.find('.v-input__icon--clear .v-icon')

@@ -24,19 +24,19 @@ const router = new Router({
     {
       path: '/theme',
       name: 'Theme',
-      component: () => import('@/views/Theme')
+      component: () => import('@/views/Theme'),
     },
     {
       path: '/:component',
       name: 'Bootstrapper',
-      component: () => import('@/views/Bootstrapper')
+      component: () => import('@/views/Bootstrapper'),
     },
     {
       path: '*',
       name: 'Home',
-      component: () => import('@/views/Home')
-    }
-  ]
+      component: () => import('@/views/Home'),
+    },
+  ],
 })
 
 // Bootstrap Analytics
@@ -47,8 +47,8 @@ if (process.env.VUE_APP_GOOGLE_ANALYTICS) {
     id: process.env.VUE_APP_GOOGLE_ANALYTICS,
     router,
     autoTracking: {
-      page: process.env.NODE_ENV !== 'development'
-    }
+      page: process.env.NODE_ENV !== 'development',
+    },
   })
 }
 

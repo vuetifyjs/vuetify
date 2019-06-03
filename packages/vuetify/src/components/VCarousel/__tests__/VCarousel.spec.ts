@@ -10,7 +10,7 @@ import VProgressLinear from '../../VProgressLinear/VProgressLinear'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 describe('VCarousel.ts', () => {
   type Instance = InstanceType<typeof VCarousel>
@@ -24,11 +24,11 @@ describe('VCarousel.ts', () => {
           $vuetify: {
             rtl: false,
             lang: {
-              t: str => str
-            }
-          }
+              t: str => str,
+            },
+          },
         },
-        ...options
+        ...options,
       })
     }
   })
@@ -36,7 +36,7 @@ describe('VCarousel.ts', () => {
   // TODO: animation frame not starting with jest 24
   it.skip('it should restart or clear timeout on cycle change', async () => {
     const wrapper = mountFunction({
-      propsData: { cycle: false }
+      propsData: { cycle: false },
     })
 
     const restartTimeout = jest.spyOn(wrapper.vm, 'restartTimeout')
@@ -59,7 +59,7 @@ describe('VCarousel.ts', () => {
 
   it('should generate vertical delimiters', () => {
     const wrapper = mountFunction({
-      propsData: { verticalDelimiters: 'left' }
+      propsData: { verticalDelimiters: 'left' },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -75,9 +75,9 @@ describe('VCarousel.ts', () => {
         default: [
           { extends: VCarouselItem },
           { extends: VCarouselItem },
-          { extends: VCarouselItem }
-        ]
-      }
+          { extends: VCarouselItem },
+        ],
+      },
     })
 
     await wrapper.vm.$nextTick()
@@ -97,8 +97,8 @@ describe('VCarousel.ts', () => {
   it('should render a progress component', async () => {
     const wrapper = mountFunction({
       propsData: {
-        progress: true
-      }
+        progress: true,
+      },
     })
 
     expect(wrapper.find(VProgressLinear).element).toBeTruthy()

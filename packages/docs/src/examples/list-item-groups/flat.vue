@@ -4,7 +4,7 @@
     max-width="400"
   >
     <v-list flat>
-      <v-list-item-group v-model="model">
+      <v-list-item-group v-model="model" color="indigo">
         <v-list-item
           v-for="(item, i) in items"
           :key="i"
@@ -28,18 +28,18 @@
       items: [
         {
           icon: 'mdi-wifi',
-          text: 'Wifi'
+          text: 'Wifi',
         },
         {
           icon: 'mdi-bluetooth',
-          text: 'Bluetooth'
+          text: 'Bluetooth',
         },
         {
           icon: 'mdi-chart-donut',
-          text: 'Data Usage'
-        }
+          text: 'Data Usage',
+        },
       ],
-      model: 1
-    })
+      model: 1,
+    }),
   }
 </script>

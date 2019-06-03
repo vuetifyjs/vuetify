@@ -6,11 +6,11 @@ export default Vue.extend({
   props: {
     large: Boolean,
     size: {
-      type: [Number, String]
+      type: [Number, String],
     },
     small: Boolean,
     xLarge: Boolean,
-    xSmall: Boolean
+    xSmall: Boolean,
   },
 
   computed: {
@@ -28,8 +28,8 @@ export default Vue.extend({
         'v-size--small': this.small,
         'v-size--default': this.medium,
         'v-size--large': this.large,
-        'v-size--x-large': this.xLarge
+        'v-size--x-large': this.xLarge,
       }
-    }
-  }
+    },
+  },
 })

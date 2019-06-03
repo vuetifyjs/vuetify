@@ -26,8 +26,8 @@
   export default {
     data () {
       return {
-        valueDeterminate: 50
+        valueDeterminate: 50,
       }
-    }
+    },
   }
 </script>

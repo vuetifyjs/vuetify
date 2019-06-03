@@ -24,14 +24,14 @@ export const BaseItemGroup = mixins(
   props: {
     activeClass: {
       type: String,
-      default: 'v-item--active'
+      default: 'v-item--active',
     },
     mandatory: Boolean,
     max: {
       type: [Number, String],
-      default: null
+      default: null,
     },
-    multiple: Boolean
+    multiple: Boolean,
   },
 
   data () {
@@ -42,14 +42,15 @@ export const BaseItemGroup = mixins(
       internalLazyValue: this.value !== undefined
         ? this.value
         : this.multiple ? [] : undefined,
-      items: [] as GroupableInstance[]
+      items: [] as GroupableInstance[],
     }
   },
 
   computed: {
     classes (): Record<string, boolean> {
       return {
-        ...this.themeClasses
+        'v-item-group': true,
+        ...this.themeClasses,
       }
     },
     selectedItem (): GroupableInstance | undefined {
@@ -82,14 +83,14 @@ export const BaseItemGroup = mixins(
       }
 
       return () => false
-    }
+    },
   },
 
   watch: {
     internalValue () {
       // https://github.com/vuetifyjs/vuetify/issues/5352
       this.$nextTick(this.updateItemsState)
-    }
+    },
   },
 
   created () {
@@ -99,6 +100,11 @@ export const BaseItemGroup = mixins(
   },
 
   methods: {
+    genData (): object {
+      return {
+        class: this.classes,
+      }
+    },
     getValue (item: GroupableInstance, i: number): unknown {
       return item.value == null || item.value === ''
         ? i
@@ -231,15 +237,12 @@ export const BaseItemGroup = mixins(
       if (this.mandatory && isSame) return
 
       this.internalValue = isSame ? undefined : value
-    }
+    },
   },
 
   render (h): VNode {
-    return h('div', {
-      staticClass: 'v-item-group',
-      class: this.classes
-    }, this.$slots.default)
-  }
+    return h('div', this.genData(), this.$slots.default)
+  },
 })
 
 export default BaseItemGroup.extend({
@@ -247,7 +250,7 @@ export default BaseItemGroup.extend({
 
   provide (): object {
     return {
-      itemGroup: this
+      itemGroup: this,
     }
-  }
+  },
 })

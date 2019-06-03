@@ -24,7 +24,7 @@
     mdiAccount,
     mdiPencil,
     mdiShareVariant,
-    mdiDelete
+    mdiDelete,
   } from '@mdi/js'
 
   export default {
@@ -33,8 +33,8 @@
         mdiAccount,
         mdiPencil,
         mdiShareVariant,
-        mdiDelete
-      }
-    })
+        mdiDelete,
+      },
+    }),
   }
 </script>

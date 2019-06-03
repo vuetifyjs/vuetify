@@ -2,7 +2,7 @@ import { touch } from '../../../../test'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 import { Lang } from '../../../services/lang'
 import VDatePicker from '../VDatePicker'
@@ -12,9 +12,9 @@ Vue.prototype.$vuetify = {
   icons: {
     values: {
       next: 'mdi-chevron-right',
-      prev: 'mdi-chevron-left'
-    }
-  }
+      prev: 'mdi-chevron-left',
+    },
+  },
 }
 
 describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
@@ -26,9 +26,9 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
         ...options,
         mocks: {
           $vuetify: {
-            lang: new Lang()
-          }
-        }
+            lang: new Lang(),
+          },
+        },
       })
     }
   })
@@ -36,8 +36,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
   it('should display the correct date in title and header', () => {
     const wrapper = mountFunction({
       propsData: {
-        value: '2005-11-01'
-      }
+        value: '2005-11-01',
+      },
     })
 
     const title = wrapper.findAll('.v-date-picker-title__date').at(0)
@@ -50,8 +50,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
   it('should work with year < 1000', () => {
     const wrapper = mountFunction({
       propsData: {
-        value: '0005-11-01'
-      }
+        value: '0005-11-01',
+      },
     })
   })
 
@@ -59,8 +59,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         value: null,
-        pickerDate: '2013-01'
-      }
+        pickerDate: '2013-01',
+      },
     })
 
     const year = wrapper.findAll('.v-date-picker-title__year').at(0)
@@ -71,8 +71,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
   it('should match snapshot with default settings', () => {
     const wrapper = mountFunction({
       propsData: {
-        value: '2013-05-07'
-      }
+        value: '2013-05-07',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -82,8 +82,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         value: '2013-05-07',
-        readonly: true
-      }
+        readonly: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -93,8 +93,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         value: '2013-05-07',
-        disabled: true
-      }
+        disabled: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -103,8 +103,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
   it('should emit input event on date click', async () => {
     const wrapper = mountFunction({
       propsData: {
-        value: '2013-05-07'
-      }
+        value: '2013-05-07',
+      },
     })
 
     const input = jest.fn()
@@ -123,11 +123,11 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         value: '2013-05-13',
-        allowedDates: () => false
+        allowedDates: () => false,
       },
       data: () => ({
-        activePicker: 'MONTH'
-      })
+        activePicker: 'MONTH',
+      }),
     })
 
     wrapper.vm.$on('input', cb)
@@ -139,11 +139,11 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         value: '2013-05-13',
-        reactive: true
+        reactive: true,
       },
       data: () => ({
-        activePicker: 'YEAR'
-      })
+        activePicker: 'YEAR',
+      }),
     })
 
     const input = jest.fn()
@@ -162,11 +162,11 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         value: '2013-05-13',
-        allowedDates: () => false
+        allowedDates: () => false,
       },
       data: () => ({
-        activePicker: 'YEAR'
-      })
+        activePicker: 'YEAR',
+      }),
     })
 
     wrapper.vm.$on('input', cb)
@@ -179,8 +179,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         multiple: true,
-        value: ['2013-05-07', '2013-05-08']
-      }
+        value: ['2013-05-07', '2013-05-08'],
+      },
     })
 
     wrapper.vm.$on('input', cb)
@@ -197,8 +197,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         multiple: true,
-        value: ['2013-05-07', '2013-05-08', '2013-05-05']
-      }
+        value: ['2013-05-07', '2013-05-08', '2013-05-05'],
+      },
     })
 
     wrapper.vm.$on('input', cb)
@@ -212,8 +212,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         value: '2013-05-07',
-        scrollable: true
-      }
+        scrollable: true,
+      },
     })
 
     wrapper.findAll('.v-date-picker-table--date').at(0).trigger('wheel')
@@ -224,8 +224,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         value: '2013-05-07',
-        scrollable: true
-      }
+        scrollable: true,
+      },
     })
 
     const table = wrapper.findAll('.v-date-picker-table--date').at(0)
@@ -240,8 +240,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         value: '2013-05-07',
-        dark: true
-      }
+        dark: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -251,8 +251,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         value: '2013-05-07',
-        noTitle: true
-      }
+        noTitle: true,
+      },
     })
 
     expect(wrapper.findAll('.v-picker__title').wrappers).toHaveLength(0)
@@ -262,8 +262,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         value: '2013-05-07',
-        firstDayOfWeek: 2
-      }
+        firstDayOfWeek: 2,
+      },
     })
 
     expect(wrapper.vm.$refs.table.firstDayOfWeek).toBe(2)
@@ -276,8 +276,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         value: '2013-05-07',
-        locale: 'fa-AF'
-      }
+        locale: 'fa-AF',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -290,8 +290,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
         value: '2005-11-01',
         headerDateFormat: dateFormat,
         titleDateFormat: dateFormat,
-        weekdayFormat: () => 'W'
-      }
+        weekdayFormat: () => 'W',
+      },
     })
 
     expect(wrapper.findAll('.v-date-picker-title__date').at(0).text()).toBe('(2005-11-01)')
@@ -304,8 +304,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
       propsData: {
         value: '2005-11-01',
         color: 'primary',
-        headerColor: 'orange darken-1'
-      }
+        headerColor: 'orange darken-1',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -315,8 +315,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         value: '2005-11-01',
-        color: 'orange darken-1'
-      }
+        color: 'orange darken-1',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -326,8 +326,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         value: '2005-11-01',
-        yearIcon: 'year'
-      }
+        yearIcon: 'year',
+      },
     })
 
     expect(wrapper.findAll('.v-picker__title').at(0).html()).toMatchSnapshot()
@@ -336,8 +336,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
   it('should match change month when clicked on header arrow buttons', () => {
     const wrapper = mountFunction({
       propsData: {
-        value: '2005-11-01'
-      }
+        value: '2005-11-01',
+      },
     })
 
     const [leftButton, rightButton] = wrapper.findAll('.v-date-picker-header button.v-btn').wrappers
@@ -352,8 +352,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
   it('should match change active picker when clicked on month button', () => {
     const wrapper = mountFunction({
       propsData: {
-        value: '2005-11-01'
-      }
+        value: '2005-11-01',
+      },
     })
 
     const button = wrapper.findAll('.v-date-picker-header__value button').at(0)
@@ -366,11 +366,11 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         type: 'date',
-        value: '2005-11-01'
+        value: '2005-11-01',
       },
       scopedSlots: {
-        default: '<div class="scoped-slot"></div>'
-      }
+        default: '<div class="scoped-slot"></div>',
+      },
     })
     expect(wrapper.findAll('.v-picker__actions .scoped-slot').wrappers).toHaveLength(1)
   })
@@ -378,12 +378,12 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
   it('should match years snapshot', async () => {
     const wrapper = mountFunction({
       data: () => ({
-        activePicker: 'YEAR'
+        activePicker: 'YEAR',
       }),
       propsData: {
         type: 'date',
-        value: '2005-11-01'
-      }
+        value: '2005-11-01',
+      },
     })
 
     expect(wrapper.vm.activePicker).toBe('YEAR')
@@ -400,12 +400,12 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
   it('should select year', async () => {
     const wrapper = mountFunction({
       data: () => ({
-        activePicker: 'YEAR'
+        activePicker: 'YEAR',
       }),
       propsData: {
         type: 'date',
-        value: '2005-11-01'
-      }
+        value: '2005-11-01',
+      },
     })
 
     wrapper.findAll('.v-date-picker-years li.active + li').at(0).trigger('click')
@@ -416,8 +416,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
   it('should set the table date when value has changed', () => {
     const wrapper = mountFunction({
       propsData: {
-        value: null
-      }
+        value: null,
+      },
     })
 
     wrapper.setProps({ value: '2005-11-11' })
@@ -428,8 +428,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         value: '1999-12-13',
-        type: 'date'
-      }
+        type: 'date',
+      },
     })
 
     wrapper.vm.$on('input', value => wrapper.setProps({ value }))
@@ -452,8 +452,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
   it('should format title date', () => {
     const wrapper = mountFunction({
       propsData: {
-        value: '2013-05-07'
-      }
+        value: '2013-05-07',
+      },
     })
 
     expect(wrapper.vm.defaultTitleDateFormatter('2013-03-05')).toBe('Tue, Mar 5')
@@ -466,8 +466,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         prevIcon: 'block',
-        nextIcon: 'check'
-      }
+        nextIcon: 'check',
+      },
     })
 
     const icons = wrapper.findAll('.v-date-picker-header .v-icon').wrappers
@@ -478,8 +478,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
   it('should emit update:pickerDate event when tableDate changes', async () => {
     const wrapper = mountFunction({
       propsData: {
-        value: '2017-09'
-      }
+        value: '2017-09',
+      },
     })
 
     const pickerDate = jest.fn()
@@ -493,8 +493,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         value: '2017-09',
-        pickerDate: '2013-11'
-      }
+        pickerDate: '2013-11',
+      },
     })
 
     expect(wrapper.vm.tableDate).toBe('2013-11')
@@ -504,8 +504,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         value: '2017-09-13',
-        pickerDate: '2013-11'
-      }
+        pickerDate: '2013-11',
+      },
     })
 
     const update = jest.fn()
@@ -513,7 +513,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     await wrapper.vm.$nextTick()
 
     wrapper.setProps({
-      pickerDate: null
+      pickerDate: null,
     })
     await wrapper.vm.$nextTick()
     expect(update).toHaveBeenCalledWith('2017-09')
@@ -524,18 +524,18 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
       propsData: {
         value: '2013-01-07',
         min: '2013-01-03',
-        max: '2013-01-17'
-      }
+        max: '2013-01-17',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
     wrapper.setData({
-      activePicker: 'MONTH'
+      activePicker: 'MONTH',
     })
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
     wrapper.setData({
-      activePicker: 'YEAR'
+      activePicker: 'YEAR',
     })
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
@@ -545,11 +545,11 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         value: '2013-02-07',
-        reactive: true
+        reactive: true,
       },
       data: () => ({
-        activePicker: 'MONTH'
-      })
+        activePicker: 'MONTH',
+      }),
     })
 
     const input = jest.fn()
@@ -567,11 +567,11 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
   it('should not emit @input and not emit @change when month is clicked (lazy picker)', async () => {
     const wrapper = mountFunction({
       propsData: {
-        value: '2013-02-07'
+        value: '2013-02-07',
       },
       data: () => ({
-        activePicker: 'MONTH'
-      })
+        activePicker: 'MONTH',
+      }),
     })
 
     const input = jest.fn()
@@ -590,8 +590,8 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         value: '2013-05-20',
-        type: 'date'
-      }
+        type: 'date',
+      },
     })
 
     const click = jest.fn()

@@ -31,14 +31,14 @@
         {
           "type": "examples",
           "value": [
-            "withoutActivator",
-            "modal",
-            "fullscreen",
-            "form",
-            "scrollable",
-            "overflowed",
-            "advanced",
-            "loader"
+            "simple/withoutActivator",
+            "simple/modal",
+            "simple/scrollable",
+            "simple/overflowed",
+            "intermediate/form",
+            "intermediate/loader",
+            "intermediate/fullscreen",
+            "complex/advanced"
           ]
         }
       ]

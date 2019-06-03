@@ -16,7 +16,7 @@ export default Vue.extend({
     maxWidth: [Number, String] as NumberOrNumberString,
     minHeight: [Number, String] as NumberOrNumberString,
     minWidth: [Number, String] as NumberOrNumberString,
-    width: [Number, String] as NumberOrNumberString
+    width: [Number, String] as NumberOrNumberString,
   },
 
   computed: {
@@ -38,6 +38,6 @@ export default Vue.extend({
       if (width) styles.width = width
 
       return styles
-    }
-  }
+    },
+  },
 })

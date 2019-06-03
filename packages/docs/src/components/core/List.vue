@@ -35,24 +35,24 @@
     props: {
       items: {
         type: Array,
-        default: () => ([])
+        default: () => ([]),
       },
       itemIcon: {
         type: String,
-        default: 'icon'
+        default: 'icon',
       },
       itemSubTitle: {
         type: String,
-        default: 'subTitle'
+        default: 'subTitle',
       },
       itemText: {
         type: String,
-        default: 'text'
+        default: 'text',
       },
       itemValue: {
         type: String,
-        default: 'value'
-      }
-    }
+        default: 'value',
+      },
+    },
   }
 </script>

@@ -90,14 +90,14 @@
           'Washington',
           'West Virginia',
           'Wisconsin',
-          'Wyoming'
-        ]
+          'Wyoming',
+        ],
       }
     },
     watch: {
       search (val) {
         val && val !== this.select && this.querySelections(val)
-      }
+      },
     },
     methods: {
       querySelections (v) {
@@ -109,7 +109,7 @@
           })
           this.loading = false
         }, 500)
-      }
-    }
+      },
+    },
   }
 </script>

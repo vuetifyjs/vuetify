@@ -4,7 +4,7 @@ import VOverflowBtn from '../VOverflowBtn'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../util/mixins'
 
@@ -21,13 +21,13 @@ describe('VOverflowBtn.js', () => {
         mocks: {
           $vuetify: {
             lang: {
-              t: (val: string) => val
+              t: (val: string) => val,
             },
             theme: {
-              dark: false
-            }
-          }
-        }
+              dark: false,
+            },
+          },
+        },
       })
     }
   })
@@ -37,14 +37,14 @@ describe('VOverflowBtn.js', () => {
   it.skip('segmented - should warn when item has no callback', async () => {
     const items = [
       { text: 'Hello' },
-      { text: 'Hello' }
+      { text: 'Hello' },
     ]
 
     const wrapper = mountFunction({
       propsData: {
         segmented: true,
-        items
-      }
+        items,
+      },
     })
 
     await wrapper.vm.$nextTick()
@@ -55,7 +55,7 @@ describe('VOverflowBtn.js', () => {
     // we have a matching model
     wrapper.setProps({
       items: [items[1]],
-      value: 'Hello'
+      value: 'Hello',
     })
 
     await wrapper.vm.$nextTick()
@@ -68,8 +68,8 @@ describe('VOverflowBtn.js', () => {
       propsData: {
         items: ['foo'],
         multiple: true,
-        value: ['foo']
-      }
+        value: ['foo'],
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -78,7 +78,7 @@ describe('VOverflowBtn.js', () => {
       items: [{ text: 'foo', value: 'foo', callback: () => { } }],
       multiple: false,
       segmented: true,
-      value: 'foo'
+      value: 'foo',
     })
 
     await wrapper.vm.$nextTick()
@@ -93,11 +93,11 @@ describe('VOverflowBtn.js', () => {
         items: [{
           text: 'foo',
           value: 'bar',
-          callback
+          callback,
         }],
         segmented: true,
-        value: 'bar'
-      }
+        value: 'bar',
+      },
     })
 
     const btn = wrapper.find('.v-btn')

@@ -3,7 +3,7 @@
     <v-card-text>
       <v-layout column align-center>
         <p>Multiple</p>
-        <v-btn-toggle multiple v-model="toggle_exclusive">
+        <v-btn-toggle v-model="toggle_exclusive" multiple>
           <v-btn>
             <v-icon>format_align_left</v-icon>
           </v-btn>
@@ -27,9 +27,9 @@
   export default {
     data () {
       return {
-        toggle_exclusive: []
+        toggle_exclusive: [],
       }
-    }
+    },
   }
 
 </script>

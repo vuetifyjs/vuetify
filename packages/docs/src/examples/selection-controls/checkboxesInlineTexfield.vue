@@ -17,7 +17,7 @@
   export default {
     data: () => ({
       includeFiles: true,
-      enabled: false
-    })
+      enabled: false,
+    }),
   }
 </script>

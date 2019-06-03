@@ -179,7 +179,6 @@
                 type="tel"
                 prepend-icon="phone"
                 placeholder="(000) 000 - 0000"
-                mask="phone"
               ></v-text-field>
             </v-flex>
             <v-flex xs12>
@@ -216,8 +215,8 @@
           text: 'Labels',
           model: true,
           children: [
-            { icon: 'add', text: 'Create label' }
-          ]
+            { icon: 'add', text: 'Create label' },
+          ],
         },
         {
           icon: 'keyboard_arrow_up',
@@ -229,18 +228,18 @@
             { text: 'Export' },
             { text: 'Print' },
             { text: 'Undo changes' },
-            { text: 'Other contacts' }
-          ]
+            { text: 'Other contacts' },
+          ],
         },
         { icon: 'settings', text: 'Settings' },
         { icon: 'chat_bubble', text: 'Send feedback' },
         { icon: 'help', text: 'Help' },
         { icon: 'phonelink', text: 'App downloads' },
-        { icon: 'keyboard', text: 'Go to the old version' }
-      ]
+        { icon: 'keyboard', text: 'Go to the old version' },
+      ],
     }),
     props: {
-      source: String
-    }
+      source: String,
+    },
   }
 </script>

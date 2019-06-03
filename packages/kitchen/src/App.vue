@@ -83,27 +83,27 @@
 
   export default {
     components: {
-      Codepen: () => import('@/components/Codepen')
+      Codepen: () => import('@/components/Codepen'),
     },
     filters: {
       capitalize (value) {
         if (!value) return ''
         value = value.toString()
         return value.charAt(0).toUpperCase() + value.slice(1)
-      }
+      },
     },
     data: () => ({
       items: [
         { title: 'Home', to: '/' },
         { title: 'Custom theme config', to: '/theme' },
-        ...items
+        ...items,
       ],
-      drawer: false
+      drawer: false,
     }),
     computed: {
       href () {
         return `https://github.com/vuetifyjs/vuetify/tree/next/packages/kitchen/src/pan/${this.$route.params.component}.vue` // TODO: set branch back to master before v2.0 release
-      }
-    }
+      },
+    },
   }
 </script>

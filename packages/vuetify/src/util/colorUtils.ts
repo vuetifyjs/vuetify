@@ -142,7 +142,7 @@ export function RGBAtoHex (rgba: RGBA): Hex {
     toHex(rgba.r),
     toHex(rgba.g),
     toHex(rgba.b),
-    toHex(Math.round(rgba.a * 255))
+    toHex(Math.round(rgba.a * 255)),
   ].join('')}`
 }
 
@@ -153,7 +153,7 @@ export function HexToRGBA (hex: Hex): RGBA {
     r: rgba[0],
     g: rgba[1],
     b: rgba[2],
-    a: Math.round((rgba[3] / 255) * 100) / 100
+    a: Math.round((rgba[3] / 255) * 100) / 100,
   }
 }
 

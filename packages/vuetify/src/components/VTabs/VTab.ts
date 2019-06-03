@@ -5,7 +5,6 @@ import Themeable from '../../mixins/themeable'
 
 // Utilities
 import { keyCodes } from './../../util/helpers'
-import { getObjectValueByPath } from '../../util/helpers'
 import mixins from '../../util/mixins'
 import { ExtractVue } from './../../util/mixins'
 
@@ -32,16 +31,21 @@ export default baseMixins.extend<options>().extend(
   props: {
     ripple: {
       type: [Boolean, Object],
-      default: true
-    }
+      default: true,
+    },
   },
+
+  data: () => ({
+    proxyClass: 'v-tab--active',
+  }),
 
   computed: {
     classes (): object {
       return {
         'v-tab': true,
+        ...Routable.options.computed.classes.call(this),
         'v-tab--disabled': this.disabled,
-        ...this.groupClasses
+        ...this.groupClasses,
       }
     },
     value (): any {
@@ -60,11 +64,7 @@ export default baseMixins.extend<options>().extend(
       }
 
       return to.replace('#', '')
-    }
-  },
-
-  watch: {
-    $route: 'onRouteChange'
+    },
   },
 
   mounted () {
@@ -86,27 +86,16 @@ export default baseMixins.extend<options>().extend(
 
       this.to || this.toggle()
     },
-    onRouteChange () {
-      if (!this.to || !this.$refs.link) return
-
-      const path = `_vnode.data.class.${this.activeClass}`
-
-      this.$nextTick(() => {
-        if (getObjectValueByPath(this.$refs.link, path)) {
-          this.toggle()
-        }
-      })
-    }
   },
 
   render (h): VNode {
-    const { tag, data } = this.generateRouteLink(this.classes)
+    const { tag, data } = this.generateRouteLink()
 
     data.attrs = {
       ...data.attrs,
       'aria-selected': String(this.isActive),
       role: 'tab',
-      tabindex: 0
+      tabindex: 0,
     }
     data.on = {
       ...data.on,
@@ -114,10 +103,9 @@ export default baseMixins.extend<options>().extend(
         if (e.keyCode === keyCodes.enter) this.click(e)
 
         this.$emit('keydown', e)
-      }
+      },
     }
-    data.ref = 'link'
 
     return h(tag, data, this.$slots.default)
-  }
+  },
 })

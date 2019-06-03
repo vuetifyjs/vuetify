@@ -35,7 +35,7 @@ export class Breakpoint extends Service {
     xs: 600,
     sm: 960,
     md: 1280,
-    lg: 1920
+    lg: 1920,
   }
   public scrollbarWidth = 16
 
@@ -45,7 +45,7 @@ export class Breakpoint extends Service {
     super()
     this.thresholds = {
       ...this.thresholds,
-      ...options.thresholds
+      ...options.thresholds,
     }
     this.scrollbarWidth = (
       options.scrollBarWidth ||
