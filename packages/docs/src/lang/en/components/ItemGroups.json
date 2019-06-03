@@ -20,6 +20,10 @@
     "mandatory": {
       "header": "### Mandatory",
       "desc": "**mandatory** item groups must have aty least 1 item selected."
+    },
+    "activeClass": {
+      "header": "### With active class",
+      "desc": "**activeClass** property allows you to set custom CSS class on active items."
     }
   },
   "props": {
