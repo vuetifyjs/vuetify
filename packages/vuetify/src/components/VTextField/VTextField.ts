@@ -319,7 +319,7 @@ export default baseMixins.extend<options>().extend({
           dark: this.dark,
           disabled: this.disabled,
           focused: !this.isSingle && (this.isFocused || !!this.validationState),
-          for: this.$attrs.id,
+          for: this.id,
           left: this.labelPosition.left,
           light: this.light,
           right: this.labelPosition.right,
@@ -351,11 +351,12 @@ export default baseMixins.extend<options>().extend({
           value: this.lazyValue,
         },
         attrs: {
-          'aria-label': (!this.$attrs || !this.$attrs.id) && this.label, // Label `for` will be set if we have an id
+          'aria-label': !this.id && this.label, // Label `for` will be set if we have an id
           ...this.$attrs,
           autocomplete: this.browserAutocomplete,
           autofocus: this.autofocus,
           disabled: this.disabled,
+          id: this.id,
           placeholder: this.placeholder,
           readonly: this.readonly,
           type: this.type,
