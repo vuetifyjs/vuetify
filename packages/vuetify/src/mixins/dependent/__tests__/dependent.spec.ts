@@ -7,17 +7,17 @@ function genDependentMixin () {
     mixins: [dependent, toggleable],
 
     props: {
-      value: Boolean
+      value: Boolean,
     },
 
     render (h) {
       return h('div', [
         h('div', {
-          ref: 'content'
+          ref: 'content',
         }, 'foobar'),
-        this.$slots.default
+        this.$slots.default,
       ])
-    }
+    },
   }
 }
 
@@ -30,7 +30,7 @@ describe('dependent.ts', () => {
     const mock = { isActive: true }
     const getOpenDependents = jest.fn(() => [mock])
     const wrapper = mount(genDependentMixin(), {
-      methods: { getOpenDependents }
+      methods: { getOpenDependents },
     })
 
     wrapper.setProps({ value: true })
@@ -53,10 +53,10 @@ describe('dependent.ts', () => {
         default: [{
           ...genDependentMixin(),
           data: () => ({
-            isActive: true
-          })
-        }]
-      }
+            isActive: true,
+          }),
+        }],
+      },
     })
 
     const openDependents = wrapper.vm.getOpenDependents()
@@ -75,19 +75,19 @@ describe('dependent.ts', () => {
           {
             ...genDependentMixin(),
             data: () => ({
-              isActive: true
-            })
+              isActive: true,
+            }),
           },
           {
             ...genDependentMixin(),
             data: () => ({
-              isActive: true
+              isActive: true,
             }),
-            render: h => h('div', 'fizzbuzz')
+            render: h => h('div', 'fizzbuzz'),
           },
-          { render: h => h('div') }
-        ]
-      }
+          { render: h => h('div') },
+        ],
+      },
     })
 
     const openDependentElements = wrapper.vm.getOpenDependentElements()

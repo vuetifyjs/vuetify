@@ -61,7 +61,7 @@
   export default {
     data: () => ({
       colors,
-      search: ''
+      search: '',
     }),
 
     computed: {
@@ -78,7 +78,7 @@
         })
 
         return colors
-      }
+      },
     },
 
     methods: {
@@ -100,7 +100,7 @@
         ) return 'black--text'
 
         return 'white--text'
-      }
-    }
+      },
+    },
   }
 </script>

@@ -11,7 +11,7 @@
 <script>
   export default {
     data: () => ({
-      months: ['2018-09', '2018-10']
-    })
+      months: ['2018-09', '2018-10'],
+    }),
   }
 </script>

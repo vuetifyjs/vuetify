@@ -85,8 +85,8 @@
         color: '',
         mode: '',
         timeout: 6000,
-        text: 'Hello, I\'m a snackbar'
+        text: 'Hello, I\'m a snackbar',
       }
-    }
+    },
   }
 </script>

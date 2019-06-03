@@ -118,7 +118,7 @@
 <script>
   export default {
     data: () => ({
-      settings: []
-    })
+      settings: [],
+    }),
   }
 </script>

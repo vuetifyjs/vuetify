@@ -11,7 +11,7 @@ import VChip from '../VChip'
 import {
   createLocalVue,
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VChip.ts', () => {
@@ -28,7 +28,7 @@ describe('VChip.ts', () => {
       return mount(VChip, {
         localVue,
         router,
-        ...options
+        ...options,
       })
     }
   })
@@ -42,7 +42,7 @@ describe('VChip.ts', () => {
 
   it('should be removable', () => {
     const wrapper = mountFunction({
-      propsData: { close: true }
+      propsData: { close: true },
     })
 
     const close = wrapper.find('.v-chip__close')
@@ -60,8 +60,8 @@ describe('VChip.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         color: 'blue',
-        textColor: 'green'
-      }
+        textColor: 'green',
+      },
     })
 
     expect(wrapper.element.classList).toContain('blue')
@@ -71,14 +71,14 @@ describe('VChip.ts', () => {
   it('should render a disabled chip', () => {
     const wrapper = mountFunction({
       propsData: {
-        disabled: true
-      }
+        disabled: true,
+      },
     })
 
     expect(wrapper.element.classList).toContain('v-chip--disabled')
 
     wrapper.setProps({
-      close: true
+      close: true,
     })
     expect(wrapper.findAll('.v-chip__close')).toHaveLength(1)
   })
@@ -87,8 +87,8 @@ describe('VChip.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         outlined: true,
-        color: 'blue'
-      }
+        color: 'blue',
+      },
     })
 
     expect(wrapper.element.classList).toContain('blue')
@@ -100,8 +100,8 @@ describe('VChip.ts', () => {
       propsData: {
         outlined: true,
         color: 'blue',
-        textColor: 'green'
-      }
+        textColor: 'green',
+      },
     })
 
     expect(wrapper.element.classList).toContain('blue')
@@ -112,8 +112,8 @@ describe('VChip.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         filter: true,
-        inputValue: true
-      }
+        inputValue: true,
+      },
     })
 
     expect(wrapper.findAll('.v-chip__filter')).toHaveLength(1)
@@ -125,9 +125,9 @@ describe('VChip.ts', () => {
     const toggle = jest.fn()
     const wrapper = mountFunction({
       provide: {
-        chipGroup: { register, unregister }
+        chipGroup: { register, unregister },
       },
-      methods: { toggle }
+      methods: { toggle },
     })
 
     wrapper.trigger('click')

@@ -7,7 +7,7 @@ import VSelectList from '../VSelectList'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VSelectList.ts', () => {
@@ -17,7 +17,7 @@ describe('VSelectList.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VSelectList, {
-        ...options
+        ...options,
       })
     }
   })
@@ -26,7 +26,7 @@ describe('VSelectList.ts', () => {
     const wrapper = mountFunction()
 
     const divider = wrapper.vm.genDivider({
-      inset: true
+      inset: true,
     })
 
     expect(divider.data.props.inset).toBe(true)
@@ -38,7 +38,7 @@ describe('VSelectList.ts', () => {
 
     const divider = wrapper.vm.genHeader({
       light: true,
-      header: 'foobar'
+      header: 'foobar',
     })
 
     expect(divider.data.props.light).toBe(true)
@@ -52,9 +52,9 @@ describe('VSelectList.ts', () => {
     const wrapper = mountFunction({
       slots: {
         'no-data': [{
-          render: h => h('div', 'foo')
-        }]
-      }
+          render: h => h('div', 'foo'),
+        }],
+      },
     })
     expect(wrapper.vm.$slots['no-data']).toHaveLength(1)
   })
@@ -74,9 +74,9 @@ describe('VSelectList.ts', () => {
         items: [
           { header: true },
           { divider: true },
-          'foo'
-        ]
-      }
+          'foo',
+        ],
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -85,8 +85,8 @@ describe('VSelectList.ts', () => {
   it('should return defined item value', async () => {
     const wrapper = mountFunction({
       propsData: {
-        itemValue: 'foo'
-      }
+        itemValue: 'foo',
+      },
     })
 
     const getValue = wrapper.vm.getValue
@@ -104,8 +104,8 @@ describe('VSelectList.ts', () => {
       propsData: {
         selectedItems: ['foo'],
         hideSelected: true,
-        items: ['foo', 'bar', 'fizz']
-      }
+        items: ['foo', 'bar', 'fizz'],
+      },
     })
 
     expect(wrapper.findAll('.v-list-item')).toHaveLength(2)
@@ -121,8 +121,8 @@ describe('VSelectList.ts', () => {
   it('should display falsy items', () => {
     const wrapper = mountFunction({
       propsData: {
-        items: [0, null, false, undefined, '']
-      }
+        items: [0, null, false, undefined, ''],
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()

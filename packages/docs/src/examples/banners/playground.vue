@@ -85,7 +85,7 @@
       iconColor: undefined,
       elevation: 4,
       colors: [ 'red', 'blue', 'teal lighten-2', 'warning lighten-1', 'orange' ],
-      icons: [ 'mdi-access-point-network', 'mdi-plus', 'mdi-minus', 'mdi-network-strength-2-alert', 'mdi-earth' ]
-    })
+      icons: [ 'mdi-access-point-network', 'mdi-plus', 'mdi-minus', 'mdi-network-strength-2-alert', 'mdi-earth' ],
+    }),
   }
 </script>

@@ -16,7 +16,7 @@ export default mixins(
   name: 'v-btn-toggle',
 
   props: {
-    rounded: Boolean
+    rounded: Boolean,
   },
 
   computed: {
@@ -24,16 +24,16 @@ export default mixins(
       return {
         ...ButtonGroup.options.computed.classes.call(this),
         'v-btn-toggle': true,
-        'v-btn-toggle--rounded': this.rounded
+        'v-btn-toggle--rounded': this.rounded,
       }
-    }
+    },
   },
 
   methods: {
     genData () {
       return this.setTextColor(this.color, {
-        ...ButtonGroup.options.methods.genData.call(this)
+        ...ButtonGroup.options.methods.genData.call(this),
       })
-    }
-  }
+    },
+  },
 })

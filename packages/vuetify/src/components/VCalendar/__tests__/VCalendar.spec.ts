@@ -3,7 +3,7 @@ import VCalendar from '../VCalendar'
 import {
   mount,
   Wrapper,
-  MountOptions
+  MountOptions,
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../util/mixins'
 
@@ -17,10 +17,10 @@ describe('VCalendar', () => {
         mocks: {
           $vuetify: {
             lang: {
-              current: 'en-US'
-            }
-          }
-        }
+              current: 'en-US',
+            },
+          },
+        },
       })
     }
   })
@@ -31,11 +31,11 @@ describe('VCalendar', () => {
         type: 'day',
         start: '2018-01-29',
         end: '2018-02-04',
-        now: '2019-02-17'
+        now: '2019-02-17',
       },
       methods: {
-        getNow: () => parseDate(new Date('2019-02-17'))
-      }
+        getNow: () => parseDate(new Date('2019-02-17')),
+      },
     })
 
     expect(wrapper.classes('v-calendar-daily')).toBeTruthy()
@@ -48,11 +48,11 @@ describe('VCalendar', () => {
         type: 'week',
         start: '2018-01-29',
         end: '2018-02-04',
-        now: '2019-02-17'
+        now: '2019-02-17',
       },
       methods: {
-        getNow: () => parseDate(new Date('2019-02-17'))
-      }
+        getNow: () => parseDate(new Date('2019-02-17')),
+      },
     })
 
     expect(wrapper.classes('v-calendar-daily')).toBeTruthy()
@@ -65,11 +65,11 @@ describe('VCalendar', () => {
         type: 'month',
         start: '2018-01-29',
         end: '2018-02-04',
-        now: '2019-02-17'
+        now: '2019-02-17',
       },
       methods: {
-        getNow: () => parseDate(new Date('2019-02-17'))
-      }
+        getNow: () => parseDate(new Date('2019-02-17')),
+      },
     })
 
     expect(wrapper.classes('v-calendar-monthly')).toBeTruthy()
@@ -81,8 +81,8 @@ describe('VCalendar', () => {
       propsData: {
         value: '2019-02-02',
         start: '2019-01-29',
-        end: '2019-02-04'
-      }
+        end: '2019-02-04',
+      },
     })
 
     expect(wrapper.vm.parsedValue.date).toBe('2019-02-02')
@@ -92,8 +92,8 @@ describe('VCalendar', () => {
     const wrapper = mountFunction({
       propsData: {
         start: '2019-01-29',
-        end: '2019-02-04'
-      }
+        end: '2019-02-04',
+      },
     })
 
     expect(wrapper.vm.parsedValue.date).toBe('2019-01-29')

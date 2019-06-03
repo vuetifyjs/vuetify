@@ -1,23 +1,43 @@
 {
-  "header": "crwdns13554:0crwdne13554:0",
-  "headerText": "crwdns13556:0crwdne13556:0",
-  "examples": {
-    "usage": {
-      "desc": "crwdns13558:0crwdne13558:0"
-    },
-    "autoGrow": {
-      "header": "crwdns13560:0crwdne13560:0",
-      "desc": "crwdns13562:0crwdne13562:0"
-    },
-    "signupBox": {
-      "header": "crwdns13564:0crwdne13564:0",
-      "desc": "crwdns13566:0crwdne13566:0"
-    }
-  },
-  "props": {
-    "autoGrow": "crwdns13568:0crwdne13568:0",
-    "noResize": "crwdns13570:0crwdne13570:0",
-    "rowHeight": "crwdns13572:0crwdne13572:0",
-    "rows": "crwdns13574:0crwdne13574:0"
-  }
+	"header": "crwdns27556:0crwdne27556:0",
+	"headerText": "crwdns27558:0crwdne27558:0",
+	"examples": {
+		"usage": {
+			"desc": "crwdns27560:0crwdne27560:0"
+		},
+		"autoGrow": {
+			"header": "crwdns27562:0crwdne27562:0",
+			"desc": "crwdns27564:0crwdne27564:0"
+		},
+		"signupBox": {
+			"header": "crwdns27566:0crwdne27566:0",
+			"desc": "crwdns27568:0crwdne27568:0"
+		}
+	},
+	"props": {
+		"autoGrow": "crwdns27570:0crwdne27570:0",
+		"noResize": "crwdns27572:0crwdne27572:0",
+		"rowHeight": "crwdns27574:0crwdne27574:0",
+		"rows": "crwdns27576:0crwdne27576:0",
+		"value": "crwdns27578:0crwdne27578:0",
+		"append": "crwdns27580:0crwdne27580:0",
+		"append-outer": "crwdns27582:0crwdne27582:0",
+		"prepend": "crwdns27584:0crwdne27584:0",
+		"prepend-inner": "crwdns27586:0crwdne27586:0"
+	},
+	"slots": {
+		"append": "crwdns27588:0crwdne27588:0",
+		"append-outer": "crwdns27590:0crwdne27590:0",
+		"prepend": "crwdns27592:0crwdne27592:0",
+		"prepend-inner": "crwdns27594:0crwdne27594:0"
+	},
+	"events": {
+		"change": "crwdns27596:0crwdne27596:0",
+		"click:append": "crwdns27598:0crwdne27598:0",
+		"click:append-outer": "crwdns27600:0crwdne27600:0",
+		"click:clear": "crwdns27602:0crwdne27602:0",
+		"click:prepend": "crwdns27604:0crwdne27604:0",
+		"click:prepend-inner": "crwdns27606:0crwdne27606:0",
+		"update:error": "crwdns27608:0crwdne27608:0"
+	}
 }

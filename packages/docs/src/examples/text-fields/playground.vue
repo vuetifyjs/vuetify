@@ -143,7 +143,7 @@
       loading: false,
       flat: false,
       counterEn: false,
-      counter: 0
-    })
+      counter: 0,
+    }),
   }
 </script>

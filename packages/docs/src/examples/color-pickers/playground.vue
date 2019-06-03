@@ -57,7 +57,7 @@
       hideModeSwitch: false,
       mode: 'rgba',
       modes: ['rgba', 'hsla', 'hexa'],
-      showSwatches: false
-    })
+      showSwatches: false,
+    }),
   }
 </script>

@@ -11,7 +11,7 @@ const requireComponent = require.context(
 Vue.component('v-paper', {
   render (h) {
     return h('v-card', this.$slots.default)
-  }
+  },
 })
 
 // Dynamically load all components

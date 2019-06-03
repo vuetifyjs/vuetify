@@ -32,9 +32,9 @@
           { state: 'Georgia', abbr: 'GA' },
           { state: 'Nebraska', abbr: 'NE' },
           { state: 'California', abbr: 'CA' },
-          { state: 'New York', abbr: 'NY' }
-        ]
+          { state: 'New York', abbr: 'NY' },
+        ],
       }
-    }
+    },
   }
 </script>

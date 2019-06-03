@@ -17,7 +17,7 @@ export default Vue.extend<options>().extend({
       stackElement: null as Element | null,
       stackExclude: null as Element[] | null,
       stackMinZIndex: 0,
-      isActive: false
+      isActive: false,
     }
   },
   computed: {
@@ -36,7 +36,7 @@ export default Vue.extend<options>().extend({
       // Return max current z-index (excluding self) + 2
       // (2 to leave room for an overlay below, if needed)
       return parseInt(index)
-    }
+    },
   },
   methods: {
     getMaxZIndex (exclude: Element[] = []) {
@@ -49,7 +49,7 @@ export default Vue.extend<options>().extend({
       // https://github.com/vuetifyjs/vuetify/issues/2146
       const activeElements = [
         ...document.getElementsByClassName('v-menu__content--active'),
-        ...document.getElementsByClassName('v-dialog__content--active')
+        ...document.getElementsByClassName('v-dialog__content--active'),
       ]
 
       // Get z-index for all active dialogs
@@ -60,6 +60,6 @@ export default Vue.extend<options>().extend({
       }
 
       return Math.max(...zis)
-    }
-  }
+    },
+  },
 })

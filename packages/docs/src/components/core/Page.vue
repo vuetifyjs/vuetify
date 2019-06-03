@@ -54,17 +54,17 @@
 <script>
   // Utilities
   import {
-    mapState
+    mapState,
   } from 'vuex'
   import { getComponent } from '@/util/helpers'
 
   export default {
     components: {
-      NotFound: () => import('@/pages/general/404')
+      NotFound: () => import('@/pages/general/404'),
     },
 
     data: () => ({
-      timeout: null
+      timeout: null,
     }),
 
     computed: {
@@ -72,11 +72,11 @@
       ...mapState('route', ['params']),
       composite () {
         return `${this.params.namespace}-${this.params.page}`
-      }
+      },
     },
 
     watch: {
-      '$route.path': 'init'
+      '$route.path': 'init',
     },
 
     mounted () {
@@ -129,8 +129,8 @@
         }
 
         this.$router.push(href)
-      }
-    }
+      },
+    },
   }
 </script>
 

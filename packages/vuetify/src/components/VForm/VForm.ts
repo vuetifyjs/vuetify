@@ -26,13 +26,13 @@ export default RegistrableProvide('form').extend({
 
   props: {
     value: Boolean,
-    lazyValidation: Boolean
+    lazyValidation: Boolean,
   },
 
   data: () => ({
     inputs: [] as VInputInstance[],
     watchers: [] as Watchers[],
-    errorBag: {} as ErrorBag
+    errorBag: {} as ErrorBag,
   }),
 
   watch: {
@@ -43,8 +43,8 @@ export default RegistrableProvide('form').extend({
         this.$emit('input', !errors)
       },
       deep: true,
-      immediate: true
-    }
+      immediate: true,
+    },
   },
 
   methods: {
@@ -58,7 +58,7 @@ export default RegistrableProvide('form').extend({
       const watchers: Watchers = {
         _uid: input._uid,
         valid: () => {},
-        shouldValidate: () => {}
+        shouldValidate: () => {},
       }
 
       if (this.lazyValidation) {
@@ -117,7 +117,7 @@ export default RegistrableProvide('form').extend({
       this.watchers = this.watchers.filter(i => i._uid !== found._uid)
       this.inputs = this.inputs.filter(i => i._uid !== found._uid)
       this.$delete(this.errorBag, found._uid)
-    }
+    },
   },
 
   render (h): VNode {
@@ -125,11 +125,11 @@ export default RegistrableProvide('form').extend({
       staticClass: 'v-form',
       attrs: {
         novalidate: true,
-        ...this.$attrs
+        ...this.$attrs,
       },
       on: {
-        submit: (e: Event) => this.$emit('submit', e)
-      }
+        submit: (e: Event) => this.$emit('submit', e),
+      },
     }, this.$slots.default)
-  }
+  },
 })

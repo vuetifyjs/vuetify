@@ -7,7 +7,7 @@ import VSheet from '../VSheet'
 // Utilities
 import {
   shallowMount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VSheet.ts', () => {
@@ -28,8 +28,8 @@ describe('VSheet.ts', () => {
   it('should render a colored paper', () => {
     const wrapper = mountFunction({
       propsData: {
-        color: 'blue lighten-1'
-      }
+        color: 'blue lighten-1',
+      },
     })
 
     expect(wrapper.element.classList).toContain('blue')
@@ -39,8 +39,8 @@ describe('VSheet.ts', () => {
   it('should render a tile paper', () => {
     const wrapper = mountFunction({
       propsData: {
-        tile: true
-      }
+        tile: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()

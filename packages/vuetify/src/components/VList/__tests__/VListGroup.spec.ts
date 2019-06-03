@@ -4,7 +4,7 @@ import VListGroup from '../VListGroup'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VListGroup.ts', () => {
@@ -14,7 +14,7 @@ describe('VListGroup.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VListGroup, {
-        ...options
+        ...options,
       })
     }
   })
@@ -33,15 +33,15 @@ describe('VListGroup.ts', () => {
         list: {
           listClick,
           register: jest.fn(),
-          unregister: jest.fn()
-        }
+          unregister: jest.fn(),
+        },
       },
       propsData: {
-        group: 'foo'
+        group: 'foo',
       },
       mocks: {
-        $route
-      }
+        $route,
+      },
     })
 
     await wrapper.vm.$nextTick()
@@ -64,9 +64,9 @@ describe('VListGroup.ts', () => {
       provide: {
         list: {
           register,
-          unregister: () => {}
-        }
-      }
+          unregister: () => {},
+        },
+      },
     })
 
     expect(register).toHaveBeenCalledWith(wrapper.vm)
@@ -78,9 +78,9 @@ describe('VListGroup.ts', () => {
       provide: {
         list: {
           register: () => {},
-          unregister
-        }
-      }
+          unregister,
+        },
+      },
     })
 
     wrapper.destroy()
@@ -92,12 +92,12 @@ describe('VListGroup.ts', () => {
     const wrapper = mountFunction({
       slots: {
         appendIcon: {
-          render: h => h('span', 'foo')
+          render: h => h('span', 'foo'),
         },
         prependIcon: {
-          render: h => h('span', 'bar')
-        }
-      }
+          render: h => h('span', 'bar'),
+        },
+      },
     })
 
     expect(wrapper.html()).toContain('<span>foo</span>')
@@ -110,9 +110,9 @@ describe('VListGroup.ts', () => {
       methods: { click },
       slots: {
         activator: {
-          template: '<span>foo</span>'
-        }
-      }
+          template: '<span>foo</span>',
+        },
+      },
     })
 
     const span = wrapper.find('span')
@@ -130,13 +130,13 @@ describe('VListGroup.ts', () => {
         list: {
           listClick,
           register: () => {},
-          unregister: () => {}
-        }
+          unregister: () => {},
+        },
       },
       propsData: {
-        group: 'foo'
+        group: 'foo',
       },
-      mocks: { $route }
+      mocks: { $route },
     })
 
     expect(wrapper.vm.isActive).toBe(false)
@@ -152,11 +152,11 @@ describe('VListGroup.ts', () => {
   it('should not react to clicks when disabled', () => {
     const wrapper = mountFunction({
       propsData: {
-        disabled: true
+        disabled: true,
       },
       slots: {
-        activator: { template: '<span class="bar">foo</span>' }
-      }
+        activator: { template: '<span class="bar">foo</span>' },
+      },
     })
 
     const span = wrapper.find('span.bar')

@@ -66,7 +66,7 @@
       entries: [],
       isLoading: false,
       model: null,
-      search: null
+      search: null,
     }),
 
     computed: {
@@ -76,7 +76,7 @@
         return Object.keys(this.model).map(key => {
           return {
             key,
-            value: this.model[key] || 'n/a'
+            value: this.model[key] || 'n/a',
           }
         })
       },
@@ -88,7 +88,7 @@
 
           return Object.assign({}, entry, { Description })
         })
-      }
+      },
     },
 
     watch: {
@@ -113,8 +113,8 @@
             console.log(err)
           })
           .finally(() => (this.isLoading = false))
-      }
-    }
+      },
+    },
   }
 </script>
 

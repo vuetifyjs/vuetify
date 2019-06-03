@@ -24,38 +24,38 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
   props: {
     closeDelay: {
       type: [Number, String],
-      default: 0
+      default: 0,
     },
     debounce: {
       type: [Number, String],
-      default: 0
+      default: 0,
     },
     disabled: Boolean,
     fixed: {
       type: Boolean,
-      default: true
+      default: true,
     },
     openDelay: {
       type: [Number, String],
-      default: 0
+      default: 0,
     },
     openOnHover: {
       type: Boolean,
-      default: true
+      default: true,
     },
     tag: {
       type: String,
-      default: 'span'
+      default: 'span',
     },
     transition: String,
     zIndex: {
-      default: null
-    }
+      default: null,
+    },
   },
 
   data: () => ({
     calculatedMinWidth: 0,
-    closeDependents: false
+    closeDependents: false,
   }),
 
   computed: {
@@ -113,7 +113,7 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
         'v-tooltip--top': this.top,
         'v-tooltip--right': this.right,
         'v-tooltip--bottom': this.bottom,
-        'v-tooltip--left': this.left
+        'v-tooltip--left': this.left,
       }
     },
     computedTransition (): string {
@@ -134,9 +134,9 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
         minWidth: convertToUnit(this.minWidth),
         opacity: this.isActive ? 0.9 : 0,
         top: this.calculatedTop,
-        zIndex: this.zIndex || this.activeZIndex
+        zIndex: this.zIndex || this.activeZIndex,
       }
-    }
+    },
   },
 
   beforeMount () {
@@ -181,7 +181,7 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
       }
 
       return listeners
-    }
+    },
   },
 
   render (h): VNode {
@@ -190,27 +190,27 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
       'class': {
         [this.contentClass]: true,
         'menuable__content__active': this.isActive,
-        'v-tooltip__content--fixed': this.activatorFixed
+        'v-tooltip__content--fixed': this.activatorFixed,
       },
       style: this.styles,
       attrs: this.getScopeIdAttrs(),
       directives: [{
         name: 'show',
-        value: this.isContentActive
+        value: this.isContentActive,
       }],
-      ref: 'content'
+      ref: 'content',
     }), this.showLazyContent(this.getContentSlot()))
 
     return h(this.tag, {
       staticClass: 'v-tooltip',
-      'class': this.classes
+      'class': this.classes,
     }, [
       h('transition', {
         props: {
-          name: this.computedTransition
-        }
+          name: this.computedTransition,
+        },
       }, [tooltip]),
-      this.genActivator()
+      this.genActivator(),
     ])
-  }
+  },
 })

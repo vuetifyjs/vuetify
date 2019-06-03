@@ -15,7 +15,7 @@ describe('VTimePickerClock.js', () => {
         right: 300,
         bottom: 300,
         x: 0,
-        y: 0
+        y: 0,
       }
     }
 
@@ -28,7 +28,7 @@ describe('VTimePickerClock.js', () => {
         right: 246,
         bottom: 246,
         x: 0,
-        y: 0
+        y: 0,
       }
     }
   }
@@ -40,8 +40,8 @@ describe('VTimePickerClock.js', () => {
         max: 59,
         min: 0,
         step: 5,
-        value: 10
-      }
+        value: 10,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -55,8 +55,8 @@ describe('VTimePickerClock.js', () => {
         max: 59,
         min: 0,
         step: 5,
-        value: 10
-      }
+        value: 10,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -70,8 +70,8 @@ describe('VTimePickerClock.js', () => {
         max: 59,
         min: 0,
         step: 5,
-        value: 10
-      }
+        value: 10,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -83,8 +83,8 @@ describe('VTimePickerClock.js', () => {
         max: 59,
         min: 3,
         value: 59,
-        scrollable: true
-      }
+        scrollable: true,
+      },
     })
 
     const input = jest.fn()
@@ -100,8 +100,8 @@ describe('VTimePickerClock.js', () => {
         min: 1,
         value: 6,
         scrollable: true,
-        readonly: true
-      }
+        readonly: true,
+      },
     })
 
     const input = jest.fn()
@@ -117,8 +117,8 @@ describe('VTimePickerClock.js', () => {
         min: 1,
         value: 6,
         scrollable: true,
-        allowedValues: val => !(val % 3)
-      }
+        allowedValues: val => !(val % 3),
+      },
     })
 
     const input = jest.fn()
@@ -133,8 +133,8 @@ describe('VTimePickerClock.js', () => {
         max: 59,
         min: 3,
         value: 59,
-        scrollable: false
-      }
+        scrollable: false,
+      },
     })
 
     const input = jest.fn()
@@ -148,8 +148,8 @@ describe('VTimePickerClock.js', () => {
       propsData: {
         value: 59,
         min: 0,
-        max: 60
-      }
+        max: 60,
+      },
     })
 
     const change = jest.fn()
@@ -169,8 +169,8 @@ describe('VTimePickerClock.js', () => {
         value: 59,
         min: 0,
         max: 60,
-        readonly: true
-      }
+        readonly: true,
+      },
     })
 
     const change = jest.fn()
@@ -189,8 +189,8 @@ describe('VTimePickerClock.js', () => {
       propsData: {
         value: 59,
         min: 0,
-        max: 60
-      }
+        max: 60,
+      },
     })
 
     const change = jest.fn()
@@ -210,8 +210,8 @@ describe('VTimePickerClock.js', () => {
       propsData: {
         value: 59,
         min: 0,
-        max: 60
-      }
+        max: 60,
+      },
     })
 
     const center = { x: 1, y: 1 }
@@ -229,8 +229,8 @@ describe('VTimePickerClock.js', () => {
         allowedValues: value => value >= 59 && value <= 60,
         min: 0,
         max: 59,
-        size: 320
-      }
+        size: 320,
+      },
     })
 
     createBoundingRect(wrapper)
@@ -249,8 +249,8 @@ describe('VTimePickerClock.js', () => {
         max: 7,
         value: 0,
         size: 320,
-        double: true
-      }
+        double: true,
+      },
     })
 
     createBoundingRect(wrapper)

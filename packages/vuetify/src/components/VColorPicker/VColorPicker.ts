@@ -23,12 +23,12 @@ export default mixins(Themeable).extend({
   props: {
     canvasHeight: {
       type: [String, Number],
-      default: 150
+      default: 150,
     },
     disabled: Boolean,
     dotSize: {
       type: [Number, String],
-      default: 10
+      default: 10,
     },
     flat: Boolean,
     hideCanvas: Boolean,
@@ -37,25 +37,25 @@ export default mixins(Themeable).extend({
     mode: {
       type: String,
       default: 'rgba',
-      validator: (v: string) => Object.keys(modes).includes(v)
+      validator: (v: string) => Object.keys(modes).includes(v),
     },
     showSwatches: Boolean,
     swatches: Array as PropValidator<string[][]>,
     swatchesMaxHeight: {
       type: [Number, String],
-      default: 150
+      default: 150,
     },
     value: {
-      type: [Object, String]
+      type: [Object, String],
     },
     width: {
       type: [Number, String],
-      default: 300
-    }
+      default: 300,
+    },
   },
 
   data: () => ({
-    internalValue: fromRGBA({ r: 255, g: 0, b: 0, a: 1 })
+    internalValue: fromRGBA({ r: 255, g: 0, b: 0, a: 1 }),
   }),
 
   watch: {
@@ -63,8 +63,8 @@ export default mixins(Themeable).extend({
       handler (color: any) {
         this.updateColor(parseColor(color, this.internalValue))
       },
-      immediate: true
-    }
+      immediate: true,
+    },
   },
 
   methods: {
@@ -84,19 +84,19 @@ export default mixins(Themeable).extend({
           disabled: this.disabled,
           dotSize: this.dotSize,
           width: this.width,
-          height: this.canvasHeight
+          height: this.canvasHeight,
         },
         on: {
-          'update:color': this.updateColor
-        }
+          'update:color': this.updateColor,
+        },
       })
     },
     genControls (): VNode {
       return this.$createElement('div', {
-        staticClass: 'v-color-picker__controls'
+        staticClass: 'v-color-picker__controls',
       }, [
         this.genPreview(),
-        !this.hideInputs && this.genEdit()
+        !this.hideInputs && this.genEdit(),
       ])
     },
     genEdit (): VNode {
@@ -105,23 +105,23 @@ export default mixins(Themeable).extend({
           color: this.internalValue,
           disabled: this.disabled,
           hideModeSwitch: this.hideModeSwitch,
-          mode: this.mode
+          mode: this.mode,
         },
         on: {
           'update:color': this.updateColor,
-          'update:mode': (v: Mode) => this.$emit('update:mode', v)
-        }
+          'update:mode': (v: Mode) => this.$emit('update:mode', v),
+        },
       })
     },
     genPreview (): VNode {
       return this.$createElement(VColorPickerPreview, {
         props: {
           color: this.internalValue,
-          disabled: this.disabled
+          disabled: this.disabled,
         },
         on: {
-          'update:color': this.updateColor
-        }
+          'update:color': this.updateColor,
+        },
       })
     },
     genSwatches (): VNode {
@@ -131,13 +131,13 @@ export default mixins(Themeable).extend({
           light: this.light,
           swatches: this.swatches,
           color: this.internalValue,
-          maxHeight: this.swatchesMaxHeight
+          maxHeight: this.swatchesMaxHeight,
         },
         on: {
-          'update:color': this.updateColor
-        }
+          'update:color': this.updateColor,
+        },
       })
-    }
+    },
   },
 
   render (h): VNode {
@@ -145,15 +145,15 @@ export default mixins(Themeable).extend({
       staticClass: 'v-color-picker',
       class: {
         'v-color-picker--flat': this.flat,
-        ...this.themeClasses
+        ...this.themeClasses,
       },
       props: {
-        maxWidth: this.width
-      }
+        maxWidth: this.width,
+      },
     }, [
       !this.hideCanvas && this.genCanvas(),
       this.genControls(),
-      this.showSwatches && this.genSwatches()
+      this.showSwatches && this.genSwatches(),
     ])
-  }
+  },
 })

@@ -14,7 +14,7 @@ import {
   VTimestampFormatter,
   createDayList,
   getDayIdentifier,
-  createNativeLocaleFormatter
+  createNativeLocaleFormatter,
 } from './util/timestamp'
 
 /* @vue/component */
@@ -73,7 +73,7 @@ export default CalendarBase.extend({
         this.currentLocale,
         (_tms, short) => short ? shortOptions : longOptions
       )
-    }
+    },
   },
 
   methods: {
@@ -85,7 +85,7 @@ export default CalendarBase.extend({
     },
     genHead (): VNode {
       return this.$createElement('div', {
-        staticClass: 'v-calendar-weekly__head'
+        staticClass: 'v-calendar-weekly__head',
       }, this.genHeadDays())
     },
     genHeadDays (): VNode[] {
@@ -98,7 +98,7 @@ export default CalendarBase.extend({
       return this.$createElement('div', this.setTextColor(color, {
         key: day.date,
         staticClass: 'v-calendar-weekly__head-weekday',
-        class: this.getRelativeClasses(day, outside)
+        class: this.getRelativeClasses(day, outside),
       }), this.weekdayFormatter(day, this.shortWeekdays))
     },
     genWeeks (): VNode[] {
@@ -114,7 +114,7 @@ export default CalendarBase.extend({
     genWeek (week: VTimestamp[]): VNode {
       return this.$createElement('div', {
         key: week[0].date,
-        staticClass: 'v-calendar-weekly__week'
+        staticClass: 'v-calendar-weekly__week',
       }, week.map(this.genDay))
     },
     genDay (day: VTimestamp): VNode {
@@ -127,11 +127,11 @@ export default CalendarBase.extend({
         key: day.date,
         staticClass: 'v-calendar-weekly__day',
         class: this.getRelativeClasses(day, outside),
-        on: this.getDefaultMouseEventHandlers(':day', _e => day)
+        on: this.getDefaultMouseEventHandlers(':day', _e => day),
       }, [
         this.genDayLabel(day),
         hasMonth ? this.genDayMonth(day) : '',
-        slot ? slot(slotData) : ''
+        slot ? slot(slotData) : '',
       ])
     },
     genDayLabel (day: VTimestamp): VNode {
@@ -142,8 +142,8 @@ export default CalendarBase.extend({
         staticClass: 'v-calendar-weekly__day-label',
         on: this.getMouseEventHandlers({
           'click:date': { event: 'click', stop: true },
-          'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false }
-        }, _e => day)
+          'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false },
+        }, _e => day),
       }), slot ? slot(day) as VNodeChildren : this.dayFormatter(day, false))
     },
     genDayMonth (day: VTimestamp): VNode | string {
@@ -151,9 +151,9 @@ export default CalendarBase.extend({
       const slot = this.$scopedSlots.dayMonth
 
       return this.$createElement('div', this.setTextColor(color, {
-        staticClass: 'v-calendar-weekly__day-month'
+        staticClass: 'v-calendar-weekly__day-month',
       }), slot ? slot(day) as VNodeChildren : this.monthFormatter(day, this.shortMonths))
-    }
+    },
   },
 
   render (h): VNode {
@@ -163,11 +163,11 @@ export default CalendarBase.extend({
       nativeOn: {
         dragstart: (e: MouseEvent) => {
           e.preventDefault()
-        }
-      }
+        },
+      },
     }, [
       !this.hideHeader ? this.genHead() : '',
-      ...this.genWeeks()
+      ...this.genWeeks(),
     ])
-  }
+  },
 })

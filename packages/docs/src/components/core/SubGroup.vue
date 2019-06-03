@@ -12,9 +12,9 @@
         type: Object,
         default: () => ({
           text: '',
-          icon: false
-        })
-      }
-    }
+          icon: false,
+        }),
+      },
+    },
   }
 </script>

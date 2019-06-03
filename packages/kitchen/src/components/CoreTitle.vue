@@ -21,7 +21,7 @@
     computed: {
       id () {
         return this.$slots.default[0].text.replace(/([a-z])([A-Z])/g, '$1-$2').replace(/\s+/g, '-').replace('+', '-').replace(/\s:/g, '-').toLowerCase()
-      }
-    }
+      },
+    },
   }
 </script>

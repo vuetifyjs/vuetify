@@ -29,7 +29,7 @@
 
       <core-title>Active class</core-title>
       <core-section center>
-        <v-chip-group active-class="success"  data-cy-flex="active">
+        <v-chip-group active-class="success" data-cy-flex="active">
           <v-chip
             v-for="n in 3"
             :key="n"
@@ -59,6 +59,6 @@
   export default {
     name: 'ChipGroups',
 
-    data: () => ({})
+    data: () => ({}),
   }
 </script>

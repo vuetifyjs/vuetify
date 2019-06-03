@@ -11,8 +11,8 @@ export default mixins(header).extend({
     genGroupByToggle (header: TableHeader) {
       return this.$createElement('span', {
         on: {
-          click: () => this.$emit('group', header.value)
-        }
+          click: () => this.$emit('group', header.value),
+        },
       }, ['group'])
     },
     // eslint-disable-next-line max-statements
@@ -24,12 +24,12 @@ export default mixins(header).extend({
         scope: 'col',
         'aria-label': header.text || '',
         'aria-sort': 'none',
-        width: header.width
+        width: header.width,
       }
 
       const classes = [
         getTextAlignment(header.align, this.$vuetify.rtl),
-        ...wrapInArray(header.class)
+        ...wrapInArray(header.class),
       ]
 
       if (header.value === 'data-table-select' && !this.singleSelect) {
@@ -77,16 +77,16 @@ export default mixins(header).extend({
       return this.$createElement('th', {
         attrs,
         class: classes,
-        on: listeners
+        on: listeners,
       }, children)
-    }
+    },
   },
 
   render (): VNode {
     return this.$createElement('thead', {
-      staticClass: 'v-data-table-header'
+      staticClass: 'v-data-table-header',
     }, [
-      this.$createElement('tr', this.headers.map(header => this.genHeader(header)))
+      this.$createElement('tr', this.headers.map(header => this.genHeader(header))),
     ])
-  }
+  },
 })

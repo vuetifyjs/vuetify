@@ -5,31 +5,31 @@
   // Utilities
   import {
     mapGetters,
-    mapState
+    mapState,
   } from 'vuex'
 
   export default {
     props: {
       code: {
         type: [Array, String],
-        default: ''
+        default: '',
       },
       source: {
         type: String,
-        default: ''
+        default: '',
       },
       tag: {
         type: String,
-        default: 'div'
-      }
+        default: 'div',
+      },
     },
 
     computed: {
       ...mapGetters('documentation', [
         'namespace',
-        'page'
+        'page',
       ]),
-      ...mapState('route', ['params'])
+      ...mapState('route', ['params']),
     },
 
     render (h) {
@@ -65,11 +65,11 @@
       return h(this.tag, {
         staticClass: 'markdown',
         class: {
-          'mb-3': wantsList
+          'mb-3': wantsList,
         },
-        domProps: { innerHTML: marked(code) }
+        domProps: { innerHTML: marked(code) },
       })
-    }
+    },
   }
 </script>
 

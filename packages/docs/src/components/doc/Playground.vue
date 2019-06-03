@@ -12,29 +12,29 @@
   // Utilities
   import kebabCase from 'lodash/kebabCase'
   import {
-    mapGetters
+    mapGetters,
   } from 'vuex'
 
   export default {
     props: {
       value: {
         type: [Object, String],
-        default: undefined
-      }
+        default: undefined,
+      },
     },
 
     computed: {
       ...mapGetters('documentation', [
         'namespace',
-        'page'
+        'page',
       ]),
       internalValue () {
         return this.value === Object(this.value)
           ? this.value
           : { file: this.value }
-      }
+      },
     },
 
-    methods: { kebabCase }
+    methods: { kebabCase },
   }
 </script>

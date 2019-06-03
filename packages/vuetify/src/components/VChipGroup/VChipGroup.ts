@@ -19,14 +19,14 @@ export default mixins(
 
   provide () {
     return {
-      chipGroup: this
+      chipGroup: this,
     }
   },
 
   props: {
     choice: Boolean,
     column: Boolean,
-    outlined: Boolean
+    outlined: Boolean,
   },
 
   computed: {
@@ -34,9 +34,9 @@ export default mixins(
       return {
         ...BaseSlideGroup.options.computed.classes.call(this),
         'v-chip-group': true,
-        'v-chip-group--column': this.column
+        'v-chip-group--column': this.column,
       }
-    }
+    },
   },
 
   watch: {
@@ -44,14 +44,14 @@ export default mixins(
       if (val) this.scrollOffset = 0
 
       this.$nextTick(this.onResize)
-    }
+    },
   },
 
   methods: {
     genData () {
       return this.setTextColor(this.color, {
-        ...BaseSlideGroup.options.methods.genData.call(this)
+        ...BaseSlideGroup.options.methods.genData.call(this),
       })
-    }
-  }
+    },
+  },
 })

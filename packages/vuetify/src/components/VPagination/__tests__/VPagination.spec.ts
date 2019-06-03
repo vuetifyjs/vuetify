@@ -2,7 +2,7 @@ import VPagination from '../VPagination'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 import Vue from 'vue'
 
@@ -11,9 +11,9 @@ Vue.prototype.$vuetify = {
   icons: {
     values: {
       next: 'mdi-chevron-right',
-      prev: 'mdi-chevron-left'
-    }
-  }
+      prev: 'mdi-chevron-left',
+    },
+  },
 }
 
 describe('VPagination.ts', () => {
@@ -31,8 +31,8 @@ describe('VPagination.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         length: 5,
-        value: 2
-      }
+        value: 2,
+      },
     })
     jest.runAllTimers()
 
@@ -57,8 +57,8 @@ describe('VPagination.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         length: 5,
-        value: 2
-      }
+        value: 2,
+      },
     })
     wrapper.vm.$vuetify.rtl = true
     await wrapper.vm.$nextTick()
@@ -71,8 +71,8 @@ describe('VPagination.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         length: 5,
-        value: 2
-      }
+        value: 2,
+      },
     })
     jest.runAllTimers()
 
@@ -92,8 +92,8 @@ describe('VPagination.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         length: 0,
-        value: 1
-      }
+        value: 1,
+      },
     })
     jest.runAllTimers()
 
@@ -104,8 +104,8 @@ describe('VPagination.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         length: 5,
-        value: 1
-      }
+        value: 1,
+      },
     })
 
     jest.runAllTimers()
@@ -119,8 +119,8 @@ describe('VPagination.ts', () => {
   it('should only render start and end of range if length is big', async () => {
     const wrapper = mountFunction({
       propsData: {
-        length: 100
-      }
+        length: 100,
+      },
     })
     jest.runAllTimers()
 
@@ -134,8 +134,8 @@ describe('VPagination.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         length: 100,
-        value: 50
-      }
+        value: 50,
+      },
     })
     jest.runAllTimers()
 
@@ -149,8 +149,8 @@ describe('VPagination.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         length: 100,
-        totalVisible: 5
-      }
+        totalVisible: 5,
+      },
     })
     const maxLength = wrapper.vm.totalVisible
     const left = Math.floor(maxLength / 2)
@@ -167,8 +167,8 @@ describe('VPagination.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         length: 100,
-        totalVisible: 5
-      }
+        totalVisible: 5,
+      },
     })
     const maxLength = wrapper.vm.totalVisible
     const even = maxLength % 2 === 0 ? 1 : 0
@@ -188,8 +188,8 @@ describe('VPagination.ts', () => {
       propsData: {
         length: 100,
         value: 50,
-        totalVisible: 10
-      }
+        totalVisible: 10,
+      },
     })
     jest.runAllTimers()
 
@@ -212,7 +212,7 @@ describe('VPagination.ts', () => {
   it('should use parents width for on resize calculation', () => {
     const wrapper = mount({
       functional: true,
-      render: h => h('div', [h(VPagination)])
+      render: h => h('div', [h(VPagination)]),
     })
 
     const pagination = wrapper.find(VPagination.options)

@@ -25,14 +25,14 @@
         default: () => ({
           params: {
             namespace: 'getting-started',
-            page: 'sponsors-and-backers'
-          }
-        })
+            page: 'sponsors-and-backers',
+          },
+        }),
       },
       href: {
         type: String,
-        default: undefined
-      }
-    }
+        default: undefined,
+      },
+    },
   }
 </script>

@@ -46,7 +46,7 @@
     data: () => ({
       panel: [0, 1],
       disabled: false,
-      readonly: false
-    })
+      readonly: false,
+    }),
   }
 </script>

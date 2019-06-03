@@ -12,7 +12,7 @@ export default {
 
   state: {
     component: null,
-    raw: null
+    raw: null,
   },
 
   getters: {
@@ -29,13 +29,13 @@ export default {
         style,
         script,
         codepenResources,
-        codepenAdditional
+        codepenAdditional,
       }
-    }
+    },
   },
 
   mutations: {
     setComponent: set('component'),
-    setRaw: set('raw')
-  }
+    setRaw: set('raw'),
+  },
 }

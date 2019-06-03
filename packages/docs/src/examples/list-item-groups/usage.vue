@@ -27,22 +27,22 @@
       items: [
         {
           icon: 'mdi-inbox',
-          text: 'Inbox'
+          text: 'Inbox',
         },
         {
           icon: 'mdi-star',
-          text: 'Star'
+          text: 'Star',
         },
         {
           icon: 'mdi-send',
-          text: 'Send'
+          text: 'Send',
         },
         {
           icon: 'mdi-email-open',
-          text: 'Drafts'
-        }
+          text: 'Drafts',
+        },
       ],
-      model: 1
-    })
+      model: 1,
+    }),
   }
 </script>

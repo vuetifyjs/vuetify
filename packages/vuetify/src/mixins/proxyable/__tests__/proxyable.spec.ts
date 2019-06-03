@@ -2,12 +2,12 @@ import Proxyable, { factory as Proxy } from '../'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('proxyable.ts', () => {
   const Mock = Proxyable.extend({
-    render: h => h('div')
+    render: h => h('div'),
   })
 
   type Instance = InstanceType<typeof Mock>
@@ -21,7 +21,7 @@ describe('proxyable.ts', () => {
   it('should watch prop and emit event', async () => {
     const change = jest.fn()
     const wrapper = mountFunction({
-      propsData: { value: 'foo' }
+      propsData: { value: 'foo' },
     })
 
     wrapper.vm.$on('change', change)
@@ -46,11 +46,11 @@ describe('proxyable.ts', () => {
     const input = jest.fn()
     const wrapper = mount({
       mixins: [Proxy('input', 'update:input-value')],
-      render: h => h('div')
+      render: h => h('div'),
     }, {
       propsData: {
-        input: 'foo'
-      }
+        input: 'foo',
+      },
     })
 
     wrapper.vm.$on('update:input-value', input)

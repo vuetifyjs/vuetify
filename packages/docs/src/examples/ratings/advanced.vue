@@ -127,7 +127,7 @@
     data: () => ({
       copied: false,
       dialog: false,
-      rating: 10
+      rating: 10,
     }),
 
     methods: {
@@ -136,8 +136,8 @@
         markup.focus()
         document.execCommand('selectAll', false, null)
         this.copied = document.execCommand('copy')
-      }
-    }
+      },
+    },
   }
 </script>
 

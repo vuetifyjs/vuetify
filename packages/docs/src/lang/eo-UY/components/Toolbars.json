@@ -1,87 +1,77 @@
 {
-  "header": "crwdns13824:0crwdne13824:0",
-  "headerText": "crwdns13826:0crwdne13826:0",
-  "examples": {
-    "usage": {
-      "desc": "crwdns13828:0crwdne13828:0"
-    },
-    "appBar": {
-      "header": "crwdns13830:0crwdne13830:0",
-      "desc": "crwdns13832:0crwdne13832:0"
-    },
-    "appBarItems": {
-      "header": "crwdns13834:0crwdne13834:0",
-      "desc": "crwdns13836:0crwdne13836:0"
-    },
-    "appBarExtension": {
-      "header": "crwdns13838:0crwdne13838:0",
-      "desc": "crwdns13840:0crwdne13840:0"
-    },
-    "columnWidthWithHierarchy": {
-      "header": "crwdns13842:0crwdne13842:0",
-      "desc": "crwdns13844:0crwdne13844:0"
-    },
-    "flexibleAndCard": {
-      "header": "crwdns13846:0crwdne13846:0",
-      "desc": "crwdns13848:0crwdne13848:0"
-    },
-    "floatingWithSearch": {
-      "header": "crwdns13850:0crwdne13850:0",
-      "desc": "crwdns13852:0crwdne13852:0"
-    },
-    "variations": {
-      "header": "crwdns13854:0crwdne13854:0",
-      "desc": "crwdns13856:0crwdne13856:0",
-      "uninverted": true
-    },
-    "prominent": {
-      "header": "crwdns13860:0crwdne13860:0",
-      "desc": "crwdns13862:0crwdne13862:0"
-    },
-    "dense": {
-      "header": "crwdns13864:0crwdne13864:0",
-      "desc": "crwdns13866:0crwdne13866:0"
-    },
-    "denseProminent": {
-      "header": "crwdns13868:0crwdne13868:0",
-      "desc": "crwdns13870:0crwdne13870:0"
-    },
-    "scrolling": {
-      "header": "crwdns13872:0crwdne13872:0",
-      "desc": "crwdns13874:0crwdne13874:0"
-    },
-    "appBarMenu": {
-      "header": "crwdns13876:0crwdne13876:0",
-      "desc": "crwdns13878:0crwdne13878:0"
-    },
-    "systemBarsStatusWindow": {
-      "header": "crwdns13880:0crwdne13880:0",
-      "desc": "crwdns13882:0crwdne13882:0"
-    }
-  },
-  "props": {
-    "card": "crwdns13884:0crwdne13884:0",
-    "clippedLeft": "crwdns13886:0crwdne13886:0",
-    "clippedRight": "crwdns13888:0crwdne13888:0",
-    "dense": "crwdns13890:0crwdne13890:0",
-    "extended": "crwdns13892:0crwdne13892:0",
-    "extensionHeight": "crwdns13894:0crwdne13894:0",
-    "flat": "crwdns13896:0crwdne13896:0",
-    "floating": "crwdns13898:0crwdne13898:0",
-    "height": "crwdns13900:0crwdne13900:0",
-    "invertedScroll": "crwdns13902:0crwdne13902:0",
-    "lightsOut": "crwdns13904:0crwdne13904:0",
-    "manualScroll": "crwdns13906:0crwdne13906:0",
-    "prominent": "crwdns13908:0crwdne13908:0",
-    "scrollOffScreen": "crwdns13910:0crwdne13910:0",
-    "scrollToolbarOffScreen": "crwdns13912:0crwdne13912:0",
-    "scrollTarget": "crwdns13914:0crwdne13914:0",
-    "scrollThreshold": "crwdns13916:0crwdne13916:0",
-    "status": "crwdns13918:0crwdne13918:0",
-    "tabs": "crwdns13920:0crwdne13920:0",
-    "window": "crwdns13922:0crwdne13922:0"
-  },
-  "slots": {
-    "extension": "crwdns13924:0crwdne13924:0"
-  }
+	"header": "crwdns24876:0crwdne24876:0",
+	"headerText": "crwdns24878:0[v-navigation-drawer]crwdnd24878:0[v-card]crwdne24878:0",
+	"examples": {
+		"usage": {
+			"desc": "crwdns24880:0[v-btn]crwdne24880:0"
+		},
+		"columnWidthWithHierarchy": {
+			"header": "crwdns24882:0crwdne24882:0",
+			"desc": "crwdns24884:0crwdne24884:0"
+		},
+		"flexibleAndCard": {
+			"header": "crwdns24886:0crwdne24886:0",
+			"desc": "crwdns24888:0crwdne24888:0"
+		},
+		"floatingWithSearch": {
+			"header": "crwdns24890:0crwdne24890:0",
+			"desc": "crwdns24892:0crwdne24892:0"
+		},
+		"variations": {
+			"header": "crwdns24894:0crwdne24894:0",
+			"desc": "crwdns24896:0crwdne24896:0",
+			"uninverted": true
+		},
+		"prominent": {
+			"header": "crwdns24900:0crwdne24900:0",
+			"desc": "crwdns24902:0[v-app]crwdne24902:0"
+		},
+		"dense": {
+			"header": "crwdns24904:0crwdne24904:0",
+			"desc": "crwdns24906:0crwdne24906:0"
+		},
+		"denseProminent": {
+			"header": "crwdns24908:0crwdne24908:0",
+			"desc": "crwdns24910:0crwdne24910:0"
+		},
+		"scrolling": {
+			"header": "crwdns24912:0crwdne24912:0",
+			"desc": "crwdns24914:0crwdne24914:0"
+		},
+		"systemBarsStatusWindow": {
+			"header": "crwdns24916:0crwdne24916:0",
+			"desc": "crwdns24918:0crwdne24918:0"
+		},
+		"contextualActionBar": {
+			"header": "crwdns24920:0crwdne24920:0",
+			"desc": "crwdns24922:0crwdne24922:0"
+		},
+		"background": {
+			"header": "crwdns24924:0crwdne24924:0",
+			"desc": "crwdns24926:0[v-img]crwdnd24926:0[v-app-bar]crwdne24926:0"
+		}
+	},
+	"props": {
+		"absolute": "crwdns24928:0crwdne24928:0",
+		"bottom": "crwdns24930:0crwdne24930:0",
+		"collapse": "crwdns24932:0crwdne24932:0",
+		"dense": "crwdns24934:0crwdne24934:0",
+		"extended": "crwdns24936:0crwdne24936:0",
+		"extensionHeight": "crwdns24938:0crwdne24938:0",
+		"flat": "crwdns24940:0crwdne24940:0",
+		"floating": "crwdns24942:0crwdne24942:0",
+		"height": "crwdns24944:0crwdne24944:0",
+		"lightsOut": "crwdns24946:0crwdne24946:0",
+		"prominent": "crwdns24948:0crwdne24948:0",
+		"short": "crwdns24950:0crwdne24950:0",
+		"src": "crwdns24952:0crwdne24952:0",
+		"status": "crwdns24954:0crwdne24954:0",
+		"window": "crwdns24956:0crwdne24956:0"
+	},
+	"slots": {
+		"extension": "crwdns24958:0crwdne24958:0"
+	},
+	"scopedSlots": {
+		"img": "crwdns24960:0crwdne24960:0"
+	}
 }

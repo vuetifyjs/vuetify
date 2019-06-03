@@ -1,0 +1,70 @@
+{
+	"header": "crwdns26326:0crwdne26326:0",
+	"headerText": "crwdns26328:0crwdne26328:0",
+	"examples": {
+		"usage": {
+			"desc": "crwdns26330:0crwdne26330:0"
+		},
+		"linearDeterminate": {
+			"header": "crwdns26332:0crwdne26332:0",
+			"desc": "crwdns26334:0crwdne26334:0"
+		},
+		"linearIndeterminate": {
+			"header": "crwdns26336:0crwdne26336:0",
+			"desc": "crwdns26338:0crwdne26338:0"
+		},
+		"linearBuffer": {
+			"header": "crwdns26340:0crwdne26340:0",
+			"desc": "crwdns26342:0crwdne26342:0"
+		},
+		"linearQueryIndeterminateAndDeterminate": {
+			"header": "crwdns26344:0crwdne26344:0",
+			"desc": "crwdns26346:0crwdne26346:0"
+		},
+		"linearCustomHeightAndContextualColors": {
+			"header": "crwdns26348:0crwdne26348:0",
+			"desc": "crwdns26350:0crwdne26350:0"
+		},
+		"linearCustomColors": {
+			"header": "crwdns26352:0crwdne26352:0",
+			"desc": "crwdns26354:0crwdne26354:0"
+		},
+		"rounded": {
+			"header": "crwdns35760:0crwdne35760:0",
+			"desc": "crwdns35762:0crwdne35762:0"
+		},
+		"loader": {
+			"header": "crwdns35764:0crwdne35764:0",
+			"desc": "crwdns35766:0crwdne35766:0"
+		},
+		"stream": {
+			"header": "crwdns35768:0crwdne35768:0",
+			"desc": "crwdns35770:0crwdne35770:0"
+		},
+		"striped": {
+			"header": "crwdns35772:0crwdne35772:0",
+			"desc": "crwdns35774:0crwdne35774:0"
+		},
+		"slot": {
+			"header": "crwdns35776:0crwdne35776:0",
+			"desc": "crwdns35778:0[v-slider]crwdne35778:0"
+		}
+	},
+	"props": {
+		"active": "crwdns26356:0crwdne26356:0",
+		"backgroundColor": "crwdns26358:0crwdne26358:0",
+		"backgroundOpacity": "crwdns26360:0crwdne26360:0",
+		"bufferValue": "crwdns26362:0crwdne26362:0",
+		"fill": "crwdns26364:0crwdne26364:0",
+		"indeterminate": "crwdns26366:0crwdne26366:0",
+		"query": "crwdns26368:0crwdne26368:0",
+		"rounded": "crwdns35780:0crwdne35780:0",
+		"size": "crwdns26370:0crwdne26370:0",
+		"stream": "crwdns35782:0crwdne35782:0",
+		"striped": "crwdns35784:0crwdne35784:0",
+		"value": "crwdns26372:0crwdne26372:0"
+	},
+	"scopedSlots": {
+		"default": "crwdns35786:0crwdne35786:0"
+	}
+}

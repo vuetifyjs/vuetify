@@ -24,7 +24,7 @@
     data: () => ({
       arrayEvents: null,
       date1: new Date().toISOString().substr(0, 10),
-      date2: new Date().toISOString().substr(0, 10)
+      date2: new Date().toISOString().substr(0, 10),
     }),
 
     mounted () {
@@ -42,7 +42,7 @@
         if ([12, 17, 28].includes(parseInt(day, 10))) return true
         if ([1, 19, 22].includes(parseInt(day, 10))) return ['red', '#00f']
         return false
-      }
-    }
+      },
+    },
   }
 </script>

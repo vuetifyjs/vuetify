@@ -47,13 +47,13 @@
           'secondary',
           'yellow darken-2',
           'red',
-          'orange'
+          'orange',
         ],
         model: 0,
         showArrows: true,
         hideDelimiters: false,
-        cycle: false
+        cycle: false,
       }
-    }
+    },
   }
 </script>

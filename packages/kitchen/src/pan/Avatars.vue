@@ -317,6 +317,6 @@
     name: 'Avatars',
 
     data: () => ({
-    })
+    }),
   }
 </script>

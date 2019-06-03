@@ -1,34 +1,34 @@
 {
-  "props": {
-    "customFilter": "crwdns15588:0crwdne15588:0",
-    "customSort": "crwdns15590:0crwdne15590:0",
-    "disableInitialSort": "crwdns15592:0crwdne15592:0",
-    "expand": "crwdns15594:0crwdne15594:0",
-    "filter": "crwdns15596:0crwdne15596:0",
-    "hideActions": "crwdns15598:0crwdne15598:0",
-    "itemKey": "crwdns15600:0crwdne15600:0",
-    "items": "crwdns15602:0crwdne15602:0",
-    "mustSort": "crwdns15604:0crwdne15604:0",
-    "nextIcon": "crwdns15606:0crwdne15606:0",
-    "noResultsText": "crwdns15608:0crwdne15608:0",
-    "pagination": "crwdns15610:0crwdne15610:0",
-    "prevIcon": "crwdns15612:0crwdne15612:0",
-    "rowsPerPageItems": "crwdns15614:0crwdne15614:0",
-    "rowsPerPageText": "crwdns15616:0crwdne15616:0",
-    "search": "crwdns15618:0crwdne15618:0",
-    "selectAll": "crwdns15620:0crwdne15620:0",
-    "totalItems": "crwdns15622:0crwdne15622:0",
-    "value": "crwdns15624:0crwdne15624:0"
-  },
-  "slots": {
-    "actions-append": "crwdns15626:0crwdne15626:0",
-    "actions-prepend": "crwdns15628:0crwdne15628:0",
-    "footer": "crwdns15630:0crwdne15630:0",
-    "noData": "crwdns15632:0crwdne15632:0",
-    "noResults": "crwdns15634:0crwdne15634:0"
-  },
-  "scopedSlots": {
-    "items": "crwdns15636:0crwdne15636:0",
-    "pageText": "crwdns15638:0crwdne15638:0"
-  }
+	"props": {
+		"customFilter": "crwdns23582:0crwdne23582:0",
+		"customSort": "crwdns23584:0crwdne23584:0",
+		"disableInitialSort": "crwdns23586:0crwdne23586:0",
+		"expand": "crwdns23588:0crwdne23588:0",
+		"filter": "crwdns23590:0crwdne23590:0",
+		"hideActions": "crwdns23592:0crwdne23592:0",
+		"itemKey": "crwdns23594:0crwdne23594:0",
+		"items": "crwdns23596:0crwdne23596:0",
+		"mustSort": "crwdns23598:0crwdne23598:0",
+		"nextIcon": "crwdns23600:0crwdne23600:0",
+		"noResultsText": "crwdns23602:0crwdne23602:0",
+		"pagination": "crwdns23604:0crwdne23604:0",
+		"prevIcon": "crwdns23606:0crwdne23606:0",
+		"rowsPerPageItems": "crwdns23608:0crwdne23608:0",
+		"rowsPerPageText": "crwdns23610:0crwdne23610:0",
+		"search": "crwdns23612:0crwdne23612:0",
+		"selectAll": "crwdns23614:0crwdne23614:0",
+		"totalItems": "crwdns23616:0crwdne23616:0",
+		"value": "crwdns23618:0crwdne23618:0"
+	},
+	"slots": {
+		"actions-append": "crwdns23620:0crwdne23620:0",
+		"actions-prepend": "crwdns23622:0crwdne23622:0",
+		"footer": "crwdns23624:0crwdne23624:0",
+		"noData": "crwdns23626:0crwdne23626:0",
+		"noResults": "crwdns23628:0crwdne23628:0"
+	},
+	"scopedSlots": {
+		"items": "crwdns23630:0crwdne23630:0",
+		"pageText": "crwdns23632:0crwdne23632:0"
+	}
 }

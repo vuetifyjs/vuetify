@@ -13,7 +13,7 @@ export default Vue.extend({
   name: 'routable',
 
   directives: {
-    Ripple
+    Ripple,
   },
 
   props: {
@@ -22,7 +22,7 @@ export default Vue.extend({
     disabled: Boolean,
     exact: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     } as PropValidator<boolean | undefined>,
     exactActiveClass: String,
     link: Boolean,
@@ -32,15 +32,15 @@ export default Vue.extend({
     replace: Boolean,
     ripple: {
       type: [Boolean, Object],
-      default: null
+      default: null,
     },
     tag: String,
-    target: String
+    target: String,
   },
 
   data: () => ({
     isActive: false,
-    proxyClass: ''
+    proxyClass: '',
   }),
 
   computed: {
@@ -70,11 +70,11 @@ export default Vue.extend({
     isLink (): boolean {
       return this.to || this.href || this.link
     },
-    styles: () => ({})
+    styles: () => ({}),
   },
 
   watch: {
-    $route: 'onRouteChange'
+    $route: 'onRouteChange',
   },
 
   methods: {
@@ -88,20 +88,20 @@ export default Vue.extend({
       const data: VNodeData = {
         attrs: {
           disabled: this.disabled,
-          tabindex: 'tabindex' in this.$attrs ? this.$attrs.tabindex : undefined
+          tabindex: 'tabindex' in this.$attrs ? this.$attrs.tabindex : undefined,
         },
         class: this.classes,
         style: this.styles,
         props: {},
         directives: [{
           name: 'ripple',
-          value: this.computedRipple
+          value: this.computedRipple,
         }],
         [this.to ? 'nativeOn' : 'on']: {
           ...this.$listeners,
-          click: this.click
+          click: this.click,
         },
-        ref: 'link'
+        ref: 'link',
       }
 
       if (typeof this.exact === 'undefined') {
@@ -127,7 +127,7 @@ export default Vue.extend({
           activeClass,
           exactActiveClass,
           append: this.append,
-          replace: this.replace
+          replace: this.replace,
         })
       } else {
         tag = (this.href && 'a') || this.tag || 'div'
@@ -152,6 +152,6 @@ export default Vue.extend({
         }
       })
     },
-    toggle: () => { /* noop */ }
-  }
+    toggle: () => { /* noop */ },
+  },
 })

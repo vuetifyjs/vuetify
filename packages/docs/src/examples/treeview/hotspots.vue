@@ -93,7 +93,7 @@
       breweries: [],
       isLoading: false,
       tree: [],
-      types: []
+      types: [],
     }),
 
     computed: {
@@ -101,13 +101,13 @@
         const children = this.types.map(type => ({
           id: type,
           name: this.getName(type),
-          children: this.getChildren(type)
+          children: this.getChildren(type),
         }))
 
         return [{
           id: 1,
           name: 'All Breweries',
-          children
+          children,
         }]
       },
       selections () {
@@ -125,7 +125,7 @@
       },
       shouldShowTree () {
         return this.breweries.length > 0 && !this.isLoading
-      }
+      },
     },
 
     watch: {
@@ -137,7 +137,7 @@
 
           return acc
         }, []).sort()
-      }
+      },
     },
 
     methods: {
@@ -157,7 +157,7 @@
 
           breweries.push({
             ...brewery,
-            name: this.getName(brewery.name)
+            name: this.getName(brewery.name),
           })
         }
 
@@ -167,8 +167,8 @@
       },
       getName (name) {
         return `${name.charAt(0).toUpperCase()}${name.slice(1)}`
-      }
-    }
+      },
+    },
   }
 </script>
 

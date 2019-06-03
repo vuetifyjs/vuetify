@@ -73,25 +73,25 @@
   const types = {
     release: {
       icon: 'mdi-package-variant-closed',
-      color: 'indigo lighten-1'
+      color: 'indigo lighten-1',
     },
     packages: {
       icon: 'mdi-server-network',
       color: 'red lighten-2',
-      small: true
+      small: true,
     },
     site: {
       icon: 'mdi-content-cut',
       color: 'blue-grey',
-      small: true
-    }
+      small: true,
+    },
   }
 
   export default {
     data: () => ({
       index: null,
       interval: null,
-      items: []
+      items: [],
     }),
 
     mounted () {
@@ -99,10 +99,10 @@
         const type = types[item.type]
         return {
           ...type,
-          ...item
+          ...item,
         }
       }).reverse()
-    }
+    },
   }
 </script>
 

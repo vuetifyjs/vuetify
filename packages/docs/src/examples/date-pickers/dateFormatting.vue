@@ -65,19 +65,19 @@
       date: new Date().toISOString().substr(0, 10),
       dateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10)),
       menu1: false,
-      menu2: false
+      menu2: false,
     }),
 
     computed: {
       computedDateFormatted () {
         return this.formatDate(this.date)
-      }
+      },
     },
 
     watch: {
       date (val) {
         this.dateFormatted = this.formatDate(this.date)
-      }
+      },
     },
 
     methods: {
@@ -92,7 +92,7 @@
 
         const [month, day, year] = date.split('/')
         return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
-      }
-    }
+      },
+    },
   }
 </script>

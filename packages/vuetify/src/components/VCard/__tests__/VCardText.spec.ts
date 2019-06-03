@@ -1,7 +1,7 @@
 import {
   mount,
   Wrapper,
-  MountOptions
+  MountOptions,
 } from '@vue/test-utils'
 import VCardText from '../VCardText'
 import { ExtractVue } from '../../../util/mixins'
@@ -24,8 +24,8 @@ describe('VCardText.vue', () => {
   it('should render component with slotted content', () => {
     const wrapper = mountFunction({
       slots: {
-        default: '<span>default</span>'
-      }
+        default: '<span>default</span>',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()

@@ -434,6 +434,6 @@
   export default {
     name: 'AppBars',
 
-    data: () => ({})
+    data: () => ({}),
   }
 </script>

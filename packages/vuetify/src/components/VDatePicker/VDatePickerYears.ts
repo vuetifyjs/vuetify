@@ -36,19 +36,19 @@ export default mixins<options &
     min: [Number, String],
     max: [Number, String],
     readonly: Boolean,
-    value: [Number, String]
+    value: [Number, String],
   },
 
   data () {
     return {
-      defaultColor: 'primary'
+      defaultColor: 'primary',
     }
   },
 
   computed: {
     formatter (): DatePickerFormatter {
       return this.format || createNativeLocaleFormatter(this.currentLocale, { year: 'numeric', timeZone: 'UTC' }, { length: 4 })
-    }
+    },
   },
 
   mounted () {
@@ -72,8 +72,8 @@ export default mixins<options &
         key: year,
         'class': { active },
         on: {
-          click: () => this.$emit('input', year)
-        }
+          click: () => this.$emit('input', year),
+        },
       }), formatted)
     },
 
@@ -88,13 +88,13 @@ export default mixins<options &
       }
 
       return children
-    }
+    },
   },
 
   render (): VNode {
     return this.$createElement('ul', {
       staticClass: 'v-date-picker-years',
-      ref: 'years'
+      ref: 'years',
     }, this.genYearItems())
-  }
+  },
 })

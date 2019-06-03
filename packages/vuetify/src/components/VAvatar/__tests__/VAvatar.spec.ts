@@ -8,7 +8,7 @@ import VAvatar from '../VAvatar'
 import {
   createLocalVue,
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VAvatar', () => {
@@ -21,7 +21,7 @@ describe('VAvatar', () => {
     mountFunction = (options = {}) => {
       return mount(VAvatar, {
         localVue,
-        ...options
+        ...options,
       })
     }
   })
@@ -36,8 +36,8 @@ describe('VAvatar', () => {
   it('should have an proper class with tile prop', () => {
     const wrapper = mountFunction({
       propsData: {
-        tile: true
-      }
+        tile: true,
+      },
     })
 
     expect(wrapper.classes()).toContain('v-avatar--tile')

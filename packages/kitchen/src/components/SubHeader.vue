@@ -6,6 +6,6 @@
 
 <script>
   export default {
-    name: 'SubHeader'
+    name: 'SubHeader',
   }
 </script>

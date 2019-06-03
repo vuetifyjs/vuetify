@@ -1,44 +1,45 @@
 {
-  "header": "crwdns13776:0crwdne13776:0",
-  "headerText": "crwdns13778:0crwdne13778:0",
-  "examples": {
-    "usage": {
-      "desc": "crwdns13780:0crwdne13780:0"
-    },
-    "timeColorable": {
-      "header": "crwdns13782:0crwdne13782:0",
-      "desc": "crwdns13784:0crwdne13784:0"
-    },
-    "timeDialogAndMenu": {
-      "header": "crwdns13786:0crwdne13786:0",
-      "desc": "crwdns13788:0crwdne13788:0"
-    },
-    "time24hFormat": {
-      "header": "crwdns13790:0crwdne13790:0",
-      "desc": "crwdns13792:0crwdne13792:0"
-    },
-    "timeAllowedTimes": {
-      "header": "crwdns13794:0crwdne13794:0",
-      "desc": "crwdns13796:0crwdne13796:0"
-    },
-    "timeWidth": {
-      "header": "crwdns13798:0crwdne13798:0",
-      "desc": "crwdns13800:0crwdne13800:0"
-    }
-  },
-  "props": {
-    "v-time-picker": {
-      "format": "crwdns13802:0crwdne13802:0",
-      "allowedHours": "crwdns13804:0crwdne13804:0",
-      "allowedMinutes": "crwdns13806:0crwdne13806:0",
-      "allowedSeconds": "crwdns13808:0crwdne13808:0",
-      "disabled": "crwdns13810:0crwdne13810:0",
-      "scrollable": "crwdns13812:0crwdne13812:0",
-      "min": "crwdns13814:0crwdne13814:0",
-      "max": "crwdns13816:0crwdne13816:0",
-      "readonly": "crwdns13818:0crwdne13818:0",
-      "useSeconds": "crwdns13820:0crwdne13820:0",
-      "value": "crwdns13822:0crwdne13822:0"
-    }
-  }
+	"header": "crwdns25334:0crwdne25334:0",
+	"headerText": "crwdns25336:0crwdne25336:0",
+	"examples": {
+		"usage": {
+			"desc": "crwdns25338:0crwdne25338:0"
+		},
+		"timeColorable": {
+			"header": "crwdns25340:0crwdne25340:0",
+			"desc": "crwdns25342:0crwdne25342:0"
+		},
+		"timeDialogAndMenu": {
+			"header": "crwdns25344:0crwdne25344:0",
+			"desc": "crwdns25346:0crwdne25346:0"
+		},
+		"time24hFormat": {
+			"header": "crwdns25348:0crwdne25348:0",
+			"desc": "crwdns25350:0crwdne25350:0"
+		},
+		"timeAllowedTimes": {
+			"header": "crwdns25352:0crwdne25352:0",
+			"desc": "crwdns25354:0crwdne25354:0"
+		},
+		"timeWidth": {
+			"header": "crwdns25356:0crwdne25356:0",
+			"desc": "crwdns25358:0crwdne25358:0"
+		}
+	},
+	"props": {
+		"v-time-picker": {
+			"format": "crwdns25360:0crwdne25360:0",
+			"allowedHours": "crwdns25362:0crwdne25362:0",
+			"allowedMinutes": "crwdns25364:0crwdne25364:0",
+			"allowedSeconds": "crwdns25366:0crwdne25366:0",
+			"disabled": "crwdns25368:0crwdne25368:0",
+			"scrollable": "crwdns25370:0crwdne25370:0",
+			"min": "crwdns25372:0crwdne25372:0",
+			"max": "crwdns25374:0crwdne25374:0",
+			"readonly": "crwdns25376:0crwdne25376:0",
+			"useSeconds": "crwdns25378:0crwdne25378:0",
+			"value": "crwdns25380:0crwdne25380:0",
+			"ampmInTitle": "crwdns25382:0crwdne25382:0"
+		}
+	}
 }

@@ -23,7 +23,7 @@
         />
         <div
           class="text-xs-center text-lg-left"
-          :style="`flex: 1 1 ${$vuetify.breakpoint.mdAndDown ? '100%' : 'auto'}`"
+          :style="`flex: 0 1 ${$vuetify.breakpoint.mdAndDown ? '100%' : 'auto'}`"
         >
           <h1
             :class="$vuetify.breakpoint.smAndDown && 'display-1' || 'display-3'"
@@ -88,7 +88,7 @@
   export default {
     components: {
       Feature: () => import('./Feature'),
-      Tidelift: () => import('./Tidelift')
-    }
+      Tidelift: () => import('./Tidelift'),
+    },
   }
 </script>

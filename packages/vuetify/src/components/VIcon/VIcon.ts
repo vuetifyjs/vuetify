@@ -42,14 +42,14 @@ const VIcon = mixins(
     tag: {
       type: String,
       required: false,
-      default: 'i'
-    }
+      default: 'i',
+    },
   },
 
   computed: {
     medium () {
       return false
-    }
+    },
   },
 
   methods: {
@@ -64,7 +64,7 @@ const VIcon = mixins(
         small: this.small,
         medium: this.medium,
         large: this.large,
-        xLarge: this.xLarge
+        xLarge: this.xLarge,
       }
 
       const explicitSize = keys(sizes).find(key => sizes[key])
@@ -81,14 +81,14 @@ const VIcon = mixins(
           'v-icon--left': this.left,
           'v-icon--link': hasClickListener,
           'v-icon--right': this.right,
-          'v-icon--dense': this.dense
+          'v-icon--dense': this.dense,
         },
         attrs: {
           'aria-hidden': !hasClickListener,
           role: hasClickListener ? 'button' : null,
-          ...this.$attrs
+          ...this.$attrs,
         },
-        on: this.$listeners
+        on: this.$listeners,
       }
 
       return data
@@ -134,7 +134,7 @@ const VIcon = mixins(
         viewBox: '0 0 24 24',
         height: '24',
         width: '24',
-        role: 'icon'
+        role: 'icon',
       }
 
       const fontSize = this.getSize()
@@ -142,7 +142,7 @@ const VIcon = mixins(
         data.style = {
           fontSize,
           height: fontSize,
-          width: fontSize
+          width: fontSize,
         }
         data.attrs.height = fontSize
         data.attrs.width = fontSize
@@ -152,8 +152,8 @@ const VIcon = mixins(
 
       return h('svg', data, [h('path', {
         attrs: {
-          d: icon
-        }
+          d: icon,
+        },
       })])
     },
     renderSvgIconComponent (icon: VuetifyIconComponent, h: CreateElement): VNode {
@@ -164,7 +164,7 @@ const VIcon = mixins(
       if (size) {
         data.style = {
           fontSize: size,
-          height: size
+          height: size,
         }
       }
 
@@ -175,7 +175,7 @@ const VIcon = mixins(
       data.nativeOn = data.on
 
       return h(component, data)
-    }
+    },
   },
 
   render (h: CreateElement): VNode {
@@ -189,7 +189,7 @@ const VIcon = mixins(
     }
 
     return this.renderSvgIconComponent(icon, h)
-  }
+  },
 })
 
 export default Vue.extend({
@@ -215,5 +215,5 @@ export default Vue.extend({
     }
 
     return h(VIcon, data, iconName ? [iconName] : children)
-  }
+  },
 })

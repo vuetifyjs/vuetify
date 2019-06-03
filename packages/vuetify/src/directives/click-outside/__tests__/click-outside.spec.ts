@@ -7,7 +7,7 @@ function bootstrap (args?: object) {
 
   const binding = {
     value: jest.fn(),
-    args
+    args,
   }
 
   jest.spyOn(window.document.body, 'addEventListener').mockImplementation((eventName, eventHandler, options) => {
@@ -20,7 +20,7 @@ function bootstrap (args?: object) {
   return {
     callback: binding.value,
     el: el as HTMLElement,
-    registeredHandler
+    registeredHandler,
   }
 }
 
@@ -69,7 +69,7 @@ describe('click-outside.js', () => {
   it('should not call the callback when clicked in elements', async () => {
     const { registeredHandler, callback, el } = bootstrap({
       closeConditional: () => true,
-      include: () => [el]
+      include: () => [el],
     })
 
     registeredHandler({ target: document.createElement('div') })

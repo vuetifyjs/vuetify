@@ -1,40 +1,47 @@
 {
-  "header": "crwdns11716:0crwdne11716:0",
-  "headerText": "crwdns11718:0crwdne11718:0",
-  "supplemental": [
-    "crwdns11720:0crwdne11720:0"
-  ],
-  "examples": {
-    "usage": {
-      "desc": "crwdns11722:0crwdne11722:0"
-    },
-    "noData": {
-      "header": "crwdns11724:0crwdne11724:0",
-      "desc": "crwdns11726:0crwdne11726:0"
-    },
-    "advanced": {
-      "header": "crwdns11728:0crwdne11728:0",
-      "desc": "crwdns11730:0crwdne11730:0"
-    },
-    "comboboxMultiple": {
-      "header": "crwdns11732:0crwdne11732:0",
-      "desc": "crwdns11734:0crwdne11734:0"
-    }
-  },
-  "slots": {
-    "append": "crwdns11736:0crwdne11736:0",
-    "item": "crwdns11738:0crwdne11738:0",
-    "no-data": "crwdns11740:0crwdne11740:0",
-    "prepend": "crwdns11742:0crwdne11742:0",
-    "selection": "crwdns11744:0crwdne11744:0"
-  },
-  "scopedSlots": {
-    "item": "crwdns11746:0crwdne11746:0",
-    "selection": "crwdns11748:0crwdne11748:0"
-  },
-  "events": {
-    "change": "crwdns11750:0crwdne11750:0",
-    "update:error": "crwdns11752:0crwdne11752:0",
-    "update:searchInput": "crwdns11754:0crwdne11754:0"
-  }
+	"header": "crwdns27944:0crwdne27944:0",
+	"headerText": "crwdns27946:0crwdne27946:0",
+	"examples": {
+		"usage": {
+			"desc": "crwdns27950:0crwdne27950:0"
+		},
+		"noData": {
+			"header": "crwdns27952:0crwdne27952:0",
+			"desc": "crwdns27954:0crwdne27954:0"
+		},
+		"advanced": {
+			"header": "crwdns27956:0crwdne27956:0",
+			"desc": "crwdns27958:0crwdne27958:0"
+		},
+		"comboboxMultiple": {
+			"header": "crwdns27960:0crwdne27960:0",
+			"desc": "crwdns27962:0crwdne27962:0"
+		}
+	},
+	"props": {
+		"value": "crwdns27964:0crwdne27964:0"
+	},
+	"slots": {
+		"append": "crwdns27966:0crwdne27966:0",
+		"append-outer": "crwdns27968:0crwdne27968:0",
+		"prepend": "crwdns27970:0crwdne27970:0",
+		"prepend-inner": "crwdns27972:0crwdne27972:0",
+		"append-item": "crwdns27974:0crwdne27974:0",
+		"no-data": "crwdns27976:0crwdne27976:0",
+		"prepend-item": "crwdns27978:0crwdne27978:0"
+	},
+	"scopedSlots": {
+		"item": "crwdns27980:0crwdne27980:0",
+		"selection": "crwdns27982:0crwdne27982:0"
+	},
+	"events": {
+		"change": "crwdns27984:0crwdne27984:0",
+		"click:append": "crwdns27986:0crwdne27986:0",
+		"click:append-outer": "crwdns27988:0crwdne27988:0",
+		"click:clear": "crwdns27990:0crwdne27990:0",
+		"click:prepend": "crwdns27992:0crwdne27992:0",
+		"click:prepend-inner": "crwdns27994:0crwdne27994:0",
+		"update:error": "crwdns27996:0crwdne27996:0",
+		"update:searchInput": "crwdns27998:0crwdne27998:0"
+	}
 }

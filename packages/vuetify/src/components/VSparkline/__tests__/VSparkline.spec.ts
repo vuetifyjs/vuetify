@@ -4,7 +4,7 @@ import VSparkline from '../VSparkline'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VSparkline.ts', () => {
@@ -14,7 +14,7 @@ describe('VSparkline.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VSparkline, {
-        ...options
+        ...options,
       })
     }
   })
@@ -22,8 +22,8 @@ describe('VSparkline.ts', () => {
   it('should render component and match a snapshot', async () => {
     const wrapper = mountFunction({
       propsData: {
-        value: [1, 7, 42]
-      }
+        value: [1, 7, 42],
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -33,8 +33,8 @@ describe('VSparkline.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         value: [1, 7, 42],
-        padding: 20
-      }
+        padding: 20,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -44,8 +44,8 @@ describe('VSparkline.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         value: [1, 7, 42],
-        smooth: 20
-      }
+        smooth: 20,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -55,8 +55,8 @@ describe('VSparkline.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         value: [1, 7, 42],
-        lineWidth: 42
-      }
+        lineWidth: 42,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -66,8 +66,8 @@ describe('VSparkline.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         value: [1, 7, 42],
-        gradient: ['#000', 'red', 'rgba(80, 160, 240, 0.5)']
-      }
+        gradient: ['#000', 'red', 'rgba(80, 160, 240, 0.5)'],
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -77,8 +77,8 @@ describe('VSparkline.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         showLabels: true,
-        value: [1, 7, 42]
-      }
+        value: [1, 7, 42],
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -86,21 +86,21 @@ describe('VSparkline.ts', () => {
     wrapper.setProps({
       value: [
         {
-          value: 2
+          value: 2,
         },
         {
-          value: 8
+          value: 8,
         },
         {
-          value: 43
-        }
-      ]
+          value: 43,
+        },
+      ],
     })
 
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({
-      labels: ['foo', 'bar', 'baz']
+      labels: ['foo', 'bar', 'baz'],
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -110,8 +110,8 @@ describe('VSparkline.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         value: [1, 7, 42],
-        type: 'bar'
-      }
+        type: 'bar',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -122,8 +122,8 @@ describe('VSparkline.ts', () => {
       propsData: {
         value: [1, 7, 42],
         gradient: ['#000', 'red', 'rgba(80, 160, 240, 0.5)'],
-        type: 'bar'
-      }
+        type: 'bar',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -134,8 +134,8 @@ describe('VSparkline.ts', () => {
       propsData: {
         value: [1, 7, 42],
         labels: ['Value 1', 'Value 2', 'Value 3'],
-        type: 'bar'
-      }
+        type: 'bar',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -146,8 +146,8 @@ describe('VSparkline.ts', () => {
       propsData: {
         value: [1, 7, 42],
         type: 'bar',
-        autoLineWidth: true
-      }
+        autoLineWidth: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -158,8 +158,8 @@ describe('VSparkline.ts', () => {
       propsData: {
         value: [1, 7, 42],
         type: 'bar',
-        lineWidth: 8
-      }
+        lineWidth: 8,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -170,8 +170,8 @@ describe('VSparkline.ts', () => {
       propsData: {
         value: [1, 7, 42],
         type: 'bar',
-        padding: 12
-      }
+        padding: 12,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -183,8 +183,8 @@ describe('VSparkline.ts', () => {
         value: [1, 7, 42],
         type: 'bar',
         autoLineWidth: true,
-        padding: 12
-      }
+        padding: 12,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -196,8 +196,8 @@ describe('VSparkline.ts', () => {
         value: [1, 7, 42],
         labels: ['Value 1', 'Value 2', 'Value 3'],
         labelSize: 15,
-        type: 'bar'
-      }
+        type: 'bar',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()

@@ -100,8 +100,8 @@
   export default {
     data () {
       return {
-        settings: []
+        settings: [],
       }
-    }
+    },
   }
 </script>
