@@ -30,6 +30,7 @@ export const defaultMenuProps = {
   eager: true,
   closeOnClick: false,
   closeOnContentClick: false,
+  disableKeys: true,
   openOnClick: false,
   maxHeight: 300,
 }
@@ -246,6 +247,7 @@ export default baseMixins.extend<options>().extend({
 
   watch: {
     internalValue (val) {
+      console.log('internal value')
       this.initialValue = val
       this.setSelectedItems()
     },
@@ -597,7 +599,9 @@ export default baseMixins.extend<options>().extend({
         keyCodes.up, keyCodes.down,
       ].includes(keyCode)) this.activateMenu()
 
-      if (this.isMenuActive && this.$refs.menu) (this.$refs.menu as { [key: string]: any }).changeListIndex(e)
+      if (this.isMenuActive && this.$refs.menu && keyCode !== keyCodes.tab) {
+        (this.$refs.menu as { [key: string]: any }).changeListIndex(e)
+      }
 
       // This should do something different
       if (keyCode === keyCodes.enter) return this.onEnterDown(e)
@@ -656,9 +660,7 @@ export default baseMixins.extend<options>().extend({
       // menu-index should toggled
       if (
         listTile &&
-        listTile.className.indexOf('v-list-item--highlighted') > -1 &&
-        this.isMenuActive &&
-        menuIndex > -1
+        this.isMenuActive
       ) {
         e.preventDefault()
         e.stopPropagation()
@@ -691,6 +693,14 @@ export default baseMixins.extend<options>().extend({
           this.$refs.menu &&
             (this.$refs.menu as { [key: string]: any }).updateDimensions()
         })
+
+        const listIndex = this.getMenuIndex()
+
+        this.$refs.menu.listIndex = -1
+
+        this.$nextTick(() => {
+          this.$refs.menu.listIndex = listIndex
+        })
       }
     },
     setMenuIndex (index: number) {
@@ -716,6 +726,7 @@ export default baseMixins.extend<options>().extend({
       this.selectedItems = selectedItems
     },
     setValue (value: any) {
+      console.log('set value')
       const oldValue = this.internalValue
       this.internalValue = value
       value !== oldValue && this.$emit('change', value)

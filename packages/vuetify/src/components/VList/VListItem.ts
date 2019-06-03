@@ -112,7 +112,7 @@ export default baseMixins.extend<options>().extend({
       this.to || this.toggle()
     },
     genAttrs () {
-      let attrs: Record<string, any> = {
+      const attrs: Record<string, any> = {
         'aria-disabled': this.disabled ? true : undefined,
         'aria-selected': String(this.isActive),
         tabindex: this.isClickable && !this.disabled ? 0 : -1,
@@ -124,7 +124,7 @@ export default baseMixins.extend<options>().extend({
       } else if (this.listItemGroup) {
         attrs.role = 'listitem'
       } else if (this.isInMenu) {
-        attrs.role = this.isClickable ? 'menuitem' : undefined,
+        attrs.role = this.isClickable ? 'menuitem' : undefined
       }
 
       return attrs

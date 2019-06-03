@@ -157,6 +157,13 @@ export default baseMixins.extend({
   watch: {
     isActive (val) {
       if (!val) this.listIndex = -1
+
+      for (let i = 0; i < this.tiles.length; i++) {
+        if (this.tiles[i].getAttribute('aria-selected') === 'true') {
+          this.listIndex = i
+          break
+        }
+      }
     },
     isContentActive (val) {
       this.hasJustFocused = val

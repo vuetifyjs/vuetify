@@ -13,6 +13,9 @@ import {
   VListItemTitle,
 } from '../VList'
 
+// Directives
+import ripple from '../../directives/ripple'
+
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
@@ -31,6 +34,11 @@ import { PropValidator } from 'vue/types/options'
 /* @vue/component */
 export default mixins(Colorable, Themeable).extend({
   name: 'v-select-list',
+
+  // https://github.com/vuejs/vue/issues/6872
+  directives: {
+    ripple,
+  },
 
   props: {
     action: Boolean,
