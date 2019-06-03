@@ -38,6 +38,7 @@ export default baseMixins.extend({
 
   provide (): object {
     return {
+      isInMenu: true,
       // Pass theme through to default slot
       theme: this.theme,
     }
@@ -230,12 +231,22 @@ export default baseMixins.extend({
       // For infinite scroll and autocomplete, re-evaluate children
       this.getTiles()
 
-      if (e.keyCode === keyCodes.down && this.listIndex < this.tiles.length - 1) {
-        this.listIndex++
-        // Allow user to set listIndex to -1 so
-        // that the list can be un-highlighted
-      } else if (e.keyCode === keyCodes.up && this.listIndex > -1) {
-        this.listIndex--
+      if (!this.isActive) {
+        return
+      } else if (e.keyCode === keyCodes.tab) {
+        if (
+          (!e.shiftKey && this.listIndex + 1 === this.tiles.length) ||
+          (e.shiftKey && this.listIndex - 1 === -1)
+        ) {
+          window.requestAnimationFrame(() => (this.isActive = false))
+          return
+        }
+
+        e.shiftKey ? this.prevTile() : this.nextTile()
+      } else if (e.keyCode === keyCodes.down) {
+        this.nextTile()
+      } else if (e.keyCode === keyCodes.up) {
+        this.prevTile()
       } else if (e.keyCode === keyCodes.enter && this.listIndex !== -1) {
         this.tiles[this.listIndex].click()
       } else { return }
@@ -248,6 +259,15 @@ export default baseMixins.extend({
       return this.isActive &&
         this.closeOnClick &&
         !this.$refs.content.contains(target)
+    },
+    genActivatorListeners () {
+      const listeners = Menuable.options.methods.genActivatorListeners.call(this)
+
+      if (!this.disableKeys) {
+        listeners.keydown = this.onKeyDown
+      }
+
+      return listeners
     },
     genTransition (): VNode {
       if (!this.transition) return this.genContent()
@@ -280,7 +300,10 @@ export default baseMixins.extend({
     },
     genContent (): VNode {
       const options = {
-        attrs: this.getScopeIdAttrs(),
+        attrs: {
+          ...this.getScopeIdAttrs(),
+          role: 'menu',
+        },
         staticClass: 'v-menu__content',
         'class': {
           ...this.rootThemeClasses,
@@ -343,18 +366,30 @@ export default baseMixins.extend({
         })
       })
     },
+    nextTile () {
+      const tile = this.tiles[this.listIndex + 1]
+
+      if (!tile) return
+
+      this.listIndex++
+
+      if (tile.tabIndex === -1) this.nextTile()
+    },
+    prevTile () {
+      const tile = this.tiles[this.listIndex - 1]
+
+      if (!tile) return
+
+      this.listIndex--
+
+      if (tile.tabIndex === -1) this.prevTile()
+    },
     onKeyDown (e: KeyboardEvent) {
       if (e.keyCode === keyCodes.esc) {
         // Wait for dependent elements to close first
         setTimeout(() => { this.isActive = false })
         const activator = this.getActivator()
         this.$nextTick(() => activator && activator.focus())
-      } else if (e.keyCode === keyCodes.tab) {
-        setTimeout(() => {
-          if (!this.$refs.content.contains(document.activeElement)) {
-            this.isActive = false
-          }
-        })
       } else {
         this.changeListIndex(e)
       }
@@ -389,9 +424,6 @@ export default baseMixins.extend({
         name: 'resize',
         value: this.onResize,
       }],
-      on: this.disableKeys ? undefined : {
-        keydown: this.onKeyDown,
-      },
     }
 
     return h('div', data, [
