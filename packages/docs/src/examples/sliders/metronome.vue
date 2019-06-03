@@ -89,7 +89,7 @@
     data: () => ({
       bpm: 40,
       interval: null,
-      isPlaying: false
+      isPlaying: false,
     }),
 
     computed: {
@@ -102,7 +102,7 @@
       },
       animationDuration () {
         return `${60 / this.bpm}s`
-      }
+      },
     },
 
     methods: {
@@ -114,8 +114,8 @@
       },
       toggle () {
         this.isPlaying = !this.isPlaying
-      }
-    }
+      },
+    },
   }
 </script>
 

@@ -55,36 +55,36 @@
         items: [
           {
             action: 'move_to_inbox',
-            title: 'Inbox'
+            title: 'Inbox',
           },
           {
             action: 'send',
-            title: 'Sent'
+            title: 'Sent',
           },
           {
             action: 'delete',
-            title: 'Trash'
+            title: 'Trash',
           },
           {
             action: 'report',
-            title: 'Spam'
+            title: 'Spam',
           },
           { divider: true },
           { header: 'Labels' },
           {
             action: 'label',
-            title: 'Family'
+            title: 'Family',
           },
           {
             action: 'label',
-            title: 'Friends'
+            title: 'Friends',
           },
           {
             action: 'label',
-            title: 'Work'
-          }
-        ]
+            title: 'Work',
+          },
+        ],
       }
-    }
+    },
   }
 </script>

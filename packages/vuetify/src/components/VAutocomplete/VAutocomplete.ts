@@ -15,7 +15,7 @@ const defaultMenuProps = {
   ...VSelectMenuProps,
   offsetY: true,
   offsetOverflow: true,
-  transition: false
+  transition: false,
 }
 
 /* @vue/component */
@@ -25,38 +25,38 @@ export default VSelect.extend({
   props: {
     allowOverflow: {
       type: Boolean,
-      default: true
+      default: true,
     },
     browserAutocomplete: {
       type: String,
-      default: 'off'
+      default: 'off',
     },
     filter: {
       type: Function,
       default: (item: any, queryText: string, itemText: string) => {
         return itemText.toLocaleLowerCase().indexOf(queryText.toLocaleLowerCase()) > -1
-      }
+      },
     },
     hideNoData: Boolean,
     noFilter: Boolean,
     searchInput: {
       type: String as PropType<string | undefined>,
-      default: undefined
+      default: undefined,
     },
     menuProps: {
       type: VSelect.options.props.menuProps.type,
-      default: () => defaultMenuProps
+      default: () => defaultMenuProps,
     },
     autoSelectFirst: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
 
   data () {
     return {
       attrsInput: null,
-      lazySearch: this.searchInput
+      lazySearch: this.searchInput,
     }
   },
 
@@ -65,7 +65,7 @@ export default VSelect.extend({
       return {
         ...VSelect.options.computed.classes.call(this),
         'v-autocomplete': true,
-        'v-autocomplete--is-selecting-index': this.selectedIndex > -1
+        'v-autocomplete--is-selecting-index': this.selectedIndex > -1,
       }
     },
     computedItems (): object[] {
@@ -97,7 +97,7 @@ export default VSelect.extend({
         this.lazySearch = val
 
         this.$emit('update:searchInput', val)
-      }
+      },
     },
     isAnyValueAllowed (): boolean {
       return false
@@ -124,7 +124,7 @@ export default VSelect.extend({
       (props as any).contentClass = `v-autocomplete__content ${(props as any).contentClass || ''}`.trim()
       return {
         ...defaultMenuProps,
-        ...props
+        ...props,
       }
     },
     searchIsDirty (): boolean {
@@ -149,11 +149,11 @@ export default VSelect.extend({
           !this.isSearching ||
           !this.filteredItems.length
         ),
-        searchInput: this.internalSearch
+        searchInput: this.internalSearch,
       }
 
       return data
-    }
+    },
   },
 
   watch: {
@@ -190,7 +190,7 @@ export default VSelect.extend({
       this.lazySearch = val
     },
     internalSearch: 'onInternalSearchChanged',
-    itemText: 'updateSelf'
+    itemText: 'updateSelf',
   },
 
   created () {
@@ -219,7 +219,7 @@ export default VSelect.extend({
         keyCodes.backspace,
         keyCodes.left,
         keyCodes.right,
-        keyCodes.delete
+        keyCodes.delete,
       ].includes(keyCode)) return
 
       const index = this.selectedItems.length - 1
@@ -245,7 +245,7 @@ export default VSelect.extend({
 
       if ([
         keyCodes.backspace,
-        keyCodes.delete
+        keyCodes.delete,
       ].includes(keyCode) &&
         !this.getDisabled(currentItem)
       ) {
@@ -373,6 +373,6 @@ export default VSelect.extend({
     },
     hasItem (item: any) {
       return this.selectedValues.indexOf(this.getValue(item)) > -1
-    }
-  }
+    },
+  },
 })

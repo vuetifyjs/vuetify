@@ -3,7 +3,7 @@ function createMessage (message: string, vm?: any, parent?: any): string | void 
     vm = {
       _isVue: true,
       $parent: parent,
-      $options: vm
+      $options: vm,
     }
   }
 

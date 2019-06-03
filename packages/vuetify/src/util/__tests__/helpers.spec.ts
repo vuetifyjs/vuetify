@@ -5,7 +5,7 @@ import {
   getPropertyFromItem,
   convertToUnit,
   getSlotType,
-  arrayDiff
+  arrayDiff,
 } from '../helpers'
 
 describe('helpers', () => {
@@ -116,14 +116,14 @@ describe('helpers', () => {
       a: {
         b: {
           c: 1,
-          d: 2
+          d: 2,
         },
         e: [
           { f: 'f' },
-          'e1'
-        ]
+          'e1',
+        ],
       },
-      g: null
+      g: null,
     }
 
     expect(getNestedValue(obj, ['a', 'b', 'c'])).toEqual(1)
@@ -152,13 +152,13 @@ describe('helpers', () => {
   it('should get property from items', () => {
     const obj = {
       a: {
-        b: 1
+        b: 1,
       },
       c: [2, 3, { d: 'd' }],
       'x.y': 'comp',
       x: {
-        y: 'nested'
-      }
+        y: 'nested',
+      },
     }
     expect(getPropertyFromItem(obj, 'a.b')).toEqual(1)
     expect(getPropertyFromItem(obj, 'c.0')).toEqual(2)
@@ -195,9 +195,9 @@ describe('helpers', () => {
     it('should detect old slots', () => {
       const vm = new Vue({
         components: {
-          foo: { render: h => h('div') }
+          foo: { render: h => h('div') },
         },
-        template: `<foo ref="foo"><template slot="bar">hello</template></foo>`
+        template: `<foo ref="foo"><template slot="bar">hello</template></foo>`,
       }).$mount()
 
       expect(getSlotType(vm.$refs.foo, 'bar')).toBe('normal')
@@ -206,9 +206,9 @@ describe('helpers', () => {
     it('should detect old scoped slots', () => {
       const vm = new Vue({
         components: {
-          foo: { render: h => h('div') }
+          foo: { render: h => h('div') },
         },
-        template: `<foo ref="foo"><template slot="bar" slot-scope="data">hello</template></foo>`
+        template: `<foo ref="foo"><template slot="bar" slot-scope="data">hello</template></foo>`,
       }).$mount()
 
       expect(getSlotType(vm.$refs.foo, 'bar')).toBe('scoped')
@@ -217,9 +217,9 @@ describe('helpers', () => {
     it('should detect bare v-slot', () => {
       const vm = new Vue({
         components: {
-          foo: { render: h => h('div') }
+          foo: { render: h => h('div') },
         },
-        template: `<foo ref="foo"><template #bar>hello</template></foo>`
+        template: `<foo ref="foo"><template #bar>hello</template></foo>`,
       }).$mount()
 
       expect(getSlotType(vm.$refs.foo, 'bar', true)).toBe('v-slot')
@@ -228,9 +228,9 @@ describe('helpers', () => {
     it('should detect bound v-slot', () => {
       const vm = new Vue({
         components: {
-          foo: { render: h => h('div') }
+          foo: { render: h => h('div') },
         },
-        template: `<foo ref="foo"><template #bar="data">hello</template></foo>`
+        template: `<foo ref="foo"><template #bar="data">hello</template></foo>`,
       }).$mount()
 
       expect(getSlotType(vm.$refs.foo, 'bar', true)).toBe('scoped')
@@ -239,9 +239,9 @@ describe('helpers', () => {
     it('should count bare v-slot as scoped', () => {
       const vm = new Vue({
         components: {
-          foo: { render: h => h('div') }
+          foo: { render: h => h('div') },
         },
-        template: `<foo ref="foo"><template #bar>hello</template></foo>`
+        template: `<foo ref="foo"><template #bar>hello</template></foo>`,
       }).$mount()
 
       expect(getSlotType(vm.$refs.foo, 'bar')).toBe('scoped')

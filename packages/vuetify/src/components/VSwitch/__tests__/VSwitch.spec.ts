@@ -5,7 +5,7 @@ import VSwitch from '../VSwitch'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 import { touch } from '../../../../test'
 
@@ -26,8 +26,8 @@ describe('VSwitch.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         inputValue: false,
-        ripple: false
-      }
+        ripple: false,
+      },
     })
 
     expect(wrapper.findAll('.v-input--selection-controls__ripple').wrappers).toHaveLength(0)
@@ -45,8 +45,8 @@ describe('VSwitch.ts', () => {
   it('should emit change event on swipe', async () => {
     const wrapper = mountFunction({
       propsData: {
-        inputValue: false
-      }
+        inputValue: false,
+      },
     })
 
     const change = jest.fn()
@@ -64,8 +64,8 @@ describe('VSwitch.ts', () => {
   it('should emit change event on key events', async () => {
     const wrapper = mountFunction({
       propsData: {
-        inputValue: false
-      }
+        inputValue: false,
+      },
     })
 
     const change = jest.fn()
@@ -90,8 +90,8 @@ describe('VSwitch.ts', () => {
   it('should not emit change event on swipe when not active', async () => {
     const wrapper = mountFunction({
       propsData: {
-        inputValue: false
-      }
+        inputValue: false,
+      },
     })
 
     const change = jest.fn()
@@ -107,8 +107,8 @@ describe('VSwitch.ts', () => {
   it('should render element with loader and match the snapshot', async () => {
     const wrapper = mountFunction({
       propsData: {
-        loading: true
-      }
+        loading: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()

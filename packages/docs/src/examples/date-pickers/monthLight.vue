@@ -10,8 +10,8 @@
     data () {
       return {
         picker: new Date().toISOString().substr(0, 7),
-        landscape: false
+        landscape: false,
       }
-    }
+    },
   }
 </script>

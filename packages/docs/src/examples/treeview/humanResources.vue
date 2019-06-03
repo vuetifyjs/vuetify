@@ -53,25 +53,25 @@
               children: [
                 {
                   id: 201,
-                  name: 'John'
+                  name: 'John',
                 },
                 {
                   id: 202,
-                  name: 'Kael'
+                  name: 'Kael',
                 },
                 {
                   id: 203,
-                  name: 'Nekosaur'
+                  name: 'Nekosaur',
                 },
                 {
                   id: 204,
-                  name: 'Jacek'
+                  name: 'Jacek',
                 },
                 {
                   id: 205,
-                  name: 'Andrew'
-                }
-              ]
+                  name: 'Andrew',
+                },
+              ],
             },
             {
               id: 3,
@@ -79,13 +79,13 @@
               children: [
                 {
                   id: 301,
-                  name: 'Ranee'
+                  name: 'Ranee',
                 },
                 {
                   id: 302,
-                  name: 'Rachel'
-                }
-              ]
+                  name: 'Rachel',
+                },
+              ],
             },
             {
               id: 4,
@@ -93,31 +93,31 @@
               children: [
                 {
                   id: 401,
-                  name: 'Phlow'
+                  name: 'Phlow',
                 },
                 {
                   id: 402,
-                  name: 'Brandon'
+                  name: 'Brandon',
                 },
                 {
                   id: 403,
-                  name: 'Sean'
-                }
-              ]
-            }
-          ]
-        }
+                  name: 'Sean',
+                },
+              ],
+            },
+          ],
+        },
       ],
       open: [1, 2],
       search: null,
-      caseSensitive: false
+      caseSensitive: false,
     }),
     computed: {
       filter () {
         return this.caseSensitive
           ? (item, search, textKey) => item[textKey].indexOf(search) > -1
           : undefined
-      }
-    }
+      },
+    },
   }
 </script>

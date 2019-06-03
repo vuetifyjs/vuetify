@@ -17,8 +17,8 @@
     data () {
       return {
         column: null,
-        row: null
+        row: null,
       }
-    }
+    },
   }
 </script>

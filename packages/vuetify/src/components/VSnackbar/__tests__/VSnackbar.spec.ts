@@ -5,7 +5,7 @@ import VSnackbar from '../VSnackbar'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VSnackbar.ts', () => {
@@ -21,8 +21,8 @@ describe('VSnackbar.ts', () => {
   it('should have a v-snack class', () => {
     const wrapper = mountFunction({
       propsData: {
-        value: true
-      }
+        value: true,
+      },
     })
 
     expect(wrapper.classes()).toContain('v-snack')
@@ -32,8 +32,8 @@ describe('VSnackbar.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         value: true,
-        color: 'orange lighten-2'
-      }
+        color: 'orange lighten-2',
+      },
     })
 
     expect(wrapper.findAll('.v-snack__wrapper.orange')).toHaveLength(1)
@@ -44,8 +44,8 @@ describe('VSnackbar.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         value: false,
-        timeout: 1000
-      }
+        timeout: 1000,
+      },
     })
 
     expect(wrapper.findAll('div .v-snack__content')).toHaveLength(0)
@@ -62,8 +62,8 @@ describe('VSnackbar.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         value: false,
-        timeout: 3141
-      }
+        timeout: 3141,
+      },
     })
 
     const value = jest.fn()
@@ -90,8 +90,8 @@ describe('VSnackbar.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         value: true,
-        timeout: 3141
-      }
+        timeout: 3141,
+      },
     })
 
     const value = jest.fn()

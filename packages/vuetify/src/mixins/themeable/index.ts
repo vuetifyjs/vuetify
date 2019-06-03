@@ -11,7 +11,7 @@ interface Themeable extends Vue {
 export function functionalThemeClasses (context: RenderContext): object {
   const vm = {
     ...context.props,
-    ...context.injections
+    ...context.injections,
   }
   const isDark = Themeable.options.computed.isDark.call(vm)
   return Themeable.options.computed.themeClasses.call({ isDark })
@@ -23,34 +23,34 @@ const Themeable = Vue.extend<Themeable>().extend({
 
   provide (): object {
     return {
-      theme: this.themeableProvide
+      theme: this.themeableProvide,
     }
   },
 
   inject: {
     theme: {
       default: {
-        isDark: false
-      }
-    }
+        isDark: false,
+      },
+    },
   },
 
   props: {
     dark: {
       type: Boolean,
-      default: null
+      default: null,
     } as PropValidator<boolean | null>,
     light: {
       type: Boolean,
-      default: null
-    } as PropValidator<boolean | null>
+      default: null,
+    } as PropValidator<boolean | null>,
   },
 
   data () {
     return {
       themeableProvide: {
-        isDark: false
-      }
+        isDark: false,
+      },
     }
   },
 
@@ -70,7 +70,7 @@ const Themeable = Vue.extend<Themeable>().extend({
     themeClasses (): object {
       return {
         'theme--dark': this.isDark,
-        'theme--light': !this.isDark
+        'theme--light': !this.isDark,
       }
     },
     /** Used by menus and dialogs, inherits from v-app instead of the parent */
@@ -89,9 +89,9 @@ const Themeable = Vue.extend<Themeable>().extend({
     rootThemeClasses (): Dictionary<boolean> {
       return {
         'theme--dark': this.rootIsDark,
-        'theme--light': !this.rootIsDark
+        'theme--light': !this.rootIsDark,
       }
-    }
+    },
   },
 
   watch: {
@@ -101,9 +101,9 @@ const Themeable = Vue.extend<Themeable>().extend({
           this.themeableProvide.isDark = this.isDark
         }
       },
-      immediate: true
-    }
-  }
+      immediate: true,
+    },
+  },
 })
 
 export default Themeable

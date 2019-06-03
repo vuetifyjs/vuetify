@@ -26,12 +26,12 @@
     props: {
       lang: {
         type: String,
-        default: 'en'
-      }
+        default: 'en',
+      },
     },
 
     created () {
       this.$ssrContext && this.$ssrContext.res.status(404)
-    }
+    },
   }
 </script>

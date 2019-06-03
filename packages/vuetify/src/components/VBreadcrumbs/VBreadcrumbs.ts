@@ -23,22 +23,22 @@ export default mixins(
   props: {
     divider: {
       type: String,
-      default: '/'
+      default: '/',
     },
     items: {
       type: Array,
-      default: () => ([])
+      default: () => ([]),
     } as PropValidator<any[]>,
-    large: Boolean
+    large: Boolean,
   },
 
   computed: {
     classes (): object {
       return {
         'v-breadcrumbs--large': this.large,
-        ...this.themeClasses
+        ...this.themeClasses,
       }
-    }
+    },
   },
 
   methods: {
@@ -62,7 +62,7 @@ export default mixins(
       }
 
       return items
-    }
+    },
   },
 
   render (h): VNode {
@@ -70,7 +70,7 @@ export default mixins(
 
     return h('ul', {
       staticClass: 'v-breadcrumbs',
-      'class': this.classes
+      'class': this.classes,
     }, children)
-  }
+  },
 })

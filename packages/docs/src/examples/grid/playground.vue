@@ -76,7 +76,7 @@
         reverse: false,
         flexDirectionAvailable: ['row', 'column', ''],
         flexDirection: 'row',
-        fillHeight: true
+        fillHeight: true,
       }
     },
     computed: {
@@ -86,9 +86,9 @@
           [this.justify]: true,
           [this.flexDirection]: true,
           reverse: this.reverse,
-          'fill-height': this.fillHeight
+          'fill-height': this.fillHeight,
         }
-      }
+      },
     },
     methods: {
       formatAttributes (attributes) {
@@ -98,8 +98,8 @@
           attributeArray.push(Key.trim())
         }
         return `<v-layout ${attributeArray.join(' ')}/>`
-      }
-    }
+      },
+    },
 
   }
 </script>

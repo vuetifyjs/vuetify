@@ -6,6 +6,6 @@ export { VAppBar, VAppBarNavIcon }
 export default {
   $_vuetify_subcomponents: {
     VAppBar,
-    VAppBarNavIcon
-  }
+    VAppBarNavIcon,
+  },
 }

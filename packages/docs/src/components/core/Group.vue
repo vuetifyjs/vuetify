@@ -45,25 +45,25 @@
         default: () => ({
           text: '',
           group: '',
-          children: []
-        })
+          children: [],
+        }),
       },
       subGroup: {
         type: Boolean,
-        default: false
-      }
+        default: false,
+      },
     },
 
     computed: {
       children () {
         return this.item.children.map(item => ({
           ...item,
-          to: `${this.item.group}/${item.to}`
+          to: `${this.item.group}/${item.to}`,
         }))
       },
       group () {
         return this.genGroup(this.item.children)
-      }
+      },
     },
 
     methods: {
@@ -79,8 +79,8 @@
 
           return group
         }).join('|')
-      }
-    }
+      },
+    },
   }
 </script>
 

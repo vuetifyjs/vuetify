@@ -5,17 +5,17 @@ export default {
     pageText: '{0}-{1} од {2}',
     noResultsText: 'Ни један запис није пронађен',
     nextPage: 'Следећа страница',
-    prevPage: 'Претходна страница'
+    prevPage: 'Претходна страница',
   },
   dataTable: {
-    rowsPerPageText: 'Редова по страници:'
+    rowsPerPageText: 'Редова по страници:',
   },
   datePicker: {
-    itemsSelected: '{0} одабрано'
+    itemsSelected: '{0} одабрано',
   },
   noDataText: 'Нема доступних података',
   carousel: {
     prev: 'Превиоус висуал',
-    next: 'Нект висуал'
-  }
+    next: 'Нект висуал',
+  },
 }

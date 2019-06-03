@@ -2,7 +2,7 @@ import VTimelineItem from '../VTimelineItem'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VTimelineItem.ts', () => {
@@ -17,13 +17,13 @@ describe('VTimelineItem.ts', () => {
   it('should conditionally render dot', () => {
     const wrapper = mountFunction({
       propsData: {
-        hideDot: true
+        hideDot: true,
       },
       provide: {
         timeline: {
-          reverse: false
-        }
-      }
+          reverse: false,
+        },
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -37,23 +37,23 @@ describe('VTimelineItem.ts', () => {
     expect(mountFunction({
       slots: {
         icon: [{
-          render: h => h('div', 'foo')
-        }]
+          render: h => h('div', 'foo'),
+        }],
       },
       provide: {
         timeline: {
-          reverse: false
-        }
-      }
+          reverse: false,
+        },
+      },
     }).html()).toMatchSnapshot()
 
     expect(mountFunction({
       propsData: { icon: 'foo' },
       provide: {
         timeline: {
-          reverse: false
-        }
-      }
+          reverse: false,
+        },
+      },
     }).html()).toMatchSnapshot()
   })
 
@@ -61,14 +61,14 @@ describe('VTimelineItem.ts', () => {
     const wrapper = mountFunction({
       slots: {
         opposite: [{
-          render: h => h('div', 'foo')
-        }]
+          render: h => h('div', 'foo'),
+        }],
       },
       provide: {
         timeline: {
-          reverse: false
-        }
-      }
+          reverse: false,
+        },
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()

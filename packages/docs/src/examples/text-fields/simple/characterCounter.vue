@@ -55,8 +55,8 @@
       return {
         title: 'Preliminary report',
         description: 'California is a state in the western United States',
-        rules: [v => v.length <= 25 || 'Max 25 characters']
+        rules: [v => v.length <= 25 || 'Max 25 characters'],
       }
-    }
+    },
   }
 </script>

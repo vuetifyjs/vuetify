@@ -24,13 +24,13 @@
 <script>
   export default {
     data: () => ({
-      offsetTop: 0
+      offsetTop: 0,
     }),
 
     methods: {
       onScroll (e) {
         this.offsetTop = e.target.scrollTop
-      }
-    }
+      },
+    },
   }
 </script>

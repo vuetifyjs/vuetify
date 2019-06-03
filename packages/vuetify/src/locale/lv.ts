@@ -7,22 +7,22 @@ export default {
     noResultsText: 'Nekas netika atrasts',
     nextPage: 'Nākamā lapa',
     prevPage: 'Iepriekšējā lapa',
-    loadingText: 'Ielādē...'
+    loadingText: 'Ielādē...',
   },
   dataTable: {
     itemsPerPageText: 'Rādīt lapā:',
     ariaLabel: {
       sortDescending: ': Sakārtots dilstošā secībā. Aktivizēt, lai noņemtu kārtošanu.',
       sortAscending: ': Sakārtots augošā secībā. Aktivizēt, lai sakārtotu dilstošā secībā.',
-      sortNone: ': Nav sakārtots. Aktivizēt, lai sakārtotu augošā secībā.'
-    }
+      sortNone: ': Nav sakārtots. Aktivizēt, lai sakārtotu augošā secībā.',
+    },
   },
   datePicker: {
-    itemsSelected: '{0} izvēlēts'
+    itemsSelected: '{0} izvēlēts',
   },
   noDataText: 'Nav pieejamu datu',
   carousel: {
     prev: 'Iepriekšējais slaids',
-    next: 'Nākamais slaids'
-  }
+    next: 'Nākamais slaids',
+  },
 }

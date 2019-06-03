@@ -22,39 +22,39 @@ export default mixins(Themeable).extend({
     ...VData.options.props, // TODO: filter out props not used
     itemKey: {
       type: String,
-      default: 'id'
+      default: 'id',
     },
     value: {
       type: Array,
-      default: () => []
+      default: () => [],
     } as PropValidator<any[]>,
     singleSelect: Boolean,
     expanded: {
       type: Array,
-      default: () => []
+      default: () => [],
     } as PropValidator<any[]>,
     singleExpand: Boolean,
     loading: [Boolean, String],
     noResultsText: {
       type: String,
-      default: '$vuetify.dataIterator.noResultsText'
+      default: '$vuetify.dataIterator.noResultsText',
     },
     noDataText: {
       type: String,
-      default: '$vuetify.noDataText'
+      default: '$vuetify.noDataText',
     },
     loadingText: {
       type: String,
-      default: '$vuetify.dataIterator.loadingText'
+      default: '$vuetify.dataIterator.loadingText',
     },
     hideDefaultFooter: Boolean,
-    footerProps: Object
+    footerProps: Object,
   },
 
   data: () => ({
     selection: {} as Record<string, any>,
     expansion: {} as Record<string, boolean>,
-    internalCurrentItems: [] as any[]
+    internalCurrentItems: [] as any[],
   }),
 
   computed: {
@@ -63,7 +63,7 @@ export default mixins(Themeable).extend({
     },
     someItems (): boolean {
       return this.internalCurrentItems.some((i: any) => this.isSelected(i))
-    }
+    },
   },
 
   watch: {
@@ -74,7 +74,7 @@ export default mixins(Themeable).extend({
           return selection
         }, {})
       },
-      immediate: true
+      immediate: true,
     },
     selection (value: Record<string, boolean>, old: Record<string, boolean>) {
       if (deepEqual(Object.keys(value), Object.keys(old))) return
@@ -88,14 +88,14 @@ export default mixins(Themeable).extend({
           return expansion
         }, {})
       },
-      immediate: true
+      immediate: true,
     },
     expansion (value: Record<string, boolean>, old: Record<string, boolean>) {
       if (deepEqual(value, old)) return
       const keys = Object.keys(value).filter(k => value[k])
       const expanded = !keys.length ? [] : this.items.filter(i => keys.includes(String(getObjectValueByPath(i, this.itemKey))))
       this.$emit('update:expanded', expanded)
-    }
+    },
   },
 
   created () {
@@ -108,7 +108,7 @@ export default mixins(Themeable).extend({
       ['rows-per-page-items', 'footer-props.items-per-page-options'],
       ['rows-per-page-text', 'footer-props.items-per-page-text'],
       ['prev-icon', 'footer-props.prev-icon'],
-      ['next-icon', 'footer-props.next-icon']
+      ['next-icon', 'footer-props.next-icon'],
     ]
 
     breakingProps.forEach(([original, replacement]) => {
@@ -119,7 +119,7 @@ export default mixins(Themeable).extend({
       'expand',
       'content-class',
       'content-props',
-      'content-tag'
+      'content-tag',
     ]
 
     removedProps.forEach(prop => {
@@ -170,20 +170,20 @@ export default mixins(Themeable).extend({
         item,
         select: {
           props: {
-            value: this.isSelected(item)
+            value: this.isSelected(item),
           },
           on: {
-            input: (v: boolean) => this.select(item, v)
-          }
+            input: (v: boolean) => this.select(item, v),
+          },
         },
         expand: {
           props: {
-            value: this.isExpanded(item)
+            value: this.isExpanded(item),
           },
           on: {
-            input: (v: boolean) => this.expand(item, v)
-          }
-        }
+            input: (v: boolean) => this.expand(item, v),
+          },
+        },
       }
 
       return props
@@ -215,7 +215,7 @@ export default mixins(Themeable).extend({
           isSelected: this.isSelected,
           select: this.select,
           isExpanded: this.isExpanded,
-          expand: this.expand
+          expand: this.expand,
         })
       }
 
@@ -232,18 +232,18 @@ export default mixins(Themeable).extend({
         props: {
           ...this.footerProps,
           options: props.options,
-          pagination: props.pagination
+          pagination: props.pagination,
         },
         on: {
-          'update:options': (value: any) => props.updateOptions(value)
-        }
+          'update:options': (value: any) => props.updateOptions(value),
+        },
       }
 
       const scopedSlots = getPrefixedScopedSlots('footer.', this.$scopedSlots)
 
       return this.$createElement(VDataFooter, {
         scopedSlots,
-        ...data
+        ...data,
       })
     },
     genDefaultScopedSlot (props: any) {
@@ -251,18 +251,18 @@ export default mixins(Themeable).extend({
         ...props,
         someItems: this.someItems,
         everyItem: this.everyItem,
-        toggleSelectAll: this.toggleSelectAll
+        toggleSelectAll: this.toggleSelectAll,
       }
 
       return this.$createElement('div', {
-        staticClass: 'v-data-iterator'
+        staticClass: 'v-data-iterator',
       }, [
         getSlot(this, 'header', outerProps, true),
         this.genItems(props),
         this.genFooter(props),
-        getSlot(this, 'footer', outerProps, true)
+        getSlot(this, 'footer', outerProps, true),
       ]) as any
-    }
+    },
   },
 
   render (): VNode {
@@ -280,11 +280,11 @@ export default mixins(Themeable).extend({
         'current-items': (v: any[]) => {
           this.internalCurrentItems = v
           this.$emit('current-items', v)
-        }
+        },
       },
       scopedSlots: {
-        default: this.genDefaultScopedSlot
-      }
+        default: this.genDefaultScopedSlot,
+      },
     })
-  }
+  },
 })

@@ -46,7 +46,7 @@ export default baseMixins.extend<options>().extend({
         if (!this.btnToggle) return ''
 
         return this.btnToggle.activeClass
-      }
+      },
     } as any as PropValidator<string>,
     block: Boolean,
     depressed: Boolean,
@@ -61,18 +61,18 @@ export default baseMixins.extend<options>().extend({
     rounded: Boolean,
     tag: {
       type: String,
-      default: 'button'
+      default: 'button',
     },
     text: Boolean,
     type: {
       type: String,
-      default: 'button'
+      default: 'button',
     },
-    value: null as any as PropValidator<any>
+    value: null as any as PropValidator<any>,
   },
 
   data: () => ({
-    proxyClass: 'v-btn--active'
+    proxyClass: 'v-btn--active',
   }),
 
   computed: {
@@ -102,7 +102,7 @@ export default baseMixins.extend<options>().extend({
         ...this.themeClasses,
         ...this.groupClasses,
         ...this.elevationClasses,
-        ...this.sizeableClasses
+        ...this.sizeableClasses,
       }
     },
     contained (): boolean {
@@ -139,9 +139,9 @@ export default baseMixins.extend<options>().extend({
     },
     styles (): object {
       return {
-        ...this.measurableStyles
+        ...this.measurableStyles,
       }
-    }
+    },
   },
 
   created () {
@@ -166,26 +166,26 @@ export default baseMixins.extend<options>().extend({
     },
     genContent (): VNode {
       return this.$createElement('span', {
-        staticClass: 'v-btn__content'
+        staticClass: 'v-btn__content',
       }, this.$slots.default)
     },
     genLoader (): VNode {
       return this.$createElement('span', {
-        class: 'v-btn__loader'
+        class: 'v-btn__loader',
       }, this.$slots.loader || [this.$createElement(VProgressCircular, {
         props: {
           indeterminate: true,
           size: 23,
-          width: 2
-        }
+          width: 2,
+        },
       })])
-    }
+    },
   },
 
   render (h): VNode {
     const children = [
       this.genContent(),
-      this.loading && this.genLoader()
+      this.loading && this.genLoader(),
     ]
     const setColor = !this.isFlat ? this.setBackgroundColor : this.setTextColor
     const { tag, data } = this.generateRouteLink()
@@ -197,5 +197,5 @@ export default baseMixins.extend<options>().extend({
       : JSON.stringify(this.value)
 
     return h(tag, setColor(this.color, data), children)
-  }
+  },
 })

@@ -5,7 +5,7 @@ import VTab from '../VTab'
 import {
   mount,
   RouterLinkStub,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 // Types
@@ -18,7 +18,7 @@ describe('VTab.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VTab, {
-        ...options
+        ...options,
       })
     }
   })
@@ -26,7 +26,7 @@ describe('VTab.ts', () => {
   it('should have the correct value', () => {
     const wrapper = mountFunction({
       propsData: {
-        href: '#foo'
+        href: '#foo',
       },
       mocks: {
         $route: { path: '/' },
@@ -36,9 +36,9 @@ describe('VTab.ts', () => {
             if (to.path) href = to.path
 
             return { href }
-          }
-        }
-      }
+          },
+        },
+      },
     })
 
     expect(wrapper.vm.value).toBe('foo')
@@ -54,15 +54,15 @@ describe('VTab.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         activeClass: 'bar',
-        to: 'foo'
+        to: 'foo',
       },
       methods: { toggle },
       mocks: {
-        $route: { path: '/' }
+        $route: { path: '/' },
       },
       stubs: {
-        RouterLink: RouterLinkStub
-      }
+        RouterLink: RouterLinkStub,
+      },
     })
 
     // Mock route change being called
@@ -74,7 +74,7 @@ describe('VTab.ts', () => {
     // explicitly mock class added
     // by vue router
     ;(wrapper.vm.$refs.link as any)._vnode.data = {
-      class: { 'bar v-tab--active': true }
+      class: { 'bar v-tab--active': true },
     }
     ;(wrapper.vm as any).$route.path = '/foo'
 
@@ -93,7 +93,7 @@ describe('VTab.ts', () => {
     const event = { preventDefault: jest.fn() }
     const toggle = jest.fn()
     const wrapper = mountFunction({
-      methods: { toggle }
+      methods: { toggle },
     })
 
     wrapper.trigger('click', event)

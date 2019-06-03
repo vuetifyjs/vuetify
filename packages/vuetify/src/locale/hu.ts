@@ -5,17 +5,17 @@ export default {
     pageText: '{0}-{1} / {2}',
     noResultsText: 'Nincs egyező találat',
     nextPage: 'Következő oldal',
-    prevPage: 'Előző oldal'
+    prevPage: 'Előző oldal',
   },
   dataTable: {
-    rowsPerPageText: 'Elem oldalanként:'
+    rowsPerPageText: 'Elem oldalanként:',
   },
   datePicker: {
-    itemsSelected: '{0} kiválaszta/-ott'
+    itemsSelected: '{0} kiválaszta/-ott',
   },
   noDataText: 'Nincs elérhető adat',
   carousel: {
     prev: 'Korábbi vizuális',
-    next: 'Következő vizuális'
-  }
+    next: 'Következő vizuális',
+  },
 }

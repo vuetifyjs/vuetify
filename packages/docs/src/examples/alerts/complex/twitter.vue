@@ -28,8 +28,8 @@
   export default {
     data () {
       return {
-        alert: true
+        alert: true,
       }
-    }
+    },
   }
 </script>

@@ -18,7 +18,7 @@
 <script>
   export default {
     data: () => ({
-      overlay: false
+      overlay: false,
     }),
 
     watch: {
@@ -26,7 +26,7 @@
         val && setTimeout(() => {
           this.overlay = false
         }, 3000)
-      }
-    }
+      },
+    },
   }
 </script>

@@ -4,7 +4,7 @@ import VParallax from '../VParallax'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VParallax.ts', () => {
@@ -14,14 +14,14 @@ describe('VParallax.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VParallax, {
-        ...options
+        ...options,
       })
     }
   })
 
   it('should render', async () => {
     const wrapper = mountFunction({
-      attachToDocument: true
+      attachToDocument: true,
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -31,8 +31,8 @@ describe('VParallax.ts', () => {
     const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
-        alt: 'name'
-      }
+        alt: 'name',
+      },
     })
 
     const img = wrapper.find('img')
@@ -42,7 +42,7 @@ describe('VParallax.ts', () => {
 
   it('should use empty alt tag when not supplied', async () => {
     const wrapper = mountFunction({
-      attachToDocument: true
+      attachToDocument: true,
     })
 
     const img = wrapper.find('img')

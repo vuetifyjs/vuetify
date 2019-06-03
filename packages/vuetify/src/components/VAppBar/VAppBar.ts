@@ -33,7 +33,7 @@ const baseMixins = mixins(
     'invertedScroll',
     'isExtended',
     'isProminent',
-    'value'
+    'value',
   ])
 )
 
@@ -55,13 +55,13 @@ export default baseMixins.extend({
     shrinkOnScroll: Boolean,
     value: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
 
   data () {
     return {
-      isActive: this.value
+      isActive: this.value,
     }
   },
 
@@ -96,7 +96,7 @@ export default baseMixins.extend({
         'v-app-bar--fixed': !this.absolute && (this.app || this.fixed),
         'v-app-bar--hide-shadow': this.hideShadow,
         'v-app-bar--is-scrolled': this.currentScroll > 0,
-        'v-app-bar--shrink-on-scroll': this.shrinkOnScroll
+        'v-app-bar--shrink-on-scroll': this.shrinkOnScroll,
       }
     },
     computedContentHeight (): number {
@@ -200,16 +200,16 @@ export default baseMixins.extend({
         marginTop: convertToUnit(this.computedMarginTop),
         transform: `translateY(${convertToUnit(this.computedTransform)})`,
         left: convertToUnit(this.computedLeft),
-        right: convertToUnit(this.computedRight)
+        right: convertToUnit(this.computedRight),
       }
-    }
+    },
   },
 
   watch: {
     canScroll: 'onScroll',
     invertedScroll (val: boolean) {
       this.isActive = !val
-    }
+    },
   },
 
   created () {
@@ -221,7 +221,7 @@ export default baseMixins.extend({
       const render = VToolbar.options.methods.genBackground.call(this)
 
       render.data = this._b(render.data || {}, render.tag!, {
-        style: { opacity: this.computedOpacity }
+        style: { opacity: this.computedOpacity },
       })
 
       return render
@@ -244,7 +244,7 @@ export default baseMixins.extend({
       }
 
       this.savedScroll = this.currentScroll
-    }
+    },
   },
 
   render (h): VNode {
@@ -257,10 +257,10 @@ export default baseMixins.extend({
       render.data.directives.push({
         arg: this.scrollTarget,
         name: 'scroll',
-        value: this.onScroll
+        value: this.onScroll,
       })
     }
 
     return render
-  }
+  },
 })

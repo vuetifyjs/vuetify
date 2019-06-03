@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    inherritAttrs: false
+    inherritAttrs: false,
   }
 </script>
 

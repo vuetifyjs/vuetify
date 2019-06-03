@@ -7,7 +7,7 @@ import { deprecate } from '../../util/console'
 const VBottomNav = VBottomNavigation.extend({
   created () {
     deprecate('<v-bottom-nav>', '<v-bottom-navigation>')
-  }
+  },
 })
 
 export { VBottomNav }

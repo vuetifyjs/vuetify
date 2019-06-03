@@ -5,17 +5,17 @@ export default {
     pageText: '{0}-{1} van {2}',
     noResultsText: 'Geen ooreenstemmende resultate is gevind nie',
     nextPage: 'Volgende bladsy',
-    prevPage: 'Vorige bladsy'
+    prevPage: 'Vorige bladsy',
   },
   dataTable: {
-    rowsPerPageText: 'Rye per bladsy:'
+    rowsPerPageText: 'Rye per bladsy:',
   },
   datePicker: {
-    itemsSelected: '{0} gekies'
+    itemsSelected: '{0} gekies',
   },
   noDataText: 'Geen data is beskikbaar nie',
   carousel: {
     prev: 'Vorige visuele',
-    next: 'Volgende visuele'
-  }
+    next: 'Volgende visuele',
+  },
 }

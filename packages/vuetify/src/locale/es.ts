@@ -5,17 +5,17 @@ export default {
     pageText: '{0}-{1} de {2}',
     noResultsText: 'Ningún resultado a mostrar',
     nextPage: 'Página siguiente',
-    prevPage: 'Página anterior'
+    prevPage: 'Página anterior',
   },
   dataTable: {
-    rowsPerPageText: 'Filas por página:'
+    rowsPerPageText: 'Filas por página:',
   },
   datePicker: {
-    itemsSelected: '{0} seleccionados'
+    itemsSelected: '{0} seleccionados',
   },
   noDataText: 'Ningún dato disponible',
   carousel: {
     prev: 'Visual previo',
-    next: 'Siguiente visual'
-  }
+    next: 'Siguiente visual',
+  },
 }

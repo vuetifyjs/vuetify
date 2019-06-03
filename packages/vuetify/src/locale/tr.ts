@@ -5,17 +5,17 @@ export default {
     pageText: '{0}-{1} de {2}',
     noResultsText: 'Eşleşen Veri Bulunamadı',
     nextPage: 'Sonraki sayfa',
-    prevPage: 'Önceki sayfa'
+    prevPage: 'Önceki sayfa',
   },
   dataTable: {
-    rowsPerPageText: 'Sayfa başına satır:'
+    rowsPerPageText: 'Sayfa başına satır:',
   },
   datePicker: {
-    itemsSelected: '{0} seçildi'
+    itemsSelected: '{0} seçildi',
   },
   noDataText: 'Uygun veri yok',
   carousel: {
     prev: 'Önceki görsel',
-    next: 'Sonraki görsel'
-  }
+    next: 'Sonraki görsel',
+  },
 }

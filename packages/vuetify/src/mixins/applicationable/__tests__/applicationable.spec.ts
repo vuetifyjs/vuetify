@@ -1,6 +1,6 @@
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 import Applicationable from '../'
 import { ComponentOptions } from 'vue'
@@ -12,13 +12,13 @@ describe('applicationable.js', () => {
     mountFunction = (options?: ComponentOptions<any>) => {
       return mount({
         render: h => h('div'),
-        ...options
+        ...options,
       }, {
         mocks: {
           $vuetify: {
-            application: new Application()
-          }
-        }
+            application: new Application(),
+          },
+        },
       })
     }
   })
@@ -28,9 +28,9 @@ describe('applicationable.js', () => {
     const wrapper = mountFunction({
       mixins: [Applicationable('left')],
       computed: {
-        applicationProperty: () => 'left'
+        applicationProperty: () => 'left',
       },
-      methods: { updateApplication }
+      methods: { updateApplication },
     })
 
     wrapper.setProps({ app: true })
@@ -44,9 +44,9 @@ describe('applicationable.js', () => {
     const wrapper = mountFunction({
       mixins: [Applicationable('left')],
       computed: {
-        applicationProperty: () => 'left'
+        applicationProperty: () => 'left',
       },
-      methods: { updateApplication, removeApplication }
+      methods: { updateApplication, removeApplication },
     })
 
     wrapper.setProps({ app: true })
@@ -63,9 +63,9 @@ describe('applicationable.js', () => {
     const wrapper = mountFunction({
       data: () => ({
         foo: 1,
-        bar: 2
+        bar: 2,
       }),
-      mixins: [ Applicationable(null, ['foo', 'bar']) ]
+      mixins: [ Applicationable(null, ['foo', 'bar']) ],
     })
 
     expect(wrapper.vm._watchers).toHaveLength(6)
@@ -76,9 +76,9 @@ describe('applicationable.js', () => {
     const wrapper = mountFunction({
       mixins: [Applicationable('left')],
       computed: {
-        applicationProperty: () => 'left'
+        applicationProperty: () => 'left',
       },
-      methods: { removeApplication }
+      methods: { removeApplication },
     })
 
     wrapper.setProps({ app: true })
@@ -93,13 +93,13 @@ describe('applicationable.js', () => {
       computed: {
         applicationProperty () {
           return 'top'
-        }
+        },
       },
       methods: {
         updateApplication () {
           return 30
-        }
-      }
+        },
+      },
     })
 
     wrapper.setProps({ app: true })
@@ -113,8 +113,8 @@ describe('applicationable.js', () => {
       methods: {
         updateApplication () {
           return 30
-        }
-      }
+        },
+      },
     })
 
     wrapper.setProps({ app: true })

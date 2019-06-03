@@ -29,11 +29,11 @@ function parseDefaultColors (colors: Record<string, Record<string, string>>) {
       color.lighten2,
       color.lighten3,
       color.lighten4,
-      color.lighten5
+      color.lighten5,
     ] : [
       color.black,
       color.white,
-      color.transparent
+      color.transparent,
     ]
   })
 }
@@ -47,35 +47,35 @@ export default mixins(Themeable).extend({
   props: {
     swatches: {
       type: Array,
-      default: () => parseDefaultColors(colors)
+      default: () => parseDefaultColors(colors),
     } as PropValidator<string[][]>,
     color: Object as PropValidator<VColorPickerColor>,
     maxWidth: [Number, String],
-    maxHeight: [Number, String]
+    maxHeight: [Number, String],
   },
 
   methods: {
     genColor (color: string) {
       const content = this.$createElement('div', {
         style: {
-          background: color
-        }
+          background: color,
+        },
       }, [
         deepEqual(this.color, parseColor(color, null)) && this.$createElement(VIcon, {
           props: {
             small: true,
             dark: contrastRatio(this.color.rgba, white) > 2 && this.color.alpha > 0.5,
-            light: contrastRatio(this.color.rgba, black) > 2 && this.color.alpha > 0.5
-          }
-        }, '$vuetify.icons.success')
+            light: contrastRatio(this.color.rgba, black) > 2 && this.color.alpha > 0.5,
+          },
+        }, '$vuetify.icons.success'),
       ])
 
       return this.$createElement('div', {
         staticClass: 'v-color-picker__color',
         on: {
           // TODO: Less hacky way of catching transparent
-          click: () => this.$emit('update:color', fromHex(color === 'transparent' ? '#00000000' : color))
-        }
+          click: () => this.$emit('update:color', fromHex(color === 'transparent' ? '#00000000' : color)),
+        },
       }, [content])
     },
     genSwatches () {
@@ -83,10 +83,10 @@ export default mixins(Themeable).extend({
         const colors = swatch.map(this.genColor)
 
         return this.$createElement('div', {
-          staticClass: 'v-color-picker__swatch'
+          staticClass: 'v-color-picker__swatch',
         }, colors)
       })
-    }
+    },
   },
 
   render (h): VNode {
@@ -94,10 +94,10 @@ export default mixins(Themeable).extend({
       staticClass: 'v-color-picker__swatches',
       style: {
         maxWidth: convertToUnit(this.maxWidth),
-        maxHeight: convertToUnit(this.maxHeight)
-      }
+        maxHeight: convertToUnit(this.maxHeight),
+      },
     }, [
-      this.$createElement('div', this.genSwatches())
+      this.$createElement('div', this.genSwatches()),
     ])
-  }
+  },
 })

@@ -16,7 +16,7 @@ export default VSheet.extend({
 
   provide (): object {
     return {
-      list: this
+      list: this,
     }
   },
 
@@ -32,13 +32,13 @@ export default VSheet.extend({
     threeLine: Boolean,
     tile: {
       type: Boolean,
-      default: true
+      default: true,
     },
-    twoLine: Boolean
+    twoLine: Boolean,
   },
 
   data: () => ({
-    groups: [] as VListGroupInstance[]
+    groups: [] as VListGroupInstance[],
   }),
 
   computed: {
@@ -53,9 +53,9 @@ export default VSheet.extend({
         'v-list--shaped': this.shaped,
         'v-list--subheader': this.subheader,
         'v-list--two-line': this.twoLine,
-        'v-list--three-line': this.threeLine
+        'v-list--three-line': this.threeLine,
       }
-    }
+    },
   },
 
   methods: {
@@ -73,7 +73,7 @@ export default VSheet.extend({
       for (const group of this.groups) {
         group.toggle(uid)
       }
-    }
+    },
   },
 
   render (h): VNode {
@@ -81,10 +81,10 @@ export default VSheet.extend({
       staticClass: 'v-list',
       class: this.classes,
       attrs: {
-        role: 'list'
-      }
+        role: 'list',
+      },
     }
 
     return h('div', this.setBackgroundColor(this.color, data), [this.$slots.default])
-  }
+  },
 })

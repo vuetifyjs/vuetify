@@ -47,7 +47,7 @@
     data () {
       return {
         interval: {},
-        value: 0
+        value: 0,
       }
     },
     beforeDestroy () {
@@ -60,7 +60,7 @@
         }
         this.value += 10
       }, 1000)
-    }
+    },
   }
 </script>
 

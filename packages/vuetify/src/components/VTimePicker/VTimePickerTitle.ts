@@ -25,11 +25,11 @@ export default mixins(
     second: Number,
     period: {
       type: String,
-      validator: period => period === 'am' || period === 'pm'
+      validator: period => period === 'am' || period === 'pm',
     } as PropValidator<'am' | 'pm'>,
     readonly: Boolean,
     useSeconds: Boolean,
-    selecting: Number
+    selecting: Number,
   },
 
   methods: {
@@ -44,7 +44,7 @@ export default mixins(
       const titleContent = [
         this.genPickerButton('selecting', SelectingTimes.Hour, displayedHour, this.disabled),
         this.$createElement('span', ':'),
-        this.genPickerButton('selecting', SelectingTimes.Minute, displayedMinute, this.disabled)
+        this.genPickerButton('selecting', SelectingTimes.Minute, displayedMinute, this.disabled),
       ]
 
       if (this.useSeconds) {
@@ -53,17 +53,17 @@ export default mixins(
         titleContent.push(this.genPickerButton('selecting', SelectingTimes.Second, displayedSecond, this.disabled))
       }
       return this.$createElement('div', {
-        'class': 'v-time-picker-title__time'
+        'class': 'v-time-picker-title__time',
       }, titleContent)
     },
     genAmPm () {
       return this.$createElement('div', {
-        staticClass: 'v-time-picker-title__ampm'
+        staticClass: 'v-time-picker-title__ampm',
       }, [
         this.genPickerButton('period', 'am', 'am', this.disabled || this.readonly),
-        this.genPickerButton('period', 'pm', 'pm', this.disabled || this.readonly)
+        this.genPickerButton('period', 'pm', 'pm', this.disabled || this.readonly),
       ])
-    }
+    },
   },
 
   render (h): VNode {
@@ -72,7 +72,7 @@ export default mixins(
     this.ampm && children.push(this.genAmPm())
 
     return h('div', {
-      staticClass: 'v-time-picker-title'
+      staticClass: 'v-time-picker-title',
     }, children)
-  }
+  },
 })

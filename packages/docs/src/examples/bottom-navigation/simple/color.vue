@@ -25,8 +25,8 @@
   export default {
     data () {
       return {
-        activeBtn: 1
+        activeBtn: 1,
       }
-    }
+    },
   }
 </script>

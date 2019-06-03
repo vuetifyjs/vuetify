@@ -8,7 +8,7 @@ import VCounter from '../VCounter'
 import {
   createLocalVue,
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VCounter.ts', () => {
@@ -24,15 +24,15 @@ describe('VCounter.ts', () => {
         context: Object.assign({
           children: [name],
           data: {},
-          props: {}
-        }, ctx)
+          props: {},
+        }, ctx),
       })
     }
   })
 
   it('should render component', () => {
     const wrapper = mountFunction({
-      props: { value: 5, max: 10 }
+      props: { value: 5, max: 10 },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -40,7 +40,7 @@ describe('VCounter.ts', () => {
 
   it('should render component in error state', () => {
     const wrapper = mountFunction({
-      props: { value: 15, max: 10 }
+      props: { value: 15, max: 10 },
     })
 
     expect(wrapper.classes('error--text')).toBe(true)
@@ -48,7 +48,7 @@ describe('VCounter.ts', () => {
 
   it('should render component if max is not provided', () => {
     const wrapper = mountFunction({
-      props: { value: 15 }
+      props: { value: 15 },
     })
 
     expect(wrapper.element.textContent).toBe('15')

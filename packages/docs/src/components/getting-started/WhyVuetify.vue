@@ -97,7 +97,7 @@
 <script>
   export default {
     provide: {
-      namespace: undefined
+      namespace: undefined,
     },
 
     data: vm => ({
@@ -108,7 +108,7 @@
           subtitle: vm.$t('GettingStarted.WhyVuetify.community'),
           caption: vm.$t('GettingStarted.WhyVuetify.communityCaption'),
           src: 'https://cdn.vuetifyjs.com/images/why-vuetify/community.png',
-          more: 'https://community.vuetifyjs.com'
+          more: 'https://community.vuetifyjs.com',
         },
         {
           color: 'purple',
@@ -116,7 +116,7 @@
           subtitle: vm.$t('GettingStarted.WhyVuetify.toolkit'),
           caption: vm.$t('GettingStarted.WhyVuetify.toolkitCaption'),
           src: 'https://cdn.vuetifyjs.com/images/why-vuetify/toolkit.png',
-          more: 'https://material.io/design/'
+          more: 'https://material.io/design/',
         },
         {
           color: 'warning',
@@ -124,7 +124,7 @@
           subtitle: vm.$t('GettingStarted.WhyVuetify.updates'),
           caption: vm.$t('GettingStarted.WhyVuetify.updatesCaption'),
           src: 'https://cdn.vuetifyjs.com/images/why-vuetify/updates.png',
-          more: 'https://github.com/vuetifyjs/vuetify/releases'
+          more: 'https://github.com/vuetifyjs/vuetify/releases',
         },
         {
           color: 'teal darken-2',
@@ -132,10 +132,10 @@
           subtitle: vm.$t('GettingStarted.WhyVuetify.support'),
           caption: vm.$t('GettingStarted.WhyVuetify.supportCaption'),
           src: 'https://cdn.vuetifyjs.com/images/why-vuetify/support.png',
-          more: 'https://github.com/vuetifyjs/vuetify/pulse'
-        }
-      ]
-    })
+          more: 'https://github.com/vuetifyjs/vuetify/pulse',
+        },
+      ],
+    }),
   }
 </script>
 

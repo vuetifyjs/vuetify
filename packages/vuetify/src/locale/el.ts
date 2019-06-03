@@ -5,17 +5,17 @@ export default {
     pageText: '{0}-{1} από {2}',
     noResultsText: 'Δε βρέθηκαν αποτελέσματα',
     nextPage: 'Επόμενη σελίδα',
-    prevPage: 'Προηγούμενη σελίδα'
+    prevPage: 'Προηγούμενη σελίδα',
   },
   dataTable: {
-    rowsPerPageText: 'Γραμμές ανά σελίδα:'
+    rowsPerPageText: 'Γραμμές ανά σελίδα:',
   },
   datePicker: {
-    itemsSelected: '{0} επιλεγμένα'
+    itemsSelected: '{0} επιλεγμένα',
   },
   noDataText: 'Χωρίς δεδομένα',
   carousel: {
     prev: 'הקודם חזותי',
-    next: 'הבא חזותי'
-  }
+    next: 'הבא חזותי',
+  },
 }

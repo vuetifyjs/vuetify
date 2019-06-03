@@ -37,23 +37,23 @@
       items: [
         {
           action: 'label',
-          title: 'list item'
+          title: 'list item',
         },
         {
-          divider: true
-        },
-        {
-          action: 'label',
-          title: 'list item'
-        },
-        {
-          divider: true
+          divider: true,
         },
         {
           action: 'label',
-          title: 'list item'
-        }
-      ]
-    })
+          title: 'list item',
+        },
+        {
+          divider: true,
+        },
+        {
+          action: 'label',
+          title: 'list item',
+        },
+      ],
+    }),
   }
 </script>

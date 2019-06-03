@@ -26,14 +26,14 @@ export default mixins(
 
   props: {
     disabled: Boolean,
-    readonly: Boolean
+    readonly: Boolean,
   },
 
   data () {
     return {
       content: null as VExpansionPanelContentInstance | null,
       header: null as VExpansionPanelHeaderInstance | null,
-      nextIsActive: false
+      nextIsActive: false,
     }
   },
 
@@ -43,7 +43,7 @@ export default mixins(
         'v-expansion-panel--active': this.isActive,
         'v-expansion-panel--next-active': this.nextIsActive,
         'v-expansion-panel--disabled': this.isDisabled,
-        ...this.groupClasses
+        ...this.groupClasses,
       }
     },
     isDisabled (): boolean {
@@ -51,7 +51,7 @@ export default mixins(
     },
     isReadonly (): boolean {
       return this.expansionPanels.readonly || this.readonly
-    }
+    },
   },
 
   methods: {
@@ -79,7 +79,7 @@ export default mixins(
       /* istanbul ignore else */
       if (this.content) this.content.isBooted = true
       this.$nextTick(() => this.$emit('change'))
-    }
+    },
   },
 
   render (h): VNode {
@@ -87,8 +87,8 @@ export default mixins(
       staticClass: 'v-expansion-panel',
       class: this.classes,
       attrs: {
-        'aria-expanded': String(this.isActive)
-      }
+        'aria-expanded': String(this.isActive),
+      },
     }, getSlot(this))
-  }
+  },
 })

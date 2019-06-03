@@ -10,8 +10,8 @@
   export default {
     data () {
       return {
-        selected: ['John']
+        selected: ['John'],
       }
-    }
+    },
   }
 </script>

@@ -31,12 +31,12 @@ export default baseMixins.extend<options>().extend(
   props: {
     ripple: {
       type: [Boolean, Object],
-      default: true
-    }
+      default: true,
+    },
   },
 
   data: () => ({
-    proxyClass: 'v-tab--active'
+    proxyClass: 'v-tab--active',
   }),
 
   computed: {
@@ -45,7 +45,7 @@ export default baseMixins.extend<options>().extend(
         'v-tab': true,
         ...Routable.options.computed.classes.call(this),
         'v-tab--disabled': this.disabled,
-        ...this.groupClasses
+        ...this.groupClasses,
       }
     },
     value (): any {
@@ -64,7 +64,7 @@ export default baseMixins.extend<options>().extend(
       }
 
       return to.replace('#', '')
-    }
+    },
   },
 
   mounted () {
@@ -85,7 +85,7 @@ export default baseMixins.extend<options>().extend(
       this.$emit('click', e)
 
       this.to || this.toggle()
-    }
+    },
   },
 
   render (h): VNode {
@@ -95,7 +95,7 @@ export default baseMixins.extend<options>().extend(
       ...data.attrs,
       'aria-selected': String(this.isActive),
       role: 'tab',
-      tabindex: 0
+      tabindex: 0,
     }
     data.on = {
       ...data.on,
@@ -103,9 +103,9 @@ export default baseMixins.extend<options>().extend(
         if (e.keyCode === keyCodes.enter) this.click(e)
 
         this.$emit('keydown', e)
-      }
+      },
     }
 
     return h(tag, data, this.$slots.default)
-  }
+  },
 })

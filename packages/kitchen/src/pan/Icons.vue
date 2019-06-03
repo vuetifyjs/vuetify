@@ -527,7 +527,7 @@
 
 <script>
   export default {
-    name: 'Icons'
+    name: 'Icons',
   }
 </script>
 

@@ -82,7 +82,7 @@
 <script>
   export default {
     data: () => ({
-      step: 1
+      step: 1,
     }),
 
     computed: {
@@ -92,7 +92,7 @@
           case 2: return 'Create a password'
           default: return 'Account created'
         }
-      }
-    }
+      },
+    },
   }
 </script>

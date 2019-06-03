@@ -31,7 +31,7 @@ export const defaultMenuProps = {
   closeOnClick: false,
   closeOnContentClick: false,
   openOnClick: false,
-  maxHeight: 300
+  maxHeight: 300,
 }
 
 // Types
@@ -58,20 +58,20 @@ export default baseMixins.extend<options>().extend({
   name: 'v-select',
 
   directives: {
-    ClickOutside
+    ClickOutside,
   },
 
   props: {
     appendIcon: {
       type: String,
-      default: '$vuetify.icons.dropdown'
+      default: '$vuetify.icons.dropdown',
     },
     attach: {
-      default: false
+      default: false,
     } as PropValidator<string | boolean | Element | VNode>,
     browserAutocomplete: {
       type: String,
-      default: 'on'
+      default: 'on',
     },
     cacheItems: Boolean,
     chips: Boolean,
@@ -81,32 +81,32 @@ export default baseMixins.extend<options>().extend({
     hideSelected: Boolean,
     items: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     itemAvatar: {
       type: [String, Array, Function],
-      default: 'avatar'
+      default: 'avatar',
     },
     itemDisabled: {
       type: [String, Array, Function],
-      default: 'disabled'
+      default: 'disabled',
     } as ItemProperty,
     itemText: {
       type: [String, Array, Function],
-      default: 'text'
+      default: 'text',
     } as ItemProperty,
     itemValue: {
       type: [String, Array, Function],
-      default: 'value'
+      default: 'value',
     } as ItemProperty,
     menuProps: {
       type: [String, Array, Object],
-      default: () => defaultMenuProps
+      default: () => defaultMenuProps,
     },
     multiple: Boolean,
     openOnClear: Boolean,
     returnObject: Boolean,
-    smallChips: Boolean
+    smallChips: Boolean,
   },
 
   data () {
@@ -126,7 +126,7 @@ export default baseMixins.extend<options>().extend({
       selectedIndex: -1,
       selectedItems: [] as any[],
       keyboardLookupPrefix: '',
-      keyboardLookupLastTime: 0
+      keyboardLookupLastTime: 0,
     }
   },
 
@@ -141,7 +141,7 @@ export default baseMixins.extend<options>().extend({
         'v-select': true,
         'v-select--chips': this.hasChips,
         'v-select--chips--small': this.smallChips,
-        'v-select--is-menu-active': this.isMenuActive
+        'v-select--is-menu-active': this.isMenuActive,
       }
     },
     /* Used by other components to overwrite */
@@ -158,8 +158,8 @@ export default baseMixins.extend<options>().extend({
         name: 'click-outside',
         value: this.blur,
         args: {
-          closeConditional: this.closeConditional
-        }
+          closeConditional: this.closeConditional,
+        },
       } as VNodeDirective] : undefined
     },
     dynamicHeight () {
@@ -178,7 +178,7 @@ export default baseMixins.extend<options>().extend({
       const scopeId = this.$vnode && (this.$vnode.context!.$options as { [key: string]: any })._scopeId
       return {
         attrs: scopeId ? {
-          [scopeId]: true
+          [scopeId]: true,
         } : null,
         props: {
           action: this.multiple,
@@ -191,14 +191,14 @@ export default baseMixins.extend<options>().extend({
           itemAvatar: this.itemAvatar,
           itemDisabled: this.itemDisabled,
           itemValue: this.itemValue,
-          itemText: this.itemText
+          itemText: this.itemText,
         },
         on: {
-          select: this.selectItem
+          select: this.selectItem,
         },
         scopedSlots: {
-          item: this.$scopedSlots.item
-        }
+          item: this.$scopedSlots.item,
+        },
       }
     },
     staticList (): VNode {
@@ -230,9 +230,9 @@ export default baseMixins.extend<options>().extend({
         ...defaultMenuProps,
         value: this.menuCanShow && this.isMenuActive,
         nudgeBottom: normalisedProps.offsetY ? 1 : 0, // convert to int
-        ...normalisedProps
+        ...normalisedProps,
       }
-    }
+    },
   },
 
   watch: {
@@ -265,8 +265,8 @@ export default baseMixins.extend<options>().extend({
         }
 
         this.setSelectedItems()
-      }
-    }
+      },
+    },
   },
 
   mounted () {
@@ -334,7 +334,7 @@ export default baseMixins.extend<options>().extend({
           close: this.deletableChips && !isDisabled,
           disabled: isDisabled,
           inputValue: index === this.selectedIndex,
-          small: this.smallChips
+          small: this.smallChips,
         },
         on: {
           click: (e: MouseEvent) => {
@@ -345,9 +345,9 @@ export default baseMixins.extend<options>().extend({
             this.selectedIndex = index
           },
           focus,
-          'click:close': () => this.onChipInput(item)
+          'click:close': () => this.onChipInput(item),
         },
-        key: JSON.stringify(this.getValue(item))
+        key: JSON.stringify(this.getValue(item)),
       }, this.getText(item))
     },
     genCommaSelection (item: object, index: number, last: boolean) {
@@ -360,9 +360,9 @@ export default baseMixins.extend<options>().extend({
       return this.$createElement('div', this.setTextColor(color, {
         staticClass: 'v-select__selection v-select__selection--comma',
         class: {
-          'v-select__selection--disabled': isDisabled
+          'v-select__selection--disabled': isDisabled,
         },
-        key: JSON.stringify(this.getValue(item))
+        key: JSON.stringify(this.getValue(item)),
       }), `${this.getText(item)}${last ? '' : ', '}`)
     },
     genDefaultSlot (): (VNode | VNode[] | null)[] {
@@ -383,17 +383,17 @@ export default baseMixins.extend<options>().extend({
         this.genFieldset(),
         this.$createElement('div', {
           staticClass: 'v-select__slot',
-          directives: this.directives
+          directives: this.directives,
         }, [
           this.genLabel(),
           this.prefix ? this.genAffix('prefix') : null,
           selections,
           this.suffix ? this.genAffix('suffix') : null,
           this.genClearIcon(),
-          this.genIconSlot()
+          this.genIconSlot(),
         ]),
         this.genMenu(),
-        this.genProgress()
+        this.genProgress(),
       ]
     },
     genInput (): VNode {
@@ -418,13 +418,13 @@ export default baseMixins.extend<options>().extend({
       const slots = ['prepend-item', 'no-data', 'append-item']
         .filter(slotName => this.$slots[slotName])
         .map(slotName => this.$createElement('template', {
-          slot: slotName
+          slot: slotName,
         }, this.$slots[slotName]))
       // Requires destructuring due to Vue
       // modifying the `on` property when passed
       // as a referenced object
       return this.$createElement(VSelectList, {
-        ...this.listData
+        ...this.listData,
       }, slots)
     },
     genMenu (): VNode {
@@ -450,9 +450,9 @@ export default baseMixins.extend<options>().extend({
           input: (val: boolean) => {
             this.isMenuActive = val
             this.isFocused = val
-          }
+          },
         },
-        ref: 'menu'
+        ref: 'menu',
       }, [this.genList()])
     },
     genSelections (): VNode {
@@ -477,7 +477,7 @@ export default baseMixins.extend<options>().extend({
       }
 
       return this.$createElement('div', {
-        staticClass: 'v-select__selections'
+        staticClass: 'v-select__selections',
       }, children)
     },
     genSlotSelection (item: object, index: number): VNode[] | undefined {
@@ -490,7 +490,7 @@ export default baseMixins.extend<options>().extend({
           this.selectedIndex = index
         },
         selected: index === this.selectedIndex,
-        disabled: this.disabled || this.readonly
+        disabled: this.disabled || this.readonly,
       })
     },
     getMenuIndex () {
@@ -565,7 +565,7 @@ export default baseMixins.extend<options>().extend({
       if (!this.readonly && !this.isMenuActive && [
         keyCodes.enter,
         keyCodes.space,
-        keyCodes.up, keyCodes.down
+        keyCodes.up, keyCodes.down,
       ].includes(keyCode)) this.activateMenu()
 
       if (this.isMenuActive && this.$refs.menu) (this.$refs.menu as { [key: string]: any }).changeListIndex(e)
@@ -690,6 +690,6 @@ export default baseMixins.extend<options>().extend({
       const oldValue = this.internalValue
       this.internalValue = value
       value !== oldValue && this.$emit('change', value)
-    }
-  }
+    },
+  },
 })

@@ -9,18 +9,18 @@
 <script>
   export default {
     components: {
-      NotFound: () => import('@/pages/general/404')
+      NotFound: () => import('@/pages/general/404'),
     },
 
     props: {
       page: {
         type: String,
-        required: true
-      }
+        required: true,
+      },
     },
 
     data: () => ({
-      component: undefined
+      component: undefined,
     }),
 
     created () {
@@ -30,6 +30,6 @@
           this.component = false
           throw new Error(`Unable to find layout for <${this.page}>`)
         })
-    }
+    },
   }
 </script>

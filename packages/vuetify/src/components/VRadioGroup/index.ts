@@ -6,6 +6,6 @@ export { VRadioGroup, VRadio }
 export default {
   $_vuetify_subcomponents: {
     VRadioGroup,
-    VRadio
-  }
+    VRadio,
+  },
 }

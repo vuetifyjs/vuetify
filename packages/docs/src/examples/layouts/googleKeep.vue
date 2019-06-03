@@ -107,12 +107,12 @@
         { icon: 'chat_bubble', text: 'Trash' },
         { icon: 'help', text: 'Help' },
         { icon: 'phonelink', text: 'App downloads' },
-        { icon: 'keyboard', text: 'Keyboard shortcuts' }
-      ]
+        { icon: 'keyboard', text: 'Keyboard shortcuts' },
+      ],
     }),
     props: {
-      source: String
-    }
+      source: String,
+    },
   }
 </script>
 

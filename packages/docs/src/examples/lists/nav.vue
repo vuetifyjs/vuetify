@@ -59,8 +59,8 @@
         { text: 'Recent', icon: 'mdi-history' },
         { text: 'Offline', icon: 'mdi-check-circle' },
         { text: 'Uploads', icon: 'mdi-upload' },
-        { text: 'Backups', icon: 'mdi-cloud-upload' }
-      ]
-    })
+        { text: 'Backups', icon: 'mdi-cloud-upload' },
+      ],
+    }),
   }
 </script>

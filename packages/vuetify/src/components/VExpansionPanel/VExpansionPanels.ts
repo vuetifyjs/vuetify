@@ -16,7 +16,7 @@ export default BaseItemGroup.extend({
 
   provide (): object {
     return {
-      expansionPanels: this
+      expansionPanels: this,
     }
   },
 
@@ -28,7 +28,7 @@ export default BaseItemGroup.extend({
     focusable: Boolean,
     inset: Boolean,
     popout: Boolean,
-    readonly: Boolean
+    readonly: Boolean,
   },
 
   computed: {
@@ -39,9 +39,9 @@ export default BaseItemGroup.extend({
         'v-expansion-panels--accordion': this.accordion,
         'v-expansion-panels--focusable': this.focusable,
         'v-expansion-panels--inset': this.inset,
-        'v-expansion-panels--popout': this.popout
+        'v-expansion-panels--popout': this.popout,
       }
-    }
+    },
   },
 
   created () {
@@ -65,6 +65,6 @@ export default BaseItemGroup.extend({
 
       item.isActive = this.toggleMethod(value)
       item.nextIsActive = this.toggleMethod(nextValue)
-    }
-  }
+    },
+  },
 })

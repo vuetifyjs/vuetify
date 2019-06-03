@@ -35,7 +35,7 @@
 <script>
   export default {
     data: () => ({
-      reverse: true
-    })
+      reverse: true,
+    }),
   }
 </script>

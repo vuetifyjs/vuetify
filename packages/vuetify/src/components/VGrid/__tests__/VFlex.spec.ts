@@ -5,7 +5,7 @@ import VFlex from '../VFlex'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VFlex.ts', () => {
@@ -15,7 +15,7 @@ describe('VFlex.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VFlex, {
-        ...options
+        ...options,
       })
     }
   })

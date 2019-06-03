@@ -22,7 +22,7 @@ export function createI18n (ssrContext, router) {
   const i18n = new VueI18n({
     locale,
     messages: { en },
-    fallbackLocale
+    fallbackLocale,
   })
 
   function setI18nLanguage (lang) {

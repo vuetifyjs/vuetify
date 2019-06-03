@@ -20,7 +20,7 @@ import {
   findWeekday,
   nextDay,
   prevDay,
-  relativeDays
+  relativeDays,
 } from '../timestamp'
 
 describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-statements
@@ -89,7 +89,7 @@ describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-state
       hasTime: false,
       past: false,
       present: false,
-      future: false
+      future: false,
     })
     expect(parseTimestamp('2019-01-03')).toEqual({
       date: '2019-01-03',
@@ -104,7 +104,7 @@ describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-state
       hasTime: false,
       past: false,
       present: false,
-      future: false
+      future: false,
     })
     expect(parseTimestamp('2019-01-03 12')).toEqual({
       date: '2019-01-03',
@@ -119,7 +119,7 @@ describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-state
       hasTime: false,
       past: false,
       present: false,
-      future: false
+      future: false,
     })
     expect(parseTimestamp('2019-01-03 12:30')).toEqual({
       date: '2019-01-03',
@@ -134,7 +134,7 @@ describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-state
       hasTime: true,
       past: false,
       present: false,
-      future: false
+      future: false,
     })
     expect(parseTimestamp('2019-01-03 07:00')).toEqual({
       date: '2019-01-03',
@@ -149,7 +149,7 @@ describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-state
       hasTime: true,
       past: false,
       present: false,
-      future: false
+      future: false,
     })
     expect(parseTimestamp('2019-01-03 07:00:45')).toEqual({
       date: '2019-01-03',
@@ -164,7 +164,7 @@ describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-state
       hasTime: true,
       past: false,
       present: false,
-      future: false
+      future: false,
     })
     expect(parseTimestamp('bad')).toBeNull()
   })
@@ -173,12 +173,12 @@ describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-state
     expect(parseTimestamp('2019-01-03', parseTimestamp('2019-02-08'))).toMatchObject({
       past: true,
       present: false,
-      future: false
+      future: false,
     })
     expect(parseTimestamp('2019-01-03 07:00', parseTimestamp('2019-01-03 07:00'))).toMatchObject({
       past: false,
       present: true,
-      future: false
+      future: false,
     })
   })
 
@@ -196,7 +196,7 @@ describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-state
       hasTime: true,
       past: false,
       present: true,
-      future: false
+      future: false,
     })
   })
 
@@ -204,36 +204,36 @@ describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-state
     expect(getDayIdentifier({
       year: 2019,
       month: 9,
-      day: 11
+      day: 11,
     })).toBe(20190911)
 
     expect(getDayIdentifier({
       year: 1989,
       month: 1,
-      day: 1
+      day: 1,
     })).toBe(19890101)
 
     expect(getDayIdentifier({
       year: 2020,
       month: 12,
-      day: 31
+      day: 31,
     })).toBe(20201231)
   })
 
   it('should generate time identifiers', () => {
     expect(getTimeIdentifier({
       hour: 0,
-      minute: 0
+      minute: 0,
     })).toBe(0)
 
     expect(getTimeIdentifier({
       hour: 0,
-      minute: 23
+      minute: 23,
     })).toBe(23)
 
     expect(getTimeIdentifier({
       hour: 11,
-      minute: 6
+      minute: 6,
     })).toBe(1106)
   })
 
@@ -250,7 +250,7 @@ describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-state
       hasDay: true,
       past: false,
       present: false,
-      future: true
+      future: true,
     }
     const b = copyTimestamp(a)
     expect(a).not.toBe(b)
@@ -395,7 +395,7 @@ describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-state
       { 'date': '2019-05-02', 'day': 2, 'future': false, 'hasDay': true, 'hasTime': false, 'hour': 0, 'minute': 0, 'month': 5, 'past': true, 'present': false, 'time': '', 'weekday': 4, 'year': 2019 },
       { 'date': '2019-05-03', 'day': 3, 'future': false, 'hasDay': true, 'hasTime': false, 'hour': 0, 'minute': 0, 'month': 5, 'past': false, 'present': true, 'time': '', 'weekday': 5, 'year': 2019 },
       { 'date': '2019-05-04', 'day': 4, 'future': true, 'hasDay': true, 'hasTime': false, 'hour': 0, 'minute': 0, 'month': 5, 'past': false, 'present': false, 'time': '', 'weekday': 6, 'year': 2019 },
-      { 'date': '2019-05-05', 'day': 5, 'future': true, 'hasDay': true, 'hasTime': false, 'hour': 0, 'minute': 0, 'month': 5, 'past': false, 'present': false, 'time': '', 'weekday': 0, 'year': 2019 }
+      { 'date': '2019-05-05', 'day': 5, 'future': true, 'hasDay': true, 'hasTime': false, 'hour': 0, 'minute': 0, 'month': 5, 'past': false, 'present': false, 'time': '', 'weekday': 0, 'year': 2019 },
     ])
   })
 

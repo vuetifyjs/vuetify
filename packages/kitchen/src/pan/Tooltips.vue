@@ -118,7 +118,7 @@
     name: 'Tooltips',
 
     data: () => ({
-      show: false
-    })
+      show: false,
+    }),
   }
 </script>

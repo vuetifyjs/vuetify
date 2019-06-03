@@ -35,7 +35,7 @@
         ['Roboto Regular Italic', 'font-weight-regular', '400'],
         ['Roboto Medium Italic', 'font-weight-medium', '500'],
         ['Roboto Bold Italic', 'font-weight-bold', '700'],
-        ['Roboto Black Italic', 'font-weight-black', '900']
+        ['Roboto Black Italic', 'font-weight-black', '900'],
       ],
       weights: [
         ['Roboto Thin', 'font-weight-thin', '100'],
@@ -43,9 +43,9 @@
         ['Roboto Regular', 'font-weight-regular', '400'],
         ['Roboto Medium', 'font-weight-medium', '500'],
         ['Roboto Bold', 'font-weight-bold', '700'],
-        ['Roboto Black', 'font-weight-black', '900']
-      ]
-    })
+        ['Roboto Black', 'font-weight-black', '900'],
+      ],
+    }),
 
   }
 </script>

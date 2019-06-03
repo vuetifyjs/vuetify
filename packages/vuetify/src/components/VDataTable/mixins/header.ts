@@ -30,13 +30,13 @@ interface options extends Vue {
 export default mixins<options>().extend({
   // https://github.com/vuejs/vue/issues/6872
   directives: {
-    ripple
+    ripple,
   },
 
   props: {
     headers: {
       type: Array as PropType<TableHeader[]>,
-      required: true
+      required: true,
     },
     options: {
       type: Object as PropType<DataOptions>,
@@ -48,17 +48,17 @@ export default mixins<options>().extend({
         groupBy: [],
         groupDesc: [],
         multiSort: false,
-        mustSort: false
-      })
+        mustSort: false,
+      }),
     },
     sortIcon: {
       type: String,
-      default: '$vuetify.icons.sort'
+      default: '$vuetify.icons.sort',
     },
     everyItem: Boolean,
     someItems: Boolean,
     showGroupBy: Boolean,
-    singleSelect: Boolean
+    singleSelect: Boolean,
   },
 
   methods: {
@@ -66,11 +66,11 @@ export default mixins<options>().extend({
       const data = {
         props: {
           value: this.everyItem,
-          indeterminate: !this.everyItem && this.someItems
+          indeterminate: !this.everyItem && this.someItems,
         },
         on: {
-          input: (v: boolean) => this.$emit('toggle-select-all', v)
-        }
+          input: (v: boolean) => this.$emit('toggle-select-all', v),
+        },
       }
 
       if (this.$scopedSlots['data-table-select']) {
@@ -79,15 +79,15 @@ export default mixins<options>().extend({
 
       return this.$createElement(VSimpleCheckbox, {
         staticClass: 'v-data-table__checkbox',
-        ...data
+        ...data,
       })
     },
     genSortIcon () {
       return this.$createElement(VIcon, {
         props: {
-          size: 18
-        }
+          size: 18,
+        },
       }, [this.sortIcon])
-    }
-  }
+    },
+  },
 })

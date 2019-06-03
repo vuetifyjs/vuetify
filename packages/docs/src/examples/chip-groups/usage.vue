@@ -29,8 +29,8 @@
         'Shopping',
         'Art',
         'Tech',
-        'Creative Writing'
-      ]
-    })
+        'Creative Writing',
+      ],
+    }),
   }
 </script>

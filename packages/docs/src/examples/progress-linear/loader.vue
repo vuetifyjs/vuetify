@@ -61,7 +61,7 @@
 <script>
   export default {
     data: () => ({
-      loading: false
+      loading: false,
     }),
 
     watch: {
@@ -69,7 +69,7 @@
         if (!val) return
 
         setTimeout(() => (this.loading = false), 3000)
-      }
-    }
+      },
+    },
   }
 </script>

@@ -66,8 +66,8 @@
         'Custom component creation and integration',
         'Application performance and structure review',
         'Live Company training',
-        'General Vue/Vuetify application support'
-      ]
+        'General Vue/Vuetify application support',
+      ],
     }),
 
     mounted () {
@@ -81,8 +81,8 @@
         script.src = '//assets.calendly.com/assets/external/widget.js'
 
         this.$el.append(script)
-      }
-    }
+      },
+    },
   }
 </script>
 

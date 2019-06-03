@@ -14,16 +14,16 @@
       return {
         items: [
           {
-            text: 'Link One'
+            text: 'Link One',
           },
           {
-            text: 'Link Two'
+            text: 'Link Two',
           },
           {
-            text: 'Link Three'
-          }
-        ]
+            text: 'Link Three',
+          },
+        ],
       }
-    }
+    },
   }
 </script>
