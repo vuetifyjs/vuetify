@@ -2,7 +2,7 @@ import VDataTable from '../VDataTable'
 import {
   mount,
   Wrapper,
-  MountOptions
+  MountOptions,
 } from '@vue/test-utils'
 import { Breakpoint } from '../../../services/breakpoint'
 import { Lang } from '../../../services/lang'
@@ -11,7 +11,7 @@ import Vue from 'vue'
 
 Vue.prototype.$vuetify = {
   rtl: false,
-  lang: new Lang()
+  lang: new Lang(),
 }
 Vue.directive('ripple', ripple)
 
@@ -20,13 +20,13 @@ const testHeaders = [
     text: 'Dessert (100g serving)',
     align: 'left',
     sortable: false,
-    value: 'name'
+    value: 'name',
   },
   { text: 'Calories', value: 'calories' },
   { text: 'Fat (g)', value: 'fat' },
   { text: 'Carbs (g)', value: 'carbs' },
   { text: 'Protein (g)', value: 'protein' },
-  { text: 'Iron (%)', value: 'iron' }
+  { text: 'Iron (%)', value: 'iron' },
 ]
 
 const testItems = [
@@ -36,7 +36,7 @@ const testItems = [
     fat: 6.0,
     carbs: 24,
     protein: 4.0,
-    iron: '1%'
+    iron: '1%',
   },
   {
     name: 'Ice cream sandwich',
@@ -44,7 +44,7 @@ const testItems = [
     fat: 9.0,
     carbs: 37,
     protein: 4.3,
-    iron: '1%'
+    iron: '1%',
   },
   {
     name: 'Eclair',
@@ -52,7 +52,7 @@ const testItems = [
     fat: 16.0,
     carbs: 23,
     protein: 6.0,
-    iron: '7%'
+    iron: '7%',
   },
   {
     name: 'Cupcake',
@@ -60,7 +60,7 @@ const testItems = [
     fat: 3.7,
     carbs: 67,
     protein: 4.3,
-    iron: '8%'
+    iron: '8%',
   },
   {
     name: 'Gingerbread',
@@ -68,7 +68,7 @@ const testItems = [
     fat: 16.0,
     carbs: 49,
     protein: 3.9,
-    iron: '16%'
+    iron: '16%',
   },
   {
     name: 'Jelly bean',
@@ -76,7 +76,7 @@ const testItems = [
     fat: 0.0,
     carbs: 94,
     protein: 0.0,
-    iron: '0%'
+    iron: '0%',
   },
   {
     name: 'Lollipop',
@@ -84,7 +84,7 @@ const testItems = [
     fat: 0.2,
     carbs: 98,
     protein: 0,
-    iron: '2%'
+    iron: '2%',
   },
   {
     name: 'Honeycomb',
@@ -92,7 +92,7 @@ const testItems = [
     fat: 3.2,
     carbs: 87,
     protein: 6.5,
-    iron: '45%'
+    iron: '45%',
   },
   {
     name: 'Donut',
@@ -100,7 +100,7 @@ const testItems = [
     fat: 25.0,
     carbs: 51,
     protein: 4.9,
-    iron: '22%'
+    iron: '22%',
   },
   {
     name: 'KitKat',
@@ -108,8 +108,8 @@ const testItems = [
     fat: 26.0,
     carbs: 65,
     protein: 7,
-    iron: '6%'
-  }
+    iron: '6%',
+  },
 ]
 
 describe('VDataTable.ts', () => {
@@ -125,12 +125,12 @@ describe('VDataTable.ts', () => {
             breakpoint: new Breakpoint(),
             lang: new Lang(),
             theme: {
-              dark: false
-            }
-          }
+              dark: false,
+            },
+          },
         },
         sync: false,
-        ...options
+        ...options,
       })
     }
   })
@@ -146,8 +146,8 @@ describe('VDataTable.ts', () => {
       propsData: {
         headers: testHeaders,
         items: testItems,
-        itemsPerPage: 5
-      }
+        itemsPerPage: 5,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -158,13 +158,13 @@ describe('VDataTable.ts', () => {
       propsData: {
         headers: testHeaders,
         items: testItems,
-        itemsPerPage: 5
+        itemsPerPage: 5,
       },
       scopedSlots: {
         body (props) {
           return this.$createElement('div', [props.items.length])
-        }
-      }
+        },
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -176,8 +176,8 @@ describe('VDataTable.ts', () => {
         headers: testHeaders,
         items: testItems,
         itemsPerPage: 5,
-        virtualRows: true
-      }
+        virtualRows: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -191,11 +191,11 @@ describe('VDataTable.ts', () => {
         itemKey: 'name',
         items: testItems,
         itemsPerPage: 5,
-        showExpand: true
+        showExpand: true,
       },
       listeners: {
-        'update:expanded': expand
-      }
+        'update:expanded': expand,
+      },
     })
     // const expand = jest.spyOn(wrapper.vm, 'expand')
 
@@ -214,8 +214,8 @@ describe('VDataTable.ts', () => {
         headers: testHeaders,
         items: testItems,
         itemsPerPage: 5,
-        showSelect: true
-      }
+        showSelect: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -229,11 +229,11 @@ describe('VDataTable.ts', () => {
         headers: testHeaders,
         items: testItems,
         itemsPerPage: 5,
-        expanded: testItems
+        expanded: testItems,
       },
       scopedSlots: {
-        'expanded-item': props => vm.$createElement('div', ['expanded'])
-      }
+        'expanded-item': props => vm.$createElement('div', ['expanded']),
+      },
     })
 
     await wrapper.vm.$nextTick()
@@ -249,11 +249,11 @@ describe('VDataTable.ts', () => {
         headers: testHeaders,
         items: testItems,
         itemsPerPage: 5,
-        groupBy: 'calories'
+        groupBy: 'calories',
       },
       scopedSlots: {
-        'group.summary': props => vm.$createElement('div', ['summary'])
-      }
+        'group.summary': props => vm.$createElement('div', ['summary']),
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -266,11 +266,11 @@ describe('VDataTable.ts', () => {
       propsData: {
         headers: testHeaders,
         items: testItems,
-        itemsPerPage: 5
+        itemsPerPage: 5,
       },
       scopedSlots: {
-        'item': props => vm.$createElement('div', [ JSON.stringify(props) ])
-      }
+        'item': props => vm.$createElement('div', [ JSON.stringify(props) ]),
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -282,8 +282,8 @@ describe('VDataTable.ts', () => {
         headers: testHeaders,
         items: testItems,
         itemsPerPage: 5,
-        groupBy: ['protein']
-      }
+        groupBy: ['protein'],
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -297,11 +297,11 @@ describe('VDataTable.ts', () => {
         headers: testHeaders,
         items: testItems,
         itemsPerPage: 5,
-        groupBy: ['protein']
+        groupBy: ['protein'],
       },
       scopedSlots: {
-        group: props => vm.$createElement('div', [ JSON.stringify(props) ])
-      }
+        group: props => vm.$createElement('div', [ JSON.stringify(props) ]),
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -310,8 +310,8 @@ describe('VDataTable.ts', () => {
   it('should render loading state', () => {
     const wrapper = mountFunction({
       propsData: {
-        loading: true
-      }
+        loading: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -319,11 +319,11 @@ describe('VDataTable.ts', () => {
     const wrapper2 = mountFunction({
       propsData: {
         headers: testHeaders,
-        loading: true
+        loading: true,
       },
       slots: {
-        progress: '<div class="progress">50%</div>'
-      }
+        progress: '<div class="progress">50%</div>',
+      },
     })
 
     expect(wrapper2.html()).toMatchSnapshot()

@@ -6,13 +6,13 @@ import VSelect from '../VSelect'
 import {
   VListTile,
   VListTileTitle,
-  VListTileContent
+  VListTileContent,
 } from '../../VList'
 
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VSelect.ts', () => {
@@ -30,13 +30,13 @@ describe('VSelect.ts', () => {
         mocks: {
           $vuetify: {
             lang: {
-              t: (val: string) => val
+              t: (val: string) => val,
             },
             theme: {
-              dark: false
-            }
-          }
-        }
+              dark: false,
+            },
+          },
+        },
       })
     }
   })
@@ -47,8 +47,8 @@ describe('VSelect.ts', () => {
       propsData: {
         value: null,
         items: [item],
-        multiple: true
-      }
+        multiple: true,
+      },
     })
 
     const change = jest.fn()
@@ -65,9 +65,9 @@ describe('VSelect.ts', () => {
       propsData: {
         items: [{
           text: 'item',
-          disabled: true
-        }]
-      }
+          disabled: true,
+        }],
+      },
     })
 
     const item = wrapper.find('.v-list-item--disabled')
@@ -80,15 +80,15 @@ describe('VSelect.ts', () => {
 
     const vm = new Vue({
       components: {
-        VListTile
-      }
+        VListTile,
+      },
     })
     const itemSlot = ({ item, tile }) => vm.$createElement('v-list-item', {
       on: tile.on,
       props: tile.props,
-      class: item.value % 2 === 0 ? '' : 'red lighten-1'
+      class: item.value % 2 === 0 ? '' : 'red lighten-1',
     }, [
-      item.text
+      item.text,
     ])
     const selectionSlot = ({ item }) => vm.$createElement('v-list-item', item.value)
     const component = Vue.component('test', {
@@ -97,10 +97,10 @@ describe('VSelect.ts', () => {
           props: { items, value: 1 },
           scopedSlots: {
             item: itemSlot,
-            selection: selectionSlot
-          }
+            selection: selectionSlot,
+          },
         })
-      }
+      },
     })
     const wrapper = mountFunction(component)
 
@@ -117,21 +117,21 @@ describe('VSelect.ts', () => {
     const vm = new Vue({
       components: {
         VListTileTitle,
-        VListTileContent
-      }
+        VListTileContent,
+      },
     })
     const itemSlot = ({ item }) => vm.$createElement('v-list-item-content', {
-      class: item.value % 2 === 0 ? '' : 'red lighten-1'
+      class: item.value % 2 === 0 ? '' : 'red lighten-1',
     }, [
-      vm.$createElement('v-list-item-title', [item.value])
+      vm.$createElement('v-list-item-title', [item.value]),
     ])
     const component = Vue.component('test', {
       render (h) {
         return h(VSelect, {
           props: { items },
-          scopedSlots: { item: itemSlot }
+          scopedSlots: { item: itemSlot },
         })
-      }
+      },
     })
 
     const wrapper = mountFunction(component)
@@ -149,9 +149,9 @@ describe('VSelect.ts', () => {
     const component = Vue.component('test', {
       render (h) {
         return h(VSelect, {
-          props: { items }
+          props: { items },
         })
-      }
+      },
     })
 
     const wrapper = mountFunction(component)
@@ -168,8 +168,8 @@ describe('VSelect.ts', () => {
       attachToDocument: true,
       propsData: {
         items: [1, 2, 3, 4],
-        multiple: true
-      }
+        multiple: true,
+      },
     })
 
     const blur = jest.fn()
@@ -203,8 +203,8 @@ describe('VSelect.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         value: 'foo',
-        items: ['foo']
-      }
+        items: ['foo'],
+      },
     })
 
     await wrapper.vm.$nextTick()
@@ -245,8 +245,8 @@ describe('VSelect.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         value: 1,
-        items: []
-      }
+        items: [],
+      },
     })
 
     wrapper.setProps({ items: [{ text: 'foo', value: 1 }] })
@@ -259,8 +259,8 @@ describe('VSelect.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         menuProps: { contentClass: 'v-menu-class' },
-        items
-      }
+        items,
+      },
     })
 
     const menu = wrapper.find('.v-menu__content')
@@ -274,8 +274,8 @@ describe('VSelect.ts', () => {
         chips: true,
         deletableChips: true,
         items: ['foo', 'bar'],
-        value: 'foo'
-      }
+        value: 'foo',
+      },
     })
 
     await wrapper.vm.$nextTick()
@@ -287,8 +287,8 @@ describe('VSelect.ts', () => {
   it('should escape items in menu', async () => {
     const wrapper = mountFunction({
       propsData: {
-        items: ['<strong>foo</strong>']
-      }
+        items: ['<strong>foo</strong>'],
+      },
     })
 
     const tileTitle = wrapper.find('.v-list-item__title')
@@ -303,13 +303,13 @@ describe('VSelect.ts', () => {
         items: [
           { text: 'one', value: 1 },
           { text: 'two', value: 2 },
-          { text: 'three', value: 3 }
+          { text: 'three', value: 3 },
         ],
         itemText: 'text',
         itemValue: 'value',
         valueComparator: (a, b) => Math.round(a) === Math.round(b),
-        value: [3.1]
-      }
+        value: [3.1],
+      },
     })
 
     expect(wrapper.vm.selectedItems).toHaveLength(1)
@@ -320,8 +320,8 @@ describe('VSelect.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         readonly: true,
-        items: ['foo', 'bar']
-      }
+        items: ['foo', 'bar'],
+      },
     })
 
     wrapper.trigger('click')
@@ -341,12 +341,12 @@ describe('VSelect.ts', () => {
         items: [
           { text: 'one', v1: 'prop v1' },
           { text: 'two', v2: 'prop v2' },
-          { text: 'three', v1: 'also prop v1' }
+          { text: 'three', v1: 'also prop v1' },
         ],
         itemText: 'text',
         itemValue: item => item.hasOwnProperty('v1') ? item.v1 : item.v2,
-        value: ['prop v1', 'prop v2']
-      }
+        value: ['prop v1', 'prop v2'],
+      },
     })
 
     expect(wrapper.vm.selectedItems).toHaveLength(2)
@@ -363,12 +363,12 @@ describe('VSelect.ts', () => {
         items: [
           { text: 'one', value: { x: [1, 2], y: ['a', 'b'] } },
           { text: 'two', value: { x: [3, 4], y: ['a', 'b'] } },
-          { text: 'three', value: { x: [1, 2], y: ['a', 'c'] } }
+          { text: 'three', value: { x: [1, 2], y: ['a', 'c'] } },
         ],
         itemText: 'text',
         itemValue: 'value',
-        value: { text: 'two', value: { x: [3, 4], y: ['a', 'b'] } }
-      }
+        value: { text: 'two', value: { x: [3, 4], y: ['a', 'b'] } },
+      },
     })
 
     expect(wrapper.vm.selectedItems).toHaveLength(1)
@@ -384,15 +384,15 @@ describe('VSelect.ts', () => {
         items: [
           { text: 'one', value: { x: [1, 2], y: ['a', 'b'] } },
           { text: 'two', value: { x: [3, 4], y: ['a', 'b'] } },
-          { text: 'three', value: { x: [1, 2], y: ['a', 'c'] } }
+          { text: 'three', value: { x: [1, 2], y: ['a', 'c'] } },
         ],
         itemText: 'text',
         itemValue: 'value',
         value: [
           { text: 'two', value: { x: [3, 4], y: ['a', 'b'] } },
-          { text: 'one', value: { x: [1, 2], y: ['a', 'b'] } }
-        ]
-      }
+          { text: 'one', value: { x: [1, 2], y: ['a', 'b'] } },
+        ],
+      },
     })
 
     expect(wrapper.vm.selectedItems).toHaveLength(2)
@@ -406,7 +406,7 @@ describe('VSelect.ts', () => {
     expect(wrapper.vm.internalValue).toBeUndefined()
 
     const wrapper2 = mountFunction({
-      propsData: { multiple: true }
+      propsData: { multiple: true },
     })
 
     expect(wrapper2.vm.internalValue).toEqual([])
@@ -415,13 +415,13 @@ describe('VSelect.ts', () => {
   it('should use slotted no-data', () => {
     const wrapper = mountFunction({
       propsData: {
-        items: ['foo']
+        items: ['foo'],
       },
       slots: {
         'no-data': [{
-          render: h => h('div', 'foo')
-        }]
-      }
+          render: h => h('div', 'foo'),
+        }],
+      },
     })
 
     const list = wrapper.find('.v-list')

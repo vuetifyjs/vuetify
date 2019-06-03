@@ -45,14 +45,14 @@
     props: {
       value: {
         type: Array,
-        default: () => ([])
-      }
+        default: () => ([]),
+      },
     },
 
     computed: {
       links () {
         return this.value.map(this.genLink)
-      }
+      },
     },
 
     methods: {
@@ -82,15 +82,15 @@
           ...this.genSectionInfo(section),
           link,
           section,
-          target
+          target,
         }
       },
       genSectionInfo (section) {
         return {
           color: this.genColor(section),
-          icon: this.genIcon(section)
+          icon: this.genIcon(section),
         }
-      }
-    }
+      },
+    },
   }
 </script>

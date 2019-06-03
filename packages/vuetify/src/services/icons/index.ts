@@ -19,7 +19,7 @@ export class Icons extends Service {
 
     this.values = {
       ...presets[this.iconfont],
-      ...(options.values || {})
+      ...(options.values || {}),
     }
   }
 }

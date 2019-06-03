@@ -24,6 +24,6 @@ export default {
   noDataText: 'Uygun veri yok',
   carousel: {
     prev: 'Önceki görsel',
-    next: 'Sonraki görsel'
-  }
+    next: 'Sonraki görsel',
+  },
 }

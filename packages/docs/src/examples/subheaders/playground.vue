@@ -66,23 +66,23 @@
       items: [
         {
           action: 'inbox',
-          title: 'inbox'
+          title: 'inbox',
         },
         {
-          divider: true
+          divider: true,
         },
         {
           action: 'send',
-          title: 'send'
+          title: 'send',
         },
         {
-          divider: true
+          divider: true,
         },
         {
           action: 'delete',
-          title: 'trash'
-        }
-      ]
-    })
+          title: 'trash',
+        },
+      ],
+    }),
   }
 </script>

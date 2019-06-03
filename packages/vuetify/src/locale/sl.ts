@@ -24,6 +24,6 @@ export default {
   noDataText: 'Ni podatkov',
   carousel: {
     prev: 'Prejšnji prikaz',
-    next: 'Naslednji prikaz'
-  }
+    next: 'Naslednji prikaz',
+  },
 }

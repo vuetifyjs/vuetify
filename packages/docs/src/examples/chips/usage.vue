@@ -26,8 +26,8 @@
 <script>
   export default {
     data: () => ({
-      value: true
-    })
+      value: true,
+    }),
   }
 </script>
 

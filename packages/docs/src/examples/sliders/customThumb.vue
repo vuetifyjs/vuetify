@@ -26,20 +26,20 @@
         'Winter',
         'Spring',
         'Summer',
-        'Fall'
+        'Fall',
       ],
       icons: [
         'mdi-snowflake',
         'mdi-leaf',
         'mdi-fire',
-        'mdi-water'
-      ]
+        'mdi-water',
+      ],
     }),
 
     methods: {
       season (val) {
         return this.icons[val]
-      }
-    }
+      },
+    },
   }
 </script>

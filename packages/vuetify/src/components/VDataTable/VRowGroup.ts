@@ -8,17 +8,17 @@ export default Vue.extend({
   props: {
     value: {
       type: Boolean,
-      default: true
+      default: true,
     },
     headerClass: {
       type: String,
-      default: 'v-row-group__header'
+      default: 'v-row-group__header',
     },
     contentClass: String,
     summaryClass: {
       type: String,
-      default: 'v-row-group__summary'
-    }
+      default: 'v-row-group__summary',
+    },
   },
 
   render (h, { slots, props }): VNode {
@@ -27,7 +27,7 @@ export default Vue.extend({
 
     if (computedSlots['column.header']) {
       children.push(h('tr', {
-        staticClass: props.headerClass
+        staticClass: props.headerClass,
       }, computedSlots['column.header']))
     } else if (computedSlots['row.header']) {
       children.push(...computedSlots['row.header'])
@@ -37,12 +37,12 @@ export default Vue.extend({
 
     if (computedSlots['column.summary']) {
       children.push(h('tr', {
-        staticClass: props.summaryClass
+        staticClass: props.summaryClass,
       }, computedSlots['column.summary']))
     } else if (computedSlots['row.summary']) {
       children.push(...computedSlots['row.summary'])
     }
 
     return children as any
-  }
+  },
 })

@@ -24,6 +24,6 @@ export default {
   noDataText: 'Geen data is beskikbaar nie',
   carousel: {
     prev: 'Vorige visuele',
-    next: 'Volgende visuele'
-  }
+    next: 'Volgende visuele',
+  },
 }

@@ -24,6 +24,6 @@ export default {
   noDataText: 'Nu există date disponibile',
   carousel: {
     prev: 'Anterior vizual',
-    next: 'Următorul vizual'
-  }
+    next: 'Următorul vizual',
+  },
 }

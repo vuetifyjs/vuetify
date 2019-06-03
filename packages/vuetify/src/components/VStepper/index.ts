@@ -11,7 +11,7 @@ export {
   VStepperContent,
   VStepperStep,
   VStepperHeader,
-  VStepperItems
+  VStepperItems,
 }
 
 export default {
@@ -20,6 +20,6 @@ export default {
     VStepperContent,
     VStepperStep,
     VStepperHeader,
-    VStepperItems
-  }
+    VStepperItems,
+  },
 }

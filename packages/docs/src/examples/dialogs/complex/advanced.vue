@@ -160,17 +160,17 @@
         widgets: false,
         items: [
           {
-            title: 'Click Me'
+            title: 'Click Me',
           },
           {
-            title: 'Click Me'
+            title: 'Click Me',
           },
           {
-            title: 'Click Me'
+            title: 'Click Me',
           },
           {
-            title: 'Click Me 2'
-          }
+            title: 'Click Me 2',
+          },
         ],
         select: [
           { text: 'State 1' },
@@ -179,9 +179,9 @@
           { text: 'State 4' },
           { text: 'State 5' },
           { text: 'State 6' },
-          { text: 'State 7' }
-        ]
+          { text: 'State 7' },
+        ],
       }
-    }
+    },
   }
 </script>

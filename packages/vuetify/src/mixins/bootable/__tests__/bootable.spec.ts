@@ -4,7 +4,7 @@ import Bootable from '../index'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('Bootable.ts', () => {
@@ -15,9 +15,9 @@ describe('Bootable.ts', () => {
     mountFunction = (options = {}) => {
       return mount({
         mixins: [Bootable],
-        render: h => h('div')
+        render: h => h('div'),
       }, {
-        ...options
+        ...options,
       })
     }
   })
@@ -25,8 +25,8 @@ describe('Bootable.ts', () => {
   it('should be booted after activation', async () => {
     const wrapper = mountFunction({
       data: () => ({
-        isActive: false
-      })
+        isActive: false,
+      }),
     })
 
     expect(wrapper.vm.isBooted).toBe(false)
@@ -38,16 +38,16 @@ describe('Bootable.ts', () => {
   it('should return lazy content', async () => {
     const wrapper = mountFunction({
       propsData: {
-        eager: true
-      }
+        eager: true,
+      },
     })
 
     expect(wrapper.vm.showLazyContent('content')).toBe('content')
 
     const wrapperLazy = mountFunction({
       data: () => ({
-        isActive: false
-      })
+        isActive: false,
+      }),
     })
 
     expect(wrapperLazy.vm.showLazyContent('content')).toBeUndefined()
@@ -62,8 +62,8 @@ describe('Bootable.ts', () => {
   it('should show if lazy and active at boot', async () => {
     const wrapper = mountFunction({
       propsData: {
-        eager: true
-      }
+        eager: true,
+      },
     })
 
     expect(wrapper.vm.showLazyContent('content')).toBe('content')
@@ -71,7 +71,7 @@ describe('Bootable.ts', () => {
 
   it('should boot', async () => {
     const wrapper = mountFunction({
-      data: () => ({ isActive: false })
+      data: () => ({ isActive: false }),
     })
 
     expect(wrapper.vm.isActive).toBe(false)

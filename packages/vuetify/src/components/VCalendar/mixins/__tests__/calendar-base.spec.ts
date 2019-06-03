@@ -3,12 +3,12 @@ import { parseTimestamp } from '../../util/timestamp'
 import {
   mount,
   Wrapper,
-  MountOptions
+  MountOptions,
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../../util/mixins'
 
 const Mock = CalendarBase.extend({
-  render: h => h('div')
+  render: h => h('div'),
 })
 
 describe('calendar-base.ts', () => {
@@ -21,10 +21,10 @@ describe('calendar-base.ts', () => {
         mocks: {
           $vuetify: {
             lang: {
-              current: 'en-US'
-            }
-          }
-        }
+              current: 'en-US',
+            },
+          },
+        },
       })
     }
   })
@@ -33,8 +33,8 @@ describe('calendar-base.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         start: '2019-01-29',
-        end: '2019-02-08'
-      }
+        end: '2019-02-08',
+      },
     })
 
     expect(wrapper.vm.parsedStart).toBeDefined()
@@ -47,8 +47,8 @@ describe('calendar-base.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         start: '2019-01-29',
-        end: '2019-02-08'
-      }
+        end: '2019-02-08',
+      },
     })
 
     expect(wrapper.vm.days).toBeDefined()
@@ -63,8 +63,8 @@ describe('calendar-base.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         start: '2019-01-29',
-        end: '2019-02-08'
-      }
+        end: '2019-02-08',
+      },
     })
 
     expect(wrapper.vm.weekdaySkips).toBeDefined()
@@ -75,8 +75,8 @@ describe('calendar-base.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         start: '2019-01-29',
-        end: '2019-02-08'
-      }
+        end: '2019-02-08',
+      },
     })
 
     expect(wrapper.vm.getRelativeClasses(parseTimestamp('2019-01-28'))).toBeDefined()
@@ -87,8 +87,8 @@ describe('calendar-base.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         start: '2019-01-29',
-        end: '2019-02-08'
-      }
+        end: '2019-02-08',
+      },
     })
 
     expect(wrapper.vm.getRelativeClasses(parseTimestamp('2019-01-28'), true)).toBeDefined()
@@ -99,8 +99,8 @@ describe('calendar-base.ts', () => {
     const weekdayFormat = x => x
     const wrapper = mountFunction({
       propsData: {
-        weekdayFormat
-      }
+        weekdayFormat,
+      },
     })
 
     expect(wrapper.vm.weekdayFormatter).toEqual(weekdayFormat)
@@ -110,8 +110,8 @@ describe('calendar-base.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         start: '2019-01-29',
-        end: '2019-02-08'
-      }
+        end: '2019-02-08',
+      },
     })
 
     expect(wrapper.vm.weekdayFormatter).toBeDefined()
@@ -151,8 +151,8 @@ describe('calendar-base.ts', () => {
     const dayFormat = x => x
     const wrapper = mountFunction({
       propsData: {
-        dayFormat
-      }
+        dayFormat,
+      },
     })
 
     expect(wrapper.vm.dayFormatter).toEqual(dayFormat)
@@ -162,8 +162,8 @@ describe('calendar-base.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         start: '2019-01-29',
-        end: '2019-02-08'
-      }
+        end: '2019-02-08',
+      },
     })
 
     expect(wrapper.vm.weekdayFormatter).toBeDefined()

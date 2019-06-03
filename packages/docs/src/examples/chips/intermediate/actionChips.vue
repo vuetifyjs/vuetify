@@ -64,7 +64,7 @@
       },
       lights () {
         alert('Toggling lights...')
-      }
-    }
+      },
+    },
   }
 </script>

@@ -12,7 +12,7 @@ describe('Icons.ts', () => {
 
   it('should use a custom iconfont preset', () => {
     icon = new Icons({
-      iconfont: 'fa4'
+      iconfont: 'fa4',
     })
 
     expect(icon.values).toMatchSnapshot()
@@ -21,8 +21,8 @@ describe('Icons.ts', () => {
   it('should accept custom icons', () => {
     icon = new Icons({
       values: {
-        complete: 'fizzbuzz'
-      }
+        complete: 'fizzbuzz',
+      },
     })
 
     expect(icon.values.complete).toBe('fizzbuzz')

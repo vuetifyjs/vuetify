@@ -16,7 +16,7 @@
 <script>
   // Utilities
   import {
-    mapGetters
+    mapGetters,
   } from 'vuex'
 
   export default {
@@ -25,21 +25,21 @@
     props: {
       value: {
         type: String,
-        default: ''
-      }
+        default: '',
+      },
     },
 
     computed: {
       ...mapGetters('documentation', [
         'namespace',
-        'page'
+        'page',
       ]),
       items () {
         return this.$t(
           `${this.namespace}.${this.page}.${this.value}`
         )
-      }
-    }
+      },
+    },
   }
 </script>
 

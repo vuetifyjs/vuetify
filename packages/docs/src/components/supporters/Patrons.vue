@@ -58,31 +58,31 @@
   // Utilities
   import {
     mapMutations,
-    mapState
+    mapState,
   } from 'vuex'
 
   export default {
     components: {
-      SupporterGroup: () => import('@/components/supporters/SupporterGroup')
+      SupporterGroup: () => import('@/components/supporters/SupporterGroup'),
     },
 
     props: {
       compact: {
         type: Boolean,
-        default: false
+        default: false,
       },
       dense: {
         type: Boolean,
-        default: false
+        default: false,
       },
       hideTitles: {
         type: Boolean,
-        default: false
+        default: false,
       },
       tier: {
         type: Array,
-        default: () => ([0, 1, 2, 3, 4, 5])
-      }
+        default: () => ([0, 1, 2, 3, 4, 5]),
+      },
     },
 
     computed: {
@@ -90,9 +90,9 @@
       classes () {
         return {
           'mb-0': this.dense,
-          'mb-5': !this.dense
+          'mb-5': !this.dense,
         }
-      }
+      },
     },
 
     async created () {
@@ -110,7 +110,7 @@
     },
 
     methods: {
-      ...mapMutations('app', ['setSupporters'])
-    }
+      ...mapMutations('app', ['setSupporters']),
+    },
   }
 </script>

@@ -101,28 +101,28 @@
       items: [
         {
           text: 'Nature',
-          icon: 'mdi-nature'
+          icon: 'mdi-nature',
         },
         {
           text: 'Nightlife',
-          icon: 'mdi-glass-wine'
+          icon: 'mdi-glass-wine',
         },
         {
           text: 'November',
-          icon: 'mdi-calendar-range'
+          icon: 'mdi-calendar-range',
         },
         {
           text: 'Portland',
-          icon: 'mdi-map-marker'
+          icon: 'mdi-map-marker',
         },
         {
           text: 'Biking',
-          icon: 'mdi-bike'
-        }
+          icon: 'mdi-bike',
+        },
       ],
       loading: false,
       search: '',
-      selected: []
+      selected: [],
     }),
 
     computed: {
@@ -148,13 +148,13 @@
         }
 
         return selections
-      }
+      },
     },
 
     watch: {
       selected () {
         this.search = ''
-      }
+      },
     },
 
     methods: {
@@ -166,7 +166,7 @@
           this.selected = []
           this.loading = false
         }, 2000)
-      }
-    }
+      },
+    },
   }
 </script>

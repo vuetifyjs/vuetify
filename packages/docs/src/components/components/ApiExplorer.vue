@@ -86,25 +86,25 @@
         provide () {
           return {
             overrideNamespace: this.namespace,
-            overridePage: this.page
+            overridePage: this.page,
           }
         },
 
         props: {
           namespace: {
             type: String,
-            default: ''
+            default: '',
           },
           page: {
             type: String,
-            default: ''
-          }
+            default: '',
+          },
         },
 
         render (h) {
           return h('div', [this.$slots.default])
-        }
-      }
+        },
+      },
     },
 
     data: () => ({
@@ -113,15 +113,15 @@
         'v-ripple',
         'v-touch',
         'v-scroll',
-        'v-resize'
+        'v-resize',
       ],
       grid: [
         'v-container',
         'v-layout',
         'v-flex',
-        'v-spacer'
+        'v-spacer',
       ],
-      search: ''
+      search: '',
     }),
 
     computed: {
@@ -163,13 +163,13 @@
         return this.selected
           ? pluralize(upperFirst(camelCase(str)))
           : undefined
-      }
+      },
     },
 
     watch: {
       currentProxy (val) {
         this.current = (val || {}).text
-      }
+      },
     },
 
     methods: {
@@ -202,7 +202,7 @@
         }
 
         return { icon, namespace, subtext, text }
-      }
-    }
+      },
+    },
   }
 </script>

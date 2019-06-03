@@ -24,6 +24,6 @@ export default {
   noDataText: 'Andmed puuduvad',
   carousel: {
     prev: 'Eelmine visuaalne',
-    next: 'Järgmine visuaalne'
-  }
+    next: 'Järgmine visuaalne',
+  },
 }

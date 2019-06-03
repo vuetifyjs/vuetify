@@ -24,6 +24,6 @@ export default {
   noDataText: 'ไม่มีข้อมูล',
   carousel: {
     prev: 'ภาพก่อนหน้า',
-    next: 'ภาพต่อไป'
-  }
+    next: 'ภาพต่อไป',
+  },
 }

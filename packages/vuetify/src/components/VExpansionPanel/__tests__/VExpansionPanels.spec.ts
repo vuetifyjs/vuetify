@@ -4,7 +4,7 @@ import VExpansionPanels from '../VExpansionPanels'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VExpansionPanels.ts', () => {
@@ -14,20 +14,20 @@ describe('VExpansionPanels.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VExpansionPanels, {
-        ...options
+        ...options,
       })
     }
   })
 
   it('should work', () => {
     const wrapper = mountFunction({
-      propsData: { value: 0 }
+      propsData: { value: 0 },
     })
 
     const item = {
       isActive: false,
       nextIsActive: false,
-      value: undefined
+      value: undefined,
     } as any
 
     wrapper.vm.updateItem(item, 0)

@@ -6,23 +6,23 @@ import Ripple from '../'
 
 // Utilities
 import {
-  mount
+  mount,
 } from '@vue/test-utils'
 
 describe('ripple.ts', () => {
   it('Ripple with no value should render element with ripple enabled', () => {
     const testComponent = Vue.component('test', {
       directives: {
-        Ripple
+        Ripple,
       },
       render (h) {
         const data = {
           directives: [{
-            name: 'ripple'
-          }]
+            name: 'ripple',
+          }],
         }
         return h('div', data)
-      }
+      },
     })
 
     const wrapper = mount(testComponent)
@@ -34,27 +34,27 @@ describe('ripple.ts', () => {
   it('Ripple should update element property reactively', () => {
     const testComponent = Vue.component('test', {
       directives: {
-        Ripple
+        Ripple,
       },
       props: {
         ripple: Boolean,
-        default: () => false
+        default: () => false,
       },
       render (h) {
         const data = {
           directives: [{
             name: 'ripple',
-            value: this.ripple
-          }]
+            value: this.ripple,
+          }],
         }
         return h('div', data)
-      }
+      },
     })
 
     const wrapper = mount(testComponent, {
       propsData: {
-        ripple: true
-      }
+        ripple: true,
+      },
     })
 
     const div = wrapper.find('div')

@@ -25,7 +25,7 @@
     methods: {
       alert () {
         alert('Hello, World!')
-      }
-    }
+      },
+    },
   }
 </script>

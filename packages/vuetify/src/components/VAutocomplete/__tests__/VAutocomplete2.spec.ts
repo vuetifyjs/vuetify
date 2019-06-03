@@ -4,7 +4,7 @@ import VAutocomplete from '../VAutocomplete'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 import { compileToFunctions } from 'vue-template-compiler'
 
@@ -21,13 +21,13 @@ describe('VAutocomplete.ts', () => {
         mocks: {
           $vuetify: {
             lang: {
-              t: (val: string) => val
+              t: (val: string) => val,
             },
             theme: {
-              dark: false
-            }
-          }
-        }
+              dark: false,
+            },
+          },
+        },
       })
     }
   })
@@ -37,8 +37,8 @@ describe('VAutocomplete.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         items: ['foo', 'bar'],
-        value: 'foo'
-      }
+        value: 'foo',
+      },
     })
 
     expect(wrapper.vm.isMenuActive).toBe(false)
@@ -57,10 +57,10 @@ describe('VAutocomplete.ts', () => {
         multiple: true,
         items: [
           { text: 'foo', value: 'foo', disabled: true },
-          { text: 'bar', value: 'bar' }
+          { text: 'bar', value: 'bar' },
         ],
-        value: ['foo', 'bar']
-      }
+        value: ['foo', 'bar'],
+      },
     })
 
     const chips = wrapper.find('.v-chip')
@@ -85,8 +85,8 @@ describe('VAutocomplete.ts', () => {
   it('should not filter results', async () => {
     const wrapper = mountFunction({
       propsData: {
-        items: ['foo', 'bar']
-      }
+        items: ['foo', 'bar'],
+      },
     })
 
     const input = wrapper.find('input')
@@ -138,7 +138,7 @@ describe('VAutocomplete.ts', () => {
       hideSelected: true,
       items: [1, 2, 3, 4],
       multiple: true,
-      value: [1, 2, 3]
+      value: [1, 2, 3],
     })
 
     await wrapper.vm.$nextTick()
@@ -155,11 +155,11 @@ describe('VAutocomplete.ts', () => {
   it('should not hide menu when no data but has no-data slot', async () => {
     const wrapper = mountFunction({
       propsData: {
-        combobox: true
+        combobox: true,
       },
       slots: {
-        'no-data': [compileToFunctions('<span>show me</span>')]
-      }
+        'no-data': [compileToFunctions('<span>show me</span>')],
+      },
     })
 
     const input = wrapper.find('input')
@@ -183,7 +183,7 @@ describe('VAutocomplete.ts', () => {
 
     wrapper.setData({
       lazySearch: '',
-      selectedIndex: 0
+      selectedIndex: 0,
     })
 
     expect(wrapper.vm.internalSearch).toBe('')
@@ -197,8 +197,8 @@ describe('VAutocomplete.ts', () => {
   it('should clear search input on clear callback', async () => {
     const wrapper = mountFunction({
       propsData: {
-        clearable: true
-      }
+        clearable: true,
+      },
     })
 
     const icon = wrapper.find('.v-input__append-inner .v-icon')
@@ -218,8 +218,8 @@ describe('VAutocomplete.ts', () => {
   it('should propagate content class', () => {
     const wrapper = mountFunction({
       propsData: {
-        menuProps: { contentClass: 'foobar' }
-      }
+        menuProps: { contentClass: 'foobar' },
+      },
     })
 
     const content = wrapper.find('.v-autocomplete__content')
@@ -231,8 +231,8 @@ describe('VAutocomplete.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         value: 1,
-        items: []
-      }
+        items: [],
+      },
     })
 
     const input = wrapper.find('input')
@@ -248,8 +248,8 @@ describe('VAutocomplete.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         hideNoData: true,
-        items: []
-      }
+        items: [],
+      },
     })
 
     const input = wrapper.find('input')
@@ -260,7 +260,7 @@ describe('VAutocomplete.ts', () => {
     expect(wrapper.vm.isFocused).toBe(true)
 
     wrapper.setProps({
-      items: ['Foo', 'Bar']
+      items: ['Foo', 'Bar'],
     })
 
     await wrapper.vm.$nextTick()
@@ -272,8 +272,8 @@ describe('VAutocomplete.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         hideNoData: true,
-        items: [ 'Something first' ]
-      }
+        items: [ 'Something first' ],
+      },
     })
 
     const input = wrapper.find('input')
@@ -284,7 +284,7 @@ describe('VAutocomplete.ts', () => {
     expect(wrapper.vm.isFocused).toBe(true)
 
     wrapper.setProps({
-      items: ['Foo', 'Bar']
+      items: ['Foo', 'Bar'],
     })
 
     await wrapper.vm.$nextTick()
@@ -297,8 +297,8 @@ describe('VAutocomplete.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         value: undefined,
-        items: [0, 1, 2]
-      }
+        items: [0, 1, 2],
+      },
     })
 
     // Initial value
@@ -340,9 +340,9 @@ describe('VAutocomplete.ts', () => {
         items: [
           'foo',
           'foobar',
-          'bar'
-        ]
-      }
+          'bar',
+        ],
+      },
     })
 
     wrapper.setData({ internalSearch: 'fo' })
@@ -359,8 +359,8 @@ describe('VAutocomplete.ts', () => {
         items: [1, 2],
         value: 1,
         hideNoData: true,
-        hideSelected: true
-      }
+        hideSelected: true,
+      },
     })
 
     const input = wrapper.find('input')
@@ -380,8 +380,8 @@ describe('VAutocomplete.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         items: ['Sandra Adams', 'Ali Connors', 'Trevor Hansen', 'Tucker Smith'],
-        multiple: true
-      }
+        multiple: true,
+      },
     })
 
     await wrapper.vm.$nextTick()
@@ -407,14 +407,14 @@ describe('VAutocomplete.ts', () => {
         items: [
           {
             id: 1,
-            labels: { '1033': 'ID 1 English', '1036': 'ID 1 French' }
+            labels: { '1033': 'ID 1 English', '1036': 'ID 1 French' },
           },
           {
             id: 2,
-            labels: { '1033': 'ID 2 English', '1036': 'ID 2 French' }
-          }
-        ]
-      }
+            labels: { '1033': 'ID 2 English', '1036': 'ID 2 French' },
+          },
+        ],
+      },
     })
 
     await wrapper.vm.$nextTick()
@@ -434,8 +434,8 @@ describe('VAutocomplete.ts', () => {
     // const wrapper = mountFunction()
     const wrapper = mountFunction({
       propsData: {
-        items: ['aaa', 'foo', 'faa']
-      }
+        items: ['aaa', 'foo', 'faa'],
+      },
     })
 
     const onKeyPress = jest.fn()

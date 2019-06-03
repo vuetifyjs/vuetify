@@ -10,8 +10,8 @@
   export default {
     data () {
       return {
-        people: ['John']
+        people: ['John'],
       }
-    }
+    },
   }
 </script>

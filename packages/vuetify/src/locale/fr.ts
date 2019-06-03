@@ -24,6 +24,6 @@ export default {
   noDataText: 'Aucune donnée disponible',
   carousel: {
     prev: 'Visuel précédent',
-    next: 'Visuel suivant'
-  }
+    next: 'Visuel suivant',
+  },
 }

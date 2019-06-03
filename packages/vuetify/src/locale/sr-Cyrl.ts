@@ -24,6 +24,6 @@ export default {
   noDataText: 'Нема доступних података',
   carousel: {
     prev: 'Превиоус висуал',
-    next: 'Нект висуал'
-  }
+    next: 'Нект висуал',
+  },
 }

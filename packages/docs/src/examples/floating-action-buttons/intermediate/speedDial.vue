@@ -95,7 +95,7 @@
       right: true,
       bottom: true,
       left: false,
-      transition: 'slide-y-reverse-transition'
+      transition: 'slide-y-reverse-transition',
     }),
 
     computed: {
@@ -106,7 +106,7 @@
           case 'three': return { 'class': 'green', icon: 'keyboard_arrow_up' }
           default: return {}
         }
-      }
+      },
     },
 
     watch: {
@@ -121,8 +121,8 @@
       },
       left (val) {
         this.right = !val
-      }
-    }
+      },
+    },
   }
 </script>
 

@@ -24,6 +24,6 @@ export default {
   noDataText: 'لا توجد بيانات متاحة',
   carousel: {
     prev: 'الصورة السابقة',
-    next: 'البصري التالي'
-  }
+    next: 'البصري التالي',
+  },
 }

@@ -5,7 +5,7 @@ import VRadio from '../VRadio'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VRadio.ts', () => {
@@ -21,14 +21,14 @@ describe('VRadio.ts', () => {
   it('should render role and aria-checked attributes on input group', () => {
     const wrapper = mountFunction({
       data: () => ({
-        isActive: false
+        isActive: false,
       }),
       provide: {
         radio: {
           name: 'name',
-          isMandatory: false
-        }
-      }
+          isMandatory: false,
+        },
+      },
     })
 
     let inputGroup = wrapper.find('input')
@@ -44,8 +44,8 @@ describe('VRadio.ts', () => {
   it('should render aria-label attribute with label value on input group', () => {
     const wrapper = mountFunction({
       propsData: {
-        label: 'Test'
-      }
+        label: 'Test',
+      },
     })
 
     const inputGroup = wrapper.find('input')
@@ -56,14 +56,14 @@ describe('VRadio.ts', () => {
   it('should not render aria-label attribute with no label value on input group', () => {
     const wrapper = mountFunction({
       propsData: {
-        label: null
+        label: null,
       },
       provide: {
         radio: {
           name: 'name',
-          isMandatory: false
-        }
-      }
+          isMandatory: false,
+        },
+      },
     })
 
     const inputGroup = wrapper.find('input')
@@ -77,9 +77,9 @@ describe('VRadio.ts', () => {
         radioGroup: {
           name: 'name',
           register: () => {},
-          unregister: () => {}
-        }
-      }
+          unregister: () => {},
+        },
+      },
     })
 
     const input = wrapper.find('input')
@@ -107,9 +107,9 @@ describe('VRadio.ts', () => {
       provide: {
         radioGroup: {
           register: () => {},
-          unregister: () => {}
-        }
-      }
+          unregister: () => {},
+        },
+      },
     })
 
     wrapper.setData({ isActive: true })
@@ -121,8 +121,8 @@ describe('VRadio.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         onIcon: 'foo',
-        offIcon: 'bar'
-      }
+        offIcon: 'bar',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()

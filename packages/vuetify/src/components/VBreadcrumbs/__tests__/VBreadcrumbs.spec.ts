@@ -6,7 +6,7 @@ import VBreadcrumbsItem from '../VBreadcrumbsItem'
 import { compileToFunctions } from 'vue-template-compiler'
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VBreadcrumbs.ts', () => {
@@ -16,7 +16,7 @@ describe('VBreadcrumbs.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VBreadcrumbs, {
-        ...options
+        ...options,
       })
     }
   })
@@ -35,9 +35,9 @@ describe('VBreadcrumbs.ts', () => {
           { text: 'a' },
           { text: 'b' },
           { text: 'c' },
-          { text: 'd' }
-        ]
-      }
+          { text: 'd' },
+        ],
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -48,9 +48,9 @@ describe('VBreadcrumbs.ts', () => {
       propsData: {
         items: [
           { text: 'a' },
-          { text: 'a' }
-        ]
-      }
+          { text: 'a' },
+        ],
+      },
     })
 
     expect(`Duplicate keys detected: 'a'`).not.toHaveBeenWarned()
@@ -63,16 +63,16 @@ describe('VBreadcrumbs.ts', () => {
           { text: 'a' },
           { text: 'b' },
           { text: 'c' },
-          { text: 'd' }
-        ]
+          { text: 'd' },
+        ],
       },
       scopedSlots: {
         item (props) {
           return this.$createElement(VBreadcrumbsItem, {
-            key: props.item.text
+            key: props.item.text,
           }, props.item.text.toUpperCase())
-        }
-      }
+        },
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -85,12 +85,12 @@ describe('VBreadcrumbs.ts', () => {
           { text: 'a' },
           { text: 'b' },
           { text: 'c' },
-          { text: 'd' }
-        ]
+          { text: 'd' },
+        ],
       },
       slots: {
-        divider: '/divider/'
-      }
+        divider: '/divider/',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()

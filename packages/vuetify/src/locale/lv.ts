@@ -10,8 +10,8 @@ export default {
     ariaLabel: {
       sortDescending: ': Sakārtots dilstošā secībā. Aktivizēt, lai noņemtu kārtošanu.',
       sortAscending: ': Sakārtots augošā secībā. Aktivizēt, lai sakārtotu dilstošā secībā.',
-      sortNone: ': Nav sakārtots. Aktivizēt, lai sakārtotu augošā secībā.'
-    }
+      sortNone: ': Nav sakārtots. Aktivizēt, lai sakārtotu augošā secībā.',
+    },
   },
   dataFooter: {
     itemsPerPageText: 'Rādīt lapā:',
@@ -24,6 +24,6 @@ export default {
   noDataText: 'Nav pieejamu datu',
   carousel: {
     prev: 'Iepriekšējais slaids',
-    next: 'Nākamais slaids'
-  }
+    next: 'Nākamais slaids',
+  },
 }

@@ -5,7 +5,7 @@ import Grid from '../grid'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 const Mock = Grid('test')
@@ -18,8 +18,8 @@ describe('VGrid.ts', () => {
     mountFunction = (options = {}) => {
       return mount(Mock, {
         context: {
-          ...options
-        }
+          ...options,
+        },
       })
     }
   })
@@ -28,8 +28,8 @@ describe('VGrid.ts', () => {
     const wrapper = mountFunction({
       attrs: {
         foo: '',
-        bar: false
-      }
+        bar: false,
+      },
     })
 
     expect(wrapper.attributes('foo')).toBeUndefined()
@@ -41,8 +41,8 @@ describe('VGrid.ts', () => {
   it('should pass the id attr', () => {
     const wrapper = mountFunction({
       attrs: {
-        id: 'test'
-      }
+        id: 'test',
+      },
     })
 
     expect(wrapper.findAll('#test')).toHaveLength(1)
@@ -52,8 +52,8 @@ describe('VGrid.ts', () => {
     const wrapper = mountFunction({
       attrs: {
         foo: 'bar',
-        'data-test': 'foo'
-      }
+        'data-test': 'foo',
+      },
     })
 
     expect(wrapper.classes('foo')).toBe(true)
@@ -65,7 +65,7 @@ describe('VGrid.ts', () => {
   // https://github.com/vuejs/vue/issues/7841
   it('should filter the slot attr', () => {
     const wrapper = mountFunction({
-      attrs: { slot: 'content' }
+      attrs: { slot: 'content' },
     })
 
     expect(wrapper.element.classList.contains('slot')).toBe(false)

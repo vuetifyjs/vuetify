@@ -5,7 +5,7 @@ import VLayout from '../VLayout'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VLayout.ts', () => {
@@ -15,7 +15,7 @@ describe('VLayout.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VLayout, {
-        ...options
+        ...options,
       })
     }
   })

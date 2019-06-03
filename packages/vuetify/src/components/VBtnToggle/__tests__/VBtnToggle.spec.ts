@@ -4,7 +4,7 @@ import VBtnToggle from '../VBtnToggle'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 // Types
@@ -17,7 +17,7 @@ describe('VBtnToggle.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VBtnToggle, {
-        ...options
+        ...options,
       })
     }
   })

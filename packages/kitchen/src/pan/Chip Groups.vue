@@ -59,6 +59,6 @@
   export default {
     name: 'ChipGroups',
 
-    data: () => ({})
+    data: () => ({}),
   }
 </script>

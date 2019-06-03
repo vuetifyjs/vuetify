@@ -16,7 +16,7 @@ const vm = new Vue({
   router,
   render (h) {
     return this.isLoaded ? h(App) : undefined
-  }
+  },
 }).$mount('#app')
 
 // Prevent layout jump while waiting for styles

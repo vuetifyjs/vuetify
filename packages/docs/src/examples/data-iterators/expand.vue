@@ -80,7 +80,7 @@
           protein: 4.0,
           sodium: 87,
           calcium: '14%',
-          iron: '1%'
+          iron: '1%',
         },
         {
           name: 'Ice cream sandwich',
@@ -90,7 +90,7 @@
           protein: 4.3,
           sodium: 129,
           calcium: '8%',
-          iron: '1%'
+          iron: '1%',
         },
         {
           name: 'Eclair',
@@ -100,7 +100,7 @@
           protein: 6.0,
           sodium: 337,
           calcium: '6%',
-          iron: '7%'
+          iron: '7%',
         },
         {
           name: 'Cupcake',
@@ -110,9 +110,9 @@
           protein: 4.3,
           sodium: 413,
           calcium: '3%',
-          iron: '8%'
-        }
-      ]
-    })
+          iron: '8%',
+        },
+      ],
+    }),
   }
 </script>

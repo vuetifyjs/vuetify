@@ -4,7 +4,7 @@ import VListItem from '../VListItem'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VListItem.ts', () => {
@@ -14,7 +14,7 @@ describe('VListItem.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VListItem, {
-        ...options
+        ...options,
       })
     }
   })
@@ -23,8 +23,8 @@ describe('VListItem.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         href: 'http://www.google.com',
-        inactive: true
-      }
+        inactive: true,
+      },
     })
 
     expect(wrapper.is('div')).toBe(true)
@@ -34,8 +34,8 @@ describe('VListItem.ts', () => {
   it('should render with a tag when tag is specified', () => {
     const wrapper = mountFunction({
       propsData: {
-        tag: 'code'
-      }
+        tag: 'code',
+      },
     })
 
     expect(wrapper.is('code')).toBe(true)
@@ -51,8 +51,8 @@ describe('VListItem.ts', () => {
   it('should render with <a> when using href prop', () => {
     const wrapper = mountFunction({
       propsData: {
-        href: 'http://www.google.com'
-      }
+        href: 'http://www.google.com',
+      },
     })
 
     const a = wrapper.find('a')
@@ -65,8 +65,8 @@ describe('VListItem.ts', () => {
   it('should have --link class when href/to prop present or link prop is used', () => {
     const wrapper = mountFunction({
       propsData: {
-        href: '/home'
-      }
+        href: '/home',
+      },
     })
 
     expect(wrapper.classes('v-list-item--link')).toBe(true)
@@ -84,8 +84,8 @@ describe('VListItem.ts', () => {
   it('should have --link class when click handler present', () => {
     const wrapper = mountFunction({
       listeners: {
-        click: () => {}
-      }
+        click: () => {},
+      },
     })
 
     expect(wrapper.classes('v-list-item--link')).toBe(true)
@@ -94,8 +94,8 @@ describe('VListItem.ts', () => {
   it('should have --link class when click.prevent.stop handler present', () => {
     const wrapper = mountFunction({
       listeners: {
-        '!click': () => {}
-      }
+        '!click': () => {},
+      },
     })
 
     expect(wrapper.classes('v-list-item--link')).toBe(true)
@@ -104,7 +104,7 @@ describe('VListItem.ts', () => {
   it('should react to keydown.enter', () => {
     const click = jest.fn()
     const wrapper = mountFunction({
-      methods: { click }
+      methods: { click },
     })
 
     wrapper.trigger('keydown.enter')
@@ -117,7 +117,7 @@ describe('VListItem.ts', () => {
     const click = jest.fn()
     const toggle = jest.fn()
     const wrapper = mountFunction({
-      methods: { toggle }
+      methods: { toggle },
     })
 
     wrapper.vm.$el.blur = blur
@@ -146,9 +146,9 @@ describe('VListItem.ts', () => {
         listItemGroup: {
           activeClass: 'foobar',
           register: () => {},
-          unregister: () => {}
-        }
-      }
+          unregister: () => {},
+        },
+      },
     })
 
     expect(wrapper.vm.activeClass).toBe('foobar')

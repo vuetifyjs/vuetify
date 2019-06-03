@@ -4,7 +4,7 @@ import VAlert from '../VAlert'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 // Types
@@ -21,10 +21,10 @@ describe('VAlert.ts', () => {
         mocks: {
           $vuetify: {
             lang: {
-              t: (val: string) => val
-            }
-          }
-        }
+              t: (val: string) => val,
+            },
+          },
+        },
       })
     }
   })
@@ -43,7 +43,7 @@ describe('VAlert.ts', () => {
 
   it('should have a close icon', () => {
     const wrapper = mountFunction({
-      propsData: { dismissible: true }
+      propsData: { dismissible: true },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -52,8 +52,8 @@ describe('VAlert.ts', () => {
   it('should be dismissible', () => {
     const wrapper = mountFunction({
       propsData: {
-        dismissible: true
-      }
+        dismissible: true,
+      },
     })
 
     const icon = wrapper.find('.v-alert__dismissible')
@@ -70,8 +70,8 @@ describe('VAlert.ts', () => {
   it('should have a custom icon', () => {
     const wrapper = mountFunction({
       propsData: {
-        icon: 'list'
-      }
+        icon: 'list',
+      },
     })
 
     const icon = wrapper.find('.v-alert__icon')
@@ -87,7 +87,7 @@ describe('VAlert.ts', () => {
 
   it('should display contextual colors by type', () => {
     const wrapper = mountFunction({
-      propsData: { type: 'error' }
+      propsData: { type: 'error' },
     })
 
     expect(wrapper.classes('error')).toBe(true)
@@ -106,8 +106,8 @@ describe('VAlert.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         type: 'error',
-        color: 'primary'
-      }
+        color: 'primary',
+      },
     })
 
     expect(wrapper.classes('primary')).toBe(true)
@@ -117,8 +117,8 @@ describe('VAlert.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         type: 'error',
-        icon: 'block'
-      }
+        icon: 'block',
+      },
     })
 
     const icon = wrapper.find('.v-alert__icon')
@@ -144,8 +144,8 @@ describe('VAlert.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         color: 'pink',
-        border: 'left'
-      }
+        border: 'left',
+      },
     })
     const border = wrapper.find('.v-alert__border')
 

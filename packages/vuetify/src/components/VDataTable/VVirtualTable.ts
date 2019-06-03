@@ -22,23 +22,23 @@ export default mixins<options &
   props: {
     chunkSize: {
       type: Number,
-      default: 25
+      default: 25,
     },
     headerHeight: {
       type: Number,
-      default: 48
+      default: 48,
     },
     itemsLength: Number,
     rowHeight: {
       type: Number,
-      default: 48
-    }
+      default: 48,
+    },
   },
 
   data: () => ({
     scrollTop: 0,
     oldChunk: 0,
-    scrollDebounce: null as any
+    scrollDebounce: null as any,
   }),
 
   computed: {
@@ -62,13 +62,13 @@ export default mixins<options &
     },
     offsetBottom (): number {
       return Math.max(0, ((this.itemsLength - this.chunkSize) * this.rowHeight) - this.offsetTop)
-    }
+    },
   },
 
   watch: {
     chunkIndex (newValue, oldValue) {
       this.oldChunk = oldValue
-    }
+    },
   },
 
   created () {
@@ -90,7 +90,7 @@ export default mixins<options &
   methods: {
     createStyleHeight (height: number) {
       return {
-        height: `${height}px`
+        height: `${height}px`,
       }
     },
     genBody () {
@@ -102,7 +102,7 @@ export default mixins<options &
       return this.$createElement('tbody', [
         this.$createElement('tr', { style: this.createStyleHeight(this.offsetTop) }),
         this.cachedItems,
-        this.$createElement('tr', { style: this.createStyleHeight(this.offsetBottom) })
+        this.$createElement('tr', { style: this.createStyleHeight(this.offsetBottom) }),
       ])
     },
     genItems () {
@@ -115,35 +115,35 @@ export default mixins<options &
     genTable () {
       return this.$createElement('div', {
         ref: 'table',
-        staticClass: 'v-virtual-table__table'
+        staticClass: 'v-virtual-table__table',
       }, [
         this.$createElement('table', [
           this.$slots['body.before'],
           this.genBody(),
-          this.$slots['body.after']
-        ])
+          this.$slots['body.after'],
+        ]),
       ])
     },
     genWrapper () {
       return this.$createElement('div', {
         staticClass: 'v-virtual-table__wrapper',
         style: {
-          height: convertToUnit(this.height)
-        }
+          height: convertToUnit(this.height),
+        },
       }, [
-        this.genTable()
+        this.genTable(),
       ])
-    }
+    },
   },
 
   render (h): VNode {
     return h('div', {
       staticClass: 'v-data-table v-virtual-table',
-      class: this.classes
+      class: this.classes,
     }, [
       this.$slots.top,
       this.genWrapper(),
-      this.$slots.bottom
+      this.$slots.bottom,
     ])
-  }
+  },
 })

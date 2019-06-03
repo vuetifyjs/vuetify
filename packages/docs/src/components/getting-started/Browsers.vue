@@ -47,8 +47,8 @@
         { icon: 'edge', title: 'Edge', supported: true },
         { icon: 'safari', title: 'Safari 10+', supported: true },
         { icon: ['internet-explorer', 'safari'], title: 'IE11 / Safari 9', supported: 'polyfill' },
-        { icon: 'internet-explorer', title: 'IE9 / IE10', supported: false }
-      ]
+        { icon: 'internet-explorer', title: 'IE9 / IE10', supported: false },
+      ],
     }),
 
     methods: {
@@ -56,8 +56,8 @@
         if (browser.supported === true) return 'GettingStarted.QuickStart.browserSupport.supported'
         else if (browser.supported === false) return 'GettingStarted.QuickStart.browserSupport.notSupported'
         else return `GettingStarted.QuickStart.browserSupport.${browser.supported}`
-      }
-    }
+      },
+    },
   }
 </script>
 

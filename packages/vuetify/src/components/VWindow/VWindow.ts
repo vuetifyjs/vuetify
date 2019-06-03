@@ -18,7 +18,7 @@ export default BaseItemGroup.extend({
 
   provide (): object {
     return {
-      windowGroup: this
+      windowGroup: this,
     }
   },
 
@@ -27,33 +27,33 @@ export default BaseItemGroup.extend({
   props: {
     activeClass: {
       type: String,
-      default: 'v-window-item--active'
+      default: 'v-window-item--active',
     },
     continuous: Boolean,
     mandatory: {
       type: Boolean,
-      default: true
+      default: true,
     },
     nextIcon: {
       type: [Boolean, String],
-      default: '$vuetify.icons.next'
+      default: '$vuetify.icons.next',
     },
     prevIcon: {
       type: [Boolean, String],
-      default: '$vuetify.icons.prev'
+      default: '$vuetify.icons.prev',
     },
     reverse: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     showArrows: Boolean,
     showArrowsOnHover: Boolean,
     touch: Object,
     touchless: Boolean,
     value: {
-      required: false
+      required: false,
     },
-    vertical: Boolean
+    vertical: Boolean,
   },
 
   data () {
@@ -62,7 +62,7 @@ export default BaseItemGroup.extend({
       internalHeight: undefined as undefined | string,
       isActive: false,
       isBooted: false,
-      isReverse: false
+      isReverse: false,
     }
   },
 
@@ -70,7 +70,7 @@ export default BaseItemGroup.extend({
     classes (): object {
       return {
         ...BaseItemGroup.options.computed.classes.call(this),
-        'v-window--show-arrows-on-hover': this.showArrowsOnHover
+        'v-window--show-arrows-on-hover': this.showArrowsOnHover,
       }
     },
     computedTransition (): string {
@@ -101,11 +101,11 @@ export default BaseItemGroup.extend({
       if (this.reverse !== undefined) return this.reverse
 
       return this.isReverse
-    }
+    },
   },
 
   watch: {
-    internalIndex: 'updateReverse'
+    internalIndex: 'updateReverse',
   },
 
   mounted () {
@@ -123,11 +123,11 @@ export default BaseItemGroup.extend({
       return this.$createElement('div', {
         staticClass: 'v-window__container',
         class: {
-          'v-window__container--is-active': this.isActive
+          'v-window__container--is-active': this.isActive,
         },
         style: {
-          height: this.internalHeight
-        }
+          height: this.internalHeight,
+        },
       }, children)
     },
     genIcon (
@@ -136,26 +136,26 @@ export default BaseItemGroup.extend({
       fn: () => void
     ) {
       return this.$createElement('div', {
-        staticClass: `v-window__${direction}`
+        staticClass: `v-window__${direction}`,
       }, [
         this.$createElement(VBtn, {
           props: {
-            icon: true
+            icon: true,
           },
           attrs: {
-            'aria-label': this.$vuetify.lang.t(`$vuetify.carousel.${direction}`)
+            'aria-label': this.$vuetify.lang.t(`$vuetify.carousel.${direction}`),
           },
           on: {
             click: () => {
               this.changedByDelimiters = true
               fn()
-            }
-          }
+            },
+          },
         }, [
           this.$createElement(VIcon, {
-            props: { size: 40 }
-          }, icon)
-        ])
+            props: { size: 40 },
+          }, icon),
+        ]),
       ])
     },
     genControlIcons () {
@@ -236,14 +236,14 @@ export default BaseItemGroup.extend({
       }
 
       this.isReverse = val < oldVal
-    }
+    },
   },
 
   render (h): VNode {
     const data = {
       staticClass: 'v-window',
       class: this.classes,
-      directives: [] as VNodeDirective[]
+      directives: [] as VNodeDirective[],
     }
 
     if (!this.touchless) {
@@ -253,15 +253,15 @@ export default BaseItemGroup.extend({
         },
         right: () => {
           this.$vuetify.rtl ? this.next() : this.prev()
-        }
+        },
       }
 
       data.directives.push({
         name: 'touch',
-        value
+        value,
       })
     }
 
     return h('div', data, [this.genContainer()])
-  }
+  },
 })

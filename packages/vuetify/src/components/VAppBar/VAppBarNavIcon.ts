@@ -16,13 +16,13 @@ export default Vue.extend({
       staticClass: (`v-app-bar__nav-icon ${data.staticClass || ''}`).trim(),
       props: {
         ...props,
-        icon: true
+        icon: true,
       },
-      on: listeners
+      on: listeners,
     })
 
     const defaultSlot = slots().default
 
     return h(VBtn, d, defaultSlot || [h(VIcon, '$vuetify.icons.menu')])
-  }
+  },
 })

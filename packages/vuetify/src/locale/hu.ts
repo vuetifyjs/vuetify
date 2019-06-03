@@ -24,6 +24,6 @@ export default {
   noDataText: 'Nincs elérhető adat',
   carousel: {
     prev: 'Korábbi vizuális',
-    next: 'Következő vizuális'
-  }
+    next: 'Következő vizuális',
+  },
 }

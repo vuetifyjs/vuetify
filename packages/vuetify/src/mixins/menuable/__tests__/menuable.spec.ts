@@ -2,12 +2,12 @@ import Menuable from '../'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('menuable.ts', () => {
   const Mock = Menuable.extend({
-    render: h => h('div')
+    render: h => h('div'),
   })
 
   type Instance = InstanceType<typeof Mock>
@@ -22,8 +22,8 @@ describe('menuable.ts', () => {
     const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
-        activator: 'body'
-      }
+        activator: 'body',
+      },
     })
 
     expect(wrapper.vm.getActivator()).toBeTruthy()
@@ -33,8 +33,8 @@ describe('menuable.ts', () => {
     const sneakPeek = jest.fn()
     const wrapper = mountFunction({
       methods: {
-        sneakPeek
-      }
+        sneakPeek,
+      },
     })
 
     wrapper.vm.updateDimensions()
@@ -46,21 +46,21 @@ describe('menuable.ts', () => {
     const wrapper = mountFunction({
       props: {
         offsetY: Boolean,
-        offsetX: Boolean
+        offsetX: Boolean,
       },
       propsData: {
         attach: true,
         left: true,
         offsetX: true,
-        maxWidth: 200
-      }
+        maxWidth: 200,
+      },
     })
 
     wrapper.setData({
       dimensions: {
         activator: { width: 300 },
-        content: { width: 138 }
-      }
+        content: { width: 138 },
+      },
     })
 
     await wrapper.vm.$nextTick()

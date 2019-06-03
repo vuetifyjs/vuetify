@@ -29,10 +29,10 @@ export default mixins(
     link: Boolean,
     loaderHeight: {
       type: [Number, String],
-      default: 4
+      default: 4,
     },
     outlined: Boolean,
-    raised: Boolean
+    raised: Boolean,
   },
 
   computed: {
@@ -47,12 +47,12 @@ export default mixins(
         'v-card--disabled': this.loading || this.disabled,
         'v-card--outlined': this.outlined,
         'v-card--raised': this.raised,
-        ...VSheet.options.computed.classes.call(this)
+        ...VSheet.options.computed.classes.call(this),
       }
     },
     styles (): object {
       const style: Dictionary<string> = {
-        ...VSheet.options.computed.styles.call(this)
+        ...VSheet.options.computed.styles.call(this),
       }
 
       if (this.img) {
@@ -60,7 +60,7 @@ export default mixins(
       }
 
       return style
-    }
+    },
   },
 
   methods: {
@@ -70,9 +70,9 @@ export default mixins(
       if (!render) return null
 
       return this.$createElement('div', {
-        staticClass: 'v-card__progress'
+        staticClass: 'v-card__progress',
       }, [render])
-    }
+    },
   },
 
   render (h): VNode {
@@ -87,7 +87,7 @@ export default mixins(
 
     return h(tag, this.setBackgroundColor(this.color, data), [
       this.genProgress(),
-      this.$slots.default
+      this.$slots.default,
     ])
-  }
+  },
 })

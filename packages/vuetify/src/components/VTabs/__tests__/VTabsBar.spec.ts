@@ -6,7 +6,7 @@ import VTabsBar from '../VTabsBar'
 import {
   mount,
   RouterLinkStub,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 // Types
@@ -20,14 +20,14 @@ describe('VTabsBar.ts', () => {
     mountFunction = (options = {}) => {
       return mount(VTabsBar, {
         stubs: {
-          RouterLink: RouterLinkStub
+          RouterLink: RouterLinkStub,
         },
         mocks: {
           $vuetify: {
-            breakpoint: {}
-          }
+            breakpoint: {},
+          },
         },
-        ...options
+        ...options,
       })
     }
   })
@@ -38,9 +38,9 @@ describe('VTabsBar.ts', () => {
       slots: {
         default: [
           { render: h => h(VTab, { props: { to: '/foo' } }) },
-          { render: h => h(VTab, { props: { to: '/bar' } }) }
-        ]
-      }
+          { render: h => h(VTab, { props: { to: '/bar' } }) },
+        ],
+      },
     })
 
     const route1 = { path: '/foo' }

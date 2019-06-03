@@ -12,28 +12,28 @@ export default mixins(Routable).extend({
     // active item should be dimmed
     activeClass: {
       type: String,
-      default: 'v-breadcrumbs__item--disabled'
+      default: 'v-breadcrumbs__item--disabled',
     },
     ripple: {
       type: [Boolean, Object],
-      default: false
-    }
+      default: false,
+    },
   },
 
   computed: {
     classes (): object {
       return {
         'v-breadcrumbs__item': true,
-        [this.activeClass]: this.disabled
+        [this.activeClass]: this.disabled,
       }
-    }
+    },
   },
 
   render (h): VNode {
     const { tag, data } = this.generateRouteLink()
 
     return h('li', [
-      h(tag, data, this.$slots.default)
+      h(tag, data, this.$slots.default),
     ])
-  }
+  },
 })

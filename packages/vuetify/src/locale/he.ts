@@ -24,6 +24,6 @@ export default {
   noDataText: 'אין נתונים זמינים',
   carousel: {
     prev: 'מצג קודם',
-    next: 'מצג הבא'
-  }
+    next: 'מצג הבא',
+  },
 }

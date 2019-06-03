@@ -37,18 +37,18 @@
 <script>
   export default {
     components: {
-      Patron: () => import('@/components/supporters/Patron')
+      Patron: () => import('@/components/supporters/Patron'),
     },
 
     props: {
       group: {
         type: Array,
-        default: () => ([])
+        default: () => ([]),
       },
       title: {
         type: String,
-        default: ''
-      }
-    }
+        default: '',
+      },
+    },
   }
 </script>

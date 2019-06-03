@@ -2,12 +2,12 @@ import Validatable from '../'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('validatable.ts', () => {
   const Mock = Validatable.extend({
-    render: h => h('div')
+    render: h => h('div'),
   })
 
   type Instance = InstanceType<typeof Mock>
@@ -21,11 +21,11 @@ describe('validatable.ts', () => {
   it('should register/unregister with injected form is available', () => {
     const form = {
       register: jest.fn(),
-      unregister: jest.fn()
+      unregister: jest.fn(),
     }
 
     const wrapper = mountFunction({
-      provide: { form }
+      provide: { form },
     })
 
     expect(form.register).toHaveBeenCalled()
@@ -50,8 +50,8 @@ describe('validatable.ts', () => {
       jest.useFakeTimers()
       const wrapper = mountFunction({
         propsData: {
-          rules: [() => returns || String(returns)]
-        }
+          rules: [() => returns || String(returns)],
+        },
       })
 
       expect(wrapper.vm.valid).toBe(returns)
@@ -142,9 +142,9 @@ describe('validatable.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         readonly: true,
-        validateOnBlur: true
+        validateOnBlur: true,
       },
-      methods: { validate }
+      methods: { validate },
     })
 
     // Initial state from beforeMount
@@ -286,9 +286,9 @@ describe('validatable.ts', () => {
       propsData: {
         errorMessages: [
           'foobar',
-          'fizzbuzz'
-        ]
-      }
+          'fizzbuzz',
+        ],
+      },
     })
 
     expect(wrapper.vm.validations).toHaveLength(1)
@@ -301,7 +301,7 @@ describe('validatable.ts', () => {
   it('should validate when internalValue changes', async () => {
     const validate = jest.fn()
     const wrapper = mountFunction({
-      methods: { validate }
+      methods: { validate },
     })
 
     expect(wrapper.vm.hasInput).toBe(false)
@@ -320,7 +320,7 @@ describe('validatable.ts', () => {
     wrapper.setData({
       hasInput: true,
       hasFocused: true,
-      isResetting: true
+      isResetting: true,
     })
 
     expect(wrapper.vm.hasInput).toBe(true)
@@ -359,8 +359,8 @@ describe('validatable.ts', () => {
   it('should reset validation and internalValue', async () => {
     const wrapper = mountFunction({
       propsData: {
-        value: 'foobar'
-      }
+        value: 'foobar',
+      },
     })
 
     wrapper.vm.reset()
@@ -381,8 +381,8 @@ describe('validatable.ts', () => {
   it('should accept null for external messages', () => {
     const wrapper = mountFunction({
       propsData: {
-        errorMessages: ['Foobar']
-      }
+        errorMessages: ['Foobar'],
+      },
     })
 
     expect(wrapper.vm.externalError).toBe(true)

@@ -52,15 +52,15 @@ export default baseMixins.extend<options>().extend({
   props: {
     activeClass: {
       type: String,
-      default: ''
+      default: '',
     },
     appendIcon: {
       type: String,
-      default: '$vuetify.icons.expand'
+      default: '$vuetify.icons.expand',
     },
     color: {
       type: String,
-      default: 'primary'
+      default: 'primary',
     },
     disabled: Boolean,
     group: String,
@@ -68,9 +68,9 @@ export default baseMixins.extend<options>().extend({
     prependIcon: String,
     ripple: {
       type: [Boolean, Object],
-      default: true
+      default: true,
     },
-    subGroup: Boolean
+    subGroup: Boolean,
   },
 
   computed: {
@@ -79,9 +79,9 @@ export default baseMixins.extend<options>().extend({
         'v-list-group--active': this.isActive,
         'v-list-group--disabled': this.disabled,
         'v-list-group--no-action': this.noAction,
-        'v-list-group--sub-group': this.subGroup
+        'v-list-group--sub-group': this.subGroup,
       }
-    }
+    },
   },
 
   watch: {
@@ -91,7 +91,7 @@ export default baseMixins.extend<options>().extend({
         this.list && this.list.listClick(this._uid)
       }
     },
-    $route: 'onRouteChange'
+    $route: 'onRouteChange',
   },
 
   created () {
@@ -126,23 +126,23 @@ export default baseMixins.extend<options>().extend({
       if (!icon && !this.$slots.appendIcon) return null
 
       return this.$createElement(VListItemIcon, {
-        staticClass: 'v-list-group__header__append-icon'
+        staticClass: 'v-list-group__header__append-icon',
       }, [
-        this.$slots.appendIcon || this.genIcon(icon)
+        this.$slots.appendIcon || this.genIcon(icon),
       ])
     },
     genHeader (): VNode {
       return this.$createElement(VListItem, {
         staticClass: 'v-list-group__header',
         class: {
-          [this.activeClass]: this.isActive
+          [this.activeClass]: this.isActive,
         },
         props: {
-          inputValue: this.isActive
+          inputValue: this.isActive,
         },
         directives: [{
           name: 'ripple',
-          value: this.ripple
+          value: this.ripple,
         }],
         on: {
           ...this.$listeners,
@@ -150,12 +150,12 @@ export default baseMixins.extend<options>().extend({
           keydown: (e: KeyboardEvent) => {
             /* istanbul ignore else */
             if (e.keyCode === keyCodes.enter) this.click()
-          }
-        }
+          },
+        },
       }, [
         this.genPrependIcon(),
         this.$slots.activator,
-        this.genAppendIcon()
+        this.genAppendIcon(),
       ])
     },
     genItems (): VNode {
@@ -163,10 +163,10 @@ export default baseMixins.extend<options>().extend({
         staticClass: 'v-list-group__items',
         directives: [{
           name: 'show',
-          value: this.isActive
-        }]
+          value: this.isActive,
+        }],
       }, this.showLazyContent([
-        this.$createElement('div', this.$slots.default)
+        this.$createElement('div', this.$slots.default),
       ]))
     },
     genPrependIcon (): VNode | null {
@@ -179,9 +179,9 @@ export default baseMixins.extend<options>().extend({
       if (!icon && !this.$slots.prependIcon) return null
 
       return this.$createElement(VListItemIcon, {
-        staticClass: 'v-list-group__header__prepend-icon'
+        staticClass: 'v-list-group__header__prepend-icon',
       }, [
-        this.$slots.prependIcon || this.genIcon(icon)
+        this.$slots.prependIcon || this.genIcon(icon),
       ])
     },
     onRouteChange (to: Route) {
@@ -205,16 +205,16 @@ export default baseMixins.extend<options>().extend({
     },
     matchRoute (to: string) {
       return to.match(this.group) !== null
-    }
+    },
   },
 
   render (h): VNode {
     return h('div', this.setTextColor(this.isActive && this.color, {
       staticClass: 'v-list-group',
-      class: this.classes
+      class: this.classes,
     }), [
       this.genHeader(),
-      h(VExpandTransition, [this.genItems()])
+      h(VExpandTransition, [this.genItems()]),
     ])
-  }
+  },
 })

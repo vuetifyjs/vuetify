@@ -107,5 +107,5 @@ expect.extend({
     expect(round(received)).toEqual(expected)
 
     return { pass: true }
-  }
+  },
 })

@@ -2,7 +2,7 @@ import VRangeSlider from '../VRangeSlider'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VRangeSlider.ts', () => {
@@ -22,10 +22,10 @@ describe('VRangeSlider.ts', () => {
           $vuetify: {
             rtl: false,
             theme: {
-              dark: false
-            }
-          }
-        }
+              dark: false,
+            },
+          },
+        },
       })
     }
   })
@@ -42,8 +42,8 @@ describe('VRangeSlider.ts', () => {
   it('should round values and swap order if needed', () => {
     const wrapper = mountFunction({
       propsData: {
-        value: [0, 0]
-      }
+        value: [0, 0],
+      },
     })
 
     expect(wrapper.vm.lazyValue).toEqual([0, 0])
@@ -77,7 +77,7 @@ describe('VRangeSlider.ts', () => {
   it('should change value on key down', () => {
     const setInternalValue = jest.fn()
     const wrapper = mountFunction({
-      methods: { setInternalValue }
+      methods: { setInternalValue },
     })
     const input = wrapper.find('.v-slider__thumb-container')
 
@@ -172,8 +172,8 @@ describe('VRangeSlider.ts', () => {
   it('should render a vertical slider', async () => {
     const wrapper = mountFunction({
       propsData: {
-        vertical: true
-      }
+        vertical: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -182,8 +182,8 @@ describe('VRangeSlider.ts', () => {
   it('should render disabled slider', async () => {
     const wrapper = mountFunction({
       propsData: {
-        disabled: true
-      }
+        disabled: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()

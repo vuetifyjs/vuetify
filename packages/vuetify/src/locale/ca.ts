@@ -24,6 +24,6 @@ export default {
   noDataText: 'Sense dades',
   carousel: {
     prev: 'Visualització prèvia',
-    next: 'Següent visual'
-  }
+    next: 'Següent visual',
+  },
 }

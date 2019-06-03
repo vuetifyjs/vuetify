@@ -7,7 +7,7 @@ const red = {
   hsla: { h: 0, s: 1, l: 0.5, a: 1 },
   hsva: { h: 0, s: 1, v: 1, a: 1 },
   hue: 0,
-  rgba: { r: 255, g: 0, b: 0, a: 1 }
+  rgba: { r: 255, g: 0, b: 0, a: 1 },
 }
 
 describe('VColorPicker/util/parseColor', () => {

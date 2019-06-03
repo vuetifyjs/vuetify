@@ -73,7 +73,7 @@
       isLoading: false,
       items: [],
       model: null,
-      search: null
+      search: null,
     }),
 
     watch: {
@@ -93,8 +93,8 @@
             console.log(err)
           })
           .finally(() => (this.isLoading = false))
-      }
-    }
+      },
+    },
   }
 </script>
 

@@ -49,9 +49,9 @@
         'Cat Photos',
         '',
         'Potatoes',
-        'Carrots'
+        'Carrots',
       ],
-      model: ['Carrots']
-    })
+      model: ['Carrots'],
+    }),
   }
 </script>

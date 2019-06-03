@@ -4,7 +4,7 @@ import VProgressLinear from '../../VProgressLinear'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VTextField.ts', () => { // eslint-disable-line max-statements
@@ -15,10 +15,10 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
       return mount(VTextField, {
         mocks: {
           $vuetify: {
-            rtl: false
-          }
+            rtl: false,
+          },
         },
-        ...options
+        ...options,
       })
     }
   })
@@ -32,8 +32,8 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
   it('should pass required attr to the input', () => {
     const wrapper = mountFunction({
       attrs: {
-        required: true
-      }
+        required: true,
+      },
     })
 
     const input = wrapper.findAll('input').at(0)
@@ -45,7 +45,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     const component = {
       render (h) {
         return h(VTextField, { on: { keyUp: keyup }, props: { download: '' }, attrs: {} })
-      }
+      },
     }
     const wrapper = mount(component)
 
@@ -58,9 +58,9 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
   it('should render aria-label attribute on text field element with label value and no id', () => {
     const wrapper = mountFunction({
       propsData: {
-        label: 'Test'
+        label: 'Test',
       },
-      attrs: {}
+      attrs: {},
     })
 
     const inputGroup = wrapper.findAll('input').at(0)
@@ -70,9 +70,9 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
   it('should not render aria-label attribute on text field element with no label value or id', () => {
     const wrapper = mountFunction({
       propsData: {
-        label: null
+        label: null,
       },
-      attrs: {}
+      attrs: {},
     })
 
     const inputGroup = wrapper.findAll('input').at(0)
@@ -82,11 +82,11 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
   it('should not render aria-label attribute on text field element with id', () => {
     const wrapper = mountFunction({
       propsData: {
-        label: 'Test'
+        label: 'Test',
       },
       attrs: {
-        id: 'Test'
-      }
+        id: 'Test',
+      },
     })
 
     const inputGroup = wrapper.findAll('input').at(0)
@@ -96,8 +96,8 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
   it('should start out as invalid', () => {
     const wrapper = mountFunction({
       propsData: {
-        rules: [v => !!v || 'Required']
-      }
+        rules: [v => !!v || 'Required'],
+      },
     })
 
     expect(wrapper.vm.valid).toEqual(false)
@@ -115,8 +115,8 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
   it('should not start validating on input if validate-on-blur prop is set', async () => {
     const wrapper = mountFunction({
       propsData: {
-        validateOnBlur: true
-      }
+        validateOnBlur: true,
+      },
     })
 
     expect(wrapper.vm.shouldValidate).toEqual(false)
@@ -128,11 +128,11 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
   it('should not display counter when set to false/undefined/null', async () => {
     const wrapper = mountFunction({
       propsData: {
-        counter: true
+        counter: true,
       },
       attrs: {
-        maxlength: 50
-      }
+        maxlength: 50,
+      },
     })
 
     expect(wrapper.findAll('.v-counter').wrappers[0]).not.toBeUndefined()
@@ -158,8 +158,8 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
   it('should have readonly attribute', () => {
     const wrapper = mountFunction({
       propsData: {
-        readonly: true
-      }
+        readonly: true,
+      },
     })
 
     const input = wrapper.findAll('input').at(0)
@@ -171,8 +171,8 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         clearable: true,
-        value: 'foo'
-      }
+        value: 'foo',
+      },
     })
 
     const clear = wrapper.findAll('.v-input__icon--clear .v-icon').at(0)
@@ -193,11 +193,11 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         value: 'foo',
-        appendIcon: 'block'
+        appendIcon: 'block',
       },
       listeners: {
-        'click:append': click
-      }
+        'click:append': click,
+      },
     })
 
     const icon = wrapper.findAll('.v-input__icon--append .v-icon').at(0)
@@ -211,8 +211,8 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         value: 'foo',
-        appendIcon: 'block'
-      }
+        appendIcon: 'block',
+      },
     })
 
     const icon = wrapper.findAll('.v-input__icon--append .v-icon').at(0)
@@ -226,8 +226,8 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         rules: [rule],
-        validateOnBlur: true
-      }
+        validateOnBlur: true,
+      },
     })
 
     const input = wrapper.find('input')
@@ -254,8 +254,8 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
   it('should keep its value on blur', async () => {
     const wrapper = mountFunction({
       propsData: {
-        value: 'asd'
-      }
+        value: 'asd',
+      },
     })
 
     const input = wrapper.findAll('input').at(0)
@@ -289,11 +289,11 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
         return h(VTextField, {
           on: {
             input: i => value = i,
-            change
+            change,
           },
-          props: { value }
+          props: { value },
         })
-      }
+      },
     }
     const wrapper = mount(component)
 
@@ -318,8 +318,8 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
         prependIcon: 'check',
         appendIcon: 'check',
         value: 'test',
-        clearable: true
-      }
+        clearable: true,
+      },
     })
 
     const prepend = wrapper.findAll('.v-input__icon--append .v-icon').at(0)
@@ -335,11 +335,11 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
         return h(VTextField, {
           on: {
             input: i => value = i,
-            change
+            change,
           },
-          props: { value }
+          props: { value },
         })
-      }
+      },
     }
     const wrapper = mount(component)
 
@@ -356,8 +356,8 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
   it('should render component with async loading and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        loading: true
-      }
+        loading: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -370,19 +370,19 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
           props: {
             indeterminate: true,
             height: 7,
-            color: 'orange'
-          }
+            color: 'orange',
+          },
         })
-      }
+      },
     })
 
     const wrapper = mountFunction({
       propsData: {
-        loading: true
+        loading: true,
       },
       slots: {
-        progress: [progress]
-      }
+        progress: [progress],
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -390,7 +390,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
 
   it('should display the number 0', async () => {
     const wrapper = mountFunction({
-      propsData: { value: 0 }
+      propsData: { value: 0 },
     })
 
     expect(wrapper.vm.$refs.input.value).toBe('0')
@@ -400,8 +400,8 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
-        autofocus: true
-      }
+        autofocus: true,
+      },
     })
 
     const focus = jest.fn()
@@ -441,8 +441,8 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         prefix: '$',
-        suffix: '.com'
-      }
+        suffix: '.com',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -453,11 +453,11 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         clearable: true,
-        value: 'foo'
+        value: 'foo',
       },
       listeners: {
-        'click:clear': clear
-      }
+        'click:clear': clear,
+      },
     })
 
     wrapper.vm.$on('click:clear', clear)
@@ -482,14 +482,14 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
 
     wrapper.setProps({
       placeholder: undefined,
-      value: 'bar'
+      value: 'bar',
     })
 
     expect(wrapper.vm.genLabel()).toBeNull()
 
     wrapper.setProps({
       label: 'bar',
-      value: undefined
+      value: undefined,
     })
 
     expect(wrapper.vm.genLabel()).toBeTruthy()
@@ -499,14 +499,14 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         label: 'foo',
-        id: 'bar'
+        id: 'bar',
       },
       attrs: {
-        id: 'bar'
+        id: 'bar',
       },
       domProps: {
-        id: 'bar'
-      }
+        id: 'bar',
+      },
     })
 
     const label = wrapper.find('label')
@@ -517,8 +517,8 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
   it('should render an appended outer icon', () => {
     const wrapper = mountFunction({
       propsData: {
-        appendOuterIcon: 'search'
-      }
+        appendOuterIcon: 'search',
+      },
     })
 
     expect(wrapper.find('.v-input__icon--append-outer .v-icon').element.innerHTML).toBe('search')
@@ -527,11 +527,11 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
   it('should have correct max value', async () => {
     const wrapper = mountFunction({
       attrs: {
-        maxlength: 25
+        maxlength: 25,
       },
       propsData: {
-        counter: true
-      }
+        counter: true,
+      },
     })
 
     const counter = wrapper.find('.v-counter')
@@ -549,19 +549,19 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     expect(wrapper.vm.badInput).toBeFalsy()
 
     wrapper.vm.onInput({
-      target: {}
+      target: {},
     })
 
     expect(wrapper.vm.badInput).toBeFalsy()
 
     wrapper.vm.onInput({
-      target: { validity: { badInput: false } }
+      target: { validity: { badInput: false } },
     })
 
     expect(wrapper.vm.badInput).toBeFalsy()
 
     wrapper.vm.onInput({
-      target: { validity: { badInput: true } }
+      target: { validity: { badInput: true } },
     })
 
     expect(wrapper.vm.badInput).toBe(true)
@@ -570,8 +570,8 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
   it('should set input autocomplete attr', () => {
     const wrapper = mountFunction({
       propsData: {
-        browserAutocomplete: 'off'
-      }
+        browserAutocomplete: 'off',
+      },
     })
 
     const input = wrapper.find('input')
@@ -581,7 +581,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
 
   it('should not apply id to root element', () => {
     const wrapper = mountFunction({
-      attrs: { id: 'foo' }
+      attrs: { id: 'foo' },
     })
 
     const input = wrapper.find('input')
@@ -623,8 +623,8 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
     const wrapper = mountFunction({
       propsData: {
-        label: 'Foobar'
-      }
+        label: 'Foobar',
+      },
     })
     const label = wrapper.find('.v-label')
 
@@ -656,8 +656,8 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
         prependIcon: 'prepend',
         appendIcon: 'append',
         prependInnerIcon: 'prepend-inner',
-        appendOuterIcon: 'append-outer'
-      }
+        appendOuterIcon: 'append-outer',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -667,7 +667,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
   it('should not focus input when mousedown did not originate from input', () => {
     const focus = jest.fn()
     const wrapper = mountFunction({
-      methods: { focus }
+      methods: { focus },
     })
 
     const input = wrapper.find('.v-input__slot')

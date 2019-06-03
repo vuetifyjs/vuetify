@@ -24,6 +24,6 @@ export default {
   noDataText: '無可用數據',
   carousel: {
     prev: '以前的視覺',
-    next: '下一個視覺'
-  }
+    next: '下一個視覺',
+  },
 }

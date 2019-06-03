@@ -24,6 +24,6 @@ export default {
   noDataText: 'Χωρίς δεδομένα',
   carousel: {
     prev: 'הקודם חזותי',
-    next: 'הבא חזותי'
-  }
+    next: 'הבא חזותי',
+  },
 }

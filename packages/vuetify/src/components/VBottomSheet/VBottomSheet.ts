@@ -11,12 +11,12 @@ export default VDialog.extend({
     inset: Boolean,
     maxWidth: {
       type: [String, Number],
-      default: 'auto'
+      default: 'auto',
     },
     transition: {
       type: String,
-      default: 'bottom-sheet-transition'
-    }
+      default: 'bottom-sheet-transition',
+    },
   },
 
   computed: {
@@ -24,8 +24,8 @@ export default VDialog.extend({
       return {
         ...VDialog.options.computed.classes.call(this),
         'v-bottom-sheet': true,
-        'v-bottom-sheet--inset': this.inset
+        'v-bottom-sheet--inset': this.inset,
       }
-    }
-  }
+    },
+  },
 })

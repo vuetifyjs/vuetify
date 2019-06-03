@@ -48,7 +48,7 @@
           { text: 'State 4' },
           { text: 'State 5' },
           { text: 'State 6' },
-          { text: 'State 7' }
+          { text: 'State 7' },
         ],
         states: [
           'Alabama', 'Alaska', 'American Samoa', 'Arizona',
@@ -64,9 +64,9 @@
           'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico',
           'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee',
           'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia',
-          'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-        ]
+          'Washington', 'West Virginia', 'Wisconsin', 'Wyoming',
+        ],
       }
-    }
+    },
   }
 </script>

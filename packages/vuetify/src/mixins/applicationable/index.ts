@@ -10,13 +10,13 @@ export default function applicationable (value: TargetProp, events: string[] = [
     name: 'applicationable',
 
     props: {
-      app: Boolean
+      app: Boolean,
     },
 
     computed: {
       applicationProperty (): TargetProp {
         return value
-      }
+      },
     },
 
     watch: {
@@ -29,7 +29,7 @@ export default function applicationable (value: TargetProp, events: string[] = [
       },
       applicationProperty (newVal, oldVal) {
         this.$vuetify.application.unregister(this._uid, oldVal)
-      }
+      },
     },
 
     activated () {
@@ -73,7 +73,7 @@ export default function applicationable (value: TargetProp, events: string[] = [
           this.applicationProperty
         )
       },
-      updateApplication: () => 0
-    }
+      updateApplication: () => 0,
+    },
   })
 }

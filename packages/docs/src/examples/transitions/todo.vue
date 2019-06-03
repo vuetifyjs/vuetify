@@ -102,14 +102,14 @@
       tasks: [
         {
           done: false,
-          text: 'Foobar'
+          text: 'Foobar',
         },
         {
           done: false,
-          text: 'Fizzbuzz'
-        }
+          text: 'Fizzbuzz',
+        },
       ],
-      task: null
+      task: null,
     }),
 
     computed: {
@@ -121,18 +121,18 @@
       },
       remainingTasks () {
         return this.tasks.length - this.completedTasks
-      }
+      },
     },
 
     methods: {
       create () {
         this.tasks.push({
           done: false,
-          text: this.task
+          text: this.task,
         })
 
         this.task = null
-      }
-    }
+      },
+    },
   }
 </script>

@@ -24,6 +24,6 @@ export default {
   noDataText: 'اطلاعاتی یافت نشد',
   carousel: {
     prev: 'تصویر قبلی',
-    next: 'بعدی بصری'
-  }
+    next: 'بعدی بصری',
+  },
 }

@@ -24,6 +24,6 @@ export default {
   noDataText: 'Tidak ada data tersedia',
   carousel: {
     prev: 'Visual sebelumnya',
-    next: 'Visual selanjutnya'
-  }
+    next: 'Visual selanjutnya',
+  },
 }

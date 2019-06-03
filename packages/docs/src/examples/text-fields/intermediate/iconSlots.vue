@@ -61,7 +61,7 @@
   export default {
     data: () => ({
       message: 'Hey!',
-      loading: false
+      loading: false,
     }),
 
     methods: {
@@ -72,8 +72,8 @@
           this.loading = false
           this.message = 'You\'ve clicked me!'
         }, 2000)
-      }
-    }
+      },
+    },
   }
 </script>
 

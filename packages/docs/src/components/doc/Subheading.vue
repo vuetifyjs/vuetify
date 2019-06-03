@@ -10,8 +10,8 @@
     props: {
       tag: {
         type: String,
-        default: 'v-headline'
-      }
-    }
+        default: 'v-headline',
+      },
+    },
   }
 </script>

@@ -8,7 +8,7 @@ export default {
     setIsLoading: set('isLoading'),
     setReleases: set('releases'),
     setSupporters: set('supporters'),
-    toggleDrawer: toggle('drawer')
+    toggleDrawer: toggle('drawer'),
   },
 
   state: {
@@ -16,6 +16,6 @@ export default {
     currentVersion: null,
     isLoading: false,
     releases: [],
-    supporters: {}
-  }
+    supporters: {},
+  },
 }

@@ -12,7 +12,7 @@ function inserted (el: HTMLElement, binding: ResizeVNodeDirective) {
   window.addEventListener('resize', callback, options)
   el._onResize = {
     callback,
-    options
+    options,
   }
 
   if (!binding.modifiers || !binding.modifiers.quiet) {
@@ -30,7 +30,7 @@ function unbind (el: HTMLElement) {
 
 const resize = {
   inserted,
-  unbind
+  unbind,
 }
 
 export { resize }

@@ -37,7 +37,7 @@ export default mixins<options>().extend({
     return {
       closeDependents: true,
       isActive: false,
-      isDependent: true
+      isDependent: true,
     }
   },
 
@@ -49,7 +49,7 @@ export default mixins<options>().extend({
       for (let index = 0; index < openDependents.length; index++) {
         openDependents[index].isActive = false
       }
-    }
+    },
   },
 
   methods: {
@@ -75,6 +75,6 @@ export default mixins<options>().extend({
       result.push(...this.getOpenDependentElements())
 
       return result
-    }
-  }
+    },
+  },
 })

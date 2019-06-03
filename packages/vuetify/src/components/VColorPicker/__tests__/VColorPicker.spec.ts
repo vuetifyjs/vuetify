@@ -2,7 +2,7 @@ import VColorPicker from '../VColorPicker'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VColorPicker.ts', () => {
@@ -20,10 +20,10 @@ describe('VColorPicker.ts', () => {
         ...options,
         mocks: {
           $vuetify: {
-            rtl: false
-          }
+            rtl: false,
+          },
         },
-        sync: false
+        sync: false,
       })
     }
   })
@@ -41,8 +41,8 @@ describe('VColorPicker.ts', () => {
   it('should change canvas height', () => {
     const wrapper = mountFunction({
       propsData: {
-        canvasHeight: 200
-      }
+        canvasHeight: 200,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -52,8 +52,8 @@ describe('VColorPicker.ts', () => {
   it('should show swatches', () => {
     const wrapper = mountFunction({
       propsData: {
-        showSwatches: true
-      }
+        showSwatches: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -63,8 +63,8 @@ describe('VColorPicker.ts', () => {
   it('should hide canvas', () => {
     const wrapper = mountFunction({
       propsData: {
-        hideCanvas: true
-      }
+        hideCanvas: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -74,8 +74,8 @@ describe('VColorPicker.ts', () => {
   it('should hide inputs', () => {
     const wrapper = mountFunction({
       propsData: {
-        hideInputs: true
-      }
+        hideInputs: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -86,11 +86,11 @@ describe('VColorPicker.ts', () => {
     const fn = jest.fn()
     const wrapper = mountFunction({
       propsData: {
-        value: '#00FF00'
+        value: '#00FF00',
       },
       listeners: {
-        input: fn
-      }
+        input: fn,
+      },
     })
 
     // Get first input (red)
@@ -109,11 +109,11 @@ describe('VColorPicker.ts', () => {
     const fn = jest.fn()
     const wrapper = mountFunction({
       propsData: {
-        value: { r: 0, g: 0, b: 255 }
+        value: { r: 0, g: 0, b: 255 },
       },
       listeners: {
-        input: fn
-      }
+        input: fn,
+      },
     })
 
     // Get first input (red)

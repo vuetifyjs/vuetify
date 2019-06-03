@@ -12,7 +12,7 @@ import VWindowItem from '../VWindowItem'
 import {
   createLocalVue,
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../util/mixins'
 
@@ -31,7 +31,7 @@ describe('VWindowItem.ts', () => {
       return mount(VWindowItem, {
         localVue,
         router,
-        ...options
+        ...options,
       })
     }
   })
@@ -39,13 +39,13 @@ describe('VWindowItem.ts', () => {
   it('should transition content', async () => {
     const wrapper = mount(VWindow, {
       slots: {
-        default: [VWindowItem]
+        default: [VWindowItem],
       },
       mocks: {
         $vuetify: {
-          rtl: false
-        }
-      }
+          rtl: false,
+        },
+      },
     })
 
     const item = wrapper.find(VWindowItem.options)
@@ -90,15 +90,15 @@ describe('VWindowItem.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         transition: 'foo',
-        reverseTransition: 'bar'
+        reverseTransition: 'bar',
       },
       data: () => ({
         windowGroup: {
           internalReverse: false,
           register: () => {},
-          unregister: () => {}
-        }
-      })
+          unregister: () => {},
+        },
+      }),
     })
 
     expect(wrapper.vm.computedTransition).toBe('foo')
@@ -122,14 +122,14 @@ describe('VWindowItem.ts', () => {
         windowGroup: {
           internalReverse: false,
           register: () => {},
-          unregister: () => {}
-        }
-      })
+          unregister: () => {},
+        },
+      }),
     })
 
     // Incorrect property
     wrapper.vm.onTransitionEnd({
-      propertyName: 'border-color'
+      propertyName: 'border-color',
     })
 
     expect(done).not.toHaveBeenCalled()
@@ -137,7 +137,7 @@ describe('VWindowItem.ts', () => {
     // Incorrect target
     wrapper.vm.onTransitionEnd({
       propertyName: 'transform',
-      target: document.createElement('div')
+      target: document.createElement('div'),
     })
 
     expect(done).not.toHaveBeenCalled()
@@ -145,7 +145,7 @@ describe('VWindowItem.ts', () => {
     // Should work
     wrapper.vm.onTransitionEnd({
       propertyName: 'transform',
-      target: wrapper.vm.$el
+      target: wrapper.vm.$el,
     })
 
     expect(done).toHaveBeenCalledTimes(1)
@@ -157,15 +157,15 @@ describe('VWindowItem.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         transition: false,
-        reverseTransition: false
+        reverseTransition: false,
       },
       data: () => ({
         windowGroup: {
           internalHeight: 0,
           register: () => {},
-          unregister: () => {}
-        }
-      })
+          unregister: () => {},
+        },
+      }),
     })
 
     expect(wrapper.vm.computedTransition).toBeFalsy()
