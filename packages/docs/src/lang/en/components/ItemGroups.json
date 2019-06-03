@@ -16,6 +16,10 @@
     "multiple": {
       "header": "### Multiple",
       "desc": "Item groups can have multiple items selected."
+    },
+    "mandatory": {
+      "header": "### Mandatory",
+      "desc": "**mandatory** item groups must have aty least 1 item selected."
     }
   },
   "props": {

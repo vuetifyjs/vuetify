@@ -31,6 +31,7 @@
           "type": "examples",
           "value": [
             "simple/multiple",
+            "simple/mandatory",
             "intermediate/togglePictures",
             "complex/post"
           ]
