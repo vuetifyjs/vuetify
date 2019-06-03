@@ -1,5 +1,5 @@
 <template>
-  <v-item-group activeClass="primary">
+  <v-item-group active-class="primary">
     <v-container grid-list-md>
       <v-layout wrap>
         <v-flex
