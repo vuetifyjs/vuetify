@@ -30,6 +30,7 @@
         {
           "type": "examples",
           "value": [
+            "simple/multiple",
             "intermediate/togglePictures",
             "complex/post"
           ]
