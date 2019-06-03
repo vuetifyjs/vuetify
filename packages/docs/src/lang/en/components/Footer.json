@@ -5,6 +5,10 @@
     "usage": {
       "desc": "The footer component is just a basic container."
     },
+    "absolute": {
+      "header": "### Absolute Footer",
+      "desc": "Absolute footers are positioned absolutely."
+    },
     "companyFooter": {
       "header": "### Company Footer",
       "desc": "The footer component as a basic company footer with links."

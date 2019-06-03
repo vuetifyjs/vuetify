@@ -36,9 +36,10 @@
         {
           "type": "examples",
           "value": [
-            "companyFooter",
-            "indigoFooter",
-            "tealFooter"
+            "simple/absolute",
+            "intermediate/companyFooter",
+            "intermediate/indigoFooter",
+            "intermediate/tealFooter"
           ]
         }
       ]
