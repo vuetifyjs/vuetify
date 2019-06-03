@@ -3,15 +3,15 @@ export default {
   dataIterator: {
     pageText: '{0}-{1} จาก {2}',
     noResultsText: 'ไม่พบข้อมูลที่ค้นหา',
-    loadingText: 'Loading item...'
+    loadingText: 'Loading item...',
   },
   dataTable: {
     itemsPerPageText: 'แถวต่อหน้า:',
     ariaLabel: {
       sortDescending: ': Sorted descending. Activate to remove sorting.',
       sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.'
-    }
+      sortNone: ': Not sorted. Activate to sort ascending.',
+    },
   },
   dataFooter: {
     itemsPerPageText: 'รายการต่อหน้า:',
@@ -19,7 +19,7 @@ export default {
     nextPage: 'หน้าต่อไป',
     prevPage: 'หน้าที่แล้ว',
     firstPage: 'หน้าแรก',
-    lastPage: 'หน้าสุดท้าย'
+    lastPage: 'หน้าสุดท้าย',
   },
   noDataText: 'ไม่มีข้อมูล',
   carousel: {

@@ -3,7 +3,7 @@ export default {
   dataIterator: {
     pageText: '{0}-{1} no {2}',
     noResultsText: 'Nekas netika atrasts',
-    loadingText: 'Ielādē...'
+    loadingText: 'Ielādē...',
   },
   dataTable: {
     itemsPerPageText: 'Rādīt lapā:',
@@ -19,7 +19,7 @@ export default {
     nextPage: 'Nākamā lapa',
     prevPage: 'Iepriekšējā lapa',
     firstPage: 'Pirmā lapa',
-    lastPage: 'Pēdējā lapa'
+    lastPage: 'Pēdējā lapa',
   },
   noDataText: 'Nav pieejamu datu',
   carousel: {

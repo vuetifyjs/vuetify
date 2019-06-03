@@ -3,15 +3,15 @@ export default {
   dataIterator: {
     pageText: '{0} تا {1} از {2}',
     noResultsText: 'نتیجه‌ای یافت نشد',
-    loadingText: 'Loading item...'
+    loadingText: 'Loading item...',
   },
   dataTable: {
     itemsPerPageText: 'ردیف در صفحه:',
     ariaLabel: {
       sortDescending: ': Sorted descending. Activate to remove sorting.',
       sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.'
-    }
+      sortNone: ': Not sorted. Activate to sort ascending.',
+    },
   },
   dataFooter: {
     itemsPerPageText: 'ردیف در صفحه:',
@@ -19,7 +19,7 @@ export default {
     nextPage: 'صفحه بعد',
     prevPage: 'صفحه قبل',
     firstPage: 'صفحه اول',
-    lastPage: 'آخرین صفحه'
+    lastPage: 'آخرین صفحه',
   },
   noDataText: 'اطلاعاتی یافت نشد',
   carousel: {

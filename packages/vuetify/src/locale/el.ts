@@ -3,15 +3,15 @@ export default {
   dataIterator: {
     pageText: '{0}-{1} από {2}',
     noResultsText: 'Δε βρέθηκαν αποτελέσματα',
-    loadingText: 'Loading item...'
+    loadingText: 'Loading item...',
   },
   dataTable: {
     itemsPerPageText: 'Γραμμές ανά σελίδα:',
     ariaLabel: {
       sortDescending: ': Sorted descending. Activate to remove sorting.',
       sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.'
-    }
+      sortNone: ': Not sorted. Activate to sort ascending.',
+    },
   },
   dataFooter: {
     itemsPerPageText: 'Αντικείμενα ανά σελίδα:',
@@ -19,7 +19,7 @@ export default {
     nextPage: 'Επόμενη σελίδα',
     prevPage: 'Προηγούμενη σελίδα',
     firstPage: 'Πρώτη σελίδα',
-    lastPage: 'Τελευταία σελίδα'
+    lastPage: 'Τελευταία σελίδα',
   },
   noDataText: 'Χωρίς δεδομένα',
   carousel: {

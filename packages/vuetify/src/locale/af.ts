@@ -3,15 +3,15 @@ export default {
   dataIterator: {
     pageText: '{0}-{1} van {2}',
     noResultsText: 'Geen ooreenstemmende resultate is gevind nie',
-    loadingText: 'Loading item...'
+    loadingText: 'Loading item...',
   },
   dataTable: {
     itemsPerPageText: 'Rye per bladsy:',
     ariaLabel: {
       sortDescending: ': Sorted descending. Activate to remove sorting.',
       sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.'
-    }
+      sortNone: ': Not sorted. Activate to sort ascending.',
+    },
   },
   dataFooter: {
     itemsPerPageText: 'Aantal per bladsy:',
@@ -19,7 +19,7 @@ export default {
     nextPage: 'Volgende bladsy',
     prevPage: 'Vorige bladsy',
     firstPage: 'Eerste bladsy',
-    lastPage: 'Laaste bladsy'
+    lastPage: 'Laaste bladsy',
   },
   noDataText: 'Geen data is beskikbaar nie',
   carousel: {

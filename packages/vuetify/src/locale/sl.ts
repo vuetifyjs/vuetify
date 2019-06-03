@@ -3,15 +3,15 @@ export default {
   dataIterator: {
     pageText: '{0}-{1} od {2}',
     noResultsText: 'Ni iskanega zapisa',
-    loadingText: 'Loading items...'
+    loadingText: 'Loading items...',
   },
   dataTable: {
     itemsPerPageText: 'Vrstic na stran:',
     ariaLabel: {
       sortDescending: ': Sorted descending. Activate to remove sorting.',
       sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.'
-    }
+      sortNone: ': Not sorted. Activate to sort ascending.',
+    },
   },
   dataFooter: {
     itemsPerPageText: 'Predmetov na stran:',
@@ -19,7 +19,7 @@ export default {
     nextPage: 'Naslednja stran',
     prevPage: 'Prejšnja stran',
     firstPage: 'Prva stran',
-    lastPage: 'Zadnja stran'
+    lastPage: 'Zadnja stran',
   },
   noDataText: 'Ni podatkov',
   carousel: {

@@ -3,15 +3,15 @@ export default {
   dataIterator: {
     pageText: '{0}-{1} 共 {2} 條',
     noResultsText: '沒有找到匹配記錄',
-    loadingText: 'Loading items...'
+    loadingText: 'Loading items...',
   },
   dataTable: {
     itemsPerPageText: '每頁行數：',
     ariaLabel: {
       sortDescending: ': Sorted descending. Activate to remove sorting.',
       sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.'
-    }
+      sortNone: ': Not sorted. Activate to sort ascending.',
+    },
   },
   dataFooter: {
     itemsPerPageText: '每頁記錄數：',
@@ -19,7 +19,7 @@ export default {
     nextPage: '下一頁',
     prevPage: '上一頁',
     firstPage: '第一頁',
-    lastPage: '最後一頁'
+    lastPage: '最後一頁',
   },
   noDataText: '無可用數據',
   carousel: {

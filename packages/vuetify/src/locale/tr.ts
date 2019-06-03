@@ -3,15 +3,15 @@ export default {
   dataIterator: {
     pageText: '{0}-{1} de {2}',
     noResultsText: 'Eşleşen Veri Bulunamadı',
-    loadingText: 'Loading item...'
+    loadingText: 'Loading item...',
   },
   dataTable: {
     itemsPerPageText: 'Sayfa başına satır:',
     ariaLabel: {
       sortDescending: ': Sorted descending. Activate to remove sorting.',
       sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.'
-    }
+      sortNone: ': Not sorted. Activate to sort ascending.',
+    },
   },
   dataFooter: {
     itemsPerPageText: 'Sayfa başına satır:',
@@ -19,7 +19,7 @@ export default {
     nextPage: 'Sonraki sayfa',
     prevPage: 'Önceki sayfa',
     firstPage: 'İlk sayfa',
-    lastPage: 'Son sayfa'
+    lastPage: 'Son sayfa',
   },
   noDataText: 'Uygun veri yok',
   carousel: {

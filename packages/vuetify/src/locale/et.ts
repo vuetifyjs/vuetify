@@ -3,15 +3,15 @@ export default {
   dataIterator: {
     pageText: '{0}-{1} {2}st',
     noResultsText: 'Vastavaid kirjeid ei leitud',
-    loadingText: 'Loading item...'
+    loadingText: 'Loading item...',
   },
   dataTable: {
     itemsPerPageText: 'Ridu leheküljel:',
     ariaLabel: {
       sortDescending: ': Sorted descending. Activate to remove sorting.',
       sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.'
-    }
+      sortNone: ': Not sorted. Activate to sort ascending.',
+    },
   },
   dataFooter: {
     itemsPerPageText: 'Kirjeid leheküljel:',
@@ -19,7 +19,7 @@ export default {
     nextPage: 'Järgmine lehekülg',
     prevPage: 'Eelmine lehekülg',
     firstPage: 'Esimene lehekülg',
-    lastPage: 'Viimane lehekülg'
+    lastPage: 'Viimane lehekülg',
   },
   noDataText: 'Andmed puuduvad',
   carousel: {
