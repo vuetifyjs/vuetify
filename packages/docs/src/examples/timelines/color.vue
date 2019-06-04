@@ -123,9 +123,3 @@
     </v-card-text>
   </v-card>
 </template>
-
-<codepen-resources lang="json">
-  {
-    "css": ["https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css"]
-  }
-</codepen-resources>
