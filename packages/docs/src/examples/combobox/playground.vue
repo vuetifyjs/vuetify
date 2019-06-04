@@ -19,7 +19,7 @@
       :small-chips="chips"
       :clearable="clearable"
     >
-      <template v-slot:no-data v-if="noData">
+      <template v-if="noData" v-slot:no-data>
         <v-list-item>
           <v-list-item-content>
             <v-list-item-title>
@@ -42,7 +42,7 @@
       multiple: true,
       hideSelected: true,
       noData: true,
-      clearable: false
-    })
+      clearable: false,
+    }),
   }
 </script>
