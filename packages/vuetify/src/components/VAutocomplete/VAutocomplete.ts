@@ -316,28 +316,20 @@ export default VSelect.extend({
       const value = target.value
 
       // If typing and menu is not currently active
-      if (target.value) {
-        this.activateMenu()
-        if (!this.isAnyValueAllowed) this.setMenuIndex(0)
-      }
+      if (target.value) this.activateMenu()
 
       this.internalSearch = value
       this.badInput = target.validity && target.validity.badInput
     },
-    onKeyDown (e: KeyboardEvent) {
-      const keyCode = e.keyCode
-
-      VSelect.options.methods.onKeyDown.call(this, e)
-
-      // The ordering is important here
-      // allows new value to be updated
-      // and then moves the index to the
-      // proper location
-      this.changeSelectedIndex(keyCode)
-    },
     onTabDown (e: KeyboardEvent) {
       VSelect.options.methods.onTabDown.call(this, e)
       this.updateSelf()
+    },
+    onUpDown () {
+      // For autocomplete / combobox, cycling
+      // interfers with native up/down behavior
+      // instead activate the menu
+      this.activateMenu()
     },
     setSelectedItems () {
       VSelect.options.methods.setSelectedItems.call(this)

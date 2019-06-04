@@ -258,6 +258,8 @@ export default baseMixins.extend<options>().extend({
       })
     },
     isMenuActive (val) {
+      this.$nextTick(() => this.onMenuActiveChange(val))
+
       if (!val) return
 
       this.isBooted = true
@@ -294,6 +296,12 @@ export default baseMixins.extend<options>().extend({
     },
     /** @public */
     activateMenu () {
+      if (
+        this.disabled ||
+        this.readonly ||
+        this.isMenuActive
+      ) return
+
       this.isMenuActive = true
     },
     clearableCallback () {
@@ -590,26 +598,57 @@ export default baseMixins.extend<options>().extend({
     },
     onKeyDown (e: KeyboardEvent) {
       const keyCode = e.keyCode
+      const menu = this.$refs.menu
 
-      // If enter, space, up, or down is pressed, open menu
-      if (!this.readonly && !this.isMenuActive && [
+      // If enter, space, open menu
+      if ([
         keyCodes.enter,
         keyCodes.space,
-        keyCodes.up, keyCodes.down,
       ].includes(keyCode)) this.activateMenu()
 
-      if (this.isMenuActive && this.$refs.menu && keyCode !== keyCodes.tab) {
-        (this.$refs.menu as { [key: string]: any }).changeListIndex(e)
+      if (!menu) return
+
+      // If menu is active, allow default
+      // listIndex change from menu
+      if (this.isMenuActive && keyCode !== keyCodes.tab) {
+        menu.changeListIndex(e)
       }
 
-      // This should do something different
-      if (keyCode === keyCodes.enter) return this.onEnterDown(e)
+      // If menu is not active, up and down can do
+      // one of 2 things. If multiple, opens the
+      // menu, if not, will cycle through all
+      // available options
+      if (
+        !this.isMenuActive &&
+        [keyCodes.up, keyCodes.down].includes(keyCode)
+      ) return this.onUpDown(e)
 
       // If escape deactivate the menu
       if (keyCode === keyCodes.esc) return this.onEscDown(e)
 
       // If tab - select item or close menu
       if (keyCode === keyCodes.tab) return this.onTabDown(e)
+    },
+    onMenuActiveChange (val: boolean) {
+      // If menu is closing and mulitple
+      // or menuIndex is already set
+      // skip menu index recalculation
+      if (
+        (this.multiple && !val) ||
+        this.getMenuIndex() > -1
+      ) return
+
+      const menu = this.$refs.menu
+
+      if (!menu) return
+
+      // When menu opens, set index of first active item
+      for (let i = 0; i < menu.tiles.length; i++) {
+        if (menu.tiles[i].getAttribute('aria-selected') === 'true') {
+          this.setMenuIndex(i)
+          break
+        }
+      }
     },
     onMouseUp (e: MouseEvent) {
       if (this.hasMouseDown) {
@@ -651,26 +690,46 @@ export default baseMixins.extend<options>().extend({
       }
     },
     onTabDown (e: KeyboardEvent) {
-      const menuIndex = this.getMenuIndex()
+      const menu = this.$refs.menu
 
-      const listTile = (this.$refs.menu as { [key: string]: any }).tiles[menuIndex]
+      if (!menu) return
+
+      const activeTile = menu.activeTile
 
       // An item that is selected by
       // menu-index should toggled
       if (
-        listTile &&
+        activeTile &&
         this.isMenuActive
       ) {
         e.preventDefault()
         e.stopPropagation()
 
-        listTile.click()
+        activeTile.click()
       } else {
         // If we make it here,
         // the user has no selected indexes
         // and is probably tabbing out
         this.blur(e)
       }
+    },
+    onUpDown (e: KeyboardEvent) {
+      const menu = this.$refs.menu
+
+      if (!menu) return
+
+      // Multiple selects do not cycle their value
+      // when pressing up or down, instead activate
+      // the menu
+      if (this.multiple) return this.activateMenu()
+
+      const keyCode = e.keyCode
+
+      // Cycle through available values to achieve
+      // select native behavior
+      menu.getTiles()
+      keyCodes.up === keyCode ? menu.prevTile() : menu.nextTile()
+      menu.activeTile && menu.activeTile.click()
     },
     selectItem (item: object) {
       if (!this.multiple) {
@@ -693,13 +752,16 @@ export default baseMixins.extend<options>().extend({
             (this.$refs.menu as { [key: string]: any }).updateDimensions()
         })
 
+        // We only need to reset list index for multiple
+        // to keep highlight when an item is toggled
+        // on and off
+        if (!this.multiple) return
+
         const listIndex = this.getMenuIndex()
 
-        this.$refs.menu.listIndex = -1
+        this.setMenuIndex(-1)
 
-        this.$nextTick(() => {
-          this.$refs.menu.listIndex = listIndex
-        })
+        this.$nextTick(() => this.setMenuIndex(listIndex))
       }
     },
     setMenuIndex (index: number) {
