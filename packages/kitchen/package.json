@@ -7,6 +7,7 @@
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "eslint --ext .js,.vue src",
+    "lint:fix": "yarn lint --fix",
     "cypress:run": "cypress run",
     "cypress:visual": "server-test dev http-get://localhost:8081/ cypress:run"
   },
