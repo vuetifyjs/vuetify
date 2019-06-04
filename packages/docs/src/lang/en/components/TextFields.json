@@ -11,7 +11,7 @@
     },
     "shaped": {
       "header": "### Shaped",
-      "desc": "`shaped` text fields are rounded if they're `outline` and have higher `border-radius` if `filled`."
+      "desc": "`shaped` text fields are rounded if they're `outlined` and have higher `border-radius` if `filled`."
     },
     "disabledAndReadonly": {
       "header": "### Disabled and readonly",
@@ -39,7 +39,7 @@
     },
     "characterCounter": {
       "header": "### Character counter",
-      "desc": "Use a `counter` prop to inform a user of the character limit. The counter does not perform any validation by itself. You will need to pair it with either the internal validation system, or a 3rd party library. You can use it on regular, box or outline text fields."
+      "desc": "Use a `counter` prop to inform a user of the character limit. The counter does not perform any validation by itself. You will need to pair it with either the internal validation system, or a 3rd party library. You can use it on regular, box or outlined text fields."
     },
     "password": {
       "header": "### Password input",
@@ -73,7 +73,7 @@
       "header": "### Solo style",
       "desc": "Text fields can be used with an alternative solo design."
     },
-    "outline": {
+    "outlined": {
       "header": "### Outline style",
       "desc": "Text fields can be used with an alternative outline design."
     },
@@ -117,7 +117,7 @@
     "toggleKeys": "Array of key codes that will toggle the input (if it supports toggling)",
     "type": "Sets input type",
     "value": "Components.Inputs.props.value",
-    "shaped": "Round if `outline` and increase `border-radius` if `filled`. Must be used with either `outline` or `filled`"
+    "shaped": "Round if `outlined` and increase `border-radius` if `filled`. Must be used with either `outlined` or `filled`"
   },
   "slots": {
     "append": "Components.Inputs.slots.append",
