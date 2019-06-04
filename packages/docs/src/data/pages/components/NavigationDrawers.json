@@ -42,7 +42,8 @@
             "right",
             "background",
             "bottom-drawer",
-            "expand-on-hover"
+            "expand-on-hover",
+            "mobileDesktop"
           ]
         }
       ]
