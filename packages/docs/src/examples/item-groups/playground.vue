@@ -20,11 +20,11 @@
             <v-item>
               <template slot-scope="{ active, toggle }">
                 <v-card
+                  v-if="type === 'cards'"
                   :color="active ? 'primary' : ''"
                   class="d-flex align-center"
                   dark
                   height="200"
-                  v-if="type === 'cards'"
                   @click="toggle"
                 >
                   <v-scroll-y-transition>
@@ -37,10 +37,10 @@
                   </v-scroll-y-transition>
                 </v-card>
                 <v-img
+                  v-else
                   src="https://picsum.photos/id/237/200/300"
                   height="150"
                   class="text-xs-right pa-2"
-                  v-else
                   @click="toggle"
                 >
                   <v-btn
