@@ -34,25 +34,25 @@
           'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico',
           'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee',
           'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia',
-          'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+          'Washington', 'West Virginia', 'Wisconsin', 'Wyoming',
         ],
         filters: [
           {
             fn: (item, queryText, itemText) => ~item.indexOf(queryText),
-            name: '~item.indexOf(queryText)'
+            name: '~item.indexOf(queryText)',
           },
           {
             fn: (item, queryText, itemText) => ~item.toLowerCase().indexOf(queryText),
-            name: '~item.toLowerCase().indexOf(queryText)'
+            name: '~item.toLowerCase().indexOf(queryText)',
           },
           {
             fn: (item, queryText, itemText) => queryText.length > 2 && ~item.indexOf(queryText),
-            name: 'queryText.length > 2 && ~item.indexOf(queryText)'
-          }
+            name: 'queryText.length > 2 && ~item.indexOf(queryText)',
+          },
         ],
-        filter: (item, queryText, itemText) => ~item.indexOf(queryText)
+        filter: (item, queryText, itemText) => ~item.indexOf(queryText),
       }
-    }
+    },
   }
 </script>
 
