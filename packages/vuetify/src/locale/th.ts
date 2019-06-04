@@ -1,14 +1,25 @@
 export default {
+  close: 'Close',
   dataIterator: {
-    rowsPerPageText: 'รายการต่อหน้า:',
-    rowsPerPageAll: 'ทั้งหมด',
     pageText: '{0}-{1} จาก {2}',
     noResultsText: 'ไม่พบข้อมูลที่ค้นหา',
-    nextPage: 'หน้าต่อไป',
-    prevPage: 'หน้าที่แล้ว',
+    loadingText: 'Loading item...',
   },
   dataTable: {
-    rowsPerPageText: 'แถวต่อหน้า:',
+    itemsPerPageText: 'แถวต่อหน้า:',
+    ariaLabel: {
+      sortDescending: ': Sorted descending. Activate to remove sorting.',
+      sortAscending: ': Sorted ascending. Activate to sort descending.',
+      sortNone: ': Not sorted. Activate to sort ascending.',
+    },
+  },
+  dataFooter: {
+    itemsPerPageText: 'รายการต่อหน้า:',
+    itemsPerPageAll: 'ทั้งหมด',
+    nextPage: 'หน้าต่อไป',
+    prevPage: 'หน้าที่แล้ว',
+    firstPage: 'หน้าแรก',
+    lastPage: 'หน้าสุดท้าย',
   },
   noDataText: 'ไม่มีข้อมูล',
   carousel: {

@@ -1,12 +1,8 @@
 export default {
   close: 'Aizvērt',
   dataIterator: {
-    itemsPerPageText: 'Rādīt lapā:',
-    itemsPerPageAll: 'Visu',
     pageText: '{0}-{1} no {2}',
     noResultsText: 'Nekas netika atrasts',
-    nextPage: 'Nākamā lapa',
-    prevPage: 'Iepriekšējā lapa',
     loadingText: 'Ielādē...',
   },
   dataTable: {
@@ -16,6 +12,14 @@ export default {
       sortAscending: ': Sakārtots augošā secībā. Aktivizēt, lai sakārtotu dilstošā secībā.',
       sortNone: ': Nav sakārtots. Aktivizēt, lai sakārtotu augošā secībā.',
     },
+  },
+  dataFooter: {
+    itemsPerPageText: 'Rādīt lapā:',
+    itemsPerPageAll: 'Visu',
+    nextPage: 'Nākamā lapa',
+    prevPage: 'Iepriekšējā lapa',
+    firstPage: 'Pirmā lapa',
+    lastPage: 'Pēdējā lapa',
   },
   noDataText: 'Nav pieejamu datu',
   carousel: {
