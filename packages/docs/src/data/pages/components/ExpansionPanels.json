@@ -45,7 +45,8 @@
         {
           "type": "examples",
           "value": [
-            "simple/disabledAndReadonly",
+            "simple/disabled",
+            "simple/readonly",
             "simple/popout",
             "simple/inset",
             "simple/accordion",
