@@ -1,6 +1,6 @@
 <template>
   <v-card flat tile>
-    <v-window vertical v-model="onboarding">
+    <v-window v-model="onboarding" vertical>
       <v-window-item
         v-for="n in length"
         :key="`card-${n}`"
