@@ -48,16 +48,16 @@
         drawer: null,
         items: [
           { title: 'Home', icon: 'dashboard' },
-          { title: 'About', icon: 'question_answer' }
+          { title: 'About', icon: 'question_answer' },
         ],
         mini: this.$vuetify.breakpoint.lgAndUp,
-        right: null
+        right: null,
       }
     },
     computed: {
       isLarge () {
         return this.$vuetify.breakpoint.lgAndUp
-      }
+      },
     },
     methods: {
       toggleNav () {
@@ -68,7 +68,7 @@
           this.mini = false
           this.drawer = !this.drawer
         }
-      }
-    }
+      },
+    },
   }
 </script>
