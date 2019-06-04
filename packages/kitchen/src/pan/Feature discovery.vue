@@ -35,27 +35,29 @@
         />
 
         <v-layout justify-space-around align-center>
-          <v-sheet id="t1v1" class="ma-5" color="green" width="40" height="40" />
+          <v-feature-discovery
+            v-model="model1"
+            color="primary"
+            :target="t1"
+            :size="size1"
+            v-on="on"
+          >
+            <template v-slot:activator="{ on }">
+              <v-sheet id="t1v1" class="ma-5" color="green" width="40" height="40" />
+            </template>
+            <h2 slot="title">Hey! New feature...</h2>
+            <p>
+              There's all sorts of new things that you can do with the great new features.
+              Just click the buttons to check them out!
+            </p>
+            <div slot="actions">
+              <v-btn class="mx-1" color="white" depressed>Action</v-btn>
+              <v-btn class="mx-1" outlined color="white" @click="model1 = false">Lesser action</v-btn>
+            </div>
+          </v-feature-discovery>
           <v-sheet id="t1v2" class="ma-5" color="blue" width="80" height="80" />
           <v-sheet id="t1v3" class="ma-5" color="red" width="120" height="120" />
         </v-layout>
-
-        <v-feature-discovery
-          v-model="model1"
-          color="primary"
-          :target="t1"
-          :size="size1"
-        >
-          <h2 slot="title">Hey! New feature...</h2>
-          <p>
-            There's all sorts of new things that you can do with the great new features.
-            Just click the buttons to check them out!
-          </p>
-          <div slot="actions">
-            <v-btn class="mx-1" color="white" depressed>Action</v-btn>
-            <v-btn class="mx-1" outline color="white" @click="model1 = false">Lesser action</v-btn>
-          </div>
-        </v-feature-discovery>
       </core-section>
 
       <core-title>Flat</core-title>
@@ -66,25 +68,27 @@
         </v-layout>
 
         <v-layout justify-center>
-          <v-sheet id="t2" class="ma-5" color="warning" width="40" height="40" />
+          <v-feature-discovery
+            v-model="model2"
+            color="primary"
+            target="#t2"
+            :flat="flat2"
+            v-on="on"
+          >
+            <template v-slot:activator="{ on }">
+              <v-sheet id="t2" class="ma-5" color="warning" width="40" height="40" />
+            </template>
+            <h2 slot="title">Hey! New feature...</h2>
+            <p>
+              There's all sorts of new things that you can do with the great new features.
+              Just click the buttons to check them out!
+            </p>
+            <div slot="actions">
+              <v-btn class="mx-1" color="white" depressed>Action</v-btn>
+              <v-btn class="mx-1" outlined color="white" @click="model2 = false">Lesser action</v-btn>
+            </div>
+          </v-feature-discovery>
         </v-layout>
-
-        <v-feature-discovery
-          v-model="model2"
-          color="primary"
-          target="#t2"
-          :flat="flat2"
-        >
-          <h2 slot="title">Hey! New feature...</h2>
-          <p>
-            There's all sorts of new things that you can do with the great new features.
-            Just click the buttons to check them out!
-          </p>
-          <div slot="actions">
-            <v-btn class="mx-1" color="white" depressed>Action</v-btn>
-            <v-btn class="mx-1" outline color="white" @click="model2 = false">Lesser action</v-btn>
-          </div>
-        </v-feature-discovery>
       </core-section>
 
       <core-title>Custom size</core-title>
@@ -98,25 +102,27 @@
         <v-btn @click="model3 = true">Show</v-btn>
 
         <v-layout justify-center>
-          <v-sheet id="t3" class="ma-5" color="warning" width="40" height="40" />
+          <v-feature-discovery
+            v-model="model3"
+            color="primary"
+            :size="size3"
+            target="#t3"
+            v-on="on"
+          >
+            <template v-slot:activator="{ on }">
+              <v-sheet id="t3" class="ma-5" color="warning" width="40" height="40" />
+            </template>
+            <h2 slot="title">Hey! New feature...</h2>
+            <p>
+              There's all sorts of new things that you can do with the great new features.
+              Just click the buttons to check them out!
+            </p>
+            <div slot="actions">
+              <v-btn class="mx-1" color="white" depressed>Action</v-btn>
+              <v-btn class="mx-1" outlined color="white" @click="model3 = false">Lesser action</v-btn>
+            </div>
+          </v-feature-discovery>
         </v-layout>
-
-        <v-feature-discovery
-          v-model="model3"
-          color="primary"
-          :size="size3"
-          target="#t3"
-        >
-          <h2 slot="title">Hey! New feature...</h2>
-          <p>
-            There's all sorts of new things that you can do with the great new features.
-            Just click the buttons to check them out!
-          </p>
-          <div slot="actions">
-            <v-btn class="mx-1" color="white" depressed>Action</v-btn>
-            <v-btn class="mx-1" outline color="white" @click="model3 = false">Lesser action</v-btn>
-          </div>
-        </v-feature-discovery>
       </core-section>
 
       <core-title>Colors</core-title>
@@ -124,69 +130,75 @@
         <v-layout justify-space-around align-center>
           <v-layout column align-center>
             <v-btn @click="model41 = true">Show</v-btn>
-            <v-sheet id="t4v1" class="ma-5" color="green" width="40" height="40" />
+            <v-feature-discovery
+              v-model="model41"
+              color="teal"
+              highlight-color="blue"
+              target="#t4v1"
+              v-on="on"
+            >
+              <template v-slot:activator="{ on }">
+                <v-sheet id="t4v1" class="ma-5" color="green" width="40" height="40" />
+              </template>
+              <h2 slot="title">Hey! New feature...</h2>
+              <p>
+                There's all sorts of new things that you can do with the great new features.
+                Just click the buttons to check them out!
+              </p>
+              <div slot="actions">
+                <v-btn class="mx-1" color="white" depressed>Action</v-btn>
+                <v-btn class="mx-1" outlined color="white" @click="model41 = false">Lesser action</v-btn>
+              </div>
+            </v-feature-discovery>
           </v-layout>
           <v-layout column align-center>
             <v-btn @click="model42 = true">Show</v-btn>
-            <v-sheet id="t4v2" class="ma-5" color="blue" width="80" height="80" />
+            <v-feature-discovery
+              v-model="model42"
+              color="green"
+              text-color="warning lighten-2"
+              target="#t4v2"
+              v-on="on"
+            >
+              <template v-slot:activator="{ on }">
+                <v-sheet id="t4v2" class="ma-5" color="blue" width="80" height="80" />
+              </template>
+              <h2 slot="title">Hey! New feature...</h2>
+              <p>
+                There's all sorts of new things that you can do with the great new features.
+                Just click the buttons to check them out!
+              </p>
+              <div slot="actions">
+                <v-btn class="mx-1" color="white" depressed>Action</v-btn>
+                <v-btn class="mx-1" outlined color="white" @click="model42 = false">Lesser action</v-btn>
+              </div>
+            </v-feature-discovery>
           </v-layout>
           <v-layout column align-center>
             <v-btn @click="model43 = true">Show</v-btn>
-            <v-sheet id="t4v3" class="ma-5" color="blue lighten-1" width="120" height="50" />
+            <v-feature-discovery
+              v-model="model43"
+              color="warning lighten-2"
+              highlight-color="error"
+              text-color="error"
+              target="#t4v3"
+              v-on="on"
+            >
+              <template v-slot:activator="{ on }">
+                <v-sheet id="t4v3" class="ma-5" color="blue lighten-1" width="120" height="50" />
+              </template>
+              <h2 slot="title">Hey! New feature...</h2>
+              <p>
+                There's all sorts of new things that you can do with the great new features.
+                Just click the buttons to check them out!
+              </p>
+              <div slot="actions">
+                <v-btn class="mx-1" color="white" depressed>Action</v-btn>
+                <v-btn class="mx-1" outlined color="white" @click="model43 = false">Lesser action</v-btn>
+              </div>
+            </v-feature-discovery>
           </v-layout>
         </v-layout>
-
-        <v-feature-discovery
-          v-model="model41"
-          color="teal"
-          highlight-color="blue"
-          target="#t4v1"
-        >
-          <h2 slot="title">Hey! New feature...</h2>
-          <p>
-            There's all sorts of new things that you can do with the great new features.
-            Just click the buttons to check them out!
-          </p>
-          <div slot="actions">
-            <v-btn class="mx-1" color="white" depressed>Action</v-btn>
-            <v-btn class="mx-1" outline color="white" @click="model41 = false">Lesser action</v-btn>
-          </div>
-        </v-feature-discovery>
-
-        <v-feature-discovery
-          v-model="model42"
-          color="green"
-          text-color="warning lighten-2"
-          target="#t4v2"
-        >
-          <h2 slot="title">Hey! New feature...</h2>
-          <p>
-            There's all sorts of new things that you can do with the great new features.
-            Just click the buttons to check them out!
-          </p>
-          <div slot="actions">
-            <v-btn class="mx-1" color="white" depressed>Action</v-btn>
-            <v-btn class="mx-1" outline color="white" @click="model42 = false">Lesser action</v-btn>
-          </div>
-        </v-feature-discovery>
-
-        <v-feature-discovery
-          v-model="model43"
-          color="warning lighten-2"
-          highlight-color="error"
-          text-color="error"
-          target="#t4v3"
-        >
-          <h2 slot="title">Hey! New feature...</h2>
-          <p>
-            There's all sorts of new things that you can do with the great new features.
-            Just click the buttons to check them out!
-          </p>
-          <div slot="actions">
-            <v-btn class="mx-1" color="white" depressed>Action</v-btn>
-            <v-btn class="mx-1" outline color="white" @click="model43 = false">Lesser action</v-btn>
-          </div>
-        </v-feature-discovery>
       </core-section>
 
       <core-title>Custom elevation</core-title>
@@ -197,25 +209,27 @@
         </v-layout>
 
         <v-layout justify-center>
-          <v-sheet id="t5" class="ma-5" color="warning" width="40" height="40" />
+          <v-feature-discovery
+            v-model="model5"
+            color="primary"
+            target="#t5"
+            :elevation="elevation5"
+            v-on="on"
+          >
+            <template v-slot:activator="{ on }">
+              <v-sheet id="t5" class="ma-5" color="warning" width="40" height="40" />
+            </template>
+            <h2 slot="title">Hey! New feature...</h2>
+            <p>
+              There's all sorts of new things that you can do with the great new features.
+              Just click the buttons to check them out!
+            </p>
+            <div slot="actions">
+              <v-btn class="mx-1" color="white" depressed>Action</v-btn>
+              <v-btn class="mx-1" outlined color="white" @click="model5 = false">Lesser action</v-btn>
+            </div>
+          </v-feature-discovery>
         </v-layout>
-
-        <v-feature-discovery
-          v-model="model5"
-          color="primary"
-          target="#t5"
-          :elevation="elevation5"
-        >
-          <h2 slot="title">Hey! New feature...</h2>
-          <p>
-            There's all sorts of new things that you can do with the great new features.
-            Just click the buttons to check them out!
-          </p>
-          <div slot="actions">
-            <v-btn class="mx-1" color="white" depressed>Action</v-btn>
-            <v-btn class="mx-1" outline color="white" @click="model5 = false">Lesser action</v-btn>
-          </div>
-        </v-feature-discovery>
       </core-section>
 
       <core-title>Persistent</core-title>
@@ -226,25 +240,27 @@
         </v-layout>
 
         <v-layout justify-center>
-          <v-sheet id="t6" class="ma-5" color="warning" width="40" height="40" />
+          <v-feature-discovery
+            v-model="model6"
+            color="primary"
+            target="#t6"
+            :persistent="persistent6"
+            v-on="on"
+          >
+            <template v-slot:activator="{ on }">
+              <v-sheet id="t6" class="ma-5" color="warning" width="40" height="40" />
+            </template>
+            <h2 slot="title">Hey! New feature...</h2>
+            <p>
+              There's all sorts of new things that you can do with the great new features.
+              Just click the buttons to check them out!
+            </p>
+            <div slot="actions">
+              <v-btn class="mx-1" color="white" depressed>Action</v-btn>
+              <v-btn class="mx-1" outlined color="white" @click="model6 = false">Lesser action</v-btn>
+            </div>
+          </v-feature-discovery>
         </v-layout>
-
-        <v-feature-discovery
-          v-model="model6"
-          color="primary"
-          target="#t6"
-          :persistent="persistent6"
-        >
-          <h2 slot="title">Hey! New feature...</h2>
-          <p>
-            There's all sorts of new things that you can do with the great new features.
-            Just click the buttons to check them out!
-          </p>
-          <div slot="actions">
-            <v-btn class="mx-1" color="white" depressed>Action</v-btn>
-            <v-btn class="mx-1" outline color="white" @click="model6 = false">Lesser action</v-btn>
-          </div>
-        </v-feature-discovery>
       </core-section>
 
       <core-title>Scoped slots</core-title>
@@ -254,24 +270,26 @@
         </v-layout>
 
         <v-layout justify-center>
-          <v-sheet id="t7" class="ma-5" color="warning" width="40" height="40" />
+          <v-feature-discovery
+            v-model="model7"
+            color="primary"
+            target="#t7"
+            v-on="on"
+          >
+            <template v-slot:activator="{ on }">
+              <v-sheet id="t7" class="ma-5" color="warning" width="40" height="40" />
+            </template>
+            <h2 slot="title">Hey! New feature...</h2>
+            <p>
+              There's all sorts of new things that you can do with the great new features.
+              Just click the buttons to check them out!
+            </p>
+            <template #actions="{ close }">
+              <v-btn class="mx-1" color="white" depressed>Action</v-btn>
+              <v-btn class="mx-1" outlined color="white" @click="close">Lesser action</v-btn>
+            </template>
+          </v-feature-discovery>
         </v-layout>
-
-        <v-feature-discovery
-          v-model="model7"
-          color="primary"
-          target="#t7"
-        >
-          <h2 slot="title">Hey! New feature...</h2>
-          <p>
-            There's all sorts of new things that you can do with the great new features.
-            Just click the buttons to check them out!
-          </p>
-          <template #actions="{ close }">
-            <v-btn class="mx-1" color="white" depressed>Action</v-btn>
-            <v-btn class="mx-1" outline color="white" @click="close">Lesser action</v-btn>
-          </template>
-        </v-feature-discovery>
       </core-section>
 
       <core-title>Disabling ripple</core-title>
@@ -282,25 +300,27 @@
         </v-layout>
 
         <v-layout justify-center>
-          <v-sheet id="t8" class="ma-5" color="warning" width="40" height="40" />
+          <v-feature-discovery
+            v-model="model8"
+            color="primary"
+            target="#t8"
+            :no-ripple="noRipple8"
+            v-on="on"
+          >
+            <template v-slot:activator="{ on }">
+              <v-sheet id="t8" class="ma-5" color="warning" width="40" height="40" />
+            </template>
+            <h2 slot="title">Hey! New feature...</h2>
+            <p>
+              There's all sorts of new things that you can do with the great new features.
+              Just click the buttons to check them out!
+            </p>
+            <template #actions="{ close }">
+              <v-btn class="mx-1" color="white" depressed>Action</v-btn>
+              <v-btn class="mx-1" outlined color="white" @click="close">Lesser action</v-btn>
+            </template>
+          </v-feature-discovery>
         </v-layout>
-
-        <v-feature-discovery
-          v-model="model8"
-          color="primary"
-          target="#t8"
-          :no-ripple="noRipple8"
-        >
-          <h2 slot="title">Hey! New feature...</h2>
-          <p>
-            There's all sorts of new things that you can do with the great new features.
-            Just click the buttons to check them out!
-          </p>
-          <template #actions="{ close }">
-            <v-btn class="mx-1" color="white" depressed>Action</v-btn>
-            <v-btn class="mx-1" outline color="white" @click="close">Lesser action</v-btn>
-          </template>
-        </v-feature-discovery>
       </core-section>
     </v-layout>
   </v-container>

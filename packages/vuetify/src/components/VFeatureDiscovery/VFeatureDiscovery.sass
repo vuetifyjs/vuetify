@@ -1,85 +1,77 @@
 @import "../../styles/styles.sass"
 @import "./_variables.sass"
-// @import "./_mixins.sass"
-
-// .v-feature-discovery.theme--light
-//   +feature-discovery-theme($material-light)
-// .v-feature-discovery.theme--dark
-//   +feature-discovery-theme($material-dark)
-
-// Block
-.v-feature-discovery
-  position: fixed
-  z-index: 10
-  transition: $feature-discovery-transition
-  border-radius: 100%
+@import "./_mixins.sass"
 
 // Element
 .v-feature-discovery
-  &__backdrop
-    width: 100%
-    height: 100%
-    opacity: 0.96
-    border-radius: 100%
-    display: flex
-    justify-content: center
-    align-items: center
-    transform: scale(0)
-    transition: $feature-discovery-transition
-    +elevation(4)
+  display: block
+  vertical-align: middle
+  position: relative
 
-  &__highlight
-    position: absolute
-    height: 88px
-    width: 88px
-    top: calc(50% - (88px / 2))
-    left: calc(50% - (88px / 2))
-    background: white
-    border-radius: 100%
-    display: flex
-    justify-content: center
-    align-items: center
-    transform: scale(0)
-    transition: $feature-discovery-transition
-
-  &:not(&--no-ripple)
-    .v-feature-discovery__highlight:before
-      content: ''
-      position: absolute
-      height: 100%
-      width: 100%
-      background-color: inherit
-      border-radius: inherit
-      transition: $feature-discovery-transition
-      animation: pulse-animation 1.4s cubic-bezier(0.24, 0, 0.38, 1) infinite
-      pointer-events: none
-      z-index: 10
+  &--inline
+    display: inline-block
 
   &__content
-    width: 60%
-    height: 60%
-    display: flex
-    flex-direction: column
-    justify-content: space-around
-    align-items: center
+    position: absolute !important
+    top: 50%
+    left: 50%
+    height: 0
+    width: 0
+    display: inline-block !important
+    border-radius: 100%
 
-  &__target
-    z-index: 11
+    &--active
+      display: inline-block
+
+      &:not(&--no-ripple)
+        .v-feature-discovery__highlight:before
+          content: ''
+          position: absolute
+          height: 100%
+          width: 100%
+          background-color: inherit
+          border-radius: inherit
+          transition: $feature-discovery-transition
+          animation: pulse-animation 1.4s cubic-bezier(0.24, 0, 0.38, 1) infinite
+          pointer-events: none
+          z-index: 10
+
+    &--fixed
+      position: fixed
+
+  &__backdrop, &__highlight
+    position: absolute
+    border-radius: 100%
+    transform: scale(0)
+    transition: $feature-discovery-transition
+
+  &__backdrop
+    opacity: 0.96
+    +elevation(4)
+
+
+  &__highlight
+    background: white
+
+  &__wrap
+    position: absolute
+    transition: .4s opacity map-get($transition, 'fast-out-slow-in')
+    opacity: 0
 
 // Modifier
-.v-feature-discovery
+.v-feature-discovery__content
   &--active
     .v-feature-discovery__backdrop, .v-feature-discovery__highlight
       transform: scale(1)
+
+    .v-feature-discovery__wrap
+      opacity: 1
 
   &:not(&--active)
     pointer-events: none
 
   &--flat &__backdrop
     +elevation(0)
-
-  &--lr-shifted &__content
-      width: 75%
 
 // Animations
 @keyframes pulse-animation

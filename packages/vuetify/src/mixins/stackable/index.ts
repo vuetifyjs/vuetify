@@ -50,6 +50,7 @@ export default Vue.extend<options>().extend({
       const activeElements = [
         ...document.getElementsByClassName('v-menu__content--active'),
         ...document.getElementsByClassName('v-dialog__content--active'),
+        ...document.getElementsByClassName('v-feature-discovery__content--active'),
       ]
 
       // Get z-index for all active dialogs
