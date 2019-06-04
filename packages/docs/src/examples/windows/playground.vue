@@ -55,7 +55,7 @@
       showArrows: false,
       vertical: false,
       reverse: false,
-      autorun: true,
+      autorun: false,
     }),
 
     created () {
