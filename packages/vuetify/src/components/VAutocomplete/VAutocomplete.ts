@@ -85,7 +85,7 @@ export default VSelect.extend({
       return String(this.getText(this.selectedItem)).length
     },
     filteredItems (): object[] {
-      if (!this.isSearching || this.noFilter || this.internalSearch == null) return this.allItems
+      if (!this.isSearching || this.noFilter || this.internalSearch === undefined) return this.allItems
 
       return this.allItems.filter(item => this.filter(item, String(this.internalSearch), String(this.getText(item))))
     },
@@ -128,7 +128,7 @@ export default VSelect.extend({
       }
     },
     searchIsDirty (): boolean {
-      return this.internalSearch != null &&
+      return this.internalSearch !== undefined &&
         this.internalSearch !== ''
     },
     selectedItem (): any {
@@ -354,7 +354,7 @@ export default VSelect.extend({
             this.multiple ||
             this.hasSlot
           )
-            ? null
+            ? undefined
             : this.getText(this.selectedItem)
         }
       })
