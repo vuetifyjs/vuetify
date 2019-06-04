@@ -45,12 +45,12 @@
         {
           "type": "examples",
           "value": [
-            "simple/external",
             "simple/disabledAndReadonly",
             "simple/popout",
             "simple/inset",
             "simple/accordion",
             "simple/focusable",
+            "intermediate/external",
             "intermediate/customIcons",
             "complex/advanced"
           ]
