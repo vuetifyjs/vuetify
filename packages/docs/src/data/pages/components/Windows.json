@@ -30,6 +30,7 @@
         {
           "type": "examples",
           "value": [
+            "simple/vertical",
             "simple/onboarding",
             "complex/account"
           ]
