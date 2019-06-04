@@ -309,7 +309,7 @@ describe('VAutocomplete.ts', () => {
     await wrapper.vm.$nextTick()
 
     // !this.selectedItem
-    expect(wrapper.vm.internalSearch).toBeUndefined()
+    expect(wrapper.vm.internalSearch).toBeNull()
 
     wrapper.setData({ internalSearch: undefined })
     wrapper.setProps({ multiple: true, value: 1 })
@@ -323,7 +323,7 @@ describe('VAutocomplete.ts', () => {
     await wrapper.vm.$nextTick()
 
     // this.multiple
-    expect(wrapper.vm.internalSearch).toBeUndefined()
+    expect(wrapper.vm.internalSearch).toBeNull()
 
     wrapper.setData({ internalSearch: undefined })
     wrapper.setProps({ multiple: false, value: 0 })
