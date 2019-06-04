@@ -1,9 +1,9 @@
 <template>
-  <v-layout>
+  <v-layout fill-height>
     <v-flex>
       <v-sheet height="64">
         <v-toolbar flat color="white">
-          <v-btn outline class="mr-3" @click="setToday">
+          <v-btn outlined class="mr-3" @click="setToday">
             Today
           </v-btn>
           <v-btn fab text small @click="prev">
@@ -15,10 +15,15 @@
           <v-toolbar-title>{{ title }}</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-menu bottom right>
-            <v-btn slot="activator" outline>
-              <span>{{ typeToLabel[type] }}</span>
-              <v-icon right>arrow_drop_down</v-icon>
-            </v-btn>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                outlined
+                v-on="on"
+              >
+                <span>{{ typeToLabel[type] }}</span>
+                <v-icon right>arrow_drop_down</v-icon>
+              </v-btn>
+            </template>
             <v-list>
               <v-list-tile @click="type = 'day'">
                 <v-list-tile-title>Day</v-list-tile-title>
@@ -43,6 +48,7 @@
           color="primary"
           :events="events"
           :event-color="getEventColor"
+          :event-margin-bottom="5"
           :now="today"
           :type="type"
           @click:event="showEvent"

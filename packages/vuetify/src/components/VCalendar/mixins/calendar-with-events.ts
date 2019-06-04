@@ -191,7 +191,8 @@ export default CalendarBase.extend({
     },
     genDayEvent ({ offset, event }: VEventVisual, index: number, day: VDaySlotScope): VNode {
       const eventHeight = this.eventHeight
-      const relativeOffset = (offset - index) * (eventHeight + 1) // 1 = margin bottom
+      const eventMarginBottom = this.eventMarginBottom
+      const relativeOffset = (offset - index) * (eventHeight + eventMarginBottom) // 1 = margin bottom
       const dayIdentifier = getDayIdentifier(day)
       const start = dayIdentifier === event.startIdentifier
       const end = dayIdentifier === event.endIdentifier
@@ -205,7 +206,8 @@ export default CalendarBase.extend({
         },
         style: {
           height: `${eventHeight}px`,
-          top: `${relativeOffset}px`
+          top: `${relativeOffset}px`,
+          'margin-bottom': `${eventMarginBottom}px`
         },
         attrs: {
           'data-date': day.date,

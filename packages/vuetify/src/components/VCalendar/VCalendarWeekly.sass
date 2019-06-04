@@ -38,6 +38,7 @@
   user-select: none
   padding: $calendar-weekly-weekday-padding
   font-size: $calendar-weekly-weekday-font-size
+  text-align: center
 
 .v-calendar-weekly__week
   display: flex
@@ -52,24 +53,19 @@
   padding: $calendar-weekly-day-padding
 
   &.v-present
-    .v-calendar-weekly__day-label
-      border: 1px solid currentColor
     .v-calendar-weekly__day-month
       color: currentColor
 
 .v-calendar-weekly__day-label
-  position: absolute
   text-decoration: none
   user-select: none
   cursor: pointer
   box-shadow: none
   text-align: center
-  left: 0
-  top: 0
-  border-radius: $calendar-weekly-day-label-radius
-  width: $calendar-weekly-day-label-size
-  height: $calendar-weekly-day-label-size
-  line-height: $calendar-weekly-day-label-size
+  margin: 4px 0 0 0
+  //border-radius: $calendar-weekly-day-label-radius
+  //height: $calendar-weekly-day-label-size
+  //line-height: $calendar-weekly-day-label-size
 
   &:hover
     text-decoration: underline

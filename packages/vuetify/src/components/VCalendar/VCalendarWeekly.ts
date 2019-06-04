@@ -151,8 +151,10 @@ export default CalendarBase.extend({
       return this.$createElement(VBtn, {
         props: {
           color,
-          rounded: true,
-          depressed: true
+          fab: !hasMonth,
+          rounded: hasMonth,
+          depressed: true,
+          small: true
         },
         on: this.getMouseEventHandlers({
           'click:date': { event: 'click', stop: true },

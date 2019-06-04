@@ -149,6 +149,10 @@ export default {
     eventRipple: {
       type: [Boolean, Object],
       default: null
+    },
+    eventMarginBottom: {
+      type: Number,
+      default: 1
     }
   }
 }
