@@ -247,7 +247,6 @@ export default baseMixins.extend<options>().extend({
 
   watch: {
     internalValue (val) {
-      console.log('internal value')
       this.initialValue = val
       this.setSelectedItems()
     },
@@ -726,7 +725,6 @@ export default baseMixins.extend<options>().extend({
       this.selectedItems = selectedItems
     },
     setValue (value: any) {
-      console.log('set value')
       const oldValue = this.internalValue
       this.internalValue = value
       value !== oldValue && this.$emit('change', value)
