@@ -1,8 +1,7 @@
-import { test } from '@/test'
-import { parseTimestamp, getDayIdentifier } from '@/components/VCalendar/util/timestamp'
-import { parseEvent, isEventOn, isEventOverlapping } from '@/components/VCalendar/util/events'
+import { parseTimestamp, getDayIdentifier } from '../timestamp'
+import { parseEvent, isEventOn, isEventOverlapping } from '../events'
 
-test('events.ts', () => {
+describe('events.ts', () => {
   it('should parse events', () => {
     expect(parseEvent({
       start: '2019-02-13',

@@ -1,22 +1,25 @@
-import { test } from '@/test'
-import CalendarWithEvents from '@/components/VCalendar/mixins/calendar-with-events'
-import { parseTimestamp } from '@/components/VCalendar/util/timestamp'
-import { parseEvent } from '@/components/VCalendar/util/events'
+import {
+  mount,
+  Wrapper,
+  MountOptions,
+} from '@vue/test-utils'
+import { ExtractVue } from '../../../../util/mixins'
+import CalendarWithEvents from '../calendar-with-events'
+import { parseTimestamp } from '../../util/timestamp'
+import { parseEvent } from '../../util/events'
 
-const Mock = {
-  mixins: [CalendarWithEvents],
+const Mock = CalendarWithEvents.extend({
   render: h => h('div'),
-}
+})
 
-test('calendar-with-events.ts', ({ mount }) => {
-  /* it('should ', async () => {
-    const wrapper = mount(Mock, {
-      propsData: {
-      }
-    })
-
-    expect(wrapper.vm.).toBeDefined()
-  }) */
+describe('calendar-with-events.ts', () => {
+  type Instance = ExtractVue<typeof Mock>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+  beforeEach(() => {
+    mountFunction = (options?: MountOptions<Instance>) => {
+      return mount(Mock, options)
+    }
+  })
 
   it('should check if there is no events', async () => {
     const wrapper = mount(Mock)
@@ -131,8 +134,7 @@ test('calendar-with-events.ts', ({ mount }) => {
   })
 
   it('should hide events', async () => {
-    const wrapper = mount({
-      ...Mock,
+    const wrapper = mountFunction({
       render: h => h('div', [
         h('div', {
           ref: 'events',
@@ -162,8 +164,7 @@ test('calendar-with-events.ts', ({ mount }) => {
   })
 
   it('should get events map', async () => {
-    const wrapper = mount({
-      ...Mock,
+    const wrapper = mountFunction({
       render: h => h('div', [
         h('div', {
           ref: 'events',
@@ -197,8 +198,7 @@ test('calendar-with-events.ts', ({ mount }) => {
   })
 
   it('should update event visibility', async () => {
-    const wrapper = mount({
-      ...Mock,
+    const wrapper = mountFunction({
       computed: {
         noEvents: () => false,
       },
