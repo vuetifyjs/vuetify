@@ -23,8 +23,8 @@
       Hero: () => import('./components/Hero'),
       MadeWithVuetify: () => import('./components/MadeWithVuetify'),
       Sponsors: () => import('./components/Sponsors'),
-      HomeFooter: () => import('./components/Footer')
-    }
+      HomeFooter: () => import('./components/Footer'),
+    },
   }
 </script>
 

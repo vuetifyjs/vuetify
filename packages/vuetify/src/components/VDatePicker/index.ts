@@ -11,7 +11,7 @@ export {
   VDatePickerHeader,
   VDatePickerDateTable,
   VDatePickerMonthTable,
-  VDatePickerYears
+  VDatePickerYears,
 }
 
 export default {
@@ -21,6 +21,6 @@ export default {
     VDatePickerHeader,
     VDatePickerDateTable,
     VDatePickerMonthTable,
-    VDatePickerYears
-  }
+    VDatePickerYears,
+  },
 }

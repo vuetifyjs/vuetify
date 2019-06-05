@@ -1,0 +1,22 @@
+{
+	"header": "crwdns27928:0crwdne27928:0",
+	"headerText": "crwdns27930:0[v-item-group]crwdnd27930:0[v-tabs]crwdnd27930:0[v-chip-group]crwdne27930:0",
+	"examples": {
+		"usage": {
+			"desc": "crwdns27932:0[v-window]crwdne27932:0"
+		},
+		"carousel": {
+			"header": "crwdns27934:0crwdne27934:0",
+			"desc": "crwdns27936:0crwdne27936:0"
+		},
+		"centerActive": {
+			"header": "crwdns35942:0crwdne35942:0",
+			"desc": "crwdns35944:0crwdne35944:0"
+		}
+	},
+	"props": {
+		"appendIcon": "crwdns27938:0crwdne27938:0",
+		"prependIcon": "crwdns27940:0crwdne27940:0",
+		"showArrows": "crwdns27942:0crwdne27942:0"
+	}
+}

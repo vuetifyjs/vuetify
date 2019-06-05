@@ -5,14 +5,14 @@ import Vue from 'vue'
 import VStepperContent from '../VStepperContent'
 import {
   VTabTransition,
-  VTabReverseTransition
+  VTabReverseTransition,
 } from '../../transitions'
 
 // Utilities
 import {
   createLocalVue,
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 const tip = '[Vuetify] The v-stepper-content component must be used inside a v-stepper'
@@ -28,7 +28,7 @@ describe('VStepperContent.ts', () => {
     mountFunction = (options = {}) => {
       return mount(VStepperContent, {
         localVue,
-        ...options
+        ...options,
       })
     }
   })
@@ -41,9 +41,9 @@ describe('VStepperContent.ts', () => {
         isVertical: false,
         stepper: {
           register: () => {},
-          unregister: () => {}
-        }
-      }
+          unregister: () => {},
+        },
+      },
     })
 
     expect(wrapper.vm.isActive).toBeNull()
@@ -62,9 +62,9 @@ describe('VStepperContent.ts', () => {
         isVertical: false,
         stepper: {
           register: () => {},
-          unregister: () => {}
-        }
-      }
+          unregister: () => {},
+        },
+      },
     })
     expect(wrapper.vm.computedTransition).toBe(VTabTransition)
 
@@ -76,26 +76,26 @@ describe('VStepperContent.ts', () => {
     const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
-        step: 1
+        step: 1,
       },
       provide: {
         isVertical: false,
         stepper: {
           register: () => {},
-          unregister: () => {}
-        }
-      }
+          unregister: () => {},
+        },
+      },
     })
 
     const enter = jest.fn()
     const leave = jest.fn()
     wrapper.setMethods({
       enter,
-      leave
+      leave,
     })
     wrapper.setData({
       isActive: true,
-      isVertical: true
+      isVertical: true,
     })
     await wrapper.vm.$nextTick()
 
@@ -119,7 +119,7 @@ describe('VStepperContent.ts', () => {
     // setting vertical and isActive at the same time causes
     // isActive watcher to fire enter/leave methods
     wrapper.setData({
-      isVertical: false
+      isVertical: false,
     })
     await wrapper.vm.$nextTick()
     wrapper.setData({ isActive: false })
@@ -137,9 +137,9 @@ describe('VStepperContent.ts', () => {
         isVertical: false,
         stepper: {
           register: () => {},
-          unregister: () => {}
-        }
-      }
+          unregister: () => {},
+        },
+      },
     })
 
     wrapper.vm.toggle(1, false)
@@ -166,9 +166,9 @@ describe('VStepperContent.ts', () => {
         isVertical: false,
         stepper: {
           register: () => {},
-          unregister: () => {}
-        }
-      }
+          unregister: () => {},
+        },
+      },
     })
 
     wrapper.setData({ isActive: false, isVertical: true })
@@ -199,9 +199,9 @@ describe('VStepperContent.ts', () => {
         isVertical: false,
         stepper: {
           register: () => {},
-          unregister: () => {}
-        }
-      }
+          unregister: () => {},
+        },
+      },
     })
 
     wrapper.setData({ isActive: false, isVertical: true })
@@ -227,9 +227,9 @@ describe('VStepperContent.ts', () => {
         isVertical: false,
         stepper: {
           register: () => {},
-          unregister: () => {}
-        }
-      }
+          unregister: () => {},
+        },
+      },
     })
 
     const onTransition = jest.fn()
@@ -262,8 +262,8 @@ describe('VStepperContent.ts', () => {
     const wrapper = mountFunction({
       propsData: { step: 1 },
       provide: {
-        isVertical: false
-      }
+        isVertical: false,
+      },
     })
     expect(tip).toHaveBeenTipped()
   })

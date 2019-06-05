@@ -28,5 +28,5 @@ export default {
       commit('SET_CHECKOUT', checkout)
       localStorage.setItem('vuetify_shopify_checkout_id', checkout.id)
     }).catch(() => dispatch('getCheckout', true))
-  }
+  },
 }

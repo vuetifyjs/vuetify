@@ -52,7 +52,7 @@
 <script>
   import {
     mapMutations,
-    mapState
+    mapState,
   } from 'vuex'
 
   export default {
@@ -64,7 +64,7 @@
           return {
             href: this.snackbar.href,
             target: '_blank',
-            rel: 'noopener'
+            rel: 'noopener',
           }
         }
 
@@ -93,8 +93,8 @@
         },
         set (val) {
           this.setValue(val)
-        }
-      }
+        },
+      },
     },
 
     watch: {
@@ -105,7 +105,7 @@
         if (localStorage.getItem(this.snackbar.id)) return
 
         this.snack = true
-      }
+      },
     },
 
     async created () {
@@ -137,8 +137,8 @@
 
         this.snackbar.handler &&
           this.snackbar.handler()
-      }
-    }
+      },
+    },
   }
 </script>
 

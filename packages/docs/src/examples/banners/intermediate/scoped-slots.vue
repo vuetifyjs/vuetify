@@ -13,7 +13,7 @@
 <script>
   export default {
     data: () => ({
-      v0: true
-    })
+      v0: true,
+    }),
   }
 </script>

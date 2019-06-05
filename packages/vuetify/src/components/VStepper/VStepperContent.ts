@@ -1,7 +1,7 @@
 // Components
 import {
   VTabTransition,
-  VTabReverseTransition
+  VTabReverseTransition,
 } from '../transitions'
 
 // Mixins
@@ -33,15 +33,15 @@ export default baseMixins.extend<options>().extend({
 
   inject: {
     isVerticalProvided: {
-      from: 'isVertical'
-    }
+      from: 'isVertical',
+    },
   },
 
   props: {
     step: {
       type: [Number, String],
-      required: true
-    }
+      required: true,
+    },
   },
 
   data () {
@@ -51,7 +51,7 @@ export default baseMixins.extend<options>().extend({
       // previous comparison
       isActive: null as boolean | null,
       isReverse: false,
-      isVertical: this.isVerticalProvided
+      isVertical: this.isVerticalProvided,
     }
   },
 
@@ -65,9 +65,9 @@ export default baseMixins.extend<options>().extend({
       if (!this.isVertical) return {}
 
       return {
-        height: convertToUnit(this.height)
+        height: convertToUnit(this.height),
       }
-    }
+    },
   },
 
   watch: {
@@ -83,7 +83,7 @@ export default baseMixins.extend<options>().extend({
 
       if (this.isActive) this.enter()
       else this.leave()
-    }
+    },
   },
 
   mounted () {
@@ -132,23 +132,23 @@ export default baseMixins.extend<options>().extend({
     toggle (step: string | number, reverse: boolean) {
       this.isActive = step.toString() === this.step.toString()
       this.isReverse = reverse
-    }
+    },
   },
 
   render (h): VNode {
     const contentData = {
-      staticClass: 'v-stepper__content'
+      staticClass: 'v-stepper__content',
     } as VNodeData
     const wrapperData = {
       staticClass: 'v-stepper__wrapper',
       style: this.styles,
-      ref: 'wrapper'
+      ref: 'wrapper',
     }
 
     if (!this.isVertical) {
       contentData.directives = [{
         name: 'show',
-        value: this.isActive
+        value: this.isActive,
       }]
     }
 
@@ -156,7 +156,7 @@ export default baseMixins.extend<options>().extend({
     const content = h('div', contentData, [wrapper])
 
     return h(this.computedTransition, {
-      on: this.$listeners
+      on: this.$listeners,
     }, [content])
-  }
+  },
 })

@@ -2,7 +2,7 @@ import VRowGroup from '../VRowGroup'
 import {
   mount,
   Wrapper,
-  MountOptions
+  MountOptions,
 } from '@vue/test-utils'
 
 describe('VRowGroup.ts', () => {
@@ -17,8 +17,8 @@ describe('VRowGroup.ts', () => {
   it('should render with "column.summary" slot', () => {
     const wrapper = mountFunction({
       slots: {
-        'column.summary': '<div></div>'
-      }
+        'column.summary': '<div></div>',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -27,8 +27,8 @@ describe('VRowGroup.ts', () => {
   it('should render with "row.summary" slot', () => {
     const wrapper = mountFunction({
       slots: {
-        'row.summary': '<div></div>'
-      }
+        'row.summary': '<div></div>',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()

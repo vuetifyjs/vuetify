@@ -55,11 +55,11 @@ export default baseMixins.extend<options>().extend({
     clearable: Boolean,
     clearIcon: {
       type: String,
-      default: '$vuetify.icons.clear'
+      default: '$vuetify.icons.clear',
     },
     color: {
       type: String,
-      default: 'primary'
+      default: 'primary',
     },
     counter: [Boolean, Number, String],
     filled: Boolean,
@@ -79,8 +79,8 @@ export default baseMixins.extend<options>().extend({
     suffix: String,
     type: {
       type: String,
-      default: 'text'
-    }
+      default: 'text',
+    },
   },
 
   data: () => ({
@@ -89,9 +89,8 @@ export default baseMixins.extend<options>().extend({
     prefixWidth: 0,
     prependWidth: 0,
     initialValue: null,
-    internalChange: false,
     isBooted: false,
-    isClearing: false
+    isClearing: false,
   }),
 
   computed: {
@@ -112,7 +111,7 @@ export default baseMixins.extend<options>().extend({
         'v-text-field--outlined': this.outlined,
         'v-text-field--placeholder': this.placeholder,
         'v-text-field--rounded': this.rounded,
-        'v-text-field--shaped': this.shaped
+        'v-text-field--shaped': this.shaped,
       }
     },
     counterValue (): number {
@@ -125,7 +124,7 @@ export default baseMixins.extend<options>().extend({
       set (val: any) {
         this.lazyValue = val
         this.$emit('input', this.lazyValue)
-      }
+      },
     },
     isDirty (): boolean {
       return (this.lazyValue != null &&
@@ -159,10 +158,10 @@ export default baseMixins.extend<options>().extend({
 
       return (this.$vuetify.rtl === this.reverse) ? {
         left: offset,
-        right: 'auto'
+        right: 'auto',
       } : {
         left: 'auto',
-        right: offset
+        right: offset,
       }
     },
     showLabel (): boolean {
@@ -171,7 +170,7 @@ export default baseMixins.extend<options>().extend({
     labelValue (): boolean {
       return !this.isSingle &&
         Boolean(this.isFocused || this.isLabelActive || this.placeholder)
-    }
+    },
   },
 
   watch: {
@@ -189,7 +188,7 @@ export default baseMixins.extend<options>().extend({
     },
     value (val) {
       this.lazyValue = val
-    }
+    },
   },
 
   created () {
@@ -219,7 +218,7 @@ export default baseMixins.extend<options>().extend({
     },
     clearableCallback () {
       this.internalValue = null
-      this.$nextTick(() => this.$refs.input.focus())
+      this.$nextTick(() => this.$refs.input && this.$refs.input.focus())
     },
     genAppendSlot () {
       const slot = []
@@ -275,7 +274,7 @@ export default baseMixins.extend<options>().extend({
         this.genIcon(
           icon,
           this.clearableCallback
-        )
+        ),
       ])
     },
     genCounter () {
@@ -288,8 +287,8 @@ export default baseMixins.extend<options>().extend({
           dark: this.dark,
           light: this.light,
           max,
-          value: this.counterValue
-        }
+          value: this.counterValue,
+        },
       })
     },
     genDefaultSlot () {
@@ -298,7 +297,7 @@ export default baseMixins.extend<options>().extend({
         this.genTextFieldSlot(),
         this.genClearIcon(),
         this.genIconSlot(),
-        this.genProgress()
+        this.genProgress(),
       ]
     },
     genFieldset () {
@@ -306,8 +305,8 @@ export default baseMixins.extend<options>().extend({
 
       return this.$createElement('fieldset', {
         attrs: {
-          'aria-hidden': true
-        }
+          'aria-hidden': true,
+        },
       }, [this.genLegend()])
     },
     genLabel () {
@@ -320,12 +319,12 @@ export default baseMixins.extend<options>().extend({
           dark: this.dark,
           disabled: this.disabled,
           focused: !this.isSingle && (this.isFocused || !!this.validationState),
-          for: this.$attrs.id,
+          for: this.id,
           left: this.labelPosition.left,
           light: this.light,
           right: this.labelPosition.right,
-          value: this.labelValue
-        }
+          value: this.labelValue,
+        },
       }
 
       return this.$createElement(VLabel, data, this.$slots.label || this.label)
@@ -333,13 +332,13 @@ export default baseMixins.extend<options>().extend({
     genLegend () {
       const width = !this.singleLine && (this.labelValue || this.isDirty) ? this.labelWidth : 0
       const span = this.$createElement('span', {
-        domProps: { innerHTML: '&#8203;' }
+        domProps: { innerHTML: '&#8203;' },
       })
 
       return this.$createElement('legend', {
         style: {
-          width: convertToUnit(width)
-        }
+          width: convertToUnit(width),
+        },
       }, [span])
     },
     genInput () {
@@ -349,60 +348,56 @@ export default baseMixins.extend<options>().extend({
       return this.$createElement('input', {
         style: {},
         domProps: {
-          value: this.lazyValue
+          value: this.lazyValue,
         },
         attrs: {
-          'aria-label': (!this.$attrs || !this.$attrs.id) && this.label, // Label `for` will be set if we have an id
+          'aria-label': !this.id && this.label, // Label `for` will be set if we have an id
           ...this.$attrs,
           autocomplete: this.browserAutocomplete,
           autofocus: this.autofocus,
           disabled: this.disabled,
+          id: this.id,
           placeholder: this.placeholder,
           readonly: this.readonly,
-          type: this.type
+          type: this.type,
         },
         on: Object.assign(listeners, {
           blur: this.onBlur,
           input: this.onInput,
           focus: this.onFocus,
-          keydown: this.onKeyDown
+          keydown: this.onKeyDown,
         }),
-        ref: 'input'
+        ref: 'input',
       })
     },
     genMessages () {
       if (this.hideDetails) return null
 
       return this.$createElement('div', {
-        staticClass: 'v-text-field__details'
+        staticClass: 'v-text-field__details',
       }, [
         VInput.options.methods.genMessages.call(this),
-        this.genCounter()
+        this.genCounter(),
       ])
     },
     genTextFieldSlot () {
       return this.$createElement('div', {
-        staticClass: 'v-text-field__slot'
+        staticClass: 'v-text-field__slot',
       }, [
         this.genLabel(),
         this.prefix ? this.genAffix('prefix') : null,
         this.genInput(),
-        this.suffix ? this.genAffix('suffix') : null
+        this.suffix ? this.genAffix('suffix') : null,
       ])
     },
     genAffix (type: 'prefix' | 'suffix') {
       return this.$createElement('div', {
         'class': `v-text-field__${type}`,
-        ref: type
+        ref: type,
       }, this[type])
     },
     onBlur (e?: Event) {
       this.isFocused = false
-      // Reset internalChange state
-      // to allow external change
-      // to persist
-      this.internalChange = false
-
       this.$emit('blur', e)
     },
     onClick () {
@@ -424,13 +419,10 @@ export default baseMixins.extend<options>().extend({
     },
     onInput (e: Event) {
       const target = e.target as HTMLInputElement
-      this.internalChange = true
       this.internalValue = target.value
       this.badInput = target.validity && target.validity.badInput
     },
     onKeyDown (e: KeyboardEvent) {
-      this.internalChange = true
-
       if (e.keyCode === keyCodes.enter) this.$emit('change', this.internalValue)
 
       this.$emit('keydown', e)
@@ -463,6 +455,6 @@ export default baseMixins.extend<options>().extend({
       if (!this.outlined || !this.$refs['prepend-inner']) return
 
       this.prependWidth = this.$refs['prepend-inner'].offsetWidth
-    }
-  }
+    },
+  },
 })

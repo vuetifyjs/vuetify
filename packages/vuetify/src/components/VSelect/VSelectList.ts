@@ -10,7 +10,7 @@ import {
   VListItem,
   VListItemAction,
   VListItemContent,
-  VListItemTitle
+  VListItemTitle,
 } from '../VList'
 
 // Mixins
@@ -20,7 +20,7 @@ import Themeable from '../../mixins/themeable'
 // Helpers
 import {
   escapeHTML,
-  getPropertyFromItem
+  getPropertyFromItem,
 } from '../../util/helpers'
 
 // Types
@@ -38,33 +38,33 @@ export default mixins(Colorable, Themeable).extend({
     hideSelected: Boolean,
     items: {
       type: Array,
-      default: () => []
+      default: () => [],
     } as PropValidator<any[]>,
     itemAvatar: {
       type: [String, Array, Function],
-      default: 'avatar'
+      default: 'avatar',
     } as PropValidator<string | (string | number)[] | ((item: object, fallback?: any) => any)>,
     itemDisabled: {
       type: [String, Array, Function],
-      default: 'disabled'
+      default: 'disabled',
     } as PropValidator<string | (string | number)[] | ((item: object, fallback?: any) => any)>,
     itemText: {
       type: [String, Array, Function],
-      default: 'text'
+      default: 'text',
     } as PropValidator<string | (string | number)[] | ((item: object, fallback?: any) => any)>,
     itemValue: {
       type: [String, Array, Function],
-      default: 'value'
+      default: 'value',
     } as PropValidator<string | (string | number)[] | ((item: object, fallback?: any) => any)>,
     noDataText: String,
     noFilter: Boolean,
     searchInput: {
-      default: null
+      default: null,
     } as PropValidator<any>,
     selectedItems: {
       type: Array,
-      default: () => []
-    } as PropValidator<any[]>
+      default: () => [],
+    } as PropValidator<any[]>,
   },
 
   computed: {
@@ -77,14 +77,14 @@ export default mixins(Colorable, Themeable).extend({
     staticNoDataTile (): VNode {
       const tile = {
         on: {
-          mousedown: (e: Event) => e.preventDefault() // Prevent onBlur from being called
-        }
+          mousedown: (e: Event) => e.preventDefault(), // Prevent onBlur from being called
+        },
       }
 
       return this.$createElement(VListItem, tile, [
-        this.genTileContent(this.noDataText)
+        this.genTileContent(this.noDataText),
       ])
-    }
+    },
   },
 
   methods: {
@@ -94,17 +94,17 @@ export default mixins(Colorable, Themeable).extend({
           click: (e: Event) => {
             e.stopPropagation()
             this.$emit('select', item)
-          }
-        }
+          },
+        },
       }
 
       return this.$createElement(VListItemAction, data, [
         this.$createElement(VCheckbox, {
           props: {
             color: this.color,
-            inputValue
-          }
-        })
+            inputValue,
+          },
+        }),
       ])
     },
     genDivider (props: { [key: string]: any }) {
@@ -161,15 +161,15 @@ export default mixins(Colorable, Themeable).extend({
             // Prevent onBlur from being called
             e.preventDefault()
           },
-          click: () => disabled || this.$emit('select', item)
+          click: () => disabled || this.$emit('select', item),
         },
         props: {
           activeClass: this.tileActiveClass,
           avatar,
           disabled,
           ripple: true,
-          inputValue: value
-        }
+          inputValue: value,
+        },
       }
 
       if (!this.$scopedSlots.item) {
@@ -177,7 +177,7 @@ export default mixins(Colorable, Themeable).extend({
           this.action && !this.hideSelected && this.items.length > 0
             ? this.genAction(item, value)
             : null,
-          this.genTileContent(item)
+          this.genTileContent(item),
         ])
       }
 
@@ -193,7 +193,7 @@ export default mixins(Colorable, Themeable).extend({
 
       return this.$createElement(VListItemContent,
         [this.$createElement(VListItemTitle, {
-          domProps: { innerHTML }
+          domProps: { innerHTML },
         })]
       )
     },
@@ -216,7 +216,7 @@ export default mixins(Colorable, Themeable).extend({
     },
     getValue (item: object) {
       return getPropertyFromItem(item, this.itemValue, this.getText(item))
-    }
+    },
   },
 
   render (): VNode {
@@ -240,13 +240,13 @@ export default mixins(Colorable, Themeable).extend({
 
     return this.$createElement('div', {
       staticClass: 'v-select-list v-card',
-      class: this.themeClasses
+      class: this.themeClasses,
     }, [
       this.$createElement(VList, {
         props: {
-          dense: this.dense
-        }
-      }, children)
+          dense: this.dense,
+        },
+      }, children),
     ])
-  }
+  },
 })

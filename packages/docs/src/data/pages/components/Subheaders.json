@@ -29,11 +29,21 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "grid",
-            "menu",
-            "social"
+            "simple/inset",
+            "simple/grid",
+            "simple/menu",
+            "intermediate/social"
           ]
         }
       ]

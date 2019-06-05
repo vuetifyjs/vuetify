@@ -3,7 +3,11 @@
   "headerText": "The `v-subheader` component is used to separate sections of lists.",
   "examples": {
     "usage": {
-      "desc": "Subheaders work great with lists for describing the information below."
+      "desc": "Subheaders in their simplest form display a subheading with default theme."
+    },
+    "inset": {
+      "header": "### Inset subheaders",
+      "desc": "Inset subheaders are moved 72px to the right. This gives you the option to line them up with list items and inset dividers."
     },
     "grid": {
       "header": "### Grid subheaders",

@@ -12,6 +12,6 @@ export default {
     VTab,
     VTabsItems,
     VTabItem,
-    VTabsSlider
-  }
+    VTabsSlider,
+  },
 }

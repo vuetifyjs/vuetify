@@ -18,7 +18,7 @@ export function inject<
 > (namespace: T, child?: string, parent?: string): Registrable<T, C> {
   const defaultImpl = child && parent ? {
     register: generateWarning(child, parent),
-    unregister: generateWarning(child, parent)
+    unregister: generateWarning(child, parent),
   } : null
 
   return Vue.extend({
@@ -26,9 +26,9 @@ export function inject<
 
     inject: {
       [namespace]: {
-        default: defaultImpl
-      }
-    }
+        default: defaultImpl,
+      },
+    },
   })
 }
 
@@ -38,15 +38,15 @@ export function provide (namespace: string, self = false) {
 
     methods: self ? {} : {
       register: null,
-      unregister: null
+      unregister: null,
     },
     provide (): object {
       return {
         [namespace]: self ? this : {
           register: this.register,
-          unregister: this.unregister
-        }
+          unregister: this.unregister,
+        },
       }
-    }
+    },
   })
 }

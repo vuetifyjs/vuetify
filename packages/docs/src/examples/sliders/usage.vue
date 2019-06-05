@@ -94,8 +94,8 @@
         slider2: 45,
         slider3: 45,
         volume: 10,
-        price: [110, 440]
+        price: [110, 440],
       }
-    }
+    },
   }
 </script>

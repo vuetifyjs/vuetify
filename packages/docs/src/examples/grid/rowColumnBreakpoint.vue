@@ -29,7 +29,7 @@
         if (this.$vuetify.breakpoint.mdAndUp) binding.column = true
 
         return binding
-      }
-    }
+      },
+    },
   }
 </script>

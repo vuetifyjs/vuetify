@@ -266,7 +266,7 @@
 
       snackbar4: false,
       color4: 'error',
-      text4: 'Hello, I\'m a snackbar'
-    })
+      text4: 'Hello, I\'m a snackbar',
+    }),
   }
 </script>

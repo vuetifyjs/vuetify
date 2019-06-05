@@ -1,44 +1,44 @@
 {
-  "close": "crwdns13510:0crwdne13510:0",
-  "init": "crwdns13512:0crwdne13512:0",
-  "quickstart": {
-    "title": "crwdns13514:0crwdne13514:0",
-    "desc": "crwdns13516:0crwdne13516:0"
-  },
-  "simple": {
-    "title": "crwdns13518:0crwdne13518:0",
-    "desc": "crwdns13520:0crwdne13520:0"
-  },
-  "webpack": {
-    "title": "crwdns13522:0crwdne13522:0",
-    "desc": "crwdns13524:0crwdne13524:0"
-  },
-  "webpackSimple": {
-    "title": "crwdns13526:0crwdne13526:0",
-    "desc": "crwdns13528:0crwdne13528:0"
-  },
-  "webpackSSR": {
-    "title": "crwdns13530:0crwdne13530:0",
-    "desc": "crwdns13532:0[Hackernews]crwdne13532:0"
-  },
-  "nuxt": {
-    "title": "crwdns13534:0crwdne13534:0",
-    "desc": "crwdns13536:0crwdne13536:0"
-  },
-  "pwa": {
-    "title": "crwdns13538:0crwdne13538:0",
-    "desc": "crwdns13540:0crwdne13540:0"
-  },
-  "electron": {
-    "title": "crwdns13542:0crwdne13542:0",
-    "desc": "crwdns13544:0crwdne13544:0"
-  },
-  "aLaCarte": {
-    "title": "crwdns13546:0crwdne13546:0",
-    "desc": "crwdns13548:0crwdne13548:0"
-  },
-  "cordova": {
-    "title": "crwdns13550:0crwdne13550:0",
-    "desc": "crwdns13552:0crwdne13552:0"
-  }
+	"close": "crwdns25290:0crwdne25290:0",
+	"init": "crwdns25292:0crwdne25292:0",
+	"quickstart": {
+		"title": "crwdns25294:0crwdne25294:0",
+		"desc": "crwdns25296:0crwdne25296:0"
+	},
+	"simple": {
+		"title": "crwdns25298:0crwdne25298:0",
+		"desc": "crwdns25300:0crwdne25300:0"
+	},
+	"webpack": {
+		"title": "crwdns25302:0crwdne25302:0",
+		"desc": "crwdns25304:0crwdne25304:0"
+	},
+	"webpackSimple": {
+		"title": "crwdns25306:0crwdne25306:0",
+		"desc": "crwdns25308:0crwdne25308:0"
+	},
+	"webpackSSR": {
+		"title": "crwdns25310:0crwdne25310:0",
+		"desc": "crwdns25312:0[Hackernews]crwdne25312:0"
+	},
+	"nuxt": {
+		"title": "crwdns25314:0crwdne25314:0",
+		"desc": "crwdns25316:0crwdne25316:0"
+	},
+	"pwa": {
+		"title": "crwdns25318:0crwdne25318:0",
+		"desc": "crwdns25320:0crwdne25320:0"
+	},
+	"electron": {
+		"title": "crwdns25322:0crwdne25322:0",
+		"desc": "crwdns25324:0crwdne25324:0"
+	},
+	"aLaCarte": {
+		"title": "crwdns25326:0crwdne25326:0",
+		"desc": "crwdns25328:0crwdne25328:0"
+	},
+	"cordova": {
+		"title": "crwdns25330:0crwdne25330:0",
+		"desc": "crwdns25332:0crwdne25332:0"
+	}
 }

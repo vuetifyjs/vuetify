@@ -4,56 +4,50 @@
       :headers="headers"
       :items="desserts"
     >
-      <template v-slot:items="props">
-        <td>
-          <v-edit-dialog
-            :return-value.sync="props.item.name"
-            @save="save"
-            @cancel="cancel"
-            @open="open"
-            @close="close"
-          > {{ props.item.name }}
-            <template v-slot:input>
-              <v-text-field
-                v-model="props.item.name"
-                :rules="[max25chars]"
-                label="Edit"
-                single-line
-                counter
-              ></v-text-field>
-            </template>
-          </v-edit-dialog>
-        </td>
-        <td class="text-xs-right">{{ props.item.calories }}</td>
-        <td class="text-xs-right">{{ props.item.fat }}</td>
-        <td class="text-xs-right">{{ props.item.carbs }}</td>
-        <td class="text-xs-right">{{ props.item.protein }}</td>
-        <td class="text-xs-right">
-          <v-edit-dialog
-            :return-value.sync="props.item.iron"
-            large
-            persistent
-            @save="save"
-            @cancel="cancel"
-            @open="open"
-            @close="close"
-          >
-            <div>{{ props.item.iron }}</div>
-            <template v-slot:input>
-              <div class="mt-3 title">Update Iron</div>
-            </template>
-            <template v-slot:input>
-              <v-text-field
-                v-model="props.item.iron"
-                :rules="[max25chars]"
-                label="Edit"
-                single-line
-                counter
-                autofocus
-              ></v-text-field>
-            </template>
-          </v-edit-dialog>
-        </td>
+      <template v-slot:item.name="props">
+        <v-edit-dialog
+          :return-value.sync="props.item.name"
+          @save="save"
+          @cancel="cancel"
+          @open="open"
+          @close="close"
+        > {{ props.item.name }}
+          <template v-slot:input>
+            <v-text-field
+              v-model="props.item.name"
+              :rules="[max25chars]"
+              label="Edit"
+              single-line
+              counter
+            ></v-text-field>
+          </template>
+        </v-edit-dialog>
+      </template>
+      <template v-slot:item.iron="props">
+        <v-edit-dialog
+          :return-value.sync="props.item.iron"
+          large
+          persistent
+          @save="save"
+          @cancel="cancel"
+          @open="open"
+          @close="close"
+        >
+          <div>{{ props.item.iron }}</div>
+          <template v-slot:input>
+            <div class="mt-3 title">Update Iron</div>
+          </template>
+          <template v-slot:input>
+            <v-text-field
+              v-model="props.item.iron"
+              :rules="[max25chars]"
+              label="Edit"
+              single-line
+              counter
+              autofocus
+            ></v-text-field>
+          </template>
+        </v-edit-dialog>
       </template>
     </v-data-table>
 
@@ -78,13 +72,13 @@
             text: 'Dessert (100g serving)',
             align: 'left',
             sortable: false,
-            value: 'name'
+            value: 'name',
           },
           { text: 'Calories', value: 'calories' },
           { text: 'Fat (g)', value: 'fat' },
           { text: 'Carbs (g)', value: 'carbs' },
           { text: 'Protein (g)', value: 'protein' },
-          { text: 'Iron (%)', value: 'iron' }
+          { text: 'Iron (%)', value: 'iron' },
         ],
         desserts: [
           {
@@ -93,7 +87,7 @@
             fat: 6.0,
             carbs: 24,
             protein: 4.0,
-            iron: '1%'
+            iron: '1%',
           },
           {
             name: 'Ice cream sandwich',
@@ -101,7 +95,7 @@
             fat: 9.0,
             carbs: 37,
             protein: 4.3,
-            iron: '1%'
+            iron: '1%',
           },
           {
             name: 'Eclair',
@@ -109,7 +103,7 @@
             fat: 16.0,
             carbs: 23,
             protein: 6.0,
-            iron: '7%'
+            iron: '7%',
           },
           {
             name: 'Cupcake',
@@ -117,7 +111,7 @@
             fat: 3.7,
             carbs: 67,
             protein: 4.3,
-            iron: '8%'
+            iron: '8%',
           },
           {
             name: 'Gingerbread',
@@ -125,7 +119,7 @@
             fat: 16.0,
             carbs: 49,
             protein: 3.9,
-            iron: '16%'
+            iron: '16%',
           },
           {
             name: 'Jelly bean',
@@ -133,7 +127,7 @@
             fat: 0.0,
             carbs: 94,
             protein: 0.0,
-            iron: '0%'
+            iron: '0%',
           },
           {
             name: 'Lollipop',
@@ -141,7 +135,7 @@
             fat: 0.2,
             carbs: 98,
             protein: 0,
-            iron: '2%'
+            iron: '2%',
           },
           {
             name: 'Honeycomb',
@@ -149,7 +143,7 @@
             fat: 3.2,
             carbs: 87,
             protein: 6.5,
-            iron: '45%'
+            iron: '45%',
           },
           {
             name: 'Donut',
@@ -157,7 +151,7 @@
             fat: 25.0,
             carbs: 51,
             protein: 4.9,
-            iron: '22%'
+            iron: '22%',
           },
           {
             name: 'KitKat',
@@ -165,9 +159,9 @@
             fat: 26.0,
             carbs: 65,
             protein: 7,
-            iron: '6%'
-          }
-        ]
+            iron: '6%',
+          },
+        ],
       }
     },
     methods: {
@@ -188,7 +182,7 @@
       },
       close () {
         console.log('Dialog closed')
-      }
-    }
+      },
+    },
   }
 </script>

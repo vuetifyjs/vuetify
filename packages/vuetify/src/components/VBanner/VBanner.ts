@@ -31,18 +31,18 @@ export default mixins(
     iconColor: String,
     mobileBreakPoint: {
       type: [Number, String],
-      default: 960
+      default: 960,
     } as PropValidator<string | number>,
     singleLine: Boolean,
     sticky: Boolean,
     tile: {
       type: Boolean,
-      default: true
+      default: true,
     },
     value: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
 
   computed: {
@@ -52,7 +52,7 @@ export default mixins(
         'v-banner--has-icon': this.hasIcon,
         'v-banner--is-mobile': this.isMobile,
         'v-banner--single-line': this.singleLine,
-        'v-banner--sticky': this.sticky
+        'v-banner--sticky': this.sticky,
       }
     },
     hasActions (): boolean {
@@ -75,9 +75,9 @@ export default mixins(
         ...styles,
         position: 'sticky',
         top: `${bar + top}px`,
-        zIndex: 1
+        zIndex: 1,
       }
-    }
+    },
   },
 
   methods: {
@@ -97,8 +97,8 @@ export default mixins(
         content = this.$createElement(VIcon, {
           props: {
             color: this.iconColor,
-            size: 28
-          }
+            size: 28,
+          },
         }, [ this.icon ])
       } else {
         content = this.$slots.icon
@@ -108,45 +108,45 @@ export default mixins(
         staticClass: 'v-banner__icon',
         props: {
           color: this.color,
-          size: 40
+          size: 40,
         },
         on: {
-          click: this.iconClick
-        }
+          click: this.iconClick,
+        },
       }, [content])
     },
     genText () {
       return this.$createElement('div', {
-        staticClass: 'v-banner__text'
+        staticClass: 'v-banner__text',
       }, this.$slots.default)
     },
     genActions () {
       if (!this.hasActions) return undefined
 
       const children = this.$scopedSlots.actions ? this.$scopedSlots.actions({
-        dismiss: () => this.isActive = false
+        dismiss: () => this.isActive = false,
       }) : this.$slots.actions
 
       return this.$createElement('div', {
-        staticClass: 'v-banner__actions'
+        staticClass: 'v-banner__actions',
       }, children)
     },
     genContent () {
       return this.$createElement('div', {
-        staticClass: 'v-banner__content'
+        staticClass: 'v-banner__content',
       }, [
         this.genIcon(),
-        this.genText()
+        this.genText(),
       ])
     },
     genWrapper () {
       return this.$createElement('div', {
-        staticClass: 'v-banner__wrapper'
+        staticClass: 'v-banner__wrapper',
       }, [
         this.genContent(),
-        this.genActions()
+        this.genActions(),
       ])
-    }
+    },
   },
 
   render (h): VNode {
@@ -157,9 +157,9 @@ export default mixins(
         style: this.styles,
         directives: [{
           name: 'show',
-          value: this.isActive
-        }]
-      }, [this.genWrapper()])
+          value: this.isActive,
+        }],
+      }, [this.genWrapper()]),
     ])
-  }
+  },
 })

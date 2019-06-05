@@ -7,7 +7,7 @@ import Vue from 'vue'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 import { touch } from '../../../../test'
 
@@ -21,9 +21,9 @@ describe('touch.ts', () => {
         render: h => h('div', {
           directives: [{
             name: 'touch',
-            value
-          }]
-        })
+            value,
+          }],
+        }),
       }))
     }
   })

@@ -98,7 +98,7 @@
       elevation: 2,
       loading: false,
       customLoad: false,
-      disabled: false
+      disabled: false,
     }),
 
     computed: {
@@ -115,7 +115,7 @@
           [this.size]: true,
           elevation: this.elevation,
           loading: this.loading,
-          disabled: this.disabled
+          disabled: this.disabled,
         }
 
         if (this.type) {
@@ -133,7 +133,7 @@
       },
       colors () {
         return Object.keys(this.$vuetify.theme.themes.dark)
-      }
-    }
+      },
+    },
   }
 </script>

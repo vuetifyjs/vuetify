@@ -1,0 +1,49 @@
+{
+	"header": "crwdns35836:0crwdne35836:0",
+	"headerText": "crwdns35838:0crwdne35838:0",
+	"examples": {
+		"usage": {
+			"desc": "crwdns35840:0crwdne35840:0"
+		},
+		"model": {
+			"header": "crwdns35842:0crwdne35842:0",
+			"desc": "crwdns35844:0crwdne35844:0"
+		},
+		"swatches": {
+			"header": "crwdns35846:0crwdne35846:0",
+			"desc": "crwdns35848:0crwdne35848:0"
+		},
+		"inputs": {
+			"header": "crwdns35850:0crwdne35850:0",
+			"desc": "crwdns35852:0crwdne35852:0"
+		},
+		"canvas": {
+			"header": "crwdns35854:0crwdne35854:0",
+			"desc": "crwdns35856:0crwdne35856:0"
+		}
+	},
+	"props": {
+		"v-color-picker": {
+			"canvasHeight": "crwdns35858:0crwdne35858:0",
+			"disabled": "crwdns35860:0crwdne35860:0",
+			"dotSize": "crwdns35862:0crwdne35862:0",
+			"flat": "crwdns35864:0crwdne35864:0",
+			"hideCanvas": "crwdns35866:0crwdne35866:0",
+			"hideInputs": "crwdns35868:0crwdne35868:0",
+			"hideModeSwitch": "crwdns35870:0crwdne35870:0",
+			"mode": "crwdns35872:0crwdne35872:0",
+			"showSwatches": "crwdns35874:0crwdne35874:0",
+			"swatches": "crwdns35876:0crwdne35876:0",
+			"swatchesMaxHeight": "crwdns35878:0crwdne35878:0",
+			"value": "crwdns35880:0crwdne35880:0",
+			"width": "crwdns35882:0crwdne35882:0"
+		}
+	},
+	"events": {
+		"v-color-picker": {
+			"input": "crwdns35884:0crwdne35884:0",
+			"update:color": "crwdns35886:0crwdne35886:0",
+			"update:mode": "crwdns35888:0crwdne35888:0"
+		}
+	}
+}

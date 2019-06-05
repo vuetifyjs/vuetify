@@ -9,5 +9,5 @@ export default Object.freeze({
   md,
   mdi,
   fa,
-  fa4
+  fa4,
 })

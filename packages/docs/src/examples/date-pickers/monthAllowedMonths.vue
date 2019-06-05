@@ -15,12 +15,12 @@
   export default {
     data () {
       return {
-        date: '2017-12'
+        date: '2017-12',
       }
     },
 
     methods: {
-      allowedMonths: val => parseInt(val.split('-')[1], 10) % 2 === 0
-    }
+      allowedMonths: val => parseInt(val.split('-')[1], 10) % 2 === 0,
+    },
   }
 </script>

@@ -22,8 +22,8 @@
     data () {
       return {
         value1: [30, 60],
-        value2: [30, 60]
+        value2: [30, 60],
       }
-    }
+    },
   }
 </script>

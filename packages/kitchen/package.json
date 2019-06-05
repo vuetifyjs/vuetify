@@ -1,21 +1,27 @@
 {
   "name": "@vuetify/kitchen",
-  "version": "2.0.0-alpha.20",
+  "version": "2.0.0-beta.0",
   "private": true,
   "scripts": {
     "deploy": "now && now alias",
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "eslint --ext .js,.vue src"
+    "lint": "eslint --ext .js,.vue src",
+    "lint:fix": "yarn lint --fix",
+    "cypress:run": "cypress run",
+    "cypress:visual": "server-test dev http-get://localhost:8081/ cypress:run"
   },
   "dependencies": {
     "sass-loader": "^7.1.0",
     "vue-router": "^3.0.2",
-    "vuetify": "^2.0.0-alpha.20"
+    "vuetify": "^2.0.0-beta.0"
   },
   "devDependencies": {
+    "@applitools/eyes-cypress": "^3.6.13",
     "@vue/cli-plugin-babel": "^3.5.1",
     "@vue/cli-service": "^3.5.1",
-    "babel-eslint": "^10.0.1"
+    "babel-eslint": "^10.0.1",
+    "cypress": "^3.2.0",
+    "start-server-and-test": "^1.9.0"
   }
 }

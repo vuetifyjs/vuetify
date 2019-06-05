@@ -43,12 +43,20 @@
           "lang": "installMDI"
         },
         {
+          "type": "text",
+          "lang": "installMDIText1"
+        },
+        {
           "type": "markup",
-          "value": "bash_yarn_install_mdi"
+          "value": "html_material_design_icons_link"
         },
         {
           "type": "text",
-          "lang": "installMDIText1"
+          "lang": "installMDIText2"
+        },
+        {
+          "type": "markup",
+          "value": "bash_yarn_install_mdi"
         },
         {
           "type": "markup",

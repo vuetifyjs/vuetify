@@ -46,19 +46,19 @@ export default mixins(
         if (!this.chipGroup) return ''
 
         return this.chipGroup.activeClass
-      }
+      },
     } as any as PropValidator<string>,
     close: Boolean,
     closeIcon: {
       type: String,
-      default: '$vuetify.icons.delete'
+      default: '$vuetify.icons.delete',
     },
     disabled: Boolean,
     draggable: Boolean,
     filter: Boolean,
     filterIcon: {
       type: String,
-      default: '$vuetify.icons.complete'
+      default: '$vuetify.icons.complete',
     },
     label: Boolean,
     link: Boolean,
@@ -69,14 +69,14 @@ export default mixins(
     selected: Boolean,
     tag: {
       type: String,
-      default: 'span'
+      default: 'span',
     },
     textColor: String,
-    value: null as any as PropValidator<any>
+    value: null as any as PropValidator<any>,
   },
 
   data: () => ({
-    proxyClass: 'v-chip--active'
+    proxyClass: 'v-chip--active',
   }),
 
   computed: {
@@ -95,7 +95,7 @@ export default mixins(
         'v-chip--removable': this.hasClose,
         ...this.themeClasses,
         ...this.sizeableClasses,
-        ...this.groupClasses
+        ...this.groupClasses,
       }
     },
     hasClose (): boolean {
@@ -112,7 +112,7 @@ export default mixins(
         Routable.options.computed.isClickable.call(this) ||
         this.chipGroup
       )
-    }
+    },
   },
 
   methods: {
@@ -128,7 +128,7 @@ export default mixins(
         children.push(
           this.$createElement(VIcon, {
             staticClass: 'v-chip__filter',
-            props: { left: true }
+            props: { left: true },
           }, this.filterIcon)
         )
       }
@@ -139,26 +139,26 @@ export default mixins(
       return this.$createElement(VIcon, {
         staticClass: 'v-chip__close',
         props: {
-          right: true
+          right: true,
         },
         on: {
           click: (e: Event) => {
             e.stopPropagation()
 
             this.$emit('click:close')
-          }
-        }
+          },
+        },
       }, this.closeIcon)
     },
     genContent (): VNode {
       return this.$createElement('span', {
-        staticClass: 'v-chip__content'
+        staticClass: 'v-chip__content',
       }, [
         this.filter && this.genFilter(),
         this.$slots.default,
-        this.hasClose && this.genClose()
+        this.hasClose && this.genClose(),
       ])
-    }
+    },
   },
 
   created () {
@@ -173,12 +173,12 @@ export default mixins(
     data.attrs = {
       ...data.attrs,
       draggable: this.draggable ? 'true' : undefined,
-      tabindex: this.chipGroup && !this.disabled ? 0 : data.attrs!.tabindex
+      tabindex: this.chipGroup && !this.disabled ? 0 : data.attrs!.tabindex,
     }
     data = this.setBackgroundColor(this.color, data)
 
     const color = this.textColor || (this.hasOutline && this.color)
 
     return h(tag, this.setTextColor(color, data), children)
-  }
+  },
 })

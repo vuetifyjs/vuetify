@@ -25,23 +25,23 @@ export default baseMixins.extend({
       default: null,
       validator: (val: string | object) => {
         return ['string', 'object'].includes(typeof val)
-      }
+      },
     } as PropValidator<string | HTMLElement>,
     disabled: Boolean,
     internalActivator: Boolean,
-    openOnHover: Boolean
+    openOnHover: Boolean,
   },
 
   data: () => ({
     activatorElement: null as null | HTMLElement,
-    activatorNode: [] as VNode[]
+    activatorNode: [] as VNode[],
   }),
 
   watch: {
     activator () {
       this.activatorElement = null
       this.getActivator()
-    }
+    },
   },
 
   mounted () {
@@ -61,12 +61,12 @@ export default baseMixins.extend({
         },
         set value (isActive: boolean) {
           self.isActive = isActive
-        }
+        },
       }
     },
     genActivator () {
       const node = getSlot(this, 'activator', Object.assign(this.getValueProxy(), {
-        on: this.genActivatorListeners()
+        on: this.genActivatorListeners(),
       })) || []
 
       this.activatorNode = node
@@ -123,6 +123,6 @@ export default baseMixins.extend({
       this.activatorElement = activator as HTMLElement
 
       return this.activatorElement
-    }
-  }
+    },
+  },
 })

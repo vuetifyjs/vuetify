@@ -49,7 +49,7 @@
 <script>
   export default {
     data: () => ({
-      hidden: false
-    })
+      hidden: false,
+    }),
   }
 </script>

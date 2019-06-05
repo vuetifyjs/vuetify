@@ -20,7 +20,7 @@ import {
   createDayList,
   createNativeLocaleFormatter,
   getStartOfWeek,
-  getEndOfWeek
+  getEndOfWeek,
 } from '../util/timestamp'
 
 export default mixins(
@@ -34,7 +34,7 @@ export default mixins(
   name: 'calendar-base',
 
   directives: {
-    Resize
+    Resize,
   },
 
   props: props.base,
@@ -81,7 +81,7 @@ export default mixins(
         this.currentLocale,
         (_tms, short) => short ? shortOptions : longOptions
       )
-    }
+    },
   },
 
   methods: {
@@ -90,7 +90,7 @@ export default mixins(
         'v-present': timestamp.present,
         'v-past': timestamp.past,
         'v-future': timestamp.future,
-        'v-outside': outside
+        'v-outside': outside,
       }
     },
     getStartOfWeek (timestamp: VTimestamp): VTimestamp {
@@ -104,6 +104,6 @@ export default mixins(
         this.locale,
         (_tms, _short) => options
       )
-    }
-  }
+    },
+  },
 })

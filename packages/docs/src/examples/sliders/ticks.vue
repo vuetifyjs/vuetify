@@ -56,9 +56,9 @@
           'Figs',
           'Lemon',
           'Pear',
-          'Apple'
-        ]
+          'Apple',
+        ],
       }
-    }
+    },
   }
 </script>

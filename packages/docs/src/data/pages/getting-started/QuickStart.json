@@ -202,6 +202,31 @@
       "children": [
         {
           "type": "heading",
+          "lang": "webpackHeader1"
+        },
+        {
+          "type": "text",
+          "lang": "webpackText1"
+        },
+        {
+          "type": "markup",
+          "value": "bash_yarn_install_sass"
+        },
+        {
+          "type": "text",
+          "lang": "webpackText2"
+        },
+        {
+          "type": "markup",
+          "value": "js_webpack_sass"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
           "lang": "existingHeader4"
         },
         {

@@ -4,13 +4,13 @@ import {
   VueConstructor,
   ComponentOptions,
   FunctionalComponentOptions,
-  VNodeData
+  VNodeData,
 } from 'vue'
 import { CombinedVueInstance, Vue } from 'vue/types/vue'
 import {
   RecordPropsDefinition,
   ThisTypedComponentOptionsWithArrayProps,
-  ThisTypedComponentOptionsWithRecordProps
+  ThisTypedComponentOptionsWithRecordProps,
 } from 'vue/types/options'
 import { MetaInfo } from 'vue-meta/types'
 import { TouchStoredHandlers } from './directives/touch'

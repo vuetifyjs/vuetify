@@ -7,7 +7,7 @@ import VCard from '../../VCard/VCard'
 import { compileToFunctions } from 'vue-template-compiler'
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VMenu.ts', () => {
@@ -20,9 +20,9 @@ describe('VMenu.ts', () => {
         ...options,
         mocks: {
           $vuetify: {
-            theme: {}
-          }
-        }
+            theme: {},
+          },
+        },
       })
     }
   })
@@ -32,14 +32,14 @@ describe('VMenu.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         value: false,
-        fullWidth: true
+        fullWidth: true,
       },
       scopedSlots: {
-        activator: '<button v-on="props.on"></button>'
+        activator: '<button v-on="props.on"></button>',
       },
       slots: {
-        default: [VCard]
-      }
+        default: [VCard],
+      },
     })
 
     const activator = wrapper.find('button')
@@ -57,14 +57,14 @@ describe('VMenu.ts', () => {
   it('should round dimensions', async () => {
     const wrapper = mountFunction({
       propsData: {
-        value: false
+        value: false,
       },
       scopedSlots: {
-        activator: '<button v-on="props.on"></button>'
+        activator: '<button v-on="props.on"></button>',
       },
       slots: {
-        default: '<span class="content"></span>'
-      }
+        default: '<span class="content"></span>',
+      },
     })
 
     const content = wrapper.find('.v-menu__content')
@@ -78,7 +78,7 @@ describe('VMenu.ts', () => {
         right: 75.987,
         bottom: 4,
         x: 0,
-        y: 0
+        y: 0,
       }
     }
 
@@ -96,11 +96,11 @@ describe('VMenu.ts', () => {
   it('should not attach event handlers to the activator container if disabled', async () => {
     const wrapper = mountFunction({
       propsData: {
-        disabled: true
+        disabled: true,
       },
       scopedSlots: {
-        activator: '<button v-on="props.on"></button>'
-      }
+        activator: '<button v-on="props.on"></button>',
+      },
     })
 
     const activator = wrapper.find('button')
@@ -137,11 +137,11 @@ describe('VMenu.ts', () => {
           ref: 'menu',
           props: {
             value: true,
-            attach: true
-          }
+            attach: true,
+          },
         }, [h('input', { class: 'first' }), h('input', { class: 'second' })]),
-        h('input', { class: 'third' })
-      ])
+        h('input', { class: 'third' }),
+      ]),
     }, { attachToDocument: true })
     const menu = wrapper.find({ name: 'v-menu', render: () => null })
     const input = wrapper.find('input')
@@ -161,14 +161,14 @@ describe('VMenu.ts', () => {
   it('should show the menu on mounted', () => {
     const activate = jest.fn()
     mountFunction({
-      methods: { activate }
+      methods: { activate },
     })
 
     expect(activate).not.toHaveBeenCalled()
 
     mountFunction({
       propsData: { value: true },
-      methods: { activate }
+      methods: { activate },
     })
     expect(activate).toHaveBeenCalled()
   })
@@ -180,8 +180,8 @@ describe('VMenu.ts', () => {
         absolute: true,
         value: true,
         positionX: 100,
-        positionY: 200
-      }
+        positionY: 200,
+      },
     })
 
     const content = wrapper.findAll('.v-menu__content').at(0)
@@ -194,7 +194,7 @@ describe('VMenu.ts', () => {
 
     wrapper.setProps({
       positionX: 110,
-      positionY: 220
+      positionY: 220,
     })
     jest.runAllTimers()
     await wrapper.vm.$nextTick()

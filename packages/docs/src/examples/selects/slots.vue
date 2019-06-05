@@ -97,9 +97,9 @@
         'Tangerines',
         'Tomatoes',
         'Watermelons',
-        'Zucchini'
+        'Zucchini',
       ],
-      selectedFruits: []
+      selectedFruits: [],
     }),
 
     computed: {
@@ -113,7 +113,7 @@
         if (this.likesAllFruit) return 'mdi-close-box'
         if (this.likesSomeFruit) return 'mdi-minus-box'
         return 'mdi-checkbox-blank-outline'
-      }
+      },
     },
 
     methods: {
@@ -125,8 +125,8 @@
             this.selectedFruits = this.fruits.slice()
           }
         })
-      }
-    }
+      },
+    },
   }
 </script>
 

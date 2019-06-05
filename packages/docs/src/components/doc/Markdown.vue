@@ -5,31 +5,31 @@
   // Utilities
   import {
     mapGetters,
-    mapState
+    mapState,
   } from 'vuex'
 
   export default {
     props: {
       code: {
         type: [Array, String],
-        default: ''
+        default: '',
       },
       source: {
         type: String,
-        default: ''
+        default: '',
       },
       tag: {
         type: String,
-        default: 'div'
-      }
+        default: 'div',
+      },
     },
 
     computed: {
       ...mapGetters('documentation', [
         'namespace',
-        'page'
+        'page',
       ]),
-      ...mapState('route', ['params'])
+      ...mapState('route', ['params']),
     },
 
     render (h) {
@@ -37,7 +37,7 @@
 
       if (!this.code) {
         if (this.$slots.default) {
-          code = this.$slots.default[0].text
+          code = this.$slots.default[0].text.trim()
         }
 
         if (code.indexOf('.') > -1) {
@@ -65,11 +65,11 @@
       return h(this.tag, {
         staticClass: 'markdown',
         class: {
-          'mb-3': wantsList
+          'mb-3': wantsList,
         },
-        domProps: { innerHTML: marked(code) }
+        domProps: { innerHTML: marked(code) },
       })
-    }
+    },
   }
 </script>
 

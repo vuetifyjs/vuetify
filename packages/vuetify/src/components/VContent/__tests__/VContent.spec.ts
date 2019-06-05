@@ -5,7 +5,7 @@ import VContent from '../VContent'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VContent.ts', () => {
@@ -25,10 +25,10 @@ describe('VContent.ts', () => {
               right: 256,
               footer: 48,
               insetFooter: 32,
-              bottom: 56
-            }
-          }
-        }
+              bottom: 56,
+            },
+          },
+        },
       })
     }
   })

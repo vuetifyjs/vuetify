@@ -1,7 +1,7 @@
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 import VCarouselItem from '../VCarouselItem'
 
@@ -20,8 +20,8 @@ describe('VCarouselItem.ts', () => {
   it('should throw warning when not used inside v-carousel', () => {
     const wrapper = mountFunction({
       propsData: {
-        src: imageSrc
-      }
+        src: imageSrc,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -31,8 +31,8 @@ describe('VCarouselItem.ts', () => {
   it('should render component and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        src: imageSrc
-      }
+        src: imageSrc,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()

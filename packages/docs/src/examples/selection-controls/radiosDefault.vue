@@ -12,8 +12,8 @@
   export default {
     data () {
       return {
-        radios: 'radio-1'
+        radios: 'radio-1',
       }
-    }
+    },
   }
 </script>

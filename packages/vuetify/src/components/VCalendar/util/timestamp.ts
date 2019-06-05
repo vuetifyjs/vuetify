@@ -127,7 +127,7 @@ export function parseTimestamp (input: string, now?: VTimestamp): VTimestamp {
     hasTime: !!(parts[6] && parts[8]),
     past: false,
     present: false,
-    future: false
+    future: false,
   }
 
   updateWeekday(timestamp)
@@ -154,7 +154,7 @@ export function parseDate (date: Date): VTimestamp {
     hasTime: true,
     past: false,
     present: true,
-    future: false
+    future: false,
   })
 }
 

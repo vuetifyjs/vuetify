@@ -77,7 +77,7 @@
     methods: {
       close () {
         alert('Chip close clicked')
-      }
-    }
+      },
+    },
   }
 </script>

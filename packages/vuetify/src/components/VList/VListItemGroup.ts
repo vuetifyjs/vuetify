@@ -18,7 +18,7 @@ export default mixins(
 
   provide () {
     return {
-      listItemGroup: this
+      listItemGroup: this,
     }
   },
 
@@ -26,16 +26,16 @@ export default mixins(
     classes (): object {
       return {
         ...BaseItemGroup.options.computed.classes.call(this),
-        'v-list-item-group': true
+        'v-list-item-group': true,
       }
-    }
+    },
   },
 
   methods: {
     genData (): object {
       return this.setTextColor(this.color, {
-        ...BaseItemGroup.options.methods.genData.call(this)
+        ...BaseItemGroup.options.methods.genData.call(this),
       })
-    }
-  }
+    },
+  },
 })

@@ -87,24 +87,24 @@
         { header: 'Select an option or create one' },
         {
           text: 'Foo',
-          color: 'blue'
+          color: 'blue',
         },
         {
           text: 'Bar',
-          color: 'red'
-        }
+          color: 'red',
+        },
       ],
       nonce: 1,
       menu: false,
       model: [
         {
           text: 'Foo',
-          color: 'blue'
-        }
+          color: 'blue',
+        },
       ],
       x: 0,
       search: null,
-      y: 0
+      y: 0,
     }),
 
     watch: {
@@ -115,7 +115,7 @@
           if (typeof v === 'string') {
             v = {
               text: v,
-              color: this.colors[this.nonce - 1]
+              color: this.colors[this.nonce - 1],
             }
 
             this.items.push(v)
@@ -125,7 +125,7 @@
 
           return v
         })
-      }
+      },
     },
 
     methods: {
@@ -149,7 +149,7 @@
         return text.toString()
           .toLowerCase()
           .indexOf(query.toString().toLowerCase()) > -1
-      }
-    }
+      },
+    },
   }
 </script>

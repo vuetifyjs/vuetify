@@ -16,16 +16,16 @@ export default mixins(
   props: {
     dark: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     id: {
       type: String,
-      default: 'app'
+      default: 'app',
     },
     light: {
       type: Boolean,
-      default: undefined
-    }
+      default: undefined,
+    },
   },
 
   computed: {
@@ -35,7 +35,7 @@ export default mixins(
       }
 
       return this.$vuetify.theme.dark
-    }
+    },
   },
 
   render (h) {
@@ -45,10 +45,10 @@ export default mixins(
       staticClass: 'application',
       class: {
         'application--is-rtl': this.$vuetify.rtl,
-        ...this.themeClasses
+        ...this.themeClasses,
       },
       attrs: { 'data-app': true },
-      domProps: { id: this.id }
+      domProps: { id: this.id },
     }, [wrapper])
-  }
+  },
 })

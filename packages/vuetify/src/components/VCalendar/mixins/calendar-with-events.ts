@@ -12,13 +12,13 @@ import props from '../util/props'
 import {
   VTimestamp,
   getDayIdentifier,
-  parseTime
+  parseTime,
 } from '../util/timestamp'
 import {
   VEventParsed,
   VEventInput,
   parseEvent,
-  isEventOn
+  isEventOn,
 } from '../util/events'
 
 // Types
@@ -103,7 +103,7 @@ export default CalendarBase.extend({
           }
           return name
         }
-    }
+    },
   },
 
   methods: {
@@ -175,7 +175,7 @@ export default CalendarBase.extend({
             eventsMap[date] = {
               parent: el.parentElement,
               more: null,
-              events: []
+              events: [],
             }
           }
           if (el.getAttribute('data-more')) {
@@ -202,20 +202,20 @@ export default CalendarBase.extend({
         staticClass: 'v-event',
         class: {
           'v-event-start': start,
-          'v-event-end': end
+          'v-event-end': end,
         },
         style: {
           height: `${eventHeight}px`,
           top: `${relativeOffset}px`,
-          'margin-bottom': `${eventMarginBottom}px`
+          'margin-bottom': `${eventMarginBottom}px`,
         },
         attrs: {
           'data-date': day.date,
-          'data-event': event.index
+          'data-event': event.index,
         },
         key: event.index,
         ref: 'events',
-        refInFor: true
+        refInFor: true,
       })
     },
     genTimedEvent ({ offset, event, columnCount, column }: VEventVisual, index: number, day: VDayBodySlotScope): VNode {
@@ -239,8 +239,8 @@ export default CalendarBase.extend({
           top: `${top}px`,
           height: `${height}px`,
           left: `${left}%`,
-          right: `${right}%`
-        }
+          right: `${right}%`,
+        },
       })
     },
     genEvent (event: VEventParsed, scope: object, showName: boolean, timedEvent: boolean, data: VNodeData): VNode {
@@ -254,9 +254,9 @@ export default CalendarBase.extend({
             on: this.getDefaultMouseEventHandlers(':event', nativeEvent => ({ ...scope, nativeEvent })),
             directives: [{
               name: 'ripple',
-              value: this.eventRipple != null ? this.eventRipple : true
+              value: this.eventRipple != null ? this.eventRipple : true,
             }],
-            ...data
+            ...data,
           })
         ), slot
           ? slot(scope)
@@ -267,8 +267,8 @@ export default CalendarBase.extend({
       return this.$createElement('div', {
         staticClass: 'pl-1',
         domProps: {
-          innerHTML: this.eventNameFunction(event, timedEvent)
-        }
+          innerHTML: this.eventNameFunction(event, timedEvent),
+        },
       })
     },
     genMore (day: VTimestamp): VNode {
@@ -276,20 +276,20 @@ export default CalendarBase.extend({
         staticClass: 'v-event-more pl-1',
         attrs: {
           'data-date': day.date,
-          'data-more': 1
+          'data-more': 1,
         },
         directives: [{
           name: 'ripple',
-          value: this.eventRipple != null ? this.eventRipple : true
+          value: this.eventRipple != null ? this.eventRipple : true,
         }],
         on: {
-          click: () => this.$emit('click:more', day)
+          click: () => this.$emit('click:more', day),
         },
         style: {
-          display: 'none'
+          display: 'none',
         },
         ref: 'events',
-        refInFor: true
+        refInFor: true,
       })
     },
     getEventsForDay (day: VTimestamp): VEventParsed[] {
@@ -462,10 +462,10 @@ export default CalendarBase.extend({
         },
         dayBody: (day: VDayBodySlotScope) => {
           return [this.$createElement('div', {
-            staticClass: 'v-event-timed-container'
+            staticClass: 'v-event-timed-container',
           }, getSlotChildren(day, this.getEventsForDayTimed, this.genTimedEvent, true))]
-        }
+        },
       }
-    }
-  }
+    },
+  },
 })

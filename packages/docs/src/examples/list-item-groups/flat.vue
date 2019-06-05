@@ -28,18 +28,18 @@
       items: [
         {
           icon: 'mdi-wifi',
-          text: 'Wifi'
+          text: 'Wifi',
         },
         {
           icon: 'mdi-bluetooth',
-          text: 'Bluetooth'
+          text: 'Bluetooth',
         },
         {
           icon: 'mdi-chart-donut',
-          text: 'Data Usage'
-        }
+          text: 'Data Usage',
+        },
       ],
-      model: 1
-    })
+      model: 1,
+    }),
   }
 </script>

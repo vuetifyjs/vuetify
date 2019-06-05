@@ -57,7 +57,7 @@
   export default {
     data: () => ({
       checking: false,
-      heartbeats: []
+      heartbeats: [],
     }),
 
     computed: {
@@ -68,7 +68,7 @@
         if (!sum && !length) return 0
 
         return Math.ceil(sum / length)
-      }
+      },
     },
 
     created () {
@@ -87,7 +87,7 @@
         this.heartbeats = Array.from({ length: 20 }, this.heartbeat)
 
         this.checking = false
-      }
-    }
+      },
+    },
   }
 </script>

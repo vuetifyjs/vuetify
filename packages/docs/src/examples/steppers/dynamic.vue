@@ -66,7 +66,7 @@
     data () {
       return {
         e1: 1,
-        steps: 2
+        steps: 2,
       }
     },
 
@@ -75,7 +75,7 @@
         if (this.e1 > val) {
           this.e1 = val
         }
-      }
+      },
     },
 
     methods: {
@@ -88,7 +88,7 @@
         } else {
           this.e1 = n + 1
         }
-      }
-    }
+      },
+    },
   }
 </script>

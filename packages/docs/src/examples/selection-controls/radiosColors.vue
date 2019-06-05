@@ -82,8 +82,8 @@
     data () {
       return {
         ex7: 'red',
-        ex8: 'primary'
+        ex8: 'primary',
       }
-    }
+    },
   }
 </script>

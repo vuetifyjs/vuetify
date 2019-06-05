@@ -45,7 +45,7 @@
       color: 'primary',
       left: false,
       bottom: false,
-      overlap: true
-    })
+      overlap: true,
+    }),
   }
 </script>

@@ -204,22 +204,22 @@
         {
           name: 'Weekly Meeting',
           start: '2019-01-07 09:00',
-          end: '2019-01-07 10:00'
+          end: '2019-01-07 10:00',
         },
         {
           name: 'Thomas\' Birthday',
-          start: '2019-01-10'
+          start: '2019-01-10',
         },
         {
           name: 'Mash Potatoes',
           start: '2019-01-09 12:30',
-          end: '2019-01-09 15:30'
-        }
-      ]
+          end: '2019-01-09 15:30',
+        },
+      ],
     }),
 
     computed: {
-      locale: () => navigator.languages[0] || navigator.language
-    }
+      locale: () => navigator.languages[0] || navigator.language,
+    },
   }
 </script>

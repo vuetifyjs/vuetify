@@ -31,8 +31,8 @@ describe('$vuetify.lang', () => {
     lang = new Lang({
       current: 'foreign',
       locales: {
-        foreign: { foo: 'foreignBar' }
-      }
+        foreign: { foo: 'foreignBar' },
+      },
     })
 
     expect(lang.t('$vuetify.foo')).toBe('foreignBar')

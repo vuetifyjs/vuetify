@@ -5,7 +5,7 @@ import { resizeWindow, touch } from '../../../../test'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 beforeEach(() => resizeWindow(1920, 1080))
@@ -22,21 +22,21 @@ describe('VNavigationDrawer', () => {
           $vuetify: {
             rtl: false,
             theme: {
-              dark: false
+              dark: false,
             },
             breakpoint: {
-              width: 1920
+              width: 1920,
             },
-            application: new Application()
-          }
-        }
+            application: new Application(),
+          },
+        },
       })
     }
   })
 
   it('should become temporary when the window resizes', async () => {
     const wrapper = mountFunction({
-      propsData: { app: true }
+      propsData: { app: true },
     })
 
     expect(wrapper.vm.isActive).toBe(true)
@@ -51,8 +51,8 @@ describe('VNavigationDrawer', () => {
       propsData: {
         app: true,
         temporary: true,
-        value: true
-      }
+        value: true,
+      },
     })
 
     await wrapper.vm.$nextTick()
@@ -64,7 +64,7 @@ describe('VNavigationDrawer', () => {
     const wrapper = mountFunction({ propsData: {
       app: true,
       permanent: true,
-      stateless: true
+      stateless: true,
     } })
 
     await wrapper.vm.$nextTick()
@@ -80,8 +80,8 @@ describe('VNavigationDrawer', () => {
       propsData: {
         app: true,
         permanent: true,
-        disableResizeWatcher: true
-      }
+        disableResizeWatcher: true,
+      },
     })
 
     await wrapper.vm.$nextTick()
@@ -97,8 +97,8 @@ describe('VNavigationDrawer', () => {
       propsData: {
         app: true,
         temporary: true,
-        value: true
-      }
+        value: true,
+      },
     })
 
     await wrapper.vm.$nextTick()
@@ -115,8 +115,8 @@ describe('VNavigationDrawer', () => {
   it('should open when changed to permanent', async () => {
     const wrapper = mountFunction({
       propsData: {
-        value: null
-      }
+        value: null,
+      },
     })
 
     wrapper.setProps({ permanent: true })
@@ -130,8 +130,8 @@ describe('VNavigationDrawer', () => {
     const wrapper = mountFunction({
       propsData: {
         permanent: true,
-        value: true
-      }
+        value: true,
+      },
     })
 
     wrapper.setProps({ value: false })
@@ -143,7 +143,7 @@ describe('VNavigationDrawer', () => {
 
   it('should update content padding when temporary state is changed', async () => {
     const wrapper = mountFunction({ propsData: {
-      app: true
+      app: true,
     } })
     await wrapper.vm.$nextTick()
 
@@ -158,7 +158,7 @@ describe('VNavigationDrawer', () => {
 
   it('should update content padding when permanent state is changed', async () => {
     const wrapper = mountFunction({ propsData: {
-      app: true
+      app: true,
     } })
     await resizeWindow(800)
     wrapper.vm.$vuetify.breakpoint.width = 800
@@ -175,7 +175,7 @@ describe('VNavigationDrawer', () => {
 
   it('should update content padding when miniVariant is changed', async () => {
     const wrapper = mountFunction({ propsData: {
-      app: true
+      app: true,
     } })
     await wrapper.vm.$nextTick()
 
@@ -191,7 +191,7 @@ describe('VNavigationDrawer', () => {
   it('should not remain mobile when temporary is toggled', async () => {
     await resizeWindow(800)
     const wrapper = mountFunction({ propsData: {
-      temporary: true
+      temporary: true,
     } })
 
     await resizeWindow(1920)
@@ -200,7 +200,7 @@ describe('VNavigationDrawer', () => {
 
   it('should stay closed when mobile and temporary is enabled', async () => {
     const wrapper = mountFunction({
-      propsData: { app: true }
+      propsData: { app: true },
     })
     await resizeWindow(800)
     wrapper.vm.$vuetify.breakpoint.width = 800
@@ -220,7 +220,7 @@ describe('VNavigationDrawer', () => {
     const wrapper = mountFunction({ propsData: {
       app: true,
       fixed: true,
-      value: true
+      value: true,
     } })
     await wrapper.vm.$nextTick()
 
@@ -247,8 +247,8 @@ describe('VNavigationDrawer', () => {
   it('should not have marginTop when temporary / isMobile', async () => {
     const wrapper = mountFunction({
       propsData: {
-        app: true
-      }
+        app: true,
+      },
     })
     wrapper.vm.$vuetify.application.bar = 0
 
@@ -291,11 +291,11 @@ describe('VNavigationDrawer', () => {
     const update = jest.fn()
     const wrapper = mountFunction({
       propsData: {
-        miniVariant: true
+        miniVariant: true,
       },
       listeners: {
-        'update:miniVariant': update
-      }
+        'update:miniVariant': update,
+      },
     })
 
     wrapper.trigger('click')
@@ -306,7 +306,7 @@ describe('VNavigationDrawer', () => {
   it('should react to open / close from touch events', async () => {
     const wrapper = mountFunction({
       attachToDocument: true,
-      propsData: { value: false }
+      propsData: { value: false },
     })
     const element = wrapper.vm.$el.parentElement
 
@@ -350,8 +350,8 @@ describe('VNavigationDrawer', () => {
   it('should activate and expand on hover', () => {
     const wrapper = mountFunction({
       propsData: {
-        expandOnHover: true
-      }
+        expandOnHover: true,
+      },
     })
 
     expect(wrapper.vm.isMouseover).toBe(false)
@@ -370,8 +370,8 @@ describe('VNavigationDrawer', () => {
     const wrapper = mountFunction({
       propsData: {
         app: true,
-        clipped: true
-      }
+        clipped: true,
+      },
     })
 
     wrapper.vm.$vuetify.application.bottom = 20
@@ -384,8 +384,8 @@ describe('VNavigationDrawer', () => {
     const wrapper = mountFunction({
       propsData: {
         app: true,
-        disableRouteWatcher: true
-      }
+        disableRouteWatcher: true,
+      },
     })
 
     expect(wrapper.vm.isActive).toBe(true)
@@ -395,7 +395,7 @@ describe('VNavigationDrawer', () => {
 
     wrapper.setProps({
       disableRouteWatcher: false,
-      stateless: true
+      stateless: true,
     })
 
     wrapper.vm.onRouteChange()
@@ -403,7 +403,7 @@ describe('VNavigationDrawer', () => {
 
     wrapper.setProps({
       stateless: false,
-      temporary: true
+      temporary: true,
     })
 
     wrapper.vm.onRouteChange()
@@ -411,7 +411,7 @@ describe('VNavigationDrawer', () => {
 
     wrapper.setProps({
       temporary: false,
-      value: true
+      value: true,
     })
     await wrapper.vm.$nextTick() // Wait for value watcher to fire
 

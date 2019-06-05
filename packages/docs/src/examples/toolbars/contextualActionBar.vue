@@ -61,7 +61,7 @@
   export default {
     data: () => ({
       selection: [],
-      items: ['Foo', 'Bar', 'Fizz', 'Buzz']
-    })
+      items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+    }),
   }
 </script>

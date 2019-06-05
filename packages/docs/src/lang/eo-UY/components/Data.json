@@ -1,0 +1,39 @@
+{
+	"props": {
+		"items": "crwdns26702:0crwdne26702:0",
+		"options": "crwdns26706:0crwdne26706:0",
+		"sortBy": "crwdns26708:0crwdne26708:0",
+		"sortDesc": "crwdns26710:0crwdne26710:0",
+		"customSort": "crwdns26712:0crwdne26712:0",
+		"mustSort": "crwdns26714:0crwdne26714:0",
+		"multiSort": "crwdns26716:0crwdne26716:0",
+		"page": "crwdns26718:0crwdne26718:0",
+		"itemsPerPage": "crwdns26720:0crwdne26720:0",
+		"groupBy": "crwdns26722:0crwdne26722:0",
+		"groupDesc": "crwdns26724:0crwdne26724:0",
+		"locale": "crwdns26726:0crwdne26726:0",
+		"disableSort": "crwdns26728:0crwdne26728:0",
+		"disablePagination": "crwdns26730:0crwdne26730:0",
+		"disableFiltering": "crwdns26732:0crwdne26732:0",
+		"search": "crwdns26734:0crwdne26734:0",
+		"customFilter": "crwdns26736:0crwdne26736:0",
+		"serverItemsLength": "crwdns26738:0crwdne26738:0"
+	},
+	"scopedSlots": {
+		"default": "crwdns26740:0crwdne26740:0"
+	},
+	"events": {
+		"current-items": "crwdns26742:0crwdne26742:0",
+		"page-count": "crwdns26744:0crwdne26744:0",
+		"pagination": "crwdns26746:0crwdne26746:0",
+		"update:options": "crwdns26748:0crwdne26748:0",
+		"update:page": "crwdns26750:0crwdne26750:0",
+		"update:items-per-page": "crwdns26752:0crwdne26752:0",
+		"update:sort-by": "crwdns26754:0crwdne26754:0",
+		"update:sort-desc": "crwdns26756:0crwdne26756:0",
+		"update:group-by": "crwdns26758:0crwdne26758:0",
+		"update:group-desc": "crwdns26760:0crwdne26760:0",
+		"update:multi-sort": "crwdns26762:0crwdne26762:0",
+		"update:must-sort": "crwdns26764:0crwdne26764:0"
+	}
+}

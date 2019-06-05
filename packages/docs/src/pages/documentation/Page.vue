@@ -57,16 +57,16 @@
       '$route.path' () {
         this.load({
           store: this.$store,
-          route: this.$route
+          route: this.$route,
         })
-      }
+      },
     },
 
     asyncData: load,
 
     methods: {
-      load
-    }
+      load,
+    },
   }
 </script>
 

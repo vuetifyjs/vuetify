@@ -4,7 +4,7 @@ import VSelect from '../VSelect'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VSelect.ts', () => {
@@ -13,7 +13,7 @@ describe('VSelect.ts', () => {
   let el
 
   (global as any).performance = {
-    now: () => {}
+    now: () => {},
   }
   beforeEach(() => {
     mountFunction = (options = {}) => {
@@ -25,13 +25,13 @@ describe('VSelect.ts', () => {
         mocks: {
           $vuetify: {
             lang: {
-              t: (val: string) => val
+              t: (val: string) => val,
             },
             theme: {
-              dark: false
-            }
-          }
-        }
+              dark: false,
+            },
+          },
+        },
       })
     }
   })
@@ -42,13 +42,13 @@ describe('VSelect.ts', () => {
   it('should select value when using a scoped slot', async () => {
     const wrapper = mountFunction({
       propsData: {
-        items: ['foo', 'bar']
+        items: ['foo', 'bar'],
       },
       slots: {
         'no-data': {
-          render: h => h('div', 'No Data')
-        }
-      }
+          render: h => h('div', 'No Data'),
+        },
+      },
     })
 
     // Will be undefined if fails
@@ -62,10 +62,10 @@ describe('VSelect.ts', () => {
         clearable: true,
         items: [
           { text: 'Foo', value: null },
-          { text: 'Bar', value: 'bar' }
+          { text: 'Bar', value: 'bar' },
         ],
-        value: null
-      }
+        value: null,
+      },
     })
 
     const icon = wrapper.find('.v-input__append-inner .v-icon')
@@ -86,8 +86,8 @@ describe('VSelect.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         clearable: true,
-        value: 'foo'
-      }
+        value: 'foo',
+      },
     })
 
     const change = jest.fn()
@@ -126,9 +126,9 @@ describe('VSelect.ts', () => {
           nudgeTop: 5,
           nudgeRight: 5,
           nudgeBottom: 5,
-          nudgeLeft: 5
-        }
-      }
+          nudgeLeft: 5,
+        },
+      },
     })
 
     const menu = wrapper.vm.$refs.menu
@@ -143,8 +143,8 @@ describe('VSelect.ts', () => {
   it('should close menu on tab down when no selectedIndex', async () => {
     const wrapper = mountFunction({
       propsData: {
-        items: ['foo', 'bar']
-      }
+        items: ['foo', 'bar'],
+      },
     })
 
     const menu = wrapper.find('.v-input__slot')
@@ -166,8 +166,8 @@ describe('VSelect.ts', () => {
   it('should select item after typing its first few letters', async () => {
     const wrapper = mountFunction({
       propsData: {
-        items: ['aaa', 'foo', 'faa']
-      }
+        items: ['aaa', 'foo', 'faa'],
+      },
     })
 
     const input = wrapper.find('input')

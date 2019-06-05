@@ -103,6 +103,6 @@
   export default {
     name: 'SystemBars',
 
-    data: () => ({})
+    data: () => ({}),
   }
 </script>

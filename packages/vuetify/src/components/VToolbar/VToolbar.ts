@@ -24,7 +24,7 @@ export default VSheet.extend({
     extended: Boolean,
     extensionHeight: {
       default: 48,
-      type: [Number, String]
+      type: [Number, String],
     },
     flat: Boolean,
     floating: Boolean,
@@ -32,16 +32,16 @@ export default VSheet.extend({
     short: Boolean,
     src: {
       type: [String, Object],
-      default: ''
+      default: '',
     } as PropValidator<string | srcObject>,
     tile: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
 
   data: () => ({
-    isExtended: false
+    isExtended: false,
   }),
 
   computed: {
@@ -77,7 +77,7 @@ export default VSheet.extend({
         'v-toolbar--extended': this.isExtended,
         'v-toolbar--flat': this.flat,
         'v-toolbar--floating': this.floating,
-        'v-toolbar--prominent': this.isProminent
+        'v-toolbar--prominent': this.isProminent,
       }
     },
     isCollapsed (): boolean {
@@ -88,14 +88,14 @@ export default VSheet.extend({
     },
     styles (): object {
       return this.measurableStyles
-    }
+    },
   },
 
   methods: {
     genBackground () {
       const props = {
         height: convertToUnit(this.computedHeight),
-        src: this.src
+        src: this.src,
       }
 
       const image = this.$scopedSlots.img
@@ -103,25 +103,25 @@ export default VSheet.extend({
         : this.$createElement(VImg, { props })
 
       return this.$createElement('div', {
-        staticClass: 'v-toolbar__image'
+        staticClass: 'v-toolbar__image',
       }, [image])
     },
     genContent () {
       return this.$createElement('div', {
         staticClass: 'v-toolbar__content',
         style: {
-          height: convertToUnit(this.computedContentHeight)
-        }
+          height: convertToUnit(this.computedContentHeight),
+        },
       }, getSlot(this))
     },
     genExtension () {
       return this.$createElement('div', {
         staticClass: 'v-toolbar__extension',
         style: {
-          height: convertToUnit(this.extensionHeight)
-        }
+          height: convertToUnit(this.extensionHeight),
+        },
       }, getSlot(this, 'extension'))
-    }
+    },
   },
 
   render (h): VNode {
@@ -131,12 +131,12 @@ export default VSheet.extend({
     const data = this.setBackgroundColor(this.color, {
       class: this.classes,
       style: this.styles,
-      on: this.$listeners
+      on: this.$listeners,
     })
 
     if (this.isExtended) children.push(this.genExtension())
     if (this.src || this.$scopedSlots.img) children.unshift(this.genBackground())
 
     return h('nav', data, children)
-  }
+  },
 })

@@ -15,21 +15,21 @@ export default Vue.extend({
   props: {
     color: {
       type: Object,
-      default: () => fromRGBA({ r: 255, g: 0, b: 0, a: 1 })
+      default: () => fromRGBA({ r: 255, g: 0, b: 0, a: 1 }),
     } as PropValidator<VColorPickerColor>,
     disabled: Boolean,
     dotSize: {
       type: [Number, String],
-      default: 10
+      default: 10,
     },
     height: {
       type: [Number, String],
-      default: 150
+      default: 150,
     },
     width: {
       type: [Number, String],
-      default: 300
-    }
+      default: 300,
+    },
   },
 
   data () {
@@ -38,8 +38,8 @@ export default Vue.extend({
         width: 0,
         height: 0,
         left: 0,
-        top: 0
-      } as ClientRect
+        top: 0,
+      } as ClientRect,
     }
   },
 
@@ -49,13 +49,13 @@ export default Vue.extend({
 
       return {
         x: this.color.hsva.s * parseInt(this.width, 10),
-        y: (1 - this.color.hsva.v) * parseInt(this.height, 10)
+        y: (1 - this.color.hsva.v) * parseInt(this.height, 10),
       }
-    }
+    },
   },
 
   watch: {
-    'color.hue': 'updateCanvas'
+    'color.hue': 'updateCanvas',
   },
 
   mounted () {
@@ -70,7 +70,7 @@ export default Vue.extend({
         h: this.color.hue,
         s: clamp(x - left, 0, width) / width,
         v: 1 - clamp(y - top, 0, height) / height,
-        a: this.color.alpha
+        a: this.color.alpha,
       }))
     },
     updateCanvas () {
@@ -124,8 +124,8 @@ export default Vue.extend({
         ref: 'canvas',
         attrs: {
           width: this.width,
-          height: this.height
-        }
+          height: this.height,
+        },
       })
     },
     genDot (): VNode {
@@ -136,15 +136,15 @@ export default Vue.extend({
       return this.$createElement('div', {
         staticClass: 'v-color-picker__canvas-dot',
         class: {
-          'v-color-picker__canvas-dot--disabled': this.disabled
+          'v-color-picker__canvas-dot--disabled': this.disabled,
         },
         style: {
           width: convertToUnit(this.dotSize),
           height: convertToUnit(this.dotSize),
-          transform: `translate(${x}, ${y})`
-        }
+          transform: `translate(${x}, ${y})`,
+        },
       })
-    }
+    },
   },
 
   render (h): VNode {
@@ -152,15 +152,15 @@ export default Vue.extend({
       staticClass: 'v-color-picker__canvas',
       style: {
         width: convertToUnit(this.width),
-        height: convertToUnit(this.height)
+        height: convertToUnit(this.height),
       },
       on: {
         click: this.handleClick,
-        mousedown: this.handleMouseDown
-      }
+        mousedown: this.handleMouseDown,
+      },
     }, [
       this.genCanvas(),
-      this.genDot()
+      this.genDot(),
     ])
-  }
+  },
 })

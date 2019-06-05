@@ -4,7 +4,7 @@ import VPicker from '../VPicker'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 import { compileToFunctions } from 'vue-template-compiler'
 
@@ -15,7 +15,7 @@ describe('VPicker.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VPicker, {
-        ...options
+        ...options,
       })
     }
   })
@@ -23,8 +23,8 @@ describe('VPicker.ts', () => {
   it('should render component without title and match snapshot', () => {
     const wrapper = mountFunction({
       slots: {
-        default: [compileToFunctions('<span>default</span>')]
-      }
+        default: [compileToFunctions('<span>default</span>')],
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -34,8 +34,8 @@ describe('VPicker.ts', () => {
     const wrapper = mountFunction({
       slots: {
         default: [compileToFunctions('<span>default</span>')],
-        title: [compileToFunctions('<span>title</span>')]
-      }
+        title: [compileToFunctions('<span>title</span>')],
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -44,12 +44,12 @@ describe('VPicker.ts', () => {
   it('should render dark component and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        dark: true
+        dark: true,
       },
       slots: {
         default: [compileToFunctions('<span>default</span>')],
-        title: [compileToFunctions('<span>title</span>')]
-      }
+        title: [compileToFunctions('<span>title</span>')],
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -58,11 +58,11 @@ describe('VPicker.ts', () => {
   it('should render colored component', () => {
     const wrapper = mountFunction({
       propsData: {
-        color: 'orange lighten-1'
+        color: 'orange lighten-1',
       },
       slots: {
-        title: [compileToFunctions('<span>title</span>')]
-      }
+        title: [compileToFunctions('<span>title</span>')],
+      },
     })
 
     const title = wrapper.find('.v-picker__title')

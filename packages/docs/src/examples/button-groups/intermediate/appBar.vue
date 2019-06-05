@@ -75,18 +75,18 @@
           { text: 'Arial' },
           { text: 'Calibri' },
           { text: 'Courier' },
-          { text: 'Verdana' }
+          { text: 'Verdana' },
         ],
         dropdown_edit: [
           { text: '100%' },
           { text: '75%' },
           { text: '50%' },
           { text: '25%' },
-          { text: '0%' }
+          { text: '0%' },
         ],
         toggle_exclusive: 2,
-        toggle_multiple: [1, 2, 3]
+        toggle_multiple: [1, 2, 3],
       }
-    }
+    },
   }
 </script>

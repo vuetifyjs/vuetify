@@ -61,7 +61,7 @@
 <script>
   export default {
     data: () => ({
-      model: null
-    })
+      model: null,
+    }),
   }
 </script>

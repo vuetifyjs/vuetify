@@ -27,7 +27,7 @@
     data: () => ({
       items: ['Gaming', 'Programming', 'Vue', 'Vuetify'],
       model: ['Vuetify'],
-      search: null
+      search: null,
     }),
 
     watch: {
@@ -35,7 +35,7 @@
         if (val.length > 5) {
           this.$nextTick(() => this.model.pop())
         }
-      }
-    }
+      },
+    },
   }
 </script>

@@ -15,16 +15,16 @@ export const VListItemTitle = createSimpleFunctional('v-list-item__title', 'div'
 export const VListItemSubtitle = createSimpleFunctional('v-list-item__subtitle', 'div')
 
 const VListTile = VListItem.extend({
-  mounted () { deprecate('v-list-tile', 'v-list-item') }
+  mounted () { deprecate('v-list-tile', 'v-list-item') },
 })
 const VListTileAction = VListItemAction.extend({
-  mounted () { deprecate('v-list-tile-action', 'v-list-item-action') }
+  mounted () { deprecate('v-list-tile-action', 'v-list-item-action') },
 })
 const VListTileAvatar = VListItemAvatar.extend({
-  mounted () { deprecate('v-list-tile-avatar', 'v-list-item-avatar') }
+  mounted () { deprecate('v-list-tile-avatar', 'v-list-item-avatar') },
 })
 const VListTileIcon = VListItemIcon.extend({
-  mounted () { deprecate('v-list-tile-icon', 'v-list-item-icon') }
+  mounted () { deprecate('v-list-tile-icon', 'v-list-item-icon') },
 })
 const VListTileActionText = VListItemActionText.extend({
   render (h, context) {
@@ -33,7 +33,7 @@ const VListTileActionText = VListItemActionText.extend({
     deprecate('v-list-tile-action-text', 'v-list-item-action-text')
 
     return render
-  }
+  },
 })
 const VListTileContent = VListItemContent.extend({
   render (h, context) {
@@ -42,7 +42,7 @@ const VListTileContent = VListItemContent.extend({
     deprecate('v-list-tile-content', 'v-list-item-content')
 
     return render
-  }
+  },
 })
 const VListTileTitle = VListItemTitle.extend({
   render (h, context) {
@@ -51,7 +51,7 @@ const VListTileTitle = VListItemTitle.extend({
     deprecate('v-list-tile-title', 'v-list-item-title')
 
     return render
-  }
+  },
 })
 const VListTileSubTitle = VListItemSubtitle.extend({
   render (h, context) {
@@ -60,7 +60,7 @@ const VListTileSubTitle = VListItemSubtitle.extend({
     deprecate('v-list-tile-subtitle', 'v-list-item-subtitle')
 
     return render
-  }
+  },
 })
 
 export {
@@ -79,7 +79,7 @@ export {
   VListTileActionText,
   VListTileContent,
   VListTileTitle,
-  VListTileSubTitle
+  VListTileSubTitle,
 }
 
 export default {
@@ -102,6 +102,6 @@ export default {
     VListTileActionText,
     VListTileContent,
     VListTileTitle,
-    VListTileSubTitle
-  }
+    VListTileSubTitle,
+  },
 }

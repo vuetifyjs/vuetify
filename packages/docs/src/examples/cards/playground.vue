@@ -55,8 +55,8 @@
       elevation: undefined,
       raised: false,
       width: 344,
-      height: undefined
-    })
+      height: undefined,
+    }),
   }
 </script>
 

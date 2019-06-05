@@ -25,7 +25,7 @@ import {
   updateWeekday,
   updateRelative,
   getStartOfMonth,
-  getEndOfMonth
+  getEndOfMonth,
 } from './util/timestamp'
 
 // Calendars
@@ -48,12 +48,12 @@ export default CalendarWithEvents.extend({
   props: {
     ...props.calendar,
     ...props.weeks,
-    ...props.intervals
+    ...props.intervals,
   },
 
   data: () => ({
     lastStart: null as VTimestamp | null,
-    lastEnd: null as VTimestamp | null
+    lastEnd: null as VTimestamp | null,
   }),
 
   computed: {
@@ -105,16 +105,11 @@ export default CalendarWithEvents.extend({
       }
 
       return { component, start, end, maxDays }
-    }
+    },
   },
 
   watch: {
-    renderProps: {
-      immediate: true,
-      handler () {
-        this.checkChange()
-      }
-    }
+    renderProps: 'checkChange',
   },
 
   mounted () {
@@ -195,7 +190,7 @@ export default CalendarWithEvents.extend({
       } else {
         return false
       }
-    }
+    },
   },
 
   render (h): VNode {
@@ -204,18 +199,18 @@ export default CalendarWithEvents.extend({
     return h(component, {
       staticClass: 'v-calendar',
       class: {
-        'v-calendar-events': !this.noEvents
+        'v-calendar-events': !this.noEvents,
       },
       props: {
         ...this.$props,
         start: start.date,
         end: end.date,
-        maxDays
+        maxDays,
       },
       directives: [{
         modifiers: { quiet: true },
         name: 'resize',
-        value: this.updateEventVisibility
+        value: this.updateEventVisibility,
       }],
       on: {
         ...this.$listeners,
@@ -226,9 +221,9 @@ export default CalendarWithEvents.extend({
           if (this.$listeners['click:date']) {
             this.$emit('click:date', day)
           }
-        }
+        },
       },
-      scopedSlots: this.getScopedSlots()
+      scopedSlots: this.getScopedSlots(),
     })
-  }
+  },
 })
