@@ -85,6 +85,6 @@
         }
         return attrs
       },
-    }
+    },
   }
 </script>
