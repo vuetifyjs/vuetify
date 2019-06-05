@@ -1,9 +1,15 @@
 import './VVirtualTable.sass'
 
-import Vue, { VNode, VNodeChildren } from 'vue'
-import { convertToUnit, debounce } from '../../util/helpers'
+// Components
 import VSimpleTable from './VSimpleTable'
+
+// Types
+import Vue, { VNode, VNodeChildren } from 'vue'
+import { PropValidator } from 'vue/types/options'
 import mixins, { ExtractVue } from '../../util/mixins'
+
+// Helpers
+import { convertToUnit, debounce } from '../../util/helpers'
 
 interface options extends Vue {
   cachedItems: VNodeChildren
@@ -28,7 +34,10 @@ export default mixins<options &
       type: Number,
       default: 48,
     },
-    itemsLength: Number,
+    items: {
+      type: Array,
+      default: () => ([]),
+    } as PropValidator<any[]>,
     rowHeight: {
       type: Number,
       default: 48,
@@ -39,9 +48,13 @@ export default mixins<options &
     scrollTop: 0,
     oldChunk: 0,
     scrollDebounce: null as any,
+    invalidateCache: false,
   }),
 
   computed: {
+    itemsLength (): number {
+      return this.items.length
+    },
     totalHeight (): number {
       return (this.itemsLength * this.rowHeight) + this.headerHeight
     },
@@ -61,13 +74,17 @@ export default mixins<options &
       return Math.min(this.startIndex + (this.chunkSize * 3), this.itemsLength)
     },
     offsetBottom (): number {
-      return Math.max(0, ((this.itemsLength - this.chunkSize) * this.rowHeight) - this.offsetTop)
+      return Math.max(0, (this.itemsLength - this.stopIndex - this.startIndex) * this.rowHeight)
     },
   },
 
   watch: {
     chunkIndex (newValue, oldValue) {
       this.oldChunk = oldValue
+    },
+    items () {
+      this.cachedItems = null
+      ;(this.$refs.table as HTMLElement).scrollTop = 0
     },
   },
 
@@ -106,7 +123,7 @@ export default mixins<options &
       ])
     },
     genItems () {
-      return this.$scopedSlots.items!({ start: this.startIndex, stop: this.stopIndex })
+      return this.$scopedSlots.items!({ items: this.items.slice(this.startIndex, this.stopIndex) })
     },
     onScroll (e: Event) {
       const target = e.target as Element
