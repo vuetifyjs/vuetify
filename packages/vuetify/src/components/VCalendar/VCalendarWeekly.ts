@@ -124,7 +124,6 @@ export default CalendarBase.extend({
       const outside = this.isOutside(day)
       const slot = this.$scopedSlots.day
       const scope = { outside, index, ...day }
-      const hasMonth = day.day === 1 && this.showMonthOnFirst
 
       return this.$createElement('div', {
         key: day.date,
@@ -134,7 +133,8 @@ export default CalendarBase.extend({
       }, [
         this.genDayLabel(day),
         slot ? slot(scope) : '',
-        hasMonth ? this.genDayMonth(day) : '',
+        // renders the orginial month text
+        // (day.day === 1 && this.showMonthOnFirst) ? this.genDayMonth(day) : '',
       ])
     },
     genDayLabel (day: VTimestamp): VNode {
