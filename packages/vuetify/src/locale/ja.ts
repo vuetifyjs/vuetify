@@ -1,14 +1,25 @@
 export default {
+  close: 'Close',
   dataIterator: {
-    rowsPerPageText: '1ページあたりの件数：',
-    rowsPerPageAll: 'すべて',
     pageText: '{0}-{1} 件目 / {2}件',
     noResultsText: '検索結果が見つかりません。',
-    nextPage: '次のページ',
-    prevPage: '前のページ',
+    loadingText: 'Loading item...',
   },
   dataTable: {
-    rowsPerPageText: '1ページあたりの行数：',
+    itemsPerPageText: '1ページあたりの行数：',
+    ariaLabel: {
+      sortDescending: ': Sorted descending. Activate to remove sorting.',
+      sortAscending: ': Sorted ascending. Activate to sort descending.',
+      sortNone: ': Not sorted. Activate to sort ascending.',
+    },
+  },
+  dataFooter: {
+    itemsPerPageText: '1ページあたりの件数：',
+    itemsPerPageAll: 'すべて',
+    nextPage: '次のページ',
+    prevPage: '前のページ',
+    firstPage: '一ページ目',
+    lastPage: '最後のページ',
   },
   noDataText: 'データはありません。',
   carousel: {
