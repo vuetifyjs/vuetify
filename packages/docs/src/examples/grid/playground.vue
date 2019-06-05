@@ -4,9 +4,15 @@
       <v-flex xs12>
         <div class="resultContainer">
           <v-layout v-bind="layoutAttributes">
-            <div class="item elevation-5"></div>
-            <div class="item elevation-5"></div>
-            <div class="item elevation-5"></div>
+            <v-card class="item elevation-5">
+                <v-card-text>1</v-card-text>
+              </v-card>
+             <v-card class="item elevation-5">
+                <v-card-text>2</v-card-text>
+              </v-card>
+              <v-card class="item elevation-5">
+                <v-card-text>3</v-card-text>
+              </v-card>
           </v-layout>
         </div>
       </v-flex>
