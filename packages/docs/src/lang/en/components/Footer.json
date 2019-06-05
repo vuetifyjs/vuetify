@@ -7,7 +7,11 @@
     },
     "absolute": {
       "header": "### Absolute Footer",
-      "desc": "Absolute footers are positioned absolutely."
+      "desc": "Absolute footers are positioned absolutely at the bottom of their parent container."
+    },
+    "padless": {
+      "header": "### Padless Footer",
+      "desc": "Padless footers remove all default padding."
     },
     "companyFooter": {
       "header": "### Company Footer",

@@ -37,6 +37,7 @@
           "type": "examples",
           "value": [
             "simple/absolute",
+            "simple/padless",
             "intermediate/companyFooter",
             "intermediate/indigoFooter",
             "intermediate/tealFooter"
