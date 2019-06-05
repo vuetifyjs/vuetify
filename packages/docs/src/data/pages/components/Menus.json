@@ -35,7 +35,7 @@
             "simple/menuActivatorTooltip",
             "simple/hover",
             "simple/customTransition",
-            "simple/disable",
+            "simple/disabled",
             "intermediate/absoluteWithoutActivator",
             "intermediate/menus",
             "intermediate/popover"
