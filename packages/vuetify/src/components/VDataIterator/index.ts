@@ -5,6 +5,6 @@ export { VDataIterator, VDataFooter }
 export default {
   $_vuetify_subcomponents: {
     VDataIterator,
-    VDataFooter
-  }
+    VDataFooter,
+  },
 }

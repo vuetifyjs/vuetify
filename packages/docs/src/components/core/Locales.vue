@@ -52,14 +52,14 @@
 
   export default {
     data: () => ({
-      languages
+      languages,
     }),
 
     computed: {
       currentLanguage () {
         const locale = this.$i18n.locale
         return this.languages.find(l => l.alternate === locale || l.locale === locale)
-      }
+      },
     },
 
     methods: {
@@ -76,7 +76,7 @@
 
         this.$router.replace({ params: { lang } })
         document.cookie = `currentLanguage=${lang};path=/;max-age=${60 * 60 * 24 * 7}` // expires in 7 days
-      }
-    }
+      },
+    },
   }
 </script>

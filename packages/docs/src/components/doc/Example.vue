@@ -141,7 +141,7 @@
 <script>
   // Utilities
   import {
-    mapGetters
+    mapGetters,
   } from 'vuex'
 
   import kebabCase from 'lodash/kebabCase'
@@ -150,8 +150,8 @@
     props: {
       value: {
         type: [Object, String],
-        default: undefined
-      }
+        default: undefined,
+      },
     },
 
     data: () => ({
@@ -161,13 +161,13 @@
       loading: true,
       parsed: undefined,
       selected: 'template',
-      branch: process.env.NODE_ENV === 'production' ? 'master' : 'dev'
+      branch: process.env.NODE_ENV === 'production' ? 'master' : 'dev',
     }),
 
     computed: {
       ...mapGetters('documentation', [
         'namespace',
-        'page'
+        'page',
       ]),
       internalValue () {
         if (this.value === Object(this.value)) return this.value
@@ -182,7 +182,7 @@
       },
       sections () {
         return ['template', 'style', 'script'].filter(section => this.parsed[section])
-      }
+      },
     },
 
     created () {
@@ -231,7 +231,7 @@
           style,
           script,
           codepenResources,
-          codepenAdditional
+          codepenAdditional,
         }
       },
       kebabCase,
@@ -242,8 +242,8 @@
         const panel = this.$refs.panel.items[0]._uid
 
         this.$refs.panel.panelClick(panel)
-      }
-    }
+      },
+    },
   }
 </script>
 

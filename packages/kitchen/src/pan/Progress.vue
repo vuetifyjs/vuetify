@@ -85,7 +85,7 @@
       model71: 42,
       model72: 89,
       model81: 42,
-      model82: 89
-    })
+      model82: 89,
+    }),
   }
 </script>

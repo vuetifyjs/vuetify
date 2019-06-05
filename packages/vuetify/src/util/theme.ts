@@ -103,7 +103,7 @@ export function genStyles (theme: VuetifyParsedTheme, cssVar = false): string {
 
 export function genVariations (name: string, value: ColorInt): Record<string, string> {
   const values: Record<string, string> = {
-    base: intToHex(value)
+    base: intToHex(value),
   }
 
   for (let i = 5; i > 0; --i) {

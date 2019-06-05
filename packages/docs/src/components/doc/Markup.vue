@@ -52,28 +52,28 @@
     name: 'Markup',
 
     components: {
-      Prism: () => import('vue-prism-component')
+      Prism: () => import('vue-prism-component'),
     },
 
     props: {
       lang: {
         type: String,
-        default: undefined
+        default: undefined,
       },
       value: {
         type: String,
-        default: 'markup'
+        default: 'markup',
       },
       filename: {
         type: Boolean,
-        default: process.env.NODE_ENV !== 'production'
-      }
+        default: process.env.NODE_ENV !== 'production',
+      },
     },
 
     data: vm => ({
       code: null,
       copied: false,
-      language: vm.lang
+      language: vm.lang,
     }),
 
     computed: {
@@ -93,7 +93,7 @@
       id () {
         if (this.value === 'markup') return
         return 'markup-' + this.value.replace(/_/g, '-')
-      }
+      },
     },
 
     mounted () {
@@ -120,8 +120,8 @@
       parseRaw (res) {
         this.language = this.lang || this.value.split('_').shift()
         this.code = res.default.trim()
-      }
-    }
+      },
+    },
   }
 </script>
 

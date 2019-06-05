@@ -39,7 +39,7 @@
         duration: 300,
         offset: 0,
         easing: 'easeInOutCubic',
-        easings: Object.keys(easings)
+        easings: Object.keys(easings),
       }
     },
     computed: {
@@ -52,14 +52,14 @@
         return {
           duration: this.duration,
           offset: this.offset,
-          easing: this.easing
+          easing: this.easing,
         }
       },
       element () {
         if (this.selected === 'Button') return this.$refs.button
         else if (this.selected === 'Radio group') return this.$refs.radio
-      }
-    }
+      },
+    },
   }
 </script>
 

@@ -6,8 +6,24 @@
       "desc": "Here we display an example list of actions that could be present in an application."
     },
     "inset": {
-      "header": "### Inset bottom sheets",
-      "desc": "Bottom sheets can be inset, reducing their maximum width on desktop to 70%. This can be further reduced manually using the `width` prop. We also showcase dynamic class binding using the Vuetify breakpoint object."
+      "header": "### Inset",
+      "desc": "Bottom sheets can be inset, reducing their maximum width on desktop to 70%. This can be further reduced manually using the `width` prop."
+    },
+    "persistent": {
+      "header": "### Persistent",
+      "desc": "Persistent bottom sheets can't be closed by clicking outside them."
+    },
+    "model": {
+      "header": "### `v-model` control",
+      "desc": "Bottom sheets can be controlled using `v-model`. You can use it to close them or if you can't use `activator` slot."
+    },
+    "open-in-list": {
+      "header": "### Open In List",
+      "desc": "By combining a functional list into a bottom sheet, you can create a simple 'open in' component."
+    },
+    "player": {
+      "header": "### Music Player",
+      "desc": " Using a inset bottom sheet, you can make practical components such as this simple music player."
     }
   },
   "props": {

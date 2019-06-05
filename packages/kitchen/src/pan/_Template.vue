@@ -15,6 +15,6 @@
   export default {
     name: '',
 
-    data: () => ({})
+    data: () => ({}),
   }
 </script>

@@ -33,8 +33,8 @@
   export default {
     data () {
       return {
-        slider: 45
+        slider: 45,
       }
-    }
+    },
   }
 </script>

@@ -44,8 +44,8 @@
     data () {
       return {
         dialogm1: '',
-        dialog: false
+        dialog: false,
       }
-    }
+    },
   }
 </script>

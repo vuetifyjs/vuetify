@@ -1,71 +1,82 @@
 {
-  "header": "crwdns13196:0crwdne13196:0",
-  "headerText": "crwdns13198:0crwdne13198:0",
-  "examples": {
-    "usage": {
-      "desc": "crwdns13200:0crwdne13200:0"
-    },
-    "thumb": {
-      "header": "crwdns13202:0crwdne13202:0",
-      "desc": "crwdns13204:0crwdne13204:0"
-    },
-    "customThumb": {
-      "header": "crwdns13206:0crwdne13206:0",
-      "desc": "crwdns13208:0crwdne13208:0"
-    },
-    "ticks": {
-      "header": "crwdns13210:0crwdne13210:0",
-      "desc": "crwdns13212:0crwdne13212:0"
-    },
-    "discrete": {
-      "header": "crwdns13214:0crwdne13214:0",
-      "desc": "crwdns13216:0crwdne13216:0"
-    },
-    "icons": {
-      "header": "crwdns13218:0crwdne13218:0",
-      "desc": "crwdns13220:0crwdne13220:0"
-    },
-    "editableNumericValue": {
-      "header": "crwdns13222:0crwdne13222:0",
-      "desc": "crwdns13224:0crwdne13224:0"
-    },
-    "customColors": {
-      "header": "crwdns13226:0crwdne13226:0",
-      "desc": "crwdns13228:0crwdne13228:0"
-    },
-    "validation": {
-      "header": "crwdns13230:0crwdne13230:0",
-      "desc": "crwdns13232:0crwdne13232:0"
-    },
-    "range": {
-      "header": "crwdns13234:0crwdne13234:0",
-      "desc": "crwdns13236:0crwdne13236:0"
-    },
-    "minMax": {
-      "header": "crwdns13238:0crwdne13238:0",
-      "desc": "crwdns13240:0crwdne13240:0"
-    },
-    "metronome": {
-      "header": "crwdns13242:0crwdne13242:0",
-      "desc": "crwdns13244:0crwdne13244:0"
-    }
-  },
-  "props": {
-    "alwaysDirty": "crwdns13246:0crwdne13246:0",
-    "inverseLabel": "crwdns13248:0crwdne13248:0",
-    "step": "crwdns13250:0crwdne13250:0",
-    "thumbColor": "crwdns13252:0crwdne13252:0",
-    "thumbLabel": "crwdns13254:0crwdne13254:0",
-    "thumbSize": "crwdns13256:0crwdne13256:0",
-    "ticks": "crwdns13258:0crwdne13258:0",
-    "tickLabels": "crwdns13260:0crwdne13260:0",
-    "tickSize": "crwdns13262:0crwdne13262:0",
-    "trackColor": "crwdns13264:0crwdne13264:0"
-  },
-  "events": {
-    "change": "crwdns13266:0crwdne13266:0",
-    "end": "crwdns13268:0crwdne13268:0",
-    "start": "crwdns13270:0crwdne13270:0",
-    "update:error": "crwdns13272:0crwdne13272:0"
-  }
+	"header": "crwdns27836:0crwdne27836:0",
+	"headerText": "crwdns27838:0crwdne27838:0",
+	"examples": {
+		"usage": {
+			"desc": "crwdns27840:0crwdne27840:0"
+		},
+		"thumb": {
+			"header": "crwdns27842:0crwdne27842:0",
+			"desc": "crwdns27844:0crwdne27844:0"
+		},
+		"customThumb": {
+			"header": "crwdns27846:0crwdne27846:0",
+			"desc": "crwdns27848:0crwdne27848:0"
+		},
+		"ticks": {
+			"header": "crwdns27850:0crwdne27850:0",
+			"desc": "crwdns27852:0crwdne27852:0"
+		},
+		"discrete": {
+			"header": "crwdns27854:0crwdne27854:0",
+			"desc": "crwdns27856:0crwdne27856:0"
+		},
+		"icons": {
+			"header": "crwdns27858:0crwdne27858:0",
+			"desc": "crwdns27860:0crwdne27860:0"
+		},
+		"editableNumericValue": {
+			"header": "crwdns27862:0crwdne27862:0",
+			"desc": "crwdns27864:0crwdne27864:0"
+		},
+		"customColors": {
+			"header": "crwdns27866:0crwdne27866:0",
+			"desc": "crwdns27868:0crwdne27868:0"
+		},
+		"validation": {
+			"header": "crwdns27870:0crwdne27870:0",
+			"desc": "crwdns27872:0crwdne27872:0"
+		},
+		"range": {
+			"header": "crwdns27874:0crwdne27874:0",
+			"desc": "crwdns27876:0crwdne27876:0"
+		},
+		"minMax": {
+			"header": "crwdns27878:0crwdne27878:0",
+			"desc": "crwdns27880:0crwdne27880:0"
+		},
+		"metronome": {
+			"header": "crwdns27882:0crwdne27882:0",
+			"desc": "crwdns27884:0crwdne27884:0"
+		},
+		"vertical": {
+			"header": "crwdns27886:0crwdne27886:0",
+			"desc": "crwdns27888:0crwdne27888:0"
+		}
+	},
+	"props": {
+		"alwaysDirty": "crwdns27890:0crwdne27890:0",
+		"inverseLabel": "crwdns27892:0crwdne27892:0",
+		"step": "crwdns27894:0crwdne27894:0",
+		"thumbColor": "crwdns27896:0crwdne27896:0",
+		"thumbLabel": "crwdns27898:0crwdne27898:0",
+		"thumbSize": "crwdns27900:0crwdne27900:0",
+		"ticks": "crwdns27902:0crwdne27902:0",
+		"tickLabels": "crwdns27904:0crwdne27904:0",
+		"tickSize": "crwdns27906:0crwdne27906:0",
+		"trackColor": "crwdns27908:0crwdne27908:0",
+		"value": "crwdns27910:0crwdne27910:0",
+		"vertical": "crwdns27912:0crwdne27912:0"
+	},
+	"events": {
+		"change": "crwdns27914:0crwdne27914:0",
+		"click:append": "crwdns27916:0crwdne27916:0",
+		"click:prepend": "crwdns27918:0crwdne27918:0",
+		"end": "crwdns27920:0crwdne27920:0",
+		"start": "crwdns27922:0crwdne27922:0",
+		"update:error": "crwdns27924:0crwdne27924:0"
+	},
+	"scopedSlots": {
+		"thumb-label": "crwdns27926:0crwdne27926:0"
+	}
 }

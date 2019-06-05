@@ -49,10 +49,10 @@
           'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico',
           'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee',
           'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia',
-          'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-        ]
+          'Washington', 'West Virginia', 'Wisconsin', 'Wyoming',
+        ],
       }
-    }
+    },
   }
 </script>
 

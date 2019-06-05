@@ -1,21 +1,9 @@
 {
-  "header": "crwdns12780:0crwdne12780:0",
-  "headerText": "crwdns12782:0crwdne12782:0",
-  "examples": {
-
-  },
-  "props": {
-    "editable": "crwdns12784:0crwdne12784:0",
-    "overflow": "crwdns12786:0crwdne12786:0",
-    "segmented": "crwdns12788:0crwdne12788:0"
-  },
-  "slots": {
-
-  },
-  "scopedSlots": {
-
-  },
-  "events": {
-
-  }
+	"header": "crwdns25204:0crwdne25204:0",
+	"headerText": "crwdns25206:0crwdne25206:0",
+	"props": {
+		"editable": "crwdns25208:0crwdne25208:0",
+		"overflow": "crwdns25210:0crwdne25210:0",
+		"segmented": "crwdns25212:0crwdne25212:0"
+	}
 }

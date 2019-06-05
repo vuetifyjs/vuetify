@@ -95,10 +95,10 @@
       drawer: null,
       drawerRight: null,
       right: false,
-      left: false
+      left: false,
     }),
     props: {
-      source: String
-    }
+      source: String,
+    },
   }
 </script>

@@ -7,8 +7,8 @@ Vue.use(Vuetify)
 
 const vuetify = new Vuetify({
   icons: {
-    iconfont: 'mdi'
-  }
+    iconfont: 'mdi',
+  },
 })
 
 goTo.framework = vuetify.framework

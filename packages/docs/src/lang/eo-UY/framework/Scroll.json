@@ -1,19 +1,21 @@
 {
-  "header": "crwdns14642:0crwdne14642:0",
-  "headerText": "crwdns14644:0$vuetifycrwdne14644:0",
-  "firstHeader": "crwdns14646:0crwdne14646:0",
-  "secondHeader": "crwdns14648:0crwdne14648:0",
-  "thirdHeader": "crwdns14650:0crwdne14650:0",
-  "loremIpsum": "crwdns14652:0crwdne14652:0",
-  "examples": {
-    "usage": {
-      "desc": "crwdns14654:0crwdne14654:0"
-    }
-  },
-  "components": [
-    "crwdns14656:0$vuetifycrwdne14656:0"
-  ],
-  "functions": {
-    "goTo": "crwdns14658:0crwdne14658:0"
-  }
+	"header": "crwdns23748:0crwdne23748:0",
+	"headerText": "crwdns23750:0$vuetifycrwdne23750:0",
+	"firstHeader": "crwdns23752:0crwdne23752:0",
+	"secondHeader": "crwdns23754:0crwdne23754:0",
+	"thirdHeader": "crwdns23756:0crwdne23756:0",
+	"loremIpsum": "crwdns23758:0crwdne23758:0",
+	"examples": {
+		"usage": {
+			"desc": "crwdns35614:0crwdne35614:0"
+		}
+	},
+	"components": {
+		"0": "crwdns23762:0$vuetifycrwdne23762:0"
+	},
+	"routerHeading": "crwdns23764:0crwdne23764:0",
+	"routerText1": "crwdns23766:0[vue-router]crwdne23766:0",
+	"functions": {
+		"goTo": "crwdns23768:0crwdne23768:0"
+	}
 }

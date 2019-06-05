@@ -90,7 +90,7 @@
 <script>
   // Utilities
   import {
-    mapState
+    mapState,
   } from 'vuex'
   import { getObjectValueByPath } from 'vuetify/es5/util/helpers'
   import camelCase from 'lodash/camelCase'
@@ -100,38 +100,38 @@
   export default {
     inject: {
       overrideNamespace: {
-        default: null
+        default: null,
       },
       overridePage: {
-        default: null
-      }
+        default: null,
+      },
     },
 
     props: {
       target: {
         type: String,
-        default: ''
+        default: '',
       },
       headers: {
         type: Array,
-        default: () => ([])
+        default: () => ([]),
       },
       lang: {
         type: String,
-        default: ''
+        default: '',
       },
       items: {
         type: Array,
-        default: () => ([])
+        default: () => ([]),
       },
       search: {
         type: String,
-        default: ''
+        default: '',
       },
       type: {
         type: String,
-        default: ''
-      }
+        default: '',
+      },
     },
 
     computed: {
@@ -198,7 +198,7 @@
       },
       page () {
         return this.overridePage || this.$store.getters['documentation/page']
-      }
+      },
     },
 
     methods: {
@@ -300,8 +300,8 @@
         }
 
         return upperFirst(camelCase(source))
-      }
-    }
+      },
+    },
   }
 </script>
 

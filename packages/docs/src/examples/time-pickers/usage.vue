@@ -12,8 +12,8 @@
       return {
         picker: null,
         landscape: false,
-        ampmInTitle: false
+        ampmInTitle: false,
       }
-    }
+    },
   }
 </script>

@@ -18,7 +18,7 @@ function inserted (el: HTMLElement, binding: ScrollVNodeDirective) {
   el._onScroll = {
     callback,
     options,
-    target
+    target,
   }
 }
 
@@ -33,7 +33,7 @@ function unbind (el: HTMLElement) {
 
 const scroll = {
   inserted,
-  unbind
+  unbind,
 } as DirectiveOptions
 
 export { scroll }

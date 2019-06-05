@@ -9,7 +9,10 @@ $calendar-daily-interval-gutter-font-size: 10px !default;
 
 $calendar-weekly-weekday-padding: 0px 4px 0px 4px !default;
 $calendar-weekly-weekday-font-size: 14px !default;
-$calendar-weekly-day-padding: 32px 4px 4px 4px !default;
+$calendar-weekly-day-padding: 0px 0px 0px 0px !default;
 $calendar-weekly-day-label-size: 32px !default;
 $calendar-weekly-day-label-radius: 16px !default;
 $calendar-weekly-day-month-left: 36px !default;
+
+$calendar-event-bottom-space: 1px;
+$calendar-event-border-radius: 5px;

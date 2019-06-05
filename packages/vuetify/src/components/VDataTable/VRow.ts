@@ -14,7 +14,7 @@ export default Vue.extend({
   props: {
     headers: Array as PropValidator<TableHeader[]>,
     item: Object,
-    rtl: Boolean
+    rtl: Boolean,
   },
 
   render (h, { props, slots, data }): VNode {
@@ -22,7 +22,7 @@ export default Vue.extend({
 
     const columns: VNode[] = props.headers.map((header: TableHeader) => {
       const classes = {
-        [getTextAlignment(header.align, props.rtl)]: true
+        [getTextAlignment(header.align, props.rtl)]: true,
       }
 
       const children = []
@@ -41,10 +41,10 @@ export default Vue.extend({
       }
 
       return h('td', {
-        class: classes
+        class: classes,
       }, children)
     })
 
     return h('tr', data, columns)
-  }
+  },
 })

@@ -30,9 +30,9 @@
           'secondary',
           'yellow darken-2',
           'red',
-          'orange'
-        ]
+          'orange',
+        ],
       }
-    }
+    },
   }
 </script>

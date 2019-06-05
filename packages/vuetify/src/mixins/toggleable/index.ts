@@ -11,12 +11,12 @@ export function factory (prop = 'value', event = 'input') {
     model: { prop, event },
 
     props: {
-      [prop]: { required: false }
+      [prop]: { required: false },
     },
 
     data () {
       return {
-        isActive: !!this[prop]
+        isActive: !!this[prop],
       }
     },
 
@@ -26,8 +26,8 @@ export function factory (prop = 'value', event = 'input') {
       },
       isActive (val) {
         !!val !== this[prop] && this.$emit(event, val)
-      }
-    }
+      },
+    },
   })
 }
 

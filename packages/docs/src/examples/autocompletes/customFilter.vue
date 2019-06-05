@@ -71,8 +71,8 @@
           { name: 'Georgia', abbr: 'GA', id: 2 },
           { name: 'Nebraska', abbr: 'NE', id: 3 },
           { name: 'California', abbr: 'CA', id: 4 },
-          { name: 'New York', abbr: 'NY', id: 5 }
-        ]
+          { name: 'New York', abbr: 'NY', id: 5 },
+        ],
       }
     },
 
@@ -88,8 +88,8 @@
       save () {
         this.isEditing = !this.isEditing
         this.hasSaved = true
-      }
-    }
+      },
+    },
   }
 </script>
 

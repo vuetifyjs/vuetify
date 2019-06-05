@@ -25,16 +25,16 @@
     props: {
       large: {
         type: Boolean,
-        default: false
+        default: false,
       },
       small: {
         type: Boolean,
-        default: false
+        default: false,
       },
       value: {
         type: Object,
-        required: true
-      }
-    }
+        required: true,
+      },
+    },
   }
 </script>

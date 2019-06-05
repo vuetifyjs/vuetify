@@ -2,7 +2,7 @@ import VDatePickerYears from '../VDatePickerYears'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VDatePickerYears.ts', () => {
@@ -16,10 +16,10 @@ describe('VDatePickerYears.ts', () => {
           $vuetify: {
             rtl: false,
             lang: {
-              t: () => {}
-            }
-          }
-        }
+              t: () => {},
+            },
+          },
+        },
       })
     }
   })
@@ -27,8 +27,8 @@ describe('VDatePickerYears.ts', () => {
   it('should render component and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        value: '2000'
-      }
+        value: '2000',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -38,8 +38,8 @@ describe('VDatePickerYears.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         min: 1234,
-        max: 1238
-      }
+        max: 1238,
+      },
     })
 
     expect(wrapper.findAll('li:first-child').at(0).element.textContent).toBe('1238')
@@ -50,8 +50,8 @@ describe('VDatePickerYears.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         min: 1238,
-        max: 1234
-      }
+        max: 1234,
+      },
     })
     expect(wrapper.findAll('li')).toHaveLength(1)
     expect(wrapper.findAll('li').at(0).element.textContent).toBe('1234')
@@ -61,8 +61,8 @@ describe('VDatePickerYears.ts', () => {
   it('should emit event on year click', async () => {
     const wrapper = mountFunction({
       propsData: {
-        value: 1999
-      }
+        value: 1999,
+      },
     })
 
     const input = jest.fn()
@@ -77,8 +77,8 @@ describe('VDatePickerYears.ts', () => {
       propsData: {
         format: year => `(${year})`,
         min: 1001,
-        max: 1001
-      }
+        max: 1001,
+      },
     })
 
     expect(wrapper.findAll('li').at(0).element.textContent).toBe('(1001)')

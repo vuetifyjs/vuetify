@@ -13,7 +13,7 @@
   export default {
     data: () => ({
       mode: 'hsla',
-      modes: ['hsla', 'rgba', 'hexa']
-    })
+      modes: ['hsla', 'rgba', 'hexa'],
+    }),
   }
 </script>

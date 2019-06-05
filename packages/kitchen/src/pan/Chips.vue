@@ -321,7 +321,7 @@
       chip1: true,
       chip2: true,
       chip3: true,
-      chip4: true
-    })
+      chip4: true,
+    }),
   }
 </script>

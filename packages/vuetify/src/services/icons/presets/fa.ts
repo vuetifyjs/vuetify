@@ -29,7 +29,7 @@ const icons: VuetifyIcons = {
   ratingHalf: 'fas fa-star-half',
   first: 'fas fa-step-backward',
   last: 'fas fa-step-forward',
-  unfold: 'fas fa-arrows-alt-v'
+  unfold: 'fas fa-arrows-alt-v',
 }
 
 export default icons

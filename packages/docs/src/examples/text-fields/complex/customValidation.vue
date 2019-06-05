@@ -99,7 +99,7 @@
       state: null,
       zip: null,
       country: null,
-      formHasErrors: false
+      formHasErrors: false,
     }),
 
     computed: {
@@ -110,15 +110,15 @@
           city: this.city,
           state: this.state,
           zip: this.zip,
-          country: this.country
+          country: this.country,
         }
-      }
+      },
     },
 
     watch: {
       name () {
         this.errorMessages = ''
-      }
+      },
     },
 
     methods: {
@@ -145,7 +145,7 @@
 
           this.$refs[f].validate(true)
         })
-      }
-    }
+      },
+    },
   }
 </script>

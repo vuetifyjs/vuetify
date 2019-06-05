@@ -1,18 +1,29 @@
 export default {
+  close: 'Close',
   dataIterator: {
-    rowsPerPageText: 'Item setiap halaman:',
-    rowsPerPageAll: 'Semua',
     pageText: '{0}-{1} dari {2}',
     noResultsText: 'Tidak ditemukan catatan yang cocok',
-    nextPage: 'Halaman selanjutnya',
-    prevPage: 'Halaman sebelumnya'
+    loadingText: 'Loading item...',
   },
   dataTable: {
-    rowsPerPageText: 'Baris setiap halaman:'
+    itemsPerPageText: 'Baris setiap halaman:',
+    ariaLabel: {
+      sortDescending: ': Sorted descending. Activate to remove sorting.',
+      sortAscending: ': Sorted ascending. Activate to sort descending.',
+      sortNone: ': Not sorted. Activate to sort ascending.',
+    },
+  },
+  dataFooter: {
+    itemsPerPageText: 'Item setiap halaman:',
+    itemsPerPageAll: 'Semua',
+    nextPage: 'Halaman selanjutnya',
+    prevPage: 'Halaman sebelumnya',
+    firstPage: 'Halaman pertama',
+    lastPage: 'Halaman terakhir',
   },
   noDataText: 'Tidak ada data tersedia',
   carousel: {
     prev: 'Visual sebelumnya',
-    next: 'Visual selanjutnya'
-  }
+    next: 'Visual selanjutnya',
+  },
 }

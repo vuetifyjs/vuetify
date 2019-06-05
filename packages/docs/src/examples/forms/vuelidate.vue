@@ -54,8 +54,8 @@
       checkbox: {
         checked (val) {
           return val
-        }
-      }
+        },
+      },
     },
 
     data: () => ({
@@ -66,9 +66,9 @@
         'Item 1',
         'Item 2',
         'Item 3',
-        'Item 4'
+        'Item 4',
       ],
-      checkbox: false
+      checkbox: false,
     }),
 
     computed: {
@@ -97,7 +97,7 @@
         !this.$v.email.email && errors.push('Must be valid e-mail')
         !this.$v.email.required && errors.push('E-mail is required')
         return errors
-      }
+      },
     },
 
     methods: {
@@ -110,8 +110,8 @@
         this.email = ''
         this.select = null
         this.checkbox = false
-      }
-    }
+      },
+    },
   }
 </script>
 

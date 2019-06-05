@@ -3,7 +3,7 @@ import {
   VTimestamp,
   parseTimestamp,
   getDayIdentifier,
-  getTimestampIdentifier
+  getTimestampIdentifier,
 } from './timestamp'
 
 export interface VEventInput {

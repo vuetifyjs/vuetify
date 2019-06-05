@@ -19,7 +19,7 @@
 <script>
   export default {
     data: () => ({
-      time: '11:15'
-    })
+      time: '11:15',
+    }),
   }
 </script>

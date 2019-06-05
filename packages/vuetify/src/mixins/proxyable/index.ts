@@ -16,18 +16,18 @@ export function factory (
 
     model: {
       prop,
-      event
+      event,
     },
 
     props: {
       [prop]: {
-        required: false
-      }
+        required: false,
+      },
     },
 
     data () {
       return {
-        internalLazyValue: this[prop] as unknown
+        internalLazyValue: this[prop] as unknown,
       }
     },
 
@@ -42,15 +42,15 @@ export function factory (
           this.internalLazyValue = val
 
           this.$emit(event, val)
-        }
-      }
+        },
+      },
     },
 
     watch: {
       [prop] (val) {
         this.internalLazyValue = val
-      }
-    }
+      },
+    },
   })
 }
 

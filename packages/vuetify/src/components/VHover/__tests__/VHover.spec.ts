@@ -7,7 +7,7 @@ import VHover from '../VHover'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VHover.ts', () => {
@@ -16,7 +16,7 @@ describe('VHover.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VHover, {
-        ...options
+        ...options,
       })
     }
   })
@@ -25,13 +25,13 @@ describe('VHover.ts', () => {
     const vm = new Vue()
     const item = props => vm.$createElement('div', {
       staticClass: 'foobar',
-      class: { 'fizzbuzz': props.hover }
+      class: { 'fizzbuzz': props.hover },
     })
 
     const wrapper = mountFunction({
       scopedSlots: {
-        default: item
-      }
+        default: item,
+      },
     })
 
     const div = wrapper.find('.foobar')
@@ -54,17 +54,17 @@ describe('VHover.ts', () => {
     const vm = new Vue()
     const item = props => vm.$createElement('div', {
       staticClass: 'foobar',
-      class: { 'fizzbuzz': props.hover }
+      class: { 'fizzbuzz': props.hover },
     })
 
     const wrapper = mountFunction({
       propsData: {
         disabled: true,
-        value: true
+        value: true,
       },
       scopedSlots: {
-        default: item
-      }
+        default: item,
+      },
     })
 
     const div = wrapper.find('.foobar')
@@ -92,14 +92,14 @@ describe('VHover.ts', () => {
   it('should warn when using multiple root elements', () => {
     mountFunction({
       propsData: {
-        value: false
+        value: false,
       },
       slots: {
         default: [
           { render: h => h('div') },
-          { render: h => h('div') }
-        ]
-      }
+          { render: h => h('div') },
+        ],
+      },
     })
 
     expect('v-hover should only contain a single element').toHaveBeenTipped()

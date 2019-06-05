@@ -31,29 +31,29 @@ export default baseMixins.extend<options>().extend(
   name: 'v-window-item',
 
   directives: {
-    Touch
+    Touch,
   },
 
   props: {
     disabled: Boolean,
     reverseTransition: {
       type: [Boolean, String],
-      default: undefined
+      default: undefined,
     },
     transition: {
       type: [Boolean, String],
-      default: undefined
+      default: undefined,
     },
     value: {
-      required: false
-    }
+      required: false,
+    },
   },
 
   data () {
     return {
       done: null as null | (() => void),
       isActive: false,
-      wasCancelled: false
+      wasCancelled: false,
     }
   },
 
@@ -71,7 +71,7 @@ export default baseMixins.extend<options>().extend(
       return typeof this.reverseTransition !== 'undefined'
         ? this.reverseTransition || ''
         : this.windowGroup.computedTransition
-    }
+    },
   },
 
   mounted () {
@@ -92,9 +92,9 @@ export default baseMixins.extend<options>().extend(
         class: this.classes,
         directives: [{
           name: 'show',
-          value: this.isActive
+          value: this.isActive,
         }],
-        on: this.$listeners
+        on: this.$listeners,
       }, this.showLazyContent(this.genDefaultSlot()))
     },
     onAfterEnter () {
@@ -145,21 +145,21 @@ export default baseMixins.extend<options>().extend(
 
       this.done()
       this.done = null
-    }
+    },
   },
 
   render (h): VNode {
     return h('transition', {
       props: {
-        name: this.computedTransition
+        name: this.computedTransition,
       },
       on: {
         afterEnter: this.onAfterEnter,
         beforeEnter: this.onBeforeEnter,
         leave: this.onLeave,
         enter: this.onEnter,
-        enterCancelled: this.onEnterCancelled
-      }
+        enterCancelled: this.onEnterCancelled,
+      },
     }, [this.genWindowItem()])
-  }
+  },
 })

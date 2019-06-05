@@ -70,7 +70,7 @@
           protein: 4.0,
           sodium: 87,
           calcium: '14%',
-          iron: '1%'
+          iron: '1%',
         },
         {
           name: 'Ice cream sandwich',
@@ -80,7 +80,7 @@
           protein: 4.3,
           sodium: 129,
           calcium: '8%',
-          iron: '1%'
+          iron: '1%',
         },
         {
           name: 'Eclair',
@@ -90,7 +90,7 @@
           protein: 6.0,
           sodium: 337,
           calcium: '6%',
-          iron: '7%'
+          iron: '7%',
         },
         {
           name: 'Cupcake',
@@ -100,7 +100,7 @@
           protein: 4.3,
           sodium: 413,
           calcium: '3%',
-          iron: '8%'
+          iron: '8%',
         },
         {
           name: 'Gingerbread',
@@ -110,7 +110,7 @@
           protein: 3.9,
           sodium: 327,
           calcium: '7%',
-          iron: '16%'
+          iron: '16%',
         },
         {
           name: 'Jelly bean',
@@ -120,7 +120,7 @@
           protein: 0.0,
           sodium: 50,
           calcium: '0%',
-          iron: '0%'
+          iron: '0%',
         },
         {
           name: 'Lollipop',
@@ -130,7 +130,7 @@
           protein: 0,
           sodium: 38,
           calcium: '0%',
-          iron: '2%'
+          iron: '2%',
         },
         {
           name: 'Honeycomb',
@@ -140,7 +140,7 @@
           protein: 6.5,
           sodium: 562,
           calcium: '0%',
-          iron: '45%'
+          iron: '45%',
         },
         {
           name: 'Donut',
@@ -150,7 +150,7 @@
           protein: 4.9,
           sodium: 326,
           calcium: '2%',
-          iron: '22%'
+          iron: '22%',
         },
         {
           name: 'KitKat',
@@ -160,9 +160,9 @@
           protein: 7,
           sodium: 54,
           calcium: '12%',
-          iron: '6%'
-        }
-      ]
-    })
+          iron: '6%',
+        },
+      ],
+    }),
   }
 </script>

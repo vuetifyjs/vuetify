@@ -11,7 +11,7 @@ import VBtn from '../VBtn'
 import {
   createLocalVue,
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 import { compileToFunctions } from 'vue-template-compiler'
 
@@ -29,7 +29,7 @@ describe('VBtn.ts', () => {
       return mount(VBtn, {
         localVue,
         router,
-        ...options
+        ...options,
       })
     }
   })
@@ -41,26 +41,26 @@ describe('VBtn.ts', () => {
   it('should render component with color prop and match snapshot', () => {
     expect(mountFunction({
       propsData: {
-        color: 'green darken-1'
-      }
+        color: 'green darken-1',
+      },
     }).html()).toMatchSnapshot()
 
     expect(mountFunction({
       propsData: {
         color: 'green darken-1',
-        text: true
-      }
+        text: true,
+      },
     }).html()).toMatchSnapshot()
   })
 
   it('should render component with loader slot and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        loading: true
+        loading: true,
       },
       slots: {
-        loader: [compileToFunctions('<span>loader</span>')]
-      }
+        loader: [compileToFunctions('<span>loader</span>')],
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -69,8 +69,8 @@ describe('VBtn.ts', () => {
   it('should render component with loader and match snapshot', () => {
     const wrapper = mount(VBtn, {
       propsData: {
-        loading: true
-      }
+        loading: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -79,8 +79,8 @@ describe('VBtn.ts', () => {
   it('should render an <a> tag when using href prop', () => {
     const wrapper = mountFunction({
       propsData: {
-        href: 'http://www.google.com'
-      }
+        href: 'http://www.google.com',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -89,8 +89,8 @@ describe('VBtn.ts', () => {
   it('should render specified tag when using tag prop', () => {
     const wrapper = mountFunction({
       propsData: {
-        tag: 'a'
-      }
+        tag: 'a',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -104,9 +104,9 @@ describe('VBtn.ts', () => {
       provide: {
         btnToggle: {
           register,
-          unregister
-        }
-      }
+          unregister,
+        },
+      },
     })
 
     expect(register).toHaveBeenCalled()
@@ -117,8 +117,8 @@ describe('VBtn.ts', () => {
   it('should emit a click event', async () => {
     const wrapper = mountFunction({
       propsData: {
-        href: '#!'
-      }
+        href: '#!',
+      },
     })
 
     const click = jest.fn()
@@ -135,8 +135,8 @@ describe('VBtn.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         inputValue: true,
-        activeClass: 'foo'
-      }
+        activeClass: 'foo',
+      },
     })
 
     expect(wrapper.classes('foo')).toBe(true)
@@ -145,8 +145,8 @@ describe('VBtn.ts', () => {
   it('should have v-btn--depressed class when using depressed prop', () => {
     const wrapper = mountFunction({
       propsData: {
-        depressed: true
-      }
+        depressed: true,
+      },
     })
 
     expect(wrapper.classes('v-btn--depressed')).toBe(true)
@@ -156,8 +156,8 @@ describe('VBtn.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         depressed: true,
-        text: true
-      }
+        text: true,
+      },
     })
 
     expect(wrapper.classes('v-btn--text')).toBe(true)
@@ -166,8 +166,8 @@ describe('VBtn.ts', () => {
   it('should have v-btn--outlined and v-btn--depressed classes when using outlined prop', () => {
     const wrapper = mountFunction({
       propsData: {
-        outlined: true
-      }
+        outlined: true,
+      },
     })
 
     expect(wrapper.classes('v-btn--outlined')).toBe(true)
@@ -177,8 +177,8 @@ describe('VBtn.ts', () => {
   it('should have the correct icon classes', () => {
     const wrapper = mountFunction({
       propsData: {
-        icon: true
-      }
+        icon: true,
+      },
     })
     expect(wrapper.classes('v-btn--icon')).toBe(true)
 
@@ -210,11 +210,11 @@ describe('VBtn.ts', () => {
         btnToggle: {
           activeClass: 'foobar',
           register,
-          unregister
-        }
+          unregister,
+        },
       },
       methods: { toggle },
-      ref: 'link'
+      ref: 'link',
     })
 
     router.push('/foobar')
@@ -236,9 +236,9 @@ describe('VBtn.ts', () => {
     const toggle = jest.fn()
     const wrapper = mountFunction({
       provide: {
-        btnToggle: { register, unregister }
+        btnToggle: { register, unregister },
       },
-      methods: { toggle }
+      methods: { toggle },
     })
 
     wrapper.trigger('click')
@@ -248,8 +248,8 @@ describe('VBtn.ts', () => {
   it('should stringify non string|number values', () => {
     const wrapper = mountFunction({
       propsData: {
-        value: 'foo'
-      }
+        value: 'foo',
+      },
     })
 
     expect(wrapper.attributes('value')).toBe('foo')

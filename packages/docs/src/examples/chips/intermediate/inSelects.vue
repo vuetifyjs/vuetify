@@ -27,7 +27,7 @@
     data () {
       return {
         chips: ['Programming', 'Playing video games', 'Watching movies', 'Sleeping'],
-        items: ['Streaming', 'Eating']
+        items: ['Streaming', 'Eating'],
       }
     },
 
@@ -35,7 +35,7 @@
       remove (item) {
         this.chips.splice(this.chips.indexOf(item), 1)
         this.chips = [...this.chips]
-      }
-    }
+      },
+    },
   }
 </script>

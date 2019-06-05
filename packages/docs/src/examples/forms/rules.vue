@@ -48,7 +48,7 @@
       allowSpaces: false,
       match: 'Foobar',
       max: 0,
-      model: 'Foobar'
+      model: 'Foobar',
     }),
 
     computed: {
@@ -80,19 +80,19 @@
         }
 
         return rules
-      }
+      },
     },
 
     watch: {
       match: 'validateField',
       max: 'validateField',
-      model: 'validateField'
+      model: 'validateField',
     },
 
     methods: {
       validateField () {
         this.$refs.form.validate()
-      }
-    }
+      },
+    },
   }
 </script>

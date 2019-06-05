@@ -42,14 +42,14 @@
         'mdi-emoticon-happy',
         'mdi-emoticon-neutral',
         'mdi-emoticon-sad',
-        'mdi-emoticon-tongue'
-      ]
+        'mdi-emoticon-tongue',
+      ],
     }),
 
     computed: {
       icon () {
         return this.icons[this.iconIndex]
-      }
+      },
     },
 
     methods: {
@@ -70,8 +70,8 @@
         this.iconIndex === this.icons.length - 1
           ? this.iconIndex = 0
           : this.iconIndex++
-      }
-    }
+      },
+    },
   }
 </script>
 

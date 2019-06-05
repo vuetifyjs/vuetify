@@ -4,7 +4,7 @@ import VListItemAvatar from '../VListItemAvatar'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 // Types
@@ -17,7 +17,7 @@ describe('VListItemAvatar.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VListItemAvatar, {
-        ...options
+        ...options,
       })
     }
   })

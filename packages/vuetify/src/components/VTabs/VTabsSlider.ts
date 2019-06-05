@@ -13,7 +13,7 @@ export default mixins(Colorable).extend({
 
   render (h): VNode {
     return h('div', this.setBackgroundColor(this.color, {
-      staticClass: 'v-tabs-slider'
+      staticClass: 'v-tabs-slider',
     }))
-  }
+  },
 })

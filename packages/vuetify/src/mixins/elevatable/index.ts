@@ -4,7 +4,7 @@ export default Vue.extend({
   name: 'elevatable',
 
   props: {
-    elevation: [Number, String]
+    elevation: [Number, String],
   },
 
   computed: {
@@ -15,6 +15,6 @@ export default Vue.extend({
       if (!this.computedElevation) return {}
 
       return { [`elevation-${this.computedElevation}`]: true }
-    }
-  }
+    },
+  },
 })

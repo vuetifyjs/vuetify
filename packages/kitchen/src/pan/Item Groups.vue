@@ -119,6 +119,6 @@
   export default {
     name: 'ItemGroups',
 
-    data: () => ({})
+    data: () => ({}),
   }
 </script>

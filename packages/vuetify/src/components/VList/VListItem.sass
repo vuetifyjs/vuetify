@@ -3,8 +3,10 @@
 
 // Theme
 +theme(v-list-item) using ($material)
+  &--disabled
+    color: map-deep-get($material, 'text', 'disabled')
 
-  &:not(.v-list-item--active)
+  &:not(.v-list-item--active):not(.v-list-item--disabled)
     color: map-deep-get($material, 'text', 'primary') !important
 
   .v-list-item__mask
@@ -167,6 +169,7 @@
     content: ''
     left: 0
     opacity: 0
+    pointer-events: none
     position: absolute
     right: 0
     top: 0

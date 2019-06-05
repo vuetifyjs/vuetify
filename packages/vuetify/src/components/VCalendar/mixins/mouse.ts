@@ -34,7 +34,7 @@ export default Vue.extend({
         ['mouseleave' + suffix]: { event: 'mouseleave' },
         ['touchstart' + suffix]: { event: 'touchstart' },
         ['touchmove' + suffix]: { event: 'touchmove' },
-        ['touchend' + suffix]: { event: 'touchend' }
+        ['touchend' + suffix]: { event: 'touchend' },
       }, getEvent)
     },
     getMouseEventHandlers (events: MouseEvents, getEvent: MouseHandler): MouseEventsMap {
@@ -78,6 +78,6 @@ export default Vue.extend({
       }
 
       return on
-    }
-  }
+    },
+  },
 })

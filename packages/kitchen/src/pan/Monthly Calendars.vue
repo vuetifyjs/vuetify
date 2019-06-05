@@ -61,6 +61,6 @@
   export default {
     name: 'MonthlyCalendars',
 
-    data: () => ({})
+    data: () => ({}),
   }
 </script>

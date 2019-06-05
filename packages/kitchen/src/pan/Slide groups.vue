@@ -169,6 +169,6 @@
   export default {
     name: 'SlideGroups',
 
-    data: () => ({})
+    data: () => ({}),
   }
 </script>

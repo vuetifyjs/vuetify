@@ -6,6 +6,6 @@ export { VTimeline, VTimelineItem }
 export default {
   $_vuetify_subcomponents: {
     VTimeline,
-    VTimelineItem
-  }
+    VTimelineItem,
+  },
 }

@@ -2,13 +2,13 @@ import Times from '../times'
 import {
   mount,
   Wrapper,
-  MountOptions
+  MountOptions,
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../../util/mixins'
 import { VTimestamp } from '../../util/timestamp'
 
 const Mock = Times.extend({
-  render: h => h('div')
+  render: h => h('div'),
 })
 
 describe('times.ts', () => {
@@ -23,8 +23,8 @@ describe('times.ts', () => {
   it('should parse timestamp', async () => {
     const wrapper = mountFunction({
       propsData: {
-        now: '2019-02-08'
-      }
+        now: '2019-02-08',
+      },
     })
 
     expect(wrapper.vm.parsedNow).toBeDefined()
@@ -41,7 +41,7 @@ describe('times.ts', () => {
       year: '2019',
       month: '2',
       day: '8',
-      weekday: '4'
+      weekday: '4',
     }
     wrapper.vm.updateDay(now as unknown as VTimestamp, target as unknown as VTimestamp)
     expect(target).toEqual(now)
@@ -57,7 +57,7 @@ describe('times.ts', () => {
       year: '2019',
       month: '2',
       day: '8',
-      weekday: '4'
+      weekday: '4',
     }
     wrapper.vm.updateDay(now as unknown as VTimestamp, target as unknown as VTimestamp)
     expect(target).not.toEqual(now)
@@ -71,7 +71,7 @@ describe('times.ts', () => {
     const now = {
       time: '08:30',
       hour: '8',
-      minute: '30'
+      minute: '30',
     }
     wrapper.vm.updateTime(now as unknown as VTimestamp, target as unknown as VTimestamp)
     expect(target).not.toEqual(now)

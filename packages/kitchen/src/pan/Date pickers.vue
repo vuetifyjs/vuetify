@@ -412,7 +412,7 @@
       dates: ['2019-01-16', '2019-02-25', '2019-02-26', '2019-02-13'],
       model: '2019-01-16',
       modelMM: '2019-01-16',
-      landscape: false
+      landscape: false,
     }),
 
     methods: {
@@ -424,7 +424,7 @@
       },
       shortHeaderFormat (date) {
         return date.substr(0, 7)
-      }
-    }
+      },
+    },
   }
 </script>

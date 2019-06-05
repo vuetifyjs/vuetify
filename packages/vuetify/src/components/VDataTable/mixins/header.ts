@@ -2,6 +2,7 @@ import { VDataTable } from '../'
 import { DataOptions } from '../../VData/VData'
 import VIcon from '../../VIcon'
 import VSimpleCheckbox from '../../VCheckbox/VSimpleCheckbox'
+import ripple from '../../../directives/ripple'
 
 import Vue, { PropType } from 'vue'
 import mixins from '../../../util/mixins'
@@ -15,7 +16,8 @@ export interface TableHeader {
   divider?: boolean
   class?: string | string[]
   width?: string | number
-  filter?: (value: any, search: string, item: any) => boolean
+  filter?: (value: any, search: string | null, item: any) => boolean
+  filterExclusive?: boolean
   sort?: compareFn
 }
 
@@ -26,10 +28,15 @@ interface options extends Vue {
 }
 
 export default mixins<options>().extend({
+  // https://github.com/vuejs/vue/issues/6872
+  directives: {
+    ripple,
+  },
+
   props: {
     headers: {
       type: Array as PropType<TableHeader[]>,
-      required: true
+      required: true,
     },
     options: {
       type: Object as PropType<DataOptions>,
@@ -41,16 +48,17 @@ export default mixins<options>().extend({
         groupBy: [],
         groupDesc: [],
         multiSort: false,
-        mustSort: false
-      })
+        mustSort: false,
+      }),
     },
     sortIcon: {
       type: String,
-      default: '$vuetify.icons.sort'
+      default: '$vuetify.icons.sort',
     },
     everyItem: Boolean,
     someItems: Boolean,
-    showGroupBy: Boolean
+    showGroupBy: Boolean,
+    singleSelect: Boolean,
   },
 
   methods: {
@@ -58,11 +66,11 @@ export default mixins<options>().extend({
       const data = {
         props: {
           value: this.everyItem,
-          indeterminate: !this.everyItem && this.someItems
+          indeterminate: !this.everyItem && this.someItems,
         },
         on: {
-          input: (v: boolean) => this.$emit('toggle-select-all', v)
-        }
+          input: (v: boolean) => this.$emit('toggle-select-all', v),
+        },
       }
 
       if (this.$scopedSlots['data-table-select']) {
@@ -71,11 +79,15 @@ export default mixins<options>().extend({
 
       return this.$createElement(VSimpleCheckbox, {
         staticClass: 'v-data-table__checkbox',
-        ...data
+        ...data,
       })
     },
     genSortIcon () {
-      return this.$createElement(VIcon, [this.sortIcon])
-    }
-  }
+      return this.$createElement(VIcon, {
+        props: {
+          size: 18,
+        },
+      }, [this.sortIcon])
+    },
+  },
 })

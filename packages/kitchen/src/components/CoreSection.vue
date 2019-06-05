@@ -10,7 +10,7 @@
   export default {
     name: 'CoreSection',
     props: {
-      center: Boolean
-    }
+      center: Boolean,
+    },
   }
 </script>

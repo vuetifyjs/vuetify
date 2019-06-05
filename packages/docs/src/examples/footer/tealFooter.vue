@@ -39,9 +39,9 @@
         'fab fa-twitter',
         'fab fa-google-plus',
         'fab fa-linkedin',
-        'fab fa-instagram'
-      ]
-    })
+        'fab fa-instagram',
+      ],
+    }),
   }
 </script>
 

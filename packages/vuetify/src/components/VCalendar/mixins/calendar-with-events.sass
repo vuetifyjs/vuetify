@@ -1,15 +1,13 @@
 @import '../../../styles/styles.sass'
+@import '../_variables.scss'
 
-v-calendar-events($material)
++theme(v-calendar-events) using ($material)
   .v-event-timed
-    border: 1px solid $material.calendar.event-outline !important
-
-theme(v-calendar-events, "v-calendar-events")
+    border: 1px solid !important
 
 .v-calendar
   .v-event
     position: relative
-    margin-bottom: $calendar-event-bottom-space
     overflow: hidden
     text-overflow: ellipsis
     white-space: nowrap
