@@ -9,6 +9,14 @@
       "header": "### Onboarding",
       "desc": "`v-window` makes it easy to create custom components such as a different styled stepper."
     },
+    "vertical": {
+      "header": "### Vertical",
+      "desc": "`v-window` can be vertical. Vertical windows have Y axis transition instead of X one."
+    },
+    "reverse": {
+      "header": "### Reverse",
+      "desc": "Reverse `v-window` always displays reverse transition."
+    },
     "account": {
       "header": "### Account creation",
       "desc": "Create rich forms with smooth animations. `v-window` automatically tracks the current selection index to automatically change the transition direction. This can be manually controlled with the **reverse** prop."
