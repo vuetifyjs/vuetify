@@ -48,6 +48,10 @@
     "shaped": {
       "header": "### Shaped lists",
       "desc": "Shaped lists have rounded borders on one side of the `v-list-item`."
+    },
+    "disabled": {
+      "header": "### Disabled lists",
+      "desc": "You cannot interact with disabled `v-list`."
     }
   },
   "props": {

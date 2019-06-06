@@ -41,6 +41,7 @@
         {
           "type": "examples",
           "value": [
+            "simple/disabled",
             "simple/shaped",
             "intermediate/avatarTitleAndAction",
             "intermediate/iconTwoLinesAndAction",
