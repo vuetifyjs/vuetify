@@ -41,17 +41,17 @@
         {
           "type": "examples",
           "value": [
-            "avatarTitleAndAction",
-            "iconTwoLinesAndAction",
-            "avatarThreeLines",
-            "avatarSubheaderTitleAndAction",
-            "subheadingsAndDividers",
-            "cardList",
-            "titleSubtitleActionsAndActionText",
-            "actionTitleAndSubtitle",
-            "expansionLists",
-            "nav",
-            "shaped"
+            "simple/shaped",
+            "intermediate/avatarTitleAndAction",
+            "intermediate/iconTwoLinesAndAction",
+            "intermediate/avatarThreeLines",
+            "intermediate/avatarSubheaderTitleAndAction",
+            "intermediate/subheadingsAndDividers",
+            "intermediate/cardList",
+            "intermediate/titleSubtitleActionsAndActionText",
+            "intermediate/actionTitleAndSubtitle",
+            "intermediate/expansionLists",
+            "intermediate/nav"
           ]
         }
       ]
