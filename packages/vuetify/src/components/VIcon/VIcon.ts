@@ -134,7 +134,9 @@ const VIcon = mixins(
         viewBox: '0 0 24 24',
         height: '24',
         width: '24',
-        role: 'icon',
+        role: 'img',
+        'aria-hidden': !this.$attrs['aria-label'],
+        'aria-label': this.$attrs['aria-label'],
       }
 
       const fontSize = this.getSize()
