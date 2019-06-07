@@ -29,15 +29,29 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "absolute",
-            "absoluteWithoutActivator",
-            "menuActivatorTooltip",
-            "hover",
-            "menus",
-            "customTransition",
-            "popover"
+            "simple/absolute",
+            "simple/menuActivatorTooltip",
+            "simple/hover",
+            "simple/customTransition",
+            "simple/disabled",
+            "simple/offsetX",
+            "simple/offsetY",
+            "simple/closeOnClick",
+            "simple/closeOnContentClick",
+            "intermediate/absoluteWithoutActivator",
+            "intermediate/menus",
+            "intermediate/popover"
           ]
         }
       ]
