@@ -17,8 +17,8 @@
       return {
         picker: new Date().toISOString().substr(0, 10),
         landscape: false,
-        reactive: false
+        reactive: false,
       }
-    }
+    },
   }
 </script>
