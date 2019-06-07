@@ -45,6 +45,7 @@
             "simple/hover",
             "simple/customTransition",
             "simple/disabled",
+            "simple/offsetX",
             "intermediate/absoluteWithoutActivator",
             "intermediate/menus",
             "intermediate/popover"

@@ -16,6 +16,11 @@
       "desc": "You can disable the menu. Disabled menus can't be opened.",
       "uninverted": true
     },
+    "offsetX": {
+      "header": "### X offset",
+      "desc": "Menu can be offsetted by X axis to make activator visible.",
+      "uninverted": true
+    },
     "absoluteWithoutActivator": {
       "header": "### Absolute position without activator",
       "desc": "Menus can also be used without an activator by using `absolute` together with the props `position-x` and `position-y`. Try right-clicking anywhere on the image.",
