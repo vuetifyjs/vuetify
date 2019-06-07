@@ -26,7 +26,7 @@
         white--text
         xs12
       >
-        &copy;2018 — <strong>Vuetify</strong>
+        {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
       </v-flex>
     </v-layout>
   </v-footer>
