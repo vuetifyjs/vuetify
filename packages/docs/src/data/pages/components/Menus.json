@@ -46,6 +46,7 @@
             "simple/customTransition",
             "simple/disabled",
             "simple/offsetX",
+            "simple/offsetY",
             "intermediate/absoluteWithoutActivator",
             "intermediate/menus",
             "intermediate/popover"
