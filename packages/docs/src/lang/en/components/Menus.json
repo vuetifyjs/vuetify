@@ -21,7 +21,7 @@
       "desc": "Menu can be offsetted by X axis to make activator visible.",
       "uninverted": true
     },
-    "offsety": {
+    "offsetY": {
       "header": "### Y offset",
       "desc": "Menu can be offsetted by Y axis to make activator visible.",
       "uninverted": true
