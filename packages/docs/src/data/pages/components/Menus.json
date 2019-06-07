@@ -47,6 +47,7 @@
             "simple/disabled",
             "simple/offsetX",
             "simple/offsetY",
+            "simple/closeOnClick",
             "intermediate/absoluteWithoutActivator",
             "intermediate/menus",
             "intermediate/popover"

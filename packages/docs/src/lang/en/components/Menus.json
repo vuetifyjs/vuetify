@@ -26,6 +26,11 @@
       "desc": "Menu can be offsetted by Y axis to make activator visible.",
       "uninverted": true
     },
+    "closeOnClick": {
+      "header": "### Close on click",
+      "desc": "Menu can be closed when lost focus.",
+      "uninverted": true
+    },
     "absoluteWithoutActivator": {
       "header": "### Absolute position without activator",
       "desc": "Menus can also be used without an activator by using `absolute` together with the props `position-x` and `position-y`. Try right-clicking anywhere on the image.",
