@@ -72,7 +72,7 @@ describe('VSelect.ts', () => {
 
     const item = wrapper.find('.v-list-item--disabled')
 
-    expect(item.element.getAttribute('disabled')).toBe('disabled')
+    expect(item.element.tabIndex).toBe(-1)
   })
 
   it('should render v-select correctly when using v-list-item in item scope slot', async () => {

@@ -197,7 +197,11 @@ export default VSelect.extend({
   },
 
   methods: {
-    onFilteredItemsChanged (val: never[]) {
+    onFilteredItemsChanged (val: never[], oldVal: never[]) {
+      // TODO: How is the watcher triggered
+      // for duplicate items? no idea
+      if (val === oldVal) return
+
       this.$nextTick(() => {
         this.setMenuIndex(val.length > 0 && (val.length === 1 || this.autoSelectFirst) ? 0 : -1)
       })
@@ -301,11 +305,6 @@ export default VSelect.extend({
 
       this.activateMenu()
     },
-    onEnterDown () {
-      // Avoid invoking this method
-      // will cause updateSelf to
-      // be called emptying search
-    },
     onInput (e: Event) {
       if (
         this.selectedIndex > -1 ||
@@ -320,6 +319,17 @@ export default VSelect.extend({
 
       this.internalSearch = value
       this.badInput = target.validity && target.validity.badInput
+    },
+    onKeyDown (e: KeyboardEvent) {
+      const keyCode = e.keyCode
+
+      VSelect.options.methods.onKeyDown.call(this, e)
+
+      // The ordering is important here
+      // allows new value to be updated
+      // and then moves the index to the
+      // proper location
+      this.changeSelectedIndex(keyCode)
     },
     onTabDown (e: KeyboardEvent) {
       VSelect.options.methods.onTabDown.call(this, e)

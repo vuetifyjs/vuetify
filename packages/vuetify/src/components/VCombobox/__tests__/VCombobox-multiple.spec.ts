@@ -109,12 +109,12 @@ describe('VCombobox.ts', () => {
 
     const input = wrapper.find('input')
     const element = input.element as HTMLInputElement
-    const menu = wrapper.find('.v-menu')
 
     input.trigger('focus')
     element.value = 'b'
     input.trigger('input')
-    menu.trigger('keydown.down')
+    // First down opens the menu
+    input.trigger('keydown.down')
 
     // Give DOM time to update
     // list tile classes
@@ -122,10 +122,11 @@ describe('VCombobox.ts', () => {
 
     expect(wrapper.vm.isMenuActive).toBe(true)
 
+    // Second down moves the index
+    input.trigger('keydown.down')
     input.trigger('keydown.tab')
 
     expect(change).toHaveBeenCalledWith(['bar'])
-    expect(wrapper.vm.getMenuIndex()).toBe(0)
   })
 
   it('should add a tag on tab using the current searchValue', async () => {
@@ -134,15 +135,18 @@ describe('VCombobox.ts', () => {
     })
 
     const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
 
     input.trigger('focus')
+    element.value = 'ba'
+    input.trigger('input')
 
-    wrapper.setProps({ searchInput: 'ba' })
     input.trigger('keydown.tab')
     await wrapper.vm.$nextTick()
     expect(change).toHaveBeenCalledWith(['ba'])
 
-    wrapper.setProps({ searchInput: 'it' })
+    element.value = 'it'
+    input.trigger('input')
     input.trigger('keydown.tab')
     await wrapper.vm.$nextTick()
     expect(change).toHaveBeenCalledWith(['ba', 'it'])

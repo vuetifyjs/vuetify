@@ -191,7 +191,7 @@ export default baseMixins.extend<options>().extend({
     const { tag, data } = this.generateRouteLink()
 
     if (tag === 'button') data.attrs!.type = this.type
-
+    if (this.disabled) data.attrs!.disabled = 'disabled'
     data.attrs!.value = ['string', 'number'].includes(typeof this.value)
       ? this.value
       : JSON.stringify(this.value)

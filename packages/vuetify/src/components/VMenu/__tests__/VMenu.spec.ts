@@ -109,55 +109,6 @@ describe('VMenu.ts', () => {
     expect(wrapper.vm.isActive).toBe(false)
   })
 
-  it('should close menu when tab is pressed', async () => {
-    const wrapper = mountFunction()
-
-    wrapper.vm.isActive = true
-    await wrapper.vm.$nextTick()
-    wrapper.trigger(`keydown.tab`)
-    await new Promise(resolve => setTimeout(resolve))
-    expect(wrapper.vm.isActive).toBe(false)
-
-    wrapper.setProps({ disableKeys: true })
-    wrapper.vm.isActive = true
-    await wrapper.vm.$nextTick()
-    expect(wrapper.vm.isActive).toBe(true)
-    wrapper.trigger(`keydown.tab`)
-    await wrapper.vm.$nextTick()
-    expect(wrapper.vm.isActive).toBe(true)
-
-    expect('Unable to locate target [data-app]').toHaveBeenTipped()
-  })
-
-  // TODO: figure out how to simulate tab focus
-  it.skip('should not close on tab if child is focused', async () => {
-    const wrapper = mount({
-      render: h => h('div', [
-        h(VMenu, {
-          ref: 'menu',
-          props: {
-            value: true,
-            attach: true,
-          },
-        }, [h('input', { class: 'first' }), h('input', { class: 'second' })]),
-        h('input', { class: 'third' }),
-      ]),
-    }, { attachToDocument: true })
-    const menu = wrapper.find({ name: 'v-menu', render: () => null })
-    const input = wrapper.find('input')
-
-    input[0].element.focus()
-    input[0].trigger('keydown.tab')
-    await wrapper.vm.$nextTick()
-    expect(menu.vm.isActive).toBe(true)
-    expect(document.activeElement).toBe(input[1].element)
-
-    input[1].trigger('keydown.tab')
-    await wrapper.vm.$nextTick()
-    expect(menu.vm.isActive).toBe(false)
-    expect(document.activeElement).toBe(input[2].element)
-  })
-
   it('should show the menu on mounted', () => {
     const activate = jest.fn()
     mountFunction({

@@ -564,9 +564,6 @@ export default baseMixins.extend<options>().extend({
         this.$emit('focus')
       }
     },
-    onEnterDown (e: Event) {
-      this.onBlur(e)
-    },
     onEscDown (e: Event) {
       e.preventDefault()
       if (this.isMenuActive) {
