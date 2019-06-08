@@ -52,6 +52,7 @@
           "value": [
             "simple/disabled",
             "simple/shaped",
+            "simple/dense",
             "intermediate/avatarTitleAndAction",
             "intermediate/iconTwoLinesAndAction",
             "intermediate/avatarThreeLines",

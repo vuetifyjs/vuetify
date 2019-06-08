@@ -52,6 +52,10 @@
     "disabled": {
       "header": "### Disabled lists",
       "desc": "You cannot interact with disabled `v-list`."
+    },
+    "dense": {
+      "header": "### Dense",
+      "desc": "`v-list` can be lowered with `dense` property."
     }
   },
   "props": {
