@@ -11,6 +11,31 @@
       "desc": "Menus can also be placed absolutely on top of the activator element using the `absolute` prop. Try clicking anywhere on the image.",
       "uninverted": true
     },
+    "disabled": {
+      "header": "### Disabled",
+      "desc": "You can disable the menu. Disabled menus can't be opened.",
+      "uninverted": true
+    },
+    "offsetX": {
+      "header": "### X offset",
+      "desc": "Menu can be offsetted by X axis to make activator visible.",
+      "uninverted": true
+    },
+    "offsetY": {
+      "header": "### Y offset",
+      "desc": "Menu can be offsetted by Y axis to make activator visible.",
+      "uninverted": true
+    },
+    "closeOnClick": {
+      "header": "### Close on click",
+      "desc": "Menu can be closed when lost focus.",
+      "uninverted": true
+    },
+    "closeOnContentClick": {
+      "header": "### Close on content click",
+      "desc": "You can configure whether `v-menu` should be closed when clicked on its content.",
+      "uninverted": true
+    },
     "absoluteWithoutActivator": {
       "header": "### Absolute position without activator",
       "desc": "Menus can also be used without an activator by using `absolute` together with the props `position-x` and `position-y`. Try right-clicking anywhere on the image.",

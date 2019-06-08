@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue.js 2 Semantic Component Framework",
-  "version": "2.0.0-beta.0",
+  "version": "2.0.0-beta.1",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -40,7 +40,7 @@
     "test:coverage": "yarn test --coverage",
     "test:types": "tsc -p ./types/test/tsconfig.json",
     "lint": "concurrently -n \"tsc,tslint,eslint,types\" --kill-others-on-fail \"tsc --noEmit --pretty\" \"tslint -p . src/**/*.ts -t verbose\" \"eslint --ext .js,.ts src\" \"yarn test:types\"",
-    "lint:fix": "concurrently -n \"tsc,tslint,eslint,types\" --kill-others-on-fail \"tsc --noEmit --pretty\" \"tslint --fix -p . -c .tslint.js src/**/*.ts -t stylish\" \"eslint --fix --ext .js,.ts src\" \"yarn test:types\""
+    "lint:fix": "concurrently -n \"tsc,tslint,eslint,types\" \"tsc --noEmit --pretty\" \"tslint --fix -p . src/**/*.ts -t verbose\" \"eslint --fix --ext .js,.ts src\" \"yarn test:types\""
   },
   "devDependencies": {
     "@mdi/js": "^3.5.95",

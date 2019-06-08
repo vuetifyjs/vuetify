@@ -1,14 +1,25 @@
 export default {
+  close: 'Close',
   dataIterator: {
-    rowsPerPageText: 'Елементів на сторінці:',
-    rowsPerPageAll: 'Всі',
     pageText: '{0}-{1} з {2}',
     noResultsText: 'В результаті пошуку нічого не знайдено',
-    nextPage: 'Наступна сторінка',
-    prevPage: 'Попередня сторінка',
+    loadingText: 'Loading item...',
   },
   dataTable: {
-    rowsPerPageText: 'Рядків на сторінці:',
+    itemsPerPageText: 'Рядків на сторінці:',
+    ariaLabel: {
+      sortDescending: ': Sorted descending. Activate to remove sorting.',
+      sortAscending: ': Sorted ascending. Activate to sort descending.',
+      sortNone: ': Not sorted. Activate to sort ascending.',
+    },
+  },
+  dataFooter: {
+    itemsPerPageText: 'Елементів на сторінці:',
+    itemsPerPageAll: 'Всі',
+    nextPage: 'Наступна сторінка',
+    prevPage: 'Попередня сторінка',
+    firstPage: 'Перша сторінка',
+    lastPage: 'Остання сторінка',
   },
   noDataText: 'Немає даних для відображення',
   carousel: {

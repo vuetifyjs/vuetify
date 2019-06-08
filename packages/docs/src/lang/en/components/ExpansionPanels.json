@@ -9,13 +9,25 @@
       "header": "### External control",
       "desc": "Expansion panels can be controlled externally by modifying the `v-model`. Its value corresponds to a zero-based index of the currently opened expansion panel content. If `multiple` prop is used then it is an array containing the indices of the open items."
     },
-    "disabledAndReadonly": {
-      "header": "### Disabled and readonly",
-      "desc": "Both the expansion-panel and its content supports the `disabled` and `readonly` props."
+    "disabled": {
+      "header": "### Disabled",
+      "desc": "Both the expansion-panel and its content can be disabled using the `disabled` prop."
+    },
+    "readonly": {
+      "header": "### Readonly",
+      "desc": "`readonly` prop does the same thing as `disabled`, but it doesn't touch styles."
     },
     "popout": {
-      "header": "### Popout, Inset & Accordion",
-      "desc": "The expansion-panel also has three alternative designs you can activate with the props **popout**, **inset** and **accordion**. Each displays expanded content differently."
+      "header": "### Popout",
+      "desc": "The expansion-panel also has **popout** design. With it, expansion-panel is enlargened when activated."
+    },
+    "inset": {
+      "header": "### Inset",
+      "desc": "**inset** expansion-panel becomes smaller when activated."
+    },
+    "accordion": {
+      "header": "### Accordion",
+      "desc": "**accordion** expansion-panel hasn't got margins around active panel."
     },
     "customIcons": {
       "header": "### Custom icon",

@@ -1,14 +1,25 @@
 export default {
+  close: 'Close',
   dataIterator: {
-    rowsPerPageText: 'Élements par page:',
-    rowsPerPageAll: 'Tous',
     pageText: '{0}-{1} de {2}',
     noResultsText: 'Aucun enregistrement correspondant trouvé',
-    nextPage: 'Page suivante',
-    prevPage: 'Page précédente',
+    loadingText: 'Loading item...',
   },
   dataTable: {
-    rowsPerPageText: 'Lignes par page:',
+    itemsPerPageText: 'Lignes par page:',
+    ariaLabel: {
+      sortDescending: ': Sorted descending. Activate to remove sorting.',
+      sortAscending: ': Sorted ascending. Activate to sort descending.',
+      sortNone: ': Not sorted. Activate to sort ascending.',
+    },
+  },
+  dataFooter: {
+    itemsPerPageText: 'Élements par page:',
+    itemsPerPageAll: 'Tous',
+    nextPage: 'Page suivante',
+    prevPage: 'Page précédente',
+    firstPage: 'Page première',
+    lastPage: 'Page Dernière',
   },
   noDataText: 'Aucune donnée disponible',
   carousel: {
