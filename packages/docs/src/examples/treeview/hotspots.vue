@@ -15,11 +15,10 @@
             v-model="tree"
             :load-children="fetch"
             :items="items"
-            activatable
-            active-class="grey lighten-4 indigo--text"
             selected-color="indigo"
             open-on-click
             selectable
+            return-object
             expand-icon="mdi-chevron-down"
             on-icon="mdi-bookmark"
             off-icon="mdi-bookmark-outline"
@@ -37,7 +36,7 @@
       >
         <v-card-text>
           <div
-            v-if="selections.length === 0"
+            v-if="tree.length === 0"
             key="title"
             class="title font-weight-light grey--text pa-3 text-xs-center"
           >
@@ -49,11 +48,12 @@
             hide-on-leave
           >
             <v-chip
-              v-for="(selection, i) in selections"
+              v-for="(selection, i) in tree"
               :key="i"
               color="grey"
               dark
               small
+              class="ma-1"
             >
               <v-icon left small>mdi-beer</v-icon>
               {{ selection.name }}
@@ -109,19 +109,6 @@
           name: 'All Breweries',
           children,
         }]
-      },
-      selections () {
-        const selections = []
-
-        for (const leaf of this.tree) {
-          const brewery = this.breweries.find(brewery => brewery.id === leaf)
-
-          if (!brewery) continue
-
-          selections.push(brewery)
-        }
-
-        return selections
       },
       shouldShowTree () {
         return this.breweries.length > 0 && !this.isLoading
