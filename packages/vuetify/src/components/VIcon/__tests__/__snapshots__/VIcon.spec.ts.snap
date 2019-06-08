@@ -6,7 +6,8 @@ exports[`VIcon for component icon should render an svg icon 1`] = `
      viewbox="0 0 24 24"
      height="24"
      width="24"
-     role="icon"
+     role="img"
+     aria-hidden="true"
      class="v-icon v-icon--svg theme--light"
 >
   <path d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z">
@@ -21,7 +22,8 @@ exports[`VIcon for component icon should render an svg icon 2`] = `
      viewbox="0 0 24 24"
      height="36px"
      width="36px"
-     role="icon"
+     role="img"
+     aria-hidden="true"
      class="v-icon v-icon--svg theme--light"
      style="font-size: 36px; height: 36px; width: 36px;"
 >
