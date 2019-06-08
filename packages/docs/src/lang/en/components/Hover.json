@@ -9,6 +9,10 @@
       "header": "### Disabled",
       "desc": "The `disabled` prop disables the hover functionality."
     },
+    "hoverList": {
+      "header": "### Hover list",
+      "desc": "hovering list"
+    },
     "transition": {
       "header": "### Transitions",
       "desc": "Create highly customized components that respond to user interaction."
