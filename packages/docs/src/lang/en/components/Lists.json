@@ -56,6 +56,10 @@
     "dense": {
       "header": "### Dense",
       "desc": "`v-list` can be lowered with `dense` property."
+    },
+    "flat": {
+      "header": "### Flat",
+      "desc": "Items don't change when selected in `v-list` with `flat` property."
     }
   },
   "props": {

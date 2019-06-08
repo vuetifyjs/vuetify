@@ -53,6 +53,7 @@
             "simple/disabled",
             "simple/shaped",
             "simple/dense",
+            "simple/flat",
             "intermediate/avatarTitleAndAction",
             "intermediate/iconTwoLinesAndAction",
             "intermediate/avatarThreeLines",
