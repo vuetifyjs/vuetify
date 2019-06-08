@@ -12,7 +12,7 @@
             slot-scope="{ hover }"
             :elevation="hover ? 12 : 2"
             height="300"
-            width="350"
+            max-width="350"
             class="mx-auto"
           >
             <v-card-text class="my-3 text-xs-center title">Hover over me!</v-card-text>

@@ -37,6 +37,7 @@
           "type": "examples",
           "value": [
             "simple/disabled",
+            "simple/openAndCloseDelay",
             "complex/hoverList",
             "complex/transition"
           ]
