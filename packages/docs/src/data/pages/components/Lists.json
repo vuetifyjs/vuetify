@@ -54,6 +54,7 @@
             "simple/shaped",
             "simple/dense",
             "simple/flat",
+            "simple/rounded",
             "intermediate/avatarTitleAndAction",
             "intermediate/iconTwoLinesAndAction",
             "intermediate/avatarThreeLines",

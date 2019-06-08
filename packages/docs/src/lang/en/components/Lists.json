@@ -60,6 +60,10 @@
     "flat": {
       "header": "### Flat",
       "desc": "Items don't change when selected in `v-list` with `flat` property."
+    },
+    "rounded": {
+      "header": "### Rounded",
+      "desc": "You can make `v-list` items rounded."
     }
   },
   "props": {
