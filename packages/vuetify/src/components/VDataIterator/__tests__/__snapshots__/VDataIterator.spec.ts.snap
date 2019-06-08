@@ -24,7 +24,7 @@ exports[`VDataIterator.ts should render and match snapshot 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-4"
+               aria-owns="computed-id-4"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -113,7 +113,7 @@ exports[`VDataIterator.ts should render and match snapshot with data 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-24"
+               aria-owns="computed-id-24"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -193,7 +193,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-43"
+               aria-owns="computed-id-43"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -273,7 +273,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-43"
+               aria-owns="computed-id-43"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -353,7 +353,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-43"
+               aria-owns="computed-id-43"
                class="v-input__slot"
           >
             <div class="v-select__slot">

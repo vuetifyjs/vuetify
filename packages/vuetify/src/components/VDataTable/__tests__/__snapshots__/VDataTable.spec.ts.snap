@@ -28,7 +28,7 @@ exports[`VDataTable.ts should render 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-6"
+               aria-owns="computed-id-6"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -152,7 +152,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-342"
+               aria-owns="computed-id-342"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -356,7 +356,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-368"
+               aria-owns="computed-id-368"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -642,7 +642,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-85"
+               aria-owns="computed-id-85"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -830,7 +830,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-59"
+               aria-owns="computed-id-59"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -1117,7 +1117,7 @@ exports[`VDataTable.ts should render with data 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-32"
+               aria-owns="computed-id-32"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -1299,7 +1299,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-319"
+               aria-owns="computed-id-319"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -1724,7 +1724,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-223"
+               aria-owns="computed-id-223"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -2095,7 +2095,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-292"
+               aria-owns="computed-id-292"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -2297,7 +2297,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-251"
+               aria-owns="computed-id-251"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -2609,7 +2609,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-176"
+               aria-owns="computed-id-176"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -2944,7 +2944,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-116"
+               aria-owns="computed-id-116"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -3279,7 +3279,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-116"
+               aria-owns="computed-id-116"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -3641,7 +3641,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-148"
+               aria-owns="computed-id-148"
                class="v-input__slot"
           >
             <div class="v-select__slot">

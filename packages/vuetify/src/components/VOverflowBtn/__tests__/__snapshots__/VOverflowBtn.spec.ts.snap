@@ -7,7 +7,7 @@ exports[`VOverflowBtn.js should use default autocomplete selections 1`] = `
     <div role="combobox"
          aria-haspopup="listbox"
          aria-expanded="false"
-         aria-owns="computed-1"
+         aria-owns="computed-id-1"
          class="v-input__slot"
     >
       <div class="v-select__slot">
@@ -54,7 +54,7 @@ exports[`VOverflowBtn.js should use default autocomplete selections 2`] = `
     <div role="combobox"
          aria-haspopup="listbox"
          aria-expanded="false"
-         aria-owns="computed-1"
+         aria-owns="computed-id-1"
          class="v-input__slot"
     >
       <div class="v-select__slot">

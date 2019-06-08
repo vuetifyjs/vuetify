@@ -145,9 +145,9 @@ export default baseMixins.extend<options>().extend({
       }
     },
     computedId (): string {
-      const id = this.$attrs.id || 'computed'
+      if (this.$attrs.id) return this.$attrs.id
 
-      return `${id}-${this._uid}`
+      return `computed-id-${this._uid}`
     },
     /* Used by other components to overwrite */
     computedItems (): object[] {

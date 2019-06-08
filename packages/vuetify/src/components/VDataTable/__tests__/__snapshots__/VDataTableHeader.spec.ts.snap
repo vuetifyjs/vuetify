@@ -527,7 +527,7 @@ exports[`VDataTableHeader.ts mobile should render 1`] = `
             <div role="button"
                  aria-haspopup="listbox"
                  aria-expanded="false"
-                 aria-owns="computed-37"
+                 aria-owns="computed-id-37"
                  class="v-input__slot"
             >
               <div class="v-select__slot">
@@ -589,7 +589,7 @@ exports[`VDataTableHeader.ts mobile should render with data-table-select header 
             <div role="button"
                  aria-haspopup="listbox"
                  aria-expanded="false"
-                 aria-owns="computed-125"
+                 aria-owns="computed-id-125"
                  class="v-input__slot"
             >
               <div class="v-select__slot">
@@ -640,7 +640,7 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
             <div role="button"
                  aria-haspopup="listbox"
                  aria-expanded="false"
-                 aria-owns="computed-67"
+                 aria-owns="computed-id-67"
                  class="v-input__slot"
             >
               <div class="v-select__slot">
@@ -704,7 +704,7 @@ exports[`VDataTableHeader.ts mobile should work with showGroupBy 1`] = `
             <div role="button"
                  aria-haspopup="listbox"
                  aria-expanded="false"
-                 aria-owns="computed-52"
+                 aria-owns="computed-id-52"
                  class="v-input__slot"
             >
               <div class="v-select__slot">
@@ -755,7 +755,7 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
             <div role="button"
                  aria-haspopup="listbox"
                  aria-expanded="false"
-                 aria-owns="computed-90"
+                 aria-owns="computed-id-90"
                  class="v-input__slot"
             >
               <div class="v-select__slot">
@@ -819,7 +819,7 @@ exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
             <div role="button"
                  aria-haspopup="listbox"
                  aria-expanded="false"
-                 aria-owns="computed-107"
+                 aria-owns="computed-id-107"
                  class="v-input__slot"
             >
               <div class="v-select__slot">

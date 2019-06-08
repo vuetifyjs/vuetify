@@ -10,7 +10,7 @@ exports[`VDataFooter.ts should render and match snapshot 1`] = `
         <div role="button"
              aria-haspopup="listbox"
              aria-expanded="false"
-             aria-owns="computed-2"
+             aria-owns="computed-id-2"
              class="v-input__slot"
         >
           <div class="v-select__slot">
@@ -80,7 +80,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
         <div role="button"
              aria-haspopup="listbox"
              aria-expanded="false"
-             aria-owns="computed-59"
+             aria-owns="computed-id-59"
              class="v-input__slot"
         >
           <div class="v-select__slot">
@@ -175,7 +175,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
         <div role="button"
              aria-haspopup="listbox"
              aria-expanded="false"
-             aria-owns="computed-38"
+             aria-owns="computed-id-38"
              class="v-input__slot"
         >
           <div class="v-select__slot">
@@ -270,7 +270,7 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
         <div role="button"
              aria-haspopup="listbox"
              aria-expanded="false"
-             aria-owns="computed-20"
+             aria-owns="computed-id-20"
              class="v-input__slot"
         >
           <div class="v-select__slot">
@@ -344,7 +344,7 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
         <div role="button"
              aria-haspopup="listbox"
              aria-expanded="false"
-             aria-owns="computed-97"
+             aria-owns="computed-id-97"
              class="v-input__slot"
         >
           <div class="v-select__slot">
