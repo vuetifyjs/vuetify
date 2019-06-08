@@ -628,6 +628,9 @@ export default baseMixins.extend<options>().extend({
 
       // If tab - select item or close menu
       if (keyCode === keyCodes.tab) return this.onTabDown(e)
+
+      // If space preventDefault
+      if (keyCode === keyCodes.space) return this.onSpaceDown(e)
     },
     onMenuActiveChange (val: boolean) {
       // If menu is closing and mulitple
@@ -689,6 +692,9 @@ export default baseMixins.extend<options>().extend({
         }
       }
     },
+    onSpaceDown (e: KeyboardEvent) {
+      e.preventDefault()
+    },
     onTabDown (e: KeyboardEvent) {
       const menu = this.$refs.menu
 
@@ -717,6 +723,8 @@ export default baseMixins.extend<options>().extend({
       const menu = this.$refs.menu
 
       if (!menu) return
+
+      e.preventDefault()
 
       // Multiple selects do not cycle their value
       // when pressing up or down, instead activate
