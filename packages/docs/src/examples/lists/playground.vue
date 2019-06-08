@@ -12,6 +12,7 @@
       <v-switch v-model="subGroup" class="ma-2" label="Sub-group"></v-switch>
       <v-switch v-model="nav" class="ma-2" label="Nav"></v-switch>
       <v-switch v-model="avatar" class="ma-2" label="Avatar"></v-switch>
+      <v-switch v-model="rounded" class="ma-2" label="Rounded"></v-switch>
     </v-layout>
     <v-card
       class="mx-auto"
@@ -31,6 +32,7 @@
           :sub-group="subGroup"
           :nav="nav"
           :avatar="avatar"
+          :rounded="rounded"
         >
           <v-subheader>REPORTS</v-subheader>
           <v-list-item-group v-model="item" color="primary">
@@ -95,6 +97,7 @@
       subGroup: false,
       nav: false,
       avatar: false,
+      rounded: false,
     }),
   }
 </script>
