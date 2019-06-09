@@ -1,0 +1,5 @@
+{
+  "props": {
+    "resetValue": "Changes the default value when using **clearable**"
+  }
+}
