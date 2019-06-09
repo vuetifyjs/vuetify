@@ -11,6 +11,7 @@ import mixins from '../../util/mixins'
 // Utiltiies
 import { convertToUnit, debounce } from '../../util/helpers'
 
+// Types
 const baseMixins = mixins(VSimpleTable)
 
 interface options extends InstanceType<typeof baseMixins> {
