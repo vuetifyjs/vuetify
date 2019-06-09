@@ -4,25 +4,23 @@ import './VVirtualTable.sass'
 import VSimpleTable from './VSimpleTable'
 
 // Types
-import Vue, { VNode, VNodeChildren } from 'vue'
+import { VNode, VNodeChildren } from 'vue'
 import { PropValidator } from 'vue/types/options'
-import mixins, { ExtractVue } from '../../util/mixins'
+import mixins from '../../util/mixins'
 
-// Helpers
+// Utiltiies
 import { convertToUnit, debounce } from '../../util/helpers'
 
-interface options extends Vue {
+const baseMixins = mixins(VSimpleTable)
+
+interface options extends InstanceType<typeof baseMixins> {
+  $refs: {
+    table: HTMLElement
+  }
   cachedItems: VNodeChildren
 }
 
-export default mixins<options &
-/* eslint-disable indent */
-  ExtractVue<typeof VSimpleTable>
-/* eslint-enable indent */
->(
-  VSimpleTable
-  /* @vue/component */
-).extend({
+export default baseMixins.extend<options>().extend({
   name: 'v-virtual-table',
 
   props: {
@@ -84,7 +82,7 @@ export default mixins<options &
     },
     items () {
       this.cachedItems = null
-      ;(this.$refs.table as HTMLElement).scrollTop = 0
+      this.$refs.table.scrollTop = 0
     },
   },
 
@@ -95,13 +93,11 @@ export default mixins<options &
   mounted () {
     this.scrollDebounce = debounce(this.onScroll, 50)
 
-    const table = this.$refs.table as Element
-    table.addEventListener('scroll', this.scrollDebounce, { passive: true })
+    this.$refs.table.addEventListener('scroll', this.scrollDebounce, { passive: true })
   },
 
   beforeDestroy () {
-    const table = this.$refs.table as Element
-    table.removeEventListener('scroll', this.scrollDebounce)
+    this.$refs.table.removeEventListener('scroll', this.scrollDebounce)
   },
 
   methods: {
