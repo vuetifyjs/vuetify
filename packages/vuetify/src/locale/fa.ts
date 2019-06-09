@@ -1,29 +1,29 @@
 export default {
-  close: 'Close',
+  close: 'بستن',
   dataIterator: {
     pageText: '{0} تا {1} از {2}',
     noResultsText: 'نتیجه‌ای یافت نشد',
-    loadingText: 'Loading item...',
+    loadingText: 'در حال بارگذاری...',
   },
   dataTable: {
     itemsPerPageText: 'ردیف در صفحه:',
     ariaLabel: {
-      sortDescending: ': Sorted descending. Activate to remove sorting.',
-      sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.',
+      sortDescending: ': نزولی مرتب شده است. فعال‌سازی برای حذف مرتب‌سازی.',
+      sortAscending: ': صعودی مرتب شده است. فعال‌سازی برای مرتب‌سازی نزولی.',
+      sortNone: ': مرتب نشده است. فعال‌سازی برای مرتب‌سازی صعودی.',
     },
   },
   dataFooter: {
     itemsPerPageText: 'ردیف در صفحه:',
     itemsPerPageAll: 'همه',
-    nextPage: 'صفحه بعد',
-    prevPage: 'صفحه قبل',
-    firstPage: 'صفحه اول',
-    lastPage: 'آخرین صفحه',
+    nextPage: 'صفحه‌ی بعد',
+    prevPage: 'صفحه‌ی قبل',
+    firstPage: 'صفحه‌ی اول',
+    lastPage: 'صفحه‌ی آخر',
   },
   noDataText: 'اطلاعاتی یافت نشد',
   carousel: {
-    prev: 'تصویر قبلی',
-    next: 'بعدی بصری',
+    prev: 'اسلاید قبلی',
+    next: 'اسلاید بعدی',
   },
 }
