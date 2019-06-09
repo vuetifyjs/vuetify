@@ -266,6 +266,32 @@ describe('VSelect.ts', () => {
     expect(input).toHaveBeenCalledWith(undefined)
   })
 
+  it('should clear input value (with custom reset value)', async () => {
+    const wrapper = mountFunction({
+      attachToDocument: true,
+      propsData: {
+        clearable: true,
+        items: ['foo', 'bar'],
+        resetValue: null,
+        value: 'foo',
+      },
+    })
+
+    const clear = wrapper.find('.v-icon')
+
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
+
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.internalValue).toBe('foo')
+    clear.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.internalValue).toBeNull()
+    expect(input).toHaveBeenCalledWith(null)
+  })
+
   it('should be clearable with prop, dirty and single select', async () => {
     const wrapper = mountFunction({
       attachToDocument: true,
@@ -311,6 +337,60 @@ describe('VSelect.ts', () => {
     await wrapper.vm.$nextTick()
     expect(change).toHaveBeenCalledWith([])
     expect(wrapper.vm.isMenuActive).toBe(false)
+  })
+
+  it('should be clearable with prop resetValue and multi select', async () => {
+    const wrapper = mountFunction({
+      attachToDocument: true,
+      propsData: {
+        clearable: true,
+        items: [1, 2],
+        multiple: true,
+        resetValue: [2],
+        value: [1],
+      },
+    })
+
+    const clear = wrapper.find('.v-icon')
+
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
+
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.internalValue).toEqual([1])
+    clear.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.internalValue).toEqual([2])
+    expect(input).toHaveBeenCalledWith([2])
+  })
+
+  it('should be clearable with prop resetValue and multi select (by unchecking last active VListItem)', async () => {
+    const wrapper = mountFunction({
+      attachToDocument: true,
+      propsData: {
+        clearable: true,
+        items: [1, 2],
+        multiple: true,
+        resetValue: [2],
+        value: [1],
+      },
+    })
+
+    const listItems = wrapper.findAll('.v-list-item').wrappers
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.internalValue).toEqual([1])
+    listItems[0].trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.internalValue).toEqual([2])
+    expect(change).toHaveBeenCalledWith([2])
   })
 
   it('should prepopulate selectedItems', () => {

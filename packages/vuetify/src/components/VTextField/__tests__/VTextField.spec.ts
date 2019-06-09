@@ -188,6 +188,28 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     expect(input).toHaveBeenCalledWith(null)
   })
 
+  it('should clear input value (with custom reset value)', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        clearable: true,
+        resetValue: 'bar',
+        value: 'foo',
+      },
+    })
+
+    const clear = wrapper.findAll('.v-input__icon--clear .v-icon').at(0)
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
+
+    expect(wrapper.vm.internalValue).toBe('foo')
+
+    clear.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(input).toHaveBeenCalledWith('bar')
+  })
+
   it('should not clear input if not clearable and has appended icon (with callback)', async () => {
     const click = jest.fn()
     const wrapper = mountFunction({

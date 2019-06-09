@@ -10,6 +10,7 @@ import VLabel from '../VLabel'
 
 // Mixins
 import Loadable from '../../mixins/loadable'
+import Clearable from '../../mixins/clearable'
 
 // Directives
 import Ripple from '../../directives/ripple'
@@ -24,7 +25,8 @@ import { VNode } from 'vue/types'
 
 const baseMixins = mixins(
   VInput,
-  Loadable
+  Loadable,
+  Clearable,
 )
 interface options extends InstanceType<typeof baseMixins> {
   $refs: {
@@ -52,7 +54,6 @@ export default baseMixins.extend<options>().extend({
     /** @deprecated */
     box: Boolean,
     browserAutocomplete: String,
-    clearable: Boolean,
     clearIcon: {
       type: String,
       default: '$vuetify.icons.clear',
@@ -217,7 +218,10 @@ export default baseMixins.extend<options>().extend({
       this.$refs.input ? this.$refs.input.blur() : this.onBlur()
     },
     clearableCallback () {
-      this.internalValue = null
+      this.internalValue = this.resetValue !== undefined
+        ? this.resetValue
+        : null
+
       this.$nextTick(() => this.$refs.input && this.$refs.input.focus())
     },
     genAppendSlot () {

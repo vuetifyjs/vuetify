@@ -142,6 +142,31 @@ describe('VCombobox.ts', () => {
     expect(change).toHaveBeenCalledTimes(4)
   })
 
+  it('should be clearable with prop resetValue (by closing VChip)', async () => {
+    const wrapper = mountFunction({
+      attachToDocument: true,
+      propsData: {
+        chips: true,
+        clearable: true,
+        items: [1, 2],
+        resetValue: 2,
+        value: 1,
+      },
+    })
+
+    const chip = wrapper.find('.v-chip__close')
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.internalValue).toBe(1)
+    chip.trigger('click')
+
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.internalValue).toBe(2)
+    expect(change).toHaveBeenCalledWith(2)
+  })
+
   it('should call methods on blur', async () => {
     const updateCombobox = jest.fn()
     const wrapper = mountFunction({

@@ -75,7 +75,6 @@ export default baseMixins.extend<options>().extend({
     },
     cacheItems: Boolean,
     chips: Boolean,
-    clearable: Boolean,
     deletableChips: Boolean,
     dense: Boolean,
     hideSelected: Boolean,
@@ -287,7 +286,11 @@ export default baseMixins.extend<options>().extend({
       this.isMenuActive = true
     },
     clearableCallback () {
-      this.setValue(this.multiple ? [] : undefined)
+      this.setValue(
+        this.resetValue !== undefined
+          ? this.resetValue
+          : this.multiple ? [] : undefined
+      )
       this.$nextTick(() => this.$refs.input && this.$refs.input.focus())
 
       if (this.openOnClear) this.isMenuActive = true
@@ -510,7 +513,7 @@ export default baseMixins.extend<options>().extend({
     },
     onChipInput (item: object) {
       if (this.multiple) this.selectItem(item)
-      else this.setValue(null)
+      else this.setValue(this.resetValue !== undefined ? this.resetValue : null)
       // If all items have been deleted,
       // open `v-menu`
       if (this.selectedItems.length === 0) {
@@ -651,9 +654,14 @@ export default baseMixins.extend<options>().extend({
         const i = this.findExistingIndex(item)
 
         i !== -1 ? internalValue.splice(i, 1) : internalValue.push(item)
-        this.setValue(internalValue.map((i: object) => {
-          return this.returnObject ? i : this.getValue(i)
-        }))
+
+        if (internalValue.length === 0 && this.resetValue !== undefined) {
+          this.setValue(this.resetValue)
+        } else {
+          this.setValue(internalValue.map((i: object) => {
+            return this.returnObject ? i : this.getValue(i)
+          }))
+        }
 
         // When selecting multiple
         // adjust menu after each
