@@ -6,7 +6,6 @@
           ref="menu1"
           v-model="menu1"
           :close-on-content-click="false"
-          :nudge-right="40"
           transition="scale-transition"
           offset-y
           full-width
@@ -33,7 +32,6 @@
         <v-menu
           v-model="menu2"
           :close-on-content-click="false"
-          :nudge-right="40"
           transition="scale-transition"
           offset-y
           full-width
