@@ -16,41 +16,39 @@
     </v-layout>
     <v-card
       class="mx-auto"
-      max-width="300"
+      max-width="400"
       tile
     >
-      <v-navigation-drawer>
-        <v-list
-          :disabled="disabled"
-          :dense="dense"
-          :two-line="twoLine"
-          :three-line="threeLine"
-          :shaped="shaped"
-          :flat="flat"
-          :subheader="subheader"
-          :inactive="inactive"
-          :sub-group="subGroup"
-          :nav="nav"
-          :avatar="avatar"
-          :rounded="rounded"
-        >
-          <v-subheader>REPORTS</v-subheader>
-          <v-list-item-group v-model="item" color="primary">
-            <v-list-item
-              v-for="(item, i) in items"
-              :key="i"
-            >
-              <v-list-item-avatar v-if="avatar">
-                <v-img :src="item.avatar"></v-img>
-              </v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title v-html="item.title"></v-list-item-title>
-                <v-list-item-subtitle v-if="twoLine || threeLine" v-html="item.subtitle"></v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list-item-group>
-        </v-list>
-      </v-navigation-drawer>
+      <v-list
+        :disabled="disabled"
+        :dense="dense"
+        :two-line="twoLine"
+        :three-line="threeLine"
+        :shaped="shaped"
+        :flat="flat"
+        :subheader="subheader"
+        :inactive="inactive"
+        :sub-group="subGroup"
+        :nav="nav"
+        :avatar="avatar"
+        :rounded="rounded"
+      >
+        <v-subheader>REPORTS</v-subheader>
+        <v-list-item-group v-model="item" color="primary">
+          <v-list-item
+            v-for="(item, i) in items"
+            :key="i"
+          >
+            <v-list-item-avatar v-if="avatar">
+              <v-img :src="item.avatar"></v-img>
+            </v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title v-html="item.title"></v-list-item-title>
+              <v-list-item-subtitle v-if="twoLine || threeLine" v-html="item.subtitle"></v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
     </v-card>
   </v-layout>
 </template>
