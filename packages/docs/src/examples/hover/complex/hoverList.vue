@@ -11,7 +11,7 @@
             <v-card
               slot-scope="{ hover }"
               :elevation="hover ? 12 : 2"
-              :class="{ onHover: hover }"
+              :class="{ 'on-hover': hover }"
             >
               <v-img
                 :src="item.img"
@@ -38,12 +38,12 @@
                       <v-btn
                         v-for="(icon, index) in icons"
                         :key="index"
-                        :class="{showBtns: hover}"
+                        :class="{'show-btns': hover}"
                         color="transparent"
                         icon
                       >
                         <v-icon
-                          :class="{showBtns: hover}"
+                          :class="{'show-btns': hover}"
                           color="transparent"
                         >
                           {{ icon }}
@@ -95,11 +95,11 @@
   transition: opacity .4s ease-in-out;
 }
 
-.v-card:not(.onHover) {
+.v-card:not(.on-hover) {
   opacity: 0.6;
  }
 
-.showBtns {
+.show-btns {
   color: rgba(255, 255, 255, 1) !important;
 }
 </style>
