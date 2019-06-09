@@ -29,32 +29,41 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "dateColorable",
-            "dateDialogAndMenu",
-            "dateFormatting",
-            "dateFormattingMomentDatefns",
-            "dateAllowedDates",
-            "dateMultiple",
-            "dateWidth",
-            "dateBirthday",
-            "datePickerDate",
-            "dateEvents",
-            "dateInternationalization",
-            "dateIcons",
-            "dateReadonly",
-            "dateCurrent",
-            "monthLight",
-            "monthColorable",
-            "monthDialogAndMenu",
-            "monthAllowedMonths",
-            "monthMultiple",
-            "monthWidth",
-            "monthInternationalization",
-            "monthIcons",
-            "monthReadonly",
-            "monthCurrent"
+            "simple/dateColorable",
+            "simple/dateAllowedDates",
+            "simple/dateWidth",
+            "simple/datePickerDate",
+            "simple/dateInternationalization",
+            "simple/dateIcons",
+            "simple/dateReadonly",
+            "simple/dateCurrent",
+            "simple/monthLight",
+            "simple/monthColorable",
+            "simple/monthAllowedMonths",
+            "simple/monthMultiple",
+            "simple/monthWidth",
+            "simple/monthInternationalization",
+            "simple/monthIcons",
+            "simple/monthReadonly",
+            "simple/monthCurrent",
+            "intermediate/dateDialogAndMenu",
+            "intermediate/dateFormatting",
+            "intermediate/dateFormattingMomentDatefns",
+            "intermediate/dateMultiple",
+            "intermediate/dateBirthday",
+            "intermediate/dateEvents",
+            "intermediate/monthDialogAndMenu"
           ]
         }
       ]

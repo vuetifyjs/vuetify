@@ -1,8 +1,7 @@
 <template>
-  <div>
+  <v-layout column align-center>
     <v-date-picker
       v-model="date"
-      type="month"
       width="290"
       class="mt-3"
     ></v-date-picker>
@@ -10,16 +9,15 @@
       v-model="date"
       full-width
       landscape
-      type="month"
       class="mt-3"
     ></v-date-picker>
-  </div>
+  </v-layout>
 </template>
 
 <script>
   export default {
     data: () => ({
-      date: new Date().toISOString().substr(0, 7),
+      date: new Date().toISOString().substr(0, 10),
     }),
   }
 </script>
