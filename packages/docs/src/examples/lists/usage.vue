@@ -1,5 +1,9 @@
 <template>
-  <v-card>
+  <v-card
+    class="mx-auto"
+    max-width="400"
+    tile
+  >
     <v-list-item>
       <v-list-item-content>
         <v-list-item-title>Single-line item</v-list-item-title>

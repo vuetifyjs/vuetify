@@ -3,7 +3,7 @@
   "headerText": "The `v-list` component is used to display information. It can contain an avatar, content, actions, subheaders and much more. Lists present content in a way that makes it easy to identify a specific item in a collection. They provide a consistent styling for organizing groups of text and images.",
   "examples": {
     "usage": {
-      "desc": "Lists come in three main variations. **single-line** (default), **swo-line** and **three-line**. The line declaration specifies the minimum height of the item and can also be controlled from `v-list` with the same prop."
+      "desc": "Lists come in three main variations. **single-line** (default), **two-line** and **three-line**. The line declaration specifies the minimum height of the item and can also be controlled from `v-list` with the same prop."
     },
     "avatarTitleAndAction": {
       "header": "### Avatar with title and action",
@@ -48,6 +48,22 @@
     "shaped": {
       "header": "### Shaped lists",
       "desc": "Shaped lists have rounded borders on one side of the `v-list-item`."
+    },
+    "disabled": {
+      "header": "### Disabled lists",
+      "desc": "You cannot interact with disabled `v-list`."
+    },
+    "dense": {
+      "header": "### Dense",
+      "desc": "`v-list` can be lowered with `dense` property."
+    },
+    "flat": {
+      "header": "### Flat",
+      "desc": "Items don't change when selected in `v-list` with `flat` property."
+    },
+    "rounded": {
+      "header": "### Rounded",
+      "desc": "You can make `v-list` items rounded."
     }
   },
   "props": {
