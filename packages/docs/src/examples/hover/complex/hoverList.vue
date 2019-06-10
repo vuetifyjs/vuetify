@@ -43,7 +43,7 @@
                         icon
                       >
                         <v-icon
-                          :class="{'show-btns': hover}"
+                          :class="{ 'show-btns': hover }"
                           color="transparent"
                         >
                           {{ icon }}
