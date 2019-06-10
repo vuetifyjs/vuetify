@@ -23,6 +23,7 @@ import ripple from '../../directives/ripple'
 
 // Helpers
 import { deepEqual, getObjectValueByPath, compareFn, getPrefixedScopedSlots, getSlot, defaultFilter } from '../../util/helpers'
+import { breaking } from '../../util/console'
 
 function filterFn (item: any, search: string | null) {
   return (header: TableHeader) => {
@@ -131,6 +132,18 @@ export default VDataIterator.extend({
     headersWithoutCustomFilters (): TableHeader[] {
       return this.computedHeaders.filter(header => !header.filter)
     },
+  },
+
+  created () {
+    const breakingProps = [
+      ['sort-icon', 'header-props.sort-icon'],
+      ['hide-headers', 'hide-default-header'],
+      ['select-all', 'show-select'],
+    ]
+
+    breakingProps.forEach(([original, replacement]) => {
+      if (this.$attrs.hasOwnProperty(original)) breaking(original, replacement)
+    })
   },
 
   mounted () {
