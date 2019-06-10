@@ -27,10 +27,10 @@
         {
           "type": "examples",
           "value": [
-            "rules",
-            "validationWithSubmitAndClear",
-            "vuelidate",
-            "veeValidate"
+            "simple/rules",
+            "simple/validationWithSubmitAndClear",
+            "intermediate/vuelidate",
+            "intermediate/veeValidate"
           ]
         }
       ]
