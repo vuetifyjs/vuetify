@@ -38,6 +38,7 @@
       :disabled="!valid"
       color="success"
       @click="validate"
+      class="mr-3"
     >
       Validate
     </v-btn>
@@ -45,6 +46,7 @@
     <v-btn
       color="error"
       @click="reset"
+      class="mr-3"
     >
       Reset Form
     </v-btn>
