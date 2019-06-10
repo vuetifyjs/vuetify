@@ -20,8 +20,10 @@ describe('theme-utilities.ts', () => {
         darken3: '#fbe002',
         darken4: '#33303a',
       },
+      anchor: '#c42742',
     }
   })
+
   it('should parse a theme or theme item', () => {
     const theme = {
       primary: '#000',
@@ -41,5 +43,13 @@ describe('theme-utilities.ts', () => {
 
   it('should generate css vars', () => {
     expect(genStyles(parsedTheme, true)).toMatchSnapshot()
+  })
+
+  it('should use custom anchor color', () => {
+    // Uses primary base as fallback
+    expect(genStyles(parsedTheme)).toContain('a { color: #c42742; }')
+
+    parsedTheme.anchor = '#000000'
+    expect(genStyles(parsedTheme)).toContain('a { color: #000000; }')
   })
 })
