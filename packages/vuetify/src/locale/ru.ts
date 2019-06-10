@@ -3,14 +3,14 @@ export default {
   dataIterator: {
     pageText: '{0}-{1} из {2}',
     noResultsText: 'Не найдено подходящих записей',
-    loadingText: 'Loading item...',
+    loadingText: 'Запись загружается...',
   },
   dataTable: {
     itemsPerPageText: 'Строк на странице:',
     ariaLabel: {
-      sortDescending: ': Sorted descending. Activate to remove sorting.',
-      sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.',
+      sortDescending: ': Упорядочено по нисходящей. Активируйте, чтобы убрать сортировку.',
+      sortAscending: ': Упорядочено во восходящей. Активируйте для упорядочивания по ниcходящей.',
+      sortNone: ': Не упорядочено. Активируйте для упорядочивания по восходящей.',
     },
   },
   dataFooter: {
