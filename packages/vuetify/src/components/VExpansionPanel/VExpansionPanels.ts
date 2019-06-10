@@ -5,9 +5,6 @@ import './VExpansionPanel.sass'
 import { BaseItemGroup, GroupableInstance } from '../VItemGroup/VItemGroup'
 import VExpansionPanel from './VExpansionPanel'
 
-// Utilities
-import { breaking } from '../../util/console'
-
 interface VExpansionPanelInstance extends InstanceType<typeof VExpansionPanel> {}
 
 /* @vue/component */
@@ -23,8 +20,6 @@ export default BaseItemGroup.extend({
   props: {
     accordion: Boolean,
     disabled: Boolean,
-    /** @deprecated */
-    expand: Boolean,
     focusable: Boolean,
     inset: Boolean,
     popout: Boolean,
@@ -42,20 +37,6 @@ export default BaseItemGroup.extend({
         'v-expansion-panels--popout': this.popout,
       }
     },
-  },
-
-  created () {
-    /* istanbul ignore next */
-    if (this.expand) breaking('expand', 'multiple')
-
-    /* istanbul ignore next */
-    if (
-      Array.isArray(this.value) &&
-      this.value.length > 0 &&
-      typeof this.value[0] === 'boolean'
-    ) {
-      breaking('<v-expansion-panels :value="[true, false]">', '<v-expansion-panels :value="[0]">')
-    }
   },
 
   methods: {

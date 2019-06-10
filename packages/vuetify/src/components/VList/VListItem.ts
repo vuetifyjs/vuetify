@@ -19,7 +19,6 @@ import { ExtractVue } from './../../util/mixins'
 import mixins from '../../util/mixins'
 import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
-import { removed } from '../../util/console'
 
 const baseMixins = mixins(
   Colorable,
@@ -87,13 +86,6 @@ export default baseMixins.extend<options>().extend({
         this.listItemGroup
       )
     },
-  },
-
-  created () {
-    /* istanbul ignore next */
-    if ('avatar' in this.$attrs) {
-      removed('avatar', this)
-    }
   },
 
   methods: {

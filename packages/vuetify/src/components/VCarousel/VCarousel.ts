@@ -15,7 +15,6 @@ import ButtonGroup from '../../mixins/button-group'
 
 // Utilities
 import { convertToUnit } from '../../util/helpers'
-import { deprecate } from '../../util/console'
 
 // Types
 import { VNode } from 'vue'
@@ -101,13 +100,6 @@ export default VWindow.extend({
         this.slideTimeout = undefined
       }
     },
-  },
-
-  created () {
-    /* istanbul ignore if */
-    if (this.hideControls) {
-      deprecate('hide-controls', ':show-arrows="false"', this)
-    }
   },
 
   mounted () {

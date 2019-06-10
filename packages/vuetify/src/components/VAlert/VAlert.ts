@@ -17,7 +17,6 @@ import Transitionable from '../../mixins/transitionable'
 import { VNodeData } from 'vue'
 import { VNode } from 'vue/types'
 import mixins from '../../util/mixins'
-import { deprecate } from '../../util/console'
 
 /* @vue/component */
 export default mixins(
@@ -53,7 +52,6 @@ export default mixins(
         return typeof val === 'string' || val === false
       },
     },
-    outline: Boolean,
     outlined: Boolean,
     prominent: Boolean,
     text: Boolean,
@@ -128,7 +126,7 @@ export default mixins(
         ...VSheet.options.computed.classes.call(this),
         'v-alert--border': Boolean(this.border),
         'v-alert--dense': this.dense,
-        'v-alert--outlined': this.hasOutline,
+        'v-alert--outlined': this.outlined,
         'v-alert--prominent': this.prominent,
         'v-alert--text': this.text,
       }
@@ -160,12 +158,8 @@ export default mixins(
         (Boolean(this.border) && this.coloredBorder)
       )
     },
-    // TODO: remove deprecated
-    hasOutline (): boolean {
-      return this.outline || this.outlined
-    },
     hasText (): boolean {
-      return this.text || this.hasOutline
+      return this.text || this.outlined
     },
     iconColor (): string | undefined {
       return this.hasColoredIcon ? this.computedColor : undefined
@@ -174,16 +168,11 @@ export default mixins(
       if (
         this.type &&
         !this.coloredBorder &&
-        !this.hasOutline
+        !this.outlined
       ) return true
 
       return Themeable.options.computed.isDark.call(this)
     },
-  },
-
-  created () {
-    /* istanbul ignore if */
-    if (this.outline) deprecate('outline', 'outlined')
   },
 
   methods: {

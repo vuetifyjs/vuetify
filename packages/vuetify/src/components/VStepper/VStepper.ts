@@ -12,7 +12,6 @@ import Themeable from '../../mixins/themeable'
 
 // Utilities
 import mixins from '../../util/mixins'
-import { deprecate } from '../../util/console'
 
 // Types
 import { VNode } from 'vue'
@@ -70,20 +69,8 @@ export default baseMixins.extend({
 
       oldVal && (this.isBooted = true)
 
-      /* istanbul ignore if */
-      if (this.$listeners.input) {
-        this.$emit('input', val)
-      }
-
       this.updateView()
     },
-  },
-
-  created () {
-    /* istanbul ignore if */
-    if (this.$listeners.input) {
-      deprecate('input', 'change', this)
-    }
   },
 
   mounted () {
