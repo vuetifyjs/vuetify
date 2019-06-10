@@ -244,7 +244,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Calories
@@ -260,7 +260,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Fat (g)
@@ -276,7 +276,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Carbs (g)
@@ -292,7 +292,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
               scope="col"
               aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Protein (g)
@@ -308,7 +308,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Iron (%)
@@ -438,7 +438,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                 scope="col"
                 aria-label="Calories: Not sorted. Activate to sort ascending."
                 aria-sort="none"
-                class="text-xs-left sortable"
+                class="text-xs-start sortable"
             >
               <span>
                 Calories
@@ -454,7 +454,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                 scope="col"
                 aria-label="Fat (g): Not sorted. Activate to sort ascending."
                 aria-sort="none"
-                class="text-xs-left sortable"
+                class="text-xs-start sortable"
             >
               <span>
                 Fat (g)
@@ -470,7 +470,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                 scope="col"
                 aria-label="Carbs (g): Not sorted. Activate to sort ascending."
                 aria-sort="none"
-                class="text-xs-left sortable"
+                class="text-xs-start sortable"
             >
               <span>
                 Carbs (g)
@@ -486,7 +486,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                 scope="col"
                 aria-label="Protein (g): Not sorted. Activate to sort ascending."
                 aria-sort="none"
-                class="text-xs-left sortable"
+                class="text-xs-start sortable"
             >
               <span>
                 Protein (g)
@@ -502,7 +502,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                 scope="col"
                 aria-label="Iron (%): Not sorted. Activate to sort ascending."
                 aria-sort="none"
-                class="text-xs-left sortable"
+                class="text-xs-start sortable"
             >
               <span>
                 Iron (%)
@@ -523,19 +523,19 @@ exports[`VDataTable.ts should render virtual table 1`] = `
             <td class="text-xs-left">
               Frozen Yogurt
             </td>
-            <td class="text-xs-left">
+            <td class="text-xs-start">
               159
             </td>
-            <td class="text-xs-left">
+            <td class="text-xs-start">
               6
             </td>
-            <td class="text-xs-left">
+            <td class="text-xs-start">
               24
             </td>
-            <td class="text-xs-left">
+            <td class="text-xs-start">
               4
             </td>
-            <td class="text-xs-left">
+            <td class="text-xs-start">
               1%
             </td>
           </tr>
@@ -543,19 +543,19 @@ exports[`VDataTable.ts should render virtual table 1`] = `
             <td class="text-xs-left">
               Ice cream sandwich
             </td>
-            <td class="text-xs-left">
+            <td class="text-xs-start">
               237
             </td>
-            <td class="text-xs-left">
+            <td class="text-xs-start">
               9
             </td>
-            <td class="text-xs-left">
+            <td class="text-xs-start">
               37
             </td>
-            <td class="text-xs-left">
+            <td class="text-xs-start">
               4.3
             </td>
-            <td class="text-xs-left">
+            <td class="text-xs-start">
               1%
             </td>
           </tr>
@@ -563,19 +563,19 @@ exports[`VDataTable.ts should render virtual table 1`] = `
             <td class="text-xs-left">
               Eclair
             </td>
-            <td class="text-xs-left">
+            <td class="text-xs-start">
               262
             </td>
-            <td class="text-xs-left">
+            <td class="text-xs-start">
               16
             </td>
-            <td class="text-xs-left">
+            <td class="text-xs-start">
               23
             </td>
-            <td class="text-xs-left">
+            <td class="text-xs-start">
               6
             </td>
-            <td class="text-xs-left">
+            <td class="text-xs-start">
               7%
             </td>
           </tr>
@@ -583,19 +583,19 @@ exports[`VDataTable.ts should render virtual table 1`] = `
             <td class="text-xs-left">
               Cupcake
             </td>
-            <td class="text-xs-left">
+            <td class="text-xs-start">
               305
             </td>
-            <td class="text-xs-left">
+            <td class="text-xs-start">
               3.7
             </td>
-            <td class="text-xs-left">
+            <td class="text-xs-start">
               67
             </td>
-            <td class="text-xs-left">
+            <td class="text-xs-start">
               4.3
             </td>
-            <td class="text-xs-left">
+            <td class="text-xs-start">
               8%
             </td>
           </tr>
@@ -603,19 +603,19 @@ exports[`VDataTable.ts should render virtual table 1`] = `
             <td class="text-xs-left">
               Gingerbread
             </td>
-            <td class="text-xs-left">
+            <td class="text-xs-start">
               356
             </td>
-            <td class="text-xs-left">
+            <td class="text-xs-start">
               16
             </td>
-            <td class="text-xs-left">
+            <td class="text-xs-start">
               49
             </td>
-            <td class="text-xs-left">
+            <td class="text-xs-start">
               3.9
             </td>
-            <td class="text-xs-left">
+            <td class="text-xs-start">
               16%
             </td>
           </tr>
@@ -727,7 +727,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Calories
@@ -743,7 +743,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Fat (g)
@@ -759,7 +759,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Carbs (g)
@@ -775,7 +775,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               scope="col"
               aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Protein (g)
@@ -791,7 +791,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Iron (%)
@@ -912,7 +912,7 @@ exports[`VDataTable.ts should render with data 1`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Calories
@@ -928,7 +928,7 @@ exports[`VDataTable.ts should render with data 1`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Fat (g)
@@ -944,7 +944,7 @@ exports[`VDataTable.ts should render with data 1`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Carbs (g)
@@ -960,7 +960,7 @@ exports[`VDataTable.ts should render with data 1`] = `
               scope="col"
               aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Protein (g)
@@ -976,7 +976,7 @@ exports[`VDataTable.ts should render with data 1`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Iron (%)
@@ -995,19 +995,19 @@ exports[`VDataTable.ts should render with data 1`] = `
           <td class="text-xs-left">
             Frozen Yogurt
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             159
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             6
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             24
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             4
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             1%
           </td>
         </tr>
@@ -1015,19 +1015,19 @@ exports[`VDataTable.ts should render with data 1`] = `
           <td class="text-xs-left">
             Ice cream sandwich
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             237
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             9
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             37
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             4.3
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             1%
           </td>
         </tr>
@@ -1035,19 +1035,19 @@ exports[`VDataTable.ts should render with data 1`] = `
           <td class="text-xs-left">
             Eclair
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             262
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             16
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             23
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             6
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             7%
           </td>
         </tr>
@@ -1055,19 +1055,19 @@ exports[`VDataTable.ts should render with data 1`] = `
           <td class="text-xs-left">
             Cupcake
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             305
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             3.7
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             67
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             4.3
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             8%
           </td>
         </tr>
@@ -1075,19 +1075,19 @@ exports[`VDataTable.ts should render with data 1`] = `
           <td class="text-xs-left">
             Gingerbread
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             356
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             16
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             49
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             3.9
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             16%
           </td>
         </tr>
@@ -1195,7 +1195,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Calories
@@ -1211,7 +1211,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Fat (g)
@@ -1227,7 +1227,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Carbs (g)
@@ -1243,7 +1243,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Iron (%)
@@ -1374,7 +1374,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Fat (g)
@@ -1390,7 +1390,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Carbs (g)
@@ -1406,7 +1406,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
               scope="col"
               aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Protein (g)
@@ -1422,7 +1422,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Iron (%)
@@ -1439,7 +1439,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
       <tbody>
         <tr class="v-row-group__header">
           <td colspan="5"
-              class="text-xs-left"
+              class="text-xs-start"
           >
             <button type="button"
                     class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
@@ -1470,16 +1470,16 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
           <td class="text-xs-left">
             Frozen Yogurt
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             6
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             24
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             4
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             1%
           </td>
         </tr>
@@ -1490,7 +1490,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
         </tr>
         <tr class="v-row-group__header">
           <td colspan="5"
-              class="text-xs-left"
+              class="text-xs-start"
           >
             <button type="button"
                     class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
@@ -1521,16 +1521,16 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
           <td class="text-xs-left">
             Ice cream sandwich
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             9
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             37
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             4.3
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             1%
           </td>
         </tr>
@@ -1541,7 +1541,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
         </tr>
         <tr class="v-row-group__header">
           <td colspan="5"
-              class="text-xs-left"
+              class="text-xs-start"
           >
             <button type="button"
                     class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
@@ -1572,16 +1572,16 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
           <td class="text-xs-left">
             Eclair
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             16
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             23
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             6
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             7%
           </td>
         </tr>
@@ -1592,7 +1592,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
         </tr>
         <tr class="v-row-group__header">
           <td colspan="5"
-              class="text-xs-left"
+              class="text-xs-start"
           >
             <button type="button"
                     class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
@@ -1623,16 +1623,16 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
           <td class="text-xs-left">
             Cupcake
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             3.7
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             67
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             4.3
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             8%
           </td>
         </tr>
@@ -1643,7 +1643,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
         </tr>
         <tr class="v-row-group__header">
           <td colspan="5"
-              class="text-xs-left"
+              class="text-xs-start"
           >
             <button type="button"
                     class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
@@ -1674,16 +1674,16 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
           <td class="text-xs-left">
             Gingerbread
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             16
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             49
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             3.9
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             16%
           </td>
         </tr>
@@ -1796,7 +1796,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Calories
@@ -1812,7 +1812,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Fat (g)
@@ -1828,7 +1828,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Carbs (g)
@@ -1844,7 +1844,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Iron (%)
@@ -1861,7 +1861,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
       <tbody>
         <tr class="v-row-group__header">
           <td colspan="5"
-              class="text-xs-left"
+              class="text-xs-start"
           >
             <button type="button"
                     class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
@@ -1892,16 +1892,16 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
           <td class="text-xs-left">
             Jelly bean
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             375
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             0
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             94
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             0%
           </td>
         </tr>
@@ -1909,22 +1909,22 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
           <td class="text-xs-left">
             Lollipop
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             392
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             0.2
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             98
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             2%
           </td>
         </tr>
         <tr class="v-row-group__header">
           <td colspan="5"
-              class="text-xs-left"
+              class="text-xs-start"
           >
             <button type="button"
                     class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
@@ -1955,22 +1955,22 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
           <td class="text-xs-left">
             Frozen Yogurt
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             159
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             6
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             24
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             1%
           </td>
         </tr>
         <tr class="v-row-group__header">
           <td colspan="5"
-              class="text-xs-left"
+              class="text-xs-start"
           >
             <button type="button"
                     class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
@@ -2001,22 +2001,22 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
           <td class="text-xs-left">
             Gingerbread
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             356
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             16
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             49
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             16%
           </td>
         </tr>
         <tr class="v-row-group__header">
           <td colspan="5"
-              class="text-xs-left"
+              class="text-xs-start"
           >
             <button type="button"
                     class="ma-0 v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
@@ -2047,16 +2047,16 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
           <td class="text-xs-left">
             Ice cream sandwich
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             237
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             9
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             37
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             1%
           </td>
         </tr>
@@ -2165,7 +2165,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Calories
@@ -2181,7 +2181,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Fat (g)
@@ -2197,7 +2197,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Carbs (g)
@@ -2213,7 +2213,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               scope="col"
               aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Protein (g)
@@ -2229,7 +2229,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Iron (%)
@@ -2364,7 +2364,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Calories
@@ -2380,7 +2380,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Fat (g)
@@ -2396,7 +2396,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Carbs (g)
@@ -2412,7 +2412,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               scope="col"
               aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Protein (g)
@@ -2428,7 +2428,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Iron (%)
@@ -2447,19 +2447,19 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
           <td class="text-xs-left">
             Frozen Yogurt
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             159
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             6
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             24
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             4
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             1%
           </td>
         </tr>
@@ -2472,19 +2472,19 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
           <td class="text-xs-left">
             Ice cream sandwich
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             237
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             9
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             37
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             4.3
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             1%
           </td>
         </tr>
@@ -2497,19 +2497,19 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
           <td class="text-xs-left">
             Eclair
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             262
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             16
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             23
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             6
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             7%
           </td>
         </tr>
@@ -2522,19 +2522,19 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
           <td class="text-xs-left">
             Cupcake
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             305
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             3.7
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             67
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             4.3
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             8%
           </td>
         </tr>
@@ -2547,19 +2547,19 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
           <td class="text-xs-left">
             Gingerbread
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             356
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             16
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             49
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             3.9
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             16%
           </td>
         </tr>
@@ -2667,7 +2667,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               aria-label
               aria-sort="none"
               width="1px"
-              class="text-xs-left"
+              class="text-xs-start"
           >
             <span>
             </span>
@@ -2686,7 +2686,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Calories
@@ -2702,7 +2702,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Fat (g)
@@ -2718,7 +2718,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Carbs (g)
@@ -2734,7 +2734,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               scope="col"
               aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Protein (g)
@@ -2750,7 +2750,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Iron (%)
@@ -2766,7 +2766,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
       </thead>
       <tbody>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
@@ -2776,24 +2776,24 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
           <td class="text-xs-left">
             Frozen Yogurt
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             159
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             6
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             24
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             4
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             1%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
@@ -2803,24 +2803,24 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
           <td class="text-xs-left">
             Ice cream sandwich
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             237
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             9
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             37
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             4.3
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             1%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
@@ -2830,24 +2830,24 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
           <td class="text-xs-left">
             Eclair
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             262
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             16
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             23
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             6
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             7%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
@@ -2857,24 +2857,24 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
           <td class="text-xs-left">
             Cupcake
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             305
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             3.7
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             67
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             4.3
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             8%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
@@ -2884,19 +2884,19 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
           <td class="text-xs-left">
             Gingerbread
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             356
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             16
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             49
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             3.9
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             16%
           </td>
         </tr>
@@ -2999,7 +2999,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               aria-label
               aria-sort="none"
               width="1px"
-              class="text-xs-left"
+              class="text-xs-start"
           >
             <span>
             </span>
@@ -3018,7 +3018,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Calories
@@ -3034,7 +3034,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Fat (g)
@@ -3050,7 +3050,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Carbs (g)
@@ -3066,7 +3066,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               scope="col"
               aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Protein (g)
@@ -3082,7 +3082,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Iron (%)
@@ -3098,7 +3098,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
       </thead>
       <tbody>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light v-data-table__expand-icon--active"
             >
@@ -3108,24 +3108,24 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
           <td class="text-xs-left">
             Frozen Yogurt
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             159
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             6
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             24
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             4
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             1%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
@@ -3135,24 +3135,24 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
           <td class="text-xs-left">
             Ice cream sandwich
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             237
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             9
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             37
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             4.3
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             1%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
@@ -3162,24 +3162,24 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
           <td class="text-xs-left">
             Eclair
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             262
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             16
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             23
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             6
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             7%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
@@ -3189,24 +3189,24 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
           <td class="text-xs-left">
             Cupcake
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             305
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             3.7
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             67
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             4.3
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             8%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             <i role="button"
                class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
@@ -3216,19 +3216,19 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
           <td class="text-xs-left">
             Gingerbread
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             356
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             16
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             49
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             3.9
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             16%
           </td>
         </tr>
@@ -3331,7 +3331,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               aria-label
               aria-sort="none"
               width="1px"
-              class="text-xs-left"
+              class="text-xs-start"
           >
             <div class="v-data-table__checkbox v-simple-checkbox">
               <div class="v-input--selection-controls__ripple">
@@ -3357,7 +3357,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Calories
@@ -3373,7 +3373,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Fat (g)
@@ -3389,7 +3389,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Carbs (g)
@@ -3405,7 +3405,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               scope="col"
               aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Protein (g)
@@ -3421,7 +3421,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-left sortable"
+              class="text-xs-start sortable"
           >
             <span>
               Iron (%)
@@ -3437,7 +3437,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
       </thead>
       <tbody>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             <div class="v-data-table__checkbox v-simple-checkbox">
               <div class="v-input--selection-controls__ripple">
               </div>
@@ -3451,24 +3451,24 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
           <td class="text-xs-left">
             Frozen Yogurt
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             159
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             6
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             24
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             4
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             1%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             <div class="v-data-table__checkbox v-simple-checkbox">
               <div class="v-input--selection-controls__ripple">
               </div>
@@ -3482,24 +3482,24 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
           <td class="text-xs-left">
             Ice cream sandwich
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             237
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             9
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             37
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             4.3
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             1%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             <div class="v-data-table__checkbox v-simple-checkbox">
               <div class="v-input--selection-controls__ripple">
               </div>
@@ -3513,24 +3513,24 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
           <td class="text-xs-left">
             Eclair
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             262
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             16
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             23
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             6
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             7%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             <div class="v-data-table__checkbox v-simple-checkbox">
               <div class="v-input--selection-controls__ripple">
               </div>
@@ -3544,24 +3544,24 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
           <td class="text-xs-left">
             Cupcake
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             305
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             3.7
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             67
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             4.3
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             8%
           </td>
         </tr>
         <tr>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             <div class="v-data-table__checkbox v-simple-checkbox">
               <div class="v-input--selection-controls__ripple">
               </div>
@@ -3575,19 +3575,19 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
           <td class="text-xs-left">
             Gingerbread
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             356
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             16
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             49
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             3.9
           </td>
-          <td class="text-xs-left">
+          <td class="text-xs-start">
             16%
           </td>
         </tr>
