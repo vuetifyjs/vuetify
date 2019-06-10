@@ -88,6 +88,30 @@ describe('VPagination.ts', () => {
     expect(cb).toHaveBeenCalledWith(2)
   })
 
+  it('emits keydown when a key is pressed', async () => {
+    const wrapper = mountFunction({
+      attrs: {
+        tabindex: '1',
+      },
+      propsData: {
+        length: 5,
+        value: 2,
+      },
+    })
+
+    await wrapper.vm.$nextTick()
+
+    const cb = jest.fn()
+
+    wrapper.vm.$on('keydown', cb)
+
+    const pagination = wrapper.find('.v-pagination')
+    pagination.trigger('focus')
+    pagination.trigger('keydown')
+
+    expect(cb).toHaveBeenCalled()
+  })
+
   it('should render disabled buttons with length equals to 0', async () => {
     const wrapper = mountFunction({
       propsData: {

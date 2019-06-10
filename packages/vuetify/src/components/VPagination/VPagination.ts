@@ -188,6 +188,9 @@ export default mixins(Colorable, Themeable).extend({
         value: this.onResize,
       }],
       class: this.classes,
+      on: {
+        keydown: (e: KeyboardEvent) => this.$emit('keydown', e),
+      },
     }, children)
   },
 })
