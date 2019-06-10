@@ -19,7 +19,7 @@
       :landscape="landscape"
       :reactive="reactive"
       :full-width="fullWidth"
-      :showCurrent="showCurrent"
+      :show-current="showCurrent"
       :type="month ? 'month' : 'date'"
       :multiple="multiple"
       :readonly="readonly"
