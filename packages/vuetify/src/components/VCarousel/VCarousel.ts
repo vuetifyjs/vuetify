@@ -103,6 +103,7 @@ export default VWindow.extend({
   },
 
   created () {
+    /* istanbul ignore next */
     if (this.$attrs.hasOwnProperty('hide-controls')) {
       breaking('hide-controls', ':show-arrows="false"', this)
     }

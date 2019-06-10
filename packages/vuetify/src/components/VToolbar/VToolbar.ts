@@ -107,6 +107,7 @@ export default VSheet.extend({
       ['card', '<v-app-bar flat>'],
     ]
 
+    /* istanbul ignore next */
     breakingProps.forEach(([original, replacement]) => {
       if (this.$attrs.hasOwnProperty(original)) breaking(original, replacement, this)
     })

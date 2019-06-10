@@ -187,6 +187,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   created () {
+    /* istanbul ignore next */
     if (this.$attrs.hasOwnProperty('box')) {
       breaking('box', 'filled', this)
     }

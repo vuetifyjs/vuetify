@@ -115,6 +115,7 @@ export default mixins(
       ['selected', 'value'],
     ]
 
+    /* istanbul ignore next */
     breakingProps.forEach(([original, replacement]) => {
       if (this.$attrs.hasOwnProperty(original)) breaking(original, replacement, this)
     })

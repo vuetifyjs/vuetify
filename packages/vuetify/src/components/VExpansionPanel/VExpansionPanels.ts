@@ -44,10 +44,12 @@ export default BaseItemGroup.extend({
   },
 
   created () {
+    /* istanbul ignore next */
     if (this.$attrs.hasOwnProperty('expand')) {
       breaking('expand', 'multiple', this)
     }
 
+    /* istanbul ignore next */
     if (
       Array.isArray(this.value) &&
       this.value.length > 0 &&

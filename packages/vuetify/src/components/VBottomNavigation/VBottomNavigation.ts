@@ -88,6 +88,7 @@ export default mixins(
   },
 
   created () {
+    /* istanbul ignore next */
     if (this.$attrs.hasOwnProperty('active')) {
       breaking('active.sync', 'value or v-model', this)
     }

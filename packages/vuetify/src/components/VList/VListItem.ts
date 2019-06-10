@@ -90,6 +90,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   created () {
+    /* istanbul ignore next */
     if (this.$attrs.hasOwnProperty('avatar')) {
       removed('avatar', this)
     }

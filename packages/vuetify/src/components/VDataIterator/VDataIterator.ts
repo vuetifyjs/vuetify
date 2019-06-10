@@ -111,6 +111,7 @@ export default mixins(Themeable).extend({
       ['next-icon', 'footer-props.next-icon'],
     ]
 
+    /* istanbul ignore next */
     breakingProps.forEach(([original, replacement]) => {
       if (this.$attrs.hasOwnProperty(original)) breaking(original, replacement, this)
     })
@@ -122,6 +123,7 @@ export default mixins(Themeable).extend({
       'content-tag',
     ]
 
+    /* istanbul ignore next */
     removedProps.forEach(prop => {
       if (this.$attrs.hasOwnProperty(prop)) removed(prop)
     })

@@ -141,6 +141,7 @@ export default VDataIterator.extend({
       ['select-all', 'show-select'],
     ]
 
+    /* istanbul ignore next */
     breakingProps.forEach(([original, replacement]) => {
       if (this.$attrs.hasOwnProperty(original)) breaking(original, replacement, this)
     })

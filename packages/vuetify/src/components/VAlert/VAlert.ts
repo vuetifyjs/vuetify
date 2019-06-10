@@ -179,6 +179,7 @@ export default mixins(
   },
 
   created () {
+    /* istanbul ignore next */
     if (this.$attrs.hasOwnProperty('outline')) {
       breaking('outline', 'outlined', this)
     }

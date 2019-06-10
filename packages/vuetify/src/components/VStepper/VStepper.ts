@@ -75,6 +75,7 @@ export default baseMixins.extend({
   },
 
   created () {
+    /* istanbul ignore next */
     if (this.$listeners.input) {
       breaking('@input', '@change', this)
     }

@@ -142,6 +142,7 @@ export default baseMixins.extend<options>().extend({
       ['round', 'rounded'],
     ]
 
+    /* istanbul ignore next */
     breakingProps.forEach(([original, replacement]) => {
       if (this.$attrs.hasOwnProperty(original)) breaking(original, replacement, this)
     })
