@@ -27,8 +27,8 @@
         {
           "type": "examples",
           "value": [
-            "loader",
-            "advanced"
+            "intermediate/loader",
+            "complex/advanced"
           ]
         }
       ]
