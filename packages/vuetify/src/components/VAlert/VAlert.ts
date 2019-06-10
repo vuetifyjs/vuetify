@@ -13,10 +13,13 @@ import Toggleable from '../../mixins/toggleable'
 import Themeable from '../../mixins/themeable'
 import Transitionable from '../../mixins/transitionable'
 
+// Utilities
+import mixins from '../../util/mixins'
+import { breaking } from '../../util/console'
+
 // Types
 import { VNodeData } from 'vue'
 import { VNode } from 'vue/types'
-import mixins from '../../util/mixins'
 
 /* @vue/component */
 export default mixins(
@@ -173,6 +176,12 @@ export default mixins(
 
       return Themeable.options.computed.isDark.call(this)
     },
+  },
+
+  created () {
+    if (this.$attrs.hasOwnProperty('outline')) {
+      breaking('outline', 'outlined', this)
+    }
   },
 
   methods: {

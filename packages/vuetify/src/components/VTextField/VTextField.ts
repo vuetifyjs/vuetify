@@ -16,7 +16,7 @@ import Ripple from '../../directives/ripple'
 
 // Utilities
 import { convertToUnit, keyCodes } from '../../util/helpers'
-import { consoleWarn } from '../../util/console'
+import { breaking, consoleWarn } from '../../util/console'
 
 // Types
 import mixins from '../../util/mixins'
@@ -187,6 +187,10 @@ export default baseMixins.extend<options>().extend({
   },
 
   created () {
+    if (this.$attrs.hasOwnProperty('box')) {
+      breaking('box', 'filled', this)
+    }
+
     /* istanbul ignore if */
     if (this.shaped && !(this.filled || this.outlined || this.isSolo)) {
       consoleWarn('shaped should be used with either filled or outlined', this)

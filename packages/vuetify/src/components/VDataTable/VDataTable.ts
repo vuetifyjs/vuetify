@@ -142,7 +142,7 @@ export default VDataIterator.extend({
     ]
 
     breakingProps.forEach(([original, replacement]) => {
-      if (this.$attrs.hasOwnProperty(original)) breaking(original, replacement)
+      if (this.$attrs.hasOwnProperty(original)) breaking(original, replacement, this)
     })
   },
 

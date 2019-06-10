@@ -12,6 +12,7 @@ import Themeable from '../../mixins/themeable'
 
 // Utilities
 import mixins from '../../util/mixins'
+import { breaking } from '../../util/console'
 
 // Types
 import { VNode } from 'vue'
@@ -71,6 +72,12 @@ export default baseMixins.extend({
 
       this.updateView()
     },
+  },
+
+  created () {
+    if (this.$listeners.input) {
+      breaking('@input', '@change', this)
+    }
   },
 
   mounted () {

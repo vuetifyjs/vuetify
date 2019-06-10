@@ -15,6 +15,7 @@ import ButtonGroup from '../../mixins/button-group'
 
 // Utilities
 import { convertToUnit } from '../../util/helpers'
+import { breaking } from '../../util/console'
 
 // Types
 import { VNode } from 'vue'
@@ -37,7 +38,6 @@ export default VWindow.extend({
       type: [Number, String],
       default: 500,
     },
-    hideControls: Boolean,
     hideDelimiters: Boolean,
     hideDelimiterBackground: Boolean,
     progress: Boolean,
@@ -100,6 +100,12 @@ export default VWindow.extend({
         this.slideTimeout = undefined
       }
     },
+  },
+
+  created () {
+    if (this.$attrs.hasOwnProperty('hide-controls')) {
+      breaking('hide-controls', ':show-arrows="false"', this)
+    }
   },
 
   mounted () {

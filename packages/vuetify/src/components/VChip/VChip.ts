@@ -20,6 +20,9 @@ import Sizeable from '../../mixins/sizeable'
 // Directives
 import Ripple from '../../directives/ripple'
 
+// Utilities
+import { breaking } from '../../util/console'
+
 // Types
 import { PropValidator } from 'vue/types/options'
 
@@ -104,6 +107,17 @@ export default mixins(
         this.chipGroup
       )
     },
+  },
+
+  created () {
+    const breakingProps = [
+      ['outline', 'outlined'],
+      ['selected', 'value'],
+    ]
+
+    breakingProps.forEach(([original, replacement]) => {
+      if (this.$attrs.hasOwnProperty(original)) breaking(original, replacement, this)
+    })
   },
 
   methods: {

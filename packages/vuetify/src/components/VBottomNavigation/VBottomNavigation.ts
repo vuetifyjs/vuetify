@@ -13,6 +13,7 @@ import { factory as ToggleableFactory } from '../../mixins/toggleable'
 
 // Utilities
 import mixins from '../../util/mixins'
+import { breaking } from '../../util/console'
 
 // Types
 import { VNode } from 'vue'
@@ -84,6 +85,12 @@ export default mixins(
         transform: this.isActive ? 'none' : 'translateY(100%)',
       }
     },
+  },
+
+  created () {
+    if (this.$attrs.hasOwnProperty('active')) {
+      breaking('active.sync', 'value or v-model', this)
+    }
   },
 
   methods: {

@@ -14,10 +14,13 @@ import Positionable from '../../mixins/positionable'
 import Routable from '../../mixins/routable'
 import Sizeable from '../../mixins/sizeable'
 
+// Utilities
+import mixins, { ExtractVue } from '../../util/mixins'
+import { breaking } from '../../util/console'
+
 // Types
 import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
-import mixins, { ExtractVue } from '../../util/mixins'
 import { RippleOptions } from '../../directives/ripple'
 
 const baseMixins = mixins(
@@ -130,6 +133,18 @@ export default baseMixins.extend<options>().extend({
         ...this.measurableStyles,
       }
     },
+  },
+
+  created () {
+    const breakingProps = [
+      ['flat', 'text'],
+      ['outline', 'outlined'],
+      ['round', 'rounded'],
+    ]
+
+    breakingProps.forEach(([original, replacement]) => {
+      if (this.$attrs.hasOwnProperty(original)) breaking(original, replacement, this)
+    })
   },
 
   methods: {

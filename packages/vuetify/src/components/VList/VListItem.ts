@@ -14,6 +14,7 @@ import Ripple from '../../directives/ripple'
 // Utilities
 import { keyCodes } from './../../util/helpers'
 import { ExtractVue } from './../../util/mixins'
+import { removed } from '../../util/console'
 
 // Types
 import mixins from '../../util/mixins'
@@ -86,6 +87,12 @@ export default baseMixins.extend<options>().extend({
         this.listItemGroup
       )
     },
+  },
+
+  created () {
+    if (this.$attrs.hasOwnProperty('avatar')) {
+      removed('avatar', this)
+    }
   },
 
   methods: {

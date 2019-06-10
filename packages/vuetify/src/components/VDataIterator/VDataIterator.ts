@@ -112,7 +112,7 @@ export default mixins(Themeable).extend({
     ]
 
     breakingProps.forEach(([original, replacement]) => {
-      if (this.$attrs.hasOwnProperty(original)) breaking(original, replacement)
+      if (this.$attrs.hasOwnProperty(original)) breaking(original, replacement, this)
     })
 
     const removedProps = [

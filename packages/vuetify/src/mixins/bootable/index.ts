@@ -1,3 +1,6 @@
+// Utilities
+import { removed } from '../../util/console'
+
 // Types
 import Vue, { VNode } from 'vue'
 interface Toggleable extends Vue {
@@ -34,6 +37,12 @@ export default Vue.extend<Vue & Toggleable>().extend({
     isActive () {
       this.isBooted = true
     },
+  },
+
+  created () {
+    if ('lazy' in this.$attrs) {
+      removed('lazy', this)
+    }
   },
 
   methods: {
