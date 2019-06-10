@@ -58,9 +58,9 @@ export default CalendarWithEvents.extend({
 
   computed: {
     parsedValue (): VTimestamp {
-      return validateTimestamp(this.value)
+      return (validateTimestamp(this.value)
         ? parseTimestamp(this.value)
-        : (this.parsedStart || this.times.today)
+        : (this.parsedStart || this.times.today)) as VTimestamp
     },
     renderProps (): VCalendarRenderProps {
       const around = this.parsedValue
