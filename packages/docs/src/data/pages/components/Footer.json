@@ -25,11 +25,22 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "companyFooter",
-            "indigoFooter",
-            "tealFooter"
+            "simple/absolute",
+            "simple/padless",
+            "intermediate/companyFooter",
+            "intermediate/indigoFooter",
+            "intermediate/tealFooter"
           ]
         }
       ]
