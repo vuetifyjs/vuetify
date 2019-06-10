@@ -139,24 +139,25 @@
 .v-tabs--vertical
   display: flex
 
-  .v-tabs-bar
+  & > .v-tabs-bar
     height: auto
 
-  .v-tabs-bar__content
-    flex-direction: column
+    .v-tabs-bar__content
+      flex-direction: column
 
-  .v-tab
-    height: $tabs-item-vertical-height
+    .v-tab
+      height: $tabs-item-vertical-height
 
-  .v-tabs-slider
-    height: 100%
+    .v-tabs-slider
+      height: 100%
 
-  .v-window
+  & > .v-window
     flex: 1 1 auto
 
   &.v-tabs--icons-and-text
-    .v-tab
-      height: $tabs-item-vertical-icons-and-text-height
+    & > .v-tabs-bar
+      .v-tab
+        height: $tabs-item-vertical-icons-and-text-height
 
 .v-tab--active
   color: inherit
