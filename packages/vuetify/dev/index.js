@@ -11,8 +11,8 @@ Vue.use(Vuetify)
 
 const vuetify = new Vuetify({
   lang: {
-    locales
-  }
+    locales,
+  },
 })
 
 const vm = new Vue({
