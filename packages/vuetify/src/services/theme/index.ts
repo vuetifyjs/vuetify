@@ -156,7 +156,7 @@ export class Theme extends Service {
   // Generate the style element
   // if applicable
   private genStyleElement (): void {
-    if (typeof document === 'undefined') return
+    if (typeof document === 'undefined' || document.getElementById('vuetify-theme-stylesheet')) return
 
     /* istanbul ignore next */
     const options = this.options || {}
