@@ -16,7 +16,7 @@ import Ripple from '../../directives/ripple'
 
 // Utilities
 import { convertToUnit, keyCodes } from '../../util/helpers'
-import { deprecate, consoleWarn } from '../../util/console'
+import { breaking, consoleWarn } from '../../util/console'
 
 // Types
 import mixins from '../../util/mixins'
@@ -49,8 +49,6 @@ export default baseMixins.extend<options>().extend({
   props: {
     appendOuterIcon: String,
     autofocus: Boolean,
-    /** @deprecated */
-    box: Boolean,
     browserAutocomplete: String,
     clearable: Boolean,
     clearIcon: {
@@ -104,7 +102,7 @@ export default baseMixins.extend<options>().extend({
         'v-text-field--solo': this.isSolo,
         'v-text-field--solo-inverted': this.soloInverted,
         'v-text-field--solo-flat': this.flat,
-        'v-text-field--filled': this.isFilled,
+        'v-text-field--filled': this.filled,
         'v-text-field--is-booted': this.isBooted,
         'v-text-field--enclosed': this.isEnclosed,
         'v-text-field--reverse': this.reverse,
@@ -133,14 +131,11 @@ export default baseMixins.extend<options>().extend({
     },
     isEnclosed (): boolean {
       return (
-        this.isFilled ||
+        this.filled ||
         this.isSolo ||
         this.outlined ||
         this.fullWidth
       )
-    },
-    isFilled (): boolean {
-      return this.box || this.filled
     },
     isLabelActive (): boolean {
       return this.isDirty || dirtyTypes.includes(this.type)
@@ -192,9 +187,13 @@ export default baseMixins.extend<options>().extend({
   },
 
   created () {
+    /* istanbul ignore next */
+    if (this.$attrs.hasOwnProperty('box')) {
+      breaking('box', 'filled', this)
+    }
+
     /* istanbul ignore if */
-    if (this.box) deprecate('box', 'filled')
-    if (this.shaped && !(this.isFilled || this.outlined || this.isSolo)) {
+    if (this.shaped && !(this.filled || this.outlined || this.isSolo)) {
       consoleWarn('shaped should be used with either filled or outlined', this)
     }
   },

@@ -345,14 +345,14 @@ describe('VSelect.ts', () => {
 
     expect(wrapper.vm.isMenuActive).toBe(false)
 
-    wrapper.setProps({ box: true })
+    wrapper.setProps({ filled: true })
     wrapper.vm.hasMouseDown = true
     wrapper.find('.v-input__slot').trigger('mouseup')
 
     expect(wrapper.vm.isMenuActive).toBe(true)
 
     wrapper.setData({ isMenuActive: false })
-    wrapper.setProps({ box: false, solo: true })
+    wrapper.setProps({ filled: false, solo: true })
     wrapper.vm.hasMouseDown = true
     wrapper.find('.v-input__slot').trigger('mouseup')
 
