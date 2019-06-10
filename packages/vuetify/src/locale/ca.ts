@@ -21,6 +21,9 @@ export default {
     firstPage: 'Pàgina Primera',
     lastPage: 'Pàgina Darrera',
   },
+  datePicker: {
+    itemsSelected: '{0} seleccionats',
+  },
   noDataText: 'Sense dades',
   carousel: {
     prev: 'Visualització prèvia',

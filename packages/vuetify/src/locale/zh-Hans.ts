@@ -21,6 +21,9 @@ export default {
     firstPage: '第一页',
     lastPage: '最后一页',
   },
+  datePicker: {
+    itemsSelected: '{0}选中',
+  },
   noDataText: '无可用数据',
   carousel: {
     prev: '以前的视觉',

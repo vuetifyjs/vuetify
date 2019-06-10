@@ -86,6 +86,10 @@ export default mixins(
       type: [Boolean, String],
       default: true,
     },
+    selectedItemsText: {
+      type: String,
+      default: '$vuetify.datePicker.itemsSelected',
+    },
     showWeek: Boolean,
     // Function formatting currently selected date in the picker title
     titleDateFormat: Function as PropValidator<DatePickerFormatter | DatePickerMultipleFormatter | undefined>,
@@ -173,11 +177,17 @@ export default mixins(
       }
     },
     defaultTitleMultipleDateFormatter (): DatePickerMultipleFormatter {
-      if ((this.value as string[]).length < 2) {
-        return dates => dates.length ? this.defaultTitleDateFormatter(dates[0]) : '0 selected'
-      }
+      return dates => {
+        if (!dates.length) {
+          return '-'
+        }
 
-      return dates => `${dates.length} selected`
+        if (dates.length === 1) {
+          return this.defaultTitleDateFormatter(dates[0])
+        }
+
+        return this.$vuetify.lang.t(this.selectedItemsText, [dates.length])
+      }
     },
     defaultTitleDateFormatter (): DatePickerFormatter {
       const titleFormats = {
