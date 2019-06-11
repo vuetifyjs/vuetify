@@ -24,6 +24,10 @@
     "slotEvents": {
       "header": "### Slot events",
       "desc": "`v-input` can have `click:append` and `click:prepend` events for its slots. Note: `v-text-field` is used just for example."
+    },
+    "slots": {
+      "header": "### Slots",
+      "desc": "`v-input` has `append` and `prepend` slots. You can place custom icons in them."
     }
   },
   "props": {

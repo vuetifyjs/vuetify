@@ -40,6 +40,7 @@
             "simple/success",
             "simple/error",
             "intermediate/rules",
+            "intermediate/slots",
             "intermediate/slotEvents"
           ]
         }
