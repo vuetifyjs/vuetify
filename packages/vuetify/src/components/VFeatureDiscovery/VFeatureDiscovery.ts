@@ -572,8 +572,11 @@ export default baseMixins.extend<options>().extend({
         staticClass: 'v-feature-discovery__content',
         class: {
           ...this.rootThemeClasses,
+          ...this.themeClasses,
           'v-feature-discovery__content--fixed': this.activatorFixed,
-          'v-feature-discovery__content--active': this.isActive
+          'v-feature-discovery__content--flat': this.flat,
+          'v-feature-discovery__content--active': this.isActive,
+          'v-feature-discovery__content--no-ripple': this.noRipple
         },
         style: this.styles,
         directives: this.genDirectives(),
