@@ -42,10 +42,8 @@
           "value": [
             "simple/colored",
             "simple/permanentFloating",
-            "simple/persistent",
             "simple/mini",
             "simple/temporary",
-            "simple/dark",
             "simple/right",
             "simple/expand-on-hover",
             "intermediate/background",
