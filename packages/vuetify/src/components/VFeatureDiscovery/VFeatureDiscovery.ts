@@ -429,6 +429,49 @@ export default baseMixins.extend<options>().extend({
       if (!el || !this.hasWindow) return null
       return this.getRoundedBoundedClientRect(el)
     },
+    measureDesktopBackdrop (): circleObject {
+      const c = this.dimensions.content
+      const x = c.width / 2 - this.defaultPadding
+      // Calculate the circles tangent point A(ax, ay) using cycloid curve
+      // Get hightlight radius with padding
+      const r = this.highlightOuterSize / 2
+      // Get rolled distance/perimeter
+      const d = -this.computedWrapOffsetLeft
+      // Calculate rolled angle
+      const t = d / (2 * r)
+      // Calculate the tangent point
+      // using the circle bottom center point as origin
+      let ax = r * Math.sin(t)
+      let ay = r * (1 + Math.cos(t))
+
+      // Move the origin to the rectangle top left absolute position
+      ax += x + d
+
+      // Calculate backdrop central point B(x, by) and radius (br)
+      const by = (Math.pow(ax, 2) - (2 * ax * x) + Math.pow(ay, 2)) / (2 * ay)
+      const br = Math.hypot(x, by)
+
+      // Move origin to the rectangle bottom left absolute position
+      ay += c.height
+      // Calculate backdrop central point C(x, cy) and radius (cr)
+      const cy = (Math.pow(ax, 2) - (2 * ax * x) + Math.pow(ay, 2)) / (2 * ay)
+      const cr = Math.hypot(x, cy)
+
+      if (br > cr) {
+        return {
+          x,
+          y: by,
+          r: br,
+          size: 2 * (br + this.defaultPadding)
+        }
+      }
+      return {
+        x,
+        y: cy - c.height,
+        r: cr,
+        size: 2 * (cr + this.defaultPadding)
+      }
+    },
     sneakPeek (cb: () => void) {
       requestAnimationFrame(() => {
         const el = this.$refs.content
