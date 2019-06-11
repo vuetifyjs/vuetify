@@ -28,7 +28,8 @@
           "type": "examples",
           "value": [
             "simple/loading",
-            "simple/success"
+            "simple/success",
+            "simple/error"
           ]
         }
       ]

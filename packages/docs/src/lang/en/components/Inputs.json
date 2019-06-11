@@ -12,6 +12,10 @@
     "success": {
       "header": "### Success",
       "desc": "As any validatable Vuetify component, `v-input` can be set to success state. Note: `v-text-field` is used just for example."
+    },
+    "error": {
+      "header": "### Error",
+      "desc": "As any validatable Vuetify component, `v-input` can be set to error state. Note: `v-text-field` is used just for example."
     }
   },
   "props": {
