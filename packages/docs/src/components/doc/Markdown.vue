@@ -77,6 +77,9 @@
 h4.markdown > p
   margin-bottom: 0
 
+.markdown:last-child p
+  margin-bottom: 0
+
 .markdown--link
   text-decoration: none
 

@@ -68,16 +68,18 @@
   > .v-card
     display: flex
     flex: 1 1 100%
-    max-width: 100%
     flex-direction: column
+    max-height: 100%
+    max-width: 100%
 
     > .v-card__title,
     > .v-card__actions
-      flex: 1 0 auto
+      flex: 0 0 auto
 
     > .v-card__text
-      overflow-y: auto
       backface-visibility: hidden
+      flex: 1 1 auto
+      overflow-y: auto
 
 @keyframes animate-dialog
   0%

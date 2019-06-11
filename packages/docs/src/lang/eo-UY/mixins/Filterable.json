@@ -1,8 +1,8 @@
 {
-	"props": {
-		"noDataText": "crwdns23656:0crwdne23656:0"
-	},
-	"slots": {
-		"noData": "crwdns23658:0crwdne23658:0"
-	}
+  "props": {
+    "noDataText": "crwdns23656:0crwdne23656:0"
+  },
+  "slots": {
+    "noData": "crwdns23658:0crwdne23658:0"
+  }
 }

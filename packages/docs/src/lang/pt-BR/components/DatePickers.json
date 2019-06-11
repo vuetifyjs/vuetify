@@ -1,0 +1,10 @@
+{
+  "examples": {
+    "dateWidth": {
+      "desc": "Você pode especificar ao picker uma largura ou fazer com que ele possua largura total."
+    },
+    "monthWidth": {
+      "desc": "Você pode especificar ao picker uma largura ou fazer com que ele possua largura total."
+    }
+  }
+}

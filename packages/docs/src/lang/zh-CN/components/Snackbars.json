@@ -1,12 +1,7 @@
 {
   "header": "Snackbars",
   "headerText": "`v-snackbar`组件用于向用户显示快速消息，Snackbars 支持定位、消失延迟和回调。",
-  "components": ["v-snackbar"],
   "examples": {
-    "position": {
-      "header": "位置",
-      "desc": "标准 Snackbars 有利于使用户注意到一些刚发生的活动。"
-    },
     "contextual": {
       "header": "上下文",
       "desc": "您可以为 Snackbars 应用一种色彩，以更好地适应您的实现。"

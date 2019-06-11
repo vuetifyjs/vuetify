@@ -1,0 +1,20 @@
+{
+  "header": "# Directive d'ondulations",
+  "headerText": "La directive `v-ripple` est utilisée pour montrer l'action d'un utilisateur. Elle peut être appliquée à n'importe quel élément de niveau bloc. La directive ripple est intégrée à de nombreux composants, tels que `v-btn`, `v-tabs-item` et bien d'autres.",
+  "examples": {
+    "usage": {
+      "uninverted": true
+    },
+    "customColor": {
+      "header": "### Couleur personnalisée",
+      "desc": "À l'aide d'une classe d'aide, vous pouvez modifier la couleur de l'ondulation.",
+      "uninverted": true
+    },
+    "center": {
+      "uninverted": true
+    },
+    "rippleInComponents": {
+      "uninverted": true
+    }
+  }
+}

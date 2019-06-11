@@ -1,26 +1,26 @@
 {
-	"becomeSponsor": "crwdns24772:0crwdne24772:0",
-	"callout": "crwdns24774:0crwdne24774:0",
-	"features": {
-		"0": {
-			"text": "crwdns24776:0crwdne24776:0",
-			"title": "crwdns24778:0crwdne24778:0"
-		},
-		"1": {
-			"text": "crwdns24780:0crwdne24780:0",
-			"title": "crwdns24782:0crwdne24782:0"
-		},
-		"2": {
-			"text": "crwdns24784:0crwdne24784:0",
-			"title": "crwdns24786:0crwdne24786:0"
-		}
-	},
-	"getHelp": "crwdns24788:0crwdne24788:0",
-	"getStarted": "crwdns24790:0crwdne24790:0",
-	"github": "crwdns24792:0crwdne24792:0",
-	"madeWithVuetify": "crwdns24794:0crwdne24794:0",
-	"materialDesign": "crwdns24796:0crwdne24796:0",
-	"mit": "crwdns24798:0crwdne24798:0",
-	"proudlySponsoredBy": "crwdns24800:0crwdne24800:0",
-	"whyVuetify": "crwdns24802:0crwdne24802:0"
+  "becomeSponsor": "crwdns24772:0crwdne24772:0",
+  "callout": "crwdns24774:0crwdne24774:0",
+  "features": {
+    "community": {
+      "text": "crwdns36058:0crwdne36058:0",
+      "title": "crwdns36060:0crwdne36060:0"
+    },
+    "components": {
+      "text": "crwdns36062:0crwdne36062:0",
+      "title": "crwdns36064:0crwdne36064:0"
+    },
+    "scaffolding": {
+      "text": "crwdns36066:0crwdne36066:0",
+      "title": "crwdns36068:0crwdne36068:0"
+    }
+  },
+  "getHelp": "crwdns24788:0crwdne24788:0",
+  "getStarted": "crwdns24790:0crwdne24790:0",
+  "github": "crwdns24792:0crwdne24792:0",
+  "madeWithVuetify": "crwdns24794:0crwdne24794:0",
+  "materialDesign": "crwdns24796:0crwdne24796:0",
+  "mit": "crwdns24798:0crwdne24798:0",
+  "proudlySponsoredBy": "crwdns24800:0crwdne24800:0",
+  "whyVuetify": "crwdns24802:0crwdne24802:0"
 }
