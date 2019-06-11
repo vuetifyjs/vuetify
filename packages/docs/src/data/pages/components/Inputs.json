@@ -39,6 +39,7 @@
             "simple/loading",
             "simple/success",
             "simple/error",
+            "simple/multiError",
             "intermediate/rules",
             "intermediate/slots",
             "intermediate/slotEvents"
