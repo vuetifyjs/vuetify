@@ -20,6 +20,10 @@
     "rules": {
       "header": "### Rules",
       "desc": "You can add custom validation rules to `v-input`, add them as functions returning `true`/error message. Note: `v-text-field` is used just for example."
+    },
+    "slotEvents": {
+      "header": "### Slot events",
+      "desc": "`v-input` can have `click:append` and `click:prepend` events for its slots. Note: `v-text-field` is used just for example."
     }
   },
   "props": {

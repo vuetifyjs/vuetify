@@ -30,7 +30,8 @@
             "simple/loading",
             "simple/success",
             "simple/error",
-            "intermediate/rules"
+            "intermediate/rules",
+            "intermediate/slotEvents"
           ]
         }
       ]
