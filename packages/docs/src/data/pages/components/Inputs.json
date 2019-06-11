@@ -29,7 +29,8 @@
           "value": [
             "simple/loading",
             "simple/success",
-            "simple/error"
+            "simple/error",
+            "intermediate/rules"
           ]
         }
       ]
