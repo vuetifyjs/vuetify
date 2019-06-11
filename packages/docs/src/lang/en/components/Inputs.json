@@ -32,6 +32,10 @@
     "slots": {
       "header": "### Slots",
       "desc": "`v-input` has `append` and `prepend` slots. You can place custom icons in them."
+    },
+    "hint": {
+      "header": "### Hint",
+      "desc": "`v-input` can have `hint` which can tell user how to use the input. `persistent-hint` prop makes the hint visible always if no messages are displayed."
     }
   },
   "props": {

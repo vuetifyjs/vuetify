@@ -37,6 +37,7 @@
           "type": "examples",
           "value": [
             "simple/loading",
+            "simple/hint",
             "simple/success",
             "simple/error",
             "simple/multiError",
