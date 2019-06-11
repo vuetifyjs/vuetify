@@ -52,7 +52,7 @@
         return this.success ? [ 'Done' ] : []
       },
       errorMsg () {
-        return this.error ? [ 'Error', 'Another one' ] : []
+        return this.error ? [ 'Error', 'Another one', 'One more', 'All the errors' ] : []
       },
     },
     methods: {
