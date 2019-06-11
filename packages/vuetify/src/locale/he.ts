@@ -21,6 +21,9 @@ export default {
     firstPage: 'עמוד ראשון',
     lastPage: 'עמוד אחרון',
   },
+  datePicker: {
+    itemsSelected: '{0} נבחרו',
+  },
   noDataText: 'אין נתונים זמינים',
   carousel: {
     prev: 'מצג קודם',

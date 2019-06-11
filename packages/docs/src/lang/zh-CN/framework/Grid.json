@@ -1,13 +1,7 @@
 {
   "header": "栅格系统",
   "headerText": "Vuetify拥有一个12点的栅格系统，它使用<kbd>flex-box</kbd>构建，栅格用于布局应用程序的内容。它包含5种类型的媒体断点，用于定位特定的屏幕大小或方向。栅格组件的属性实际上是从它们定义的属性派生的类，这允许您轻松地将这些辅助类指定为属性，同时仍然提供在任何地方使用的类。",
-  "components": ["v-container', 'v-layout', 'v-flex', 'v-spacer"],
   "examples": {
-    "grid": {
-      "header": "用例",
-      "desc": "`v-container`可以用于中心聚焦的页面，或者用`fluid`来扩展它的全部宽度。`v-layout`用于分隔各部分，并包含`v-flex`。您的布局结构如下，**v-container** &raquo; **v-layout** &raquo; **v-flex**。栅格链的每个部分都是一个弹性框元素，最后，`v-flex`会自动设置它的子元素获得<kbd>flex: 1 1 auto</kbd>。",
-      "uninverted": true
-    },
     "offset": {
       "header": "偏移",
       "desc": "偏移对于补偿可能还不可见的元素或控制内容的位置很有用。就像断点一样，您可以为仍和可用的大小设置偏移量，这使您可以根据需要精确调整应用程序布局。",
@@ -46,8 +40,5 @@
       "header": "Html标签",
       "desc": "有的时候您会想要将一个布局项指定为特定的标签，比如一个`section`或者`li`元素。"
     }
-  },
-  "props": {
-    "tag": "Mixins.Routable.props.tag"
   }
 }

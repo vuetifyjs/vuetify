@@ -2,10 +2,6 @@
   "header": "Button",
   "headerText": "O componente `v-btn` substitui o tema do botão html padrão pelo material design com grande variedade de opções. Qualquer classe de ajuda de cor pode ser usada para alterar a cor do fundo ou texto.",
   "examples": {
-    "usage": {
-      "header": "Uso",
-      "desc": ""
-    },
     "flat": {
       "header": "Plano",
       "desc": "Botões planos não tem sombra ou fundo. O contorno do botão é exibido somente ao passar o mouse."
@@ -22,10 +18,6 @@
       "header": "Variantes de Botão com Menu Suspenso",
       "desc": "Os botões com menu suspenso são seleções normais com estilo adicional.",
       "uninverted": true
-    },
-    "toggle": {
-      "header": "Botão de Alternância",
-      "desc": "Botões de alternância são, essencialmente, botões estilo rádio ou caixas de seleção, dependendo das propriedades selecionadas. Este componente é compatível com o componente `v-toolbar`."
     },
     "icon": {
       "header": "Ícone",
@@ -67,6 +59,7 @@
       "large": "Botão de tamanho grande",
       "loading": "Adiciona uma animação de ícone de carregamento",
       "outline": "O botão terá um contorno",
+      "outlined": "O botão terá um contorno",
       "round": "O botão terá cantos arredondados",
       "small": "Botão de tamanho pequeno",
       "type": "Define o tipo do botão"

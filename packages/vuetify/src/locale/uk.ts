@@ -21,6 +21,9 @@ export default {
     firstPage: 'Перша сторінка',
     lastPage: 'Остання сторінка',
   },
+  datePicker: {
+    itemsSelected: '{0} вибрано',
+  },
   noDataText: 'Немає даних для відображення',
   carousel: {
     prev: 'Попередній візуальний',

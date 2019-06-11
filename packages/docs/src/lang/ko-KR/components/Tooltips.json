@@ -1,12 +1,7 @@
 {
   "header": "툴팁 (Tooltip)",
   "headerText": "`v-tooltip` 컴포넌트는 사용자가 마우스 포인터를 요소 위에 올렸을 때 (hover) 정보를 전달하는데 유용합니다. 또한 **v-model** 을 이용하여 툴팁의 표시를 프로그램적으로 제어할 수 있습니다.",
-  "components": ["v-tooltip"],
   "examples": {
-    "default": {
-      "header": "기본설정 (Default)",
-      "desc": "툴팁은 어떤 요소(element)든 감쌀 수 있습니다."
-    },
     "alignment": {
       "header": "정렬 (Alignment)",
       "desc": "툴팁은 활성 요소(activator elements) 의 4방향 어느쪽으로든 정렬될 수 있습니다."

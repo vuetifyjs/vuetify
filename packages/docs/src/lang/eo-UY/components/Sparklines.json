@@ -1,43 +1,43 @@
 {
-	"header": "crwdns25408:0crwdne25408:0",
-	"headerText": "crwdns25410:0crwdne25410:0",
-	"examples": {
-		"playground": {
-			"header": "crwdns25412:0crwdne25412:0",
-			"desc": "crwdns25414:0crwdne25414:0"
-		},
-		"heartRate": {
-			"header": "crwdns25416:0crwdne25416:0",
-			"desc": "crwdns25418:0crwdne25418:0"
-		},
-		"dashboardCard": {
-			"header": "crwdns25420:0crwdne25420:0",
-			"desc": "crwdns25422:0crwdne25422:0"
-		},
-		"salesCard": {
-			"header": "crwdns25424:0crwdne25424:0",
-			"desc": "crwdns25426:0crwdne25426:0"
-		},
-		"fill": {
-			"header": "crwdns25428:0crwdne25428:0",
-			"desc": "crwdns25430:0crwdne25430:0"
-		}
-	},
-	"props": {
-		"autoDraw": "crwdns25432:0crwdne25432:0",
-		"autoDrawDuration": "crwdns25434:0crwdne25434:0",
-		"autoDrawEasing": "crwdns25436:0crwdne25436:0",
-		"autoLineWidth": "crwdns25438:0crwdne25438:0",
-		"data": "crwdns25440:0crwdne25440:0",
-		"fill": "crwdns25442:0crwdne25442:0",
-		"gradient": "crwdns25444:0crwdne25444:0",
-		"gradientDirection": "crwdns25446:0crwdne25446:0",
-		"labels": "crwdns25448:0crwdne25448:0",
-		"labelSize": "crwdns25450:0crwdne25450:0",
-		"lineWidth": "crwdns25452:0crwdne25452:0",
-		"padding": "crwdns25454:0crwdne25454:0",
-		"showLabels": "crwdns25456:0crwdne25456:0",
-		"smooth": "crwdns25458:0crwdne25458:0",
-		"type": "crwdns25460:0crwdne25460:0"
-	}
+  "header": "crwdns25408:0crwdne25408:0",
+  "headerText": "crwdns25410:0crwdne25410:0",
+  "examples": {
+    "playground": {
+      "header": "crwdns25412:0crwdne25412:0",
+      "desc": "crwdns25414:0crwdne25414:0"
+    },
+    "heartRate": {
+      "header": "crwdns25416:0crwdne25416:0",
+      "desc": "crwdns25418:0crwdne25418:0"
+    },
+    "dashboardCard": {
+      "header": "crwdns25420:0crwdne25420:0",
+      "desc": "crwdns25422:0crwdne25422:0"
+    },
+    "salesCard": {
+      "header": "crwdns25424:0crwdne25424:0",
+      "desc": "crwdns25426:0crwdne25426:0"
+    },
+    "fill": {
+      "header": "crwdns25428:0crwdne25428:0",
+      "desc": "crwdns25430:0crwdne25430:0"
+    }
+  },
+  "props": {
+    "autoDraw": "crwdns25432:0crwdne25432:0",
+    "autoDrawDuration": "crwdns25434:0crwdne25434:0",
+    "autoDrawEasing": "crwdns25436:0crwdne25436:0",
+    "autoLineWidth": "crwdns25438:0crwdne25438:0",
+    "data": "crwdns25440:0crwdne25440:0",
+    "fill": "crwdns25442:0crwdne25442:0",
+    "gradient": "crwdns25444:0crwdne25444:0",
+    "gradientDirection": "crwdns25446:0crwdne25446:0",
+    "labels": "crwdns25448:0crwdne25448:0",
+    "labelSize": "crwdns25450:0crwdne25450:0",
+    "lineWidth": "crwdns25452:0crwdne25452:0",
+    "padding": "crwdns25454:0crwdne25454:0",
+    "showLabels": "crwdns25456:0crwdne25456:0",
+    "smooth": "crwdns25458:0crwdne25458:0",
+    "type": "crwdns25460:0crwdne25460:0"
+  }
 }

@@ -100,13 +100,6 @@ declare module 'vuetify/lib' {
   const VListItemIcon: Component
   const VListItemSubtitle: Component
   const VListItemTitle: Component
-  const VListTile: Component
-  const VListTileAction: Component
-  const VListTileActionText: Component
-  const VListTileAvatar: Component
-  const VListTileContent: Component
-  const VListTileSubTitle: Component
-  const VListTileTitle: Component
   const VMenu: Component
   const VMenuTransition: Component
   const VMessages: Component
@@ -271,13 +264,6 @@ declare module 'vuetify/lib' {
     VListItemIcon,
     VListItemSubtitle,
     VListItemTitle,
-    VListTile,
-    VListTileAction,
-    VListTileActionText,
-    VListTileAvatar,
-    VListTileContent,
-    VListTileSubTitle,
-    VListTileTitle,
     VMenu,
     VMenuTransition,
     VMessages,

@@ -21,6 +21,9 @@ export default {
     firstPage: 'صفحه‌ی اول',
     lastPage: 'صفحه‌ی آخر',
   },
+  datePicker: {
+    itemsSelected: '{0} انتخاب شده است',
+  },
   noDataText: 'اطلاعاتی یافت نشد',
   carousel: {
     prev: 'اسلاید قبلی',

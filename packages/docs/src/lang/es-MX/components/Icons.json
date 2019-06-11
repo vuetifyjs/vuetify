@@ -1,40 +1,27 @@
 {
-    "header": "Icon",
-    "headerText": "El componente `v-icon` provee de una gran colección de símbolos que dan contexto a varios aspectos de tu aplicación. Los íconos de vuetify utilizan la librería de fuentes Material Icons. Para ver la lista de todos los íconos disponibles, visita la página oficial de [Material Icons](https://material.io/icons/).",
-    "components": [
-        "v-icon"
-    ],
-    "examples": [
-        {
-            "standard": {
-                "header": "Standard",
-                "desc": "Los íconos vienen en dos temas (light y dark) así como cuatro tamaños diferentes (standard, medium, large y x-large)."
-            },
-            "fontAwesome": {
-                "header": "Font Awesome",
-                "desc": "[Font Awesome](http://fontawesome.io/icons/) también tiene soporte. Simplemente utiliza el prefijo `fa-` para el nombre del ícono. Considera que de todos modos necesitas incluir los íconos de Font Awesome en tu proyecto."
-            },
-            "mdi": {
-                "header": "Material Design Icons",
-                "desc": "[Material Design Icons](https://materialdesignicons.com/) también tiene soporte. Simplemente utiliza el prefijo `mdi-` para el nombre del ícono. Considera que de todos modos necesitas incluir los íconos de MDI en tu proyecto."
-            },
-            "color": {
-                "header": "Color",
-                "desc": "Al usar auxiliares de color puedes cambiar el color de un ícono de los temas estándar dark y light."
-            },
-            "buttons": {
-                "header": "Buttons",
-                "desc": "Los íconos pueden ser usados dentro de los botones para enfatizar una acción.."
-            }
-        }
-    ],
-    "props": {
-        "disabled": "Mixins.Input.props.disabled",
-        "large": "Hace que el ícono sea grande **(36px)**",
-        "left": "Coloca el ícono a la izquierda, cuando se usa dentro de un botón",
-        "medium": "Hace el ícono mediano  **(28px)**",
-        "right": "Coloca el ícono a la derecha, cuando se usa dentro de un botón",
-        "small": "Hace el ícono pequeño **(16px)**",
-        "xLarge": "Hace el ícono extra grande **(40px)**"
+  "header": "Icon",
+  "headerText": "El componente `v-icon` provee de una gran colección de símbolos que dan contexto a varios aspectos de tu aplicación. Los íconos de vuetify utilizan la librería de fuentes Material Icons. Para ver la lista de todos los íconos disponibles, visita la página oficial de [Material Icons](https://material.io/icons/).",
+  "examples": {
+    "fontAwesome": {
+      "header": "Font Awesome",
+      "desc": "[Font Awesome](http://fontawesome.io/icons/) también tiene soporte. Simplemente utiliza el prefijo `fa-` para el nombre del ícono. Considera que de todos modos necesitas incluir los íconos de Font Awesome en tu proyecto."
+    },
+    "color": {
+      "header": "Color",
+      "desc": "Al usar auxiliares de color puedes cambiar el color de un ícono de los temas estándar dark y light."
+    },
+    "buttons": {
+      "header": "Buttons",
+      "desc": "Los íconos pueden ser usados dentro de los botones para enfatizar una acción.."
     }
+  },
+  "props": {
+    "disabled": "Mixins.Input.props.disabled",
+    "large": "Hace que el ícono sea grande **(36px)**",
+    "left": "Coloca el ícono a la izquierda, cuando se usa dentro de un botón",
+    "medium": "Hace el ícono mediano  **(28px)**",
+    "right": "Coloca el ícono a la derecha, cuando se usa dentro de un botón",
+    "small": "Hace el ícono pequeño **(16px)**",
+    "xLarge": "Hace el ícono extra grande **(40px)**"
+  }
 }
