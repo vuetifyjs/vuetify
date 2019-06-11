@@ -10,8 +10,8 @@
       <v-switch v-model="persistentHint" class="ma-2" label="Persistent hint"></v-switch>
       <v-flex xs12>
         <v-layout row wrap justify-space-around>
-          <v-btn @click="success = true; error = false;" color="success">Success</v-btn>
-          <v-btn @click="success = false; error = true;" color="error">Error</v-btn>
+          <v-btn color="success" @click="success = true; error = false;">Success</v-btn>
+          <v-btn color="error" @click="success = false; error = true;">Error</v-btn>
         </v-layout>
       </v-flex>
     </v-layout>
@@ -47,20 +47,20 @@
         persistentHint: true,
       }
     },
-    methods: {
-      appendIconCallback () {
-        alert('click:append')
-      },
-      prependIconCallback () {
-        alert('click:prepend')
-      },
-    },
     computed: {
       successMsg () {
         return this.success ? [ 'Done' ] : []
       },
       errorMsg () {
         return this.error ? [ 'Error', 'Another one' ] : []
+      },
+    },
+    methods: {
+      appendIconCallback () {
+        alert('click:append')
+      },
+      prependIconCallback () {
+        alert('click:prepend')
       },
     },
   }
