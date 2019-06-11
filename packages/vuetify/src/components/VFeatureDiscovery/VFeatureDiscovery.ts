@@ -157,6 +157,7 @@ export default baseMixins.extend<options>().extend({
     pageHeight: 0,
     pageYOffset: 0,
     resizeTimeout: 0,
+    activatorZIndexTimeout: 0,
     minHighlightPadding: 20,
     stackClass: 'v-feature-discovery__content--active',
     stackMinZIndex: 6
@@ -373,7 +374,16 @@ export default baseMixins.extend<options>().extend({
       const activator = this.getActivator()
       if (activator) {
         const zIndex = String(parseInt(this.zIndex || this.activeZIndex) + 1)
-        activator.style.zIndex = this.isActive ? zIndex : ''
+        if (this.isActive) {
+          activator.style.zIndex = zIndex
+        } else {
+          // When deactivating feature discovery
+          // the activator should be visible
+          // until the end of the opacity transition
+          // hacky but will revisit in the future
+          clearTimeout(this.activatorZIndexTimeout)
+          this.activatorZIndexTimeout = window.setTimeout(() => { activator.style.zIndex = '' }, 400)
+        }
       }
     },
     checkActivatorFixed () {
