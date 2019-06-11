@@ -4,6 +4,10 @@
   "examples": {
     "usage": {
       "desc": "`v-input` has 4 main areas. The prepended slot, the appended slot, the default slot, and messages. These make up the core logic shared between all form components."
+    },
+    "loading": {
+      "header": "### Loading",
+      "desc": "`v-input` has `loading` state which can be used, e.g. for data loading indication. Note: `v-select` is used just for example."
     }
   },
   "props": {
