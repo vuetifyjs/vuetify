@@ -1,3 +1,3 @@
 <template>
-  <v-select color="success" loading></v-select>
+  <v-text-field color="success" loading disabled></v-text-field>
 </template>
