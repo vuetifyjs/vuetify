@@ -42,6 +42,7 @@
   {
     "name": "Tiếng Việt",
     "locale": "vi-VN",
+    "alternate": "vi",
     "country": "vn"
   },
   {
