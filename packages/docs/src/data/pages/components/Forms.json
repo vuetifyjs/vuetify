@@ -25,12 +25,21 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "rules",
-            "validationWithSubmitAndClear",
-            "vuelidate",
-            "veeValidate"
+            "simple/rules",
+            "simple/validationWithSubmitAndClear",
+            "intermediate/vuelidate",
+            "intermediate/veeValidate"
           ]
         }
       ]
