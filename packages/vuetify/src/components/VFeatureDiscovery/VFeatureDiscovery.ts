@@ -166,7 +166,7 @@ export default baseMixins.extend<options>().extend({
     classes (): object {
       return {
         'v-feature-discovery--flat': this.flat,
-        'v-feature-discovery--active': this.internalActive,
+        'v-feature-discovery--active': this.isActive,
         'v-feature-discovery--no-ripple': this.noRipple,
         ...this.themeClasses
       }
@@ -310,12 +310,8 @@ export default baseMixins.extend<options>().extend({
     },
     attrs (): object {
       return {
-        'aria-hidden': !this.internalActive
+        'aria-hidden': !this.isActive
       }
-    },
-    internalActive (): boolean {
-      const a = this.dimensions.activator
-      return this.isActive && a.bottom > 0 && window.innerHeight - a.top > 0
     }
   },
 
@@ -524,7 +520,7 @@ export default baseMixins.extend<options>().extend({
       }
     },
     closeConditional (): boolean {
-      return !this.persistent && this.internalActive
+      return !this.persistent && this.isActive
     },
     genDirectives (): VNodeDirective[] {
       const directives: VNodeDirective[] = [{
