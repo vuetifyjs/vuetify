@@ -46,7 +46,7 @@
     transition: $feature-discovery-transition
 
   &__backdrop
-    opacity: 0.96
+    opacity: 0
     +elevation(4)
 
 
@@ -55,12 +55,15 @@
 
   &__wrap
     position: absolute
-    transition: .4s opacity map-get($transition, 'fast-out-slow-in')
+    transition: .2s opacity map-get($transition, 'slow-in-fast-out')
     opacity: 0
 
 // Modifier
 .v-feature-discovery__content
   &--active
+    .v-feature-discovery__backdrop
+      opacity: 0.96
+
     .v-feature-discovery__backdrop, .v-feature-discovery__highlight
       transform: scale(1)
 
@@ -70,8 +73,9 @@
   &:not(&--active)
     pointer-events: none
 
-  &--flat &__backdrop
-    +elevation(0)
+  &--flat
+    .v-feature-discovery__backdrop
+      +elevation(0)
 
 // Animations
 @keyframes pulse-animation
