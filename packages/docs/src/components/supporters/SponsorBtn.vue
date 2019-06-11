@@ -6,6 +6,7 @@
     :target="href ? '_blank' : undefined"
     color="primary"
     outlined
+    rounded
     rel="noopener"
     v-on="$listeners"
   >
