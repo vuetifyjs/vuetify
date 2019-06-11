@@ -8,6 +8,10 @@
     "loading": {
       "header": "### Loading",
       "desc": "`v-input` has `loading` state which can be used, e.g. for data loading indication. Note: `v-text-field` is used just for example."
+    },
+    "success": {
+      "header": "### Success",
+      "desc": "As any validatable Vuetify component, `v-input` can be set to success state. Note: `v-text-field` is used just for example."
     }
   },
   "props": {

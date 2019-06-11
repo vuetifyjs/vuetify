@@ -27,7 +27,8 @@
         {
           "type": "examples",
           "value": [
-            "simple/loading"
+            "simple/loading",
+            "simple/success"
           ]
         }
       ]
