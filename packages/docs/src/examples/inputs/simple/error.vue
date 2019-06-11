@@ -1,3 +1,3 @@
 <template>
-  <v-input :error-messages="['Fatal error']" error disabled>Input</v-input>
+  <v-input :error-messages="['Success']" error disabled>Input</v-input>
 </template>
