@@ -44,10 +44,10 @@ export default mixins(
       return getWeekdaySkips(this.weekdays)
     },
     parsedStart (): VTimestamp {
-      return parseTimestamp(this.start)
+      return parseTimestamp(this.start) as VTimestamp
     },
     parsedEnd (): VTimestamp {
-      return this.end ? parseTimestamp(this.end) : this.parsedStart
+      return (this.end ? parseTimestamp(this.end) : this.parsedStart) as VTimestamp
     },
     days (): VTimestamp[] {
       return createDayList(
