@@ -16,7 +16,7 @@
           :value="overlay"
         >
           <v-btn
-            green
+            color="green"
             @click="overlay = false"
           >
             Close Overlay
