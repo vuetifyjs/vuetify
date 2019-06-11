@@ -7,7 +7,7 @@
     },
     "absolute": {
       "header": "### Absolute",
-      "desc": "`absolute` overlays are contained within their parent element."
+      "desc": "`absolute` overlays are positioned absolutely and contained inside of their parent element."
     },
     "opacity": {
       "header": "### Opacity",
