@@ -1,0 +1,68 @@
+{
+  "header": "# Boutons",
+  "headerText": "Le composant `v-btn` remplace le bouton html standard avec un thème visuel et une multitude d'options. Toutes les classes d'aides de couleur peuvent être utilisées pour modifier la couleur de fond ou du texte.",
+  "examples": {
+    "flat": {
+      "header": "### Plat",
+      "desc": "Les boutons plats n'ont pas d'ombre portée et aucun fond d'écran. Seulement au survol d'un conteneur pour le bouton affiché."
+    },
+    "raised": {
+      "header": "### Soulevées",
+      "desc": "Les boutons soulevés ont une ombre portée qui augmente lorsque vous cliquez dessus. C'est le style par défaut."
+    },
+    "depressed": {
+      "header": "### Diminué",
+      "desc": "Les boutons diminués maintiennent toujours leur couleur d'arrière-plan, mais n'ont pas d'ombre portée."
+    },
+    "dropdown": {
+      "header": "### Variante de bouton déroulant",
+      "desc": "Les boutons de menus déroulants sont régulièrement sélectionné avec un style supplémentaire.",
+      "uninverted": true
+    },
+    "icon": {
+      "header": "### Icônes",
+      "desc": "Les icônes peuvent être utilisées pour le contenu primaire d'un bouton."
+    },
+    "floating": {
+      "header": "### Flottant",
+      "desc": "Les boutons flottants sont ronds et contiennent généralement une icône."
+    },
+    "loaders": {
+      "header": "### Chargements",
+      "desc": "En utilisant la proprité de chargement, vous pouvez notifier à un utilisateur qu'il y a un traitement en cours. Le comportement par défaut est d'utiliser un composant `v-progress-circular`, mais cela peut être personnalisé."
+    },
+    "sizing": {
+      "header": "### Taille",
+      "desc": "Les boutons peuvent être dotés de différentes options de tailles pour s'adapter à une multitude de scénarios."
+    },
+    "outline": {
+      "header": "### Alertes avec bordures",
+      "desc": "Les contours de boutons héritent leurs bordures de la couleur appliquée."
+    },
+    "round": {
+      "header": "### Boutons ronds",
+      "desc": "Les boutons arrondis se comportent comme des boutons réguliers mais ont des bords arrondis."
+    },
+    "block": {
+      "header": "### Bloc",
+      "desc": "Les blocs de boutons s'étendent sur la largeur totale disponible."
+    }
+  },
+  "props": {
+    "v-btn": {
+      "block": "Élargir le bouton à 100 % de l'espace disponible",
+      "depressed": "Supprime l'ombre portée de la boîte de boutons",
+      "fab": "Rendre le bouton rond",
+      "flat": "Supprime la couleur de fond du bouton",
+      "icon": "Indique le bouton comme icône - ronde et plate",
+      "inputValue": "Contrôle de l’état actif du bouton",
+      "large": "Bouton de grande taille",
+      "loading": "Ajoute un chargement d'animation de l’icône",
+      "outline": "Le bouton aura un contour",
+      "outlined": "Le bouton aura un contour",
+      "round": "Le bouton sera arrondi sur les côtés",
+      "small": "Bouton de petite taille",
+      "type": "Définir l'attribut de type du bouton"
+    }
+  }
+}

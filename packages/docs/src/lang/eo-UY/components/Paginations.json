@@ -1,42 +1,42 @@
 {
-	"header": "crwdns27062:0crwdne27062:0",
-	"headerText": "crwdns27064:0crwdne27064:0",
-	"examples": {
-		"usage": {
-			"desc": "crwdns27066:0crwdne27066:0"
-		},
-		"long": {
-			"header": "crwdns27068:0crwdne27068:0",
-			"desc": "crwdns27070:0crwdne27070:0"
-		},
-		"limit": {
-			"header": "crwdns27072:0crwdne27072:0",
-			"desc": "crwdns27074:0crwdne27074:0"
-		},
-		"round": {
-			"header": "crwdns27076:0crwdne27076:0",
-			"desc": "crwdns27078:0crwdne27078:0"
-		},
-		"icons": {
-			"header": "crwdns27080:0crwdne27080:0",
-			"desc": "crwdns27082:0crwdne27082:0"
-		},
-		"disabled": {
-			"header": "crwdns27084:0crwdne27084:0",
-			"desc": "crwdns27086:0crwdne27086:0"
-		}
-	},
-	"events": {
-		"previous": "crwdns27088:0crwdne27088:0",
-		"next": "crwdns27090:0crwdne27090:0"
-	},
-	"props": {
-		"circle": "crwdns27092:0crwdne27092:0",
-		"disabled": "crwdns27094:0crwdne27094:0",
-		"length": "crwdns27096:0crwdne27096:0",
-		"nextIcon": "crwdns27098:0crwdne27098:0",
-		"prevIcon": "crwdns27100:0crwdne27100:0",
-		"totalVisible": "crwdns27102:0crwdne27102:0",
-		"value": "crwdns27104:0crwdne27104:0"
-	}
+  "header": "crwdns27062:0crwdne27062:0",
+  "headerText": "crwdns27064:0crwdne27064:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns27066:0crwdne27066:0"
+    },
+    "long": {
+      "header": "crwdns27068:0crwdne27068:0",
+      "desc": "crwdns27070:0crwdne27070:0"
+    },
+    "limit": {
+      "header": "crwdns27072:0crwdne27072:0",
+      "desc": "crwdns27074:0crwdne27074:0"
+    },
+    "round": {
+      "header": "crwdns27076:0crwdne27076:0",
+      "desc": "crwdns27078:0crwdne27078:0"
+    },
+    "icons": {
+      "header": "crwdns27080:0crwdne27080:0",
+      "desc": "crwdns27082:0crwdne27082:0"
+    },
+    "disabled": {
+      "header": "crwdns27084:0crwdne27084:0",
+      "desc": "crwdns27086:0crwdne27086:0"
+    }
+  },
+  "events": {
+    "previous": "crwdns27088:0crwdne27088:0",
+    "next": "crwdns27090:0crwdne27090:0"
+  },
+  "props": {
+    "circle": "crwdns27092:0crwdne27092:0",
+    "disabled": "crwdns27094:0crwdne27094:0",
+    "length": "crwdns27096:0crwdne27096:0",
+    "nextIcon": "crwdns27098:0crwdne27098:0",
+    "prevIcon": "crwdns27100:0crwdne27100:0",
+    "totalVisible": "crwdns27102:0crwdne27102:0",
+    "value": "crwdns27104:0crwdne27104:0"
+  }
 }

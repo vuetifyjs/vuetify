@@ -2,25 +2,13 @@
   "header": "Carousel",
   "headerText": "El componente `v-carousel` se utiliza para mostrar grandes cantidades de contenido visual en un timer rotativo.",
   "examples": {
-    "default": {
-      "header": "Default",
-      "desc": "Un carrusel por default tiene la transición slide.",
-      "uninverted": true
-    },
     "customTransition": {
       "header": "Transición personalizada",
-      "desc": "También puedes aplicar tu propia transición personalizada.",
-      "uninverted": true
-    },
-    "customDelimiter": {
-      "header": "Delimitador personalizado",
-      "desc": "También puedes cambiar el ícono del delimitador del carrusel.",
-      "uninverted": true
+      "desc": "También puedes aplicar tu propia transición personalizada."
     },
     "hideControls": {
       "header": "Esconder los controles",
-      "desc": "Puedes esconder los controles de la parte inferior con la prop `hide-controls`.",
-      "uninverted": true
+      "desc": "Puedes esconder los controles de la parte inferior con la prop `hide-controls`."
     }
   },
   "props": {
@@ -32,7 +20,6 @@
     "hideDelimiters": "Esconde el panel con los delimitadores del carrusel",
     "interval": "La duración entre imágenes en el ciclo",
     "reverseTransition": "Configura la transición reversa",
-    "src": "La ruta a la imagen",
-    "transition": "Mixins.Transitionable.props.transition"
+    "src": "La ruta a la imagen"
   }
 }

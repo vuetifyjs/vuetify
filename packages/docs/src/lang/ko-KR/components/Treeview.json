@@ -1,0 +1,7 @@
+{
+  "props": {
+    "v-treeview": {
+      "customFilter": "커스텀 검색 필터"
+    }
+  }
+}

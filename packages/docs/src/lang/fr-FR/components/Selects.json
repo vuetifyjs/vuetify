@@ -1,0 +1,5 @@
+{
+  "events": {
+    "update:searchInput": "L'événement `search-input.sync`"
+  }
+}

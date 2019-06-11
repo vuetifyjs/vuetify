@@ -1,6 +1,6 @@
 {
-	"props": {
-		"openDelay": "crwdns23548:0crwdne23548:0",
-		"closeDelay": "crwdns23550:0crwdne23550:0"
-	}
+  "props": {
+    "openDelay": "crwdns23548:0crwdne23548:0",
+    "closeDelay": "crwdns23550:0crwdne23550:0"
+  }
 }

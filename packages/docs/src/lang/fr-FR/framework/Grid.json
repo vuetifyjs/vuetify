@@ -1,0 +1,31 @@
+{
+  "examples": {
+    "usage": {
+      "uninverted": true
+    },
+    "playground": {
+      "uninverted": true
+    },
+    "offset": {
+      "uninverted": true
+    },
+    "order": {
+      "uninverted": true
+    },
+    "directionAndAlign": {
+      "uninverted": true
+    },
+    "rowColumnBreakpoint": {
+      "uninverted": true
+    },
+    "growShrink": {
+      "uninverted": true
+    },
+    "nestedGrid": {
+      "uninverted": true
+    },
+    "uniqueLayouts": {
+      "uninverted": true
+    }
+  }
+}

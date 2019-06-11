@@ -1,14 +1,6 @@
 {
   "header": "动效",
   "headerText": "流畅的动画有助于给用户界面带来很棒的感觉。使用Vue的过渡系统和可复用的功能组件，您可以轻松地控制应用程序的动画效果。大多数组件可以通过`transition`属性来改变他们的过渡。",
-  "components": [
-    "v-fade-transition",
-    "v-slide-x-transition",
-    "v-slide-x-reverse-transition",
-    "v-slide-y-transition",
-    "v-slide-y-reverse-transition",
-    "v-scale-transition"
-  ],
   "examples": {
     "slideXTransitions": {
       "header": "X轴滑动过渡",

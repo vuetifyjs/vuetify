@@ -1,12 +1,7 @@
 {
   "header": "按钮",
   "headerText": "`v-btn`组件用一个material design主题和多个选项来替换标准的html按钮。任何色彩辅助类都可以用来改变背景或文字的颜色。",
-  "components": ["v-btn"],
   "examples": {
-    "usage": {
-      "header": "用例",
-      "desc": ""
-    },
     "flat": {
       "header": "扁平",
       "desc": "扁平按钮没有巷子箱子阴影，也没有背景。只有鼠标悬浮时才显示按钮的容器。"
@@ -23,10 +18,6 @@
       "header": "按钮下拉菜单",
       "desc": "按钮下拉菜单是带有额外的样式的常规选择框。",
       "uninverted": true
-    },
-    "toggle": {
-      "header": "按钮切换",
-      "desc": "根据所选的属性，切换按钮本质上是样式化的单选框或复选框。此组件与`v-toolbar`组件兼容。"
     },
     "icon": {
       "header": "图标",
@@ -68,6 +59,7 @@
       "large": "大型按钮",
       "loading": "添加一个加载中的图标动画",
       "outline": "按钮将拥有一个轮廓",
+      "outlined": "按钮将拥有一个轮廓",
       "round": "按钮两边会边圆",
       "small": "小型按钮",
       "type": "设置按钮的类型标签"
