@@ -48,7 +48,6 @@
             "simple/expand-on-hover",
             "intermediate/background",
             "intermediate/combined",
-            "intermediate/nested",
             "complex/bottom-drawer"
           ]
         }
