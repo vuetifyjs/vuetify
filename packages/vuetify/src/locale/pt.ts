@@ -3,14 +3,14 @@ export default {
   dataIterator: {
     pageText: '{0}-{1} de {2}',
     noResultsText: 'Nenhum dado encontrado',
-    loadingText: 'Loading item...',
+    loadingText: 'Carregando itens...',
   },
   dataTable: {
     itemsPerPageText: 'Linhas por página:',
     ariaLabel: {
-      sortDescending: ': Sorted descending. Activate to remove sorting.',
-      sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.',
+      sortDescending: ': Ordenado decrescente. Ative para remover a ordenação.',
+      sortAscending: ': Ordenado crescente. Ative para ordenar decrescente.',
+      sortNone: ': Não ordenado. Ative para ordenar crescente.',
     },
   },
   dataFooter: {
@@ -26,7 +26,7 @@ export default {
   },
   noDataText: 'Não há dados disponíveis',
   carousel: {
-    prev: 'Visual anterior',
-    next: 'Próximo visual',
+    prev: 'Visão anterior',
+    next: 'Próxima visão',
   },
 }
