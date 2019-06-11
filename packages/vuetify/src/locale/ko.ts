@@ -21,6 +21,9 @@ export default {
     firstPage: '첫 페이지',
     lastPage: '마지막 페이지',
   },
+  datePicker: {
+    itemsSelected: '{0} 선택됨',
+  },
   noDataText: '이용할 수 없습니다',
   carousel: {
     prev: '이전 화면',

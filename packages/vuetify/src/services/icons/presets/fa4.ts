@@ -27,6 +27,7 @@ const icons: VuetifyIcons = {
   ratingEmpty: 'fa fa-star-o',
   ratingFull: 'fa fa-star',
   ratingHalf: 'fa fa-star-half-o',
+  loading: 'fa fa-refresh',
   first: 'fa fa-step-backward',
   last: 'fa fa-step-forward',
   unfold: 'fa fa-angle-double-down',

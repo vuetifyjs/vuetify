@@ -21,6 +21,9 @@ export default {
     firstPage: 'Első oldal',
     lastPage: 'Utolsó oldal',
   },
+  datePicker: {
+    itemsSelected: '{0} kiválaszta/-ott',
+  },
   noDataText: 'Nincs elérhető adat',
   carousel: {
     prev: 'Korábbi vizuális',
