@@ -5,6 +5,10 @@
     "usage": {
       "desc": "In its simplest form, the `v-overlay` component will add a dimmed layer over your application."
     },
+    "absolute": {
+      "header": "### Absolute",
+      "desc": "`absolute` overlays are contained within their parent element."
+    },
     "loader": {
       "header": "### Loader",
       "desc": "Using the `v-overlay` as a background, add a progress component to easily create a custom loader."

@@ -36,6 +36,7 @@
         {
           "type": "examples",
           "value": [
+            "simple/absolute",
             "intermediate/loader",
             "complex/advanced"
           ]
