@@ -11,11 +11,11 @@
     },
     "success": {
       "header": "### Success",
-      "desc": "As any validatable Vuetify component, `v-input` can be set to success state."
+      "desc": "As any validatable Vuetify component, `v-input` can be set to success state using `success` prop, you can add message to it using `success-messages` prop."
     },
     "error": {
       "header": "### Error",
-      "desc": "As any validatable Vuetify component, `v-input` can be set to error state."
+      "desc": "As any validatable Vuetify component, `v-input` can be set to error state using `error` prop, messages can be added using `error-messages` prop. You can determine error messages count to show using `error-count` property."
     },
     "multiError": {
       "header": "### Multiple errors",
