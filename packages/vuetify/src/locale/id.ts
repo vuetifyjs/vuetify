@@ -21,6 +21,9 @@ export default {
     firstPage: 'Halaman pertama',
     lastPage: 'Halaman terakhir',
   },
+  datePicker: {
+    itemsSelected: '{0} dipilih',
+  },
   noDataText: 'Tidak ada data tersedia',
   carousel: {
     prev: 'Visual sebelumnya',

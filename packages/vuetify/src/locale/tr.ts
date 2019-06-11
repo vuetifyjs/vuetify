@@ -21,6 +21,9 @@ export default {
     firstPage: 'İlk sayfa',
     lastPage: 'Son sayfa',
   },
+  datePicker: {
+    itemsSelected: '{0} seçildi',
+  },
   noDataText: 'Uygun veri yok',
   carousel: {
     prev: 'Önceki görsel',
