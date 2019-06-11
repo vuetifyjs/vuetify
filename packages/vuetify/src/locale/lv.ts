@@ -21,6 +21,9 @@ export default {
     firstPage: 'Pirmā lapa',
     lastPage: 'Pēdējā lapa',
   },
+  datePicker: {
+    itemsSelected: '{0} izvēlēts',
+  },
   noDataText: 'Nav pieejamu datu',
   carousel: {
     prev: 'Iepriekšējais slaids',

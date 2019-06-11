@@ -21,6 +21,9 @@ export default {
     firstPage: 'Pagina prima',
     lastPage: 'Pagina ultima',
   },
+  datePicker: {
+    itemsSelected: '{0} selectate',
+  },
   noDataText: 'Nu există date disponibile',
   carousel: {
     prev: 'Anterior vizual',

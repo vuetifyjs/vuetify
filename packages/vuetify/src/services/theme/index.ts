@@ -70,7 +70,7 @@ export class Theme extends Service {
   // When setting css, check for element
   // and apply new values
   set css (val: string) {
-    this.checkStyleElement() && (this.styleEl!.innerHTML = val)
+    this.checkOrCreateStyleElement() && (this.styleEl!.innerHTML = val)
   }
 
   set dark (val: boolean) {
@@ -131,13 +131,14 @@ export class Theme extends Service {
   }
 
   // Check for existence of style element
-  private checkStyleElement (): boolean {
+  private checkOrCreateStyleElement (): boolean {
+    this.styleEl = document.getElementById('vuetify-theme-stylesheet') as HTMLStyleElement
+
     /* istanbul ignore next */
     if (this.styleEl) return true
 
     this.genStyleElement() // If doesn't have it, create it
 
-    this.styleEl = document.getElementById('vuetify-theme-stylesheet') as HTMLStyleElement
     return Boolean(this.styleEl)
   }
 

@@ -21,6 +21,9 @@ export default {
     firstPage: 'Esimene lehekülg',
     lastPage: 'Viimane lehekülg',
   },
+  datePicker: {
+    itemsSelected: '{0} valitud',
+  },
   noDataText: 'Andmed puuduvad',
   carousel: {
     prev: 'Eelmine visuaalne',
