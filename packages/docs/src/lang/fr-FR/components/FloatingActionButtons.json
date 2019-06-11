@@ -1,0 +1,19 @@
+{
+  "props": {
+    "v-btn": {
+      "block": "Élargir le bouton à 100 % de l'espace disponible",
+      "depressed": "Supprime l'ombre portée de la boîte de boutons",
+      "fab": "Rendre le bouton rond",
+      "flat": "Supprime la couleur de fond du bouton",
+      "icon": "Indique le bouton comme icône - ronde et plate",
+      "inputValue": "Contrôle de l’état actif du bouton",
+      "large": "Bouton de grande taille",
+      "loading": "Ajoute un chargement d'animation de l’icône",
+      "outline": "Le bouton aura un contour",
+      "outlined": "Le bouton aura un contour",
+      "round": "Le bouton sera arrondi sur les côtés",
+      "small": "Bouton de petite taille",
+      "type": "Définir l'attribut de type du bouton"
+    }
+  }
+}

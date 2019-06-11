@@ -1,11 +1,11 @@
 {
-	"props": {
-		"actions": "crwdns23564:0crwdne23564:0",
-		"autosave": "crwdns23566:0crwdne23566:0",
-		"headerColor": "crwdns23568:0crwdne23568:0",
-		"landscape": "crwdns23570:0crwdne23570:0",
-		"noTitle": "crwdns23572:0crwdne23572:0",
-		"scrollable": "crwdns23574:0crwdne23574:0",
-		"value": "crwdns23576:0crwdne23576:0"
-	}
+  "props": {
+    "actions": "crwdns23564:0crwdne23564:0",
+    "autosave": "crwdns23566:0crwdne23566:0",
+    "headerColor": "crwdns23568:0crwdne23568:0",
+    "landscape": "crwdns23570:0crwdne23570:0",
+    "noTitle": "crwdns23572:0crwdne23572:0",
+    "scrollable": "crwdns23574:0crwdne23574:0",
+    "value": "crwdns23576:0crwdne23576:0"
+  }
 }

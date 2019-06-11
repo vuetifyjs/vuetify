@@ -1,0 +1,8 @@
+{
+  "header": "# Faites partie de quelque chose de plus grand !",
+  "headerText": "Vuetify est rendu possible par une communauté extraordinaire qui soumet des tickets, crée des demandes de fusion et fournit des commentaires précieux. Notre travail consiste à vous permettre de créer des applications étonnantes. Souvent, vous rencontrez quelque chose qui peut être amélioré. Peut-être trouvez-vous un bug ou avez-vous une idée de fonctionnalités supplémentaires ? C'est génial ! Il suffit de cloner le projet Vuetify pour commencer à travailler dans un environnement de développement.",
+  "issueHeader": "## Signaler des problèmes",
+  "startupSubHeader1": "### Yarn",
+  "startupSubHeader2": "### PM2",
+  "startupText4": "Pour importer une instance PM2 pré-configurée, utilisez les éléments suivants"
+}

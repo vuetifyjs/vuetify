@@ -1,12 +1,7 @@
 {
   "header": "타임 피커 (Time picker)",
   "headerText": "`v-time-picker`는 다른 Vuetify 컴포넌트들에 사용될 수 있는 독자적(stand-alone) 컴포넌트 입니다. 타임 피커는 시간을 선택할 수 있는 시각적 표현을 제공합니다.",
-  "components": ["v-time-picker"],
   "examples": {
-    "timeLight": {
-      "header": "타임 피커 (Time pickers)",
-      "desc": "타임피커는 기본적으로 라이트 테마를 사용합니다."
-    },
     "timeColorable": {
       "header": "타임 피커 - 색상 (Time pickers - Colors)",
       "desc": "타임 피커의 색상은 `color`와 `header-color` prop을 이용하여 설정할 수 있습니다. `header-color`가 제공되지 않으면 `color` prop이 사용됩니다."

@@ -39,6 +39,11 @@
     "description": "Help support Vuetify.js by backing the development of new features",
     "keywords": "sponsor, backer, donations"
   },
+  "getting-started/long-term-support": {
+    "title": "Long-term Support",
+    "description": "Vuetify provides long-term support to the last major release for 12 months for critical bugs and security vulnerabilities.",
+    "keywords": "lts, long-term support"
+  },
   "getting-started/contributing": {
     "title": "Contributing",
     "description": "Learn how to help contribute to the Vuetify framework.",

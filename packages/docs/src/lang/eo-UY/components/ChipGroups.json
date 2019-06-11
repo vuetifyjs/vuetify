@@ -1,40 +1,40 @@
 {
-	"header": "crwdns27034:0crwdne27034:0",
-	"headerText": "crwdns27036:0crwdne27036:0",
-	"examples": {
-		"usage": {
-			"header": "crwdns27038:0crwdne27038:0",
-			"desc": "crwdns27040:0crwdne27040:0"
-		},
-		"toothbrush": {
-			"header": "crwdns27042:0crwdne27042:0",
-			"desc": "crwdns27044:0crwdne27044:0"
-		},
-		"filterResults": {
-			"header": "crwdns27046:0crwdne27046:0",
-			"desc": "crwdns27048:0crwdne27048:0"
-		},
-		"blouse": {
-			"header": "crwdns27050:0crwdne27050:0",
-			"desc": "crwdns27052:0crwdne27052:0"
-		},
-		"column": {
-			"header": "crwdns35824:0crwdne35824:0",
-			"desc": "crwdns35826:0crwdne35826:0"
-		},
-		"mandatory": {
-			"header": "crwdns35828:0crwdne35828:0",
-			"desc": "crwdns35830:0crwdne35830:0"
-		},
-		"multiple": {
-			"header": "crwdns35832:0crwdne35832:0",
-			"desc": "crwdns35834:0crwdne35834:0"
-		}
-	},
-	"props": {
-		"appendIcon": "crwdns27054:0crwdne27054:0",
-		"column": "crwdns27056:0crwdne27056:0",
-		"prependIcon": "crwdns27058:0crwdne27058:0",
-		"showArrows": "crwdns27060:0crwdne27060:0"
-	}
+  "header": "crwdns27034:0crwdne27034:0",
+  "headerText": "crwdns27036:0crwdne27036:0",
+  "examples": {
+    "usage": {
+      "header": "crwdns27038:0crwdne27038:0",
+      "desc": "crwdns27040:0crwdne27040:0"
+    },
+    "toothbrush": {
+      "header": "crwdns27042:0crwdne27042:0",
+      "desc": "crwdns27044:0crwdne27044:0"
+    },
+    "filterResults": {
+      "header": "crwdns27046:0crwdne27046:0",
+      "desc": "crwdns27048:0crwdne27048:0"
+    },
+    "blouse": {
+      "header": "crwdns27050:0crwdne27050:0",
+      "desc": "crwdns27052:0crwdne27052:0"
+    },
+    "column": {
+      "header": "crwdns35824:0crwdne35824:0",
+      "desc": "crwdns35826:0crwdne35826:0"
+    },
+    "mandatory": {
+      "header": "crwdns35828:0crwdne35828:0",
+      "desc": "crwdns35830:0crwdne35830:0"
+    },
+    "multiple": {
+      "header": "crwdns35832:0crwdne35832:0",
+      "desc": "crwdns35834:0crwdne35834:0"
+    }
+  },
+  "props": {
+    "appendIcon": "crwdns27054:0crwdne27054:0",
+    "column": "crwdns27056:0crwdne27056:0",
+    "prependIcon": "crwdns27058:0crwdne27058:0",
+    "showArrows": "crwdns27060:0crwdne27060:0"
+  }
 }
