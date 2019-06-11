@@ -3,7 +3,7 @@
     <v-card height="300" width="250">
       <v-layout justify-center wrap>
         <v-btn
-          color="green"
+          color="success"
           class="mt-5"
           @click="overlay = !overlay"
         >
@@ -11,15 +11,14 @@
         </v-btn>
 
         <v-overlay
-          absolute
-          opacity="1"
+          :absolute="absolute"
           :value="overlay"
         >
           <v-btn
-            color="green"
+            color="success"
             @click="overlay = false"
           >
-            Close Overlay
+            Hide Overlay
           </v-btn>
         </v-overlay>
       </v-layout>
@@ -31,6 +30,7 @@
   export default {
     data: () => ({
       overlay: false,
+      absolute: true,
     }),
   }
 </script>

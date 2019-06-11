@@ -9,6 +9,10 @@
       "header": "### Absolute",
       "desc": "`absolute` overlays are contained within their parent element."
     },
+    "zIndex": {
+      "header": "### Z Index",
+      "desc": "`z-index` gives you the ability to easily change the stack order of the `v-overlay` component."
+    },
     "loader": {
       "header": "### Loader",
       "desc": "Using the `v-overlay` as a background, add a progress component to easily create a custom loader."

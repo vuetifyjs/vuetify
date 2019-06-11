@@ -37,6 +37,7 @@
           "type": "examples",
           "value": [
             "simple/absolute",
+            "simple/zIndex",
             "intermediate/loader",
             "complex/advanced"
           ]
