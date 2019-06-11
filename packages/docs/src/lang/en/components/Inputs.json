@@ -15,7 +15,7 @@
     },
     "error": {
       "header": "### Error",
-      "desc": "As any validatable Vuetify component, `v-input` can be set to error state. Note: `v-text-field` is used just for example."
+      "desc": "As any validatable Vuetify component, `v-input` can be set to error state."
     },
     "rules": {
       "header": "### Rules",
