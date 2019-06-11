@@ -40,6 +40,13 @@ interface options extends ExtractVue<typeof baseMixins> {
   }
 }
 
+interface circleObject {
+  x: number
+  y: number
+  r: number
+  size: number
+}
+
 /* @vue/component */
 export default baseMixins.extend<options>().extend({
   name: 'v-feature-discovery',
@@ -171,10 +178,6 @@ export default baseMixins.extend<options>().extend({
         !!this.activator
       )
     },
-    computedActivatorIsLeft (): boolean {
-      const a = this.dimensions.activator
-      return a.x < this.pageWidth / 2
-    },
     isOnEdgeLeft (): boolean {
       const a = this.dimensions.activator
       return a.left <= parseFloat(this.edgeX)
@@ -220,33 +223,14 @@ export default baseMixins.extend<options>().extend({
       }
     },
     backdropSize (): number {
-      // const a = this.dimensions.activator
+      if (!this.isOnEdge) return this.measureDesktopBackdrop().size
       const c = this.dimensions.content
-
-      let height = this.highlightOuterSize / 2 + c.height
-      let width = c.width - this.defaultPadding
+      let width = c.width - 2 * this.defaultPadding
       if (!this.isOnEdgeX) {
-        width = c.width / 2
+        width = width / 2
       }
-      if (!this.isOnEdge) {
-        height -= this.computedBackdropOffsetTop
-        // Calculate top point (ax, ay)
-        const ax = c.width / 2 - this.computedWrapOffsetLeft
-        const ay = c.height + this.highlightOuterSize
-        // Calculate central point (cx, cy)
-        const cx = Math.pow(c.width, 2) / (2 * c.width)
-        const cy = (Math.pow(ax, 2) - (2 * ax * cx) + Math.pow(ay, 2)) / (2 * ay)
-        console.log('ax, ay', ax, ay)
-        console.log('cx, cy', cx, cy)
-        console.log(2 * Math.pow(Math.pow(ax - cx, 2) + Math.pow(ay - cy, 2), 1 / 2))
-        console.log(2 * (Math.hypot(cx, cy)))
-        console.log(2 * (Math.hypot(ax - cx, ay - cy)))
-        // return 2 * Math.pow(Math.pow(ax - cx, 2) + Math.pow(ay - cy, 2), 1 / 2)
-        return 2 * (Math.hypot(cx, cy))
-      }
-      const size = 2 * (Math.hypot(width, height) + this.defaultPadding)
-
-      return size
+      const height = this.highlightOuterSize / 2 + c.height
+      return 2 * (Math.hypot(width, height) + this.defaultPadding)
     },
     highlightInnerSize (): number {
       // Allow non fabs elements while keeping the size ratio 88:56
@@ -274,8 +258,8 @@ export default baseMixins.extend<options>().extend({
     },
     computedBackdropOffsetTop (): number {
       if (this.isOnEdge) return 0
-      return this.highlightOuterSize / 2 + this.defaultPadding
-      // return this.highlightOuterSize / 2
+      const backdrop = this.measureDesktopBackdrop()
+      return -backdrop.y + this.highlightInnerSize - this.highlightPadding
     },
     backdropStyle (): object {
       const size = this.backdropSize
