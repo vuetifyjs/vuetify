@@ -1,97 +1,65 @@
 {
-    "header": "Text field",
-    "headerText": "Los componentes de campo de texto se usan para recolectar información proveída por el usuario.",
-    "components": [
-        "v-text-field"
-    ],
-    "supplemental": [
-        "MaskTable"
-    ],
-    "examples": [
-        {
-            "label": {
-                "header": "Con etiqueta",
-                "desc": "Los text-fields vienen en dos opciones de tema: _dark_ y _light_."
-            },
-            "singleLine": {
-                "header": "Tema _light_ en una sola línea",
-                "desc": "Los text-fields de una sola línea no flotan su etiqueta cuando se enfocan o cuando tienen datos."
-            },
-            "icon": {
-                "header": "Con ícono",
-                "desc": "Los íconos pueden ser especificados como anexos al principio o al final."
-            },
-            "multiLine": {
-                "header": "Multi línea",
-                "desc": "Un text-field multi línea es útil para grandes cantidades de texto."
-            },
-            "characterCounter": {
-                "header": "Cuenta de caracteres",
-                "desc": "Utiliza un contador para informar al usuario el límite de caracteres. El contador no lleva a cabo ninguna validación por sí solo. Deberás aregarle el sistema de validación interno o una librería de terceros."
-            },
-            "password": {
-                "header": "Contraseña",
-                "desc": "Un input para contraseña puede ser utilizado con un ícono anexo al principio y un _callback_ para controlar la visibilidad."
-            },
-            "validation": {
-                "header": "Validación",
-                "desc": "Vuetify incluye una validación simple a través de la prop `rules`. La prop acepta un arreglo de _callbacks_. Durante la validación de las reglas, el valor del  v-model actual será pasado al callback. Este callback debe retornar ya sea `true` o un `String` con el mensaje de error."
-            },
-            "fullWidthWithCharacterCounter": {
-                "header": "Text field de ancho total con un contador de caracteres",
-                "desc": "Los text fields de ancho total te permiten crear inputs que no tienen límite de ancho. En este ejemplo, usamos un `v-divider` para separar los campos."
-            },
-            "requiredFields": {
-                "header": "Campos requeridos",
-                "desc": "En este ejemplo, dos de los text fields son requeridos. Utilizamos la prop **required** con el fin de aplicar un asterisco a la etiqueta y las reglas que validan los campos."
-            },
-            "hint": {
-                "header": "Pista",
-                "desc": "La prop **hint** en los campos de texto agrega el texto proveído detrás del campo de texto. al usar **persistent-hint** mantiene la pista visible cuando el text field no está enfocado."
-            },
-            "prefixesAndSuffixes": {
-                "header": "Prefijos y sufijos",
-                "desc": "Las props **prefix** y **suffix** te permiten añadir al principio o al final un texto no modificable junto al text field."
-            },
-            "customValidation": {
-                "header": "Validación personalizada",
-                "desc": "Aunque el `v-form` prefabricado o un plugin de terceros como [vuelidate](https://github.com/monterail/vuelidate) o [vee-validation](https://github.com/logaretm/vee-validate) pueden ayudarte a llevar a cabo tu proceso de validación de forma sencilla, puedes elejir controlarlo manualmente."
-            },
-            "textarea": {
-                "header": "Textarea",
-                "desc": "Los text fields _textarea_ tienen un estilo alternativo.",
-                "uninverted": true
-            },
-            "box": {
-                "header": "Box style",
-                "desc": "Los text fields pueden ser utilizados con un diseño alternativo de _box design_. Los íconos adjuntos al principio o al final **no están** soportados en este modo."
-            },
-            "customColors": {
-                "header": "Colores personalizados",
-                "desc": "Puedes opcionalmente cambiar un text field a cualquier otro color en la paleta de Material design. Debajo hay un ejemplo de una implementación de un _form_ personalizado con validación."
-            },
-            "masks": {
-                "header": "Masks",
-                "desc": "Los text fields pueden validar contra cualquier máscara de caracteres. Al usar ya sea reglas prefabricadas o personalizadas puedes opcionalmente darle formato y validar conjuntos de caracteres específicos.."
-            },
-            "progressBar": {
-                "header": "Progress bar",
-                "desc": "Puedes desplegar una barra de progreso en lugar de la línea de abajo. Puedes usar el progreso indeterminado default que tenga el mismo color que el text field o indicar que usarás un color personalizado utilizando el slot `progress`."
-            }
-        }
-    ],
-    "props": {
-        "autoGrow": "Crece el tamaño del input automáticamente. Esta opción requiere el uso de **v-model**",
-        "autofocus": "Habilita el autoenfoque",
-        "box": "Aplica un estilo alternativo de _box_ al input",
-        "counter": "Crea un contador para la longitud del input. Si no se especifica un número, el default es 25. No aplica ninguna validación.",
-        "fullWidth": "Indica el tipo del input como un full-width (ancho total)",
-        "multiLine": "Lo convierte en un textarea",
-        "prefix": "Muestra un texto de prefijo",
-        "rows": "Número de renglones en el textarea",
-        "suffix": "Muestra un texto de sufijo",
-        "textarea": "Un textaarea con un estilo alternativo",
-        "toggleKeys": "Arreglo de códigos de teclas que alternarán el valor del input (toggle) si es que lo soporta",
-        "type": "Configura el tipo de input"
+  "header": "Text field",
+  "headerText": "Los componentes de campo de texto se usan para recolectar información proveída por el usuario.",
+  "examples": {
+    "singleLine": {
+      "header": "Tema _light_ en una sola línea",
+      "desc": "Los text-fields de una sola línea no flotan su etiqueta cuando se enfocan o cuando tienen datos."
+    },
+    "icon": {
+      "header": "Con ícono",
+      "desc": "Los íconos pueden ser especificados como anexos al principio o al final."
+    },
+    "characterCounter": {
+      "header": "Cuenta de caracteres"
+    },
+    "password": {
+      "header": "Contraseña",
+      "desc": "Un input para contraseña puede ser utilizado con un ícono anexo al principio y un _callback_ para controlar la visibilidad."
+    },
+    "validation": {
+      "header": "Validación",
+      "desc": "Vuetify incluye una validación simple a través de la prop `rules`. La prop acepta un arreglo de _callbacks_. Durante la validación de las reglas, el valor del  v-model actual será pasado al callback. Este callback debe retornar ya sea `true` o un `String` con el mensaje de error."
+    },
+    "fullWidthWithCharacterCounter": {
+      "header": "Text field de ancho total con un contador de caracteres",
+      "desc": "Los text fields de ancho total te permiten crear inputs que no tienen límite de ancho. En este ejemplo, usamos un `v-divider` para separar los campos."
+    },
+    "hint": {
+      "header": "Pista",
+      "desc": "La prop **hint** en los campos de texto agrega el texto proveído detrás del campo de texto. al usar **persistent-hint** mantiene la pista visible cuando el text field no está enfocado."
+    },
+    "prefixesAndSuffixes": {
+      "header": "Prefijos y sufijos",
+      "desc": "Las props **prefix** y **suffix** te permiten añadir al principio o al final un texto no modificable junto al text field."
+    },
+    "customValidation": {
+      "header": "Validación personalizada",
+      "desc": "Aunque el `v-form` prefabricado o un plugin de terceros como [vuelidate](https://github.com/monterail/vuelidate) o [vee-validation](https://github.com/logaretm/vee-validate) pueden ayudarte a llevar a cabo tu proceso de validación de forma sencilla, puedes elejir controlarlo manualmente."
+    },
+    "box": {
+      "header": "Box style",
+      "desc": "Los text fields pueden ser utilizados con un diseño alternativo de _box design_. Los íconos adjuntos al principio o al final **no están** soportados en este modo."
+    },
+    "customColors": {
+      "header": "Colores personalizados",
+      "desc": "Puedes opcionalmente cambiar un text field a cualquier otro color en la paleta de Material design. Debajo hay un ejemplo de una implementación de un _form_ personalizado con validación."
+    },
+    "progressBar": {
+      "header": "Progress bar",
+      "desc": "Puedes desplegar una barra de progreso en lugar de la línea de abajo. Puedes usar el progreso indeterminado default que tenga el mismo color que el text field o indicar que usarás un color personalizado utilizando el slot `progress`."
     }
+  },
+  "props": {
+    "autoGrow": "Crece el tamaño del input automáticamente. Esta opción requiere el uso de **v-model**",
+    "autofocus": "Habilita el autoenfoque",
+    "counter": "Crea un contador para la longitud del input. Si no se especifica un número, el default es 25. No aplica ninguna validación.",
+    "multiLine": "Lo convierte en un textarea",
+    "prefix": "Muestra un texto de prefijo",
+    "rows": "Número de renglones en el textarea",
+    "suffix": "Muestra un texto de sufijo",
+    "textarea": "Un textaarea con un estilo alternativo",
+    "toggleKeys": "Arreglo de códigos de teclas que alternarán el valor del input (toggle) si es que lo soporta",
+    "type": "Configura el tipo de input"
+  }
 }

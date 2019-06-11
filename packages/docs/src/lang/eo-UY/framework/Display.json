@@ -1,39 +1,39 @@
 {
-	"header": "crwdns24134:0crwdne24134:0",
-	"headerText": "crwdns24136:0crwdne24136:0",
-	"visibilityHeader": "crwdns24138:0crwdne24138:0",
-	"visibilityText": "crwdns24140:0{breakpoint}crwdnd24140:0{condition}crwdne24140:0",
-	"breakpointText": "crwdns24142:0crwdne24142:0",
-	"breakpoints": {
-		"0": "crwdns24144:0crwdne24144:0",
-		"1": "crwdns24146:0crwdne24146:0",
-		"2": "crwdns24148:0crwdne24148:0",
-		"3": "crwdns24150:0crwdne24150:0",
-		"4": "crwdns24152:0crwdne24152:0"
-	},
-	"conditionText": "crwdns24154:0crwdne24154:0",
-	"conditions": {
-		"0": "crwdns24156:0crwdne24156:0",
-		"1": "crwdns24158:0crwdne24158:0",
-		"2": "crwdns24160:0crwdne24160:0"
-	},
-	"mediaText": "crwdns24162:0crwdne24162:0",
-	"displayHeader": "crwdns24164:0crwdne24164:0",
-	"displayText": "crwdns24166:0{display}crwdne24166:0",
-	"displays": {
-		"0": "crwdns24168:0crwdne24168:0",
-		"1": "crwdns24170:0crwdne24170:0",
-		"2": "crwdns24172:0crwdne24172:0",
-		"3": "crwdns24174:0crwdne24174:0",
-		"4": "crwdns24176:0crwdne24176:0",
-		"5": "crwdns24178:0crwdne24178:0"
-	},
-	"exampleText": "crwdns24180:0crwdne24180:0",
-	"overflowHeader": "crwdns24182:0crwdne24182:0",
-	"overflowText": "crwdns24184:0{axis}crwdne24184:0",
-	"overflows": {
-		"0": "crwdns24186:0crwdne24186:0",
-		"1": "crwdns24188:0crwdne24188:0",
-		"2": "crwdns24190:0crwdne24190:0"
-	}
+  "header": "crwdns24134:0crwdne24134:0",
+  "headerText": "crwdns24136:0crwdne24136:0",
+  "visibilityHeader": "crwdns24138:0crwdne24138:0",
+  "visibilityText": "crwdns24140:0{breakpoint}crwdnd24140:0{condition}crwdne24140:0",
+  "breakpointText": "crwdns24142:0crwdne24142:0",
+  "breakpoints": [
+    "crwdns24144:0crwdne24144:0",
+    "crwdns24146:0crwdne24146:0",
+    "crwdns24148:0crwdne24148:0",
+    "crwdns24150:0crwdne24150:0",
+    "crwdns24152:0crwdne24152:0"
+  ],
+  "conditionText": "crwdns24154:0crwdne24154:0",
+  "conditions": [
+    "crwdns24156:0crwdne24156:0",
+    "crwdns24158:0crwdne24158:0",
+    "crwdns24160:0crwdne24160:0"
+  ],
+  "mediaText": "crwdns24162:0crwdne24162:0",
+  "displayHeader": "crwdns24164:0crwdne24164:0",
+  "displayText": "crwdns24166:0{display}crwdne24166:0",
+  "displays": [
+    "crwdns24168:0crwdne24168:0",
+    "crwdns24170:0crwdne24170:0",
+    "crwdns24172:0crwdne24172:0",
+    "crwdns24174:0crwdne24174:0",
+    "crwdns24176:0crwdne24176:0",
+    "crwdns24178:0crwdne24178:0"
+  ],
+  "exampleText": "crwdns24180:0crwdne24180:0",
+  "overflowHeader": "crwdns24182:0crwdne24182:0",
+  "overflowText": "crwdns24184:0{axis}crwdne24184:0",
+  "overflows": [
+    "crwdns24186:0crwdne24186:0",
+    "crwdns24188:0crwdne24188:0",
+    "crwdns24190:0crwdne24190:0"
+  ]
 }

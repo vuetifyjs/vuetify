@@ -1,14 +1,14 @@
 {
-	"header": "crwdns23490:0crwdne23490:0",
-	"headerText": "crwdns23492:0crwdne23492:0",
-	"examples": {
-		"usage": {
-			"desc": "crwdns23494:0crwdne23494:0",
-			"uninverted": true
-		}
-	},
-	"options": {
-		"modifiers.quiet": "crwdns23498:0crwdne23498:0",
-		"value": "crwdns23500:0crwdne23500:0"
-	}
+  "header": "crwdns23490:0crwdne23490:0",
+  "headerText": "crwdns23492:0crwdne23492:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns23494:0crwdne23494:0",
+      "uninverted": true
+    }
+  },
+  "options": {
+    "modifiers.quiet": "crwdns23498:0crwdne23498:0",
+    "value": "crwdns23500:0crwdne23500:0"
+  }
 }

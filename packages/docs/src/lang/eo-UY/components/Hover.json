@@ -1,19 +1,19 @@
 {
-	"header": "crwdns28714:0crwdne28714:0",
-	"headerText": "crwdns28716:0crwdne28716:0",
-	"examples": {
-		"usage": {
-			"desc": "crwdns28718:0crwdne28718:0"
-		},
-		"transition": {
-			"header": "crwdns28720:0crwdne28720:0",
-			"desc": "crwdns28722:0crwdne28722:0"
-		}
-	},
-	"props": {
-		"disabled": "crwdns28724:0crwdne28724:0"
-	},
-	"scopedSlots": {
-		"default": "crwdns28726:0crwdne28726:0"
-	}
+  "header": "crwdns28714:0crwdne28714:0",
+  "headerText": "crwdns28716:0crwdne28716:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns28718:0crwdne28718:0"
+    },
+    "transition": {
+      "header": "crwdns28720:0crwdne28720:0",
+      "desc": "crwdns28722:0crwdne28722:0"
+    }
+  },
+  "props": {
+    "disabled": "crwdns28724:0crwdne28724:0"
+  },
+  "scopedSlots": {
+    "default": "crwdns28726:0crwdne28726:0"
+  }
 }

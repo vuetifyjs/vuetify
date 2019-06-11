@@ -1,36 +1,36 @@
 {
-	"header": "crwdns29520:0crwdne29520:0",
-	"headerText": "crwdns29522:0crwdne29522:0",
-	"buy": "crwdns29524:0crwdne29524:0",
-	"free": "crwdns29526:0crwdne29526:0",
-	"live": "crwdns29528:0crwdne29528:0",
-	"premium": "crwdns29530:0crwdne29530:0",
-	"downloadNow": "crwdns29532:0crwdne29532:0",
-	"viewDemo": "crwdns29534:0crwdne29534:0",
-	"templates": {
-		"alpha": {
-			"title": "crwdns29536:0crwdne29536:0",
-			"description": "crwdns29538:0crwdne29538:0"
-		},
-		"dashboard": {
-			"title": "crwdns29540:0crwdne29540:0",
-			"description": "crwdns29542:0crwdne29542:0"
-		},
-		"freelancer": {
-			"title": "crwdns29544:0crwdne29544:0",
-			"description": "crwdns29546:0crwdne29546:0"
-		},
-		"material-kit": {
-			"title": "crwdns29548:0crwdne29548:0",
-			"description": "crwdns29550:0crwdne29550:0"
-		},
-		"parallax": {
-			"title": "crwdns29552:0crwdne29552:0",
-			"description": "crwdns29554:0crwdne29554:0"
-		},
-		"blog": {
-			"title": "crwdns29556:0crwdne29556:0",
-			"description": "crwdns29558:0crwdne29558:0"
-		}
-	}
+  "header": "crwdns29520:0crwdne29520:0",
+  "headerText": "crwdns29522:0crwdne29522:0",
+  "buy": "crwdns29524:0crwdne29524:0",
+  "free": "crwdns29526:0crwdne29526:0",
+  "live": "crwdns29528:0crwdne29528:0",
+  "premium": "crwdns29530:0crwdne29530:0",
+  "downloadNow": "crwdns29532:0crwdne29532:0",
+  "viewDemo": "crwdns29534:0crwdne29534:0",
+  "templates": {
+    "alpha": {
+      "title": "crwdns29536:0crwdne29536:0",
+      "description": "crwdns29538:0crwdne29538:0"
+    },
+    "dashboard": {
+      "title": "crwdns29540:0crwdne29540:0",
+      "description": "crwdns29542:0crwdne29542:0"
+    },
+    "freelancer": {
+      "title": "crwdns29544:0crwdne29544:0",
+      "description": "crwdns29546:0crwdne29546:0"
+    },
+    "material-kit": {
+      "title": "crwdns29548:0crwdne29548:0",
+      "description": "crwdns29550:0crwdne29550:0"
+    },
+    "parallax": {
+      "title": "crwdns29552:0crwdne29552:0",
+      "description": "crwdns29554:0crwdne29554:0"
+    },
+    "blog": {
+      "title": "crwdns29556:0crwdne29556:0",
+      "description": "crwdns29558:0crwdne29558:0"
+    }
+  }
 }

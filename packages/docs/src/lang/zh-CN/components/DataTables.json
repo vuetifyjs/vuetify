@@ -1,23 +1,18 @@
 {
   "header": "数据表格",
   "headerText": "`v-data-table` 用于显示表格数据，功能包括排序、搜索、分页、行内编辑、头部提示以及行选择。",
-  "components": ["v-data-table', 'v-edit-dialog"],
   "examples": {
-    "standard": {
-      "header": "标准",
-      "desc": "标准的数据表格包含没有附加功能的数据。你可以通过 `hide-actions` 属性来控制是否需要显示分页信息，即 使用 `hide-action`将不分页，直接显示全部数据。"
+    "select": {
+      "header": "行选择框",
+      "desc": "使用行选择框能让你进行行选择操作。"
     },
-    "noData": {
-      "header": "no-data 插槽",
-      "desc": "当没有数据的时候，可以使用 `no-data` 插槽显示一段自定义HTML。"
+    "expand": {
+      "header": "expand 插槽",
+      "desc": "`v-data-table` 组件还支持行展开，通过使用`expand` 插槽。 另外你可以使用 `expand` 属性来避免你点击另一行的时候已展开的行关闭。"
     },
     "headers": {
       "header": "items 和 headers 插槽",
       "desc": "`items` 和 `headers` 可以接受 <kbd>td/th</kbd> 标签, 或者你想控制一整行，可以使用 <kbd>tr</kbd> 标签。第二种情况下，`item-key`并不会自动在行上加上`key`，你需要手动添加。"
-    },
-    "headerCell": {
-      "header": "headerCell 插槽",
-      "desc": "如果你想对每个表头单元应用一些常见的标记或者效果，可以使用 `headerCell` 插槽，这下面的例子中就是将提示信息应用到表头的每个单元。"
     },
     "progress": {
       "header": "progress 插槽",
@@ -27,25 +22,9 @@
       "header": "footer 插槽",
       "desc": "如果你还想添加一些额外的功能，比如每列过滤或者搜索，你可以使用 `footer` 插槽。"
     },
-    "expand": {
-      "header": "expand 插槽",
-      "desc": "`v-data-table` 组件还支持行展开，通过使用`expand` 插槽。 另外你可以使用 `expand` 属性来避免你点击另一行的时候已展开的行关闭。"
-    },
-    "pageText": {
-      "header": "page-text 插槽",
-      "desc": "你可以使用`page-text` 插槽来自定义显示范围以及总条目。"
-    },
-    "select": {
-      "header": "行选择框",
-      "desc": "使用行选择框能让你进行行选择操作。"
-    },
     "search": {
       "header": "搜索以及无结果时的 no-result 插槽",
       "desc": "数据表格还提供了一个 `search` 属性，允许你进行数据筛选。"
-    },
-    "customIcons": {
-      "header": "Custom icons",
-      "desc": "Previous/next pagination icons and sort icon can be customized with **prev-icon**, **next-icon** and **sort-icon** props."
     },
     "paginate": {
       "header": "外部分页",
@@ -75,21 +54,11 @@
   "props": {
     "v-edit-dialog": {
       "cancelText": "为取消按钮设置默认文本，当使用了 `large` 属性时（即有提交和取消按钮的对话框）。",
-      "eager": "Mixins.Bootable.props.eager",
       "large": "附加一个提交和取消按钮到对话框",
-      "saveText": "为保存按钮设置默认文本，当使用了 `large` 属性时。",
-      "transition": "Mixins.Transitionable.props.transition"
+      "saveText": "为保存按钮设置默认文本，当使用了 `large` 属性时。"
     },
     "v-data-table": {
-      "headerText": "使用一个对象时表头的文本值",
-      "headers": "表头数组",
-      "hideHeaders": "隐藏表头"
-    }
-  },
-  "scopedSlots": {
-    "v-data-table": {
-      "headerCell": "自定义表头每个单元的插槽",
-      "headers": "自定义整个表头的插槽"
+      "headers": "表头数组"
     }
   }
 }

@@ -1,0 +1,4 @@
+{
+  "callback": "La fonction de rappel à invoquer",
+  "debounce": "Durée d'attente avant d'appeler la méthode de rappel"
+}

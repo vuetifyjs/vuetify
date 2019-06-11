@@ -1,0 +1,31 @@
+{
+  "header": "# Fil d'ariane",
+  "headerText": "Le composant `v-breadcrumbs` est un outil d'aide à la navigation pour les pages. Il peut accepter une icône **Material Icons** ou des caractères texte comme un diviseur. Un tableau d'objets peut être transmis à la propriété **items** du composant. De plus, un emplacement scopé existe pour plus de contrôle du fil d'ariane, soit en utilisant `v-breadcrumbs-item` ou d'autres balises personnalisées.",
+  "examples": {
+    "usage": {
+      "desc": "Par défaut, le fil d'ariane utilise un séparateur de texte. Cela peut être n’importe quelle chaîne de caractère."
+    },
+    "iconDividers": {
+      "header": "### Diviseurs d'icônes",
+      "desc": "Pour la variante d’icône, le fil d'ariane peut utiliser n’importe quelle icône du thème Material Design."
+    },
+    "itemSlot": {
+      "header": "### Emplacement de l'objet",
+      "desc": "Vous pouvez utiliser l'emplacement `item` pour personnaliser chaque fil d'ariane."
+    }
+  },
+  "props": {
+    "divider": "Spécifie le caractère de séparation",
+    "icons": "Spécifie que les séparateurs sont des icônes",
+    "items": "Tableau d’objets qui décrivent chaque fil d’Ariane. Voir la section `v-breadcrumbs-item` pour découvrir toutes les propriétés de l’objet. Utilisez la propriété `text` pour le texte du fil d'ariane.",
+    "justifyCenter": "Aligner au centre le fil d'ariane",
+    "justifyEnd": "Aligner le fil d'ariane à la fin",
+    "large": "Augmenter la taille de police du texte du fil d'ariane"
+  },
+  "slots": {
+    "divider": "Spécifie le contenu du diviseur"
+  },
+  "scopedSlots": {
+    "item": "Emplacement personnalisé pour remplacer le rendu par défaut du fil d'ariane"
+  }
+}

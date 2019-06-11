@@ -2,10 +2,6 @@
   "header": "Button",
   "headerText": "El componente `v-btn` reemplaza el botón html estándar con un diseño de material design y una multitud de opciones. Cualquier clase auxiliar de color puede ser utilizada para alterar el color del texto o del fondo.",
   "examples": {
-    "usage": {
-      "header": "Uso",
-      "desc": ""
-    },
     "flat": {
       "header": "Flat",
       "desc": "Los botones _flat_ no tienen sombra ni color de fondo. Sólo cuando se pasa el mouse por encima de ellos es que se muestra el contenedor del botón."
@@ -22,10 +18,6 @@
       "header": "Variantes de Button Dropdown",
       "desc": "Los _button dropdowns_ son selects regulares con estilos adicionales.",
       "uninverted": true
-    },
-    "toggle": {
-      "header": "Button Toggle",
-      "desc": "Los _toggle buttons_ son escencialmente radio o checkboxes estilizados, dependiendo de las propiedades selecionadas. Este componente es compatible con el componente `v-toolbar`."
     },
     "icon": {
       "header": "Ícono",
@@ -54,10 +46,6 @@
     "block": {
       "header": "Block",
       "desc": "Los _block butons_ se extienden hasta abarcar el ancho total disponible."
-    },
-    "appBar": {
-      "header": "En un toolbar",
-      "desc": "Integra fácilmente soluciones personalizadas de botones al `v-toolbar`"
     }
   },
   "props": {
@@ -71,6 +59,7 @@
       "large": "Botón de tamaño grande",
       "loading": "Agrega un ícono animado \"loading\"",
       "outline": "El botón tendrá un contorno",
+      "outlined": "El botón tendrá un contorno",
       "round": "El botón será redondeado de los lados",
       "small": "Botón de tamaño pequeño",
       "type": "Configura el atributo _type_ del botón"

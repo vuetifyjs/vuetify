@@ -1,13 +1,14 @@
 {
   "header": "# Поддержка разработки Vuetify",
   "headerText": "Vuetify - проект с открытым исходным кодом под лицензией MIT. Это всегда можно будет свободно использовать. Тем не менее, объем усилий, необходимых для поддержания базовой структуры и всех дополняющих пакетов, довольно значителен. С целью продолжения разработки дополнительной функциональности даже после завершения спецификации Material Design вы можете помочь [поддержка Vuetify в Patreon](https://www.patreon.com/vuetify).",
-  "backersHeader": "## Patreon backers:",
-  "backersSubHeader": "### Diamond ($500/mo)",
-  "backersSubHeader2": "### Palladium ($250/mo)",
-  "backersSubHeader3": "### Platinum ($100/mo)",
-  "backersSubHeader4": "### Gold ($50/mo)",
   "affiliatesHeader": "## Affiliates:",
+  "openCollectiveBlurb": "Спонсоры Open Collective ежемесячно поддерживают основную команду проекта.",
+  "patrons": "### Спонсоры Patreon",
+  "patreonBlurb": "Спонсоры Patreon ежемесячно напрямую поддерживают автора -- Джона Лейдера.",
   "sponsorsHeader": "## Service sponsors:",
+  "tideliftBlurb": "Получите профессиональную поддержку Vuetify. Доступно в рамках подписки Tidelift.",
+  "oneTime": "### Единовременное пожертвование",
+  "oneTimeBlurb": "Vuetify благодарен за любые разовые пожертвования, полученные через:",
   "questionHeader": "## Дополнительные вопросы?",
   "questionButton": "Свяжитесь с нами"
 }
