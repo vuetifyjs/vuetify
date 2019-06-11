@@ -21,6 +21,9 @@ export default {
     firstPage: 'Erste Seite',
     lastPage: 'Letzte Seite',
   },
+  datePicker: {
+    itemsSelected: '{0} ausgewählt',
+  },
   noDataText: 'Keine Daten vorhanden',
   carousel: {
     prev: 'Vorheriges Bild',

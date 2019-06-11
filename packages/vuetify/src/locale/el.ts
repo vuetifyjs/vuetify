@@ -21,6 +21,9 @@ export default {
     firstPage: 'Πρώτη σελίδα',
     lastPage: 'Τελευταία σελίδα',
   },
+  datePicker: {
+    itemsSelected: '{0} επιλεγμένα',
+  },
   noDataText: 'Χωρίς δεδομένα',
   carousel: {
     prev: 'הקודם חזותי',

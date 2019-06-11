@@ -1,10 +1,10 @@
 <template>
   <v-card
     class="mx-auto"
-    max-width="300"
+    width="256"
     tile
   >
-    <v-navigation-drawer>
+    <v-navigation-drawer permanent>
       <v-system-bar></v-system-bar>
       <v-list>
         <v-list-item>

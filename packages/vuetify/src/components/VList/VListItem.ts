@@ -14,12 +14,12 @@ import Ripple from '../../directives/ripple'
 // Utilities
 import { keyCodes } from './../../util/helpers'
 import { ExtractVue } from './../../util/mixins'
+import { removed } from '../../util/console'
 
 // Types
 import mixins from '../../util/mixins'
 import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
-import { removed } from '../../util/console'
 
 const baseMixins = mixins(
   Colorable,
@@ -91,7 +91,7 @@ export default baseMixins.extend<options>().extend({
 
   created () {
     /* istanbul ignore next */
-    if ('avatar' in this.$attrs) {
+    if (this.$attrs.hasOwnProperty('avatar')) {
       removed('avatar', this)
     }
   },
