@@ -11,7 +11,7 @@
     overflow: hidden
     text-overflow: ellipsis
     white-space: nowrap
-    font-size: 0.9em
+    font-size: $calendar-event-font-size
     cursor: pointer
     margin-right: -1px
     &.v-event-start
@@ -25,7 +25,7 @@
     overflow: hidden
     text-overflow: ellipsis
     white-space: nowrap
-    font-size: 0.9em
+    font-size: $calendar-event-font-size
     cursor: pointer
     border-radius: $calendar-event-border-radius
     font-weight: bold
@@ -42,7 +42,11 @@
     overflow: hidden
     white-space: nowrap
     text-overflow: ellipsis
-    font-size: 0.9em
+    font-size: $calendar-event-font-size
     cursor: pointer
     border-radius: $calendar-event-border-radius
     pointer-events: all
+
+  &.v-calendar-events
+    .v-calendar-weekly__day
+      overflow: visible

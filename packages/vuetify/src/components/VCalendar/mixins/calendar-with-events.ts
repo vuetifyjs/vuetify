@@ -165,8 +165,12 @@ export default CalendarBase.extend({
       })
     },
     getEventsMap (): VDailyEventsMap {
-      const elements = this.$refs.events as HTMLElement[]
       const eventsMap: VDailyEventsMap = {}
+      const elements = this.$refs.events as HTMLElement[]
+
+      if (!elements || !elements.forEach) {
+        return eventsMap
+      }
 
       elements.forEach(el => {
         const date = el.getAttribute('data-date')

@@ -3,7 +3,7 @@
     <v-flex
       sm12
       lg3
-      class="mb-3"
+      class="mb-3 controls"
     >
       <v-btn
         fab
@@ -73,34 +73,34 @@
       >
         <template v-slot:activator="{ on }">
           <v-text-field
-            slot="activator"
             v-model="start"
             label="Start Date"
             prepend-icon="event"
             readonly
+            v-on="on"
           ></v-text-field>
-          <v-date-picker
-            v-model="start"
-            no-title
-            scrollable
-          >
-            <v-spacer></v-spacer>
-            <v-btn
-              flat
-              color="primary"
-              @click="startMenu = false"
-            >
-              Cancel
-            </v-btn>
-            <v-btn
-              flat
-              color="primary"
-              @click="$refs.startMenu.save(start)"
-            >
-              OK
-            </v-btn>
-          </v-date-picker>
         </template>
+        <v-date-picker
+          v-model="start"
+          no-title
+          scrollable
+        >
+          <v-spacer></v-spacer>
+          <v-btn
+            text
+            color="primary"
+            @click="startMenu = false"
+          >
+            Cancel
+          </v-btn>
+          <v-btn
+            text
+            color="primary"
+            @click="$refs.startMenu.save(start)"
+          >
+            OK
+          </v-btn>
+        </v-date-picker>
       </v-menu>
       <v-menu
         v-if="hasEnd"
@@ -111,17 +111,18 @@
         :return-value.sync="end"
         transition="scale-transition"
         min-width="290px"
-        lazy
         offset-y
         full-width
       >
-        <v-text-field
-          slot="activator"
-          v-model="end"
-          label="End Date"
-          prepend-icon="event"
-          readonly
-        ></v-text-field>
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            v-model="end"
+            label="End Date"
+            prepend-icon="event"
+            readonly
+            v-on="on"
+          ></v-text-field>
+        </template>
         <v-date-picker
           v-model="end"
           no-title
@@ -129,14 +130,14 @@
         >
           <v-spacer></v-spacer>
           <v-btn
-            flat
+            text
             color="primary"
             @click="endMenu = false"
           >
             Cancel
           </v-btn>
           <v-btn
-            flat
+            text
             color="primary"
             @click="$refs.endMenu.save(end)"
           >
@@ -152,17 +153,18 @@
         :return-value.sync="now"
         transition="scale-transition"
         min-width="290px"
-        lazy
         offset-y
         full-width
       >
-        <v-text-field
-          slot="activator"
-          v-model="now"
-          label="Today"
-          prepend-icon="event"
-          readonly
-        ></v-text-field>
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            v-model="now"
+            label="Today"
+            prepend-icon="event"
+            readonly
+            v-on="on"
+          ></v-text-field>
+        </template>
         <v-date-picker
           v-model="now"
           no-title
@@ -170,14 +172,14 @@
         >
           <v-spacer></v-spacer>
           <v-btn
-            flat
+            text
             color="primary"
             @click="nowMenu = false"
           >
             Cancel
           </v-btn>
           <v-btn
-            flat
+            text
             color="primary"
             @click="$refs.nowMenu.save(now)"
           >
@@ -225,7 +227,6 @@
           ref="calendar"
           v-model="start"
           :type="type"
-          :events="events"
           :start="start"
           :end="end"
           :min-weeks="minWeeks"
@@ -415,5 +416,7 @@
 </script>
 
 <style scoped>
-
+.controls {
+  position: relative;
+}
 </style>

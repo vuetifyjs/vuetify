@@ -39,10 +39,12 @@
   padding: $calendar-weekly-weekday-padding
   font-size: $calendar-weekly-weekday-font-size
   text-align: center
+  text-transform: uppercase
 
 .v-calendar-weekly__week
   display: flex
   flex: 1
+  height: 0
 
 .v-calendar-weekly__day
   flex: 1
@@ -67,8 +69,9 @@
   //height: $calendar-weekly-day-label-size
   //line-height: $calendar-weekly-day-label-size
 
-  &:hover
-    text-decoration: underline
+  .v-btn
+    font-size: $calendar-weekly-day-label-font-size
+    text-transform: none
 
 .v-calendar-weekly__day-month
   position: absolute
@@ -79,3 +82,4 @@
   left: $calendar-weekly-day-month-left
   height: $calendar-weekly-day-label-size
   line-height: $calendar-weekly-day-label-size
+

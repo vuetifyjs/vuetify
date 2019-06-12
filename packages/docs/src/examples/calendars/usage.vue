@@ -25,18 +25,18 @@
               </v-btn>
             </template>
             <v-list>
-              <v-list-tile @click="type = 'day'">
-                <v-list-tile-title>Day</v-list-tile-title>
-              </v-list-tile>
-              <v-list-tile @click="type = 'week'">
-                <v-list-tile-title>Week</v-list-tile-title>
-              </v-list-tile>
-              <v-list-tile @click="type = 'month'">
-                <v-list-tile-title>Month</v-list-tile-title>
-              </v-list-tile>
-              <v-list-tile @click="type = '4day'">
-                <v-list-tile-title>4 days</v-list-tile-title>
-              </v-list-tile>
+              <v-list-item @click="type = 'day'">
+                <v-list-item-title>Day</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="type = 'week'">
+                <v-list-item-title>Week</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="type = 'month'">
+                <v-list-item-title>Month</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="type = '4day'">
+                <v-list-item-title>4 days</v-list-item-title>
+              </v-list-item>
             </v-list>
           </v-menu>
         </v-toolbar>
@@ -48,7 +48,7 @@
           color="primary"
           :events="events"
           :event-color="getEventColor"
-          :event-margin-bottom="5"
+          :event-margin-bottom="3"
           :now="today"
           :type="type"
           @click:event="showEvent"
@@ -84,9 +84,9 @@
                 <v-icon>more_vert</v-icon>
               </v-btn>
             </v-toolbar>
-            <v-card-title primary-title>
+            <v-card-text>
               <span v-html="selectedEvent.details"></span>
-            </v-card-title>
+            </v-card-text>
             <v-card-actions>
               <v-btn
                 text
