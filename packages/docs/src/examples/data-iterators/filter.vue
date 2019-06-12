@@ -283,7 +283,7 @@
             iron: '6%',
           },
         ],
-      },
+      }
     },
     computed: {
       numberOfPages () {
