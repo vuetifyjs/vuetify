@@ -27,7 +27,7 @@
       "desc": "Closable chips can be controlled with a v-model. Listen to the `click:close` event if you want to know when a chip has been closed.",
       "uninverted": true
     },
-    "inSelects": {
+    "in-selects": {
       "header": "### In selects",
       "desc": "Selects can use chips to display the selected data. Try adding your own tags below.",
       "uninverted": true
@@ -36,7 +36,7 @@
       "header": "### Custom lists",
       "desc": "In this example we opt to use a customized list instead of [v-autocomplete](/components/autocompletes). This allows us to always display the options available while still providing the same functionality of search and selection."
     },
-    "actionChips": {
+    "action-chips": {
       "header": "### Action chips",
       "desc": "Chips can be used as actionable items. Provided with a _click_ event, the chip becomes interactive and can invoke methods."
     },
@@ -60,7 +60,7 @@
       "header": "### Filter",
       "desc": "`v-chip` component has `filter` option which shows an additional icon to you if chip is active. It can be customized using `filter-icon`."
     },
-    "noRipple": {
+    "no-ripple": {
       "header": "### No ripple",
       "desc": "`v-chip` can be rendered without ripple if `ripple` prop is set to `false`."
     }
