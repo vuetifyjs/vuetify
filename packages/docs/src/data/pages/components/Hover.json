@@ -25,9 +25,21 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "transition"
+            "simple/disabled",
+            "simple/openAndCloseDelay",
+            "complex/hoverList",
+            "complex/transition"
           ]
         }
       ]
