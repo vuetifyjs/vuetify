@@ -58,7 +58,5 @@
       "q": "Imagens relativas não estão funcionando nos componentes `v-card`",
       "a": "O carregador do Vue (Vue loader) converte caminhos relativos para exigir funções automaticamente para você. Infelizmente, este não é o caso quando se trata de componentes personalizados. Você pode contornar esse problema usando `require`.<br><br>` <v-card :src=\"require(\"path/to/img/img.jpg\")\"`"
     }
-  ],
-  "questionHeader": "Tem algo que você acha que deveria estar aqui?",
-  "questionButton": "Nos informe"
+  ]
 }

@@ -1,15 +1,12 @@
 {
   "header": "슬라이더 (Slider)",
   "headerText": "`v-slider` 컴포넌트는 숫자 입력을 위한 더 나은 시각화를 제공합니다. 사용의 숫자형 데이터를 수집하기 위해 사용도비니다.",
-  "components": ["v-slider"],
   "examples": {
     "usage": {
-      "header": "Usage",
       "desc": "슬라이더는 사용자가 단일 값을 선택할 수 있는 바를 따라 값의 범위를 반영합니다. 그것은 볼륨, 밝기 또는 이미지 필터의 적용과 같은 설정을 조정하는 데 이상적입니다."
     },
     "thumb": {
-      "header": "Thumb",
-      "desc": "You can display a `thumb-label` while sliding or always. It It can have a custom color by setting `thumb-color` and a custom size with `thumb-size`. With `always-dirty` its color will never change, even when on `min` value."
+      "header": "Thumb"
     },
     "ticks": {
       "header": "눈금 (Ticks)",
@@ -31,20 +28,20 @@
       "header": "사용자지정 생상 (Custom colors)",
       "desc": "`color`, `track-color`와 `thumb-color` prop들을 이용해 슬라이더의 색상을 정의할 수 있습니다."
     },
+    "validation": {
+      "header": "검증 (Validation)",
+      "desc": "Vuetify는 `rules` prop 을 통해 간단한 검증(validation)을 제공합니다. `rules` prop은 콜백 배열을 받습니다. 규칙들(rules)을 검증할 때, 현재 v-model 값이 콜백으로 전달됩니다. 이 콜백은 `true` 나 에러 메시지로 `String`을 반환해야 합니다."
+    },
     "range": {
-      "header": "Range",
-      "desc": "Range sliders."
+      "header": "Range"
     },
     "minMax": {
-      "header": "Min & Max values",
-      "desc": "You can set `min` and `max` values of sliders."
+      "header": "Min & Max values"
     }
   },
   "props": {
     "step": "0 보다 크면 스텝 간격으로 쓰임",
     "thumbColor": "Thumb과 thumb 레이블 색상",
-    "thumbLabel": "thumb 레이블을 표시",
-    "ticks": "",
-    "trackColor": "Sets the track fill color"
+    "thumbLabel": "thumb 레이블을 표시"
   }
 }

@@ -1,10 +1,10 @@
 {
-	"props": {
-		"absolute": "crwdns23710:0crwdne23710:0",
-		"bottom": "crwdns23712:0crwdne23712:0",
-		"fixed": "crwdns23714:0crwdne23714:0",
-		"left": "crwdns23716:0crwdne23716:0",
-		"right": "crwdns23718:0crwdne23718:0",
-		"top": "crwdns23720:0crwdne23720:0"
-	}
+  "props": {
+    "absolute": "crwdns23710:0crwdne23710:0",
+    "bottom": "crwdns23712:0crwdne23712:0",
+    "fixed": "crwdns23714:0crwdne23714:0",
+    "left": "crwdns23716:0crwdne23716:0",
+    "right": "crwdns23718:0crwdne23718:0",
+    "top": "crwdns23720:0crwdne23720:0"
+  }
 }

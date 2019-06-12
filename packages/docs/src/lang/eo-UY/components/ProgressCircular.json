@@ -1,39 +1,39 @@
 {
-	"header": "crwdns26766:0crwdne26766:0",
-	"headerText": "crwdns26768:0crwdne26768:0",
-	"examples": {
-		"usage": {
-			"desc": "crwdns26770:0crwdne26770:0"
-		},
-		"circularColored": {
-			"header": "crwdns26772:0crwdne26772:0",
-			"desc": "crwdns26774:0crwdne26774:0"
-		},
-		"circularIndeterminate": {
-			"header": "crwdns26776:0crwdne26776:0",
-			"desc": "crwdns26778:0crwdne26778:0"
-		},
-		"circularSizeAndWidth": {
-			"header": "crwdns26780:0crwdne26780:0",
-			"desc": "crwdns26782:0crwdne26782:0"
-		},
-		"circularRotate": {
-			"header": "crwdns26784:0crwdne26784:0",
-			"desc": "crwdns26786:0crwdne26786:0"
-		}
-	},
-	"props": {
-		"active": "crwdns26788:0crwdne26788:0",
-		"backgroundColor": "crwdns26790:0crwdne26790:0",
-		"backgroundOpacity": "crwdns26792:0crwdne26792:0",
-		"bufferValue": "crwdns26794:0crwdne26794:0",
-		"button": "crwdns26796:0crwdne26796:0",
-		"fill": "crwdns26798:0crwdne26798:0",
-		"indeterminate": "crwdns26800:0crwdne26800:0",
-		"query": "crwdns26802:0crwdne26802:0",
-		"rotate": "crwdns26804:0crwdne26804:0",
-		"size": "crwdns26806:0crwdne26806:0",
-		"value": "crwdns26808:0crwdne26808:0",
-		"width": "crwdns26810:0crwdne26810:0"
-	}
+  "header": "crwdns26766:0crwdne26766:0",
+  "headerText": "crwdns26768:0crwdne26768:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns26770:0crwdne26770:0"
+    },
+    "circularColored": {
+      "header": "crwdns26772:0crwdne26772:0",
+      "desc": "crwdns26774:0crwdne26774:0"
+    },
+    "circularIndeterminate": {
+      "header": "crwdns26776:0crwdne26776:0",
+      "desc": "crwdns26778:0crwdne26778:0"
+    },
+    "circularSizeAndWidth": {
+      "header": "crwdns26780:0crwdne26780:0",
+      "desc": "crwdns26782:0crwdne26782:0"
+    },
+    "circularRotate": {
+      "header": "crwdns26784:0crwdne26784:0",
+      "desc": "crwdns26786:0crwdne26786:0"
+    }
+  },
+  "props": {
+    "active": "crwdns26788:0crwdne26788:0",
+    "backgroundColor": "crwdns26790:0crwdne26790:0",
+    "backgroundOpacity": "crwdns26792:0crwdne26792:0",
+    "bufferValue": "crwdns26794:0crwdne26794:0",
+    "button": "crwdns26796:0crwdne26796:0",
+    "fill": "crwdns26798:0crwdne26798:0",
+    "indeterminate": "crwdns26800:0crwdne26800:0",
+    "query": "crwdns26802:0crwdne26802:0",
+    "rotate": "crwdns26804:0crwdne26804:0",
+    "size": "crwdns26806:0crwdne26806:0",
+    "value": "crwdns26808:0crwdne26808:0",
+    "width": "crwdns26810:0crwdne26810:0"
+  }
 }

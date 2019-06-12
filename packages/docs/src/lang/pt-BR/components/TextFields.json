@@ -3,7 +3,6 @@
   "headerText": "Os componentes Text fields são usados para colecionar informação provida pelo usuário.",
   "examples": {
     "usage": {
-      "header": "Text-field padrão",
       "desc": "Um text-field simples com placeholder e/ou label."
     },
     "singleLine": {
@@ -15,8 +14,7 @@
       "desc": "Ícones podem ser especificados como prepended ou appended."
     },
     "characterCounter": {
-      "header": "Contador de caractere",
-      "desc": "Use um contador para informar o usuário o limite de caracteres. O contador não realiza nenhuma validação por si só. Você precisará juntá-lo com um sistema de validação interno, ou uma biblioteca de terceiros."
+      "header": "Contador de caractere"
     },
     "password": {
       "header": "Campo de senha",
@@ -29,10 +27,6 @@
     "fullWidthWithCharacterCounter": {
       "header": "Text field com largura total e contador de caractere",
       "desc": "Text fields com largura total possibilitam a você criar campos de entrada sem limites. Neste exemplo, nós usamos o `v-divider` para separar os campos."
-    },
-    "requiredFields": {
-      "header": "Campos requeridos",
-      "desc": "Neste exemplo, dois dos text-fields são requeridos. Nós utilizados a propriedade **required** para aplicar o asterisco para a label e a validação das regras para os campos."
     },
     "hint": {
       "header": "Texto de sugestão",
@@ -58,10 +52,6 @@
       "header": "Cores customizadas",
       "desc": "Você pode opcionalmente modificar um text-field em qualquer cor que a oalheta de cores do Material design contenha. Abaixo é um exemplo de uma implementação de um formulário customizado com validação."
     },
-    "masks": {
-      "header": "Máscaras",
-      "desc": "Text fields podem ser validados com máscaras. Usando regras customizadas ou pré-fabricadas, você pode formatar opcionalmente e validar conjuntos específicos de caracteres."
-    },
     "progressBar": {
       "header": "Barra de progresso",
       "desc": "Você pode exibir uma barra de progresso ao invés da linha inferior. Você pode usar o progresso indeterminado padrão que possuirá a mesma cor que o text field ou designar uma cor customizada usando o slot `progress`"
@@ -70,9 +60,7 @@
   "props": {
     "autoGrow": "O campo de entrada crescerá de forma automática. Esta opção requer o uso do **v-model**",
     "autofocus": "Habilita focagem automática",
-    "box": "Aplica o estilo em caixa alternativo para o campo de entrada",
     "counter": "Cria um contador para o tamanho da entrada. O padrão é 25 se nenhum número for especificado. Não é aplicada nenhuma validação.",
-    "fullWidth": "Designa o tipo da entrada com largura total",
     "multiLine": "Transforma em um textarea",
     "prefix": "Exibe um texto como prefixo",
     "rows": "Número de linhas em um textarea",
@@ -82,7 +70,6 @@
     "type": "Seta o tipo do campo de entrada"
   },
   "events": {
-    "change": "Mixins.Input.events.change",
-    "update:error": "Mixins.Validatable.events['update:error']"
+    "change": "Mixins.Input.events.change"
   }
 }

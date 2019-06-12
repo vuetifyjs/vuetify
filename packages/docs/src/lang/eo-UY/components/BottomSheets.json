@@ -1,20 +1,36 @@
 {
-	"header": "crwdns26604:0crwdne26604:0",
-	"headerText": "crwdns26606:0crwdne26606:0",
-	"examples": {
-		"usage": {
-			"desc": "crwdns26608:0crwdne26608:0"
-		},
-		"inset": {
-			"header": "crwdns26610:0crwdne26610:0",
-			"desc": "crwdns26612:0crwdne26612:0"
-		}
-	},
-	"props": {
-		"disabled": "crwdns26614:0crwdne26614:0",
-		"hideOverlay": "crwdns26616:0crwdne26616:0",
-		"inset": "crwdns26618:0crwdne26618:0",
-		"eager": "crwdns26620:0crwdne26620:0",
-		"maxWidth": "crwdns26622:0crwdne26622:0"
-	}
+  "header": "crwdns26604:0crwdne26604:0",
+  "headerText": "crwdns26606:0crwdne26606:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns26608:0crwdne26608:0"
+    },
+    "inset": {
+      "header": "crwdns36070:0crwdne36070:0",
+      "desc": "crwdns36072:0crwdne36072:0"
+    },
+    "persistent": {
+      "header": "crwdns36074:0crwdne36074:0",
+      "desc": "crwdns36076:0crwdne36076:0"
+    },
+    "model": {
+      "header": "crwdns36078:0crwdne36078:0",
+      "desc": "crwdns36080:0crwdne36080:0"
+    },
+    "open-in-list": {
+      "header": "crwdns36082:0crwdne36082:0",
+      "desc": "crwdns36084:0crwdne36084:0"
+    },
+    "player": {
+      "header": "crwdns36086:0crwdne36086:0",
+      "desc": "crwdns36088:0crwdne36088:0"
+    }
+  },
+  "props": {
+    "disabled": "crwdns26614:0crwdne26614:0",
+    "hideOverlay": "crwdns26616:0crwdne26616:0",
+    "inset": "crwdns26618:0crwdne26618:0",
+    "eager": "crwdns26620:0crwdne26620:0",
+    "maxWidth": "crwdns26622:0crwdne26622:0"
+  }
 }

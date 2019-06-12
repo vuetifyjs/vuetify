@@ -1,5 +1,5 @@
 {
-    "props": {
-        "color": "Aplica el color especificado al control."
-    }
+  "props": {
+    "color": "Aplica el color especificado al control."
+  }
 }

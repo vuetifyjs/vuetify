@@ -2,10 +2,6 @@
   "header": "Tooltip",
   "headerText": "O componente `v-tooltip` é útil para transmitir informações quando um usuário paira o mouse sobre um elemento. Você também pode controlar a exibição das tooltips programaticamente utilizando o **v-model**",
   "examples": {
-    "default": {
-      "header": "Padrão",
-      "desc": "Tooltips podem envolver qualquer elemento."
-    },
     "alignment": {
       "header": "Alinhamento",
       "desc": "Uma tooltip pode ser alinhada em qualquer um dos quatro lados do elemento que fará sua ativação"

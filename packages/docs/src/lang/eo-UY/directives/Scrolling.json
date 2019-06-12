@@ -1,19 +1,19 @@
 {
-	"header": "crwdns23442:0crwdne23442:0",
-	"headerText": "crwdns23444:0crwdne23444:0",
-	"examples": {
-		"usage": {
-			"desc": "crwdns23446:0crwdne23446:0",
-			"uninverted": true
-		},
-		"options": {
-			"header": "crwdns23450:0crwdne23450:0",
-			"desc": "crwdns23452:0crwdne23452:0",
-			"uninverted": true
-		}
-	},
-	"options": {
-		"arg:target": "crwdns23456:0crwdne23456:0",
-		"value": "crwdns23458:0crwdne23458:0"
-	}
+  "header": "crwdns23442:0crwdne23442:0",
+  "headerText": "crwdns23444:0crwdne23444:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns23446:0crwdne23446:0",
+      "uninverted": true
+    },
+    "options": {
+      "header": "crwdns23450:0crwdne23450:0",
+      "desc": "crwdns23452:0crwdne23452:0",
+      "uninverted": true
+    }
+  },
+  "options": {
+    "arg:target": "crwdns23456:0crwdne23456:0",
+    "value": "crwdns23458:0crwdne23458:0"
+  }
 }

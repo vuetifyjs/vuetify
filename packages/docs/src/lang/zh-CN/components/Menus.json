@@ -1,17 +1,14 @@
 {
   "header": "菜单",
   "headerText": "`v-menu`组件展示一个菜单在用于激活它的元素的位置上。",
-  "components": ["v-menu"],
   "examples": {
-    "activator": {
-      "header": "激活器",
-      "desc": "请记住将激活菜单的元素放置在`activator`插槽中。",
-      "uninverted": true
-    },
     "absolute": {
       "header": "绝对定位",
       "desc": "菜单也可以使用`absolute`属性绝对定位在激活元素的顶部。尝试点击图片上的任何地方。",
       "uninverted": true
+    },
+    "disabled": {
+      "header": "禁用"
     },
     "absoluteWithoutActivator": {
       "header": "没有激活时的绝对定位",
@@ -46,8 +43,6 @@
     "offsetX": "在x轴上偏移菜单，与左/右方向一起工作",
     "offsetY": "在y轴上偏移菜单，与上/下方向一起工作",
     "openOnClick": "指定是否在激活器点击时打开菜单",
-    "openOnHover": "指定是否在激活器悬停时打开菜单",
-    "origin": "Mixins.Transitionable.props.origin",
-    "transition": "Mixins.Transitionable.props.transition"
+    "openOnHover": "指定是否在激活器悬停时打开菜单"
   }
 }
