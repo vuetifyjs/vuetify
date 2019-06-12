@@ -20,6 +20,7 @@ import {
 // Types
 import { VNode, VNodeData, PropType } from 'vue'
 import mixins from '../../util/mixins'
+import { PropValidator } from 'vue/types/options'
 
 const baseMixins = mixins(
   Colorable,
@@ -43,7 +44,7 @@ export default baseMixins.extend<options>().extend({
       default: '',
     },
     height: [Number, String],
-    hideDetails: Boolean,
+    hideDetails: [Boolean, String] as PropValidator<boolean | 'auto'>,
     hint: String,
     id: String,
     label: String,
@@ -65,7 +66,7 @@ export default baseMixins.extend<options>().extend({
     classes (): object {
       return {
         'v-input--has-state': this.hasState,
-        'v-input--hide-details': this.hideDetails,
+        'v-input--hide-details': this.genMessages === null,
         'v-input--is-label-active': this.isLabelActive,
         'v-input--is-dirty': this.isDirty,
         'v-input--is-disabled': this.disabled,
@@ -211,18 +212,20 @@ export default baseMixins.extend<options>().extend({
       }, this.$slots.label || this.label)
     },
     genMessages () {
-      if (this.hideDetails) return null
+      if (this.hideDetails === true) return null
 
-      const messages = this.hasHint
-        ? [this.hint]
-        : this.validations
+      const messages = (this.hasMessages || this.hasHint)
+        ? (this.hasHint ? [this.hint] : this.validations)
+        : []
+
+      if (!messages.length && this.hideDetails === 'auto') return null
 
       return this.$createElement(VMessages, {
         props: {
           color: this.hasHint ? '' : this.validationState,
           dark: this.dark,
           light: this.light,
-          value: (this.hasMessages || this.hasHint) ? messages : [],
+          value: messages,
         },
       })
     },
