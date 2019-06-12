@@ -1,6 +1,6 @@
 {
   "header": "# Overflow Button",
-  "headerText": "Coming soon...",
+  "headerText": "`v-overflow-btn` is used to give user the ability to select items from the list. It has 3 variations: `editable`, `overflow` and `segmented`",
   "examples": {
     "usage": {
       "desc": "`v-overflow-btn` is used for creating selection lists"
