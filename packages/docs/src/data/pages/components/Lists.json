@@ -39,19 +39,32 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "avatarTitleAndAction",
-            "iconTwoLinesAndAction",
-            "avatarThreeLines",
-            "avatarSubheaderTitleAndAction",
-            "subheadingsAndDividers",
-            "cardList",
-            "titleSubtitleActionsAndActionText",
-            "actionTitleAndSubtitle",
-            "expansionLists",
-            "nav",
-            "shaped"
+            "simple/disabled",
+            "simple/shaped",
+            "simple/dense",
+            "simple/flat",
+            "simple/rounded",
+            "intermediate/avatarTitleAndAction",
+            "intermediate/iconTwoLinesAndAction",
+            "intermediate/avatarThreeLines",
+            "intermediate/avatarSubheaderTitleAndAction",
+            "intermediate/subheadingsAndDividers",
+            "intermediate/cardList",
+            "intermediate/titleSubtitleActionsAndActionText",
+            "intermediate/actionTitleAndSubtitle",
+            "intermediate/expansionLists",
+            "intermediate/nav"
           ]
         }
       ]

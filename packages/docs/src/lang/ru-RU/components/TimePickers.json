@@ -1,14 +1,7 @@
 {
-  "header": "# Time picker",
   "headerText": "`v-time-picker` является автономным компонентом, который может использоваться во многих существующих компонентах Vuetify. Он предлагает пользователю визуальное представление для выбора времени.",
-  "components": ["v-time-picker"],
   "examples": {
-    "timeLight": {
-      "header": "### Time pickers",
-      "desc": "У Time pickers по умолчанию включена светлая тема."
-    },
     "timeColorable": {
-      "header": "### Time pickers - Colors",
       "desc": "Цветовая схема Time picker может быть установлена с помощью prop `color` и `header-color`. Если `header-color` prop не указан, заголовок будет использовать значение `color`."
     },
     "timeDialogAndMenu": {
@@ -16,7 +9,6 @@
       "desc": "Благодаря гибкости pickers вы можете действительно набирать опыт именно так, как вы этого хотите."
     },
     "time24hFormat": {
-      "header": "### Time pickers - 24h format",
       "desc": "Time picker можно переключить на 24-часовой формат."
     },
     "timeAllowedTimes": {

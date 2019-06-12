@@ -3,7 +3,15 @@
   "headerText": "The `v-footer` component is used for displaying general information that a user might want to access from any page within your site.",
   "examples": {
     "usage": {
-      "desc": "The footer component is just a basic container."
+      "desc": "The `v-footer` component in it's simplest form is a container."
+    },
+    "absolute": {
+      "header": "### Absolute Footer",
+      "desc": "The `absolute` prop positions footers absolutely at the bottom of their parent container."
+    },
+    "padless": {
+      "header": "### Padless Footer",
+      "desc": "The `padless` prop removes all default padding from the footer component."
     },
     "companyFooter": {
       "header": "### Company Footer",

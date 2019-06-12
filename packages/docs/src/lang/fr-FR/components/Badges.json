@@ -1,0 +1,18 @@
+{
+  "examples": {
+    "overlap": {
+      "header": "### Chevauchement"
+    },
+    "visibility": {
+      "header": "### Visibilité"
+    },
+    "inline": {
+      "header": "### Axe en ligne",
+      "desc": "Les badges peuvent également être placés sur du texte."
+    },
+    "icon": {
+      "header": "### Icônes",
+      "desc": "Le badge peut utiliser tous les jeux d'icônes actuellement pris en charge."
+    }
+  }
+}

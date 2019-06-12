@@ -1,45 +1,45 @@
 {
-	"header": "crwdns26562:0crwdne26562:0",
-	"headerText": "crwdns26564:0[vuetify-loader]crwdne26564:0",
-	"examples": {
-		"usage": {
-			"desc": "crwdns35812:0crwdne35812:0"
-		},
-		"containCover": {
-			"header": "crwdns26568:0crwdne26568:0",
-			"desc": "crwdns26570:0crwdne26570:0"
-		},
-		"maxHeight": {
-			"header": "crwdns26572:0crwdne26572:0",
-			"desc": "crwdns26574:0crwdne26574:0"
-		},
-		"ratio": {
-			"header": "crwdns26576:0crwdne26576:0",
-			"desc": "crwdns35814:0crwdne35814:0"
-		},
-		"gradients": {
-			"header": "crwdns26580:0crwdne26580:0",
-			"desc": "crwdns26582:0crwdne26582:0"
-		},
-		"grid": {
-			"header": "crwdns35816:0crwdne35816:0",
-			"desc": "crwdns35818:0crwdne35818:0"
-		},
-		"placeholder": {
-			"header": "crwdns35820:0crwdne35820:0",
-			"desc": "crwdns35822:0crwdne35822:0"
-		}
-	},
-	"props": {
-		"alt": "crwdns26584:0crwdne26584:0",
-		"aspectRatio": "crwdns26586:0crwdne26586:0",
-		"contain": "crwdns26588:0crwdne26588:0",
-		"gradient": "crwdns26590:0[linear-gradient]crwdne26590:0",
-		"lazySrc": "crwdns26592:0[vuetify-loader]crwdne26592:0",
-		"position": "crwdns26594:0crwdne26594:0",
-		"sizes": "crwdns26596:0[MDN]crwdne26596:0",
-		"src": "crwdns26598:0crwdne26598:0",
-		"srcset": "crwdns26600:0crwdne26600:0",
-		"transition": "crwdns26602:0crwdne26602:0"
-	}
+  "header": "crwdns26562:0crwdne26562:0",
+  "headerText": "crwdns26564:0[vuetify-loader]crwdne26564:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns35812:0crwdne35812:0"
+    },
+    "containCover": {
+      "header": "crwdns26568:0crwdne26568:0",
+      "desc": "crwdns26570:0crwdne26570:0"
+    },
+    "maxHeight": {
+      "header": "crwdns26572:0crwdne26572:0",
+      "desc": "crwdns26574:0crwdne26574:0"
+    },
+    "ratio": {
+      "header": "crwdns26576:0crwdne26576:0",
+      "desc": "crwdns35814:0crwdne35814:0"
+    },
+    "gradients": {
+      "header": "crwdns26580:0crwdne26580:0",
+      "desc": "crwdns26582:0crwdne26582:0"
+    },
+    "grid": {
+      "header": "crwdns35816:0crwdne35816:0",
+      "desc": "crwdns35818:0crwdne35818:0"
+    },
+    "placeholder": {
+      "header": "crwdns35820:0crwdne35820:0",
+      "desc": "crwdns35822:0crwdne35822:0"
+    }
+  },
+  "props": {
+    "alt": "crwdns26584:0crwdne26584:0",
+    "aspectRatio": "crwdns26586:0crwdne26586:0",
+    "contain": "crwdns26588:0crwdne26588:0",
+    "gradient": "crwdns26590:0[linear-gradient]crwdne26590:0",
+    "lazySrc": "crwdns26592:0[vuetify-loader]crwdne26592:0",
+    "position": "crwdns26594:0crwdne26594:0",
+    "sizes": "crwdns26596:0[MDN]crwdne26596:0",
+    "src": "crwdns26598:0crwdne26598:0",
+    "srcset": "crwdns26600:0crwdne26600:0",
+    "transition": "crwdns26602:0crwdne26602:0"
+  }
 }

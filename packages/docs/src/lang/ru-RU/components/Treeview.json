@@ -1,12 +1,10 @@
 {
-  "header": "# Treeview",
   "headerText": "Компонент `v-treeview` полезен для отображения большого количества вложенных данных.",
   "examples": {
     "usage": {
       "desc": "Основной пример"
     },
     "fileExplorer": {
-      "header": "### Scoped slots",
       "desc": "Используя scoped slots мы можем создать интуитивно понятный файловый менеджер. Кроме слота `prepend`, есть также один для `label`, и `append` слот."
     },
     "directory": {

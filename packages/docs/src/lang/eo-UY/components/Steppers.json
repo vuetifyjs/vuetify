@@ -1,75 +1,75 @@
 {
-	"header": "crwdns28036:0crwdne28036:0",
-	"headerText": "crwdns28038:0crwdne28038:0",
-	"examples": {
-		"usage": {
-			"desc": "crwdns28040:0crwdne28040:0"
-		},
-		"editable": {
-			"header": "crwdns28042:0crwdne28042:0",
-			"desc": "crwdns28044:0crwdne28044:0"
-		},
-		"nonEditable": {
-			"header": "crwdns28046:0crwdne28046:0",
-			"desc": "crwdns28048:0crwdne28048:0"
-		},
-		"optional": {
-			"header": "crwdns28050:0crwdne28050:0",
-			"desc": "crwdns28052:0crwdne28052:0"
-		},
-		"horizontal": {
-			"header": "crwdns28054:0crwdne28054:0",
-			"desc": "crwdns28056:0crwdne28056:0"
-		},
-		"vertical": {
-			"header": "crwdns28058:0crwdne28058:0",
-			"desc": "crwdns28060:0crwdne28060:0"
-		},
-		"linear": {
-			"header": "crwdns28062:0crwdne28062:0",
-			"desc": "crwdns28064:0crwdne28064:0"
-		},
-		"nonLinear": {
-			"header": "crwdns28066:0crwdne28066:0",
-			"desc": "crwdns28068:0crwdne28068:0"
-		},
-		"alternateLabels": {
-			"header": "crwdns28070:0crwdne28070:0",
-			"desc": "crwdns28072:0crwdne28072:0"
-		},
-		"error": {
-			"header": "crwdns28074:0crwdne28074:0",
-			"desc": "crwdns28076:0crwdne28076:0"
-		},
-		"alternateError": {
-			"header": "crwdns28078:0crwdne28078:0",
-			"desc": "crwdns28080:0crwdne28080:0"
-		},
-		"verticalError": {
-			"header": "crwdns28082:0crwdne28082:0",
-			"desc": "crwdns28084:0crwdne28084:0"
-		},
-		"dynamic": {
-			"header": "crwdns28086:0crwdne28086:0",
-			"desc": "crwdns28088:0crwdne28088:0"
-		}
-	},
-	"props": {
-		"altLabels": "crwdns28090:0crwdne28090:0",
-		"color": "crwdns28092:0crwdne28092:0",
-		"complete": "crwdns28094:0crwdne28094:0",
-		"completeIcon": "crwdns28096:0crwdne28096:0",
-		"editable": "crwdns28098:0crwdne28098:0",
-		"editIcon": "crwdns28100:0crwdne28100:0",
-		"errorIcon": "crwdns28102:0crwdne28102:0",
-		"nonLinear": "crwdns28104:0crwdne28104:0",
-		"rules": "crwdns28106:0crwdne28106:0",
-		"vertical": "crwdns28108:0crwdne28108:0",
-		"v-stepper-step": {
-			"step": "crwdns28110:0crwdne28110:0"
-		},
-		"v-stepper-content": {
-			"step": "crwdns28112:0crwdne28112:0"
-		}
-	}
+  "header": "crwdns28036:0crwdne28036:0",
+  "headerText": "crwdns28038:0crwdne28038:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns28040:0crwdne28040:0"
+    },
+    "editable": {
+      "header": "crwdns28042:0crwdne28042:0",
+      "desc": "crwdns28044:0crwdne28044:0"
+    },
+    "nonEditable": {
+      "header": "crwdns28046:0crwdne28046:0",
+      "desc": "crwdns28048:0crwdne28048:0"
+    },
+    "optional": {
+      "header": "crwdns28050:0crwdne28050:0",
+      "desc": "crwdns28052:0crwdne28052:0"
+    },
+    "horizontal": {
+      "header": "crwdns28054:0crwdne28054:0",
+      "desc": "crwdns28056:0crwdne28056:0"
+    },
+    "vertical": {
+      "header": "crwdns28058:0crwdne28058:0",
+      "desc": "crwdns28060:0crwdne28060:0"
+    },
+    "linear": {
+      "header": "crwdns28062:0crwdne28062:0",
+      "desc": "crwdns28064:0crwdne28064:0"
+    },
+    "nonLinear": {
+      "header": "crwdns28066:0crwdne28066:0",
+      "desc": "crwdns28068:0crwdne28068:0"
+    },
+    "alternateLabels": {
+      "header": "crwdns28070:0crwdne28070:0",
+      "desc": "crwdns28072:0crwdne28072:0"
+    },
+    "error": {
+      "header": "crwdns28074:0crwdne28074:0",
+      "desc": "crwdns28076:0crwdne28076:0"
+    },
+    "alternateError": {
+      "header": "crwdns28078:0crwdne28078:0",
+      "desc": "crwdns28080:0crwdne28080:0"
+    },
+    "verticalError": {
+      "header": "crwdns28082:0crwdne28082:0",
+      "desc": "crwdns28084:0crwdne28084:0"
+    },
+    "dynamic": {
+      "header": "crwdns28086:0crwdne28086:0",
+      "desc": "crwdns28088:0crwdne28088:0"
+    }
+  },
+  "props": {
+    "altLabels": "crwdns28090:0crwdne28090:0",
+    "color": "crwdns28092:0crwdne28092:0",
+    "complete": "crwdns28094:0crwdne28094:0",
+    "completeIcon": "crwdns28096:0crwdne28096:0",
+    "editable": "crwdns28098:0crwdne28098:0",
+    "editIcon": "crwdns28100:0crwdne28100:0",
+    "errorIcon": "crwdns28102:0crwdne28102:0",
+    "nonLinear": "crwdns28104:0crwdne28104:0",
+    "rules": "crwdns28106:0crwdne28106:0",
+    "vertical": "crwdns28108:0crwdne28108:0",
+    "v-stepper-step": {
+      "step": "crwdns28110:0crwdne28110:0"
+    },
+    "v-stepper-content": {
+      "step": "crwdns28112:0crwdne28112:0"
+    }
+  }
 }

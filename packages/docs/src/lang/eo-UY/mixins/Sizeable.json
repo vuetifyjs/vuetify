@@ -1,10 +1,10 @@
 {
-	"props": {
-		"large": "crwdns23692:0crwdne23692:0",
-		"medium": "crwdns23694:0crwdne23694:0",
-		"size": "crwdns23696:0crwdne23696:0",
-		"small": "crwdns23698:0crwdne23698:0",
-		"xSmall": "crwdns23700:0crwdne23700:0",
-		"xLarge": "crwdns23702:0crwdne23702:0"
-	}
+  "props": {
+    "large": "crwdns23692:0crwdne23692:0",
+    "medium": "crwdns23694:0crwdne23694:0",
+    "size": "crwdns23696:0crwdne23696:0",
+    "small": "crwdns23698:0crwdne23698:0",
+    "xSmall": "crwdns23700:0crwdne23700:0",
+    "xLarge": "crwdns23702:0crwdne23702:0"
+  }
 }

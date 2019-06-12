@@ -1,36 +1,9 @@
 {
   "props": {
-    "v-alert": {
-      "outline": false
-    },
-    "v-btn": {
-      "outline": false
-    },
-    "v-expansion-panels": {
-      "expand": false
-    },
-    "v-bottom-navigation": {
-      "active": false
-    },
-    "v-chip": {
-      "outline": false,
-      "selected": false
-    },
-    "v-textarea": {
-      "box": false
-    },
-    "v-text-field": {
-      "box": false
-    },
-    "v-select": {
-      "box": false
-    },
     "v-autocomplete": {
       "activator": false,
-      "box": false,
       "closeOnClick": false,
       "closeOnContentClick": false,
-      "combobox": false,
       "delimiters": false,
       "nudgeBottom": false,
       "nudgeLeft": false,
@@ -43,10 +16,8 @@
     },
     "v-combobox": {
       "activator": false,
-      "box": false,
       "closeOnClick": false,
       "closeOnContentClick": false,
-      "combobox": false,
       "delimiters": false,
       "nudgeBottom": false,
       "nudgeLeft": false,
@@ -59,10 +30,8 @@
     },
     "v-overflow-btn": {
       "activator": false,
-      "box": false,
       "closeOnClick": false,
       "closeOnContentClick": false,
-      "combobox": false,
       "delimiters": false,
       "nudgeBottom": false,
       "nudgeLeft": false,

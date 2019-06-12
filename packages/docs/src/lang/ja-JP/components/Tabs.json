@@ -1,0 +1,5 @@
+{
+  "props": {
+    "reverseTransition": "戻す際のトランジションを設定します。"
+  }
+}

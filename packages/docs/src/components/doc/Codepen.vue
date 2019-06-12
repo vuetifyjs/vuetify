@@ -17,7 +17,9 @@
   const title = 'Vuetify Example Pen'
 
   const cssResources = [
-    'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons',
+    'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900',
+    'https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css',
+    'https://fonts.googleapis.com/css?family=Material+Icons',
     `https://cdn.jsdelivr.net/npm/vuetify@${version}/dist/vuetify.min.css`,
   ]
 

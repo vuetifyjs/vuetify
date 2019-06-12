@@ -40,6 +40,11 @@
     "country": "jp"
   },
   {
+    "name": "Tiếng Việt",
+    "locale": "vi-VN",
+    "country": "vn"
+  },
+  {
     "name": "Translate!",
     "locale": "eo-UY",
     "country": "uy"

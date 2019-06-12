@@ -54,7 +54,5 @@
       "q": "使用相对路径的图片在`v-card`中不起作用",
       "a": "Vue加载器会自动将相对路径转换未require函数。不幸的是，当涉及到自定义组件时，情况并非如此。您可以使用`require`来避开这个问题。\n\n`<v-card :src=\"require('path/to/img/img.jpg')\">`"
     }
-  ],
-  "questionHeader": "还有什么是你觉得应该出现在这里的?",
-  "questionButton": "请让我们知道"
+  ]
 }

@@ -7,9 +7,12 @@ import VSheet from '../VSheet/VSheet'
 // Components
 import VImg, { srcObject } from '../VImg/VImg'
 
+// Utilities
+import { convertToUnit, getSlot } from '../../util/helpers'
+import { breaking } from '../../util/console'
+
 // Types
 import { VNode } from 'vue'
-import { convertToUnit, getSlot } from '../../util/helpers'
 import { PropValidator } from 'vue/types/options'
 
 /* @vue/component */
@@ -89,6 +92,25 @@ export default VSheet.extend({
     styles (): object {
       return this.measurableStyles
     },
+  },
+
+  created () {
+    const breakingProps = [
+      ['app', '<v-app-bar app>'],
+      ['manual-scroll', '<v-app-bar :value="false">'],
+      ['clipped-left', '<v-app-bar clipped-left>'],
+      ['clipped-right', '<v-app-bar clipped-right>'],
+      ['inverted-scroll', '<v-app-bar inverted-scroll>'],
+      ['scroll-off-screen', '<v-app-bar scroll-off-screen>'],
+      ['scroll-target', '<v-app-bar scroll-target>'],
+      ['scroll-threshold', '<v-app-bar scroll-threshold>'],
+      ['card', '<v-app-bar flat>'],
+    ]
+
+    /* istanbul ignore next */
+    breakingProps.forEach(([original, replacement]) => {
+      if (this.$attrs.hasOwnProperty(original)) breaking(original, replacement, this)
+    })
   },
 
   methods: {

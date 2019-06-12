@@ -1,9 +1,9 @@
 {
-	"header": "crwdns25204:0crwdne25204:0",
-	"headerText": "crwdns25206:0crwdne25206:0",
-	"props": {
-		"editable": "crwdns25208:0crwdne25208:0",
-		"overflow": "crwdns25210:0crwdne25210:0",
-		"segmented": "crwdns25212:0crwdne25212:0"
-	}
+  "header": "crwdns25204:0crwdne25204:0",
+  "headerText": "crwdns25206:0crwdne25206:0",
+  "props": {
+    "editable": "crwdns25208:0crwdne25208:0",
+    "overflow": "crwdns25210:0crwdne25210:0",
+    "segmented": "crwdns25212:0crwdne25212:0"
+  }
 }

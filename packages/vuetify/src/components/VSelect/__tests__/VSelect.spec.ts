@@ -4,9 +4,9 @@ import Vue from 'vue'
 // Components
 import VSelect from '../VSelect'
 import {
-  VListTile,
-  VListTileTitle,
-  VListTileContent,
+  VListItem,
+  VListItemTitle,
+  VListItemContent,
 } from '../../VList'
 
 // Utilities
@@ -80,7 +80,7 @@ describe('VSelect.ts', () => {
 
     const vm = new Vue({
       components: {
-        VListTile,
+        VListItem,
       },
     })
     const itemSlot = ({ item, tile }) => vm.$createElement('v-list-item', {
@@ -116,8 +116,8 @@ describe('VSelect.ts', () => {
 
     const vm = new Vue({
       components: {
-        VListTileTitle,
-        VListTileContent,
+        VListItemTitle,
+        VListItemContent,
       },
     })
     const itemSlot = ({ item }) => vm.$createElement('v-list-item-content', {

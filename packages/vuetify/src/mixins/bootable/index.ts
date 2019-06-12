@@ -1,4 +1,3 @@
-
 // Utilities
 import { removed } from '../../util/console'
 
@@ -41,6 +40,7 @@ export default Vue.extend<Vue & Toggleable>().extend({
   },
 
   created () {
+    /* istanbul ignore next */
     if ('lazy' in this.$attrs) {
       removed('lazy', this)
     }

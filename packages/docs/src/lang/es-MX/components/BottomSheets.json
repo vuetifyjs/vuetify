@@ -1,20 +1,9 @@
 {
   "header": "Bottom sheet",
   "headerText": "El _bottom sheet_ es un `v-dialog` modificado que aparece desde la parte baja de la pantalla, similar a un `v-bottom-navigation`. Mientras que un componente _bottom navigation_ es para los botones y acciones específicas al nivel de la aplicación, un _bottom sheet_ puede contener cualquier cosa.",
-  "examples": {
-    "standard": {
-      "header": "Presentación estándar",
-      "desc": "Aquí mostramos una lista de acciones de ejemplo que podría estar presente en una aplicación."
-    },
-    "inset": {
-      "header": "Inset bottom sheets",
-      "desc": "Los _bottom sheets_ pueden quedar \"por dentro\", lo que reduce su ancho máximo al 70% en resolución de escritorio. Esto puede ser reducido aún más manualmente utilizando la prop `width`. También mostramos _binding_ de clases dinámicas utilizando el objeto `breakpoint` de Vuetify."
-    }
-  },
   "props": {
     "disabled": "Deshabilita abrir el díalogo",
     "inset": "Reduce el ancho máximo del contenido del diálogo a 70%",
-    "eager": "Mixins.Bootable.props.eager",
     "maxWidth": "Especifica el ancho máximo del contenedor del _bottom sheet_."
   }
 }

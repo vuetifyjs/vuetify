@@ -83,22 +83,4 @@ describe('VBottomNavigation.ts', () => {
 
     expect(spy).toHaveBeenCalledTimes(2)
   })
-
-  // deprecated
-  it('should emit update when active changes', async () => {
-    const update = jest.fn()
-    const wrapper = mountFunction({
-      slots: {
-        default: [VBtn, VBtn],
-      },
-    })
-
-    wrapper.vm.$on('update:active', update)
-
-    const btn = wrapper.find('.v-btn')
-    btn.trigger('click')
-
-    await wrapper.vm.$nextTick()
-    expect(update).toHaveBeenCalledWith(0)
-  })
 })

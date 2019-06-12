@@ -27,6 +27,7 @@ const icons: VuetifyIcons = {
   ratingEmpty: 'mdi-star-outline',
   ratingFull: 'mdi-star',
   ratingHalf: 'mdi-star-half',
+  loading: 'mdi-cached',
   first: 'mdi-page-first',
   last: 'mdi-page-last',
   unfold: 'mdi-unfold-more-horizontal',

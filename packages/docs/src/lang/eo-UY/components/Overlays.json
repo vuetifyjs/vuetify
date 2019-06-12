@@ -1,22 +1,22 @@
 {
-	"header": "crwdns27722:0crwdne27722:0",
-	"headerText": "crwdns27724:0crwdne27724:0",
-	"examples": {
-		"usage": {
-			"desc": "crwdns27726:0crwdne27726:0"
-		},
-		"loader": {
-			"header": "crwdns27728:0crwdne27728:0",
-			"desc": "crwdns27730:0crwdne27730:0"
-		},
-		"advanced": {
-			"header": "crwdns27732:0crwdne27732:0",
-			"desc": "crwdns27734:0[v-hover]crwdne27734:0"
-		}
-	},
-	"props": {
-		"absolute": "crwdns27736:0crwdne27736:0",
-		"opacity": "crwdns27738:0crwdne27738:0",
-		"zIndex": "crwdns27740:0crwdne27740:0"
-	}
+  "header": "crwdns27722:0crwdne27722:0",
+  "headerText": "crwdns27724:0crwdne27724:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns27726:0crwdne27726:0"
+    },
+    "loader": {
+      "header": "crwdns27728:0crwdne27728:0",
+      "desc": "crwdns27730:0crwdne27730:0"
+    },
+    "advanced": {
+      "header": "crwdns27732:0crwdne27732:0",
+      "desc": "crwdns27734:0[v-hover]crwdne27734:0"
+    }
+  },
+  "props": {
+    "absolute": "crwdns27736:0crwdne27736:0",
+    "opacity": "crwdns27738:0crwdne27738:0",
+    "zIndex": "crwdns27740:0crwdne27740:0"
+  }
 }
