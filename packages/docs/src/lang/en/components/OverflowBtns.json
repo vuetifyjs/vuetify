@@ -20,6 +20,10 @@
     "hint": {
       "header": "### Hint",
       "desc": "You can add a hint for user using `hint` property"
+    },
+    "counter": {
+      "header": "### Counter",
+      "desc": "You can add counter to `v-overflow-btn` to control max char count"
     }
   },
   "props": {

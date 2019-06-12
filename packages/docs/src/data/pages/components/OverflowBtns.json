@@ -34,7 +34,8 @@
             "simple/segmented",
             "simple/editable",
             "simple/menuProps",
-            "simple/hint"
+            "simple/hint",
+            "simple/counter"
           ]
         }
       ]
