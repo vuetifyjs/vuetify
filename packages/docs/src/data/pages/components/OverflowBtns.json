@@ -33,6 +33,7 @@
           "value": [
             "simple/segmented",
             "simple/editable",
+            "simple/menuProps",
             "simple/hint"
           ]
         }

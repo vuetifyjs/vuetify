@@ -13,6 +13,10 @@
       "header": "### Editable",
       "desc": "`editable` `v-overflow-btn` can be directly edited, just as `v-text-field`"
     },
+    "menuProps": {
+      "header": "### Menu props",
+      "desc": "You can set underlying `v-menu` props using `menu-props` property"
+    },
     "hint": {
       "header": "### Hint",
       "desc": "You can add a hint for user using `hint` property"
