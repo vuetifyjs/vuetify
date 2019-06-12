@@ -25,10 +25,22 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "loader",
-            "advanced"
+            "simple/absolute",
+            "simple/opacity",
+            "simple/zIndex",
+            "intermediate/loader",
+            "complex/advanced"
           ]
         }
       ]
