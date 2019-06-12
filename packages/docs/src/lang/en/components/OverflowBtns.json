@@ -1,7 +1,11 @@
 {
   "header": "# Overflow Button",
   "headerText": "Coming soon...",
-  "examples": {},
+  "examples": {
+    "usage": {
+      "desc": "`v-overflow-btn` is used for creating selection lists"
+    }
+  },
   "props": {
     "editable": "Creates an editable button",
     "overflow": "Creates an overflow button",
