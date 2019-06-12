@@ -156,9 +156,7 @@ describe('VListItem.ts', () => {
 
   it('should have the correct aria attributes', () => {
     const wrapper = mountFunction({
-      propsData: {
-        disabled: true
-      }
+      propsData: { disabled: true },
     })
 
     expect(wrapper.element.getAttribute('aria-disabled')).toBe('true')
@@ -167,7 +165,7 @@ describe('VListItem.ts', () => {
 
     wrapper.setProps({
       disabled: false,
-      inputValue: true
+      inputValue: true,
     })
 
     expect(wrapper.element.getAttribute('aria-disabled')).toBeNull()
@@ -182,7 +180,7 @@ describe('VListItem.ts', () => {
   it('should have the correct role', () => {
     // Custom provided
     const wrapper = mountFunction({
-      attrs: { role: 'item' }
+      attrs: { role: 'item' },
     })
     expect(wrapper.element.getAttribute('role')).toBe('item')
 
@@ -199,7 +197,7 @@ describe('VListItem.ts', () => {
 
     // In menu
     const wrapper3 = mountFunction({
-      provide: { isInMenu: true }
+      provide: { isInMenu: true },
     })
     expect(wrapper3.element.getAttribute('role')).toBeNull()
     wrapper3.setProps({ href: '#' }) // could be `to` or `link` as well
