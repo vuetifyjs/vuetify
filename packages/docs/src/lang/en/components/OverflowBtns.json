@@ -25,6 +25,10 @@
       "header": "### Counter",
       "desc": "You can add counter to `v-overflow-btn` to control max char count"
     },
+    "disabled": {
+      "header": "### Disabled",
+      "desc": "`v-overflow-btn` can be disabled in order to prevent user from interacting with it"
+    },
     "readonly": {
       "header": "### Read-only",
       "desc": "`v-overflow-btn` can be put into `readonly` mode, it'll become inactive but won't change color"

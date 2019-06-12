@@ -36,6 +36,7 @@
             "simple/menuProps",
             "simple/hint",
             "simple/counter",
+            "simple/disabled",
             "simple/readonly"
           ]
         }
