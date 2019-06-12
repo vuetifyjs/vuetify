@@ -1,22 +1,34 @@
 {
-	"header": "crwdns28672:0crwdne28672:0",
-	"headerText": "crwdns28674:0crwdne28674:0",
-	"examples": {
-		"usage": {
-			"desc": "crwdns28676:0crwdne28676:0"
-		},
-		"post": {
-			"header": "crwdns28678:0crwdne28678:0",
-			"desc": "crwdns28680:0crwdne28680:0"
-		},
-		"togglePictures": {
-			"header": "crwdns35980:0crwdne35980:0",
-			"desc": "crwdns35982:0crwdne35982:0"
-		}
-	},
-	"props": {
-		"activeClass": "crwdns28682:0crwdne28682:0",
-		"mandatory": "crwdns28684:0crwdne28684:0",
-		"multiple": "crwdns28686:0crwdne28686:0"
-	}
+  "header": "crwdns28672:0crwdne28672:0",
+  "headerText": "crwdns28674:0crwdne28674:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns28676:0crwdne28676:0"
+    },
+    "post": {
+      "header": "crwdns28678:0crwdne28678:0",
+      "desc": "crwdns28680:0crwdne28680:0"
+    },
+    "togglePictures": {
+      "header": "crwdns35980:0crwdne35980:0",
+      "desc": "crwdns35982:0crwdne35982:0"
+    },
+    "multiple": {
+      "header": "crwdns36240:0crwdne36240:0",
+      "desc": "crwdns36242:0crwdne36242:0"
+    },
+    "mandatory": {
+      "header": "crwdns36244:0crwdne36244:0",
+      "desc": "crwdns36246:0crwdne36246:0"
+    },
+    "activeClass": {
+      "header": "crwdns36248:0crwdne36248:0",
+      "desc": "crwdns36250:0crwdne36250:0"
+    }
+  },
+  "props": {
+    "activeClass": "crwdns28682:0crwdne28682:0",
+    "mandatory": "crwdns28684:0crwdne28684:0",
+    "multiple": "crwdns28686:0crwdne28686:0"
+  }
 }

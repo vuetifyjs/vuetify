@@ -1,41 +1,11 @@
 {
-    "header": "# Tema",
-    "headerText": "Cambia fácilmente los colores de tu aplicación mediante código. Reconstruye las hojas de estilo que vienen por default y personaliza varios aspectos del framework para tus necesidades particulares. Si estás buscando el **Generador de Temas**, por favor ve [aquí](https://theme-generator.vuetifyjs.com).",
-    "lightAndDarkHeader": "## Light y Dark",
-    "lightAndDarkText1": "Vuetify soporta variantes tanto **light** como **dark** del spec de Material Design. Esto se aplica desde el componente raíz `v-app` y está soportado por la mayoría de los componentes. Por default, tu aplicación usará el tema **light**, pero puedes sobreescribirlo al agregar la propiedad **dark**.",
-    "lightAndDarkText2": "Cuando designas a un componente como light o dark, todos sus hijos heredarán y aplicarán el mismo estilo a menos que se especifique lo contrario. Debido a la especificidad de CSS, hay ciertas combinaciones que harán que tengas que asignar manualmente el _tema_ para hijos anidados. Esto podría darse más a menudo cuando usas el tema **dark**.",
-    "customizingHeader": "## Personalizar",
-    "customizingText1": "Por default, Vuetify tiene un tema estándar aplicado a todos sus componentes.",
-    "customizingText2": "Esto puede ser cambiado fácilmente. Tan sólo pasa la propiedad **theme** a la función `Vue.use`. Puedes escoger modificar todo o sólo algunas de las propiedades del tema, con el resto siendo heredado desde el tema default.",
-    "customizingText3": "También puedes usar los colores de Material predefinidos..",
-    "customizingText4": "Por debajo, Vuetify generará las clases de CSS que serán accesibles en el DOM basado en estos valores. Estas clases seguirán el mismo markup que otras clases auxiliares, por ejemplo `primary` o `secondary--text`.",
-    "customizingText5": "Estos valores también estarán disponibles en el objeto instancia **$vuetify** en la propiedad **theme**. Esto permite que puedas modificar tu tema _dinámicamente_. Tras bambalinas, Vuetify regenerará y actualizará tus clases del tema, haciendo que tu aplicación se vea diferente de manera fluida.",
-    "stylusHeader": "## Modificando variables de Stylus",
-    "stylusText1": "Vuetify está construido sobre **stylus**. De manera similar  a **scss**, puedes cambiar las variables y recompilar los archivos de estilos. Una lista de variables disponibles se encuentra [aquí](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/stylus/settings/_variables.styl). A fin de generar el archivo stylus, necesitarás configurar tu aplicación para que soporte a stylus. Si estás usando una de las plantillas prefabricadas disponibles en el [Inicio Rápido](/getting-started/quick-start), puedes omitir la sección que viene.",
-    "stylusHeader2": "### Configurar el stylus-loader con Webpack",
-    "stylusText2": "En la línea de comandos, ejecuta:",
-    "stylusText3": "Esto instalará las dependencias necesarias para importar y parsear los archivos de stylus. Una vez instaladas, abre tu config de webpack y agrega una regla para stylus. Para aplicaciones basadas en **SSR**, asegúrate de que el import se haga en tu `client-entry` principal.",
-    "stylusText4": "Crea una carpeta llamada `stylus` dentro de tu carpeta src (o una carpeta de assets apropiada) con un archivo llamado `main.styl`. Esto servirá como el punto de entrada (entry point) y reconstruirá los estilos por default de Vuetify. Una vez creado, abre el archivo .styl y agrega esta entrada:",
-    "stylusText5": "Toma en cuenta que la ubicación relativa de node_modules puede variar en tu proyecto así que haz los cambios necesarios. Se recomienda que el import se ubique en tu archivo `index.js` o en `client-entry.js`. **NO IMPORTES** tu archivo `main.styl` dentro de un componente. Esto _causará problemas_ de rendimiento y hará más lento el **HMR** (hot module reloading).",
-    "stylusText6": "Ya que decidiste la ubicación de tu import, si estás trayendo la hoja de estilos de Vuetify con una etiqueta `<link>` en tu archivo index, quítala. Reinicia tu proceso de build y abre tu proyecto de nuevo. Deberás ver todos los archivos funcionando correctamente.",
-    "stylusHeader3": "### Cambiar los valores de Stylus",
-    "stylusText7": "Ahora que stylus ha sido configurado, puedes configurar también los valores por default de las variables que quieres cambiar. Estos deben ser declarados _antes_ del import y automáticamente sobreescribirán los defaults de Vuetify.",
-    "toc": [
-        {
-            "text": "Tema",
-            "href": "introduccion"
-        },
-        {
-            "text": "Light y Dark",
-            "href": "light-y-dark"
-        },
-        {
-            "text": "Personalizar",
-            "href": "personalizar"
-        },
-        {
-            "text": "Cambiar los valores de Stylus",
-            "href": "guia-de-stylus"
-        }
-    ]
+  "header": "# Tema",
+  "headerText": "Cambia fácilmente los colores de tu aplicación mediante código. Reconstruye las hojas de estilo que vienen por default y personaliza varios aspectos del framework para tus necesidades particulares. Si estás buscando el **Generador de Temas**, por favor ve [aquí](https://theme-generator.vuetifyjs.com).",
+  "lightAndDarkHeader": "## Light y Dark",
+  "customizingHeader": "## Personalizar",
+  "customizingText1": "Por default, Vuetify tiene un tema estándar aplicado a todos sus componentes.",
+  "customizingText2": "Esto puede ser cambiado fácilmente. Tan sólo pasa la propiedad **theme** a la función `Vue.use`. Puedes escoger modificar todo o sólo algunas de las propiedades del tema, con el resto siendo heredado desde el tema default.",
+  "customizingText3": "También puedes usar los colores de Material predefinidos..",
+  "customizingText4": "Por debajo, Vuetify generará las clases de CSS que serán accesibles en el DOM basado en estos valores. Estas clases seguirán el mismo markup que otras clases auxiliares, por ejemplo `primary` o `secondary--text`.",
+  "customizingText5": "Estos valores también estarán disponibles en el objeto instancia **$vuetify** en la propiedad **theme**. Esto permite que puedas modificar tu tema _dinámicamente_. Tras bambalinas, Vuetify regenerará y actualizará tus clases del tema, haciendo que tu aplicación se vea diferente de manera fluida."
 }
