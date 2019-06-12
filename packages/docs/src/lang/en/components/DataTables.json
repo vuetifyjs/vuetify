@@ -29,13 +29,13 @@
       "header": "### Sort on multiple columns",
       "desc": "Using the `multi-sort` prop will enable you to sort on multiple columns at the same time. When enabled, you can pass arrays to both `sort-by` and `sort-desc` to programmatically control the sorting, instead of single values."
     },
-    "customize-rows": {
-      "header": "### Customizing default rows",
-      "desc": "You can use the dynamic scoped slots `item.column.<name>` to customize only certain columns. `<name>` is the name of the `value` property in the corresponding header item sent to `headers`. So to customize the calories column we're using the `item.column.calories` slot."
-    },
     "customize-header": {
       "header": "### Customizing default header",
       "desc": "You can use the dynamic scoped slots `header.column.<name>` to customize only certain columns. `<name>` is the name of the `value` property in the corresponding header item sent to `headers`."
+    },
+    "customize-rows": {
+      "header": "### Customizing default rows",
+      "desc": "You can use the dynamic scoped slots `item.column.<name>` to customize only certain columns. `<name>` is the name of the `value` property in the corresponding header item sent to `headers`. So to customize the calories column we're using the `item.column.calories` slot."
     },
     "customize-footer": {
       "header": "### Customizing footer",
