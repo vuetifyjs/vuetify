@@ -8,6 +8,10 @@
     "segmented": {
       "header": "### Segmented",
       "desc": "`segmented` `v-overflow-btn` has additional divider between content and icon"
+    },
+    "editable": {
+      "header": "### Editable",
+      "desc": "`editable` `v-overflow-btn` can be directly edited, just as `v-text-field`"
     }
   },
   "props": {

@@ -31,7 +31,8 @@
         {
           "type": "examples",
           "value": [
-            "simple/segmented"
+            "simple/segmented",
+            "simple/editable"
           ]
         }
       ]
