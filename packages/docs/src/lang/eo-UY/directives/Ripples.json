@@ -1,29 +1,29 @@
 {
-	"header": "crwdns23460:0crwdne23460:0",
-	"headerText": "crwdns23462:0crwdne23462:0",
-	"examples": {
-		"usage": {
-			"desc": "crwdns23464:0crwdne23464:0",
-			"uninverted": true
-		},
-		"customColor": {
-			"header": "crwdns23468:0crwdne23468:0",
-			"desc": "crwdns23470:0crwdne23470:0",
-			"uninverted": true
-		},
-		"center": {
-			"header": "crwdns23474:0crwdne23474:0",
-			"desc": "crwdns23476:0crwdne23476:0",
-			"uninverted": true
-		},
-		"rippleInComponents": {
-			"header": "crwdns23480:0crwdne23480:0",
-			"desc": "crwdns23482:0crwdne23482:0",
-			"uninverted": true
-		}
-	},
-	"options": {
-		"class": "crwdns23486:0crwdne23486:0",
-		"center": "crwdns23488:0crwdne23488:0"
-	}
+  "header": "crwdns23460:0crwdne23460:0",
+  "headerText": "crwdns23462:0crwdne23462:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns23464:0crwdne23464:0",
+      "uninverted": true
+    },
+    "customColor": {
+      "header": "crwdns23468:0crwdne23468:0",
+      "desc": "crwdns23470:0crwdne23470:0",
+      "uninverted": true
+    },
+    "center": {
+      "header": "crwdns23474:0crwdne23474:0",
+      "desc": "crwdns23476:0crwdne23476:0",
+      "uninverted": true
+    },
+    "rippleInComponents": {
+      "header": "crwdns23480:0crwdne23480:0",
+      "desc": "crwdns23482:0crwdne23482:0",
+      "uninverted": true
+    }
+  },
+  "options": {
+    "class": "crwdns23486:0crwdne23486:0",
+    "center": "crwdns23488:0crwdne23488:0"
+  }
 }

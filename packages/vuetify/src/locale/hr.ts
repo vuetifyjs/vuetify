@@ -21,6 +21,9 @@ export default {
     firstPage: 'Prva stranica',
     lastPage: 'Zadnja stranica',
   },
+  datePicker: {
+    itemsSelected: '{0} odabrano',
+  },
   noDataText: 'Nema dostupnih podataka',
   carousel: {
     prev: 'Prethodna slika',

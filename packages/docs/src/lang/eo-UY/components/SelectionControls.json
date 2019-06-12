@@ -1,94 +1,94 @@
 {
-	"header": "crwdns27452:0crwdne27452:0",
-	"headerText": "crwdns27454:0crwdne27454:0",
-	"examples": {
-		"usage": {
-			"desc": "crwdns27456:0crwdne27456:0"
-		},
-		"checkboxesBoolean": {
-			"header": "crwdns27458:0crwdne27458:0",
-			"desc": "crwdns27460:0crwdne27460:0"
-		},
-		"checkboxesArray": {
-			"header": "crwdns27462:0crwdne27462:0",
-			"desc": "crwdns27464:0crwdne27464:0"
-		},
-		"checkboxesStates": {
-			"header": "crwdns27466:0crwdne27466:0",
-			"desc": "crwdns27468:0crwdne27468:0"
-		},
-		"checkboxesColors": {
-			"header": "crwdns27470:0crwdne27470:0",
-			"desc": "crwdns27472:0crwdne27472:0"
-		},
-		"checkboxesInlineTexfield": {
-			"header": "crwdns27474:0crwdne27474:0",
-			"desc": "crwdns27476:0crwdne27476:0"
-		},
-		"radiosDefault": {
-			"header": "crwdns27478:0crwdne27478:0",
-			"desc": "crwdns27480:0crwdne27480:0"
-		},
-		"radiosDirection": {
-			"header": "crwdns27482:0crwdne27482:0",
-			"desc": "crwdns27484:0crwdne27484:0"
-		},
-		"radiosColors": {
-			"header": "crwdns27486:0crwdne27486:0",
-			"desc": "crwdns27488:0crwdne27488:0"
-		},
-		"switchesBoolean": {
-			"header": "crwdns27490:0crwdne27490:0",
-			"desc": "crwdns27492:0crwdne27492:0"
-		},
-		"switchesArray": {
-			"header": "crwdns27494:0crwdne27494:0",
-			"desc": "crwdns27496:0crwdne27496:0"
-		},
-		"switchesStates": {
-			"header": "crwdns27498:0crwdne27498:0",
-			"desc": "crwdns27500:0crwdne27500:0"
-		},
-		"switchesColors": {
-			"header": "crwdns27502:0crwdne27502:0",
-			"desc": "crwdns27504:0crwdne27504:0"
-		},
-		"switchesFlat": {
-			"header": "crwdns27506:0crwdne27506:0",
-			"desc": "crwdns27508:0crwdne27508:0"
-		},
-		"labelSlot": {
-			"header": "crwdns27510:0crwdne27510:0",
-			"desc": "crwdns27512:0crwdne27512:0"
-		}
-	},
-	"props": {
-		"column": "crwdns27514:0crwdne27514:0",
-		"flat": "crwdns27516:0crwdne27516:0",
-		"indeterminate": "crwdns27518:0crwdne27518:0",
-		"indeterminateIcon": "crwdns27520:0crwdne27520:0",
-		"inputValue": "crwdns27522:0crwdne27522:0",
-		"inset": "crwdns27524:0crwdne27524:0",
-		"loading": "crwdns27526:0crwdne27526:0",
-		"mandatory": "crwdns27528:0crwdne27528:0",
-		"multiple": "crwdns27530:0crwdne27530:0",
-		"name": "crwdns27532:0crwdne27532:0",
-		"offIcon": "crwdns27534:0crwdne27534:0",
-		"onIcon": "crwdns27536:0crwdne27536:0",
-		"row": "crwdns27538:0crwdne27538:0",
-		"value": "crwdns27540:0crwdne27540:0",
-		"v-radio": {
-			"disabled": "crwdns27542:0crwdne27542:0",
-			"label": "crwdns27544:0crwdne27544:0",
-			"readonly": "crwdns27546:0crwdne27546:0"
-		}
-	},
-	"slots": {
-		"append": "crwdns27548:0crwdne27548:0",
-		"prepend": "crwdns27550:0crwdne27550:0"
-	},
-	"events": {
-		"change": "crwdns27552:0crwdne27552:0",
-		"update:error": "crwdns27554:0crwdne27554:0"
-	}
+  "header": "crwdns27452:0crwdne27452:0",
+  "headerText": "crwdns27454:0crwdne27454:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns27456:0crwdne27456:0"
+    },
+    "checkboxesBoolean": {
+      "header": "crwdns27458:0crwdne27458:0",
+      "desc": "crwdns27460:0crwdne27460:0"
+    },
+    "checkboxesArray": {
+      "header": "crwdns27462:0crwdne27462:0",
+      "desc": "crwdns27464:0crwdne27464:0"
+    },
+    "checkboxesStates": {
+      "header": "crwdns27466:0crwdne27466:0",
+      "desc": "crwdns27468:0crwdne27468:0"
+    },
+    "checkboxesColors": {
+      "header": "crwdns27470:0crwdne27470:0",
+      "desc": "crwdns27472:0crwdne27472:0"
+    },
+    "checkboxesInlineTexfield": {
+      "header": "crwdns27474:0crwdne27474:0",
+      "desc": "crwdns27476:0crwdne27476:0"
+    },
+    "radiosDefault": {
+      "header": "crwdns27478:0crwdne27478:0",
+      "desc": "crwdns27480:0crwdne27480:0"
+    },
+    "radiosDirection": {
+      "header": "crwdns27482:0crwdne27482:0",
+      "desc": "crwdns27484:0crwdne27484:0"
+    },
+    "radiosColors": {
+      "header": "crwdns27486:0crwdne27486:0",
+      "desc": "crwdns27488:0crwdne27488:0"
+    },
+    "switchesBoolean": {
+      "header": "crwdns27490:0crwdne27490:0",
+      "desc": "crwdns27492:0crwdne27492:0"
+    },
+    "switchesArray": {
+      "header": "crwdns27494:0crwdne27494:0",
+      "desc": "crwdns27496:0crwdne27496:0"
+    },
+    "switchesStates": {
+      "header": "crwdns27498:0crwdne27498:0",
+      "desc": "crwdns27500:0crwdne27500:0"
+    },
+    "switchesColors": {
+      "header": "crwdns27502:0crwdne27502:0",
+      "desc": "crwdns27504:0crwdne27504:0"
+    },
+    "switchesFlat": {
+      "header": "crwdns27506:0crwdne27506:0",
+      "desc": "crwdns27508:0crwdne27508:0"
+    },
+    "labelSlot": {
+      "header": "crwdns27510:0crwdne27510:0",
+      "desc": "crwdns27512:0crwdne27512:0"
+    }
+  },
+  "props": {
+    "column": "crwdns27514:0crwdne27514:0",
+    "flat": "crwdns27516:0crwdne27516:0",
+    "indeterminate": "crwdns27518:0crwdne27518:0",
+    "indeterminateIcon": "crwdns27520:0crwdne27520:0",
+    "inputValue": "crwdns27522:0crwdne27522:0",
+    "inset": "crwdns27524:0crwdne27524:0",
+    "loading": "crwdns27526:0crwdne27526:0",
+    "mandatory": "crwdns27528:0crwdne27528:0",
+    "multiple": "crwdns27530:0crwdne27530:0",
+    "name": "crwdns27532:0crwdne27532:0",
+    "offIcon": "crwdns27534:0crwdne27534:0",
+    "onIcon": "crwdns27536:0crwdne27536:0",
+    "row": "crwdns27538:0crwdne27538:0",
+    "value": "crwdns27540:0crwdne27540:0",
+    "v-radio": {
+      "disabled": "crwdns27542:0crwdne27542:0",
+      "label": "crwdns27544:0crwdne27544:0",
+      "readonly": "crwdns27546:0crwdne27546:0"
+    }
+  },
+  "slots": {
+    "append": "crwdns27548:0crwdne27548:0",
+    "prepend": "crwdns27550:0crwdne27550:0"
+  },
+  "events": {
+    "change": "crwdns27552:0crwdne27552:0",
+    "update:error": "crwdns27554:0crwdne27554:0"
+  }
 }

@@ -1,42 +1,21 @@
 {
-    "header": "Expansion Panel",
-    "headerText": "El componente `v-expansion-panel` es útil para reducir el espacio vertical cuando hay grandes cantidades de información. La funcionalidad default es que el componente sólo despliega un contenido de _expansion-panel_ a la vez. Sin embargo, con la prop `expandable`, el _expansion-panel_ puede permanecer abierto hasta que sea explicitamente cerrado por el usuario.",
-    "components": [
-        "v-expansion-panel",
-        "v-expansion-panel"
-    ],
-    "examples": [
-        {
-            "accordion": {
-                "header": "Acordeón",
-                "desc": "Los _expansion panels_ de acordeón pueden tener sólo 1 panel abierto a la vez."
-            },
-            "expand": {
-                "header": "_Expand_",
-                "desc": "Los paneles _expand_ permanecerán abiertos hasta ser cerrados por el usuario..",
-                "uninverted": true
-            },
-            "popout": {
-                "header": "_Popout & Inset_",
-                "desc": "El _expansion panel_ también tiene dos alternativas de diseño que puedes activar con las props `popout` and `inset`.",
-                "inverted": true
-            },
-            "focusable": {
-                "header": "Enfocable",
-                "desc": "Los encabezados de _expansion panel_ pueden ser enfocables al usar la prop `focusable`.",
-                "uninverted": true
-            }
-        }
-    ],
-    "props": {
-        "v-expansion-panels": {
-            "expand": "Mantiene el _expansion-panel_ abierto cuando se selecciona algún otro",
-            "focusable": "Hace que los headers del _expansion panel_ sean enfocables",
-            "inset": "Hace que el _expansion panel_ abra con un estilo _inset_",
-            "popout": "Hace que el _expansion panel_ abra con un estilo _popup_"
-        },
-        "v-expansion-panel": {
-            "hideActions": "Esconde el ícono _expand_ en el encabezado del contenido"
-        }
+  "header": "Expansion Panel",
+  "headerText": "El componente `v-expansion-panel` es útil para reducir el espacio vertical cuando hay grandes cantidades de información. La funcionalidad default es que el componente sólo despliega un contenido de _expansion-panel_ a la vez. Sin embargo, con la prop `expandable`, el _expansion-panel_ puede permanecer abierto hasta que sea explicitamente cerrado por el usuario.",
+  "examples": {
+    "disabled": {
+      "header": "Deshabilitado"
+    },
+    "focusable": {
+      "header": "Enfocable",
+      "desc": "Los encabezados de _expansion panel_ pueden ser enfocables al usar la prop `focusable`."
     }
+  },
+  "props": {
+    "v-expansion-panels": {
+      "expand": "Mantiene el _expansion-panel_ abierto cuando se selecciona algún otro",
+      "focusable": "Hace que los headers del _expansion panel_ sean enfocables",
+      "inset": "Hace que el _expansion panel_ abra con un estilo _inset_",
+      "popout": "Hace que el _expansion panel_ abra con un estilo _popup_"
+    }
+  }
 }

@@ -1,0 +1,6 @@
+{
+  "header": "# Alertes",
+  "props": {
+    "type": "Spécifie si une alerte est de type **success**, **info**, **warning** ou **error**. Utilise la couleur contextuelle et l'icône prédéfinie."
+  }
+}

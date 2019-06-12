@@ -5,7 +5,9 @@ exports[`VExpansionPanel should hide actions and match snapshot 1`] = `
 <div aria-expanded="false"
      class="v-expansion-panel"
 >
-  <button class="v-expansion-panel-header">
+  <button type="button"
+          class="v-expansion-panel-header"
+  >
   </button>
   <div class="v-expansion-panel-content"
        style="display: none;"
@@ -20,7 +22,9 @@ exports[`VExpansionPanel should hide actions and match snapshot 2`] = `
 <div aria-expanded="false"
      class="v-expansion-panel"
 >
-  <button class="v-expansion-panel-header">
+  <button type="button"
+          class="v-expansion-panel-header"
+  >
     <div class="v-expansion-panel-header__icon">
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"

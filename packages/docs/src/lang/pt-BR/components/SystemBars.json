@@ -1,0 +1,7 @@
+{
+  "props": {
+    "lightsOut": "Reduz a opacidade da barra do sistema",
+    "status": "Reduz a altura da barra do sistema",
+    "window": "Aumenta a altura da barra do sistema"
+  }
+}

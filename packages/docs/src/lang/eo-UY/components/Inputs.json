@@ -1,34 +1,34 @@
 {
-	"header": "crwdns27356:0crwdne27356:0",
-	"headerText": "crwdns27358:0crwdne27358:0",
-	"examples": {
-		"usage": {
-			"desc": "crwdns27360:0crwdne27360:0"
-		}
-	},
-	"props": {
-		"appendIcon": "crwdns27362:0crwdne27362:0",
-		"backgroundColor": "crwdns27364:0crwdne27364:0",
-		"hideDetails": "crwdns27366:0crwdne27366:0",
-		"hint": "crwdns27368:0crwdne27368:0",
-		"label": "crwdns27370:0crwdne27370:0",
-		"loading": "crwdns27372:0crwdne27372:0",
-		"persistentHint": "crwdns27374:0crwdne27374:0",
-		"placeholder": "crwdns27376:0crwdne27376:0",
-		"prependIcon": "crwdns27378:0crwdne27378:0",
-		"required": "crwdns27380:0crwdne27380:0",
-		"tabindex": "crwdns27382:0crwdne27382:0",
-		"toggleKeys": "crwdns27384:0crwdne27384:0",
-		"value": "crwdns27386:0crwdne27386:0"
-	},
-	"slots": {
-		"append": "crwdns27388:0crwdne27388:0",
-		"prepend": "crwdns27390:0crwdne27390:0"
-	},
-	"events": {
-		"blur": "crwdns27392:0crwdne27392:0",
-		"change": "crwdns27394:0crwdne27394:0",
-		"click:append": "crwdns27396:0crwdne27396:0",
-		"click:prepend": "crwdns27398:0crwdne27398:0"
-	}
+  "header": "crwdns27356:0crwdne27356:0",
+  "headerText": "crwdns27358:0crwdne27358:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns27360:0crwdne27360:0"
+    }
+  },
+  "props": {
+    "appendIcon": "crwdns27362:0crwdne27362:0",
+    "backgroundColor": "crwdns27364:0crwdne27364:0",
+    "hideDetails": "crwdns27366:0crwdne27366:0",
+    "hint": "crwdns27368:0crwdne27368:0",
+    "label": "crwdns27370:0crwdne27370:0",
+    "loading": "crwdns27372:0crwdne27372:0",
+    "persistentHint": "crwdns27374:0crwdne27374:0",
+    "placeholder": "crwdns27376:0crwdne27376:0",
+    "prependIcon": "crwdns27378:0crwdne27378:0",
+    "required": "crwdns27380:0crwdne27380:0",
+    "tabindex": "crwdns27382:0crwdne27382:0",
+    "toggleKeys": "crwdns27384:0crwdne27384:0",
+    "value": "crwdns27386:0crwdne27386:0"
+  },
+  "slots": {
+    "append": "crwdns27388:0crwdne27388:0",
+    "prepend": "crwdns27390:0crwdne27390:0"
+  },
+  "events": {
+    "blur": "crwdns27392:0crwdne27392:0",
+    "change": "crwdns27394:0crwdne27394:0",
+    "click:append": "crwdns27396:0crwdne27396:0",
+    "click:prepend": "crwdns27398:0crwdne27398:0"
+  }
 }

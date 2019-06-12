@@ -2,10 +2,6 @@
   "header": "Card",
   "headerText": "El componente `v-card` es un componente versátil que puede ser usado desde un panel hasta para una imagen estática. El componente **card** tiene numerosos componentes auxiliares para hacer el markup tan sencillo como sea posible. Los componentes que no tienen opciones listadas utilizan la opción de componente funcional de **Vue** para hacer un render más rápido y sirven como _markup sugar_ para construir más fácilmente.",
   "examples": {
-    "components": {
-      "header": "Componentes",
-      "desc": "Un _card_ tiene 4 componentes básicos: `v-card-media`, `v-card-title`, `v-card-text` and `v-card-actions`."
-    },
     "mediaWithText": {
       "header": "Contenido con texto",
       "desc": "Al hacer uso del sistema de _layout_, podemos agregar un texto personalizado en cualquier parte del fondo."
@@ -31,7 +27,6 @@
     "img": "Especifica una imagen de fondo",
     "primaryTitle": "Aplica un padding al título principal",
     "raised": "Especifica una elevación más alta por default",
-    "src": "La imagen que se desplegará como fondo",
-    "tile": "Convierte el _card_ en un _tile_ al quitar el redondeo del borde"
+    "src": "La imagen que se desplegará como fondo"
   }
 }

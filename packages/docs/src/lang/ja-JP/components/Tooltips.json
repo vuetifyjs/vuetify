@@ -1,12 +1,7 @@
 {
   "header": "Tooltip",
   "headerText": "`v-tooltip` コンポーネントはユーザーが要素をホバーした際に情報を表示するのに便利です。**v-model** を経由してTooltipの表示をプログラム的に制御することができます。",
-  "components": ["v-tooltip"],
   "examples": {
-    "default": {
-      "header": "Default",
-      "desc": "Tooltipsはどんな要素もラップすることができます。"
-    },
     "alignment": {
       "header": "配置",
       "desc": "Tooltipは対象になる要素の四方向のどこにでも配置することができます。"

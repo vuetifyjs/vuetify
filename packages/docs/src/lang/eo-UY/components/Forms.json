@@ -1,34 +1,34 @@
 {
-	"header": "crwdns27420:0crwdne27420:0",
-	"headerText": "crwdns27422:0[Vee-validate]crwdnd27422:0[vuelidate]crwdne27422:0",
-	"examples": {
-		"usage": {
-			"desc": "crwdns27424:0crwdne27424:0"
-		},
-		"rules": {
-			"header": "crwdns27426:0crwdne27426:0",
-			"desc": "crwdns27428:0crwdne27428:0"
-		},
-		"validationWithSubmitAndClear": {
-			"header": "crwdns27430:0crwdne27430:0",
-			"desc": "crwdns35932:0$refscrwdnd35932:0$refscrwdnd35932:0$refscrwdne35932:0"
-		},
-		"vuelidate": {
-			"header": "crwdns27434:0crwdne27434:0",
-			"desc": "crwdns27436:0[Documentation]crwdne27436:0"
-		},
-		"veeValidate": {
-			"header": "crwdns27438:0crwdne27438:0",
-			"desc": "crwdns27440:0[Documentation]crwdne27440:0"
-		}
-	},
-	"props": {
-		"lazyValidation": "crwdns27442:0crwdne27442:0",
-		"value": "crwdns27444:0crwdne27444:0"
-	},
-	"functions": {
-		"reset": "crwdns27446:0crwdne27446:0",
-		"resetValidation": "crwdns35934:0crwdne35934:0",
-		"validate": "crwdns27450:0crwdne27450:0"
-	}
+  "header": "crwdns27420:0crwdne27420:0",
+  "headerText": "crwdns27422:0[Vee-validate]crwdnd27422:0[vuelidate]crwdne27422:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns27424:0crwdne27424:0"
+    },
+    "rules": {
+      "header": "crwdns27426:0crwdne27426:0",
+      "desc": "crwdns27428:0crwdne27428:0"
+    },
+    "validationWithSubmitAndClear": {
+      "header": "crwdns27430:0crwdne27430:0",
+      "desc": "crwdns35932:0$refscrwdnd35932:0$refscrwdnd35932:0$refscrwdne35932:0"
+    },
+    "vuelidate": {
+      "header": "crwdns27434:0crwdne27434:0",
+      "desc": "crwdns27436:0[Documentation]crwdne27436:0"
+    },
+    "veeValidate": {
+      "header": "crwdns27438:0crwdne27438:0",
+      "desc": "crwdns27440:0[Documentation]crwdne27440:0"
+    }
+  },
+  "props": {
+    "lazyValidation": "crwdns27442:0crwdne27442:0",
+    "value": "crwdns27444:0crwdne27444:0"
+  },
+  "functions": {
+    "reset": "crwdns27446:0crwdne27446:0",
+    "resetValidation": "crwdns35934:0crwdne35934:0",
+    "validate": "crwdns27450:0crwdne27450:0"
+  }
 }

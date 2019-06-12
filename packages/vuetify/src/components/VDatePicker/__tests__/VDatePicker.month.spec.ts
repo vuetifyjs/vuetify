@@ -26,7 +26,15 @@ describe('VDatePicker.ts', () => {
         mocks: {
           $vuetify: {
             rtl: false,
-            lang: new Lang(),
+            lang: new Lang({
+              locales: {
+                en: {
+                  datePicker: {
+                    itemsSelected: 'i has {0} items',
+                  },
+                },
+              },
+            }),
           },
         },
       })
@@ -236,6 +244,28 @@ describe('VDatePicker.ts', () => {
     const icons = wrapper.findAll('.v-date-picker-header .v-icon').wrappers
     expect(icons[0].element.textContent).toBe('block')
     expect(icons[1].element.textContent).toBe('check')
+  })
+
+  it('should display translated title', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        multiple: true,
+        type: 'month',
+        value: ['2013-05'],
+      },
+    })
+
+    expect(wrapper.find('.v-date-picker-title__date').text()).toBe('May')
+
+    wrapper.setProps({
+      value: [],
+    })
+    expect(wrapper.find('.v-date-picker-title__date').text()).toBe('-')
+
+    wrapper.setProps({
+      value: ['2013-05', '2013-06', '2013-07'],
+    })
+    expect(wrapper.find('.v-date-picker-title__date').text()).toBe('i has 3 items')
   })
 
   it('should emit click/dblclick:month event', async () => {
