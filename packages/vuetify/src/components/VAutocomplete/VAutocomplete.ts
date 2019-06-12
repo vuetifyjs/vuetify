@@ -285,9 +285,7 @@ export default VSelect.extend({
     genInputSlot () {
       const slot = VSelect.options.methods.genInputSlot.call(this)
 
-      slot.data = slot.data || {}
-      slot.data.attrs = slot.data.attrs || {}
-      slot.data.attrs.role = 'combobox'
+      slot.data!.attrs!.role = 'combobox'
 
       return slot
     },
