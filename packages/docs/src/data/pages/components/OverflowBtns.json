@@ -37,7 +37,8 @@
             "simple/hint",
             "simple/counter",
             "simple/disabled",
-            "simple/readonly"
+            "simple/readonly",
+            "simple/loading"
           ]
         }
       ]

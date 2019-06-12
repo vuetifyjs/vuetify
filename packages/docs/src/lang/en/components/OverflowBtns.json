@@ -7,7 +7,7 @@
     },
     "segmented": {
       "header": "### Segmented",
-      "desc": "`segmented` `v-overflow-btn` has additional divider between content and icon"
+      "desc": "`segmented` `v-overflow-btn` has and additional divider between the content and the icon"
     },
     "editable": {
       "header": "### Editable",
@@ -32,6 +32,10 @@
     "readonly": {
       "header": "### Read-only",
       "desc": "`v-overflow-btn` can be put into `readonly` mode, it'll become inactive but won't change color"
+    },
+    "loading": {
+      "header": "### Loading",
+      "desc": "`v-overflow-btn` can have `loading` state with linear progress bar under them"
     }
   },
   "props": {
