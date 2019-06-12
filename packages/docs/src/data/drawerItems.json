@@ -44,6 +44,7 @@
       { "text": "grid", "to": "grid" },
       { "text": "gridLists", "to": "grid-lists" },
       { "text": "aspectRatios", "to": "aspect-ratios" },
+      { "text": "transitions", "to": "transitions" },
       {
         "group": "layout",
         "text": "styles",
@@ -61,13 +62,6 @@
           { "text": "elevation", "to": "elevation" },
           { "text": "spacing", "to": "spacing" },
           { "text": "textAlignment", "to": "alignment" }
-        ]
-      },
-      {
-        "group": "layout",
-        "text": "motion",
-        "children": [
-          { "text": "transitions", "to": "transitions" }
         ]
       }
     ]
