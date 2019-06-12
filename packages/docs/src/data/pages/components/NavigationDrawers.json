@@ -55,7 +55,7 @@
           "value": [
             "components/lists",
             "components/icons",
-            "framework/pre-made-layouts"
+            "layout/pre-made-layouts"
           ]
         }
       ]

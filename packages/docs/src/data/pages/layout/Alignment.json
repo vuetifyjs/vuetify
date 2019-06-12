@@ -17,8 +17,8 @@
         {
           "type": "up-next",
           "value": [
-            "framework/content",
-            "framework/typography"
+            "layout/content",
+            "layout/typography"
           ]
         }
       ]

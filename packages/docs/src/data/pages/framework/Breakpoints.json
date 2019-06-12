@@ -65,8 +65,8 @@
           "type": "up-next",
           "value": [
             "directives/resizing",
-            "framework/display",
-            "framework/alignment"
+            "layout/display",
+            "layout/alignment"
           ]
         }
       ]

@@ -49,9 +49,9 @@
         {
           "type": "up-next",
           "value": [
-            "framework/colors",
-            "framework/elevation",
-            "framework/grid"
+            "layout/colors",
+            "layout/elevation",
+            "layout/grid"
           ]
         }
       ]

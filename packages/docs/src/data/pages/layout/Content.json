@@ -73,8 +73,8 @@
         {
           "type": "up-next",
           "value": [
-            "framework/typography",
-            "framework/alignment"
+            "layout/typography",
+            "layout/alignment"
           ]
         }
       ]

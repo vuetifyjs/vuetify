@@ -66,8 +66,8 @@
         {
           "type": "up-next",
           "value": [
-            "framework/alignment",
-            "framework/content"
+            "layout/alignment",
+            "layout/content"
           ]
         }
       ]

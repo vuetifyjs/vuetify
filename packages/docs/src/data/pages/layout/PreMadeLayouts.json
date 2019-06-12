@@ -17,7 +17,7 @@
           "type": "up-next",
           "value": [
             "themes/premium",
-            "framework/colors",
+            "layout/colors",
             "framework/theme"
           ]
         }

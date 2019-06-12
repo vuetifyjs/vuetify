@@ -28,8 +28,8 @@
           "type": "up-next",
           "value": [
             "framework/breakpoints",
-            "framework/display",
-            "framework/grid"
+            "layout/display",
+            "layout/grid"
           ]
         }
       ]

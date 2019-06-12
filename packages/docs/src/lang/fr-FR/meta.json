@@ -73,7 +73,7 @@
     "description": "Vuetify prend en charge l'internationalisation linguistique de ses composants.",
     "keywords": "vue, i18n, langue, internationalisation"
   },
-  "framework/transitions": {
+  "layout/transitions": {
     "title": "Transitions",
     "description": "Créez une application incroyable avec des animations fluides.",
     "keywords": "animations, transitions"
@@ -83,7 +83,7 @@
     "description": "En utilisant l'aide goTo, vous pouvez défiler facilement vers n'importe quel emplacement de la page.",
     "keywords": "défilement, défilement fluide, transitions"
   },
-  "framework/colors": {
+  "layout/colors": {
     "title": "Palette de couleurs Material",
     "description": "Appliquez facilement n'importe quelle couleur de la palette Material.",
     "keywords": "couleurs"
@@ -93,23 +93,23 @@
     "description": "Configurez le thème et les couleurs supplémentaires de votre application en un éclair.",
     "keywords": "thèmes"
   },
-  "framework/typography": {
+  "layout/typography": {
     "title": "Typographie de l'application",
     "description": "Voir les différents styles de typographie. Des titres aux légendes, avec différents poids et tailles.",
     "keywords": "typographie, entêtes, titres"
   },
-  "framework/content": {
+  "layout/content": {
     "keywords": "contenu, html, balisage"
   },
-  "framework/pre-made-layouts": {
+  "layout/pre-made-layouts": {
     "title": "Mises en page de l'application"
   },
-  "framework/grid": {
+  "layout/grid": {
     "title": "Système de grille de mise en page",
     "description": "Vuetify supporte la grille de conception Material Design en 12 points pour la mise en page de votre application.",
     "keywords": "grille, mise en page, flex"
   },
-  "framework/grid-lists": {
+  "layout/grid-lists": {
     "title": "Composant de liste sous forme de grille"
   },
   "components/app-bars": {

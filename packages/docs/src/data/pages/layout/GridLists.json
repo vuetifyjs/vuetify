@@ -20,6 +20,7 @@
       "children": [
         {
           "type": "api",
+          "lang": "grid",
           "value": [
             "v-container",
             "v-layout",
@@ -35,16 +36,7 @@
         {
           "type": "examples",
           "value": [
-            "playground",
-            "offset",
-            "order",
-            "directionAndAlign",
-            "rowColumnBreakpoint",
-            "growShrink",
-            "nestedGrid",
-            "uniqueLayouts",
-            "spacer",
-            "tags"
+            "subheader"
           ]
         }
       ]
@@ -55,9 +47,9 @@
         {
           "type": "up-next",
           "value": [
-            "framework/grid-lists",
-            "framework/breakpoints",
-            "framework/display"
+            "layout/grid",
+            "components/images",
+            "components/cards"
           ]
         }
       ]

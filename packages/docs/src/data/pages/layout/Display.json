@@ -1,28 +1,40 @@
 {
   "title": "header",
   "titleText": "headerText",
-  "mdSpec": {
-    "version": "2",
-    "link": "https://material.io/design/typography/the-type-system.html"
-  },
   "children": [
     {
+      "type": "layout-grid"
+    },
+    {
       "type": "section",
       "children": [
         {
           "type": "heading",
-          "lang": "fontHeader"
+          "lang": "visibilityHeader"
         },
         {
           "type": "text",
-          "lang": "fontText"
+          "lang": "visibilityText"
+        },
+        {
+          "type": "text",
+          "lang": "breakpointText"
         },
         {
           "type": "markdown",
-          "lang": "fonts"
+          "lang": "breakpoints"
         },
         {
-          "type": "style-headings"
+          "type": "text",
+          "lang": "conditionText"
+        },
+        {
+          "type": "markdown",
+          "lang": "conditions"
+        },
+        {
+          "type": "text",
+          "lang": "mediaText"
         }
       ]
     },
@@ -31,26 +43,15 @@
       "children": [
         {
           "type": "heading",
-          "lang": "weightsHeader"
+          "lang": "overflowHeader"
         },
         {
           "type": "text",
-          "lang": "weightsText"
+          "lang": "overflowText"
         },
         {
           "type": "markdown",
-          "lang": "weights"
-        },
-        {
-          "type": "text",
-          "lang": "italicText"
-        },
-        {
-          "type": "markdown",
-          "lang": "italic"
-        },
-        {
-          "type": "style-weights"
+          "lang": "overflows"
         }
       ]
     },
@@ -59,18 +60,15 @@
       "children": [
         {
           "type": "heading",
-          "lang": "transformHeader"
+          "lang": "displayHeader"
         },
         {
           "type": "text",
-          "lang": "transformText"
+          "lang": "displayText"
         },
         {
           "type": "markdown",
-          "lang": "transforms"
-        },
-        {
-          "type": "style-typefaces"
+          "lang": "displays"
         }
       ]
     },
@@ -79,19 +77,15 @@
       "children": [
         {
           "type": "heading",
-          "lang": "wrapHeader"
+          "lang": "Generic.Pages.examples"
         },
         {
           "type": "text",
-          "lang": "wrapText"
-        },
-        {
-          "type": "markdown",
-          "lang": "wraps"
+          "lang": "exampleText"
         },
         {
           "type": "example",
-          "value": "truncate"
+          "value": "hiddenElements"
         }
       ]
     },
@@ -101,8 +95,9 @@
         {
           "type": "up-next",
           "value": [
-            "framework/alignment",
-            "framework/content"
+            "layout/alignment",
+            "directives/resizing",
+            "framework/breakpoints"
           ]
         }
       ]

@@ -18,11 +18,9 @@
   {
     "group": "framework",
     "text": "frameworkOptions",
-    "icon": "mdi-buffer",
+    "icon": "mdi-tune",
     "children": [
       { "text": "aLaCarte", "to": "a-la-carte" },
-      { "text": "grid", "to": "grid" },
-      { "text": "gridLists", "to": "grid-lists" },
       {
         "group": "framework",
         "text": "services",
@@ -34,17 +32,20 @@
           { "text": "scroll", "to": "scroll" },
           { "text": "theme", "to": "theme" }
         ]
-      },
+      }
+    ]
+  },
+  {
+    "group": "layout",
+    "text": "layout",
+    "icon": "mdi-buffer",
+    "children": [
+      { "text": "preMadeLayouts", "to": "pre-made-layouts" },
+      { "text": "grid", "to": "grid" },
+      { "text": "gridLists", "to": "grid-lists" },
+      { "text": "aspectRatios", "to": "aspect-ratios" },
       {
-        "group": "framework",
-        "text": "layout",
-        "children": [
-          { "text": "aspectRatios", "to": "aspect-ratios" },
-          { "text": "preMadeLayouts", "to": "pre-made-layouts" }
-        ]
-      },
-      {
-        "group": "framework",
+        "group": "layout",
         "text": "styles",
         "children": [
           { "text": "colors", "to": "colors" },
@@ -53,7 +54,7 @@
         ]
       },
       {
-        "group": "framework",
+        "group": "layout",
         "text": "helperClasses",
         "children": [
           { "text": "display", "to": "display" },
@@ -63,7 +64,7 @@
         ]
       },
       {
-        "group": "framework",
+        "group": "layout",
         "text": "motion",
         "children": [
           { "text": "transitions", "to": "transitions" }

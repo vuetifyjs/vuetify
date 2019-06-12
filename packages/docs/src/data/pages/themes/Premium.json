@@ -16,7 +16,7 @@
         {
           "type": "up-next",
           "value": [
-            "framework/pre-made-layouts",
+            "layout/pre-made-layouts",
             "framework/theme",
             "getting-started/quick-start"
           ]

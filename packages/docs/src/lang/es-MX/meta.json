@@ -12,7 +12,7 @@
   "framework/theme": {
     "description": "Setup your custom application theme by changing a few variables."
   },
-  "framework/grid-lists": {
+  "layout/grid-lists": {
     "description": "Grid list component for Vuetify Framework"
   },
   "framework/breakpoints": {

@@ -51,7 +51,7 @@
         {
           "type": "up-next",
           "value": [
-            "framework/grid",
+            "layout/grid",
             "components/buttons",
             "components/toolbars"
           ]

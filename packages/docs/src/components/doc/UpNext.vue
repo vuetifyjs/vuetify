@@ -60,6 +60,7 @@
         switch (section) {
           case 'getting-started': return 'teal'
           case 'framework': return 'brown'
+          case 'layout': return 'green'
           case 'components': return 'primary'
           case 'directives': return 'blue-grey'
           case 'themes': return 'tertiary'
@@ -69,7 +70,8 @@
       genIcon (section) {
         switch (section) {
           case 'getting-started': return 'mdi-speedometer'
-          case 'framework': return 'mdi-buffer'
+          case 'framework': return 'mdi-tune'
+          case 'layout': return 'mdi-buffer'
           case 'components': return 'mdi-view-dashboard'
           case 'directives': return 'mdi-function'
           case 'themes': return 'mdi-palette'

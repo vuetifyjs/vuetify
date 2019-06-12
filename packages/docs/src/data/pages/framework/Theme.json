@@ -243,8 +243,8 @@
         {
           "type": "up-next",
           "value": [
-            "framework/colors",
-            "framework/pre-made-layouts",
+            "layout/colors",
+            "layout/pre-made-layouts",
             "themes/premium"
           ]
         }

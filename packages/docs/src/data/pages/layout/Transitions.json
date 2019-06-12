@@ -87,7 +87,7 @@
           "type": "up-next",
           "value": [
             "components/menus",
-            "framework/colors",
+            "layout/colors",
             "components/expansion-panels"
           ]
         }

@@ -102,7 +102,7 @@
           "value": [
             "framework/theme",
             "themes/premium",
-            "framework/pre-made-layouts"
+            "layout/pre-made-layouts"
           ]
         }
       ]

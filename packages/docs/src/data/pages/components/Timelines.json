@@ -50,7 +50,7 @@
           "value": [
             "components/cards",
             "components/icons",
-            "framework/grid"
+            "layout/grid"
           ]
         }
       ]
