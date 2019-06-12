@@ -20,7 +20,6 @@ import {
 // Types
 import { VNode, VNodeData, PropType } from 'vue'
 import mixins from '../../util/mixins'
-import { PropValidator } from 'vue/types/options'
 
 const baseMixins = mixins(
   Colorable,
@@ -44,7 +43,7 @@ export default baseMixins.extend<options>().extend({
       default: '',
     },
     height: [Number, String],
-    hideDetails: [Boolean, String] as PropValidator<boolean | 'auto'>,
+    hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
     hint: String,
     id: String,
     label: String,
