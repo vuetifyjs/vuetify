@@ -427,10 +427,8 @@ export default baseMixins.extend<options>().extend({
     genInputSlot (): VNode {
       const render = VTextField.options.methods.genInputSlot.call(this)
 
-      render.data = render.data || {}
-      render.data.attrs = render.data.attrs || {}
-      render.data.attrs = {
-        ...render.data.attrs,
+      render.data!.attrs = {
+        ...render.data!.attrs,
         role: 'button',
         'aria-haspopup': 'listbox',
         'aria-expanded': String(this.isMenuActive),
