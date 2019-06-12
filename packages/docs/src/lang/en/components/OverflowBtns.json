@@ -35,7 +35,10 @@
     },
     "loading": {
       "header": "### Loading",
-      "desc": "`v-overflow-btn` can have `loading` state with linear progress bar under them"
+    },
+    "box": {
+      "header": "### Box",
+      "desc": "Text fields can be used with an alternative box design. Append and prepend icon props are **not** supported in this mode."
     }
   },
   "props": {

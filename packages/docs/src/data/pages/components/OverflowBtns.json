@@ -47,7 +47,8 @@
             "simple/counter",
             "simple/disabled",
             "simple/readonly",
-            "simple/loading"
+            "simple/loading",
+            "simple/box"
           ]
         }
       ]
