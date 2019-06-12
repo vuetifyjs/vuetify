@@ -4,6 +4,10 @@
   "examples": {
     "usage": {
       "desc": "`v-overflow-btn` is used for creating selection lists"
+    },
+    "segmented": {
+      "header": "### Segmented",
+      "desc": "`segmented` `v-overflow-btn` has additional divider between content and icon"
     }
   },
   "props": {
