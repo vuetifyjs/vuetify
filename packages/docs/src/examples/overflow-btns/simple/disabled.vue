@@ -4,7 +4,7 @@
       class="my-2"
       :items="dropdown_font"
       label="Overflow Btn"
-      readonly
+      disabled
       target="#dropdown-example-1"
     ></v-overflow-btn>
   </v-container>
