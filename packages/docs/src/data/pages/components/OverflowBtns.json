@@ -35,7 +35,8 @@
             "simple/editable",
             "simple/menuProps",
             "simple/hint",
-            "simple/counter"
+            "simple/counter",
+            "simple/readonly"
           ]
         }
       ]
