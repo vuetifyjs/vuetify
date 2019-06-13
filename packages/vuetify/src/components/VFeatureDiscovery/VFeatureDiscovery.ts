@@ -46,6 +46,20 @@ interface CircleObject {
   size: number
 }
 
+interface Dimensions {
+  top: number
+  left: number
+  bottom: number
+  right: number
+  width: number
+  height: number
+  offsetTop: number
+  offsetLeft: number
+  scrollHeight: number
+  x: number
+  y: number
+}
+
 /* @vue/component */
 export default baseMixins.extend<options>().extend({
   name: 'v-feature-discovery',
@@ -149,10 +163,11 @@ export default baseMixins.extend<options>().extend({
         height: 0,
         offsetTop: 0,
         scrollHeight: 0,
+        offsetLeft: 0,
         x: 0,
         y: 0
       }
-    },
+    } as Record<string, Dimensions>,
     hasJustFocused: false,
     hasWindow: false,
     isContentActive: false,
@@ -329,7 +344,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   methods: {
-    absolutePosition () {
+    absolutePosition (): Dimensions {
       return {
         offsetTop: 0,
         offsetLeft: 0,
@@ -340,7 +355,7 @@ export default baseMixins.extend<options>().extend({
         right: this.positionX || this.absoluteX,
         height: 0,
         width: 0
-      }
+      } as Dimensions
     },
     callActivate () {
       this.hasWindow && this.activate()
@@ -395,7 +410,7 @@ export default baseMixins.extend<options>().extend({
         this.pageYOffset = this.activatorFixed ? 0 : this.getOffsetTop()
       }
     },
-    getRoundedBoundedClientRect (el: Element) {
+    getRoundedBoundedClientRect (el: Element): Dimensions {
       const rect = el.getBoundingClientRect()
       return {
         top: Math.round(rect.top),
@@ -406,9 +421,9 @@ export default baseMixins.extend<options>().extend({
         height: Math.round(rect.height),
         x: Math.round(Math.round(rect.left) + Math.round(rect.width) / 2),
         y: Math.round(Math.round(rect.top) + Math.round(rect.height) / 2)
-      }
+      } as Dimensions
     },
-    measure (el: HTMLElement) {
+    measure (el: HTMLElement): Dimensions | null {
       if (!el || !this.hasWindow) return null
       return this.getRoundedBoundedClientRect(el)
     },
@@ -481,7 +496,7 @@ export default baseMixins.extend<options>().extend({
       this.pageWidth = document.documentElement.clientWidth
       this.pageHeight = document.documentElement.clientHeight
 
-      const dimensions: Record<string, any> = {}
+      const dimensions: Record<string, Dimensions> = {}
 
       // Activator should already be shown
       if (!this.hasActivator || this.absolute) {
@@ -490,16 +505,16 @@ export default baseMixins.extend<options>().extend({
         const activator = this.getActivator()
         if (!activator) return
 
-        dimensions.activator = this.measure(activator)
+        dimensions.activator = this.measure(activator) as Dimensions
         dimensions.activator.offsetLeft = activator.offsetLeft
         dimensions.activator.offsetTop = 0
       }
 
       // Display and hide to get dimensions
       this.sneakPeek(() => {
-        dimensions.content = this.measure(this.$refs.content)
+        dimensions.content = this.measure(this.$refs.content) as Dimensions
 
-        this.dimensions = dimensions as any
+        this.dimensions = dimensions
       })
     },
     getOffsetLeft () {
