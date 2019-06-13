@@ -4,15 +4,15 @@
       <v-container fluid>
         <v-layout row wrap>
           <v-flex xs12>
-           <v-radio-group v-model="color" row>
-             <v-radio
-               v-for="(colorValue, i) in ['success', 'info', 'error', 'cyan darken-2']"
-               :key="i"
-               :color="colorValue"
-               :label="colorValue"
-               :value="colorValue"
-             ></v-radio>
-           </v-radio-group>
+            <v-radio-group v-model="color" row>
+              <v-radio
+                v-for="(colorValue, i) in ['success', 'info', 'error', 'cyan darken-2']"
+                :key="i"
+                :color="colorValue"
+                :label="colorValue"
+                :value="colorValue"
+              ></v-radio>
+            </v-radio-group>
           </v-flex>
           <v-flex xs12 sm3>
             <v-checkbox
