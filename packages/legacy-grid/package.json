@@ -17,7 +17,6 @@
     "*.css"
   ],
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --config build/config.js --progress --hide-modules"
   },
   "devDependencies": {
