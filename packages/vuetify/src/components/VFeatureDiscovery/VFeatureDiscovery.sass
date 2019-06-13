@@ -23,18 +23,17 @@
     &--active
       display: inline-block
 
-      &:not(&--no-ripple)
-        .v-feature-discovery__highlight:before
-          content: ''
-          position: absolute
-          height: 100%
-          width: 100%
-          background-color: inherit
-          border-radius: inherit
-          transition: $feature-discovery-transition
-          animation: pulse-animation 1.4s cubic-bezier(0.24, 0, 0.38, 1) infinite
-          pointer-events: none
-          z-index: 10
+      &:not(&--no-ripple) .v-feature-discovery__highlight:before
+        content: ''
+        position: absolute
+        height: 100%
+        width: 100%
+        background-color: inherit
+        border-radius: inherit
+        transition: $feature-discovery-transition
+        animation: pulse-animation 1.4s cubic-bezier(0.24, 0, 0.38, 1) infinite
+        pointer-events: none
+        z-index: 10
 
     &--fixed
       position: fixed
@@ -48,7 +47,6 @@
   &__backdrop
     opacity: 0
     +elevation(4)
-
 
   &__highlight
     background: white
