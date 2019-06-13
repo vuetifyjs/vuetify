@@ -91,6 +91,7 @@
               <v-btn
                 text
                 color="secondary"
+                @click="selectedOpen = false"
               >
                 Cancel
               </v-btn>
@@ -302,7 +303,7 @@
         const open = () => {
           this.selectedEvent = event
           this.selectedElement = nativeEvent.target
-          this.selectedOpen = true
+          setTimeout(() => this.selectedOpen = true, 10)
         }
 
         if (this.selectedOpen) {
