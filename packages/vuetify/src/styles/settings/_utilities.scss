@@ -1,5 +1,3 @@
-// Utilities
-
 $utilities: () !default;
 $utilities: map-merge(
   (
@@ -231,65 +229,3 @@ $utilities: map-merge(
   ),
   $utilities
 );
-
-@mixin generate-utility($utility, $infix) {
-  $values: map-get($utility, values);
-
-  // If the values are a list or string, convert it into a map
-  @if type-of($values) == "string" or type-of(nth($values, 1)) != "list" {
-    $values: zip($values, $values);
-  }
-
-  @each $value in $values {
-    $properties: map-get($utility, property);
-
-    // Multiple properties are possible, for example with vertical or horizontal margins or paddings
-    @if type-of($properties) == "string" {
-      $properties: append((), $properties);
-    }
-
-    // Use custom class if present
-    $property-class: map-get($utility, class);
-    $property-class: if($property-class, $property-class, nth($properties, 1));
-
-    // Don't prefix if value key is null (eg. with shadow class)
-    $property-class-modifier: if(nth($value, 1), "-" + nth($value, 1), "");
-
-    $value: nth(nth($value, 2), 1);
-    $value: nth($value, length($value));
-
-    .#{$property-class + $infix + $property-class-modifier} {
-      @each $property in $properties {
-        #{$property}: $value !important;
-      }
-    }
-  }
-}
-
-@each $breakpoint in map-keys($grid-breakpoints) {
-
-  // Generate media query if needed
-  @include media-breakpoint-up($breakpoint) {
-    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
-
-    // Loop over each utility property
-    @each $key, $utility in $utilities {
-      // The utility can be disabled with `false`, thus check if the utility is a map first
-      // Only proceed if responsive media queries are enabled or if it's the base media query
-      @if type-of($utility) == "map" and (map-get($utility, responsive) or $infix == "") {
-        @include generate-utility($utility, $infix);
-      }
-    }
-  }
-}
-
-// Print utilities
-@media print {
-  @each $key, $utility in $utilities {
-    // The utility can be disabled with `false`, thus check if the utility is a map first
-    // Then check if the utility needs print styles
-    @if type-of($utility) == "map" and map-get($utility, print) == true {
-      @include generate-utility($utility, "-print");
-    }
-  }
-}

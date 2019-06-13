@@ -5,21 +5,6 @@
   margin-right: auto
   margin-left: auto
 
-@function breakpoint-min($name, $breakpoints: $grid-breakpoints)
-  $min: map-get($breakpoints, $name)
-  @return if($min != 0, $min, null)
-
-@function breakpoint-infix($name, $breakpoints: $grid-breakpoints)
-  @return if(breakpoint-min($name, $breakpoints) == null, "", "-#{$name}")
-
-=media-breakpoint-up($name, $breakpoints: $grid-breakpoints)
-  $min: breakpoint-min($name, $breakpoints)
-  @if $min
-    @media (min-width: $min)
-      @content
-  @else
-    @content
-
 // For each breakpoint, define the maximum width of the container in a media query
 =make-container-max-widths($max-widths: $container-max-widths, $breakpoints: $grid-breakpoints)
   @each $breakpoint, $container-max-width in $max-widths
