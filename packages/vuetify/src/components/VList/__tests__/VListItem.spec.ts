@@ -154,7 +154,7 @@ describe('VListItem.ts', () => {
     expect(wrapper.vm.activeClass).toBe('foobar')
   })
 
-  it('should have the correct aria attributes', () => {
+  it('should have the correct aria attributes and tabindex', () => {
     const wrapper = mountFunction({
       propsData: { disabled: true },
     })
