@@ -5,7 +5,7 @@ import VAutocomplete from '../VAutocomplete'
 import {
   mount,
   Wrapper,
-  MountOptions
+  MountOptions,
 } from '@vue/test-utils'
 
 describe('VAutocomplete.ts', () => {
