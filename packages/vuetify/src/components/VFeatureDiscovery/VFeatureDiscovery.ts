@@ -40,7 +40,7 @@ interface options extends ExtractVue<typeof baseMixins> {
   }
 }
 
-interface circleObject {
+interface CircleObject {
   x: number
   y: number
   r: number
@@ -173,30 +173,24 @@ export default baseMixins.extend<options>().extend({
       }
     },
     hasActivator (): boolean {
-      return Boolean(
-        !!this.$slots.activator ||
-        !!this.$scopedSlots.activator ||
-        !!this.activator
-      )
+      return !!this.$slots.activator ||
+             !!this.$scopedSlots.activator ||
+             !!this.activator
     },
     isOnEdgeLeft (): boolean {
-      const a = this.dimensions.activator
-      return a.left <= parseFloat(this.edgeX)
+      return this.dimensions.activator.left <= parseFloat(this.edgeX)
     },
     isOnEdgeRight (): boolean {
-      const a = this.dimensions.activator
-      return a.left >= this.pageWidth - parseFloat(this.edgeX)
+      return this.dimensions.activator.left >= this.pageWidth - parseFloat(this.edgeX)
     },
     isOnEdgeX (): boolean {
       return this.isOnEdgeLeft || this.isOnEdgeRight
     },
     isOnEdgeTop (): boolean {
-      const a = this.dimensions.activator
-      return a.top <= parseFloat(this.edgeY)
+      return this.dimensions.activator.top <= parseFloat(this.edgeY)
     },
     isOnEdgeBottom (): boolean {
-      const a = this.dimensions.activator
-      return a.top >= this.pageHeight - parseFloat(this.edgeY)
+      return this.dimensions.activator.top >= this.pageHeight - parseFloat(this.edgeY)
     },
     isOnEdgeY (): boolean {
       return this.isOnEdgeTop || this.isOnEdgeBottom
@@ -225,20 +219,20 @@ export default baseMixins.extend<options>().extend({
     },
     backdropSize (): number {
       if (!this.isOnEdge) return this.measureDesktopBackdrop().size
-      const c = this.dimensions.content
-      let width = c.width - 2 * this.defaultPadding
+      const { width: w, height: h } = this.dimensions.content
+      let width = w - 2 * this.defaultPadding
       if (!this.isOnEdgeX) {
         width = width / 2
       }
-      const height = this.highlightOuterSize / 2 + c.height
+      const height = this.highlightOuterSize / 2 + h
       return 2 * (Math.hypot(width, height) + this.defaultPadding)
     },
     highlightInnerSize (): number {
       // Allow non fabs elements while keeping the size ratio 88:56
       const ratio = 11 / 7
       const minSize = 56 * ratio
-      const a = this.dimensions.activator
-      const size = Math.max(a.height, a.width) * ratio
+      const { width, height } = this.dimensions.activator
+      const size = Math.max(height, width) * ratio
       return Math.max(size, minSize)
     },
     highlightOuterSize (): number {
@@ -246,9 +240,7 @@ export default baseMixins.extend<options>().extend({
     },
     highlightPadding (): number {
       // Allow non fabs elements while keeping the padding ratio 88:20
-      const padding = this.highlightInnerSize / 4.4
-      if (padding > this.minHighlightPadding) return padding
-      return this.minHighlightPadding
+      return Math.max(this.highlightInnerSize / 4.4, this.minHighlightPadding)
     },
     defaultPadding (): number {
       return this.highlightPadding * 2
@@ -259,8 +251,8 @@ export default baseMixins.extend<options>().extend({
     },
     computedBackdropOffsetTop (): number {
       if (this.isOnEdge) return 0
-      const backdrop = this.measureDesktopBackdrop()
-      return -backdrop.y + this.highlightInnerSize - this.highlightPadding
+      const { y } = this.measureDesktopBackdrop()
+      return -y + this.highlightInnerSize - this.highlightPadding
     },
     backdropStyle (): object {
       const size = this.backdropSize
@@ -348,9 +340,7 @@ export default baseMixins.extend<options>().extend({
       }
     },
     callActivate () {
-      if (!this.hasWindow) return
-
-      this.activate()
+      this.hasWindow && this.activate()
     },
     callDeactivate () {
       this.isContentActive = false
@@ -419,23 +409,23 @@ export default baseMixins.extend<options>().extend({
       if (!el || !this.hasWindow) return null
       return this.getRoundedBoundedClientRect(el)
     },
-    measureDesktopBackdrop (): circleObject {
+    measureDesktopBackdrop (): CircleObject {
       const c = this.dimensions.content
       const x = c.width / 2 - this.defaultPadding
       // Calculate the circles tangent point A(ax, ay) using cycloid curve
       // Get hightlight radius with padding
-      const r = this.highlightOuterSize / 2
+      const radius = this.highlightOuterSize / 2
       // Get rolled distance/perimeter
-      const d = -this.computedWrapOffsetLeft
+      const diameter = -this.computedWrapOffsetLeft
       // Calculate rolled angle
-      const t = d / (2 * r)
+      const t = diameter / (2 * radius)
       // Calculate the tangent point
       // using the circle bottom center point as origin
-      let ax = r * Math.sin(t)
-      let ay = r * (1 + Math.cos(t))
+      let ax = radius * Math.sin(t)
+      let ay = radius * (1 + Math.cos(t))
 
       // Move the origin to the rectangle top left absolute position
-      ax += x + d
+      ax += x + diameter
 
       // Calculate backdrop central point B(x, by) and radius (br)
       const by = (Math.pow(ax, 2) - (2 * ax * x) + Math.pow(ay, 2)) / (2 * ay)
