@@ -7,7 +7,6 @@ import Colorable from '../../mixins/colorable'
 import Elevatable from '../../mixins/elevatable'
 import Positionable from '../../mixins/positionable'
 import Stackable from '../../mixins/stackable'
-import Toggleable from '../../mixins/toggleable'
 import Themeable from '../../mixins/themeable'
 
 // Directives
@@ -28,7 +27,6 @@ const baseMixins = mixins(
   Elevatable,
   Positionable,
   Stackable,
-  Toggleable,
   Themeable
 )
 
