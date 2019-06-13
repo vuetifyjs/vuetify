@@ -43,8 +43,7 @@
             "simple/autoHeight",
             "simple/multiLine",
             "simple/timeout",
-            "simple/vertical",
-            "contextual"
+            "simple/vertical"
           ]
         }
       ]
