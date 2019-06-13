@@ -10,10 +10,6 @@ import Stackable from '../../mixins/stackable'
 import Toggleable from '../../mixins/toggleable'
 import Themeable from '../../mixins/themeable'
 
-// Types
-import { VNode, VNodeDirective, VNodeData } from 'vue'
-import mixins, { ExtractVue } from '../../util/mixins'
-
 // Directives
 import ClickOutside from '../../directives/click-outside'
 import Resize from '../../directives/resize'
@@ -21,6 +17,10 @@ import Resize from '../../directives/resize'
 // Helpers
 import { convertToUnit, keyCodes } from '../../util/helpers'
 import ThemeProvider from '../../util/ThemeProvider'
+
+// Types
+import { VNode, VNodeDirective, VNodeData } from 'vue'
+import mixins from '../../util/mixins'
 
 const baseMixins = mixins(
   Activatable,
@@ -32,7 +32,7 @@ const baseMixins = mixins(
   Themeable
 )
 
-interface options extends ExtractVue<typeof baseMixins> {
+interface options extends InstanceType<typeof baseMixins> {
   attach: boolean | string | Element
   $refs: {
     content: HTMLElement
@@ -195,7 +195,7 @@ export default baseMixins.extend<options>().extend({
     isOnEdgeY (): boolean {
       return this.isOnEdgeTop || this.isOnEdgeBottom
     },
-    isOnEdge (): Object {
+    isOnEdge (): boolean {
       return this.isOnEdgeX || this.isOnEdgeY
     },
     computedWrapPadding (): number {
@@ -473,13 +473,12 @@ export default baseMixins.extend<options>().extend({
       }))
     },
     updateDimensions () {
-      this.hasWindow = typeof window !== 'undefined'
       this.checkActivatorFixed()
       this.checkForPageYOffset()
       this.pageWidth = document.documentElement.clientWidth
       this.pageHeight = document.documentElement.clientHeight
 
-      const dimensions: any = {}
+      const dimensions: Record<string, any> = {}
 
       // Activator should already be shown
       if (!this.hasActivator || this.absolute) {
@@ -497,7 +496,7 @@ export default baseMixins.extend<options>().extend({
       this.sneakPeek(() => {
         dimensions.content = this.measure(this.$refs.content)
 
-        this.dimensions = dimensions
+        this.dimensions = dimensions as any
       })
     },
     getOffsetLeft () {
