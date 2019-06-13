@@ -126,6 +126,7 @@ declare module 'vue/types/vue' {
     version: string
     /* eslint-disable-next-line camelcase */
     $_vuetify_subcomponents?: Record<string, VueConstructor>
+    /* eslint-disable-next-line camelcase */
     $_vuetify_installed?: true
     options: Options
 
