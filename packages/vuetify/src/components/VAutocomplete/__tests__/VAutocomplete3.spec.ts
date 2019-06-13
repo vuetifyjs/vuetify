@@ -10,7 +10,7 @@ import {
 
 describe('VAutocomplete.ts', () => {
   type Instance = InstanceType<typeof VAutocomplete>
-  let mountFunction: (options?: object) => Wrapper<Instance>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 
   beforeEach(() => {
     document.body.setAttribute('data-app', 'true')
