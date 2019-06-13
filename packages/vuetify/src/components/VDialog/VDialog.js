@@ -197,7 +197,7 @@ export default {
       this.$emit('keydown', e)
     },
     onFocusin (e) {
-      const { target } = event
+      const { target } = e
 
       if (
         // It isn't the document or the dialog body
