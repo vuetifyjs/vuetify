@@ -16,12 +16,12 @@ export default Vue.extend({
       type: Boolean,
       default: false
     },
-    alignV: {
+    align: {
       type: String,
       default: null,
       validator: (str: any) => [...ALIGNMENT, 'baseline', 'stretch'].includes(str)
     },
-    alignH: {
+    justify: {
       type: String,
       default: null,
       validator: (str: any) => [...ALIGNMENT, 'between', 'around'].includes(str)
@@ -39,8 +39,8 @@ export default Vue.extend({
         staticClass: props.dense ? 'form-row' : 'row',
         class: {
           'no-gutters': props.noGutters,
-          [`align-items-${props.alignV}`]: props.alignV,
-          [`justify-content-${props.alignH}`]: props.alignH,
+          [`align-items-${props.align}`]: props.align,
+          [`justify-content-${props.justify}`]: props.justify,
           [`align-content-${props.alignContent}`]: props.alignContent
         }
       }),
