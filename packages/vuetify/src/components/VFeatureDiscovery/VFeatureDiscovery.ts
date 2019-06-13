@@ -20,6 +20,7 @@ import ThemeProvider from '../../util/ThemeProvider'
 // Types
 import { VNode, VNodeDirective, VNodeData } from 'vue'
 import mixins from '../../util/mixins'
+import { PropValidator } from 'vue/types/options'
 
 const baseMixins = mixins(
   Activatable,
@@ -81,21 +82,22 @@ export default baseMixins.extend<options>().extend({
     },
     contentWidth: {
       type: [Number, String],
-      default: 280
+      default: 280,
+      validator: (v: string | number) => !isNaN(parseInt(v))
     },
     positionX: {
       type: Number,
       default: null
-    },
+    } as PropValidator<null | number>,
     positionY: {
       type: Number,
       default: null
-    },
+    } as PropValidator<null | number>,
     value: {
+      type: Boolean,
       default: true
     },
     noRipple: {
-      default: false,
       type: Boolean
     },
     textColor: {
@@ -104,16 +106,19 @@ export default baseMixins.extend<options>().extend({
     },
     edgeX: {
       type: [Number, String],
-      default: 200
+      default: 200,
+      validator: (v: string | number) => !isNaN(parseInt(v))
     },
     edgeY: {
       type: [Number, String],
-      default: 144
+      default: 144,
+      validator: (v: string | number) => !isNaN(parseInt(v))
     },
     zIndex: {
       type: [Number, String],
-      default: null
-    }
+      default: null,
+      validator: (v: string | number) => !isNaN(parseInt(v))
+    } as PropValidator<null | string | number>
   },
 
   data: () => ({
