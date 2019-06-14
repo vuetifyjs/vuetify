@@ -96,10 +96,7 @@ export default mixins(
       }
     },
     hasClose (): boolean {
-      return Boolean(
-        this.close ||
-        this.$listeners['click:close']
-      )
+      return Boolean(this.close)
     },
     isClickable (): boolean {
       return Boolean(
