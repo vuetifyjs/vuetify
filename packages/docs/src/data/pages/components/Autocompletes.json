@@ -44,7 +44,9 @@
             "simple/customFilter",
             "intermediate/scopedSlots",
             "intermediate/asynchronous",
-            "intermediate/advanced" ]
+            "intermediate/advanced",
+            "complex/stateSelector"
+          ]
         }
       ]
     },
