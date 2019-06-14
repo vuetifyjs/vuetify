@@ -93,7 +93,7 @@
             >
               <template v-slot:selection="data">
                 <v-chip
-                  :selected="data.selected"
+                  :value="data.selected"
                   close
                   @input="remove(data.item)"
                 >

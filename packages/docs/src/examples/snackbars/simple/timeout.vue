@@ -1,12 +1,20 @@
 <template>
-  <div class="text-xs-center ma-2">
-    <v-btn dark @click="snackbar = true">Open Snackbar</v-btn>
+  <div class="text-xs-center">
+    <v-btn
+      dark
+      color="orange darken-2"
+      @click="snackbar = true"
+    >
+      Open Snackbar
+    </v-btn>
+
     <v-snackbar
       v-model="snackbar"
+      :timeout="timeout"
     >
       {{ text }}
       <v-btn
-        color="pink"
+        color="blue"
         text
         @click="snackbar = false"
       >
@@ -20,7 +28,8 @@
   export default {
     data: () => ({
       snackbar: false,
-      text: 'Hello, I\'m a snackbar',
+      text: 'My timeout is set to 2000.',
+      timeout: 2000,
     }),
   }
 </script>

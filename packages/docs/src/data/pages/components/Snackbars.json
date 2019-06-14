@@ -29,9 +29,21 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "contextual"
+            "simple/autoHeight",
+            "simple/multiLine",
+            "simple/timeout",
+            "simple/vertical"
           ]
         }
       ]
