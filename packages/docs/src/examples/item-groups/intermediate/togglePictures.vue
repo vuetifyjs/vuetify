@@ -18,9 +18,8 @@
             xs12
             md6
           >
-            <v-item>
+            <v-item v-slot:default="{ active, toggle }">
               <v-img
-                slot-scope="{ active, toggle }"
                 :src="`https://cdn.vuetifyjs.com/images/${item.src}`"
                 height="150"
                 class="text-xs-right pa-2"

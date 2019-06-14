@@ -12,7 +12,7 @@
             :min="min"
             hide-details
           >
-            <template #append>
+            <template v-slot:append>
               <v-text-field
                 v-model="slider"
                 class="mt-0 pt-0"
@@ -39,7 +39,7 @@
             hide-details
             class="align-center"
           >
-            <template #prepend>
+            <template v-slot:prepend>
               <v-text-field
                 v-model="range[0]"
                 class="mt-0 pt-0"
@@ -49,7 +49,7 @@
                 style="width: 60px"
               ></v-text-field>
             </template>
-            <template #append>
+            <template v-slot:append>
               <v-text-field
                 v-model="range[1]"
                 class="mt-0 pt-0"

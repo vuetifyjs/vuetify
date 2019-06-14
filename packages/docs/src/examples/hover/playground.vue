@@ -7,9 +7,9 @@
           :close-delay="closeDelay"
           :disabled="disabled"
           :value="value"
+          v-slot:default="{ hover }"
         >
           <v-card
-            slot-scope="{ hover }"
             :elevation="hover ? 12 : 2"
             height="300"
             max-width="350"

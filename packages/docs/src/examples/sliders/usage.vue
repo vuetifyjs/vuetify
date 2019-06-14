@@ -60,7 +60,7 @@
           :step="10"
           hide-details
         >
-          <template #prepend>
+          <template v-slot:prepend>
             <v-text-field
               v-model="price[0]"
               class="pt-0 mt-0"
@@ -70,7 +70,7 @@
               style="width: 60px"
             ></v-text-field>
           </template>
-          <template #append>
+          <template v-slot:append>
             <v-text-field
               v-model="price[1]"
               class="pt-0 mt-0"

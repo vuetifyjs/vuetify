@@ -2,7 +2,7 @@
   <v-banner single-line>
     One line message text string with two actions on tablet / Desktop
 
-    <template #actions>
+    <template v-slot:actions>
       <v-btn
         text
         color="deep-purple accent-4"

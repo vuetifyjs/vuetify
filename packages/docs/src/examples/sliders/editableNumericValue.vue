@@ -21,7 +21,7 @@
               label="R"
               class="align-center"
             >
-              <template #append>
+              <template v-slot:append>
                 <v-text-field
                   v-model="red"
                   class="mt-0 pt-0"
@@ -39,7 +39,7 @@
               label="G"
               class="align-center"
             >
-              <template #append>
+              <template v-slot:append>
                 <v-text-field
                   v-model="green"
                   class="mt-0 pt-0"
@@ -57,7 +57,7 @@
               label="B"
               class="align-center"
             >
-              <template #append>
+              <template v-slot:append>
                 <v-text-field
                   v-model="blue"
                   class="mt-0 pt-0"
