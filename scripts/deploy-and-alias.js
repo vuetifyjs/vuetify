@@ -8,7 +8,7 @@ if (!alias) {
 }
 
 const options = {
-  env: process.env
+  env: process.env,
 }
 
 const child = shell.exec('now --team=vuetifyjs --token=$NOW_TOKEN --npm', options)

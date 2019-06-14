@@ -1,5 +1,5 @@
 const allowedStrings = [
-  'transition-group'
+  'transition-group',
 ]
 
 function isCreateElementCall (node) {
@@ -30,6 +30,6 @@ module.exports = function (context) {
       if (isCreateElementCall(node) && isStringRender(node) && isCustomComponent(node)) {
         context.report(node.arguments[0], 'Do not render components by a string reference')
       }
-    }
+    },
   }
 }

@@ -6,7 +6,7 @@ module.exports = {
     {
       name: 'vuetify-docs',
       script: 'server.js',
-      cwd: './packages/docs/'
-    }
-  ]
+      cwd: './packages/docs/',
+    },
+  ],
 }
