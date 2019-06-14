@@ -3,7 +3,7 @@
     <v-overflow-btn
       class="my-2"
       :items="dropdown_icon"
-      label="Segmented Btn"
+      label="Overflow Btn w/ segmented"
       segmented
       target="#dropdown-example-2"
     ></v-overflow-btn>

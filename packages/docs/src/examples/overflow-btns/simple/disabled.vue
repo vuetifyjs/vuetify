@@ -3,7 +3,7 @@
     <v-overflow-btn
       class="my-2"
       :items="dropdown_font"
-      label="Overflow Btn"
+      label="Overflow Btn w/ disabled"
       disabled
       target="#dropdown-example-1"
     ></v-overflow-btn>

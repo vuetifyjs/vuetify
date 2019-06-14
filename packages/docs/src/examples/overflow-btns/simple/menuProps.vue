@@ -4,7 +4,7 @@
       class="my-2"
       :items="dropdown_font"
       menu-props="top"
-      label="Overflow Btn"
+      label="Overflow Btn w/ menu-props"
       target="#dropdown-example-1"
     ></v-overflow-btn>
   </v-container>

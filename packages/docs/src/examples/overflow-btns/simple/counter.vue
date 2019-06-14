@@ -3,8 +3,7 @@
     <v-overflow-btn
       class="my-2"
       :items="dropdown_edit"
-      label="Editable Btn"
-      editable
+      label="Overflow Btn w/ counter"
       counter
       item-value="text"
     ></v-overflow-btn>
