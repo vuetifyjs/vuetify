@@ -24,6 +24,10 @@
     "advanced": {
       "header": "### Advanced slots",
       "desc": "The `v-autocomplete` component is extremely flexible and can fit in just about any use-case. Create custom displays for **no-data**, **item** and **selection** slots to provide a unique user experience. Using _scoped slots_ enables you to easily customize the desired look for your application."
+    },
+    "stateSelector": {
+      "header": "### State selector",
+      "desc": "Using a combination of `v-autocomplete` slots and transitions, you can create a stylish toggleable autocomplete field such as this state selector."
     }
   },
   "props": {
