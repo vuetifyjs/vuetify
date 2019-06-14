@@ -27,12 +27,12 @@
         {
           "type": "examples",
           "value": [
-            "light",
-            "icons",
-            "multiple",
-            "customTextAndValue",
-            "slots",
-            "selectionAppearance"
+            "simple/light",
+            "simple/icons",
+            "simple/multiple",
+            "simple/customTextAndValue",
+            "intermediate/slots",
+            "intermediate/selectionAppearance"
           ]
         }
       ]
