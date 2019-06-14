@@ -34,16 +34,16 @@
         {
           "type": "examples",
           "value": [
-            "minMax",
-            "icons",
-            "vertical",
-            "thumb",
-            "customThumb",
-            "ticks",
-            "customColors",
-            "validation",
-            "range",
-            "metronome"
+            "simple/minMax",
+            "simple/icons",
+            "simple/vertical",
+            "simple/thumb",
+            "simple/customThumb",
+            "simple/ticks",
+            "simple/customColors",
+            "simple/range",
+            "intermediate/validation",
+            "intermediate/metronome"
           ]
         }
       ]
