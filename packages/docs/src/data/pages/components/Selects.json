@@ -33,6 +33,7 @@
             "simple/icons",
             "simple/multiple",
             "simple/customTextAndValue",
+            "intermediate/menuProps",
             "intermediate/slots",
             "intermediate/selectionAppearance"
           ]
