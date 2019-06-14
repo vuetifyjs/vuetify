@@ -30,14 +30,15 @@
         {
           "type": "examples",
           "value": [
-            "small",
-            "icons",
-            "avatars",
-            "color",
-            "slot",
-            "alert",
-            "reverse",
-            "advanced"
+            "simple/small",
+            "simple/icons",
+            "simple/reverse",
+            "intermediate/cardTimeline",
+            "intermediate/slot",
+            "intermediate/avatars",
+            "intermediate/alert",
+            "intermediate/color",
+            "complex/advanced"
           ]
         }
       ]
