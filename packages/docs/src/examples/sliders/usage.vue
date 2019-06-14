@@ -12,7 +12,7 @@
           v-model="volume"
           append-icon="volume_up"
           prepend-icon="volume_down"
-          label="Label"
+          label="Volume"
         ></v-slider>
       </v-flex>
     </v-layout>
