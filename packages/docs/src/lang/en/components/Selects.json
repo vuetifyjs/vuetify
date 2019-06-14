@@ -32,6 +32,10 @@
     "disabled": {
       "header": "### Disabled",
       "desc": "You cannot use disabled `v-select`."
+    },
+    "readonly": {
+      "header": "### Read-only",
+      "desc": "You cannot use read-only `v-select`, but it looks default."
     }
   },
   "props": {

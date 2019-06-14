@@ -28,6 +28,7 @@
           "type": "examples",
           "value": [
             "simple/disabled",
+            "simple/readonly",
             "simple/light",
             "simple/icons",
             "simple/multiple",
