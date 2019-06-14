@@ -29,8 +29,24 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
-          "value": [ "api", "scopedSlots", "customFilter", "asynchronous", "advanced" ]
+          "value": [
+            "simple/api",
+            "simple/customFilter",
+            "intermediate/scopedSlots",
+            "intermediate/asynchronous",
+            "intermediate/advanced",
+            "complex/stateSelector"
+          ]
         }
       ]
     },
