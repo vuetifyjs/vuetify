@@ -56,6 +56,10 @@
     "disabled": {
       "header": "### Disabled",
       "desc": "You cannot interact with `disabled` sliders."
+    },
+    "readonly": {
+      "header": "### Readonly",
+      "desc": "You cannot interact with `readonly` sliders, but they look as ordinary ones."
     }
   },
   "props": {

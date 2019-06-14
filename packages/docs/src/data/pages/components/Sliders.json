@@ -36,6 +36,7 @@
           "value": [
             "simple/minMax",
             "simple/disabled",
+            "simple/readonly",
             "simple/icons",
             "simple/vertical",
             "simple/thumb",
