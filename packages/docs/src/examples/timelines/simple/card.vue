@@ -1,7 +1,7 @@
 <template>
   <v-timeline>
     <v-timeline-item
-      v-for="n in 4"
+      v-for="n in 3"
       :key="n"
       color="red lighten-2"
       large
