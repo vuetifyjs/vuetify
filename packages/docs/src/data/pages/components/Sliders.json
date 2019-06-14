@@ -35,6 +35,7 @@
           "type": "examples",
           "value": [
             "simple/minMax",
+            "simple/disabled",
             "simple/icons",
             "simple/vertical",
             "simple/thumb",

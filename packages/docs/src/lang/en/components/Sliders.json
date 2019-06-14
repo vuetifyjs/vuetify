@@ -52,6 +52,10 @@
     "vertical": {
       "header": "### Vertical sliders",
       "desc": "You can use `vertical` to switch sliders to a vertical orientation. If you need to change the height of the slider, use css."
+    },
+    "disabled": {
+      "header": "### Disabled",
+      "desc": "You cannot interact with `disabled` sliders."
     }
   },
   "props": {
