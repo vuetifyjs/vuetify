@@ -60,6 +60,10 @@
     "readonly": {
       "header": "### Readonly",
       "desc": "You cannot interact with `readonly` sliders, but they look as ordinary ones."
+    },
+    "inverseLabel": {
+      "header": "### Inverse label",
+      "desc": "`v-slider` with `inverse-label` property displays label at the end of it."
     }
   },
   "props": {
