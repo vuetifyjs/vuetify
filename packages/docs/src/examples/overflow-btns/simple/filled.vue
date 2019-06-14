@@ -3,8 +3,8 @@
     <v-overflow-btn
       class="my-2"
       :items="dropdown_font"
-      label="Overflow Btn"
-      box
+      label="Overflow Btn - filled"
+      filled
       target="#dropdown-example-1"
     ></v-overflow-btn>
   </v-container>

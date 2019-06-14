@@ -6,7 +6,7 @@
       <v-switch v-model="loading" class="ma-2" label="Loading"></v-switch>
       <v-switch v-model="disabled" class="ma-2" label="Disabled"></v-switch>
       <v-switch v-model="readonly" class="ma-2" label="Readonly"></v-switch>
-      <v-switch v-model="box" class="ma-2" label="Box"></v-switch>
+      <v-switch v-model="filled" class="ma-2" label="Filled"></v-switch>
       <v-switch v-model="reverse" class="ma-2" label="Reverse"></v-switch>
       <v-switch v-model="dense" class="ma-2" label="Dense"></v-switch>
       <v-switch v-model="persistentHint" class="ma-2" label="Persistent hint"></v-switch>
@@ -21,7 +21,7 @@
         :loading="loading"
         :disabled="disabled"
         :readonly="readonly"
-        :box="box"
+        :filled="filled"
         :reverse="reverse"
         :dense="dense"
         :persistent-hint="persistentHint"
@@ -43,7 +43,7 @@
       loading: false,
       disabled: false,
       readonly: false,
-      box: false,
+      filled: false,
       reverse: false,
       dense: false,
       persistentHint: false,

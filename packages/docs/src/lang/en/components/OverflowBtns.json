@@ -5,22 +5,6 @@
     "usage": {
       "desc": "`v-overflow-btn` is used for creating selection lists"
     },
-    "segmented": {
-      "header": "### Segmented",
-      "desc": "`segmented` `v-overflow-btn` has and additional divider between the content and the icon"
-    },
-    "editable": {
-      "header": "### Editable",
-      "desc": "`editable` `v-overflow-btn` can be directly edited, just as `v-text-field`"
-    },
-    "menuProps": {
-      "header": "### Menu props",
-      "desc": "You can set underlying `v-menu` props using `menu-props` property"
-    },
-    "hint": {
-      "header": "### Hint",
-      "desc": "You can add a hint for the user using the `hint` property"
-    },
     "counter": {
       "header": "### Counter",
       "desc": "You can add a counter to `v-overflow-btn` to control the max char count"
@@ -29,17 +13,33 @@
       "header": "### Disabled",
       "desc": "`v-overflow-btn` can be disabled in order to prevent a user from interacting with it"
     },
-    "readonly": {
-      "header": "### Read-only",
-      "desc": "`v-overflow-btn` can be put into `readonly` mode, it'll become inactive but won't change the color"
+    "editable": {
+      "header": "### Editable",
+      "desc": "`editable` `v-overflow-btn` can be directly edited, just as `v-text-field`"
+    },
+    "filled": {
+      "header": "### Filled",
+      "desc": "Text fields can be used with an alternative box design. Append and prepend icon props are **not** supported in this mode."
+    },
+    "hint": {
+      "header": "### Hint",
+      "desc": "You can add a hint for the user using the `hint` property"
     },
     "loading": {
       "header": "### Loading",
       "desc": "`v-overflow-btn` can have `loading` state with a linear progress bar under them"
     },
-    "box": {
-      "header": "### Box",
-      "desc": "Text fields can be used with an alternative box design. Append and prepend icon props are **not** supported in this mode."
+    "menuProps": {
+      "header": "### Menu props",
+      "desc": "You can set underlying `v-menu` props using `menu-props` property"
+    },
+    "readonly": {
+      "header": "### Read-only",
+      "desc": "`v-overflow-btn` can be put into `readonly` mode, it'll become inactive but won't change the color"
+    },
+    "segmented": {
+      "header": "### Segmented",
+      "desc": "`segmented` `v-overflow-btn` has and additional divider between the content and the icon"
     }
   },
   "props": {

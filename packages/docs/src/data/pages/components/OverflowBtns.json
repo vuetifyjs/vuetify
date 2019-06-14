@@ -40,15 +40,15 @@
         {
           "type": "examples",
           "value": [
-            "simple/segmented",
-            "simple/editable",
-            "simple/menuProps",
-            "simple/hint",
             "simple/counter",
             "simple/disabled",
-            "simple/readonly",
+            "simple/editable",
+            "simple/filled",
+            "simple/hint",
             "simple/loading",
-            "simple/box"
+            "simple/menuProps",
+            "simple/readonly",
+            "simple/segmented"
           ]
         }
       ]
