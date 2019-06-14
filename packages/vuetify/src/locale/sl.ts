@@ -21,6 +21,9 @@ export default {
     firstPage: 'Prva stran',
     lastPage: 'Zadnja stran',
   },
+  datePicker: {
+    itemsSelected: '{0} izbrano/-ih',
+  },
   noDataText: 'Ni podatkov',
   carousel: {
     prev: 'Prejšnji prikaz',

@@ -21,6 +21,9 @@ export default {
     firstPage: 'Eerste bladsy',
     lastPage: 'Laaste bladsy',
   },
+  datePicker: {
+    itemsSelected: '{0} gekies',
+  },
   noDataText: 'Geen data is beskikbaar nie',
   carousel: {
     prev: 'Vorige visuele',

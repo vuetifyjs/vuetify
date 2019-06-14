@@ -1,14 +1,6 @@
 {
   "header": "모션 (Motion)",
   "headerText": "부드러운 애니메이션은 UI에 대한 느낌을 좋게 만듭니다. Vue의 트랜지션 (transition; 장면전환) 시스템과 재사용가능한 펑셔널(functional) 컴포넌트를 사용하면 쉽게 어플리케이션의 모션을 조절할 수 있습니다.  대부분의 컴포넌트는 <code>transition</code> prop 을 이용하여 트랜지션을 조절할 수 있습니다.",
-  "components": [
-    "v-fade-transition",
-    "v-slide-x-transition",
-    "v-slide-x-reverse-transition",
-    "v-slide-y-transition",
-    "v-slide-y-reverse-transition",
-    "v-scale-transition"
-  ],
   "examples": {
     "slideXTransitions": {
       "header": "슬라이드 X 트랜지션 (Slide X transitions)",

@@ -13,7 +13,7 @@ import { factory as ToggleableFactory } from '../../mixins/toggleable'
 
 // Utilities
 import mixins from '../../util/mixins'
-import { deprecate } from '../../util/console'
+import { breaking } from '../../util/console'
 
 // Types
 import { VNode } from 'vue'
@@ -34,7 +34,6 @@ export default mixins(
   name: 'v-bottom-navigation',
 
   props: {
-    active: [Number, String],
     activeClass: {
       type: String,
       default: 'v-btn--active',
@@ -90,8 +89,8 @@ export default mixins(
 
   created () {
     /* istanbul ignore next */
-    if (this.active != null) {
-      deprecate('active.sync', 'value or v-model')
+    if (this.$attrs.hasOwnProperty('active')) {
+      breaking('active.sync', 'value or v-model', this)
     }
   },
 
@@ -107,8 +106,6 @@ export default mixins(
     },
     updateValue (val: any) {
       this.$emit('change', val)
-      // TODO: deprecate
-      this.$emit('update:active', val)
     },
   },
 
@@ -121,10 +118,9 @@ export default mixins(
         activeClass: this.activeClass,
         mandatory: Boolean(
           this.mandatory ||
-          this.value !== undefined ||
-          this.active !== undefined
+          this.value !== undefined
         ),
-        value: this.internalValue || this.active,
+        value: this.internalValue,
       },
       on: { change: this.updateValue },
     })

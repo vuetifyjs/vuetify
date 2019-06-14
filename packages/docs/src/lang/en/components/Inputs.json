@@ -4,6 +4,38 @@
   "examples": {
     "usage": {
       "desc": "`v-input` has 4 main areas. The prepended slot, the appended slot, the default slot, and messages. These make up the core logic shared between all form components."
+    },
+    "loading": {
+      "header": "### Loading",
+      "desc": "`v-input` has `loading` state which can be used, e.g. for data loading indication. Note: `v-text-field` is used just for example."
+    },
+    "success": {
+      "header": "### Success",
+      "desc": "As any validatable Vuetify component, `v-input` can be set to success state using `success` prop, you can add message to it using `success-messages` prop."
+    },
+    "error": {
+      "header": "### Error",
+      "desc": "As any validatable Vuetify component, `v-input` can be set to error state using `error` prop, messages can be added using `error-messages` prop. You can determine error messages count to show using `error-count` property."
+    },
+    "multiError": {
+      "header": "### Multiple errors",
+      "desc": "You can add multiple errors to `v-input` using `error-count` property."
+    },
+    "rules": {
+      "header": "### Rules",
+      "desc": "You can add custom validation rules to `v-input`, add them as functions returning `true`/error message. Note: `v-text-field` is used just for example."
+    },
+    "slotEvents": {
+      "header": "### Slot events",
+      "desc": "`v-input` can have `click:append` and `click:prepend` events for its slots. Note: `v-text-field` is used just for example."
+    },
+    "slots": {
+      "header": "### Slots",
+      "desc": "`v-input` has `append` and `prepend` slots. You can place custom icons in them."
+    },
+    "hint": {
+      "header": "### Hint",
+      "desc": "`v-input` can have `hint` which can tell user how to use the input. `persistent-hint` prop makes the hint visible always if no messages are displayed."
     }
   },
   "props": {

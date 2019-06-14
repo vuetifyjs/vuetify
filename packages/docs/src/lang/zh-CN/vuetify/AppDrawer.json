@@ -1,4 +1,11 @@
 {
   "becomeASponsor": "成为赞助者",
-  "diamondSponsors": "钻石赞助商"
+  "contributing": "贡献",
+  "diamondSponsors": "钻石赞助商",
+  "faq": "常见问题！",
+  "i18n": "国际化",
+  "meetTheTeam": "认识开发团队",
+  "roadmap": "开发路线图",
+  "sponsorsAndBackers": "赞助商和支持者",
+  "whyVuetify": "为什么选择Vuetify？"
 }

@@ -1,0 +1,14 @@
+{
+  "examples": {
+    "usage": {
+      "uninverted": true
+    },
+    "closable": {
+      "header": "### Refermable",
+      "uninverted": true
+    },
+    "inSelects": {
+      "uninverted": true
+    }
+  }
+}

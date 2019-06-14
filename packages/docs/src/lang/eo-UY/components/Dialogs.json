@@ -1,64 +1,64 @@
 {
-	"header": "crwdns28370:0crwdne28370:0",
-	"headerText": "crwdns28372:0crwdne28372:0",
-	"examples": {
-		"usage": {
-			"desc": "crwdns28374:0crwdne28374:0"
-		},
-		"withoutActivator": {
-			"header": "crwdns28376:0crwdne28376:0",
-			"desc": "crwdns28378:0crwdne28378:0",
-			"uninverted": true
-		},
-		"modal": {
-			"header": "crwdns28382:0crwdne28382:0",
-			"desc": "crwdns28384:0crwdne28384:0",
-			"uninverted": true
-		},
-		"fullscreen": {
-			"header": "crwdns28388:0crwdne28388:0",
-			"desc": "crwdns28390:0crwdne28390:0",
-			"uninverted": true
-		},
-		"form": {
-			"header": "crwdns28394:0crwdne28394:0",
-			"desc": "crwdns28396:0crwdne28396:0",
-			"uninverted": true
-		},
-		"scrollable": {
-			"header": "crwdns28400:0crwdne28400:0",
-			"desc": "crwdns28402:0crwdne28402:0",
-			"uninverted": true
-		},
-		"overflowed": {
-			"header": "crwdns28406:0crwdne28406:0",
-			"desc": "crwdns28408:0crwdne28408:0",
-			"uninverted": true
-		},
-		"advanced": {
-			"header": "crwdns35974:0crwdne35974:0",
-			"desc": "crwdns35976:0crwdne35976:0",
-			"uninverted": true
-		},
-		"loader": {
-			"header": "crwdns28418:0crwdne28418:0",
-			"desc": "crwdns28420:0crwdne28420:0"
-		}
-	},
-	"props": {
-		"dark": "crwdns28422:0crwdne28422:0",
-		"disabled": "crwdns28424:0crwdne28424:0",
-		"fullWidth": "crwdns28426:0crwdne28426:0",
-		"fullscreen": "crwdns28428:0crwdne28428:0",
-		"hideOverlay": "crwdns28430:0crwdne28430:0",
-		"eager": "crwdns28432:0crwdne28432:0",
-		"light": "crwdns28434:0crwdne28434:0",
-		"maxWidth": "crwdns28436:0crwdne28436:0",
-		"noClickAnimation": "crwdns28438:0crwdne28438:0",
-		"origin": "crwdns28440:0crwdne28440:0",
-		"persistent": "crwdns28442:0crwdne28442:0",
-		"scrollable": "crwdns28444:0crwdne28444:0",
-		"transition": "crwdns28446:0crwdne28446:0",
-		"width": "crwdns28448:0crwdne28448:0"
-	}
+  "header": "crwdns28370:0crwdne28370:0",
+  "headerText": "crwdns28372:0crwdne28372:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns28374:0crwdne28374:0"
+    },
+    "withoutActivator": {
+      "header": "crwdns28376:0crwdne28376:0",
+      "desc": "crwdns28378:0crwdne28378:0",
+      "uninverted": true
+    },
+    "modal": {
+      "header": "crwdns28382:0crwdne28382:0",
+      "desc": "crwdns28384:0crwdne28384:0",
+      "uninverted": true
+    },
+    "fullscreen": {
+      "header": "crwdns28388:0crwdne28388:0",
+      "desc": "crwdns28390:0crwdne28390:0",
+      "uninverted": true
+    },
+    "form": {
+      "header": "crwdns28394:0crwdne28394:0",
+      "desc": "crwdns28396:0crwdne28396:0",
+      "uninverted": true
+    },
+    "scrollable": {
+      "header": "crwdns28400:0crwdne28400:0",
+      "desc": "crwdns28402:0crwdne28402:0",
+      "uninverted": true
+    },
+    "overflowed": {
+      "header": "crwdns28406:0crwdne28406:0",
+      "desc": "crwdns28408:0crwdne28408:0",
+      "uninverted": true
+    },
+    "advanced": {
+      "header": "crwdns35974:0crwdne35974:0",
+      "desc": "crwdns35976:0crwdne35976:0",
+      "uninverted": true
+    },
+    "loader": {
+      "header": "crwdns28418:0crwdne28418:0",
+      "desc": "crwdns28420:0crwdne28420:0"
+    }
+  },
+  "props": {
+    "dark": "crwdns28422:0crwdne28422:0",
+    "disabled": "crwdns28424:0crwdne28424:0",
+    "fullWidth": "crwdns28426:0crwdne28426:0",
+    "fullscreen": "crwdns28428:0crwdne28428:0",
+    "hideOverlay": "crwdns28430:0crwdne28430:0",
+    "eager": "crwdns28432:0crwdne28432:0",
+    "light": "crwdns28434:0crwdne28434:0",
+    "maxWidth": "crwdns28436:0crwdne28436:0",
+    "noClickAnimation": "crwdns28438:0crwdne28438:0",
+    "origin": "crwdns28440:0crwdne28440:0",
+    "persistent": "crwdns28442:0crwdne28442:0",
+    "scrollable": "crwdns28444:0crwdne28444:0",
+    "transition": "crwdns28446:0crwdne28446:0",
+    "width": "crwdns28448:0crwdne28448:0"
+  }
 }

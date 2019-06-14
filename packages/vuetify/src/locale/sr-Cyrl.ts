@@ -21,6 +21,9 @@ export default {
     firstPage: 'Прва страница',
     lastPage: 'Последња страница',
   },
+  datePicker: {
+    itemsSelected: '{0} одабрано',
+  },
   noDataText: 'Нема доступних података',
   carousel: {
     prev: 'Превиоус висуал',

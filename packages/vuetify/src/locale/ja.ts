@@ -21,6 +21,9 @@ export default {
     firstPage: '一ページ目',
     lastPage: '最後のページ',
   },
+  datePicker: {
+    itemsSelected: '{0}日付選択',
+  },
   noDataText: 'データはありません。',
   carousel: {
     prev: '前のビジュアル',

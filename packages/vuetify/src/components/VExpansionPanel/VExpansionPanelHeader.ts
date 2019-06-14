@@ -101,6 +101,7 @@ export default baseMixins.extend<options>().extend({
       class: this.classes,
       attrs: {
         tabindex: this.isDisabled ? -1 : null,
+        type: 'button',
       },
       directives: [{
         name: 'ripple',
