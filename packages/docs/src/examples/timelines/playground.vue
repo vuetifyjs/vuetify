@@ -25,7 +25,7 @@
         :fill-dot="fillDot"
         :hide-dot="hideDot"
         :icon="icon ? 'mdi-star' : ''"
-        :iconColor=" iconColor ? 'deep-orange' : ''"
+        :icon-color=" iconColor ? 'deep-orange' : ''"
         :left="left"
         :right="right"
         :small="small"
