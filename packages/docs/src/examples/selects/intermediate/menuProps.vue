@@ -3,7 +3,7 @@
     <v-flex xs12>
       <v-select
         :items="items"
-        :menuProps="{ top: true, offsetY: true }"
+        :menu-props="{ top: true, offsetY: true }"
         label="Label"
       ></v-select>
     </v-flex>
