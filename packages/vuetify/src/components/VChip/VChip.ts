@@ -85,7 +85,7 @@ export default mixins(
         'v-chip--disabled': this.disabled,
         'v-chip--draggable': this.draggable,
         'v-chip--label': this.label,
-        'v-chip--link': this.isClickable,
+        'v-chip--link': this.isLink,
         'v-chip--no-color': !this.color,
         'v-chip--outlined': this.outlined,
         'v-chip--pill': this.pill,

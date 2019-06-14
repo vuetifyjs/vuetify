@@ -35,6 +35,8 @@
   &.v-btn--icon
     color: map-deep-get($material, 'icons', 'active')
 
+  +states($material)
+
 // Block
 .v-btn
   align-items: center
@@ -56,11 +58,6 @@
   user-select: none
   vertical-align: middle
   white-space: nowrap
-
-  &:hover,
-  &:focus
-    &:before
-      opacity: 0.2
 
   &:before
     border-radius: inherit
@@ -136,12 +133,19 @@
   width: 100%
 
 // Modifiers
+.v-btn:not(.v-btn--text):not(.v-btn--outlined)
+  &.v-btn--active:before
+    opacity: 0.18
+
+  &:hover:before
+    opacity: 0.08
+
+  &:focus:before
+    opacity: 0.24
+
 .v-btn--active
   .v-icon
     color: inherit
-
-  &:before
-    opacity: 0.12
 
 .v-btn--absolute
   position: absolute
