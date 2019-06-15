@@ -347,7 +347,17 @@ export default VDataIterator.extend({
       return this.$scopedSlots.item ? this.genScopedRows(items, props) : this.genDefaultRows(items, props)
     },
     genScopedRows (items: any[], props: DataProps) {
-      return items.map((item: any) => this.$scopedSlots.item!(this.createItemProps(item)))
+      const rows = []
+
+      for (let i = 0; i < items.length; i++) {
+        const item = items[i]
+        rows.push(this.$scopedSlots.item!(this.createItemProps(item)))
+        if (this.isExpanded(item)) {
+          rows.push(this.$scopedSlots['expanded-item']!({ item, headers: this.computedHeaders }))
+        }
+      }
+
+      return rows
     },
     genDefaultRows (items: any[], props: DataProps) {
       return this.$scopedSlots['expanded-item']
