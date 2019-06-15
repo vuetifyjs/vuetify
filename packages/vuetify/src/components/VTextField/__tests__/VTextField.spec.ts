@@ -687,7 +687,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
 
     expect(wrapper.vm.genMessages()).toBeNull()
 
-    wrapper.setProps({ counter:  7})
+    wrapper.setProps({ counter: 7 })
     expect(wrapper.vm.genMessages()).not.toBeNull()
 
     wrapper.setProps({ counter: null, errorMessages: 'required' })
