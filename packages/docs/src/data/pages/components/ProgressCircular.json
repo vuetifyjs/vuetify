@@ -33,10 +33,10 @@
         {
           "type": "examples",
           "value": [
-            "circularColored",
-            "circularIndeterminate",
-            "circularSizeAndWidth",
-            "circularRotate"
+            "simple/circularColored",
+            "simple/circularIndeterminate",
+            "simple/circularSizeAndWidth",
+            "simple/circularRotate"
           ]
         }
       ]
