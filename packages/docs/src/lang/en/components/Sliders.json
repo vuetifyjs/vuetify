@@ -52,6 +52,18 @@
     "vertical": {
       "header": "### Vertical sliders",
       "desc": "You can use `vertical` to switch sliders to a vertical orientation. If you need to change the height of the slider, use css."
+    },
+    "disabled": {
+      "header": "### Disabled",
+      "desc": "You cannot interact with `disabled` sliders."
+    },
+    "readonly": {
+      "header": "### Readonly",
+      "desc": "You cannot interact with `readonly` sliders, but they look as ordinary ones."
+    },
+    "inverseLabel": {
+      "header": "### Inverse label",
+      "desc": "`v-slider` with `inverse-label` property displays label at the end of it."
     }
   },
   "props": {
