@@ -43,9 +43,11 @@
       display: flex
       align-items: center
       min-height: 48px
+      padding-right: $treeview-node-padding-end
 
     &__content
       align-items: center
+      display: flex
       flex-basis: 0%
       flex-grow: 1
       flex-shrink: 0
@@ -57,6 +59,7 @@
         flex-shrink: 1 !important
 
     &__label
+      flex: 1
       font-size: $treeview-label-font-size
       margin-left: $treeview-label-margin-start
       overflow: hidden
