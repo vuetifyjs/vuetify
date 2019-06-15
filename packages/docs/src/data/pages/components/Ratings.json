@@ -31,27 +31,27 @@
           "type": "examples",
           "value": [
             {
-              "file": "sizes",
+              "file": "simple/sizes",
               "newIn": "1.2"
             },
             {
-              "file": "length",
+              "file": "simple/length",
               "newIn": "1.2"
             },
             {
-              "file": "increments",
+              "file": "intermediate/increments",
               "newIn": "1.2"
             },
             {
-              "file": "slots",
+              "file": "intermediate/slots",
               "newIn": "1.2"
             },
             {
-              "file": "card",
+              "file": "intermediate/card",
               "newIn": "1.2"
             },
             {
-              "file": "advanced",
+              "file": "complex/advanced",
               "newIn": "1.2"
             }
           ]
