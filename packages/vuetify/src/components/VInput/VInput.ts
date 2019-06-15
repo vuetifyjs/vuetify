@@ -65,7 +65,7 @@ export default baseMixins.extend<options>().extend({
     classes (): object {
       return {
         'v-input--has-state': this.hasState,
-        'v-input--hide-details': this.genMessages === null,
+        'v-input--hide-details': this.genMessages() === null,
         'v-input--is-label-active': this.isLabelActive,
         'v-input--is-dirty': this.isDirty,
         'v-input--is-disabled': this.disabled,
