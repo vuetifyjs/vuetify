@@ -8,7 +8,7 @@
         :value="value"
         :width="width"
         color="light-blue"
-      ></v-progress-circular>
+      >{{ value }}</v-progress-circular>
     </div>
 
     <v-layout row wrap>
