@@ -35,6 +35,10 @@
               "newIn": "1.2"
             },
             {
+              "file": "simple/colors",
+              "newIn": "1.2"
+            },
+            {
               "file": "simple/length",
               "newIn": "1.2"
             },
