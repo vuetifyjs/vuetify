@@ -10,7 +10,6 @@
       :search="search"
       :sort-by="sortBy.toLowerCase()"
       :sort-desc="sortDesc"
-      hide-actions
       hide-default-footer
     >
       <template v-slot:header>
@@ -82,14 +81,14 @@
               <v-divider></v-divider>
 
               <v-list dense>
-                <v-list-tile
+                <v-list-item
                   v-for="(key, index) in filteredKeys"
                   :key="index"
                   :color="sortBy === key ? `blue lighten-4` : `white`"
                 >
-                  <v-list-tile-content>{{ key }}:</v-list-tile-content>
-                  <v-list-tile-content class="align-end">{{ item[key.toLowerCase()] }}</v-list-tile-content>
-                </v-list-tile>
+                  <v-list-item-content>{{ key }}:</v-list-item-content>
+                  <v-list-item-content class="align-end">{{ item[key.toLowerCase()] }}</v-list-item-content>
+                </v-list-item>
               </v-list>
             </v-card>
           </v-flex>
@@ -108,7 +107,7 @@
             <template v-slot:activator="{ on }">
               <v-btn
                 dark
-                flat
+                text
                 color="primary"
                 class="ml-2"
                 v-on="on"

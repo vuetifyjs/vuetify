@@ -14,6 +14,44 @@
               ></v-radio>
             </v-radio-group>
           </v-flex>
+          <v-flex xs12 sm3>
+            <v-checkbox
+              v-model="x"
+              label="Left"
+              value="left"
+            ></v-checkbox>
+          </v-flex>
+
+          <v-flex xs6 sm3>
+            <v-checkbox
+              v-model="x"
+              label="Right"
+              value="right"
+            ></v-checkbox>
+          </v-flex>
+
+          <v-flex xs6 sm3>
+            <v-checkbox
+              v-model="y"
+              label="Top"
+              value="top"
+            ></v-checkbox>
+          </v-flex>
+
+          <v-flex xs6 sm3>
+            <v-checkbox
+              v-model="y"
+              label="Bottom"
+              value="bottom"
+            ></v-checkbox>
+          </v-flex>
+
+          <v-flex xs12 sm3>
+            <v-checkbox
+              v-model="autoHeight"
+              label="Auto Height"
+            ></v-checkbox>
+          </v-flex>
 
           <v-flex xs12 sm3>
             <v-checkbox
@@ -31,9 +69,10 @@
             ></v-checkbox>
           </v-flex>
 
-          <v-flex xs12 sm4 offset-sm4>
+          <v-flex xs12 sm4>
             <v-text-field
               v-model="text"
+              class="px-3"
               label="Text"
               type="text"
             ></v-text-field>
@@ -42,13 +81,14 @@
           <v-flex xs12 sm4>
             <v-text-field
               v-model.number="timeout"
+              class="px-3"
               label="Timeout"
               type="number"
             ></v-text-field>
           </v-flex>
         </v-layout>
-      </v-container>
 
+      </v-container>
       <v-btn
         block
         color="primary"
@@ -58,11 +98,17 @@
         Show Snackbar
       </v-btn>
     </v-card-text>
+
     <v-snackbar
       v-model="snackbar"
+      :auto-height="autoHeight"
+      :bottom="y === 'bottom'"
       :color="color"
+      :left="x === 'left'"
       :multi-line="mode === 'multi-line'"
+      :right="x === 'right'"
       :timeout="timeout"
+      :top="y === 'top'"
       :vertical="mode === 'vertical'"
     >
       {{ text }}
@@ -77,16 +123,19 @@
   </v-card>
 </template>
 
-<script>
+  <script>
   export default {
     data () {
       return {
-        snackbar: false,
+        autoHeight: false,
         color: '',
         mode: '',
-        timeout: 6000,
+        snackbar: false,
         text: 'Hello, I\'m a snackbar',
+        timeout: 6000,
+        x: null,
+        y: 'top',
       }
     },
   }
-</script>
+  </script>
