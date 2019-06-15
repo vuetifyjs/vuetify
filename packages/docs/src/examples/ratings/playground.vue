@@ -119,7 +119,7 @@
         'blue',
         'error',
         'teal',
-        'red lighten-3'
+        'red lighten-3',
       ],
       bgColor: 'grey lighten-1',
       bgColors: [
@@ -130,7 +130,7 @@
         'grey',
         '#eee',
         'cyan lighten-2',
-        'grey lighten-1'
+        'grey lighten-1',
       ],
     }),
   }
