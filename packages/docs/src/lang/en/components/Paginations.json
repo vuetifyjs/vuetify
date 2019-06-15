@@ -7,7 +7,7 @@
     },
     "long": {
       "header": "### Long",
-      "desc": "When the number of page buttons exceeds the parent container, the component will truncate the list."
+      "desc": "Using the `length` prop you can set the length of `v-pagination`, if the number of page buttons exceeds the parent container, it will truncate the list."
     },
     "limit": {
       "header": "### Limit",
@@ -15,15 +15,15 @@
     },
     "round": {
       "header": "### Round",
-      "desc": "The alternate style for pagination is circle pages."
+      "desc": "The `circle` prop gives you an alternate style for pagination buttons."
     },
     "icons": {
       "header": "### Icons",
-      "desc": "Previous and next page icons can be customized with `prev-icon` and `next-icon` props."
+      "desc": "Previous and next page icons can be customized with the `prev-icon` and `next-icon` props."
     },
     "disabled": {
       "header": "### Disabled",
-      "desc": "Pagination items can be manually deactivated."
+      "desc": "Pagination items can be manually deactivated using the `disabled` prop."
     }
   },
   "events": {
