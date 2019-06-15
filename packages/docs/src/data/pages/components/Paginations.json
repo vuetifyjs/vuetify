@@ -27,11 +27,11 @@
         {
           "type": "examples",
           "value": [
-            "long",
-            "limit",
-            "round",
-            "icons",
-            "disabled"
+            "simple/long",
+            "simple/limit",
+            "simple/round",
+            "simple/icons",
+            "simple/disabled"
           ]
         }
       ]
