@@ -28,6 +28,18 @@
     "selectionAppearance": {
       "header": "### Change selection appearance",
       "desc": "The `selection` scoped slot can be used to customize the way selected values are shown in the input. This is great when you want something like `foo (+20 others)` or don't want the selection to occupy multiple lines."
+    },
+    "disabled": {
+      "header": "### Disabled",
+      "desc": "You cannot use disabled `v-select`."
+    },
+    "readonly": {
+      "header": "### Read-only",
+      "desc": "You cannot use read-only `v-select`, but it looks default."
+    },
+    "menuProps": {
+      "header": "### Custom menu props",
+      "desc": "Custom props can be passed directly to `v-menu` using `menuProps` prop. In this example menu is force directed to top and shifted to top."
     }
   },
   "props": {
