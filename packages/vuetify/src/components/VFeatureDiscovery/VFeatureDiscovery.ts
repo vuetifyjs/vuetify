@@ -53,11 +53,21 @@ interface Dimensions {
   right: number
   width: number
   height: number
-  offsetTop: number
-  offsetLeft: number
-  scrollHeight: number
   x: number
   y: number
+}
+
+function initDimensions (): Dimensions {
+  return {
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    width: 0,
+    height: 0,
+    x: 0,
+    y: 0
+  }
 }
 
 /* @vue/component */
@@ -141,33 +151,9 @@ export default baseMixins.extend<options>().extend({
     activatorFixed: false,
     activatorNode: null as null | VNode | VNode[],
     dimensions: {
-      activator: {
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-        width: 0,
-        height: 0,
-        offsetTop: 0,
-        scrollHeight: 0,
-        offsetLeft: 0,
-        x: 0,
-        y: 0
-      },
-      content: {
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-        width: 0,
-        height: 0,
-        offsetTop: 0,
-        scrollHeight: 0,
-        offsetLeft: 0,
-        x: 0,
-        y: 0
-      }
-    } as Record<string, Dimensions>,
+      activator: initDimensions(),
+      content: initDimensions()
+    },
     hasJustFocused: false,
     hasWindow: false,
     isContentActive: false,
@@ -226,8 +212,7 @@ export default baseMixins.extend<options>().extend({
       const halfWidth = this.computedWrapWidth / 2 - this.defaultPadding
       if (this.isOnEdgeLeft) return halfWidth
       if (this.isOnEdgeRight) return -halfWidth
-      const a = this.dimensions.activator
-      const isLeft = a.x < this.pageWidth / 2
+      const isLeft = this.dimensions.activator.x < this.pageWidth / 2
       return isLeft ? this.highlightPadding : -this.highlightPadding
     },
     styles (): object {
@@ -276,7 +261,6 @@ export default baseMixins.extend<options>().extend({
       const size = this.backdropSize
       const top = -this.backdropSize / 2 + this.computedBackdropOffsetTop
       const left = -this.backdropSize / 2 + this.computedBackdropOffsetLeft
-
       const originLeft = this.computedBackdropOffsetLeft < 0
         ? `calc(50% + ${convertToUnit(-this.computedBackdropOffsetLeft)})`
         : `calc(50% - ${convertToUnit(this.computedBackdropOffsetLeft)})`
@@ -295,6 +279,7 @@ export default baseMixins.extend<options>().extend({
     highlightStyle (): object {
       const size = convertToUnit(this.highlightInnerSize)
       const halfSize = convertToUnit(-this.highlightInnerSize / 2)
+
       return {
         top: halfSize,
         left: halfSize,
@@ -311,6 +296,7 @@ export default baseMixins.extend<options>().extend({
       if (this.isOnEdgeX || !this.isOnEdgeY) {
         left += this.computedWrapOffsetLeft
       }
+
       return {
         top: convertToUnit(top),
         left: convertToUnit(left),
@@ -346,16 +332,12 @@ export default baseMixins.extend<options>().extend({
   methods: {
     absolutePosition (): Dimensions {
       return {
-        offsetTop: 0,
-        offsetLeft: 0,
-        scrollHeight: 0,
+        ...initDimensions(),
         top: this.positionY || this.absoluteY,
         bottom: this.positionY || this.absoluteY,
         left: this.positionX || this.absoluteX,
-        right: this.positionX || this.absoluteX,
-        height: 0,
-        width: 0
-      } as Dimensions
+        right: this.positionX || this.absoluteX
+      }
     },
     callActivate () {
       this.hasWindow && this.activate()
@@ -421,15 +403,14 @@ export default baseMixins.extend<options>().extend({
         height: Math.round(rect.height),
         x: Math.round(Math.round(rect.left) + Math.round(rect.width) / 2),
         y: Math.round(Math.round(rect.top) + Math.round(rect.height) / 2)
-      } as Dimensions
+      }
     },
-    measure (el: HTMLElement): Dimensions | null {
-      if (!el || !this.hasWindow) return null
-      return this.getRoundedBoundedClientRect(el)
+    measure (el: HTMLElement): Dimensions {
+      return (!el || !this.hasWindow) ? initDimensions() : this.getRoundedBoundedClientRect(el)
     },
     measureDesktopBackdrop (): CircleObject {
-      const c = this.dimensions.content
-      const x = c.width / 2 - this.defaultPadding
+      const content = this.dimensions.content
+      const x = content.width / 2 - this.defaultPadding
       // Calculate the circles tangent point A(ax, ay) using cycloid curve
       // Get hightlight radius with padding
       const radius = this.highlightOuterSize / 2
@@ -450,7 +431,7 @@ export default baseMixins.extend<options>().extend({
       const br = Math.hypot(x, by)
 
       // Move origin to the rectangle bottom left absolute position
-      ay += c.height
+      ay += content.height
       // Calculate backdrop central point C(x, cy) and radius (cr)
       const cy = (Math.pow(ax, 2) - (2 * ax * x) + Math.pow(ay, 2)) / (2 * ay)
       const cr = Math.hypot(x, cy)
@@ -463,9 +444,10 @@ export default baseMixins.extend<options>().extend({
           size: 2 * (br + this.defaultPadding)
         }
       }
+
       return {
         x,
-        y: cy - c.height,
+        y: cy - content.height,
         r: cr,
         size: 2 * (cr + this.defaultPadding)
       }
@@ -496,25 +478,17 @@ export default baseMixins.extend<options>().extend({
       this.pageWidth = document.documentElement.clientWidth
       this.pageHeight = document.documentElement.clientHeight
 
-      const dimensions: Record<string, Dimensions> = {}
-
       // Activator should already be shown
       if (!this.hasActivator || this.absolute) {
-        dimensions.activator = this.absolutePosition()
+        this.dimensions.activator = this.absolutePosition()
       } else {
         const activator = this.getActivator()
-        if (!activator) return
-
-        dimensions.activator = this.measure(activator) as Dimensions
-        dimensions.activator.offsetLeft = activator.offsetLeft
-        dimensions.activator.offsetTop = 0
+        if (activator) this.dimensions.activator = this.measure(activator)
       }
 
       // Display and hide to get dimensions
       this.sneakPeek(() => {
-        dimensions.content = this.measure(this.$refs.content) as Dimensions
-
-        this.dimensions = dimensions
+        this.dimensions.content = this.measure(this.$refs.content)
       })
     },
     getOffsetLeft () {
@@ -598,10 +572,10 @@ export default baseMixins.extend<options>().extend({
         style: this.styles,
         directives: this.genDirectives(),
         on: {
-          click: (e: Event) => {
-            e.stopPropagation()
+          click: (event: Event) => {
+            event.stopPropagation()
 
-            const target = e.target as HTMLElement
+            const target = event.target as HTMLElement
 
             if (target.getAttribute('disabled')) return
             if (this.closeOnContentClick) this.isActive = false
