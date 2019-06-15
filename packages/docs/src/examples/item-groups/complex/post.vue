@@ -24,9 +24,9 @@
         <v-item
           v-for="n in 8"
           :key="n"
+          v-slot:default="{ active, toggle }"
         >
           <v-chip
-            slot-scope="{ active, toggle }"
             active-class="purple--text"
             :input-value="active"
             @click="toggle"
