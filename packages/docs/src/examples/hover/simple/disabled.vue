@@ -5,9 +5,11 @@
     row
   >
     <v-flex xs12>
-      <v-hover disabled>
+      <v-hover
+        v-slot:default="{ hover }"
+        disabled
+      >
         <v-card
-          slot-scope="{ hover }"
           :elevation="hover ? 12 : 2"
           class="mx-auto"
           height="350"

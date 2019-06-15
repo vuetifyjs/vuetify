@@ -9,7 +9,7 @@
         ticks="always"
         tick-size="4"
       >
-        <template #thumb-label="props">
+        <template v-slot:thumb-label="props">
           <v-icon dark>
             {{ season(props.value) }}
           </v-icon>

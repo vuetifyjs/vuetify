@@ -3,13 +3,13 @@
     <v-layout row>
       <v-flex xs12 sm6 offset-sm3>
         <v-hover
+          v-slot:default="{ hover }"
           :open-delay="openDelay"
           :close-delay="closeDelay"
           :disabled="disabled"
           :value="value"
         >
           <v-card
-            slot-scope="{ hover }"
             :elevation="hover ? 12 : 2"
             height="300"
             max-width="350"

@@ -36,9 +36,9 @@
         <v-item
           v-for="n in length"
           :key="`btn-${n}`"
+          v-slot:default="{ active, toggle }"
         >
           <v-btn
-            slot-scope="{ active, toggle }"
             :input-value="active"
             icon
             @click="toggle"
