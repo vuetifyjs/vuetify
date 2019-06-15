@@ -3,14 +3,13 @@
     <v-container>
       <v-layout justify-center>
         <v-flex xs8>
-          <v-card>
-            <v-card-text>
-              <v-pagination
-                v-model="page"
-                :length="15"
-              ></v-pagination>
-            </v-card-text>
-          </v-card>
+          <v-container max-width="300">
+            <v-pagination
+              v-model="page"
+              class="my-3"
+              :length="15"
+            ></v-pagination>
+          </v-container>
         </v-flex>
       </v-layout>
     </v-container>
