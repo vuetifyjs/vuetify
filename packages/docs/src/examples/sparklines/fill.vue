@@ -23,8 +23,8 @@
               <v-item
                 v-for="(gradient, i) in gradients"
                 :key="i"
-                :value="gradient"
                 v-slot:default="{ active, toggle }"
+                :value="gradient"
               >
                 <v-card
                   :style="{

@@ -5,8 +5,8 @@
       sm6
     >
       <v-hover
-        open-delay="200"
         v-slot:default="{ hover }"
+        open-delay="200"
       >
         <v-card
           :elevation="hover ? 16 : 2"
@@ -26,8 +26,8 @@
       sm6
     >
       <v-hover
-        close-delay="200"
         v-slot:default="{ hover }"
+        close-delay="200"
       >
         <v-card
           :elevation="hover ? 16 : 2"

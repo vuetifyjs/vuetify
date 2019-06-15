@@ -26,8 +26,8 @@
     <v-switch v-model="range" class="ma-2" label="Range"></v-switch>
     <v-flex xs12>
       <v-slider
-        v-model="volume"
         v-if="!range"
+        v-model="volume"
         append-icon="volume_up"
         prepend-icon="volume_down"
         :min="min"

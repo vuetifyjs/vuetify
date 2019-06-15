@@ -6,8 +6,8 @@
   >
     <v-flex xs12>
       <v-hover
-        disabled
         v-slot:default="{ hover }"
+        disabled
       >
         <v-card
           :elevation="hover ? 12 : 2"
