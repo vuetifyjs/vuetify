@@ -486,18 +486,14 @@ export default VDataIterator.extend({
       if (this.virtualRows) {
         return this.$createElement(VVirtualTable, {
           props: Object.assign(simpleProps, {
-            itemsLength: props.items.length,
+            items: props.items,
             height: this.height,
             rowHeight: this.dense ? 24 : 48,
             headerHeight: this.dense ? 32 : 48,
             // TODO: expose rest of props from virtual table?
           }),
           scopedSlots: {
-            items: ({ start, stop }) => {
-              // TODO: Grouped rows support?
-              const items = props.groupedItems ? [] : (props.items as any[]).slice(start, stop)
-              return this.genItems(items, props) as any
-            },
+            items: ({ items }) => this.genItems(items, props) as any,
           },
         }, [
           this.proxySlot('body.before', [this.genCaption(props), this.genHeaders(props)]),
