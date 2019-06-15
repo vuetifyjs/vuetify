@@ -5,10 +5,24 @@
         <v-radio-group row wrap>
           <v-switch v-model="circle" label="Toggle circle" class="mx-3"></v-switch>
           <v-switch v-model="disabled" label="Toggle disabled" class="mx-3"></v-switch>
-          <v-switch v-model="nextIcon" label="Toggle next-icon" class="mx-3"></v-switch>
-          <v-switch v-model="prevIcon" label="Toggle prev-icon" class="mx-3"></v-switch>
         </v-radio-group>
       </v-flex>
+
+      <v-radio-group row>
+        <v-select
+          v-model="nextIcon"
+          class="mx-3"
+          :items="nextIcons"
+          label="next-icon"
+        ></v-select>
+
+        <v-select
+          v-model="prevIcon"
+          class="mx-3"
+          :items="prevIcons"
+          label="prev-icon"
+        ></v-select>
+      </v-radio-group>
 
       <v-flex>
         <v-text-field
@@ -42,8 +56,8 @@
       :circle="circle"
       :disabled="disabled"
       :length="length"
-      :next-icon=" nextIcon ? 'mdi-menu-right' : 'navigate-next' "
-      :prev-icon=" prevIcon ? 'mdi-menu-left' : 'navigate-before' "
+      :next-icon="nextIcon"
+      :prev-icon="prevIcon"
       :page="page"
       :total-visible="totalVisible"
     ></v-pagination>
@@ -57,8 +71,10 @@
         circle: false,
         disabled: false,
         length: 10,
-        nextIcon: false,
-        prevIcon: false,
+        nextIcon: 'navigate_next',
+        nextIcons: ['navigate_next', 'arrow_forward', 'arrow_right', 'chevron_right'],
+        prevIcon: 'navigate_before',
+        prevIcons: ['navigate_before', 'arrow_back', 'arrow_left', 'chevron_left'],
         page: 1,
         totalVisible: 10,
       }
