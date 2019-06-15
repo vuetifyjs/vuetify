@@ -25,13 +25,22 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "long",
-            "limit",
-            "round",
-            "icons",
-            "disabled"
+            "simple/long",
+            "simple/limit",
+            "simple/round",
+            "simple/icons",
+            "simple/disabled"
           ]
         }
       ]
