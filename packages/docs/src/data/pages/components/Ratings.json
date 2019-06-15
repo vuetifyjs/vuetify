@@ -28,6 +28,18 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": {
+            "file": "playground",
+            "newIn": "2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
             {
