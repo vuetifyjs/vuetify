@@ -10,6 +10,7 @@ import { keyCodes } from '../../util/helpers'
 
 // Types
 import { PropType } from 'vue'
+import { PropValidator } from 'vue/types/options'
 
 const defaultMenuProps = {
   ...VSelectMenuProps,
@@ -34,7 +35,7 @@ export default VSelect.extend({
     filter: {
       type: Function,
       default: (item: any, queryText: string, itemText: string) => {
-        return itemText.toLocaleLowerCase().indexOf(queryText.toLocaleLowerCase()) > -1
+        return itemText.includes(queryText)
       },
     },
     hideNoData: Boolean,
@@ -51,6 +52,10 @@ export default VSelect.extend({
       type: Boolean,
       default: false,
     },
+    sanitizeText: {
+      type: Function,
+      default: (text: string) => text.toLocaleLowerCase(),
+    } as PropValidator<(text: string) => string>,
   },
 
   data () {
@@ -87,7 +92,8 @@ export default VSelect.extend({
     filteredItems (): object[] {
       if (!this.isSearching || this.noFilter || this.internalSearch == null) return this.allItems
 
-      return this.allItems.filter(item => this.filter(item, String(this.internalSearch), String(this.getText(item))))
+      const internalSearch = this.sanitizeText(String(this.internalSearch))
+      return this.allItems.filter(item => this.filter(item, internalSearch, this.sanitizeText(String(this.getText(item)))))
     },
     internalSearch: {
       get (): string | undefined {
@@ -149,6 +155,7 @@ export default VSelect.extend({
           !this.isSearching ||
           !this.filteredItems.length
         ),
+        sanitizeText: this.sanitizeText,
         searchInput: this.internalSearch,
       }
 

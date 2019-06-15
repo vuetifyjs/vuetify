@@ -65,6 +65,10 @@ export default mixins(Colorable, Themeable).extend({
       type: Array,
       default: () => [],
     } as PropValidator<any[]>,
+    sanitizeText: {
+      type: Function,
+      default: (text: string) => text.toLocaleLowerCase(),
+    } as PropValidator<(text: string) => string>,
   },
 
   computed: {
@@ -130,8 +134,8 @@ export default mixins(Colorable, Themeable).extend({
       middle: string
       end: string
     } {
-      const searchInput = (this.searchInput || '').toString().toLocaleLowerCase()
-      const index = text.toLocaleLowerCase().indexOf(searchInput)
+      const searchInput = this.sanitizeText((this.searchInput || '').toString())
+      const index = this.sanitizeText(text).indexOf(searchInput)
 
       if (index < 0) return { start: '', middle: text, end: '' }
 
