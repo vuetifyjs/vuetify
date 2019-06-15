@@ -1,0 +1,26 @@
+{
+  "header": "# Carrousel",
+  "headerText": "Le composant `v-carousel` est utilisé pour afficher un grand nombre de contenu visuel sur un minuteur rotatif.",
+  "examples": {
+    "customTransition": {
+      "header": "### Transition personnalisée"
+    },
+    "hideDelimiters": {
+      "header": "### Cacher les délimiteurs",
+      "desc": "Vous pouvez cacher les délimiteurs avec la propriété <pre>hide-delimiters</pre>."
+    },
+    "hideControls": {
+      "header": "### Cacher les contrôles"
+    }
+  },
+  "props": {
+    "nextIcon": "Icône pour passer à la page suivante",
+    "prevIcon": "Icône pour passer à la page précédente",
+    "cycle": "Détermine si le carrousel fait défiler les images",
+    "delimiterIcon": "Définit l'icône pour le délimiteur du carrousel",
+    "hideControls": "Masque les contrôles de navigation",
+    "hideDelimiters": "Masque le panneau avec les délimiteurs de carrousel",
+    "interval": "Durée entre chaque image",
+    "src": "La source de l'image (src)"
+  }
+}

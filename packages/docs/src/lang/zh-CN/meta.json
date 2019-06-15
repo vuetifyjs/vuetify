@@ -1,0 +1,83 @@
+{
+  "": {
+    "title": "Vue.js语言编写的框架",
+    "description": "Vuetify是采用Material Design构建的Vue.js框架，旨在创建美观、内容丰富的应用程序。"
+  },
+  "404": {
+    "title": "哎呀，404",
+    "description": "哎呀，好像你要找的东西不存在了！"
+  },
+  "getting-started/quick-start": {
+    "title": "快速入门",
+    "description": "开始使用Vue和Vuetify，使用Vue-cli-3脚手架，支持现有的项目和创建新项目。",
+    "keywords": "快速启动，vuetify模板，安装vuetify"
+  },
+  "getting-started/starter-templates": {
+    "title": "默认模板启动项目",
+    "description": "了解应用程序的布局和结构。 查看示例。",
+    "keywords": "模板，vuetify"
+  },
+  "getting-started/why-vuetify": {
+    "title": "为什么选择Vuetify？",
+    "description": "你选择Vuetify而不是其他框架的百万个理由！！"
+  },
+  "getting-started/frequently-asked-questions": {
+    "title": "常见问题！",
+    "description": "遇到问题了？请查看这些常见问题。",
+    "keywords": "常见问题，ｆａｑ"
+  },
+  "getting-started/meet-the-team": {
+    "title": "认识开发团队",
+    "description": "与开发团队交流使Ｖｕｅｔｉｆｙ更棒！感谢你支持Ｖｕｅｔｉｆｙ",
+    "keywords": "ｖｕｅｔｉｆｙ开发团队，ｖｕｅｔｉｆｙ核心成员"
+  },
+  "getting-started/sponsors-and-backers": {
+    "title": "赞助商和支持者",
+    "description": "支持Ｖｕｅｔｉｆｙ开发新功能",
+    "keywords": "赞助商，支持者，捐赠"
+  },
+  "getting-started/contributing": {
+    "title": "贡献",
+    "description": "了解如何为Vuetify框架做出贡献。",
+    "keywords": "贡献、贡献、功能请求"
+  },
+  "getting-started/roadmap": {
+    "title": "开发路线图",
+    "description": "Vuetify即将推出的新计划和新功能。 新的vue组件，新的指令，更多！",
+    "keywords": "规划，未来计划"
+  },
+  "getting-started/consulting-and-support": {
+    "title": "咨询和支持",
+    "description": "获得Vuetify的创作者John Leider的帮助和支持",
+    "keywords": "咨询和支持"
+  },
+  "framework/a-la-carte": {
+    "description": "使用自动化的treeshaking，仅使用你需要的组件。将你需要的单个组件单独引入。"
+  },
+  "framework/application": {
+    "title": "应用程序服务",
+    "description": "Vuetify配备了默认配置，可以轻松为任何应用程序创建布局。",
+    "keywords": "默认布局，默认标记，默认布局"
+  },
+  "framework/icons": {
+    "title": "安装图标主题",
+    "description": "Vuetify通过前缀和全局选项支持自定义图标集。",
+    "keywords": "vue, 图标, confont, 图标库, vutification 图标"
+  },
+  "framework/internationalization": {
+    "title": "国际化",
+    "description": "Vuetify支持语言的国际化。"
+  },
+  "framework/scroll": {
+    "title": "滚动",
+    "description": "使用goTo，您可以顺利滚动到页面上的任何位置。",
+    "keywords": "滚动，滚动，平滑滚动，过渡"
+  },
+  "components/api-explorer": {
+    "title": "ＡＰＩ文档管理"
+  },
+  "components/categories/tables": {
+    "title": "标签组件",
+    "description": "有助于表单显示的Ｖｕｅｔｉｆｙ组件"
+  }
+}

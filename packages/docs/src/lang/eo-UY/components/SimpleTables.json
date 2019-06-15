@@ -1,31 +1,31 @@
 {
-	"header": "crwdns27106:0crwdne27106:0",
-	"headerText": "crwdns27108:0crwdne27108:0",
-	"examples": {
-		"usage": {
-			"desc": "crwdns27110:0crwdne27110:0"
-		},
-		"height": {
-			"header": "crwdns27112:0crwdne27112:0",
-			"desc": "crwdns27114:0crwdne27114:0"
-		},
-		"fixedHeader": {
-			"header": "crwdns27116:0crwdne27116:0",
-			"desc": "crwdns27118:0crwdne27118:0"
-		},
-		"dense": {
-			"header": "crwdns27120:0crwdne27120:0",
-			"desc": "crwdns27122:0crwdne27122:0"
-		},
-		"dark": {
-			"header": "crwdns27124:0crwdne27124:0",
-			"desc": "crwdns27126:0crwdne27126:0"
-		}
-	},
-	"props": {
-		"v-simple-table": {
-			"dense": "crwdns27128:0crwdne27128:0",
-			"fixedHeader": "crwdns27130:0crwdne27130:0"
-		}
-	}
+  "header": "crwdns27106:0crwdne27106:0",
+  "headerText": "crwdns27108:0crwdne27108:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns27110:0crwdne27110:0"
+    },
+    "height": {
+      "header": "crwdns27112:0crwdne27112:0",
+      "desc": "crwdns27114:0crwdne27114:0"
+    },
+    "fixedHeader": {
+      "header": "crwdns27116:0crwdne27116:0",
+      "desc": "crwdns27118:0crwdne27118:0"
+    },
+    "dense": {
+      "header": "crwdns27120:0crwdne27120:0",
+      "desc": "crwdns27122:0crwdne27122:0"
+    },
+    "dark": {
+      "header": "crwdns27124:0crwdne27124:0",
+      "desc": "crwdns27126:0crwdne27126:0"
+    }
+  },
+  "props": {
+    "v-simple-table": {
+      "dense": "crwdns27128:0crwdne27128:0",
+      "fixedHeader": "crwdns27130:0crwdne27130:0"
+    }
+  }
 }

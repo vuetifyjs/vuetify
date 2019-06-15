@@ -1,22 +1,7 @@
 {
   "header": "리스트 (List)",
   "headerText": "`v-list` 컴포넌트는 정보를 표시하는데 사용됩니다. 이는 아바타, 컨텐츠, 액션, 서브헤더 그리고 많은 것을 포함합니다. 리스트는 자식들을 가질 수 있고 사이드바에서 사용될 수도 있습니다.",
-  "components": [
-    "v-list",
-    "v-list-item",
-    "v-list-group",
-    "v-list-item-action",
-    "v-list-item-avatar",
-    "v-list-item-content",
-    "v-list-item-title",
-    "v-list-item-subtitle",
-    "v-list-item-action-text"
-  ],
   "examples": {
-    "avatarTwoLines": {
-      "header": "Avatar with 2 lines",
-      "desc": "리스트는 리스트 아이템의 배열을 취할 수 있습니다. 배열이 주어지면 리스트 컴포넌트는 이 배열에 기반하여 필요한 클래스를 알아 냅니다. 또한 아이템 배열 안에서 헤더나 구분자(디바이더)를 정의할 수도 있습니다."
-    },
     "avatarTitleAndAction": {
       "header": "아바타와 타이틀/액션 (Avatar with title and action)",
       "desc": "리스트는 더 명시적인 접근을 위해 슬롯을 가지고 있습니다. 만약 이 접근방식을 택한다면, 정확한 간격(spacing)을 위해 추가적인 props을 반드시 제공해야 한다는 점을 기억하세요. 예를 들어 아바타를 가진 타일(tile)의 경우 반드시 `avatar` 프로퍼티를 제공해야합니다."
@@ -52,6 +37,9 @@
     "expansionLists": {
       "header": "확장 리스트 (Expansion Lists)",
       "desc": "리스트는 클릭할때 보여지는 아이템 그룹을 가질 수 있습니다. 확장리스는 또한 `네비게이션 서랍(navigation drawer)` 컴포넌트 안에서도 사용됩니다."
+    },
+    "flat": {
+      "header": "플랫 (Flat)"
     }
   },
   "props": {
@@ -59,18 +47,14 @@
     "dense": "리스트 타일에서 최대 높이를 낮춤",
     "expand": "명시적으로 닫을때만 접음(collapse)",
     "group": "라우트 네임스페이스를 지정. 활성화 상태를 결정하기 위한 문자열이나 정규표현식.",
+    "inactive": "리스트 타일이 to/herf prop을 가지고 있거나 @click 핸들러를 가지고 있어도 링크로 렌더링 되지 않음",
     "noAction": "그룹 아이템에서  액션아이콘을 위한 왼쪽 패딩을 제거",
-    "subheader": "탑 패딩(top padding)을 제거. 앞선 형제(previous sibling)이 헤더일 경우 사용",
     "subGroup": "컴포넌트를 중첩된 리스트 그룹(nested  list group)으로 지정",
+    "subheader": "탑 패딩(top padding)을 제거. 앞선 형제(previous sibling)이 헤더일 경우 사용",
     "threeLine": "3줄 리스트 아이템에서 리스트 타일의 높이를 증가",
     "twoLine": "2줄 리스트 아이템에서 리스트 타일의 높이를 증가",
-    "inactive": "리스트 타일이 to/herf prop을 가지고 있거나 @click 핸들러를 가지고 있어도 링크로 렌더링 되지 않음",
     "value": "리스트 그룹을 펼치거나 접음(Expands / Collapse)",
-    "v-list-item-avatar": {
-      "color": "Mixins.Colorable.props.color"
-    },
     "v-list-group": {
-      "activeClass": "Mixins.Routable.props.activeClass",
       "appendIcon": "Mixins.Input.props.appendIcon",
       "disabled": "Mixins.Input.props.disabled",
       "prependIcon": "Mixins.Input.props.prependIcon"

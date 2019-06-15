@@ -1,22 +1,7 @@
 {
   "header": "列表",
   "headerText": "`v-list` 组件用于显示信息，它可以包含一个头像、内容、操作、列表组标题等等。列表也可以包含子元素并在侧边栏（sidebar）使用。",
-  "components": [
-    "v-list",
-    "v-list-item",
-    "v-list-item-title",
-    "v-list-item-subtitle",
-    "v-list-item-content",
-    "v-list-item-action",
-    "v-list-item-avatar",
-    "v-list-item-group",
-    "v-list-item-action-text"
-  ],
   "examples": {
-    "avatarTwoLines": {
-      "header": "头像和两行内容的组合",
-      "desc": "列表可以包含一个items数组。如果给定一个数组，列表组件将依据给出的内容找到相关的类，你也可以在items数组定义列表组标题（headers）或分隔线（divider）。"
-    },
     "avatarTitleAndAction": {
       "header": "头像和列表项标题以及操作的组合",
       "desc": "列表组件还提供了用于更明确做法的插槽，如果你选择这种方法，切记必须提供附加属性来确保正确的间距。在这个例子中，有一个带有头像的图块，所以我们必须提供 `avatar` 属性。"
@@ -52,15 +37,21 @@
     "expansionLists": {
       "header": "可展开的列表",
       "desc": "一个列表项可以包含一组在点击时展开的项，可展开的列表也可以在 `navigation drawer` 组件中使用。"
+    },
+    "flat": {
+      "header": "扁平"
     }
   },
   "props": {
     "avatar": "用来设置单行列表项的最小高度（即使用该属性后将有一个头像大小的最小高度）",
     "dense": "减小列表块的最大宽度",
     "expand": "将只有在明确关闭后才会折叠起来",
+    "inactive": "如果设置了该属性，即使有to/href或者@click，列表块也不会响应链接。",
     "subheader": "会移除上边距（top padding），当前面只有一个列表组标题的时候使用",
     "threeLine": "增加列表块的高度到3行",
     "twoLine": "增加列表块的高度到2行",
-    "inactive": "如果设置了该属性，即使有to/href或者@click，列表块也不会响应链接。"
+    "v-list-group": {
+      "disabled": "Mixins.Input.props.disabled"
+    }
   }
 }

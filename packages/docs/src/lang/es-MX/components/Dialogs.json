@@ -2,11 +2,6 @@
   "header": "Dialog",
   "headerText": "El componente `v-dialog` informa a los usuarios acerca de una tarea específica y puede contener información crítica, requerir decisiones o involucrar múltiples tareas. Utiliza los diálogos muy esporádicamente porque interrumpen.",
   "examples": {
-    "simple": {
-      "header": "Diálogos simples",
-      "desc": "Al escoger una opción ésta se atrapa inmediatamente y el menú se cierra. Al tocar un área fuera del diálogo o presionar Atrás, se cancela la acción y el diálogo se cierra.",
-      "uninverted": true
-    },
     "withoutActivator": {
       "header": "Sin _activator_",
       "desc": "Si por alguna razón no puedes utilizar el slot _activator_, asegúrate de agregar el modificador `.stop`al evento que acciona el diálogo.",
@@ -38,8 +33,6 @@
       "uninverted": true
     },
     "advanced": {
-      "header": "Diálogos simples",
-      "desc": "Al escoger una opción inmediatamente se cierra el menú. Al tocar afuera del díalogo o al presionar 'Atrás' cancela la acción y cancela el diálogo.",
       "uninverted": true
     },
     "loader": {
@@ -52,13 +45,10 @@
     "fullWidth": "Especifica que el modal será forzado a 100% del ancho",
     "fullscreen": "Cambia la distribución para ser mostrada en pantalla completa",
     "hideOverlay": "Esconde el _overlay_",
-    "eager": "Mixins.Bootable.props.eager",
     "maxWidth": "El ancho máximo del contenido",
     "noClickAnimation": "Deshabilita el efecto 'de rebote' cuando se hace click afuera de los contenidos del `v-dialog` cuando se usa la prop **persistent**",
-    "origin": "Mixins.Transitionable.props.origin",
     "persistent": "Hacer click fuera no cerrará el diálogo",
     "scrollable": "Cuando se asigna el valor `true`, espera un `card`, `card-title`, `card-text` y `card-actions`. Adicionalmente `card-text` debe tener una altura específica. Colocará `overflow-y` en el `card-text`.",
-    "transition": "Mixins.Transitionable.props.transition",
     "width": "Configura el ancho del diálogo"
   }
 }

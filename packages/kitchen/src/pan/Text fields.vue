@@ -1115,27 +1115,6 @@
       </core-section>
 
       <core-title>
-        Mask
-      </core-title>
-      <core-section>
-        <v-card>
-          <v-card-text>
-            <v-text-field
-              v-model="mask"
-              label="Mask"
-            />
-          </v-card-text>
-          <v-card-text>
-            <v-text-field
-              v-model="value"
-              :mask="mask"
-              label="Value"
-            />
-          </v-card-text>
-        </v-card>
-      </core-section>
-
-      <core-title>
         Loading
       </core-title>
       <core-section>
@@ -1213,8 +1192,6 @@
       title2: 'Hi,\nI just wanted to check in and see if you had any plans the upcoming weekend. We are thinking of heading up to Napa',
       first: 'John',
       last: 'Doe',
-      mask: 'credit-card',
-      value: '4444444444444444',
       value1: '',
       value2: '',
     }),

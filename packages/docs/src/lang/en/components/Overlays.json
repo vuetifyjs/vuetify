@@ -5,6 +5,18 @@
     "usage": {
       "desc": "In its simplest form, the `v-overlay` component will add a dimmed layer over your application."
     },
+    "absolute": {
+      "header": "### Absolute",
+      "desc": "`absolute` overlays are positioned absolutely and contained inside of their parent element."
+    },
+    "opacity": {
+      "header": "### Opacity",
+      "desc": "`opacity` allows you to customize the transparency of `v-overlay` components."
+    },
+    "zIndex": {
+      "header": "### Z Index",
+      "desc": "`z-index` gives you the ability to easily change the stack order of the `v-overlay` component."
+    },
     "loader": {
       "header": "### Loader",
       "desc": "Using the `v-overlay` as a background, add a progress component to easily create a custom loader."

@@ -1,12 +1,12 @@
 {
-	"header": "crwdns24526:0crwdne24526:0",
-	"headerText": "crwdns24528:0crwdne24528:0",
-	"examples": {
-		"ratios": {
-			"desc": "crwdns24530:0crwdne24530:0"
-		}
-	},
-	"props": {
-		"aspectRatio": "crwdns24532:0crwdne24532:0"
-	}
+  "header": "crwdns24526:0crwdne24526:0",
+  "headerText": "crwdns24528:0crwdne24528:0",
+  "examples": {
+    "ratios": {
+      "desc": "crwdns24530:0crwdne24530:0"
+    }
+  },
+  "props": {
+    "aspectRatio": "crwdns24532:0crwdne24532:0"
+  }
 }
