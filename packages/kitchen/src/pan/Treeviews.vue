@@ -26,6 +26,29 @@
       </core-section>
 
       <core-title>
+        Dense mode
+      </core-title>
+      <core-section>
+        <v-treeview
+          v-model="tree1"
+          dense
+          :open="open1"
+          :items="items1"
+          activatable
+          item-key="name"
+          open-on-click
+          #prepend="{ item, open }"
+        >
+          <v-icon v-if="!item.file">
+            {{ open ? 'mdi-folder-open' : 'mdi-folder' }}
+          </v-icon>
+          <v-icon v-else>
+            {{ files1[item.file] }}
+          </v-icon>
+        </v-treeview>
+      </core-section>
+
+      <core-title>
         Async data loading
       </core-title>
       <core-section>
