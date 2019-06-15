@@ -711,6 +711,29 @@ exports[`VTreeView.ts should render items 1`] = `
 
 `;
 
+exports[`VTreeView.ts should render items in dense mode 1`] = `
+
+<div class="v-treeview v-treeview--dense theme--light">
+  <div aria-expanded="false"
+       class="v-treeview-node"
+  >
+    <div class="v-treeview-node__root">
+      <i role="button"
+         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light"
+      >
+        arrow_drop_down
+      </i>
+      <div class="v-treeview-node__content">
+        <div class="v-treeview-node__label">
+          Root
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
 exports[`VTreeView.ts should select all descendants 1`] = `
 
 <div class="v-treeview theme--light">

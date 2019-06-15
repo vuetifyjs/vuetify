@@ -44,6 +44,17 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render items in dense mode', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: singleRootTwoChildren,
+        dense: true,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should select all descendants', async () => {
     const wrapper = mountFunction({
       propsData: {
