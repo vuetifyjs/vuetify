@@ -4,9 +4,11 @@
       xs12
       sm6
     >
-      <v-hover open-delay="200">
+      <v-hover
+        v-slot:default="{ hover }"
+        open-delay="200"
+      >
         <v-card
-          slot-scope="{ hover }"
           :elevation="hover ? 16 : 2"
           class="mx-auto"
           height="350"
@@ -23,9 +25,11 @@
       xs12
       sm6
     >
-      <v-hover close-delay="200">
+      <v-hover
+        v-slot:default="{ hover }"
+        close-delay="200"
+      >
         <v-card
-          slot-scope="{ hover }"
           :elevation="hover ? 16 : 2"
           class="mx-auto"
           height="350"

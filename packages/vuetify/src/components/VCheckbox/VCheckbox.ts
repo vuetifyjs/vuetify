@@ -3,6 +3,7 @@ import '../../styles/components/_selection-controls.sass'
 
 // Components
 import VIcon from '../VIcon'
+import VInput from '../VInput'
 
 // Mixins
 import Selectable from '../../mixins/selectable'
@@ -36,6 +37,7 @@ export default Selectable.extend({
   computed: {
     classes (): object {
       return {
+        ...VInput.options.computed.classes.call(this),
         'v-input--selection-controls': true,
         'v-input--checkbox': true,
       }
