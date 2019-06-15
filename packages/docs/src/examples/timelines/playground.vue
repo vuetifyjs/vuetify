@@ -30,8 +30,8 @@
         :right="right"
         :small="small"
       >
-        <template v-if="avatar" v-slot:icon>
-          <v-avatar>
+        <template v-slot:icon>
+          <v-avatar v-if="avatar">
             <img src="http://i.pravatar.cc/64">
           </v-avatar>
         </template>
