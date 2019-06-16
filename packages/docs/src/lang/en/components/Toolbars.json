@@ -6,15 +6,15 @@
     "usage": {
       "desc": "A toolbar is a flexible container that can be utilized in a number of ways. By default, the toolbar is 64px high on desktop and 56px high on mobile. There are a number of helper components available to use with the toolbar. The `v-toolbar-title` is used for displaying a title and `v-toolbar-items` allow [v-btn](/components/buttons) to extend full height."
     },
-    "columnWidthWithHierarchy": {
+    "column-width-with-hierarchy": {
       "header": "### Column width with hierarchy",
       "desc": "Toolbars come in **2** variants, light and dark. Light toolbars have dark tinted buttons and dark text whereas dark toolbars have white tinted buttons and white text."
     },
-    "flexibleAndCard": {
+    "flexible-and-card": {
       "header": "### Flexible toolbar and card toolbar",
       "desc": "In this example we offset our card onto the extended content area of a toolbar using the **extended** prop."
     },
-    "floatingWithSearch": {
+    "floating-with-search": {
       "header": "### Floating with search",
       "desc": "A floating toolbar is turned into an inline element that only takes up as much space as needed. This is particilarly useful when placing toolbars over content."
     },
@@ -31,7 +31,7 @@
       "header": "### Dense toolbars",
       "desc": "Dense toolbars reduce their height to _48px_. When using in conjunction with the **prominent** prop, will reduce height to _96px_."
     },
-    "denseProminent": {
+    "dense-prominent": {
       "header": "### Dense prominent toolbars",
       "desc": "You can combine both the prominent and dense to extend a smaller variant of the toolbar."
     },
@@ -39,11 +39,11 @@
       "header": "### Scrolling techniques",
       "desc": "A toolbar can transition off screen when scrolling. Here we demonstrate how you can specify the scroll target (default is window). Keep in mind, for this example there is special markup that will not be required in your application."
     },
-    "systemBarsStatusWindow": {
+    "system-bars-status-window": {
       "header": "### System bars - status/window",
       "desc": "System bars are useful for notification icons on mobile and desktop. For live examples of these, head to the pre-defined layouts."
     },
-    "contextualActionBar": {
+    "contextual-action-bar": {
       "header": "### Contextual action bars",
       "desc": "In this example we conntext various item visibility states through a `v-select`'s **v-model**."
     },
