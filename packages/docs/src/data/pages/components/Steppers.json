@@ -36,18 +36,18 @@
         {
           "type": "examples",
           "value": [
-            "editable",
-            "nonEditable",
-            "optional",
-            "horizontal",
-            "vertical",
-            "linear",
-            "nonLinear",
-            "alternateLabels",
-            "error",
-            "alternateError",
-            "verticalError",
-            "dynamic"
+            "simple/editable",
+            "simple/nonEditable",
+            "simple/optional",
+            "simple/horizontal",
+            "simple/vertical",
+            "simple/linear",
+            "simple/nonLinear",
+            "simple/alternateLabels",
+            "simple/error",
+            "simple/alternateError",
+            "simple/verticalError",
+            "intermediate/dynamic"
           ]
         }
       ]
