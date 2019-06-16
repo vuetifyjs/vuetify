@@ -9,7 +9,7 @@
       "header": "### Creating rules",
       "desc": "Rules allow you to apply custom validation on all form components. These are validated sequentially and will display a **maximum** of 1 error at a time, so make sure you order your rules accordingly."
     },
-    "validationWithSubmitAndClear": {
+    "validation-with-submit-and-clear": {
       "header": "### Validation with submit & clear",
       "desc": "The `v-form` component has **three** functions that can be accessed by setting a _ref_ on the component. A ref allows us to access internal methods on a component, for example, `<v-form ref=\"form\">`. **this.$refs.form.validate()** will validate all inputs and return if they are all valid or not. **this.$refs.form.reset()** will clear all inputs and reset their validation errors. **this.$refs.form.resetValidation()** will only reset input validation and not alter their state."
     },
@@ -17,7 +17,7 @@
       "header": "### Vuelidate",
       "desc": "**vuelidate** is a simple, lightweight model-based validation for Vue.js. [Documentation](https://vuelidate.netlify.com/)"
     },
-    "veeValidate": {
+    "vee-validate": {
       "header": "### Vee-validate",
       "desc": "**vee-validate** is a template Based Validation Framework for Vue.js. [Documentation](https://baianat.github.io/vee-validate/)"
     }
