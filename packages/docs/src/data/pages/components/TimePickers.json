@@ -30,7 +30,13 @@
       "children": [
         {
           "type": "examples",
-          "value": [ "timeColorable", "timeDialogAndMenu", "time24hFormat", "timeAllowedTimes", "timeWidth" ]
+          "value": [
+            "time-colorable",
+            "time-dialog-and-menu",
+            "time-24h-format",
+            "time-allowed-times",
+            "time-width"
+          ]
         }
       ]
     },
