@@ -31,12 +31,21 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "circularColored",
-            "circularIndeterminate",
-            "circularSizeAndWidth",
-            "circularRotate"
+            "simple/circularColored",
+            "simple/circularIndeterminate",
+            "simple/circularSizeAndWidth",
+            "simple/circularRotate"
           ]
         }
       ]
