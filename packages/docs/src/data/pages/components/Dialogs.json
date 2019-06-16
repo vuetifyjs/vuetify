@@ -31,7 +31,7 @@
         {
           "type": "examples",
           "value": [
-            "simple/withoutActivator",
+            "simple/without-activator",
             "simple/modal",
             "simple/scrollable",
             "simple/overflowed",
