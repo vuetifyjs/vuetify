@@ -38,7 +38,7 @@
           "value": [
             "simple/absolute",
             "simple/opacity",
-            "simple/zIndex",
+            "simple/z-index",
             "intermediate/loader",
             "complex/advanced"
           ]

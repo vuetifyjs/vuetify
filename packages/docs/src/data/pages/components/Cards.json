@@ -47,12 +47,12 @@
           "value": [
             "simple/outlined",
             "intermediate/intermediate",
-            "intermediate/infoCard",
-            "intermediate/mediaWithText",
+            "intermediate/info-card",
+            "intermediate/media-with-text",
             "intermediate/grids",
             "complex/horizontal",
-            "complex/customActions",
-            "complex/twitterCard",
+            "complex/custom-actions",
+            "complex/twitter-card",
             "complex/loading",
             "complex/weather",
             "complex/advanced"

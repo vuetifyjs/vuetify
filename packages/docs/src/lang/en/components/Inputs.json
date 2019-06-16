@@ -17,7 +17,7 @@
       "header": "### Error",
       "desc": "As any validatable Vuetify component, `v-input` can be set to error state using `error` prop, messages can be added using `error-messages` prop. You can determine error messages count to show using `error-count` property."
     },
-    "multiError": {
+    "multi-error": {
       "header": "### Multiple errors",
       "desc": "You can add multiple errors to `v-input` using `error-count` property."
     },
@@ -25,7 +25,7 @@
       "header": "### Rules",
       "desc": "You can add custom validation rules to `v-input`, add them as functions returning `true`/error message. Note: `v-text-field` is used just for example."
     },
-    "slotEvents": {
+    "slot-events": {
       "header": "### Slot events",
       "desc": "`v-input` can have `click:append` and `click:prepend` events for its slots. Note: `v-text-field` is used just for example."
     },

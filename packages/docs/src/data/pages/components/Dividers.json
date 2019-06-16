@@ -42,9 +42,9 @@
           "value": [
             "simple/inset",
             "simple/vertical",
-            "simple/verticalInset",
+            "simple/vertical-inset",
             "intermediate/subheaders",
-            "intermediate/dividerListPortrait"
+            "intermediate/divider-list-portrait"
           ]
         }
       ]

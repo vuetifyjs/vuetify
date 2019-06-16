@@ -5,11 +5,11 @@
     "usage": {
       "desc": "`v-img` component is used to display a responsive image with lazy-load and placeholder."
     },
-    "containCover": {
+    "contain-cover": {
       "header": "### Contain and Cover",
       "desc": "If the provided aspect ratio doesn't match that of the actual image, the default behavior is to fill as much space as possible, clipping the sides of the image. Enabling the `contain` prop will prevent this, but will result in empty space at the sides."
     },
-    "maxHeight": {
+    "max-height": {
       "header": "### Height",
       "desc": "`v-img` will automatically grow to the size of its `src`, preserving the correct aspect ratio. You can limit this with the `height` and `max-height` props."
     },
