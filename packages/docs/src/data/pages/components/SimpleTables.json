@@ -34,7 +34,7 @@
           "type": "examples",
           "value": [
             "height",
-            "fixedHeader",
+            "fixed-header",
             "dense",
             "dark"
           ]
