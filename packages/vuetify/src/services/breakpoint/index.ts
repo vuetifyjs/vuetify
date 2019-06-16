@@ -1,8 +1,13 @@
-// Extensions
 import { Service } from '../service'
+import { unquoteJSON } from '../../util/helpers'
+
+// @ts-ignore
+import { breakpoints } from '../../styles/styles.sass'
 
 // Types
 import { VuetifyBreakpointOptions } from 'vuetify/types/services/breakpoint'
+
+unquoteJSON(breakpoints) // TODO: do something with this
 
 export class Breakpoint extends Service {
   public static property = 'breakpoint'

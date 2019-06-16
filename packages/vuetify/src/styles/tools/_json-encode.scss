@@ -1,0 +1,65 @@
+/**
+ * @copyright 2014-2015 Hugo Giraudel and contributors
+ * @license MIT
+ * @see https://github.com/oddbird/sass-json-export
+ */
+
+/// Converts a SASS value into a JSON string
+@function json-encode($value) {
+  $type: type-of($value);
+  $function: '_json-encode--#{$type}';
+
+  @if function-exists('get-function') {
+    $function: get-function($function);
+  }
+
+  @if function-exists('_json-encode--#{$type}') {
+    @return call($function, $value);
+  }
+
+  @error 'Unknown type for #{$value} (#{$type}).';
+}
+
+@function _proof-quote($value) {
+  @return '"#{$value}"';
+}
+
+@function _json-encode--bool($boolean) {
+  @return $boolean;
+}
+
+@function _json-encode--color($color) {
+  @return _proof-quote($color);
+}
+
+@function _json-encode--list($list) {
+  $str: '';
+
+  @each $item in $list {
+    $str: $str + ', ' + json-encode($item);
+  }
+
+  @return '[' + str-slice($str, 3) + ']';
+}
+
+@function _json-encode--map($map) {
+  $str: '';
+
+  @each $key, $value in $map {
+    $str: $str + ', ' + _proof-quote($key) + ': ' + json-encode($value);
+  }
+
+  @return '{' + str-slice($str, 3) + '}';
+}
+
+@function _json-encode--null($null) {
+  @return 'null';
+}
+
+@function _json-encode--number($number) {
+  @return if(unitless($number), $number, _proof-quote($number));
+}
+
+@function _json-encode--string($string) {
+  @return _proof-quote($string);
+}

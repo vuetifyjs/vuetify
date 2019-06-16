@@ -194,3 +194,7 @@ $code-kbd-font-weight: 900 !default;
 
 $input-top-spacing: 16px !default;
 $text-field-active-label-height: 12px !default;
+
+:export {
+  breakpoints: json-encode($grid-breakpoints);
+}

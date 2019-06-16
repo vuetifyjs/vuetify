@@ -494,3 +494,11 @@ export function chunk (str: string, size = 1) {
   }
   return chunked
 }
+
+/** Removes extra quotes from json-encode in sass files */
+export function unquoteJSON (json: string): unknown {
+  if (json.startsWith('\'') && json.endsWith('\'')) {
+    json = json.substring(1, json.length - 1)
+  }
+  return JSON.parse(json)
+}
