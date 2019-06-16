@@ -9,7 +9,7 @@
       "header": "### Chips",
       "desc": "Easily hook up a custom chip group."
     },
-    "togglePictures": {
+    "toggle-pictures": {
       "header": "### Custom groups",
       "desc": "Icons can be used as toggle buttons when they allow selection, or deselection, of a single choice, such as marking an item as a favorite."
     },
@@ -21,7 +21,7 @@
       "header": "### Mandatory",
       "desc": "**mandatory** item groups must have aty least 1 item selected."
     },
-    "activeClass": {
+    "active-class": {
       "header": "### With active class",
       "desc": "**activeClass** property allows you to set custom CSS class on active items."
     }
