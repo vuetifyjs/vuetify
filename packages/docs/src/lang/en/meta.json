@@ -371,7 +371,7 @@
   },
   "components/overflow-btns": {
     "title": "Overflow button Component",
-    "description": "Coming soon",
+    "description": "Overflow button component for Vuetify framework",
     "keywords": "overflow button, components"
   },
   "components/overlays": {

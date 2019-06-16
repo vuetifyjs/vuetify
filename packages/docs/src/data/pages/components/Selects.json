@@ -25,14 +25,26 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "light",
-            "icons",
-            "multiple",
-            "customTextAndValue",
-            "slots",
-            "selectionAppearance"
+            "simple/disabled",
+            "simple/readonly",
+            "simple/light",
+            "simple/icons",
+            "simple/multiple",
+            "simple/customTextAndValue",
+            "intermediate/menuProps",
+            "intermediate/slots",
+            "intermediate/selectionAppearance"
           ]
         }
       ]

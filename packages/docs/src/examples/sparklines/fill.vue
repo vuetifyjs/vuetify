@@ -20,9 +20,13 @@
         <v-layout fill-height align-center>
           <v-item-group v-model="gradient" mandatory>
             <v-layout>
-              <v-item v-for="(gradient, i) in gradients" :key="i" :value="gradient">
+              <v-item
+                v-for="(gradient, i) in gradients"
+                :key="i"
+                v-slot:default="{ active, toggle }"
+                :value="gradient"
+              >
                 <v-card
-                  slot-scope="{ active, toggle }"
                   :style="{
                     background: gradient.length > 1
                       ? `linear-gradient(0deg, ${gradient})`

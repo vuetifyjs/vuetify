@@ -1,7 +1,6 @@
 <template>
-  <v-hover>
+  <v-hover v-slot:default="{ hover }">
     <v-card
-      slot-scope="{ hover }"
       class="mx-auto"
       color="grey lighten-4"
       max-width="600"

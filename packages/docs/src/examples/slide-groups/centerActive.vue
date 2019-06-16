@@ -13,9 +13,9 @@
       <v-slide-item
         v-for="n in 15"
         :key="n"
+        v-slot:default="{ active, toggle }"
       >
         <v-card
-          slot-scope="{ active, toggle }"
           :color="active ? 'primary' : 'grey lighten-1'"
           class="ma-3"
           height="200"

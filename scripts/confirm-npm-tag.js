@@ -22,5 +22,5 @@ inquirer.prompt({
   type: 'confirm',
   name: 'yes',
   message: 'Are you sure?',
-  default: true
+  default: true,
 }).then(({ yes }) => yes || shell.exit(1))

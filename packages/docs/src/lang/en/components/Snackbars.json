@@ -3,10 +3,26 @@
   "headerText": "The `v-snackbar` component is used to display a quick message to a user. Snackbars support positioning, removal delay and callbacks.",
   "examples": {
     "usage": {
-      "desc": "The standard snackbar is useful for calling attention to some function that has just happened."
+      "desc": "`v-snackbar`'s in their simplest form display a temporary and closable notification for the user."
+    },
+    "autoHeight": {
+      "header": "### Auto Height",
+      "desc": "The `auto-height` property gives `v-snackbar` the option for dynamic height based on it's content."
+    },
+    "multiLine": {
+      "header": "### Multi Line",
+      "desc": "The `multi-line` property extends the height of the `v-snackbar` to give you a little more room for content."
+    },
+    "timeout": {
+      "header": "### Timeout",
+      "desc": "The `timeout` property lets you customize the delay before the `v-snackbar` is hidden."
+    },
+    "vertical": {
+      "header": "### Vertical",
+      "desc": "The `vertical` property allows you to stack the content of your `v-snackbar`."
     },
     "contextual": {
-      "header": "Contextual",
+      "header": "### Contextual",
       "desc": "You can also apply a color to the snackbar to better fit your implementation."
     }
   },

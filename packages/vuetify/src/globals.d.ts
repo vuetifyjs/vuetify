@@ -126,6 +126,8 @@ declare module 'vue/types/vue' {
     version: string
     /* eslint-disable-next-line camelcase */
     $_vuetify_subcomponents?: Record<string, VueConstructor>
+    /* eslint-disable-next-line camelcase */
+    $_vuetify_installed?: true
     options: Options
 
     extend<Data, Methods, Computed, Options, PropNames extends string = never> (options?: ThisTypedComponentOptionsWithArrayProps<V, Data, Methods, Computed, PropNames> & Options): OptionsVue<V, Data, Methods, Computed, Record<PropNames, any>, Options>

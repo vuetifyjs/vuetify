@@ -11,8 +11,45 @@
       "type": "section",
       "children": [
         {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "api",
           "value": ["v-overflow-btn"]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "simple/counter",
+            "simple/disabled",
+            "simple/editable",
+            "simple/filled",
+            "simple/hint",
+            "simple/loading",
+            "simple/menuProps",
+            "simple/readonly",
+            "simple/segmented"
+          ]
         }
       ]
     },

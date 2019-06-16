@@ -13,6 +13,11 @@
         {
           "type": "usage",
           "value": "usage"
+        },
+        {
+          "type": "alert",
+          "lang": "Components.Toolbars.buttonMargin",
+          "value": "warning"
         }
       ]
     },

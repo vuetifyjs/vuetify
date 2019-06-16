@@ -30,7 +30,7 @@
       >
         <template v-for="(item, index) in items">
           <v-list-item :key="item.title">
-            <template #default="{ active, toggle }">
+            <template v-slot:default="{ active, toggle }">
               <v-list-item-content>
                 <v-list-item-title v-text="item.title"></v-list-item-title>
                 <v-list-item-subtitle class="text--primary" v-text="item.headline"></v-list-item-subtitle>

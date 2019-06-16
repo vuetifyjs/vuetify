@@ -69,7 +69,7 @@
         delete
       </v-icon>
     </template>
-    <template #no-data>
+    <template v-slot:no-data>
       <v-btn color="primary" @click="initialize">Reset</v-btn>
     </template>
   </v-data-table>

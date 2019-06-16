@@ -44,7 +44,7 @@
         multiple
       >
         <v-list-item>
-          <template #default="{ active, toggle }">
+          <template v-slot:default="{ active, toggle }">
             <v-list-item-action>
               <v-checkbox
                 v-model="active"
@@ -61,7 +61,7 @@
         </v-list-item>
 
         <v-list-item>
-          <template #default="{ active, toggle }">
+          <template v-slot:default="{ active, toggle }">
             <v-list-item-action>
               <v-checkbox
                 v-model="active"
@@ -78,7 +78,7 @@
         </v-list-item>
 
         <v-list-item>
-          <template #default="{ active, toggle }">
+          <template v-slot:default="{ active, toggle }">
             <v-list-item-action>
               <v-checkbox
                 v-model="active"
@@ -95,7 +95,7 @@
         </v-list-item>
 
         <v-list-item>
-          <template #default="{ active, toggle }">
+          <template v-slot:default="{ active, toggle }">
             <v-list-item-action>
               <v-checkbox
                 v-model="active"

@@ -42,16 +42,16 @@
       <v-btn
         :disabled="!valid"
         color="success"
-        @click="validate"
         class="mr-3"
+        @click="validate"
       >
         Validate
       </v-btn>
 
       <v-btn
         color="error"
-        @click="reset"
         class="mr-3"
+        @click="reset"
       >
         Reset Form
       </v-btn>
