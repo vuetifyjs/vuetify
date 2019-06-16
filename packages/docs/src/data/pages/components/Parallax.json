@@ -27,8 +27,8 @@
         {
           "type": "examples",
           "value": [
-            "content",
-            "custom-height"
+            "sinple/content",
+            "simple/custom-height"
           ]
         }
       ]
