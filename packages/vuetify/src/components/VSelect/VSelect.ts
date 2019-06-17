@@ -700,6 +700,7 @@ export default baseMixins.extend<options>().extend({
       // An item that is selected by
       // menu-index should toggled
       if (
+        !this.multiple &&
         activeTile &&
         this.isMenuActive
       ) {

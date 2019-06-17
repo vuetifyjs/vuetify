@@ -136,7 +136,7 @@ describe('VCombobox.ts', () => {
 
     element.value = ''
     input.trigger('input')
-    input.trigger('keydown.tab')
+    input.trigger('keydown.enter')
 
     expect(wrapper.vm.internalValue).toBe('')
     expect(change).toHaveBeenCalledTimes(4)
@@ -174,7 +174,7 @@ describe('VCombobox.ts', () => {
     element.value = 'foo'
     input.trigger('input')
 
-    input.trigger('keydown.tab')
+    input.trigger('keydown.enter')
     expect(change).toHaveBeenCalledWith('foo')
 
     input.trigger('keydown.esc')

@@ -102,56 +102,6 @@ describe('VCombobox.ts', () => {
     expect(wrapper.vm.selectedIndex).toBe(-1)
   })
 
-  it('should add a tag on tab using the first suggestion', async () => {
-    const { wrapper, change } = createMultipleCombobox({
-      items: ['bar'],
-    })
-
-    const input = wrapper.find('input')
-    const element = input.element as HTMLInputElement
-
-    input.trigger('focus')
-    element.value = 'b'
-    input.trigger('input')
-    // First down opens the menu
-    input.trigger('keydown.down')
-
-    // Give DOM time to update
-    // list tile classes
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.isMenuActive).toBe(true)
-
-    // Second down moves the index
-    input.trigger('keydown.down')
-    input.trigger('keydown.tab')
-
-    expect(change).toHaveBeenCalledWith(['bar'])
-  })
-
-  it('should add a tag on tab using the current searchValue', async () => {
-    const { wrapper, change } = createMultipleCombobox({
-      items: ['bar'],
-    })
-
-    const input = wrapper.find('input')
-    const element = input.element as HTMLInputElement
-
-    input.trigger('focus')
-    element.value = 'ba'
-    input.trigger('input')
-
-    input.trigger('keydown.tab')
-    await wrapper.vm.$nextTick()
-    expect(change).toHaveBeenCalledWith(['ba'])
-
-    element.value = 'it'
-    input.trigger('input')
-    input.trigger('keydown.tab')
-    await wrapper.vm.$nextTick()
-    expect(change).toHaveBeenCalledWith(['ba', 'it'])
-  })
-
   it('should add a tag on enter using the current searchValue', async () => {
     const { wrapper, change } = createMultipleCombobox({
       items: ['bar'],
@@ -203,7 +153,7 @@ describe('VCombobox.ts', () => {
 
     element.value = 'foo'
     input.trigger('input')
-    input.trigger('keydown.tab')
+    input.trigger('keydown.enter')
     await wrapper.vm.$nextTick()
 
     expect(change).toHaveBeenCalledWith(['bar', 'foo'])
@@ -218,7 +168,7 @@ describe('VCombobox.ts', () => {
     input.trigger('focus')
     element.value = 'bar'
     input.trigger('input')
-    input.trigger('keydown.tab')
+    input.trigger('keydown.enter')
 
     expect(change).toHaveBeenCalledWith(['bar'])
   })
@@ -379,48 +329,5 @@ describe('VCombobox.ts', () => {
 
     expect(change).toHaveBeenCalledWith(['foobar'])
     expect(internal).toHaveBeenCalledWith(['foobar'], ['foo'])
-  })
-
-  it('should react to tabs', async () => {
-    const updateTags = jest.fn()
-    const wrapper = mountFunction({
-      propsData: {
-        items: ['fizz', 'buzz'],
-        multiple: true,
-      },
-      methods: {
-        updateTags,
-      },
-    })
-
-    const input = wrapper.find('input')
-    const element = input.element as HTMLInputElement
-
-    input.trigger('focus')
-    element.value = 'foo'
-    input.trigger('input')
-    input.trigger('keydown.tab')
-
-    expect(wrapper.vm.getMenuIndex()).toBe(-1)
-    expect(updateTags).toHaveBeenCalledTimes(1)
-
-    input.trigger('focus')
-    element.value = 'fizz'
-    input.trigger('input')
-    input.trigger('keydown.down')
-
-    // Allow dom to update class for
-    // selected tile
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.isMenuActive).toBe(true)
-    expect(wrapper.vm.getMenuIndex()).toBe(0)
-
-    input.trigger('keydown.tab')
-
-    // We overwrite update tags so above
-    // is does not persist
-    expect(wrapper.vm.internalValue).toEqual(['fizz'])
-    expect(updateTags).toHaveBeenCalledTimes(2)
   })
 })
