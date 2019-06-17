@@ -177,14 +177,11 @@ export default baseMixins.extend({
   },
 
   mounted () {
-    this.isActive && this.activate()
+    this.isActive && this.callActivate()
   },
 
   methods: {
     activate () {
-      // This exists primarily for v-select
-      // helps determine which tiles to activate
-      this.getTiles()
       // Update coordinates and dimensions of menu
       // and its activator
       this.updateDimensions()
@@ -372,19 +369,31 @@ export default baseMixins.extend({
     nextTile () {
       const tile = this.tiles[this.listIndex + 1]
 
-      if (!tile) return
+      if (!tile) {
+        if (!this.tiles.length) return
+
+        this.listIndex = -1
+        this.nextTile()
+
+        return
+      }
 
       this.listIndex++
-
       if (tile.tabIndex === -1) this.nextTile()
     },
     prevTile () {
       const tile = this.tiles[this.listIndex - 1]
 
-      if (!tile) return
+      if (!tile) {
+        if (!this.tiles.length) return
+
+        this.listIndex = this.tiles.length
+        this.prevTile()
+
+        return
+      }
 
       this.listIndex--
-
       if (tile.tabIndex === -1) this.prevTile()
     },
     onKeyDown (e: KeyboardEvent) {
@@ -393,9 +402,15 @@ export default baseMixins.extend({
         setTimeout(() => { this.isActive = false })
         const activator = this.getActivator()
         this.$nextTick(() => activator && activator.focus())
-      } else {
-        this.changeListIndex(e)
+      } else if (
+        !this.isActive &&
+        [keyCodes.up, keyCodes.down].includes(e.keyCode)
+      ) {
+        this.isActive = true
       }
+
+      // Allow for isActive watcher to generate tile list
+      this.$nextTick(() => this.changeListIndex(e))
     },
     onResize () {
       if (!this.isActive) return

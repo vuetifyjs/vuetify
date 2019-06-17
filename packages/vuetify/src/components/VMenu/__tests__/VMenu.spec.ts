@@ -175,13 +175,13 @@ describe('VMenu.ts', () => {
     expect(wrapper.vm.listIndex).toBe(3)
 
     wrapper.vm.nextTile()
+    expect(wrapper.vm.listIndex).toBe(0)
+
+    wrapper.vm.prevTile()
     expect(wrapper.vm.listIndex).toBe(3)
 
     wrapper.vm.prevTile()
     expect(wrapper.vm.listIndex).toBe(1)
-
-    wrapper.vm.prevTile()
-    expect(wrapper.vm.listIndex).toBe(0)
 
     wrapper.vm.prevTile()
     expect(wrapper.vm.listIndex).toBe(0)
@@ -267,5 +267,39 @@ describe('VMenu.ts', () => {
     expect(mountFunction({
       attrs: { role: 'listbox' },
     }).vm.$refs.content.getAttribute('role')).toBe('listbox')
+  })
+
+  it('should select first or last item when opening menu with up or down key', async () => {
+    const event = (keyCode: number) => new KeyboardEvent('keydown', { keyCode })
+    const wrapper = mountFunction({
+      scopedSlots: {
+        default () {
+          return this.$createElement('div', [
+            this.$createElement(VListItem, { props: { link: true } }),
+            this.$createElement(VListItem, { props: { link: true } }),
+            this.$createElement(VListItem, { props: { link: true } }),
+            this.$createElement(VListItem, { props: { link: true } }),
+          ])
+        },
+      },
+    })
+
+    wrapper.vm.onKeyDown(event(keyCodes.up))
+    expect(wrapper.vm.isActive).toBe(true)
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.listIndex).toBe(3)
+
+    wrapper.setData({ isActive: false })
+
+    wrapper.vm.onKeyDown(event(keyCodes.down))
+    expect(wrapper.vm.isActive).toBe(true)
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.listIndex).toBe(0)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })
