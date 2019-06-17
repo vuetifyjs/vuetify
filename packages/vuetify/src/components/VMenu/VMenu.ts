@@ -234,15 +234,8 @@ export default baseMixins.extend({
       if (!this.isActive) {
         return
       } else if (e.keyCode === keyCodes.tab) {
-        if (
-          (!e.shiftKey && this.listIndex + 1 === this.tiles.length) ||
-          (e.shiftKey && this.listIndex - 1 === -1)
-        ) {
-          window.requestAnimationFrame(() => (this.isActive = false))
-          return
-        }
-
-        e.shiftKey ? this.prevTile() : this.nextTile()
+        this.isActive = false
+        return
       } else if (e.keyCode === keyCodes.down) {
         this.nextTile()
       } else if (e.keyCode === keyCodes.up) {
