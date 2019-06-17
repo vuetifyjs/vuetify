@@ -42,14 +42,14 @@
         {
           "type": "examples",
           "value": [
-            "slideXTransitions",
-            "slideYTransitions",
-            "scrollXTransitions",
-            "scrollYTransitions",
-            "scaleTransition",
-            "fadeTransition",
-            "expandTransition",
-            "customOrigin",
+            "slide-x-transitions",
+            "slide-y-transitions",
+            "scroll-x-transitions",
+            "scroll-y-transitions",
+            "scale-transition",
+            "fade-transition",
+            "expand-transition",
+            "custom-origin",
             "todo"
           ]
         }

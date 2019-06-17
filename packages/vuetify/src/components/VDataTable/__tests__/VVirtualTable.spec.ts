@@ -20,7 +20,7 @@ describe('VVirtualTable.ts', () => {
 
     const wrapper = mountFunction({
       propsData: {
-        itemsLength: 10,
+        items: ['a', 'b', 'c'],
       },
       scopedSlots: {
         items: props => vm.$createElement('div', { staticClass: 'test' }, [ JSON.stringify(props) ]),
@@ -30,31 +30,24 @@ describe('VVirtualTable.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should update on scroll', () => {
-    const scrollTop = jest.fn()
-    const wrapper = mountFunction({
-      scopedSlots: {
-        items: '<div></div>',
-      },
-    })
-    wrapper.vm.$watch('scrollTop', scrollTop)
-
-    wrapper.vm.onScroll({ target: { scrollTop: 1337 } } as any)
-    expect(scrollTop).toHaveBeenLastCalledWith(1337, 0)
-    wrapper.vm.onScroll({ target: { scrollTop: 123 } } as any)
-    expect(scrollTop).toHaveBeenLastCalledWith(123, 1337)
-  })
-
-  it('should compute height', () => {
+  it('should re-render when items change', async () => {
     const wrapper = mountFunction({
       propsData: {
-        itemsLength: 10,
+        items: ['a', 'b', 'c'],
       },
       scopedSlots: {
-        items: '<div></div>',
+        items (props) {
+          return this.$createElement('div', props.items.map(i => this.$createElement('div', [i])))
+        },
       },
     })
 
-    expect(wrapper.vm.totalHeight).toBe(528)
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({
+      items: ['d', 'e', 'f'],
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

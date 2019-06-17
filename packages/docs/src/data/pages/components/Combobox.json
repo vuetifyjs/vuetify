@@ -36,8 +36,8 @@
         {
           "type": "examples",
           "value": [
-            "simple/comboboxMultiple",
-            "intermediate/noData",
+            "simple/combobox-multiple",
+            "intermediate/no-data",
             "intermediate/advanced"
           ]
         }

@@ -2,6 +2,7 @@
 
 exports[`theme-utilities.ts should generate css vars 1`] = `
 ":root {
+  --v-anchor-base: #c42742;
   --v-primary-base: #c42742;
   --v-primary-lighten5: #2c0447;
   --v-primary-lighten4: #cfa854;
@@ -14,7 +15,7 @@ exports[`theme-utilities.ts should generate css vars 1`] = `
   --v-primary-darken4: #33303a;
 }
 
-a { color: var(--v-primary-base); }
+a { color: var(--v-anchor-base); }
 .primary {
   background-color: var(--v-primary-base) !important;
   border-color: var(--v-primary-base) !important;
@@ -183,6 +184,7 @@ exports[`theme-utilities.ts should generate styles 1`] = `
 
 exports[`theme-utilities.ts should parse a theme or theme item 1`] = `
 Object {
+  "anchor": "#000000",
   "primary": Object {
     "base": "#000000",
     "darken1": "#000000",
@@ -212,6 +214,7 @@ Object {
 
 exports[`theme-utilities.ts should parse a theme or theme item 2`] = `
 Object {
+  "anchor": "#c42742",
   "primary": Object {
     "base": "#c42742",
     "darken1": "#0169dc",

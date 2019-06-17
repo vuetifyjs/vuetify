@@ -40,8 +40,8 @@
         {
           "type": "examples",
           "value": [
-            "simple/autoHeight",
-            "simple/multiLine",
+            "simple/auto-height",
+            "simple/multi-line",
             "simple/timeout",
             "simple/vertical"
           ]

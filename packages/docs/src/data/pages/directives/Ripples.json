@@ -27,9 +27,9 @@
         {
           "type": "examples",
           "value": [
-            "customColor",
+            "custom-color",
             "center",
-            "rippleInComponents"
+            "ripple-in-components"
           ]
         }
       ]

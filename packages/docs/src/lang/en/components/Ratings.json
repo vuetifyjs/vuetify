@@ -28,6 +28,10 @@
     "advanced": {
       "header": "### Advanced usage",
       "desc": "The `v-rating` component fits right in with existing components. Build truly complex examples with rich features and beautiful designs."
+    },
+    "colors": {
+      "header": "### Colors",
+      "desc": "The `v-rating` component can be colored as you want, you can set both selected and not selected colors."
     }
   },
   "props": {

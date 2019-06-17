@@ -9,7 +9,7 @@
       "header": "### Fixed height",
       "desc": "Use the `height` prop to set a fixed height of the table."
     },
-    "fixedHeader": {
+    "fixed-header": {
       "header": "### Fixed header",
       "desc": "Use the `fixed-header` prop together with `height` to fix the header to the top of the table."
     },

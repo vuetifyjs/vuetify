@@ -28,8 +28,8 @@
           "type": "examples",
           "value": [
             { "file": "dense", "newIn": "2.0" },
-            { "file": "humanResources", "newIn": "1.5" },
-            "fileExplorer",
+            "human-resources",
+            "file-explorer",
             "directory",
             "hotspots"
           ]

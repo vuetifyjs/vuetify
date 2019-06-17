@@ -20,7 +20,7 @@
             :value="item"
             active-class="deep-purple--text text--accent-4"
           >
-            <template #default="{ active, toggle }">
+            <template v-slot:default="{ active, toggle }">
               <v-list-item-content>
                 <v-list-item-title v-text="item"></v-list-item-title>
               </v-list-item-content>

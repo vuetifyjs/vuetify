@@ -4,6 +4,9 @@
 
 // Theme
 +theme(v-btn-toggle) using ($material)
+  background: map-get($material, 'cards')
+  color: map-deep-get($material, 'text', 'primary')
+
   .v-btn.v-btn
     border-color: map-get($material, 'dividers') !important
 
@@ -15,19 +18,27 @@
 
 // Block
 .v-btn-toggle
-  border-radius: 2px
+  border-radius: $btn-toggle-border-radius
   display: inline-flex
 
+  > .v-btn
+    opacity: $btn-toggle-btn-opacity
+
+    &--active
+      color: inherit
+      opacity: 1
+
+    &.v-size--default
+      height: $btn-toggle-btn-height
+      min-height: 0
+      min-width: $btn-toggle-btn-width
+      padding: $btn-toggle-btn-padding
+
   > .v-btn.v-btn
-    background-color: transparent !important
     border-radius: 0
     border-style: solid
     border-width: thin
     box-shadow: none
-    min-height: 0
-    min-width: $btn-toggle-btn-width
-    padding: $btn-toggle-btn-padding
-    height: $btn-toggle-btn-height
 
     &:first-child
       border-top-left-radius: inherit
@@ -39,9 +50,6 @@
 
     &:after
       display: none
-
-    &--active
-      color: inherit
 
 // Modifiers
 .v-btn-toggle--rounded

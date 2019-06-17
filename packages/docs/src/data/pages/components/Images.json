@@ -31,8 +31,8 @@
         {
           "type": "examples",
           "value": [
-            "simple/containCover",
-            "simple/maxHeight",
+            "simple/contain-cover",
+            "simple/max-height",
             "simple/ratio",
             "simple/placeholder",
             "intermediate/gradients",
