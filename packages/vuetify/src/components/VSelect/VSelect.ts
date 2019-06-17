@@ -638,7 +638,7 @@ export default baseMixins.extend<options>().extend({
 
       const menu = this.$refs.menu
 
-      if (!menu) return
+      if (!menu || !this.isDirty) return
 
       // When menu opens, set index of first active item
       for (let i = 0; i < menu.tiles.length; i++) {
