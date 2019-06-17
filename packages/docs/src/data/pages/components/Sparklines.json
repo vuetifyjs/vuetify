@@ -7,8 +7,8 @@
       "type": "section",
       "children": [
         {
-          "type": "usage",
-          "value": "playground"
+          "type": "api",
+          "value": ["v-sparkline"]
         }
       ]
     },
@@ -16,8 +16,8 @@
       "type": "section",
       "children": [
         {
-          "type": "api",
-          "value": ["v-sparkline"]
+          "type": "playground",
+          "value": "playground"
         }
       ]
     },
