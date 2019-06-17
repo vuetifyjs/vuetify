@@ -28,30 +28,46 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": {
+            "file": "playground",
+            "newIn": "2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
             {
-              "file": "sizes",
+              "file": "simple/sizes",
               "newIn": "1.2"
             },
             {
-              "file": "length",
+              "file": "simple/colors",
               "newIn": "1.2"
             },
             {
-              "file": "increments",
+              "file": "simple/length",
               "newIn": "1.2"
             },
             {
-              "file": "slots",
+              "file": "intermediate/increments",
               "newIn": "1.2"
             },
             {
-              "file": "card",
+              "file": "intermediate/slots",
               "newIn": "1.2"
             },
             {
-              "file": "advanced",
+              "file": "intermediate/card",
+              "newIn": "1.2"
+            },
+            {
+              "file": "complex/advanced",
               "newIn": "1.2"
             }
           ]

@@ -54,7 +54,7 @@
         active-class=""
       >
         <v-list-item>
-          <template #default="{ active }">
+          <template v-slot:default="{ active }">
             <v-list-item-action>
               <v-checkbox v-model="active"></v-checkbox>
             </v-list-item-action>
@@ -67,7 +67,7 @@
         </v-list-item>
 
         <v-list-item>
-          <template #default="{ active }">
+          <template v-slot:default="{ active }">
             <v-list-item-action>
               <v-checkbox v-model="active"></v-checkbox>
             </v-list-item-action>
@@ -80,7 +80,7 @@
         </v-list-item>
 
         <v-list-item>
-          <template #default="{ active }">
+          <template v-slot:default="{ active }">
             <v-list-item-action>
               <v-checkbox v-model="active"></v-checkbox>
             </v-list-item-action>

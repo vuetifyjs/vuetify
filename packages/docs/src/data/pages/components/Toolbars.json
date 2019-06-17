@@ -40,13 +40,13 @@
         {
           "type": "examples",
           "value": [
-            "columnWidthWithHierarchy",
-            "flexibleAndCard",
-            "floatingWithSearch",
+            "column-width-with-hierarchy",
+            "flexible-and-card",
+            "floating-with-search",
             "variations",
             "prominent",
             "dense",
-            "contextualActionBar",
+            "contextual-action-bar",
             "background"
           ]
         }

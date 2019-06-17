@@ -27,9 +27,9 @@
         {
           "type": "examples",
           "value": [
-            "heartRate",
-            "dashboardCard",
-            "salesCard",
+            "heart-rate",
+            "dashboard-card",
+            "sales-card",
             "fill"
           ]
         }

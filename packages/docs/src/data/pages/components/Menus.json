@@ -41,15 +41,15 @@
           "type": "examples",
           "value": [
             "simple/absolute",
-            "simple/menuActivatorTooltip",
+            "simple/menu-activator-tooltip",
             "simple/hover",
-            "simple/customTransition",
+            "simple/custom-transition",
             "simple/disabled",
-            "simple/offsetX",
-            "simple/offsetY",
-            "simple/closeOnClick",
-            "simple/closeOnContentClick",
-            "intermediate/absoluteWithoutActivator",
+            "simple/offset-x",
+            "simple/offset-y",
+            "simple/close-on-click",
+            "simple/close-on-content-click",
+            "intermediate/absolute-without-activator",
             "intermediate/menus",
             "intermediate/popover"
           ]

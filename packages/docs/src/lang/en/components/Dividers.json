@@ -13,7 +13,7 @@
       "header": "### Vertical dividers",
       "desc": "Vertical dividers give you more tools for unique layouts."
     },
-    "verticalInset": {
+    "vertical-inset": {
       "header": "### Vertical inset dividers",
       "desc": "Vertical dividers can also be paired with the inset property for even more options."
     },
@@ -21,7 +21,7 @@
       "header": "### Dividers and subheaders",
       "desc": "Dividers and subheaders can help break up content and can be lined up with one another by using the same inset prop."
     },
-    "dividerListPortrait": {
+    "divider-list-portrait": {
       "header": "### Dividers in Portrait View",
       "desc": "Create custom cards to fit any use-case"
     }

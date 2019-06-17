@@ -29,7 +29,7 @@
       "header": "### Loading",
       "desc": "`v-overflow-btn` can have `loading` state with a linear progress bar under them"
     },
-    "menuProps": {
+    "menu-props": {
       "header": "### Menu props",
       "desc": "You can set underlying `v-menu` props using `menu-props` property"
     },

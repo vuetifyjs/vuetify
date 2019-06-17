@@ -33,11 +33,11 @@
         {
           "type": "examples",
           "value": [
-            "linearDeterminate",
-            "linearIndeterminate",
-            "linearBuffer",
-            "linearQueryIndeterminateAndDeterminate",
-            "linearCustomColors",
+            "linear-determinate",
+            "linear-indeterminate",
+            "linear-buffer",
+            "linear-query-indeterminate-and-determinate",
+            "linear-custom-colors",
             "rounded",
             "loader",
             "stream",

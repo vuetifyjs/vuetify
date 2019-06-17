@@ -69,6 +69,14 @@
         },
         {
           "type": "text",
+          "lang": "customizingText3a"
+        },
+        {
+          "type": "markup",
+          "value": "js_vuetify_anchor_color"
+        },
+        {
+          "type": "text",
           "lang": "customizingText4"
         },
         {

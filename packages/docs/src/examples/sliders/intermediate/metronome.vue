@@ -62,7 +62,7 @@
         min="40"
         max="218"
       >
-        <template #prepend>
+        <template v-slot:prepend>
           <v-icon
             :color="color"
             @click="decrement"
@@ -71,7 +71,7 @@
           </v-icon>
         </template>
 
-        <template #append>
+        <template v-slot:append>
           <v-icon
             :color="color"
             @click="increment"
