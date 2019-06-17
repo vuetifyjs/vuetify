@@ -36,7 +36,7 @@ exports[`VDataTable.ts should render 1`] = `
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
                        autocomplete="on"
                        readonly="readonly"
-                       type="text"
+                       type="hidden"
                        aria-readonly="false"
                 >
               </div>
@@ -157,7 +157,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
                        autocomplete="on"
                        readonly="readonly"
-                       type="text"
+                       type="hidden"
                        aria-readonly="false"
                 >
               </div>
@@ -358,7 +358,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
                        autocomplete="on"
                        readonly="readonly"
-                       type="text"
+                       type="hidden"
                        aria-readonly="false"
                 >
               </div>
@@ -641,7 +641,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
                        autocomplete="on"
                        readonly="readonly"
-                       type="text"
+                       type="hidden"
                        aria-readonly="false"
                 >
               </div>
@@ -826,7 +826,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
                        autocomplete="on"
                        readonly="readonly"
-                       type="text"
+                       type="hidden"
                        aria-readonly="false"
                 >
               </div>
@@ -1110,7 +1110,7 @@ exports[`VDataTable.ts should render with data 1`] = `
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
                        autocomplete="on"
                        readonly="readonly"
-                       type="text"
+                       type="hidden"
                        aria-readonly="false"
                 >
               </div>
@@ -1289,7 +1289,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
                        autocomplete="on"
                        readonly="readonly"
-                       type="text"
+                       type="hidden"
                        aria-readonly="false"
                 >
               </div>
@@ -1711,7 +1711,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
                        autocomplete="on"
                        readonly="readonly"
-                       type="text"
+                       type="hidden"
                        aria-readonly="false"
                 >
               </div>
@@ -2079,7 +2079,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
                        autocomplete="on"
                        readonly="readonly"
-                       type="text"
+                       type="hidden"
                        aria-readonly="false"
                 >
               </div>
@@ -2278,7 +2278,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
                        autocomplete="on"
                        readonly="readonly"
-                       type="text"
+                       type="hidden"
                        aria-readonly="false"
                 >
               </div>
@@ -2587,7 +2587,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
                        autocomplete="on"
                        readonly="readonly"
-                       type="text"
+                       type="hidden"
                        aria-readonly="false"
                 >
               </div>
@@ -2919,7 +2919,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
                        autocomplete="on"
                        readonly="readonly"
-                       type="text"
+                       type="hidden"
                        aria-readonly="false"
                 >
               </div>
@@ -3251,7 +3251,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
                        autocomplete="on"
                        readonly="readonly"
-                       type="text"
+                       type="hidden"
                        aria-readonly="false"
                 >
               </div>
@@ -3610,7 +3610,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
                        autocomplete="on"
                        readonly="readonly"
-                       type="text"
+                       type="hidden"
                        aria-readonly="false"
                 >
               </div>

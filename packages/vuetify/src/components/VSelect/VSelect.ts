@@ -402,6 +402,7 @@ export default baseMixins.extend<options>().extend({
       input.data!.domProps!.value = null
       input.data!.attrs!.readonly = true
       input.data!.attrs!['aria-readonly'] = String(this.readonly)
+      input.data!.attrs!.type = 'hidden'
       input.data!.on!.keypress = this.onKeyPress
 
       return input

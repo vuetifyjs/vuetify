@@ -15,7 +15,7 @@ exports[`VDataFooter.ts should render and match snapshot 1`] = `
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
                      autocomplete="on"
                      readonly="readonly"
-                     type="text"
+                     type="hidden"
                      aria-readonly="false"
               >
             </div>
@@ -85,7 +85,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
                      autocomplete="on"
                      readonly="readonly"
-                     type="text"
+                     type="hidden"
                      aria-readonly="false"
               >
             </div>
@@ -177,7 +177,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
                      autocomplete="on"
                      readonly="readonly"
-                     type="text"
+                     type="hidden"
                      aria-readonly="false"
               >
             </div>
@@ -269,7 +269,7 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
                      autocomplete="on"
                      readonly="readonly"
-                     type="text"
+                     type="hidden"
                      aria-readonly="false"
               >
             </div>
@@ -340,7 +340,7 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
                      autocomplete="on"
                      readonly="readonly"
-                     type="text"
+                     type="hidden"
                      aria-readonly="false"
               >
             </div>
