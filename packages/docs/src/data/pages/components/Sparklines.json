@@ -7,6 +7,15 @@
       "type": "section",
       "children": [
         {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "api",
           "value": ["v-sparkline"]
         }
