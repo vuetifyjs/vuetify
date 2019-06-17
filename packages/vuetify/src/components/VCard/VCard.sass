@@ -103,9 +103,11 @@
     transition: .2s opacity map-get($transition, 'fast-in-slow-out')
 
 .v-card--disabled
-  opacity: 0.6
   pointer-events: none
   user-select: none
+
+  > *:not(.v-card__progress)
+    opacity: 0.6
 
 .v-card--loading
   overflow: hidden
