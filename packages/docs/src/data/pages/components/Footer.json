@@ -38,9 +38,9 @@
           "value": [
             "simple/absolute",
             "simple/padless",
-            "intermediate/companyFooter",
-            "intermediate/indigoFooter",
-            "intermediate/tealFooter"
+            "intermediate/company-footer",
+            "intermediate/indigo-footer",
+            "intermediate/teal-footer"
           ]
         }
       ]

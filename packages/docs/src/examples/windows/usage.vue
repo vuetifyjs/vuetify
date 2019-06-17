@@ -9,8 +9,9 @@
       <v-item
         v-for="n in length"
         :key="n"
+        v-slot:default="{ active, toggle }"
       >
-        <div slot-scope="{ active, toggle }">
+        <div>
           <v-btn
             :input-value="active"
             icon

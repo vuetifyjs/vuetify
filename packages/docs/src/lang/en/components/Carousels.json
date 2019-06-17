@@ -9,19 +9,19 @@
       "header": "### Cycle",
       "desc": "With the **cycle** prop you can have your slides automatically transition to the next available every 6s (default)."
     },
-    "customTransition": {
+    "custom-transition": {
       "header": "### Custom transition",
       "desc": "The `v-carousel-item` component can have its **transition/reverse-transition** changed."
     },
-    "customIcons": {
+    "custom-icons": {
       "header": "### Custom delimiters",
       "desc": "Use any available icon as your carousel's slide delimiter."
     },
-    "hideDelimiters": {
+    "hide-delimiters": {
       "header": "### Hide delimiters",
       "desc": "You can hide the bottom controls with `hide-delimiters` prop."
     },
-    "hideControls": {
+    "hide-controls": {
       "header": "### Hide controls",
       "desc": "You can hide the carousel navigation controls with `:show-arrow=\"false\"`."
     },

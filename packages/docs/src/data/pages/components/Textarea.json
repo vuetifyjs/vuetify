@@ -30,7 +30,10 @@
       "children": [
         {
           "type": "examples",
-          "value": [ "autoGrow", "signupBox" ]
+          "value": [
+            "auto-grow",
+            "signup-box"
+          ]
         }
       ]
     },

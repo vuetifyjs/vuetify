@@ -7,15 +7,6 @@
       "type": "section",
       "children": [
         {
-          "type": "usage",
-          "value": "playground"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
           "type": "api",
           "value": ["v-sparkline"]
         }
@@ -25,11 +16,20 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "heartRate",
-            "dashboardCard",
-            "salesCard",
+            "heart-rate",
+            "dashboard-card",
+            "sales-card",
             "fill"
           ]
         }

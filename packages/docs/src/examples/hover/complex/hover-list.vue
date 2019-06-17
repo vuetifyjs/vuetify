@@ -7,9 +7,8 @@
           xs12
           sm4
         >
-          <v-hover>
+          <v-hover v-slot:default="{ hover }">
             <v-card
-              slot-scope="{ hover }"
               :elevation="hover ? 12 : 2"
               :class="{ 'on-hover': hover }"
             >

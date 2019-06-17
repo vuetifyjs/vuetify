@@ -5,7 +5,7 @@
     "usage": {
       "desc": "A simple text field with placeholder and/or label."
     },
-    "singleLine": {
+    "single-line": {
       "header": "### Single line",
       "desc": "Single line text fields do not float their label on focus or with data."
     },
@@ -13,7 +13,7 @@
       "header": "### Shaped",
       "desc": "`shaped` text fields are rounded if they're `outlined` and have higher `border-radius` if `filled`."
     },
-    "disabledAndReadonly": {
+    "disabled-and-readonly": {
       "header": "### Disabled and readonly",
       "desc": "Text fields can be `disabled` or `readonly`."
     },
@@ -25,19 +25,19 @@
       "header": "### Clearable",
       "desc": "When `clearable`, you can customize the clear icon with `clear-icon`."
     },
-    "iconEvents": {
+    "icon-events": {
       "header": "### Icon events",
       "desc": "`click:prepend`, `click:append`, `click:append-outer`, and `click:clear` will be emitted when you click on the respective icon. Note that these events will not be fired if the slot is used instead. "
     },
-    "iconSlots": {
+    "icon-slots": {
       "header": "### Icon slots",
       "desc": "Instead of using prepend / append / append-outer icons you can use slots to extend input's functionality."
     },
-    "labelSlot": {
+    "label-slot": {
       "header": "### Label slot",
       "desc": "Text field label can be defined in `label` slot - that will allow to use HTML content"
     },
-    "characterCounter": {
+    "character-counter": {
       "header": "### Character counter",
       "desc": "Use a `counter` prop to inform a user of the character limit. The counter does not perform any validation by itself. You will need to pair it with either the internal validation system, or a 3rd party library. You can use it on regular, box or outlined text fields."
     },
@@ -49,7 +49,7 @@
       "header": "### Validation",
       "desc": "Vuetify includes simple validation through the `rules` prop. The prop accepts an array of callbacks. While validating rules, the current v-model value will be passed to the callback. This callback should return either `true` or a `String`, the error message."
     },
-    "fullWidthWithCharacterCounter": {
+    "full-width-with-character-counter": {
       "header": "### Full-width text field with character counter",
       "desc": "Full width text fields allow you to create boundless inputs. In this example, we use a `v-divider` to separate the fields."
     },
@@ -57,11 +57,11 @@
       "header": "### Hint text",
       "desc": "The `hint` property on text fields adds the provided string beneath the text field. Using `persistent-hint` keeps the hint visible when the text field is not focused. Hint prop is **not** supported in solo mode."
     },
-    "prefixesAndSuffixes": {
+    "prefixes-and-suffixes": {
       "header": "### Prefixes & suffixes",
       "desc": "The `prefix` and `suffix` properties allows you to prepend and append inline non-modifiable text next to the text field."
     },
-    "customValidation": {
+    "custom-validation": {
       "header": "### Custom validation",
       "desc": "While the built in `v-form` or 3rd party plugin such as [vuelidate](https://github.com/monterail/vuelidate) or [vee-validation](https://github.com/logaretm/vee-validate) can help streamline your validation process, you can choose to simply control it yourself."
     },
@@ -77,7 +77,7 @@
       "header": "### Outline style",
       "desc": "Text fields can be used with an alternative outline design."
     },
-    "customColors": {
+    "custom-colors": {
       "header": "### Custom colors",
       "desc": "You can optionally change a text field into any color in the Material design palette. Below is an example implementation of a custom form with validation."
     },
@@ -85,7 +85,7 @@
       "header": "### Masks (using vue-the-mask)",
       "desc": "You can add masking functionality using a 3rd party library such as vue-the-mask."
     },
-    "progressBar": {
+    "progress-bar": {
       "header": "### Progress bar",
       "desc": "You can display a progress bar instead of the bottom line. You can use the default indeterminate progress having same color as the text field or designate a custom one using the `progress` slot"
     }

@@ -16,32 +16,32 @@
       "desc": "You can disable the menu. Disabled menus can't be opened.",
       "uninverted": true
     },
-    "offsetX": {
+    "offset-x": {
       "header": "### X offset",
       "desc": "Menu can be offsetted by X axis to make activator visible.",
       "uninverted": true
     },
-    "offsetY": {
+    "offset-y": {
       "header": "### Y offset",
       "desc": "Menu can be offsetted by Y axis to make activator visible.",
       "uninverted": true
     },
-    "closeOnClick": {
+    "close-on-click": {
       "header": "### Close on click",
       "desc": "Menu can be closed when lost focus.",
       "uninverted": true
     },
-    "closeOnContentClick": {
+    "close-on-content-click": {
       "header": "### Close on content click",
       "desc": "You can configure whether `v-menu` should be closed when clicked on its content.",
       "uninverted": true
     },
-    "absoluteWithoutActivator": {
+    "absolute-without-activator": {
       "header": "### Absolute position without activator",
       "desc": "Menus can also be used without an activator by using `absolute` together with the props `position-x` and `position-y`. Try right-clicking anywhere on the image.",
       "uninverted": true
     },
-    "menuActivatorTooltip": {
+    "menu-activator-tooltip": {
       "header": "### Menu with activator and tooltip",
       "desc": "With the new `v-slot` syntax, nested activators such as those seen with a `v-menu` and `v-tooltip` attached to the same activator button, need a particular setup in order to function correctly. **Note: this same syntax is used for other nested activators such as `v-dialog` w/ `v-tooltip`.**",
       "uninverted": true
@@ -56,7 +56,7 @@
       "desc": "Menus can be placed within almost any component.",
       "uninverted": true
     },
-    "customTransition": {
+    "custom-transition": {
       "header": "### Custom transitions",
       "desc": "Vuetify comes with 3 standard transitions, **scale**, **slide-x** and **slide-y**. You can also create your own and pass it as the transition argument. For an example of how the stock transitions are constructed, visit [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/util/helpers.ts).",
       "uninverted": true

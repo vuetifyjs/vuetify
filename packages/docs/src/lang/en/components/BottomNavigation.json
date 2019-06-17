@@ -25,11 +25,11 @@
       "header": "### Toggle",
       "desc": "As with other Vuetify components, you can control the display state with `v-model`."
     },
-    "hideOnScroll": {
+    "hide-on-scroll": {
       "header": "### Hide on scroll",
       "desc": "Hide-on-scroll hides `v-bottom-navigation` when target element is scrolled."
     },
-    "scrollThreshold": {
+    "scroll-threshold": {
       "header": "### Scroll threshold",
       "desc": "`scroll-threshold` property allows you to customize the threshold you can scroll before `v-bottom-navigation` disappears."
     }
