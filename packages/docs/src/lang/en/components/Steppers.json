@@ -9,7 +9,7 @@
       "header": "### Editable steps",
       "desc": "An editable step can be selected by a user at any point and will navigate them to that step."
     },
-    "nonEditable": {
+    "non-editable": {
       "header": "### Non-editable steps",
       "desc": "Non-editable steps force a user to process linearly through your process."
     },
@@ -29,11 +29,11 @@
       "header": "### Linear steppers",
       "desc": "Linear steppers will always move a user through your defined path."
     },
-    "nonLinear": {
+    "non-linear": {
       "header": "### Non-linear steppers",
       "desc": "Non-linear steppers allow the user to move through your process in whatever way they choose."
     },
-    "alternateLabels": {
+    "alternate-labels": {
       "header": "### Alternate labels",
       "desc": "Steppers also have an alternative label style which places the title under the step itself."
     },
@@ -41,11 +41,11 @@
       "header": "### Multi-line error state",
       "desc": "An error state can be displayed to notify the user of some action that must be taken."
     },
-    "alternateError": {
+    "alternate-error": {
       "header": "### Alternative label multi-line error state",
       "desc": "The error state can also be applied to the alternative label style."
     },
-    "verticalError": {
+    "vertical-error": {
       "header": "### Vertical multi-line error state",
       "desc": "The same state also applies to Vertical steppers."
     },

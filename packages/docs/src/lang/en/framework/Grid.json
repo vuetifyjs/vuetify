@@ -24,27 +24,27 @@
       "desc": "You can control the ordering of grid items. As with offsets, you can set different orders for different sizes. Design specialized screen layouts that accommodate to any application.",
       "uninverted": true
     },
-    "directionAndAlign": {
+    "direction-and-align": {
       "header": "### Direction and Align",
       "desc": "Designate the direction and alignment in a variety of ways. All of the available <kbd>flex-box</kbd> api is available through intuitive helper props.",
       "uninverted": true
     },
-    "rowColumnBreakpoint": {
+    "row-column-breakpoint": {
       "header": "### Row and column breakpoints",
       "desc": "Dynamically change your layout based upon resolution. **(resize your screen and watch the layout change to a `row` on small breakpoints)**",
       "uninverted": true
     },
-    "growShrink": {
+    "grow-shrink": {
       "header": "### Grow and Shrink",
       "desc": "By default, flex components will automatically fill the available space in a row or column. They will also shrink relative to the rest of the flex items in the flex container when there isn't enough space in the row or column. To disable the grow behavior, use the `shrink` attribute. To disable the shrink behavior, use the `grow` attribute. To disable both the grow and shrink behavior, use the `grow-shrink-0` attribute.",
       "uninverted": true
     },
-    "nestedGrid": {
+    "nested-grid": {
       "header": "### Nested grid",
       "desc": "Grids can be nested, similar to other frameworks, in order to achieve very custom layouts.",
       "uninverted": true
     },
-    "uniqueLayouts": {
+    "unique-layouts": {
       "header": "### Unique layouts",
       "desc": "The power and flexibility of the Vuetify grid system allows you to create amazing user interfaces.",
       "uninverted": true

@@ -40,10 +40,10 @@
             "simple/hint",
             "simple/success",
             "simple/error",
-            "simple/multiError",
+            "simple/multi-error",
             "intermediate/rules",
             "intermediate/slots",
-            "intermediate/slotEvents"
+            "intermediate/slot-events"
           ]
         }
       ]

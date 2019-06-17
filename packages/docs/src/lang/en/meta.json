@@ -534,7 +534,7 @@
     "description": "Baseline layout for the Vuetify.js framework",
     "keywords": "template, pre-made, vuetify layout"
   },
-  "examples/layouts/baselineFlipped": {
+  "examples/layouts/baseline-flipped": {
     "title": "Baseline Flipped layout example",
     "description": "Baseline Flipped layout for the Vuetify.js framework",
     "keywords": "template, pre-made, vuetify layout"
@@ -554,17 +554,17 @@
     "description": "Dark layout for the Vuetify.js framework",
     "keywords": "template, pre-made, vuetify layout"
   },
-  "examples/layouts/googleContacts": {
+  "examples/layouts/google-contacts": {
     "title": "Google Contacts layout example",
     "description": "Google Contacts layout for the Vuetify.js framework",
     "keywords": "template, pre-made, vuetify layout"
   },
-  "examples/layouts/googleKeep": {
+  "examples/layouts/google-keep": {
     "title": "Google Keep layout example",
     "description": "Google Keep layout for the Vuetify.js framework",
     "keywords": "template, pre-made, vuetify layout"
   },
-  "examples/layouts/googleYoutube": {
+  "examples/layouts/google-youtube": {
     "title": "Google Youtube layout example",
     "description": "Google Youtube layout for the Vuetify.js framework",
     "keywords": "template, pre-made, vuetify layout"

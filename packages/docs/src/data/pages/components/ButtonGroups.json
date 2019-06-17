@@ -34,7 +34,7 @@
             "simple/rounded",
             "simple/mandatory",
             "simple/multiple",
-            "intermediate/appBar",
+            "intermediate/app-bar",
             "intermediate/qwerty"
           ]
         }

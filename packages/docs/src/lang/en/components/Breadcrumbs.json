@@ -5,11 +5,11 @@
     "usage": {
       "desc": "By default, breadcrumbs use a text divider. This can be any string."
     },
-    "iconDividers": {
+    "icon-dividers": {
       "header": "### Icon dividers",
       "desc": "For the icon variant, breadcrumbs can use any icon in Material Design Icons."
     },
-    "itemSlot": {
+    "item-slot": {
       "header": "### Item slot",
       "desc": "You can use the scoped `item` slot to customize each breadcrumb."
     },

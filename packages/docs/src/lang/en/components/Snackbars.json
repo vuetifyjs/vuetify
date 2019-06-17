@@ -5,11 +5,11 @@
     "usage": {
       "desc": "`v-snackbar`'s in their simplest form display a temporary and closable notification for the user."
     },
-    "autoHeight": {
+    "auto-height": {
       "header": "### Auto Height",
       "desc": "The `auto-height` property gives `v-snackbar` the option for dynamic height based on it's content."
     },
-    "multiLine": {
+    "multi-line": {
       "header": "### Multi Line",
       "desc": "The `multi-line` property extends the height of the `v-snackbar` to give you a little more room for content."
     },

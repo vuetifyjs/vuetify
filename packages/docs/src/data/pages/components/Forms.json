@@ -37,9 +37,9 @@
           "type": "examples",
           "value": [
             "simple/rules",
-            "simple/validationWithSubmitAndClear",
+            "simple/validation-with-submit-and-clear",
             "intermediate/vuelidate",
-            "intermediate/veeValidate"
+            "intermediate/vee-validate"
           ]
         }
       ]

@@ -5,7 +5,7 @@
     "usage": {
       "desc": "A dialog contains two slots, one for its activator and one for its content (default). Good for Privacy Policies."
     },
-    "withoutActivator": {
+    "without-activator": {
       "header": "### Without activator",
       "desc": "If for some reason you are unable to use the activator slot, be sure to add the `.stop` modifier to the event that triggers the dialog.",
       "uninverted": true
