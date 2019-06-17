@@ -182,6 +182,31 @@ describe('VWindow.ts', () => {
     expect(wrapper.vm.internalIndex).toBe(4)
   })
 
+  it('should react to touch in rtl mode', async () => {
+    const wrapper = mountFunction({
+      propsData: { value: 1 },
+      slots: {
+        default: [
+          VWindowItem,
+          VWindowItem,
+          VWindowItem,
+          VWindowItem,
+          VWindowItem,
+        ],
+      },
+    })
+
+    wrapper.vm.$vuetify.rtl = true
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.internalIndex).toBe(1)
+
+    touch(wrapper).start(200, 0).end(0, 0)
+    expect(wrapper.vm.internalIndex).toBe(2)
+
+    touch(wrapper).start(0, 0).end(200, 0)
+    expect(wrapper.vm.internalIndex).toBe(1)
+  })
+
   it('should accept a custom touch object', async () => {
     const left = jest.fn()
     const right = jest.fn()
