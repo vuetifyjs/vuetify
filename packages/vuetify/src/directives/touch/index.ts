@@ -7,7 +7,7 @@ export interface TouchStoredHandlers {
   touchmove: (e: TouchEvent) => void
 }
 
-interface TouchHandlers {
+export interface TouchHandlers {
   start?: (wrapperEvent: TouchEvent & TouchWrapper) => void
   end?: (wrapperEvent: TouchEvent & TouchWrapper) => void
   move?: (wrapperEvent: TouchEvent & TouchWrapper) => void

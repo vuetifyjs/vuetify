@@ -7,10 +7,11 @@ import VIcon from '../VIcon'
 import { BaseItemGroup } from '../VItemGroup/VItemGroup'
 
 // Directives
-import Touch from '../../directives/touch'
+import Touch, { TouchHandlers } from '../../directives/touch'
 
 // Types
-import { VNode, VNodeDirective } from 'vue/types/vnode'
+import { VNode } from 'vue/types/vnode'
+import { PropValidator } from 'vue/types/options'
 
 /* @vue/component */
 export default BaseItemGroup.extend({
@@ -48,7 +49,7 @@ export default BaseItemGroup.extend({
     },
     showArrows: Boolean,
     showArrowsOnHover: Boolean,
-    touch: Object,
+    touch: Object as PropValidator<TouchHandlers | null>,
     touchless: Boolean,
     value: {
       required: false,
@@ -243,23 +244,13 @@ export default BaseItemGroup.extend({
     const data = {
       staticClass: 'v-window',
       class: this.classes,
-      directives: [] as VNodeDirective[],
-    }
-
-    if (!this.touchless) {
-      const value = this.touch || {
-        left: () => {
-          this.$vuetify.rtl ? this.prev() : this.next()
-        },
-        right: () => {
-          this.$vuetify.rtl ? this.next() : this.prev()
-        },
-      }
-
-      data.directives.push({
+      directives: this.touchless ? [] : [{
         name: 'touch',
-        value,
-      })
+        value: this.touch || {
+          left: this.next,
+          right: this.prev,
+        },
+      }],
     }
 
     return h('div', data, [this.genContainer()])
