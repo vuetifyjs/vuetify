@@ -23,8 +23,8 @@
     }
   },
   "props": {
-    "appendIcon": "The appended slot when arrows are shown",
-    "prependIcon": "The prepended slot when arrows are shown",
+    "nextIcon": "The appended slot when arrows are shown",
+    "prevIcon": "The prepended slot when arrows are shown",
     "showArrows": "Always show pagination arrows"
   }
 }
