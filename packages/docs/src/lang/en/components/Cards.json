@@ -5,11 +5,11 @@
     "usage": {
       "desc": "A card has 3 basic components, `v-card-title`, `v-card-text` and `v-card-actions`."
     },
-    "infoCard": {
+    "info-card": {
       "header": "### Information card",
       "desc": "Cards are entry points to more detailed information. To keep things concise, ensure to limit the number of actions the user can take."
     },
-    "mediaWithText": {
+    "media-with-text": {
       "header": "### Media with text",
       "desc": "Using the layout system, we can add custom text anywhere within the background."
     },
@@ -25,11 +25,11 @@
       "header": "### Grids",
       "desc": "Using grid lists, you can create beautiful layouts."
     },
-    "customActions": {
+    "custom-actions": {
       "header": "### Custom actions",
       "desc": "With a simple conditional, you can easily add supplementary text that is hidden until opened."
     },
-    "twitterCard": {
+    "twitter-card": {
       "header": "### Twitter card",
       "desc": "The `v-card` component has multiple children components that help you build complex examples without having to worry about spacing. This example is comprised of the `v-card-title`, `v-card-text` and `v-card-actions` components."
     },

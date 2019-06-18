@@ -38,11 +38,11 @@
             "playground",
             "offset",
             "order",
-            "directionAndAlign",
-            "rowColumnBreakpoint",
-            "growShrink",
-            "nestedGrid",
-            "uniqueLayouts",
+            "direction-and-align",
+            "row-column-breakpoint",
+            "grow-shrink",
+            "nested-grid",
+            "unique-layouts",
             "spacer",
             "tags"
           ]

@@ -8,47 +8,51 @@
         </v-radio-group>
       </v-flex>
 
-      <v-radio-group row>
-        <v-select
-          v-model="nextIcon"
-          class="mx-3"
-          :items="nextIcons"
-          label="next-icon"
-        ></v-select>
+      <v-layout row>
+        <v-flex xs3>
+          <v-select
+            v-model="prevIcon"
+            class="mx-3"
+            :items="prevIcons"
+            label="prev-icon"
+          ></v-select>
+        </v-flex>
 
-        <v-select
-          v-model="prevIcon"
-          class="mx-3"
-          :items="prevIcons"
-          label="prev-icon"
-        ></v-select>
-      </v-radio-group>
+        <v-flex xs3>
+          <v-select
+            v-model="nextIcon"
+            class="mx-3"
+            :items="nextIcons"
+            label="next-icon"
+          ></v-select>
+        </v-flex>
 
-      <v-flex>
-        <v-text-field
-          v-model="length"
-          label="Pagination length"
-          max="25"
-          min="1"
-          step="1"
-          style="width: 125px"
-          type="number"
-          @keydown="false"
-        ></v-text-field>
-      </v-flex>
+        <v-flex xs3>
+          <v-text-field
+            v-model="length"
+            label="Pagination length"
+            max="25"
+            min="1"
+            step="1"
+            style="width: 125px"
+            type="number"
+            @keydown="false"
+          ></v-text-field>
+        </v-flex>
 
-      <v-flex>
-        <v-text-field
-          v-model="totalVisible"
-          label="Total visible"
-          max="25"
-          min="1"
-          step="1"
-          style="width: 125px"
-          type="number"
-          @keydown="false"
-        ></v-text-field>
-      </v-flex>
+        <v-flex xs3>
+          <v-text-field
+            v-model="totalVisible"
+            label="Total visible"
+            max="25"
+            min="1"
+            step="1"
+            style="width: 125px"
+            type="number"
+            @keydown="false"
+          ></v-text-field>
+        </v-flex>
+      </v-layout>
     </v-layout>
 
     <v-pagination

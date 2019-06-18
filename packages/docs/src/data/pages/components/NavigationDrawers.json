@@ -32,7 +32,7 @@
           "type": "examples",
           "value": [
             "colored",
-            "permanentFloating",
+            "permanent-floating",
             "persistent",
             "mini",
             "temporary",

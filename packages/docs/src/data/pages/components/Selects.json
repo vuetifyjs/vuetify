@@ -41,10 +41,10 @@
             "simple/light",
             "simple/icons",
             "simple/multiple",
-            "simple/customTextAndValue",
-            "intermediate/menuProps",
+            "simple/custom-text-and-value",
+            "intermediate/menu-props",
             "intermediate/slots",
-            "intermediate/selectionAppearance"
+            "intermediate/selection-appearance"
           ]
         }
       ]

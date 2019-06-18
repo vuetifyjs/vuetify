@@ -27,8 +27,8 @@
         {
           "type": "examples",
           "value": [
-            { "file": "humanResources", "newIn": "1.5" },
-            "fileExplorer",
+            "human-resources",
+            "file-explorer",
             "directory",
             "hotspots"
           ]

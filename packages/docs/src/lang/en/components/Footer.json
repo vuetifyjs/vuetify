@@ -13,15 +13,15 @@
       "header": "### Padless Footer",
       "desc": "The `padless` prop removes all default padding from the footer component."
     },
-    "companyFooter": {
+    "company-footer": {
       "header": "### Company Footer",
       "desc": "The footer component as a basic company footer with links."
     },
-    "indigoFooter": {
+    "indigo-footer": {
       "header": "### Indigo Footer",
       "desc": "The footer component with Indigo background color and social media icons and button."
     },
-    "tealFooter": {
+    "teal-footer": {
       "header": "### Teal Footer",
       "desc": "The footer component with a Teal color header and columns and rows of links."
     }

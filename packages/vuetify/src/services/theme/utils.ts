@@ -10,12 +10,15 @@ export function parse (
   theme: Record<string, VuetifyThemeItem>,
   isItem = false
 ): VuetifyParsedTheme {
-  const colors = Object.keys(theme)
+  const { anchor, ...variant } = theme
+  const colors = Object.keys(variant)
   const parsedTheme: any = {}
 
   for (let i = 0; i < colors.length; ++i) {
     const name = colors[i]
     const value = theme[name]
+
+    if (value == null) continue
 
     if (isItem) {
       /* istanbul ignore else */
@@ -27,6 +30,10 @@ export function parse (
     } else {
       parsedTheme[name] = genVariations(name, colorToInt(value))
     }
+  }
+
+  if (!isItem) {
+    parsedTheme.anchor = anchor || parsedTheme.base || parsedTheme.primary.base
   }
 
   return parsedTheme
@@ -68,15 +75,17 @@ const genColorVariableName = (name: string, variant = 'base'): string => `--v-${
 const genColorVariable = (name: string, variant = 'base'): string => `var(${genColorVariableName(name, variant)})`
 
 export function genStyles (theme: VuetifyParsedTheme, cssVar = false): string {
-  const colors = Object.keys(theme)
+  const { anchor, ...variant } = theme
+  const colors = Object.keys(variant)
 
   if (!colors.length) return ''
 
   let variablesCss = ''
   let css = ''
 
-  const aColor = cssVar ? genColorVariable('primary') : theme.primary.base
+  const aColor = cssVar ? genColorVariable('anchor') : anchor
   css += `a { color: ${aColor}; }`
+  cssVar && (variablesCss += `  ${genColorVariableName('anchor')}: ${anchor};\n`)
 
   for (let i = 0; i < colors.length; ++i) {
     const name = colors[i]

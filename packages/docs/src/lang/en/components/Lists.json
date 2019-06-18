@@ -5,39 +5,39 @@
     "usage": {
       "desc": "Lists come in three main variations. **single-line** (default), **two-line** and **three-line**. The line declaration specifies the minimum height of the item and can also be controlled from `v-list` with the same prop."
     },
-    "avatarTitleAndAction": {
+    "avatar-title-and-action": {
       "header": "### Avatar with title and action",
       "desc": "Lists also contain slots for a more explicit approach. If you choose this approach, remember you must provide additional props for correct spacing. In this example, we have a tile with an avatar, so we must provide an `avatar` property."
     },
-    "iconTwoLinesAndAction": {
+    "icon-two-lines-and-action": {
       "header": "### Icon with 2 lines and action",
       "desc": "Lists can contain subheaders, dividers, and can contain 1 or more lines. The subtitle will overflow with ellipsis if it extends past one line."
     },
-    "avatarThreeLines": {
+    "avatar-three-lines": {
       "header": "### Avatar with 3 lines",
       "desc": "For three line lists, the subtitle will clamp vertically at 2 lines and then ellipsis."
     },
-    "avatarSubheaderTitleAndAction": {
+    "avatar-subheader-title-and-action": {
       "header": "### Avatar with title and action",
       "desc": "Here we combine **v-list-item-avatar** and **v-list-item-icon** in a single-line list."
     },
-    "subheadingsAndDividers": {
+    "subheadings-and-dividers": {
       "header": "### Subheadings and dividers",
       "desc": "Lists can contain multiple subheaders and dividers."
     },
-    "cardList": {
+    "card-list": {
       "header": "### Card image with toolbar and list",
       "desc": "A list can be combined with a card."
     },
-    "titleSubtitleActionsAndActionText": {
+    "title-subtitle-actions-and-action-text": {
       "header": "### Title with sub-title, actions and action-text",
       "desc": "A list can contain a stack within an action. This is useful when you need to display meta text next to your action item."
     },
-    "actionTitleAndSubtitle": {
+    "action-title-and-subtitle": {
       "header": "### Action with title and sub-title",
       "desc": "A **three-line** list with actions. Utilizing [v-list-item-group](/components/list-item-groups), easily connect actions to your tiles."
     },
-    "expansionLists": {
+    "expansion-lists": {
       "header": "### Expansion Lists",
       "desc": "A list can contain a group of items which will display on click. Expansion lists are also used within the [v-navigation-drawer](/components/navigation-drawers) component."
     },

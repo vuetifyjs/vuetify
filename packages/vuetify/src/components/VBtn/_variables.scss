@@ -10,8 +10,8 @@ $btn-sizes: (
   'x-small': 20,
   'small': 28,
   'default': 36,
-  'large': 54,
-  'x-large': 70
+  'large': 44,
+  'x-large': 52
 ) !default;
 $btn-transition-duration: 0.28s !default;
 $btn-transition-fn: map-get($transition, 'fast-out-slow-in') !default;

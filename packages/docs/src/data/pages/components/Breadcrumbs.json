@@ -41,8 +41,8 @@
           "value": [
             "simple/large",
             "simple/divider",
-            "intermediate/iconDividers",
-            "intermediate/itemSlot"
+            "intermediate/icon-dividers",
+            "intermediate/item-slot"
           ]
         }
       ]
