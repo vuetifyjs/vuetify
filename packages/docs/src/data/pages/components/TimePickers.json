@@ -31,11 +31,11 @@
         {
           "type": "examples",
           "value": [
-            "time-colorable",
-            "time-dialog-and-menu",
-            "time-24h-format",
-            "time-allowed-times",
-            "time-width"
+            "simple/time-colorable",
+            "simple/time-24h-format",
+            "simple/time-allowed-times",
+            "simple/time-width",
+            "intermediate/time-dialog-and-menu"
           ]
         }
       ]
