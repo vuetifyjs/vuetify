@@ -2,11 +2,14 @@
 
 exports[`VSelect.ts should add color to selected index 1`] = `
 
-<div role="combobox"
-     class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
->
+<div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
   <div class="v-input__control">
-    <div class="v-input__slot">
+    <div role="button"
+         aria-haspopup="listbox"
+         aria-expanded="false"
+         aria-owns="computed-id-157"
+         class="v-input__slot"
+    >
       <div class="v-select__slot">
         <div class="v-select__selections">
           <div class="v-select__selection v-select__selection--comma primary--text">
@@ -15,7 +18,7 @@ exports[`VSelect.ts should add color to selected index 1`] = `
           <input autocomplete="on"
                  readonly="readonly"
                  type="text"
-                 aria-readonly="false"
+                 aria-readonly="true"
           >
         </div>
         <div class="v-input__append-inner">

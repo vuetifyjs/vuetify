@@ -58,6 +58,7 @@ export default mixins(
       type: Array,
       default: () => ([]),
     } as PropValidator<NodeArray>,
+    dense: Boolean,
     items: {
       type: Array,
       default: () => ([]),
@@ -382,6 +383,7 @@ export default mixins(
       staticClass: 'v-treeview',
       class: {
         'v-treeview--hoverable': this.hoverable,
+        'v-treeview--dense': this.dense,
         ...this.themeClasses,
       },
     }, children)

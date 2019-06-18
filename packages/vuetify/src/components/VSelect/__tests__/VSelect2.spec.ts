@@ -197,7 +197,7 @@ describe('VSelect.ts', () => {
   })
 
   // Inspired by https://github.com/vuetifyjs/vuetify/pull/1425 - Thanks @kevmo314
-  it('should open the select when focused and enter, space, up or down are pressed', async () => {
+  it('should open the select when focused and enter, space are pressed', async () => {
     const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
@@ -207,7 +207,7 @@ describe('VSelect.ts', () => {
 
     const input = wrapper.find('input')
 
-    for (const key of ['up', 'down', 'space', 'enter']) {
+    for (const key of ['space', 'enter']) {
       input.trigger('focus')
       await wrapper.vm.$nextTick()
       expect(wrapper.vm.isMenuActive).toBe(false)
@@ -406,7 +406,11 @@ describe('VSelect.ts', () => {
   })
 
   it('should react to different key down', async () => {
-    const wrapper = mountFunction()
+    const wrapper = mountFunction({
+      propsData: {
+        items: [1, 2, 3, 4],
+      },
+    })
     const blur = jest.fn()
     wrapper.vm.$on('blur', blur)
 
@@ -418,13 +422,31 @@ describe('VSelect.ts', () => {
     expect(blur).toHaveBeenCalled()
     expect(wrapper.vm.isMenuActive).toBe(false)
 
-    for (const keyCode of [keyCodes.enter, keyCodes.space, keyCodes.up, keyCodes.down]) {
+    // Enter and Space
+    for (const keyCode of [keyCodes.enter, keyCodes.space]) {
       event.keyCode = keyCode
       wrapper.vm.onKeyDown(event)
       expect(wrapper.vm.isMenuActive).toBe(true)
 
-      wrapper.vm.isMenuActive = false
+      // Escape
+      event.keyCode = keyCodes.esc
+      wrapper.vm.onKeyDown(event)
       expect(wrapper.vm.isMenuActive).toBe(false)
     }
+
+    // Down arrow
+    event.keyCode = keyCodes.down
+    expect(wrapper.vm.internalValue).toBeUndefined()
+
+    wrapper.vm.onKeyDown(event)
+    expect(wrapper.vm.internalValue).toBe(1)
+
+    wrapper.vm.onKeyDown(event)
+    expect(wrapper.vm.internalValue).toBe(2)
+
+    // Up arrow
+    event.keyCode = keyCodes.up
+    wrapper.vm.onKeyDown(event)
+    expect(wrapper.vm.internalValue).toBe(1)
   })
 })

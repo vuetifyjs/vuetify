@@ -23,11 +23,14 @@ exports[`VDataTable.ts should render 1`] = `
   <div class="v-data-footer">
     <div class="v-data-footer__select">
       Rows per page:
-      <div role="combobox"
-           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-      >
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
-          <div class="v-input__slot">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="computed-id-6"
+               class="v-input__slot"
+          >
             <div class="v-select__slot">
               <div class="v-select__selections">
                 <div class="v-select__selection v-select__selection--comma">
@@ -37,7 +40,7 @@ exports[`VDataTable.ts should render 1`] = `
                        autocomplete="on"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="false"
+                       aria-readonly="true"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -60,8 +63,8 @@ exports[`VDataTable.ts should render 1`] = `
       –
     </div>
     <div class="v-data-footer__icons-before">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
@@ -75,8 +78,8 @@ exports[`VDataTable.ts should render 1`] = `
       </button>
     </div>
     <div class="v-data-footer__icons-after">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
@@ -144,11 +147,14 @@ exports[`VDataTable.ts should render loading state 1`] = `
   <div class="v-data-footer">
     <div class="v-data-footer__select">
       Rows per page:
-      <div role="combobox"
-           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-      >
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
-          <div class="v-input__slot">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="computed-id-342"
+               class="v-input__slot"
+          >
             <div class="v-select__slot">
               <div class="v-select__selections">
                 <div class="v-select__selection v-select__selection--comma">
@@ -158,7 +164,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
                        autocomplete="on"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="false"
+                       aria-readonly="true"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -181,8 +187,8 @@ exports[`VDataTable.ts should render loading state 1`] = `
       –
     </div>
     <div class="v-data-footer__icons-before">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
@@ -196,8 +202,8 @@ exports[`VDataTable.ts should render loading state 1`] = `
       </button>
     </div>
     <div class="v-data-footer__icons-after">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
@@ -345,11 +351,14 @@ exports[`VDataTable.ts should render loading state 2`] = `
   <div class="v-data-footer">
     <div class="v-data-footer__select">
       Rows per page:
-      <div role="combobox"
-           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-      >
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
-          <div class="v-input__slot">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="computed-id-368"
+               class="v-input__slot"
+          >
             <div class="v-select__slot">
               <div class="v-select__selections">
                 <div class="v-select__selection v-select__selection--comma">
@@ -359,7 +368,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
                        autocomplete="on"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="false"
+                       aria-readonly="true"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -382,8 +391,8 @@ exports[`VDataTable.ts should render loading state 2`] = `
       –
     </div>
     <div class="v-data-footer__icons-before">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
@@ -397,8 +406,8 @@ exports[`VDataTable.ts should render loading state 2`] = `
       </button>
     </div>
     <div class="v-data-footer__icons-after">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
@@ -628,11 +637,14 @@ exports[`VDataTable.ts should render virtual table 1`] = `
   <div class="v-data-footer">
     <div class="v-data-footer__select">
       Rows per page:
-      <div role="combobox"
-           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-      >
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
-          <div class="v-input__slot">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="computed-id-85"
+               class="v-input__slot"
+          >
             <div class="v-select__slot">
               <div class="v-select__selections">
                 <div class="v-select__selection v-select__selection--comma">
@@ -642,7 +654,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                        autocomplete="on"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="false"
+                       aria-readonly="true"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -665,8 +677,8 @@ exports[`VDataTable.ts should render virtual table 1`] = `
       1-5 of 10
     </div>
     <div class="v-data-footer__icons-before">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
@@ -813,11 +825,14 @@ exports[`VDataTable.ts should render with body slot 1`] = `
   <div class="v-data-footer">
     <div class="v-data-footer__select">
       Rows per page:
-      <div role="combobox"
-           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-      >
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
-          <div class="v-input__slot">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="computed-id-59"
+               class="v-input__slot"
+          >
             <div class="v-select__slot">
               <div class="v-select__selections">
                 <div class="v-select__selection v-select__selection--comma">
@@ -827,7 +842,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
                        autocomplete="on"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="false"
+                       aria-readonly="true"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -850,8 +865,8 @@ exports[`VDataTable.ts should render with body slot 1`] = `
       1-5 of 10
     </div>
     <div class="v-data-footer__icons-before">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
@@ -1097,11 +1112,14 @@ exports[`VDataTable.ts should render with data 1`] = `
   <div class="v-data-footer">
     <div class="v-data-footer__select">
       Rows per page:
-      <div role="combobox"
-           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-      >
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
-          <div class="v-input__slot">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="computed-id-32"
+               class="v-input__slot"
+          >
             <div class="v-select__slot">
               <div class="v-select__selections">
                 <div class="v-select__selection v-select__selection--comma">
@@ -1111,7 +1129,7 @@ exports[`VDataTable.ts should render with data 1`] = `
                        autocomplete="on"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="false"
+                       aria-readonly="true"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -1134,8 +1152,8 @@ exports[`VDataTable.ts should render with data 1`] = `
       1-5 of 10
     </div>
     <div class="v-data-footer__icons-before">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
@@ -1276,11 +1294,14 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
   <div class="v-data-footer">
     <div class="v-data-footer__select">
       Rows per page:
-      <div role="combobox"
-           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-      >
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
-          <div class="v-input__slot">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="computed-id-319"
+               class="v-input__slot"
+          >
             <div class="v-select__slot">
               <div class="v-select__selections">
                 <div class="v-select__selection v-select__selection--comma">
@@ -1290,7 +1311,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
                        autocomplete="on"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="false"
+                       aria-readonly="true"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -1313,8 +1334,8 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
       1-5 of 10
     </div>
     <div class="v-data-footer__icons-before">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
@@ -1698,11 +1719,14 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
   <div class="v-data-footer">
     <div class="v-data-footer__select">
       Rows per page:
-      <div role="combobox"
-           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-      >
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
-          <div class="v-input__slot">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="computed-id-223"
+               class="v-input__slot"
+          >
             <div class="v-select__slot">
               <div class="v-select__selections">
                 <div class="v-select__selection v-select__selection--comma">
@@ -1712,7 +1736,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                        autocomplete="on"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="false"
+                       aria-readonly="true"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -1735,8 +1759,8 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
       1-5 of 10
     </div>
     <div class="v-data-footer__icons-before">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
@@ -2066,11 +2090,14 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
   <div class="v-data-footer">
     <div class="v-data-footer__select">
       Rows per page:
-      <div role="combobox"
-           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-      >
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
-          <div class="v-input__slot">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="computed-id-292"
+               class="v-input__slot"
+          >
             <div class="v-select__slot">
               <div class="v-select__selections">
                 <div class="v-select__selection v-select__selection--comma">
@@ -2080,7 +2107,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                        autocomplete="on"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="false"
+                       aria-readonly="true"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -2103,8 +2130,8 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
       1-5 of 10
     </div>
     <div class="v-data-footer__icons-before">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
@@ -2265,11 +2292,14 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
   <div class="v-data-footer">
     <div class="v-data-footer__select">
       Rows per page:
-      <div role="combobox"
-           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-      >
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
-          <div class="v-input__slot">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="computed-id-251"
+               class="v-input__slot"
+          >
             <div class="v-select__slot">
               <div class="v-select__selections">
                 <div class="v-select__selection v-select__selection--comma">
@@ -2279,7 +2309,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
                        autocomplete="on"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="false"
+                       aria-readonly="true"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -2302,8 +2332,8 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
       1-5 of 10
     </div>
     <div class="v-data-footer__icons-before">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
@@ -2574,11 +2604,14 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
   <div class="v-data-footer">
     <div class="v-data-footer__select">
       Rows per page:
-      <div role="combobox"
-           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-      >
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
-          <div class="v-input__slot">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="computed-id-176"
+               class="v-input__slot"
+          >
             <div class="v-select__slot">
               <div class="v-select__selections">
                 <div class="v-select__selection v-select__selection--comma">
@@ -2588,7 +2621,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
                        autocomplete="on"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="false"
+                       aria-readonly="true"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -2611,8 +2644,8 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
       1-5 of 10
     </div>
     <div class="v-data-footer__icons-before">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
@@ -2906,11 +2939,14 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
   <div class="v-data-footer">
     <div class="v-data-footer__select">
       Rows per page:
-      <div role="combobox"
-           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-      >
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
-          <div class="v-input__slot">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="computed-id-116"
+               class="v-input__slot"
+          >
             <div class="v-select__slot">
               <div class="v-select__selections">
                 <div class="v-select__selection v-select__selection--comma">
@@ -2920,7 +2956,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
                        autocomplete="on"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="false"
+                       aria-readonly="true"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -2943,8 +2979,8 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
       1-5 of 10
     </div>
     <div class="v-data-footer__icons-before">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
@@ -3238,11 +3274,14 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
   <div class="v-data-footer">
     <div class="v-data-footer__select">
       Rows per page:
-      <div role="combobox"
-           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-      >
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
-          <div class="v-input__slot">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="computed-id-116"
+               class="v-input__slot"
+          >
             <div class="v-select__slot">
               <div class="v-select__selections">
                 <div class="v-select__selection v-select__selection--comma">
@@ -3252,7 +3291,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
                        autocomplete="on"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="false"
+                       aria-readonly="true"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -3275,8 +3314,8 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
       1-5 of 10
     </div>
     <div class="v-data-footer__icons-before">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
@@ -3597,11 +3636,14 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
   <div class="v-data-footer">
     <div class="v-data-footer__select">
       Rows per page:
-      <div role="combobox"
-           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-      >
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
-          <div class="v-input__slot">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="computed-id-148"
+               class="v-input__slot"
+          >
             <div class="v-select__slot">
               <div class="v-select__selections">
                 <div class="v-select__selection v-select__selection--comma">
@@ -3611,7 +3653,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
                        autocomplete="on"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="false"
+                       aria-readonly="true"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -3634,8 +3676,8 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
       1-5 of 10
     </div>
     <div class="v-data-footer__icons-before">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
