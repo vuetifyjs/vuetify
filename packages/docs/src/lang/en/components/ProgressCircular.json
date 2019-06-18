@@ -5,19 +5,19 @@
     "usage": {
       "desc": "By default, progress circular uses the applications secondary color."
     },
-    "circularColored": {
+    "circular-colored": {
       "header": "### Colored",
       "desc": "Alternate colors can be applied to `v-progress-circular` using the `color` prop."
     },
-    "circularIndeterminate": {
+    "circular-indeterminate": {
       "header": "### Indeterminate",
       "desc": "Using the `indeterminate` prop, a `v-progress-circular` continues to animate indefinitely."
     },
-    "circularSizeAndWidth": {
+    "circular-size-and-width": {
       "header": "### Size & Width",
       "desc": "The `size` and `width` props allow you to easily alter the size and width of the `v-progress-circular` component."
     },
-    "circularRotate": {
+    "circular-rotate": {
       "header": "### Rotate",
       "desc": "The `rotate` prop gives you the ability to customize the `v-progress-circular`'s origin."
     }

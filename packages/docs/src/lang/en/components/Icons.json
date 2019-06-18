@@ -5,7 +5,7 @@
     "usage": {
       "desc": "Icons come in two themes (light and dark), and five different sizes (x-small, small, medium (default), large, and x-large)."
     },
-    "fontAwesome": {
+    "font-awesome": {
       "header": "### Font Awesome",
       "desc": "[Font Awesome](http://fontawesome.io/icons/) is also supported. Simply use the `fa-` prefixed icon name. Please note that you still need to include the Font Awesome icons in your project. For more information on how to install it, please navigate to the [installation page](/framework/icons#install-font-awesome-5-icons)"
     },
@@ -25,7 +25,7 @@
       "header": "### Clickable",
       "desc": "Binding any click event to `v-icon` will automatically change the cursor to a pointer."
     },
-    "mdiSvg": {
+    "mdi-svg": {
       "header": "### MDI SVG",
       "desc": "You can manually import only the icons you use when using the [@mdi/js](https://www.npmjs.com/package/@mdi/js) package. If you want to use SVG icons with `VIcon` component, read about using them [here](/framework/icons#install-material-design-icons-js-svg)."
     }

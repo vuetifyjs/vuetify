@@ -31,6 +31,7 @@ const baseMixins = mixins(
 
 interface options extends ExtractVue<typeof baseMixins> {
   $el: HTMLElement
+  isInMenu: boolean
 }
 
 /* @vue/component */
@@ -42,6 +43,12 @@ export default baseMixins.extend<options>().extend({
   },
 
   inheritAttrs: false,
+
+  inject: {
+    isInMenu: {
+      default: false,
+    },
+  },
 
   props: {
     activeClass: {
@@ -104,6 +111,24 @@ export default baseMixins.extend<options>().extend({
 
       this.to || this.toggle()
     },
+    genAttrs () {
+      const attrs: Record<string, any> = {
+        'aria-disabled': this.disabled ? true : undefined,
+        'aria-selected': String(this.isActive),
+        tabindex: this.isClickable && !this.disabled ? 0 : -1,
+        ...this.$attrs,
+      }
+
+      if (this.$attrs.role) {
+        // do nothing, role already provided
+      } else if (this.listItemGroup) {
+        attrs.role = 'listitem'
+      } else if (this.isInMenu) {
+        attrs.role = this.isClickable ? 'menuitem' : undefined
+      }
+
+      return attrs
+    },
   },
 
   render (h): VNode {
@@ -111,9 +136,7 @@ export default baseMixins.extend<options>().extend({
 
     data.attrs = {
       ...data.attrs,
-      'aria-selected': String(this.isActive),
-      role: 'listitem',
-      tabindex: tag === 'a' && this.isClickable ? 0 : -1,
+      ...this.genAttrs(),
     }
     data.on = {
       ...data.on,

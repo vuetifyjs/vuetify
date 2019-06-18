@@ -37,19 +37,19 @@
         {
           "type": "examples",
           "value": [
-            "fixedTabs",
+            "fixed-tabs",
             "right",
             "content",
-            "dynamicHeight",
-            "iconsAndText",
+            "dynamic-height",
+            "icons-and-text",
             "desktop",
-            "alignWithTitle",
+            "align-with-title",
             "grow",
             {
-              "file": "centerActive",
+              "file": "center-active",
               "newIn": "2.0"
             },
-            "overflowToMenu",
+            "overflow-to-menu",
             "pagination",
             "icons",
             "dynamic",

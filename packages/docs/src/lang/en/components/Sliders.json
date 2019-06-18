@@ -9,7 +9,7 @@
       "header": "### Thumb",
       "desc": "You can display a `thumb-label` while sliding or always. It It can have a custom color by setting `thumb-color` and a custom size with `thumb-size`. With `always-dirty` its color will never change, even when on `min` value."
     },
-    "customThumb": {
+    "custom-thumb": {
       "header": "### Custom Range slider",
       "desc": " Using the `tick-labels` prop along with a scoped slot, you can create a very customized solution."
     },
@@ -25,11 +25,11 @@
       "header": "### Icons",
       "desc": "You can add icons to the slider with the `append-icon` and `prepend-icon` props. With `@click:append` and `@click:prepend` you can trigger a callback function when click the icon."
     },
-    "editableNumericValue": {
+    "editable-numeric-value": {
       "header": "### With an editable numeric value",
       "desc": "Sliders can be combined with other components for a better display."
     },
-    "customColors": {
+    "custom-colors": {
       "header": "### Custom colors",
       "desc": "You can set the colors of the slider using the props `color`, `track-color` and `thumb-color`."
     },
@@ -41,7 +41,7 @@
       "header": "### Range",
       "desc": "Range sliders."
     },
-    "minMax": {
+    "min-max": {
       "header": "### Min & Max values",
       "desc": "You can set `min` and `max` values of sliders."
     },
@@ -61,7 +61,7 @@
       "header": "### Readonly",
       "desc": "You cannot interact with `readonly` sliders, but they look as ordinary ones."
     },
-    "inverseLabel": {
+    "inverse-label": {
       "header": "### Inverse label",
       "desc": "`v-slider` with `inverse-label` property displays label at the end of it."
     }

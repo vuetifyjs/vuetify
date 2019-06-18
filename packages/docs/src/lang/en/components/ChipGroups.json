@@ -10,7 +10,7 @@
       "header": "### Toothbrush card",
       "desc": "Chip groups allow the creation of custom interfaces that perform the same actions as an item group or radio controls, but are stylistically different."
     },
-    "filterResults": {
+    "filter-results": {
       "header": "### Filter results",
       "desc": "Easily create chip groups that provide additional feedback with the **filter** prop. This creates an alternative visual style that communicates to the user that the chip is selected."
     },

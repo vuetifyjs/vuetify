@@ -43,16 +43,16 @@
         {
           "type": "examples",
           "value": [
-            "simple/minMax",
+            "simple/min-max",
             "simple/disabled",
             "simple/readonly",
             "simple/icons",
             "simple/vertical",
             "simple/thumb",
-            "simple/inverseLabel",
-            "simple/customThumb",
+            "simple/inverse-label",
+            "simple/custom-thumb",
             "simple/ticks",
-            "simple/customColors",
+            "simple/custom-colors",
             "simple/range",
             "intermediate/validation",
             "intermediate/metronome"

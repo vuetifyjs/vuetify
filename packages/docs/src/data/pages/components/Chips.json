@@ -47,10 +47,10 @@
             "simple/sizes",
             "simple/draggable",
             "simple/filter",
-            "simple/noRipple",
+            "simple/no-ripple",
             "intermediate/closable",
-            "intermediate/actionChips",
-            "intermediate/inSelects",
+            "intermediate/action-chips",
+            "intermediate/in-selects",
             "complex/photos",
             "complex/filtering",
             "complex/expandable"

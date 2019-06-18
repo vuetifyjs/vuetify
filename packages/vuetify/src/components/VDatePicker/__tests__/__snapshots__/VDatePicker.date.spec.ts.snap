@@ -3067,8 +3067,8 @@ exports[`VDatePicker.ts should render disabled picker 1`] = `
   >
     <div>
       <div class="v-date-picker-header v-date-picker-header--disabled theme--light">
-        <button disabled="disabled"
-                type="button"
+        <button type="button"
+                disabled="disabled"
                 class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
         >
           <span class="v-btn__content">
@@ -3085,8 +3085,8 @@ exports[`VDatePicker.ts should render disabled picker 1`] = `
             </button>
           </div>
         </div>
-        <button disabled="disabled"
-                type="button"
+        <button type="button"
+                disabled="disabled"
                 class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
         >
           <span class="v-btn__content">

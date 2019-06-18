@@ -20,6 +20,7 @@
 
       <v-stepper-step
         step="3"
+        editable
       >
         Create an ad
       </v-stepper-step>
