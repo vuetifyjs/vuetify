@@ -34,20 +34,29 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "editable",
-            "non-editable",
-            "optional",
-            "horizontal",
-            "vertical",
-            "linear",
-            "non-linear",
-            "alternate-labels",
-            "error",
-            "alternate-error",
-            "vertical-error",
-            "dynamic"
+            "simple/editable",
+            "simple/non-editable",
+            "simple/optional",
+            "simple/horizontal",
+            "simple/vertical",
+            "simple/linear",
+            "simple/non-linear",
+            "simple/alternate-labels",
+            "simple/error",
+            "simple/alternate-error",
+            "simple/vertical-error",
+            "intermediate/dynamic"
           ]
         }
       ]

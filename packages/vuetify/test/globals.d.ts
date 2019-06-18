@@ -9,3 +9,7 @@ declare global {
     }
   }
 }
+
+declare global {
+  interface KeyboardEventInit { keyCode?: number }
+}
