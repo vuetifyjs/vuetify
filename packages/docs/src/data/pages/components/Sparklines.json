@@ -7,6 +7,15 @@
       "type": "section",
       "children": [
         {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "api",
           "value": ["v-sparkline"]
         }
@@ -27,10 +36,10 @@
         {
           "type": "examples",
           "value": [
-            "heart-rate",
-            "dashboard-card",
-            "sales-card",
-            "fill"
+            "simple/fill",
+            "intermediate/heart-rate",
+            "intermediate/dashboard-card",
+            "intermediate/sales-card"
           ]
         }
       ]
