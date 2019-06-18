@@ -9,7 +9,7 @@ import { inject as RegistrableInject } from '../../mixins/registrable'
 
 // Utils
 import mixins from '../../util/mixins'
-import { getObjectValueByPath } from '../../util/helpers'
+import { getObjectValueByPath, keyCodes } from '../../util/helpers'
 import { PropValidator } from 'vue/types/options'
 
 // Types
@@ -150,10 +150,29 @@ export default mixins<options>(
         this.hasLoaded = true
       })
     },
-    open () {
+    toggleOpen () {
       this.isOpen = !this.isOpen
       this.treeview.updateOpen(this.key, this.isOpen)
       this.treeview.emitOpen()
+    },
+    toggleActive () {
+      this.isActive = !this.isActive
+      this.treeview.updateActive(this.key, this.isActive)
+      this.treeview.emitActive()
+    },
+    toggleSelected () {
+      if (this.isLoading) return
+
+      this.checkChildren().then(() => {
+        // We nextTick here so that items watch in VTreeview has a chance to run first
+        this.$nextTick(() => {
+          this.isSelected = !this.isSelected
+          this.isIndeterminate = false
+
+          this.treeview.updateSelected(this.key, this.isSelected)
+          this.treeview.emitSelected()
+        })
+      })
     },
     genLabel () {
       const children = []
@@ -191,7 +210,7 @@ export default mixins<options>(
 
             if (this.isLoading) return
 
-            this.checkChildren().then(() => this.open())
+            this.checkChildren().then(() => this.toggleOpen())
           },
         },
       }, [this.isLoading ? this.loadingIcon : this.expandIcon])
@@ -205,19 +224,7 @@ export default mixins<options>(
         on: {
           click: (e: MouseEvent) => {
             e.stopPropagation()
-
-            if (this.isLoading) return
-
-            this.checkChildren().then(() => {
-              // We nextTick here so that items watch in VTreeview has a chance to run first
-              this.$nextTick(() => {
-                this.isSelected = !this.isSelected
-                this.isIndeterminate = false
-
-                this.treeview.updateSelected(this.key, this.isSelected)
-                this.treeview.emitSelected()
-              })
-            })
+            this.toggleSelected()
           },
         },
       }, [this.computedIcon])
@@ -233,14 +240,29 @@ export default mixins<options>(
         class: {
           [this.activeClass]: this.isActive,
         },
+        attrs: {
+          tabIndex: 0,
+        },
         on: {
           click: () => {
             if (this.openOnClick && this.children) {
-              this.open()
+              this.toggleOpen()
             } else if (this.activatable) {
-              this.isActive = !this.isActive
-              this.treeview.updateActive(this.key, this.isActive)
-              this.treeview.emitActive()
+              this.toggleActive()
+            }
+          },
+          keydown: (e: KeyboardEvent) => {
+            if (e.keyCode === keyCodes.enter && this.children) {
+              e.preventDefault()
+              this.toggleOpen()
+            } else if (e.keyCode === keyCodes.space) {
+              if (this.selectable) {
+                e.preventDefault()
+                this.toggleSelected()
+              } else if (this.activatable) {
+                e.preventDefault()
+                this.toggleActive()
+              }
             }
           },
         },
