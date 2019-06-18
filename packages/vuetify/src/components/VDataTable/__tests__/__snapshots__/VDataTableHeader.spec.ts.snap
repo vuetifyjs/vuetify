@@ -541,7 +541,7 @@ exports[`VDataTableHeader.ts mobile should render 1`] = `
                   <input aria-label="Sort by"
                          autocomplete="on"
                          readonly="readonly"
-                         type="text"
+                         type="hidden"
                          aria-readonly="true"
                   >
                 </div>
@@ -603,7 +603,7 @@ exports[`VDataTableHeader.ts mobile should render with data-table-select header 
                   <input aria-label="Sort by"
                          autocomplete="on"
                          readonly="readonly"
-                         type="text"
+                         type="hidden"
                          aria-readonly="true"
                   >
                 </div>
@@ -667,7 +667,7 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
                   <input aria-label="Sort by"
                          autocomplete="on"
                          readonly="readonly"
-                         type="text"
+                         type="hidden"
                          aria-readonly="true"
                   >
                 </div>
@@ -718,7 +718,7 @@ exports[`VDataTableHeader.ts mobile should work with showGroupBy 1`] = `
                   <input aria-label="Sort by"
                          autocomplete="on"
                          readonly="readonly"
-                         type="text"
+                         type="hidden"
                          aria-readonly="true"
                   >
                 </div>
@@ -782,7 +782,7 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
                   <input aria-label="Sort by"
                          autocomplete="on"
                          readonly="readonly"
-                         type="text"
+                         type="hidden"
                          aria-readonly="true"
                   >
                 </div>
@@ -846,7 +846,7 @@ exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
                   <input aria-label="Sort by"
                          autocomplete="on"
                          readonly="readonly"
-                         type="text"
+                         type="hidden"
                          aria-readonly="true"
                   >
                 </div>
