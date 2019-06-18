@@ -33,9 +33,9 @@
         {
           "type": "examples",
           "value": [
-            "window",
-            "themes",
-            "lights-out"
+            "simple/window",
+            "simple/themes",
+            "simple/lights-out"
           ]
         }
       ]
