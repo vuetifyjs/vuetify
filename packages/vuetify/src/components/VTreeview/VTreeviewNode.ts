@@ -150,6 +150,20 @@ export default mixins<options>(
         this.hasLoaded = true
       })
     },
+    onKeyDown (e: KeyboardEvent) {
+      if (e.keyCode === keyCodes.enter && this.children) {
+        e.preventDefault()
+        this.toggleOpen()
+      } else if (e.keyCode === keyCodes.space) {
+        if (this.selectable) {
+          e.preventDefault()
+          this.toggleSelected()
+        } else if (this.activatable) {
+          e.preventDefault()
+          this.toggleActive()
+        }
+      }
+    },
     toggleOpen () {
       this.isOpen = !this.isOpen
       this.treeview.updateOpen(this.key, this.isOpen)
@@ -251,20 +265,7 @@ export default mixins<options>(
               this.toggleActive()
             }
           },
-          keydown: (e: KeyboardEvent) => {
-            if (e.keyCode === keyCodes.enter && this.children) {
-              e.preventDefault()
-              this.toggleOpen()
-            } else if (e.keyCode === keyCodes.space) {
-              if (this.selectable) {
-                e.preventDefault()
-                this.toggleSelected()
-              } else if (this.activatable) {
-                e.preventDefault()
-                this.toggleActive()
-              }
-            }
-          },
+          keydown: this.onKeyDown,
         },
       }, children)
     },
