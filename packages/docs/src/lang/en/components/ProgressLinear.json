@@ -17,10 +17,6 @@
       "header": "### Custom colors",
       "desc": "You can also set the color using the props `color` and `background-color`."
     },
-    "linear-custom-height-and-contextual-colors": {
-      "header": "### Custom height and contextual colors",
-      "desc": "A custom height or contextual color can be applied to a progress bar. The bars primary color is your applications primary color."
-    },
     "linear-determinate": {
       "header": "### Determinate",
       "desc": "The progress linear component can have a determinate state modified by `v-model`."
