@@ -5,6 +5,10 @@
     "usage": {
       "desc": "A basic example"
     },
+    "dense": {
+      "header": "### Dense mode",
+      "desc": "Dense mode provides more compact layout with decreased heights of the items."
+    },
     "file-explorer": {
       "header": "### Scoped slots",
       "desc": "Using scoped slots we are able to create an intuitive file explorer. Apart from the `prepend` slot, there is also one for the `label`, and an `append` slot."
@@ -28,6 +32,7 @@
       "active": "Syncable prop that allows one to control which nodes are active. The array consists of the `item-key` of each active item.",
       "activeClass": "The class applied to the node when active",
       "customFilter": "Custom search filter",
+      "dense": "Decreases the height of the items",
       "expandIcon": "Icon used to indicate that a node can be expanded",
       "hoverable": "Applies a hover class when mousing over nodes",
       "filter": "Custom item filtering function. By default it will use case-insensitive search in item's label.",
