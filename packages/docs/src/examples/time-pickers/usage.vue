@@ -1,9 +1,5 @@
 <template>
-  <div>
-    <v-checkbox v-model="landscape" label="Landscape"></v-checkbox>
-    <v-checkbox v-model="ampmInTitle" label="AM/PM in title"></v-checkbox>
-    <v-time-picker v-model="picker" :landscape="landscape" :ampm-in-title="ampmInTitle"></v-time-picker>
-  </div>
+  <v-time-picker v-model="picker"></v-time-picker>
 </template>
 
 <script>
@@ -11,8 +7,6 @@
     data () {
       return {
         picker: null,
-        landscape: false,
-        ampmInTitle: false,
       }
     },
   }
