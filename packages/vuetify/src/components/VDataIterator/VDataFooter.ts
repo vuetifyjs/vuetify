@@ -144,7 +144,7 @@ export default Vue.extend({
 
         children = this.$scopedSlots['page-text']
           ? [this.$scopedSlots['page-text']!({ pageStart, pageStop, itemsLength })]
-          : [`${pageStart}-${pageStop} of ${itemsLength}`]
+          : [this.$vuetify.lang.t('$vuetify.dataIterator.pageText', pageStart, pageStop, itemsLength)]
       }
 
       return this.$createElement('div', {

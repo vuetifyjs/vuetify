@@ -93,9 +93,13 @@
 
     computed: {
       chipColor () {
-        if (this.chip === 'new') return 'primary'
-        if (this.chip === 'updated') return 'warning'
-        if (this.chip === 'deprecated') return 'black'
+        switch (this.chip) {
+          case 'new': return 'primary'
+          case 'updated': return 'warning'
+          case 'deprecated': return 'black'
+          case 'help': return 'error'
+          default: return 'primary'
+        }
       },
       customAttrs () {
         const attrs = {
