@@ -3,60 +3,76 @@
 exports[`VSelectList.ts should display falsy items 1`] = `
 
 <div class="v-select-list v-card theme--light">
-  <div role="list"
+  <div role="listbox"
+       tabindex="-1"
        class="v-list v-sheet v-sheet--tile theme--light"
   >
-    <div tabindex="-1"
+    <div tabindex="0"
          aria-selected="false"
-         role="listitem"
+         aria-labelledby="29-list-0"
+         role="option"
          class="v-list-item v-list-item--link theme--light"
     >
       <div class="v-list-item__content">
-        <div class="v-list-item__title">
+        <div id="29-list-0"
+             class="v-list-item__title"
+        >
           0
         </div>
       </div>
     </div>
-    <div tabindex="-1"
+    <div tabindex="0"
          aria-selected="false"
-         role="listitem"
+         aria-labelledby="29-list-null"
+         role="option"
          class="v-list-item v-list-item--link theme--light"
     >
       <div class="v-list-item__content">
-        <div class="v-list-item__title">
+        <div id="29-list-null"
+             class="v-list-item__title"
+        >
           null
         </div>
       </div>
     </div>
-    <div tabindex="-1"
+    <div tabindex="0"
          aria-selected="false"
-         role="listitem"
+         aria-labelledby="29-list-false"
+         role="option"
          class="v-list-item v-list-item--link theme--light"
     >
       <div class="v-list-item__content">
-        <div class="v-list-item__title">
+        <div id="29-list-false"
+             class="v-list-item__title"
+        >
           false
         </div>
       </div>
     </div>
-    <div tabindex="-1"
+    <div tabindex="0"
          aria-selected="false"
-         role="listitem"
+         aria-labelledby="29-list-undefined"
+         role="option"
          class="v-list-item v-list-item--link theme--light"
     >
       <div class="v-list-item__content">
-        <div class="v-list-item__title">
+        <div id="29-list-undefined"
+             class="v-list-item__title"
+        >
           undefined
         </div>
       </div>
     </div>
-    <div tabindex="-1"
+    <div tabindex="0"
          aria-selected="false"
-         role="listitem"
+         aria-labelledby="29-list-"
+         role="option"
          class="v-list-item v-list-item--link theme--light"
     >
       <div class="v-list-item__content">
-        <div class="v-list-item__title">
+        <div id="29-list-"
+             class="v-list-item__title"
+        >
         </div>
       </div>
     </div>
@@ -68,16 +84,18 @@ exports[`VSelectList.ts should display falsy items 1`] = `
 exports[`VSelectList.ts should display no-data-text when item slot is provided 1`] = `
 
 <div class="v-select-list v-card theme--light">
-  <div role="list"
+  <div role="listbox"
+       tabindex="-1"
        class="v-list v-sheet v-sheet--tile theme--light"
   >
     <div tabindex="-1"
          aria-selected="false"
-         role="listitem"
          class="v-list-item theme--light"
     >
       <div class="v-list-item__content">
-        <div class="v-list-item__title">
+        <div id="10-list-undefined"
+             class="v-list-item__title"
+        >
           undefined
         </div>
       </div>
@@ -90,20 +108,24 @@ exports[`VSelectList.ts should display no-data-text when item slot is provided 1
 exports[`VSelectList.ts should generate children 1`] = `
 
 <div class="v-select-list v-card theme--light">
-  <div role="list"
+  <div role="listbox"
+       tabindex="-1"
        class="v-list v-sheet v-sheet--tile theme--light"
   >
     <div class="v-subheader theme--light">
       true
     </div>
     <hr class="v-divider theme--light">
-    <div tabindex="-1"
+    <div tabindex="0"
          aria-selected="false"
-         role="listitem"
+         aria-labelledby="14-list-foo"
+         role="option"
          class="v-list-item v-list-item--link theme--light"
     >
       <div class="v-list-item__content">
-        <div class="v-list-item__title">
+        <div id="14-list-foo"
+             class="v-list-item__title"
+        >
           foo
         </div>
       </div>

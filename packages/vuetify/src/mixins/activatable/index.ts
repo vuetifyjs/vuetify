@@ -67,6 +67,7 @@ export default baseMixins.extend({
     genActivator () {
       const node = getSlot(this, 'activator', Object.assign(this.getValueProxy(), {
         on: this.genActivatorListeners(),
+        attrs: this.genActivatorAttributes(),
       })) || []
 
       this.activatorNode = node
@@ -75,6 +76,13 @@ export default baseMixins.extend({
     },
     getContentSlot () {
       return getSlot(this, 'default', this.getValueProxy(), true)
+    },
+    genActivatorAttributes () {
+      return {
+        role: 'button',
+        'aria-haspopup': true,
+        'aria-expanded': String(this.isActive),
+      }
     },
     genActivatorListeners () {
       if (this.disabled) return {}

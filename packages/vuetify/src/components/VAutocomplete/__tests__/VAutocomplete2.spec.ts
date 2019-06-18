@@ -431,15 +431,13 @@ describe('VAutocomplete.ts', () => {
   })
 
   it('should not replicate html select hotkeys in v-autocomplete', async () => {
-    // const wrapper = mountFunction()
+    const onKeyPress = jest.fn()
     const wrapper = mountFunction({
       propsData: {
         items: ['aaa', 'foo', 'faa'],
       },
+      methods: { onKeyPress },
     })
-
-    const onKeyPress = jest.fn()
-    wrapper.setMethods({ onKeyPress })
 
     const input = wrapper.find('input')
     input.trigger('focus')

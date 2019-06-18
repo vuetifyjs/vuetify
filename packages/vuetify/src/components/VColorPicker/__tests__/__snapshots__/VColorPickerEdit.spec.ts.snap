@@ -292,8 +292,8 @@ exports[`VColorPickerEdit.ts should render with disabled 1`] = `
       A
     </span>
   </div>
-  <button disabled="disabled"
-          type="button"
+  <button type="button"
+          disabled="disabled"
           class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
   >
     <span class="v-btn__content">

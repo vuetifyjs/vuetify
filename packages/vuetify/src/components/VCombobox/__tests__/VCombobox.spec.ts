@@ -136,7 +136,7 @@ describe('VCombobox.ts', () => {
 
     element.value = ''
     input.trigger('input')
-    input.trigger('keydown.tab')
+    input.trigger('keydown.enter')
 
     expect(wrapper.vm.internalValue).toBe('')
     expect(change).toHaveBeenCalledTimes(4)
@@ -174,7 +174,7 @@ describe('VCombobox.ts', () => {
     element.value = 'foo'
     input.trigger('input')
 
-    input.trigger('keydown.tab')
+    input.trigger('keydown.enter')
     expect(change).toHaveBeenCalledWith('foo')
 
     input.trigger('keydown.esc')
@@ -246,11 +246,13 @@ describe('VCombobox.ts', () => {
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/5008
-  it.skip('should select item if menu index is greater than -1', async () => {
+  it('should select item if menu index is greater than -1', async () => {
+    const selectItem = jest.fn()
     const wrapper = mountFunction({
       propsData: {
         items: ['foo'],
       },
+      methods: { selectItem },
     })
 
     const input = wrapper.find('input')
@@ -263,6 +265,6 @@ describe('VCombobox.ts', () => {
 
     input.trigger('keydown.enter')
 
-    expect(wrapper.vm.internalValue).toBe('foo')
+    expect(selectItem).toHaveBeenCalledWith('foo')
   })
 })
