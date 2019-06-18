@@ -5,8 +5,8 @@
     "usage": {
       "desc": "`v-system-bar` in it's simplest form displays a small container with default theme."
     },
-    "colored": {
-      "header": "### Colored system bars",
+    "color": {
+      "header": "### Colored bar",
       "desc": "You can optionally change the color of the `v-system-bar` by using the `color` prop."
     },
     "window": {
@@ -20,6 +20,10 @@
     "lights-out": {
       "header": "### Lights out",
       "desc": "You can reduce `v-system-bar`'s opacity using `lights-out` property."
+    },
+    "notification": {
+      "header": "### Notification",
+      "desc": "The `v-system-bar` component can be used to display updates or notifications to the user."
     }
   },
   "props": {
