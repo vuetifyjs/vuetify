@@ -39,9 +39,10 @@
             "simple/linear-query-indeterminate-and-determinate",
             "simple/linear-custom-colors",
             "simple/rounded",
-            "simple/loader",
             "simple/stream",
             "simple/striped",
+            "intermediate/loader",
+            "intermediate/file-loader",
             "intermediate/slot"
           ]
         }
