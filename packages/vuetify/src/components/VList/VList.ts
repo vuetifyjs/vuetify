@@ -56,6 +56,9 @@ export default VSheet.extend({
         'v-list--three-line': this.threeLine,
       }
     },
+    styles (): object {
+      return this.measurableStyles
+    },
   },
 
   methods: {
@@ -80,6 +83,7 @@ export default VSheet.extend({
     const data = {
       staticClass: 'v-list',
       class: this.classes,
+      style: this.styles,
       attrs: {
         role: 'list',
         ...this.$attrs,
