@@ -251,7 +251,7 @@ export function getZIndex (el?: Element | null): number {
 
   const index = +window.getComputedStyle(el).getPropertyValue('z-index')
 
-  if (isNaN(index)) return getZIndex(el.parentNode as Element)
+  if (!index) return getZIndex(el.parentNode as Element)
   return index
 }
 
