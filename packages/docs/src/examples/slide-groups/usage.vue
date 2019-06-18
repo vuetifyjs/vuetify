@@ -10,6 +10,7 @@
         v-slot:default="{ active, toggle }"
       >
         <v-btn
+          class="mx-2"
           :input-value="active"
           active-class="purple white--text"
           depressed
