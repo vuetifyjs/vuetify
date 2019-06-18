@@ -24,6 +24,10 @@
     "multiple": {
       "header": "### Multiple",
       "desc": "You can select multiple items"
+    },
+    "mandatory": {
+      "header": "### Mandatory",
+      "desc": "At least 1 item must be selected"
     }
   },
   "props": {
