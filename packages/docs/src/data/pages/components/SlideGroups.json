@@ -30,6 +30,7 @@
         {
           "type": "examples",
           "value": [
+            "simple/custom-icons",
             "simple/carousel",
             "simple/center-active"
           ]

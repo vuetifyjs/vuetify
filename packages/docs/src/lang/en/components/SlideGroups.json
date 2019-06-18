@@ -12,6 +12,10 @@
     "center-active": {
       "header": "### Centered active item",
       "desc": "Active item is always centered"
+    },
+    "custom-icons": {
+      "header": "### Custom icons",
+      "desc": "You can add your custom pagination icons instead of arrows"
     }
   },
   "props": {
