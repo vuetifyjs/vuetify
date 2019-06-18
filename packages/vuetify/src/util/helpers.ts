@@ -486,7 +486,7 @@ export function padEnd (str: string, length: number, char = '0') {
 }
 
 export function chunk (str: string, size = 1) {
-  const chunked: any[] = []
+  const chunked: string[] = []
   let index = 0
   while (index < str.length) {
     chunked.push(str.substr(index, size))
