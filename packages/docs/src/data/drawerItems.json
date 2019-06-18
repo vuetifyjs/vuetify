@@ -192,7 +192,6 @@
   {
     "text": "premiumThemes",
     "icon": "mdi-palette",
-    "to": "themes/premium",
-    "updated": true
+    "to": "themes/premium"
   }
 ]
