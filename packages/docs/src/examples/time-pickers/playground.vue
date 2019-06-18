@@ -8,7 +8,7 @@
       <v-switch v-model="useSeconds" class="mx-2" label="Use seconds"></v-switch>
       <v-switch v-model="fullWidth" class="mx-2" label="Full-width"></v-switch>
       <v-switch v-model="noTitle" class="mx-2" label="No title"></v-switch>
-      <v-switch v-model="scrollable" class="mx-2" label="scrollable"></v-switch>
+      <v-switch v-model="scrollable" class="mx-2" label="Scrollable"></v-switch>
       <v-btn-toggle v-model="format">
         <v-btn text value="ampm">
           12h
