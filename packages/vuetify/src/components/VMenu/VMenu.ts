@@ -38,6 +38,7 @@ export default baseMixins.extend({
 
   provide (): object {
     return {
+      isInMenu: true,
       // Pass theme through to default slot
       theme: this.theme,
     }
@@ -95,6 +96,9 @@ export default baseMixins.extend({
   },
 
   computed: {
+    activeTile (): HTMLElement | undefined {
+      return this.tiles[this.listIndex]
+    },
     calculatedLeft (): string {
       const menuWidth = Math.max(this.dimensions.content.width, parseFloat(this.calculatedMinWidth))
 
@@ -173,14 +177,11 @@ export default baseMixins.extend({
   },
 
   mounted () {
-    this.isActive && this.activate()
+    this.isActive && this.callActivate()
   },
 
   methods: {
     activate () {
-      // This exists primarily for v-select
-      // helps determine which tiles to activate
-      this.getTiles()
       // Update coordinates and dimensions of menu
       // and its activator
       this.updateDimensions()
@@ -230,12 +231,15 @@ export default baseMixins.extend({
       // For infinite scroll and autocomplete, re-evaluate children
       this.getTiles()
 
-      if (e.keyCode === keyCodes.down && this.listIndex < this.tiles.length - 1) {
-        this.listIndex++
-        // Allow user to set listIndex to -1 so
-        // that the list can be un-highlighted
-      } else if (e.keyCode === keyCodes.up && this.listIndex > -1) {
-        this.listIndex--
+      if (!this.isActive) {
+        return
+      } else if (e.keyCode === keyCodes.tab) {
+        this.isActive = false
+        return
+      } else if (e.keyCode === keyCodes.down) {
+        this.nextTile()
+      } else if (e.keyCode === keyCodes.up) {
+        this.prevTile()
       } else if (e.keyCode === keyCodes.enter && this.listIndex !== -1) {
         this.tiles[this.listIndex].click()
       } else { return }
@@ -248,6 +252,15 @@ export default baseMixins.extend({
       return this.isActive &&
         this.closeOnClick &&
         !this.$refs.content.contains(target)
+    },
+    genActivatorListeners () {
+      const listeners = Menuable.options.methods.genActivatorListeners.call(this)
+
+      if (!this.disableKeys) {
+        listeners.keydown = this.onKeyDown
+      }
+
+      return listeners
     },
     genTransition (): VNode {
       if (!this.transition) return this.genContent()
@@ -280,7 +293,10 @@ export default baseMixins.extend({
     },
     genContent (): VNode {
       const options = {
-        attrs: this.getScopeIdAttrs(),
+        attrs: {
+          ...this.getScopeIdAttrs(),
+          role: 'role' in this.$attrs ? this.$attrs.role : 'menu',
+        },
         staticClass: 'v-menu__content',
         'class': {
           ...this.rootThemeClasses,
@@ -343,21 +359,51 @@ export default baseMixins.extend({
         })
       })
     },
+    nextTile () {
+      const tile = this.tiles[this.listIndex + 1]
+
+      if (!tile) {
+        if (!this.tiles.length) return
+
+        this.listIndex = -1
+        this.nextTile()
+
+        return
+      }
+
+      this.listIndex++
+      if (tile.tabIndex === -1) this.nextTile()
+    },
+    prevTile () {
+      const tile = this.tiles[this.listIndex - 1]
+
+      if (!tile) {
+        if (!this.tiles.length) return
+
+        this.listIndex = this.tiles.length
+        this.prevTile()
+
+        return
+      }
+
+      this.listIndex--
+      if (tile.tabIndex === -1) this.prevTile()
+    },
     onKeyDown (e: KeyboardEvent) {
       if (e.keyCode === keyCodes.esc) {
         // Wait for dependent elements to close first
         setTimeout(() => { this.isActive = false })
         const activator = this.getActivator()
         this.$nextTick(() => activator && activator.focus())
-      } else if (e.keyCode === keyCodes.tab) {
-        setTimeout(() => {
-          if (!this.$refs.content.contains(document.activeElement)) {
-            this.isActive = false
-          }
-        })
-      } else {
-        this.changeListIndex(e)
+      } else if (
+        !this.isActive &&
+        [keyCodes.up, keyCodes.down].includes(e.keyCode)
+      ) {
+        this.isActive = true
       }
+
+      // Allow for isActive watcher to generate tile list
+      this.$nextTick(() => this.changeListIndex(e))
     },
     onResize () {
       if (!this.isActive) return
@@ -389,9 +435,6 @@ export default baseMixins.extend({
         name: 'resize',
         value: this.onResize,
       }],
-      on: this.disableKeys ? undefined : {
-        keydown: this.onKeyDown,
-      },
     }
 
     return h('div', data, [
