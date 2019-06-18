@@ -51,7 +51,6 @@ export default VAutocomplete.extend({
   },
 
   methods: {
-    onFilteredItemsChanged: () => {},
     onInternalSearchChanged (val: any) {
       if (
         val &&
@@ -94,12 +93,14 @@ export default VAutocomplete.extend({
     onEnterDown (e: Event) {
       e.preventDefault()
 
-      VSelect.options.methods.onEnterDown.call(this, e)
-
       // If has menu index, let v-select-list handle
       if (this.getMenuIndex() > -1) return
 
       this.updateSelf()
+    },
+    onFilteredItemsChanged () {
+      // noop - should not auto select so user can enter custom
+      // words that may loosely match items in the list
     },
     onKeyDown (e: KeyboardEvent) {
       const keyCode = e.keyCode
@@ -113,6 +114,8 @@ export default VAutocomplete.extend({
         this.$refs.input.selectionStart === 0
       ) {
         this.updateSelf()
+      } else if (keyCode === keyCodes.enter) {
+        this.onEnterDown(e)
       }
 
       // The ordering is important here

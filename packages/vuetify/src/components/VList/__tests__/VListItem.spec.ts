@@ -153,4 +153,54 @@ describe('VListItem.ts', () => {
 
     expect(wrapper.vm.activeClass).toBe('foobar')
   })
+
+  it('should have the correct aria attributes and tabindex', () => {
+    const wrapper = mountFunction({
+      propsData: { disabled: true },
+    })
+
+    expect(wrapper.element.getAttribute('aria-disabled')).toBe('true')
+    expect(wrapper.element.getAttribute('aria-selected')).toBe('false')
+    expect(wrapper.element.tabIndex).toBe(-1)
+
+    wrapper.setProps({
+      disabled: false,
+      inputValue: true,
+    })
+
+    expect(wrapper.element.getAttribute('aria-disabled')).toBeNull()
+    expect(wrapper.element.getAttribute('aria-selected')).toBe('true')
+    expect(wrapper.element.tabIndex).toBe(-1)
+
+    wrapper.setProps({ link: true })
+
+    expect(wrapper.element.tabIndex).toBe(0)
+  })
+
+  it('should have the correct role', () => {
+    // Custom provided
+    const wrapper = mountFunction({
+      attrs: { role: 'item' },
+    })
+    expect(wrapper.element.getAttribute('role')).toBe('item')
+
+    // In list-item-group
+    const wrapper2 = mountFunction({
+      provide: {
+        listItemGroup: {
+          register: () => {},
+          unregister: () => {},
+        },
+      },
+    })
+    expect(wrapper2.element.getAttribute('role')).toBe('listitem')
+
+    // In menu
+    const wrapper3 = mountFunction({
+      provide: { isInMenu: true },
+    })
+    expect(wrapper3.element.getAttribute('role')).toBeNull()
+    wrapper3.setProps({ href: '#' }) // could be `to` or `link` as well
+    expect(wrapper3.element.getAttribute('role')).toBe('menuitem')
+  })
 })

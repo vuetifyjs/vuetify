@@ -2,7 +2,9 @@
 
 exports[`VSelect.ts should escape items in menu 1`] = `
 
-<div class="v-list-item__title">
+<div id="143-list-<strong>foo</strong>"
+     class="v-list-item__title"
+>
   &lt;strong&gt;foo&lt;/strong&gt;
 </div>
 
@@ -10,11 +12,14 @@ exports[`VSelect.ts should escape items in menu 1`] = `
 
 exports[`VSelect.ts should only show items if they are in items 1`] = `
 
-<div role="combobox"
-     class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
->
+<div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
   <div class="v-input__control">
-    <div class="v-input__slot">
+    <div role="button"
+         aria-haspopup="listbox"
+         aria-expanded="false"
+         aria-owns="computed-id-88"
+         class="v-input__slot"
+    >
       <div class="v-select__slot">
         <div class="v-select__selections">
           <div class="v-select__selection v-select__selection--comma">
@@ -23,7 +28,7 @@ exports[`VSelect.ts should only show items if they are in items 1`] = `
           <input autocomplete="on"
                  readonly="readonly"
                  type="text"
-                 aria-readonly="false"
+                 aria-readonly="true"
           >
         </div>
         <div class="v-input__append-inner">
@@ -55,17 +60,20 @@ exports[`VSelect.ts should only show items if they are in items 1`] = `
 
 exports[`VSelect.ts should only show items if they are in items 2`] = `
 
-<div role="combobox"
-     class="v-input theme--light v-text-field v-select"
->
+<div class="v-input theme--light v-text-field v-select">
   <div class="v-input__control">
-    <div class="v-input__slot">
+    <div role="button"
+         aria-haspopup="listbox"
+         aria-expanded="false"
+         aria-owns="computed-id-88"
+         class="v-input__slot"
+    >
       <div class="v-select__slot">
         <div class="v-select__selections">
           <input autocomplete="on"
                  readonly="readonly"
                  type="text"
-                 aria-readonly="false"
+                 aria-readonly="true"
           >
         </div>
         <div class="v-input__append-inner">
@@ -97,11 +105,14 @@ exports[`VSelect.ts should only show items if they are in items 2`] = `
 
 exports[`VSelect.ts should only show items if they are in items 3`] = `
 
-<div role="combobox"
-     class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
->
+<div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
   <div class="v-input__control">
-    <div class="v-input__slot">
+    <div role="button"
+         aria-haspopup="listbox"
+         aria-expanded="false"
+         aria-owns="computed-id-88"
+         class="v-input__slot"
+    >
       <div class="v-select__slot">
         <div class="v-select__selections">
           <div class="v-select__selection v-select__selection--comma">
@@ -110,7 +121,7 @@ exports[`VSelect.ts should only show items if they are in items 3`] = `
           <input autocomplete="on"
                  readonly="readonly"
                  type="text"
-                 aria-readonly="false"
+                 aria-readonly="true"
           >
         </div>
         <div class="v-input__append-inner">
@@ -142,11 +153,14 @@ exports[`VSelect.ts should only show items if they are in items 3`] = `
 
 exports[`VSelect.ts should only show items if they are in items 4`] = `
 
-<div role="combobox"
-     class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
->
+<div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
   <div class="v-input__control">
-    <div class="v-input__slot">
+    <div role="button"
+         aria-haspopup="listbox"
+         aria-expanded="false"
+         aria-owns="computed-id-88"
+         class="v-input__slot"
+    >
       <div class="v-select__slot">
         <div class="v-select__selections">
           <div class="v-select__selection v-select__selection--comma">
@@ -158,7 +172,7 @@ exports[`VSelect.ts should only show items if they are in items 4`] = `
           <input autocomplete="on"
                  readonly="readonly"
                  type="text"
-                 aria-readonly="false"
+                 aria-readonly="true"
           >
         </div>
         <div class="v-input__append-inner">
@@ -190,17 +204,20 @@ exports[`VSelect.ts should only show items if they are in items 4`] = `
 
 exports[`VSelect.ts should render v-select correctly when not using scope slot 1`] = `
 
-<div role="combobox"
-     class="v-input theme--light v-text-field v-select"
->
+<div class="v-input theme--light v-text-field v-select">
   <div class="v-input__control">
-    <div class="v-input__slot">
+    <div role="button"
+         aria-haspopup="listbox"
+         aria-expanded="false"
+         aria-owns="computed-id-48"
+         class="v-input__slot"
+    >
       <div class="v-select__slot">
         <div class="v-select__selections">
           <input autocomplete="on"
                  readonly="readonly"
                  type="text"
-                 aria-readonly="false"
+                 aria-readonly="true"
           >
         </div>
         <div class="v-input__append-inner">
@@ -232,17 +249,20 @@ exports[`VSelect.ts should render v-select correctly when not using scope slot 1
 
 exports[`VSelect.ts should render v-select correctly when not using v-list-item in item scope slot 1`] = `
 
-<div role="combobox"
-     class="v-input theme--light v-text-field v-select"
->
+<div class="v-input theme--light v-text-field v-select">
   <div class="v-input__control">
-    <div class="v-input__slot">
+    <div role="button"
+         aria-haspopup="listbox"
+         aria-expanded="false"
+         aria-owns="computed-id-37"
+         class="v-input__slot"
+    >
       <div class="v-select__slot">
         <div class="v-select__selections">
           <input autocomplete="on"
                  readonly="readonly"
                  type="text"
-                 aria-readonly="false"
+                 aria-readonly="true"
           >
         </div>
         <div class="v-input__append-inner">
@@ -274,17 +294,20 @@ exports[`VSelect.ts should render v-select correctly when not using v-list-item 
 
 exports[`VSelect.ts should render v-select correctly when using v-list-item in item scope slot 1`] = `
 
-<div role="combobox"
-     class="v-input theme--light v-text-field v-select"
->
+<div class="v-input theme--light v-text-field v-select">
   <div class="v-input__control">
-    <div class="v-input__slot">
+    <div role="button"
+         aria-haspopup="listbox"
+         aria-expanded="false"
+         aria-owns="computed-id-25"
+         class="v-input__slot"
+    >
       <div class="v-select__slot">
         <div class="v-select__selections">
           <input autocomplete="on"
                  readonly="readonly"
                  type="text"
-                 aria-readonly="false"
+                 aria-readonly="true"
           >
         </div>
         <div class="v-input__append-inner">
@@ -316,16 +339,21 @@ exports[`VSelect.ts should render v-select correctly when using v-list-item in i
 
 exports[`VSelect.ts should use slotted no-data 1`] = `
 
-<div role="list"
+<div role="listbox"
+     id="computed-id-244"
+     tabindex="-1"
      class="v-list v-sheet v-sheet--tile theme--light"
 >
-  <div tabindex="-1"
+  <div tabindex="0"
        aria-selected="false"
-       role="listitem"
+       aria-labelledby="249-list-foo"
+       role="option"
        class="v-list-item v-list-item--link theme--light"
   >
     <div class="v-list-item__content">
-      <div class="v-list-item__title">
+      <div id="249-list-foo"
+           class="v-list-item__title"
+      >
         foo
       </div>
     </div>

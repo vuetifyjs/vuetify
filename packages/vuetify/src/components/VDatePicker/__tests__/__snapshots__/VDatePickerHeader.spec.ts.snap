@@ -107,8 +107,8 @@ exports[`VDatePickerHeader.ts should render component with default slot and matc
 exports[`VDatePickerHeader.ts should render disabled component and match snapshot 1`] = `
 
 <div class="v-date-picker-header v-date-picker-header--disabled theme--light">
-  <button disabled="disabled"
-          type="button"
+  <button type="button"
+          disabled="disabled"
           class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
   >
     <span class="v-btn__content">
@@ -125,8 +125,8 @@ exports[`VDatePickerHeader.ts should render disabled component and match snapsho
       </button>
     </div>
   </div>
-  <button disabled="disabled"
-          type="button"
+  <button type="button"
+          disabled="disabled"
           class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
   >
     <span class="v-btn__content">

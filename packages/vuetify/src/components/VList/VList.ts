@@ -82,6 +82,7 @@ export default VSheet.extend({
       class: this.classes,
       attrs: {
         role: 'list',
+        ...this.$attrs,
       },
     }
 
