@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap class="api-item grey lighten-2 mt-2">
+  <v-layout wrap class="api-item grey lighten-2 mb-3">
     <v-flex
       v-for="(header, i) in headers"
       :key="header.value"
@@ -43,6 +43,14 @@
         </template>
       </div>
     </v-flex>
+    <v-flex xs12 v-if="item.example">
+      <doc-markup
+        class="mb-0"
+        lang="ts"
+        :filename="false"
+        hide-copy
+      >{{ item.example }}</doc-markup>
+    </v-flex>
   </v-layout>
 </template>
 
@@ -55,13 +63,15 @@
   }
 </script>
 
-<style>
-  .api-item > .flex {
-    padding: 0.4rem;
-  }
+<style lang="sass">
+.api-item
+  border-radius: 6px
+  overflow: hidden
 
-  .default-markup pre {
-    padding: 0.25rem;
-    padding-left: 0.5rem;
-  }
+  > .flex
+    padding: 0.4rem
+
+.default-markup pre
+  padding: 0.25rem
+  padding-left: 0.5rem
 </style>

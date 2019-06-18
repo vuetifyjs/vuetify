@@ -92,12 +92,12 @@
     },
     {
       value: 'default',
-      type: 'markup',
-      class: 'xs12 sm6 grey lighten-4',
+      // type: 'markup',
+      class: 'xs12 sm8 grey lighten-4',
     },
     {
       value: 'type',
-      class: 'xs12 sm6 text-sm-right grey lighten-4',
+      class: 'xs12 sm4 text-sm-right grey lighten-4',
     },
   ]
 
@@ -142,7 +142,7 @@
           {
             value: 'props',
             type: 'markup',
-            class: 'xs12 grey lighten-4',
+            class: 'xs12 grey lighten-4 grey lighten-4',
           },
         ],
         events: [
@@ -158,7 +158,7 @@
           {
             value: 'value',
             type: 'markup',
-            class: 'xs 12',
+            class: 'xs 12 grey lighten-4',
           },
         ],
         functions: [
