@@ -16,6 +16,10 @@
     "custom-icons": {
       "header": "### Custom icons",
       "desc": "You can add your custom pagination icons instead of arrows"
+    },
+    "active-class": {
+      "header": "### Active class",
+      "desc": "Active class can be customized"
     }
   },
   "props": {
