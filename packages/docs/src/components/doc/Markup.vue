@@ -4,6 +4,7 @@
       v-if="$slots.default || code"
       :language="language"
       :code="code"
+      :inline="inline"
     ><slot /></prism>
 
     <div
@@ -21,7 +22,7 @@
       </a>
     </div>
 
-    <div class="v-markup__copy">
+    <div v-if="!hideCopy" class="v-markup__copy">
       <v-icon
         title="Copy code"
         aria-label="Copy code"
@@ -62,6 +63,7 @@
         type: String,
         default: undefined,
       },
+      inline: Boolean,
       value: {
         type: String,
         default: 'markup',
@@ -70,6 +72,7 @@
         type: Boolean,
         default: process.env.NODE_ENV !== 'production',
       },
+      hideCopy: Boolean,
     },
 
     data: vm => ({

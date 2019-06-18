@@ -56,6 +56,11 @@
           eager
         >
           <v-card flat>
+            <!-- <doc-scoped-slots v-if="tab === 'scopedSlots'"
+              :slots="component[tab]"
+              :lang="lang"
+              :search="search"
+            ></doc-scoped-slots> -->
             <doc-parameters
               :headers="headers[tab]"
               :items="component[tab]"
@@ -78,15 +83,21 @@
   const propProps = [
     {
       value: 'name',
-      class: 'xs6 sm3 lg2',
+      class: 'xs4',
+    },
+    {
+      value: 'description',
+      type: 'markdown',
+      class: 'xs8 text-sm-right',
     },
     {
       value: 'default',
-      class: 'xs6 sm3 text-xs-right',
+      type: 'markup',
+      class: 'xs12 sm6 grey lighten-4',
     },
     {
       value: 'type',
-      class: 'xs6 ml-auto sm4 text-sm-right',
+      class: 'xs12 sm6 text-sm-right grey lighten-4',
     },
   ]
 
@@ -110,27 +121,44 @@
         slots: [
           {
             value: 'name',
-            class: 'left',
+            class: 'xs4',
+          },
+          {
+            value: 'description',
+            type: 'markdown',
+            class: 'xs8 text-xs-right',
           },
         ],
         scopedSlots: [
           {
             value: 'name',
-            class: 'xs3',
+            class: 'xs4',
+          },
+          {
+            value: 'description',
+            type: 'markdown',
+            class: 'xs8 text-xs-right',
           },
           {
             value: 'props',
-            class: 'xs9',
+            type: 'markup',
+            class: 'xs12 grey lighten-4',
           },
         ],
         events: [
           {
             value: 'name',
-            class: '',
+            class: 'xs4',
+          },
+          {
+            value: 'description',
+            type: 'markdown',
+            class: 'xs8 text-xs-right',
           },
           {
             value: 'value',
-            class: 'text-xs-right',
+            type: 'markup',
+            class: 'xs 12',
           },
         ],
         functions: [
@@ -140,6 +168,7 @@
           },
           {
             value: 'signature',
+            type: 'markup',
             class: 'text-xs-right',
           },
         ],
