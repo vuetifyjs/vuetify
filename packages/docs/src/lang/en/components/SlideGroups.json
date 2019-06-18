@@ -20,6 +20,10 @@
     "active-class": {
       "header": "### Active class",
       "desc": "Active class can be customized"
+    },
+    "multiple": {
+      "header": "### Multiple",
+      "desc": "You can select multiple items"
     }
   },
   "props": {
