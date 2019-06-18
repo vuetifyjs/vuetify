@@ -74,11 +74,9 @@
 </script>
 
 <style lang="sass">
-h4.markdown > p
-  margin-bottom: 0
-
-.markdown:last-child p
-  margin-bottom: 0
+.markdown:last-child p,
+.markdown:last-child
+  margin-bottom: 0 !important
 
 .markdown--link
   text-decoration: none
