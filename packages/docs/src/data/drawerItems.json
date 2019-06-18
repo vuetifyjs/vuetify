@@ -12,7 +12,7 @@
       { "new": true, "text": "lts", "to": "long-term-support" },
       { "text": "contributing", "to": "contributing" },
       { "updated": true, "text": "roadmap", "to": "roadmap" },
-      { "text": "consulting", "to": "consulting-and-support" }
+      { "help": true, "text": "consulting", "to": "consulting-and-support" }
     ]
   },
   {
