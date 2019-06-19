@@ -20,10 +20,6 @@
     "lights-out": {
       "header": "### Lights out",
       "desc": "You can reduce `v-system-bar`'s opacity using `lights-out` property."
-    },
-    "notification": {
-      "header": "### Notification",
-      "desc": "The `v-system-bar` component can be used to display updates or notifications to the user."
     }
   },
   "props": {
