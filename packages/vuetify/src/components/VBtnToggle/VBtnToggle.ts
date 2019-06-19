@@ -16,6 +16,7 @@ export default mixins(
   name: 'v-btn-toggle',
 
   props: {
+    group: Boolean,
     rounded: Boolean,
   },
 
@@ -24,6 +25,7 @@ export default mixins(
       return {
         ...ButtonGroup.options.computed.classes.call(this),
         'v-btn-toggle': true,
+        'v-btn-toggle--group': this.group,
         'v-btn-toggle--rounded': this.rounded,
         ...this.themeClasses,
       }
