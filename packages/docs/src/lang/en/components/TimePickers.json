@@ -32,6 +32,10 @@
     "time-no-title": {
       "header": "### Time pickers - no title",
       "desc": "You can remove picker's title."
+    },
+    "time-disabled": {
+      "header": "### Time pickers - disabled",
+      "desc": "You can't interact with disabled picker."
     }
   },
   "props": {
