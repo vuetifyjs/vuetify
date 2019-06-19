@@ -40,6 +40,10 @@
     "readonly": {
       "header": "### Read-only",
       "desc": "Read-only picker behaves same as disabled one, but looks like default one."
+    },
+    "use-seconds": {
+      "header": "### With seconds",
+      "desc": "Time picker can have seconds input."
     }
   },
   "props": {

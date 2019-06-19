@@ -48,6 +48,7 @@
             "simple/width",
             "simple/ampm-in-title",
             "simple/no-title",
+            "simple/use-seconds",
             "intermediate/dialog-and-menu"
           ]
         }
