@@ -1,7 +1,15 @@
 @mixin rtl()
-  .application--is-rtl &
-    @content
+  @if $use-rtl
+    @if $use-ltr
+      .application--is-rtl &
+        @content
+    @else
+      @content
 
 @mixin ltr()
-  .application--is-ltr &
-    @content
+  @if $use-ltr
+    @if $use-rtl
+      .application--is-ltr &
+        @content
+    @else
+      @content
