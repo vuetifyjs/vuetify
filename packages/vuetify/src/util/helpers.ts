@@ -430,15 +430,6 @@ export function searchItems (items: any[], search: string) {
   return items.filter(item => Object.keys(item).some(key => defaultFilter(getObjectValueByPath(item, key), search)))
 }
 
-export function getTextAlignment (align: string | undefined, rtl: boolean): string {
-  align = align || 'start'
-
-  if (align === 'start') align = rtl ? 'right' : 'left'
-  else if (align === 'end') align = rtl ? 'left' : 'right'
-
-  return `text-xs-${align}`
-}
-
 /**
  * Returns:
  *  - 'normal' for old style slots - `<template slot="default">`
