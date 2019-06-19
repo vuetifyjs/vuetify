@@ -321,7 +321,7 @@ export default VDataIterator.extend({
         }, [this.$createElement(VIcon, ['close'])])
 
         const column = this.$createElement('td', {
-          staticClass: 'text-xs-left',
+          staticClass: 'text-xs-start',
           attrs: {
             colspan: this.computedHeadersLength,
           },
