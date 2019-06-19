@@ -24,6 +24,10 @@
     "time-width": {
       "header": "### Time pickers - Setting picker width",
       "desc": "You can specify allowed the picker's width or make it full width."
+    },
+    "time-ampm-in-title": {
+      "header": "### Time pickers - AM/PM switch in title",
+      "desc": "You can move AM/PM switch to picker's title."
     }
   },
   "props": {

@@ -44,6 +44,7 @@
             "simple/time-24h-format",
             "simple/time-allowed-times",
             "simple/time-width",
+            "simple/time-ampm-in-title",
             "intermediate/time-dialog-and-menu"
           ]
         }
