@@ -19,6 +19,7 @@
       </v-btn-toggle>
     </v-layout>
     <v-time-picker
+      class="mt-2"
       v-model="picker"
       :disabled="disabled"
       :readonly="readonly"
