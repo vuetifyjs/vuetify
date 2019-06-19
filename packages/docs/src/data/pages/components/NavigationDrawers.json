@@ -29,20 +29,27 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "colored",
-            "permanent-floating",
-            "persistent",
-            "mini",
-            "temporary",
-            "dark",
-            "combined",
-            "nested",
-            "right",
-            "background",
-            "bottom-drawer",
-            "expand-on-hover"
+            "simple/colored",
+            "simple/permanent-floating",
+            "simple/permanent-floating-card",
+            "simple/mini",
+            "simple/temporary",
+            "simple/right",
+            "simple/expand-on-hover",
+            "intermediate/background",
+            "intermediate/combined",
+            "complex/bottom-drawer"
           ]
         }
       ]
