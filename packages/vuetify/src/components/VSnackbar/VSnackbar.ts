@@ -6,6 +6,9 @@ import Colorable from '../../mixins/colorable'
 import Toggleable from '../../mixins/toggleable'
 import { factory as PositionableFactory } from '../../mixins/positionable'
 
+// Utilities
+import { convertToUnit } from '../../util/helpers'
+
 // Types
 import mixins from '../../util/mixins'
 import { VNode } from 'vue'
@@ -19,6 +22,7 @@ export default mixins(
   name: 'v-snackbar',
 
   props: {
+    app: Boolean,
     autoHeight: Boolean,
     multiLine: Boolean,
     // TODO: change this to closeDelay to match other API in delayable.js
@@ -39,12 +43,35 @@ export default mixins(
         'v-snack--active': this.isActive,
         'v-snack--absolute': this.absolute,
         'v-snack--auto-height': this.autoHeight,
-        'v-snack--bottom': this.bottom || !this.top,
+        'v-snack--bottom': this.isBottom,
         'v-snack--left': this.left,
         'v-snack--multi-line': this.multiLine && !this.vertical,
         'v-snack--right': this.right,
         'v-snack--top': this.top,
         'v-snack--vertical': this.vertical,
+      }
+    },
+    isBottom (): boolean {
+      return this.bottom || !this.top
+    },
+    styles (): object {
+      if (!this.app) return {}
+
+      return {
+        marginBottom: this.isBottom ? convertToUnit(
+          this.$vuetify.application.bottom +
+          this.$vuetify.application.footer
+        ) : undefined,
+        marginLeft: this.left ? convertToUnit(
+          this.$vuetify.application.left
+        ) : undefined,
+        marginRight: this.right ? convertToUnit(
+          this.$vuetify.application.right
+        ) : undefined,
+        marginTop: this.top ? convertToUnit(
+          this.$vuetify.application.bar +
+          this.$vuetify.application.top
+        ) : undefined,
       }
     },
   },
@@ -78,6 +105,7 @@ export default mixins(
       this.isActive && h('div', {
         staticClass: 'v-snack',
         class: this.classes,
+        style: this.styles,
         on: this.$listeners,
       }, [
         h('div', this.setBackgroundColor(this.color, {
