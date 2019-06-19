@@ -12,6 +12,18 @@
     .text-#{$size}-justify
       text-align: justify !important
 
+    .text-#{$size}-start
+      +ltr()
+        text-align: left !important
+      +rtl()
+        text-align: right !important
+
+    .text-#{$size}-end
+      +ltr()
+        text-align: right !important
+      +rtl()
+        text-align: left !important
+
 @each $name, $weight in $font-weights
   .font-weight
     &-#{$name}
