@@ -15,7 +15,7 @@
     },
     "avatar-three-lines": {
       "header": "### Avatar with 3 lines",
-      "desc": "For three line lists, the subtitle will clamp vertically at 2 lines and then ellipsis."
+      "desc": "For three line lists, the subtitle will clamp vertically at 2 lines and then ellipsis. This feature uses [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) and is not supported in all browsers."
     },
     "avatar-subheader-title-and-action": {
       "header": "### Avatar with title and action",
@@ -83,8 +83,8 @@
     "shaped": "Provides an alternative active style for `v-list-item`.",
     "subGroup": "Designate the component as nested list group",
     "subheader": "Removes top padding. Used when previous sibling is a header",
-    "threeLine": "Increases list-item height for three lines",
-    "twoLine": "Increases list-item height for two lines",
+    "threeLine": "Increases list-item height for three lines. This prop uses [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) and is not supported in all browsers.",
+    "twoLine": "Increases list-item height for two lines. This prop uses [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) and is not supported in all browsers.",
     "value": "Expands / Collapse list group",
     "v-list-item-avatar": {
       "color": "Mixins.Colorable.props.color"
