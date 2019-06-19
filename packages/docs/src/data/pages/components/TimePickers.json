@@ -42,6 +42,7 @@
           "value": [
             "simple/time-colorable",
             "simple/time-disabled",
+            "simple/time-readonly",
             "simple/time-24h-format",
             "simple/time-allowed-times",
             "simple/time-width",

@@ -36,6 +36,10 @@
     "time-disabled": {
       "header": "### Time pickers - disabled",
       "desc": "You can't interact with disabled picker."
+    },
+    "time-readonly": {
+      "header": "### Time pickers - read-only",
+      "desc": "Read-only picker behaves same as disabled one, but looks like default one."
     }
   },
   "props": {
