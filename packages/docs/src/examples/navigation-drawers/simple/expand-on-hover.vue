@@ -2,6 +2,7 @@
   <v-card>
     <v-navigation-drawer
       expand-on-hover
+      permanent
     >
       <template v-slot:prepend>
         <v-list>
