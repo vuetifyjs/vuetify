@@ -20,7 +20,6 @@
   },
   "props": {
     "lightsOut": "Reduces the system bar opacity",
-    "status": "Reduces the system bar height",
     "window": "Increases the system bar height"
   }
 }
