@@ -48,6 +48,10 @@
     "scrollable": {
       "header": "### Scrollable",
       "desc": "You can edit time picker's value using mouse wheel."
+    },
+    "range": {
+      "header": "### Range",
+      "desc": "This is an example of joining pickers together using `min` and `max` prop."
     }
   },
   "props": {
