@@ -25,6 +25,10 @@
       "header": "### Subheadings and dividers",
       "desc": "Lists can contain multiple subheaders and dividers."
     },
+    "nested": {
+      "header": "### Nested lists",
+      "desc": "Using the `v-list-group` component you can create up to **2** levels in depth using the **sub-group** prop."
+    },
     "card-list": {
       "header": "### Card image with toolbar and list",
       "desc": "A list can be combined with a card."

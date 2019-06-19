@@ -1,6 +1,6 @@
 <template>
-  <v-layout justify-center>
-    <v-time-picker v-model="picker"></v-time-picker>
+  <v-layout row wrap justify-space-around align-center>
+    <v-time-picker v-model="picker" scrollable></v-time-picker>
   </v-layout>
 </template>
 

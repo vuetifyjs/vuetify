@@ -6,6 +6,14 @@
       "type": "section",
       "children": [
         {
+          "type": "text",
+          "lang": "howText"
+        },
+        {
+          "type": "text",
+          "lang": "alignments"
+        },
+        {
           "type": "usage",
           "value": "example"
         }
