@@ -1,7 +1,7 @@
 {
-	"props": {
-		"mode": "crwdns23508:0crwdne23508:0",
-		"origin": "crwdns23510:0crwdne23510:0",
-		"transition": "crwdns23512:0crwdne23512:0"
-	}
+  "props": {
+    "mode": "crwdns23508:0crwdne23508:0",
+    "origin": "crwdns23510:0crwdne23510:0",
+    "transition": "crwdns23512:0crwdne23512:0"
+  }
 }

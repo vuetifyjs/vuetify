@@ -41,8 +41,8 @@
           "value": [
             "simple/multiple",
             "simple/mandatory",
-            "simple/activeClass",
-            "intermediate/togglePictures",
+            "simple/active-class",
+            "intermediate/toggle-pictures",
             "complex/post"
           ]
         }

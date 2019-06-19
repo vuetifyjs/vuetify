@@ -28,6 +28,10 @@
       "offsetY": false,
       "transition": false
     },
+    "v-dialog": {
+      "close-delay": false,
+      "open-delay": false
+    },
     "v-overflow-btn": {
       "activator": false,
       "closeOnClick": false,

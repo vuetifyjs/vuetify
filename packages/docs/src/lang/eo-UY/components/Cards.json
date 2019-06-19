@@ -1,74 +1,74 @@
 {
-	"header": "crwdns26474:0crwdne26474:0",
-	"headerText": "crwdns26476:0crwdne26476:0",
-	"examples": {
-		"usage": {
-			"desc": "crwdns26478:0crwdne26478:0"
-		},
-		"infoCard": {
-			"header": "crwdns26480:0crwdne26480:0",
-			"desc": "crwdns26482:0crwdne26482:0"
-		},
-		"mediaWithText": {
-			"header": "crwdns26484:0crwdne26484:0",
-			"desc": "crwdns26486:0crwdne26486:0"
-		},
-		"outlined": {
-			"header": "crwdns26488:0crwdne26488:0",
-			"desc": "crwdns26490:0crwdne26490:0"
-		},
-		"horizontal": {
-			"header": "crwdns26492:0crwdne26492:0",
-			"desc": "crwdns26494:0crwdne26494:0"
-		},
-		"grids": {
-			"header": "crwdns26496:0crwdne26496:0",
-			"desc": "crwdns26498:0crwdne26498:0"
-		},
-		"customActions": {
-			"header": "crwdns26500:0crwdne26500:0",
-			"desc": "crwdns26502:0crwdne26502:0"
-		},
-		"twitterCard": {
-			"header": "crwdns26504:0crwdne26504:0",
-			"desc": "crwdns26506:0crwdne26506:0"
-		},
-		"loading": {
-			"header": "crwdns26508:0crwdne26508:0",
-			"desc": "crwdns26510:0[v-progress-linear]crwdne26510:0"
-		},
-		"weather": {
-			"header": "crwdns26512:0crwdne26512:0",
-			"desc": "crwdns26514:0[v-list-items]crwdnd26514:0[v-slider]crwdne26514:0"
-		},
-		"advanced": {
-			"header": "crwdns26516:0crwdne26516:0",
-			"desc": "crwdns26518:0crwdne26518:0"
-		},
-		"intermediate": {
-			"header": "crwdns26520:0crwdne26520:0",
-			"desc": "crwdns26522:0crwdne26522:0"
-		}
-	},
-	"cardMediaWarning": "crwdns26524:0crwdne26524:0",
-	"props": {
-		"alt": "crwdns26526:0crwdne26526:0",
-		"aspectRatio": "crwdns26528:0crwdne26528:0",
-		"contain": "crwdns26530:0crwdne26530:0",
-		"flat": "crwdns26532:0crwdne26532:0",
-		"gradient": "crwdns26534:0crwdne26534:0",
-		"height": "crwdns26536:0crwdne26536:0",
-		"hover": "crwdns26538:0crwdne26538:0",
-		"img": "crwdns26540:0crwdne26540:0",
-		"lazySrc": "crwdns26542:0crwdne26542:0",
-		"link": "crwdns26544:0crwdne26544:0",
-		"outlined": "crwdns26546:0crwdne26546:0",
-		"position": "crwdns26548:0crwdne26548:0",
-		"primaryTitle": "crwdns26550:0crwdne26550:0",
-		"raised": "crwdns26552:0crwdne26552:0",
-		"sizes": "crwdns26554:0crwdne26554:0",
-		"src": "crwdns26556:0crwdne26556:0",
-		"srcset": "crwdns26558:0crwdne26558:0",
-		"transition": "crwdns26560:0crwdne26560:0"
-	}
+  "header": "crwdns26474:0crwdne26474:0",
+  "headerText": "crwdns26476:0crwdne26476:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns26478:0crwdne26478:0"
+    },
+    "infoCard": {
+      "header": "crwdns26480:0crwdne26480:0",
+      "desc": "crwdns26482:0crwdne26482:0"
+    },
+    "mediaWithText": {
+      "header": "crwdns26484:0crwdne26484:0",
+      "desc": "crwdns26486:0crwdne26486:0"
+    },
+    "outlined": {
+      "header": "crwdns26488:0crwdne26488:0",
+      "desc": "crwdns26490:0crwdne26490:0"
+    },
+    "horizontal": {
+      "header": "crwdns26492:0crwdne26492:0",
+      "desc": "crwdns26494:0crwdne26494:0"
+    },
+    "grids": {
+      "header": "crwdns26496:0crwdne26496:0",
+      "desc": "crwdns26498:0crwdne26498:0"
+    },
+    "customActions": {
+      "header": "crwdns26500:0crwdne26500:0",
+      "desc": "crwdns26502:0crwdne26502:0"
+    },
+    "twitterCard": {
+      "header": "crwdns26504:0crwdne26504:0",
+      "desc": "crwdns26506:0crwdne26506:0"
+    },
+    "loading": {
+      "header": "crwdns26508:0crwdne26508:0",
+      "desc": "crwdns26510:0[v-progress-linear]crwdne26510:0"
+    },
+    "weather": {
+      "header": "crwdns26512:0crwdne26512:0",
+      "desc": "crwdns26514:0[v-list-items]crwdnd26514:0[v-slider]crwdne26514:0"
+    },
+    "advanced": {
+      "header": "crwdns26516:0crwdne26516:0",
+      "desc": "crwdns26518:0crwdne26518:0"
+    },
+    "intermediate": {
+      "header": "crwdns26520:0crwdne26520:0",
+      "desc": "crwdns26522:0crwdne26522:0"
+    }
+  },
+  "cardMediaWarning": "crwdns26524:0crwdne26524:0",
+  "props": {
+    "alt": "crwdns26526:0crwdne26526:0",
+    "aspectRatio": "crwdns26528:0crwdne26528:0",
+    "contain": "crwdns26530:0crwdne26530:0",
+    "flat": "crwdns26532:0crwdne26532:0",
+    "gradient": "crwdns26534:0crwdne26534:0",
+    "height": "crwdns26536:0crwdne26536:0",
+    "hover": "crwdns26538:0crwdne26538:0",
+    "img": "crwdns26540:0crwdne26540:0",
+    "lazySrc": "crwdns26542:0crwdne26542:0",
+    "link": "crwdns26544:0crwdne26544:0",
+    "outlined": "crwdns26546:0crwdne26546:0",
+    "position": "crwdns26548:0crwdne26548:0",
+    "primaryTitle": "crwdns26550:0crwdne26550:0",
+    "raised": "crwdns26552:0crwdne26552:0",
+    "sizes": "crwdns26554:0crwdne26554:0",
+    "src": "crwdns26556:0crwdne26556:0",
+    "srcset": "crwdns26558:0crwdne26558:0",
+    "transition": "crwdns26560:0crwdne26560:0"
+  }
 }

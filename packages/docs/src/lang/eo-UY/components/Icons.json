@@ -1,44 +1,44 @@
 {
-	"header": "crwdns25866:0crwdne25866:0",
-	"headerText": "crwdns25868:0crwdne25868:0",
-	"examples": {
-		"usage": {
-			"desc": "crwdns25870:0crwdne25870:0"
-		},
-		"fontAwesome": {
-			"header": "crwdns25872:0crwdne25872:0",
-			"desc": "crwdns25874:0crwdne25874:0"
-		},
-		"md": {
-			"header": "crwdns25876:0crwdne25876:0",
-			"desc": "crwdns25878:0crwdne25878:0"
-		},
-		"color": {
-			"header": "crwdns25880:0crwdne25880:0",
-			"desc": "crwdns25882:0crwdne25882:0"
-		},
-		"buttons": {
-			"header": "crwdns25884:0crwdne25884:0",
-			"desc": "crwdns25886:0crwdne25886:0"
-		},
-		"clickable": {
-			"header": "crwdns25888:0crwdne25888:0",
-			"desc": "crwdns25890:0crwdne25890:0"
-		},
-		"mdiSvg": {
-			"header": "crwdns25892:0crwdne25892:0",
-			"desc": "crwdns25894:0[here]crwdne25894:0"
-		}
-	},
-	"props": {
-		"disabled": "crwdns25896:0crwdne25896:0",
-		"large": "crwdns25898:0crwdne25898:0",
-		"left": "crwdns25900:0crwdne25900:0",
-		"medium": "crwdns25902:0crwdne25902:0",
-		"right": "crwdns25904:0crwdne25904:0",
-		"dense": "crwdns25906:0crwdne25906:0",
-		"size": "crwdns25908:0crwdne25908:0",
-		"small": "crwdns25910:0crwdne25910:0",
-		"xLarge": "crwdns25912:0crwdne25912:0"
-	}
+  "header": "crwdns25866:0crwdne25866:0",
+  "headerText": "crwdns25868:0crwdne25868:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns25870:0crwdne25870:0"
+    },
+    "fontAwesome": {
+      "header": "crwdns25872:0crwdne25872:0",
+      "desc": "crwdns25874:0crwdne25874:0"
+    },
+    "md": {
+      "header": "crwdns25876:0crwdne25876:0",
+      "desc": "crwdns25878:0crwdne25878:0"
+    },
+    "color": {
+      "header": "crwdns25880:0crwdne25880:0",
+      "desc": "crwdns25882:0crwdne25882:0"
+    },
+    "buttons": {
+      "header": "crwdns25884:0crwdne25884:0",
+      "desc": "crwdns25886:0crwdne25886:0"
+    },
+    "clickable": {
+      "header": "crwdns25888:0crwdne25888:0",
+      "desc": "crwdns25890:0crwdne25890:0"
+    },
+    "mdiSvg": {
+      "header": "crwdns25892:0crwdne25892:0",
+      "desc": "crwdns25894:0[here]crwdne25894:0"
+    }
+  },
+  "props": {
+    "disabled": "crwdns25896:0crwdne25896:0",
+    "large": "crwdns25898:0crwdne25898:0",
+    "left": "crwdns25900:0crwdne25900:0",
+    "medium": "crwdns25902:0crwdne25902:0",
+    "right": "crwdns25904:0crwdne25904:0",
+    "dense": "crwdns25906:0crwdne25906:0",
+    "size": "crwdns25908:0crwdne25908:0",
+    "small": "crwdns25910:0crwdne25910:0",
+    "xLarge": "crwdns25912:0crwdne25912:0"
+  }
 }

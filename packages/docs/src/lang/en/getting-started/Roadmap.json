@@ -15,7 +15,7 @@
       "complete": true,
       "title": "v1.0 Release",
       "caption": "February 2018",
-      "text": "The official v1.0 release party. After 18 months and Kael's sanity, we rolled into our first **MAJOR** release.",
+      "text": "The official v1.0 release party. After 18 months and Kael's sanity, we rolled into our first **MAJOR** release. This included a multitude of brand new components, features and functionality. Check here for the official [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.0.0).",
       "value": false
     },
     {
@@ -23,7 +23,7 @@
       "complete": true,
       "title": "v1.1 Release",
       "caption": "June 2018",
-      "text": "A complete rebuild of all form functionality. Abstracted features from components like `v-select` into new implementations, `v-autocomplete`, `v-combobox`, etc. First official support of **RTL**.",
+      "text": "A complete rebuild of all form functionality including all inputs and selection controls. Abstracted features from components like `v-select` into new implementations, `v-autocomplete`, `v-combobox` for more scoped functionality and easier testing. This release also marked the first official support of **RTL** languages. Check here for the official [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.1.0).",
       "value": false
     },
     {
@@ -31,7 +31,7 @@
       "complete": true,
       "title": "v1.2 Release",
       "caption": "July 2018",
-      "text": "Add new components, `v-img`, `v-rating` and `v-hover`. Improve theme propagation system and expand the functionality of the **colorable** mixin.",
+      "text": "Added new components, `v-img`, `v-rating` and `v-hover`. Improved theme propagation system and expanded the functionality of the colors used with components such as HEX and RGBA. Als added numerous new locales. Check here for the official [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.2.0).",
       "value": false
     },
     {
@@ -39,7 +39,7 @@
       "complete": true,
       "title": "v1.3 Release",
       "caption": "October 2018",
-      "text": "Add new components, `v-treeview`, `v-timeline` and `v-item-group`. Unify the interfaces used in `v-tabs` and `v-carousel`. Improve the **vuetify-loader** to support effortless application tree-shaking of Vuetify components.",
+      "text": "Added new components, `v-treeview`, `v-timeline` and `v-item-group`. Unified the interfaces used in `v-tabs` and `v-carousel`. Improved the **vuetify-loader** to support effortless application tree-shaking of Vuetify components. Check here for the official [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.3.0).",
       "value": false
     },
     {
@@ -47,7 +47,7 @@
       "complete": true,
       "title": "AWS Cognito Vuex Module",
       "caption": "November 2018",
-      "text": "A fully featured Vuex module for interacting with AWS Cognito. Useful for websites that require authentication.",
+      "text": "A fully featured Vuex module for interacting with AWS Cognito. Useful for websites that require authentication. Check here for more information on [AWS Cognito](https://aws.amazon.com/cognito/dev-resources/).",
       "value": false
     },
     {
@@ -55,7 +55,7 @@
       "complete": true,
       "title": "v1.4 Release",
       "caption": "December 2018",
-      "text": "Add new component `v-sparkline` and abstract `v-toolbar`'s functionality into multiple components.",
+      "text": "Added new components `v-sparkline` and abstracted `v-toolbar`'s functionality into multiple components for easier maintainability and testing. Rebuilt the entire documentation to make it easier for contributors and maintenance from the team. Check here for the official [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.4.0).",
       "value": false
     },
     {
@@ -63,7 +63,7 @@
       "complete": true,
       "title": "v1.5 Release",
       "caption": "February 2019",
-      "text": "Add new component `v-calendar`. Improve functionality of `v-sparkline` with new **bar** and **fill** props. Improve `v-treeview` and prepare for LTS.",
+      "text": "Added new component, `v-calendar`. Improved functionality of `v-sparkline` with new **bar** and **fill** properties. Improved `v-treeview` and prepared for LTS. Navigate to the [Long-term Support Page](/getting-started/long-term-support) for more information on LTS. Check here for the official [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0).",
       "value": false
     },
     {
@@ -71,7 +71,24 @@
       "complete": false,
       "title": "v2.0 Release **(Arcadia)**",
       "caption": "Q2 2019",
-      "text": "A complete rebuild of the framework core. Improving the layout and theme systems, platform integration, accessibility and performance. Fully modular and automatic tree-shaking from the [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader).",
+      "text": "A complete rebuild of the framework core. Improving the layout and theme systems, platform integration, accessibility, RTL and performance. Update all components to the [Material Design 2](https://material.io/design/) specification. Add additional functionality to multiple existing components and setup v1.5 for [Long-term Support](/getting-started/long-term-support).",
+      "features": {
+        "#### Highlights": [
+          "Complete update to Material Design 2",
+          "Fully updated to Typescript",
+          "Converted from Stylus to Sass",
+          "Converted from avoriaz to vue-test-utils"
+        ],
+        "#### New Components": [
+          "v-app-bar",
+          "v-banner",
+          "v-chip-group",
+          "v-color-picker",
+          "v-list-item-group",
+          "v-overlay",
+          "v-simple-table"
+        ]
+      },
       "value": true
     },
     {
@@ -79,7 +96,7 @@
       "complete": false,
       "title": "v2.1 Release **(Vanguard)**",
       "caption": "Q3 2019",
-      "text": "Vuetify components will be pre-configurable through framework wide defaults. This will allow you to set global settings such as **no-ripples** or all inputs are of **outline** type and even set all cards to become **tile**s.",
+      "text": "A maintenance cycle to work on bugs from the v2.0 release. This includes performance issues, incorrect or missing a11y and RTL and general fixes. This will allow the team to catch up on the backlog of tasks that have accumulated over the 6 month development cycle of the previous release.",
       "value": false
     },
     {
@@ -87,7 +104,15 @@
       "complete": false,
       "title": "v2.2 Release **(Tigris)**",
       "caption": "Q4 2019",
-      "text": "The introduction of Vuetify Presets. Will include the entire Material Design Studies collection and be user customizable. For more information on Google's studies, please [navigate here](https://material.io/design/material-studies/about-our-material-studies.html).",
+      "text": "Vuetify components will be pre-configurable through framework wide defaults. This will allow you to set global settings such as **no-ripples** or all inputs are of **outline** type and even set all cards to become **tile**s.",
+      "value": false
+    },
+    {
+      "type": "release",
+      "complete": false,
+      "title": "v2.2 Release **(Orion)**",
+      "caption": "Q1 2020",
+      "text": "The introduction of Vuetify Presets. Will include the entire Material Design Studies collection and be _user customizable_. For more information on Google's studies, please [navigate here](https://material.io/design/material-studies/about-our-material-studies.html).",
       "value": false
     },
     {

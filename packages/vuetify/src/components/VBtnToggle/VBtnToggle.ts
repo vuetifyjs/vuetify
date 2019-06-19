@@ -25,6 +25,7 @@ export default mixins(
         ...ButtonGroup.options.computed.classes.call(this),
         'v-btn-toggle': true,
         'v-btn-toggle--rounded': this.rounded,
+        ...this.themeClasses,
       }
     },
   },

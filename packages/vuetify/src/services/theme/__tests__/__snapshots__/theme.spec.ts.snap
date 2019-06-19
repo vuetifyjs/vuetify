@@ -5669,6 +5669,7 @@ Object {
     "lighten4": "#f8ffff",
     "lighten5": "#ffffff",
   },
+  "anchor": "#1976d2",
   "error": Object {
     "base": "#ff5252",
     "darken1": "#df323b",

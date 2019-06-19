@@ -9,9 +9,10 @@
       { "text": "faq", "to": "frequently-asked-questions" },
       { "text": "meetTheTeam", "to": "meet-the-team" },
       { "text": "sponsorsAndBackers", "to": "sponsors-and-backers" },
+      { "new": true, "text": "lts", "to": "long-term-support" },
       { "text": "contributing", "to": "contributing" },
       { "updated": true, "text": "roadmap", "to": "roadmap" },
-      { "text": "consulting", "to": "consulting-and-support" }
+      { "help": true, "text": "consulting", "to": "consulting-and-support" }
     ]
   },
   {
@@ -191,7 +192,6 @@
   {
     "text": "premiumThemes",
     "icon": "mdi-palette",
-    "to": "themes/premium",
-    "updated": true
+    "to": "themes/premium"
   }
 ]

@@ -1,106 +1,106 @@
 {
-	"header": "crwdns28450:0crwdne28450:0",
-	"headerText": "crwdns28452:0crwdne28452:0",
-	"examples": {
-		"usage": {
-			"desc": "crwdns28454:0crwdne28454:0"
-		},
-		"slots": {
-			"header": "crwdns28456:0crwdne28456:0",
-			"desc": "crwdns28458:0crwdne28458:0"
-		},
-		"events": {
-			"header": "crwdns28460:0crwdne28460:0",
-			"desc": "crwdns28462:0crwdne28462:0"
-		},
-		"weekly": {
-			"header": "crwdns28464:0crwdne28464:0",
-			"desc": "crwdns28466:0crwdne28466:0"
-		},
-		"daily": {
-			"header": "crwdns28468:0crwdne28468:0",
-			"desc": "crwdns28470:0crwdne28470:0"
-		}
-	},
-	"props": {
-		"start": "crwdns28476:0crwdne28476:0",
-		"end": "crwdns28478:0crwdne28478:0",
-		"weekdays": "crwdns28480:0crwdne28480:0",
-		"hideHeader": "crwdns28482:0crwdne28482:0",
-		"shortWeekdays": "crwdns28484:0crwdne28484:0",
-		"locale": "crwdns28486:0crwdne28486:0",
-		"maxDays": "crwdns28488:0crwdne28488:0",
-		"shortIntervals": "crwdns28490:0crwdne28490:0",
-		"intervalHeight": "crwdns28492:0crwdne28492:0",
-		"intervalMinutes": "crwdns28494:0crwdne28494:0",
-		"firstInterval": "crwdns28496:0crwdne28496:0",
-		"intervalCount": "crwdns28498:0crwdne28498:0",
-		"minWeeks": "crwdns28500:0crwdne28500:0",
-		"shortMonths": "crwdns28502:0crwdne28502:0",
-		"showMonthOnFirst": "crwdns28504:0crwdne28504:0",
-		"type": "crwdns28506:0crwdne28506:0",
-		"value": "crwdns28508:0crwdne28508:0",
-		"now": "crwdns28510:0crwdne28510:0",
-		"v-model": "crwdns28512:0crwdne28512:0",
-		"weekdayFormat": "crwdns28514:0crwdne28514:0",
-		"monthFormat": "crwdns28516:0crwdne28516:0",
-		"intervalFormat": "crwdns28518:0crwdne28518:0",
-		"intervalStyle": "crwdns28520:0crwdne28520:0",
-		"showIntervalLabel": "crwdns28522:0crwdne28522:0",
-		"dayFormat": "crwdns28524:0crwdne28524:0"
-	},
-	"functions": {
-		"updateTimes": "crwdns28526:0crwdne28526:0",
-		"next": "crwdns28528:0crwdne28528:0",
-		"prev": "crwdns28530:0crwdne28530:0",
-		"move": "crwdns28532:0crwdne28532:0",
-		"timeToY": "crwdns28534:0crwdne28534:0",
-		"minutesToPixels": "crwdns28536:0crwdne28536:0",
-		"scrollToTime": "crwdns28538:0crwdne28538:0"
-	},
-	"scopedSlots": {
-		"day": "crwdns28540:0crwdne28540:0",
-		"dayBody": "crwdns28542:0crwdne28542:0",
-		"dayHeader": "crwdns28544:0crwdne28544:0",
-		"dayLabel": "crwdns28546:0crwdne28546:0",
-		"dayMonth": "crwdns28548:0crwdne28548:0",
-		"interval": "crwdns28550:0crwdne28550:0"
-	},
-	"events": {
-		"input": "crwdns28552:0crwdne28552:0",
-		"moved": "crwdns28554:0crwdne28554:0",
-		"change": "crwdns28556:0crwdne28556:0",
-		"click:date": "crwdns28558:0crwdne28558:0",
-		"contextmenu:date": "crwdns28560:0crwdne28560:0",
-		"click:day": "crwdns28562:0crwdne28562:0",
-		"contextmenu:day": "crwdns28564:0crwdne28564:0",
-		"mousedown:day": "crwdns28566:0crwdne28566:0",
-		"mousemove:day": "crwdns28568:0crwdne28568:0",
-		"mouseup:day": "crwdns28570:0crwdne28570:0",
-		"mouseenter:day": "crwdns28572:0crwdne28572:0",
-		"mouseleave:day": "crwdns28574:0crwdne28574:0",
-		"touchstart:day": "crwdns28576:0crwdne28576:0",
-		"touchmove:day": "crwdns28578:0crwdne28578:0",
-		"touchend:day": "crwdns28580:0crwdne28580:0",
-		"click:time": "crwdns28582:0crwdne28582:0",
-		"contextmenu:time": "crwdns28584:0crwdne28584:0",
-		"mousedown:time": "crwdns28586:0crwdne28586:0",
-		"mousemove:time": "crwdns28588:0crwdne28588:0",
-		"mouseup:time": "crwdns28590:0crwdne28590:0",
-		"mouseenter:time": "crwdns28592:0crwdne28592:0",
-		"mouseleave:time": "crwdns28594:0crwdne28594:0",
-		"touchstart:time": "crwdns28596:0crwdne28596:0",
-		"touchmove:time": "crwdns28598:0crwdne28598:0",
-		"touchend:time": "crwdns28600:0crwdne28600:0",
-		"click:interval": "crwdns28602:0crwdne28602:0",
-		"contextmenu:interval": "crwdns28604:0crwdne28604:0",
-		"mousedown:interval": "crwdns28606:0crwdne28606:0",
-		"mousemove:interval": "crwdns28608:0crwdne28608:0",
-		"mouseup:interval": "crwdns28610:0crwdne28610:0",
-		"mouseenter:interval": "crwdns28612:0crwdne28612:0",
-		"mouseleave:interval": "crwdns28614:0crwdne28614:0",
-		"touchstart:interval": "crwdns28616:0crwdne28616:0",
-		"touchmove:interval": "crwdns28618:0crwdne28618:0",
-		"touchend:interval": "crwdns28620:0crwdne28620:0"
-	}
+  "header": "crwdns28450:0crwdne28450:0",
+  "headerText": "crwdns28452:0crwdne28452:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns28454:0crwdne28454:0"
+    },
+    "slots": {
+      "header": "crwdns28456:0crwdne28456:0",
+      "desc": "crwdns28458:0crwdne28458:0"
+    },
+    "events": {
+      "header": "crwdns28460:0crwdne28460:0",
+      "desc": "crwdns28462:0crwdne28462:0"
+    },
+    "weekly": {
+      "header": "crwdns28464:0crwdne28464:0",
+      "desc": "crwdns28466:0crwdne28466:0"
+    },
+    "daily": {
+      "header": "crwdns28468:0crwdne28468:0",
+      "desc": "crwdns28470:0crwdne28470:0"
+    }
+  },
+  "props": {
+    "start": "crwdns28476:0crwdne28476:0",
+    "end": "crwdns28478:0crwdne28478:0",
+    "weekdays": "crwdns28480:0crwdne28480:0",
+    "hideHeader": "crwdns28482:0crwdne28482:0",
+    "shortWeekdays": "crwdns28484:0crwdne28484:0",
+    "locale": "crwdns28486:0crwdne28486:0",
+    "maxDays": "crwdns28488:0crwdne28488:0",
+    "shortIntervals": "crwdns28490:0crwdne28490:0",
+    "intervalHeight": "crwdns28492:0crwdne28492:0",
+    "intervalMinutes": "crwdns28494:0crwdne28494:0",
+    "firstInterval": "crwdns28496:0crwdne28496:0",
+    "intervalCount": "crwdns28498:0crwdne28498:0",
+    "minWeeks": "crwdns28500:0crwdne28500:0",
+    "shortMonths": "crwdns28502:0crwdne28502:0",
+    "showMonthOnFirst": "crwdns28504:0crwdne28504:0",
+    "type": "crwdns28506:0crwdne28506:0",
+    "value": "crwdns28508:0crwdne28508:0",
+    "now": "crwdns28510:0crwdne28510:0",
+    "v-model": "crwdns28512:0crwdne28512:0",
+    "weekdayFormat": "crwdns28514:0crwdne28514:0",
+    "monthFormat": "crwdns28516:0crwdne28516:0",
+    "intervalFormat": "crwdns28518:0crwdne28518:0",
+    "intervalStyle": "crwdns28520:0crwdne28520:0",
+    "showIntervalLabel": "crwdns28522:0crwdne28522:0",
+    "dayFormat": "crwdns28524:0crwdne28524:0"
+  },
+  "functions": {
+    "updateTimes": "crwdns28526:0crwdne28526:0",
+    "next": "crwdns28528:0crwdne28528:0",
+    "prev": "crwdns28530:0crwdne28530:0",
+    "move": "crwdns28532:0crwdne28532:0",
+    "timeToY": "crwdns28534:0crwdne28534:0",
+    "minutesToPixels": "crwdns28536:0crwdne28536:0",
+    "scrollToTime": "crwdns28538:0crwdne28538:0"
+  },
+  "scopedSlots": {
+    "day": "crwdns28540:0crwdne28540:0",
+    "dayBody": "crwdns28542:0crwdne28542:0",
+    "dayHeader": "crwdns28544:0crwdne28544:0",
+    "dayLabel": "crwdns28546:0crwdne28546:0",
+    "dayMonth": "crwdns28548:0crwdne28548:0",
+    "interval": "crwdns28550:0crwdne28550:0"
+  },
+  "events": {
+    "input": "crwdns28552:0crwdne28552:0",
+    "moved": "crwdns28554:0crwdne28554:0",
+    "change": "crwdns28556:0crwdne28556:0",
+    "click:date": "crwdns28558:0crwdne28558:0",
+    "contextmenu:date": "crwdns28560:0crwdne28560:0",
+    "click:day": "crwdns28562:0crwdne28562:0",
+    "contextmenu:day": "crwdns28564:0crwdne28564:0",
+    "mousedown:day": "crwdns28566:0crwdne28566:0",
+    "mousemove:day": "crwdns28568:0crwdne28568:0",
+    "mouseup:day": "crwdns28570:0crwdne28570:0",
+    "mouseenter:day": "crwdns28572:0crwdne28572:0",
+    "mouseleave:day": "crwdns28574:0crwdne28574:0",
+    "touchstart:day": "crwdns28576:0crwdne28576:0",
+    "touchmove:day": "crwdns28578:0crwdne28578:0",
+    "touchend:day": "crwdns28580:0crwdne28580:0",
+    "click:time": "crwdns28582:0crwdne28582:0",
+    "contextmenu:time": "crwdns28584:0crwdne28584:0",
+    "mousedown:time": "crwdns28586:0crwdne28586:0",
+    "mousemove:time": "crwdns28588:0crwdne28588:0",
+    "mouseup:time": "crwdns28590:0crwdne28590:0",
+    "mouseenter:time": "crwdns28592:0crwdne28592:0",
+    "mouseleave:time": "crwdns28594:0crwdne28594:0",
+    "touchstart:time": "crwdns28596:0crwdne28596:0",
+    "touchmove:time": "crwdns28598:0crwdne28598:0",
+    "touchend:time": "crwdns28600:0crwdne28600:0",
+    "click:interval": "crwdns28602:0crwdne28602:0",
+    "contextmenu:interval": "crwdns28604:0crwdne28604:0",
+    "mousedown:interval": "crwdns28606:0crwdne28606:0",
+    "mousemove:interval": "crwdns28608:0crwdne28608:0",
+    "mouseup:interval": "crwdns28610:0crwdne28610:0",
+    "mouseenter:interval": "crwdns28612:0crwdne28612:0",
+    "mouseleave:interval": "crwdns28614:0crwdne28614:0",
+    "touchstart:interval": "crwdns28616:0crwdne28616:0",
+    "touchmove:interval": "crwdns28618:0crwdne28618:0",
+    "touchend:interval": "crwdns28620:0crwdne28620:0"
+  }
 }

@@ -36,8 +36,8 @@
             "simple/horizontal",
             "simple/shift",
             "simple/toggle",
-            "intermediate/hideOnScroll",
-            "intermediate/scrollThreshold"
+            "intermediate/hide-on-scroll",
+            "intermediate/scroll-threshold"
           ]
         }
       ]

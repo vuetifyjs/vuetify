@@ -25,6 +25,33 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "simple/loading",
+            "simple/hint",
+            "simple/success",
+            "simple/error",
+            "simple/multi-error",
+            "intermediate/rules",
+            "intermediate/slots",
+            "intermediate/slot-events"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "up-next",
           "value": [
             "components/forms",

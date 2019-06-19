@@ -1,27 +1,35 @@
 {
-	"header": "crwdns25914:0crwdne25914:0",
-	"headerText": "crwdns25916:0crwdne25916:0",
-	"examples": {
-		"usage": {
-			"desc": "crwdns25918:0crwdne25918:0"
-		},
-		"companyFooter": {
-			"header": "crwdns25920:0crwdne25920:0",
-			"desc": "crwdns25922:0crwdne25922:0"
-		},
-		"indigoFooter": {
-			"header": "crwdns25924:0crwdne25924:0",
-			"desc": "crwdns25926:0crwdne25926:0"
-		},
-		"tealFooter": {
-			"header": "crwdns25928:0crwdne25928:0",
-			"desc": "crwdns25930:0crwdne25930:0"
-		}
-	},
-	"props": {
-		"absolute": "crwdns25932:0crwdne25932:0",
-		"fixed": "crwdns25934:0crwdne25934:0",
-		"inset": "crwdns25936:0crwdne25936:0",
-		"padless": "crwdns25938:0crwdne25938:0"
-	}
+  "header": "crwdns25914:0crwdne25914:0",
+  "headerText": "crwdns25916:0crwdne25916:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns36134:0crwdne36134:0"
+    },
+    "absolute": {
+      "header": "crwdns36136:0crwdne36136:0",
+      "desc": "crwdns36138:0crwdne36138:0"
+    },
+    "padless": {
+      "header": "crwdns36140:0crwdne36140:0",
+      "desc": "crwdns36142:0crwdne36142:0"
+    },
+    "companyFooter": {
+      "header": "crwdns25920:0crwdne25920:0",
+      "desc": "crwdns25922:0crwdne25922:0"
+    },
+    "indigoFooter": {
+      "header": "crwdns25924:0crwdne25924:0",
+      "desc": "crwdns25926:0crwdne25926:0"
+    },
+    "tealFooter": {
+      "header": "crwdns25928:0crwdne25928:0",
+      "desc": "crwdns25930:0crwdne25930:0"
+    }
+  },
+  "props": {
+    "absolute": "crwdns25932:0crwdne25932:0",
+    "fixed": "crwdns25934:0crwdne25934:0",
+    "inset": "crwdns25936:0crwdne25936:0",
+    "padless": "crwdns25938:0crwdne25938:0"
+  }
 }

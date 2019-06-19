@@ -1,21 +1,10 @@
 {
   "header": "Bottom sheet",
   "headerText": "O bottom sheet é um `v-dialog` modificado que é deslizado da parte inferior da tela, similar a um `v-bottom-navigation`. Enquanto um componente de navegação inferior é para botões e ações de nível da aplicação, um bottom sheet pode conter qualquer coisa.",
-  "examples": {
-    "standard": {
-      "header": "Exibição padrão",
-      "desc": "Aqui mostramos uma lista de exemplos de ações que podem estar presentes em uma aplicação."
-    },
-    "inset": {
-      "header": "Inset bottom sheets",
-      "desc": "Bottom sheets podem ser inset, reduzindo sua largura máxima no desktop para 70%. Isso pode ser ainda mais reduzido manualmente usando a propriedade `width`. Também mostramos a ligação da classe dinâmica usando o objeto de ponto de interrupção do Vuetify."
-    }
-  },
   "props": {
     "disabled": "Desativa a capacidade de abrir o diálogo",
     "hideOverlay": "Oculta a exibição da sobreposição",
     "inset": "Reduz a largura máxima do conteúdo do diálogo para 70%",
-    "eager": "Mixins.Bootable.props.eager",
     "maxWidth": "Especifica a largura máxima do conteúdo"
   }
 }

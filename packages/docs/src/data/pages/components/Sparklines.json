@@ -8,7 +8,7 @@
       "children": [
         {
           "type": "usage",
-          "value": "playground"
+          "value": "usage"
         }
       ]
     },
@@ -25,12 +25,21 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "heartRate",
-            "dashboardCard",
-            "salesCard",
-            "fill"
+            "simple/fill",
+            "intermediate/heart-rate",
+            "intermediate/dashboard-card",
+            "intermediate/sales-card"
           ]
         }
       ]

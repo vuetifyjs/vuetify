@@ -1,31 +1,19 @@
 {
   "header": "# Элементы управления выбора",
   "headerText": "Элементы управления выбора, позволяют пользователю выбирать параметры. Эти компоненты **должны** использоваться с помощью `v-model`, поскольку они не поддерживают своё собственное состояние.",
-  "components": ["v-radio-group', 'v-radio', 'v-checkbox', 'v-switch"],
   "examples": {
-    "example": {
-      "header": "### Примеры по умолчанию",
-      "desc": ""
-    },
-    "checkboxesBoolean": {
-      "header": "### Checkboxes - Boolean",
-      "desc": ""
-    },
     "checkboxesArray": {
-      "header": "### Checkboxes - Массив",
-      "desc": ""
+      "header": "### Checkboxes - Массив"
     },
     "checkboxesStates": {
-      "header": "### Checkboxes - Состояние",
-      "desc": ""
+      "header": "### Checkboxes - Состояние"
     },
     "checkboxesColors": {
       "header": "### Checkboxes - Цвета",
       "desc": "Checkboxes могут быть окрашены с использованием любого из встроенных цветов и контекстных имён с помощью свойства `color`."
     },
     "checkboxesInlineTexfield": {
-      "header": "### Checkboxes - в одну линию с текстовым полем",
-      "desc": ""
+      "header": "### Checkboxes - в одну линию с текстовым полем"
     },
     "radiosDefault": {
       "header": "### Radio - по умолчанию",
@@ -39,40 +27,27 @@
       "header": "### Radios - цвета",
       "desc": "Radio могут быть окрашены с использованием любого из встроенных цветов и контекстных имён, с помощью свойства `color`"
     },
-    "switchesBoolean": {
-      "header": "### Switches - Boolean",
-      "desc": ""
-    },
     "switchesArray": {
-      "header": "### Switches - Массив",
-      "desc": ""
+      "header": "### Switches - Массив"
     },
     "switchesStates": {
-      "header": "### Switches - Состояние",
-      "desc": ""
+      "header": "### Switches - Состояние"
     },
     "switchesColors": {
       "header": "### Switches - Цвета",
       "desc": "Switches можно покрасить, используя любой из встроенных цветов и контекстных имён, используя свойство `color`."
-    },
-    "labelSlot": {
-      "header": "### Label slot",
-      "desc": "Selection controls' labels can be defined in `label` slot - that will allow to use HTML content"
     }
   },
   "props": {
     "column": "Показ radio кнопки в столбце",
-    "disabled": "Mixins.Input.props.disabled",
-    "label": "Mixins.Input.props.label",
+    "indeterminate": "Устанавливает неопределённое состояние для checkbox",
+    "inputValue": "связанное значение **v-model**",
     "mandatory": "Принудительный выбор для дочернего элемента `v-radio`",
     "name": "Устанавливает атрибут имени компонента",
     "row": "Показ radio кнопки в ряд",
-    "indeterminate": "Устанавливает неопределённое состояние для checkbox",
-    "inputValue": "связанное значение **v-model**",
     "value": "Устанавливает значение компонента управления выбора"
   },
   "events": {
-    "blur": "Mixins.Input.events.blur",
     "change": "Mixins.Input.events.change",
     "update:error": "Mixins.Input.events.update:error"
   }

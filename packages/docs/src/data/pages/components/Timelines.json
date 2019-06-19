@@ -28,16 +28,26 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "small",
-            "icons",
-            "avatars",
-            "color",
-            "slot",
-            "alert",
-            "reverse",
-            "advanced"
+            "simple/small",
+            "simple/icons",
+            "simple/reverse",
+            "simple/card",
+            "intermediate/alert",
+            "intermediate/slot",
+            "intermediate/avatars",
+            "complex/color",
+            "complex/advanced"
           ]
         }
       ]

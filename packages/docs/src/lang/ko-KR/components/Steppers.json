@@ -1,17 +1,7 @@
 {
   "header": "단계 (Stepper)",
   "headerText": "`v-stepper` 컴포넌트는 숫자가 매겨진 단계를 가진 진행상태를 표시합니다.",
-  "components": [
-    "v-stepper",
-    "v-stepper-step",
-    "v-stepper-content",
-    "v-stepper-header"
-  ],
   "examples": {
-    "example": {
-      "header": "예제 (Example)",
-      "desc": "단계(stepper) 는 쇼핑 카트나 레코드 생성 등 여러 시나리오에 사용될 수 있습니다."
-    },
     "editable": {
       "header": "편집가능한 단계 (Editable steps)",
       "desc": "편집가능한 단계는 언제라도 사용자가 선택할 수 있으며 해당 단계로 이동됩니다."
