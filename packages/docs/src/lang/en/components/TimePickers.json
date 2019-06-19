@@ -28,6 +28,10 @@
     "time-ampm-in-title": {
       "header": "### Time pickers - AM/PM switch in title",
       "desc": "You can move AM/PM switch to picker's title."
+    },
+    "time-no-title": {
+      "header": "### Time pickers - no title",
+      "desc": "You can remove picker's title."
     }
   },
   "props": {
