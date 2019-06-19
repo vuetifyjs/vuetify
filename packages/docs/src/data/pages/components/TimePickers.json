@@ -49,6 +49,7 @@
             "simple/ampm-in-title",
             "simple/no-title",
             "simple/use-seconds",
+            "simple/scrollable",
             "intermediate/dialog-and-menu"
           ]
         }

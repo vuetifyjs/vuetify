@@ -44,6 +44,10 @@
     "use-seconds": {
       "header": "### With seconds",
       "desc": "Time picker can have seconds input."
+    },
+    "scrollable": {
+      "header": "### Scrollable",
+      "desc": "You can edit time picker's value using mouse wheel."
     }
   },
   "props": {
