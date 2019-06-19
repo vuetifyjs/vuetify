@@ -328,4 +328,22 @@ describe('VDataTable.ts', () => {
 
     expect(wrapper2.html()).toMatchSnapshot()
   })
+
+  it('should emit event when clicking on internally created row', async () => {
+    const fn = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems,
+      },
+      listeners: {
+        'click:row': fn,
+      },
+    })
+
+    wrapper.find('tbody tr').trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(fn).toHaveBeenCalled()
+  })
 })
