@@ -46,8 +46,7 @@ export default mixins(
       if (this.height) {
         return isNaN(parseInt(this.height)) ? this.height : parseInt(this.height)
       }
-
-      return this.window ? 32 : 24
+      return this.status ? 16 : this.window ? 32 : 24
     },
     styles (): object {
       return {
