@@ -419,7 +419,7 @@ export default baseMixins.extend<options>().extend({
 
       input.data!.domProps!.value = null
       input.data!.attrs!.readonly = true
-      input.data!.attrs!.type = 'hidden'
+      input.data!.attrs!.type = 'text'
       input.data!.attrs!['aria-readonly'] = true
       input.data!.on!.keypress = this.onKeyPress
 

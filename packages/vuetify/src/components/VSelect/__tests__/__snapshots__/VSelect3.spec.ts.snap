@@ -17,7 +17,7 @@ exports[`VSelect.ts should add color to selected index 1`] = `
           </div>
           <input autocomplete="on"
                  readonly="readonly"
-                 type="hidden"
+                 type="text"
                  aria-readonly="true"
           >
         </div>
