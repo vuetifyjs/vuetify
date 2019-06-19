@@ -197,7 +197,6 @@ describe('VDataTable.ts', () => {
         'update:expanded': expand,
       },
     })
-    // const expand = jest.spyOn(wrapper.vm, 'expand')
 
     expect(wrapper.html()).toMatchSnapshot()
     const expandIcon = wrapper.findAll('.v-data-table__expand-icon').at(0)
