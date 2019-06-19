@@ -21,18 +21,20 @@
       offset-y
       min-width="200"
     >
-      <v-btn
-        slot="activator"
-        icon
-        title="Compare with another version"
-      >
-        <v-icon>mdi-codepen</v-icon>
-      </v-btn>
+      <template #activator="{ on }">
+        <v-btn
+          icon
+          title="Compare with another version"
+          v-on="on"
+        >
+          <v-icon>mdi-codepen</v-icon>
+        </v-btn>
+      </template>
       <v-card>
         <v-card-text>
           <v-text-field
             v-model="version"
-            box
+            filled
             label="Compare with:"
             prefix="version"
           />
