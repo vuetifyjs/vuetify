@@ -70,13 +70,13 @@
     data: () => ({
       layouts: [
         { name: 'Baseline', href: '/examples/layouts/baseline' },
-        { name: 'Baseline Flipped', href: '/examples/layouts/baselineFlipped' },
+        { name: 'Baseline Flipped', href: '/examples/layouts/baseline-flipped' },
         { name: 'Centered', href: '/examples/layouts/centered' },
         { name: 'Complex', href: '/examples/layouts/complex' },
         { name: 'Dark', href: '/examples/layouts/dark' },
-        { name: 'Google Contacts', href: '/examples/layouts/googleContacts' },
-        { name: 'Google Keep', href: '/examples/layouts/googleKeep' },
-        { name: 'Google Youtube', href: '/examples/layouts/googleYoutube' },
+        { name: 'Google Contacts', href: '/examples/layouts/google-contacts' },
+        { name: 'Google Keep', href: '/examples/layouts/google-keep' },
+        { name: 'Google Youtube', href: '/examples/layouts/google-youtube' },
         { name: 'Sandbox', href: '/examples/layouts/sandbox' },
       ],
     }),

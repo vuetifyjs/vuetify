@@ -73,7 +73,7 @@
 <script>
   export default {
     data: () => ({
-      directions: ['t', 'b', 'l', 'r', 'x', 'y', 'a'],
+      directions: ['t', 'b', 'l', 'r', 's', 'e', 'x', 'y', 'a'],
       sizes: ['auto', '0', '1', '2', '3', '4', '5'],
       paddingDirection: 'a',
       paddingSize: '2',

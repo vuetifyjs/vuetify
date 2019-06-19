@@ -61,7 +61,7 @@
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis magnam necessitatibus possimus sapiente laboriosam ducimus atque maxime quibusdam, facilis velit assumenda, quod nisi aliquid corrupti maiores doloribus soluta optio blanditiis.
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis magnam necessitatibus possimus sapiente laboriosam ducimus atque maxime quibusdam, facilis velit assumenda, quod nisi aliquid corrupti maiores doloribus soluta optio blanditiis.
 
-          <template #actions>
+          <template v-slot:actions>
             <v-btn
               text
               color="deep-purple accent-4"

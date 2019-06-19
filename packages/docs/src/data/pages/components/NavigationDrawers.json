@@ -41,7 +41,8 @@
           "type": "examples",
           "value": [
             "simple/colored",
-            "simple/permanentFloating",
+            "simple/permanent-floating",
+            "simple/permanent-floating-card",
             "simple/mini",
             "simple/temporary",
             "simple/right",

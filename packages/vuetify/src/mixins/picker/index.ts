@@ -64,6 +64,7 @@ export default mixins(
           landscape: this.landscape,
           light: this.light,
           width: this.width,
+          noTitle: this.noTitle,
         },
       }, children)
     },

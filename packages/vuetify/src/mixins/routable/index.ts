@@ -87,7 +87,6 @@ export default Vue.extend({
 
       const data: VNodeData = {
         attrs: {
-          disabled: this.disabled,
           tabindex: 'tabindex' in this.$attrs ? this.$attrs.tabindex : undefined,
         },
         class: this.classes,

@@ -25,19 +25,19 @@
       "header": "### Slot: items and headers",
       "desc": "The `items` and `headers` slots can accept either a collection of <kbd>td/th</kbd> tags, or if you want control of the entire row, a <kbd>tr</kbd> tag. In the latter case, you have to manually specify a `key` on the row regardless of the `item-key` value."
     },
-    "multiSort": {
+    "multi-sort": {
       "header": "### Sort on multiple columns",
       "desc": "Using the `multi-sort` prop will enable you to sort on multiple columns at the same time. When enabled, you can pass arrays to both `sort-by` and `sort-desc` to programmatically control the sorting, instead of single values."
     },
-    "customizeRows": {
-      "header": "### Customizing default rows",
-      "desc": "You can use the dynamic scoped slots `item.column.<name>` to customize only certain columns. `<name>` is the name of the `value` property in the corresponding header item sent to `headers`. So to customize the calories column we're using the `item.column.calories` slot."
-    },
-    "customizeHeader": {
+    "customize-header": {
       "header": "### Customizing default header",
       "desc": "You can use the dynamic scoped slots `header.column.<name>` to customize only certain columns. `<name>` is the name of the `value` property in the corresponding header item sent to `headers`."
     },
-    "customizeFooter": {
+    "customize-rows": {
+      "header": "### Customizing default rows",
+      "desc": "You can use the dynamic scoped slots `item.column.<name>` to customize only certain columns. `<name>` is the name of the `value` property in the corresponding header item sent to `headers`. So to customize the calories column we're using the `item.column.calories` slot."
+    },
+    "customize-footer": {
       "header": "### Customizing footer",
       "desc": "The `footer-props` prop allows you to send props to the default footer."
     },
@@ -69,7 +69,7 @@
       "header": "### Remove default header and footer",
       "desc": "You can apply the `hide-default-headers` and `hide-default-footer` props to remove the default header and footer respectively."
     },
-    "editdialog": {
+    "edit-dialog": {
       "header": "### Inline Editing",
       "desc": "The `v-edit-dialog` component is used for inline-editing within data tables. You can block closing the dialog when clicked outside by adding the **persistent** prop."
     },

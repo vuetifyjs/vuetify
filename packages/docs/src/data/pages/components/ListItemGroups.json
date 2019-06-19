@@ -30,7 +30,7 @@
         {
           "type": "examples",
           "value": [
-            "selectionControls",
+            "selection-controls",
             "flat"
           ]
         }

@@ -32,6 +32,12 @@ export function install (Vue: VueConstructor, args: VuetifyUseOptions = {}) {
     return false
   })(components)
 
+  // Used to avoid multiple mixins being setup
+  // when in dev mode and hot module reload
+  // https://github.com/vuejs/vue/issues/5089#issuecomment-284260111
+  if (Vue.$_vuetify_installed) return
+  Vue.$_vuetify_installed = true
+
   Vue.mixin({
     beforeCreate () {
       const options = this.$options as any

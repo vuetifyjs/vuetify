@@ -40,10 +40,10 @@
           "type": "examples",
           "value": [
             "simple/cycle",
-            "simple/customTransition",
-            "simple/customIcons",
-            "simple/hideControls",
-            "simple/hideDelimiters",
+            "simple/custom-transition",
+            "simple/custom-icons",
+            "simple/hide-controls",
+            "simple/hide-delimiters",
             "intermediate/model"
           ]
         }

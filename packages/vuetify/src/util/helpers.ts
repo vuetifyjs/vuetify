@@ -251,7 +251,7 @@ export function getZIndex (el?: Element | null): number {
 
   const index = +window.getComputedStyle(el).getPropertyValue('z-index')
 
-  if (isNaN(index)) return getZIndex(el.parentNode as Element)
+  if (!index) return getZIndex(el.parentNode as Element)
   return index
 }
 
@@ -349,7 +349,7 @@ export const camelize = (str: string): string => {
  * Returns the set difference of B and A, i.e. the set of elements in B but not in A
  */
 export function arrayDiff (a: any[], b: any[]): any[] {
-  const diff = []
+  const diff: any[] = []
   for (let i = 0; i < b.length; i++) {
     if (a.indexOf(b[i]) < 0) diff.push(b[i])
   }
@@ -430,15 +430,6 @@ export function searchItems (items: any[], search: string) {
   return items.filter(item => Object.keys(item).some(key => defaultFilter(getObjectValueByPath(item, key), search)))
 }
 
-export function getTextAlignment (align: string | undefined, rtl: boolean): string {
-  align = align || 'start'
-
-  if (align === 'start') align = rtl ? 'right' : 'left'
-  else if (align === 'end') align = rtl ? 'left' : 'right'
-
-  return `text-xs-${align}`
-}
-
 /**
  * Returns:
  *  - 'normal' for old style slots - `<template slot="default">`
@@ -486,7 +477,7 @@ export function padEnd (str: string, length: number, char = '0') {
 }
 
 export function chunk (str: string, size = 1) {
-  const chunked = []
+  const chunked: string[] = []
   let index = 0
   while (index < str.length) {
     chunked.push(str.substr(index, size))

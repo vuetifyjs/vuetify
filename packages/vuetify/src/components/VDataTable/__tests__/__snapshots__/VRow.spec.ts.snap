@@ -37,10 +37,10 @@ exports[`VRow.ts should render with scoped slots 1`] = `
 exports[`VRow.ts should render without slots 1`] = `
 
 <tr>
-  <td class="text-xs-left">
+  <td class="text-xs-start">
     0.68
   </td>
-  <td class="text-xs-left">
+  <td class="text-xs-start">
     0.65
   </td>
 </tr>

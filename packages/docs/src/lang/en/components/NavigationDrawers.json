@@ -9,7 +9,7 @@
       "header": "### Colored drawer",
       "desc": "Navigation drawers can be customized to fit any application's design. Here we apply a custom background color and an appended content area using the **append** slot."
     },
-    "permanentFloating": {
+    "permanent-floating": {
       "header": "### Permanent floating drawer",
       "desc": "By default, a navigation drawer has a 1px right border that separates it from content. In this example we want to detach the drawer from the left side and let it float on its own. The **floating** property removes the right border (or left if using **right**)."
     },

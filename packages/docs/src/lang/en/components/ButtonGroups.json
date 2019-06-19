@@ -5,7 +5,7 @@
     "usage": {
       "desc": "Toggle buttons allow you to create a styled group of buttons that can selected or toggled under a single `v-model`"
     },
-    "appBar": {
+    "app-bar": {
       "header": "### In toolbar",
       "desc": "Easily integrate customized button solutions with a `v-toolbar`"
     },
