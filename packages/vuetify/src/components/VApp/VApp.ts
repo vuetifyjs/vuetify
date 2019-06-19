@@ -45,6 +45,7 @@ export default mixins(
       staticClass: 'application',
       class: {
         'application--is-rtl': this.$vuetify.rtl,
+        'application--is-ltr': !this.$vuetify.rtl,
         ...this.themeClasses,
       },
       attrs: { 'data-app': true },
