@@ -31,18 +31,28 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "linear-determinate",
-            "linear-indeterminate",
-            "linear-buffer",
-            "linear-query-indeterminate-and-determinate",
-            "linear-custom-colors",
-            "rounded",
-            "loader",
-            "stream",
-            "striped",
-            "slot"
+            "simple/linear-determinate",
+            "simple/linear-indeterminate",
+            "simple/linear-buffer",
+            "simple/linear-query-indeterminate-and-determinate",
+            "simple/linear-custom-colors",
+            "simple/rounded",
+            "simple/stream",
+            "simple/striped",
+            "intermediate/loader",
+            "intermediate/file-loader",
+            "intermediate/slot"
           ]
         }
       ]
