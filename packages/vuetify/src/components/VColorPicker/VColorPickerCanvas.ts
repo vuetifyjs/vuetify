@@ -56,6 +56,9 @@ export default Vue.extend({
 
   watch: {
     'color.hue': 'updateCanvas',
+    width () {
+      this.$nextTick(this.updateCanvas)
+    },
   },
 
   mounted () {

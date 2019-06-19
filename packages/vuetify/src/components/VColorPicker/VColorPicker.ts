@@ -8,6 +8,9 @@ import VColorPickerCanvas from './VColorPickerCanvas'
 import VColorPickerEdit, { Mode, modes } from './VColorPickerEdit'
 import VColorPickerSwatches from './VColorPickerSwatches'
 
+// Directives
+import { resize } from '../../directives'
+
 // Helpers
 import { VColorPickerColor, parseColor, fromRGBA, extractColor } from './util'
 import mixins from '../../util/mixins'
@@ -19,6 +22,8 @@ import { PropValidator } from 'vue/types/options'
 
 export default mixins(Themeable).extend({
   name: 'v-color-picker',
+
+  directives: { resize },
 
   props: {
     canvasHeight: {
@@ -56,7 +61,14 @@ export default mixins(Themeable).extend({
 
   data: () => ({
     internalValue: fromRGBA({ r: 255, g: 0, b: 0, a: 1 }),
+    elementWidth: 300,
   }),
+
+  computed: {
+    isPercentageWidth (): boolean {
+      return typeof this.width === 'string' && this.width.indexOf('%') > 0
+    },
+  },
 
   watch: {
     value: {
@@ -68,6 +80,9 @@ export default mixins(Themeable).extend({
   },
 
   methods: {
+    calculateWidth () {
+      this.elementWidth = this.$el.getBoundingClientRect().width
+    },
     updateColor (color: VColorPickerColor) {
       this.internalValue = color
       const value = extractColor(this.internalValue, this.value)
@@ -83,7 +98,7 @@ export default mixins(Themeable).extend({
           color: this.internalValue,
           disabled: this.disabled,
           dotSize: this.dotSize,
-          width: this.width,
+          width: this.isPercentageWidth ? this.elementWidth : this.width,
           height: this.canvasHeight,
         },
         on: {
@@ -150,6 +165,12 @@ export default mixins(Themeable).extend({
       props: {
         maxWidth: this.width,
       },
+      directives: this.isPercentageWidth ? [
+        {
+          name: 'resize',
+          value: this.calculateWidth,
+        },
+      ] : undefined,
     }, [
       !this.hideCanvas && this.genCanvas(),
       this.genControls(),
