@@ -290,6 +290,7 @@ export default baseMixins.extend<options>().extend({
     blur (e?: Event) {
       VTextField.options.methods.blur.call(this, e)
       this.isMenuActive = false
+      this.isFocused = false
       this.selectedIndex = -1
     },
     /** @public */
@@ -535,6 +536,9 @@ export default baseMixins.extend<options>().extend({
     },
     getValue (item: object) {
       return getPropertyFromItem(item, this.itemValue, this.getText(item))
+    },
+    onBlur (e?: Event) {
+      e && this.$emit('blur', e)
     },
     onChipInput (item: object) {
       if (this.multiple) this.selectItem(item)
