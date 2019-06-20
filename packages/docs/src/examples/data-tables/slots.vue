@@ -52,12 +52,14 @@
 
       <template v-if="isEnabled('body')" v-slot:body="{ items }">
         <tr v-for="item in items" :key="item.name">
-          <td>{{ item.name }}</td>
-          <td>CONTENT</td>
-          <td>CONTENT</td>
-          <td>CONTENT</td>
-          <td>CONTENT</td>
-          <td>CONTENT</td>
+          <tbody>
+            <td>{{ item.name }}</td>
+            <td>CONTENT</td>
+            <td>CONTENT</td>
+            <td>CONTENT</td>
+            <td>CONTENT</td>
+            <td>CONTENT</td>
+          </tbody>
         </tr>
       </template>
 
