@@ -136,6 +136,13 @@ function rippleShow (e: MouseEvent | TouchEvent) {
   if (!element || !element._ripple || element._ripple.touched) return
   if (isTouchEvent(e)) {
     element._ripple.touched = true
+    element._ripple.isTouch = true
+  } else {
+    // It's possible for touch events to fire
+    // as mouse events on Android/iOS, this
+    // will skip the event call if it has
+    // already been registered as touch
+    if (element._ripple.isTouch) return
   }
   value.center = element._ripple.centered
   if (element._ripple.class) {
