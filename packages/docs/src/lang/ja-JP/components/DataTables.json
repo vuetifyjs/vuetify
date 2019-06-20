@@ -3,7 +3,7 @@
   "headerText": "`v-data-table` コンポーネントは表形式のデータを表示するために使われます。ソート、検索、ページネーション、インライン編集、ヘッダーツールチップ、行の選択 などの機能を含んでいます。",
   "components": ["v-data-table', 'v-edit-dialog"],
   "examples": {
-    "standard": {
+    "usage": {
       "header": "基本的な使い方",
       "desc": "基本的な Data table は付加的な機能を含まないデータを格納します。 `hide-actions` prop を使用することで、ページネーションを制御するテーブルアクションの表示を外すことができます。"
     },
