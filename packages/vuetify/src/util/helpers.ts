@@ -251,7 +251,7 @@ export function getZIndex (el?: Element | null): number {
 
   const index = +window.getComputedStyle(el).getPropertyValue('z-index')
 
-  if (isNaN(index)) return getZIndex(el.parentNode as Element)
+  if (!index) return getZIndex(el.parentNode as Element)
   return index
 }
 
@@ -428,15 +428,6 @@ export function searchItems (items: any[], search: string) {
   if (search.trim() === '') return items
 
   return items.filter(item => Object.keys(item).some(key => defaultFilter(getObjectValueByPath(item, key), search)))
-}
-
-export function getTextAlignment (align: string | undefined, rtl: boolean): string {
-  align = align || 'start'
-
-  if (align === 'start') align = rtl ? 'right' : 'left'
-  else if (align === 'end') align = rtl ? 'left' : 'right'
-
-  return `text-xs-${align}`
 }
 
 /**

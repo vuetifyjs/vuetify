@@ -212,8 +212,13 @@ export default baseMixins.extend<options>().extend({
       this.onFocus()
     },
     /** @public */
-    blur () {
-      this.$refs.input ? this.$refs.input.blur() : this.onBlur()
+    blur (e?: Event) {
+      // https://github.com/vuetifyjs/vuetify/issues/5913
+      // Safari tab order gets broken if called synchronous
+      window.requestAnimationFrame(() => {
+        this.$refs.input && this.$refs.input.blur()
+      })
+      this.onBlur(e)
     },
     clearableCallback () {
       this.internalValue = null
@@ -397,7 +402,7 @@ export default baseMixins.extend<options>().extend({
     },
     onBlur (e?: Event) {
       this.isFocused = false
-      this.$emit('blur', e)
+      e && this.$emit('blur', e)
     },
     onClick () {
       if (this.isFocused || this.disabled) return

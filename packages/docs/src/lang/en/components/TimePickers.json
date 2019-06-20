@@ -5,25 +5,53 @@
     "usage": {
       "desc": "Time pickers have the light theme enabled by default."
     },
-    "time-colorable": {
-      "header": "### Time pickers - Colors",
+    "colorable": {
+      "header": "### Colors",
       "desc": "Time picker colors can be set using the `color` and `header-color` props. If `header-color` prop is not provided  header will use the `color` prop value."
     },
-    "time-dialog-and-menu": {
-      "header": "### Time pickers - In dialog and menu",
+    "dialog-and-menu": {
+      "header": "### In dialog and menu",
       "desc": "Due to the flexibility of pickers, you can really dial in the experience exactly how you want it."
     },
-    "time-24h-format": {
-      "header": "### Time pickers - 24h format",
+    "24h-format": {
+      "header": "### 24h format",
       "desc": "A time picker can be switched to 24hr format. Note that the `format` prop defines only the way the picker is displayed, picker's value (model) is always in 24hr format."
     },
-    "time-allowed-times": {
-      "header": "### Time pickers - Allowed times",
+    "allowed-times": {
+      "header": "### Allowed times",
       "desc": "You can specify allowed times using arrays, objects, and functions. You can also specify time step/precision/interval - e.g. 10 minutes."
     },
-    "time-width": {
-      "header": "### Time pickers - Setting picker width",
+    "width": {
+      "header": "### Setting picker width",
       "desc": "You can specify allowed the picker's width or make it full width."
+    },
+    "ampm-in-title": {
+      "header": "### AM/PM switch in title",
+      "desc": "You can move AM/PM switch to picker's title."
+    },
+    "no-title": {
+      "header": "### No title",
+      "desc": "You can remove picker's title."
+    },
+    "disabled": {
+      "header": "### Disabled",
+      "desc": "You can't interact with disabled picker."
+    },
+    "readonly": {
+      "header": "### Read-only",
+      "desc": "Read-only picker behaves same as disabled one, but looks like default one."
+    },
+    "use-seconds": {
+      "header": "### With seconds",
+      "desc": "Time picker can have seconds input."
+    },
+    "scrollable": {
+      "header": "### Scrollable",
+      "desc": "You can edit time picker's value using mouse wheel."
+    },
+    "range": {
+      "header": "### Range",
+      "desc": "This is an example of joining pickers together using `min` and `max` prop."
     }
   },
   "props": {

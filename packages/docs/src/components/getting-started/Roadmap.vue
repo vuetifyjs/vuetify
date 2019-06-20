@@ -60,6 +60,15 @@
             <div v-if="(index != null && index >= i) || item.value">
               <v-card-text>
                 <doc-markdown :code="item.text" />
+
+                <template v-if="item.features">
+                  <div class="mt-3" />
+
+                  <template v-for="(features, key, index) in item.features">
+                    <doc-markdown :key="`title-${index}`" :code="key" />
+                    <doc-markdown :key="`list-${index}`" :code="features" />
+                  </template>
+                </template>
               </v-card-text>
             </div>
           </v-expand-transition>
@@ -107,7 +116,10 @@
 </script>
 
 <style lang="sass">
-#roadmap .v-timeline-item__body
-  p
+#roadmap
+  .v-timeline-item__body p
     margin: 0
+
+  .markdown > h3
+    margin-bottom: 8px
 </style>
