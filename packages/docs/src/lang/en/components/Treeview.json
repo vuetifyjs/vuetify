@@ -38,6 +38,7 @@
       "filter": "Custom item filtering function. By default it will use case-insensitive search in item's label.",
       "indeterminateIcon": "Icon used when node is in an indeterminate state",
       "itemChildren": "Property on supplied `items` that contains its children",
+      "itemDisabled": "Property on supplied `items` that contains the disabled state of the item",
       "itemKey": "Property on supplied `items` used to keep track of node state. The value of this property has to be unique among all items.",
       "itemText": "Property on supplied `items` that contains its label text",
       "items": "An array of items used to build the treeview",
