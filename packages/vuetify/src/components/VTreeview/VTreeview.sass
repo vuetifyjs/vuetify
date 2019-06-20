@@ -5,9 +5,14 @@
 +theme(v-treeview) using ($material)
   color: map-deep-get($material, 'text', 'primary')
 
-  &--hoverable .v-treeview-node__root:hover,
-  .v-treeview-node--active
-    background: map-get($material, 'dividers')
+  &--hoverable .v-treeview-node__root,
+  .v-treeview-node--click > .v-treeview-node__root
+    +states($material)
+
+  .v-treeview-node__root.v-treeview-node--active
+    &:hover:before,
+    &:before
+      opacity: map-deep-get($material, 'states', 'activated')
 
 .v-treeview
   > .v-treeview-node
@@ -44,6 +49,19 @@
       align-items: center
       min-height: 48px
       padding-right: $treeview-node-padding-end
+      position: relative
+
+      &:before
+        background-color: currentColor
+        bottom: 0
+        content: ''
+        left: 0
+        opacity: 0
+        pointer-events: none
+        position: absolute
+        right: 0
+        top: 0
+        transition: $primary-transition
 
     &__content
       align-items: center
