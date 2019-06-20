@@ -6,9 +6,14 @@
     "children": [
       { "text": "quickStart", "to": "quick-start" },
       { "text": "preMadeLayouts", "to": "pre-made-layouts" },
-      { "text": "aLaCarte", "to": "a-la-carte" },
       { "text": "whyVuetify", "to": "why-vuetify" },
-      { "text": "faq", "to": "frequently-asked-questions" }
+      { "text": "faq", "to": "frequently-asked-questions" },
+      { "text": "meetTheTeam", "to": "meet-the-team" },
+      { "text": "sponsorsAndBackers", "to": "sponsors-and-backers" },
+      { "new": true, "text": "lts", "to": "long-term-support" },
+      { "text": "contributing", "to": "contributing" },
+      { "updated": true, "text": "roadmap", "to": "roadmap" },
+      { "help": true, "text": "consulting", "to": "consulting-and-support" }
     ]
   },
   {
@@ -16,6 +21,7 @@
     "text": "customizing",
     "icon": "mdi-cogs",
     "children": [
+      { "text": "aLaCarte", "to": "a-la-carte" },
       { "text": "breakpoints", "to": "breakpoints" },
       { "text": "icons", "to": "icons" },
       { "text": "i18n", "to": "internationalization" },
@@ -140,7 +146,7 @@
     "text": "styles",
     "icon": "mdi-palette",
     "children": [
-      { "text": "colors", "group": "framework", "to": "colors" },
+      { "text": "colors", "to": "colors" },
       { "text": "content", "to": "content" },
       { "text": "display", "to": "display" },
       { "text": "elevation", "to": "elevation" },
@@ -164,17 +170,8 @@
     ]
   },
   {
-    "group": "around-vuetify",
-    "text": "around-vuetify",
-    "icon": "mdi-earth",
-    "children": [
-      { "text": "premiumThemes", "to": "themes/premium" },
-      { "text": "meetTheTeam", "to": "meet-the-team" },
-      { "text": "sponsorsAndBackers", "to": "sponsors-and-backers" },
-      { "new": true, "text": "lts", "to": "long-term-support" },
-      { "text": "contributing", "to": "contributing" },
-      { "updated": true, "text": "roadmap", "to": "roadmap" },
-      { "help": true, "text": "consulting", "to": "consulting-and-support" }
-    ]
+    "text": "premiumThemes",
+    "icon": "mdi-cards",
+    "to": "themes/premium"
   }
 ]
