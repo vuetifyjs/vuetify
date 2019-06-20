@@ -53,13 +53,13 @@
       <template v-if="isEnabled('body')" v-slot:body="{ items }">
       <tbody>
         <tr v-for="item in items" :key="item.name">          
-            <td>{{ item.name }}</td>
-            <td>CONTENT</td>
-            <td>CONTENT</td>
-            <td>CONTENT</td>
-            <td>CONTENT</td>
-            <td>CONTENT</td>          
-          </tr>
+          <td>{{ item.name }}</td>
+          <td>CONTENT</td>
+          <td>CONTENT</td>
+          <td>CONTENT</td>
+          <td>CONTENT</td>
+          <td>CONTENT</td> 
+         </tr>
         </tbody>
       </template>
 
