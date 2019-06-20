@@ -31,8 +31,8 @@
         {
           "type": "examples",
           "value": [
-            "auto-grow",
-            "signup-box"
+            "simple/auto-grow",
+            "intermediate/signup-box"
           ]
         }
       ]
