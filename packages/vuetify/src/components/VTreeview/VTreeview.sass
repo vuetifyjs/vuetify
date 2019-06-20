@@ -1,5 +1,6 @@
 @import '../../styles/styles.sass'
 @import './_variables.scss'
+@import './_mixins.sass'
 
 // Theme
 +theme(v-treeview) using ($material)
@@ -23,6 +24,12 @@
   &-node
     margin-left: $treeview-node-x-margin
 
+    &.v-treeview-node--shaped
+      +treeview-shaped($treeview-node-height, $treeview-node-shaped-margin)
+
+    &.v-treeview-node--rounded
+      +treeview-rounded($treeview-node-height, $treeview-node-shaped-margin)
+
     &--excluded
       display: none
 
@@ -42,7 +49,7 @@
     &__root
       display: flex
       align-items: center
-      min-height: 48px
+      min-height: $treeview-node-height
       padding-right: $treeview-node-padding-end
 
     &__content
@@ -121,4 +128,11 @@
 
   &--dense
     .v-treeview-node__root
-      min-height: 40px
+      min-height: $treeview-node-height-dense
+
+    &.v-treeview-node--shaped
+      +treeview-shaped($treeview-node-height-dense, $treeview-node-shaped-margin)
+
+    &.v-treeview-node--rounded
+      +treeview-rounded($treeview-node-height-dense, $treeview-node-shaped-margin)
+
