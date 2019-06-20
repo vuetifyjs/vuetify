@@ -6,6 +6,7 @@ import VTreeviewNode from './VTreeviewNode'
 
 // Mixins
 import { inject as RegistrableInject } from '../../mixins/registrable'
+import Colorable from '../../mixins/colorable'
 
 // Utils
 import mixins from '../../util/mixins'
@@ -28,6 +29,10 @@ export const VTreeviewNodeProps = {
     default: 'v-treeview-node--active',
   },
   selectable: Boolean,
+  color: {
+    type: String,
+    default: 'primary',
+  },
   selectedColor: {
     type: String,
     default: 'accent',
@@ -70,6 +75,7 @@ export const VTreeviewNodeProps = {
 }
 
 export default mixins<options>(
+  Colorable,
   RegistrableInject('treeview')
   /* @vue/component */
 ).extend({
@@ -228,7 +234,7 @@ export default mixins<options>(
       if (this.selectable) children.unshift(this.genCheckbox())
       if (this.hasChildren) children.unshift(this.genToggle())
 
-      return this.$createElement('div', {
+      return this.$createElement('div', this.setTextColor(this.isActive && this.color, {
         staticClass: 'v-treeview-node__root',
         class: {
           [this.activeClass]: this.isActive,
@@ -244,7 +250,7 @@ export default mixins<options>(
             }
           },
         },
-      }, children)
+      }), children)
     },
     genChild (item: any): VNode {
       return this.$createElement(VTreeviewNode, {
@@ -255,6 +261,7 @@ export default mixins<options>(
           item,
           selectable: this.selectable,
           selectedColor: this.selectedColor,
+          color: this.color,
           expandIcon: this.expandIcon,
           indeterminateIcon: this.indeterminateIcon,
           offIcon: this.offIcon,
