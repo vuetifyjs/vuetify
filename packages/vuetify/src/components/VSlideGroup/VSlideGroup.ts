@@ -21,6 +21,7 @@ import Vue, { VNode } from 'vue'
 interface TouchEvent {
   touchstartX: number
   touchmoveX: number
+  stopPropagation: Function
 }
 
 interface Widths {
@@ -264,6 +265,7 @@ export const BaseSlideGroup = mixins<options &
       }
     },
     overflowCheck (e: TouchEvent, fn: (e: TouchEvent) => void) {
+      e.stopPropagation()
       this.isOverflowing && fn(e)
     },
     scrollIntoView /* istanbul ignore next */ () {

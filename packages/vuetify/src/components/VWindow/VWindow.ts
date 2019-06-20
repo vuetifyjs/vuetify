@@ -254,6 +254,12 @@ export default BaseItemGroup.extend({
         right: () => {
           this.$vuetify.rtl ? this.next() : this.prev()
         },
+        end: (e: TouchEvent) => {
+          e.stopPropagation()
+        },
+        start: (e: TouchEvent) => {
+          e.stopPropagation()
+        },
       }
 
       data.directives.push({
