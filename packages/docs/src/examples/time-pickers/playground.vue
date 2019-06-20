@@ -1,5 +1,5 @@
 <template>
-  <v-layout column  :align-center="!fullWidth">
+  <v-layout column :align-center="!fullWidth">
     <v-layout row wrap justify-space-around>
       <v-switch v-model="disabled" class="mx-2" label="Disabled"></v-switch>
       <v-switch v-model="readonly" class="mx-2" label="Readonly"></v-switch>
@@ -19,8 +19,8 @@
       </v-btn-toggle>
     </v-layout>
     <v-time-picker
-      class="mt-2"
       v-model="picker"
+      class="mt-2"
       :disabled="disabled"
       :readonly="readonly"
       :landscape="landscape"
