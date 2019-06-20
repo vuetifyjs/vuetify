@@ -1,5 +1,5 @@
 @mixin states ($material)
-  &:hover:before
+  &:hover::before
     opacity: map-deep-get($material, 'states', 'hover')
 
   &:focus::before
