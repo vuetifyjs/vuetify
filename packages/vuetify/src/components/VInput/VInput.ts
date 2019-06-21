@@ -36,6 +36,8 @@ interface options extends InstanceType<typeof baseMixins> {
 export default baseMixins.extend<options>().extend({
   name: 'v-input',
 
+  inheritAttrs: false,
+
   props: {
     appendIcon: String,
     backgroundColor: {
