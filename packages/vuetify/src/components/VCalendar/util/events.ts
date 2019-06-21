@@ -1,4 +1,3 @@
-
 import {
   VTimestamp,
   parseTimestamp,
@@ -27,7 +26,7 @@ export function parseEvent (input: VEventInput, index: number, startProperty: st
     throw new Error('The ' + startProperty + ' property is required on all events to be a valid timestamp in the format YYYY-MM-DD or YYYY-MM-DD hh:mm')
   }
 
-  const start: VTimestamp = parseTimestamp(input[ startProperty ]) as VTimestamp
+  const start: VTimestamp = parseTimestamp(input[startProperty]) as VTimestamp
   const end: VTimestamp = (input[ endProperty ] ? parseTimestamp(input[ endProperty ]) : start) as VTimestamp
   const startIdentifier: number = getDayIdentifier(start)
   const startTimestampIdentifier: number = getTimestampIdentifier(start)

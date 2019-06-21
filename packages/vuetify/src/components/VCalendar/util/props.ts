@@ -1,6 +1,7 @@
 
 import { validateTimestamp, parseDate } from './timestamp'
 import { VEventInput } from './events'
+import { PropValidator } from 'vue/types/options'
 
 export default {
   base: {
@@ -15,9 +16,9 @@ export default {
       default: '0000-00-00',
     },
     weekdays: {
-      type: Array as () => number[],
+      type: Array,
       default: () => [0, 1, 2, 3, 4, 5, 6],
-    },
+    } as PropValidator<number[]>,
     hideHeader: {
       type: Boolean,
       default: false,
@@ -107,9 +108,9 @@ export default {
   },
   events: {
     events: {
-      type: Array as () => VEventInput[],
+      type: Array,
       default: () => [],
-    },
+    } as PropValidator<VEventInput[]>,
     eventStart: {
       type: String,
       default: 'start',

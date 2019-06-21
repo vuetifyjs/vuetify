@@ -3,7 +3,6 @@ import {
   Wrapper,
   MountOptions,
 } from '@vue/test-utils'
-import { ExtractVue } from '../../../../util/mixins'
 import CalendarWithEvents from '../calendar-with-events'
 import { parseTimestamp } from '../../util/timestamp'
 import { parseEvent } from '../../util/events'
@@ -13,7 +12,7 @@ const Mock = CalendarWithEvents.extend({
 })
 
 describe('calendar-with-events.ts', () => {
-  type Instance = ExtractVue<typeof Mock>
+  type Instance = InstanceType<typeof Mock>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {
     mountFunction = (options?: MountOptions<Instance>) => {

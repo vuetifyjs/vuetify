@@ -118,7 +118,7 @@ export default CalendarBase.extend({
           : `${hour}:${minute}${suffix}`)
         : `${hour}${suffix}`
     },
-    updateEventVisibility (): void {
+    updateEventVisibility () {
       if (this.noEvents || !this.eventMore) {
         return
       }
@@ -155,7 +155,7 @@ export default CalendarBase.extend({
         }
       }
     },
-    hideEvents (id: string): void {
+    hideEvents (id: string) {
       const elements = this.$refs.events as HTMLElement[]
 
       elements.forEach(el => {

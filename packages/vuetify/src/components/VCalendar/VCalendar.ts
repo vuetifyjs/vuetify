@@ -64,7 +64,7 @@ export default CalendarWithEvents.extend({
     },
     renderProps (): VCalendarRenderProps {
       const around = this.parsedValue
-      let component: any = 'div'
+      let component: any = null
       let maxDays = this.maxDays
       let start = around
       let end = around
