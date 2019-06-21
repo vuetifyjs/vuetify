@@ -13,7 +13,7 @@
       "header": "### Auto grow",
       "desc": "Textarea can automatically resize when entered text exceeds its size."
     },
-    "auto-focus": {
+    "autofocus": {
       "header": "### Auto focus",
       "desc": "You can focus `v-textarea` on page load using the `auto-focus` prop."
     },
