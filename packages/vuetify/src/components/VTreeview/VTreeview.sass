@@ -6,7 +6,7 @@
   color: map-deep-get($material, 'text', 'primary')
 
   &--hoverable .v-treeview-node__root:hover,
-  .v-treeview-node--active
+  .v-treeview-node__root.v-treeview-node--active
     &:before
       opacity: 0.2
 
@@ -20,20 +20,6 @@
       & > .v-treeview-node__root
         padding-left: $treeview-direct-leaf-node-padding-start
         padding-right: $treeview-node-padding-end
-
-  &--hoverable .v-treeview-node__root:hover,
-  .v-treeview-node--active
-    &:before
-      background-color: currentColor
-      bottom: 0
-      content: ''
-      left: 0
-      opacity: 0
-      pointer-events: none
-      position: absolute
-      right: 0
-      top: 0
-      transition: $primary-transition
 
   &-node
     margin-left: $treeview-node-x-margin
@@ -60,6 +46,18 @@
       min-height: 48px
       padding-right: $treeview-node-padding-end
       position: relative
+
+      &:before
+        background-color: currentColor
+        bottom: 0
+        content: ''
+        left: 0
+        opacity: 0
+        pointer-events: none
+        position: absolute
+        right: 0
+        top: 0
+        transition: $primary-transition
 
     &__content
       align-items: center
