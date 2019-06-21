@@ -438,6 +438,7 @@ export default VDataIterator.extend({
     genBody (props: DataProps): VNode | string | VNodeChildren {
       const data = {
         ...props,
+        isMobile: this.isMobile,
         headers: this.computedHeaders,
       }
 
