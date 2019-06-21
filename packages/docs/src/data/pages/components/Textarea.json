@@ -34,6 +34,7 @@
             "simple/icon",
             "simple/auto-grow",
             "simple/autofocus",
+            "simple/background-color",
             "intermediate/signup-box"
           ]
         }

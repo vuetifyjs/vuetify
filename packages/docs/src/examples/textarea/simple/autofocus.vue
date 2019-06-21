@@ -3,7 +3,7 @@
     <v-textarea
       autofocus
       label="Label"
-      value="I am autofocused"
+      value="I am an autofocused textarea... "
     ></v-textarea>
   </v-container>
 </template>

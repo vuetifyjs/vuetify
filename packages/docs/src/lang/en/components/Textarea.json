@@ -5,7 +5,7 @@
     "usage": {
       "desc": "A multi-line text-field is useful for larger amounts of text."
     },
-    "append-icon": {
+    "icon": {
       "header": "### Icons",
       "desc": "The `append-icon` and `prepend-icon` props help add context to `v-textarea`."
     },
@@ -16,6 +16,10 @@
     "autofocus": {
       "header": "### Auto focus",
       "desc": "You can focus `v-textarea` on page load using the `auto-focus` prop."
+    },
+    "background-color": {
+      "header": "### Background color",
+      "desc": "The `background-color` and `color` props give you more control over styling `v-textarea`'s."
     },
     "signup-box": {
       "header": "### Beautiful Forms",
