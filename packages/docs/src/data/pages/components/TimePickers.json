@@ -29,13 +29,29 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "time-colorable",
-            "time-dialog-and-menu",
-            "time-24h-format",
-            "time-allowed-times",
-            "time-width"
+            "simple/colorable",
+            "simple/disabled",
+            "simple/readonly",
+            "simple/24h-format",
+            "simple/allowed-times",
+            "simple/width",
+            "simple/ampm-in-title",
+            "simple/no-title",
+            "simple/use-seconds",
+            "simple/scrollable",
+            "intermediate/dialog-and-menu",
+            "intermediate/range"
           ]
         }
       ]
