@@ -68,14 +68,13 @@ describe('VSelect.ts', () => {
   })
 
   it('should disable v-list-item', async () => {
+    const selectItem = jest.fn()
     const wrapper = mountFunction({
       propsData: {
         items: [{ text: 'foo', disabled: true, id: 0 }],
       },
+      methods: { selectItem },
     })
-
-    const selectItem = jest.fn()
-    wrapper.setMethods({ selectItem })
 
     const el = wrapper.find('.v-list-item')
 

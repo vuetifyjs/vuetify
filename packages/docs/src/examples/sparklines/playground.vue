@@ -8,6 +8,9 @@
       :line-width="width"
       :stroke-linecap="lineCap"
       :gradient-direction="gradientDirection"
+      :fill="fill"
+      :type="type"
+      :auto-line-width="autoLineWidth"
       auto-draw
     ></v-sparkline>
 
@@ -107,6 +110,25 @@
           thumb-label
         ></v-slider>
       </v-flex>
+
+      <v-flex xs6 offset-md6>
+        <v-layout fill-height align-center>
+          <v-subheader class="pl-0">Type</v-subheader>
+          <v-btn-toggle v-model="type" mandatory>
+            <v-btn text value="bar">bar</v-btn>
+            <v-btn text value="trend">trend</v-btn>
+          </v-btn-toggle>
+        </v-layout>
+      </v-flex>
+
+      <v-flex
+        xs12
+      >
+        <v-layout row wrap justify-space-around>
+          <v-switch v-model="fill" label="Fill"></v-switch>
+          <v-switch v-model="autoLineWidth" label="autoLineWidth"></v-switch>
+        </v-layout>
+      </v-flex>
     </v-layout>
   </v-container>
 </template>
@@ -131,6 +153,9 @@
       value: [0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0],
       gradientDirection: 'top',
       gradients,
+      fill: false,
+      type: 'trend',
+      autoLineWidth: false,
     }),
   }
 </script>

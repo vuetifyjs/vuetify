@@ -183,6 +183,12 @@
       "href": "https://www.crowdin.com/",
       "logo": "sponsors/crowdin.png",
       "type": "Service Sponsor"
+    },
+    {
+      "name": "Zeit Now",
+      "href": "https://zeit.co/now",
+      "logo": "sponsors/zeit-now.svg",
+      "type": "Service Sponsor"
     }
   ]
 }

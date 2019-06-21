@@ -27,7 +27,6 @@ export default mixins(
   props: {
     height: [Number, String],
     lightsOut: Boolean,
-    status: Boolean,
     window: Boolean,
   },
 
@@ -37,7 +36,6 @@ export default mixins(
         'v-system-bar--lights-out': this.lightsOut,
         'v-system-bar--absolute': this.absolute,
         'v-system-bar--fixed': !this.absolute && (this.app || this.fixed),
-        'v-system-bar--status': this.status,
         'v-system-bar--window': this.window,
         ...this.themeClasses,
       }

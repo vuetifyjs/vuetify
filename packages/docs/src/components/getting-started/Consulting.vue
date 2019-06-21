@@ -30,8 +30,8 @@
         <v-avatar size="156" class="mx-3 mb-2 mt-3 elevation-8">
           <v-img src="https://cdn.vuetifyjs.com/images/john.png" />
         </v-avatar>
-        <div class="body-2">John Leider</div>
-        <div class="caption">Creator</div>
+        <div class="body-1">John Leider</div>
+        <div class="caption grey--text">Creator</div>
       </div>
     </v-flex>
     <v-flex
@@ -62,10 +62,12 @@
   export default {
     data: () => ({
       tiles: [
+        'Paired Programming Sessions',
         'Application Hardening and Unit Tests',
         'Custom component creation and integration',
         'Application performance and structure review',
-        'Live Company training',
+        'Live Company / Individual training',
+        'Best practices and procedures',
         'General Vue/Vuetify application support',
       ],
     }),

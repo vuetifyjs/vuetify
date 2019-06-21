@@ -162,7 +162,7 @@ describe('VAutocomplete.ts', () => {
 
     expect(wrapper.vm.$el.getAttribute('role')).toBeFalsy()
 
-    const input = wrapper.find('input')
+    const input = wrapper.find('.v-input__slot')
     expect(input.element.getAttribute('role')).toBe('combobox')
   })
 
