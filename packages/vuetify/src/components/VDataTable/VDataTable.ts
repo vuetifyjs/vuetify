@@ -410,7 +410,10 @@ export default VDataIterator.extend({
             expanded,
           },
           on: {
-            click: () => this.expand(item, !expanded),
+            click: (e: MouseEvent) => {
+              e.stopPropagation()
+              this.expand(item, !expanded)
+            },
           },
         }
 
@@ -433,6 +436,9 @@ export default VDataIterator.extend({
           rtl: this.$vuetify.rtl,
         },
         scopedSlots,
+        on: {
+          click: () => this.$emit('click:row', item),
+        },
       })
     },
     genBody (props: DataProps): VNode | string | VNodeChildren {
