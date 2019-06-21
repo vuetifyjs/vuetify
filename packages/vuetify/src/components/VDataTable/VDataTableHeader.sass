@@ -3,23 +3,24 @@
 @import './_variables.scss'
 
 // Theme
-+theme(v-data-table-header) using ($material)
-  th.sortable
-    .v-icon
-      color: rgba(map-get($material, 'fg-color'), map-get($material, 'disabledORhints-text-percent'))
-
-    &:hover
-      color: rgba(map-get($material, 'fg-color'), map-get($material, 'primary-text-percent'))
-
-    &.active
-      color: rgba(map-get($material, 'fg-color'), map-get($material, 'primary-text-percent'))
-
++theme(v-data-table) using ($material)
+  .v-data-table-header
+    th.sortable
       .v-icon
+        color: rgba(map-get($material, 'fg-color'), map-get($material, 'disabledORhints-text-percent'))
+
+      &:hover
         color: rgba(map-get($material, 'fg-color'), map-get($material, 'primary-text-percent'))
 
-  &__sort-badge
-    background-color: rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
-    color: map-deep-get($material, 'text', 'primary')
+      &.active
+        color: rgba(map-get($material, 'fg-color'), map-get($material, 'primary-text-percent'))
+
+        .v-icon
+          color: rgba(map-get($material, 'fg-color'), map-get($material, 'primary-text-percent'))
+
+    &__sort-badge
+      background-color: rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+      color: map-deep-get($material, 'text', 'primary')
 
 // Block
 .v-data-table-header

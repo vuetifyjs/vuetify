@@ -43,8 +43,6 @@
             "customize-header",
             "customize-rows",
             "customize-footer",
-            "progress",
-            "footer",
             "paginate",
             "sort",
             "server",

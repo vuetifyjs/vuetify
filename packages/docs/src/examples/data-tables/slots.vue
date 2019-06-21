@@ -5,8 +5,9 @@
       :headers="headers"
       :items="items"
       :search="search"
-      :hide-default-header="!showSelect"
+      :hide-default-header="hideHeaders"
       :show-select="showSelect"
+      :loading="isLoading"
       hide-default-footer
       item-key="name"
       class="elevation-1"
@@ -27,6 +28,10 @@
             </th>
           </tr>
         </thead>
+      </template>
+
+      <template v-if="isEnabled('progress')" v-slot:progress>
+        <v-progress-linear color="purple" :height="10" indeterminate></v-progress-linear>
       </template>
 
       <template v-if="isEnabled('item.data-table-select')" v-slot:item.data-table-select="{ on, props }">
@@ -175,6 +180,7 @@
           'top',
           'header.data-table-select',
           'header',
+          'progress',
           'item.data-table-select',
           'item.<name>',
           'body.prepend',
@@ -203,6 +209,12 @@
     computed: {
       showSelect () {
         return this.isEnabled('header.data-table-select') || this.isEnabled('item.data-table-select')
+      },
+      hideHeaders () {
+        return !this.showSelect
+      },
+      isLoading () {
+        return this.isEnabled('progress')
       },
     },
 
