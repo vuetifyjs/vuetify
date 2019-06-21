@@ -13,6 +13,10 @@
       "header": "### Auto grow",
       "desc": "Textarea can automatically resize when entered text exceeds its size."
     },
+    "auto-focus": {
+      "header": "### Auto focus",
+      "desc": "You can focus `v-textarea` on page load using the `auto-focus` prop."
+    },
     "signup-box": {
       "header": "### Beautiful Forms",
       "desc": "Utilizing alternative input styles, you can create amazing interfaces that are easy to build and easy to use."

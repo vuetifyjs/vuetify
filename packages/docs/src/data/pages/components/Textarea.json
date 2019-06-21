@@ -33,6 +33,7 @@
           "value": [
             "simple/icon",
             "simple/auto-grow",
+            "simple/autofocus",
             "intermediate/signup-box"
           ]
         }
