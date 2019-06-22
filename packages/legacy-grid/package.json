@@ -1,6 +1,7 @@
 {
   "name": "@vuetify/legacy-grid",
   "version": "1.0.0",
+  "private": true,
   "description": "The old v-layout/v-flex grid for vuetify 2.0",
   "author": "Kael Watts-Deuchar <kaelwd@gmail.com>",
   "homepage": "http://vuetifyjs.com",
@@ -20,7 +21,7 @@
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --config build/config.js --progress --hide-modules"
   },
   "devDependencies": {
-    "vuetify": "2.0.0-alpha.20"
+    "vuetify": "^2.0.0-alpha.20"
   },
   "peerDependencies": {
     "vuetify": "^2.0.0-alpha.5"
