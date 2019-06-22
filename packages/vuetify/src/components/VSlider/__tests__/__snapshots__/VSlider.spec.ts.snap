@@ -380,9 +380,7 @@ exports[`VSlider.ts should correctly handle setting value to zero (#7320) 1`] = 
 
 exports[`VSlider.ts should display label and have different aria-label 1`] = `
 
-<div class="v-input theme--light v-input__slider"
-     aria-label="bar"
->
+<div class="v-input theme--light v-input__slider">
   <div class="v-input__control">
     <div class="v-input__slot">
       <label aria-hidden="true"
