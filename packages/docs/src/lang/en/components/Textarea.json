@@ -29,6 +29,10 @@
       "header": "### Clearable",
       "desc": "You can clearn the text from a textarea by using the `clearable` prop, and customize the icon used with the `clearable-icon` prop."
     },
+    "counter": {
+      "header": "### Counter",
+      "desc": "The `counter` prop informs the user of a character limit for the `v-textarea`."
+    },
     "signup-box": {
       "header": "### Beautiful Forms",
       "desc": "Utilizing alternative input styles, you can create amazing interfaces that are easy to build and easy to use."
