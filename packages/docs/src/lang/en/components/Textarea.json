@@ -25,6 +25,10 @@
       "header": "### Browser autocomplete",
       "desc": "The `browser-autocomplete` prop gives you the option to enable the browser to predict user input."
     },
+    "clearable": {
+      "header": "### Clearable",
+      "desc": "You can clearn the text from a textarea by using the `clearable` prop, and customize the icon used with the `clearable-icon` prop."
+    },
     "signup-box": {
       "header": "### Beautiful Forms",
       "desc": "Utilizing alternative input styles, you can create amazing interfaces that are easy to build and easy to use."

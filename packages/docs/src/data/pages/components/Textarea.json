@@ -36,6 +36,7 @@
             "simple/autofocus",
             "simple/background-color",
             "simple/browser-autocomplete",
+            "simple/clearable",
             "intermediate/signup-box"
           ]
         }
