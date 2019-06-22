@@ -34,10 +34,30 @@
             "checkboxes-array",
             "checkboxes-states",
             "checkboxes-colors",
-            "checkboxes-inline-texfield",
+            "checkboxes-inline-texfield"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
             "radios-default",
             "radios-direction",
-            "radios-colors",
+            "radios-colors"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
             "switches-boolean",
             "switches-array",
             "switches-states",
