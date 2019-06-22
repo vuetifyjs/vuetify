@@ -45,6 +45,7 @@
             "simple/column-width-with-hierarchy",
             "simple/variations",
             "simple/background",
+            "simple/extended",
             "intermediate/flexible-and-card",
             "intermediate/floating-with-search",
             "intermediate/contextual-action-bar"
