@@ -30,20 +30,20 @@
         {
           "type": "examples",
           "value": [
-            "checkboxesBoolean",
-            "checkboxesArray",
-            "checkboxesStates",
-            "checkboxesColors",
-            "checkboxesInlineTexfield",
-            "radiosDefault",
-            "radiosDirection",
-            "radiosColors",
-            "switchesBoolean",
-            "switchesArray",
-            "switchesStates",
-            "switchesColors",
-            "switchesFlat",
-            "labelSlot"
+            "checkboxes-boolean",
+            "checkboxes-array",
+            "checkboxes-states",
+            "checkboxes-colors",
+            "checkboxes-inline-texfield",
+            "radios-default",
+            "radios-direction",
+            "radios-colors",
+            "switches-boolean",
+            "switches-array",
+            "switches-states",
+            "switches-colors",
+            "switches-flat",
+            "label-slot"
           ]
         }
       ]

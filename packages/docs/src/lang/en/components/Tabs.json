@@ -5,7 +5,7 @@
     "usage": {
       "desc": "The `v-tabs` component is a styled extension of [v-item-group](/components/item-groups). It provides an easy to use interface for organizing groups of content."
     },
-    "fixedTabs": {
+    "fixed-tabs": {
       "header": "### Fixed tabs",
       "desc": "The **fixed-tabs** prop forces `v-tab` to take up all available space up to the maximum width (300px)."
     },
@@ -17,11 +17,11 @@
       "header": "### Content",
       "desc": "It is common to put `v-tabs` inside the **extension** slot of `v-toolbar`. Using `v-toolbar`'s **tabs** prop auto adjusts its height to 48px to match `v-tabs`."
     },
-    "dynamicHeight": {
+    "dynamic-height": {
       "header": "### With search",
       "desc": "When changing your `v-tab-item`, the content area will smoothly scale to the new size."
     },
-    "iconsAndText": {
+    "icons-and-text": {
       "header": "### Icons and text",
       "desc": "`v-tab`'s can contain icons as well as text. This increases the `v-tabs` height to 72px."
     },
@@ -29,7 +29,7 @@
       "header": "### Desktop tabs",
       "desc": "You can represent `v-tab` actions by using single icons. This is useful when it is easy to correlate content to each tab."
     },
-    "alignWithTitle": {
+    "align-with-title": {
       "header": "### Align tabs with toolbar title",
       "desc": "Make `v-tabs` lined up with the `v-toolbar-title` component (`v-app-bar-nav-icon` or `v-btn` must be used in `v-toolbar`)."
     },
@@ -37,11 +37,11 @@
       "header": "### Grow",
       "desc": "The **grow** prop will make the tab items take up all available space up to a maximum width of 300px."
     },
-    "centerActive": {
+    "center-active": {
       "header": "### Centered active tab",
       "desc": "Active tab is always centered"
     },
-    "overflowToMenu": {
+    "overflow-to-menu": {
       "header": "### With menu",
       "desc": "You can use a menu to hold additional tabs, swapping them out on the fly."
     },

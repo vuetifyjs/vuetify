@@ -13,7 +13,7 @@
       "header": "### Opacity",
       "desc": "`opacity` allows you to customize the transparency of `v-overlay` components."
     },
-    "zIndex": {
+    "z-index": {
       "header": "### Z Index",
       "desc": "`z-index` gives you the ability to easily change the stack order of the `v-overlay` component."
     },

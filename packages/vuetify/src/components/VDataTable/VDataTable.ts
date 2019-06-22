@@ -321,7 +321,7 @@ export default VDataIterator.extend({
         }, [this.$createElement(VIcon, ['close'])])
 
         const column = this.$createElement('td', {
-          staticClass: 'text-xs-left',
+          staticClass: 'text-xs-start',
           attrs: {
             colspan: this.computedHeadersLength,
           },
@@ -347,7 +347,17 @@ export default VDataIterator.extend({
       return this.$scopedSlots.item ? this.genScopedRows(items, props) : this.genDefaultRows(items, props)
     },
     genScopedRows (items: any[], props: DataProps) {
-      return items.map((item: any) => this.$scopedSlots.item!(this.createItemProps(item)))
+      const rows = []
+
+      for (let i = 0; i < items.length; i++) {
+        const item = items[i]
+        rows.push(this.$scopedSlots.item!(this.createItemProps(item)))
+        if (this.isExpanded(item)) {
+          rows.push(this.$scopedSlots['expanded-item']!({ item, headers: this.computedHeaders }))
+        }
+      }
+
+      return rows
     },
     genDefaultRows (items: any[], props: DataProps) {
       return this.$scopedSlots['expanded-item']
@@ -400,7 +410,10 @@ export default VDataIterator.extend({
             expanded,
           },
           on: {
-            click: () => this.expand(item, !expanded),
+            click: (e: MouseEvent) => {
+              e.stopPropagation()
+              this.expand(item, !expanded)
+            },
           },
         }
 
@@ -423,11 +436,15 @@ export default VDataIterator.extend({
           rtl: this.$vuetify.rtl,
         },
         scopedSlots,
+        on: {
+          click: () => this.$emit('click:row', item),
+        },
       })
     },
     genBody (props: DataProps): VNode | string | VNodeChildren {
       const data = {
         ...props,
+        isMobile: this.isMobile,
         headers: this.computedHeaders,
       }
 
@@ -476,18 +493,14 @@ export default VDataIterator.extend({
       if (this.virtualRows) {
         return this.$createElement(VVirtualTable, {
           props: Object.assign(simpleProps, {
-            itemsLength: props.items.length,
+            items: props.items,
             height: this.height,
             rowHeight: this.dense ? 24 : 48,
             headerHeight: this.dense ? 32 : 48,
             // TODO: expose rest of props from virtual table?
           }),
           scopedSlots: {
-            items: ({ start, stop }) => {
-              // TODO: Grouped rows support?
-              const items = props.groupedItems ? [] : (props.items as any[]).slice(start, stop)
-              return this.genItems(items, props) as any
-            },
+            items: ({ items }) => this.genItems(items, props) as any,
           },
         }, [
           this.proxySlot('body.before', [this.genCaption(props), this.genHeaders(props)]),

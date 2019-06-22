@@ -19,11 +19,14 @@ exports[`VDataIterator.ts should render and match snapshot 1`] = `
   <div class="v-data-footer">
     <div class="v-data-footer__select">
       Items per page:
-      <div role="combobox"
-           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-      >
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
-          <div class="v-input__slot">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="computed-id-4"
+               class="v-input__slot"
+          >
             <div class="v-select__slot">
               <div class="v-select__selections">
                 <div class="v-select__selection v-select__selection--comma">
@@ -33,7 +36,7 @@ exports[`VDataIterator.ts should render and match snapshot 1`] = `
                        autocomplete="on"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="false"
+                       aria-readonly="true"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -55,8 +58,8 @@ exports[`VDataIterator.ts should render and match snapshot 1`] = `
       –
     </div>
     <div class="v-data-footer__icons-before">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
@@ -69,8 +72,8 @@ exports[`VDataIterator.ts should render and match snapshot 1`] = `
       </button>
     </div>
     <div class="v-data-footer__icons-after">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
@@ -105,11 +108,14 @@ exports[`VDataIterator.ts should render and match snapshot with data 1`] = `
   <div class="v-data-footer">
     <div class="v-data-footer__select">
       Items per page:
-      <div role="combobox"
-           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-      >
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
-          <div class="v-input__slot">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="computed-id-24"
+               class="v-input__slot"
+          >
             <div class="v-select__slot">
               <div class="v-select__selections">
                 <div class="v-select__selection v-select__selection--comma">
@@ -119,7 +125,7 @@ exports[`VDataIterator.ts should render and match snapshot with data 1`] = `
                        autocomplete="on"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="false"
+                       aria-readonly="true"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -141,8 +147,8 @@ exports[`VDataIterator.ts should render and match snapshot with data 1`] = `
       1-4 of 4
     </div>
     <div class="v-data-footer__icons-before">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
@@ -155,8 +161,8 @@ exports[`VDataIterator.ts should render and match snapshot with data 1`] = `
       </button>
     </div>
     <div class="v-data-footer__icons-after">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
@@ -182,11 +188,14 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
   <div class="v-data-footer">
     <div class="v-data-footer__select">
       Items per page:
-      <div role="combobox"
-           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-      >
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
-          <div class="v-input__slot">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="computed-id-43"
+               class="v-input__slot"
+          >
             <div class="v-select__slot">
               <div class="v-select__selections">
                 <div class="v-select__selection v-select__selection--comma">
@@ -196,7 +205,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
                        autocomplete="on"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="false"
+                       aria-readonly="true"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -218,8 +227,8 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
       –
     </div>
     <div class="v-data-footer__icons-before">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
@@ -232,8 +241,8 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
       </button>
     </div>
     <div class="v-data-footer__icons-after">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
@@ -259,11 +268,14 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
   <div class="v-data-footer">
     <div class="v-data-footer__select">
       Items per page:
-      <div role="combobox"
-           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-      >
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
-          <div class="v-input__slot">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="computed-id-43"
+               class="v-input__slot"
+          >
             <div class="v-select__slot">
               <div class="v-select__selections">
                 <div class="v-select__selection v-select__selection--comma">
@@ -273,7 +285,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
                        autocomplete="on"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="false"
+                       aria-readonly="true"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -295,8 +307,8 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
       –
     </div>
     <div class="v-data-footer__icons-before">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
@@ -309,8 +321,8 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
       </button>
     </div>
     <div class="v-data-footer__icons-after">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
@@ -336,11 +348,14 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
   <div class="v-data-footer">
     <div class="v-data-footer__select">
       Items per page:
-      <div role="combobox"
-           class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-      >
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
         <div class="v-input__control">
-          <div class="v-input__slot">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="computed-id-43"
+               class="v-input__slot"
+          >
             <div class="v-select__slot">
               <div class="v-select__selections">
                 <div class="v-select__selection v-select__selection--comma">
@@ -350,7 +365,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
                        autocomplete="on"
                        readonly="readonly"
                        type="text"
-                       aria-readonly="false"
+                       aria-readonly="true"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -372,8 +387,8 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
       –
     </div>
     <div class="v-data-footer__icons-before">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
@@ -386,8 +401,8 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
       </button>
     </div>
     <div class="v-data-footer__icons-after">
-      <button disabled="disabled"
-              type="button"
+      <button type="button"
+              disabled="disabled"
               class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >

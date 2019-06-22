@@ -5,7 +5,7 @@
     "usage": {
       "desc": "By default, the `v-list-item-group` operates similarly to `v-item-group`. If a **value** is not provided, the group will provide a default based upon its index."
     },
-    "selectionControls": {
+    "selection-controls": {
       "header": "Selection controls",
       "desc": "Using a default scoped slot, you can access an items internal state and toggle it. Since the **active** property is a _boolean_, we use the **true-value** prop on the checkbox to link its state to the `v-list-item`."
     },

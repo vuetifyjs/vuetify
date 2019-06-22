@@ -32,18 +32,30 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "minMax",
-            "icons",
-            "vertical",
-            "thumb",
-            "customThumb",
-            "ticks",
-            "customColors",
-            "validation",
-            "range",
-            "metronome"
+            "simple/min-max",
+            "simple/disabled",
+            "simple/readonly",
+            "simple/icons",
+            "simple/vertical",
+            "simple/thumb",
+            "simple/inverse-label",
+            "simple/custom-thumb",
+            "simple/ticks",
+            "simple/custom-colors",
+            "simple/range",
+            "intermediate/validation",
+            "intermediate/metronome"
           ]
         }
       ]

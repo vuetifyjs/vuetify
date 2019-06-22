@@ -23,7 +23,7 @@ export interface VuetifyThemes {
 }
 
 export interface VuetifyThemeVariant {
-  [name: string]: VuetifyThemeItem
+  [name: string]: VuetifyThemeItem | string | number | undefined
 
   primary: VuetifyThemeItem
   secondary: VuetifyThemeItem
@@ -32,6 +32,7 @@ export interface VuetifyThemeVariant {
   warning: VuetifyThemeItem
   error: VuetifyThemeItem
   success: VuetifyThemeItem
+  anchor?: string | number
 }
 
 export interface VuetifyThemeCache {
@@ -58,4 +59,4 @@ export interface VuetifyParsedThemeItem {
   darken4: string
 }
 
-export type VuetifyThemeItem = VuetifyParsedThemeItem | string | number
+export type VuetifyThemeItem = VuetifyParsedThemeItem | string | number | undefined

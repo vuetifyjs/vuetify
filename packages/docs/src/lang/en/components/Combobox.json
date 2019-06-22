@@ -5,7 +5,7 @@
     "usage": {
       "desc": "With Combobox, you can allow a user to create new values that may not be present in a provided items list."
     },
-    "noData": {
+    "no-data": {
       "header": "### No data with chips",
       "desc": "In this example we utilize a custom **no-data** slot to provide context to the user when searching / creating items."
     },
@@ -13,7 +13,7 @@
       "header": "### Advanced custom options",
       "desc": "The `v-combobox` improves upon the added functionality from `v-select` and `v-autocomplete`. This provides you with an expansive interface to create truly customized implementations. This example takes advantage of some more advanced features such as a custom **filter** algorithm, inline list editing and dynamic input items."
     },
-    "comboboxMultiple": {
+    "combobox-multiple": {
       "header": "### Multiple combobox",
       "desc": "Previously known as **tags** - user is allowed to enter more than 1 value"
     }

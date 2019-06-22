@@ -77,7 +77,7 @@ function formatComponentName (vm: any, includeFile?: boolean): string {
 
 function generateComponentTrace (vm: any): string {
   if (vm._isVue && vm.$parent) {
-    const tree = []
+    const tree: any[] = []
     let currentRecursiveSequence = 0
     while (vm) {
       if (tree.length > 0) {
