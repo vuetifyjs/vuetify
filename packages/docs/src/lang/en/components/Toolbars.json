@@ -55,6 +55,10 @@
       "header": "### Extended",
       "desc": "Toolbars can generate extension even without slot."
     },
+    "extension-height": {
+      "header": "### Extension height",
+      "desc": "Extension's height can be customized."
+    },
     "collapse": {
       "header": "### Collapse",
       "desc": "Toolbars can collapse to save space on screen."
