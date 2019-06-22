@@ -39,6 +39,6 @@
         'error',
         'success',
       ],
-    })
+    }),
   }
 </script>
