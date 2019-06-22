@@ -46,6 +46,7 @@
             "simple/variations",
             "simple/background",
             "simple/extended",
+            "simple/collapse",
             "intermediate/flexible-and-card",
             "intermediate/floating-with-search",
             "intermediate/contextual-action-bar"

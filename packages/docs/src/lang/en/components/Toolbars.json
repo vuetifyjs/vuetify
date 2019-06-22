@@ -54,6 +54,10 @@
     "extended": {
       "header": "### Extended",
       "desc": "Toolbars can generate extension even without slot."
+    },
+    "collapse": {
+      "header": "### Collapse",
+      "desc": "Toolbars can collapse to save space on screen."
     }
   },
   "props": {
