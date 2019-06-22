@@ -35,25 +35,34 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "fixed-tabs",
-            "right",
-            "content",
-            "dynamic-height",
-            "icons-and-text",
-            "desktop",
-            "align-with-title",
-            "grow",
+            "simple/fixed-tabs",
             {
-              "file": "center-active",
+              "file": "simple/center-active",
               "newIn": "2.0"
             },
-            "overflow-to-menu",
-            "pagination",
-            "icons",
-            "dynamic",
-            "vertical"
+            "simple/grow",
+            "simple/pagination",
+            "simple/icons",
+            "simple/vertical",
+            "intermediate/icons-and-text",
+            "intermediate/right",
+            "intermediate/content",
+            "intermediate/align-with-title",
+            "intermediate/dynamic",
+            "complex/dynamic-height",
+            "complex/desktop",
+            "complex/overflow-to-menu"
           ]
         }
       ]
