@@ -52,6 +52,15 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground-radios"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
             "simple/radios-default",
