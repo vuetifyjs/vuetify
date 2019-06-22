@@ -30,11 +30,11 @@
         {
           "type": "examples",
           "value": [
-            "checkboxes-boolean",
-            "checkboxes-array",
-            "checkboxes-states",
-            "checkboxes-colors",
-            "checkboxes-inline-texfield"
+            "simple/checkboxes-boolean",
+            "simple/checkboxes-array",
+            "simple/checkboxes-states",
+            "simple/checkboxes-colors",
+            "intermediate/checkboxes-inline-texfield"
           ]
         }
       ]
@@ -45,9 +45,9 @@
         {
           "type": "examples",
           "value": [
-            "radios-default",
-            "radios-direction",
-            "radios-colors"
+            "simple/radios-default",
+            "simple/radios-direction",
+            "simple/radios-colors"
           ]
         }
       ]
@@ -58,12 +58,12 @@
         {
           "type": "examples",
           "value": [
-            "switches-boolean",
-            "switches-array",
-            "switches-states",
-            "switches-colors",
-            "switches-flat",
-            "label-slot"
+            "simple/switches-boolean",
+            "simple/switches-array",
+            "simple/switches-states",
+            "simple/switches-colors",
+            "simple/switches-flat",
+            "intermediate/label-slot"
           ]
         }
       ]
