@@ -2,8 +2,8 @@
   <div>
     <doc-heading>Generic.Pages.api</doc-heading>
     <v-card outlined>
-      <div class="d-flex">
-        <v-tabs
+      <div class="d-flex pa-2">
+        <!-- <v-tabs
           v-model="current"
           right
         >
@@ -20,14 +20,19 @@
           >
             component
           </v-tab-item>
-        </v-tabs>
+        </v-tabs> -->
+        <v-select
+          v-model="current"
+          :items="value"
+          label="Component"
+        />
+        <v-spacer />
         <v-text-field
           v-model="search"
           append-icon="search"
           label="Search..."
           single-line
           hide-details
-          class="mt-0 px-2 pt-2"
           width="290"
         />
       </div>
@@ -90,7 +95,7 @@
     },
     {
       value: 'default',
-      // type: 'markup',
+      type: 'inline-markup',
       class: 'xs12 sm8 grey lighten-4',
     },
     {

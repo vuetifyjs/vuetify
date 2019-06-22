@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap class="api-item grey lighten-2 mb-3">
+  <v-layout wrap class="api-item grey lighten-2 mb-2">
     <v-flex
       v-for="(header, i) in headers"
       :key="header.value"
@@ -10,9 +10,13 @@
         v-text="$t(`Generic.Pages.${header.value}`)"
       />
       <div :class="header.value">
+        <doc-inline-markup
+          v-if="header.type === 'inline-markup'"
+          lang="ts"
+          :code="item[header.value]"
+        />
         <doc-markup
-          v-if="header.type === 'markup'"
-          class="ma-0 default-markup"
+          v-else-if="header.type === 'markup'"
           lang="ts"
           :filename="false"
           hide-copy
@@ -43,7 +47,7 @@
         </template>
       </div>
     </v-flex>
-    <v-flex xs12 v-if="item.example">
+    <v-flex v-if="item.example" xs12>
       <doc-markup
         class="mb-0"
         lang="ts"
@@ -70,8 +74,4 @@
 
   > .flex
     padding: 0.4rem
-
-.default-markup pre
-  padding: 0.25rem
-  padding-left: 0.5rem
 </style>
