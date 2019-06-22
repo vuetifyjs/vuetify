@@ -40,14 +40,14 @@
         {
           "type": "examples",
           "value": [
-            "column-width-with-hierarchy",
-            "flexible-and-card",
-            "floating-with-search",
-            "variations",
-            "prominent",
-            "dense",
-            "contextual-action-bar",
-            "background"
+            "simple/prominent",
+            "simple/dense",
+            "simple/column-width-with-hierarchy",
+            "simple/variations",
+            "simple/background",
+            "intermediate/flexible-and-card",
+            "intermediate/floating-with-search",
+            "intermediate/contextual-action-bar"
           ]
         }
       ]
