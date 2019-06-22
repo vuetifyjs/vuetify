@@ -38,6 +38,7 @@
             "simple/browser-autocomplete",
             "simple/clearable",
             "simple/counter",
+            "simple/rows",
             "intermediate/signup-box"
           ]
         }

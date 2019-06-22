@@ -33,6 +33,10 @@
       "header": "### Counter",
       "desc": "The `counter` prop informs the user of a character limit for the `v-textarea`."
     },
+    "rows": {
+      "header": "### Rows",
+      "desc": "The `rows` prop allows you to define how many rows the textarea has, using the `row-height` prop you can further customize your rows by defining their height."
+    },
     "signup-box": {
       "header": "### Beautiful Forms",
       "desc": "Utilizing alternative input styles, you can create amazing interfaces that are easy to build and easy to use."

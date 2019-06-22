@@ -4,7 +4,7 @@
       counter
       label="Text"
       :rules="rules"
-      placeholder="Type something..."
+      :value="value"
     ></v-textarea>
   </v-container>
 </template>
@@ -13,6 +13,7 @@
   export default {
     data: () => ({
       rules: [v => v.length <= 25 || 'Max 25 characters'],
+      value: 'Hello!',
     }),
   }
 </script>
