@@ -28,6 +28,15 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground-checkboxes"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
             "simple/checkboxes-boolean",
