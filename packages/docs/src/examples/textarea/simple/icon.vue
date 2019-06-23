@@ -6,7 +6,6 @@
           class="mx-2"
           label="prepend-icon"
           rows="1"
-          placeholder="Enter your message..."
           prepend-icon="comment"
         ></v-textarea>
       </v-flex>
@@ -16,7 +15,6 @@
           class="mx-2"
           label="append-icon"
           rows="1"
-          placeholder="Enter your message..."
         ></v-textarea>
       </v-flex>
       <v-flex xs12 sm6>
@@ -25,7 +23,6 @@
           class="mx-2"
           label="prepend-inner-icon"
           rows="1"
-          placeholder="Enter your message..."
         ></v-textarea>
       </v-flex>
       <v-flex xs12 sm6>
@@ -34,7 +31,6 @@
           class="mx-2"
           label="append-outer-icon"
           rows="1"
-          placeholder="Enter your message..."
         ></v-textarea>
       </v-flex>
     </v-layout>
