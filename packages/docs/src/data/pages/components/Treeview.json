@@ -30,6 +30,7 @@
             { "file": "simple/dense", "newIn": "2.0" },
             "simple/selectable",
             "simple/activatable",
+            "simple/hoverable",
             "intermediate/file-explorer",
             "complex/human-resources",
             "complex/directory",

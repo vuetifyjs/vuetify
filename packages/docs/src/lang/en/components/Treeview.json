@@ -32,6 +32,10 @@
     "activatable": {
       "header": "### Activatable",
       "desc": "Treeview nodes can be activated by clicking on them."
+    },
+    "hoverable": {
+      "header": "### Hoverable",
+      "desc": "Treeview nodes can have a hover effect."
     }
   },
   "props": {
