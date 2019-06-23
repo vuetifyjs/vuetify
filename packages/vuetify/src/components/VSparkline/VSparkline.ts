@@ -321,7 +321,7 @@ export default mixins<options &
         ...this.$props,
       }
 
-      props.points = genPoints(this.internalValue, boundary, this.type)
+      props.points = genPoints(this.internalValue, boundary, this.type, this.totalBars)
 
       const totalWidth = boundary.maxX / (props.points.length - 1)
 
