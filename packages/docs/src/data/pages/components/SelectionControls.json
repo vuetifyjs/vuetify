@@ -74,6 +74,15 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground-switches"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
             "simple/switches-boolean",
