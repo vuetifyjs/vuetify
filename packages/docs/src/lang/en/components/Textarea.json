@@ -11,7 +11,7 @@
     },
     "auto-grow": {
       "header": "### Auto grow",
-      "desc": "Textarea can automatically resize when entered text exceeds its size."
+      "desc": "Textarea's will automatically increase in size when the contained text exceeds it's size when using the `auto-grow` prop."
     },
     "autofocus": {
       "header": "### Auto focus",
@@ -35,7 +35,7 @@
     },
     "no-resize": {
       "header": "### No resize",
-      "desc": "`v-textarea`'s have the option to remain the same size regardless of content, using the `no-resize` prop."
+      "desc": "`v-textarea`'s have the option to remain the same size regardless of content size, using the `no-resize` prop."
     },
     "rows": {
       "header": "### Rows",
