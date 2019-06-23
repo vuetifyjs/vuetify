@@ -248,7 +248,7 @@ export default mixins<options &
           attrs: {
             offset: index / len,
             'stop-color': color || this.color || 'currentColor',
-            'stop-opacity': this.fill && this.internalValue.length > 1 ? 0.5 : 1,
+            'stop-opacity': this.fill && this.internalValue.length > 1 ? 0.5 : undefined,
           },
         })
       )
