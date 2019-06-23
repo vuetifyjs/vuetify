@@ -28,6 +28,7 @@
           "type": "examples",
           "value": [
             { "file": "simple/dense", "newIn": "2.0" },
+            "simple/selectable",
             "intermediate/file-explorer",
             "complex/human-resources",
             "complex/directory",

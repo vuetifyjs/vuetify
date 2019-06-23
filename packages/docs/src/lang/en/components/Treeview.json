@@ -24,6 +24,10 @@
     "human-resources": {
       "header": "### Searching a directory",
       "desc": "Easily filter your treeview by using the **search** prop. You can easily apply your custom filtering function if you need case-sensitive or fuzzy filtering by setting the **filter** prop. This works similar to the [v-autocomplete](/components/autocompletes) component."
+    },
+    "selectable": {
+      "header": "### Selectable",
+      "desc": "You can easily select treeview nodes and children."
     }
   },
   "props": {
