@@ -31,6 +31,7 @@
             "simple/selectable",
             "simple/activatable",
             "simple/hoverable",
+            "simple/open-all",
             "intermediate/file-explorer",
             "complex/human-resources",
             "complex/directory",

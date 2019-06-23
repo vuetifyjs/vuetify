@@ -36,6 +36,10 @@
     "hoverable": {
       "header": "### Hoverable",
       "desc": "Treeview nodes can have a hover effect."
+    },
+    "open-all": {
+      "header": "### Open-all",
+      "desc": "Treeview nodes can be pre-opened on page load."
     }
   },
   "props": {
