@@ -28,6 +28,10 @@
     "selectable": {
       "header": "### Selectable",
       "desc": "You can easily select treeview nodes and children."
+    },
+    "activatable": {
+      "header": "### Activatable",
+      "desc": "Treeview nodes can be activated by clicking on them."
     }
   },
   "props": {
