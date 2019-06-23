@@ -38,7 +38,7 @@ export interface BarText {
 
 interface options extends Vue {
   $refs: {
-    path: SVGPathElement
+    path: SVGPathElement[]
   }
 }
 
@@ -111,7 +111,7 @@ export default mixins<options &
       validator: (val: string) => ['trend', 'bar'].includes(val),
     } as PropValidator<'trend' | 'bar'>,
     value: {
-      type: Array as Prop<SparklineItem[]>,
+      type: Array as Prop<SparklineItem[] | SparklineItem[][]>,
       default: () => ([]),
     },
     width: {
@@ -136,7 +136,7 @@ export default mixins<options &
       return Number(this.width)
     },
     totalBars (): number {
-      return this.value.length
+      return Math.max(...this.internalValue.map(x => x.length))
     },
     _lineWidth (): number {
       if (this.autoLineWidth && this.type !== 'trend') {
@@ -165,7 +165,7 @@ export default mixins<options &
     },
     parsedLabels (): SparklineText[] {
       const labels = []
-      const points = this.points
+      const points = this.points[0]
       const len = points.length
 
       for (let i = 0; labels.length < len; i++) {
@@ -186,11 +186,18 @@ export default mixins<options &
 
       return labels
     },
-    points (): Point[] {
-      return genPoints(this.value.slice(), this.boundary, this.type)
+    points (): Point[][] {
+      return genPoints(this.internalValue.slice(), this.boundary, this.type, this.totalBars)
     },
     textY (): number {
       return this.boundary.maxY + 6
+    },
+    internalValue (): SparklineItem[][] {
+      if (this.value[0] instanceof Array) {
+        return this.value as SparklineItem[][]
+      } else {
+        return [this.value as SparklineItem[]]
+      }
     },
   },
 
@@ -201,25 +208,26 @@ export default mixins<options &
         this.$nextTick(() => {
           if (!this.autoDraw || this.type === 'bar') return
 
-          const path = this.$refs.path
-          const length = path.getTotalLength()
+          for (const path of this.$refs.path) {
+            const length = path.getTotalLength()
 
-          if (!this.fill) {
-            path.style.transition = 'none'
-            path.style.strokeDasharray = length + ' ' + length
-            path.style.strokeDashoffset = Math.abs(length - (this.lastLength || 0)).toString()
-            path.getBoundingClientRect()
-            path.style.transition = `stroke-dashoffset ${this.autoDrawDuration}ms ${this.autoDrawEasing}`
-            path.style.strokeDashoffset = '0'
-          } else {
-            path.style.transformOrigin = 'bottom center'
-            path.style.transition = 'none'
-            path.style.transform = `scaleY(0)`
-            path.getBoundingClientRect()
-            path.style.transition = `transform ${this.autoDrawDuration}ms ${this.autoDrawEasing}`
-            path.style.transform = `scaleY(1)`
+            if (!this.fill) {
+              path.style.transition = 'none'
+              path.style.strokeDasharray = length + ' ' + length
+              path.style.strokeDashoffset = Math.abs(length - (this.lastLength || 0)).toString()
+              path.getBoundingClientRect()
+              path.style.transition = `stroke-dashoffset ${this.autoDrawDuration}ms ${this.autoDrawEasing}`
+              path.style.strokeDashoffset = '0'
+            } else {
+              path.style.transformOrigin = 'bottom center'
+              path.style.transition = 'none'
+              path.style.transform = `scaleY(0)`
+              path.getBoundingClientRect()
+              path.style.transition = `transform ${this.autoDrawDuration}ms ${this.autoDrawEasing}`
+              path.style.transform = `scaleY(1)`
+            }
+            this.lastLength = length
           }
-          this.lastLength = length
         })
       },
     },
@@ -271,17 +279,18 @@ export default mixins<options &
 
       return this.genG(this.parsedLabels.map(this.genText))
     },
-    genPath () {
+    genPath (points: Point[]) {
       const radius = this.smooth === true ? 8 : Number(this.smooth)
 
       return this.$createElement('path', {
         attrs: {
           id: this._uid,
-          d: genPath(this.points.slice(), radius, this.fill, Number(this.height)),
+          d: genPath(points.slice(), radius, this.fill, Number(this.height)),
           fill: this.fill ? `url(#${this._uid})` : 'none',
           stroke: this.fill ? 'none' : `url(#${this._uid})`,
         },
         ref: 'path',
+        refInFor: true,
       })
     },
     genLabel (item: SparklineText, index: number) {
@@ -298,7 +307,7 @@ export default mixins<options &
       }, [this.genLabel(item, index)])
     },
     genBar () {
-      if (!this.value || this.totalBars < 2) return undefined as never
+      if (!this.internalValue || this.totalBars < 2) return undefined as never
       const { width, height, parsedPadding, _lineWidth } = this
       const viewWidth = width || this.totalBars * parsedPadding * 2
       const viewHeight = height || 75
@@ -312,7 +321,7 @@ export default mixins<options &
         ...this.$props,
       }
 
-      props.points = genPoints(this.value, boundary, this.type)
+      props.points = genPoints(this.internalValue, boundary, this.type)
 
       const totalWidth = boundary.maxX / (props.points.length - 1)
 
@@ -361,7 +370,7 @@ export default mixins<options &
         attrs: {
           id: `${id}-clip`,
         },
-      }, this.points.map(item => {
+      }, this.points[0].map(item => {
         return this.$createElement('rect', {
           attrs: {
             x: item.x + offsetX,
@@ -410,7 +419,7 @@ export default mixins<options &
       }), [
         this.genGradient(),
         this.genLabels(),
-        this.genPath(),
+        ...this.points.map(points => this.genPath(points)),
       ])
     },
   },

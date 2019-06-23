@@ -1,15 +1,16 @@
 import { SparklineItem, Boundary, Point } from '../VSparkline'
 
-export function genPoints (
+function genPoints1D (
   points: SparklineItem[],
   boundary: Boundary,
-  type: String
+  type: String,
+  totalPoints: number
 ): Point[] {
   const { minX, minY, maxX, maxY } = boundary
   const normalisedPoints = points.map(
     item => (typeof item === 'number' ? item : item.value)
   )
-  const totalPoints = normalisedPoints.length
+
   const maxValue = Math.max(...normalisedPoints) + 1
   let minValue = Math.min(...normalisedPoints)
 
@@ -29,4 +30,13 @@ export function genPoints (
       value,
     }
   })
+}
+
+export function genPoints (
+  points: SparklineItem[][],
+  boundary: Boundary,
+  type: String,
+  totalPoints: number
+): Point[][] {
+  return points.map(ps => genPoints1D(ps, boundary, type, totalPoints))
 }
