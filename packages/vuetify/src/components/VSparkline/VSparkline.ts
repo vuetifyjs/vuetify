@@ -284,17 +284,18 @@ export default mixins<options &
         ref: 'path',
       })
     },
-    genText (item: SparklineText, index: number) {
-      const children = this.$scopedSlots.label
+    genLabel (item: SparklineText, index: number) {
+      return this.$scopedSlots.label
         ? this.$scopedSlots.label({ index, value: item.value })
         : item.value
-
+    },
+    genText (item: SparklineText, index: number) {
       return this.$createElement('text', {
         attrs: {
           x: item.x,
           y: this.textY,
         },
-      }, [children])
+      }, [this.genLabel(item, index)])
     },
     genBar () {
       if (!this.value || this.totalBars < 2) return undefined as never
@@ -386,14 +387,14 @@ export default mixins<options &
     genBarLabels (props: BarText): VNode {
       const offsetX = props.offsetX || 0
 
-      const children = props.points.map(item => (
+      const children = this.parsedLabels.map((item, i) => (
         this.$createElement('text', {
           attrs: {
             x: item.x + offsetX + this._lineWidth / 2,
             y: props.boundary.maxY + (Number(this.labelSize) || 7),
             'font-size': Number(this.labelSize) || 7,
           },
-        }, item.value.toString())
+        }, [this.genLabel(item, i)])
       ))
 
       return this.genG(children)
