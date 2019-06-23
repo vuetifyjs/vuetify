@@ -27,11 +27,11 @@
         {
           "type": "examples",
           "value": [
-            { "file": "dense", "newIn": "2.0" },
-            "human-resources",
-            "file-explorer",
-            "directory",
-            "hotspots"
+            { "file": "simple/dense", "newIn": "2.0" },
+            "intermediate/file-explorer",
+            "complex/human-resources",
+            "complex/directory",
+            "complex/hotspots"
           ]
         }
       ]
