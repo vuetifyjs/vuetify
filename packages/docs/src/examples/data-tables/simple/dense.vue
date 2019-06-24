@@ -1,5 +1,5 @@
 <template>
-  <v-data-table dense :headers="headers" :items="desserts" item-key="name" class="elevation-1"></v-data-table>
+  <v-data-table dense :items="desserts" item-key="name" class="elevation-1"></v-data-table>
 </template>
 
 <script>
@@ -86,6 +86,14 @@
           protein: 7,
           iron: '6%',
         },
+      ],
+      headers: [
+        {
+          text: 'Dessert (100g serving)',
+          align: 'left',
+          value: 'name',
+        },
+        { text: 'Category', value: 'category' },
       ],
     }),
   }
