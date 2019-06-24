@@ -12,6 +12,10 @@
     "flat": {
       "header": "De-emphasized selections",
       "desc": "You can easily disable the default highlighting of selected `v-list-item`s. This creates a lower profile for a user's choices."
+    },
+    "multiple": {
+      "header": "### Select multiple items",
+      "desc": "You can select multiple items at one time."
     }
   }
 }

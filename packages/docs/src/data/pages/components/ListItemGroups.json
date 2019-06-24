@@ -31,6 +31,7 @@
           "type": "examples",
           "value": [
             "simple/flat",
+            "simple/multiple",
             "intermediate/selection-controls"
           ]
         }
