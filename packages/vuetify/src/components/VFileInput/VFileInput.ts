@@ -39,6 +39,10 @@ export default VTextField.extend({
         'v-file-input': true,
       }
     },
+    counterValue (): string {
+      // TODO: add to locale
+      return `${this.lazyFileValue.length} files`
+    },
     isDirty (): boolean {
       return this.lazyFileValue.length > 0
     },
