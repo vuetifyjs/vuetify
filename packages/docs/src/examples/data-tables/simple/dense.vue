@@ -5,7 +5,7 @@
 <script>
   export default {
     data: () => ({
-      items: [
+      desserts: [
         {
           name: 'Frozen Yogurt',
           calories: 159,
