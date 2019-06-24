@@ -39,6 +39,7 @@
             "simple/virtualized",
             "simple/loading",
             "simple/dense",
+            "simple/footer-props",
             "intermediate/slots",
             "intermediate/expand",
             "intermediate/customize-header",
