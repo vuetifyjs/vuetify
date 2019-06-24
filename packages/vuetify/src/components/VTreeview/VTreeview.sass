@@ -5,10 +5,9 @@
 +theme(v-treeview) using ($material)
   color: map-deep-get($material, 'text', 'primary')
 
-  &--hoverable .v-treeview-node__root:hover,
-  .v-treeview-node__root.v-treeview-node--active
-    &:before
-      opacity: 0.2
+  &--hoverable .v-treeview-node__root:hover::before,
+  .v-treeview-node__root.v-treeview-node--active::before
+    opacity: 0.2
 
 .v-treeview
   > .v-treeview-node
