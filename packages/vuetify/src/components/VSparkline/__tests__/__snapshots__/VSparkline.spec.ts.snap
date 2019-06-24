@@ -201,19 +201,19 @@ exports[`VSparkline.ts should render component with bars and custom label size a
           y="82"
           font-size="15"
     >
-      1
+      Value 1
     </text>
     <text x="148"
           y="82"
           font-size="15"
     >
-      7
+      Value 2
     </text>
     <text x="245.33333333333331"
           y="82"
           font-size="15"
     >
-      42
+      Value 3
     </text>
   </g>
   <g transform="scale(1,-1) translate(0,-67)"
@@ -409,19 +409,19 @@ exports[`VSparkline.ts should render component with bars and labels and match a 
           y="74"
           font-size="7"
     >
-      1
+      Value 1
     </text>
     <text x="148"
           y="74"
           font-size="7"
     >
-      7
+      Value 2
     </text>
     <text x="245.33333333333331"
           y="74"
           font-size="7"
     >
-      42
+      Value 3
     </text>
   </g>
   <g transform="scale(1,-1) translate(0,-67)"
