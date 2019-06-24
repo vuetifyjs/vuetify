@@ -8,17 +8,24 @@ export default VTextField.extend({
   name: 'v-file-input',
 
   props: {
-    clearable: Boolean,
+    clearable: {
+      type: Boolean,
+      default: true,
+    },
     multiple: Boolean,
     prependIcon: {
       type: String,
       default: '$vuetify.icons.file',
     },
-    appendIcon: {
-      type: String,
-      default: '$vuetify.icons.close',
-    },
     placeholder: String,
+    readonly: {
+      type: Boolean,
+      default: true,
+    },
+    type: {
+      type: String,
+      default: 'file',
+    },
   },
 
   data: () => ({
@@ -43,17 +50,9 @@ export default VTextField.extend({
   },
 
   methods: {
-    genIconSlot () {
-      const slot = []
-
-      if (this.isDirty) {
-        slot.push(this.genIcon('append', () => {
-          this.lazyFileValue = []
-          this.internalValue = null
-        }))
-      }
-
-      return this.genSlot('append', 'inner', slot)
+    clearableCallback () {
+      this.lazyFileValue = []
+      this.internalValue = null
     },
     genPrependSlot () {
       const icon = this.genIcon('prepend', () => {
@@ -67,10 +66,7 @@ export default VTextField.extend({
     genInput () {
       const input = VTextField.options.methods.genInput.call(this)
 
-      input.data!.domProps!.type = 'file'
       input.data!.attrs!.multiple = this.multiple
-      input.data!.attrs!.readonly = true
-      input.data!.attrs!['aria-readonly'] = String(this.readonly)
       input.data!.on!.change = (e: any) => {
         this.lazyFileValue = [...e.target.files]
       }
