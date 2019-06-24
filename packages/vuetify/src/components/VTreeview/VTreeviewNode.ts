@@ -71,6 +71,8 @@ export const VTreeviewNodeProps = {
   loadChildren: Function as PropValidator<(item: any) => Promise<void>>,
   openOnClick: Boolean,
   transition: Boolean,
+  rounded: Boolean,
+  shaped: Boolean,
 }
 
 export default mixins<options>(
@@ -279,6 +281,8 @@ export default mixins<options>(
           loadChildren: this.loadChildren,
           transition: this.transition,
           openOnClick: this.openOnClick,
+          rounded: this.rounded,
+          shaped: this.shaped,
         },
         scopedSlots: this.$scopedSlots,
       })
@@ -309,6 +313,8 @@ export default mixins<options>(
         'v-treeview-node--leaf': !this.hasChildren,
         'v-treeview-node--click': this.openOnClick,
         'v-treeview-node--disabled': this.disabled,
+        'v-treeview-node--rounded': this.rounded,
+        'v-treeview-node--shaped': this.shaped,
         'v-treeview-node--selected': this.isSelected,
         'v-treeview-node--excluded': this.treeview.isExcluded(this.key),
       },
