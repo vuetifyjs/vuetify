@@ -6,18 +6,24 @@ import VTreeviewNode from './VTreeviewNode'
 
 // Mixins
 import { inject as RegistrableInject } from '../../mixins/registrable'
+import Colorable from '../../mixins/colorable'
 
 // Utils
-import mixins from '../../util/mixins'
+import mixins, { ExtractVue } from '../../util/mixins'
 import { getObjectValueByPath } from '../../util/helpers'
 import { PropValidator } from 'vue/types/options'
 
 // Types
-import Vue, { VNode } from 'vue'
+import { VNode } from 'vue'
 
 type VTreeViewInstance = InstanceType<typeof VTreeview>
 
-interface options extends Vue {
+const baseMixins = mixins(
+  Colorable,
+  RegistrableInject('treeview')
+)
+
+interface options extends ExtractVue<typeof baseMixins> {
   treeview: VTreeViewInstance
 }
 
@@ -28,6 +34,10 @@ export const VTreeviewNodeProps = {
     default: 'v-treeview-node--active',
   },
   selectable: Boolean,
+  color: {
+    type: String,
+    default: 'primary',
+  },
   selectedColor: {
     type: String,
     default: 'accent',
@@ -75,10 +85,8 @@ export const VTreeviewNodeProps = {
   shaped: Boolean,
 }
 
-export default mixins<options>(
-  RegistrableInject('treeview')
-  /* @vue/component */
-).extend({
+/* @vue/component */
+export default baseMixins.extend<options>().extend({
   name: 'v-treeview-node',
 
   inject: {
@@ -241,7 +249,7 @@ export default mixins<options>(
       if (this.selectable) children.unshift(this.genCheckbox())
       if (this.hasChildren) children.unshift(this.genToggle())
 
-      return this.$createElement('div', {
+      return this.$createElement('div', this.setTextColor(this.isActive && this.color, {
         staticClass: 'v-treeview-node__root',
         class: {
           [this.activeClass]: this.isActive,
@@ -259,7 +267,7 @@ export default mixins<options>(
             }
           },
         },
-      }, children)
+      }), children)
     },
     genChild (item: any): VNode {
       return this.$createElement(VTreeviewNode, {
@@ -270,6 +278,7 @@ export default mixins<options>(
           item,
           selectable: this.selectable,
           selectedColor: this.selectedColor,
+          color: this.color,
           expandIcon: this.expandIcon,
           indeterminateIcon: this.indeterminateIcon,
           offIcon: this.offIcon,

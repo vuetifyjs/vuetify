@@ -6,9 +6,9 @@
 +theme(v-treeview) using ($material)
   color: map-deep-get($material, 'text', 'primary')
 
-  &--hoverable .v-treeview-node__root:hover,
-  .v-treeview-node--active
-    background: map-get($material, 'dividers')
+  &--hoverable .v-treeview-node__root:hover::before,
+  .v-treeview-node__root.v-treeview-node--active::before
+    opacity: 0.2
 
   .v-treeview-node--disabled
     color: map-deep-get($material, 'text', 'disabled')
@@ -61,6 +61,19 @@
       align-items: center
       min-height: $treeview-node-height
       padding-right: $treeview-node-padding-end
+      position: relative
+
+      &:before
+        background-color: currentColor
+        bottom: 0
+        content: ''
+        left: 0
+        opacity: 0
+        pointer-events: none
+        position: absolute
+        right: 0
+        top: 0
+        transition: $primary-transition
 
     &__content
       align-items: center
