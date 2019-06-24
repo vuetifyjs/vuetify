@@ -11,7 +11,7 @@
     },
     "auto-grow": {
       "header": "### Auto grow",
-      "desc": "Textarea's will automatically increase in size when the contained text exceeds it's size when using the `auto-grow` prop."
+      "desc": "When using the `auto-grow` prop, textarea's will automatically increase in size when the contained text exceeds it's size."
     },
     "autofocus": {
       "header": "### Auto focus",
@@ -35,11 +35,11 @@
     },
     "no-resize": {
       "header": "### No resize",
-      "desc": "`v-textarea`'s have the option to remain the same size regardless of content size, using the `no-resize` prop."
+      "desc": "`v-textarea`'s have the option to remain the same size regardless of their content's size, using the `no-resize` prop."
     },
     "rows": {
       "header": "### Rows",
-      "desc": "The `rows` prop allows you to define how many rows the textarea has, using the `row-height` prop you can further customize your rows by defining their height."
+      "desc": "The `rows` prop allows you to define how many rows the textarea has, when combined with the `row-height` prop you can further customize your rows by defining their height."
     },
     "signup-box": {
       "header": "### Beautiful Forms",
