@@ -31,12 +31,21 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "height",
-            "fixed-header",
-            "dense",
-            "dark"
+            "simple/height",
+            "simple/fixed-header",
+            "simple/dense",
+            "simple/dark"
           ]
         }
       ]

@@ -9,7 +9,7 @@ export function genPath (points: Point[], radius: number, fill = false, height =
   const end = points[points.length - 1]
 
   return (
-    (fill ? `M${start.x} ${height} L${start.x} ${start.y}` : `M${start.x} ${start.y}`) +
+    (fill ? `M${start.x} ${height - start.x + 2} L${start.x} ${start.y}` : `M${start.x} ${start.y}`) +
     points
       .map((point, index) => {
         const next = points[index + 1]
@@ -33,5 +33,6 @@ export function genPath (points: Point[], radius: number, fill = false, height =
         return `L${before.x} ${before.y}S${point.x} ${point.y} ${after.x} ${after.y}`
       })
       .join('') +
-    (fill ? `L${end.x} ${height} Z` : ''))
+    (fill ? `L${end.x} ${height - start.x + 2} Z` : '')
+  )
 }

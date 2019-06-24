@@ -38,16 +38,28 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "column-width-with-hierarchy",
-            "flexible-and-card",
-            "floating-with-search",
-            "variations",
-            "prominent",
-            "dense",
-            "contextual-action-bar",
-            "background"
+            "simple/prominent",
+            "simple/dense",
+            "simple/column-width-with-hierarchy",
+            "simple/variations",
+            "simple/background",
+            "simple/extended",
+            "simple/extension-height",
+            "simple/collapse",
+            "intermediate/flexible-and-card",
+            "intermediate/floating-with-search",
+            "intermediate/contextual-action-bar"
           ]
         }
       ]

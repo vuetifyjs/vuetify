@@ -2,7 +2,7 @@
 import { VNode } from 'vue'
 import mixins from '../../util/mixins'
 import header, { TableHeader } from './mixins/header'
-import { getTextAlignment, wrapInArray } from '../../util/helpers'
+import { wrapInArray } from '../../util/helpers'
 
 export default mixins(header).extend({
   name: 'v-data-table-header-desktop',
@@ -28,7 +28,7 @@ export default mixins(header).extend({
       }
 
       const classes = [
-        getTextAlignment(header.align, this.$vuetify.rtl),
+        `text-xs-${header.align || 'start'}`,
         ...wrapInArray(header.class),
       ]
 

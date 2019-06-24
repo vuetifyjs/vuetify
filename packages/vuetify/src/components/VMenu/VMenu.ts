@@ -144,6 +144,9 @@ export default baseMixins.extend({
 
       return top || '0'
     },
+    hasClickableTiles (): boolean {
+      return Boolean(this.tiles.find(tile => tile.tabIndex > -1))
+    },
     styles (): object {
       return {
         maxHeight: this.calculatedMaxHeight,
@@ -231,7 +234,7 @@ export default baseMixins.extend({
       // For infinite scroll and autocomplete, re-evaluate children
       this.getTiles()
 
-      if (!this.isActive) {
+      if (!this.isActive || !this.hasClickableTiles) {
         return
       } else if (e.keyCode === keyCodes.tab) {
         this.isActive = false

@@ -232,4 +232,15 @@ describe('VInput.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should not apply attrs to element', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        foo: 'bar',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.attributes()).not.toHaveProperty('foobar')
+  })
 })

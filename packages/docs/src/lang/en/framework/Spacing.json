@@ -16,6 +16,8 @@
     "`b` - applies the spacing for `*-bottom`",
     "`l` - applies the spacing for `*-left`",
     "`r` - applies the spacing for `*-right`",
+    "`s` - applies the spacing for `*-left` (in LTR mode) and for `*-right` (in RTL mode)",
+    "`e` - applies the spacing for `*-right` (in LTR mode) and for `*-left` (in RTL mode)",
     "`x` - applies the spacing for both `*-left` and `*-right`",
     "`y` - applies the spacing for both `*-top` and `*-bottom`",
     "`a` - applies the spacing for the property in all directions"
