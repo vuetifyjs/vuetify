@@ -16,6 +16,10 @@
     "multiple": {
       "header": "### Select multiple items",
       "desc": "You can select multiple items at one time."
+    },
+    "mandatory": {
+      "header": "### Mandatory",
+      "desc": "At least one item must be selected."
     }
   }
 }

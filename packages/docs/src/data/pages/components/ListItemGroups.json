@@ -32,6 +32,7 @@
           "value": [
             "simple/flat",
             "simple/multiple",
+            "simple/mandatory",
             "intermediate/selection-controls"
           ]
         }
