@@ -5,6 +5,8 @@
       <v-switch v-model="selectable" label="Selectable"></v-switch>
       <v-switch v-model="activatable" label="Activatable"></v-switch>
       <v-switch v-model="hoverable" label="Hoverable"></v-switch>
+      <v-switch v-model="shaped" label="Shaped"></v-switch>
+      <v-switch v-model="rounded" label="Rounded"></v-switch>
       <v-switch v-model="openOnClick" label="Open on any item click"></v-switch>
       <v-flex xs12>
         <v-select v-model="selectedColor" :items="selectedColors" :disabled="!selectable" label="Selected checkbox color"></v-select>
