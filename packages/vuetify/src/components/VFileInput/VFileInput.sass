@@ -1,0 +1,20 @@
+@import '../../styles/styles.sass'
+
++theme(v-file-input) using ($material)
+  .v-file-input__text
+    color: map-deep-get($material, 'text', 'primary')
+
+    &--placeholder
+      color: map-deep-get($material, 'text', 'secondary')
+
+// Block
+.v-file-input
+  input[type="file"]
+    opacity: 0
+    width: 0
+
+// Element
+.v-file-input .v-file-input__text
+  align-items: center
+  display: flex
+  width: 100%
