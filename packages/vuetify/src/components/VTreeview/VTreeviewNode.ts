@@ -286,6 +286,7 @@ export default baseMixins.extend<options>().extend({
           loadingIcon: this.loadingIcon,
           itemKey: this.itemKey,
           itemText: this.itemText,
+          itemDisabled: this.itemDisabled,
           itemChildren: this.itemChildren,
           loadChildren: this.loadChildren,
           transition: this.transition,
