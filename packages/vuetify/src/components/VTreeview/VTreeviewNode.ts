@@ -52,6 +52,10 @@ export const VTreeviewNodeProps = {
     type: String,
     default: '$vuetify.icons.loading',
   },
+  itemDisabled: {
+    type: String,
+    default: 'disabled',
+  },
   itemKey: {
     type: String,
     default: 'id',
@@ -101,6 +105,9 @@ export default mixins<options>(
   }),
 
   computed: {
+    disabled (): string {
+      return getObjectValueByPath(this.item, this.itemDisabled)
+    },
     key (): string {
       return getObjectValueByPath(this.item, this.itemKey)
     },
@@ -189,6 +196,8 @@ export default mixins<options>(
         slot: 'prepend',
         on: {
           click: (e: MouseEvent) => {
+            if (this.disabled) return
+
             e.stopPropagation()
 
             if (this.isLoading) return
@@ -206,6 +215,8 @@ export default mixins<options>(
         },
         on: {
           click: (e: MouseEvent) => {
+            if (this.disabled) return
+
             e.stopPropagation()
 
             if (this.isLoading) return
@@ -237,6 +248,8 @@ export default mixins<options>(
         },
         on: {
           click: () => {
+            if (this.disabled) return
+
             if (this.openOnClick && this.children) {
               this.open()
             } else if (this.activatable) {
@@ -299,6 +312,7 @@ export default mixins<options>(
       class: {
         'v-treeview-node--leaf': !this.hasChildren,
         'v-treeview-node--click': this.openOnClick,
+        'v-treeview-node--disabled': this.disabled,
         'v-treeview-node--rounded': this.rounded,
         'v-treeview-node--shaped': this.shaped,
         'v-treeview-node--selected': this.isSelected,

@@ -10,6 +10,13 @@
   .v-treeview-node--active
     background: map-get($material, 'dividers')
 
+  .v-treeview-node--disabled
+    color: map-deep-get($material, 'text', 'disabled')
+
+    .v-treeview-node__toggle,
+    .v-treeview-node__checkbox
+      color: map-deep-get($material, 'text', 'disabled') !important
+
 .v-treeview
   > .v-treeview-node
     margin-left: 0
@@ -24,6 +31,9 @@
   &-node
     margin-left: $treeview-node-x-margin
 
+    &--disabled
+      pointer-events: none
+      
     &.v-treeview-node--shaped
       +treeview-shaped($treeview-node-height, $treeview-node-shaped-margin)
 
