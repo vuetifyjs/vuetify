@@ -30,8 +30,8 @@
         {
           "type": "examples",
           "value": [
-            "selection-controls",
-            "flat"
+            "simple/flat",
+            "intermediate/selection-controls"
           ]
         }
       ]
