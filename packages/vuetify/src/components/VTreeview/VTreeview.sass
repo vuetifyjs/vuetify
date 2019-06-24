@@ -10,8 +10,8 @@
   .v-treeview-node--click > .v-treeview-node__root
     +states($material)
 
-  .v-treeview-node__root.v-treeview-node--active::before
-    opacity: 0.2
+  .v-treeview-node__root.v-treeview-node--active
+    +active-states($material)
 
   .v-treeview-node--disabled
     color: map-deep-get($material, 'text', 'disabled')
