@@ -1,7 +1,8 @@
 <template>
   <v-card>
     <v-toolbar
-      color="grey lighten-3"
+      color="primary"
+      dark
       flat
     >
       <v-icon>mdi-silverware</v-icon>
@@ -16,7 +17,7 @@
             :load-children="fetch"
             :items="items"
             activatable
-            active-class="grey lighten-4 indigo--text"
+            color="success"
             selected-color="indigo"
             open-on-click
             selectable
