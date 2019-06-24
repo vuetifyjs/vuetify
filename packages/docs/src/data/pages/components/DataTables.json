@@ -37,6 +37,7 @@
             "simple/search",
             "simple/headerless",
             "simple/virtualized",
+            "simple/loading",
             "intermediate/slots",
             "intermediate/expand",
             "intermediate/customize-header",
