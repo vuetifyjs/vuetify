@@ -22,16 +22,16 @@
       >
         <v-btn
           v-for="header in headers"
-          text
           :key="header.value"
+          text
           :value="header.value"
         >Sort by {{ header.text }}</v-btn>
       </v-btn-toggle>
       <v-btn-toggle v-model="groupBy">
         <v-btn
           v-for="header in headers"
-          text
           :key="header.value"
+          text
           :value="header.value"
         >Group by {{ header.text }}</v-btn>
       </v-btn-toggle>
@@ -61,115 +61,115 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      dense: false,
-      loading: false,
-      virtualRows: false,
-      disableSort: false,
-      disablePagination: false,
-      disableFiltering: false,
-      hideDefaultHeader: false,
-      hideDefaultFooter: false,
-      multiSort: false,
-      mustSort: false,
-      showExpand: false,
-      showGroupBy: false,
-      showSelect: false,
-      sortBy: [],
-      groupBy: [],
-      headers: [
-        {
-          text: "Dessert (100g serving)",
-          align: "left",
-          value: "name"
-        },
-        { text: "Category", value: "category" }
-      ],
-      desserts: [
-        {
-          name: "Frozen Yogurt",
-          category: "Ice cream"
-        },
-        {
-          name: "Ice cream sandwich",
-          category: "Ice cream"
-        },
-        {
-          name: "Eclair",
-          category: "Cookie"
-        },
-        {
-          name: "Cupcake",
-          category: "Pastry"
-        },
-        {
-          name: "Gingerbread",
-          category: "Cookie"
-        },
-        {
-          name: "Jelly bean",
-          category: "Candy"
-        },
-        {
-          name: "Lollipop",
-          category: "Candy"
-        },
-        {
-          name: "Honeycomb",
-          category: "Toffee"
-        },
-        {
-          name: "Donut",
-          category: "Pastry"
-        },
-        {
-          name: "KitKat",
-          category: "Candy"
-        },
-        {
-          name: "Frozen Yogurt",
-          category: "Ice cream"
-        },
-        {
-          name: "Ice cream sandwich",
-          category: "Ice cream"
-        },
-        {
-          name: "Eclair",
-          category: "Cookie"
-        },
-        {
-          name: "Cupcake",
-          category: "Pastry"
-        },
-        {
-          name: "Gingerbread",
-          category: "Cookie"
-        },
-        {
-          name: "Jelly bean",
-          category: "Candy"
-        },
-        {
-          name: "Lollipop",
-          category: "Candy"
-        },
-        {
-          name: "Honeycomb",
-          category: "Toffee"
-        },
-        {
-          name: "Donut",
-          category: "Pastry"
-        },
-        {
-          name: "KitKat",
-          category: "Candy"
-        }
-      ]
-    };
+  export default {
+    data () {
+      return {
+        dense: false,
+        loading: false,
+        virtualRows: false,
+        disableSort: false,
+        disablePagination: false,
+        disableFiltering: false,
+        hideDefaultHeader: false,
+        hideDefaultFooter: false,
+        multiSort: false,
+        mustSort: false,
+        showExpand: false,
+        showGroupBy: false,
+        showSelect: false,
+        sortBy: [],
+        groupBy: [],
+        headers: [
+          {
+            text: 'Dessert (100g serving)',
+            align: 'left',
+            value: 'name',
+          },
+          { text: 'Category', value: 'category' },
+        ],
+        desserts: [
+          {
+            name: 'Frozen Yogurt',
+            category: 'Ice cream',
+          },
+          {
+            name: 'Ice cream sandwich',
+            category: 'Ice cream',
+          },
+          {
+            name: 'Eclair',
+            category: 'Cookie',
+          },
+          {
+            name: 'Cupcake',
+            category: 'Pastry',
+          },
+          {
+            name: 'Gingerbread',
+            category: 'Cookie',
+          },
+          {
+            name: 'Jelly bean',
+            category: 'Candy',
+          },
+          {
+            name: 'Lollipop',
+            category: 'Candy',
+          },
+          {
+            name: 'Honeycomb',
+            category: 'Toffee',
+          },
+          {
+            name: 'Donut',
+            category: 'Pastry',
+          },
+          {
+            name: 'KitKat',
+            category: 'Candy',
+          },
+          {
+            name: 'Frozen Yogurt',
+            category: 'Ice cream',
+          },
+          {
+            name: 'Ice cream sandwich',
+            category: 'Ice cream',
+          },
+          {
+            name: 'Eclair',
+            category: 'Cookie',
+          },
+          {
+            name: 'Cupcake',
+            category: 'Pastry',
+          },
+          {
+            name: 'Gingerbread',
+            category: 'Cookie',
+          },
+          {
+            name: 'Jelly bean',
+            category: 'Candy',
+          },
+          {
+            name: 'Lollipop',
+            category: 'Candy',
+          },
+          {
+            name: 'Honeycomb',
+            category: 'Toffee',
+          },
+          {
+            name: 'Donut',
+            category: 'Pastry',
+          },
+          {
+            name: 'KitKat',
+            category: 'Candy',
+          },
+        ],
+      }
+    },
   }
-};
 </script>
