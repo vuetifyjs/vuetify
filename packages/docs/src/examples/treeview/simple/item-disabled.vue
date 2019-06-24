@@ -1,32 +1,9 @@
 <template>
-  <div>
-    <v-layout row wrap justify-space-around>
-      <v-switch v-model="dense" label="Dense"></v-switch>
-      <v-switch v-model="selectable" label="Selectable"></v-switch>
-      <v-switch v-model="activatable" label="Activatable"></v-switch>
-      <v-switch v-model="hoverable" label="Hoverable"></v-switch>
-      <v-switch v-model="openOnClick" label="Open on any item click"></v-switch>
-      <v-flex xs12>
-        <v-select v-model="selectedColor" :items="selectedColors" :disabled="!selectable" label="Selected checkbox color"></v-select>
-      </v-flex>
-      <v-flex xs12>
-        <v-select v-model="color" :items="selectedColors" :disabled="!activatable" label="Active node color"></v-select>
-      </v-flex>
-    </v-layout>
-
-    <v-treeview
-      :items="items"
-      :dense="dense"
-      :selectable="selectable"
-      :activatable="activatable"
-      :hoverable="hoverable"
-      :openOnClick="openOnClick"
-      :selectedColor="selectedColor"
-      :color="color"
-      :shaped="shaped"
-      :rounded="rounded"
-    ></v-treeview>
-  </div>
+  <v-treeview
+    selectable
+    item-disabled="locked"
+    :items="items"
+  ></v-treeview>
 </template>
 
 <script>
@@ -36,6 +13,7 @@
         {
           id: 1,
           name: 'Applications :',
+          locked: true,
           children: [
             { id: 2, name: 'Calendar : app' },
             { id: 3, name: 'Chrome : app' },
@@ -53,6 +31,7 @@
                 {
                   id: 7,
                   name: 'src :',
+                  locked: true,
                   children: [
                     { id: 8, name: 'index : ts' },
                     { id: 9, name: 'bootstrap : ts' },
@@ -81,9 +60,9 @@
           id: 15,
           name: 'Downloads :',
           children: [
-            { id: 16, name: 'October : pdf' },
-            { id: 17, name: 'November : pdf' },
-            { id: 18, name: 'Tutorial : html' },
+            { id: 16, name: 'October : pdf', locked: true },
+            { id: 17, name: 'November : pdf', locked: true },
+            { id: 18, name: 'Tutorial : html', locked: true },
           ],
         },
         {
@@ -103,22 +82,6 @@
             { id: 25, name: 'Conference introduction : avi' },
           ],
         },
-      ],
-      dense: false,
-      selectable: false,
-      activatable: false,
-      hoverable: false,
-      openOnClick: false,
-      shaped: false,
-      rounded: false,
-      color: 'primary',
-      selectedColor: 'accent',
-      selectedColors: [
-        'accent',
-        'teal',
-        'red',
-        'success',
-        'warning lighten-2',
       ],
     }),
   }

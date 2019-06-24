@@ -9,6 +9,26 @@
       "header": "### Dense mode",
       "desc": "Dense mode provides more compact layout with decreased heights of the items."
     },
+    "color": {
+      "header": "### Color",
+      "desc": "You can control the text and background color of the active treeview node."
+    },
+    "selected-color": {
+      "header": "### Checkbox color",
+      "desc": "You can control the color of the selected node checkbox."
+    },
+    "shaped": {
+      "header": "### Shaped",
+      "desc": "Shaped treeview's have rounded borders on one side of the nodes."
+    },
+    "rounded": {
+      "header": "### Rounded",
+      "desc": "You can make treeview nodes rounded."
+    },
+    "item-disabled": {
+      "header": "### Disabling nodes",
+      "desc": "Setting `item-disabled` prop allows to control which node's property disables the node when set to `true`."
+    },
     "file-explorer": {
       "header": "### Scoped slots",
       "desc": "Using scoped slots we are able to create an intuitive file explorer. Apart from the `prepend` slot, there is also one for the `label`, and an `append` slot."
@@ -47,6 +67,7 @@
       "activatable": "Allows user to mark a node as active by clicking on it",
       "active": "Syncable prop that allows one to control which nodes are active. The array consists of the `item-key` of each active item.",
       "activeClass": "The class applied to the node when active",
+      "color": "Sets the color of the active node",
       "customFilter": "Custom search filter",
       "dense": "Decreases the height of the items",
       "expandIcon": "Icon used to indicate that a node can be expanded",
