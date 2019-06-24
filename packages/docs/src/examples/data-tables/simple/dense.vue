@@ -1,5 +1,5 @@
 <template>
-  <v-data-table dense :items="desserts" item-key="name" class="elevation-1"></v-data-table>
+  <v-data-table dense :headers="headers" :items="desserts" item-key="name" class="elevation-1"></v-data-table>
 </template>
 
 <script>
@@ -91,9 +91,14 @@
         {
           text: 'Dessert (100g serving)',
           align: 'left',
+          sortable: false,
           value: 'name',
         },
-        { text: 'Category', value: 'category' },
+        { text: 'Calories', value: 'calories' },
+        { text: 'Fat (g)', value: 'fat' },
+        { text: 'Carbs (g)', value: 'carbs' },
+        { text: 'Protein (g)', value: 'protein' },
+        { text: 'Iron (%)', value: 'iron' },
       ],
     }),
   }

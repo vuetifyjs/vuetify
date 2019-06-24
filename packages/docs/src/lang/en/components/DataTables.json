@@ -23,7 +23,7 @@
     },
     "dense": {
       "header": "### Dense",
-      "desc": "Using the `dense` prop you can give your data table."
+      "desc": "Using the `dense` prop you are able to give your data tables an alternate style."
     },
     "loading": {
       "header": "### Loading state",
