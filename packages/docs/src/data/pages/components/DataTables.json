@@ -38,6 +38,7 @@
             "simple/headerless",
             "simple/virtualized",
             "simple/loading",
+            "simple/dense",
             "intermediate/slots",
             "intermediate/expand",
             "intermediate/customize-header",

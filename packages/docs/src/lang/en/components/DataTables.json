@@ -21,6 +21,10 @@
       "header": "### Grouped rows",
       "desc": "Using the `group-by` and `group-desc` props you can group rows on an item property. The `show-group-by` prop will show a group button in the default header."
     },
+    "dense": {
+      "header": "### Dense",
+      "desc": "Using the `dense` prop you can give your data table."
+    },
     "loading": {
       "header": "### Loading state",
       "desc": "You can load data to data table dynamically."
