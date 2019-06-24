@@ -33,6 +33,7 @@
             "simple/flat",
             "simple/multiple",
             "simple/mandatory",
+            "simple/active-class",
             "intermediate/selection-controls"
           ]
         }
