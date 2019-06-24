@@ -47,7 +47,7 @@ const baseMixins = mixins(
 export default baseMixins.extend({
   name: 'v-navigation-drawer',
 
-  provide () {
+  provide (): object {
     return {
       isInNav: this.tag === 'nav',
     }
@@ -90,7 +90,7 @@ export default baseMixins.extend({
     stateless: Boolean,
     tag: {
       type: String,
-      default () {
+      default (): string {
         return this.app ? 'nav' : 'aside'
       },
     },
