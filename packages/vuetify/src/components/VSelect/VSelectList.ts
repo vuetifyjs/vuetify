@@ -84,6 +84,9 @@ export default mixins(Colorable, Themeable).extend({
     },
     staticNoDataTile (): VNode {
       const tile = {
+        attrs: {
+          role: undefined,
+        },
         on: {
           mousedown: (e: Event) => e.preventDefault(), // Prevent onBlur from being called
         },
@@ -170,6 +173,9 @@ export default mixins(Colorable, Themeable).extend({
 
       const tile = {
         attrs: {
+          // Default behavior in list does not
+          // contain aria-selected by default
+          'aria-selected': String(value),
           'aria-labelledby': this.genLabelledBy(item),
           role: 'option',
         },

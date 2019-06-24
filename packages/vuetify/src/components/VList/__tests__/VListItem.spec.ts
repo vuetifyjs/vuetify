@@ -177,7 +177,7 @@ describe('VListItem.ts', () => {
     expect(wrapper.element.tabIndex).toBe(0)
   })
 
-  it('should have the correct role', () => {
+  it.only('should have the correct role', () => {
     // Custom provided
     const wrapper = mountFunction({
       attrs: { role: 'item' },
@@ -187,6 +187,7 @@ describe('VListItem.ts', () => {
     // In list-item-group
     const wrapper2 = mountFunction({
       provide: {
+        isInGroup: true,
         listItemGroup: {
           register: () => {},
           unregister: () => {},
