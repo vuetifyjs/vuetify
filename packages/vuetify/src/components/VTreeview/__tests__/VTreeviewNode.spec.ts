@@ -96,4 +96,24 @@ describe('VTreeViewNode.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should render disabled item', () => {
+    const wrapper = mount({
+      name: 'test',
+
+      render: h => h(VTreeviewNode, {
+        scopedSlots: {
+          prepend: defaultSlot,
+          append: defaultSlot,
+        },
+        props: {
+          item: { ...singleRootTwoChildren, disabled: true },
+        },
+      }),
+    }, {
+      provide: { treeview },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

@@ -6,6 +6,7 @@ import {
   convertToUnit,
   getSlotType,
   arrayDiff,
+  getObjectValueByPath,
 } from '../helpers'
 
 describe('helpers', () => {
@@ -111,6 +112,24 @@ describe('helpers', () => {
     expect(deepEqual({ r: [circular] }, { r: [circular] })).toEqual(true)
   })
 
+  it('should get value directly on object if not undefined', () => {
+    const obj = {
+      a: 'foo',
+      'b.a': 'foobar',
+      b: {
+        a: 1,
+      },
+      'c.d': undefined,
+      c: {
+        d: 'bar',
+      },
+    }
+
+    expect(getObjectValueByPath(obj, 'a')).toEqual('foo')
+    expect(getObjectValueByPath(obj, 'b.a')).toEqual('foobar')
+    expect(getObjectValueByPath(obj, 'c.d')).toEqual('bar')
+  })
+
   it('should get nested value', () => {
     const obj = {
       a: {
@@ -166,7 +185,7 @@ describe('helpers', () => {
     expect(getPropertyFromItem(obj, 'c.2.d.x', 'fallback')).toEqual('fallback')
     expect(getPropertyFromItem(obj, o => o.a.b + o.c[0])).toEqual(3)
     expect(getPropertyFromItem(obj, ['c', 2, 'd'])).toEqual('d')
-    expect(getPropertyFromItem(obj, 'x.y')).toEqual('nested')
+    expect(getPropertyFromItem(obj, 'x.y')).toEqual('comp')
     expect(getPropertyFromItem(obj, ['x', 'y'])).toEqual('nested')
     expect(getPropertyFromItem(obj, ['x.y'])).toEqual('comp')
   })

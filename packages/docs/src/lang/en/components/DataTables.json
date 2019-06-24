@@ -160,6 +160,7 @@
       "save": "Emits when edit-dialog save button is pressed"
     },
     "v-data-table": {
+      "click:row": "Emits when a table row is clicked. The item for the row is included. **NOTE:** will not emit when table rows are defined through a scoped slot.",
       "update:pagination": "Emits when the `pagination.sync` event is updated"
     }
   }
