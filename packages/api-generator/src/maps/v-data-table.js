@@ -11,10 +11,12 @@ const TableHeader = {
   'class?': 'string | string[]',
   'width?': 'string | number',
   'filter?': '(value: any, search: string, item: any): boolean',
-  'sort?': '(a: any, b: any): number'
+  'sort?': '(a: any, b: any): number',
 }
 
-const DataTableEvents = [].concat(DataIteratorEvents)
+const DataTableEvents = [
+  { name: 'click:row', source: 'v-data-table', value: 'any' },
+].concat(DataIteratorEvents)
 
 const DataTableHeaderScopedProps = {
   props: {
@@ -23,48 +25,48 @@ const DataTableHeaderScopedProps = {
     mobile: 'boolean',
     showGroupBy: 'boolean',
     someItems: 'boolean',
-    everyItem: 'boolean'
+    everyItem: 'boolean',
   },
   on: {
     sort: DataDefaultScopedSlotProps.sort,
     group: DataDefaultScopedSlotProps.group,
-    'toggle-select-all': '(value: boolean): void'
-  }
+    'toggle-select-all': '(value: boolean): void',
+  },
 }
 
 const DataTableHeaderColumnScopedProps = {
-  header: 'TableHeader'
+  header: 'TableHeader',
 }
 
 const DataTableItemColumnScopedProps = {
   item: 'any',
   header: 'TableHeader',
-  value: 'any'
+  value: 'any',
 }
 
 const DataTableSelectScopedProps = {
   item: 'any',
   props: {
-    value: 'boolean'
+    value: 'boolean',
   },
   on: {
-    input: '(value: boolean): void'
-  }
+    input: '(value: boolean): void',
+  },
 }
 
 const DataTableExpandScopedProps = {
   item: 'any',
   props: {
-    expanded: 'boolean'
+    expanded: 'boolean',
   },
   on: {
-    click: '(value: boolean): void'
-  }
+    click: '(value: boolean): void',
+  },
 }
 
 const DataTableExpandedItemScopedProps = {
   item: 'any',
-  headers: 'TableHeader[]'
+  headers: 'TableHeader[]',
 }
 
 const DataTableSlots = [
@@ -85,7 +87,7 @@ const DataTableSlots = [
   { name: 'item.data-table-select', props: DataTableSelectScopedProps },
   { name: 'item.data-table-expand', props: DataTableExpandScopedProps },
   { name: 'item.<name>', props: DataTableItemColumnScopedProps },
-  { name: 'expanded-item', props: DataTableExpandedItemScopedProps }
+  { name: 'expanded-item', props: DataTableExpandedItemScopedProps },
 ]
 
 module.exports = {
@@ -93,15 +95,15 @@ module.exports = {
     props: [
       {
         name: 'headers',
-        example: TableHeader
-      }
+        example: TableHeader,
+      },
     ].concat(DataIteratorProps).concat(DataProps),
     slots: DataTableSlots,
     scopedSlots: DataTableSlots,
-    events: DataTableEvents
+    events: DataTableEvents,
   },
   TableHeader,
   DataTableEvents,
   DataTableHeaderScopedProps,
-  DataTableSlots
+  DataTableSlots,
 }
