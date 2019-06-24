@@ -160,7 +160,6 @@ describe('VListItem.ts', () => {
     })
 
     expect(wrapper.element.getAttribute('aria-disabled')).toBe('true')
-    expect(wrapper.element.getAttribute('aria-selected')).toBe('false')
     expect(wrapper.element.tabIndex).toBe(-1)
 
     wrapper.setProps({
@@ -169,7 +168,6 @@ describe('VListItem.ts', () => {
     })
 
     expect(wrapper.element.getAttribute('aria-disabled')).toBeNull()
-    expect(wrapper.element.getAttribute('aria-selected')).toBe('true')
     expect(wrapper.element.tabIndex).toBe(-1)
 
     wrapper.setProps({ link: true })
@@ -177,7 +175,7 @@ describe('VListItem.ts', () => {
     expect(wrapper.element.tabIndex).toBe(0)
   })
 
-  it.only('should have the correct role', () => {
+  it('should have the correct role', () => {
     // Custom provided
     const wrapper = mountFunction({
       attrs: { role: 'item' },
