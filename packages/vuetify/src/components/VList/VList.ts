@@ -80,8 +80,10 @@ export default VSheet.extend({
     const data = {
       staticClass: 'v-list',
       class: this.classes,
+      style: this.styles,
       attrs: {
         role: 'list',
+        ...this.$attrs,
       },
     }
 

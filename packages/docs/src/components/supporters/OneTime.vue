@@ -15,7 +15,7 @@
       tag="v-divider"
     />
 
-    <v-flex xs12>
+    <v-flex xs12 mb-3>
       <doc-markdown>oneTimeBlurb</doc-markdown>
     </v-flex>
 

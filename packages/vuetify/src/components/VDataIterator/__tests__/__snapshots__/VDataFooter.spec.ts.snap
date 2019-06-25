@@ -5,18 +5,20 @@ exports[`VDataFooter.ts should render and match snapshot 1`] = `
 <div class="v-data-footer">
   <div class="v-data-footer__select">
     Items per page:
-    <div role="combobox"
-         class="v-input v-input--hide-details theme--light v-text-field v-select"
-    >
+    <div class="v-input v-input--hide-details theme--light v-text-field v-select">
       <div class="v-input__control">
-        <div class="v-input__slot">
+        <div role="button"
+             aria-haspopup="listbox"
+             aria-expanded="false"
+             aria-owns="computed-id-2"
+             class="v-input__slot"
+        >
           <div class="v-select__slot">
             <div class="v-select__selections">
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                     autocomplete="on"
                      readonly="readonly"
                      type="text"
-                     aria-readonly="false"
+                     aria-readonly="true"
               >
             </div>
             <div class="v-input__append-inner">
@@ -72,21 +74,23 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
 <div class="v-data-footer">
   <div class="v-data-footer__select">
     Items per page:
-    <div role="combobox"
-         class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-    >
+    <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
       <div class="v-input__control">
-        <div class="v-input__slot">
+        <div role="button"
+             aria-haspopup="listbox"
+             aria-expanded="false"
+             aria-owns="computed-id-59"
+             class="v-input__slot"
+        >
           <div class="v-select__slot">
             <div class="v-select__selections">
               <div class="v-select__selection v-select__selection--comma">
                 10
               </div>
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                     autocomplete="on"
                      readonly="readonly"
                      type="text"
-                     aria-readonly="false"
+                     aria-readonly="true"
               >
             </div>
             <div class="v-input__append-inner">
@@ -164,21 +168,23 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
 <div class="v-data-footer">
   <div class="v-data-footer__select">
     Items per page:
-    <div role="combobox"
-         class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-    >
+    <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
       <div class="v-input__control">
-        <div class="v-input__slot">
+        <div role="button"
+             aria-haspopup="listbox"
+             aria-expanded="false"
+             aria-owns="computed-id-38"
+             class="v-input__slot"
+        >
           <div class="v-select__slot">
             <div class="v-select__selections">
               <div class="v-select__selection v-select__selection--comma">
                 10
               </div>
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                     autocomplete="on"
                      readonly="readonly"
                      type="text"
-                     aria-readonly="false"
+                     aria-readonly="true"
               >
             </div>
             <div class="v-input__append-inner">
@@ -256,21 +262,23 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
 <div class="v-data-footer">
   <div class="v-data-footer__select">
     Items per page:
-    <div role="combobox"
-         class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-    >
+    <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
       <div class="v-input__control">
-        <div class="v-input__slot">
+        <div role="button"
+             aria-haspopup="listbox"
+             aria-expanded="false"
+             aria-owns="computed-id-20"
+             class="v-input__slot"
+        >
           <div class="v-select__slot">
             <div class="v-select__selections">
               <div class="v-select__selection v-select__selection--comma">
                 100
               </div>
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                     autocomplete="on"
                      readonly="readonly"
                      type="text"
-                     aria-readonly="false"
+                     aria-readonly="true"
               >
             </div>
             <div class="v-input__append-inner">
@@ -305,8 +313,8 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
     </button>
   </div>
   <div class="v-data-footer__icons-after">
-    <button disabled="disabled"
-            type="button"
+    <button type="button"
+            disabled="disabled"
             class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
             aria-label="Next page"
     >
@@ -327,21 +335,23 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
 <div class="v-data-footer">
   <div class="v-data-footer__select">
     Items per page:
-    <div role="combobox"
-         class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select"
-    >
+    <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
       <div class="v-input__control">
-        <div class="v-input__slot">
+        <div role="button"
+             aria-haspopup="listbox"
+             aria-expanded="false"
+             aria-owns="computed-id-97"
+             class="v-input__slot"
+        >
           <div class="v-select__slot">
             <div class="v-select__selections">
               <div class="v-select__selection v-select__selection--comma">
                 10
               </div>
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                     autocomplete="on"
                      readonly="readonly"
                      type="text"
-                     aria-readonly="false"
+                     aria-readonly="true"
               >
             </div>
             <div class="v-input__append-inner">

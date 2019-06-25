@@ -164,6 +164,10 @@ export function getTimeIdentifier (timestamp: VTimestamp): number {
   return timestamp.hour * 100 + timestamp.minute
 }
 
+export function getTimestampIdentifier (timestamp: VTimestamp): number {
+  return getDayIdentifier(timestamp) * 10000 + getTimeIdentifier(timestamp)
+}
+
 export function updateRelative (timestamp: VTimestamp, now: VTimestamp, time = false): VTimestamp {
   let a = getDayIdentifier(now)
   let b = getDayIdentifier(timestamp)

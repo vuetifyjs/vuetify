@@ -3,9 +3,8 @@
 exports[`VListGroup.ts should render component and match snapshot 1`] = `
 
 <div class="v-list-group">
-  <div tabindex="-1"
+  <div tabindex="0"
        aria-selected="false"
-       role="listitem"
        class="v-list-group__header v-list-item v-list-item--link theme--light"
   >
     <div class="v-list-item__icon v-list-group__header__append-icon">

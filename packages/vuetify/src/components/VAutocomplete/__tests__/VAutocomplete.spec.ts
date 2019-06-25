@@ -32,24 +32,6 @@ describe('VAutocomplete.ts', () => {
     }
   })
 
-  it('should allow changing of browser autocomplete', async () => {
-    const wrapper = mountFunction({
-      propsData: {
-        browserAutocomplete: 'on',
-      },
-    })
-
-    const input = wrapper.find('input')
-
-    expect(input.element.getAttribute('autocomplete')).toBe('on')
-
-    wrapper.setProps({ browserAutocomplete: 'off' })
-
-    await wrapper.vm.$nextTick()
-
-    expect(input.element.getAttribute('autocomplete')).toBe('off')
-  })
-
   it('should have explicit tabindex passed through when autocomplete', () => {
     const wrapper = mountFunction({
       attrs: {
@@ -162,7 +144,7 @@ describe('VAutocomplete.ts', () => {
 
     expect(wrapper.vm.$el.getAttribute('role')).toBeFalsy()
 
-    const input = wrapper.find('input')
+    const input = wrapper.find('.v-input__slot')
     expect(input.element.getAttribute('role')).toBe('combobox')
   })
 

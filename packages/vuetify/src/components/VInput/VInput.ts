@@ -36,6 +36,8 @@ interface options extends InstanceType<typeof baseMixins> {
 export default baseMixins.extend<options>().extend({
   name: 'v-input',
 
+  inheritAttrs: false,
+
   props: {
     appendIcon: String,
     backgroundColor: {
@@ -55,7 +57,6 @@ export default baseMixins.extend<options>().extend({
 
   data () {
     return {
-      attrsInput: {},
       lazyValue: this.value,
       hasMouseDown: false,
     }
@@ -284,7 +285,6 @@ export default baseMixins.extend<options>().extend({
   render (h): VNode {
     return h('div', this.setTextColor(this.validationState, {
       staticClass: 'v-input',
-      attrs: this.attrsInput,
       class: this.classes,
     }), this.genContent())
   },

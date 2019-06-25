@@ -4,6 +4,9 @@ import './VCalendarWeekly.sass'
 // Types
 import { VNode, VNodeChildren } from 'vue'
 
+// Components
+import VBtn from '../VBtn'
+
 // Mixins
 import CalendarBase from './mixins/calendar-base'
 
@@ -117,11 +120,10 @@ export default CalendarBase.extend({
         staticClass: 'v-calendar-weekly__week',
       }, week.map(this.genDay))
     },
-    genDay (day: VTimestamp): VNode {
+    genDay (day: VTimestamp, index: number): VNode {
       const outside = this.isOutside(day)
       const slot = this.$scopedSlots.day
-      const slotData = { outside, ...day }
-      const hasMonth = day.day === 1 && this.showMonthOnFirst
+      const scope = { outside, index, ...day }
 
       return this.$createElement('div', {
         key: day.date,
@@ -130,21 +132,40 @@ export default CalendarBase.extend({
         on: this.getDefaultMouseEventHandlers(':day', _e => day),
       }, [
         this.genDayLabel(day),
-        hasMonth ? this.genDayMonth(day) : '',
-        slot ? slot(slotData) : '',
+        slot ? slot(scope) : '',
+        // renders the orginial month text
+        // (day.day === 1 && this.showMonthOnFirst) ? this.genDayMonth(day) : '',
       ])
     },
     genDayLabel (day: VTimestamp): VNode {
-      const color = day.present ? this.color : undefined
       const slot = this.$scopedSlots.dayLabel
 
-      return this.$createElement('div', this.setTextColor(color, {
+      return this.$createElement('div', {
         staticClass: 'v-calendar-weekly__day-label',
+      }, [
+        slot ? slot(day) as VNodeChildren : this.genDayLabelButton(day),
+      ])
+    },
+    genDayLabelButton (day: VTimestamp): VNode {
+      const color = day.present ? this.color : 'transparent'
+      const hasMonth = day.day === 1 && this.showMonthOnFirst
+
+      return this.$createElement(VBtn, {
+        props: {
+          color,
+          fab: !hasMonth,
+          rounded: hasMonth,
+          depressed: true,
+          small: true,
+        },
         on: this.getMouseEventHandlers({
           'click:date': { event: 'click', stop: true },
           'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false },
         }, _e => day),
-      }), slot ? slot(day) as VNodeChildren : this.dayFormatter(day, false))
+      }, hasMonth
+        ? this.monthFormatter(day, this.shortMonths) + ' ' + this.dayFormatter(day, false)
+        : this.dayFormatter(day, false)
+      )
     },
     genDayMonth (day: VTimestamp): VNode | string {
       const color = day.present ? this.color : undefined

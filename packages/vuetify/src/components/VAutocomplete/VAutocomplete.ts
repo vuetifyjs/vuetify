@@ -27,10 +27,6 @@ export default VSelect.extend({
       type: Boolean,
       default: true,
     },
-    browserAutocomplete: {
-      type: String,
-      default: 'off',
-    },
     filter: {
       type: Function,
       default: (item: any, queryText: string, itemText: string) => {
@@ -55,7 +51,6 @@ export default VSelect.extend({
 
   data () {
     return {
-      attrsInput: null,
       lazySearch: this.searchInput,
     }
   },
@@ -198,7 +193,11 @@ export default VSelect.extend({
   },
 
   methods: {
-    onFilteredItemsChanged (val: never[]) {
+    onFilteredItemsChanged (val: never[], oldVal: never[]) {
+      // TODO: How is the watcher triggered
+      // for duplicate items? no idea
+      if (val === oldVal) return
+
       this.$nextTick(() => {
         this.setMenuIndex(val.length > 0 && (val.length === 1 || this.autoSelectFirst) ? 0 : -1)
       })
@@ -275,11 +274,16 @@ export default VSelect.extend({
       input.data = input.data || {}
       input.data.attrs = input.data.attrs || {}
       input.data.domProps = input.data.domProps || {}
-
-      input.data.attrs.role = 'combobox'
       input.data.domProps.value = this.internalSearch
 
       return input
+    },
+    genInputSlot () {
+      const slot = VSelect.options.methods.genInputSlot.call(this)
+
+      slot.data!.attrs!.role = 'combobox'
+
+      return slot
     },
     genSelections () {
       return this.hasSlot || this.multiple
@@ -295,11 +299,6 @@ export default VSelect.extend({
 
       this.activateMenu()
     },
-    onEnterDown () {
-      // Avoid invoking this method
-      // will cause updateSelf to
-      // be called emptying search
-    },
     onInput (e: Event) {
       if (
         this.selectedIndex > -1 ||
@@ -310,10 +309,7 @@ export default VSelect.extend({
       const value = target.value
 
       // If typing and menu is not currently active
-      if (target.value) {
-        this.activateMenu()
-        if (!this.isAnyValueAllowed) this.setMenuIndex(0)
-      }
+      if (target.value) this.activateMenu()
 
       this.internalSearch = value
       this.badInput = target.validity && target.validity.badInput
@@ -329,9 +325,16 @@ export default VSelect.extend({
       // proper location
       this.changeSelectedIndex(keyCode)
     },
+    onSpaceDown (e: KeyboardEvent) { /* noop */ },
     onTabDown (e: KeyboardEvent) {
       VSelect.options.methods.onTabDown.call(this, e)
       this.updateSelf()
+    },
+    onUpDown () {
+      // For autocomplete / combobox, cycling
+      // interfers with native up/down behavior
+      // instead activate the menu
+      this.activateMenu()
     },
     setSelectedItems () {
       VSelect.options.methods.setSelectedItems.call(this)

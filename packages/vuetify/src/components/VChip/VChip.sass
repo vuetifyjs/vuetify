@@ -17,6 +17,11 @@
   border-color: map-get($material, 'dividers')
   color: map-deep-get($material, 'text', 'primary')
 
+  &:not(.v-chip--active):not(.v-chip--link)
+    background: map-get($material, 'chips')
+
+  +states($material)
+
 // Block
 .v-chip
   align-items: center
@@ -28,7 +33,7 @@
   position: relative
   text-decoration: none
   transition-duration: $chip-transition-duration
-  transition-property: box-shadow, opacity, background
+  transition-property: box-shadow, opacity
   transition-timing-function: $chip-transition-fn
   vertical-align: middle
 
@@ -38,12 +43,11 @@
     border-radius: inherit
     content: ''
     left: 0
-    opacity: 0.12
+    opacity: 0
     position: absolute
     pointer-events: none
     right: 0
     top: 0
-    transition: $chip-after-transition
 
   // Important is needed to account for new avatar structure
   .v-avatar
@@ -106,23 +110,15 @@
   .v-icon
     color: inherit
 
-  &:before
-    opacity: 0.22
-
 .v-chip--link
-  &:hover,
-  &:focus
-    &:before
-      opacity: 0.32
+  &::before
+    transition: opacity $primary-transition
+
+  &:focus::before
+    opacity: $chip-link-focus-opacity
 
 .v-chip--clickable
   cursor: pointer
-
-  &:focus:after
-    opacity: .36
-
-  &:hover:after
-    opacity: .18
 
   &:active
     +elevation(2)

@@ -44,7 +44,18 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should select all descendants', async () => {
+  it('should render items in dense mode', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: singleRootTwoChildren,
+        dense: true,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should select all leaf nodes', async () => {
     const wrapper = mountFunction({
       propsData: {
         items: threeLevels,
@@ -59,7 +70,49 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
     await wrapper.vm.$nextTick()
 
     expect(fn).toHaveBeenCalledTimes(1)
-    expect(fn).toHaveBeenCalledWith([0, 1, 3, 2])
+    expect(fn).toHaveBeenCalledWith([3, 2])
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should select only leaf nodes', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: threeLevels,
+        selectable: true,
+      },
+    })
+
+    const fn = jest.fn()
+    wrapper.vm.$on('input', fn)
+
+    wrapper.find('.v-treeview-node__toggle').trigger('click')
+    await wrapper.vm.$nextTick()
+
+    wrapper.findAll('.v-treeview-node__checkbox').at(2).trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(fn).toHaveBeenCalledTimes(1)
+    expect(fn).toHaveBeenCalledWith([3])
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should select only root node', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: threeLevels,
+        selectable: true,
+        selectionType: 'independent',
+      },
+    })
+
+    const fn = jest.fn()
+    wrapper.vm.$on('input', fn)
+
+    wrapper.find('.v-treeview-node__checkbox').trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(fn).toHaveBeenCalledTimes(1)
+    expect(fn).toHaveBeenCalledWith([0])
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -263,7 +316,7 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
     // lifecycle hook. We should not assert
     // internal state.
     expect([...wrapper.vm.activeCache]).toEqual([2])
-    expect([...wrapper.vm.selectedCache]).toEqual([1, 2])
+    expect([...wrapper.vm.selectedCache]).toEqual([2])
   })
 
   it('should react to changes for active items', async () => {
@@ -324,9 +377,9 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
     await wrapper.vm.$nextTick()
     expect(value).toHaveBeenCalledWith([])
 
-    wrapper.setProps({ value: [0], items: singleRootTwoChildren })
+    wrapper.setProps({ value: [0] })
     await wrapper.vm.$nextTick()
-    expect(value).toHaveBeenCalledWith([0, 1, 3, 2])
+    expect(value).toHaveBeenLastCalledWith([3, 2])
   })
 
   it('should accept string value for id', async () => {
@@ -390,17 +443,25 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
   })
 
   it('should recalculate tree when loading async children using custom key', async () => {
+    const items = [
+      {
+        id: 1,
+        name: 'One',
+        __children: [],
+      },
+    ]
+
     const wrapper = mountFunction({
       propsData: {
-        items: [
-          {
-            id: 1,
-            name: 'One',
-            __children: [],
-          },
-        ],
+        items,
         itemChildren: '__children',
-        loadChildren: item => item.__children.push({ id: 2, name: 'Two' }),
+        loadChildren: () => {
+          const newItems = [...items]
+          items[0].__children.push({ id: 2, name: 'Two' })
+          wrapper.setProps({
+            items: newItems,
+          })
+        },
       },
     })
 
@@ -408,8 +469,6 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('[Vue warn]: Error in created hook: "TypeError: Cannot set property \'vnode\' of undefined"').toHaveBeenWarned()
-    expect('TypeError: Cannot set property \'vnode\' of undefined').toHaveBeenWarned()
   })
 
   it('should remove old nodes', async () => {
@@ -547,7 +606,7 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
     await wrapper.vm.$nextTick()
 
     expect(selected).toHaveBeenCalledTimes(1)
-    expect(selected).toHaveBeenCalledWith([items[0], items[0].children[0]])
+    expect(selected).toHaveBeenCalledWith([items[0].children[0]])
 
     wrapper.find('.v-treeview-node__toggle').trigger('click')
     await wrapper.vm.$nextTick()

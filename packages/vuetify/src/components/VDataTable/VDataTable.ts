@@ -230,6 +230,7 @@ export default VDataIterator.extend({
           someItems: this.someItems,
           everyItem: this.everyItem,
           singleSelect: this.singleSelect,
+          disableSort: this.disableSort,
         },
         on: {
           sort: props.sort,
@@ -321,7 +322,7 @@ export default VDataIterator.extend({
         }, [this.$createElement(VIcon, ['close'])])
 
         const column = this.$createElement('td', {
-          staticClass: 'text-xs-left',
+          staticClass: 'text-xs-start',
           attrs: {
             colspan: this.computedHeadersLength,
           },
@@ -410,7 +411,10 @@ export default VDataIterator.extend({
             expanded,
           },
           on: {
-            click: () => this.expand(item, !expanded),
+            click: (e: MouseEvent) => {
+              e.stopPropagation()
+              this.expand(item, !expanded)
+            },
           },
         }
 
@@ -433,11 +437,15 @@ export default VDataIterator.extend({
           rtl: this.$vuetify.rtl,
         },
         scopedSlots,
+        on: {
+          click: () => this.$emit('click:row', item),
+        },
       })
     },
     genBody (props: DataProps): VNode | string | VNodeChildren {
       const data = {
         ...props,
+        isMobile: this.isMobile,
         headers: this.computedHeaders,
       }
 

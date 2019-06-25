@@ -49,7 +49,6 @@ export default baseMixins.extend<options>().extend({
   props: {
     appendOuterIcon: String,
     autofocus: Boolean,
-    browserAutocomplete: String,
     clearable: Boolean,
     clearIcon: {
       type: String,
@@ -192,6 +191,11 @@ export default baseMixins.extend<options>().extend({
       breaking('box', 'filled', this)
     }
 
+    /* istanbul ignore next */
+    if (this.$attrs.hasOwnProperty('browser-autocomplete')) {
+      breaking('browser-autocomplete', 'autocomplete', this)
+    }
+
     /* istanbul ignore if */
     if (this.shaped && !(this.filled || this.outlined || this.isSolo)) {
       consoleWarn('shaped should be used with either filled or outlined', this)
@@ -212,8 +216,13 @@ export default baseMixins.extend<options>().extend({
       this.onFocus()
     },
     /** @public */
-    blur () {
-      this.$refs.input ? this.$refs.input.blur() : this.onBlur()
+    blur (e?: Event) {
+      // https://github.com/vuetifyjs/vuetify/issues/5913
+      // Safari tab order gets broken if called synchronous
+      window.requestAnimationFrame(() => {
+        this.$refs.input && this.$refs.input.blur()
+      })
+      this.onBlur(e)
     },
     clearableCallback () {
       this.internalValue = null
@@ -352,7 +361,6 @@ export default baseMixins.extend<options>().extend({
         attrs: {
           'aria-label': !this.id && this.label, // Label `for` will be set if we have an id
           ...this.$attrs,
-          autocomplete: this.browserAutocomplete,
           autofocus: this.autofocus,
           disabled: this.disabled,
           id: this.id,
@@ -402,7 +410,7 @@ export default baseMixins.extend<options>().extend({
     },
     onBlur (e?: Event) {
       this.isFocused = false
-      this.$emit('blur', e)
+      e && this.$emit('blur', e)
     },
     onClick () {
       if (this.isFocused || this.disabled) return

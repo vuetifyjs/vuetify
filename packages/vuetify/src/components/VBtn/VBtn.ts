@@ -149,12 +149,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   methods: {
-    // Prevent focus to match md spec
     click (e: MouseEvent): void {
-      !this.fab &&
-      e.detail &&
-      this.$el.blur()
-
       this.$emit('click', e)
 
       this.btnToggle && this.toggle()
@@ -185,8 +180,10 @@ export default baseMixins.extend<options>().extend({
     const setColor = !this.isFlat ? this.setBackgroundColor : this.setTextColor
     const { tag, data } = this.generateRouteLink()
 
-    if (tag === 'button') data.attrs!.type = this.type
-
+    if (tag === 'button') {
+      data.attrs!.type = this.type
+      data.attrs!.disabled = this.disabled
+    }
     data.attrs!.value = ['string', 'number'].includes(typeof this.value)
       ? this.value
       : JSON.stringify(this.value)

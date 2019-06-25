@@ -29,4 +29,7 @@ export default {
     prev: 'Korábbi vizuális',
     next: 'Következő vizuális',
   },
+  calendar: {
+    moreEvents: '{0} további',
+  },
 }

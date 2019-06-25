@@ -29,4 +29,7 @@ export default {
     prev: 'הקודם חזותי',
     next: 'הבא חזותי',
   },
+  calendar: {
+    moreEvents: '{0} ακόμη',
+  },
 }

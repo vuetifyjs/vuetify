@@ -29,4 +29,7 @@ export default {
     prev: 'Prejšnji prikaz',
     next: 'Naslednji prikaz',
   },
+  calendar: {
+    moreEvents: 'Še {0}',
+  },
 }
