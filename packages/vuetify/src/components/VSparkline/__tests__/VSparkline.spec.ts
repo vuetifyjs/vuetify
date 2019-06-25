@@ -117,6 +117,17 @@ describe('VSparkline.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render component with bars and negative and match a snapshot', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: [-1, 1, 7, 42],
+        type: 'bar',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render component with bars and gradient and match a snapshot', async () => {
     const wrapper = mountFunction({
       propsData: {

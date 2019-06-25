@@ -21,7 +21,6 @@
   },
   "props": {
     "autocomplete": "Filtrar los elementos en la lista basado en el input del usuario",
-    "browserAutocomplete": "Configura la prop de autocompletar para cuando el usuario escribe",
     "cacheItems": "Mantiene una copia local _única_ de todos los elementos que han sido pasados a través de la prop `items`",
     "chips": "Cambia el display de las selecciones a _chips_",
     "combobox": "La variante de selección simple de **tags**",
