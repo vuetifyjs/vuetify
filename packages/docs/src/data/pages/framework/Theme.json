@@ -251,8 +251,8 @@
         {
           "type": "up-next",
           "value": [
-            "framework/colors",
-            "framework/pre-made-layouts",
+            "styles/colors",
+            "getting-started/pre-made-layouts",
             "themes/premium"
           ]
         }

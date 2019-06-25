@@ -107,7 +107,7 @@
           "type": "up-next",
           "value": [
             "directives/scrolling",
-            "framework/content",
+            "styles/content",
             "components/sliders"
           ]
         }

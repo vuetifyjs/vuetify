@@ -39,7 +39,7 @@
         {
           "type": "up-next",
           "value": [
-            "framework/aspect-ratios",
+            "components/aspect-ratios",
             "components/cards",
             "components/images"
           ]

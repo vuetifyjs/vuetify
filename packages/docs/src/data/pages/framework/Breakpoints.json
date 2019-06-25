@@ -65,7 +65,7 @@
           "type": "up-next",
           "value": [
             "directives/resizing",
-            "framework/display",
+            "styles/display",
             "framework/alignment"
           ]
         }

@@ -1,7 +1,7 @@
 {
   "header": "# Text alignment",
   "headerText": "Layouts can change when screen resolutions change. The alignment classes help you position your text based on viewport size.",
-  "howText": "The helper classes apply **text-alignment** to an element. These classes can be applied using the following format `text-{screen}-{alignment}` with `{screen}` being the [viewport size](/framework/display) and `{alignment}` being the text alignment as described below:",
+  "howText": "The helper classes apply **text-alignment** to an element. These classes can be applied using the following format `text-{screen}-{alignment}` with `{screen}` being the [viewport size](/styles/display) and `{alignment}` being the text alignment as described below:",
   "alignments": [
     "`left` - aligns text to the left",
     "`right` - aligns text to the right",

@@ -59,17 +59,17 @@
     "description": "Get help and support from the creator of Vuetify, John Leider",
     "keywords": "consulting, support, help"
   },
-  "framework/a-la-carte": {
+  "customizing/a-la-carte": {
     "title": "A La Carte",
     "description": "Get ready for automatic treeshaking. Use only the components you need. Single component importing only pulls in what you use.",
     "keywords": "a la carte, a-la-carte, vuetify single import, vuetify import, component importing"
   },
-  "framework/application": {
+  "components/application": {
     "title": "Application service",
     "description": "Vuetify comes equipped with a default markup that makes it easy to create layouts for any application.",
     "keywords": "default layout, default markup, vuetify default layout"
   },
-  "framework/icons": {
+  "customizing/icons": {
     "title": "Installing Icons",
     "description": "Vuetify supports custom icon sets through prefixes and global options.",
     "keywords": "vue, icon, iconfont, icon libraries, vuetify icons"
@@ -79,62 +79,62 @@
     "description": "Vuetify supports language internationalization of its components.",
     "keywords": "vue, i18n, language, internationalization"
   },
-  "framework/transitions": {
+  "styles/transitions": {
     "title": "Transitions",
     "description": "Make an amazing application with smooth built in animations.",
     "keywords": "motion, transitions"
   },
-  "framework/scroll": {
+  "styles/scroll": {
     "title": "Scroll",
     "description": "Using the goTo helper you can smoothly scroll to any location on the page.",
     "keywords": "scrolling, scroll, smooth scroll, transitions"
   },
-  "framework/colors": {
+  "styles/colors": {
     "title": "Material color palette",
     "description": "Easily apply any color from the material design palette.",
     "keywords": "colors"
   },
-  "framework/theme": {
+  "customizing/theme": {
     "title": "Application theming",
     "description": "Setup your application's theme and supplemental colors in a flash.",
     "keywords": "themes"
   },
-  "framework/typography": {
+  "styles/typography": {
     "title": "Application typography",
     "description": "View the various typography styles. From headings to captions, with various weights and sizes.",
     "keywords": "typography, headings, titles"
   },
-  "framework/content": {
+  "styles/content": {
     "title": "Content styles",
     "description": "Vuetify has custom styling for default html markup.",
     "keywords": "content, html, markup"
   },
-  "framework/pre-made-layouts": {
+  "getting-started/pre-made-layouts": {
     "title": "Application layouts",
     "description": "Select from a multitude of official material design layouts.",
     "keywords": "pre-defined layouts, layouts, application layout, material design layouts"
   },
-  "framework/grid": {
+  "components/grids": {
     "title": "Layout grid system",
     "description": "Vuetify supports the material design 12 point grid for laying out your application.",
     "keywords": "grid, layout, flex"
   },
-  "framework/grid-lists": {
+  "components/grid-lists": {
     "title": "Grid List Component",
     "description": "Grid lists allow you to specify the gutter used when separating grid items.",
     "keywords": "grid lists, grid"
   },
-  "framework/breakpoints": {
+  "customizing/breakpoints": {
     "title": "Breakpoints",
     "description": "Access the Vuetify grid system directly in components.",
     "keywords": "breakpoints"
   },
-  "framework/aspect-ratios": {
+  "components/aspect-ratios": {
     "title": "Aspect ratios",
     "description": "Aspect ratios for Vuetify Framework",
     "keywords": "ratio, responsive"
   },
-  "framework/spacing": {
+  "styles/spacing": {
     "title": "Spacing helpers",
     "description": "Spacing helper classes allow you to apply margin or padding to any element.",
     "keywords": "spacing helper classes"
@@ -144,12 +144,12 @@
     "description": "Alignment helpers assist in modifying your application layout on varying viewport sizes.",
     "keywords": "alignment helper classes"
   },
-  "framework/display": {
+  "styles/display": {
     "title": "Display helpers",
     "description": "Display helper classes allow you to control when elements should display based upon viewport.",
     "keywords": "display helper classes"
   },
-  "framework/elevation": {
+  "styles/elevation": {
     "title": "Elevation helpers",
     "description": "Elevation helper classes allow you to control relative depth, or distance, between two surfaces along the z-axis.",
     "keywords": "elevation helper classes"

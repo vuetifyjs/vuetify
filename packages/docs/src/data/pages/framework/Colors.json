@@ -100,9 +100,9 @@
         {
           "type": "up-next",
           "value": [
-            "framework/theme",
+            "customizing/theme",
             "themes/premium",
-            "framework/pre-made-layouts"
+            "getting-started/pre-made-layouts"
           ]
         }
       ]
