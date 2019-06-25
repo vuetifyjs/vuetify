@@ -21,6 +21,7 @@
     "text": "customizing",
     "icon": "mdi-cogs",
     "children": [
+      { "new": true, "text": "accessibility", "to": "accessibility" },
       { "text": "aLaCarte", "to": "a-la-carte" },
       { "text": "breakpoints", "to": "breakpoints" },
       { "text": "icons", "to": "icons" },

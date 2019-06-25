@@ -1,0 +1,9 @@
+<!-- Rendered Activator HTML Output -->
+<button
+  type="button"
+  role="button"
+  aria-haspopup="true"
+  aria-expanded="false"
+>
+  Click me
+</button>
