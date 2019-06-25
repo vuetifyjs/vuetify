@@ -27,10 +27,6 @@ export default VSelect.extend({
       type: Boolean,
       default: true,
     },
-    browserAutocomplete: {
-      type: String,
-      default: 'off',
-    },
     filter: {
       type: Function,
       default: (item: any, queryText: string, itemText: string) => {

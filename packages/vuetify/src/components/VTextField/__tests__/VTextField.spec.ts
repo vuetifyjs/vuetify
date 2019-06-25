@@ -567,18 +567,6 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     expect(wrapper.vm.badInput).toBe(true)
   })
 
-  it('should set input autocomplete attr', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        browserAutocomplete: 'off',
-      },
-    })
-
-    const input = wrapper.find('input')
-
-    expect(input.element.autocomplete).toBe('off')
-  })
-
   it('should not apply id to root element', () => {
     const wrapper = mountFunction({
       attrs: { id: 'foo' },
