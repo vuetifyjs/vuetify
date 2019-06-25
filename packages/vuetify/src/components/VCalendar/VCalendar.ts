@@ -5,7 +5,7 @@
 import { VNode, Component } from 'vue'
 
 // Mixins
-import CalendarBase from './mixins/calendar-base'
+import CalendarWithEvents from './mixins/calendar-with-events'
 
 // Util
 import props from './util/props'
@@ -16,6 +16,7 @@ import {
   VTimestamp,
   VTime,
   parseTimestamp,
+  validateTimestamp,
   relativeDays,
   nextDay,
   prevDay,
@@ -41,7 +42,7 @@ interface VCalendarRenderProps {
 }
 
 /* @vue/component */
-export default CalendarBase.extend({
+export default CalendarWithEvents.extend({
   name: 'v-calendar',
 
   props: {
@@ -57,13 +58,13 @@ export default CalendarBase.extend({
 
   computed: {
     parsedValue (): VTimestamp {
-      return parseTimestamp(this.value) ||
-        this.parsedStart ||
-        this.times.today
+      return (validateTimestamp(this.value)
+        ? parseTimestamp(this.value)
+        : (this.parsedStart || this.times.today)) as VTimestamp
     },
     renderProps (): VCalendarRenderProps {
       const around = this.parsedValue
-      let component: any = 'div'
+      let component: any = null
       let maxDays = this.maxDays
       let start = around
       let end = around
@@ -99,6 +100,8 @@ export default CalendarBase.extend({
           start = this.parsedStart || around
           end = this.parsedEnd
           break
+        default:
+          throw new Error(this.type + ' is not a valid Calendar type')
       }
 
       return { component, start, end, maxDays }
@@ -107,6 +110,14 @@ export default CalendarBase.extend({
 
   watch: {
     renderProps: 'checkChange',
+  },
+
+  mounted () {
+    this.updateEventVisibility()
+  },
+
+  updated () {
+    this.updateEventVisibility()
   },
 
   methods: {
@@ -187,12 +198,20 @@ export default CalendarBase.extend({
 
     return h(component, {
       staticClass: 'v-calendar',
+      class: {
+        'v-calendar-events': !this.noEvents,
+      },
       props: {
         ...this.$props,
         start: start.date,
         end: end.date,
         maxDays,
       },
+      directives: [{
+        modifiers: { quiet: true },
+        name: 'resize',
+        value: this.updateEventVisibility,
+      }],
       on: {
         ...this.$listeners,
         'click:date': (day: VTimestamp) => {
@@ -204,7 +223,7 @@ export default CalendarBase.extend({
           }
         },
       },
-      scopedSlots: this.$scopedSlots,
+      scopedSlots: this.getScopedSlots(),
     })
   },
 })
