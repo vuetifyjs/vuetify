@@ -24,6 +24,10 @@
     "human-resources": {
       "header": "### Searching a directory",
       "desc": "Easily filter your treeview by using the **search** prop. You can easily apply your custom filtering function if you need case-sensitive or fuzzy filtering by setting the **filter** prop. This works similar to the [v-autocomplete](/components/autocompletes) component."
+    },
+    "selection-type": {
+      "header": "### Selection type",
+      "desc": "Treeview now supports two different selection types. The default type is **'leaf'**, which will only include leaf nodes in the v-model array, but will render parent nodes as either partially or fully selected. The alternative mode is **'independent'**, which allows one to select parent nodes, but each node is independent of its parent and children."
     }
   },
   "props": {
@@ -55,6 +59,7 @@
       "search": "The search model for filtering results",
       "selectable": "Will render a checkbox next to each node allowing them to be selected",
       "selectedColor": "The color of the selection checkbox",
+      "selectionType": "Controls how the treeview selects nodes. There are two modes available: 'leaf' and 'independent'",
       "shaped": "Provides an alternative active style for `v-treeview` node.",
       "transition": "Applies a transition when nodes are opened and closed",
       "value": "Allows one to control which nodes are selected. The array consists of the `item-key` of each selected item. Is used with `@input` event to allow for `v-model` binding."

@@ -28,6 +28,7 @@
           "type": "examples",
           "value": [
             { "file": "dense", "newIn": "2.0" },
+            { "file": "selection-type", "newIn": "2.0" },
             "human-resources",
             "file-explorer",
             "directory",
