@@ -9,6 +9,26 @@
       "header": "### Dense mode",
       "desc": "Dense mode provides more compact layout with decreased heights of the items."
     },
+    "color": {
+      "header": "### Color",
+      "desc": "You can control the text and background color of the active treeview node."
+    },
+    "selected-color": {
+      "header": "### Checkbox color",
+      "desc": "You can control the color of the selected node checkbox."
+    },
+    "shaped": {
+      "header": "### Shaped",
+      "desc": "Shaped treeview's have rounded borders on one side of the nodes."
+    },
+    "rounded": {
+      "header": "### Rounded",
+      "desc": "You can make treeview nodes rounded."
+    },
+    "item-disabled": {
+      "header": "### Disabling nodes",
+      "desc": "Setting `item-disabled` prop allows to control which node's property disables the node when set to `true`."
+    },
     "file-explorer": {
       "header": "### Scoped slots",
       "desc": "Using scoped slots we are able to create an intuitive file explorer. Apart from the `prepend` slot, there is also one for the `label`, and an `append` slot."
@@ -25,6 +45,22 @@
       "header": "### Searching a directory",
       "desc": "Easily filter your treeview by using the **search** prop. You can easily apply your custom filtering function if you need case-sensitive or fuzzy filtering by setting the **filter** prop. This works similar to the [v-autocomplete](/components/autocompletes) component."
     },
+    "selectable": {
+      "header": "### Selectable",
+      "desc": "You can easily select treeview nodes and children."
+    },
+    "activatable": {
+      "header": "### Activatable",
+      "desc": "Treeview nodes can be activated by clicking on them."
+    },
+    "hoverable": {
+      "header": "### Hoverable",
+      "desc": "Treeview nodes can have a hover effect."
+    },
+    "open-all": {
+      "header": "### Open-all",
+      "desc": "Treeview nodes can be pre-opened on page load."
+    },
     "selection-type": {
       "header": "### Selection type",
       "desc": "Treeview now supports two different selection types. The default type is **'leaf'**, which will only include leaf nodes in the v-model array, but will render parent nodes as either partially or fully selected. The alternative mode is **'independent'**, which allows one to select parent nodes, but each node is independent of its parent and children."
@@ -35,6 +71,7 @@
       "activatable": "Allows user to mark a node as active by clicking on it",
       "active": "Syncable prop that allows one to control which nodes are active. The array consists of the `item-key` of each active item.",
       "activeClass": "The class applied to the node when active",
+      "color": "Sets the color of the active node",
       "customFilter": "Custom search filter",
       "dense": "Decreases the height of the items",
       "expandIcon": "Icon used to indicate that a node can be expanded",
