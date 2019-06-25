@@ -32,7 +32,6 @@
           step="1"
           style="width: 125px"
           type="number"
-          @keydown="false"
         ></v-text-field>
         <v-text-field
           v-model="rows"
@@ -43,7 +42,6 @@
           step="1"
           style="width: 125px"
           type="number"
-          @keydown="false"
         ></v-text-field>
       </v-flex>
 
