@@ -39,6 +39,7 @@
 
     <v-data-table
       :headers="headers"
+      :height="height"
       :items="desserts"
       :dense="dense"
       :loading="loading"
@@ -65,6 +66,7 @@
     data () {
       return {
         dense: false,
+        height: 300,
         loading: false,
         virtualRows: false,
         disableSort: false,
@@ -127,6 +129,46 @@
           {
             name: 'KitKat',
             category: 'Candy',
+          },
+          {
+            name: 'Butterfinger',
+            category: 'Candy',
+          },
+          {
+            name: 'Scone',
+            category: 'Pastry',
+          },
+          {
+            name: 'Crunch bar',
+            category: 'Candy',
+          },
+          {
+            name: 'Fudge sundae',
+            category: 'Ice cream',
+          },
+          {
+            name: 'Twizzlers',
+            category: 'Candy',
+          },
+          {
+            name: 'Root beer float',
+            category: 'Ice cream',
+          },
+          {
+            name: 'Strawberry shortcake',
+            category: 'Pastry',
+          },
+          {
+            name: 'Croissant',
+            category: 'Pastry',
+          },
+          {
+            name: 'Cannoli dip',
+            category: 'Ice cream',
+          },
+          {
+            name: 'Sorbet',
+            category: 'Ice cream',
           },
         ],
       }
