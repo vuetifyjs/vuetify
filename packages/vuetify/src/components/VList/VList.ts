@@ -56,9 +56,6 @@ export default VSheet.extend({
         'v-list--three-line': this.threeLine,
       }
     },
-    styles (): object {
-      return this.measurableStyles
-    },
   },
 
   methods: {
