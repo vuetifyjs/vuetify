@@ -7,6 +7,9 @@ import { VNode, VNodeChildren } from 'vue'
 // Directives
 import Resize from '../../directives/resize'
 
+// Components
+import VBtn from '../VBtn'
+
 // Mixins
 import CalendarWithIntervals from './mixins/calendar-with-intervals'
 
@@ -69,7 +72,7 @@ export default CalendarWithIntervals.extend({
     genHeadDays (): VNode[] {
       return this.days.map(this.genHeadDay)
     },
-    genHeadDay (day: VTimestamp): VNode {
+    genHeadDay (day: VTimestamp, index: number): VNode {
       const slot = this.$scopedSlots.dayHeader
 
       return this.$createElement('div', {
@@ -82,7 +85,7 @@ export default CalendarWithIntervals.extend({
       }, [
         this.genHeadWeekday(day),
         this.genHeadDayLabel(day),
-        slot ? slot(day) : '',
+        slot ? slot({ ...day, index }) : '',
       ])
     },
     genHeadWeekday (day: VTimestamp): VNode {
@@ -93,17 +96,28 @@ export default CalendarWithIntervals.extend({
       }), this.weekdayFormatter(day, this.shortWeekdays))
     },
     genHeadDayLabel (day: VTimestamp): VNode {
-      const color = day.present ? this.color : undefined
-
-      return this.$createElement('div', this.setTextColor(color, {
+      return this.$createElement('div', {
         staticClass: 'v-calendar-daily_head-day-label',
+      }, [
+        this.genHeadDayButton(day),
+      ])
+    },
+    genHeadDayButton (day: VTimestamp): VNode {
+      const color = day.present ? this.color : 'transparent'
+
+      return this.$createElement(VBtn, {
+        props: {
+          color,
+          fab: true,
+          depressed: true,
+        },
         on: this.getMouseEventHandlers({
           'click:date': { event: 'click', stop: true },
           'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false },
         }, _e => {
           return day
         }),
-      }), this.dayFormatter(day, false))
+      }, this.dayFormatter(day, false))
     },
     genBody (): VNode {
       return this.$createElement('div', {

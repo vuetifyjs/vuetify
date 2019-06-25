@@ -29,4 +29,7 @@ export default {
     prev: 'מצג קודם',
     next: 'מצג הבא',
   },
+  calendar: {
+    moreEvents: '{0} נוספים',
+  },
 }

@@ -29,4 +29,7 @@ export default {
     prev: 'Iepriekšējais slaids',
     next: 'Nākamais slaids',
   },
+  calendar: {
+    moreEvents: 'Vēl {0}',
+  },
 }

@@ -539,7 +539,6 @@ exports[`VDataTableHeader.ts mobile should render 1`] = `
                 </label>
                 <div class="v-select__selections">
                   <input aria-label="Sort by"
-                         autocomplete="on"
                          readonly="readonly"
                          type="text"
                          aria-readonly="true"
@@ -601,7 +600,6 @@ exports[`VDataTableHeader.ts mobile should render with data-table-select header 
                 </label>
                 <div class="v-select__selections">
                   <input aria-label="Sort by"
-                         autocomplete="on"
                          readonly="readonly"
                          type="text"
                          aria-readonly="true"
@@ -665,7 +663,6 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
                     </span>
                   </span>
                   <input aria-label="Sort by"
-                         autocomplete="on"
                          readonly="readonly"
                          type="text"
                          aria-readonly="true"
@@ -716,7 +713,6 @@ exports[`VDataTableHeader.ts mobile should work with showGroupBy 1`] = `
                 </label>
                 <div class="v-select__selections">
                   <input aria-label="Sort by"
-                         autocomplete="on"
                          readonly="readonly"
                          type="text"
                          aria-readonly="true"
@@ -780,7 +776,6 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
                     </span>
                   </span>
                   <input aria-label="Sort by"
-                         autocomplete="on"
                          readonly="readonly"
                          type="text"
                          aria-readonly="true"
@@ -844,7 +839,6 @@ exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
                     </span>
                   </span>
                   <input aria-label="Sort by"
-                         autocomplete="on"
                          readonly="readonly"
                          type="text"
                          aria-readonly="true"
