@@ -1,5 +1,5 @@
 // Directives
-import Ripple from '../../directives/ripple'
+import ripple from '../../directives/ripple'
 
 // Types
 import Vue, { VNode, VNodeData, VNodeDirective } from 'vue'
@@ -7,7 +7,7 @@ import Vue, { VNode, VNodeData, VNodeDirective } from 'vue'
 export default Vue.extend({
   name: 'rippleable',
 
-  directives: { Ripple },
+  directives: { ripple },
 
   props: {
     ripple: {
