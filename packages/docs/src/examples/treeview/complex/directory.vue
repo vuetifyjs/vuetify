@@ -14,21 +14,18 @@
           :load-children="fetchUsers"
           :open.sync="open"
           activatable
-          active-class="primary--text"
-          class="grey lighten-5"
+          color="warning"
           open-on-click
           transition
         >
           <template v-slot:prepend="{ item, active }">
-            <v-icon
-              v-if="!item.children"
-              :color="active ? 'primary' : ''"
-            >
-              mdi-account
-            </v-icon>
+            <v-icon v-if="!item.children">mdi-account</v-icon>
           </template>
         </v-treeview>
       </v-flex>
+
+      <v-divider vertical></v-divider>
+
       <v-flex
         d-flex
         text-xs-center

@@ -3,7 +3,7 @@
     <v-flex
       sm12
       lg3
-      class="pa-3 mb-3 feature-pane"
+      class="mb-3 controls"
     >
       <v-btn
         fab
@@ -401,6 +401,13 @@
       },
     },
     methods: {
+      viewDay ({ date }) {
+        this.start = date
+        this.type = 'day'
+      },
+      getEventColor (event) {
+        return event.color
+      },
       showIntervalLabel (interval) {
         return interval.minute === 0
       },
@@ -409,59 +416,7 @@
 </script>
 
 <style scoped>
-
-  .feature-pane {
-    position: relative;
-    padding-top: 30px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-  }
-
-  .day-header {
-    margin: 0px 2px 2px 2px;
-    padding: 2px 6px;
-    background-color: #1867c0;
-    color: #ffffff;
-    border: 1px solid #1867c0;
-    border-radius: 2px;
-    user-select: none;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
-
-  .day-body {
-    position: absolute;
-    top: 400px;
-    height: 36px;
-    margin: 2px;
-    padding: 2px 6px;
-    background-color: #1867c0;
-    color: #ffffff;
-    border: 1px solid #1867c0;
-    border-radius: 2px;
-    left: 0;
-    right: 0;
-    user-select: none;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
-
-  .day {
-    position: relative;
-    height: 24px;
-    margin: 0px;
-    padding: 0px 6px;
-    background-color: #1867c0;
-    color: #ffffff;
-    border: 1px solid #1867c0;
-    border-radius: 2px;
-    left: 0;
-    right: 0;
-    user-select: none;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
-
+.controls {
+  position: relative;
+}
 </style>

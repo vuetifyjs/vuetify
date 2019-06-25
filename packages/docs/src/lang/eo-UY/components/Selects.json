@@ -33,7 +33,6 @@
   "props": {
     "attach": "crwdns26934:0crwdne26934:0",
     "autocomplete": "crwdns26936:0crwdne26936:0",
-    "browserAutocomplete": "crwdns26938:0crwdne26938:0",
     "cacheItems": "crwdns26940:0crwdne26940:0",
     "chips": "crwdns26942:0crwdne26942:0",
     "combobox": "crwdns26944:0crwdne26944:0",

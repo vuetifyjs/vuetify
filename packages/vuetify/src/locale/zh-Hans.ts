@@ -29,4 +29,7 @@ export default {
     prev: '以前的视觉',
     next: '下一个视觉',
   },
+  calendar: {
+    moreEvents: '还有{0}个',
+  },
 }

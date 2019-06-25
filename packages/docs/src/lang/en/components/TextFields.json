@@ -95,7 +95,6 @@
     "autoGrow": "Auto-grows the input. This option requires the use of **v-model**",
     "autofocus": "Enables autofocus",
     "filled": "Applies the alternate filled input style",
-    "browserAutocomplete": "Configures the default `<input>` autocomplete attribute",
     "clearIcon": "Applied when using **clearable** and the input is dirty",
     "counter": "Creates counter for input length; if no number is specified, it defaults to 25. Does not apply any validation.",
     "flat": "Mixins.Soloable.props.flat",
