@@ -16,7 +16,6 @@ exports[`VDataFooter.ts should render and match snapshot 1`] = `
           <div class="v-select__slot">
             <div class="v-select__selections">
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                     autocomplete="on"
                      readonly="readonly"
                      type="text"
                      aria-readonly="true"
@@ -89,7 +88,6 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
                 10
               </div>
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                     autocomplete="on"
                      readonly="readonly"
                      type="text"
                      aria-readonly="true"
@@ -184,7 +182,6 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
                 10
               </div>
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                     autocomplete="on"
                      readonly="readonly"
                      type="text"
                      aria-readonly="true"
@@ -279,7 +276,6 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
                 100
               </div>
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                     autocomplete="on"
                      readonly="readonly"
                      type="text"
                      aria-readonly="true"
@@ -353,7 +349,6 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
                 10
               </div>
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                     autocomplete="on"
                      readonly="readonly"
                      type="text"
                      aria-readonly="true"

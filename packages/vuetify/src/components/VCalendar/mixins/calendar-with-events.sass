@@ -1,0 +1,57 @@
+@import '../../../styles/styles.sass'
+@import '../_variables.scss'
+
++theme(v-calendar-events) using ($material)
+  .v-event-timed
+    border: 1px solid !important
+
+.v-calendar
+  .v-event
+    position: relative
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+    font-size: $calendar-event-font-size
+    cursor: pointer
+    margin-right: -1px
+
+    &.v-event-start
+      border-top-left-radius: $calendar-event-border-radius
+      border-bottom-left-radius: $calendar-event-border-radius
+
+    &.v-event-end
+      width: 95%
+      border-top-right-radius: $calendar-event-border-radius
+      border-bottom-right-radius: $calendar-event-border-radius
+
+  .v-event-more
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+    font-size: $calendar-event-font-size
+    cursor: pointer
+    border-radius: $calendar-event-border-radius
+    font-weight: bold
+    width: 95%
+
+  .v-event-timed-container
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    width: 95%
+    pointer-events: none
+
+  .v-event-timed
+    position: absolute
+    overflow: hidden
+    white-space: nowrap
+    text-overflow: ellipsis
+    font-size: $calendar-event-font-size
+    cursor: pointer
+    border-radius: $calendar-event-border-radius
+    pointer-events: all
+
+  &.v-calendar-events
+    .v-calendar-weekly__day
+      overflow: visible

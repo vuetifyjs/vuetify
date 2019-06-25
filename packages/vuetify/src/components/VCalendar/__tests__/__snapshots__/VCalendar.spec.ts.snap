@@ -13,7 +13,13 @@ exports[`VCalendar should render day view 1`] = `
         Mon
       </div>
       <div class="v-calendar-daily_head-day-label">
-        29
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            29
+          </span>
+        </button>
       </div>
     </div>
   </div>
@@ -327,191 +333,395 @@ exports[`VCalendar should render month view 1`] = `
   <div class="v-calendar-weekly__week">
     <div class="v-calendar-weekly__day v-past v-outside">
       <div class="v-calendar-weekly__day-label">
-        31
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            31
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-weekly__day v-past">
       <div class="v-calendar-weekly__day-label">
-        1
-      </div>
-      <div class="v-calendar-weekly__day-month">
-        Jan
-      </div>
-    </div>
-    <div class="v-calendar-weekly__day v-past">
-      <div class="v-calendar-weekly__day-label">
-        2
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--rounded theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            Jan 1
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-weekly__day v-past">
       <div class="v-calendar-weekly__day-label">
-        3
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            2
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-weekly__day v-past">
       <div class="v-calendar-weekly__day-label">
-        4
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            3
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-weekly__day v-past">
       <div class="v-calendar-weekly__day-label">
-        5
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            4
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-weekly__day v-past">
       <div class="v-calendar-weekly__day-label">
-        6
-      </div>
-    </div>
-  </div>
-  <div class="v-calendar-weekly__week">
-    <div class="v-calendar-weekly__day v-past">
-      <div class="v-calendar-weekly__day-label">
-        7
-      </div>
-    </div>
-    <div class="v-calendar-weekly__day v-past">
-      <div class="v-calendar-weekly__day-label">
-        8
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            5
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-weekly__day v-past">
       <div class="v-calendar-weekly__day-label">
-        9
-      </div>
-    </div>
-    <div class="v-calendar-weekly__day v-past">
-      <div class="v-calendar-weekly__day-label">
-        10
-      </div>
-    </div>
-    <div class="v-calendar-weekly__day v-past">
-      <div class="v-calendar-weekly__day-label">
-        11
-      </div>
-    </div>
-    <div class="v-calendar-weekly__day v-past">
-      <div class="v-calendar-weekly__day-label">
-        12
-      </div>
-    </div>
-    <div class="v-calendar-weekly__day v-past">
-      <div class="v-calendar-weekly__day-label">
-        13
-      </div>
-    </div>
-  </div>
-  <div class="v-calendar-weekly__week">
-    <div class="v-calendar-weekly__day v-past">
-      <div class="v-calendar-weekly__day-label">
-        14
-      </div>
-    </div>
-    <div class="v-calendar-weekly__day v-past">
-      <div class="v-calendar-weekly__day-label">
-        15
-      </div>
-    </div>
-    <div class="v-calendar-weekly__day v-past">
-      <div class="v-calendar-weekly__day-label">
-        16
-      </div>
-    </div>
-    <div class="v-calendar-weekly__day v-past">
-      <div class="v-calendar-weekly__day-label">
-        17
-      </div>
-    </div>
-    <div class="v-calendar-weekly__day v-past">
-      <div class="v-calendar-weekly__day-label">
-        18
-      </div>
-    </div>
-    <div class="v-calendar-weekly__day v-past">
-      <div class="v-calendar-weekly__day-label">
-        19
-      </div>
-    </div>
-    <div class="v-calendar-weekly__day v-past">
-      <div class="v-calendar-weekly__day-label">
-        20
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            6
+          </span>
+        </button>
       </div>
     </div>
   </div>
   <div class="v-calendar-weekly__week">
     <div class="v-calendar-weekly__day v-past">
       <div class="v-calendar-weekly__day-label">
-        21
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            7
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-weekly__day v-past">
       <div class="v-calendar-weekly__day-label">
-        22
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            8
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-weekly__day v-past">
       <div class="v-calendar-weekly__day-label">
-        23
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            9
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-weekly__day v-past">
       <div class="v-calendar-weekly__day-label">
-        24
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            10
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-weekly__day v-past">
       <div class="v-calendar-weekly__day-label">
-        25
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            11
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-weekly__day v-past">
       <div class="v-calendar-weekly__day-label">
-        26
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            12
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-weekly__day v-past">
       <div class="v-calendar-weekly__day-label">
-        27
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            13
+          </span>
+        </button>
       </div>
     </div>
   </div>
   <div class="v-calendar-weekly__week">
     <div class="v-calendar-weekly__day v-past">
       <div class="v-calendar-weekly__day-label">
-        28
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            14
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-weekly__day v-past">
       <div class="v-calendar-weekly__day-label">
-        29
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            15
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-weekly__day v-past">
       <div class="v-calendar-weekly__day-label">
-        30
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            16
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-weekly__day v-past">
       <div class="v-calendar-weekly__day-label">
-        31
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            17
+          </span>
+        </button>
+      </div>
+    </div>
+    <div class="v-calendar-weekly__day v-past">
+      <div class="v-calendar-weekly__day-label">
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            18
+          </span>
+        </button>
+      </div>
+    </div>
+    <div class="v-calendar-weekly__day v-past">
+      <div class="v-calendar-weekly__day-label">
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            19
+          </span>
+        </button>
+      </div>
+    </div>
+    <div class="v-calendar-weekly__day v-past">
+      <div class="v-calendar-weekly__day-label">
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            20
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="v-calendar-weekly__week">
+    <div class="v-calendar-weekly__day v-past">
+      <div class="v-calendar-weekly__day-label">
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            21
+          </span>
+        </button>
+      </div>
+    </div>
+    <div class="v-calendar-weekly__day v-past">
+      <div class="v-calendar-weekly__day-label">
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            22
+          </span>
+        </button>
+      </div>
+    </div>
+    <div class="v-calendar-weekly__day v-past">
+      <div class="v-calendar-weekly__day-label">
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            23
+          </span>
+        </button>
+      </div>
+    </div>
+    <div class="v-calendar-weekly__day v-past">
+      <div class="v-calendar-weekly__day-label">
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            24
+          </span>
+        </button>
+      </div>
+    </div>
+    <div class="v-calendar-weekly__day v-past">
+      <div class="v-calendar-weekly__day-label">
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            25
+          </span>
+        </button>
+      </div>
+    </div>
+    <div class="v-calendar-weekly__day v-past">
+      <div class="v-calendar-weekly__day-label">
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            26
+          </span>
+        </button>
+      </div>
+    </div>
+    <div class="v-calendar-weekly__day v-past">
+      <div class="v-calendar-weekly__day-label">
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            27
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="v-calendar-weekly__week">
+    <div class="v-calendar-weekly__day v-past">
+      <div class="v-calendar-weekly__day-label">
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            28
+          </span>
+        </button>
+      </div>
+    </div>
+    <div class="v-calendar-weekly__day v-past">
+      <div class="v-calendar-weekly__day-label">
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            29
+          </span>
+        </button>
+      </div>
+    </div>
+    <div class="v-calendar-weekly__day v-past">
+      <div class="v-calendar-weekly__day-label">
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            30
+          </span>
+        </button>
+      </div>
+    </div>
+    <div class="v-calendar-weekly__day v-past">
+      <div class="v-calendar-weekly__day-label">
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            31
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-weekly__day v-past v-outside">
       <div class="v-calendar-weekly__day-label">
-        1
-      </div>
-      <div class="v-calendar-weekly__day-month">
-        Feb
-      </div>
-    </div>
-    <div class="v-calendar-weekly__day v-past v-outside">
-      <div class="v-calendar-weekly__day-label">
-        2
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--rounded theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            Feb 1
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-weekly__day v-past v-outside">
       <div class="v-calendar-weekly__day-label">
-        3
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            2
+          </span>
+        </button>
+      </div>
+    </div>
+    <div class="v-calendar-weekly__day v-past v-outside">
+      <div class="v-calendar-weekly__day-label">
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--small transparent"
+        >
+          <span class="v-btn__content">
+            3
+          </span>
+        </button>
       </div>
     </div>
   </div>
@@ -532,7 +742,13 @@ exports[`VCalendar should render week view 1`] = `
         Sun
       </div>
       <div class="v-calendar-daily_head-day-label">
-        28
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            28
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -540,7 +756,13 @@ exports[`VCalendar should render week view 1`] = `
         Mon
       </div>
       <div class="v-calendar-daily_head-day-label">
-        29
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            29
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -548,7 +770,13 @@ exports[`VCalendar should render week view 1`] = `
         Tue
       </div>
       <div class="v-calendar-daily_head-day-label">
-        30
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            30
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -556,7 +784,13 @@ exports[`VCalendar should render week view 1`] = `
         Wed
       </div>
       <div class="v-calendar-daily_head-day-label">
-        31
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            31
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -564,7 +798,13 @@ exports[`VCalendar should render week view 1`] = `
         Thu
       </div>
       <div class="v-calendar-daily_head-day-label">
-        1
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            1
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -572,7 +812,13 @@ exports[`VCalendar should render week view 1`] = `
         Fri
       </div>
       <div class="v-calendar-daily_head-day-label">
-        2
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            2
+          </span>
+        </button>
       </div>
     </div>
     <div class="v-calendar-daily_head-day v-past">
@@ -580,7 +826,13 @@ exports[`VCalendar should render week view 1`] = `
         Sat
       </div>
       <div class="v-calendar-daily_head-day-label">
-        3
+        <button type="button"
+                class="v-btn v-btn--depressed v-btn--fab v-btn--round theme--light v-size--default transparent"
+        >
+          <span class="v-btn__content">
+            3
+          </span>
+        </button>
       </div>
     </div>
   </div>

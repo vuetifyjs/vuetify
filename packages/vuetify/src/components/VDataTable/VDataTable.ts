@@ -230,6 +230,7 @@ export default VDataIterator.extend({
           someItems: this.someItems,
           everyItem: this.everyItem,
           singleSelect: this.singleSelect,
+          disableSort: this.disableSort,
         },
         on: {
           sort: props.sort,
