@@ -9,7 +9,6 @@
   "/components/carousel": "/components/carousels",
   "/components/datatables": "/components/data-tables",
   "/components/expansion-panel": "/components/expansion-panels",
-  "/components/grid-lists": "/components/grid-lists",
   "/vuetify/sandbox": "/customizing/sandbox",
   "/directives/badges": "/components/badges",
   "/vuetify/quick-start": "/getting-started/quick-start",
