@@ -25,14 +25,32 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            { "file": "dense", "newIn": "2.0" },
-            { "file": "selection-type", "newIn": "2.0" },
-            "human-resources",
-            "file-explorer",
-            "directory",
-            "hotspots"
+            { "file": "simple/dense", "newIn": "2.0" },
+            "simple/selected-color",
+            { "file": "simple/color", "newIn": "2.0" },
+            { "file": "simple/shaped", "newIn": "2.0" },
+            { "file": "simple/rounded", "newIn": "2.0" },
+            { "file": "simple/item-disabled", "newIn": "2.0" },
+            { "file": "simple/selection-type", "newIn": "2.0" },
+            "simple/selectable",
+            "simple/activatable",
+            "simple/hoverable",
+            "simple/open-all",
+            "intermediate/file-explorer",
+            "complex/human-resources",
+            "complex/directory",
+            "complex/hotspots"
           ]
         }
       ]

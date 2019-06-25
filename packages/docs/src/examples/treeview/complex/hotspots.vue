@@ -1,7 +1,8 @@
 <template>
   <v-card>
     <v-toolbar
-      color="grey lighten-3"
+      color="primary"
+      dark
       flat
     >
       <v-icon>mdi-silverware</v-icon>
