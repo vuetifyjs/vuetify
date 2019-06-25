@@ -29,4 +29,7 @@ export default {
     prev: 'ภาพก่อนหน้า',
     next: 'ภาพต่อไป',
   },
+  calendar: {
+    moreEvents: 'อีก {0}',
+  },
 }

@@ -49,7 +49,6 @@ export default baseMixins.extend<options>().extend({
   props: {
     appendOuterIcon: String,
     autofocus: Boolean,
-    browserAutocomplete: String,
     clearable: Boolean,
     clearIcon: {
       type: String,
@@ -190,6 +189,11 @@ export default baseMixins.extend<options>().extend({
     /* istanbul ignore next */
     if (this.$attrs.hasOwnProperty('box')) {
       breaking('box', 'filled', this)
+    }
+
+    /* istanbul ignore next */
+    if (this.$attrs.hasOwnProperty('browser-autocomplete')) {
+      breaking('browser-autocomplete', 'autocomplete', this)
     }
 
     /* istanbul ignore if */
@@ -357,7 +361,6 @@ export default baseMixins.extend<options>().extend({
         attrs: {
           'aria-label': !this.id && this.label, // Label `for` will be set if we have an id
           ...this.$attrs,
-          autocomplete: this.browserAutocomplete,
           autofocus: this.autofocus,
           disabled: this.disabled,
           id: this.id,

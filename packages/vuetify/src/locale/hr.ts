@@ -29,4 +29,7 @@ export default {
     prev: 'Prethodna slika',
     next: 'Sljedeća vizuala',
   },
+  calendar: {
+    moreEvents: 'Još {0}',
+  },
 }

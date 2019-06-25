@@ -7,6 +7,9 @@ import Mouse from './mouse'
 import Themeable from '../../../mixins/themeable'
 import Times from './times'
 
+// Directives
+import Resize from '../../../directives/resize'
+
 // Util
 import props from '../util/props'
 import {
@@ -30,6 +33,10 @@ export default mixins(
 ).extend({
   name: 'calendar-base',
 
+  directives: {
+    Resize,
+  },
+
   props: props.base,
 
   computed: {
@@ -40,7 +47,7 @@ export default mixins(
       return parseTimestamp(this.start) as VTimestamp
     },
     parsedEnd (): VTimestamp {
-      return parseTimestamp(this.end) as VTimestamp
+      return (this.end ? parseTimestamp(this.end) : this.parsedStart) as VTimestamp
     },
     days (): VTimestamp[] {
       return createDayList(
@@ -91,6 +98,12 @@ export default mixins(
     },
     getEndOfWeek (timestamp: VTimestamp): VTimestamp {
       return getEndOfWeek(timestamp, this.weekdays, this.times.today)
+    },
+    getFormatter (options: object): VTimestampFormatter {
+      return createNativeLocaleFormatter(
+        this.locale,
+        (_tms, _short) => options
+      )
     },
   },
 })
