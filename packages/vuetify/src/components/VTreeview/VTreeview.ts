@@ -84,7 +84,7 @@ export default mixins(
       type: String,
       default: 'leaf',
       validator: (v: string) => ['leaf', 'independent'].includes(v),
-    },
+    } as PropValidator<'leaf' | 'independent'>,
     ...VTreeviewNodeProps,
   },
 
