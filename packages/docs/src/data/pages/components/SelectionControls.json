@@ -29,7 +29,7 @@
       "children": [
         {
           "type": "playground",
-          "value": "playground-checkboxes"
+          "value": "playground"
         }
       ]
     },
@@ -43,48 +43,10 @@
             "simple/checkboxes-array",
             "simple/checkboxes-states",
             "simple/checkboxes-colors",
-            "intermediate/checkboxes-inline-texfield"
-          ]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "playground",
-          "value": "playground-radios"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "examples",
-          "value": [
+            "intermediate/checkboxes-inline-texfield",
             "simple/radios-default",
             "simple/radios-direction",
-            "simple/radios-colors"
-          ]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "playground",
-          "value": "playground-switches"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "examples",
-          "value": [
+            "simple/radios-colors",
             "simple/switches-boolean",
             "simple/switches-array",
             "simple/switches-states",
