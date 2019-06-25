@@ -21,10 +21,16 @@
       "children": [
         {
           "type": "api",
-          "value": [
-            "v-data-table",
-            "v-edit-dialog"
-          ]
+          "value": ["v-data-table", "v-edit-dialog"]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "playground",
+          "value": "playground"
         }
       ]
     },
@@ -34,22 +40,25 @@
         {
           "type": "examples",
           "value": [
-            "slots",
-            "select",
-            "expand",
-            "group",
-            "multi-sort",
-            "search",
-            "customize-header",
-            "customize-rows",
-            "customize-footer",
-            "paginate",
-            "sort",
-            "server",
-            "headerless",
-            "edit-dialog",
-            "crud",
-            "virtualized"
+            "simple/select",
+            "simple/group",
+            "simple/multi-sort",
+            "simple/search",
+            "simple/headerless",
+            "simple/virtualized",
+            "simple/loading",
+            "simple/dense",
+            "simple/footer-props",
+            "intermediate/slots",
+            "intermediate/expand",
+            "intermediate/customize-header",
+            "intermediate/customize-rows",
+            "intermediate/customize-footer",
+            "intermediate/paginate",
+            "intermediate/sort",
+            "intermediate/server",
+            "complex/edit-dialog",
+            "complex/crud"
           ]
         }
       ]
