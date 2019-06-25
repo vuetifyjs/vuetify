@@ -6,9 +6,12 @@
 +theme(v-treeview) using ($material)
   color: map-deep-get($material, 'text', 'primary')
 
-  &--hoverable .v-treeview-node__root:hover::before,
-  .v-treeview-node__root.v-treeview-node--active::before
-    opacity: 0.2
+  &--hoverable .v-treeview-node__root,
+  .v-treeview-node--click > .v-treeview-node__root
+    +states($material)
+
+  .v-treeview-node__root.v-treeview-node--active
+    +active-states($material)
 
   .v-treeview-node--disabled
     color: map-deep-get($material, 'text', 'disabled')
@@ -63,7 +66,7 @@
       padding-right: $treeview-node-padding-end
       position: relative
 
-      &:before
+      &::before
         background-color: currentColor
         bottom: 0
         content: ''
