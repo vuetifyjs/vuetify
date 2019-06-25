@@ -13,10 +13,6 @@
       "header": "### Auto grow",
       "desc": "When using the `auto-grow` prop, textarea's will automatically increase in size when the contained text exceeds it's size."
     },
-    "autofocus": {
-      "header": "### Auto focus",
-      "desc": "You can focus `v-textarea` on page load using the `auto-focus` prop."
-    },
     "background-color": {
       "header": "### Background color",
       "desc": "The `background-color` and `color` props give you more control over styling `v-textarea`'s."
