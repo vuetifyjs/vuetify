@@ -62,13 +62,13 @@
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/customizing/a-la-carte</loc>
+       <loc>https://vuetifyjs.com/en/customization/a-la-carte</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/customizing/icons</loc>
+       <loc>https://vuetifyjs.com/en/customization/icons</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
@@ -104,7 +104,7 @@
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/customizing/breakpoints</loc>
+       <loc>https://vuetifyjs.com/en/customization/breakpoints</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
@@ -152,7 +152,7 @@
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/customizing/theme</loc>
+       <loc>https://vuetifyjs.com/en/customization/theme</loc>
        <lastmod>2019-01-07</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>

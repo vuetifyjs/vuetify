@@ -17,8 +17,8 @@
     ]
   },
   {
-    "group": "customizing",
-    "text": "customizing",
+    "group": "customization",
+    "text": "customization",
     "icon": "mdi-cogs",
     "children": [
       { "new": true, "text": "accessibility", "to": "accessibility" },

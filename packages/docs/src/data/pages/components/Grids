@@ -56,7 +56,7 @@
           "type": "up-next",
           "value": [
             "components/grid-lists",
-            "customizing/breakpoints",
+            "customization/breakpoints",
             "styles/display"
           ]
         }

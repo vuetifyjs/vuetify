@@ -53,7 +53,7 @@
     "description": "Obtenir l'aide et le soutien du créateur de Vuetify, John Leider",
     "keywords": "consultation, support, aide"
   },
-  "customizing/a-la-carte": {
+  "customization/a-la-carte": {
     "title": "A la carte",
     "description": "Préparez-vous à le treeshaking automatique. Utilisez uniquement les composants nécessaires sans tout importer.",
     "keywords": "à la carte, importation simple de Vuetify, importation de Vuetify, importation de composant"
@@ -63,7 +63,7 @@
     "description": "Vuetify est équipé d'un balisage par défaut qui facilite la création de mises en page pour n'importe quelle application.",
     "keywords": "mise en page par défaut, balisage par défaut, vu la mise en page par défaut"
   },
-  "customizing/icons": {
+  "customization/icons": {
     "title": "Installation des icônes",
     "description": "Vuetify supporte les icônes personnalisées en utilisant les préfixes et les options globales.",
     "keywords": "vue, icônes, polices de caractères d'icônes, bibliothèques d'icônes, icônes Vuetify"
@@ -88,7 +88,7 @@
     "description": "Appliquez facilement n'importe quelle couleur de la palette Material.",
     "keywords": "couleurs"
   },
-  "customizing/theme": {
+  "customization/theme": {
     "title": "Thème de l'application",
     "description": "Configurez le thème et les couleurs supplémentaires de votre application en un éclair.",
     "keywords": "thèmes"

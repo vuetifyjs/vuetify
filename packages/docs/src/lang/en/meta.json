@@ -59,7 +59,7 @@
     "description": "Get help and support from the creator of Vuetify, John Leider",
     "keywords": "consulting, support, help"
   },
-  "customizing/a-la-carte": {
+  "customization/a-la-carte": {
     "title": "A La Carte",
     "description": "Get ready for automatic treeshaking. Use only the components you need. Single component importing only pulls in what you use.",
     "keywords": "a la carte, a-la-carte, vuetify single import, vuetify import, component importing"
@@ -69,7 +69,7 @@
     "description": "Vuetify comes equipped with a default markup that makes it easy to create layouts for any application.",
     "keywords": "default layout, default markup, vuetify default layout"
   },
-  "customizing/icons": {
+  "customization/icons": {
     "title": "Installing Icons",
     "description": "Vuetify supports custom icon sets through prefixes and global options.",
     "keywords": "vue, icon, iconfont, icon libraries, vuetify icons"
@@ -94,7 +94,7 @@
     "description": "Easily apply any color from the material design palette.",
     "keywords": "colors"
   },
-  "customizing/theme": {
+  "customization/theme": {
     "title": "Application theming",
     "description": "Setup your application's theme and supplemental colors in a flash.",
     "keywords": "themes"
@@ -124,7 +124,7 @@
     "description": "Grid lists allow you to specify the gutter used when separating grid items.",
     "keywords": "grid lists, grid"
   },
-  "customizing/breakpoints": {
+  "customization/breakpoints": {
     "title": "Breakpoints",
     "description": "Access the Vuetify grid system directly in components.",
     "keywords": "breakpoints"
