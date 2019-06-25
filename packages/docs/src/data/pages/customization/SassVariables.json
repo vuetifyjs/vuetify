@@ -6,14 +6,6 @@
       "type": "section",
       "children": [
         {
-          "type": "heading",
-          "lang": "sassHeader"
-        },
-        {
-          "type": "text",
-          "lang": "sassText1"
-        },
-        {
           "type": "alert",
           "lang": "sassAlert1",
           "value": "info"
