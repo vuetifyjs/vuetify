@@ -29,4 +29,7 @@ export default {
     prev: 'Anterior vizual',
     next: 'Următorul vizual',
   },
+  calendar: {
+    moreEvents: '{0} mai mult',
+  },
 }

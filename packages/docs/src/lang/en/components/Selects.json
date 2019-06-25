@@ -45,7 +45,6 @@
   "props": {
     "attach": "Mixins.Detachable.props.attach",
     "autocomplete": "Filter the items in the list based on user input",
-    "browserAutocomplete": "Set browser autocompletion for the search input",
     "cacheItems": "Keeps a local _unique_ copy of all items that have been passed through the **items** prop.",
     "chips": "Changes display of selections to chips",
     "combobox": "The single select variant of **tags**",

@@ -1,5 +1,7 @@
 
 import { validateTimestamp, parseDate } from './timestamp'
+import { VEventInput } from './events'
+import { PropValidator } from 'vue/types/options'
 
 export default {
   base: {
@@ -14,9 +16,9 @@ export default {
       default: '0000-00-00',
     },
     weekdays: {
-      type: Array as () => number[],
+      type: Array,
       default: () => [0, 1, 2, 3, 4, 5, 6],
-    },
+    } as PropValidator<number[]>,
     hideHeader: {
       type: Boolean,
       default: false,
@@ -102,6 +104,56 @@ export default {
     value: {
       type: String,
       validate: validateTimestamp,
+    },
+  },
+  events: {
+    events: {
+      type: Array,
+      default: () => [],
+    } as PropValidator<VEventInput[]>,
+    eventStart: {
+      type: String,
+      default: 'start',
+    },
+    eventEnd: {
+      type: String,
+      default: 'end',
+    },
+    eventHeight: {
+      type: Number,
+      default: 20,
+    },
+    eventColor: {
+      type: [String, Function],
+      default: 'secondary',
+    },
+    eventTextColor: {
+      type: [String, Function],
+      default: 'white',
+    },
+    eventName: {
+      type: [String, Function],
+      default: 'name',
+    },
+    eventOverlapThreshold: {
+      type: Number,
+      default: 60,
+    },
+    eventMore: {
+      type: Boolean,
+      default: true,
+    },
+    eventMoreText: {
+      type: String,
+      default: '$vuetify.calendar.moreEvents',
+    },
+    eventRipple: {
+      type: [Boolean, Object],
+      default: null,
+    },
+    eventMarginBottom: {
+      type: Number,
+      default: 1,
     },
   },
 }
