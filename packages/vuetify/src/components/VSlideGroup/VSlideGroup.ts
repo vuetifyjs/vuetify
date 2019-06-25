@@ -58,7 +58,7 @@ export const BaseSlideGroup = mixins<options &
     centerActive: Boolean,
     nextIcon: {
       type: String,
-      default: '$vuetify.icons.next',
+      default: '$next',
     },
     mobileBreakPoint: {
       type: [Number, String],
@@ -67,7 +67,7 @@ export const BaseSlideGroup = mixins<options &
     },
     prevIcon: {
       type: String,
-      default: '$vuetify.icons.prev',
+      default: '$prev',
     },
     showArrows: Boolean,
   },

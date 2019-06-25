@@ -50,7 +50,7 @@ exports[`VColorPickerEdit.ts should change mode 1`] = `
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
       >
-        $vuetify.icons.unfold
+        $unfold
       </i>
     </span>
   </button>
@@ -108,7 +108,7 @@ exports[`VColorPickerEdit.ts should change mode 2`] = `
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
       >
-        $vuetify.icons.unfold
+        $unfold
       </i>
     </span>
   </button>
@@ -132,7 +132,7 @@ exports[`VColorPickerEdit.ts should change mode 3`] = `
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
       >
-        $vuetify.icons.unfold
+        $unfold
       </i>
     </span>
   </button>
@@ -190,7 +190,7 @@ exports[`VColorPickerEdit.ts should change mode 4`] = `
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
       >
-        $vuetify.icons.unfold
+        $unfold
       </i>
     </span>
   </button>
@@ -300,7 +300,7 @@ exports[`VColorPickerEdit.ts should render with disabled 1`] = `
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
       >
-        $vuetify.icons.unfold
+        $unfold
       </i>
     </span>
   </button>

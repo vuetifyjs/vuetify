@@ -113,7 +113,7 @@ export default mixins(
       }, [
         this.$createElement(VIcon, {
           props: { color },
-        }, '$vuetify.icons.cancel'),
+        }, '$cancel'),
       ])
     },
     __cachedIcon (): VNode | null {
@@ -148,10 +148,10 @@ export default mixins(
       if (typeof this.icon === 'string' && this.icon) return this.icon
 
       switch (this.type) {
-        case 'info': return '$vuetify.icons.info'
-        case 'error': return '$vuetify.icons.error'
-        case 'success': return '$vuetify.icons.success'
-        case 'warning': return '$vuetify.icons.warning'
+        case 'info': return '$info'
+        case 'error': return '$error'
+        case 'success': return '$success'
+        case 'warning': return '$warning'
         default: return false
       }
     },

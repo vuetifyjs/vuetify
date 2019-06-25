@@ -65,7 +65,7 @@ export default baseMixins.extend<options>().extend({
   props: {
     appendIcon: {
       type: String,
-      default: '$vuetify.icons.dropdown',
+      default: '$dropdown',
     },
     attach: {
       default: false,

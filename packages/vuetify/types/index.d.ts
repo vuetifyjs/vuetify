@@ -39,7 +39,7 @@ export interface VuetifyUseOptions {
   /**
    * Override specific icon names. You can also specify your own custom ones that can then be accessed from v-icon
    *
-   * @example &lt;v-icon&gt;$vuetify.icons.(name)&lt;/v-icon&gt;
+   * @example &lt;v-icon&gt;$(name)&lt;/v-icon&gt;
    */
   icons?: Partial<VuetifyIconOptions>
   lang?: Partial<VuetifyLangOptions>

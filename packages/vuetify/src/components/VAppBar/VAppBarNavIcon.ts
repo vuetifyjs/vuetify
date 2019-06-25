@@ -23,6 +23,6 @@ export default Vue.extend({
 
     const defaultSlot = slots().default
 
-    return h(VBtn, d, defaultSlot || [h(VIcon, '$vuetify.icons.menu')])
+    return h(VBtn, d, defaultSlot || [h(VIcon, '$menu')])
   },
 })

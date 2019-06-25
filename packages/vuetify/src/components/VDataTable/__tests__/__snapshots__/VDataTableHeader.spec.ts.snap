@@ -27,7 +27,7 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
          class="v-icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -43,7 +43,7 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
          class="v-icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -59,7 +59,7 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
          class="v-icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -75,7 +75,7 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
          class="v-icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -91,7 +91,7 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
          class="v-icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
   </tr>
@@ -126,7 +126,7 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
          class="v-icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -142,7 +142,7 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
          class="v-icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -158,7 +158,7 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
          class="v-icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -174,7 +174,7 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
          class="v-icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -190,7 +190,7 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
          class="v-icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
       <span class="v-data-table-header__sort-badge">
         1
@@ -231,7 +231,7 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
          class="v-icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
       <span>
         group
@@ -250,7 +250,7 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
          class="v-icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
       <span>
         group
@@ -269,7 +269,7 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
          class="v-icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
       <span>
         group
@@ -288,7 +288,7 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
          class="v-icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
       <span>
         group
@@ -307,7 +307,7 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
          class="v-icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
       <span>
         group
@@ -345,7 +345,7 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
          class="v-icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -361,7 +361,7 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
          class="v-icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -377,7 +377,7 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
          class="v-icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -393,7 +393,7 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
          class="v-icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -409,7 +409,7 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
          class="v-icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
   </tr>
@@ -444,7 +444,7 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
          class="v-icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -460,7 +460,7 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
          class="v-icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -476,7 +476,7 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
          class="v-icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -492,7 +492,7 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
          class="v-icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
     <th role="columnheader"
@@ -508,7 +508,7 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
          class="v-icon material-icons theme--light"
          style="font-size: 18px;"
       >
-        $vuetify.icons.sort
+        $sort
       </i>
     </th>
   </tr>
@@ -549,7 +549,7 @@ exports[`VDataTableHeader.ts mobile should render 1`] = `
                     <i aria-hidden="true"
                        class="v-icon material-icons theme--light"
                     >
-                      $vuetify.icons.dropdown
+                      $dropdown
                     </i>
                   </div>
                 </div>
@@ -579,7 +579,7 @@ exports[`VDataTableHeader.ts mobile should render with data-table-select header 
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
-              $vuetify.icons.checkboxOff
+              $checkboxOff
             </i>
           </div>
         </div>
@@ -610,7 +610,7 @@ exports[`VDataTableHeader.ts mobile should render with data-table-select header 
                     <i aria-hidden="true"
                        class="v-icon material-icons theme--light"
                     >
-                      $vuetify.icons.dropdown
+                      $dropdown
                     </i>
                   </div>
                 </div>
@@ -657,7 +657,7 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
                            class="v-icon material-icons theme--light"
                            style="font-size: 18px;"
                         >
-                          $vuetify.icons.sort
+                          $sort
                         </i>
                       </div>
                     </span>
@@ -673,7 +673,7 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
                     <i aria-hidden="true"
                        class="v-icon material-icons theme--light"
                     >
-                      $vuetify.icons.dropdown
+                      $dropdown
                     </i>
                   </div>
                 </div>
@@ -723,7 +723,7 @@ exports[`VDataTableHeader.ts mobile should work with showGroupBy 1`] = `
                     <i aria-hidden="true"
                        class="v-icon material-icons theme--light"
                     >
-                      $vuetify.icons.dropdown
+                      $dropdown
                     </i>
                   </div>
                 </div>
@@ -770,7 +770,7 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
                            class="v-icon material-icons theme--light"
                            style="font-size: 18px;"
                         >
-                          $vuetify.icons.sort
+                          $sort
                         </i>
                       </div>
                     </span>
@@ -786,7 +786,7 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
                     <i aria-hidden="true"
                        class="v-icon material-icons theme--light"
                     >
-                      $vuetify.icons.dropdown
+                      $dropdown
                     </i>
                   </div>
                 </div>
@@ -833,7 +833,7 @@ exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
                            class="v-icon material-icons theme--light"
                            style="font-size: 18px;"
                         >
-                          $vuetify.icons.sort
+                          $sort
                         </i>
                       </div>
                     </span>
@@ -849,7 +849,7 @@ exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
                     <i aria-hidden="true"
                        class="v-icon material-icons theme--light"
                     >
-                      $vuetify.icons.dropdown
+                      $dropdown
                     </i>
                   </div>
                 </div>

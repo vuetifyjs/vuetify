@@ -64,12 +64,12 @@ export default baseMixins.extend<options>().extend({
     },
     nextIcon: {
       type: String,
-      default: '$vuetify.icons.next',
+      default: '$next',
     },
     optional: Boolean,
     prevIcon: {
       type: String,
-      default: '$vuetify.icons.prev',
+      default: '$prev',
     },
     right: Boolean,
     showArrows: Boolean,

@@ -35,7 +35,7 @@ exports[`VSelect.ts should only show items if they are in items 1`] = `
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
-              $vuetify.icons.dropdown
+              $dropdown
             </i>
           </div>
         </div>
@@ -79,7 +79,7 @@ exports[`VSelect.ts should only show items if they are in items 2`] = `
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
-              $vuetify.icons.dropdown
+              $dropdown
             </i>
           </div>
         </div>
@@ -126,7 +126,7 @@ exports[`VSelect.ts should only show items if they are in items 3`] = `
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
-              $vuetify.icons.dropdown
+              $dropdown
             </i>
           </div>
         </div>
@@ -176,7 +176,7 @@ exports[`VSelect.ts should only show items if they are in items 4`] = `
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
-              $vuetify.icons.dropdown
+              $dropdown
             </i>
           </div>
         </div>
@@ -220,7 +220,7 @@ exports[`VSelect.ts should render v-select correctly when not using scope slot 1
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
-              $vuetify.icons.dropdown
+              $dropdown
             </i>
           </div>
         </div>
@@ -264,7 +264,7 @@ exports[`VSelect.ts should render v-select correctly when not using v-list-item 
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
-              $vuetify.icons.dropdown
+              $dropdown
             </i>
           </div>
         </div>
@@ -308,7 +308,7 @@ exports[`VSelect.ts should render v-select correctly when using v-list-item in i
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
-              $vuetify.icons.dropdown
+              $dropdown
             </i>
           </div>
         </div>

@@ -41,15 +41,15 @@ export default baseMixins.extend<options>().extend({
     complete: Boolean,
     completeIcon: {
       type: String,
-      default: '$vuetify.icons.complete',
+      default: '$complete',
     },
     editIcon: {
       type: String,
-      default: '$vuetify.icons.edit',
+      default: '$edit',
     },
     errorIcon: {
       type: String,
-      default: '$vuetify.icons.error',
+      default: '$error',
     },
     editable: Boolean,
     rules: {

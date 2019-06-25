@@ -17,7 +17,7 @@
           v-model="rating"
           color="yellow darken-3"
           background-color="grey darken-1"
-          empty-icon="$vuetify.icons.ratingFull"
+          empty-icon="$ratingFull"
           half-increments
           hover
         ></v-rating>

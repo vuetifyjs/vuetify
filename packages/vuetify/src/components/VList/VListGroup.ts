@@ -56,7 +56,7 @@ export default baseMixins.extend<options>().extend({
     },
     appendIcon: {
       type: String,
-      default: '$vuetify.icons.expand',
+      default: '$expand',
     },
     color: {
       type: String,
@@ -173,7 +173,7 @@ export default baseMixins.extend<options>().extend({
       const icon = this.prependIcon
         ? this.prependIcon
         : this.subGroup
-          ? '$vuetify.icons.subgroup'
+          ? '$subgroup'
           : false
 
       if (!icon && !this.$slots.prependIcon) return null

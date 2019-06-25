@@ -175,15 +175,15 @@ describe('VIcon', () => {
       }
     })
 
-    it('should render MD left icon from $vuetify.icons.checkboxOn', () => {
-      const wrapper = mountFunction({}, '$vuetify.icons.checkboxOn')
+    it('should render MD left icon from $checkboxOn', () => {
+      const wrapper = mountFunction({}, '$checkboxOn')
 
       expect(wrapper.text()).toBe('check_box')
       expect(wrapper.element.className).toBe('v-icon material-icons theme--light')
     })
 
-    it('should render MD left icon from $vuetify.icons.prev', () => {
-      const wrapper = mountFunction({}, '$vuetify.icons.prev')
+    it('should render MD left icon from $prev', () => {
+      const wrapper = mountFunction({}, '$prev')
 
       expect(wrapper.text()).toBe('chevron_left')
       expect(wrapper.element.className).toBe('v-icon material-icons theme--light')
@@ -228,7 +228,7 @@ describe('VIcon', () => {
     })
 
     it('should render component', () => {
-      const wrapper = mountFunction({}, '$vuetify.icons.testIcon')
+      const wrapper = mountFunction({}, '$testIcon')
 
       expect(wrapper.text()).toBe('test icon')
       expect(wrapper.element.className).toBe('v-icon test-component v-icon--is-component theme--light')
@@ -236,14 +236,14 @@ describe('VIcon', () => {
     })
 
     it('should render a colored component', () => {
-      const wrapper = mountFunction({ props: { color: 'green lighten-1' } }, '$vuetify.icons.testIcon')
+      const wrapper = mountFunction({ props: { color: 'green lighten-1' } }, '$testIcon')
 
       expect(wrapper.element.classList).toContain('green--text')
       expect(wrapper.element.classList).toContain('text--lighten-1')
     })
 
     it('should render a disabled component', () => {
-      const wrapper = mountFunction({ props: { disabled: true } }, '$vuetify.icons.testIcon')
+      const wrapper = mountFunction({ props: { disabled: true } }, '$testIcon')
 
       expect(wrapper.element.classList).toContain('v-icon--disabled')
     })
@@ -251,7 +251,7 @@ describe('VIcon', () => {
     it('should set font size from helper prop', async () => {
       const iconFactory = size => mountFunction({
         props: { [size]: true },
-      }, '$vuetify.icons.testIcon')
+      }, '$testIcon')
 
       const small = iconFactory('small')
       expect(small.html()).toMatchSnapshot()
@@ -267,20 +267,20 @@ describe('VIcon', () => {
     })
 
     it('should render a left aligned component', () => {
-      const wrapper = mountFunction({ props: { left: true } }, '$vuetify.icons.testIcon')
+      const wrapper = mountFunction({ props: { left: true } }, '$testIcon')
 
       expect(wrapper.element.classList).toContain('v-icon--left')
     })
 
     it('should render a right aligned component', () => {
-      const wrapper = mountFunction({ props: { right: true } }, '$vuetify.icons.testIcon')
+      const wrapper = mountFunction({ props: { right: true } }, '$testIcon')
 
       expect(wrapper.element.classList).toContain('v-icon--right')
     })
 
     it('should be an accessible link', () => {
       const clickHandler = jest.fn()
-      const wrapper = mountFunction({ on: { click: clickHandler } }, '$vuetify.icons.testIcon')
+      const wrapper = mountFunction({ on: { click: clickHandler } }, '$testIcon')
       wrapper.trigger('click')
 
       expect(wrapper.element.classList).toContain('v-icon--link')

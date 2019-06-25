@@ -49,11 +49,11 @@ export default baseMixins.extend<options>().extend({
     id: String,
     onIcon: {
       type: String,
-      default: '$vuetify.icons.radioOn',
+      default: '$radioOn',
     },
     offIcon: {
       type: String,
-      default: '$vuetify.icons.radioOff',
+      default: '$radioOff',
     },
     readonly: Boolean,
     value: {

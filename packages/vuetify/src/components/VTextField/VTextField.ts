@@ -52,7 +52,7 @@ export default baseMixins.extend<options>().extend({
     clearable: Boolean,
     clearIcon: {
       type: String,
-      default: '$vuetify.icons.clear',
+      default: '$clear',
     },
     color: {
       type: String,

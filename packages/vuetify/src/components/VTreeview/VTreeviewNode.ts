@@ -44,23 +44,23 @@ export const VTreeviewNodeProps = {
   },
   indeterminateIcon: {
     type: String,
-    default: '$vuetify.icons.checkboxIndeterminate',
+    default: '$checkboxIndeterminate',
   },
   onIcon: {
     type: String,
-    default: '$vuetify.icons.checkboxOn',
+    default: '$checkboxOn',
   },
   offIcon: {
     type: String,
-    default: '$vuetify.icons.checkboxOff',
+    default: '$checkboxOff',
   },
   expandIcon: {
     type: String,
-    default: '$vuetify.icons.subgroup',
+    default: '$subgroup',
   },
   loadingIcon: {
     type: String,
-    default: '$vuetify.icons.loading',
+    default: '$loading',
   },
   itemDisabled: {
     type: String,

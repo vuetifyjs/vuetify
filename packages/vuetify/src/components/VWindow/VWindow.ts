@@ -36,11 +36,11 @@ export default BaseItemGroup.extend({
     },
     nextIcon: {
       type: [Boolean, String],
-      default: '$vuetify.icons.next',
+      default: '$next',
     },
     prevIcon: {
       type: [Boolean, String],
-      default: '$vuetify.icons.prev',
+      default: '$prev',
     },
     reverse: {
       type: Boolean,

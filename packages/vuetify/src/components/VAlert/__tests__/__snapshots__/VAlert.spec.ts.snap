@@ -16,7 +16,7 @@ exports[`VAlert.ts should be dismissible 1`] = `
         <i aria-hidden="true"
            class="v-icon material-icons theme--light"
         >
-          $vuetify.icons.cancel
+          $cancel
         </i>
       </span>
     </button>
@@ -63,7 +63,7 @@ exports[`VAlert.ts should have a close icon 1`] = `
         <i aria-hidden="true"
            class="v-icon material-icons theme--light"
         >
-          $vuetify.icons.cancel
+          $cancel
         </i>
       </span>
     </button>

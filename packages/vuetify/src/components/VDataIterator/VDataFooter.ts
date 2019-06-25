@@ -28,19 +28,19 @@ export default Vue.extend({
     } as PropValidator<any[]>,
     prevIcon: {
       type: String,
-      default: '$vuetify.icons.prev',
+      default: '$prev',
     },
     nextIcon: {
       type: String,
-      default: '$vuetify.icons.next',
+      default: '$next',
     },
     firstIcon: {
       type: String,
-      default: '$vuetify.icons.first',
+      default: '$first',
     },
     lastIcon: {
       type: String,
-      default: '$vuetify.icons.last',
+      default: '$last',
     },
     itemsPerPageText: {
       type: String,

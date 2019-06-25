@@ -78,7 +78,7 @@ export default VDataIterator.extend({
     headersLength: Number,
     expandIcon: {
       type: String,
-      default: '$vuetify.icons.expand',
+      default: '$expand',
     },
     customFilter: {
       type: Function,

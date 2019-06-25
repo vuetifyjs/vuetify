@@ -53,7 +53,7 @@ export default mixins<options>().extend({
     },
     sortIcon: {
       type: String,
-      default: '$vuetify.icons.sort',
+      default: '$sort',
     },
     everyItem: Boolean,
     someItems: Boolean,

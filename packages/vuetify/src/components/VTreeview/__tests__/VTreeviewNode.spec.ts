@@ -65,11 +65,11 @@ describe('VTreeViewNode.ts', () => {
       provide: { treeview },
     })
 
-    expect(wrapper.vm.computedIcon).toBe('$vuetify.icons.checkboxOff')
+    expect(wrapper.vm.computedIcon).toBe('$checkboxOff')
 
     wrapper.setData({ isIndeterminate: true })
 
-    expect(wrapper.vm.computedIcon).toBe('$vuetify.icons.checkboxIndeterminate')
+    expect(wrapper.vm.computedIcon).toBe('$checkboxIndeterminate')
   })
 
   it('should use scoped slots', () => {
