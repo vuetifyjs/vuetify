@@ -64,7 +64,7 @@
       { "text": "dividers", "to": "dividers" },
       { "text": "expansionPanels", "to": "expansion-panels" },
       { "text": "footer", "to": "footer" },
-      { "text": "grid", "to": "grid" },
+      { "text": "grid", "to": "grids" },
       { "text": "gridLists", "to": "grid-lists" },
       {
         "group": "components",
@@ -152,7 +152,6 @@
       { "text": "elevation", "to": "elevation" },
       { "text": "spacing", "to": "spacing" },
       { "text": "textAlignment", "to": "alignment" },
-      { "text": "transitions", "to": "transitions" },
       { "text": "typography", "to": "typography" },
       { "text": "transitions", "to": "transitions" },
       { "text": "scroll", "to": "scroll" }
