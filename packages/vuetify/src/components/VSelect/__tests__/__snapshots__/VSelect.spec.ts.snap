@@ -25,9 +25,8 @@ exports[`VSelect.ts should only show items if they are in items 1`] = `
           <div class="v-select__selection v-select__selection--comma">
             foo
           </div>
-          <input autocomplete="on"
-                 readonly="readonly"
-                 type="hidden"
+          <input readonly="readonly"
+                 type="text"
                  aria-readonly="true"
           >
         </div>
@@ -70,9 +69,8 @@ exports[`VSelect.ts should only show items if they are in items 2`] = `
     >
       <div class="v-select__slot">
         <div class="v-select__selections">
-          <input autocomplete="on"
-                 readonly="readonly"
-                 type="hidden"
+          <input readonly="readonly"
+                 type="text"
                  aria-readonly="true"
           >
         </div>
@@ -118,9 +116,8 @@ exports[`VSelect.ts should only show items if they are in items 3`] = `
           <div class="v-select__selection v-select__selection--comma">
             bar
           </div>
-          <input autocomplete="on"
-                 readonly="readonly"
-                 type="hidden"
+          <input readonly="readonly"
+                 type="text"
                  aria-readonly="true"
           >
         </div>
@@ -169,9 +166,8 @@ exports[`VSelect.ts should only show items if they are in items 4`] = `
           <div class="v-select__selection v-select__selection--comma">
             bar
           </div>
-          <input autocomplete="on"
-                 readonly="readonly"
-                 type="hidden"
+          <input readonly="readonly"
+                 type="text"
                  aria-readonly="true"
           >
         </div>
@@ -214,9 +210,8 @@ exports[`VSelect.ts should render v-select correctly when not using scope slot 1
     >
       <div class="v-select__slot">
         <div class="v-select__selections">
-          <input autocomplete="on"
-                 readonly="readonly"
-                 type="hidden"
+          <input readonly="readonly"
+                 type="text"
                  aria-readonly="true"
           >
         </div>
@@ -259,9 +254,8 @@ exports[`VSelect.ts should render v-select correctly when not using v-list-item 
     >
       <div class="v-select__slot">
         <div class="v-select__selections">
-          <input autocomplete="on"
-                 readonly="readonly"
-                 type="hidden"
+          <input readonly="readonly"
+                 type="text"
                  aria-readonly="true"
           >
         </div>
@@ -304,9 +298,8 @@ exports[`VSelect.ts should render v-select correctly when using v-list-item in i
     >
       <div class="v-select__slot">
         <div class="v-select__selections">
-          <input autocomplete="on"
-                 readonly="readonly"
-                 type="hidden"
+          <input readonly="readonly"
+                 type="text"
                  aria-readonly="true"
           >
         </div>

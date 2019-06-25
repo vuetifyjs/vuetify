@@ -13,10 +13,6 @@
       "header": "### Permanent floating drawer",
       "desc": "By default, a navigation drawer has a 1px right border that separates it from content. In this example we want to detach the drawer from the left side and let it float on its own. The **floating** property removes the right border (or left if using **right**)."
     },
-    "persistent": {
-      "header": "### Avatars",
-      "desc": "When setting up drawer lists you will typically pair the **nav** prop with **dense**. This will lower the font-size of the list items and reduce the vertical space that they take up."
-    },
     "mini": {
       "header": "### Mini",
       "desc": "When using the **mini-variant** prop, the drawer will shrink (default 80px) and hide everything inside of `v-list` except the first element. In this example we use the **.sync** modifier that allows us to tie the expanding/contracting of the drawer programmatically."
@@ -25,18 +21,9 @@
       "header": "### Temporary",
       "desc": "A temporary drawer sits above its application and uses a scrim (overlay) to darken the background. This drawer behavior is mimicked by default when on mobile. Clicking outside of the drawer will cause it to close."
     },
-    "dark": {
-      "header": "### Dark theme",
-      "desc": "The `v-navigation-drawer` also supports the dark variant.",
-      "uninverted": true
-    },
     "combined": {
       "header": "### Combined drawers",
       "desc": "In this example we define a custom width to accommodate our nested drawer. Using `v-layout` we ensure that the drawer and list stack horizontally next to each other."
-    },
-    "nested": {
-      "header": "### Nested lists",
-      "desc": "Using the `v-list-group` component you can create up to **2** levels in depth using the **sub-group** prop. For more information on `v-list`, [navigate here](/components/lists)."
     },
     "right": {
       "header": "### Right positioned",

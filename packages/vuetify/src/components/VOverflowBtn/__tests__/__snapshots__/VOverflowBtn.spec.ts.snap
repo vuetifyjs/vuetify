@@ -15,8 +15,7 @@ exports[`VOverflowBtn.js should use default autocomplete selections 1`] = `
           <div class="v-select__selection v-select__selection--comma">
             foo
           </div>
-          <input autocomplete="off"
-                 readonly="readonly"
+          <input readonly="readonly"
                  type="text"
           >
         </div>
@@ -62,8 +61,7 @@ exports[`VOverflowBtn.js should use default autocomplete selections 2`] = `
           <div class="v-select__selection v-select__selection--comma">
             foo
           </div>
-          <input autocomplete="off"
-                 readonly="readonly"
+          <input readonly="readonly"
                  type="text"
           >
         </div>

@@ -9,6 +9,7 @@
       dark
       src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
       width="100%"
+      permanent
     >
       <v-list>
         <v-list-item

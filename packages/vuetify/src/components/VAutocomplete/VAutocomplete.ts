@@ -27,10 +27,6 @@ export default VSelect.extend({
       type: Boolean,
       default: true,
     },
-    browserAutocomplete: {
-      type: String,
-      default: 'off',
-    },
     filter: {
       type: Function,
       default: (item: any, queryText: string, itemText: string) => {
@@ -329,6 +325,7 @@ export default VSelect.extend({
       // proper location
       this.changeSelectedIndex(keyCode)
     },
+    onSpaceDown (e: KeyboardEvent) { /* noop */ },
     onTabDown (e: KeyboardEvent) {
       VSelect.options.methods.onTabDown.call(this, e)
       this.updateSelf()

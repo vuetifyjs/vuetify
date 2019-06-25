@@ -50,6 +50,18 @@
     "background": {
       "header": "### Prominent w/ Background",
       "desc": "Toolbars can display a background as opposed to a solid color. This can be modified by using the **img** scoped slot and providing your own [v-img](/components/images) component. Backgrounds can be faded using a [v-app-bar](/components/app-bars#prominent-w-scroll-shrink-and-image)."
+    },
+    "extended": {
+      "header": "### Extended",
+      "desc": "Toolbars can generate extension even without slot."
+    },
+    "extension-height": {
+      "header": "### Extension height",
+      "desc": "Extension's height can be customized."
+    },
+    "collapse": {
+      "header": "### Collapse",
+      "desc": "Toolbars can collapse to save space on screen."
     }
   },
   "props": {

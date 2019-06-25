@@ -50,6 +50,7 @@ export default baseMixins.extend<options>().extend({
   computed: {
     classes (): object {
       return {
+        'v-expansion-panel-header--active': this.isActive,
         'v-expansion-panel-header--mousedown': this.hasMousedown,
       }
     },
