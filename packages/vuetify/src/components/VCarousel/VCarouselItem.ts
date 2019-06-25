@@ -47,7 +47,6 @@ export default baseMixins.extend({
     onBeforeEnter () { /* noop */ },
     onEnter () { /* noop */ },
     onAfterEnter () { /* noop */ },
-    onBeforeLeave () { /* noop */ },
     onEnterCancelled () { /* noop */ },
   },
 })

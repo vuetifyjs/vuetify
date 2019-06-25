@@ -352,22 +352,31 @@ export default mixins<options &
       ])
     },
     genClipPath (offsetX: number, lineWidth: number, id: string) {
+      const negative = Math.min(...this.points.map(x => x.value)) < 0
+
       const { maxY } = this.boundary
       const rounding = typeof this.smooth === 'number'
         ? this.smooth
         : this.smooth ? 2 : 0
+
+      const zero = genPoints([ 0, ...this.value ], this.boundary, this.type)[0].y
 
       return this.$createElement('clipPath', {
         attrs: {
           id: `${id}-clip`,
         },
       }, this.points.map(item => {
+        let height = 0
+
+        if (negative && item.value > 0) height = zero - item.y
+        else if (!negative || item.value < 0) height = maxY - item.y
+
         return this.$createElement('rect', {
           attrs: {
             x: item.x + offsetX,
-            y: 0,
+            y: negative ? item.value < 0 ? zero - (maxY - item.y) : zero : 0,
             width: lineWidth,
-            height: Math.max(maxY - item.y, 0),
+            height: Math.max(height, 0),
             rx: rounding,
             ry: rounding,
           },

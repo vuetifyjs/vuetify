@@ -33,7 +33,7 @@
 
     &--disabled
       pointer-events: none
-      
+
     &.v-treeview-node--shaped
       +treeview-shaped($treeview-node-height, $treeview-node-shaped-margin)
 
@@ -74,6 +74,9 @@
         right: 0
         top: 0
         transition: $primary-transition
+
+      &.v-treeview-node--active .v-treeview-node__content .v-icon
+        color: inherit
 
     &__content
       align-items: center
