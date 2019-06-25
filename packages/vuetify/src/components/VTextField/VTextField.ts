@@ -12,7 +12,7 @@ import VLabel from '../VLabel'
 import Loadable from '../../mixins/loadable'
 
 // Directives
-import Ripple from '../../directives/ripple'
+import ripple from '../../directives/ripple'
 
 // Utilities
 import { convertToUnit, keyCodes } from '../../util/helpers'
@@ -42,7 +42,7 @@ const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', '
 export default baseMixins.extend<options>().extend({
   name: 'v-text-field',
 
-  directives: { Ripple },
+  directives: { ripple },
 
   inheritAttrs: false,
 
