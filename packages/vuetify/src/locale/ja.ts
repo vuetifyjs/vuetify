@@ -29,4 +29,7 @@ export default {
     prev: '前のビジュアル',
     next: '次のビジュアル',
   },
+  calendar: {
+    moreEvents: 'さらに{0}',
+  },
 }

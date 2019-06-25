@@ -8,6 +8,9 @@
   .v-tab--disabled
     color: map-get($material, 'tabs')
 
+  .v-tab
+    +states($material)
+
 .v-tabs-bar.theme--dark
   .v-tab:not(.v-tab--active):not(.v-tab--disabled)
     opacity: .7
@@ -55,12 +58,6 @@
     right: 0
     top: 0
     transition: $primary-transition
-
-  &:hover:before
-    opacity: $tabs-item-hover-opacity
-
-  &:focus:before
-    opacity: $tabs-item-focus-opacity
 
   &:not(.v-tab-disabled)
     cursor: pointer
@@ -162,12 +159,12 @@
 .v-tab--active
   color: inherit
 
+  &.v-tab:not(:focus)::before
+    opacity: 0
+
   .v-icon
     color: inherit
 
 .v-tab--disabled
   pointer-events: none
   opacity: .5
-
-  &:before
-    opacity: 0

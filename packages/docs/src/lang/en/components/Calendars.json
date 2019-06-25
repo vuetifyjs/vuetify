@@ -1,6 +1,6 @@
 {
   "header": "# Calendar",
-  "headerText": "The `v-calendar` component is used to display information in a daily, weekly, or monthly view. The daily view has slots for all day or timed elements, and the weekly and monthly view has a slot for each day.",
+  "headerText": "The `v-calendar` component is used to display information in a daily, weekly, or monthly view. The daily view has slots for all day or timed elements, and the weekly and monthly view has a slot for each day. Optionally you can pass in an array of events and they will be rendered over the appropriate days and times.",
   "examples": {
     "usage": {
       "desc": "A calendar has a type and a value which determines what type of calendar is shown over what span of time."
@@ -11,7 +11,7 @@
     },
     "events": {
       "header": "### Events",
-      "desc": "This is an example of an event calendar with type of `month`. Click on an event to show event details."
+      "desc": "This is an example of an event calendar with type of `month`. This shows the bare minimum configuration, an array of events with `name`, `start` and `end` properties. `end` is optional, it defaults to the `start`. If the `start` has a time it's considered a timed event and will be shown accordingly in the day views. An event can span multiple days and will be rendered accordingly."
     },
     "weekly": {
       "header": "### Weekly",
@@ -25,6 +25,17 @@
   "props": {
     "start": "The starting date on the calendar (inclusive) in the format of `YYYY-MM-DD`. This may be ignored depending on the `type` of the calendar.",
     "end": "The ending date on the calendar (inclusive) in the format of `YYYY-MM-DD`. This may be ignored depending on the `type` of the calendar.",
+    "events": "An array of event objects with a property for a start timestamp and optionally a name and end timestamp. If an end timestamp is not given, the value of start will be used. If no name is given, you must provide an implementation for the `event` slot.",
+    "eventStart": "Set property of *event*'s start timestamp.",
+    "eventEnd": "Set property of *event*'s end timestamp.",
+    "eventHeight": "The height of an event in pixels in the `month` view and at the top of the `day` views.",
+    "eventColor": "A background color for all events or a function which accepts an event object passed to the calendar to return a color.",
+    "eventTextColor": "A text color for all events or a function which accepts an event object passed to the calendar to return a color.",
+    "eventName": "Set property of *event*'s displayed name, or a function which accepts an event object passed to the calendar as the first argument and a flag signalling whether the name is for a timed event (true) or an event over a day.",
+    "eventOverlapThreshold": "A value in minutes that's used to determine whether two timed events should be placed in column beside each other or should be treated as slightly overlapping events.",
+    "eventMore": "Whether the more 'button' is displayed on a calendar with too many events in a given day. It will say something like '5 more' and when clicked generates a `click:more` event.",
+    "eventMoreText": "The text to display in the more 'button' given the number of hidden events.",
+    "eventRipple": "Applies the `v-ripple` directive.",
     "weekdays": "Specifies which days of the week to display. To display Monday through Friday only, a value of `[1, 2, 3, 4, 5]` can be used. To display a week starting on Monday a value of `[1, 2, 3, 4, 5, 6, 0]` can be used.",
     "hideHeader": "If the header at the top of the `day` view should be visible.",
     "shortWeekdays": "Whether the short versions of a weekday should be used (Mon vs Monday).",
@@ -56,7 +67,10 @@
     "move": "A generic function that moves the calendar next (if amount is positive) or previous (if amount is negative).",
     "timeToY": "Converts a time to a pixel value on the y-axis for the `day` view. If the time is not in a valid format or if the calendar is not in the `day` view then false is returned.",
     "minutesToPixels": "Converts minutes to a pixel value on the y-axis for the `day` view. If the view is not `day` then -1 is returned.",
-    "scrollToTime": "Scrolls the scrollable area in the `day` view to the given time. If the time is not in a valid format or if the calendar is not in the `day` view then false is returned."
+    "scrollToTime": "Scrolls the scrollable area in the `day` view to the given time. If the time is not in a valid format or if the calendar is not in the `day` view then false is returned.",
+    "updateEventVisibility": "If the calendar has events and `event-more` is truthy the days with too many events contain a 'button' to represent how many events had to be hidden.",
+    "formatTime": "A utility function to take a timestamp object (at least has hour and minute properties) and generates a time as a string.",
+    "getFormatter": "A utility function given options to pass to Intl.DateTimeFormat and returns a function which can be given a Date to format as a string."
   },
   "scopedSlots": {
     "day": "The content that is placed in a `week` or `month` view. The day & time object is passed as the slot-scope.",
@@ -64,12 +78,14 @@
     "dayHeader": "The content that is placed in a `day` view in the top container. The day & time object is passed as the slot-scope.",
     "dayLabel": "The content that is placed in the day of the month space in the `week` or `month` view. The day & time object is passed as the slot-scope.",
     "dayMonth": "The content that is placed in the month space in the `week` or `month` view. The day & time object is passed as the slot-scope.",
-    "interval": "The content that is placed in the interval space in the `day` view. The day & time object is passed as the slot-scope."
+    "interval": "The content that is placed in the interval space in the `day` view. The day & time object is passed as the slot-scope.",
+    "event": "The content placed in an event. The following variables are available: event, day, outside, start, end, timed."
   },
   "events": {
     "input": "An alias to the `click:date` event used to support v-model.",
     "moved": "One of the functions `next`, `prev`, and `move` was called. The event passed is the day object calculated for the movement.",
     "change": "The range of days displayed on the calendar changed. This is triggered on initialization. The event passed is an object with start and end date objects.",
+    "click:more": "The click event on the `X more` button on views with too many events in a day.",
     "click:date": "The click event on the day of the month link. The event passed is the day & time object.",
     "contextmenu:date": "The right-click event on the day of the month link. The event passed is the day & time object.",
     "click:day": "The click event on a day. The event passed is the day object.",
@@ -101,6 +117,16 @@
     "mouseleave:interval": "The mouseleave event at a specific interval label in the `day` view. The event passed is the day & time object.",
     "touchstart:interval": "The touchstart event at a specific interval label in the `day` view. The event passed is the day & time object.",
     "touchmove:interval": "The touchmove event at a specific interval label in the `day` view. The event passed is the day & time object.",
-    "touchend:interval": "The touchend event at a specific interval label in the `day` view. The event passed is the day & time object."
+    "touchend:interval": "The touchend event at a specific interval label in the `day` view. The event passed is the day & time object.",
+    "click:event": "The click event on a specific event. The event passed is the day & time object.",
+    "contextmenu:event": "The right-click event on an event. The event passed is the day & time object.",
+    "mousedown:event": "The mousedown event on an event. The event passed is the day & time object.",
+    "mousemove:event": "The mousemove event on an event. The event passed is the day & time object.",
+    "mouseup:event": "The mouseup event on an event. The event passed is the day & time object.",
+    "mouseenter:event": "The mouseenter event on an event. The event passed is the day & time object.",
+    "mouseleave:event": "The mouseleave event on an event. The event passed is the day & time object.",
+    "touchstart:event": "The touchstart event on an event` view. The event passed is the day & time object.",
+    "touchmove:event": "The touchmove event aont an event` view. The event passed is the day & time object.",
+    "touchend:event": "The touchend event on am view. The event passed is the day & time object."
   }
 }

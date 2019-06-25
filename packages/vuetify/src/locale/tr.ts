@@ -29,4 +29,7 @@ export default {
     prev: 'Önceki görsel',
     next: 'Sonraki görsel',
   },
+  calendar: {
+    moreEvents: '{0} tane daha',
+  },
 }

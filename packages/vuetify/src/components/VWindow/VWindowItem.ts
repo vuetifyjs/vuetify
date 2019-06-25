@@ -111,7 +111,7 @@ export default baseMixins.extend<options>().extend(
     onBeforeEnter () {
       this.windowGroup.isActive = true
     },
-    onLeave (el: HTMLElement) {
+    onBeforeLeave (el: HTMLElement) {
       this.windowGroup.internalHeight = convertToUnit(el.clientHeight)
     },
     onEnterCancelled () {
@@ -122,7 +122,7 @@ export default baseMixins.extend<options>().extend(
 
       if (isBooted) this.done = done
 
-      requestAnimationFrame(() => {
+      this.$nextTick(() => {
         if (!this.computedTransition) return done()
 
         this.windowGroup.internalHeight = convertToUnit(el.clientHeight)
@@ -156,7 +156,7 @@ export default baseMixins.extend<options>().extend(
       on: {
         afterEnter: this.onAfterEnter,
         beforeEnter: this.onBeforeEnter,
-        leave: this.onLeave,
+        beforeLeave: this.onBeforeLeave,
         enter: this.onEnter,
         enterCancelled: this.onEnterCancelled,
       },
