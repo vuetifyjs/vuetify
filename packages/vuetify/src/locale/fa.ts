@@ -29,4 +29,7 @@ export default {
     prev: 'اسلاید قبلی',
     next: 'اسلاید بعدی',
   },
+  calendar: {
+    moreEvents: '{بیشتر {0',
+  },
 }

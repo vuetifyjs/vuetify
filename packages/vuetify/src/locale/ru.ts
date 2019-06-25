@@ -29,4 +29,7 @@ export default {
     prev: 'Предыдущий визуальный',
     next: 'Следующий визуальный',
   },
+  calendar: {
+    moreEvents: 'Еще {0}',
+  },
 }
