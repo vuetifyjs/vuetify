@@ -20,6 +20,7 @@
     "text": "frameworkOptions",
     "icon": "mdi-buffer",
     "children": [
+      { "new": true, "text": "accessibility", "to": "accessibility" },
       { "text": "aLaCarte", "to": "a-la-carte" },
       { "text": "grid", "to": "grid" },
       { "text": "gridLists", "to": "grid-lists" },
