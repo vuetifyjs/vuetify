@@ -202,4 +202,16 @@ describe('VSparkline.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should render component with label size and match a snapshot', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: [1, 7, 42],
+        showLabels: true,
+        labelSize: 14,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

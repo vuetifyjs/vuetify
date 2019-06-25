@@ -155,7 +155,7 @@ exports[`VSparkline.ts should render component with bars and custom label size a
 
 <svg width="100%"
      height="25%"
-     viewbox="0 0 300 75"
+     viewbox="0 0 300 93.75"
 >
   <defs>
     <linearGradient id="27"
@@ -363,7 +363,7 @@ exports[`VSparkline.ts should render component with bars and labels and match a 
 
 <svg width="100%"
      height="25%"
-     viewbox="0 0 300 75"
+     viewbox="0 0 300 83.75"
 >
   <defs>
     <linearGradient id="17"
@@ -598,6 +598,57 @@ exports[`VSparkline.ts should render component with gradient and match a snapsho
 
 `;
 
+exports[`VSparkline.ts should render component with label size and match a snapshot 1`] = `
+
+<svg stroke-width="4"
+     width="100%"
+     height="25%"
+     viewbox="0 0 300 92.5"
+     class="primary--text"
+>
+  <defs>
+    <linearGradient id="29"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="primary"
+      >
+      </stop>
+    </linearGradient>
+  </defs>
+  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
+    <text x="8"
+          y="81"
+          font-size="14"
+    >
+      1
+    </text>
+    <text x="150"
+          y="81"
+          font-size="14"
+    >
+      7
+    </text>
+    <text x="292"
+          y="81"
+          font-size="14"
+    >
+      42
+    </text>
+  </g>
+  <path id="29"
+        d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
+        fill="none"
+        stroke="url(#29)"
+  >
+  </path>
+</svg>
+
+`;
+
 exports[`VSparkline.ts should render component with line width and match a snapshot 1`] = `
 
 <svg stroke-width="42"
@@ -665,7 +716,7 @@ exports[`VSparkline.ts should render component with string labels and match a sn
 <svg stroke-width="4"
      width="100%"
      height="25%"
-     viewbox="0 0 300 75"
+     viewbox="0 0 300 83.75"
      class="primary--text"
 >
   <defs>
@@ -683,17 +734,20 @@ exports[`VSparkline.ts should render component with string labels and match a sn
   </defs>
   <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
     <text x="8"
-          y="73"
+          y="74"
+          font-size="7"
     >
       1
     </text>
     <text x="150"
-          y="73"
+          y="74"
+          font-size="7"
     >
       7
     </text>
     <text x="292"
-          y="73"
+          y="74"
+          font-size="7"
     >
       42
     </text>
@@ -713,7 +767,7 @@ exports[`VSparkline.ts should render component with string labels and match a sn
 <svg stroke-width="4"
      width="100%"
      height="25%"
-     viewbox="0 0 300 75"
+     viewbox="0 0 300 83.75"
      class="primary--text"
 >
   <defs>
@@ -731,17 +785,20 @@ exports[`VSparkline.ts should render component with string labels and match a sn
   </defs>
   <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
     <text x="8"
-          y="73"
+          y="74"
+          font-size="7"
     >
       2
     </text>
     <text x="150"
-          y="73"
+          y="74"
+          font-size="7"
     >
       8
     </text>
     <text x="292"
-          y="73"
+          y="74"
+          font-size="7"
     >
       43
     </text>
@@ -761,7 +818,7 @@ exports[`VSparkline.ts should render component with string labels and match a sn
 <svg stroke-width="4"
      width="100%"
      height="25%"
-     viewbox="0 0 300 75"
+     viewbox="0 0 300 83.75"
      class="primary--text"
 >
   <defs>
@@ -779,17 +836,20 @@ exports[`VSparkline.ts should render component with string labels and match a sn
   </defs>
   <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
     <text x="8"
-          y="73"
+          y="74"
+          font-size="7"
     >
       foo
     </text>
     <text x="150"
-          y="73"
+          y="74"
+          font-size="7"
     >
       bar
     </text>
     <text x="292"
-          y="73"
+          y="74"
+          font-size="7"
     >
       baz
     </text>
