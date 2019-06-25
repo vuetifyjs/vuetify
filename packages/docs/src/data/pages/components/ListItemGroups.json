@@ -28,10 +28,22 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "selection-controls",
-            "flat"
+            "simple/flat",
+            "simple/multiple",
+            "simple/mandatory",
+            "simple/active-class",
+            "intermediate/selection-controls"
           ]
         }
       ]
