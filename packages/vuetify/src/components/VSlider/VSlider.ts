@@ -455,22 +455,23 @@ export default mixins<options &
     onThumbMouseDown (e: MouseEvent) {
       this.oldValue = this.internalValue
       this.keyPressed = 2
-      const options = { passive: true }
+      const options = { passive: true, capture: true }
       this.isActive = true
 
       if ('touches' in e) {
         this.app.addEventListener('touchmove', this.onMouseMove, options)
-        addOnceEventListener(this.app, 'touchend', this.onSliderMouseUp)
+        addOnceEventListener(this.app, 'touchend', this.onSliderMouseUp, options)
       } else {
         this.app.addEventListener('mousemove', this.onMouseMove, options)
-        addOnceEventListener(this.app, 'mouseup', this.onSliderMouseUp)
+        addOnceEventListener(this.app, 'mouseup', this.onSliderMouseUp, options)
       }
 
       this.$emit('start', this.internalValue)
     },
-    onSliderMouseUp () {
+    onSliderMouseUp (e: Event) {
+      e.stopPropagation()
       this.keyPressed = 0
-      const options = { passive: true }
+      const options = { passive: true, capture: true }
       this.app.removeEventListener('touchmove', this.onMouseMove, options)
       this.app.removeEventListener('mousemove', this.onMouseMove, options)
 
