@@ -29,7 +29,7 @@ export default VTextField.extend({
   },
 
   data: () => ({
-    lazyFileValue: [] as File[],
+    lazyFileValue: [] as any[],
   }),
 
   computed: {
@@ -72,7 +72,7 @@ export default VTextField.extend({
 
       input.data!.attrs!.multiple = this.multiple
       input.data!.on!.change = (e: any) => {
-        this.lazyFileValue = e.target.files
+        this.lazyFileValue = [...e.target.files]
       }
 
       return [
