@@ -204,7 +204,8 @@
           description = this.$t(description)
         }
 
-        const prepend = process.env.NODE_ENV === 'development' ? devPrepend : ''
+        // const prepend = process.env.NODE_ENV === 'development' ? devPrepend : ''
+        const prepend = ''
 
         return `${prepend}${description}`
       },

@@ -85,23 +85,26 @@
 
   const propProps = [
     {
+      hideTitle: true,
       value: 'name',
-      class: 'xs4',
+      class: 'xs8',
     },
     {
+      hideTitle: true,
+      value: 'type',
+      class: 'xs4 text-sm-right',
+    },
+    {
+      hideTitle: true,
       value: 'description',
       type: 'markdown',
-      class: 'xs8 text-sm-right',
+      class: 'xs12 grey lighten-4',
     },
-    {
-      value: 'default',
-      type: 'inline-markup',
-      class: 'xs12 sm8 grey lighten-4',
-    },
-    {
-      value: 'type',
-      class: 'xs12 sm4 text-sm-right grey lighten-4',
-    },
+    // {
+    //   value: 'default',
+    //   type: 'inline-markup',
+    //   class: 'xs12 sm8 grey lighten-4',
+    // },
   ]
 
   export default {

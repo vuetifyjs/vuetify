@@ -95,6 +95,7 @@ module.exports = {
     props: [
       {
         name: 'headers',
+        type: 'TableHeader[]',
         example: TableHeader,
       },
     ].concat(DataIteratorProps).concat(DataProps),
