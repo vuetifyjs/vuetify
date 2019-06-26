@@ -308,10 +308,12 @@ export function prevDay (timestamp: VTimestamp): VTimestamp {
   return timestamp
 }
 
-export function relativeDays (timestamp: VTimestamp,
-  mover: VTimestampOperation = nextDay, days = 1): VTimestamp {
+export function relativeDays (
+  timestamp: VTimestamp,
+  mover: VTimestampOperation = nextDay,
+  days = 1
+): VTimestamp {
   while (--days >= 0) mover(timestamp)
-
   return timestamp
 }
 
