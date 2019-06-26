@@ -4,6 +4,12 @@ import './VFileInput.sass'
 // Extensions
 import VTextField from '../VTextField'
 
+// Types
+import { PropValidator } from 'vue/types/options'
+
+// Helpers
+import { wrapInArray } from '../../util/helpers'
+
 export default VTextField.extend({
   name: 'v-file-input',
 
@@ -26,6 +32,10 @@ export default VTextField.extend({
       type: String,
       default: 'file',
     },
+    fileValue: {
+      type: [Object, Array],
+      default: () => ([]),
+    } as PropValidator<File | File[]>,
   },
 
   data: () => ({
@@ -50,6 +60,16 @@ export default VTextField.extend({
       if (!this.isDirty) return this.placeholder
 
       return this.lazyFileValue.map(file => file.name).join(', ')
+    },
+  },
+
+  watch: {
+    lazyFileValue () {
+      this.$emit('update:fileValue', this.lazyFileValue)
+    },
+    fileValue () {
+      this.lazyFileValue = wrapInArray(this.fileValue)
+      this.internalValue = null // No way to "push" update from JS to file input
     },
   },
 
