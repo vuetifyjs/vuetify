@@ -64,6 +64,11 @@
     "description": "Get help and support from the creator of Vuetify, John Leider",
     "keywords": "consulting, support, help"
   },
+  "framework/accessibility": {
+    "title": "Web accessibility",
+    "description": "See examples and the advantages of having accessibility (a11y) support in Vuetify components.",
+    "keywords": "a11y, accessibility, usability"
+  },
   "framework/a-la-carte": {
     "title": "A La Carte",
     "description": "Get ready for automatic treeshaking. Use only the components you need. Single component importing only pulls in what you use.",
