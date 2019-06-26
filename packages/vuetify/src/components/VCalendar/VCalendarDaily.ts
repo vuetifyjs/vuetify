@@ -73,7 +73,7 @@ export default CalendarWithIntervals.extend({
       return this.days.map(this.genHeadDay)
     },
     genHeadDay (day: VTimestamp, index: number): VNode {
-      const slot = this.$scopedSlots.dayHeader
+      const slot = this.$scopedSlots['day-header']
 
       return this.$createElement('div', {
         key: day.date,
@@ -157,7 +157,7 @@ export default CalendarWithIntervals.extend({
       return this.days.map(this.genDay)
     },
     genDay (day: VTimestamp, index: number): VNode {
-      const slot = this.$scopedSlots.dayBody
+      const slot = this.$scopedSlots['day-body']
       const scope = this.getSlotScope(day)
 
       return this.$createElement('div', {
