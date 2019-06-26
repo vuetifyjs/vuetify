@@ -1,0 +1,14 @@
+{
+  "header": "# All about _app_",
+  "headerText": "In Vuetify, the `v-app` component and the **app** help bootstrap your application with the proper sizing around `v-content`. This allows you to create truly unique interfaces without the hassle of managing your layout. The `v-app` component is **REQUIRED** for all applications. This is the mount point for many of Vuetify's components and functionality. This also serves to ensure proper cross-browser support for certain click events and should only be used within an application once.",
+  "markupHeader": "## Default application markup",
+  "markupText": "This is an example of the default application markup for Vuetify. You can place your layout elements anywhere, as long as you apply the **app** property. The key component in all of this is the `v-content` element. This will be dynamically sized depending upon the structure of your designated **app** components. You can use combinations of any or all of the above components including [v-bottom-navigation](/components/bottom-navigation).",
+  "markupText2": "When using [vue-router](https://router.vuejs.org/) it is recommended that you place your views inside `v-content`.",
+  "alert1": "In order for your application to work properly, you **must** wrap it in a `v-app` component. This component is required for ensuring proper **cross-browser compatibility**. It can exist **anywhere** inside the body, but must be the parent of **ALL** Vuetify components.",
+  "alert2": "Applying the **app** prop automatically applies position: **fixed** to the layout element. If your application calls for an _absolute_ element, you can overwrite this functionality using the **absolute** prop.",
+  "appHeader": "## Application service",
+  "appText": "The **application service** is used to configure your Vuetify layout. It does so through a special **app** prop that exists on certain layout components such as [v-navigation-drawer](/components/navigation-drawers) and [v-toolbar](/components/toolbars). This property tells the service to account for that components dimensions within your layout. It then works in conjunction with `v-content` to ensure your content area is always propertly sized.",
+  "header2": "## Application service object",
+  "headerText1": "The **application-service** has a number of properties that can be accessed:",
+  "headerText2": "These values are automatically updated when you add new components with the **app** prop. They are not editable and exist in a _READONLY_ state. You can access these values by referencing the application property on the **$vuetify** object."
+}

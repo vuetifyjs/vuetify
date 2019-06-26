@@ -1,0 +1,70 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "alert",
+          "lang": "sassAlert1",
+          "value": "info"
+        },
+        {
+          "type": "heading",
+          "lang": "sassHeader2"
+        },
+        {
+          "type": "text",
+          "lang": "sassText2"
+        },
+        {
+          "type": "markup",
+          "value": "bash_yarn_install_sass"
+        },
+        {
+          "type": "text",
+          "lang": "sassText3"
+        },
+        {
+          "type": "markup",
+          "value": "sass_import_vuetify_css"
+        },
+        {
+          "type": "text",
+          "lang": "sassText3a"
+        },
+        {
+          "type": "markup",
+          "value": "js_vue_config_sass_variables"
+        },
+        {
+          "type": "text",
+          "lang": "sassText4"
+        },
+        {
+          "type": "alert",
+          "lang": "sassAlert2",
+          "value": "warning"
+        },
+        {
+          "type": "text",
+          "lang": "sassText5"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "styles/colors",
+            "getting-started/pre-made-layouts",
+            "themes/premium"
+          ]
+        }
+      ]
+    }
+  ]
+}

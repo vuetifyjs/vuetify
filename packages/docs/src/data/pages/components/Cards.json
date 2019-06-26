@@ -68,7 +68,7 @@
           "value": [
             "components/buttons",
             "components/images",
-            "framework/typography"
+            "styles/typography"
           ]
         }
       ]

@@ -18,60 +18,18 @@
     ]
   },
   {
-    "group": "framework",
-    "text": "frameworkOptions",
-    "icon": "mdi-buffer",
+    "group": "customization",
+    "text": "customization",
+    "icon": "mdi-cogs",
     "children": [
       { "new": true, "text": "accessibility", "to": "accessibility" },
       { "text": "aLaCarte", "to": "a-la-carte" },
-      { "text": "grid", "to": "grid" },
-      { "text": "gridLists", "to": "grid-lists" },
-      {
-        "group": "framework",
-        "text": "services",
-        "children": [
-          { "text": "application", "to": "application" },
-          { "text": "breakpoints", "to": "breakpoints" },
-          { "text": "icons", "to": "icons" },
-          { "text": "i18n", "to": "internationalization" },
-          { "text": "scroll", "to": "scroll" },
-          { "text": "theme", "to": "theme" }
-        ]
-      },
-      {
-        "group": "framework",
-        "text": "layout",
-        "children": [
-          { "text": "aspectRatios", "to": "aspect-ratios" },
-          { "text": "preMadeLayouts", "to": "pre-made-layouts" }
-        ]
-      },
-      {
-        "group": "framework",
-        "text": "styles",
-        "children": [
-          { "text": "colors", "to": "colors" },
-          { "text": "content", "to": "content" },
-          { "text": "typography", "to": "typography" }
-        ]
-      },
-      {
-        "group": "framework",
-        "text": "helperClasses",
-        "children": [
-          { "text": "display", "to": "display" },
-          { "text": "elevation", "to": "elevation" },
-          { "text": "spacing", "to": "spacing" },
-          { "text": "textAlignment", "to": "alignment" }
-        ]
-      },
-      {
-        "group": "framework",
-        "text": "motion",
-        "children": [
-          { "text": "transitions", "to": "transitions" }
-        ]
-      }
+      { "text": "breakpoints", "to": "breakpoints" },
+      { "text": "icons", "to": "icons" },
+      { "text": "i18n", "to": "internationalization" },
+      { "new": true, "text": "rtl", "to": "rtl" },
+      { "new": true, "text": "sass-variables", "to": "sass-variables" },
+      { "text": "theme", "to": "theme" }
     ]
   },
   {
@@ -81,6 +39,8 @@
     "children": [
       { "text": "apiExplorer", "subtext": "browseAllComponents", "to": "api-explorer" },
       { "text": "alerts", "to": "alerts" },
+      { "text": "application", "to": "application" },
+      { "text": "aspectRatios", "to": "aspect-ratios" },
       { "text": "avatars", "to": "avatars" },
       { "text": "badges", "to": "badges" },
       { "text": "banners", "to": "banners", "new": true },
@@ -106,6 +66,8 @@
       { "text": "dividers", "to": "dividers" },
       { "text": "expansionPanels", "to": "expansion-panels" },
       { "text": "footer", "to": "footer" },
+      { "text": "grid", "to": "grids" },
+      { "text": "gridLists", "to": "grid-lists" },
       {
         "group": "components",
         "text": "groups",
@@ -182,6 +144,22 @@
     ]
   },
   {
+    "group": "styles",
+    "text": "styles",
+    "icon": "mdi-palette",
+    "children": [
+      { "text": "colors", "to": "colors" },
+      { "text": "content", "to": "content" },
+      { "text": "display", "to": "display" },
+      { "text": "elevation", "to": "elevation" },
+      { "text": "spacing", "to": "spacing" },
+      { "text": "textAlignment", "to": "alignment" },
+      { "text": "typography", "to": "typography" },
+      { "text": "transitions", "to": "transitions" },
+      { "text": "scroll", "to": "scroll" }
+    ]
+  },
+  {
     "group": "directives",
     "text": "directives",
     "icon": "mdi-function",
@@ -194,7 +172,7 @@
   },
   {
     "text": "premiumThemes",
-    "icon": "mdi-palette",
+    "icon": "mdi-vuetify",
     "to": "themes/premium"
   }
 ]

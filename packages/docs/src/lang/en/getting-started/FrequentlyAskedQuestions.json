@@ -51,8 +51,8 @@
       "q": "### How do I use Font Awesome Icons or Material Design Icons (mdi)",
       "a": "You must add the fonts to your index.html or otherwise import them into your project.",
       "a2": [
-        "**MDI**: [Material Design Icons](/framework/icons#install-material-design-icons)",
-        "**FA**: [Font Awesome](/framework/icons#install-font-awesome-5-icons)"
+        "**MDI**: [Material Design Icons](/customization/icons#install-material-design-icons)",
+        "**FA**: [Font Awesome](/customization/icons#install-font-awesome-5-icons)"
       ]
     },
     {
@@ -88,7 +88,7 @@
     },
     {
       "q": "### The vuetify-loader doesn't load all components",
-      "a": "The vuetify-loader has limitations in _dynamic_ components. Make sure to checkout the [limitations](/framework/a-la-carte#limitations) section for more information."
+      "a": "The vuetify-loader has limitations in _dynamic_ components. Make sure to checkout the [limitations](/customization/a-la-carte#limitations) section for more information."
     }
   ]
 }

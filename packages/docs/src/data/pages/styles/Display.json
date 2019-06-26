@@ -97,7 +97,7 @@
           "value": [
             "framework/alignment",
             "directives/resizing",
-            "framework/breakpoints"
+            "customization/breakpoints"
           ]
         }
       ]

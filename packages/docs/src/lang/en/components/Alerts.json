@@ -39,7 +39,7 @@
     },
     "transition": {
       "header": "### Transition",
-      "desc": "The `transition` prop allows you to apply a transition to the alert which is viewable when the component hides and shows. You can use any of Vuetifies prebuilt transitions found [here](/framework/transitions#motion) or you may [create your own](/framework/transitions#create-your-own)."
+      "desc": "The `transition` prop allows you to apply a transition to the alert which is viewable when the component hides and shows. You can use any of Vuetifies prebuilt transitions found [here](/styles/transitions#motion) or you may [create your own](/styles/transitions#create-your-own)."
     },
     "type": {
       "header": "### Type",

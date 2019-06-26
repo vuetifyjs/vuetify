@@ -90,36 +90,6 @@
       "children": [
         {
           "type": "heading",
-          "lang": "bidHeader"
-        },
-        {
-          "type": "text",
-          "lang": "bidText1"
-        },
-        {
-          "type": "markup",
-          "value": "js_vuetify_rtl"
-        },
-        {
-          "type": "img",
-          "lang": "bidText2",
-          "value": "accessibility/rtl.png"
-        },
-        {
-          "type": "text",
-          "lang": "bidText3"
-        },
-        {
-          "type": "markup",
-          "value": "html_vuetify_dynamic_rtl"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "heading",
           "lang": "resourcesHeader"
         },
         {
