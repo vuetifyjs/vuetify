@@ -18,7 +18,7 @@ import Routable from '../../mixins/routable'
 import Sizeable from '../../mixins/sizeable'
 
 // Directives
-import Ripple from '../../directives/ripple'
+import ripple from '../../directives/ripple'
 
 // Utilities
 import { breaking } from '../../util/console'
@@ -37,7 +37,7 @@ export default mixins(
 ).extend({
   name: 'v-chip',
 
-  directives: { Ripple },
+  directives: { ripple },
 
   props: {
     activeClass: {
