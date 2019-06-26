@@ -70,10 +70,6 @@ export default baseMixins.extend<options>().extend({
     attach: {
       default: false,
     } as PropValidator<string | boolean | Element | VNode>,
-    browserAutocomplete: {
-      type: String,
-      default: 'on',
-    },
     cacheItems: Boolean,
     chips: Boolean,
     clearable: Boolean,

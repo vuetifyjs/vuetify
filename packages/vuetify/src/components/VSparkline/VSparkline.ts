@@ -284,17 +284,18 @@ export default mixins<options &
         ref: 'path',
       })
     },
-    genText (item: SparklineText, index: number) {
-      const children = this.$scopedSlots.label
+    genLabel (item: SparklineText, index: number) {
+      return this.$scopedSlots.label
         ? this.$scopedSlots.label({ index, value: item.value })
         : item.value
-
+    },
+    genText (item: SparklineText, index: number) {
       return this.$createElement('text', {
         attrs: {
           x: item.x,
           y: this.textY,
         },
-      }, [children])
+      }, [this.genLabel(item, index)])
     },
     genBar () {
       if (!this.value || this.totalBars < 2) return undefined as never
@@ -351,22 +352,31 @@ export default mixins<options &
       ])
     },
     genClipPath (offsetX: number, lineWidth: number, id: string) {
+      const negative = Math.min(...this.points.map(x => x.value)) < 0
+
       const { maxY } = this.boundary
       const rounding = typeof this.smooth === 'number'
         ? this.smooth
         : this.smooth ? 2 : 0
+
+      const zero = genPoints([ 0, ...this.value ], this.boundary, this.type)[0].y
 
       return this.$createElement('clipPath', {
         attrs: {
           id: `${id}-clip`,
         },
       }, this.points.map(item => {
+        let height = 0
+
+        if (negative && item.value > 0) height = zero - item.y
+        else if (!negative || item.value < 0) height = maxY - item.y
+
         return this.$createElement('rect', {
           attrs: {
             x: item.x + offsetX,
-            y: 0,
+            y: negative ? item.value < 0 ? zero - (maxY - item.y) : zero : 0,
             width: lineWidth,
-            height: Math.max(maxY - item.y, 0),
+            height: Math.max(height, 0),
             rx: rounding,
             ry: rounding,
           },
@@ -386,14 +396,14 @@ export default mixins<options &
     genBarLabels (props: BarText): VNode {
       const offsetX = props.offsetX || 0
 
-      const children = props.points.map(item => (
+      const children = this.parsedLabels.map((item, i) => (
         this.$createElement('text', {
           attrs: {
             x: item.x + offsetX + this._lineWidth / 2,
             y: props.boundary.maxY + (Number(this.labelSize) || 7),
             'font-size': Number(this.labelSize) || 7,
           },
-        }, item.value.toString())
+        }, [this.genLabel(item, i)])
       ))
 
       return this.genG(children)

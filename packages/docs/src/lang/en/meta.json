@@ -19,6 +19,11 @@
     "description": "Understand the layout and structure of your application. Check out examples.",
     "keywords": "templates, vuetify"
   },
+  "getting-started/unit-testing": {
+    "title": "Unit testing",
+    "description": "Learn how to create unit tests using Vuetify components in your Vue application.",
+    "keywords": "unit testing vuetify, testing vuetify"
+  },
   "getting-started/why-vuetify": {
     "title": "Why Vuetify?",
     "description": "Why you should choose Vuetify over other Vue frameworks.",
@@ -58,6 +63,11 @@
     "title": "Consulting & Support",
     "description": "Get help and support from the creator of Vuetify, John Leider",
     "keywords": "consulting, support, help"
+  },
+  "framework/accessibility": {
+    "title": "Web accessibility",
+    "description": "See examples and the advantages of having accessibility (a11y) support in Vuetify components.",
+    "keywords": "a11y, accessibility, usability"
   },
   "framework/a-la-carte": {
     "title": "A La Carte",

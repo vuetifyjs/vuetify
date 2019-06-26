@@ -40,6 +40,7 @@ declare global {
       class?: string
       circle?: boolean
       touched?: boolean
+      isTouch?: boolean
     }
     _onScroll?: {
       callback: EventListenerOrEventListenerObject

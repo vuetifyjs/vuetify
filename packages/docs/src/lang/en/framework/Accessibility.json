@@ -1,0 +1,26 @@
+{
+  "header": "# Web accessibility",
+  "headerText": "Web accessibility **(a11y for short)**, is the inclusive practice of ensuring there are no barriers that prevent the interaction with, or access to, websites on the World Wide Web by people with disabilities. Vuetify components are built to provide keyboard interactions for all mouse-based actions and utilize HTML5 semantic elements where applicatable.",
+  "accessibilityHeader": "## Material Design Accessibility",
+  "accessibilityText": "Google provides a detailed overview on how their components are created with a11y in mind. They also provide examples of how you can ensure that you are using best practices when creating applications (beyond what it supported by default with Vuetify). You can find more information about [implementing accessibility](https://material.io/design/usability/accessibility.html) on the specification site.",
+  "activatorHeader": "## Activator scoped slot props",
+  "activatorText1": "Vuetify uses activator slots for many components such as `v-menu`, `v-dialog` and more. In some instances these activator elements should have specific a11y attributes that associate them with their corresponding content. In order to achieve this, we pass down the necessary a11y options through a scoped slot.",
+  "activatorText2": "When the activator element is rendered, it will now contain the bound a11y attributes:",
+  "focusHeader1": "## Focus management and keyboard interactions",
+  "focusText1": "Beyond attributes, components such as `v-menu` also support interaction by pressing <kbd>↑</kbd> and <kbd>↓</kbd> for navigating between options.",
+  "focusHeader2": "#### v-menu",
+  "focusText2": "When inside of a `v-menu`, `v-list-item` will be automatically configured to have a role of **menuitem**. Navigate to the [Menu](/components/menus) for more information on the components features.",
+  "focusHeader3": "#### v-list-item-group",
+  "focusText3": "The `v-list-item-group` component makes `v-list-item` interactable and navigatable when pressing the <kbd>tab</kbd> key. It also configures `v-list-item` to have a role of **listitem**. Navigate to the [List-item group](/components/list-item-groups) for more information on the components features.",
+  "bidHeader": "## Bidirectionality (RTL)",
+  "bidText1": "Vuetify supports RTL **(right to left)** languages and can be activated by using the **rtl** option when bootstrapping your application. You can find additional information about [implementing bidrectionality](https://material.io/design/usability/bidirectionality.html) on the specification site.",
+  "bidText2": "RTL Form",
+  "bidText3": "You can also change this dynamically at any point by modifying the **rtl** value on the vuetify object.",
+  "resourcesHeader": "## Additional Resources",
+  "resourcesText1": "While Vuetify attempts to make a11y as easy as posisble in your application, there are times where additional information is needed. Below you can find a list of helpful resources.",
+  "resourcesText2": [
+    "[W3C Web Accessibility Initiative](https://www.w3.org/WAI/)",
+    "[WAI-ARIA Authoring Practices](https://www.w3.org/TR/wai-aria-practices-1.1/)",
+    "[The A11Y Project](https://a11yproject.com/)"
+  ]
+}

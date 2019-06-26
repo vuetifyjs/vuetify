@@ -12,7 +12,7 @@ import VLabel from '../VLabel'
 import Loadable from '../../mixins/loadable'
 
 // Directives
-import Ripple from '../../directives/ripple'
+import ripple from '../../directives/ripple'
 
 // Utilities
 import { convertToUnit, keyCodes } from '../../util/helpers'
@@ -42,14 +42,13 @@ const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', '
 export default baseMixins.extend<options>().extend({
   name: 'v-text-field',
 
-  directives: { Ripple },
+  directives: { ripple },
 
   inheritAttrs: false,
 
   props: {
     appendOuterIcon: String,
     autofocus: Boolean,
-    browserAutocomplete: String,
     clearable: Boolean,
     clearIcon: {
       type: String,
@@ -190,6 +189,11 @@ export default baseMixins.extend<options>().extend({
     /* istanbul ignore next */
     if (this.$attrs.hasOwnProperty('box')) {
       breaking('box', 'filled', this)
+    }
+
+    /* istanbul ignore next */
+    if (this.$attrs.hasOwnProperty('browser-autocomplete')) {
+      breaking('browser-autocomplete', 'autocomplete', this)
     }
 
     /* istanbul ignore if */
@@ -357,7 +361,6 @@ export default baseMixins.extend<options>().extend({
         attrs: {
           'aria-label': !this.id && this.label, // Label `for` will be set if we have an id
           ...this.$attrs,
-          autocomplete: this.browserAutocomplete,
           autofocus: this.autofocus,
           disabled: this.disabled,
           id: this.id,

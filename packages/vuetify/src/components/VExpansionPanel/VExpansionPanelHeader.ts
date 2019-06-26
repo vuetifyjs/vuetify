@@ -7,7 +7,7 @@ import VIcon from '../VIcon'
 import { inject as RegistrableInject } from '../../mixins/registrable'
 
 // Directives
-import Ripple from '../../directives/ripple'
+import ripple from '../../directives/ripple'
 
 // Utilities
 import { getSlot } from '../../util/helpers'
@@ -28,7 +28,7 @@ interface options extends ExtractVue<typeof baseMixins> {
 export default baseMixins.extend<options>().extend({
   name: 'v-expansion-panel-header',
 
-  directives: { Ripple },
+  directives: { ripple },
 
   props: {
     disableIconRotate: Boolean,
@@ -50,6 +50,7 @@ export default baseMixins.extend<options>().extend({
   computed: {
     classes (): object {
       return {
+        'v-expansion-panel-header--active': this.isActive,
         'v-expansion-panel-header--mousedown': this.hasMousedown,
       }
     },

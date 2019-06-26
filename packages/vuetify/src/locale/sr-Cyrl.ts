@@ -29,4 +29,7 @@ export default {
     prev: 'Превиоус висуал',
     next: 'Нект висуал',
   },
+  calendar: {
+    moreEvents: '{0} море',
+  },
 }

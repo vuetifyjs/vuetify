@@ -149,12 +149,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   methods: {
-    // Prevent focus to match md spec
     click (e: MouseEvent): void {
-      !this.fab &&
-      e.detail &&
-      this.$el.blur()
-
       this.$emit('click', e)
 
       this.btnToggle && this.toggle()

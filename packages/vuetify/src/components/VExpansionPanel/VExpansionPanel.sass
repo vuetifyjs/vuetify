@@ -18,6 +18,10 @@
       .v-icon
         color: map-deep-get($material, 'icons', 'active')
 
+  &.v-expansion-panels--focusable
+    .v-expansion-panel-header
+      +states($material)
+
 // Block
 .v-expansion-panels
   border-radius: $expansion-panel-border-radius
@@ -160,15 +164,6 @@
     flex: 1 1 auto
 
 // Modifier
-.v-expansion-panels--focusable
-  .v-expansion-panel--active
-    .v-expansion-panel-header
-      &::before
-        opacity: 0.12
-
-      &:focus::before
-        opacity: 0.2
-
 .v-expansion-panels--accordion
   .v-expansion-panel
     margin-top: 0

@@ -29,4 +29,7 @@ export default {
     prev: 'Visual sebelumnya',
     next: 'Visual selanjutnya',
   },
+  calendar: {
+    moreEvents: '{0} lagi',
+  },
 }

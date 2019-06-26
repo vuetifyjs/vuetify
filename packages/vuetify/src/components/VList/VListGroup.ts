@@ -14,7 +14,7 @@ import Toggleable from '../../mixins/toggleable'
 import { inject as RegistrableInject } from '../../mixins/registrable'
 
 // Directives
-import Ripple from '../../directives/ripple'
+import ripple from '../../directives/ripple'
 
 // Transitions
 import { VExpandTransition } from '../transitions'
@@ -47,7 +47,7 @@ interface options extends ExtractVue<typeof baseMixins> {
 export default baseMixins.extend<options>().extend({
   name: 'v-list-group',
 
-  directives: { Ripple },
+  directives: { ripple },
 
   props: {
     activeClass: {
