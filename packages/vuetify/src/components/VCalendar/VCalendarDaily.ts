@@ -204,7 +204,9 @@ export default CalendarWithIntervals.extend({
 
       return this.$createElement('div', data, this.genIntervalLabels())
     },
-    genIntervalLabels (): VNode[] {
+    genIntervalLabels (): VNode[] | null {
+      if (!this.intervals.length) return null
+
       return this.intervals[0].map(this.genIntervalLabel)
     },
     genIntervalLabel (interval: VTimestamp): VNode {
