@@ -343,8 +343,14 @@ export function getWeekdaySkips (weekdays: number[]): number[] {
   return skips
 }
 
-export function createDayList (start: VTimestamp, end: VTimestamp, now: VTimestamp,
-  weekdaySkips: number[], max = 42, min = 0): VTimestamp[] {
+export function createDayList (
+  start: VTimestamp,
+  end: VTimestamp,
+  now: VTimestamp,
+  weekdaySkips: number[],
+  max = 42,
+  min = 0
+): VTimestamp[] {
   const stop = getDayIdentifier(end)
   const days: VTimestamp[] = []
   let current = copyTimestamp(start)
@@ -352,7 +358,7 @@ export function createDayList (start: VTimestamp, end: VTimestamp, now: VTimesta
   let stopped = currentIdentifier === stop
 
   if (stop < getDayIdentifier(start)) {
-    return days
+    throw new Error('End date is earlier than start date.')
   }
 
   while ((!stopped || days.length < min) && days.length < max) {
@@ -368,6 +374,8 @@ export function createDayList (start: VTimestamp, end: VTimestamp, now: VTimesta
     days.push(day)
     current = relativeDays(current, nextDay, weekdaySkips[current.weekday])
   }
+
+  if (!days.length) throw new Error('No dates found using specified start date, end date, and weekdays.')
 
   return days
 }
