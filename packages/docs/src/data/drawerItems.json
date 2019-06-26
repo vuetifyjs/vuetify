@@ -172,7 +172,7 @@
   },
   {
     "text": "premiumThemes",
-    "icon": "mdi-cards",
+    "icon": "mdi-vuetify",
     "to": "themes/premium"
   }
 ]

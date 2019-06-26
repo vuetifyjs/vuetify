@@ -12,11 +12,6 @@
     "description": "开始使用Vue和Vuetify，使用Vue-cli-3脚手架，支持现有的项目和创建新项目。",
     "keywords": "快速启动，vuetify模板，安装vuetify"
   },
-  "getting-started/starter-templates": {
-    "title": "默认模板启动项目",
-    "description": "了解应用程序的布局和结构。 查看示例。",
-    "keywords": "模板，vuetify"
-  },
   "getting-started/why-vuetify": {
     "title": "为什么选择Vuetify？",
     "description": "你选择Vuetify而不是其他框架的百万个理由！！"
