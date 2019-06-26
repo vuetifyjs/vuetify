@@ -19,6 +19,11 @@
     "description": "Understand the layout and structure of your application. Check out examples.",
     "keywords": "templates, vuetify"
   },
+  "getting-started/unit-testing": {
+    "title": "Unit testing",
+    "description": "Learn how to create unit tests using Vuetify components in your Vue application.",
+    "keywords": "unit testing vuetify, testing vuetify"
+  },
   "getting-started/why-vuetify": {
     "title": "Why Vuetify?",
     "description": "Why you should choose Vuetify over other Vue frameworks.",

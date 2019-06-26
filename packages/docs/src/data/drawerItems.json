@@ -5,6 +5,8 @@
     "icon": "mdi-speedometer",
     "children": [
       { "text": "quickStart", "to": "quick-start" },
+      { "text": "preMadeLayouts", "to": "pre-made-layouts" },
+      { "text": "testing", "to": "unit-testing" },
       { "text": "whyVuetify", "to": "why-vuetify" },
       { "text": "faq", "to": "frequently-asked-questions" },
       { "text": "meetTheTeam", "to": "meet-the-team" },
