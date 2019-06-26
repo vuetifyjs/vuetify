@@ -74,10 +74,10 @@
   },
   "scopedSlots": {
     "day": "The content that is placed in a `week` or `month` view. The day & time object is passed as the slot-scope.",
-    "dayBody": "The content that is placed in a `day` view in the scrollable interval container. The day & time object is passed as the slot-scope.",
-    "dayHeader": "The content that is placed in a `day` view in the top container. The day & time object is passed as the slot-scope.",
-    "dayLabel": "The content that is placed in the day of the month space in the `week` or `month` view. The day & time object is passed as the slot-scope.",
-    "dayMonth": "The content that is placed in the month space in the `week` or `month` view. The day & time object is passed as the slot-scope.",
+    "day-body": "The content that is placed in a `day` view in the scrollable interval container. The day & time object is passed as the slot-scope.",
+    "day-header": "The content that is placed in a `day` view in the top container. The day & time object is passed as the slot-scope.",
+    "day-label": "The content that is placed in the day of the month space in the `week` or `month` view. The day & time object is passed as the slot-scope.",
+    "day-month": "The content that is placed in the month space in the `week` or `month` view. The day & time object is passed as the slot-scope.",
     "interval": "The content that is placed in the interval space in the `day` view. The day & time object is passed as the slot-scope.",
     "event": "The content placed in an event. The following variables are available: event, day, outside, start, end, timed."
   },

@@ -1,31 +1,51 @@
-import { SparklineItem, Boundary, Point } from '../VSparkline'
+import { Point, Boundary, Bar } from '../VSparkline'
 
 export function genPoints (
-  points: SparklineItem[],
-  boundary: Boundary,
-  type: String
+  values: number[],
+  boundary: Boundary
 ): Point[] {
-  const { minX, minY, maxX, maxY } = boundary
-  const normalisedPoints = points.map(
-    item => (typeof item === 'number' ? item : item.value)
-  )
-  const totalPoints = normalisedPoints.length
-  const maxValue = Math.max(...normalisedPoints) + 1
-  let minValue = Math.min(...normalisedPoints)
+  const { minX, maxX, minY, maxY } = boundary
+  const totalValues = values.length
+  const maxValue = Math.max(...values)
+  const minValue = Math.min(...values)
 
-  if (minValue) minValue -= 1
-  let gridX = (maxX - minX) / (totalPoints - 1)
-  if (type === 'bar') gridX = maxX / totalPoints
+  const gridX = (maxX - minX) / (totalValues - 1)
   const gridY = (maxY - minY) / (maxValue - minValue)
 
-  return normalisedPoints.map((value, index) => {
+  return values.map((value, index) => {
     return {
       x: minX + index * gridX,
       y:
         maxY -
         (value - minValue) * gridY +
-        +(index === totalPoints - 1) * 0.00001 -
+        +(index === totalValues - 1) * 0.00001 -
         +(index === 0) * 0.00001,
+      value,
+    }
+  })
+}
+
+export function genBars (
+  values: number[],
+  boundary: Boundary
+): Bar[] {
+  const { minX, maxX, minY, maxY } = boundary
+  const totalValues = values.length
+  const maxValue = Math.max(...values)
+  const minValue = Math.min(...values)
+
+  const gridX = maxX / totalValues
+  const gridY = (maxY - minY) / (maxValue - minValue)
+  const horizonY = maxY - Math.abs(minValue * gridY)
+
+  return values.map((value, index) => {
+    const height = Math.abs(gridY * value)
+
+    return {
+      x: minX + index * gridX,
+      y: horizonY - height +
+        +(value < 0) * height,
+      height,
       value,
     }
   })
