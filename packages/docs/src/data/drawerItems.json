@@ -6,7 +6,7 @@
     "children": [
       { "text": "quickStart", "to": "quick-start" },
       { "text": "preMadeLayouts", "to": "pre-made-layouts" },
-      { "text": "testing", "to": "unit-testing" },
+      { "new": true, "text": "testing", "to": "unit-testing" },
       { "text": "whyVuetify", "to": "why-vuetify" },
       { "text": "faq", "to": "frequently-asked-questions" },
       { "text": "meetTheTeam", "to": "meet-the-team" },
@@ -43,12 +43,12 @@
       { "text": "aspectRatios", "to": "aspect-ratios" },
       { "text": "avatars", "to": "avatars" },
       { "text": "badges", "to": "badges" },
-      { "text": "banners", "to": "banners", "new": true },
+      { "new": true, "text": "banners", "to": "banners" },
       {
         "group": "components",
         "text": "bars",
         "children": [
-          { "text": "appBars", "to": "app-bars", "new": true },
+          { "new": true, "text": "appBars", "to": "app-bars" },
           { "text": "toolbars", "to": "toolbars" },
           { "text": "systemBars", "to": "system-bars" }
         ]
@@ -73,10 +73,10 @@
         "text": "groups",
         "children": [
           { "text": "buttonGroups", "to": "button-groups" },
-          { "text": "chipGroups", "to": "chip-groups", "new": true },
+          { "new": true, "text": "chipGroups", "to": "chip-groups" },
           { "text": "itemGroups", "to": "item-groups" },
-          { "text": "listItemGroups", "to": "list-item-groups", "new": true },
-          { "text": "slideGroups", "to": "slide-groups" },
+          { "new": true, "text": "listItemGroups", "to": "list-item-groups" },
+          { "new": true, "text": "slideGroups", "to": "slide-groups" },
           { "text": "windows", "to": "windows" }
         ]
       },
@@ -102,14 +102,14 @@
       { "text": "lists", "to": "lists" },
       { "text": "menus", "to": "menus" },
       { "text": "navigationDrawers", "to": "navigation-drawers" },
-      { "text": "overlays", "to": "overlays", "new": true },
+      { "new": true, "text": "overlays", "to": "overlays" },
       { "text": "paginations", "to": "paginations" },
       { "text": "parallax", "to": "parallax" },
       {
         "group": "components",
         "text": "pickers",
         "children": [
-          { "text": "colorPickers", "to": "color-pickers", "new": true },
+          { "new": true, "text": "colorPickers", "to": "color-pickers" },
           { "text": "datePickers", "to": "date-pickers" },
           { "text": "timePickers", "to": "time-pickers" }
         ]
@@ -133,7 +133,7 @@
         "text": "tables",
         "children": [
           { "text": "dataIterators", "to": "data-iterators" },
-          { "text": "simpleTables", "to": "simple-tables", "new": true },
+          { "new": true, "text": "simpleTables", "to": "simple-tables" },
           { "text": "dataTables", "to": "data-tables" }
         ]
       },
