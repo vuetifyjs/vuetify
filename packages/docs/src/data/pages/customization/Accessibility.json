@@ -101,6 +101,19 @@
           "lang": "resourcesText2"
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "customization/rtl",
+            "components/menus",
+            "components/list-item-groups"
+          ]
+        }
+      ]
     }
   ]
 }

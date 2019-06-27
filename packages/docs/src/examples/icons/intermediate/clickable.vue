@@ -1,10 +1,10 @@
 <template>
   <v-card>
     <v-toolbar
-      card
       color="pink"
       dark
       dense
+      flat
     >
       <v-toolbar-title class="body-2">Upcoming Changes</v-toolbar-title>
     </v-toolbar>

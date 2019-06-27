@@ -31,7 +31,7 @@
     }
   },
   "props": {
-    "disabled": "Components.Inputs.props.disabled",
+    "disabled": "Mixins.Validatable.props.disabled",
     "large": "Mixins.Sizeable.props.large",
     "left": "Places the icon on the left, when used inside a button",
     "medium": "Mixins.Sizeable.props.medium",

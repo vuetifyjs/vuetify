@@ -41,8 +41,8 @@
           "type": "up-next",
           "value": [
             "components/buttons",
-            "styles/colors",
-            "components/lists"
+            "components/expansion-panels",
+            "styles/transitions"
           ]
         }
       ]

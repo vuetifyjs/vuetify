@@ -193,8 +193,8 @@
           "type": "up-next",
           "value": [
             "styles/colors",
-            "getting-started/pre-made-layouts",
-            "themes/premium"
+            "styles/transitions",
+            "getting-started/pre-made-layouts"
           ]
         }
       ]

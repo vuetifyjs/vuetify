@@ -23,6 +23,18 @@
           "value": "html_vuetify_dynamic_rtl"
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "customization/accessibility",
+            "customization/internationalization"
+          ]
+        }
+      ]
     }
   ]
 }

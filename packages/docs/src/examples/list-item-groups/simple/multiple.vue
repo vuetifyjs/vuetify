@@ -39,7 +39,7 @@
           text: 'Data Usage',
         },
       ],
-      model: 1,
+      model: [1],
     }),
   }
 </script>

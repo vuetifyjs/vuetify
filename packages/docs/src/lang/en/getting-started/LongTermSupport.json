@@ -4,11 +4,11 @@
   "2header": "## Vuetify 2.0",
   "2text": "The latest version of Vuetify, based on the Material Design 2 specification. It includes multiple advancements over v1.5 including and is the recommended version for the most up-to-date features and functionality. This version is actively maintained and has a [roadmap](/getting-started/roadmap) of upcoming features.",
   "2features": [
-    "7 new components",
-    "Complete upgrade to the MD2 Specification",
-    "Full Typescript Support",
-    "Improved accessibility and RTL support",
-    "Numerous bug fixes, QOL changes and performance improvements"
+    "**7 new components**",
+    "**Complete upgrade to the MD2 Specification**",
+    "**Full Typescript Support**",
+    "**Improved accessibility and RTL support**",
+    "**Numerous bug fixes, QOL changes and performance improvements**"
   ],
   "2upgrade": "Upgrading from v1.5? Check out the available [upgrade guide](https://github.com/vuetifyjs/vuetify/releases/tag/v2.0.0#user-content-upgrade-guide).",
   "15header": "## Vuetify 1.5 LTS",

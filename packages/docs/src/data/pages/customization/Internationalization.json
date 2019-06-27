@@ -93,6 +93,18 @@
           "value": "js_vuei18n_import"
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "customization/accessibility",
+            "customization/rtl"
+          ]
+        }
+      ]
     }
   ]
 }

@@ -27,7 +27,7 @@
       <v-chip
         v-if="item === Object(item)"
         :color="`${item.color} lighten-3`"
-        :selected="selected"
+        :value="selected"
         label
         small
       >

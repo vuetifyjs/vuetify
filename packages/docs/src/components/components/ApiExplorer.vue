@@ -16,7 +16,7 @@
       >
         <template v-slot:selection="props">
           <v-chip
-            :selected="props.selected"
+            :value="props.selected"
             color="primary"
             class="white--text"
             label

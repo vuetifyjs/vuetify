@@ -81,6 +81,19 @@
           "lang": "e2eText1"
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "getting-started/long-term-support",
+            "getting-started/contributing",
+            "getting-started/consulting-and-support"
+          ]
+        }
+      ]
     }
   ]
 }
