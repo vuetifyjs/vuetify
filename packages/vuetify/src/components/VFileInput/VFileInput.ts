@@ -18,6 +18,10 @@ export default VTextField.extend({
   name: 'v-file-input',
 
   props: {
+    accept: {
+      type: String,
+      default: null,
+    } as PropValidator<string | null>,
     clearable: {
       type: Boolean,
       default: true,
@@ -114,6 +118,7 @@ export default VTextField.extend({
       const input = VTextField.options.methods.genInput.call(this)
 
       input.data!.attrs!.multiple = this.multiple
+      input.data!.attrs!.accept = this.accept
       input.data!.on!.change = (e: any) => {
         this.lazyFileValue = [...e.target.files]
       }
