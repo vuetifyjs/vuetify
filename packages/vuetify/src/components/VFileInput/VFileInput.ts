@@ -4,7 +4,11 @@ import './VFileInput.sass'
 // Extensions
 import VTextField from '../VTextField'
 
+// Components
+import { VProgressLinear } from '../VProgressLinear'
+
 // Types
+import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
 // Helpers
@@ -36,6 +40,11 @@ export default VTextField.extend({
       type: [Object, Array],
       default: () => ([]),
     } as PropValidator<File | File[]>,
+    progress: {
+      type: [Number, String],
+      default: null,
+      validator: (v: number | string) => !isNaN(parseInt(v)),
+    } as PropValidator<number | string | null>,
   },
 
   data: () => ({
@@ -112,6 +121,21 @@ export default VTextField.extend({
           },
         },
       }, [this.text])
+    },
+    genProgress (): VNode | VNode[] | null {
+      if (this.loading === false && !this.progress) return null
+
+      return this.$slots.progress || this.$createElement(VProgressLinear, {
+        props: {
+          absolute: true,
+          color: (this.loading === true)
+            ? (this.color || 'primary')
+            : (this.loading || 'primary'),
+          height: this.loaderHeight,
+          indeterminate: !this.progress,
+          value: this.progress || 0,
+        },
+      })
     },
   },
 })
