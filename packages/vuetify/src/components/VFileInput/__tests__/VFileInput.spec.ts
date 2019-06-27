@@ -127,7 +127,7 @@ describe('VFileInput.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({
-      progress: "70",
+      progress: '70',
     })
 
     expect(wrapper.html()).toMatchSnapshot()
