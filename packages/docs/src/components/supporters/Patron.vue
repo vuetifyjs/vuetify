@@ -1,5 +1,6 @@
 <template>
   <v-card
+    :aria-label="`Supporter ${value.name}`"
     :href="value.href"
     :width="small ? 130 : large ? 195 : 160"
     flat
@@ -10,7 +11,7 @@
     rel="noopener"
   >
     <v-img
-      :alt="`Supporter ${value.name}`"
+      :alt="value.name"
       :class="value.dark ? 'black' : ''"
       :height="small ? 40 : 70"
       :src="`https://cdn.vuetifyjs.com/images/${value.logo}`"
