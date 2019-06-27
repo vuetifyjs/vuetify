@@ -1,5 +1,5 @@
 {
-  "header": "# Icon",
+  "header": "# Icons",
   "headerText": "The `v-icon` component provides a large set of glyphs to provide context to various aspects of your application. For a list of all available icons, visit the official [Material Design Icons](https://materialdesignicons.com/) page.",
   "examples": {
     "usage": {

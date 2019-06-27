@@ -1,8 +1,8 @@
 {
   "": {
-    "title": "Vue.js Material Component Framework",
-    "description": "Vuetify is a semantic development framework for Vue.js. Built with Material Design, it aims to provide all the tools necessary to create beautiful content rich applications.",
-    "keywords": "vue, vue 2, vue js, vue.js, material design, vue components, material design components, vuetify, vuetify.js"
+    "title": "Vue Material Design Component Framework",
+    "description": "Vuetify is a Material Design component framework for Vue.js. It aims to provide all the tools necessary to create beautiful content rich applications.",
+    "keywords": "vue, material design components, vue components, material design components, vuetify, vuetify.js, component framework"
   },
   "404": {
     "title": "Whoops, 404",
@@ -10,84 +10,84 @@
     "keywords": ""
   },
   "getting-started/quick-start": {
-    "title": "Quick Start",
-    "description": "Get started with Vue and Vuetify in no time. Support for vue-cli-3, existing projects and more.",
+    "title": "Quick start",
+    "description": "Get started with Vue and Vuetify in no time. Support for vue-cli-3, Webpack, Nuxt and more.",
     "keywords": "quick start, vuetify templates, installing vuetify, install vuetify"
   },
   "getting-started/pre-made-layouts": {
     "title": "Application layouts",
-    "description": "Select from a multitude of official material design layouts.",
+    "description": "Select from a multitude of Vuetify Material Design layouts built to help kickstart your application.",
     "keywords": "pre-defined layouts, layouts, application layout, material design layouts"
   },
   "getting-started/unit-testing": {
     "title": "Unit testing",
-    "description": "Learn how to create unit tests using Vuetify components in your Vue application.",
-    "keywords": "unit testing vuetify, testing vuetify"
+    "description": "Learn how to create unit tests with vue-test-utils and Vuetify components in your Vue application.",
+    "keywords": "unit testing vuetify, testing vuetify, vuetify spec tests"
   },
   "getting-started/why-vuetify": {
     "title": "Why Vuetify?",
-    "description": "Why you should choose Vuetify over other Vue frameworks.",
-    "keywords": "why vuetify, why vue, why choose vuetify"
+    "description": "Vuetify has an extremely active community, provides easy to use Material Design components and is consistently updated.",
+    "keywords": "why vuetify, why choose vuetify, best vue framework, best ui framework"
   },
   "getting-started/frequently-asked-questions": {
     "title": "Frequently asked questions",
-    "description": "Stuck on a problem? Check these frequently asked questions.",
+    "description": "Stuck on a problem? Check out the most frequently asked questions by the Vuetify community.",
     "keywords": "frequently asked questions, faq"
   },
   "getting-started/meet-the-team": {
     "title": "Meet the team",
-    "description": "Meet the team responsible for making Vuetify great. Thank you for supporting Vuetify!",
+    "description": "Meet the team responsible for building Vuetify. These are the core individuals who drive the vision of the framework.",
     "keywords": "vuetify dev team, vuetify core team"
   },
   "getting-started/sponsors-and-backers": {
     "title": "Sponsors and backers",
-    "description": "Help support Vuetify.js by backing the development of new features",
-    "keywords": "sponsor, backer, donations"
+    "description": "Help support Vuetify by backing the project. This helps with the maintenance of existing features and the development of new ones.",
+    "keywords": "sponsor, backer, donations, patron, supporting vuetify, vuetify support"
   },
   "getting-started/long-term-support": {
-    "title": "Long-term Support",
+    "title": "Long-term support",
     "description": "Vuetify provides long-term support to the last major release for 12 months for critical bugs and security vulnerabilities.",
     "keywords": "lts, long-term support"
   },
   "getting-started/contributing": {
     "title": "Contributing",
-    "description": "Learn how to help contribute to the Vuetify framework.",
+    "description": "Contributing to open source helps developers access amazing tools for free. Learn how you can help develop in the Vuetify framework.",
     "keywords": "contribute, contributing, feature request"
   },
   "getting-started/roadmap": {
     "title": "Roadmap",
-    "description": "The upcoming planned features and new functionality coming to Vuetify. New vue components, new directives, and much much more!.",
-    "keywords": "roadmap, future plans"
+    "description": "The upcoming planned features and new functionality coming to Vuetify. New components, new directives, and much much more!.",
+    "keywords": "vuetify roadmap, future plans, new vuetify features"
   },
   "getting-started/consulting-and-support": {
-    "title": "Consulting & Support",
-    "description": "Get help and support from the creator of Vuetify, John Leider",
-    "keywords": "consulting, support, help"
+    "title": "Consulting and support",
+    "description": "Get professional help, support and guidance for your Vuetify application from the creator, John Leider.",
+    "keywords": "vuetify consulting, vuetify support, vuetify help"
   },
   "customization/accessibility": {
-    "title": "Web accessibility",
+    "title": "Accessibility",
     "description": "See examples and the advantages of having accessibility (a11y) support in Vuetify components.",
     "keywords": "a11y, accessibility, usability"
   },
   "customization/a-la-carte": {
-    "title": "A La Carte",
-    "description": "Get ready for automatic treeshaking. Use only the components you need. Single component importing only pulls in what you use.",
-    "keywords": "a la carte, a-la-carte, vuetify single import, vuetify import, component importing"
+    "title": "A-la-carte",
+    "description": "A La Carte provides automatic treeshaking via the vuetify-loader. Use only the features that you need and drastically reduce your package size.",
+    "keywords": "a la carte, a-la-carte, vuetify single import, vuetify import, component importing, reduce vuetify size"
   },
   "customization/breakpoints": {
     "title": "Breakpoints",
-    "description": "Access the Vuetify grid system directly in components.",
-    "keywords": "breakpoints"
+    "description": "Access the Vuetify grid system inside of components using the Breakpoint service.",
+    "keywords": "breakpoints, grid breakpoints"
   },
   "customization/icons": {
-    "title": "Installing Icons",
-    "description": "Vuetify supports custom icon sets through prefixes and global options.",
-    "keywords": "vue, icon, iconfont, icon libraries, vuetify icons"
+    "title": "Icons",
+    "description": "Vuetify supports Material Design Icons, Font awesome and other icon sets through prefixes and global options.",
+    "keywords": "vue icon component, iconfont, icon libraries, vuetify icons"
   },
   "customization/internationalization": {
     "title": "Internationalization",
-    "description": "Vuetify supports language internationalization of its components.",
-    "keywords": "vue, i18n, language, internationalization"
+    "description": "Vuetify supports language internationalization (i18n) from a wide range of locales across the globe.",
+    "keywords": "i18n, language, internationalization"
   },
   "customization/rtl": {
     "title": "RTL (bidirectionality)",
@@ -95,503 +95,502 @@
     "keywords": "rtl, right-to-left, bidirectionality"
   },
   "customization/sass-variables": {
-    "title": "Sass variables",
+    "title": "SASS variables",
     "description": "Customize Vuetify's internal styles by modifying SASS variables.",
     "keywords": "sass variables, scss variables, modifying Vuetify styles"
   },
   "customization/theme": {
-    "title": "Application theming",
+    "title": "Theme",
     "description": "Setup your application's theme and supplemental colors in a flash.",
     "keywords": "themes"
   },
   "styles/alignment": {
-    "title": "Alignment helpers",
-    "description": "Alignment helpers assist in modifying your application layout on varying viewport sizes.",
-    "keywords": "alignment helper classes"
+    "title": "CSS Alignment helpers",
+    "description": "Alignment helpers assist in modifying your application layout on varying viewport sizes with pre-configured css classes.",
+    "keywords": "alignment helper classes, alignment classes, alignment helpers"
   },
   "styles/colors": {
     "title": "Material color palette",
-    "description": "Easily apply any color from the material design palette.",
-    "keywords": "colors"
+    "description": "Learn about the colors of Material Design. Consume the javascript color pack directly in your application.",
+    "keywords": "colors, material design colors, vuetify color pack, material color classes"
   },
   "styles/content": {
     "title": "Content styles",
-    "description": "Vuetify has custom styling for default html markup.",
+    "description": "Vuetify provides custom styling for various HTML elements.",
     "keywords": "content, html, markup"
   },
   "styles/display": {
-    "title": "Display helpers",
+    "title": "CSS Display helpers",
     "description": "Display helper classes allow you to control when elements should display based upon viewport.",
-    "keywords": "display helper classes"
+    "keywords": "display helper classes, display classes, vuetify display"
   },
   "styles/elevation": {
-    "title": "Elevation helpers",
+    "title": "CSS Elevation helpers",
     "description": "Elevation helper classes allow you to control relative depth, or distance, between two surfaces along the z-axis.",
-    "keywords": "elevation helper classes"
+    "keywords": "elevation helper classes, elevation classes, vuetify elevation"
   },
   "styles/scroll": {
-    "title": "Scroll",
-    "description": "Using the goTo helper you can smoothly scroll to any location on the page.",
+    "title": "Smooth scrolling",
+    "description": "Using the goTo helper you can smoothly scroll to any location or component on the page.",
     "keywords": "scrolling, scroll, smooth scroll, transitions"
   },
   "styles/spacing": {
-    "title": "Spacing helpers",
-    "description": "Spacing helper classes allow you to apply margin or padding to any element.",
-    "keywords": "spacing helper classes"
+    "title": "CSS Spacing helpers",
+    "description": "Spacing helper classes allow you to apply margin or padding to any element in increments from 1 to 5.",
+    "keywords": "spacing helper classes, spacing classes, vuetify spacing"
   },
   "styles/transitions": {
     "title": "Transitions",
-    "description": "Make an amazing application with smooth built in animations.",
-    "keywords": "motion, transitions"
+    "description": "Utilize Vuetify's built in CSS and Javascript transitions within components.",
+    "keywords": "motion, transitions, vuetify transitions"
   },
   "styles/typography": {
     "title": "Application typography",
-    "description": "View the various typography styles. From headings to captions, with various weights and sizes.",
+    "description": "View the various typography styles. From headings to captions, with various weights, sizes and italics.",
     "keywords": "typography, headings, titles"
   },
   "framework/sandbox": {
     "title": "Sandbox",
-    "description": "Play around with the available configuring options for your next application.",
-    "keywords": "sandbox, vuetify, layout sandbox"
+    "description": "Play around with the available configuring options using Vuetify layout components.",
+    "keywords": "sandbox, vuetify, layout sandbox, vuetify layout"
   },
   "components/api-explorer": {
-    "title": "API Explorer",
-    "description": "Search the API of all Vuetify components.",
-    "keywords": "material design components, components api, vuetify api"
+    "title": "API explorer",
+    "description": "Search the API of Vuetify components or browse common categories.",
+    "keywords": "material design components, components api, vuetify api, vuetify component categories"
+  },
+  "components/categories/forms": {
+    "title": "Forms category",
+    "description": "A collection of Vuetify components that are commonly used when building forms.",
+    "keywords": "forms category, vuetify form components"
+  },
+  "components/categories/navigation": {
+    "title": "Navigation category",
+    "description": "A collection of Vuetify components that are associated with navigation and drawers.",
+    "keywords": "navigation category, vuetify navigation components"
+  },
+  "components/categories/layout": {
+    "title": "Layout category",
+    "description": "Vuetify Components that are useful when building layouts",
+    "keywords": "layout category, vuetify layout components"
+  },
+  "components/categories/buttons": {
+    "title": "Buttons & Indicators category",
+    "description": "A collection of Vuetify components that are used to provide elements that the user can interact with.",
+    "keywords": "buttons and indicators category, vuetify button and indicator components"
+  },
+  "components/categories/modals": {
+    "title": "Popups & Modals category",
+    "description": "A collection of Vuetify components that are used to draw the users attention to an action or task. Typically related to modals and alerts.",
+    "keywords": "popups and modals category, vuetify popup and modal components"
+  },
+  "components/categories/tables": {
+    "title": "Tables category",
+    "description": "A collection of Vuetify components that are used to consolidate and display tabulated or grouped data.",
+    "keywords": "tables category, vuetify table components"
   },
   "components/alerts": {
-    "title": "Alert Component",
-    "description": "The v-alert component is used to convey information to the user. Designed to stand out, the alerts come in four contextual styles, success, info, warning, and error.",
-    "keywords": "alerts, components"
+    "title": "Alert component",
+    "description": "The v-alert component is used to convey information to the user. Designed to stand out, the alerts come in four contextual styles.",
+    "keywords": "alerts, vue alert component, vuetify alert component"
   },
   "components/application": {
     "title": "Application service",
-    "description": "Vuetify comes equipped with a default markup that makes it easy to create layouts for any application.",
-    "keywords": "default layout, default markup, vuetify default layout"
+    "description": "Vuetify comes equipped with a default markup that makes it easy to create layouts (boilerplate) for any Vue application.",
+    "keywords": "default layout, vuetify default markup, vuetify default layout"
   },
   "components/app-bars": {
-    "title": "App-bar Component",
-    "description": "The v-app-bar component is a supercharged toolbar with advanced scrolling techniques and application layout support.",
-    "keywords": "toolbars, system-bars, app-bars"
+    "title": "App-bar component",
+    "description": "The app bar component is a supercharged toolbar with advanced scrolling techniques and application layout support.",
+    "keywords": "app bars, vuetify app bar component, vue app bar component"
   },
   "components/aspect-ratios": {
     "title": "Aspect ratios",
-    "description": "Aspect ratios for Vuetify Framework",
-    "keywords": "ratio, responsive"
+    "description": "The responsive component is used as a wrapper component to force custom aspect ratios for its children.",
+    "keywords": "ratio, responsive, aspect ratios"
   },
   "components/autocompletes": {
-    "title": "Autocomplete Component",
-    "description": "The v-autocomplete component provides type-ahead autocomplete functionality.",
-    "keywords": "autocomplete, components"
+    "title": "Autocomplete component",
+    "description": "The autocomplete component provides type-ahead autocomplete functionality and provides a list of available options.",
+    "keywords": "autocomplete, vuetify autocomplete component, vue autocomplete component"
   },
   "components/avatars": {
-    "title": "Avatar Component",
-    "description": "The v-avatar component is used to control the size and border radius of an image.",
-    "keywords": "avatars, components"
+    "title": "Avatar component",
+    "description": "The avatar component is used to control the size and border radius of an image. It can be used with numerous components to provide better visual context.",
+    "keywords": "avatars, vuetify avatar component, vue avatar component"
   },
   "components/badges": {
-    "title": "Badges",
-    "description": "Badge component for the Vuetify framework.",
-    "keywords": "badges"
+    "title": "Badge component",
+    "description": "The badge component is a small status descriptor for elements. This typically contains a small number or short set of characters.",
+    "keywords": "badges, vuetify badge component, vue badge component"
   },
   "components/banners": {
-    "title": "Banners",
-    "description": "Banner component for Vuetify framework.",
-    "keywords": "vuetify, banner, components"
+    "title": "Banner component",
+    "description": "The banner component displays an important and succint message for a user to address. It can also provide actions for user to take.",
+    "keywords": "banners, vuetify banner component, vue banner component"
   },
   "components/breadcrumbs": {
-    "title": "Breadcrumbs Component",
-    "description": "The v-breadcrumbs component is a navigational helper for pages. It can accept a Material Icons icon or characters as a divider.",
-    "keywords": "breadcrumbs, crumbs"
+    "title": "Breadcrumbs component",
+    "description": "The breadcrumbs component is a navigational helper for pages. It can accept a Material Icons icon or characters as a divider.",
+    "keywords": "breadcrumbs, vuetify breadcrumbs component, vue breadcrumbs component, v-breadcrumbs component"
   },
   "components/bottom-navigation": {
-    "title": "Bottom Navigation Component",
-    "description": "The v-bottom-navigation component is primarily for mobile use and acts as the primary navigation.",
-    "keywords": "bottom nav, material nav, nav, bottom navigation, navigation"
+    "title": "Bottom navigation component",
+    "description": "The bottom navigation component is used for mobile devices and acts as the primary navigation for your application.",
+    "keywords": "bottom navigation, vuetify bottom navigation component, vue bottom navigation component"
   },
   "components/bottom-sheets": {
-    "title": "Bottom sheets",
-    "description": "The v-bottom-sheets component is used for elevating content above other elements in a dialog style fashion",
-    "keywords": "bottom sheets, bottom dialog, bottom modal"
+    "title": "Bottom sheet component",
+    "description": "The bottom sheet component is used for elevating content above other elements in a dialog style fashion.",
+    "keywords": "bottom sheets, vuetify bottom sheet component, vue bottom sheet component"
   },
   "components/calendars": {
-    "title": "Calendars",
-    "description": "Calendar component for Vuetify framework.",
-    "keywords": "vuetify, calendar, components"
+    "title": "Calendar component",
+    "description": "The calendar component is a clean and simple adaptation to the popular Google Calendar application.",
+    "keywords": "calendars, vuetify calendar component, vue calendar component"
   },
   "components/cards": {
-    "title": "Cards",
-    "description": "Card component for Vuetify framework.",
-    "keywords": "vuetify, cards, components"
-  },
-  "components/categories/forms": {
-    "title": "Format components",
-    "description": "Vuetify Components that are useful when building forms",
-    "keywords": "forms, vuetify form components"
-  },
-  "components/categories/navigation": {
-    "title": "Navigation components",
-    "description": "Vuetify Components that are useful when building forms",
-    "keywords": "navigation, vuetify navigation components"
-  },
-  "components/categories/layout": {
-    "title": "Layout components",
-    "description": "Vuetify Components that are useful when building layouts",
-    "keywords": "layout, vuetify layout components"
-  },
-  "components/categories/buttons": {
-    "title": "Buttons & Indicators",
-    "description": "Vuetify components that are useful for building interactive apps",
-    "keywords": "vuetify button components"
-  },
-  "components/categories/modals": {
-    "title": "Popups & Modals",
-    "description": "Vuetify Components that are useful for showing dynamic content",
-    "keywords": "vuetify modal components"
-  },
-  "components/categories/tables": {
-    "title": "Table components",
-    "description": "Vuetify Components that are useful when showing tabular data",
-    "keywords": "vuetify table components"
+    "title": "Card component",
+    "description": "The card component provides an elevatable sheet of paper to display content and provide actions on a single topic.",
+    "keywords": "cards, vuetify card component, vue card component"
   },
   "components/buttons": {
-    "title": "Button Component",
-    "description": "Button component for Vuetify Framework.",
-    "keywords": "vuetify, buttons, components"
+    "title": "Button component",
+    "description": "The button component communicates actions that a user can take and are typically placed in dialogs, forms, cards and toolbars.",
+    "keywords": "buttons, vuetify button component, vue button component"
   },
   "components/button-groups": {
-    "title": "Button groups",
-    "description": "Button groups for Vuetify Framework.",
-    "keywords": "vuetify, buttons, components, groups, button group"
+    "title": "Button group component",
+    "description": "The button group component allows you to combine a series of selectable buttons together in a single-line.",
+    "keywords": "button groups, vuetify button group component, vue button group component"
   },
   "components/floating-action-buttons": {
-    "title": "Floating Action Button Component",
-    "description": "Floating Action Button component for Vuetify Framework.",
-    "keywords": "vuetify, buttons, fab, floating button, floating action button"
+    "title": "FAB component",
+    "description": "The floating action button (or FAB) component is a promoted action that is elevated above the UI or attached to an element such as a card.",
+    "keywords": "floating action button, fab, vuetify fab component, vue fab component"
   },
   "components/carousels": {
-    "title": "Carousels Component",
-    "description": "Carousel component for Vuetify Framework.",
-    "keywords": "carousel"
+    "title": "Carousel component",
+    "description": "The carousel component is used to cycle through visual content such as images or slides of text.",
+    "keywords": "carousels, vuetify carousel component, vue carousel component"
   },
   "components/chips": {
-    "title": "Chip Component",
-    "description": "Chip component for Vuetify Framework.",
-    "keywords": "chip"
+    "title": "Chip component",
+    "description": "The chip component allows a user to enter information, make selections, filter content or trigger actions.",
+    "keywords": "chips, vuetify chip component, vue chip component"
   },
   "components/chip-groups": {
-    "title": "Chip Group Component",
-    "description": "Chip Group component for Vuetify Framework.",
-    "keywords": "chip, chip-group, chip group, grouped chips"
+    "title": "Chip group component",
+    "description": "The chip group component combines numerous selectable chips into single or multiple lines.",
+    "keywords": "chip groups, vuetify chip group component, vue chip group component"
   },
   "components/color-pickers": {
-    "title": "Color pickers",
-    "description": "The v-color-picker component allows users to select a color using a number of different inputs",
-    "keyword": "components, color picker, color"
+    "title": "Color picker component",
+    "description": "The color picker component allows users to select a from pre-defined or custom colors using a variety of different inputs and formats.",
+    "keyword": "color pickers, vuetify color picker component, vue color picker component"
   },
   "components/combobox": {
-    "title": "Combobox Component",
-    "description": "The v-combobox component provides type-ahead autocomplete functionality and allows user to provide a custom value.",
-    "keywords": "autocomplete, combobox, components"
+    "title": "Combobox component",
+    "description": "The combobox component provides type-ahead autocomplete functionality and allows users to provide a custom values beyond the provided list of options.",
+    "keywords": "comboboxes, vuetify combobox component, vue combobox component"
   },
   "components/dividers": {
-    "title": "Dividers Component",
-    "description": "Divider component for Vuetify Framework.",
-    "keywords": "carousel"
+    "title": "Divider component",
+    "description": "The divider component is a thin line commonly used to separate groups of content in lists or layouts.",
+    "keywords": "dividers, vuetify divider component, vue divider component"
   },
   "components/data-iterators": {
-    "title": "Data iterator Component",
-    "description": "The v-data-iterator component is used for displaying data, and shares a majority of its functionality with the v-data-table component. Features include sorting, searching, pagination, and selection.",
-    "keywords": "data iterator, tables"
+    "title": "Data iterator component",
+    "description": "The data iterator component is used for filter and displaying data including sorting, searching, pagination, and selection.",
+    "keywords": "data iterators, vuetify data iterator component, vue data iterator component"
   },
   "components/data-tables": {
-    "title": "Data tables Component",
-    "description": "The v-data-table component is used for displaying tabular data. Features include sorting, searching, pagination, inline-editing, header tooltips, and row selection.",
-    "keywords": "data tables, tables"
+    "title": "Data table component",
+    "description": "The data table component is used for displaying tabular data in a way that is easy for users to scan. It includes sorting, searching, pagination and selection.",
+    "keywords": "data tables, vuetify data table component, vue data table component"
   },
   "components/dialogs": {
-    "title": "Dialogs Component",
-    "description": "A dialog informs a user about a specific task and may contain critical information.",
-    "keywords": "dialogs"
+    "title": "Dialog component",
+    "description": "The dialog component informs a user about a specific task and may contain critical information or require the user to take a specific action.",
+    "keywords": "dialogs, vuetify dialog component, vue dialog component"
   },
   "components/expansion-panels": {
-    "title": "Expansion panel Component",
-    "description": "Expansion panel component for Vuetify framework.",
-    "keywords": "expansion panel"
+    "title": "Expansion panel component",
+    "description": "The expansion panel component is a lightweight container that hides information behind expandable and contractable containers.",
+    "keywords": "expansion panels, vuetify expansion panel component, vue expansion panel component"
   },
   "components/footer": {
-    "title": "Footer Component",
-    "description": "Footer component for Vuetify Framework",
-    "keywords": "footer"
+    "title": "Footer component",
+    "description": "The footer component provides a container for displaying additional navigation information about a site.",
+    "keywords": "footers, vuetify footer component, vue footer component"
   },
   "components/grids": {
-    "title": "Layout grid system",
-    "description": "Vuetify supports the material design 12 point grid for laying out your application.",
-    "keywords": "grid, layout, flex"
+    "title": "Grid system",
+    "description": "Vuetify supports the 12 point Material Design grid for laying out and controlling breakpoints for your application.",
+    "keywords": "grids, vuetify grid component, layout component, flex component"
   },
   "components/grid-lists": {
-    "title": "Grid List Component",
+    "title": "Grid list component",
     "description": "Grid lists allow you to specify the gutter used when separating grid items.",
-    "keywords": "grid lists, grid"
+    "keywords": "grid lists, vuetify grid list component, vue grid list component"
   },
   "components/forms": {
-    "title": "Form Component",
-    "description": "Form component for Vuetify Framework",
-    "keywords": "form"
+    "title": "Form component",
+    "description": "The form component provides a wrapper that makes it easy to process and control validation states of input components.",
+    "keywords": "forms, vuetify form component, vue form component, form validation"
   },
   "components/hover": {
-    "title": "Hover Component",
-    "description": "Easily respond when the user hovers over elements",
-    "keywords": "hover, mouseover"
+    "title": "Hover component",
+    "description": "The hover component makes it easy respond when the user hover events by wrapping selectable content.",
+    "keywords": "hover, vuetify hover component, vue hover component"
   },
   "components/icons": {
-    "title": "Icon Component",
-    "description": "Icon component for Vuetify Framework",
-    "keywords": "icon"
+    "title": "Icon component",
+    "description": "The icon component is compatible with multiple common iconfonts such as Material Design Icons, Font Awesome and more.",
+    "keywords": "icons, vuetify icon component, vue icon component"
   },
   "components/images": {
-    "title": "Image Component",
-    "description": "Image component for Vuetify Framework",
-    "keywords": "image, progressive, lazy, load"
+    "title": "Image component",
+    "description": "The image component provides a flexible interface for displaying different types of images.",
+    "keywords": "images, vuetify image component, vue image component"
   },
   "components/inputs": {
-    "title": "Input Component",
-    "description": "Create customized inputs by extending the v-input component",
-    "keywords": "inputs"
+    "title": "Input component",
+    "description": "The input component is the baseline functionality for all of Vuetify's form components and provides a baseline for custom implementations.",
+    "keywords": "inputs, vuetify input component, vue input component"
   },
   "components/item-groups": {
-    "title": "Item groups",
-    "description": "Create dynamic groups for any situation",
-    "keywords": "groups"
+    "title": "Item group component",
+    "description": "The item group components provides the ability to create a group of selectable items out of any component.",
+    "keywords": "item groups, vuetify item group component, vue item group component"
   },
   "components/lists": {
-    "title": "List Component",
-    "description": "List component for Vuetify Framework",
-    "keywords": "list, lists"
+    "title": "List component",
+    "description": "The list component is a continous group of text, images and icons that may contain primary or supplemental actions.",
+    "keywords": "lists, vuetify list component, vue list component"
   },
   "components/list-item-groups": {
-    "title": "List Item Group Component",
-    "description": "List Item Group component for Vuetify Framework",
-    "keywords": "list-groups, list groups, list-item-groups, list item groups"
+    "title": "List item group component",
+    "description": "The list item group component provides an interface for displaying a series of content using list items.",
+    "keywords": "list-groups, vuetify list item group component, vue list item group component"
   },
   "components/menus": {
-    "title": "Menu Component",
-    "description": "Menu component for Vuetify Framework",
-    "keywords": "menu"
+    "title": "Menu component",
+    "description": "The menu component exposes a drop down of potential selections or actions that the user can make.",
+    "keywords": "menus, vuetify menu component, vue menu component"
   },
   "components/navigation-drawers": {
-    "title": "Navigation drawer",
-    "description": "Navigation drawer component for Vuetify Framework",
-    "keywords": "navigation, drawer, sidebar, sidenav"
+    "title": "Navigation drawer component",
+    "description": "The navigation drawer component contains internal navigation links for an application and can be permanently on-screen or controlled programmatically.",
+    "keywords": "navigation drawer, vuetify navigation drawer component, vue navigation drawer component"
   },
   "components/overflow-btns": {
-    "title": "Overflow button Component",
-    "description": "Overflow button component for Vuetify framework",
-    "keywords": "overflow button, components"
+    "title": "Overflow button component",
+    "description": "The overflow button component creates an interface for a select that contains additional features and functionality.",
+    "keywords": "overflow buttons, vuetify overflow button component, vue overflow button component"
   },
   "components/overlays": {
-    "title": "Overlay Component",
-    "description": "Overlay component for the Vuetify Framework",
-    "keywords": "overlay, components"
+    "title": "Overlay component",
+    "description": "The overlay component makes it easy to create a scrim or hovering effect over components or your entire application.",
+    "keywords": "overlays, vuetify overlay component, vue overlay component"
   },
   "components/paginations": {
-    "title": "Pagination Component",
-    "description": "The v-pagination component is used to separate long sets of data so that it is easier for a user to consume information.",
-    "keywords": "pagination, components"
+    "title": "Pagination component",
+    "description": "The pagination component is used to separate long sets of data so that it is easier for a user to consume information.",
+    "keywords": "pagination, vuetify pagination component, vue pagination component"
   },
   "components/parallax": {
-    "title": "Parallax Component",
-    "description": "The v-parallax component creates a 3d effect that makes an image appear to scroll slower than the window.",
-    "keywords": "parallax, components"
+    "title": "Parallax component",
+    "description": "The parallax component creates a 3d effect that makes an image appear to scroll slower than the window.",
+    "keywords": "parallax, vuetify parallax component, vue parallax component"
   },
   "components/date-pickers": {
-    "title": "Date Picker Component",
-    "description": "Date Picker component for the Vuetify framework.",
-    "keywords": "vuetify, picker, date picker, component"
+    "title": "Date picker component",
+    "description": "The date picker component is a stand-alone interface that allows the selection of a date, month and year.",
+    "keywords": "date pickers, vuetify date picker component, vue date picker component"
   },
   "components/time-pickers": {
-    "title": "Time Picker Component",
-    "description": "Time Picker component for the Vuetify framework.",
-    "keywords": "vuetify, picker, time picker, component"
+    "title": "Time picker component",
+    "description": "The time picker component is a stand-alone interface that allows the selection of hours and minutes in AM/PM and 24hr formats.",
+    "keywords": "time pickers, vuetify time picker component, vue time picker component"
   },
   "components/progress-circular": {
-    "title": "Progress Circular",
-    "description": "The v-progress-circular component is useful for displaying numerical data in a circle.",
-    "keywords": "progress, circular progress, circle progress"
+    "title": "Progress circular component",
+    "description": "The progress circular component is useful for displaying a visual indicator of numerical data in a circle.",
+    "keywords": "progress circular, vuetify progress circular component, vue progress circular component, circular progress"
   },
   "components/progress-linear": {
-    "title": "Progress Linear",
-    "description": "The v-progress-linear component is useful for displaying numerical data in a straight line.",
-    "keywords": "progress, linear progress, line progress"
+    "title": "Progress linear component",
+    "description": "The progress-linear component is useful for displaying a visual indicator of numerical data in a straight line.",
+    "keywords": "progress linear, vuetify progress linear component, vue progress linear component, linear progress"
   },
   "components/ratings": {
-    "title": "Ratings",
-    "description": "Star rating component for the Vuetify framework.",
-    "keywords": "rating, star rating, ratings, stars"
+    "title": "Star rating component",
+    "description": "The star rating component is a specialized widget for collecting user feedback via ratings.",
+    "keywords": "star ratings, vuetify star rating component, vue star rating component, rating component"
   },
   "components/sheets": {
-    "title": "Sheet Component",
-    "description": "The v-sheet component is the baseline paper element in Vuetify.",
-    "keywords": "sheet, components"
+    "title": "Sheet component",
+    "description": "The sheet component is the default paper element in Vuetify and serves as the baseline for many Material Design implementations.",
+    "keywords": "sheets, vuetify sheet component, vue sheet component"
   },
   "components/simple-tables": {
-    "title": "Simple tables",
-    "description": "The v-simple-table component is a lightweight wrapper around the table element",
-    "keywords": "components, simple, table, data"
+    "title": "Simple table component",
+    "description": "The simple table component is a lightweight wrapper around the table element that provides a Material Design feel without all the baggage.",
+    "keywords": "simple table, vuetify simple table component, vue simple table component, table component"
   },
   "components/sliders": {
-    "title": "Slider Component",
-    "description": "The v-slider component is a better visualization of the number input. It is used for gathering numerical user data.",
-    "keywords": "slider, components"
+    "title": "Slider component",
+    "description": "The slider component is a better visualization of the number input. It is used for gathering numerical user data.",
+    "keywords": "sliders, vuetify slider component, vue slider component"
   },
   "components/slide-groups": {
-    "title": "Slide Group Component",
-    "description": "Slide Group component for the Vuetify framework.",
-    "keywords": "slide groups, slideable groups, carousel groups"
+    "title": "Slide group component",
+    "description": "The slide group component is similar to item groups in that you can make selectable content out of elements but does so in a single line fashion.",
+    "keywords": "slide groups, slideable groups, vuetify slide group component, vue slide group component"
   },
   "components/snackbars": {
-    "title": "Snackbar & toasts Component",
-    "description": "Snackbar component for Vuetify Framework",
-    "keywords": "snackbar"
+    "title": "Snackbar component",
+    "description": "The snackbar component informs user of a process that your application has performed is will perform. It can be temporary and often contains actions.",
+    "keywords": "snackbars, vuetify snackbar component, vue snackbar component"
   },
   "components/sparklines": {
-    "title": "Sparkline Component",
-    "description": "Sparkline component for Vuetify Framework",
-    "keywords": "sparkline, graph, chart, line"
+    "title": "Sparkline component",
+    "description": "The sparkline component creates beautiful and expressive simple graphs for displaying numerical data.",
+    "keywords": "sparklines, vuetify sparkline component, vue sparkline component, sparkline, graph, chart, line"
   },
   "components/steppers": {
-    "title": "Stepper Component",
-    "description": "Stepper component for Vuetify Framework",
-    "keywords": "stepper"
+    "title": "Stepper component",
+    "description": "The stepper component provides a linear progression process for gathering and displaying information to a user, similar to a form wizard.",
+    "keywords": "steppers, vuetify stepper component, vue stepper component"
   },
   "components/selection-controls": {
-    "title": "Selection controls Input Components",
-    "description": "Selection controls input components for Vuetify Framework",
-    "keywords": "vuetify, form, components"
+    "title": "Selection control components",
+    "description": "Selection control components allows users to complete tasks that require the selection of various options, such as settings.",
+    "keywords": "selection controls, vuetify selection controls, vuetify checkbox component, vuetify radio component, vuetify switch component"
   },
   "components/selects": {
-    "title": "Selects Input Components",
-    "description": "Selects input components for Vuetify Framework",
-    "keywords": "vuetify, form, components"
+    "title": "Select component",
+    "description": "The select component provides a list of options that a user can make selections from.",
+    "keywords": "selects, vuetify select component, vue select component"
   },
   "components/subheaders": {
-    "title": "Subheaders",
-    "description": "Subheaders are used for separating lists of content.",
-    "keywords": "subheader"
+    "title": "Subheader component",
+    "description": "The subheader component is used to provide context of sections of content or filtering and sorting criteria.",
+    "keywords": "subheaders, vuetify subheader component, vue subheader component"
   },
   "components/system-bars": {
-    "title": "System-bar Component",
-    "description": "THe v-system-bar component provides an appplication with an android style status bar.",
-    "keywords": "system-bar, android status bar, status bar"
+    "title": "System-bar component",
+    "description": "The system bar component creates an android style status bar that rests on the very top of your application.",
+    "keywords": "system bars, vuetify system bar component, vue system bar component, android status bar, status bar"
   },
   "components/tabs": {
-    "title": "Tabs",
-    "description": "Tabs component for the Vuetify framework.",
-    "keywords": "tabs"
+    "title": "Tabs component",
+    "description": "The tabs component provides a way to organize and navigate between groups of content that are related at the same level of hierarchy.",
+    "keywords": "tabs, vuetify tabs component, vue tabs component"
   },
   "components/timelines": {
-    "title": "Timelines",
-    "description": "Timeline component for the Vuetify framework.",
-    "keywords": "timeline, history"
+    "title": "Timeline component",
+    "description": "The timeline component is used to display chronological information horizontally.",
+    "keywords": "timelines, vuetify timeline component, vue timeline component"
   },
   "components/textarea": {
-    "title": "Textareas",
-    "description": "Textarea component for the Vuetify framework.",
-    "keywords": "textarea"
+    "title": "Textarea component",
+    "description": "The textarea component is a text field that accepts lengthy textual input from users.",
+    "keywords": "textareas, vuetify textarea component, vue textarea component"
   },
   "components/text-fields": {
-    "title": "Text fields",
-    "description": "Text field component for the Vuetify framework.",
-    "keywords": "text field"
+    "title": "Text field component",
+    "description": "The text field component accepts textual input from users.",
+    "keywords": "text fields, vuetify text field component, vue text field component"
   },
   "components/toolbars": {
-    "title": "Toolbars",
-    "description": "Toolbars component for the Vuetify framework.",
-    "keywords": "toolbars"
+    "title": "Toolbar component",
+    "description": "The toolbar component sits above the content that it affects and provides an area for labeling and additional actions.",
+    "keywords": "toolbars, vuetify toolbar component, vue toolbar component"
   },
   "components/tooltips": {
-    "title": "Tooltip",
-    "description": "Tooltip components for the Vuetify framework.",
-    "keywords": "tooltips"
+    "title": "Tooltip component",
+    "description": "The tooltip component displays textual information regarding the element it is attached to.",
+    "keywords": "tooltips, vuetify tooltip component, vue tooltip component"
   },
   "components/treeview": {
-    "title": "Treeview",
-    "description": "Treeview component for the Vuetify framework",
-    "keywords": "treeview"
+    "title": "Treeview component",
+    "description": "The treeview component is a user interface that is used to represent hierarchical data in a tree structure.",
+    "keywords": "treeview, vuetify treeview component, vue treeview component"
   },
   "components/windows": {
-    "title": "Windows",
-    "description": "Windows components for the Vuetify framework.",
-    "keywords": "windows, views, transition views"
+    "title": "Window component",
+    "description": "The window component is a wrapper container that allows transitioning between content. It serves as the baseline for tabs and carousels.",
+    "keywords": "windows, vuetify window component, vue window component"
   },
-
   "directives/resizing": {
-    "title": "Resizing",
-    "description": "Resize directive for the Vuetify framework.",
-    "keywords": "resize, resize directive, window resize directive"
+    "title": "Resizing directive",
+    "description": "The resize directive provides the ability to conditionally invoke functions when the screen is resized.",
+    "keywords": "resize, vuetify resize directive, vue resize directive, window resize directive"
   },
   "directives/ripples": {
-    "title": "Ripple",
-    "description": "Ripple directive for the Vuetify framework.",
-    "keywords": "ripples, ink"
+    "title": "Ripple directive",
+    "description": "The ripple directive adds touch and click feedback to any element in the form of a water ripple.",
+    "keywords": "ripples, ink, vuetify ripple directive, vue ripple directive"
   },
   "directives/scrolling": {
-    "title": "Scrolling",
-    "description": "Scroll directive for the Vuetify framework.",
-    "keywords": "scroll, scroll directive, window scroll directive"
+    "title": "Scrolling directive",
+    "description": "The scroll directive gives you the ability to conditionally invoke methods when the screen or an element are scrolled.",
+    "keywords": "scroll, vuetify scroll directive, vue scroll directive, window scroll directive"
   },
   "directives/touch-support": {
-    "title": "Touch Support",
-    "description": "Touch directive for the Vuetify framework.",
-    "keywords": "touch, touch directive, mobile touch directive"
+    "title": "Touch Support directive",
+    "description": "The touch directive provides an interface for responding to various user touch actions.",
+    "keywords": "touch, vuetify touch directive, vue touch directive, mobile touch directive"
   },
   "examples/layouts/baseline": {
-    "title": "Baseline layout example",
-    "description": "Baseline layout for the Vuetify.js framework",
-    "keywords": "template, pre-made, vuetify layout"
+    "title": "Basic layout example",
+    "description": "A basic application layout implemented using Vuetify components.",
+    "keywords": "basic template, pre-made, vuetify layout"
   },
   "examples/layouts/baseline-flipped": {
-    "title": "Baseline Flipped layout example",
-    "description": "Baseline Flipped layout for the Vuetify.js framework",
-    "keywords": "template, pre-made, vuetify layout"
+    "title": "Basic flipped layout example",
+    "description": "A basic flipped application layout implemented using Vuetify components.",
+    "keywords": "basic template, pre-made, vuetify layout"
   },
   "examples/layouts/centered": {
     "title": "Centered layout example",
-    "description": "Centered layout for the Vuetify.js framework",
-    "keywords": "template, pre-made, vuetify layout"
+    "description": "A centered application layout implemented using Vuetify components.",
+    "keywords": "centered template, pre-made, vuetify layout"
   },
   "examples/layouts/complex": {
     "title": "Complex layout example",
-    "description": "Complex layout for the Vuetify.js framework",
-    "keywords": "template, pre-made, vuetify layout"
+    "description": "A complex application layout implemented using Vuetify components.",
+    "keywords": "complex template, pre-made, vuetify layout"
   },
   "examples/layouts/dark": {
     "title": "Dark layout example",
-    "description": "Dark layout for the Vuetify.js framework",
-    "keywords": "template, pre-made, vuetify layout"
+    "description": "A dark application layout implemented using Vuetify components.",
+    "keywords": "dark template, pre-made, vuetify layout"
   },
   "examples/layouts/google-contacts": {
-    "title": "Google Contacts layout example",
-    "description": "Google Contacts layout for the Vuetify.js framework",
-    "keywords": "template, pre-made, vuetify layout"
+    "title": "Google contacts layout example",
+    "description": "A Google Contacts application example implemented using Vuetify components.",
+    "keywords": "google contacts template, pre-made, vuetify layout"
   },
   "examples/layouts/google-keep": {
-    "title": "Google Keep layout example",
-    "description": "Google Keep layout for the Vuetify.js framework",
-    "keywords": "template, pre-made, vuetify layout"
+    "title": "Google keep layout example",
+    "description": "A Google Keep application example implemented using Vuetify components.",
+    "keywords": "google keep template, pre-made, vuetify layout"
   },
   "examples/layouts/google-youtube": {
-    "title": "Google Youtube layout example",
-    "description": "Google Youtube layout for the Vuetify.js framework",
-    "keywords": "template, pre-made, vuetify layout"
+    "title": "Google youtube layout example",
+    "description": "A Youtube application example implemented using Vuetify components.",
+    "keywords": "youtube template, pre-made, vuetify layout"
   },
   "examples/layouts/sandbox": {
-    "title": "Layout Sandbox",
-    "description": "Layout Sandbox for the Vuetify.js framework",
+    "title": "Layout sandbox",
+    "description": "A layout sandbox where you can try different variations of layout setups.",
     "keywords": "template, pre-made, vuetify layout, sandbox"
   },
   "themes/premium": {
-    "title": "Free / Premium Themes",
+    "title": "Premium & free themes",
     "description": "Vuetify offers numerous pre-build starter and premium themes. Kickstart your next application today, no design skills needed.",
     "keywords": "vuetify themes, pre-built material themes, premium themes"
   }

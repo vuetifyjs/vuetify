@@ -1,5 +1,5 @@
 {
-  "header": "# Chip Groups",
+  "header": "# Chip groups",
   "headerText": "The `v-chip-group` supercharges the `v-chip` component by providing groupable functionality. It is used for creating groups of selections using chips.",
   "examples": {
     "usage": {

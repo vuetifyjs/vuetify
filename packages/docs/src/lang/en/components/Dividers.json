@@ -1,5 +1,5 @@
 {
-  "header": "# Divider",
+  "header": "# Dividers",
   "headerText": "The `v-divider` component is used to separate sections of lists.",
   "examples": {
     "usage": {

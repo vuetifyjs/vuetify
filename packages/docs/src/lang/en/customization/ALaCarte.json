@@ -1,5 +1,5 @@
 {
-  "header": "# Overview",
+  "header": "# A-la-carte",
   "headerText": "Being a component framework, Vuetify will always grow horizontally. Depending on your project, a small **package size** may be a requirement. The A la carte system enables you to pick and choose which components to import, drastically _lowering_ your build size. New projects created with the [vue-cli plugin](/getting-started/quick-start#new-applications) have this enabled by default.",
   "treeshakeWarning": "Tree shaking only works with webpack 4 in production mode",
   "loaderHeader1": "## vuetify-loader",

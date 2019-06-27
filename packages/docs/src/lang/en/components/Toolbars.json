@@ -1,5 +1,5 @@
 {
-  "header": "# Toolbar",
+  "header": "# Toolbars",
   "headerText": "The `v-toolbar` component is pivotal to any gui, as it generally is the primary source of site navigation. The toolbar component works great in conjunction with [v-navigation-drawer](/components/navigation-drawers) and [v-card](/components/cards).",
   "buttonMargin": "When `<v-btn>`s with the **icon** prop are used inside of `v-toolbar` and `v-app-bar` they will automatically have their size increased and negative margin applied to ensure proper spacing according to the Material Design Specification. If you choose to wrap your buttons in any container, such as a `<div>`, you will need to apply negative margin to that container in order to properly align them.",
   "examples": {
