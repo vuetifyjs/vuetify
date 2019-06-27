@@ -122,7 +122,7 @@
         </v-layout>
       </v-flex>
 
-      <v-flex xs12 v-if="showLabels">
+      <v-flex v-if="showLabels" xs12>
         <v-slider
           v-model="labelSize"
           label="Label size"
