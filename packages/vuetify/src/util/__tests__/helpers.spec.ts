@@ -268,7 +268,7 @@ describe('helpers', () => {
     })
   })
 
-  it('humanReadableFileSize should format file sizes', () => {
+  it('humanReadableFileSize should format file sizes with base 1024', () => {
     expect(humanReadableFileSize(0)).toBe('0 B')
     expect(humanReadableFileSize(512)).toBe('512 B')
 
@@ -280,5 +280,19 @@ describe('helpers', () => {
 
     expect(humanReadableFileSize(1073741824)).toBe('1.0 GB')
     expect(humanReadableFileSize(2147483648)).toBe('2.0 GB')
+  })
+
+  it('humanReadableFileSize should format file sizes with base 1000', () => {
+    expect(humanReadableFileSize(0, 1000)).toBe('0 B')
+    expect(humanReadableFileSize(512, 1000)).toBe('512 B')
+
+    expect(humanReadableFileSize(1000, 1000)).toBe('1.0 KB')
+    expect(humanReadableFileSize(4000, 1000)).toBe('4.0 KB')
+
+    expect(humanReadableFileSize(1000000, 1000)).toBe('1.0 MB')
+    expect(humanReadableFileSize(2000000, 1000)).toBe('2.0 MB')
+
+    expect(humanReadableFileSize(1000000000, 1000)).toBe('1.0 GB')
+    expect(humanReadableFileSize(2000000000, 1000)).toBe('2.0 GB')
   })
 })
