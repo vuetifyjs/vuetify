@@ -7,6 +7,7 @@ import {
   getSlotType,
   arrayDiff,
   getObjectValueByPath,
+  humanReadableFileSize,
 } from '../helpers'
 
 describe('helpers', () => {
@@ -265,5 +266,19 @@ describe('helpers', () => {
 
       expect(getSlotType(vm.$refs.foo, 'bar')).toBe('scoped')
     })
+  })
+
+  it('humanReadableFileSize should format file sizes', () => {
+    expect(humanReadableFileSize(0)).toBe('0 B')
+    expect(humanReadableFileSize(512)).toBe('512 B')
+
+    expect(humanReadableFileSize(1024)).toBe('1.0 KB')
+    expect(humanReadableFileSize(4096)).toBe('4.0 KB')
+
+    expect(humanReadableFileSize(1048576)).toBe('1.0 MB')
+    expect(humanReadableFileSize(2097152)).toBe('2.0 MB')
+
+    expect(humanReadableFileSize(1073741824)).toBe('1.0 GB')
+    expect(humanReadableFileSize(2147483648)).toBe('2.0 GB')
   })
 })
