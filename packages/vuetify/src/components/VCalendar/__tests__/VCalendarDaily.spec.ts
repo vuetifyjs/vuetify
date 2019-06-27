@@ -93,7 +93,7 @@ describe('VCalendarDaily', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  // Re-enable once test can be done without breaking travis
+  // TODO: Re-enable once test can be done without breaking travis
   it.skip('should render correctly without shortIntervals prop', async () => {
     const wrapper = mountFunction({
       propsData: {
