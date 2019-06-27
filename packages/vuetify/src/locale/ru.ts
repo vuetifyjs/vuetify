@@ -32,4 +32,7 @@ export default {
   calendar: {
     moreEvents: 'Еще {0}',
   },
+  fileInput: {
+    counter: 'Файлов: {0}',
+  },
 }

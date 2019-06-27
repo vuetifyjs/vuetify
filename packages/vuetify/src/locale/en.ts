@@ -32,4 +32,7 @@ export default {
   calendar: {
     moreEvents: '{0} more',
   },
+  fileInput: {
+    counter: '{0} files',
+  },
 }

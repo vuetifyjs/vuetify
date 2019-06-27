@@ -45,6 +45,10 @@ export default VTextField.extend({
       default: null,
       validator: (v: number | string) => !isNaN(parseInt(v)),
     } as PropValidator<number | string | null>,
+    counterString: {
+      type: String,
+      default: '$vuetify.fileInput.counter',
+    },
   },
 
   data: () => ({
@@ -59,8 +63,7 @@ export default VTextField.extend({
       }
     },
     counterValue (): string {
-      // TODO: add to locale
-      return `${this.lazyFileValue.length} files`
+      return this.$vuetify.lang.t(this.counterString, this.lazyFileValue.length)
     },
     isDirty (): boolean {
       return this.lazyFileValue.length > 0
