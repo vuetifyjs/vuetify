@@ -86,6 +86,54 @@ exports[`VFileInput.ts should display file size 1`] = `
 
 `;
 
+exports[`VFileInput.ts should display file size 2`] = `
+
+<div class="v-input v-input--is-label-active v-input--is-dirty v-input--is-readonly theme--light v-text-field v-file-input">
+  <div class="v-input__prepend-outer">
+    <div tabindex="0"
+         class="v-input__icon v-input__icon--prepend"
+    >
+      <i role="button"
+         class="v-icon v-icon--link material-icons theme--light"
+      >
+        $vuetify.icons.file
+      </i>
+    </div>
+  </div>
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-text-field__slot">
+        <div class="v-file-input__text">
+          test (2.1 MB)
+        </div>
+        <input readonly="readonly"
+               type="file"
+        >
+      </div>
+      <div class="v-input__append-inner">
+        <div class="v-input__icon v-input__icon--clear">
+          <i role="button"
+             class="v-icon v-icon--link material-icons theme--light"
+          >
+            $vuetify.icons.clear
+          </i>
+        </div>
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages theme--light">
+        <span name="message-transition"
+              tag="div"
+              class="v-messages__wrapper"
+        >
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
 exports[`VFileInput.ts should display progress 1`] = `
 
 <div class="v-input v-input--is-label-active v-input--is-readonly theme--light v-text-field v-file-input">
@@ -258,6 +306,57 @@ exports[`VFileInput.ts should display total size in counter 1`] = `
       </div>
       <div class="v-counter theme--light">
         2 files (3.0 MB in total)
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VFileInput.ts should display total size in counter 2`] = `
+
+<div class="v-input v-input--is-label-active v-input--is-dirty v-input--is-readonly theme--light v-text-field v-file-input">
+  <div class="v-input__prepend-outer">
+    <div tabindex="0"
+         class="v-input__icon v-input__icon--prepend"
+    >
+      <i role="button"
+         class="v-icon v-icon--link material-icons theme--light"
+      >
+        $vuetify.icons.file
+      </i>
+    </div>
+  </div>
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-text-field__slot">
+        <div class="v-file-input__text">
+          test (1.0 MB), test (2.1 MB)
+        </div>
+        <input readonly="readonly"
+               type="file"
+        >
+      </div>
+      <div class="v-input__append-inner">
+        <div class="v-input__icon v-input__icon--clear">
+          <i role="button"
+             class="v-icon v-icon--link material-icons theme--light"
+          >
+            $vuetify.icons.clear
+          </i>
+        </div>
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages theme--light">
+        <span name="message-transition"
+              tag="div"
+              class="v-messages__wrapper"
+        >
+        </span>
+      </div>
+      <div class="v-counter theme--light">
+        2 files (3.1 MB in total)
       </div>
     </div>
   </div>

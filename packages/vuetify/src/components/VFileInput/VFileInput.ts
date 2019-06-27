@@ -57,7 +57,11 @@ export default VTextField.extend({
       type: String,
       default: '$vuetify.fileInput.counterSize',
     },
-    displaySize: Boolean,
+    displaySize: {
+      type: [Boolean, Number],
+      default: false,
+      validator: v => typeof v === 'boolean' || v === 1000 || v === 1024,
+    } as PropValidator<boolean | 1000 | 1024>,
   },
 
   data: () => ({
@@ -74,7 +78,7 @@ export default VTextField.extend({
     counterValue (): string {
       if (this.displaySize) {
         const bytes = this.lazyFileValue.length > 0 ? (this.lazyFileValue as File[]).map(f => f.size).reduce((a, b) => a + b) : 0
-        return this.$vuetify.lang.t(this.counterSizeString, this.lazyFileValue.length, humanReadableFileSize(bytes))
+        return this.$vuetify.lang.t(this.counterSizeString, this.lazyFileValue.length, humanReadableFileSize(bytes, this.base))
       }
       return this.$vuetify.lang.t(this.counterString, this.lazyFileValue.length)
     },
@@ -85,8 +89,11 @@ export default VTextField.extend({
       if (!this.isDirty) return this.placeholder
 
       return this.lazyFileValue.map(file =>
-        this.displaySize ? `${file.name} (${humanReadableFileSize(file.size)})` : file.name
+        this.displaySize ? `${file.name} (${humanReadableFileSize(file.size, this.base)})` : file.name
       ).join(', ')
+    },
+    base (): 1000 | 1024 | undefined {
+      return typeof this.displaySize !== 'boolean' ? this.displaySize : undefined
     },
   },
 

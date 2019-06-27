@@ -63,6 +63,12 @@ describe('VFileInput.ts', () => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({
+      displaySize: 1000,
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should display total size in counter', () => {
@@ -75,6 +81,12 @@ describe('VFileInput.ts', () => {
 
     wrapper.setData({
       lazyFileValue: [ oneMBFile, twoMBFile ],
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({
+      displaySize: 1000,
     })
 
     expect(wrapper.html()).toMatchSnapshot()
