@@ -146,7 +146,9 @@ export default CalendarWithEvents.extend({
             relativeDays(moved, mover, DAYS_IN_WEEK)
             break
           case 'day':
-            mover(moved)
+            const index = moved.weekday
+            const days = forward ? this.weekdaySkips[index] : this.weekdaySkipsReverse[index]
+            relativeDays(moved, mover, days)
             break
           case '4day':
             relativeDays(moved, mover, 4)

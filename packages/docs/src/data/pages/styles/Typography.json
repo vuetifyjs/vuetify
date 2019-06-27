@@ -1,22 +1,28 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/typography/the-type-system.html"
+  },
   "children": [
     {
       "type": "section",
       "children": [
         {
-          "type": "usage",
-          "value": "usage"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
+          "type": "heading",
+          "lang": "fontHeader"
+        },
         {
-          "type": "api",
-          "value": [ "$vuetify" ]
+          "type": "text",
+          "lang": "fontText"
+        },
+        {
+          "type": "markdown",
+          "lang": "fonts"
+        },
+        {
+          "type": "style-headings"
         }
       ]
     },
@@ -25,15 +31,26 @@
       "children": [
         {
           "type": "heading",
-          "lang": "routerHeading"
+          "lang": "weightsHeader"
         },
         {
           "type": "text",
-          "lang": "routerText1"
+          "lang": "weightsText"
         },
         {
-          "type": "markup",
-          "value": "js_import_goto_router"
+          "type": "markdown",
+          "lang": "weights"
+        },
+        {
+          "type": "text",
+          "lang": "italicText"
+        },
+        {
+          "type": "markdown",
+          "lang": "italic"
+        },
+        {
+          "type": "style-weights"
         }
       ]
     },
@@ -42,19 +59,18 @@
       "children": [
         {
           "type": "heading",
-          "lang": "firstHeader"
+          "lang": "transformHeader"
         },
         {
           "type": "text",
-          "lang": "loremIpsum"
+          "lang": "transformText"
         },
         {
-          "type": "text",
-          "lang": "loremIpsum"
+          "type": "markdown",
+          "lang": "transforms"
         },
         {
-          "type": "text",
-          "lang": "loremIpsum"
+          "type": "style-typefaces"
         }
       ]
     },
@@ -63,40 +79,19 @@
       "children": [
         {
           "type": "heading",
-          "lang": "secondHeader"
+          "lang": "wrapHeader"
         },
         {
           "type": "text",
-          "lang": "loremIpsum"
+          "lang": "wrapText"
         },
         {
-          "type": "text",
-          "lang": "loremIpsum"
+          "type": "markdown",
+          "lang": "wraps"
         },
         {
-          "type": "text",
-          "lang": "loremIpsum"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "heading",
-          "lang": "thirdHeader"
-        },
-        {
-          "type": "text",
-          "lang": "loremIpsum"
-        },
-        {
-          "type": "text",
-          "lang": "loremIpsum"
-        },
-        {
-          "type": "text",
-          "lang": "loremIpsum"
+          "type": "example",
+          "value": "truncate"
         }
       ]
     },
@@ -106,9 +101,8 @@
         {
           "type": "up-next",
           "value": [
-            "directives/scrolling",
-            "framework/content",
-            "components/sliders"
+            "framework/alignment",
+            "styles/content"
           ]
         }
       ]

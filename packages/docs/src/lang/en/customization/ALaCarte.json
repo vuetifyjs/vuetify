@@ -13,7 +13,7 @@
   "loaderText4a": "You can also explicitly install the loader for webpack based projects. Similar to the vue.config.js setup, you simply add the loader to your project's webpack plugins.",
   "loaderHeader5": "## Required styles",
   "loaderText5a": "When you import from `vuetify/lib` the baseline framework styles are pulled in as well. Each component is individually responsible for their styles and will be compiled just the same. If you are using `vue-cli-3` and the `vue-cli-plugin-vuetify` plugin, this is done for you automatically and you can **skip** this section. If you are working in a project where you do not have access to the cli, you can manually included the required packages.",
-  "sassInfo": "For a more detailed explanation on how to setup your application to handle Sass, please navigate to the [theme page](/framework/theme).",
+  "sassInfo": "For a more detailed explanation on how to setup your application to handle Sass, please navigate to the [theme page](/customization/theme).",
   "loaderText5b": "After installation you will still need to configure your webpack.config.js to parse .sass files. For more information on how to do this with **fibers**, checkout the [official documentation](https://webpack.js.org/loaders/sass-loader/).",
   "loaderHeader6": "## Custom dynamic imports",
   "loaderText6a": "The vuetify-loader also allows you to write your own custom match functions to import your own project's components as well. This can be done in both vue-cli and webpack projects.",

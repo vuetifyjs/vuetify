@@ -5,200 +5,200 @@ module.exports = {
     scopedSlots: [
       {
         name: 'day',
-        props: VTimestamp
+        props: VTimestamp,
       },
       {
-        name: 'dayBody',
-        props: VTimestampWithTime
+        name: 'day-body',
+        props: VTimestampWithTime,
       },
       {
-        name: 'dayHeader',
-        props: VTimestamp
+        name: 'day-header',
+        props: VTimestamp,
       },
       {
-        name: 'dayLabel',
-        props: VTimestamp
+        name: 'day-label',
+        props: VTimestamp,
       },
       {
-        name: 'dayMonth',
-        props: VTimestamp
+        name: 'day-month',
+        props: VTimestamp,
       },
       {
         name: 'interval',
-        props: VTimestampWithTime
-      }
+        props: VTimestampWithTime,
+      },
     ],
     functions: [
       {
         name: 'updateTimes',
-        signature: '(): void'
+        signature: '(): void',
       },
       {
         name: 'next',
-        signature: '(amount: number = 1): void'
+        signature: '(amount: number = 1): void',
       },
       {
         name: 'prev',
-        signature: '(amount: number = 1): void'
+        signature: '(amount: number = 1): void',
       },
       {
         name: 'move',
-        signature: '(amount: number = 1): void'
+        signature: '(amount: number = 1): void',
       },
       {
         name: 'timeToY',
-        signature: '(time: number | string | { hour: number, minute: number }, clamp: boolean = true): number | false'
+        signature: '(time: number | string | { hour: number, minute: number }, clamp: boolean = true): number | false',
       },
       {
         name: 'minutesToPixels',
-        signature: '(minutes: number): number'
+        signature: '(minutes: number): number',
       },
       {
         name: 'scrollToTime',
-        signature: '(time: number | string | { hour: number, minute: number }): boolean'
-      }
+        signature: '(time: number | string | { hour: number, minute: number }): boolean',
+      },
     ],
     events: [
       {
         name: 'input',
-        value: VTimestamp
+        value: VTimestamp,
       },
       {
         name: 'moved',
-        value: VTimestamp
+        value: VTimestamp,
       },
       {
         name: 'change',
-        value: { start: VTimestamp, end: VTimestamp }
+        value: { start: VTimestamp, end: VTimestamp },
       },
       {
         name: 'click:date',
-        value: VTimestampWithTime
+        value: VTimestampWithTime,
       },
       {
         name: 'contextmenu:date',
-        value: VTimestampWithTime
+        value: VTimestampWithTime,
       },
       {
         name: 'click:day',
-        value: VTimestampWithTime
+        value: VTimestampWithTime,
       },
       {
         name: 'contextmenu:day',
-        value: VTimestampWithTime
+        value: VTimestampWithTime,
       },
       {
         name: 'mousedown:day',
-        value: VTimestampWithTime
+        value: VTimestampWithTime,
       },
       {
         name: 'mousemove:day',
-        value: VTimestampWithTime
+        value: VTimestampWithTime,
       },
       {
         name: 'mouseup:day',
-        value: VTimestampWithTime
+        value: VTimestampWithTime,
       },
       {
         name: 'mouseenter:day',
-        value: VTimestampWithTime
+        value: VTimestampWithTime,
       },
       {
         name: 'mouseleave:day',
-        value: VTimestampWithTime
+        value: VTimestampWithTime,
       },
       {
         name: 'touchstart:day',
-        value: VTimestampWithTime
+        value: VTimestampWithTime,
       },
       {
         name: 'touchmove:day',
-        value: VTimestampWithTime
+        value: VTimestampWithTime,
       },
       {
         name: 'touchend:day',
-        value: VTimestampWithTime
+        value: VTimestampWithTime,
       },
       {
         name: 'click:time',
-        value: VTimestampWithTime
+        value: VTimestampWithTime,
       },
       {
         name: 'contextmenu:time',
-        value: VTimestampWithTime
+        value: VTimestampWithTime,
       },
       {
         name: 'mousedown:time',
-        value: VTimestampWithTime
+        value: VTimestampWithTime,
       },
       {
         name: 'mousemove:time',
-        value: VTimestampWithTime
+        value: VTimestampWithTime,
       },
       {
         name: 'mouseup:time',
-        value: VTimestampWithTime
+        value: VTimestampWithTime,
       },
       {
         name: 'mouseenter:time',
-        value: VTimestampWithTime
+        value: VTimestampWithTime,
       },
       {
         name: 'mouseleave:time',
-        value: VTimestampWithTime
+        value: VTimestampWithTime,
       },
       {
         name: 'touchstart:time',
-        value: VTimestampWithTime
+        value: VTimestampWithTime,
       },
       {
         name: 'touchmove:time',
-        value: VTimestampWithTime
+        value: VTimestampWithTime,
       },
       {
         name: 'touchend:time',
-        value: VTimestampWithTime
+        value: VTimestampWithTime,
       },
       {
         name: 'click:interval',
-        value: VTimestamp
+        value: VTimestamp,
       },
       {
         name: 'contextmenu:interval',
-        value: VTimestamp
+        value: VTimestamp,
       },
       {
         name: 'mousedown:interval',
-        value: VTimestamp
+        value: VTimestamp,
       },
       {
         name: 'mousemove:interval',
-        value: VTimestamp
+        value: VTimestamp,
       },
       {
         name: 'mouseup:interval',
-        value: VTimestamp
+        value: VTimestamp,
       },
       {
         name: 'mouseenter:interval',
-        value: VTimestamp
+        value: VTimestamp,
       },
       {
         name: 'mouseleave:interval',
-        value: VTimestamp
+        value: VTimestamp,
       },
       {
         name: 'touchstart:interval',
-        value: VTimestamp
+        value: VTimestamp,
       },
       {
         name: 'touchmove:interval',
-        value: VTimestamp
+        value: VTimestamp,
       },
       {
         name: 'touchend:interval',
-        value: VTimestamp
-      }
-    ]
-  }
+        value: VTimestamp,
+      },
+    ],
+  },
 }

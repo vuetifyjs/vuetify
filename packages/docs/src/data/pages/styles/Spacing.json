@@ -67,7 +67,7 @@
           "type": "up-next",
           "value": [
             "framework/alignment",
-            "framework/content"
+            "styles/content"
           ]
         }
       ]

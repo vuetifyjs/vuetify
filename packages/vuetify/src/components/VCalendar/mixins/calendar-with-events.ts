@@ -461,10 +461,10 @@ export default CalendarBase.extend({
           }
           return children
         },
-        dayHeader: (day: VDaySlotScope) => {
+        'day-header': (day: VDaySlotScope) => {
           return getSlotChildren(day, this.getEventsForDayAll, this.genDayEvent, false)
         },
-        dayBody: (day: VDayBodySlotScope) => {
+        'day-body': (day: VDayBodySlotScope) => {
           return [this.$createElement('div', {
             staticClass: 'v-event-timed-container',
           }, getSlotChildren(day, this.getEventsForDayTimed, this.genTimedEvent, true))]

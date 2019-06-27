@@ -1,28 +1,22 @@
 {
   "title": "header",
   "titleText": "headerText",
-  "mdSpec": {
-    "version": "2",
-    "link": "https://material.io/design/typography/the-type-system.html"
-  },
   "children": [
     {
       "type": "section",
       "children": [
         {
-          "type": "heading",
-          "lang": "fontHeader"
-        },
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
         {
-          "type": "text",
-          "lang": "fontText"
-        },
-        {
-          "type": "markdown",
-          "lang": "fonts"
-        },
-        {
-          "type": "style-headings"
+          "type": "api",
+          "value": [ "$vuetify" ]
         }
       ]
     },
@@ -31,26 +25,15 @@
       "children": [
         {
           "type": "heading",
-          "lang": "weightsHeader"
+          "lang": "routerHeading"
         },
         {
           "type": "text",
-          "lang": "weightsText"
+          "lang": "routerText1"
         },
         {
-          "type": "markdown",
-          "lang": "weights"
-        },
-        {
-          "type": "text",
-          "lang": "italicText"
-        },
-        {
-          "type": "markdown",
-          "lang": "italic"
-        },
-        {
-          "type": "style-weights"
+          "type": "markup",
+          "value": "js_import_goto_router"
         }
       ]
     },
@@ -59,18 +42,19 @@
       "children": [
         {
           "type": "heading",
-          "lang": "transformHeader"
+          "lang": "firstHeader"
         },
         {
           "type": "text",
-          "lang": "transformText"
+          "lang": "loremIpsum"
         },
         {
-          "type": "markdown",
-          "lang": "transforms"
+          "type": "text",
+          "lang": "loremIpsum"
         },
         {
-          "type": "style-typefaces"
+          "type": "text",
+          "lang": "loremIpsum"
         }
       ]
     },
@@ -79,19 +63,40 @@
       "children": [
         {
           "type": "heading",
-          "lang": "wrapHeader"
+          "lang": "secondHeader"
         },
         {
           "type": "text",
-          "lang": "wrapText"
+          "lang": "loremIpsum"
         },
         {
-          "type": "markdown",
-          "lang": "wraps"
+          "type": "text",
+          "lang": "loremIpsum"
         },
         {
-          "type": "example",
-          "value": "truncate"
+          "type": "text",
+          "lang": "loremIpsum"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "thirdHeader"
+        },
+        {
+          "type": "text",
+          "lang": "loremIpsum"
+        },
+        {
+          "type": "text",
+          "lang": "loremIpsum"
+        },
+        {
+          "type": "text",
+          "lang": "loremIpsum"
         }
       ]
     },
@@ -101,8 +106,9 @@
         {
           "type": "up-next",
           "value": [
-            "framework/alignment",
-            "framework/content"
+            "directives/scrolling",
+            "styles/content",
+            "components/sliders"
           ]
         }
       ]

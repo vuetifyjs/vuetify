@@ -27,9 +27,9 @@
         {
           "type": "up-next",
           "value": [
-            "framework/breakpoints",
-            "framework/display",
-            "framework/grid"
+            "customization/breakpoints",
+            "styles/display",
+            "components/grids"
           ]
         }
       ]

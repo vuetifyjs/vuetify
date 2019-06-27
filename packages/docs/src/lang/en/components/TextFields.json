@@ -74,7 +74,7 @@
       "desc": "Text fields can be used with an alternative solo design."
     },
     "outlined": {
-      "header": "### Outline style",
+      "header": "### Outlined style",
       "desc": "Text fields can be used with an alternative outline design."
     },
     "custom-colors": {

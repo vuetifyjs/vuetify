@@ -67,7 +67,7 @@
         {
           "type": "up-next",
           "value": [
-            "framework/breakpoints",
+            "customization/breakpoints",
             "components/buttons",
             "components/windows"
           ]

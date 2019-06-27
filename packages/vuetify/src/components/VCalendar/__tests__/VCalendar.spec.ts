@@ -98,4 +98,29 @@ describe('VCalendar', () => {
 
     expect(wrapper.vm.parsedValue.date).toBe('2019-01-29')
   })
+
+  it('should go to correct day when using next/prev public functions', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: '2019-01-11',
+        type: 'day',
+        weekdays: [1, 2, 3, 4, 5],
+      },
+    })
+
+    const input = jest.fn(value => wrapper.setProps({ value }))
+    wrapper.vm.$on('input', input)
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.vm.next()
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.vm.prev()
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

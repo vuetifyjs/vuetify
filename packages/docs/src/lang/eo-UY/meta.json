@@ -14,11 +14,6 @@
     "description": "crwdns22772:0crwdne22772:0",
     "keywords": "crwdns22774:0crwdne22774:0"
   },
-  "getting-started/starter-templates": {
-    "title": "crwdns22776:0crwdne22776:0",
-    "description": "crwdns22778:0crwdne22778:0",
-    "keywords": "crwdns22780:0crwdne22780:0"
-  },
   "getting-started/why-vuetify": {
     "title": "crwdns22782:0crwdne22782:0",
     "description": "crwdns22784:0crwdne22784:0",
@@ -54,17 +49,17 @@
     "description": "crwdns22820:0crwdne22820:0",
     "keywords": "crwdns22822:0crwdne22822:0"
   },
-  "framework/a-la-carte": {
+  "customization/a-la-carte": {
     "title": "crwdns22824:0crwdne22824:0",
     "description": "crwdns22826:0crwdne22826:0",
     "keywords": "crwdns22828:0crwdne22828:0"
   },
-  "framework/application": {
+  "components/application": {
     "title": "crwdns22830:0crwdne22830:0",
     "description": "crwdns22832:0crwdne22832:0",
     "keywords": "crwdns22834:0crwdne22834:0"
   },
-  "framework/icons": {
+  "customization/icons": {
     "title": "crwdns22836:0crwdne22836:0",
     "description": "crwdns22838:0crwdne22838:0",
     "keywords": "crwdns22840:0crwdne22840:0"
@@ -74,62 +69,62 @@
     "description": "crwdns22844:0crwdne22844:0",
     "keywords": "crwdns22846:0crwdne22846:0"
   },
-  "framework/transitions": {
+  "styles/transitions": {
     "title": "crwdns22848:0crwdne22848:0",
     "description": "crwdns22850:0crwdne22850:0",
     "keywords": "crwdns22852:0crwdne22852:0"
   },
-  "framework/scroll": {
+  "styles/scroll": {
     "title": "crwdns22854:0crwdne22854:0",
     "description": "crwdns22856:0crwdne22856:0",
     "keywords": "crwdns22858:0crwdne22858:0"
   },
-  "framework/colors": {
+  "styles/colors": {
     "title": "crwdns22860:0crwdne22860:0",
     "description": "crwdns22862:0crwdne22862:0",
     "keywords": "crwdns22864:0crwdne22864:0"
   },
-  "framework/theme": {
+  "customization/theme": {
     "title": "crwdns22866:0crwdne22866:0",
     "description": "crwdns22868:0crwdne22868:0",
     "keywords": "crwdns22870:0crwdne22870:0"
   },
-  "framework/typography": {
+  "styles/typography": {
     "title": "crwdns22872:0crwdne22872:0",
     "description": "crwdns22874:0crwdne22874:0",
     "keywords": "crwdns22876:0crwdne22876:0"
   },
-  "framework/content": {
+  "styles/content": {
     "title": "crwdns22878:0crwdne22878:0",
     "description": "crwdns22880:0crwdne22880:0",
     "keywords": "crwdns22882:0crwdne22882:0"
   },
-  "framework/pre-made-layouts": {
+  "getting-started/pre-made-layouts": {
     "title": "crwdns22884:0crwdne22884:0",
     "description": "crwdns22886:0crwdne22886:0",
     "keywords": "crwdns22888:0crwdne22888:0"
   },
-  "framework/grid": {
+  "components/grids": {
     "title": "crwdns22890:0crwdne22890:0",
     "description": "crwdns22892:0crwdne22892:0",
     "keywords": "crwdns22894:0crwdne22894:0"
   },
-  "framework/grid-lists": {
+  "components/grid-lists": {
     "title": "crwdns22896:0crwdne22896:0",
     "description": "crwdns22898:0crwdne22898:0",
     "keywords": "crwdns22900:0crwdne22900:0"
   },
-  "framework/breakpoints": {
+  "customization/breakpoints": {
     "title": "crwdns22902:0crwdne22902:0",
     "description": "crwdns22904:0crwdne22904:0",
     "keywords": "crwdns22906:0crwdne22906:0"
   },
-  "framework/aspect-ratios": {
+  "components/aspect-ratios": {
     "title": "crwdns22908:0crwdne22908:0",
     "description": "crwdns22910:0crwdne22910:0",
     "keywords": "crwdns22912:0crwdne22912:0"
   },
-  "framework/spacing": {
+  "styles/spacing": {
     "title": "crwdns22914:0crwdne22914:0",
     "description": "crwdns22916:0crwdne22916:0",
     "keywords": "crwdns22918:0crwdne22918:0"
@@ -139,12 +134,12 @@
     "description": "crwdns22922:0crwdne22922:0",
     "keywords": "crwdns22924:0crwdne22924:0"
   },
-  "framework/display": {
+  "styles/display": {
     "title": "crwdns22926:0crwdne22926:0",
     "description": "crwdns22928:0crwdne22928:0",
     "keywords": "crwdns22930:0crwdne22930:0"
   },
-  "framework/elevation": {
+  "styles/elevation": {
     "title": "crwdns22932:0crwdne22932:0",
     "description": "crwdns22934:0crwdne22934:0",
     "keywords": "crwdns22936:0crwdne22936:0"

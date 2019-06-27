@@ -14,10 +14,10 @@
     "description": "Get started with Vue and Vuetify in no time. Support for vue-cli-3, existing projects and more.",
     "keywords": "quick start, vuetify templates, installing vuetify, install vuetify"
   },
-  "getting-started/starter-templates": {
-    "title": "Starter Templates",
-    "description": "Understand the layout and structure of your application. Check out examples.",
-    "keywords": "templates, vuetify"
+  "getting-started/pre-made-layouts": {
+    "title": "Application layouts",
+    "description": "Select from a multitude of official material design layouts.",
+    "keywords": "pre-defined layouts, layouts, application layout, material design layouts"
   },
   "getting-started/unit-testing": {
     "title": "Unit testing",
@@ -64,105 +64,90 @@
     "description": "Get help and support from the creator of Vuetify, John Leider",
     "keywords": "consulting, support, help"
   },
-  "framework/accessibility": {
+  "customization/accessibility": {
     "title": "Web accessibility",
     "description": "See examples and the advantages of having accessibility (a11y) support in Vuetify components.",
     "keywords": "a11y, accessibility, usability"
   },
-  "framework/a-la-carte": {
+  "customization/a-la-carte": {
     "title": "A La Carte",
     "description": "Get ready for automatic treeshaking. Use only the components you need. Single component importing only pulls in what you use.",
     "keywords": "a la carte, a-la-carte, vuetify single import, vuetify import, component importing"
   },
-  "framework/application": {
-    "title": "Application service",
-    "description": "Vuetify comes equipped with a default markup that makes it easy to create layouts for any application.",
-    "keywords": "default layout, default markup, vuetify default layout"
-  },
-  "framework/icons": {
-    "title": "Installing Icons",
-    "description": "Vuetify supports custom icon sets through prefixes and global options.",
-    "keywords": "vue, icon, iconfont, icon libraries, vuetify icons"
-  },
-  "framework/internationalization": {
-    "title": "Internationalization",
-    "description": "Vuetify supports language internationalization of its components.",
-    "keywords": "vue, i18n, language, internationalization"
-  },
-  "framework/transitions": {
-    "title": "Transitions",
-    "description": "Make an amazing application with smooth built in animations.",
-    "keywords": "motion, transitions"
-  },
-  "framework/scroll": {
-    "title": "Scroll",
-    "description": "Using the goTo helper you can smoothly scroll to any location on the page.",
-    "keywords": "scrolling, scroll, smooth scroll, transitions"
-  },
-  "framework/colors": {
-    "title": "Material color palette",
-    "description": "Easily apply any color from the material design palette.",
-    "keywords": "colors"
-  },
-  "framework/theme": {
-    "title": "Application theming",
-    "description": "Setup your application's theme and supplemental colors in a flash.",
-    "keywords": "themes"
-  },
-  "framework/typography": {
-    "title": "Application typography",
-    "description": "View the various typography styles. From headings to captions, with various weights and sizes.",
-    "keywords": "typography, headings, titles"
-  },
-  "framework/content": {
-    "title": "Content styles",
-    "description": "Vuetify has custom styling for default html markup.",
-    "keywords": "content, html, markup"
-  },
-  "framework/pre-made-layouts": {
-    "title": "Application layouts",
-    "description": "Select from a multitude of official material design layouts.",
-    "keywords": "pre-defined layouts, layouts, application layout, material design layouts"
-  },
-  "framework/grid": {
-    "title": "Layout grid system",
-    "description": "Vuetify supports the material design 12 point grid for laying out your application.",
-    "keywords": "grid, layout, flex"
-  },
-  "framework/grid-lists": {
-    "title": "Grid List Component",
-    "description": "Grid lists allow you to specify the gutter used when separating grid items.",
-    "keywords": "grid lists, grid"
-  },
-  "framework/breakpoints": {
+  "customization/breakpoints": {
     "title": "Breakpoints",
     "description": "Access the Vuetify grid system directly in components.",
     "keywords": "breakpoints"
   },
-  "framework/aspect-ratios": {
-    "title": "Aspect ratios",
-    "description": "Aspect ratios for Vuetify Framework",
-    "keywords": "ratio, responsive"
+  "customization/icons": {
+    "title": "Installing Icons",
+    "description": "Vuetify supports custom icon sets through prefixes and global options.",
+    "keywords": "vue, icon, iconfont, icon libraries, vuetify icons"
   },
-  "framework/spacing": {
-    "title": "Spacing helpers",
-    "description": "Spacing helper classes allow you to apply margin or padding to any element.",
-    "keywords": "spacing helper classes"
+  "customization/internationalization": {
+    "title": "Internationalization",
+    "description": "Vuetify supports language internationalization of its components.",
+    "keywords": "vue, i18n, language, internationalization"
   },
-  "framework/alignment": {
+  "customization/rtl": {
+    "title": "RTL (bidirectionality)",
+    "description": "Vuetify is configurable and compatible with RTL languages.",
+    "keywords": "rtl, right-to-left, bidirectionality"
+  },
+  "customization/sass-variables": {
+    "title": "Sass variables",
+    "description": "Customize Vuetify's internal styles by modifying SASS variables.",
+    "keywords": "sass variables, scss variables, modifying Vuetify styles"
+  },
+  "customization/theme": {
+    "title": "Application theming",
+    "description": "Setup your application's theme and supplemental colors in a flash.",
+    "keywords": "themes"
+  },
+  "styles/alignment": {
     "title": "Alignment helpers",
     "description": "Alignment helpers assist in modifying your application layout on varying viewport sizes.",
     "keywords": "alignment helper classes"
   },
-  "framework/display": {
+  "styles/colors": {
+    "title": "Material color palette",
+    "description": "Easily apply any color from the material design palette.",
+    "keywords": "colors"
+  },
+  "styles/content": {
+    "title": "Content styles",
+    "description": "Vuetify has custom styling for default html markup.",
+    "keywords": "content, html, markup"
+  },
+  "styles/display": {
     "title": "Display helpers",
     "description": "Display helper classes allow you to control when elements should display based upon viewport.",
     "keywords": "display helper classes"
   },
-  "framework/elevation": {
+  "styles/elevation": {
     "title": "Elevation helpers",
     "description": "Elevation helper classes allow you to control relative depth, or distance, between two surfaces along the z-axis.",
     "keywords": "elevation helper classes"
+  },
+  "styles/scroll": {
+    "title": "Scroll",
+    "description": "Using the goTo helper you can smoothly scroll to any location on the page.",
+    "keywords": "scrolling, scroll, smooth scroll, transitions"
+  },
+  "styles/spacing": {
+    "title": "Spacing helpers",
+    "description": "Spacing helper classes allow you to apply margin or padding to any element.",
+    "keywords": "spacing helper classes"
+  },
+  "styles/transitions": {
+    "title": "Transitions",
+    "description": "Make an amazing application with smooth built in animations.",
+    "keywords": "motion, transitions"
+  },
+  "styles/typography": {
+    "title": "Application typography",
+    "description": "View the various typography styles. From headings to captions, with various weights and sizes.",
+    "keywords": "typography, headings, titles"
   },
   "framework/sandbox": {
     "title": "Sandbox",
@@ -179,10 +164,20 @@
     "description": "The v-alert component is used to convey information to the user. Designed to stand out, the alerts come in four contextual styles, success, info, warning, and error.",
     "keywords": "alerts, components"
   },
+  "components/application": {
+    "title": "Application service",
+    "description": "Vuetify comes equipped with a default markup that makes it easy to create layouts for any application.",
+    "keywords": "default layout, default markup, vuetify default layout"
+  },
   "components/app-bars": {
-    "title": "AppBars Component",
+    "title": "App-bar Component",
     "description": "The v-app-bar component is a supercharged toolbar with advanced scrolling techniques and application layout support.",
     "keywords": "toolbars, system-bars, app-bars"
+  },
+  "components/aspect-ratios": {
+    "title": "Aspect ratios",
+    "description": "Aspect ratios for Vuetify Framework",
+    "keywords": "ratio, responsive"
   },
   "components/autocompletes": {
     "title": "Autocomplete Component",
@@ -328,6 +323,16 @@
     "title": "Footer Component",
     "description": "Footer component for Vuetify Framework",
     "keywords": "footer"
+  },
+  "components/grids": {
+    "title": "Layout grid system",
+    "description": "Vuetify supports the material design 12 point grid for laying out your application.",
+    "keywords": "grid, layout, flex"
+  },
+  "components/grid-lists": {
+    "title": "Grid List Component",
+    "description": "Grid lists allow you to specify the gutter used when separating grid items.",
+    "keywords": "grid lists, grid"
   },
   "components/forms": {
     "title": "Form Component",
@@ -475,7 +480,7 @@
     "keywords": "subheader"
   },
   "components/system-bars": {
-    "title": "SystemBar Component",
+    "title": "System-bar Component",
     "description": "THe v-system-bar component provides an appplication with an android style status bar.",
     "keywords": "system-bar, android status bar, status bar"
   },
@@ -519,6 +524,7 @@
     "description": "Windows components for the Vuetify framework.",
     "keywords": "windows, views, transition views"
   },
+
   "directives/resizing": {
     "title": "Resizing",
     "description": "Resize directive for the Vuetify framework.",

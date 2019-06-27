@@ -6,7 +6,16 @@
       "type": "section",
       "children": [
         {
-          "type": "doc-pre-made-layouts"
+          "type": "text",
+          "lang": "howText"
+        },
+        {
+          "type": "text",
+          "lang": "alignments"
+        },
+        {
+          "type": "usage",
+          "value": "example"
         }
       ]
     },
@@ -16,9 +25,8 @@
         {
           "type": "up-next",
           "value": [
-            "themes/premium",
-            "framework/colors",
-            "framework/theme"
+            "styles/content",
+            "styles/typography"
           ]
         }
       ]
