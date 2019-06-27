@@ -12,7 +12,7 @@ import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
 // Helpers
-import { wrapInArray } from '../../util/helpers'
+import { wrapInArray, humanReadableFileSize } from '../../util/helpers'
 
 export default VTextField.extend({
   name: 'v-file-input',
@@ -49,6 +49,11 @@ export default VTextField.extend({
       type: String,
       default: '$vuetify.fileInput.counter',
     },
+    counterSizeString: {
+      type: String,
+      default: '$vuetify.fileInput.counterSize',
+    },
+    displaySize: Boolean,
   },
 
   data: () => ({
@@ -63,6 +68,10 @@ export default VTextField.extend({
       }
     },
     counterValue (): string {
+      if (this.displaySize) {
+        const bytes = this.lazyFileValue.length > 0 ? (this.lazyFileValue as File[]).map(f => f.size).reduce((a, b) => a + b) : 0
+        return this.$vuetify.lang.t(this.counterSizeString, this.lazyFileValue.length, humanReadableFileSize(bytes))
+      }
       return this.$vuetify.lang.t(this.counterString, this.lazyFileValue.length)
     },
     isDirty (): boolean {
@@ -71,7 +80,9 @@ export default VTextField.extend({
     text (): string | null {
       if (!this.isDirty) return this.placeholder
 
-      return this.lazyFileValue.map(file => file.name).join(', ')
+      return this.lazyFileValue.map(file =>
+        this.displaySize ? `${file.name} (${humanReadableFileSize(file.size)})` : file.name
+      ).join(', ')
     },
   },
 

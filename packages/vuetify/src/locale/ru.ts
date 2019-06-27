@@ -34,5 +34,6 @@ export default {
   },
   fileInput: {
     counter: 'Файлов: {0}',
+    counterSize: 'Файлов: {0} (всего {1})',
   },
 }

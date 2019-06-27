@@ -486,3 +486,17 @@ export function chunk (str: string, size = 1) {
   }
   return chunked
 }
+
+export function humanReadableFileSize (bytes: number): string {
+  if (bytes < 1024) {
+    return `${bytes} B`
+  }
+
+  var units = ['KB', 'MB', 'GB']
+  var unit = -1
+  while (Math.abs(bytes) >= 1024 && unit < units.length - 1) {
+    bytes /= 1024
+    ++unit
+  }
+  return `${bytes.toFixed(1)} ${units[unit]}`
+}
