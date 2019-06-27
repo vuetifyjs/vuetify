@@ -1,0 +1,31 @@
+<!-- Rendered `v-list-group` content HTML Output -->
+<div
+  class="v-list-item-group"
+  role="listbox"
+>
+  <div
+    aria-selected="true"
+    class="v-list-item"
+    role="listitem"
+    tabindex="0"
+  >
+    ...
+  </div>
+  <div
+    aria-disabled="true"
+    aria-selected="true"
+    class="v-list-item"
+    role="listitem"
+    tabindex="-1"
+  >
+    ...
+  </div>
+  <div
+    aria-selected="false"
+    class="v-list-item"
+    role="listitem"
+    tabindex="0"
+  >
+    ...
+  </div>
+</div>

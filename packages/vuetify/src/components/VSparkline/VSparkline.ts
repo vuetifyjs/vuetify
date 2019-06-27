@@ -3,7 +3,7 @@ import Colorable from '../../mixins/colorable'
 
 // Utilities
 import mixins, { ExtractVue } from '../../util/mixins'
-import { genPoints } from './helpers/core'
+import { genPoints, genBars } from './helpers/core'
 import { genPath } from './helpers/path'
 
 // Types
@@ -30,6 +30,13 @@ export interface Point {
   value: number
 }
 
+export interface Bar {
+  x: number
+  y: number
+  height: number
+  value: number
+}
+
 export interface BarText {
   points: Point[]
   boundary: Boundary
@@ -52,6 +59,8 @@ export default mixins<options &
   Colorable
 ).extend({
   name: 'VSparkline',
+
+  inheritAttrs: false,
 
   props: {
     autoDraw: Boolean,
@@ -138,34 +147,43 @@ export default mixins<options &
     parsedHeight (): number {
       return parseInt(this.height, 10)
     },
+    parsedLabelSize (): number {
+      return parseInt(this.labelSize, 10) || 7
+    },
     totalHeight (): number {
       let height = this.parsedHeight
 
-      if (this.hasLabels) height += parseInt(this.labelSize, 10) * 1.25
+      if (this.hasLabels) height += parseInt(this.labelSize, 10) * 1.5
 
       return height
+    },
+    totalWidth (): number {
+      let width = this.parsedWidth
+      if (this.type === 'bar') width = Math.max(this.value.length * this._lineWidth, width)
+
+      return width
     },
     totalValues (): number {
       return this.value.length
     },
     _lineWidth (): number {
-      if (this.autoLineWidth && this.type === 'bar') {
+      if (this.autoLineWidth && this.type !== 'trend') {
         const totalPadding = this.parsedPadding * (this.totalValues + 1)
         return (this.parsedWidth - totalPadding) / this.totalValues
       } else {
-        return parseInt(this.lineWidth, 10) || 4
+        return parseFloat(this.lineWidth) || 4
       }
     },
     boundary (): Boundary {
-      const { width, height, parsedPadding } = this
-      const viewWidth = width || this.totalValues * parsedPadding * 2
-      const viewHeight = height || 75
+      if (this.type === 'bar') return { minX: 0, maxX: this.totalWidth, minY: 0, maxY: this.parsedHeight }
+
+      const padding = this.parsedPadding
 
       return {
-        minX: parsedPadding,
-        minY: parsedPadding,
-        maxX: Number(viewWidth) - parsedPadding,
-        maxY: Number(viewHeight) - parsedPadding,
+        minX: padding,
+        maxX: this.totalWidth - padding,
+        minY: padding,
+        maxY: this.parsedHeight - padding,
       }
     },
     hasLabels (): boolean {
@@ -177,7 +195,7 @@ export default mixins<options &
     },
     parsedLabels (): SparklineText[] {
       const labels = []
-      const points = this.points
+      const points = this._values
       const len = points.length
 
       for (let i = 0; labels.length < len; i++) {
@@ -185,24 +203,32 @@ export default mixins<options &
         let value = this.labels[i]
 
         if (!value) {
-          value = item === Object(item)
+          value = typeof item === 'object'
             ? item.value
             : item
         }
 
         labels.push({
-          ...item,
+          x: item.x,
           value: String(value),
         })
       }
 
       return labels
     },
-    points (): Point[] {
-      return genPoints(this.value.slice(), this.boundary, this.type)
+    normalizedValues (): number[] {
+      return this.value.map(item => (typeof item === 'number' ? item : item.value))
+    },
+    _values (): Point[] | Bar[] {
+      return this.type === 'trend' ? genPoints(this.normalizedValues, this.boundary) : genBars(this.normalizedValues, this.boundary)
     },
     textY (): number {
-      return this.boundary.maxY + 6
+      let y = this.parsedHeight
+      if (this.type === 'trend') y -= 4
+      return y
+    },
+    _radius (): number {
+      return this.smooth === true ? 8 : Number(this.smooth)
     },
   },
 
@@ -279,49 +305,53 @@ export default mixins<options &
       }, children)
     },
     genPath () {
-      const radius = this.smooth === true ? 8 : Number(this.smooth)
+      const points = genPoints(this.normalizedValues, this.boundary)
 
       return this.$createElement('path', {
         attrs: {
           id: this._uid,
-          d: genPath(this.points.slice(), radius, this.fill, Number(this.height)),
+          d: genPath(points, this._radius, this.fill, this.parsedHeight),
           fill: this.fill ? `url(#${this._uid})` : 'none',
           stroke: this.fill ? 'none' : `url(#${this._uid})`,
         },
         ref: 'path',
       })
     },
+    genLabels (offsetX: number) {
+      const children = this.parsedLabels.map((item, i) => (
+        this.$createElement('text', {
+          attrs: {
+            x: item.x + offsetX + this._lineWidth / 2,
+            y: this.textY + (this.parsedLabelSize * 0.75),
+            'font-size': Number(this.labelSize) || 7,
+          },
+        }, [this.genLabel(item, i)])
+      ))
+
+      return this.genG(children)
+    },
     genLabel (item: SparklineText, index: number) {
       return this.$scopedSlots.label
         ? this.$scopedSlots.label({ index, value: item.value })
         : item.value
     },
-    genText (item: SparklineText, index: number) {
-      return this.$createElement('text', {
-        attrs: {
-          x: item.x,
-          y: this.textY,
-        },
-      }, [this.genLabel(item, index)])
-    },
-    genBar () {
+    genBars () {
       if (!this.value || this.totalValues < 2) return undefined as never
 
-      const offsetX = this.autoLineWidth ? 0 : ((this.boundary.maxX / this.totalValues) / 2) - this.boundary.minX
+      const bars = genBars(this.normalizedValues, this.boundary)
+      const offsetX = (Math.abs(bars[0].x - bars[1].x) - this._lineWidth) / 2
 
       return this.$createElement('svg', {
         attrs: {
-          width: '100%',
-          height: '25%',
-          viewBox: `0 0 ${this.width} ${this.totalHeight}`,
+          display: 'block',
+          viewBox: `0 0 ${this.totalWidth} ${this.totalHeight}`,
         },
       }, [
         this.genGradient(),
-        this.genClipPath(offsetX, this._lineWidth, 'sparkline-bar-' + this._uid),
-        this.hasLabels && this.genLabels(offsetX),
+        this.genClipPath(bars, offsetX, this._lineWidth, 'sparkline-bar-' + this._uid),
+        this.hasLabels ? this.genLabels(offsetX) : undefined as never,
         this.$createElement('g', {
           attrs: {
-            transform: `scale(1,-1) translate(0,-${this.boundary.maxY})`,
             'clip-path': `url(#sparkline-bar-${this._uid}-clip)`,
             fill: `url(#${this._uid})`,
           },
@@ -330,15 +360,14 @@ export default mixins<options &
             attrs: {
               x: 0,
               y: 0,
-              width: this.width,
+              width: this.totalWidth,
               height: this.height,
             },
           }),
         ]),
       ])
     },
-    genClipPath (offsetX: number, lineWidth: number, id: string) {
-      const { maxY } = this.boundary
+    genClipPath (bars: Bar[], offsetX: number, lineWidth: number, id: string) {
       const rounding = typeof this.smooth === 'number'
         ? this.smooth
         : this.smooth ? 2 : 0
@@ -347,13 +376,13 @@ export default mixins<options &
         attrs: {
           id: `${id}-clip`,
         },
-      }, this.points.map(item => {
+      }, bars.map(item => {
         return this.$createElement('rect', {
           attrs: {
             x: item.x + offsetX,
-            y: 0,
+            y: item.y,
             width: lineWidth,
-            height: Math.max(maxY - item.y, 0),
+            height: item.height,
             rx: rounding,
             ry: rounding,
           },
@@ -362,7 +391,7 @@ export default mixins<options &
             attrs: {
               attributeName: 'height',
               from: 0,
-              to: maxY - item.y,
+              to: item.height,
               dur: `${this.autoDrawDuration}ms`,
               fill: 'freeze',
             },
@@ -370,25 +399,12 @@ export default mixins<options &
         ])
       }))
     },
-    genLabels (offsetX: number) {
-      const children = this.parsedLabels.map((item, i) => (
-        this.$createElement('text', {
-          attrs: {
-            x: item.x + offsetX + this._lineWidth / 2,
-            y: this.boundary.maxY + (Number(this.labelSize) || 7),
-            'font-size': Number(this.labelSize) || 7,
-          },
-        }, [this.genLabel(item, i)])
-      ))
-
-      return this.genG(children)
-    },
     genTrend () {
       return this.$createElement('svg', this.setTextColor(this.color, {
         attrs: {
+          ...this.$attrs,
+          display: 'block',
           'stroke-width': this._lineWidth || 1,
-          width: '100%',
-          height: '25%',
           viewBox: `0 0 ${this.width} ${this.totalHeight}`,
         },
       }), [
@@ -402,8 +418,6 @@ export default mixins<options &
   render (h): VNode {
     if (this.totalValues < 2) return undefined as never
 
-    return this.type === 'trend'
-      ? this.genTrend()
-      : this.genBar()
+    return this.type === 'trend' ? this.genTrend() : this.genBars()
   },
 })

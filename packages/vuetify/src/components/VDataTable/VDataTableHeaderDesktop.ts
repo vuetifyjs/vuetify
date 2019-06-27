@@ -40,7 +40,7 @@ export default mixins(header).extend({
           : this.$createElement('span', [header.text])
         )
 
-        if (header.sortable || !header.hasOwnProperty('sortable')) {
+        if (!this.disableSort && (header.sortable || !header.hasOwnProperty('sortable'))) {
           listeners['click'] = () => this.$emit('sort', header.value)
 
           const sortIndex = this.options.sortBy.findIndex(k => k === header.value)

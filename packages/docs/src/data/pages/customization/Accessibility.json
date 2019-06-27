@@ -1,0 +1,106 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "accessibilityHeader"
+        },
+        {
+          "type": "text",
+          "lang": "accessibilityText"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "activatorHeader"
+        },
+        {
+          "type": "text",
+          "lang": "activatorText1"
+        },
+        {
+          "type": "markup",
+          "value": "html_a11y_activator_slots"
+        },
+        {
+          "type": "text",
+          "lang": "activatorText2"
+        },
+        {
+          "type": "markup",
+          "value": "html_a11y_activator_slots_rendered"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "focusHeader1"
+        },
+        {
+          "type": "text",
+          "lang": "focusText1"
+        },
+        {
+          "type": "heading",
+          "lang": "focusHeader2"
+        },
+        {
+          "type": "text",
+          "lang": "focusText2"
+        },
+        {
+          "type": "example",
+          "value": "menu"
+        },
+        {
+          "type": "markup",
+          "value": "html_a11y_menu_content_rendered"
+        },
+        {
+          "type": "heading",
+          "lang": "focusHeader3"
+        },
+        {
+          "type": "text",
+          "lang": "focusText3"
+        },
+        {
+          "type": "example",
+          "value": "list_item_group"
+        },
+        {
+          "type": "markup",
+          "value": "html_a11y_list_item_group_rendered"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "resourcesHeader"
+        },
+        {
+          "type": "text",
+          "lang": "resourcesText1"
+        },
+        {
+          "type": "text",
+          "lang": "resourcesText2"
+        }
+      ]
+    }
+  ]
+}

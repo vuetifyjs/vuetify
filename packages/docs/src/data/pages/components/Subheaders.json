@@ -55,7 +55,7 @@
           "type": "up-next",
           "value": [
             "components/cards",
-            "framework/grid-lists",
+            "components/grid-lists",
             "components/lists"
           ]
         }

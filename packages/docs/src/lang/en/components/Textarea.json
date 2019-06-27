@@ -3,11 +3,39 @@
   "headerText": "Textarea components are used for collecting large amounts of textual data.",
   "examples": {
     "usage": {
-      "desc": "A multi-line text-field is useful for larger amounts of text."
+      "desc": "`v-textarea` in it's simplest form is a multi-line text-field, useful for larger amounts of text."
+    },
+    "icon": {
+      "header": "### Icons",
+      "desc": "The `append-icon` and `prepend-icon` props help add context to `v-textarea`."
     },
     "auto-grow": {
       "header": "### Auto grow",
-      "desc": "Textarea can automatically resize when entered text exceeds its size."
+      "desc": "When using the `auto-grow` prop, textarea's will automatically increase in size when the contained text exceeds it's size."
+    },
+    "background-color": {
+      "header": "### Background color",
+      "desc": "The `background-color` and `color` props give you more control over styling `v-textarea`'s."
+    },
+    "browser-autocomplete": {
+      "header": "### Browser autocomplete",
+      "desc": "The `browser-autocomplete` prop gives you the option to enable the browser to predict user input."
+    },
+    "clearable": {
+      "header": "### Clearable",
+      "desc": "You can clear the text from a `v-textarea` by using the `clearable` prop, and customize the icon used with the `clearable-icon` prop."
+    },
+    "counter": {
+      "header": "### Counter",
+      "desc": "The `counter` prop informs the user of a character limit for the `v-textarea`."
+    },
+    "no-resize": {
+      "header": "### No resize",
+      "desc": "`v-textarea`'s have the option to remain the same size regardless of their content's size, using the `no-resize` prop."
+    },
+    "rows": {
+      "header": "### Rows",
+      "desc": "The `rows` prop allows you to define how many rows the textarea has, when combined with the `row-height` prop you can further customize your rows by defining their height."
     },
     "signup-box": {
       "header": "### Beautiful Forms",

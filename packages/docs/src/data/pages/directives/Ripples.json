@@ -41,7 +41,7 @@
           "type": "up-next",
           "value": [
             "components/buttons",
-            "framework/colors",
+            "styles/colors",
             "components/lists"
           ]
         }

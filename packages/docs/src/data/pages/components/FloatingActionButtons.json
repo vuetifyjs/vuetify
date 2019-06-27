@@ -49,7 +49,7 @@
           "value": [
             "components/buttons",
             "components/icons",
-            "framework/transitions"
+            "styles/transitions"
           ]
         }
       ]

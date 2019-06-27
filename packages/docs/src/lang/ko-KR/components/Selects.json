@@ -21,7 +21,6 @@
   },
   "props": {
     "autocomplete": "사용자 인풋에 기반하여 리스트안의 아이템들을 필터링합니다.",
-    "browserAutocomplete": "**autocomplete** prop을 사용할때 검색 인풋을 위한 autocomplete prop을 설정합니다.(??)",
     "cacheItems": "**items** prop으로 넘겨진 모든 항목의 _유니크한_ 로컬 사본을 보관합니다.",
     "combobox": "**태그** 를 위한 단일 셀렉션의 한 종류",
     "debounceSearch": "검색 인풋 값이 들어올때 디바운스(Debounces)",

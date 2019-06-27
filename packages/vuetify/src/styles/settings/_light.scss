@@ -15,7 +15,7 @@ $material-light: (
     'past-color': rgba(map-get($shades, 'black'), .38)
   ),
   'cards': map-get($shades, 'white'),
-  'chips': map-get($grey, 'lighten-2'),
+  'chips': #e0e0e0,
   'dividers': rgba(map-get($shades, 'black'), 0.12),
   'text': (
     'theme': map-get($shades, 'white'),
@@ -59,6 +59,14 @@ $material-light: (
     'inactive': rgba(map-get($shades, 'black'), 0.26),
     'disabled': rgba(map-get($shades, 'black'), 0.26),
     'discrete': map-get($shades, 'black')
+  ),
+  'states': (
+    'hover': 0.04,
+    'focus': 0.12,
+    'selected': 0.08,
+    'activated': 0.12,
+    'pressed': 0.16,
+    'dragged': 0.08
   ),
   'tabs': rgba(0, 0, 0, 0.54),
   'toggle-buttons': (

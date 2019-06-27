@@ -15,8 +15,7 @@ exports[`VSelect.ts should add color to selected index 1`] = `
           <div class="v-select__selection v-select__selection--comma primary--text">
             foo
           </div>
-          <input autocomplete="on"
-                 readonly="readonly"
+          <input readonly="readonly"
                  type="text"
                  aria-readonly="true"
           >
