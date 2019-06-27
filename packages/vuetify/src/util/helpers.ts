@@ -492,7 +492,7 @@ export function humanReadableFileSize (bytes: number, base: 1000 | 1024 = 1024):
     return `${bytes} B`
   }
 
-  const units = base === 1024 ? ['KB', 'MB', 'GB'] : ['KiB', 'MiB', 'GiB']
+  const units = base === 1000 ? ['kB', 'MB', 'GB'] : ['KiB', 'MiB', 'GiB']
   let unit = -1
   while (Math.abs(bytes) >= base && unit < units.length - 1) {
     bytes /= base

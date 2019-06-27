@@ -56,7 +56,7 @@ exports[`VFileInput.ts should display file size 1`] = `
     <div class="v-input__slot">
       <div class="v-text-field__slot">
         <div class="v-file-input__text">
-          test (2.0 MB)
+          test (2.0 MiB)
         </div>
         <input readonly="readonly"
                type="file"
@@ -280,7 +280,7 @@ exports[`VFileInput.ts should display total size in counter 1`] = `
     <div class="v-input__slot">
       <div class="v-text-field__slot">
         <div class="v-file-input__text">
-          test (1.0 MB), test (2.0 MB)
+          test (1.0 MiB), test (2.0 MiB)
         </div>
         <input readonly="readonly"
                type="file"
@@ -305,7 +305,7 @@ exports[`VFileInput.ts should display total size in counter 1`] = `
         </span>
       </div>
       <div class="v-counter theme--light">
-        2 files (3.0 MB in total)
+        2 files (3.0 MiB in total)
       </div>
     </div>
   </div>
