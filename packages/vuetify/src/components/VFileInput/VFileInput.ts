@@ -6,6 +6,7 @@ import VTextField from '../VTextField'
 
 // Components
 import { VProgressLinear } from '../VProgressLinear'
+import { VChip } from '../VChip'
 
 // Types
 import { VNode } from 'vue'
@@ -62,6 +63,11 @@ export default VTextField.extend({
       default: false,
       validator: v => typeof v === 'boolean' || v === 1000 || v === 1024,
     } as PropValidator<boolean | 1000 | 1024>,
+    chips: Boolean,
+    removable: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   data: () => ({
@@ -85,12 +91,12 @@ export default VTextField.extend({
     isDirty (): boolean {
       return this.lazyFileValue.length > 0
     },
-    text (): string | null {
-      if (!this.isDirty) return this.placeholder
+    text (): string[] {
+      if (!this.isDirty) return [ this.placeholder ]
 
       return this.lazyFileValue.map(file =>
         this.displaySize ? `${file.name} (${humanReadableFileSize(file.size, this.base)})` : file.name
-      ).join(', ')
+      )
     },
     base (): 1000 | 1024 | undefined {
       return typeof this.displaySize !== 'boolean' ? this.displaySize : undefined
@@ -147,7 +153,21 @@ export default VTextField.extend({
             this.$refs.input.click()
           },
         },
-      }, [this.text])
+      }, this.chips ? this.genChips() : [this.text.join(', ')])
+    },
+    genChips () {
+      return this.isDirty
+        ? this.text.map((text, i) => this.$createElement(VChip, {
+          props: {
+            close: this.removable,
+          },
+          on: {
+            'click:close': () => {
+              this.removable && this.lazyFileValue.splice(i, 1)
+            },
+          },
+        }, [text]))
+        : []
     },
     genProgress (): VNode | VNode[] | null {
       if (this.loading === false && !this.progress) return null
