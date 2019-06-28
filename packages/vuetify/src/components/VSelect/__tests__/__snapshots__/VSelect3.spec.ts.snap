@@ -7,7 +7,7 @@ exports[`VSelect.ts should add color to selected index 1`] = `
     <div role="button"
          aria-haspopup="listbox"
          aria-expanded="false"
-         aria-owns="computed-id-157"
+         aria-owns="list-157"
          class="v-input__slot"
     >
       <div class="v-select__slot">
@@ -15,7 +15,8 @@ exports[`VSelect.ts should add color to selected index 1`] = `
           <div class="v-select__selection v-select__selection--comma primary--text">
             foo
           </div>
-          <input readonly="readonly"
+          <input id="input-157"
+                 readonly="readonly"
                  type="text"
                  aria-readonly="true"
           >

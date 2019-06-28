@@ -5,6 +5,7 @@ exports[`VRadio.ts should not render aria-label attribute with no label value on
 <div class="v-radio theme--light">
   <div class="v-input--selection-controls__input">
     <input aria-checked="false"
+           id="input-4"
            role="radio"
            type="radio"
            value
@@ -17,34 +18,6 @@ exports[`VRadio.ts should not render aria-label attribute with no label value on
       $vuetify.icons.radioOff
     </i>
   </div>
-</div>
-
-`;
-
-exports[`VRadio.ts should render aria-label attribute with label value on input group 1`] = `
-
-<div class="v-radio theme--light">
-  <div class="v-input--selection-controls__input">
-    <input aria-label="Test"
-           aria-checked="false"
-           role="radio"
-           type="radio"
-           value
-    >
-    <div class="v-input--selection-controls__ripple">
-    </div>
-    <i aria-hidden="true"
-       class="v-icon material-icons theme--light"
-    >
-      $vuetify.icons.radioOff
-    </i>
-  </div>
-  <label aria-hidden="true"
-         class="v-label theme--light"
-         style="left: 0px; position: relative;"
-  >
-    Test
-  </label>
 </div>
 
 `;
@@ -54,6 +27,7 @@ exports[`VRadio.ts should render proper input name 1`] = `
 <div class="v-radio theme--light">
   <div class="v-input--selection-controls__input">
     <input aria-checked="false"
+           id="input-7"
            role="radio"
            type="radio"
            name="name"
@@ -76,6 +50,7 @@ exports[`VRadio.ts should render role and aria-checked attributes on input group
 <div class="v-radio theme--light">
   <div class="v-input--selection-controls__input">
     <input aria-checked="true"
+           id="input-1"
            role="radio"
            type="radio"
            value
@@ -97,6 +72,7 @@ exports[`VRadio.ts should use custom icons 1`] = `
 <div class="v-radio theme--light">
   <div class="v-input--selection-controls__input">
     <input aria-checked="false"
+           id="input-16"
            role="radio"
            type="radio"
            value
@@ -118,6 +94,7 @@ exports[`VRadio.ts should use custom icons 2`] = `
 <div class="v-radio theme--light">
   <div class="v-input--selection-controls__input">
     <input aria-checked="true"
+           id="input-16"
            role="radio"
            type="radio"
            value

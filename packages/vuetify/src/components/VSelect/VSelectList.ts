@@ -137,9 +137,9 @@ export default mixins(Colorable, Themeable).extend({
       return `<span class="v-list-item__mask">${escapeHTML(text)}</span>`
     },
     genLabelledBy (item: object) {
-      const text = this.getText(item).split(' ').join('-')
+      const text = escapeHTML(this.getText(item).split(' ').join('-').toLowerCase())
 
-      return `${this._uid}-list-${text}`
+      return `${text}-list-item-${this._uid}`
     },
     getMaskedCharacters (text: string): {
       start: string

@@ -140,14 +140,12 @@ export default baseMixins.extend<options>().extend({
         'v-select--is-menu-active': this.isMenuActive,
       }
     },
-    computedId (): string {
-      if (this.$attrs.id) return this.$attrs.id
-
-      return `computed-id-${this._uid}`
-    },
     /* Used by other components to overwrite */
     computedItems (): object[] {
       return this.allItems
+    },
+    computedOwns (): string {
+      return `list-${this._uid}`
     },
     counterValue (): number {
       return this.multiple
@@ -184,7 +182,7 @@ export default baseMixins.extend<options>().extend({
       return {
         attrs: {
           ...attrs,
-          id: this.computedId,
+          id: this.computedOwns,
         },
         props: {
           action: this.multiple,
@@ -428,7 +426,7 @@ export default baseMixins.extend<options>().extend({
         role: 'button',
         'aria-haspopup': 'listbox',
         'aria-expanded': String(this.isMenuActive),
-        'aria-owns': this.computedId,
+        'aria-owns': this.computedOwns,
       }
 
       return render

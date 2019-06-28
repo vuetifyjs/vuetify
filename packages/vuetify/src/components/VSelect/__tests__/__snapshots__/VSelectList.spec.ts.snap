@@ -9,12 +9,12 @@ exports[`VSelectList.ts should display falsy items 1`] = `
   >
     <div tabindex="0"
          aria-selected="false"
-         aria-labelledby="29-list-0"
+         aria-labelledby="0-list-item-29"
          role="option"
          class="v-list-item v-list-item--link theme--light"
     >
       <div class="v-list-item__content">
-        <div id="29-list-0"
+        <div id="0-list-item-29"
              class="v-list-item__title"
         >
           0
@@ -23,12 +23,12 @@ exports[`VSelectList.ts should display falsy items 1`] = `
     </div>
     <div tabindex="0"
          aria-selected="false"
-         aria-labelledby="29-list-null"
+         aria-labelledby="null-list-item-29"
          role="option"
          class="v-list-item v-list-item--link theme--light"
     >
       <div class="v-list-item__content">
-        <div id="29-list-null"
+        <div id="null-list-item-29"
              class="v-list-item__title"
         >
           null
@@ -37,12 +37,12 @@ exports[`VSelectList.ts should display falsy items 1`] = `
     </div>
     <div tabindex="0"
          aria-selected="false"
-         aria-labelledby="29-list-false"
+         aria-labelledby="false-list-item-29"
          role="option"
          class="v-list-item v-list-item--link theme--light"
     >
       <div class="v-list-item__content">
-        <div id="29-list-false"
+        <div id="false-list-item-29"
              class="v-list-item__title"
         >
           false
@@ -51,12 +51,12 @@ exports[`VSelectList.ts should display falsy items 1`] = `
     </div>
     <div tabindex="0"
          aria-selected="false"
-         aria-labelledby="29-list-undefined"
+         aria-labelledby="undefined-list-item-29"
          role="option"
          class="v-list-item v-list-item--link theme--light"
     >
       <div class="v-list-item__content">
-        <div id="29-list-undefined"
+        <div id="undefined-list-item-29"
              class="v-list-item__title"
         >
           undefined
@@ -65,12 +65,12 @@ exports[`VSelectList.ts should display falsy items 1`] = `
     </div>
     <div tabindex="0"
          aria-selected="false"
-         aria-labelledby="29-list-"
+         aria-labelledby="-list-item-29"
          role="option"
          class="v-list-item v-list-item--link theme--light"
     >
       <div class="v-list-item__content">
-        <div id="29-list-"
+        <div id="-list-item-29"
              class="v-list-item__title"
         >
         </div>
@@ -92,7 +92,7 @@ exports[`VSelectList.ts should display no-data-text when item slot is provided 1
          class="v-list-item theme--light"
     >
       <div class="v-list-item__content">
-        <div id="10-list-undefined"
+        <div id="undefined-list-item-10"
              class="v-list-item__title"
         >
           undefined
@@ -117,12 +117,12 @@ exports[`VSelectList.ts should generate children 1`] = `
     <hr class="v-divider theme--light">
     <div tabindex="0"
          aria-selected="false"
-         aria-labelledby="14-list-foo"
+         aria-labelledby="foo-list-item-14"
          role="option"
          class="v-list-item v-list-item--link theme--light"
     >
       <div class="v-list-item__content">
-        <div id="14-list-foo"
+        <div id="foo-list-item-14"
              class="v-list-item__title"
         >
           foo

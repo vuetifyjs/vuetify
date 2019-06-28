@@ -76,6 +76,9 @@ export default baseMixins.extend<options>().extend({
         ...this.themeClasses,
       }
     },
+    computedId (): string {
+      return this.id || `input-${this._uid}`
+    },
     hasHint (): boolean {
       return !this.hasMessages &&
         !!this.hint &&
@@ -206,7 +209,7 @@ export default baseMixins.extend<options>().extend({
           color: this.validationState,
           dark: this.dark,
           focused: this.hasState,
-          for: this.id,
+          for: this.computedId,
           light: this.light,
         },
       }, this.$slots.label || this.label)
