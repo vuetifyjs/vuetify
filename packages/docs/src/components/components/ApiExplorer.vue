@@ -33,7 +33,10 @@
             <v-icon v-text="props.item.icon" />
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title v-text="props.item.text" />
+            <v-list-item-title
+              :id="props.attrs['aria-labelledby']"
+              v-text="props.item.text"
+            />
             <v-list-item-subtitle v-text="props.item.subtext" />
           </v-list-item-content>
         </template>
@@ -45,12 +48,12 @@
       text-xs-center
       grey--text
     >
-      <h3
+      <h2
         class="display-1"
         v-text="$t('Components.ApiExplorer.search')"
       />
       <div v-text="$t('Components.ApiExplorer.or')" />
-      <h3
+      <h2
         class="display-1"
         v-text="$t('Components.ApiExplorer.browseCategories')"
       />
