@@ -10,14 +10,29 @@ import { VNode } from 'vue'
 
 type VListGroupInstance = InstanceType<typeof VListGroup>
 
+interface options extends InstanceType<typeof VSheet> {
+  isInMenu: boolean
+  isInNav: boolean
+}
+
 /* @vue/component */
-export default VSheet.extend({
+export default VSheet.extend<options>().extend({
   name: 'v-list',
 
   provide (): object {
     return {
+      isInList: true,
       list: this,
     }
+  },
+
+  inject: {
+    isInMenu: {
+      default: false,
+    },
+    isInNav: {
+      default: false,
+    },
   },
 
   props: {
@@ -82,7 +97,7 @@ export default VSheet.extend({
       class: this.classes,
       style: this.styles,
       attrs: {
-        role: 'list',
+        role: this.isInNav || this.isInMenu ? undefined : 'list',
         ...this.$attrs,
       },
     }

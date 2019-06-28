@@ -83,9 +83,9 @@ describe('VSelect.ts', () => {
         VListItem,
       },
     })
-    const itemSlot = ({ item, tile }) => vm.$createElement('v-list-item', {
-      on: tile.on,
-      props: tile.props,
+    const itemSlot = ({ item, attrs, on }) => vm.$createElement('v-list-item', {
+      on,
+      ...attrs,
       class: item.value % 2 === 0 ? '' : 'red lighten-1',
     }, [
       item.text,

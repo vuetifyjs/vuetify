@@ -89,7 +89,6 @@ exports[`VSelectList.ts should display no-data-text when item slot is provided 1
        class="v-list v-sheet v-sheet--tile theme--light"
   >
     <div tabindex="-1"
-         aria-selected="false"
          class="v-list-item theme--light"
     >
       <div class="v-list-item__content">

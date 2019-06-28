@@ -84,6 +84,9 @@ export default mixins(Colorable, Themeable).extend({
     },
     staticNoDataTile (): VNode {
       const tile = {
+        attrs: {
+          role: undefined,
+        },
         on: {
           mousedown: (e: Event) => e.preventDefault(), // Prevent onBlur from being called
         },
@@ -170,6 +173,9 @@ export default mixins(Colorable, Themeable).extend({
 
       const tile = {
         attrs: {
+          // Default behavior in list does not
+          // contain aria-selected by default
+          'aria-selected': String(value),
           'aria-labelledby': this.genLabelledBy(item),
           role: 'option',
         },
@@ -199,7 +205,15 @@ export default mixins(Colorable, Themeable).extend({
       }
 
       const parent = this
-      const scopedSlot = this.$scopedSlots.item({ parent, item, tile })
+      const scopedSlot = this.$scopedSlots.item({
+        parent,
+        item,
+        attrs: {
+          ...tile.attrs,
+          ...tile.props,
+        },
+        on: tile.on,
+      })
 
       return this.needsTile(scopedSlot)
         ? this.$createElement(VListItem, tile, scopedSlot)
@@ -221,7 +235,7 @@ export default mixins(Colorable, Themeable).extend({
     needsTile (slot: VNode[] | undefined) {
       return slot!.length !== 1 ||
         slot![0].componentOptions == null ||
-        slot![0].componentOptions.Ctor.options.name !== 'v-list-tile'
+        slot![0].componentOptions.Ctor.options.name !== 'v-list-item'
     },
     getAvatar (item: object) {
       return Boolean(getPropertyFromItem(item, this.itemAvatar, false))

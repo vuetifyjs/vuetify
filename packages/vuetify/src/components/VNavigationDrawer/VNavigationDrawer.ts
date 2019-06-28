@@ -47,6 +47,12 @@ const baseMixins = mixins(
 export default baseMixins.extend({
   name: 'v-navigation-drawer',
 
+  provide (): object {
+    return {
+      isInNav: this.tag === 'nav',
+    }
+  },
+
   directives: {
     ClickOutside,
     Resize,
@@ -82,6 +88,12 @@ export default baseMixins.extend({
       default: '',
     } as PropValidator<string | srcObject>,
     stateless: Boolean,
+    tag: {
+      type: String,
+      default (): string {
+        return this.app ? 'nav' : 'aside'
+      },
+    },
     temporary: Boolean,
     touchless: Boolean,
     width: {
@@ -439,7 +451,7 @@ export default baseMixins.extend({
 
     if (this.src || getSlot(this, 'img')) children.unshift(this.genBackground())
 
-    return h('aside', this.setBackgroundColor(this.color, {
+    return h(this.tag, this.setBackgroundColor(this.color, {
       class: this.classes,
       style: this.styles,
       directives: this.genDirectives(),
