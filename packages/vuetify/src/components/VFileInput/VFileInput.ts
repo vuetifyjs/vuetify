@@ -153,7 +153,7 @@ export default VTextField.extend({
             this.$refs.input.click()
           },
         },
-      }, this.chips ? this.genChips() : [this.text.join(', ')])
+      }, this.$scopedSlots.selection ? this.$scopedSlots.selection({ text: this.text, files: this.lazyFileValue }) : this.chips ? this.genChips() : [this.text.join(', ')])
     },
     genChips () {
       return this.isDirty
