@@ -17,7 +17,11 @@
       @click="toggleDrawer"
     />
 
-    <router-link :to="{ name: 'home/Home' }">
+    <router-link
+      :to="{ name: 'home/Home' }"
+      aria-label="Vuetify Home Page"
+      title="Vuetify Home Page"
+    >
       <v-img
         alt="Vuetify Logo"
         src="https://cdn.vuetifyjs.com/images/logos/v-alt.svg"
