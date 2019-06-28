@@ -40,7 +40,7 @@
                   column
                   ma-0
                 >
-                  <h2 class="text-uppercase mb-3">
+                  <h2 class="text-uppercase mb-3 text-xs-center">
                     <strong
                       class="headline font-weight-bold"
                       v-text="philosophy.title"
@@ -51,7 +51,7 @@
                     />
                   </h2>
 
-                  <div class="text-xs-justify">
+                  <div class="text-xs-center">
                     <doc-markdown :code="philosophy.caption" />
                   </div>
                 </v-layout>
