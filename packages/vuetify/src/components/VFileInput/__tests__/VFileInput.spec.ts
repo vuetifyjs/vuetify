@@ -205,6 +205,19 @@ describe('VFileInput.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render small chips', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        smallChips: true,
+      },
+      data: () => ({
+        lazyFileValue: [ oneMBFile ],
+      }),
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should remove file using chips', () => {
     const fn = jest.fn()
     const wrapper = mountFunction({

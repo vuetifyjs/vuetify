@@ -64,6 +64,7 @@ export default VTextField.extend({
       validator: v => typeof v === 'boolean' || v === 1000 || v === 1024,
     } as PropValidator<boolean | 1000 | 1024>,
     chips: Boolean,
+    smallChips: Boolean,
     removable: {
       type: Boolean,
       default: true,
@@ -100,6 +101,9 @@ export default VTextField.extend({
     },
     base (): 1000 | 1024 | undefined {
       return typeof this.displaySize !== 'boolean' ? this.displaySize : undefined
+    },
+    hasChips (): boolean {
+      return this.chips || this.smallChips
     },
   },
 
@@ -150,20 +154,21 @@ export default VTextField.extend({
         staticClass: 'v-file-input__text',
         class: {
           'v-file-input__text--placeholder': this.placeholder && !this.isDirty,
-          'v-file-input__text--chips': this.chips && !this.$scopedSlots.selection,
+          'v-file-input__text--chips': this.hasChips && !this.$scopedSlots.selection,
         },
         on: {
           click: () => {
             this.$refs.input.click()
           },
         },
-      }, this.$scopedSlots.selection ? this.$scopedSlots.selection({ text: this.text, files: this.lazyFileValue }) : this.chips ? this.genChips() : [this.text.join(', ')])
+      }, this.$scopedSlots.selection ? this.$scopedSlots.selection({ text: this.text, files: this.lazyFileValue }) : this.hasChips ? this.genChips() : [this.text.join(', ')])
     },
     genChips () {
       return this.isDirty
         ? this.text.map((text, i) => this.$createElement(VChip, {
           props: {
             close: this.removable,
+            small: this.smallChips,
           },
           on: {
             'click:close': () => {
