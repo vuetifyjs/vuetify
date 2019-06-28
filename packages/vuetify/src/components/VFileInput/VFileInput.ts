@@ -147,6 +147,7 @@ export default VTextField.extend({
         staticClass: 'v-file-input__text',
         class: {
           'v-file-input__text--placeholder': this.placeholder && !this.isDirty,
+          'v-file-input__text--chips': this.chips && !this.$scopedSlots.selection,
         },
         on: {
           click: () => {
