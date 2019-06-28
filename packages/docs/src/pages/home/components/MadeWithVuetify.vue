@@ -31,6 +31,7 @@
               <v-card
                 :title="`Link to ${feature.title}`"
                 :href="`${feature.url}?ref=vuetifyjs.com`"
+                class="v-card--mwvjs"
                 elevation="24"
                 target="_blank"
                 rel="noopener"
@@ -58,11 +59,10 @@
                       />
                       <v-btn
                         :aria-label="`Link to ${feature.title}`"
-                        aria-readonly="readonly"
                         color="success"
                         fab
                         large
-                        readonly
+                        tabindex="-1"
                       >
                         <v-icon>mdi-open-in-new</v-icon>
                       </v-btn>
@@ -156,3 +156,8 @@
     },
   }
 </script>
+
+<style lang="sass">
+  .v-card--mwvjs:focus .v-overlay
+    display: flex !important
+</style>
