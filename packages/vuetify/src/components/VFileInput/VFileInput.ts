@@ -107,9 +107,12 @@ export default VTextField.extend({
     lazyFileValue () {
       this.$emit('update:fileValue', this.lazyFileValue)
     },
-    fileValue () {
-      this.lazyFileValue = wrapInArray(this.fileValue)
-      this.internalValue = null // No way to "push" update from JS to file input
+    fileValue: {
+      immediate: true,
+      handler () {
+        this.lazyFileValue = wrapInArray(this.fileValue)
+        this.internalValue = null // No way to "push" update from JS to file input
+      },
     },
   },
 
