@@ -191,4 +191,36 @@ describe('VFileInput.ts', () => {
     expect(wrapper.vm.lazyFileValue).toEqual([ oneMBFile ])
     expect(wrapper.vm.internalValue).toBeNull()
   })
+
+  it('should render chips', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        chips: true,
+      },
+      data: () => ({
+        lazyFileValue: [ oneMBFile ],
+      }),
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should remove file using chips', () => {
+    const fn = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        chips: true,
+      },
+      listeners: {
+        'update:fileValue': fn,
+      },
+      data: () => ({
+        lazyFileValue: [ oneMBFile, twoMBFile ],
+      }),
+    })
+
+    wrapper.find('.v-chip .v-icon').trigger('click')
+
+    expect(fn).toHaveBeenLastCalledWith([ twoMBFile ])
+  })
 })

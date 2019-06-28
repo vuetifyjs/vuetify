@@ -410,6 +410,63 @@ exports[`VFileInput.ts should render 1`] = `
 
 `;
 
+exports[`VFileInput.ts should render chips 1`] = `
+
+<div class="v-input v-input--is-label-active v-input--is-dirty v-input--is-readonly theme--light v-text-field v-file-input">
+  <div class="v-input__prepend-outer">
+    <div tabindex="0"
+         class="v-input__icon v-input__icon--prepend"
+    >
+      <i role="button"
+         class="v-icon v-icon--link material-icons theme--light"
+      >
+        $vuetify.icons.file
+      </i>
+    </div>
+  </div>
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-text-field__slot">
+        <div class="v-file-input__text v-file-input__text--chips">
+          <span class="v-chip v-chip--no-color v-chip--removable theme--light v-size--default">
+            <span class="v-chip__content">
+              test
+              <i role="button"
+                 class="v-icon v-chip__close v-icon--link v-icon--right material-icons theme--light"
+              >
+                $vuetify.icons.delete
+              </i>
+            </span>
+          </span>
+        </div>
+        <input readonly="readonly"
+               type="file"
+        >
+      </div>
+      <div class="v-input__append-inner">
+        <div class="v-input__icon v-input__icon--clear">
+          <i role="button"
+             class="v-icon v-icon--link material-icons theme--light"
+          >
+            $vuetify.icons.clear
+          </i>
+        </div>
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages theme--light">
+        <span name="message-transition"
+              tag="div"
+              class="v-messages__wrapper"
+        >
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
 exports[`VFileInput.ts should render counter 1`] = `
 
 <div class="v-input v-input--is-label-active v-input--is-dirty v-input--is-readonly theme--light v-text-field v-file-input">
