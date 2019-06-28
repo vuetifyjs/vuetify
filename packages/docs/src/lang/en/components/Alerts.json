@@ -69,5 +69,8 @@
   },
   "scopedSlots": {
     "close": "Slot for icon used in `dismissible` prop."
+  },
+  "functions": {
+    "toggle": "Toggles the `v-alert` active state. Available in close slot and used as the click action in `dismissible`."
   }
 }

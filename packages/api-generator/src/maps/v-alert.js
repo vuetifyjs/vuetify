@@ -15,5 +15,11 @@ module.exports = {
         value: 'boolean',
       },
     ],
+    functions: [
+      {
+        name: 'toggle',
+        signature: '(): void',
+      },
+    ],
   },
 }
