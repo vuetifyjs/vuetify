@@ -127,6 +127,7 @@ export default VTextField.extend({
       input.data!.attrs!.multiple = this.multiple
       input.data!.attrs!.accept = this.accept
       input.data!.on!.change = (e: any) => {
+        /* istanbul ignore next */
         this.lazyFileValue = [...e.target.files]
       }
 

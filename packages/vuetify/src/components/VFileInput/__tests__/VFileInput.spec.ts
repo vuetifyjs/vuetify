@@ -152,4 +152,43 @@ describe('VFileInput.ts', () => {
 
     expect(wrapper.find('input').element.getAttribute('disabled')).toBe('disabled')
   })
+
+  it('should proxy icon and text click to input', () => {
+    const fn = jest.fn()
+    const wrapper = mountFunction()
+
+    const input = wrapper.find('input').element
+    input.click = fn
+
+    const icon = wrapper.find('.v-icon')
+    icon.trigger('click')
+    expect(fn).toHaveBeenCalledTimes(1)
+
+    const text = wrapper.find('.v-file-input__text')
+    text.trigger('click')
+    expect(fn).toHaveBeenCalledTimes(2)
+  })
+
+  it('should clear', () => {
+    const wrapper = mountFunction()
+
+    wrapper.setData({
+      lazyFileValue: [ oneMBFile ],
+    })
+
+    wrapper.vm.clearableCallback()
+    expect(wrapper.vm.lazyFileValue).toHaveLength(0)
+    expect(wrapper.vm.internalValue).toBeNull()
+  })
+
+  it('should react to setting fileValue', () => {
+    const wrapper = mountFunction()
+
+    wrapper.setProps({
+      fileValue: [ oneMBFile ],
+    })
+
+    expect(wrapper.vm.lazyFileValue).toEqual([ oneMBFile ])
+    expect(wrapper.vm.internalValue).toBeNull()
+  })
 })
