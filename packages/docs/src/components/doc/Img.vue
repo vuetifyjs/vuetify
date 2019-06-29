@@ -1,20 +1,20 @@
 <template>
-  <div>
-    <figure class="mb-4 text-xs-center">
+  <figure class="mb-4 text-xs-center">
+    <v-sheet>
       <v-img
         :src="computedValue"
         class="d-inline-block"
         style="max-width: 100%;"
       />
+    </v-sheet>
 
-      <figcaption
-        v-if="$slots.default"
-        class="caption text-xs-center"
-      >
-        <doc-markdown><slot /></doc-markdown>
-      </figcaption>
-    </figure>
-  </div>
+    <figcaption
+      v-if="$slots.default"
+      class="caption text-xs-center"
+    >
+      <doc-markdown><slot /></doc-markdown>
+    </figcaption>
+  </figure>
 </template>
 
 <script>
