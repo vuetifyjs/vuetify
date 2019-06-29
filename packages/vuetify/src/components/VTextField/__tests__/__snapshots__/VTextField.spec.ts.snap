@@ -6,7 +6,7 @@ exports[`VTextField.ts should apply theme to label, counter, messages and icons 
   <div class="v-input__prepend-outer">
     <div class="v-input__icon v-input__icon--prepend">
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon notranslate material-icons theme--light"
       >
         prepend
       </i>
@@ -17,7 +17,7 @@ exports[`VTextField.ts should apply theme to label, counter, messages and icons 
       <div class="v-input__prepend-inner">
         <div class="v-input__icon v-input__icon--prepend-inner">
           <i aria-hidden="true"
-             class="v-icon prepend prepend-inner theme--light"
+             class="v-icon notranslate prepend prepend-inner theme--light"
           >
           </i>
         </div>
@@ -36,7 +36,7 @@ exports[`VTextField.ts should apply theme to label, counter, messages and icons 
       <div class="v-input__append-inner">
         <div class="v-input__icon v-input__icon--append">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             append
           </i>
@@ -62,7 +62,7 @@ exports[`VTextField.ts should apply theme to label, counter, messages and icons 
   <div class="v-input__append-outer">
     <div class="v-input__icon v-input__icon--append-outer">
       <i aria-hidden="true"
-         class="v-icon append append-outer theme--light"
+         class="v-icon notranslate append append-outer theme--light"
       >
       </i>
     </div>

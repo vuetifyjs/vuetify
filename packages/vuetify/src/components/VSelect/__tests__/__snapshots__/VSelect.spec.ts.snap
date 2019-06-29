@@ -34,7 +34,7 @@ exports[`VSelect.ts should only show items if they are in items 1`] = `
         <div class="v-input__append-inner">
           <div class="v-input__icon v-input__icon--append">
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
             >
               $vuetify.icons.dropdown
             </i>
@@ -79,7 +79,7 @@ exports[`VSelect.ts should only show items if they are in items 2`] = `
         <div class="v-input__append-inner">
           <div class="v-input__icon v-input__icon--append">
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
             >
               $vuetify.icons.dropdown
             </i>
@@ -127,7 +127,7 @@ exports[`VSelect.ts should only show items if they are in items 3`] = `
         <div class="v-input__append-inner">
           <div class="v-input__icon v-input__icon--append">
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
             >
               $vuetify.icons.dropdown
             </i>
@@ -178,7 +178,7 @@ exports[`VSelect.ts should only show items if they are in items 4`] = `
         <div class="v-input__append-inner">
           <div class="v-input__icon v-input__icon--append">
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
             >
               $vuetify.icons.dropdown
             </i>
@@ -223,7 +223,7 @@ exports[`VSelect.ts should render v-select correctly when not using scope slot 1
         <div class="v-input__append-inner">
           <div class="v-input__icon v-input__icon--append">
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
             >
               $vuetify.icons.dropdown
             </i>
@@ -268,7 +268,7 @@ exports[`VSelect.ts should render v-select correctly when not using v-list-item 
         <div class="v-input__append-inner">
           <div class="v-input__icon v-input__icon--append">
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
             >
               $vuetify.icons.dropdown
             </i>
@@ -313,7 +313,7 @@ exports[`VSelect.ts should render v-select correctly when using v-list-item in i
         <div class="v-input__append-inner">
           <div class="v-input__icon v-input__icon--append">
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
             >
               $vuetify.icons.dropdown
             </i>
