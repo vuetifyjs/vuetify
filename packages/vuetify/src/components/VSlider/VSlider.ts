@@ -289,7 +289,7 @@ export default mixins<options &
       return this.$createElement('input', {
         attrs: {
           value: this.internalValue,
-          id: this.id,
+          id: this.computedId,
           disabled: this.disabled,
           readonly: true,
           tabindex: -1,

@@ -6,7 +6,8 @@ exports[`VTextarea.ts should calculate element height when using auto-grow prop 
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-text-field__slot">
-        <textarea rows="5"
+        <textarea id="input-1"
+                  rows="5"
                   style="height: 120px;"
         >
         </textarea>

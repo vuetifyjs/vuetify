@@ -5,6 +5,7 @@
     wrap
   >
     <v-flex
+      v-if="title"
       font-weight-medium
       grey--text
       tag="h4"

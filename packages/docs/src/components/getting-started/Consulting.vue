@@ -40,10 +40,10 @@
     >
       <v-card outlined>
         <v-card-title class="pb-3 primary">
-          <h3 class="title white--text">
+          <h2 class="title white--text">
             <v-icon color="white" class="mr-2">mdi-calendar</v-icon>
             <span>Schedule an Appointment</span>
-          </h3>
+          </h2>
         </v-card-title>
         <div
           class="calendly-inline-widget"

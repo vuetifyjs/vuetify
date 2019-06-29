@@ -41,10 +41,12 @@
 
     <v-layout pa-3>
       <a
-        href="https://vuejobs.com/?utm_source=vuejobs&utm_medium=banner&utm_campaign=linking&ref=vuetifyjs.com"
-        target="_blank"
-        rel="noopener"
+        aria-label="VueJobs"
         class="d-inline-block"
+        href="https://vuejobs.com/?utm_source=vuejobs&utm_medium=banner&utm_campaign=linking&ref=vuetifyjs.com"
+        rel="noopener"
+        target="_blank"
+        title="VueJobs"
         @click="$ga.event('drawer', 'click', 'vuejobs')"
       >
         <v-img

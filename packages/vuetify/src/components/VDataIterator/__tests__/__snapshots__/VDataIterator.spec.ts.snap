@@ -24,7 +24,7 @@ exports[`VDataIterator.ts should render and match snapshot 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-id-4"
+               aria-owns="list-4"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -33,6 +33,7 @@ exports[`VDataIterator.ts should render and match snapshot 1`] = `
                   10
                 </div>
                 <input aria-label="$vuetify.dataFooter.itemsPerPageText"
+                       id="input-4"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
@@ -112,7 +113,7 @@ exports[`VDataIterator.ts should render and match snapshot with data 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-id-24"
+               aria-owns="list-24"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -121,6 +122,7 @@ exports[`VDataIterator.ts should render and match snapshot with data 1`] = `
                   10
                 </div>
                 <input aria-label="$vuetify.dataFooter.itemsPerPageText"
+                       id="input-24"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
@@ -191,7 +193,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-id-43"
+               aria-owns="list-43"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -200,6 +202,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
                   10
                 </div>
                 <input aria-label="$vuetify.dataFooter.itemsPerPageText"
+                       id="input-43"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
@@ -270,7 +273,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-id-43"
+               aria-owns="list-43"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -279,6 +282,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
                   10
                 </div>
                 <input aria-label="$vuetify.dataFooter.itemsPerPageText"
+                       id="input-43"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
@@ -349,7 +353,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-id-43"
+               aria-owns="list-43"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -358,6 +362,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
                   10
                 </div>
                 <input aria-label="$vuetify.dataFooter.itemsPerPageText"
+                       id="input-43"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"

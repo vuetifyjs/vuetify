@@ -21,7 +21,6 @@ import { VExpandTransition } from '../transitions'
 
 // Utils
 import mixins, { ExtractVue } from '../../util/mixins'
-import { keyCodes } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
@@ -134,6 +133,10 @@ export default baseMixins.extend<options>().extend({
     genHeader (): VNode {
       return this.$createElement(VListItem, {
         staticClass: 'v-list-group__header',
+        attrs: {
+          'aria-expanded': String(this.isActive),
+          role: 'button',
+        },
         class: {
           [this.activeClass]: this.isActive,
         },
@@ -147,10 +150,6 @@ export default baseMixins.extend<options>().extend({
         on: {
           ...this.$listeners,
           click: this.click,
-          keydown: (e: KeyboardEvent) => {
-            /* istanbul ignore else */
-            if (e.keyCode === keyCodes.enter) this.click()
-          },
         },
       }, [
         this.genPrependIcon(),

@@ -13,26 +13,20 @@
           xs12
           md4
         >
-          <v-card color="grey lighten-3" outlined>
-            <v-list
-              class="pa-0"
-              two-line
-              nav
+          <v-card outlined>
+            <core-item
+              :to="link.link"
+              :avatar="link.icon"
+              :avatar-color="link.color"
+              :text="link.target"
+              :subtext="link.section"
+              no-markdown
+              @click.native="$ga.event('up-next', 'click', link.target, $route.path)"
             >
-              <core-item
-                :to="link.link"
-                :avatar="link.icon"
-                :avatar-color="link.color"
-                :text="link.target"
-                :subtext="link.section"
-                no-markdown
-                @click.native="$ga.event('up-next', 'click', link.target, $route.path)"
-              >
-                <v-list-item-action>
-                  <v-icon>mdi-arrow-right</v-icon>
-                </v-list-item-action>
-              </core-item>
-            </v-list>
+              <v-list-item-action>
+                <v-icon>mdi-arrow-right</v-icon>
+              </v-list-item-action>
+            </core-item>
           </v-card>
         </v-flex>
       </v-layout>

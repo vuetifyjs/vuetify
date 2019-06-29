@@ -7,20 +7,21 @@
     <slot name="top" />
 
     <ul class="app-table-of-contents">
+      <li class="grey--text text--darken-4 pl-3 mb-3 title">Contents</li>
       <li
         v-for="(item, i) in list"
         :key="i"
       >
         <a
-          :href="item.id"
+          :href="item.target"
           :class="{
             'primary--text': activeIndex === i,
-            'grey--text text--darken-1': activeIndex !== i
+            'grey--text text--darken-2': activeIndex !== i
           }"
           :style="{
             borderColor: activeIndex === i ? 'inherit' : null
           }"
-          class="mb-3 d-block subtitle-2"
+          class="mb-3 d-block body-2"
           @click.stop.prevent="goTo(item.target)"
           v-text="item.text"
         />

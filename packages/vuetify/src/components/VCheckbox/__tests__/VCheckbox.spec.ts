@@ -102,29 +102,6 @@ describe('VCheckbox.ts', () => { // eslint-disable-line max-statements
     expect(input.element.getAttribute('aria-checked')).toBe('mixed')
   })
 
-  it('should render aria-label attribute with label value on input group', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        label: 'Test',
-      },
-      attrs: {},
-    })
-
-    const inputGroup = wrapper.find('input')
-    expect(inputGroup.element.getAttribute('aria-label')).toBe('Test')
-  })
-
-  it('should not render aria-label attribute with no label value on input group', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        label: null,
-      },
-    })
-
-    const inputGroup = wrapper.find('input')
-    expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
-  })
-
   it('should toggle on keypress', async () => {
     const wrapper = mountFunction({
       propsData: {

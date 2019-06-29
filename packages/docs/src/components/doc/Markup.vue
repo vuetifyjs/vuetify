@@ -15,6 +15,7 @@
         target="_blank"
         rel="noopener"
         title="Edit code"
+        aria-label="Edit code"
       >
         <v-icon>mdi-pencil</v-icon>
       </a>
@@ -23,6 +24,7 @@
     <div class="v-markup__copy">
       <v-icon
         title="Copy code"
+        aria-label="Copy code"
         @click="copyMarkup"
       >
         content_copy
