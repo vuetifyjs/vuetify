@@ -27,7 +27,7 @@
         aria-label="Copy code"
         @click="copyMarkup"
       >
-        content_copy
+        mdi-content-copy
       </v-icon>
       <v-slide-x-transition>
         <span
@@ -164,13 +164,13 @@
 
   &__copied
     position: absolute
-    top: 0
+    top: 12px
     right: 75px
 
   &__copy,
   &__edit
     position: absolute
-    top: 12px
+    top: 0
     cursor: pointer
     width: 25px
     height: 25px
