@@ -23,10 +23,10 @@
     .v-btn__loading
       color: map-deep-get($material, 'buttons', 'disabled') !important
 
-    &:not(.v-btn--flat):not(.v-btn--outlined)
+    &:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined)
       background-color: map-deep-get($material, 'buttons', 'focused') !important
 
-  &:not(.v-btn--flat)
+  &:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined)
     background-color: map-get($material, 'app-bar')
 
   &.v-btn--outlined.v-btn--text
@@ -242,7 +242,7 @@
 .v-btn--outlined,
 .v-btn--flat,
 .v-btn--text
-  background-color: transparent !important
+  background-color: transparent
 
 .v-btn--round,
 .v-btn--rounded
