@@ -111,11 +111,20 @@
     // TODO: Remove when v-img
     // supports lazy loading
     mounted () {
-      this.$nextTick(this.init)
+      window.addEventListener('scroll', this.init, { passive: true })
+    },
+
+    beforeDestroy () {
+      this.removeListener()
     },
 
     methods: {
+      removeListener () {
+        window.removeEventListener('scroll', this.init, { passive: true })
+      },
       init () {
+        this.removeListener()
+
         fetch('https://madewithvuejs.com/api/tag/vuetify', {
           method: 'get',
           headers: {
