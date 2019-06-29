@@ -14,10 +14,10 @@
       width="24px"
     />
     <span class="body-2 text-uppercase font-weight-regular hidden-sm-and-down">
-      Get Professionally-Supported Vuetify
+      Vuetify For Enterprise Available via Tidelift
     </span>
     <span class="body-2 text-uppercase font-weight-regular hidden-md-and-up">
-      Get Professional Support
+      Get Enterprise Support
     </span>
   </v-chip>
 </template>
