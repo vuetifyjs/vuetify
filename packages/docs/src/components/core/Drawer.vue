@@ -10,9 +10,9 @@
       pb-0
     >
       <div class="text-xs-center">
-        <h4 class="title grey--text text--darken-4">Premiere sponsor</h4>
+        <h4 class="title grey--text text--darken-2">Premiere sponsor</h4>
 
-        <span class="d-block mb-3 overline grey--text text--darken-2">
+        <span class="d-block mb-3 overline grey--text">
           Your logo here
         </span>
 
