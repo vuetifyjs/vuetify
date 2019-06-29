@@ -100,20 +100,14 @@ export default mixins(Colorable, Themeable).extend({
 
   methods: {
     genAction (item: object, inputValue: any): VNode {
-      const data = {
-        on: {
-          click: (e: Event) => {
-            e.stopPropagation()
-            this.$emit('select', item)
-          },
-        },
-      }
-
-      return this.$createElement(VListItemAction, data, [
+      return this.$createElement(VListItemAction, [
         this.$createElement(VSimpleCheckbox, {
           props: {
             color: this.color,
             value: inputValue,
+          },
+          on: {
+            input: () => this.$emit('select', item),
           },
         }),
       ])
