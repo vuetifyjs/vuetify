@@ -51,7 +51,6 @@
     "clippedRight": "Designates that the application's `v-navigation-drawer` is clipped on the right side of the toolbar",
     "collapseOnScroll": "Collapse the toolbar when scrolling",
     "elevateOnScroll": "Elevate the toolbar from 0dp to 4dp when scrolling",
-    "fade-img-on-scroll": "Fade image when user scrolls",
     "fadeImgOnScroll": "When using the **src** prop or `img` scoped slot, will fade the image when scrolling",
     "hideOnScroll": "Will transition the toolbar off screen when scrolling down",
     "invertedScroll": "Will slide out of view when scrolling down and back into view when scrolling up",
