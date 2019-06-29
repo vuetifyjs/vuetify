@@ -164,13 +164,13 @@
 
   &__copied
     position: absolute
-    top: 12px
-    right: 100px
+    top: 0
+    right: 75px
 
   &__copy,
   &__edit
     position: absolute
-    top: 0px
+    top: 12px
     cursor: pointer
     width: 25px
     height: 25px
