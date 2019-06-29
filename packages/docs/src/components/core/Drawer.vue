@@ -27,7 +27,7 @@
           ref="search"
           v-model="search"
           label="Search"
-          append-icon="search"
+          append-icon="mdi-magnify"
           clearable
           hide-details
           single-line
