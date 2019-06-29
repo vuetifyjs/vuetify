@@ -10,10 +10,10 @@
       pb-0
     >
       <div class="text-xs-center">
-        <h4 class="body-2 font-weight-bold grey--text">Premiere sponsor</h4>
+        <h4 class="title grey--text text--darken-4">Premiere sponsor</h4>
 
-        <span class="d-block mb-3 caption grey--text text--lighten-1">
-          One spot available
+        <span class="d-block mb-3 overline grey--text text--darken-2">
+          Your logo here
         </span>
 
         <supporters-sponsor-btn
