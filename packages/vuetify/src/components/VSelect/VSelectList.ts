@@ -48,10 +48,6 @@ export default mixins(Colorable, Themeable).extend({
       type: Array,
       default: () => [],
     } as PropValidator<any[]>,
-    itemAvatar: {
-      type: [String, Array, Function],
-      default: 'avatar',
-    } as PropValidator<string | (string | number)[] | ((item: object, fallback?: any) => any)>,
     itemDisabled: {
       type: [String, Array, Function],
       default: 'disabled',
@@ -153,13 +149,11 @@ export default mixins(Colorable, Themeable).extend({
     genTile (
       item: object,
       disabled = null as null | boolean,
-      avatar = false,
       value = false
     ): VNode | VNode[] | undefined {
       if (!value) value = this.hasItem(item)
 
       if (item === Object(item)) {
-        avatar = this.getAvatar(item)
         disabled = disabled !== null
           ? disabled
           : this.getDisabled(item)
@@ -182,7 +176,6 @@ export default mixins(Colorable, Themeable).extend({
         },
         props: {
           activeClass: this.tileActiveClass,
-          avatar,
           disabled,
           ripple: true,
           inputValue: value,
@@ -230,9 +223,6 @@ export default mixins(Colorable, Themeable).extend({
       return slot!.length !== 1 ||
         slot![0].componentOptions == null ||
         slot![0].componentOptions.Ctor.options.name !== 'v-list-item'
-    },
-    getAvatar (item: object) {
-      return Boolean(getPropertyFromItem(item, this.itemAvatar, false))
     },
     getDisabled (item: object) {
       return Boolean(getPropertyFromItem(item, this.itemDisabled, false))
