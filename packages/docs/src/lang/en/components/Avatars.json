@@ -25,5 +25,9 @@
       "header": "### Advanced usage",
       "desc": "Combining an avatar with other components allows you to build beautiful user interfaces right out of the box."
     }
+  },
+  "props": {
+    "left": "Place avatar at left side",
+    "right": "Place avatar at right side"
   }
 }
