@@ -2,6 +2,9 @@
 
 exports[`VDivider should render component and match snapshot 1`] = `
 
-<hr class="v-divider theme--light">
+<hr role="separator"
+    aria-orientation="horizontal"
+    class="v-divider theme--light"
+>
 
 `;
