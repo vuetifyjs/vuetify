@@ -45,6 +45,55 @@
       "children": [
         {
           "type": "heading",
+          "lang": "scopedHeader1"
+        },
+        {
+          "type": "text",
+          "lang": "scopedText1"
+        },
+        {
+          "type": "text",
+          "lang": "scopedText2"
+        },
+        {
+          "type": "markup",
+          "value": "html_a11y_select_default"
+        },
+        {
+          "type": "text",
+          "lang": "scopedText3"
+        },
+        {
+          "type": "markup",
+          "value": "html_a11y_select_content_rendered"
+        },
+        {
+          "type": "text",
+          "lang": "scopedText4"
+        },
+        {
+          "type": "example",
+          "value": "select_list_item"
+        },
+        {
+          "type": "text",
+          "lang": "scopedText5"
+        },
+        {
+          "type": "markup",
+          "value": "html_a11y_item_slots"
+        },
+        {
+          "type": "text",
+          "lang": "scopedText6"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
           "lang": "focusHeader1"
         },
         {
