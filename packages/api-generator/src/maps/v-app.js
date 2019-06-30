@@ -1,5 +1,5 @@
 module.exports = {
   'v-app': {
-    slots: ['default']
-  }
+    slots: ['default'],
+  },
 }

@@ -3,8 +3,8 @@ module.exports = {
     functions: [
       {
         name: 'goTo',
-        signature: '(target: string | number | HTMLElement | VueComponent, options?: object): void'
-      }
-    ]
-  }
+        signature: '(target: string | number | HTMLElement | VueComponent, options?: object): void',
+      },
+    ],
+  },
 }

@@ -1,5 +1,5 @@
 module.exports = {
   'v-card-title': {
-    slots: ['default']
-  }
+    slots: ['default'],
+  },
 }
