@@ -32,8 +32,8 @@
     "sticky": "Position the banner to the top of the screen when scrolling. **Evergreen browsers only**"
   },
   "slots": {
-    "icon": "Slot for custom icon",
-    "actions": "Slot for actions such as buttons"
+    "actions": "Slot for actions such as buttons",
+    "icon": "Slot for custom icon"
   },
   "scopedSlots": {
     "actions": "Actions scoped slot. Has a `dismiss` function in its scope"
