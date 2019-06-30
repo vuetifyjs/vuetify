@@ -4,14 +4,14 @@ module.exports = {
     scopedSlots: [{
       name: 'actions',
       props: {
-        dismiss: '(): void'
-      }
+        dismiss: '(): void',
+      },
     }],
     functions: [
       {
         name: 'toggle',
-        signature: '(): void'
-      }
-    ]
-  }
+        signature: '(): void',
+      },
+    ],
+  },
 }
