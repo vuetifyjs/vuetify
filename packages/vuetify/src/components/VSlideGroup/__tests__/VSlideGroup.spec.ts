@@ -208,6 +208,7 @@ describe('VSlideGroup.ts', () => {
     const event = {
       touchstartX: 0,
       touchmoveX: 0,
+      stopPropagation: () => {},
     }
 
     wrapper.vm.overflowCheck(event, fn)

@@ -75,7 +75,7 @@ const VIcon = mixins(
     getDefaultData (): VNodeData {
       const hasClickListener = Boolean(this.$listeners.click || this.$listeners['!click'])
       const data: VNodeData = {
-        staticClass: 'v-icon',
+        staticClass: 'v-icon notranslate',
         class: {
           'v-icon--disabled': this.disabled,
           'v-icon--left': this.left,

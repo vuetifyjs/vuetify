@@ -1,27 +1,28 @@
 <template>
   <div
     v-scroll="onScroll"
-    class="mb-4"
+    class="mb-5"
     v-on="$listeners"
   >
     <slot name="top" />
 
     <ul class="app-table-of-contents">
-      <li class="grey--text text--darken-4 pl-3 mb-3 title">Contents</li>
+      <li class="grey--text text--darken-3 pl-3 mb-2 body-1">Contents</li>
       <li
         v-for="(item, i) in list"
         :key="i"
+        class="mb-2"
       >
         <a
           :href="item.target"
           :class="{
             'primary--text': activeIndex === i,
-            'grey--text text--darken-2': activeIndex !== i
+            'grey--text': activeIndex !== i
           }"
           :style="{
             borderColor: activeIndex === i ? 'inherit' : null
           }"
-          class="mb-3 d-block body-2"
+          class="d-block body-2"
           @click.stop.prevent="goTo(item.target)"
           v-text="item.text"
         />

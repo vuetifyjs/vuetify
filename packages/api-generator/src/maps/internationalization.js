@@ -4,18 +4,18 @@ module.exports = {
       {
         name: 'locales',
         default: '{ en: VuetifyLocale }',
-        type: 'Record<string, VuetifyLocale>'
+        type: 'Record<string, VuetifyLocale>',
       },
       {
         name: 'current',
         default: 'en',
-        type: 'string'
+        type: 'string',
       },
       {
         name: 't',
         default: '(key: string, ...params: Array<string | number>): string',
-        type: 'Function'
-      }
-    ]
-  }
+        type: 'Function',
+      },
+    ],
+  },
 }

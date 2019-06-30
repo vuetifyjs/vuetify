@@ -5,7 +5,7 @@ exports[`VStepperStep.ts should accept a custom color 1`] = `
 <div class="v-stepper__step v-stepper__step--inactive v-stepper__step--complete">
   <span class="v-stepper__step__step pink">
     <i aria-hidden="true"
-       class="v-icon mdi mdi-check theme--light"
+       class="v-icon notranslate mdi mdi-check theme--light"
     >
     </i>
   </span>
@@ -22,7 +22,7 @@ exports[`VStepperStep.ts should accept a custom css color 1`] = `
         style="background-color: rgb(170, 187, 204); border-color: #aabbcc;"
   >
     <i aria-hidden="true"
-       class="v-icon mdi mdi-check theme--light"
+       class="v-icon notranslate mdi mdi-check theme--light"
     >
     </i>
   </span>

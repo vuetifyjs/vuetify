@@ -54,6 +54,7 @@
         <v-icon class="hidden-md-and-up">mdi-file-document-box</v-icon>
       </v-btn>
       <core-store />
+      <core-enterprise />
       <core-supports />
       <core-ecosystems />
       <core-versions />

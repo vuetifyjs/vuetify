@@ -5,10 +5,10 @@ module.exports = {
         name: 'touch',
         example: {
           left: 'Function',
-          right: 'Function'
-        }
-      }
+          right: 'Function',
+        },
+      },
     ],
-    slots: ['default']
-  }
+    slots: ['default'],
+  },
 }

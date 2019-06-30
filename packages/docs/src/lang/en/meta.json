@@ -64,6 +64,11 @@
     "description": "Get professional help, support and guidance for your Vuetify application from the creator, John Leider.",
     "keywords": "vuetify consulting, vuetify support, vuetify help"
   },
+  "getting-started/enterprise": {
+    "title": "Vuetify for enterprise",
+    "description": "Get the tools you need to continuously catalog and understand the open source software that your application depends on with the Tidelift subscription.",
+    "keywords": "vuetify enterprise, tidelift enterprise, tidelift vuetify"
+  },
   "customization/accessibility": {
     "title": "Accessibility",
     "description": "See examples and the advantages of having accessibility (a11y) support in Vuetify components.",
