@@ -1,6 +1,6 @@
 <template>
   <figure class="mb-4 text-xs-center">
-    <v-sheet>
+    <v-sheet color="transparent">
       <v-img
         :src="computedValue"
         class="d-inline-block"
