@@ -144,7 +144,7 @@ exports[`VColorPicker.ts should change canvas height 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.unfold
           </i>
@@ -288,7 +288,7 @@ exports[`VColorPicker.ts should hide canvas 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.unfold
           </i>
@@ -547,7 +547,7 @@ exports[`VColorPicker.ts should render color picker 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.unfold
           </i>
@@ -703,7 +703,7 @@ exports[`VColorPicker.ts should show swatches 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.unfold
           </i>

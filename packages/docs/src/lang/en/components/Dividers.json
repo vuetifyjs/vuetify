@@ -15,11 +15,11 @@
     },
     "vertical-inset": {
       "header": "### Vertical inset dividers",
-      "desc": "Vertical dividers can also be paired with the inset property for even more options."
+      "desc": "Vertical dividers can also be paired with the `inset` prop for even more options."
     },
     "subheaders": {
       "header": "### Dividers and subheaders",
-      "desc": "Dividers and subheaders can help break up content and can be lined up with one another by using the same inset prop."
+      "desc": "Dividers and subheaders can help break up content and can optionally line up with one another by using the same `inset` prop."
     },
     "divider-list-portrait": {
       "header": "### Dividers in Portrait View",
@@ -28,6 +28,6 @@
   },
   "props": {
     "inset": "Adds indentation (72px) for **normal** dividers, reduces max height for **vertical**.",
-    "vertical": "Creates a vertical divider"
+    "vertical": "Displays dividers vertically"
   }
 }

@@ -27,12 +27,12 @@
 #ad__container
   #carbonads
     a
-      color: rgba(#000, .87)
+      color: #000
       display: inline-block
       text-decoration: none
 
       &.carbon-poweredby
-        color: rgba(#000, .56)
+        color: rgba(#000, .87)
         text-transform: uppercase
         letter-spacing: 1px
         font-size: 9px !important

@@ -42,7 +42,7 @@ exports[`VDataIterator.ts should render and match snapshot 1`] = `
               <div class="v-input__append-inner">
                 <div class="v-input__icon v-input__icon--append">
                   <i aria-hidden="true"
-                     class="v-icon mdi mdi-menu-down theme--light"
+                     class="v-icon notranslate mdi mdi-menu-down theme--light"
                   >
                   </i>
                 </div>
@@ -65,7 +65,7 @@ exports[`VDataIterator.ts should render and match snapshot 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon mdi mdi-chevron-left theme--light"
+             class="v-icon notranslate mdi mdi-chevron-left theme--light"
           >
           </i>
         </span>
@@ -79,7 +79,7 @@ exports[`VDataIterator.ts should render and match snapshot 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon mdi mdi-chevron-right theme--light"
+             class="v-icon notranslate mdi mdi-chevron-right theme--light"
           >
           </i>
         </span>
@@ -131,7 +131,7 @@ exports[`VDataIterator.ts should render and match snapshot with data 1`] = `
               <div class="v-input__append-inner">
                 <div class="v-input__icon v-input__icon--append">
                   <i aria-hidden="true"
-                     class="v-icon mdi mdi-menu-down theme--light"
+                     class="v-icon notranslate mdi mdi-menu-down theme--light"
                   >
                   </i>
                 </div>
@@ -154,7 +154,7 @@ exports[`VDataIterator.ts should render and match snapshot with data 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon mdi mdi-chevron-left theme--light"
+             class="v-icon notranslate mdi mdi-chevron-left theme--light"
           >
           </i>
         </span>
@@ -168,7 +168,7 @@ exports[`VDataIterator.ts should render and match snapshot with data 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon mdi mdi-chevron-right theme--light"
+             class="v-icon notranslate mdi mdi-chevron-right theme--light"
           >
           </i>
         </span>
@@ -211,7 +211,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
               <div class="v-input__append-inner">
                 <div class="v-input__icon v-input__icon--append">
                   <i aria-hidden="true"
-                     class="v-icon mdi mdi-menu-down theme--light"
+                     class="v-icon notranslate mdi mdi-menu-down theme--light"
                   >
                   </i>
                 </div>
@@ -234,7 +234,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon mdi mdi-chevron-left theme--light"
+             class="v-icon notranslate mdi mdi-chevron-left theme--light"
           >
           </i>
         </span>
@@ -248,7 +248,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon mdi mdi-chevron-right theme--light"
+             class="v-icon notranslate mdi mdi-chevron-right theme--light"
           >
           </i>
         </span>
@@ -291,7 +291,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
               <div class="v-input__append-inner">
                 <div class="v-input__icon v-input__icon--append">
                   <i aria-hidden="true"
-                     class="v-icon mdi mdi-menu-down theme--light"
+                     class="v-icon notranslate mdi mdi-menu-down theme--light"
                   >
                   </i>
                 </div>
@@ -314,7 +314,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon mdi mdi-chevron-left theme--light"
+             class="v-icon notranslate mdi mdi-chevron-left theme--light"
           >
           </i>
         </span>
@@ -328,7 +328,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon mdi mdi-chevron-right theme--light"
+             class="v-icon notranslate mdi mdi-chevron-right theme--light"
           >
           </i>
         </span>
@@ -371,7 +371,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
               <div class="v-input__append-inner">
                 <div class="v-input__icon v-input__icon--append">
                   <i aria-hidden="true"
-                     class="v-icon mdi mdi-menu-down theme--light"
+                     class="v-icon notranslate mdi mdi-menu-down theme--light"
                   >
                   </i>
                 </div>
@@ -394,7 +394,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon mdi mdi-chevron-left theme--light"
+             class="v-icon notranslate mdi mdi-chevron-left theme--light"
           >
           </i>
         </span>
@@ -408,7 +408,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon mdi mdi-chevron-right theme--light"
+             class="v-icon notranslate mdi mdi-chevron-right theme--light"
           >
           </i>
         </span>

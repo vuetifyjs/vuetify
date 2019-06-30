@@ -3,12 +3,24 @@ module.exports = {
     props: [
       {
         'name': 'dark',
-        'source': 'themeable'
+        'source': 'themeable',
+      },
+      {
+        'name': 'inset',
+        'type': 'Boolean',
+        'default': 'false',
+        'source': null,
       },
       {
         'name': 'light',
-        'source': 'themeable'
-      }
-    ]
-  }
+        'source': 'themeable',
+      },
+      {
+        'name': 'vertical',
+        'type': 'Boolean',
+        'default': 'false',
+        'source': null,
+      },
+    ],
+  },
 }

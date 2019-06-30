@@ -267,7 +267,8 @@ export default baseMixins.extend({
     children.push(h('div', {
       'class': this.contentClasses,
       attrs: {
-        tabIndex: '-1',
+        role: 'document',
+        tabindex: 0,
         ...this.getScopeIdAttrs(),
       },
       on: {
@@ -287,6 +288,7 @@ export default baseMixins.extend({
 
     return h('div', {
       staticClass: 'v-dialog__container',
+      attrs: { role: 'dialog' },
       style: {
         display: (!this.hasActivator || this.fullWidth) ? 'block' : 'inline-block',
       },
