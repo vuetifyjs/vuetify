@@ -4,12 +4,12 @@ module.exports = {
     events: [
       {
         name: 'input',
-        value: 'boolean'
+        value: 'boolean',
       },
       {
         name: 'update:inputValue',
-        value: 'string | number'
-      }
-    ]
-  }
+        value: 'string | number',
+      },
+    ],
+  },
 }

@@ -30,7 +30,6 @@
     "editable": " 편집 버튼을 생성 - [스펙](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "filter": "항목 필터링에 사용되는 함수",
     "hideSelected": "이미 선택된 셀렉트 메뉴 항목을 보여주지 않음",
-    "itemAvatar": "**항목** 의 아바타 값 속성을 설정",
     "itemDisabled": "**항목** 의 비활성화(disabled) 값 속성을 설정",
     "itemText": "**항목** 의 텍스트 값 속성을 설정",
     "itemValue": "**항목** 의 값 속성을 설정",

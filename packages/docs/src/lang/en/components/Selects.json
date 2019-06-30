@@ -56,7 +56,6 @@
     "editable": " Creates an editable button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "filter": "The function used for filtering items",
     "hideSelected": "Do not display in the select menu items that are already selected",
-    "itemAvatar": "Set property of **items**'s avatar value",
     "itemDisabled": "Set property of **items**'s disabled value",
     "itemText": "Set property of **items**'s text value",
     "itemValue": "Set property of **items**'s value - **must be primative**. Dot notation is supported",

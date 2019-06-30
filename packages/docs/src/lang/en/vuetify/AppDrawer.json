@@ -1,5 +1,5 @@
 {
-  "accessibility": "Accessibility",
+  "accessibility": "Accessibility (a11y)",
   "aLaCarte": "A-la-carte",
   "alerts": "Alerts",
   "apiExplorer": "API explorer",
@@ -52,7 +52,7 @@
   "gridLists": "Grid lists",
   "groups": "Groups",
   "hover": "Hover",
-  "i18n": "Internationalization",
+  "i18n": "Internationalization (i18n)",
   "icons": "Icons",
   "images": "Images",
   "inputs": "Inputs",

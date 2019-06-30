@@ -24,7 +24,7 @@
     },
     "closable": {
       "header": "### Closable",
-      "desc": "Closable chips can be controlled with a v-model. Listen to the `click:close` event if you want to know when a chip has been closed.",
+      "desc": "Closable chips can be controlled with a v-model. You can also listen to the `click:close` event if you want to know when a chip has been closed.",
       "uninverted": true
     },
     "in-selects": {

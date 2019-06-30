@@ -1,0 +1,24 @@
+<!-- Vue HTML Markup -->
+
+<template>
+  <v-select
+    :items="['Fizz', 'Buzz']"
+    label="Items"
+  >
+    <template v-slot:item="{ item, attrs, on }">
+      <v-list-item
+        v-bind="attrs"
+        v-on="on"
+      >
+        <v-list-item-content>
+          <v-list-item-title
+            :id="attrs['aria-labelledby']"
+            v-text="item.title"
+          ></v-list-item-title>
+
+          <v-list-item-subtitle v-text="item.sub"></v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+    </template>
+  </v-select>
+</template>

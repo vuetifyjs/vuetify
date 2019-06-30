@@ -26,8 +26,13 @@
               <supporters-patrons
                 :tier="[1]"
                 compact
+                dense
+                hide-titles
               />
-              <supporters-sponsor-btn small />
+              <supporters-sponsor-btn
+                small
+                class="mt-3"
+              />
             </div>
           </v-flex>
 

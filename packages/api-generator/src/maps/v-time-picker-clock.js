@@ -3,8 +3,8 @@ module.exports = {
     props: [
       {
         name: 'format',
-        default: '(val: string): string'
-      }
-    ]
-  }
+        default: '(val: string): string',
+      },
+    ],
+  },
 }

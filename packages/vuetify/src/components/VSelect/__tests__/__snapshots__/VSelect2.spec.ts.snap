@@ -24,7 +24,7 @@ exports[`VSelect.ts should be clearable with prop, dirty and multi select 1`] = 
         <div class="v-input__append-inner">
           <div class="v-input__icon v-input__icon--clear">
             <i role="button"
-               class="v-icon v-icon--link material-icons theme--light"
+               class="v-icon notranslate v-icon--link material-icons theme--light"
             >
               $vuetify.icons.clear
             </i>
@@ -33,7 +33,7 @@ exports[`VSelect.ts should be clearable with prop, dirty and multi select 1`] = 
         <div class="v-input__append-inner">
           <div class="v-input__icon v-input__icon--append">
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
             >
               $vuetify.icons.dropdown
             </i>
@@ -81,7 +81,7 @@ exports[`VSelect.ts should be clearable with prop, dirty and single select 1`] =
         <div class="v-input__append-inner">
           <div class="v-input__icon v-input__icon--clear">
             <i role="button"
-               class="v-icon v-icon--link material-icons theme--light"
+               class="v-icon notranslate v-icon--link material-icons theme--light"
             >
               $vuetify.icons.clear
             </i>
@@ -90,7 +90,7 @@ exports[`VSelect.ts should be clearable with prop, dirty and single select 1`] =
         <div class="v-input__append-inner">
           <div class="v-input__icon v-input__icon--append">
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
             >
               $vuetify.icons.dropdown
             </i>
@@ -138,7 +138,7 @@ exports[`VSelect.ts should use scoped slot for selection generation 1`] = `
         <div class="v-input__append-inner">
           <div class="v-input__icon v-input__icon--append">
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
             >
               $vuetify.icons.dropdown
             </i>

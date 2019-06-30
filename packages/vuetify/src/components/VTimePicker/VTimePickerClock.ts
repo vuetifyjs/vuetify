@@ -178,7 +178,9 @@ export default mixins<options &
       this.isDragging = true
       this.onDragMove(e)
     },
-    onMouseUp () {
+    onMouseUp (e: MouseEvent | TouchEvent) {
+      e.stopPropagation()
+
       this.isDragging = false
       if (this.valueOnMouseUp !== null && this.isAllowed(this.valueOnMouseUp)) {
         this.$emit('change', this.valueOnMouseUp)
@@ -244,7 +246,7 @@ export default mixins<options &
       on: (this.readonly || this.disabled) ? undefined : Object.assign({
         mousedown: this.onMouseDown,
         mouseup: this.onMouseUp,
-        mouseleave: () => (this.isDragging && this.onMouseUp()),
+        mouseleave: (e: MouseEvent) => (this.isDragging && this.onMouseUp(e)),
         touchstart: this.onMouseDown,
         touchend: this.onMouseUp,
         mousemove: this.onDragMove,
