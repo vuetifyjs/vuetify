@@ -3,7 +3,7 @@
   "headerText": "The `v-alert` component is used to convey important information to the user through the use contextual types icons and color. These default types come in in 4 variations: **success**, **info**, **warning**, and **error**. Default icons are assigned which help represent different actions each type portrays. Many parts of an alert such as `border`, `icon`, and `color` can also be customized to fit almost any situation.",
   "examples": {
     "usage": {
-      "desc": "Alerts in their simplist form displays a message with default theme and style."
+      "desc": "Alerts in their simplest form displays a message with default theme and style."
     },
     "border": {
       "header": "### Border",
@@ -15,7 +15,7 @@
     },
     "dense": {
       "header": "### Dense",
-      "desc": "The `dense` prop hides the icon and descreases the height of the alert creating a simple and compact style. This prop, when combined with `border`, will decrease the border thickness to stay consistant with the style."
+      "desc": "The `dense` prop hides the icon and decreases the height of the alert creating a simple and compact style. This prop, when combined with `border`, will decrease the border thickness to stay consistent with the style."
     },
     "dismissible": {
       "header": "### Dismissible",
@@ -23,7 +23,7 @@
     },
     "icon": {
       "header": "### Icon",
-      "desc": "The `icon` prop allows you to add an icon to the beginining of the alert component. If a `type` is provided, this will override the default type icon. Additionally setting `icon` to false will remove the icon altogether."
+      "desc": "The `icon` prop allows you to add an icon to the beginning of the alert component. If a `type` is provided, this will override the default type icon. Additionally setting `icon` to false will remove the icon altogether."
     },
     "outlined": {
       "header": "### Outlined",
@@ -35,7 +35,7 @@
     },
     "text": {
       "header": "### Text",
-      "desc": "The `text` prop is a simple alert variant that applies a transparent background and the colors from props `color` and `type` to its text. Similiar to other styled props, `text` can be combined with other props like `dense`, `prominent`, and `outlined` to effectively color the text."
+      "desc": "The `text` prop is a simple alert variant that applies a transparent background and the colors from props `color` and `type` to its text. Similar to other styled props, `text` can be combined with other props like `dense`, `prominent`, and `outlined` to effectively color the text."
     },
     "transition": {
       "header": "### Transition",
@@ -52,8 +52,8 @@
   },
   "props": {
     "border": "Puts a border on the element. Accepts **top** | **right** | **bottom** | **left**.",
-    "coloredBorder": "Swap color from the background to the border for an alternative border look.",
     "closeLabel": "Text used for *aria-label* on **dismissible** alerts.",
+    "coloredBorder": "Swap color from the background to the border for an alternative border look.",
     "dense": "Hides icon and decreases component height for a more simplistic alert.",
     "dismissible": "Specifies that the Alert can be closed.",
     "icon": "Designates a specific icon.",
@@ -62,5 +62,15 @@
     "prominent": "Displays a larger vertically centered icon to draw more attention.",
     "text": "Make the background transparent and color the text.",
     "type": "Specify a **success**, **info**, **warning** or **error** alert. Uses the contextual color and a pre-defined icon."
+  },
+  "slots": {
+    "append": "Slot for icon at end of alert.",
+    "prepend": "Slot for icon at beginning of alert."
+  },
+  "scopedSlots": {
+    "close": "Slot for icon used in `dismissible` prop."
+  },
+  "functions": {
+    "toggle": "Toggles the `v-alert` active state. Available in close slot and used as the click action in `dismissible`."
   }
 }
