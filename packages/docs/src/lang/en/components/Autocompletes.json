@@ -1,5 +1,5 @@
 {
-  "header": "# Autocomplete",
+  "header": "# Autocompletes",
   "headerText": "The `v-autocomplete` component offers simple and flexible type-ahead functionality. This is useful when searching large sets of data or even dynamically requesting information from an API.",
   "examples": {
     "usage": {

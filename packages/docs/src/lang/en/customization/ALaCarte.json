@@ -1,5 +1,5 @@
 {
-  "header": "# Overview",
+  "header": "# A-la-carte",
   "headerText": "Being a component framework, Vuetify will always grow horizontally. Depending on your project, a small **package size** may be a requirement. The A la carte system enables you to pick and choose which components to import, drastically _lowering_ your build size. New projects created with the [vue-cli plugin](/getting-started/quick-start#new-applications) have this enabled by default.",
   "treeshakeWarning": "Tree shaking only works with webpack 4 in production mode",
   "loaderHeader1": "## vuetify-loader",
@@ -20,7 +20,7 @@
   "loaderHeader7": "## Limitations",
   "loaderText7a": "When using the `vuetify-loader`, there are a few scenarios which will require manual importing of components.",
   "loaderHeader8": "### Dynamic components",
-  "loaderText8a": "`v-data-iterator` can use any component via the content-tag prop. This component must be registered [globally](#markup-js-a-la-carte):",
+  "loaderText8a": "`v-data-iterator` can use any component via the content-tag prop. This component must be registered [globally](#markup-js-a-la-carte-manual):",
   "loaderText8b": "Dynamic components used with `<component :is=\"my-component\">` can be registered [locally](#markup-js-a-la-carte-destructuring):",
   "loaderHeader9": "### Functional components",
   "loaderText9a": "Functional components are inlined at runtime by vue, and cannot have a **components** property in their options. Any vuetify components used in a custom functional component must either be registered globally (recommended), or locally wherever the custom component is used.",

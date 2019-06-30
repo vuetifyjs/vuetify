@@ -1,5 +1,5 @@
 {
-  "header": "# Carousel",
+  "header": "# Carousels",
   "headerText": "The `v-carousel` component is used to display large numbers of visual content on a rotating timer.",
   "examples": {
     "usage": {

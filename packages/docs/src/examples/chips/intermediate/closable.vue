@@ -2,6 +2,7 @@
   <div class="text-xs-center">
     <v-btn
       v-if="!chip1 && !chip2 && !chip3 && !chip4"
+      close
       color="primary"
       dark
       @click="chip1 = true, chip2 = true, chip3 = true, chip4= true"
@@ -12,6 +13,7 @@
     <v-chip
       v-if="chip1"
       class="ma-2"
+      close
       @click:close="chip1 = false"
     >
       Closable
@@ -20,6 +22,7 @@
     <v-chip
       v-if="chip2"
       class="ma-2"
+      close
       color="red"
       text-color="white"
       @click:close="chip2 = false"
@@ -30,6 +33,7 @@
     <v-chip
       v-if="chip3"
       class="ma-2"
+      close
       color="green"
       outlined
       @click:close="chip3 = false"
@@ -40,6 +44,7 @@
     <v-chip
       v-if="chip4"
       class="ma-2"
+      close
       color="orange"
       label
       outlined

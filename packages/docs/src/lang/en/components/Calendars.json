@@ -1,5 +1,5 @@
 {
-  "header": "# Calendar",
+  "header": "# Calendars",
   "headerText": "The `v-calendar` component is used to display information in a daily, weekly, or monthly view. The daily view has slots for all day or timed elements, and the weekly and monthly view has a slot for each day. Optionally you can pass in an array of events and they will be rendered over the appropriate days and times.",
   "examples": {
     "usage": {

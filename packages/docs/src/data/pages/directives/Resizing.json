@@ -28,8 +28,8 @@
           "type": "up-next",
           "value": [
             "customization/breakpoints",
-            "styles/display",
-            "components/grids"
+            "components/grids",
+            "components/grid-lists"
           ]
         }
       ]

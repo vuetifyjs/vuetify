@@ -10,9 +10,7 @@
       <v-card-text>
         <doc-markdown>2text</doc-markdown>
 
-        <strong>
-          <doc-markdown>2features</doc-markdown>
-        </strong>
+        <doc-markdown>2features</doc-markdown>
 
         <doc-markdown>2upgrade</doc-markdown>
       </v-card-text>

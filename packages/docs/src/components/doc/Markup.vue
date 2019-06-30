@@ -15,6 +15,7 @@
         target="_blank"
         rel="noopener"
         title="Edit code"
+        aria-label="Edit code"
       >
         <v-icon>mdi-pencil</v-icon>
       </a>
@@ -23,9 +24,10 @@
     <div class="v-markup__copy">
       <v-icon
         title="Copy code"
+        aria-label="Copy code"
         @click="copyMarkup"
       >
-        content_copy
+        mdi-content-copy
       </v-icon>
       <v-slide-x-transition>
         <span
@@ -163,12 +165,12 @@
   &__copied
     position: absolute
     top: 12px
-    right: 100px
+    right: 75px
 
   &__copy,
   &__edit
     position: absolute
-    top: 0px
+    top: 0
     cursor: pointer
     width: 25px
     height: 25px

@@ -13,14 +13,14 @@
 <style lang="sass">
 .core-goto--heading
   h1
-    font-size: 32px
-    font-weight: 400
+    font-size: 3rem
+    font-weight: 300
 
   h2
-    font-size: 24px
-    font-weight: 400
+    font-size: 2rem
+    font-weight: 500
 
   h3
-    font-size: 16px
+    font-size: 1.25rem
     font-weight: 500
 </style>

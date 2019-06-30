@@ -49,7 +49,7 @@
           color="pink"
           small
         >
-          <v-layout pt-3>
+          <v-layout pt-1>
             <v-flex xs3>
               <strong>5pm</strong>
             </v-flex>
@@ -64,7 +64,7 @@
           color="teal lighten-3"
           small
         >
-          <v-layout wrap pt-3>
+          <v-layout wrap pt-1>
             <v-flex xs3>
               <strong>3-4pm</strong>
             </v-flex>
@@ -95,7 +95,7 @@
           color="pink"
           small
         >
-          <v-layout pt-3>
+          <v-layout pt-1>
             <v-flex xs3>
               <strong>12pm</strong>
             </v-flex>
@@ -109,7 +109,7 @@
           color="teal lighten-3"
           small
         >
-          <v-layout pt-3>
+          <v-layout pt-1>
             <v-flex xs3>
               <strong>9-11am</strong>
             </v-flex>

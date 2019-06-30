@@ -1,5 +1,5 @@
 {
-  "header": "# Grid list",
+  "header": "# Grid lists",
   "headerText": "Grid lists are an addon for the `v-container` component that add gutter control between items.",
   "components": ["v-container', 'v-layout', 'v-flex', 'v-spacer"],
   "examples": {

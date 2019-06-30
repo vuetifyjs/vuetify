@@ -95,7 +95,7 @@
         {
           "type": "up-next",
           "value": [
-            "framework/alignment",
+            "styles/alignment",
             "directives/resizing",
             "customization/breakpoints"
           ]

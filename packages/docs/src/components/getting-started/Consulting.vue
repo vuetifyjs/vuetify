@@ -38,20 +38,17 @@
       xs12
       mt-4
     >
-      <v-card
-        color="transparent"
-        class="elevation-0"
-      >
+      <v-card outlined>
         <v-card-title class="pb-3 primary">
-          <h3 class="title white--text">
+          <h2 class="title white--text">
             <v-icon color="white" class="mr-2">mdi-calendar</v-icon>
             <span>Schedule an Appointment</span>
-          </h3>
+          </h2>
         </v-card-title>
         <div
           class="calendly-inline-widget"
           data-url="https://calendly.com/vuetify"
-          style="min-width:320px;height:580px;"
+          style="min-width:320px;height:625px;"
         />
       </v-card>
     </v-flex>

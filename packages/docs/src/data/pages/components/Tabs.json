@@ -47,10 +47,7 @@
           "type": "examples",
           "value": [
             "simple/fixed-tabs",
-            {
-              "file": "simple/center-active",
-              "newIn": "2.0"
-            },
+            "simple/center-active",
             "simple/grow",
             "simple/pagination",
             "simple/icons",

@@ -92,10 +92,9 @@ export default mixins(
     genInput (type: string, attrs: object) {
       return this.$createElement('input', {
         attrs: Object.assign({
-          'aria-label': this.label,
           'aria-checked': this.isActive.toString(),
           disabled: this.isDisabled,
-          id: this.id,
+          id: this.computedId,
           role: type,
           type,
         }, attrs),

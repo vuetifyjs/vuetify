@@ -177,4 +177,17 @@ describe('VListGroup.ts', () => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.isActive).toBe(true)
   })
+
+  it('should have the correct a11y attributes', () => {
+    const wrapper = mountFunction()
+    const header = wrapper.find('.v-list-group__header')
+
+    expect(header.element.tabIndex).toBe(0)
+    expect(header.element.getAttribute('aria-expanded')).toBe('false')
+    expect(header.element.getAttribute('role')).toBe('button')
+
+    wrapper.setData({ isActive: true })
+
+    expect(header.element.getAttribute('aria-expanded')).toBe('true')
+  })
 })

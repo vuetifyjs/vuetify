@@ -1,5 +1,5 @@
 module.exports = {
   'v-list-group': {
-    slots: ['activator', 'default']
-  }
+    slots: ['activator', 'default'],
+  },
 }

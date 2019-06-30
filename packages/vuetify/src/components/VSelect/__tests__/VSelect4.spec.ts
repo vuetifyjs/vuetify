@@ -197,13 +197,13 @@ describe('VSelect.ts', () => {
     expect(inputSlot.element.getAttribute('role')).toBe('button')
     expect(inputSlot.element.getAttribute('aria-haspopup')).toBe('listbox')
     expect(inputSlot.element.getAttribute('aria-expanded')).toBe('false')
-    expect(inputSlot.element.getAttribute('aria-owns')).toBe(wrapper.vm.computedId)
+    expect(inputSlot.element.getAttribute('aria-owns')).toBe(wrapper.vm.computedOwns)
 
     const list = wrapper.find('.v-select-list')
     let items = list.findAll('.v-list-item')
 
     expect(list.element.children[0].getAttribute('role')).toBe('listbox')
-    expect(list.element.children[0].id).toBe(wrapper.vm.computedId)
+    expect(list.element.children[0].id).toBe(wrapper.vm.computedOwns)
     expect(items.at(0).element.getAttribute('role')).toBe('option')
     expect(items.at(0).element.getAttribute('aria-selected')).toBe('true')
     expect(items.at(1).element.getAttribute('aria-selected')).toBe('false')
@@ -215,7 +215,7 @@ describe('VSelect.ts', () => {
     expect(items.at(1).element.getAttribute('aria-selected')).toBe('true')
 
     const item = items.at(0)
-    const generatedId = `${(list.vm as any)._uid}-list-Foo`
+    const generatedId = `foo-list-item-${(list.vm as any)._uid}`
 
     expect(item.element.getAttribute('aria-labelledby')).toBe(generatedId)
     expect(item.find('.v-list-item__title').element.id).toBe(generatedId)

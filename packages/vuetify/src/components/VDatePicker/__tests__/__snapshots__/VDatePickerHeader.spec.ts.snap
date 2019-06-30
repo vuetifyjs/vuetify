@@ -8,7 +8,7 @@ exports[`VDatePickerHeader.ts should render component and match snapshot 1`] = `
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon mdi mdi-chevron-left theme--light"
+         class="v-icon notranslate mdi mdi-chevron-left theme--light"
       >
       </i>
     </span>
@@ -25,7 +25,7 @@ exports[`VDatePickerHeader.ts should render component and match snapshot 1`] = `
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon mdi mdi-chevron-right theme--light"
+         class="v-icon notranslate mdi mdi-chevron-right theme--light"
       >
       </i>
     </span>
@@ -42,7 +42,7 @@ exports[`VDatePickerHeader.ts should render component in RTL mode and match snap
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon mdi mdi-chevron-right theme--light"
+         class="v-icon notranslate mdi mdi-chevron-right theme--light"
       >
       </i>
     </span>
@@ -59,7 +59,7 @@ exports[`VDatePickerHeader.ts should render component in RTL mode and match snap
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon mdi mdi-chevron-left theme--light"
+         class="v-icon notranslate mdi mdi-chevron-left theme--light"
       >
       </i>
     </span>
@@ -76,7 +76,7 @@ exports[`VDatePickerHeader.ts should render component with default slot and matc
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon mdi mdi-chevron-left theme--light"
+         class="v-icon notranslate mdi mdi-chevron-left theme--light"
       >
       </i>
     </span>
@@ -95,7 +95,7 @@ exports[`VDatePickerHeader.ts should render component with default slot and matc
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon mdi mdi-chevron-right theme--light"
+         class="v-icon notranslate mdi mdi-chevron-right theme--light"
       >
       </i>
     </span>
@@ -113,7 +113,7 @@ exports[`VDatePickerHeader.ts should render disabled component and match snapsho
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon mdi mdi-chevron-left theme--light"
+         class="v-icon notranslate mdi mdi-chevron-left theme--light"
       >
       </i>
     </span>
@@ -131,7 +131,7 @@ exports[`VDatePickerHeader.ts should render disabled component and match snapsho
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon mdi mdi-chevron-right theme--light"
+         class="v-icon notranslate mdi mdi-chevron-right theme--light"
       >
       </i>
     </span>
@@ -148,7 +148,7 @@ exports[`VDatePickerHeader.ts should render readonly component and match snapsho
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon mdi mdi-chevron-left theme--light"
+         class="v-icon notranslate mdi mdi-chevron-left theme--light"
       >
       </i>
     </span>
@@ -165,7 +165,7 @@ exports[`VDatePickerHeader.ts should render readonly component and match snapsho
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon mdi mdi-chevron-right theme--light"
+         class="v-icon notranslate mdi mdi-chevron-right theme--light"
       >
       </i>
     </span>

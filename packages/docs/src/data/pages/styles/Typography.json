@@ -101,7 +101,7 @@
         {
           "type": "up-next",
           "value": [
-            "framework/alignment",
+            "styles/alignment",
             "styles/content"
           ]
         }

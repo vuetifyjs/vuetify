@@ -1,5 +1,5 @@
 {
-  "header": "# Data table",
+  "header": "# Data tables",
   "headerText": "The `v-data-table` component is used for displaying tabular data. Features include sorting, searching, pagination, inline-editing, header tooltips, and row selection.",
   "examples": {
     "usage": {

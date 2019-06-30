@@ -1,5 +1,5 @@
 {
-  "header": "# Button Groups",
+  "header": "# Button groups",
   "headerText": "The `v-btn-toggle` component is a simple wrapper for `v-item-group` built specifically to work with `v-btn`.",
   "examples": {
     "usage": {

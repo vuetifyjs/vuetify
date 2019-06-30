@@ -3,7 +3,6 @@
     class="white--text py-5"
     style="background: linear-gradient(to bottom, #1867c0, #5CBBF6)"
   >
-    <tidelift />
     <v-container>
       <v-layout
         align-center
@@ -81,6 +80,8 @@
     </v-container>
 
     <feature />
+
+    <tidelift />
   </v-responsive>
 </template>
 

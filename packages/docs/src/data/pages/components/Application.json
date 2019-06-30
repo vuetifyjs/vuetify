@@ -67,9 +67,9 @@
         {
           "type": "up-next",
           "value": [
-            "themes/premium",
-            "styles/colors",
-            "customization/theme"
+            "customization/theme",
+            "components/app-bars",
+            "components/navigation-drawers"
           ]
         }
       ]

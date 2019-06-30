@@ -49,9 +49,9 @@
         {
           "type": "up-next",
           "value": [
-            "styles/colors",
-            "styles/elevation",
-            "components/grids"
+            "components/cards",
+            "components/grids",
+            "styles/elevation"
           ]
         }
       ]
