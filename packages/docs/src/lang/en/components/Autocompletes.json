@@ -42,11 +42,11 @@
   },
   "slots": {
     "append": "Components.Inputs.slots.append",
+    "append-item": "Components.Selects.slots.append-item",
     "append-outer": "Components.TextFields.slots.append-outer",
+    "no-data": "Mixins.Filterable.slots.noData",
     "prepend": "Components.Inputs.slots.prepend",
     "prepend-inner": "Components.TextFields.slots.prepend-inner",
-    "append-item": "Components.Selects.slots.append-item",
-    "no-data": "Mixins.Filterable.slots.noData",
     "prepend-item": "Components.Selects.slots.prepend-item"
   },
   "scopedSlots": {
