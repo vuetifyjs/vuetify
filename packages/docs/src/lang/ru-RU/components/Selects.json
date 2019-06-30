@@ -30,7 +30,6 @@
     "editable": "Создаёт редактируемую кнопку - [спецификация](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "filter": "Функция, используемая для фильтрации элементов",
     "hideSelected": "Не отображать в элементах _select_ , которые уже выбраны",
-    "itemAvatar": "Установить свойству **items** значение аватара",
     "itemDisabled": "Установить свойству **items** отключено",
     "itemText": "Установить свойству **items** значение text",
     "itemValue": "Установить свойству **items** значение",

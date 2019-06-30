@@ -211,6 +211,9 @@ export default mixins(
     genAlert (): VNode {
       let data: VNodeData = {
         staticClass: 'v-alert',
+        attrs: {
+          role: 'alert',
+        },
         class: this.classes,
         style: this.styles,
         directives: [{

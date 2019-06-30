@@ -23,7 +23,7 @@ exports[`VOverflowBtn.js should use default autocomplete selections 1`] = `
         <div class="v-input__append-inner">
           <div class="v-input__icon v-input__icon--append">
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
             >
               $vuetify.icons.dropdown
             </i>
@@ -70,7 +70,7 @@ exports[`VOverflowBtn.js should use default autocomplete selections 2`] = `
         <div class="v-input__append-inner">
           <div class="v-input__icon v-input__icon--append">
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
             >
               $vuetify.icons.dropdown
             </i>

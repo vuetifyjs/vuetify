@@ -2,7 +2,7 @@
 
 exports[`VToolbar.ts should render an extended toolbar 1`] = `
 
-<nav class="v-sheet v-sheet--tile theme--light v-toolbar v-toolbar--extended">
+<header class="v-sheet v-sheet--tile theme--light v-toolbar v-toolbar--extended">
   <div class="v-toolbar__content"
        style="height: 64px;"
   >
@@ -11,13 +11,13 @@ exports[`VToolbar.ts should render an extended toolbar 1`] = `
        style="height: 48px;"
   >
   </div>
-</nav>
+</header>
 
 `;
 
 exports[`VToolbar.ts should render an extended toolbar with specific height 1`] = `
 
-<nav class="v-sheet v-sheet--tile theme--light v-toolbar v-toolbar--extended">
+<header class="v-sheet v-sheet--tile theme--light v-toolbar v-toolbar--extended">
   <div class="v-toolbar__content"
        style="height: 64px;"
   >
@@ -26,6 +26,6 @@ exports[`VToolbar.ts should render an extended toolbar with specific height 1`] 
        style="height: 42px;"
   >
   </div>
-</nav>
+</header>
 
 `;

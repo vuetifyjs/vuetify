@@ -156,7 +156,7 @@ exports[`VDatePicker.ts should match snapshot with colored picker & header 1`] =
         >
           <span class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon mdi mdi-chevron-left theme--light"
+               class="v-icon notranslate mdi mdi-chevron-left theme--light"
             >
             </i>
           </span>
@@ -173,7 +173,7 @@ exports[`VDatePicker.ts should match snapshot with colored picker & header 1`] =
         >
           <span class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon mdi mdi-chevron-right theme--light"
+               class="v-icon notranslate mdi mdi-chevron-right theme--light"
             >
             </i>
           </span>
@@ -332,7 +332,7 @@ exports[`VDatePicker.ts should match snapshot with colored picker 1`] = `
         >
           <span class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon mdi mdi-chevron-left theme--light"
+               class="v-icon notranslate mdi mdi-chevron-left theme--light"
             >
             </i>
           </span>
@@ -349,7 +349,7 @@ exports[`VDatePicker.ts should match snapshot with colored picker 1`] = `
         >
           <span class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon mdi mdi-chevron-right theme--light"
+               class="v-icon notranslate mdi mdi-chevron-right theme--light"
             >
             </i>
           </span>
@@ -631,7 +631,7 @@ exports[`VDatePicker.ts should match snapshot with pick-month prop 1`] = `
         >
           <span class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon mdi mdi-chevron-left theme--light"
+               class="v-icon notranslate mdi mdi-chevron-left theme--light"
             >
             </i>
           </span>
@@ -648,7 +648,7 @@ exports[`VDatePicker.ts should match snapshot with pick-month prop 1`] = `
         >
           <span class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon mdi mdi-chevron-right theme--light"
+               class="v-icon notranslate mdi mdi-chevron-right theme--light"
             >
             </i>
           </span>
