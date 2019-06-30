@@ -19,7 +19,7 @@
     },
     "profile": {
       "header": "### Profile Card",
-      "desc": "Using the **tile** prop, we can create a sleek hardlined profile card."
+      "desc": "Using the **tile** prop, we can create a sleek hard-lined profile card."
     },
     "advanced": {
       "header": "### Advanced usage",
