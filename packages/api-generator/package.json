@@ -6,7 +6,9 @@
   "main": "dist/api.js",
   "scripts": {
     "debug": "babel-node inspect src/index.js",
-    "build": "node src/index.js"
+    "build": "node src/index.js",
+    "lint": "eslint --ext .js src",
+    "lint:fix": "yarn lint --fix"
   },
   "author": "",
   "license": "ISC",

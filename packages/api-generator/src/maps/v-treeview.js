@@ -5,22 +5,22 @@ module.exports = {
     scopedSlots: [
       {
         name: 'prepend',
-        props: VTreeviewScopedProps
+        props: VTreeviewScopedProps,
       },
       {
         name: 'label',
-        props: VTreeviewScopedProps
+        props: VTreeviewScopedProps,
       },
       {
         name: 'append',
-        props: VTreeviewScopedProps
-      }
+        props: VTreeviewScopedProps,
+      },
     ],
     functions: [
       {
         name: 'updateAll',
-        signature: '(val: boolean): void'
-      }
-    ]
-  }
+        signature: '(val: boolean): void',
+      },
+    ],
+  },
 }

@@ -1,5 +1,5 @@
 module.exports = {
   'v-tab': {
-    slots: ['default']
-  }
+    slots: ['default'],
+  },
 }

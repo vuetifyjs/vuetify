@@ -1,5 +1,5 @@
 module.exports = {
   'v-toolbar-title': {
-    slots: ['default']
-  }
+    slots: ['default'],
+  },
 }

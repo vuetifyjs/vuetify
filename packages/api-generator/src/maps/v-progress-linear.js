@@ -5,9 +5,9 @@ module.exports = {
       {
         name: 'default',
         props: {
-          value: 'number'
-        }
-      }
-    ]
-  }
+          value: 'number',
+        },
+      },
+    ],
+  },
 }

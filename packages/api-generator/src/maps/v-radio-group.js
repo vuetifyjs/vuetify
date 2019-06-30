@@ -6,8 +6,8 @@ module.exports = {
     events: [
       {
         name: 'change',
-        value: 'any'
-      }
-    ].concat(validatableEvents)
-  }
+        value: 'any',
+      },
+    ].concat(validatableEvents),
+  },
 }

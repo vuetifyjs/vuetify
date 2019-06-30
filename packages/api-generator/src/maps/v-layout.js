@@ -7,26 +7,26 @@ module.exports = {
         'name': 'row',
         'type': 'Boolean',
         'default': 'true',
-        'source': null
+        'source': null,
       },
       {
         'name': 'column',
         'type': 'Boolean',
         'default': 'false',
-        'source': null
+        'source': null,
       },
       {
         'name': 'reverse',
         'type': 'Boolean',
         'default': 'false',
-        'source': null
+        'source': null,
       },
       {
         'name': 'wrap',
         'type': 'Boolean',
         'default': 'false',
-        'source': null
-      }
-    ].concat(sharedGridProps)
-  }
+        'source': null,
+      },
+    ].concat(sharedGridProps),
+  },
 }

@@ -1,5 +1,5 @@
 module.exports = {
   'v-breadcrumbs-item': {
-    slots: ['default']
-  }
+    slots: ['default'],
+  },
 }
