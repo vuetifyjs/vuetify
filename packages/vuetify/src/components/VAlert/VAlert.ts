@@ -41,11 +41,11 @@ export default mixins(
         ].includes(val)
       },
     },
-    coloredBorder: Boolean,
     closeLabel: {
       type: String,
       default: '$vuetify.close',
     },
+    coloredBorder: Boolean,
     dense: Boolean,
     dismissible: Boolean,
     icon: {

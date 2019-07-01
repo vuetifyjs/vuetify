@@ -3,10 +3,10 @@ const { inputEvents, inputSlots } = require('../variables')
 module.exports = {
   'v-input': {
     events: [
-      ...inputEvents
+      ...inputEvents,
     ],
     slots: [
-      ...inputSlots
-    ]
-  }
+      ...inputSlots,
+    ],
+  },
 }

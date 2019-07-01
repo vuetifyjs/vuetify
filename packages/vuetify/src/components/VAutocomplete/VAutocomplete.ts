@@ -27,6 +27,10 @@ export default VSelect.extend({
       type: Boolean,
       default: true,
     },
+    autoSelectFirst: {
+      type: Boolean,
+      default: false,
+    },
     filter: {
       type: Function,
       default: (item: any, queryText: string, itemText: string) => {
@@ -34,18 +38,14 @@ export default VSelect.extend({
       },
     },
     hideNoData: Boolean,
-    noFilter: Boolean,
-    searchInput: {
-      type: String as PropType<string | undefined>,
-      default: undefined,
-    },
     menuProps: {
       type: VSelect.options.props.menuProps.type,
       default: () => defaultMenuProps,
     },
-    autoSelectFirst: {
-      type: Boolean,
-      default: false,
+    noFilter: Boolean,
+    searchInput: {
+      type: String as PropType<string | undefined>,
+      default: undefined,
     },
   },
 

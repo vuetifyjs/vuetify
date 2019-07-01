@@ -6,7 +6,7 @@ const DataOptions = {
   groupBy: 'string[]',
   groupDesc: 'boolean[]',
   multiSort: 'boolean',
-  mustSort: 'boolean'
+  mustSort: 'boolean',
 }
 
 const DataPagination = {
@@ -15,7 +15,7 @@ const DataPagination = {
   pageStart: 'number',
   pageStop: 'number',
   pageCount: 'number',
-  itemsLength: 'number'
+  itemsLength: 'number',
 }
 
 const DataProps = [
@@ -37,7 +37,7 @@ const DataProps = [
   { name: 'disableFiltering', source: 'v-data' },
   { name: 'search', source: 'v-data' },
   { name: 'customFilter', source: 'v-data', default: '(items: any[], search: string): any[]' },
-  { name: 'serverItemsLength', source: 'v-data' }
+  { name: 'serverItemsLength', source: 'v-data' },
 ]
 
 const DataDefaultScopedSlotProps = {
@@ -47,7 +47,7 @@ const DataDefaultScopedSlotProps = {
   updateOptions: '(obj: any): void',
   sort: '(value: string): void',
   group: '(value: string): void',
-  groupedItems: 'Record<string, any[]>'
+  groupedItems: 'Record<string, any[]>',
 }
 
 const DataEvents = [
@@ -62,7 +62,7 @@ const DataEvents = [
   { name: 'update:group-by', source: 'v-data', value: 'string | string[]' },
   { name: 'update:group-desc', source: 'v-data', value: 'boolean | boolean[]' },
   { name: 'update:multi-sort', source: 'v-data', value: 'boolean' },
-  { name: 'update:must-sort', source: 'v-data', value: 'boolean' }
+  { name: 'update:must-sort', source: 'v-data', value: 'boolean' },
 ]
 
 module.exports = {
@@ -70,12 +70,12 @@ module.exports = {
     props: DataProps,
     events: DataEvents,
     scopedSlots: {
-      default: DataDefaultScopedSlotProps
-    }
+      default: DataDefaultScopedSlotProps,
+    },
   },
   DataOptions,
   DataPagination,
   DataProps,
   DataDefaultScopedSlotProps,
-  DataEvents
+  DataEvents,
 }

@@ -1,5 +1,5 @@
 module.exports = {
   'v-expansion-panel': {
-    slots: ['default']
-  }
+    slots: ['default'],
+  },
 }
