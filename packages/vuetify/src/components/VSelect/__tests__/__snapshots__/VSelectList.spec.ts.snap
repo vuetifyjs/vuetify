@@ -114,7 +114,10 @@ exports[`VSelectList.ts should generate children 1`] = `
     <div class="v-subheader theme--light">
       true
     </div>
-    <hr class="v-divider theme--light">
+    <hr role="separator"
+        aria-orientation="horizontal"
+        class="v-divider theme--light"
+    >
     <div tabindex="0"
          aria-selected="false"
          aria-labelledby="foo-list-item-14"
