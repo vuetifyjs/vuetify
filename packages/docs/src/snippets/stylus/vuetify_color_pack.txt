@@ -1,5 +1,0 @@
-// src/assets/stylus/main.styl
-
-$color-pack = false
-
-@import '~vuetify/src/stylus/main'

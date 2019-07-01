@@ -53,19 +53,19 @@
       "children": [
         {
           "type": "heading",
-          "lang": "stylusPackHeader"
+          "lang": "sassPackHeader"
         },
         {
           "type": "text",
-          "lang": "stylusPackText"
+          "lang": "sassPackText"
         },
         {
           "type": "markup",
-          "value": "stylus_vuetify_color_pack"
+          "value": "sass_vuetify_color_pack"
         },
         {
           "type": "text",
-          "lang": "stylusPackText2"
+          "lang": "sassPackText2"
         },
         {
           "type": "markup",
@@ -78,7 +78,7 @@
         },
         {
           "type": "text",
-          "lang": "stylusPackText3"
+          "lang": "sassPackText3"
         },
         {
           "type": "markup",
