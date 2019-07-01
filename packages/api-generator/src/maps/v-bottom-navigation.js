@@ -7,6 +7,10 @@ module.exports = {
         value: 'boolean'
       },
       {
+        name: 'change',
+        value: 'any'
+      },
+      {
         name: 'update:inputValue',
         value: 'string | number'
       }
