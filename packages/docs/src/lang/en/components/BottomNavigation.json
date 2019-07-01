@@ -45,6 +45,7 @@
     "mandatory": "Components.ItemGroups.props.mandatory"
   },
   "events": {
-    "update:inputValue": "The event used for `input-value.sync`"
+    "update:inputValue": "The event used for `input-value.sync`",
+    "change": "The value of selected item"
   }
 }
