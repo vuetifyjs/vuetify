@@ -42,7 +42,8 @@
     "hideOnScroll": "Will transition the navigation off screen when scrolling up",
     "horizontal": "Uses an alternative horizontal styling for `v-btn`",
     "inputValue": "Holds the value of the currently active button. If the button has no value supplied, its index will be used instead. This prop supports the **.sync** modifier.",
-    "mandatory": "Components.ItemGroups.props.mandatory"
+    "mandatory": "Components.ItemGroups.props.mandatory",
+    "backgroundColor": "Background color for component"
   },
   "events": {
     "update:inputValue": "The event used for `input-value.sync`",
