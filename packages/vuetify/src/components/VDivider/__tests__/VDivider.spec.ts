@@ -63,4 +63,40 @@ describe('VDivider', () => {
 
     expect(wrapper.classes('v-divider--vertical')).toBe(true)
   })
+
+  it('should have separator role by default', () => {
+    const wrapper = mountFunction()
+
+    expect(wrapper.attributes('role')).toBe('separator')
+  })
+
+  it('should have aria-orientation horizontal by default', () => {
+    const wrapper = mountFunction()
+
+    expect(wrapper.attributes('aria-orientation')).toBe('horizontal')
+  })
+
+  it('should have aria-orientation vertical if vertical prop is set', () => {
+    const wrapper = mountFunction({
+      propsData: { vertical: true },
+    })
+
+    expect(wrapper.attributes('aria-orientation')).toBe('vertical')
+  })
+
+  it('should have presentation role if set in attrs', () => {
+    const wrapper = mountFunction({
+      attrs: { role: 'presentation' },
+    })
+
+    expect(wrapper.attributes('role')).toBe('presentation')
+  })
+
+  it('should have no aria-orientation if presentation role is set in attrs', () => {
+    const wrapper = mountFunction({
+      attrs: { role: 'presentation' },
+    })
+
+    expect(wrapper.attributes('aria-orientation')).toBeUndefined()
+  })
 })

@@ -4,13 +4,13 @@ module.exports = {
       {
         name: 'modifiers.quiet',
         default: 'false',
-        type: 'Boolean'
+        type: 'Boolean',
       },
       {
         name: 'value',
         default: 'undefined',
-        type: 'Function'
-      }
-    ]
-  }
+        type: 'Function',
+      },
+    ],
+  },
 }

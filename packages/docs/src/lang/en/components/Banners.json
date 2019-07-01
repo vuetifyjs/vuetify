@@ -11,7 +11,7 @@
     },
     "two-line": {
       "header": "### Two-line (mobile)",
-      "desc": "**Two-line** VBanner can store larger amout of data, use it for big messages."
+      "desc": "**Two-line** VBanner can store larger amount of data, use it for big messages."
     },
     "icon-slot": {
       "header": "### Icon slot",
@@ -30,5 +30,15 @@
     "icon": "Designates a specific icon",
     "iconColor": "Designates a specific icon color",
     "sticky": "Position the banner to the top of the screen when scrolling. **Evergreen browsers only**"
+  },
+  "slots": {
+    "actions": "Slot for actions such as buttons",
+    "icon": "Slot for custom icon"
+  },
+  "scopedSlots": {
+    "actions": "Actions scoped slot. Has a `dismiss` function in its scope"
+  },
+  "functions": {
+    "toggle": "Toggles visibility"
   }
 }

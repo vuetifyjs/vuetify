@@ -5,12 +5,12 @@ module.exports = {
       {
         name: 'tag',
         type: 'String',
-        default: 'div'
+        default: 'div',
       },
       {
         name: 'tile',
-        type: 'Boolean'
-      }
-    ]
-  }
+        type: 'Boolean',
+      },
+    ],
+  },
 }

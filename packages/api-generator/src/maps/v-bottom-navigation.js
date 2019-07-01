@@ -4,12 +4,12 @@ module.exports = {
     events: [
       {
         name: 'change',
-        value: 'any'
+        value: 'any',
       },
       {
         name: 'update:inputValue',
-        value: 'string | number'
-      }
-    ]
-  }
+        value: 'string | number',
+      },
+    ],
+  },
 }

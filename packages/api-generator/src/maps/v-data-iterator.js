@@ -11,40 +11,40 @@ const DataIteratorProps = [
   { name: 'noResultsText', source: 'v-data-iterator' },
   { name: 'noDataText', source: 'v-data-iterator' },
   { name: 'hideDefaultFooter', source: 'v-data-iterator' },
-  { name: 'footerProps', source: 'v-data-iterator' }
+  { name: 'footerProps', source: 'v-data-iterator' },
 ].concat(DataProps)
 
 const DataIteratorEvents = [
   { name: 'input', source: 'v-data', value: 'any[]' },
   { name: 'update:expanded', source: 'v-data', value: 'any[]' },
   { name: 'item-selected', source: 'v-data', value: '{ item: any, value: boolean }' },
-  { name: 'item-expanded', source: 'v-data', value: '{ item: any, value: boolean }' }
+  { name: 'item-expanded', source: 'v-data', value: '{ item: any, value: boolean }' },
 ].concat(DataEvents)
 
 const DataIteratorSlots = [
   { name: 'loading', source: 'data-iterator' },
   { name: 'no-data', source: 'data-iterator' },
-  { name: 'no-results', source: 'data-iterator' }
+  { name: 'no-results', source: 'data-iterator' },
 ]
 
 const DataIteratorItemScopedProps = {
   item: 'any',
   select: {
     props: {
-      value: 'boolean'
+      value: 'boolean',
     },
     on: {
-      input: '(v: boolean) => void'
-    }
+      input: '(v: boolean) => void',
+    },
   },
   expand: {
     props: {
-      value: 'boolean'
+      value: 'boolean',
     },
     on: {
-      input: '(v: boolean) => void'
-    }
-  }
+      input: '(v: boolean) => void',
+    },
+  },
 }
 
 const DataIteratorScopedSlots = [
@@ -55,30 +55,30 @@ const DataIteratorScopedSlots = [
       isSelected: 'boolean',
       select: '(item: any, value: boolean): void',
       isExpanded: 'boolean',
-      expand: '(item: any, value: boolean): void'
+      expand: '(item: any, value: boolean): void',
     },
-    source: 'data-iterator'
+    source: 'data-iterator',
   },
   {
     name: 'footer',
     props: DataDefaultScopedSlotProps,
-    source: 'data-iterator'
+    source: 'data-iterator',
   },
   {
     name: 'footer.page-text',
     props: DataFooterPageTextScopedProps,
-    source: 'data-iterator'
+    source: 'data-iterator',
   },
   {
     name: 'header',
     props: DataDefaultScopedSlotProps,
-    source: 'data-iterator'
+    source: 'data-iterator',
   },
   {
     name: 'item',
     props: DataIteratorItemScopedProps,
-    source: 'data-iterator'
-  }
+    source: 'data-iterator',
+  },
 ]
 
 module.exports = {
@@ -86,10 +86,10 @@ module.exports = {
     props: DataIteratorProps,
     slots: DataIteratorSlots,
     scopedSlots: DataIteratorScopedSlots,
-    events: DataIteratorEvents
+    events: DataIteratorEvents,
   },
   DataIteratorProps,
   DataIteratorEvents,
   DataIteratorSlots,
-  DataIteratorScopedSlots
+  DataIteratorScopedSlots,
 }

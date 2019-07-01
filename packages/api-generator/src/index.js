@@ -89,14 +89,14 @@ function genProp (name, props, mixins) {
     name,
     type,
     default: getPropDefault(prop.default, type),
-    source
+    source,
   }
 }
 
 function parseComponent (component) {
   return {
     props: parseProps(component),
-    mixins: parseMixins(component)
+    mixins: parseMixins(component),
   }
 }
 
@@ -211,7 +211,7 @@ function writePlainFile (content, file) {
 const tags = Object.keys(components).reduce((t, k) => {
   t[k] = {
     attributes: components[k].props.map(p => p.name.replace(/([A-Z])/g, g => `-${g[0].toLowerCase()}`)).sort(),
-    description: ''
+    description: '',
   }
 
   return t
@@ -229,7 +229,7 @@ const attributes = Object.keys(components).reduce((attrs, k) => {
 
     a[`${k}/${name}`] = {
       type,
-      description: ''
+      description: '',
     }
 
     return a
@@ -240,7 +240,7 @@ const attributes = Object.keys(components).reduce((attrs, k) => {
 
 const fakeComponents = ts => {
   const imports = [
-    `import Vue from 'vue'`
+    `import Vue from 'vue'`,
   ]
   if (ts) imports.push(`import { PropValidator } from 'vue/types/options'`)
   const inspection = ts ? '' : `// noinspection JSUnresolvedFunction\n`

@@ -4,9 +4,9 @@ module.exports = {
       {
         name: 'default',
         props: {
-          hover: 'boolean'
-        }
-      }
-    ]
-  }
+          hover: 'boolean',
+        },
+      },
+    ],
+  },
 }

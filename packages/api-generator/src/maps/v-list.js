@@ -1,5 +1,5 @@
 module.exports = {
   'v-list': {
-    slots: ['default']
-  }
+    slots: ['default'],
+  },
 }
