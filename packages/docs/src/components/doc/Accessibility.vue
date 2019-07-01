@@ -23,7 +23,7 @@
       ...mapGetters('documentation', [
         'namespace',
         'page',
-      ])
+      ]),
     },
 
   }
