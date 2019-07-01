@@ -1,5 +1,5 @@
-<style lang="stylus">
-  $color-pack = false
+<style lang="sass">
+  $color-pack: false;
 
-  @import '~vuetify/src/stylus/main'
+  @import '~vuetify/src/styles/main.sass';
 </style>
