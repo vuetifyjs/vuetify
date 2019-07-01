@@ -28,7 +28,8 @@
     "items": "An array of objects describing each breadcrumb. See `v-breadcrumbs-item` API section for all object properties. Use `text` property for the breadcrumb text.",
     "justifyCenter": "Align the breadcrumbs center",
     "justifyEnd": "Align the breadcrumbs at the end",
-    "large": "Increase the font-size of the breadcrumb item text"
+    "large": "Increase the font-size of the breadcrumb item text",
+    "link": "Add link styles"
   },
   "slots": {
     "divider": "Specifies the divider content"

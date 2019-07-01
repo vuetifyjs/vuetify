@@ -16,6 +16,7 @@ export function goTo (id) {
 export function getComponent (type) {
   switch (type) {
     case 'alert': return 'doc-alert'
+    case 'accessibility': return 'doc-accessibility'
     case 'api': return 'doc-api'
     case 'checklist': return 'doc-checklist'
     case 'example': return 'doc-example'
