@@ -5,13 +5,13 @@ module.exports = {
       name: 'activator',
       props: {
         on: '{ [eventName]: eventHandler }',
-        value: 'boolean'
-      }
+        value: 'boolean',
+      },
     }, {
       name: 'default',
       props: {
-        value: 'boolean'
-      }
-    }]
-  }
+        value: 'boolean',
+      },
+    }],
+  },
 }

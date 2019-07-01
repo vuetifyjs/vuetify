@@ -3,24 +3,24 @@ module.exports = {
     events: [
       {
         name: 'input',
-        value: 'string'
+        value: 'string',
       },
       {
         name: 'change',
-        value: 'string'
+        value: 'string',
       },
       {
         name: 'click:hour',
-        value: 'string'
+        value: 'string',
       },
       {
         name: 'click:minute',
-        value: 'string'
+        value: 'string',
       },
       {
         name: 'click:second',
-        value: 'string'
-      }
-    ]
-  }
+        value: 'string',
+      },
+    ],
+  },
 }

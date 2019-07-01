@@ -13,7 +13,7 @@ exports[`VRadio.ts should not render aria-label attribute with no label value on
     <div class="v-input--selection-controls__ripple">
     </div>
     <i aria-hidden="true"
-       class="v-icon material-icons theme--light"
+       class="v-icon notranslate material-icons theme--light"
     >
       $vuetify.icons.radioOff
     </i>
@@ -36,7 +36,7 @@ exports[`VRadio.ts should render proper input name 1`] = `
     <div class="v-input--selection-controls__ripple">
     </div>
     <i aria-hidden="true"
-       class="v-icon material-icons theme--light"
+       class="v-icon notranslate material-icons theme--light"
     >
       $vuetify.icons.radioOff
     </i>
@@ -58,7 +58,7 @@ exports[`VRadio.ts should render role and aria-checked attributes on input group
     <div class="v-input--selection-controls__ripple accent--text">
     </div>
     <i aria-hidden="true"
-       class="v-icon material-icons theme--light accent--text"
+       class="v-icon notranslate material-icons theme--light accent--text"
     >
       $vuetify.icons.radioOn
     </i>
@@ -80,7 +80,7 @@ exports[`VRadio.ts should use custom icons 1`] = `
     <div class="v-input--selection-controls__ripple">
     </div>
     <i aria-hidden="true"
-       class="v-icon material-icons theme--light"
+       class="v-icon notranslate material-icons theme--light"
     >
       bar
     </i>
@@ -102,7 +102,7 @@ exports[`VRadio.ts should use custom icons 2`] = `
     <div class="v-input--selection-controls__ripple accent--text">
     </div>
     <i aria-hidden="true"
-       class="v-icon material-icons theme--light accent--text"
+       class="v-icon notranslate material-icons theme--light accent--text"
     >
       foo
     </i>

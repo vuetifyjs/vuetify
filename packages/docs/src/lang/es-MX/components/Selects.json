@@ -31,7 +31,6 @@
     "editable": " Crea un botón editable- [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "filter": "La función utilizada para filtrar los elementos",
     "hideSelected": "No mostrar elementos en las opciones que ya hayan sido seleccionados",
-    "itemAvatar": "Configura el avatar del elemento",
     "itemDisabled": "Determina si el elemento está deshabilitado",
     "itemText": "Configura el texto del elemento",
     "itemValue": "Configura el valor del elemento",

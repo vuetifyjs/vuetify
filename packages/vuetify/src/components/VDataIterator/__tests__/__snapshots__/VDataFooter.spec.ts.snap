@@ -25,7 +25,7 @@ exports[`VDataFooter.ts should render and match snapshot 1`] = `
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
-                   class="v-icon mdi mdi-menu-down theme--light"
+                   class="v-icon notranslate mdi mdi-menu-down theme--light"
                 >
                 </i>
               </div>
@@ -47,7 +47,7 @@ exports[`VDataFooter.ts should render and match snapshot 1`] = `
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-chevron-left theme--light"
+           class="v-icon notranslate mdi mdi-chevron-left theme--light"
         >
         </i>
       </span>
@@ -60,7 +60,7 @@ exports[`VDataFooter.ts should render and match snapshot 1`] = `
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-chevron-right theme--light"
+           class="v-icon notranslate mdi mdi-chevron-right theme--light"
         >
         </i>
       </span>
@@ -98,7 +98,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
-                   class="v-icon mdi mdi-menu-down theme--light"
+                   class="v-icon notranslate mdi mdi-menu-down theme--light"
                 >
                 </i>
               </div>
@@ -120,7 +120,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-page-first theme--light"
+           class="v-icon notranslate mdi mdi-page-first theme--light"
         >
         </i>
       </span>
@@ -131,7 +131,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-chevron-left theme--light"
+           class="v-icon notranslate mdi mdi-chevron-left theme--light"
         >
         </i>
       </span>
@@ -144,7 +144,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-chevron-right theme--light"
+           class="v-icon notranslate mdi mdi-chevron-right theme--light"
         >
         </i>
       </span>
@@ -155,7 +155,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-page-last theme--light"
+           class="v-icon notranslate mdi mdi-page-last theme--light"
         >
         </i>
       </span>
@@ -193,7 +193,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
-                   class="v-icon mdi mdi-menu-down theme--light"
+                   class="v-icon notranslate mdi mdi-menu-down theme--light"
                 >
                 </i>
               </div>
@@ -215,7 +215,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-page-last theme--light"
+           class="v-icon notranslate mdi mdi-page-last theme--light"
         >
         </i>
       </span>
@@ -226,7 +226,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-chevron-right theme--light"
+           class="v-icon notranslate mdi mdi-chevron-right theme--light"
         >
         </i>
       </span>
@@ -239,7 +239,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-chevron-left theme--light"
+           class="v-icon notranslate mdi mdi-chevron-left theme--light"
         >
         </i>
       </span>
@@ -250,7 +250,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-page-first theme--light"
+           class="v-icon notranslate mdi mdi-page-first theme--light"
         >
         </i>
       </span>
@@ -288,7 +288,7 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
-                   class="v-icon mdi mdi-menu-down theme--light"
+                   class="v-icon notranslate mdi mdi-menu-down theme--light"
                 >
                 </i>
               </div>
@@ -310,7 +310,7 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-chevron-left theme--light"
+           class="v-icon notranslate mdi mdi-chevron-left theme--light"
         >
         </i>
       </span>
@@ -324,7 +324,7 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-chevron-right theme--light"
+           class="v-icon notranslate mdi mdi-chevron-right theme--light"
         >
         </i>
       </span>
@@ -362,7 +362,7 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
-                   class="v-icon mdi mdi-menu-down theme--light"
+                   class="v-icon notranslate mdi mdi-menu-down theme--light"
                 >
                 </i>
               </div>
@@ -384,7 +384,7 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-chevron-left theme--light"
+           class="v-icon notranslate mdi mdi-chevron-left theme--light"
         >
         </i>
       </span>
@@ -400,7 +400,7 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
     >
       <span class="v-btn__content">
         <i aria-hidden="true"
-           class="v-icon mdi mdi-chevron-right theme--light"
+           class="v-icon notranslate mdi mdi-chevron-right theme--light"
         >
         </i>
       </span>

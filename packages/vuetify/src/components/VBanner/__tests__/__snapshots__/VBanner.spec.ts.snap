@@ -47,7 +47,7 @@ exports[`VBanner.ts should render component with icon 1`] = `
            style="height: 40px; min-width: 40px; width: 40px;"
       >
         <i aria-hidden="true"
-           class="v-icon mdi mdi-plus theme--light"
+           class="v-icon notranslate mdi mdi-plus theme--light"
            style="font-size: 28px;"
         >
         </i>

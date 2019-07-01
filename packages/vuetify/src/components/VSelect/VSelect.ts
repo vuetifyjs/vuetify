@@ -80,10 +80,6 @@ export default baseMixins.extend<options>().extend({
       type: Array,
       default: () => [],
     },
-    itemAvatar: {
-      type: [String, Array, Function],
-      default: 'avatar',
-    },
     itemDisabled: {
       type: [String, Array, Function],
       default: 'disabled',
@@ -192,7 +188,6 @@ export default baseMixins.extend<options>().extend({
           items: this.virtualizedItems,
           noDataText: this.$vuetify.lang.t(this.noDataText),
           selectedItems: this.selectedItems,
-          itemAvatar: this.itemAvatar,
           itemDisabled: this.itemDisabled,
           itemValue: this.itemValue,
           itemText: this.itemText,

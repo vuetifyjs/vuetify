@@ -12,7 +12,7 @@ import Loadable from '../../mixins/loadable'
 import ClickOutside from '../../directives/click-outside'
 
 // Helpers
-import { addOnceEventListener, deepEqual, keyCodes, createRange, convertToUnit } from '../../util/helpers'
+import { addOnceEventListener, deepEqual, keyCodes, createRange, convertToUnit, passiveSupported } from '../../util/helpers'
 import { consoleWarn } from '../../util/console'
 
 // Types
@@ -455,24 +455,26 @@ export default mixins<options &
     onThumbMouseDown (e: MouseEvent) {
       this.oldValue = this.internalValue
       this.keyPressed = 2
-      const options = { passive: true }
       this.isActive = true
 
+      const mouseUpOptions = passiveSupported ? { passive: true, capture: true } : true
+      const mouseMoveOptions = passiveSupported ? { passive: true } : false
       if ('touches' in e) {
-        this.app.addEventListener('touchmove', this.onMouseMove, options)
-        addOnceEventListener(this.app, 'touchend', this.onSliderMouseUp)
+        this.app.addEventListener('touchmove', this.onMouseMove, mouseMoveOptions)
+        addOnceEventListener(this.app, 'touchend', this.onSliderMouseUp, mouseUpOptions)
       } else {
-        this.app.addEventListener('mousemove', this.onMouseMove, options)
-        addOnceEventListener(this.app, 'mouseup', this.onSliderMouseUp)
+        this.app.addEventListener('mousemove', this.onMouseMove, mouseMoveOptions)
+        addOnceEventListener(this.app, 'mouseup', this.onSliderMouseUp, mouseUpOptions)
       }
 
       this.$emit('start', this.internalValue)
     },
-    onSliderMouseUp () {
+    onSliderMouseUp (e: Event) {
+      e.stopPropagation()
       this.keyPressed = 0
-      const options = { passive: true }
-      this.app.removeEventListener('touchmove', this.onMouseMove, options)
-      this.app.removeEventListener('mousemove', this.onMouseMove, options)
+      const mouseMoveOptions = passiveSupported ? { passive: true } : false
+      this.app.removeEventListener('touchmove', this.onMouseMove, mouseMoveOptions)
+      this.app.removeEventListener('mousemove', this.onMouseMove, mouseMoveOptions)
 
       this.$emit('end', this.internalValue)
       if (!deepEqual(this.oldValue, this.internalValue)) {

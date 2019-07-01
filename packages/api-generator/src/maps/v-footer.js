@@ -1,5 +1,5 @@
 module.exports = {
   'v-footer': {
-    slots: ['default']
-  }
+    slots: ['default'],
+  },
 }

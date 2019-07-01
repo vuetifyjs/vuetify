@@ -127,4 +127,24 @@ describe('VSelectList.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/7692
+  it('should select an item when checkbox is clicked', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        action: true,
+        items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+        multiple: true,
+      },
+    })
+
+    const checkbox = wrapper.find('.v-simple-checkbox')
+    const select = jest.fn()
+
+    wrapper.vm.$on('select', select)
+
+    checkbox.trigger('click')
+
+    expect(select).toHaveBeenCalledWith('Foo')
+  })
 })

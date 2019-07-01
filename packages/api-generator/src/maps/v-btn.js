@@ -1,5 +1,5 @@
 module.exports = {
   'v-btn': {
-    slots: ['default']
-  }
+    slots: ['default'],
+  },
 }
