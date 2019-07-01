@@ -8,6 +8,16 @@
   },
   "children": [
     {
+      "type":"section",
+      "children": [
+        {
+          "type": "alert",
+          "lang": "alert",
+          "value": "error"
+        }
+      ]
+    },
+    {
       "type": "section",
       "children": [
         {

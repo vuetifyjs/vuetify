@@ -70,5 +70,6 @@
   },
   "scopedSlots": {
     "img": "Used to modify `v-img` properties when using the **src** prop"
-  }
+  },
+  "alert": "If you are using `v-navigation-drawer` with `app` property enabled, you don't need to use `absolute` prop as in examples."
 }
