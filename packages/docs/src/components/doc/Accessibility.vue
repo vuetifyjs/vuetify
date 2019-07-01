@@ -23,12 +23,7 @@
       ...mapGetters('documentation', [
         'namespace',
         'page',
-      ]),
-      internalValue () {
-        return this.value === Object(this.value)
-          ? this.value
-          : { file: this.value }
-      },
+      ])
     },
 
   }
