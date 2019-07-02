@@ -40,18 +40,18 @@ export default mixins(
     },
     backgroundColor: String,
     grow: Boolean,
-    hideOnScroll: Boolean,
-    horizontal: Boolean,
-    mandatory: Boolean,
     height: {
       type: [Number, String],
       default: 56,
     },
-    shift: Boolean,
+    hideOnScroll: Boolean,
+    horizontal: Boolean,
     inputValue: {
       type: Boolean,
       default: true,
     },
+    mandatory: Boolean,
+    shift: Boolean,
   },
 
   data () {
