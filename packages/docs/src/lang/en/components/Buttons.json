@@ -65,17 +65,29 @@
       "outlined": "Button will have an outline",
       "round": "Button will be round on the sides",
       "small": "Small size button",
-      "type": "Set the button's type attribute"
+      "type": "Set the button's type attribute",
+      "link": "Mixins.Routable.props.link",
+      "rounded": "Round button's edges",
+      "text": "Text only with highlight on hover"
     },
     "v-btn-toggle": {
       "activeClass": "Components.ItemGroups.props.activeClass",
       "mandatory": "Components.ItemGroups.props.mandatory",
-      "multiple": "Components.ItemGroups.props.multiple"
+      "multiple": "Components.ItemGroups.props.multiple",
+      "rounded": "Round edge buttons"
     }
   },
   "events": {
+    "v-btn": {
+      "click": "Mouse click event"
+    },
     "v-btn-toggle": {
       "change": "Components.Inputs.events.change"
+    }
+  },
+  "slots": {
+    "v-btn": {
+      "loader": "Custom loader"
     }
   }
 }
