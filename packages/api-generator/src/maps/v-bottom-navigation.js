@@ -3,8 +3,8 @@ module.exports = {
     slots: ['default'],
     events: [
       {
-        name: 'input',
-        value: 'boolean',
+        name: 'change',
+        value: 'any',
       },
       {
         name: 'update:inputValue',
