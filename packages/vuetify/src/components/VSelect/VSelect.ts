@@ -334,7 +334,7 @@ export default baseMixins.extend<options>().extend({
       )
 
       return this.$createElement(VChip, {
-        staticClass: 'v-chip--select-multi',
+        staticClass: 'v-chip--select',
         attrs: { tabindex: -1 },
         props: {
           close: this.deletableChips && !isDisabled,
