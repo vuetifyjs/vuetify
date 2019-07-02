@@ -2,29 +2,32 @@
   <div>
     <v-container>
       <v-layout
-        justify-center
+        row
+        justify-space-around
         wrap
       >
-        <v-flex xs3>
-          <v-switch
-            v-model="showSwatches"
-            label="Show Swatches"
-          ></v-switch>
-          <v-switch
-            v-model="hideInputs"
-            label="Hide Inputs"
-          ></v-switch>
-          <v-switch
-            v-model="hideCanvas"
-            label="Hide Canvas"
-          ></v-switch>
-          <v-switch
-            v-model="hideModeSwitch"
-            label="Hide Mode Switch"
-          ></v-switch>
-        </v-flex>
+        <v-switch
+          v-model="showSwatches"
+          class="mx-2"
+          label="Show Swatches"
+        ></v-switch>
+        <v-switch
+          v-model="hideInputs"
+          class="mx-2"
+          label="Hide Inputs"
+        ></v-switch>
+        <v-switch
+          v-model="hideCanvas"
+          class="mx-2"
+          label="Hide Canvas"
+        ></v-switch>
+        <v-switch
+          v-model="hideModeSwitch"
+          class="mx-2"
+          label="Hide Mode Switch"
+        ></v-switch>
 
-        <v-flex xs3>
+        <v-flex class="mx-2" xs3>
           <v-select
             v-model="mode"
             :items="modes"
@@ -33,8 +36,6 @@
         </v-flex>
       </v-layout>
     </v-container>
-
-    <div class="my-4"></div>
 
     <v-color-picker
       v-model="color"

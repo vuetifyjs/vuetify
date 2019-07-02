@@ -39,29 +39,29 @@ export default baseMixins.extend({
   },
 
   props: {
+    dark: Boolean,
     disabled: Boolean,
-    persistent: Boolean,
     fullscreen: Boolean,
     fullWidth: Boolean,
-    noClickAnimation: Boolean,
     light: Boolean,
-    dark: Boolean,
     maxWidth: {
       type: [String, Number],
       default: 'none',
     },
+    noClickAnimation: Boolean,
     origin: {
       type: String,
       default: 'center center',
     },
-    width: {
-      type: [String, Number],
-      default: 'auto',
-    },
+    persistent: Boolean,
     scrollable: Boolean,
     transition: {
       type: [String, Boolean],
       default: 'dialog-transition',
+    },
+    width: {
+      type: [String, Number],
+      default: 'auto',
     },
   },
 
