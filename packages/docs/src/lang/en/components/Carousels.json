@@ -3,7 +3,7 @@
   "headerText": "The `v-carousel` component is used to display large numbers of visual content on a rotating timer.",
   "examples": {
     "usage": {
-      "desc": "The `v-carousel` component expands upon `v-window` by providing additional features targetted at displaying images."
+      "desc": "The `v-carousel` component expands upon `v-window` by providing additional features targeted at displaying images."
     },
     "cycle": {
       "header": "### Cycle",
