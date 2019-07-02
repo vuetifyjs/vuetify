@@ -23,11 +23,12 @@
         </v-chip>
       </v-list-item>
     </template>
-    <template v-slot:selection="{ item, parent, selected }">
+    <template v-slot:selection="{ attrs, item, parent, selected }">
       <v-chip
         v-if="item === Object(item)"
+        v-bind="attrs"
         :color="`${item.color} lighten-3`"
-        :value="selected"
+        :input-value="selected"
         label
         small
       >
@@ -41,27 +42,25 @@
       </v-chip>
     </template>
     <template v-slot:item="{ index, item }">
-      <v-list-item-content>
-        <v-text-field
-          v-if="editing === item"
-          v-model="editing.text"
-          autofocus
-          flat
-          background-color="transparent"
-          hide-details
-          solo
-          @keyup.enter="edit(index, item)"
-        ></v-text-field>
-        <v-chip
-          v-else
-          :color="`${item.color} lighten-3`"
-          dark
-          label
-          small
-        >
-          {{ item.text }}
-        </v-chip>
-      </v-list-item-content>
+      <v-text-field
+        v-if="editing === item"
+        v-model="editing.text"
+        autofocus
+        flat
+        background-color="transparent"
+        hide-details
+        solo
+        @keyup.enter="edit(index, item)"
+      ></v-text-field>
+      <v-chip
+        v-else
+        :color="`${item.color} lighten-3`"
+        dark
+        label
+        small
+      >
+        {{ item.text }}
+      </v-chip>
       <v-spacer></v-spacer>
       <v-list-item-action @click.stop>
         <v-btn
