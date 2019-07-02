@@ -61,6 +61,7 @@ $utilities: map-merge(
     "justify-content": (
       responsive: true,
       property: justify-content,
+      class: justify,
       values: (
         start: flex-start,
         end: flex-end,
@@ -72,6 +73,7 @@ $utilities: map-merge(
     "align-items": (
       responsive: true,
       property: align-items,
+      class: align,
       values: (
         start: flex-start,
         end: flex-end,

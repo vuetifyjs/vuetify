@@ -42,8 +42,8 @@ const propMap = {
 }
 
 const classMap = {
-  align: 'align-items',
-  justify: 'justify-content',
+  align: 'align',
+  justify: 'justify',
   alignContent: 'align-content'
 }
 
@@ -115,8 +115,8 @@ export default Vue.extend({
 
       classList.push({
         'no-gutters': props.noGutters,
-        [`align-items-${props.align}`]: props.align,
-        [`justify-content-${props.justify}`]: props.justify,
+        [`align-${props.align}`]: props.align,
+        [`justify-${props.justify}`]: props.justify,
         [`align-content-${props.alignContent}`]: props.alignContent
       })
 
