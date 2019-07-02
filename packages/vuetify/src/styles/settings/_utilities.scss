@@ -1,14 +1,18 @@
 $utilities: () !default;
 $utilities: map-merge(
   (
-    "align": (
-      property: vertical-align,
-      class: align,
-      values: baseline top middle bottom text-bottom text-top
-    ),
+    // Display utilities
     "overflow": (
       property: overflow,
       values: auto hidden,
+    ),
+    "overflow-x": (
+      property: overflow-x,
+      values: auto hidden
+    ),
+    "overflow-y": (
+      property: overflow-y,
+      values: auto hidden
     ),
     "display": (
       responsive: true,
@@ -17,6 +21,7 @@ $utilities: map-merge(
       class: d,
       values: none inline inline-block block table table-row table-cell flex inline-flex
     ),
+
     // Flex utilities
     "flex": (
       responsive: true,
@@ -120,6 +125,7 @@ $utilities: map-merge(
         last: 13,
       ),
     ),
+
     // Margin utilities
     "margin": (
       responsive: true,
@@ -163,6 +169,7 @@ $utilities: map-merge(
       class: ml,
       values: map-merge($spacers, (auto: auto))
     ),
+
     // Padding utilities
     "padding": (
       responsive: true,
@@ -206,6 +213,7 @@ $utilities: map-merge(
       class: pl,
       values: $spacers
     ),
+
     // Text
     "text-align": (
       responsive: true,
@@ -218,7 +226,7 @@ $utilities: map-merge(
       class: text,
       values: (
         wrap: normal,
-        nowrap: nowrap,
+        no-wrap: nowrap,
       )
     ),
     "overflow-wrap": (
@@ -226,6 +234,16 @@ $utilities: map-merge(
       class: text,
       values: (break: break-word)
     ),
+    "text-overflow": (
+      property: white-space overflow text-overflow,
+      class: text,
+      values: (truncate: nowrap hidden ellipsis)
+    ),
+    "text-transform": (
+      property: text-transform,
+      class: text,
+      values: none capitalize lowercase uppercase
+    )
   ),
   $utilities
 );
