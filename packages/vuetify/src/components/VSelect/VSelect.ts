@@ -503,6 +503,9 @@ export default baseMixins.extend<options>().extend({
     },
     genSlotSelection (item: object, index: number): VNode[] | undefined {
       return this.$scopedSlots.selection!({
+        attrs: {
+          class: 'v-chip--select',
+        },
         parent: this,
         item,
         index,
