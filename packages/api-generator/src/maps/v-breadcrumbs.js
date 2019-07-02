@@ -1,6 +1,6 @@
 module.exports = {
   'v-breadcrumbs': {
-    slots: ['divider'],
+    slots: ['default', 'divider'],
     scopedSlots: [
       {
         name: 'item',

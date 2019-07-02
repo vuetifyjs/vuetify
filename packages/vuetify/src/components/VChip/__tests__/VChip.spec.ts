@@ -133,4 +133,25 @@ describe('VChip.ts', () => {
     wrapper.trigger('click')
     expect(toggle).toHaveBeenCalled()
   })
+
+  it('should conditionally show based on active prop', async () => {
+    const active = jest.fn()
+    const wrapper = mountFunction({
+      propsData: { close: true },
+    })
+    const close = wrapper.find('.v-chip__close')
+
+    wrapper.vm.$on('update:active', active)
+
+    expect(wrapper.isVisible()).toBe(true)
+
+    close.trigger('click')
+
+    expect(active).toHaveBeenCalledTimes(1)
+
+    // Simulate active.sync behavior
+    wrapper.setProps({ active: false })
+
+    expect(wrapper.isVisible()).toBe(false)
+  })
 })

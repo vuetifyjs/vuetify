@@ -345,7 +345,7 @@ export default baseMixins.extend<options>().extend({
 
       return this.$createElement('legend', {
         style: {
-          width: convertToUnit(width),
+          width: !this.isSingle ? convertToUnit(width) : undefined,
         },
       }, [span])
     },
