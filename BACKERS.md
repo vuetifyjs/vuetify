@@ -26,9 +26,9 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Elfo s.r.l.
 - Codefirst
 - Dan Trevino
-- [https://www.customessaymeister.com/](customessaymeister)
-- [https://blokt.com/](blokt)
-- [https://www.loomio.org/](Loomio)
+- [customessaymeister](https://www.customessaymeister.com/)
+- [blokt](https://blokt.com/)
+- [Loomio](https://www.loomio.org/)
 - Hannes Kochniß
 
 ### $20+
