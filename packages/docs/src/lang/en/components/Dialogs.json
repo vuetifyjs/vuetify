@@ -64,9 +64,5 @@
     "scrollable": "When set to true, expects a card, card-title, card-text and card-actions. Additionally, card-text should have specified height. Will set card-text to overflow-y",
     "transition": "Mixins.Transitionable.props.transition",
     "width": "Sets the dialog width"
-  },
-  "scopedSlots": {
-    "activator": "When used, will activate the component when clicked (or hover for specific components). This manually stops the event propagation. Without this slot, if you open the component through its model, you will need to manually stop the event propagation",
-    "default": "The default scoped slot"
   }
 }
