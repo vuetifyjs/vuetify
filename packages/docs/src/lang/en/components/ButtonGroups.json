@@ -23,7 +23,7 @@
     },
     "multiple": {
       "header": "### Multiple",
-      "desc": "`multiple` `VBtnToggle` allows user to select mutiple variants and returns value as an array."
+      "desc": "`multiple` `VBtnToggle` allows user to select multiple variants and returns value as an array."
     }
   },
   "props": {
