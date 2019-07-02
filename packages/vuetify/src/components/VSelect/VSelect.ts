@@ -757,6 +757,10 @@ export default baseMixins.extend<options>().extend({
 
         this.setMenuIndex(-1)
 
+        // There is no item to re-highlight
+        // when selections are hidden
+        if (this.hideSelected) return
+
         this.$nextTick(() => this.setMenuIndex(listIndex))
       }
     },
