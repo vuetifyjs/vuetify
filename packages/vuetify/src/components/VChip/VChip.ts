@@ -178,7 +178,7 @@ export default mixins(
     data.attrs = {
       ...data.attrs,
       draggable: this.draggable ? 'true' : undefined,
-      tabindex: this.disabled ? -1 : data.attrs!.tabindex || (this.isClickable ? 0 : undefined),
+      tabindex: this.chipGroup && !this.disabled ? 0 : data.attrs!.tabindex,
     }
     data.directives = [{
       name: 'show',
