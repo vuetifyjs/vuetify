@@ -22,5 +22,19 @@ module.exports = {
         signature: '(val: boolean): void',
       },
     ],
+    events: [
+      {
+        name: 'input',
+        value: 'array',
+      },
+      {
+        name: 'update:active',
+        value: 'array',
+      },
+      {
+        name: 'update:open',
+        value: 'array',
+      },
+    ],
   },
 }
