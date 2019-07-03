@@ -23,13 +23,14 @@
     },
     "multiple": {
       "header": "### Multiple",
-      "desc": "`multiple` `VBtnToggle` allows user to select mutiple variants and returns value as an array."
+      "desc": "`multiple` `VBtnToggle` allows user to select multiple variants and returns value as an array."
     }
   },
   "props": {
     "activeClass": "Components.ItemGroups.props.activeClass",
     "mandatory": "Components.ItemGroups.props.mandatory",
-    "multiple": "Components.ItemGroups.props.multiple"
+    "multiple": "Components.ItemGroups.props.multiple",
+    "rounded": "Round edge buttons"
   },
   "events": {
     "change": "Components.Inputs.events.change"
