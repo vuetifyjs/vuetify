@@ -1,20 +1,21 @@
 <template>
   <v-menu
     v-model="pwaDialog"
-    attach
     bottom
     left
     offset-y
   >
-    <v-btn
-      v-if="showInstallBanner"
-      slot="activator"
-      :aria-label="$t('Vuetify.AppToolbar.pwa')"
-      flat
-      style="min-width: 48px"
-    >
-      <v-icon>mdi-cogs</v-icon>
-    </v-btn>
+    <template #activator="{ on }">
+      <v-btn
+        v-if="showInstallBanner"
+        :aria-label="$t('Vuetify.AppToolbar.pwa')"
+        text
+        style="min-width: 48px"
+        v-on="on"
+      >
+        <v-icon>mdi-download-network</v-icon>
+      </v-btn>
+    </template>
     <v-sheet
       color="blue"
       dark
@@ -26,7 +27,7 @@
           dark
           class="ml-3"
         >
-          mdi-info
+          mdi-information
         </v-icon>
         <v-spacer />
         <span>{{ this.$t('Vuetify.AppToolbar.pwaMenu') }}</span>
@@ -68,6 +69,7 @@
         this.installEvent.userChoice.then(res => {
           if (res.outcome === 'accepted') {
             // display loader and download cache
+            console.log('meow')
           }
           this.installEvent = null
         })
