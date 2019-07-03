@@ -220,4 +220,36 @@ describe('VSelect.ts', () => {
     expect(item.element.getAttribute('aria-labelledby')).toBe(generatedId)
     expect(item.find('.v-list-item__title').element.id).toBe(generatedId)
   })
+
+  it('should not reset menu index when hide-on-selected is used', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+      },
+    })
+
+    const input = wrapper.find('input')
+    input.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    input.trigger('keydown.down')
+
+    expect(wrapper.vm.$refs.menu.listIndex).toBe(0)
+
+    input.trigger('keydown.enter')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.internalValue).toBe('Foo')
+    expect(wrapper.vm.$refs.menu.listIndex).toBe(0)
+
+    wrapper.setProps({ value: null, hideSelected: true })
+    input.trigger('keydown.enter')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.internalValue).toBe('Foo')
+    expect(wrapper.vm.$refs.menu.listIndex).toBe(-1)
+  })
 })

@@ -334,7 +334,7 @@ export default baseMixins.extend<options>().extend({
       )
 
       return this.$createElement(VChip, {
-        staticClass: 'v-chip--select-multi',
+        staticClass: 'v-chip--select',
         attrs: { tabindex: -1 },
         props: {
           close: this.deletableChips && !isDisabled,
@@ -503,6 +503,9 @@ export default baseMixins.extend<options>().extend({
     },
     genSlotSelection (item: object, index: number): VNode[] | undefined {
       return this.$scopedSlots.selection!({
+        attrs: {
+          class: 'v-chip--select',
+        },
         parent: this,
         item,
         index,
@@ -753,6 +756,10 @@ export default baseMixins.extend<options>().extend({
         const listIndex = this.getMenuIndex()
 
         this.setMenuIndex(-1)
+
+        // There is no item to re-highlight
+        // when selections are hidden
+        if (this.hideSelected) return
 
         this.$nextTick(() => this.setMenuIndex(listIndex))
       }
