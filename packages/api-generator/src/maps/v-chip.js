@@ -8,11 +8,11 @@ module.exports = {
       },
       {
         name: 'click',
-        value: 'boolean',
+        value: 'MouseEvent',
       },
       {
         name: 'click:close',
-        value: 'boolean',
+        value: 'void',
       },
       {
         name: 'update:active',
