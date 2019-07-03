@@ -6,6 +6,18 @@ module.exports = {
         name: 'input',
         value: 'boolean',
       },
+      {
+        name: 'click',
+        value: 'boolean',
+      },
+      {
+        name: 'click:close',
+        value: 'boolean',
+      },
+      {
+        name: 'update:active',
+        value: 'boolean',
+      },
     ],
   },
 }

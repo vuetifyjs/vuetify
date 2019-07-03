@@ -76,7 +76,12 @@
     "label": "Removes circle edges",
     "link": "Explicitly define the chip as a link",
     "outlined": "Removes background and applies border and text color",
-    "pill": "Remove `v-avatar` padding.",
+    "pill": "Remove `v-avatar` padding",
     "selected": "Applies a selection color to the chip. Primarily used for displaying highlight context in `v-select`"
+  },
+  "events": {
+    "click": "Emitted when chip is clicked, toggles chip if contained in a chip group",
+    "click:close": "Emitted when close icon is clicked",
+    "update:active": "Emitted when close icon is clicked, sets active to `false`"
   }
 }
