@@ -7,11 +7,8 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-// Types
-import { ExtractVue } from '../../../util/mixins'
-
 describe('VList.ts', () => {
-  type Instance = ExtractVue<typeof VList>
+  type Instance = InstanceType<typeof VList>
   let mountFunction: (options?: object) => Wrapper<Instance>
 
   beforeEach(() => {
@@ -66,5 +63,23 @@ describe('VList.ts', () => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should have an inferred role from injections', () => {
+    const wrapper = mountFunction({
+      provide: { isInMenu: true },
+    })
+
+    expect(wrapper.element.getAttribute('role')).toBeNull()
+
+    const wrapper2 = mountFunction({
+      provide: { isInNav: true },
+    })
+
+    expect(wrapper2.element.getAttribute('role')).toBeNull()
+
+    const wrapper3 = mountFunction()
+
+    expect(wrapper3.element.getAttribute('role')).toBe('list')
   })
 })

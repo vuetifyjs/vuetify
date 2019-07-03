@@ -2,7 +2,7 @@
   <v-navigation-drawer
     :value="true"
     app
-    class="transparent pa-3 overflow-hidden"
+    class="transparent pl-3 overflow-hidden"
     clipped
     floating
     right

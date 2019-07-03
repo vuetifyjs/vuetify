@@ -20,15 +20,6 @@
       "type": "section",
       "children": [
         {
-          "type": "playground",
-          "value": "playground"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
           "type": "api",
           "value": [
             "v-expansion-panels",
@@ -36,6 +27,15 @@
             "v-expansion-panel-header",
             "v-expansion-panel-content"
           ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "playground",
+          "value": "playground"
         }
       ]
     },

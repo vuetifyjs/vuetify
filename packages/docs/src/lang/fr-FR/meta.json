@@ -13,11 +13,6 @@
     "description": "Commencez avec Vue et Vuetify en un rien de temps. Supporte vue-cli-3, les projets existants et plus.",
     "keywords": "démarrage rapide, templates vuetify, installer vuetify"
   },
-  "getting-started/starter-templates": {
-    "title": "Templates de démarrage",
-    "description": "Comprenez la mise en page et la structure de votre application. Regardez les exemples.",
-    "keywords": "templates, vuetify"
-  },
   "getting-started/why-vuetify": {
     "title": "Pourquoi Vuetify ?",
     "description": "Pourquoi devriez-vous choisir Vuetify par rapport aux autres frameworks Vue.",
@@ -53,17 +48,17 @@
     "description": "Obtenir l'aide et le soutien du créateur de Vuetify, John Leider",
     "keywords": "consultation, support, aide"
   },
-  "framework/a-la-carte": {
+  "customization/a-la-carte": {
     "title": "A la carte",
     "description": "Préparez-vous à le treeshaking automatique. Utilisez uniquement les composants nécessaires sans tout importer.",
     "keywords": "à la carte, importation simple de Vuetify, importation de Vuetify, importation de composant"
   },
-  "framework/application": {
+  "components/application": {
     "title": "Paramètres de l'application",
     "description": "Vuetify est équipé d'un balisage par défaut qui facilite la création de mises en page pour n'importe quelle application.",
     "keywords": "mise en page par défaut, balisage par défaut, vu la mise en page par défaut"
   },
-  "framework/icons": {
+  "customization/icons": {
     "title": "Installation des icônes",
     "description": "Vuetify supporte les icônes personnalisées en utilisant les préfixes et les options globales.",
     "keywords": "vue, icônes, polices de caractères d'icônes, bibliothèques d'icônes, icônes Vuetify"
@@ -73,43 +68,43 @@
     "description": "Vuetify prend en charge l'internationalisation linguistique de ses composants.",
     "keywords": "vue, i18n, langue, internationalisation"
   },
-  "framework/transitions": {
+  "styles/transitions": {
     "title": "Transitions",
     "description": "Créez une application incroyable avec des animations fluides.",
     "keywords": "animations, transitions"
   },
-  "framework/scroll": {
+  "styles/scroll": {
     "title": "Défilement",
     "description": "En utilisant l'aide goTo, vous pouvez défiler facilement vers n'importe quel emplacement de la page.",
     "keywords": "défilement, défilement fluide, transitions"
   },
-  "framework/colors": {
+  "styles/colors": {
     "title": "Palette de couleurs Material",
     "description": "Appliquez facilement n'importe quelle couleur de la palette Material.",
     "keywords": "couleurs"
   },
-  "framework/theme": {
+  "customization/theme": {
     "title": "Thème de l'application",
     "description": "Configurez le thème et les couleurs supplémentaires de votre application en un éclair.",
     "keywords": "thèmes"
   },
-  "framework/typography": {
+  "styles/typography": {
     "title": "Typographie de l'application",
     "description": "Voir les différents styles de typographie. Des titres aux légendes, avec différents poids et tailles.",
     "keywords": "typographie, entêtes, titres"
   },
-  "framework/content": {
+  "styles/content": {
     "keywords": "contenu, html, balisage"
   },
-  "framework/pre-made-layouts": {
+  "getting-started/pre-made-layouts": {
     "title": "Mises en page de l'application"
   },
-  "framework/grid": {
+  "components/grids": {
     "title": "Système de grille de mise en page",
     "description": "Vuetify supporte la grille de conception Material Design en 12 points pour la mise en page de votre application.",
     "keywords": "grille, mise en page, flex"
   },
-  "framework/grid-lists": {
+  "components/grid-lists": {
     "title": "Composant de liste sous forme de grille"
   },
   "components/app-bars": {

@@ -40,6 +40,10 @@ export default mixins(
   directives: { ripple },
 
   props: {
+    active: {
+      type: Boolean,
+      default: true,
+    },
     activeClass: {
       type: String,
       default (): string | undefined {
@@ -109,7 +113,9 @@ export default mixins(
   created () {
     const breakingProps = [
       ['outline', 'outlined'],
-      ['selected', 'value'],
+      ['selected', 'input-value'],
+      ['value', 'active'],
+      ['@input', '@active.sync'],
     ]
 
     /* istanbul ignore next */
@@ -149,6 +155,7 @@ export default mixins(
             e.stopPropagation()
 
             this.$emit('click:close')
+            this.$emit('update:active', false)
           },
         },
       }, this.closeIcon)
@@ -173,6 +180,10 @@ export default mixins(
       draggable: this.draggable ? 'true' : undefined,
       tabindex: this.chipGroup && !this.disabled ? 0 : data.attrs!.tabindex,
     }
+    data.directives = [{
+      name: 'show',
+      value: this.active,
+    }]
     data = this.setBackgroundColor(this.color, data)
 
     const color = this.textColor || (this.outlined && this.color)

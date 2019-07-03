@@ -80,10 +80,6 @@ export default baseMixins.extend<options>().extend({
       type: Array,
       default: () => [],
     },
-    itemAvatar: {
-      type: [String, Array, Function],
-      default: 'avatar',
-    },
     itemDisabled: {
       type: [String, Array, Function],
       default: 'disabled',
@@ -140,14 +136,12 @@ export default baseMixins.extend<options>().extend({
         'v-select--is-menu-active': this.isMenuActive,
       }
     },
-    computedId (): string {
-      if (this.$attrs.id) return this.$attrs.id
-
-      return `computed-id-${this._uid}`
-    },
     /* Used by other components to overwrite */
     computedItems (): object[] {
       return this.allItems
+    },
+    computedOwns (): string {
+      return `list-${this._uid}`
     },
     counterValue (): number {
       return this.multiple
@@ -184,7 +178,7 @@ export default baseMixins.extend<options>().extend({
       return {
         attrs: {
           ...attrs,
-          id: this.computedId,
+          id: this.computedOwns,
         },
         props: {
           action: this.multiple,
@@ -194,7 +188,6 @@ export default baseMixins.extend<options>().extend({
           items: this.virtualizedItems,
           noDataText: this.$vuetify.lang.t(this.noDataText),
           selectedItems: this.selectedItems,
-          itemAvatar: this.itemAvatar,
           itemDisabled: this.itemDisabled,
           itemValue: this.itemValue,
           itemText: this.itemText,
@@ -341,7 +334,7 @@ export default baseMixins.extend<options>().extend({
       )
 
       return this.$createElement(VChip, {
-        staticClass: 'v-chip--select-multi',
+        staticClass: 'v-chip--select',
         attrs: { tabindex: -1 },
         props: {
           close: this.deletableChips && !isDisabled,
@@ -428,7 +421,7 @@ export default baseMixins.extend<options>().extend({
         role: 'button',
         'aria-haspopup': 'listbox',
         'aria-expanded': String(this.isMenuActive),
-        'aria-owns': this.computedId,
+        'aria-owns': this.computedOwns,
       }
 
       return render
@@ -510,6 +503,9 @@ export default baseMixins.extend<options>().extend({
     },
     genSlotSelection (item: object, index: number): VNode[] | undefined {
       return this.$scopedSlots.selection!({
+        attrs: {
+          class: 'v-chip--select',
+        },
         parent: this,
         item,
         index,
@@ -760,6 +756,10 @@ export default baseMixins.extend<options>().extend({
         const listIndex = this.getMenuIndex()
 
         this.setMenuIndex(-1)
+
+        // There is no item to re-highlight
+        // when selections are hidden
+        if (this.hideSelected) return
 
         this.$nextTick(() => this.setMenuIndex(listIndex))
       }

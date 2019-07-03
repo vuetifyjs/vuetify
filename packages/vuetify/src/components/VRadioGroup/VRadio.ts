@@ -84,6 +84,9 @@ export default baseMixins.extend<options>().extend({
         ? this.onIcon
         : this.offIcon
     },
+    computedId (): string {
+      return VInput.options.computed.computedId.call(this)
+    },
     hasLabel: VInput.options.computed.hasLabel,
     hasState (): boolean {
       return (this.radioGroup || {}).hasState
@@ -99,7 +102,7 @@ export default baseMixins.extend<options>().extend({
         return this.name
       }
 
-      return this.radioGroup.name || `'v-radio-'${this.radioGroup._uid}`
+      return this.radioGroup.name || `radio-${this.radioGroup._uid}`
     },
   },
 
@@ -116,7 +119,7 @@ export default baseMixins.extend<options>().extend({
       return this.$createElement(VLabel, {
         on: { click: this.onChange },
         attrs: {
-          for: this.id,
+          for: this.computedId,
         },
         props: {
           color: ((this.radioGroup || {}).validationState) || '',

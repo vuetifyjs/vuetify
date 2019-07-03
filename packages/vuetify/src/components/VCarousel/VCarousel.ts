@@ -40,18 +40,18 @@ export default VWindow.extend({
     },
     hideDelimiters: Boolean,
     hideDelimiterBackground: Boolean,
-    progress: Boolean,
-    progressColor: String,
     interval: {
       type: [Number, String],
       default: 6000,
       validator: (value: string | number) => value > 0,
     },
-    showArrows: {
+    mandatory: {
       type: Boolean,
       default: true,
     },
-    mandatory: {
+    progress: Boolean,
+    progressColor: String,
+    showArrows: {
       type: Boolean,
       default: true,
     },

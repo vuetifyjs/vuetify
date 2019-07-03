@@ -41,6 +41,10 @@ export default VSheet.extend({
       type: Boolean,
       default: true,
     },
+    tag: {
+      type: String,
+      default: 'header',
+    },
   },
 
   data: () => ({
@@ -159,6 +163,6 @@ export default VSheet.extend({
     if (this.isExtended) children.push(this.genExtension())
     if (this.src || this.$scopedSlots.img) children.unshift(this.genBackground())
 
-    return h('nav', data, children)
+    return h(this.tag, data, children)
   },
 })

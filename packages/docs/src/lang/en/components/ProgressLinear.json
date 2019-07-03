@@ -1,5 +1,5 @@
 {
-  "header": "# Progress Linear",
+  "header": "# Progress linear",
   "headerText": "The `v-progress-linear` component is used to convey data visually to users. They can also represent an indeterminate amount, such as loading or processing.",
   "examples": {
     "usage": {

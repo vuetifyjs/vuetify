@@ -24,6 +24,7 @@
           v-model="model"
           centered
           slider-color="yellow"
+          background-color="transparent"
         >
           <v-tab
             v-for="i in 3"

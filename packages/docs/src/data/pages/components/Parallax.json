@@ -27,7 +27,7 @@
         {
           "type": "examples",
           "value": [
-            "sinple/content",
+            "simple/content",
             "simple/custom-height"
           ]
         }
@@ -39,7 +39,7 @@
         {
           "type": "up-next",
           "value": [
-            "framework/aspect-ratios",
+            "components/aspect-ratios",
             "components/cards",
             "components/images"
           ]

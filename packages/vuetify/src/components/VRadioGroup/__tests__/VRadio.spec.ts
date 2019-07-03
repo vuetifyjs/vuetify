@@ -41,18 +41,6 @@ describe('VRadio.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render aria-label attribute with label value on input group', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        label: 'Test',
-      },
-    })
-
-    const inputGroup = wrapper.find('input')
-    expect(inputGroup.element.getAttribute('aria-label')).toBe('Test')
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
   it('should not render aria-label attribute with no label value on input group', () => {
     const wrapper = mountFunction({
       propsData: {

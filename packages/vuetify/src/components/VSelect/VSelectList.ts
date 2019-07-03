@@ -48,10 +48,6 @@ export default mixins(Colorable, Themeable).extend({
       type: Array,
       default: () => [],
     } as PropValidator<any[]>,
-    itemAvatar: {
-      type: [String, Array, Function],
-      default: 'avatar',
-    } as PropValidator<string | (string | number)[] | ((item: object, fallback?: any) => any)>,
     itemDisabled: {
       type: [String, Array, Function],
       default: 'disabled',
@@ -84,6 +80,9 @@ export default mixins(Colorable, Themeable).extend({
     },
     staticNoDataTile (): VNode {
       const tile = {
+        attrs: {
+          role: undefined,
+        },
         on: {
           mousedown: (e: Event) => e.preventDefault(), // Prevent onBlur from being called
         },
@@ -97,20 +96,14 @@ export default mixins(Colorable, Themeable).extend({
 
   methods: {
     genAction (item: object, inputValue: any): VNode {
-      const data = {
-        on: {
-          click: (e: Event) => {
-            e.stopPropagation()
-            this.$emit('select', item)
-          },
-        },
-      }
-
-      return this.$createElement(VListItemAction, data, [
+      return this.$createElement(VListItemAction, [
         this.$createElement(VSimpleCheckbox, {
           props: {
             color: this.color,
             value: inputValue,
+          },
+          on: {
+            input: () => this.$emit('select', item),
           },
         }),
       ])
@@ -134,9 +127,9 @@ export default mixins(Colorable, Themeable).extend({
       return `<span class="v-list-item__mask">${escapeHTML(text)}</span>`
     },
     genLabelledBy (item: object) {
-      const text = this.getText(item).split(' ').join('-')
+      const text = escapeHTML(this.getText(item).split(' ').join('-').toLowerCase())
 
-      return `${this._uid}-list-${text}`
+      return `${text}-list-item-${this._uid}`
     },
     getMaskedCharacters (text: string): {
       start: string
@@ -156,13 +149,11 @@ export default mixins(Colorable, Themeable).extend({
     genTile (
       item: object,
       disabled = null as null | boolean,
-      avatar = false,
       value = false
     ): VNode | VNode[] | undefined {
       if (!value) value = this.hasItem(item)
 
       if (item === Object(item)) {
-        avatar = this.getAvatar(item)
         disabled = disabled !== null
           ? disabled
           : this.getDisabled(item)
@@ -170,6 +161,9 @@ export default mixins(Colorable, Themeable).extend({
 
       const tile = {
         attrs: {
+          // Default behavior in list does not
+          // contain aria-selected by default
+          'aria-selected': String(value),
           'aria-labelledby': this.genLabelledBy(item),
           role: 'option',
         },
@@ -182,7 +176,6 @@ export default mixins(Colorable, Themeable).extend({
         },
         props: {
           activeClass: this.tileActiveClass,
-          avatar,
           disabled,
           ripple: true,
           inputValue: value,
@@ -199,7 +192,15 @@ export default mixins(Colorable, Themeable).extend({
       }
 
       const parent = this
-      const scopedSlot = this.$scopedSlots.item({ parent, item, tile })
+      const scopedSlot = this.$scopedSlots.item({
+        parent,
+        item,
+        attrs: {
+          ...tile.attrs,
+          ...tile.props,
+        },
+        on: tile.on,
+      })
 
       return this.needsTile(scopedSlot)
         ? this.$createElement(VListItem, tile, scopedSlot)
@@ -221,10 +222,7 @@ export default mixins(Colorable, Themeable).extend({
     needsTile (slot: VNode[] | undefined) {
       return slot!.length !== 1 ||
         slot![0].componentOptions == null ||
-        slot![0].componentOptions.Ctor.options.name !== 'v-list-tile'
-    },
-    getAvatar (item: object) {
-      return Boolean(getPropertyFromItem(item, this.itemAvatar, false))
+        slot![0].componentOptions.Ctor.options.name !== 'v-list-item'
     },
     getDisabled (item: object) {
       return Boolean(getPropertyFromItem(item, this.itemDisabled, false))

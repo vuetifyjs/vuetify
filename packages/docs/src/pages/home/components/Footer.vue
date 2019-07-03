@@ -9,20 +9,19 @@
     <v-container>
       <v-layout wrap>
         <v-flex xs12>
-          <h5 class="mb-3">
-            <v-layout
-              align-center
-              column
-              justify-center
-            >
-              <v-img
-                contain
-                height="64px"
-                src="https://cdn.vuetifyjs.com/images/logos/v-alt.svg"
-                width="64px"
-              />
-            </v-layout>
-          </h5>
+          <v-layout
+            align-center
+            column
+            justify-center
+            mb-3
+          >
+            <v-img
+              contain
+              height="64px"
+              src="https://cdn.vuetifyjs.com/images/logos/v-alt.svg"
+              width="64px"
+            />
+          </v-layout>
         </v-flex>
         <v-flex xs12>
           <v-layout justify-center mb-3>
@@ -31,6 +30,7 @@
               :key="i"
               :href="social.href"
               :title="social.title"
+              :aria-label="social.title"
               class="mx-3"
               target="_blank"
               rel="noopener"
@@ -68,7 +68,7 @@
               <template v-slot:append>
                 <v-btn
                   type="submit"
-                  color="secondary"
+                  color="primary"
                   name="member[subscribe]"
                   value="Subscribe"
                 >

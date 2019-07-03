@@ -178,7 +178,7 @@ export default baseMixins.extend<options>().extend({
       return true
     },
     genBar (items: VNode[], slider: VNode | null) {
-      return this.$createElement(VTabsBar, this.setTextColor(this.computedColor, {
+      const data = {
         staticClass: this.backgroundColor,
         style: {
           height: convertToUnit(this.height),
@@ -202,7 +202,12 @@ export default baseMixins.extend<options>().extend({
           },
         },
         ref: 'items',
-      }), [
+      }
+
+      this.setTextColor(this.computedColor, data)
+      this.setBackgroundColor(this.backgroundColor, data)
+
+      return this.$createElement(VTabsBar, data, [
         this.genSlider(slider),
         items,
       ])

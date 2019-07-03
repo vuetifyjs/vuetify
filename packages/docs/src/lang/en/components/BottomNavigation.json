@@ -37,6 +37,7 @@
   "props": {
     "absolute": "Mixins.Positionable.props.absolute",
     "activeClass": "Components.ItemGroups.props.activeClass",
+    "backgroundColor": "Background color for component",
     "fixed": "Mixins.Positionable.props.fixed",
     "grow": "Force `v-btn`s to take up all available space",
     "hideOnScroll": "Will transition the navigation off screen when scrolling up",
@@ -45,6 +46,7 @@
     "mandatory": "Components.ItemGroups.props.mandatory"
   },
   "events": {
+    "change": "The value of selected item",
     "update:inputValue": "The event used for `input-value.sync`"
   }
 }

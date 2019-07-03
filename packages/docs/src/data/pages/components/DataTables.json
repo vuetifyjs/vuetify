@@ -70,7 +70,7 @@
           "type": "up-next",
           "value": [
             "components/data-iterator",
-            "components/paginations",
+            "components/simple-tables",
             "components/lists"
           ]
         }

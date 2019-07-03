@@ -1,5 +1,5 @@
 {
-  "header": "# Textarea",
+  "header": "# Textareas",
   "headerText": "Textarea components are used for collecting large amounts of textual data.",
   "examples": {
     "usage": {
@@ -19,7 +19,7 @@
     },
     "browser-autocomplete": {
       "header": "### Browser autocomplete",
-      "desc": "The `browser-autocomplete` prop gives you the option to enable the browser to predict user input."
+      "desc": "The `autocomplete` prop gives you the option to enable the browser to predict user input."
     },
     "clearable": {
       "header": "### Clearable",

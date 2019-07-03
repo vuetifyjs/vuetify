@@ -22,6 +22,7 @@
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
           <v-btn
+            aria-label="Invert example colors"
             icon
             @click="dark = !dark"
             v-on="on"
@@ -29,11 +30,12 @@
             <v-icon>mdi-invert-colors</v-icon>
           </v-btn>
         </template>
-        Invert colors
+        Invert example colors
       </v-tooltip>
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
           <v-btn
+            aria-label="Edit in Codepen"
             icon
             @click="sendToCodepen"
             v-on="on"
@@ -46,6 +48,7 @@
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
           <v-btn
+            aria-label="View on Github"
             :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/docs/src/examples/${file}.vue`"
             icon
             target="_blank"
@@ -59,6 +62,7 @@
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
           <v-btn
+            aria-label="View source"
             icon
             @click="expand = !expand"
             v-on="on"
@@ -66,7 +70,7 @@
             <v-icon>mdi-code-tags</v-icon>
           </v-btn>
         </template>
-        View Source
+        View source
       </v-tooltip>
     </v-toolbar>
 

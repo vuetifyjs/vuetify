@@ -117,6 +117,7 @@ describe('VCombobox.ts', () => {
     const wrapper = mountFunction({
       attachToDocument: true,
     })
+    await wrapper.vm.$nextTick()
 
     const change = jest.fn()
     const input = wrapper.find('input')
@@ -130,6 +131,8 @@ describe('VCombobox.ts', () => {
     input.trigger('input')
     input.trigger('keydown.enter')
 
+    await wrapper.vm.$nextTick()
+
     expect(change).toHaveBeenCalledWith('foo')
     expect(change).toHaveBeenCalledTimes(2)
     expect(wrapper.vm.internalValue).toBe('foo')
@@ -137,6 +140,8 @@ describe('VCombobox.ts', () => {
     element.value = ''
     input.trigger('input')
     input.trigger('keydown.enter')
+
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.internalValue).toBe('')
     expect(change).toHaveBeenCalledTimes(4)
@@ -153,6 +158,8 @@ describe('VCombobox.ts', () => {
 
     const e = { preventDefault: jest.fn() }
     wrapper.vm.onEnterDown(e)
+
+    await wrapper.vm.$nextTick()
 
     // https://github.com/vuetifyjs/vuetify/issues/4974
     expect(e.preventDefault).toHaveBeenCalled()
@@ -175,6 +182,7 @@ describe('VCombobox.ts', () => {
     input.trigger('input')
 
     input.trigger('keydown.enter')
+    await wrapper.vm.$nextTick()
     expect(change).toHaveBeenCalledWith('foo')
 
     input.trigger('keydown.esc')

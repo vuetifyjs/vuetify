@@ -1,11 +1,11 @@
 <template>
   <v-card
     v-if="featured.length > 0"
-    class="text-xs-center py-4"
+    class="text-xs-center py-5"
     flat
   >
-    <h4
-      class="font-weight-medium grey--text"
+    <h3
+      class="font-weight-medium grey--text text--darken-2"
       v-text="$t('Vuetify.Home.madeWithVuetify')"
     />
 
@@ -29,7 +29,12 @@
           <v-hover>
             <template v-slot:default="{ hover }">
               <v-card
+                :title="`Link to ${feature.title}`"
+                :href="`${feature.url}?ref=vuetifyjs.com`"
+                class="v-card--mwvjs"
                 elevation="24"
+                target="_blank"
+                rel="noopener"
                 @click="$ga.event('home', 'click', 'mwvjs', feature.title)"
               >
                 <v-img
@@ -53,13 +58,11 @@
                         v-text="feature.teaser"
                       />
                       <v-btn
-                        :title="`Link to ${feature.title}`"
-                        :href="`${feature.url}?ref=vuetifyjs.com`"
+                        :aria-label="`Link to ${feature.title}`"
                         color="success"
                         fab
                         large
-                        target="_blank"
-                        rel="noopener"
+                        tabindex="-1"
                       >
                         <v-icon>mdi-open-in-new</v-icon>
                       </v-btn>
@@ -75,9 +78,11 @@
 
     <div class="text-xs-center">
       <a
+        aria-label="Link to madewithvuejs.com"
         href="https://madewithvuejs.com/vuetify?ref=vuetifyjs.com"
-        target="_blank"
         rel="noopener"
+        target="_blank"
+        title="Link to madewithvuejs.com"
         @click="$ga.event('home', 'click', ' mwvjs')"
       >
         <v-img
@@ -106,11 +111,20 @@
     // TODO: Remove when v-img
     // supports lazy loading
     mounted () {
-      this.$nextTick(this.init)
+      window.addEventListener('scroll', this.init, { passive: true })
+    },
+
+    beforeDestroy () {
+      this.removeListener()
     },
 
     methods: {
+      removeListener () {
+        window.removeEventListener('scroll', this.init, { passive: true })
+      },
       init () {
+        this.removeListener()
+
         fetch('https://madewithvuejs.com/api/tag/vuetify', {
           method: 'get',
           headers: {
@@ -151,3 +165,8 @@
     },
   }
 </script>
+
+<style lang="sass">
+  .v-card--mwvjs:focus .v-overlay
+    display: flex !important
+</style>

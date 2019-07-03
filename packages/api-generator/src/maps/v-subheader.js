@@ -1,5 +1,5 @@
 module.exports = {
   'v-subheader': {
-    slots: ['default']
-  }
+    slots: ['default'],
+  },
 }

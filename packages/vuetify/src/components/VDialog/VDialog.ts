@@ -39,29 +39,29 @@ export default baseMixins.extend({
   },
 
   props: {
+    dark: Boolean,
     disabled: Boolean,
-    persistent: Boolean,
     fullscreen: Boolean,
     fullWidth: Boolean,
-    noClickAnimation: Boolean,
     light: Boolean,
-    dark: Boolean,
     maxWidth: {
       type: [String, Number],
       default: 'none',
     },
+    noClickAnimation: Boolean,
     origin: {
       type: String,
       default: 'center center',
     },
-    width: {
-      type: [String, Number],
-      default: 'auto',
-    },
+    persistent: Boolean,
     scrollable: Boolean,
     transition: {
       type: [String, Boolean],
       default: 'dialog-transition',
+    },
+    width: {
+      type: [String, Number],
+      default: 'auto',
     },
   },
 
@@ -267,7 +267,8 @@ export default baseMixins.extend({
     children.push(h('div', {
       'class': this.contentClasses,
       attrs: {
-        tabIndex: '-1',
+        role: 'document',
+        tabindex: 0,
         ...this.getScopeIdAttrs(),
       },
       on: {
@@ -287,6 +288,7 @@ export default baseMixins.extend({
 
     return h('div', {
       staticClass: 'v-dialog__container',
+      attrs: { role: 'dialog' },
       style: {
         display: (!this.hasActivator || this.fullWidth) ? 'block' : 'inline-block',
       },

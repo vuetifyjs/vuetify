@@ -31,7 +31,6 @@
     "editable": " 创建一个可编辑按钮 - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "filter": "用于过滤选项的函数",
     "hideSelected": "不要在选择菜单中显示已选择的项",
-    "itemAvatar": "设置 **items** 属性的头像",
     "itemDisabled": " 禁用 **items** 的属性值",
     "itemText": "设置**items**'属性的文本值",
     "itemValue": "设置**items**属性的值",

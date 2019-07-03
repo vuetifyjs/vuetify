@@ -8,6 +8,10 @@
   .v-tab--disabled
     color: map-get($material, 'tabs')
 
+  .v-tabs-bar,
+  .v-tabs-items
+    background-color: map-get($material, 'cards')
+
   .v-tab
     +states($material)
 
@@ -18,6 +22,7 @@
 // Block
 .v-tabs
   flex: 1 1 auto
+  width: 100%
 
   .v-menu__activator
     height: 100%

@@ -372,71 +372,6 @@ describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-state
     expect(parseTimestamp('2019-03-01').weekday).toBe(5)
   })
 
-  it('should allow first day of week', () => {
-    const weekdays = [1, 2, 3, 4, 5, 6, 0]
-    const skips = getWeekdaySkips(weekdays)
-    const today = parseTimestamp('2019-05-03')
-    const date = parseTimestamp('2019-04-30')
-    const start = getStartOfWeek(date, weekdays, today)
-    const end = getEndOfWeek(date, weekdays, today)
-
-    const days = createDayList(
-      start,
-      end,
-      today,
-      skips,
-      Number.MAX_SAFE_INTEGER
-    )
-
-    expect(days).toEqual([
-      { 'date': '2019-04-29', 'day': 29, 'future': false, 'hasDay': true, 'hasTime': false, 'hour': 0, 'minute': 0, 'month': 4, 'past': true, 'present': false, 'time': '', 'weekday': 1, 'year': 2019 },
-      { 'date': '2019-04-30', 'day': 30, 'future': false, 'hasDay': true, 'hasTime': false, 'hour': 0, 'minute': 0, 'month': 4, 'past': true, 'present': false, 'time': '', 'weekday': 2, 'year': 2019 },
-      { 'date': '2019-05-01', 'day': 1, 'future': false, 'hasDay': true, 'hasTime': false, 'hour': 0, 'minute': 0, 'month': 5, 'past': true, 'present': false, 'time': '', 'weekday': 3, 'year': 2019 },
-      { 'date': '2019-05-02', 'day': 2, 'future': false, 'hasDay': true, 'hasTime': false, 'hour': 0, 'minute': 0, 'month': 5, 'past': true, 'present': false, 'time': '', 'weekday': 4, 'year': 2019 },
-      { 'date': '2019-05-03', 'day': 3, 'future': false, 'hasDay': true, 'hasTime': false, 'hour': 0, 'minute': 0, 'month': 5, 'past': false, 'present': true, 'time': '', 'weekday': 5, 'year': 2019 },
-      { 'date': '2019-05-04', 'day': 4, 'future': true, 'hasDay': true, 'hasTime': false, 'hour': 0, 'minute': 0, 'month': 5, 'past': false, 'present': false, 'time': '', 'weekday': 6, 'year': 2019 },
-      { 'date': '2019-05-05', 'day': 5, 'future': true, 'hasDay': true, 'hasTime': false, 'hour': 0, 'minute': 0, 'month': 5, 'past': false, 'present': false, 'time': '', 'weekday': 0, 'year': 2019 },
-    ])
-  })
-
-  it('should return empty array when end is less than start', () => {
-    const weekdays = [1, 2, 3, 4, 5, 6, 0]
-    const skips = getWeekdaySkips(weekdays)
-    const today = parseTimestamp('2019-05-03')
-    const date = parseTimestamp('2019-04-30')
-    const start = getEndOfWeek(date, weekdays, today)
-    const end = getStartOfWeek(date, weekdays, today)
-
-    const days = createDayList(
-      start,
-      end,
-      today,
-      skips,
-      Number.MAX_SAFE_INTEGER
-    )
-
-    expect(days).toEqual([])
-  })
-
-  it('should handle skips equal to zero', () => {
-    const weekdays = [1, 2, 3, 4, 5, 6, 0]
-    const skips = [0, 1, 0, 1, 0, 1, 0]
-    const today = parseTimestamp('2019-04-30')
-    const date = parseTimestamp('2019-04-27')
-    const start = getStartOfWeek(date, weekdays, today)
-    const end = getEndOfWeek(date, weekdays, today)
-
-    const days = createDayList(
-      start,
-      end,
-      today,
-      skips,
-      Number.MAX_SAFE_INTEGER
-    )
-
-    expect(days).toMatchSnapshot()
-  })
-
   it('should create interval list', () => {
     expect(createIntervalList(parseTimestamp('2019-02-08'), 2, 15, 10)).toMatchSnapshot()
     expect(createIntervalList(parseTimestamp('2019-02-08'), 1, 15, 10)).toMatchSnapshot()
@@ -496,12 +431,67 @@ describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-state
     expect(getWeekdaySkips([ 1, 5, 1, 3, 4, 2, 6 ])).toEqual([0, 1, 1, 1, 1, 1, 2])
   })
 
-  it('should create day list', () => {
-    const skips = getWeekdaySkips([ 0, 1, 2, 3, 4, 5, 6 ])
-    const skips1 = getWeekdaySkips([ 1, 1, 1, 1, 1, 1, 0 ])
-    expect(createDayList(parseTimestamp('2019-02-02'), parseTimestamp('2019-02-01'), parseTimestamp('2019-02-02'), skips)).toHaveLength(0)
-    expect(createDayList(parseTimestamp('2019-02-01'), parseTimestamp('2019-02-10'), parseTimestamp('2019-02-02'), skips)).toHaveLength(10)
-    expect(createDayList(parseTimestamp('2019-02-01'), parseTimestamp('2019-02-10'), parseTimestamp('2019-02-02'), skips1)).toHaveLength(3)
+  describe('createDayList', () => {
+    it('should create day list', () => {
+      const skips = getWeekdaySkips([ 0, 1, 2, 3, 4, 5, 6 ])
+      const skips1 = getWeekdaySkips([ 1, 1, 1, 1, 1, 1, 0 ])
+      expect(() => createDayList(parseTimestamp('2019-02-02'), parseTimestamp('2019-02-01'), parseTimestamp('2019-02-02'), skips)).toThrow()
+      expect(createDayList(parseTimestamp('2019-02-01'), parseTimestamp('2019-02-10'), parseTimestamp('2019-02-02'), skips)).toHaveLength(10)
+      expect(createDayList(parseTimestamp('2019-02-01'), parseTimestamp('2019-02-10'), parseTimestamp('2019-02-02'), skips1)).toHaveLength(3)
+    })
+
+    it('should allow first day of week', () => {
+      const weekdays = [1, 2, 3, 4, 5, 6, 0]
+      const skips = getWeekdaySkips(weekdays)
+      const today = parseTimestamp('2019-05-03')
+      const date = parseTimestamp('2019-04-30')
+      const start = getStartOfWeek(date, weekdays, today)
+      const end = getEndOfWeek(date, weekdays, today)
+
+      const days = createDayList(
+        start,
+        end,
+        today,
+        skips,
+        Number.MAX_SAFE_INTEGER
+      )
+
+      expect(days).toEqual([
+        { 'date': '2019-04-29', 'day': 29, 'future': false, 'hasDay': true, 'hasTime': false, 'hour': 0, 'minute': 0, 'month': 4, 'past': true, 'present': false, 'time': '', 'weekday': 1, 'year': 2019 },
+        { 'date': '2019-04-30', 'day': 30, 'future': false, 'hasDay': true, 'hasTime': false, 'hour': 0, 'minute': 0, 'month': 4, 'past': true, 'present': false, 'time': '', 'weekday': 2, 'year': 2019 },
+        { 'date': '2019-05-01', 'day': 1, 'future': false, 'hasDay': true, 'hasTime': false, 'hour': 0, 'minute': 0, 'month': 5, 'past': true, 'present': false, 'time': '', 'weekday': 3, 'year': 2019 },
+        { 'date': '2019-05-02', 'day': 2, 'future': false, 'hasDay': true, 'hasTime': false, 'hour': 0, 'minute': 0, 'month': 5, 'past': true, 'present': false, 'time': '', 'weekday': 4, 'year': 2019 },
+        { 'date': '2019-05-03', 'day': 3, 'future': false, 'hasDay': true, 'hasTime': false, 'hour': 0, 'minute': 0, 'month': 5, 'past': false, 'present': true, 'time': '', 'weekday': 5, 'year': 2019 },
+        { 'date': '2019-05-04', 'day': 4, 'future': true, 'hasDay': true, 'hasTime': false, 'hour': 0, 'minute': 0, 'month': 5, 'past': false, 'present': false, 'time': '', 'weekday': 6, 'year': 2019 },
+        { 'date': '2019-05-05', 'day': 5, 'future': true, 'hasDay': true, 'hasTime': false, 'hour': 0, 'minute': 0, 'month': 5, 'past': false, 'present': false, 'time': '', 'weekday': 0, 'year': 2019 },
+      ])
+    })
+
+    it('should handle skips equal to zero', () => {
+      const weekdays = [1, 2, 3, 4, 5, 6, 0]
+      const skips = [0, 1, 0, 1, 0, 1, 0]
+      const today = parseTimestamp('2019-04-30')
+      const date = parseTimestamp('2019-04-27')
+      const start = getStartOfWeek(date, weekdays, today)
+      const end = getEndOfWeek(date, weekdays, today)
+
+      const days = createDayList(
+        start,
+        end,
+        today,
+        skips,
+        Number.MAX_SAFE_INTEGER
+      )
+
+      expect(days).toMatchSnapshot()
+    })
+
+    it('should throw error if no days are available given specified weekday skips (#7155)', () => {
+      const skips = getWeekdaySkips([1, 2, 3, 4, 5])
+      // 2019-01-12 is a saturday (weekday 6)
+      expect(() => createDayList(parseTimestamp('2019-01-12'), parseTimestamp('2019-01-12'), parseTimestamp('2019-02-01'), skips))
+        .toThrow('No dates found using specified start date, end date, and weekdays.')
+    })
   })
 
   it('should find weekday', () => {

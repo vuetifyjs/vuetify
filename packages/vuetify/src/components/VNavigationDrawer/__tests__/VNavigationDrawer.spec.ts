@@ -427,4 +427,22 @@ describe('VNavigationDrawer', () => {
     wrapper.vm.onRouteChange()
     expect(wrapper.vm.isActive).toBe(false)
   })
+
+  it('should accept custom tag and have default based upon app prop', () => {
+    const wrapper = mountFunction()
+
+    expect(wrapper.vm.tag).toBe('aside')
+
+    const wrapper2 = mountFunction({
+      propsData: { app: true },
+    })
+
+    expect(wrapper2.vm.tag).toBe('nav')
+
+    const wrapper3 = mountFunction({
+      propsData: { tag: 'div' },
+    })
+
+    expect(wrapper3.vm.tag).toBe('div')
+  })
 })

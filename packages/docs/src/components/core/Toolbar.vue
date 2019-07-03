@@ -17,7 +17,11 @@
       @click="toggleDrawer"
     />
 
-    <router-link :to="{ name: 'home/Home' }">
+    <router-link
+      :to="{ name: 'home/Home' }"
+      aria-label="Vuetify Home Page"
+      title="Vuetify Home Page"
+    >
       <v-img
         alt="Vuetify Logo"
         src="https://cdn.vuetifyjs.com/images/logos/v-alt.svg"
@@ -50,6 +54,7 @@
         <v-icon class="hidden-md-and-up">mdi-file-document-box</v-icon>
       </v-btn>
       <core-store />
+      <core-enterprise />
       <core-supports />
       <core-ecosystems />
       <core-versions />
