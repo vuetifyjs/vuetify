@@ -1,6 +1,7 @@
 {
   "header": "# Unit testing",
   "headerText": "Unit tests are an important (and sometimes ignored) part of developing applications. They help us secure or processes and work flows, ensuring that the most critical parts of our projects are protected from accidental mistakes or oversights in our development. It's because of that that Vue has its own testing utility called [vue-test-utils](https://vue-test-utils.vuejs.org/). It provides useful features for interacting with Vue components and works with many popular test runners.",
+  "alert": "Vuetify utilizes Typescript and currently must import and extend the Vue object. This has the potential in some applications to generate a warning **$attrs** or **$listeners** is read-only. There is currenty an on-going [Github discussion](https://github.com/vuetifyjs/vuetify/issues/4068) with potential work-arounds in a variety of use-cases. If you have additional questions please join us in our [online community](https://community.vuetifyjs.com).",
   "runnerHeader": "## Test runner setup",
   "runnerText1": "Information on how to setup a test runner with vue-cli-3 can be found on the [official documentation](https://vue-test-utils.vuejs.org/guides/getting-started.html). At a glance, vue-cli-3 has getting started repositories for the following test runners:",
   "runnerText2": [
@@ -13,6 +14,7 @@
   "specText1": "Creating unit tests in Vuetify are similar to **vuex** and **vue-router** in that you will use the Vuetify object in a **localVue** instance and pass an instance to the mount functions options.",
   "specText2": "Let's create an example test use-case that we might find in our application.",
   "specText3": "In the example above we have created a custom component with a **title** prop and a `v-btn` that emits a custom event when clicked. We now want to create tests that ensure this behavior works correctly and continues to do so through future changes. The below examples are created with with the [Jest](https://jestjs.io/) test runner.",
+  "specAlert": "If you are stuck and have additional questions about testing or need help in general, please join us in our [online community](https://community.vuetifyjs.com).",
   "efficiencyHeader": "### Testing efficiency",
   "efficiencyText1": "When writing tests you will often find yourself repeating the same things over and over. In this case, it's beneficial to create helper functions to reduce the duplication for each individual test. Basically, [DRYing](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) up our code.",
   "efficiencyText2": "One of the most common duplicated code written in unit tests are the mount functions. This can easily be compacted into a reusable function for each run.",
