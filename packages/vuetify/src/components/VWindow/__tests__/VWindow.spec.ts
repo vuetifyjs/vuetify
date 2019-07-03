@@ -104,7 +104,7 @@ describe('VWindow.ts', () => {
     wrapper.vm.next()
     expect(wrapper.vm.internalIndex).toBe(2)
 
-    // changed all following indices 
+    // changed all following indices
     // due to: https://github.com/vuetifyjs/vuetify/issues/7728
     wrapper.vm.next()
     expect(wrapper.vm.internalIndex).toBe(2)
