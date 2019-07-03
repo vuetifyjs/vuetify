@@ -3,7 +3,7 @@
   "headerText": "The `v-carousel` component is used to display large numbers of visual content on a rotating timer.",
   "examples": {
     "usage": {
-      "desc": "The `v-carousel` component expands upon `v-window` by providing additional features targetted at displaying images."
+      "desc": "The `v-carousel` component expands upon `v-window` by providing additional features targeted at displaying images."
     },
     "cycle": {
       "header": "### Cycle",
@@ -32,22 +32,30 @@
   },
   "props": {
     "activeClass": "Components.ItemGroups.props.activeClass",
+    "continuous": "Determines whether carousel is continuous",
+    "cycle": "Determines if carousel should cycle through images",
     "disabled": "Components.Windows.props.disabled",
+    "delimiterIcon": "Sets icon for carousel delimiter",
+    "hideControls": "Hides the navigation controls",
+    "hideDelimiters": "Hides the panel with carousel delimiters",
+    "hideDelimiterBackground": "Hides the delimiter background",
+    "interval": "The duration between image cycles",
+    "link": "Explicitly define the carousel item as a link",
     "mandatory": "Components.ItemGroups.props.mandatory",
     "multiple": "Components.ItemGroups.props.multiple",
     "nextIcon": "The displayed icon for forcing pagination to the next item",
     "prevIcon": "The displayed icon for forcing pagination to the previous item",
-    "cycle": "Determines if carousel should cycle through images",
-    "delimiterIcon": "Sets icon for carousel delimiter",
-    "hideControls": "Hides the navigation controls",
-    "hideDelimiters": "Hides the panel with carousel delimiters",
-    "interval": "The duration between image cycles",
+    "progress": "Displays a carousel progress bar",
+    "progressColor": "Applies specified color to progress bar",
     "reverse": "Components.Windows.props.reverse",
     "reverseTransition": "Components.Windows.props.reverseTransition",
+    "showArrows": "Displays arrows",
+    "showArrowsOnHover": "Displays arrows when hovered over",
     "src": "The image src",
     "touch": "Components.Windows.props.touch",
     "touchless": "Components.Windows.props.touchless",
     "transition": "Mixins.Transitionable.props.transition",
-    "vertical": "Components.Windows.props.vertical"
+    "vertical": "Components.Windows.props.vertical",
+    "verticalDelimiters": "Displays delimiters vertically"
   }
 }
