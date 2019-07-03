@@ -1,0 +1,46 @@
+<template>
+  <i :class="standardClass">{{ parsed.id }}</i>
+</template>
+
+<script>
+export default {
+  props: {
+    name: {
+      type: String
+    }
+  },
+  computed: {
+    parsed() {
+      const check = (customPrefixes, standardPrefix) => {
+        for (let prefix of customPrefixes) {
+          prefix = `_${prefix}`
+          if (this.name.endsWith(prefix)) {
+            return {
+              prefix: standardPrefix,
+              id: this.name.substring(0, this.name.indexOf(prefix))
+            }
+          }
+        }
+        return false
+      }
+
+      return (
+        check(['fill', 'filled'], '') ||
+        check(['outline', 'outlined'], 'outlined') ||
+        check(['two-tone', 'two-toned'], 'two-tone') ||
+        check(['round', 'rounded'], 'round') ||
+        check(['sharp', 'shapened'], 'sharp') || {
+          prefix: '',
+          id: this.name
+        }
+      )
+    },
+    standardClass() {
+      if (this.parsed.prefix) {
+        return `material-icons-${this.parsed.prefix}`
+      }
+      return 'material-icons'
+    }
+  }
+}
+</script>
