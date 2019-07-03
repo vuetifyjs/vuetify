@@ -49,7 +49,7 @@
     data: () => ({
       pwaDialog: false,
       showInstallBanner: false,
-      installEvent: null
+      installEvent: null,
     }),
     created () {
       if (!this.$ssrContext) {
@@ -71,7 +71,7 @@
           }
           this.installEvent = null
         })
-      }
-    }
+      },
+    },
   }
 </script>
