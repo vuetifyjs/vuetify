@@ -1,0 +1,10 @@
+{
+  "props": {
+    "large": "Makes the component large",
+    "medium": "Makes the component medium",
+    "size": "Specifies a custom font size for the icon",
+    "small": "Makes the component small",
+    "xSmall": "Makes the component extra small",
+    "xLarge": "Makes the component extra large"
+  }
+}

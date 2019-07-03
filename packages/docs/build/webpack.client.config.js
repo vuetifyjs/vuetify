@@ -17,6 +17,24 @@ const cssLoaders = [
   }
 ]
 
+const sassLoaders = [
+  ...cssLoaders,
+  { loader: 'sass-loader', options: {
+    implementation: require('sass'),
+    fiber: require('fibers'),
+    indentedSyntax: true
+  } }
+]
+
+const scssLoaders = [
+  ...cssLoaders,
+  { loader: 'sass-loader', options: {
+    implementation: require('sass'),
+    fiber: require('fibers'),
+    indentedSyntax: false
+  } }
+]
+
 const config = merge(base, {
   name: 'client',
   entry: {
@@ -37,6 +55,14 @@ const config = merge(base, {
             options: { sourceMap: false } // stylus-loader sucks at sourcemaps
           }
         ]
+      },
+      {
+        test: /\.sass$/,
+        use: sassLoaders
+      },
+      {
+        test: /\.scss$/,
+        use: scssLoaders
       }
     ]
   },

@@ -1,15 +1,14 @@
 <template>
   <div>
     <doc-heading>Generic.Pages.api</doc-heading>
-    <v-card>
+    <v-card outlined>
       <v-tabs
         v-model="tab"
         :slider-color="computedTabs.length ? 'primary' : 'transparent'"
-        color="grey lighten-3"
       >
         <v-tab
-          v-for="(tab, i) in computedTabs"
-          :key="`tab-${i}`"
+          v-for="(tab) in computedTabs"
+          :key="`tab-${tab}`"
           :href="`#${tab}`"
         >
           {{ tab.replace(/([A-Z])/g, ' $1') }}
@@ -45,6 +44,7 @@
       </v-card-text>
 
       <v-tabs-items
+        :key="current"
         v-model="tab"
         touchless
         class="white"
@@ -53,7 +53,7 @@
           v-for="(tab, i) in computedTabs"
           :key="`tab-item-${i}`"
           :value="tab"
-          lazy
+          eager
         >
           <v-card flat>
             <doc-parameters
@@ -78,28 +78,28 @@
   const propProps = [
     {
       value: 'name',
-      class: 'xs6 sm3 lg2'
+      class: 'xs6 sm3 lg2',
     },
     {
       value: 'default',
-      class: 'xs6 sm3 text-xs-right'
+      class: 'xs6 sm3 text-xs-right',
     },
     {
       value: 'type',
-      class: 'xs6 ml-auto sm4 text-sm-right'
-    }
+      class: 'xs6 ml-auto sm4 text-sm-right',
+    },
   ]
 
   export default {
     props: {
       lang: {
         type: String,
-        default: ''
+        default: '',
       },
       value: {
         type: Array,
-        default: () => ([])
-      }
+        default: () => ([]),
+      },
     },
 
     data: vm => ({
@@ -110,54 +110,54 @@
         slots: [
           {
             value: 'name',
-            class: 'left'
-          }
+            class: 'left',
+          },
         ],
         scopedSlots: [
           {
             value: 'name',
-            class: 'xs3'
+            class: 'xs3',
           },
           {
             value: 'props',
-            class: 'xs9'
-          }
+            class: 'xs9',
+          },
         ],
         events: [
           {
             value: 'name',
-            class: ''
+            class: '',
           },
           {
             value: 'value',
-            class: 'text-xs-right'
-          }
+            class: 'text-xs-right',
+          },
         ],
         functions: [
           {
             value: 'name',
-            class: ''
+            class: '',
           },
           {
             value: 'signature',
-            class: 'text-xs-right'
-          }
+            class: 'text-xs-right',
+          },
         ],
         functional: [
           {
             value: 'name',
-            class: ''
+            class: '',
           },
           {
             value: 'description',
-            class: 'text-xs-right'
-          }
+            class: 'text-xs-right',
+          },
         ],
-        options: [...propProps]
+        options: [...propProps],
       },
       search: null,
       tab: null,
-      tabs: ['api', 'props', 'slots', 'scopedSlots', 'params', 'events', 'functions', 'functional', 'options']
+      tabs: ['api', 'props', 'slots', 'scopedSlots', 'params', 'events', 'functions', 'functional', 'options'],
     }),
 
     computed: {
@@ -170,12 +170,12 @@
 
         return {
           ...component,
-          ...(api[this.current] || {})
+          ...(api[this.current] || {}),
         }
       },
       computedTabs () {
         return this.tabs.filter(tab => (this.component[tab] || []).length > 0)
-      }
+      },
     },
 
     watch: {
@@ -192,7 +192,7 @@
         }
 
         this.tab = ''
-      }
-    }
+      },
+    },
   }
 </script>

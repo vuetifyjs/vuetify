@@ -1,0 +1,30 @@
+@import '../../styles/styles.sass'
+
++theme(v-color-picker) using ($material)
+  .v-color-picker__input input
+    border: thin solid map-get($material, 'dividers')
+
+  span
+    color: map-deep-get($material, 'text', 'secondary')
+
+  .v-color-picker__dot, .v-color-picker__color
+    background-color: map-deep-get($material, 'color-picker', 'checkerboard')
+
+// Block
+.v-color-picker
+  align-self: flex-start
+  contain: content
+  +elevation(2)
+
+// Element
+.v-color-picker__controls
+  display: flex
+  flex-direction: column
+  padding: 16px
+
+// Modifier
+.v-color-picker--flat
+  +elevation(0)
+
+  .v-color-picker__track:not(.v-input--is-disabled) .v-slider__thumb // High specifity
+    +elevation(0)

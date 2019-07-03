@@ -7,7 +7,7 @@ import mixins from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
 
 // Types
-import { VNode, VNodeChildrenArrayContents } from 'vue'
+import { VNode, ScopedSlotChildren } from 'vue/types/vnode'
 
 export default mixins(
   Delayable,
@@ -19,12 +19,12 @@ export default mixins(
   props: {
     disabled: {
       type: Boolean,
-      default: false
+      default: false,
     },
     value: {
       type: Boolean,
-      default: undefined
-    }
+      default: undefined,
+    },
   },
 
   methods: {
@@ -33,7 +33,7 @@ export default mixins(
     },
     onMouseLeave () {
       this.runDelay('close')
-    }
+    },
   },
 
   render (): VNode {
@@ -43,27 +43,31 @@ export default mixins(
       return null as any
     }
 
-    let element: VNode | VNodeChildrenArrayContents | string | undefined
+    let element: VNode | ScopedSlotChildren
 
+    /* istanbul ignore else */
     if (this.$scopedSlots.default) {
       element = this.$scopedSlots.default({ hover: this.isActive })
-    } else if (this.$slots.default && this.$slots.default.length === 1) {
-      element = this.$slots.default[0]
     }
 
-    if (!element || typeof element === 'string' || Array.isArray(element)) {
+    if (Array.isArray(element) && element.length === 1) {
+      element = element[0]
+    }
+
+    if (!element || Array.isArray(element) || !element.tag) {
       consoleWarn('v-hover should only contain a single element', this)
 
       return element as any
     }
 
     if (!this.disabled) {
-      this._g(element.data!, {
+      element.data = element.data || {}
+      this._g(element.data, {
         mouseenter: this.onMouseEnter,
-        mouseleave: this.onMouseLeave
+        mouseleave: this.onMouseLeave,
       })
     }
 
     return element
-  }
+  },
 })

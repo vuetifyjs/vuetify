@@ -1,6 +1,11 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VBottomNavigation",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/bottom-navigation.html"
+  },
   "children": [
     {
       "type": "section",
@@ -16,7 +21,7 @@
       "children": [
         {
           "type": "api",
-          "value": ["v-bottom-nav"]
+          "value": ["v-bottom-navigation"]
         }
       ]
     },
@@ -26,8 +31,13 @@
         {
           "type": "examples",
           "value": [
-            "colorAndShift",
-            "toggle"
+            "simple/color",
+            "simple/grow",
+            "simple/horizontal",
+            "simple/shift",
+            "simple/toggle",
+            "intermediate/hide-on-scroll",
+            "intermediate/scroll-threshold"
           ]
         }
       ]

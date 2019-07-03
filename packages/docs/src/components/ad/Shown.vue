@@ -7,8 +7,8 @@
     props: {
       viewport: {
         type: String,
-        default: undefined
-      }
-    }
+        default: undefined,
+      },
+    },
   }
 </script>

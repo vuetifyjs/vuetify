@@ -28,7 +28,7 @@
         :color="computedColor"
         :ripple="false"
         v-bind="bind"
-        :flat="snackbar.color !== 'store'"
+        :text="snackbar.color !== 'store'"
         dark
         depressed
         @click="onClick"
@@ -52,7 +52,7 @@
 <script>
   import {
     mapMutations,
-    mapState
+    mapState,
   } from 'vuex'
 
   export default {
@@ -64,7 +64,7 @@
           return {
             href: this.snackbar.href,
             target: '_blank',
-            rel: 'noopener'
+            rel: 'noopener',
           }
         }
 
@@ -93,8 +93,8 @@
         },
         set (val) {
           this.setValue(val)
-        }
-      }
+        },
+      },
     },
 
     watch: {
@@ -105,17 +105,19 @@
         if (localStorage.getItem(this.snackbar.id)) return
 
         this.snack = true
-      }
+      },
     },
 
     async created () {
-      if (this.$ssrContext) return
+      // if (this.$ssrContext) return
 
-      const notify = await fetch('https://cdn.vuetifyjs.com/notify.json', {
-        headers: {
-          'Access-Control-Allow-Origin': '*'
-        }
-      }).then(res => res.json())
+      const notify = require('@/data/api/notify.json')
+
+      // const notify = await fetch('https://cdn.vuetifyjs.com/notify.json', {
+      //   headers: {
+      //     'Access-Control-Allow-Origin': '*'
+      //   }
+      // }).then(res => res.json())
 
       if (notify) this.setSnackbar(notify)
     },
@@ -135,8 +137,8 @@
 
         this.snackbar.handler &&
           this.snackbar.handler()
-      }
-    }
+      },
+    },
   }
 </script>
 

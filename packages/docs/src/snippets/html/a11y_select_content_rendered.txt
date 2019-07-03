@@ -1,0 +1,34 @@
+<!-- Rendered `v-select` content HTML Output -->
+
+<div
+  role="listbox"
+  tabindex="-1"
+>
+  <div
+    aria-labelledby="foo-list-item-12"
+    aria-selected="true"
+    class="v-list-item"
+    role="option"
+    tabindex="0"
+  >
+    <div
+      class="v-list-item__title"
+      id="foo-list-item-12"
+    >
+      Foo
+    </div>
+  <div
+    aria-labelledby="bar-list-item-13"
+    aria-selected="false"
+    class="v-list-item"
+    role="option"
+    tabindex="0"
+  >
+    <div
+      class="v-list-item__title"
+      id="bar-list-item-13"
+    >
+      Bar
+    </div>
+  </div>
+</div>

@@ -9,9 +9,9 @@
         v-if="typeof item === 'number'"
         :key="`divider-${i}`"
       >
-        <span slot="opposite">
-          Completed
-        </span>
+        <template v-slot:opposite>
+          <span>Completed</span>
+        </template>
       </v-timeline-item>
       <v-timeline-item
         v-else-if="index == null || index >= i"
@@ -21,11 +21,12 @@
         :small="item.complete || item.small"
         fill-dot
       >
-        <strong
-          slot="opposite"
-          :class="index === i ? 'primary--text' : undefined"
-          v-text="item.caption"
-        />
+        <template v-slot:opposite>
+          <strong
+            :class="index === i ? 'primary--text' : undefined"
+            v-text="item.caption"
+          />
+        </template>
         <v-card
           :class="`elevation-${item.value ? 8 : 1}`"
           :hover="!item.complete"
@@ -33,9 +34,9 @@
           @click.native="item.value = !item.value"
         >
           <v-card-title class="py-0 pr-2">
-            <span
+            <doc-markdown
               class="body-2"
-              v-text="item.title"
+              :code="item.title"
             />
             <v-spacer />
             <v-btn
@@ -44,7 +45,7 @@
               :input-value="item.value"
               :ripple="false"
               class="font-weight-light ma-0"
-              flat
+              text
             >
               <span
                 class="mr-2"
@@ -59,6 +60,15 @@
             <div v-if="(index != null && index >= i) || item.value">
               <v-card-text>
                 <doc-markdown :code="item.text" />
+
+                <template v-if="item.features">
+                  <div class="mt-3" />
+
+                  <template v-for="(features, key, index) in item.features">
+                    <doc-markdown :key="`title-${index}`" :code="key" />
+                    <doc-markdown :key="`list-${index}`" :code="features" />
+                  </template>
+                </template>
               </v-card-text>
             </div>
           </v-expand-transition>
@@ -72,25 +82,25 @@
   const types = {
     release: {
       icon: 'mdi-package-variant-closed',
-      color: 'indigo lighten-1'
+      color: 'indigo lighten-1',
     },
     packages: {
       icon: 'mdi-server-network',
       color: 'red lighten-2',
-      small: true
+      small: true,
     },
     site: {
       icon: 'mdi-content-cut',
       color: 'blue-grey',
-      small: true
-    }
+      small: true,
+    },
   }
 
   export default {
     data: () => ({
       index: null,
       interval: null,
-      items: []
+      items: [],
     }),
 
     mounted () {
@@ -98,15 +108,18 @@
         const type = types[item.type]
         return {
           ...type,
-          ...item
+          ...item,
         }
       }).reverse()
-    }
+    },
   }
 </script>
 
-<style lang="stylus">
-  #roadmap .v-timeline-item__body
-    p
-      margin: 0
+<style lang="sass">
+#roadmap
+  .v-timeline-item__body p
+    margin: 0
+
+  .markdown > h3
+    margin-bottom: 8px
 </style>

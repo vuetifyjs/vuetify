@@ -12,7 +12,7 @@
           v-model="search"
           prepend-inner-icon="mdi-comment-search"
           label="Search"
-          box
+          filled
           single-line
           clearable
         />
@@ -24,17 +24,18 @@
         <v-data-iterator
           :items="gotchas"
           :search.sync="search"
-          content-class="v-data-iterator--faq"
-          hide-actions
+          class="v-data-iterator--faq"
+          hide-default-footer
+          disable-pagination
         >
-          <template slot="item" slot-scope="{ item: gotcha, index }">
+          <template v-slot:item="{ item: gotcha, index }">
             <div class="mb-5">
               <core-goto :id="`question-${index + 1}`">
                 <doc-markdown :code="gotcha.q" />
               </core-goto>
-              <v-paper
+              <v-card
                 class="pa-3"
-                elevation="1"
+                outlined
               >
                 <doc-markdown :code="gotcha.a" />
 
@@ -48,7 +49,7 @@
                   :value="gotcha.s"
                   class="mb-0 mt-3"
                 />
-              </v-paper>
+              </v-card>
             </div>
           </template>
         </v-data-iterator>
@@ -62,7 +63,7 @@
     name: 'FrequentlyAskedQuestions',
 
     data: () => ({
-      search: null
+      search: null,
     }),
 
     computed: {
@@ -83,19 +84,16 @@
             a.indexOf(search) > -1
           )
         })
-      }
-    }
+      },
+    },
   }
 </script>
 
-<style lang="stylus">
-.v-data-iterator--faq {
-  p {
-    margin: 0;
-  }
-}
+<style lang="sass">
+.v-data-iterator--faq
+  p
+    margin: 0
 
-.text-decoration-none {
-  text-decoration: none;
-}
+.text-decoration-none
+  text-decoration: none
 </style>

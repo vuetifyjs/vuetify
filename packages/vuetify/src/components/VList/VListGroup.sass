@@ -1,0 +1,83 @@
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+@import './_mixins.sass'
+
+// Element
+.v-list-group
+  .v-list-item__icon.v-list-group__header__append-icon
+    min-width: 48px
+    justify-content: flex-end
+    margin-left: 0
+
+.v-list-group--sub-group
+  align-items: center
+  display: flex
+  flex-wrap: wrap
+
+.v-list-group__header
+  align-items: center
+  cursor: pointer
+  display: flex
+  flex: 1 1 auto
+  outline: none
+  padding: 0 16px
+  position: relative
+  user-select: none
+
+  &.v-list-item--active:not(:hover):not(:focus):before
+    display: none
+
+.v-list-group__items
+  flex: 1 1 auto
+
+.v-list-group--active > .v-list-group__header
+  > .v-list-group__header__append-icon .v-icon
+    transform: rotate(-180deg)
+
+  &.v-list-group__header--sub-group
+    > .v-list-group__header__prepend-icon .v-icon
+      transform: rotate(-180deg)
+
+
+  .v-list-item,
+  .v-list-item__content,
+  .v-list-group__header__prepend-icon .v-icon
+    color: inherit
+
+.v-list-group--sub-group
+  .v-list-item__action,
+  .v-list-item__avatar,
+  .v-list-item__icon
+    &:first-child
+      margin-right: 16px
+
+  .v-list-group__header
+    padding-left: 32px
+
+  .v-list-group__items
+    .v-list-item
+      padding-left: 40px
+
+  &.v-list-group--active
+    .v-list-item__icon.v-list-group__header__prepend-icon .v-icon
+      transform: rotate(-180deg)
+
+.v-list-group--no-action
+  > .v-list-group__items > div > .v-list-item
+    padding-left: 72px
+
+  &.v-list-group--sub-group
+    > .v-list-group__items > div > .v-list-item
+      padding-left: 88px
+
+.v-list--dense
+  .v-list-group--sub-group .v-list-group__header
+    padding-left: 24px
+
+  .v-list-group--no-action
+    > .v-list-group__items > div > .v-list-item
+      padding-left: 64px
+
+    &.v-list-group--sub-group
+      > .v-list-group__items > div > .v-list-item
+        padding-left: 80px

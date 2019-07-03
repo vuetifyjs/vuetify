@@ -1,13 +1,14 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VSparkline",
   "children": [
     {
       "type": "section",
       "children": [
         {
           "type": "usage",
-          "value": "playground"
+          "value": "usage"
         }
       ]
     },
@@ -24,12 +25,34 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "heartRate",
-            "dashboardCard",
-            "salesCard",
-            "fill"
+            "simple/fill",
+            "intermediate/heart-rate",
+            "intermediate/dashboard-card",
+            "intermediate/sales-card"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/cards",
+            "components/sheets",
+            "components/expansion-panels"
           ]
         }
       ]

@@ -18,7 +18,7 @@
   // Utilities
   import {
     mapGetters,
-    mapState
+    mapState,
   } from 'vuex'
   import { parseLink } from '@/util/helpers'
 
@@ -26,7 +26,7 @@
     computed: {
       ...mapGetters('documentation', [
         'namespace',
-        'page'
+        'page',
       ]),
       ...mapState('route', ['params']),
       contributionGuide () {
@@ -45,11 +45,11 @@
       contributionPageLink () {
         const file = `${this.params.namespace}/${this.page}.json`
         return `https://github.com/vuetifyjs/vuetify/tree/master/packages/docs/src/data/pages/${file}`
-      }
+      },
     },
 
     methods: {
-      parseLink
-    }
+      parseLink,
+    },
   }
 </script>

@@ -22,13 +22,13 @@
   export default {
     data () {
       return {
-        text: ''
+        text: '',
       }
     },
     methods: {
       appendIconCallback () {},
-      prependIconCallback () {}
-    }
+      prependIconCallback () {},
+    },
   }
 </script>
 

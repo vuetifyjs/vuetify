@@ -1,0 +1,46 @@
+{
+  "header": "# Badges",
+  "headerText": "The `v-badge` component superscripts or subscripts an avatar-like icon or text onto content to highlight information to a user or to just draw attention to a specific element. Content within the badge usually contains numbers or icons.",
+  "examples": {
+    "usage": {
+      "desc": "Badges in their simplest form display to the upper right of the content that it wraps and requires the badge slot."
+    },
+    "bottom": {
+      "header": "### Bottom",
+      "desc": "The `bottom` prop will place the badge as a subscript to the wrapped content. Can be used with `left` prop to achieve a bottom left position."
+    },
+    "left": {
+      "header": "### Left",
+      "desc": "The `left` prop will place the badge to the left of the wrapped content. Can be used with `bottom` prop to achieve a bottom left position."
+    },
+    "overlap": {
+      "header": "### Overlap",
+      "desc": "The `overlap` prop will cause the badge to overlap its content."
+    },
+    "visibility": {
+      "header": "### Visibility",
+      "desc": "`v-badge`'s visibility can be controlled by binding `v-model` and setting it to true or false programmatically."
+    },
+    "inline": {
+      "header": "### Inline",
+      "desc": "Badges can also be placed inline with text."
+    },
+    "icon": {
+      "header": "### Icon",
+      "desc": "The badge can use all of the currently supported icon sets."
+    },
+    "hover": {
+      "header": "### Show-on-hover",
+      "desc": "You can do many things with visibility control, for example, show badge on hover."
+    },
+    "dynamic": {
+      "header": "### Dynamic notifications",
+      "desc": "You can incorporate badges with dynamic content to make things such as a notification system."
+    }
+  },
+  "props": {
+    "bottom": "Mixins.Positionable.props.bottom",
+    "left": "Mixins.Positionable.props.left",
+    "transition": "Mixins.Transitionable.props.transition"
+  }
+}

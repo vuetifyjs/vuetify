@@ -23,15 +23,16 @@
           chips
           label="I use a scoped slot"
         >
-          <template slot="selection" slot-scope="data">
+          <template v-slot:selection="data">
             <v-chip
               :key="JSON.stringify(data.item)"
-              :selected="data.selected"
+              v-bind="data.attrs"
+              :input-value="data.selected"
               :disabled="data.disabled"
-              class="v-chip--select-multi "
-              @input="data.parent.selectItem(data.item)"
+              @click.stop="data.parent.selectedIndex = data.index"
+              @click:close="data.parent.selectItem(data.item)"
             >
-              <v-avatar class="accent white--text">
+              <v-avatar class="accent white--text" left>
                 {{ data.item.slice(0, 1).toUpperCase() }}
               </v-avatar>
               {{ data.item }}
@@ -60,9 +61,9 @@
           'Programming',
           'Design',
           'Vue',
-          'Vuetify'
-        ]
+          'Vuetify',
+        ],
       }
-    }
+    },
   }
 </script>

@@ -1,7 +1,7 @@
 <template>
-  <v-toolbar
+  <v-app-bar
     id="app-toolbar"
-    :class="`elevation-${isHome ? 0 : 6}`"
+    :elevate-on-scroll="isHome"
     app
     clipped-left
     clipped-right
@@ -10,14 +10,18 @@
     fixed
     height="58"
   >
-    <v-toolbar-side-icon
+    <v-app-bar-nav-icon
       v-if="!isHome"
       :aria-label="$t('Vuetify.AppToolbar.menu')"
       class="hidden-lg-and-up"
       @click="toggleDrawer"
     />
 
-    <router-link :to="{ name: 'home/Home' }">
+    <router-link
+      :to="{ name: 'home/Home' }"
+      aria-label="Vuetify Home Page"
+      title="Vuetify Home Page"
+    >
       <v-img
         alt="Vuetify Logo"
         src="https://cdn.vuetifyjs.com/images/logos/v-alt.svg"
@@ -43,27 +47,28 @@
           }
         }"
         class="hidden-xs-only"
-        flat
+        text
         style="min-width: 48px;"
       >
         <span class="hidden-sm-and-down">{{ $t('Vuetify.AppToolbar.documentation' ) }}</span>
         <v-icon class="hidden-md-and-up">mdi-file-document-box</v-icon>
       </v-btn>
       <core-store />
+      <core-enterprise />
       <core-supports />
       <core-ecosystems />
       <core-versions />
       <core-locales />
       <core-pwa-prompt />
     </v-toolbar-items>
-  </v-toolbar>
+  </v-app-bar>
 </template>
 
 <script>
   // Utilities
   import {
     mapMutations,
-    mapState
+    mapState,
   } from 'vuex'
   import languages from '@/data/i18n/languages.json'
 
@@ -71,14 +76,14 @@
     name: 'CoreToolbar',
 
     data: vm => ({
-      languages
+      languages,
     }),
 
     computed: {
       ...mapState('route', ['name', 'params']),
       isHome () {
         return this.name === 'home/Home'
-      }
+      },
     },
 
     methods: {
@@ -89,26 +94,26 @@
           .slice(2)
           .join('/')
         window.location.href = `${window.location.origin}/releases/${release}/#/${path}`
-      }
-    }
+      },
+    },
   }
 </script>
 
-<style lang="stylus">
-  #app-toolbar
-    .v-toolbar__title
-      margin-left .5em
-      font-weight 300
-      font-size 21px
-      position relative
-      top 1px
+<style lang="sass">
+#app-toolbar
+  .v-toolbar__title
+    margin-left: .5em
+    font-weight: 300
+    font-size: 21px
+    position: relative
+    top: 1px
 
-    .v-toolbar__items
-      .v-btn
-        text-transform capitalize
-        font-size 16px
-        font-weight 300
+  .v-toolbar__items
+    .v-btn
+      text-transform: capitalize
+      font-size: 16px
+      font-weight: 300
 
-    .v-toolbar__extension
-      padding: 0
+  .v-toolbar__extension
+    padding: 0
 </style>

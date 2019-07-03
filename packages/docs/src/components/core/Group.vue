@@ -5,10 +5,13 @@
     :sub-group="subGroup"
     no-action
   >
-    <core-item
-      slot="activator"
-      :text="item.text"
-    />
+    <template v-slot:activator>
+      <v-list-item-content class="v-list-group__activator">
+        <v-list-item-title>
+          <doc-markdown>{{ item.text }}</doc-markdown>
+        </v-list-item-title>
+      </v-list-item-content>
+    </template>
     <template v-for="(child, i) in children">
       <core-sub-group
         v-if="child.group != null"
@@ -42,25 +45,25 @@
         default: () => ({
           text: '',
           group: '',
-          children: []
-        })
+          children: [],
+        }),
       },
       subGroup: {
         type: Boolean,
-        default: false
-      }
+        default: false,
+      },
     },
 
     computed: {
       children () {
         return this.item.children.map(item => ({
           ...item,
-          to: `${this.item.group}/${item.to}`
+          to: `${this.item.group}/${item.to}`,
         }))
       },
       group () {
         return this.genGroup(this.item.children)
-      }
+      },
     },
 
     methods: {
@@ -76,7 +79,13 @@
 
           return group
         }).join('|')
-      }
-    }
+      },
+    },
   }
 </script>
+
+<style>
+.v-list-group__activator p {
+  margin-bottom: 0;
+}
+</style>

@@ -1,0 +1,46 @@
+@import '../../styles/styles.sass'
+@import './_variables'
+
+// Theme
++theme(v-breadcrumbs) using ($material)
+  .v-breadcrumbs__divider, .v-breadcrumbs__item--disabled
+    color: map-deep-get($material, 'text', 'disabled')
+
+// Block
+.v-breadcrumbs
+  align-items: center
+  display: flex
+  flex-wrap: wrap
+  flex: $breadcrumbs-flex
+  list-style-type: none
+  margin: $breadcrumbs-margin
+  padding: $breadcrumbs-padding
+
+  li
+    align-items: center
+    display: inline-flex
+    font-size: $breadcrumbs-item-font-size
+
+    .v-icon
+      font-size: $breadcrumbs-item-large-font-size
+
+    &:nth-child(even)
+      padding: $breadcrumbs-even-child-padding
+
+// Element
+.v-breadcrumbs__item
+  align-items: center
+  display: inline-flex
+  text-decoration: none
+  transition: $primary-transition
+
+  &--disabled
+    pointer-events: none
+
+// Modifier
+.v-breadcrumbs--large
+  li
+    font-size: $breadcrumbs-item-large-font-size
+
+    .v-icon
+      font-size: $breadcrumbs-item-large-font-size

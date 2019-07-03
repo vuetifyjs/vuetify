@@ -4,7 +4,7 @@
 "preserve_hierarchy": true
 "files": [
   {
-    "source": "en-US\\**\\*.json",
+    "source": "en\\**\\*.json",
     "translation": "%locale%\\**\\%original_file_name%",
   }
 ]

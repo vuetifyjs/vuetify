@@ -12,7 +12,7 @@
         pa-0
       >
         <supporter-group
-          v-if="tier >= 1"
+          v-if="tier.includes(1)"
           :group="supporters.diamond"
           :title="!hideTitles ? 'Diamond' : undefined"
           :class="classes"
@@ -21,14 +21,14 @@
         />
 
         <supporter-group
-          v-if="tier >= 2"
+          v-if="tier.includes(2)"
           :group="supporters.palladium"
           :title="!hideTitles ? 'Palladium' : undefined"
           :class="classes"
         />
 
         <supporter-group
-          v-if="tier >= 3"
+          v-if="tier.includes(3)"
           :group="supporters.gold"
           :title="!hideTitles ? 'Gold' : undefined"
           :class="classes"
@@ -36,7 +36,7 @@
         />
 
         <supporter-group
-          v-if="tier >= 4"
+          v-if="tier.includes(4)"
           :group="supporters.affiliates"
           :title="!hideTitles ? 'Affiliate' : undefined"
           :class="classes"
@@ -44,7 +44,7 @@
         />
 
         <supporter-group
-          v-if="tier >= 5"
+          v-if="tier.includes(5)"
           :group="supporters.service"
           :title="!hideTitles ? 'Service' : undefined"
           small
@@ -58,31 +58,31 @@
   // Utilities
   import {
     mapMutations,
-    mapState
+    mapState,
   } from 'vuex'
 
   export default {
     components: {
-      SupporterGroup: () => import('@/components/supporters/SupporterGroup')
+      SupporterGroup: () => import('@/components/supporters/SupporterGroup'),
     },
 
     props: {
       compact: {
         type: Boolean,
-        default: false
+        default: false,
       },
       dense: {
         type: Boolean,
-        default: false
+        default: false,
       },
       hideTitles: {
         type: Boolean,
-        default: false
+        default: false,
       },
       tier: {
-        type: [Number, String],
-        default: 10
-      }
+        type: Array,
+        default: () => ([0, 1, 2, 3, 4, 5]),
+      },
     },
 
     computed: {
@@ -90,25 +90,27 @@
       classes () {
         return {
           'mb-0': this.dense,
-          'mb-5': !this.dense
+          'mb-5': !this.dense,
         }
-      }
+      },
     },
 
     async created () {
-      if (this.$ssrContext || Object.keys(this.supporters).length) return
+      // if (this.$ssrContext || Object.keys(this.supporters).length) return
 
-      const supporters = await fetch('https://cdn.vuetifyjs.com/supporters.json', {
-        headers: {
-          'Access-Control-Allow-Origin': '*'
-        }
-      }).then(res => res.json())
+      const supporters = require('@/data/api/supporters.json')
+
+      // const supporters = await fetch('https://cdn.vuetifyjs.com/supporters.json', {
+      //   headers: {
+      //     'Access-Control-Allow-Origin': '*'
+      //   }
+      // }).then(res => res.json())
 
       if (supporters) this.setSupporters(supporters)
     },
 
     methods: {
-      ...mapMutations('app', ['setSupporters'])
-    }
+      ...mapMutations('app', ['setSupporters']),
+    },
   }
 </script>

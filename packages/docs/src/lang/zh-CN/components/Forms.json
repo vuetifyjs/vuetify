@@ -1,19 +1,12 @@
 {
   "header": "表单",
   "headerText": "在表单验证方面，Vuetify拥有集成了众多的功能，想要使用第三方验证插件？您可以开箱即用Vee-validate和Vuelidate。",
-  "components": ["v-form"],
   "examples": {
-    "basicValidation": {
-      "header": "VForm - 基本验证",
-      "desc": ""
-    },
     "validationWithSubmitAndClear": {
-      "header": "VForm - 提交和清除时验证和",
-      "desc": ""
+      "header": "VForm - 提交和清除时验证和"
     },
     "vuelidate": {
-      "header": "验证",
-      "desc": ""
+      "header": "验证"
     },
     "veeValidate": {
       "header": "Vee-validate",

@@ -23,16 +23,16 @@
       Hero: () => import('./components/Hero'),
       MadeWithVuetify: () => import('./components/MadeWithVuetify'),
       Sponsors: () => import('./components/Sponsors'),
-      HomeFooter: () => import('./components/Footer')
-    }
+      HomeFooter: () => import('./components/Footer'),
+    },
   }
 </script>
 
-<style lang="stylus">
-  #home
-    .v-card {
-      border-radius: 6px;
-    }
-  .mono
-    font-family: 'Roboto Mono', monospace !important
+<style lang="sass">
+#home
+  .v-card
+    border-radius: 6px
+
+.mono
+  font-family: 'Roboto Mono', monospace !important
 </style>

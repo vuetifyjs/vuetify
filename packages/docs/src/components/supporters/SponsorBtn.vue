@@ -5,7 +5,8 @@
     :href="href"
     :target="href ? '_blank' : undefined"
     color="primary"
-    outline
+    outlined
+    rounded
     rel="noopener"
     v-on="$listeners"
   >
@@ -25,14 +26,14 @@
         default: () => ({
           params: {
             namespace: 'getting-started',
-            page: 'sponsors-and-backers'
-          }
-        })
+            page: 'sponsors-and-backers',
+          },
+        }),
       },
       href: {
         type: String,
-        default: undefined
-      }
-    }
+        default: undefined,
+      },
+    },
   }
 </script>

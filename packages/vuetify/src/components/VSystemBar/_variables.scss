@@ -1,0 +1,7 @@
+$system-bar-font-size: map-deep-get($headings, 'body-2', 'size') !default;
+$system-bar-font-weight: map-deep-get($headings, 'body-2', 'weight') !default;
+$system-bar-icon-font-size: map-deep-get($headings, 'subtitle-1', 'size') !default;
+$system-bar-padding: 0 8px !default;
+$system-bar-icon-margin-right: 4px !default;
+$system-bar-window-icon-margin-right: 8px !default;
+$system-bar-window-icon-font-size: map-deep-get($headings, 'h6', 'size') !default;

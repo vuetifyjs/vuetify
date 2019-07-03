@@ -1,0 +1,49 @@
+{
+  "header": "# Color pickers",
+  "headerText": "The `v-color-picker` allows you to select a color using a variety of input methods.",
+  "examples": {
+    "usage": {
+      "desc": ""
+    },
+    "model": {
+      "header": "### Model",
+      "desc": "The `v-color-picker` uses the `v-model` prop to control the color displayed. It supports hex strings such as **#FF00FF** and **#FF00FF00**, and objects representing **RGBA**, **HSLA** and **HSVA** values."
+    },
+    "swatches": {
+      "header": "### Swatches",
+      "desc": "Using the `show-swatches` prop you can display an array of color swatches that users can pick from. It is also possible to customize what colors are shown using the `swatches` prop. You can also set the max height of the swatches section with the `swatches-max-height` prop."
+    },
+    "inputs": {
+      "header": "### Inputs",
+      "desc": "The number inputs can be hidden with the `hide-inputs` prop. You can also hide the mode switch icon with the `hide-mode-switch` prop. The mode can also be controlled externally through the `mode` prop."
+    },
+    "canvas": {
+      "header": "### Canvas",
+      "desc": "The canvas can be hidden with the `hide-canvas` prop, and you can set its height with the prop `canvas-height`. The size of the selection dot can be controlled with the `dot-size` prop."
+    }
+  },
+  "props": {
+    "v-color-picker": {
+      "canvasHeight": "Height of canvas",
+      "disabled": "Disables picker",
+      "dotSize": "Changes the size of the selection dot on the canvas",
+      "flat": "Removes elevation",
+      "hideCanvas": "Hides canvas",
+      "hideInputs": "Hides inputs",
+      "hideModeSwitch": "Hides mode switch",
+      "mode": "Sets mode of inputs. Available modes are 'rgba', 'hsla', and 'hexa'. Can be synced with the `.sync` modifier.",
+      "showSwatches": "Displays color swatches",
+      "swatches": "Sets the available color swatches to select from",
+      "swatchesMaxHeight": "Sets the maximum height of the swatches section",
+      "value": "Current color. This can be either a string representing a hex color, or an object representing a RGBA, HSLA, or HSVA value",
+      "width": "Sets the width of the color picker"
+    }
+  },
+  "events": {
+    "v-color-picker": {
+      "input": "Selected color. Depending on what you passed to the `value` prop this is either a string or an object",
+      "update:color": "Selected color. This is the internal representation of the color, containing all values.",
+      "update:mode": "Selected mode"
+    }
+  }
+}

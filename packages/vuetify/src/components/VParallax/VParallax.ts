@@ -1,38 +1,40 @@
 // Style
-import '../../stylus/components/_parallax.styl'
+import './VParallax.sass'
 
 // Mixins
 import Translatable from '../../mixins/translatable'
 
 // Types
-import Vue from 'vue'
 import { VNode, VNodeData } from 'vue/types/vnode'
-import mixins, { ExtractVue } from '../../util/mixins'
+import mixins from '../../util/mixins'
 
-interface options extends Vue {
+const baseMixins = mixins(
+  Translatable
+)
+interface options extends InstanceType<typeof baseMixins> {
   $refs: {
     img: HTMLImageElement
   }
 }
 
 /* @vue/component */
-export default mixins<options & ExtractVue<typeof Translatable>>(Translatable).extend({
+export default baseMixins.extend<options>().extend({
   name: 'v-parallax',
 
   props: {
     alt: {
       type: String,
-      default: ''
+      default: '',
     },
     height: {
       type: [String, Number],
-      default: 500
+      default: 500,
     },
-    src: String
+    src: String,
   },
 
   data: () => ({
-    isBooted: false
+    isBooted: false,
   }),
 
   computed: {
@@ -40,15 +42,9 @@ export default mixins<options & ExtractVue<typeof Translatable>>(Translatable).e
       return {
         display: 'block',
         opacity: this.isBooted ? 1 : 0,
-        transform: `translate(-50%, ${this.parallax}px)`
+        transform: `translate(-50%, ${this.parallax}px)`,
       }
-    }
-  },
-
-  watch: {
-    parallax () {
-      this.isBooted = true
-    }
+    },
   },
 
   mounted () {
@@ -70,10 +66,12 @@ export default mixins<options & ExtractVue<typeof Translatable>>(Translatable).e
           this.listeners()
         }, false)
       }
+
+      this.isBooted = true
     },
     objHeight () {
       return this.$refs.img.naturalHeight
-    }
+    },
   },
 
   render (h): VNode {
@@ -82,27 +80,27 @@ export default mixins<options & ExtractVue<typeof Translatable>>(Translatable).e
       style: this.styles,
       attrs: {
         src: this.src,
-        alt: this.alt
+        alt: this.alt,
       },
-      ref: 'img'
+      ref: 'img',
     }
 
     const container = h('div', {
-      staticClass: 'v-parallax__image-container'
+      staticClass: 'v-parallax__image-container',
     }, [
-      h('img', imgData)
+      h('img', imgData),
     ])
 
     const content = h('div', {
-      staticClass: 'v-parallax__content'
+      staticClass: 'v-parallax__content',
     }, this.$slots.default)
 
     return h('div', {
       staticClass: 'v-parallax',
       style: {
-        height: `${this.height}px`
+        height: `${this.height}px`,
       },
-      on: this.$listeners
+      on: this.$listeners,
     }, [container, content])
-  }
+  },
 })

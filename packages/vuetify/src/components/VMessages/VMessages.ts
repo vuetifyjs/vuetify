@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_messages.styl'
+import './VMessages.sass'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
@@ -17,8 +17,8 @@ export default mixins(Colorable, Themeable).extend({
   props: {
     value: {
       type: Array,
-      default: () => ([])
-    } as PropValidator<string[]>
+      default: () => ([]),
+    } as PropValidator<string[]>,
   },
 
   methods: {
@@ -27,8 +27,8 @@ export default mixins(Colorable, Themeable).extend({
         staticClass: 'v-messages__wrapper',
         attrs: {
           name: 'message-transition',
-          tag: 'div'
-        }
+          tag: 'div',
+        },
       }, this.value.map(this.genMessage))
     },
     genMessage (message: string, key: number) {
@@ -36,16 +36,16 @@ export default mixins(Colorable, Themeable).extend({
         staticClass: 'v-messages__message',
         key,
         domProps: {
-          innerHTML: message
-        }
+          innerHTML: message,
+        },
       })
-    }
+    },
   },
 
   render (h): VNode {
     return h('div', this.setTextColor(this.color, {
       staticClass: 'v-messages',
-      class: this.themeClasses
+      class: this.themeClasses,
     }), [this.genChildren()])
-  }
+  },
 })

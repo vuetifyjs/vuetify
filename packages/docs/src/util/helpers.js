@@ -1,6 +1,6 @@
 // Must be called in Vue context
 export function goTo (id) {
-  this.$vuetify.goTo(id, { offset: -80 }).then(() => {
+  this.$vuetify.goTo(id).then(() => {
     if (!id) {
       return (document.location.hash = '')
     }
@@ -16,6 +16,7 @@ export function goTo (id) {
 export function getComponent (type) {
   switch (type) {
     case 'alert': return 'doc-alert'
+    case 'accessibility': return 'doc-accessibility'
     case 'api': return 'doc-api'
     case 'checklist': return 'doc-checklist'
     case 'example': return 'doc-example'
@@ -26,11 +27,13 @@ export function getComponent (type) {
     case 'markup': return 'doc-markup'
     case 'markdown': return 'doc-markdown'
     case 'parameters': return 'doc-parameters'
+    case 'playground': return 'doc-playground'
     case 'section': return 'doc-section'
     case 'supplemental': return 'doc-supplemental'
     case 'tree': return 'doc-tree'
     case 'up-next': return 'doc-up-next'
     case 'usage': return 'doc-usage'
+    case 'locales': return 'doc-locales'
     default: return type
   }
 }
@@ -77,4 +80,5 @@ export function genChip (item) {
   if (item.new) return 'new'
   if (item.updated) return 'updated'
   if (item.deprecated) return 'deprecated'
+  if (item.help) return 'help'
 }

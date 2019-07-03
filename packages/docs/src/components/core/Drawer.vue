@@ -1,21 +1,22 @@
 <template>
   <v-navigation-drawer
     v-model="inputValue"
-    clipped
+    :width="300"
     app
+    clipped
   >
     <v-container
       fluid
       pb-0
     >
       <div class="text-xs-center">
-        <h4 class="body-2 font-weight-bold grey--text">Premiere sponsor</h4>
-        <span class="d-block mb-3 caption grey--text text--lighten-1">
-          One spot available
+        <h4 class="title grey--text text--darken-2">Premiere sponsor</h4>
+
+        <span class="d-block mb-3 overline grey--text">
+          Your logo here
         </span>
 
         <supporters-sponsor-btn
-          large
           class="mb-4"
           href="https://www.patreon.com/join/vuetify"
         />
@@ -26,7 +27,7 @@
           ref="search"
           v-model="search"
           label="Search"
-          append-icon="search"
+          append-icon="mdi-magnify"
           clearable
           hide-details
           single-line
@@ -40,10 +41,12 @@
 
     <v-layout pa-3>
       <a
-        href="https://vuejobs.com/?utm_source=vuejobs&utm_medium=banner&utm_campaign=linking&ref=vuetifyjs.com"
-        target="_blank"
-        rel="noopener"
+        aria-label="VueJobs"
         class="d-inline-block"
+        href="https://vuejobs.com/?utm_source=vuejobs&utm_medium=banner&utm_campaign=linking&ref=vuetifyjs.com"
+        rel="noopener"
+        target="_blank"
+        title="VueJobs"
         @click="$ga.event('drawer', 'click', 'vuejobs')"
       >
         <v-img
@@ -57,9 +60,10 @@
       </a>
     </v-layout>
     <v-list
-      class="pa-0"
+      class="py-0"
       dense
       expand
+      nav
     >
       <template v-for="(item, i) in items">
         <v-subheader
@@ -94,7 +98,7 @@
   // Utilities
   import {
     mapMutations,
-    mapState
+    mapState,
   } from 'vuex'
   import kebabCase from 'lodash/kebabCase'
   import drawerItems from '@/data/drawerItems.json'
@@ -105,15 +109,15 @@
       docSearch: {},
       isSearching: false,
       drawerItems,
-      search: ''
+      search: '',
     }),
 
     computed: {
-      ...mapState('app', ['drawer']),
+      ...mapState('app', ['drawer', 'supporters']),
       children () {
         return this.item.children.map(item => ({
           ...item,
-          to: `${this.item.group}/${item.to}`
+          to: `${this.item.group}/${item.to}`,
         }))
       },
       group () {
@@ -127,11 +131,11 @@
         },
         set (val) {
           this.setDrawer(val)
-        }
+        },
       },
       items () {
         return this.drawerItems.map(this.addLanguagePrefix)
-      }
+      },
     },
 
     watch: {
@@ -142,7 +146,10 @@
         ) this.inputValue = false
       },
       inputValue (val) {
-        if (!val) this.docSearch.autocomplete.autocomplete.close()
+        if (!val) {
+          this.docSearch.autocomplete.autocomplete.close()
+          this.docSearch.autocomplete.autocomplete.setVal('')
+        }
       },
       isSearching (val) {
         this.$refs.toolbar.isScrolling = !val
@@ -155,8 +162,9 @@
       search (val) {
         if (!val) {
           this.docSearch.autocomplete.autocomplete.close()
+          this.docSearch.autocomplete.autocomplete.setVal('')
         }
-      }
+      },
     },
 
     mounted () {
@@ -172,6 +180,7 @@
 
     destroyed () {
       this.docSearch.autocomplete.autocomplete.close()
+      this.docSearch.autocomplete.autocomplete.setVal('')
     },
 
     methods: {
@@ -180,7 +189,7 @@
         const { children, subtext, ...props } = item
         const newItem = {
           ...props,
-          text: `Vuetify.AppDrawer.${item.text}`
+          text: `Vuetify.AppDrawer.${item.text}`,
         }
 
         if (children) {
@@ -201,7 +210,7 @@
           autocompleteOptions: {
             appendTo: '#app',
             hint: false,
-            debug: true
+            debug: true,
           },
           indexName: 'vuetifyjs',
           inputSelector: '#search',
@@ -211,57 +220,58 @@
             vm.search = ''
             vm.isSearching = false
             vm.$router.push(loc.pop())
-          }
+          },
         })
-      }
-    }
+      },
+    },
   }
 </script>
 
-<style lang="stylus">
-  @import '~vuetify/src/stylus/settings/_elevations.styl'
+<style lang="sass">
+@import '~vuetify/src/styles/settings/_elevations.scss'
+@import '~vuetify/src/styles/tools/_elevation.sass'
 
-  .algolia-autocomplete
-    flex: 1 1 auto
-    position: fixed !important
+.algolia-autocomplete
+  flex: 1 1 auto
+  position: fixed !important
 
-  .v-chip--x-small
-    font-family: 'Roboto', sans-serif
-    font-size: 10px
-    font-weight: 400 !important
-    height: 16px
+.v-chip--x-small
+  font-family: 'Roboto', sans-serif
+  font-size: 10px
+  font-weight: 400 !important
+  height: 16px
 
-    .v-chip__content
-      line-height: 1
-      padding: 8px
+  .v-chip__content
+    line-height: 1
+    padding: 8px
 
-  #search
-    width: 100%
+#search
+  width: 100%
 
-  #app
-    .algolia-autocomplete > span
-      left: -16px !important
-      top: 18px !important
-      elevation(6)
+#app
+  .algolia-autocomplete > span
+    left: -16px !important
+    top: 18px !important
+    @include elevation(6)
 
-      .ds-dataset-1
-        border: none !important
+    .ds-dataset-1
+      border: none !important
 
-  #app-drawer
-    img.logo
-      margin 40px 0 15px
+#app-drawer
+  img.logo
+    margin: 40px 0 15px
 
-    .diamond-sponsor
-      // todo trim down actual image file dimensions
-      height: 30px
-      margin-bottom 0.25em
+  .diamond-sponsor
+    // todo trim down actual image file dimensions
+    height: 30px
+    margin-bottom: 0.25em
 
-      aside.v-navigation-drawer ul li
-        font-size 14px
-        color: #373737
+    aside.v-navigation-drawer ul li
+      font-size: 14px
+      color: #373737
 
-      &-label
-        color #676767
-        margin: 24px 0 16px 0
-        font-size 13px
+    &-label
+      color: #676767
+      margin: 24px 0 16px 0
+      font-size: 13px
 </style>

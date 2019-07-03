@@ -1,14 +1,11 @@
 {
   "header": "Badge",
-  "headerText": "O componente `v-badge` pode conter qualquer tipo de conteúdo para destacar informações para um usuário ou apenas chamar atenção para um elemento específico.",
   "examples": {
-    "character": {
-      "header": "Caractere",
-      "desc": "Qualquer elemento pode ser usado com um marcador."
-    },
     "overlap": {
-      "header": "Sobreposição",
-      "desc": "O marcador irá sobrepor seu conteúdo ao usar a propriedade `overlap`."
+      "header": "Sobreposição"
+    },
+    "visibility": {
+      "header": "Visibilidade"
     },
     "inline": {
       "header": "Em linha",
@@ -17,15 +14,6 @@
     "icon": {
       "header": "Ícone",
       "desc": "O marcador pode usar todos os conjuntos de ícones atualmente suportados."
-    },
-    "visibility": {
-      "header": "Visibilidade",
-      "desc": "A visibilidade dos marcadores pode ser controlada usando `v-model`."
     }
-  },
-  "props": {
-    "bottom": "Mixins.Positionable.props.bottom",
-    "left": "Mixins.Positionable.props.left",
-    "transition": "Mixins.Transitionable.props.transition"
   }
 }

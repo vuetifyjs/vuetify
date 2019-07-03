@@ -20,31 +20,32 @@
 <script>
   // Utilities
   import {
-    mapGetters
+    mapGetters,
   } from 'vuex'
 
   export default {
     props: {
       value: {
         type: Array,
-        default: () => ([])
-      }
+        default: () => ([]),
+      },
     },
 
     computed: {
       ...mapGetters('documentation', [
         'namespace',
-        'page'
+        'page',
       ]),
       examples () {
         return this.value.map(example => {
-          const file = example === Object(example) ? example.file : example
+          const path = example === Object(example) ? example.file : example
+          const file = path.split('/').pop()
           return {
             header: `${this.namespace}.${this.page}.examples.${file}.header`,
-            desc: `${this.namespace}.${this.page}.examples.${file}.desc`
+            desc: `${this.namespace}.${this.page}.examples.${file}.desc`,
           }
         })
-      }
-    }
+      },
+    },
   }
 </script>

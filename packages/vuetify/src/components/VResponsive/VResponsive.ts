@@ -1,4 +1,4 @@
-import '../../stylus/components/_responsive.styl'
+import './VResponsive.sass'
 
 // Mixins
 import Measurable, { NumberOrNumberString } from '../../mixins/measurable'
@@ -14,7 +14,7 @@ export default mixins(Measurable).extend({
   name: 'v-responsive',
 
   props: {
-    aspectRatio: [String, Number] as NumberOrNumberString
+    aspectRatio: [String, Number] as NumberOrNumberString,
   },
 
   computed: {
@@ -26,32 +26,32 @@ export default mixins(Measurable).extend({
         ? { paddingBottom: (1 / this.computedAspectRatio) * 100 + '%' }
         : undefined
     },
-    __cachedSizer (): VNode | never[] {
+    __cachedSizer (): VNode | [] {
       if (!this.aspectStyle) return []
 
       return this.$createElement('div', {
         style: this.aspectStyle,
-        staticClass: 'v-responsive__sizer'
+        staticClass: 'v-responsive__sizer',
       })
-    }
+    },
   },
 
   methods: {
     genContent (): VNode {
       return this.$createElement('div', {
-        staticClass: 'v-responsive__content'
+        staticClass: 'v-responsive__content',
       }, this.$slots.default)
-    }
+    },
   },
 
   render (h): VNode {
     return h('div', {
       staticClass: 'v-responsive',
       style: this.measurableStyles,
-      on: this.$listeners
+      on: this.$listeners,
     }, [
       this.__cachedSizer,
-      this.genContent()
+      this.genContent(),
     ])
-  }
+  },
 })

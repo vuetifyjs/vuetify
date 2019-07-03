@@ -1,7 +1,8 @@
-import '../../stylus/components/_date-picker-years.styl'
+import './VDatePickerYears.sass'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import Localable from '../../mixins/localable'
 
 // Utils
 import { createNativeLocaleFormatter } from './util'
@@ -9,7 +10,7 @@ import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
 import Vue, { VNode } from 'vue'
-import { NativeLocaleFormatter } from './util/createNativeLocaleFormatter'
+import { DatePickerFormatter } from './util/createNativeLocaleFormatter'
 import { PropValidator } from 'vue/types/options'
 
 interface options extends Vue {
@@ -19,49 +20,46 @@ interface options extends Vue {
 export default mixins<options &
 /* eslint-disable indent */
   ExtractVue<[
-    typeof Colorable
+    typeof Colorable,
+    typeof Localable
   ]>
 /* eslint-enable indent */
 >(
-  Colorable
+  Colorable,
+  Localable
 /* @vue/component */
 ).extend({
   name: 'v-date-picker-years',
 
   props: {
-    format: {
-      type: Function,
-      default: null
-    } as any as PropValidator<NativeLocaleFormatter | null>,
-    locale: {
-      type: String,
-      default: 'en-us'
-    },
+    format: Function as PropValidator<DatePickerFormatter | undefined>,
     min: [Number, String],
     max: [Number, String],
     readonly: Boolean,
-    value: [Number, String]
+    value: [Number, String],
   },
 
   data () {
     return {
-      defaultColor: 'primary'
+      defaultColor: 'primary',
     }
   },
 
   computed: {
-    formatter (): NativeLocaleFormatter {
-      return this.format || createNativeLocaleFormatter(this.locale, { year: 'numeric', timeZone: 'UTC' }, { length: 4 })
-    }
+    formatter (): DatePickerFormatter {
+      return this.format || createNativeLocaleFormatter(this.currentLocale, { year: 'numeric', timeZone: 'UTC' }, { length: 4 })
+    },
   },
 
   mounted () {
-    const activeItem = this.$el.getElementsByClassName('active')[0]
-    if (activeItem) {
-      this.$el.scrollTop = activeItem.offsetTop - this.$el.offsetHeight / 2 + activeItem.offsetHeight / 2
-    } else {
-      this.$el.scrollTop = this.$el.scrollHeight / 2 - this.$el.offsetHeight / 2
-    }
+    setTimeout(() => {
+      const activeItem = this.$el.getElementsByClassName('active')[0]
+      if (activeItem) {
+        this.$el.scrollTop = activeItem.offsetTop - this.$el.offsetHeight / 2 + activeItem.offsetHeight / 2
+      } else {
+        this.$el.scrollTop = this.$el.scrollHeight / 2 - this.$el.offsetHeight / 2
+      }
+    })
   },
 
   methods: {
@@ -74,8 +72,8 @@ export default mixins<options &
         key: year,
         'class': { active },
         on: {
-          click: () => this.$emit('input', year)
-        }
+          click: () => this.$emit('input', year),
+        },
       }), formatted)
     },
 
@@ -90,13 +88,13 @@ export default mixins<options &
       }
 
       return children
-    }
+    },
   },
 
   render (): VNode {
     return this.$createElement('ul', {
       staticClass: 'v-date-picker-years',
-      ref: 'years'
+      ref: 'years',
     }, this.genYearItems())
-  }
+  },
 })

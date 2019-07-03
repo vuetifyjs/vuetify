@@ -1,0 +1,33 @@
+@import '../../styles/styles.sass'
+@import './_variables.sass'
+
+// Theme
++theme(v-chip-group) using ($material)
+  .v-chip:not(.v-chip--active)
+    color: map-deep-get($material, 'text', 'primary') !important
+
+// Block
+.v-chip-group
+  .v-chip
+    margin: $chip-group-margin
+
+  .v-chip--active
+    color: inherit
+
+    &.v-chip--no-color
+      &:after
+        opacity: .22
+
+      &:focus:after
+        opacity: .32
+
+// Element
+.v-chip-group .v-slide-group__content
+  padding: $chip-group-content-padding
+
+// Modifiers
+.v-chip-group--column
+  .v-slide-group__content
+    white-space: normal
+    flex-wrap: wrap
+    max-width: 100%

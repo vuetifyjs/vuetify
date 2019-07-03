@@ -10,6 +10,6 @@ export default {
   $_vuetify_subcomponents: {
     VBreadcrumbs,
     VBreadcrumbsItem,
-    VBreadcrumbsDivider
-  }
+    VBreadcrumbsDivider,
+  },
 }

@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VFooter",
   "children": [
     {
       "type": "section",
@@ -24,11 +25,22 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "companyFooter",
-            "indigoFooter",
-            "tealFooter"
+            "simple/absolute",
+            "simple/padless",
+            "intermediate/company-footer",
+            "intermediate/indigo-footer",
+            "intermediate/teal-footer"
           ]
         }
       ]
@@ -39,7 +51,7 @@
         {
           "type": "up-next",
           "value": [
-            "framework/grid",
+            "components/grids",
             "components/buttons",
             "components/toolbars"
           ]

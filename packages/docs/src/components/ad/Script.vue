@@ -7,21 +7,21 @@
     props: {
       id: {
         type: String,
-        default: undefined
+        default: undefined,
       },
       scriptId: {
         type: String,
-        default: undefined
+        default: undefined,
       },
       src: {
         type: String,
-        default: undefined
-      }
+        default: undefined,
+      },
     },
 
     data: () => ({
       isBooted: false,
-      script: null
+      script: null,
     }),
 
     watch: {
@@ -29,7 +29,7 @@
         clearTimeout(this.timeout)
 
         this.timeout = setTimeout(this.serve, 100)
-      }
+      },
     },
 
     mounted () {
@@ -45,7 +45,7 @@
     },
 
     methods: {
-      serve: () => {} /* noop */
-    }
+      serve: () => {}, /* noop */
+    },
   }
 </script>

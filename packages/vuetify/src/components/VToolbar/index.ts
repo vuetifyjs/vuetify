@@ -1,18 +1,22 @@
-import { createSimpleFunctional } from '../../util/helpers'
-
+// Components
 import VToolbar from './VToolbar'
-import VToolbarSideIcon from './VToolbarSideIcon'
+
+// Utilities
+import { createSimpleFunctional } from '../../util/helpers'
 
 const VToolbarTitle = createSimpleFunctional('v-toolbar__title')
 const VToolbarItems = createSimpleFunctional('v-toolbar__items')
 
-export { VToolbar, VToolbarSideIcon, VToolbarTitle, VToolbarItems }
+export {
+  VToolbar,
+  VToolbarItems,
+  VToolbarTitle,
+}
 
 export default {
   $_vuetify_subcomponents: {
     VToolbar,
     VToolbarItems,
     VToolbarTitle,
-    VToolbarSideIcon
-  }
+  },
 }

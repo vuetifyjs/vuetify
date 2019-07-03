@@ -1,0 +1,11 @@
+$expansion-panel-border-radius: 4px !default;
+$expansion-panel-active-margin: 16px !default;
+$expansion-panel-header-font-size: 0.9375rem !default;
+$expansion-panel-header-min-height: 48px !default;
+$expansion-panel-active-header-min-height: 64px !default;
+$expansion-panel-header-padding: 16px 24px !default;
+$expansion-panel-content-padding: 0 24px 16px !default;
+$expansion-panel-popout-max-width: calc(100% - #{$expansion-panel-active-margin * 2});
+$expansion-panel-popout-active-max-width: calc(100% + #{$expansion-panel-active-margin});
+$expansion-panel-inset-max-width: 100%;
+$expansion-panel-inset-active-max-width: calc(100% - #{$expansion-panel-active-margin * 2});

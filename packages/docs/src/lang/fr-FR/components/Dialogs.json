@@ -1,0 +1,37 @@
+{
+  "header": "# Dialogue",
+  "headerText": "Le composant `v-dialog` informe les utilisateurs d'une tâche spécifique et peut contenir des informations critiques, exiger des décisions ou impliquer plusieurs tâches. Utilisez des dialogs avec parcimonie parce qu'ils sont interruptifs.",
+  "examples": {
+    "usage": {
+      "desc": "Une boîte de dialogue contient deux emplacements, l'un pour son activateur et l'autre pour son contenu (par défaut). Bonne pour les politiques de confidentialité."
+    },
+    "withoutActivator": {
+      "uninverted": true
+    },
+    "modal": {
+      "uninverted": true
+    },
+    "fullscreen": {
+      "header": "### Plein écran",
+      "desc": "En raison d'un espace limité, les dialogues à écran plein peuvent être plus appropriés pour les appareils mobiles que les dialogues utilisés sur les appareils avec des écrans plus larges.",
+      "uninverted": true
+    },
+    "form": {
+      "uninverted": true
+    },
+    "scrollable": {
+      "header": "### Défilable",
+      "uninverted": true
+    },
+    "overflowed": {
+      "uninverted": true
+    },
+    "advanced": {
+      "uninverted": true
+    }
+  },
+  "props": {
+    "disabled": "Désactiver la possibilité d'ouvrir les fenêtres",
+    "width": "Définit la largeur de la boîte de dialogue"
+  }
+}

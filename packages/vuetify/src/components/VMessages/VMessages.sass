@@ -1,0 +1,22 @@
+@import '../../styles/styles.sass'
+
+/* Theme */
++theme(v-messages) using ($material)
+  color: map-deep-get($material, 'text', 'secondary')
+
+.v-messages
+  flex: 1 1 auto
+  font-size: 12px
+  min-height: 14px
+  min-width: 1px // Ensure takes up space with no messages and inside of flex
+  position: relative
+
+  +rtl()
+    text-align: right
+
+  &__message
+    line-height: normal
+    word-break: break-word
+    overflow-wrap: break-word
+    word-wrap: break-word
+    hyphens: auto

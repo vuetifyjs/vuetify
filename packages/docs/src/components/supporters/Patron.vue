@@ -1,5 +1,6 @@
 <template>
   <v-card
+    :aria-label="`Supporter ${value.name}`"
     :href="value.href"
     :width="small ? 130 : large ? 195 : 160"
     flat
@@ -9,15 +10,14 @@
     target="_blank"
     rel="noopener"
   >
-    <div>
-      <v-img
-        :alt="`Supporter ${value.name}`"
-        :class="value.dark ? 'black' : ''"
-        :height="small ? 40 : 70"
-        :src="`https://cdn.vuetifyjs.com/images/${value.logo}`"
-        contain
-      />
-    </div>
+    <v-img
+      :alt="value.name"
+      :class="value.dark ? 'black' : ''"
+      :height="small ? 40 : 70"
+      :src="`https://cdn.vuetifyjs.com/images/${value.logo}`"
+      contain
+      @click="$ga.event('patrons', 'click', value.name)"
+    />
   </v-card>
 </template>
 
@@ -26,16 +26,16 @@
     props: {
       large: {
         type: Boolean,
-        default: false
+        default: false,
       },
       small: {
         type: Boolean,
-        default: false
+        default: false,
       },
       value: {
         type: Object,
-        required: true
-      }
-    }
+        required: true,
+      },
+    },
   }
 </script>

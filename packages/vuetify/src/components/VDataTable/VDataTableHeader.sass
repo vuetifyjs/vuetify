@@ -1,0 +1,82 @@
+// Imports
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+
+// Theme
++theme(v-data-table) using ($material)
+  .v-data-table-header
+    th.sortable
+      .v-icon
+        color: rgba(map-get($material, 'fg-color'), map-get($material, 'disabledORhints-text-percent'))
+
+      &:hover
+        color: rgba(map-get($material, 'fg-color'), map-get($material, 'primary-text-percent'))
+
+      &.active
+        color: rgba(map-get($material, 'fg-color'), map-get($material, 'primary-text-percent'))
+
+        .v-icon
+          color: rgba(map-get($material, 'fg-color'), map-get($material, 'primary-text-percent'))
+
+    &__sort-badge
+      background-color: rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+      color: map-deep-get($material, 'text', 'primary')
+
+// Block
+.v-data-table-header
+  th
+    &.sortable
+      pointer-events: auto
+      cursor: pointer
+      outline: 0
+
+      .v-icon
+        display: inline-block
+        opacity: 0
+        transition: .3s map-get($transition, 'swing')
+
+    &.active
+      transform: none
+
+      .v-icon
+        opacity: 1
+
+      &.desc
+        .v-icon
+          transform: rotate(-180deg)
+
+.v-data-table-header__sort-badge
+  display: inline-flex
+  justify-content: center
+  align-items: center
+  border: 0px
+  border-radius: 50%
+  min-width: 18px
+  min-height: 18px
+  height: 18px
+  width: 18px
+
+// Mobile
+.v-data-table-header-mobile
+  th
+    height: initial
+
+.v-data-table-header-mobile__wrapper
+  display: flex
+
+  .v-select
+    margin-bottom: 8px
+    margin-left: 16px
+
+    .v-chip
+      height: 24px
+
+    .v-chip__close.desc
+      .v-icon
+        transform: rotate(-180deg)
+
+.v-data-table-header-mobile__select
+  min-width: 56px
+  display: flex
+  align-items: center
+  justify-content: center

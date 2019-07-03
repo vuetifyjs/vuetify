@@ -1,0 +1,108 @@
+// Imports
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+
+// Theme
++theme(v-data-table) using ($material)
+  background-color: map-get($material, 'cards')
+  color: map-deep-get($material, 'text', 'primary')
+
+  colgroup
+    .divider
+      border-right: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+
+  &.v-data-table--fixed-header
+    thead th
+      background: map-get($material, 'cards')
+      border-bottom: 0px !important
+      box-shadow: inset 0 -1px 0 rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+
+  thead
+    tr
+      &:last-child th
+        border-bottom: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+
+      th
+        color: rgba(map-get($material, 'text-color'), map-get($material, 'secondary-text-percent'))
+
+  tbody
+    tr
+      &:not(:last-child)
+        border-bottom: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
+
+      &.active
+        background: map-deep-get($material, 'table', 'active')
+
+// Block
+.v-data-table
+  table
+    width: 100%
+    border-collapse: collapse
+
+  td, th
+    padding: 0 16px
+
+  th
+    text-align: left
+    user-select: none
+    font-size: 12px
+    height: $data-table-regular-header-height
+
+  td
+    font-size: 14px
+    height: $data-table-regular-row-height
+
+// Elements
+.v-data-table__wrapper
+  overflow-x: auto
+  overflow-y: hidden
+
+.v-data-table__progress
+  height: auto !important
+
+  th
+    height: auto !important
+    border: none !important
+    padding: 0
+
+// Modifiers
+.v-data-table--dense
+  td
+    height: $data-table-dense-row-height
+  th
+    height: $data-table-dense-header-height
+
+.v-data-table--fixed-height
+  .v-data-table__wrapper
+    overflow-y: auto
+
+.v-data-table--fixed-header
+  .v-data-table__wrapper
+    overflow-y: auto
+
+  thead
+    th
+      position: sticky
+      top: 0
+      z-index: 2
+
+    tr:nth-child(2)
+      th
+        top: $data-table-regular-header-height
+
+  // Account for scroll bar
+  .v-table__header, .v-data-footer
+    margin-right: $data-table-scroll-bar-width
+
+.v-data-table--fixed.v-data-table--dense
+  thead
+    tr:nth-child(2)
+      th
+        top: $data-table-dense-header-height
+
+.v-data-table--mobile
+  tr, td, th
+    display: block
+
+  td, th
+    padding: 14px

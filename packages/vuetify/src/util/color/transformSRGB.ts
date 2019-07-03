@@ -1,10 +1,11 @@
-import { RGB, XYZ } from '../colorUtils'
+import { ColorInt, XYZ } from '../colorUtils'
+import { clamp } from '../../util/helpers'
 
 // For converting XYZ to sRGB
 const srgbForwardMatrix = [
   [3.2406, -1.5372, -0.4986],
   [-0.9689, 1.8758, 0.0415],
-  [0.0557, -0.2040, 1.0570]
+  [0.0557, -0.2040, 1.0570],
 ]
 
 // Forward gamma adjust
@@ -18,7 +19,7 @@ const srgbForwardTransform = (C: number): number => (
 const srgbReverseMatrix = [
   [0.4124, 0.3576, 0.1805],
   [0.2126, 0.7152, 0.0722],
-  [0.0193, 0.1192, 0.9505]
+  [0.0193, 0.1192, 0.9505],
 ]
 
 // Reverse gamma adjust
@@ -28,11 +29,7 @@ const srgbReverseTransform = (C: number): number => (
     : ((C + 0.055) / 1.055) ** 2.4
 )
 
-function clamp (value: number): number {
-  return Math.max(0, Math.min(1, value))
-}
-
-export function fromXYZ (xyz: XYZ): RGB {
+export function fromXYZ (xyz: XYZ): ColorInt {
   const rgb = Array(3)
   const transform = srgbForwardTransform
   const matrix = srgbForwardMatrix
@@ -50,7 +47,7 @@ export function fromXYZ (xyz: XYZ): RGB {
   return (rgb[0] << 16) + (rgb[1] << 8) + (rgb[2] << 0)
 }
 
-export function toXYZ (rgb: RGB): XYZ {
+export function toXYZ (rgb: ColorInt): XYZ {
   const xyz: XYZ = [0, 0, 0]
   const transform = srgbReverseTransform
   const matrix = srgbReverseMatrix

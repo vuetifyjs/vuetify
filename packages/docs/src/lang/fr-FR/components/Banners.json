@@ -1,0 +1,11 @@
+{
+  "header": "Bannière",
+  "examples": {
+    "scoped-slots": {
+      "header": "### Emplacements étendus"
+    }
+  },
+  "props": {
+    "icon": "Désigne une icône spécifique"
+  }
+}

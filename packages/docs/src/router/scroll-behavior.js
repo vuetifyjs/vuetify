@@ -1,4 +1,4 @@
-import goTo from 'vuetify/es5/components/Vuetify/goTo'
+import goTo from 'vuetify/es5/services/goto'
 import { waitForReadystate } from '../util/helpers'
 
 export default async function (to, from, savedPosition) {
@@ -9,7 +9,6 @@ export default async function (to, from, savedPosition) {
 
   if (to.hash) {
     scrollTo = to.hash
-    options.offset = -80
   } else if (savedPosition) {
     scrollTo = savedPosition.y
   }

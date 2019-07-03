@@ -1,14 +1,35 @@
 export default {
+  close: 'Close',
   dataIterator: {
-    rowsPerPageText: 'Aantal per pagina:',
-    rowsPerPageAll: 'Alles',
     pageText: '{0}-{1} van {2}',
     noResultsText: 'Geen overeenkomende resultaten gevonden',
-    nextPage: 'Volgende pagina',
-    prevPage: 'Vorige pagina'
+    loadingText: 'Loading item...',
   },
   dataTable: {
-    rowsPerPageText: 'Rijen per pagina:'
+    itemsPerPageText: 'Rijen per pagina:',
+    ariaLabel: {
+      sortDescending: ': Sorted descending. Activate to remove sorting.',
+      sortAscending: ': Sorted ascending. Activate to sort descending.',
+      sortNone: ': Not sorted. Activate to sort ascending.',
+    },
   },
-  noDataText: 'Geen gegevens beschikbaar'
+  dataFooter: {
+    itemsPerPageText: 'Aantal per pagina:',
+    itemsPerPageAll: 'Alles',
+    nextPage: 'Volgende pagina',
+    prevPage: 'Vorige pagina',
+    firstPage: 'Eerste pagina',
+    lastPage: 'Laatste pagina',
+  },
+  datePicker: {
+    itemsSelected: '{0} geselecteerd',
+  },
+  noDataText: 'Geen gegevens beschikbaar',
+  carousel: {
+    prev: 'Vorige visual',
+    next: 'Volgende visueel',
+  },
+  calendar: {
+    moreEvents: '{0} meer',
+  },
 }

@@ -1,0 +1,74 @@
+// Imports
+@import '../../styles/styles.sass'
+@import './_variables.scss'
+
+.v-badge
+  display: inline-block
+  line-height: 1
+  position: relative
+
+  &__badge
+    align-items: center
+    border-radius: $badge-border-radius
+    color: $badge-color
+    display: inline-flex
+    flex-direction: row
+    flex-wrap: wrap
+    font-size: $badge-font-size
+    height: $badge-height
+    justify-content: center
+    line-height: normal
+    min-width: $badge-width
+    padding: 0 4px
+    position: absolute
+    right: -($badge-width)
+    top: -($badge-height / 2)
+    transition: $primary-transition
+
+    .v-icon
+      font-size: $badge-font-size
+
+  &--overlap
+    .v-badge__badge
+      top: -8px
+      right: -8px
+
+    &.v-badge--left
+      .v-badge__badge
+        left: -8px
+        right: initial
+
+    &.v-badge--bottom
+      .v-badge__badge
+        bottom: -8px
+        top: initial
+
+  &--left
+    .v-badge__badge
+      left: -($badge-width)
+      right: initial
+
+  &--bottom
+    .v-badge__badge
+      bottom: -($badge-height / 2)
+      top: initial
+
+  +rtl()
+    &__badge
+      right: initial
+      left: -($badge-width)
+
+    &--overlap
+      .v-badge__badge
+        right: initial
+        left: -8px
+
+      &.v-badge--left
+        .v-badge__badge
+          right: -8px
+          left: initial
+
+    &--left
+      .v-badge__badge
+        right: -($badge-width)
+        left: initial

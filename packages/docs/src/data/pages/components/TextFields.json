@@ -1,6 +1,11 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VTextField",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/text-fields.html"
+  },
   "children": [
     {
       "type": "section",
@@ -24,12 +29,8 @@
       "type": "section",
       "children": [
         {
-          "type": "supplemental",
-          "value": [
-            {
-              "type": "components-mask-table"
-            }
-          ]
+          "type": "playground",
+          "value": "playground"
         }
       ]
     },
@@ -39,26 +40,27 @@
         {
           "type": "examples",
           "value": [
-            "singleLine",
-            "disabledAndReadonly",
-            "icon",
-            "clearable",
-            "iconEvents",
-            "iconSlots",
-            "labelSlot",
-            "characterCounter",
-            "password",
-            "validation",
-            "fullWidthWithCharacterCounter",
-            "hint",
-            "prefixesAndSuffixes",
-            "customValidation",
-            "box",
-            "solo",
-            "outline",
-            "customColors",
-            "masks",
-            "progressBar"
+            "simple/single-line",
+            "simple/shaped",
+            "simple/disabled-and-readonly",
+            "simple/icon",
+            "simple/clearable",
+            "simple/character-counter",
+            "simple/password",
+            "simple/box",
+            "simple/solo",
+            "simple/outlined",
+            "simple/custom-colors",
+            "simple/masks",
+            "simple/hint",
+            "simple/prefixes-and-suffixes",
+            "intermediate/icon-events",
+            "intermediate/icon-slots",
+            "intermediate/label-slot",
+            "intermediate/validation",
+            "intermediate/full-width-with-character-counter",
+            "intermediate/progress-bar",
+            "complex/custom-validation"
           ]
         }
       ]

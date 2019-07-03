@@ -48,37 +48,38 @@
                 top
                 right
               >
-                <v-tooltip
-                  slot="activator"
-                  bottom
-                >
-                  <v-btn
-                    slot="activator"
-                    :href="template.demoUrl.length === 1 ? `${template.demoUrl[0]}?ref=vuetifyjs.com` : undefined"
-                    icon
-                    target="_blank"
-                    rel="noopener"
-                    aria-label="View Demo"
-                  >
-                    <v-icon color="primary">mdi-eye</v-icon>
-                  </v-btn>
-                  <span v-text="$t('Themes.Premium.viewDemo')" />
-                </v-tooltip>
+                <template #activator="{ on: menu }">
+                  <v-tooltip bottom>
+                    <template #activator="{ on: tooltip }">
+                      <v-btn
+                        :href="template.demoUrl.length === 1 ? `${template.demoUrl[0]}?ref=vuetifyjs.com` : undefined"
+                        icon
+                        target="_blank"
+                        rel="noopener"
+                        aria-label="View Demo"
+                        v-on="{ ...tooltip, ...menu }"
+                      >
+                        <v-icon color="primary">mdi-eye</v-icon>
+                      </v-btn>
+                    </template>
+                    <span v-text="$t('Themes.Premium.viewDemo')" />
+                  </v-tooltip>
+                </template>
                 <v-list v-if="template.demoUrl.length > 1">
-                  <v-list-tile
+                  <v-list-item
                     v-for="([title, demo], i) in template.demoUrl"
                     :key="i"
                     :href="`${demo}?ref=vuetifyjs.com`"
                     target="_blank"
                     rel="noopener"
                   >
-                    <v-list-tile-content>
-                      <v-list-tile-title v-text="title" />
-                    </v-list-tile-content>
-                    <v-list-tile-action>
+                    <v-list-item-content>
+                      <v-list-item-title v-text="title" />
+                    </v-list-item-content>
+                    <v-list-item-action>
                       <v-icon>mdi-open-in-new</v-icon>
-                    </v-list-tile-action>
-                  </v-list-tile>
+                    </v-list-item-action>
+                  </v-list-item>
                 </v-list>
               </v-menu>
 
@@ -87,8 +88,8 @@
               <v-btn
                 :href="`${template.url}?ref=vuetifyjs.com`"
                 color="primary"
-                flat
-                outline
+                text
+                outlined
                 target="_blank"
                 rel="noopener"
                 @click="$ga.event('themes', 'click', template.title)"
@@ -108,17 +109,25 @@
     data: vm => ({
       templates: [
         {
+          title: vm.$t('Themes.Premium.templates.material-kit.title'),
+          description: vm.$t('Themes.Premium.templates.material-kit.description'),
+          src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-material-kit.png',
+          free: false,
+          url: 'https://store.vuetifyjs.com/product/material-kit-theme',
+          demoUrl: ['https://material-kit.vuetifyjs.com'],
+        },
+        {
           title: vm.$t('Themes.Premium.templates.alpha.title'),
           description: vm.$t('Themes.Premium.templates.alpha.description'),
-          src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-premium.jpg',
+          src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-alpha-theme.png',
           free: false,
-          url: 'https://store.vuetifyjs.com/product/813199294506',
+          url: 'https://store.vuetifyjs.com/product/vuetify-alpha-theme',
           demoUrl: [
             ['Construction', 'https://alpha-construction.vuetifyjs.com'],
             ['Creative', 'https://alpha-creative.vuetifyjs.com'],
             ['SaaS', 'https://alpha-saas.vuetifyjs.com'],
-            ['Ecommerce', 'https://alpha-ecommerce.vuetifyjs.com']
-          ]
+            ['Ecommerce', 'https://alpha-ecommerce.vuetifyjs.com'],
+          ],
         },
         {
           title: vm.$t('Themes.Premium.templates.dashboard.title'),
@@ -126,7 +135,7 @@
           src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-admin-dashboard.jpg',
           free: true,
           url: 'https://www.creative-tim.com/product/vuetify-material-dashboard',
-          demoUrl: ['https://demos.creative-tim.com/vuetify-material-dashboard/#/dashboard']
+          demoUrl: ['https://demos.creative-tim.com/vuetify-material-dashboard/#/dashboard'],
         },
         {
           title: vm.$t('Themes.Premium.templates.freelancer.title'),
@@ -134,7 +143,7 @@
           src: 'https://cdn.vuetifyjs.com/images/starter/freelancer.png',
           free: true,
           url: 'https://github.com/vuetifyjs/theme-freelancer',
-          demoUrl: []
+          demoUrl: [],
         },
         {
           title: vm.$t('Themes.Premium.templates.parallax.title'),
@@ -142,18 +151,18 @@
           src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-parallax-starter.png',
           free: true,
           url: 'https://github.com/vuetifyjs/parallax-starter',
-          demoUrl: ['/themes/parallax-starter']
+          demoUrl: ['/themes/parallax-starter'],
         },
         {
           title: vm.$t('Themes.Premium.templates.blog.title'),
           description: vm.$t('Themes.Premium.templates.blog.description'),
-          src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-blog-starter.png',
+          src: 'https://cdn.vuetifyjs.com/images/starter/blog.png',
           free: true,
-          url: 'https://github.com/vuetifyjs/blog-starter',
-          demoUrl: ['/themes/blog-starter']
-        }
-      ]
-    })
+          url: 'https://github.com/vuetifyjs/theme-blog',
+          demoUrl: ['https://free-blog.vuetifyjs.com'],
+        },
+      ],
+    }),
   }
 </script>
 

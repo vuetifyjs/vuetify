@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VBadge",
   "children": [
     {
       "type": "section",
@@ -24,12 +25,25 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "overlap",
-            "inline",
-            "icon",
-            "visibility"
+            "simple/bottom",
+            "simple/left",
+            "simple/overlap",
+            "simple/icon",
+            "simple/inline",
+            "simple/visibility",
+            "intermediate/hover",
+            "complex/dynamic"
           ]
         }
       ]

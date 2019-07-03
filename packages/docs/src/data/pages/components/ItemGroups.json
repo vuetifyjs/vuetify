@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VItemGroup",
   "children": [
     {
       "type": "section",
@@ -27,9 +28,22 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "post"
+            "simple/multiple",
+            "simple/mandatory",
+            "simple/active-class",
+            "intermediate/toggle-pictures",
+            "complex/post"
           ]
         }
       ]

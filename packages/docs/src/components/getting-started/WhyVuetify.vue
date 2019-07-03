@@ -40,7 +40,7 @@
                   column
                   ma-0
                 >
-                  <h2 class="text-uppercase mb-3">
+                  <h2 class="text-uppercase mb-3 text-xs-center">
                     <strong
                       class="headline font-weight-bold"
                       v-text="philosophy.title"
@@ -51,7 +51,7 @@
                     />
                   </h2>
 
-                  <div class="text-xs-justify">
+                  <div class="text-xs-center">
                     <doc-markdown :code="philosophy.caption" />
                   </div>
                 </v-layout>
@@ -78,7 +78,7 @@
                 <v-btn
                   :href="philosophy.more"
                   color="white"
-                  outline
+                  outlined
                   rel="noopener"
                   small
                   target="_blank"
@@ -97,7 +97,7 @@
 <script>
   export default {
     provide: {
-      namespace: undefined
+      namespace: undefined,
     },
 
     data: vm => ({
@@ -108,7 +108,7 @@
           subtitle: vm.$t('GettingStarted.WhyVuetify.community'),
           caption: vm.$t('GettingStarted.WhyVuetify.communityCaption'),
           src: 'https://cdn.vuetifyjs.com/images/why-vuetify/community.png',
-          more: 'https://community.vuetifyjs.com'
+          more: 'https://community.vuetifyjs.com',
         },
         {
           color: 'purple',
@@ -116,15 +116,15 @@
           subtitle: vm.$t('GettingStarted.WhyVuetify.toolkit'),
           caption: vm.$t('GettingStarted.WhyVuetify.toolkitCaption'),
           src: 'https://cdn.vuetifyjs.com/images/why-vuetify/toolkit.png',
-          more: 'https://material.io/design/'
+          more: 'https://material.io/design/',
         },
         {
-          color: 'red darken-3',
+          color: 'warning',
           title: vm.$t('GettingStarted.WhyVuetify.continuous'),
           subtitle: vm.$t('GettingStarted.WhyVuetify.updates'),
           caption: vm.$t('GettingStarted.WhyVuetify.updatesCaption'),
           src: 'https://cdn.vuetifyjs.com/images/why-vuetify/updates.png',
-          more: 'https://github.com/vuetifyjs/vuetify/releases'
+          more: 'https://github.com/vuetifyjs/vuetify/releases',
         },
         {
           color: 'teal darken-2',
@@ -132,10 +132,10 @@
           subtitle: vm.$t('GettingStarted.WhyVuetify.support'),
           caption: vm.$t('GettingStarted.WhyVuetify.supportCaption'),
           src: 'https://cdn.vuetifyjs.com/images/why-vuetify/support.png',
-          more: 'https://github.com/vuetifyjs/vuetify/pulse'
-        }
-      ]
-    })
+          more: 'https://github.com/vuetifyjs/vuetify/pulse',
+        },
+      ],
+    }),
   }
 </script>
 

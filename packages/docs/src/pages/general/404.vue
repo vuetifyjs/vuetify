@@ -9,7 +9,7 @@
         <p>The page you were looking for does not exist</p>
         <v-btn
           :to="`/${lang}/getting-started/quick-start`"
-          outline
+          outlined
           color="primary"
         >
           Get me out of here!
@@ -26,12 +26,12 @@
     props: {
       lang: {
         type: String,
-        default: 'en'
-      }
+        default: 'en',
+      },
     },
 
     created () {
       this.$ssrContext && this.$ssrContext.res.status(404)
-    }
+    },
   }
 </script>

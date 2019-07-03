@@ -5,31 +5,31 @@
   // Utilities
   import {
     mapGetters,
-    mapState
+    mapState,
   } from 'vuex'
 
   export default {
     props: {
       code: {
         type: [Array, String],
-        default: ''
+        default: '',
       },
       source: {
         type: String,
-        default: ''
+        default: '',
       },
       tag: {
         type: String,
-        default: 'div'
-      }
+        default: 'div',
+      },
     },
 
     computed: {
       ...mapGetters('documentation', [
         'namespace',
-        'page'
+        'page',
       ]),
-      ...mapState('route', ['params'])
+      ...mapState('route', ['params']),
     },
 
     render (h) {
@@ -37,7 +37,7 @@
 
       if (!this.code) {
         if (this.$slots.default) {
-          code = this.$slots.default[0].text
+          code = this.$slots.default[0].text.trim()
         }
 
         if (code.indexOf('.') > -1) {
@@ -65,30 +65,30 @@
       return h(this.tag, {
         staticClass: 'markdown',
         class: {
-          'mb-3': wantsList
+          'mb-3': wantsList,
         },
-        domProps: { innerHTML: marked(code) }
+        domProps: { innerHTML: marked(code) },
       })
-    }
+    },
   }
 </script>
 
-<style lang="stylus">
-h4.markdown > p {
-  margin-bottom: 0;
-}
+<style lang="sass">
+.markdown:last-child p,
+.markdown:last-child
+  margin-bottom: 0 !important
 
-.markdown--link {
-  text-decoration: none;
+.markdown--link
+  text-decoration: none
 
-  &:hover {
-    opacity: 0.8;
-  }
+  &:hover
+    opacity: 0.8
 
-  .v-icon {
-    font-size: 14px;
-    margin-left: 4px;
-    vertical-align: baseline;
-  }
-}
+  .v-icon
+    font-size: 14px
+    margin-left: 4px
+    vertical-align: baseline
+
+.markdown > h4
+  margin: 8px 0
 </style>

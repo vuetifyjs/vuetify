@@ -1,6 +1,11 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VDataTable",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/data-tables.html"
+  },
   "children": [
     {
       "type": "section",
@@ -16,10 +21,16 @@
       "children": [
         {
           "type": "api",
-          "value": [
-            "v-data-table",
-            "v-edit-dialog"
-          ]
+          "value": ["v-data-table", "v-edit-dialog"]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "playground",
+          "value": "playground"
         }
       ]
     },
@@ -29,22 +40,25 @@
         {
           "type": "examples",
           "value": [
-            "noData",
-            "headers",
-            "headerCell",
-            "progress",
-            "footer",
-            "expand",
-            "pageText",
-            "select",
-            "search",
-            "customIcons",
-            "paginate",
-            "sort",
-            "server",
-            "headerless",
-            "editdialog",
-            "crud"
+            "simple/select",
+            "simple/group",
+            "simple/multi-sort",
+            "simple/search",
+            "simple/headerless",
+            "simple/virtualized",
+            "simple/loading",
+            "simple/dense",
+            "simple/footer-props",
+            "intermediate/slots",
+            "intermediate/expand",
+            "intermediate/customize-header",
+            "intermediate/customize-rows",
+            "intermediate/customize-footer",
+            "intermediate/paginate",
+            "intermediate/sort",
+            "intermediate/server",
+            "complex/edit-dialog",
+            "complex/crud"
           ]
         }
       ]
@@ -56,7 +70,7 @@
           "type": "up-next",
           "value": [
             "components/data-iterator",
-            "components/paginations",
+            "components/simple-tables",
             "components/lists"
           ]
         }

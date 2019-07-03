@@ -11,8 +11,8 @@
       <v-flex xs12 sm6 d-flex>
         <v-select
           :items="items"
-          box
-          label="Box style"
+          filled
+          label="Filled style"
         ></v-select>
       </v-flex>
 
@@ -20,7 +20,7 @@
         <v-select
           :items="items"
           label="Outline style"
-          outline
+          outlined
         ></v-select>
       </v-flex>
 
@@ -38,7 +38,7 @@
 <script>
   export default {
     data: () => ({
-      items: ['Foo', 'Bar', 'Fizz', 'Buzz']
-    })
+      items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+    }),
   }
 </script>

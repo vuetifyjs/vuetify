@@ -1,6 +1,6 @@
 {
-    "props": {
-        "openDelay": "Los milisegundos a esperar antes de abrir el componente.",
-        "closeDelay": "Los milisegundos a esperar antes de cerrar el componente."
-    }
+  "props": {
+    "openDelay": "Los milisegundos a esperar antes de abrir el componente.",
+    "closeDelay": "Los milisegundos a esperar antes de cerrar el componente."
+  }
 }

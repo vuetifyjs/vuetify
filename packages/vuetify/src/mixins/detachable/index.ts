@@ -1,0 +1,152 @@
+// Mixins
+import Bootable from '../bootable'
+
+// Utilities
+import { getObjectValueByPath } from '../../util/helpers'
+import mixins, { ExtractVue } from '../../util/mixins'
+import { consoleWarn } from '../../util/console'
+
+// Types
+import Vue, { PropOptions } from 'vue'
+import { VNode } from 'vue/types'
+
+interface options extends Vue {
+  $el: HTMLElement
+  $refs: {
+    content: HTMLElement
+  }
+}
+
+function validateAttachTarget (val: any) {
+  const type = typeof val
+
+  if (type === 'boolean' || type === 'string') return true
+
+  return val.nodeType === Node.ELEMENT_NODE
+}
+
+/* @vue/component */
+export default mixins<options &
+  /* eslint-disable indent */
+  ExtractVue<typeof Bootable>
+  /* eslint-enable indent */
+>(Bootable).extend({
+  name: 'detachable',
+
+  props: {
+    attach: {
+      default: false,
+      validator: validateAttachTarget,
+    } as PropOptions<boolean | string | Element>,
+    contentClass: {
+      type: String,
+      default: '',
+    },
+  },
+
+  data: () => ({
+    activatorNode: null as null | VNode | VNode[],
+    hasDetached: false,
+  }),
+
+  watch: {
+    attach () {
+      this.hasDetached = false
+      this.initDetach()
+    },
+    hasContent: 'initDetach',
+  },
+
+  beforeMount () {
+    this.$nextTick(() => {
+      if (this.activatorNode) {
+        const activator = Array.isArray(this.activatorNode) ? this.activatorNode : [this.activatorNode]
+
+        activator.forEach(node => {
+          if (!node.elm) return
+          if (!this.$el.parentNode) return
+
+          const target = this.$el === this.$el.parentNode.firstChild
+            ? this.$el
+            : this.$el.nextSibling
+
+          this.$el.parentNode.insertBefore(node.elm, target)
+        })
+      }
+    })
+  },
+
+  mounted () {
+    this.eager && this.initDetach()
+  },
+
+  deactivated () {
+    this.isActive = false
+  },
+
+  beforeDestroy () {
+    // IE11 Fix
+    try {
+      if (
+        this.$refs.content &&
+        this.$refs.content.parentNode
+      ) {
+        this.$refs.content.parentNode.removeChild(this.$refs.content)
+      }
+
+      if (this.activatorNode) {
+        const activator = Array.isArray(this.activatorNode) ? this.activatorNode : [this.activatorNode]
+        activator.forEach(node => {
+          node.elm &&
+            node.elm.parentNode &&
+            node.elm.parentNode.removeChild(node.elm)
+        })
+      }
+    } catch (e) { console.log(e) }
+  },
+
+  methods: {
+    getScopeIdAttrs () {
+      const scopeId = getObjectValueByPath(this.$vnode, 'context.$options._scopeId')
+
+      return scopeId && {
+        [scopeId]: '',
+      }
+    },
+    initDetach () {
+      if (this._isDestroyed ||
+        !this.$refs.content ||
+        this.hasDetached ||
+        // Leave menu in place if attached
+        // and dev has not changed target
+        this.attach === '' || // If used as a boolean prop (<v-menu attach>)
+        this.attach === true || // If bound to a boolean (<v-menu :attach="true">)
+        this.attach === 'attach' // If bound as boolean prop in pug (v-menu(attach))
+      ) return
+
+      let target
+      if (this.attach === false) {
+        // Default, detach to app
+        target = document.querySelector('[data-app]')
+      } else if (typeof this.attach === 'string') {
+        // CSS selector
+        target = document.querySelector(this.attach)
+      } else {
+        // DOM Element
+        target = this.attach
+      }
+
+      if (!target) {
+        consoleWarn(`Unable to locate target ${this.attach || '[data-app]'}`, this)
+        return
+      }
+
+      target.insertBefore(
+        this.$refs.content,
+        target.firstChild
+      )
+
+      this.hasDetached = true
+    },
+  },
+})

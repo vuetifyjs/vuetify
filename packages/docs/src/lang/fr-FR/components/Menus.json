@@ -1,0 +1,43 @@
+{
+  "examples": {
+    "usage": {
+      "uninverted": true
+    },
+    "absolute": {
+      "uninverted": true
+    },
+    "disabled": {
+      "uninverted": true
+    },
+    "offsetX": {
+      "uninverted": true
+    },
+    "offsetY": {
+      "uninverted": true
+    },
+    "closeOnClick": {
+      "uninverted": true
+    },
+    "closeOnContentClick": {
+      "uninverted": true
+    },
+    "absoluteWithoutActivator": {
+      "uninverted": true
+    },
+    "menuActivatorTooltip": {
+      "uninverted": true
+    },
+    "hover": {
+      "uninverted": true
+    },
+    "menus": {
+      "uninverted": true
+    },
+    "customTransition": {
+      "uninverted": true
+    },
+    "popover": {
+      "uninverted": true
+    }
+  }
+}

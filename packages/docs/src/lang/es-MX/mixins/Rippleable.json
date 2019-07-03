@@ -1,5 +1,5 @@
 {
-    "props": {
-        "ripple": "Aplica la directiva `v-ripple`"
-    }
+  "props": {
+    "ripple": "Aplica la directiva `v-ripple`"
+  }
 }

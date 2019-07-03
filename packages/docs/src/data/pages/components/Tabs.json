@@ -1,6 +1,11 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VTabs",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/tabs.html"
+  },
   "children": [
     {
       "type": "section",
@@ -30,19 +35,31 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "fixedTabs",
-            "right",
-            "content",
-            "search",
-            "iconsAndText",
-            "desktop",
-            "alignWithTitle",
-            "grow",
-            "overflowToMenu",
-            "pagination",
-            "icons"
+            "simple/fixed-tabs",
+            "simple/center-active",
+            "simple/grow",
+            "simple/pagination",
+            "simple/icons",
+            "simple/vertical",
+            "intermediate/icons-and-text",
+            "intermediate/right",
+            "intermediate/content",
+            "intermediate/align-with-title",
+            "intermediate/dynamic",
+            "complex/dynamic-height",
+            "complex/desktop",
+            "complex/overflow-to-menu"
           ]
         }
       ]

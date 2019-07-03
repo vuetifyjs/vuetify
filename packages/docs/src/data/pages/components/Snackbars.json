@@ -1,6 +1,11 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VSnackbar",
+  "mdSpec": {
+    "version": "2",
+    "link": "https://material.io/design/components/snackbars.html"
+  },
   "children": [
     {
       "type": "section",
@@ -24,9 +29,21 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "contextual"
+            "simple/auto-height",
+            "simple/multi-line",
+            "simple/timeout",
+            "simple/vertical"
           ]
         }
       ]
@@ -38,7 +55,7 @@
           "type": "up-next",
           "value": [
             "components/buttons",
-            "framework/colors",
+            "styles/colors",
             "components/forms"
           ]
         }

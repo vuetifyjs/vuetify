@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "file": "components/VHover",
   "children": [
     {
       "type": "section",
@@ -24,9 +25,21 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "transition"
+            "simple/disabled",
+            "simple/open-and-close-delay",
+            "complex/hover-list",
+            "complex/transition"
           ]
         }
       ]

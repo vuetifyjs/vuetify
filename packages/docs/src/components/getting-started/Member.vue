@@ -35,6 +35,7 @@
               <v-flex>
                 <a
                   v-if="value.email"
+                  :aria-label="`${value.name}'s Email`"
                   :href="`mailto:${value.email}`"
                   :title="`${value.name}'s Email`"
                   class="text-decoration-none mx-2"
@@ -45,6 +46,7 @@
                 </a>
                 <a
                   v-if="value.twitter"
+                  :aria-label="`${value.name}'s Twitter Profile`"
                   :href="`https://twitter.com/${value.twitter}`"
                   :title="`${value.name}'s Twitter Profile`"
                   class="text-decoration-none mx-2"
@@ -55,6 +57,7 @@
                 </a>
                 <a
                   v-if="value.github"
+                  :aria-label="`${value.name}'s Github Profile`"
                   :href="`https://github.com/${value.github}`"
                   :title="`${value.name}'s Github Profile`"
                   class="text-decoration-none mx-2"
@@ -65,6 +68,7 @@
                 </a>
                 <a
                   v-if="value.linkedin"
+                  :aria-label="`${value.name}'s LinkedIn Profile`"
                   :href="`https://linkedin.com/in/${value.linkedin}`"
                   :title="`${value.name}'s LinkedIn Profile`"
                   class="text-decoration-none mx-2"
@@ -73,13 +77,24 @@
                 >
                   <v-icon>mdi-linkedin</v-icon>
                 </a>
+                <a
+                  v-if="value.patreon"
+                  :aria-label="`${value.name}'s Patreon`"
+                  :href="`https://patreon.com/${value.github}`"
+                  :title="`${value.name}'s Patreon`"
+                  class="text-decoration-none mx-2"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <v-icon>mdi-patreon</v-icon>
+                </a>
               </v-flex>
             </v-layout>
           </v-sheet>
         </v-img>
       </v-hover>
     </v-avatar>
-    <h3
+    <div
       class="font-weight-light headline"
       v-text="value.name"
     />
@@ -91,9 +106,9 @@
     props: {
       value: {
         type: Object,
-        default: () => ({})
-      }
-    }
+        default: () => ({}),
+      },
+    },
   }
 </script>
 

@@ -1,8 +1,7 @@
 [
   {
     "name": "English",
-    "locale": "en-US",
-    "alternate": "en",
+    "locale": "en",
     "country": "us",
     "fallback": true
   },
@@ -39,6 +38,11 @@
     "locale": "ja-JP",
     "alternate": "ja",
     "country": "jp"
+  },
+  {
+    "name": "Tiếng Việt",
+    "locale": "vi-VN",
+    "country": "vn"
   },
   {
     "name": "Translate!",

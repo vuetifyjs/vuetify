@@ -1,33 +1,43 @@
 <template>
-  <v-navigation-drawer permanent>
-    <v-toolbar flat>
-      <v-list>
-        <v-list-tile>
-          <v-list-tile-title class="title">
+  <v-card
+    height="400"
+    width="256"
+    class="mx-auto"
+  >
+    <v-navigation-drawer permanent>
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title class="title">
             Application
-          </v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-toolbar>
+          </v-list-item-title>
+          <v-list-item-subtitle>
+            subtext
+          </v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
 
-    <v-divider></v-divider>
+      <v-divider></v-divider>
 
-    <v-list dense class="pt-0">
-      <v-list-tile
-        v-for="item in items"
-        :key="item.title"
-        @click=""
+      <v-list
+        dense
+        nav
       >
-        <v-list-tile-action>
-          <v-icon>{{ item.icon }}</v-icon>
-        </v-list-tile-action>
+        <v-list-item
+          v-for="item in items"
+          :key="item.title"
+          link
+        >
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
 
-        <v-list-tile-content>
-          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
-    </v-list>
-  </v-navigation-drawer>
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+  </v-card>
 </template>
 
 <script>
@@ -35,11 +45,12 @@
     data () {
       return {
         items: [
-          { title: 'Home', icon: 'dashboard' },
-          { title: 'About', icon: 'question_answer' }
+          { title: 'Dashboard', icon: 'mdi-view-dashboard' },
+          { title: 'Photos', icon: 'mdi-image' },
+          { title: 'About', icon: 'mdi-help-box' },
         ],
-        right: null
+        right: null,
       }
-    }
+    },
   }
 </script>
