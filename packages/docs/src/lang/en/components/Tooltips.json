@@ -1,13 +1,13 @@
 {
   "header": "# Tooltips",
-  "headerText": "The `v-tooltip` component is useful for conveying information when a user hovers over an element. You can also programmatically control the display of tooltips through a **v-model**",
+  "headerText": "The `v-tooltip` component is useful for conveying information when a user hovers over an element. You can also programmatically control the display of tooltips through a `v-model`. When activated, tooltips display a text label identifying an element, such as a description of its function.",
   "examples": {
     "usage": {
       "desc": "Tooltips can wrap any element."
     },
     "alignment": {
       "header": "### Alignment",
-      "desc": "Tooltip can be aligned to any of the four sides of the activator element"
+      "desc": "A tooltip can be aligned to any of the four sides of the activator element"
     },
     "visibility": {
       "header": "### Visibility",
@@ -15,12 +15,16 @@
     }
   },
   "props": {
+    "activator": "Sets the tooltip activator",
     "closeDelay": "Delay (in ms) after which menu closes (when open-on-hover prop is set to true)",
     "dark": "Mixins.Themeable.props.dark",
     "debounce": "Duration before tooltip is shown and hidden when hovered",
     "disabled": "Disables the tooltip",
+    "internalActivator": "Designates whether to use an internal activator",
     "light": "Mixins.Themeable.props.light",
-    "openDelay": "Delay (in ms) after which menu opens (when open-on-hover prop is set to true)",
+    "openDelay": "Delay (in ms) after which tooltip opens (when `open-on-hover` prop is set to **true**)",
+    "openOnClick": "Designates whether the tooltip should open on activator click",
+    "openOnHover": "Designates whether the tooltip should open on activator hover",
     "tag": "Specifies a custom tag for the activator wrapper",
     "transition": "Mixins.Transitionable.props.transition"
   }
