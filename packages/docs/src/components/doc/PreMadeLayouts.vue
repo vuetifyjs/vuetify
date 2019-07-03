@@ -39,7 +39,8 @@
                   :href="`https://github.com/vuetifyjs/vuetify/tree/master/packages/docs/src${layout.href}.vue`"
                   :title="`Link to layout for ${layout.name}`"
                   class="mx-2"
-                  color="success"
+                  color="indigo"
+                  depressed
                   fab
                 >
                   <v-icon>mdi-open-in-new</v-icon>
@@ -49,7 +50,8 @@
                   :href="layout.href"
                   :title="`Link to code for ${layout.name}`"
                   class="mx-2"
-                  color="success"
+                  color="indigo"
+                  depressed
                   fab
                 >
                   <v-icon>mdi-code-tags</v-icon>
