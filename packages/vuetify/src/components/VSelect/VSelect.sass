@@ -71,6 +71,11 @@
     .v-select__selections
       min-height: 42px
 
+    // Explicit override since active chips
+    // in select are not focused
+    .v-chip--select.v-chip--active::before
+      opacity: 0.2
+
     &.v-select--chips--small
       .v-select__selections
         min-height: 32px

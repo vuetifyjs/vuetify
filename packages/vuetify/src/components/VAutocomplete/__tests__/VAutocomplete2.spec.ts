@@ -345,7 +345,15 @@ describe('VAutocomplete.ts', () => {
       },
     })
 
-    wrapper.setData({ internalSearch: 'fo' })
+    await wrapper.vm.$nextTick()
+
+    const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
+
+    input.trigger('focus')
+    element.value = 'fo'
+    input.trigger('input')
+    input.trigger('keydown.enter')
 
     await wrapper.vm.$nextTick()
 

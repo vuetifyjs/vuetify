@@ -19,6 +19,7 @@
       <v-tabs
         slot="extension"
         v-model="tabs"
+        background-color="transparent"
         centered
       >
         <v-tab

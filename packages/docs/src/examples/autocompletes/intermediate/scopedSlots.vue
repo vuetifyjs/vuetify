@@ -93,12 +93,13 @@
             >
               <template v-slot:selection="data">
                 <v-chip
-                  :value="data.selected"
+                  v-bind="data.attrs"
+                  :input-value="data.selected"
                   close
-                  @input="remove(data.item)"
+                  @click:close="remove(data.item)"
                 >
-                  <v-avatar>
-                    <img :src="data.item.avatar">
+                  <v-avatar left>
+                    <v-img :src="data.item.avatar"></v-img>
                   </v-avatar>
                   {{ data.item.name }}
                 </v-chip>

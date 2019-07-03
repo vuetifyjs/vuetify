@@ -23,6 +23,7 @@
         <v-tabs
           v-model="tab"
           align-with-title
+          background-color="transparent"
         >
           <v-tabs-slider color="yellow"></v-tabs-slider>
 

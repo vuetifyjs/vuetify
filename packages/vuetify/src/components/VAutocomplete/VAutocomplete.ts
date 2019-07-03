@@ -198,8 +198,17 @@ export default VSelect.extend({
       // for duplicate items? no idea
       if (val === oldVal) return
 
+      this.setMenuIndex(-1)
+
       this.$nextTick(() => {
-        this.setMenuIndex(val.length > 0 && (val.length === 1 || this.autoSelectFirst) ? 0 : -1)
+        if (
+          !this.internalSearch ||
+          (val.length !== 1 &&
+            !this.autoSelectFirst)
+        ) return
+
+        this.$refs.menu.getTiles()
+        this.setMenuIndex(0)
       })
     },
     onInternalSearchChanged () {
