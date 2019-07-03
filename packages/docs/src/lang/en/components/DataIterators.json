@@ -66,7 +66,7 @@
       "no-results": "Defines content for when `search` is provided but no results are found"
     },
     "v-data-footer": {
-      "page-text": "Defines content for the items-per-page text"
+      "pageText": "Defines content for the items-per-page text"
     }
   },
   "events": {
