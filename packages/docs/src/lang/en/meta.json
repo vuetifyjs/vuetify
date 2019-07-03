@@ -90,8 +90,8 @@
     "keywords": "vue icon component, iconfont, icon libraries, vuetify icons"
   },
   "customization/internationalization": {
-    "title": "Internationalization",
-    "description": "Vuetify supports language internationalization (i18n) from a wide range of locales across the globe.",
+    "title": "Internationalization (i18n)",
+    "description": "Vuetify supports language Internationalization (i18n) from a wide range of locales and easily integrates vue-i18n.",
     "keywords": "i18n, language, internationalization"
   },
   "customization/rtl": {
