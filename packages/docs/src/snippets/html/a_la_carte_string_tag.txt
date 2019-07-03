@@ -1,4 +1,4 @@
-// SomeComponent.vue
+<!-- Vue Component -->
 
 <template>
   <v-data-iterator content-tag="v-layout">

@@ -5,7 +5,11 @@
     "version": "2",
     "link": "https://material.io/design/layout/responsive-layout-grid.html#breakpoints"
   },
+  "file": "services/breakpoint",
   "children": [
+    {
+      "type": "layout-grid"
+    },
     {
       "type": "section",
       "children": [
@@ -23,10 +27,7 @@
         },
         {
           "type": "markup",
-          "value": "js_breakpoint_example1"
-        },
-        {
-          "type": "layout-grid"
+          "value": "html_breakpoint_example3"
         },
         {
           "type": "heading",
@@ -46,7 +47,7 @@
         },
         {
           "type": "markup",
-          "value": "js_breakpoint_example2"
+          "value": "html_breakpoint_example2"
         },
         {
           "type": "text",

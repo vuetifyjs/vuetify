@@ -33,34 +33,21 @@ export const VTreeviewNodeProps = {
     type: String,
     default: 'v-treeview-node--active',
   },
-  selectable: Boolean,
   color: {
     type: String,
     default: 'primary',
-  },
-  selectedColor: {
-    type: String,
-    default: 'accent',
-  },
-  indeterminateIcon: {
-    type: String,
-    default: '$vuetify.icons.checkboxIndeterminate',
-  },
-  onIcon: {
-    type: String,
-    default: '$vuetify.icons.checkboxOn',
-  },
-  offIcon: {
-    type: String,
-    default: '$vuetify.icons.checkboxOff',
   },
   expandIcon: {
     type: String,
     default: '$vuetify.icons.subgroup',
   },
-  loadingIcon: {
+  indeterminateIcon: {
     type: String,
-    default: '$vuetify.icons.loading',
+    default: '$vuetify.icons.checkboxIndeterminate',
+  },
+  itemChildren: {
+    type: String,
+    default: 'children',
   },
   itemDisabled: {
     type: String,
@@ -74,15 +61,28 @@ export const VTreeviewNodeProps = {
     type: String,
     default: 'name',
   },
-  itemChildren: {
-    type: String,
-    default: 'children',
-  },
   loadChildren: Function as PropValidator<(item: any) => Promise<void>>,
+  loadingIcon: {
+    type: String,
+    default: '$vuetify.icons.loading',
+  },
+  offIcon: {
+    type: String,
+    default: '$vuetify.icons.checkboxOff',
+  },
+  onIcon: {
+    type: String,
+    default: '$vuetify.icons.checkboxOn',
+  },
   openOnClick: Boolean,
-  transition: Boolean,
   rounded: Boolean,
+  selectable: Boolean,
+  selectedColor: {
+    type: String,
+    default: 'accent',
+  },
   shaped: Boolean,
+  transition: Boolean,
 }
 
 /* @vue/component */
@@ -104,12 +104,12 @@ export default baseMixins.extend<options>().extend({
   },
 
   data: () => ({
+    hasLoaded: false,
+    isActive: false, // Node is selected (row)
+    isIndeterminate: false, // Node has at least one selected child
+    isLoading: false,
     isOpen: false, // Node is open/expanded
     isSelected: false, // Node is selected (checkbox)
-    isIndeterminate: false, // Node has at least one selected child
-    isActive: false, // Node is selected (row)
-    isLoading: false,
-    hasLoaded: false,
   }),
 
   computed: {

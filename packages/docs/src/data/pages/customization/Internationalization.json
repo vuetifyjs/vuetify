@@ -10,15 +10,6 @@
       "type": "section",
       "children": [
         {
-          "type": "api",
-          "value": ["internationalization"]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
           "type": "heading",
           "lang": "gettingStarted"
         },
@@ -36,6 +27,15 @@
         {
           "type": "markup",
           "value": "js_vuetify_custom_locale"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": ["internationalization"]
         }
       ]
     },

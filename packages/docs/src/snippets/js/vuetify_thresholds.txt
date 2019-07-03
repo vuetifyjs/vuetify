@@ -1,3 +1,5 @@
+// src/plugins/vuetify.js
+
 export default new Vuetify({
   breakpoint: {
     thresholds: {
@@ -8,5 +10,5 @@ export default new Vuetify({
       xl: 1280
     },
     scrollBarWidth: 24
-  }
+  },
 })
