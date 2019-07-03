@@ -1,9 +1,11 @@
+import { DataOptions } from './v-data.js'
+
 const DataFooterSlots = [
   { name: 'pageText' },
 ]
 
 const DataFooterEvents = [
-  { name: 'update:options' },
+  { name: 'update:options', value: DataOptions },
 ]
 
 const DataFooterPageTextScopedProps = {
