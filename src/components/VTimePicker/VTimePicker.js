@@ -135,9 +135,10 @@ export default {
     onChange () {
       if (!this.selectingHour) {
         this.$emit('change', this.value)
+      } else {
+        this.selectingHour = !this.selectingHour
       }
 
-      this.selectingHour = !this.selectingHour
     },
     firstAllowed (type, value) {
       const allowedFn = type === 'hour' ? this.isAllowedHourCb : this.isAllowedMinuteCb
