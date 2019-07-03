@@ -1,4 +1,4 @@
-import { DataOptions } from './v-data.js'
+const { DataOptions } = require('./v-data')
 
 const DataFooterSlots = [
   { name: 'pageText' },
