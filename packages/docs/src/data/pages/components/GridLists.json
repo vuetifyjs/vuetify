@@ -7,6 +7,9 @@
   },
   "children": [
     {
+      "type": "layout-grid"
+    },
+    {
       "type": "section",
       "children": [
         {
