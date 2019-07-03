@@ -6,6 +6,11 @@
       "type": "section",
       "children": [
         {
+          "type": "alert",
+          "lang": "alert",
+          "value": "warning"
+        },
+        {
           "type": "heading",
           "lang": "runnerHeader"
         },
@@ -45,6 +50,11 @@
         {
           "type": "markup",
           "value": "js_testing_mock_component_spec"
+        },
+        {
+          "type": "alert",
+          "lang": "specAlert",
+          "value": "info"
         }
       ]
     },
