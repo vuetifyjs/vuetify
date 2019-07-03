@@ -45,6 +45,11 @@
       "offsetX": false,
       "offsetY": false,
       "transition": false
+    },
+    "v-window": {
+      "mandatory": false,
+      "max": false,
+      "multiple": false
     }
   }
 }
