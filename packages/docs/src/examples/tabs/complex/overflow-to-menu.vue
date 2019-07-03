@@ -22,6 +22,7 @@
       <template v-slot:extension>
         <v-tabs
           v-model="currentItem"
+          background-color="transparent"
           fixed-tabs
           slider-color="white"
         >

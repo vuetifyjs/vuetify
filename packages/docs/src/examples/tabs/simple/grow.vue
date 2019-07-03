@@ -6,6 +6,7 @@
 
     <v-tabs
       v-model="tab"
+      background-color="transparent"
       color="basil"
       grow
     >
