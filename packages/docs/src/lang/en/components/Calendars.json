@@ -122,7 +122,7 @@
     "touchend:interval": "The touchend event at a specific interval label in the `day` view. The event passed is the day & time object.",
     "touchend:time": "The touchend event at a specific time in the `day` view. The event passed is the day & time object.",
     "touchmove:day": "The touchmove event on a day. The event passed is the day object.",
-    "touchmove:event": "The touchmove event aont an event` view. The event passed is the day & time object.",
+    "touchmove:event": "The touchmove event on an `event` view. The event passed is the day & time object.",
     "touchmove:interval": "The touchmove event at a specific interval label in the `day` view. The event passed is the day & time object.",
     "touchmove:time": "The touchmove event at a specific time in the `day` view. The event passed is the day & time object.",
     "touchstart:day": "The touchstart event on a day. The event passed is the day object.",
