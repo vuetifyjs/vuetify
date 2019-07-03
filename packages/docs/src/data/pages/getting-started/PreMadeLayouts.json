@@ -6,6 +6,11 @@
       "type": "section",
       "children": [
         {
+          "type": "alert",
+          "lang": "alert",
+          "value": "info"
+        },
+        {
           "type": "doc-pre-made-layouts"
         }
       ]
@@ -16,8 +21,8 @@
         {
           "type": "up-next",
           "value": [
+            "components/application",
             "themes/premium",
-            "styles/colors",
             "customization/theme"
           ]
         }
