@@ -6,7 +6,7 @@
     "usage": {
       "desc": "A toolbar is a flexible container that can be used in a number of ways. By default, the toolbar is 64px high on desktop and 56px high on mobile. There are a number of helper components available to use with the toolbar. The `v-toolbar-title` is used for displaying a title and `v-toolbar-items` allow [v-btn](/components/buttons) to extend full height."
     },
-    "column-width-with-hierarchy": {
+    "light-and-dark": {
       "header": "### Light and Dark",
       "desc": "Toolbars come in **2** variants, light and dark. Light toolbars have dark tinted buttons and dark text whereas dark toolbars have white tinted buttons and white text."
     },
