@@ -1,5 +1,5 @@
 module.exports = {
   'v-responsive': {
-    slots: ['default']
+    slots: ['default'],
   },
 }
