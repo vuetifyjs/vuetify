@@ -64,5 +64,9 @@
     "scrollable": "When set to true, expects a card, card-title, card-text and card-actions. Additionally, card-text should have specified height. Will set card-text to overflow-y",
     "transition": "Mixins.Transitionable.props.transition",
     "width": "Sets the dialog width"
+  },
+  "events": {
+    "click:outside": "Event that fires when clicking outside an active dialog. ",
+    "keydown": "Event that fires when key is pressed. If dialog is active and not persistent, **esc** key will close dialog"
   }
 }

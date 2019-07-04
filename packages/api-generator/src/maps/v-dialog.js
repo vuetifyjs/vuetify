@@ -8,5 +8,15 @@ module.exports = {
         value: 'boolean',
       },
     }],
+    events: [
+      {
+        name: 'click:outside',
+        value: 'void',
+      },
+      {
+        name: 'keydown',
+        value: 'KeyboardEvent',
+      },
+    ],
   },
 }
