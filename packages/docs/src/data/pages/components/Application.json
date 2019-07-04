@@ -6,6 +6,18 @@
       "type": "section",
       "children": [
         {
+          "type": "api",
+          "value": [
+            "v-app",
+            "v-content"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "alert",
           "lang": "alert1",
           "value": "error"
@@ -30,22 +42,53 @@
           "type": "alert",
           "lang": "alert2",
           "value": "info"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "componentHeader"
         },
+        {
+          "type": "text",
+          "lang": "componentText1"
+        },
+        {
+          "type": "text",
+          "lang": "componentText2"
+        },
+        {
+          "type": "text",
+          "lang": "componentText3"
+        },
+        {
+          "type": "text",
+          "lang": "componentText4"
+        },
+        {
+          "type": "text",
+          "lang": "componentText5"
+        },
+        {
+          "type": "img",
+          "value": "layouts/app.png",
+          "lang": "componentImg"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
         {
           "type": "heading",
           "lang": "appHeader"
         },
         {
           "type": "text",
-          "lang": "appText"
-        },
-        {
-          "type": "heading",
-          "lang": "header2"
-        },
-        {
-          "type": "text",
-          "lang": "headerText1"
+          "lang": "appText1"
         },
         {
           "type": "markup",
@@ -53,11 +96,20 @@
         },
         {
           "type": "text",
-          "lang": "headerText2"
+          "lang": "appText2"
         },
         {
           "type": "markup",
           "value": "js_application_service_property_reference"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "accessibility",
+          "value": "accessibility"
         }
       ]
     },

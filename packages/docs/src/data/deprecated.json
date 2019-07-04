@@ -1,5 +1,9 @@
 {
   "props": {
+    "v-app": {
+      "dark": false,
+      "light": false
+    },
     "v-autocomplete": {
       "activator": false,
       "closeOnClick": false,
