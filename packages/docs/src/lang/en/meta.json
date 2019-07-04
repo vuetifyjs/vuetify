@@ -75,8 +75,8 @@
     "keywords": "a11y, accessibility, usability"
   },
   "customization/a-la-carte": {
-    "title": "A-la-carte",
-    "description": "A La Carte provides automatic treeshaking via the vuetify-loader. Use only the features that you need and drastically reduce your package size.",
+    "title": "A-la-carte (treeshaking)",
+    "description": "A La Carte provides automatic treeshaking via the vuetify-loader. Use only the features that you need and drastically reduce your package bundle size.",
     "keywords": "a la carte, a-la-carte, vuetify single import, vuetify import, component importing, reduce vuetify size"
   },
   "customization/breakpoints": {
@@ -90,8 +90,8 @@
     "keywords": "vue icon component, iconfont, icon libraries, vuetify icons"
   },
   "customization/internationalization": {
-    "title": "Internationalization",
-    "description": "Vuetify supports language internationalization (i18n) from a wide range of locales across the globe.",
+    "title": "Internationalization (i18n)",
+    "description": "Vuetify supports language Internationalization (i18n) from a wide range of locales and easily integrates vue-i18n.",
     "keywords": "i18n, language, internationalization"
   },
   "customization/rtl": {

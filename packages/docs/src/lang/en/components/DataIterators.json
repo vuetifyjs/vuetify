@@ -20,61 +20,61 @@
   },
   "props": {
     "v-data-iterator": {
-      "itemKey": "The property on each item that is used as a unique key",
-      "value": "Used for selection",
-      "singleSelect": "Changes selection mode to single select",
       "expanded": "Array of expanded items. Can be used with `.sync` modifier",
-      "singleExpand": "Changes expansion mode to single expand",
+      "footerProps": "See the `v-data-footer` API for more information",
+      "hideDefaultFooter": "Hides default footer",
+      "itemKey": "The property on each item that is used as a unique key",
       "loading": "If `true` and no items are provided, then a loading text will be shown",
       "loadingText": "Text shown when `loading` is true and no items are provided",
-      "noResultsText": "Text shown when `search` prop is used and there are no results",
       "noDataText": "Text shown when no items are provided to the component",
-      "hideDefaultFooter": "Hides default footer",
-      "footerProps": "See the `v-data-footer` API for more information"
+      "noResultsText": "Text shown when `search` prop is used and there are no results",
+      "singleExpand": "Changes expansion mode to single expand",
+      "singleSelect": "Changes selection mode to single select",
+      "value": "Used for selection"
     },
     "v-data-footer": {
+      "disableItemsPerPage": "Disables items-per-page dropdown",
+      "disablePagination": "Disables pagination buttons",
+      "firstIcon": "First icon",
+      "itemsPerPageAllText": "Text for 'All' option in items-per-page dropdown",
+      "itemsPerPageOptions": "Array of options to show in the items-per-page dropdown",
+      "itemsPerPageText": "Text for items-per-page dropdown",
+      "lastIcon": "Last icon",
+      "nextIcon": "Next icon",
       "options": "DataOptions",
       "pagination": "DataPagination",
-      "itemsPerPageOptions": "Array of options to show in the items-per-page dropdown",
       "prevIcon": "Previous icon",
-      "nextIcon": "Next icon",
-      "firstIcon": "First icon",
-      "lastIcon": "Last icon",
-      "itemsPerPageText": "Text for items-per-page dropdown",
-      "itemsPerPageAllText": "Text for 'All' option in items-per-page dropdown",
-      "showFirstLastPage": "Show first/last icons",
       "showCurrentPage": "Show current page number between prev/next icons",
-      "disablePagination": "Disables pagination buttons",
-      "disableItemsPerPage": "Disables items-per-page dropdown"
+      "showFirstLastPage": "Show first/last icons"
     }
   },
   "scopedSlots": {
     "v-data-iterator": {
-      "footer": "Defines a footer below the items",
-      "footer.page-text": "This slot is forwarded to the default footer. See the `v-data-footer` API for more information",
       "default": "The default slot. Use this to render your items",
+      "footer.page-text": "This slot is forwarded to the default footer. See the `v-data-footer` API for more information",
+      "footer": "Defines a footer below the items",
       "header": "Defines a header above the items",
       "item": "Slot for each item"
     }
   },
   "slots": {
     "v-data-iterator": {
-      "header": "Defines a header above the items",
       "footer": "Defines a footer below the items",
+      "header": "Defines a header above the items",
       "loading": "Defines content for when `loading` is true and no items are provided",
       "no-data": "Defines content for when no items are provided",
       "no-results": "Defines content for when `search` is provided but no results are found"
     },
     "v-data-footer": {
-      "page-text": "Defines content for the items-per-page text"
+      "pageText": "Defines content for the items-per-page text"
     }
   },
   "events": {
     "v-data-iterator": {
       "input": "Array of selected items",
-      "update:expanded": "The `.sync` event for `expanded` prop",
+      "item-expanded": "Event emitted when an item is expanded or closed",
       "item-selected": "Event emitted when an item is selected or deselected",
-      "item-expanded": "Event emitted when an item is expanded or closed"
+      "update:expanded": "The `.sync` event for `expanded` prop"
     },
     "v-data-footer": {
       "update:options": "The `.sync` event for `options` prop"
