@@ -16,7 +16,7 @@ Vue.use(Vuetify, {
   },
   directives: {
     ripple,
-  }
+  },
 })
 
 export default new Vuetify({ ... })

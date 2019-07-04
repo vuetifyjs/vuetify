@@ -12,16 +12,16 @@ const messages = {
     $vuetify: {
       dataIterator: {
         rowsPerPageText: 'Items per page:',
-        pageText: '{0}-{1} of {2}'
-      }
+        pageText: '{0}-{1} of {2}',
+      },
     },
   },
   sv: {
     $vuetify: {
       dataIterator: {
         rowsPerPageText: 'Element per sida:',
-        pageText: '{0}-{1} av {2}'
-      }
+        pageText: '{0}-{1} av {2}',
+      },
     },
   },
 }

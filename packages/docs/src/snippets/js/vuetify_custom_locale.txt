@@ -14,7 +14,6 @@ import pl from 'vuetify/src/locale/pl'
 // Your own translation file
 import sv from './i18n/vuetify/sv'
 
-
 Vue.component('my-component', {
   methods: {
     changeLocale () {

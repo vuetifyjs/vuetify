@@ -1,4 +1,3 @@
-// my-project/
 $ yarn add babel-polyfill
 // OR
 $ npm install babel-polyfill --save

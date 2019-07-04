@@ -1,4 +1,4 @@
-<!-- src/components/CustomCard.vue -->
+<!-- Vue Component -->
 
 <template>
   <v-card>
