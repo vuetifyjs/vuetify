@@ -15,7 +15,7 @@ const DataIteratorProps = [
 ].concat(DataProps)
 
 const DataIteratorEvents = [
-  { name: 'input', source: 'v-data', value: 'any[]' },
+  { name: 'input', source: 'v-data', value: 'boolean[]' },
   { name: 'update:expanded', source: 'v-data', value: 'any[]' },
   { name: 'item-selected', source: 'v-data', value: '{ item: any, value: boolean }' },
   { name: 'item-expanded', source: 'v-data', value: '{ item: any, value: boolean }' },
