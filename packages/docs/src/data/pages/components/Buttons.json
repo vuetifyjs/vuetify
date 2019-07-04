@@ -41,6 +41,11 @@
       "type": "section",
       "children": [
         {
+          "type": "alert",
+          "lang": "alert",
+          "value": "warning"
+        },
+        {
           "type": "examples",
           "value": [
             "simple/flat",
