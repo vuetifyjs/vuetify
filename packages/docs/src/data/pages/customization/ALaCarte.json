@@ -8,7 +8,7 @@
         {
           "type": "alert",
           "lang": "treeshakeWarning",
-          "value": "warning"
+          "value": "error"
         },
         {
           "type": "heading",
@@ -174,7 +174,7 @@
         },
         {
           "type": "markup",
-          "value": "js_a_la_carte_destructuring"
+          "value": "html_a_la_carte_destructuring"
         }
       ]
     },

@@ -43,7 +43,7 @@ describe('CustomCard.vue', () => {
   it('should emit an event when the action v-btn is clicked', () => {
     const wrapper = mount(CustomCard, {
       localVue,
-      vuetify
+      vuetify,
     })
 
     const event = jest.fn()
