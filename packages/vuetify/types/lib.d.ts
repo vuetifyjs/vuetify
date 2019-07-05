@@ -6,11 +6,11 @@ declare module 'vuetify/lib' {
   const Vuetify: Vuetify
   const colors: Colors
   const directives: {
-    ClickOutside: DirectiveOptions,
-    Ripple: DirectiveOptions,
-    Resize: DirectiveOptions,
-    Scroll: DirectiveOptions,
-    Touch: DirectiveOptions
+    clickOutside: DirectiveOptions,
+    ripple: DirectiveOptions,
+    resize: DirectiveOptions,
+    scroll: DirectiveOptions,
+    touch: DirectiveOptions
   }
   const VAlert: Component
   const VApp: Component

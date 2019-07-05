@@ -3,7 +3,7 @@ import Vue from 'vue'
 import { install } from 'vuetify/es5/install'
 import VBtn from 'vuetify/es5/components/VBtn'
 import * as VCard from 'vuetify/es5/components/VCard'
-import { Ripple } from 'vuetify/es5/directives'
+import { ripple } from 'vuetify/es5/directives'
 import * as directives from 'vuetify/es5/directives'
 
 install(Vue, {
@@ -12,7 +12,7 @@ install(Vue, {
     ...VCard
   },
   directives: {
-    Ripple,
+    ripple,
     ...directives
   }
 })
@@ -23,6 +23,6 @@ Vue.extend({
     ...VCard
   },
   directives: {
-    Ripple
+    ripple
   }
 })
