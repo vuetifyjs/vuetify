@@ -47,6 +47,10 @@
       "header": "### Round",
       "desc": "Rounded buttons behave the same as regular buttons but have rounded edges."
     },
+    "tile": {
+      "header": "### Tile",
+      "desc": "Tile buttons behave the same as regular buttons but have no border radius."
+    },
     "block": {
       "header": "### Block",
       "desc": "Block buttons extend the full available width."
