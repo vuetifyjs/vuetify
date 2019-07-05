@@ -213,4 +213,15 @@ describe('VSparkline.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should render component with trend and equal values and match a snapshot', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: [1, 1, 1],
+        type: 'trend',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

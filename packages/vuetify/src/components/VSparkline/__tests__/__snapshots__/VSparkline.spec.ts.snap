@@ -856,6 +856,36 @@ exports[`VSparkline.ts should render component with string labels and match a sn
 
 `;
 
+exports[`VSparkline.ts should render component with trend and equal values and match a snapshot 1`] = `
+
+<svg display="block"
+     stroke-width="4"
+     viewbox="0 0 300 75"
+     class="primary--text"
+>
+  <defs>
+    <linearGradient id="31"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="primary"
+      >
+      </stop>
+    </linearGradient>
+  </defs>
+  <path id="31"
+        d="M8 66.99999L150 67L292 67.00001"
+        fill="none"
+        stroke="url(#31)"
+  >
+  </path>
+</svg>
+
+`;
+
 exports[`VSparkline.ts should render smooth component and match a snapshot 1`] = `
 
 <svg display="block"
