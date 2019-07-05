@@ -18,61 +18,66 @@ import { wrapInArray, humanReadableFileSize } from '../../util/helpers'
 export default VTextField.extend({
   name: 'v-file-input',
 
+  model: {
+    prop: 'value',
+    event: 'change',
+  },
+
   props: {
     accept: {
       type: String,
       default: null,
     } as PropValidator<string | null>,
+    chips: Boolean,
     clearable: {
       type: Boolean,
       default: true,
     },
-    multiple: Boolean,
-    prependIcon: {
-      type: String,
-      default: '$vuetify.icons.file',
-    },
-    placeholder: String,
-    readonly: {
-      type: Boolean,
-      default: true,
-    },
-    type: {
-      type: String,
-      default: 'file',
-    },
-    fileValue: {
-      type: [Object, Array],
-      default: () => ([]),
-    } as PropValidator<File | File[]>,
-    progress: {
-      type: [Number, String],
-      default: null,
-      validator: (v: number | string) => !isNaN(parseInt(v)),
-    } as PropValidator<number | string | null>,
-    counterString: {
-      type: String,
-      default: '$vuetify.fileInput.counter',
-    },
     counterSizeString: {
       type: String,
       default: '$vuetify.fileInput.counterSize',
+    },
+    counterString: {
+      type: String,
+      default: '$vuetify.fileInput.counter',
     },
     displaySize: {
       type: [Boolean, Number],
       default: false,
       validator: v => typeof v === 'boolean' || v === 1000 || v === 1024,
     } as PropValidator<boolean | 1000 | 1024>,
-    chips: Boolean,
-    smallChips: Boolean,
+    multiple: Boolean,
+    placeholder: String,
+    prependIcon: {
+      type: String,
+      default: '$vuetify.icons.file',
+    },
+    progress: {
+      type: [Number, String],
+      default: null,
+      validator: (v: number | string) => !isNaN(parseInt(v)),
+    } as PropValidator<number | string | null>,
+    readonly: {
+      type: Boolean,
+      default: true,
+    },
     removable: {
       type: Boolean,
       default: true,
     },
+    smallChips: Boolean,
+    type: {
+      type: String,
+      default: 'file',
+    },
+    value: {
+      type: [Object, Array],
+      default: () => ([]),
+    } as PropValidator<File | File[]>,
   },
 
   data: () => ({
-    lazyFileValue: [] as any[],
+    lazyValue: [] as File[],
   }),
 
   computed: {
@@ -84,18 +89,33 @@ export default VTextField.extend({
     },
     counterValue (): string {
       if (this.displaySize) {
-        const bytes = this.lazyFileValue.length > 0 ? (this.lazyFileValue as File[]).map(f => f.size).reduce((a, b) => a + b) : 0
-        return this.$vuetify.lang.t(this.counterSizeString, this.lazyFileValue.length, humanReadableFileSize(bytes, this.base))
+        const bytes = this.internalValue.length > 0
+          ? (this.internalValue as File[]).map(f => f.size).reduce((a, b) => a + b)
+          : 0
+
+        return this.$vuetify.lang.t(this.counterSizeString, this.lazyValue.length, humanReadableFileSize(bytes, this.base))
       }
-      return this.$vuetify.lang.t(this.counterString, this.lazyFileValue.length)
+      return this.$vuetify.lang.t(this.counterString, this.lazyValue.length)
+    },
+    internalValue: {
+      get (): File[] {
+        return this.lazyValue
+      },
+      set (val: any) {
+        this.lazyValue = wrapInArray(val)
+        this.$emit('change', this.lazyValue)
+      },
     },
     isDirty (): boolean {
-      return this.lazyFileValue.length > 0
+      return this.internalValue.length > 0
+    },
+    isLabelActive (): boolean {
+      return this.isDirty
     },
     text (): string[] {
-      if (!this.isDirty) return [ this.placeholder ]
+      if (!this.isDirty) return [this.placeholder]
 
-      return this.lazyFileValue.map(file =>
+      return this.internalValue.map((file: File) =>
         this.displaySize ? `${file.name} (${humanReadableFileSize(file.size, this.base)})` : file.name
       )
     },
@@ -107,23 +127,9 @@ export default VTextField.extend({
     },
   },
 
-  watch: {
-    lazyFileValue () {
-      this.$emit('update:fileValue', this.lazyFileValue)
-    },
-    fileValue: {
-      immediate: true,
-      handler () {
-        this.lazyFileValue = wrapInArray(this.fileValue)
-        this.internalValue = null // No way to "push" update from JS to file input
-      },
-    },
-  },
-
   methods: {
     clearableCallback () {
-      this.lazyFileValue = []
-      this.internalValue = null
+      this.internalValue = []
     },
     genPrependSlot () {
       const icon = this.genIcon('prepend', () => {
@@ -139,9 +145,10 @@ export default VTextField.extend({
 
       input.data!.attrs!.multiple = this.multiple
       input.data!.attrs!.accept = this.accept
+      delete input.data!.domProps!.value
       input.data!.on!.change = (e: any) => {
         /* istanbul ignore next */
-        this.lazyFileValue = [...e.target.files]
+        this.internalValue = [...e.target.files]
       }
 
       return [
@@ -150,6 +157,10 @@ export default VTextField.extend({
       ]
     },
     genText () {
+      const children = this.$scopedSlots.selection
+        ? this.$scopedSlots.selection({ text: this.text, files: this.internalValue })
+        : this.hasChips && this.isDirty ? this.genChips() : [this.text.join(', ')]
+
       return this.$createElement('div', {
         staticClass: 'v-file-input__text',
         class: {
@@ -161,22 +172,22 @@ export default VTextField.extend({
             this.$refs.input.click()
           },
         },
-      }, this.$scopedSlots.selection ? this.$scopedSlots.selection({ text: this.text, files: this.lazyFileValue }) : this.hasChips ? this.genChips() : [this.text.join(', ')])
+      }, children)
     },
     genChips () {
-      return this.isDirty
-        ? this.text.map((text, i) => this.$createElement(VChip, {
-          props: {
-            close: this.removable,
-            small: this.smallChips,
+      if (!this.isDirty) return []
+
+      return this.text.map((text, i) => this.$createElement(VChip, {
+        props: {
+          close: this.removable,
+          small: this.smallChips,
+        },
+        on: {
+          'click:close': () => {
+            this.removable && this.internalValue.splice(i, 1)
           },
-          on: {
-            'click:close': () => {
-              this.removable && this.lazyFileValue.splice(i, 1)
-            },
-          },
-        }, [text]))
-        : []
+        },
+      }, [text]))
     },
     genProgress (): VNode | VNode[] | null {
       if (this.loading === false && !this.progress) return null
