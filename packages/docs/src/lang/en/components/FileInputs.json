@@ -1,0 +1,21 @@
+{
+  "header": "# File inputs",
+  "headerText": "The `v-file-input` component is a specialized input that provides a clean interface for selecting files, showing detailed selection information and upload progress.",
+  "examples": {
+    "usage": {
+      "desc": "The `v-file-input` is a basic container for collecting and displaying information on user selected files."
+    }
+  },
+  "props": {
+    "accept": "One or more [unique file type specifiers](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#Unique_file_type_specifiers) describing file types to allow",
+    "chips": "Components.Selects.props.chips",
+    "counterSizeString": "The text displayed when using the **counter** and **display-size** props",
+    "counterString": "The text displayed when using the **counter** prop",
+    "deletableChips": "Components.Selects.props.deletableChips",
+    "displaySize": "Sets the displayed size of selected file(s). When using **true** will default to _base=1000_ displaying (**kB, MB, GB**) while _base=1024_ will display (**KiB, MiB, GiB**).",
+    "multiple": "Components.ItemGroups.props.multiple",
+    "progress": "The current provided progress of the file(s) being uploaded",
+    "smallChips": "Components.Selects.props.smallChips",
+    "value": "A single or array of [File objects](https://developer.mozilla.org/en-US/docs/Web/API/File)"
+  }
+}

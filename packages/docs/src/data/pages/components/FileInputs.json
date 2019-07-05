@@ -1,0 +1,25 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "file": "components/VAutocomplete",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": ["v-file-input"]
+        }
+      ]
+    }
+  ]
+}
