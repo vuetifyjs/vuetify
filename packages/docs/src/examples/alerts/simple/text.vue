@@ -4,28 +4,47 @@
       text
       color="info"
     >
-      I'm a text alert with color info
+      <h3 class="headline">Lorem Ipsum</h3>
+      <div>Maecenas nec odio et ante tincidunt tempus. Sed mollis, eros et ultrices tempus, mauris ipsum aliquam libero, non adipiscing dolor urna a orci. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. Curabitur turpis.</div>
+
+      <v-divider
+        class="my-3 info"
+        style="opacity: 0.22"
+      ></v-divider>
+
+      <v-layout align-center>
+        <div>Proin magna. Vivamus in erat ut urna cursus vestibulum. Etiam imperdiet imperdiet orci.</div>
+        <v-spacer></v-spacer>
+        <v-btn
+          color="info"
+          outlined
+        >Okay</v-btn>
+      </v-layout>
     </v-alert>
     <v-alert
       text
       outlined
-      type="info"
+      color="deep-orange"
+      icon="mdi-fire"
     >
-      I'm a text alert with outlined and type info
+      Nullam tincidunt adipiscing enim. In consectetuer turpis ut velit. Maecenas egestas arcu quis ligula mattis placerat. Praesent metus tellus, elementum eu, semper a, adipiscing nec, purus.
     </v-alert>
     <v-alert
       text
       dense
-      type="info"
+      color="teal"
+      icon="mdi-clock-fast"
+      border="left"
     >
-      I'm a text alert with dense and type info
+      Vestibulum ullamcorper mauris at ligula. Nulla porta dolor. Vestibulum facilisis, purus nec pulvinar iaculis, ligula mi congue nunc, vitae euismod ligula urna in dolor. Curabitur at lacus ac velit ornare lobortis.
     </v-alert>
     <v-alert
       text
       prominent
-      type="info"
+      type="error"
+      icon="mdi-cloud-alert"
     >
-      I'm a text alert with prominent and type info
+      Praesent blandit laoreet nibh. Praesent nonummy mi in odio. Phasellus tempus. Mauris turpis nunc, blandit et, volutpat molestie, porta ut, ligula. Duis leo.
     </v-alert>
   </div>
 </template>

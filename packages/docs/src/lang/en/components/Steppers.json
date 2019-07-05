@@ -1,5 +1,5 @@
 {
-  "header": "# Stepper",
+  "header": "# Steppers",
   "headerText": "The `v-stepper` component displays progress through numbered steps.",
   "examples": {
     "usage": {

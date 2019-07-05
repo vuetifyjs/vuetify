@@ -33,7 +33,13 @@ export default mixins(Routable).extend({
     const { tag, data } = this.generateRouteLink()
 
     return h('li', [
-      h(tag, data, this.$slots.default),
+      h(tag, {
+        ...data,
+        attrs: {
+          ...data.attrs,
+          'aria-current': this.isActive && this.isLink ? 'page' : undefined,
+        },
+      }, this.$slots.default),
     ])
   },
 })

@@ -74,27 +74,27 @@
       </core-title>
       <core-section>
         <v-btn
-          flat
+          text
           small
         >
           Flat
         </v-btn>
         <v-btn
-          flat
+          text
           small
           color="primary"
         >
           Primary
         </v-btn>
         <v-btn
-          flat
+          text
           small
           color="error"
         >
           Error
         </v-btn>
         <v-btn
-          flat
+          text
           small
           disabled
         >
@@ -103,23 +103,23 @@
       </core-section>
 
       <core-section>
-        <v-btn flat>
+        <v-btn text>
           Flat
         </v-btn>
         <v-btn
-          flat
+          text
           color="primary"
         >
           Primary
         </v-btn>
         <v-btn
-          flat
+          text
           color="error"
         >
           Error
         </v-btn>
         <v-btn
-          flat
+          text
           disabled
         >
           Disabled
@@ -128,27 +128,27 @@
 
       <core-section>
         <v-btn
-          flat
+          text
           large
         >
           Flat
         </v-btn>
         <v-btn
-          flat
+          text
           large
           color="primary"
         >
           Primary
         </v-btn>
         <v-btn
-          flat
+          text
           large
           color="error"
         >
           Error
         </v-btn>
         <v-btn
-          flat
+          text
           large
           disabled
         >
@@ -246,27 +246,27 @@
       </core-title>
       <core-section>
         <v-btn
-          round
+          rounded
           small
         >
           Rounded
         </v-btn>
         <v-btn
-          round
+          rounded
           small
           color="primary"
         >
           Primary
         </v-btn>
         <v-btn
-          round
+          rounded
           small
           color="error"
         >
           Error
         </v-btn>
         <v-btn
-          round
+          rounded
           small
           disabled
         >
@@ -275,23 +275,23 @@
       </core-section>
 
       <core-section>
-        <v-btn round>
+        <v-btn rounded>
           Rounded
         </v-btn>
         <v-btn
-          round
+          rounded
           color="primary"
         >
           Primary
         </v-btn>
         <v-btn
-          round
+          rounded
           color="error"
         >
           Error
         </v-btn>
         <v-btn
-          round
+          rounded
           disabled
         >
           Disabled
@@ -300,27 +300,27 @@
 
       <core-section>
         <v-btn
-          round
+          rounded
           large
         >
           Rounded
         </v-btn>
         <v-btn
-          round
+          rounded
           large
           color="primary"
         >
           Primary
         </v-btn>
         <v-btn
-          round
+          rounded
           large
           color="error"
         >
           Error
         </v-btn>
         <v-btn
-          round
+          rounded
           large
           disabled
         >
@@ -419,14 +419,14 @@
       <core-section>
         <v-btn
           outlined
-          round
+          rounded
           small
         >
           Rounded
         </v-btn>
         <v-btn
           outlined
-          round
+          rounded
           small
           color="primary"
         >
@@ -434,7 +434,7 @@
         </v-btn>
         <v-btn
           outlined
-          round
+          rounded
           small
           color="error"
         >
@@ -442,7 +442,7 @@
         </v-btn>
         <v-btn
           outlined
-          round
+          rounded
           small
           disabled
         >
@@ -453,27 +453,27 @@
       <core-section>
         <v-btn
           outlined
-          round
+          rounded
         >
           Rounded
         </v-btn>
         <v-btn
           outlined
-          round
+          rounded
           color="primary"
         >
           Primary
         </v-btn>
         <v-btn
           outlined
-          round
+          rounded
           color="error"
         >
           Error
         </v-btn>
         <v-btn
           outlined
-          round
+          rounded
           disabled
         >
           Disabled
@@ -483,14 +483,14 @@
       <core-section>
         <v-btn
           outlined
-          round
+          rounded
           large
         >
           Rounded
         </v-btn>
         <v-btn
           outlined
-          round
+          rounded
           large
           color="primary"
         >
@@ -498,7 +498,7 @@
         </v-btn>
         <v-btn
           outlined
-          round
+          rounded
           large
           color="error"
         >
@@ -506,7 +506,7 @@
         </v-btn>
         <v-btn
           outlined
-          round
+          rounded
           large
           disabled
         >
@@ -616,7 +616,7 @@
         <v-btn
           outlined
           text
-          round
+          rounded
           small
         >
           Rounded
@@ -624,7 +624,7 @@
         <v-btn
           outlined
           text
-          round
+          rounded
           small
           color="primary"
         >
@@ -633,7 +633,7 @@
         <v-btn
           outlined
           text
-          round
+          rounded
           small
           color="error"
         >
@@ -642,7 +642,7 @@
         <v-btn
           outlined
           text
-          round
+          rounded
           small
           disabled
         >
@@ -654,14 +654,14 @@
         <v-btn
           outlined
           text
-          round
+          rounded
         >
           Rounded
         </v-btn>
         <v-btn
           outlined
           text
-          round
+          rounded
           color="primary"
         >
           Primary
@@ -669,7 +669,7 @@
         <v-btn
           outlined
           text
-          round
+          rounded
           color="error"
         >
           Error
@@ -677,7 +677,7 @@
         <v-btn
           outlined
           text
-          round
+          rounded
           disabled
         >
           Disabled
@@ -688,7 +688,7 @@
         <v-btn
           outlined
           text
-          round
+          rounded
           large
         >
           Rounded
@@ -696,7 +696,7 @@
         <v-btn
           outlined
           text
-          round
+          rounded
           large
           color="primary"
         >
@@ -705,7 +705,7 @@
         <v-btn
           outlined
           text
-          round
+          rounded
           large
           color="error"
         >
@@ -714,7 +714,7 @@
         <v-btn
           outlined
           text
-          round
+          rounded
           large
           disabled
         >
@@ -1413,32 +1413,32 @@
     >
       <core-section>
         <v-btn-toggle>
-          <v-btn flat>
+          <v-btn text>
             <v-icon>mdi-format-align-left</v-icon>
           </v-btn>
-          <v-btn flat>
+          <v-btn text>
             <v-icon>mdi-format-align-center</v-icon>
           </v-btn>
-          <v-btn flat>
+          <v-btn text>
             <v-icon>mdi-format-align-right</v-icon>
           </v-btn>
-          <v-btn flat>
+          <v-btn text>
             <v-icon>mdi-format-align-justify</v-icon>
           </v-btn>
         </v-btn-toggle>
       </core-section>
       <core-section>
         <v-btn-toggle multiple>
-          <v-btn flat>
+          <v-btn text>
             <v-icon>mdi-format-bold</v-icon>
           </v-btn>
-          <v-btn flat>
+          <v-btn text>
             <v-icon>mdi-format-italic</v-icon>
           </v-btn>
-          <v-btn flat>
+          <v-btn text>
             <v-icon>mdi-format-underline</v-icon>
           </v-btn>
-          <v-btn flat>
+          <v-btn text>
             <v-icon>mdi-format-color-fill</v-icon>
           </v-btn>
         </v-btn-toggle>
@@ -1464,32 +1464,32 @@
       </core-section>
       <core-section>
         <v-btn-toggle>
-          <v-btn flat>
+          <v-btn text>
             <v-icon>mdi-format-align-left</v-icon>
           </v-btn>
-          <v-btn flat>
+          <v-btn text>
             <v-icon>mdi-format-align-center</v-icon>
           </v-btn>
-          <v-btn flat>
+          <v-btn text>
             <v-icon>mdi-format-align-right</v-icon>
           </v-btn>
-          <v-btn flat>
+          <v-btn text>
             <v-icon>mdi-format-align-justify</v-icon>
           </v-btn>
         </v-btn-toggle>
       </core-section>
       <core-section>
         <v-btn-toggle mandatory>
-          <v-btn flat>
+          <v-btn text>
             <v-icon>mdi-format-align-left</v-icon>
           </v-btn>
-          <v-btn flat>
+          <v-btn text>
             <v-icon>mdi-format-align-center</v-icon>
           </v-btn>
-          <v-btn flat>
+          <v-btn text>
             <v-icon>mdi-format-align-right</v-icon>
           </v-btn>
-          <v-btn flat>
+          <v-btn text>
             <v-icon>mdi-format-align-justify</v-icon>
           </v-btn>
         </v-btn-toggle>
@@ -1497,25 +1497,25 @@
       <core-section>
         <v-btn-toggle>
           <v-btn
-            flat
+            text
             value="left"
           >
             Left
           </v-btn>
           <v-btn
-            flat
+            text
             value="center"
           >
             Center
           </v-btn>
           <v-btn
-            flat
+            text
             value="right"
           >
             Right
           </v-btn>
           <v-btn
-            flat
+            text
             value="justify"
           >
             Justify
@@ -1525,28 +1525,28 @@
       <core-section>
         <v-btn-toggle>
           <v-btn
-            flat
+            text
             value="left"
           >
             <span>Left</span>
             <v-icon>mdi-format-align-left</v-icon>
           </v-btn>
           <v-btn
-            flat
+            text
             value="center"
           >
             <span>Center</span>
             <v-icon>mdi-format-align-center</v-icon>
           </v-btn>
           <v-btn
-            flat
+            text
             value="right"
           >
             <span>Right</span>
             <v-icon>mdi-format-align-right</v-icon>
           </v-btn>
           <v-btn
-            flat
+            text
             value="justify"
           >
             <span>Justify</span>

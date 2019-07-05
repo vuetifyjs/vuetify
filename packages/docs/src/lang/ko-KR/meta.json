@@ -9,10 +9,10 @@
   "getting-started/contributing": {
     "description": "Help develop Vuetify with new features and functionality."
   },
-  "framework/theme": {
+  "customization/theme": {
     "description": "Setup your custom application theme by changing a few variables."
   },
-  "framework/grid-lists": {
+  "components/grid-lists": {
     "description": "Grid list component for Vuetify Framework"
   },
   "components/inputs": {

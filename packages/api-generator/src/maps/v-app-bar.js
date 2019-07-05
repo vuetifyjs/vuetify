@@ -4,8 +4,8 @@ module.exports = {
     scopedSlots: [{
       name: 'img',
       props: {
-        props: '{ height: string, src: string | srcObject }'
-      }
-    }]
-  }
+        props: '{ height: string, src: string | srcObject }',
+      },
+    }],
+  },
 }

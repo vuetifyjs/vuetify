@@ -12,7 +12,7 @@
           v-model="search"
           prepend-inner-icon="mdi-comment-search"
           label="Search"
-          box
+          filled
           single-line
           clearable
         />

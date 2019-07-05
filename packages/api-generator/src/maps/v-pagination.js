@@ -3,16 +3,16 @@ module.exports = {
     events: [
       {
         name: 'input',
-        value: 'number'
+        value: 'number',
       },
       {
         name: 'next',
-        value: 'void'
+        value: 'void',
       },
       {
         name: 'previous',
-        value: 'void'
-      }
-    ]
-  }
+        value: 'void',
+      },
+    ],
+  },
 }

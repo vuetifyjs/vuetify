@@ -6,8 +6,8 @@
       "type": "section",
       "children": [
         {
-          "type": "text",
-          "lang": "whyText1"
+          "type": "heading",
+          "lang": "core"
         },
         {
           "type": "getting-started-why-vuetify"

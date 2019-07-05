@@ -10,7 +10,7 @@ export default new Vuetify({
     iconfont: 'fa',
     values: {
       cancel: 'fas fa-ban',
-      menu: 'fas fa-ellipsis-v'
-    }
-  }
+      menu: 'fas fa-ellipsis-v',
+    },
+  },
 })

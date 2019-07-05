@@ -1,5 +1,5 @@
 {
-  "header": "# Menu",
+  "header": "# Menus",
   "headerText": "The `v-menu` component shows a menu at the position of the element used to activate it.",
   "examples": {
     "usage": {

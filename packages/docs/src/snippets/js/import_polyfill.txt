@@ -1,4 +1,9 @@
-// my-project/src/index.js
+// src/main.js
+
 import 'babel-polyfill'
-...
-new Vue()
+import Vue from 'vue'
+import vuetify from '@plugins/vuetify'
+
+new Vue({
+  vuetify,
+}).$mount('#app')

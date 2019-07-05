@@ -8,6 +8,16 @@
   },
   "children": [
     {
+      "type":"section",
+      "children": [
+        {
+          "type": "alert",
+          "lang": "alert",
+          "value": "error"
+        }
+      ]
+    },
+    {
       "type": "section",
       "children": [
         {
@@ -42,7 +52,6 @@
           "value": [
             "simple/colored",
             "simple/permanent-floating",
-            "simple/permanent-floating-card",
             "simple/mini",
             "simple/temporary",
             "simple/right",
@@ -62,7 +71,7 @@
           "value": [
             "components/lists",
             "components/icons",
-            "framework/pre-made-layouts"
+            "getting-started/pre-made-layouts"
           ]
         }
       ]

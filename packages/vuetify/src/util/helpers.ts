@@ -141,13 +141,18 @@ export function directiveConfig (binding: BindingConfig, defaults = {}): VNodeDi
   }
 }
 
-export function addOnceEventListener (el: EventTarget, event: string, cb: () => void): void {
-  var once = () => {
-    cb()
-    el.removeEventListener(event, once, false)
+export function addOnceEventListener (
+  el: EventTarget,
+  eventName: string,
+  cb: (event: Event) => void,
+  options: boolean | AddEventListenerOptions = false
+): void {
+  var once = (event: Event) => {
+    cb(event)
+    el.removeEventListener(eventName, once, options)
   }
 
-  el.addEventListener(event, once, false)
+  el.addEventListener(eventName, once, options)
 }
 
 let passiveSupported = false

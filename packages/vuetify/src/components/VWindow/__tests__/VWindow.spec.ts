@@ -104,14 +104,16 @@ describe('VWindow.ts', () => {
     wrapper.vm.next()
     expect(wrapper.vm.internalIndex).toBe(2)
 
+    // changed all following indices
+    // due to: https://github.com/vuetifyjs/vuetify/issues/7728
     wrapper.vm.next()
-    expect(wrapper.vm.internalIndex).toBe(0)
-
-    wrapper.vm.prev()
     expect(wrapper.vm.internalIndex).toBe(2)
 
     wrapper.vm.prev()
     expect(wrapper.vm.internalIndex).toBe(1)
+
+    wrapper.vm.prev()
+    expect(wrapper.vm.internalIndex).toBe(0)
 
     wrapper.vm.prev()
     expect(wrapper.vm.internalIndex).toBe(0)
@@ -167,19 +169,21 @@ describe('VWindow.ts', () => {
     touch(wrapper).start(0, 0).end(200, 0)
     expect(wrapper.vm.internalIndex).toBe(0)
 
+    // changed expected indices due to:
+    // https://github.com/vuetifyjs/vuetify/issues/7728
     touch(wrapper).start(0, 0).end(200, 0)
-    expect(wrapper.vm.internalIndex).toBe(4)
+    expect(wrapper.vm.internalIndex).toBe(0)
 
     touch(wrapper).start(200, 0).end(0, 0)
-    expect(wrapper.vm.internalIndex).toBe(0)
+    expect(wrapper.vm.internalIndex).toBe(1)
 
     wrapper.setProps({ value: 4 })
     touch(wrapper).start(200, 0).end(0, 0)
-    expect(wrapper.vm.internalIndex).toBe(0)
+    expect(wrapper.vm.internalIndex).toBe(4)
 
     wrapper.setProps({ value: 0 })
     touch(wrapper).start(0, 0).end(200, 0)
-    expect(wrapper.vm.internalIndex).toBe(4)
+    expect(wrapper.vm.internalIndex).toBe(0)
   })
 
   it('should accept a custom touch object', async () => {
@@ -319,5 +323,35 @@ describe('VWindow.ts', () => {
     touch(wrapper).start(0, 0).end(200, 0)
 
     expect(wrapper.vm.internalIndex).toBe(0)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/7728
+  it('should not "wrap around" when continuous === false', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        continuous: false,
+      },
+      slots: {
+        default: [
+          { extends: VWindowItem },
+          { extends: VWindowItem },
+          { extends: VWindowItem },
+        ],
+      },
+    })
+
+    // by default we expect the internalIndex to be 0
+    expect(wrapper.vm.internalIndex).toBe(0)
+    // now call the prev() function
+    wrapper.vm.prev()
+    expect(wrapper.vm.internalIndex).toBe(0)
+    // now advance to the end
+    wrapper.vm.next()
+    expect(wrapper.vm.internalIndex).toBe(1)
+    wrapper.vm.next()
+    expect(wrapper.vm.internalIndex).toBe(2)
+    // it should not be able to advance past the end
+    wrapper.vm.next()
+    expect(wrapper.vm.internalIndex).toBe(2)
   })
 })

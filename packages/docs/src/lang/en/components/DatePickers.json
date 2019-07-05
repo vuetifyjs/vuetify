@@ -104,7 +104,7 @@
       "desc": "Date pickers come in two orientation variations, portrait **(default)** and landscape. By default they are emitting `input` event when the day (for date picker) or month (for month picker), but with **reactive** prop they can update the model even after clicking year/month."
     }
   },
-  "header": "# Date/month picker",
+  "header": "# Date/month pickers",
   "headerText": "The `v-date-picker` is stand-alone component that can be utilized in many existing Vuetify components. It offers the user a visual representation for selecting date/month.",
   "props": {
     "disabled": "Disables interaction with the picker",

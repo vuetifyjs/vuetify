@@ -4,13 +4,13 @@ module.exports = {
       {
         name: 'arg:target',
         default: 'window',
-        type: 'String'
+        type: 'String',
       },
       {
         name: 'value',
         default: '(): {}',
-        type: 'Function'
-      }
-    ]
-  }
+        type: 'Function',
+      },
+    ],
+  },
 }

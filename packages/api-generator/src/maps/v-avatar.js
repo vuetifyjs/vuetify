@@ -1,5 +1,5 @@
 module.exports = {
   'v-avatar': {
-    slots: ['default']
-  }
+    slots: ['default'],
+  },
 }

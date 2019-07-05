@@ -11,7 +11,7 @@
               width="100%"
             />
             <v-card-text>
-              <h3 class="subheading font-weight-bold mb-2 text--primary" v-text="feature.title" />
+              <h2 class="subtitle-1 font-weight-bold mb-2 text--primary" v-text="feature.title" />
               <p class="mb-2" v-text="feature.text" />
             </v-card-text>
           </v-card>

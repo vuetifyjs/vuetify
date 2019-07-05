@@ -6,8 +6,8 @@ module.exports = {
         name: 'dense',
         type: 'boolean',
         default: 'false',
-        'source': null
-      }
-    ]
-  }
+        'source': null,
+      },
+    ],
+  },
 }

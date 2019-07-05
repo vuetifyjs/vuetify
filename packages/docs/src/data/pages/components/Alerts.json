@@ -36,6 +36,7 @@
         {
           "type": "examples",
           "value": [
+            "simple/type",
             "simple/border",
             "simple/colored-border",
             "simple/dense",
@@ -45,9 +46,17 @@
             "simple/prominent",
             "simple/text",
             "simple/transition",
-            "simple/type",
             "complex/twitter"
           ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "accessibility",
+          "value": "accessibility"
         }
       ]
     },

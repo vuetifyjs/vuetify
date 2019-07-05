@@ -12,7 +12,7 @@ import VLabel from '../VLabel'
 import Loadable from '../../mixins/loadable'
 
 // Directives
-import Ripple from '../../directives/ripple'
+import ripple from '../../directives/ripple'
 
 // Utilities
 import { convertToUnit, keyCodes } from '../../util/helpers'
@@ -42,7 +42,7 @@ const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', '
 export default baseMixins.extend<options>().extend({
   name: 'v-text-field',
 
-  directives: { Ripple },
+  directives: { ripple },
 
   inheritAttrs: false,
 
@@ -327,7 +327,7 @@ export default baseMixins.extend<options>().extend({
           dark: this.dark,
           disabled: this.disabled,
           focused: !this.isSingle && (this.isFocused || !!this.validationState),
-          for: this.id,
+          for: this.computedId,
           left: this.labelPosition.left,
           light: this.light,
           right: this.labelPosition.right,
@@ -345,7 +345,7 @@ export default baseMixins.extend<options>().extend({
 
       return this.$createElement('legend', {
         style: {
-          width: convertToUnit(width),
+          width: !this.isSingle ? convertToUnit(width) : undefined,
         },
       }, [span])
     },
@@ -359,11 +359,10 @@ export default baseMixins.extend<options>().extend({
           value: this.lazyValue,
         },
         attrs: {
-          'aria-label': !this.id && this.label, // Label `for` will be set if we have an id
           ...this.$attrs,
           autofocus: this.autofocus,
           disabled: this.disabled,
-          id: this.id,
+          id: this.computedId,
           placeholder: this.placeholder,
           readonly: this.readonly,
           type: this.type,

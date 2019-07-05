@@ -59,11 +59,12 @@ export default mixins(
       default: () => ([]),
     } as PropValidator<NodeArray>,
     dense: Boolean,
+    filter: Function as PropValidator<FilterTreeItemFunction>,
+    hoverable: Boolean,
     items: {
       type: Array,
       default: () => ([]),
     } as PropValidator<any[]>,
-    hoverable: Boolean,
     multipleActive: Boolean,
     open: {
       type: Array,
@@ -74,25 +75,24 @@ export default mixins(
       type: Boolean,
       default: false, // TODO: Should be true in next major
     },
-    value: {
-      type: Array,
-      default: () => ([]),
-    } as PropValidator<NodeArray>,
     search: String,
-    filter: Function as PropValidator<FilterTreeItemFunction>,
     selectionType: {
       type: String,
       default: 'leaf',
       validator: (v: string) => ['leaf', 'independent'].includes(v),
     } as PropValidator<'leaf' | 'independent'>,
+    value: {
+      type: Array,
+      default: () => ([]),
+    } as PropValidator<NodeArray>,
     ...VTreeviewNodeProps,
   },
 
   data: () => ({
-    nodes: {} as Record<string | number, NodeState>,
-    selectedCache: new Set() as NodeCache,
     activeCache: new Set() as NodeCache,
+    nodes: {} as Record<string | number, NodeState>,
     openCache: new Set() as NodeCache,
+    selectedCache: new Set() as NodeCache,
   }),
 
   computed: {

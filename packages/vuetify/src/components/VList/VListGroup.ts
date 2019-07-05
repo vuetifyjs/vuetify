@@ -14,14 +14,13 @@ import Toggleable from '../../mixins/toggleable'
 import { inject as RegistrableInject } from '../../mixins/registrable'
 
 // Directives
-import Ripple from '../../directives/ripple'
+import ripple from '../../directives/ripple'
 
 // Transitions
 import { VExpandTransition } from '../transitions'
 
 // Utils
 import mixins, { ExtractVue } from '../../util/mixins'
-import { keyCodes } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
@@ -47,7 +46,7 @@ interface options extends ExtractVue<typeof baseMixins> {
 export default baseMixins.extend<options>().extend({
   name: 'v-list-group',
 
-  directives: { Ripple },
+  directives: { ripple },
 
   props: {
     activeClass: {
@@ -134,6 +133,10 @@ export default baseMixins.extend<options>().extend({
     genHeader (): VNode {
       return this.$createElement(VListItem, {
         staticClass: 'v-list-group__header',
+        attrs: {
+          'aria-expanded': String(this.isActive),
+          role: 'button',
+        },
         class: {
           [this.activeClass]: this.isActive,
         },
@@ -147,10 +150,6 @@ export default baseMixins.extend<options>().extend({
         on: {
           ...this.$listeners,
           click: this.click,
-          keydown: (e: KeyboardEvent) => {
-            /* istanbul ignore else */
-            if (e.keyCode === keyCodes.enter) this.click()
-          },
         },
       }, [
         this.genPrependIcon(),

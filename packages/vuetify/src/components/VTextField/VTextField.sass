@@ -264,7 +264,8 @@
 
   &--solo,
   &--outlined,
-  &--full-width
+  &--full-width,
+  &--rounded
     & > .v-input__control > .v-input__slot
       &:before,
       &:after
@@ -274,9 +275,6 @@
     margin-bottom: 16px
     transition: border $primary-transition
 
-    input
-      margin-top: 12px
-
     .v-label
       top: 18px
 
@@ -284,7 +282,6 @@
         transform: translateY(-24px) scale(.75)
 
     fieldset
-      border-radius: 4px
       border-style: solid
       border-width: 1px
       bottom: 0
@@ -335,10 +332,21 @@
         border-color: currentColor
         border-width: 2px
 
-  &--solo > .v-input__control > .v-input__slot
+  &--solo,
+  &--outlined
     border-radius: 4px
 
+    fieldset,
+    .v-input__control,
+    .v-input__slot
+      border-radius: inherit
+
+    .v-text-field__slot
+      align-items: center
+
   &--rounded
+    border-radius: 28px
+
     &.v-text-field--outlined
       fieldset
         border-radius: 28px
@@ -366,9 +374,6 @@
 
     &:not(.v-text-field--solo-flat) > .v-input__control > .v-input__slot
       +elevation(2)
-
-    .v-text-field__slot
-      align-items: center
 
     .v-input__append-inner,
     .v-input__prepend-inner

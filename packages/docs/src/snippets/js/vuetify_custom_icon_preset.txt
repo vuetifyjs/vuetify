@@ -26,13 +26,13 @@ const MY_ICONS = {
   dropdown: '...',
   radioOn: '...',
   radioOff: '...',
-  edit: '...'
+  edit: '...',
 }
 
 Vue.use(Vuetify)
 
 export default new Vuetify({
   icons: {
-    values: MY_ICONS
-  }
+    values: MY_ICONS,
+  },
 })

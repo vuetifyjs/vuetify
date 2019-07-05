@@ -56,7 +56,7 @@
         {
           "type": "up-next",
           "value": [
-            "framework/icons",
+            "customization/icons",
             "components/buttons",
             "components/cards"
           ]

@@ -64,7 +64,7 @@
           "value": [
             "components/dialogs",
             "components/tooltips",
-            "framework/transitions"
+            "styles/transitions"
           ]
         }
       ]

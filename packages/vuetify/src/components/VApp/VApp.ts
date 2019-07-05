@@ -28,24 +28,14 @@ export default mixins(
     },
   },
 
-  computed: {
-    isDark () {
-      if (this.dark != null || this.light != null) {
-        return Themeable.options.computed.isDark.call(this)
-      }
-
-      return this.$vuetify.theme.dark
-    },
-  },
-
   render (h) {
-    const wrapper = h('div', { staticClass: 'application--wrap' }, this.$slots.default)
+    const wrapper = h('div', { staticClass: 'v-application--wrap' }, this.$slots.default)
 
     return h('div', {
-      staticClass: 'application',
+      staticClass: 'v-application',
       class: {
-        'application--is-rtl': this.$vuetify.rtl,
-        'application--is-ltr': !this.$vuetify.rtl,
+        'v-application--is-rtl': this.$vuetify.rtl,
+        'v-application--is-ltr': !this.$vuetify.rtl,
         ...this.themeClasses,
       },
       attrs: { 'data-app': true },

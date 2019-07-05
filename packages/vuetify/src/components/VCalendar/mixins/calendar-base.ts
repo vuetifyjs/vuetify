@@ -43,6 +43,11 @@ export default mixins(
     weekdaySkips (): number[] {
       return getWeekdaySkips(this.weekdays)
     },
+    weekdaySkipsReverse (): number [] {
+      const reversed = this.weekdaySkips.slice()
+      reversed.reverse()
+      return reversed
+    },
     parsedStart (): VTimestamp {
       return parseTimestamp(this.start) as VTimestamp
     },
