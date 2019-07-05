@@ -98,7 +98,7 @@
 
     mounted () {
       this.$nextTick(this.init)
-      const branch = (window) ? window.location.hostname.split(',')[0] : 'master'
+      const branch = (window) ? window.location.hostname.split('.')[0] : 'master'
       this.branch = ['master', 'dev', 'next'].includes(branch) ? branch : 'master'
     },
 
