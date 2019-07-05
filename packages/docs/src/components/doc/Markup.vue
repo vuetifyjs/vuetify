@@ -11,7 +11,7 @@
       class="v-markup__edit"
     >
       <a
-        :href="`https://github.com/vuetifyjs/vuetify/tree/master/packages/docs/src/snippets/${file}`"
+        :href="href"
         target="_blank"
         rel="noopener"
         title="Edit code"
@@ -76,6 +76,7 @@
       code: null,
       copied: false,
       language: vm.lang,
+      branch: null,
     }),
 
     computed: {
@@ -87,10 +88,7 @@
         return `${folder}/${file}.txt`
       },
       href () {
-        const branch = process.env.NODE_ENV === 'production' ? 'master' : 'dev'
-        const href = `https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/docs/src/snippets`
-
-        return `${href}/${this.file}`
+        return `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/snippets/${this.file}`
       },
       id () {
         if (this.value === 'markup') return
@@ -100,6 +98,8 @@
 
     mounted () {
       this.$nextTick(this.init)
+      const branch = (window) ? window.location.hostname.split(',')[0] : 'master'
+      this.branch = ['master', 'dev', 'next'].includes(branch) ? branch : 'master'
     },
 
     methods: {
