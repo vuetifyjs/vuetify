@@ -17,10 +17,12 @@ import { VuetifyGoToOptions } from './services/goto'
 import { VuetifyIconOptions } from './services/icons'
 import { VuetifyLangOptions } from './services/lang'
 import { VuetifyThemeOptions } from './services/theme'
+import { VuetifyPreset } from './presets'
 
 declare const Vuetify: Vuetify
 export default Vuetify
 export interface Vuetify {
+  new (preset?: Partial<VuetifyPreset>): Vuetify;
   install: PluginFunction<VuetifyUseOptions>
   version: string
 }
