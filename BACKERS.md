@@ -26,74 +26,94 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Elfo s.r.l.
 - Codefirst
 - Dan Trevino
-- customessaymeister
-- blokt
+- [customessaymeister](https://www.customessaymeister.com/)
+- [blokt](https://blokt.com/)
+- [Loomio](https://www.loomio.org/)
 - Hannes Kochniß
 
 ### $20+
 - Michael Marti
-- Jay Blanchard
 - [Aeroden](https://www.aeroden.com) <!-- Adrian Belovic -->
-- Robin Paolini
-- Jason Frueh
-- [Integra CCS](https://www.integraccs.com/)
-- Kyle Lawhorn
-- Team of Monkeys
+- Jay Blanchard
 - Christo Crampton
-- Working Group Two
-- Austin Ginder
+- Team of Monkeys
+- Robin Paolini
+- [Integra CCS](https://www.integraccs.com/)
+- Joel Hatch
 - Juha Vehnia
 - Kent Johnson
-- Joel Hatch
+- Working Group Two
+- Kyle Lawhorn
+- Jason Frueh
+- Austin Ginder
+- Brad Stewart
 
 ### $10+
-- MEHMET SAGLAM
-- Mark
-- Sean Kimball
-- Alexander Weiher
-- Michael Hipp
 - Chava Sobreyra
-- Alvin Wang
-- Steve Drucker
-- Glen Azzpardi
-- James Chang
-- Taylor Hubbard
-- Dave Willenberg
-- Jan Hjørdie
-- Cảnh Kiều
+- Costa Huang
 - Paul
-- Tom McGee
-- Matheus Fonseca
 - Philippe Genois
-- Jadranko Dragoje
 - Sam Bosell
-- Daniel Rivers
-- Rich Harris
+- Omar Spira
+- Jiří Žižka
 - Anthony Estebe
-- Blaine Landowski
-- Christopher Bartling
-- Paul Whittemore
-- Mateusz Gilewicz
-- Boris Dayma
-- Rollin Crittendon
+- Eelco Wentrup
+- Mike Margerum
 - Mark Freedman
-- Erik Vavro
-- Quitin Donnel henry
-- Stephen Elliot
-- Pierre Vanhulst
-- Göran Ehrsson
-- Keyur Desai
-- Jeremy Hall
-- Eric Helgeson
-- Harrison Leong
+- Alvin Wang
+- Jadranko Dragoje
+- Stanislovas Janonis
 - Brandon Deo
-- Bohdan Kokotko
-- Justin Sheppard
-- Jaeyoung Lee
+- Idea Junction Ltd.
+- Michael Hipp
+- Keyur Desai
+- Blaine Landowski
+- Paul Whittemore
 - Helmi
-- Daan Roet
+- Hexodus
+- Pierre Vanhulst
+- Brett Lindenberg
+- Cảnh Kiều
+- Dave Willenberg
+- James Chang
+- YubiGeek
 - Shu Ogawa
+- Daan Roet
+- Quentin Casares
+- Jeremy Hall
+- Harrison Leong
+- Cameron Cox
+- Harold Bruton
 - Daaron Dwyer
-- Morgan Benton
-- Afilio GmbH
+- Adam Kaput
+- Eric Helgeson
+- Glen Azzopardi
+- Rich Harris
+- Jilson Thomas
+- Boris Dayma
+- Jaeyoung Lee
 - Nathanael Björkgård
+- Göran Ehrsson
+- Daniel Rivers
+- Tom McGee
+- Justin Sheppard
+- Steve Drucker
+- Morgan Benton
+- Christopher Bartling
+- Matheus Fonseca
+- Stephen Elliot
+- Jan Hjørdie
+- Chirstian Burkhard
+- Mateusz Gilewicz
+- Quitin Donnell henry
+- Salty Fish
+- Graham Hunter
+- Erik Vavro
+- Bohdan Kokotko
+- Daniel Chote
+- Mohammed Alkhuzayyim
+- Jonty Brook
+- Jose Rojas
+- Sean Kimball
+- MEHMET SAGLAM
+- Mark Couvaras
