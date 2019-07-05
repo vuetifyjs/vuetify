@@ -16,7 +16,7 @@
           v-if="structure.file"
           shrink
         >
-          <core-file-btn :link="structure.file" />
+          <core-file-btn :link="structure.file" :branch="branch" />
         </v-flex>
         <v-flex
           v-if="structure.mdSpec"
@@ -45,7 +45,7 @@
         :value="child"
       />
 
-      <doc-contribution />
+      <doc-contribution :branch="branch" />
     </template>
   </v-container>
   <not-found v-else />
@@ -65,6 +65,7 @@
 
     data: () => ({
       timeout: null,
+      branch: null,
     }),
 
     computed: {
@@ -81,6 +82,9 @@
 
     mounted () {
       this.init()
+
+      const branch = (window) ? window.location.hostname.split(',')[0] : 'master'
+      this.branch = ['master', 'dev', 'next'].includes(branch) ? branch : 'master'
     },
 
     methods: {

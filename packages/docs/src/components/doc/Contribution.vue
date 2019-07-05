@@ -23,6 +23,12 @@
   import { parseLink } from '@/util/helpers'
 
   export default {
+    props: {
+      branch: {
+        type: String,
+        default: 'master',
+      },
+    },
     computed: {
       ...mapGetters('documentation', [
         'namespace',
@@ -40,11 +46,11 @@
       },
       contributionLanguageLink () {
         const file = `${this.params.namespace}/${this.page}.json`
-        return `https://github.com/vuetifyjs/vuetify/tree/master/packages/docs/src/lang/${this.params.lang}/${file}`
+        return `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/lang/${this.params.lang}/${file}`
       },
       contributionPageLink () {
         const file = `${this.params.namespace}/${this.page}.json`
-        return `https://github.com/vuetifyjs/vuetify/tree/master/packages/docs/src/data/pages/${file}`
+        return `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/data/pages/${file}`
       },
     },
 
