@@ -4,10 +4,10 @@
   "buttonMargin": "When `<v-btn>`s with the **icon** prop are used inside of `v-toolbar` and `v-app-bar` they will automatically have their size increased and negative margin applied to ensure proper spacing according to the Material Design Specification. If you choose to wrap your buttons in any container, such as a `<div>`, you will need to apply negative margin to that container in order to properly align them.",
   "examples": {
     "usage": {
-      "desc": "A toolbar is a flexible container that can be utilized in a number of ways. By default, the toolbar is 64px high on desktop and 56px high on mobile. There are a number of helper components available to use with the toolbar. The `v-toolbar-title` is used for displaying a title and `v-toolbar-items` allow [v-btn](/components/buttons) to extend full height."
+      "desc": "A toolbar is a flexible container that can be used in a number of ways. By default, the toolbar is 64px high on desktop and 56px high on mobile. There are a number of helper components available to use with the toolbar. The `v-toolbar-title` is used for displaying a title and `v-toolbar-items` allow [v-btn](/components/buttons) to extend full height."
     },
-    "column-width-with-hierarchy": {
-      "header": "### Column width with hierarchy",
+    "light-and-dark": {
+      "header": "### Light and Dark",
       "desc": "Toolbars come in **2** variants, light and dark. Light toolbars have dark tinted buttons and dark text whereas dark toolbars have white tinted buttons and white text."
     },
     "flexible-and-card": {
@@ -16,7 +16,7 @@
     },
     "floating-with-search": {
       "header": "### Floating with search",
-      "desc": "A floating toolbar is turned into an inline element that only takes up as much space as needed. This is particilarly useful when placing toolbars over content."
+      "desc": "A floating toolbar is turned into an inline element that only takes up as much space as needed. This is particularly useful when placing toolbars over content."
     },
     "variations": {
       "header": "### Variations",
@@ -25,7 +25,7 @@
     },
     "prominent": {
       "header": "### Prominent toolbars",
-      "desc": "Prominent toolbars increase the `v-toolbar`'s height to _128px_ and positions the `v-toolbar-title` towards the bottom of the container. This is exanded upon in [v-app](/components/app-bars#prominent-w-scroll-shrink) with the ability to shrink a **prominent** toolbar to a **dense** or **short** one."
+      "desc": "Prominent toolbars increase the `v-toolbar`'s height to _128px_ and positions the `v-toolbar-title` towards the bottom of the container. This is expanded upon in [v-app](/components/app-bars#prominent-w-scroll-shrink) with the ability to shrink a **prominent** toolbar to a **dense** or **short** one."
     },
     "dense": {
       "header": "### Dense toolbars",
@@ -33,11 +33,11 @@
     },
     "dense-prominent": {
       "header": "### Dense prominent toolbars",
-      "desc": "You can combine both the prominent and dense to extend a smaller variant of the toolbar."
+      "desc": "You can combine both the prominent and dense properties."
     },
     "scrolling": {
       "header": "### Scrolling techniques",
-      "desc": "A toolbar can transition off screen when scrolling. Here we demonstrate how you can specify the scroll target (default is window). Keep in mind, for this example there is special markup that will not be required in your application."
+      "desc": "A toolbar can transition off screen when scrolling. Here we demonstrate how you can specify the scroll target (default is window). Note: for this example there is special markup that will not be required in your application."
     },
     "system-bars-status-window": {
       "header": "### System bars - status/window",
@@ -45,7 +45,7 @@
     },
     "contextual-action-bar": {
       "header": "### Contextual action bars",
-      "desc": "In this example we conntext various item visibility states through a `v-select`'s **v-model**."
+      "desc": "It is possible to update the appearance of a toolbar in response to changes in app state. In this example, the color and content of the toolbar changes in response to user selections in the `v-select`."
     },
     "background": {
       "header": "### Prominent w/ Background",
@@ -53,36 +53,34 @@
     },
     "extended": {
       "header": "### Extended",
-      "desc": "Toolbars can generate extension even without slot."
+      "desc": "Toolbars can be extended without using the `extension` slot."
     },
     "extension-height": {
       "header": "### Extension height",
-      "desc": "Extension's height can be customized."
+      "desc": "The extension's height can be customized."
     },
     "collapse": {
       "header": "### Collapse",
-      "desc": "Toolbars can collapse to save space on screen."
+      "desc": "Toolbars can be collapsed to save screen space."
     }
   },
   "props": {
     "absolute": "Absolutely position the toolbar",
     "bottom": "Mixins.Positionable.props.bottom",
-    "collapse": "Puts the toolbar into a collapse state",
-    "dense": "Reduces the height of the toolbar content to 48px (96px when using with prominent)",
-    "extended": "Force the toolbar to generate the extension without using the slot",
-    "extensionHeight": "Specify an explicit height for the extended slot",
+    "collapse": "Puts the toolbar into a collapsed state",
+    "dense": "Reduces the height of the toolbar content to 48px (96px when using with `prominent`)",
+    "extended": "Use this prop to increase the height of the toolbar _without_ using the `extension` slot for adding content. May be used in conjunction with `extension-height`, and any of the other props that affect the height of the toolbar, e.g. `prominent`, `dense`, etc., **except** `height`",
+    "extensionHeight": "Specify an explicit height in pixels for the `extension` slot. ",
     "flat": "Removes the toolbar box-shadow",
     "floating": "Makes the toolbar float inline",
-    "height": "Designates a specific height for the toolbar",
-    "lightsOut": "Reduces the system bar opacity",
+    "height": "Designates a specific height for the toolbar. Overrides the heights imposed by other props, e.g. `prominent`, `dense`, `extended`, etc.",
     "prominent": "Increases the height of the toolbar content to 128px",
-    "short": "Reduce the height of the toolbar content to 56px (112px when using with short)",
+    "short": "Reduce the height of the toolbar content to 56px (112px when using with `prominent`)",
     "src": "Specifies an image background",
-    "status": "Reduces the system bar height",
-    "window": "Increases the system bar height"
+    "tag": "Sets the root HTML element type of the toolbar. Default is **header** but implementers may want to change it to some other block-level tag that makes more sense given the context, e.g. **section**, **aside**, or **article**"
   },
   "slots": {
-    "extension": "Slot positioned directly under main content"
+    "extension": "Slot positioned directly under the main content of the toolbar. Height of this slot can be set explicitly with the `extension-height` prop. If this slot has no content, the `extended` prop may be used instead"
   },
   "scopedSlots": {
     "img": "Expects a `v-img` component. Scoped **props** should be applied with `v-bind=\"props\"`"

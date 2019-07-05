@@ -1,5 +1,7 @@
+<!-- Vue Component -->
+
 <template>
-  <component :is="button ? 'v-btn' : 'v-chip'">
+  <component :is="button ? 'v-btn' : 'v-chip'" />
 </template>
 
 <script>
@@ -7,6 +9,6 @@
 
   export default {
     components: { VBtn, VChip },
-    data: () => ({ button: false })
+    data: () => ({ button: false }),
   }
 </script>

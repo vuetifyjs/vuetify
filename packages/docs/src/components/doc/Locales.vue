@@ -1,14 +1,14 @@
 <template>
-  <div class="ml-3">
-    <p>
-      <span
-        v-for="({localeCode, localeName, localeNativeName}, index) in localeNames"
+  <div class="ml-3 mb-4">
+    <ul>
+      <li
+        v-for="({ localeCode, localeName, localeNativeName }) in localeNames"
         :key="localeCode"
       >
-        {{ index ? ', ' : '' }} <strong>{{ localeCode }}</strong>
+        <strong>{{ localeCode }}</strong>
         - {{ localeName }} {{ localeNativeName ? ` (${localeNativeName})` : '' }}
-      </span>
-    </p>
+      </li>
+    </ul>
   </div>
 </template>
 

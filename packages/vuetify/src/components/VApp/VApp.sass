@@ -1,7 +1,7 @@
 @import '../../styles/styles.sass'
 
 // Theme
-+theme(application) using ($material)
++theme(v-application) using ($material)
   background: map-get($material, 'background')
   color: map-deep-get($material, 'text', 'primary')
 
@@ -15,7 +15,7 @@
     &--disabled
       color: map-deep-get($material, 'text', 'disabled') !important
 
-.application
+.v-application
   display: flex
 
   a
@@ -36,7 +36,7 @@
 // Firefox overrides
 @-moz-document url-prefix()
   @media print
-    .application
+    .v-application
       display: block
 
       &--wrap

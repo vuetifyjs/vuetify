@@ -70,20 +70,21 @@
               </v-flex>
 
               <v-flex
-                v-if="philosophy.more"
+                v-if="philosophy.more || philosophy.to"
                 xs12
                 mt-3
                 text-xs-center
               >
                 <v-btn
                   :href="philosophy.more"
+                  :rel="philosophy.more && 'noopener'"
+                  :target="philosophy.more && '_blank'"
+                  :to="philosophy.to"
                   color="white"
                   outlined
-                  rel="noopener"
                   small
-                  target="_blank"
                 >
-                  More
+                  Details
                 </v-btn>
               </v-flex>
             </v-layout>
@@ -100,42 +101,44 @@
       namespace: undefined,
     },
 
-    data: vm => ({
-      philosophies: [
-        {
-          color: 'indigo',
-          title: vm.$t('GettingStarted.WhyVuetify.vibrant'),
-          subtitle: vm.$t('GettingStarted.WhyVuetify.community'),
-          caption: vm.$t('GettingStarted.WhyVuetify.communityCaption'),
-          src: 'https://cdn.vuetifyjs.com/images/why-vuetify/community.png',
-          more: 'https://community.vuetifyjs.com',
-        },
-        {
-          color: 'purple',
-          title: vm.$t('GettingStarted.WhyVuetify.material'),
-          subtitle: vm.$t('GettingStarted.WhyVuetify.toolkit'),
-          caption: vm.$t('GettingStarted.WhyVuetify.toolkitCaption'),
-          src: 'https://cdn.vuetifyjs.com/images/why-vuetify/toolkit.png',
-          more: 'https://material.io/design/',
-        },
-        {
-          color: 'warning',
-          title: vm.$t('GettingStarted.WhyVuetify.continuous'),
-          subtitle: vm.$t('GettingStarted.WhyVuetify.updates'),
-          caption: vm.$t('GettingStarted.WhyVuetify.updatesCaption'),
-          src: 'https://cdn.vuetifyjs.com/images/why-vuetify/updates.png',
-          more: 'https://github.com/vuetifyjs/vuetify/releases',
-        },
-        {
-          color: 'teal darken-2',
-          title: vm.$t('GettingStarted.WhyVuetify.amazing'),
-          subtitle: vm.$t('GettingStarted.WhyVuetify.support'),
-          caption: vm.$t('GettingStarted.WhyVuetify.supportCaption'),
-          src: 'https://cdn.vuetifyjs.com/images/why-vuetify/support.png',
-          more: 'https://github.com/vuetifyjs/vuetify/pulse',
-        },
-      ],
-    }),
+    data () {
+      return {
+        philosophies: [
+          {
+            color: 'indigo',
+            title: this.$t('GettingStarted.WhyVuetify.vibrant'),
+            subtitle: this.$t('GettingStarted.WhyVuetify.community'),
+            caption: this.$t('GettingStarted.WhyVuetify.communityCaption'),
+            src: 'https://cdn.vuetifyjs.com/images/why-vuetify/community.png',
+            more: 'https://community.vuetifyjs.com',
+          },
+          {
+            color: 'purple',
+            title: this.$t('GettingStarted.WhyVuetify.material'),
+            subtitle: this.$t('GettingStarted.WhyVuetify.toolkit'),
+            caption: this.$t('GettingStarted.WhyVuetify.toolkitCaption'),
+            src: 'https://cdn.vuetifyjs.com/images/why-vuetify/toolkit.png',
+            more: 'https://material.io/design/',
+          },
+          {
+            color: 'warning',
+            title: this.$t('GettingStarted.WhyVuetify.continuous'),
+            subtitle: this.$t('GettingStarted.WhyVuetify.updates'),
+            caption: this.$t('GettingStarted.WhyVuetify.updatesCaption'),
+            src: 'https://cdn.vuetifyjs.com/images/why-vuetify/updates.png',
+            more: 'https://github.com/vuetifyjs/vuetify/releases',
+          },
+          {
+            color: 'teal darken-2',
+            title: this.$t('GettingStarted.WhyVuetify.professional'),
+            subtitle: this.$t('GettingStarted.WhyVuetify.support'),
+            caption: this.$t('GettingStarted.WhyVuetify.supportCaption'),
+            src: 'https://cdn.vuetifyjs.com/images/why-vuetify/support.png',
+            to: `/${this.$route.params.lang}/getting-started/consulting-and-support`,
+          },
+        ],
+      }
+    },
   }
 </script>
 

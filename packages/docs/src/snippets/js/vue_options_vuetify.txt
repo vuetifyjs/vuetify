@@ -1,8 +1,8 @@
 // src/main.js
 
 import Vue from 'vue'
-import vuetify from './plugins/vuetify' // path to vuetify export
+import vuetify from '@plugins/vuetify' // path to vuetify export
 
 new Vue({
-  vuetify
+  vuetify,
 }).$mount('#app')

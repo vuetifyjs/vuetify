@@ -1,6 +1,6 @@
 {
   "accessibility": "Accessibility (a11y)",
-  "aLaCarte": "A-la-carte",
+  "aLaCarte": "A-la-carte (treeshaking)",
   "alerts": "Alerts",
   "apiExplorer": "API explorer",
   "appBars": "App bars",
