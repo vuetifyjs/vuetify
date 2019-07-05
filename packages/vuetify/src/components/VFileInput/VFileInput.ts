@@ -76,9 +76,11 @@ export default VTextField.extend({
     } as PropValidator<File | File[]>,
   },
 
-  data: () => ({
-    lazyValue: [] as File[],
-  }),
+  data () {
+    return {
+      lazyValue: wrapInArray(this.value) as File[],
+    }
+  },
 
   computed: {
     classes (): object {
@@ -146,10 +148,6 @@ export default VTextField.extend({
       input.data!.attrs!.multiple = this.multiple
       input.data!.attrs!.accept = this.accept
       delete input.data!.domProps!.value
-      input.data!.on!.change = (e: any) => {
-        /* istanbul ignore next */
-        this.internalValue = [...e.target.files]
-      }
 
       return [
         this.genText(),
@@ -184,7 +182,9 @@ export default VTextField.extend({
         },
         on: {
           'click:close': () => {
-            this.removable && this.internalValue.splice(i, 1)
+            this.internalValue = this.internalValue.filter((val: File[], index: number) => {
+              return i !== index
+            })
           },
         },
       }, [text]))
@@ -203,6 +203,10 @@ export default VTextField.extend({
           value: this.progress || 0,
         },
       })
+    },
+    onInput (e: Event) {
+      const target = e.target as HTMLInputElement
+      this.internalValue = [...target.files]
     },
   },
 })

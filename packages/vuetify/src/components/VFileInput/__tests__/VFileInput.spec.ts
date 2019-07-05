@@ -41,11 +41,8 @@ describe('VFileInput.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         counter: true,
+        value: [oneMBFile],
       },
-    })
-
-    wrapper.setData({
-      lazyFileValue: [ oneMBFile ],
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -55,11 +52,8 @@ describe('VFileInput.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         displaySize: true,
+        value: [twoMBFile],
       },
-    })
-
-    wrapper.setData({
-      lazyFileValue: [ twoMBFile ],
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -76,11 +70,8 @@ describe('VFileInput.ts', () => {
       propsData: {
         displaySize: true,
         counter: true,
+        value: [oneMBFile, twoMBFile],
       },
-    })
-
-    wrapper.setData({
-      lazyFileValue: [ oneMBFile, twoMBFile ],
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -100,21 +91,6 @@ describe('VFileInput.ts', () => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should emit event on change', () => {
-    const fn = jest.fn()
-    const wrapper = mountFunction({
-      listeners: {
-        'update:fileValue': fn,
-      },
-    })
-
-    wrapper.setData({
-      lazyFileValue: [ oneMBFile ],
-    })
-
-    expect(fn).toHaveBeenLastCalledWith([ oneMBFile ])
   })
 
   it('should display progress', () => {
@@ -170,36 +146,34 @@ describe('VFileInput.ts', () => {
   })
 
   it('should clear', () => {
-    const wrapper = mountFunction()
-
-    wrapper.setData({
-      lazyFileValue: [ oneMBFile ],
+    const wrapper = mountFunction({
+      propsData: {
+        value: [oneMBFile],
+      },
     })
 
     wrapper.vm.clearableCallback()
-    expect(wrapper.vm.lazyFileValue).toHaveLength(0)
-    expect(wrapper.vm.internalValue).toBeNull()
+    expect(wrapper.vm.internalValue).toEqual([])
   })
 
-  it('should react to setting fileValue', () => {
+  it('should react to setting fileValue', async () => {
     const wrapper = mountFunction()
 
     wrapper.setProps({
-      fileValue: [ oneMBFile ],
+      value: [oneMBFile],
     })
 
-    expect(wrapper.vm.lazyFileValue).toEqual([ oneMBFile ])
-    expect(wrapper.vm.internalValue).toBeNull()
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.internalValue).toEqual([oneMBFile])
   })
 
   it('should render chips', () => {
     const wrapper = mountFunction({
       propsData: {
         chips: true,
+        value: [oneMBFile],
       },
-      data: () => ({
-        lazyFileValue: [ oneMBFile ],
-      }),
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -211,29 +185,29 @@ describe('VFileInput.ts', () => {
         smallChips: true,
       },
       data: () => ({
-        lazyFileValue: [ oneMBFile ],
+        lazyValue: [oneMBFile],
       }),
     })
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should remove file using chips', () => {
+  it('should remove file using chips', async () => {
     const fn = jest.fn()
     const wrapper = mountFunction({
       propsData: {
         chips: true,
+        value: [oneMBFile, twoMBFile],
       },
       listeners: {
-        'update:fileValue': fn,
+        'change': fn,
       },
-      data: () => ({
-        lazyFileValue: [ oneMBFile, twoMBFile ],
-      }),
     })
+
+    await wrapper.vm.$nextTick()
 
     wrapper.find('.v-chip .v-icon').trigger('click')
 
-    expect(fn).toHaveBeenLastCalledWith([ twoMBFile ])
+    expect(fn).toHaveBeenLastCalledWith([twoMBFile])
   })
 })
