@@ -1,9 +1,9 @@
 {
-  "color": "default",
+  "color": "info",
   "close": true,
-  "id": "posts/25960280",
-  "text": "Go to Video",
-  "msg": "⚡ March 2019 **Framework Update Video**",
-  "href": "https://www.patreon.com/posts/25960280",
+  "id": "version2",
+  "text": "Go to Docs",
+  "msg": "🎉 **Version 2** is coming soon! 🎉",
+  "href": "https://next.vuetifyjs.com",
   "timeout": 0
 }
