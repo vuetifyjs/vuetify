@@ -2,7 +2,7 @@
   <v-tooltip left bottom>
     <template #activator="{ on }">
       <v-btn
-        :href="`https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/${link}`"
+        :href="`https://github.com/vuetifyjs/vuetify/tree/next/packages/vuetify/src/${link}`"
         icon
         target="_blank"
         rel="noopener"
