@@ -1,5 +1,55 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VSparkline.ts should position labels correctly 1`] = `
+
+<svg display="block"
+     stroke-width="20"
+     viewbox="0 0 300 85.5"
+     class="primary--text"
+>
+  <defs>
+    <linearGradient id="35"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="primary"
+      >
+      </stop>
+    </linearGradient>
+  </defs>
+  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
+    <text x="8"
+          y="76.25"
+          font-size="7"
+    >
+      1
+    </text>
+    <text x="150"
+          y="76.25"
+          font-size="7"
+    >
+      7
+    </text>
+    <text x="292"
+          y="76.25"
+          font-size="7"
+    >
+      42
+    </text>
+  </g>
+  <path id="35"
+        d="M8 66.99999L150 58.36585365853659S150 58.36585365853659 150 58.36585365853659L292 8.00001"
+        fill="none"
+        stroke="url(#35)"
+  >
+  </path>
+</svg>
+
+`;
+
 exports[`VSparkline.ts should render component and match a snapshot 1`] = `
 
 <svg display="block"
@@ -640,6 +690,56 @@ exports[`VSparkline.ts should render component with gradient and match a snapsho
         d="M8 66.99999L150 58.36585365853659S150 58.36585365853659 150 58.36585365853659L292 8.00001"
         fill="none"
         stroke="url(#9)"
+  >
+  </path>
+</svg>
+
+`;
+
+exports[`VSparkline.ts should render component with label size and match a snapshot 1`] = `
+
+<svg display="block"
+     stroke-width="4"
+     viewbox="0 0 300 96"
+     class="primary--text"
+>
+  <defs>
+    <linearGradient id="33"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="primary"
+      >
+      </stop>
+    </linearGradient>
+  </defs>
+  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
+    <text x="8"
+          y="81.5"
+          font-size="14"
+    >
+      1
+    </text>
+    <text x="150"
+          y="81.5"
+          font-size="14"
+    >
+      7
+    </text>
+    <text x="292"
+          y="81.5"
+          font-size="14"
+    >
+      42
+    </text>
+  </g>
+  <path id="33"
+        d="M8 66.99999L150 58.36585365853659S150 58.36585365853659 150 58.36585365853659L292 8.00001"
+        fill="none"
+        stroke="url(#33)"
   >
   </path>
 </svg>
