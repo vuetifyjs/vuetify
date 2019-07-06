@@ -31,7 +31,7 @@ const icons: VuetifyIcons = {
   first: 'mdi-page-first',
   last: 'mdi-page-last',
   unfold: 'mdi-unfold-more-horizontal',
-  file: 'mdi-paperclip',
+  file: 'mdi-cloud-upload',
 }
 
 export default icons

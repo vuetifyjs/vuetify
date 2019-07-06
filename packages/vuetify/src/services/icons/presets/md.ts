@@ -31,7 +31,7 @@ const icons: VuetifyIcons = {
   first: 'first_page',
   last: 'last_page',
   unfold: 'unfold_more',
-  file: 'attach_file',
+  file: 'cloud_upload',
 }
 
 export default icons
