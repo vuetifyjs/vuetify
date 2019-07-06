@@ -91,6 +91,6 @@
   export default {
     name: 'FileInputs',
 
-    data: () => ({})
+    data: () => ({}),
   }
 </script>
