@@ -32,7 +32,9 @@ export function genBars (
   const { minX, maxX, minY, maxY } = boundary
   const totalValues = values.length
   const maxValue = Math.max(...values)
-  const minValue = Math.min(...values)
+  let minValue = Math.min(...values)
+
+  if (minValue > 0) minValue = 0
 
   const gridX = maxX / totalValues
   const gridY = (maxY - minY) / (maxValue - minValue)
