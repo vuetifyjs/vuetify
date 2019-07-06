@@ -83,6 +83,11 @@
       <core-section>
         <v-file-input accept="image/*"></v-file-input>
       </core-section>
+
+      <core-title>Validation (1 MB limit)</core-title>
+      <core-section>
+        <v-file-input display-size :rules="rules"></v-file-input>
+      </core-section>
     </v-layout>
   </v-container>
 </template>
@@ -91,6 +96,10 @@
   export default {
     name: 'FileInputs',
 
-    data: () => ({}),
+    data: () => ({
+      rules: [
+        value => value.length > 0 || value.map(f => f.size).reduce((a, b) => a + b) < 2000000 || "File must be smaller than 2 MB!",
+      ],
+    }),
   }
 </script>
