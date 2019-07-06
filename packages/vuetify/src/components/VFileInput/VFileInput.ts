@@ -46,9 +46,9 @@ export default VTextField.extend({
       default: true,
     },
     displaySize: {
-      type: [Boolean, Number],
+      type: [Number, Boolean],
       default: false,
-      validator: v => typeof v === 'boolean' || v === 1000 || v === 1024,
+      validator: (v: number | boolean) => typeof v === 'boolean' || v === 1000 || v === 1024,
     } as PropValidator<boolean | 1000 | 1024>,
     multiple: Boolean,
     placeholder: String,
@@ -72,7 +72,7 @@ export default VTextField.extend({
     },
     value: {
       type: [Object, Array],
-      default: () => ([]),
+      default: () => [],
     } as PropValidator<File | File[]>,
   },
 
@@ -90,20 +90,25 @@ export default VTextField.extend({
       }
     },
     counterValue (): string {
-      if (this.displaySize) {
-        const bytes = this.internalValue.length > 0
-          ? (this.internalValue as File[]).map(f => f.size).reduce((a, b) => a + b)
-          : 0
+      if (!this.displaySize) return this.$vuetify.lang.t(this.counterString, this.lazyValue.length)
 
-        return this.$vuetify.lang.t(this.counterSizeString, this.lazyValue.length, humanReadableFileSize(bytes, this.base))
-      }
-      return this.$vuetify.lang.t(this.counterString, this.lazyValue.length)
+      const bytes = this.internalValue.length > 0
+        ? (this.internalValue as File[])
+            .map(f => f.size)
+            .reduce((a, b) => a + b)
+        : 0
+
+      return this.$vuetify.lang.t(
+        this.counterSizeString,
+        this.lazyValue.length,
+        humanReadableFileSize(bytes, this.base)
+      )
     },
     internalValue: {
       get (): File[] {
         return this.lazyValue
       },
-      set (val: any) {
+      set (val: File | File[]) {
         this.lazyValue = wrapInArray(val)
         this.$emit('change', this.lazyValue)
       },
@@ -115,10 +120,12 @@ export default VTextField.extend({
       return this.isDirty
     },
     text (): string[] {
-      if (!this.isDirty) return [this.placeholder]
+      if (!this.isDirty) return [ this.placeholder ]
 
       return this.internalValue.map((file: File) =>
-        this.displaySize ? `${file.name} (${humanReadableFileSize(file.size, this.base)})` : file.name
+        this.displaySize
+          ? `${file.name} (${humanReadableFileSize(file.size, this.base)})`
+          : file.name
       )
     },
     base (): 1000 | 1024 | undefined {
@@ -140,7 +147,7 @@ export default VTextField.extend({
 
       icon.data!.attrs! = { tabindex: 0 }
 
-      return this.genSlot('prepend', 'outer', [icon])
+      return this.genSlot('prepend', 'outer', [ icon ])
     },
     genInput () {
       const input = VTextField.options.methods.genInput.call(this)
@@ -149,15 +156,12 @@ export default VTextField.extend({
       input.data!.attrs!.accept = this.accept
       delete input.data!.domProps!.value
 
-      return [
-        this.genText(),
-        input,
-      ]
+      return [ this.genText(), input ]
     },
     genText () {
       const children = this.$scopedSlots.selection
         ? this.$scopedSlots.selection({ text: this.text, files: this.internalValue })
-        : this.hasChips && this.isDirty ? this.genChips() : [this.text.join(', ')]
+        : this.hasChips && this.isDirty ? this.genChips() : [ this.text.join(', ') ]
 
       return this.$createElement('div', {
         staticClass: 'v-file-input__text',
@@ -166,9 +170,7 @@ export default VTextField.extend({
           'v-file-input__text--chips': this.hasChips && !this.$scopedSlots.selection,
         },
         on: {
-          click: () => {
-            this.$refs.input.click()
-          },
+          click: () => this.$refs.input.click(),
         },
       }, children)
     },
@@ -182,31 +184,27 @@ export default VTextField.extend({
         },
         on: {
           'click:close': () => {
-            this.internalValue = this.internalValue.filter((val: File[], index: number) => {
-              return i !== index
-            })
+            this.internalValue.splice(i, 1)
+            this.internalValue = this.internalValue // Trigger the watcher
           },
         },
-      }, [text]))
+      }, [ text ]))
     },
-    genProgress (): VNode | VNode[] | null {
+    genProgress () {
       if (this.loading === false && !this.progress) return null
 
       return this.$slots.progress || this.$createElement(VProgressLinear, {
         props: {
           absolute: true,
-          color: (this.loading === true)
-            ? (this.color || 'primary')
-            : (this.loading || 'primary'),
+          color: (this.loading === true ? this.color : this.loading) || 'primary',
           height: this.loaderHeight,
           indeterminate: !this.progress,
-          value: this.progress || 0,
+          value: this.progress,
         },
       })
     },
     onInput (e: Event) {
-      const target = e.target as HTMLInputElement
-      this.internalValue = [...target.files]
+      this.internalValue = [...(e.target as HTMLInputElement).files]
     },
   },
 })
