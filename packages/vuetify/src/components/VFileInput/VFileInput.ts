@@ -93,8 +93,8 @@ export default VTextField.extend({
 
       const bytes = this.internalValue.length > 0
         ? (this.internalValue as File[])
-            .map(f => f.size)
-            .reduce((a, b) => a + b)
+          .map(f => f.size)
+          .reduce((a, b) => a + b)
         : 0
 
       return this.$vuetify.lang.t(
@@ -119,7 +119,7 @@ export default VTextField.extend({
       return this.isDirty
     },
     text (): string[] {
-      if (!this.isDirty) return [ this.placeholder ]
+      if (!this.isDirty) return [this.placeholder]
 
       return this.internalValue.map((file: File) =>
         this.displaySize
@@ -146,7 +146,7 @@ export default VTextField.extend({
 
       icon.data!.attrs! = { tabindex: 0 }
 
-      return this.genSlot('prepend', 'outer', [ icon ])
+      return this.genSlot('prepend', 'outer', [icon])
     },
     genInput () {
       const input = VTextField.options.methods.genInput.call(this)
@@ -155,12 +155,12 @@ export default VTextField.extend({
       input.data!.attrs!.accept = this.accept
       delete input.data!.domProps!.value
 
-      return [ this.genText(), input ]
+      return [this.genText(), input]
     },
     genText () {
       const children = this.$scopedSlots.selection
         ? this.$scopedSlots.selection({ text: this.text, files: this.internalValue })
-        : this.hasChips && this.isDirty ? this.genChips() : [ this.text.join(', ') ]
+        : this.hasChips && this.isDirty ? this.genChips() : [this.text.join(', ')]
 
       return this.$createElement('div', {
         staticClass: 'v-file-input__text',
@@ -187,7 +187,7 @@ export default VTextField.extend({
             this.internalValue = this.internalValue // Trigger the watcher
           },
         },
-      }, [ text ]))
+      }, [text]))
     },
     genProgress () {
       if (this.loading === false && !this.progress) return null
