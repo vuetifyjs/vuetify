@@ -15,7 +15,7 @@ Vue.use(Vuetify, {
     VToolbar,
   },
   directives: {
-    ripple,
+    Ripple,
   },
 })
 
