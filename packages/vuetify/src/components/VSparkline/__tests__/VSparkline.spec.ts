@@ -260,7 +260,7 @@ describe('VSparkline.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({
-      value: [1, 3],
+      value: [-1, -2],
     })
     await wrapper.vm.$nextTick()
 

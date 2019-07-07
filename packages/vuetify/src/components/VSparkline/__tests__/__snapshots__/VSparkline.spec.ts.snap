@@ -202,7 +202,7 @@ exports[`VSparkline.ts should render component with bars and correct bar lengths
      viewbox="0 0 300 75"
 >
   <defs>
-    <linearGradient id="33"
+    <linearGradient id="37"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -214,7 +214,7 @@ exports[`VSparkline.ts should render component with bars and correct bar lengths
       </stop>
     </linearGradient>
   </defs>
-  <clipPath id="sparkline-bar-33-clip">
+  <clipPath id="sparkline-bar-37-clip">
     <rect x="73"
           y="37.5"
           width="4"
@@ -232,8 +232,8 @@ exports[`VSparkline.ts should render component with bars and correct bar lengths
     >
     </rect>
   </clipPath>
-  <g clip-path="url(#sparkline-bar-33-clip)"
-     fill="url(#33)"
+  <g clip-path="url(#sparkline-bar-37-clip)"
+     fill="url(#37)"
   >
     <rect x="0"
           y="0"
@@ -252,7 +252,7 @@ exports[`VSparkline.ts should render component with bars and correct bar lengths
      viewbox="0 0 300 75"
 >
   <defs>
-    <linearGradient id="33"
+    <linearGradient id="37"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -264,11 +264,11 @@ exports[`VSparkline.ts should render component with bars and correct bar lengths
       </stop>
     </linearGradient>
   </defs>
-  <clipPath id="sparkline-bar-33-clip">
+  <clipPath id="sparkline-bar-37-clip">
     <rect x="73"
-          y="50"
+          y="0"
           width="4"
-          height="25"
+          height="37.5"
           rx="0"
           ry="0"
     >
@@ -282,8 +282,8 @@ exports[`VSparkline.ts should render component with bars and correct bar lengths
     >
     </rect>
   </clipPath>
-  <g clip-path="url(#sparkline-bar-33-clip)"
-     fill="url(#33)"
+  <g clip-path="url(#sparkline-bar-37-clip)"
+     fill="url(#37)"
   >
     <rect x="0"
           y="0"
