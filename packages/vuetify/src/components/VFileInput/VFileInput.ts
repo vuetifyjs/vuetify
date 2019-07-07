@@ -9,7 +9,6 @@ import { VProgressLinear } from '../VProgressLinear'
 import { VChip } from '../VChip'
 
 // Types
-import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
 // Helpers
