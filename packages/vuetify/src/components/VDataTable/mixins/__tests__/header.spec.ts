@@ -74,7 +74,7 @@ describe('VDataTable/header.ts', () => {
           return this.$createElement('div', {
             on: props.on,
             staticClass: 'test',
-          }, [ JSON.stringify(props) ])
+          }, [JSON.stringify(props)])
         },
       },
       listeners: {

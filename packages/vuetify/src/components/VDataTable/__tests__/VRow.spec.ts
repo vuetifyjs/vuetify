@@ -74,8 +74,8 @@ describe('VRow.ts', () => {
         },
       },
       scopedSlots: {
-        'column.petrol': props => vm.$createElement('p', { staticClass: `test ${props.header.value}` }, [ props.value ]),
-        'column.diesel': props => vm.$createElement('p', { staticClass: `test ${props.header.value}` }, [ props.value ]),
+        'column.petrol': props => vm.$createElement('p', { staticClass: `test ${props.header.value}` }, [props.value]),
+        'column.diesel': props => vm.$createElement('p', { staticClass: `test ${props.header.value}` }, [props.value]),
       },
     })
 

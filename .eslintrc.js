@@ -34,6 +34,7 @@ module.exports = {
     'no-return-assign': 'off',
     'no-unused-vars': 'error',
     'no-empty': 'error',
+    'array-bracket-spacing': ['error', 'never'],
     'object-curly-spacing': ['error', 'always'],
     'space-before-function-paren': [
       'error',
