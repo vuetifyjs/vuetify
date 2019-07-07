@@ -234,10 +234,10 @@ function update (el: HTMLElement, binding: VNodeDirective) {
   updateRipple(el, binding, wasEnabled)
 }
 
-const ripple = {
+export const Ripple = {
   bind: directive,
   unbind,
   update,
 }
 
-export default ripple
+export default Ripple
