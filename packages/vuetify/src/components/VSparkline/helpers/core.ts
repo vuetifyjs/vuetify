@@ -10,7 +10,7 @@ export function genPoints (
   const minValue = Math.min(...values)
 
   const gridX = (maxX - minX) / (totalValues - 1)
-  const gridY = (maxY - minY) / (maxValue - minValue)
+  const gridY = (maxY - minY) / ((maxValue - minValue) || 1)
 
   return values.map((value, index) => {
     return {
