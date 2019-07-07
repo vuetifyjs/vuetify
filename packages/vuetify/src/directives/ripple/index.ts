@@ -240,5 +240,4 @@ const ripple = {
   update,
 }
 
-export { ripple }
 export default ripple

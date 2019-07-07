@@ -33,5 +33,4 @@ const resize = {
   unbind,
 }
 
-export { resize }
 export default resize

@@ -36,5 +36,4 @@ const scroll = {
   unbind,
 } as DirectiveOptions
 
-export { scroll }
 export default scroll

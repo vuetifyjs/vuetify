@@ -140,5 +140,4 @@ const touch = {
   unbind,
 }
 
-export { touch }
 export default touch
