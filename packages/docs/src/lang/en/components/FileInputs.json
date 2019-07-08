@@ -24,6 +24,10 @@
     "size": {
       "header": "### Size displaying",
       "desc": "`v-file-input` can display size of files you upload"
+    },
+    "counter": {
+      "header": "### Counter",
+      "desc": "As an ordinary `v-text-field`, `v-file-input` can count your added files. If you use `display-size` along with `counter`, counter will display size of all files."
     }
   },
   "props": {
