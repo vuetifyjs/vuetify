@@ -35,7 +35,8 @@
             "simple/counter",
             "simple/placeholder",
             "simple/custom-icon",
-            "intermediate/custom-select"
+            "intermediate/custom-select",
+            "intermediate/validation"
           ]
         }
       ]

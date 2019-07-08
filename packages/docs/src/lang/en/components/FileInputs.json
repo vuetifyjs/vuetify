@@ -40,6 +40,10 @@
     "custom-select": {
       "header": "### Custom selection look",
       "desc": "You can customize `v-file-input`'s selected files look."
+    },
+    "validation": {
+      "header": "### Validation",
+      "desc": "`v-file-input` supports Vuetify's `validatable` mixin, so you can check, e.g. file size."
     }
   },
   "props": {
