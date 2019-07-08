@@ -37,7 +37,7 @@
         },
       ],
       divider: '/',
-      dividers: [ '/', '\\', '.', ';', '>', '-' ],
+      dividers: ['/', '\\', '.', ';', '>', '-'],
       large: false,
       customDiv: false,
     }),

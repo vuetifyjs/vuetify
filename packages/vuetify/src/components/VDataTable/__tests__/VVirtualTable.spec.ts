@@ -23,7 +23,7 @@ describe('VVirtualTable.ts', () => {
         items: ['a', 'b', 'c'],
       },
       scopedSlots: {
-        items: props => vm.$createElement('div', { staticClass: 'test' }, [ JSON.stringify(props) ]),
+        items: props => vm.$createElement('div', { staticClass: 'test' }, [JSON.stringify(props)]),
       },
     })
 
