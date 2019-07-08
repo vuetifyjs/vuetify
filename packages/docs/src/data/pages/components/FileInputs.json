@@ -28,7 +28,8 @@
           "type": "examples",
           "value": [
             "simple/multiple",
-            "simple/accept"
+            "simple/accept",
+            "simple/chips"
           ]
         }
       ]
