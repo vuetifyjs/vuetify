@@ -34,6 +34,7 @@
             "simple/size",
             "simple/counter",
             "simple/placeholder",
+            "simple/custom-icon",
             "intermediate/custom-select"
           ]
         }

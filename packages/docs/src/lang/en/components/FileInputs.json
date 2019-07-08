@@ -33,6 +33,10 @@
       "header": "### Placeholder",
       "desc": "You can add a placeholder to make users know what should they add to file input."
     },
+    "custom-icon": {
+      "header": "### Custom icons",
+      "desc": "You can customize icons of upload component."
+    },
     "custom-select": {
       "header": "### Custom selection look",
       "desc": "You can customize `v-file-input`'s selected files look."
