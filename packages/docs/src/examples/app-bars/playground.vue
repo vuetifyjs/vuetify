@@ -151,7 +151,7 @@
       shrinkOnScroll: false,
       extended: false,
       color: 'accent',
-      colors: [ 'primary', 'accent', 'warning lighten-2', 'teal', 'orange' ],
+      colors: ['primary', 'accent', 'warning lighten-2', 'teal', 'orange'],
     }),
   }
 </script>

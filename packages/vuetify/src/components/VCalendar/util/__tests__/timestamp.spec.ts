@@ -426,15 +426,15 @@ describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-state
   })
 
   it('should get weekday skips', () => {
-    expect(getWeekdaySkips([ 0, 1, 2, 3, 4, 5, 6 ])).toEqual([1, 1, 1, 1, 1, 1, 1])
-    expect(getWeekdaySkips([ 1, 5, 0, 3, 4, 2, 6 ])).toEqual([1, 1, 1, 1, 1, 1, 1])
-    expect(getWeekdaySkips([ 1, 5, 1, 3, 4, 2, 6 ])).toEqual([0, 1, 1, 1, 1, 1, 2])
+    expect(getWeekdaySkips([0, 1, 2, 3, 4, 5, 6])).toEqual([1, 1, 1, 1, 1, 1, 1])
+    expect(getWeekdaySkips([1, 5, 0, 3, 4, 2, 6])).toEqual([1, 1, 1, 1, 1, 1, 1])
+    expect(getWeekdaySkips([1, 5, 1, 3, 4, 2, 6])).toEqual([0, 1, 1, 1, 1, 1, 2])
   })
 
   describe('createDayList', () => {
     it('should create day list', () => {
-      const skips = getWeekdaySkips([ 0, 1, 2, 3, 4, 5, 6 ])
-      const skips1 = getWeekdaySkips([ 1, 1, 1, 1, 1, 1, 0 ])
+      const skips = getWeekdaySkips([0, 1, 2, 3, 4, 5, 6])
+      const skips1 = getWeekdaySkips([1, 1, 1, 1, 1, 1, 0])
       expect(() => createDayList(parseTimestamp('2019-02-02'), parseTimestamp('2019-02-01'), parseTimestamp('2019-02-02'), skips)).toThrow()
       expect(createDayList(parseTimestamp('2019-02-01'), parseTimestamp('2019-02-10'), parseTimestamp('2019-02-02'), skips)).toHaveLength(10)
       expect(createDayList(parseTimestamp('2019-02-01'), parseTimestamp('2019-02-10'), parseTimestamp('2019-02-02'), skips1)).toHaveLength(3)
