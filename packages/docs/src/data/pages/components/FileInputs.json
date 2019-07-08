@@ -30,7 +30,8 @@
             "simple/multiple",
             "simple/accept",
             "simple/chips",
-            "simple/small-chips"
+            "simple/small-chips",
+            "simple/size"
           ]
         }
       ]

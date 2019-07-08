@@ -20,6 +20,10 @@
     "small-chips": {
       "header": "### Small chips",
       "desc": "If you like, `v-file-input`'s chips can be smaller"
+    },
+    "size": {
+      "header": "### Size displaying",
+      "desc": "`v-file-input` can display size of files you upload"
     }
   },
   "props": {
