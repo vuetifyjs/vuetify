@@ -16,6 +16,10 @@
     "chips": {
       "header": "### With chips",
       "desc": "You can add chips to `v-file-input`. Any file will be shown as its own chip"
+    },
+    "small-chips": {
+      "header": "### Small chips",
+      "desc": "If you like, `v-file-input`'s chips can be smaller"
     }
   },
   "props": {

@@ -29,7 +29,8 @@
           "value": [
             "simple/multiple",
             "simple/accept",
-            "simple/chips"
+            "simple/chips",
+            "simple/small-chips"
           ]
         }
       ]
