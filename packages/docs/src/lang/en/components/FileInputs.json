@@ -44,6 +44,10 @@
     "validation": {
       "header": "### Validation",
       "desc": "`v-file-input` supports Vuetify's `validatable` mixin, so you can check, e.g. file size."
+    },
+    "avatar": {
+      "header": "### Avatar picker",
+      "desc": "This example demonstrates the use of `v-file-input` in your app as an avatar select."
     }
   },
   "props": {

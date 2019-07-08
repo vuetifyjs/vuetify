@@ -36,7 +36,8 @@
             "simple/placeholder",
             "simple/custom-icon",
             "intermediate/custom-select",
-            "intermediate/validation"
+            "intermediate/validation",
+            "complex/avatar"
           ]
         }
       ]
