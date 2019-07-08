@@ -65,8 +65,19 @@
       "hideActions": "Hide the expand icon in the content header"
     }
   },
+  "events": {
+    "v-expansion-panel": {
+      "change": "The value of selected item",
+      "click": "Mouse click event"
+    },
+    "v-expansion-panel-header": {
+      "click": "Mouse click event"
+    }
+  },
   "slots": {
+    "v-expansion-panel-header": {
     "actions": "Expansion header actions",
-    "header": "Expansion header content"
+    "icon": "Slot for custom icon"
+    }
   }
 }
