@@ -9,7 +9,7 @@
     "nuxt": "Specifies the link is a nuxt-link",
     "replace": "Vue Router router-link prop",
     "to": "Will designate the component tag to `<router-link>`",
-    "tag": "Specify a custom tag to use on the component",
+    "tag": "Components.Sheets.props.tag",
     "target": "Specify the target attribute."
   }
 }

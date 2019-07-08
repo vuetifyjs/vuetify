@@ -41,6 +41,10 @@
   "props": {
     "bottom": "Mixins.Positionable.props.bottom",
     "left": "Mixins.Positionable.props.left",
+    "overlap": "Overlaps the slotted content on top of the component.",
     "transition": "Mixins.Transitionable.props.transition"
+  },
+  "slots": {
+    "badge": "The slot used for the badge's content."
   }
 }

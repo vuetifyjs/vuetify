@@ -27,7 +27,8 @@
         {
           "type": "api",
           "value": [
-            "v-app-bar"
+            "v-app-bar",
+            "v-app-bar-nav-icon"
           ]
         }
       ]
