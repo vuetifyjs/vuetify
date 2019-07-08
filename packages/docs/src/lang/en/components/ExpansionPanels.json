@@ -67,7 +67,7 @@
   },
   "events": {
     "v-expansion-panel": {
-      "change": "The value of selected item",
+      "change": "Toggles the value of the selected panel",
       "click": "Mouse click event"
     },
     "v-expansion-panel-header": {
