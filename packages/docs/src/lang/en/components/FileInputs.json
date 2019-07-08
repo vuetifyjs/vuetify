@@ -29,6 +29,10 @@
       "header": "### Counter",
       "desc": "As an ordinary `v-text-field`, `v-file-input` can count your added files. If you use `display-size` along with `counter`, counter will display size of all files."
     },
+    "placeholder": {
+      "header": "### Placeholder",
+      "desc": "You can add a placeholder to make users know what should they add to file input."
+    },
     "custom-select": {
       "header": "### Custom selection look",
       "desc": "You can customize `v-file-input`'s selected files look."

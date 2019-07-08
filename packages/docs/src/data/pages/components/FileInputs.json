@@ -33,6 +33,7 @@
             "simple/small-chips",
             "simple/size",
             "simple/counter",
+            "simple/placeholder",
             "intermediate/custom-select"
           ]
         }
