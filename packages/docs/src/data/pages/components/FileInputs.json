@@ -32,7 +32,8 @@
             "simple/chips",
             "simple/small-chips",
             "simple/size",
-            "simple/counter"
+            "simple/counter",
+            "intermediate/custom-select"
           ]
         }
       ]
