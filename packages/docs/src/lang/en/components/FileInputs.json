@@ -4,6 +4,10 @@
   "examples": {
     "usage": {
       "desc": "The `v-file-input` is a basic container for collecting and displaying information on user selected files."
+    },
+    "multiple": {
+      "header": "### Multiple",
+      "desc": "The `v-file-input` Can contain multiple files at the same time."
     }
   },
   "props": {

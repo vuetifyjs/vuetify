@@ -20,6 +20,17 @@
           "value": ["v-file-input"]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "simple/multiple"
+          ]
+        }
+      ]
     }
   ]
 }
