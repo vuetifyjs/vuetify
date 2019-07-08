@@ -1,5 +1,11 @@
 <template>
-  <v-file-input :rules="rules" accept="image/png, image/jpeg, image/bmp" placeholder="Pick an avatar" prepend-icon="mdi-camera" label="Avatar"></v-file-input>
+  <v-file-input
+    :rules="rules"
+    accept="image/png, image/jpeg, image/bmp"
+    placeholder="Pick an avatar"
+    prepend-icon="mdi-camera"
+    label="Avatar"
+  ></v-file-input>
 </template>
 
 <script>
