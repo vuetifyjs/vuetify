@@ -36,17 +36,19 @@
   },
   "props": {
     "absolute": "Mixins.Positionable.props.absolute",
-    "activeClass": "Components.ItemGroups.props.activeClass",
-    "backgroundColor": "Background color for component",
+    "activeClass": "The class applied to a [v-btn](/components/buttons) when activated.",
+    "backgroundColor": "Changes the background-color for the component.",
     "fixed": "Mixins.Positionable.props.fixed",
-    "grow": "Force `v-btn`s to take up all available space",
-    "hideOnScroll": "Will transition the navigation off screen when scrolling up",
-    "horizontal": "Uses an alternative horizontal styling for `v-btn`",
-    "inputValue": "Holds the value of the currently active button. If the button has no value supplied, its index will be used instead. This prop supports the **.sync** modifier.",
-    "mandatory": "Components.ItemGroups.props.mandatory"
+    "grow": "Force [v-btn](/components/buttons)s to take up all available space.",
+    "hideOnScroll": "Will transition the navigation off screen when scrolling up.",
+    "horizontal": "Uses an alternative horizontal styling for [v-btn](/components/buttons).",
+    "inputValue": "Controls whether the component is visible or hidden. Supports the **.sync** modifier.",
+    "mandatory": "Components.ItemGroups.props.mandatory",
+    "shift": "Hides text of [v-btn](/components/buttons)s when they are not active.",
+    "value": "Holds the value of the currently active [v-btn](/components/buttons). If the button has no value supplied, its index will be used instead.."
   },
   "events": {
-    "change": "The value of selected item",
-    "update:inputValue": "The event used for `input-value.sync`"
+    "change": "The value of currently selected button. If no value is assigne, will be the current index of the button.",
+    "update:inputValue": "The event used for `input-value.sync`."
   }
 }
