@@ -8,6 +8,10 @@
     "multiple": {
       "header": "### Multiple",
       "desc": "The `v-file-input` Can contain multiple files at the same time."
+    },
+    "accept": {
+      "header": "### Accept formats",
+      "desc": "`v-file-input` component can accept only specific media formats/file types if you want. The example below can accept only images."
     }
   },
   "props": {
