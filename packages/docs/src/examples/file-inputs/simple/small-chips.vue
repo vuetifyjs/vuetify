@@ -1,3 +1,3 @@
 <template>
-  <v-file-input small-chips label="File input"></v-file-input>
+  <v-file-input small-chips multiple label="File input"></v-file-input>
 </template>
