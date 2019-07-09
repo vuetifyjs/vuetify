@@ -3,10 +3,6 @@ import VWindow from '../VWindow/VWindow'
 
 // Types & Components
 import { BaseItemGroup, GroupableInstance } from './../VItemGroup/VItemGroup'
-import { VNode } from 'vue'
-
-// Utilities
-import ThemeProvider from '../../util/ThemeProvider'
 
 /* @vue/component */
 export default VWindow.extend({
@@ -26,23 +22,23 @@ export default VWindow.extend({
         'v-tabs-items': true,
       }
     },
+    isDark (): boolean {
+      if (this.dark === true) {
+        // explicitly dark
+        return true
+      } else if (this.light === true) {
+        // explicitly light
+        return false
+      } else {
+        // inherit from root
+        return this.rootIsDark
+      }
+    },
   },
 
   methods: {
     getValue (item: GroupableInstance, i: number) {
       return item.id || BaseItemGroup.options.methods.getValue.call(this, item, i)
     },
-  },
-
-  render (h): VNode {
-    const render = VWindow.options.render.call(this, h)
-
-    return h(ThemeProvider, {
-      props: {
-        root: true,
-        dark: this.dark,
-        light: this.light,
-      },
-    }, [render])
   },
 })

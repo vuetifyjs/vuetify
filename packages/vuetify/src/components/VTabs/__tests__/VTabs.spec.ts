@@ -32,6 +32,7 @@ describe('VTabs.ts', () => {
           $vuetify: {
             application: { left: 0, right: 0 },
             breakpoint: {},
+            theme: { dark: false },
           },
         },
         ...options,
