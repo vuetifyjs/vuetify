@@ -4,7 +4,7 @@ module.exports = {
     events: [
       {
         name: 'change',
-        value: 'any',
+        value: 'void',
       },
       {
         name: 'click',
