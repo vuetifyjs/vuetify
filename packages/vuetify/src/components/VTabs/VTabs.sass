@@ -8,12 +8,14 @@
   .v-tab--disabled
     color: map-get($material, 'tabs')
 
-  .v-tabs-bar,
-  .v-tabs-items
+  .v-tabs-bar
     background-color: map-get($material, 'cards')
 
   .v-tab
     +states($material)
+
++theme(v-tabs-items) using ($material)
+  background-color: map-get($material, 'cards')
 
 .v-tabs-bar.theme--dark
   .v-tab:not(.v-tab--active):not(.v-tab--disabled)
