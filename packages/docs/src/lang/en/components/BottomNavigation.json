@@ -43,7 +43,7 @@
     "hideOnScroll": "Will transition the navigation off screen when scrolling up.",
     "horizontal": "Uses an alternative horizontal styling for [v-btn](/components/buttons).",
     "inputValue": "Controls whether the component is visible or hidden. Supports the **.sync** modifier.",
-    "mandatory": "Components.ItemGroups.props.mandatory",
+    "mandatory": "Mixins.BaseItemGroup.props.mandatory",
     "shift": "Hides text of [v-btn](/components/buttons)s when they are not active.",
     "value": "Holds the value of the currently active [v-btn](/components/buttons). If the button has no value supplied, its index will be used instead.."
   },
