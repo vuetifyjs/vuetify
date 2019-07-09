@@ -38,7 +38,7 @@
     </div>
 
     <a
-      v-if="filename"
+      v-if="filename && file"
       :href="href"
       target="_blank"
       rel="noopener"
@@ -186,7 +186,7 @@
       color: inherit
       text-decoration: none
 
-  &__filename
+  a.v-markup__filename
     text-decoration: none
     position: absolute
     bottom: 0
