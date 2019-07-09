@@ -36,7 +36,7 @@ describe('activatable.ts', () => {
         activator: props => vm.$createElement('button', props),
       },
       render (h) {
-        return h('div', [ this.genActivator() ])
+        return h('div', [this.genActivator()])
       },
     })
 
@@ -60,7 +60,7 @@ describe('activatable.ts', () => {
         }, [String(scope.value)]),
       },
       render (h) {
-        return h('div', [ this.genActivator() ])
+        return h('div', [this.genActivator()])
       },
     })
 
@@ -82,7 +82,7 @@ describe('activatable.ts', () => {
         activator: props => vm.$createElement('button', props),
       },
       render (h) {
-        return h('div', [ this.genActivator() ])
+        return h('div', [this.genActivator()])
       },
       methods: {
         runDelay,

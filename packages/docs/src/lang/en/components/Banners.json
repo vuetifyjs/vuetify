@@ -27,18 +27,19 @@
     }
   },
   "props": {
-    "icon": "Designates a specific icon",
-    "iconColor": "Designates a specific icon color",
-    "sticky": "Position the banner to the top of the screen when scrolling. **Evergreen browsers only**"
+    "icon": "Designates a specific icon.",
+    "iconColor": "Designates a specific icon color.",
+    "singleLine": "Forces the banner onto a single line.",
+    "sticky": "Applies **position: sticky** to the component (**Evergreen browsers only**). You can find more information on the [MDN documentation for sticky position](https://developer.mozilla.org/en-US/docs/Web/CSS/position)."
   },
   "slots": {
-    "actions": "Slot for actions such as buttons",
-    "icon": "Slot for custom icon"
+    "actions": "The slot used for the action's content such as a [v-btn](/components/buttons).",
+    "icon": "The slot used for the icon's content."
   },
   "scopedSlots": {
-    "actions": "Actions scoped slot. Has a `dismiss` function in its scope"
+    "actions": "The same slot for actions but with a provided **dismiss** function in its scope. When invoked, this function will close the banner."
   },
   "functions": {
-    "toggle": "Toggles visibility"
+    "toggle": "Mixins.Toggleable.props.value"
   }
 }

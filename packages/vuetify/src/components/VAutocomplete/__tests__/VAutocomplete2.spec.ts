@@ -272,7 +272,7 @@ describe('VAutocomplete.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         hideNoData: true,
-        items: [ 'Something first' ],
+        items: ['Something first'],
       },
     })
 

@@ -1,0 +1,28 @@
+import Vue from 'vue'
+import Vuetify from 'vuetify/lib'
+import 'vuetify/src/stylus/app.styl'
+import MaterialIcon from '@/components/MaterialIcon'
+
+function missingMaterialIcons(ids) {
+  const icons = {}
+  for (const id of ids) {
+    for (const suffix of ['fill', 'outline', 'two-tone', 'round', 'sharp']) {
+      const name = `${id}_${suffix}`
+      icons[name] = {
+        component: MaterialIcon,
+        props: {
+          name
+        }
+      }
+    }
+  }
+  return icons
+}
+
+Vue.use(Vuetify, {
+  // iconfont: 'md',
+  icons: {
+    ...missingMaterialIcons(['visibility', 'visibility_off'])
+    // This will enable 'visibility_outline', 'visibility_off_round' and so on.
+  }
+})

@@ -39,6 +39,7 @@ const VIcon = mixins(
     left: Boolean,
     right: Boolean,
     dense: Boolean,
+    size: [Number, String],
     tag: {
       type: String,
       required: false,

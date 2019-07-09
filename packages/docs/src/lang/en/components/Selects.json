@@ -1,6 +1,7 @@
 {
   "header": "# Selects",
   "headerText": "Select fields components are used for collecting user provided information from a list of options.",
+  "objectAlert": "When using objects for the **items** prop, you must associate **item-text** and **item-value** with existing properties on your objects. These values are defaulted to **text** and **value** and can be changed.",
   "examples": {
     "usage": {
       "desc": ""

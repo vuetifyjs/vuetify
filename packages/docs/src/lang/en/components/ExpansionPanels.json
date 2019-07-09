@@ -3,7 +3,7 @@
   "headerText": "The `v-expansion-panel` component is useful for reducing vertical space with large amounts of information. The default functionality of the component is to only display one expansion-panel body at a time; however, with the `multiple` property, the expansion-panel can remain open until explicitly closed.",
   "examples": {
     "usage": {
-      "desc": ""
+      "desc": "Expansion panels in their simplest form display a list of expandable items."
     },
     "external": {
       "header": "### External control",
@@ -65,8 +65,19 @@
       "hideActions": "Hide the expand icon in the content header"
     }
   },
+  "events": {
+    "v-expansion-panel": {
+      "change": "Toggles the value of the selected panel",
+      "click": "Mouse click event"
+    },
+    "v-expansion-panel-header": {
+      "click": "Mouse click event"
+    }
+  },
   "slots": {
+    "v-expansion-panel-header": {
     "actions": "Expansion header actions",
-    "header": "Expansion header content"
+    "icon": "Slot for custom icon"
+    }
   }
 }

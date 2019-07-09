@@ -1,9 +1,9 @@
 {
   "header": "# App Bars",
-  "headerText": "The `v-app-bar` component is pivotal to any gui, as it generally is the primary source of site navigation. The toolbar component works great in conjunction with a navigation drawer for hiding links and presenting an activator to open the sidebar on mobile.",
+  "headerText": "The `v-app-bar` component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation. The app-bar component works great in conjunction with a [v-navigation-drawer](/components/navigation-drawers) for providing site navigation in your application.",
   "examples": {
     "usage": {
-      "desc": "The `VAppBar` component is used for application-wide actions and information."
+      "desc": "The `v-app-bar` component is used for application-wide actions and information."
     },
     "dense": {
       "header": "### Dense",
@@ -47,15 +47,15 @@
     }
   },
   "props": {
-    "clippedLeft": "Designates that the application's `v-navigation-drawer` is clipped on the left side of the toolbar",
-    "clippedRight": "Designates that the application's `v-navigation-drawer` is clipped on the right side of the toolbar",
-    "collapseOnScroll": "Collapse the toolbar when scrolling",
-    "elevateOnScroll": "Elevate the toolbar from 0dp to 4dp when scrolling",
-    "fadeImgOnScroll": "When using the **src** prop or `img` scoped slot, will fade the image when scrolling",
-    "hideOnScroll": "Will transition the toolbar off screen when scrolling down",
-    "invertedScroll": "Will slide out of view when scrolling down and back into view when scrolling up",
-    "scrollOffScreen": "Scroll the entire `v-app-bar` (including extension) off screen.",
-    "shrinkOnScroll": "Shrinks a **prominent** toolbar to a **dense** or **short** (default) one",
+    "clippedLeft": "Designates that the application's `v-navigation-drawer` that is positioned on the left is below the app-bar.",
+    "clippedRight": "Designates that the application's `v-navigation-drawer` that is positioned on the right is below the app-bar.",
+    "collapseOnScroll": "Puts the app-bar into a collapsed state when scrolling.",
+    "elevateOnScroll": "Elevates the app-bar when scrolling.",
+    "fadeImgOnScroll": "When using the **src** prop or `img` scoped slot, will fade the image when scrolling.",
+    "hideOnScroll": "Hides the app-bar when scrolling. Will still show the `extension` slot.",
+    "invertedScroll": "Hides the app-bar when scrolling down and displays it when scrolling up.",
+    "scrollOffScreen": "Hides the app-bar when scrolling. Will **NOT** show the `extension` slot.",
+    "shrinkOnScroll": "Shrinks a **prominent** toolbar to a **dense** or **short** (default) one when scrolling.",
     "src": "Image source. See `v-img` for details"
   },
   "slots": {

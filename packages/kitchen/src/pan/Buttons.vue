@@ -241,6 +241,94 @@
           Disabled
         </v-btn>
       </core-section>
+
+      <core-title>
+        Tile
+      </core-title>
+      <core-section>
+        <v-btn
+          tile
+          small
+        >
+          Tile
+        </v-btn>
+        <v-btn
+          tile
+          small
+          color="primary"
+        >
+          Primary
+        </v-btn>
+        <v-btn
+          tile
+          small
+          color="error"
+        >
+          Error
+        </v-btn>
+        <v-btn
+          tile
+          small
+          disabled
+        >
+          Disabled
+        </v-btn>
+      </core-section>
+
+      <core-section>
+        <v-btn tile>
+          Tile
+        </v-btn>
+        <v-btn
+          tile
+          color="primary"
+        >
+          Primary
+        </v-btn>
+        <v-btn
+          tile
+          color="error"
+        >
+          Error
+        </v-btn>
+        <v-btn
+          tile
+          disabled
+        >
+          Disabled
+        </v-btn>
+      </core-section>
+
+      <core-section>
+        <v-btn
+          tile
+          large
+        >
+          Tile
+        </v-btn>
+        <v-btn
+          tile
+          large
+          color="primary"
+        >
+          Primary
+        </v-btn>
+        <v-btn
+          tile
+          large
+          color="error"
+        >
+          Error
+        </v-btn>
+        <v-btn
+          tile
+          large
+          disabled
+        >
+          Disabled
+        </v-btn>
+      </core-section>
+
       <core-title>
         Rounded
       </core-title>
@@ -327,6 +415,7 @@
           Disabled
         </v-btn>
       </core-section>
+
       <core-title>
         Outline
       </core-title>
@@ -413,6 +502,108 @@
           Disabled
         </v-btn>
       </core-section>
+
+      <core-title>
+        Tile with Outline
+      </core-title>
+      <core-section>
+        <v-btn
+          outlined
+          tile
+          small
+        >
+          Rounded
+        </v-btn>
+        <v-btn
+          outlined
+          tile
+          small
+          color="primary"
+        >
+          Primary
+        </v-btn>
+        <v-btn
+          outlined
+          tile
+          small
+          color="error"
+        >
+          Error
+        </v-btn>
+        <v-btn
+          outlined
+          tile
+          small
+          disabled
+        >
+          Disabled
+        </v-btn>
+      </core-section>
+
+      <core-section>
+        <v-btn
+          outlined
+          tile
+        >
+          Rounded
+        </v-btn>
+        <v-btn
+          outlined
+          tile
+          color="primary"
+        >
+          Primary
+        </v-btn>
+        <v-btn
+          outlined
+          tile
+          color="error"
+        >
+          Error
+        </v-btn>
+        <v-btn
+          outlined
+          tile
+          disabled
+        >
+          Disabled
+        </v-btn>
+      </core-section>
+
+      <core-section>
+        <v-btn
+          outlined
+          tile
+          large
+        >
+          Rounded
+        </v-btn>
+        <v-btn
+          outlined
+          tile
+          large
+          color="primary"
+        >
+          Primary
+        </v-btn>
+        <v-btn
+          outlined
+          tile
+          large
+          color="error"
+        >
+          Error
+        </v-btn>
+        <v-btn
+          outlined
+          tile
+          large
+          disabled
+        >
+          Disabled
+        </v-btn>
+      </core-section>
+
       <core-title>
         Rounded with Outline
       </core-title>
@@ -513,6 +704,7 @@
           Disabled
         </v-btn>
       </core-section>
+
       <!-- Outline -->
       <core-section>
         <v-btn

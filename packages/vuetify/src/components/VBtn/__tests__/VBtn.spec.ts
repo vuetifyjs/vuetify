@@ -76,6 +76,16 @@ describe('VBtn.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render tile button and match snapshot', () => {
+    const wrapper = mount(VBtn, {
+      propsData: {
+        tile: true,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render an <a> tag when using href prop', () => {
     const wrapper = mountFunction({
       propsData: {

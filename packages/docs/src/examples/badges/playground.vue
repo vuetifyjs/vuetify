@@ -41,7 +41,7 @@
 <script>
   export default {
     data: () => ({
-      colors: [ 'primary', 'accent', 'warning lighten-2', 'teal', 'error lighten-2' ],
+      colors: ['primary', 'accent', 'warning lighten-2', 'teal', 'error lighten-2'],
       color: 'primary',
       left: false,
       bottom: false,
