@@ -28,6 +28,12 @@ export default mixins(
     },
   },
 
+  computed: {
+    isDark (): boolean {
+      return this.$vuetify.theme.dark
+    },
+  },
+
   render (h) {
     const wrapper = h('div', { staticClass: 'v-application--wrap' }, this.$slots.default)
 
