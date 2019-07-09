@@ -56,6 +56,18 @@
       "offsetY": false,
       "transition": false
     },
+    "v-checkbox": {
+      "height": false
+    },
+    "v-radio": {
+      "height": false
+    },
+    "v-radio-group": {
+      "height": false
+    },
+    "v-switch": {
+      "height": false
+    },
     "v-window": {
       "mandatory": false,
       "max": false,
