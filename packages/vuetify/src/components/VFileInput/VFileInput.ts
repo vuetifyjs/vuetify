@@ -40,10 +40,6 @@ export default VTextField.extend({
       type: String,
       default: '$vuetify.fileInput.counter',
     },
-    deletableChips: {
-      type: Boolean,
-      default: true,
-    },
     displaySize: {
       type: [Number, Boolean],
       default: false,
@@ -173,7 +169,6 @@ export default VTextField.extend({
 
       return this.text.map((text, i) => this.$createElement(VChip, {
         props: {
-          close: this.deletableChips,
           small: this.smallChips,
         },
         on: {
