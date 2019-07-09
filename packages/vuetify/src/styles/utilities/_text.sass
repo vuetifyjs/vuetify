@@ -1,54 +1,55 @@
-@each $size, $width in $grid-breakpoints
-  @media all and (min-width: $width)
-    .text-#{$size}-left
-      text-align: left !important
-
-    .text-#{$size}-center
-      text-align: center !important
-
-    .text-#{$size}-right
-      text-align: right !important
-
-    .text-#{$size}-justify
-      text-align: justify !important
-
-    .text-#{$size}-start
-      +ltr()
-        text-align: left !important
-      +rtl()
-        text-align: right !important
-
-    .text-#{$size}-end
-      +ltr()
-        text-align: right !important
-      +rtl()
+.v-application
+  @each $size, $width in $grid-breakpoints
+    @media all and (min-width: $width)
+      .text-#{$size}-left
         text-align: left !important
 
-@each $name, $weight in $font-weights
-  .font-weight
-    &-#{$name}
-      font-weight: $weight !important
+      .text-#{$size}-center
+        text-align: center !important
 
-.font-italic
-  font-style: italic !important
+      .text-#{$size}-right
+        text-align: right !important
 
-.text-capitalize
-  text-transform: capitalize !important
+      .text-#{$size}-justify
+        text-align: justify !important
 
-.text-lowercase
-  text-transform: lowercase !important
+      .text-#{$size}-start
+        +ltr()
+          text-align: left !important
+        +rtl()
+          text-align: right !important
 
-.text-none
-  text-transform: none !important
+      .text-#{$size}-end
+        +ltr()
+          text-align: right !important
+        +rtl()
+          text-align: left !important
 
-.text-uppercase
-  text-transform: uppercase !important
+  @each $name, $weight in $font-weights
+    .font-weight
+      &-#{$name}
+        font-weight: $weight !important
 
-.text-no-wrap
-  white-space: nowrap !important
+  .font-italic
+    font-style: italic !important
 
-.text-truncate
-  white-space: nowrap !important
-  overflow: hidden !important
-  text-overflow: ellipsis !important
-  line-height: 1.1 !important
+  .text-capitalize
+    text-transform: capitalize !important
+
+  .text-lowercase
+    text-transform: lowercase !important
+
+  .text-none
+    text-transform: none !important
+
+  .text-uppercase
+    text-transform: uppercase !important
+
+  .text-no-wrap
+    white-space: nowrap !important
+
+  .text-truncate
+    white-space: nowrap !important
+    overflow: hidden !important
+    text-overflow: ellipsis !important
+    line-height: 1.1 !important
