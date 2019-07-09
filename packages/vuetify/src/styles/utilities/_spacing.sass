@@ -25,20 +25,21 @@
   .ml-auto
     margin-left: auto !important
 
-  .ms-auto
-    +ltr()
-      margin-left: auto !important
-    +rtl()
-      margin-right: auto !important
+.ms-auto
+  +ltr()
+    margin-left: auto !important
+  +rtl()
+    margin-right: auto !important
 
-  .me-auto
-    +ltr()
-      margin-right: auto !important
-    +rtl()
-      margin-left: auto !important
+.me-auto
+  +ltr()
+    margin-right: auto !important
+  +rtl()
+    margin-left: auto !important
 
-  $i: 0
-  @each $level, $spacer in $spacers
+$i: 0
+@each $level, $spacer in $spacers
+  .v-application
     .ma-#{$i}
       margin: map-get($spacer, 'y') map-get($spacer, 'x') !important
     .my-#{$i}
@@ -55,17 +56,18 @@
       margin-bottom: map-get($spacer, 'y') !important
     .ml-#{$i}
       margin-left: map-get($spacer, 'x') !important
-    .ms-#{$i}
-      +ltr()
-        margin-left: map-get($spacer, 'x') !important
-      +rtl()
-        margin-right: map-get($spacer, 'x') !important
-    .me-#{$i}
-      +ltr()
-        margin-right: map-get($spacer, 'x') !important
-      +rtl()
-        margin-left: map-get($spacer, 'x') !important
+  .ms-#{$i}
+    +ltr()
+      margin-left: map-get($spacer, 'x') !important
+    +rtl()
+      margin-right: map-get($spacer, 'x') !important
+  .me-#{$i}
+    +ltr()
+      margin-right: map-get($spacer, 'x') !important
+    +rtl()
+      margin-left: map-get($spacer, 'x') !important
 
+  .v-application
     .pa-#{$i}
       padding: map-get($spacer, 'y') map-get($spacer, 'x') !important
     .py-#{$i}
@@ -82,15 +84,15 @@
       padding-bottom: map-get($spacer, 'y') !important
     .pl-#{$i}
       padding-left: map-get($spacer, 'x') !important
-    .ps-#{$i}
-      +ltr()
-        padding-left: map-get($spacer, 'x') !important
-      +rtl()
-        padding-right: map-get($spacer, 'x') !important
-    .pe-#{$i}
-      +ltr()
-        padding-right: map-get($spacer, 'x') !important
-      +rtl()
-        padding-left: map-get($spacer, 'x') !important
+  .ps-#{$i}
+    +ltr()
+      padding-left: map-get($spacer, 'x') !important
+    +rtl()
+      padding-right: map-get($spacer, 'x') !important
+  .pe-#{$i}
+    +ltr()
+      padding-right: map-get($spacer, 'x') !important
+    +rtl()
+      padding-left: map-get($spacer, 'x') !important
 
-    $i: $i + 1
+  $i: $i + 1
