@@ -36,7 +36,7 @@
                 />
                 <v-btn
                   :aria-label="`Link to layout for ${layout.name}`"
-                  :href="`https://github.com/vuetifyjs/vuetify/tree/master/packages/docs/src${layout.href}.vue`"
+                  :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/docs/src${layout.href}.vue`"
                   :title="`Link to layout for ${layout.name}`"
                   class="mx-2"
                   color="indigo"
@@ -68,6 +68,7 @@
 <script>
   export default {
     data: () => ({
+      branch: null,
       layouts: [
         { name: 'Baseline', href: '/examples/layouts/baseline' },
         { name: 'Baseline Flipped', href: '/examples/layouts/baseline-flipped' },
@@ -84,6 +85,10 @@
       genSrc (name) {
         return `https://cdn.vuetifyjs.com/images/layouts/${name.toLowerCase().replace(' ', '-')}.png`
       },
+    },
+    mounted () {
+      const branch = (window) ? window.location.hostname.split('.')[0] : 'master'
+      this.branch = ['master', 'dev', 'next'].includes(branch) ? branch : 'master'
     },
   }
 </script>
