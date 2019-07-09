@@ -93,22 +93,6 @@ describe('VFileInput.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should display progress', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        progress: 30,
-      },
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-
-    wrapper.setProps({
-      progress: '70',
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
   it('should work with accept', () => {
     const wrapper = mountFunction({
       propsData: {

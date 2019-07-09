@@ -58,12 +58,6 @@
         <v-file-input loading></v-file-input>
       </core-section>
 
-      <core-title>Progress</core-title>
-      <core-section>
-        <v-file-input progress="30"></v-file-input>
-        <v-file-input progress="70"></v-file-input>
-      </core-section>
-
       <core-title>Disabled</core-title>
       <core-section>
         <v-file-input disabled></v-file-input>

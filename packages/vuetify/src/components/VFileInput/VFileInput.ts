@@ -55,11 +55,6 @@ export default VTextField.extend({
       type: String,
       default: '$vuetify.icons.file',
     },
-    progress: {
-      type: [Number, String],
-      default: null,
-      validator: (v: number | string) => !isNaN(parseInt(v)),
-    } as PropValidator<number | string | null>,
     readonly: {
       type: Boolean,
       default: true,
@@ -188,19 +183,6 @@ export default VTextField.extend({
           },
         },
       }, [text]))
-    },
-    genProgress () {
-      if (this.loading === false && !this.progress) return null
-
-      return this.$slots.progress || this.$createElement(VProgressLinear, {
-        props: {
-          absolute: true,
-          color: (this.loading === true ? this.color : this.loading) || 'primary',
-          height: this.loaderHeight,
-          indeterminate: !this.progress,
-          value: this.progress,
-        },
-      })
     },
     onInput (e: Event) {
       this.internalValue = [...(e.target as HTMLInputElement).files]
