@@ -4,7 +4,7 @@ import Elevatable from '../'
 describe('elevatable.ts', () => {
   it('generate elevation classes', () => {
     const wrapper = mount({
-      mixins: [ Elevatable ],
+      mixins: [Elevatable],
       render: h => h('div'),
     })
 

@@ -52,7 +52,7 @@ function directive (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirec
   }, 0)
 }
 
-export default {
+export const ClickOutside = {
   // [data-app] may not be found
   // if using bind, inserted makes
   // sure that the root element is
@@ -78,3 +78,5 @@ export default {
     delete el._clickOutside
   },
 }
+
+export default ClickOutside

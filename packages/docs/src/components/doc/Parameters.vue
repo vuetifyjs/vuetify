@@ -72,12 +72,14 @@
             </v-flex>
             <v-flex>
               <!-- eslint-disable -->
-              <doc-markup
-                v-if="item.example"
-                class="mt-2 mb-0"
-                lang="ts"
-                value="example"
-              >{{ genTypescriptDef(item.example) }}</doc-markup>
+              <no-ssr>
+                <doc-markup
+                  v-if="item.example"
+                  class="mt-2 mb-0"
+                  lang="ts"
+                  value="example"
+                >{{ genTypescriptDef(item.example) }}</doc-markup>
+              </no-ssr>
               <!-- eslint-enable -->
             </v-flex>
           </v-layout>
@@ -285,7 +287,7 @@
         else return value
       },
       genTypescriptDef (obj) {
-        return JSON.stringify(obj, null, 2).replace(/"(.*)":\s"(.*)"?/g, '$1: $2')
+        return JSON.stringify(obj, null, 2).replace(/"(.*)":\s"(.*)"/g, '$1: $2')
       },
       genHeaderName (header, item) {
         let name = header

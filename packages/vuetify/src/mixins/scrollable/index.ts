@@ -1,5 +1,5 @@
 // Directives
-import Scroll from '../../directives/scroll'
+import { Scroll } from '../../directives'
 
 // Utilities
 import { consoleWarn } from '../../util/console'

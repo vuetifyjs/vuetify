@@ -46,27 +46,24 @@
     }
   },
   "props": {
-    "activator": "Sets the dialog activator",
     "dark": "Mixins.Themeable.props.dark",
-    "disabled": "Disables the ability to open the dialog",
-    "fullWidth": "Specifies the modal to force 100% width",
-    "fullscreen": "Changes layout for fullscreen display",
-    "hideOverlay": "Hides the display of the overlay",
-    "internalActivator": "Designates whether to use an internal activator",
+    "fullWidth": "Forces the dialog to expand 100% of available width.",
+    "fullscreen": "Changes layout for fullscreen display.",
+    "hideOverlay": "Hides the display of the overlay.",
+    "internalActivator": "Designates whether the supplied **activator** prop is inside the component.",
     "eager": "Mixins.Bootable.props.eager",
     "light": "Mixins.Themeable.props.light",
-    "maxWidth": "The maximum width of the content",
-    "noClickAnimation": "Disables the bounce effect when clicking outside of a `v-dialog`'s content when using the **persistent** prop",
-    "openOnHover": "Designates whether dialog should open on activator hover",
+    "maxWidth": "Mixins.Measurable.props.maxWidth",
+    "noClickAnimation": "Disables the bounce effect when clicking outside of a `v-dialog`'s content when using the **persistent** prop.",
+    "openOnHover": "Designates whether component should activate when its activator is hovered.",
     "origin": "Mixins.Transitionable.props.origin",
-    "persistent": "Clicking outside will not dismiss the dialog",
-    "returnValue": "Returns value to original state if the save function is not called",
-    "scrollable": "When set to true, expects a card, card-title, card-text and card-actions. Additionally, card-text should have specified height. Will set card-text to overflow-y",
+    "persistent": "Clicking outside of the element will not deactivate it.",
+    "scrollable": "When set to true, expects a `v-card` and a `v-card-text` component with a designated height. For more information, check out the [scrollabe example](/components/dialogs#scrollable).",
     "transition": "Mixins.Transitionable.props.transition",
-    "width": "Sets the dialog width"
+    "width": "Mixins.Measurable.props.width"
   },
   "events": {
-    "click:outside": "Event that fires when clicking outside an active dialog. ",
-    "keydown": "Event that fires when key is pressed. If dialog is active and not persistent, **esc** key will close dialog"
+    "click:outside": "Event that fires when clicking outside an active dialog.",
+    "keydown": "Event that fires when key is pressed. If dialog is active and not using the **persistent** prop, the **esc** key will deactivate it."
   }
 }

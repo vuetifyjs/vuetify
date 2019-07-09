@@ -1,6 +1,12 @@
 {
   "header": "# Cards",
   "headerText": "The `v-card` component is a versatile component that can be used for anything from a panel to a static image. The **card** component has numerous helper components to make markup as easy as possible. Components that have no listed options use **Vue's** functional component option for faster rendering and serve as markup sugar to make building easier.",
+  "componentsHeader": "### Functional components",
+  "componentsList": [
+    "`v-card-actions`: The container used for placing **actions** for a card, such as [v-btn](/components/buttons) or [v-menu](/components/menus). Also applies _special margin_ to buttons so that they properly line up with other card content areas.",
+    "`v-card-text`: Primarily used for **text content** in a card. Applies padding for text, reduces its font-size to .875rem and changes its color to grey.",
+    "`v-card-title`: Provides a default **font-size** and **padding** for card titles. Font-size can be overwritten with typography classes, (/styles/typography)."
+  ],
   "examples": {
     "usage": {
       "desc": "A card has 3 basic components, `v-card-title`, `v-card-text` and `v-card-actions`."
@@ -54,21 +60,12 @@
   "props": {
     "alt": "Components.Images.props.alt",
     "aspectRatio": "Components.Images.props.aspectRatio",
-    "contain": "Change the background-size to contain.",
-    "flat": "Removes card box shadow",
+    "contain": "Applies **background-size: contain** to the background image (when using the **img** prop).",
+    "flat": "Removes the card's elevation.",
     "gradient": "Components.Images.props.gradient",
-    "height": "Manually define the height of the card",
-    "hover": "Apply a higher elevation on hover",
-    "img": "Specifies an image background",
-    "lazySrc": "Components.Images.props.lazySrc",
-    "link": "Applies styles as if element were a link",
-    "outlined": "Removes card elevation shadow and adds a 1px border",
-    "position": "Components.Images.props.position",
-    "primaryTitle": "Applies primary title specific padding.",
-    "raised": "Specifies a higher default elevation",
-    "sizes": "Components.Images.props.sizes",
-    "src": "The image to display as a background.",
-    "srcset": "Components.Images.props.srcset",
-    "transition": "Components.Images.props.transition"
+    "hover": "Will apply an elevation of 4dp when hovered (default 2dp). You can find more information on the [elevation page](/styles/elevation).",
+    "img": "Specifies an image background for the card. For more advanced implementations, it is recommended that you use the [v-img](/components/images) component. You can find a [v-img example here](#media-with-text).",
+    "outlined": "Removes card elevation shadow and adds a thin border.",
+    "raised": "Specifies a higher default elevation (8dp). You can find more information on the [elevation page](/styles/elevation)."
   }
 }

@@ -27,14 +27,11 @@
     }
   },
   "props": {
-    "activator": "Sets the bottom sheet activator",
     "eager": "Mixins.Bootable.props.eager",
-    "disabled": "Disables the ability to open the bottom sheet",
-    "hideOverlay": "Hide the display of the overlay",
-    "inset": "Reduces the sheet content maximum width to 70%",
-    "internalActivator": "Designates whether to use an internal activator",
-    "maxWidth": "Specify the maximum width of the sheet's container",
-    "openOnHover": "Designates whether bottom sheet should open on activator hover",
-    "returnValue": "Returns value to original state if the save function is not called"
+    "hideOverlay": "Components.Dialogs.props.hideOverlay",
+    "inset": "Reduces the sheet content maximum width to 70%.",
+    "internalActivator": "Components.Dialogs.props.internalActivator",
+    "openOnHover": "Components.Dialogs.props.openOnHover",
+    "maxWidth": "Components.Dialogs.props.maxWidth"
   }
 }

@@ -67,6 +67,7 @@ export default mixins(
     },
     clearable: Boolean,
     readonly: Boolean,
+    size: [Number, String],
     hover: Boolean,
     value: {
       type: Number,

@@ -11,7 +11,7 @@
     },
     "open-and-close-delay": {
       "header": "### Open/Close Delay",
-      "desc": "Delay `v-hover` events by using `open-delay` and `close-delay` props in combination or seperately."
+      "desc": "Delay `v-hover` events by using `open-delay` and `close-delay` props in combination or separately."
     },
     "hover-list": {
       "header": "### Hover list",
