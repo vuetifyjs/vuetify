@@ -18,6 +18,11 @@
       "offsetY": false,
       "transition": false
     },
+    "v-bottom-sheet": {
+      "close-delay": false,
+      "open-delay": false,
+      "return-value": false
+    },
     "v-combobox": {
       "activator": false,
       "closeOnClick": false,
@@ -34,7 +39,8 @@
     },
     "v-dialog": {
       "close-delay": false,
-      "open-delay": false
+      "open-delay": false,
+      "return-value": false
     },
     "v-overflow-btn": {
       "activator": false,

@@ -304,6 +304,47 @@
       "type": "section",
       "children": [
         {
+          "type": "heading",
+          "lang": "usingMissingMaterialIconsHeader"
+        },
+        {
+          "type": "text",
+          "lang": "usingMissingMaterialIconsText1"
+        },
+        {
+          "type": "markup",
+          "value": "html_using_missing_material_icons_font"
+        },
+        {
+          "type": "text",
+          "lang": "usingMissingMaterialIconsText2"
+        },
+        {
+          "type": "markup",
+          "value": "html_using_missing_material_icons_component"
+        },
+        {
+          "type": "text",
+          "lang": "usingMissingMaterialIconsText3"
+        },
+        {
+          "type": "markup",
+          "value": "js_using_missing_material_icons"
+        },
+        {
+          "type": "text",
+          "lang": "usingMissingMaterialIconsText4"
+        },
+        {
+          "type": "markup",
+          "value": "html_using_missing_material_icons_usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "up-next",
           "value": [
             "components/icons",

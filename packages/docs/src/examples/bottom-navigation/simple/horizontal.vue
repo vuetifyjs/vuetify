@@ -3,7 +3,6 @@
     :value="activeBtn"
     color="deep-purple"
     horizontal
-    dark
   >
     <v-btn>
       <span>Recents</span>

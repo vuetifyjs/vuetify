@@ -38,6 +38,11 @@
   "componentIconsHeader": "## Component icons",
   "componentIconsText1": "Instead of provided icon fonts presets you can use your own component icons. You also can switch icons that are used in Vuetify component with your own.",
   "componentIconsText2": "If you want your SVG icon to inherit colors and scale correctly - be sure add the following css to it:",
+  "usingMissingMaterialIconsHeader": "## Using missing Material Icons",
+  "usingMissingMaterialIconsText1": "Some material icons are missing by default. For example, `person` and `person_outline` are available, but `visibility_outline` isn't, while `visibility` is. To use missing material icons, include the font below (remove another material font if already registered).",
+  "usingMissingMaterialIconsText2": "You can add your custom component. Let me assume it is **@/components/MaterialIcon.vue**.",
+  "usingMissingMaterialIconsText3": "Then you need to register the exact material icons you want.",
+  "usingMissingMaterialIconsText4": "Finally you can use the material icons like this.",
   "customFASvg": "### Custom Font Awesome Pro Icons",
   "customFASvgText1": "You can utilize component icons with Font Awesome Pro to select individual icon weights:"
 }

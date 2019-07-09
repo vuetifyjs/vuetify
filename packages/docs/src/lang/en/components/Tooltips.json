@@ -15,7 +15,6 @@
     }
   },
   "props": {
-    "activator": "Sets the tooltip activator",
     "closeDelay": "Delay (in ms) after which menu closes (when open-on-hover prop is set to true)",
     "dark": "Mixins.Themeable.props.dark",
     "debounce": "Duration before tooltip is shown and hidden when hovered",

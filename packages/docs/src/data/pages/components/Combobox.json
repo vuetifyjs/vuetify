@@ -9,6 +9,11 @@
         {
           "type": "usage",
           "value": "usage"
+        },
+        {
+          "type": "alert",
+          "lang": "Components.Selects.objectAlert",
+          "value": "error"
         }
       ]
     },

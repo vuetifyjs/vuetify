@@ -6,7 +6,7 @@ import Vuetify, {
   VRating,
   VToolbar,
 } from 'vuetify/lib'
-import { ripple } from 'vuetify/lib/directives'
+import { Ripple } from 'vuetify/lib/directives'
 
 Vue.use(Vuetify, {
   components: {
@@ -15,7 +15,7 @@ Vue.use(Vuetify, {
     VToolbar,
   },
   directives: {
-    ripple,
+    Ripple,
   },
 })
 

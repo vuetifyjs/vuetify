@@ -57,6 +57,7 @@
             "simple/sizing",
             "simple/outline",
             "simple/round",
+            "simple/tile",
             "simple/block",
             "intermediate/loaders"
           ]
