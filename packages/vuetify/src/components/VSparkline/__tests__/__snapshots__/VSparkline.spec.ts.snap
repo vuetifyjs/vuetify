@@ -100,25 +100,25 @@ exports[`VSparkline.ts should render component with bars and auto-line-width and
   </defs>
   <clipPath id="sparkline-bar-21-clip">
     <rect x="5.333333333333336"
-          y="71.34146341463415"
+          y="73.21428571428571"
           width="89.33333333333333"
-          height="1.829268292682927"
+          height="1.7857142857142858"
           rx="0"
           ry="0"
     >
     </rect>
     <rect x="105.33333333333334"
-          y="60.36585365853659"
+          y="62.5"
           width="89.33333333333333"
-          height="12.804878048780488"
+          height="12.5"
           rx="0"
           ry="0"
     >
     </rect>
     <rect x="205.33333333333334"
-          y="-3.6585365853658516"
+          y="0"
           width="89.33333333333333"
-          height="76.82926829268293"
+          height="75"
           rx="0"
           ry="0"
     >
@@ -158,25 +158,25 @@ exports[`VSparkline.ts should render component with bars and auto-line-width wit
   </defs>
   <clipPath id="sparkline-bar-27-clip">
     <rect x="8"
-          y="71.34146341463415"
+          y="73.21428571428571"
           width="84"
-          height="1.829268292682927"
+          height="1.7857142857142858"
           rx="0"
           ry="0"
     >
     </rect>
     <rect x="108"
-          y="60.36585365853659"
+          y="62.5"
           width="84"
-          height="12.804878048780488"
+          height="12.5"
           rx="0"
           ry="0"
     >
     </rect>
     <rect x="208"
-          y="-3.6585365853658516"
+          y="0"
           width="84"
-          height="76.82926829268293"
+          height="75"
           rx="0"
           ry="0"
     >
@@ -184,6 +184,106 @@ exports[`VSparkline.ts should render component with bars and auto-line-width wit
   </clipPath>
   <g clip-path="url(#sparkline-bar-27-clip)"
      fill="url(#27)"
+  >
+    <rect x="0"
+          y="0"
+          width="300"
+          height="75"
+    >
+    </rect>
+  </g>
+</svg>
+
+`;
+
+exports[`VSparkline.ts should render component with bars and correct bar lengths 1`] = `
+
+<svg display="block"
+     viewbox="0 0 300 75"
+>
+  <defs>
+    <linearGradient id="37"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="primary"
+      >
+      </stop>
+    </linearGradient>
+  </defs>
+  <clipPath id="sparkline-bar-37-clip">
+    <rect x="73"
+          y="37.5"
+          width="4"
+          height="37.5"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+    <rect x="223"
+          y="0"
+          width="4"
+          height="75"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+  </clipPath>
+  <g clip-path="url(#sparkline-bar-37-clip)"
+     fill="url(#37)"
+  >
+    <rect x="0"
+          y="0"
+          width="300"
+          height="75"
+    >
+    </rect>
+  </g>
+</svg>
+
+`;
+
+exports[`VSparkline.ts should render component with bars and correct bar lengths 2`] = `
+
+<svg display="block"
+     viewbox="0 0 300 75"
+>
+  <defs>
+    <linearGradient id="37"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="primary"
+      >
+      </stop>
+    </linearGradient>
+  </defs>
+  <clipPath id="sparkline-bar-37-clip">
+    <rect x="73"
+          y="0"
+          width="4"
+          height="37.5"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+    <rect x="223"
+          y="0"
+          width="4"
+          height="75"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+  </clipPath>
+  <g clip-path="url(#sparkline-bar-37-clip)"
+     fill="url(#37)"
   >
     <rect x="0"
           y="0"
@@ -216,25 +316,25 @@ exports[`VSparkline.ts should render component with bars and custom label size a
   </defs>
   <clipPath id="sparkline-bar-29-clip">
     <rect x="48"
-          y="71.34146341463415"
+          y="73.21428571428571"
           width="4"
-          height="1.829268292682927"
+          height="1.7857142857142858"
           rx="0"
           ry="0"
     >
     </rect>
     <rect x="148"
-          y="60.36585365853659"
+          y="62.5"
           width="4"
-          height="12.804878048780488"
+          height="12.5"
           rx="0"
           ry="0"
     >
     </rect>
     <rect x="248"
-          y="-3.6585365853658516"
+          y="0"
           width="4"
-          height="76.82926829268293"
+          height="75"
           rx="0"
           ry="0"
     >
@@ -294,25 +394,25 @@ exports[`VSparkline.ts should render component with bars and custom padding and 
   </defs>
   <clipPath id="sparkline-bar-25-clip">
     <rect x="48"
-          y="71.34146341463415"
+          y="73.21428571428571"
           width="4"
-          height="1.829268292682927"
+          height="1.7857142857142858"
           rx="0"
           ry="0"
     >
     </rect>
     <rect x="148"
-          y="60.36585365853659"
+          y="62.5"
           width="4"
-          height="12.804878048780488"
+          height="12.5"
           rx="0"
           ry="0"
     >
     </rect>
     <rect x="248"
-          y="-3.6585365853658516"
+          y="0"
           width="4"
-          height="76.82926829268293"
+          height="75"
           rx="0"
           ry="0"
     >
@@ -360,25 +460,25 @@ exports[`VSparkline.ts should render component with bars and gradient and match 
   </defs>
   <clipPath id="sparkline-bar-17-clip">
     <rect x="48"
-          y="71.34146341463415"
+          y="73.21428571428571"
           width="4"
-          height="1.829268292682927"
+          height="1.7857142857142858"
           rx="0"
           ry="0"
     >
     </rect>
     <rect x="148"
-          y="60.36585365853659"
+          y="62.5"
           width="4"
-          height="12.804878048780488"
+          height="12.5"
           rx="0"
           ry="0"
     >
     </rect>
     <rect x="248"
-          y="-3.6585365853658516"
+          y="0"
           width="4"
-          height="76.82926829268293"
+          height="75"
           rx="0"
           ry="0"
     >
@@ -418,25 +518,25 @@ exports[`VSparkline.ts should render component with bars and labels and match a 
   </defs>
   <clipPath id="sparkline-bar-19-clip">
     <rect x="48"
-          y="71.34146341463415"
+          y="73.21428571428571"
           width="4"
-          height="1.829268292682927"
+          height="1.7857142857142858"
           rx="0"
           ry="0"
     >
     </rect>
     <rect x="148"
-          y="60.36585365853659"
+          y="62.5"
           width="4"
-          height="12.804878048780488"
+          height="12.5"
           rx="0"
           ry="0"
     >
     </rect>
     <rect x="248"
-          y="-3.6585365853658516"
+          y="0"
           width="4"
-          height="76.82926829268293"
+          height="75"
           rx="0"
           ry="0"
     >
@@ -496,25 +596,25 @@ exports[`VSparkline.ts should render component with bars and line width and matc
   </defs>
   <clipPath id="sparkline-bar-23-clip">
     <rect x="46"
-          y="71.34146341463415"
+          y="73.21428571428571"
           width="8"
-          height="1.829268292682927"
+          height="1.7857142857142858"
           rx="0"
           ry="0"
     >
     </rect>
     <rect x="146"
-          y="60.36585365853659"
+          y="62.5"
           width="8"
-          height="12.804878048780488"
+          height="12.5"
           rx="0"
           ry="0"
     >
     </rect>
     <rect x="246"
-          y="-3.6585365853658516"
+          y="0"
           width="8"
-          height="76.82926829268293"
+          height="75"
           rx="0"
           ry="0"
     >
@@ -554,25 +654,25 @@ exports[`VSparkline.ts should render component with bars and match a snapshot 1`
   </defs>
   <clipPath id="sparkline-bar-13-clip">
     <rect x="48"
-          y="71.34146341463415"
+          y="73.21428571428571"
           width="4"
-          height="1.829268292682927"
+          height="1.7857142857142858"
           rx="0"
           ry="0"
     >
     </rect>
     <rect x="148"
-          y="60.36585365853659"
+          y="62.5"
           width="4"
-          height="12.804878048780488"
+          height="12.5"
           rx="0"
           ry="0"
     >
     </rect>
     <rect x="248"
-          y="-3.6585365853658516"
+          y="0"
           width="4"
-          height="76.82926829268293"
+          height="75"
           rx="0"
           ry="0"
     >

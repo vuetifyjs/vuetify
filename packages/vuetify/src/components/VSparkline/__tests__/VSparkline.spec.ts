@@ -248,4 +248,22 @@ describe('VSparkline.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should render component with bars and correct bar lengths', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: [1, 2],
+        type: 'bar',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({
+      value: [-1, -2],
+    })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
