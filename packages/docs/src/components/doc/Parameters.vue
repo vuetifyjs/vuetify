@@ -12,17 +12,22 @@
       :items="computedItems"
       sort-by="name"
       :items-per-page="-1"
-      class="component-parameters pa-2"
+      class="component-parameters"
       hide-default-footer
     >
       <template #default="{ items }">
         <div>
-          <doc-api-item
-            v-for="item in items"
-            :key="item.name"
-            :headers="headers"
-            :item="item"
-          />
+          <template v-for="(item, i) in items">
+            <doc-api-item
+              :key="item.name"
+              :headers="headers"
+              :item="item"
+            />
+            <v-divider
+              v-if="i + 1!== items.length"
+              :key="`divider-${i}`"
+            />
+          </template>
         </div>
       </template>
     </v-data-iterator>

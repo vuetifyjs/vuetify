@@ -1,26 +1,41 @@
 <template>
-  <v-layout wrap class="api-item grey lighten-2 mb-2">
+  <v-layout
+    class="api-item pa-2"
+    wrap
+  >
     <v-flex xs3>
-      <span class="mono name" v-text="item.name" />
+      <div class="overline grey--text text--darken-2">Name</div>
+      <v-chip
+        x-small
+        class="caption"
+        color="primary"
+        label
+      >{{ item.name }}</v-chip>
+      <!-- <span class="mono name" v-text="item.name" /> -->
     </v-flex>
     <v-flex xs2>
-        <span class="mono type" :class="[item.example && 'example']" v-text="item.type" @click="expanded = !expanded" />
+      <div class="overline grey--text text--darken-2">Type</div>
+      <span class="mono type" :class="[item.example && 'example']" @click="expanded = !expanded" v-text="item.type" />
     </v-flex>
-    <v-flex xs5>
+    <v-flex xs7 text-xs-right>
+      <div class="overline grey--text text--darken-2">Default</div>
+      <span class="mono type" v-text="item.default" />
+    </v-flex>
+    <v-flex xs12>
+      <div class="overline grey--text text--darken-2">Description</div>
       <doc-markdown
-          class="pl-3"
-          :code="item.description"
-        />
+        :code="item.description"
+      />
     </v-flex>
-    <v-flex xs2>
-      <doc-inline-markup
-          v-if="item.name !== 'custom-sort' && item.default !== 'undefined'"
-          class="text-xs-right"
-          lang="ts"
-          :code="item.type === 'string' ? `'${item.default}'` : item.default"
-        />
+    <!-- <v-flex xs2> -->
+    <!-- <doc-inline-markup
+        v-if="item.name !== 'custom-sort' && item.default !== 'undefined'"
+        class="text-xs-right"
+        lang="ts"
+        :code="item.type === 'string' ? `'${item.default}'` : item.default"
+      /> -->
 
-    </v-flex>
+    <!-- </v-flex> -->
     <!-- <v-flex xs12 class="d-flex">
       <div>
         <span class="mono name" v-text="item.name" /><span class="mono">:&nbsp;</span><span class="mono type" :class="[item.example && 'example']" v-text="item.type" @click="expanded = !expanded" />
@@ -50,7 +65,6 @@
         hide-copy
       >{{ item.example }}</doc-markup>
     </v-flex> -->
-
 
     <!-- <v-flex
       v-for="(header, i) in headers"
@@ -119,7 +133,7 @@
     },
     data: () => ({
       expanded: false,
-    })
+    }),
   }
 </script>
 
@@ -134,7 +148,6 @@
     text-decoration: underline
 
 .api-item
-  border-radius: 6px
   overflow: hidden
 
   > .flex

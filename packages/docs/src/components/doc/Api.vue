@@ -2,79 +2,72 @@
   <div>
     <doc-heading>Generic.Pages.api</doc-heading>
     <v-card outlined>
-      <div class="d-flex pa-2">
-        <!-- <v-tabs
-          v-model="current"
-          right
-        >
-          <v-tab
-            v-for="component in value"
-            :key="`tab-${component}`"
-            :href="`#${component}`"
-          >
-            {{ component }}
-          </v-tab>
-          <v-tab-item
-            v-for="component in value"
-            :key="`tab-${component}`"
-          >
-            component
-          </v-tab-item>
-        </v-tabs> -->
-        <v-select
-          v-model="current"
-          :items="value"
-          label="Component"
-        />
-        <v-spacer />
-        <v-text-field
-          v-model="search"
-          append-icon="search"
-          label="Search..."
-          single-line
-          hide-details
-          width="290"
-        />
-      </div>
-
-      <v-tabs
-        v-model="tab"
-        :slider-color="computedTabs.length ? 'primary' : 'transparent'"
-        vertical
+      <v-layout
+        pt-3
+        grey
+        lighten-4
+        wrap
       >
-        <v-tab
-          v-for="(tab) in computedTabs"
-          :key="`tab-${tab}`"
-          :href="`#${tab}`"
-        >
-          {{ tab.replace(/([A-Z])/g, ' $1') }}
-        </v-tab>
-
-        <v-tabs-items
-          :key="current"
-          v-model="tab"
-          touchless
-          class="white"
-        >
-          <v-tab-item
-            v-for="(tab, i) in computedTabs"
-            :key="`tab-item-${i}`"
-            :value="tab"
-            eager
+        <v-flex d-flex xs12 px-3 pb-3>
+          <v-select
+            v-model="current"
+            :items="value"
+            label="Component"
+            menu-props="auto"
+            hide-details
+          />
+          <v-spacer />
+          <v-text-field
+            v-model="search"
+            append-icon="search"
+            label="Search..."
+            single-line
+            hide-details
+            width="290"
+          />
+        </v-flex>
+        <v-flex xs12>
+          <v-tabs
+            v-model="tab"
+            background-color="transparent"
+            :slider-color="computedTabs.length ? 'primary' : 'transparent'"
           >
-            <v-card flat>
-              <doc-parameters
-                :headers="headers[tab]"
-                :items="component[tab]"
-                :lang="lang"
-                :search="search"
-                :target="current"
-                :type="tab"
-              />
-            </v-card>
-          </v-tab-item>
-        </v-tabs-items>
-      </v-tabs>
+            <v-tab
+              v-for="(tab) in computedTabs"
+              :key="`tab-${tab}`"
+              :href="`#${tab}`"
+            >
+              {{ tab.replace(/([A-Z])/g, ' $1') }}
+            </v-tab>
+          </v-tabs>
+        </v-flex>
+      </v-layout>
+
+      <v-tabs-items
+        :key="current"
+        v-model="tab"
+        touchless
+        class="white scroll-y"
+        style="max-height: 700px;"
+      >
+        <v-tab-item
+          v-for="(tab, i) in computedTabs"
+          :key="`tab-item-${i}`"
+          :value="tab"
+          eager
+        >
+          <v-card flat>
+            <doc-parameters
+              :headers="headers[tab]"
+              :items="component[tab]"
+              :lang="lang"
+              :search="search"
+              :target="current"
+              :type="tab"
+            />
+          </v-card>
+        </v-tab-item>
+      </v-tabs-items>
     </v-card>
   </div>
 </template>
