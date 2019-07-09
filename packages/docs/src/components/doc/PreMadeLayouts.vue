@@ -81,14 +81,14 @@
         { name: 'Sandbox', href: '/examples/layouts/sandbox' },
       ],
     }),
+    mounted () {
+      const branch = (window) ? window.location.hostname.split('.')[0] : 'master'
+      this.branch = ['master', 'dev', 'next'].includes(branch) ? branch : 'master'
+    },
     methods: {
       genSrc (name) {
         return `https://cdn.vuetifyjs.com/images/layouts/${name.toLowerCase().replace(' ', '-')}.png`
       },
-    },
-    mounted () {
-      const branch = (window) ? window.location.hostname.split('.')[0] : 'master'
-      this.branch = ['master', 'dev', 'next'].includes(branch) ? branch : 'master'
     },
   }
 </script>
