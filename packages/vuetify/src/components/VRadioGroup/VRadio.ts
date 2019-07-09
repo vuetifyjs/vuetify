@@ -117,7 +117,16 @@ export default baseMixins.extend<options>().extend({
       if (!this.hasLabel) return null
 
       return this.$createElement(VLabel, {
-        on: { click: this.onChange },
+        on: {
+          click: (e: Event) => {
+            // Prevent label from
+            // causing the input
+            // to focus
+            e.preventDefault()
+
+            this.onChange()
+          },
+        },
         attrs: {
           for: this.computedId,
         },
