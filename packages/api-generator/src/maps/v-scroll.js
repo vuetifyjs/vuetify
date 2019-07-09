@@ -4,7 +4,7 @@ module.exports = {
       {
         name: 'arg:target',
         default: 'window',
-        type: 'String',
+        type: 'string',
       },
       {
         name: 'value',

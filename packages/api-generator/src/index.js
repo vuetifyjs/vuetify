@@ -184,7 +184,7 @@ function writeApiFile (obj, file) {
   stream.once('open', () => {
     stream.write(comment)
     stream.write('module.exports = ')
-    stream.write(JSON.stringify(obj, null, 2).replace(/'/g, '').replace(/"/g, '\''))
+    stream.write(JSON.stringify(obj, null, 2))
     stream.write('\n')
     stream.end()
   })

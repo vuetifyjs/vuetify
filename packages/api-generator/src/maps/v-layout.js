@@ -5,25 +5,25 @@ module.exports = {
     props: [
       {
         'name': 'row',
-        'type': 'Boolean',
+        'type': 'boolean',
         'default': 'true',
         'source': null,
       },
       {
         'name': 'column',
-        'type': 'Boolean',
+        'type': 'boolean',
         'default': 'false',
         'source': null,
       },
       {
         'name': 'reverse',
-        'type': 'Boolean',
+        'type': 'boolean',
         'default': 'false',
         'source': null,
       },
       {
         'name': 'wrap',
-        'type': 'Boolean',
+        'type': 'boolean',
         'default': 'false',
         'source': null,
       },
