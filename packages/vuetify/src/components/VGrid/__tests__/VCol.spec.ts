@@ -47,18 +47,6 @@ describe('layout > col', () => {
     expect(wrapper.classes()).toHaveLength(5)
   })
 
-  it('should not have class "col" when only single breakpoint prop specified', async () => {
-    const wrapper = mount(VCol, {
-      propsData: {
-        sm: 5,
-      },
-    })
-
-    expect(wrapper.is('div')).toBe(true)
-    expect(wrapper.classes()).toContain('col-sm-5')
-    expect(wrapper.classes()).toHaveLength(1)
-  })
-
   it('should apply ".offset-*" classes with "offset-{bp}-{#}" props', async () => {
     const wrapper = mount(VCol, {
       propsData: {
@@ -104,7 +92,6 @@ describe('layout > col', () => {
   it("should apply boolean breakpoint classes for 'sm', 'md', 'lg', 'xl' prop", async () => {
     const wrapper = mount(VCol, {
       propsData: {
-        col: true,
         sm: true,
         md: true,
         lg: true,
@@ -132,11 +119,12 @@ describe('layout > col', () => {
     })
 
     expect(wrapper.is('div')).toBe(true)
+    expect(wrapper.classes()).toContain('col')
     expect(wrapper.classes()).toContain('col-sm')
     expect(wrapper.classes()).toContain('col-md')
     expect(wrapper.classes()).toContain('col-lg')
     expect(wrapper.classes()).toContain('col-xl')
-    expect(wrapper.classes()).toHaveLength(4)
+    expect(wrapper.classes()).toHaveLength(5)
   })
 
   it('should apply ".align-self-*" class with "align-self" prop', async () => {
