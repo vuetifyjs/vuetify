@@ -172,6 +172,50 @@ $utilities: map-merge(
       values: map-merge($spacers, (auto: auto))
     ),
 
+    // Negative margin utilities
+    "negative-margin": (
+      responsive: true,
+      property: margin,
+      class: ma,
+      values: $negative-spacers
+    ),
+    "negative-margin-x": (
+      responsive: true,
+      property: margin-right margin-left,
+      class: mx,
+      values: $negative-spacers
+    ),
+    "negative-margin-y": (
+      responsive: true,
+      property: margin-top margin-bottom,
+      class: my,
+      values: $negative-spacers
+    ),
+    "negative-margin-top": (
+      responsive: true,
+      property: margin-top,
+      class: mt,
+      values: $negative-spacers
+    ),
+    "negative-margin-right": (
+      responsive: true,
+      property: margin-right,
+      class: mr,
+      values: $negative-spacers
+    ),
+    "negative-margin-bottom": (
+      responsive: true,
+      property: margin-bottom,
+      class: mb,
+      values: $negative-spacers
+    ),
+    "negative-margin-left": (
+      responsive: true,
+      property: margin-left,
+      class: ml,
+      values: $negative-spacers
+    ),
+
     // Padding utilities
     "padding": (
       responsive: true,
