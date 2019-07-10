@@ -68,7 +68,6 @@ export default Vue.extend({
   name: 'v-col',
   functional: true,
   props: {
-    col: Boolean,
     cols: {
       type: [Boolean, String, Number],
       default: false
@@ -118,7 +117,7 @@ export default Vue.extend({
 
       classList.push({
         // Default to .col if no other col-{bp}-* classes generated nor `cols` specified.
-        col: props.col || (!hasColClasses && !props.cols),
+        col: !hasColClasses && !props.cols,
         [`col-${props.cols}`]: props.cols,
         [`offset-${props.offset}`]: props.offset,
         [`order-${props.order}`]: props.order,
