@@ -1,13 +1,13 @@
 {
   "header": "# File inputs",
-  "headerText": "The `v-file-input` component is a specialized input that provides a clean interface for selecting files, showing detailed selection information and upload progress.",
+  "headerText": "The `v-file-input` component is a specialized input that provides a clean interface for selecting files, showing detailed selection information and upload progress. It is meant to be a direct replacement for a standard file input.",
   "examples": {
     "usage": {
-      "desc": "The `v-file-input` is a basic container for collecting and displaying information on user selected files."
+      "desc": "At its core, the `v-file-input` component is a basic container that extends [v-text-field](/components/text-fields)."
     },
     "multiple": {
       "header": "### Multiple",
-      "desc": "The `v-file-input` Can contain multiple files at the same time."
+      "desc": "The `v-file-input` can contain multiple files at the same time when using the **multiple** prop."
     },
     "accept": {
       "header": "### Accept formats",
@@ -19,15 +19,15 @@
     },
     "size": {
       "header": "### Size displaying",
-      "desc": "The displayed size of the selected file(s) can be configured with the **display-size** property."
+      "desc": "The displayed size of the selected file(s) can be configured with the **display-size** property. Display sizes can be either _1024_ (the default used when providing **true**) or _1000_."
     },
     "counter": {
       "header": "### Counter",
-      "desc": "When using the **display-size** property along with **counter**, the total number of files and size will be displayed.."
+      "desc": "When using the **display-size** property along with **counter**, the total number of files and size will be displayed under the input."
     },
     "scoped-slots": {
       "header": "### Scoped slots",
-      "desc": "Using the `selection` scoped slot, you can customize the appearance of your input selections."
+      "desc": "Using the `selection` scoped slot, you can customize the appearance of your input selections. This is typically done with [chips](/components/chips), however any component or markup can be used."
     },
     "custom-icon": {
       "header": "### Custom icons",
@@ -35,25 +35,25 @@
     },
     "validation": {
       "header": "### Validation",
-      "desc": "Using the **rules** prop you can create your own custom validation parameters."
+      "desc": "Similar to other inputs, you can use the **rules** prop to can create your own custom validation parameters."
     },
     "advanced": {
       "header": "### Complex selection slots",
-      "desc": "The flexibility of the selection slot allows you accomodate complex use-cases."
+      "desc": "The flexibility of the selection slot allows you accomodate complex use-cases. In this example we show the first 2 selections as chips while adding a number indicator for the remaining amount."
     }
   },
   "props": {
     "accept": "One or more [unique file type specifiers](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#Unique_file_type_specifiers) describing file types to allow.",
     "chips": "Components.Selects.props.chips",
-    "counterSizeString": "The text displayed when using the **counter** and **display-size** props. Can also be customizing globally in [Internationalization](/customization/internationalization).",
-    "counterString": "The text displayed when using the **counter** prop. Can also be customizing globally in [Internationalization](/customization/internationalization).",
-    "displaySize": "Sets the displayed size of selected file(s). When using **true** will default to _base=1000_ displaying (**kB, MB, GB**) while _base=1024_ will display (**KiB, MiB, GiB**).",
+    "counterSizeString": "The text displayed when using the **counter** and **display-size** props. Can also be customized globally on the [internationalization page](/customization/internationalization).",
+    "counterString": "The text displayed when using the **counter** prop. Can also be customized globally on the [internationalization page](/customization/internationalization).",
+    "displaySize": "Sets the displayed size of selected file(s). When using **true** will default to _1000_ displaying (**kB, MB, GB**) while _1024_ will display (**KiB, MiB, GiB**).",
     "multiple": "Adds the **multiple** attribute to the input, allowing multiple file selections.",
     "smallChips": "Components.Selects.props.smallChips",
     "value": "A single or array of [File objects](https://developer.mozilla.org/en-US/docs/Web/API/File)."
   },
   "scopedSlots": {
-    "selection": "Slot for defining a custom appearance for selected item(s)."
+    "selection": "Slot for defining a custom appearance for selected item(s). Provides the current **index**, **text** (truncated) and [file](https://developer.mozilla.org/en-US/docs/Web/API/File)."
   },
   "events": {
     "change": "Components.Inputs.events.change"
