@@ -2,7 +2,7 @@
 import '../VCard/VCard.sass'
 
 // Components
-import VCheckbox from '../VCheckbox'
+import VSimpleCheckbox from '../VCheckbox/VSimpleCheckbox'
 import VDivider from '../VDivider'
 import VSubheader from '../VSubheader'
 import {
@@ -10,8 +10,11 @@ import {
   VListItem,
   VListItemAction,
   VListItemContent,
-  VListItemTitle
+  VListItemTitle,
 } from '../VList'
+
+// Directives
+import ripple from '../../directives/ripple'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
@@ -20,7 +23,7 @@ import Themeable from '../../mixins/themeable'
 // Helpers
 import {
   escapeHTML,
-  getPropertyFromItem
+  getPropertyFromItem,
 } from '../../util/helpers'
 
 // Types
@@ -32,39 +35,40 @@ import { PropValidator } from 'vue/types/options'
 export default mixins(Colorable, Themeable).extend({
   name: 'v-select-list',
 
+  // https://github.com/vuejs/vue/issues/6872
+  directives: {
+    ripple,
+  },
+
   props: {
     action: Boolean,
     dense: Boolean,
     hideSelected: Boolean,
     items: {
       type: Array,
-      default: () => []
+      default: () => [],
     } as PropValidator<any[]>,
-    itemAvatar: {
-      type: [String, Array, Function],
-      default: 'avatar'
-    } as PropValidator<string | (string | number)[] | ((item: object, fallback?: any) => any)>,
     itemDisabled: {
       type: [String, Array, Function],
-      default: 'disabled'
+      default: 'disabled',
     } as PropValidator<string | (string | number)[] | ((item: object, fallback?: any) => any)>,
     itemText: {
       type: [String, Array, Function],
-      default: 'text'
+      default: 'text',
     } as PropValidator<string | (string | number)[] | ((item: object, fallback?: any) => any)>,
     itemValue: {
       type: [String, Array, Function],
-      default: 'value'
+      default: 'value',
     } as PropValidator<string | (string | number)[] | ((item: object, fallback?: any) => any)>,
     noDataText: String,
     noFilter: Boolean,
     searchInput: {
-      default: null
+      default: null,
     } as PropValidator<any>,
     selectedItems: {
       type: Array,
-      default: () => []
-    } as PropValidator<any[]>
+      default: () => [],
+    } as PropValidator<any[]>,
   },
 
   computed: {
@@ -76,35 +80,32 @@ export default mixins(Colorable, Themeable).extend({
     },
     staticNoDataTile (): VNode {
       const tile = {
+        attrs: {
+          role: undefined,
+        },
         on: {
-          mousedown: (e: Event) => e.preventDefault() // Prevent onBlur from being called
-        }
+          mousedown: (e: Event) => e.preventDefault(), // Prevent onBlur from being called
+        },
       }
 
       return this.$createElement(VListItem, tile, [
-        this.genTileContent(this.noDataText)
+        this.genTileContent(this.noDataText),
       ])
-    }
+    },
   },
 
   methods: {
     genAction (item: object, inputValue: any): VNode {
-      const data = {
-        on: {
-          click: (e: Event) => {
-            e.stopPropagation()
-            this.$emit('select', item)
-          }
-        }
-      }
-
-      return this.$createElement(VListItemAction, data, [
-        this.$createElement(VCheckbox, {
+      return this.$createElement(VListItemAction, [
+        this.$createElement(VSimpleCheckbox, {
           props: {
             color: this.color,
-            inputValue
-          }
-        })
+            value: inputValue,
+          },
+          on: {
+            input: () => this.$emit('select', item),
+          },
+        }),
       ])
     },
     genDivider (props: { [key: string]: any }) {
@@ -123,7 +124,12 @@ export default mixins(Colorable, Themeable).extend({
       return this.$createElement(VSubheader, { props }, props.header)
     },
     genHighlight (text: string): string {
-      return `<span class="v-list__item__mask">${escapeHTML(text)}</span>`
+      return `<span class="v-list-item__mask">${escapeHTML(text)}</span>`
+    },
+    genLabelledBy (item: object) {
+      const text = escapeHTML(this.getText(item).split(' ').join('-').toLowerCase())
+
+      return `${text}-list-item-${this._uid}`
     },
     getMaskedCharacters (text: string): {
       start: string
@@ -143,33 +149,37 @@ export default mixins(Colorable, Themeable).extend({
     genTile (
       item: object,
       disabled = null as null | boolean,
-      avatar = false,
       value = false
     ): VNode | VNode[] | undefined {
       if (!value) value = this.hasItem(item)
 
       if (item === Object(item)) {
-        avatar = this.getAvatar(item)
         disabled = disabled !== null
           ? disabled
           : this.getDisabled(item)
       }
 
       const tile = {
+        attrs: {
+          // Default behavior in list does not
+          // contain aria-selected by default
+          'aria-selected': String(value),
+          'aria-labelledby': this.genLabelledBy(item),
+          role: 'option',
+        },
         on: {
           mousedown: (e: Event) => {
             // Prevent onBlur from being called
             e.preventDefault()
           },
-          click: () => disabled || this.$emit('select', item)
+          click: () => disabled || this.$emit('select', item),
         },
         props: {
           activeClass: this.tileActiveClass,
-          avatar,
           disabled,
           ripple: true,
-          inputValue: value
-        }
+          inputValue: value,
+        },
       }
 
       if (!this.$scopedSlots.item) {
@@ -177,12 +187,20 @@ export default mixins(Colorable, Themeable).extend({
           this.action && !this.hideSelected && this.items.length > 0
             ? this.genAction(item, value)
             : null,
-          this.genTileContent(item)
+          this.genTileContent(item),
         ])
       }
 
       const parent = this
-      const scopedSlot = this.$scopedSlots.item({ parent, item, tile })
+      const scopedSlot = this.$scopedSlots.item({
+        parent,
+        item,
+        attrs: {
+          ...tile.attrs,
+          ...tile.props,
+        },
+        on: tile.on,
+      })
 
       return this.needsTile(scopedSlot)
         ? this.$createElement(VListItem, tile, scopedSlot)
@@ -193,7 +211,8 @@ export default mixins(Colorable, Themeable).extend({
 
       return this.$createElement(VListItemContent,
         [this.$createElement(VListItemTitle, {
-          domProps: { innerHTML }
+          attrs: { id: this.genLabelledBy(item) },
+          domProps: { innerHTML },
         })]
       )
     },
@@ -203,10 +222,7 @@ export default mixins(Colorable, Themeable).extend({
     needsTile (slot: VNode[] | undefined) {
       return slot!.length !== 1 ||
         slot![0].componentOptions == null ||
-        slot![0].componentOptions.Ctor.options.name !== 'v-list-tile'
-    },
-    getAvatar (item: object) {
-      return Boolean(getPropertyFromItem(item, this.itemAvatar, false))
+        slot![0].componentOptions.Ctor.options.name !== 'v-list-item'
     },
     getDisabled (item: object) {
       return Boolean(getPropertyFromItem(item, this.itemDisabled, false))
@@ -216,7 +232,7 @@ export default mixins(Colorable, Themeable).extend({
     },
     getValue (item: object) {
       return getPropertyFromItem(item, this.itemValue, this.getText(item))
-    }
+    },
   },
 
   render (): VNode {
@@ -240,13 +256,16 @@ export default mixins(Colorable, Themeable).extend({
 
     return this.$createElement('div', {
       staticClass: 'v-select-list v-card',
-      class: this.themeClasses
+      class: this.themeClasses,
     }, [
       this.$createElement(VList, {
-        props: {
-          dense: this.dense
-        }
-      }, children)
+        attrs: {
+          id: this.$attrs.id,
+          role: 'listbox',
+          tabindex: -1,
+        },
+        props: { dense: this.dense },
+      }, children),
     ])
-  }
+  },
 })

@@ -7,10 +7,13 @@ import VRow from './VRow'
 export {
   VContainer,
   VCol,
-  VRow
+  VRow,
 }
+
 export default {
-  VContainer,
-  VCol,
-  VRow
+  $_vuetify_subcomponents: {
+    VContainer,
+    VCol,
+    VRow,
+  },
 }

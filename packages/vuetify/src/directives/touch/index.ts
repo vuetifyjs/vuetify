@@ -97,13 +97,13 @@ function createHandlers (value: TouchHandlers): TouchStoredHandlers {
     down: value.down,
     start: value.start,
     move: value.move,
-    end: value.end
+    end: value.end,
   }
 
   return {
     touchstart: (e: TouchEvent) => touchstart(e, wrapper),
     touchend: (e: TouchEvent) => touchend(e, wrapper),
-    touchmove: (e: TouchEvent) => touchmove(e, wrapper)
+    touchmove: (e: TouchEvent) => touchmove(e, wrapper),
   }
 }
 
@@ -135,10 +135,9 @@ function unbind (el: HTMLElement, binding: TouchVNodeDirective, vnode: VNode) {
   delete target._touchHandlers[vnode.context!._uid]
 }
 
-const touch = {
+export const Touch = {
   inserted,
-  unbind
+  unbind,
 }
 
-export { touch }
-export default touch
+export default Touch

@@ -10,8 +10,8 @@
     data: () => ({
       windowSize: {
         x: 0,
-        y: 0
-      }
+        y: 0,
+      },
     }),
 
     mounted () {
@@ -21,7 +21,7 @@
     methods: {
       onResize () {
         this.windowSize = { x: window.innerWidth, y: window.innerHeight }
-      }
-    }
+      },
+    },
   }
 </script>

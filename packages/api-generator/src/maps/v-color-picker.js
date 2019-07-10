@@ -6,21 +6,21 @@ const VColorPickerColor = {
     h: 'number',
     s: 'number',
     l: 'number',
-    a: 'number'
+    a: 'number',
   },
   hsva: {
     h: 'number',
     s: 'number',
     v: 'number',
-    a: 'number'
+    a: 'number',
   },
   hue: 'number',
   rgba: {
     r: 'number',
     g: 'number',
     b: 'number',
-    a: 'number'
-  }
+    a: 'number',
+  },
 }
 
 module.exports = {
@@ -28,16 +28,16 @@ module.exports = {
     events: [
       {
         name: 'input',
-        value: 'string | object'
+        value: 'string | object',
       },
       {
         name: 'update:color',
-        value: VColorPickerColor
+        value: VColorPickerColor,
       },
       {
         name: 'update:mode',
-        value: 'string'
-      }
-    ]
-  }
+        value: 'string',
+      },
+    ],
+  },
 }

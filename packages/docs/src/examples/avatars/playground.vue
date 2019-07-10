@@ -55,14 +55,14 @@
       slider: 56,
       tile: false,
       color: 'grey lighten-4',
-      colors: [ 'primary', 'accent', 'warning lighten-2', 'teal', 'grey lighten-4' ],
-      img: true
+      colors: ['primary', 'accent', 'warning lighten-2', 'teal', 'grey lighten-4'],
+      img: true,
     }),
 
     computed: {
       avatarSize () {
         return `${this.slider}px`
-      }
-    }
+      },
+    },
   }
 </script>

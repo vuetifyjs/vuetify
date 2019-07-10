@@ -72,12 +72,14 @@
             </v-flex>
             <v-flex>
               <!-- eslint-disable -->
-              <doc-markup
-                v-if="item.example"
-                class="mt-2 mb-0"
-                lang="ts"
-                value="example"
-              >{{ genTypescriptDef(item.example) }}</doc-markup>
+              <no-ssr>
+                <doc-markup
+                  v-if="item.example"
+                  class="mt-2 mb-0"
+                  lang="ts"
+                  value="example"
+                >{{ genTypescriptDef(item.example) }}</doc-markup>
+              </no-ssr>
               <!-- eslint-enable -->
             </v-flex>
           </v-layout>
@@ -90,7 +92,7 @@
 <script>
   // Utilities
   import {
-    mapState
+    mapState,
   } from 'vuex'
   import { getObjectValueByPath } from 'vuetify/es5/util/helpers'
   import camelCase from 'lodash/camelCase'
@@ -100,38 +102,38 @@
   export default {
     inject: {
       overrideNamespace: {
-        default: null
+        default: null,
       },
       overridePage: {
-        default: null
-      }
+        default: null,
+      },
     },
 
     props: {
       target: {
         type: String,
-        default: ''
+        default: '',
       },
       headers: {
         type: Array,
-        default: () => ([])
+        default: () => ([]),
       },
       lang: {
         type: String,
-        default: ''
+        default: '',
       },
       items: {
         type: Array,
-        default: () => ([])
+        default: () => ([]),
       },
       search: {
         type: String,
-        default: ''
+        default: '',
       },
       type: {
         type: String,
-        default: ''
-      }
+        default: '',
+      },
     },
 
     computed: {
@@ -198,7 +200,7 @@
       },
       page () {
         return this.overridePage || this.$store.getters['documentation/page']
-      }
+      },
     },
 
     methods: {
@@ -209,11 +211,11 @@
         )
       },
       /* eslint-disable-next-line max-statements */
-      genDescription (name, item) {
+      genDescription (name, item, namespace = this.namespace, page = this.page) {
         let description = ''
         let devPrepend = ''
         const camelSource = this.parseSource(item.source)
-        const page = this.lang ? upperFirst(camelCase(this.lang)) : this.page
+        if (this.lang) page = upperFirst(camelCase(this.lang))
         const composite = `${this.namespace}.${page}`
 
         // Components.Alerts.props['v-alert'].value
@@ -228,6 +230,8 @@
         const mixinDesc = `Mixins.${camelSource}.${this.type}['${name}']`
         // Generic.Props.value
         const genericDesc = `Generic.${upperFirst(this.type)}['${name}']`
+        // api['v-btn'] = 'Components.Buttons'
+        const apiDesc = `${composite}.api['${this.target}']`
 
         if (this.$te(specialDesc)) {
           description = this.$t(specialDesc)
@@ -247,6 +251,10 @@
         } else if (this.$te(genericDesc)) {
           description = this.$t(genericDesc)
           devPrepend = `**GENERIC (${item.source})** - `
+        } else if (this.$te(apiDesc)) {
+          const [namespace, page] = this.$t(apiDesc).split('.')
+
+          return this.genDescription(name, item, namespace, page)
         } else {
           description = ''
           devPrepend = `**MISSING DESCRIPTION** - ${item.source}`
@@ -285,7 +293,7 @@
         else return value
       },
       genTypescriptDef (obj) {
-        return JSON.stringify(obj, null, 2).replace(/"(.*)":\s"(.*)"?/g, '$1: $2')
+        return JSON.stringify(obj, null, 2).replace(/"(.*)":\s"(.*)"/g, '$1: $2')
       },
       genHeaderName (header, item) {
         let name = header
@@ -300,8 +308,8 @@
         }
 
         return upperFirst(camelCase(source))
-      }
-    }
+      },
+    },
   }
 </script>
 

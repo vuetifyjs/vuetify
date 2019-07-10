@@ -13,8 +13,8 @@
   export default {
     data () {
       return {
-        selected: 0
+        selected: 0,
       }
-    }
+    },
   }
 </script>

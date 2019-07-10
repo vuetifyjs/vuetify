@@ -1,5 +1,5 @@
 // Directives
-import Ripple from '../../directives/ripple'
+import ripple from '../../directives/ripple'
 
 // Types
 import Vue, { VNode, VNodeData, VNodeDirective } from 'vue'
@@ -7,13 +7,13 @@ import Vue, { VNode, VNodeData, VNodeDirective } from 'vue'
 export default Vue.extend({
   name: 'rippleable',
 
-  directives: { Ripple },
+  directives: { ripple },
 
   props: {
     ripple: {
       type: [Boolean, Object],
-      default: true
-    }
+      default: true,
+    },
   },
 
   methods: {
@@ -25,14 +25,14 @@ export default Vue.extend({
       data.directives = data.directives || []
       data.directives.push({
         name: 'ripple',
-        value: { center: true }
+        value: { center: true },
       } as VNodeDirective)
       data.on = Object.assign({
-        click: this.onChange
+        click: this.onChange,
       }, this.$listeners)
 
       return this.$createElement('div', data)
     },
-    onChange () {}
-  }
+    onChange () {},
+  },
 })

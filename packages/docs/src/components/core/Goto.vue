@@ -27,18 +27,16 @@
     data: () => ({
       hover: false,
       id: '',
-      tag: null
+      tag: null,
     }),
 
     computed: {
       classes () {
         return {
           [`tag-${this.tag}`]: true,
-          'mb-4': this.tag === 'H1',
-          'mb-3': this.tag === 'H2',
-          'mb-2': this.tag === 'H3'
+          'mb-2': ['H1', 'H2', 'H3'].includes(this.tag),
         }
-      }
+      },
     },
 
     mounted () {
@@ -55,8 +53,8 @@
         e.stopPropagation()
 
         this.$router.push(`#${this.id}`)
-      }
-    }
+      },
+    },
   }
 </script>
 

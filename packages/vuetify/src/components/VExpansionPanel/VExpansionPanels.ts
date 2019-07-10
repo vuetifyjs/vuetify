@@ -8,6 +8,7 @@ import VExpansionPanel from './VExpansionPanel'
 // Utilities
 import { breaking } from '../../util/console'
 
+// Types
 interface VExpansionPanelInstance extends InstanceType<typeof VExpansionPanel> {}
 
 /* @vue/component */
@@ -16,19 +17,17 @@ export default BaseItemGroup.extend({
 
   provide (): object {
     return {
-      expansionPanels: this
+      expansionPanels: this,
     }
   },
 
   props: {
     accordion: Boolean,
     disabled: Boolean,
-    /** @deprecated */
-    expand: Boolean,
     focusable: Boolean,
     inset: Boolean,
     popout: Boolean,
-    readonly: Boolean
+    readonly: Boolean,
   },
 
   computed: {
@@ -39,14 +38,16 @@ export default BaseItemGroup.extend({
         'v-expansion-panels--accordion': this.accordion,
         'v-expansion-panels--focusable': this.focusable,
         'v-expansion-panels--inset': this.inset,
-        'v-expansion-panels--popout': this.popout
+        'v-expansion-panels--popout': this.popout,
       }
-    }
+    },
   },
 
   created () {
     /* istanbul ignore next */
-    if (this.expand) breaking('expand', 'multiple')
+    if (this.$attrs.hasOwnProperty('expand')) {
+      breaking('expand', 'multiple', this)
+    }
 
     /* istanbul ignore next */
     if (
@@ -54,7 +55,7 @@ export default BaseItemGroup.extend({
       this.value.length > 0 &&
       typeof this.value[0] === 'boolean'
     ) {
-      breaking('<v-expansion-panels :value="[true, false]">', '<v-expansion-panels :value="[0]">')
+      breaking(':value="[true, false, true]"', ':value="[0, 2]"', this)
     }
   },
 
@@ -65,6 +66,6 @@ export default BaseItemGroup.extend({
 
       item.isActive = this.toggleMethod(value)
       item.nextIsActive = this.toggleMethod(nextValue)
-    }
-  }
+    },
+  },
 })

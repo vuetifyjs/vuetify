@@ -10,10 +10,10 @@
       pb-0
     >
       <div class="text-xs-center">
-        <h4 class="body-2 font-weight-bold grey--text">Premiere sponsor</h4>
+        <h4 class="title grey--text text--darken-2">Premiere sponsor</h4>
 
-        <span class="d-block mb-3 caption grey--text text--lighten-1">
-          One spot available
+        <span class="d-block mb-3 overline grey--text">
+          Your logo here
         </span>
 
         <supporters-sponsor-btn
@@ -27,7 +27,7 @@
           ref="search"
           v-model="search"
           label="Search"
-          append-icon="search"
+          append-icon="mdi-magnify"
           clearable
           hide-details
           single-line
@@ -41,10 +41,12 @@
 
     <v-layout pa-3>
       <a
-        href="https://vuejobs.com/?utm_source=vuejobs&utm_medium=banner&utm_campaign=linking&ref=vuetifyjs.com"
-        target="_blank"
-        rel="noopener"
+        aria-label="VueJobs"
         class="d-inline-block"
+        href="https://vuejobs.com/?utm_source=vuejobs&utm_medium=banner&utm_campaign=linking&ref=vuetifyjs.com"
+        rel="noopener"
+        target="_blank"
+        title="VueJobs"
         @click="$ga.event('drawer', 'click', 'vuejobs')"
       >
         <v-img
@@ -96,7 +98,7 @@
   // Utilities
   import {
     mapMutations,
-    mapState
+    mapState,
   } from 'vuex'
   import kebabCase from 'lodash/kebabCase'
   import drawerItems from '@/data/drawerItems.json'
@@ -107,7 +109,7 @@
       docSearch: {},
       isSearching: false,
       drawerItems,
-      search: ''
+      search: '',
     }),
 
     computed: {
@@ -115,7 +117,7 @@
       children () {
         return this.item.children.map(item => ({
           ...item,
-          to: `${this.item.group}/${item.to}`
+          to: `${this.item.group}/${item.to}`,
         }))
       },
       group () {
@@ -129,11 +131,11 @@
         },
         set (val) {
           this.setDrawer(val)
-        }
+        },
       },
       items () {
         return this.drawerItems.map(this.addLanguagePrefix)
-      }
+      },
     },
 
     watch: {
@@ -162,7 +164,7 @@
           this.docSearch.autocomplete.autocomplete.close()
           this.docSearch.autocomplete.autocomplete.setVal('')
         }
-      }
+      },
     },
 
     mounted () {
@@ -187,7 +189,7 @@
         const { children, subtext, ...props } = item
         const newItem = {
           ...props,
-          text: `Vuetify.AppDrawer.${item.text}`
+          text: `Vuetify.AppDrawer.${item.text}`,
         }
 
         if (children) {
@@ -208,7 +210,7 @@
           autocompleteOptions: {
             appendTo: '#app',
             hint: false,
-            debug: true
+            debug: true,
           },
           indexName: 'vuetifyjs',
           inputSelector: '#search',
@@ -218,10 +220,10 @@
             vm.search = ''
             vm.isSearching = false
             vm.$router.push(loc.pop())
-          }
+          },
         })
-      }
-    }
+      },
+    },
   }
 </script>
 

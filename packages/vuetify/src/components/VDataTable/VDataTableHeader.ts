@@ -13,7 +13,7 @@ export default Vue.extend({
   functional: true,
 
   props: {
-    mobile: Boolean
+    mobile: Boolean,
   },
 
   render (h, { props, data, slots }) {
@@ -25,5 +25,5 @@ export default Vue.extend({
     } else {
       return h(VDataTableHeaderDesktop, data, children)
     }
-  }
+  },
 })

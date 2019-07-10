@@ -1,10 +1,10 @@
 <template>
   <v-card>
     <v-toolbar
-      card
       color="pink"
       dark
       dense
+      flat
     >
       <v-toolbar-title class="body-2">Upcoming Changes</v-toolbar-title>
     </v-toolbar>
@@ -29,13 +29,7 @@
     methods: {
       next () {
         alert('You clicked next!')
-      }
-    }
+      },
+    },
   }
 </script>
-
-<codepen-resources lang="json">
-  {
-    "css": ["https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css"]
-  }
-</codepen-resources>

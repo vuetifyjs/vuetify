@@ -96,15 +96,19 @@
     content: ''
     left: 0
     opacity: 0
+    pointer-events: none
     position: absolute
     right: 0
     top: 0
     transition: .2s opacity map-get($transition, 'fast-in-slow-out')
 
 .v-card--disabled
-  opacity: 0.6
   pointer-events: none
   user-select: none
+
+  > *:not(.v-card__progress)
+    opacity: 0.6
+    transition: inherit
 
 .v-card--loading
   overflow: hidden

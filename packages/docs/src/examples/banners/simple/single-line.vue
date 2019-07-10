@@ -38,7 +38,7 @@
 <script>
   export default {
     data: () => ({
-      sticky: false
-    })
+      sticky: false,
+    }),
   }
 </script>

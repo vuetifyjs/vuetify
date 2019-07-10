@@ -17,6 +17,6 @@ export default {
     VEditDialog,
     VTableOverflow,
     VSimpleTable,
-    VVirtualTable
-  }
+    VVirtualTable,
+  },
 }

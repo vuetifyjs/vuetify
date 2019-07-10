@@ -4,7 +4,7 @@ import VFooter from '../VFooter'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VFooter.ts', () => {
@@ -18,11 +18,11 @@ describe('VFooter.ts', () => {
           $vuetify: {
             application: {
               register: () => {},
-              unregister: () => {}
-            }
-          }
+              unregister: () => {},
+            },
+          },
         },
-        ...options
+        ...options,
       })
     }
   })
@@ -40,7 +40,7 @@ describe('VFooter.ts', () => {
   it('should return computed values when using app', async () => {
     const wrapper = mountFunction({
       propsData: {
-        app: true
+        app: true,
       },
       mocks: {
         $vuetify: {
@@ -50,10 +50,10 @@ describe('VFooter.ts', () => {
             left: 300,
             right: 200,
             register: () => {},
-            unregister: () => {}
-          }
-        }
-      }
+            unregister: () => {},
+          },
+        },
+      },
     })
 
     expect(wrapper.vm.computedBottom).toBe(64)

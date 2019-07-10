@@ -11,7 +11,7 @@ export default mixins(Themeable).extend({
   props: {
     fixedHeader: Boolean,
     height: [Number, String],
-    dense: Boolean
+    dense: Boolean,
   },
 
   computed: {
@@ -20,9 +20,9 @@ export default mixins(Themeable).extend({
         'v-data-table--dense': this.dense,
         'v-data-table--fixed-height': !!this.height && !this.fixedHeader,
         'v-data-table--fixed-header': this.fixedHeader,
-        ...this.themeClasses
+        ...this.themeClasses,
       }
-    }
+    },
   },
 
   methods: {
@@ -30,22 +30,22 @@ export default mixins(Themeable).extend({
       return this.$slots.wrapper || this.$createElement('div', {
         staticClass: 'v-data-table__wrapper',
         style: {
-          height: convertToUnit(this.height)
-        }
+          height: convertToUnit(this.height),
+        },
       }, [
-        this.$createElement('table', this.$slots.default)
+        this.$createElement('table', this.$slots.default),
       ])
-    }
+    },
   },
 
   render (h): VNode {
     return h('div', {
       staticClass: 'v-data-table',
-      class: this.classes
+      class: this.classes,
     }, [
       this.$slots.top,
       this.genWrapper(),
-      this.$slots.bottom
+      this.$slots.bottom,
     ])
-  }
+  },
 })

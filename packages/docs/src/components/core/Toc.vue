@@ -1,26 +1,28 @@
 <template>
   <div
     v-scroll="onScroll"
-    class="mb-4"
+    class="mb-5"
     v-on="$listeners"
   >
     <slot name="top" />
 
     <ul class="app-table-of-contents">
+      <li class="grey--text text--darken-3 pl-3 mb-2 body-1">Contents</li>
       <li
         v-for="(item, i) in list"
         :key="i"
+        class="mb-2"
       >
         <a
-          :href="item.id"
+          :href="item.target"
           :class="{
             'primary--text': activeIndex === i,
-            'grey--text text--darken-1': activeIndex !== i
+            'grey--text': activeIndex !== i
           }"
           :style="{
             borderColor: activeIndex === i ? 'inherit' : null
           }"
-          class="mb-3 d-block subtitle-2"
+          class="d-block body-2"
           @click.stop.prevent="goTo(item.target)"
           v-text="item.text"
         />
@@ -39,7 +41,7 @@
       currentOffset: 0,
       list: [],
       routeTimeout: null,
-      timeout: null
+      timeout: null,
     }),
 
     watch: {
@@ -48,8 +50,8 @@
         handler () {
           clearTimeout(this.routeTimeout)
           this.routeTimeout = setTimeout(this.genList, 300)
-        }
-      }
+        },
+      },
     },
 
     methods: {
@@ -70,7 +72,7 @@
           list.push({
             item,
             text: item.innerText,
-            target: `#${item.id}`
+            target: `#${item.id}`,
           })
         }
 
@@ -104,8 +106,8 @@
         clearTimeout(this.timeout)
 
         this.timeout = setTimeout(this.findActiveIndex, 10)
-      }
-    }
+      },
+    },
   }
 </script>
 

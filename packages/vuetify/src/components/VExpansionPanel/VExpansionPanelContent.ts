@@ -29,7 +29,7 @@ export default baseMixins.extend<options>().extend({
   computed: {
     isActive (): boolean {
       return this.expansionPanel.isActive
-    }
+    },
   },
 
   created () {
@@ -46,11 +46,11 @@ export default baseMixins.extend<options>().extend({
         staticClass: 'v-expansion-panel-content',
         directives: [{
           name: 'show',
-          value: this.isActive
-        }]
+          value: this.isActive,
+        }],
       }, this.showLazyContent([
-        h('div', { class: 'v-expansion-panel-content__wrap' }, getSlot(this))
-      ]))
+        h('div', { class: 'v-expansion-panel-content__wrap' }, getSlot(this)),
+      ])),
     ])
-  }
+  },
 })

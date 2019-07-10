@@ -1,0 +1,5 @@
+// src/sass/main.scss
+
+$color-pack: false;
+
+@import '~vuetify/src/styles/main.sass';

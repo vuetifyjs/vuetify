@@ -22,23 +22,23 @@ export default mixins(Returnable, Themeable).extend({
 
   props: {
     cancelText: {
-      default: 'Cancel'
+      default: 'Cancel',
     },
     large: Boolean,
     eager: Boolean,
     persistent: Boolean,
     saveText: {
-      default: 'Save'
+      default: 'Save',
     },
     transition: {
       type: String,
-      default: 'slide-x-reverse-transition'
-    }
+      default: 'slide-x-reverse-transition',
+    },
   },
 
   data () {
     return {
-      isActive: false
+      isActive: false,
     }
   },
 
@@ -50,7 +50,7 @@ export default mixins(Returnable, Themeable).extend({
       } else {
         this.$emit('close')
       }
-    }
+    },
   },
 
   methods: {
@@ -67,20 +67,20 @@ export default mixins(Returnable, Themeable).extend({
         props: {
           text: true,
           color: 'primary',
-          light: true
+          light: true,
         },
-        on: { click: fn }
+        on: { click: fn },
       }, text)
     },
     genActions (): VNode {
       return this.$createElement('div', {
-        'class': 'v-small-dialog__actions'
+        'class': 'v-small-dialog__actions',
       }, [
         this.genButton(this.cancel, this.cancelText),
         this.genButton(() => {
           this.save(this.returnValue)
           this.$emit('save')
-        }, this.saveText)
+        }, this.saveText),
       ])
     },
     genContent (): VNode {
@@ -94,11 +94,11 @@ export default mixins(Returnable, Themeable).extend({
               this.save(input.value)
               this.$emit('save')
             }
-          }
+          },
         },
-        ref: 'content'
+        ref: 'content',
       }, [this.$slots.input])
-    }
+    },
   },
 
   render (h): VNode {
@@ -115,22 +115,22 @@ export default mixins(Returnable, Themeable).extend({
         closeOnContentClick: false,
         eager: this.eager,
         light: this.light,
-        dark: this.dark
+        dark: this.dark,
       },
       on: {
-        input: (val: boolean) => (this.isActive = val)
+        input: (val: boolean) => (this.isActive = val),
       },
       scopedSlots: {
         activator: ({ on }) => {
           return h('span', {
             staticClass: 'v-small-dialog__activator',
-            on
+            on,
           }, this.$slots.default)
-        }
-      }
+        },
+      },
     }, [
       this.genContent(),
-      this.large ? this.genActions() : null
+      this.large ? this.genActions() : null,
     ])
-  }
+  },
 })

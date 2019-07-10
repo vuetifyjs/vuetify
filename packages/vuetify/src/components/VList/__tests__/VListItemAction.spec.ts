@@ -5,7 +5,7 @@ import VListItemAction from '../VListItemAction'
 import Vue from 'vue'
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 import { functionalContext } from '../../../../test'
 
@@ -19,7 +19,7 @@ describe('VListItemAction.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VListItemAction, {
-        ...options
+        ...options,
       })
     }
   })
@@ -32,7 +32,7 @@ describe('VListItemAction.ts', () => {
 
   it('should render component with static class and match snapshot', () => {
     const wrapper = mountFunction(functionalContext({
-      staticClass: 'static-class'
+      staticClass: 'static-class',
     }))
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -40,10 +40,10 @@ describe('VListItemAction.ts', () => {
 
   it('should render component with many children and match snapshot', () => {
     const content1 = mount(Vue.component('content1', {
-      render: h => h('div')
+      render: h => h('div'),
     })).vNode
     const content2 = mount(Vue.component('content2', {
-      render: h => h('span')
+      render: h => h('span'),
     })).vNode
     const wrapper = mountFunction(functionalContext({}, [content1, content2]))
 
@@ -52,10 +52,10 @@ describe('VListItemAction.ts', () => {
 
   it('should render component with one children and match snapshot', () => {
     const visible = mount(Vue.component('visible', {
-      render: h => { return h('div') || h() }
+      render: h => { return h('div') || h() },
     })).vNode
     const notVisible = mount(Vue.component('notVisible', {
-      render: h => { return h() || h('span') }
+      render: h => { return h() || h('span') },
     })).vNode
 
     const wrapper = mountFunction(functionalContext({}, [visible, notVisible]))
@@ -67,11 +67,11 @@ describe('VListItemAction.ts', () => {
     const wrapper = mountFunction({
       context: Object.assign({
         domProps: {
-          innerHTML: '<b>something</b>'
+          innerHTML: '<b>something</b>',
         },
         data: {},
-        props: {}
-      })
+        props: {},
+      }),
     })
 
     expect(wrapper.html()).toMatchSnapshot()

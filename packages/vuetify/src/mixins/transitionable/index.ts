@@ -6,6 +6,6 @@ export default Vue.extend({
   props: {
     mode: String,
     origin: String,
-    transition: String
-  }
+    transition: String,
+  },
 })

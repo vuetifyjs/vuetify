@@ -60,6 +60,14 @@ $material-dark: (
     'disabled': rgba(map-get($shades, 'white'), 0.2),
     'discrete': map-get($shades, 'white')
   ),
+  'states': (
+    'hover': 0.08,
+    'focus': 0.24,
+    'selected': 0.16,
+    'activated': 0.24,
+    'pressed': 0.32,
+    'dragged': 0.16
+  ),
   'tabs': rgba(map-get($shades, 'white'), 0.6),
   'toggle-buttons': (
     'color': map-get($shades, 'white')

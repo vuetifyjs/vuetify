@@ -1,9 +1,10 @@
 <template>
-  <figure class="mb-4">
-    <v-sheet>
+  <figure class="mb-4 text-xs-center">
+    <v-sheet color="transparent">
       <v-img
         :src="computedValue"
-        class="mb-2"
+        class="d-inline-block"
+        style="max-width: 100%;"
       />
     </v-sheet>
 
@@ -21,8 +22,8 @@
     props: {
       value: {
         type: String,
-        default: undefined
-      }
+        default: undefined,
+      },
     },
 
     computed: {
@@ -34,7 +35,7 @@
         }
 
         return `https://cdn.vuetifyjs.com/images/${this.value}`
-      }
-    }
+      },
+    },
   }
 </script>

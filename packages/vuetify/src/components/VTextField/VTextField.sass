@@ -147,6 +147,7 @@
     align-self: center
     cursor: default
     transition: color $primary-transition
+    white-space: nowrap
 
   &__prefix
     text-align: right
@@ -220,10 +221,6 @@
     border-top-left-radius: 4px
     border-top-right-radius: 4px
 
-    &:before
-      border-style: solid
-      border-width: thin 0 thin 0
-
   &.v-text-field--enclosed
     margin: 0
     padding: 0
@@ -263,7 +260,8 @@
 
   &--solo,
   &--outlined,
-  &--full-width
+  &--full-width,
+  &--rounded
     & > .v-input__control > .v-input__slot
       &:before,
       &:after
@@ -273,9 +271,6 @@
     margin-bottom: 16px
     transition: border $primary-transition
 
-    input
-      margin-top: 12px
-
     .v-label
       top: 18px
 
@@ -283,7 +278,6 @@
         transform: translateY(-24px) scale(.75)
 
     fieldset
-      border-radius: 4px
       border-style: solid
       border-width: 1px
       bottom: 0
@@ -334,10 +328,21 @@
         border-color: currentColor
         border-width: 2px
 
-  &--solo > .v-input__control > .v-input__slot
+  &--solo,
+  &--outlined
     border-radius: 4px
 
+    fieldset,
+    .v-input__control,
+    .v-input__slot
+      border-radius: inherit
+
+    .v-text-field__slot
+      align-items: center
+
   &--rounded
+    border-radius: 28px
+
     &.v-text-field--outlined
       fieldset
         border-radius: 28px
@@ -346,9 +351,14 @@
       border-radius: 28px
       padding: 0 24px !important
 
-  &--shaped > .v-input__control > .v-input__slot
-    border-top-left-radius: 16px
-    border-top-right-radius: 16px
+  &--shaped
+    &.v-text-field--outlined
+      fieldset
+        border-radius: 16px 16px 0 0
+
+    > .v-input__control > .v-input__slot
+      border-top-left-radius: 16px
+      border-top-right-radius: 16px
 
   &.v-text-field--solo
     .v-label
@@ -360,9 +370,6 @@
 
     &:not(.v-text-field--solo-flat) > .v-input__control > .v-input__slot
       +elevation(2)
-
-    .v-text-field__slot
-      align-items: center
 
     .v-input__append-inner,
     .v-input__prepend-inner

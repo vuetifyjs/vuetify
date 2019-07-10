@@ -152,6 +152,16 @@
         </v-tabs>
       </core-section>
 
+      <core-title>Centered active tab</core-title>
+      <core-section>
+        <v-tabs center-active>
+          <v-tab
+            v-for="i in 30"
+            :key="i"
+          >Item {{ i }}</v-tab>
+        </v-tabs>
+      </core-section>
+
       <core-title>Icons and text</core-title>
       <core-section>
         <v-tabs
@@ -303,14 +313,14 @@
       active3: null,
       active4: null,
       active5: null,
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     }),
 
     methods: {
       next () {
         const active = parseInt(this.active5)
         this.active5 = (active < 2 ? active + 1 : 0)
-      }
-    }
+      },
+    },
   }
 </script>

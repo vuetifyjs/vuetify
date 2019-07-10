@@ -4,7 +4,7 @@ import VDialog from '../VDialog'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 // eslint-disable-next-line max-statements
@@ -22,10 +22,10 @@ describe('VDialog.ts', () => {
         mocks: {
           $vuetify: {
             theme: {},
-            breakpoint: {}
-          }
+            breakpoint: {},
+          },
         },
-        ...options
+        ...options,
       })
     }
   })
@@ -43,8 +43,8 @@ describe('VDialog.ts', () => {
   it('should render a disabled component and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        disabled: true
-      }
+        disabled: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -53,8 +53,8 @@ describe('VDialog.ts', () => {
   it('should render a persistent component and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        persistent: true
-      }
+        persistent: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -63,8 +63,8 @@ describe('VDialog.ts', () => {
   it('should render a fullscreen component and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        fullscreen: true
-      }
+        fullscreen: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -73,8 +73,8 @@ describe('VDialog.ts', () => {
   it('should render a eager component and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        eager: true
-      }
+        eager: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -83,8 +83,8 @@ describe('VDialog.ts', () => {
   it('should render a scrollable component and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        scrollable: true
-      }
+        scrollable: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -93,8 +93,8 @@ describe('VDialog.ts', () => {
   it('should render component with custom origin and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        origin: 'top right'
-      }
+        origin: 'top right',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -103,8 +103,8 @@ describe('VDialog.ts', () => {
   it('should render component with custom width (max-width) and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        maxWidth: 100
-      }
+        maxWidth: 100,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -113,8 +113,8 @@ describe('VDialog.ts', () => {
   it('should render component with custom width and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        width: '50%'
-      }
+        width: '50%',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -123,8 +123,8 @@ describe('VDialog.ts', () => {
   it('should render component with custom transition and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        transition: 'fade-transition'
-      }
+        transition: 'fade-transition',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -137,10 +137,10 @@ describe('VDialog.ts', () => {
         activator ({ on }) {
           return this.$createElement('div', {
             staticClass: 'activator',
-            on
+            on,
           })
-        }
-      }
+        },
+      },
     })
 
     wrapper.vm.$on('input', input)
@@ -156,16 +156,16 @@ describe('VDialog.ts', () => {
     const input = jest.fn()
     const wrapper = mountFunction({
       propsData: {
-        disabled: true
+        disabled: true,
       },
       scopedSlots: {
         activator ({ on }) {
           return this.$createElement('div', {
             staticClass: 'activator',
-            on
+            on,
           })
-        }
-      }
+        },
+      },
     })
 
     wrapper.vm.$on('input', input)
@@ -180,23 +180,23 @@ describe('VDialog.ts', () => {
   it('not change state on v-model update', async () => {
     const wrapper = mountFunction({
       propsData: {
-        value: false
+        value: false,
       },
       scopedSlots: {
-        activator: '<span>activator</span>'
-      }
+        activator: '<span>activator</span>',
+      },
     })
 
     expect(wrapper.vm.isActive).toBe(false)
 
     wrapper.setProps({
-      value: true
+      value: true,
     })
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.isActive).toBe(true)
 
     wrapper.setProps({
-      value: false
+      value: false,
     })
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.isActive).toBe(false)
@@ -205,7 +205,7 @@ describe('VDialog.ts', () => {
   it('should emit keydown event', async () => {
     const keydown = jest.fn()
     const wrapper = mountFunction({
-      propsData: { value: true }
+      propsData: { value: true },
     })
     wrapper.vm.$on('keydown', keydown)
 
@@ -234,16 +234,16 @@ describe('VDialog.ts', () => {
   it('should not respond to events if disabled', async () => {
     const wrapper = mountFunction({
       propsData: {
-        disabled: true
+        disabled: true,
       },
       scopedSlots: {
         activator ({ on }) {
           return this.$createElement('div', {
             staticClass: 'activator',
-            on
+            on,
           })
-        }
-      }
+        },
+      },
     })
 
     const activator = wrapper.find('div.activator')
@@ -260,8 +260,8 @@ describe('VDialog.ts', () => {
 
     const wrapper2 = mountFunction({
       scopedSlots: {
-        activator: '<div></div>'
-      }
+        activator: '<div></div>',
+      },
     })
     expect(wrapper2.element.style.display).toBe('inline-block')
     expect(wrapper2.vm.hasActivator).toBe(true)
@@ -270,8 +270,8 @@ describe('VDialog.ts', () => {
       scopedSlots: {
         activator () {
           return this.$createElement('span')
-        }
-      }
+        },
+      },
     })
     const dialog = wrapper3.find(VDialog)
     expect(wrapper2.element.style.display).toBe('inline-block')
@@ -287,10 +287,10 @@ describe('VDialog.ts', () => {
         activator ({ on }) {
           return this.$createElement('div', {
             staticClass: 'activator',
-            on
+            on,
           })
-        }
-      }
+        },
+      },
     })
 
     wrapper.vm.$on('input', input)
@@ -308,7 +308,7 @@ describe('VDialog.ts', () => {
   // Ensure dialog opens up when provided a default value
   it('should set model active before mounted', () => {
     const wrapper = mountFunction({
-      propsData: { value: true }
+      propsData: { value: true },
     })
 
     expect(wrapper.vm.isActive).toBe(true)
@@ -316,7 +316,7 @@ describe('VDialog.ts', () => {
 
   it('should close dialog on escape keydown', () => {
     const wrapper = mountFunction({
-      propsData: { value: true }
+      propsData: { value: true },
     })
 
     expect(wrapper.vm.isActive).toBe(true)

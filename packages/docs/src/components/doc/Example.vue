@@ -22,6 +22,7 @@
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
           <v-btn
+            aria-label="Invert example colors"
             icon
             @click="dark = !dark"
             v-on="on"
@@ -29,11 +30,12 @@
             <v-icon>mdi-invert-colors</v-icon>
           </v-btn>
         </template>
-        Invert colors
+        Invert example colors
       </v-tooltip>
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
           <v-btn
+            aria-label="Edit in Codepen"
             icon
             @click="sendToCodepen"
             v-on="on"
@@ -46,6 +48,7 @@
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
           <v-btn
+            aria-label="View on Github"
             :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/docs/src/examples/${file}.vue`"
             icon
             target="_blank"
@@ -59,6 +62,7 @@
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
           <v-btn
+            aria-label="View source"
             icon
             @click="expand = !expand"
             v-on="on"
@@ -66,7 +70,7 @@
             <v-icon>mdi-code-tags</v-icon>
           </v-btn>
         </template>
-        View Source
+        View source
       </v-tooltip>
     </v-toolbar>
 
@@ -141,7 +145,7 @@
 <script>
   // Utilities
   import {
-    mapGetters
+    mapGetters,
   } from 'vuex'
 
   import kebabCase from 'lodash/kebabCase'
@@ -150,8 +154,8 @@
     props: {
       value: {
         type: [Object, String],
-        default: undefined
-      }
+        default: undefined,
+      },
     },
 
     data: () => ({
@@ -161,13 +165,13 @@
       loading: true,
       parsed: undefined,
       selected: 'template',
-      branch: process.env.NODE_ENV === 'production' ? 'master' : 'dev'
+      branch: undefined,
     }),
 
     computed: {
       ...mapGetters('documentation', [
         'namespace',
-        'page'
+        'page',
       ]),
       internalValue () {
         if (this.value === Object(this.value)) return this.value
@@ -182,7 +186,7 @@
       },
       sections () {
         return ['template', 'style', 'script'].filter(section => this.parsed[section])
-      }
+      },
     },
 
     created () {
@@ -205,6 +209,9 @@
         /* webpackMode: "lazy-once" */
         `!raw-loader!../../examples/${this.file}.vue`
       ).then(comp => this.boot(comp.default))
+
+      const branch = (window) ? window.location.hostname.split('.')[0] : 'master'
+      this.branch = ['master', 'dev', 'next'].includes(branch) ? branch : 'master'
     },
 
     methods: {
@@ -231,7 +238,7 @@
           style,
           script,
           codepenResources,
-          codepenAdditional
+          codepenAdditional,
         }
       },
       kebabCase,
@@ -242,8 +249,8 @@
         const panel = this.$refs.panel.items[0]._uid
 
         this.$refs.panel.panelClick(panel)
-      }
-    }
+      },
+    },
   }
 </script>
 

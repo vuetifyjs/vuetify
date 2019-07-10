@@ -41,11 +41,11 @@
           "type": "examples",
           "value": [
             "simple/md",
-            "simple/fontAwesome",
+            "simple/font-awesome",
             "simple/color",
             "intermediate/buttons",
             "intermediate/clickable",
-            "complex/mdiSvg"
+            "complex/mdi-svg"
           ]
         }
       ]
@@ -56,7 +56,7 @@
         {
           "type": "up-next",
           "value": [
-            "framework/icons",
+            "customization/icons",
             "components/buttons",
             "components/cards"
           ]

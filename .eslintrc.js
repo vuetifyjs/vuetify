@@ -28,11 +28,13 @@ module.exports = {
     }],
     'max-statements': ['error', 24],
     'no-console': 'off',
+    'comma-dangle': ['error', 'always-multiline'],
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-return-assign': 'off',
     'no-unused-vars': 'error',
     'no-empty': 'error',
+    'array-bracket-spacing': ['error', 'never'],
     'object-curly-spacing': ['error', 'always'],
     'space-before-function-paren': [
       'error',

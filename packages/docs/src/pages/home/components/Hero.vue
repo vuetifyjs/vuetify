@@ -3,7 +3,6 @@
     class="white--text py-5"
     style="background: linear-gradient(to bottom, #1867c0, #5CBBF6)"
   >
-    <tidelift />
     <v-container>
       <v-layout
         align-center
@@ -23,7 +22,7 @@
         />
         <div
           class="text-xs-center text-lg-left"
-          :style="`flex: 1 1 ${$vuetify.breakpoint.mdAndDown ? '100%' : 'auto'}`"
+          :style="`flex: 0 1 ${$vuetify.breakpoint.mdAndDown ? '100%' : 'auto'}`"
         >
           <h1
             :class="$vuetify.breakpoint.smAndDown && 'display-1' || 'display-3'"
@@ -81,6 +80,8 @@
     </v-container>
 
     <feature />
+
+    <tidelift />
   </v-responsive>
 </template>
 
@@ -88,7 +89,7 @@
   export default {
     components: {
       Feature: () => import('./Feature'),
-      Tidelift: () => import('./Tidelift')
-    }
+      Tidelift: () => import('./Tidelift'),
+    },
   }
 </script>

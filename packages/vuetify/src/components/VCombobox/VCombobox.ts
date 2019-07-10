@@ -18,16 +18,16 @@ export default VAutocomplete.extend({
   props: {
     delimiters: {
       type: Array,
-      default: () => ([])
+      default: () => ([]),
     } as PropValidator<any[]>,
     returnObject: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
 
   data: () => ({
-    editingIndex: -1
+    editingIndex: -1,
   }),
 
   computed: {
@@ -47,11 +47,10 @@ export default VAutocomplete.extend({
 
       return this.hasDisplayedItems ||
         (!!this.$slots['no-data'] && !this.hideNoData)
-    }
+    },
   },
 
   methods: {
-    onFilteredItemsChanged: () => {},
     onInternalSearchChanged (val: any) {
       if (
         val &&
@@ -78,7 +77,7 @@ export default VAutocomplete.extend({
             this.editingIndex = index
             this.internalSearch = this.getText(item)
             this.selectedIndex = -1
-          }
+          },
         }
       }
 
@@ -94,12 +93,16 @@ export default VAutocomplete.extend({
     onEnterDown (e: Event) {
       e.preventDefault()
 
-      VSelect.options.methods.onEnterDown.call(this, e)
+      this.$nextTick(() => {
+        // If has menu index, let v-select-list handle
+        if (this.getMenuIndex() > -1) return
+        this.updateSelf()
+      })
+    },
+    onFilteredItemsChanged (val: never[], oldVal: never[]) {
+      if (!this.autoSelectFirst) return
 
-      // If has menu index, let v-select-list handle
-      if (this.getMenuIndex() > -1) return
-
-      this.updateSelf()
+      VAutocomplete.options.methods.onFilteredItemsChanged.call(this, val, oldVal)
     },
     onKeyDown (e: KeyboardEvent) {
       const keyCode = e.keyCode
@@ -113,6 +116,8 @@ export default VAutocomplete.extend({
         this.$refs.input.selectionStart === 0
       ) {
         this.updateSelf()
+      } else if (keyCode === keyCodes.enter) {
+        this.onEnterDown(e)
       }
 
       // The ordering is important here
@@ -215,6 +220,6 @@ export default VAutocomplete.extend({
 
       this.selectItem(this.internalSearch)
       this.internalSearch = null
-    }
-  }
+    },
+  },
 })

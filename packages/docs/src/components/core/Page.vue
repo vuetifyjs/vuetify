@@ -16,7 +16,7 @@
           v-if="structure.file"
           shrink
         >
-          <core-file-btn :link="structure.file" />
+          <core-file-btn :link="structure.file" :branch="branch" />
         </v-flex>
         <v-flex
           v-if="structure.mdSpec"
@@ -45,7 +45,7 @@
         :value="child"
       />
 
-      <doc-contribution />
+      <doc-contribution :branch="branch" />
     </template>
   </v-container>
   <not-found v-else />
@@ -54,17 +54,18 @@
 <script>
   // Utilities
   import {
-    mapState
+    mapState,
   } from 'vuex'
   import { getComponent } from '@/util/helpers'
 
   export default {
     components: {
-      NotFound: () => import('@/pages/general/404')
+      NotFound: () => import('@/pages/general/404'),
     },
 
     data: () => ({
-      timeout: null
+      timeout: null,
+      branch: null,
     }),
 
     computed: {
@@ -72,15 +73,18 @@
       ...mapState('route', ['params']),
       composite () {
         return `${this.params.namespace}-${this.params.page}`
-      }
+      },
     },
 
     watch: {
-      '$route.path': 'init'
+      '$route.path': 'init',
     },
 
     mounted () {
       this.init()
+
+      const branch = (window) ? window.location.hostname.split('.')[0] : 'master'
+      this.branch = ['master', 'dev', 'next'].includes(branch) ? branch : 'master'
     },
 
     methods: {
@@ -129,8 +133,8 @@
         }
 
         this.$router.push(href)
-      }
-    }
+      },
+    },
   }
 </script>
 

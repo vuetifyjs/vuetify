@@ -1,15 +1,17 @@
+const { DataOptions } = require('./v-data')
+
 const DataFooterSlots = [
-  { name: 'pageText' }
+  { name: 'pageText' },
 ]
 
 const DataFooterEvents = [
-  { name: 'update:options' }
+  { name: 'update:options', value: DataOptions },
 ]
 
 const DataFooterPageTextScopedProps = {
   pageStart: 'number',
   pageStop: 'number',
-  itemsLength: 'number'
+  itemsLength: 'number',
 }
 
 module.exports = {
@@ -17,11 +19,11 @@ module.exports = {
     slots: DataFooterSlots,
     scopedSlots: {
       name: 'page-text',
-      props: DataFooterPageTextScopedProps
+      props: DataFooterPageTextScopedProps,
     },
-    events: DataFooterEvents
+    events: DataFooterEvents,
   },
   DataFooterSlots,
   DataFooterEvents,
-  DataFooterPageTextScopedProps
+  DataFooterPageTextScopedProps,
 }

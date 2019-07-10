@@ -25,9 +25,9 @@ export default mixins(
   props: {
     tag: {
       type: String,
-      default: 'div'
+      default: 'div',
     },
-    tile: Boolean
+    tile: Boolean,
   },
 
   computed: {
@@ -36,19 +36,19 @@ export default mixins(
         'v-sheet': true,
         'v-sheet--tile': this.tile,
         ...this.themeClasses,
-        ...this.elevationClasses
+        ...this.elevationClasses,
       }
     },
     styles (): object {
       return this.measurableStyles
-    }
+    },
   },
 
   render (h): VNode {
     const data = {
       class: this.classes,
       style: this.styles,
-      on: this.$listeners
+      on: this.$listeners,
     }
 
     return h(
@@ -56,5 +56,5 @@ export default mixins(
       this.setBackgroundColor(this.color, data),
       this.$slots.default
     )
-  }
+  },
 })

@@ -9,7 +9,7 @@ const breakpointProps = (() => {
   return breakpoints.reduce((props, val) => {
     props[val] = {
       type: [Boolean, String, Number],
-      default: false
+      default: false,
     }
     return props
   }, {} as Dictionary<PropOptions>)
@@ -19,7 +19,7 @@ const offsetProps = (() => {
   return breakpoints.reduce((props, val) => {
     props['offset' + upperFirst(val)] = {
       type: [String, Number],
-      default: null
+      default: null,
     }
     return props
   }, {} as Dictionary<PropOptions>)
@@ -29,7 +29,7 @@ const orderProps = (() => {
   return breakpoints.reduce((props, val) => {
     props['order' + upperFirst(val)] = {
       type: [String, Number],
-      default: null
+      default: null,
     }
     return props
   }, {} as Dictionary<PropOptions>)
@@ -38,7 +38,7 @@ const orderProps = (() => {
 const propMap = {
   col: Object.keys(breakpointProps),
   offset: Object.keys(offsetProps),
-  order: Object.keys(orderProps)
+  order: Object.keys(orderProps),
 }
 
 function breakpointClass (type: keyof typeof propMap, prop: string, val: boolean | string | number) {
@@ -70,28 +70,28 @@ export default Vue.extend({
   props: {
     cols: {
       type: [Boolean, String, Number],
-      default: false
+      default: false,
     },
     ...breakpointProps,
     offset: {
       type: [String, Number],
-      default: null
+      default: null,
     },
     ...offsetProps,
     order: {
       type: [String, Number],
-      default: null
+      default: null,
     },
     ...orderProps,
     alignSelf: {
       type: String,
       default: null,
-      validator: (str: any) => ['auto', 'start', 'end', 'center', 'baseline', 'stretch'].includes(str)
+      validator: (str: any) => ['auto', 'start', 'end', 'center', 'baseline', 'stretch'].includes(str),
     },
     tag: {
       type: String,
-      default: 'div'
-    }
+      default: 'div',
+    },
   },
   render (h, { props, data, children, parent }): VNode {
     // Super-fast memoization based on props, 5x faster than JSON.stringify
@@ -121,12 +121,12 @@ export default Vue.extend({
         [`col-${props.cols}`]: props.cols,
         [`offset-${props.offset}`]: props.offset,
         [`order-${props.order}`]: props.order,
-        [`align-self-${props.alignSelf}`]: props.alignSelf
+        [`align-self-${props.alignSelf}`]: props.alignSelf,
       })
 
       cache.set(cacheKey, classList)
     }
 
     return h(props.tag, mergeData(data, { class: classList }), children)
-  }
+  },
 })

@@ -27,9 +27,9 @@
         {
           "type": "examples",
           "value": [
-            "customColor",
+            "custom-color",
             "center",
-            "rippleInComponents"
+            "ripple-in-components"
           ]
         }
       ]
@@ -41,8 +41,8 @@
           "type": "up-next",
           "value": [
             "components/buttons",
-            "framework/colors",
-            "components/lists"
+            "components/expansion-panels",
+            "styles/transitions"
           ]
         }
       ]

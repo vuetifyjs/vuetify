@@ -5,22 +5,36 @@ module.exports = {
     scopedSlots: [
       {
         name: 'prepend',
-        props: VTreeviewScopedProps
+        props: VTreeviewScopedProps,
       },
       {
         name: 'label',
-        props: VTreeviewScopedProps
+        props: VTreeviewScopedProps,
       },
       {
         name: 'append',
-        props: VTreeviewScopedProps
-      }
+        props: VTreeviewScopedProps,
+      },
     ],
     functions: [
       {
         name: 'updateAll',
-        signature: '(val: boolean): void'
-      }
-    ]
-  }
+        signature: '(val: boolean): void',
+      },
+    ],
+    events: [
+      {
+        name: 'input',
+        value: 'array',
+      },
+      {
+        name: 'update:active',
+        value: 'array',
+      },
+      {
+        name: 'update:open',
+        value: 'array',
+      },
+    ],
+  },
 }

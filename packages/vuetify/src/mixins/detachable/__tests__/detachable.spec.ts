@@ -8,13 +8,13 @@ const Mock = Detachable.extend({
   render (h) {
     const content = h('div', {
       staticClass: 'content',
-      ref: 'content'
+      ref: 'content',
     })
 
     return h('div', {
-      staticClass: 'mock'
+      staticClass: 'mock',
     }, [this.$slots.default, content])
-  }
+  },
 })
 
 describe('detachable.ts', () => {
@@ -24,17 +24,17 @@ describe('detachable.ts', () => {
       attachToDocument: true,
       slots: {
         default: [{
-          render: h => h(localMock)
-        }]
+          render: h => h(localMock),
+        }],
       },
       mocks: {
         $vuetify: {
           rtl: false,
           theme: {
-            dark: false
-          }
-        }
-      }
+            dark: false,
+          },
+        },
+      },
     })
 
     const detach = wrapper.find(localMock)
@@ -50,17 +50,17 @@ describe('detachable.ts', () => {
       attachToDocument: true,
       slots: {
         default: [{
-          render: h => h(localMock)
-        }]
+          render: h => h(localMock),
+        }],
       },
       mocks: {
         $vuetify: {
           rtl: false,
           theme: {
-            dark: false
-          }
-        }
-      }
+            dark: false,
+          },
+        },
+      },
     })
 
     const detach = wrapper.find(localMock)
@@ -76,13 +76,13 @@ describe('detachable.ts', () => {
     const wrapper = mount(localMock, {
       attachToDocument: true,
       propsData: {
-        attach: ''
+        attach: '',
       },
       slots: {
         default: [{
-          render: h => h('div', { staticClass: 'foo' })
-        }]
-      }
+          render: h => h('div', { staticClass: 'foo' }),
+        }],
+      },
     })
 
     expect(wrapper.vm.initDetach()).toBeUndefined()

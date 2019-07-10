@@ -35,34 +35,34 @@ export default baseMixins.extend({
   name: 'v-dialog',
 
   directives: {
-    ClickOutside
+    ClickOutside,
   },
 
   props: {
+    dark: Boolean,
     disabled: Boolean,
-    persistent: Boolean,
     fullscreen: Boolean,
     fullWidth: Boolean,
-    noClickAnimation: Boolean,
     light: Boolean,
-    dark: Boolean,
     maxWidth: {
       type: [String, Number],
-      default: 'none'
+      default: 'none',
     },
+    noClickAnimation: Boolean,
     origin: {
       type: String,
-      default: 'center center'
+      default: 'center center',
     },
-    width: {
-      type: [String, Number],
-      default: 'auto'
-    },
+    persistent: Boolean,
     scrollable: Boolean,
     transition: {
       type: [String, Boolean],
-      default: 'dialog-transition'
-    }
+      default: 'dialog-transition',
+    },
+    width: {
+      type: [String, Number],
+      default: 'auto',
+    },
   },
 
   data () {
@@ -71,7 +71,7 @@ export default baseMixins.extend({
       animate: false,
       animateTimeout: -1,
       isActive: !!this.value,
-      stackMinZIndex: 200
+      stackMinZIndex: 200,
     }
   },
 
@@ -83,13 +83,13 @@ export default baseMixins.extend({
         'v-dialog--persistent': this.persistent,
         'v-dialog--fullscreen': this.fullscreen,
         'v-dialog--scrollable': this.scrollable,
-        'v-dialog--animated': this.animate
+        'v-dialog--animated': this.animate,
       }
     },
     contentClasses (): object {
       return {
         'v-dialog__content': true,
-        'v-dialog__content--active': this.isActive
+        'v-dialog__content--active': this.isActive,
       }
     },
     hasActivator (): boolean {
@@ -97,7 +97,7 @@ export default baseMixins.extend({
         !!this.$slots.activator ||
         !!this.$scopedSlots.activator
       )
-    }
+    },
   },
 
   watch: {
@@ -120,7 +120,7 @@ export default baseMixins.extend({
         this.showScroll()
         this.genOverlay()
       }
-    }
+    },
   },
 
   beforeMount () {
@@ -220,7 +220,7 @@ export default baseMixins.extend({
         const focusable = this.$refs.content.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
         focusable.length && (focusable[0] as HTMLElement).focus()
       }
-    }
+    },
   },
 
   render (h): VNode {
@@ -234,62 +234,64 @@ export default baseMixins.extend({
           value: () => { this.isActive = false },
           args: {
             closeConditional: this.closeConditional,
-            include: this.getOpenDependentElements
-          }
+            include: this.getOpenDependentElements,
+          },
         },
-        { name: 'show', value: this.isActive }
+        { name: 'show', value: this.isActive },
       ],
       on: {
-        click: (e: Event) => { e.stopPropagation() }
+        click: (e: Event) => { e.stopPropagation() },
       },
-      style: {}
+      style: {},
     }
 
     if (!this.fullscreen) {
       data.style = {
         maxWidth: this.maxWidth === 'none' ? undefined : convertToUnit(this.maxWidth),
-        width: this.width === 'auto' ? undefined : convertToUnit(this.width)
+        width: this.width === 'auto' ? undefined : convertToUnit(this.width),
       }
     }
 
     children.push(this.genActivator())
 
-    let dialog = h('div', data, this.showLazyContent(this.$slots.default))
+    let dialog = h('div', data, this.showLazyContent(this.getContentSlot()))
     if (this.transition) {
       dialog = h('transition', {
         props: {
           name: this.transition,
-          origin: this.origin
-        }
+          origin: this.origin,
+        },
       }, [dialog])
     }
 
     children.push(h('div', {
       'class': this.contentClasses,
       attrs: {
-        tabIndex: '-1',
-        ...this.getScopeIdAttrs()
+        role: 'document',
+        tabindex: 0,
+        ...this.getScopeIdAttrs(),
       },
       on: {
-        keydown: this.onKeydown
+        keydown: this.onKeydown,
       },
       style: { zIndex: this.activeZIndex },
-      ref: 'content'
+      ref: 'content',
     }, [
       this.$createElement(ThemeProvider, {
         props: {
           root: true,
           light: this.light,
-          dark: this.dark
-        }
-      }, [dialog])
+          dark: this.dark,
+        },
+      }, [dialog]),
     ]))
 
     return h('div', {
       staticClass: 'v-dialog__container',
+      attrs: { role: 'dialog' },
       style: {
-        display: (!this.hasActivator || this.fullWidth) ? 'block' : 'inline-block'
-      }
+        display: (!this.hasActivator || this.fullWidth) ? 'block' : 'inline-block',
+      },
     }, children)
-  }
+  },
 })

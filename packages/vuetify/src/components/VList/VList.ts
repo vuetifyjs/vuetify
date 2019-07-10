@@ -10,14 +10,29 @@ import { VNode } from 'vue'
 
 type VListGroupInstance = InstanceType<typeof VListGroup>
 
+interface options extends InstanceType<typeof VSheet> {
+  isInMenu: boolean
+  isInNav: boolean
+}
+
 /* @vue/component */
-export default VSheet.extend({
+export default VSheet.extend<options>().extend({
   name: 'v-list',
 
   provide (): object {
     return {
-      list: this
+      isInList: true,
+      list: this,
     }
+  },
+
+  inject: {
+    isInMenu: {
+      default: false,
+    },
+    isInNav: {
+      default: false,
+    },
   },
 
   props: {
@@ -32,13 +47,13 @@ export default VSheet.extend({
     threeLine: Boolean,
     tile: {
       type: Boolean,
-      default: true
+      default: true,
     },
-    twoLine: Boolean
+    twoLine: Boolean,
   },
 
   data: () => ({
-    groups: [] as VListGroupInstance[]
+    groups: [] as VListGroupInstance[],
   }),
 
   computed: {
@@ -53,9 +68,9 @@ export default VSheet.extend({
         'v-list--shaped': this.shaped,
         'v-list--subheader': this.subheader,
         'v-list--two-line': this.twoLine,
-        'v-list--three-line': this.threeLine
+        'v-list--three-line': this.threeLine,
       }
-    }
+    },
   },
 
   methods: {
@@ -73,18 +88,20 @@ export default VSheet.extend({
       for (const group of this.groups) {
         group.toggle(uid)
       }
-    }
+    },
   },
 
   render (h): VNode {
     const data = {
       staticClass: 'v-list',
       class: this.classes,
+      style: this.styles,
       attrs: {
-        role: 'list'
-      }
+        role: this.isInNav || this.isInMenu ? undefined : 'list',
+        ...this.$attrs,
+      },
     }
 
     return h('div', this.setBackgroundColor(this.color, data), [this.$slots.default])
-  }
+  },
 })

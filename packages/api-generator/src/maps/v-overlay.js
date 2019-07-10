@@ -1,5 +1,5 @@
 module.exports = {
   'v-overlay': {
-    slots: ['default']
-  }
+    slots: ['default'],
+  },
 }

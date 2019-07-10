@@ -218,7 +218,7 @@
     name: 'Cards',
 
     data: () => ({
-      show: false
-    })
+      show: false,
+    }),
   }
 </script>

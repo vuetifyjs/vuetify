@@ -6,7 +6,7 @@
           color="primary"
           type="day"
         >
-          <template v-slot:dayHeader="{ present }">
+          <template v-slot:day-header="{ present }">
             <template
               v-if="present"
               class="text-xs-center"
@@ -30,6 +30,6 @@
 
 <script>
   export default {
-    data: () => ({})
+    data: () => ({}),
   }
 </script>

@@ -4,20 +4,17 @@ import VList from '../VList'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
-// Types
-import { ExtractVue } from '../../../util/mixins'
-
 describe('VList.ts', () => {
-  type Instance = ExtractVue<typeof VList>
+  type Instance = InstanceType<typeof VList>
   let mountFunction: (options?: object) => Wrapper<Instance>
 
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VList, {
-        ...options
+        ...options,
       })
     }
   })
@@ -31,8 +28,8 @@ describe('VList.ts', () => {
   it('should render a dense component and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        dense: true
-      }
+        dense: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -41,8 +38,8 @@ describe('VList.ts', () => {
   it('should render a subheader component and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        subheader: true
-      }
+        subheader: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -51,8 +48,8 @@ describe('VList.ts', () => {
   it('should render a threeLine component and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        threeLine: true
-      }
+        threeLine: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -61,10 +58,28 @@ describe('VList.ts', () => {
   it('should render a twoLine component and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {
-        twoLine: true
-      }
+        twoLine: true,
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should have an inferred role from injections', () => {
+    const wrapper = mountFunction({
+      provide: { isInMenu: true },
+    })
+
+    expect(wrapper.element.getAttribute('role')).toBeNull()
+
+    const wrapper2 = mountFunction({
+      provide: { isInNav: true },
+    })
+
+    expect(wrapper2.element.getAttribute('role')).toBeNull()
+
+    const wrapper3 = mountFunction()
+
+    expect(wrapper3.element.getAttribute('role')).toBe('list')
   })
 })

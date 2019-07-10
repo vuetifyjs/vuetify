@@ -28,9 +28,23 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "carousel"
+            "simple/custom-icons",
+            "simple/active-class",
+            "simple/multiple",
+            "simple/mandatory",
+            "simple/carousel",
+            "simple/center-active"
           ]
         }
       ]

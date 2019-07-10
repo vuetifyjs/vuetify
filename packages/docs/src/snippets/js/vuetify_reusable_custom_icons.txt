@@ -1,9 +1,13 @@
-import Vue from 'vue'
-import Vuetify from 'vuetify'
+// src/plugins/vuetify.js
 
-Vue.use(Vuetify, {
+import Vue from 'vue'
+import Vuetify from 'vuetify/lib'
+
+Vue.use(Vuetify)
+
+export default new Vuetify({
   icons: {
-    iconfont: 'mdi',
+    iconfont: 'mdi', // default
     values: {
       product: 'mdi-dropbox',
       support: 'mdi-lifebuoy',
@@ -11,7 +15,7 @@ Vue.use(Vuetify, {
       pc: 'mdi-desktop-classic',
       xbox: 'mdi-xbox',
       playstation: 'mdi-playstation',
-      switch: 'mdi-nintendo-switch'
-    }
-  }
+      switch: 'mdi-nintendo-switch',
+    },
+  },
 })

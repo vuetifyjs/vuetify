@@ -1115,27 +1115,6 @@
       </core-section>
 
       <core-title>
-        Mask
-      </core-title>
-      <core-section>
-        <v-card>
-          <v-card-text>
-            <v-text-field
-              v-model="mask"
-              label="Mask"
-            />
-          </v-card-text>
-          <v-card-text>
-            <v-text-field
-              v-model="value"
-              :mask="mask"
-              label="Value"
-            />
-          </v-card-text>
-        </v-card>
-      </core-section>
-
-      <core-title>
         Loading
       </core-title>
       <core-section>
@@ -1195,7 +1174,7 @@
       rules1: {
         required: value => !!value || 'Required.',
         min: v => v.length >= 8 || 'Min 8 characters',
-        emailMatch: () => ('The email and password you entered don\'t match')
+        emailMatch: () => ('The email and password you entered don\'t match'),
       },
       title1: 'Preliminary report',
       email: '',
@@ -1206,17 +1185,15 @@
           // eslint-disable-next-line max-len
           const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
           return pattern.test(value) || 'Invalid e-mail.'
-        }
+        },
       },
       selected: ['Trevor Handsen'],
       items: ['Trevor Handsen', 'Alex Nelson'],
       title2: 'Hi,\nI just wanted to check in and see if you had any plans the upcoming weekend. We are thinking of heading up to Napa',
       first: 'John',
       last: 'Doe',
-      mask: 'credit-card',
-      value: '4444444444444444',
       value1: '',
-      value2: ''
+      value2: '',
     }),
     computed: {
       progress () {
@@ -1227,7 +1204,7 @@
       },
       message () {
         return ['Too short', 'Weak', 'Strong'][Math.floor(this.progress / 40)]
-      }
+      },
     },
 
     methods: {
@@ -1238,7 +1215,7 @@
           this.loading = false
           this.message5 = 'You\'ve clicked me!'
         }, 2000)
-      }
-    }
+      },
+    },
   }
 </script>

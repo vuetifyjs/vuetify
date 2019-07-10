@@ -48,5 +48,9 @@ export interface VuetifyIcons {
   ratingEmpty: VuetifyIcon
   ratingFull: VuetifyIcon
   ratingHalf: VuetifyIcon
+  loading: VuetifyIcon
+  first: VuetifyIcon
+  last: VuetifyIcon
+  unfold: VuetifyIcon
   [name: string]: VuetifyIcon
 }

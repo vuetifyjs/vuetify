@@ -3,15 +3,16 @@
   "description": "A Vue.js project",
   "private": true,
   "author": "John Leider <john.j.leider@gmail.com>",
-  "version": "2.0.0-alpha.20",
+  "version": "2.0.0-beta.7",
   "scripts": {
     "dev": "cross-env NODE_OPTIONS=--max_old_space_size=8192 node server",
     "start": "cross-env NODE_ENV=production node server",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --config build/webpack.prod.config.js --progress --hide-modules",
-    "lint": "eslint --ext .js,.vue,.json src"
+    "lint": "eslint --ext .js,.vue,.json src",
+    "lint:fix": "yarn lint --fix"
   },
   "dependencies": {
-    "@vuetify/api-generator": "^2.0.0-alpha.20",
+    "@vuetify/api-generator": "^2.0.0-beta.7",
     "babel-polyfill": "^6.26.0",
     "chokidar": "^2.1.2",
     "compression": "^1.7.4",
@@ -37,7 +38,7 @@
     "vue-router": "^3.0.2",
     "vue-server-renderer": "^2.6.10",
     "vuelidate": "^0.6.2",
-    "vuetify": "^2.0.0-alpha.20",
+    "vuetify": "^2.0.0-beta.7",
     "vuex": "^3.1.0",
     "vuex-router-sync": "^5.0.0",
     "webfontloader": "^1.6.28"
@@ -60,6 +61,7 @@
     "css-loader": "^2.1.1",
     "deepmerge": "^2.2.1",
     "docsearch.js": "^2.6.2",
+    "eslint": "^5.16.0",
     "eslint-plugin-json": "^1.4.0",
     "event-source-polyfill": "^0.0.12",
     "fibers": "^4.0.1",
@@ -86,6 +88,7 @@
     "vue-color": "^2.7.0",
     "vue-prism-component": "^1.1.1",
     "vue-style-loader": "^4.1.2",
+    "vue-the-mask": "^0.11.1",
     "webpack-dev-middleware": "^3.6.1",
     "webpack-hot-middleware": "^2.24.3",
     "webpack-node-externals": "^1.7.2"

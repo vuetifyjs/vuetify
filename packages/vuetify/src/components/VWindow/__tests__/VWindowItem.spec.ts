@@ -12,13 +12,13 @@ import VWindowItem from '../VWindowItem'
 import {
   createLocalVue,
   mount,
-  Wrapper
+  Wrapper,
+  MountOptions,
 } from '@vue/test-utils'
-import { ExtractVue } from '../../../util/mixins'
 
 describe('VWindowItem.ts', () => {
-  type Instance = ExtractVue<typeof VWindowItem>
-  let mountFunction: (options?: object) => Wrapper<Instance>
+  type Instance = InstanceType<typeof VWindowItem>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   let router: Router
   let localVue: typeof Vue
 
@@ -31,22 +31,25 @@ describe('VWindowItem.ts', () => {
       return mount(VWindowItem, {
         localVue,
         router,
-        ...options
+        ...options,
       })
     }
   })
 
+  // eslint-disable-next-line max-statements
   it('should transition content', async () => {
     const wrapper = mount(VWindow, {
       slots: {
-        default: [VWindowItem]
+        default: [VWindowItem],
       },
       mocks: {
         $vuetify: {
-          rtl: false
-        }
-      }
+          rtl: false,
+        },
+      },
     })
+
+    await new Promise(resolve => window.requestAnimationFrame(resolve))
 
     const item = wrapper.find(VWindowItem.options)
     // Before enter
@@ -58,7 +61,7 @@ describe('VWindowItem.ts', () => {
     const el = document.createElement('div')
     expect(wrapper.vm.internalHeight).toBeUndefined()
     item.vm.onEnter(el)
-    await new Promise(resolve => window.requestAnimationFrame(resolve))
+    await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalHeight).toBe('0px')
 
     // After enter
@@ -68,12 +71,12 @@ describe('VWindowItem.ts', () => {
     expect(wrapper.vm.isActive).toBeFalsy()
 
     // Leave
-    item.vm.onLeave(el)
+    item.vm.onBeforeLeave(el)
     expect(wrapper.vm.internalHeight).toBe('0px')
 
     // Canceling
     item.vm.onBeforeEnter()
-    item.vm.onEnter(el)
+    item.vm.onEnter(el, () => {})
     item.vm.onEnterCancelled()
 
     expect(item.vm.wasCancelled).toBeTruthy()
@@ -81,7 +84,7 @@ describe('VWindowItem.ts', () => {
 
     item.vm.onAfterEnter()
 
-    await new Promise(resolve => requestAnimationFrame(resolve))
+    await new Promise(resolve => window.requestAnimationFrame(resolve))
 
     expect(wrapper.vm.isActive).toBeTruthy()
   })
@@ -90,15 +93,15 @@ describe('VWindowItem.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         transition: 'foo',
-        reverseTransition: 'bar'
+        reverseTransition: 'bar',
       },
       data: () => ({
         windowGroup: {
           internalReverse: false,
           register: () => {},
-          unregister: () => {}
-        }
-      })
+          unregister: () => {},
+        },
+      }),
     })
 
     expect(wrapper.vm.computedTransition).toBe('foo')
@@ -122,14 +125,14 @@ describe('VWindowItem.ts', () => {
         windowGroup: {
           internalReverse: false,
           register: () => {},
-          unregister: () => {}
-        }
-      })
+          unregister: () => {},
+        },
+      }),
     })
 
     // Incorrect property
     wrapper.vm.onTransitionEnd({
-      propertyName: 'border-color'
+      propertyName: 'border-color',
     })
 
     expect(done).not.toHaveBeenCalled()
@@ -137,7 +140,7 @@ describe('VWindowItem.ts', () => {
     // Incorrect target
     wrapper.vm.onTransitionEnd({
       propertyName: 'transform',
-      target: document.createElement('div')
+      target: document.createElement('div'),
     })
 
     expect(done).not.toHaveBeenCalled()
@@ -145,7 +148,7 @@ describe('VWindowItem.ts', () => {
     // Should work
     wrapper.vm.onTransitionEnd({
       propertyName: 'transform',
-      target: wrapper.vm.$el
+      target: wrapper.vm.$el,
     })
 
     expect(done).toHaveBeenCalledTimes(1)
@@ -157,15 +160,15 @@ describe('VWindowItem.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         transition: false,
-        reverseTransition: false
+        reverseTransition: false,
       },
       data: () => ({
         windowGroup: {
           internalHeight: 0,
           register: () => {},
-          unregister: () => {}
-        }
-      })
+          unregister: () => {},
+        },
+      }),
     })
 
     expect(wrapper.vm.computedTransition).toBeFalsy()

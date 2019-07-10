@@ -4,7 +4,7 @@ import VListItem from '../VListItem'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VListItem.ts', () => {
@@ -14,7 +14,7 @@ describe('VListItem.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VListItem, {
-        ...options
+        ...options,
       })
     }
   })
@@ -23,8 +23,8 @@ describe('VListItem.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         href: 'http://www.google.com',
-        inactive: true
-      }
+        inactive: true,
+      },
     })
 
     expect(wrapper.is('div')).toBe(true)
@@ -34,8 +34,8 @@ describe('VListItem.ts', () => {
   it('should render with a tag when tag is specified', () => {
     const wrapper = mountFunction({
       propsData: {
-        tag: 'code'
-      }
+        tag: 'code',
+      },
     })
 
     expect(wrapper.is('code')).toBe(true)
@@ -51,8 +51,8 @@ describe('VListItem.ts', () => {
   it('should render with <a> when using href prop', () => {
     const wrapper = mountFunction({
       propsData: {
-        href: 'http://www.google.com'
-      }
+        href: 'http://www.google.com',
+      },
     })
 
     const a = wrapper.find('a')
@@ -65,8 +65,8 @@ describe('VListItem.ts', () => {
   it('should have --link class when href/to prop present or link prop is used', () => {
     const wrapper = mountFunction({
       propsData: {
-        href: '/home'
-      }
+        href: '/home',
+      },
     })
 
     expect(wrapper.classes('v-list-item--link')).toBe(true)
@@ -84,8 +84,8 @@ describe('VListItem.ts', () => {
   it('should have --link class when click handler present', () => {
     const wrapper = mountFunction({
       listeners: {
-        click: () => {}
-      }
+        click: () => {},
+      },
     })
 
     expect(wrapper.classes('v-list-item--link')).toBe(true)
@@ -94,8 +94,8 @@ describe('VListItem.ts', () => {
   it('should have --link class when click.prevent.stop handler present', () => {
     const wrapper = mountFunction({
       listeners: {
-        '!click': () => {}
-      }
+        '!click': () => {},
+      },
     })
 
     expect(wrapper.classes('v-list-item--link')).toBe(true)
@@ -104,7 +104,7 @@ describe('VListItem.ts', () => {
   it('should react to keydown.enter', () => {
     const click = jest.fn()
     const wrapper = mountFunction({
-      methods: { click }
+      methods: { click },
     })
 
     wrapper.trigger('keydown.enter')
@@ -117,7 +117,7 @@ describe('VListItem.ts', () => {
     const click = jest.fn()
     const toggle = jest.fn()
     const wrapper = mountFunction({
-      methods: { toggle }
+      methods: { toggle },
     })
 
     wrapper.vm.$el.blur = blur
@@ -146,11 +146,70 @@ describe('VListItem.ts', () => {
         listItemGroup: {
           activeClass: 'foobar',
           register: () => {},
-          unregister: () => {}
-        }
-      }
+          unregister: () => {},
+        },
+      },
     })
 
     expect(wrapper.vm.activeClass).toBe('foobar')
+  })
+
+  it('should have the correct aria attributes and tabindex', () => {
+    const wrapper = mountFunction({
+      propsData: { disabled: true },
+    })
+
+    expect(wrapper.element.getAttribute('aria-disabled')).toBe('true')
+    expect(wrapper.element.tabIndex).toBe(-1)
+
+    wrapper.setProps({
+      disabled: false,
+      inputValue: true,
+    })
+
+    expect(wrapper.element.getAttribute('aria-disabled')).toBeNull()
+    expect(wrapper.element.tabIndex).toBe(-1)
+
+    wrapper.setProps({ link: true })
+
+    expect(wrapper.element.tabIndex).toBe(0)
+  })
+
+  it('should have the correct role', () => {
+    // Custom provided
+    const wrapper = mountFunction({
+      attrs: { role: 'item' },
+    })
+    expect(wrapper.element.getAttribute('role')).toBe('item')
+
+    // In nav
+    const wrapper2 = mountFunction({
+      provide: { isInNav: true },
+    })
+    expect(wrapper2.element.getAttribute('role')).toBeNull()
+
+    // In list-item-group
+    const wrapper3 = mountFunction({
+      provide: { isInGroup: true },
+    })
+    expect(wrapper3.element.getAttribute('role')).toBe('listitem')
+
+    // In menu
+    const wrapper4 = mountFunction({
+      provide: { isInMenu: true },
+    })
+    expect(wrapper4.element.getAttribute('role')).toBeNull()
+    wrapper4.setProps({ href: '#' }) // could be `to` or `link` as well
+    expect(wrapper4.element.getAttribute('role')).toBe('menuitem')
+
+    // In list not a link
+    const wrapper5 = mountFunction({
+      provide: { isInList: true },
+    })
+    expect(wrapper5.element.getAttribute('role')).toBe('listitem')
+
+    // In list link
+    wrapper5.setProps({ link: true })
+    expect(wrapper5.element.getAttribute('role')).toBeNull()
   })
 })

@@ -11,7 +11,7 @@ export default Vue.extend({
   props: {
     headers: Array as PropValidator<TableHeader[]>,
     item: Object,
-    rtl: Boolean
+    rtl: Boolean,
   },
 
   render (h, { props, slots, data }): VNode {
@@ -19,15 +19,15 @@ export default Vue.extend({
 
     const columns: VNode[] = props.headers.map((header: TableHeader) => {
       const classes = {
-        'v-data-table__mobile-row': true
+        'v-data-table__mobile-row': true,
       }
 
       const children = []
       const value = getObjectValueByPath(props.item, header.value)
 
-      const scopeName = `column.${header.value}`
-      const scopedSlot = data.scopedSlots && data.scopedSlots[scopeName]
-      const regularSlot = computedSlots[scopeName]
+      const slotName = header.value
+      const scopedSlot = data.scopedSlots && data.scopedSlots[slotName]
+      const regularSlot = computedSlots[slotName]
 
       if (scopedSlot) {
         children.push(scopedSlot({ item: props.item, header, value }))
@@ -38,15 +38,15 @@ export default Vue.extend({
       }
 
       return h('td', {
-        class: classes
+        class: classes,
       }, [
         h('div', { staticClass: 'v-data-table__mobile-row__wrapper' }, [
           header.value !== 'dataTableSelect' && h('div', { staticClass: 'v-data-table__mobile-row__header' }, [header.text]),
-          h('div', { staticClass: 'v-data-table__mobile-row__cell' }, children)
-        ])
+          h('div', { staticClass: 'v-data-table__mobile-row__cell' }, children),
+        ]),
       ])
     })
 
     return h('tr', data, columns)
-  }
+  },
 })

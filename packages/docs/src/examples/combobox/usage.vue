@@ -26,12 +26,13 @@
           <template v-slot:selection="data">
             <v-chip
               :key="JSON.stringify(data.item)"
-              :selected="data.selected"
+              v-bind="data.attrs"
+              :input-value="data.selected"
               :disabled="data.disabled"
               @click.stop="data.parent.selectedIndex = data.index"
-              @input="data.parent.selectItem(data.item)"
+              @click:close="data.parent.selectItem(data.item)"
             >
-              <v-avatar class="accent white--text">
+              <v-avatar class="accent white--text" left>
                 {{ data.item.slice(0, 1).toUpperCase() }}
               </v-avatar>
               {{ data.item }}
@@ -60,9 +61,9 @@
           'Programming',
           'Design',
           'Vue',
-          'Vuetify'
-        ]
+          'Vuetify',
+        ],
       }
-    }
+    },
   }
 </script>

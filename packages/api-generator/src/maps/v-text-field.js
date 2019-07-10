@@ -5,17 +5,17 @@ module.exports = {
     events: [
       {
         name: 'input',
-        value: 'string'
+        value: 'string',
       },
       {
         name: 'change',
-        value: 'string'
+        value: 'string',
       },
       ...inputEvents,
-      ...textEvents
+      ...textEvents,
     ].concat(validatableEvents),
     slots: [
-      ...textFieldSlots
-    ]
-  }
+      ...textFieldSlots,
+    ],
+  },
 }

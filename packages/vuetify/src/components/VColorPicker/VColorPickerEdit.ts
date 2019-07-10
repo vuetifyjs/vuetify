@@ -26,22 +26,22 @@ export const modes = {
       ['r', 255, 'int'],
       ['g', 255, 'int'],
       ['b', 255, 'int'],
-      ['a', 1, 'float']
+      ['a', 1, 'float'],
     ],
-    from: fromRGBA
+    from: fromRGBA,
   },
   hsla: {
     inputs: [
       ['h', 360, 'int'],
       ['s', 1, 'float'],
       ['l', 1, 'float'],
-      ['a', 1, 'float']
+      ['a', 1, 'float'],
     ],
-    from: fromHSLA
+    from: fromHSLA,
   },
   hexa: {
-    from: fromHexa
-  }
+    from: fromHexa,
+  },
 } as { [key: string]: Mode }
 
 export default Vue.extend({
@@ -54,27 +54,27 @@ export default Vue.extend({
     mode: {
       type: String,
       default: 'rgba',
-      validator: (v: string) => Object.keys(modes).includes(v)
-    }
+      validator: (v: string) => Object.keys(modes).includes(v),
+    },
   },
 
   data () {
     return {
       modes,
-      internalMode: this.mode
+      internalMode: this.mode,
     }
   },
 
   computed: {
     currentMode (): Mode {
       return this.modes[this.internalMode]
-    }
+    },
   },
 
   watch: {
     mode (mode) {
       this.internalMode = mode
-    }
+    },
   },
 
   created () {
@@ -101,17 +101,17 @@ export default Vue.extend({
     },
     genInput (target: string, attrs: any, value: any, on: any): VNode {
       return this.$createElement('div', {
-        staticClass: 'v-color-picker__input'
+        staticClass: 'v-color-picker__input',
       }, [
         this.$createElement('input', {
           key: target,
           attrs,
           domProps: {
-            value
+            value,
           },
-          on
+          on,
         }),
-        this.$createElement('span', target.toUpperCase())
+        this.$createElement('span', target.toUpperCase()),
       ])
     },
     genInputs (): VNode[] | VNode {
@@ -123,14 +123,14 @@ export default Vue.extend({
             'hex',
             {
               maxlength: 9,
-              disabled: this.disabled
+              disabled: this.disabled,
             },
             value,
             {
               change: (e: Event) => {
                 const el = e.target as HTMLInputElement
                 this.$emit('update:color', this.currentMode.from(parseHex(el.value)))
-              }
+              },
             }
           )
         }
@@ -144,7 +144,7 @@ export default Vue.extend({
                 min: 0,
                 max,
                 step: type === 'float' ? '0.01' : type === 'int' ? '1' : undefined,
-                disabled: this.disabled
+                disabled: this.disabled,
               },
               this.getValue(value[target], type),
               {
@@ -156,7 +156,7 @@ export default Vue.extend({
                     Object.assign({}, value, { [target]: newVal }),
                     this.color.alpha
                   ))
-                }
+                },
               }
             )
           })
@@ -168,23 +168,23 @@ export default Vue.extend({
         props: {
           small: true,
           icon: true,
-          disabled: this.disabled
+          disabled: this.disabled,
         },
         on: {
-          click: this.changeMode
-        }
+          click: this.changeMode,
+        },
       }, [
-        this.$createElement(VIcon, '$vuetify.icons.unfold')
+        this.$createElement(VIcon, '$vuetify.icons.unfold'),
       ])
-    }
+    },
   },
 
   render (h): VNode {
     return h('div', {
-      staticClass: 'v-color-picker__edit'
+      staticClass: 'v-color-picker__edit',
     }, [
       this.genInputs(),
-      !this.hideModeSwitch && this.genSwitch()
+      !this.hideModeSwitch && this.genSwitch(),
     ])
-  }
+  },
 })

@@ -4,7 +4,7 @@ import VCombobox from '../VCombobox'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VCombobox.ts', () => {
@@ -20,13 +20,13 @@ describe('VCombobox.ts', () => {
         mocks: {
           $vuetify: {
             lang: {
-              t: (val: string) => val
+              t: (val: string) => val,
             },
             theme: {
-              dark: false
-            }
-          }
-        }
+              dark: false,
+            },
+          },
+        },
       })
     }
   })
@@ -34,8 +34,8 @@ describe('VCombobox.ts', () => {
   it('should evaluate the range of an integer', async () => {
     const wrapper = mountFunction({
       propsData: {
-        value: 11
-      }
+        value: 11,
+      },
     })
 
     await wrapper.vm.$nextTick()
@@ -50,8 +50,8 @@ describe('VCombobox.ts', () => {
     const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
-        items: [1, 12]
-      }
+        items: [1, 12],
+      },
     })
 
     const event = jest.fn()
@@ -76,8 +76,8 @@ describe('VCombobox.ts', () => {
     const item = { value: 123, text: 'Foo' }
     const wrapper = mountFunction({
       propsData: {
-        items: [item]
-      }
+        items: [item],
+      },
     })
 
     const event = jest.fn()
@@ -115,8 +115,9 @@ describe('VCombobox.ts', () => {
 
   it('should clear value', async () => {
     const wrapper = mountFunction({
-      attachToDocument: true
+      attachToDocument: true,
     })
+    await wrapper.vm.$nextTick()
 
     const change = jest.fn()
     const input = wrapper.find('input')
@@ -130,13 +131,17 @@ describe('VCombobox.ts', () => {
     input.trigger('input')
     input.trigger('keydown.enter')
 
+    await wrapper.vm.$nextTick()
+
     expect(change).toHaveBeenCalledWith('foo')
     expect(change).toHaveBeenCalledTimes(2)
     expect(wrapper.vm.internalValue).toBe('foo')
 
     element.value = ''
     input.trigger('input')
-    input.trigger('keydown.tab')
+    input.trigger('keydown.enter')
+
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.internalValue).toBe('')
     expect(change).toHaveBeenCalledTimes(4)
@@ -147,12 +152,14 @@ describe('VCombobox.ts', () => {
     const wrapper = mountFunction({
       attachToDocument: true,
       methods: {
-        updateCombobox
-      }
+        updateCombobox,
+      },
     })
 
     const e = { preventDefault: jest.fn() }
     wrapper.vm.onEnterDown(e)
+
+    await wrapper.vm.$nextTick()
 
     // https://github.com/vuetifyjs/vuetify/issues/4974
     expect(e.preventDefault).toHaveBeenCalled()
@@ -174,7 +181,8 @@ describe('VCombobox.ts', () => {
     element.value = 'foo'
     input.trigger('input')
 
-    input.trigger('keydown.tab')
+    input.trigger('keydown.enter')
+    await wrapper.vm.$nextTick()
     expect(change).toHaveBeenCalledWith('foo')
 
     input.trigger('keydown.esc')
@@ -192,8 +200,8 @@ describe('VCombobox.ts', () => {
       attachToDocument: true,
       propsData: {
         items: ['foo', 'bar', 'fizz'],
-        searchInput: 'foobar'
-      }
+        searchInput: 'foobar',
+      },
     })
 
     const slot = wrapper.find('.v-input__slot')
@@ -217,12 +225,12 @@ describe('VCombobox.ts', () => {
       { text: 'Programming', value: 0 },
       { text: 'Design', value: 1 },
       { text: 'Vue', value: 2 },
-      { text: 'Vuetify', value: 3 }
+      { text: 'Vuetify', value: 3 },
     ]
     const wrapper = mountFunction({
       propsData: {
-        items
-      }
+        items,
+      },
     })
 
     const input = wrapper.find('input')
@@ -246,11 +254,13 @@ describe('VCombobox.ts', () => {
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/5008
-  it.skip('should select item if menu index is greater than -1', async () => {
+  it('should select item if menu index is greater than -1', async () => {
+    const selectItem = jest.fn()
     const wrapper = mountFunction({
       propsData: {
-        items: ['foo']
-      }
+        items: ['foo'],
+      },
+      methods: { selectItem },
     })
 
     const input = wrapper.find('input')
@@ -263,6 +273,6 @@ describe('VCombobox.ts', () => {
 
     input.trigger('keydown.enter')
 
-    expect(wrapper.vm.internalValue).toBe('foo')
+    expect(selectItem).toHaveBeenCalledWith('foo')
   })
 })

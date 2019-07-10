@@ -252,7 +252,7 @@ On the next screen, search for `Vuetify` on the list, select it, and install it 
     </tr>
     <tr>
       <td>
-        <a href="https://cognito.vuetifyjs.com/">vuex-cognito-module</a>
+        <a href="https://github.com/vuetifyjs/vuex/tree/master/packages/cognito-module/">vuex-cognito-module</a>
       </td>
       <td>
         <a href="https://www.npmjs.com/package/@vuetify/vuex-cognito-module">

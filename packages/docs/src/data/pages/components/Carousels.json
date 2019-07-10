@@ -28,13 +28,23 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "cycle",
-            "customTransition",
-            "customIcons",
-            "hideControls",
-            "hideDelimiters"
+            "simple/cycle",
+            "simple/custom-transition",
+            "simple/custom-icons",
+            "simple/hide-controls",
+            "simple/hide-delimiters",
+            "intermediate/model"
           ]
         }
       ]

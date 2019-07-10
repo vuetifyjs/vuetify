@@ -22,7 +22,7 @@
 <script>
   // Utilities
   import {
-    mapState
+    mapState,
   } from 'vuex'
   import kebabCase from 'lodash/kebabCase'
 
@@ -30,8 +30,8 @@
     props: {
       value: {
         type: Array,
-        default: () => ([])
-      }
+        default: () => ([]),
+      },
     },
 
     computed: {
@@ -40,9 +40,9 @@
         return this.value.map(item => ({
           title: this.$t(`Components.Categories.${item}`),
           text: this.$t(`Components.Categories.${item}Text`),
-          to: `/${this.params.lang}/components/categories/${kebabCase(item)}`
+          to: `/${this.params.lang}/components/categories/${kebabCase(item)}`,
         }))
-      }
-    }
+      },
+    },
   }
 </script>

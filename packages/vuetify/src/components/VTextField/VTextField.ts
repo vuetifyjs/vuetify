@@ -9,15 +9,14 @@ import VCounter from '../VCounter'
 import VLabel from '../VLabel'
 
 // Mixins
-import Maskable from '../../mixins/maskable'
 import Loadable from '../../mixins/loadable'
 
 // Directives
-import Ripple from '../../directives/ripple'
+import ripple from '../../directives/ripple'
 
 // Utilities
 import { convertToUnit, keyCodes } from '../../util/helpers'
-import { deprecate, consoleWarn } from '../../util/console'
+import { breaking, consoleWarn } from '../../util/console'
 
 // Types
 import mixins from '../../util/mixins'
@@ -25,7 +24,6 @@ import { VNode } from 'vue/types'
 
 const baseMixins = mixins(
   VInput,
-  Maskable,
   Loadable
 )
 interface options extends InstanceType<typeof baseMixins> {
@@ -44,24 +42,21 @@ const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', '
 export default baseMixins.extend<options>().extend({
   name: 'v-text-field',
 
-  directives: { Ripple },
+  directives: { ripple },
 
   inheritAttrs: false,
 
   props: {
     appendOuterIcon: String,
     autofocus: Boolean,
-    /** @deprecated */
-    box: Boolean,
-    browserAutocomplete: String,
     clearable: Boolean,
     clearIcon: {
       type: String,
-      default: '$vuetify.icons.clear'
+      default: '$vuetify.icons.clear',
     },
     color: {
       type: String,
-      default: 'primary'
+      default: 'primary',
     },
     counter: [Boolean, Number, String],
     filled: Boolean,
@@ -81,8 +76,8 @@ export default baseMixins.extend<options>().extend({
     suffix: String,
     type: {
       type: String,
-      default: 'text'
-    }
+      default: 'text',
+    },
   },
 
   data: () => ({
@@ -91,9 +86,8 @@ export default baseMixins.extend<options>().extend({
     prefixWidth: 0,
     prependWidth: 0,
     initialValue: null,
-    internalChange: false,
     isBooted: false,
-    isClearing: false
+    isClearing: false,
   }),
 
   computed: {
@@ -107,14 +101,14 @@ export default baseMixins.extend<options>().extend({
         'v-text-field--solo': this.isSolo,
         'v-text-field--solo-inverted': this.soloInverted,
         'v-text-field--solo-flat': this.flat,
-        'v-text-field--filled': this.isFilled,
+        'v-text-field--filled': this.filled,
         'v-text-field--is-booted': this.isBooted,
         'v-text-field--enclosed': this.isEnclosed,
         'v-text-field--reverse': this.reverse,
         'v-text-field--outlined': this.outlined,
         'v-text-field--placeholder': this.placeholder,
         'v-text-field--rounded': this.rounded,
-        'v-text-field--shaped': this.shaped
+        'v-text-field--shaped': this.shaped,
       }
     },
     counterValue (): number {
@@ -125,14 +119,9 @@ export default baseMixins.extend<options>().extend({
         return this.lazyValue
       },
       set (val: any) {
-        if (this.mask && val !== this.lazyValue) {
-          this.lazyValue = this.unmaskText(this.maskText(this.unmaskText(val)))
-          this.setSelectionRange()
-        } else {
-          this.lazyValue = val
-          this.$emit('input', this.lazyValue)
-        }
-      }
+        this.lazyValue = val
+        this.$emit('input', this.lazyValue)
+      },
     },
     isDirty (): boolean {
       return (this.lazyValue != null &&
@@ -141,20 +130,17 @@ export default baseMixins.extend<options>().extend({
     },
     isEnclosed (): boolean {
       return (
-        this.isFilled ||
+        this.filled ||
         this.isSolo ||
         this.outlined ||
         this.fullWidth
       )
     },
-    isFilled (): boolean {
-      return this.box || this.filled
-    },
     isLabelActive (): boolean {
       return this.isDirty || dirtyTypes.includes(this.type)
     },
     isSingle (): boolean {
-      return this.isSolo || this.singleLine
+      return this.isSolo || this.singleLine || this.fullWidth
     },
     isSolo (): boolean {
       return this.solo || this.soloInverted
@@ -166,10 +152,10 @@ export default baseMixins.extend<options>().extend({
 
       return (this.$vuetify.rtl === this.reverse) ? {
         left: offset,
-        right: 'auto'
+        right: 'auto',
       } : {
         left: 'auto',
-        right: offset
+        right: offset,
       }
     },
     showLabel (): boolean {
@@ -178,11 +164,12 @@ export default baseMixins.extend<options>().extend({
     labelValue (): boolean {
       return !this.isSingle &&
         Boolean(this.isFocused || this.isLabelActive || this.placeholder)
-    }
+    },
   },
 
   watch: {
     labelValue: 'setLabelWidth',
+    outlined: 'setLabelWidth',
     isFocused (val) {
       // Sets validationState from validatable
       this.hasColor = val
@@ -194,23 +181,23 @@ export default baseMixins.extend<options>().extend({
       }
     },
     value (val) {
-      if (this.mask && !this.internalChange) {
-        const masked = this.maskText(this.unmaskText(val))
-        this.lazyValue = this.unmaskText(masked)
-
-        // Emit when the externally set value was modified internally
-        String(val) !== this.lazyValue && this.$nextTick(() => {
-          this.$refs.input.value = masked
-          this.$emit('input', this.lazyValue)
-        })
-      } else this.lazyValue = val
-    }
+      this.lazyValue = val
+    },
   },
 
   created () {
+    /* istanbul ignore next */
+    if (this.$attrs.hasOwnProperty('box')) {
+      breaking('box', 'filled', this)
+    }
+
+    /* istanbul ignore next */
+    if (this.$attrs.hasOwnProperty('browser-autocomplete')) {
+      breaking('browser-autocomplete', 'autocomplete', this)
+    }
+
     /* istanbul ignore if */
-    if (this.box) deprecate('box', 'filled')
-    if (this.shaped && !(this.isFilled || this.outlined || this.isSolo)) {
+    if (this.shaped && !(this.filled || this.outlined || this.isSolo)) {
       consoleWarn('shaped should be used with either filled or outlined', this)
     }
   },
@@ -229,12 +216,17 @@ export default baseMixins.extend<options>().extend({
       this.onFocus()
     },
     /** @public */
-    blur () {
-      this.$refs.input ? this.$refs.input.blur() : this.onBlur()
+    blur (e?: Event) {
+      // https://github.com/vuetifyjs/vuetify/issues/5913
+      // Safari tab order gets broken if called synchronous
+      window.requestAnimationFrame(() => {
+        this.$refs.input && this.$refs.input.blur()
+      })
+      this.onBlur(e)
     },
     clearableCallback () {
       this.internalValue = null
-      this.$nextTick(() => this.$refs.input.focus())
+      this.$nextTick(() => this.$refs.input && this.$refs.input.focus())
     },
     genAppendSlot () {
       const slot = []
@@ -290,7 +282,7 @@ export default baseMixins.extend<options>().extend({
         this.genIcon(
           icon,
           this.clearableCallback
-        )
+        ),
       ])
     },
     genCounter () {
@@ -303,8 +295,8 @@ export default baseMixins.extend<options>().extend({
           dark: this.dark,
           light: this.light,
           max,
-          value: this.counterValue
-        }
+          value: this.counterValue,
+        },
       })
     },
     genDefaultSlot () {
@@ -313,7 +305,7 @@ export default baseMixins.extend<options>().extend({
         this.genTextFieldSlot(),
         this.genClearIcon(),
         this.genIconSlot(),
-        this.genProgress()
+        this.genProgress(),
       ]
     },
     genFieldset () {
@@ -321,8 +313,8 @@ export default baseMixins.extend<options>().extend({
 
       return this.$createElement('fieldset', {
         attrs: {
-          'aria-hidden': true
-        }
+          'aria-hidden': true,
+        },
       }, [this.genLegend()])
     },
     genLabel () {
@@ -335,12 +327,12 @@ export default baseMixins.extend<options>().extend({
           dark: this.dark,
           disabled: this.disabled,
           focused: !this.isSingle && (this.isFocused || !!this.validationState),
-          for: this.$attrs.id,
+          for: this.computedId,
           left: this.labelPosition.left,
           light: this.light,
           right: this.labelPosition.right,
-          value: this.labelValue
-        }
+          value: this.labelValue,
+        },
       }
 
       return this.$createElement(VLabel, data, this.$slots.label || this.label)
@@ -348,13 +340,13 @@ export default baseMixins.extend<options>().extend({
     genLegend () {
       const width = !this.singleLine && (this.labelValue || this.isDirty) ? this.labelWidth : 0
       const span = this.$createElement('span', {
-        domProps: { innerHTML: '&#8203;' }
+        domProps: { innerHTML: '&#8203;' },
       })
 
       return this.$createElement('legend', {
         style: {
-          width: convertToUnit(width)
-        }
+          width: !this.isSingle ? convertToUnit(width) : undefined,
+        },
       }, [span])
     },
     genInput () {
@@ -364,62 +356,55 @@ export default baseMixins.extend<options>().extend({
       return this.$createElement('input', {
         style: {},
         domProps: {
-          value: this.maskText(this.lazyValue)
+          value: this.lazyValue,
         },
         attrs: {
-          'aria-label': (!this.$attrs || !this.$attrs.id) && this.label, // Label `for` will be set if we have an id
-          maxlength: this.mask ? this.masked.length : undefined,
           ...this.$attrs,
-          autocomplete: this.browserAutocomplete,
           autofocus: this.autofocus,
           disabled: this.disabled,
+          id: this.computedId,
           placeholder: this.placeholder,
           readonly: this.readonly,
-          type: this.type
+          type: this.type,
         },
         on: Object.assign(listeners, {
           blur: this.onBlur,
           input: this.onInput,
           focus: this.onFocus,
-          keydown: this.onKeyDown
+          keydown: this.onKeyDown,
         }),
-        ref: 'input'
+        ref: 'input',
       })
     },
     genMessages () {
       if (this.hideDetails) return null
 
       return this.$createElement('div', {
-        staticClass: 'v-text-field__details'
+        staticClass: 'v-text-field__details',
       }, [
         VInput.options.methods.genMessages.call(this),
-        this.genCounter()
+        this.genCounter(),
       ])
     },
     genTextFieldSlot () {
       return this.$createElement('div', {
-        staticClass: 'v-text-field__slot'
+        staticClass: 'v-text-field__slot',
       }, [
         this.genLabel(),
         this.prefix ? this.genAffix('prefix') : null,
         this.genInput(),
-        this.suffix ? this.genAffix('suffix') : null
+        this.suffix ? this.genAffix('suffix') : null,
       ])
     },
     genAffix (type: 'prefix' | 'suffix') {
       return this.$createElement('div', {
         'class': `v-text-field__${type}`,
-        ref: type
+        ref: type,
       }, this[type])
     },
     onBlur (e?: Event) {
       this.isFocused = false
-      // Reset internalChange state
-      // to allow external change
-      // to persist
-      this.internalChange = false
-
-      this.$emit('blur', e)
+      e && this.$emit('blur', e)
     },
     onClick () {
       if (this.isFocused || this.disabled) return
@@ -440,14 +425,10 @@ export default baseMixins.extend<options>().extend({
     },
     onInput (e: Event) {
       const target = e.target as HTMLInputElement
-      this.internalChange = true
-      this.mask && this.resetSelections(target)
       this.internalValue = target.value
       this.badInput = target.validity && target.validity.badInput
     },
     onKeyDown (e: KeyboardEvent) {
-      this.internalChange = true
-
       if (e.keyCode === keyCodes.enter) this.$emit('change', this.internalValue)
 
       this.$emit('keydown', e)
@@ -480,6 +461,6 @@ export default baseMixins.extend<options>().extend({
       if (!this.outlined || !this.$refs['prepend-inner']) return
 
       this.prependWidth = this.$refs['prepend-inner'].offsetWidth
-    }
-  }
+    },
+  },
 })

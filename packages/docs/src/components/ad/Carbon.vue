@@ -7,19 +7,19 @@
     props: {
       scriptId: {
         type: String,
-        default: '_carbonads_js'
+        default: '_carbonads_js',
       },
       src: {
         type: String,
-        default: '//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=vuetifyjscom'
-      }
+        default: '//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=vuetifyjscom',
+      },
     },
 
     methods: {
       serve () {
         window._carbonads && window._carbonads.refresh()
-      }
-    }
+      },
+    },
   }
 </script>
 
@@ -27,12 +27,12 @@
 #ad__container
   #carbonads
     a
-      color: rgba(#000, .87)
+      color: #000
       display: inline-block
       text-decoration: none
 
       &.carbon-poweredby
-        color: rgba(#000, .56)
+        color: rgba(#000, .87)
         text-transform: uppercase
         letter-spacing: 1px
         font-size: 9px !important

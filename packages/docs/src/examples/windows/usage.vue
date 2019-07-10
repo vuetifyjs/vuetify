@@ -9,8 +9,9 @@
       <v-item
         v-for="n in length"
         :key="n"
+        v-slot:default="{ active, toggle }"
       >
-        <div slot-scope="{ active, toggle }">
+        <div>
           <v-btn
             :input-value="active"
             icon
@@ -66,13 +67,7 @@
   export default {
     data: () => ({
       length: 3,
-      window: 0
-    })
+      window: 0,
+    }),
   }
 </script>
-
-<codepen-resources lang="json">
-  {
-    "css": ["https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css"]
-  }
-</codepen-resources>

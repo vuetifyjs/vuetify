@@ -17,7 +17,11 @@
       @click="toggleDrawer"
     />
 
-    <router-link :to="{ name: 'home/Home' }">
+    <router-link
+      :to="{ name: 'home/Home' }"
+      aria-label="Vuetify Home Page"
+      title="Vuetify Home Page"
+    >
       <v-img
         alt="Vuetify Logo"
         src="https://cdn.vuetifyjs.com/images/logos/v-alt.svg"
@@ -50,6 +54,7 @@
         <v-icon class="hidden-md-and-up">mdi-file-document-box</v-icon>
       </v-btn>
       <core-store />
+      <core-enterprise />
       <core-supports />
       <core-ecosystems />
       <core-versions />
@@ -62,7 +67,7 @@
   // Utilities
   import {
     mapMutations,
-    mapState
+    mapState,
   } from 'vuex'
   import languages from '@/data/i18n/languages.json'
 
@@ -70,14 +75,14 @@
     name: 'CoreToolbar',
 
     data: vm => ({
-      languages
+      languages,
     }),
 
     computed: {
       ...mapState('route', ['name', 'params']),
       isHome () {
         return this.name === 'home/Home'
-      }
+      },
     },
 
     methods: {
@@ -88,8 +93,8 @@
           .slice(2)
           .join('/')
         window.location.href = `${window.location.origin}/releases/${release}/#/${path}`
-      }
-    }
+      },
+    },
   }
 </script>
 

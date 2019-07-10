@@ -4,7 +4,7 @@ import VSelect from '../VSelect'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VSelect.ts', () => {
@@ -13,7 +13,7 @@ describe('VSelect.ts', () => {
   let el
 
   (global as any).performance = {
-    now: () => {}
+    now: () => {},
   }
   beforeEach(() => {
     mountFunction = (options = {}) => {
@@ -25,13 +25,13 @@ describe('VSelect.ts', () => {
         mocks: {
           $vuetify: {
             lang: {
-              t: (val: string) => val
+              t: (val: string) => val,
             },
             theme: {
-              dark: false
-            }
-          }
-        }
+              dark: false,
+            },
+          },
+        },
       })
     }
   })
@@ -42,13 +42,13 @@ describe('VSelect.ts', () => {
   it('should select value when using a scoped slot', async () => {
     const wrapper = mountFunction({
       propsData: {
-        items: ['foo', 'bar']
+        items: ['foo', 'bar'],
       },
       slots: {
         'no-data': {
-          render: h => h('div', 'No Data')
-        }
-      }
+          render: h => h('div', 'No Data'),
+        },
+      },
     })
 
     // Will be undefined if fails
@@ -62,10 +62,10 @@ describe('VSelect.ts', () => {
         clearable: true,
         items: [
           { text: 'Foo', value: null },
-          { text: 'Bar', value: 'bar' }
+          { text: 'Bar', value: 'bar' },
         ],
-        value: null
-      }
+        value: null,
+      },
     })
 
     const icon = wrapper.find('.v-input__append-inner .v-icon')
@@ -86,8 +86,8 @@ describe('VSelect.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         clearable: true,
-        value: 'foo'
-      }
+        value: 'foo',
+      },
     })
 
     const change = jest.fn()
@@ -126,9 +126,9 @@ describe('VSelect.ts', () => {
           nudgeTop: 5,
           nudgeRight: 5,
           nudgeBottom: 5,
-          nudgeLeft: 5
-        }
-      }
+          nudgeLeft: 5,
+        },
+      },
     })
 
     const menu = wrapper.vm.$refs.menu
@@ -143,8 +143,8 @@ describe('VSelect.ts', () => {
   it('should close menu on tab down when no selectedIndex', async () => {
     const wrapper = mountFunction({
       propsData: {
-        items: ['foo', 'bar']
-      }
+        items: ['foo', 'bar'],
+      },
     })
 
     const menu = wrapper.find('.v-input__slot')
@@ -166,8 +166,8 @@ describe('VSelect.ts', () => {
   it('should select item after typing its first few letters', async () => {
     const wrapper = mountFunction({
       propsData: {
-        items: ['aaa', 'foo', 'faa']
-      }
+        items: ['aaa', 'foo', 'faa'],
+      },
     })
 
     const input = wrapper.find('input')
@@ -181,5 +181,75 @@ describe('VSelect.ts', () => {
     input.trigger('keypress', { key: 'a' })
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalValue).toEqual('faa')
+  })
+
+  it('should have the correct a11y attributes', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+        value: 'Foo',
+      },
+    })
+    await wrapper.vm.$nextTick()
+
+    const inputSlot = wrapper.find('.v-input__slot')
+
+    expect(inputSlot.element.getAttribute('role')).toBe('button')
+    expect(inputSlot.element.getAttribute('aria-haspopup')).toBe('listbox')
+    expect(inputSlot.element.getAttribute('aria-expanded')).toBe('false')
+    expect(inputSlot.element.getAttribute('aria-owns')).toBe(wrapper.vm.computedOwns)
+
+    const list = wrapper.find('.v-select-list')
+    let items = list.findAll('.v-list-item')
+
+    expect(list.element.children[0].getAttribute('role')).toBe('listbox')
+    expect(list.element.children[0].id).toBe(wrapper.vm.computedOwns)
+    expect(items.at(0).element.getAttribute('role')).toBe('option')
+    expect(items.at(0).element.getAttribute('aria-selected')).toBe('true')
+    expect(items.at(1).element.getAttribute('aria-selected')).toBe('false')
+
+    wrapper.setProps({ value: 'Bar' })
+
+    items = list.findAll('.v-list-item')
+    expect(items.at(0).element.getAttribute('aria-selected')).toBe('false')
+    expect(items.at(1).element.getAttribute('aria-selected')).toBe('true')
+
+    const item = items.at(0)
+    const generatedId = `foo-list-item-${(list.vm as any)._uid}`
+
+    expect(item.element.getAttribute('aria-labelledby')).toBe(generatedId)
+    expect(item.find('.v-list-item__title').element.id).toBe(generatedId)
+  })
+
+  it('should not reset menu index when hide-on-selected is used', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+      },
+    })
+
+    const input = wrapper.find('input')
+    input.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    input.trigger('keydown.down')
+
+    expect(wrapper.vm.$refs.menu.listIndex).toBe(0)
+
+    input.trigger('keydown.enter')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.internalValue).toBe('Foo')
+    expect(wrapper.vm.$refs.menu.listIndex).toBe(0)
+
+    wrapper.setProps({ value: null, hideSelected: true })
+    input.trigger('keydown.enter')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.internalValue).toBe('Foo')
+    expect(wrapper.vm.$refs.menu.listIndex).toBe(-1)
   })
 })

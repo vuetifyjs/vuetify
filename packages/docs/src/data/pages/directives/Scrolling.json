@@ -36,7 +36,7 @@
         {
           "type": "up-next",
           "value": [
-            "framework/scroll",
+            "styles/scroll",
             "directives/touch-support"
           ]
         }

@@ -1,13 +1,7 @@
 {
   "header": "대화창 (Dialog)",
   "headerText": "`v-dialog` 컴포넌트는 사용자에게 해야할 특정 작업에 대해 알리고 중요한 정보를 포함하거나 결정을 내리거나 여러 작업을 포함 할 수 있습니다. 대화창은 방해적(interruptive) 이므로 자제해서 사용하세요.",
-  "components": ["v-dialog"],
   "examples": {
-    "simple": {
-      "header": "간단한 대화창 (Simple dialogs)",
-      "desc": "선택된 옵션을 바로 커밋(commit) 하고 메뉴를 닫습니다. 대화창의 바깥을 건드리거나 (touch) 뒤로가기(Back)을 누르면 액션을 취소하고 대화창을 닫습니다.",
-      "uninverted": true
-    },
     "withoutActivator": {
       "header": "Without activator",
       "desc": "어떤 이유로 activator 슬롯을 사용할 수 없을 경우, 선택창을 활성화하는 이벤트에 `.stop` 수식어(modifier)를 사용했는지 확인하세요(사용해야한다는 의미).",
@@ -41,15 +35,7 @@
   },
   "props": {
     "disabled": "Disabled the ability to open the dialog",
-    "fullWidth": "Specifies the modal to force 100% width",
-    "fullscreen": "Changes layout for fullscreen display",
     "hideOverlay": "Hide the display of the overlay",
-    "eager": "Mixins.Bootable.props.eager",
-    "maxWidth": "The maximum width of the content",
-    "origin": "Mixins.Transitionable.props.origin",
-    "persistent": "Clicking outside will not dismiss the dialog",
-    "scrollable": "When set to true, expects a card, card-title, card-text and card-actions. Additionally card-text should have specified height. Will set card-text to overflow-y",
-    "transition": "Mixins.Transitionable.props.transition",
-    "width": "Sets the dialog width"
+    "scrollable": "When set to true, expects a card, card-title, card-text and card-actions. Additionally card-text should have specified height. Will set card-text to overflow-y"
   }
 }

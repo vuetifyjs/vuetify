@@ -18,7 +18,7 @@ export default VAutocomplete.extend({
 
   props: {
     segmented: Boolean,
-    editable: Boolean
+    editable: Boolean,
   },
 
   computed: {
@@ -27,7 +27,7 @@ export default VAutocomplete.extend({
         ...VAutocomplete.options.computed.classes.call(this),
         'v-overflow-btn': true,
         'v-overflow-btn--segmented': this.segmented,
-        'v-overflow-btn--editable': this.editable
+        'v-overflow-btn--editable': this.editable,
       }
     },
     isAnyValueAllowed (): boolean {
@@ -39,7 +39,7 @@ export default VAutocomplete.extend({
     },
     computedItems (): object[] {
       return this.segmented ? this.allItems : this.filteredItems
-    }
+    },
   },
 
   methods: {
@@ -91,9 +91,9 @@ export default VAutocomplete.extend({
           click (e: Event) {
             e.stopPropagation()
             itemObj.callback(e)
-          }
-        }
+          },
+        },
       }, [itemObj.text])
-    }
-  }
+    },
+  },
 })

@@ -16,39 +16,36 @@ export default mixins(
   props: {
     dark: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     id: {
       type: String,
-      default: 'app'
+      default: 'app',
     },
     light: {
       type: Boolean,
-      default: undefined
-    }
+      default: undefined,
+    },
   },
 
   computed: {
-    isDark () {
-      if (this.dark != null || this.light != null) {
-        return Themeable.options.computed.isDark.call(this)
-      }
-
+    isDark (): boolean {
       return this.$vuetify.theme.dark
-    }
+    },
   },
 
   render (h) {
-    const wrapper = h('div', { staticClass: 'application--wrap' }, this.$slots.default)
+    const wrapper = h('div', { staticClass: 'v-application--wrap' }, this.$slots.default)
 
     return h('div', {
-      staticClass: 'application',
+      staticClass: 'v-application',
       class: {
-        'application--is-rtl': this.$vuetify.rtl,
-        ...this.themeClasses
+        'v-application--is-rtl': this.$vuetify.rtl,
+        'v-application--is-ltr': !this.$vuetify.rtl,
+        ...this.themeClasses,
       },
       attrs: { 'data-app': true },
-      domProps: { id: this.id }
+      domProps: { id: this.id },
     }, [wrapper])
-  }
+  },
 })

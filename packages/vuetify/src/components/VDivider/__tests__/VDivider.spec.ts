@@ -8,7 +8,7 @@ import VDivider from '../VDivider'
 import {
   createLocalVue,
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VDivider', () => {
@@ -21,7 +21,7 @@ describe('VDivider', () => {
     mountFunction = (options = {}) => {
       return mount(VDivider, {
         localVue,
-        ...options
+        ...options,
       })
     }
   })
@@ -34,7 +34,7 @@ describe('VDivider', () => {
 
   it('should render an inset component', () => {
     const wrapper = mountFunction({
-      propsData: { inset: true }
+      propsData: { inset: true },
     })
 
     expect(wrapper.classes('v-divider--inset')).toBe(true)
@@ -42,7 +42,7 @@ describe('VDivider', () => {
 
   it('should render a light component', () => {
     const wrapper = mountFunction({
-      propsData: { light: true }
+      propsData: { light: true },
     })
 
     expect(wrapper.classes('theme--light')).toBe(true)
@@ -50,7 +50,7 @@ describe('VDivider', () => {
 
   it('should render a dark component', () => {
     const wrapper = mountFunction({
-      propsData: { dark: true }
+      propsData: { dark: true },
     })
 
     expect(wrapper.classes('theme--dark')).toBe(true)
@@ -58,9 +58,45 @@ describe('VDivider', () => {
 
   it('should render a vertical component', () => {
     const wrapper = mountFunction({
-      propsData: { vertical: true }
+      propsData: { vertical: true },
     })
 
     expect(wrapper.classes('v-divider--vertical')).toBe(true)
+  })
+
+  it('should have separator role by default', () => {
+    const wrapper = mountFunction()
+
+    expect(wrapper.attributes('role')).toBe('separator')
+  })
+
+  it('should have aria-orientation horizontal by default', () => {
+    const wrapper = mountFunction()
+
+    expect(wrapper.attributes('aria-orientation')).toBe('horizontal')
+  })
+
+  it('should have aria-orientation vertical if vertical prop is set', () => {
+    const wrapper = mountFunction({
+      propsData: { vertical: true },
+    })
+
+    expect(wrapper.attributes('aria-orientation')).toBe('vertical')
+  })
+
+  it('should have presentation role if set in attrs', () => {
+    const wrapper = mountFunction({
+      attrs: { role: 'presentation' },
+    })
+
+    expect(wrapper.attributes('role')).toBe('presentation')
+  })
+
+  it('should have no aria-orientation if presentation role is set in attrs', () => {
+    const wrapper = mountFunction({
+      attrs: { role: 'presentation' },
+    })
+
+    expect(wrapper.attributes('aria-orientation')).toBeUndefined()
   })
 })

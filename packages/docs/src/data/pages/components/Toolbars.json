@@ -13,6 +13,11 @@
         {
           "type": "usage",
           "value": "usage"
+        },
+        {
+          "type": "alert",
+          "lang": "buttonMargin",
+          "value": "warning"
         }
       ]
     },
@@ -33,16 +38,28 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "columnWidthWithHierarchy",
-            "flexibleAndCard",
-            "floatingWithSearch",
-            "variations",
-            "prominent",
-            "dense",
-            "contextualActionBar",
-            "background"
+            "simple/prominent",
+            "simple/dense",
+            "simple/light-and-dark",
+            "simple/variations",
+            "simple/background",
+            "simple/extended",
+            "simple/extension-height",
+            "simple/collapse",
+            "intermediate/flexible-and-card",
+            "intermediate/floating-with-search",
+            "intermediate/contextual-action-bar"
           ]
         }
       ]

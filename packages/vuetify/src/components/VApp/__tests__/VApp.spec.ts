@@ -4,7 +4,7 @@ import VApp from '../VApp'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VApp.ts', () => {
@@ -14,7 +14,7 @@ describe('VApp.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VApp, {
-        ...options
+        ...options,
       })
     }
   })
@@ -25,10 +25,10 @@ describe('VApp.ts', () => {
         $vuetify: {
           rtl: false,
           theme: {
-            dark: false
-          }
-        }
-      }
+            dark: false,
+          },
+        },
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -40,31 +40,31 @@ describe('VApp.ts', () => {
         $vuetify: {
           rtl: false,
           theme: {
-            dark: false
-          }
-        }
-      }
+            dark: false,
+          },
+        },
+      },
     })
 
-    const app = wrapper.find('.application')
+    const app = wrapper.find('.v-application')
     expect(app.attributes()['data-app']).toBe('true')
   })
 
   it('should allow a custom id', () => {
     const wrapper = mountFunction({
       propsData: {
-        id: 'inspire'
+        id: 'inspire',
       },
       mocks: {
         $vuetify: {
           rtl: false,
           theme: {
-            dark: false
-          }
-        }
-      }
+            dark: false,
+          },
+        },
+      },
     })
-    const app = wrapper.find('.application')
+    const app = wrapper.find('.v-application')
     expect(app.attributes().id).toBe('inspire')
 
     expect(wrapper.html()).toMatchSnapshot()

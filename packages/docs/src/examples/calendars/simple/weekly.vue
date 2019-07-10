@@ -2,16 +2,16 @@
   <v-layout>
     <v-flex>
       <v-sheet height="400">
-        <!-- now is normally calculated by itself, but to keep the calendar in this date range to view events -->
         <v-calendar
           ref="calendar"
           :now="today"
           :value="today"
+          :events="events"
           color="primary"
           type="week"
         >
           <!-- the events at the top (all-day) -->
-          <template v-slot:dayHeader="{ date }">
+          <template v-slot:day-header="{ date }">
             <template v-for="event in eventsMap[date]">
               <!-- all day events don't have time -->
               <div
@@ -24,7 +24,7 @@
             </template>
           </template>
           <!-- the events at the bottom (timed) -->
-          <template v-slot:dayBody="{ date, timeToY, minutesToPixels }">
+          <template v-slot:day-body="{ date, timeToY, minutesToPixels }">
             <template v-for="event in eventsMap[date]">
               <!-- timed events -->
               <div
@@ -49,39 +49,24 @@
       today: '2019-01-08',
       events: [
         {
-          title: 'Weekly Meeting',
-          date: '2019-01-07',
-          time: '09:00',
-          duration: 45
+          name: 'Weekly Meeting',
+          start: '2019-01-07 09:00',
+          end: '2019-01-07 10:00',
         },
         {
-          title: 'Thomas\' Birthday',
-          date: '2019-01-10'
+          name: 'Thomas\' Birthday',
+          start: '2019-01-10',
         },
         {
-          title: 'Mash Potatoes',
-          date: '2019-01-09',
-          time: '12:30',
-          duration: 180
-        }
-      ]
+          name: 'Mash Potatoes',
+          start: '2019-01-09 12:30',
+          end: '2019-01-09 15:30',
+        },
+      ],
     }),
-    computed: {
-      // convert the list of events into a map of lists keyed by date
-      eventsMap () {
-        const map = {}
-        this.events.forEach(e => (map[e.date] = map[e.date] || []).push(e))
-        return map
-      }
-    },
     mounted () {
       this.$refs.calendar.scrollToTime('08:00')
     },
-    methods: {
-      open (event) {
-        alert(event.title)
-      }
-    }
   }
 </script>
 

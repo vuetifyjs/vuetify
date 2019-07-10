@@ -18,13 +18,13 @@ export default mixins(
 
   model: {
     prop: 'inputValue',
-    event: 'change'
+    event: 'change',
   },
 
   props: {
     color: {
       type: String,
-      default: 'accent'
+      default: 'accent',
     },
     id: String,
     inputValue: null as any,
@@ -32,14 +32,14 @@ export default mixins(
     trueValue: null as any,
     multiple: {
       type: Boolean,
-      default: null
+      default: null,
     },
-    label: String
+    label: String,
   },
 
   data () {
     return {
-      lazyValue: this.inputValue
+      lazyValue: this.inputValue,
     }
   },
 
@@ -70,13 +70,13 @@ export default mixins(
     },
     isDirty (): boolean {
       return this.isActive
-    }
+    },
   },
 
   watch: {
     inputValue (val) {
       this.lazyValue = val
-    }
+    },
   },
 
   methods: {
@@ -85,31 +85,39 @@ export default mixins(
 
       if (!label) return label
 
-      label!.data!.on = { click: this.onChange }
+      label!.data!.on = {
+        click: (e: Event) => {
+          // Prevent label from
+          // causing the input
+          // to focus
+          e.preventDefault()
+
+          this.onChange()
+        },
+      }
 
       return label
     },
     genInput (type: string, attrs: object) {
       return this.$createElement('input', {
         attrs: Object.assign({
-          'aria-label': this.label,
           'aria-checked': this.isActive.toString(),
           disabled: this.isDisabled,
-          id: this.id,
+          id: this.computedId,
           role: type,
-          type
+          type,
         }, attrs),
         domProps: {
           value: this.value,
-          checked: this.isActive
+          checked: this.isActive,
         },
         on: {
           blur: this.onBlur,
           change: this.onChange,
           focus: this.onFocus,
-          keydown: this.onKeydown
+          keydown: this.onKeydown,
         },
-        ref: 'input'
+        ref: 'input',
       })
     },
     onBlur () {
@@ -148,6 +156,6 @@ export default mixins(
       this.isFocused = true
     },
     /** @abstract */
-    onKeydown (e: Event) {}
-  }
+    onKeydown (e: Event) {},
+  },
 })

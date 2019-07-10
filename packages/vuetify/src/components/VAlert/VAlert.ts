@@ -13,11 +13,13 @@ import Toggleable from '../../mixins/toggleable'
 import Themeable from '../../mixins/themeable'
 import Transitionable from '../../mixins/transitionable'
 
+// Utilities
+import mixins from '../../util/mixins'
+import { breaking } from '../../util/console'
+
 // Types
 import { VNodeData } from 'vue'
 import { VNode } from 'vue/types'
-import mixins from '../../util/mixins'
-import { deprecate } from '../../util/console'
 
 /* @vue/component */
 export default mixins(
@@ -35,15 +37,15 @@ export default mixins(
           'top',
           'right',
           'bottom',
-          'left'
+          'left',
         ].includes(val)
-      }
+      },
     },
-    coloredBorder: Boolean,
     closeLabel: {
       type: String,
-      default: '$vuetify.close'
+      default: '$vuetify.close',
     },
+    coloredBorder: Boolean,
     dense: Boolean,
     dismissible: Boolean,
     icon: {
@@ -51,9 +53,8 @@ export default mixins(
       type: [Boolean, String],
       validator (val: boolean | string) {
         return typeof val === 'string' || val === false
-      }
+      },
     },
-    outline: Boolean,
     outlined: Boolean,
     prominent: Boolean,
     text: Boolean,
@@ -64,14 +65,14 @@ export default mixins(
           'info',
           'error',
           'success',
-          'warning'
+          'warning',
         ].includes(val)
-      }
+      },
     },
     value: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
 
   computed: {
@@ -81,8 +82,8 @@ export default mixins(
       let data: VNodeData = {
         staticClass: 'v-alert__border',
         class: {
-          [`v-alert__border--${this.border}`]: true
-        }
+          [`v-alert__border--${this.border}`]: true,
+        },
       }
 
       if (this.coloredBorder) {
@@ -101,18 +102,18 @@ export default mixins(
         staticClass: 'v-alert__dismissible',
         props: {
           color,
-          icon: true
+          icon: true,
         },
         attrs: {
-          'aria-label': this.$vuetify.lang.t(this.closeLabel)
+          'aria-label': this.$vuetify.lang.t(this.closeLabel),
         },
         on: {
-          click: () => (this.isActive = false)
-        }
+          click: () => (this.isActive = false),
+        },
       }, [
         this.$createElement(VIcon, {
-          props: { color }
-        }, '$vuetify.icons.cancel')
+          props: { color },
+        }, '$vuetify.icons.cancel'),
       ])
     },
     __cachedIcon (): VNode | null {
@@ -120,7 +121,7 @@ export default mixins(
 
       return this.$createElement(VIcon, {
         staticClass: 'v-alert__icon',
-        props: { color: this.iconColor }
+        props: { color: this.iconColor },
       }, this.computedIcon)
     },
     classes (): object {
@@ -128,9 +129,9 @@ export default mixins(
         ...VSheet.options.computed.classes.call(this),
         'v-alert--border': Boolean(this.border),
         'v-alert--dense': this.dense,
-        'v-alert--outlined': this.hasOutline,
+        'v-alert--outlined': this.outlined,
         'v-alert--prominent': this.prominent,
-        'v-alert--text': this.text
+        'v-alert--text': this.text,
       }
 
       if (this.border) {
@@ -160,12 +161,8 @@ export default mixins(
         (Boolean(this.border) && this.coloredBorder)
       )
     },
-    // TODO: remove deprecated
-    hasOutline (): boolean {
-      return this.outline || this.outlined
-    },
     hasText (): boolean {
-      return this.text || this.hasOutline
+      return this.text || this.outlined
     },
     iconColor (): string | undefined {
       return this.hasColoredIcon ? this.computedColor : undefined
@@ -174,16 +171,18 @@ export default mixins(
       if (
         this.type &&
         !this.coloredBorder &&
-        !this.hasOutline
+        !this.outlined
       ) return true
 
       return Themeable.options.computed.isDark.call(this)
-    }
+    },
   },
 
   created () {
-    /* istanbul ignore if */
-    if (this.outline) deprecate('outline', 'outlined')
+    /* istanbul ignore next */
+    if (this.$attrs.hasOwnProperty('outline')) {
+      breaking('outline', 'outlined', this)
+    }
   },
 
   methods: {
@@ -195,29 +194,32 @@ export default mixins(
         this.$slots.append,
         this.$scopedSlots.close
           ? this.$scopedSlots.close({ toggle: this.toggle })
-          : this.__cachedDismissible
+          : this.__cachedDismissible,
       ]
 
       const data: VNodeData = {
-        staticClass: 'v-alert__wrapper'
+        staticClass: 'v-alert__wrapper',
       }
 
       return this.$createElement('div', data, children)
     },
     genContent (): VNode {
       return this.$createElement('div', {
-        staticClass: 'v-alert__content'
+        staticClass: 'v-alert__content',
       }, this.$slots.default)
     },
     genAlert (): VNode {
       let data: VNodeData = {
         staticClass: 'v-alert',
+        attrs: {
+          role: 'alert',
+        },
         class: this.classes,
         style: this.styles,
         directives: [{
           name: 'show',
-          value: this.isActive
-        }]
+          value: this.isActive,
+        }],
       }
 
       if (!this.coloredBorder) {
@@ -230,7 +232,7 @@ export default mixins(
     /** @public */
     toggle () {
       this.isActive = !this.isActive
-    }
+    },
   },
 
   render (h): VNode {
@@ -242,8 +244,8 @@ export default mixins(
       props: {
         name: this.transition,
         origin: this.origin,
-        mode: this.mode
-      }
+        mode: this.mode,
+      },
     }, [render])
-  }
+  },
 })

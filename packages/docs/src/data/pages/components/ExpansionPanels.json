@@ -34,14 +34,26 @@
       "type": "section",
       "children": [
         {
+          "type": "playground",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "examples",
           "value": [
-            "external",
-            "disabledAndReadonly",
-            "popout",
-            "customIcons",
-            "focusable",
-            "advanced"
+            "simple/disabled",
+            "simple/readonly",
+            "simple/popout",
+            "simple/inset",
+            "simple/accordion",
+            "simple/focusable",
+            "intermediate/external",
+            "intermediate/custom-icons",
+            "complex/advanced"
           ]
         }
       ]

@@ -10,7 +10,7 @@ export default Vue.extend({
   name: 'colorable',
 
   props: {
-    color: String
+    color: String,
   },
 
   methods: {
@@ -31,12 +31,12 @@ export default Vue.extend({
         data.style = {
           ...data.style as object,
           'background-color': `${color}`,
-          'border-color': `${color}`
+          'border-color': `${color}`,
         }
       } else if (color) {
         data.class = {
           ...data.class,
-          [color]: true
+          [color]: true,
         }
       }
 
@@ -60,19 +60,19 @@ export default Vue.extend({
         data.style = {
           ...data.style as object,
           'color': `${color}`,
-          'caret-color': `${color}`
+          'caret-color': `${color}`,
         }
       } else if (color) {
         const [colorName, colorModifier] = color.toString().trim().split(' ', 2) as (string | undefined)[]
         data.class = {
           ...data.class,
-          [colorName + '--text']: true
+          [colorName + '--text']: true,
         }
         if (colorModifier) {
           data.class['text--' + colorModifier] = true
         }
       }
       return data
-    }
-  }
+    },
+  },
 })

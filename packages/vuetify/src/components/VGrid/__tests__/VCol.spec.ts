@@ -16,8 +16,8 @@ describe('layout > col', () => {
   it('renders custom root element when tag prop set', async () => {
     const wrapper = mount(VCol, {
       propsData: {
-        tag: 'span'
-      }
+        tag: 'span',
+      },
     })
 
     expect(wrapper.is('span')).toBe(true)
@@ -34,8 +34,8 @@ describe('layout > col', () => {
         sm: 5,
         md: 4,
         lg: 3,
-        xl: 2
-      }
+        xl: 2,
+      },
     })
 
     expect(wrapper.is('div')).toBe(true)
@@ -50,8 +50,8 @@ describe('layout > col', () => {
   it('should not have class "col" when only single breakpoint prop specified', async () => {
     const wrapper = mount(VCol, {
       propsData: {
-        sm: 5
-      }
+        sm: 5,
+      },
     })
 
     expect(wrapper.is('div')).toBe(true)
@@ -66,8 +66,8 @@ describe('layout > col', () => {
         offsetSm: 5,
         offsetMd: 4,
         offsetLg: 3,
-        offsetXl: 2
-      }
+        offsetXl: 2,
+      },
     })
 
     expect(wrapper.is('div')).toBe(true)
@@ -87,8 +87,8 @@ describe('layout > col', () => {
         orderSm: 5,
         orderMd: 4,
         orderLg: 3,
-        orderXl: 2
-      }
+        orderXl: 2,
+      },
     })
 
     expect(wrapper.is('div')).toBe(true)
@@ -108,8 +108,8 @@ describe('layout > col', () => {
         sm: true,
         md: true,
         lg: true,
-        xl: true
-      }
+        xl: true,
+      },
     })
 
     expect(wrapper.is('div')).toBe(true)
@@ -127,8 +127,8 @@ describe('layout > col', () => {
         sm: '',
         md: '',
         lg: '',
-        xl: ''
-      }
+        xl: '',
+      },
     })
 
     expect(wrapper.is('div')).toBe(true)
@@ -142,8 +142,8 @@ describe('layout > col', () => {
   it('should apply ".align-self-*" class with "align-self" prop', async () => {
     const wrapper = mount(VCol, {
       propsData: {
-        alignSelf: 'center'
-      }
+        alignSelf: 'center',
+      },
     })
 
     expect(wrapper.is('div')).toBe(true)

@@ -12,7 +12,7 @@
           v-model="search"
           prepend-inner-icon="mdi-comment-search"
           label="Search"
-          box
+          filled
           single-line
           clearable
         />
@@ -63,7 +63,7 @@
     name: 'FrequentlyAskedQuestions',
 
     data: () => ({
-      search: null
+      search: null,
     }),
 
     computed: {
@@ -84,8 +84,8 @@
             a.indexOf(search) > -1
           )
         })
-      }
-    }
+      },
+    },
   }
 </script>
 

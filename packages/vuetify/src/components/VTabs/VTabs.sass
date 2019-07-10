@@ -8,6 +8,15 @@
   .v-tab--disabled
     color: map-get($material, 'tabs')
 
+  .v-tabs-bar
+    background-color: map-get($material, 'cards')
+
+  .v-tab
+    +states($material)
+
++theme(v-tabs-items) using ($material)
+  background-color: map-get($material, 'cards')
+
 .v-tabs-bar.theme--dark
   .v-tab:not(.v-tab--active):not(.v-tab--disabled)
     opacity: .7
@@ -15,6 +24,7 @@
 // Block
 .v-tabs
   flex: 1 1 auto
+  width: 100%
 
   .v-menu__activator
     height: 100%
@@ -44,22 +54,21 @@
   transition: none
   user-select: none
 
+  // Needs increased specificity
+  &.v-tab
+    color: inherit
+
   &:before
     background-color: currentColor
     bottom: 0
     content: ''
     left: 0
     opacity: 0
+    pointer-events: none
     position: absolute
     right: 0
     top: 0
     transition: $primary-transition
-
-  &:hover:before
-    opacity: $tabs-item-hover-opacity
-
-  &:focus:before
-    opacity: $tabs-item-focus-opacity
 
   &:not(.v-tab-disabled)
     cursor: pointer
@@ -89,6 +98,19 @@
 
   .v-tabs-slider-wrapper + *
     margin-left: auto
+
+  +rtl()
+    .v-tabs-bar__content > *:last-child
+      margin-right: 0
+      margin-left: auto
+
+    .v-tabs-bar__content > *:first-child:not(.v-tabs-slider-wrapper)
+      margin-left: 0
+      margin-right: auto
+
+    .v-tabs-slider-wrapper + *
+      margin-left: 0
+      margin-right: auto
 
 .v-tabs--fixed-tabs
   .v-tab
@@ -125,27 +147,31 @@
 .v-tabs--vertical
   display: flex
 
-  .v-tabs-bar
+  & > .v-tabs-bar
     height: auto
 
-  .v-tabs-bar__content
-    flex-direction: column
+    .v-tabs-bar__content
+      flex-direction: column
 
-  .v-tab
-    height: $tabs-item-vertical-height
+    .v-tab
+      height: $tabs-item-vertical-height
 
-  .v-tabs-slider
-    height: 100%
+    .v-tabs-slider
+      height: 100%
 
-  .v-window
+  & > .v-window
     flex: 1 1 auto
 
   &.v-tabs--icons-and-text
-    .v-tab
-      height: $tabs-item-vertical-icons-and-text-height
+    & > .v-tabs-bar
+      .v-tab
+        height: $tabs-item-vertical-icons-and-text-height
 
 .v-tab--active
   color: inherit
+
+  &.v-tab:not(:focus)::before
+    opacity: 0
 
   .v-icon
     color: inherit
@@ -153,6 +179,3 @@
 .v-tab--disabled
   pointer-events: none
   opacity: .5
-
-  &:before
-    opacity: 0

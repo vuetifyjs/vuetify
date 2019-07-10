@@ -2,6 +2,6 @@ const { inputSlots } = require('../variables')
 
 module.exports = {
   'v-switch': {
-    slots: inputSlots.concat(['label'])
-  }
+    slots: inputSlots.concat(['label']),
+  },
 }

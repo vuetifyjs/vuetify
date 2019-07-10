@@ -5,7 +5,7 @@ const alias = {
   api: '@vuetify/api-generator',
   docs: 'vuetifyjs.com',
   kitchen: '@vuetify/kitchen',
-  dev: 'vuetify'
+  dev: 'vuetify',
 }
 target = alias[target] || target
 

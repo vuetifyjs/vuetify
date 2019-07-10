@@ -16,9 +16,9 @@
     props: {
       value: {
         type: String,
-        default: ''
-      }
-    }
+        default: '',
+      },
+    },
   }
 </script>
 
@@ -26,6 +26,7 @@
 .app-alert
   a
     color: #fff
+    text-decoration: underline
 
   p
     margin: 0 !important

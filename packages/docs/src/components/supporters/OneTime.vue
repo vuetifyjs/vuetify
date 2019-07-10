@@ -15,7 +15,7 @@
       tag="v-divider"
     />
 
-    <v-flex xs12>
+    <v-flex xs12 mb-3>
       <doc-markdown>oneTimeBlurb</doc-markdown>
     </v-flex>
 
@@ -24,12 +24,14 @@
       text-xs-center
     >
       <a
+        aria-label="Support Vuetify through Paypal"
         href="https://paypal.me/vuetify"
         rel="noopener"
         target="_blank"
         title="Support Vuetify through Paypal"
       >
         <v-img
+          alt="Paypal Logo"
           class="d-inline-block"
           src="https://cdn.vuetifyjs.com/images/social/paypal.png"
           width="150"

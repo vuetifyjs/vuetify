@@ -7,12 +7,12 @@ export default Vue.extend({
   props: {
     tag: {
       type: String,
-      default: 'div'
+      default: 'div',
     },
     fluid: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   render (h, { props, data, children }) {
     return h(
@@ -20,10 +20,10 @@ export default Vue.extend({
       mergeData(data, {
         class: {
           container: !props.fluid,
-          'container-fluid': props.fluid
-        }
+          'container-fluid': props.fluid,
+        },
       }),
       children
     )
-  }
+  },
 })

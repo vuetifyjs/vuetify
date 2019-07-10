@@ -8,7 +8,7 @@ import VIcon from '../VIcon'
 import {
   createLocalVue,
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VIcon', () => {
@@ -24,8 +24,8 @@ describe('VIcon', () => {
         context: Object.assign({
           children: [name],
           data: {},
-          props: {}
-        }, ctx)
+          props: {},
+        }, ctx),
       })
     }
   })
@@ -34,7 +34,7 @@ describe('VIcon', () => {
     const wrapper = mountFunction()
 
     expect(wrapper.text()).toBe('add')
-    expect(wrapper.element.className).toBe('v-icon material-icons theme--light')
+    expect(wrapper.element.className).toBe('v-icon notranslate material-icons theme--light')
   })
 
   it('should render a colored component', () => {
@@ -60,7 +60,7 @@ describe('VIcon', () => {
     const SIZE_MAP = {
       small: '16px',
       large: '36px',
-      xLarge: '40px'
+      xLarge: '40px',
     }
 
     Object.keys(SIZE_MAP).forEach(size => {
@@ -104,37 +104,37 @@ describe('VIcon', () => {
     const wrapper = mountFunction({ props: {} }, 'fa-add')
 
     expect(wrapper.text()).toBe('')
-    expect(wrapper.element.className).toBe('v-icon fa fa-add theme--light')
+    expect(wrapper.element.className).toBe('v-icon notranslate fa fa-add theme--light')
   })
 
   it('should support font awesome 5 icons when using <icon>- prefix', () => {
     const wrapper = mountFunction({ props: {} }, 'fab fa-facebook')
 
     expect(wrapper.text()).toBe('')
-    expect(wrapper.element.className).toBe('v-icon fab fa-facebook theme--light')
+    expect(wrapper.element.className).toBe('v-icon notranslate fab fa-facebook theme--light')
   })
 
   it('should allow the use of v-text', () => {
     const wrapper = mountFunction({
-      domProps: { textContent: 'fa-home' }
+      domProps: { textContent: 'fa-home' },
     })
 
     expect(wrapper.text()).toBe('')
-    expect(wrapper.element.className).toBe('v-icon fa fa-home theme--light')
+    expect(wrapper.element.className).toBe('v-icon notranslate fa fa-home theme--light')
   })
 
   it('should allow the use of v-html', () => {
     const wrapper = mountFunction({
-      domProps: { innerHTML: 'fa-home' }
+      domProps: { innerHTML: 'fa-home' },
     })
 
     expect(wrapper.text()).toBe('')
-    expect(wrapper.element.className).toBe('v-icon fa fa-home theme--light')
+    expect(wrapper.element.className).toBe('v-icon notranslate fa fa-home theme--light')
   })
 
   it('set font size from helper prop', async () => {
     const iconFactory = size => mountFunction({
-      props: { [size]: true }
+      props: { [size]: true },
     })
 
     const small = iconFactory('small')
@@ -153,14 +153,14 @@ describe('VIcon', () => {
   it('should have proper classname', () => {
     const wrapper = mountFunction({
       props: {
-        color: 'primary'
+        color: 'primary',
       },
       domProps: {
-        innerHTML: 'fa-lock'
-      }
+        innerHTML: 'fa-lock',
+      },
     })
 
-    expect(wrapper.element.className).toBe('v-icon fa fa-lock theme--light primary--text')
+    expect(wrapper.element.className).toBe('v-icon notranslate fa fa-lock theme--light primary--text')
   })
 
   describe('for global icon', () => {
@@ -169,9 +169,9 @@ describe('VIcon', () => {
         icons: {
           values: {
             checkboxOn: 'check_box',
-            prev: 'chevron_left'
-          }
-        }
+            prev: 'chevron_left',
+          },
+        },
       }
     })
 
@@ -179,14 +179,14 @@ describe('VIcon', () => {
       const wrapper = mountFunction({}, '$vuetify.icons.checkboxOn')
 
       expect(wrapper.text()).toBe('check_box')
-      expect(wrapper.element.className).toBe('v-icon material-icons theme--light')
+      expect(wrapper.element.className).toBe('v-icon notranslate material-icons theme--light')
     })
 
     it('should render MD left icon from $vuetify.icons.prev', () => {
       const wrapper = mountFunction({}, '$vuetify.icons.prev')
 
       expect(wrapper.text()).toBe('chevron_left')
-      expect(wrapper.element.className).toBe('v-icon material-icons theme--light')
+      expect(wrapper.element.className).toBe('v-icon notranslate material-icons theme--light')
     })
   })
 
@@ -207,9 +207,9 @@ describe('VIcon', () => {
       props: ['name'],
       render (h) {
         return h('div', {
-          class: 'test-component'
+          class: 'test-component',
         }, this.name)
-      }
+      },
     })
 
     beforeEach(() => {
@@ -219,11 +219,11 @@ describe('VIcon', () => {
             testIcon: {
               component: getTestComponent(),
               props: {
-                name: 'test icon'
-              }
-            }
-          }
-        }
+                name: 'test icon',
+              },
+            },
+          },
+        },
       }
     })
 
@@ -231,7 +231,7 @@ describe('VIcon', () => {
       const wrapper = mountFunction({}, '$vuetify.icons.testIcon')
 
       expect(wrapper.text()).toBe('test icon')
-      expect(wrapper.element.className).toBe('v-icon test-component v-icon--is-component theme--light')
+      expect(wrapper.element.className).toBe('v-icon notranslate test-component v-icon--is-component theme--light')
       expect(wrapper.html()).toMatchSnapshot()
     })
 
@@ -250,7 +250,7 @@ describe('VIcon', () => {
 
     it('should set font size from helper prop', async () => {
       const iconFactory = size => mountFunction({
-        props: { [size]: true }
+        props: { [size]: true },
       }, '$vuetify.icons.testIcon')
 
       const small = iconFactory('small')

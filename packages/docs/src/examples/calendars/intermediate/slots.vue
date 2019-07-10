@@ -43,10 +43,10 @@
         '2019-01-04': [2, 90],
         '2019-01-03': [10, 32],
         '2019-01-02': [80, 10, 10],
-        '2019-01-01': [20, 25, 10]
+        '2019-01-01': [20, 25, 10],
       },
       colors: ['#1867c0', '#fb8c00', '#000000'],
-      category: ['Development', 'Meetings', 'Slacking']
-    })
+      category: ['Development', 'Meetings', 'Slacking'],
+    }),
   }
 </script>

@@ -6,7 +6,7 @@ import { ExtractVue } from '../../../util/mixins'
 import {
   mount,
   shallowMount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VSlideGroup.ts', () => {
@@ -21,11 +21,11 @@ describe('VSlideGroup.ts', () => {
           $vuetify: {
             rtl: false,
             breakpoint: {
-              width: 1920
-            }
-          }
+              width: 1920,
+            },
+          },
         },
-        ...options
+        ...options,
       })
     }
   })
@@ -33,11 +33,11 @@ describe('VSlideGroup.ts', () => {
   it('should conditionally have affixes, prev and next', () => {
     const wrapper = mountFunction({
       data: () => ({
-        isOverflowing: true
+        isOverflowing: true,
       }),
       propsData: {
-        showArrows: true
-      }
+        showArrows: true,
+      },
     })
 
     expect(wrapper.vm.hasAffixes).toBe(true)
@@ -48,8 +48,8 @@ describe('VSlideGroup.ts', () => {
       scrollOffset: 100,
       widths: {
         content: 1000,
-        wrapper: 500
-      }
+        wrapper: 500,
+      },
     })
 
     expect(wrapper.vm.hasPrev).toBe(true)
@@ -58,8 +58,8 @@ describe('VSlideGroup.ts', () => {
       scrollOffset: -100,
       widths: {
         content: 1000,
-        wrapper: 500
-      }
+        wrapper: 500,
+      },
     })
 
     expect(wrapper.vm.hasNext).toBe(true)
@@ -75,19 +75,97 @@ describe('VSlideGroup.ts', () => {
     expect(wrapper.vm.isMobile).toBe(true)
   })
 
+  it('should compute newOffset for active element', async () => {
+    const { calculateNewOffset } = mountFunction().vm
+    let currentOffset = 0
+    const testOffsetAndUpdate = (direction: 'prev' | 'next', rtl: boolean, expectedOffset: number) => {
+      currentOffset = calculateNewOffset(direction, {
+        content: 1000,
+        wrapper: 400,
+      }, rtl, currentOffset)
+
+      expect(currentOffset).toBe(expectedOffset)
+    }
+
+    testOffsetAndUpdate('next', false, 400)
+    testOffsetAndUpdate('next', false, 600)
+    testOffsetAndUpdate('next', false, 600)
+    testOffsetAndUpdate('prev', false, 200)
+    testOffsetAndUpdate('prev', false, 0)
+    testOffsetAndUpdate('prev', false, 0)
+    // RTL
+    currentOffset = 0
+    testOffsetAndUpdate('next', true, -400)
+    testOffsetAndUpdate('next', true, -600)
+    testOffsetAndUpdate('next', true, -600)
+    testOffsetAndUpdate('prev', true, -200)
+    testOffsetAndUpdate('prev', true, -0)
+    testOffsetAndUpdate('prev', true, -0)
+  })
+
+  it('should compute updatedOffset for active element', async () => {
+    const { calculateUpdatedOffset } = mountFunction().vm
+    const testOffset = (offsetLeft: number, rtl: boolean, expectedOffset: number) => {
+      const offset = calculateUpdatedOffset({
+        offsetLeft,
+        clientWidth: 20,
+      } as HTMLElement, {
+        content: 1000,
+        wrapper: 500,
+      }, rtl, 0)
+
+      expect(offset).toBe(expectedOffset)
+    }
+
+    testOffset(10, false, 0)
+    testOffset(400, false, 0)
+    testOffset(600, false, 126)
+    testOffset(960, false, 486)
+    // RTL
+    testOffset(10, true, -496)
+    testOffset(400, true, -106)
+    testOffset(600, true, 0)
+    testOffset(960, true, 0)
+  })
+
+  it('should compute centeredOffset for active element', async () => {
+    const { calculateCenteredOffset } = mountFunction().vm
+    const testOffset = (offsetLeft: number, rtl: boolean, expectedOffset: number) => {
+      const offset = calculateCenteredOffset({
+        offsetLeft,
+        clientWidth: 20,
+      } as HTMLElement, {
+        content: 1000,
+        wrapper: 500,
+      }, rtl)
+
+      expect(offset).toBe(expectedOffset)
+    }
+
+    testOffset(10, false, 0)
+    testOffset(400, false, 160)
+    testOffset(600, false, 360)
+    testOffset(960, false, 500)
+    // RTL
+    testOffset(10, true, -500)
+    testOffset(400, true, -340)
+    testOffset(600, true, -140)
+    testOffset(960, true, -0)
+  })
+
   // TODO: Unsure what we're actually testing, willChange not found in jest 24
   it.skip('should call on touch methods', async () => {
     const wrapper = mountFunction({
       data: () => ({
-        isOverflowing: true
-      })
+        isOverflowing: true,
+      }),
     })
 
     expect(wrapper.vm.scrollOffset).toBe(0)
 
     const touchstartEvent = {
       touchstartX: 10,
-      touchmoveX: 0
+      touchmoveX: 0,
     }
 
     wrapper.vm.onTouchStart(touchstartEvent)
@@ -98,7 +176,7 @@ describe('VSlideGroup.ts', () => {
 
     const touchmoveEvent = {
       touchstartX: 10,
-      touchmoveX: 100
+      touchmoveX: 100,
     }
     wrapper.vm.onTouchMove(touchmoveEvent)
 
@@ -110,7 +188,7 @@ describe('VSlideGroup.ts', () => {
 
     wrapper.setData({
       scrollOffset: 90,
-      isOverflowing: true
+      isOverflowing: true,
     })
 
     wrapper.vm.onTouchEnd()
@@ -129,7 +207,8 @@ describe('VSlideGroup.ts', () => {
     const fn = jest.fn()
     const event = {
       touchstartX: 0,
-      touchmoveX: 0
+      touchmoveX: 0,
+      stopPropagation: () => {},
     }
 
     wrapper.vm.overflowCheck(event, fn)
@@ -147,12 +226,12 @@ describe('VSlideGroup.ts', () => {
     const wrapper = mountFunction({
       methods: { scrollTo, setWidths },
       propsData: {
-        showArrows: true
+        showArrows: true,
       },
       listeners: {
         'click:prev': onClick,
-        'click:next': onClick
-      }
+        'click:next': onClick,
+      },
     })
 
     wrapper.setData({
@@ -160,8 +239,8 @@ describe('VSlideGroup.ts', () => {
       scrollOffset: 200,
       widths: {
         content: 1000,
-        wrapper: 500
-      }
+        wrapper: 500,
+      },
     })
 
     await wrapper.vm.$nextTick()
@@ -180,23 +259,23 @@ describe('VSlideGroup.ts', () => {
       computed: {
         hasAffixes: () => true,
         hasNext: () => true,
-        hasPrev: () => true
+        hasPrev: () => true,
       },
       propsData: {
-        showArrows: true
+        showArrows: true,
       },
       scopedSlots: {
         prev () {
           return this.$createElement('div', {
-            staticClass: 'fizz'
+            staticClass: 'fizz',
           }, 'foo')
         },
         next () {
           return this.$createElement('div', {
-            staticClass: 'fizz'
+            staticClass: 'fizz',
           }, 'bar')
-        }
-      }
+        },
+      },
     })
 
     wrapper.setData({ isOverflowing: true })
@@ -209,16 +288,16 @@ describe('VSlideGroup.ts', () => {
       computed: {
         hasAffixes: () => true,
         hasNext: () => true,
-        hasPrev: () => true
+        hasPrev: () => true,
       },
       propsData: {
-        showArrows: true
+        showArrows: true,
       },
       mocks: {
         $vuetify: {
-          rtl: true
-        }
-      }
+          rtl: true,
+        },
+      },
     })
 
     const html1 = wrapper.html()

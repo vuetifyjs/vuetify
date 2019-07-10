@@ -1,5 +1,5 @@
 export interface VuetifyBreakpointOptions {
-  thresholds: Partial<VuetifyBreakpointThresholds>
+  thresholds?: Partial<VuetifyBreakpointThresholds>
   scrollBarWidth?: number
 }
 

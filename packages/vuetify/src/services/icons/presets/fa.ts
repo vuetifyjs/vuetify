@@ -27,9 +27,10 @@ const icons: VuetifyIcons = {
   ratingEmpty: 'far fa-star',
   ratingFull: 'fas fa-star',
   ratingHalf: 'fas fa-star-half',
+  loading: 'fas fa-sync',
   first: 'fas fa-step-backward',
   last: 'fas fa-step-forward',
-  unfold: 'fas fa-arrows-alt-v'
+  unfold: 'fas fa-arrows-alt-v',
 }
 
 export default icons

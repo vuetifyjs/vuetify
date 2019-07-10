@@ -15,7 +15,7 @@ const defaultMenuProps = {
   ...VSelectMenuProps,
   offsetY: true,
   offsetOverflow: true,
-  transition: false
+  transition: false,
 }
 
 /* @vue/component */
@@ -25,38 +25,33 @@ export default VSelect.extend({
   props: {
     allowOverflow: {
       type: Boolean,
-      default: true
+      default: true,
     },
-    browserAutocomplete: {
-      type: String,
-      default: 'off'
+    autoSelectFirst: {
+      type: Boolean,
+      default: false,
     },
     filter: {
       type: Function,
       default: (item: any, queryText: string, itemText: string) => {
         return itemText.toLocaleLowerCase().indexOf(queryText.toLocaleLowerCase()) > -1
-      }
+      },
     },
     hideNoData: Boolean,
+    menuProps: {
+      type: VSelect.options.props.menuProps.type,
+      default: () => defaultMenuProps,
+    },
     noFilter: Boolean,
     searchInput: {
       type: String as PropType<string | undefined>,
-      default: undefined
+      default: undefined,
     },
-    menuProps: {
-      type: VSelect.options.props.menuProps.type,
-      default: () => defaultMenuProps
-    },
-    autoSelectFirst: {
-      type: Boolean,
-      default: false
-    }
   },
 
   data () {
     return {
-      attrsInput: null,
-      lazySearch: this.searchInput
+      lazySearch: this.searchInput,
     }
   },
 
@@ -65,7 +60,7 @@ export default VSelect.extend({
       return {
         ...VSelect.options.computed.classes.call(this),
         'v-autocomplete': true,
-        'v-autocomplete--is-selecting-index': this.selectedIndex > -1
+        'v-autocomplete--is-selecting-index': this.selectedIndex > -1,
       }
     },
     computedItems (): object[] {
@@ -97,7 +92,7 @@ export default VSelect.extend({
         this.lazySearch = val
 
         this.$emit('update:searchInput', val)
-      }
+      },
     },
     isAnyValueAllowed (): boolean {
       return false
@@ -124,7 +119,7 @@ export default VSelect.extend({
       (props as any).contentClass = `v-autocomplete__content ${(props as any).contentClass || ''}`.trim()
       return {
         ...defaultMenuProps,
-        ...props
+        ...props,
       }
     },
     searchIsDirty (): boolean {
@@ -149,11 +144,11 @@ export default VSelect.extend({
           !this.isSearching ||
           !this.filteredItems.length
         ),
-        searchInput: this.internalSearch
+        searchInput: this.internalSearch,
       }
 
       return data
-    }
+    },
   },
 
   watch: {
@@ -190,7 +185,7 @@ export default VSelect.extend({
       this.lazySearch = val
     },
     internalSearch: 'onInternalSearchChanged',
-    itemText: 'updateSelf'
+    itemText: 'updateSelf',
   },
 
   created () {
@@ -198,9 +193,22 @@ export default VSelect.extend({
   },
 
   methods: {
-    onFilteredItemsChanged (val: never[]) {
+    onFilteredItemsChanged (val: never[], oldVal: never[]) {
+      // TODO: How is the watcher triggered
+      // for duplicate items? no idea
+      if (val === oldVal) return
+
+      this.setMenuIndex(-1)
+
       this.$nextTick(() => {
-        this.setMenuIndex(val.length > 0 && (val.length === 1 || this.autoSelectFirst) ? 0 : -1)
+        if (
+          !this.internalSearch ||
+          (val.length !== 1 &&
+            !this.autoSelectFirst)
+        ) return
+
+        this.$refs.menu.getTiles()
+        this.setMenuIndex(0)
       })
     },
     onInternalSearchChanged () {
@@ -219,7 +227,7 @@ export default VSelect.extend({
         keyCodes.backspace,
         keyCodes.left,
         keyCodes.right,
-        keyCodes.delete
+        keyCodes.delete,
       ].includes(keyCode)) return
 
       const index = this.selectedItems.length - 1
@@ -245,7 +253,7 @@ export default VSelect.extend({
 
       if ([
         keyCodes.backspace,
-        keyCodes.delete
+        keyCodes.delete,
       ].includes(keyCode) &&
         !this.getDisabled(currentItem)
       ) {
@@ -275,11 +283,16 @@ export default VSelect.extend({
       input.data = input.data || {}
       input.data.attrs = input.data.attrs || {}
       input.data.domProps = input.data.domProps || {}
-
-      input.data.attrs.role = 'combobox'
       input.data.domProps.value = this.internalSearch
 
       return input
+    },
+    genInputSlot () {
+      const slot = VSelect.options.methods.genInputSlot.call(this)
+
+      slot.data!.attrs!.role = 'combobox'
+
+      return slot
     },
     genSelections () {
       return this.hasSlot || this.multiple
@@ -295,11 +308,6 @@ export default VSelect.extend({
 
       this.activateMenu()
     },
-    onEnterDown () {
-      // Avoid invoking this method
-      // will cause updateSelf to
-      // be called emptying search
-    },
     onInput (e: Event) {
       if (
         this.selectedIndex > -1 ||
@@ -310,12 +318,8 @@ export default VSelect.extend({
       const value = target.value
 
       // If typing and menu is not currently active
-      if (target.value) {
-        this.activateMenu()
-        if (!this.isAnyValueAllowed) this.setMenuIndex(0)
-      }
+      if (target.value) this.activateMenu()
 
-      this.mask && this.resetSelections(target)
       this.internalSearch = value
       this.badInput = target.validity && target.validity.badInput
     },
@@ -330,9 +334,16 @@ export default VSelect.extend({
       // proper location
       this.changeSelectedIndex(keyCode)
     },
+    onSpaceDown (e: KeyboardEvent) { /* noop */ },
     onTabDown (e: KeyboardEvent) {
       VSelect.options.methods.onTabDown.call(this, e)
       this.updateSelf()
+    },
+    onUpDown () {
+      // For autocomplete / combobox, cycling
+      // interfers with native up/down behavior
+      // instead activate the menu
+      this.activateMenu()
     },
     setSelectedItems () {
       VSelect.options.methods.setSelectedItems.call(this)
@@ -374,6 +385,6 @@ export default VSelect.extend({
     },
     hasItem (item: any) {
       return this.selectedValues.indexOf(this.getValue(item)) > -1
-    }
-  }
+    },
+  },
 })

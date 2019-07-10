@@ -1,16 +1,7 @@
 {
   "header": "탐색 서랍 (Navigation drawer)",
   "headerText": "`v-navigation-drawer` 컴포넌트는 사용자가 어플리케이션 내에서 탐색(navigate) 할 때 활용할 수 있습니다. 탐색 서랍은 (**vue-router** 를 사용하거나 사용하지 않고) 바로 쓸 수 있도록 미리 설정되어 있습니다.",
-  "components": ["v-navigation-drawer"],
   "examples": {
-    "permanent": {
-      "header": "기본값 (Default)",
-      "desc": "탐색 서랍은 어플리케이션의 여러 페이지들에 대한 링크를 모아 놓는데 사용합니다."
-    },
-    "permanentClipped": {
-      "header": "색깔이 있는 서랍 (Colored drawer)",
-      "desc": "탐색 서랍은 어떤 어플리케이션 디자인에도 적합하게 커스터마이즈 될 수 있습니다. 어떤 컴포넌트든 서랍 안에 사용할 수 있는데 주로 사용하게 되는 컴포넌트는 `v-list` 와 모든 **list** 의 자식 컴포넌트, 그리고 `v-divder`일 겁니다."
-    },
     "permanentFloating": {
       "header": "영구적인 떠 있는 서랍 (Permanent floating drawer)",
       "desc": "탐색 서랍은 카드안에 위치해서 컨탠츠 배경 위로 떠 있을 수 있습니다."
@@ -34,12 +25,8 @@
     }
   },
   "props": {
-    "absolute": "Mixins.Positionable.props.absolute",
-    "clipped": "A clipped drawer rests under the application toolbar",
     "disableResizeWatcher": "모바일과 데스크탑에서 서랍의 크기가 재조정 될 경우 자동으로 서랍을 열거나 닫습니다.",
     "disableRouteWatcher": "라우트가 변경될때 서랍을 열지 않습니다.",
-    "fixed": "Mixins.Positionable.props.fixed",
-    "floating": "A floating drawer has no visible container (no border-right)",
     "hideOverlay": "오버레이를 감춥니다. (Hide the display of the overlay)",
     "miniVariantWidth": "`mini` 프롭이 활성화 될때, 너비를 지정",
     "miniVariant": "밀집된 탐색 서랍 너비. **.sync** 변경자 사용 가능. 서랍을 클릭하면 서랍이 다시 열림",

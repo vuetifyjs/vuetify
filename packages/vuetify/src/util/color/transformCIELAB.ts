@@ -21,7 +21,7 @@ export function fromXYZ (xyz: XYZ): LAB {
   return [
     116 * transformedY - 16,
     500 * (transform(xyz[0] / 0.95047) - transformedY),
-    200 * (transformedY - transform(xyz[2] / 1.08883))
+    200 * (transformedY - transform(xyz[2] / 1.08883)),
   ]
 }
 
@@ -31,6 +31,6 @@ export function toXYZ (lab: LAB): XYZ {
   return [
     transform(Ln + lab[1] / 500) * 0.95047,
     transform(Ln),
-    transform(Ln - lab[2] / 200) * 1.08883
+    transform(Ln - lab[2] / 200) * 1.08883,
   ]
 }

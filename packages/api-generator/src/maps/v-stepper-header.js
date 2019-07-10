@@ -1,5 +1,5 @@
 module.exports = {
   'v-stepper-header': {
-    slots: ['default']
-  }
+    slots: ['default'],
+  },
 }

@@ -3,7 +3,7 @@ import { Lang } from '../../../services/lang'
 import {
   mount,
   MountOptions,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 import Vue from 'vue'
 
@@ -11,9 +11,9 @@ Vue.prototype.$vuetify = {
   icons: {
     values: {
       next: 'mdi-chevron-right',
-      prev: 'mdi-chevron-left'
-    }
-  }
+      prev: 'mdi-chevron-left',
+    },
+  },
 }
 
 describe('VDatePicker.ts', () => {
@@ -26,9 +26,17 @@ describe('VDatePicker.ts', () => {
         mocks: {
           $vuetify: {
             rtl: false,
-            lang: new Lang()
-          }
-        }
+            lang: new Lang({
+              locales: {
+                en: {
+                  datePicker: {
+                    itemsSelected: 'i has {0} items',
+                  },
+                },
+              },
+            }),
+          },
+        },
       })
     }
   })
@@ -38,12 +46,12 @@ describe('VDatePicker.ts', () => {
       propsData: {
         value: '2013-05',
         type: 'month',
-        reactive: true
-      }
+        reactive: true,
+      },
     })
 
     wrapper.setData({
-      activePicker: 'YEAR'
+      activePicker: 'YEAR',
     })
 
     const input = jest.fn()
@@ -63,12 +71,12 @@ describe('VDatePicker.ts', () => {
       propsData: {
         value: '2013-05',
         type: 'month',
-        allowedDates: () => false
-      }
+        allowedDates: () => false,
+      },
     })
 
     wrapper.setData({
-      activePicker: 'YEAR'
+      activePicker: 'YEAR',
     })
 
     wrapper.vm.$on('input', cb)
@@ -81,8 +89,8 @@ describe('VDatePicker.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         value: '2013-05',
-        type: 'month'
-      }
+        type: 'month',
+      },
     })
 
     wrapper.vm.$on('input', cb)
@@ -95,8 +103,8 @@ describe('VDatePicker.ts', () => {
       propsData: {
         value: '2013-05',
         type: 'month',
-        scrollable: true
-      }
+        scrollable: true,
+      },
     })
 
     wrapper.findAll('.v-date-picker-table--month').at(0).trigger('wheel')
@@ -108,8 +116,8 @@ describe('VDatePicker.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         value: '2013-05-07',
-        type: 'month'
-      }
+        type: 'month',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -120,8 +128,8 @@ describe('VDatePicker.ts', () => {
       propsData: {
         value: '2013-05',
         type: 'month',
-        allowedDates: value => ['2013-01', '2013-03', '2013-05', '2013-07'].includes(value)
-      }
+        allowedDates: value => ['2013-01', '2013-03', '2013-05', '2013-07'].includes(value),
+      },
     })
 
     expect(wrapper.findAll('.v-date-picker-table--month tbody').at(0).html()).toMatchSnapshot()
@@ -132,8 +140,8 @@ describe('VDatePicker.ts', () => {
       propsData: {
         value: '2005-11-01',
         type: 'month',
-        monthFormat: date => `(${date.split('-')[1]})`
-      }
+        monthFormat: date => `(${date.split('-')[1]})`,
+      },
     })
 
     expect(wrapper.findAll('.v-date-picker-table--month tbody').at(0).html()).toMatchSnapshot()
@@ -145,8 +153,8 @@ describe('VDatePicker.ts', () => {
         type: 'month',
         value: '2005-11-01',
         color: 'primary',
-        headerColor: 'orange darken-1'
-      }
+        headerColor: 'orange darken-1',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -157,8 +165,8 @@ describe('VDatePicker.ts', () => {
       propsData: {
         type: 'month',
         value: '2005-11-01',
-        color: 'orange darken-1'
-      }
+        color: 'orange darken-1',
+      },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -168,8 +176,8 @@ describe('VDatePicker.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         value: '2005-11',
-        type: 'month'
-      }
+        type: 'month',
+      },
     })
 
     const [leftButton, rightButton] = wrapper.findAll('.v-date-picker-header button.v-btn').wrappers
@@ -185,8 +193,8 @@ describe('VDatePicker.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         value: '2005-11-01',
-        type: 'month'
-      }
+        type: 'month',
+      },
     })
 
     const button = wrapper.findAll('.v-date-picker-header__value button').at(0)
@@ -199,12 +207,12 @@ describe('VDatePicker.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         type: 'month',
-        value: '2005-11'
-      }
+        value: '2005-11',
+      },
     })
 
     wrapper.setData({
-      activePicker: 'YEAR'
+      activePicker: 'YEAR',
     })
 
     wrapper.findAll('.v-date-picker-years li.active + li').at(0).trigger('click')
@@ -216,8 +224,8 @@ describe('VDatePicker.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         value: null,
-        type: 'month'
-      }
+        type: 'month',
+      },
     })
 
     wrapper.setProps({ value: '2005-11' })
@@ -229,8 +237,8 @@ describe('VDatePicker.ts', () => {
       propsData: {
         type: 'month',
         prevIcon: 'block',
-        nextIcon: 'check'
-      }
+        nextIcon: 'check',
+      },
     })
 
     const icons = wrapper.findAll('.v-date-picker-header .v-icon').wrappers
@@ -238,12 +246,34 @@ describe('VDatePicker.ts', () => {
     expect(icons[1].element.textContent).toBe('check')
   })
 
+  it('should display translated title', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        multiple: true,
+        type: 'month',
+        value: ['2013-05'],
+      },
+    })
+
+    expect(wrapper.find('.v-date-picker-title__date').text()).toBe('May')
+
+    wrapper.setProps({
+      value: [],
+    })
+    expect(wrapper.find('.v-date-picker-title__date').text()).toBe('-')
+
+    wrapper.setProps({
+      value: ['2013-05', '2013-06', '2013-07'],
+    })
+    expect(wrapper.find('.v-date-picker-title__date').text()).toBe('i has 3 items')
+  })
+
   it('should emit click/dblclick:month event', async () => {
     const wrapper = mountFunction({
       propsData: {
         value: '2013-05',
-        type: 'month'
-      }
+        type: 'month',
+      },
     })
 
     const click = jest.fn()

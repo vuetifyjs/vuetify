@@ -5,5 +5,5 @@ import pad from './pad'
 export {
   createNativeLocaleFormatter,
   monthChange,
-  pad
+  pad,
 }

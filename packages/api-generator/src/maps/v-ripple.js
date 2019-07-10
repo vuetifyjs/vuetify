@@ -4,18 +4,18 @@ module.exports = {
       {
         name: 'value',
         default: '{}',
-        type: 'Object'
+        type: 'object',
       },
       {
         name: 'center',
         default: 'false',
-        type: 'Boolean'
+        type: 'boolean',
       },
       {
         name: 'class',
         default: '""',
-        type: 'string'
-      }
-    ]
-  }
+        type: 'string',
+      },
+    ],
+  },
 }

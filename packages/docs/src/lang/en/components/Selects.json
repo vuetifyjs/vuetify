@@ -1,9 +1,7 @@
 {
-  "header": "# Select",
+  "header": "# Selects",
   "headerText": "Select fields components are used for collecting user provided information from a list of options.",
-  "supplemental": [
-    "MaskTable"
-  ],
+  "objectAlert": "When using objects for the **items** prop, you must associate **item-text** and **item-value** with existing properties on your objects. These values are defaulted to **text** and **value** and can be changed.",
   "examples": {
     "usage": {
       "desc": ""
@@ -20,7 +18,7 @@
       "header": "### Multiple",
       "desc": "A multi-select can utilize `v-chip` as the display for selected items."
     },
-    "customTextAndValue": {
+    "custom-text-and-value": {
       "header": "### Customized item text and value",
       "desc": "You can specify the specific properties within your items array correspond to the text and value fields. By default, this is **text** and **value**. In this example we also use the `return-object` prop which will return the entire object of the selected item on selection."
     },
@@ -28,15 +26,26 @@
       "header": "### Prepend/Append item slots",
       "desc": "The `v-select` components can be optionally expanded with prepended and appended items. This is perfect for customized **select-all** functionality."
     },
-    "selectionAppearance": {
+    "selection-appearance": {
       "header": "### Change selection appearance",
       "desc": "The `selection` scoped slot can be used to customize the way selected values are shown in the input. This is great when you want something like `foo (+20 others)` or don't want the selection to occupy multiple lines."
+    },
+    "disabled": {
+      "header": "### Disabled",
+      "desc": "You cannot use disabled `v-select`."
+    },
+    "readonly": {
+      "header": "### Read-only",
+      "desc": "You cannot use read-only `v-select`, but it looks default."
+    },
+    "menu-props": {
+      "header": "### Custom menu props",
+      "desc": "Custom props can be passed directly to `v-menu` using `menuProps` prop. In this example menu is force directed to top and shifted to top."
     }
   },
   "props": {
     "attach": "Mixins.Detachable.props.attach",
     "autocomplete": "Filter the items in the list based on user input",
-    "browserAutocomplete": "Set browser autocompletion for the search input",
     "cacheItems": "Keeps a local _unique_ copy of all items that have been passed through the **items** prop.",
     "chips": "Changes display of selections to chips",
     "combobox": "The single select variant of **tags**",
@@ -48,7 +57,6 @@
     "editable": " Creates an editable button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "filter": "The function used for filtering items",
     "hideSelected": "Do not display in the select menu items that are already selected",
-    "itemAvatar": "Set property of **items**'s avatar value",
     "itemDisabled": "Set property of **items**'s disabled value",
     "itemText": "Set property of **items**'s text value",
     "itemValue": "Set property of **items**'s value - **must be primative**. Dot notation is supported",

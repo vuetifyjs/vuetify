@@ -4,7 +4,7 @@ import VCombobox from '../VCombobox'
 // Utilities
 import {
   mount,
-  Wrapper
+  Wrapper,
 } from '@vue/test-utils'
 import { keyCodes } from '../../../util/helpers'
 
@@ -21,13 +21,13 @@ describe('VCombobox.ts', () => {
         mocks: {
           $vuetify: {
             lang: {
-              t: (val: string) => val
+              t: (val: string) => val,
             },
             theme: {
-              dark: false
-            }
-          }
-        }
+              dark: false,
+            },
+          },
+        },
       })
     }
   })
@@ -38,8 +38,8 @@ describe('VCombobox.ts', () => {
       attachToDocument: true,
       propsData: Object.assign({
         multiple: true,
-        value: []
-      }, propsData)
+        value: [],
+      }, propsData),
     })
 
     wrapper.vm.$on('input', change)
@@ -57,12 +57,14 @@ describe('VCombobox.ts', () => {
     input.trigger('input')
     input.trigger('keydown.enter')
 
+    await wrapper.vm.$nextTick()
+
     expect(change).toHaveBeenCalledWith(['foo'])
   })
 
   it('should change selectedIndex with keyboard', async () => {
     const { wrapper } = createMultipleCombobox({
-      value: ['foo', 'bar']
+      value: ['foo', 'bar'],
     })
 
     const input = wrapper.find('input')
@@ -79,7 +81,7 @@ describe('VCombobox.ts', () => {
 
   it('should delete a tagged item when selected and backspace/delete is pressed', async () => {
     const { wrapper, change } = createMultipleCombobox({
-      value: ['foo', 'bar']
+      value: ['foo', 'bar'],
     })
 
     const input = wrapper.find('input')
@@ -102,55 +104,9 @@ describe('VCombobox.ts', () => {
     expect(wrapper.vm.selectedIndex).toBe(-1)
   })
 
-  it('should add a tag on tab using the first suggestion', async () => {
-    const { wrapper, change } = createMultipleCombobox({
-      items: ['bar']
-    })
-
-    const input = wrapper.find('input')
-    const element = input.element as HTMLInputElement
-    const menu = wrapper.find('.v-menu')
-
-    input.trigger('focus')
-    element.value = 'b'
-    input.trigger('input')
-    menu.trigger('keydown.down')
-
-    // Give DOM time to update
-    // list tile classes
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.isMenuActive).toBe(true)
-
-    input.trigger('keydown.tab')
-
-    expect(change).toHaveBeenCalledWith(['bar'])
-    expect(wrapper.vm.getMenuIndex()).toBe(0)
-  })
-
-  it('should add a tag on tab using the current searchValue', async () => {
-    const { wrapper, change } = createMultipleCombobox({
-      items: ['bar']
-    })
-
-    const input = wrapper.find('input')
-
-    input.trigger('focus')
-
-    wrapper.setProps({ searchInput: 'ba' })
-    input.trigger('keydown.tab')
-    await wrapper.vm.$nextTick()
-    expect(change).toHaveBeenCalledWith(['ba'])
-
-    wrapper.setProps({ searchInput: 'it' })
-    input.trigger('keydown.tab')
-    await wrapper.vm.$nextTick()
-    expect(change).toHaveBeenCalledWith(['ba', 'it'])
-  })
-
   it('should add a tag on enter using the current searchValue', async () => {
     const { wrapper, change } = createMultipleCombobox({
-      items: ['bar']
+      items: ['bar'],
     })
 
     const input = wrapper.find('input')
@@ -171,7 +127,7 @@ describe('VCombobox.ts', () => {
   it.skip('should add a tag on left arrow and select the previous tag', async () => {
     const { wrapper, change } = createMultipleCombobox({
       value: ['foo'],
-      items: ['foo', 'bar']
+      items: ['foo', 'bar'],
     })
 
     const input = wrapper.find('input')
@@ -188,7 +144,7 @@ describe('VCombobox.ts', () => {
 
   it('should remove a duplicate tag and add it to the end', async () => {
     const { wrapper, change } = createMultipleCombobox({
-      value: ['foo', 'bar']
+      value: ['foo', 'bar'],
     })
 
     const input = wrapper.find('input')
@@ -199,7 +155,7 @@ describe('VCombobox.ts', () => {
 
     element.value = 'foo'
     input.trigger('input')
-    input.trigger('keydown.tab')
+    input.trigger('keydown.enter')
     await wrapper.vm.$nextTick()
 
     expect(change).toHaveBeenCalledWith(['bar', 'foo'])
@@ -214,7 +170,9 @@ describe('VCombobox.ts', () => {
     input.trigger('focus')
     element.value = 'bar'
     input.trigger('input')
-    input.trigger('keydown.tab')
+    input.trigger('keydown.enter')
+
+    await wrapper.vm.$nextTick()
 
     expect(change).toHaveBeenCalledWith(['bar'])
   })
@@ -222,7 +180,7 @@ describe('VCombobox.ts', () => {
   it('should be able to add a tag from user input after deleting a tag with delete', async () => {
     const { wrapper, change } = createMultipleCombobox({
       multiple: true,
-      value: ['foo', 'bar']
+      value: ['foo', 'bar'],
     })
 
     const input = wrapper.find('input')
@@ -244,6 +202,8 @@ describe('VCombobox.ts', () => {
     input.trigger('input')
     input.trigger('keydown.enter')
 
+    await wrapper.vm.$nextTick()
+
     expect(change).toHaveBeenCalledWith(['foo', 'baz'])
     expect(wrapper.vm.selectedIndex).toBe(-1)
   })
@@ -254,7 +214,7 @@ describe('VCombobox.ts', () => {
       clearable: true,
       deletableChips: true,
       multiple: true,
-      value: ['foo', 'bar']
+      value: ['foo', 'bar'],
     })
 
     const input = wrapper.find('input')
@@ -273,6 +233,8 @@ describe('VCombobox.ts', () => {
     expect(wrapper.vm.internalSearch).toBe('baz')
     input.trigger('keydown.enter')
 
+    await wrapper.vm.$nextTick()
+
     expect(change).toHaveBeenCalledWith(['foo', 'baz'])
     expect(wrapper.vm.selectedIndex).toBe(-1)
   })
@@ -282,7 +244,7 @@ describe('VCombobox.ts', () => {
     const { wrapper } = createMultipleCombobox({
       chips: true,
       multiple: true,
-      value: ['foo', 'bar']
+      value: ['foo', 'bar'],
     })
 
     const input = wrapper.find('input')
@@ -306,7 +268,7 @@ describe('VCombobox.ts', () => {
   // eslint-disable-next-line max-statements
   it('should create new items when a delimiter is entered', async () => {
     const { wrapper, change } = createMultipleCombobox({
-      delimiters: [', ', 'baz']
+      delimiters: [', ', 'baz'],
     })
 
     await wrapper.vm.$nextTick()
@@ -347,7 +309,7 @@ describe('VCombobox.ts', () => {
   it('should allow the editing of an existing value', async () => {
     const { wrapper } = createMultipleCombobox({
       chips: true,
-      value: ['foo']
+      value: ['foo'],
     })
 
     const change = jest.fn()
@@ -375,48 +337,5 @@ describe('VCombobox.ts', () => {
 
     expect(change).toHaveBeenCalledWith(['foobar'])
     expect(internal).toHaveBeenCalledWith(['foobar'], ['foo'])
-  })
-
-  it('should react to tabs', async () => {
-    const updateTags = jest.fn()
-    const wrapper = mountFunction({
-      propsData: {
-        items: ['fizz', 'buzz'],
-        multiple: true
-      },
-      methods: {
-        updateTags
-      }
-    })
-
-    const input = wrapper.find('input')
-    const element = input.element as HTMLInputElement
-
-    input.trigger('focus')
-    element.value = 'foo'
-    input.trigger('input')
-    input.trigger('keydown.tab')
-
-    expect(wrapper.vm.getMenuIndex()).toBe(-1)
-    expect(updateTags).toHaveBeenCalledTimes(1)
-
-    input.trigger('focus')
-    element.value = 'fizz'
-    input.trigger('input')
-    input.trigger('keydown.down')
-
-    // Allow dom to update class for
-    // selected tile
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.isMenuActive).toBe(true)
-    expect(wrapper.vm.getMenuIndex()).toBe(0)
-
-    input.trigger('keydown.tab')
-
-    // We overwrite update tags so above
-    // is does not persist
-    expect(wrapper.vm.internalValue).toEqual(['fizz'])
-    expect(updateTags).toHaveBeenCalledTimes(2)
   })
 })

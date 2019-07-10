@@ -7,9 +7,12 @@ import VSheet from '../VSheet/VSheet'
 // Components
 import VImg, { srcObject } from '../VImg/VImg'
 
+// Utilities
+import { convertToUnit, getSlot } from '../../util/helpers'
+import { breaking } from '../../util/console'
+
 // Types
 import { VNode } from 'vue'
-import { convertToUnit, getSlot } from '../../util/helpers'
 import { PropValidator } from 'vue/types/options'
 
 /* @vue/component */
@@ -19,12 +22,12 @@ export default VSheet.extend({
   props: {
     absolute: Boolean,
     bottom: Boolean,
-    dense: Boolean,
     collapse: Boolean,
+    dense: Boolean,
     extended: Boolean,
     extensionHeight: {
       default: 48,
-      type: [Number, String]
+      type: [Number, String],
     },
     flat: Boolean,
     floating: Boolean,
@@ -32,16 +35,20 @@ export default VSheet.extend({
     short: Boolean,
     src: {
       type: [String, Object],
-      default: ''
+      default: '',
     } as PropValidator<string | srcObject>,
+    tag: {
+      type: String,
+      default: 'header',
+    },
     tile: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
 
   data: () => ({
-    isExtended: false
+    isExtended: false,
   }),
 
   computed: {
@@ -77,7 +84,7 @@ export default VSheet.extend({
         'v-toolbar--extended': this.isExtended,
         'v-toolbar--flat': this.flat,
         'v-toolbar--floating': this.floating,
-        'v-toolbar--prominent': this.isProminent
+        'v-toolbar--prominent': this.isProminent,
       }
     },
     isCollapsed (): boolean {
@@ -88,14 +95,33 @@ export default VSheet.extend({
     },
     styles (): object {
       return this.measurableStyles
-    }
+    },
+  },
+
+  created () {
+    const breakingProps = [
+      ['app', '<v-app-bar app>'],
+      ['manual-scroll', '<v-app-bar :value="false">'],
+      ['clipped-left', '<v-app-bar clipped-left>'],
+      ['clipped-right', '<v-app-bar clipped-right>'],
+      ['inverted-scroll', '<v-app-bar inverted-scroll>'],
+      ['scroll-off-screen', '<v-app-bar scroll-off-screen>'],
+      ['scroll-target', '<v-app-bar scroll-target>'],
+      ['scroll-threshold', '<v-app-bar scroll-threshold>'],
+      ['card', '<v-app-bar flat>'],
+    ]
+
+    /* istanbul ignore next */
+    breakingProps.forEach(([original, replacement]) => {
+      if (this.$attrs.hasOwnProperty(original)) breaking(original, replacement, this)
+    })
   },
 
   methods: {
     genBackground () {
       const props = {
         height: convertToUnit(this.computedHeight),
-        src: this.src
+        src: this.src,
       }
 
       const image = this.$scopedSlots.img
@@ -103,25 +129,25 @@ export default VSheet.extend({
         : this.$createElement(VImg, { props })
 
       return this.$createElement('div', {
-        staticClass: 'v-toolbar__image'
+        staticClass: 'v-toolbar__image',
       }, [image])
     },
     genContent () {
       return this.$createElement('div', {
         staticClass: 'v-toolbar__content',
         style: {
-          height: convertToUnit(this.computedContentHeight)
-        }
+          height: convertToUnit(this.computedContentHeight),
+        },
       }, getSlot(this))
     },
     genExtension () {
       return this.$createElement('div', {
         staticClass: 'v-toolbar__extension',
         style: {
-          height: convertToUnit(this.extensionHeight)
-        }
+          height: convertToUnit(this.extensionHeight),
+        },
       }, getSlot(this, 'extension'))
-    }
+    },
   },
 
   render (h): VNode {
@@ -131,12 +157,12 @@ export default VSheet.extend({
     const data = this.setBackgroundColor(this.color, {
       class: this.classes,
       style: this.styles,
-      on: this.$listeners
+      on: this.$listeners,
     })
 
     if (this.isExtended) children.push(this.genExtension())
     if (this.src || this.$scopedSlots.img) children.unshift(this.genBackground())
 
-    return h('nav', data, children)
-  }
+    return h(this.tag, data, children)
+  },
 })

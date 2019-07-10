@@ -38,48 +38,49 @@ export default baseMixins.extend({
 
   provide (): object {
     return {
+      isInMenu: true,
       // Pass theme through to default slot
-      theme: this.theme
+      theme: this.theme,
     }
   },
 
   directives: {
     ClickOutside,
-    Resize
+    Resize,
   },
 
   props: {
     auto: Boolean,
     closeOnClick: {
       type: Boolean,
-      default: true
+      default: true,
     },
     closeOnContentClick: {
       type: Boolean,
-      default: true
+      default: true,
     },
     disabled: Boolean,
     disableKeys: Boolean,
     fullWidth: Boolean,
     maxHeight: {
       type: [Number, String],
-      default: 'auto'
+      default: 'auto',
     },
     openOnClick: {
       type: Boolean,
-      default: true
+      default: true,
     },
     offsetX: Boolean,
     offsetY: Boolean,
     openOnHover: Boolean,
     origin: {
       type: String,
-      default: 'top left'
+      default: 'top left',
     },
     transition: {
       type: [Boolean, String],
-      default: 'v-menu-transition'
-    }
+      default: 'v-menu-transition',
+    },
   },
 
   data () {
@@ -90,11 +91,14 @@ export default baseMixins.extend({
       listIndex: -1,
       resizeTimeout: 0,
       selectedIndex: null as null | number,
-      tiles: [] as HTMLElement[]
+      tiles: [] as HTMLElement[],
     }
   },
 
   computed: {
+    activeTile (): HTMLElement | undefined {
+      return this.tiles[this.listIndex]
+    },
     calculatedLeft (): string {
       const menuWidth = Math.max(this.dimensions.content.width, parseFloat(this.calculatedMinWidth))
 
@@ -140,6 +144,9 @@ export default baseMixins.extend({
 
       return top || '0'
     },
+    hasClickableTiles (): boolean {
+      return Boolean(this.tiles.find(tile => tile.tabIndex > -1))
+    },
     styles (): object {
       return {
         maxHeight: this.calculatedMaxHeight,
@@ -148,9 +155,9 @@ export default baseMixins.extend({
         top: this.calculatedTop,
         left: this.calculatedLeft,
         transformOrigin: this.origin,
-        zIndex: this.zIndex || this.activeZIndex
+        zIndex: this.zIndex || this.activeZIndex,
       }
-    }
+    },
   },
 
   watch: {
@@ -169,18 +176,15 @@ export default baseMixins.extend({
 
       prev in this.tiles &&
         this.tiles[prev].classList.remove('v-list-item--highlighted')
-    }
+    },
   },
 
   mounted () {
-    this.isActive && this.activate()
+    this.isActive && this.callActivate()
   },
 
   methods: {
     activate () {
-      // This exists primarily for v-select
-      // helps determine which tiles to activate
-      this.getTiles()
       // Update coordinates and dimensions of menu
       // and its activator
       this.updateDimensions()
@@ -230,12 +234,15 @@ export default baseMixins.extend({
       // For infinite scroll and autocomplete, re-evaluate children
       this.getTiles()
 
-      if (e.keyCode === keyCodes.down && this.listIndex < this.tiles.length - 1) {
-        this.listIndex++
-        // Allow user to set listIndex to -1 so
-        // that the list can be un-highlighted
-      } else if (e.keyCode === keyCodes.up && this.listIndex > -1) {
-        this.listIndex--
+      if (!this.isActive || !this.hasClickableTiles) {
+        return
+      } else if (e.keyCode === keyCodes.tab) {
+        this.isActive = false
+        return
+      } else if (e.keyCode === keyCodes.down) {
+        this.nextTile()
+      } else if (e.keyCode === keyCodes.up) {
+        this.prevTile()
       } else if (e.keyCode === keyCodes.enter && this.listIndex !== -1) {
         this.tiles[this.listIndex].click()
       } else { return }
@@ -249,19 +256,28 @@ export default baseMixins.extend({
         this.closeOnClick &&
         !this.$refs.content.contains(target)
     },
+    genActivatorListeners () {
+      const listeners = Menuable.options.methods.genActivatorListeners.call(this)
+
+      if (!this.disableKeys) {
+        listeners.keydown = this.onKeyDown
+      }
+
+      return listeners
+    },
     genTransition (): VNode {
       if (!this.transition) return this.genContent()
 
       return this.$createElement('transition', {
         props: {
-          name: this.transition
-        }
+          name: this.transition,
+        },
       }, [this.genContent()])
     },
     genDirectives (): VNodeDirective[] {
       const directives: VNodeDirective[] = [{
         name: 'show',
-        value: this.isContentActive
+        value: this.isContentActive,
       }]
 
       // Do not add click outside for hover menu
@@ -271,8 +287,8 @@ export default baseMixins.extend({
           value: () => { this.isActive = false },
           args: {
             closeConditional: this.closeConditional,
-            include: () => [this.$el, ...this.getOpenDependentElements()]
-          }
+            include: () => [this.$el, ...this.getOpenDependentElements()],
+          },
         } as any)
       }
 
@@ -280,14 +296,17 @@ export default baseMixins.extend({
     },
     genContent (): VNode {
       const options = {
-        attrs: this.getScopeIdAttrs(),
+        attrs: {
+          ...this.getScopeIdAttrs(),
+          role: 'role' in this.$attrs ? this.$attrs.role : 'menu',
+        },
         staticClass: 'v-menu__content',
         'class': {
           ...this.rootThemeClasses,
           'v-menu__content--auto': this.auto,
           'v-menu__content--fixed': this.activatorFixed,
           'menuable__content__active': this.isActive,
-          [this.contentClass.trim()]: true
+          [this.contentClass.trim()]: true,
         },
         style: this.styles,
         directives: this.genDirectives(),
@@ -301,8 +320,8 @@ export default baseMixins.extend({
             if (target.getAttribute('disabled')) return
             if (this.closeOnContentClick) this.isActive = false
           },
-          keydown: this.onKeyDown
-        }
+          keydown: this.onKeyDown,
+        },
       } as VNodeData
 
       if (!this.disabled && this.openOnHover) {
@@ -318,7 +337,7 @@ export default baseMixins.extend({
       return this.$createElement(
         'div',
         options,
-        this.showLazyContent(this.$slots.default)
+        this.showLazyContent(this.getContentSlot())
       )
     },
     getTiles () {
@@ -343,21 +362,51 @@ export default baseMixins.extend({
         })
       })
     },
+    nextTile () {
+      const tile = this.tiles[this.listIndex + 1]
+
+      if (!tile) {
+        if (!this.tiles.length) return
+
+        this.listIndex = -1
+        this.nextTile()
+
+        return
+      }
+
+      this.listIndex++
+      if (tile.tabIndex === -1) this.nextTile()
+    },
+    prevTile () {
+      const tile = this.tiles[this.listIndex - 1]
+
+      if (!tile) {
+        if (!this.tiles.length) return
+
+        this.listIndex = this.tiles.length
+        this.prevTile()
+
+        return
+      }
+
+      this.listIndex--
+      if (tile.tabIndex === -1) this.prevTile()
+    },
     onKeyDown (e: KeyboardEvent) {
       if (e.keyCode === keyCodes.esc) {
         // Wait for dependent elements to close first
         setTimeout(() => { this.isActive = false })
         const activator = this.getActivator()
         this.$nextTick(() => activator && activator.focus())
-      } else if (e.keyCode === keyCodes.tab) {
-        setTimeout(() => {
-          if (!this.$refs.content.contains(document.activeElement)) {
-            this.isActive = false
-          }
-        })
-      } else {
-        this.changeListIndex(e)
+      } else if (
+        !this.isActive &&
+        [keyCodes.up, keyCodes.down].includes(e.keyCode)
+      ) {
+        this.isActive = true
       }
+
+      // Allow for isActive watcher to generate tile list
+      this.$nextTick(() => this.changeListIndex(e))
     },
     onResize () {
       if (!this.isActive) return
@@ -375,23 +424,20 @@ export default baseMixins.extend({
       // hacky but will revisit in the future
       clearTimeout(this.resizeTimeout)
       this.resizeTimeout = window.setTimeout(this.updateDimensions, 100)
-    }
+    },
   },
 
   render (h): VNode {
     const data = {
       staticClass: 'v-menu',
       class: {
-        'v-menu--inline': !this.fullWidth && (this.$slots.activator || this.$scopedSlots.activator)
+        'v-menu--inline': !this.fullWidth && (this.$slots.activator || this.$scopedSlots.activator),
       },
       directives: [{
         arg: '500',
         name: 'resize',
-        value: this.onResize
+        value: this.onResize,
       }],
-      on: this.disableKeys ? undefined : {
-        keydown: this.onKeyDown
-      }
     }
 
     return h('div', data, [
@@ -400,9 +446,9 @@ export default baseMixins.extend({
         props: {
           root: true,
           light: this.light,
-          dark: this.dark
-        }
-      }, [this.genTransition()])
+          dark: this.dark,
+        },
+      }, [this.genTransition()]),
     ])
-  }
+  },
 })

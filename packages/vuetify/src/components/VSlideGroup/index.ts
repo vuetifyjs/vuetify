@@ -3,12 +3,12 @@ import VSlideItem from './VSlideItem'
 
 export {
   VSlideGroup,
-  VSlideItem
+  VSlideItem,
 }
 
 export default {
   $_vuetify_subcomponents: {
     VSlideGroup,
-    VSlideItem
-  }
+    VSlideItem,
+  },
 }

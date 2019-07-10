@@ -3,137 +3,137 @@ const sharedGridProps = [
     'name': 'tag',
     'type': 'String',
     'default': 'div',
-    'source': null
+    'source': null,
   },
   {
     'name': 'alignBaseline',
     'type': 'Boolean',
     'default': 'false',
-    'source': null
+    'source': null,
   },
   {
     'name': 'alignCenter',
     'type': 'Boolean',
     'default': 'false',
-    'source': null
+    'source': null,
   },
   {
     'name': 'alignContentCenter',
     'type': 'Boolean',
     'default': 'false',
-    'source': null
+    'source': null,
   },
   {
     'name': 'alignContentEnd',
     'type': 'Boolean',
     'default': 'false',
-    'source': null
+    'source': null,
   },
   {
     'name': 'alignContentSpaceAround',
     'type': 'Boolean',
     'default': 'false',
-    'source': null
+    'source': null,
   },
   {
     'name': 'alignContentSpaceBetween',
     'type': 'Boolean',
     'default': 'false',
-    'source': null
+    'source': null,
   },
   {
     'name': 'alignContentStart',
     'type': 'Boolean',
     'default': 'false',
-    'source': null
+    'source': null,
   },
   {
     'name': 'alignEnd',
     'type': 'Boolean',
     'default': 'false',
-    'source': null
+    'source': null,
   },
   {
     'name': 'alignStart',
     'type': 'Boolean',
     'default': 'false',
-    'source': null
+    'source': null,
   },
   {
     'name': 'd-{type}',
     'type': 'Boolean',
     'default': 'false',
-    'source': null
+    'source': null,
   },
   {
     'name': 'fillHeight',
     'type': 'Boolean',
     'default': 'false',
-    'source': null
+    'source': null,
   },
   {
     'name': 'justifyCenter',
     'type': 'Boolean',
     'default': 'false',
-    'source': null
+    'source': null,
   },
   {
     'name': 'justifyEnd',
     'type': 'Boolean',
     'default': 'false',
-    'source': null
+    'source': null,
   },
   {
     'name': 'justifySpaceAround',
     'type': 'Boolean',
     'default': 'false',
-    'source': null
+    'source': null,
   },
   {
     'name': 'justifySpaceBetween',
     'type': 'Boolean',
     'default': 'false',
-    'source': null
+    'source': null,
   },
   {
     'name': 'justifyStart',
     'type': 'Boolean',
     'default': 'false',
-    'source': null
-  }
+    'source': null,
+  },
 ]
 
 const validatableEvents = [
   {
     name: 'update:error',
-    value: 'boolean'
-  }
+    value: 'boolean',
+  },
 ]
 
 const inputEvents = [
   {
     name: 'click:prepend',
-    value: 'Event'
+    value: 'Event',
   },
   {
     name: 'click:append',
-    value: 'Event'
-  }
+    value: 'Event',
+  },
 ]
 
 const textEvents = [
   {
     name: 'click:clear',
-    value: 'Event'
+    value: 'Event',
   },
   {
     name: 'click:append-outer',
-    value: 'Event'
+    value: 'Event',
   },
   {
     name: 'click:prepend-inner',
-    value: 'Event'
-  }
+    value: 'Event',
+  },
 ]
 
 const inputSlots = ['append', 'prepend', 'default']
@@ -146,16 +146,16 @@ const VSelect = {
   props: [
     {
       name: 'filter',
-      default: '(item: object, queryText: string, itemText: string): boolean'
+      default: '(item: object, queryText: string, itemText: string): boolean',
     },
     {
       name: 'valueComparator',
-      default: '(a: any, b: any): boolean'
+      default: '(a: any, b: any): boolean',
     },
     {
       name: 'menuProps',
-      default: '{"closeOnClick":false, "closeOnContentClick":false, "openOnClick":false, "maxHeight":300}'
-    }
+      default: '{"closeOnClick":false, "closeOnContentClick":false, "openOnClick":false, "maxHeight":300}',
+    },
   ],
   slots: selectSlots.concat(['no-data', 'progress']),
   scopedSlots: [
@@ -167,34 +167,35 @@ const VSelect = {
         index: 'number',
         select: 'function',
         selected: 'boolean',
-        disabled: 'boolean'
-      }
+        disabled: 'boolean',
+      },
     },
     {
       name: 'item',
       props: {
         parent: 'VueComponent',
         item: 'object',
-        tile: 'object'
-      }
-    }
+        on: 'object',
+        attrs: 'object',
+      },
+    },
   ],
   events: [
     {
       name: 'input',
-      value: 'any'
+      value: 'any',
     },
     {
       name: 'change',
-      value: 'any'
+      value: 'any',
     },
     {
       name: 'update:searchInput',
-      value: 'string'
+      value: 'string',
     },
     ...inputEvents,
-    ...textEvents
-  ].concat(validatableEvents)
+    ...textEvents,
+  ].concat(validatableEvents),
 }
 
 const VTreeviewScopedProps = {
@@ -203,7 +204,7 @@ const VTreeviewScopedProps = {
   selected: 'boolean',
   indeterminate: 'boolean',
   active: 'boolean',
-  open: 'boolean'
+  open: 'boolean',
 }
 
 const VTimestamp = {
@@ -219,7 +220,7 @@ const VTimestamp = {
   hasTime: 'boolean',
   past: 'boolean',
   present: 'boolean',
-  future: 'boolean'
+  future: 'boolean',
 }
 
 const VTimestampWithTime = {
@@ -236,51 +237,51 @@ const VTimestampWithTime = {
   past: 'boolean',
   present: 'boolean',
   future: 'boolean',
-  timeToY: '(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number'
+  timeToY: '(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number',
 }
 
 const VSlider = {
   events: [
     {
       name: 'input',
-      value: 'number'
+      value: 'number',
     },
     {
       name: 'change',
-      value: 'number'
+      value: 'number',
     },
     {
       name: 'start',
-      value: 'number'
+      value: 'number',
     },
     {
       name: 'end',
-      value: 'number'
+      value: 'number',
     },
-    ...inputEvents
+    ...inputEvents,
   ].concat(validatableEvents),
   slots: [
     {
       name: 'append',
-      source: 'v-input'
+      source: 'v-input',
     },
     {
       name: 'prepend',
-      source: 'v-input'
+      source: 'v-input',
     },
     {
       name: 'label',
-      source: 'v-input'
-    }
+      source: 'v-input',
+    },
   ],
   scopedSlots: [
     {
       name: 'thumb-label',
       props: {
-        value: 'number | string'
-      }
-    }
-  ]
+        value: 'number | string',
+      },
+    },
+  ],
 }
 
 module.exports = {
@@ -294,5 +295,5 @@ module.exports = {
   validatableEvents,
   textEvents,
   textFieldSlots,
-  VTreeviewScopedProps
+  VTreeviewScopedProps,
 }

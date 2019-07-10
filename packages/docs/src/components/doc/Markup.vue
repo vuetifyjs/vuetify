@@ -11,10 +11,11 @@
       class="v-markup__edit"
     >
       <a
-        :href="`https://github.com/vuetifyjs/vuetify/tree/master/packages/docs/src/snippets/${file}`"
+        :href="href"
         target="_blank"
         rel="noopener"
         title="Edit code"
+        aria-label="Edit code"
       >
         <v-icon>mdi-pencil</v-icon>
       </a>
@@ -23,9 +24,10 @@
     <div class="v-markup__copy">
       <v-icon
         title="Copy code"
+        aria-label="Copy code"
         @click="copyMarkup"
       >
-        content_copy
+        mdi-content-copy
       </v-icon>
       <v-slide-x-transition>
         <span
@@ -36,7 +38,7 @@
     </div>
 
     <a
-      v-if="filename"
+      v-if="filename && file"
       :href="href"
       target="_blank"
       rel="noopener"
@@ -52,28 +54,29 @@
     name: 'Markup',
 
     components: {
-      Prism: () => import('vue-prism-component')
+      Prism: () => import('vue-prism-component'),
     },
 
     props: {
       lang: {
         type: String,
-        default: undefined
+        default: undefined,
       },
       value: {
         type: String,
-        default: 'markup'
+        default: 'markup',
       },
       filename: {
         type: Boolean,
-        default: process.env.NODE_ENV !== 'production'
-      }
+        default: process.env.NODE_ENV !== 'production',
+      },
     },
 
     data: vm => ({
       code: null,
       copied: false,
-      language: vm.lang
+      language: vm.lang,
+      branch: null,
     }),
 
     computed: {
@@ -85,19 +88,18 @@
         return `${folder}/${file}.txt`
       },
       href () {
-        const branch = process.env.NODE_ENV === 'production' ? 'master' : 'dev'
-        const href = `https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/docs/src/snippets`
-
-        return `${href}/${this.file}`
+        return `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/snippets/${this.file}`
       },
       id () {
         if (this.value === 'markup') return
         return 'markup-' + this.value.replace(/_/g, '-')
-      }
+      },
     },
 
     mounted () {
       this.$nextTick(this.init)
+      const branch = (window) ? window.location.hostname.split('.')[0] : 'master'
+      this.branch = ['master', 'dev', 'next'].includes(branch) ? branch : 'master'
     },
 
     methods: {
@@ -120,8 +122,8 @@
       parseRaw (res) {
         this.language = this.lang || this.value.split('_').shift()
         this.code = res.default.trim()
-      }
-    }
+      },
+    },
   }
 </script>
 
@@ -163,12 +165,12 @@
   &__copied
     position: absolute
     top: 12px
-    right: 100px
+    right: 75px
 
   &__copy,
   &__edit
     position: absolute
-    top: 0px
+    top: 0
     cursor: pointer
     width: 25px
     height: 25px
@@ -184,7 +186,7 @@
       color: inherit
       text-decoration: none
 
-  &__filename
+  a.v-markup__filename
     text-decoration: none
     position: absolute
     bottom: 0

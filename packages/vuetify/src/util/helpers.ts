@@ -16,7 +16,7 @@ export function createSimpleFunctional (
       data.staticClass = (`${c} ${data.staticClass || ''}`).trim()
 
       return h(el, data, children)
-    }
+    },
   })
 }
 
@@ -42,24 +42,24 @@ export function createSimpleTransition (
     props: {
       group: {
         type: Boolean,
-        default: false
+        default: false,
       },
       hideOnLeave: {
         type: Boolean,
-        default: false
+        default: false,
       },
       leaveAbsolute: {
         type: Boolean,
-        default: false
+        default: false,
       },
       mode: {
         type: String,
-        default: mode
+        default: mode,
       },
       origin: {
         type: String,
-        default: origin
-      }
+        default: origin,
+      },
     },
 
     render (h, context): VNode {
@@ -67,7 +67,7 @@ export function createSimpleTransition (
       context.data = context.data || {}
       context.data.props = {
         name,
-        mode: context.props.mode
+        mode: context.props.mode,
       }
       context.data.on = context.data.on || {}
       if (!Object.isExtensible(context.data.on)) {
@@ -96,7 +96,7 @@ export function createSimpleTransition (
       context.data.on.leave = mergeTransitions(leave, ourLeave)
 
       return h(tag, context.data, context.children)
-    }
+    },
   }
 }
 
@@ -113,21 +113,21 @@ export function createJavaScriptTransition (
     props: {
       mode: {
         type: String,
-        default: mode
-      }
+        default: mode,
+      },
     },
 
     render (h, context): VNode {
       const data = {
         props: {
           ...context.props,
-          name
+          name,
         },
-        on: functions
+        on: functions,
       }
 
       return h('transition', data, context.children)
-    }
+    },
   }
 }
 
@@ -137,17 +137,22 @@ export function directiveConfig (binding: BindingConfig, defaults = {}): VNodeDi
     ...defaults,
     ...binding.modifiers,
     value: binding.arg,
-    ...(binding.value || {})
+    ...(binding.value || {}),
   }
 }
 
-export function addOnceEventListener (el: EventTarget, event: string, cb: () => void): void {
-  var once = () => {
-    cb()
-    el.removeEventListener(event, once, false)
+export function addOnceEventListener (
+  el: EventTarget,
+  eventName: string,
+  cb: (event: Event) => void,
+  options: boolean | AddEventListenerOptions = false
+): void {
+  var once = (event: Event) => {
+    cb(event)
+    el.removeEventListener(eventName, once, options)
   }
 
-  el.addEventListener(event, once, false)
+  el.addEventListener(eventName, once, options)
 }
 
 let passiveSupported = false
@@ -156,7 +161,7 @@ try {
     const testListenerOpts = Object.defineProperty({}, 'passive', {
       get: () => {
         passiveSupported = true
-      }
+      },
     })
 
     window.addEventListener('testListener', testListenerOpts, testListenerOpts)
@@ -214,9 +219,10 @@ export function deepEqual (a: any, b: any): boolean {
   return props.every(p => deepEqual(a[p], b[p]))
 }
 
-export function getObjectValueByPath (obj: object, path: string, fallback?: any): any {
+export function getObjectValueByPath (obj: any, path: string, fallback?: any): any {
   // credit: http://stackoverflow.com/questions/6491463/accessing-nested-javascript-objects-with-string-key#comment55278413_6491621
-  if (!path || path.constructor !== String) return fallback
+  if (obj == null || !path || typeof path !== 'string') return fallback
+  if (obj[path] !== undefined) return obj[path]
   path = path.replace(/\[(\w+)\]/g, '.$1') // convert indexes to properties
   path = path.replace(/^\./, '') // strip a leading dot
   return getNestedValue(obj, path.split('.'), fallback)
@@ -251,14 +257,14 @@ export function getZIndex (el?: Element | null): number {
 
   const index = +window.getComputedStyle(el).getPropertyValue('z-index')
 
-  if (isNaN(index)) return getZIndex(el.parentNode as Element)
+  if (!index) return getZIndex(el.parentNode as Element)
   return index
 }
 
 const tagsToReplace = {
   '&': '&amp;',
   '<': '&lt;',
-  '>': '&gt;'
+  '>': '&gt;',
 } as any
 
 export function escapeHTML (str: string): string {
@@ -313,7 +319,7 @@ export const keyCodes = Object.freeze({
   backspace: 8,
   insert: 45,
   pageup: 33,
-  pagedown: 34
+  pagedown: 34,
 })
 
 const ICONS_PREFIX = '$vuetify.'
@@ -349,7 +355,7 @@ export const camelize = (str: string): string => {
  * Returns the set difference of B and A, i.e. the set of elements in B but not in A
  */
 export function arrayDiff (a: any[], b: any[]): any[] {
-  const diff = []
+  const diff: any[] = []
   for (let i = 0; i < b.length; i++) {
     if (a.indexOf(b[i]) < 0) diff.push(b[i])
   }
@@ -413,26 +419,21 @@ export function sortItems (
   })
 }
 
+export type FilterFn = (value: any, search: string, item: any) => boolean
+
+export function defaultFilter (value: any, search: string | null) {
+  return value != null &&
+    search != null &&
+    typeof value !== 'boolean' &&
+    value.toString().toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) !== -1
+}
+
 export function searchItems (items: any[], search: string) {
   if (!search) return items
   search = search.toString().toLowerCase()
   if (search.trim() === '') return items
 
-  return items.filter(i => Object.keys(i).some(j => {
-    const val = i[j]
-    return val != null &&
-      typeof val !== 'boolean' &&
-      val.toString().toLowerCase().indexOf(search) !== -1
-  }))
-}
-
-export function getTextAlignment (align: string | undefined, rtl: boolean): string {
-  align = align || 'start'
-
-  if (align === 'start') align = rtl ? 'right' : 'left'
-  else if (align === 'end') align = rtl ? 'left' : 'right'
-
-  return `text-xs-${align}`
+  return items.filter(item => Object.keys(item).some(key => defaultFilter(getObjectValueByPath(item, key), search)))
 }
 
 /**
@@ -482,7 +483,7 @@ export function padEnd (str: string, length: number, char = '0') {
 }
 
 export function chunk (str: string, size = 1) {
-  const chunked = []
+  const chunked: string[] = []
   let index = 0
   while (index < str.length) {
     chunked.push(str.substr(index, size))

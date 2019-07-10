@@ -18,33 +18,33 @@ const alignValidator = (str: any) => [...ALIGNMENT, 'baseline', 'stretch'].inclu
 const alignProps = makeProps('align', () => ({
   type: String,
   default: null,
-  validator: alignValidator
+  validator: alignValidator,
 }))
 
 const justifyValidator = (str: any) => [...ALIGNMENT, 'between', 'around'].includes(str)
 const justifyProps = makeProps('justify', () => ({
   type: String,
   default: null,
-  validator: justifyValidator
+  validator: justifyValidator,
 }))
 
 const alignContentValidator = (str: any) => [...ALIGNMENT, 'between', 'around', 'stretch'].includes(str)
 const alignContentProps = makeProps('alignContent', () => ({
   type: String,
   default: null,
-  validator: alignContentValidator
+  validator: alignContentValidator,
 }))
 
 const propMap = {
   align: Object.keys(alignProps),
   justify: Object.keys(justifyProps),
-  alignContent: Object.keys(alignContentProps)
+  alignContent: Object.keys(alignContentProps),
 }
 
 const classMap = {
   align: 'align',
   justify: 'justify',
-  alignContent: 'align-content'
+  alignContent: 'align-content',
 }
 
 function breakpointClass (type: keyof typeof propMap, prop: string, val: string) {
@@ -70,28 +70,28 @@ export default Vue.extend({
   props: {
     tag: {
       type: String,
-      default: 'div'
+      default: 'div',
     },
     dense: Boolean,
     noGutters: Boolean,
     align: {
       type: String,
       default: null,
-      validator: alignValidator
+      validator: alignValidator,
     },
     ...alignProps,
     justify: {
       type: String,
       default: null,
-      validator: justifyValidator
+      validator: justifyValidator,
     },
     ...justifyProps,
     alignContent: {
       type: String,
       default: null,
-      validator: alignContentValidator
+      validator: alignContentValidator,
     },
-    ...alignContentProps
+    ...alignContentProps,
   },
   render (h, { props, data, children }) {
     // Super-fast memoization based on props, 5x faster than JSON.stringify
@@ -117,7 +117,7 @@ export default Vue.extend({
         'no-gutters': props.noGutters,
         [`align-${props.align}`]: props.align,
         [`justify-${props.justify}`]: props.justify,
-        [`align-content-${props.alignContent}`]: props.alignContent
+        [`align-content-${props.alignContent}`]: props.alignContent,
       })
 
       cache.set(cacheKey, classList)
@@ -127,9 +127,9 @@ export default Vue.extend({
       props.tag,
       mergeData(data, {
         staticClass: props.dense ? 'form-row' : 'row',
-        class: classList
+        class: classList,
       }),
       children
     )
-  }
+  },
 })

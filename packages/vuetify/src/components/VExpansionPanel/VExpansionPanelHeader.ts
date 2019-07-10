@@ -7,7 +7,7 @@ import VIcon from '../VIcon'
 import { inject as RegistrableInject } from '../../mixins/registrable'
 
 // Directives
-import Ripple from '../../directives/ripple'
+import ripple from '../../directives/ripple'
 
 // Utilities
 import { getSlot } from '../../util/helpers'
@@ -28,29 +28,30 @@ interface options extends ExtractVue<typeof baseMixins> {
 export default baseMixins.extend<options>().extend({
   name: 'v-expansion-panel-header',
 
-  directives: { Ripple },
+  directives: { ripple },
 
   props: {
     disableIconRotate: Boolean,
     expandIcon: {
       type: String,
-      default: '$vuetify.icons.expand'
+      default: '$vuetify.icons.expand',
     },
     hideActions: Boolean,
     ripple: {
       type: [Boolean, Object],
-      default: false
-    }
+      default: false,
+    },
   },
 
   data: () => ({
-    hasMousedown: false
+    hasMousedown: false,
   }),
 
   computed: {
     classes (): object {
       return {
-        'v-expansion-panel-header--mousedown': this.hasMousedown
+        'v-expansion-panel-header--active': this.isActive,
+        'v-expansion-panel-header--mousedown': this.hasMousedown,
       }
     },
     isActive (): boolean {
@@ -61,7 +62,7 @@ export default baseMixins.extend<options>().extend({
     },
     isReadonly (): boolean {
       return this.expansionPanel.isReadonly
-    }
+    },
   },
 
   created () {
@@ -84,15 +85,15 @@ export default baseMixins.extend<options>().extend({
         this.$createElement('div', {
           staticClass: 'v-expansion-panel-header__icon',
           class: {
-            'v-expansion-panel-header__icon--disable-rotate': this.disableIconRotate
+            'v-expansion-panel-header__icon--disable-rotate': this.disableIconRotate,
           },
           directives: [{
             name: 'show',
-            value: !this.isDisabled
-          }]
-        }, icon)
+            value: !this.isDisabled,
+          }],
+        }, icon),
       ])
-    }
+    },
   },
 
   render (h): VNode {
@@ -100,21 +101,22 @@ export default baseMixins.extend<options>().extend({
       staticClass: 'v-expansion-panel-header',
       class: this.classes,
       attrs: {
-        tabindex: this.isDisabled ? -1 : null
+        tabindex: this.isDisabled ? -1 : null,
+        type: 'button',
       },
       directives: [{
         name: 'ripple',
-        value: this.ripple
+        value: this.ripple,
       }],
       on: {
         ...this.$listeners,
         click: this.onClick,
         mousedown: () => (this.hasMousedown = true),
-        mouseup: () => (this.hasMousedown = false)
-      }
+        mouseup: () => (this.hasMousedown = false),
+      },
     }, [
       getSlot(this, 'default', { open: this.isActive }, true),
-      this.hideActions || this.genIcon()
+      this.hideActions || this.genIcon(),
     ])
-  }
+  },
 })

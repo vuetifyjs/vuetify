@@ -3,19 +3,22 @@ import * as sRGB from '../../util/color/transformSRGB'
 import * as LAB from '../../util/color/transformCIELAB'
 import {
   VuetifyParsedTheme,
-  VuetifyThemeItem
+  VuetifyThemeItem,
 } from 'vuetify/types/services/theme'
 
 export function parse (
   theme: Record<string, VuetifyThemeItem>,
   isItem = false
 ): VuetifyParsedTheme {
-  const colors = Object.keys(theme)
+  const { anchor, ...variant } = theme
+  const colors = Object.keys(variant)
   const parsedTheme: any = {}
 
   for (let i = 0; i < colors.length; ++i) {
     const name = colors[i]
     const value = theme[name]
+
+    if (value == null) continue
 
     if (isItem) {
       /* istanbul ignore else */
@@ -29,6 +32,10 @@ export function parse (
     }
   }
 
+  if (!isItem) {
+    parsedTheme.anchor = anchor || parsedTheme.base || parsedTheme.primary.base
+  }
+
   return parsedTheme
 }
 
@@ -37,11 +44,11 @@ export function parse (
  */
 const genBaseColor = (name: string, value: string): string => {
   return `
-.${name} {
+.v-application .${name} {
   background-color: ${value} !important;
   border-color: ${value} !important;
 }
-.${name}--text {
+.v-application .${name}--text {
   color: ${value} !important;
   caret-color: ${value} !important;
 }`
@@ -53,11 +60,11 @@ const genBaseColor = (name: string, value: string): string => {
 const genVariantColor = (name: string, variant: string, value: string): string => {
   const [type, n] = variant.split(/(\d)/, 2)
   return `
-.${name}.${type}-${n} {
+.v-application .${name}.${type}-${n} {
   background-color: ${value} !important;
   border-color: ${value} !important;
 }
-.${name}--text.text--${type}-${n} {
+.v-application .${name}--text.text--${type}-${n} {
   color: ${value} !important;
   caret-color: ${value} !important;
 }`
@@ -68,15 +75,17 @@ const genColorVariableName = (name: string, variant = 'base'): string => `--v-${
 const genColorVariable = (name: string, variant = 'base'): string => `var(${genColorVariableName(name, variant)})`
 
 export function genStyles (theme: VuetifyParsedTheme, cssVar = false): string {
-  const colors = Object.keys(theme)
+  const { anchor, ...variant } = theme
+  const colors = Object.keys(variant)
 
   if (!colors.length) return ''
 
   let variablesCss = ''
   let css = ''
 
-  const aColor = cssVar ? genColorVariable('primary') : theme.primary.base
-  css += `a { color: ${aColor}; }`
+  const aColor = cssVar ? genColorVariable('anchor') : anchor
+  css += `.v-application a { color: ${aColor}; }`
+  cssVar && (variablesCss += `  ${genColorVariableName('anchor')}: ${anchor};\n`)
 
   for (let i = 0; i < colors.length; ++i) {
     const name = colors[i]
@@ -105,7 +114,7 @@ export function genStyles (theme: VuetifyParsedTheme, cssVar = false): string {
 
 export function genVariations (name: string, value: ColorInt): Record<string, string> {
   const values: Record<string, string> = {
-    base: intToHex(value)
+    base: intToHex(value),
   }
 
   for (let i = 5; i > 0; --i) {

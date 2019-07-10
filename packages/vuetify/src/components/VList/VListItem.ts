@@ -14,12 +14,12 @@ import Ripple from '../../directives/ripple'
 // Utilities
 import { keyCodes } from './../../util/helpers'
 import { ExtractVue } from './../../util/mixins'
+import { removed } from '../../util/console'
 
 // Types
 import mixins from '../../util/mixins'
 import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
-import { removed } from '../../util/console'
 
 const baseMixins = mixins(
   Colorable,
@@ -31,6 +31,10 @@ const baseMixins = mixins(
 
 interface options extends ExtractVue<typeof baseMixins> {
   $el: HTMLElement
+  isInGroup: boolean
+  isInList: boolean
+  isInMenu: boolean
+  isInNav: boolean
 }
 
 /* @vue/component */
@@ -38,10 +42,25 @@ export default baseMixins.extend<options>().extend({
   name: 'v-list-item',
 
   directives: {
-    Ripple
+    Ripple,
   },
 
   inheritAttrs: false,
+
+  inject: {
+    isInGroup: {
+      default: false,
+    },
+    isInList: {
+      default: false,
+    },
+    isInMenu: {
+      default: false,
+    },
+    isInNav: {
+      default: false,
+    },
+  },
 
   props: {
     activeClass: {
@@ -50,22 +69,22 @@ export default baseMixins.extend<options>().extend({
         if (!this.listItemGroup) return ''
 
         return this.listItemGroup.activeClass
-      }
+      },
     } as any as PropValidator<string>,
     dense: Boolean,
     inactive: Boolean,
     link: Boolean,
     tag: {
       type: String,
-      default: 'div'
+      default: 'div',
     },
     threeLine: Boolean,
     twoLine: Boolean,
-    value: null as any as PropValidator<any>
+    value: null as any as PropValidator<any>,
   },
 
   data: () => ({
-    proxyClass: 'v-list-item--active'
+    proxyClass: 'v-list-item--active',
   }),
 
   computed: {
@@ -78,7 +97,7 @@ export default baseMixins.extend<options>().extend({
         'v-list-item--link': this.isClickable && !this.inactive,
         'v-list-item--three-line': this.threeLine,
         'v-list-item--two-line': this.twoLine,
-        ...this.themeClasses
+        ...this.themeClasses,
       }
     },
     isClickable (): boolean {
@@ -86,12 +105,12 @@ export default baseMixins.extend<options>().extend({
         Routable.options.computed.isClickable.call(this) ||
         this.listItemGroup
       )
-    }
+    },
   },
 
   created () {
     /* istanbul ignore next */
-    if ('avatar' in this.$attrs) {
+    if (this.$attrs.hasOwnProperty('avatar')) {
       removed('avatar', this)
     }
   },
@@ -103,7 +122,29 @@ export default baseMixins.extend<options>().extend({
       this.$emit('click', e)
 
       this.to || this.toggle()
-    }
+    },
+    genAttrs () {
+      const attrs: Record<string, any> = {
+        'aria-disabled': this.disabled ? true : undefined,
+        tabindex: this.isClickable && !this.disabled ? 0 : -1,
+        ...this.$attrs,
+      }
+
+      if (this.$attrs.hasOwnProperty('role')) {
+        // do nothing, role already provided
+      } else if (this.isInNav) {
+        // do nothing, role is inherit
+      } else if (this.isInGroup) {
+        attrs.role = 'listitem'
+        attrs['aria-selected'] = String(this.isActive)
+      } else if (this.isInMenu) {
+        attrs.role = this.isClickable ? 'menuitem' : undefined
+      } else if (this.isInList && !this.isLink) {
+        attrs.role = 'listitem'
+      }
+
+      return attrs
+    },
   },
 
   render (h): VNode {
@@ -111,9 +152,7 @@ export default baseMixins.extend<options>().extend({
 
     data.attrs = {
       ...data.attrs,
-      'aria-selected': String(this.isActive),
-      role: 'listitem',
-      tabindex: tag === 'a' && this.isClickable ? 0 : -1
+      ...this.genAttrs(),
     }
     data.on = {
       ...data.on,
@@ -123,18 +162,18 @@ export default baseMixins.extend<options>().extend({
         if (e.keyCode === keyCodes.enter) this.click(e)
 
         this.$emit('keydown', e)
-      }
+      },
     }
 
     const children = this.$scopedSlots.default
       ? this.$scopedSlots.default({
         active: this.isActive,
-        toggle: this.toggle
+        toggle: this.toggle,
       })
       : this.$slots.default
 
     tag = this.inactive ? 'div' : tag
 
     return h(tag, this.setTextColor(this.color, data), children)
-  }
+  },
 })

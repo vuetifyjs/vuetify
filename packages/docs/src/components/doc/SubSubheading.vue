@@ -10,8 +10,8 @@
     props: {
       tag: {
         type: String,
-        default: 'v-subtitle-2'
-      }
-    }
+        default: 'v-subtitle-2',
+      },
+    },
   }
 </script>

@@ -5,8 +5,10 @@
     wrap
   >
     <v-flex
+      v-if="title"
       font-weight-medium
       grey--text
+      text--darken-3
       tag="h4"
       xs12
       v-text="title"
@@ -37,18 +39,18 @@
 <script>
   export default {
     components: {
-      Patron: () => import('@/components/supporters/Patron')
+      Patron: () => import('@/components/supporters/Patron'),
     },
 
     props: {
       group: {
         type: Array,
-        default: () => ([])
+        default: () => ([]),
       },
       title: {
         type: String,
-        default: ''
-      }
-    }
+        default: '',
+      },
+    },
   }
 </script>

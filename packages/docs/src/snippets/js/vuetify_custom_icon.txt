@@ -1,12 +1,16 @@
-import Vue from 'vue'
-import Vuetify from 'vuetify'
+// src/plugins/vuetify.js
 
-Vue.use(Vuetify, {
+import Vue from 'vue'
+import Vuetify from 'vuetify/lib'
+
+Vue.use(Vuetify)
+
+export default new Vuetify({
   icons: {
     iconfont: 'fa',
     values: {
       cancel: 'fas fa-ban',
-      menu: 'fas fa-ellipsis-v'
-    }
-  }
+      menu: 'fas fa-ellipsis-v',
+    },
+  },
 })

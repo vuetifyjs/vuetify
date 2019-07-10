@@ -13,6 +13,11 @@
         {
           "type": "usage",
           "value": "usage"
+        },
+        {
+          "type": "alert",
+          "lang": "Components.Toolbars.buttonMargin",
+          "value": "warning"
         }
       ]
     },
@@ -22,7 +27,8 @@
         {
           "type": "api",
           "value": [
-            "v-app-bar"
+            "v-app-bar",
+            "v-app-bar-nav-icon"
           ]
         }
       ]

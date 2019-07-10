@@ -11,7 +11,7 @@ import {
   VuetifyParsedTheme,
   VuetifyThemeOptions,
   VuetifyThemes,
-  VuetifyThemeVariant
+  VuetifyThemeVariant,
 } from 'vuetify/types/services/theme'
 
 export class Theme extends Service {
@@ -28,7 +28,7 @@ export class Theme extends Service {
       error: '#FF5252',     // red.accent2
       info: '#2196F3',      // blue.base
       success: '#4CAF50',   // green.base
-      warning: '#FB8C00'    // amber.base
+      warning: '#FB8C00',    // amber.base
     },
     dark: {
       primary: '#2196F3',   // blue.base
@@ -37,8 +37,8 @@ export class Theme extends Service {
       error: '#FF5252',     // red.accent2
       info: '#2196F3',      // blue.base
       success: '#4CAF50',   // green.base
-      warning: '#FB8C00'    // amber.base
-    }
+      warning: '#FB8C00',    // amber.base
+    },
   }
   public defaults: VuetifyThemes = this.themes
 
@@ -55,7 +55,7 @@ export class Theme extends Service {
 
     this.options = {
       ...this.options,
-      ...options.options
+      ...options.options,
     }
 
     this.dark = Boolean(options.dark)
@@ -63,14 +63,14 @@ export class Theme extends Service {
 
     this.themes = {
       dark: this.fillVariant(themes.dark, true),
-      light: this.fillVariant(themes.light, false)
+      light: this.fillVariant(themes.light, false),
     }
   }
 
   // When setting css, check for element
   // and apply new values
   set css (val: string) {
-    this.checkStyleElement() && (this.styleEl!.innerHTML = val)
+    this.checkOrCreateStyleElement() && (this.styleEl!.innerHTML = val)
   }
 
   set dark (val: boolean) {
@@ -131,13 +131,14 @@ export class Theme extends Service {
   }
 
   // Check for existence of style element
-  private checkStyleElement (): boolean {
+  private checkOrCreateStyleElement (): boolean {
+    this.styleEl = document.getElementById('vuetify-theme-stylesheet') as HTMLStyleElement
+
     /* istanbul ignore next */
     if (this.styleEl) return true
 
     this.genStyleElement() // If doesn't have it, create it
 
-    this.styleEl = document.getElementById('vuetify-theme-stylesheet') as HTMLStyleElement
     return Boolean(this.styleEl)
   }
 
@@ -181,10 +182,10 @@ export class Theme extends Service {
             cssText: this.generatedStyles,
             type: 'text/css',
             id: 'vuetify-theme-stylesheet',
-            nonce: options.cspNonce
-          }
-        ]
-      }
+            nonce: options.cspNonce,
+          },
+        ],
+      },
     } as any))
   }
 
@@ -214,9 +215,9 @@ export class Theme extends Service {
         themes: {
           immediate: true,
           deep: true,
-          handler: () => this.applyTheme()
-        }
-      }
+          handler: () => this.applyTheme(),
+        },
+      },
     })
   }
 

@@ -100,7 +100,7 @@
         <v-select
           v-model="variant"
           :items="['outlined', 'label', 'pill', 'filter', 'link']"
-          box
+          filled
           chips
           deletable-chips
           label="Variants"
@@ -125,7 +125,7 @@
       color: '',
       icon: '',
       value: false,
-      variant: []
+      variant: [],
     }),
 
     watch: {
@@ -133,7 +133,7 @@
         if (val.includes('filter')) {
           this.value = true
         }
-      }
-    }
+      },
+    },
   }
 </script>

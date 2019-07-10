@@ -33,7 +33,7 @@
 <script>
   export default {
     data: () => ({
-      collapseOnScroll: true
-    })
+      collapseOnScroll: true,
+    }),
   }
 </script>

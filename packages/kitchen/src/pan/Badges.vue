@@ -446,7 +446,7 @@
 
     data: () => ({
       show1: false,
-      show2: false
-    })
+      show2: false,
+    }),
   }
 </script>
