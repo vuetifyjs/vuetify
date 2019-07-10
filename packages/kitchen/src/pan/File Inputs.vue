@@ -78,7 +78,7 @@
         <v-file-input accept="image/*"></v-file-input>
       </core-section>
 
-      <core-title>Validation (1 MB limit)</core-title>
+      <core-title>Validation (2 MB limit)</core-title>
       <core-section>
         <v-file-input display-size :rules="rules"></v-file-input>
       </core-section>
