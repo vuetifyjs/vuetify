@@ -33,7 +33,7 @@ export default {
     moreEvents: '{0} więcej',
   },
   fileInput: {
-    counter: '{0} files',
-    counterSize: '{0} files ({1} in total)',
+    counter: 'Liczba plików: {0}',
+    counterSize: 'Liczba plików: {0} (łącznie {1})',
   },
 }
