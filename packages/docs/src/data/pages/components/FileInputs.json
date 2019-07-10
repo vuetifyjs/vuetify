@@ -30,14 +30,12 @@
             "simple/multiple",
             "simple/accept",
             "simple/chips",
-            "simple/small-chips",
             "simple/size",
             "simple/counter",
-            "simple/placeholder",
             "simple/custom-icon",
-            "intermediate/custom-select",
+            "intermediate/scoped-slots",
             "intermediate/validation",
-            "complex/avatar"
+            "complex/advanced"
           ]
         }
       ]

@@ -15,8 +15,9 @@
 
 // Element
 .v-file-input .v-file-input__text
-  display: flex
   align-items: center
+  align-self: stretch
+  display: flex
   width: 100%
 
   &.v-file-input__text--chips
@@ -24,3 +25,7 @@
 
   .v-chip
     margin: 4px
+
+.v-file-input.v-text-field--filled:not(.v-text-field--single-line)
+  .v-file-input__text
+    padding-top: 22px

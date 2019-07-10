@@ -11,55 +11,51 @@
     },
     "accept": {
       "header": "### Accept formats",
-      "desc": "`v-file-input` component can accept only specific media formats/file types if you want. The example below can accept only images."
+      "desc": "`v-file-input` component can accept only specific media formats/file types if you want. For more information, checkout the documentation on the [accept attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept)."
     },
     "chips": {
       "header": "### With chips",
-      "desc": "You can add chips to `v-file-input`. Any file will be shown as its own chip"
-    },
-    "small-chips": {
-      "header": "### Small chips",
-      "desc": "If you like, `v-file-input`'s chips can be smaller"
+      "desc": "A selected file can be displayed as a [chip](/components/chips). When using the **chips** and **multiple** props, each chip will be displayed (as opposed to the file count)."
     },
     "size": {
       "header": "### Size displaying",
-      "desc": "`v-file-input` can display size of files you upload"
+      "desc": "The displayed size of the selected file(s) can be configured with the **display-size** property."
     },
     "counter": {
       "header": "### Counter",
-      "desc": "As an ordinary `v-text-field`, `v-file-input` can count your added files. If you use `display-size` along with `counter`, counter will display size of all files."
+      "desc": "When using the **display-size** property along with **counter**, the total number of files and size will be displayed.."
     },
-    "placeholder": {
-      "header": "### Placeholder",
-      "desc": "You can add a placeholder to make users know what should they add to file input."
+    "scoped-slots": {
+      "header": "### Scoped slots",
+      "desc": "Using the `selection` scoped slot, you can customize the appearance of your input selections."
     },
     "custom-icon": {
       "header": "### Custom icons",
-      "desc": "You can customize icons of upload component."
-    },
-    "custom-select": {
-      "header": "### Custom selection look",
-      "desc": "You can customize `v-file-input`'s selected files look."
+      "desc": "The `v-file-input` has a default prepended icon that can be set on the component or adjusted globally. More information on changing global components can be found on the [customizing icons page](/customizing/icons)."
     },
     "validation": {
       "header": "### Validation",
-      "desc": "`v-file-input` supports Vuetify's `validatable` mixin, so you can check, e.g. file size."
+      "desc": "Using the **rules** prop you can create your own custom validation parameters."
     },
-    "avatar": {
-      "header": "### Avatar picker",
-      "desc": "This example demonstrates the use of `v-file-input` in your app as an avatar select."
+    "advanced": {
+      "header": "### Complex selection slots",
+      "desc": "The flexibility of the selection slot allows you accomodate complex use-cases."
     }
   },
   "props": {
-    "accept": "One or more [unique file type specifiers](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#Unique_file_type_specifiers) describing file types to allow",
+    "accept": "One or more [unique file type specifiers](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#Unique_file_type_specifiers) describing file types to allow.",
     "chips": "Components.Selects.props.chips",
-    "counterSizeString": "The text displayed when using the **counter** and **display-size** props",
-    "counterString": "The text displayed when using the **counter** prop",
-    "deletableChips": "Components.Selects.props.deletableChips",
+    "counterSizeString": "The text displayed when using the **counter** and **display-size** props. Can also be customizing globally in [Internationalization](/customization/internationalization).",
+    "counterString": "The text displayed when using the **counter** prop. Can also be customizing globally in [Internationalization](/customization/internationalization).",
     "displaySize": "Sets the displayed size of selected file(s). When using **true** will default to _base=1000_ displaying (**kB, MB, GB**) while _base=1024_ will display (**KiB, MiB, GiB**).",
-    "multiple": "Components.ItemGroups.props.multiple",
-    "progress": "The current provided progress of the file(s) being uploaded",
+    "multiple": "Adds the **multiple** attribute to the input, allowing multiple file selections.",
     "smallChips": "Components.Selects.props.smallChips",
-    "value": "A single or array of [File objects](https://developer.mozilla.org/en-US/docs/Web/API/File)"
+    "value": "A single or array of [File objects](https://developer.mozilla.org/en-US/docs/Web/API/File)."
+  },
+  "scopedSlots": {
+    "selection": "Slot for defining a custom appearance for selected item(s)."
+  },
+  "events": {
+    "change": "Components.Inputs.events.change"
   }
 }

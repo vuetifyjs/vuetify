@@ -175,23 +175,4 @@ describe('VFileInput.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
-
-  it('should remove file using chips', async () => {
-    const fn = jest.fn()
-    const wrapper = mountFunction({
-      propsData: {
-        chips: true,
-        value: [oneMBFile, twoMBFile],
-      },
-      listeners: {
-        'change': fn,
-      },
-    })
-
-    await wrapper.vm.$nextTick()
-
-    wrapper.find('.v-chip .v-icon').trigger('click')
-
-    expect(fn).toHaveBeenLastCalledWith([twoMBFile])
-  })
 })

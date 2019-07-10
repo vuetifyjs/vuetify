@@ -5,14 +5,13 @@ import './VFileInput.sass'
 import VTextField from '../VTextField'
 
 // Components
-import { VProgressLinear } from '../VProgressLinear'
 import { VChip } from '../VChip'
 
 // Types
 import { PropValidator } from 'vue/types/options'
 
-// Helpers
-import { wrapInArray, humanReadableFileSize } from '../../util/helpers'
+// Utilities
+import { humanReadableFileSize, wrapInArray } from '../../util/helpers'
 
 export default VTextField.extend({
   name: 'v-file-input',
@@ -41,9 +40,14 @@ export default VTextField.extend({
       default: '$vuetify.fileInput.counter',
     },
     displaySize: {
-      type: [Number, Boolean],
+      type: [Boolean, Number],
       default: false,
-      validator: (v: number | boolean) => typeof v === 'boolean' || v === 1000 || v === 1024,
+      validator: (v: boolean | number) => {
+        return (
+          typeof v === 'boolean' ||
+          [1000, 1024].includes(v)
+        )
+      },
     } as PropValidator<boolean | 1000 | 1024>,
     multiple: Boolean,
     placeholder: String,
@@ -112,11 +116,11 @@ export default VTextField.extend({
     text (): string[] {
       if (!this.isDirty) return [this.placeholder]
 
-      return this.internalValue.map((file: File) =>
-        this.displaySize
-          ? `${file.name} (${humanReadableFileSize(file.size, this.base)})`
-          : file.name
-      )
+      return this.internalValue.map((file: File) => {
+        const name = this.truncateText(file.name)
+
+        return !this.displaySize ? name : `${name} (${humanReadableFileSize(file.size, this.base)})`
+      })
     },
     base (): 1000 | 1024 | undefined {
       return typeof this.displaySize !== 'boolean' ? this.displaySize : undefined
@@ -130,6 +134,28 @@ export default VTextField.extend({
     clearableCallback () {
       this.internalValue = []
     },
+    genChips () {
+      if (!this.isDirty) return []
+
+      return this.text.map((text, i) => this.$createElement(VChip, {
+        props: { small: this.smallChips },
+        on: {
+          'click:close': () => {
+            this.internalValue.splice(i, 1)
+            this.internalValue = this.internalValue // Trigger the watcher
+          },
+        },
+      }, [text]))
+    },
+    genInput () {
+      const input = VTextField.options.methods.genInput.call(this)
+
+      input.data!.attrs!.multiple = this.multiple
+      input.data!.attrs!.accept = this.accept
+      delete input.data!.domProps!.value
+
+      return [this.genSelections(), input]
+    },
     genPrependSlot () {
       const icon = this.genIcon('prepend', () => {
         this.$refs.input.click()
@@ -139,19 +165,31 @@ export default VTextField.extend({
 
       return this.genSlot('prepend', 'outer', [icon])
     },
-    genInput () {
-      const input = VTextField.options.methods.genInput.call(this)
+    genSelectionText (): string[] {
+      const length = this.text.length
 
-      input.data!.attrs!.multiple = this.multiple
-      input.data!.attrs!.accept = this.accept
-      delete input.data!.domProps!.value
-
-      return [this.genText(), input]
+      if (length < 2) return this.text
+      if (this.displaySize && !this.counter) return [this.counterValue]
+      return [this.$vuetify.lang.t(this.counterString, length)]
     },
-    genText () {
-      const children = this.$scopedSlots.selection
-        ? this.$scopedSlots.selection({ text: this.text, files: this.internalValue })
-        : this.hasChips && this.isDirty ? this.genChips() : [this.text.join(', ')]
+    genSelections () {
+      const children = []
+
+      if (this.isDirty && this.$scopedSlots.selection) {
+        this.internalValue.forEach((file: File, index: number) => {
+          if (!this.$scopedSlots.selection) return
+
+          children.push(
+            this.$scopedSlots.selection({
+              text: this.text[index],
+              file,
+              index,
+            })
+          )
+        })
+      } else {
+        children.push(this.hasChips && this.isDirty ? this.genChips() : this.genSelectionText())
+      }
 
       return this.$createElement('div', {
         staticClass: 'v-file-input__text',
@@ -164,23 +202,12 @@ export default VTextField.extend({
         },
       }, children)
     },
-    genChips () {
-      if (!this.isDirty) return []
-
-      return this.text.map((text, i) => this.$createElement(VChip, {
-        props: {
-          small: this.smallChips,
-        },
-        on: {
-          'click:close': () => {
-            this.internalValue.splice(i, 1)
-            this.internalValue = this.internalValue // Trigger the watcher
-          },
-        },
-      }, [text]))
-    },
     onInput (e: Event) {
       this.internalValue = [...(e.target as HTMLInputElement).files]
+    },
+    truncateText (str: string) {
+      if (str.length < 22) return str
+      return `${str.slice(0, 10)}...${str.slice(-10)}`
     },
   },
 })

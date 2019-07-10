@@ -3,13 +3,14 @@ module.exports = {
     scopedSlots: [{
       name: 'selection',
       props: {
-        text: 'string[]',
-        files: 'File[]',
+        file: 'File',
+        index: 'number',
+        text: 'string',
       },
     }],
     events: [{
       name: 'change',
       value: 'File[]',
-    }]
+    }],
   },
 }
