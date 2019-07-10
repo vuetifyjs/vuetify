@@ -1,5 +1,10 @@
 module.exports = {
   'v-stepper-items': {
-    slots: ['default'],
+    slots: [
+      {
+        name: 'default',
+        props: undefined,
+      },
+    ],
   },
 }

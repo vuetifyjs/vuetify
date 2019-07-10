@@ -1,5 +1,10 @@
 module.exports = {
   'v-progress-circular': {
-    slots: ['default'],
+    slots: [
+      {
+        name: 'default',
+        props: undefined,
+      },
+    ],
   },
 }

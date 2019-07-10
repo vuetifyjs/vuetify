@@ -1,5 +1,10 @@
 module.exports = {
   'v-card-actions': {
-    slots: ['default'],
+    slots: [
+      {
+        name: 'default',
+        props: undefined,
+      },
+    ],
   },
 }

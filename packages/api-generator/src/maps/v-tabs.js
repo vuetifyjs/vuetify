@@ -1,6 +1,11 @@
 module.exports = {
   'v-tabs': {
-    slots: ['default'],
+    slots: [
+      {
+        name: 'default',
+        props: undefined,
+      },
+    ],
     events: [
       {
         name: 'change',

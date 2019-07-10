@@ -1,5 +1,10 @@
 module.exports = {
   'v-parallax': {
-    slots: ['default'],
+    slots: [
+      {
+        name: 'default',
+        props: undefined,
+      },
+    ],
   },
 }

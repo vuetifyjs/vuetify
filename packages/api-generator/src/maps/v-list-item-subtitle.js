@@ -1,5 +1,10 @@
 module.exports = {
   'v-list-item-subtitle': {
-    slots: ['default'],
+    slots: [
+      {
+        name: 'default',
+        props: undefined,
+      },
+    ],
   },
 }

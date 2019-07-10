@@ -1,6 +1,15 @@
 module.exports = {
   'v-edit-dialog': {
-    slots: ['default', 'input'],
+    slots: [
+      {
+        name: 'default',
+        props: undefined,
+      },
+      {
+        name: 'input',
+        props: undefined,
+      },
+    ],
     events: [
       {
         name: 'cancel',

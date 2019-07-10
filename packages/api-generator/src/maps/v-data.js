@@ -69,9 +69,12 @@ module.exports = {
   'v-data': {
     props: DataProps,
     events: DataEvents,
-    scopedSlots: {
-      default: DataDefaultScopedSlotProps,
-    },
+    slots: [
+      {
+        name: 'default',
+        props: DataDefaultScopedSlotProps,
+      },
+    ],
   },
   DataOptions,
   DataPagination,

@@ -1,5 +1,14 @@
 module.exports = {
   'v-badge': {
-    slots: ['badge', 'default'],
+    slots: [
+      {
+        name: 'badge',
+        props: undefined,
+      },
+      {
+        name: 'default',
+        props: undefined,
+      },
+    ],
   },
 }

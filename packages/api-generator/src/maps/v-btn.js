@@ -1,5 +1,14 @@
 module.exports = {
   'v-btn': {
-    slots: ['default', 'loader'],
+    slots: [
+      {
+        name: 'default',
+        props: undefined,
+      },
+      {
+        name: 'loader',
+        props: undefined,
+      },
+    ],
   },
 }

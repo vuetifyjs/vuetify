@@ -1,5 +1,10 @@
 module.exports = {
   'v-list-item': {
-    slots: ['default'],
+    slots: [
+      {
+        name: 'default',
+        props: undefined,
+      },
+    ],
   },
 }

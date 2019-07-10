@@ -1,6 +1,11 @@
 module.exports = {
   'v-expansion-panel': {
-    slots: ['default'],
+    slots: [
+      {
+        name: 'default',
+        props: undefined,
+      },
+    ],
     events: [
       {
         name: 'change',
@@ -13,10 +18,28 @@ module.exports = {
     ],
   },
   'v-expansion-panel-content': {
-    slots: ['default'],
+    slots: [
+      {
+        name: 'default',
+        props: undefined,
+      },
+    ],
   },
   'v-expansion-panel-header': {
-    slots: ['default', 'icon', 'actions'],
+    slots: [
+      {
+        name: 'actions',
+        props: undefined,
+      },
+      {
+        name: 'default',
+        props: undefined,
+      },
+      {
+        name: 'icon',
+        props: undefined,
+      },
+    ],
     events: [
       {
         name: 'click',

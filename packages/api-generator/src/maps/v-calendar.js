@@ -2,7 +2,7 @@ const { VTimestamp, VTimestampWithTime } = require('../variables')
 
 module.exports = {
   'v-calendar': {
-    scopedSlots: [
+    slots: [
       {
         name: 'day',
         props: VTimestamp,

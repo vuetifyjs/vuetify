@@ -2,9 +2,9 @@ const { VTreeviewScopedProps } = require('../variables')
 
 module.exports = {
   'v-treeview': {
-    scopedSlots: [
+    slots: [
       {
-        name: 'prepend',
+        name: 'append',
         props: VTreeviewScopedProps,
       },
       {
@@ -12,7 +12,7 @@ module.exports = {
         props: VTreeviewScopedProps,
       },
       {
-        name: 'append',
+        name: 'prepend',
         props: VTreeviewScopedProps,
       },
     ],

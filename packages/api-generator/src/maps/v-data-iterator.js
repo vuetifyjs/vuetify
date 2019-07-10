@@ -84,8 +84,10 @@ const DataIteratorScopedSlots = [
 module.exports = {
   'v-data-iterator': {
     props: DataIteratorProps,
-    slots: DataIteratorSlots,
-    scopedSlots: DataIteratorScopedSlots,
+    slots: [
+      ...DataIteratorSlots,
+      ...DataIteratorScopedSlots,
+    ],
     events: DataIteratorEvents,
   },
   DataIteratorProps,

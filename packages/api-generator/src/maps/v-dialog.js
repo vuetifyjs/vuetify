@@ -1,13 +1,18 @@
 module.exports = {
   'v-dialog': {
-    slots: ['default'],
-    scopedSlots: [{
-      name: 'activator',
-      props: {
-        on: '{ [eventName]: eventHandler }',
-        value: 'boolean',
+    slots: [
+      {
+        name: 'activator',
+        props: {
+          on: '{ [eventName]: eventHandler }',
+          value: 'boolean',
+        },
       },
-    }],
+      {
+        name: 'default',
+        props: undefined,
+      },
+    ],
     events: [
       {
         name: 'click:outside',
