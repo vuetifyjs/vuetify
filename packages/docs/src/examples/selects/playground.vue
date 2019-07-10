@@ -61,7 +61,7 @@
 
     watch: {
       multiple (val) {
-        if (val) this.model = [ this.model ]
+        if (val) this.model = [this.model]
         else this.model = this.model[0] || 'Foo'
       },
     },

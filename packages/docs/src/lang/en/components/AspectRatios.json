@@ -7,6 +7,6 @@
     }
   },
   "props": {
-    "aspectRatio": "Sets a base aspect ratio, calculated as width/height. This will only set a **minimum** height, the component can still grow if it has lots of content"
+    "aspectRatio": "Sets a base aspect ratio, calculated as width/height. This will only set a **minimum** height, the component can still grow if it has a lot of content."
   }
 }

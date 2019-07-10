@@ -5,13 +5,13 @@ module.exports = {
     props: [
       {
         'name': 'grid-list-{xs through xl}',
-        'type': 'Boolean',
+        'type': 'boolean',
         'default': 'false',
         'source': null,
       },
       {
         'name': 'fluid',
-        'type': 'Boolean',
+        'type': 'boolean',
         'default': 'false',
         'source': null,
       },

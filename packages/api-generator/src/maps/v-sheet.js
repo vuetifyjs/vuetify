@@ -4,12 +4,12 @@ module.exports = {
     props: [
       {
         name: 'tag',
-        type: 'String',
+        type: 'string',
         default: 'div',
       },
       {
         name: 'tile',
-        type: 'Boolean',
+        type: 'boolean',
       },
     ],
   },

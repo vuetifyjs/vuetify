@@ -25,10 +25,5 @@
       "header": "### With active class",
       "desc": "**activeClass** property allows you to set custom CSS class on active items."
     }
-  },
-  "props": {
-    "activeClass": "CSS Class to apply when active",
-    "mandatory": "Forces a value to always be selected",
-    "multiple": "Allows for multiple selections. Model used must be an `Array`"
   }
 }

@@ -85,7 +85,16 @@ export default mixins(
 
       if (!label) return label
 
-      label!.data!.on = { click: this.onChange }
+      label!.data!.on = {
+        click: (e: Event) => {
+          // Prevent label from
+          // causing the input
+          // to focus
+          e.preventDefault()
+
+          this.onChange()
+        },
+      }
 
       return label
     },

@@ -49,10 +49,10 @@
     },
     computed: {
       successMsg () {
-        return this.success ? [ 'Done' ] : []
+        return this.success ? ['Done'] : []
       },
       errorMsg () {
-        return this.error ? [ 'Error', 'Another one', 'One more', 'All the errors' ] : []
+        return this.error ? ['Error', 'Another one', 'One more', 'All the errors'] : []
       },
     },
     methods: {

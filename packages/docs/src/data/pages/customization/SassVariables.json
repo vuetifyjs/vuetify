@@ -57,6 +57,23 @@
       "type": "section",
       "children": [
         {
+          "type": "heading",
+          "lang": "sfcHeader"
+        },
+        {
+          "type": "text",
+          "lang": "sfcText1"
+        },
+        {
+          "type": "markup",
+          "value": "js_vue_config_sass_loader_config"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
           "type": "up-next",
           "value": [
             "styles/colors",

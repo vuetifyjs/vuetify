@@ -269,7 +269,7 @@ describe('VDataTable.ts', () => {
         itemsPerPage: 5,
       },
       scopedSlots: {
-        'item': props => vm.$createElement('div', [ JSON.stringify(props) ]),
+        'item': props => vm.$createElement('div', [JSON.stringify(props)]),
       },
     })
 
@@ -300,7 +300,7 @@ describe('VDataTable.ts', () => {
         groupBy: ['protein'],
       },
       scopedSlots: {
-        group: props => vm.$createElement('div', [ JSON.stringify(props) ]),
+        group: props => vm.$createElement('div', [JSON.stringify(props)]),
       },
     })
 

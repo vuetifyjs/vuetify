@@ -409,7 +409,7 @@ export default mixins<options &
         },
       }), [
         this.genGradient(),
-        this.hasLabels && this.genLabels(-2),
+        this.hasLabels && this.genLabels(-(this._lineWidth / 2)),
         this.genPath(),
       ])
     },

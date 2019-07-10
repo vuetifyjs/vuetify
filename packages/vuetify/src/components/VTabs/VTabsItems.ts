@@ -22,6 +22,18 @@ export default VWindow.extend({
         'v-tabs-items': true,
       }
     },
+    isDark (): boolean {
+      if (this.dark === true) {
+        // explicitly dark
+        return true
+      } else if (this.light === true) {
+        // explicitly light
+        return false
+      } else {
+        // inherit from root
+        return this.rootIsDark
+      }
+    },
   },
 
   methods: {

@@ -65,7 +65,7 @@ describe('applicationable.js', () => {
         foo: 1,
         bar: 2,
       }),
-      mixins: [ Applicationable(null, ['foo', 'bar']) ],
+      mixins: [Applicationable(null, ['foo', 'bar'])],
     })
 
     expect(wrapper.vm._watchers).toHaveLength(6)
@@ -89,7 +89,7 @@ describe('applicationable.js', () => {
 
   it('should update application with dynamic property', async () => {
     const wrapper = mountFunction({
-      mixins: [ Applicationable('top') ],
+      mixins: [Applicationable('top')],
       computed: {
         applicationProperty () {
           return 'top'
@@ -109,7 +109,7 @@ describe('applicationable.js', () => {
 
   it('should remove designated value from application', async () => {
     const wrapper = mountFunction({
-      mixins: [ Applicationable('footer') ],
+      mixins: [Applicationable('footer')],
       methods: {
         updateApplication () {
           return 30

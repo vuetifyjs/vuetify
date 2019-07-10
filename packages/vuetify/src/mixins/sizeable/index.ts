@@ -5,9 +5,6 @@ export default Vue.extend({
 
   props: {
     large: Boolean,
-    size: {
-      type: [Number, String],
-    },
     small: Boolean,
     xLarge: Boolean,
     xSmall: Boolean,
