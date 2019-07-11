@@ -27,7 +27,6 @@ import { PropValidator } from 'vue/types/options'
 import { VNode, VNodeDirective } from 'vue'
 
 export const defaultMenuProps = {
-  eager: true,
   closeOnClick: false,
   closeOnContentClick: false,
   disableKeys: true,
