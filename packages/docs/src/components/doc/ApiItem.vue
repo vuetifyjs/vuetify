@@ -41,7 +41,7 @@
 
       <!-- Description -->
       <doc-markdown
-        v-else-if="header.value === 'description'"
+        v-else-if="header.value === 'description' && item.description"
         :code="item.description"
       />
 
