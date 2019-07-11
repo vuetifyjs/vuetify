@@ -20,7 +20,6 @@ function getMapData () {
       maps[slot].slots.push(slotDefault)
     }
   })
-
   return maps
 }
 
