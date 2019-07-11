@@ -139,11 +139,11 @@
             class: 'xs4',
           },
           {
-            value: 'props',
-            class: 'xs8 text-xs-right',
+            value: 'description',
+            class: 'xs12 mt-2',
           },
           {
-            value: 'description',
+            value: 'props',
             class: 'xs12 mt-2',
           },
         ],

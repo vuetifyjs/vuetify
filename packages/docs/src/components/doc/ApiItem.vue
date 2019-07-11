@@ -45,12 +45,37 @@
         :code="item.description"
       />
 
+      <!-- Signature -->
       <doc-markup
-        v-if="header.value === 'example' && item.example"
+        v-else-if="header.value === 'signature' && item.signature"
+        :filename="false"
+        lang="ts"
+        value="example"
+      >{{ item.signature }}</doc-markup>
+
+      <!-- Example -->
+      <doc-markup
+        v-else-if="header.value === 'example' && item.example"
         :filename="false"
         lang="ts"
         value="example"
       >{{ item.example }}</doc-markup>
+
+      <!-- Props -->
+      <doc-markup
+        v-else-if="header.value === 'props' && item.props"
+        :filename="false"
+        lang="ts"
+        value="example"
+      >{{ item.props }}</doc-markup>
+
+      <!-- Value -->
+      <doc-markup
+        v-else-if="header.value === 'value' && item.value"
+        :filename="false"
+        lang="ts"
+        value="example"
+      >{{ item.value }}</doc-markup>
     </v-flex>
   </v-layout>
 </template>
@@ -61,9 +86,6 @@
       headers: Array,
       item: Object,
     },
-    data: () => ({
-      expanded: false,
-    }),
   }
 </script>
 
