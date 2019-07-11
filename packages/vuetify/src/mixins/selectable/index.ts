@@ -22,10 +22,6 @@ export default mixins(
   },
 
   props: {
-    color: {
-      type: String,
-      default: 'accent',
-    },
     id: String,
     inputValue: null as any,
     falseValue: null as any,
@@ -39,13 +35,17 @@ export default mixins(
 
   data () {
     return {
+      hasColor: this.inputValue,
       lazyValue: this.inputValue,
     }
   },
 
   computed: {
     computedColor (): string | undefined {
-      return this.isActive ? this.color : this.validationState
+      if (!this.isActive) return undefined
+      if (this.color) return this.color
+      if (this.isDark) return 'white'
+      return 'accent'
     },
     isMultiple (): boolean {
       return this.multiple === true || (this.multiple === null && Array.isArray(this.internalValue))
@@ -151,6 +151,7 @@ export default mixins(
 
       this.validate(true, input)
       this.internalValue = input
+      this.hasColor = input
     },
     onFocus () {
       this.isFocused = true

@@ -54,7 +54,7 @@ export default Selectable.extend({
       }
     },
     switchData (): VNodeData {
-      return this.setTextColor(this.loading ? undefined : this.computedColor, {
+      return this.setTextColor(this.loading ? undefined : this.validationState, {
         class: this.themeClasses,
       })
     },
@@ -75,7 +75,7 @@ export default Selectable.extend({
           ...this.$attrs,
           ...this.attrs,
         }),
-        this.genRipple(this.setTextColor(this.computedColor, {
+        this.genRipple(this.setTextColor(this.validationState, {
           directives: [{
             name: 'touch',
             value: {
