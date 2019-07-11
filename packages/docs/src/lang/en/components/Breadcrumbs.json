@@ -33,5 +33,5 @@
   "slots": {
     "divider": "The slot used for dividers.",
     "item": "The slot used to override default `v-breadcrumbs-item` behavior when using the **items** prop."
-  },
+  }
 }
