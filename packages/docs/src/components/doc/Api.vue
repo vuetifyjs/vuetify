@@ -110,13 +110,7 @@
         slots: [
           {
             value: 'name',
-            class: 'left',
-          },
-        ],
-        scopedSlots: [
-          {
-            value: 'name',
-            class: 'xs3',
+            class: 'left xs3',
           },
           {
             value: 'props',
@@ -157,7 +151,7 @@
       },
       search: null,
       tab: null,
-      tabs: ['api', 'props', 'slots', 'scopedSlots', 'params', 'events', 'functions', 'functional', 'options'],
+      tabs: ['api', 'props', 'slots', 'params', 'events', 'functions', 'functional', 'options'],
     }),
 
     computed: {
