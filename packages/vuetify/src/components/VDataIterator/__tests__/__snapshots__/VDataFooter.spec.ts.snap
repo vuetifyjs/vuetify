@@ -32,6 +32,10 @@ exports[`VDataFooter.ts should render and match snapshot 1`] = `
             </div>
           </div>
           <div class="v-menu">
+            <div class="v-menu__content theme--light "
+                 style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+            >
+            </div>
           </div>
         </div>
       </div>
@@ -80,7 +84,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
         <div role="button"
              aria-haspopup="listbox"
              aria-expanded="false"
-             aria-owns="list-59"
+             aria-owns="list-39"
              class="v-input__slot"
         >
           <div class="v-select__slot">
@@ -89,7 +93,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
                 10
               </div>
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                     id="input-59"
+                     id="input-39"
                      readonly="readonly"
                      type="text"
                      aria-readonly="true"
@@ -105,6 +109,10 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
             </div>
           </div>
           <div class="v-menu">
+            <div class="v-menu__content theme--light "
+                 style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+            >
+            </div>
           </div>
         </div>
       </div>
@@ -175,7 +183,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
         <div role="button"
              aria-haspopup="listbox"
              aria-expanded="false"
-             aria-owns="list-38"
+             aria-owns="list-24"
              class="v-input__slot"
         >
           <div class="v-select__slot">
@@ -184,7 +192,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
                 10
               </div>
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                     id="input-38"
+                     id="input-24"
                      readonly="readonly"
                      type="text"
                      aria-readonly="true"
@@ -200,6 +208,10 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
             </div>
           </div>
           <div class="v-menu">
+            <div class="v-menu__content theme--light "
+                 style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+            >
+            </div>
           </div>
         </div>
       </div>
@@ -270,7 +282,7 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
         <div role="button"
              aria-haspopup="listbox"
              aria-expanded="false"
-             aria-owns="list-20"
+             aria-owns="list-13"
              class="v-input__slot"
         >
           <div class="v-select__slot">
@@ -279,7 +291,7 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
                 100
               </div>
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                     id="input-20"
+                     id="input-13"
                      readonly="readonly"
                      type="text"
                      aria-readonly="true"
@@ -295,6 +307,10 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
             </div>
           </div>
           <div class="v-menu">
+            <div class="v-menu__content theme--light "
+                 style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+            >
+            </div>
           </div>
         </div>
       </div>
@@ -344,7 +360,7 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
         <div role="button"
              aria-haspopup="listbox"
              aria-expanded="false"
-             aria-owns="list-97"
+             aria-owns="list-65"
              class="v-input__slot"
         >
           <div class="v-select__slot">
@@ -353,7 +369,7 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
                 10
               </div>
               <input aria-label="$vuetify.dataFooter.itemsPerPageText"
-                     id="input-97"
+                     id="input-65"
                      readonly="readonly"
                      type="text"
                      aria-readonly="true"
@@ -369,6 +385,10 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
             </div>
           </div>
           <div class="v-menu">
+            <div class="v-menu__content theme--light "
+                 style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+            >
+            </div>
           </div>
         </div>
       </div>
