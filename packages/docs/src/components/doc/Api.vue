@@ -2,78 +2,85 @@
   <div>
     <doc-heading>Generic.Pages.api</doc-heading>
     <v-card outlined>
-      <v-layout
-        pt-3
-        grey
-        lighten-4
-        wrap
+      <v-card
+        color="primary"
+        dark
+        flat
+        style="border-bottom-left-radius: 0; border-bottom-right-radius: 0"
       >
-        <v-flex xs12 md4 px-3 mb-3>
-          <v-select
-            v-model="current"
-            :items="value"
-            label="Available Component(s)"
-            menu-props="offset-y"
-            hide-details
-            outlined
-            prepend-inner-icon="mdi-view-dashboard"
-          />
-        </v-flex>
-        <v-flex xs12 md4 offset-md4 px-3 mb-3>
-          <v-text-field
-            v-model="search"
-            append-icon="search"
-            label="Search..."
-            single-line
-            hide-details
-            outlined
-          />
-        </v-flex>
-        <v-flex xs12>
-          <v-tabs
-            v-model="tab"
-            background-color="transparent"
-            :vertical="$vuetify.breakpoint.smAndUp"
-            :slider-color="computedTabs.length ? 'primary' : 'transparent'"
-          >
-            <v-tab
-              v-for="(tab) in computedTabs"
-              :key="`tab-${tab}`"
-              :href="`#${tab}`"
-              class="justify-start"
-            >
-              {{ tab.replace(/([A-Z])/g, ' $1') }}
-            </v-tab>
+        <v-card-text>
+          <v-layout wrap>
+            <v-flex xs12 md4>
+              <v-select
+                v-model="current"
+                :items="value"
+                :class="$vuetify.breakpoint.mdAndUp ? '' : 'mb-3'"
+                label="Available Component(s)"
+                outlined
+                color="warning"
+                :menu-props="{offsetY: true, contentClass: 'primary'}"
+                prepend-icon="mdi-view-dashboard"
+                hide-details
+              />
+            </v-flex>
+            <v-flex xs12 md4 offset-md4>
+              <v-text-field
+                v-model="search"
+                type="search"
+                clearable
+                color="warning"
+                append-icon="search"
+                label="Search..."
+                outlined
+                hide-details
+                single-line
+              />
+            </v-flex>
+          </v-layout>
+        </v-card-text>
+      </v-card>
+      <v-tabs
+        v-model="tab"
+        background-color="transparent"
+        :vertical="$vuetify.breakpoint.smAndUp"
+        :slider-color="computedTabs.length ? 'primary' : 'transparent'"
+      >
+        <v-tab
+          v-for="(tab) in computedTabs"
+          :key="`tab-${tab}`"
+          :href="`#${tab}`"
+          class="justify-start"
+        >
+          {{ tab.replace(/([A-Z])/g, ' $1') }}
+        </v-tab>
 
-            <v-tabs-items
-              :key="current"
-              v-model="tab"
-              touchless
-              class="white"
-            >
-              <v-tab-item
-                v-for="(tab, i) in computedTabs"
-                :key="`tab-item-${i}`"
-                :value="tab"
-                class="scroll-y"
-                eager
-                style="max-height: 800px;"
-              >
-                <v-card flat>
-                  <doc-parameters
-                    :headers="headers[tab]"
-                    :items="component[tab]"
-                    :lang="lang"
-                    :search="search"
-                    :target="current"
-                    :type="tab"
-                  />
-                </v-card>
-              </v-tab-item>
-            </v-tabs-items>
-          </v-tabs>
-        </v-flex>
-      </v-layout>
+        <v-tabs-items
+          :key="current"
+          v-model="tab"
+          touchless
+          class="white"
+        >
+          <v-tab-item
+            v-for="(tab, i) in computedTabs"
+            :key="`tab-item-${i}`"
+            :value="tab"
+            class="scroll-y"
+            eager
+            style="max-height: 800px;"
+          >
+            <v-card flat>
+              <doc-parameters
+                :headers="headers[tab]"
+                :items="component[tab]"
+                :lang="lang"
+                :search="search"
+                :target="current"
+                :type="tab"
+              />
+            </v-card>
+          </v-tab-item>
+        </v-tabs-items>
+      </v-tabs>
     </v-card>
   </div>
 </template>
