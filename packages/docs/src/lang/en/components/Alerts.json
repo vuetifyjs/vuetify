@@ -67,10 +67,8 @@
   },
   "slots": {
     "append": "Slot for icon at end of alert.",
+    "close": "Slot for icon used in **dismissible** prop.",
     "prepend": "Slot for icon at beginning of alert."
-  },
-  "scopedSlots": {
-    "close": "Slot for icon used in **dismissible** prop."
   },
   "functions": {
     "toggle": "Toggles the alert's active state. Available in the close slot and used as the click action in **dismissible**."

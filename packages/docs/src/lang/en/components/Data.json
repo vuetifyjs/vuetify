@@ -19,7 +19,7 @@
     "customFilter": "Function to filter items",
     "serverItemsLength": "Used only when data is provided by a server. Should be set to the total amount of items available on server so that pagination works correctly"
   },
-  "scopedSlots": {
+  "slots": {
     "default": "The default slot. Use this to render your items"
   },
   "events": {

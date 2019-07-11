@@ -24,8 +24,5 @@
   },
   "props": {
     "disabled": "Turns off hover functionality"
-  },
-  "scopedSlots": {
-    "default": "The default scoped slot"
   }
 }

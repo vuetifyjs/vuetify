@@ -19,7 +19,7 @@
     },
     "sales-card": {
       "header": "### Custom labels",
-      "desc": "By providing a scoped slot **label**, we are able to modify the displayed content adding a dollar sign ($). This slot is **_exclusively_** for text content. For more information on the svg `<text>` element, [navigate here](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/text)."
+      "desc": "By providing a **label** slot, we are able to modify the displayed content adding a dollar sign ($). This slot is **_exclusively_** for text content. For more information on the svg `<text>` element, [navigate here](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/text)."
     },
     "fill": {
       "header": "### Fill",

@@ -18,8 +18,8 @@
       "desc": "A rating can have 3 defined icons, **full-icon**, **half-icon** (with the **half-increments** prop) and **empty-icon**."
     },
     "slots": {
-      "header": "### Scoped slots",
-      "desc": "A scoped slot is provided to give you even more freedom in how you display the rating."
+      "header": "### Slots",
+      "desc": "Slots are provided to give you even more freedom in how you display the rating."
     },
     "card": {
       "header": "### Card ratings",

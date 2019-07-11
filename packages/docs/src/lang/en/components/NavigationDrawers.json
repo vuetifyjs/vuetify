@@ -31,7 +31,7 @@
     },
     "background": {
       "header": "### Backgrounds",
-      "desc": "Apply a custom background to your drawer. If you need to customize `v-img`'s properties you can use the scoped **img** scoped slot."
+      "desc": "Apply a custom background to your drawer. If you need to customize `v-img`'s properties you can use the **img** slot."
     },
     "bottom-drawer": {
       "header": "### Bottom drawer",
@@ -66,10 +66,8 @@
   },
   "slots": {
     "append": "A slot at the bottom of the drawer",
+    "img": "Used to modify `v-img` properties when using the **src** prop",
     "prepend": "A slot at the top of the drawer"
-  },
-  "scopedSlots": {
-    "img": "Used to modify `v-img` properties when using the **src** prop"
   },
   "alert": "If you are using `v-navigation-drawer` with `app` property enabled, you don't need to use `absolute` prop as in examples."
 }

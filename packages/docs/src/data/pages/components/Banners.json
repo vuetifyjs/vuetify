@@ -44,7 +44,7 @@
             "simple/two-line",
             "intermediate/icon-slot",
             "intermediate/icon-event",
-            "intermediate/scoped-slots"
+            "intermediate/actions-slots"
           ]
         }
       ]
