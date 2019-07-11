@@ -68,6 +68,8 @@
 </template>
 
 <script>
+  import { getBranch } from '@/util/helpers'
+
   export default {
     data: () => ({
       branch: null,
@@ -84,8 +86,7 @@
       ],
     }),
     mounted () {
-      const branch = (window) ? window.location.hostname.split('.')[0] : 'master'
-      this.branch = ['master', 'dev', 'next'].includes(branch) ? branch : 'master'
+      this.branch = getBranch()
     },
     methods: {
       genSrc (name) {

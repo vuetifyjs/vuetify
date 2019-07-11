@@ -8,6 +8,8 @@
 </template>
 
 <script>
+  import { getBranch } from '@/util/helpers'
+
   export default {
     components: {
       NotFound: () => import('@/pages/general/404'),
@@ -35,8 +37,7 @@
     },
 
     mounted () {
-      const branch = (window) ? window.location.hostname.split('.')[0] : 'master'
-      this.branch = ['master', 'dev', 'next'].includes(branch) ? branch : 'master'
+      const branch = getBranch()
     }
   }
 </script>
