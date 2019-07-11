@@ -37,7 +37,7 @@
     },
 
     mounted () {
-      const branch = getBranch()
-    }
+      this.branch = getBranch()
+    },
   }
 </script>
