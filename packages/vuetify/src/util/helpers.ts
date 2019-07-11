@@ -392,10 +392,16 @@ export function sortItems (
   return items.sort((a, b) => {
     for (let i = 0; i < sortBy.length; i++) {
       const sortKey = sortBy[i]
-      if (sortDesc[i]) {
-        return collator.compare(b[sortKey], a[sortKey])
+      const sortA = getObjectValueByPath(a, sortKey)
+      const sortB = getObjectValueByPath(b, sortKey)
+      if (sortA === null && sortB === null) {
+        return 0
       }
-      return collator.compare(a[sortKey], b[sortKey])
+      if (customSorters && customSorters[sortKey]) return customSorters[sortKey](sortA, sortB)
+      if (sortDesc[i]) {
+        return collator.compare(sortB, sortA)
+      }
+      return collator.compare(sortA, sortB)
     }
     return 0
   })
