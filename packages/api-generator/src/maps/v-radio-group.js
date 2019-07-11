@@ -1,4 +1,4 @@
-const { inputSlots, validatableEvents } = require('../variables')
+const { inputSlots, validatableEvents } = require('../helpers/variables')
 
 module.exports = {
   'v-radio-group': {

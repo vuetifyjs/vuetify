@@ -1,4 +1,4 @@
-const { VSelect } = require('../variables')
+const { VSelect } = require('../helpers/variables')
 
 VSelect.props.push({
   name: 'menuProps',

@@ -1,7 +1,7 @@
 const Vue = require('vue')
 const Vuetify = require('vuetify')
 const fs = require('fs')
-const map = require('./map')
+const map = require('./helpers/map')
 const deepmerge = require('deepmerge')
 
 const hyphenateRE = /\B([A-Z])/g

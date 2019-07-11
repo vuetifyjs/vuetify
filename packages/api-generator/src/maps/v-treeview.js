@@ -1,4 +1,4 @@
-const { VTreeviewScopedProps } = require('../variables')
+const { VTreeviewScopedProps } = require('../helpers/variables')
 
 module.exports = {
   'v-treeview': {

@@ -1,4 +1,4 @@
-const { VSelect } = require('../variables')
+const { VSelect } = require('../helpers/variables')
 
 const ItemObject = {
   text: 'string | number | object',

@@ -1,4 +1,4 @@
-const { VSlider } = require('../variables')
+const { VSlider } = require('../helpers/variables')
 
 module.exports = {
   'v-range-slider': VSlider,
