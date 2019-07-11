@@ -2,43 +2,42 @@
   <div>
     <doc-heading>Generic.Pages.api</doc-heading>
     <v-card outlined>
-      <v-card
+      <v-toolbar
+        class="px-2 py-3"
         color="primary"
         dark
         flat
-        style="border-bottom-left-radius: 0; border-bottom-right-radius: 0"
+        height="auto"
       >
-        <v-card-text>
-          <v-layout wrap>
-            <v-flex xs12 md4>
-              <v-select
-                v-model="current"
-                :items="value"
-                :class="$vuetify.breakpoint.mdAndUp ? '' : 'mb-3'"
-                label="Available Component(s)"
-                outlined
-                color="warning"
-                :menu-props="{offsetY: true, contentClass: 'primary'}"
-                prepend-icon="mdi-view-dashboard"
-                hide-details
-              />
-            </v-flex>
-            <v-flex xs12 md4 offset-md4>
-              <v-text-field
-                v-model="search"
-                type="search"
-                clearable
-                color="warning"
-                append-icon="search"
-                label="Search..."
-                outlined
-                hide-details
-                single-line
-              />
-            </v-flex>
-          </v-layout>
-        </v-card-text>
-      </v-card>
+        <v-layout wrap>
+          <v-flex xs12 md4>
+            <v-select
+              v-model="current"
+              :items="value"
+              :class="$vuetify.breakpoint.mdAndUp ? '' : 'mb-3'"
+              label="Available Component(s)"
+              outlined
+              color="warning"
+              :menu-props="{offsetY: true, contentClass: 'primary'}"
+              prepend-icon="mdi-view-dashboard"
+              hide-details
+            />
+          </v-flex>
+          <v-flex xs12 md4 offset-md4>
+            <v-text-field
+              v-model="search"
+              type="search"
+              clearable
+              color="warning"
+              append-icon="search"
+              label="Search..."
+              outlined
+              hide-details
+              single-line
+            />
+          </v-flex>
+        </v-layout>
+      </v-toolbar>
       <v-tabs
         v-model="tab"
         background-color="transparent"
