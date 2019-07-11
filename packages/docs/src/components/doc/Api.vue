@@ -8,66 +8,72 @@
         lighten-4
         wrap
       >
-        <v-flex d-flex xs12 px-3 pb-3>
+        <v-flex xs12 md4 px-3 mb-3>
           <v-select
             v-model="current"
             :items="value"
-            label="Component"
-            menu-props="auto"
+            label="Available Component(s)"
+            menu-props="offset-y"
             hide-details
+            outlined
+            prepend-inner-icon="mdi-view-dashboard"
           />
-          <v-spacer />
+        </v-flex>
+        <v-flex xs12 md4 offset-md4 px-3 mb-3>
           <v-text-field
             v-model="search"
             append-icon="search"
             label="Search..."
             single-line
             hide-details
-            width="290"
+            outlined
           />
         </v-flex>
         <v-flex xs12>
           <v-tabs
             v-model="tab"
             background-color="transparent"
+            :vertical="$vuetify.breakpoint.smAndUp"
             :slider-color="computedTabs.length ? 'primary' : 'transparent'"
           >
             <v-tab
               v-for="(tab) in computedTabs"
               :key="`tab-${tab}`"
               :href="`#${tab}`"
+              class="justify-start"
             >
               {{ tab.replace(/([A-Z])/g, ' $1') }}
             </v-tab>
+
+            <v-tabs-items
+              :key="current"
+              v-model="tab"
+              touchless
+              class="white"
+            >
+              <v-tab-item
+                v-for="(tab, i) in computedTabs"
+                :key="`tab-item-${i}`"
+                :value="tab"
+                class="scroll-y"
+                eager
+                style="max-height: 800px;"
+              >
+                <v-card flat>
+                  <doc-parameters
+                    :headers="headers[tab]"
+                    :items="component[tab]"
+                    :lang="lang"
+                    :search="search"
+                    :target="current"
+                    :type="tab"
+                  />
+                </v-card>
+              </v-tab-item>
+            </v-tabs-items>
           </v-tabs>
         </v-flex>
       </v-layout>
-
-      <v-tabs-items
-        :key="current"
-        v-model="tab"
-        touchless
-        class="white scroll-y"
-        style="max-height: 700px;"
-      >
-        <v-tab-item
-          v-for="(tab, i) in computedTabs"
-          :key="`tab-item-${i}`"
-          :value="tab"
-          eager
-        >
-          <v-card flat>
-            <doc-parameters
-              :headers="headers[tab]"
-              :items="component[tab]"
-              :lang="lang"
-              :search="search"
-              :target="current"
-              :type="tab"
-            />
-          </v-card>
-        </v-tab-item>
-      </v-tabs-items>
     </v-card>
   </div>
 </template>
@@ -78,26 +84,25 @@
 
   const propProps = [
     {
-      hideTitle: true,
       value: 'name',
-      class: 'xs8',
+      class: 'xs6 md3',
     },
     {
-      hideTitle: true,
       value: 'type',
-      class: 'xs4 text-sm-right',
+      class: 'xs6 md2 text-xs-right',
     },
     {
-      hideTitle: true,
-      value: 'description',
-      type: 'markdown',
-      class: 'xs12 grey lighten-4',
+      value: 'default',
+      class: 'xs12 md7 text-md-right',
     },
-    // {
-    //   value: 'default',
-    //   type: 'inline-markup',
-    //   class: 'xs12 sm8 grey lighten-4',
-    // },
+    {
+      value: 'description',
+      class: 'xs12 mt-2',
+    },
+    {
+      value: 'example',
+      class: 'xs12 mt-2',
+    },
   ]
 
   export default {
@@ -120,12 +125,12 @@
         slots: [
           {
             value: 'name',
-            class: 'xs4',
+            class: 'xs12',
           },
           {
             value: 'description',
             type: 'markdown',
-            class: 'xs8 text-xs-right',
+            class: 'xs12 mt-2',
           },
         ],
         scopedSlots: [
@@ -134,51 +139,46 @@
             class: 'xs4',
           },
           {
-            value: 'description',
-            type: 'markdown',
+            value: 'props',
             class: 'xs8 text-xs-right',
           },
           {
-            value: 'props',
-            type: 'markup',
-            class: 'xs12 grey lighten-4 grey lighten-4',
+            value: 'description',
+            class: 'xs12 mt-2',
           },
         ],
         events: [
           {
             value: 'name',
-            class: 'xs4',
+            class: 'xs12',
           },
           {
             value: 'description',
-            type: 'markdown',
-            class: 'xs8 text-xs-right',
+            class: 'xs12 mt-2',
           },
           {
             value: 'value',
-            type: 'markup',
-            class: 'xs 12 grey lighten-4',
+            class: 'xs12 mt-2',
           },
         ],
         functions: [
           {
             value: 'name',
-            class: '',
+            class: 'xs12',
           },
           {
             value: 'signature',
-            type: 'markup',
-            class: 'text-xs-right',
+            class: 'xs12 mt-2',
           },
         ],
         functional: [
           {
             value: 'name',
-            class: '',
+            class: 'xs12',
           },
           {
             value: 'description',
-            class: 'text-xs-right',
+            class: 'xs12 mt-2',
           },
         ],
         options: [...propProps],
