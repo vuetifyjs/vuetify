@@ -53,6 +53,15 @@ export default Selectable.extend({
         role: 'switch',
       }
     },
+    // Do not return undefined if disabled,
+    // according to spec, should still show
+    // a color when disabled and active
+    validationState (): string | undefined {
+      if (this.hasError && this.shouldValidate) return 'error'
+      if (this.hasSuccess) return 'success'
+      if (this.hasColor) return this.computedColor
+      return undefined
+    },
     switchData (): VNodeData {
       return this.setTextColor(this.loading ? undefined : this.validationState, {
         class: this.themeClasses,

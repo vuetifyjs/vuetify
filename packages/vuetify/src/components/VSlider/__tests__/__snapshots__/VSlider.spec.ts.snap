@@ -109,7 +109,7 @@ exports[`VSlider.ts should change track styles in rtl 3`] = `
                disabled="disabled"
         >
         <div class="v-slider__track-container">
-          <div class="v-slider__track-background primary lighten-3"
+          <div class="v-slider__track-background"
                style="right: 0px;"
           >
           </div>
@@ -254,7 +254,7 @@ exports[`VSlider.ts should change track styles in rtl 6`] = `
                disabled="disabled"
         >
         <div class="v-slider__track-container">
-          <div class="v-slider__track-background primary lighten-3"
+          <div class="v-slider__track-background"
                style="left: 0px;"
           >
           </div>

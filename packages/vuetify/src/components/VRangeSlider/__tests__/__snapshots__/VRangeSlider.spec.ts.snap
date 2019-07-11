@@ -83,11 +83,11 @@ exports[`VRangeSlider.ts should render disabled slider 1`] = `
                tabindex="-1"
         >
         <div class="v-slider__track-container">
-          <div class="v-slider__track-background primary lighten-3">
+          <div class="v-slider__track-background">
           </div>
-          <div class="v-slider__track-background primary lighten-3">
+          <div class="v-slider__track-background">
           </div>
-          <div class="v-slider__track-background primary lighten-3">
+          <div class="v-slider__track-background">
           </div>
         </div>
         <div role="slider"

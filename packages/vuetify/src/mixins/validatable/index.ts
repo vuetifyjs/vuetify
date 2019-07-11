@@ -93,6 +93,8 @@ export default mixins(
       return this.validationTarget.length > 0
     },
     hasState (): boolean {
+      if (this.disabled) return false
+
       return (
         this.hasSuccess ||
         (this.shouldValidate && this.hasError)
@@ -129,6 +131,7 @@ export default mixins(
       return this.validationTarget.slice(0, Number(this.errorCount))
     },
     validationState (): string | undefined {
+      if (this.disabled) return undefined
       if (this.hasError && this.shouldValidate) return 'error'
       if (this.hasSuccess) return 'success'
       if (this.hasColor) return this.computedColor

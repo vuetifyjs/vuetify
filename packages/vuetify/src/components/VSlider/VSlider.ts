@@ -186,10 +186,13 @@ export default mixins<options &
       )
     },
     computedTrackColor (): string | undefined {
+      if (this.disabled) return undefined
       if (this.trackColor) return this.trackColor
+      if (this.isDark) return this.validationState
       return this.validationState || 'primary lighten-3'
     },
     computedTrackFillColor (): string | undefined {
+      if (this.disabled) return undefined
       if (this.trackFillColor) return this.trackFillColor
       return this.validationState || this.computedColor
     },
