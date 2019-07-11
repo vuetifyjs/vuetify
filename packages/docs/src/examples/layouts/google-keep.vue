@@ -50,7 +50,7 @@
         </template>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar color="amber" app absolute clipped-left>
+    <v-app-bar color="amber" app absolute clipped-left>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <span class="title ml-3 mr-5">Google&nbsp;<span class="font-weight-light">Keep</span></span>
       <v-text-field
@@ -61,7 +61,7 @@
         prepend-inner-icon="search"
       ></v-text-field>
       <v-spacer></v-spacer>
-    </v-toolbar>
+    </v-app-bar>
     <v-content>
       <v-container fluid fill-height class="grey lighten-4">
         <v-layout justify-center align-center>
@@ -69,7 +69,7 @@
             <v-tooltip right>
               <template v-slot:activator="{ on }">
                 <v-btn :href="source" icon large target="_blank" v-on="on">
-                  <v-icon large>code</v-icon>
+                  <v-icon large>mdi-code-tags</v-icon>
                 </v-btn>
               </template>
               <span>Source</span>

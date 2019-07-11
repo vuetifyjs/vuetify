@@ -147,6 +147,7 @@
   import {
     mapGetters,
   } from 'vuex'
+  import { getBranch } from '@/util/helpers'
 
   import kebabCase from 'lodash/kebabCase'
 
@@ -210,8 +211,7 @@
         `!raw-loader!../../examples/${this.file}.vue`
       ).then(comp => this.boot(comp.default))
 
-      const branch = (window) ? window.location.hostname.split('.')[0] : 'master'
-      this.branch = ['master', 'dev', 'next'].includes(branch) ? branch : 'master'
+      this.branch = getBranch()
     },
 
     methods: {

@@ -11,13 +11,13 @@
       overflow
       app
     ></v-navigation-drawer>
-    <v-toolbar :clipped-left="primaryDrawer.clipped" app absolute>
+    <v-app-bar :clipped-left="primaryDrawer.clipped" app absolute>
       <v-app-bar-nav-icon
         v-if="primaryDrawer.type !== 'permanent'"
         @click.stop="primaryDrawer.model = !primaryDrawer.model"
       ></v-app-bar-nav-icon>
       <v-toolbar-title>Vuetify</v-toolbar-title>
-    </v-toolbar>
+    </v-app-bar>
     <v-content>
       <v-container fluid>
         <v-layout align-center justify-center>
