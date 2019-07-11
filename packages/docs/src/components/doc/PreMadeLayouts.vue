@@ -36,23 +36,25 @@
                 />
                 <v-btn
                   :aria-label="`Link to layout for ${layout.name}`"
-                  :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/docs/src${layout.href}.vue`"
+                  :href="layout.href"
                   :title="`Link to layout for ${layout.name}`"
                   class="mx-2"
                   color="indigo"
                   depressed
                   fab
+                  target="_blank"
                 >
                   <v-icon>mdi-open-in-new</v-icon>
                 </v-btn>
                 <v-btn
                   :aria-label="`Link to layout ${layout.name}`"
-                  :href="layout.href"
+                  :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/docs/src${layout.href}.vue`"
                   :title="`Link to code for ${layout.name}`"
                   class="mx-2"
                   color="indigo"
                   depressed
                   fab
+                  target="_blank"
                 >
                   <v-icon>mdi-code-tags</v-icon>
                 </v-btn>

@@ -18,7 +18,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar
+    <v-app-bar
       color="blue-grey"
       dark
       fixed
@@ -29,7 +29,7 @@
       <v-toolbar-title>Toolbar</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-app-bar-nav-icon @click.stop="drawerRight = !drawerRight"></v-app-bar-nav-icon>
-    </v-toolbar>
+    </v-app-bar>
     <v-navigation-drawer
       v-model="drawer"
       fixed
@@ -58,7 +58,7 @@
             <v-tooltip right>
               <template v-slot:activator="{ on }">
                 <v-btn :href="source" icon large target="_blank" v-on="on">
-                  <v-icon large>code</v-icon>
+                  <v-icon large>mdi-code-tags</v-icon>
                 </v-btn>
               </template>
               <span>Source</span>
