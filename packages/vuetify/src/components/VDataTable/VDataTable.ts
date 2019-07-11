@@ -25,26 +25,27 @@ import ripple from '../../directives/ripple'
 import { deepEqual, getObjectValueByPath, compareFn, getPrefixedScopedSlots, getSlot, defaultFilter } from '../../util/helpers'
 import { breaking } from '../../util/console'
 
-function filterFn (item: any, search: string | null) {
+function filterFn (item: any, search: string | null, locale: string) {
   return (header: TableHeader) => {
     const value = getObjectValueByPath(item, header.value)
-    return header.filter ? header.filter(value, search, item) : defaultFilter(value, search)
+    return header.filter ? header.filter(value, search, item) : defaultFilter(value, search, locale)
   }
 }
 
 function searchTableItems (
   items: any[],
   search: string | null,
+  locale: string,
   headersWithCustomFilters: TableHeader[],
   headersWithoutCustomFilters: TableHeader[]
 ) {
   let filtered = items
   search = typeof search === 'string' ? search.trim() : null
   if (search) {
-    filtered = items.filter(item => headersWithoutCustomFilters.some(filterFn(item, search)))
+    filtered = items.filter(item => headersWithoutCustomFilters.some(filterFn(item, search, locale)))
   }
 
-  return filtered.filter(item => headersWithCustomFilters.every(filterFn(item, search)))
+  return filtered.filter(item => headersWithCustomFilters.every(filterFn(item, search, locale)))
 }
 
 /* @vue/component */
@@ -83,7 +84,8 @@ export default VDataIterator.extend({
     customFilter: {
       type: Function,
       default: searchTableItems,
-    } as PropValidator<(items: any[], search: string, exclusiveHeaders: TableHeader[], nonExclusiveHeaders: TableHeader[]) => any[]>,
+    } as PropValidator<(items: any[], search: string, locale: string,
+       exclusiveHeaders: TableHeader[], nonExclusiveHeaders: TableHeader[]) => any[]>,
   },
 
   data () {
@@ -169,8 +171,8 @@ export default VDataIterator.extend({
     calcWidths () {
       this.widths = Array.from(this.$el.querySelectorAll('th')).map(e => e.clientWidth)
     },
-    customFilterWithColumns (items: any[], search: string) {
-      return this.customFilter(items, search, this.headersWithCustomFilters, this.headersWithoutCustomFilters)
+    customFilterWithColumns (items: any[], search: string, locale: string) {
+      return this.customFilter(items, search, locale, this.headersWithCustomFilters, this.headersWithoutCustomFilters)
     },
     customSortWithHeaders (items: any[], sortBy: string[], sortDesc: boolean[], locale: string) {
       return this.customSort(items, sortBy, sortDesc, locale, this.columnSorters)
