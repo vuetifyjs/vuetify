@@ -8,10 +8,6 @@ module.exports = {
           value: 'boolean',
         },
       },
-      {
-        name: 'default',
-        props: undefined,
-      },
     ],
   },
 }

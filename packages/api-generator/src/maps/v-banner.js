@@ -8,10 +8,6 @@ module.exports = {
         },
       },
       {
-        name: 'default',
-        props: undefined,
-      },
-      {
         name: 'icon',
         props: undefined,
       },

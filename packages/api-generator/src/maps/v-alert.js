@@ -12,10 +12,6 @@ module.exports = {
         },
       },
       {
-        name: 'default',
-        props: undefined,
-      },
-      {
         name: 'prepend',
         props: undefined,
       },

@@ -1,11 +1,5 @@
 module.exports = {
   'v-chip': {
-    slots: [
-      {
-        name: 'default',
-        props: undefined,
-      },
-    ],
     events: [
       {
         name: 'input',
