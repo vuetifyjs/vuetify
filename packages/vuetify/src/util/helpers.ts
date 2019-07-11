@@ -388,21 +388,35 @@ export function sortItems (
   customSorters?: Record<string, compareFn>
 ) {
   if (sortBy === null || !sortBy.length) return items
-  const collator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
+
+  const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
+  const numericCollator = new Intl.Collator(locale, { numeric: true, usage: 'sort' })
   return items.sort((a, b) => {
     for (let i = 0; i < sortBy.length; i++) {
       const sortKey = sortBy[i]
-      const sortA = getObjectValueByPath(a, sortKey)
-      const sortB = getObjectValueByPath(b, sortKey)
+
+      let sortA = getObjectValueByPath(a, sortKey)
+      let sortB = getObjectValueByPath(b, sortKey)
+
+      if (sortDesc[i]) {
+        [sortA, sortB] = [sortB, sortA]
+      }
+
+      if (customSorters && customSorters[sortKey]) return customSorters[sortKey](sortA, sortB)
+
+      // Check if both cannot be evaluated
       if (sortA === null && sortB === null) {
         return 0
       }
-      if (customSorters && customSorters[sortKey]) return customSorters[sortKey](sortA, sortB)
-      if (sortDesc[i]) {
-        return collator.compare(sortB, sortA)
+
+      [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())
+
+      if (sortA !== sortB) {
+        if (!isNaN(sortA) && !isNaN(sortB)) numericCollator.compare(sortA, sortB)
+        return stringCollator.compare(sortA, sortB)
       }
-      return collator.compare(sortA, sortB)
     }
+
     return 0
   })
 }
