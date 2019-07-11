@@ -2,6 +2,7 @@
   <component
     :is="component"
     v-if="component !== false"
+    :source="`https://github.com/vuetifyjs/vuetify/blob/${branch}/packages/docs/src/examples/layouts/${page}.vue`"
   />
   <not-found v-else />
 </template>
@@ -20,6 +21,7 @@
     },
 
     data: () => ({
+      branch: undefined,
       component: undefined,
     }),
 
@@ -31,5 +33,10 @@
           throw new Error(`Unable to find layout for <${this.page}>`)
         })
     },
+
+    mounted () {
+      const branch = (window) ? window.location.hostname.split('.')[0] : 'master'
+      this.branch = ['master', 'dev', 'next'].includes(branch) ? branch : 'master'
+    }
   }
 </script>
