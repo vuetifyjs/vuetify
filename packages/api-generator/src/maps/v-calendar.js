@@ -1,4 +1,4 @@
-const { VTimestamp, VTimestampWithTime } = require('../variables')
+const { VTimestamp, VTimestampWithTime } = require('../helpers/variables')
 
 module.exports = {
   'v-calendar': {

@@ -6,10 +6,6 @@ module.exports = {
         props: undefined,
       },
       {
-        name: 'default',
-        props: undefined,
-      },
-      {
         name: 'img',
         props: { height: 'string', src: 'string | srcObject' },
       },

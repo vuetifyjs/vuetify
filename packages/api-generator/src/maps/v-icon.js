@@ -8,11 +8,5 @@ module.exports = {
         'source': null,
       },
     ],
-    slots: [
-      {
-        name: 'default',
-        props: undefined,
-      },
-    ],
   },
 }

@@ -2,10 +2,6 @@ module.exports = {
   'v-toolbar': {
     slots: [
       {
-        name: 'default',
-        props: undefined,
-      },
-      {
         name: 'extension',
         props: undefined,
       },

@@ -5,10 +5,6 @@ module.exports = {
         name: 'badge',
         props: undefined,
       },
-      {
-        name: 'default',
-        props: undefined,
-      },
     ],
   },
 }
