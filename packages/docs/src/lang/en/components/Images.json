@@ -41,5 +41,12 @@
     "src": "The image URL. This prop is mandatory",
     "srcset": "A set of alternate images to use based on device size. [Read more...](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-srcset)",
     "transition": "The transition to use when switching from `lazy-src` to `src`"
+  },
+  "events": {
+    "error": "Emitted when there is an error",
+    "load": "Emitted when image is loaded"
+  },
+  "slots": {
+    "placeholder": "Slot for image placeholder"
   }
 }
