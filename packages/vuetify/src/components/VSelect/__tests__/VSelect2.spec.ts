@@ -37,6 +37,7 @@ describe('VSelect.ts', () => {
   it('should use slotted prepend-item', () => {
     const wrapper = mountFunction({
       propsData: {
+        eager: true,
         items: ['foo'],
       },
       slots: {
@@ -55,6 +56,7 @@ describe('VSelect.ts', () => {
   it('should use slotted append-item', () => {
     const wrapper = mountFunction({
       propsData: {
+        eager: true,
         items: ['foo'],
       },
       slots: {
@@ -369,6 +371,7 @@ describe('VSelect.ts', () => {
     const wrapper = mountFunction({
       attachToDocument: true,
       propsData: {
+        eager: true,
         items: [
           { text: 'bar', value: { id: 1 } },
           { text: 'foo', value: { id: 2 } },

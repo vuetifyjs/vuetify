@@ -54,6 +54,7 @@
     "deletableChips": "Adds a remove icon to selected chips",
     "dense": "Lowers max height of list items",
     "disabled": "Disables the input",
+    "eager": "Mixins.Bootable.props.eager",
     "editable": " Creates an editable button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "filter": "The function used for filtering items",
     "hideSelected": "Do not display in the select menu items that are already selected",

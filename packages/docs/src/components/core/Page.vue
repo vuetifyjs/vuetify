@@ -56,7 +56,7 @@
   import {
     mapState,
   } from 'vuex'
-  import { getComponent } from '@/util/helpers'
+  import { getComponent, getBranch } from '@/util/helpers'
 
   export default {
     components: {
@@ -83,8 +83,7 @@
     mounted () {
       this.init()
 
-      const branch = (window) ? window.location.hostname.split('.')[0] : 'master'
-      this.branch = ['master', 'dev', 'next'].includes(branch) ? branch : 'master'
+      this.branch = getBranch()
     },
 
     methods: {
