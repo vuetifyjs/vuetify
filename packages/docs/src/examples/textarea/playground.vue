@@ -150,7 +150,7 @@
     data: () => ({
       autoGrow: false,
       autofocus: true,
-      clearable: '',
+      clearable: false,
       counter: 0,
       filled: false,
       flat: false,

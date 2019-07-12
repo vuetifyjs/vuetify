@@ -68,6 +68,7 @@
   },
   "props": {
     "alwaysDirty": "When used with the **thumb-label** prop will always show the thumb label.",
+    "dark": "Components.Inputs.props.dark",
     "inverseLabel": "Reverse the label position. Works with **rtl**.",
     "step": "If greater than 0, sets step interval for ticks",
     "thumbColor": "Sets the thumb and thumb label color",
@@ -76,7 +77,8 @@
     "ticks": "Show track ticks. If `true` it shows ticks when using slider. If set to `'always'` it always shows ticks.",
     "tickLabels": "When provided with Array<string>, will attempt to map the labels to each step in index order",
     "tickSize": "Controls the size of **ticks**",
-    "trackColor": "Sets the track fill color",
+    "trackColor": "Sets the track's color",
+    "trackFillColor": "Sets the track's fill color",
     "value": "Controls the current value of the slider",
     "vertical": "Changes slider direction to vertical"
   },

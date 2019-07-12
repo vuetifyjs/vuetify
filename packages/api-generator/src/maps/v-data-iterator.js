@@ -15,10 +15,10 @@ const DataIteratorProps = [
 ].concat(DataProps)
 
 const DataIteratorEvents = [
-  { name: 'input', source: 'v-data', value: 'boolean[]' },
-  { name: 'update:expanded', source: 'v-data', value: 'any[]' },
-  { name: 'item-selected', source: 'v-data', value: '{ item: any, value: boolean }' },
-  { name: 'item-expanded', source: 'v-data', value: '{ item: any, value: boolean }' },
+  { name: 'input', source: 'v-data-iterator', value: 'any[]' },
+  { name: 'update:expanded', source: 'v-data-iterator', value: 'any[]' },
+  { name: 'item-selected', source: 'v-data-iterator', value: '{ item: any, value: boolean }' },
+  { name: 'item-expanded', source: 'v-data-iterator', value: '{ item: any, value: boolean }' },
 ].concat(DataEvents)
 
 const DataIteratorSlots = [
@@ -53,9 +53,9 @@ const DataIteratorScopedSlots = [
     props: {
       ...DataDefaultScopedSlotProps,
       isSelected: 'boolean',
-      select: '(item: any, value: boolean): void',
+      select: '(item: any, value: boolean) => void',
       isExpanded: 'boolean',
-      expand: '(item: any, value: boolean): void',
+      expand: '(item: any, value: boolean) => void',
     },
     source: 'data-iterator',
   },

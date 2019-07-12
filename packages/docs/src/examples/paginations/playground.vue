@@ -8,8 +8,8 @@
         </v-radio-group>
       </v-flex>
 
-      <v-layout row>
-        <v-flex xs3>
+      <v-layout wrap>
+        <v-flex xs12 md3>
           <v-select
             v-model="prevIcon"
             class="mx-3"
@@ -18,7 +18,7 @@
           ></v-select>
         </v-flex>
 
-        <v-flex xs3>
+        <v-flex xs12 md3>
           <v-select
             v-model="nextIcon"
             class="mx-3"
@@ -27,7 +27,7 @@
           ></v-select>
         </v-flex>
 
-        <v-flex xs3>
+        <v-flex xs12 md3>
           <v-text-field
             v-model="length"
             label="Pagination length"
@@ -40,7 +40,7 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex xs3>
+        <v-flex xs12 md3>
           <v-text-field
             v-model="totalVisible"
             label="Total visible"

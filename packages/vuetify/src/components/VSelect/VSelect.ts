@@ -80,6 +80,10 @@ export default baseMixins.extend<options>().extend({
       type: Array,
       default: () => [],
     },
+    itemColor: {
+      type: String,
+      default: 'primary',
+    },
     itemDisabled: {
       type: [String, Array, Function],
       default: 'disabled',
@@ -182,7 +186,7 @@ export default baseMixins.extend<options>().extend({
         },
         props: {
           action: this.multiple,
-          color: this.color,
+          color: this.itemColor,
           dense: this.dense,
           hideSelected: this.hideSelected,
           items: this.virtualizedItems,

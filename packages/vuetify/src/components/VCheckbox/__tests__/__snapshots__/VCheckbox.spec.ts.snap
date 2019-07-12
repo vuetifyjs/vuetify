@@ -123,10 +123,10 @@ exports[`VCheckbox.ts should use custom icons 3`] = `
                type="checkbox"
                value="buzz"
         >
-        <div class="v-input--selection-controls__ripple accent--text">
+        <div class="v-input--selection-controls__ripple">
         </div>
         <i aria-hidden="true"
-           class="v-icon notranslate material-icons theme--light accent--text"
+           class="v-icon notranslate material-icons theme--light"
         >
           fizzbuzz
         </i>

@@ -9,7 +9,7 @@
       <v-toolbar-title>Local hotspots</v-toolbar-title>
     </v-toolbar>
 
-    <v-layout>
+    <v-layout wrap>
       <v-flex>
         <v-card-text>
           <v-treeview

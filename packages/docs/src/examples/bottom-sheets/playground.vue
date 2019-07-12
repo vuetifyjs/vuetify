@@ -17,9 +17,9 @@
       </template>
       <v-sheet class="text-xs-center" height="200px">
         <v-btn
-          class="mt-4"
-          flat
-          color="red"
+          class="my-4"
+          depressed
+          color="error"
           @click="sheet = !sheet"
         >close</v-btn>
         <div class="title">Active Playground Props</div>
