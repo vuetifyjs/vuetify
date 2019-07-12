@@ -82,3 +82,8 @@ export function genChip (item) {
   if (item.deprecated) return 'deprecated'
   if (item.help) return 'help'
 }
+
+export function getBranch () {
+  const branch = window ? window.location.hostname.split('.')[0] : 'master'
+  return ['master', 'dev', 'next'].includes(branch) ? branch : 'master'
+}
