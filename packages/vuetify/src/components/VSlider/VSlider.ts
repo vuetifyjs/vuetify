@@ -47,10 +47,6 @@ export default mixins<options &
   mixins: [Loadable],
 
   props: {
-    color: {
-      type: String,
-      default: 'primary',
-    },
     disabled: Boolean,
     inverseLabel: Boolean,
     min: {
@@ -78,10 +74,7 @@ export default mixins<options &
       type: [Number, String],
       default: 2,
     },
-    thumbColor: {
-      type: String,
-      default: 'primary',
-    },
+    thumbColor: String,
     thumbLabel: {
       type: [Boolean, String],
       default: null,
@@ -91,10 +84,8 @@ export default mixins<options &
       type: [Number, String],
       default: 32,
     },
-    trackColor: {
-      type: String,
-      default: 'primary lighten-3',
-    },
+    trackColor: String,
+    trackFillColor: String,
     value: [Number, String],
     vertical: Boolean,
   },
@@ -194,17 +185,20 @@ export default mixins<options &
         this.$scopedSlots['thumb-label']
       )
     },
-    computedColor (): string | false {
-      if (this.disabled) return false
-      return this.validationState || this.color
+    computedTrackColor (): string | undefined {
+      if (this.disabled) return undefined
+      if (this.trackColor) return this.trackColor
+      if (this.isDark) return this.validationState
+      return this.validationState || 'primary lighten-3'
     },
-    computedTrackColor (): string | false {
-      if (this.disabled) return false
-      return this.validationState || this.trackColor
+    computedTrackFillColor (): string | undefined {
+      if (this.disabled) return undefined
+      if (this.trackFillColor) return this.trackFillColor
+      return this.validationState || this.computedColor
     },
-    computedThumbColor (): string | false {
-      if (this.disabled) return false
-      return this.validationState || this.thumbColor || this.color
+    computedThumbColor (): string | undefined {
+      if (this.thumbColor) return this.thumbColor
+      return this.validationState || this.computedColor
     },
   },
 
@@ -304,7 +298,7 @@ export default mixins<options &
           staticClass: 'v-slider__track-background',
           style: this.trackStyles,
         })),
-        this.$createElement('div', this.setBackgroundColor(this.computedColor, {
+        this.$createElement('div', this.setBackgroundColor(this.computedTrackFillColor, {
           staticClass: 'v-slider__track-fill',
           style: this.trackFillStyles,
         })),

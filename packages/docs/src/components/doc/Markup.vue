@@ -51,6 +51,8 @@
 </template>
 
 <script>
+  import { getBranch } from '@/util/helpers'
+
   export default {
     name: 'Markup',
 
@@ -103,8 +105,7 @@
 
     mounted () {
       this.$nextTick(this.init)
-      const branch = (window) ? window.location.hostname.split('.')[0] : 'master'
-      this.branch = ['master', 'dev', 'next'].includes(branch) ? branch : 'master'
+      this.branch = getBranch()
     },
 
     methods: {
