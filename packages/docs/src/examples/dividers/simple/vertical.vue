@@ -14,7 +14,7 @@
 
     <v-spacer></v-spacer>
 
-    <v-toolbar-items>
+    <v-toolbar-items class="hidden-sm-and-down">
       <v-btn text>
         News
       </v-btn>

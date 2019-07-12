@@ -21,16 +21,11 @@
       "children": [
         {
           "type": "api",
-          "value": ["v-data-table", "v-edit-dialog"]
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "playground",
-          "value": "playground"
+          "value": [
+            "v-data-table",
+            "v-data-footer",
+            "v-edit-dialog"
+          ]
         }
       ]
     },

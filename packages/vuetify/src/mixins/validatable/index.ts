@@ -1,5 +1,6 @@
 // Mixins
 import Colorable from '../colorable'
+import Themeable from '../themeable'
 import { inject as RegistrableInject } from '../registrable'
 
 // Utilities
@@ -16,7 +17,8 @@ export type VuetifyRuleValidations = (VuetifyRuleValidator | string)[]
 /* @vue/component */
 export default mixins(
   Colorable,
-  RegistrableInject('form')
+  RegistrableInject('form'),
+  Themeable
 ).extend({
   name: 'validatable',
 
@@ -63,6 +65,12 @@ export default mixins(
   },
 
   computed: {
+    computedColor (): string | undefined {
+      if (this.disabled) return undefined
+      if (this.color) return this.color
+      if (this.isDark) return 'white'
+      else return 'primary'
+    },
     hasError (): boolean {
       return (
         this.internalErrorMessages.length > 0 ||
@@ -85,6 +93,8 @@ export default mixins(
       return this.validationTarget.length > 0
     },
     hasState (): boolean {
+      if (this.disabled) return false
+
       return (
         this.hasSuccess ||
         (this.shouldValidate && this.hasError)
@@ -121,9 +131,10 @@ export default mixins(
       return this.validationTarget.slice(0, Number(this.errorCount))
     },
     validationState (): string | undefined {
+      if (this.disabled) return undefined
       if (this.hasError && this.shouldValidate) return 'error'
       if (this.hasSuccess) return 'success'
-      if (this.hasColor) return this.color
+      if (this.hasColor) return this.computedColor
       return undefined
     },
     validationTarget (): VuetifyRuleValidations {

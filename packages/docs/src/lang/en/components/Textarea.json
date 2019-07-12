@@ -44,6 +44,7 @@
   },
   "props": {
     "autoGrow": "Automatically grow the textarea depending on amount of text",
+    "dark": "Components.Inputs.props.dark",
     "noResize": "Remove resize handle",
     "rowHeight": "Height value for each row",
     "rows": "Default row count",

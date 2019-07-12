@@ -1,6 +1,6 @@
 <template>
   <div class="text-xs-center">
-    <v-bottom-sheet inset>
+    <v-bottom-sheet v-model="sheet" inset>
       <template v-slot:activator="{ on }">
         <v-btn
           color="orange"
@@ -13,11 +13,11 @@
       <v-sheet class="text-xs-center" height="200px">
         <v-btn
           class="mt-4"
-          flat
-          color="red"
+          text
+          color="error"
           @click="sheet = !sheet"
         >close</v-btn>
-        <div>This is a bottom sheet using the inset prop</div>
+        <div class="my-3">This is a bottom sheet using the inset prop</div>
       </v-sheet>
     </v-bottom-sheet>
   </div>

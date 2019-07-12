@@ -27,9 +27,9 @@
     }
   },
   "props": {
-    "activeClass": "Components.ItemGroups.props.activeClass",
-    "mandatory": "Components.ItemGroups.props.mandatory",
-    "multiple": "Components.ItemGroups.props.multiple",
+    "activeClass": "Mixins.BaseItemGroup.props.activeClass",
+    "mandatory": "Mixins.BaseItemGroup.props.mandatory",
+    "multiple": "Mixins.BaseItemGroup.props.multiple",
     "rounded": "Round edge buttons"
   },
   "events": {
