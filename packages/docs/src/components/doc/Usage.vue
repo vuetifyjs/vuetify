@@ -5,6 +5,7 @@
     <doc-example
       :id="`usage-${-1}`"
       :value="internalValue"
+      eager
     />
   </div>
 </template>
