@@ -64,15 +64,11 @@ export default VTextField.extend({
       default: 'file',
     },
     value: {
-      type: [Object, Array],
       default: () => [],
+      validator: val => {
+        return typeof val === 'object' || Array.isArray(val)
+      },
     } as PropValidator<File | File[]>,
-  },
-
-  data () {
-    return {
-      lazyValue: wrapInArray(this.value) as File[],
-    }
   },
 
   computed: {
@@ -85,7 +81,7 @@ export default VTextField.extend({
     counterValue (): string {
       if (!this.showSize) return this.$vuetify.lang.t(this.counterString, this.lazyValue.length)
 
-      const bytes = this.internalValue.reduce((size: number, file: File) => size + file.size, 0)
+      const bytes = this.internalArrayValue.reduce((size: number, file: File) => size + file.size, 0)
 
       return this.$vuetify.lang.t(
         this.counterSizeString,
@@ -93,25 +89,33 @@ export default VTextField.extend({
         humanReadableFileSize(bytes, this.base === 1024)
       )
     },
+    internalArrayValue (): File[] {
+      return Array.isArray(this.internalValue)
+        ? this.internalValue
+        : wrapInArray(this.internalValue)
+    },
     internalValue: {
       get (): File[] {
         return this.lazyValue
       },
       set (val: File | File[]) {
-        this.lazyValue = wrapInArray(val)
+        this.lazyValue = val
         this.$emit('change', this.lazyValue)
       },
     },
     isDirty (): boolean {
-      return this.internalValue.length > 0
+      return this.internalArrayValue.length > 0
     },
     isLabelActive (): boolean {
       return this.isDirty
     },
+    isMultiple (): boolean {
+      return this.$attrs.hasOwnProperty('multiple')
+    },
     text (): string[] {
       if (!this.isDirty) return [this.placeholder]
 
-      return this.internalValue.map((file: File) => {
+      return this.internalArrayValue.map((file: File) => {
         const name = this.truncateText(file.name)
 
         return !this.showSize ? name : `${name} (${humanReadableFileSize(file.size, this.base === 1024)})`
@@ -127,7 +131,7 @@ export default VTextField.extend({
 
   methods: {
     clearableCallback () {
-      this.internalValue = []
+      this.internalValue = this.isMultiple ? [] : null
     },
     genChips () {
       if (!this.isDirty) return []
@@ -196,7 +200,9 @@ export default VTextField.extend({
       }, children)
     },
     onInput (e: Event) {
-      this.internalValue = [...(e.target as HTMLInputElement).files]
+      const files = [...(e.target as HTMLInputElement).files]
+
+      this.internalValue = this.isMultiple ? files : files[0]
     },
     truncateText (str: string) {
       if (str.length < Number(this.truncateLength)) return str

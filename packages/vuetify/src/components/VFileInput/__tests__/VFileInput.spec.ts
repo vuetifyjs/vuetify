@@ -131,13 +131,19 @@ describe('VFileInput.ts', () => {
 
   it('should clear', () => {
     const wrapper = mountFunction({
-      propsData: {
-        value: [oneMBFile],
-      },
+      propsData: { value: oneMBFile },
     })
 
     wrapper.vm.clearableCallback()
-    expect(wrapper.vm.internalValue).toEqual([])
+    expect(wrapper.vm.internalValue).toBeNull()
+
+    const wrapper2 = mountFunction({
+      attrs: { multiple: '' },
+      propsData: { value: oneMBFile },
+    })
+
+    wrapper2.vm.clearableCallback()
+    expect(wrapper2.vm.internalValue).toEqual([])
   })
 
   it('should react to setting fileValue', async () => {

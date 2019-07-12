@@ -312,7 +312,7 @@ exports[`VFileInput.ts should render chips 1`] = `
             </span>
           </span>
         </div>
-        <input id="input-62"
+        <input id="input-69"
                readonly="readonly"
                type="file"
         >
@@ -417,7 +417,7 @@ exports[`VFileInput.ts should render small chips 1`] = `
             </span>
           </span>
         </div>
-        <input id="input-69"
+        <input id="input-76"
                readonly="readonly"
                type="file"
         >
