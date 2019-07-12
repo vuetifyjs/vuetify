@@ -492,16 +492,17 @@ export function chunk (str: string, size = 1) {
   return chunked
 }
 
-export function humanReadableFileSize (bytes: number, base: 1000 | 1024 = 1024): string {
+export function humanReadableFileSize (bytes: number, binary = false): string {
+  const base = binary ? 1024 : 1000
   if (bytes < base) {
     return `${bytes} B`
   }
 
-  const units = base === 1000 ? ['kB', 'MB', 'GB'] : ['KiB', 'MiB', 'GiB']
+  const prefix = binary ? ['Ki', 'Mi', 'Gi'] : ['k', 'M', 'G']
   let unit = -1
-  while (Math.abs(bytes) >= base && unit < units.length - 1) {
+  while (Math.abs(bytes) >= base && unit < prefix.length - 1) {
     bytes /= base
     ++unit
   }
-  return `${bytes.toFixed(1)} ${units[unit]}`
+  return `${bytes.toFixed(1)} ${prefix[unit]}B`
 }

@@ -51,7 +51,7 @@ describe('VFileInput.ts', () => {
   it('should display file size', () => {
     const wrapper = mountFunction({
       propsData: {
-        displaySize: true,
+        showSize: true,
         value: [twoMBFile],
       },
     })
@@ -59,7 +59,7 @@ describe('VFileInput.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({
-      displaySize: 1000,
+      showSize: 1000,
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -68,7 +68,7 @@ describe('VFileInput.ts', () => {
   it('should display total size in counter', () => {
     const wrapper = mountFunction({
       propsData: {
-        displaySize: true,
+        showSize: true,
         counter: true,
         value: [oneMBFile, twoMBFile],
       },
@@ -77,7 +77,7 @@ describe('VFileInput.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({
-      displaySize: 1000,
+      showSize: 1000,
     })
 
     expect(wrapper.html()).toMatchSnapshot()

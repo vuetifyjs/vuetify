@@ -6,13 +6,14 @@
     multiple
     prepend-icon="mdi-paperclip"
   >
-    <template v-slot:selection="{ index, text }">
+    <template v-slot:selection="{ text }">
       <v-chip
         small
         label
         color="primary"
-        v-text="text"
-      ></v-chip>
+      >
+        {{ text }}
+      </v-chip>
     </template>
   </v-file-input>
 </template>

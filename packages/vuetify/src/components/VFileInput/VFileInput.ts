@@ -85,16 +85,12 @@ export default VTextField.extend({
     counterValue (): string {
       if (!this.showSize) return this.$vuetify.lang.t(this.counterString, this.lazyValue.length)
 
-      const bytes = this.internalValue.length > 0
-        ? (this.internalValue as File[])
-          .map(f => f.size)
-          .reduce((a, b) => a + b)
-        : 0
+      const bytes = this.internalValue.reduce((size: number, file: File) => size + file.size, 0)
 
       return this.$vuetify.lang.t(
         this.counterSizeString,
         this.lazyValue.length,
-        humanReadableFileSize(bytes, this.base)
+        humanReadableFileSize(bytes, this.base === 1024)
       )
     },
     internalValue: {
@@ -118,7 +114,7 @@ export default VTextField.extend({
       return this.internalValue.map((file: File) => {
         const name = this.truncateText(file.name)
 
-        return !this.showSize ? name : `${name} (${humanReadableFileSize(file.size, this.base)})`
+        return !this.showSize ? name : `${name} (${humanReadableFileSize(file.size, this.base === 1024)})`
       })
     },
     base (): 1000 | 1024 | undefined {
