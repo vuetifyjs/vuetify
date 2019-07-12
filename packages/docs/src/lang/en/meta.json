@@ -339,6 +339,11 @@
     "description": "Grid lists allow you to specify the gutter used when separating grid items.",
     "keywords": "grid lists, vuetify grid list component, vue grid list component"
   },
+  "components/file-inputs": {
+    "title": "File input component",
+    "description": "The file input component is a specialized input that provides a clean interface for selecting files, showing detailed selection information and upload progress.",
+    "keywords": "file input, file upload, file field"
+  },
   "components/forms": {
     "title": "Form component",
     "description": "The form component provides a wrapper that makes it easy to process and control validation states of input components.",
