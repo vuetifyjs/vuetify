@@ -64,6 +64,7 @@
   },
   "props": {
     "column": "Displays radio buttons in column",
+    "dark": "Components.Inputs.props.dark",
     "flat": "Display component without elevation. Default elevation for thumb is 4dp, `flat` resets it",
     "indeterminate": "Sets an indeterminate state for the checkbox",
     "indeterminateIcon": "The icon used when in an indeterminate state",

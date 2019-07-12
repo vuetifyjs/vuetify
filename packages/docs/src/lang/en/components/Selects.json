@@ -50,6 +50,7 @@
     "chips": "Changes display of selections to chips",
     "combobox": "The single select variant of **tags**",
     "contentClass": "Mixins.Detachable.props.contentClass",
+    "dark": "Components.Inputs.props.dark",
     "debounceSearch": "Debounces the search input value being emitted",
     "deletableChips": "Adds a remove icon to selected chips",
     "dense": "Lowers max height of list items",
