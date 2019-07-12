@@ -38,8 +38,11 @@
   user-select: none
   padding: $calendar-weekly-weekday-padding
   font-size: $calendar-weekly-weekday-font-size
+  overflow: hidden
   text-align: center
+  text-overflow: ellipsis
   text-transform: uppercase
+  white-space: nowrap
 
 .v-calendar-weekly__week
   display: flex
@@ -79,4 +82,3 @@
   left: $calendar-weekly-day-month-left
   height: $calendar-weekly-day-label-size
   line-height: $calendar-weekly-day-label-size
-
