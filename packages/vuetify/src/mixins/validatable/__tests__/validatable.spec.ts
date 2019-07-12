@@ -399,6 +399,7 @@ describe('validatable.ts', () => {
 
   it('should return white when no color and isDark', () => {
     const wrapper = mountFunction({
+      computed: { rootIsDark: () => false },
       propsData: { dark: true },
     })
 
@@ -409,6 +410,18 @@ describe('validatable.ts', () => {
 
     wrapper.setProps({ color: undefined, dark: undefined })
     expect(wrapper.vm.computedColor).toBe('primary')
+
+    const wrapper2 = mountFunction({
+      computed: { rootIsDark: () => true },
+    })
+
+    expect(wrapper2.vm.computedColor).toBe('primary')
+
+    wrapper2.setProps({ color: 'blue' })
+    expect(wrapper2.vm.computedColor).toBe('blue')
+
+    wrapper2.setProps({ color: undefined, light: true })
+    expect(wrapper2.vm.computedColor).toBe('primary')
   })
 
   it('should return undefined for color and validation state if disabled', () => {
