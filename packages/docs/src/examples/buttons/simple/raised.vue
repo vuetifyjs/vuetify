@@ -1,5 +1,5 @@
 <template>
-  <v-layout align-center>
+  <v-layout align-center wrap>
     <v-flex xs12 sm4 text-xs-center>
       <div class="my-2">
         <v-btn small>Normal</v-btn>

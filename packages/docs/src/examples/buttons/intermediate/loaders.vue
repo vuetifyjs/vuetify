@@ -1,7 +1,7 @@
 <template>
   <div class="text-xs-center">
     <v-btn
-      class="mx-2"
+      class="ma-2"
       :loading="loading"
       :disabled="loading"
       color="secondary"
@@ -14,7 +14,7 @@
       :loading="loading3"
       :disabled="loading3"
       color="blue-grey"
-      class="mx-2 white--text"
+      class="ma-2 white--text"
       @click="loader = 'loading3'"
     >
       Upload
@@ -22,7 +22,7 @@
     </v-btn>
 
     <v-btn
-      class="mx-2"
+      class="ma-2"
       :loading="loading2"
       :disabled="loading2"
       color="success"
@@ -35,7 +35,7 @@
     </v-btn>
 
     <v-btn
-      class="mx-2"
+      class="ma-2"
       :loading="loading4"
       :disabled="loading4"
       color="info"
@@ -53,7 +53,7 @@
       :loading="loading5"
       :disabled="loading5"
       color="blue-grey"
-      class="mx-2 white--text"
+      class="ma-2 white--text"
       fab
       @click="loader = 'loading5'"
     >
