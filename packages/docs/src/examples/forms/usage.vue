@@ -1,7 +1,7 @@
 <template>
   <v-form v-model="valid">
     <v-container>
-      <v-layout>
+      <v-layout wrap>
         <v-flex
           xs12
           md4

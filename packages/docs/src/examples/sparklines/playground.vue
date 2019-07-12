@@ -20,7 +20,7 @@
 
     <v-layout wrap>
       <v-flex xs12>
-        <v-layout fill-height align-center>
+        <v-layout fill-height align-center wrap>
           <v-subheader class="pl-0">Type</v-subheader>
           <v-btn-toggle v-model="type" mandatory>
             <v-btn small text value="bar">bar</v-btn>
@@ -29,8 +29,8 @@
         </v-layout>
       </v-flex>
 
-      <v-flex xs6>
-        <v-layout fill-height align-center>
+      <v-flex xs12 md6>
+        <v-layout fill-height align-center wrap>
           <v-subheader class="pl-0">Gradient</v-subheader>
           <v-item-group v-model="gradient" mandatory>
             <v-layout>
@@ -59,8 +59,8 @@
         </v-layout>
       </v-flex>
 
-      <v-flex xs6>
-        <v-layout fill-height align-center>
+      <v-flex xs12 md6>
+        <v-layout fill-height align-center wrap>
           <v-subheader class="pl-0">Gradient direction</v-subheader>
           <v-btn-toggle v-model="gradientDirection" mandatory>
             <v-btn small text value="top">top</v-btn>

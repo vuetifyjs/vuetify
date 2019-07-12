@@ -23,4 +23,15 @@
   h3
     font-size: 1.25rem
     font-weight: 500
+
+  @media only screen and (max-width: 600px)
+    h1
+      font-size: 2rem
+      font-weight: 500
+
+    h2
+      font-size: 1.25rem
+
+    h3
+      font-size: 1rem
 </style>

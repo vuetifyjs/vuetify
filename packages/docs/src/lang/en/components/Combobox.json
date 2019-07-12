@@ -19,6 +19,7 @@
     }
   },
   "props": {
+    "dark": "Components.Inputs.props.dark",
     "value": "Components.Inputs.props.value"
   },
   "slots": {
