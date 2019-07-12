@@ -31,7 +31,7 @@ const icons: VuetifyIcons = {
   first: 'fas fa-step-backward',
   last: 'fas fa-step-forward',
   unfold: 'fas fa-arrows-alt-v',
-  file: 'fas fa-cloud-upload-alt',
+  file: 'fas fa-paperclip',
 }
 
 export default icons
