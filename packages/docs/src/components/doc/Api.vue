@@ -55,7 +55,7 @@
           :key="current"
           v-model="tab"
           touchless
-          class="white"
+          class="white hide-overflow"
         >
           <v-tab-item
             v-for="(tab, i) in computedTabs"
