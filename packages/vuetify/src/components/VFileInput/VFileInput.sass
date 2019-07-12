@@ -11,6 +11,7 @@
 .v-file-input
   input[type="file"]
     opacity: 0
+    max-width: 0
     width: 0
 
 // Element
@@ -18,6 +19,7 @@
   align-items: center
   align-self: stretch
   display: flex
+  flex-wrap: wrap
   width: 100%
 
   &.v-file-input__text--chips
@@ -29,3 +31,7 @@
 .v-file-input.v-text-field--filled:not(.v-text-field--single-line)
   .v-file-input__text
     padding-top: 22px
+
+.v-file-input.v-text-field--outlined
+  .v-text-field__slot
+    padding: 6px 0
