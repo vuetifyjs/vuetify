@@ -116,7 +116,9 @@
       "caption": "Set the caption (using `<caption>`)",
       "headerProps": "Pass props to the default header. See 'v-data-table-header' API for more information",
       "calculateWidths": "Enables calculation of column widths. `widths` property will be available in select scoped slots",
-      "fixedHeader": "Fixed header to top of table. **NOTE:** Does not work in IE11"
+      "fixedHeader": "Fixed header to top of table. **NOTE:** Does not work in IE11",
+      "itemKey": "The field on each item object that designates a unique key. The value of this property has to be unique for each item.",
+      "expandIcon": "Icon used for expand toggle button."
     }
   },
   "scopedSlots": {
