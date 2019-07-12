@@ -14,10 +14,10 @@
         <v-btn
           class="mt-4"
           flat
-          color="red"
+          color="error"
           @click="sheet = !sheet"
         >close</v-btn>
-        <div>This is a bottom sheet using the persistent prop</div>
+        <div class="py-3">This is a bottom sheet using the persistent prop</div>
       </v-sheet>
     </v-bottom-sheet>
   </div>

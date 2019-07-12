@@ -1,15 +1,50 @@
 <template>
   <div>
-    <v-layout row justify-center>
-      <v-btn color="primary" dark @click="dialog = true">Open Dialog 1</v-btn>
-      <v-btn color="primary" dark @click="dialog2 = true">Open Dialog 2</v-btn>
-      <v-btn color="primary" dark @click="dialog3 = true">Open Dialog 3</v-btn>
-      <v-menu bottom offset-y>
+    <v-layout
+      row
+      justify-center
+      wrap
+    >
+      <v-btn
+        color="primary"
+        class="ma-2"
+        dark
+        @click="dialog = true"
+      >
+        Open Dialog 1
+      </v-btn>
+      <v-btn
+        color="primary"
+        class="ma-2"
+        dark
+        @click="dialog2 = true"
+      >
+        Open Dialog 2
+      </v-btn>
+      <v-btn
+        color="primary"
+        class="ma-2"
+        dark
+        @click="dialog3 = true"
+      >
+        Open Dialog 3
+      </v-btn>
+      <v-menu
+        bottom
+        offset-y
+      >
         <template v-slot:activator="{ on }">
-          <v-btn v-on="on">A Menu</v-btn>
+          <v-btn
+            class="ma-2"
+            v-on="on"
+          >A Menu</v-btn>
         </template>
         <v-list>
-          <v-list-item v-for="(item, i) in items" :key="i" @click="">
+          <v-list-item
+            v-for="(item, i) in items"
+            :key="i"
+            @click="() => {}"
+          >
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -22,37 +57,76 @@
         scrollable
       >
         <v-card tile>
-          <v-toolbar flat dark color="primary">
-            <v-btn icon dark @click="dialog = false">
+          <v-toolbar
+            flat
+            dark
+            color="primary"
+          >
+            <v-btn
+              icon
+              dark
+              @click="dialog = false"
+            >
               <v-icon>close</v-icon>
             </v-btn>
             <v-toolbar-title>Settings</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-toolbar-items>
-              <v-btn dark text @click="dialog = false">Save</v-btn>
+              <v-btn
+                dark
+                text
+                @click="dialog = false"
+              >
+                Save
+              </v-btn>
             </v-toolbar-items>
-            <v-menu bottom right offset-y>
+            <v-menu
+              bottom
+              right
+              offset-y
+            >
               <template v-slot:activator="{ on }">
-                <v-btn dark icon v-on="on">
+                <v-btn
+                  dark
+                  icon
+                  v-on="on"
+                >
                   <v-icon>more_vert</v-icon>
                 </v-btn>
               </template>
               <v-list>
-                <v-list-item v-for="(item, i) in items" :key="i" @click="">
+                <v-list-item
+                  v-for="(item, i) in items"
+                  :key="i"
+                  @click="() => {}"
+                >
                   <v-list-item-title>{{ item.title }}</v-list-item-title>
                 </v-list-item>
               </v-list>
             </v-menu>
           </v-toolbar>
           <v-card-text>
-            <v-btn color="primary" dark @click="dialog2 = !dialog2">Open Dialog 2</v-btn>
+            <v-btn
+              color="primary"
+              dark
+              class="ma-2"
+              @click="dialog2 = !dialog2"
+            >
+              Open Dialog 2
+            </v-btn>
             <v-tooltip right>
               <template v-slot:activator="{ on }">
-                <v-btn v-on="on">Tool Tip Activator</v-btn>
+                <v-btn
+                  class="ma-2"
+                  v-on="on"
+                >Tool Tip Activator</v-btn>
               </template>
               Tool Tip
             </v-tooltip>
-            <v-list three-line subheader>
+            <v-list
+              three-line
+              subheader
+            >
               <v-subheader>User Controls</v-subheader>
               <v-list-item>
                 <v-list-item-content>
@@ -68,7 +142,10 @@
               </v-list-item>
             </v-list>
             <v-divider></v-divider>
-            <v-list three-line subheader>
+            <v-list
+              three-line
+              subheader
+            >
               <v-subheader>General</v-subheader>
               <v-list-item>
                 <v-list-item-action>
@@ -103,13 +180,23 @@
           <div style="flex: 1 1 auto;"></div>
         </v-card>
       </v-dialog>
-      <v-dialog v-model="dialog2" max-width="500px">
+
+      <v-dialog
+        v-model="dialog2"
+        max-width="500px"
+      >
         <v-card>
           <v-card-title>
             Dialog 2
           </v-card-title>
           <v-card-text>
-            <v-btn color="primary" dark @click="dialog3 = !dialog3">Open Dialog 3</v-btn>
+            <v-btn
+              color="primary"
+              dark
+              @click="dialog3 = !dialog3"
+            >
+              Open Dialog 3
+            </v-btn>
             <v-select
               :items="select"
               label="A Select List"
@@ -117,30 +204,55 @@
             ></v-select>
           </v-card-text>
           <v-card-actions>
-            <v-btn color="primary" text @click="dialog2=false">Close</v-btn>
+            <v-btn
+              color="primary"
+              text
+              @click="dialog2 = false"
+            >
+              Close
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
-      <v-dialog v-model="dialog3" max-width="500px">
+      <v-dialog
+        v-model="dialog3"
+        max-width="500px"
+      >
         <v-card>
           <v-card-title>
             <span>Dialog 3</span>
             <v-spacer></v-spacer>
-            <v-menu bottom left>
+            <v-menu
+              bottom
+              left
+            >
               <template v-slot:activator="{ on }">
-                <v-btn icon v-on="on">
+                <v-btn
+                  icon
+                  v-on="on"
+                >
                   <v-icon>more_vert</v-icon>
                 </v-btn>
               </template>
               <v-list>
-                <v-list-item v-for="(item, i) in items" :key="i" @click="">
+                <v-list-item
+                  v-for="(item, i) in items"
+                  :key="i"
+                  @click="() => {}"
+                >
                   <v-list-item-title>{{ item.title }}</v-list-item-title>
                 </v-list-item>
               </v-list>
             </v-menu>
           </v-card-title>
           <v-card-actions>
-            <v-btn color="primary" text @click="dialog3=false">Close</v-btn>
+            <v-btn
+              color="primary"
+              text
+              @click="dialog3 = false"
+            >
+              Close
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>

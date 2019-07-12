@@ -4,6 +4,7 @@
       v-if="$slots.default || code"
       :language="language"
       :code="code"
+      :inline="inline"
     ><slot /></prism>
 
     <div
@@ -21,7 +22,7 @@
       </a>
     </div>
 
-    <div class="v-markup__copy">
+    <div v-if="!hideCopy" class="v-markup__copy">
       <v-icon
         title="Copy code"
         aria-label="Copy code"
@@ -50,6 +51,8 @@
 </template>
 
 <script>
+  import { getBranch } from '@/util/helpers'
+
   export default {
     name: 'Markup',
 
@@ -62,6 +65,7 @@
         type: String,
         default: undefined,
       },
+      inline: Boolean,
       value: {
         type: String,
         default: 'markup',
@@ -70,6 +74,7 @@
         type: Boolean,
         default: process.env.NODE_ENV !== 'production',
       },
+      hideCopy: Boolean,
     },
 
     data: vm => ({
@@ -81,6 +86,8 @@
 
     computed: {
       file () {
+        if (!this.filename) return ''
+
         const split = this.value.split('_')
         const folder = split.shift()
         const file = split.join('_')
@@ -98,8 +105,7 @@
 
     mounted () {
       this.$nextTick(this.init)
-      const branch = (window) ? window.location.hostname.split('.')[0] : 'master'
-      this.branch = ['master', 'dev', 'next'].includes(branch) ? branch : 'master'
+      this.branch = getBranch()
     },
 
     methods: {

@@ -3,7 +3,7 @@
     <v-btn
       color="blue"
       dark
-      @click="sheet=!sheet"
+      @click="sheet = !sheet"
     >
       Open v-model
     </v-btn>
@@ -11,11 +11,11 @@
       <v-sheet class="text-xs-center" height="200px">
         <v-btn
           class="mt-4"
-          flat
+          text
           color="red"
           @click="sheet = !sheet"
         >close</v-btn>
-        <div>This is a bottom sheet using the controlled by v-model instead of activator</div>
+        <div class="py-3">This is a bottom sheet using the controlled by v-model instead of activator</div>
       </v-sheet>
     </v-bottom-sheet>
   </div>

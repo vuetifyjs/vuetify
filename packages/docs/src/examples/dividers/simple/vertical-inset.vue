@@ -1,14 +1,13 @@
 <template>
   <v-toolbar
     color="teal"
-    light
+    dark
   >
     <v-toolbar-title>Title</v-toolbar-title>
 
     <v-divider
       class="mx-3"
       inset
-      light
       vertical
     ></v-divider>
 
@@ -16,7 +15,7 @@
 
     <v-spacer></v-spacer>
 
-    <v-toolbar-items>
+    <v-toolbar-items class="hidden-sm-and-down">
       <v-btn text>
         News
       </v-btn>
