@@ -17,7 +17,6 @@
               :class="$vuetify.breakpoint.mdAndUp ? '' : 'mb-3'"
               label="Available Component(s)"
               outlined
-              color="warning"
               :menu-props="{offsetY: true, contentClass: 'primary'}"
               prepend-icon="mdi-view-dashboard"
               hide-details
@@ -28,7 +27,6 @@
               v-model="search"
               type="search"
               clearable
-              color="warning"
               append-icon="search"
               label="Search..."
               outlined
