@@ -255,12 +255,14 @@ export default Themeable.extend({
         toggleSelectAll: this.toggleSelectAll,
       }
 
-      return [
+      return this.$createElement('div', {
+        staticClass: 'v-data-iterator',
+      }, [
         getSlot(this, 'header', outerProps, true),
         this.genItems(props),
         this.genFooter(props),
         getSlot(this, 'footer', outerProps, true),
-      ]
+      ])
     },
   },
 
