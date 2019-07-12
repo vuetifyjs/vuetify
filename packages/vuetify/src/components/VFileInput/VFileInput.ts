@@ -140,8 +140,9 @@ export default VTextField.extend({
         props: { small: this.smallChips },
         on: {
           'click:close': () => {
-            this.internalValue.splice(index, 1)
-            this.internalValue = this.internalValue // Trigger the watcher
+            const internalValue = this.internalValue
+            internalValue.splice(index, 1)
+            this.internalValue = internalValue // Trigger the watcher
           },
         },
       }, [text]))
