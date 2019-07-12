@@ -17,8 +17,9 @@
         dark
         label
         small
-        v-text="text"
-      ></v-chip>
+      >
+        {{ text }}
+      </v-chip>
 
       <span
         v-else-if="index === 2"

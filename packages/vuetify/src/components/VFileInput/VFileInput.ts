@@ -22,10 +22,6 @@ export default VTextField.extend({
   },
 
   props: {
-    accept: {
-      type: String,
-      default: null,
-    } as PropValidator<string | null>,
     chips: Boolean,
     clearable: {
       type: Boolean,
@@ -39,17 +35,6 @@ export default VTextField.extend({
       type: String,
       default: '$vuetify.fileInput.counter',
     },
-    displaySize: {
-      type: [Boolean, Number],
-      default: false,
-      validator: (v: boolean | number) => {
-        return (
-          typeof v === 'boolean' ||
-          [1000, 1024].includes(v)
-        )
-      },
-    } as PropValidator<boolean | 1000 | 1024>,
-    multiple: Boolean,
     placeholder: String,
     prependIcon: {
       type: String,
@@ -59,7 +44,21 @@ export default VTextField.extend({
       type: Boolean,
       default: true,
     },
+    showSize: {
+      type: [Boolean, Number],
+      default: false,
+      validator: (v: boolean | number) => {
+        return (
+          typeof v === 'boolean' ||
+          [1000, 1024].includes(v)
+        )
+      },
+    } as PropValidator<boolean | 1000 | 1024>,
     smallChips: Boolean,
+    truncateLength: {
+      type: [Number, String],
+      default: 22,
+    },
     type: {
       type: String,
       default: 'file',
@@ -84,7 +83,7 @@ export default VTextField.extend({
       }
     },
     counterValue (): string {
-      if (!this.displaySize) return this.$vuetify.lang.t(this.counterString, this.lazyValue.length)
+      if (!this.showSize) return this.$vuetify.lang.t(this.counterString, this.lazyValue.length)
 
       const bytes = this.internalValue.length > 0
         ? (this.internalValue as File[])
@@ -119,11 +118,11 @@ export default VTextField.extend({
       return this.internalValue.map((file: File) => {
         const name = this.truncateText(file.name)
 
-        return !this.displaySize ? name : `${name} (${humanReadableFileSize(file.size, this.base)})`
+        return !this.showSize ? name : `${name} (${humanReadableFileSize(file.size, this.base)})`
       })
     },
     base (): 1000 | 1024 | undefined {
-      return typeof this.displaySize !== 'boolean' ? this.displaySize : undefined
+      return typeof this.showSize !== 'boolean' ? this.showSize : undefined
     },
     hasChips (): boolean {
       return this.chips || this.smallChips
@@ -137,11 +136,11 @@ export default VTextField.extend({
     genChips () {
       if (!this.isDirty) return []
 
-      return this.text.map((text, i) => this.$createElement(VChip, {
+      return this.text.map((text, index) => this.$createElement(VChip, {
         props: { small: this.smallChips },
         on: {
           'click:close': () => {
-            this.internalValue.splice(i, 1)
+            this.internalValue.splice(index, 1)
             this.internalValue = this.internalValue // Trigger the watcher
           },
         },
@@ -150,8 +149,6 @@ export default VTextField.extend({
     genInput () {
       const input = VTextField.options.methods.genInput.call(this)
 
-      input.data!.attrs!.multiple = this.multiple
-      input.data!.attrs!.accept = this.accept
       delete input.data!.domProps!.value
 
       return [this.genSelections(), input]
@@ -161,7 +158,7 @@ export default VTextField.extend({
         this.$refs.input.click()
       })
 
-      icon.data!.attrs! = { tabindex: 0 }
+      icon.data!.attrs = { tabindex: 0 }
 
       return this.genSlot('prepend', 'outer', [icon])
     },
@@ -169,7 +166,7 @@ export default VTextField.extend({
       const length = this.text.length
 
       if (length < 2) return this.text
-      if (this.displaySize && !this.counter) return [this.counterValue]
+      if (this.showSize && !this.counter) return [this.counterValue]
       return [this.$vuetify.lang.t(this.counterString, length)]
     },
     genSelections () {
@@ -206,8 +203,8 @@ export default VTextField.extend({
       this.internalValue = [...(e.target as HTMLInputElement).files]
     },
     truncateText (str: string) {
-      if (str.length < 22) return str
-      return `${str.slice(0, 10)}...${str.slice(-10)}`
+      if (str.length < Number(this.truncateLength)) return str
+      return `${str.slice(0, 10)}…${str.slice(-10)}`
     },
   },
 })
