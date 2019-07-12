@@ -22,6 +22,7 @@
         color="primary"
         label
         x-small
+        style="height: auto;"
       >{{ item.name }}</v-chip>
 
       <!-- Type -->
