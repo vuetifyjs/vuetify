@@ -1,5 +1,5 @@
 <template>
-  <v-app id="inspire" dark>
+  <v-app id="inspire">
     <v-navigation-drawer
       v-model="drawer"
       clipped
@@ -66,6 +66,9 @@
     }),
     props: {
       source: String,
+    },
+    created () {
+      this.$vuetify.dark = true
     },
   }
 </script>
