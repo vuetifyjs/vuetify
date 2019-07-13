@@ -28,13 +28,13 @@
       </template>
 
       <v-list>
-        <v-list-tile
+        <v-list-item
           v-for="n in 5"
           :key="n"
           @click="() => {}"
         >
-          <v-list-tile-item>Option {{ n }}</v-list-tile-item>
-        </v-list-tile>
+          <v-list-item-title>Option {{ n }}</v-list-item-title>
+        </v-list-item>
       </v-list>
     </v-menu>
   </v-app-bar>

@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-layout row>
+    <v-layout wrap>
       <v-flex
         pa-1
       >
@@ -22,7 +22,7 @@
         </v-card>
       </v-flex>
     </v-layout>
-    <v-layout row>
+    <v-layout wrap>
       <v-flex
         pa-1
       >
@@ -45,7 +45,7 @@
         </v-card>
       </v-flex>
     </v-layout>
-    <v-layout row>
+    <v-layout wrap>
       <v-flex
         pa-1
       >
@@ -68,7 +68,7 @@
         </v-card>
       </v-flex>
     </v-layout>
-    <v-layout>
+    <v-layout wrap>
       <v-flex
         grow-shrink-0
         pa-1

@@ -46,7 +46,7 @@
           v-for="(tab) in computedTabs"
           :key="`tab-${tab}`"
           :href="`#${tab}`"
-          class="justify-start"
+          :class="[$vuetify.breakpoint.smAndUp && 'justify-start']"
         >
           {{ tab.replace(/([A-Z])/g, ' $1') }}
         </v-tab>

@@ -1,12 +1,33 @@
-<template lang="pug">
-  v-container(fluid)
-    v-layout(row)
-      v-flex(xs4)
-        v-slider(prepend-icon="fas fa-arrows-alt-h" v-model="selected" min="0" max="24" thumb-label)
-      v-flex(xs6 offset-xs1)
-        v-card(v-bind:class="{ [`elevation-${selected}`]: true }")
-          v-card-text
-            p.text-xs-center.ma-0 Elevation {{ selected }}
+<template>
+  <v-container fluid>
+    <v-layout wrap>
+      <v-flex
+        xs12
+        md4
+      >
+        <v-slider
+          v-model="selected"
+          prepend-icon="mdi-pan-horizontal"
+          min="0"
+          max="24"
+          thumb-label
+        ></v-slider>
+      </v-flex>
+      <v-flex
+        xs12
+        md4
+        offset-md3
+      >
+        <v-card :elevation="selected">
+          <v-card-text>
+            <p class="text-xs-center ma-0">
+              Elevation {{ selected }}
+            </p>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>

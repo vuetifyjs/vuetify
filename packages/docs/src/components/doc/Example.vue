@@ -130,15 +130,26 @@
       </v-card>
     </v-expand-transition>
 
-    <doc-codepen ref="codepen" :pen="parsed" />
+    <doc-codepen
+      v-if="parsed"
+      ref="codepen"
+      :pen="parsed"
+    />
 
-    <v-sheet :dark="dark" tile flat>
-      <v-card-text>
-        <div data-app="true">
-          <component :is="component" />
-        </div>
-      </v-card-text>
-    </v-sheet>
+    <v-fade-transition>
+      <v-sheet
+        v-if="component"
+        :dark="dark"
+        tile
+        flat
+      >
+        <v-card-text>
+          <div data-app="true">
+            <component :is="component" />
+          </div>
+        </v-card-text>
+      </v-sheet>
+    </v-fade-transition>
   </v-card>
 </template>
 
@@ -148,25 +159,26 @@
     mapGetters,
   } from 'vuex'
   import { getBranch } from '@/util/helpers'
-
   import kebabCase from 'lodash/kebabCase'
 
   export default {
     props: {
+      eager: Boolean,
       value: {
         type: [Object, String],
         default: undefined,
       },
     },
 
-    data: () => ({
+    data: vm => ({
+      branch: undefined,
       component: undefined,
       dark: false,
       expand: false,
-      loading: true,
+      loading: false,
+      observer: null,
       parsed: undefined,
       selected: 'template',
-      branch: undefined,
     }),
 
     computed: {
@@ -194,38 +206,25 @@
       this.expand = Boolean(this.internalValue.show)
     },
 
-    async mounted () {
-      await this.$nextTick()
+    beforeDestroy () {
+      this.unobserve()
+    },
 
-      import(
-        /* webpackChunkName: "examples" */
-        /* webpackMode: "lazy-once" */
-        `../../examples/${this.file}.vue`
-      )
-        .then(comp => (this.component = comp.default))
-        .finally(() => (this.loading = false))
-
-      import(
-        /* webpackChunkName: "examples-source" */
-        /* webpackMode: "lazy-once" */
-        `!raw-loader!../../examples/${this.file}.vue`
-      ).then(comp => this.boot(comp.default))
-
+    mounted () {
       this.branch = getBranch()
+
+      if (this.eager) return this.getFiles()
+
+      this.observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) this.getFiles()
+        })
+      }, { threshold: 0 })
+
+      this.observer.observe(this.$el)
     },
 
     methods: {
-      getLang (tab) {
-        if (tab === 'script') return 'js'
-        if (tab === 'style') return 'css'
-        return 'vue'
-      },
-      parseTemplate (target, template) {
-        const string = `(<${target}(.*)?>[\\w\\W]*<\\/${target}>)`
-        const regex = new RegExp(string, 'g')
-        const parsed = regex.exec(template) || []
-        return parsed[1] || ''
-      },
       boot (res) {
         const template = this.parseTemplate('template', res)
         const style = this.parseTemplate('style', res)
@@ -241,7 +240,41 @@
           codepenAdditional,
         }
       },
+      async getFiles () {
+        this.loading = true
+        await this.importComponent()
+        this.loading = false
+      },
+      getLang (tab) {
+        if (tab === 'script') return 'js'
+        if (tab === 'style') return 'css'
+        return 'vue'
+      },
+      importComponent () {
+        return import(
+          /* webpackChunkName: "examples" */
+          /* webpackMode: "lazy-once" */
+          `../../examples/${this.file}.vue`
+        )
+          .then(comp => (this.component = comp.default))
+          .then(this.importTemplate)
+      },
+      importTemplate () {
+        return import(
+          /* webpackChunkName: "examples-source" */
+          /* webpackMode: "lazy-once" */
+          `!raw-loader!../../examples/${this.file}.vue`
+        )
+          .then(comp => this.boot(comp.default))
+          .then(this.unobserve)
+      },
       kebabCase,
+      parseTemplate (target, template) {
+        const string = `(<${target}(.*)?>[\\w\\W]*<\\/${target}>)`
+        const regex = new RegExp(string, 'g')
+        const parsed = regex.exec(template) || []
+        return parsed[1] || ''
+      },
       sendToCodepen () {
         this.$refs.codepen.submit()
       },
@@ -249,6 +282,9 @@
         const panel = this.$refs.panel.items[0]._uid
 
         this.$refs.panel.panelClick(panel)
+      },
+      unobserve () {
+        this.observer && this.observer.unobserve(this.$el)
       },
     },
   }

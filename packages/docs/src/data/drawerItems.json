@@ -89,6 +89,7 @@
         "children": [
           { "text": "autocompletes", "to": "autocompletes" },
           { "text": "combobox", "to": "combobox" },
+          { "new": true, "text": "fileInputs", "to": "file-inputs" },
           { "text": "forms", "to": "forms" },
           { "text": "inputs", "to": "inputs" },
           { "text": "overflowButtons", "to": "overflow-btns" },
