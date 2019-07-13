@@ -52,6 +52,7 @@
             "simple/switches-states",
             "simple/switches-colors",
             "simple/switches-flat",
+            "simple/switches-inset",
             "intermediate/label-slot"
           ]
         }
