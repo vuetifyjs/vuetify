@@ -57,12 +57,16 @@
   },
   "slots": {
     "append": "Adds an item after input content",
+    "label": "Replaces the default label",
     "prepend": "Adds an item before input content"
   },
   "events": {
     "blur": "Emitted when the input is blurred",
     "change": "Emitted when the input is changed by user interaction",
+    "click": "Emitted when input is clicked",
     "click:append": "Emitted when appended icon is clicked",
-    "click:prepend": "Emitted when prepended icon is clicked"
+    "click:prepend": "Emitted when prepended icon is clicked",
+    "mousedown": "Emitted when click is pressed",
+    "mouseup": "Emitted when click is released"
   }
 }
