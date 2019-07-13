@@ -86,8 +86,6 @@
 
     computed: {
       file () {
-        if (!this.filename) return ''
-
         const split = this.value.split('_')
         const folder = split.shift()
         const file = split.join('_')
