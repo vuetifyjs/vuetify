@@ -43,6 +43,7 @@
     "backgroundColor": "Changes the background-color of the input",
     "dark": "Applies the dark theme variant to the component. This will default the components color to _white_ unless specifically overwritten by the **color** prop. You can find more information on the Material Design documentation for [dark themes](https://material.io/design/color/dark-theme.html).",
     "hideDetails": "Hides hint, validation errors",
+    "height": "Sets the height of the input",
     "hint": "Hint text",
     "label": "Sets input label",
     "loading": "Mixins.Loadable.props.loading",
