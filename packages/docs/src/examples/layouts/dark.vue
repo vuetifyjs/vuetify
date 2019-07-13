@@ -68,7 +68,7 @@
       source: String,
     },
     created () {
-      this.$vuetify.dark = true
+      this.$vuetify.theme.dark = true
     },
   }
 </script>
