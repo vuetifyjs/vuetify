@@ -22,6 +22,7 @@
     "dotenv": "^6.2.0",
     "es6-promise": "^4.2.6",
     "express": "^4.16.4",
+    "intersection-observer": "^0.7.0",
     "iso-639-1": "^2.0.3",
     "lodash": "^4.17.11",
     "lru-cache": "^4.1.3",
