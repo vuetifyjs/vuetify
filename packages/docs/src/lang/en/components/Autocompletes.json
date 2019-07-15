@@ -62,7 +62,7 @@
     "click:prepend": "Components.Inputs.events['click:prepend']",
     "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
     "update:error": "Mixins.Validatable.events['update:error']",
-    "update:menuListIndex": "Emitted when menu item is selected using keyboard arrows",
+    "update:listIndex": "Emitted when menu item is selected using keyboard arrows",
     "update:searchInput": "The `search-input.sync` event"
   }
 }

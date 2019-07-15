@@ -193,6 +193,10 @@ const VSelect = {
       name: 'update:searchInput',
       value: 'string',
     },
+    {
+      name: 'update:listIndex',
+      value: 'number',
+    },
     ...inputEvents,
     ...textEvents,
   ].concat(validatableEvents),
