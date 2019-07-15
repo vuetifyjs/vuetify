@@ -213,11 +213,12 @@
     mounted () {
       this.branch = getBranch()
 
+      this.importComponent()
       if (this.eager) return this.getFiles()
 
       this.observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) this.getFiles()
+          if (entry.isIntersecting) this.importTemplate()
         })
       }, { threshold: 0 })
 
@@ -243,6 +244,7 @@
       async getFiles () {
         this.loading = true
         await this.importComponent()
+        await this.importTemplate()
         this.loading = false
       },
       getLang (tab) {
@@ -257,7 +259,6 @@
           `../../examples/${this.file}.vue`
         )
           .then(comp => (this.component = comp.default))
-          .then(this.importTemplate)
       },
       importTemplate () {
         return import(

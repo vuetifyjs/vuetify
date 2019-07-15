@@ -55,6 +55,9 @@ const Themeable = Vue.extend<Themeable>().extend({
   },
 
   computed: {
+    appIsDark (): boolean {
+      return this.$vuetify.theme.dark || false
+    },
     isDark (): boolean {
       if (this.dark === true) {
         // explicitly dark
@@ -83,7 +86,7 @@ const Themeable = Vue.extend<Themeable>().extend({
         return false
       } else {
         // inherit from v-app
-        return this.$vuetify.theme.dark || false
+        return this.appIsDark
       }
     },
     rootThemeClasses (): Dictionary<boolean> {

@@ -119,7 +119,7 @@ export default baseMixins.extend<options>().extend({
     },
     computedColor (): string {
       if (this.color) return this.color
-      else if (this.isDark && !this.rootIsDark) return 'white'
+      else if (this.isDark && !this.appIsDark) return 'white'
       else return 'primary'
     },
   },

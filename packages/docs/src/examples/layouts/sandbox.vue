@@ -1,5 +1,5 @@
 <template>
-  <v-app id="sandbox" :dark="dark">
+  <v-app id="sandbox">
     <v-navigation-drawer
       v-model="primaryDrawer.model"
       :permanent="primaryDrawer.type === 'permanent'"
@@ -27,7 +27,7 @@
                 <v-layout row wrap>
                   <v-flex xs12 md6>
                     <span>Scheme</span>
-                    <v-switch v-model="dark" primary label="Dark"></v-switch>
+                    <v-switch v-model="$vuetify.theme.dark" primary label="Dark"></v-switch>
                   </v-flex>
                   <v-flex xs12 md6>
                     <span>Drawer</span>
@@ -69,7 +69,6 @@
 <script>
   export default {
     data: () => ({
-      dark: true,
       drawers: ['Default (no property)', 'Permanent', 'Temporary'],
       primaryDrawer: {
         model: null,
