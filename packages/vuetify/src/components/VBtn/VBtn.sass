@@ -95,6 +95,9 @@
       margin-left: -4px
       margin-right: 8px
 
+  > .v-btn__content .v-icon
+    color: inherit
+
 // Elements
 .v-btn__content
   align-items: center
@@ -107,9 +110,6 @@
   // button content when clicked
   // https://stackoverflow.com/questions/10305658/prevent-button-from-shifting-during-click-in-ie
   position: relative
-
-  .v-icon
-    color: inherit
 
   .v-icon--left,
   .v-icon--right
@@ -145,10 +145,6 @@
 
   &:focus:before
     opacity: $btn-focus-opacity
-
-.v-btn--active
-  .v-icon
-    color: inherit
 
 .v-btn--absolute
   position: absolute
