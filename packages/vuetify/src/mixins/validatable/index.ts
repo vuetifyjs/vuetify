@@ -73,7 +73,7 @@ export default mixins(
       // have a white color. If the entire app
       // is setup to be dark, then they will
       // like want to use their primary color
-      if (this.isDark && !this.rootIsDark) return 'white'
+      if (this.isDark && !this.appIsDark) return 'white'
       else return 'primary'
     },
     hasError (): boolean {

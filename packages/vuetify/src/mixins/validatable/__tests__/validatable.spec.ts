@@ -14,7 +14,14 @@ describe('validatable.ts', () => {
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {
     mountFunction = (options?: MountOptions<Instance>) => {
-      return mount(Mock, options)
+      return mount(Mock, {
+        mocks: {
+          $vuetify: {
+            theme: { dark: false },
+          },
+        },
+        ...options,
+      })
     }
   })
 
