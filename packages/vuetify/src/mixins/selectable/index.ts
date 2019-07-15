@@ -44,7 +44,7 @@ export default mixins(
     computedColor (): string | undefined {
       if (!this.isActive) return undefined
       if (this.color) return this.color
-      if (this.isDark && !this.rootIsDark) return 'white'
+      if (this.isDark && !this.appIsDark) return 'white'
       return 'accent'
     },
     isMultiple (): boolean {
