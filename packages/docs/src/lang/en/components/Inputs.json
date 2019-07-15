@@ -43,25 +43,30 @@
     "backgroundColor": "Changes the background-color of the input",
     "dark": "Applies the dark theme variant to the component. This will default the components color to _white_ unless you've configured your [application theme](/customization/theme) to **dark** or if you are using the **color** prop on the component. You can find more information on the Material Design documentation for [dark themes](https://material.io/design/color/dark-theme.html).",
     "hideDetails": "Hides hint, validation errors",
+    "height": "Sets the height of the input",
     "hint": "Hint text",
     "label": "Sets input label",
     "loading": "Mixins.Loadable.props.loading",
     "persistentHint": "Forces hint to always be visible",
     "placeholder": "Sets the input's placeholder text",
     "prependIcon": "Prepends an icon to the component, uses the same syntax as `v-icon`",
-    "required": "Designates the input as required; Adds an asertisk to the end of the label; Does not perform any validation.",
-    "tabindex": "Tabindex of input",
+    "required": "Designates the input as required; Adds an asterisk to the end of the label; Does not perform any validation.",
+    "tabindex": "Tab index of input",
     "toggleKeys": "Array of key codes that will toggle the input (if it supports toggling)",
     "value": "Input value"
   },
   "slots": {
     "append": "Adds an item after input content",
+    "label": "Replaces the default label",
     "prepend": "Adds an item before input content"
   },
   "events": {
     "blur": "Emitted when the input is blurred",
     "change": "Emitted when the input is changed by user interaction",
+    "click": "Emitted when input is clicked",
     "click:append": "Emitted when appended icon is clicked",
-    "click:prepend": "Emitted when prepended icon is clicked"
+    "click:prepend": "Emitted when prepended icon is clicked",
+    "mousedown": "Emitted when click is pressed",
+    "mouseup": "Emitted when click is released"
   }
 }
