@@ -244,6 +244,7 @@
       async getFiles () {
         this.loading = true
         await this.importComponent()
+        await this.importTemplate()
         this.loading = false
       },
       getLang (tab) {
