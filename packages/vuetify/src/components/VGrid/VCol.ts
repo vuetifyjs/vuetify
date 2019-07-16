@@ -1,3 +1,5 @@
+import './VGrid.sass'
+
 import Vue, { VNode, PropOptions } from 'vue'
 import mergeData from '../../util/mergeData'
 import { upperFirst } from '../../util/helpers'

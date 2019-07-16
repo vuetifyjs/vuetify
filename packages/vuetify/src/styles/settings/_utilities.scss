@@ -4,7 +4,7 @@ $utilities: map-merge(
     // Display utilities
     "overflow": (
       property: overflow,
-      values: auto hidden,
+      values: auto hidden visible,
     ),
     "overflow-x": (
       property: overflow-x,
