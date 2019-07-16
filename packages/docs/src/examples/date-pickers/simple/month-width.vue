@@ -9,7 +9,7 @@
     <v-date-picker
       v-model="date"
       full-width
-      landscape
+      :landscape="$vuetify.breakpoint.smAndUp"
       type="month"
       class="mt-3"
     ></v-date-picker>

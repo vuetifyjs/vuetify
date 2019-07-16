@@ -2,16 +2,21 @@
   <div>
     <v-alert
       v-model="alert"
-      dismissible
+      border="left"
       close-text="Close Alert"
-      type="info"
+      color="deep-purple accent-4"
+      dark
+      dismissible
     >
-      I'm a dismissable alert
+      Aenean imperdiet. Quisque id odio. Cras dapibus. Pellentesque ut neque. Cras dapibus.
+
+      Vivamus consectetuer hendrerit lacus. Sed mollis, eros et ultrices tempus, mauris ipsum aliquam libero, non adipiscing dolor urna a orci. Sed mollis, eros et ultrices tempus, mauris ipsum aliquam libero, non adipiscing dolor urna a orci. Curabitur blandit mollis lacus. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo.
     </v-alert>
     <div class="text-xs-center">
       <v-btn
         v-if="!alert"
-        color="primary"
+        color="deep-purple accent-4"
+        dark
         @click="alert = true"
       >
         Reset

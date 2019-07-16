@@ -80,23 +80,22 @@ function getPropSource (name, mixins) {
   return source
 }
 
-function genProp (name, props, mixins) {
-  const prop = props[name]
+function genProp (name, prop, mixins, cmp) {
   const type = getPropType(prop.type)
-  const source = getPropSource(name, mixins)
+  const source = getPropSource(name, mixins) || cmp
 
   return {
     name,
     type,
     default: getPropDefault(prop.default, type),
-    source
+    source,
   }
 }
 
 function parseComponent (component) {
   return {
     props: parseProps(component),
-    mixins: parseMixins(component)
+    mixins: parseMixins(component),
   }
 }
 
@@ -105,8 +104,8 @@ function parseProps (component, array = [], mixin = false) {
   const mixins = [component.super].concat(options.extends).concat(options.mixins).filter(m => !!m)
   const props = options.props || {}
 
-  Object.keys(props).forEach(prop => {
-    const generated = genProp(prop, props, mixins)
+  Object.keys(props).forEach(key => {
+    const generated = genProp(key, props[key], mixins, component.options.name)
     array.push(generated)
   })
 
@@ -184,7 +183,7 @@ function writeApiFile (obj, file) {
   stream.once('open', () => {
     stream.write(comment)
     stream.write('module.exports = ')
-    stream.write(JSON.stringify(obj, null, 2).replace(/'/g, '').replace(/"/g, '\''))
+    stream.write(JSON.stringify(obj, null, 2))
     stream.write('\n')
     stream.end()
   })
@@ -211,7 +210,7 @@ function writePlainFile (content, file) {
 const tags = Object.keys(components).reduce((t, k) => {
   t[k] = {
     attributes: components[k].props.map(p => p.name.replace(/([A-Z])/g, g => `-${g[0].toLowerCase()}`)).sort(),
-    description: ''
+    description: '',
   }
 
   return t
@@ -229,7 +228,7 @@ const attributes = Object.keys(components).reduce((attrs, k) => {
 
     a[`${k}/${name}`] = {
       type,
-      description: ''
+      description: '',
     }
 
     return a
@@ -240,7 +239,7 @@ const attributes = Object.keys(components).reduce((attrs, k) => {
 
 const fakeComponents = ts => {
   const imports = [
-    `import Vue from 'vue'`
+    `import Vue from 'vue'`,
   ]
   if (ts) imports.push(`import { PropValidator } from 'vue/types/options'`)
   const inspection = ts ? '' : `// noinspection JSUnresolvedFunction\n`

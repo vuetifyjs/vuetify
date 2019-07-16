@@ -5,7 +5,6 @@ import { VData } from '../VData'
 import VDataFooter from './VDataFooter'
 
 // Mixins
-import mixins from '../../util/mixins'
 import Themeable from '../../mixins/themeable'
 
 // Helpers
@@ -15,7 +14,7 @@ import { PropValidator } from 'vue/types/options'
 import { breaking, removed } from '../../util/console'
 
 /* @vue/component */
-export default mixins(Themeable).extend({
+export default Themeable.extend({
   name: 'v-data-iterator',
 
   props: {
@@ -251,7 +250,7 @@ export default mixins(Themeable).extend({
         this.genItems(props),
         this.genFooter(props),
         getSlot(this, 'footer', outerProps, true),
-      ]) as any
+      ])
     },
   },
 

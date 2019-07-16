@@ -29,8 +29,8 @@
         <v-switch
           v-model="shaped"
           class="ma-1"
-          label="Shaped (requires Filled or Outlined)"
-          :disabled="!outlined && !filled"
+          label="Shaped (requires Filled, Outlined or Solo)"
+          :disabled="!outlined && !filled && !solo"
         ></v-switch>
         <v-switch
           v-model="outlined"
@@ -40,13 +40,14 @@
         <v-switch
           v-model="rounded"
           class="ma-1"
-          label="Rounded (requires Filled or Outlined)"
-          :disabled="!filled || !outlined"
+          label="Rounded (requires Filled, Outlined or Solo)"
+          :disabled="!filled && !outlined && !solo"
         ></v-switch>
         <v-switch
           v-model="solo"
           class="ma-1"
           label="Solo"
+          :disabled="filled"
         ></v-switch>
         <v-switch
           v-model="singleLine"
@@ -57,6 +58,7 @@
           v-model="filled"
           class="ma-1"
           label="Filled"
+          :disabled="outlined || solo"
         ></v-switch>
         <v-switch
           v-model="clearable"

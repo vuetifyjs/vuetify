@@ -4,8 +4,8 @@ module.exports = {
     events: [
       {
         name: 'change',
-        value: 'string'
-      }
-    ]
-  }
+        value: 'string',
+      },
+    ],
+  },
 }

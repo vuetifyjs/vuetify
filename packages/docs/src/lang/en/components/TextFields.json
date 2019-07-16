@@ -1,5 +1,5 @@
 {
-  "header": "# Text field",
+  "header": "# Text fields",
   "headerText": "Text fields components are used for collecting user provided information.",
   "examples": {
     "usage": {
@@ -74,7 +74,7 @@
       "desc": "Text fields can be used with an alternative solo design."
     },
     "outlined": {
-      "header": "### Outline style",
+      "header": "### Outlined style",
       "desc": "Text fields can be used with an alternative outline design."
     },
     "custom-colors": {
@@ -97,6 +97,7 @@
     "filled": "Applies the alternate filled input style",
     "clearIcon": "Applied when using **clearable** and the input is dirty",
     "counter": "Creates counter for input length; if no number is specified, it defaults to 25. Does not apply any validation.",
+    "dark": "Components.Inputs.props.dark",
     "flat": "Mixins.Soloable.props.flat",
     "fullWidth": "Designates input type as full-width",
     "multiLine": "Turns into textarea",

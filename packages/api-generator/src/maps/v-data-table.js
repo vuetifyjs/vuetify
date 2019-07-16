@@ -30,7 +30,7 @@ const DataTableHeaderScopedProps = {
   on: {
     sort: DataDefaultScopedSlotProps.sort,
     group: DataDefaultScopedSlotProps.group,
-    'toggle-select-all': '(value: boolean): void',
+    'toggle-select-all': '(value: boolean) => void',
   },
 }
 
@@ -55,7 +55,7 @@ const DataTableHeaderSelectScopedProps = {
     indeterminate: 'boolean',
   },
   on: {
-    input: '(value: boolean): void',
+    input: '(value: boolean) => void',
   },
 }
 
@@ -89,10 +89,10 @@ module.exports = {
     props: [
       {
         name: 'headers',
+        type: 'TableHeader[]',
         example: TableHeader,
       },
     ].concat(DataIteratorProps).concat(DataProps),
-    slots: DataTableSlots,
     scopedSlots: DataTableSlots,
     events: DataTableEvents,
   },

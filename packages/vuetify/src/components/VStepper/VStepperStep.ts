@@ -6,7 +6,7 @@ import Colorable from '../../mixins/colorable'
 import { inject as RegistrableInject } from '../../mixins/registrable'
 
 // Directives
-import Ripple from '../../directives/ripple'
+import ripple from '../../directives/ripple'
 
 // Utilities
 import mixins from '../../util/mixins'
@@ -29,7 +29,7 @@ interface options extends InstanceType<typeof baseMixins> {
 export default baseMixins.extend<options>().extend({
   name: 'v-stepper-step',
 
-  directives: { Ripple },
+  directives: { ripple },
 
   inject: ['stepClick'],
 

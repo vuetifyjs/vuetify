@@ -22,10 +22,6 @@ export default mixins(
   },
 
   props: {
-    color: {
-      type: String,
-      default: 'accent',
-    },
     id: String,
     inputValue: null as any,
     falseValue: null as any,
@@ -39,13 +35,17 @@ export default mixins(
 
   data () {
     return {
+      hasColor: this.inputValue,
       lazyValue: this.inputValue,
     }
   },
 
   computed: {
     computedColor (): string | undefined {
-      return this.isActive ? this.color : this.validationState
+      if (!this.isActive) return undefined
+      if (this.color) return this.color
+      if (this.isDark && !this.appIsDark) return 'white'
+      return 'accent'
     },
     isMultiple (): boolean {
       return this.multiple === true || (this.multiple === null && Array.isArray(this.internalValue))
@@ -85,17 +85,25 @@ export default mixins(
 
       if (!label) return label
 
-      label!.data!.on = { click: this.onChange }
+      label!.data!.on = {
+        click: (e: Event) => {
+          // Prevent label from
+          // causing the input
+          // to focus
+          e.preventDefault()
+
+          this.onChange()
+        },
+      }
 
       return label
     },
     genInput (type: string, attrs: object) {
       return this.$createElement('input', {
         attrs: Object.assign({
-          'aria-label': this.label,
           'aria-checked': this.isActive.toString(),
           disabled: this.isDisabled,
-          id: this.id,
+          id: this.computedId,
           role: type,
           type,
         }, attrs),
@@ -143,6 +151,7 @@ export default mixins(
 
       this.validate(true, input)
       this.internalValue = input
+      this.hasColor = input
     },
     onFocus () {
       this.isFocused = true

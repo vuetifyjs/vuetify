@@ -1,8 +1,5 @@
 <template>
-  <v-app
-    id="inspire"
-    dark
-  >
+  <v-app id="inspire">
     <v-navigation-drawer
       v-model="drawer"
       fixed
@@ -43,7 +40,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar
+    <v-app-bar
       color="red"
       dense
       fixed
@@ -66,7 +63,7 @@
           hide-details
         ></v-text-field>
       </v-layout>
-    </v-toolbar>
+    </v-app-bar>
     <v-content>
       <v-container fill-height>
         <v-layout justify-center align-center>
@@ -74,7 +71,7 @@
             <v-tooltip right>
               <template v-slot:activator="{ on }">
                 <v-btn :href="source" icon large target="_blank" v-on="on">
-                  <v-icon large>code</v-icon>
+                  <v-icon large>mdi-code-tags</v-icon>
                 </v-btn>
               </template>
               <span>Source</span>
@@ -115,6 +112,9 @@
     }),
     props: {
       source: String,
+    },
+    created () {
+      this.$vuetify.theme.dark = true
     },
   }
 </script>

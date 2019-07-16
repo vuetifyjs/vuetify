@@ -32,4 +32,8 @@ export default {
   calendar: {
     moreEvents: '還有{0}個',
   },
+  fileInput: {
+    counter: '{0} files',
+    counterSize: '{0} files ({1} in total)',
+  },
 }

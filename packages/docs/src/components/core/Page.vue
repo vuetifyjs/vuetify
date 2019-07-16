@@ -16,7 +16,7 @@
           v-if="structure.file"
           shrink
         >
-          <core-file-btn :link="structure.file" />
+          <core-file-btn :link="structure.file" :branch="branch" />
         </v-flex>
         <v-flex
           v-if="structure.mdSpec"
@@ -45,7 +45,7 @@
         :value="child"
       />
 
-      <doc-contribution />
+      <doc-contribution :branch="branch" />
     </template>
   </v-container>
   <not-found v-else />
@@ -56,7 +56,7 @@
   import {
     mapState,
   } from 'vuex'
-  import { getComponent } from '@/util/helpers'
+  import { getComponent, getBranch } from '@/util/helpers'
 
   export default {
     components: {
@@ -65,6 +65,7 @@
 
     data: () => ({
       timeout: null,
+      branch: null,
     }),
 
     computed: {
@@ -81,6 +82,8 @@
 
     mounted () {
       this.init()
+
+      this.branch = getBranch()
     },
 
     methods: {

@@ -3,58 +3,58 @@ module.exports = {
     props: [
       {
         'name': 'offset-(size)(0-12)',
-        'type': 'Boolean',
+        'type': 'boolean',
         'default': 'false',
-        'source': null
+        'source': null,
       },
       {
         'name': 'order-(size)(1-12)',
-        'type': 'Boolean',
+        'type': 'boolean',
         'default': 'false',
-        'source': null
+        'source': null,
       },
       {
         'name': '(size)(1-12)',
-        'type': 'Boolean',
+        'type': 'boolean',
         'default': 'false',
-        'source': null
+        'source': null,
       },
       {
         'name': 'alignSelfStart',
-        'type': 'Boolean',
+        'type': 'boolean',
         'default': 'false',
-        'source': null
+        'source': null,
       },
       {
         'name': 'alignSelfEnd',
-        'type': 'Boolean',
+        'type': 'boolean',
         'default': 'false',
-        'source': null
+        'source': null,
       },
       {
         'name': 'alignSelfCenter',
-        'type': 'Boolean',
+        'type': 'boolean',
         'default': 'false',
-        'source': null
+        'source': null,
       },
       {
         'name': 'alignSelfBaseline',
-        'type': 'Boolean',
+        'type': 'boolean',
         'default': 'false',
-        'source': null
+        'source': null,
       },
       {
         'name': 'grow',
-        'type': 'Boolean',
+        'type': 'boolean',
         'default': 'false',
-        'source': null
+        'source': null,
       },
       {
         'name': 'shrink',
-        'type': 'Boolean',
+        'type': 'boolean',
         'default': 'false',
-        'source': null
-      }
-    ]
-  }
+        'source': null,
+      },
+    ],
+  },
 }

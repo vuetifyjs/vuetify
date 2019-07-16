@@ -138,7 +138,7 @@ export default CalendarBase.extend({
       ])
     },
     genDayLabel (day: VTimestamp): VNode {
-      const slot = this.$scopedSlots.dayLabel
+      const slot = this.$scopedSlots['day-label']
 
       return this.$createElement('div', {
         staticClass: 'v-calendar-weekly__day-label',
@@ -169,7 +169,7 @@ export default CalendarBase.extend({
     },
     genDayMonth (day: VTimestamp): VNode | string {
       const color = day.present ? this.color : undefined
-      const slot = this.$scopedSlots.dayMonth
+      const slot = this.$scopedSlots['day-month']
 
       return this.$createElement('div', this.setTextColor(color, {
         staticClass: 'v-calendar-weekly__day-month',

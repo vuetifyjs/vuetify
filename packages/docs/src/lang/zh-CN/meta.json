@@ -12,11 +12,6 @@
     "description": "开始使用Vue和Vuetify，使用Vue-cli-3脚手架，支持现有的项目和创建新项目。",
     "keywords": "快速启动，vuetify模板，安装vuetify"
   },
-  "getting-started/starter-templates": {
-    "title": "默认模板启动项目",
-    "description": "了解应用程序的布局和结构。 查看示例。",
-    "keywords": "模板，vuetify"
-  },
   "getting-started/why-vuetify": {
     "title": "为什么选择Vuetify？",
     "description": "你选择Vuetify而不是其他框架的百万个理由！！"
@@ -51,15 +46,15 @@
     "description": "获得Vuetify的创作者John Leider的帮助和支持",
     "keywords": "咨询和支持"
   },
-  "framework/a-la-carte": {
+  "customization/a-la-carte": {
     "description": "使用自动化的treeshaking，仅使用你需要的组件。将你需要的单个组件单独引入。"
   },
-  "framework/application": {
+  "components/application": {
     "title": "应用程序服务",
     "description": "Vuetify配备了默认配置，可以轻松为任何应用程序创建布局。",
     "keywords": "默认布局，默认标记，默认布局"
   },
-  "framework/icons": {
+  "customization/icons": {
     "title": "安装图标主题",
     "description": "Vuetify通过前缀和全局选项支持自定义图标集。",
     "keywords": "vue, 图标, confont, 图标库, vutification 图标"
@@ -68,7 +63,7 @@
     "title": "国际化",
     "description": "Vuetify支持语言的国际化。"
   },
-  "framework/scroll": {
+  "styles/scroll": {
     "title": "滚动",
     "description": "使用goTo，您可以顺利滚动到页面上的任何位置。",
     "keywords": "滚动，滚动，平滑滚动，过渡"

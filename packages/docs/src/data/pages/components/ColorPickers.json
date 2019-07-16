@@ -50,9 +50,9 @@
         {
           "type": "up-next",
           "value": [
-            "components/autocompletes",
-            "components/forms",
-            "components/selects"
+            "components/menus",
+            "styles/colors",
+            "customization/theme"
           ]
         }
       ]

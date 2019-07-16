@@ -13,8 +13,7 @@
     <v-bottom-navigation
       :input-value="showNav"
       :value="activeBtn"
-      color="deep-purple"
-      dark
+      color="indigo"
     >
       <v-btn>
         <span>Recents</span>

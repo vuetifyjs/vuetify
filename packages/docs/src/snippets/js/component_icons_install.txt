@@ -12,9 +12,9 @@ export default new Vuetify({
       product: {
         component: IconComponent, // you can use string here if component is registered globally
         props: { // pass props to your component if needed
-          name: 'product'
-        }
-      }
-    }
-  }
+          name: 'product',
+        },
+      },
+    },
+  },
 })

@@ -28,7 +28,7 @@ exports[`VDataTable.ts should render 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-id-6"
+               aria-owns="list-6"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -37,6 +37,7 @@ exports[`VDataTable.ts should render 1`] = `
                   10
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                       id="input-6"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
@@ -45,7 +46,7 @@ exports[`VDataTable.ts should render 1`] = `
               <div class="v-input__append-inner">
                 <div class="v-input__icon v-input__icon--append">
                   <i aria-hidden="true"
-                     class="v-icon material-icons theme--light"
+                     class="v-icon notranslate material-icons theme--light"
                   >
                     $vuetify.icons.dropdown
                   </i>
@@ -53,6 +54,10 @@ exports[`VDataTable.ts should render 1`] = `
               </div>
             </div>
             <div class="v-menu">
+              <div class="v-menu__content theme--light "
+                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+              >
+              </div>
             </div>
           </div>
         </div>
@@ -69,7 +74,7 @@ exports[`VDataTable.ts should render 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.prev
           </i>
@@ -84,7 +89,7 @@ exports[`VDataTable.ts should render 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.next
           </i>
@@ -151,7 +156,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-id-342"
+               aria-owns="list-276"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -160,6 +165,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
                   10
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                       id="input-276"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
@@ -168,7 +174,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
               <div class="v-input__append-inner">
                 <div class="v-input__icon v-input__icon--append">
                   <i aria-hidden="true"
-                     class="v-icon material-icons theme--light"
+                     class="v-icon notranslate material-icons theme--light"
                   >
                     $vuetify.icons.dropdown
                   </i>
@@ -176,6 +182,10 @@ exports[`VDataTable.ts should render loading state 1`] = `
               </div>
             </div>
             <div class="v-menu">
+              <div class="v-menu__content theme--light "
+                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+              >
+              </div>
             </div>
           </div>
         </div>
@@ -192,7 +202,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.prev
           </i>
@@ -207,7 +217,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.next
           </i>
@@ -254,7 +264,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -270,7 +280,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -286,7 +296,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -302,7 +312,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
               Protein (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -318,7 +328,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -354,7 +364,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-id-368"
+               aria-owns="list-296"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -363,6 +373,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
                   10
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                       id="input-296"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
@@ -371,7 +382,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
               <div class="v-input__append-inner">
                 <div class="v-input__icon v-input__icon--append">
                   <i aria-hidden="true"
-                     class="v-icon material-icons theme--light"
+                     class="v-icon notranslate material-icons theme--light"
                   >
                     $vuetify.icons.dropdown
                   </i>
@@ -379,6 +390,10 @@ exports[`VDataTable.ts should render loading state 2`] = `
               </div>
             </div>
             <div class="v-menu">
+              <div class="v-menu__content theme--light "
+                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+              >
+              </div>
             </div>
           </div>
         </div>
@@ -395,7 +410,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.prev
           </i>
@@ -410,7 +425,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.next
           </i>
@@ -450,7 +465,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                 Calories
               </span>
               <i aria-hidden="true"
-                 class="v-icon material-icons theme--light"
+                 class="v-icon notranslate material-icons theme--light"
                  style="font-size: 18px;"
               >
                 $vuetify.icons.sort
@@ -466,7 +481,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                 Fat (g)
               </span>
               <i aria-hidden="true"
-                 class="v-icon material-icons theme--light"
+                 class="v-icon notranslate material-icons theme--light"
                  style="font-size: 18px;"
               >
                 $vuetify.icons.sort
@@ -482,7 +497,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                 Carbs (g)
               </span>
               <i aria-hidden="true"
-                 class="v-icon material-icons theme--light"
+                 class="v-icon notranslate material-icons theme--light"
                  style="font-size: 18px;"
               >
                 $vuetify.icons.sort
@@ -498,7 +513,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                 Protein (g)
               </span>
               <i aria-hidden="true"
-                 class="v-icon material-icons theme--light"
+                 class="v-icon notranslate material-icons theme--light"
                  style="font-size: 18px;"
               >
                 $vuetify.icons.sort
@@ -514,7 +529,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                 Iron (%)
               </span>
               <i aria-hidden="true"
-                 class="v-icon material-icons theme--light"
+                 class="v-icon notranslate material-icons theme--light"
                  style="font-size: 18px;"
               >
                 $vuetify.icons.sort
@@ -639,7 +654,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-id-85"
+               aria-owns="list-67"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -648,6 +663,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                       id="input-67"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
@@ -656,7 +672,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
               <div class="v-input__append-inner">
                 <div class="v-input__icon v-input__icon--append">
                   <i aria-hidden="true"
-                     class="v-icon material-icons theme--light"
+                     class="v-icon notranslate material-icons theme--light"
                   >
                     $vuetify.icons.dropdown
                   </i>
@@ -664,6 +680,10 @@ exports[`VDataTable.ts should render virtual table 1`] = `
               </div>
             </div>
             <div class="v-menu">
+              <div class="v-menu__content theme--light "
+                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+              >
+              </div>
             </div>
           </div>
         </div>
@@ -680,7 +700,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.prev
           </i>
@@ -694,7 +714,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.next
           </i>
@@ -741,7 +761,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -757,7 +777,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -773,7 +793,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -789,7 +809,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               Protein (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -805,7 +825,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -826,7 +846,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-id-59"
+               aria-owns="list-47"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -835,6 +855,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                       id="input-47"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
@@ -843,7 +864,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               <div class="v-input__append-inner">
                 <div class="v-input__icon v-input__icon--append">
                   <i aria-hidden="true"
-                     class="v-icon material-icons theme--light"
+                     class="v-icon notranslate material-icons theme--light"
                   >
                     $vuetify.icons.dropdown
                   </i>
@@ -851,6 +872,10 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               </div>
             </div>
             <div class="v-menu">
+              <div class="v-menu__content theme--light "
+                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+              >
+              </div>
             </div>
           </div>
         </div>
@@ -867,7 +892,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.prev
           </i>
@@ -881,7 +906,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.next
           </i>
@@ -928,7 +953,7 @@ exports[`VDataTable.ts should render with data 1`] = `
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -944,7 +969,7 @@ exports[`VDataTable.ts should render with data 1`] = `
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -960,7 +985,7 @@ exports[`VDataTable.ts should render with data 1`] = `
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -976,7 +1001,7 @@ exports[`VDataTable.ts should render with data 1`] = `
               Protein (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -992,7 +1017,7 @@ exports[`VDataTable.ts should render with data 1`] = `
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1112,7 +1137,7 @@ exports[`VDataTable.ts should render with data 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-id-32"
+               aria-owns="list-26"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -1121,6 +1146,7 @@ exports[`VDataTable.ts should render with data 1`] = `
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                       id="input-26"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
@@ -1129,7 +1155,7 @@ exports[`VDataTable.ts should render with data 1`] = `
               <div class="v-input__append-inner">
                 <div class="v-input__icon v-input__icon--append">
                   <i aria-hidden="true"
-                     class="v-icon material-icons theme--light"
+                     class="v-icon notranslate material-icons theme--light"
                   >
                     $vuetify.icons.dropdown
                   </i>
@@ -1137,6 +1163,10 @@ exports[`VDataTable.ts should render with data 1`] = `
               </div>
             </div>
             <div class="v-menu">
+              <div class="v-menu__content theme--light "
+                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+              >
+              </div>
             </div>
           </div>
         </div>
@@ -1153,7 +1183,7 @@ exports[`VDataTable.ts should render with data 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.prev
           </i>
@@ -1167,7 +1197,7 @@ exports[`VDataTable.ts should render with data 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.next
           </i>
@@ -1213,7 +1243,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1229,7 +1259,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1245,7 +1275,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1261,7 +1291,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1293,7 +1323,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-id-319"
+               aria-owns="list-259"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -1302,6 +1332,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                       id="input-259"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
@@ -1310,7 +1341,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
               <div class="v-input__append-inner">
                 <div class="v-input__icon v-input__icon--append">
                   <i aria-hidden="true"
-                     class="v-icon material-icons theme--light"
+                     class="v-icon notranslate material-icons theme--light"
                   >
                     $vuetify.icons.dropdown
                   </i>
@@ -1318,6 +1349,10 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
               </div>
             </div>
             <div class="v-menu">
+              <div class="v-menu__content theme--light "
+                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+              >
+              </div>
             </div>
           </div>
         </div>
@@ -1334,7 +1369,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.prev
           </i>
@@ -1348,7 +1383,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.next
           </i>
@@ -1394,7 +1429,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1410,7 +1445,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1426,7 +1461,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
               Protein (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1442,7 +1477,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1460,7 +1495,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
-                   class="v-icon material-icons theme--light"
+                   class="v-icon notranslate material-icons theme--light"
                 >
                   remove
                 </i>
@@ -1472,7 +1507,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
-                   class="v-icon material-icons theme--light"
+                   class="v-icon notranslate material-icons theme--light"
                 >
                   close
                 </i>
@@ -1511,7 +1546,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
-                   class="v-icon material-icons theme--light"
+                   class="v-icon notranslate material-icons theme--light"
                 >
                   remove
                 </i>
@@ -1523,7 +1558,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
-                   class="v-icon material-icons theme--light"
+                   class="v-icon notranslate material-icons theme--light"
                 >
                   close
                 </i>
@@ -1562,7 +1597,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
-                   class="v-icon material-icons theme--light"
+                   class="v-icon notranslate material-icons theme--light"
                 >
                   remove
                 </i>
@@ -1574,7 +1609,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
-                   class="v-icon material-icons theme--light"
+                   class="v-icon notranslate material-icons theme--light"
                 >
                   close
                 </i>
@@ -1613,7 +1648,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
-                   class="v-icon material-icons theme--light"
+                   class="v-icon notranslate material-icons theme--light"
                 >
                   remove
                 </i>
@@ -1625,7 +1660,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
-                   class="v-icon material-icons theme--light"
+                   class="v-icon notranslate material-icons theme--light"
                 >
                   close
                 </i>
@@ -1664,7 +1699,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
-                   class="v-icon material-icons theme--light"
+                   class="v-icon notranslate material-icons theme--light"
                 >
                   remove
                 </i>
@@ -1676,7 +1711,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
-                   class="v-icon material-icons theme--light"
+                   class="v-icon notranslate material-icons theme--light"
                 >
                   close
                 </i>
@@ -1717,7 +1752,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-id-223"
+               aria-owns="list-181"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -1726,6 +1761,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                       id="input-181"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
@@ -1734,7 +1770,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
               <div class="v-input__append-inner">
                 <div class="v-input__icon v-input__icon--append">
                   <i aria-hidden="true"
-                     class="v-icon material-icons theme--light"
+                     class="v-icon notranslate material-icons theme--light"
                   >
                     $vuetify.icons.dropdown
                   </i>
@@ -1742,6 +1778,10 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
               </div>
             </div>
             <div class="v-menu">
+              <div class="v-menu__content theme--light "
+                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+              >
+              </div>
             </div>
           </div>
         </div>
@@ -1758,7 +1798,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.prev
           </i>
@@ -1772,7 +1812,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.next
           </i>
@@ -1818,7 +1858,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1834,7 +1874,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1850,7 +1890,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1866,7 +1906,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -1884,7 +1924,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
-                   class="v-icon material-icons theme--light"
+                   class="v-icon notranslate material-icons theme--light"
                 >
                   remove
                 </i>
@@ -1896,7 +1936,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
-                   class="v-icon material-icons theme--light"
+                   class="v-icon notranslate material-icons theme--light"
                 >
                   close
                 </i>
@@ -1947,7 +1987,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
-                   class="v-icon material-icons theme--light"
+                   class="v-icon notranslate material-icons theme--light"
                 >
                   remove
                 </i>
@@ -1959,7 +1999,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
-                   class="v-icon material-icons theme--light"
+                   class="v-icon notranslate material-icons theme--light"
                 >
                   close
                 </i>
@@ -1993,7 +2033,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
-                   class="v-icon material-icons theme--light"
+                   class="v-icon notranslate material-icons theme--light"
                 >
                   remove
                 </i>
@@ -2005,7 +2045,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
-                   class="v-icon material-icons theme--light"
+                   class="v-icon notranslate material-icons theme--light"
                 >
                   close
                 </i>
@@ -2039,7 +2079,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
-                   class="v-icon material-icons theme--light"
+                   class="v-icon notranslate material-icons theme--light"
                 >
                   remove
                 </i>
@@ -2051,7 +2091,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
-                   class="v-icon material-icons theme--light"
+                   class="v-icon notranslate material-icons theme--light"
                 >
                   close
                 </i>
@@ -2087,7 +2127,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-id-292"
+               aria-owns="list-238"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -2096,6 +2136,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                       id="input-238"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
@@ -2104,7 +2145,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               <div class="v-input__append-inner">
                 <div class="v-input__icon v-input__icon--append">
                   <i aria-hidden="true"
-                     class="v-icon material-icons theme--light"
+                     class="v-icon notranslate material-icons theme--light"
                   >
                     $vuetify.icons.dropdown
                   </i>
@@ -2112,6 +2153,10 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               </div>
             </div>
             <div class="v-menu">
+              <div class="v-menu__content theme--light "
+                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+              >
+              </div>
             </div>
           </div>
         </div>
@@ -2128,7 +2173,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.prev
           </i>
@@ -2142,7 +2187,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.next
           </i>
@@ -2189,7 +2234,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2205,7 +2250,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2221,7 +2266,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2237,7 +2282,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               Protein (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2253,7 +2298,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2288,7 +2333,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-id-251"
+               aria-owns="list-203"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -2297,6 +2342,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                       id="input-203"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
@@ -2305,7 +2351,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               <div class="v-input__append-inner">
                 <div class="v-input__icon v-input__icon--append">
                   <i aria-hidden="true"
-                     class="v-icon material-icons theme--light"
+                     class="v-icon notranslate material-icons theme--light"
                   >
                     $vuetify.icons.dropdown
                   </i>
@@ -2313,6 +2359,10 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               </div>
             </div>
             <div class="v-menu">
+              <div class="v-menu__content theme--light "
+                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+              >
+              </div>
             </div>
           </div>
         </div>
@@ -2329,7 +2379,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.prev
           </i>
@@ -2343,7 +2393,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.next
           </i>
@@ -2390,7 +2440,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2406,7 +2456,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2422,7 +2472,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2438,7 +2488,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               Protein (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2454,7 +2504,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2599,7 +2649,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-id-176"
+               aria-owns="list-140"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -2608,6 +2658,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                       id="input-140"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
@@ -2616,7 +2667,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               <div class="v-input__append-inner">
                 <div class="v-input__icon v-input__icon--append">
                   <i aria-hidden="true"
-                     class="v-icon material-icons theme--light"
+                     class="v-icon notranslate material-icons theme--light"
                   >
                     $vuetify.icons.dropdown
                   </i>
@@ -2624,6 +2675,10 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               </div>
             </div>
             <div class="v-menu">
+              <div class="v-menu__content theme--light "
+                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+              >
+              </div>
             </div>
           </div>
         </div>
@@ -2640,7 +2695,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.prev
           </i>
@@ -2654,7 +2709,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.next
           </i>
@@ -2714,7 +2769,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2730,7 +2785,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2746,7 +2801,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2762,7 +2817,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               Protein (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2778,7 +2833,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -2790,7 +2845,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         <tr>
           <td class="text-xs-start">
             <i role="button"
-               class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
+               class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
             </i>
@@ -2817,7 +2872,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         <tr>
           <td class="text-xs-start">
             <i role="button"
-               class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
+               class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
             </i>
@@ -2844,7 +2899,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         <tr>
           <td class="text-xs-start">
             <i role="button"
-               class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
+               class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
             </i>
@@ -2871,7 +2926,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         <tr>
           <td class="text-xs-start">
             <i role="button"
-               class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
+               class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
             </i>
@@ -2898,7 +2953,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
         <tr>
           <td class="text-xs-start">
             <i role="button"
-               class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
+               class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
             </i>
@@ -2933,7 +2988,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-id-116"
+               aria-owns="list-92"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -2942,6 +2997,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                       id="input-92"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
@@ -2950,7 +3006,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               <div class="v-input__append-inner">
                 <div class="v-input__icon v-input__icon--append">
                   <i aria-hidden="true"
-                     class="v-icon material-icons theme--light"
+                     class="v-icon notranslate material-icons theme--light"
                   >
                     $vuetify.icons.dropdown
                   </i>
@@ -2958,6 +3014,10 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               </div>
             </div>
             <div class="v-menu">
+              <div class="v-menu__content theme--light "
+                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+              >
+              </div>
             </div>
           </div>
         </div>
@@ -2974,7 +3034,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.prev
           </i>
@@ -2988,7 +3048,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.next
           </i>
@@ -3048,7 +3108,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3064,7 +3124,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3080,7 +3140,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3096,7 +3156,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               Protein (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3112,7 +3172,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3124,7 +3184,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         <tr>
           <td class="text-xs-start">
             <i role="button"
-               class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light v-data-table__expand-icon--active"
+               class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light v-data-table__expand-icon--active"
             >
               $vuetify.icons.expand
             </i>
@@ -3151,7 +3211,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         <tr>
           <td class="text-xs-start">
             <i role="button"
-               class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
+               class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
             </i>
@@ -3178,7 +3238,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         <tr>
           <td class="text-xs-start">
             <i role="button"
-               class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
+               class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
             </i>
@@ -3205,7 +3265,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         <tr>
           <td class="text-xs-start">
             <i role="button"
-               class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
+               class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
             </i>
@@ -3232,7 +3292,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
         <tr>
           <td class="text-xs-start">
             <i role="button"
-               class="v-icon v-data-table__expand-icon v-icon--link material-icons theme--light"
+               class="v-icon notranslate v-data-table__expand-icon v-icon--link material-icons theme--light"
             >
               $vuetify.icons.expand
             </i>
@@ -3267,7 +3327,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-id-116"
+               aria-owns="list-92"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -3276,6 +3336,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                       id="input-92"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
@@ -3284,7 +3345,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               <div class="v-input__append-inner">
                 <div class="v-input__icon v-input__icon--append">
                   <i aria-hidden="true"
-                     class="v-icon material-icons theme--light"
+                     class="v-icon notranslate material-icons theme--light"
                   >
                     $vuetify.icons.dropdown
                   </i>
@@ -3292,6 +3353,10 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               </div>
             </div>
             <div class="v-menu">
+              <div class="v-menu__content theme--light "
+                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+              >
+              </div>
             </div>
           </div>
         </div>
@@ -3308,7 +3373,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.prev
           </i>
@@ -3322,7 +3387,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.next
           </i>
@@ -3363,7 +3428,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               <div class="v-input--selection-controls__ripple">
               </div>
               <i aria-hidden="true"
-                 class="v-icon material-icons theme--light"
+                 class="v-icon notranslate material-icons theme--light"
               >
                 $vuetify.icons.checkboxOff
               </i>
@@ -3389,7 +3454,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               Calories
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3405,7 +3470,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               Fat (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3421,7 +3486,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               Carbs (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3437,7 +3502,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               Protein (g)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3453,7 +3518,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               Iron (%)
             </span>
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
                style="font-size: 18px;"
             >
               $vuetify.icons.sort
@@ -3468,7 +3533,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               <div class="v-input--selection-controls__ripple">
               </div>
               <i aria-hidden="true"
-                 class="v-icon material-icons theme--light"
+                 class="v-icon notranslate material-icons theme--light"
               >
                 $vuetify.icons.checkboxOff
               </i>
@@ -3499,7 +3564,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               <div class="v-input--selection-controls__ripple">
               </div>
               <i aria-hidden="true"
-                 class="v-icon material-icons theme--light"
+                 class="v-icon notranslate material-icons theme--light"
               >
                 $vuetify.icons.checkboxOff
               </i>
@@ -3530,7 +3595,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               <div class="v-input--selection-controls__ripple">
               </div>
               <i aria-hidden="true"
-                 class="v-icon material-icons theme--light"
+                 class="v-icon notranslate material-icons theme--light"
               >
                 $vuetify.icons.checkboxOff
               </i>
@@ -3561,7 +3626,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               <div class="v-input--selection-controls__ripple">
               </div>
               <i aria-hidden="true"
-                 class="v-icon material-icons theme--light"
+                 class="v-icon notranslate material-icons theme--light"
               >
                 $vuetify.icons.checkboxOff
               </i>
@@ -3592,7 +3657,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               <div class="v-input--selection-controls__ripple">
               </div>
               <i aria-hidden="true"
-                 class="v-icon material-icons theme--light"
+                 class="v-icon notranslate material-icons theme--light"
               >
                 $vuetify.icons.checkboxOff
               </i>
@@ -3628,7 +3693,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="computed-id-148"
+               aria-owns="list-118"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -3637,6 +3702,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
                   5
                 </div>
                 <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                       id="input-118"
                        readonly="readonly"
                        type="text"
                        aria-readonly="true"
@@ -3645,7 +3711,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               <div class="v-input__append-inner">
                 <div class="v-input__icon v-input__icon--append">
                   <i aria-hidden="true"
-                     class="v-icon material-icons theme--light"
+                     class="v-icon notranslate material-icons theme--light"
                   >
                     $vuetify.icons.dropdown
                   </i>
@@ -3653,6 +3719,10 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               </div>
             </div>
             <div class="v-menu">
+              <div class="v-menu__content theme--light "
+                   style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+              >
+              </div>
             </div>
           </div>
         </div>
@@ -3669,7 +3739,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.prev
           </i>
@@ -3683,7 +3753,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
-             class="v-icon material-icons theme--light"
+             class="v-icon notranslate material-icons theme--light"
           >
             $vuetify.icons.next
           </i>

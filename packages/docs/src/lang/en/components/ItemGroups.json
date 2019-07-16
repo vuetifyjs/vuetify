@@ -1,5 +1,5 @@
 {
-  "header": "# Item Groups",
+  "header": "# Item groups",
   "headerText": "The `v-item-group` provides the ability to create a group of selectable items out of any component. This is the baseline functionality for components such as `v-tabs` and `v-carousel`.",
   "examples": {
     "usage": {
@@ -25,10 +25,5 @@
       "header": "### With active class",
       "desc": "**activeClass** property allows you to set custom CSS class on active items."
     }
-  },
-  "props": {
-    "activeClass": "CSS Class to apply when active",
-    "mandatory": "Forces a value to always be selected",
-    "multiple": "Allows for multiple selections. Model used must be an `Array`"
   }
 }

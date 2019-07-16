@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-switch v-model="reverse" label="Toggle reverse"></v-switch>
-    <v-timeline :reverse="reverse">
+    <v-timeline :reverse="reverse" :dense="$vuetify.breakpoint.smAndDown">
       <v-timeline-item
         v-for="n in 2"
         :key="n"

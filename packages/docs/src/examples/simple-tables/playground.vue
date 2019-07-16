@@ -20,7 +20,7 @@
     </v-simple-table>
 
     <v-layout row wrap>
-      <v-flex xs4>
+      <v-flex xs12 md6>
         <v-text-field
           v-model="height"
           class="mx-3"
@@ -33,10 +33,10 @@
           @keydown="false"
         ></v-text-field>
       </v-flex>
-      <v-flex xs4>
+      <v-flex xs6 md3>
         <v-switch v-model="dense" label="Toggle dense" class="mx-3"></v-switch>
       </v-flex>
-      <v-flex xs4>
+      <v-flex xs6 md3>
         <v-switch v-model="fixedHeader" label="Toggle fixed-header" class="mx-3"></v-switch>
       </v-flex>
     </v-layout>

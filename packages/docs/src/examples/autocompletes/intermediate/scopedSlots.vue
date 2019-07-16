@@ -2,21 +2,21 @@
   <v-card
     color="blue-grey darken-1"
     dark
+    :loading="isUpdating"
   >
+    <template v-slot:progress>
+      <v-progress-linear
+        absolute
+        color="green lighten-3"
+        height="4"
+        indeterminate
+      ></v-progress-linear>
+    </template>
     <v-img
       height="200"
       src="https://cdn.vuetifyjs.com/images/cards/dark-beach.jpg"
     >
       <v-layout wrap>
-        <v-flex xs12>
-          <v-progress-linear
-            :active="isUpdating"
-            class="ma-0"
-            color="green lighten-3"
-            height="4"
-            indeterminate
-          ></v-progress-linear>
-        </v-flex>
         <v-flex
           text-xs-right
           xs12
@@ -60,7 +60,10 @@
     <v-form>
       <v-container>
         <v-layout wrap>
-          <v-flex xs12 md6>
+          <v-flex
+            xs12
+            md6
+          >
             <v-text-field
               v-model="name"
               :disabled="isUpdating"
@@ -69,7 +72,10 @@
               label="Name"
             ></v-text-field>
           </v-flex>
-          <v-flex xs12 md6>
+          <v-flex
+            xs12
+            md6
+          >
             <v-text-field
               v-model="title"
               :disabled="isUpdating"
@@ -93,12 +99,14 @@
             >
               <template v-slot:selection="data">
                 <v-chip
-                  :value="data.selected"
+                  v-bind="data.attrs"
+                  :input-value="data.selected"
                   close
-                  @input="remove(data.item)"
+                  @click="data.select"
+                  @click:close="remove(data.item)"
                 >
-                  <v-avatar>
-                    <img :src="data.item.avatar">
+                  <v-avatar left>
+                    <v-img :src="data.item.avatar"></v-img>
                   </v-avatar>
                   {{ data.item.name }}
                 </v-chip>

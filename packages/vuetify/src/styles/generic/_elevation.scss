@@ -1,8 +1,8 @@
 @import '../tools/_elevation.sass';
 
 $z: 24;
-@while $z > 0 {
-  .elevation-#{$z} {
+@while $z >= 0 {
+  .v-application .elevation-#{$z} {
     @include elevation($z, $important: true);
   }
 

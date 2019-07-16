@@ -22,8 +22,8 @@ export default VSheet.extend({
   props: {
     absolute: Boolean,
     bottom: Boolean,
-    dense: Boolean,
     collapse: Boolean,
+    dense: Boolean,
     extended: Boolean,
     extensionHeight: {
       default: 48,
@@ -37,6 +37,10 @@ export default VSheet.extend({
       type: [String, Object],
       default: '',
     } as PropValidator<string | srcObject>,
+    tag: {
+      type: String,
+      default: 'header',
+    },
     tile: {
       type: Boolean,
       default: true,
@@ -159,6 +163,6 @@ export default VSheet.extend({
     if (this.isExtended) children.push(this.genExtension())
     if (this.src || this.$scopedSlots.img) children.unshift(this.genBackground())
 
-    return h('nav', data, children)
+    return h(this.tag, data, children)
   },
 })

@@ -3,10 +3,10 @@
 exports[`VApp.ts should allow a custom id 1`] = `
 
 <div data-app="true"
-     class="application application--is-ltr theme--light"
+     class="v-application v-application--is-ltr theme--light"
      id="inspire"
 >
-  <div class="application--wrap">
+  <div class="v-application--wrap">
   </div>
 </div>
 
@@ -15,10 +15,10 @@ exports[`VApp.ts should allow a custom id 1`] = `
 exports[`VApp.ts should match a snapshot 1`] = `
 
 <div data-app="true"
-     class="application application--is-ltr theme--light"
+     class="v-application v-application--is-ltr theme--light"
      id="app"
 >
-  <div class="application--wrap">
+  <div class="v-application--wrap">
   </div>
 </div>
 

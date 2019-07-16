@@ -2,10 +2,12 @@
 
 exports[`VDialog.ts should render a disabled component and match snapshot 1`] = `
 
-<div class="v-dialog__container"
+<div role="dialog"
+     class="v-dialog__container"
      style="display: block;"
 >
-  <div tabindex="-1"
+  <div role="document"
+       tabindex="0"
        class="v-dialog__content"
        style="z-index: 0;"
   >
@@ -20,7 +22,8 @@ exports[`VDialog.ts should render a disabled component and match snapshot 1`] = 
 
 exports[`VDialog.ts should render a eager component and match snapshot 1`] = `
 
-<div class="v-dialog__container"
+<div role="dialog"
+     class="v-dialog__container"
      style="display: block;"
 >
 </div>
@@ -29,10 +32,12 @@ exports[`VDialog.ts should render a eager component and match snapshot 1`] = `
 
 exports[`VDialog.ts should render a fullscreen component and match snapshot 1`] = `
 
-<div class="v-dialog__container"
+<div role="dialog"
+     class="v-dialog__container"
      style="display: block;"
 >
-  <div tabindex="-1"
+  <div role="document"
+       tabindex="0"
        class="v-dialog__content"
        style="z-index: 0;"
   >
@@ -47,10 +52,12 @@ exports[`VDialog.ts should render a fullscreen component and match snapshot 1`] 
 
 exports[`VDialog.ts should render a persistent component and match snapshot 1`] = `
 
-<div class="v-dialog__container"
+<div role="dialog"
+     class="v-dialog__container"
      style="display: block;"
 >
-  <div tabindex="-1"
+  <div role="document"
+       tabindex="0"
        class="v-dialog__content"
        style="z-index: 0;"
   >
@@ -65,10 +72,12 @@ exports[`VDialog.ts should render a persistent component and match snapshot 1`] 
 
 exports[`VDialog.ts should render a scrollable component and match snapshot 1`] = `
 
-<div class="v-dialog__container"
+<div role="dialog"
+     class="v-dialog__container"
      style="display: block;"
 >
-  <div tabindex="-1"
+  <div role="document"
+       tabindex="0"
        class="v-dialog__content"
        style="z-index: 0;"
   >
@@ -83,10 +92,12 @@ exports[`VDialog.ts should render a scrollable component and match snapshot 1`] 
 
 exports[`VDialog.ts should render component and match snapshot 1`] = `
 
-<div class="v-dialog__container"
+<div role="dialog"
+     class="v-dialog__container"
      style="display: block;"
 >
-  <div tabindex="-1"
+  <div role="document"
+       tabindex="0"
        class="v-dialog__content"
        style="z-index: 0;"
   >
@@ -101,10 +112,12 @@ exports[`VDialog.ts should render component and match snapshot 1`] = `
 
 exports[`VDialog.ts should render component with custom origin and match snapshot 1`] = `
 
-<div class="v-dialog__container"
+<div role="dialog"
+     class="v-dialog__container"
      style="display: block;"
 >
-  <div tabindex="-1"
+  <div role="document"
+       tabindex="0"
        class="v-dialog__content"
        style="z-index: 0;"
   >
@@ -119,10 +132,12 @@ exports[`VDialog.ts should render component with custom origin and match snapsho
 
 exports[`VDialog.ts should render component with custom transition and match snapshot 1`] = `
 
-<div class="v-dialog__container"
+<div role="dialog"
+     class="v-dialog__container"
      style="display: block;"
 >
-  <div tabindex="-1"
+  <div role="document"
+       tabindex="0"
        class="v-dialog__content"
        style="z-index: 0;"
   >
@@ -137,10 +152,12 @@ exports[`VDialog.ts should render component with custom transition and match sna
 
 exports[`VDialog.ts should render component with custom width (max-width) and match snapshot 1`] = `
 
-<div class="v-dialog__container"
+<div role="dialog"
+     class="v-dialog__container"
      style="display: block;"
 >
-  <div tabindex="-1"
+  <div role="document"
+       tabindex="0"
        class="v-dialog__content"
        style="z-index: 0;"
   >
@@ -155,10 +172,12 @@ exports[`VDialog.ts should render component with custom width (max-width) and ma
 
 exports[`VDialog.ts should render component with custom width and match snapshot 1`] = `
 
-<div class="v-dialog__container"
+<div role="dialog"
+     class="v-dialog__container"
      style="display: block;"
 >
-  <div tabindex="-1"
+  <div role="document"
+       tabindex="0"
        class="v-dialog__content"
        style="z-index: 0;"
   >

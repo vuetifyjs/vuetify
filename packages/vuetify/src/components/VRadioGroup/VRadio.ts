@@ -39,10 +39,6 @@ export default baseMixins.extend<options>().extend({
   inheritAttrs: false,
 
   props: {
-    color: {
-      type: String,
-      default: 'accent',
-    },
     disabled: Boolean,
     label: String,
     name: String,
@@ -74,15 +70,16 @@ export default baseMixins.extend<options>().extend({
         ...this.groupClasses,
       }
     },
-    computedColor (): string | false {
-      const color = (this.radioGroup || {}).validationState
-
-      return this.isActive ? this.color : (color || false)
+    computedColor (): string | undefined {
+      return Selectable.options.computed.computedColor.call(this)
     },
     computedIcon (): string {
       return this.isActive
         ? this.onIcon
         : this.offIcon
+    },
+    computedId (): string {
+      return VInput.options.computed.computedId.call(this)
     },
     hasLabel: VInput.options.computed.hasLabel,
     hasState (): boolean {
@@ -99,7 +96,10 @@ export default baseMixins.extend<options>().extend({
         return this.name
       }
 
-      return this.radioGroup.name || `'v-radio-'${this.radioGroup._uid}`
+      return this.radioGroup.name || `radio-${this.radioGroup._uid}`
+    },
+    validationState (): string | undefined {
+      return (this.radioGroup || {}).validationState || this.computedColor
     },
   },
 
@@ -114,12 +114,21 @@ export default baseMixins.extend<options>().extend({
       if (!this.hasLabel) return null
 
       return this.$createElement(VLabel, {
-        on: { click: this.onChange },
+        on: {
+          click: (e: Event) => {
+            // Prevent label from
+            // causing the input
+            // to focus
+            e.preventDefault()
+
+            this.onChange()
+          },
+        },
         attrs: {
-          for: this.id,
+          for: this.computedId,
         },
         props: {
-          color: ((this.radioGroup || {}).validationState) || '',
+          color: this.validationState,
           focused: this.hasState,
         },
       }, getSlot(this, 'label') || this.label)
@@ -133,8 +142,8 @@ export default baseMixins.extend<options>().extend({
           value: this.value,
           ...this.$attrs,
         }),
-        this.genRipple(this.setTextColor(this.computedColor)),
-        this.$createElement(VIcon, this.setTextColor(this.computedColor, {}), this.computedIcon),
+        this.genRipple(this.setTextColor(this.validationState)),
+        this.$createElement(VIcon, this.setTextColor(this.validationState, {}), this.computedIcon),
       ])
     },
     onFocus (e: Event) {
@@ -154,14 +163,10 @@ export default baseMixins.extend<options>().extend({
   },
 
   render (h): VNode {
-    let data = {
+    const data = {
       staticClass: 'v-radio',
       class: this.classes,
     } as VNodeData
-
-    if ((this.radioGroup || {}).hasError) {
-      data = this.setTextColor(this.color, data)
-    }
 
     return h('div', data, [
       this.genRadio(),

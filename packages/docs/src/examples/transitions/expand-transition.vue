@@ -6,7 +6,7 @@
   >
     <v-flex shrink>
       <v-btn
-        class="my-3"
+        class="ma-2"
         color="primary"
         @click="expand = !expand"
       >
@@ -27,7 +27,7 @@
 
     <v-flex shrink>
       <v-btn
-        class="my-3"
+        class="ma-2"
         color="secondary"
         @click="expand2 = !expand2"
       >

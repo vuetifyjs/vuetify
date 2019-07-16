@@ -1,6 +1,7 @@
 {
   "props": {
-    "activeClass": "The class used when item is active",
-    "disabled": "Disables the item from changing value from the toggle method"
+    "activeClass": "Mixins.Routable.props.activeClass",
+    "disabled": "Mixins.Routable.props.disabled",
+    "value": "The value used when the component is selected in a group. If not provided, the index will be used."
   }
 }

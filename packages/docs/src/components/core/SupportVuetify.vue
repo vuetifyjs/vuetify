@@ -1,5 +1,6 @@
 <template>
   <v-card
+    aria-label="Support the Development of Vuetify"
     class="mb-5"
     href="https://www.patreon.com/vuetify"
     rel="noopener"
@@ -40,7 +41,12 @@
         >
           <v-layout align-center>
             <v-flex xs12>
-              <img class="logo" src="https://cdn.vuetifyjs.com/images/logos/logo.svg" width="50px" alt="">
+              <v-img
+                class="logo"
+                src="https://cdn.vuetifyjs.com/images/logos/logo.svg"
+                width="50px"
+                alt="Vuetify Logo"
+              />
             </v-flex>
           </v-layout>
         </v-flex>

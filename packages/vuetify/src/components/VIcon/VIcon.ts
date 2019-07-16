@@ -35,10 +35,11 @@ const VIcon = mixins(
   name: 'v-icon',
 
   props: {
+    dense: Boolean,
     disabled: Boolean,
     left: Boolean,
     right: Boolean,
-    dense: Boolean,
+    size: [Number, String],
     tag: {
       type: String,
       required: false,
@@ -69,13 +70,17 @@ const VIcon = mixins(
 
       const explicitSize = keys(sizes).find(key => sizes[key])
 
-      return (explicitSize && SIZE_MAP[explicitSize]) || convertToUnit(this.size)
+      return (
+        (explicitSize && SIZE_MAP[explicitSize]) || convertToUnit(this.size)
+      )
     },
     // Component data for both font and svg icon.
     getDefaultData (): VNodeData {
-      const hasClickListener = Boolean(this.$listeners.click || this.$listeners['!click'])
+      const hasClickListener = Boolean(
+        this.$listeners.click || this.$listeners['!click']
+      )
       const data: VNodeData = {
-        staticClass: 'v-icon',
+        staticClass: 'v-icon notranslate',
         class: {
           'v-icon--disabled': this.disabled,
           'v-icon--left': this.left,
@@ -152,13 +157,18 @@ const VIcon = mixins(
 
       this.applyColors(data)
 
-      return h('svg', data, [h('path', {
-        attrs: {
-          d: icon,
-        },
-      })])
+      return h('svg', data, [
+        h('path', {
+          attrs: {
+            d: icon,
+          },
+        }),
+      ])
     },
-    renderSvgIconComponent (icon: VuetifyIconComponent, h: CreateElement): VNode {
+    renderSvgIconComponent (
+      icon: VuetifyIconComponent,
+      h: CreateElement
+    ): VNode {
       const data = this.getDefaultData()
       data.class['v-icon--is-component'] = true
 

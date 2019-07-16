@@ -5,28 +5,28 @@ module.exports = {
     props: [
       {
         'name': 'row',
-        'type': 'Boolean',
+        'type': 'boolean',
         'default': 'true',
-        'source': null
+        'source': null,
       },
       {
         'name': 'column',
-        'type': 'Boolean',
+        'type': 'boolean',
         'default': 'false',
-        'source': null
+        'source': null,
       },
       {
         'name': 'reverse',
-        'type': 'Boolean',
+        'type': 'boolean',
         'default': 'false',
-        'source': null
+        'source': null,
       },
       {
         'name': 'wrap',
-        'type': 'Boolean',
+        'type': 'boolean',
         'default': 'false',
-        'source': null
-      }
-    ].concat(sharedGridProps)
-  }
+        'source': null,
+      },
+    ].concat(sharedGridProps),
+  },
 }

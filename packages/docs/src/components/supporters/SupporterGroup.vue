@@ -5,8 +5,10 @@
     wrap
   >
     <v-flex
+      v-if="title"
       font-weight-medium
       grey--text
+      text--darken-3
       tag="h4"
       xs12
       v-text="title"
