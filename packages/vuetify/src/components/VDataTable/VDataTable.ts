@@ -394,10 +394,7 @@ export default VDataIterator.extend({
             value: data.isSelected,
           },
           on: {
-            click: (e: MouseEvent) => {
-              e.stopPropagation()
-              this.expand(item, !data.isExpanded)
-            },
+            input: (val: boolean) => data.select(val),
           },
         })
       }
@@ -410,7 +407,10 @@ export default VDataIterator.extend({
             'v-data-table__expand-icon--active': data.isExpanded,
           },
           on: {
-            click: () => data.expand(!data.isExpanded),
+            click: (e: MouseEvent) => {
+              e.stopPropagation()
+              data.expand(!data.isExpanded)
+            },
           },
         }, [this.expandIcon])
       }
