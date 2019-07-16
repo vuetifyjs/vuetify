@@ -138,7 +138,6 @@ export default {
       } else {
         this.selectingHour = !this.selectingHour
       }
-
     },
     firstAllowed (type, value) {
       const allowedFn = type === 'hour' ? this.isAllowedHourCb : this.isAllowedMinuteCb
