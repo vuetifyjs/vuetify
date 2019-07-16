@@ -1,5 +1,5 @@
 <template>
-  <v-container text-xs-center>
+  <v-container text-center>
     <v-layout
       column
       variations
@@ -1538,7 +1538,7 @@
         <v-card
           max-width="300"
           height="100"
-          class="my-5 mx-auto"
+          class="my-12 mx-auto"
           style="position: relative"
         >
           <v-btn

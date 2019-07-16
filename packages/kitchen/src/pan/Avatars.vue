@@ -1,5 +1,5 @@
 <template>
-  <v-container text-xs-center>
+  <v-container text-center>
     <v-layout
       column
       variations
@@ -9,7 +9,7 @@
       <core-title>Round</core-title>
       <core-section>
         <v-layout
-          justify-space-around
+          justify-around
           align-center
           wrap
         >
@@ -43,7 +43,7 @@
       <core-title>Tile</core-title>
       <core-section>
         <v-layout
-          justify-space-around
+          justify-around
           align-center
           wrap
         >
@@ -82,7 +82,7 @@
       <core-section>
         <v-layout
           align-center
-          justify-space-around
+          justify-around
           wrap
         >
           <v-avatar
@@ -124,7 +124,7 @@
       <core-section>
         <v-layout
           align-center
-          justify-space-around
+          justify-around
           wrap
         >
           <v-avatar size="32">
@@ -158,7 +158,7 @@
       <core-section>
         <v-layout
           align-center
-          justify-space-around
+          justify-around
           wrap
         >
           <v-badge overlap>
@@ -232,7 +232,7 @@
       <core-section>
         <v-layout
           align-center
-          justify-space-around
+          justify-around
           wrap
         >
           <v-avatar
@@ -271,7 +271,7 @@
 
         <v-layout
           align-center
-          justify-space-around
+          justify-around
           wrap
         >
           <v-avatar

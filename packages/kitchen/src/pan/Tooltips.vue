@@ -7,7 +7,7 @@
         Simple
       </core-title>
       <core-section>
-        <v-layout justify-space-around>
+        <v-layout justify-around>
           <v-tooltip left>
             <template
               slot="activator"
@@ -87,7 +87,7 @@
 
           <v-flex
             xs12
-            class="mt-5"
+            class="mt-12"
           >
             <v-tooltip
               v-model="show"

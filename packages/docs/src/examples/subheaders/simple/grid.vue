@@ -54,7 +54,7 @@
           </v-layout>
         </v-container>
 
-        <v-footer class="mt-5"></v-footer>
+        <v-footer class="mt-12"></v-footer>
       </v-card>
     </v-flex>
   </v-layout>

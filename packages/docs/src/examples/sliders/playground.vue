@@ -2,7 +2,7 @@
   <v-layout
     row
     wrap
-    justify-space-around
+    justify-around
   >
     <v-flex xs12>
       <v-slider

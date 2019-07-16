@@ -1,6 +1,6 @@
 <template>
   <v-layout column align-center>
-    <v-layout row wrap justify-space-around>
+    <v-layout row wrap justify-around>
       <v-switch v-model="autorun" class="ma-2" label="Automatic switching"></v-switch>
       <v-switch v-model="showArrows" class="ma-2" label="Show arrows"></v-switch>
       <v-switch v-model="vertical" class="ma-2" label="Vertical"></v-switch>
@@ -20,8 +20,8 @@
       >
         <v-card flat>
           <v-card-text>
-            <v-layout align-center mb-3>
-              <v-avatar color="grey" class="mr-3"></v-avatar>
+            <v-layout align-center mb-4>
+              <v-avatar color="grey" class="mr-4"></v-avatar>
               <strong class="title">Title {{ n }}</strong>
               <v-spacer></v-spacer>
               <v-btn icon>

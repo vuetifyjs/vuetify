@@ -72,7 +72,7 @@
           <v-flex xs12 sm4>
             <v-text-field
               v-model="text"
-              class="px-3"
+              class="px-4"
               label="Text"
               type="text"
             ></v-text-field>
@@ -81,7 +81,7 @@
           <v-flex xs12 sm4>
             <v-text-field
               v-model.number="timeout"
-              class="px-3"
+              class="px-4"
               label="Timeout"
               type="number"
             ></v-text-field>

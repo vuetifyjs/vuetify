@@ -1,8 +1,8 @@
 <template>
-  <v-layout wrap mb-5>
+  <v-layout wrap mb-12>
     <v-flex
       xs12
-      mb-5
+      mb-12
     >
       <v-autocomplete
         v-model="selected"
@@ -45,7 +45,7 @@
     <v-flex
       v-if="!selected"
       xs12
-      text-xs-center
+      text-center
       grey--text
     >
       <h2

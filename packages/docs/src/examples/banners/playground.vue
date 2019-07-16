@@ -3,7 +3,7 @@
     <v-layout
       row
       wrap
-      justify-space-around
+      justify-around
     >
       <v-switch
         v-model="sticky"
@@ -45,7 +45,7 @@
     </v-layout>
 
     <v-sheet
-      class="scroll-y"
+      class="overflow-y-auto"
       max-height="600"
     >
       <v-container style="height: 1500px;">

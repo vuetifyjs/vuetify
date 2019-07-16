@@ -1,5 +1,5 @@
 <template>
-  <v-container text-xs-center>
+  <v-container text-center>
     <v-layout
       column
       variations
@@ -12,7 +12,7 @@
       <core-section>
         <v-layout
           align-center
-          justify-space-around
+          justify-around
           wrap
         >
           <v-chip close>
@@ -47,7 +47,7 @@
       <core-section>
         <v-layout
           align-center
-          justify-space-around
+          justify-around
           wrap
         >
           <v-chip close @click="() => {}">
@@ -82,7 +82,7 @@
       <core-section>
         <v-layout
           align-center
-          justify-space-around
+          justify-around
           wrap
         >
           <v-chip
@@ -121,7 +121,7 @@
       <core-section>
         <v-layout
           align-center
-          justify-space-around
+          justify-around
           wrap
         >
           <v-chip
@@ -186,7 +186,7 @@
       <core-section>
         <v-layout
           align-center
-          justify-space-around
+          justify-around
           wrap
         >
           <v-chip
@@ -221,7 +221,7 @@
       <core-section>
         <v-layout
           align-center
-          justify-space-around
+          justify-around
           wrap
         >
           <v-chip label>
@@ -255,10 +255,10 @@
       <core-section>
         <v-layout
           align-center
-          justify-space-around
+          justify-around
           wrap
         >
-          <div class="text-xs-center">
+          <div class="text-center">
             <v-btn
               v-if="!chip1 && !chip2 && !chip3 && !chip4"
               color="primary"

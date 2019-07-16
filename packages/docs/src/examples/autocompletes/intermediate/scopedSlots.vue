@@ -18,7 +18,7 @@
     >
       <v-layout wrap>
         <v-flex
-          text-xs-right
+          text-right
           xs12
         >
           <v-menu
@@ -50,7 +50,7 @@
           align-start
           column
           justify-end
-          pa-3
+          pa-4
         >
           <h3 class="headline">{{ name }}</h3>
           <span class="grey--text text--lighten-1">{{ title }}</span>

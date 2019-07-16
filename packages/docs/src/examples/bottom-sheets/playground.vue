@@ -1,6 +1,6 @@
 <template>
-  <div class="text-xs-center">
-    <v-layout row wrap justify-space-around>
+  <div class="text-center">
+    <v-layout row wrap justify-around>
       <v-switch v-model="sheet" label="Model"></v-switch>
       <v-switch v-model="inset" label="Inset"></v-switch>
       <v-switch v-model="hideOverlay" label="Hide overlay"></v-switch>
@@ -15,9 +15,9 @@
           Open Playground
         </v-btn>
       </template>
-      <v-sheet class="text-xs-center" height="200px">
+      <v-sheet class="text-center" height="200px">
         <v-btn
-          class="mt-4"
+          class="mt-6"
           flat
           color="red"
           @click="sheet = !sheet"

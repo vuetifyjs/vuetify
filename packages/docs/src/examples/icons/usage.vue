@@ -1,5 +1,5 @@
 <template>
-  <v-layout justify-space-around>
+  <v-layout justify-around>
     <v-icon>mdi-anchor</v-icon>
 
     <v-icon>mdi-xbox-controller</v-icon>

@@ -2,7 +2,7 @@
   <v-container grid-list-xl>
     <v-layout
       wrap
-      justify-space-around
+      justify-around
     >
       <v-flex
         xs12
@@ -24,7 +24,7 @@
       </v-flex>
       <v-flex
         xs12
-        text-xs-center
+        text-center
       >
         <v-icon :color="color">{{ icon }}</v-icon>
       </v-flex>

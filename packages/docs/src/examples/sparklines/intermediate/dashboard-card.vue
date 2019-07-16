@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="mt-3 mx-auto"
+    class="mt-4 mx-auto"
     max-width="400"
   >
     <v-sheet

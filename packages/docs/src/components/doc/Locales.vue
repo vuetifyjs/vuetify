@@ -1,5 +1,5 @@
 <template>
-  <div class="ml-3 mb-4">
+  <div class="ml-4 mb-6">
     <ul>
       <li
         v-for="({ localeCode, localeName, localeNativeName }) in localeNames"

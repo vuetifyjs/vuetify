@@ -1,6 +1,6 @@
 <template>
   <v-container grid-list-xl>
-    <v-layout wrap justify-space-around>
+    <v-layout wrap justify-around>
       <v-flex
         v-for="elevation in elevations"
         :key="elevation"
@@ -8,7 +8,7 @@
         md4
       >
         <v-sheet
-          class="pa-5"
+          class="pa-12"
           color="grey lighten-3"
         >
           <v-sheet

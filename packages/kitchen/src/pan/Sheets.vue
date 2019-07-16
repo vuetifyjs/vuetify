@@ -8,7 +8,7 @@
       </core-title>
       <core-section>
         <v-layout
-          justify-space-around
+          justify-around
           wrap
         >
           <v-flex
@@ -16,7 +16,7 @@
             :key="elevation"
           >
             <v-sheet
-              class="pa-5"
+              class="pa-12"
               color="grey lighten-3"
             >
               <v-sheet
@@ -36,7 +36,7 @@
       </core-title>
       <core-section>
         <v-layout
-          justify-space-around
+          justify-around
           wrap
         >
           <v-flex
@@ -44,7 +44,7 @@
             :key="color"
           >
             <v-sheet
-              class="pa-5"
+              class="pa-12"
               color="grey lighten-3"
             >
               <v-sheet
@@ -63,11 +63,11 @@
       </core-title>
       <core-section>
         <v-layout
-          justify-space-around
+          justify-around
           wrap
         >
           <v-sheet
-            class="pa-5"
+            class="pa-12"
             color="grey lighten-3"
           >
             <v-sheet
@@ -78,7 +78,7 @@
             />
           </v-sheet>
           <v-sheet
-            class="pa-5"
+            class="pa-12"
             color="grey lighten-3"
           >
             <v-sheet
@@ -89,7 +89,7 @@
             />
           </v-sheet>
           <v-sheet
-            class="pa-5"
+            class="pa-12"
             color="grey lighten-3"
           >
             <v-sheet
@@ -100,7 +100,7 @@
             />
           </v-sheet>
           <v-sheet
-            class="pa-5"
+            class="pa-12"
             color="grey lighten-3"
           >
             <v-sheet

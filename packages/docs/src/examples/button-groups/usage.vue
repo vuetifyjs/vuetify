@@ -1,5 +1,5 @@
 <template>
-  <v-card flat class="py-5">
+  <v-card flat class="py-12">
     <v-card-text>
       <v-container fluid class="pa-0">
         <v-layout row wrap>

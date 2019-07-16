@@ -16,7 +16,7 @@
       </v-list>
     </v-menu>
 
-    <div class="mx-3 hidden-sm-and-down"></div>
+    <div class="mx-4 hidden-sm-and-down"></div>
 
     <v-menu transition="scroll-x-reverse-transition">
       <template v-slot:activator="{ on }">

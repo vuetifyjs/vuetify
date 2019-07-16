@@ -5,14 +5,14 @@
 
       <core-title>Simple</core-title>
       <core-section>
-        <v-layout justify-space-around>
+        <v-layout justify-around>
           <v-switch v-model="model1" />
         </v-layout>
       </core-section>
 
       <core-title>Disabled</core-title>
       <core-section>
-        <v-layout justify-space-around>
+        <v-layout justify-around>
           <v-switch v-model="model21" disabled />
           <v-switch v-model="model22" disabled />
         </v-layout>
@@ -20,7 +20,7 @@
 
       <core-title>Colors</core-title>
       <core-section>
-        <v-layout justify-space-around>
+        <v-layout justify-around>
           <v-switch v-model="model31" color="cyan" />
           <v-switch v-model="model32" color="red lighten-2" />
           <v-switch v-model="model33" color="warning" />
@@ -29,14 +29,14 @@
 
       <core-title>Flat</core-title>
       <core-section>
-        <v-layout justify-space-around>
+        <v-layout justify-around>
           <v-switch v-model="model4" flat />
         </v-layout>
       </core-section>
 
       <core-title>Loading</core-title>
       <core-section>
-        <v-layout justify-space-around>
+        <v-layout justify-around>
           <v-switch v-model="model51" loading color="cyan" />
           <v-switch v-model="model52" disabled loading color="red lighten-2" />
           <v-switch v-model="model53" disabled loading color="warning" />
@@ -45,7 +45,7 @@
 
       <core-title>Inset</core-title>
       <core-section>
-        <v-layout justify-space-around>
+        <v-layout justify-around>
           <v-switch v-model="model61" color="red" inset />
           <v-switch v-model="model62" color="blue" inset />
         </v-layout>

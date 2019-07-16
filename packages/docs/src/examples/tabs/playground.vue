@@ -3,7 +3,7 @@
     <v-layout
       row
       wrap
-      justify-space-around
+      justify-around
     >
       <v-switch
         v-model="icons"

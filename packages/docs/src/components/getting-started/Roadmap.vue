@@ -1,7 +1,7 @@
 <template>
   <v-timeline
     id="roadmap"
-    class="mb-5"
+    class="mb-12"
     dense
   >
     <template v-for="(item, i) in items">
@@ -62,7 +62,7 @@
                 <doc-markdown :code="item.text" />
 
                 <template v-if="item.features">
-                  <div class="mt-3" />
+                  <div class="mt-4" />
 
                   <template v-for="(features, key, index) in item.features">
                     <doc-markdown :key="`title-${index}`" :code="key" />

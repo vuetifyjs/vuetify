@@ -1,5 +1,5 @@
 <template>
-  <v-layout justify-space-around align-center>
+  <v-layout justify-around align-center>
     <v-chip
       class="ma-2"
       :input-value="active"

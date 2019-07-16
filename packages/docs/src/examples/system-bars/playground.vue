@@ -1,7 +1,7 @@
 <template>
   <v-layout column justify-center align-center>
     <v-container fluid>
-      <v-card img="https://cdn.vuetifyjs.com/images/home/vuetify_layout1.svg" height="200px" class="mb-4">
+      <v-card img="https://cdn.vuetifyjs.com/images/home/vuetify_layout1.svg" height="200px" class="mb-6">
         <v-system-bar
           color="orange"
           :height="height"
@@ -23,7 +23,7 @@
       <v-flex xs4>
         <v-text-field
           v-model="height"
-          class="mx-3"
+          class="mx-4"
           label="Height - px"
           max="30"
           min="1"
@@ -34,10 +34,10 @@
         ></v-text-field>
       </v-flex>
       <v-flex xs4>
-        <v-switch v-model="lightsOut" label="Toggle lights-out" class="mx-3"></v-switch>
+        <v-switch v-model="lightsOut" label="Toggle lights-out" class="mx-4"></v-switch>
       </v-flex>
       <v-flex xs4>
-        <v-switch v-model="window" label="Toggle window" class="mx-3"></v-switch>
+        <v-switch v-model="window" label="Toggle window" class="mx-4"></v-switch>
       </v-flex>
     </v-layout>
   </v-layout>

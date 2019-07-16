@@ -4,7 +4,7 @@
     prominent
   >
     <v-app-bar-nav-icon></v-app-bar-nav-icon>
-    <v-toolbar-title class="title mr-4">Cryptocurrency</v-toolbar-title>
+    <v-toolbar-title class="title mr-6">Cryptocurrency</v-toolbar-title>
     <v-autocomplete
       v-model="model"
       :items="items"

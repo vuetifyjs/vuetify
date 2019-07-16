@@ -5,7 +5,7 @@
   >
     <v-btn
       v-bind="options"
-      class="mt-5"
+      class="mt-12"
       dark
     >
       <v-icon

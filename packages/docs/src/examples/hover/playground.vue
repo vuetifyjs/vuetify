@@ -1,5 +1,5 @@
 <template>
-  <div class="pa-3 grey lighten-4">
+  <div class="pa-4 grey lighten-4">
     <v-layout row>
       <v-flex xs12 sm6 offset-sm3>
         <v-hover
@@ -15,7 +15,7 @@
             max-width="350"
             class="mx-auto"
           >
-            <v-card-text class="my-3 text-xs-center title">Hover over me!</v-card-text>
+            <v-card-text class="my-4 text-center title">Hover over me!</v-card-text>
           </v-card>
         </v-hover>
       </v-flex>

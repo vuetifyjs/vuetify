@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-layout row wrap justify-space-around>
+    <v-layout row wrap justify-around>
       <v-switch v-model="dense" class="mx-2" label="Dense"></v-switch>
       <v-switch v-model="loading" class="mx-2" label="Loading"></v-switch>
       <v-switch v-model="virtualRows" class="mx-2" label="Virtual rows"></v-switch>

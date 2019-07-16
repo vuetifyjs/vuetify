@@ -70,7 +70,7 @@
 
           <v-divider
             vertical
-            class="mx-3"
+            class="mx-4"
           ></v-divider>
 
           <v-flex xs3>
@@ -120,7 +120,7 @@
         </v-layout>
       </v-expansion-panel-header>
       <v-expansion-panel-content>
-        <v-layout justify-space-around>
+        <v-layout justify-around>
           <v-flex xs3>
             <v-menu
               ref="startMenu"

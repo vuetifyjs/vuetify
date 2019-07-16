@@ -19,7 +19,7 @@
                 {{ item.heading }}
               </v-subheader>
             </v-flex>
-            <v-flex xs6 class="text-xs-center">
+            <v-flex xs6 class="text-center">
               <a href="#!" class="body-2 black--text">EDIT</a>
             </v-flex>
           </v-layout>
@@ -74,7 +74,7 @@
       app
       fixed
     >
-      <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
+      <v-toolbar-title style="width: 300px" class="ml-0 pl-4">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <span class="hidden-sm-and-down">Google Contacts</span>
       </v-toolbar-title>
@@ -138,15 +138,15 @@
     <v-dialog v-model="dialog" width="800px">
       <v-card>
         <v-card-title
-          class="grey lighten-4 py-4 title"
+          class="grey lighten-4 py-6 title"
         >
           Create contact
         </v-card-title>
-        <v-container grid-list-sm class="pa-4">
+        <v-container grid-list-sm class="pa-6">
           <v-layout row wrap>
-            <v-flex xs12 align-center justify-space-between>
+            <v-flex xs12 align-center justify-between>
               <v-layout align-center>
-                <v-avatar size="40px" class="mr-3">
+                <v-avatar size="40px" class="mr-4">
                   <img
                     src="//ssl.gstatic.com/s2/oz/images/sge/grey_silhouette.png"
                     alt=""

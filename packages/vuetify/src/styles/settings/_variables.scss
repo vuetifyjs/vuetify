@@ -29,11 +29,11 @@ $grid-columns: 12 !default;
 $container-padding-x: $grid-gutter / 2 !default;
 
 $grid-gutters: (
-  'xs': $grid-gutter / 4,
-  'sm': $grid-gutter / 2,
-  'md': $grid-gutter,
-  'lg': $grid-gutter * 2,
-  'xl': $grid-gutter * 3
+  'xs': $grid-gutter / 12,
+  'sm': $grid-gutter / 6,
+  'md': $grid-gutter / 3,
+  'lg': $grid-gutter * 2/3,
+  'xl': $grid-gutter
 ) !default;
 
 $container-max-widths: (

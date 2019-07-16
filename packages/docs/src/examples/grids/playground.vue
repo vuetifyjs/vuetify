@@ -71,7 +71,7 @@
         alignmentsAvailable: ['align-center', 'align-end', 'align-space-around', 'align-space-between', 'align-start', ''],
         alignment: 'align-center',
         alignmentsContentAvailable: ['align-content-center', 'align-content-end', 'align-content-space-around', 'align-content-space-between', 'align-content-start', ''],
-        justifyAvailable: ['justify-center', 'justify-end', 'justify-space-around', 'justify-space-between', 'justify-start', ''],
+        justifyAvailable: ['justify-center', 'justify-end', 'justify-around', 'justify-between', 'justify-start', ''],
         justify: 'justify-center',
         reverse: false,
         flexDirectionAvailable: ['row', 'column', ''],

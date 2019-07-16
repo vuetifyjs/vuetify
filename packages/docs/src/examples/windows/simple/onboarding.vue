@@ -26,7 +26,7 @@
       </v-window-item>
     </v-window>
 
-    <v-card-actions class="justify-space-between">
+    <v-card-actions class="justify-between">
       <v-btn
         text
         @click="prev"
@@ -35,7 +35,7 @@
       </v-btn>
       <v-item-group
         v-model="onboarding"
-        class="text-xs-center"
+        class="text-center"
         mandatory
       >
         <v-item

@@ -2,7 +2,7 @@
   <v-card
     :loading="loading"
     :min-height="loading ? 200 : undefined"
-    class="mb-5"
+    class="mb-12"
     outlined
   >
     <v-toolbar

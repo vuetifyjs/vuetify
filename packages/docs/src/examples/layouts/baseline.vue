@@ -34,7 +34,7 @@
           justify-center
           align-center
         >
-          <v-flex text-xs-center>
+          <v-flex text-center>
             <v-tooltip left>
               <template v-slot:activator="{ on }">
                 <v-btn :href="source" icon large target="_blank" v-on="on">

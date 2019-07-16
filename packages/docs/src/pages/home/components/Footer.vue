@@ -1,7 +1,7 @@
 <template>
   <v-footer
     id="footer"
-    class="justify-center align-center py-4"
+    class="justify-center align-center py-6"
     color="grey darken-4"
     dark
     height="auto"
@@ -13,7 +13,7 @@
             align-center
             column
             justify-center
-            mb-3
+            mb-4
           >
             <v-img
               contain
@@ -24,14 +24,14 @@
           </v-layout>
         </v-flex>
         <v-flex xs12>
-          <v-layout justify-center mb-3>
+          <v-layout justify-center mb-4>
             <a
               v-for="(social, i) in socials"
               :key="i"
               :href="social.href"
               :title="social.title"
               :aria-label="social.title"
-              class="mx-3"
+              class="mx-4"
               target="_blank"
               rel="noopener"
             >
@@ -77,15 +77,15 @@
               </template>
             </v-text-field>
           </v-form>
-          <div class="text-xs-center caption">
+          <div class="text-center caption">
             Subscribe to our <strong>monthly</strong> Newsletter
           </div>
         </v-flex>
         <v-flex xs12 />
         <v-flex
           xs12
-          my-5
-          text-xs-center
+          my-12
+          text-center
         >
           <v-divider
             class="mx-auto"
@@ -95,7 +95,7 @@
         <v-flex xs12>
           <v-layout
             column
-            text-xs-center
+            text-center
           >
             <div>
               Released under the&nbsp;
@@ -107,7 +107,7 @@
               >
                 MIT License
               </a>
-              <div class="mb-3">
+              <div class="mb-4">
                 Copyright &copy; 2016-{{ (new Date()).getFullYear() }} Vuetify, LLC
               </div>
               <a

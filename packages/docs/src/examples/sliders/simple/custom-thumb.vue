@@ -1,6 +1,6 @@
 <template>
   <v-layout>
-    <v-flex pa-5>
+    <v-flex pa-12>
       <v-range-slider
         :tick-labels="seasons"
         :value="[0, 1]"

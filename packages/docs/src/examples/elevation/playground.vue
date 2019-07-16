@@ -6,7 +6,7 @@
       v-flex(xs6 offset-xs1)
         v-card(v-bind:class="{ [`elevation-${selected}`]: true }")
           v-card-text
-            p.text-xs-center.ma-0 Elevation {{ selected }}
+            p.text-center.ma-0 Elevation {{ selected }}
 </template>
 
 <script>

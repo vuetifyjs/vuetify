@@ -17,7 +17,7 @@
       </v-list>
     </v-menu>
 
-    <div class="mx-4"></div>
+    <div class="mx-6"></div>
 
     <v-menu transition="scroll-y-transition">
       <template v-slot:activator="{ on }">

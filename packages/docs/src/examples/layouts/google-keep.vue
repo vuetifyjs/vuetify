@@ -23,7 +23,7 @@
                 {{ item.heading }}
               </v-subheader>
             </v-flex>
-            <v-flex xs6 class="text-xs-right">
+            <v-flex xs6 class="text-right">
               <v-btn small text>edit</v-btn>
             </v-flex>
           </v-layout>
@@ -31,7 +31,7 @@
             v-else-if="item.divider"
             :key="i"
             dark
-            class="my-3"
+            class="my-4"
           ></v-divider>
           <v-list-item
             v-else
@@ -52,7 +52,7 @@
     </v-navigation-drawer>
     <v-toolbar color="amber" app absolute clipped-left>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <span class="title ml-3 mr-5">Google&nbsp;<span class="font-weight-light">Keep</span></span>
+      <span class="title ml-4 mr-12">Google&nbsp;<span class="font-weight-light">Keep</span></span>
       <v-text-field
         solo-inverted
         flat

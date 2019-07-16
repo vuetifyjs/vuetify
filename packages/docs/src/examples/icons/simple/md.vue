@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-layout justify-space-around class="mb-2">
+    <v-layout justify-around class="mb-2">
       <span class="group pa-2">
         <v-icon>home</v-icon>
         <v-icon>event</v-icon>
@@ -14,7 +14,7 @@
       </span>
     </v-layout>
 
-    <v-layout justify-space-around class="mb-2">
+    <v-layout justify-around class="mb-2">
       <span class="group pa-2">
         <v-icon medium>home</v-icon>
         <v-icon medium>event</v-icon>
@@ -28,7 +28,7 @@
       </span>
     </v-layout>
 
-    <v-layout justify-space-around class="mb-2">
+    <v-layout justify-around class="mb-2">
       <span class="group pa-2">
         <v-icon large>home</v-icon>
         <v-icon large>event</v-icon>
@@ -42,7 +42,7 @@
       </span>
     </v-layout>
 
-    <v-layout justify-space-around>
+    <v-layout justify-around>
       <span class="group pa-2">
         <v-icon x-large>home</v-icon>
         <v-icon x-large>event</v-icon>

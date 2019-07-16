@@ -3,7 +3,7 @@
     <v-flex>
       <v-sheet height="64">
         <v-toolbar flat color="white">
-          <v-btn outlined class="mr-3" @click="setToday">
+          <v-btn outlined class="mr-4" @click="setToday">
             Today
           </v-btn>
           <v-btn fab text small @click="prev">

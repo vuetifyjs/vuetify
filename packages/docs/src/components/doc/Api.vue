@@ -16,7 +16,7 @@
       </v-tabs>
 
       <v-card-text>
-        <v-layout justify-space-between>
+        <v-layout justify-between>
           <v-flex
             xs12
             sm4
@@ -82,7 +82,7 @@
     },
     {
       value: 'default',
-      class: 'xs6 sm3 text-xs-right',
+      class: 'xs6 sm3 text-right',
     },
     {
       value: 'type',
@@ -130,7 +130,7 @@
           },
           {
             value: 'value',
-            class: 'text-xs-right',
+            class: 'text-right',
           },
         ],
         functions: [
@@ -140,7 +140,7 @@
           },
           {
             value: 'signature',
-            class: 'text-xs-right',
+            class: 'text-right',
           },
         ],
         functional: [
@@ -150,7 +150,7 @@
           },
           {
             value: 'description',
-            class: 'text-xs-right',
+            class: 'text-right',
           },
         ],
         options: [...propProps],

@@ -43,7 +43,7 @@
                   </v-btn>
                 </template>
                 <v-card>
-                  <v-card-text class="pa-4">
+                  <v-card-text class="pa-6">
                     <v-btn large flat color="primary" @click="clickMe"><v-icon left>mdi-target</v-icon>Click me</v-btn>
                   </v-card-text>
                 </v-card>

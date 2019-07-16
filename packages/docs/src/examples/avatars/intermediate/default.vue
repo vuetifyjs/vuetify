@@ -1,5 +1,5 @@
 <template>
-  <v-layout justify-space-around wrap>
+  <v-layout justify-around wrap>
 
     <v-avatar color="indigo">
       <v-icon dark>account_circle</v-icon>
