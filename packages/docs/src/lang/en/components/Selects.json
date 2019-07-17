@@ -82,14 +82,12 @@
   "slots": {
     "append": "Components.Inputs.slots.append",
     "append-outer": "Components.TextFields.slots.append-outer",
+    "item": "Define a custom item appearance",
     "prepend": "Components.Inputs.slots.prepend",
     "prepend-inner": "Components.TextFields.slots.prepend-inner",
     "append-item": "Adds an item after menu content",
     "no-data": "Mixins.Filterable.slots.noData",
-    "prepend-item": "Adds an item before menu content"
-  },
-  "scopedSlots": {
-    "item": "Define a custom item appearance",
+    "prepend-item": "Adds an item before menu content",
     "selection": "Define a custom selection appearance"
   },
   "events": {

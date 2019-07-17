@@ -121,27 +121,6 @@
       "expandIcon": "Icon used for expand toggle button."
     }
   },
-  "scopedSlots": {
-    "v-data-table": {
-      "item": "Slot to replace the default rendering of a row",
-      "item.dataTableSelect": "Slot to replace the default `v-simple-checkbox` used when selecting rows",
-      "item.dataTableExpand": "Slot to replace the default `v-icon` used when expanding rows",
-      "item.<name>": "Slot to customize a specific column",
-      "expanded-item": "Slot to customize expanded rows",
-      "body": "Slot to replaces the default table `<tbody>`",
-      "body.append": "Appends elements to the end of the default table `<tbody>`",
-      "body.prepend": "Prepends elements to the end of the default table `<tbody>`",
-      "footer": "Slot to add a custom footer",
-      "header": "Slot to add a custom header",
-      "header.<name>": "Slot to customize a specific header column",
-      "header.dataTableSelect": "Slot to replace the default `v-simple-checkbox` in header",
-      "top": "Slot to add content above the table",
-      "progress": "Slot to replace the default `<v-progress-linear>` component",
-      "group": "Slot to replace the default rendering of grouped rows",
-      "group.header": "Slot to customize the default rendering of group headers",
-      "group.summary": "Slot to customize the default rendering of group summaries"
-    }
-  },
   "slots": {
     "v-data-table": {
       "item": "Slot to replace the default rendering of a row",

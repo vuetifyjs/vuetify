@@ -59,9 +59,7 @@
     "src": "Image source. See `v-img` for details"
   },
   "slots": {
-    "extension": "Components.Toolbars.slots.extension"
-  },
-  "scopedSlots": {
-    "img": "Components.Toolbars.scopedSlots.img"
+    "extension": "Components.Toolbars.slots.extension",
+    "img": "Components.Toolbars.slots.img"
   }
 }

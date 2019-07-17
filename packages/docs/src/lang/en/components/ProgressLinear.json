@@ -64,7 +64,7 @@
     "striped": "Adds a stripe background to the filled portion of the progress component",
     "value": "Components.ProgressCircular.props.value"
   },
-  "scopedSlots": {
+  "slots": {
     "default": "Provides the current value of the component"
   }
 }

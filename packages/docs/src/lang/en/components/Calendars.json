@@ -73,7 +73,7 @@
     "updateEventVisibility": "If the calendar has events and `event-more` is truthy the days with too many events contain a 'button' to represent how many events had to be hidden.",
     "updateTimes": "Updates now & today in the calendar, possibly updating the styles in the calendar."
   },
-  "scopedSlots": {
+  "slots": {
     "day-body": "The content that is placed in a `day` view in the scrollable interval container. The day & time object is passed as the slot-scope.",
     "day-header": "The content that is placed in a `day` view in the top container. The day & time object is passed as the slot-scope.",
     "day-label": "The content that is placed in the day of the month space in the `week` or `month` view. The day & time object is passed as the slot-scope.",

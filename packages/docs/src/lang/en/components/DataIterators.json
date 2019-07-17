@@ -48,19 +48,13 @@
       "showFirstLastPage": "Show first/last icons"
     }
   },
-  "scopedSlots": {
-    "v-data-iterator": {
-      "default": "The default slot. Use this to render your items",
-      "footer.page-text": "This slot is forwarded to the default footer. See the `v-data-footer` API for more information",
-      "footer": "Defines a footer below the items",
-      "header": "Defines a header above the items",
-      "item": "Slot for each item"
-    }
-  },
   "slots": {
     "v-data-iterator": {
+      "default": "The default slot. Use this to render your items",
       "footer": "Defines a footer below the items",
+      "footer.page-text": "This slot is forwarded to the default footer. See the `v-data-footer` API for more information",
       "header": "Defines a header above the items",
+      "item": "Slot for each item",
       "loading": "Defines content for when `loading` is true and no items are provided",
       "no-data": "Defines content for when no items are provided",
       "no-results": "Defines content for when `search` is provided but no results are found"

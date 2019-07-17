@@ -53,7 +53,7 @@
     "truncateLength": "The length of a filename before it is truncated with ellipsis",
     "value": "A single or array of [File objects](https://developer.mozilla.org/en-US/docs/Web/API/File)."
   },
-  "scopedSlots": {
+  "slots": {
     "selection": "Slot for defining a custom appearance for selected item(s). Provides the current **index**, **text** (truncated) and [file](https://developer.mozilla.org/en-US/docs/Web/API/File)."
   },
   "events": {

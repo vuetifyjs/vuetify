@@ -101,7 +101,7 @@
       "value": "Allows one to control which nodes are selected. The array consists of the `item-key` of each selected item. Is used with `@input` event to allow for `v-model` binding."
     }
   },
-  "scopedSlots": {
+  "slots": {
     "v-treeview": {
       "append": "Appends content after label",
       "label": "Label content",

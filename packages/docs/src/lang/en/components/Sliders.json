@@ -90,7 +90,7 @@
     "start": "Slider value emitted at start of slider movement",
     "update:error": "Mixins.Validatable.events['update:error']"
   },
-  "scopedSlots": {
+  "slots": {
     "thumb-label": "Replaces the content inside the thumb label"
   }
 }

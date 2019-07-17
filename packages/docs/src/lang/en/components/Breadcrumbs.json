@@ -31,9 +31,7 @@
     "large": "Increase the font-size of the breadcrumb item text to 16px (14px default)."
   },
   "slots": {
-    "divider": "The slot used for dividers."
-  },
-  "scopedSlots": {
+    "divider": "The slot used for dividers.",
     "item": "The scoped slot used to override default `v-breadcrumbs-item` behavior when using the **items** prop."
   }
 }
