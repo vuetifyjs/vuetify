@@ -6,7 +6,6 @@
     <v-btn
       v-bind="options"
       class="mt-5"
-      dark
     >
       <v-icon
         v-if="hasIcon"
@@ -18,16 +17,35 @@
       <span v-else>
         {{ text }}
       </span>
-      <template v-if="customLoad" v-slot:loader>
+      <template
+        v-if="customLoad"
+        v-slot:loader
+      >
         Loading...
       </template>
     </v-btn>
 
     <v-flex xs12>
       <v-container grid-list-md>
-        <v-slider v-model="minWidth" label="Min width" min="10" max="300"></v-slider>
-        <v-slider v-model="minHeight" label="Min height" min="10" max="300"></v-slider>
-        <v-slider v-model="elevation" label="Elevation" min="0" max="24"></v-slider>
+        <v-slider
+          v-model="minWidth"
+          label="Min width"
+          min="10"
+          max="300"
+        ></v-slider>
+        <v-slider
+          v-model="minHeight"
+          label="Min height"
+          min="10"
+          max="300"
+        ></v-slider>
+        <v-slider
+          v-model="elevation"
+          label="Elevation"
+          min="0"
+          max="24"
+          clearable
+        ></v-slider>
         <v-layout wrap>
           <v-flex
             xs12
@@ -91,7 +109,7 @@
       size: 'medium',
       sizes: ['x-small', 'small', 'medium', 'large', 'x-large'],
       type: [],
-      types: ['block', 'depressed', 'fab', 'outlined', 'round', 'text'],
+      types: ['block', 'depressed', 'fab', 'outlined', 'rounded', 'text'],
       text: 'Customize me',
       minWidth: undefined,
       minHeight: undefined,
@@ -133,6 +151,19 @@
       },
       colors () {
         return Object.keys(this.$vuetify.theme.themes.dark)
+      },
+    },
+    watch: {
+      type (val) {
+        if (
+          val.includes('depressed') ||
+          val.includes('outlined') ||
+          val.includes('text')
+        ) {
+          this.elevation = 0
+        } else {
+          this.elevation = 2
+        }
       },
     },
   }
