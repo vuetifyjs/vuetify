@@ -194,7 +194,7 @@ const VSelect = {
       value: 'string',
     },
     {
-      name: 'update:listIndex',
+      name: 'update:list-index',
       value: 'number',
     },
     ...inputEvents,

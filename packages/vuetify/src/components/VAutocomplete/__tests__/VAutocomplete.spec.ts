@@ -486,24 +486,4 @@ describe('VAutocomplete.ts', () => {
 
     expect(wrapper.vm.genSelections()).toEqual([])
   })
-
-  it('should emit listIndex event when navigated by keyboard', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        items: ['foo', 'bar'],
-      },
-    })
-
-    const listIndexUpdate = jest.fn()
-    wrapper.vm.$on('update:listIndex', listIndexUpdate)
-
-    const input = wrapper.find('input')
-    const slot = wrapper.find('.v-input__slot')
-    slot.trigger('click')
-
-    input.trigger('keydown.down')
-    expect(listIndexUpdate).toBeCalledWith(0)
-    input.trigger('keydown.down')
-    expect(listIndexUpdate).toBeCalledWith(1)
-  })
 })
