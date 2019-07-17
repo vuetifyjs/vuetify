@@ -25,5 +25,14 @@
       "header": "### Custom active class",
       "desc": "You can set class which will be added when item is selected."
     }
+  },
+  "api": {
+    "v-list-item": "Components.Lists",
+    "v-list-item-action":  "Components.Lists",
+    "v-list-item-avatar":  "Components.Lists",
+    "v-list-item-content":  "Components.Lists",
+    "v-list-item-title":  "Components.Lists",
+    "v-list-item-subtitle":  "Components.Lists",
+    "v-list-item-action-text":  "Components.Lists"
   }
 }
