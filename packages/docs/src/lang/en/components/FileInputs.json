@@ -25,9 +25,9 @@
       "header": "### Counter",
       "desc": "When using the **display-size** property along with **counter**, the total number of files and size will be displayed under the input."
     },
-    "scoped-slots": {
-      "header": "### Scoped slots",
-      "desc": "Using the `selection` scoped slot, you can customize the appearance of your input selections. This is typically done with [chips](/components/chips), however any component or markup can be used."
+    "selection": {
+      "header": "### Selection slot",
+      "desc": "Using the `selection` slot, you can customize the appearance of your input selections. This is typically done with [chips](/components/chips), however any component or markup can be used."
     },
     "custom-icon": {
       "header": "### Custom icons",
