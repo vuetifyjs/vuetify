@@ -2,7 +2,7 @@
 
 // Theme
 +theme(v-input--selection-controls) using ($material)
-  &.v-input--is-disabled
+  &.v-input--is-disabled:not(.v-input--indeterminate)
     .v-icon
       // needed for helper override
       color: map-deep-get($material, 'buttons', 'disabled') !important
@@ -78,7 +78,7 @@
       transition: inherit
 
     .v-ripple__container
-      transform: scale(1.4)
+      transform: scale(1.2)
 
   &.v-input
     flex: 0 1 auto
@@ -93,4 +93,11 @@
   .v-radio--is-focused
     .v-input--selection-controls__ripple:before
       background: currentColor
-      transform: scale(.8)
+      opacity: .4
+      transform: scale(1.2)
+
+  .v-input--selection-controls__input:hover
+    .v-input--selection-controls__ripple:before
+      background: currentColor
+      transform: scale(1.2)
+      transition: none

@@ -66,18 +66,19 @@
     }
   },
   "props": {
+    "active": "Determines whether the chip is visible or not.",
     "close": "Adds remove button",
     "closeIcon": "Change the default icon used for **close** chips",
     "disabled": "Disables the chip, making it un-selectable",
     "draggable": "Makes the chip draggable",
     "filter": "Displays a selection icon when selected",
     "filterIcon": "Change the default icon used for **filter** chips",
-    "inputValue": "Designates whether the component is selected, highlighting the chip",
+    "inputValue": "Controls the **active** state of the item. This is typically used to highlight the component.",
     "label": "Removes circle edges",
     "link": "Explicitly define the chip as a link",
     "outlined": "Removes background and applies border and text color",
     "pill": "Remove `v-avatar` padding",
-    "selected": "Applies a selection color to the chip. Primarily used for displaying highlight context in `v-select`"
+    "value": "The value used when a child of a [v-chip-group](/components/chip-groups)."
   },
   "events": {
     "click": "Emitted when chip is clicked, toggles chip if contained in a chip group",
