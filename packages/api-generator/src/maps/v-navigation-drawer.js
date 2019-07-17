@@ -1,10 +1,14 @@
 module.exports = {
   'v-navigation-drawer': {
-    slots: ['default', 'prepend', 'append'],
-    scopedSlots: [{
-      name: 'img',
-      props: { height: 'string', src: 'string | srcObject' },
-    }],
+    slots: [
+      'default',
+      'prepend',
+      'append',
+      {
+        name: 'img',
+        props: { height: 'string', src: 'string | srcObject' },
+      },
+    ],
     events: [
       {
         name: 'input',

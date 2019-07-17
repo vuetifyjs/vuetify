@@ -1,12 +1,16 @@
 module.exports = {
   'v-banner': {
-    slots: ['default', 'icon', 'actions'],
-    scopedSlots: [{
-      name: 'actions',
-      props: {
-        dismiss: '(): void',
+    slots: [
+      'default',
+      'icon',
+      'actions',
+      {
+        name: 'actions',
+        props: {
+          dismiss: '(): void',
+        },
       },
-    }],
+    ],
     functions: [
       {
         name: 'toggle',

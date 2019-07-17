@@ -12,8 +12,9 @@ module.exports = {
       name: 'items',
       example: BreadcrumbsItem,
     }],
-    slots: ['default', 'divider'],
-    scopedSlots: [
+    slots: [
+      'default',
+      'divider',
       {
         name: 'item',
         props: {

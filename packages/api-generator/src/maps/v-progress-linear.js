@@ -1,7 +1,6 @@
 module.exports = {
   'v-progress-linear': {
-    slots: ['default'],
-    scopedSlots: [
+    slots: [
       {
         name: 'default',
         props: {

@@ -69,7 +69,7 @@ module.exports = {
   'v-data': {
     props: DataProps,
     events: DataEvents,
-    scopedSlots: {
+    slots: {
       default: DataDefaultScopedSlotProps,
     },
   },

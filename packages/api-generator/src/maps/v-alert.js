@@ -1,7 +1,9 @@
 module.exports = {
   'v-alert': {
-    slots: ['append', 'default', 'prepend'],
-    scopedSlots: [
+    slots: [
+      'append',
+      'default',
+      'prepend',
       {
         name: 'close',
         props: {

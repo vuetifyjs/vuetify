@@ -1,6 +1,6 @@
 module.exports = {
   'v-hover': {
-    scopedSlots: [
+    slots: [
       {
         name: 'default',
         props: {
