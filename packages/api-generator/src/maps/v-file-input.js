@@ -1,6 +1,6 @@
 module.exports = {
   'v-file-input': {
-    scopedSlots: [{
+    slots: [{
       name: 'selection',
       props: {
         file: 'File',
