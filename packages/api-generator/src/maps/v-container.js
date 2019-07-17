@@ -2,7 +2,6 @@ const { sharedGridProps } = require('../helpers/variables')
 
 module.exports = {
   'v-container': {
-    slots: ['default'],
     props: [
       {
         'name': 'grid-list-{xs through xl}',

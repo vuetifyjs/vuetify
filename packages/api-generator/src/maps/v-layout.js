@@ -2,7 +2,6 @@ const { sharedGridProps } = require('../helpers/variables')
 
 module.exports = {
   'v-layout': {
-    slots: ['default'],
     props: [
       {
         'name': 'row',
