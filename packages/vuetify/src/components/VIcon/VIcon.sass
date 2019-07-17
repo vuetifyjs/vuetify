@@ -9,16 +9,21 @@
   &--disabled
     color: map-deep-get($material, 'icons', 'inactive') !important
 
-.v-icon
+// Increased specificity to overwrite
+// iconfont css interference
+.v-icon.v-icon
   align-items: center
   display: inline-flex
   font-feature-settings: 'liga'
   font-size: $icon-size
   justify-content: center
+  letter-spacing: normal
   line-height: 1
+  text-indent: 0
   transition: $primary-transition
   vertical-align: middle
 
+.v-icon
   &--right
     margin-left: map-get($grid-gutters, 'md')
   &--left
