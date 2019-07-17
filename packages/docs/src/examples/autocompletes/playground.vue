@@ -1,17 +1,22 @@
 <template>
   <div>
     <v-select
-      v-model="filter"
-      label="Filter"
-      item-text="name"
-      item-value="fn"
+      v-model="model"
       :items="filters"
+      label="Filter"
+      placeholder="Select a Filter..."
+      filled
+      rounded
     ></v-select>
     <v-autocomplete
-      v-model="model"
+      label="Test custom filters"
       :items="states"
-      :filter="filter"
+      :filter="activeFilter"
+      filled
+      rounded
     ></v-autocomplete>
+
+    {{ model }}
   </div>
 </template>
 
@@ -38,26 +43,24 @@
         ],
         filters: [
           {
-            fn: (item, queryText, itemText) => ~item.indexOf(queryText),
-            name: '~item.indexOf(queryText)',
+            value: 0,
+            fn: (item, queryText, itemText) => item.indexOf(queryText) > -1,
+            text: 'Exact Match',
           },
           {
-            fn: (item, queryText, itemText) => ~item.toLowerCase().indexOf(queryText),
-            name: '~item.toLowerCase().indexOf(queryText)',
-          },
-          {
-            fn: (item, queryText, itemText) => queryText.length > 2 && ~item.indexOf(queryText),
-            name: 'queryText.length > 2 && ~item.indexOf(queryText)',
+            value: 1,
+            fn: (item, queryText, itemText) => queryText.length > 2 && item.toLowerCase().indexOf(queryText) > -1,
+            text: 'Search Length > 2 & Loose Match',
           },
         ],
-        filter: (item, queryText, itemText) => ~item.indexOf(queryText),
       }
+    },
+
+    computed: {
+      activeFilter () {
+        if (this.model == null) return undefined
+        return this.filters[this.model].fn
+      },
     },
   }
 </script>
-
-<codepen-resources lang="json">
-  {
-    "css": ["https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css"]
-  }
-</codepen-resources>
