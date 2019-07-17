@@ -129,17 +129,6 @@
         slots: [
           {
             value: 'name',
-            class: 'xs12',
-          },
-          {
-            value: 'description',
-            type: 'markdown',
-            class: 'xs12 mt-2',
-          },
-        ],
-        scopedSlots: [
-          {
-            value: 'name',
             class: 'xs4',
           },
           {
@@ -189,7 +178,7 @@
       },
       search: null,
       tab: null,
-      tabs: ['api', 'props', 'slots', 'scopedSlots', 'params', 'events', 'functions', 'functional', 'options'],
+      tabs: ['api', 'props', 'slots', 'params', 'events', 'functions', 'functional', 'options'],
     }),
 
     computed: {
