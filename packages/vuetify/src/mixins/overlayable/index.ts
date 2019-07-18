@@ -93,7 +93,8 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
           if (
             !this.overlay ||
             !this.overlay.$el ||
-            !this.overlay.$el.parentNode
+            !this.overlay.$el.parentNode ||
+            this.overlay.value
           ) return
 
           this.overlay.$el.parentNode.removeChild(this.overlay.$el)
