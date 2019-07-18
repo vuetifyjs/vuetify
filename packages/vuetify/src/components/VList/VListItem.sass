@@ -99,17 +99,29 @@
 .v-list-item__avatar
   &:first-child
     margin-right: 24px
+    +rtl()
+      margin-right: 0
+      margin-left: 24px
 
   &:last-child:not(:only-child)
     margin-left: 16px
+    +rtl()
+      margin-left: 0
+      margin-right: 16px
 
 .v-list-item__action,
 .v-list-item__icon
   &:first-child
     margin-right: 32px
+    +rtl()
+      margin-right: 0
+      margin-left: 32px
 
   &:last-of-type:not(:only-child)
     margin-left: 16px
+    +rtl()
+      margin-left: 0
+      margin-right: 16px
 
 .v-list-item__action,
 .v-list-item__avatar,
