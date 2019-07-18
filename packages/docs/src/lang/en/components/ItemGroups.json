@@ -24,9 +24,6 @@
     "active-class": {
       "header": "### With active class",
       "desc": "**activeClass** property allows you to set custom CSS class on active items."
-    },
-    "slots": {
-      "default": "The default slot. Use this to render your items"
     }
   }
 }
