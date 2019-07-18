@@ -262,15 +262,15 @@ describe('VSelect.ts', () => {
     })
 
     const listIndexUpdate = jest.fn()
-    wrapper.vm.$on('update:listIndex', listIndexUpdate)
+    wrapper.vm.$on('update:list-index', listIndexUpdate)
 
     const input = wrapper.find('input')
     const slot = wrapper.find('.v-input__slot')
     slot.trigger('click')
 
     input.trigger('keydown.down')
-    expect(listIndexUpdate).toBeCalledWith(0)
+    expect(listIndexUpdate).toHaveBeenCalledWith(0)
     input.trigger('keydown.down')
-    expect(listIndexUpdate).toBeCalledWith(1)
+    expect(listIndexUpdate).toHaveBeenCalledWith(1)
   })
 })

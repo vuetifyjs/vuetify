@@ -604,7 +604,7 @@ export default baseMixins.extend<options>().extend({
       // listIndex change from menu
       if (this.isMenuActive && keyCode !== keyCodes.tab) {
         menu.changeListIndex(e)
-        this.$emit('update:listIndex', menu.listIndex)
+        this.$emit('update:list-index', menu.listIndex)
       }
 
       // If menu is not active, up and down can do
