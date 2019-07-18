@@ -94,7 +94,8 @@
       "value": "The value used when a child of a [v-list-item-group](/components/list-item-groups)."
     },
     "v-list-item-avatar": {
-      "color": "Mixins.Colorable.props.color"
+      "color": "Mixins.Colorable.props.color",
+      "horizontal": "Uses an alternative horizontal style."
     },
     "v-list-group": {
       "activeClass": "Mixins.Routable.props.activeClass",
