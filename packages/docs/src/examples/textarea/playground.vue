@@ -25,6 +25,7 @@
       <v-flex xs12 sm6>
         <v-text-field
           v-model="rowHeight"
+          :disabled="!autoGrow"
           class="mx-3"
           label="Row height - px"
           max="500"
