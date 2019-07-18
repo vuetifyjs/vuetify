@@ -71,6 +71,10 @@ export default VTextField.extend({
     } as PropValidator<File | File[]>,
   },
 
+  data: () => ({
+    internalFileInput: null,
+  }),
+
   computed: {
     classes (): object {
       return {
@@ -132,6 +136,7 @@ export default VTextField.extend({
   methods: {
     clearableCallback () {
       this.internalValue = this.isMultiple ? [] : null
+      this.internalFileInput = null
     },
     genChips () {
       if (!this.isDirty) return []
@@ -150,7 +155,7 @@ export default VTextField.extend({
     genInput () {
       const input = VTextField.options.methods.genInput.call(this)
 
-      delete input.data!.domProps!.value
+      input.data!.domProps!.value = this.internalFileInput
 
       return [this.genSelections(), input]
     },
