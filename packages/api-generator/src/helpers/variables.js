@@ -136,11 +136,48 @@ const textEvents = [
   },
 ]
 
-const inputSlots = ['append', 'prepend', 'default']
+const inputSlots = [
+  {
+    name: 'append',
+    props: undefined,
+  },
+  {
+    name: 'default',
+    props: undefined,
+  },
+  {
+    name: 'prepend',
+    props: undefined,
+  },
+]
 
-const textFieldSlots = [...inputSlots, 'append-outer', 'prepend-inner', 'label']
+const textFieldSlots = [
+  ...inputSlots,
+  {
+    name: 'append-outer',
+    props: undefined,
+  },
+  {
+    name: 'label',
+    props: undefined,
+  },
+  {
+    name: 'prepend-inner',
+    props: undefined,
+  },
+]
 
-const selectSlots = [...textFieldSlots, 'append-item', 'prepend-item']
+const selectSlots = [
+  ...textFieldSlots,
+  {
+    name: 'append-item',
+    props: undefined,
+  },
+  {
+    name: 'prepend-item',
+    props: undefined,
+  },
+]
 
 const VSelect = {
   props: [
@@ -157,8 +194,24 @@ const VSelect = {
       default: '{"closeOnClick":false, "closeOnContentClick":false, "openOnClick":false, "maxHeight":300}',
     },
   ],
-  slots: selectSlots.concat(['no-data', 'progress']),
-  scopedSlots: [
+  slots: selectSlots.concat([
+    {
+      name: 'item',
+      props: {
+        parent: 'VueComponent',
+        item: 'object',
+        on: 'object',
+        attrs: 'object',
+      },
+    },
+    {
+      name: 'no-data',
+      props: undefined,
+    },
+    {
+      name: 'progress',
+      props: undefined,
+    },
     {
       name: 'selection',
       props: {
@@ -170,16 +223,7 @@ const VSelect = {
         disabled: 'boolean',
       },
     },
-    {
-      name: 'item',
-      props: {
-        parent: 'VueComponent',
-        item: 'object',
-        on: 'object',
-        attrs: 'object',
-      },
-    },
-  ],
+  ]),
   events: [
     {
       name: 'input',
@@ -266,15 +310,13 @@ const VSlider = {
       source: 'v-input',
     },
     {
-      name: 'prepend',
-      source: 'v-input',
-    },
-    {
       name: 'label',
       source: 'v-input',
     },
-  ],
-  scopedSlots: [
+    {
+      name: 'prepend',
+      source: 'v-input',
+    },
     {
       name: 'thumb-label',
       props: {

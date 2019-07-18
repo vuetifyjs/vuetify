@@ -60,9 +60,7 @@
     "fade-img-on-scroll": "crwdns25586:0crwdne25586:0"
   },
   "slots": {
-    "extension": "crwdns25588:0crwdne25588:0"
-  },
-  "scopedSlots": {
+    "extension": "crwdns25588:0crwdne25588:0",
     "img": "crwdns25590:0crwdne25590:0"
   }
 }

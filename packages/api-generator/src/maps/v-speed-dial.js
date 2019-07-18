@@ -1,5 +1,10 @@
 module.exports = {
   'v-speed-dial': {
-    slots: ['activator', 'default'],
+    slots: [
+      {
+        name: 'activator',
+        props: undefined,
+      },
+    ],
   },
 }

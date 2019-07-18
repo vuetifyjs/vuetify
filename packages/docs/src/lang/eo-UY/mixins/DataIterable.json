@@ -24,11 +24,9 @@
     "actions-append": "crwdns23620:0crwdne23620:0",
     "actions-prepend": "crwdns23622:0crwdne23622:0",
     "footer": "crwdns23624:0crwdne23624:0",
-    "noData": "crwdns23626:0crwdne23626:0",
-    "noResults": "crwdns23628:0crwdne23628:0"
-  },
-  "scopedSlots": {
     "items": "crwdns23630:0crwdne23630:0",
+    "noData": "crwdns23626:0crwdne23626:0",
+    "noResults": "crwdns23628:0crwdne23628:0",
     "pageText": "crwdns23632:0crwdne23632:0"
   }
 }

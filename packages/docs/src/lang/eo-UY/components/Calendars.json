@@ -58,7 +58,7 @@
     "minutesToPixels": "crwdns28536:0crwdne28536:0",
     "scrollToTime": "crwdns28538:0crwdne28538:0"
   },
-  "scopedSlots": {
+  "slots": {
     "day": "crwdns28540:0crwdne28540:0",
     "dayBody": "crwdns28542:0crwdne28542:0",
     "dayHeader": "crwdns28544:0crwdne28544:0",
