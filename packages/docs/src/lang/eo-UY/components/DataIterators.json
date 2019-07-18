@@ -46,6 +46,7 @@
   },
   "slots": {
     "v-data-iterator": {
+      "default": "crwdns28788:0crwdne28788:0",
       "header": "crwdns28792:0crwdne28792:0",
       "item": "crwdns36004:0crwdne36004:0",
       "footer": "crwdns28794:0crwdne28794:0",

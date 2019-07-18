@@ -19,6 +19,9 @@
     "customFilter": "crwdns26736:0crwdne26736:0",
     "serverItemsLength": "crwdns26738:0crwdne26738:0"
   },
+  "slots": {
+    "default": "crwdns26740:0crwdne26740:0"
+  },
   "events": {
     "current-items": "crwdns26742:0crwdne26742:0",
     "page-count": "crwdns26744:0crwdne26744:0",
