@@ -76,6 +76,7 @@ export default mixins(
   watch: {
     inputValue (val) {
       this.lazyValue = val
+      this.hasColor = val
     },
   },
 
