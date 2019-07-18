@@ -45,7 +45,7 @@
     "segmented": "Создаёт сегментированную кнопку - [спец.](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "tags": "Функция тегов позволяет пользователю создавать новые значения, недоступные из **items**"
   },
-  "scopedSlots": {
+  "slots": {
     "item": "Определить внешний вид элемента",
     "selection": "Определить внешний вид пользовательского выбора"
   },

@@ -76,7 +76,7 @@
     "start": "crwdns27922:0crwdne27922:0",
     "update:error": "crwdns27924:0crwdne27924:0"
   },
-  "scopedSlots": {
+  "slots": {
     "thumb-label": "crwdns27926:0crwdne27926:0"
   }
 }

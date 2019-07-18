@@ -9,7 +9,7 @@
       "header": "### Recherche d'une API",
       "desc": "Branchez facilement les données dynamiques et créez une expérience unique. La liste de propriétés expansive de v-autocomplete`permet de régler facilement tous les aspects de l'entrée."
     },
-    "scopedSlots": {
+    "slots": {
       "header": "### Emplacements étendus",
       "desc": "Avec la puissance des emplacements étendus, vous pouvez personnaliser la sortie visuelle de la sélection. Dans cet exemple, nous ajoutons une image de profil pour les jetons et la liste d'éléments."
     },
@@ -23,7 +23,7 @@
     },
     "advanced": {
       "header": "### Emplacements avancés",
-      "desc": "Le composant `v-autocomplete` est extrêmement flexible et peut s'adapter à n'importe quel cas d'utilisation. Créez des affichages personnalisés pour les emplacements **no-data**, **item** et **selection** afin de fournir une expérience utilisateur unique. L'utilisation de _scoped slots_ vous permet de personnaliser facilement le rendu souhaité pour votre application."
+      "desc": "Le composant `v-autocomplete` est extrêmement flexible et peut s'adapter à n'importe quel cas d'utilisation. Créez des affichages personnalisés pour les emplacements **no-data**, **item** et **selection** afin de fournir une expérience utilisateur unique. L'utilisation de _slots_ vous permet de personnaliser facilement le rendu souhaité pour votre application."
     }
   },
   "props": {
