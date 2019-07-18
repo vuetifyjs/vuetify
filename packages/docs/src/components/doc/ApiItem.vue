@@ -10,7 +10,7 @@
     >
       <!-- Header -->
       <div
-        v-if="header.value !== 'example' || item.example"
+        v-if="!['example', 'props'].includes(header.value) || item.example || item.props"
         class="text-capitalize overline grey--text text--darken-3"
         v-text="header.value"
       />
