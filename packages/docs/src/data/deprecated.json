@@ -63,6 +63,7 @@
       "height": false
     },
     "v-radio-group": {
+      "color": false,
       "height": false
     },
     "v-switch": {
