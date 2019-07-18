@@ -1,4 +1,7 @@
 module.exports = {
+  'v-expansion-panels': {
+    slots: ['default'],
+  },
   'v-expansion-panel': {
     slots: ['default'],
     events: [

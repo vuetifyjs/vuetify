@@ -54,6 +54,7 @@
     </v-autocomplete>
     <template v-slot:extension>
       <v-tabs
+        v-model="tab"
         :hide-slider="!model"
         background-color="transparent"
         color="blue-grey"
@@ -74,9 +75,14 @@
       items: [],
       model: null,
       search: null,
+      tab: null,
     }),
 
     watch: {
+      model (val) {
+        if (val != null) this.tab = 0
+        else this.tab = null
+      },
       search (val) {
         // Items have already been loaded
         if (this.items.length > 0) return

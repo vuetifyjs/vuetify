@@ -1,4 +1,5 @@
 // Styles
+import './VCheckbox.sass'
 import '../../styles/components/_selection-controls.sass'
 
 // Components
@@ -40,6 +41,7 @@ export default Selectable.extend({
         ...VInput.options.computed.classes.call(this),
         'v-input--selection-controls': true,
         'v-input--checkbox': true,
+        'v-input--indeterminate': this.inputIndeterminate,
       }
     },
     computedIcon (): string {
@@ -50,6 +52,16 @@ export default Selectable.extend({
       } else {
         return this.offIcon
       }
+    },
+    // Do not return undefined if disabled,
+    // according to spec, should still show
+    // a color when disabled and active
+    validationState (): string | undefined {
+      if (this.disabled && !this.inputIndeterminate) return undefined
+      if (this.hasError && this.shouldValidate) return 'error'
+      if (this.hasSuccess) return 'success'
+      if (this.hasColor) return this.computedColor
+      return undefined
     },
   },
 
