@@ -27,11 +27,11 @@
             <v-fade-transition>
               <v-overlay
                 absolute
-                opacity="0.3"
+                opacity="0.7"
                 class="text-center"
               >
                 <h2
-                  class="headline mb-12"
+                  class="title mb-6"
                   v-text="layout.name"
                 />
                 <v-btn
@@ -42,6 +42,7 @@
                   color="indigo"
                   depressed
                   fab
+                  small
                   target="_blank"
                 >
                   <v-icon>mdi-open-in-new</v-icon>
@@ -54,6 +55,7 @@
                   color="indigo"
                   depressed
                   fab
+                  small
                   target="_blank"
                 >
                   <v-icon>mdi-code-tags</v-icon>

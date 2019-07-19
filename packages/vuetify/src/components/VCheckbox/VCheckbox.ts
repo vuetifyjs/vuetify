@@ -69,6 +69,13 @@ export default Selectable.extend({
     indeterminate (val) {
       this.inputIndeterminate = val
     },
+    inputIndeterminate (val) {
+      this.$emit('update:indeterminate', val)
+    },
+    isActive () {
+      if (!this.indeterminate) return
+      this.inputIndeterminate = false
+    },
   },
 
   methods: {
