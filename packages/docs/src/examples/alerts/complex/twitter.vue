@@ -12,7 +12,7 @@
       You've got <strong>5</strong> new updates on your timeline!.
     </v-alert>
 
-    <div class="text-xs-center">
+    <div class="text-center">
       <v-btn
         v-if="!alert"
         dark

@@ -2,7 +2,7 @@
   <v-layout
     id="one-time-donation"
     tag="section"
-    mb-5
+    mb-12
     wrap
   >
     <v-flex xs12>
@@ -15,13 +15,13 @@
       tag="v-divider"
     />
 
-    <v-flex xs12 mb-3>
+    <v-flex xs12 mb-4>
       <doc-markdown>oneTimeBlurb</doc-markdown>
     </v-flex>
 
     <v-flex
       xs12
-      text-xs-center
+      text-center
     >
       <a
         aria-label="Support Vuetify through Paypal"

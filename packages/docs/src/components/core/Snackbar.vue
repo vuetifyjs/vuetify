@@ -15,7 +15,7 @@
       <v-icon
         v-if="computedIcon"
         dark
-        class="mr-3"
+        class="mr-4"
       >
         {{ computedIcon }}
       </v-icon>
@@ -40,7 +40,7 @@
         :ripple="false"
         :aria-label="$t('Vuetify.Snackbar.close')"
         icon
-        class="ml-3"
+        class="ml-4"
         @click="markViewed"
       >
         <v-icon>clear</v-icon>

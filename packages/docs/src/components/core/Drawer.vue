@@ -9,7 +9,7 @@
       fluid
       pb-0
     >
-      <div class="text-xs-center">
+      <div class="text-center">
         <h4 class="title grey--text text--darken-2">Premiere sponsor</h4>
 
         <supporters-sponsors
@@ -19,7 +19,7 @@
         />
 
         <supporters-sponsor-btn
-          class="mb-4 mt-3"
+          class="mb-6 mt-4"
           href="https://www.patreon.com/join/vuetify"
         />
 
@@ -39,9 +39,9 @@
       </div>
     </v-container>
 
-    <v-divider class="mt-3" />
+    <v-divider class="mt-4" />
 
-    <v-layout pa-3>
+    <v-layout pa-4>
       <a
         aria-label="VueJobs"
         class="d-inline-block"

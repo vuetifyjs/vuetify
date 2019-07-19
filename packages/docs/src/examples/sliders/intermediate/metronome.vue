@@ -19,9 +19,9 @@
     <v-card-text>
       <v-layout
         justify-space-between
-        mb-3
+        mb-4
       >
-        <v-flex text-xs-left>
+        <v-flex text-left>
           <span
             class="display-3 font-weight-light"
             v-text="bpm"
@@ -39,7 +39,7 @@
             ></v-avatar>
           </v-fade-transition>
         </v-flex>
-        <v-flex text-xs-right>
+        <v-flex text-right>
           <v-btn
             :color="color"
             dark

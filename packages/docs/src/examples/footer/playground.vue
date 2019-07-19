@@ -8,13 +8,13 @@
         flat
         tile
         width="100%"
-        class="red lighten-1 text-xs-center"
+        class="red lighten-1 text-center"
       >
         <v-card-text>
           <v-btn
             v-for="icon in icons"
             :key="icon"
-            class="mx-3"
+            class="mx-4"
             icon
           >
             <v-icon size="24px">{{ icon }}</v-icon>
@@ -32,7 +32,7 @@
     <v-layout
       align-center
       justify-center
-      class="ma-5"
+      class="ma-12"
     >
       <v-flex
         xs12

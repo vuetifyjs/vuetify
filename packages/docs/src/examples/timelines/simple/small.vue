@@ -10,7 +10,7 @@
           <v-icon
             dark
             size="42"
-            class="mr-3"
+            class="mr-4"
           >
             mdi-magnify
           </v-icon>
@@ -24,7 +24,7 @@
             <v-flex
               md2
               hidden-sm-and-down
-              text-xs-right
+              text-right
             >
               <v-icon size="64">mdi-calendar-text</v-icon>
             </v-flex>
@@ -41,7 +41,7 @@
     >
       <v-card>
         <v-card-title class="amber lighten-1 justify-end">
-          <h2 class="display-1 mr-3 white--text font-weight-light">Title 2</h2>
+          <h2 class="display-1 mr-4 white--text font-weight-light">Title 2</h2>
           <v-icon
             dark
             size="42"
@@ -68,7 +68,7 @@
       <v-card>
         <v-card-title class="cyan lighten-1">
           <v-icon
-            class="mr-3"
+            class="mr-4"
             dark
             size="42"
           >
@@ -99,7 +99,7 @@
     >
       <v-card>
         <v-card-title class="red lighten-1 justify-end">
-          <h2 class="display-1 mr-3 white--text font-weight-light">Title 4</h2>
+          <h2 class="display-1 mr-4 white--text font-weight-light">Title 4</h2>
           <v-icon
             dark
             size="42"
@@ -128,7 +128,7 @@
       <v-card>
         <v-card-title class="green lighten-1">
           <v-icon
-            class="mr-3"
+            class="mr-4"
             dark
             size="42"
           >

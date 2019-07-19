@@ -20,7 +20,7 @@
       >
         <v-card :elevation="selected">
           <v-card-text>
-            <p class="text-xs-center ma-0">
+            <p class="text-center ma-0">
               Elevation {{ selected }}
             </p>
           </v-card-text>

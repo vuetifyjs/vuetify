@@ -99,7 +99,7 @@
       >
         <v-sheet
           elevation="12"
-          class="pa-5"
+          class="pa-12"
         >
           <v-text-field
             v-model="model"
@@ -118,7 +118,7 @@
             :flat="flat"
             :counter="counterEn ? counter : false"
           ></v-text-field>
-          <div class="mt-5 text-xs-center">
+          <div class="mt-12 text-center">
             Value: {{ model }}
           </div>
         </v-sheet>

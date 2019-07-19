@@ -1,6 +1,6 @@
 <template>
   <v-responsive
-    class="white--text py-5"
+    class="white--text py-12"
     style="background: linear-gradient(to bottom, #1867c0, #5CBBF6)"
   >
     <v-container>
@@ -21,17 +21,17 @@
           src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-300.png"
         />
         <div
-          class="text-xs-center text-lg-left"
+          class="text-center text-lg-left"
           :style="`flex: 0 1 ${$vuetify.breakpoint.mdAndDown ? '100%' : 'auto'}`"
         >
           <h1
             :class="$vuetify.breakpoint.smAndDown && 'display-1' || 'display-3'"
-            class="font-weight-light mb-4 mx-3"
+            class="font-weight-light mb-6 mx-4"
             v-html="$vuetify.breakpoint.smAndUp ? $t('Vuetify.Home.callout') : 'Vuetify.js'"
           />
           <v-layout
             :justify-center="$vuetify.breakpoint.mdAndDown"
-            pa-3
+            pa-4
             wrap
           >
             <v-btn

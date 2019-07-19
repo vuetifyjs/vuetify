@@ -8,7 +8,7 @@
     >
       <v-text-field
         append-icon="mic"
-        class="mx-3"
+        class="mx-4"
         flat
         hide-details
         label="Search"

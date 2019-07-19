@@ -1,12 +1,12 @@
 <template>
   <v-card
-    class="pa-5"
+    class="pa-12"
     flat
   >
     <div
       v-for="(weight, i) in weights"
       :key="`${i}-weight`"
-      class="mb-3"
+      class="mb-4"
     >
       <div :class="`${weight[1]} my-2 display-2`">
         {{ weight[0] }}
@@ -16,7 +16,7 @@
     <div
       v-for="(weight, i) in italics"
       :key="`${i}-italic`"
-      class="mb-3"
+      class="mb-4"
     >
       <div :class="`${weight[1]} my-2 display-2 font-italic`">
         {{ weight[0] }}

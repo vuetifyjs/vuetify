@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="hide-overflow"
+    class="overflow-hidden"
     color="purple lighten-1"
     dark
   >

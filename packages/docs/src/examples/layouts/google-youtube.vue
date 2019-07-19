@@ -20,7 +20,7 @@
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-subheader class="mt-3 grey--text text--darken-1">SUBSCRIPTIONS</v-subheader>
+        <v-subheader class="mt-4 grey--text text--darken-1">SUBSCRIPTIONS</v-subheader>
         <v-list>
           <v-list-item
             v-for="item in items2"
@@ -37,7 +37,7 @@
           </v-list-item>
         </v-list>
         <v-list-item
-          class="mt-3"
+          class="mt-4"
           @click=""
         >
           <v-list-item-action>
@@ -61,8 +61,8 @@
       dense
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-icon class="mx-3">fab fa-youtube</v-icon>
-      <v-toolbar-title class="mr-5 align-center">
+      <v-icon class="mx-4">fab fa-youtube</v-icon>
+      <v-toolbar-title class="mr-12 align-center">
         <span class="title">Youtube</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>

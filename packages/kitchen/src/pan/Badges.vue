@@ -268,7 +268,7 @@
 
           <v-flex
             xs12
-            class="mt-5"
+            class="mt-12"
           >
             <v-badge
               :value="show1"
@@ -289,7 +289,7 @@
 
           <v-flex
             xs12
-            class="mt-5"
+            class="mt-12"
           >
             <v-badge
               :value="show1"
@@ -328,7 +328,7 @@
 
           <v-flex
             xs12
-            class="mt-5"
+            class="mt-12"
           >
             <v-badge
               :value="show2"
@@ -350,7 +350,7 @@
 
           <v-flex
             xs12
-            class="mt-5"
+            class="mt-12"
           >
             <v-badge
               :value="show2"

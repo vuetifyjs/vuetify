@@ -41,7 +41,7 @@
             </v-flex>
             <v-flex
               xs6
-              class="text-xs-right"
+              class="text-right"
             >
               <v-btn
                 small
@@ -53,7 +53,7 @@
             v-else-if="item.divider"
             :key="i"
             dark
-            class="my-3"
+            class="my-4"
           ></v-divider>
           <v-list-item
             v-else

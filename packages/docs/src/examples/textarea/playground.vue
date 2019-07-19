@@ -26,7 +26,7 @@
         <v-text-field
           v-model="rowHeight"
           :disabled="!autoGrow"
-          class="mx-3"
+          class="mx-4"
           label="Row height - px"
           max="500"
           min="1"
@@ -36,7 +36,7 @@
         ></v-text-field>
         <v-text-field
           v-model="rows"
-          class="mx-3"
+          class="mx-4"
           label="Rows"
           max="50"
           min="1"
@@ -114,7 +114,7 @@
       >
         <v-sheet
           elevation="12"
-          class="pa-5"
+          class="pa-12"
         >
           <v-textarea
             v-model="model"
@@ -137,7 +137,7 @@
             :single-line="singleLine"
             :solo="solo"
           ></v-textarea>
-          <div class="mt-5 text-xs-center">
+          <div class="mt-12 text-center">
             Value: {{ model }}
           </div>
         </v-sheet>

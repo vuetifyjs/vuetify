@@ -28,10 +28,10 @@
               <v-overlay
                 absolute
                 opacity="0.7"
-                class="text-xs-center"
+                class="text-center"
               >
                 <h2
-                  class="title mb-4"
+                  class="title mb-6"
                   v-text="layout.name"
                 />
                 <v-btn

@@ -1,16 +1,16 @@
-import VRowGroup from '../VRowGroup'
+import RowGroup from '../RowGroup'
 import {
   mount,
   Wrapper,
   MountOptions,
 } from '@vue/test-utils'
 
-describe('VRowGroup.ts', () => {
-  type Instance = InstanceType<typeof VRowGroup>
+describe('Table RowGroup', () => {
+  type Instance = InstanceType<typeof RowGroup>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {
     mountFunction = (options?: MountOptions<Instance>) => {
-      return mount(VRowGroup, options)
+      return mount(RowGroup, options)
     }
   })
 

@@ -42,7 +42,7 @@
           align-center
           justify-center
         >
-          <v-flex text-xs-center>
+          <v-flex text-center>
             <v-tooltip left>
               <template v-slot:activator="{ on }">
                 <v-btn

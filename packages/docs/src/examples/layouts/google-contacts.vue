@@ -20,7 +20,7 @@
             </v-flex>
             <v-flex
               xs6
-              class="text-xs-center"
+              class="text-center"
             >
               <a
                 href="#!"
@@ -85,7 +85,7 @@
     >
       <v-toolbar-title
         style="width: 300px"
-        class="ml-0 pl-3"
+        class="ml-0 pl-4"
       >
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <span class="hidden-sm-and-down">Google Contacts</span>
@@ -192,7 +192,7 @@
               <v-layout align-center>
                 <v-avatar
                   size="40px"
-                  class="mr-3"
+                  class="mr-4"
                 >
                   <img
                     src="//ssl.gstatic.com/s2/oz/images/sge/grey_silhouette.png"

@@ -23,7 +23,7 @@
       </v-expand-transition>
     </v-flex>
 
-    <div class="mx-3 hidden-sm-and-down"></div>
+    <div class="mx-4 hidden-sm-and-down"></div>
 
     <v-flex shrink>
       <v-btn

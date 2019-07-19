@@ -53,7 +53,7 @@
           </v-flex>
         </v-layout>
 
-        <v-layout row wrap class="mt-5">
+        <v-layout row wrap class="mt-12">
           <v-flex xs12 sm4 md4>
             <v-checkbox
               v-model="ex4"

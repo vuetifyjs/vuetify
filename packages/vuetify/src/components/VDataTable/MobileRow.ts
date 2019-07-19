@@ -1,13 +1,10 @@
-// Types
 import Vue, { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 import { TableHeader } from './mixins/header'
-
-// Utils
 import { getObjectValueByPath } from '../../util/helpers'
 
 export default Vue.extend({
-  name: 'v-row',
+  name: 'row',
 
   functional: true,
 
@@ -21,6 +18,10 @@ export default Vue.extend({
     const computedSlots = slots()
 
     const columns: VNode[] = props.headers.map((header: TableHeader) => {
+      const classes = {
+        'v-data-table__mobile-row': true,
+      }
+
       const children = []
       const value = getObjectValueByPath(props.item, header.value)
 
@@ -37,8 +38,13 @@ export default Vue.extend({
       }
 
       return h('td', {
-        class: `text-xs-${header.align || 'start'}`,
-      }, children)
+        class: classes,
+      }, [
+        h('div', { staticClass: 'v-data-table__mobile-row__wrapper' }, [
+          header.value !== 'dataTableSelect' && h('div', { staticClass: 'v-data-table__mobile-row__header' }, [header.text]),
+          h('div', { staticClass: 'v-data-table__mobile-row__cell' }, children),
+        ]),
+      ])
     })
 
     return h('tr', data, columns)
