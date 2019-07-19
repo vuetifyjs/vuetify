@@ -76,7 +76,23 @@
 
 <br>
 
-<h4 align="center"><b>Diamond Sponsors</b></h4>
+<h2 align="center"><b>Sponsors</b></h2>
+
+<h4 align="center"><b>$1500/mo</b></h4>
+
+<table>
+  <tbody>
+    <tr>
+      <td>
+        <a href="https://www.fractalindustries.com/?ref=vuetify-github">
+          <img height="70px" src="https://cdn.vuetifyjs.com/images/backers/fractal-industries.png">
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 align="center"><b>$500/mo</b></h4>
 
 <table>
   <tbody>
@@ -100,23 +116,18 @@
   </tbody>
 </table>
 
-<h4 align="center">Palladium Sponsors</h4>
+<h4 align="center">$250/mo</h4>
 
 <table>
   <tbody>
     <tr>
-      <td>
-        <a href="http://www.eikospartners.com/?ref=vuetify-github">
-        <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/eikos-partners.png">
-      </a>
-      </td>
       <td>
         <a href="https://application.rategenius.com/?ref=vuetify-github">
           <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/rate-genius.png">
         </a>
       </td>
       <td>
-        <a href="http://www.clearbluetechnologies.com/">
+        <a href="http://www.clearbluetechnologies.com/?ref=vuetify-github">
           <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/clear-blue.png">
         </a>
       </td>
@@ -125,15 +136,25 @@
           <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/digital-maas.svg">
         </a>
       </td>
+      <td>
+        <a href="https://www.brightree.com/?ref=vuetify-github">
+          <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/brightree.svg">
+        </a>
+      </td>
     </tr>
   </tbody>
 </table>
 
+<br>
+<br>
+
 <h4 align="center"><b>Open Collective Sponsors</b></h4>
 
-<a href="https://opencollective.com/vuetify">
-  <img src="https://opencollective.com/static/images/become_sponsor.svg" alt="Donate to OpenCollective">
-</a>
+<div align="center">
+  <a href="https://opencollective.com/vuetify">
+    <img src="https://opencollective.com/static/images/become_sponsor.svg" alt="Donate to OpenCollective">
+  </a>
+</div>
 
 <br>
 
