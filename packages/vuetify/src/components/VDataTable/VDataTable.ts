@@ -384,47 +384,34 @@ export default VDataIterator.extend({
     genDefaultSimpleRow (item: any, classes: string | string[] | object | null = null): VNode {
       const scopedSlots = getPrefixedScopedSlots('item.', this.$scopedSlots)
 
-      if (this.showSelect) {
-        const data = {
-          item,
-          props: {
-            value: this.isSelected(item),
-          },
-          on: {
-            input: (v: any) => this.select(item, v),
-          },
-        }
+      const data = this.createItemProps(item)
 
+      if (this.showSelect) {
         const slot = scopedSlots['data-table-select']
         scopedSlots['data-table-select'] = slot ? () => slot(data) : () => this.$createElement(VSimpleCheckbox, {
           staticClass: 'v-data-table__checkbox',
-          ...data,
+          props: {
+            value: data.isSelected,
+          },
+          on: {
+            input: (val: boolean) => data.select(val),
+          },
         })
       }
 
-      const expanded = this.isExpanded(item)
-
       if (this.showExpand) {
-        const data = {
-          item,
-          props: {
-            expanded,
-          },
-          on: {
-            click: (e: MouseEvent) => {
-              e.stopPropagation()
-              this.expand(item, !expanded)
-            },
-          },
-        }
-
         const slot = scopedSlots['data-table-expand']
         scopedSlots['data-table-expand'] = slot ? () => slot(data) : () => this.$createElement(VIcon, {
           staticClass: 'v-data-table__expand-icon',
           class: {
-            'v-data-table__expand-icon--active': expanded,
+            'v-data-table__expand-icon--active': data.isExpanded,
           },
-          ...data,
+          on: {
+            click: (e: MouseEvent) => {
+              e.stopPropagation()
+              data.expand(!data.isExpanded)
+            },
+          },
         }, [this.expandIcon])
       }
 
