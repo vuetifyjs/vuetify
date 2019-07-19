@@ -101,36 +101,41 @@
           "lang": "focusText1"
         },
         {
-          "type": "heading",
-          "lang": "focusHeader2"
-        },
-        {
-          "type": "text",
-          "lang": "focusText2"
-        },
-        {
-          "type": "example",
-          "value": "menu"
-        },
-        {
-          "type": "markup",
-          "value": "html_a11y_menu_content_rendered"
-        },
-        {
-          "type": "heading",
-          "lang": "focusHeader3"
-        },
-        {
-          "type": "text",
-          "lang": "focusText3"
-        },
-        {
-          "type": "example",
-          "value": "list_item_group"
-        },
-        {
-          "type": "markup",
-          "value": "html_a11y_list_item_group_rendered"
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "focusHeader2"
+            },
+            {
+              "type": "text",
+              "lang": "focusText2"
+            },
+            {
+              "type": "example",
+              "value": "menu"
+            },
+            {
+              "type": "markup",
+              "value": "html_a11y_menu_content_rendered"
+            },
+            {
+              "type": "heading",
+              "lang": "focusHeader3"
+            },
+            {
+              "type": "text",
+              "lang": "focusText3"
+            },
+            {
+              "type": "example",
+              "value": "list_item_group"
+            },
+            {
+              "type": "markup",
+              "value": "html_a11y_list_item_group_rendered"
+            }
+          ]
         }
       ]
     },

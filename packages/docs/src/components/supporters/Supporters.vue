@@ -25,3 +25,9 @@
     <supporters-sponsors />
   </v-container>
 </template>
+
+<script>
+  export default {
+    inheritAttrs: false,
+  }
+</script>
