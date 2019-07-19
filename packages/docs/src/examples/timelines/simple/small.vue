@@ -24,7 +24,7 @@
             <v-flex
               md2
               hidden-sm-and-down
-              text-xs-right
+              text-right
             >
               <v-icon size="64">mdi-calendar-text</v-icon>
             </v-flex>
