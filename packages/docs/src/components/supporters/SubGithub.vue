@@ -6,7 +6,7 @@
     wrap
   >
     <v-flex xs12>
-      <doc-heading goto="one-time-donation">patreon</doc-heading>
+      <doc-heading goto="one-time-donation">github</doc-heading>
     </v-flex>
 
     <v-flex
@@ -16,14 +16,14 @@
     />
 
     <v-flex xs12 mb-3>
-      <doc-markdown>patreonBlurb</doc-markdown>
+      <doc-markdown>githubBlurb</doc-markdown>
     </v-flex>
 
     <v-flex
       xs12
       text-xs-center
     >
-      <core-patreon-btn />
+      <core-github-btn />
     </v-flex>
   </v-layout>
 </template>
