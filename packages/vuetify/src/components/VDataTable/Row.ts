@@ -37,7 +37,7 @@ export default Vue.extend({
       }
 
       return h('td', {
-        class: `text-xs-${header.align || 'start'}`,
+        class: `text-${header.align || 'start'}`,
       }, children)
     })
 
