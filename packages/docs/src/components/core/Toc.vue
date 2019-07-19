@@ -44,7 +44,7 @@
     }),
 
     computed: {
-      ...mapState('documentation', ['toc'])
+      ...mapState('documentation', ['toc']),
     },
 
     methods: {

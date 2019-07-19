@@ -2,7 +2,7 @@ import deprecatedIn from '@/data/deprecated'
 import newIn from '@/data/new'
 
 // Utilities
-import { push, set } from '@/util/vuex'
+import { set } from '@/util/vuex'
 import camelCase from 'lodash/camelCase'
 import upperFirst from 'lodash/upperFirst'
 
@@ -15,7 +15,7 @@ export default {
     namespace: null,
     page: null,
     structure: null,
-    toc: []
+    toc: [],
   },
 
   getters: {
@@ -43,6 +43,6 @@ export default {
       if (payload) {
         state.toc = []
       }
-    }
+    },
   },
 }

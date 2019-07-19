@@ -20,7 +20,7 @@
         v-if="header.value === 'name'"
         class="mono name"
         v-text="item.name"
-      ></span>
+      />
 
       <!-- Type -->
       <span

@@ -1,10 +1,10 @@
 <template>
   <v-container px-0>
     <v-card
+      id="vuetify-2-0"
       outlined
       class="mb-12"
       tag="section"
-      id="vuetify-2-0"
     >
       <v-card-title>
         <doc-subheading>2header</doc-subheading>
@@ -19,9 +19,9 @@
     </v-card>
 
     <v-card
+      id="vuetify-1-5-lts"
       outlined
       tag="section"
-      id="vuetify-1-5-lts"
     >
       <v-card-title>
         <doc-subheading>15header</doc-subheading>
