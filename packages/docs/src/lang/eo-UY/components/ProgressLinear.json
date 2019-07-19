@@ -64,7 +64,7 @@
     "striped": "crwdns35784:0crwdne35784:0",
     "value": "crwdns26372:0crwdne26372:0"
   },
-  "scopedSlots": {
+  "slots": {
     "default": "crwdns35786:0crwdne35786:0"
   }
 }

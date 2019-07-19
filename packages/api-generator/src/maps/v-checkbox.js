@@ -1,4 +1,4 @@
-const { inputSlots } = require('../variables')
+const { inputSlots } = require('../helpers/variables')
 
 module.exports = {
   'v-checkbox': {

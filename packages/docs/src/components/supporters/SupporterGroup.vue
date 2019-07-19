@@ -26,8 +26,9 @@
         d-flex
         shrink
       >
-        <patron
+        <supporters-sponsor
           :value="item"
+          :x-large="$attrs['x-large']"
           :large="$attrs.large"
           :small="$attrs.small"
         />
@@ -38,10 +39,6 @@
 
 <script>
   export default {
-    components: {
-      Patron: () => import('@/components/supporters/Patron'),
-    },
-
     props: {
       group: {
         type: Array,

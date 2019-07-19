@@ -1,6 +1,5 @@
 module.exports = {
   'v-flex': {
-    slots: ['default'],
     props: [
       {
         'name': 'offset-(size)(0-12)',

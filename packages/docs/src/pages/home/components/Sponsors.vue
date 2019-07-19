@@ -1,11 +1,11 @@
 <template>
   <v-card flat color="grey lighten-4 pa-5 text-xs-center">
     <h3 class="font-weight-medium grey--text text--darken-2">
-      Patreon Sponsors
+      Project Sponsors
     </h3>
 
-    <supporters-patrons
-      :tier="[1, 2, 3]"
+    <supporters-sponsors
+      :tier="[0, 1, 2, 3]"
       class="mb-5"
       dense
       hide-titles

@@ -15,7 +15,7 @@
     },
     "img": {
       "header": "### Prominent w/ scroll shrink and image",
-      "desc": "`v-app-bar` can contain background images. You can set source via the `src` prop. If you need to customize the `v-img` properties, the app-bar provides you with an **img** scoped slot."
+      "desc": "`v-app-bar` can contain background images. You can set source via the `src` prop. If you need to customize the `v-img` properties, the app-bar provides you with an **img** slot."
     },
     "img-fade": {
       "header": "### Prominent w/ scroll shrink and image, fading on scroll",
@@ -51,7 +51,7 @@
     "clippedRight": "Designates that the application's `v-navigation-drawer` that is positioned on the right is below the app-bar.",
     "collapseOnScroll": "Puts the app-bar into a collapsed state when scrolling.",
     "elevateOnScroll": "Elevates the app-bar when scrolling.",
-    "fadeImgOnScroll": "When using the **src** prop or `img` scoped slot, will fade the image when scrolling.",
+    "fadeImgOnScroll": "When using the **src** prop or `img` slot, will fade the image when scrolling.",
     "hideOnScroll": "Hides the app-bar when scrolling. Will still show the `extension` slot.",
     "invertedScroll": "Hides the app-bar when scrolling down and displays it when scrolling up.",
     "scrollOffScreen": "Hides the app-bar when scrolling. Will **NOT** show the `extension` slot.",
@@ -59,9 +59,7 @@
     "src": "Image source. See `v-img` for details"
   },
   "slots": {
+    "img": "Components.Toolbars.slots.img",
     "extension": "Components.Toolbars.slots.extension"
-  },
-  "scopedSlots": {
-    "img": "Components.Toolbars.scopedSlots.img"
   }
 }

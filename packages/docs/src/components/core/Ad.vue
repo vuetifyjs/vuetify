@@ -23,7 +23,7 @@
           >
             <core-toc />
             <div class="my-3">
-              <supporters-patrons
+              <supporters-sponsors
                 :tier="[1]"
                 compact
                 dense

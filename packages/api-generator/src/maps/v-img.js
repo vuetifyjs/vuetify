@@ -1,6 +1,11 @@
 module.exports = {
   'v-img': {
-    slots: ['default', 'placeholder'],
+    slots: [
+      {
+        name: 'placeholder',
+        props: undefined,
+      },
+    ],
     events: [
       {
         name: 'error',

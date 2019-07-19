@@ -12,8 +12,5 @@
   },
   "props": {
     "disabled": "crwdns28724:0crwdne28724:0"
-  },
-  "scopedSlots": {
-    "default": "crwdns28726:0crwdne28726:0"
   }
 }
