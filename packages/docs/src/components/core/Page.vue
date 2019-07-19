@@ -1,42 +1,44 @@
 <template>
   <v-container
+    page
     v-if="structure !== false"
-    :id="composite"
-    class="page"
   >
     <template v-if="structure">
-      <v-layout>
-        <v-flex shrink>
-          <doc-heading v-if="structure.title">
-            {{ structure.title }}
-          </doc-heading>
-        </v-flex>
-        <v-spacer />
-        <v-flex
-          v-if="structure.file"
-          shrink
-        >
-          <core-file-btn :link="structure.file" :branch="branch" />
-        </v-flex>
-        <v-flex
-          v-if="structure.mdSpec"
-          shrink
-        >
-          <core-spec-btn
-            :link="structure.mdSpec.link"
-            :version="structure.mdSpec.version"
-          />
-        </v-flex>
-      </v-layout>
-
-      <div
-        v-if="structure.titleText"
+      <section
+        :id="id"
         class="mb-12"
       >
-        <doc-text class="mb-6">
-          {{ structure.titleText }}
-        </doc-text>
-      </div>
+        <v-layout>
+          <v-flex shrink>
+            <doc-heading v-if="structure.title">
+              {{ structure.title }}
+            </doc-heading>
+          </v-flex>
+          <template v-if="structure.file">
+            <v-spacer />
+            <v-flex
+
+              shrink
+            >
+              <core-file-btn :link="structure.file" :branch="branch" />
+            </v-flex>
+            <v-flex
+              v-if="structure.mdSpec"
+              shrink
+            >
+              <core-spec-btn
+                :link="structure.mdSpec.link"
+                :version="structure.mdSpec.version"
+              />
+            </v-flex>
+          </template>
+        </v-layout>
+        <div v-if="structure.titleText">
+          <doc-text class="mb-6">
+            {{ structure.titleText }}
+          </doc-text>
+        </div>
+      </section>
 
       <component
         :is="getComponent(child.type)"
@@ -54,9 +56,11 @@
 <script>
   // Utilities
   import {
+    mapGetters,
     mapState,
   } from 'vuex'
   import { getComponent, getBranch } from '@/util/helpers'
+  import kebabCase from 'lodash/kebabCase'
 
   export default {
     components: {
@@ -69,10 +73,21 @@
     }),
 
     computed: {
+      ...mapGetters('documentation', [
+        'namespace',
+        'page',
+      ]),
       ...mapState('documentation', ['structure']),
       ...mapState('route', ['params']),
       composite () {
         return `${this.params.namespace}-${this.params.page}`
+      },
+      id () {
+        if (!this.structure) return
+
+        return kebabCase(this.$t(
+          `${this.namespace}.${this.page}.${this.structure.title}`
+        ))
       },
     },
 

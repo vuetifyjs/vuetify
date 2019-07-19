@@ -9,7 +9,7 @@
     <ul class="app-table-of-contents">
       <li class="grey--text text--darken-3 pl-4 mb-2 body-1">Contents</li>
       <li
-        v-for="(item, i) in list"
+        v-for="(item, i) in toc"
         :key="i"
         class="mb-2"
       >
@@ -23,7 +23,7 @@
             borderColor: activeIndex === i ? 'inherit' : null
           }"
           class="d-block body-2"
-          @click.stop.prevent="goTo(item.target)"
+          @click.stop.prevent="goTo(`#${item.id}`)"
           v-text="item.text"
         />
       </li>
@@ -33,64 +33,35 @@
   </div>
 </template>
 <script>
+  // Utilities
   import { goTo } from '@/util/helpers'
+  import { mapState } from 'vuex'
 
   export default {
     data: () => ({
       activeIndex: 0,
       currentOffset: 0,
-      list: [],
-      routeTimeout: null,
-      timeout: null,
     }),
 
-    watch: {
-      '$route.path': {
-        immediate: true,
-        handler () {
-          clearTimeout(this.routeTimeout)
-          this.routeTimeout = setTimeout(this.genList, 300)
-        },
-      },
+    computed: {
+      ...mapState('documentation', ['toc'])
     },
 
     methods: {
       goTo,
-      async genList () {
-        const list = []
-
-        const items = document.querySelectorAll('.page [id]')
-
-        for (const item of items) {
-          if (
-            // Not a top level heading
-            !['H1', 'H2'].includes(item.tagName) ||
-            // From previous list
-            this.list.find(l => l.item === item)
-          ) continue
-
-          list.push({
-            item,
-            text: item.innerText,
-            target: `#${item.id}`,
-          })
-        }
-
-        this.list = list
-      },
       findActiveIndex () {
         if (this.currentOffset < 100) {
           this.activeIndex = 0
           return
         }
 
-        const list = this.list.slice().reverse()
+        const list = this.toc.slice().reverse()
         const index = list.findIndex(item => {
-          const { offsetParent } = item.item
+          const section = document.getElementById(item.id)
 
-          if (!offsetParent) return false
+          if (!section) return false
 
-          return offsetParent.offsetTop - 100 < this.currentOffset
+          return section.offsetTop - 100 < this.currentOffset
         })
 
         const lastIndex = list.length
@@ -105,7 +76,7 @@
 
         clearTimeout(this.timeout)
 
-        this.timeout = setTimeout(this.findActiveIndex, 10)
+        this.timeout = setTimeout(this.findActiveIndex, 50)
       },
     },
   }
