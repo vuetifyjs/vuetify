@@ -19,7 +19,7 @@
         <v-tabs
           v-model="tabs"
           align-with-title
-          color="transparent"
+          background-color="transparent"
         >
           <v-tab href="#one">Item One</v-tab>
           <v-tab href="#two">Item Two</v-tab>

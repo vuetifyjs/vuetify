@@ -186,6 +186,7 @@ describe('VSelect.ts', () => {
   it('should have the correct a11y attributes', async () => {
     const wrapper = mountFunction({
       propsData: {
+        eager: true,
         items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
         value: 'Foo',
       },

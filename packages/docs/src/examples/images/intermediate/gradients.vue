@@ -1,6 +1,6 @@
 <template>
   <v-container fluid grid-list-sm>
-    <v-layout>
+    <v-layout wrap>
       <v-flex xs6 sm4>
         <v-img
           src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg"

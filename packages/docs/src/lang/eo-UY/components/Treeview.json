@@ -52,7 +52,7 @@
       "value": "crwdns25194:0crwdne25194:0"
     }
   },
-  "scopedSlots": {
+  "slots": {
     "v-treeview": {
       "append": "crwdns25196:0crwdne25196:0",
       "label": "crwdns25198:0crwdne25198:0",

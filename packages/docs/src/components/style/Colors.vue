@@ -17,11 +17,13 @@
         <v-flex
           v-for="(color, key) in computedColors"
           :key="key"
-          xs6
-          md4
+          xs12
+          md6
+          lg4
         >
           <v-card
             :color="key"
+            outlined
             tile
           >
             <v-card-text>
@@ -32,10 +34,10 @@
             v-for="(subColor, key2) in color"
             :key="key2"
             :color="`${key} ${convertToClass(key2)}`"
-            :class="getColorClass(key2)"
             tile
+            flat
           >
-            <v-card-text>
+            <v-card-text :class="getColorClass(key2)">
               <v-layout>
                 <v-flex xs8 caption>
                   <span v-if="key !== 'shades'">{{ key }}&nbsp;</span>

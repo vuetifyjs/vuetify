@@ -1,10 +1,7 @@
 <template>
-  <v-toolbar
-    color="orange accent-1"
-    prominent
-  >
-    <v-app-bar-nav-icon></v-app-bar-nav-icon>
-    <v-toolbar-title class="title mr-6">Cryptocurrency</v-toolbar-title>
+  <v-toolbar color="orange accent-1">
+    <v-app-bar-nav-icon class="hidden-sm-and-down"></v-app-bar-nav-icon>
+    <v-toolbar-title class="title mr-6 hidden-sm-and-down">Cryptocurrency</v-toolbar-title>
     <v-autocomplete
       v-model="model"
       :items="items"
@@ -27,11 +24,13 @@
           </v-list-item-title>
         </v-list-item>
       </template>
-      <template v-slot:selection="{ item, selected }">
+      <template v-slot:selection="{ attr, on, item, selected }">
         <v-chip
-          :selected="selected"
+          v-bind="attr"
+          :input-value="selected"
           color="blue-grey"
           class="white--text"
+          v-on="on"
         >
           <v-icon left>mdi-coin</v-icon>
           <span v-text="item.name"></span>
@@ -55,8 +54,10 @@
     </v-autocomplete>
     <template v-slot:extension>
       <v-tabs
+        v-model="tab"
         :hide-slider="!model"
-        color="transparent"
+        background-color="transparent"
+        color="blue-grey"
         slider-color="blue-grey"
       >
         <v-tab :disabled="!model">News</v-tab>
@@ -74,9 +75,14 @@
       items: [],
       model: null,
       search: null,
+      tab: null,
     }),
 
     watch: {
+      model (val) {
+        if (val != null) this.tab = 0
+        else this.tab = null
+      },
       search (val) {
         // Items have already been loaded
         if (this.items.length > 0) return

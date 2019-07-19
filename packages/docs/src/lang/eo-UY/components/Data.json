@@ -19,7 +19,7 @@
     "customFilter": "crwdns26736:0crwdne26736:0",
     "serverItemsLength": "crwdns26738:0crwdne26738:0"
   },
-  "scopedSlots": {
+  "slots": {
     "default": "crwdns26740:0crwdne26740:0"
   },
   "events": {

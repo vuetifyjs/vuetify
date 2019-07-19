@@ -262,7 +262,7 @@ export default Themeable.extend({
         this.genItems(props),
         this.genFooter(props),
         getSlot(this, 'footer', outerProps, true),
-      ]) as any
+      ])
     },
   },
 

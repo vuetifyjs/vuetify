@@ -23,9 +23,7 @@
     "large": "Augmenter la taille de police du texte du fil d'ariane"
   },
   "slots": {
-    "divider": "Spécifie le contenu du diviseur"
-  },
-  "scopedSlots": {
+    "divider": "Spécifie le contenu du diviseur",
     "item": "Emplacement personnalisé pour remplacer le rendu par défaut du fil d'ariane"
   }
 }

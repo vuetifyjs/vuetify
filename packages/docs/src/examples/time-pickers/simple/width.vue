@@ -11,7 +11,7 @@
     <v-time-picker
       v-model="time"
       full-width
-      landscape
+      :landscape="$vuetify.breakpoint.mdAndUp"
       type="month"
       class="mt-4"
     ></v-time-picker>

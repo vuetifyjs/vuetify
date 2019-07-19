@@ -11,6 +11,7 @@
       mb-4
       align-center
       justify-start
+      wrap
     >
       <div
         class="mr-4"

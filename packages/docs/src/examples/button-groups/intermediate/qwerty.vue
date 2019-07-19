@@ -13,6 +13,7 @@
       px-2
       pb-2
       justify-space-between
+      wrap
     >
       <v-btn-toggle
         v-model="formatting"

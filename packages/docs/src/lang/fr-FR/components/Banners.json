@@ -1,7 +1,7 @@
 {
   "header": "Bannière",
   "examples": {
-    "scoped-slots": {
+    "actions-slots": {
       "header": "### Emplacements étendus"
     }
   },

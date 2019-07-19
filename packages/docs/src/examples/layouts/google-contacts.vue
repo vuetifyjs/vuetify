@@ -67,7 +67,7 @@
         </template>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar
+    <v-app-bar
       :clipped-left="$vuetify.breakpoint.lgAndUp"
       color="blue darken-3"
       dark
@@ -101,14 +101,14 @@
           >
         </v-avatar>
       </v-btn>
-    </v-toolbar>
+    </v-app-bar>
     <v-content>
       <v-container fluid fill-height>
         <v-layout justify-center align-center>
           <v-tooltip right>
             <template v-slot:activator="{ on }">
               <v-btn :href="source" icon large target="_blank" v-on="on">
-                <v-icon large>code</v-icon>
+                <v-icon large>mdi-code-tags</v-icon>
               </v-btn>
             </template>
             <span>Source</span>

@@ -183,6 +183,7 @@ describe('VAutocomplete.ts', () => {
   it('should not filter text with no items', async () => {
     const wrapper = mountFunction({
       propsData: {
+        eager: true,
         items: ['foo', 'bar'],
       },
     })

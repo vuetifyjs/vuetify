@@ -27,6 +27,14 @@ const MY_ICONS = {
   radioOn: '...',
   radioOff: '...',
   edit: '...',
+  ratingEmpty: '...',
+  ratingFull: '...',
+  ratingHalf: '...',
+  loading: '...',
+  first: '...',
+  last: '...',
+  unfold: '...',
+  file: '...',
 }
 
 Vue.use(Vuetify)

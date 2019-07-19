@@ -27,38 +27,40 @@
             prepend-inner-icon="search"
             label="Search"
           ></v-text-field>
-          <v-spacer></v-spacer>
-          <v-select
-            v-model="sortBy"
-            flat
-            solo-inverted
-            hide-details
-            :items="keys"
-            prepend-inner-icon="search"
-            label="Sort by"
-          ></v-select>
-          <v-spacer></v-spacer>
-          <v-btn-toggle
-            v-model="sortDesc"
-            mandatory
-          >
-            <v-btn
-              large
-              depressed
-              color="blue"
-              :value="false"
+          <template v-if="$vuetify.breakpoint.mdAndUp">
+            <v-spacer></v-spacer>
+            <v-select
+              v-model="sortBy"
+              flat
+              solo-inverted
+              hide-details
+              :items="keys"
+              prepend-inner-icon="search"
+              label="Sort by"
+            ></v-select>
+            <v-spacer></v-spacer>
+            <v-btn-toggle
+              v-model="sortDesc"
+              mandatory
             >
-              <v-icon>arrow_upward</v-icon>
-            </v-btn>
-            <v-btn
-              large
-              depressed
-              color="blue"
-              :value="true"
-            >
-              <v-icon>arrow_downward</v-icon>
-            </v-btn>
-          </v-btn-toggle>
+              <v-btn
+                large
+                depressed
+                color="blue"
+                :value="false"
+              >
+                <v-icon>arrow_upward</v-icon>
+              </v-btn>
+              <v-btn
+                large
+                depressed
+                color="blue"
+                :value="true"
+              >
+                <v-icon>arrow_downward</v-icon>
+              </v-btn>
+            </v-btn-toggle>
+          </template>
         </v-toolbar>
       </template>
 
@@ -96,12 +98,7 @@
       </template>
 
       <template v-slot:footer>
-        <v-toolbar
-          flat
-          dense
-          color="transparent"
-          class="mt-2"
-        >
+        <v-layout mt-2 wrap align-center justify-center>
           <span class="grey--text">Items per page</span>
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
@@ -153,7 +150,7 @@
           >
             <v-icon>keyboard_arrow_right</v-icon>
           </v-btn>
-        </v-toolbar>
+        </v-layout>
       </template>
     </v-data-iterator>
   </v-container>

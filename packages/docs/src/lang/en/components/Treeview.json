@@ -30,8 +30,8 @@
       "desc": "Setting `item-disabled` prop allows to control which node's property disables the node when set to `true`."
     },
     "file-explorer": {
-      "header": "### Scoped slots",
-      "desc": "Using scoped slots we are able to create an intuitive file explorer. Apart from the `prepend` slot, there is also one for the `label`, and an `append` slot."
+      "header": "### Slots",
+      "desc": "Using slots we are able to create an intuitive file explorer. Apart from the `prepend` slot, there is also one for the `label`, and an `append` slot."
     },
     "directory": {
       "header": "### Async items",
@@ -101,7 +101,7 @@
       "value": "Allows one to control which nodes are selected. The array consists of the `item-key` of each selected item. Is used with `@input` event to allow for `v-model` binding."
     }
   },
-  "scopedSlots": {
+  "slots": {
     "v-treeview": {
       "append": "Appends content after label",
       "label": "Label content",

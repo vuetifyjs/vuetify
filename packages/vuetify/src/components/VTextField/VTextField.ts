@@ -54,10 +54,6 @@ export default baseMixins.extend<options>().extend({
       type: String,
       default: '$vuetify.icons.clear',
     },
-    color: {
-      type: String,
-      default: 'primary',
-    },
     counter: [Boolean, Number, String],
     filled: Boolean,
     flat: Boolean,

@@ -57,6 +57,10 @@
       "header": "### Switches - Flat",
       "desc": "You can make switch render without elevation of thumb using `flat` property."
     },
+    "switches-inset": {
+      "header": "### Switches - inset",
+      "desc": "You can make switch render in inset mode."
+    },
     "label-slot": {
       "header": "### Label slot",
       "desc": "Selection controls' labels can be defined in `label` slot - that will allow to use HTML content"
@@ -64,6 +68,7 @@
   },
   "props": {
     "column": "Displays radio buttons in column",
+    "dark": "Components.Inputs.props.dark",
     "flat": "Display component without elevation. Default elevation for thumb is 4dp, `flat` resets it",
     "indeterminate": "Sets an indeterminate state for the checkbox",
     "indeterminateIcon": "The icon used when in an indeterminate state",

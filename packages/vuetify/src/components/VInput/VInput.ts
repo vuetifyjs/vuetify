@@ -7,8 +7,6 @@ import VLabel from '../VLabel'
 import VMessages from '../VMessages'
 
 // Mixins
-import Colorable from '../../mixins/colorable'
-import Themeable from '../../mixins/themeable'
 import Validatable from '../../mixins/validatable'
 
 // Utilities
@@ -22,8 +20,6 @@ import { VNode, VNodeData, PropType } from 'vue'
 import mixins from '../../util/mixins'
 
 const baseMixins = mixins(
-  Colorable,
-  Themeable,
   Validatable
 )
 

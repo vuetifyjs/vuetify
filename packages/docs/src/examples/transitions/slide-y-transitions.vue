@@ -5,7 +5,7 @@
   >
     <v-menu transition="slide-y-transition">
       <template v-slot:activator="{ on }">
-        <v-btn color="primary" v-on="on">
+        <v-btn color="primary" class="ma-2" v-on="on">
           Slide Y Transition
         </v-btn>
       </template>
@@ -20,7 +20,7 @@
 
     <v-menu transition="slide-y-reverse-transition">
       <template v-slot:activator="{ on }">
-        <v-btn color="secondary" v-on="on">
+        <v-btn color="secondary" class="ma-2" v-on="on">
           Slide Y Reverse Transition
         </v-btn>
       </template>

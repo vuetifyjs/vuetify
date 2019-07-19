@@ -87,11 +87,11 @@
     "subheader": "Removes top padding. Used when previous sibling is a header",
     "threeLine": "Increases list-item height for three lines. This prop uses [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) and is not supported in all browsers.",
     "twoLine": "Increases list-item height for two lines. This prop uses [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) and is not supported in all browsers.",
-    "value": "Expands / Collapse list group",
     "v-list-item": {
       "color": "Applies specified color to the control when in an **active** state or **input-value** is **true** - it can be the name of material color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`)",
       "disabled": "Disables the component",
-      "inputValue": "Controls the **active** state of the item. This is typically used to highlight the component"
+      "inputValue": "Controls the **active** state of the item. This is typically used to highlight the component",
+      "value": "The value used when a child of a [v-list-item-group](/components/list-item-groups)."
     },
     "v-list-item-avatar": {
       "color": "Mixins.Colorable.props.color"
@@ -99,7 +99,8 @@
     "v-list-group": {
       "activeClass": "Mixins.Routable.props.activeClass",
       "appendIcon": "Components.Inputs.props.appendIcon",
-      "prependIcon": "Components.Inputs.props.prependIcon"
+      "prependIcon": "Components.Inputs.props.prependIcon",
+      "value": "Expands / Collapse list group"
     }
   }
 }

@@ -24,10 +24,10 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar color="indigo" dark fixed app>
+    <v-app-bar color="indigo" dark fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Application</v-toolbar-title>
-    </v-toolbar>
+    </v-app-bar>
     <v-content>
       <v-container fluid fill-height>
         <v-layout
@@ -38,7 +38,7 @@
             <v-tooltip left>
               <template v-slot:activator="{ on }">
                 <v-btn :href="source" icon large target="_blank" v-on="on">
-                  <v-icon large>code</v-icon>
+                  <v-icon large>mdi-code-tags</v-icon>
                 </v-btn>
               </template>
               <span>Source</span>

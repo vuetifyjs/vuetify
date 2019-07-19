@@ -12,7 +12,7 @@
     </div>
 
     <v-layout row wrap>
-      <v-flex xs2>
+      <v-flex xs12 md3 lg2>
         <v-text-field
           v-model="rotate"
           class="mx-4"
@@ -25,7 +25,7 @@
           @keydown="false"
         ></v-text-field>
       </v-flex>
-      <v-flex xs2>
+      <v-flex xs12 md3 lg2>
         <v-text-field
           v-model="size"
           class="mx-4"
@@ -38,7 +38,7 @@
           @keydown="false"
         ></v-text-field>
       </v-flex>
-      <v-flex xs2>
+      <v-flex xs12 md3 lg2>
         <v-text-field
           v-model="value"
           class="mx-4"
@@ -51,7 +51,7 @@
           @keydown="false"
         ></v-text-field>
       </v-flex>
-      <v-flex xs2>
+      <v-flex xs12 md3 lg2>
         <v-text-field
           v-model="width"
           class="mx-4"
@@ -64,7 +64,7 @@
           @keydown="false"
         ></v-text-field>
       </v-flex>
-      <v-flex xs2>
+      <v-flex xs12 md3 lg2>
         <v-switch v-model="indeterminate" label="Toggle indeterminate" class="mx-4"></v-switch>
       </v-flex>
     </v-layout>

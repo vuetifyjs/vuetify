@@ -1,5 +1,5 @@
 <template>
-  <v-app id="sandbox" :dark="dark">
+  <v-app id="sandbox">
     <v-navigation-drawer
       v-model="primaryDrawer.model"
       :permanent="primaryDrawer.type === 'permanent'"
@@ -11,13 +11,13 @@
       overflow
       app
     ></v-navigation-drawer>
-    <v-toolbar :clipped-left="primaryDrawer.clipped" app absolute>
+    <v-app-bar :clipped-left="primaryDrawer.clipped" app absolute>
       <v-app-bar-nav-icon
         v-if="primaryDrawer.type !== 'permanent'"
         @click.stop="primaryDrawer.model = !primaryDrawer.model"
       ></v-app-bar-nav-icon>
       <v-toolbar-title>Vuetify</v-toolbar-title>
-    </v-toolbar>
+    </v-app-bar>
     <v-content>
       <v-container fluid>
         <v-layout align-center justify-center>
@@ -27,7 +27,7 @@
                 <v-layout row wrap>
                   <v-flex xs12 md6>
                     <span>Scheme</span>
-                    <v-switch v-model="dark" primary label="Dark"></v-switch>
+                    <v-switch v-model="$vuetify.theme.dark" primary label="Dark"></v-switch>
                   </v-flex>
                   <v-flex xs12 md6>
                     <span>Drawer</span>
@@ -69,7 +69,6 @@
 <script>
   export default {
     data: () => ({
-      dark: true,
       drawers: ['Default (no property)', 'Permanent', 'Temporary'],
       primaryDrawer: {
         model: null,

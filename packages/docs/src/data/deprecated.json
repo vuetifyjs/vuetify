@@ -23,6 +23,9 @@
       "open-delay": false,
       "return-value": false
     },
+    "v-chip": {
+      "ripple": false
+    },
     "v-combobox": {
       "activator": false,
       "closeOnClick": false,
@@ -63,6 +66,7 @@
       "height": false
     },
     "v-radio-group": {
+      "color": false,
       "height": false
     },
     "v-switch": {
