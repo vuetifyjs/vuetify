@@ -169,22 +169,10 @@ export default Themeable.extend({
     createItemProps (item: any) {
       const props = {
         item,
-        select: {
-          props: {
-            value: this.isSelected(item),
-          },
-          on: {
-            input: (v: boolean) => this.select(item, v),
-          },
-        },
-        expand: {
-          props: {
-            value: this.isExpanded(item),
-          },
-          on: {
-            input: (v: boolean) => this.expand(item, v),
-          },
-        },
+        select: (v: boolean) => this.select(item, v),
+        isSelected: this.isSelected(item),
+        expand: (v: boolean) => this.expand(item, v),
+        isExpanded: this.isExpanded(item),
       }
 
       return props
