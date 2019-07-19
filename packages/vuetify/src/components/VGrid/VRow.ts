@@ -23,14 +23,14 @@ const alignProps = makeProps('align', () => ({
   validator: alignValidator,
 }))
 
-const justifyValidator = (str: any) => [...ALIGNMENT, 'between', 'around'].includes(str)
+const justifyValidator = (str: any) => [...ALIGNMENT, 'space-between', 'space-around'].includes(str)
 const justifyProps = makeProps('justify', () => ({
   type: String,
   default: null,
   validator: justifyValidator,
 }))
 
-const alignContentValidator = (str: any) => [...ALIGNMENT, 'between', 'around', 'stretch'].includes(str)
+const alignContentValidator = (str: any) => [...ALIGNMENT, 'space-between', 'space-around', 'stretch'].includes(str)
 const alignContentProps = makeProps('alignContent', () => ({
   type: String,
   default: null,

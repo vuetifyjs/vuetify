@@ -66,8 +66,8 @@ $utilities: map-merge(
         start: flex-start,
         end: flex-end,
         center: center,
-        between: space-between,
-        around: space-around,
+        space-between: space-between,
+        space-around: space-around,
       )
     ),
     "align-items": (
@@ -89,8 +89,8 @@ $utilities: map-merge(
         start: flex-start,
         end: flex-end,
         center: center,
-        between: space-between,
-        around: space-around,
+        space-between: space-between,
+        space-around: space-around,
         stretch: stretch,
       )
     ),
