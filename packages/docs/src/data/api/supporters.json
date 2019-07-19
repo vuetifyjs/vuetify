@@ -1,194 +1,150 @@
 {
-  "diamond": [
+  "1500": [
+    {
+      "name": "Fractal Industries",
+      "href": "https://www.fractalindustries.com/",
+      "logo": "backers/fractal-industries.png"
+    }
+  ],
+  "500": [
     {
       "type": "Patron",
       "name": "LMAX Exchange",
       "href": "https://careers.lmax.com/?utm_source=vuetify&utm_medium=logo-link&utm_campaign=lmax-careers",
-      "logo": "backers/lmax-exchange.png",
-      "pledge": "Diamond ($500)"
+      "logo": "backers/lmax-exchange.png"
     },
     {
       "name": "Intygrate",
       "logo": "backers/intygrate.png",
-      "href": "http://intygrate.com/",
-      "type": "Patron",
-      "pledge": "Diamond ($500)"
+      "href": "http://intygrate.com/"
     },
     {
       "name": "ResaleAI",
       "logo": "backers/resaleai_logo_blue.svg",
-      "href": "http://resaleai.com/",
-      "type": "Patron",
-      "pledge": "Diamond ($500)"
+      "href": "http://resaleai.com/"
     }
   ],
-  "palladium": [
+  "250": [
     {
       "name": "rateGenius",
       "href": "https://application.rategenius.com/",
-      "logo": "backers/rate-genius.png",
-      "type": "Patron",
-      "pledge": "Palladium ($250)"
+      "logo": "backers/rate-genius.png"
     },
     {
       "name": "Clearblue Technologies",
       "href": "http://www.clearbluetechnologies.com/",
-      "logo": "backers/clear-blue.png",
-      "type": "Patron",
-      "pledge": "Palladium ($250)"
+      "logo": "backers/clear-blue.png"
     },
     {
       "name": "DigitalMaas",
       "href": "https://www.digitalmaas.com/",
-      "logo": "backers/digital-maas.svg",
-      "type": "Patron",
-      "pledge": "Palladium ($250)"
-    },
-    {
-      "name": "Fractal Industries",
-      "href": "https://www.fractalindustries.com/",
-      "logo": "backers/fractal-industries.png",
-      "type": "Patron",
-      "pledge": "Palladium ($250)"
+      "logo": "backers/digital-maas.svg"
     }
   ],
-  "gold": [
+  "50": [
     {
       "name": "Deister Software",
       "href": "http://www.deister.es/",
-      "logo": "backers/deister-logo-light.png",
-      "type": "Patron",
-      "pledge": "Gold ($50)"
+      "logo": "backers/deister-logo-light.png"
     },
     {
       "name": "Cycloid",
       "href": "https://www.cycloid.io/",
-      "logo": "backers/cycloid.png",
-      "type": "Patron",
-      "pledge": "Gold ($50)"
+      "logo": "backers/cycloid.png"
     },
     {
       "name": "Zweidenker",
       "href": "http://zweidenker.de/",
-      "logo": "backers/zweidenker-logo-grey.svg",
-      "type": "Patron",
-      "pledge": "Gold ($50)"
+      "logo": "backers/zweidenker-logo-grey.svg"
     },
     {
       "name": "Identity Panel",
       "href": "https://support.identitypanel.com/",
-      "logo": "backers/identity-panel.png",
-      "type": "Patron",
-      "pledge": "Gold ($50)"
+      "logo": "backers/identity-panel.png"
     },
     {
       "name": "Hohenstein",
       "href": "https://www.hohenstein.de/en/home/home.xhtml",
-      "logo": "backers/hohenstein.svg",
-      "type": "Patron",
-      "pledge": "Gold ($50)"
+      "logo": "backers/hohenstein.svg"
     },
     {
       "name": "P2L Technologies",
       "href": "https://p2l.tech/",
-      "logo": "backers/p2l.png",
-      "type": "Patron",
-      "pledge": "Gold ($50)"
+      "logo": "backers/p2l.png"
     },
     {
       "name": "madhead",
       "href": "https://www.madhead.com/",
-      "logo": "backers/madhead.png",
-      "type": "Patron",
-      "pledge": "Gold ($50)"
+      "logo": "backers/madhead.png"
     },
     {
       "name": "Elfo",
       "href": "http://www.elfo.net/",
-      "logo": "backers/elfo.svg",
-      "type": "Patron",
-      "pledge": "Gold ($50)"
+      "logo": "backers/elfo.svg"
     },
     {
       "name": "CodeFirst",
       "href": "https://www.codefirst.co.uk/",
-      "logo": "backers/code-first.png",
-      "type": "Patron",
-      "pledge": "Gold ($50)"
+      "logo": "backers/code-first.png"
     },
     {
       "name": "Custom Essay Meister",
       "href": "https://www.customessaymeister.com/",
-      "logo": "backers/essay-meister.svg",
-      "type": "Patron",
-      "pledge": "Gold ($50)"
+      "logo": "backers/essay-meister.svg"
     },
     {
       "name": "NoteRiot",
       "href": "https://note.riot.ai/",
-      "logo": "backers/note-riot.png",
-      "type": "Patron",
-      "pledge": "Gold ($50)"
+      "logo": "backers/note-riot.png"
     },
     {
       "name": "blokt",
       "href": "https://blokt.com/",
-      "logo": "backers/blokt.png",
-      "type": "Patron",
-      "pledge": "Gold ($50)"
+      "logo": "backers/blokt.png"
     },
     {
       "name": "Loomio",
       "href": "https://www.loomio.org/",
-      "logo": "backers/loomio.svg",
-      "type": "Patron",
-      "pledge": "Gold ($50)"
+      "logo": "backers/loomio.svg"
+    },
+    {
+      "name": "Toolio",
+      "href": "http://www.toolio.com/",
+      "logo": "backers/toolio.png"
     }
   ],
-  "affiliates": [
+  "affiliate": [
     {
       "name": "VueJobs",
       "logo": "affiliates/vuejobs-logo.svg",
-      "href": "https://vuejobs.com/?utm_source=vuejobs&utm_medium=affiliates&utm_campaign=linking",
-      "type": "Affiliate"
+      "href": "https://vuejobs.com/?utm_source=vuejobs&utm_medium=affiliates&utm_campaign=linking"
     },
     {
       "name": "Made with Vue.js",
       "href": "https://madewithvuejs.com",
-      "logo": "affiliates/madewithvuejs.png",
-      "type": "Affiliate"
-    },
-    {
-      "name": "Vue.js Radar",
-      "href": "https://vuejsradar.com",
-      "logo": "affiliates/vueradar2.png",
-      "type": "Affiliate"
+      "logo": "affiliates/madewithvuejs.png"
     }
   ],
   "service": [
     {
       "name": "Cloudflare",
       "href": "https://www.cloudflare.com/",
-      "logo": "sponsors/cloudflare.svg",
-      "type": "Service Sponsor"
+      "logo": "sponsors/cloudflare.svg"
     },
     {
       "name": "Browserstack",
       "href": "https://www.browserstack.com/",
-      "logo": "sponsors/browser-stack.png",
-      "type": "Service Sponsor"
+      "logo": "sponsors/browser-stack.png"
     },
     {
       "name": "Crowdin",
       "href": "https://www.crowdin.com/",
-      "logo": "sponsors/crowdin.png",
-      "type": "Service Sponsor"
+      "logo": "sponsors/crowdin.png"
     },
     {
       "name": "Zeit Now",
       "href": "https://zeit.co/now",
-      "logo": "sponsors/zeit-now.svg",
-      "type": "Service Sponsor"
+      "logo": "sponsors/zeit-now.svg"
     }
   ]
 }

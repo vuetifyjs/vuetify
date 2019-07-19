@@ -12,32 +12,39 @@
         pa-0
       >
         <supporter-group
+          v-if="tier.includes(0)"
+          :group="supporters['1500']"
+          :title="!hideTitles ? '$1500/mo' : undefined"
+          :class="classes"
+          :x-large="!compact"
+        />
+
+        <supporter-group
           v-if="tier.includes(1)"
-          :group="supporters.diamond"
-          :title="!hideTitles ? 'Diamond' : undefined"
+          :group="supporters['500']"
+          :title="!hideTitles ? '$500/mo' : undefined"
           :class="classes"
           :large="!compact"
-          :small="compact"
         />
 
         <supporter-group
           v-if="tier.includes(2)"
-          :group="supporters.palladium"
-          :title="!hideTitles ? 'Palladium' : undefined"
+          :group="supporters['250']"
+          :title="!hideTitles ? '$250/mo' : undefined"
           :class="classes"
         />
 
         <supporter-group
           v-if="tier.includes(3)"
-          :group="supporters.gold"
-          :title="!hideTitles ? 'Gold' : undefined"
+          :group="supporters['50']"
+          :title="!hideTitles ? '$50/mo' : undefined"
           :class="classes"
           small
         />
 
         <supporter-group
           v-if="tier.includes(4)"
-          :group="supporters.affiliates"
+          :group="supporters.affiliate"
           :title="!hideTitles ? 'Affiliate' : undefined"
           :class="classes"
           small
@@ -96,15 +103,7 @@
     },
 
     async created () {
-      // if (this.$ssrContext || Object.keys(this.supporters).length) return
-
       const supporters = require('@/data/api/supporters.json')
-
-      // const supporters = await fetch('https://cdn.vuetifyjs.com/supporters.json', {
-      //   headers: {
-      //     'Access-Control-Allow-Origin': '*'
-      //   }
-      // }).then(res => res.json())
 
       if (supporters) this.setSupporters(supporters)
     },

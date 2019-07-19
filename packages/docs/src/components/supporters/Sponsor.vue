@@ -2,7 +2,7 @@
   <v-card
     :aria-label="`Supporter ${value.name}`"
     :href="value.href"
-    :width="small ? 130 : large ? 195 : 160"
+    :width="width"
     flat
     tile
     color="transparent"
@@ -13,7 +13,7 @@
     <v-img
       :alt="value.name"
       :class="value.dark ? 'black' : ''"
-      :height="small ? 40 : 70"
+      :height="height"
       :src="`https://cdn.vuetifyjs.com/images/${value.logo}`"
       class="flex-shrink-1"
       contain
@@ -36,6 +36,25 @@
       value: {
         type: Object,
         required: true,
+      },
+      xLarge: {
+        type: Boolean,
+        default: false,
+      },
+    },
+
+    computed: {
+      height () {
+        if (this.xLarge) return 100
+        if (this.large) return 80
+        if (this.small) return 30
+        return 40
+      },
+      width () {
+        if (this.xLarge) return 205
+        if (this.large) return 175
+        if (this.small) return 115
+        return 140
       },
     },
   }

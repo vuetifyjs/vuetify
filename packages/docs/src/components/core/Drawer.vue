@@ -12,12 +12,14 @@
       <div class="text-center">
         <h4 class="title grey--text text--darken-2">Premiere sponsor</h4>
 
-        <span class="d-block mb-4 overline grey--text">
-          Your logo here
-        </span>
+        <supporters-sponsors
+          :tier="[0]"
+          dense
+          hide-titles
+        />
 
         <supporters-sponsor-btn
-          class="mb-6"
+          class="mb-6 mt-4"
           href="https://www.patreon.com/join/vuetify"
         />
 

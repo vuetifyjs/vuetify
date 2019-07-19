@@ -4,16 +4,16 @@
     pa-0
   >
 
-    <supporters-patreon-sub />
+    <supporters-sub-github />
 
-    <supporters-open-collective-sub />
+    <supporters-sub-open-collective />
 
-    <supporters-tidelift-sub />
+    <supporters-sub-tidelift />
 
-    <supporters-one-time />
+    <supporters-sub-paypal />
 
     <v-flex xs12>
-      <doc-heading>patrons</doc-heading>
+      <doc-heading>sponsors</doc-heading>
     </v-flex>
 
     <v-flex
@@ -22,6 +22,6 @@
       tag="v-divider"
     />
 
-    <supporters-patrons />
+    <supporters-sponsors />
   </v-container>
 </template>
