@@ -1,7 +1,7 @@
 <template>
   <div
     v-ripple
-    class="text-xs-center elevation-2 pa-5 headline"
+    class="text-center elevation-2 pa-12 headline"
   >
     HTML element with v-ripple
   </div>

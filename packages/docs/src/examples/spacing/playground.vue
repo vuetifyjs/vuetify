@@ -65,7 +65,7 @@
             class="light-green lighten-3"
           )
             div(
-              class="white text-xs-center"
+              class="white text-center"
               v-text="$t('Styles.Spacing.playgroundText2')"
             )
 </template>

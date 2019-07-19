@@ -17,9 +17,7 @@
         value="true"
       >
         <template v-slot:activator>
-          <v-list-item>
-            <v-list-item-title>Users</v-list-item-title>
-          </v-list-item>
+          <v-list-item-title>Users</v-list-item-title>
         </template>
 
         <v-list-group
@@ -28,11 +26,9 @@
           value="true"
         >
           <template v-slot:activator>
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title>Admin</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>Admin</v-list-item-title>
+            </v-list-item-content>
           </template>
 
           <v-list-item
@@ -52,11 +48,9 @@
           no-action
         >
           <template v-slot:activator>
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title>Actions</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>Actions</v-list-item-title>
+            </v-list-item-content>
           </template>
           <v-list-item
             v-for="(crud, i) in cruds"

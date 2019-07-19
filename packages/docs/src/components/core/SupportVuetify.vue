@@ -1,7 +1,7 @@
 <template>
   <v-card
     aria-label="Support the Development of Vuetify"
-    class="mb-5"
+    class="mb-12"
     href="https://www.patreon.com/vuetify"
     rel="noopener"
     target="_blank"
@@ -17,7 +17,7 @@
           <v-layout align-center row wrap>
             <v-flex
               display-1
-              mr-4
+              mr-6
               patreon
               d-flex
               xs12
@@ -25,8 +25,8 @@
             >
               PATREON
             </v-flex>
-            <v-flex hidden-xs-only patreon-bar mr-4 />
-            <v-flex hidden-sm-and-up patreon-bar-horizontal mr-4 />
+            <v-flex hidden-xs-only patreon-bar mr-6 />
+            <v-flex hidden-sm-and-up patreon-bar-horizontal mr-6 />
             <v-flex xs12 sm6 display-1 patreon-caption pb-1>
               Support Vuetify
             </v-flex>
@@ -35,7 +35,7 @@
         <v-flex
           :style="{ order: $vuetify.breakpoint.xs ? '1' : '2' }"
           align-center
-          text-xs-center
+          text-center
           xs2
           d-flex
         >

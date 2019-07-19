@@ -35,7 +35,7 @@
         >
           <div>{{ props.item.iron }}</div>
           <template v-slot:input>
-            <div class="mt-3 title">Update Iron</div>
+            <div class="mt-4 title">Update Iron</div>
           </template>
           <template v-slot:input>
             <v-text-field

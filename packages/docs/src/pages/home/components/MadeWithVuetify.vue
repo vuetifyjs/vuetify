@@ -1,7 +1,7 @@
 <template>
   <v-card
     v-if="featured.length > 0"
-    class="text-xs-center py-5"
+    class="text-center py-12"
     flat
   >
     <h3
@@ -11,7 +11,7 @@
 
     <v-container
       grid-list-xl
-      mb-3
+      mb-4
     >
       <v-layout
         align-center
@@ -54,7 +54,7 @@
                         v-text="feature.title"
                       />
                       <div
-                        class="overline grey--text mb-5 px-4"
+                        class="overline grey--text mb-12 px-6"
                         v-text="feature.teaser"
                       />
                       <v-btn
@@ -76,7 +76,7 @@
       </v-layout>
     </v-container>
 
-    <div class="text-xs-center">
+    <div class="text-center">
       <a
         aria-label="Link to madewithvuejs.com"
         href="https://madewithvuejs.com/vuetify?ref=vuetifyjs.com"

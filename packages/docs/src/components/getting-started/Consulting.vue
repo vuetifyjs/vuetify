@@ -1,6 +1,6 @@
 <template>
   <v-layout
-    justify-between
+    justify-space-between
     wrap
   >
     <v-flex
@@ -26,8 +26,8 @@
       xs12
       md4
     >
-      <div class="text-xs-center d-inline-block">
-        <v-avatar size="156" class="mx-3 mb-2 mt-3 elevation-8">
+      <div class="text-center d-inline-block">
+        <v-avatar size="156" class="mx-4 mb-2 mt-4 elevation-8">
           <v-img src="https://cdn.vuetifyjs.com/images/john.png" />
         </v-avatar>
         <div class="body-1">John Leider</div>
@@ -36,10 +36,10 @@
     </v-flex>
     <v-flex
       xs12
-      mt-4
+      mt-6
     >
       <v-card outlined>
-        <v-card-title class="pb-3 primary">
+        <v-card-title class="pb-4 primary">
           <h2 class="title white--text">
             <v-icon color="white" class="mr-2">mdi-calendar</v-icon>
             <span>Schedule an Appointment</span>

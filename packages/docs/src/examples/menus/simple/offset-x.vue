@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xs-center">
+  <div class="text-center">
     <v-switch v-model="offset" label="X offset"></v-switch>
     <v-menu top :offset-x="offset">
       <template v-slot:activator="{ on }">

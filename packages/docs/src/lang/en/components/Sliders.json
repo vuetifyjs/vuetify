@@ -11,7 +11,7 @@
     },
     "custom-thumb": {
       "header": "### Custom Range slider",
-      "desc": " Using the `tick-labels` prop along with a scoped slot, you can create a very customized solution."
+      "desc": " Using the `tick-labels` prop along with slots, you can create a very customized solution."
     },
     "ticks": {
       "header": "### Ticks",
@@ -90,7 +90,7 @@
     "start": "Slider value emitted at start of slider movement",
     "update:error": "Mixins.Validatable.events['update:error']"
   },
-  "scopedSlots": {
+  "slots": {
     "thumb-label": "Replaces the content inside the thumb label"
   }
 }

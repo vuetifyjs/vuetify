@@ -99,7 +99,7 @@ module.exports = {
         example: TableHeader,
       },
     ].concat(DataIteratorProps).concat(DataProps),
-    scopedSlots: DataTableSlots,
+    slots: DataTableSlots,
     events: DataTableEvents,
   },
   TableHeader,

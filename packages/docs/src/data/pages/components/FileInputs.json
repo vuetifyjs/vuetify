@@ -33,7 +33,7 @@
             "simple/size",
             "simple/counter",
             "simple/custom-icon",
-            "intermediate/scoped-slots",
+            "intermediate/selection",
             "intermediate/validation",
             "complex/advanced"
           ]

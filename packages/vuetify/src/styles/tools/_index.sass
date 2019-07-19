@@ -4,3 +4,12 @@
 @import './_rtl'
 @import './_states'
 @import './_theme'
+@import './_utilities'
+
+=media-breakpoint-up($name, $breakpoints: $grid-breakpoints)
+  $min: breakpoint-min($name, $breakpoints)
+  @if $min
+    @media (min-width: $min)
+      @content
+  @else
+    @content

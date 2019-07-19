@@ -113,7 +113,7 @@ exports[`VCheckbox.ts should use custom icons 2`] = `
 
 exports[`VCheckbox.ts should use custom icons 3`] = `
 
-<div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-input--selection-controls v-input--checkbox v-input--indeterminate">
+<div class="v-input theme--light v-input--selection-controls v-input--checkbox v-input--indeterminate">
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-input--selection-controls__input">
@@ -121,7 +121,7 @@ exports[`VCheckbox.ts should use custom icons 3`] = `
                id="input-91"
                role="checkbox"
                type="checkbox"
-               value="buzz"
+               value="fizz"
         >
         <div class="v-input--selection-controls__ripple">
         </div>

@@ -28,7 +28,7 @@ export default mixins(header).extend({
       }
 
       const classes = [
-        `text-xs-${header.align || 'start'}`,
+        `text-${header.align || 'start'}`,
         ...wrapInArray(header.class),
       ]
 

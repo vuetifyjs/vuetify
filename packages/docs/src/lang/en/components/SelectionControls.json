@@ -94,6 +94,7 @@
   },
   "events": {
     "change": "Components.Inputs.events.change",
+    "update:indeterminate": "The **indeterminate.sync** event.",
     "update:error": "Mixins.Validatable.events['update:error']"
   }
 }
