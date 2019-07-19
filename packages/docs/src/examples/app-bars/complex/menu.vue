@@ -31,9 +31,16 @@
         <v-icon>favorite</v-icon>
       </v-btn>
 
-      <v-menu bottom left>
+      <v-menu
+        bottom
+        left
+      >
         <template v-slot:activator="{ on }">
-          <v-btn icon color="yellow" v-on="on">
+          <v-btn
+            icon
+            color="yellow"
+            v-on="on"
+          >
             <v-icon>more_vert</v-icon>
           </v-btn>
         </template>
@@ -49,7 +56,10 @@
       </v-menu>
 
       <template v-slot:extension>
-        <v-tabs align-with-title>
+        <v-tabs
+          align-with-title
+          background-color="transparent"
+        >
           <v-tab>Tab 1</v-tab>
           <v-tab>Tab 2</v-tab>
           <v-tab>Tab 3</v-tab>
