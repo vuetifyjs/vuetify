@@ -1,13 +1,13 @@
 <template>
   <div
     v-scroll="onScroll"
-    class="mb-5"
+    class="mb-12"
     v-on="$listeners"
   >
     <slot name="top" />
 
     <ul class="app-table-of-contents">
-      <li class="grey--text text--darken-3 pl-3 mb-2 body-1">Contents</li>
+      <li class="grey--text text--darken-3 pl-4 mb-2 body-1">Contents</li>
       <li
         v-for="(item, i) in list"
         :key="i"

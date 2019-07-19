@@ -1,5 +1,5 @@
 <template>
-  <v-container grid-list-xl text-xs-center>
+  <v-container grid-list-xl text-center>
     <v-layout row wrap>
       <v-flex xs10 offset-xs1>
         <v-card dark color="purple">

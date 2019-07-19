@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VRow.ts should render with regular slots 1`] = `
+exports[`MobileRow should render with regular slots 1`] = `
 
 <tr>
   <td class="v-data-table__mobile-row">
@@ -31,7 +31,7 @@ exports[`VRow.ts should render with regular slots 1`] = `
 
 `;
 
-exports[`VRow.ts should render with scoped slots 1`] = `
+exports[`MobileRow should render with scoped slots 1`] = `
 
 <tr>
   <td class="v-data-table__mobile-row">
@@ -62,7 +62,7 @@ exports[`VRow.ts should render with scoped slots 1`] = `
 
 `;
 
-exports[`VRow.ts should render without slots 1`] = `
+exports[`MobileRow should render without slots 1`] = `
 
 <tr>
   <td class="v-data-table__mobile-row">

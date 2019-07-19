@@ -2,7 +2,7 @@
   <v-container id="long-term-support" px-0>
     <v-card
       outlined
-      class="mb-5"
+      class="mb-12"
     >
       <v-card-title>
         <doc-subheading>2header</doc-subheading>

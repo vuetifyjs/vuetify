@@ -14,11 +14,11 @@ import VDataTableHeader from './VDataTableHeader'
 import VVirtualTable from './VVirtualTable'
 import VIcon from '../VIcon'
 import VProgressLinear from '../VProgressLinear'
-import VRow from './VRow'
-import VRowGroup from './VRowGroup'
+import Row from './Row'
+import RowGroup from './RowGroup'
 import VSimpleCheckbox from '../VCheckbox/VSimpleCheckbox'
 import VSimpleTable from './VSimpleTable'
-import VMobileRow from './VMobileRow'
+import MobileRow from './MobileRow'
 import ripple from '../../directives/ripple'
 
 // Helpers
@@ -322,7 +322,7 @@ export default VDataIterator.extend({
         }, [this.$createElement(VIcon, ['close'])])
 
         const column = this.$createElement('td', {
-          staticClass: 'text-xs-start',
+          staticClass: 'text-start',
           attrs: {
             colspan: this.computedHeadersLength,
           },
@@ -337,7 +337,7 @@ export default VDataIterator.extend({
         ]))
       }
 
-      return this.$createElement(VRowGroup, {
+      return this.$createElement(RowGroup, {
         key: group,
         props: {
           value: isOpen,
@@ -372,7 +372,7 @@ export default VDataIterator.extend({
         staticClass: 'expanded expanded__content',
       }, [this.$scopedSlots['expanded-item']!({ item, headers: this.computedHeaders })])
 
-      return this.$createElement(VRowGroup, {
+      return this.$createElement(RowGroup, {
         props: {
           value: isExpanded,
         },
@@ -428,7 +428,7 @@ export default VDataIterator.extend({
         }, [this.expandIcon])
       }
 
-      return this.$createElement(this.isMobile ? VMobileRow : VRow, {
+      return this.$createElement(this.isMobile ? MobileRow : Row, {
         key: getObjectValueByPath(item, this.itemKey),
         class: classes,
         props: {

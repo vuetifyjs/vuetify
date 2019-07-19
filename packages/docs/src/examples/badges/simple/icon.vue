@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xs-center">
+  <div class="text-center">
     <v-badge left color="purple">
       <template v-slot:badge>
         <v-icon dark>mdi-adjust</v-icon>

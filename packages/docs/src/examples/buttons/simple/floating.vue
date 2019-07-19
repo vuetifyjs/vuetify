@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xs-center">
+  <div class="text-center">
     <v-btn class="mx-2" fab dark small color="primary">
       <v-icon dark>remove</v-icon>
     </v-btn>

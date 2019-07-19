@@ -2,7 +2,7 @@
   <v-alert
     :type="value"
     border="left"
-    class="app-alert mb-3"
+    class="app-alert mb-4"
     value
   >
     <doc-markdown><slot /></doc-markdown>

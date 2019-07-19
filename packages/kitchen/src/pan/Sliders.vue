@@ -4,7 +4,7 @@
       <v-layout v-for="i in 2" :key="`basic_${i}`">
         <!-- Basic -->
         <v-flex>
-          <h3 v-if="i === 1" class="title grey--text mb-4 mt-5 center">
+          <h3 v-if="i === 1" class="title grey--text mb-6 mt-12 center">
             Basic
           </h3>
           <v-layout row align-center>
@@ -13,7 +13,7 @@
         </v-flex>
 
         <v-flex>
-          <h3 v-if="i === 1" class="title grey--text mb-4 mt-5 center">
+          <h3 v-if="i === 1" class="title grey--text mb-6 mt-12 center">
             Disabled
           </h3>
           <v-layout row align-center>
@@ -22,7 +22,7 @@
         </v-flex>
 
         <v-flex>
-          <h3 v-if="i === 1" class="title grey--text mb-4 mt-5 center">
+          <h3 v-if="i === 1" class="title grey--text mb-6 mt-12 center">
             Read only
           </h3>
           <v-layout row align-center>
@@ -34,7 +34,7 @@
       <!-- Labels -->
       <v-layout v-for="i in 2" :key="`labels_${i}`">
         <v-flex>
-          <h3 v-if="i === 1" class="title grey--text mb-4 mt-5 center">
+          <h3 v-if="i === 1" class="title grey--text mb-6 mt-12 center">
             Label
           </h3>
           <v-layout row align-center>
@@ -43,7 +43,7 @@
         </v-flex>
 
         <v-flex>
-          <h3 v-if="i === 1" class="title grey--text mb-4 mt-5 center">
+          <h3 v-if="i === 1" class="title grey--text mb-6 mt-12 center">
             Inverse label
           </h3>
           <v-layout row align-center>
@@ -55,7 +55,7 @@
       <!-- Icons -->
       <v-layout v-for="i in 2" :key="`icons_${i}`">
         <v-flex>
-          <h3 v-if="i === 1" class="title grey--text mb-4 mt-5 center">
+          <h3 v-if="i === 1" class="title grey--text mb-6 mt-12 center">
             Icons
           </h3>
           <v-layout row align-center>
@@ -67,7 +67,7 @@
       <!-- Colors -->
       <v-layout v-for="i in 2" :key="`colors_${i}`">
         <v-flex>
-          <h3 v-if="i === 1" class="title grey--text mb-4 mt-5 center">
+          <h3 v-if="i === 1" class="title grey--text mb-6 mt-12 center">
             Colors
           </h3>
           <v-layout row align-center>
@@ -86,7 +86,7 @@
       <!-- Min/max -->
       <v-layout v-for="i in 2" :key="`minmax_${i}`">
         <v-flex>
-          <h3 v-if="i === 1" class="title grey--text mb-4 mt-5 center">
+          <h3 v-if="i === 1" class="title grey--text mb-6 mt-12 center">
             Min/max ({{ minmax }})
           </h3>
           <v-layout row align-center>
@@ -98,7 +98,7 @@
       <!-- Steps (and ticks) -->
       <v-layout v-for="i in 2" :key="`steps_${i}`">
         <v-flex>
-          <h3 v-if="i === 1" class="title grey--text mb-4 mt-5 center">
+          <h3 v-if="i === 1" class="title grey--text mb-6 mt-12 center">
             Steps
           </h3>
           <v-layout row align-center>
@@ -107,7 +107,7 @@
         </v-flex>
 
         <v-flex>
-          <h3 v-if="i === 1" class="title grey--text mb-4 mt-5 center">
+          <h3 v-if="i === 1" class="title grey--text mb-6 mt-12 center">
             Steps and ticks on move
           </h3>
           <v-layout row align-center>
@@ -116,7 +116,7 @@
         </v-flex>
 
         <v-flex>
-          <h3 v-if="i === 1" class="title grey--text mb-4 mt-5 center">
+          <h3 v-if="i === 1" class="title grey--text mb-6 mt-12 center">
             Steps and always ticks
           </h3>
           <v-layout row align-center>
@@ -125,7 +125,7 @@
         </v-flex>
 
         <v-flex>
-          <h3 v-if="i === 1" class="title grey--text mb-4 mt-5 center">
+          <h3 v-if="i === 1" class="title grey--text mb-6 mt-12 center">
             Tick size
           </h3>
           <v-layout row align-center>
@@ -137,7 +137,7 @@
       <!-- Thumb and tick label -->
       <v-layout v-for="i in 2" :key="`thumbs_${i}`">
         <v-flex>
-          <h3 v-if="i === 1" class="title grey--text mb-4 mt-5 center">
+          <h3 v-if="i === 1" class="title grey--text mb-6 mt-12 center">
             Thumb label on move
           </h3>
           <v-layout row align-center>
@@ -146,7 +146,7 @@
         </v-flex>
 
         <v-flex>
-          <h3 v-if="i === 1" class="title grey--text mb-4 mt-5 center">
+          <h3 v-if="i === 1" class="title grey--text mb-6 mt-12 center">
             Thumb label always
           </h3>
           <v-layout row align-center>
@@ -155,7 +155,7 @@
         </v-flex>
 
         <v-flex>
-          <h3 v-if="i === 1" class="title grey--text mb-4 mt-5 center">
+          <h3 v-if="i === 1" class="title grey--text mb-6 mt-12 center">
             Thumb label size
           </h3>
           <v-layout row align-center>
@@ -164,7 +164,7 @@
         </v-flex>
 
         <v-flex>
-          <h3 v-if="i === 1" class="title grey--text mb-4 mt-5 center">
+          <h3 v-if="i === 1" class="title grey--text mb-6 mt-12 center">
             Tick labels
           </h3>
           <v-layout row align-center>
@@ -176,7 +176,7 @@
       <!-- Validation -->
       <v-layout v-for="i in 2" :key="`validation_${i}`">
         <v-flex>
-          <h3 v-if="i === 1" class="title grey--text mb-4 mt-5 center">
+          <h3 v-if="i === 1" class="title grey--text mb-6 mt-12 center">
             Validation
           </h3>
           <v-layout row align-center>
@@ -184,7 +184,7 @@
           </v-layout>
         </v-flex>
         <v-flex>
-          <h3 v-if="i === 1" class="title grey--text mb-4 mt-5 center">
+          <h3 v-if="i === 1" class="title grey--text mb-6 mt-12 center">
             Validation with thumb-label
           </h3>
           <v-layout row align-center>
@@ -196,7 +196,7 @@
       <!-- Range -->
       <v-layout v-for="i in 2" :key="`range_${i}`">
         <v-flex>
-          <h3 v-if="i === 1" class="title grey--text mb-4 mt-5 center">
+          <h3 v-if="i === 1" class="title grey--text mb-6 mt-12 center">
             Basic range
           </h3>
           <v-layout row align-center>
@@ -204,7 +204,7 @@
           </v-layout>
         </v-flex>
         <v-flex>
-          <h3 v-if="i === 1" class="title grey--text mb-4 mt-5 center">
+          <h3 v-if="i === 1" class="title grey--text mb-6 mt-12 center">
             Disabled range
           </h3>
           <v-layout row align-center>
@@ -212,7 +212,7 @@
           </v-layout>
         </v-flex>
         <v-flex>
-          <h3 v-if="i === 1" class="title grey--text mb-4 mt-5 center">
+          <h3 v-if="i === 1" class="title grey--text mb-6 mt-12 center">
             Disabled range
           </h3>
           <v-layout row align-center>

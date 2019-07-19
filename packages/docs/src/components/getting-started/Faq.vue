@@ -5,7 +5,7 @@
   >
     <v-layout wrap>
       <v-flex
-        mb-3
+        mb-4
         xs12
       >
         <v-text-field
@@ -19,7 +19,7 @@
       </v-flex>
       <v-flex
         xs12
-        mb-5
+        mb-12
       >
         <v-data-iterator
           :items="gotchas"
@@ -29,12 +29,12 @@
           disable-pagination
         >
           <template v-slot:item="{ item: gotcha, index }">
-            <div class="mb-5">
+            <div class="mb-12">
               <core-goto :id="`question-${index + 1}`">
                 <doc-markdown :code="gotcha.q" />
               </core-goto>
               <v-card
-                class="pa-3"
+                class="pa-4"
                 outlined
               >
                 <doc-markdown :code="gotcha.a" />
@@ -47,7 +47,7 @@
                 <doc-markup
                   v-if="gotcha.s"
                   :value="gotcha.s"
-                  class="mb-0 mt-3"
+                  class="mb-0 mt-4"
                 />
               </v-card>
             </div>

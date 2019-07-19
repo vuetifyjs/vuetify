@@ -31,9 +31,9 @@
 
       <div
         v-if="structure.titleText"
-        class="mb-5"
+        class="mb-12"
       >
-        <doc-text class="mb-4">
+        <doc-text class="mb-6">
           {{ structure.titleText }}
         </doc-text>
       </div>

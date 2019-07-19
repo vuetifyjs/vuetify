@@ -1,7 +1,7 @@
 <template>
   <v-chip
     color="#f6914d"
-    class="pr-5 v-tidelift"
+    class="pr-12 v-tidelift"
     href="https://tidelift.com/subscription/npm/vuetify?utm_source=vuetify&utm_medium=referral&utm_campaign=homepage"
     rel="noopener"
     target="_blank"
@@ -9,7 +9,7 @@
     <v-img
       alt="Tidelift"
       left
-      class="mr-3"
+      class="mr-4"
       src="https://cdn.vuetifyjs.com/images/affiliates/tidelift-small.png"
       width="24px"
     />

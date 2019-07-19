@@ -1,7 +1,7 @@
 <template>
   <v-layout
     id="patreon"
-    mb-5
+    mb-12
     tag="section"
     wrap
   >
@@ -15,13 +15,13 @@
       tag="v-divider"
     />
 
-    <v-flex xs12 mb-3>
+    <v-flex xs12 mb-4>
       <doc-markdown>githubBlurb</doc-markdown>
     </v-flex>
 
     <v-flex
       xs12
-      text-xs-center
+      text-center
     >
       <core-github-btn />
     </v-flex>

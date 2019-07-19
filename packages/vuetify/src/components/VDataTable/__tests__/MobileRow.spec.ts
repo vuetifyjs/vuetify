@@ -1,4 +1,4 @@
-import VRow from '../VRow'
+import MobileRow from '../MobileRow'
 import {
   mount,
   Wrapper,
@@ -6,12 +6,12 @@ import {
 } from '@vue/test-utils'
 import Vue from 'vue'
 
-describe('VRow.ts', () => {
-  type Instance = InstanceType<typeof VRow>
+describe('MobileRow', () => {
+  type Instance = InstanceType<typeof MobileRow>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {
     mountFunction = (options?: MountOptions<Instance>) => {
-      return mount(VRow, options)
+      return mount(MobileRow, options)
     }
   })
 
@@ -36,7 +36,7 @@ describe('VRow.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it.skip('should render with regular slots', () => {
+  it('should render with regular slots', () => {
     const wrapper = mountFunction({
       context: {
         props: {
@@ -47,8 +47,8 @@ describe('VRow.ts', () => {
         },
       },
       slots: {
-        'column.petrol': '<p class="test">$0.68</p>',
-        'column.diesel': '<p class="test">$0.65</p>',
+        'petrol': '<p class="test">$0.68</p>',
+        'diesel': '<p class="test">$0.65</p>',
       },
     })
 
@@ -58,7 +58,7 @@ describe('VRow.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it.skip('should render with scoped slots', () => {
+  it('should render with scoped slots', () => {
     const vm = new Vue()
     const wrapper = mountFunction({
       context: {
@@ -74,8 +74,8 @@ describe('VRow.ts', () => {
         },
       },
       scopedSlots: {
-        'column.petrol': props => vm.$createElement('p', { staticClass: `test ${props.header.value}` }, [props.value]),
-        'column.diesel': props => vm.$createElement('p', { staticClass: `test ${props.header.value}` }, [props.value]),
+        'petrol': props => vm.$createElement('p', { staticClass: `test ${props.header.value}` }, [props.value]),
+        'diesel': props => vm.$createElement('p', { staticClass: `test ${props.header.value}` }, [props.value]),
       },
     })
 

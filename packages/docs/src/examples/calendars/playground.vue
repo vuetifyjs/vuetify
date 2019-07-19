@@ -3,7 +3,7 @@
     <v-flex
       sm12
       lg3
-      class="mb-3 controls"
+      class="mb-4 controls"
     >
       <v-btn
         fab
@@ -220,7 +220,7 @@
     <v-flex
       sm12
       lg9
-      class="pl-3"
+      class="pl-4"
     >
       <v-sheet height="500">
         <v-calendar

@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xs-center">
+  <div class="text-center">
     <v-btn
       color="blue"
       dark
@@ -8,9 +8,9 @@
       Open v-model
     </v-btn>
     <v-bottom-sheet v-model="sheet">
-      <v-sheet class="text-xs-center" height="200px">
+      <v-sheet class="text-center" height="200px">
         <v-btn
-          class="mt-4"
+          class="mt-6"
           text
           color="red"
           @click="sheet = !sheet"

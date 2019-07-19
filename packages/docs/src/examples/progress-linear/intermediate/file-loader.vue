@@ -48,7 +48,7 @@
         <v-flex
           xs12
           subtitle-1
-          text-xs-center
+          text-center
         >
           Getting your files
         </v-flex>

@@ -16,19 +16,16 @@
       />
 
       <!-- Name -->
-      <v-chip
+      <span
         v-if="header.value === 'name'"
-        class="caption"
-        color="primary"
-        label
-        x-small
-        style="height: auto;"
-      >{{ item.name }}</v-chip>
+        class="mono name"
+        v-text="item.name"
+      ></span>
 
       <!-- Type -->
       <span
         v-else-if="header.value === 'type'"
-        class="mono type"
+        class="mono"
         v-text="item.type"
       />
 
@@ -95,7 +92,8 @@
   overflow: hidden
 
   .mono
-    // color: #d63200
+    &.name
+      color: #d63200
 
     // &.example
 

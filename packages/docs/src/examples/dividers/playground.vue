@@ -1,5 +1,5 @@
 <template>
-  <div class="grey lighten-5 pa-3">
+  <div class="grey lighten-5 pa-4">
     <v-toolbar
       v-if="variant === 'vertical'"
       color="gray"
@@ -7,7 +7,7 @@
       <v-toolbar-title>Title</v-toolbar-title>
 
       <v-divider
-        class="mx-3"
+        class="mx-4"
         :inset="inset"
         vertical
       ></v-divider>
@@ -107,7 +107,7 @@
       </v-flex>
     </v-layout>
     <v-layout
-      class="mt-5"
+      class="mt-12"
       align-center
       justify-center
     >
