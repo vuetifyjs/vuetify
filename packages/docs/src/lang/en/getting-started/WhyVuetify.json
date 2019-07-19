@@ -1,4 +1,6 @@
 {
+  "header": "# What's the difference?",
+  "headerText": "Vuetify is the #1 Material framework and has been in development since 2016. The goal of the project is to provide users with everything that is needed to build rich and engaging web applications using the Material Design specification and Vue. It accomplishes that with a consistent update cycle, Long-term Support **(LTS)** for previous versions, responsive community engagement, a vast ecosystem of resources and a dedication to quality components.",
   "community": "Community",
   "communityCaption": "Get ready to enjoy one of the most active communities in the Vue ecosystem. Stuck on a problem? Get help right now. Find a bug? Want to talk about Firebase? Create something amazing? Let us know. The **Core** team responds and reacts to issues as they happen. Feel confident knowing we have your back.",
   "communityHeader": "## Active help",
@@ -24,8 +26,6 @@
     "Enterprise Support through Tidelift",
     "Premium & Free themes"
   ],
-  "header": "# What's the difference?",
-  "headerText": "Vuetify is the #1 Material framework and has been in development since 2016. The goal of the project is to provide users with everything that is needed to build rich and engaging web applications using the Material Design specification and Vue. It accomplishes that with a consistent update cycle, Long-term Support **(LTS)** for previous versions, responsive community engagement, a vast ecosystem of resources and a dedication to quality components.",
   "material": "Material",
   "questionButton": "Ask the Community",
   "questionHeader": "## Still have questions?",

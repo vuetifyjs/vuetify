@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section id="material-colors">
     <doc-heading>colorHeader</doc-heading>
     <doc-text>colorText</doc-text>
 
@@ -52,7 +52,7 @@
         </v-flex>
       </v-layout>
     </v-container>
-  </div>
+  </section>
 </template>
 
 <script>

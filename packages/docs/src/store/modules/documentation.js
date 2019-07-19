@@ -2,7 +2,7 @@ import deprecatedIn from '@/data/deprecated'
 import newIn from '@/data/new'
 
 // Utilities
-import { set } from '@/util/vuex'
+import { push, set } from '@/util/vuex'
 import camelCase from 'lodash/camelCase'
 import upperFirst from 'lodash/upperFirst'
 
@@ -15,6 +15,7 @@ export default {
     namespace: null,
     page: null,
     structure: null,
+    toc: []
   },
 
   getters: {
@@ -29,6 +30,19 @@ export default {
   },
 
   mutations: {
-    setStructure: set('structure'),
+    pushToc: (state, payload) => {
+      if (state.toc.find(item => item.id === payload.id)) {
+        return
+      }
+
+      state.toc.push(payload)
+    },
+    setStructure: (state, payload) => {
+      set('structure')(state, payload)
+
+      if (payload) {
+        state.toc = []
+      }
+    }
   },
 }
