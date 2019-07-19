@@ -9,16 +9,16 @@ import * as ThemeUtils from './utils'
 import Vue from 'vue'
 import {
   VuetifyParsedTheme,
-  VuetifyThemeOptions,
   VuetifyThemes,
   VuetifyThemeVariant,
+  Theme as ITheme,
 } from 'vuetify/types/services/theme'
 
-export class Theme extends Service {
+export class Theme extends Service implements ITheme {
   static property = 'theme'
 
   public disabled = false
-  public options: VuetifyThemeOptions['options']
+  public options: ITheme['options']
   public styleEl?: HTMLStyleElement
   public themes: VuetifyThemes = {
     light: {
@@ -45,7 +45,7 @@ export class Theme extends Service {
   private isDark = null as boolean | null
   private vueInstance = null as Vue | null
 
-  constructor (options: Partial<VuetifyThemeOptions> = {}) {
+  constructor (options: Partial<ITheme> = {}) {
     super()
     if (options.disable) {
       this.disabled = true

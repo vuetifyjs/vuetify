@@ -6,10 +6,10 @@ declare module 'vuetify/lib' {
   const Vuetify: Vuetify
   const colors: Colors
   const directives: {
-    ClickOutside: DirectiveOptions,
-    Ripple: DirectiveOptions,
-    Resize: DirectiveOptions,
-    Scroll: DirectiveOptions,
+    ClickOutside: DirectiveOptions
+    Ripple: DirectiveOptions
+    Resize: DirectiveOptions
+    Scroll: DirectiveOptions
     Touch: DirectiveOptions
   }
   const VAlert: Component
@@ -334,6 +334,6 @@ declare module 'vuetify/lib' {
     VTreeviewNode,
     VVirtualTable,
     VWindow,
-    VWindowItem
+    VWindowItem,
   }
 }

@@ -10,8 +10,8 @@ import { consoleError, consoleWarn } from '../../util/console'
 
 // Types
 import {
-  VuetifyLangOptions,
   VuetifyLocale,
+  Lang as ILang,
 } from 'vuetify/types/services/lang'
 
 const LANG_PREFIX = '$vuetify.'
@@ -38,14 +38,14 @@ function getTranslation (
   return translation
 }
 
-export class Lang extends Service {
+export class Lang extends Service implements ILang {
   static property = 'lang'
 
   public locales: Record<string, VuetifyLocale>
   public current: string
   private translator: ((key: string, ...params: any[]) => string) | undefined
 
-  constructor (options: Partial<VuetifyLangOptions> = {}) {
+  constructor (options: Partial<ILang> = {}) {
     super()
     this.current = options.current || 'en'
     this.locales = Object.assign({ en }, options.locales)
