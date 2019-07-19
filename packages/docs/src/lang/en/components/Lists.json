@@ -101,6 +101,7 @@
       "activeClass": "Mixins.Routable.props.activeClass",
       "appendIcon": "Components.Inputs.props.appendIcon",
       "prependIcon": "Components.Inputs.props.prependIcon",
+      "ripple": "Mixins.Rippleable.props.ripple",
       "value": "Expands / Collapse list group"
     }
   }
