@@ -28,7 +28,7 @@
     },
     "selection-appearance": {
       "header": "### Change selection appearance",
-      "desc": "The `selection` scoped slot can be used to customize the way selected values are shown in the input. This is great when you want something like `foo (+20 others)` or don't want the selection to occupy multiple lines."
+      "desc": "The `selection` slot can be used to customize the way selected values are shown in the input. This is great when you want something like `foo (+20 others)` or don't want the selection to occupy multiple lines."
     },
     "disabled": {
       "header": "### Disabled",
@@ -81,15 +81,13 @@
   },
   "slots": {
     "append": "Components.Inputs.slots.append",
+    "append-item": "Adds an item after menu content",
     "append-outer": "Components.TextFields.slots.append-outer",
+    "item": "Define a custom item appearance",
+    "no-data": "Mixins.Filterable.slots.noData",
     "prepend": "Components.Inputs.slots.prepend",
     "prepend-inner": "Components.TextFields.slots.prepend-inner",
-    "append-item": "Adds an item after menu content",
-    "no-data": "Mixins.Filterable.slots.noData",
-    "prepend-item": "Adds an item before menu content"
-  },
-  "scopedSlots": {
-    "item": "Define a custom item appearance",
+    "prepend-item": "Adds an item before menu content",
     "selection": "Define a custom selection appearance"
   },
   "events": {

@@ -1,5 +1,5 @@
 <template>
-  <v-card class="hide-overflow">
+  <v-card class="overflow-hidden">
     <v-app-bar
       absolute
       color="#6A76AB"
@@ -36,7 +36,10 @@
       </v-btn>
 
       <template v-slot:extension>
-        <v-tabs align-with-title>
+        <v-tabs
+          align-with-title
+          background-color="transparent"
+        >
           <v-tab>Tab 1</v-tab>
           <v-tab>Tab 2</v-tab>
           <v-tab>Tab 3</v-tab>
@@ -45,7 +48,7 @@
     </v-app-bar>
     <v-sheet
       id="scrolling-techniques-3"
-      class="scroll-y"
+      class="overflow-y-auto"
       max-height="600"
     >
       <v-container style="height: 1000px;"></v-container>

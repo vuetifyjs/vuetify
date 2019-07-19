@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xs-center">
+  <div class="text-center">
     <v-bottom-sheet v-model="sheet">
       <template v-slot:activator="{ on }">
         <v-btn
@@ -10,9 +10,9 @@
           Open Usage
         </v-btn>
       </template>
-      <v-sheet class="text-xs-center" height="200px">
+      <v-sheet class="text-center" height="200px">
         <v-btn
-          class="mt-4"
+          class="mt-6"
           flat
           color="red"
           @click="sheet = !sheet"

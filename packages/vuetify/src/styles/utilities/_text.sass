@@ -1,30 +1,3 @@
-@each $size, $width in $grid-breakpoints
-  @media all and (min-width: $width)
-    .v-application
-      .text-#{$size}-left
-        text-align: left !important
-
-      .text-#{$size}-center
-        text-align: center !important
-
-      .text-#{$size}-right
-        text-align: right !important
-
-      .text-#{$size}-justify
-        text-align: justify !important
-
-    .text-#{$size}-start
-      +ltr()
-        text-align: left !important
-      +rtl()
-        text-align: right !important
-
-    .text-#{$size}-end
-      +ltr()
-        text-align: right !important
-      +rtl()
-        text-align: left !important
-
 .v-application
   @each $name, $weight in $font-weights
     .font-weight
@@ -33,24 +6,3 @@
 
   .font-italic
     font-style: italic !important
-
-  .text-capitalize
-    text-transform: capitalize !important
-
-  .text-lowercase
-    text-transform: lowercase !important
-
-  .text-none
-    text-transform: none !important
-
-  .text-uppercase
-    text-transform: uppercase !important
-
-  .text-no-wrap
-    white-space: nowrap !important
-
-  .text-truncate
-    white-space: nowrap !important
-    overflow: hidden !important
-    text-overflow: ellipsis !important
-    line-height: 1.1 !important

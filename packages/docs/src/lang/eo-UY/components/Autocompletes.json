@@ -9,7 +9,7 @@
       "header": "crwdns25600:0crwdne25600:0",
       "desc": "crwdns25602:0crwdne25602:0"
     },
-    "scopedSlots": {
+    "slots": {
       "header": "crwdns25604:0crwdne25604:0",
       "desc": "crwdns25606:0crwdne25606:0"
     },
@@ -36,15 +36,13 @@
   },
   "slots": {
     "append": "crwdns25632:0crwdne25632:0",
+    "append-item": "crwdns25640:0crwdne25640:0",
     "append-outer": "crwdns25634:0crwdne25634:0",
+    "item": "crwdns25646:0crwdne25646:0",
+    "no-data": "crwdns25642:0crwdne25642:0",
     "prepend": "crwdns25636:0crwdne25636:0",
     "prepend-inner": "crwdns25638:0crwdne25638:0",
-    "append-item": "crwdns25640:0crwdne25640:0",
-    "no-data": "crwdns25642:0crwdne25642:0",
-    "prepend-item": "crwdns25644:0crwdne25644:0"
-  },
-  "scopedSlots": {
-    "item": "crwdns25646:0crwdne25646:0",
+    "prepend-item": "crwdns25644:0crwdne25644:0",
     "selection": "crwdns25648:0crwdne25648:0"
   },
   "events": {

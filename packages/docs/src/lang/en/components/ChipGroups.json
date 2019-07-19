@@ -31,6 +31,9 @@
       "desc": "Chip groups with `multiple` prop can have many values selected."
     }
   },
+  "api": {
+    "v-chip": "Components.Chips"
+  },
   "props": {
     "appendIcon": "The icon used in the append slot (if shown)",
     "centerActive": "Forces the selected chip to be centered",

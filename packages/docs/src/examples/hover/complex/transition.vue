@@ -20,7 +20,7 @@
         </v-expand-transition>
       </v-img>
       <v-card-text
-        class="pt-4"
+        class="pt-6"
         style="position: relative;"
       >
         <v-btn

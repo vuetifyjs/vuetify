@@ -1,5 +1,5 @@
 <template>
-  <section class="mb-5">
+  <section class="mb-12">
     <core-tree :children="value.children" />
   </section>
 </template>

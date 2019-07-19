@@ -2,7 +2,7 @@
   <div>
     <v-responsive
       :max-width="$vuetify.breakpoint.lgAndUp ? '60%' : '100%'"
-      class="left mb-5"
+      class="left mb-12"
     >
       <doc-heading>subHeader</doc-heading>
       <doc-markdown>subText1</doc-markdown>

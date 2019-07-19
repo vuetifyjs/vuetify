@@ -4,8 +4,8 @@
     class="mx-auto"
   >
     <v-layout
-      py-3
-      pl-3
+      py-4
+      pl-4
     >
       <v-flex shrink>
         <v-img
@@ -14,7 +14,7 @@
           src="https://cdn.vuetifyjs.com/images/cards/store.jpg"
         ></v-img>
       </v-flex>
-      <v-flex text-xs-center>
+      <v-flex text-center>
         <v-container
           grid-list-lg
           pa-0

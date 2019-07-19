@@ -106,6 +106,7 @@
   // https://github.com/vuetifyjs/vuetify/issues/7580
   flex: 1 0 auto
   justify-content: center
+  line-height: normal
   // Fixes bug where IE11 moves
   // button content when clicked
   // https://stackoverflow.com/questions/10305658/prevent-button-from-shifting-during-click-in-ie
@@ -189,7 +190,14 @@
   &.v-btn--absolute
     z-index: 4
 
-  @each $name, $size in $btn-sizes
+  @each $name, $size in $fab-icon-sizes
+    &.v-size--#{$name}
+      .v-icon
+        height: #{$size}px
+        font-size: #{$size}px
+        width: #{$size}px
+
+  @each $name, $size in $fab-sizes
     &.v-size--#{$name}
       height: #{$size}px
       width: #{$size}px

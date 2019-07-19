@@ -7,7 +7,7 @@
     <v-card-title>
       <v-btn
         icon
-        class="mr-4"
+        class="mr-6"
       >
         <v-icon>mdi-chevron-right</v-icon>
       </v-btn>

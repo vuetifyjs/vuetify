@@ -21,7 +21,10 @@
       "children": [
         {
           "type": "api",
-          "value": ["v-btn-toggle"]
+          "value": [
+            "v-btn-toggle",
+            "v-btn"
+          ]
         }
       ]
     },

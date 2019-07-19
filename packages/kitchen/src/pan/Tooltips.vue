@@ -87,7 +87,7 @@
 
           <v-flex
             xs12
-            class="mt-5"
+            class="mt-12"
           >
             <v-tooltip
               v-model="show"

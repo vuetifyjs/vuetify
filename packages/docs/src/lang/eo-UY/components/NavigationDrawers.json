@@ -79,9 +79,7 @@
   },
   "slots": {
     "append": "crwdns36090:0crwdne36090:0",
+    "img": "crwdns27834:0crwdne27834:0",
     "prepend": "crwdns36092:0crwdne36092:0"
-  },
-  "scopedSlots": {
-    "img": "crwdns27834:0crwdne27834:0"
   }
 }

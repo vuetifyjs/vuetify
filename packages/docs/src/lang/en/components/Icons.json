@@ -37,7 +37,7 @@
     "left": "Places the icon on the left, when used inside a button",
     "medium": "Mixins.Sizeable.props.medium",
     "right": "Places the icon on the right, when used inside a button",
-    "size": "Mixins.Sizeable.props.size",
+    "size": "Specifies a custom font size for the icon.",
     "small": "Mixins.Sizeable.props.small",
     "tag": "Specifies a custom tag to be used",
     "xLarge": "Mixins.Sizeable.props.xLarge"

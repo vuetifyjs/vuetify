@@ -98,7 +98,7 @@
         ></v-switch>
       </v-flex>
     </v-layout>
-    <v-card class="hide-overflow">
+    <v-card class="overflow-hidden">
       <v-app-bar
         absolute
         dark
@@ -126,7 +126,7 @@
       </v-app-bar>
       <v-sheet
         id="playground-example"
-        class="scroll-y"
+        class="overflow-y-auto"
         max-height="600"
       >
         <v-container style="height: 1500px;">

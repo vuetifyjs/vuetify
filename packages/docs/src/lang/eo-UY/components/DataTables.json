@@ -107,27 +107,6 @@
       "fixedHeader": "crwdns26118:0crwdne26118:0"
     }
   },
-  "scopedSlots": {
-    "v-data-table": {
-      "item": "crwdns26120:0crwdne26120:0",
-      "item.dataTableSelect": "crwdns35716:0crwdne35716:0",
-      "item.dataTableExpand": "crwdns26124:0crwdne26124:0",
-      "item.<name>": "crwdns35718:0crwdne35718:0",
-      "expanded-item": "crwdns35720:0crwdne35720:0",
-      "body": "crwdns26128:0crwdne26128:0",
-      "body.append": "crwdns26130:0crwdne26130:0",
-      "body.prepend": "crwdns26132:0crwdne26132:0",
-      "footer": "crwdns26134:0crwdne26134:0",
-      "header": "crwdns26136:0crwdne26136:0",
-      "header.<name>": "crwdns35722:0crwdne35722:0",
-      "header.dataTableSelect": "crwdns35724:0crwdne35724:0",
-      "top": "crwdns26140:0crwdne26140:0",
-      "progress": "crwdns26142:0crwdne26142:0",
-      "group": "crwdns26144:0crwdne26144:0",
-      "group.header": "crwdns26146:0crwdne26146:0",
-      "group.summary": "crwdns26148:0crwdne26148:0"
-    }
-  },
   "slots": {
     "v-data-table": {
       "item": "crwdns26152:0crwdne26152:0",

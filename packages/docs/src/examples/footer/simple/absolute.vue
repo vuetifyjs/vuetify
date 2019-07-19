@@ -5,7 +5,7 @@
       class="font-weight-medium"
     >
       <v-flex
-        text-xs-center
+        text-center
         xs12
       >
         {{ new Date().getFullYear() }} — <strong>Vuetify</strong>

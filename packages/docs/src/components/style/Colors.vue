@@ -43,7 +43,7 @@
                   <span v-if="key !== 'shades'">{{ key }}&nbsp;</span>
                   <span v-if="key2 !== 'base'">{{ key2.replace(/(.*)(\d)/, '$1-$2') }}</span>
                 </v-flex>
-                <v-flex xs4 text-xs-right>
+                <v-flex xs4 text-right>
                   <span v-if="subColor !== 'transparent'" v-text="subColor.toUpperCase()" />
                 </v-flex>
               </v-layout>

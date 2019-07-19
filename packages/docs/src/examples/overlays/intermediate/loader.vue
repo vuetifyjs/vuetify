@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xs-center">
+  <div class="text-center">
     <v-btn
       color="deep-purple accent-4"
       class="white--text"

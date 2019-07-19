@@ -31,9 +31,7 @@
     "large": "crwdns27190:0crwdne27190:0"
   },
   "slots": {
-    "divider": "crwdns27192:0crwdne27192:0"
-  },
-  "scopedSlots": {
+    "divider": "crwdns27192:0crwdne27192:0",
     "item": "crwdns27194:0crwdne27194:0"
   }
 }

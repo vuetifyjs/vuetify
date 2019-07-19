@@ -58,7 +58,7 @@
           </v-card-title>
           <v-layout
             justify-space-between
-            pa-3
+            pa-4
           >
             <v-flex xs5>
               <v-treeview
@@ -83,7 +83,7 @@
             </v-flex>
             <v-flex
               d-flex
-              text-xs-center
+              text-center
             >
               <v-scroll-y-transition mode="out-in">
                 <div
@@ -96,7 +96,7 @@
                 <v-card
                   v-else
                   :key="selected2.id"
-                  class="pt-4 mx-auto"
+                  class="pt-6 mx-auto"
                   flat
                   max-width="400"
                 >
@@ -107,7 +107,7 @@
                     >
                       <v-img
                         :src="`https://avataaars.io/${avatar2}`"
-                        class="mb-4"
+                        class="mb-6"
                       />
                     </v-avatar>
                     <h3 class="headline mb-2">
@@ -123,14 +123,14 @@
                   <v-divider />
                   <v-layout
                     tag="v-card-text"
-                    text-xs-left
+                    text-left
                     wrap
                   >
                     <v-flex
                       tag="strong"
                       xs5
-                      text-xs-right
-                      mr-3
+                      text-right
+                      mr-4
                       mb-2
                     >
                       Company:
@@ -139,8 +139,8 @@
                     <v-flex
                       tag="strong"
                       xs5
-                      text-xs-right
-                      mr-3
+                      text-right
+                      mr-4
                       mb-2
                     >
                       Website:
@@ -156,8 +156,8 @@
                     <v-flex
                       tag="strong"
                       xs5
-                      text-xs-right
-                      mr-3
+                      text-right
+                      mr-4
                       mb-2
                     >
                       Phone:

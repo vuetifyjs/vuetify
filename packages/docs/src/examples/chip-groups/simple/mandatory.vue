@@ -1,7 +1,7 @@
 <template>
   <v-layout row justify-space-around>
     <v-flex xs12 sm6 md4>
-      <v-sheet elevation="10" class="py-3 px-1">
+      <v-sheet elevation="10" class="py-4 px-1">
         <v-chip-group
           mandatory
           active-class="primary--text"

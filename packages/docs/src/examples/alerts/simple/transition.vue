@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="text-xs-center mb-3">
+    <div class="text-center mb-4">
       <v-btn
         color="primary"
         @click="alert = !alert"
