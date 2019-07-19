@@ -1,5 +1,5 @@
 const { DataDefaultScopedSlotProps, DataOptions, DataProps } = require('./v-data')
-const { DataIteratorEvents, DataIteratorProps } = require('./v-data-iterator')
+const { DataIteratorEvents, DataIteratorProps, DataIteratorItemScopedProps } = require('./v-data-iterator')
 const { DataFooterPageTextScopedProps } = require('./v-data-footer')
 
 const TableHeader = {
@@ -38,29 +38,24 @@ const DataTableHeaderColumnScopedProps = {
   header: 'TableHeader',
 }
 
+const DataTableItemScopedProps = {
+  ...DataIteratorItemScopedProps,
+  headers: 'TableHeader[]',
+}
+
 const DataTableItemColumnScopedProps = {
   item: 'any',
   header: 'TableHeader',
   value: 'any',
 }
 
-const DataTableSelectScopedProps = {
-  item: 'any',
+const DataTableHeaderSelectScopedProps = {
   props: {
     value: 'boolean',
+    indeterminate: 'boolean',
   },
   on: {
     input: '(value: boolean) => void',
-  },
-}
-
-const DataTableExpandScopedProps = {
-  item: 'any',
-  props: {
-    expanded: 'boolean',
-  },
-  on: {
-    click: '(value: boolean) => void',
   },
 }
 
@@ -75,17 +70,16 @@ const DataTableSlots = [
   { name: 'footer', props: DataDefaultScopedSlotProps },
   { name: 'footer.page-text', props: DataFooterPageTextScopedProps },
   { name: 'header', props: DataTableHeaderScopedProps },
-  { name: 'header.data-table-select', props: DataTableSelectScopedProps },
-  { name: 'header.data-table-expand', props: DataTableExpandScopedProps },
+  { name: 'header.data-table-select', props: DataTableHeaderSelectScopedProps },
   { name: 'header.<name>', props: DataTableHeaderColumnScopedProps },
   { name: 'top', props: DataDefaultScopedSlotProps },
   { name: 'progress', props: DataDefaultScopedSlotProps },
   { name: 'group', props: DataDefaultScopedSlotProps },
   { name: 'group.header', props: DataDefaultScopedSlotProps },
   { name: 'group.summary', props: DataDefaultScopedSlotProps },
-  { name: 'item', props: DataDefaultScopedSlotProps },
-  { name: 'item.data-table-select', props: DataTableSelectScopedProps },
-  { name: 'item.data-table-expand', props: DataTableExpandScopedProps },
+  { name: 'item', props: DataTableItemScopedProps },
+  { name: 'item.data-table-select', props: DataTableItemScopedProps },
+  { name: 'item.data-table-expand', props: DataTableItemScopedProps },
   { name: 'item.<name>', props: DataTableItemColumnScopedProps },
   { name: 'expanded-item', props: DataTableExpandedItemScopedProps },
 ]

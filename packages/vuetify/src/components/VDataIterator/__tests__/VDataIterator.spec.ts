@@ -116,7 +116,7 @@ describe('VDataIterator.ts', () => {
               id: props.item.text,
             },
             on: {
-              click: () => props.select.on.input(true),
+              click: () => props.select(true),
             },
           }, [props.item.text])
         },
@@ -151,7 +151,7 @@ describe('VDataIterator.ts', () => {
               id: props.item.text,
             },
             on: {
-              click: () => props.expand.on.input(true),
+              click: () => props.expand(true),
             },
           }, [props.item.text])
         },
