@@ -23,6 +23,9 @@
       "open-delay": false,
       "return-value": false
     },
+    "v-chip": {
+      "ripple": false
+    },
     "v-combobox": {
       "activator": false,
       "closeOnClick": false,
