@@ -1,7 +1,7 @@
 <template>
   <v-container
-    page
     v-if="structure !== false"
+    page
   >
     <template v-if="structure">
       <section

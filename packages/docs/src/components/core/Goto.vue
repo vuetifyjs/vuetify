@@ -31,8 +31,8 @@
     props: {
       id: {
         type: String,
-        default: ''
-      }
+        default: '',
+      },
     },
 
     data: () => ({
@@ -64,7 +64,7 @@
       if (['H1', 'H2'].includes(this.tag)) {
         this.pushToc({
           id: this.internalId,
-          text: element.innerText
+          text: element.innerText,
         })
       }
     },
