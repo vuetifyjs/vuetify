@@ -1,11 +1,27 @@
 <template>
   <v-app id="keep">
+    <v-app-bar
+      app
+      clipped-left
+      color="amber"
+    >
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <span class="title ml-3 mr-5">Google&nbsp;<span class="font-weight-light">Keep</span></span>
+      <v-text-field
+        solo-inverted
+        flat
+        hide-details
+        label="Search"
+        prepend-inner-icon="search"
+      ></v-text-field>
+      <v-spacer></v-spacer>
+    </v-app-bar>
+
     <v-navigation-drawer
       v-model="drawer"
-      fixed
-      clipped
-      class="grey lighten-4"
       app
+      clipped
+      color="grey lighten-4"
     >
       <v-list
         dense
@@ -23,8 +39,14 @@
                 {{ item.heading }}
               </v-subheader>
             </v-flex>
-            <v-flex xs6 class="text-xs-right">
-              <v-btn small text>edit</v-btn>
+            <v-flex
+              xs6
+              class="text-xs-right"
+            >
+              <v-btn
+                small
+                text
+              >edit</v-btn>
             </v-flex>
           </v-layout>
           <v-divider
@@ -50,25 +72,27 @@
         </template>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar color="amber" app absolute clipped-left>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <span class="title ml-3 mr-5">Google&nbsp;<span class="font-weight-light">Keep</span></span>
-      <v-text-field
-        solo-inverted
-        flat
-        hide-details
-        label="Search"
-        prepend-inner-icon="search"
-      ></v-text-field>
-      <v-spacer></v-spacer>
-    </v-app-bar>
+
     <v-content>
-      <v-container fluid fill-height class="grey lighten-4">
-        <v-layout justify-center align-center>
+      <v-container
+        fluid
+        fill-height
+        class="grey lighten-4"
+      >
+        <v-layout
+          justify-center
+          align-center
+        >
           <v-flex shrink>
             <v-tooltip right>
               <template v-slot:activator="{ on }">
-                <v-btn :href="source" icon large target="_blank" v-on="on">
+                <v-btn
+                  :href="source"
+                  icon
+                  large
+                  target="_blank"
+                  v-on="on"
+                >
                   <v-icon large>mdi-code-tags</v-icon>
                 </v-btn>
               </template>
@@ -76,7 +100,13 @@
             </v-tooltip>
             <v-tooltip right>
               <template v-slot:activator="{ on }">
-                <v-btn icon large href="https://codepen.io/johnjleider/pen/jZQNbd" target="_blank" v-on="on">
+                <v-btn
+                  icon
+                  large
+                  href="https://codepen.io/johnjleider/pen/zgxbYO"
+                  target="_blank"
+                  v-on="on"
+                >
                   <v-icon large>mdi-codepen</v-icon>
                 </v-btn>
               </template>
@@ -91,6 +121,9 @@
 
 <script>
   export default {
+    props: {
+      source: String,
+    },
     data: () => ({
       drawer: null,
       items: [
@@ -110,9 +143,6 @@
         { icon: 'keyboard', text: 'Keyboard shortcuts' },
       ],
     }),
-    props: {
-      source: String,
-    },
   }
 </script>
 

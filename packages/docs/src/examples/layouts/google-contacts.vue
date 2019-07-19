@@ -3,7 +3,6 @@
     <v-navigation-drawer
       v-model="drawer"
       :clipped="$vuetify.breakpoint.lgAndUp"
-      fixed
       app
     >
       <v-list dense>
@@ -19,8 +18,14 @@
                 {{ item.heading }}
               </v-subheader>
             </v-flex>
-            <v-flex xs6 class="text-xs-center">
-              <a href="#!" class="body-2 black--text">EDIT</a>
+            <v-flex
+              xs6
+              class="text-xs-center"
+            >
+              <a
+                href="#!"
+                class="body-2 black--text"
+              >EDIT</a>
             </v-flex>
           </v-layout>
           <v-list-group
@@ -54,7 +59,11 @@
               </v-list-item-content>
             </v-list-item>
           </v-list-group>
-          <v-list-item v-else :key="item.text" @click="">
+          <v-list-item
+            v-else
+            :key="item.text"
+            @click=""
+          >
             <v-list-item-action>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-action>
@@ -67,14 +76,17 @@
         </template>
       </v-list>
     </v-navigation-drawer>
+
     <v-app-bar
       :clipped-left="$vuetify.breakpoint.lgAndUp"
+      app
       color="blue darken-3"
       dark
-      app
-      fixed
     >
-      <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
+      <v-toolbar-title
+        style="width: 300px"
+        class="ml-0 pl-3"
+      >
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <span class="hidden-sm-and-down">Google Contacts</span>
       </v-toolbar-title>
@@ -93,21 +105,39 @@
       <v-btn icon>
         <v-icon>notifications</v-icon>
       </v-btn>
-      <v-btn icon large>
-        <v-avatar size="32px" item>
-          <img
+      <v-btn
+        icon
+        large
+      >
+        <v-avatar
+          size="32px"
+          item
+        >
+          <v-img
             src="https://cdn.vuetifyjs.com/images/logos/logo.svg"
             alt="Vuetify"
           >
-        </v-avatar>
+          </v-img></v-avatar>
       </v-btn>
     </v-app-bar>
     <v-content>
-      <v-container fluid fill-height>
-        <v-layout justify-center align-center>
+      <v-container
+        fluid
+        fill-height
+      >
+        <v-layout
+          align-center
+          justify-center
+        >
           <v-tooltip right>
             <template v-slot:activator="{ on }">
-              <v-btn :href="source" icon large target="_blank" v-on="on">
+              <v-btn
+                :href="source"
+                icon
+                large
+                target="_blank"
+                v-on="on"
+              >
                 <v-icon large>mdi-code-tags</v-icon>
               </v-btn>
             </template>
@@ -115,7 +145,13 @@
           </v-tooltip>
           <v-tooltip right>
             <template v-slot:activator="{ on }">
-              <v-btn icon large href="https://codepen.io/johnjleider/pen/EQOYVV" target="_blank" v-on="on">
+              <v-btn
+                icon
+                large
+                href="https://codepen.io/johnjleider/pen/MNYLdL"
+                target="_blank"
+                v-on="on"
+              >
                 <v-icon large>mdi-codepen</v-icon>
               </v-btn>
             </template>
@@ -125,28 +161,39 @@
       </v-container>
     </v-content>
     <v-btn
-      fab
       bottom
-      right
       color="pink"
       dark
+      fab
       fixed
+      right
       @click="dialog = !dialog"
     >
       <v-icon>add</v-icon>
     </v-btn>
-    <v-dialog v-model="dialog" width="800px">
+    <v-dialog
+      v-model="dialog"
+      width="800px"
+    >
       <v-card>
-        <v-card-title
-          class="grey lighten-4 py-4 title"
-        >
+        <v-card-title class="grey darken-2">
           Create contact
         </v-card-title>
-        <v-container grid-list-sm class="pa-4">
-          <v-layout row wrap>
-            <v-flex xs12 align-center justify-space-between>
+        <v-container grid-list-sm>
+          <v-layout
+            row
+            wrap
+          >
+            <v-flex
+              xs12
+              align-center
+              justify-space-between
+            >
               <v-layout align-center>
-                <v-avatar size="40px" class="mr-3">
+                <v-avatar
+                  size="40px"
+                  class="mr-3"
+                >
                   <img
                     src="//ssl.gstatic.com/s2/oz/images/sge/grey_silhouette.png"
                     alt=""
@@ -190,10 +237,20 @@
           </v-layout>
         </v-container>
         <v-card-actions>
-          <v-btn text color="primary">More</v-btn>
+          <v-btn
+            text
+            color="primary"
+          >More</v-btn>
           <v-spacer></v-spacer>
-          <v-btn text color="primary" @click="dialog = false">Cancel</v-btn>
-          <v-btn text @click="dialog = false">Save</v-btn>
+          <v-btn
+            text
+            color="primary"
+            @click="dialog = false"
+          >Cancel</v-btn>
+          <v-btn
+            text
+            @click="dialog = false"
+          >Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -202,6 +259,9 @@
 
 <script>
   export default {
+    props: {
+      source: String,
+    },
     data: () => ({
       dialog: false,
       drawer: null,
@@ -238,8 +298,5 @@
         { icon: 'keyboard', text: 'Go to the old version' },
       ],
     }),
-    props: {
-      source: String,
-    },
   }
 </script>

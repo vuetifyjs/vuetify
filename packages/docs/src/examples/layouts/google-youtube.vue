@@ -2,12 +2,15 @@
   <v-app id="inspire">
     <v-navigation-drawer
       v-model="drawer"
-      fixed
-      clipped
       app
+      clipped
     >
       <v-list dense>
-        <v-list-item v-for="item in items" :key="item.text" @click="">
+        <v-list-item
+          v-for="item in items"
+          :key="item.text"
+          @click=""
+        >
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
@@ -19,14 +22,24 @@
         </v-list-item>
         <v-subheader class="mt-3 grey--text text--darken-1">SUBSCRIPTIONS</v-subheader>
         <v-list>
-          <v-list-item v-for="item in items2" :key="item.text" avatar @click="">
+          <v-list-item
+            v-for="item in items2"
+            :key="item.text"
+            @click=""
+          >
             <v-list-item-avatar>
-              <img :src="`https://randomuser.me/api/portraits/men/${item.picture}.jpg`" alt="">
+              <img
+                :src="`https://randomuser.me/api/portraits/men/${item.picture}.jpg`"
+                alt=""
+              >
             </v-list-item-avatar>
             <v-list-item-title v-text="item.text"></v-list-item-title>
           </v-list-item>
         </v-list>
-        <v-list-item class="mt-3" @click="">
+        <v-list-item
+          class="mt-3"
+          @click=""
+        >
           <v-list-item-action>
             <v-icon color="grey darken-1">add_circle_outline</v-icon>
           </v-list-item-action>
@@ -40,12 +53,12 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
+
     <v-app-bar
+      app
+      clipped-left
       color="red"
       dense
-      fixed
-      clipped-left
-      app
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-icon class="mx-3">fab fa-youtube</v-icon>
@@ -53,7 +66,11 @@
         <span class="title">Youtube</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-layout row align-center style="max-width: 650px">
+      <v-layout
+        row
+        align-center
+        style="max-width: 650px"
+      >
         <v-text-field
           :append-icon-cb="() => {}"
           placeholder="Search..."
@@ -64,13 +81,23 @@
         ></v-text-field>
       </v-layout>
     </v-app-bar>
+
     <v-content>
       <v-container fill-height>
-        <v-layout justify-center align-center>
+        <v-layout
+          justify-center
+          align-center
+        >
           <v-flex shrink>
             <v-tooltip right>
               <template v-slot:activator="{ on }">
-                <v-btn :href="source" icon large target="_blank" v-on="on">
+                <v-btn
+                  :href="source"
+                  icon
+                  large
+                  target="_blank"
+                  v-on="on"
+                >
                   <v-icon large>mdi-code-tags</v-icon>
                 </v-btn>
               </template>
@@ -78,7 +105,13 @@
             </v-tooltip>
             <v-tooltip right>
               <template v-slot:activator="{ on }">
-                <v-btn icon large href="https://codepen.io/johnjleider/pen/YeRKwQ" target="_blank" v-on="on">
+                <v-btn
+                  icon
+                  large
+                  href="https://codepen.io/johnjleider/pen/aezMOO"
+                  target="_blank"
+                  v-on="on"
+                >
                   <v-icon large>mdi-codepen</v-icon>
                 </v-btn>
               </template>
@@ -93,6 +126,9 @@
 
 <script>
   export default {
+    props: {
+      source: String,
+    },
     data: () => ({
       drawer: null,
       items: [
@@ -110,9 +146,6 @@
         { picture: 78, text: 'MKBHD' },
       ],
     }),
-    props: {
-      source: String,
-    },
     created () {
       this.$vuetify.theme.dark = true
     },
