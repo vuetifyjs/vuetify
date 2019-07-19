@@ -240,7 +240,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
               scope="col"
               aria-label="Dessert (100g serving)"
               aria-sort="none"
-              class="text-xs-left"
+              class="text-left"
           >
             <span>
               Dessert (100g serving)
@@ -250,7 +250,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Calories
@@ -266,7 +266,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Fat (g)
@@ -282,7 +282,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Carbs (g)
@@ -298,7 +298,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
               scope="col"
               aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Protein (g)
@@ -314,7 +314,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Iron (%)
@@ -437,7 +437,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                 scope="col"
                 aria-label="Dessert (100g serving)"
                 aria-sort="none"
-                class="text-xs-left"
+                class="text-left"
             >
               <span>
                 Dessert (100g serving)
@@ -447,7 +447,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                 scope="col"
                 aria-label="Calories: Not sorted. Activate to sort ascending."
                 aria-sort="none"
-                class="text-xs-start sortable"
+                class="text-start sortable"
             >
               <span>
                 Calories
@@ -463,7 +463,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                 scope="col"
                 aria-label="Fat (g): Not sorted. Activate to sort ascending."
                 aria-sort="none"
-                class="text-xs-start sortable"
+                class="text-start sortable"
             >
               <span>
                 Fat (g)
@@ -479,7 +479,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                 scope="col"
                 aria-label="Carbs (g): Not sorted. Activate to sort ascending."
                 aria-sort="none"
-                class="text-xs-start sortable"
+                class="text-start sortable"
             >
               <span>
                 Carbs (g)
@@ -495,7 +495,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                 scope="col"
                 aria-label="Protein (g): Not sorted. Activate to sort ascending."
                 aria-sort="none"
-                class="text-xs-start sortable"
+                class="text-start sortable"
             >
               <span>
                 Protein (g)
@@ -511,7 +511,7 @@ exports[`VDataTable.ts should render virtual table 1`] = `
                 scope="col"
                 aria-label="Iron (%): Not sorted. Activate to sort ascending."
                 aria-sort="none"
-                class="text-xs-start sortable"
+                class="text-start sortable"
             >
               <span>
                 Iron (%)
@@ -729,7 +729,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               scope="col"
               aria-label="Dessert (100g serving)"
               aria-sort="none"
-              class="text-xs-left"
+              class="text-left"
           >
             <span>
               Dessert (100g serving)
@@ -739,7 +739,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Calories
@@ -755,7 +755,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Fat (g)
@@ -771,7 +771,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Carbs (g)
@@ -787,7 +787,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               scope="col"
               aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Protein (g)
@@ -803,7 +803,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Iron (%)
@@ -917,7 +917,7 @@ exports[`VDataTable.ts should render with data 1`] = `
               scope="col"
               aria-label="Dessert (100g serving)"
               aria-sort="none"
-              class="text-xs-left"
+              class="text-left"
           >
             <span>
               Dessert (100g serving)
@@ -927,7 +927,7 @@ exports[`VDataTable.ts should render with data 1`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Calories
@@ -943,7 +943,7 @@ exports[`VDataTable.ts should render with data 1`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Fat (g)
@@ -959,7 +959,7 @@ exports[`VDataTable.ts should render with data 1`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Carbs (g)
@@ -975,7 +975,7 @@ exports[`VDataTable.ts should render with data 1`] = `
               scope="col"
               aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Protein (g)
@@ -991,7 +991,7 @@ exports[`VDataTable.ts should render with data 1`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Iron (%)
@@ -1203,7 +1203,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
               scope="col"
               aria-label="Dessert (100g serving)"
               aria-sort="none"
-              class="text-xs-left"
+              class="text-left"
           >
             <span>
               Dessert (100g serving)
@@ -1213,7 +1213,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Calories
@@ -1229,7 +1229,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Fat (g)
@@ -1245,7 +1245,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Carbs (g)
@@ -1261,7 +1261,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Iron (%)
@@ -1385,7 +1385,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
               scope="col"
               aria-label="Dessert (100g serving)"
               aria-sort="none"
-              class="text-xs-left"
+              class="text-left"
           >
             <span>
               Dessert (100g serving)
@@ -1395,7 +1395,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Fat (g)
@@ -1411,7 +1411,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Carbs (g)
@@ -1427,7 +1427,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
               scope="col"
               aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Protein (g)
@@ -1443,7 +1443,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Iron (%)
@@ -1810,7 +1810,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               scope="col"
               aria-label="Dessert (100g serving)"
               aria-sort="none"
-              class="text-xs-left"
+              class="text-left"
           >
             <span>
               Dessert (100g serving)
@@ -1820,7 +1820,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Calories
@@ -1836,7 +1836,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Fat (g)
@@ -1852,7 +1852,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Carbs (g)
@@ -1868,7 +1868,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Iron (%)
@@ -2182,7 +2182,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               scope="col"
               aria-label="Dessert (100g serving)"
               aria-sort="none"
-              class="text-xs-left"
+              class="text-left"
           >
             <span>
               Dessert (100g serving)
@@ -2192,7 +2192,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Calories
@@ -2208,7 +2208,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Fat (g)
@@ -2224,7 +2224,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Carbs (g)
@@ -2240,7 +2240,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               scope="col"
               aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Protein (g)
@@ -2256,7 +2256,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Iron (%)
@@ -2384,7 +2384,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               scope="col"
               aria-label="Dessert (100g serving)"
               aria-sort="none"
-              class="text-xs-left"
+              class="text-left"
           >
             <span>
               Dessert (100g serving)
@@ -2394,7 +2394,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Calories
@@ -2410,7 +2410,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Fat (g)
@@ -2426,7 +2426,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Carbs (g)
@@ -2442,7 +2442,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               scope="col"
               aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Protein (g)
@@ -2458,7 +2458,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Iron (%)
@@ -2700,7 +2700,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               aria-label
               aria-sort="none"
               width="1px"
-              class="text-xs-start"
+              class="text-start"
           >
             <span>
             </span>
@@ -2709,7 +2709,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               scope="col"
               aria-label="Dessert (100g serving)"
               aria-sort="none"
-              class="text-xs-left"
+              class="text-left"
           >
             <span>
               Dessert (100g serving)
@@ -2719,7 +2719,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Calories
@@ -2735,7 +2735,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Fat (g)
@@ -2751,7 +2751,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Carbs (g)
@@ -2767,7 +2767,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               scope="col"
               aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Protein (g)
@@ -2783,7 +2783,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Iron (%)
@@ -3035,7 +3035,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               aria-label
               aria-sort="none"
               width="1px"
-              class="text-xs-start"
+              class="text-start"
           >
             <span>
             </span>
@@ -3044,7 +3044,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               scope="col"
               aria-label="Dessert (100g serving)"
               aria-sort="none"
-              class="text-xs-left"
+              class="text-left"
           >
             <span>
               Dessert (100g serving)
@@ -3054,7 +3054,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Calories
@@ -3070,7 +3070,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Fat (g)
@@ -3086,7 +3086,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Carbs (g)
@@ -3102,7 +3102,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               scope="col"
               aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Protein (g)
@@ -3118,7 +3118,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Iron (%)
@@ -3370,7 +3370,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               aria-label
               aria-sort="none"
               width="1px"
-              class="text-xs-start"
+              class="text-start"
           >
             <div class="v-data-table__checkbox v-simple-checkbox">
               <div class="v-input--selection-controls__ripple">
@@ -3386,7 +3386,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               scope="col"
               aria-label="Dessert (100g serving)"
               aria-sort="none"
-              class="text-xs-left"
+              class="text-left"
           >
             <span>
               Dessert (100g serving)
@@ -3396,7 +3396,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               scope="col"
               aria-label="Calories: Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Calories
@@ -3412,7 +3412,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               scope="col"
               aria-label="Fat (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Fat (g)
@@ -3428,7 +3428,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               scope="col"
               aria-label="Carbs (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Carbs (g)
@@ -3444,7 +3444,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               scope="col"
               aria-label="Protein (g): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Protein (g)
@@ -3460,7 +3460,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
               scope="col"
               aria-label="Iron (%): Not sorted. Activate to sort ascending."
               aria-sort="none"
-              class="text-xs-start sortable"
+              class="text-start sortable"
           >
             <span>
               Iron (%)
