@@ -104,5 +104,16 @@
       "ripple": "Mixins.Rippleable.props.ripple",
       "value": "Expands / Collapse list group"
     }
+  },
+  "slots": {
+    "v-list-group": {
+      "appendIcon": "Components.Inputs.props.appendIcon",
+      "prependIcon": "Components.Inputs.props.prependIcon"
+    }
+  },
+  "events": {
+    "v-list-group": {
+      "click": "Emitted when component is clicked"
+    }
   }
 }
