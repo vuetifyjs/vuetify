@@ -144,7 +144,7 @@
         </v-card-title>
         <v-container grid-list-sm class="pa-6">
           <v-layout row wrap>
-            <v-flex xs12 align-center justify-between>
+            <v-flex xs12 align-center justify-space-between>
               <v-layout align-center>
                 <v-avatar size="40px" class="mr-4">
                   <img

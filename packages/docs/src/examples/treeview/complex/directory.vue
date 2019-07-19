@@ -4,7 +4,7 @@
       User Directory
     </v-card-title>
     <v-layout
-      justify-between
+      justify-space-between
       pa-4
     >
       <v-flex xs5>

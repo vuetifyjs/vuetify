@@ -1,5 +1,5 @@
 <template>
-  <v-layout justify-around>
+  <v-layout justify-space-around>
     <v-flex xs12 sm6 md4 lg3>
       <v-sheet elevation="10" class="pa-4">
         <v-chip-group

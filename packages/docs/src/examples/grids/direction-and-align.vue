@@ -1,6 +1,6 @@
 <template>
   <v-container fluid grid-list-xl>
-    <v-layout row justify-between>
+    <v-layout row justify-space-between>
       <v-flex xs2>
         <v-card dark color="primary">
           <v-card-text>one</v-card-text>
@@ -17,7 +17,7 @@
         </v-card>
       </v-flex>
     </v-layout>
-    <v-layout row justify-around>
+    <v-layout row justify-space-around>
       <v-flex xs2>
         <v-card dark color="primary">
           <v-card-text>one</v-card-text>

@@ -26,7 +26,7 @@
       <core-section>
         <v-layout
           row
-          justify-around
+          justify-space-around
         >
           <v-rating
             value="1"
@@ -49,7 +49,7 @@
       <core-section>
         <v-layout
           row
-          justify-around
+          justify-space-around
         >
           <v-rating
             value="1"
@@ -72,7 +72,7 @@
       <core-section>
         <v-layout
           row
-          justify-around
+          justify-space-around
         >
           <v-rating
             value="1"
@@ -209,7 +209,7 @@
       <core-section>
         <v-layout
           row
-          justify-around
+          justify-space-around
         >
           <v-rating
             value="1"
@@ -242,7 +242,7 @@
       <core-section>
         <v-layout
           row
-          justify-around
+          justify-space-around
         >
           <v-rating
             value="2"
@@ -333,7 +333,7 @@
           dark
           style="max-width: 400px;"
         >
-          <v-layout justify-between>
+          <v-layout justify-space-between>
             <v-flex xs8>
               <v-card-title primary-title>
                 <div>

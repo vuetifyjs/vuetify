@@ -12,7 +12,7 @@
     <v-layout
       px-2
       pb-2
-      justify-between
+      justify-space-between
     >
       <v-btn-toggle
         v-model="formatting"

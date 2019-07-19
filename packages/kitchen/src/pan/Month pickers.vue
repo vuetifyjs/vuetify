@@ -25,7 +25,7 @@
         <v-layout
           row
           wrap
-          justify-around
+          justify-space-around
           align-center
         >
           <v-date-picker
@@ -51,7 +51,7 @@
         <v-layout
           row
           wrap
-          justify-around
+          justify-space-around
           align-center
         >
           <v-flex text-center>
@@ -97,7 +97,7 @@
         <v-layout
           row
           wrap
-          justify-around
+          justify-space-around
           align-center
         >
           <v-date-picker
@@ -131,7 +131,7 @@
         <v-layout
           row
           wrap
-          justify-around
+          justify-space-around
           align-center
         >
           <v-date-picker
@@ -165,7 +165,7 @@
         <v-layout
           row
           wrap
-          justify-around
+          justify-space-around
           align-center
         >
           <v-date-picker
@@ -199,7 +199,7 @@
         <v-layout
           row
           wrap
-          justify-around
+          justify-space-around
           align-center
         >
           <v-flex text-center>
@@ -263,7 +263,7 @@
         <v-layout
           row
           wrap
-          justify-around
+          justify-space-around
           align-center
         >
           <v-date-picker
@@ -298,7 +298,7 @@
           row
           wrap
           align-center
-          justify-around
+          justify-space-around
         >
           <v-date-picker
             v-model="model"
@@ -317,7 +317,7 @@
         <v-layout
           row
           wrap
-          justify-around
+          justify-space-around
         >
           <div class="mt-4">
             <div class="subheading text-center">
@@ -353,7 +353,7 @@
         <v-layout
           row
           wrap
-          justify-around
+          justify-space-around
           align-center
         >
           <v-date-picker
@@ -394,7 +394,7 @@
         <v-layout
           row
           wrap
-          justify-around
+          justify-space-around
           align-center
         >
           <div class="mt-6">

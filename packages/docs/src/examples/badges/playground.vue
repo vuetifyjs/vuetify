@@ -1,6 +1,6 @@
 <template>
-  <v-layout row justify-around>
-    <v-layout style="flex-grow: 0;" column wrap justify-between align-center>
+  <v-layout row justify-space-around>
+    <v-layout style="flex-grow: 0;" column wrap justify-space-between align-center>
       <v-select
         v-model="color"
         style="width: 250px;"

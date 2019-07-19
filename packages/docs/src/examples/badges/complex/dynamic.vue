@@ -1,7 +1,7 @@
 <template>
   <v-container fluid class="text-center">
     <v-layout
-      justify-around
+      justify-space-around
       wrap
     >
       <div>

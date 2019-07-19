@@ -26,7 +26,7 @@
       <core-section>
         <v-layout
           row
-          justify-around
+          justify-space-around
           align-center
         >
           <v-time-picker
@@ -47,7 +47,7 @@
       <core-section>
         <v-layout
           row
-          justify-around
+          justify-space-around
           align-center
           wrap
         >
@@ -81,7 +81,7 @@
         <v-layout
           row
           wrap
-          justify-around
+          justify-space-around
         >
           <v-time-picker
             value="9:41"
@@ -103,7 +103,7 @@
         <v-layout
           row
           wrap
-          justify-around
+          justify-space-around
         >
           <v-time-picker
             value="9:41"
@@ -133,7 +133,7 @@
         <v-layout
           row
           wrap
-          justify-around
+          justify-space-around
           align-center
         >
           <v-time-picker
@@ -155,7 +155,7 @@
         <v-layout
           row
           wrap
-          justify-around
+          justify-space-around
           align-center
         >
           <v-time-picker
@@ -180,7 +180,7 @@
           row
           wrap
           align-center
-          justify-around
+          justify-space-around
         >
           <v-time-picker
             value="9:41"
@@ -213,7 +213,7 @@
           row
           wrap
           align-center
-          justify-around
+          justify-space-around
         >
           <v-time-picker
             value="9:41"
@@ -246,7 +246,7 @@
           row
           wrap
           align-center
-          justify-around
+          justify-space-around
         >
           <v-time-picker
             value="9:41"
@@ -281,7 +281,7 @@
         <v-layout
           row
           wrap
-          justify-around
+          justify-space-around
         >
           <v-time-picker
             value="9:41"
@@ -303,7 +303,7 @@
         <v-layout
           row
           wrap
-          justify-around
+          justify-space-around
         >
           <v-time-picker
             value="9:41"

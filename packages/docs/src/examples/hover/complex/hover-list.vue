@@ -20,7 +20,7 @@
                   <v-layout
                     fill-height
                     column
-                    justify-between
+                    justify-space-between
                   >
                     <p class="mt-4 subheading text-left">{{ item.title }}</p>
 

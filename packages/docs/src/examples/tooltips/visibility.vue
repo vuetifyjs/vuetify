@@ -2,7 +2,7 @@
   <v-container fluid class="text-center">
     <v-layout
       flex
-      justify-between
+      justify-space-between
       row
       wrap
     >

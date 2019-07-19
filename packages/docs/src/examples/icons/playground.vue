@@ -2,7 +2,7 @@
   <v-container grid-list-xl>
     <v-layout
       wrap
-      justify-around
+      justify-space-around
     >
       <v-flex
         xs12

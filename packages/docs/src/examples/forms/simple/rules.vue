@@ -2,7 +2,7 @@
   <v-container grid-list-xl>
     <v-layout
       wrap
-      justify-between
+      justify-space-between
     >
       <v-flex
         xs12

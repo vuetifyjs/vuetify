@@ -1,6 +1,6 @@
 <template>
   <v-layout
-    justify-between
+    justify-space-between
     wrap
   >
     <v-flex

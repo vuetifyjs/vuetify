@@ -12,7 +12,7 @@
       <core-section>
         <v-layout
           align-center
-          justify-around
+          justify-space-around
           wrap
         >
           <v-chip close>
@@ -47,7 +47,7 @@
       <core-section>
         <v-layout
           align-center
-          justify-around
+          justify-space-around
           wrap
         >
           <v-chip close @click="() => {}">
@@ -82,7 +82,7 @@
       <core-section>
         <v-layout
           align-center
-          justify-around
+          justify-space-around
           wrap
         >
           <v-chip
@@ -121,7 +121,7 @@
       <core-section>
         <v-layout
           align-center
-          justify-around
+          justify-space-around
           wrap
         >
           <v-chip
@@ -186,7 +186,7 @@
       <core-section>
         <v-layout
           align-center
-          justify-around
+          justify-space-around
           wrap
         >
           <v-chip
@@ -221,7 +221,7 @@
       <core-section>
         <v-layout
           align-center
-          justify-around
+          justify-space-around
           wrap
         >
           <v-chip label>
@@ -255,7 +255,7 @@
       <core-section>
         <v-layout
           align-center
-          justify-around
+          justify-space-around
           wrap
         >
           <div class="text-center">

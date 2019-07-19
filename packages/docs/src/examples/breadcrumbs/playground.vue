@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-layout justify-around wrap>
+    <v-layout justify-space-around wrap>
       <v-flex xs12>
         <v-select v-model="divider" :items="dividers" label="Divider"></v-select>
       </v-flex>

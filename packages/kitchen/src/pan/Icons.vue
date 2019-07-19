@@ -8,7 +8,7 @@
       </core-title>
       <core-section>
         <v-layout
-          justify-around
+          justify-space-around
           class="mb-2"
         >
           <span class="group pa-2">
@@ -31,7 +31,7 @@
         </v-layout>
 
         <v-layout
-          justify-around
+          justify-space-around
           class="mb-2"
         >
           <span class="group pa-2">
@@ -69,7 +69,7 @@
         </v-layout>
 
         <v-layout
-          justify-around
+          justify-space-around
           class="mb-2"
         >
           <span class="group pa-2">
@@ -106,7 +106,7 @@
           </span>
         </v-layout>
 
-        <v-layout justify-around>
+        <v-layout justify-space-around>
           <span class="group pa-2">
             <v-icon x-large>
               mdi-home
@@ -147,7 +147,7 @@
       </core-title>
       <core-section>
         <v-layout
-          justify-around
+          justify-space-around
           class="mb-2"
         >
           <span class="group pa-2">
@@ -176,7 +176,7 @@
         </v-layout>
 
         <v-layout
-          justify-around
+          justify-space-around
           class="mb-2"
         >
           <span class="group pa-2">
@@ -223,7 +223,7 @@
         </v-layout>
 
         <v-layout
-          justify-around
+          justify-space-around
           class="mb-2"
         >
           <span class="group pa-2">
@@ -269,7 +269,7 @@
           </span>
         </v-layout>
 
-        <v-layout justify-around>
+        <v-layout justify-space-around>
           <span class="group pa-2">
             <v-icon
               color="primary"
@@ -319,7 +319,7 @@
       </core-title>
       <core-section>
         <v-layout
-          justify-around
+          justify-space-around
           class="mb-2"
         >
           <span class="group pa-2">
@@ -366,7 +366,7 @@
         </v-layout>
 
         <v-layout
-          justify-around
+          justify-space-around
           class="mb-2"
         >
           <span class="group pa-2">
@@ -419,7 +419,7 @@
         </v-layout>
 
         <v-layout
-          justify-around
+          justify-space-around
           class="mb-2"
         >
           <span class="group pa-2">
@@ -471,7 +471,7 @@
           </span>
         </v-layout>
 
-        <v-layout justify-around>
+        <v-layout justify-space-around>
           <span class="group pa-2">
             <v-icon
               color="primary"

@@ -26,7 +26,7 @@
             fill-height
           >
             <v-layout
-              justify-between
+              justify-space-between
               align-center
               wrap
               ma-0

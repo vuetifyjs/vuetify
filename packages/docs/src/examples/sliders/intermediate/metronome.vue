@@ -18,7 +18,7 @@
 
     <v-card-text>
       <v-layout
-        justify-between
+        justify-space-between
         mb-4
       >
         <v-flex text-left>

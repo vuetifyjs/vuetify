@@ -120,7 +120,7 @@
         </v-layout>
       </v-expansion-panel-header>
       <v-expansion-panel-content>
-        <v-layout justify-around>
+        <v-layout justify-space-around>
           <v-flex xs3>
             <v-menu
               ref="startMenu"

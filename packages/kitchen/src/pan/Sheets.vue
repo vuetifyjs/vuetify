@@ -8,7 +8,7 @@
       </core-title>
       <core-section>
         <v-layout
-          justify-around
+          justify-space-around
           wrap
         >
           <v-flex
@@ -36,7 +36,7 @@
       </core-title>
       <core-section>
         <v-layout
-          justify-around
+          justify-space-around
           wrap
         >
           <v-flex
@@ -63,7 +63,7 @@
       </core-title>
       <core-section>
         <v-layout
-          justify-around
+          justify-space-around
           wrap
         >
           <v-sheet

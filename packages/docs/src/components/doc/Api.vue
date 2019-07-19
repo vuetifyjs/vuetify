@@ -16,7 +16,7 @@
       </v-tabs>
 
       <v-card-text>
-        <v-layout justify-between>
+        <v-layout justify-space-between>
           <v-flex
             xs12
             sm4

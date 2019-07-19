@@ -7,7 +7,7 @@
         Simple
       </core-title>
       <core-section>
-        <v-layout justify-around>
+        <v-layout justify-space-around>
           <v-tooltip left>
             <template
               slot="activator"

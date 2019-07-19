@@ -8,7 +8,7 @@
       :key="i"
       my-4
       align-center
-      justify-between
+      justify-space-between
       wrap
     >
       <v-flex

@@ -1,5 +1,5 @@
 <template>
-  <v-layout justify-around>
+  <v-layout justify-space-around>
     <v-icon large color="green darken-2">business</v-icon>
 
     <v-icon large color="blue darken-2">chat</v-icon>

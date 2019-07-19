@@ -57,7 +57,7 @@
             User Directory
           </v-card-title>
           <v-layout
-            justify-between
+            justify-space-between
             pa-4
           >
             <v-flex xs5>
@@ -177,7 +177,7 @@
       <core-section>
         <v-layout
           row
-          justify-around
+          justify-space-around
         >
           <v-flex>
             <v-treeview

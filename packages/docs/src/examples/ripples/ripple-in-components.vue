@@ -1,7 +1,7 @@
 <template>
   <v-layout
     row
-    justify-around
+    justify-space-around
     py-12
     wrap
   >

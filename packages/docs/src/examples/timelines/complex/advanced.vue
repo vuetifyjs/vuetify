@@ -40,7 +40,7 @@
           color="pink"
           small
         >
-          <v-layout justify-between>
+          <v-layout justify-space-between>
             <v-flex xs7 v-text="event.text"></v-flex>
             <v-flex xs5 text-right v-text="event.time"></v-flex>
           </v-layout>
@@ -60,7 +60,7 @@
         icon-color="grey lighten-2"
         small
       >
-        <v-layout justify-between>
+        <v-layout justify-space-between>
           <v-flex xs7>This order was archived.</v-flex>
           <v-flex xs5 text-right>15:26 EDT</v-flex>
         </v-layout>
@@ -70,7 +70,7 @@
         class="mb-4"
         small
       >
-        <v-layout justify-between>
+        <v-layout justify-space-between>
           <v-flex xs7>
             <v-chip
               class="white--text ml-0"
@@ -91,7 +91,7 @@
         color="grey"
         small
       >
-        <v-layout justify-between>
+        <v-layout justify-space-between>
           <v-flex xs7>
             Order confirmation email was sent to John Leider (john@vuetifyjs.com).
           </v-flex>
@@ -116,7 +116,7 @@
         color="grey"
         small
       >
-        <v-layout justify-between>
+        <v-layout justify-space-between>
           <v-flex xs7>
             A $15.00 USD payment was processed on PayPal Express Checkout
           </v-flex>
@@ -128,7 +128,7 @@
         color="grey"
         small
       >
-        <v-layout justify-between>
+        <v-layout justify-space-between>
           <v-flex xs7>
             John Leider placed this order on Online Store (checkout #1937432132572).
           </v-flex>

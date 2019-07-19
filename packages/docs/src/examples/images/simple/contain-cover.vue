@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-layout justify-around>
+    <v-layout justify-space-around>
       <v-flex xs5>
         <div class="title mb-1">Default (cover)</div>
         <v-layout column>

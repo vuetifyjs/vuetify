@@ -3,7 +3,7 @@
     class="mx-auto"
     max-width="500"
   >
-    <v-card-title class="title font-weight-regular justify-between">
+    <v-card-title class="title font-weight-regular justify-space-between">
       <span>{{ currentTitle }}</span>
       <v-avatar
         color="primary lighten-2"

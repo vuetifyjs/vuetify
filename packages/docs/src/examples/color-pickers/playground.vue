@@ -3,7 +3,7 @@
     <v-container>
       <v-layout
         row
-        justify-around
+        justify-space-around
         wrap
       >
         <v-switch

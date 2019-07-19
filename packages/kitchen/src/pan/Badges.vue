@@ -5,7 +5,7 @@
 
       <core-title>Left</core-title>
       <core-section>
-        <v-layout justify-around>
+        <v-layout justify-space-around>
           <v-badge left>
             <template #badge>
               <span>
@@ -51,7 +51,7 @@
         Right
       </core-title>
       <core-section>
-        <v-layout justify-around>
+        <v-layout justify-space-around>
           <v-badge right>
             <template #badge>
               <span>
@@ -97,7 +97,7 @@
         Color
       </core-title>
       <core-section>
-        <v-layout justify-around>
+        <v-layout justify-space-around>
           <v-badge
             left
             color="red"
@@ -200,7 +200,7 @@
         Overlap
       </core-title>
       <core-section>
-        <v-layout justify-around>
+        <v-layout justify-space-around>
           <v-badge
             left
             overlap
@@ -377,7 +377,7 @@
         Icons
       </core-title>
       <core-section>
-        <v-layout justify-around>
+        <v-layout justify-space-around>
           <v-badge
             left
             color="red"

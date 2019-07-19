@@ -6,7 +6,7 @@
     <v-layout
       row
       wrap
-      justify-around
+      justify-space-around
     >
       <v-flex xs12>
         <v-select

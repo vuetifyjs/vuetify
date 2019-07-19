@@ -5,7 +5,7 @@
     dark
     style="max-width: 400px;"
   >
-    <v-layout justify-between>
+    <v-layout justify-space-between>
       <v-flex xs8>
         <v-card-title primary-title>
           <div>

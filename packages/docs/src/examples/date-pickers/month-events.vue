@@ -1,5 +1,5 @@
 <template>
-  <v-layout justify-between wrap>
+  <v-layout justify-space-between wrap>
     <v-flex xs12 sm6 class="my-4">
       <div class="subheading">Defined by array</div>
       <v-date-picker
