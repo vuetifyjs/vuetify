@@ -3,7 +3,7 @@ import './VDataTable.sass'
 // Types
 import { VNode, VNodeChildrenArrayContents, VNodeChildren } from 'vue'
 import { PropValidator } from 'vue/types/options'
-import { DataProps, DataPaginaton, DataOptions } from '../VData/VData'
+import { DataProps, DataPagination, DataOptions } from '../VData/VData'
 import { TableHeader } from './mixins/header'
 
 // Components
@@ -530,7 +530,7 @@ export default VDataIterator.extend({
         'update:sort-desc': (v: boolean | boolean[]) => this.$emit('update:sort-desc', v),
         'update:group-by': (v: string | string[]) => this.$emit('update:group-by', v),
         'update:group-desc': (v: boolean | boolean[]) => this.$emit('update:group-desc', v),
-        'pagination': (v: DataPaginaton, old: DataPaginaton) => !deepEqual(v, old) && this.$emit('pagination', v),
+        'pagination': (v: DataPagination, old: DataPagination) => !deepEqual(v, old) && this.$emit('pagination', v),
         'current-items': (v: any[]) => {
           this.internalCurrentItems = v
           this.$emit('current-items', v)
