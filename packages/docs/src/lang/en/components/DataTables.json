@@ -75,7 +75,7 @@
     },
     "server": {
       "header": "### Paginate and sort server-side",
-      "desc": "If you're loading data from a backend and want to paginate and sort the results before displaying them, you can use the `total-items` prop. Defining this prop will disable the built-in sorting and pagination, and you will instead need to use the `pagination` prop to listen for changes. Use the `loading` prop to display a progress bar while fetching data."
+      "desc": "If you're loading data already paginated and sorted from a backend, you can use the `server-items-length` prop. Defining this prop will disable the built-in sorting and pagination, and you will instead need to use the available events (`update:page`, `update:sortBy`, `update:options`, etc) to know when to request new pages from you backend. Use the `loading` prop to display a progress bar while fetching data."
     },
     "headerless": {
       "header": "### Remove default header and footer",
