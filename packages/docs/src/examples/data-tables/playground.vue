@@ -3,7 +3,6 @@
     <v-layout row wrap justify-space-around>
       <v-switch v-model="dense" class="mx-2" label="Dense"></v-switch>
       <v-switch v-model="loading" class="mx-2" label="Loading"></v-switch>
-      <v-switch v-model="virtualRows" class="mx-2" label="Virtual rows"></v-switch>
       <v-switch v-model="disableSort" class="mx-2" label="Disable sort"></v-switch>
       <v-switch v-model="disablePagination" class="mx-2" label="Disable pagination"></v-switch>
       <v-switch v-model="disableFiltering" class="mx-2" label="Disable filtering"></v-switch>
@@ -43,7 +42,6 @@
       :items="desserts"
       :dense="dense"
       :loading="loading"
-      :virtual-rows="virtualRows"
       :disable-sort="disableSort"
       :disable-pagination="disablePagination"
       :disable-filtering="disableFiltering"
@@ -68,7 +66,6 @@
         dense: false,
         height: 300,
         loading: false,
-        virtualRows: false,
         disableSort: false,
         disablePagination: false,
         disableFiltering: false,

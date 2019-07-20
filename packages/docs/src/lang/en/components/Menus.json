@@ -74,11 +74,14 @@
     "light": "Mixins.Themeable.props.light",
     "disabled": "Disables the menu",
     "disableKeys": "Removes all keyboard interaction",
+    "internalActivator": "Detaches the menu content inside of the component as opposed to the document.",
+    "maxHeight": "Set's the maximum height for the menu content.",
     "offsetX": "Offset the menu on the x-axis. Works in conjunction with direction left/right",
     "offsetY": "Offset the menu on the y-axis. Works in conjunction with direction top/bottom",
     "openOnClick": "Designates whether menu should open on activator click",
     "openOnHover": "Designates whether menu should open on activator hover",
     "origin": "Mixins.Transitionable.props.origin",
+    "returnValue": "The value that is updated when the menu is closed.",
     "transition": "Mixins.Transitionable.props.transition"
   }
 }

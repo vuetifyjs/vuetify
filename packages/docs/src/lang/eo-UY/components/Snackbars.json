@@ -11,7 +11,6 @@
     }
   },
   "props": {
-    "autoHeight": "crwdns26384:0crwdne26384:0",
     "multiLine": "crwdns26386:0crwdne26386:0",
     "timeout": "crwdns26388:0crwdne26388:0",
     "vertical": "crwdns26390:0crwdne26390:0"

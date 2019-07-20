@@ -10,6 +10,7 @@
   pointer-events: none
   position: fixed
   right: 8px
+  text-align: left
   z-index: 1000
 
   &--absolute
@@ -38,10 +39,10 @@
   &__content
     align-items: center
     display: flex
-    height: 48px
+    min-height: 48px
     justify-content: space-between
     overflow: hidden
-    padding: 0 16px
+    padding: 8px 16px
     width: 100%
 
     .v-btn.v-btn
@@ -83,9 +84,6 @@
       &__content
         flex: 0 0 auto
         margin: 0
-
-  &--auto-height &__content
-    height: auto
 
 @media #{map-get($display-breakpoints, 'sm-and-up')}
   .v-snack

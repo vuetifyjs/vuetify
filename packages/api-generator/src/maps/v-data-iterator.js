@@ -1,7 +1,7 @@
 const { DataEvents, DataProps, DataDefaultScopedSlotProps } = require('./v-data')
 const { DataFooterPageTextScopedProps } = require('./v-data-footer')
 
-const DataIteratorProps = [
+const DataIteratorProps = DataProps.concat([
   { name: 'value', source: 'v-data-iterator' },
   { name: 'singleSelect', source: 'v-data-iterator' },
   { name: 'expanded', source: 'v-data-iterator' },
@@ -12,14 +12,14 @@ const DataIteratorProps = [
   { name: 'noDataText', source: 'v-data-iterator' },
   { name: 'hideDefaultFooter', source: 'v-data-iterator' },
   { name: 'footerProps', source: 'v-data-iterator' },
-].concat(DataProps)
+])
 
-const DataIteratorEvents = [
+const DataIteratorEvents = DataEvents.concat([
   { name: 'input', source: 'v-data-iterator', value: 'any[]' },
   { name: 'update:expanded', source: 'v-data-iterator', value: 'any[]' },
   { name: 'item-selected', source: 'v-data-iterator', value: '{ item: any, value: boolean }' },
   { name: 'item-expanded', source: 'v-data-iterator', value: '{ item: any, value: boolean }' },
-].concat(DataEvents)
+])
 
 const DataIteratorSlots = [
   { name: 'loading', source: 'data-iterator' },
