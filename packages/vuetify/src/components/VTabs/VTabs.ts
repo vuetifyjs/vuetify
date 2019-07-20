@@ -179,7 +179,6 @@ export default baseMixins.extend<options>().extend({
     },
     genBar (items: VNode[], slider: VNode | null) {
       const data = {
-        staticClass: this.backgroundColor,
         style: {
           height: convertToUnit(this.height),
         },

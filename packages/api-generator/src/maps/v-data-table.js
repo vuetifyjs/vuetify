@@ -1,4 +1,5 @@
-const { DataDefaultScopedSlotProps, DataOptions, DataProps } = require('./v-data')
+const deepmerge = require('../helpers/merge')
+const { DataDefaultScopedSlotProps, DataOptions } = require('./v-data')
 const { DataIteratorEvents, DataIteratorProps, DataIteratorItemScopedProps } = require('./v-data-iterator')
 const { DataFooterPageTextScopedProps } = require('./v-data-footer')
 
@@ -86,13 +87,17 @@ const DataTableSlots = [
 
 module.exports = {
   'v-data-table': {
-    props: [
+    props: deepmerge(DataIteratorProps, [
       {
         name: 'headers',
         type: 'TableHeader[]',
         example: TableHeader,
       },
-    ].concat(DataIteratorProps).concat(DataProps),
+      {
+        name: 'customFilter',
+        default: '(value: any, search: string | null, item: any): boolean',
+      },
+    ]),
     slots: DataTableSlots,
     events: DataTableEvents,
   },

@@ -64,12 +64,16 @@
     }
   },
   "props": {
+    "v-tab-item": {
+      "value": "Sets the value of the tab. If not provided, the index will be used."
+    },
     "activeClass": "Mixins.BaseItemGroup.props.activeClass",
     "alignWithTitle": "Make `v-tabs` lined up with the toolbar title",
     "backgroundColor": "Changes the background color of `v-tabs-bar`.",
     "centerActive": "Forces the selected tab to be centered",
     "cycle": "Will reset to first or last tab when swiping left or right if at the end of indexes",
     "dark": "Mixins.Themeable.props.dark",
+    "height": "Sets the height of the tabs bar",
     "grow": "Force `v-tab`'s to take up all available space",
     "hideSlider": "Hide's the generated `v-tabs-slider`",
     "iconsAndText": "Will stack icon and text vertically",
@@ -82,7 +86,8 @@
     "showArrows": "Show pagination arrows if the tab items overflow their container. For mobile devices, arrows will only display when using this prop.",
     "sliderColor": "Changes the background color of an auto-generated `v-tabs-slider`",
     "touchless": "Components.NavigationDrawers.props.touchless",
-    "transition": "Mixins.Transitionable.props.transition"
+    "transition": "Mixins.Transitionable.props.transition",
+    "vertical": "Stacks tabs on top of each other vertically."
   },
   "events": {
     "v-tabs": {
