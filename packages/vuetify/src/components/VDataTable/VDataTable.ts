@@ -11,7 +11,7 @@ import { VData } from '../VData'
 import { VDataFooter, VDataIterator } from '../VDataIterator'
 import VBtn from '../VBtn'
 import VDataTableHeader from './VDataTableHeader'
-import VVirtualTable from './VVirtualTable'
+// import VVirtualTable from './VVirtualTable'
 import VIcon from '../VIcon'
 import VProgressLinear from '../VProgressLinear'
 import Row from './Row'
@@ -68,7 +68,8 @@ export default VDataIterator.extend({
     showSelect: Boolean,
     showExpand: Boolean,
     showGroupBy: Boolean,
-    virtualRows: Boolean,
+    // TODO: Fix
+    // virtualRows: Boolean,
     mobileBreakpoint: {
       type: Number,
       default: 600,
@@ -483,23 +484,23 @@ export default VDataIterator.extend({
         dense: this.dense,
       }
 
-      if (this.virtualRows) {
-        return this.$createElement(VVirtualTable, {
-          props: Object.assign(simpleProps, {
-            items: props.items,
-            height: this.height,
-            rowHeight: this.dense ? 24 : 48,
-            headerHeight: this.dense ? 32 : 48,
-            // TODO: expose rest of props from virtual table?
-          }),
-          scopedSlots: {
-            items: ({ items }) => this.genItems(items, props) as any,
-          },
-        }, [
-          this.proxySlot('body.before', [this.genCaption(props), this.genHeaders(props)]),
-          this.proxySlot('bottom', this.genFooters(props)),
-        ])
-      }
+      // if (this.virtualRows) {
+      //   return this.$createElement(VVirtualTable, {
+      //     props: Object.assign(simpleProps, {
+      //       items: props.items,
+      //       height: this.height,
+      //       rowHeight: this.dense ? 24 : 48,
+      //       headerHeight: this.dense ? 32 : 48,
+      //       // TODO: expose rest of props from virtual table?
+      //     }),
+      //     scopedSlots: {
+      //       items: ({ items }) => this.genItems(items, props) as any,
+      //     },
+      //   }, [
+      //     this.proxySlot('body.before', [this.genCaption(props), this.genHeaders(props)]),
+      //     this.proxySlot('bottom', this.genFooters(props)),
+      //   ])
+      // }
 
       return this.$createElement(VSimpleTable, {
         props: simpleProps,

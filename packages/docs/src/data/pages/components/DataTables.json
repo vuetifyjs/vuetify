@@ -40,7 +40,6 @@
             "simple/multi-sort",
             "simple/search",
             "simple/headerless",
-            "simple/virtualized",
             "simple/loading",
             "simple/dense",
             "simple/footer-props",
