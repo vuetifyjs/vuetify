@@ -419,9 +419,9 @@ export function sortItems (
   })
 }
 
-export type FilterFn = (value: any, search: string, item: any) => boolean
+export type FilterFn = (value: any, search: string | null, item: any) => boolean
 
-export function defaultFilter (value: any, search: string | null) {
+export function defaultFilter (value: any, search: string | null, item: any) {
   return value != null &&
     search != null &&
     typeof value !== 'boolean' &&
@@ -433,7 +433,7 @@ export function searchItems (items: any[], search: string) {
   search = search.toString().toLowerCase()
   if (search.trim() === '') return items
 
-  return items.filter(item => Object.keys(item).some(key => defaultFilter(getObjectValueByPath(item, key), search)))
+  return items.filter(item => Object.keys(item).some(key => defaultFilter(getObjectValueByPath(item, key), search, item)))
 }
 
 /**
