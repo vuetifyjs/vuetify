@@ -17,7 +17,7 @@
       "header": "### Date pickers - current date indicator"
     },
     "date-dialog-and-menu": {
-      "desc": "When integrating a picker into a `v-text-field`, it is recommended to use the **readonly** prop. This will prevent mobile keyboards from triggering. To save vertical space, you can also hide the picker title.  \n\n  Pickers expose a scoped slot that allow you to hook into save and cancel functionality. This will maintain an old value which can be replaced if the user cancels.",
+      "desc": "When integrating a picker into a `v-text-field`, it is recommended to use the **readonly** prop. This will prevent mobile keyboards from triggering. To save vertical space, you can also hide the picker title.  \n\n  Pickers expose a slot that allow you to hook into save and cancel functionality. This will maintain an old value which can be replaced if the user cancels.",
       "header": "### Date pickers - In dialog and menu"
     },
     "date-events": {
@@ -69,7 +69,7 @@
       "header": "### Month pickers - current month indicator"
     },
     "month-dialog-and-menu": {
-      "desc": "When integrating a picker into a `v-text-field`, it is recommended to use the **readonly** prop. This will prevent mobile keyboards from triggering. To save vertical space, you can also hide the picker title. \n\n Pickers expose a scoped slot that allow you to hook into save and cancel functionality. This will maintain an old value which can be replaced if the user cancels.",
+      "desc": "When integrating a picker into a `v-text-field`, it is recommended to use the **readonly** prop. This will prevent mobile keyboards from triggering. To save vertical space, you can also hide the picker title. \n\n Pickers expose a slot that allow you to hook into save and cancel functionality. This will maintain an old value which can be replaced if the user cancels.",
       "header": "### Month pickers - In dialog and menu"
     },
     "month-events": {

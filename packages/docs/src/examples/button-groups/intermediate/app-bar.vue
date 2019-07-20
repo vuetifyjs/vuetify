@@ -7,19 +7,19 @@
       class="pa-0"
     ></v-overflow-btn>
 
-    <v-divider vertical></v-divider>
-
-    <v-overflow-btn
-      :items="dropdown_edit"
-      editable
-      label="Select size"
-      hide-details
-      class="pa-0"
-      overflow
-    ></v-overflow-btn>
-    <v-divider vertical></v-divider>
-
     <template v-if="$vuetify.breakpoint.mdAndUp">
+      <v-divider vertical></v-divider>
+
+      <v-overflow-btn
+        :items="dropdown_edit"
+        editable
+        label="Select size"
+        hide-details
+        class="pa-0"
+        overflow
+      ></v-overflow-btn>
+
+      <v-divider vertical></v-divider>
 
       <v-spacer></v-spacer>
 
@@ -44,7 +44,7 @@
         </v-btn>
       </v-btn-toggle>
 
-      <div class="mx-3"></div>
+      <div class="mx-4"></div>
 
       <v-btn-toggle v-model="toggle_exclusive">
         <v-btn :value="1" text>

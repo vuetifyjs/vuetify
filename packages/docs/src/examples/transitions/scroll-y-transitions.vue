@@ -5,7 +5,7 @@
   >
     <v-menu transition="scroll-x-transition">
       <template v-slot:activator="{ on }">
-        <v-btn color="primary" v-on="on">
+        <v-btn color="primary" class="ma-2" v-on="on">
           Scroll X Transition
         </v-btn>
       </template>
@@ -16,11 +16,11 @@
       </v-list>
     </v-menu>
 
-    <div class="mx-3 hidden-sm-and-down"></div>
+    <div class="mx-4 hidden-sm-and-down"></div>
 
     <v-menu transition="scroll-x-reverse-transition">
       <template v-slot:activator="{ on }">
-        <v-btn color="secondary" v-on="on">
+        <v-btn color="secondary" class="ma-2" v-on="on">
           Scroll X Reverse Transition
         </v-btn>
       </template>

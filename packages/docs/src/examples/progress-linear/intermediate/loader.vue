@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="mx-auto mt-4"
+    class="mx-auto mt-6"
     width="344"
   >
     <v-system-bar>
@@ -45,7 +45,7 @@
         <v-scale-transition>
           <div
             v-if="!loading"
-            class="text-xs-center"
+            class="text-center"
           >
             <v-btn
               color="primary"

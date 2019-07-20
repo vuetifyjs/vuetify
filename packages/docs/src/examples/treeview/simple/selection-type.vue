@@ -13,7 +13,7 @@
         ></v-treeview>
       </v-flex>
       <v-divider vertical></v-divider>
-      <v-flex xs6 pa-4>
+      <v-flex xs6 pa-6>
         <template v-if="!selection.length">
           No nodes selected.
         </template>

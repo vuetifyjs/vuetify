@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="mx-auto mt-5"
+    class="mx-auto mt-12"
     max-width="450"
   >
     <v-system-bar></v-system-bar>
@@ -40,7 +40,7 @@
       >
         <v-img
           :src="item.image"
-          class="mr-3"
+          class="mr-4"
           max-width="64"
           min-width="64"
         ></v-img>

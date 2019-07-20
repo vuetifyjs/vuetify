@@ -30,7 +30,7 @@
       </v-btn>
       <v-item-group
         v-model="onboarding"
-        class="text-xs-center"
+        class="text-center"
         mandatory
       >
         <v-item

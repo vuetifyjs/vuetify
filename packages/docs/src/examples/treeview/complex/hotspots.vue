@@ -9,7 +9,7 @@
       <v-toolbar-title>Local hotspots</v-toolbar-title>
     </v-toolbar>
 
-    <v-layout>
+    <v-layout wrap>
       <v-flex>
         <v-card-text>
           <v-treeview
@@ -39,7 +39,7 @@
           <div
             v-if="tree.length === 0"
             key="title"
-            class="title font-weight-light grey--text pa-3 text-xs-center"
+            class="title font-weight-light grey--text pa-4 text-center"
           >
             Select your favorite breweries
           </div>

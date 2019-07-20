@@ -39,7 +39,7 @@
     <v-form
       ref="form"
       v-model="form"
-      class="pa-3 pt-4"
+      class="pa-4 pt-6"
     >
       <v-text-field
         v-model="password"

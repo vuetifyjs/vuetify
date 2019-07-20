@@ -2,7 +2,7 @@
   <v-container fluid class="pa-0">
     <v-layout row wrap align-center>
       <v-flex xs12 sm6>
-        <div class="text-xs-center">
+        <div class="text-center">
           <div class="my-2">
             <v-btn small color="primary" dark>Small Button</v-btn>
           </div>
@@ -15,7 +15,7 @@
         </div>
       </v-flex>
       <v-flex xs12 sm6>
-        <div class="text-xs-center">
+        <div class="text-center">
           <div class="my-2">
             <v-btn color="primary" fab small dark>
               <v-icon>edit</v-icon>

@@ -29,7 +29,7 @@
                 <v-scroll-y-transition>
                   <div
                     v-if="active"
-                    class="display-3 text-xs-center"
+                    class="display-3 text-center"
                   >
                     Active
                   </div>
@@ -39,7 +39,7 @@
                 v-else
                 src="https://picsum.photos/id/237/200/300"
                 height="150"
-                class="text-xs-right pa-2"
+                class="text-right pa-2"
                 @click="toggle"
               >
                 <v-btn

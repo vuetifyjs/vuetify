@@ -1,6 +1,5 @@
 module.exports = {
   'v-bottom-navigation': {
-    slots: ['default'],
     events: [
       {
         name: 'change',

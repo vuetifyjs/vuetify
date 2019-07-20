@@ -4,7 +4,7 @@
 
     <v-card-text>
       <v-layout row>
-        <v-flex class="pr-3">
+        <v-flex class="pr-4">
           <v-slider
             v-model="slider"
             class="align-center"
@@ -31,7 +31,7 @@
 
     <v-card-text>
       <v-layout row>
-        <v-flex class="px-3">
+        <v-flex class="px-4">
           <v-range-slider
             v-model="range"
             :max="max"

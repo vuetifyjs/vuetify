@@ -39,160 +39,190 @@
           "lang": "installText1"
         },
         {
-          "type": "heading",
-          "lang": "installMDI"
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "installMDI"
+            },
+            {
+              "type": "text",
+              "lang": "installMDIText1"
+            },
+            {
+              "type": "markup",
+              "value": "html_material_design_icons_link"
+            },
+            {
+              "type": "text",
+              "lang": "installMDIText2"
+            },
+            {
+              "type": "markup",
+              "value": "bash_yarn_install_mdi"
+            },
+            {
+              "type": "markup",
+              "value": "js_import_mdi"
+            }
+          ]
         },
         {
-          "type": "text",
-          "lang": "installMDIText1"
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "installMDISvg"
+            },
+            {
+              "type": "text",
+              "lang": "installMDISvgText1"
+            },
+            {
+              "type": "markup",
+              "value": "bash_yarn_install_mdi_svg"
+            },
+            {
+              "type": "text",
+              "lang": "installMDISvgText2"
+            },
+            {
+              "type": "markup",
+              "value": "js_import_mdi_svg"
+            },
+            {
+              "type": "text",
+              "lang": "installMDISvgText3"
+            },
+            {
+              "type": "markup",
+              "value": "html_mdi_svg"
+            }
+          ]
         },
         {
-          "type": "markup",
-          "value": "html_material_design_icons_link"
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "installMD"
+            },
+            {
+              "type": "text",
+              "lang": "installMDText1"
+            },
+            {
+              "type": "markup",
+              "value": "html_material_icons_link"
+            },
+            {
+              "type": "text",
+              "lang": "installMDText2"
+            },
+            {
+              "type": "markup",
+              "value": "bash_yarn_install_material_icons"
+            },
+            {
+              "type": "text",
+              "lang": "installMDText3"
+            },
+            {
+              "type": "markup",
+              "value": "js_import_material_icons"
+            }
+          ]
         },
         {
-          "type": "text",
-          "lang": "installMDIText2"
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "installFA"
+            },
+            {
+              "type": "text",
+              "lang": "installFAText1"
+            },
+            {
+              "type": "markup",
+              "value": "html_fa5_link"
+            },
+            {
+              "type": "text",
+              "lang": "installFAText2"
+            },
+            {
+              "type": "markup",
+              "value": "bash_yarn_install_fa5"
+            },
+            {
+              "type": "text",
+              "lang": "installFAText3"
+            },
+            {
+              "type": "markup",
+              "value": "js_import_fa5"
+            }
+          ]
         },
         {
-          "type": "markup",
-          "value": "bash_yarn_install_mdi"
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "installFA4"
+            },
+            {
+              "type": "text",
+              "lang": "installFA4Text1"
+            },
+            {
+              "type": "markup",
+              "value": "html_fa4_link"
+            },
+            {
+              "type": "text",
+              "lang": "installFA4Text2"
+            },
+            {
+              "type": "markup",
+              "value": "bash_yarn_install_fa4"
+            },
+            {
+              "type": "text",
+              "lang": "installFA4Text3"
+            },
+            {
+              "type": "markup",
+              "value": "js_import_fa4"
+            }
+          ]
         },
         {
-          "type": "markup",
-          "value": "js_import_mdi"
-        },
-        {
-          "type": "heading",
-          "lang": "installMDISvg"
-        },
-        {
-          "type": "text",
-          "lang": "installMDISvgText1"
-        },
-        {
-          "type": "markup",
-          "value": "bash_yarn_install_mdi_svg"
-        },
-        {
-          "type": "text",
-          "lang": "installMDISvgText2"
-        },
-        {
-          "type": "markup",
-          "value": "js_import_mdi_svg"
-        },
-        {
-          "type": "text",
-          "lang": "installMDISvgText3"
-        },
-        {
-          "type": "markup",
-          "value": "html_mdi_svg"
-        },
-        {
-          "type": "heading",
-          "lang": "installMD"
-        },
-        {
-          "type": "text",
-          "lang": "installMDText1"
-        },
-        {
-          "type": "markup",
-          "value": "html_material_icons_link"
-        },
-        {
-          "type": "text",
-          "lang": "installMDText2"
-        },
-        {
-          "type": "markup",
-          "value": "bash_yarn_install_material_icons"
-        },
-        {
-          "type": "text",
-          "lang": "installMDText3"
-        },
-        {
-          "type": "markup",
-          "value": "js_import_material_icons"
-        },
-        {
-          "type": "heading",
-          "lang": "installFA"
-        },
-        {
-          "type": "text",
-          "lang": "installFAText1"
-        },
-        {
-          "type": "markup",
-          "value": "html_fa5_link"
-        },
-        {
-          "type": "text",
-          "lang": "installFAText2"
-        },
-        {
-          "type": "markup",
-          "value": "bash_yarn_install_fa5"
-        },
-        {
-          "type": "text",
-          "lang": "installFAText3"
-        },
-        {
-          "type": "markup",
-          "value": "js_import_fa5"
-        },
-        {
-          "type": "heading",
-          "lang": "installFA4"
-        },
-        {
-          "type": "text",
-          "lang": "installFA4Text1"
-        },
-        {
-          "type": "markup",
-          "value": "html_fa4_link"
-        },
-        {
-          "type": "text",
-          "lang": "installFA4Text2"
-        },
-        {
-          "type": "markup",
-          "value": "bash_yarn_install_fa4"
-        },
-        {
-          "type": "text",
-          "lang": "installFA4Text3"
-        },
-        {
-          "type": "markup",
-          "value": "js_import_fa4"
-        },
-        {
-          "type": "heading",
-          "lang": "installFASvg"
-        },
-        {
-          "type": "text",
-          "lang": "installFASvgText1"
-        },
-        {
-          "type": "markup",
-          "value": "bash_yarn_install_fa_svg"
-        },
-        {
-          "type": "text",
-          "lang": "installFASvgText2"
-        },
-        {
-          "type": "markup",
-          "value": "js_import_fa_svg"
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "installFASvg"
+            },
+            {
+              "type": "text",
+              "lang": "installFASvgText1"
+            },
+            {
+              "type": "markup",
+              "value": "bash_yarn_install_fa_svg"
+            },
+            {
+              "type": "text",
+              "lang": "installFASvgText2"
+            },
+            {
+              "type": "markup",
+              "value": "js_import_fa_svg"
+            }
+          ]
         }
       ]
     },
@@ -262,16 +292,21 @@
           "value": "html_custom_icons_custom_component"
         },
         {
-          "type": "heading",
-          "lang": "customFASvg"
-        },
-        {
-          "type": "text",
-          "lang": "customFASvgText1"
-        },
-        {
-          "type": "markup",
-          "value": "js_vuetify_custom_fa_svg_icons"
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "customFASvg"
+            },
+            {
+              "type": "text",
+              "lang": "customFASvgText1"
+            },
+            {
+              "type": "markup",
+              "value": "js_vuetify_custom_fa_svg_icons"
+            }
+          ]
         }
       ]
     },

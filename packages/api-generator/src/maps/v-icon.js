@@ -1,6 +1,5 @@
 module.exports = {
   'v-icon': {
-    slots: ['default'],
     props: [
       {
         name: 'dense',

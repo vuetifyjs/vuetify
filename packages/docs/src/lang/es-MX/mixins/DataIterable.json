@@ -19,9 +19,7 @@
     "value": "Elementos de fila seleccionados."
   },
   "slots": {
-    "footer": "Slot para especificar un footer adicional."
-  },
-  "scopedSlots": {
+    "footer": "Slot para especificar un footer adicional.",
     "items": "Slot para especificar cómo se renderizan los elementos."
   }
 }

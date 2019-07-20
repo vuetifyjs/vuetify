@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="text-xs-center">
+  <v-container fluid class="text-center">
     <v-layout
       flex
       justify-space-between
@@ -10,7 +10,7 @@
         <v-btn @click="show = !show">toggle</v-btn>
       </v-flex>
 
-      <v-flex xs12 class="mt-5">
+      <v-flex xs12 class="mt-12">
         <v-tooltip v-model="show" top>
           <template v-slot:activator="{ on }">
             <v-btn icon v-on="on">

@@ -139,86 +139,86 @@
           "type": "alert",
           "lang": "alert2",
           "value": "error"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "heading",
-          "lang": "existingHeader3a"
         },
         {
-          "type": "text",
-          "lang": "existingText3a"
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "existingHeader3a"
+            },
+            {
+              "type": "text",
+              "lang": "existingText3a"
+            },
+            {
+              "type": "markup",
+              "value": "js_use_vuetify_loader"
+            },
+            {
+              "type": "text",
+              "lang": "existingText3a1"
+            }
+          ]
         },
         {
-          "type": "markup",
-          "value": "js_use_vuetify_loader"
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "existingHeader3b"
+            },
+            {
+              "type": "text",
+              "lang": "existingText3b"
+            },
+            {
+              "type": "markup",
+              "value": "js_use_vuetify_alacarte"
+            }
+          ]
         },
         {
-          "type": "text",
-          "lang": "existingText3a1"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "heading",
-          "lang": "existingHeader3b"
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "existingHeader3c"
+            },
+            {
+              "type": "text",
+              "lang": "existingText3c"
+            },
+            {
+              "type": "markup",
+              "value": "js_use_vuetify"
+            }
+          ]
         },
         {
-          "type": "text",
-          "lang": "existingText3b"
-        },
-        {
-          "type": "markup",
-          "value": "js_use_vuetify_alacarte"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "heading",
-          "lang": "existingHeader3c"
-        },
-        {
-          "type": "text",
-          "lang": "existingText3c"
-        },
-        {
-          "type": "markup",
-          "value": "js_use_vuetify"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "heading",
-          "lang": "webpackHeader1"
-        },
-        {
-          "type": "text",
-          "lang": "webpackText1"
-        },
-        {
-          "type": "markup",
-          "value": "bash_yarn_install_sass"
-        },
-        {
-          "type": "text",
-          "lang": "webpackText2"
-        },
-        {
-          "type": "markup",
-          "value": "js_webpack_sass"
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "webpackHeader1"
+            },
+            {
+              "type": "text",
+              "lang": "webpackText1"
+            },
+            {
+              "type": "markup",
+              "value": "bash_yarn_install_sass"
+            },
+            {
+              "type": "text",
+              "lang": "webpackText2"
+            },
+            {
+              "type": "markup",
+              "value": "js_webpack_sass"
+            }
+          ]
         }
       ]
     },
@@ -259,28 +259,33 @@
           "lang": "existingText6"
         },
         {
-          "type": "heading",
-          "lang": "existingHeader7"
-        },
-        {
-          "type": "text",
-          "lang": "existingText7"
-        },
-        {
-          "type": "markup",
-          "value": "bash_yarn_install_mdi"
-        },
-        {
-          "type": "text",
-          "lang": "existingText8"
-        },
-        {
-          "type": "markup",
-          "value": "js_import_mdi"
-        },
-        {
-          "type": "text",
-          "lang": "existingText9"
+          "type": "section",
+          "children": [
+            {
+              "type": "heading",
+              "lang": "existingHeader7"
+            },
+            {
+              "type": "text",
+              "lang": "existingText7"
+            },
+            {
+              "type": "markup",
+              "value": "bash_yarn_install_mdi"
+            },
+            {
+              "type": "text",
+              "lang": "existingText8"
+            },
+            {
+              "type": "markup",
+              "value": "js_import_mdi"
+            },
+            {
+              "type": "text",
+              "lang": "existingText9"
+            }
+          ]
         }
       ]
     },

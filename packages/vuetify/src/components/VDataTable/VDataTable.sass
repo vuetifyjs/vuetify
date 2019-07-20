@@ -18,6 +18,10 @@
         &.expanded__content
           box-shadow: inset 0px 4px 8px -5px rgba(50, 50, 50, 0.75), inset 0px -4px 8px -5px rgba(50, 50, 50, 0.75)
 
+  .v-row-group
+    &__header, &__summary
+      background: map-deep-get($material, 'table', 'group')
+
   .v-data-footer
     border-top: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
 
@@ -56,7 +60,6 @@
 
 .v-row-group
   &__header, &__summary
-    background: lightgrey // TOOD: theme
 
     td
       height: 35px

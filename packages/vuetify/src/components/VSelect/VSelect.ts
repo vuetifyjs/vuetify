@@ -27,7 +27,6 @@ import { PropValidator } from 'vue/types/options'
 import { VNode, VNodeDirective } from 'vue'
 
 export const defaultMenuProps = {
-  eager: true,
   closeOnClick: false,
   closeOnContentClick: false,
   disableKeys: true,
@@ -75,10 +74,15 @@ export default baseMixins.extend<options>().extend({
     clearable: Boolean,
     deletableChips: Boolean,
     dense: Boolean,
+    eager: Boolean,
     hideSelected: Boolean,
     items: {
       type: Array,
       default: () => [],
+    },
+    itemColor: {
+      type: String,
+      default: 'primary',
     },
     itemDisabled: {
       type: [String, Array, Function],
@@ -182,7 +186,7 @@ export default baseMixins.extend<options>().extend({
         },
         props: {
           action: this.multiple,
-          color: this.color,
+          color: this.itemColor,
           dense: this.dense,
           hideSelected: this.hideSelected,
           items: this.virtualizedItems,
@@ -227,6 +231,7 @@ export default baseMixins.extend<options>().extend({
 
       return {
         ...defaultMenuProps,
+        eager: this.eager,
         value: this.menuCanShow && this.isMenuActive,
         nudgeBottom: normalisedProps.offsetY ? 1 : 0, // convert to int
         ...normalisedProps,

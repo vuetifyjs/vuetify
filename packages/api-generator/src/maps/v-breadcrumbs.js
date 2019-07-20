@@ -1,10 +1,10 @@
-const BreadcrumbsItem = {
+const BreadcrumbsItem = [{
   href: 'string',
   disabled: 'boolean',
   link: 'boolean',
   text: 'string | number',
   to: 'string | object',
-}
+}]
 
 module.exports = {
   'v-breadcrumbs': {
@@ -12,8 +12,11 @@ module.exports = {
       name: 'items',
       example: BreadcrumbsItem,
     }],
-    slots: ['default', 'divider'],
-    scopedSlots: [
+    slots: [
+      {
+        name: 'divider',
+        props: undefined,
+      },
       {
         name: 'item',
         props: {

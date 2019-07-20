@@ -1,33 +1,33 @@
 <template>
-  <div class="text-xs-center">
+  <div class="text-center">
     <v-layout column justify-center align-center>
       <v-flex xs12>
         <v-radio-group row wrap>
-          <v-switch v-model="circle" label="Toggle circle" class="mx-3"></v-switch>
-          <v-switch v-model="disabled" label="Toggle disabled" class="mx-3"></v-switch>
+          <v-switch v-model="circle" label="Toggle circle" class="mx-4"></v-switch>
+          <v-switch v-model="disabled" label="Toggle disabled" class="mx-4"></v-switch>
         </v-radio-group>
       </v-flex>
 
-      <v-layout row>
-        <v-flex xs3>
+      <v-layout wrap>
+        <v-flex xs12 md3>
           <v-select
             v-model="prevIcon"
-            class="mx-3"
+            class="mx-4"
             :items="prevIcons"
             label="prev-icon"
           ></v-select>
         </v-flex>
 
-        <v-flex xs3>
+        <v-flex xs12 md3>
           <v-select
             v-model="nextIcon"
-            class="mx-3"
+            class="mx-4"
             :items="nextIcons"
             label="next-icon"
           ></v-select>
         </v-flex>
 
-        <v-flex xs3>
+        <v-flex xs12 md3>
           <v-text-field
             v-model="length"
             label="Pagination length"
@@ -40,7 +40,7 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex xs3>
+        <v-flex xs12 md3>
           <v-text-field
             v-model="totalVisible"
             label="Total visible"

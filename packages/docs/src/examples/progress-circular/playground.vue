@@ -1,6 +1,6 @@
 <template>
   <v-layout column justify-center align-center>
-    <div class="text-xs-center ma-5">
+    <div class="text-center ma-12">
       <v-progress-circular
         :indeterminate="indeterminate"
         :rotate="rotate"
@@ -12,10 +12,10 @@
     </div>
 
     <v-layout row wrap>
-      <v-flex xs2>
+      <v-flex xs12 md3 lg2>
         <v-text-field
           v-model="rotate"
-          class="mx-3"
+          class="mx-4"
           label="Rotate"
           max="360"
           min="0"
@@ -25,10 +25,10 @@
           @keydown="false"
         ></v-text-field>
       </v-flex>
-      <v-flex xs2>
+      <v-flex xs12 md3 lg2>
         <v-text-field
           v-model="size"
-          class="mx-3"
+          class="mx-4"
           label="Size - px"
           max="100"
           min="1"
@@ -38,10 +38,10 @@
           @keydown="false"
         ></v-text-field>
       </v-flex>
-      <v-flex xs2>
+      <v-flex xs12 md3 lg2>
         <v-text-field
           v-model="value"
-          class="mx-3"
+          class="mx-4"
           label="Value - %"
           max="100"
           min="1"
@@ -51,10 +51,10 @@
           @keydown="false"
         ></v-text-field>
       </v-flex>
-      <v-flex xs2>
+      <v-flex xs12 md3 lg2>
         <v-text-field
           v-model="width"
-          class="mx-3"
+          class="mx-4"
           label="Width - px"
           max="100"
           min="1"
@@ -64,8 +64,8 @@
           @keydown="false"
         ></v-text-field>
       </v-flex>
-      <v-flex xs2>
-        <v-switch v-model="indeterminate" label="Toggle indeterminate" class="mx-3"></v-switch>
+      <v-flex xs12 md3 lg2>
+        <v-switch v-model="indeterminate" label="Toggle indeterminate" class="mx-4"></v-switch>
       </v-flex>
     </v-layout>
   </v-layout>

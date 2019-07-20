@@ -7,7 +7,7 @@ import VBtn from '../VBtn'
 
 // Types
 import Vue, { VNode, VNodeChildrenArrayContents } from 'vue'
-import { DataOptions, DataPaginaton } from '../VData/VData'
+import { DataOptions, DataPagination } from '../VData/VData'
 import { PropValidator } from 'vue/types/options'
 
 export default Vue.extend({
@@ -21,7 +21,7 @@ export default Vue.extend({
     pagination: {
       type: Object,
       required: true,
-    } as PropValidator<DataPaginaton>,
+    } as PropValidator<DataPagination>,
     itemsPerPageOptions: {
       type: Array,
       default: () => ([5, 10, 15, -1]),

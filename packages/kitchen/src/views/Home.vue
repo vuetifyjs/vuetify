@@ -1,15 +1,15 @@
 <template>
   <v-content>
     <v-container
-      text-xs-center
-      pt-5
+      text-center
+      pt-12
     >
       <v-layout justify-center>
         <v-flex
           xs12
           md6
         >
-          <h2 class="display-3 mb-5">
+          <h2 class="display-3 mb-12">
             What'll it be?
           </h2>
           <v-autocomplete

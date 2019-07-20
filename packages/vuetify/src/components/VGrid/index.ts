@@ -1,24 +1,30 @@
-import {
-  createSimpleFunctional,
-} from '../../util/helpers'
+import './VGrid.sass'
+
+import { createSimpleFunctional } from '../../util/helpers'
 import VContainer from './VContainer'
-import VFlex from './VFlex'
+import VCol from './VCol'
+import VRow from './VRow'
 import VLayout from './VLayout'
+import VFlex from './VFlex'
 
 const VSpacer = createSimpleFunctional('spacer', 'div', 'v-spacer')
 
 export {
   VContainer,
-  VFlex,
-  VLayout,
+  VCol,
+  VRow,
   VSpacer,
+  VLayout,
+  VFlex,
 }
 
 export default {
   $_vuetify_subcomponents: {
     VContainer,
-    VFlex,
-    VLayout,
+    VCol,
+    VRow,
     VSpacer,
+    VLayout,
+    VFlex,
   },
 }

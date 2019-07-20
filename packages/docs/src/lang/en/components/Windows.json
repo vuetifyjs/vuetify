@@ -23,7 +23,7 @@
     }
   },
   "props": {
-    "activeClass": "Components.ItemGroups.props.activeClass",
+    "activeClass": "Mixins.BaseItemGroup.props.activeClass",
     "continuous": "If `true`, window will \"wrap around\" from the last item to the first, and from the first item to the last",
     "nextIcon": "Icon used for the \"next\" button if `show-arrows` is `true`",
     "prevIcon": "Icon used for the \"prev\" button if `show-arrows` is `true`",
@@ -38,7 +38,8 @@
     "v-window-item": {
       "disabled": "Prevents the item from becoming active when using the \"next\" and \"prev\" buttons or the `toggle` method",
       "reverse-transition": "Sets the reverse transition",
-      "transition": "Mixins.Transitionable.props.transition"
+      "transition": "Mixins.Transitionable.props.transition",
+      "value": "Mixins.Groupable.props.value"
     }
   }
 }

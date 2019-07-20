@@ -59,7 +59,7 @@
             required
           ></v-autocomplete>
         </v-card-text>
-        <v-divider class="mt-5"></v-divider>
+        <v-divider class="mt-12"></v-divider>
         <v-card-actions>
           <v-btn text>Cancel</v-btn>
           <v-spacer></v-spacer>

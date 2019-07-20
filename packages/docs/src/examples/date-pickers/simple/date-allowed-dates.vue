@@ -3,7 +3,7 @@
     <v-date-picker
       v-model="date"
       :allowed-dates="allowedDates"
-      class="mt-3"
+      class="mt-4"
       min="2016-06-15"
       max="2018-03-20"
     ></v-date-picker>

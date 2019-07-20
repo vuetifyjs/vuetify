@@ -17,20 +17,10 @@
       margin: 0
 
   &--top
-    &:not(.v-speed-dial--absolute)
-      top: map-get($grid-gutters, 'lg')
-
-    &.v-speed-dial--absolute
-      top: 50%
-      transform: translateY(-50%)
+    top: map-get($grid-gutters, 'lg')
 
   &--bottom
-    &:not(.v-speed-dial--absolute)
-      bottom: map-get($grid-gutters, 'lg')
-
-    &.v-speed-dial--absolute
-      bottom: 50%
-      transform: translateY(50%)
+    bottom: map-get($grid-gutters, 'lg')
 
   &--left
     left: map-get($grid-gutters, 'lg')
@@ -76,4 +66,8 @@
   align-items: center
   display: flex
   justify-content: center
+  margin-bottom: 16px
   position: absolute
+
+  .v-btn
+    margin: 6px

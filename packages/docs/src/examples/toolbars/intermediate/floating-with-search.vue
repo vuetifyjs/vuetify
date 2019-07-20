@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="pa-3"
+    class="pa-4"
     flat
     height="300px"
     img="https://cdn.vuetifyjs.com/images/toolbar/map.jpg"

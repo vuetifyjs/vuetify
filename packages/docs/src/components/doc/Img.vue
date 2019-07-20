@@ -1,5 +1,5 @@
 <template>
-  <figure class="mb-4 text-xs-center">
+  <figure class="mb-6 text-center">
     <v-sheet color="transparent">
       <v-img
         :src="computedValue"
@@ -10,7 +10,7 @@
 
     <figcaption
       v-if="$slots.default"
-      class="caption text-xs-center"
+      class="caption text-center"
     >
       <doc-markdown><slot /></doc-markdown>
     </figcaption>

@@ -4,7 +4,7 @@
       prominent
       type="error"
     >
-      <v-layout align-center>
+      <v-layout align-center wrap>
         <div>Nunc nonummy metus. Nunc interdum lacus sit amet orci. Nullam dictum felis eu pede mollis pretium. Cras id dui.</div>
         <v-spacer></v-spacer>
         <v-btn>Take action</v-btn>
