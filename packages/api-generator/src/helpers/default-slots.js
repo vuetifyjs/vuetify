@@ -44,7 +44,6 @@ module.exports = [
   'v-list-item-group',
   'v-list-item-subtitle',
   'v-list-item-title',
-  'v-list-item',
   'v-list',
   'v-menu',
   'v-navigation-drawer',
