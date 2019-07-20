@@ -62,6 +62,7 @@
     "touchless": "Disable mobile touch functionality"
   },
   "events": {
+    "transitionend": "Emits event object when transition is complete.",
     "update:miniVariant": "The `mini-variant.sync` event"
   },
   "slots": {
