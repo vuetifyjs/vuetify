@@ -46,6 +46,7 @@
             "simple/footer-props",
             "intermediate/slots",
             "intermediate/expand",
+            "intermediate/custom-filter",
             "intermediate/customize-header",
             "intermediate/customize-rows",
             "intermediate/customize-footer",
