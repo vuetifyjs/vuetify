@@ -56,6 +56,7 @@
     "backgroundOpacity": "Components.ProgressCircular.props.backgroundOpacity",
     "bufferValue": "Components.ProgressCircular.props.bufferValue",
     "fill": "Components.ProgressCircular.props.fill",
+    "height": "Mixins.Measurable.props.height",
     "indeterminate": "Components.ProgressCircular.props.indeterminate",
     "query": "Animates like **indeterminate** prop but inverse",
     "rounded": "Adds a border radius to the progress component",

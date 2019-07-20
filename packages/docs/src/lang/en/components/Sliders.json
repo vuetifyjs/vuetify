@@ -70,6 +70,8 @@
     "alwaysDirty": "When used with the **thumb-label** prop will always show the thumb label.",
     "dark": "Components.Inputs.props.dark",
     "inverseLabel": "Reverse the label position. Works with **rtl**.",
+    "max": "Sets the maximum allowed value",
+    "min": "Sets the minimum allowed value",
     "step": "If greater than 0, sets step interval for ticks",
     "thumbColor": "Sets the thumb and thumb label color",
     "thumbLabel": "Show thumb label. If `true` it shows label when using slider. If set to `'always'` it always shows label.",
