@@ -82,4 +82,5 @@ module.exports = {
   DataIteratorEvents,
   DataIteratorSlots,
   DataIteratorScopedSlots,
+  DataIteratorItemScopedProps,
 }
