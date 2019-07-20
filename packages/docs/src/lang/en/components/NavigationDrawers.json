@@ -51,6 +51,7 @@
     "expandOnHover": "Collapses the drawer to a **mini-variant** until hovering with the mouse",
     "fixed": "Mixins.Positionable.props.fixed",
     "floating": "A floating drawer has no visible container (no border-right)",
+    "height": "Mixins.Measurable.props.height",
     "hideOverlay": "Hide the display of the overlay",
     "miniVariantWidth": "Designates the width assigned when the `mini` prop is turned on",
     "miniVariant": "Condenses navigation drawer width, also accepts the **.sync** modifier. With this, the drawer will re-open when clicking it",
@@ -58,8 +59,11 @@
     "right": "Places the navigation drawer on the right",
     "src": "Components.Toolbars.props.src",
     "stateless": "Remove all automated state functionality (resize, mobile, route) and manually control the drawer state",
+    "tag": "Components.Sheets.props.tag",
     "temporary": "A temporary drawer sits above its application and uses a scrim (overlay) to darken the background",
-    "touchless": "Disable mobile touch functionality"
+    "touchless": "Disable mobile touch functionality",
+    "width": "Mixins.Measurable.props.width",
+    "value": "Mixins.Toggleable.props.value"
   },
   "events": {
     "update:miniVariant": "The `mini-variant.sync` event"

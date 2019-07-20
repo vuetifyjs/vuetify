@@ -47,17 +47,7 @@
     "editable": "Creates an editable button",
     "overflow": "Creates an overflow button",
     "segmented": "Creates a segmented button",
-    "value": "Input value"
-  },
-  "events": {
-    "change": "Components.Inputs.events.change",
-    "click:append": "Components.Inputs.events['click:append']",
-    "click:append-outer": "Components.TextFields.events['click:append-outer']",
-    "click:clear": "Components.TextFields.events['click:clear']",
-    "click:prepend": "Components.Inputs.events['click:prepend']",
-    "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
-    "update:error": "Mixins.Validatable.events['update:error']",
-    "update:searchInput": "The `search-input.sync` event"
+    "value": "Components.Inputs.props.value"
   },
   "slots": {
     "append": "Components.Inputs.slots.append",
@@ -69,5 +59,15 @@
     "prepend-inner": "Components.TextFields.slots.prepend-inner",
     "prepend-item": "Components.Selects.slots.prepend-item",
     "selection": "Components.Selects.slots.selection"
+  },
+  "events": {
+    "change": "Components.Inputs.events.change",
+    "click:append": "Components.Inputs.events['click:append']",
+    "click:append-outer": "Components.TextFields.events['click:append-outer']",
+    "click:clear": "Components.TextFields.events['click:clear']",
+    "click:prepend": "Components.Inputs.events['click:prepend']",
+    "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
+    "update:error": "Mixins.Validatable.events['update:error']",
+    "update:searchInput": "The `search-input.sync` event"
   }
 }

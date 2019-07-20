@@ -48,13 +48,6 @@
 
           <v-flex xs12 sm3>
             <v-checkbox
-              v-model="autoHeight"
-              label="Auto Height"
-            ></v-checkbox>
-          </v-flex>
-
-          <v-flex xs12 sm3>
-            <v-checkbox
               v-model="mode"
               label="Multi-line (mobile)"
               value="multi-line"
@@ -101,7 +94,6 @@
 
     <v-snackbar
       v-model="snackbar"
-      :auto-height="autoHeight"
       :bottom="y === 'bottom'"
       :color="color"
       :left="x === 'left'"
@@ -127,7 +119,6 @@
   export default {
     data () {
       return {
-        autoHeight: false,
         color: '',
         mode: '',
         snackbar: false,
