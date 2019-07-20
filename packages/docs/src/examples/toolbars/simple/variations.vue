@@ -6,7 +6,7 @@
       xs12
       sm12
       md6
-      class="my-3"
+      class="my-4"
     >
       <v-card color="grey lighten-4" flat height="200px">
         <v-toolbar :color="bar.class" :dark="bar.dark">

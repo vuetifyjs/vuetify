@@ -1,8 +1,10 @@
 <template>
-  <v-container id="long-term-support" px-0>
+  <v-container px-0>
     <v-card
+      id="vuetify-2-0"
       outlined
-      class="mb-5"
+      class="mb-12"
+      tag="section"
     >
       <v-card-title>
         <doc-subheading>2header</doc-subheading>
@@ -16,7 +18,11 @@
       </v-card-text>
     </v-card>
 
-    <v-card outlined>
+    <v-card
+      id="vuetify-1-5-lts"
+      outlined
+      tag="section"
+    >
       <v-card-title>
         <doc-subheading>15header</doc-subheading>
       </v-card-title>
@@ -32,3 +38,9 @@
     </v-card>
   </v-container>
 </template>
+
+<script>
+  export default {
+    inherritAttrs: false,
+  }
+</script>

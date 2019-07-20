@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-3 text-xs-center member">
+  <div class="mb-4 text-center member">
     <v-avatar
       size="164"
       class="elevation-4"

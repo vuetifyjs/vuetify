@@ -44,9 +44,9 @@ const DataDefaultScopedSlotProps = {
   items: 'any[]',
   pagination: DataPagination,
   options: DataOptions,
-  updateOptions: '(obj: any) => void',
-  sort: '(value: string) => void',
-  group: '(value: string) => void',
+  updateOptions: '(obj: any): void',
+  sort: '(value: string): void',
+  group: '(value: string): void',
   groupedItems: 'Record<string, any[]>',
 }
 
@@ -69,9 +69,10 @@ module.exports = {
   'v-data': {
     props: DataProps,
     events: DataEvents,
-    scopedSlots: {
-      default: DataDefaultScopedSlotProps,
-    },
+    slots: [{
+      name: 'default',
+      props: DataDefaultScopedSlotProps,
+    }],
   },
   DataOptions,
   DataPagination,

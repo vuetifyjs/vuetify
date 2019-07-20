@@ -69,9 +69,7 @@
     "window": "crwdns24956:0crwdne24956:0"
   },
   "slots": {
-    "extension": "crwdns24958:0crwdne24958:0"
-  },
-  "scopedSlots": {
+    "extension": "crwdns24958:0crwdne24958:0",
     "img": "crwdns24960:0crwdne24960:0"
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <v-container grid-list-md text-xs-center>
+  <v-container grid-list-md text-center>
     <v-layout row wrap>
       <v-flex xs12>
         <v-card dark color="primary">

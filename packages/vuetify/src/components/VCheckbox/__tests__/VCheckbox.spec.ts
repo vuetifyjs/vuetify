@@ -332,9 +332,9 @@ describe('VCheckbox.ts', () => { // eslint-disable-line max-statements
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    wrapper.setProps({ value: 'fizz' })
+    wrapper.setProps({ inputValue: true })
     expect(wrapper.html()).toMatchSnapshot()
-    wrapper.setProps({ value: 'buzz' })
+    wrapper.setProps({ inputValue: false })
     expect(wrapper.html()).toMatchSnapshot()
   })
 

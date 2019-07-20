@@ -37,6 +37,9 @@ jobs:
       before_script:
         - yarn global add codecov
       script:
+        - cd packages/vuetify
+        - yarn build:lib
+        - cd ../..
         - yarn run lint
         - lerna run test:coverage -- -i
       after_script:
@@ -54,9 +57,9 @@ jobs:
       before_script:
         - yarn global add codecov
       script:
-        - lerna run lint --scope vuetify
         - lerna run test:coverage --scope vuetify -- -i && codecov
         - lerna run build --scope vuetify
+        - lerna run lint --scope vuetify
         - rm -rf release
         - mkdir -p release
         - for file in ./packages/vuetify/dist/*; do cp "$file" "${file/packages\/vuetify\/dist\/vuetify/release/vuetify-${TRAVIS_TAG}}"; done

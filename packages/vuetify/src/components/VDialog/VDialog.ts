@@ -54,6 +54,10 @@ export default baseMixins.extend({
       default: 'center center',
     },
     persistent: Boolean,
+    retainFocus: {
+      type: Boolean,
+      default: true,
+    },
     scrollable: Boolean,
     transition: {
       type: [String, Boolean],
@@ -200,7 +204,7 @@ export default baseMixins.extend({
       this.$emit('keydown', e)
     },
     onFocusin (e: Event) {
-      if (!e) return
+      if (!e || !this.retainFocus) return
 
       const target = e.target as HTMLElement
 

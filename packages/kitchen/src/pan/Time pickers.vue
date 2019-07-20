@@ -85,17 +85,17 @@
         >
           <v-time-picker
             value="9:41"
-            class="mt-4"
+            class="mt-6"
             color="success"
           />
           <v-time-picker
             value="9:41"
-            class="mt-4"
+            class="mt-6"
             color="warning"
           />
           <v-time-picker
             value="9:41"
-            class="mt-4"
+            class="mt-6"
             color="teal lighten-1"
           />
         </v-layout>
@@ -107,19 +107,19 @@
         >
           <v-time-picker
             value="9:41"
-            class="mt-4"
+            class="mt-6"
             landscape
             color="success"
           />
           <v-time-picker
             value="9:41"
-            class="mt-4"
+            class="mt-6"
             landscape
             color="warning"
           />
           <v-time-picker
             value="9:41"
-            class="mt-4"
+            class="mt-6"
             landscape
             color="teal lighten-1"
           />
@@ -185,21 +185,21 @@
           <v-time-picker
             value="9:41"
             :allowed-hours="v => v >= 2 && v <= 13"
-            class="mt-3"
+            class="mt-4"
             format="24hr"
           />
 
           <v-time-picker
             value="9:41"
             :allowed-hours="v => v >= 3 && v <= 11"
-            class="mt-3"
+            class="mt-4"
             format="24hr"
           />
 
           <v-time-picker
             value="9:41"
             :allowed-hours="v => v >= 8 && v <= 17"
-            class="mt-3"
+            class="mt-4"
             format="24hr"
           />
         </v-layout>
@@ -218,21 +218,21 @@
           <v-time-picker
             value="9:41"
             :allowed-minutes="v => v >= 10 && v <= 50"
-            class="mt-3"
+            class="mt-4"
             format="24hr"
           />
 
           <v-time-picker
             value="9:41"
             :allowed-minutes="v => v >= 5 && v <= 40"
-            class="mt-3"
+            class="mt-4"
             format="24hr"
           />
 
           <v-time-picker
             value="9:41"
             :allowed-minutes="v => v >= 20 && v <= 40"
-            class="mt-3"
+            class="mt-4"
             format="24hr"
           />
         </v-layout>
@@ -252,7 +252,7 @@
             value="9:41"
             :allowed-hours="v => v >= 2 && v <= 13"
             :allowed-minutes="v => v >= 10 && v <= 50"
-            class="mt-3"
+            class="mt-4"
             format="24hr"
           />
 
@@ -260,7 +260,7 @@
             value="9:41"
             :allowed-hours="v => v >= 3 && v <= 11"
             :allowed-minutes="v => v >= 5 && v <= 40"
-            class="mt-3"
+            class="mt-4"
             format="24hr"
           />
 
@@ -268,7 +268,7 @@
             value="9:41"
             :allowed-hours="v => v >= 8 && v <= 17"
             :allowed-minutes="v => v >= 20 && v <= 40"
-            class="mt-3"
+            class="mt-4"
             format="24hr"
           />
         </v-layout>
@@ -285,17 +285,17 @@
         >
           <v-time-picker
             value="9:41"
-            class="mt-4 center"
+            class="mt-6 center"
             width="150"
           />
           <v-time-picker
             value="9:41"
-            class="mt-4 center"
+            class="mt-6 center"
             width="200"
           />
           <v-time-picker
             value="9:41"
-            class="mt-4 center"
+            class="mt-6 center"
             width="300"
           />
         </v-layout>
@@ -307,19 +307,19 @@
         >
           <v-time-picker
             value="9:41"
-            class="mt-4 center"
+            class="mt-6 center"
             landscape
             width="150"
           />
           <v-time-picker
             value="9:41"
-            class="mt-4 center"
+            class="mt-6 center"
             landscape
             width="200"
           />
           <v-time-picker
             value="9:41"
-            class="mt-4 center"
+            class="mt-6 center"
             landscape
             width="400"
           />
@@ -333,12 +333,12 @@
         <v-layout column>
           <v-time-picker
             value="9:41"
-            class="mt-4"
+            class="mt-6"
             full-width
           />
           <v-time-picker
             value="9:41"
-            class="mt-4"
+            class="mt-6"
             landscape
             full-width
           />

@@ -44,19 +44,13 @@
       "disableItemsPerPage": "crwdns28782:0crwdne28782:0"
     }
   },
-  "scopedSlots": {
-    "v-data-iterator": {
-      "footer": "crwdns28784:0crwdne28784:0",
-      "footer.page-text": "crwdns36002:0crwdne36002:0",
-      "default": "crwdns28788:0crwdne28788:0",
-      "header": "crwdns28790:0crwdne28790:0",
-      "item": "crwdns36004:0crwdne36004:0"
-    }
-  },
   "slots": {
     "v-data-iterator": {
+      "default": "crwdns28788:0crwdne28788:0",
       "header": "crwdns28792:0crwdne28792:0",
+      "item": "crwdns36004:0crwdne36004:0",
       "footer": "crwdns28794:0crwdne28794:0",
+      "footer.page-text": "crwdns36002:0crwdne36002:0",
       "loading": "crwdns28796:0crwdne28796:0",
       "no-data": "crwdns28798:0crwdne28798:0",
       "no-results": "crwdns28800:0crwdne28800:0"

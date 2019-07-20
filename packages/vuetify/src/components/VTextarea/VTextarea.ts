@@ -59,6 +59,9 @@ export default baseMixins.extend({
     lazyValue () {
       this.autoGrow && this.$nextTick(this.calculateInputHeight)
     },
+    rowHeight () {
+      this.autoGrow && this.$nextTick(this.calculateInputHeight)
+    },
   },
 
   mounted () {

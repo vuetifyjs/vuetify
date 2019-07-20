@@ -3,13 +3,13 @@
     <v-date-picker
       v-model="date"
       width="290"
-      class="mt-3"
+      class="mt-4"
     ></v-date-picker>
     <v-date-picker
       v-model="date"
       full-width
       :landscape="$vuetify.breakpoint.smAndUp"
-      class="mt-3"
+      class="mt-4"
     ></v-date-picker>
   </v-layout>
 </template>

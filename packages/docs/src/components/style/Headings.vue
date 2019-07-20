@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="pa-5 mb-3"
+    class="pa-12 mb-4"
     color="teal"
     dark
     flat
@@ -8,13 +8,13 @@
     <v-layout
       v-for="(text, i) in texts"
       :key="`${i}-text`"
-      mb-3
+      mb-4
       align-center
       justify-start
       wrap
     >
       <div
-        class="mr-3"
+        class="mr-4"
         style="min-width: 85px;"
       >
         <code>.{{ text[0] }}</code>

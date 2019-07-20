@@ -26,6 +26,9 @@
       "desc": "`multiple` `VBtnToggle` allows user to select multiple variants and returns value as an array."
     }
   },
+  "api": {
+    "v-btn": "Components.Buttons"
+  },
   "props": {
     "activeClass": "Mixins.BaseItemGroup.props.activeClass",
     "mandatory": "Mixins.BaseItemGroup.props.mandatory",

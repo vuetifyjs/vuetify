@@ -86,7 +86,8 @@ $material-light: (
   ),
   'table': (
     'active': map-get($grey, 'lighten-4'),
-    'hover': map-get($grey, 'lighten-3')
+    'hover': map-get($grey, 'lighten-3'),
+    'group': map-get($grey, 'lighten-2')
   ),
   'picker': (
     'body': map-get($shades, 'white'),

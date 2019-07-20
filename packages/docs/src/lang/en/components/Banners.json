@@ -21,9 +21,9 @@
       "header": "### Icon click event",
       "desc": "VBanner emits `click:icon` event on icon click, even with custom icon slot."
     },
-    "scoped-slots": {
-      "header": "### Scoped slots",
-      "desc": "`actions` slot has `dismiss` function in its scope, you can use it to easily dismiss banner."
+    "actions-slots": {
+      "header": "### Actions slot",
+      "desc": "the `actions` slot has `dismiss` function in its scope, you can use it to easily dismiss banner."
     }
   },
   "props": {
@@ -33,11 +33,8 @@
     "sticky": "Applies **position: sticky** to the component (**Evergreen browsers only**). You can find more information on the [MDN documentation for sticky position](https://developer.mozilla.org/en-US/docs/Web/CSS/position)."
   },
   "slots": {
-    "actions": "The slot used for the action's content such as a [v-btn](/components/buttons).",
+    "actions": "The slot used for the action's content such as a [v-btn](/components/buttons). The **dismiss** function in this slots scope, when invoked, will close the banner.",
     "icon": "The slot used for the icon's content."
-  },
-  "scopedSlots": {
-    "actions": "The same slot for actions but with a provided **dismiss** function in its scope. When invoked, this function will close the banner."
   },
   "functions": {
     "toggle": "Mixins.Toggleable.props.value"

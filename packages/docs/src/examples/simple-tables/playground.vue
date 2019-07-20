@@ -7,8 +7,8 @@
     >
       <thead>
         <tr>
-          <th class="text-xs-left">Name</th>
-          <th class="text-xs-left">Calories</th>
+          <th class="text-left">Name</th>
+          <th class="text-left">Calories</th>
         </tr>
       </thead>
       <tbody>
@@ -23,7 +23,7 @@
       <v-flex xs12 md6>
         <v-text-field
           v-model="height"
-          class="mx-3"
+          class="mx-4"
           label="Height - px"
           max="500"
           min="1"
@@ -34,10 +34,10 @@
         ></v-text-field>
       </v-flex>
       <v-flex xs6 md3>
-        <v-switch v-model="dense" label="Toggle dense" class="mx-3"></v-switch>
+        <v-switch v-model="dense" label="Toggle dense" class="mx-4"></v-switch>
       </v-flex>
       <v-flex xs6 md3>
-        <v-switch v-model="fixedHeader" label="Toggle fixed-header" class="mx-3"></v-switch>
+        <v-switch v-model="fixedHeader" label="Toggle fixed-header" class="mx-4"></v-switch>
       </v-flex>
     </v-layout>
   </div>

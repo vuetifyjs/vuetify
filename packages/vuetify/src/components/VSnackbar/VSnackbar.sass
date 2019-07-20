@@ -26,9 +26,13 @@
     background-color: $snackbar-background-color
     border-radius: 4px
     display: flex
+    margin: 0 auto
+    max-width: 672px
     min-width: 344px
     pointer-events: auto
-    width: 100%
+    transition-duration: .15s
+    transition-timing-function: map-get($transition, 'linear-out-slow-in')
+    transition-property: opacity, transform
     +elevation(6)
 
   &__content
@@ -37,14 +41,14 @@
     height: 48px
     justify-content: space-between
     overflow: hidden
-    padding: 16px 24px
+    padding: 0 16px
     width: 100%
 
     .v-btn.v-btn
       color: $snackbar-color
       flex: 0 0 auto
       height: auto
-      margin: 0 -16px 0 24px
+      margin: 0 -8px 0 24px
       min-width: auto
       padding: 8px
       width: auto
@@ -53,28 +57,28 @@
         margin: -2px
 
       +rtl()
-        margin: 0 24px 0 -16px
+        margin: 0 24px 0 -8px
 
       &::before
         display: none
 
   &--multi-line &__content
-    height: 80px
-    padding: 24px
+    height: auto
+    min-height: 68px
 
   &--vertical &__content
     // https://stackoverflow.com/questions/35111090/text-in-a-flex-container-doesnt-wrap-in-ie11
     align-items: stretch
     flex-direction: column
-    height: 112px
-    padding: 24px 24px 14px
+    height: auto
+    padding: 16px 16px 8px
 
     .v-btn
       &.v-btn // Higher specificity
         align-self: flex-end
         justify-self: flex-end
         margin-left: 0
-        margin-top: 24px
+        margin-top: 18px
 
       &__content
         flex: 0 0 auto
@@ -86,24 +90,11 @@
 @media #{map-get($display-breakpoints, 'sm-and-up')}
   .v-snack
     &__wrapper
-      width: auto
-      max-width: 568px
-      margin: 0 auto
-
       .v-snack--left &
         margin-left: 0
+
       .v-snack--right &
         margin-right: 0
-
-    &--left,
-    &--right
-      margin: 0 $snackbar-corner-offset
-
-      &.v-snack--top
-        transform: translateY($snackbar-corner-offset)
-
-      &.v-snack--bottom
-        transform: translateY(0 - $snackbar-corner-offset)
 
     &__content .v-btn:first-of-type
       margin-left: 42px
@@ -113,27 +104,11 @@
         margin-right: 42px
 
 .v-snack-transition
-  &-enter-active,
-  &-leave-active
-    transition: transform .4s map-get($transition, 'swing')
-
-    .v-snack__content
-      transition: opacity .3s linear .1s
-
   &-enter
-    .v-snack__content
-      opacity: 0
-
-  &-enter-to,
-  &-leave
-    .v-snack__content
-      opacity: 1
+    .v-snack__wrapper
+      transform: scale(.8)
 
   &-enter,
   &-leave-to
-    &.v-snack.v-snack--top
-      // Extra 8px to hide the bottom shadow
-      transform: translateY(calc(-100% - 24px))
-
-    &.v-snack.v-snack--bottom
-      transform: translateY(100%)
+    .v-snack__wrapper
+      opacity: 0

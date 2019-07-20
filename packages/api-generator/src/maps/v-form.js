@@ -1,6 +1,5 @@
 module.exports = {
   'v-form': {
-    slots: ['default'],
     functions: [
       {
         name: 'reset',

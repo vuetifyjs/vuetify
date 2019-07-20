@@ -25,15 +25,13 @@
   "slots": {
     "append": "Components.Inputs.slots.append",
     "append-outer": "Components.TextFields.slots.append-outer",
+    "item": "Components.Selects.slots.item",
     "prepend": "Components.Inputs.slots.prepend",
     "prepend-inner": "Components.TextFields.slots.prepend-inner",
     "append-item": "Components.Selects.slots.append-item",
     "no-data": "Mixins.Filterable.slots.noData",
-    "prepend-item": "Components.Selects.slots.prepend-item"
-  },
-  "scopedSlots": {
-    "item": "Components.Selects.scopedSlots.item",
-    "selection": "Components.Selects.scopedSlots.selection"
+    "prepend-item": "Components.Selects.slots.prepend-item",
+    "selection": "Components.Selects.slots.selection"
   },
   "events": {
     "change": "Components.Inputs.events.change",

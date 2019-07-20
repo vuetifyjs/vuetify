@@ -14,11 +14,11 @@ import VDataTableHeader from './VDataTableHeader'
 import VVirtualTable from './VVirtualTable'
 import VIcon from '../VIcon'
 import VProgressLinear from '../VProgressLinear'
-import VRow from './VRow'
-import VRowGroup from './VRowGroup'
+import Row from './Row'
+import RowGroup from './RowGroup'
 import VSimpleCheckbox from '../VCheckbox/VSimpleCheckbox'
 import VSimpleTable from './VSimpleTable'
-import VMobileRow from './VMobileRow'
+import MobileRow from './MobileRow'
 import ripple from '../../directives/ripple'
 
 // Helpers
@@ -322,7 +322,7 @@ export default VDataIterator.extend({
         }, [this.$createElement(VIcon, ['close'])])
 
         const column = this.$createElement('td', {
-          staticClass: 'text-xs-start',
+          staticClass: 'text-start',
           attrs: {
             colspan: this.computedHeadersLength,
           },
@@ -337,7 +337,7 @@ export default VDataIterator.extend({
         ]))
       }
 
-      return this.$createElement(VRowGroup, {
+      return this.$createElement(RowGroup, {
         key: group,
         props: {
           value: isOpen,
@@ -372,7 +372,7 @@ export default VDataIterator.extend({
         staticClass: 'expanded expanded__content',
       }, [this.$scopedSlots['expanded-item']!({ item, headers: this.computedHeaders })])
 
-      return this.$createElement(VRowGroup, {
+      return this.$createElement(RowGroup, {
         props: {
           value: isExpanded,
         },
@@ -384,51 +384,38 @@ export default VDataIterator.extend({
     genDefaultSimpleRow (item: any, classes: string | string[] | object | null = null): VNode {
       const scopedSlots = getPrefixedScopedSlots('item.', this.$scopedSlots)
 
-      if (this.showSelect) {
-        const data = {
-          item,
-          props: {
-            value: this.isSelected(item),
-          },
-          on: {
-            input: (v: any) => this.select(item, v),
-          },
-        }
+      const data = this.createItemProps(item)
 
+      if (this.showSelect) {
         const slot = scopedSlots['data-table-select']
         scopedSlots['data-table-select'] = slot ? () => slot(data) : () => this.$createElement(VSimpleCheckbox, {
           staticClass: 'v-data-table__checkbox',
-          ...data,
+          props: {
+            value: data.isSelected,
+          },
+          on: {
+            input: (val: boolean) => data.select(val),
+          },
         })
       }
 
-      const expanded = this.isExpanded(item)
-
       if (this.showExpand) {
-        const data = {
-          item,
-          props: {
-            expanded,
-          },
-          on: {
-            click: (e: MouseEvent) => {
-              e.stopPropagation()
-              this.expand(item, !expanded)
-            },
-          },
-        }
-
         const slot = scopedSlots['data-table-expand']
         scopedSlots['data-table-expand'] = slot ? () => slot(data) : () => this.$createElement(VIcon, {
           staticClass: 'v-data-table__expand-icon',
           class: {
-            'v-data-table__expand-icon--active': expanded,
+            'v-data-table__expand-icon--active': data.isExpanded,
           },
-          ...data,
+          on: {
+            click: (e: MouseEvent) => {
+              e.stopPropagation()
+              data.expand(!data.isExpanded)
+            },
+          },
         }, [this.expandIcon])
       }
 
-      return this.$createElement(this.isMobile ? VMobileRow : VRow, {
+      return this.$createElement(this.isMobile ? MobileRow : Row, {
         key: getObjectValueByPath(item, this.itemKey),
         class: classes,
         props: {
