@@ -51,6 +51,7 @@
     "expandOnHover": "Collapses the drawer to a **mini-variant** until hovering with the mouse",
     "fixed": "Mixins.Positionable.props.fixed",
     "floating": "A floating drawer has no visible container (no border-right)",
+    "height": "Mixins.Measurable.props.height",
     "hideOverlay": "Hide the display of the overlay",
     "height": "Sets the height of the navigation drawer",
     "miniVariantWidth": "Designates the width assigned when the `mini` prop is turned on",
@@ -59,11 +60,11 @@
     "right": "Places the navigation drawer on the right",
     "src": "Components.Toolbars.props.src",
     "stateless": "Remove all automated state functionality (resize, mobile, route) and manually control the drawer state",
-    "tag": "Specifies a custom tag to be used",
+    "tag": "Components.Sheets.props.tag",
     "temporary": "A temporary drawer sits above its application and uses a scrim (overlay) to darken the background",
     "touchless": "Disable mobile touch functionality",
-    "value": "Controls the opened/closed state of the **v-navigation-drawer**",
-    "width": "Sets the width of the navigation drawer"
+    "value": "Mixins.Toggleable.props.value",
+    "width": "Mixins.Measurable.props.width"
   },
   "events": {
     "transitionend": "Emits event object when transition is complete.",

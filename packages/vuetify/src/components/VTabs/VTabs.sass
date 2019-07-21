@@ -21,6 +21,18 @@
   .v-tab:not(.v-tab--active):not(.v-tab--disabled)
     opacity: .7
 
+.v-tabs-bar
+  &.primary,
+  &.secondary,
+  &.accent,
+  &.success,
+  &.error,
+  &.warning,
+  &.info
+    .v-tab,
+    .v-tabs-slider
+      color: map-deep-get($material-dark, 'text', 'primary')
+
 // Block
 .v-tabs
   flex: 1 1 auto
