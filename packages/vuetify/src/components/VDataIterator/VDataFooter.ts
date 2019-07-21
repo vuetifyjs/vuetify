@@ -148,7 +148,7 @@ export default Vue.extend({
       }
 
       return this.$createElement('div', {
-        'class': 'v-data-footer__pagination',
+        class: 'v-data-footer__pagination',
       }, children)
     },
     genIcon (click: Function, disabled: boolean, label: string, icon: string): VNode {

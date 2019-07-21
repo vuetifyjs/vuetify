@@ -5,7 +5,7 @@
   "scripts": {
     "deploy": "now && now alias",
     "dev": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --silent",
     "lint": "eslint --ext .js,.vue src",
     "lint:fix": "yarn lint --fix",
     "cypress:run": "cypress run",
@@ -13,15 +13,15 @@
   },
   "dependencies": {
     "sass-loader": "^7.1.0",
-    "vue-router": "^3.0.2",
+    "vue-router": "^3.0.7",
     "vuetify": "^2.0.0-beta.9"
   },
   "devDependencies": {
-    "@applitools/eyes-cypress": "^3.6.13",
-    "@vue/cli-plugin-babel": "^3.5.1",
-    "@vue/cli-service": "^3.5.1",
-    "babel-eslint": "^10.0.1",
-    "cypress": "^3.2.0",
-    "start-server-and-test": "^1.9.0"
+    "@applitools/eyes-cypress": "^3.6.40",
+    "@vue/cli-plugin-babel": "^3.9.2",
+    "@vue/cli-service": "^3.9.3",
+    "babel-eslint": "^10.0.2",
+    "cypress": "^3.4.0",
+    "start-server-and-test": "^1.9.1"
   }
 }

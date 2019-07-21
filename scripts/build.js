@@ -1,4 +1,4 @@
-const shell = require('shelljs')
+const child = require('child_process')
 
 let target = process.argv[2]
 const alias = {
@@ -10,7 +10,7 @@ const alias = {
 target = alias[target] || target
 
 if (!target) {
-  shell.exec('lerna run build --stream')
+  child.spawn('lerna', ['run', 'build', '--stream'], { stdio:'inherit' })
 } else {
-  shell.exec(`lerna run build --scope ${target} --stream`)
+  child.spawn('lerna', ['run', 'build', `--scope ${target}`, '--stream'], { stdio:'inherit' })
 }

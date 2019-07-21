@@ -101,8 +101,8 @@ describe('calendar-with-events.ts', () => {
 
     expect(wrapper.vm.eventNameFunction).toBeDefined()
     expect(typeof wrapper.vm.eventNameFunction).toBe('function')
-    expect(wrapper.vm.eventNameFunction({ start: { date: '2019-02-12' }, input: { 'Meetup': 'Meetup' } })).toBe('Meetup')
-    expect(wrapper.vm.eventNameFunction({ start: { date: '2019-02-12', hour: 8, minute: 30, hasTime: true }, input: { 'Meetup': 'Meetup' } })).toBe('Meetup')
+    expect(wrapper.vm.eventNameFunction({ start: { date: '2019-02-12' }, input: { Meetup: 'Meetup' } })).toBe('Meetup')
+    expect(wrapper.vm.eventNameFunction({ start: { date: '2019-02-12', hour: 8, minute: 30, hasTime: true }, input: { Meetup: 'Meetup' } })).toBe('Meetup')
 
     wrapper.setProps({
       eventName: 'Conference',
@@ -110,8 +110,8 @@ describe('calendar-with-events.ts', () => {
 
     expect(wrapper.vm.eventNameFunction).toBeDefined()
     expect(typeof wrapper.vm.eventNameFunction).toBe('function')
-    expect(wrapper.vm.eventNameFunction({ start: { date: '2019-02-12' }, input: { 'Conference': 'Conference' } })).toBe('Conference')
-    expect(wrapper.vm.eventNameFunction({ start: { date: '2019-02-12', hour: 8, minute: 30, hasTime: true }, input: { 'Conference': 'Conference' } })).toBe('<strong>8:30a</strong> Conference')
+    expect(wrapper.vm.eventNameFunction({ start: { date: '2019-02-12' }, input: { Conference: 'Conference' } })).toBe('Conference')
+    expect(wrapper.vm.eventNameFunction({ start: { date: '2019-02-12', hour: 8, minute: 30, hasTime: true }, input: { Conference: 'Conference' } })).toBe('<strong>8:30a</strong> Conference')
   })
 
   it('should format time', async () => {

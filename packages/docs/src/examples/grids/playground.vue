@@ -93,9 +93,9 @@
     methods: {
       formatAttributes (attributes) {
         const attributeArray = []
-        for (const Key in attributes) {
-          if (!attributes.hasOwnProperty(Key) || Key === '' || attributes[Key] === false) continue
-          attributeArray.push(Key.trim())
+        for (const key in attributes) {
+          if (!attributes.hasOwnProperty(key) || key === '' || attributes[key] === false) continue
+          attributeArray.push(key.trim())
         }
         return `<v-layout ${attributeArray.join(' ')}/>`
       },

@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VDataTable.ts should render 1`] = `
-
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
     <table>
@@ -98,11 +97,9 @@ exports[`VDataTable.ts should render 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataTable.ts should render loading state 1`] = `
-
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
     <table>
@@ -226,11 +223,9 @@ exports[`VDataTable.ts should render loading state 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataTable.ts should render loading state 2`] = `
-
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
     <table>
@@ -434,7 +429,6 @@ exports[`VDataTable.ts should render loading state 2`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataTable.ts should render virtual table 1`] = `
@@ -727,7 +721,6 @@ exports[`VDataTable.ts should render virtual table 1`] = `
 `;
 
 exports[`VDataTable.ts should render with body slot 1`] = `
-
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
     <table>
@@ -915,11 +908,9 @@ exports[`VDataTable.ts should render with body slot 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataTable.ts should render with data 1`] = `
-
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
     <table>
@@ -1206,11 +1197,9 @@ exports[`VDataTable.ts should render with data 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataTable.ts should render with group scoped slot 1`] = `
-
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
     <table>
@@ -1392,11 +1381,9 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
-
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
     <table>
@@ -1821,11 +1808,9 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataTable.ts should render with grouped rows 1`] = `
-
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
     <table>
@@ -2196,11 +2181,9 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataTable.ts should render with item scoped slot 1`] = `
-
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
     <table>
@@ -2402,11 +2385,9 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
-
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
     <table>
@@ -2718,11 +2699,9 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataTable.ts should render with showExpand 1`] = `
-
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
     <table>
@@ -3057,11 +3036,9 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataTable.ts should render with showExpand 2`] = `
-
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
     <table>
@@ -3396,11 +3373,9 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VDataTable.ts should render with showSelect 1`] = `
-
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">
     <table>
@@ -3762,5 +3737,4 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
     </div>
   </div>
 </div>
-
 `;

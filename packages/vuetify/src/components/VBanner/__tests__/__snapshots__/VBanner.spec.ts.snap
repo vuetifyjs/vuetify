@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VBanner.ts should render component with actions 1`] = `
-
 <div class="v-banner v-sheet v-sheet--tile theme--light">
   <div class="v-banner__wrapper">
     <div class="v-banner__content">
@@ -21,11 +20,9 @@ exports[`VBanner.ts should render component with actions 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VBanner.ts should render component with content 1`] = `
-
 <div class="v-banner v-sheet v-sheet--tile theme--light">
   <div class="v-banner__wrapper">
     <div class="v-banner__content">
@@ -35,11 +32,9 @@ exports[`VBanner.ts should render component with content 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VBanner.ts should render component with icon 1`] = `
-
 <div class="v-banner v-sheet v-sheet--tile theme--light v-banner--has-icon">
   <div class="v-banner__wrapper">
     <div class="v-banner__content">
@@ -58,11 +53,9 @@ exports[`VBanner.ts should render component with icon 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VBanner.ts should render component with icon slot 1`] = `
-
 <div class="v-banner v-sheet v-sheet--tile theme--light v-banner--has-icon">
   <div class="v-banner__wrapper">
     <div class="v-banner__content">
@@ -79,11 +72,9 @@ exports[`VBanner.ts should render component with icon slot 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VBanner.ts should render sinle-line component with content 1`] = `
-
 <div class="v-banner v-sheet v-sheet--tile theme--light">
   <div class="v-banner__wrapper">
     <div class="v-banner__content">
@@ -93,5 +84,4 @@ exports[`VBanner.ts should render sinle-line component with content 1`] = `
     </div>
   </div>
 </div>
-
 `;

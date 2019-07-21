@@ -35,7 +35,7 @@ describe('VRadio.ts', () => {
     expect(inputGroup.element.getAttribute('role')).toBe('radio')
     expect(inputGroup.element.getAttribute('aria-checked')).toBe('false')
 
-    wrapper.setData({ 'isActive': true })
+    wrapper.setData({ isActive: true })
     inputGroup = wrapper.find('input')
     expect(inputGroup.element.getAttribute('aria-checked')).toBe('true')
     expect(wrapper.html()).toMatchSnapshot()

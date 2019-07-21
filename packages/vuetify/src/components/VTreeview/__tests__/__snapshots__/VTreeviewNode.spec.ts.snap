@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VTreeViewNode.ts should generate a transition element 1`] = `
-
 <div aria-expanded="false"
      class="v-treeview-node v-treeview-node--leaf"
 >
@@ -12,11 +11,9 @@ exports[`VTreeViewNode.ts should generate a transition element 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeViewNode.ts should render disabled item 1`] = `
-
 <div aria-expanded="false"
      class="v-treeview-node v-treeview-node--disabled"
 >
@@ -39,11 +36,9 @@ exports[`VTreeViewNode.ts should render disabled item 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeViewNode.ts should use label slot 1`] = `
-
 <div aria-expanded="false"
      class="v-treeview-node"
 >
@@ -62,11 +57,9 @@ exports[`VTreeViewNode.ts should use label slot 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeViewNode.ts should use scoped slots 1`] = `
-
 <div aria-expanded="false"
      class="v-treeview-node v-treeview-node--leaf"
 >
@@ -83,5 +76,4 @@ exports[`VTreeViewNode.ts should use scoped slots 1`] = `
     </div>
   </div>
 </div>
-
 `;

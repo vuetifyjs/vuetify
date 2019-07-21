@@ -74,10 +74,12 @@ module.exports = {
     ]
   },
   performance: {
-    maxEntrypointSize: 300000,
-    hints: isProd ? 'warning' : false
+    hints: false
   },
-  stats: { children: false },
+  stats: {
+    children: false,
+    assets: !isProd
+  },
   plugins
 }
 

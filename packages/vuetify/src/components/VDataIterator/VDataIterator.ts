@@ -265,7 +265,7 @@ export default Themeable.extend({
         'update:sort-desc': (v: any) => this.$emit('update:sort-desc', v),
         'update:group-by': (v: any) => this.$emit('update:group-by', v),
         'update:group-desc': (v: any) => this.$emit('update:group-desc', v),
-        'pagination': (v: any, old: any) => !deepEqual(v, old) && this.$emit('pagination', v),
+        pagination: (v: any, old: any) => !deepEqual(v, old) && this.$emit('pagination', v),
         'current-items': (v: any[]) => {
           this.internalCurrentItems = v
           this.$emit('current-items', v)

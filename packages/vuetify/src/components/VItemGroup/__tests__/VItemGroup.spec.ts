@@ -48,9 +48,9 @@ describe('VItemGroup', () => {
         multiple: true,
         value: '',
       },
-    });
+    })
 
-    (expect('Model must be bound to an array if the multiple property is true') as any).toHaveBeenTipped()
+    expect('Model must be bound to an array if the multiple property is true').toHaveBeenTipped()
   })
 
   it('should return the correct value', () => {
