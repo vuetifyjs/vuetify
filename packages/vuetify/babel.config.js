@@ -1,11 +1,10 @@
 const vuetifyPackage = require('./package.json')
 
+const env = process.env.NODE_ENV
+
 module.exports = {
   presets: [
-    ['env', {
-      targets: {
-        node: 8
-      },
+    ['@babel/preset-env', {
       modules: false
     }]
   ],
@@ -13,13 +12,12 @@ module.exports = {
     ['transform-define', {
       __VUETIFY_VERSION__: vuetifyPackage.version,
       __REQUIRED_VUE__: vuetifyPackage.peerDependencies.vue
-    }],
-    '@babel/plugin-proposal-object-rest-spread'
+    }]
   ],
   env: {
     test: {
       presets: [
-        ['env', {
+        ['@babel/preset-env', {
           targets: { node: true }
         }]
       ],
@@ -37,21 +35,23 @@ module.exports = {
       ]
     },
     es5: {
-      presets: [
-        ['env', {
-          targets: {
-            node: 8
-          }
-        }]
-      ],
-      plugins: [
-        './build/babel-transform-sass-paths.js'
-      ]
+      presets: ['@babel/preset-env']
     },
     lib: {
-      plugins: [
-        './build/babel-transform-sass-paths.js'
+      presets: [
+        ['@babel/preset-env', {
+          targets: 'last 1 chrome version',
+          modules: false
+        }]
       ]
     }
   }
+}
+
+if (['lib', 'es5'].includes(env)) {
+  module.exports.plugins.push('./build/babel-transform-sass-paths.js')
+}
+
+if (env !== 'lib') {
+  module.exports.plugins.push('@babel/plugin-proposal-object-rest-spread')
 }
