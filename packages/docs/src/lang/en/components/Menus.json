@@ -18,12 +18,12 @@
     },
     "offset-x": {
       "header": "### X offset",
-      "desc": "Menu can be offsetted by X axis to make activator visible.",
+      "desc": "Menu can be offset by the X axis to make the activator visible.",
       "uninverted": true
     },
     "offset-y": {
       "header": "### Y offset",
-      "desc": "Menu can be offsetted by Y axis to make activator visible.",
+      "desc": "Menu can be offset by the Y axis to make the activator visible.",
       "uninverted": true
     },
     "close-on-click": {
@@ -33,7 +33,7 @@
     },
     "close-on-content-click": {
       "header": "### Close on content click",
-      "desc": "You can configure whether `v-menu` should be closed when clicked on its content.",
+      "desc": "You can configure whether `v-menu` should be closed when its content is clicked.",
       "uninverted": true
     },
     "absolute-without-activator": {
@@ -74,14 +74,14 @@
     "light": "Mixins.Themeable.props.light",
     "disabled": "Disables the menu",
     "disableKeys": "Removes all keyboard interaction",
-    "internalActivator": "Detaches the menu content inside of the component as opposed to the document.",
-    "maxHeight": "Set's the maximum height for the menu content.",
+    "internalActivator": "Components.Dialogs.props.internalActivator",
     "offsetX": "Offset the menu on the x-axis. Works in conjunction with direction left/right",
     "offsetY": "Offset the menu on the y-axis. Works in conjunction with direction top/bottom",
+    "maxHeight": "Sets the max height of the menu content",
     "openOnClick": "Designates whether menu should open on activator click",
     "openOnHover": "Designates whether menu should open on activator hover",
     "origin": "Mixins.Transitionable.props.origin",
-    "returnValue": "The value that is updated when the menu is closed.",
+    "returnValue": "The value that is updated when the menu is closed - must be primitive. Dot notation is supported",
     "transition": "Mixins.Transitionable.props.transition"
   }
 }
