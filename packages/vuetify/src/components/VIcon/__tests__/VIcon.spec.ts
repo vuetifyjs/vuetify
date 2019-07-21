@@ -58,6 +58,7 @@ describe('VIcon', () => {
 
   it('should render a mapped size', () => {
     const SIZE_MAP = {
+      xSmall: '12px',
       small: '16px',
       large: '36px',
       xLarge: '40px',

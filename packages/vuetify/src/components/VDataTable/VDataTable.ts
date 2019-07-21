@@ -3,7 +3,7 @@ import './VDataTable.sass'
 // Types
 import { VNode, VNodeChildrenArrayContents, VNodeChildren } from 'vue'
 import { PropValidator } from 'vue/types/options'
-import { DataProps, DataPaginaton, DataOptions } from '../VData/VData'
+import { DataProps, DataPagination, DataOptions } from '../VData/VData'
 import { TableHeader } from './mixins/header'
 
 // Components
@@ -11,7 +11,7 @@ import { VData } from '../VData'
 import { VDataFooter, VDataIterator } from '../VDataIterator'
 import VBtn from '../VBtn'
 import VDataTableHeader from './VDataTableHeader'
-import VVirtualTable from './VVirtualTable'
+// import VVirtualTable from './VVirtualTable'
 import VIcon from '../VIcon'
 import VProgressLinear from '../VProgressLinear'
 import Row from './Row'
@@ -22,13 +22,13 @@ import MobileRow from './MobileRow'
 import ripple from '../../directives/ripple'
 
 // Helpers
-import { deepEqual, getObjectValueByPath, compareFn, getPrefixedScopedSlots, getSlot, defaultFilter } from '../../util/helpers'
+import { deepEqual, getObjectValueByPath, compareFn, getPrefixedScopedSlots, getSlot, defaultFilter, FilterFn } from '../../util/helpers'
 import { breaking } from '../../util/console'
 
-function filterFn (item: any, search: string | null) {
+function filterFn (item: any, search: string | null, filter: FilterFn) {
   return (header: TableHeader) => {
     const value = getObjectValueByPath(item, header.value)
-    return header.filter ? header.filter(value, search, item) : defaultFilter(value, search)
+    return header.filter ? header.filter(value, search, item) : filter(value, search, item)
   }
 }
 
@@ -36,15 +36,20 @@ function searchTableItems (
   items: any[],
   search: string | null,
   headersWithCustomFilters: TableHeader[],
-  headersWithoutCustomFilters: TableHeader[]
+  headersWithoutCustomFilters: TableHeader[],
+  customFilter: FilterFn
 ) {
   let filtered = items
   search = typeof search === 'string' ? search.trim() : null
-  if (search) {
-    filtered = items.filter(item => headersWithoutCustomFilters.some(filterFn(item, search)))
+  if (search && headersWithoutCustomFilters.length) {
+    filtered = items.filter(item => headersWithoutCustomFilters.some(filterFn(item, search, customFilter)))
   }
 
-  return filtered.filter(item => headersWithCustomFilters.every(filterFn(item, search)))
+  if (headersWithCustomFilters.length) {
+    filtered = filtered.filter(item => headersWithCustomFilters.every(filterFn(item, search, defaultFilter)))
+  }
+
+  return filtered
 }
 
 /* @vue/component */
@@ -63,7 +68,8 @@ export default VDataIterator.extend({
     showSelect: Boolean,
     showExpand: Boolean,
     showGroupBy: Boolean,
-    virtualRows: Boolean,
+    // TODO: Fix
+    // virtualRows: Boolean,
     mobileBreakpoint: {
       type: Number,
       default: 600,
@@ -82,8 +88,8 @@ export default VDataIterator.extend({
     },
     customFilter: {
       type: Function,
-      default: searchTableItems,
-    } as PropValidator<(items: any[], search: string, exclusiveHeaders: TableHeader[], nonExclusiveHeaders: TableHeader[]) => any[]>,
+      default: defaultFilter,
+    } as PropValidator<typeof defaultFilter>,
   },
 
   data () {
@@ -170,7 +176,7 @@ export default VDataIterator.extend({
       this.widths = Array.from(this.$el.querySelectorAll('th')).map(e => e.clientWidth)
     },
     customFilterWithColumns (items: any[], search: string) {
-      return this.customFilter(items, search, this.headersWithCustomFilters, this.headersWithoutCustomFilters)
+      return searchTableItems(items, search, this.headersWithCustomFilters, this.headersWithoutCustomFilters, this.customFilter)
     },
     customSortWithHeaders (items: any[], sortBy: string[], sortDesc: boolean[], locale: string) {
       return this.customSort(items, sortBy, sortDesc, locale, this.columnSorters)
@@ -478,23 +484,23 @@ export default VDataIterator.extend({
         dense: this.dense,
       }
 
-      if (this.virtualRows) {
-        return this.$createElement(VVirtualTable, {
-          props: Object.assign(simpleProps, {
-            items: props.items,
-            height: this.height,
-            rowHeight: this.dense ? 24 : 48,
-            headerHeight: this.dense ? 32 : 48,
-            // TODO: expose rest of props from virtual table?
-          }),
-          scopedSlots: {
-            items: ({ items }) => this.genItems(items, props) as any,
-          },
-        }, [
-          this.proxySlot('body.before', [this.genCaption(props), this.genHeaders(props)]),
-          this.proxySlot('bottom', this.genFooters(props)),
-        ])
-      }
+      // if (this.virtualRows) {
+      //   return this.$createElement(VVirtualTable, {
+      //     props: Object.assign(simpleProps, {
+      //       items: props.items,
+      //       height: this.height,
+      //       rowHeight: this.dense ? 24 : 48,
+      //       headerHeight: this.dense ? 32 : 48,
+      //       // TODO: expose rest of props from virtual table?
+      //     }),
+      //     scopedSlots: {
+      //       items: ({ items }) => this.genItems(items, props) as any,
+      //     },
+      //   }, [
+      //     this.proxySlot('body.before', [this.genCaption(props), this.genHeaders(props)]),
+      //     this.proxySlot('bottom', this.genFooters(props)),
+      //   ])
+      // }
 
       return this.$createElement(VSimpleTable, {
         props: simpleProps,
@@ -530,7 +536,7 @@ export default VDataIterator.extend({
         'update:sort-desc': (v: boolean | boolean[]) => this.$emit('update:sort-desc', v),
         'update:group-by': (v: string | string[]) => this.$emit('update:group-by', v),
         'update:group-desc': (v: boolean | boolean[]) => this.$emit('update:group-desc', v),
-        'pagination': (v: DataPaginaton, old: DataPaginaton) => !deepEqual(v, old) && this.$emit('pagination', v),
+        'pagination': (v: DataPagination, old: DataPagination) => !deepEqual(v, old) && this.$emit('pagination', v),
         'current-items': (v: any[]) => {
           this.internalCurrentItems = v
           this.$emit('current-items', v)

@@ -9,6 +9,7 @@ import { factory as PositionableFactory } from '../../mixins/positionable'
 // Types
 import mixins from '../../util/mixins'
 import { VNode } from 'vue'
+import { removed } from '../../util/console'
 
 export default mixins(
   Colorable,
@@ -19,7 +20,6 @@ export default mixins(
   name: 'v-snackbar',
 
   props: {
-    autoHeight: Boolean,
     multiLine: Boolean,
     // TODO: change this to closeDelay to match other API in delayable.js
     timeout: {
@@ -38,7 +38,6 @@ export default mixins(
       return {
         'v-snack--active': this.isActive,
         'v-snack--absolute': this.absolute,
-        'v-snack--auto-height': this.autoHeight,
         'v-snack--bottom': this.bottom || !this.top,
         'v-snack--left': this.left,
         'v-snack--multi-line': this.multiLine && !this.vertical,
@@ -53,6 +52,12 @@ export default mixins(
     isActive () {
       this.setTimeout()
     },
+  },
+
+  created () {
+    if (this.$attrs.hasOwnProperty('auto-height')) {
+      removed('auto-height', this)
+    }
   },
 
   mounted () {

@@ -81,7 +81,7 @@
     "openOnClick": "Designates whether menu should open on activator click",
     "openOnHover": "Designates whether menu should open on activator hover",
     "origin": "Mixins.Transitionable.props.origin",
-    "returnValue": "Set property of return value - must be primitive. Dot notation is supported",
+    "returnValue": "The value that is updated when the menu is closed - must be primitive. Dot notation is supported",
     "transition": "Mixins.Transitionable.props.transition"
   }
 }

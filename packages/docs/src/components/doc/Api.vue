@@ -18,7 +18,7 @@
               label="Available Component(s)"
               outlined
               :menu-props="{offsetY: true, contentClass: 'primary'}"
-              prepend-icon="mdi-view-dashboard"
+              prepend-inner-icon="mdi-view-dashboard"
               hide-details
             />
           </v-flex>

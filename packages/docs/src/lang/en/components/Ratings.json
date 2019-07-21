@@ -45,5 +45,8 @@
     "length": "The amount of ratings to show",
     "readonly": "Removes all hover effects and pointer events",
     "value": "The rating value"
+  },
+  "slots": {
+    "item": "The slot for rendered items."
   }
 }
