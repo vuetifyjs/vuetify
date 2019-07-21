@@ -24,7 +24,7 @@ const DataProps = [
   { name: 'options', source: 'v-data' },
   { name: 'sortBy', source: 'v-data' },
   { name: 'sortDesc', source: 'v-data' },
-  { name: 'customSort', source: 'v-data', default: '(items: any[], sortBy: string[], sortDesc: boolean[], locale: string, customSorters?: Record<string, compareFn>): any[]' },
+  { name: 'customSort', source: 'v-data', default: '(items: any[], sortBy: string[], sortDesc: boolean[], locale: string, customSorters?: Record<string, compareFn>) => any[]' },
   { name: 'mustSort', source: 'v-data' },
   { name: 'multiSort', source: 'v-data' },
   { name: 'page', source: 'v-data' },
@@ -36,7 +36,7 @@ const DataProps = [
   { name: 'disablePagination', source: 'v-data' },
   { name: 'disableFiltering', source: 'v-data' },
   { name: 'search', source: 'v-data' },
-  { name: 'customFilter', source: 'v-data', default: '(items: any[], search: string): any[]' },
+  { name: 'customFilter', source: 'v-data', default: '(items: any[], search: string) => any[]' },
   { name: 'serverItemsLength', source: 'v-data' },
 ]
 
@@ -44,10 +44,10 @@ const DataDefaultScopedSlotProps = {
   items: 'any[]',
   pagination: DataPagination,
   options: DataOptions,
-  updateOptions: '(obj: any): void',
-  sort: '(value: string): void',
-  group: '(value: string): void',
   groupedItems: 'Record<string, any[]>',
+  updateOptions: '(obj: any) => void',
+  sort: '(value: string) => void',
+  group: '(value: string) => void',
 }
 
 const DataEvents = [

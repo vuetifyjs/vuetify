@@ -48,7 +48,6 @@
             "intermediate/custom-filter",
             "intermediate/customize-header",
             "intermediate/customize-rows",
-            "intermediate/customize-footer",
             "intermediate/paginate",
             "intermediate/sort",
             "intermediate/server",
