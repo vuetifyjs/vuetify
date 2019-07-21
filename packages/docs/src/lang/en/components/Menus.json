@@ -77,7 +77,7 @@
     "internalActivator": "Components.Dialogs.props.internalActivator",
     "offsetX": "Offset the menu on the x-axis. Works in conjunction with direction left/right",
     "offsetY": "Offset the menu on the y-axis. Works in conjunction with direction top/bottom",
-    "maxHeight": "Sets the max height of the menu",
+    "maxHeight": "Sets the max height of the menu content",
     "openOnClick": "Designates whether menu should open on activator click",
     "openOnHover": "Designates whether menu should open on activator hover",
     "origin": "Mixins.Transitionable.props.origin",
