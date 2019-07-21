@@ -66,12 +66,12 @@ export default baseMixins.extend({
       type: [Number, String],
       default: 'auto',
     },
+    offsetX: Boolean,
+    offsetY: Boolean,
     openOnClick: {
       type: Boolean,
       default: true,
     },
-    offsetX: Boolean,
-    offsetY: Boolean,
     openOnHover: Boolean,
     origin: {
       type: String,
