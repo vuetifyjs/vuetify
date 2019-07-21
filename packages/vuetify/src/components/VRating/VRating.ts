@@ -47,6 +47,7 @@ export default mixins(
       type: String,
       default: 'primary',
     },
+    clearable: Boolean,
     dense: Boolean,
     emptyIcon: {
       type: String,
@@ -61,14 +62,13 @@ export default mixins(
       default: '$vuetify.icons.ratingHalf',
     },
     halfIncrements: Boolean,
+    hover: Boolean,
     length: {
       type: [Number, String],
       default: 5,
     },
-    clearable: Boolean,
     readonly: Boolean,
     size: [Number, String],
-    hover: Boolean,
     value: {
       type: Number,
       default: 0,
