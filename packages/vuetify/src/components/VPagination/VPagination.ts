@@ -27,7 +27,6 @@ export default mixins(Colorable, Themeable).extend({
       default: 0,
       validator: (val: number) => val % 1 === 0,
     },
-    totalVisible: [Number, String],
     nextIcon: {
       type: String,
       default: '$vuetify.icons.next',
@@ -36,6 +35,7 @@ export default mixins(Colorable, Themeable).extend({
       type: String,
       default: '$vuetify.icons.prev',
     },
+    totalVisible: [Number, String],
     value: {
       type: Number,
       default: 0,

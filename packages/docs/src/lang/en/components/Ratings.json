@@ -47,6 +47,9 @@
     "value": "The rating value"
   },
   "slots": {
-    "item": "The slot for rendered items."
+    "item": "The slot for rendered items"
+  },
+  "events": {
+    "input": "Emits the rating number when this value changes"
   }
 }
