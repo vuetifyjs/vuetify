@@ -50,7 +50,7 @@
     "fullWidth": "Forces the dialog to expand 100% of available width.",
     "fullscreen": "Changes layout for fullscreen display.",
     "hideOverlay": "Hides the display of the overlay.",
-    "internalActivator": "Designates whether the supplied **activator** prop is inside the component.",
+    "internalActivator": "Detaches the menu content inside of the component as opposed to the document.",
     "eager": "Mixins.Bootable.props.eager",
     "light": "Mixins.Themeable.props.light",
     "maxWidth": "Mixins.Measurable.props.maxWidth",
