@@ -55,7 +55,7 @@
     "css-loader": "^3.1.0",
     "deepmerge": "^4.0.0",
     "docsearch.js": "^2.6.3",
-    "eslint": "^6.1.0",
+    "eslint": "^5.16.0",
     "eslint-plugin-json": "^1.4.0",
     "event-source-polyfill": "^1.0.7",
     "fibers": "^4.0.1",
