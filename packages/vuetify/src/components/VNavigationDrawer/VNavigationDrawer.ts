@@ -356,7 +356,7 @@ export default baseMixins.extend({
       }
 
       if (this.miniVariant) {
-        on.click = () => this.$emit('update:miniVariant', false)
+        on.click = () => this.$emit('update:mini-variant', false)
       }
 
       if (this.expandOnHover) {

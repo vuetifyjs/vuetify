@@ -67,7 +67,7 @@
   },
   "events": {
     "transitionend": "Emits event object when transition is complete.",
-    "update:miniVariant": "The `mini-variant.sync` event"
+    "update:mini-variant": "The `mini-variant.sync` event"
   },
   "slots": {
     "append": "A slot at the bottom of the drawer",

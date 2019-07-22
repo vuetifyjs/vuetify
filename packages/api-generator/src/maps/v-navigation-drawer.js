@@ -24,7 +24,7 @@ module.exports = {
         value: 'object',
       },
       {
-        name: 'update:miniVariant',
+        name: 'update:mini-variant',
         value: 'boolean',
       },
     ],

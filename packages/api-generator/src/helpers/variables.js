@@ -234,7 +234,7 @@ const VSelect = {
       value: 'any',
     },
     {
-      name: 'update:searchInput',
+      name: 'update:search-input',
       value: 'string',
     },
     ...inputEvents,

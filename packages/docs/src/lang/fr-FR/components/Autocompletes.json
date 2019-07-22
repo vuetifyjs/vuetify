@@ -34,6 +34,6 @@
     "hideNoData": "Masque le menu lorsqu'il n'y a pas d'options à afficher. Utile pour empêcher le menu de s'ouvrir avant que les résultats ne soient récupérés de manière asynchrone. Il a également l'effet d'ouvrir le menu lorsque le tableau `items` change, s'il n'est pas déjà ouvert."
   },
   "events": {
-    "update:searchInput": "L'événement `search-input.sync`"
+    "update:search-input": "L'événement `search-input.sync`"
   }
 }

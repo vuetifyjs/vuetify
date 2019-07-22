@@ -83,7 +83,7 @@ describe('VDatePickerTitle.ts', () => {
     })
 
     const input = jest.fn(value => wrapper.setProps({ selectingYear: value }))
-    wrapper.vm.$on('update:selectingYear', input)
+    wrapper.vm.$on('update:selecting-year', input)
 
     wrapper.findAll('.v-date-picker-title__date').at(0).trigger('click')
     expect(input).not.toHaveBeenCalled()

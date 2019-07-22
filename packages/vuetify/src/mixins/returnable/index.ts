@@ -18,7 +18,7 @@ export default Vue.extend({
       if (val) {
         this.originalValue = this.returnValue
       } else {
-        this.$emit('update:returnValue', this.originalValue)
+        this.$emit('update:return-value', this.originalValue)
       }
     },
   },
