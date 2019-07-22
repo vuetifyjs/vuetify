@@ -119,7 +119,7 @@
       //   }
       // }).then(res => res.json())
 
-      if (notify) this.setSnackbar(notify)
+      if (notify.href) this.setSnackbar(notify)
     },
 
     methods: {
