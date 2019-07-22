@@ -98,6 +98,6 @@
     "click:prepend": "Components.Inputs.events['click:prepend']",
     "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
     "update:error": "Mixins.Validatable.events['update:error']",
-    "update:searchInput": "The `search-input.sync` event"
+    "update:search-input": "The `search-input.sync` event"
   }
 }
