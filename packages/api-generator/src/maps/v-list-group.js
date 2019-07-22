@@ -2,16 +2,16 @@ module.exports = {
   'v-list-group': {
     slots: [
       {
-        'name': 'activator',
-        'props': undefined,
+        name: 'activator',
+        props: undefined,
       },
       {
-        'name': 'appendIcon',
-        'props': undefined,
+        name: 'appendIcon',
+        props: undefined,
       },
       {
-        'name': 'prependIcon',
-        'props': undefined,
+        name: 'prependIcon',
+        props: undefined,
       },
     ],
     events: [

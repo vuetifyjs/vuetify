@@ -206,7 +206,7 @@ export default VTextField.extend({
       }, children)
     },
     onInput (e: Event) {
-      const files = [...(e.target as HTMLInputElement).files]
+      const files = [...(e.target as HTMLInputElement).files || []]
 
       this.internalValue = this.isMultiple ? files : files[0]
     },

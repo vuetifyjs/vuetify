@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VDatePickerDateTable.ts should match snapshot with first day of week 1`] = `
-
 <div class="v-date-picker-table v-date-picker-table--date theme--light">
   <table>
     <thead>
@@ -334,11 +333,9 @@ exports[`VDatePickerDateTable.ts should match snapshot with first day of week 1`
     </tbody>
   </table>
 </div>
-
 `;
 
 exports[`VDatePickerDateTable.ts should render component and match snapshot 1`] = `
-
 <div class="v-date-picker-table v-date-picker-table--date theme--light">
   <table>
     <thead>
@@ -659,11 +656,9 @@ exports[`VDatePickerDateTable.ts should render component and match snapshot 1`] 
     </tbody>
   </table>
 </div>
-
 `;
 
 exports[`VDatePickerDateTable.ts should render component and match snapshot for multiple selection 1`] = `
-
 <div class="v-date-picker-table v-date-picker-table--date theme--light"
      multiple="multiple"
      selecteddates="2005-11-03,2005-11-05,2005-11-08"
@@ -987,11 +982,9 @@ exports[`VDatePickerDateTable.ts should render component and match snapshot for 
     </tbody>
   </table>
 </div>
-
 `;
 
 exports[`VDatePickerDateTable.ts should render component with events (array) and match snapshot 1`] = `
-
 <div class="v-date-picker-table v-date-picker-table--date theme--light">
   <table>
     <thead>
@@ -1316,11 +1309,9 @@ exports[`VDatePickerDateTable.ts should render component with events (array) and
     </tbody>
   </table>
 </div>
-
 `;
 
 exports[`VDatePickerDateTable.ts should render component with events (function) and match snapshot 1`] = `
-
 <div class="v-date-picker-table v-date-picker-table--date theme--light">
   <table>
     <thead>
@@ -1645,11 +1636,9 @@ exports[`VDatePickerDateTable.ts should render component with events (function) 
     </tbody>
   </table>
 </div>
-
 `;
 
 exports[`VDatePickerDateTable.ts should render component with events colored by function and match snapshot 1`] = `
-
 <div class="v-date-picker-table v-date-picker-table--date theme--light">
   <table>
     <thead>
@@ -1974,11 +1963,9 @@ exports[`VDatePickerDateTable.ts should render component with events colored by 
     </tbody>
   </table>
 </div>
-
 `;
 
 exports[`VDatePickerDateTable.ts should render component with events colored by object and match snapshot 1`] = `
-
 <div class="v-date-picker-table v-date-picker-table--date theme--light">
   <table>
     <thead>
@@ -2307,11 +2294,9 @@ exports[`VDatePickerDateTable.ts should render component with events colored by 
     </tbody>
   </table>
 </div>
-
 `;
 
 exports[`VDatePickerDateTable.ts should render component with showWeek and match snapshot 1`] = `
-
 <div class="v-date-picker-table v-date-picker-table--date theme--light">
   <table>
     <thead>
@@ -2636,11 +2621,9 @@ exports[`VDatePickerDateTable.ts should render component with showWeek and match
     </tbody>
   </table>
 </div>
-
 `;
 
 exports[`VDatePickerDateTable.ts should render disabled component and match snapshot 1`] = `
-
 <div class="v-date-picker-table v-date-picker-table--date v-date-picker-table--disabled theme--light">
   <table>
     <thead>
@@ -2992,11 +2975,9 @@ exports[`VDatePickerDateTable.ts should render disabled component and match snap
     </tbody>
   </table>
 </div>
-
 `;
 
 exports[`VDatePickerDateTable.ts should render readonly component and match snapshot 1`] = `
-
 <div class="v-date-picker-table v-date-picker-table--date theme--light">
   <table>
     <thead>
@@ -3317,5 +3298,4 @@ exports[`VDatePickerDateTable.ts should render readonly component and match snap
     </tbody>
   </table>
 </div>
-
 `;

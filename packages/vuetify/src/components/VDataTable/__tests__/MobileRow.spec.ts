@@ -47,8 +47,8 @@ describe('MobileRow', () => {
         },
       },
       slots: {
-        'petrol': '<p class="test">$0.68</p>',
-        'diesel': '<p class="test">$0.65</p>',
+        petrol: '<p class="test">$0.68</p>',
+        diesel: '<p class="test">$0.65</p>',
       },
     })
 
@@ -74,8 +74,8 @@ describe('MobileRow', () => {
         },
       },
       scopedSlots: {
-        'petrol': props => vm.$createElement('p', { staticClass: `test ${props.header.value}` }, [props.value]),
-        'diesel': props => vm.$createElement('p', { staticClass: `test ${props.header.value}` }, [props.value]),
+        petrol: props => vm.$createElement('p', { staticClass: `test ${props.header.value}` }, [props.value]),
+        diesel: props => vm.$createElement('p', { staticClass: `test ${props.header.value}` }, [props.value]),
       },
     })
 

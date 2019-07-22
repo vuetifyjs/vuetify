@@ -24,8 +24,8 @@ module.exports = {
   output: {
     path: resolve('../dist'),
     publicPath: '/dist/',
-    filename: '[name].[chunkhash].js',
-    chunkFilename: '[name].[chunkhash].js'
+    filename: isProd ? '[name].[chunkhash].js' : '[name].js',
+    chunkFilename: isProd ? '[name].[chunkhash].js' : '[name].js'
   },
   resolve: {
     extensions: ['*', '.js', '.json', '.vue'],
@@ -74,10 +74,12 @@ module.exports = {
     ]
   },
   performance: {
-    maxEntrypointSize: 300000,
-    hints: isProd ? 'warning' : false
+    hints: false
   },
-  stats: { children: false },
+  stats: {
+    children: false,
+    assets: !isProd
+  },
   plugins
 }
 

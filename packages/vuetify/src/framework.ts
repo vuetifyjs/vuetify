@@ -16,11 +16,15 @@ import './styles/main.sass'
 
 export default class Vuetify {
   static install = install
+
   static installed = false
+
   static version = __VUETIFY_VERSION__
 
   framework: Record<string, VuetifyServiceContract> = {}
+
   installed: string[] = []
+
   preset: Partial<VuetifyPreset> = {}
 
   constructor (preset: Partial<VuetifyPreset> = {}) {

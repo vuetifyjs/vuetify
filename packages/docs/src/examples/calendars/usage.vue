@@ -110,9 +110,9 @@
       focus: '2019-01-08',
       type: 'month',
       typeToLabel: {
-        'month': 'Month',
-        'week': 'Week',
-        'day': 'Day',
+        month: 'Month',
+        week: 'Week',
+        day: 'Day',
         '4day': '4 Days',
       },
       start: null,

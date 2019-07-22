@@ -230,7 +230,7 @@ export default baseMixins.extend({
   render (h): VNode {
     const children = []
     const data = {
-      'class': this.classes,
+      class: this.classes,
       ref: 'dialog',
       directives: [
         {
@@ -269,7 +269,7 @@ export default baseMixins.extend({
     }
 
     children.push(h('div', {
-      'class': this.contentClasses,
+      class: this.contentClasses,
       attrs: {
         role: 'document',
         tabindex: 0,

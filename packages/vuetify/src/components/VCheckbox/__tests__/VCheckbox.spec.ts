@@ -95,10 +95,10 @@ describe('VCheckbox.ts', () => { // eslint-disable-line max-statements
     expect(input.element.getAttribute('role')).toBe('checkbox')
     expect(input.element.getAttribute('aria-checked')).toBe('false')
 
-    wrapper.setProps({ 'inputValue': true })
+    wrapper.setProps({ inputValue: true })
     expect(input.element.getAttribute('aria-checked')).toBe('true')
 
-    wrapper.setProps({ 'indeterminate': true })
+    wrapper.setProps({ indeterminate: true })
     expect(input.element.getAttribute('aria-checked')).toBe('mixed')
   })
 

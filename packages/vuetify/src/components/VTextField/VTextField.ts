@@ -394,7 +394,7 @@ export default baseMixins.extend<options>().extend({
     },
     genAffix (type: 'prefix' | 'suffix') {
       return this.$createElement('div', {
-        'class': `v-text-field__${type}`,
+        class: `v-text-field__${type}`,
         ref: type,
       }, this[type])
     },

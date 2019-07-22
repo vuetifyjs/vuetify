@@ -27,7 +27,7 @@ export default mixins(
 
       return this.$createElement('div', {
         staticClass: `v-picker__title__btn ${staticClass}`.trim(),
-        'class': {
+        class: {
           'v-picker__title__btn--active': active,
           'v-picker__title__btn--readonly': readonly,
         },

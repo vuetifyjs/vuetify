@@ -107,7 +107,7 @@ export default mixins(
 
       return this.$createElement('button', setColor(color, {
         staticClass: 'v-btn',
-        'class': this.genButtonClasses(isAllowed, isFloating, isSelected, isCurrent),
+        class: this.genButtonClasses(isAllowed, isFloating, isSelected, isCurrent),
         attrs: {
           type: 'button',
         },
