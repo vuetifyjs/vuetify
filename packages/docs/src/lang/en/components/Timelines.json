@@ -58,5 +58,10 @@
       "right": "Explicitly set the item to a right orientation",
       "small": "Small size dot"
     }
+  },
+  "slots": {
+    "v-timeline-item": {
+      "opposite": "Used to customize the opposite side of timeline items"
+    }
   }
 }
