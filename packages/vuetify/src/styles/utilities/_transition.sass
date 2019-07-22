@@ -1,3 +1,4 @@
-@each $name, $bezier in $transition
-  .v-application .transition-#{$name}
-    transition: 0.3s $bezier !important
+.v-application
+  @each $name, $bezier in $transition
+    .transition-#{$name}
+      transition: 0.3s $bezier !important
