@@ -125,21 +125,23 @@
     "reactive": "Updates the picker model when changing months/years automatically",
     "readonly": "Makes the picker readonly (doesnt't allow to select new date)",
     "scrollable": "Allows changing displayed month with mouse scroll",
+    "selectedItemText": "Text used for translating the number of selected dates when using *multiple* prop. Can also be customizing globally in [Internationalization](/customization/internationalization).",
     "showCurrent": "Toggles visibility of the current date/month outline or shows the provided date/month as a current",
     "showWeek": "Toggles visibility of the week numbers in the body of the calendar",
     "titleDateFormat": "Allows you to customize the format of the date string that appears in the title of the date picker. Called with date (ISO 8601 string) arguments.",
     "type": "Determines the type of the picker - `date` for date picker, `month` for month picker",
     "value": "Date picker model (ISO 8601 format, YY-mm-dd or YY-mm)",
     "weekdayFormat": "Allows you to customize the format of the weekday string that appears in the body of the calendar. Called with date (ISO 8601 string) arguments.",
+    "width": "Width of the picker",
     "yearFormat": "Allows you to customize the format of the year string that appears in the header of the calendar. Called with date (ISO 8601 string) arguments.",
     "yearIcon": "Sets the icon in the year selection button"
   },
-  "functions": {
-    "allowedDates": "Checks if date is allowed by picker",
-    "dayFormat": "Formats day string that appears in the date table to specified locale",
-    "headerDateFormat": "Formats current date string that appears in the header to specified locale",
-    "monthFormat": "Formats month string that appears in the months table to specified locale",
-    "titleDateFormat": "Formats date string that appears in the title to specified locale",
-    "yearFormat": "Formats year string that appears in the header to specified locale"
+  "events": {
+    "update:picker-date": "The `.sync` event for `picker-date` prop",
+    "click:date": "Emitted when the date button is clicked",
+    "dblclick:date": "Emitted when the date button is double clicked",
+    "click:month": "Emitted when the month button is clicked",
+    "dblclick:month": "Emitted when the month button is double clicked. Usable only for `month` pickers.",
+    "change": "Reactive date picker emits `input` even when any part of the date (year/month/day) changes, but `change` event is emitted only when the day (for date pickers) or month (for month pickers) changes."
   }
 }
