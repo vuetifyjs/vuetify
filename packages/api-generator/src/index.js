@@ -262,3 +262,5 @@ components['$vuetify'] = map['$vuetify']
 components['internationalization'] = map['internationalization']
 
 writeApiFile({ ...components, ...directives }, 'dist/api.js')
+
+writeJsonFile({ ...components, ...directives }, 'dist/web-types.json')
