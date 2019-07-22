@@ -10,7 +10,7 @@
       :items="items"
       :search-input.sync="search"
       cache-items
-      class="mx-3"
+      class="mx-4"
       flat
       hide-no-data
       hide-details

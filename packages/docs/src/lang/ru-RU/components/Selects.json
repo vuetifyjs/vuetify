@@ -45,13 +45,13 @@
     "segmented": "Создаёт сегментированную кнопку - [спец.](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "tags": "Функция тегов позволяет пользователю создавать новые значения, недоступные из **items**"
   },
-  "scopedSlots": {
+  "slots": {
     "item": "Определить внешний вид элемента",
     "selection": "Определить внешний вид пользовательского выбора"
   },
   "events": {
     "change": "Mixins.Input.events.change",
     "update:error": "Mixins.Input.events.update:error",
-    "update:searchInput": "`search-input.sync` событие"
+    "update:search-input": "`search-input.sync` событие"
   }
 }

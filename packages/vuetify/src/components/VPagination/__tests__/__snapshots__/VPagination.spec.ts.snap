@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VPagination.ts emits an event when next or previous is clicked 1`] = `
-
 <ul class="v-pagination theme--light">
   <li>
     <button type="button"
@@ -59,11 +58,9 @@ exports[`VPagination.ts emits an event when next or previous is clicked 1`] = `
     </button>
   </li>
 </ul>
-
 `;
 
 exports[`VPagination.ts should only render end of range if value is equals "right" 1`] = `
-
 <ul class="v-pagination theme--light">
   <li>
     <button type="button"
@@ -119,11 +116,9 @@ exports[`VPagination.ts should only render end of range if value is equals "righ
     </button>
   </li>
 </ul>
-
 `;
 
 exports[`VPagination.ts should only render middle of range if length is big and value is somewhere in the middle 1`] = `
-
 <ul class="v-pagination theme--light">
   <li>
     <button type="button"
@@ -296,11 +291,9 @@ exports[`VPagination.ts should only render middle of range if length is big and 
     </button>
   </li>
 </ul>
-
 `;
 
 exports[`VPagination.ts should only render start and end of range if length is big 1`] = `
-
 <ul class="v-pagination theme--light">
   <li>
     <button type="button"
@@ -475,11 +468,9 @@ exports[`VPagination.ts should only render start and end of range if length is b
     </button>
   </li>
 </ul>
-
 `;
 
 exports[`VPagination.ts should only render start of range if value is equals "left" 1`] = `
-
 <ul class="v-pagination theme--light">
   <li>
     <button type="button"
@@ -535,11 +526,9 @@ exports[`VPagination.ts should only render start of range if value is equals "le
     </button>
   </li>
 </ul>
-
 `;
 
 exports[`VPagination.ts should render component in RTL mode and match snapshot 1`] = `
-
 <ul class="v-pagination theme--light">
   <li>
     <button type="button"
@@ -597,11 +586,9 @@ exports[`VPagination.ts should render component in RTL mode and match snapshot 1
     </button>
   </li>
 </ul>
-
 `;
 
 exports[`VPagination.ts should render disabled buttons with length equals to 0 1`] = `
-
 <ul class="v-pagination theme--light">
   <li>
     <button type="button"
@@ -624,11 +611,9 @@ exports[`VPagination.ts should render disabled buttons with length equals to 0 1
     </button>
   </li>
 </ul>
-
 `;
 
 exports[`VPagination.ts should use totalVisible prop if defined 1`] = `
-
 <ul class="v-pagination theme--light">
   <li>
     <button type="button"
@@ -717,5 +702,4 @@ exports[`VPagination.ts should use totalVisible prop if defined 1`] = `
     </button>
   </li>
 </ul>
-
 `;

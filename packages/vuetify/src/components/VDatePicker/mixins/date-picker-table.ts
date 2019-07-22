@@ -107,7 +107,7 @@ export default mixins(
 
       return this.$createElement('button', setColor(color, {
         staticClass: 'v-btn',
-        'class': this.genButtonClasses(isAllowed, isFloating, isSelected, isCurrent),
+        class: this.genButtonClasses(isAllowed, isFloating, isSelected, isCurrent),
         attrs: {
           type: 'button',
         },
@@ -162,10 +162,10 @@ export default mixins(
     },
     wheel (e: WheelEvent, calculateTableDate: CalculateTableDateFunction) {
       e.preventDefault()
-      this.$emit('tableDate', calculateTableDate(e.deltaY))
+      this.$emit('update:table-date', calculateTableDate(e.deltaY))
     },
     touch (value: number, calculateTableDate: CalculateTableDateFunction) {
-      this.$emit('tableDate', calculateTableDate(value))
+      this.$emit('update:table-date', calculateTableDate(value))
     },
     genTable (staticClass: string, children: VNodeChildren, calculateTableDate: CalculateTableDateFunction) {
       const transition = this.$createElement('transition', {

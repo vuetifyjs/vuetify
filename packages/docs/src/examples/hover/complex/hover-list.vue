@@ -1,5 +1,5 @@
 <template>
-  <v-container grid-list-md text-xs-center fill-height class="pa-3">
+  <v-container grid-list-md text-center fill-height class="pa-4">
     <v-layout align-center justify-center row wrap fill-height>
       <template v-for="(item, i) in items">
         <v-flex
@@ -22,13 +22,13 @@
                     column
                     justify-space-between
                   >
-                    <p class="mt-3 subheading text-xs-left">{{ item.title }}</p>
+                    <p class="mt-4 subheading text-left">{{ item.title }}</p>
 
                     <div>
-                      <p class="ma-0 body-1 font-weight-bold font-italic text-xs-left">
+                      <p class="ma-0 body-1 font-weight-bold font-italic text-left">
                         {{ item.text }}
                       </p>
-                      <p class="caption font-weight-medium font-italic text-xs-left">
+                      <p class="caption font-weight-medium font-italic text-left">
                         {{ item.subtext }}
                       </p>
                     </div>

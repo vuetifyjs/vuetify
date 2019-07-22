@@ -24,7 +24,7 @@
       </v-flex>
       <v-flex
         xs12
-        text-xs-center
+        text-center
       >
         <v-icon :color="color">{{ icon }}</v-icon>
       </v-flex>

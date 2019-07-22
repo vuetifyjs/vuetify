@@ -11,11 +11,11 @@
     },
     "select": {
       "header": "### Selectable rows",
-      "desc": "The `show-select` prop will render a checkbox in the default header to toggle all rows, and a checkbox for each default row. You can customize these with the scoped slots `header.column.data-table-select` and `item.column.data-table-select` respectively. You can also switch between allowing multiple selected rows at the same time or just one with the `single-select` prop."
+      "desc": "The `show-select` prop will render a checkbox in the default header to toggle all rows, and a checkbox for each default row. You can customize these with the slots `header.column.data-table-select` and `item.column.data-table-select` respectively. You can also switch between allowing multiple selected rows at the same time or just one with the `single-select` prop."
     },
     "expand": {
       "header": "### Expandable rows",
-      "desc": "The `show-expand` prop will render an expand icon on each default row. You can customize this with the `item.column.data-table-expand` scoped slot. You can also switch between allowing multiple expanded rows at the same time or just one with the `single-expand` prop. The expanded rows are available on the synced prop `expanded.sync`"
+      "desc": "The `show-expand` prop will render an expand icon on each default row. You can customize this with the `item.column.data-table-expand` slot. You can also switch between allowing multiple expanded rows at the same time or just one with the `single-expand` prop. The expanded rows are available on the synced prop `expanded.sync`"
     },
     "group": {
       "header": "### Grouped rows",
@@ -43,11 +43,11 @@
     },
     "customize-header": {
       "header": "### Customizing default header",
-      "desc": "You can use the dynamic scoped slots `header.column.<name>` to customize only certain columns. `<name>` is the name of the `value` property in the corresponding header item sent to `headers`."
+      "desc": "You can use the dynamic slots `header.column.<name>` to customize only certain columns. `<name>` is the name of the `value` property in the corresponding header item sent to `headers`."
     },
     "customize-rows": {
       "header": "### Customizing default rows",
-      "desc": "You can use the dynamic scoped slots `item.column.<name>` to customize only certain columns. `<name>` is the name of the `value` property in the corresponding header item sent to `headers`. So to customize the calories column we're using the `item.column.calories` slot."
+      "desc": "You can use the dynamic slots `item.column.<name>` to customize only certain columns. `<name>` is the name of the `value` property in the corresponding header item sent to `headers`. So to customize the calories column we're using the `item.column.calories` slot."
     },
     "customize-footer": {
       "header": "### Customizing footer",
@@ -75,7 +75,7 @@
     },
     "server": {
       "header": "### Paginate and sort server-side",
-      "desc": "If you're loading data from a backend and want to paginate and sort the results before displaying them, you can use the `total-items` prop. Defining this prop will disable the built-in sorting and pagination, and you will instead need to use the `pagination` prop to listen for changes. Use the `loading` prop to display a progress bar while fetching data."
+      "desc": "If you're loading data already paginated and sorted from a backend, you can use the `server-items-length` prop. Defining this prop will disable the built-in sorting and pagination, and you will instead need to use the available events (`update:page`, `update:sortBy`, `update:options`, etc) to know when to request new pages from you backend. Use the `loading` prop to display a progress bar while fetching data."
     },
     "headerless": {
       "header": "### Remove default header and footer",
@@ -92,6 +92,10 @@
     "virtualized": {
       "header": "### Virtualized rows",
       "desc": "Using the `virtual-rows` prop will virtualize the rendering of the rows, which can increase the performance of the data-table when you have a large number of rows. Be aware that you can not use the `body`, `body.prepend` or `body.append` slots with this prop."
+    },
+    "custom-filter": {
+      "header": "### Custom filtering",
+      "desc": "You can override the default filtering used with `search` prop by supplying a function to the `custom-filter` prop. If you need to customize the filtering of a specific column, you can supply a function to the `filter` property on header items. The signature is `(value: any, search: string | null, item: any): boolean`. This function will always be run even if `search` prop has not been provided. Thus you need to make sure to exit early with a value of `true` if filter should not be applied."
     }
   },
   "props": {
@@ -121,46 +125,29 @@
       "expandIcon": "Icon used for expand toggle button."
     }
   },
-  "scopedSlots": {
-    "v-data-table": {
-      "item": "Slot to replace the default rendering of a row",
-      "item.dataTableSelect": "Slot to replace the default `v-simple-checkbox` used when selecting rows",
-      "item.dataTableExpand": "Slot to replace the default `v-icon` used when expanding rows",
-      "item.<name>": "Slot to customize a specific column",
-      "expanded-item": "Slot to customize expanded rows",
-      "body": "Slot to replaces the default table `<tbody>`",
-      "body.append": "Appends elements to the end of the default table `<tbody>`",
-      "body.prepend": "Prepends elements to the end of the default table `<tbody>`",
-      "footer": "Slot to add a custom footer",
-      "header": "Slot to add a custom header",
-      "header.<name>": "Slot to customize a specific header column",
-      "header.dataTableSelect": "Slot to replace the default `v-simple-checkbox` in header",
-      "top": "Slot to add content above the table",
-      "progress": "Slot to replace the default `<v-progress-linear>` component",
-      "group": "Slot to replace the default rendering of grouped rows",
-      "group.header": "Slot to customize the default rendering of group headers",
-      "group.summary": "Slot to customize the default rendering of group summaries"
-    }
-  },
   "slots": {
     "v-data-table": {
       "item": "Slot to replace the default rendering of a row",
-      "item.dataTableSelect": "Slot to replace the default `v-simple-checkbox` used when selecting rows",
-      "item.dataTableExpand": "Slot to replace the default `v-icon` used when expanding rows",
+      "item.data-table-select": "Slot to replace the default `v-simple-checkbox` used when selecting rows",
+      "item.data-table-expand": "Slot to replace the default `v-icon` used when expanding rows",
       "item.<name>": "Slot to customize a specific column",
       "expanded-item": "Slot to customize expanded rows",
       "body": "Slot to replaces the default table `<tbody>`",
       "body.append": "Appends elements to the end of the default table `<tbody>`",
       "body.prepend": "Prepends elements to the end of the default table `<tbody>`",
       "footer": "Slot to add a custom footer",
+      "footer.page-text": "Slot to customize footer page text",
       "header": "Slot to add a custom header",
       "header.<name>": "Slot to customize a specific header column",
-      "header.dataTableSelect": "Slot to replace the default `v-simple-checkbox` in header",
-      "top": "Slot to add content above the table",
-      "progress": "Slot to replace the default `<v-progress-linear>` component",
+      "header.data-table-select": "Slot to replace the default `v-simple-checkbox` in header",
       "group": "Slot to replace the default rendering of grouped rows",
       "group.header": "Slot to customize the default rendering of group headers",
-      "group.summary": "Slot to customize the default rendering of group summaries"
+      "group.summary": "Slot to customize the default rendering of group summaries",
+      "top": "Slot to add content above the table",
+      "progress": "Slot to replace the default `<v-progress-linear>` component",
+      "loading": "Defines content for when `loading` is true and no items are provided",
+      "no-data": "Defines content for when no items are provided",
+      "no-results": "Defines content for when `search` is provided but no results are found"
     },
     "v-edit-dialog": {
       "input": "Slot used to denote input component for v-edit-dialog"
@@ -174,7 +161,7 @@
       "save": "Emits when edit-dialog save button is pressed"
     },
     "v-data-table": {
-      "click:row": "Emits when a table row is clicked. The item for the row is included. **NOTE:** will not emit when table rows are defined through a scoped slot.",
+      "click:row": "Emits when a table row is clicked. The item for the row is included. **NOTE:** will not emit when table rows are defined through a slot.",
       "update:pagination": "Emits when the `pagination.sync` event is updated"
     }
   }

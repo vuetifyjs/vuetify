@@ -18,7 +18,7 @@
               label="Available Component(s)"
               outlined
               :menu-props="{offsetY: true, contentClass: 'primary'}"
-              prepend-icon="mdi-view-dashboard"
+              prepend-inner-icon="mdi-view-dashboard"
               hide-details
             />
           </v-flex>
@@ -55,13 +55,13 @@
           :key="current"
           v-model="tab"
           touchless
-          class="white hide-overflow"
+          class="white overflow-hidden"
         >
           <v-tab-item
             v-for="(tab, i) in computedTabs"
             :key="`tab-item-${i}`"
             :value="tab"
-            class="scroll-y"
+            class="overflow-y-auto"
             eager
             style="max-height: 800px;"
           >
@@ -136,16 +136,6 @@
             type: 'markdown',
             class: 'xs12 mt-2',
           },
-        ],
-        scopedSlots: [
-          {
-            value: 'name',
-            class: 'xs4',
-          },
-          {
-            value: 'description',
-            class: 'xs12 mt-2',
-          },
           {
             value: 'props',
             class: 'xs12 mt-2',
@@ -189,7 +179,7 @@
       },
       search: null,
       tab: null,
-      tabs: ['api', 'props', 'slots', 'scopedSlots', 'params', 'events', 'functions', 'functional', 'options'],
+      tabs: ['api', 'props', 'slots', 'params', 'events', 'functions', 'functional', 'options'],
     }),
 
     computed: {

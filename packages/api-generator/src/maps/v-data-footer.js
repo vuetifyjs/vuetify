@@ -28,11 +28,13 @@ const DataFooterProps = [
 module.exports = {
   'v-data-footer': {
     props: DataFooterProps,
-    slots: DataFooterSlots,
-    scopedSlots: {
-      name: 'page-text',
-      props: DataFooterPageTextScopedProps,
-    },
+    slots: [
+      ...DataFooterSlots,
+      {
+        name: 'page-text',
+        props: DataFooterPageTextScopedProps,
+      },
+    ],
     events: DataFooterEvents,
   },
   DataFooterSlots,

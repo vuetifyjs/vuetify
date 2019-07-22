@@ -25,9 +25,9 @@
       "header": "### Counter",
       "desc": "When using the **display-size** property along with **counter**, the total number of files and size will be displayed under the input."
     },
-    "scoped-slots": {
-      "header": "### Scoped slots",
-      "desc": "Using the `selection` scoped slot, you can customize the appearance of your input selections. This is typically done with [chips](/components/chips), however any component or markup can be used."
+    "selection": {
+      "header": "### Selection slot",
+      "desc": "Using the `selection` slot, you can customize the appearance of your input selections. This is typically done with [chips](/components/chips), however any component or markup can be used."
     },
     "custom-icon": {
       "header": "### Custom icons",
@@ -53,7 +53,7 @@
     "truncateLength": "The length of a filename before it is truncated with ellipsis",
     "value": "A single or array of [File objects](https://developer.mozilla.org/en-US/docs/Web/API/File)."
   },
-  "scopedSlots": {
+  "slots": {
     "selection": "Slot for defining a custom appearance for selected item(s). Provides the current **index**, **text** (truncated) and [file](https://developer.mozilla.org/en-US/docs/Web/API/File)."
   },
   "events": {

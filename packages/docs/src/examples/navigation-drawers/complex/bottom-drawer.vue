@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="mx-auto hide-overflow"
+    class="mx-auto overflow-hidden"
     height="400"
     width="344"
   >

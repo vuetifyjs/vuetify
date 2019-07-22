@@ -1,6 +1,6 @@
 {
   "header": "# Menu déroulant",
   "events": {
-    "update:searchInput": "L'événement `search-input.sync`"
+    "update:search-input": "L'événement `search-input.sync`"
   }
 }

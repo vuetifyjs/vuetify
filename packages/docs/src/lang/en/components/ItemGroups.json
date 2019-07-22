@@ -19,7 +19,7 @@
     },
     "mandatory": {
       "header": "### Mandatory",
-      "desc": "**mandatory** item groups must have aty least 1 item selected."
+      "desc": "**mandatory** item groups must have at least 1 item selected."
     },
     "active-class": {
       "header": "### With active class",

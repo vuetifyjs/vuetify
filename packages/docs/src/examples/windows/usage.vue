@@ -2,7 +2,7 @@
   <v-layout align-center>
     <v-item-group
       v-model="window"
-      class="shrink mr-4"
+      class="shrink mr-6"
       mandatory
       tag="v-flex"
     >
@@ -35,8 +35,8 @@
         >
           <v-card flat>
             <v-card-text>
-              <v-layout align-center mb-3>
-                <v-avatar color="grey" class="mr-3"></v-avatar>
+              <v-layout align-center mb-4>
+                <v-avatar color="grey" class="mr-4"></v-avatar>
                 <strong class="title">Title {{ n }}</strong>
                 <v-spacer></v-spacer>
                 <v-btn icon>

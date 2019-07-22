@@ -34,7 +34,7 @@
         align-center
         justify-center
         layout
-        text-xs-center
+        text-center
       >
         <v-avatar
           :color="color"

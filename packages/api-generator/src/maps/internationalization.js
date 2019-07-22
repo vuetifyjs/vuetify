@@ -1,5 +1,5 @@
 module.exports = {
-  'internationalization': {
+  internationalization: {
     api: [
       {
         name: 'locales',

@@ -18,8 +18,11 @@ export class Theme extends Service {
   static property = 'theme'
 
   public disabled = false
+
   public options: VuetifyThemeOptions['options']
+
   public styleEl?: HTMLStyleElement
+
   public themes: VuetifyThemes = {
     light: {
       primary: '#1976D2',   // blue.darken2
@@ -40,9 +43,11 @@ export class Theme extends Service {
       warning: '#FB8C00',    // amber.base
     },
   }
+
   public defaults: VuetifyThemes = this.themes
 
   private isDark = null as boolean | null
+
   private vueInstance = null as Vue | null
 
   constructor (options: Partial<VuetifyThemeOptions> = {}) {

@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xs-center">
+  <div class="text-center">
     <v-layout row wrap justify-space-around>
       <v-switch v-model="sheet" label="Model"></v-switch>
       <v-switch v-model="inset" label="Inset"></v-switch>
@@ -15,9 +15,9 @@
           Open Playground
         </v-btn>
       </template>
-      <v-sheet class="text-xs-center" height="200px">
+      <v-sheet class="text-center" height="200px">
         <v-btn
-          class="my-4"
+          class="my-6"
           depressed
           color="error"
           @click="sheet = !sheet"

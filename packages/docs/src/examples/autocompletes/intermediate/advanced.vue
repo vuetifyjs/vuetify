@@ -1,7 +1,7 @@
 <template>
   <v-toolbar color="orange accent-1">
     <v-app-bar-nav-icon class="hidden-sm-and-down"></v-app-bar-nav-icon>
-    <v-toolbar-title class="title mr-4 hidden-sm-and-down">Cryptocurrency</v-toolbar-title>
+    <v-toolbar-title class="title mr-6 hidden-sm-and-down">Cryptocurrency</v-toolbar-title>
     <v-autocomplete
       v-model="model"
       :items="items"

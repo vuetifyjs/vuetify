@@ -94,13 +94,26 @@
       "value": "The value used when a child of a [v-list-item-group](/components/list-item-groups)."
     },
     "v-list-item-avatar": {
-      "color": "Mixins.Colorable.props.color"
+      "color": "Mixins.Colorable.props.color",
+      "horizontal": "Uses an alternative horizontal style."
     },
     "v-list-group": {
       "activeClass": "Mixins.Routable.props.activeClass",
       "appendIcon": "Components.Inputs.props.appendIcon",
       "prependIcon": "Components.Inputs.props.prependIcon",
+      "ripple": "Mixins.Rippleable.props.ripple",
       "value": "Expands / Collapse list group"
+    }
+  },
+  "slots": {
+    "v-list-group": {
+      "appendIcon": "Components.Inputs.props.appendIcon",
+      "prependIcon": "Components.Inputs.props.prependIcon"
+    }
+  },
+  "events": {
+    "v-list-group": {
+      "click": "Emitted when component is clicked"
     }
   }
 }

@@ -84,7 +84,8 @@ $material-dark: (
   ),
   'table': (
     'active': #505050,
-    'hover': map-get($grey, 'darken-2')
+    'hover': map-get($grey, 'darken-2'),
+    'group': map-get($grey, 'darken-1')
   ),
   'picker': (
     'body': map-get($grey, 'darken-3'),

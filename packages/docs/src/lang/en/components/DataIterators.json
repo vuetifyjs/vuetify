@@ -11,7 +11,7 @@
     },
     "expand": {
       "header": "### Expand",
-      "desc": "The `v-data-iterator` has internal state for both selection and expansion, just like `v-data-table`. In this example we use the methods `isExpanded` and `expand` available on the default scoped slot."
+      "desc": "The `v-data-iterator` has internal state for both selection and expansion, just like `v-data-table`. In this example we use the methods `isExpanded` and `expand` available on the default slot."
     },
     "filter": {
       "header": "### Filter",
@@ -48,19 +48,13 @@
       "showFirstLastPage": "Show first/last icons"
     }
   },
-  "scopedSlots": {
+  "slots": {
     "v-data-iterator": {
       "default": "The default slot. Use this to render your items",
       "footer.page-text": "This slot is forwarded to the default footer. See the `v-data-footer` API for more information",
       "footer": "Defines a footer below the items",
       "header": "Defines a header above the items",
-      "item": "Slot for each item"
-    }
-  },
-  "slots": {
-    "v-data-iterator": {
-      "footer": "Defines a footer below the items",
-      "header": "Defines a header above the items",
+      "item": "Slot for each item",
       "loading": "Defines content for when `loading` is true and no items are provided",
       "no-data": "Defines content for when no items are provided",
       "no-results": "Defines content for when `search` is provided but no results are found"

@@ -54,6 +54,10 @@ export default baseMixins.extend({
       default: 'center center',
     },
     persistent: Boolean,
+    retainFocus: {
+      type: Boolean,
+      default: true,
+    },
     scrollable: Boolean,
     transition: {
       type: [String, Boolean],
@@ -200,7 +204,7 @@ export default baseMixins.extend({
       this.$emit('keydown', e)
     },
     onFocusin (e: Event) {
-      if (!e) return
+      if (!e || !this.retainFocus) return
 
       const target = e.target as HTMLElement
 
@@ -226,7 +230,7 @@ export default baseMixins.extend({
   render (h): VNode {
     const children = []
     const data = {
-      'class': this.classes,
+      class: this.classes,
       ref: 'dialog',
       directives: [
         {
@@ -265,7 +269,7 @@ export default baseMixins.extend({
     }
 
     children.push(h('div', {
-      'class': this.contentClasses,
+      class: this.contentClasses,
       attrs: {
         role: 'document',
         tabindex: 0,

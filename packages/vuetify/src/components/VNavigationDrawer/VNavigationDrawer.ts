@@ -62,15 +62,16 @@ export default baseMixins.extend({
   props: {
     bottom: Boolean,
     clipped: Boolean,
-    disableRouteWatcher: Boolean,
     disableResizeWatcher: Boolean,
+    disableRouteWatcher: Boolean,
+    expandOnHover: Boolean,
+    floating: Boolean,
     height: {
       type: [Number, String],
       default (): string {
         return this.app ? '100vh' : '100%'
       },
     },
-    floating: Boolean,
     miniVariant: Boolean,
     miniVariantWidth: {
       type: [Number, String],
@@ -81,7 +82,6 @@ export default baseMixins.extend({
       default: 1264,
     },
     permanent: Boolean,
-    expandOnHover: Boolean,
     right: Boolean,
     src: {
       type: [String, Object],
@@ -356,7 +356,7 @@ export default baseMixins.extend({
       }
 
       if (this.miniVariant) {
-        on.click = () => this.$emit('update:miniVariant', false)
+        on.click = () => this.$emit('update:mini-variant', false)
       }
 
       if (this.expandOnHover) {

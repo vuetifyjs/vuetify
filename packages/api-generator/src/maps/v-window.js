@@ -9,6 +9,5 @@ module.exports = {
         },
       },
     ],
-    slots: ['default'],
   },
 }

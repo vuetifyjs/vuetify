@@ -24,11 +24,9 @@
     "actions-append": "Slot to put custom elements after the actions in the footer.",
     "actions-prepend": "Slot to put custom elements before the actions in the footer.",
     "footer": "Slot to specify an extra footer",
-    "noData": "Displayed when there are no items (takes precedence over `no-results`)",
-    "noResults": "Displayed when there are no filtered items"
-  },
-  "scopedSlots": {
     "items": "Slot to specify how items are rendered",
+    "noData": "Displayed when there are no items (takes precedence over `no-results`)",
+    "noResults": "Displayed when there are no filtered items",
     "pageText": "Slot to customize the page text region of the pagination controls."
   }
 }
