@@ -125,7 +125,7 @@
     "reactive": "Updates the picker model when changing months/years automatically",
     "readonly": "Makes the picker readonly (doesnt't allow to select new date)",
     "scrollable": "Allows changing displayed month with mouse scroll",
-    "selectedItemText": "Text used for translating the number of selected dates when using *multiple* prop. Can also be customizing globally in [Internationalization](/customization/internationalization).",
+    "selectedItemsText": "Text used for translating the number of selected dates when using *multiple* prop. Can also be customizing globally in [Internationalization](/customization/internationalization).",
     "showCurrent": "Toggles visibility of the current date/month outline or shows the provided date/month as a current",
     "showWeek": "Toggles visibility of the week numbers in the body of the calendar",
     "titleDateFormat": "Allows you to customize the format of the date string that appears in the title of the date picker. Called with date (ISO 8601 string) arguments.",
