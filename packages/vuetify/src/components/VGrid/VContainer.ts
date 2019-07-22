@@ -9,6 +9,7 @@ export default Grid('container').extend({
   name: 'v-container',
   functional: true,
   props: {
+    id: String,
     tag: {
       type: String,
       default: 'div',
@@ -40,6 +41,11 @@ export default Grid('container').extend({
 
         return value || typeof value === 'string'
       })
+    }
+
+    if (props.id) {
+      data.domProps = data.domProps || {}
+      data.domProps.id = props.id
     }
 
     return h(
