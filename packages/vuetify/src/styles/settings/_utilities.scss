@@ -21,6 +21,13 @@ $utilities: map-merge(
       class: d,
       values: none inline inline-block block table table-row table-cell flex inline-flex
     ),
+    "float": (
+      responsive: true,
+      print: true,
+      property: float,
+      class: float,
+      values: none left right
+    ),
 
     // Flex utilities
     "flex": (
