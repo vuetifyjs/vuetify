@@ -1,4 +1,4 @@
-const child = require('child_process')
+const spawn = require('cross-spawn')
 
 let target = process.argv[2]
 const alias = {
@@ -10,7 +10,7 @@ const alias = {
 target = alias[target] || target
 
 if (!target) {
-  child.spawn('yarn', ['lerna', 'run', 'build', '--stream'], { stdio:'inherit', shell: true })
+  spawn('yarn', ['lerna', 'run', 'build', '--stream'], { stdio: 'inherit' })
 } else {
-  child.spawn('yarn', ['lerna', 'run', 'build', `--scope ${target}`, '--stream'], { stdio:'inherit', shell: true })
+  spawn('yarn', ['lerna', 'run', 'build', `--scope ${target}`, '--stream'], { stdio: 'inherit' })
 }
