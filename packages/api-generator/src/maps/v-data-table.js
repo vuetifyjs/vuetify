@@ -11,8 +11,8 @@ const TableHeader = {
   'divider?': 'boolean',
   'class?': 'string | string[]',
   'width?': 'string | number',
-  'filter?': '(value: any, search: string, item: any): boolean',
-  'sort?': '(a: any, b: any): number',
+  'filter?': '(value: any, search: string, item: any) => boolean',
+  'sort?': '(a: any, b: any) => number',
 }
 
 const DataTableEvents = [
@@ -95,7 +95,7 @@ module.exports = {
       },
       {
         name: 'customFilter',
-        default: '(value: any, search: string | null, item: any): boolean',
+        default: '(value: any, search: string | null, item: any) => boolean',
       },
     ]),
     slots: DataTableSlots,
