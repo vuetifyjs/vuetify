@@ -1,3 +1,6 @@
+// Styles
+import './VForm.sass'
+
 // Components
 import VInput from '../VInput/VInput'
 
