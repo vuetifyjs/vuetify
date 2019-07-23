@@ -1,6 +1,6 @@
 {
   "header": "# Snackbars",
-  "headerText": "The `v-snackbar` component is used to display a quick message to a user. Snackbars support positioning, delay removal, and callbacks.",
+  "headerText": "The `v-snackbar` component is used to display a quick message to a user. Snackbars support positioning, removal delay, and callbacks.",
   "examples": {
     "usage": {
       "desc": "`v-snackbar`'s in their simplest form display a temporary and closable notification to the user."
