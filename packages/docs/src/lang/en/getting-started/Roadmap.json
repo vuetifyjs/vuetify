@@ -75,7 +75,7 @@
       "features": {
         "#### Highlights": [
           "Complete update to Material Design 2",
-          "Fully updated to Typescript",
+          "Converted from Javascript to Typescript",
           "Converted from Stylus to Sass",
           "Converted from avoriaz to vue-test-utils"
         ],
@@ -84,9 +84,11 @@
           "v-banner",
           "v-chip-group",
           "v-color-picker",
+          "v-file-input",
           "v-list-item-group",
           "v-overlay",
-          "v-simple-table"
+          "v-simple-table",
+          "v-slide-group"
         ]
       },
       "value": true
@@ -104,7 +106,7 @@
       "complete": false,
       "title": "v2.2 Release **(Tigris)**",
       "caption": "Q4 2019",
-      "text": "Vuetify components will be pre-configurable through framework wide defaults. This will allow you to set global settings such as **no-ripples** or all inputs are of **outline** type and even set all cards to become **tile**s.",
+      "text": "The introduction of Vuetify Presets. Will include the entire Material Design Studies collection and be _user customizable_. For more information on Google's studies, please [navigate here](https://material.io/design/material-studies/about-our-material-studies.html).",
       "value": false
     },
     {
@@ -112,7 +114,7 @@
       "complete": false,
       "title": "v2.2 Release **(Orion)**",
       "caption": "Q1 2020",
-      "text": "The introduction of Vuetify Presets. Will include the entire Material Design Studies collection and be _user customizable_. For more information on Google's studies, please [navigate here](https://material.io/design/material-studies/about-our-material-studies.html).",
+      "text": "Vuetify components will be pre-configurable through framework wide defaults. This will allow you to set global settings such as **no-ripples** or all inputs are of **outline** type and even set all cards to become **tile**s.",
       "value": false
     },
     {
