@@ -1,6 +1,6 @@
 <template>
   <v-container grid-list-md text-center>
-    <v-layout row wrap>
+    <v-layout wrap>
       <v-flex xs12>
         <v-card dark color="primary">
           <v-card-text class="px-0">12</v-card-text>

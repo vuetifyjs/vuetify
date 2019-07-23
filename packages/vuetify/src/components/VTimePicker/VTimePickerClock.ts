@@ -131,7 +131,7 @@ export default mixins<options &
         const color = value === this.value && (this.color || 'accent')
         children.push(this.$createElement('span', this.setBackgroundColor(color, {
           staticClass: 'v-time-picker-clock__item',
-          'class': {
+          class: {
             'v-time-picker-clock__item--active': value === this.displayedValue,
             'v-time-picker-clock__item--disabled': this.disabled || !this.isAllowed(value),
           },
@@ -148,7 +148,7 @@ export default mixins<options &
       const color = (this.value != null) && (this.color || 'accent')
       return this.$createElement('div', this.setBackgroundColor(color, {
         staticClass: 'v-time-picker-clock__hand',
-        'class': {
+        class: {
           'v-time-picker-clock__hand--inner': this.isInner(this.value),
         },
         style: {

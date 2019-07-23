@@ -1,6 +1,6 @@
 <template>
   <v-layout column align-center>
-    <v-layout row wrap justify-space-around>
+    <v-layout wrap justify-space-around>
       <v-switch v-model="disabled" class="ma-2" label="Disabled"></v-switch>
       <v-switch v-model="absolute" class="ma-2" label="Absolute"></v-switch>
       <v-switch v-model="openOnHover" class="ma-2" label="Open on hover"></v-switch>

@@ -1,6 +1,6 @@
 <template>
   <v-layout column align-center>
-    <v-layout row wrap justify-space-around>
+    <v-layout wrap justify-space-around>
       <v-switch v-model="valid" class="ma-4" label="Valid" readonly></v-switch>
       <v-switch v-model="lazy" class="ma-4" label="Lazy"></v-switch>
     </v-layout>

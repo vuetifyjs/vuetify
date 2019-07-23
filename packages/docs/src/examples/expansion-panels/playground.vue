@@ -1,6 +1,6 @@
 <template>
   <v-layout column align-center>
-    <v-layout row wrap justify-space-around>
+    <v-layout wrap justify-space-around>
       <v-switch v-model="accordion" class="ma-2" label="Accordion"></v-switch>
       <v-switch v-model="popout" class="ma-2" label="Popout"></v-switch>
       <v-switch v-model="inset" class="ma-2" label="Inset"></v-switch>

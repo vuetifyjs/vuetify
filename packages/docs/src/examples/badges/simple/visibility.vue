@@ -2,7 +2,6 @@
   <v-container fluid class="text-center">
     <v-layout
       justify-space-between
-      row
       wrap
     >
       <v-flex xs12>

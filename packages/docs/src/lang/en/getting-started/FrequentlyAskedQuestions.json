@@ -65,7 +65,7 @@
       "q": "### How do I upgrade to the latest version",
       "a": "All required changes are noted in the **Upgrade Guide** of our releases.",
       "a2": [
-        "[v2.0.0](https://github.com/vuetifyjs/vuetify/releases/tag/v2.0.0) **(coming soon)**",
+        "[v2.0.0](https://github.com/vuetifyjs/vuetify/releases/tag/v2.0.0)",
         "[v1.5.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0)",
         "[v1.4.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.4.0)",
         "[v1.3.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.3.0)",
@@ -91,6 +91,10 @@
     {
       "q": "### How long will version 1.5 be supported?",
       "a": "Until July 2020. More information can be found on the [Long-term Support page](/getting-started/long-term-support)."
+    },
+    {
+      "q": "How do I get to the v1.5 documentation?",
+      "a": "[https://v15.vuetiyfjs.com](https://v15.vuetiyfjs.com)"
     }
   ]
 }

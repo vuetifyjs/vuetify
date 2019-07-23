@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="pa-0">
-    <v-layout row wrap align-center>
+    <v-layout wrap align-center>
       <v-flex xs12 sm6>
         <div class="text-center">
           <div class="my-2">

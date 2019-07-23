@@ -49,8 +49,6 @@ module.exports = [
   'v-navigation-drawer',
   'v-overlay',
   'v-parallax',
-  'v-progress-circular',
-  'v-progress-linear',
   'v-rating',
   'v-responsive',
   'v-sheet',

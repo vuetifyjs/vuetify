@@ -2,7 +2,7 @@
   <v-card>
     <v-card-text>
       <v-container fluid>
-        <v-layout row wrap>
+        <v-layout wrap>
           <v-flex xs12>
             <v-radio-group v-model="color" row>
               <v-radio

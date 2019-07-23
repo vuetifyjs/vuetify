@@ -20,7 +20,11 @@ module.exports = {
         value: 'boolean',
       },
       {
-        name: 'update:miniVariant',
+        name: 'transitionend',
+        value: 'object',
+      },
+      {
+        name: 'update:mini-variant',
         value: 'boolean',
       },
     ],

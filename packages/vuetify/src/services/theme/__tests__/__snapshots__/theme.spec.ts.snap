@@ -1138,7 +1138,6 @@ exports[`Theme.ts should generate theme and apply to document 1`] = `
 `;
 
 exports[`Theme.ts should initialize the theme 1`] = `
-
 <style type="text/css"
        id="vuetify-theme-stylesheet"
 >
@@ -1704,7 +1703,6 @@ exports[`Theme.ts should initialize the theme 1`] = `
   caret-color: #855a00 !important;
 }
 </style>
-
 `;
 
 exports[`Theme.ts should minify theme 1`] = `

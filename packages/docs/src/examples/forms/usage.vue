@@ -1,6 +1,6 @@
 <template>
   <v-form v-model="valid">
-    <v-container>
+    <v-container grid-list-xl>
       <v-layout wrap>
         <v-flex
           xs12

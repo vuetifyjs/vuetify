@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VTextField.ts should apply theme to label, counter, messages and icons 1`] = `
-
 <div class="v-input theme--light v-text-field">
   <div class="v-input__prepend-outer">
     <div class="v-input__icon v-input__icon--prepend">
@@ -68,11 +67,9 @@ exports[`VTextField.ts should apply theme to label, counter, messages and icons 
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTextField.ts should have prefix and suffix 1`] = `
-
 <div class="v-input theme--light v-text-field v-text-field--prefix">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -99,11 +96,9 @@ exports[`VTextField.ts should have prefix and suffix 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTextField.ts should not display counter when set to false/undefined/null 1`] = `
-
 <div class="v-input theme--light v-text-field">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -128,11 +123,9 @@ exports[`VTextField.ts should not display counter when set to false/undefined/nu
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTextField.ts should not display counter when set to false/undefined/null 2`] = `
-
 <div class="v-input theme--light v-text-field">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -154,11 +147,9 @@ exports[`VTextField.ts should not display counter when set to false/undefined/nu
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTextField.ts should render component and match snapshot 1`] = `
-
 <div class="v-input theme--light v-text-field">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -179,11 +170,9 @@ exports[`VTextField.ts should render component and match snapshot 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTextField.ts should render component with async loading and custom progress and match snapshot 1`] = `
-
 <div class="v-input v-input--is-loading theme--light v-text-field">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -223,11 +212,9 @@ exports[`VTextField.ts should render component with async loading and custom pro
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTextField.ts should render component with async loading and match snapshot 1`] = `
-
 <div class="v-input v-input--is-loading theme--light v-text-field">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -267,5 +254,4 @@ exports[`VTextField.ts should render component with async loading and match snap
     </div>
   </div>
 </div>
-
 `;

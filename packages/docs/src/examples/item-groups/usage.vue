@@ -19,7 +19,7 @@
               <v-scroll-y-transition>
                 <div
                   v-if="active"
-                  class="display-3 text-center"
+                  class="display-3 flex-grow-1 text-center"
                 >
                   Active
                 </div>

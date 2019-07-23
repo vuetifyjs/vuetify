@@ -63,7 +63,7 @@
 
       <core-title>Colors</core-title>
       <core-section>
-        <v-layout row wrap justify-space-around align-center>
+        <v-layout wrap justify-space-around align-center>
           <v-card dark color="success" class="mt-2">
             <v-card-title primary-title>
               <div class="headline">Unlimited music now</div>

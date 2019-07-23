@@ -19,7 +19,7 @@
       </v-card>
     </v-container>
 
-    <v-layout row wrap>
+    <v-layout wrap>
       <v-flex xs4>
         <v-text-field
           v-model="height"

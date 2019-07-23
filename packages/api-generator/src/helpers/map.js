@@ -10,13 +10,14 @@ function getMapData () {
   })
   defaultSlots.forEach(slot => {
     const mapExists = !!maps[slot]
-    const hasSlot = mapExists && !!maps[slot].slots
+    const hasSlots = mapExists && !!maps[slot].slots
+    const hasDefaultSlot = hasSlots && maps[slot].slots.find(s => s.name === 'default')
     const slotDefault = { name: 'default', props: undefined }
     if (!mapExists) {
       maps[slot] = { slots: [slotDefault] }
-    } else if (!hasSlot) {
+    } else if (!hasSlots) {
       maps[slot].slots = [slotDefault]
-    } else {
+    } else if (!hasDefaultSlot) {
       maps[slot].slots.push(slotDefault)
     }
   })

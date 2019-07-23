@@ -9,6 +9,7 @@ export default Grid('container').extend({
   name: 'v-container',
   functional: true,
   props: {
+    id: String,
     tag: {
       type: String,
       default: 'div',
@@ -42,12 +43,17 @@ export default Grid('container').extend({
       })
     }
 
+    if (props.id) {
+      data.domProps = data.domProps || {}
+      data.domProps.id = props.id
+    }
+
     return h(
       props.tag,
       mergeData(data, {
+        staticClass: 'container',
         class: Array<any>({
-          container: !props.fluid,
-          'container-fluid': props.fluid,
+          'container--fluid': props.fluid,
         }).concat(classes || []),
       }),
       children

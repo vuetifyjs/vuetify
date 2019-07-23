@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VCalendar should go to correct day when using next/prev public functions 1`] = `
-
 <div class="v-calendar v-calendar-daily theme--light">
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
@@ -301,11 +300,9 @@ exports[`VCalendar should go to correct day when using next/prev public function
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VCalendar should go to correct day when using next/prev public functions 2`] = `
-
 <div class="v-calendar v-calendar-daily theme--light">
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
@@ -605,11 +602,9 @@ exports[`VCalendar should go to correct day when using next/prev public function
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VCalendar should go to correct day when using next/prev public functions 3`] = `
-
 <div class="v-calendar v-calendar-daily theme--light">
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
@@ -909,11 +904,9 @@ exports[`VCalendar should go to correct day when using next/prev public function
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VCalendar should render day view 1`] = `
-
 <div class="v-calendar v-calendar-daily theme--light">
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
@@ -1213,11 +1206,9 @@ exports[`VCalendar should render day view 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VCalendar should render month view 1`] = `
-
 <div class="v-calendar-monthly v-calendar-weekly v-calendar theme--light">
   <div class="v-calendar-weekly__head">
     <div class="v-calendar-weekly__head-weekday v-present v-outside">
@@ -1638,11 +1629,9 @@ exports[`VCalendar should render month view 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VCalendar should render week view 1`] = `
-
 <div class="v-calendar v-calendar-daily theme--light">
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
@@ -2614,5 +2603,4 @@ exports[`VCalendar should render week view 1`] = `
     </div>
   </div>
 </div>
-
 `;

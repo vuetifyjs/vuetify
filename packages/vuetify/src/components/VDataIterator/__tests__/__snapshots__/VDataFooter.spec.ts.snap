@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VDataFooter.ts should render and match snapshot 1`] = `
-
 <div class="v-data-footer">
   <div class="v-data-footer__select">
     Items per page:
@@ -71,11 +70,9 @@ exports[`VDataFooter.ts should render and match snapshot 1`] = `
     </button>
   </div>
 </div>
-
 `;
 
 exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 1`] = `
-
 <div class="v-data-footer">
   <div class="v-data-footer__select">
     Items per page:
@@ -170,11 +167,9 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
     </button>
   </div>
 </div>
-
 `;
 
 exports[`VDataFooter.ts should render in RTL mode 1`] = `
-
 <div class="v-data-footer">
   <div class="v-data-footer__select">
     Items per page:
@@ -269,11 +264,9 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
     </button>
   </div>
 </div>
-
 `;
 
 exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
-
 <div class="v-data-footer">
   <div class="v-data-footer__select">
     Items per page:
@@ -347,11 +340,9 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
     </button>
   </div>
 </div>
-
 `;
 
 exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
-
 <div class="v-data-footer">
   <div class="v-data-footer__select">
     Items per page:
@@ -427,5 +418,4 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
     </button>
   </div>
 </div>
-
 `;

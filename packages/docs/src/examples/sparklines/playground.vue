@@ -115,7 +115,7 @@
       </v-flex>
 
       <v-flex xs6>
-        <v-layout row wrap justify-space-around>
+        <v-layout wrap justify-space-around>
           <v-switch v-model="showLabels" label="Show labels"></v-switch>
           <v-switch v-model="fill" label="Fill" :disabled="type !== 'trend'"></v-switch>
           <v-switch v-model="autoLineWidth" label="Auto-line-width" :disabled="type !== 'bar'"></v-switch>

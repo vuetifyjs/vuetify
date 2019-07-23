@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VParallax.ts should render 1`] = `
-
 <div class="v-parallax"
      style="height: 500px;"
 >
@@ -14,11 +13,9 @@ exports[`VParallax.ts should render 1`] = `
   <div class="v-parallax__content">
   </div>
 </div>
-
 `;
 
 exports[`VParallax.ts should use alt tag when supplied 1`] = `
-
 <div class="v-parallax"
      style="height: 500px;"
 >
@@ -31,11 +28,9 @@ exports[`VParallax.ts should use alt tag when supplied 1`] = `
   <div class="v-parallax__content">
   </div>
 </div>
-
 `;
 
 exports[`VParallax.ts should use empty alt tag when not supplied 1`] = `
-
 <div class="v-parallax"
      style="height: 500px;"
 >
@@ -48,5 +43,4 @@ exports[`VParallax.ts should use empty alt tag when not supplied 1`] = `
   <div class="v-parallax__content">
   </div>
 </div>
-
 `;

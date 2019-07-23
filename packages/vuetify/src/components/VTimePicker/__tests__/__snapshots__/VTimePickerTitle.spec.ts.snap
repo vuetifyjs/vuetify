@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VTimePickerTitle.ts should render component in 12hr 1`] = `
-
 <div class="v-time-picker-title">
   <div class="v-time-picker-title__time">
     <div class="v-picker__title__btn">
@@ -23,11 +22,9 @@ exports[`VTimePickerTitle.ts should render component in 12hr 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTimePickerTitle.ts should render component in 12hr. with useSeconds 1`] = `
-
 <div class="v-time-picker-title">
   <div class="v-time-picker-title__time">
     <div class="v-picker__title__btn">
@@ -55,11 +52,9 @@ exports[`VTimePickerTitle.ts should render component in 12hr. with useSeconds 1`
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTimePickerTitle.ts should render component in 24hr 1`] = `
-
 <div class="v-time-picker-title">
   <div class="v-time-picker-title__time">
     <div class="v-picker__title__btn">
@@ -73,11 +68,9 @@ exports[`VTimePickerTitle.ts should render component in 24hr 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTimePickerTitle.ts should render component in 24hr. with useSeconds 1`] = `
-
 <div class="v-time-picker-title">
   <div class="v-time-picker-title__time">
     <div class="v-picker__title__btn">
@@ -97,11 +90,9 @@ exports[`VTimePickerTitle.ts should render component in 24hr. with useSeconds 1`
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTimePickerTitle.ts should render component when selecting hour 1`] = `
-
 <div class="v-time-picker-title">
   <div class="v-time-picker-title__time">
     <div class="v-picker__title__btn v-picker__title__btn--active">
@@ -115,11 +106,9 @@ exports[`VTimePickerTitle.ts should render component when selecting hour 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTimePickerTitle.ts should render component when selecting hour. with useSeconds 1`] = `
-
 <div class="v-time-picker-title">
   <div class="v-time-picker-title__time">
     <div class="v-picker__title__btn v-picker__title__btn--active">
@@ -139,11 +128,9 @@ exports[`VTimePickerTitle.ts should render component when selecting hour. with u
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTimePickerTitle.ts should render disabled component 1`] = `
-
 <div class="v-time-picker-title">
   <div class="v-time-picker-title__time">
     <div class="v-picker__title__btn v-picker__title__btn--readonly">
@@ -165,11 +152,9 @@ exports[`VTimePickerTitle.ts should render disabled component 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTimePickerTitle.ts should render disabled component. with useSeconds 1`] = `
-
 <div class="v-time-picker-title">
   <div class="v-time-picker-title__time">
     <div class="v-picker__title__btn v-picker__title__btn--readonly">
@@ -197,5 +182,4 @@ exports[`VTimePickerTitle.ts should render disabled component. with useSeconds 1
     </div>
   </div>
 </div>
-
 `;
