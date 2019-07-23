@@ -62,7 +62,7 @@
       </a>
     </v-layout>
     <v-list
-      class="py-0"
+      class="pt-0 pb-7"
       dense
       expand
       nav
