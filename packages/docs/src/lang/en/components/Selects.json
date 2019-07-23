@@ -91,12 +91,14 @@
     "selection": "Define a custom selection appearance"
   },
   "events": {
+    "blur": "Emitted when component is no longer focused",
     "change": "Components.Inputs.events.change",
     "click:append": "Components.Inputs.events['click:append']",
     "click:append-outer": "Components.TextFields.events['click:append-outer']",
     "click:clear": "Components.TextFields.events['click:clear']",
     "click:prepend": "Components.Inputs.events['click:prepend']",
     "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
+    "focus": "Emitted when component is focused",
     "update:error": "Mixins.Validatable.events['update:error']",
     "update:searchInput": "The `search-input.sync` event"
   }
