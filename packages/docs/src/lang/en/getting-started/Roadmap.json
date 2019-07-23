@@ -68,9 +68,9 @@
     },
     {
       "type": "release",
-      "complete": false,
+      "complete": true,
       "title": "v2.0 Release **(Arcadia)**",
-      "caption": "Q2 2019",
+      "caption": "July 2019",
       "text": "A complete rebuild of the framework core. Improving the layout and theme systems, platform integration, accessibility, RTL and performance. Update all components to the [Material Design 2](https://material.io/design/) specification. Add additional functionality to multiple existing components and setup v1.5 for [Long-term Support](/getting-started/long-term-support).",
       "features": {
         "#### Highlights": [
@@ -91,15 +91,15 @@
           "v-slide-group"
         ]
       },
-      "value": true
+      "value": false
     },
     {
       "type": "release",
       "complete": false,
       "title": "v2.1 Release **(Vanguard)**",
       "caption": "Q3 2019",
-      "text": "A maintenance cycle to work on bugs from the v2.0 release. This includes performance issues, incorrect or missing a11y and RTL and general fixes. This will allow the team to catch up on the backlog of tasks that have accumulated over the 6 month development cycle of the previous release.",
-      "value": false
+      "text": "A maintenance cycle to work on bugs from the v2.0 release. This includes performance issues, incorrect or missing a11y, RTL, regressions and general fixes. This will allow the team to catch up on the backlog of tasks that have accumulated over the 8 month development cycle of the previous release.",
+      "value": true
     },
     {
       "type": "release",
