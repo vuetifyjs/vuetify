@@ -1,6 +1,6 @@
 <template>
   <v-layout column align-center>
-    <v-layout row wrap justify-space-around>
+    <v-layout wrap justify-space-around>
       <v-switch v-model="autorun" class="ma-2" label="Automatic switching"></v-switch>
       <v-switch v-model="showArrows" class="ma-2" label="Show arrows"></v-switch>
       <v-switch v-model="vertical" class="ma-2" label="Vertical"></v-switch>

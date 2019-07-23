@@ -67,7 +67,6 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-layout
-        row
         align-center
         style="max-width: 650px"
       >

@@ -1,7 +1,7 @@
 <template>
   <v-form>
     <v-container grid-list-xl fluid>
-      <v-layout row wrap>
+      <v-layout wrap>
 
         <v-flex xs12 sm6>
           <v-text-field

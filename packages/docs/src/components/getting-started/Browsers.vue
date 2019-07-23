@@ -1,7 +1,6 @@
 <template>
   <v-list class="transparent py-0">
     <v-layout
-      row
       wrap
     >
       <v-flex

@@ -23,7 +23,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
           align-center
@@ -49,7 +48,6 @@
 
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
           align-center
@@ -95,7 +93,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
           align-center
@@ -129,7 +126,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
           align-center
@@ -163,7 +159,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
           align-center
@@ -197,7 +192,6 @@
 
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
           align-center
@@ -261,7 +255,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
           align-center
@@ -295,7 +288,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
           align-center
           justify-space-around
@@ -315,7 +307,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
         >
@@ -351,7 +342,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
           align-center
@@ -392,7 +382,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
           justify-space-around
           align-center

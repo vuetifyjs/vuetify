@@ -1,5 +1,5 @@
 <template>
-  <v-layout row wrap justify-space-around>
+  <v-layout wrap justify-space-around>
     <v-time-picker
       v-model="time"
       :allowed-hours="allowedHours"

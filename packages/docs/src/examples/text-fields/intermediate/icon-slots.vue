@@ -1,7 +1,7 @@
 <template>
   <v-form>
     <v-container grid-list-xl>
-      <v-layout row wrap>
+      <v-layout wrap>
         <v-flex xs12>
           <v-text-field
             v-model="message"

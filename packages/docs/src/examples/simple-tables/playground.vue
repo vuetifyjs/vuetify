@@ -19,7 +19,7 @@
       </tbody>
     </v-simple-table>
 
-    <v-layout row wrap>
+    <v-layout wrap>
       <v-flex xs12 md6>
         <v-text-field
           v-model="height"

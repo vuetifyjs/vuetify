@@ -7,14 +7,14 @@
     target="_blank"
   >
     <v-card-text>
-      <v-layout row wrap>
+      <v-layout wrap>
         <v-flex
           :style="{ order: $vuetify.breakpoint.xs ? '2' : '1' }"
           d-flex
           pl-1
           xs10
         >
-          <v-layout align-center row wrap>
+          <v-layout align-center wrap>
             <v-flex
               display-1
               mr-6

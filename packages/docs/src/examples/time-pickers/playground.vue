@@ -1,6 +1,6 @@
 <template>
   <v-layout column :align-center="!fullWidth">
-    <v-layout row wrap justify-space-around>
+    <v-layout wrap justify-space-around>
       <v-switch v-model="disabled" class="mx-2" label="Disabled"></v-switch>
       <v-switch v-model="readonly" class="mx-2" label="Readonly"></v-switch>
       <v-switch v-model="landscape" class="mx-2" label="Landscape"></v-switch>
