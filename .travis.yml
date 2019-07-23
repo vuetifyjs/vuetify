@@ -49,7 +49,7 @@ jobs:
       before_script: yarn global add now
       script:
         - cd packages/kitchen
-        - yarn simmer
+        - yarn build
         - now --team=vuetifyjs --token=$NOW_TOKEN --npm
         - now alias --team=vuetifyjs --token=$NOW_TOKEN
 
