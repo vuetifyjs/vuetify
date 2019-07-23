@@ -2,9 +2,10 @@
   <v-card
     aria-label="Support the Development of Vuetify"
     class="mb-12"
-    href="https://www.patreon.com/vuetify"
+    href="https://github.com/users/johnleider/sponsorship"
     rel="noopener"
     target="_blank"
+    elevation="16"
   >
     <v-card-text>
       <v-layout wrap>
@@ -18,17 +19,18 @@
             <v-flex
               display-1
               mr-6
-              patreon
+              support
               d-flex
               xs12
               sm6
             >
-              PATREON
+              <v-icon x-large class="mr-3">mdi-github-circle</v-icon>
+              GITHUB
             </v-flex>
-            <v-flex hidden-xs-only patreon-bar mr-6 />
-            <v-flex hidden-sm-and-up patreon-bar-horizontal mr-6 />
-            <v-flex xs12 sm6 display-1 patreon-caption pb-1>
-              Support Vuetify
+            <v-flex hidden-xs-only support-bar mr-6 />
+            <v-flex hidden-sm-and-up support-bar-horizontal mr-6 />
+            <v-flex xs12 sm6 display-1 support-caption>
+              Sponsor the project
             </v-flex>
           </v-layout>
         </v-flex>
@@ -56,22 +58,25 @@
 </template>
 
 <style lang="sass" scoped>
-.patreon
+.support
   color: #052D49
   flex: 0 0 auto
   font-weight: 900
   letter-spacing: 6px !important
 
-.patreon-bar
+  .v-icon
+    color: inherit
+
+.support-bar
   background-color: #052D49
   height: 80px
   flex: 0 1 6px
 
-.patreon-bar-horizontal
+.support-bar-horizontal
   border-bottom: 6px solid #052D49
   width: 100%
   flex-shrink: 1
 
-.patreon-caption
+.support-caption
   color: #052D49
 </style>
