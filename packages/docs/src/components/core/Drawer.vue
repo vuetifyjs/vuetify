@@ -19,7 +19,7 @@
         />
 
         <supporters-sponsor-btn
-          class="mb-6 mt-4"
+          class="mb-6"
           href="https://www.patreon.com/join/vuetify"
         />
 
