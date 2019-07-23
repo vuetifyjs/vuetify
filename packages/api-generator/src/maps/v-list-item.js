@@ -1,28 +1,28 @@
 module.exports = {
   'v-list-item': {
-    'slots': [
+    slots: [
       {
-        'name': 'default',
-        'props': [
+        name: 'default',
+        props: [
           {
-            'name': 'active',
-            'value': 'boolean',
+            name: 'active',
+            value: 'boolean',
           },
           {
-            'name': 'toggle',
-            'value': 'boolean',
+            name: 'toggle',
+            value: 'boolean',
           },
         ],
       },
     ],
-    'events': [
+    events: [
       {
-        'name': 'click',
-        'value': 'MouseEvent | KeyboardEvent',
+        name: 'click',
+        value: 'MouseEvent | KeyboardEvent',
       },
       {
-        'name': 'keydown',
-        'value': 'KeyboardEvent',
+        name: 'keydown',
+        value: 'KeyboardEvent',
       },
     ],
   },

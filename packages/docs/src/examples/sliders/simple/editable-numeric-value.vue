@@ -85,8 +85,9 @@
   }
 </script>
 
-<style lang="sass">
-.e4
-  width: 400px
-  margin: auto
+<style scoped>
+.e4 {
+  width: 400px;
+  margin: auto;
+}
 </style>

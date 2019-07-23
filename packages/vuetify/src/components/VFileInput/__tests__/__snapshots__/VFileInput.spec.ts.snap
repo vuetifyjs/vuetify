@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VFileInput.ts should be unclearable 1`] = `
-
 <div class="v-input v-input--is-readonly theme--light v-text-field v-file-input">
   <div class="v-input__prepend-outer">
     <div tabindex="0"
@@ -36,11 +35,9 @@ exports[`VFileInput.ts should be unclearable 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VFileInput.ts should display file size 1`] = `
-
 <div class="v-input v-input--is-label-active v-input--is-dirty v-input--is-readonly theme--light v-text-field v-file-input">
   <div class="v-input__prepend-outer">
     <div tabindex="0"
@@ -85,11 +82,9 @@ exports[`VFileInput.ts should display file size 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VFileInput.ts should display file size 2`] = `
-
 <div class="v-input v-input--is-label-active v-input--is-dirty v-input--is-readonly theme--light v-text-field v-file-input">
   <div class="v-input__prepend-outer">
     <div tabindex="0"
@@ -134,11 +129,9 @@ exports[`VFileInput.ts should display file size 2`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VFileInput.ts should display total size in counter 1`] = `
-
 <div class="v-input v-input--is-label-active v-input--is-dirty v-input--is-readonly theme--light v-text-field v-file-input">
   <div class="v-input__prepend-outer">
     <div tabindex="0"
@@ -186,11 +179,9 @@ exports[`VFileInput.ts should display total size in counter 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VFileInput.ts should display total size in counter 2`] = `
-
 <div class="v-input v-input--is-label-active v-input--is-dirty v-input--is-readonly theme--light v-text-field v-file-input">
   <div class="v-input__prepend-outer">
     <div tabindex="0"
@@ -238,11 +229,9 @@ exports[`VFileInput.ts should display total size in counter 2`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VFileInput.ts should render 1`] = `
-
 <div class="v-input v-input--is-readonly theme--light v-text-field v-file-input">
   <div class="v-input__prepend-outer">
     <div tabindex="0"
@@ -285,11 +274,9 @@ exports[`VFileInput.ts should render 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VFileInput.ts should render chips 1`] = `
-
 <div class="v-input v-input--is-label-active v-input--is-dirty v-input--is-readonly theme--light v-text-field v-file-input">
   <div class="v-input__prepend-outer">
     <div tabindex="0"
@@ -338,11 +325,9 @@ exports[`VFileInput.ts should render chips 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VFileInput.ts should render counter 1`] = `
-
 <div class="v-input v-input--is-label-active v-input--is-dirty v-input--is-readonly theme--light v-text-field v-file-input">
   <div class="v-input__prepend-outer">
     <div tabindex="0"
@@ -390,11 +375,9 @@ exports[`VFileInput.ts should render counter 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VFileInput.ts should render small chips 1`] = `
-
 <div class="v-input v-input--is-label-active v-input--is-dirty v-input--is-readonly theme--light v-text-field v-file-input">
   <div class="v-input__prepend-outer">
     <div tabindex="0"
@@ -443,5 +426,4 @@ exports[`VFileInput.ts should render small chips 1`] = `
     </div>
   </div>
 </div>
-
 `;

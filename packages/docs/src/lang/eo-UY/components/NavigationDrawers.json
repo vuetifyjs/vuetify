@@ -75,7 +75,7 @@
     "touchless": "crwdns27830:0crwdne27830:0"
   },
   "events": {
-    "update:miniVariant": "crwdns27832:0crwdne27832:0"
+    "update:mini-variant": "crwdns27832:0crwdne27832:0"
   },
   "slots": {
     "append": "crwdns36090:0crwdne36090:0",

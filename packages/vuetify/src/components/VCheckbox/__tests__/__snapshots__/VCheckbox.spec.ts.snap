@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VCheckbox.ts should be disabled 1`] = `
-
 <input aria-checked="false"
        disabled="disabled"
        id="input-101"
@@ -9,11 +8,9 @@ exports[`VCheckbox.ts should be disabled 1`] = `
        type="checkbox"
        value
 >
-
 `;
 
 exports[`VCheckbox.ts should render themed component 1`] = `
-
 <div class="v-input theme--light v-input--selection-controls v-input--checkbox">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -42,11 +39,9 @@ exports[`VCheckbox.ts should render themed component 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VCheckbox.ts should use custom icons 1`] = `
-
 <div class="v-input theme--light v-input--selection-controls v-input--checkbox v-input--indeterminate">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -75,11 +70,9 @@ exports[`VCheckbox.ts should use custom icons 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VCheckbox.ts should use custom icons 2`] = `
-
 <div class="v-input theme--light v-input--selection-controls v-input--checkbox v-input--indeterminate">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -108,11 +101,9 @@ exports[`VCheckbox.ts should use custom icons 2`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VCheckbox.ts should use custom icons 3`] = `
-
 <div class="v-input theme--light v-input--selection-controls v-input--checkbox v-input--indeterminate">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -141,5 +132,4 @@ exports[`VCheckbox.ts should use custom icons 3`] = `
     </div>
   </div>
 </div>
-
 `;

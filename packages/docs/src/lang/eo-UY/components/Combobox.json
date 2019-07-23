@@ -40,6 +40,6 @@
     "click:prepend": "crwdns27992:0crwdne27992:0",
     "click:prepend-inner": "crwdns27994:0crwdne27994:0",
     "update:error": "crwdns27996:0crwdne27996:0",
-    "update:searchInput": "crwdns27998:0crwdne27998:0"
+    "update:search-input": "crwdns27998:0crwdne27998:0"
   }
 }

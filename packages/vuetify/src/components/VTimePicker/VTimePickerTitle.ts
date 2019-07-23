@@ -53,7 +53,7 @@ export default mixins(
         titleContent.push(this.genPickerButton('selecting', SelectingTimes.Second, displayedSecond, this.disabled))
       }
       return this.$createElement('div', {
-        'class': 'v-time-picker-title__time',
+        class: 'v-time-picker-title__time',
       }, titleContent)
     },
     genAmPm () {

@@ -17,6 +17,6 @@
     "inputValue": "Maintient la valeur du bouton actuellement actif. Si le bouton n'a pas de valeur fournie, son index sera utilisé à la place. Ce prop supporte le modificateur **.sync** ."
   },
   "events": {
-    "update:inputValue": "L'événement utilisé pour `input-value.sync`"
+    "update:input-value": "L'événement utilisé pour `input-value.sync`"
   }
 }

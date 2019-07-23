@@ -53,7 +53,7 @@ describe('VAutocomplete.ts', () => {
     const element = input.element as HTMLInputElement
 
     const update = jest.fn()
-    wrapper.vm.$on('update:searchInput', update)
+    wrapper.vm.$on('update:search-input', update)
 
     element.value = 'test'
     input.trigger('input')

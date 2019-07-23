@@ -387,11 +387,11 @@
     }),
     computed: {
       intervalStyle () {
-        return stylings[ this.styleInterval ].bind(this)
+        return stylings[this.styleInterval].bind(this)
       },
       hasIntervals () {
         return this.type in {
-          'week': 1, 'day': 1, '4day': 1, 'custom-daily': 1,
+          week: 1, day: 1, '4day': 1, 'custom-daily': 1,
         }
       },
       hasEnd () {

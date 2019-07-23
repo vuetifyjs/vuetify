@@ -13,6 +13,7 @@ const isDev = process.env.NODE_ENV !== 'production'
 // Since data fetching is async, this function is expected to
 // return a Promise that resolves to the app instance.
 export default context => {
+  /* eslint-disable-next-line no-async-promise-executor */
   return new Promise(async (resolve, reject) => {
     const s = isDev && Date.now()
     const {

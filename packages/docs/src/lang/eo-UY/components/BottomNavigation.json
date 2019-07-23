@@ -45,6 +45,6 @@
     "mandatory": "crwdns26224:0crwdne26224:0"
   },
   "events": {
-    "update:inputValue": "crwdns26226:0crwdne26226:0"
+    "update:input-value": "crwdns26226:0crwdne26226:0"
   }
 }

@@ -195,7 +195,7 @@ export default VDataIterator.extend({
       return this.$createElement('colgroup', this.computedHeaders.map(header => {
         return this.$createElement('col', {
           class: {
-            'divider': header.divider,
+            divider: header.divider,
           },
           style: {
             width: header.width,
@@ -536,7 +536,7 @@ export default VDataIterator.extend({
         'update:sort-desc': (v: boolean | boolean[]) => this.$emit('update:sort-desc', v),
         'update:group-by': (v: string | string[]) => this.$emit('update:group-by', v),
         'update:group-desc': (v: boolean | boolean[]) => this.$emit('update:group-desc', v),
-        'pagination': (v: DataPagination, old: DataPagination) => !deepEqual(v, old) && this.$emit('pagination', v),
+        pagination: (v: DataPagination, old: DataPagination) => !deepEqual(v, old) && this.$emit('pagination', v),
         'current-items': (v: any[]) => {
           this.internalCurrentItems = v
           this.$emit('current-items', v)

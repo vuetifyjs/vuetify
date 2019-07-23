@@ -301,7 +301,7 @@ export default mixins<options &
           textAnchor: 'middle',
           dominantBaseline: 'mathematical',
           fill: this.color || 'currentColor',
-        },
+        } as object, // TODO: TS 3.5 is too eager with the array type here
       }, children)
     },
     genPath () {

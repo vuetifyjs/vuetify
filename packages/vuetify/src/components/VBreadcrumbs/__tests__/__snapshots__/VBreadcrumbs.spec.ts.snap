@@ -1,14 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VBreadcrumbs.ts should have breadcrumbs classes 1`] = `
-
 <ul class="v-breadcrumbs theme--light">
 </ul>
-
 `;
 
 exports[`VBreadcrumbs.ts should render items without slot 1`] = `
-
 <ul class="v-breadcrumbs theme--light">
   <li>
     <div class="v-breadcrumbs__item">
@@ -40,11 +37,9 @@ exports[`VBreadcrumbs.ts should render items without slot 1`] = `
     </div>
   </li>
 </ul>
-
 `;
 
 exports[`VBreadcrumbs.ts should use a custom divider slot 1`] = `
-
 <ul class="v-breadcrumbs theme--light">
   <li>
     <div class="v-breadcrumbs__item">
@@ -76,11 +71,9 @@ exports[`VBreadcrumbs.ts should use a custom divider slot 1`] = `
     </div>
   </li>
 </ul>
-
 `;
 
 exports[`VBreadcrumbs.ts should use slot to render items if present 1`] = `
-
 <ul class="v-breadcrumbs theme--light">
   <li>
     <div class="v-breadcrumbs__item">
@@ -112,5 +105,4 @@ exports[`VBreadcrumbs.ts should use slot to render items if present 1`] = `
     </div>
   </li>
 </ul>
-
 `;

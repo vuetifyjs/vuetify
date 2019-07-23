@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VProgressCircular.ts should render component and match snapshot 1`] = `
-
 <div role="progressbar"
      aria-valuemin="0"
      aria-valuemax="100"
@@ -40,11 +39,9 @@ exports[`VProgressCircular.ts should render component and match snapshot 1`] = `
     </span>
   </div>
 </div>
-
 `;
 
 exports[`VProgressCircular.ts should render component with button prop and match snapshot 1`] = `
-
 <div role="progressbar"
      aria-valuemin="0"
      aria-valuemax="100"
@@ -80,11 +77,9 @@ exports[`VProgressCircular.ts should render component with button prop and match
   <div class="v-progress-circular__info">
   </div>
 </div>
-
 `;
 
 exports[`VProgressCircular.ts should render component with color prop and match snapshot 1`] = `
-
 <div role="progressbar"
      aria-valuemin="0"
      aria-valuemax="100"
@@ -120,11 +115,9 @@ exports[`VProgressCircular.ts should render component with color prop and match 
   <div class="v-progress-circular__info">
   </div>
 </div>
-
 `;
 
 exports[`VProgressCircular.ts should render component with fill prop and match snapshot 1`] = `
-
 <div role="progressbar"
      aria-valuemin="0"
      aria-valuemax="100"
@@ -161,11 +154,9 @@ exports[`VProgressCircular.ts should render component with fill prop and match s
   <div class="v-progress-circular__info">
   </div>
 </div>
-
 `;
 
 exports[`VProgressCircular.ts should render component with indeterminate prop and match snapshot 1`] = `
-
 <div role="progressbar"
      aria-valuemin="0"
      aria-valuemax="100"
@@ -190,11 +181,9 @@ exports[`VProgressCircular.ts should render component with indeterminate prop an
   <div class="v-progress-circular__info">
   </div>
 </div>
-
 `;
 
 exports[`VProgressCircular.ts should render component with rotate prop and match snapshot 1`] = `
-
 <div role="progressbar"
      aria-valuemin="0"
      aria-valuemax="100"
@@ -230,11 +219,9 @@ exports[`VProgressCircular.ts should render component with rotate prop and match
   <div class="v-progress-circular__info">
   </div>
 </div>
-
 `;
 
 exports[`VProgressCircular.ts should render component with size prop and match snapshot 1`] = `
-
 <div role="progressbar"
      aria-valuemin="0"
      aria-valuemax="100"
@@ -270,11 +257,9 @@ exports[`VProgressCircular.ts should render component with size prop and match s
   <div class="v-progress-circular__info">
   </div>
 </div>
-
 `;
 
 exports[`VProgressCircular.ts should render component with width prop and match snapshot 1`] = `
-
 <div role="progressbar"
      aria-valuemin="0"
      aria-valuemax="100"
@@ -310,5 +295,4 @@ exports[`VProgressCircular.ts should render component with width prop and match 
   <div class="v-progress-circular__info">
   </div>
 </div>
-
 `;

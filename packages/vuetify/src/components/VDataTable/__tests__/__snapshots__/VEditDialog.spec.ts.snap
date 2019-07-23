@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VEditDialog.ts should render 1`] = `
-
 <div class="v-menu v-small-dialog v-menu--inline theme--light">
   <span class="v-small-dialog__activator">
   </span>
@@ -11,11 +10,9 @@ exports[`VEditDialog.ts should render 1`] = `
   >
   </div>
 </div>
-
 `;
 
 exports[`VEditDialog.ts should render actions 1`] = `
-
 <div class="v-small-dialog__actions">
   <button type="button"
           class="v-btn v-btn--flat v-btn--text theme--light v-size--default primary--text"
@@ -32,11 +29,9 @@ exports[`VEditDialog.ts should render actions 1`] = `
     </span>
   </button>
 </div>
-
 `;
 
 exports[`VEditDialog.ts should render button 1`] = `
-
 <button type="button"
         class="v-btn v-btn--flat v-btn--text theme--light v-size--default primary--text"
 >
@@ -44,11 +39,9 @@ exports[`VEditDialog.ts should render button 1`] = `
     test
   </span>
 </button>
-
 `;
 
 exports[`VEditDialog.ts should render custom button texts 1`] = `
-
 <div class="v-menu v-small-dialog v-menu--inline theme--light">
   <span class="v-small-dialog__activator">
   </span>
@@ -58,5 +51,4 @@ exports[`VEditDialog.ts should render custom button texts 1`] = `
   >
   </div>
 </div>
-
 `;

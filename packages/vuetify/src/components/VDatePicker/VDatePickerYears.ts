@@ -70,7 +70,7 @@ export default mixins<options &
 
       return this.$createElement('li', this.setTextColor(color, {
         key: year,
-        'class': { active },
+        class: { active },
         on: {
           click: () => this.$emit('input', year),
         },

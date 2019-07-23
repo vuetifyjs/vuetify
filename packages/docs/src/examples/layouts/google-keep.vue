@@ -146,8 +146,8 @@
   }
 </script>
 
-<style lang="sass">
-#keep
-  .v-navigation-drawer__border
-    display: none
+<style>
+#keep .v-navigation-drawer__border {
+  display: none
+}
 </style>

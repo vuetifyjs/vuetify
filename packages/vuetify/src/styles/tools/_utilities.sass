@@ -27,7 +27,8 @@
         @else
           @error 'Only RTL and LTR are supported'
     @else
-      +generate-utility-body($utility, $properties, $value, $infix)
+      .v-application
+        +generate-utility-body($utility, $properties, $value, $infix)
 
 =generate-utility-body($utility, $properties, $value, $infix)
   // Use custom class if present
