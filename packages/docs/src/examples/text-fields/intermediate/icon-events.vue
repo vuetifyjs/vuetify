@@ -1,6 +1,6 @@
 <template>
   <v-form>
-    <v-container>
+    <v-container grid-list-xl>
       <v-layout row wrap>
 
         <v-flex xs12>
