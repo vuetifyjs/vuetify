@@ -73,14 +73,14 @@
           },
           {
             icon: 'mdi-developer-board',
-            text: this.$t('Vuetify.AppToolbar.inDev'),
-            subtext: this.$t('Vuetify.AppToolbar.dev'),
+            text: this.$t('Vuetify.AppToolbar.dev'),
+            subtext: this.$t('Vuetify.AppToolbar.inDev'),
             href: 'https://dev.vuetifyjs.com',
           },
           {
             icon: 'mdi-rocket',
-            text: this.$t('Vuetify.AppToolbar.inDev'),
-            subtext: this.$t('Vuetify.AppToolbar.next'),
+            text: this.$t('Vuetify.AppToolbar.next'),
+            subtext: this.$t('Vuetify.AppToolbar.inDev'),
             href: 'https://next.vuetifyjs.com',
           },
         ]
