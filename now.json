@@ -6,7 +6,5 @@
     "silent": true
   },
   "version": 1,
-  "engines": {
-    "node": "^12.5.0"
-  }
+  "type": "docker"
 }
