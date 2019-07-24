@@ -66,6 +66,7 @@ const DataTableExpandedItemScopedProps = {
 }
 
 const DataTableSlots = [
+  { name: 'body.append', props: DataDefaultScopedSlotProps },
   { name: 'body.prepend', props: DataDefaultScopedSlotProps },
   { name: 'body', props: DataDefaultScopedSlotProps },
   { name: 'footer', props: DataDefaultScopedSlotProps },
