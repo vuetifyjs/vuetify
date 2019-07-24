@@ -16,7 +16,7 @@
 
     <template v-for="(item, i) in group">
       <v-flex
-        v-if="i % 4 === 0"
+        v-if="i % 4 === 0 && group.length > 1"
         :key="`divider-${i}`"
         xs12
       />

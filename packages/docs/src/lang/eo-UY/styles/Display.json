@@ -1,0 +1,39 @@
+{
+  "header": "crwdns37734:0crwdne37734:0",
+  "headerText": "crwdns37736:0crwdne37736:0",
+  "visibilityHeader": "crwdns37738:0crwdne37738:0",
+  "visibilityText": "crwdns37740:0{breakpoint}crwdnd37740:0{condition}crwdne37740:0",
+  "breakpointText": "crwdns37742:0crwdne37742:0",
+  "breakpoints": [
+    "crwdns37744:0crwdne37744:0",
+    "crwdns37746:0crwdne37746:0",
+    "crwdns37748:0crwdne37748:0",
+    "crwdns37750:0crwdne37750:0",
+    "crwdns37752:0crwdne37752:0"
+  ],
+  "conditionText": "crwdns37754:0crwdne37754:0",
+  "conditions": [
+    "crwdns37756:0crwdne37756:0",
+    "crwdns37758:0crwdne37758:0",
+    "crwdns37760:0crwdne37760:0"
+  ],
+  "mediaText": "crwdns37762:0crwdne37762:0",
+  "displayHeader": "crwdns37764:0crwdne37764:0",
+  "displayText": "crwdns37766:0{display}crwdne37766:0",
+  "displays": [
+    "crwdns37768:0crwdne37768:0",
+    "crwdns37770:0crwdne37770:0",
+    "crwdns37772:0crwdne37772:0",
+    "crwdns37774:0crwdne37774:0",
+    "crwdns37776:0crwdne37776:0",
+    "crwdns37778:0crwdne37778:0"
+  ],
+  "exampleText": "crwdns37780:0crwdne37780:0",
+  "overflowHeader": "crwdns37782:0crwdne37782:0",
+  "overflowText": "crwdns37784:0{axis}crwdne37784:0",
+  "overflows": [
+    "crwdns37786:0crwdne37786:0",
+    "crwdns37788:0crwdne37788:0",
+    "crwdns37790:0crwdne37790:0"
+  ]
+}

@@ -1,11 +1,10 @@
 {
-  "header": "확장 패널 (Expansion Panel)",
   "headerText": "`v-expansion-panel` 컴포넌트는 다량의 정보가 있을때 세로 공간을 줄이는데 유용합니다. 기본 기능은 단순히 확장 패널(expansion-panel)을 한번에 하나씩 보여줍니다. 하지만 `expandable` 속성(propertiy)를 사용하면 확장패널이 명시적으로 닫기 전까지 열려있게 할 수 있습니다.",
   "examples": {
     "disabled": {
       "header": "비활성화 (Disabled)"
     },
-    "customIcons": {
+    "custom-icons": {
       "header": "Custom icon",
       "desc": "`expand-icon` prop으로 확장 액션 아이콘을 커스터마이즈 합니다."
     },
@@ -23,7 +22,8 @@
     }
   },
   "slots": {
-    "actions": "확장 해더 액션",
-    "header": "확장 헤더 컨탠츠"
+    "v-expansion-panel-header": {
+      "actions": "확장 해더 액션"
+    }
   }
 }
