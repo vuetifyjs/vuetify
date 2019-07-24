@@ -41,7 +41,7 @@
   export default {
     data: () => ({
       browsers: [
-        { icon: 'google-chrome', title: 'Chrome', supported: true },
+        { icon: 'google-chrome', title: 'Chromium (Chrome, Edge Insider)', supported: true },
         { icon: 'firefox', title: 'Firefox', supported: true },
         { icon: 'edge', title: 'Edge', supported: true },
         { icon: 'apple-safari', title: 'Safari 10+', supported: true },
