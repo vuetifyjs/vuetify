@@ -48,8 +48,8 @@ export default baseMixins.extend<options>().extend({
     },
     alignWithTitle: Boolean,
     backgroundColor: String,
-    centered: Boolean,
     centerActive: Boolean,
+    centered: Boolean,
     fixedTabs: Boolean,
     grow: Boolean,
     height: {
