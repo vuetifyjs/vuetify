@@ -1,10 +1,3 @@
 {
-  "header": "Bottom sheet",
-  "headerText": "O bottom sheet é um `v-dialog` modificado que é deslizado da parte inferior da tela, similar a um `v-bottom-navigation`. Enquanto um componente de navegação inferior é para botões e ações de nível da aplicação, um bottom sheet pode conter qualquer coisa.",
-  "props": {
-    "disabled": "Desativa a capacidade de abrir o diálogo",
-    "hideOverlay": "Oculta a exibição da sobreposição",
-    "inset": "Reduz a largura máxima do conteúdo do diálogo para 70%",
-    "maxWidth": "Especifica a largura máxima do conteúdo"
-  }
+  "headerText": "O bottom sheet é um `v-dialog` modificado que é deslizado da parte inferior da tela, similar a um `v-bottom-navigation`. Enquanto um componente de navegação inferior é para botões e ações de nível da aplicação, um bottom sheet pode conter qualquer coisa."
 }

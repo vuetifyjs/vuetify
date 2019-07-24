@@ -1,14 +1,13 @@
 {
-  "header": "Form",
   "headerText": "フォームのバリデーションに関して、Vuetifyには多数の機能が組み込まれています。なお、サードパーティのバリデーションプラグインである[Vee-validate](https://github.com/baianat/Vee-validate)や[vuelidate](https://github.com/monterail/vuelidate)も使用することができます。",
   "examples": {
-    "validationWithSubmitAndClear": {
+    "validation-with-submit-and-clear": {
       "header": "送信時のバリデーションとバリデーションのクリア"
     },
     "vuelidate": {
       "header": "Vuelidate"
     },
-    "veeValidate": {
+    "vee-validate": {
       "header": "Vee-validate",
       "desc": "Vee-validateは、フォームのバリデーションが可能なもうひとつのバリデーションプラグインです。なお、 **value** propを使用するときに `v-checkbox`を正しくバリデートするには、**type =\"checkbox\"** を追加する必要があるので注意して下さい。"
     }

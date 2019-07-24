@@ -11,8 +11,13 @@
       "desc": "Les badges peuvent également être placés sur du texte."
     },
     "icon": {
-      "header": "### Icônes",
+      "header": "### Icon",
       "desc": "Le badge peut utiliser tous les jeux d'icônes actuellement pris en charge."
     }
+  },
+  "props": {
+    "bottom": "Mixins.Positionable.props.bottom",
+    "left": "Mixins.Positionable.props.left",
+    "transition": "Mixins.Transitionable.props.transition"
   }
 }

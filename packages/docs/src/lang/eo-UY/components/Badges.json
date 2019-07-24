@@ -1,46 +1,50 @@
 {
-  "header": "crwdns28220:0crwdne28220:0",
-  "headerText": "crwdns35946:0crwdne35946:0",
+  "header": "crwdns40792:0crwdne40792:0",
+  "headerText": "crwdns40794:0crwdne40794:0",
   "examples": {
     "usage": {
-      "desc": "crwdns35948:0crwdne35948:0"
+      "desc": "crwdns40796:0crwdne40796:0"
     },
     "bottom": {
-      "header": "crwdns35950:0crwdne35950:0",
-      "desc": "crwdns35952:0crwdne35952:0"
+      "header": "crwdns40798:0crwdne40798:0",
+      "desc": "crwdns40800:0crwdne40800:0"
     },
     "left": {
-      "header": "crwdns35954:0crwdne35954:0",
-      "desc": "crwdns35956:0crwdne35956:0"
+      "header": "crwdns40802:0crwdne40802:0",
+      "desc": "crwdns40804:0crwdne40804:0"
     },
     "overlap": {
-      "header": "crwdns28226:0crwdne28226:0",
-      "desc": "crwdns35958:0crwdne35958:0"
+      "header": "crwdns34352:0crwdne34352:0",
+      "desc": "crwdns40806:0crwdne40806:0"
     },
     "visibility": {
-      "header": "crwdns28238:0crwdne28238:0",
-      "desc": "crwdns35960:0crwdne35960:0"
+      "header": "crwdns34364:0crwdne34364:0",
+      "desc": "crwdns40808:0crwdne40808:0"
     },
     "inline": {
-      "header": "crwdns28230:0crwdne28230:0",
-      "desc": "crwdns28232:0crwdne28232:0"
+      "header": "crwdns34356:0crwdne34356:0",
+      "desc": "crwdns34358:0crwdne34358:0"
     },
     "icon": {
-      "header": "crwdns28234:0crwdne28234:0",
-      "desc": "crwdns28236:0crwdne28236:0"
+      "header": "crwdns34360:0crwdne34360:0",
+      "desc": "crwdns34362:0crwdne34362:0"
     },
     "hover": {
-      "header": "crwdns35962:0crwdne35962:0",
-      "desc": "crwdns35964:0crwdne35964:0"
+      "header": "crwdns40810:0crwdne40810:0",
+      "desc": "crwdns40812:0crwdne40812:0"
     },
     "dynamic": {
-      "header": "crwdns35966:0crwdne35966:0",
-      "desc": "crwdns35968:0crwdne35968:0"
+      "header": "crwdns40814:0crwdne40814:0",
+      "desc": "crwdns40816:0crwdne40816:0"
     }
   },
   "props": {
-    "bottom": "crwdns28242:0crwdne28242:0",
-    "left": "crwdns28244:0crwdne28244:0",
-    "transition": "crwdns28246:0crwdne28246:0"
+    "bottom": "crwdns34368:0crwdne34368:0",
+    "left": "crwdns34370:0crwdne34370:0",
+    "overlap": "crwdns40818:0crwdne40818:0",
+    "transition": "crwdns34372:0crwdne34372:0"
+  },
+  "slots": {
+    "badge": "crwdns40820:0crwdne40820:0"
   }
 }

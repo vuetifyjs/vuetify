@@ -1,0 +1,13 @@
+{
+  "examples": {
+    "multiple": {
+      "header": "### Множественный select"
+    },
+    "custom-icon": {
+      "header": "### Пользовательские иконки"
+    },
+    "validation": {
+      "header": "### Валидация"
+    }
+  }
+}
