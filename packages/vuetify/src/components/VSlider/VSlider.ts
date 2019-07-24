@@ -49,30 +49,17 @@ export default mixins<options &
   props: {
     disabled: Boolean,
     inverseLabel: Boolean,
-    min: {
-      type: [Number, String],
-      default: 0,
-    },
     max: {
       type: [Number, String],
       default: 100,
     },
+    min: {
+      type: [Number, String],
+      default: 0,
+    },
     step: {
       type: [Number, String],
       default: 1,
-    },
-    ticks: {
-      type: [Boolean, String],
-      default: false,
-      validator: v => typeof v === 'boolean' || v === 'always',
-    } as PropValidator<boolean | 'always'>,
-    tickLabels: {
-      type: Array,
-      default: () => ([]),
-    } as PropValidator<string[]>,
-    tickSize: {
-      type: [Number, String],
-      default: 2,
     },
     thumbColor: String,
     thumbLabel: {
@@ -83,6 +70,19 @@ export default mixins<options &
     thumbSize: {
       type: [Number, String],
       default: 32,
+    },
+    tickLabels: {
+      type: Array,
+      default: () => ([]),
+    } as PropValidator<string[]>,
+    ticks: {
+      type: [Boolean, String],
+      default: false,
+      validator: v => typeof v === 'boolean' || v === 'always',
+    } as PropValidator<boolean | 'always'>,
+    tickSize: {
+      type: [Number, String],
+      default: 2,
     },
     trackColor: String,
     trackFillColor: String,
