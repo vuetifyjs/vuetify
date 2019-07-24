@@ -1,6 +1,6 @@
 {
   "header": "# System bars",
-  "headerText": "The `v-system-bar` component can be used for displaying some statuses to user. It looks like Android system bar and can contain icons, spacers and some amount of text.",
+  "headerText": "The `v-system-bar` component can be used for displaying statuses to the user. It looks like the Android system bar and can contain icons, spacers, and some text.",
   "examples": {
     "usage": {
       "desc": "`v-system-bar` in it's simplest form displays a small container with default theme."
