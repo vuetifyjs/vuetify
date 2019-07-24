@@ -1,6 +1,6 @@
 <template>
   <div class="pa-4 grey lighten-4">
-    <v-layout row>
+    <v-layout>
       <v-flex xs12 sm6 offset-sm3>
         <v-hover
           v-slot:default="{ hover }"

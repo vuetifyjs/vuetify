@@ -11,7 +11,7 @@
         </div>
       </v-flex>
       <v-flex xs12>
-        <v-layout row xs12 wrap>
+        <v-layout xs12 wrap>
           <v-flex xs12 md4>
             <v-radio-group v-model="alignment">
               <v-radio

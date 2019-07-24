@@ -37,7 +37,7 @@
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
     </v-toolbar>
 
-    <v-layout v-else row>
+    <v-layout v-else>
       <v-flex xs12 sm6 offset-sm3>
         <v-card>
           <v-list>

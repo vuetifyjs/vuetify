@@ -1,6 +1,6 @@
 <template>
   <v-container id="dropdown-example" grid-list-xl>
-    <v-layout row wrap>
+    <v-layout wrap>
       <v-flex xs12 sm4>
         <p>Overflow</p>
 

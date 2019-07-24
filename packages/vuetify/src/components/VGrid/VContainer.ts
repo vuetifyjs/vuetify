@@ -51,9 +51,9 @@ export default Grid('container').extend({
     return h(
       props.tag,
       mergeData(data, {
+        staticClass: 'container',
         class: Array<any>({
-          container: !props.fluid,
-          'container-fluid': props.fluid,
+          'container--fluid': props.fluid,
         }).concat(classes || []),
       }),
       children

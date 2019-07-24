@@ -2,7 +2,6 @@
   <v-layout
     align-center
     justify-center
-    row
   >
     <v-flex xs12>
       <v-hover

@@ -91,7 +91,7 @@ export default VSelect.extend({
       set (val: any) {
         this.lazySearch = val
 
-        this.$emit('update:searchInput', val)
+        this.$emit('update:search-input', val)
       },
     },
     isAnyValueAllowed (): boolean {

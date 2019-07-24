@@ -117,6 +117,7 @@ export default Vue.extend({
 
       classList.push({
         'no-gutters': props.noGutters,
+        'row--dense': props.dense,
         [`align-${props.align}`]: props.align,
         [`justify-${props.justify}`]: props.justify,
         [`align-content-${props.alignContent}`]: props.alignContent,
@@ -128,7 +129,7 @@ export default Vue.extend({
     return h(
       props.tag,
       mergeData(data, {
-        staticClass: props.dense ? 'form-row' : 'row',
+        staticClass: 'row',
         class: classList,
       }),
       children

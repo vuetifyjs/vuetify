@@ -1,6 +1,6 @@
 <template>
   <v-layout column>
-    <v-layout row wrap justify-space-around>
+    <v-layout wrap justify-space-around>
       <v-switch v-model="mandatory" label="Mandatory"></v-switch>
       <v-switch v-model="multiple" label="Multiple"></v-switch>
       <v-flex xs12>
@@ -29,7 +29,7 @@
                 <v-scroll-y-transition>
                   <div
                     v-if="active"
-                    class="display-3 text-center"
+                    class="display-3 flex-grow-1 text-center"
                   >
                     Active
                   </div>

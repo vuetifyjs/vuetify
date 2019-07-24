@@ -1,5 +1,5 @@
 <template>
-  <v-layout row wrap>
+  <v-layout wrap>
     <v-flex xs12 sm6 class="my-2 px-1">
       <v-date-picker
         ref="picker"

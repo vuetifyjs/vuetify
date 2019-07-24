@@ -1,6 +1,6 @@
 <template>
   <v-container grid-list-md>
-    <v-layout row wrap>
+    <v-layout wrap>
       <v-flex xs12 lg6>
         <v-menu
           v-model="menu1"

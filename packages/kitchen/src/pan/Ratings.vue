@@ -25,7 +25,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           justify-space-around
         >
           <v-rating
@@ -48,7 +47,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           justify-space-around
         >
           <v-rating
@@ -71,7 +69,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           justify-space-around
         >
           <v-rating
@@ -208,7 +205,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           justify-space-around
         >
           <v-rating
@@ -241,7 +237,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           justify-space-around
         >
           <v-rating

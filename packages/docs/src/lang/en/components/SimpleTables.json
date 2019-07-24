@@ -1,6 +1,6 @@
 {
   "header": "# Simple tables",
-  "headerText": "The `v-simple-table` component is a simple wrapper component around the `<table>` element. Inside the component you can use all the regular table elements such as ´<thead>`, `<tbody>`, `<tr>`, etc.",
+  "headerText": "The `v-simple-table` component is a simple wrapper component around the `<table>` element. Inside the component you can use all the regular table elements such as `<thead>`, `<tbody>`, `<tr>`, etc.",
   "examples": {
     "usage": {
       "desc": "The simple table is a wrapper component around the `<table>` element."

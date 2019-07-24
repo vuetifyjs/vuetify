@@ -2,7 +2,7 @@
   <v-card flat>
     <v-card-text>
       <v-container fluid>
-        <v-layout row wrap>
+        <v-layout wrap>
           <v-flex xs12 sm4 md4>
             <v-switch
               v-model="ex11"
@@ -53,7 +53,7 @@
           </v-flex>
         </v-layout>
 
-        <v-layout row wrap class="mt-12">
+        <v-layout wrap class="mt-12">
           <v-flex xs12 sm4 md4>
             <v-switch
               v-model="ex11"

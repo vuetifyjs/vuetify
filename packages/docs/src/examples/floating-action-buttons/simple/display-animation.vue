@@ -1,6 +1,6 @@
 <template>
   <v-container fluid grid-list-lg>
-    <v-layout row wrap>
+    <v-layout wrap>
       <v-flex xs12 sm12 md6 offset-md3>
         <v-card>
           <v-toolbar extended>

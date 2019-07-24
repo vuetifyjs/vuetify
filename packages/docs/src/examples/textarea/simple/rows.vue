@@ -1,6 +1,6 @@
 <template>
   <v-container fluid grid-list-md>
-    <v-layout row wrap>
+    <v-layout wrap>
       <v-flex xs12 sm6>
         <v-textarea
           label="One row"
