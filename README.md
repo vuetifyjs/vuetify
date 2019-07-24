@@ -84,8 +84,8 @@
   <tbody>
     <tr>
       <td>
-        <a href="https://www.fractalindustries.com/?ref=vuetify-github">
-          <img height="70px" src="https://cdn.vuetifyjs.com/images/backers/fractal-industries.png">
+        <a href="https://www.qomplx.com/?ref=vuetify-github">
+          <img height="70px" src="https://cdn.vuetifyjs.com/images/backers/QOMPLX.webp">
         </a>
       </td>
     </tr>

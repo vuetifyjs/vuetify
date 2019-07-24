@@ -1,16 +1,15 @@
 {
-  "header": "텍스트 필드 (Text field)",
   "headerText": "텍스트 필드 컴포넌트는 사용자가 제공한 정보를 모으는데 사용됩니다.",
   "examples": {
-    "singleLine": {
+    "single-line": {
       "header": "한 줄 라이트 테마 (Single line light theme)",
       "desc": "Single line text-fields do not float their label on focus or with data."
     },
     "icon": {
-      "header": "아이콘과 함께 (With Icon)",
+      "header": "아이콘 (Icons)",
       "desc": "아이콘은 앞(prepended)이나 뒤(appended)에 넣을 수 있습니다."
     },
-    "characterCounter": {
+    "character-counter": {
       "header": "글자수 카운터 (Character counter)"
     },
     "password": {
@@ -21,7 +20,7 @@
       "header": "검증 (Validation)",
       "desc": "Vuetify는 `rules` prop 을 통해 간단한 검증(validation)을 제공합니다. `rules` prop은 콜백 배열을 받습니다. 규칙들(rules)을 검증할 때, 현재 v-model 값이 콜백으로 전달됩니다. 이 콜백은 `true` 나 에러 메시지로 `String`을 반환해야 합니다."
     },
-    "fullWidthWithCharacterCounter": {
+    "full-width-with-character-counter": {
       "header": "전체-너비 텍스트 필드와 글자수 카운터 (Full-width text field with character counter)",
       "desc": "전체 너비 텍스트 필드는 무제한 인풋을 만들 수 있도록 해줍니다. 이 예제에서는 `v-divider` 를 이용해 필드들을 분리하였습니다. "
     },
@@ -29,11 +28,11 @@
       "header": "힌트 텍스트 (Hint text)",
       "desc": "텍스트 필드의 `hint` 프로퍼티는 텍스트 필드 아래 문자열을 추가합니다. `persistent-hint` 를 사용하면 텍스트 필드가 포커스 되지 않았을 때도 힌트 문자열을 유지할 수 있습니다."
     },
-    "prefixesAndSuffixes": {
+    "prefixes-and-suffixes": {
       "header": "접두사와 접미사 (Prefixes & suffixes)",
       "desc": "`prefix`와 `suffix` 프로퍼티는 텍스트 필드에 편집 불가능한 인라인 텍스트를 앞이나 뒤에 붙일 수 있습니다."
     },
-    "customValidation": {
+    "custom-validation": {
       "header": "사용자 검증 (Custom validation)",
       "desc": "내장된 `v-form`이나 [vuelidate](https://github.com/monterail/vuelidate),[vee-validation](https://github.com/logaretm/vee-validate)같은 서드파티 플러그인은 검증 프로세스를 구성하는 것을 도와주지만 동시에 간단한 사용자 검증을 선택 할 수도 있습니다."
     },
@@ -45,11 +44,10 @@
       "header": "솔로 스타일 (Solo style)",
       "desc": "텍스트 필드들은 솔로 디자인과 함께 사용될 수도 있습니다."
     },
-    "customColors": {
-      "header": "사용자 색상 (Custom colors)",
+    "custom-colors": {
       "desc": "선택적으로 택스트필드의 칼라를 마테리얼 디자인 팔레트의 어떤 색상으로든 바꿀 수 있습니다. 아래 예는 검증과 커스텀 폼의 구현입니다."
     },
-    "progressBar": {
+    "progress-bar": {
       "header": "프로그레스 바 (Progress bar)",
       "desc": "바텀 라인(bottom line) 대신 프로그레스 바를 표시할 수도 있습니다. 기본적으로 텍스트 필드와 같은 색상을 가진 불확정 프로그래스를 사용하 ㄹ수도 있고  `progress` 슬롯을 이용해서 커스터마이즈할 수도 있습니다."
     }
@@ -67,9 +65,5 @@
     "textarea": "대체 스타일의 Textarea 텍스트 필드",
     "toggleKeys": "인풋을 토글하기 위한 키 코드 배열 (토글이 지원될 경우)",
     "type": "인풋 타입을 설정"
-  },
-  "events": {
-    "change": "Mixins.Input.events.change",
-    "update:error": "Mixins.Input.events.update:error"
   }
 }

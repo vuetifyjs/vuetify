@@ -1,40 +1,38 @@
 {
-  "header": "List",
   "headerText": "El componente `v-list` se utiliza para mostrar información. Puede contener un avatar, contenido, acciones, subheaders y mucho más. Las listas pueden contener componentes hijos y se usan en el sidebar.",
   "examples": {
-    "avatarTitleAndAction": {
+    "avatar-title-and-action": {
       "header": "Avatar con título y acción",
       "desc": "Las listas también contienen _slots_ para una implementación más directa. Si escoges esta manera, recuerda que debes proveer props adicionales para el espaciado correcto. En este ejemplo, tenemos un _tile_ con un avatar, así que debemos proveer una propiedad `avatar`."
     },
-    "iconTwoLinesAndAction": {
+    "icon-two-lines-and-action": {
       "header": "Ícono con 2 líneas y acción",
       "desc": "Las listas pueden contener _subheaders_, divisores y pueden contener 1 o más líneas. El subtítulo será cortado con una _ellipsis (...)_ si su longitud se extiende más allá de una línea. "
     },
-    "avatarThreeLines": {
-      "header": "Avatar con 3 líneas",
-      "desc": "Para listas con tres líneas, el subtítulo se extenderá 2 líneas y después creará una _ellipsis (...)_. Si requieres más de tres líneas, se aconseja utilizar un componente [card](/components/cards)."
+    "avatar-three-lines": {
+      "header": "Avatar con 3 líneas"
     },
-    "avatarSubheaderTitleAndAction": {
-      "header": "Avatar con un título y una acción.",
+    "avatar-subheader-title-and-action": {
+      "header": "Avatar con título y acción",
       "desc": "Cuando un _slot_ de lista es utilizado, debes manualmente definir si es que contiene encabezados, o si los elementos contienen un avatar. Esto es requerido para mantener el espaciado apropiado."
     },
-    "subheadingsAndDividers": {
+    "subheadings-and-dividers": {
       "header": "Subheadings y divisores",
       "desc": "Las listas pueden contener smúltiples _subheaders_ y _dividers_."
     },
-    "cardList": {
+    "card-list": {
       "header": "Imagen en _card_ con _toolbar_ y una lista",
       "desc": "Una lista puede ser combinada con una _Card_."
     },
-    "titleSubtitleActionsAndActionText": {
+    "title-subtitle-actions-and-action-text": {
       "header": "Título y subtítulo, acciones y un _action-text_",
       "desc": "Una lista puede contener una pila dentro de una acción. _Ripple_ y las props del _router_ pueden pasarse al componente principal v-list, al v-list-item o como una propiedad en el arreglo de elementos que compondrán la lista."
     },
-    "actionTitleAndSubtitle": {
+    "action-title-and-subtitle": {
       "header": "Acción con título y subtítulo",
       "desc": "Una lista puede contener hasta 3 líneas.."
     },
-    "expansionLists": {
+    "expansion-lists": {
       "header": "Listas de expansión",
       "desc": "Una lista puede contener un grupo de elementos que se mostrarán al hacer click. Las listas de expansión también se usan en el componente de `navigation drawer`."
     },
@@ -47,11 +45,6 @@
     "dense": "Reduce la altura máxima de los _list tiles_",
     "expand": "Sólo colapsará cuando explícitamente se cierre",
     "inactive": "Si se especifica, el _list tile_ no será desplegado como un link incluso si tiene las props to/href o un @click",
-    "subheader": "Quita el _padding_ de arriba. Utilizado cuando el hermano anterior es un encabezado",
-    "threeLine": "Incrementa el alto del _list-item_ para cuando hay tres líneas",
-    "twoLine": "Incrementa el alto del _list-item_ para cuando hay dos líneas",
-    "v-list-group": {
-      "disabled": "Mixins.Input.props.disabled"
-    }
+    "subheader": "Quita el _padding_ de arriba. Utilizado cuando el hermano anterior es un encabezado"
   }
 }

@@ -1,5 +1,4 @@
 {
-  "header": "Badge (insignia)",
   "examples": {
     "overlap": {
       "header": "Traslape"
@@ -8,7 +7,7 @@
       "header": "Visibilidad"
     },
     "inline": {
-      "header": "En línea",
+      "header": "### En línea",
       "desc": "Las insignias pueden ser colocadas en línea con el texto."
     },
     "icon": {

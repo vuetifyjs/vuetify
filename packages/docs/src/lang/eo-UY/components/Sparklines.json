@@ -1,43 +1,49 @@
 {
-  "header": "crwdns25408:0crwdne25408:0",
-  "headerText": "crwdns25410:0crwdne25410:0",
+  "header": "crwdns38304:0crwdne38304:0",
+  "headerText": "crwdns32086:0crwdne32086:0",
   "examples": {
+    "usage": {
+      "desc": "crwdns38306:0crwdne38306:0"
+    },
     "playground": {
-      "header": "crwdns25412:0crwdne25412:0",
-      "desc": "crwdns25414:0crwdne25414:0"
+      "header": "crwdns32088:0crwdne32088:0",
+      "desc": "crwdns32090:0crwdne32090:0"
     },
-    "heartRate": {
-      "header": "crwdns25416:0crwdne25416:0",
-      "desc": "crwdns25418:0crwdne25418:0"
+    "heart-rate": {
+      "header": "crwdns38308:0crwdne38308:0",
+      "desc": "crwdns38310:0crwdne38310:0"
     },
-    "dashboardCard": {
-      "header": "crwdns25420:0crwdne25420:0",
-      "desc": "crwdns25422:0crwdne25422:0"
+    "dashboard-card": {
+      "header": "crwdns38312:0crwdne38312:0",
+      "desc": "crwdns38314:0crwdne38314:0"
     },
-    "salesCard": {
-      "header": "crwdns25424:0crwdne25424:0",
-      "desc": "crwdns25426:0crwdne25426:0"
+    "sales-card": {
+      "header": "crwdns38316:0crwdne38316:0",
+      "desc": "crwdns38318:0crwdne38318:0"
     },
     "fill": {
-      "header": "crwdns25428:0crwdne25428:0",
-      "desc": "crwdns25430:0crwdne25430:0"
+      "header": "crwdns32104:0crwdne32104:0",
+      "desc": "crwdns32106:0crwdne32106:0"
     }
   },
   "props": {
-    "autoDraw": "crwdns25432:0crwdne25432:0",
-    "autoDrawDuration": "crwdns25434:0crwdne25434:0",
-    "autoDrawEasing": "crwdns25436:0crwdne25436:0",
-    "autoLineWidth": "crwdns25438:0crwdne25438:0",
-    "data": "crwdns25440:0crwdne25440:0",
-    "fill": "crwdns25442:0crwdne25442:0",
-    "gradient": "crwdns25444:0crwdne25444:0",
-    "gradientDirection": "crwdns25446:0crwdne25446:0",
-    "labels": "crwdns25448:0crwdne25448:0",
-    "labelSize": "crwdns25450:0crwdne25450:0",
-    "lineWidth": "crwdns25452:0crwdne25452:0",
-    "padding": "crwdns25454:0crwdne25454:0",
-    "showLabels": "crwdns25456:0crwdne25456:0",
-    "smooth": "crwdns25458:0crwdne25458:0",
-    "type": "crwdns25460:0crwdne25460:0"
+    "autoDraw": "crwdns32108:0crwdne32108:0",
+    "autoDrawDuration": "crwdns32110:0crwdne32110:0",
+    "autoDrawEasing": "crwdns32112:0crwdne32112:0",
+    "autoLineWidth": "crwdns32114:0crwdne32114:0",
+    "data": "crwdns32116:0crwdne32116:0",
+    "fill": "crwdns32118:0crwdne32118:0",
+    "gradient": "crwdns32120:0crwdne32120:0",
+    "gradientDirection": "crwdns32122:0crwdne32122:0",
+    "height": "crwdns38320:0crwdne38320:0",
+    "labels": "crwdns32124:0crwdne32124:0",
+    "labelSize": "crwdns32126:0crwdne32126:0",
+    "lineWidth": "crwdns32128:0crwdne32128:0",
+    "padding": "crwdns32130:0crwdne32130:0",
+    "showLabels": "crwdns32132:0crwdne32132:0",
+    "smooth": "crwdns32134:0crwdne32134:0",
+    "type": "crwdns32136:0crwdne32136:0",
+    "width": "crwdns38322:0crwdne38322:0",
+    "value": "crwdns38324:0crwdne38324:0"
   }
 }

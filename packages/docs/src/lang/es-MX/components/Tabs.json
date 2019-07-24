@@ -1,8 +1,7 @@
 {
-  "header": "Tab",
   "headerText": "El componente `v-tabs` se usa para esconder contenido detrás de un item seleccionable. También puede usarse como pseudo-navegación para una página, donde los tabs son links y los _tab-items_ son el contenido.",
   "examples": {
-    "fixedTabs": {
+    "fixed-tabs": {
       "header": "Tabs fijos",
       "desc": "La prop **fixed-tabs** configura un mínimo de ancho más grande y aplica un nuevo máximo de ancho a los `v-tabs-items`. En pantallas de escritorio, los tab items serán centrados dentro del componente `v-tabs` y cambiarán para llenar el espacio disponible en móviles."
     },
@@ -10,14 +9,14 @@
       "header": "Contenido",
       "desc": "Los tabs no son la única cosa que puedes poner dentro del componente `v-tabs`. En este ejemplo hemos agregado también un toolbar."
     },
-    "iconsAndText": {
+    "icons-and-text": {
       "header": "Íconos y texto",
       "desc": "Al utilizar la prop **icons-and-text** puedes agregar íconos a cada elemento _tab_."
     },
     "desktop": {
       "header": "Tabs de escritorio"
     },
-    "alignWithTitle": {
+    "align-with-title": {
       "header": "Alinear tabs con el título del toolbar",
       "desc": "Hace que los `v-tabs` se alineen con el componente `v-toolbar-title` (`v-app-bar-nav-icon` o `v-btn` deben utilizarse en un `v-toolbar`). Tal vez no funcione si el texto del tab se salta a la siguiente línea (_wrapped_)."
     },
@@ -25,7 +24,7 @@
       "header": "Grow",
       "desc": "La prop **grow** hará que todos los elementos tab abarquen el alto disponible."
     },
-    "overflowToMenu": {
+    "overflow-to-menu": {
       "header": "Con menu",
       "desc": "Puedes usar un menú para que contenga tabs adicionales, cambiándolos al vuelo"
     },

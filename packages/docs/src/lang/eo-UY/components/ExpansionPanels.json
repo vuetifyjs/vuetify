@@ -1,72 +1,84 @@
 {
-  "header": "crwdns25940:0crwdne25940:0",
-  "headerText": "crwdns25942:0crwdne25942:0",
+  "header": "crwdns38724:0crwdne38724:0",
+  "headerText": "crwdns38726:0crwdne38726:0",
   "examples": {
     "usage": {
-      "desc": "crwdns25944:0crwdne25944:0"
+      "desc": "crwdns38728:0crwdne38728:0"
     },
     "external": {
-      "header": "crwdns25946:0crwdne25946:0",
-      "desc": "crwdns25948:0crwdne25948:0"
+      "header": "crwdns32520:0crwdne32520:0",
+      "desc": "crwdns38730:0crwdne38730:0"
     },
     "disabled": {
-      "header": "crwdns36144:0crwdne36144:0",
-      "desc": "crwdns36146:0crwdne36146:0"
+      "header": "crwdns38732:0crwdne38732:0",
+      "desc": "crwdns38734:0crwdne38734:0"
     },
     "readonly": {
-      "header": "crwdns36148:0crwdne36148:0",
-      "desc": "crwdns36150:0crwdne36150:0"
+      "header": "crwdns38736:0crwdne38736:0",
+      "desc": "crwdns38738:0crwdne38738:0"
     },
     "popout": {
-      "header": "crwdns36152:0crwdne36152:0",
-      "desc": "crwdns36154:0crwdne36154:0"
+      "header": "crwdns38740:0crwdne38740:0",
+      "desc": "crwdns38742:0crwdne38742:0"
     },
     "inset": {
-      "header": "crwdns36156:0crwdne36156:0",
-      "desc": "crwdns36158:0crwdne36158:0"
+      "header": "crwdns38744:0crwdne38744:0",
+      "desc": "crwdns38746:0crwdne38746:0"
     },
     "accordion": {
-      "header": "crwdns36160:0crwdne36160:0",
-      "desc": "crwdns36162:0crwdne36162:0"
+      "header": "crwdns38748:0crwdne38748:0",
+      "desc": "crwdns38750:0crwdne38750:0"
     },
-    "customIcons": {
-      "header": "crwdns25958:0crwdne25958:0",
-      "desc": "crwdns25960:0crwdne25960:0"
+    "custom-icons": {
+      "header": "crwdns38752:0crwdne38752:0",
+      "desc": "crwdns38754:0crwdne38754:0"
     },
     "focusable": {
-      "header": "crwdns25962:0crwdne25962:0",
-      "desc": "crwdns25964:0crwdne25964:0"
+      "header": "crwdns32542:0crwdne32542:0",
+      "desc": "crwdns32544:0crwdne32544:0"
     },
     "advanced": {
-      "header": "crwdns25966:0crwdne25966:0",
-      "desc": "crwdns25968:0crwdne25968:0",
+      "header": "crwdns38756:0crwdne38756:0",
+      "desc": "crwdns38758:0crwdne38758:0",
       "uninverted": true
     }
   },
   "props": {
     "v-expansion-panels": {
-      "accordion": "crwdns25972:0crwdne25972:0",
-      "disabled": "crwdns25974:0crwdne25974:0",
-      "expand": "crwdns25976:0crwdne25976:0",
-      "focusable": "crwdns25978:0crwdne25978:0",
-      "inset": "crwdns25980:0crwdne25980:0",
-      "popout": "crwdns25982:0crwdne25982:0",
-      "readonly": "crwdns25984:0crwdne25984:0",
-      "value": "crwdns25986:0crwdne25986:0"
+      "accordion": "crwdns38762:0crwdne38762:0",
+      "disabled": "crwdns38764:0crwdne38764:0",
+      "expand": "crwdns38766:0crwdne38766:0",
+      "focusable": "crwdns38768:0crwdne38768:0",
+      "inset": "crwdns38770:0crwdne38770:0",
+      "popout": "crwdns38772:0crwdne38772:0",
+      "readonly": "crwdns38774:0crwdne38774:0",
+      "value": "crwdns38776:0crwdne38776:0"
     },
     "v-expansion-panel": {
-      "disabled": "crwdns25988:0crwdne25988:0",
-      "readonly": "crwdns25990:0crwdne25990:0",
-      "value": "crwdns25992:0crwdne25992:0"
+      "disabled": "crwdns38778:0crwdne38778:0",
+      "readonly": "crwdns38780:0crwdne38780:0",
+      "value": "crwdns38782:0crwdne38782:0"
     },
     "v-expansion-panel-header": {
-      "disableIconRotate": "crwdns25994:0crwdne25994:0",
-      "expandIcon": "crwdns25996:0crwdne25996:0",
-      "hideActions": "crwdns25998:0crwdne25998:0"
+      "disableIconRotate": "crwdns38784:0crwdne38784:0",
+      "expandIcon": "crwdns38786:0crwdne38786:0",
+      "hideActions": "crwdns38788:0crwdne38788:0",
+      "ripple": "crwdns38790:0crwdne38790:0"
+    }
+  },
+  "events": {
+    "v-expansion-panel": {
+      "change": "crwdns38792:0crwdne38792:0",
+      "click": "crwdns38794:0crwdne38794:0"
+    },
+    "v-expansion-panel-header": {
+      "click": "crwdns38796:0crwdne38796:0"
     }
   },
   "slots": {
-    "actions": "crwdns26000:0crwdne26000:0",
-    "header": "crwdns26002:0crwdne26002:0"
+    "v-expansion-panel-header": {
+      "actions": "crwdns38798:0crwdne38798:0",
+      "icon": "crwdns38800:0crwdne38800:0"
+    }
   }
 }

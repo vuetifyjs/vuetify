@@ -1,25 +1,11 @@
 {
-  "app": "Designa o componente como parte do layout do aplicativo. Usado para ajustar dinamicamente o dimensionamento de conteúdo",
   "auto": "Centraliza a lista no elemento selecionado",
   "centered": "Centraliza as abas",
   "clearable": "Adicionar a funcionalidade de limpar o input, ícone padrão é usa o **clear** do Material Icons",
   "falseValue": "Define o valor para falso",
   "fullWidth": "Força largura 100%",
-  "height": "Define a altura do componente",
   "id": "Define o id no DOM do componente",
-  "max": "Define a largura máxima",
-  "maxHeight": "Define a altura máxima do conteúdo",
-  "min": "Define a largura mínima",
-  "mobileBreakPoint": "Define o ponto de troca para mobile",
-  "overlap": "Componente irá sobrepor o conteúdo do slot",
-  "persistent": "Dialog não fecha ao clicar fora",
-  "ripple": "Aplica a diretiva `v-ripple`",
-  "shift": "Oculta o texto do botão quando não está ativo",
   "singleLine": "Label não se move em eventos focus/dirty",
-  "size": "Define a altura e a largura do elemento",
   "textColor": "Aplica uma cor específica ao texto",
-  "tile": "Remove a borda arredondada",
-  "trueValue": "Define o valor para verdadeiro",
-  "value": "Controla visibilidade",
-  "width": "A largura do conteúdo"
+  "trueValue": "Define o valor para verdadeiro"
 }
