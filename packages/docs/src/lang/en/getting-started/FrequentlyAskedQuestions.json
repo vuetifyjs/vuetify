@@ -20,7 +20,7 @@
     },
     {
       "q": "### Is there a codepen template with router",
-      "a": "Yes. [Vuetify Codepen Router Template](https://codepen.io/zikeji/pen/ypeQNm)."
+      "a": "Yes. [Vuetify Codepen Router Template](https://codepen.io/johnjleider/pen/PMZvpr)."
     },
     {
       "q": "### My application does not look correct",
@@ -93,7 +93,7 @@
       "a": "Until July 2020. More information can be found on the [Long-term Support page](/getting-started/long-term-support)."
     },
     {
-      "q": "How do I get to the v1.5 documentation?",
+      "q": "### How do I get to the v1.5 documentation?",
       "a": "[https://v15.vuetiyfjs.com](https://v15.vuetiyfjs.com)"
     }
   ]
