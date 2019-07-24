@@ -1,1 +1,23 @@
-{}
+{
+  "props": {
+    "value": "Components.Inputs.props.value"
+  },
+  "slots": {
+    "append": "Components.Inputs.slots.append",
+    "append-outer": "Components.TextFields.slots.append-outer",
+    "prepend": "Components.Inputs.slots.prepend",
+    "prepend-inner": "Components.TextFields.slots.prepend-inner",
+    "append-item": "Components.Selects.slots.append-item",
+    "no-data": "Mixins.Filterable.slots.noData",
+    "prepend-item": "Components.Selects.slots.prepend-item"
+  },
+  "events": {
+    "change": "Components.Inputs.events.change",
+    "click:append": "Components.Inputs.events['click:append']",
+    "click:append-outer": "Components.TextFields.events['click:append-outer']",
+    "click:clear": "Components.TextFields.events['click:clear']",
+    "click:prepend": "Components.Inputs.events['click:prepend']",
+    "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
+    "update:error": "Mixins.Validatable.events['update:error']"
+  }
+}

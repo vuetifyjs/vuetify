@@ -1,5 +1,4 @@
 {
-  "header": "# Auto-complétion",
   "headerText": "Le composant `v-autocomplete` offre des fonctionnalités simples et flexibles. Ceci est utile pour la recherche de grands ensembles de données ou même pour les requêtes dynamiques d'information à partir d'une API.",
   "examples": {
     "usage": {
@@ -8,10 +7,6 @@
     "api": {
       "header": "### Recherche d'une API",
       "desc": "Branchez facilement les données dynamiques et créez une expérience unique. La liste de propriétés expansive de v-autocomplete`permet de régler facilement tous les aspects de l'entrée."
-    },
-    "slots": {
-      "header": "### Emplacements étendus",
-      "desc": "Avec la puissance des emplacements étendus, vous pouvez personnaliser la sortie visuelle de la sélection. Dans cet exemple, nous ajoutons une image de profil pour les jetons et la liste d'éléments."
     },
     "customFilter": {
       "header": "### Filtres personnalisés en auto-complétion",
@@ -22,18 +17,34 @@
       "desc": "Parfois vous avez besoin de récupérer des données externes via une requête de recherche. Utilisez la propriété `search-input` avec le modificateur **.sync** quand vous utilisez la propriété `autocomplete`. On peut également utiliser la nouvelle propriété `cache-items`. Ceci gardera une unique liste de tous les éléments qui ont été passés à la propriété `items` et est **REQUIRED** lors de l'utilisation d’éléments asynchrones et de la propriété **multiple**."
     },
     "advanced": {
-      "header": "### Emplacements avancés",
-      "desc": "Le composant `v-autocomplete` est extrêmement flexible et peut s'adapter à n'importe quel cas d'utilisation. Créez des affichages personnalisés pour les emplacements **no-data**, **item** et **selection** afin de fournir une expérience utilisateur unique. L'utilisation de _slots_ vous permet de personnaliser facilement le rendu souhaité pour votre application."
+      "header": "### Emplacements avancés"
     }
   },
   "props": {
     "allowOverflow": "Permet au menu de déborder hors de l'écran",
     "autoSelectFirst": "Lors de la recherche, la première option sera toujours mise en évidence",
     "filter": "L'algorithme de filtrage utilisé lors de la recherche. [example]\n(https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/components/VAutocomplete/VAutocomplete.js#L35)",
+    "hideNoData": "Masque le menu lorsqu'il n'y a pas d'options à afficher. Utile pour empêcher le menu de s'ouvrir avant que les résultats ne soient récupérés de manière asynchrone. Il a également l'effet d'ouvrir le menu lorsque le tableau `items` change, s'il n'est pas déjà ouvert.",
     "noFilter": "Ne pas appliquer le filtrage lors de la recherche. Utile lorsque les données sont filtrées côté serveur",
-    "hideNoData": "Masque le menu lorsqu'il n'y a pas d'options à afficher. Utile pour empêcher le menu de s'ouvrir avant que les résultats ne soient récupérés de manière asynchrone. Il a également l'effet d'ouvrir le menu lorsque le tableau `items` change, s'il n'est pas déjà ouvert."
+    "value": "Components.Inputs.props.value"
+  },
+  "slots": {
+    "append": "Components.Inputs.slots.append",
+    "append-item": "Components.Selects.slots.append-item",
+    "append-outer": "Components.TextFields.slots.append-outer",
+    "no-data": "Mixins.Filterable.slots.noData",
+    "prepend": "Components.Inputs.slots.prepend",
+    "prepend-inner": "Components.TextFields.slots.prepend-inner",
+    "prepend-item": "Components.Selects.slots.prepend-item"
   },
   "events": {
+    "change": "Components.Inputs.events.change",
+    "click:append": "Components.Inputs.events['click:append']",
+    "click:append-outer": "Components.TextFields.events['click:append-outer']",
+    "click:clear": "Components.TextFields.events['click:clear']",
+    "click:prepend": "Components.Inputs.events['click:prepend']",
+    "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
+    "update:error": "Mixins.Validatable.events['update:error']",
     "update:search-input": "L'événement `search-input.sync`"
   }
 }

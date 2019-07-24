@@ -1,1 +1,10 @@
-{}
+{
+  "directives": "Directives",
+  "documentation": "Tài liệu",
+  "ecosystem": "Hệ sinh thái",
+  "github": "Github",
+  "menu": "Menu",
+  "store": "Gian hàng",
+  "support": "Hỗ trợ",
+  "translations": "Ngôn ngữ"
+}

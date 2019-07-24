@@ -1,18 +1,30 @@
 {
-  "header": "crwdns26374:0crwdne26374:0",
-  "headerText": "crwdns26376:0crwdne26376:0",
+  "header": "crwdns39126:0crwdne39126:0",
+  "headerText": "crwdns32810:0crwdne32810:0",
   "examples": {
     "usage": {
-      "desc": "crwdns26378:0crwdne26378:0"
+      "desc": "crwdns39128:0crwdne39128:0"
+    },
+    "multi-line": {
+      "header": "crwdns39130:0crwdne39130:0",
+      "desc": "crwdns39132:0crwdne39132:0"
+    },
+    "timeout": {
+      "header": "crwdns39134:0crwdne39134:0",
+      "desc": "crwdns39136:0crwdne39136:0"
+    },
+    "vertical": {
+      "header": "crwdns39138:0crwdne39138:0",
+      "desc": "crwdns39140:0crwdne39140:0"
     },
     "contextual": {
-      "header": "crwdns26380:0crwdne26380:0",
-      "desc": "crwdns26382:0crwdne26382:0"
+      "header": "crwdns39142:0crwdne39142:0",
+      "desc": "crwdns32816:0crwdne32816:0"
     }
   },
   "props": {
-    "multiLine": "crwdns26386:0crwdne26386:0",
-    "timeout": "crwdns26388:0crwdne26388:0",
-    "vertical": "crwdns26390:0crwdne26390:0"
+    "multiLine": "crwdns39144:0crwdne39144:0",
+    "timeout": "crwdns32822:0crwdne32822:0",
+    "vertical": "crwdns39146:0crwdne39146:0"
   }
 }
