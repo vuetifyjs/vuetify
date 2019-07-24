@@ -1,12 +1,11 @@
 {
-  "header": "단계 (Stepper)",
   "headerText": "`v-stepper` 컴포넌트는 숫자가 매겨진 단계를 가진 진행상태를 표시합니다.",
   "examples": {
     "editable": {
       "header": "편집가능한 단계 (Editable steps)",
       "desc": "편집가능한 단계는 언제라도 사용자가 선택할 수 있으며 해당 단계로 이동됩니다."
     },
-    "nonEditable": {
+    "non-editable": {
       "header": "편집할 수 없는 단계 (Non-editable steps)",
       "desc": "편집할 수 없는 단계는 사용자가 프로세스를 선형적으로만 진행할 수 있도록 강제합니다."
     },
@@ -26,11 +25,11 @@
       "header": "선형 단계 (Linear steppers)",
       "desc": "선형 단계는 사용자가 언제나 미리 정의된 경로를 따라 이동하게 합니다."
     },
-    "nonLinear": {
+    "non-linear": {
       "header": "비선형 단계 (Non-linear steppers)",
       "desc": "비선형 단계는 사용자의 선택에 따라 미리 정의된 진행방식을 따라 이동하게 합니다."
     },
-    "alternateLabels": {
+    "alternate-labels": {
       "header": "대체 레이블 (Alternate labels)",
       "desc": "타이틀을 단계 아래에 배치할 수 있습니다."
     },
@@ -38,11 +37,11 @@
       "header": "여러 줄 오류 상태 (Multi-line error state)",
       "desc": "사용자에게 필수적인 액션을 알리기 위해 오류 상태를 표시할 수 있습니다."
     },
-    "alternateError": {
+    "alternate-error": {
       "header": "여러줄 오류 상태의 대체 레이블 (Alternative label multi-line error state)",
       "desc": "오류 상태에 대체 레이블 스타일을 적용할 수 있습니다."
     },
-    "verticalError": {
+    "vertical-error": {
       "header": "세로 여러 줄 오류 상태 (Vertical multi-line error state)",
       "desc": "오류 상태는 수직 단계로 표시할 수도 있습니다."
     },

@@ -1,14 +1,11 @@
 {
-  "header": "데이터 테이블 (Data table)",
   "headerText": "`v-data-table` 컴포넌트는 데이터를 테이블 형태로 보여줍니다. 정렬(sorting), 검색(searching), 페이지네이션(pagination), 선택(selection) 등이 가능합니다.",
   "examples": {
     "select": {
-      "header": "선택 가능한 행 (Selectable rows)",
-      "desc": "선택 가능한 열은 특정 행이나 전체 행에 대한 액션을 실행할 수 있도록 해줍니다. (Selectable rows allow you to perform an action on specific and all rows.)"
+      "header": "선택 가능한 행 (Selectable rows)"
     },
     "expand": {
-      "header": "슬롯: expand",
-      "desc": "`expand` 슬롯을 이용하여 확장 가능한 행(row)을 만들 수 있습니다. `expand` prop으로 다른 행(row)을 클릭했을때 확장된 행이 닫히는 것을 방지할 수 있습니다."
+      "header": "슬롯: expand"
     },
     "headers": {
       "header": "슬롯: items 과 headers",
@@ -17,10 +14,6 @@
     "progress": {
       "header": "슬롯: progress",
       "desc": "`progress` 슬롯은 데이터 테이블의 `로딩` 상태 표시를 커스터마이즈 할 수 있습니다.\n기본 값은 `indeterminate` `v-progress-linear` 입니다."
-    },
-    "footer": {
-      "header": "슬롯: footer",
-      "desc": "`footer` 슬롯으로 테이블에 별도의 기능을 추가할 수 있습니다. 예) 컬럼 필터링이나 검색"
     },
     "search": {
       "header": "검색과 \"검색결과 없음\" (no-results) 슬롯",
@@ -41,7 +34,7 @@
       "header": "헤더가 없는 테이블 (Headerless tables)",
       "desc": "`hide-headers` prop은 헤더가 없는 테이블을 만듭니다."
     },
-    "editdialog": {
+    "edit-dialog": {
       "header": "인라인 편집 (Inline Editing)",
       "desc": "`v-edit-dialog` 컴포넌트로 데이터 테이블 내에서의 인라인 편집이 가능합니다. **persistent* prop 을 추가하여 외부를 클릭했을 때 다이얼로그가 닫히는 것을 막을 수 있습니다."
     },

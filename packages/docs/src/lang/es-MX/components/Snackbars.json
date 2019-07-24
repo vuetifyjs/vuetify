@@ -1,5 +1,4 @@
 {
-  "header": "Snackbar",
   "headerText": "El componente `v-snackbar` se utiliza para mostrar un mensaje rápido al usuario. Los snackbars tienen soporte para posicionamiento, tiempo de espera antes de quitarse y _callbacks_",
   "examples": {
     "contextual": {
@@ -7,8 +6,6 @@
     }
   },
   "props": {
-    "multiLine": "Hace que el snackbar aparezca más alto (móviles)",
-    "timeout": "El tiempo de espera hasta que el snackbar se haga completamente invisible",
-    "vertical": "Apila los snackbars verticalmente (móviles)"
+    "timeout": "El tiempo de espera hasta que el snackbar se haga completamente invisible"
   }
 }

@@ -1,4 +1,5 @@
 {
+  "callout": "Material Design<br>Component Framework",
   "features": {
     "community": {
       "text": "Khi bạn gặp khó khăn, bạn cần hỗ trợ ngay lập tức. Vuetify cung cấp sự hỗ trợ cộng đồng trên Discord."
@@ -11,5 +12,13 @@
       "text": "Vuetify hỗ trợ các tính năng của công cụ Vue thông qua plugin vue-cli-3. Chỉ với một dòng lệnh bạn có thể bắt đầu xây dựng ý tưởng tuyệt vời của mình.",
       "title": "Ready-Made Project Scaffolding"
     }
-  }
+  },
+  "getHelp": "Nhận hỗ trợ",
+  "getStarted": "Bắt đầu",
+  "github": "Github",
+  "madeWithVuetify": "Các dự án sử dụng Vuetify",
+  "materialDesign": "Material Design",
+  "mit": "MIT License",
+  "proudlySponsoredBy": "Patreon Sponsors",
+  "whyVuetify": "Dùng Vuetify?"
 }
