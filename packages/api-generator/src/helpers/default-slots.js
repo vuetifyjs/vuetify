@@ -61,6 +61,7 @@ module.exports = [
   'v-stepper-items',
   'v-stepper-step',
   'v-stepper',
+  'v-stepper-content',
   'v-subheader',
   'v-tab-item',
   'v-tab',
