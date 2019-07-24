@@ -33,7 +33,7 @@
     },
     "customTransition": {
       "header": "### Custom transitions",
-      "desc": "Vuetify comes with 3 standard transitions, **scale**, **slide-x** and **slide-y**. You can also create your own and pass it as the transition argument. For an example of how the stock transitions are constructed, visit [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/util/helpers.ts).",
+      "desc": "Vuetify comes with 3 standard transitions, **scale**, **slide-x** and **slide-y**. You can also create your own and pass it as the transition argument. For an example of how the stock transitions are constructed, visit [here](https://github.com/vuetifyjs/vuetify/blob/stable/packages/vuetify/src/util/helpers.ts).",
       "uninverted": true
     },
     "popover": {

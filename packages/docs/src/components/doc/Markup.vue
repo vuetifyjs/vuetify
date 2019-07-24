@@ -11,7 +11,7 @@
       class="v-markup__edit"
     >
       <a
-        :href="`https://github.com/vuetifyjs/vuetify/tree/master/packages/docs/src/snippets/${file}`"
+        :href="`https://github.com/vuetifyjs/vuetify/tree/stable/packages/docs/src/snippets/${file}`"
         target="_blank"
         rel="noopener"
         title="Edit code"
