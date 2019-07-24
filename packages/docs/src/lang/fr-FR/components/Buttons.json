@@ -1,5 +1,4 @@
 {
-  "header": "# Boutons",
   "headerText": "Le composant `v-btn` remplace le bouton html standard avec un thème visuel et une multitude d'options. Toutes les classes d'aides de couleur peuvent être utilisées pour modifier la couleur de fond ou du texte.",
   "examples": {
     "flat": {
@@ -20,7 +19,6 @@
       "uninverted": true
     },
     "icon": {
-      "header": "### Icônes",
       "desc": "Les icônes peuvent être utilisées pour le contenu primaire d'un bouton."
     },
     "floating": {
@@ -40,7 +38,6 @@
       "desc": "Les contours de boutons héritent leurs bordures de la couleur appliquée."
     },
     "round": {
-      "header": "### Boutons ronds",
       "desc": "Les boutons arrondis se comportent comme des boutons réguliers mais ont des bords arrondis."
     },
     "block": {
@@ -50,19 +47,12 @@
   },
   "props": {
     "v-btn": {
-      "block": "Élargir le bouton à 100 % de l'espace disponible",
-      "depressed": "Supprime l'ombre portée de la boîte de boutons",
-      "fab": "Rendre le bouton rond",
-      "flat": "Supprime la couleur de fond du bouton",
-      "icon": "Indique le bouton comme icône - ronde et plate",
-      "inputValue": "Contrôle de l’état actif du bouton",
-      "large": "Bouton de grande taille",
-      "loading": "Ajoute un chargement d'animation de l’icône",
-      "outline": "Le bouton aura un contour",
-      "outlined": "Le bouton aura un contour",
-      "round": "Le bouton sera arrondi sur les côtés",
-      "small": "Bouton de petite taille",
-      "type": "Définir l'attribut de type du bouton"
+      "loading": "Ajoute un chargement d'animation de l’icône"
+    }
+  },
+  "events": {
+    "v-btn-toggle": {
+      "change": "Components.Inputs.events.change"
     }
   }
 }

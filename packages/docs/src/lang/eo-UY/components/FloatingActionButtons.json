@@ -1,46 +1,34 @@
 {
-  "header": "crwdns28622:0crwdne28622:0",
-  "headerText": "crwdns28624:0crwdne28624:0",
+  "header": "crwdns34748:0crwdne34748:0",
+  "headerText": "crwdns34750:0crwdne34750:0",
   "examples": {
     "usage": {
-      "desc": "crwdns28626:0crwdne28626:0"
+      "desc": "crwdns34752:0crwdne34752:0"
     },
     "small": {
-      "header": "crwdns28628:0crwdne28628:0",
-      "desc": "crwdns28630:0crwdne28630:0"
+      "header": "crwdns34754:0crwdne34754:0",
+      "desc": "crwdns34756:0crwdne34756:0"
     },
-    "displayAnimation": {
-      "header": "crwdns28632:0crwdne28632:0",
-      "desc": "crwdns28634:0crwdne28634:0"
+    "display-animation": {
+      "header": "crwdns40980:0crwdne40980:0",
+      "desc": "crwdns40982:0crwdne40982:0"
     },
-    "lateralScreens": {
-      "header": "crwdns28636:0crwdne28636:0",
-      "desc": "crwdns28638:0crwdne28638:0"
+    "lateral-screens": {
+      "header": "crwdns40984:0crwdne40984:0",
+      "desc": "crwdns40986:0crwdne40986:0"
     },
-    "speedDial": {
-      "header": "crwdns28640:0crwdne28640:0",
-      "desc": "crwdns28642:0crwdne28642:0"
+    "speed-dial": {
+      "header": "crwdns40988:0crwdne40988:0",
+      "desc": "crwdns40990:0crwdne40990:0"
     }
   },
+  "api": {
+    "v-btn": "crwdns40992:0crwdne40992:0"
+  },
   "props": {
-    "v-btn": {
-      "block": "crwdns28644:0crwdne28644:0",
-      "depressed": "crwdns28646:0crwdne28646:0",
-      "fab": "crwdns28648:0crwdne28648:0",
-      "flat": "crwdns28650:0crwdne28650:0",
-      "icon": "crwdns28652:0crwdne28652:0",
-      "inputValue": "crwdns28654:0crwdne28654:0",
-      "large": "crwdns28656:0crwdne28656:0",
-      "loading": "crwdns28658:0crwdne28658:0",
-      "outline": "crwdns28660:0crwdne28660:0",
-      "outlined": "crwdns35978:0crwdne35978:0",
-      "round": "crwdns28662:0crwdne28662:0",
-      "small": "crwdns28664:0crwdne28664:0",
-      "type": "crwdns28666:0crwdne28666:0"
-    },
     "v-speed-dial": {
-      "direction": "crwdns28668:0crwdne28668:0",
-      "openOnHover": "crwdns28670:0crwdne28670:0"
+      "direction": "crwdns34794:0crwdne34794:0",
+      "openOnHover": "crwdns34796:0crwdne34796:0"
     }
   }
 }

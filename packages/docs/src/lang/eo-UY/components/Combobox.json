@@ -1,45 +1,46 @@
 {
-  "header": "crwdns27944:0crwdne27944:0",
-  "headerText": "crwdns27946:0crwdne27946:0",
+  "header": "crwdns34102:0crwdne34102:0",
+  "headerText": "crwdns40578:0[v-autocomplete]crwdne40578:0",
   "examples": {
     "usage": {
-      "desc": "crwdns27950:0crwdne27950:0"
+      "desc": "crwdns34108:0crwdne34108:0"
     },
-    "noData": {
-      "header": "crwdns27952:0crwdne27952:0",
-      "desc": "crwdns27954:0crwdne27954:0"
+    "no-data": {
+      "header": "crwdns40580:0crwdne40580:0",
+      "desc": "crwdns40582:0crwdne40582:0"
     },
     "advanced": {
-      "header": "crwdns27956:0crwdne27956:0",
-      "desc": "crwdns27958:0crwdne27958:0"
+      "header": "crwdns34114:0crwdne34114:0",
+      "desc": "crwdns34116:0crwdne34116:0"
     },
-    "comboboxMultiple": {
-      "header": "crwdns27960:0crwdne27960:0",
-      "desc": "crwdns27962:0crwdne27962:0"
+    "combobox-multiple": {
+      "header": "crwdns40584:0crwdne40584:0",
+      "desc": "crwdns40586:0crwdne40586:0"
     }
   },
   "props": {
-    "value": "crwdns27964:0crwdne27964:0"
+    "dark": "crwdns40588:0crwdne40588:0",
+    "value": "crwdns34122:0crwdne34122:0"
   },
   "slots": {
-    "append": "crwdns27966:0crwdne27966:0",
-    "append-item": "crwdns27974:0crwdne27974:0",
-    "append-outer": "crwdns27968:0crwdne27968:0",
-    "item": "crwdns27980:0crwdne27980:0",
-    "no-data": "crwdns27976:0crwdne27976:0",
-    "prepend": "crwdns27970:0crwdne27970:0",
-    "prepend-inner": "crwdns27972:0crwdne27972:0",
-    "prepend-item": "crwdns27978:0crwdne27978:0",
-    "selection": "crwdns27982:0crwdne27982:0"
+    "append": "crwdns34124:0crwdne34124:0",
+    "append-outer": "crwdns34126:0crwdne34126:0",
+    "item": "crwdns40590:0crwdne40590:0",
+    "prepend": "crwdns34128:0crwdne34128:0",
+    "prepend-inner": "crwdns34130:0crwdne34130:0",
+    "append-item": "crwdns34132:0crwdne34132:0",
+    "no-data": "crwdns34134:0crwdne34134:0",
+    "prepend-item": "crwdns34136:0crwdne34136:0",
+    "selection": "crwdns40592:0crwdne40592:0"
   },
   "events": {
-    "change": "crwdns27984:0crwdne27984:0",
-    "click:append": "crwdns27986:0crwdne27986:0",
-    "click:append-outer": "crwdns27988:0crwdne27988:0",
-    "click:clear": "crwdns27990:0crwdne27990:0",
-    "click:prepend": "crwdns27992:0crwdne27992:0",
-    "click:prepend-inner": "crwdns27994:0crwdne27994:0",
-    "update:error": "crwdns27996:0crwdne27996:0",
-    "update:search-input": "crwdns27998:0crwdne27998:0"
+    "change": "crwdns34142:0crwdne34142:0",
+    "click:append": "crwdns34144:0crwdne34144:0",
+    "click:append-outer": "crwdns34146:0crwdne34146:0",
+    "click:clear": "crwdns34148:0crwdne34148:0",
+    "click:prepend": "crwdns34150:0crwdne34150:0",
+    "click:prepend-inner": "crwdns34152:0crwdne34152:0",
+    "update:error": "crwdns34154:0crwdne34154:0",
+    "update:search-input": "crwdns40594:0crwdne40594:0"
   }
 }

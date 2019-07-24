@@ -1,6 +1,4 @@
 {
-  "header": "Divider",
-  "headerText": "El componente `v-divider` se usa para separar secciones de las listas.",
   "examples": {
     "inset": {
       "header": "Inset dividers",
@@ -9,13 +7,12 @@
     "vertical": {
       "header": "_Dividers_ en modo vertical"
     },
-    "dividerListPortrait": {
+    "divider-list-portrait": {
       "header": "_Dividers_ en modo _Portrait_",
       "desc": "Crea _cards_ personalizadas para que se ajusten a cualquier caso de uso"
     }
   },
   "props": {
-    "inset": "Agrega indentación (72px) para los dividers **normales**, reduce la altura máxima en el caso de los **verticales**",
-    "vertical": "Crea un divider vertical"
+    "inset": "Agrega indentación (72px) para los dividers **normales**, reduce la altura máxima en el caso de los **verticales**"
   }
 }

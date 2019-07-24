@@ -1,0 +1,62 @@
+{
+  "header": "crwdns39372:0crwdne39372:0",
+  "headerText": "crwdns39374:0crwdne39374:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns39376:0[v-text-field]crwdne39376:0"
+    },
+    "multiple": {
+      "header": "crwdns39378:0crwdne39378:0",
+      "desc": "crwdns39380:0crwdne39380:0"
+    },
+    "accept": {
+      "header": "crwdns39382:0crwdne39382:0",
+      "desc": "crwdns39384:0crwdne39384:0"
+    },
+    "chips": {
+      "header": "crwdns39386:0crwdne39386:0",
+      "desc": "crwdns39388:0[chip]crwdne39388:0"
+    },
+    "size": {
+      "header": "crwdns39390:0crwdne39390:0",
+      "desc": "crwdns39392:0crwdne39392:0"
+    },
+    "counter": {
+      "header": "crwdns39394:0crwdne39394:0",
+      "desc": "crwdns39396:0crwdne39396:0"
+    },
+    "selection": {
+      "header": "crwdns39398:0crwdne39398:0",
+      "desc": "crwdns39400:0[chips]crwdne39400:0"
+    },
+    "custom-icon": {
+      "header": "crwdns39402:0crwdne39402:0",
+      "desc": "crwdns39404:0crwdne39404:0"
+    },
+    "validation": {
+      "header": "crwdns39406:0crwdne39406:0",
+      "desc": "crwdns39408:0crwdne39408:0"
+    },
+    "advanced": {
+      "header": "crwdns39410:0crwdne39410:0",
+      "desc": "crwdns39412:0crwdne39412:0"
+    }
+  },
+  "props": {
+    "accept": "crwdns39414:0crwdne39414:0",
+    "chips": "crwdns39416:0crwdne39416:0",
+    "counterSizeString": "crwdns39418:0crwdne39418:0",
+    "counterString": "crwdns39420:0crwdne39420:0",
+    "multiple": "crwdns39422:0crwdne39422:0",
+    "showSize": "crwdns39424:0crwdne39424:0",
+    "smallChips": "crwdns39426:0crwdne39426:0",
+    "truncateLength": "crwdns39428:0crwdne39428:0",
+    "value": "crwdns39430:0crwdne39430:0"
+  },
+  "slots": {
+    "selection": "crwdns39432:0[file]crwdne39432:0"
+  },
+  "events": {
+    "change": "crwdns39434:0crwdne39434:0"
+  }
+}

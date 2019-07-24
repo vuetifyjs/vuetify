@@ -1,7 +1,7 @@
 {
   "headerText": "`v-ripple`ディレクティブはユーザからのアクションを表示する際に利用します。どのブロックレベルの要素に対しても設定できます。`v-btn`、`v-tabs-item`など多くのコンポーネントにrippleディレクティブが組み込まれています。",
   "examples": {
-    "customColor": {
+    "custom-color": {
       "desc": "Helperクラスを利用すれば波紋の色を変更できます。"
     }
   }

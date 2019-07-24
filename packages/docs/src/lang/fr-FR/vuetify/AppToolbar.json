@@ -1,5 +1,4 @@
 {
-  "api": "API",
   "archived": "documentation archivée",
   "awesome": "Awesome Vuetify",
   "bug": "Signaler un bug",
@@ -9,7 +8,6 @@
   "components": "Composants",
   "current": "Version actuelle",
   "dev": "branche dev",
-  "directives": "Directives",
   "documentation": "Documentation",
   "ecosystem": "Écosystème",
   "eslint": "Configuration Eslint",
@@ -18,7 +16,6 @@
   "getHelp": "Obtenir de l'aide",
   "github": "Github",
   "guide": "Guide",
-  "inDev": "En développement",
   "issues": "Tableau d'issues Github",
   "latest": "Dernières versions",
   "medium": "Publications Medium",

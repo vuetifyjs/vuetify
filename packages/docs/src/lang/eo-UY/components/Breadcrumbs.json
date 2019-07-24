@@ -1,37 +1,37 @@
 {
-  "header": "crwdns27166:0crwdne27166:0",
-  "headerText": "crwdns27168:0crwdne27168:0",
+  "header": "crwdns33358:0crwdne33358:0",
+  "headerText": "crwdns39882:0crwdne39882:0",
   "examples": {
     "usage": {
-      "desc": "crwdns27170:0crwdne27170:0"
+      "desc": "crwdns33362:0crwdne33362:0"
     },
-    "iconDividers": {
-      "header": "crwdns27172:0crwdne27172:0",
-      "desc": "crwdns27174:0crwdne27174:0"
+    "icon-dividers": {
+      "header": "crwdns39884:0crwdne39884:0",
+      "desc": "crwdns39886:0crwdne39886:0"
     },
-    "itemSlot": {
-      "header": "crwdns27176:0crwdne27176:0",
-      "desc": "crwdns27178:0crwdne27178:0"
+    "item-slot": {
+      "header": "crwdns39888:0crwdne39888:0",
+      "desc": "crwdns39890:0crwdne39890:0"
     },
     "large": {
-      "header": "crwdns35890:0crwdne35890:0",
-      "desc": "crwdns35892:0crwdne35892:0"
+      "header": "crwdns39892:0crwdne39892:0",
+      "desc": "crwdns39894:0crwdne39894:0"
     },
     "divider": {
-      "header": "crwdns35894:0crwdne35894:0",
-      "desc": "crwdns35896:0crwdne35896:0"
+      "header": "crwdns39896:0crwdne39896:0",
+      "desc": "crwdns39898:0crwdne39898:0"
     }
   },
   "props": {
-    "divider": "crwdns27180:0crwdne27180:0",
-    "icons": "crwdns27182:0crwdne27182:0",
-    "items": "crwdns27184:0crwdne27184:0",
-    "justifyCenter": "crwdns27186:0crwdne27186:0",
-    "justifyEnd": "crwdns27188:0crwdne27188:0",
-    "large": "crwdns27190:0crwdne27190:0"
+    "divider": "crwdns39900:0crwdne39900:0",
+    "icons": "crwdns39902:0[v-icon]crwdne39902:0",
+    "items": "crwdns39904:0crwdne39904:0",
+    "justifyCenter": "crwdns39906:0crwdne39906:0",
+    "justifyEnd": "crwdns39908:0crwdne39908:0",
+    "large": "crwdns39910:0crwdne39910:0"
   },
   "slots": {
-    "divider": "crwdns27192:0crwdne27192:0",
-    "item": "crwdns27194:0crwdne27194:0"
+    "divider": "crwdns39912:0crwdne39912:0",
+    "item": "crwdns39914:0crwdne39914:0"
   }
 }
