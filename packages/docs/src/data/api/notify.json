@@ -1,1 +1,9 @@
-{}
+{
+  "color": "default",
+  "close": true,
+  "id": "vuetify-2",
+  "text": "Go to Release",
+  "msg": "⚡ Version 2 is now live!",
+  "href": "https://github.com/vuetifyjs/vuetify/releases/tag/v2.0.0",
+  "timeout": 0
+}

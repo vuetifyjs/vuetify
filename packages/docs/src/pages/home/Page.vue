@@ -6,10 +6,6 @@
         pa-0
       >
         <hero />
-
-        <sponsors />
-
-        <made-with-vuetify />
       </v-container>
     </v-content>
 
@@ -21,8 +17,6 @@
   export default {
     components: {
       Hero: () => import('./components/Hero'),
-      MadeWithVuetify: () => import('./components/MadeWithVuetify'),
-      Sponsors: () => import('./components/Sponsors'),
       HomeFooter: () => import('./components/Footer')
     }
   }

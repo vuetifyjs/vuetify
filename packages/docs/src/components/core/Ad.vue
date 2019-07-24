@@ -23,10 +23,6 @@
           >
             <core-toc />
             <div class="my-3">
-              <supporters-patrons
-                :tier="[1]"
-                compact
-              />
               <supporters-sponsor-btn small />
             </div>
           </v-flex>

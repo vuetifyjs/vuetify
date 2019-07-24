@@ -9,30 +9,10 @@
       pb-0
     >
       <div class="text-xs-center">
-        <h4 class="body-2 font-weight-bold grey--text">Premiere sponsor</h4>
-
-        <span class="d-block mb-3 caption grey--text text--lighten-1">
-          One spot available
-        </span>
-
         <supporters-sponsor-btn
           large
-          class="mb-4"
-          href="https://www.patreon.com/join/vuetify"
-        />
-
-        <v-text-field
-          id="search"
-          key="search"
-          ref="search"
-          v-model="search"
-          label="Search"
-          append-icon="search"
-          clearable
-          hide-details
-          single-line
-          solo
-          light
+          class="mb-3"
+          href="https://github.com/users/johnleider/sponsorship"
         />
       </div>
     </v-container>
@@ -85,6 +65,7 @@
           :subtext="item.subtext"
           :text="item.text"
           :to="item.to"
+          :href="item.href"
         />
       </template>
     </v-list>
@@ -103,8 +84,6 @@
 
   export default {
     data: () => ({
-      docSearch: {},
-      isSearching: false,
       drawerItems,
       search: ''
     }),
@@ -141,43 +120,7 @@
           this.inputValue &&
           this.$vuetify.breakpoint.mdAndDown
         ) this.inputValue = false
-      },
-      inputValue (val) {
-        if (!val) {
-          this.docSearch.autocomplete.autocomplete.close()
-          this.docSearch.autocomplete.autocomplete.setVal('')
-        }
-      },
-      isSearching (val) {
-        this.$refs.toolbar.isScrolling = !val
-        if (val) {
-          this.$nextTick(() => this.$refs.search.focus())
-        } else {
-          this.search = null
-        }
-      },
-      search (val) {
-        if (!val) {
-          this.docSearch.autocomplete.autocomplete.close()
-          this.docSearch.autocomplete.autocomplete.setVal('')
-        }
       }
-    },
-
-    mounted () {
-      import(
-        /* webpackChunkName: "docsearch" */
-        'docsearch.js/dist/cdn/docsearch.min.css'
-      )
-      import(
-        /* webpackChunkName: "docsearch" */
-        'docsearch.js'
-      ).then(this.init)
-    },
-
-    destroyed () {
-      this.docSearch.autocomplete.autocomplete.close()
-      this.docSearch.autocomplete.autocomplete.setVal('')
     },
 
     methods: {
@@ -199,27 +142,7 @@
 
         return newItem
       },
-      ...mapMutations('app', ['setDrawer']),
-      init ({ default: docsearch }) {
-        const vm = this
-        this.docSearch = docsearch({
-          apiKey: '259d4615e283a1bbaa3313b4eff7881c',
-          autocompleteOptions: {
-            appendTo: '#app',
-            hint: false,
-            debug: true
-          },
-          indexName: 'vuetifyjs',
-          inputSelector: '#search',
-          handleSelected (input, event, suggestion) {
-            const url = suggestion.url
-            const loc = url.split('.com')
-            vm.search = ''
-            vm.isSearching = false
-            vm.$router.push(loc.pop())
-          }
-        })
-      }
+      ...mapMutations('app', ['setDrawer'])
     }
   }
 </script>

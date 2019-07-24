@@ -8,10 +8,9 @@
       { "text": "whyVuetify", "to": "why-vuetify" },
       { "text": "faq", "to": "frequently-asked-questions" },
       { "text": "meetTheTeam", "to": "meet-the-team" },
-      { "text": "sponsorsAndBackers", "to": "sponsors-and-backers" },
       { "text": "contributing", "to": "contributing" },
-      { "updated": true, "text": "roadmap", "to": "roadmap" },
-      { "text": "consulting", "to": "consulting-and-support" }
+      { "text": "roadmap", "href": "https://vuetifyjs.com/getting-started/roadmap" },
+      { "text": "consulting", "href": "https://vuetifyjs.com/getting-started/consulting-and-support" }
     ]
   },
   {
@@ -58,7 +57,7 @@
         "group": "framework",
         "text": "motion",
         "children": [
-          { "text": "scroll", "to": "scroll", "updated": true },
+          { "text": "scroll", "to": "scroll" },
           { "text": "transitions", "to": "transitions" }
         ]
       }
@@ -78,7 +77,7 @@
       { "text": "breadcrumbs", "to": "breadcrumbs" },
       { "text": "buttons", "to": "buttons" },
       { "text": "fabs", "to": "floating-action-buttons" },
-      { "text": "calendars", "to": "calendars", "new": true },
+      { "text": "calendars", "to": "calendars" },
       { "text": "cards", "to": "cards" },
       { "text": "carousels", "to": "carousels" },
       { "text": "chips", "to": "chips" },
@@ -134,14 +133,14 @@
       { "text": "ratings", "to": "ratings" },
       { "text": "sheets", "to": "sheets" },
       { "text": "snackbars", "to": "snackbars" },
-      { "text": "sparklines", "to": "sparklines", "updated": true },
+      { "text": "sparklines", "to": "sparklines" },
       { "text": "steppers", "to": "steppers" },
       { "text": "subheaders", "to": "subheaders" },
       { "text": "tabs", "to": "tabs" },
       { "text": "timelines", "to": "timelines" },
       { "text": "toolbars", "to": "toolbars" },
       { "text": "tooltips", "to": "tooltips" },
-      { "text": "treeview", "to": "treeview", "updated": true }
+      { "text": "treeview", "to": "treeview" }
     ]
   },
   {
@@ -158,7 +157,6 @@
   {
     "text": "premiumThemes",
     "icon": "mdi-palette",
-    "to": "themes/premium",
-    "updated": true
+    "href": "https://vuetifyjs.com/en/themes/premium"
   }
 ]
