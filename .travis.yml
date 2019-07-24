@@ -23,6 +23,8 @@ stages:
     if: (tag IS present) AND (type = push) AND (repo = vuetifyjs/vuetify)
   - name: publish-docs-live
     if: (branch = master) AND (type = push) AND (repo = vuetifyjs/vuetify)
+  - name: publish-docs-stable
+    if: (branch = stable) AND (type = push) AND (repo = vuetifyjs/vuetify)
   - name: publish-docs-dev
     if: (branch = dev) AND (type = push) AND (repo = vuetifyjs/vuetify)
   - name: publish-docs-next
@@ -75,6 +77,11 @@ jobs:
       name: 'Publish docs - dev'
       before_script: yarn global add now
       script: node scripts/deploy-and-alias.js dev.vuetifyjs.com
+
+    - stage: publish-docs-stable
+      name: 'Publish docs - stable'
+      before_script: yarn global add now
+      script: node scripts/deploy-and-alias.js v15.vuetifyjs.com
 
     - stage: publish-docs-next
       name: 'Publish docs - next'

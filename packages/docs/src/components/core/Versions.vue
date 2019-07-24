@@ -59,20 +59,14 @@
           {
             icon: 'mdi-rocket',
             text: 'v2.0.0',
-            subtext: this.$t('Vuetify.AppToolbar.next'),
-            href: 'https://next.vuetifyjs.com'
+            subtext: this.$t('Vuetify.AppToolbar.latestRelease'),
+            href: 'https://vuetifyjs.com'
           },
           {
             icon: 'mdi-package',
             text: 'v1.0.x',
             subtext: this.$t('Vuetify.AppToolbar.archived'),
             href: 'https://v1.vuetifyjs.com'
-          },
-          {
-            icon: 'mdi-developer-board',
-            text: this.$t('Vuetify.AppToolbar.inDev'),
-            subtext: this.$t('Vuetify.AppToolbar.dev'),
-            href: 'https://dev.vuetifyjs.com'
           }
         ]
       },

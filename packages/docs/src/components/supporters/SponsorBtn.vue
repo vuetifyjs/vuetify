@@ -1,7 +1,6 @@
 <template>
   <v-btn
     v-bind="$attrs"
-    :to="!href && to ? to : undefined"
     :href="href"
     :target="href ? '_blank' : undefined"
     color="primary"
@@ -20,18 +19,9 @@
     inheritAttrs: false,
 
     props: {
-      to: {
-        type: [Object, String],
-        default: () => ({
-          params: {
-            namespace: 'getting-started',
-            page: 'sponsors-and-backers'
-          }
-        })
-      },
       href: {
         type: String,
-        default: undefined
+        default: 'https://github.com/users/johnleider/sponsorship'
       }
     }
   }
