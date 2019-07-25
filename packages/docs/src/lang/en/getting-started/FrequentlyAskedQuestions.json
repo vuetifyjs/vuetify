@@ -7,6 +7,10 @@
   "resetSearch": "Reset search",
   "gotchas": [
     {
+      "q": "### Error: Cannot find module 'node-sass'",
+      "a": "Ensure that your `@vue/cli packages` located in `package.json` are at least **^3.5.0**."
+    },
+    {
       "q": "### My code doesn't work - what should I do",
       "a": "First, ensure that you're using the latest version of Vue.js and Vuetify. Try to reproduce it in codepen using the following [template](https://template.vuetifyjs.com/). If you are unable to reproduce the issue outside of your environment, this usually means the issue resides locally. If you are still unable to resolve your issue, please provide your codepen and issue in **#need-help** in the [community](https://chat.vuetifyjs.com)."
     },
