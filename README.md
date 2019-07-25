@@ -313,7 +313,7 @@ To use Vuetify in your project by directly importing it through CDNs (Content De
 Don't forget to add both Vuetify and the main Vue library to your HTML file before the closing `</body>` tag.
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vuetify@1.x/dist/vuetify.js"></script>
 ```
 
