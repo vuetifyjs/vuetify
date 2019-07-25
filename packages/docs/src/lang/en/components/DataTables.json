@@ -11,11 +11,11 @@
     },
     "select": {
       "header": "### Selectable rows",
-      "desc": "The `show-select` prop will render a checkbox in the default header to toggle all rows, and a checkbox for each default row. You can customize these with the slots `header.column.data-table-select` and `item.column.data-table-select` respectively. You can also switch between allowing multiple selected rows at the same time or just one with the `single-select` prop."
+      "desc": "The `show-select` prop will render a checkbox in the default header to toggle all rows, and a checkbox for each default row. You can customize these with the slots `header.data-table-select` and `item.data-table-select` respectively. You can also switch between allowing multiple selected rows at the same time or just one with the `single-select` prop."
     },
     "expand": {
       "header": "### Expandable rows",
-      "desc": "The `show-expand` prop will render an expand icon on each default row. You can customize this with the `item.column.data-table-expand` slot. You can also switch between allowing multiple expanded rows at the same time or just one with the `single-expand` prop. The expanded rows are available on the synced prop `expanded.sync`"
+      "desc": "The `show-expand` prop will render an expand icon on each default row. You can customize this with the `item.data-table-expand` slot. You can also switch between allowing multiple expanded rows at the same time or just one with the `single-expand` prop. The expanded rows are available on the synced prop `expanded.sync`"
     },
     "group": {
       "header": "### Grouped rows",
@@ -43,11 +43,11 @@
     },
     "customize-header": {
       "header": "### Customizing default header",
-      "desc": "You can use the dynamic slots `header.column.<name>` to customize only certain columns. `<name>` is the name of the `value` property in the corresponding header item sent to `headers`."
+      "desc": "You can use the dynamic slots `header.<name>` to customize only certain columns. `<name>` is the name of the `value` property in the corresponding header item sent to `headers`."
     },
     "customize-rows": {
       "header": "### Customizing default rows",
-      "desc": "You can use the dynamic slots `item.column.<name>` to customize only certain columns. `<name>` is the name of the `value` property in the corresponding header item sent to `headers`. So to customize the calories column we're using the `item.column.calories` slot."
+      "desc": "You can use the dynamic slots `item.<name>` to customize only certain columns. `<name>` is the name of the `value` property in the corresponding header item sent to `headers`. So to customize the calories column we're using the `item.calories` slot."
     },
     "progress": {
       "header": "### Slot: progress",

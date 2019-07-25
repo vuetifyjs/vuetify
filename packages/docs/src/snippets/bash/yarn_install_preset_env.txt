@@ -1,3 +1,3 @@
-$ yarn add @babel/preset-env -d
+$ yarn add @babel/preset-env -D
 // OR
-$ npm install @babel/preset-env --save-dev
+$ npm install @babel/preset-env -D
