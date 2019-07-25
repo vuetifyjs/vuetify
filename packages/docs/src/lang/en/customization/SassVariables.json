@@ -10,5 +10,7 @@
   "sassAlert2": "If you are requiring the Vuetify stylesheet by a `<link>` tag in your index file, remove it.",
   "sassText5": "Under the hood, the new variables will be hoisted to the top of the compiled styles and used to override the default behavior.",
   "sfcHeader": "## Single-file components",
-  "sfcText1": "When vue-cli compiles styles, by default it does not associate different file types for SASS, (**.scss** and **.sass**). When adding custom styles in a SFC (single-file component) with `lang=\"sass\"`, it will throw an error saying that a _semi-colon_ must be added to the import statement. When you add this _semi-colon_, it will tell you to remove it. This is due to the fact that Vuetify uses both **.scss** and **.sass** files. In order to resolve this, we have to tell webpack to explicitly use the **sass-loader** for **.sass** files."
+  "sfcText1": "Using the above configuration you will also be able to access Vuetify variables in SFC files when using style blocks with `lang=\"sass\"`. However if you wish to use `lang=\"scss\"`, an extra step is necessary.",
+  "sfcText2": "When vue-cli compiles styles, by default it does not differentiate between file types for SASS, (**.scss** and **.sass**). Due to this, and the above configuration, when adding custom styles in a SFC with `lang=\"scss\"`, it will throw an error saying that a _semi-colon_ must be added to the import statement. However if you add this _semi-colon_ to the existing configuration, it will tell you to remove it. This is due to the fact that Vuetify uses both **.scss** and **.sass** files internally.",
+  "sfcText3": "In order to solve this, we have to tell webpack to explicitly use an import statement that includes the semi-colon when encountering **scss** code."
 }
