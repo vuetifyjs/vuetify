@@ -23,7 +23,7 @@
 
   const jsResources = [
     'https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js',
-    'https://cdn.jsdelivr.net/npm/vue/dist/vue.js',
+    'https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js',
     `https://cdn.jsdelivr.net/npm/vuetify@${version}/dist/vuetify.min.js`
   ]
 
