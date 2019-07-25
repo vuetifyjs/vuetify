@@ -105,6 +105,7 @@ export default baseMixins.extend<options>().extend({
     genLabel () {
       return this.$createElement('div', {
         staticClass: 'v-stepper__label',
+        attrs: { title: this.$slots.default && this.$slots.default.length > 0 ? this.$slots.default[0].text : null }
       }, this.$slots.default)
     },
     genStep () {
