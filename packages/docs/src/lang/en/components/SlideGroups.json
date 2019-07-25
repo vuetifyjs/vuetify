@@ -35,5 +35,12 @@
     "nextIcon": "The appended slot when arrows are shown",
     "prevIcon": "The prepended slot when arrows are shown",
     "showArrows": "Always show pagination arrows"
+  },
+  "events": {
+    "click:location": "Emitted when a slide item is selected inside of the slide group"
+  },
+  "slots": {
+    "next": "The next slot",
+    "prev": "The prev slot"
   }
 }
