@@ -24,7 +24,7 @@
           <v-text-field
             v-model="message3"
             filled
-            label="Box"
+            label="Filled"
             clearable
           ></v-text-field>
         </v-flex>

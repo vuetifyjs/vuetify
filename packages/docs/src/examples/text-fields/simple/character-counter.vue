@@ -30,7 +30,7 @@
             :rules="rules"
             counter="25"
             filled
-            label="Box"
+            label="Filled"
           ></v-text-field>
         </v-flex>
 
