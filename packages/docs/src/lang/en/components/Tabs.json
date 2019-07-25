@@ -69,7 +69,7 @@
     },
     "activeClass": "Mixins.BaseItemGroup.props.activeClass",
     "alignWithTitle": "Make `v-tabs` lined up with the toolbar title",
-    "backgroundColor": "Changes the background color of `v-tabs-bar`.",
+    "backgroundColor": "Changes the background color of the component.",
     "centerActive": "Forces the selected tab to be centered",
     "cycle": "Will reset to first or last tab when swiping left or right if at the end of indexes",
     "dark": "Mixins.Themeable.props.dark",
@@ -90,6 +90,10 @@
     "vertical": "Stacks tabs on top of each other vertically."
   },
   "events": {
+    "v-tab": {
+      "click": "Emitted when the component is clicked",
+      "keydown": "Emitted when **enter** key is pressed"
+    },
     "v-tabs": {
       "change" : "Emitted when tab is changed by user interaction"
     },
