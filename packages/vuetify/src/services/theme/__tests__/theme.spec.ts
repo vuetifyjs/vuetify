@@ -186,6 +186,7 @@ describe('Theme.ts', () => {
   it('should add fake child element for nuxt ssr support', () => {
     const theme = new Theme(mock)
     ;(instance as any).$meta = {}
+    instance.$isServer = true
 
     expect(instance.$children).toHaveLength(0)
 
