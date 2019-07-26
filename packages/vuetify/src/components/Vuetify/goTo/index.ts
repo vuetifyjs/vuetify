@@ -50,7 +50,8 @@ export default function goTo (_target: GoToTarget, _settings: Partial<GoToSettin
 
     container.scrollTop = Math.floor(startLocation + (targetLocation - startLocation) * ease(progress))
 
-    if (progress === 1 || container.clientHeight + container.scrollTop === container.scrollHeight) {
+    const clientHeight = container === document.body ? document.documentElement.clientHeight : container.clientHeight
+    if (progress === 1 || clientHeight + container.scrollTop === container.scrollHeight) {
       return resolve(targetLocation)
     }
 
