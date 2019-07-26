@@ -4,7 +4,8 @@
   <title>Vuetify Parallax Starter</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900' rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
 </head>
 <body>
@@ -59,7 +60,7 @@
                 <v-flex xs12 md4>
                   <v-card flat class="transparent">
                     <v-card-text class="text-center">
-                      <v-icon x-large class="blue--text text--lighten-2">color_lens</v-icon>
+                      <v-icon x-large class="blue--text text--lighten-2">mdi-palette</v-icon>
                     </v-card-text>
                     <v-card-title primary-title class="layout justify-center">
                       <div class="headline text-center">Material Design</div>
@@ -74,7 +75,7 @@
                 <v-flex xs12 md4>
                   <v-card flat class="transparent">
                     <v-card-text class="text-center">
-                      <v-icon x-large class="blue--text text--lighten-2">flash_on</v-icon>
+                      <v-icon x-large class="blue--text text--lighten-2">mdi-flash</v-icon>
                     </v-card-text>
                     <v-card-title primary-title class="layout justify-center">
                       <div class="headline">Fast development</div>
@@ -89,7 +90,7 @@
                 <v-flex xs12 md4>
                   <v-card flat class="transparent">
                     <v-card-text class="text-center">
-                      <v-icon x-large class="blue--text text--lighten-2">build</v-icon>
+                      <v-icon x-large class="blue--text text--lighten-2">mdi-wrench</v-icon>
                     </v-card-text>
                     <v-card-title primary-title class="layout justify-center">
                       <div class="headline text-center">Completely Open Sourced</div>
@@ -108,7 +109,7 @@
       </section>
 
       <section>
-        <v-parallax src="assets/section.jpeg" height="380">
+        <v-parallax src="assets/section.jpg" height="380">
           <v-layout column align-center justify-center>
             <div class="headline white--text mb-4 text-center">Web development has never been easier</div>
             <em>Kick-start your application today</em>
@@ -151,7 +152,7 @@
                 <v-list class="transparent">
                   <v-list-item>
                     <v-list-item-action>
-                      <v-icon class="blue--text text--lighten-2">phone</v-icon>
+                      <v-icon class="blue--text text--lighten-2">mdi-phone</v-icon>
                     </v-list-item-action>
                     <v-list-item-content>
                       <v-list-item-title>777-867-5309</v-list-item-title>
@@ -159,7 +160,7 @@
                   </v-list-item>
                   <v-list-item>
                     <v-list-item-action>
-                      <v-icon class="blue--text text--lighten-2">place</v-icon>
+                      <v-icon class="blue--text text--lighten-2">mdi-map-marker</v-icon>
                     </v-list-item-action>
                     <v-list-item-content>
                       <v-list-item-title>Chicago, US</v-list-item-title>
@@ -167,7 +168,7 @@
                   </v-list-item>
                   <v-list-item>
                     <v-list-item-action>
-                      <v-icon class="blue--text text--lighten-2">email</v-icon>
+                      <v-icon class="blue--text text--lighten-2">mdi-email</v-icon>
                     </v-list-item-action>
                     <v-list-item-content>
                       <v-list-item-title>john@vuetifyjs.com</v-list-item-title>
@@ -185,7 +186,7 @@
           <v-flex xs12>
             <div class="white--text ml-4">
               Made with
-              <v-icon class="red--text">favorite</v-icon>
+              <v-icon class="red--text">mdi-heart</v-icon>
               by <a class="white--text" href="https://vuetifyjs.com" target="_blank">Vuetify</a>
               and <a class="white--text" href="https://github.com/vwxyzjn">Costa Huang</a>
             </div>
@@ -200,6 +201,7 @@
  <script>
    new Vue({
     el: '#app',
+    vuetify: new Vuetify(),
     data () {
       return {
         title: 'Your Logo'
