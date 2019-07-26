@@ -82,9 +82,9 @@
     computed: {
       layoutAttributes () {
         return {
-          [this.alignment]: true,
-          [this.justify]: true,
-          [this.flexDirection]: true,
+          [this.alignment]: Number.isNaN(+this.alignment),
+          [this.justify]: Number.isNaN(+this.justify),
+          [this.flexDirection]: Number.isNaN(+this.flexDirection),
           reverse: this.reverse,
           'fill-height': this.fillHeight,
         }
