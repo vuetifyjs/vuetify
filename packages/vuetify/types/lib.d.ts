@@ -12,6 +12,9 @@ declare module 'vuetify/lib' {
     Scroll: DirectiveOptions,
     Touch: DirectiveOptions
   }
+  const MobileRow: Component
+  const Row: Component
+  const RowGroup: Component
   const VAlert: Component
   const VApp: Component
   const VAppBar: Component
@@ -152,6 +155,7 @@ declare module 'vuetify/lib' {
   const VTabTransition: Component
   const VTableOverflow: Component
   const VTabs: Component
+  const VTabsBar: Component
   const VTabsItems: Component
   const VTabsSlider: Component
   const VTextField: Component
@@ -175,6 +179,9 @@ declare module 'vuetify/lib' {
   export {
     colors,
     directives,
+    MobileRow,
+    Row,
+    RowGroup,
     VAlert,
     VApp,
     VAppBar,
@@ -315,6 +322,7 @@ declare module 'vuetify/lib' {
     VTabTransition,
     VTableOverflow,
     VTabs,
+    VTabsBar,
     VTabsItems,
     VTabsSlider,
     VTextField,
