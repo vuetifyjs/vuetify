@@ -22,8 +22,8 @@ export default RegistrableProvide('form').extend({
   inheritAttrs: false,
 
   props: {
-    value: Boolean,
     lazyValidation: Boolean,
+    value: Boolean,
   },
 
   data: () => ({
