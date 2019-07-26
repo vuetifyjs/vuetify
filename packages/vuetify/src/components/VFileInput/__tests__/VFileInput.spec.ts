@@ -181,4 +181,14 @@ describe('VFileInput.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should render without icon', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        prependIcon: '',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
