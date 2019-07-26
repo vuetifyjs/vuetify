@@ -20,7 +20,7 @@
 
         <v-flex xs12 sm6>
           <v-text-field
-            label="Box"
+            label="Filled"
             single-line
             filled
           ></v-text-field>

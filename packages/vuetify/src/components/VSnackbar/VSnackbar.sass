@@ -11,6 +11,8 @@
   position: fixed
   right: 8px
   text-align: left
+  transition-duration: .15s
+  transition-timing-function: map-get($transition, 'linear-out-slow-in')
   z-index: 1000
 
   &--absolute
@@ -31,8 +33,7 @@
     max-width: 672px
     min-width: 344px
     pointer-events: auto
-    transition-duration: .15s
-    transition-timing-function: map-get($transition, 'linear-out-slow-in')
+    transition: inherit
     transition-property: opacity, transform
     +elevation(6)
 

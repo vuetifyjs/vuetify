@@ -40,7 +40,7 @@
         <v-flex xs12 sm6>
           <v-text-field
             value="John Doe"
-            label="Box"
+            label="Filled"
             filled
             disabled
           ></v-text-field>
@@ -49,7 +49,7 @@
         <v-flex xs12 sm6>
           <v-text-field
             value="John Doe"
-            label="Box"
+            label="Filled"
             filled
             readonly
           ></v-text-field>

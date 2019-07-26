@@ -74,6 +74,10 @@ export default baseMixins.extend<options>().extend({
     right: Boolean,
     showArrows: Boolean,
     sliderColor: String,
+    sliderSize: {
+      type: [Number, String],
+      default: 2,
+    },
     vertical: Boolean,
   },
 
@@ -167,11 +171,11 @@ export default baseMixins.extend<options>().extend({
         const el = activeTab.$el as HTMLElement
 
         this.slider = {
-          height: this.vertical ? el.offsetHeight : 2,
+          height: !this.vertical ? Number(this.sliderSize) : el.scrollHeight,
           left: this.vertical ? 0 : el.offsetLeft,
           right: this.vertical ? 0 : el.offsetLeft + el.offsetWidth,
           top: el.offsetTop,
-          width: this.vertical ? 2 : el.scrollWidth,
+          width: this.vertical ? Number(this.sliderSize) : el.scrollWidth,
         }
       })
 

@@ -76,7 +76,7 @@ export default RegistrableProvide('form').extend({
     },
     /** @public */
     validate (): boolean {
-      return this.inputs.every(input => input.validate(true))
+      return this.inputs.filter(input => !input.validate(true)).length === 0
     },
     /** @public */
     reset (): void {
