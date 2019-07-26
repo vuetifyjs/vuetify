@@ -102,7 +102,7 @@ export default Vue.extend({
       if (
         computedIPPO.length > 0 &&
         !computedIPPO.find(ippo => ippo.value === value)
-      ) value = this.computedItemsPerPageOptions[0]
+      ) value = computedIPPO[0]
 
       return this.$createElement('div', {
         staticClass: 'v-data-footer__select',
@@ -114,7 +114,7 @@ export default Vue.extend({
           },
           props: {
             disabled: this.disableItemsPerPage,
-            items: this.computedItemsPerPageOptions,
+            items: computedIPPO,
             value,
             hideDetails: true,
             auto: true,
