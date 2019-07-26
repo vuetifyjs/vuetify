@@ -6,5 +6,11 @@ module.exports = {
         value: 'void',
       },
     ],
+    slots: [
+      {
+        name: 'progress',
+        props: undefined,
+      },
+    ],
   },
 }

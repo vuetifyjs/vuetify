@@ -162,6 +162,10 @@ const textFieldSlots = [
     props: undefined,
   },
   {
+    name: 'progress',
+    props: undefined,
+  },
+  {
     name: 'prepend-inner',
     props: undefined,
   },
@@ -206,10 +210,6 @@ const VSelect = {
     },
     {
       name: 'no-data',
-      props: undefined,
-    },
-    {
-      name: 'progress',
       props: undefined,
     },
     {
@@ -316,6 +316,10 @@ const VSlider = {
     {
       name: 'prepend',
       source: 'v-input',
+    },
+    {
+      name: 'progress',
+      props: undefined,
     },
     {
       name: 'thumb-label',
