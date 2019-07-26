@@ -183,7 +183,7 @@ describe('Theme.ts', () => {
     expect(ssrContext.head).toMatchSnapshot()
   })
 
-  it('should add fake child element for nuxt ssr support', () => {
+  it('should add fake child element for vue-meta with ssr support', () => {
     const theme = new Theme(mock)
     ;(instance as any).$meta = {}
     instance.$isServer = true
