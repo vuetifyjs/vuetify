@@ -99,20 +99,21 @@
   align-self: flex-start
   margin: 16px 0
 
+// https://github.com/vuetifyjs/vuetify/issues/7930
+.v-list-item__action,
+.v-list-item__avatar,
+.v-list-item__icon
+  &:last-of-type:not(:only-child)
+    margin-left: 16px
+
 .v-list-item__avatar
   &:first-child
     margin-right: 24px
-
-  &:last-child:not(:only-child)
-    margin-left: 16px
 
 .v-list-item__action,
 .v-list-item__icon
   &:first-child
     margin-right: 32px
-
-  &:last-of-type:not(:only-child)
-    margin-left: 16px
 
 .v-list-item__action,
 .v-list-item__avatar,
