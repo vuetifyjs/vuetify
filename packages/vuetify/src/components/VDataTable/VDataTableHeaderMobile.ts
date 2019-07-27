@@ -37,14 +37,16 @@ export default mixins(header).extend({
       }, children)
     },
     genSortSelect () {
+      const sortHeaders = this.headers.filter(h => h.sortable !== false && h.value !== 'data-table-select')
+
       return this.$createElement(VSelect, {
         props: {
           label: 'Sort by',
-          items: this.headers.filter(h => h.value !== 'data-table-select'),
+          items: sortHeaders,
           hideDetails: true,
           multiple: this.options.multiSort,
           value: this.options.multiSort ? this.options.sortBy : this.options.sortBy[0],
-          disabled: this.disableSort,
+          disabled: sortHeaders.length === 0 || this.disableSort,
         },
         on: {
           change: (v: string | string[]) => this.$emit('sort', v),
