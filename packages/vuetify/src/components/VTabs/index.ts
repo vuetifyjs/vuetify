@@ -3,9 +3,8 @@ import VTab from './VTab'
 import VTabsItems from './VTabsItems'
 import VTabItem from './VTabItem'
 import VTabsSlider from './VTabsSlider'
-import VTabsBar from './VTabsBar'
 
-export { VTabs, VTab, VTabItem, VTabsItems, VTabsSlider, VTabsBar }
+export { VTabs, VTab, VTabItem, VTabsItems, VTabsSlider }
 
 export default {
   $_vuetify_subcomponents: {
@@ -14,6 +13,5 @@ export default {
     VTabsItems,
     VTabItem,
     VTabsSlider,
-    VTabsBar,
   },
 }
