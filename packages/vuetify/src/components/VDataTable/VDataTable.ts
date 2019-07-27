@@ -260,7 +260,9 @@ export default VDataIterator.extend({
       return children
     },
     genEmptyWrapper (content: VNodeChildrenArrayContents) {
-      return this.$createElement('tr', [
+      return this.$createElement('tr', {
+        staticClass: 'v-data-table__empty-wrapper',
+      }, [
         this.$createElement('td', {
           attrs: {
             colspan: this.computedHeadersLength,
