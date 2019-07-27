@@ -18,7 +18,7 @@
     "Automatic treeshaking with the [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader)",
     "Extensive component API",
     "SSR, PWA and Mobile App Support",
-    "vue-cli-3 Support",
+    "Vue CLI 3 Support",
     "Accessibility **(a11y)** Support",
     "Internationalization **(i18n)** Support",
     "RTL **(bidirectionality)** Support",

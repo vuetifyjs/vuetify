@@ -1,5 +1,5 @@
 {
-  "headerText": "Vuetify propose à la fois des thèmes **gratuits** et **premium** conçus à l'avance pour vous aider à démarrer rapidement. Des thèmes gratuits sont disponibles pour l'installation via vue-cli ou vous pouvez simplement télécharger le code source.",
+  "headerText": "Vuetify propose à la fois des thèmes **gratuits** et **premium** conçus à l'avance pour vous aider à démarrer rapidement. Des thèmes gratuits sont disponibles pour l'installation via Vue CLI 3 ou vous pouvez simplement télécharger le code source.",
   "buy": "Informations et démos",
   "free": "Gratuit",
   "live": "Aperçu en direct",
@@ -9,7 +9,7 @@
   "templates": {
     "alpha": {
       "title": "Thème Alpha",
-      "description": "Une expérience avec les thèmes complète comprenant vue-cli amélioré, une documentation complète, 5 composants personnalisés et bien plus encore !"
+      "description": "Une expérience avec les thèmes complète comprenant Vue CLI 3 amélioré, une documentation complète, 5 composants personnalisés et bien plus encore !"
     },
     "dashboard": {
       "title": "Tableau de bord Material",

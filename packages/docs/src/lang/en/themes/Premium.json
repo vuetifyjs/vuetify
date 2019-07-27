@@ -1,6 +1,6 @@
 {
   "header": "# Premium & free themes",
-  "headerText": "Vuetify offers both **free** and **premium** pre-made themes designed to get you started in a flash. Free themes are available to install through vue-cli or you can simply download the source.",
+  "headerText": "Vuetify offers both **free** and **premium** pre-made themes designed to get you started in a flash. Free themes are available to install through Vue CLI 3 or you can simply download the source.",
   "buy": "Information and Demos",
   "free": "Free",
   "live": "Live Preview",
@@ -10,7 +10,7 @@
   "templates": {
     "alpha": {
       "title": "Alpha Theme",
-      "description": "Complete theme experience including enhanced vue-cli, full documentation, 5 custom components and much more!"
+      "description": "Complete theme experience including enhanced Vue CLI 3, full documentation, 5 custom components and much more!"
     },
     "dashboard": {
       "title": "Material Dashboard",
@@ -22,7 +22,7 @@
     },
     "material-kit": {
       "title": "Material Kit",
-      "description": "A complete set of Material Inspired themes built with Vuetify on top of vue-cli-3."
+      "description": "A complete set of Material Inspired themes built with Vuetify on top of Vue CLI 3."
     },
     "parallax": {
       "title": "Parallax",
