@@ -182,6 +182,7 @@ describe('VFileInput.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  // https://github.com/vuetifyjs/vuetify/issues/8049
   it('should render without icon', () => {
     const wrapper = mountFunction({
       propsData: {
