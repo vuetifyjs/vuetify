@@ -47,9 +47,14 @@
   height: $tabs-bar-height
 
   // https://github.com/vuetifyjs/vuetify/issues/6932
-  &.v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows)
-    > .v-slide-group__wrapper > .v-tabs-bar__content > .v-tab:first-of-type
+  &.v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows) > .v-slide-group__wrapper > .v-tabs-bar__content
+    & > .v-tab:first-child,
+    & > .v-tabs-slider-wrapper + .v-tab
       margin-left: $tabs-item-mobile-no-arrows-margin
+
+      +rtl()
+        margin-left: 0
+        margin-right: $tabs-item-mobile-no-arrows-margin
 
   &.v-item-group > *
     cursor: initial
@@ -103,9 +108,14 @@
     transition: $primary-transition
 
 // Modifier
-.v-tabs--align-with-title > .v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows)
-  > .v-slide-group__wrapper > .v-tabs-bar__content > .v-tab:first-of-type
+.v-tabs--align-with-title > .v-tabs-bar--is-mobile:not(.v-tabs-bar--show-arrows) > .v-slide-group__wrapper > .v-tabs-bar__content
+  & > .v-tab:first-child,
+  & > .v-tabs-slider-wrapper + .v-tab
     margin-left: $tabs-item-align-with-title-margin
+
+    +rtl()
+      margin-left: 0
+      margin-right: $tabs-item-align-with-title-margin
 
 .v-tabs--fixed-tabs,
 .v-tabs--centered
@@ -158,10 +168,18 @@
 .v-tabs--right
   .v-tab:first-child,
   .v-tabs-slider-wrapper + .v-tab
-    margin-left: auto
+    +ltr()
+      margin-left: auto
+
+    +rtl()
+      margin-right: auto
 
   .v-tab:last-child
-    margin-right: 0
+    +ltr()
+      margin-right: 0
+
+    +rtl()
+      margin-left: 0
 
 .v-tabs--vertical
   display: flex
