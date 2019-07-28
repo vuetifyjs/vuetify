@@ -80,7 +80,6 @@
           </v-toolbar>
 
           <v-layout
-            row
             pb-2
           >
             <v-flex
@@ -156,7 +155,6 @@
       </core-title>
       <core-section>
         <v-layout
-          row
           wrap
         >
           <v-flex
@@ -302,10 +300,10 @@
 
     data: () => ({
       bars: [
-        { 'class': '' },
-        { 'class': '', dark: true },
-        { 'class': 'primary', dark: true },
-        { 'class': 'elevation-0' },
+        { class: '' },
+        { class: '', dark: true },
+        { class: 'primary', dark: true },
+        { class: 'elevation-0' },
       ],
       items: [
         'All', 'Family', 'Friends', 'Coworkers',

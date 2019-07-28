@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-layout row wrap justify-space-around>
+    <v-layout wrap justify-space-around>
       <v-switch v-model="extended" class="mx-2" label="Extended"></v-switch>
       <v-switch v-model="extendedSlot" class="mx-2" label="Extension slot"></v-switch>
       <v-switch v-model="prominent" class="mx-2" label="Prominent"></v-switch>

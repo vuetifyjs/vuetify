@@ -268,7 +268,7 @@ describe('VDataTable.ts', () => {
         itemsPerPage: 5,
       },
       scopedSlots: {
-        'item': props => vm.$createElement('div', [JSON.stringify(props)]),
+        item: props => vm.$createElement('div', [JSON.stringify(props)]),
       },
     })
 

@@ -1,5 +1,4 @@
 {
-  "header": "Button",
   "headerText": "O componente `v-btn` substitui o tema do botão html padrão pelo material design com grande variedade de opções. Qualquer classe de ajuda de cor pode ser usada para alterar a cor do fundo ou texto.",
   "examples": {
     "flat": {
@@ -16,11 +15,9 @@
     },
     "dropdown": {
       "header": "Variantes de Botão com Menu Suspenso",
-      "desc": "Os botões com menu suspenso são seleções normais com estilo adicional.",
-      "uninverted": true
+      "desc": "Os botões com menu suspenso são seleções normais com estilo adicional."
     },
     "icon": {
-      "header": "Ícone",
       "desc": "Ícones podem ser usados para o contúdo principal de um botão."
     },
     "floating": {
@@ -40,7 +37,6 @@
       "desc": "Botões com contorno herdam suas bordas da cor atual aplicada."
     },
     "round": {
-      "header": "Arredondado",
       "desc": "Botões arredondados comportam da mesma maneira que botões comuns, mas possuem cantos arredondadas."
     },
     "block": {
@@ -50,19 +46,7 @@
   },
   "props": {
     "v-btn": {
-      "block": "Expande o botão para 100% do espaço disponível",
-      "depressed": "Remove a sombra do botão",
-      "fab": "Torna o bottão redondo",
-      "flat": "Remove a cor de fundo do botão",
-      "icon": "Designa o botão como ícone - redondo e plano",
-      "inputValue": "Controla o estado ativo do botão",
-      "large": "Botão de tamanho grande",
-      "loading": "Adiciona uma animação de ícone de carregamento",
-      "outline": "O botão terá um contorno",
-      "outlined": "O botão terá um contorno",
-      "round": "O botão terá cantos arredondados",
-      "small": "Botão de tamanho pequeno",
-      "type": "Define o tipo do botão"
+      "loading": "Adiciona uma animação de ícone de carregamento"
     }
   }
 }

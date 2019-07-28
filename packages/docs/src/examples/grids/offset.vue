@@ -1,6 +1,6 @@
 <template>
   <v-container grid-list-xl text-center>
-    <v-layout row wrap>
+    <v-layout wrap>
       <v-flex xs10 offset-xs1>
         <v-card dark color="purple">
           <v-card-text>xs10 offset-xs1</v-card-text>

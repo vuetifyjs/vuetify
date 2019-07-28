@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-layout row wrap>
+    <v-layout wrap>
       <v-flex xs12>
         <h3 ref="radio" class="headline">Target</h3>
         <v-radio-group v-model="type" row>

@@ -3,7 +3,6 @@
     <v-layout
       flex
       justify-space-between
-      row
       wrap
     >
       <v-flex xs12>

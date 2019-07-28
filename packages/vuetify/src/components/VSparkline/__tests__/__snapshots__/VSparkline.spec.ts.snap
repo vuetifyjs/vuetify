@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VSparkline.ts should position labels correctly 1`] = `
-
 <svg display="block"
      stroke-width="20"
      viewbox="0 0 300 85.5"
@@ -47,11 +46,9 @@ exports[`VSparkline.ts should position labels correctly 1`] = `
   >
   </path>
 </svg>
-
 `;
 
 exports[`VSparkline.ts should render component and match a snapshot 1`] = `
-
 <svg display="block"
      stroke-width="4"
      viewbox="0 0 300 75"
@@ -77,11 +74,9 @@ exports[`VSparkline.ts should render component and match a snapshot 1`] = `
   >
   </path>
 </svg>
-
 `;
 
 exports[`VSparkline.ts should render component with bars and auto-line-width and match a snapshot 1`] = `
-
 <svg display="block"
      viewbox="0 0 300 75"
 >
@@ -135,11 +130,9 @@ exports[`VSparkline.ts should render component with bars and auto-line-width and
     </rect>
   </g>
 </svg>
-
 `;
 
 exports[`VSparkline.ts should render component with bars and auto-line-width with custom padding and match a snapshot 1`] = `
-
 <svg display="block"
      viewbox="0 0 300 75"
 >
@@ -193,11 +186,9 @@ exports[`VSparkline.ts should render component with bars and auto-line-width wit
     </rect>
   </g>
 </svg>
-
 `;
 
 exports[`VSparkline.ts should render component with bars and correct bar lengths 1`] = `
-
 <svg display="block"
      viewbox="0 0 300 75"
 >
@@ -243,11 +234,9 @@ exports[`VSparkline.ts should render component with bars and correct bar lengths
     </rect>
   </g>
 </svg>
-
 `;
 
 exports[`VSparkline.ts should render component with bars and correct bar lengths 2`] = `
-
 <svg display="block"
      viewbox="0 0 300 75"
 >
@@ -293,11 +282,9 @@ exports[`VSparkline.ts should render component with bars and correct bar lengths
     </rect>
   </g>
 </svg>
-
 `;
 
 exports[`VSparkline.ts should render component with bars and custom label size and match a snapshot 1`] = `
-
 <svg display="block"
      viewbox="0 0 300 97.5"
 >
@@ -371,11 +358,9 @@ exports[`VSparkline.ts should render component with bars and custom label size a
     </rect>
   </g>
 </svg>
-
 `;
 
 exports[`VSparkline.ts should render component with bars and custom padding and match a snapshot 1`] = `
-
 <svg display="block"
      viewbox="0 0 300 75"
 >
@@ -429,11 +414,9 @@ exports[`VSparkline.ts should render component with bars and custom padding and 
     </rect>
   </g>
 </svg>
-
 `;
 
 exports[`VSparkline.ts should render component with bars and gradient and match a snapshot 1`] = `
-
 <svg display="block"
      viewbox="0 0 300 75"
 >
@@ -495,11 +478,9 @@ exports[`VSparkline.ts should render component with bars and gradient and match 
     </rect>
   </g>
 </svg>
-
 `;
 
 exports[`VSparkline.ts should render component with bars and labels and match a snapshot 1`] = `
-
 <svg display="block"
      viewbox="0 0 300 85.5"
 >
@@ -573,11 +554,9 @@ exports[`VSparkline.ts should render component with bars and labels and match a 
     </rect>
   </g>
 </svg>
-
 `;
 
 exports[`VSparkline.ts should render component with bars and line width and match a snapshot 1`] = `
-
 <svg display="block"
      viewbox="0 0 300 75"
 >
@@ -631,11 +610,9 @@ exports[`VSparkline.ts should render component with bars and line width and matc
     </rect>
   </g>
 </svg>
-
 `;
 
 exports[`VSparkline.ts should render component with bars and match a snapshot 1`] = `
-
 <svg display="block"
      viewbox="0 0 300 75"
 >
@@ -689,11 +666,9 @@ exports[`VSparkline.ts should render component with bars and match a snapshot 1`
     </rect>
   </g>
 </svg>
-
 `;
 
 exports[`VSparkline.ts should render component with bars and negative and match a snapshot 1`] = `
-
 <svg display="block"
      viewbox="0 0 300 75"
 >
@@ -755,11 +730,9 @@ exports[`VSparkline.ts should render component with bars and negative and match 
     </rect>
   </g>
 </svg>
-
 `;
 
 exports[`VSparkline.ts should render component with gradient and match a snapshot 1`] = `
-
 <svg display="block"
      stroke-width="4"
      viewbox="0 0 300 75"
@@ -793,11 +766,9 @@ exports[`VSparkline.ts should render component with gradient and match a snapsho
   >
   </path>
 </svg>
-
 `;
 
 exports[`VSparkline.ts should render component with label size and match a snapshot 1`] = `
-
 <svg display="block"
      stroke-width="4"
      viewbox="0 0 300 96"
@@ -843,11 +814,9 @@ exports[`VSparkline.ts should render component with label size and match a snaps
   >
   </path>
 </svg>
-
 `;
 
 exports[`VSparkline.ts should render component with line width and match a snapshot 1`] = `
-
 <svg display="block"
      stroke-width="42"
      viewbox="0 0 300 75"
@@ -873,11 +842,9 @@ exports[`VSparkline.ts should render component with line width and match a snaps
   >
   </path>
 </svg>
-
 `;
 
 exports[`VSparkline.ts should render component with padding and match a snapshot 1`] = `
-
 <svg display="block"
      stroke-width="4"
      viewbox="0 0 300 75"
@@ -903,11 +870,9 @@ exports[`VSparkline.ts should render component with padding and match a snapshot
   >
   </path>
 </svg>
-
 `;
 
 exports[`VSparkline.ts should render component with string labels and match a snapshot 1`] = `
-
 <svg display="block"
      stroke-width="4"
      viewbox="0 0 300 85.5"
@@ -953,11 +918,9 @@ exports[`VSparkline.ts should render component with string labels and match a sn
   >
   </path>
 </svg>
-
 `;
 
 exports[`VSparkline.ts should render component with string labels and match a snapshot 2`] = `
-
 <svg display="block"
      stroke-width="4"
      viewbox="0 0 300 85.5"
@@ -1003,11 +966,9 @@ exports[`VSparkline.ts should render component with string labels and match a sn
   >
   </path>
 </svg>
-
 `;
 
 exports[`VSparkline.ts should render component with string labels and match a snapshot 3`] = `
-
 <svg display="block"
      stroke-width="4"
      viewbox="0 0 300 85.5"
@@ -1053,11 +1014,9 @@ exports[`VSparkline.ts should render component with string labels and match a sn
   >
   </path>
 </svg>
-
 `;
 
 exports[`VSparkline.ts should render component with trend and equal values and match a snapshot 1`] = `
-
 <svg display="block"
      stroke-width="4"
      viewbox="0 0 300 75"
@@ -1083,11 +1042,9 @@ exports[`VSparkline.ts should render component with trend and equal values and m
   >
   </path>
 </svg>
-
 `;
 
 exports[`VSparkline.ts should render smooth component and match a snapshot 1`] = `
-
 <svg display="block"
      stroke-width="4"
      viewbox="0 0 300 75"
@@ -1113,5 +1070,4 @@ exports[`VSparkline.ts should render smooth component and match a snapshot 1`] =
   >
   </path>
 </svg>
-
 `;

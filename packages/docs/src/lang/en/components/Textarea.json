@@ -67,6 +67,7 @@
     "click:clear": "Components.TextFields.events['click:clear']",
     "click:prepend": "Components.Inputs.events['click:prepend']",
     "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
+    "keydown": "Emitted when the **enter** key is pressed, textarea must be focused",
     "update:error": "Mixins.Validatable.events['update:error']"
   }
 }

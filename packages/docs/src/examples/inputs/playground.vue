@@ -1,6 +1,6 @@
 <template>
   <v-layout column>
-    <v-layout row wrap justify-space-around>
+    <v-layout wrap justify-space-around>
       <v-flex xs12>
         <v-slider v-model="errorCount" label="Max error count" min="0" max="4"></v-slider>
       </v-flex>
@@ -9,7 +9,7 @@
       <v-switch v-model="hideDetails" class="ma-2" label="Hide details"></v-switch>
       <v-switch v-model="persistentHint" class="ma-2" label="Persistent hint"></v-switch>
       <v-flex xs12>
-        <v-layout row wrap justify-space-around>
+        <v-layout wrap justify-space-around>
           <v-btn color="success" @click="success = true; error = false;">Success</v-btn>
           <v-btn color="error" @click="success = false; error = true;">Error</v-btn>
         </v-layout>

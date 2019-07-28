@@ -30,7 +30,7 @@
       "noResultsText": "Text shown when `search` prop is used and there are no results",
       "singleExpand": "Changes expansion mode to single expand",
       "singleSelect": "Changes selection mode to single select",
-      "value": "Used for selection"
+      "value": "Used for controlling selected rows"
     },
     "v-data-footer": {
       "disableItemsPerPage": "Disables items-per-page dropdown",

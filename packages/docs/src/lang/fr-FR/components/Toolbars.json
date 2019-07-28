@@ -3,5 +3,8 @@
     "variations": {
       "uninverted": true
     }
+  },
+  "props": {
+    "bottom": "Mixins.Positionable.props.bottom"
   }
 }

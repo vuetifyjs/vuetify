@@ -1,8 +1,6 @@
 {
-  "header": "Avatar",
   "examples": {
     "advanced": {
-      "header": "Uso avançado",
       "desc": "Combinar um avatar com outros componentes permite que você crie belíssimas interfaces de usuário."
     }
   }

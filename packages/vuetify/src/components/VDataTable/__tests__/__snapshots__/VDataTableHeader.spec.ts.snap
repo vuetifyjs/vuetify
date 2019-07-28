@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VDataTableHeader.ts desktop should render 1`] = `
-
 <thead class="v-data-table-header">
   <tr>
     <th role="columnheader"
@@ -96,11 +95,9 @@ exports[`VDataTableHeader.ts desktop should render 1`] = `
     </th>
   </tr>
 </thead>
-
 `;
 
 exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
-
 <thead class="v-data-table-header">
   <tr>
     <th role="columnheader"
@@ -198,11 +195,9 @@ exports[`VDataTableHeader.ts desktop should work with multiSort 1`] = `
     </th>
   </tr>
 </thead>
-
 `;
 
 exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
-
 <thead class="v-data-table-header">
   <tr>
     <th role="columnheader"
@@ -315,11 +310,9 @@ exports[`VDataTableHeader.ts desktop should work with showGroupBy 1`] = `
     </th>
   </tr>
 </thead>
-
 `;
 
 exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
-
 <thead class="v-data-table-header">
   <tr>
     <th role="columnheader"
@@ -414,11 +407,9 @@ exports[`VDataTableHeader.ts desktop should work with sortBy correctly 1`] = `
     </th>
   </tr>
 </thead>
-
 `;
 
 exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
-
 <thead class="v-data-table-header">
   <tr>
     <th role="columnheader"
@@ -513,11 +504,9 @@ exports[`VDataTableHeader.ts desktop should work with sortDesc correctly 1`] = `
     </th>
   </tr>
 </thead>
-
 `;
 
 exports[`VDataTableHeader.ts mobile should render 1`] = `
-
 <thead class="v-data-table-header v-data-table-header-mobile">
   <tr>
     <th colspan="6">
@@ -567,11 +556,9 @@ exports[`VDataTableHeader.ts mobile should render 1`] = `
     </th>
   </tr>
 </thead>
-
 `;
 
 exports[`VDataTableHeader.ts mobile should render with data-table-select header 1`] = `
-
 <thead class="v-data-table-header v-data-table-header-mobile">
   <tr>
     <th colspan="7">
@@ -632,11 +619,9 @@ exports[`VDataTableHeader.ts mobile should render with data-table-select header 
     </th>
   </tr>
 </thead>
-
 `;
 
 exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
-
 <thead class="v-data-table-header v-data-table-header-mobile">
   <tr>
     <th colspan="6">
@@ -699,11 +684,9 @@ exports[`VDataTableHeader.ts mobile should work with multiSort 1`] = `
     </th>
   </tr>
 </thead>
-
 `;
 
 exports[`VDataTableHeader.ts mobile should work with showGroupBy 1`] = `
-
 <thead class="v-data-table-header v-data-table-header-mobile">
   <tr>
     <th colspan="6">
@@ -753,11 +736,9 @@ exports[`VDataTableHeader.ts mobile should work with showGroupBy 1`] = `
     </th>
   </tr>
 </thead>
-
 `;
 
 exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
-
 <thead class="v-data-table-header v-data-table-header-mobile">
   <tr>
     <th colspan="6">
@@ -820,11 +801,9 @@ exports[`VDataTableHeader.ts mobile should work with sortBy correctly 1`] = `
     </th>
   </tr>
 </thead>
-
 `;
 
 exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
-
 <thead class="v-data-table-header v-data-table-header-mobile">
   <tr>
     <th colspan="6">
@@ -887,5 +866,4 @@ exports[`VDataTableHeader.ts mobile should work with sortDesc correctly 1`] = `
     </th>
   </tr>
 </thead>
-
 `;

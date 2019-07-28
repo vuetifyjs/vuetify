@@ -1,6 +1,6 @@
 <template>
   <v-container fluid grid-list-sm>
-    <v-layout row wrap>
+    <v-layout wrap>
       <v-flex d-flex xs12 order-xs5>
         <v-layout column>
           <v-flex d-flex>
@@ -16,14 +16,14 @@
         </v-layout>
       </v-flex>
       <v-flex d-flex xs12 sm7>
-        <v-layout row wrap>
+        <v-layout wrap>
           <v-flex d-flex>
             <v-card color="indigo lighten-2" dark tile flat>
               <v-card-text>{{ lorem.slice(0, 70) }}</v-card-text>
             </v-card>
           </v-flex>
           <v-flex d-flex>
-            <v-layout row>
+            <v-layout>
               <v-flex
                 v-for="n in 2"
                 :key="n"

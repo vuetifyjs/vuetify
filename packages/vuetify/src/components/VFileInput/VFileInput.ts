@@ -160,11 +160,11 @@ export default VTextField.extend({
       return [this.genSelections(), input]
     },
     genPrependSlot () {
+      if (!this.prependIcon) return null
+
       const icon = this.genIcon('prepend', () => {
         this.$refs.input.click()
       })
-
-      icon.data!.attrs = { tabindex: 0 }
 
       return this.genSlot('prepend', 'outer', [icon])
     },
@@ -206,7 +206,7 @@ export default VTextField.extend({
       }, children)
     },
     onInput (e: Event) {
-      const files = [...(e.target as HTMLInputElement).files]
+      const files = [...(e.target as HTMLInputElement).files || []]
 
       this.internalValue = this.isMultiple ? files : files[0]
     },

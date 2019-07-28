@@ -1,1 +1,35 @@
-{}
+{
+  "headerText": "`v-autoompalty` 组件提供简单灵活的输入提示功能。当搜索大量数据甚至从API中动态请求信息时是十分有用的。",
+  "examples": {
+    "usage": {
+      "desc": "自动完成组件扩展了`v-select`并为其增加了过滤项目的能力。"
+    },
+    "api": {
+      "header": "### 搜索 API"
+    },
+    "customFilter": {
+      "desc": "prop`filter`可以用来过滤每个项目，并带有自定义逻辑。在这个例子中，我们按名称过滤项目"
+    }
+  },
+  "props": {
+    "value": "Components.Inputs.props.value"
+  },
+  "slots": {
+    "append": "Components.Inputs.slots.append",
+    "append-item": "Components.Selects.slots.append-item",
+    "append-outer": "Components.TextFields.slots.append-outer",
+    "no-data": "Mixins.Filterable.slots.noData",
+    "prepend": "Components.Inputs.slots.prepend",
+    "prepend-inner": "Components.TextFields.slots.prepend-inner",
+    "prepend-item": "Components.Selects.slots.prepend-item"
+  },
+  "events": {
+    "change": "Components.Inputs.events.change",
+    "click:append": "Components.Inputs.events['click:append']",
+    "click:append-outer": "Components.TextFields.events['click:append-outer']",
+    "click:clear": "Components.TextFields.events['click:clear']",
+    "click:prepend": "Components.Inputs.events['click:prepend']",
+    "click:prepend-inner": "Components.TextFields.events['click:prepend-inner']",
+    "update:error": "Mixins.Validatable.events['update:error']"
+  }
+}

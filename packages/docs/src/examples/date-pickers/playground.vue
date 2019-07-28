@@ -1,7 +1,7 @@
 <template>
-  <v-layout row wrap justify-space-around>
+  <v-layout wrap justify-space-around>
     <v-flex xs12>
-      <v-layout row wrap justify-space-around>
+      <v-layout wrap justify-space-around>
         <v-switch v-model="landscape" class="ma-4" label="Landscape"></v-switch>
         <v-switch v-model="reactive" class="ma-4" label="Reactive"></v-switch>
         <v-switch v-model="fullWidth" class="ma-4" label="Full width"></v-switch>

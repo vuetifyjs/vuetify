@@ -1,6 +1,6 @@
 const deepmerge = require('../helpers/merge')
 const { DataDefaultScopedSlotProps, DataOptions } = require('./v-data')
-const { DataIteratorEvents, DataIteratorProps, DataIteratorItemScopedProps } = require('./v-data-iterator')
+const { DataIteratorEvents, DataIteratorProps, DataIteratorSlots, DataIteratorItemScopedProps } = require('./v-data-iterator')
 const { DataFooterPageTextScopedProps } = require('./v-data-footer')
 
 const TableHeader = {
@@ -11,8 +11,8 @@ const TableHeader = {
   'divider?': 'boolean',
   'class?': 'string | string[]',
   'width?': 'string | number',
-  'filter?': '(value: any, search: string, item: any): boolean',
-  'sort?': '(a: any, b: any): number',
+  'filter?': '(value: any, search: string, item: any) => boolean',
+  'sort?': '(a: any, b: any) => number',
 }
 
 const DataTableEvents = [
@@ -66,6 +66,7 @@ const DataTableExpandedItemScopedProps = {
 }
 
 const DataTableSlots = [
+  { name: 'body.append', props: DataDefaultScopedSlotProps },
   { name: 'body.prepend', props: DataDefaultScopedSlotProps },
   { name: 'body', props: DataDefaultScopedSlotProps },
   { name: 'footer', props: DataDefaultScopedSlotProps },
@@ -95,10 +96,10 @@ module.exports = {
       },
       {
         name: 'customFilter',
-        default: '(value: any, search: string | null, item: any): boolean',
+        default: '(value: any, search: string | null, item: any) => boolean',
       },
     ]),
-    slots: DataTableSlots,
+    slots: deepmerge(DataTableSlots, DataIteratorSlots),
     events: DataTableEvents,
   },
   TableHeader,

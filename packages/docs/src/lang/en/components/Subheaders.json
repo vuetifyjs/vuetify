@@ -23,6 +23,6 @@
     }
   },
   "props": {
-    "inset": "Adds identation (72px)"
+    "inset": "Adds indentation (72px)"
   }
 }

@@ -7,7 +7,7 @@
   "createTranslation": "## Create a translation",
   "createTranslationText": "To create your own translation, use the code below or copy and rename the file `vuetify/src/locale/en.ts` to your project and make your changes.",
   "customComponents": "## Custom components",
-  "customComponentsText": "If you are building custom Vuetify components that need to hook into the internationalization engine, you can use the `t` function which exists both directly on the `$vuetify` object and on `$vuetify.lang`.",
+  "customComponentsText": "If you are building custom Vuetify components that need to hook into the internationalization engine, you can use the `t` function which is part of the `$vuetify.lang` API.",
   "api": {
     "current": "Current locale",
     "locales": "Available locales",

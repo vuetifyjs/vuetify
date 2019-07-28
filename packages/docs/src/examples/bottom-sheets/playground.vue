@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <v-layout row wrap justify-space-around>
+    <v-layout wrap justify-space-around>
       <v-switch v-model="sheet" label="Model"></v-switch>
       <v-switch v-model="inset" label="Inset"></v-switch>
       <v-switch v-model="hideOverlay" label="Hide overlay"></v-switch>

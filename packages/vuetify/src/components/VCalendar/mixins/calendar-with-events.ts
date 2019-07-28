@@ -364,19 +364,19 @@ export default CalendarBase.extend({
       }
 
       const getOffset: VEventVisualGetOffset = (visual, visuals) => {
-        let offset = indexToOffset[ visual.event.index ]
+        let offset = indexToOffset[visual.event.index]
         if (offset === -1) {
           let min = Number.MAX_SAFE_INTEGER
           let max = -1
           visuals.forEach(other => {
-            const otherOffset = indexToOffset[ other.event.index ]
+            const otherOffset = indexToOffset[other.event.index]
             if (otherOffset !== -1) {
               min = Math.min(min, otherOffset)
               max = Math.max(max, otherOffset)
             }
           })
           offset = min > 0 && max !== -1 ? min - 1 : max + 1
-          indexToOffset[ visual.event.index ] = offset
+          indexToOffset[visual.event.index] = offset
         }
         return offset
       }
@@ -409,9 +409,9 @@ export default CalendarBase.extend({
           visuals.forEach(visual => {
             if (visual.columnCount === -1) {
               visuals.forEach(other => {
-                const otherOffset = indexToOffset[ other.event.index ]
+                const otherOffset = indexToOffset[other.event.index]
                 if (otherOffset !== -1 && other.event.endTimestampIdentifier <= visual.event.startTimestampIdentifier) {
-                  indexToOffset[ other.event.index ] = -1
+                  indexToOffset[other.event.index] = -1
                 }
               })
               visual.offset = getOffset(visual, visuals)

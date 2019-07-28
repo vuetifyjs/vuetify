@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VTreeView.ts should filter items 1`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="false"
        class="v-treeview-node v-treeview-node--leaf"
@@ -26,11 +25,9 @@ exports[`VTreeView.ts should filter items 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should filter items 2`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="false"
        class="v-treeview-node v-treeview-node--leaf v-treeview-node--excluded"
@@ -55,11 +52,9 @@ exports[`VTreeView.ts should filter items 2`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should filter items using custom item filter 1`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="false"
        class="v-treeview-node v-treeview-node--leaf v-treeview-node--excluded"
@@ -84,11 +79,9 @@ exports[`VTreeView.ts should filter items using custom item filter 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should filter items using custom item filter 2`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="false"
        class="v-treeview-node v-treeview-node--leaf"
@@ -113,11 +106,9 @@ exports[`VTreeView.ts should filter items using custom item filter 2`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should handle replacing items with new array of equal length 1`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="false"
        class="v-treeview-node v-treeview-node--leaf"
@@ -142,11 +133,9 @@ exports[`VTreeView.ts should handle replacing items with new array of equal leng
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should handle replacing items with new array of equal length 2`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="false"
        class="v-treeview-node v-treeview-node--leaf"
@@ -171,11 +160,9 @@ exports[`VTreeView.ts should handle replacing items with new array of equal leng
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should load children when expanding 1`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="false"
        class="v-treeview-node"
@@ -194,11 +181,9 @@ exports[`VTreeView.ts should load children when expanding 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should load children when expanding 2`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="true"
        class="v-treeview-node"
@@ -230,11 +215,9 @@ exports[`VTreeView.ts should load children when expanding 2`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should load children when selecting, but not render 1`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="false"
        class="v-treeview-node"
@@ -258,11 +241,9 @@ exports[`VTreeView.ts should load children when selecting, but not render 1`] = 
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should load children when selecting, but not render 2`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="false"
        class="v-treeview-node v-treeview-node--selected"
@@ -286,11 +267,9 @@ exports[`VTreeView.ts should load children when selecting, but not render 2`] = 
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should not show expand icon when children is empty 1`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="false"
        class="v-treeview-node v-treeview-node--leaf"
@@ -303,11 +282,9 @@ exports[`VTreeView.ts should not show expand icon when children is empty 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should open all children when using open-all prop 1`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="true"
        class="v-treeview-node"
@@ -368,11 +345,9 @@ exports[`VTreeView.ts should open all children when using open-all prop 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should react to open changes 1`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="true"
        class="v-treeview-node"
@@ -433,11 +408,9 @@ exports[`VTreeView.ts should react to open changes 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should react to open changes 2`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="true"
        class="v-treeview-node"
@@ -485,11 +458,9 @@ exports[`VTreeView.ts should react to open changes 2`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should react to open changes 3`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="true"
        class="v-treeview-node"
@@ -550,11 +521,9 @@ exports[`VTreeView.ts should react to open changes 3`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should react to open changes 4`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="false"
        class="v-treeview-node"
@@ -573,11 +542,9 @@ exports[`VTreeView.ts should react to open changes 4`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should recalculate tree when loading async children using custom key 1`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="true"
        class="v-treeview-node"
@@ -609,11 +576,9 @@ exports[`VTreeView.ts should recalculate tree when loading async children using 
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should remove old nodes 1`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="false"
        class="v-treeview-node v-treeview-node--leaf"
@@ -638,11 +603,9 @@ exports[`VTreeView.ts should remove old nodes 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should remove old nodes 2`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="false"
        class="v-treeview-node v-treeview-node--leaf"
@@ -656,11 +619,9 @@ exports[`VTreeView.ts should remove old nodes 2`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should remove old nodes 3`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="false"
        class="v-treeview-node v-treeview-node--leaf"
@@ -685,11 +646,9 @@ exports[`VTreeView.ts should remove old nodes 3`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should render items 1`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="false"
        class="v-treeview-node"
@@ -708,11 +667,9 @@ exports[`VTreeView.ts should render items 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should render items in dense mode 1`] = `
-
 <div class="v-treeview v-treeview--dense theme--light">
   <div aria-expanded="false"
        class="v-treeview-node"
@@ -731,11 +688,9 @@ exports[`VTreeView.ts should render items in dense mode 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should select all leaf nodes 1`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="false"
        class="v-treeview-node v-treeview-node--selected"
@@ -759,11 +714,9 @@ exports[`VTreeView.ts should select all leaf nodes 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should select only leaf nodes 1`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="true"
        class="v-treeview-node"
@@ -826,11 +779,9 @@ exports[`VTreeView.ts should select only leaf nodes 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should select only root node 1`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="false"
        class="v-treeview-node v-treeview-node--selected"
@@ -854,11 +805,9 @@ exports[`VTreeView.ts should select only root node 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should show expand icon when children is empty and load-children prop used 1`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="false"
        class="v-treeview-node"
@@ -876,11 +825,9 @@ exports[`VTreeView.ts should show expand icon when children is empty and load-ch
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should update selection when selected prop changes 1`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="false"
        class="v-treeview-node"
@@ -904,11 +851,9 @@ exports[`VTreeView.ts should update selection when selected prop changes 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should update selection when selected prop changes 2`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="true"
        class="v-treeview-node v-treeview-node--selected"
@@ -950,11 +895,9 @@ exports[`VTreeView.ts should update selection when selected prop changes 2`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeView.ts should update selection when selected prop changes 3`] = `
-
 <div class="v-treeview theme--light">
   <div aria-expanded="true"
        class="v-treeview-node"
@@ -996,5 +939,4 @@ exports[`VTreeView.ts should update selection when selected prop changes 3`] = `
     </div>
   </div>
 </div>
-
 `;

@@ -1,5 +1,11 @@
 module.exports = {
   'v-rating': {
+    events: [
+      {
+        name: 'input',
+        value: 'Number',
+      },
+    ],
     slots: [{
       name: 'item',
       props: {

@@ -65,6 +65,14 @@
           "lang": "sfcText1"
         },
         {
+          "type": "text",
+          "lang": "sfcText2"
+        },
+        {
+          "type": "text",
+          "lang": "sfcText3"
+        },
+        {
           "type": "markup",
           "value": "js_vue_config_sass_loader_config"
         }

@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VCalendarDaily should render component and have v-calendar-daily class 1`] = `
-
 <div class="v-calendar-daily theme--light">
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
@@ -973,11 +972,9 @@ exports[`VCalendarDaily should render component and have v-calendar-daily class 
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VCalendarDaily should render correctly with firstInterval prop 1`] = `
-
 <div class="v-calendar-daily theme--light">
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
@@ -1948,11 +1945,9 @@ exports[`VCalendarDaily should render correctly with firstInterval prop 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VCalendarDaily should render correctly with intervalCount prop 1`] = `
-
 <div class="v-calendar-daily theme--light">
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
@@ -2504,11 +2499,9 @@ exports[`VCalendarDaily should render correctly with intervalCount prop 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VCalendarDaily should render correctly with intervalHeight prop 1`] = `
-
 <div class="v-calendar-daily theme--light">
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
@@ -3480,11 +3473,9 @@ exports[`VCalendarDaily should render correctly with intervalHeight prop 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VCalendarDaily should render correctly with intervalMinutes prop 1`] = `
-
 <div class="v-calendar-daily theme--light">
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
@@ -4440,11 +4431,9 @@ exports[`VCalendarDaily should render correctly with intervalMinutes prop 1`] = 
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VCalendarDaily should render correctly with maxDays prop 1`] = `
-
 <div class="v-calendar-daily theme--light">
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
@@ -5192,7 +5181,6 @@ exports[`VCalendarDaily should render correctly with maxDays prop 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VCalendarDaily should render correctly without shortIntervals prop 1`] = `
@@ -6172,7 +6160,6 @@ exports[`VCalendarDaily should render correctly without shortIntervals prop 1`] 
 `;
 
 exports[`VCalendarDaily should use custom interval formatter and render correctly 1`] = `
-
 <div class="v-calendar-daily theme--light">
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
@@ -7144,11 +7131,9 @@ exports[`VCalendarDaily should use custom interval formatter and render correctl
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VCalendarDaily should use custom interval style function and render correctly 1`] = `
-
 <div class="v-calendar-daily theme--light">
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
@@ -8120,11 +8105,9 @@ exports[`VCalendarDaily should use custom interval style function and render cor
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VCalendarDaily should use custom showIntervalLabel function and render correctly 1`] = `
-
 <div class="v-calendar-daily theme--light">
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
@@ -9085,5 +9068,4 @@ exports[`VCalendarDaily should use custom showIntervalLabel function and render 
     </div>
   </div>
 </div>
-
 `;

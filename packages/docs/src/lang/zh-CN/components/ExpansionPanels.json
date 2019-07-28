@@ -1,11 +1,10 @@
 {
-  "header": "扩展面板",
   "headerText": "`v-expansion-panel`组件对于减少大量信息的垂直空间非常有用。该组件的默认功能是一次仅显示一个展开面板主题。但是使用`expandable`属性后，扩展面板会保持打开状态，直到被显式关闭。",
   "examples": {
     "disabled": {
       "header": "禁用"
     },
-    "customIcons": {
+    "custom-icons": {
       "header": "Custom icon",
       "desc": "Expand action icon can be customized with `expand-icon` prop."
     },

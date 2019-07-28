@@ -1,5 +1,5 @@
 <template>
-  <v-layout row wrap>
+  <v-layout wrap>
     <v-flex
       v-for="(bar, i) in bars"
       :key="i"
@@ -32,10 +32,10 @@
   export default {
     data: () => ({
       bars: [
-        { 'class': '' },
-        { 'class': '', dark: true },
-        { 'class': 'primary', dark: true },
-        { 'class': 'elevation-0' },
+        { class: '' },
+        { class: '', dark: true },
+        { class: 'primary', dark: true },
+        { class: 'elevation-0' },
       ],
     }),
   }

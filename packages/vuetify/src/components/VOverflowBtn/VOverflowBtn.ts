@@ -17,8 +17,8 @@ export default VAutocomplete.extend({
   name: 'v-overflow-btn',
 
   props: {
-    segmented: Boolean,
     editable: Boolean,
+    segmented: Boolean,
   },
 
   computed: {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-layout row wrap justify-space-around>
+    <v-layout wrap justify-space-around>
       <v-switch v-model="chips" label="Chips"></v-switch>
       <v-switch v-model="multiple" label="Multiple"></v-switch>
       <v-switch v-model="hideSelected" label="Hide selected"></v-switch>

@@ -1,5 +1,4 @@
 {
-  "header": "Select",
   "headerText": "Los componentes _select fields_ son utilizados para recolectar información provista por el usuario de una lista de opciones.",
   "examples": {
     "light": {
@@ -14,9 +13,12 @@
       "header": "Múltiple",
       "desc": "Un multi-select puede utilizar `v-chip` para mostrar los elementos seleccionados."
     },
-    "customTextAndValue": {
+    "custom-text-and-value": {
       "header": "Texto y valor del elemento personalizado",
       "desc": "Puedes especificar las propiedades dentro de tu arreglo de elementos que correspondan a los campos texto y valor (_text_ y _value_). En este ejemplo también usamos la prop `return-object` que retornará el objeto entero del elemento seleccionado."
+    },
+    "disabled": {
+      "header": "Deshabilitado"
     }
   },
   "props": {
@@ -29,16 +31,15 @@
     "dense": "Reduce la altura máxima de los elementos de la lista",
     "disabled": "Deshabilita el input",
     "editable": " Crea un botón editable- [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
-    "filter": "La función utilizada para filtrar los elementos",
+    "filter": "La función que se utiliza para filtrar los elementos.",
     "hideSelected": "No mostrar elementos en las opciones que ya hayan sido seleccionados",
     "itemDisabled": "Determina si el elemento está deshabilitado",
-    "itemText": "Configura el texto del elemento",
-    "itemValue": "Configura el valor del elemento",
     "items": "Puede ser un arreglo de objetos o un arreglo de strings. Cuando se usan objetos, buscará por campos _text_ y _field_. Esto puede cambiarse usando las props `item-text` y `item-value`",
+    "itemText": "Configura el texto del elemento",
     "minWidth": "Mixins.Menuable.props.minWidth",
     "multiple": "Cambia a múltiple. Acepta un arreglo.",
     "multiLine": "Hace que la etiqueta flote cuando el componente se enfoca o su valor cambia (_dirty_)",
-    "noDataText": "Texto a mostrar cuando no hay datos",
+    "noDataText": "El texto a mostrar cuando no hay datos.",
     "openOnClear": "Cuando se usa la prop `clearable` y ha sido _limpiado_, el menu del select se abrirá o permanecerá abierto, dependiendo del estado actual",
     "overflow": "Crea un botón _overflow_ - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "returnObject": "Cambia el comportamiento al seleccionar para que regrese un objeto directamente en lugar del valor especificado con **item-value**",

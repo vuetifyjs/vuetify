@@ -26,7 +26,6 @@
       pa-2
     >
       <v-layout
-        row
         wrap
       >
         <v-flex

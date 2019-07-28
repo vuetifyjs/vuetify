@@ -9,26 +9,41 @@ export class Breakpoint extends Service {
 
   // Public
   public xs = false
+
   public sm = false
+
   public md = false
+
   public lg = false
+
   public xl = false
 
   public xsOnly = false
+
   public smOnly = false
+
   public smAndDown = false
+
   public smAndUp = false
+
   public mdOnly = false
+
   public mdAndDown = false
+
   public mdAndUp = false
+
   public lgOnly = false
+
   public lgAndDown = false
+
   public lgAndUp = false
+
   public xlOnly = false
 
   public name = ''
 
   public height = 0
+
   public width = 0
 
   public thresholds = {
@@ -37,6 +52,7 @@ export class Breakpoint extends Service {
     md: 1280,
     lg: 1920,
   }
+
   public scrollbarWidth = 16
 
   private resizeTimeout = 0

@@ -2,7 +2,7 @@
   <div>
     <v-responsive
       :max-width="$vuetify.breakpoint.lgAndUp ? '60%' : '100%'"
-      class="left mb-12"
+      class="float-left mb-12"
     >
       <doc-heading>subHeader</doc-heading>
       <doc-markdown>subText1</doc-markdown>
@@ -12,7 +12,7 @@
     </v-responsive>
 
     <v-img
-      class="right hidden-md-and-down"
+      class="float-right hidden-md-and-down"
       src="https://cdn.vuetifyjs.com/images/affiliates/vuetify-tidelift.png"
       max-width="35%"
     />

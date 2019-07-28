@@ -1,7 +1,7 @@
 <template>
   <v-form>
-    <v-container>
-      <v-layout row wrap>
+    <v-container grid-list-xl>
+      <v-layout wrap>
 
         <v-flex xs12 sm6>
 

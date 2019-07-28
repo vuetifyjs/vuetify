@@ -5,7 +5,6 @@
   >
     <v-layout
       justify-center
-      row
       wrap
     >
       <v-btn

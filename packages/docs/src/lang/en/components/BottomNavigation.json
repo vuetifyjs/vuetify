@@ -49,6 +49,6 @@
   },
   "events": {
     "change": "The value of currently selected button. If no value is assigne, will be the current index of the button.",
-    "update:inputValue": "The event used for `input-value.sync`."
+    "update:input-value": "The event used for `input-value.sync`."
   }
 }
