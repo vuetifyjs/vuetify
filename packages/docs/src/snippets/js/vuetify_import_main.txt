@@ -1,5 +1,5 @@
 // src/index.js
 
-import './assets/stylus/main.styl'
+import './src/sass/main.scss'
 // OR
-require('./assets/stylus/main.styl')
+require('./src/sass/main.scss')

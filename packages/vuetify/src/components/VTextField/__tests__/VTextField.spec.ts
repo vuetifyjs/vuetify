@@ -55,18 +55,6 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     expect(keyup).toHaveBeenCalled()
   })
 
-  it('should render aria-label attribute on text field element with label value and no id', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        label: 'Test',
-      },
-      attrs: {},
-    })
-
-    const inputGroup = wrapper.findAll('input').at(0)
-    expect(inputGroup.element.getAttribute('aria-label')).toBe('Test')
-  })
-
   it('should not render aria-label attribute on text field element with no label value or id', () => {
     const wrapper = mountFunction({
       propsData: {
@@ -567,18 +555,6 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     expect(wrapper.vm.badInput).toBe(true)
   })
 
-  it('should set input autocomplete attr', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        browserAutocomplete: 'off',
-      },
-    })
-
-    const input = wrapper.find('input')
-
-    expect(input.element.autocomplete).toBe('off')
-  })
-
   it('should not apply id to root element', () => {
     const wrapper = mountFunction({
       attrs: { id: 'foo' },
@@ -605,7 +581,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     expect(change).toHaveBeenCalledTimes(2)
   })
 
-  it('should have focus and blur methods', () => {
+  it('should have focus and blur methods', async () => {
     const wrapper = mountFunction()
     const focus = jest.fn()
     const blur = jest.fn()
@@ -616,6 +592,12 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     expect(focus).toHaveBeenCalledTimes(1)
 
     wrapper.vm.blur()
+
+    // https://github.com/vuetifyjs/vuetify/issues/5913
+    // Blur waits a requestAnimationFrame
+    // to resolve a bug in MAC / Safari
+    await new Promise(resolve => window.requestAnimationFrame(resolve))
+
     expect(blur).toHaveBeenCalledTimes(1)
   })
 

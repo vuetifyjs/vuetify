@@ -19,10 +19,10 @@ export default mixins(header).extend({
       children.push(this.$createElement('div', {
         staticClass: 'v-chip__close',
         class: {
-          'sortable': true,
-          'active': beingSorted,
-          'asc': beingSorted && !isDesc,
-          'desc': beingSorted && isDesc,
+          sortable: true,
+          active: beingSorted,
+          asc: beingSorted && !isDesc,
+          desc: beingSorted && isDesc,
         },
       }, [this.genSortIcon()]))
 
@@ -44,6 +44,7 @@ export default mixins(header).extend({
           hideDetails: true,
           multiple: this.options.multiSort,
           value: this.options.multiSort ? this.options.sortBy : this.options.sortBy[0],
+          disabled: this.disableSort,
         },
         on: {
           change: (v: string | string[]) => this.$emit('sort', v),

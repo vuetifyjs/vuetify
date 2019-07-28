@@ -1,15 +1,15 @@
 <template>
-  <div class="grey lighten-5 pa-3">
+  <div class="grey lighten-5 pa-4">
     <v-alert
       v-model="show"
       v-bind="localAttrs"
       :dismissible="dismissible"
       :type="type"
-      class="mb-3"
+      class="mb-4"
     >
       This is a {{ type }} alert.
     </v-alert>
-    <div class="text-xs-center">
+    <div class="text-center">
       <v-btn
         v-if="!show"
         color="primary"

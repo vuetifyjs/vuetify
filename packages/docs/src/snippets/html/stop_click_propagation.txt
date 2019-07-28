@@ -1,7 +1,21 @@
-<v-dialog v-model="dialog">
-  <v-card>...</v-card>
-</v-dialog>
+<!-- Vue Component -->
 
-<v-btn @click.stop="dialog = true">
-  Open Dialog
-</v-btn>
+<template>
+  <div>
+    <v-dialog v-model="dialog">
+      <v-card>...</v-card>
+    </v-dialog>
+
+    <v-btn @click.stop="dialog = true">
+      Open Dialog
+    </v-btn>
+  </div>
+</template>
+
+<script>
+  export default {
+    data: () => ({
+      dialog: false,
+    }),
+  }
+</script>

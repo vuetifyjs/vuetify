@@ -29,4 +29,11 @@ export default {
     prev: '이전 화면',
     next: '다음 화면',
   },
+  calendar: {
+    moreEvents: '{0} 더보기',
+  },
+  fileInput: {
+    counter: '{0} files',
+    counterSize: '{0} files ({1} in total)',
+  },
 }

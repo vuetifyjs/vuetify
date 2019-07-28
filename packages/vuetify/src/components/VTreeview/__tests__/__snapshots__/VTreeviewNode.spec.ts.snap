@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VTreeViewNode.ts should generate a transition element 1`] = `
-
 <div aria-expanded="false"
      class="v-treeview-node v-treeview-node--leaf"
 >
@@ -14,11 +13,34 @@ exports[`VTreeViewNode.ts should generate a transition element 1`] = `
     </div>
   </div>
 </div>
+`;
 
+exports[`VTreeViewNode.ts should render disabled item 1`] = `
+<div aria-expanded="false"
+     class="v-treeview-node v-treeview-node--disabled"
+>
+  <div class="v-treeview-node__root">
+    <i role="button"
+       class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
+    >
+      arrow_drop_down
+    </i>
+    <div class="v-treeview-node__content">
+      <div>
+        foobar
+      </div>
+      <div class="v-treeview-node__label">
+        Root
+      </div>
+      <div>
+        foobar
+      </div>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`VTreeViewNode.ts should use label slot 1`] = `
-
 <div aria-expanded="false"
      class="v-treeview-node"
 >
@@ -26,7 +48,7 @@ exports[`VTreeViewNode.ts should use label slot 1`] = `
        class="v-treeview-node__root"
   >
     <i role="button"
-       class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light"
+       class="v-icon notranslate v-treeview-node__toggle v-icon--link material-icons theme--light"
     >
       arrow_drop_down
     </i>
@@ -39,11 +61,9 @@ exports[`VTreeViewNode.ts should use label slot 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VTreeViewNode.ts should use scoped slots 1`] = `
-
 <div aria-expanded="false"
      class="v-treeview-node v-treeview-node--leaf"
 >
@@ -62,5 +82,4 @@ exports[`VTreeViewNode.ts should use scoped slots 1`] = `
     </div>
   </div>
 </div>
-
 `;

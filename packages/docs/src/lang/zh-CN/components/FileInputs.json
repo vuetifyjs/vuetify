@@ -1,0 +1,16 @@
+{
+  "examples": {
+    "multiple": {
+      "header": "多选"
+    },
+    "custom-icon": {
+      "header": "自定义图标"
+    },
+    "validation": {
+      "header": "验证"
+    }
+  },
+  "events": {
+    "change": "Components.Inputs.events.change"
+  }
+}

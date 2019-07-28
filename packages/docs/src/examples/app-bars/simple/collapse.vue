@@ -1,5 +1,5 @@
 <template>
-  <v-card class="hide-overflow">
+  <v-card class="overflow-hidden">
     <v-app-bar
       :collapse="!collapseOnScroll"
       :collapse-on-scroll="collapseOnScroll"
@@ -22,7 +22,7 @@
     </v-app-bar>
     <v-sheet
       id="scrolling-techniques-6"
-      class="scroll-y"
+      class="overflow-y-auto"
       max-height="600"
     >
       <v-container style="height: 1000px;"></v-container>

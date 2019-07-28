@@ -7,7 +7,7 @@ import VBtn from '../VBtn'
 
 // Types
 import Vue, { VNode, VNodeChildrenArrayContents } from 'vue'
-import { DataOptions, DataPaginaton } from '../VData/VData'
+import { DataOptions, DataPagination } from '../VData/VData'
 import { PropValidator } from 'vue/types/options'
 
 export default Vue.extend({
@@ -21,7 +21,7 @@ export default Vue.extend({
     pagination: {
       type: Object,
       required: true,
-    } as PropValidator<DataPaginaton>,
+    } as PropValidator<DataPagination>,
     itemsPerPageOptions: {
       type: Array,
       default: () => ([5, 10, 15, -1]),
@@ -144,11 +144,11 @@ export default Vue.extend({
 
         children = this.$scopedSlots['page-text']
           ? [this.$scopedSlots['page-text']!({ pageStart, pageStop, itemsLength })]
-          : [`${pageStart}-${pageStop} of ${itemsLength}`]
+          : [this.$vuetify.lang.t('$vuetify.dataIterator.pageText', pageStart, pageStop, itemsLength)]
       }
 
       return this.$createElement('div', {
-        'class': 'v-data-footer__pagination',
+        class: 'v-data-footer__pagination',
       }, children)
     },
     genIcon (click: Function, disabled: boolean, label: string, icon: string): VNode {

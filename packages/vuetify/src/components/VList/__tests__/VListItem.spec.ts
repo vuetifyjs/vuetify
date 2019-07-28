@@ -160,7 +160,6 @@ describe('VListItem.ts', () => {
     })
 
     expect(wrapper.element.getAttribute('aria-disabled')).toBe('true')
-    expect(wrapper.element.getAttribute('aria-selected')).toBe('false')
     expect(wrapper.element.tabIndex).toBe(-1)
 
     wrapper.setProps({
@@ -169,7 +168,6 @@ describe('VListItem.ts', () => {
     })
 
     expect(wrapper.element.getAttribute('aria-disabled')).toBeNull()
-    expect(wrapper.element.getAttribute('aria-selected')).toBe('true')
     expect(wrapper.element.tabIndex).toBe(-1)
 
     wrapper.setProps({ link: true })
@@ -184,23 +182,34 @@ describe('VListItem.ts', () => {
     })
     expect(wrapper.element.getAttribute('role')).toBe('item')
 
-    // In list-item-group
+    // In nav
     const wrapper2 = mountFunction({
-      provide: {
-        listItemGroup: {
-          register: () => {},
-          unregister: () => {},
-        },
-      },
+      provide: { isInNav: true },
     })
-    expect(wrapper2.element.getAttribute('role')).toBe('listitem')
+    expect(wrapper2.element.getAttribute('role')).toBeNull()
+
+    // In list-item-group
+    const wrapper3 = mountFunction({
+      provide: { isInGroup: true },
+    })
+    expect(wrapper3.element.getAttribute('role')).toBe('listitem')
 
     // In menu
-    const wrapper3 = mountFunction({
+    const wrapper4 = mountFunction({
       provide: { isInMenu: true },
     })
-    expect(wrapper3.element.getAttribute('role')).toBeNull()
-    wrapper3.setProps({ href: '#' }) // could be `to` or `link` as well
-    expect(wrapper3.element.getAttribute('role')).toBe('menuitem')
+    expect(wrapper4.element.getAttribute('role')).toBeNull()
+    wrapper4.setProps({ href: '#' }) // could be `to` or `link` as well
+    expect(wrapper4.element.getAttribute('role')).toBe('menuitem')
+
+    // In list not a link
+    const wrapper5 = mountFunction({
+      provide: { isInList: true },
+    })
+    expect(wrapper5.element.getAttribute('role')).toBe('listitem')
+
+    // In list link
+    wrapper5.setProps({ link: true })
+    expect(wrapper5.element.getAttribute('role')).toBeNull()
   })
 })

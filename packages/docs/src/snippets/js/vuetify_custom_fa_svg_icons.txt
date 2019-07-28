@@ -2,6 +2,7 @@
 
 import Vue from 'vue'
 import Vuetify from 'vuetify/lib'
+
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faBars } from '@fortawesome/pro-light-svg-icons'
@@ -19,16 +20,16 @@ export default new Vuetify({
       menu: {
         component: FontAwesomeIcon,
         props: {
-          icon: ['fal', 'bars']
-        }
+          icon: ['fal', 'bars'],
+        },
       },
       // reusable custom icon
       vuejs: {
         component: FontAwesomeIcon,
         props: {
-          icon: ['fab', 'vuejs']
-        }
-      }
-    }
-  }
+          icon: ['fab', 'vuejs'],
+        },
+      },
+    },
+  },
 })

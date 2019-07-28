@@ -15,12 +15,12 @@
     </v-card-title>
     <v-layout
       align-center
-      px-3
+      px-4
       grey--text
     >
       <v-avatar
         size="24"
-        class="mr-3"
+        class="mr-4"
       >
         <v-img src="https://cdn.vuetifyjs.com/images/weather/part-cloud-48px.png" contain></v-img>
       </v-avatar>
@@ -28,7 +28,7 @@
       <span>81° / 62°</span>
     </v-layout>
 
-    <v-divider class="mt-4 mx-3"></v-divider>
+    <v-divider class="mt-6 mx-4"></v-divider>
 
     <v-card-text>
       <v-chip

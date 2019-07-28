@@ -27,9 +27,9 @@ export default VSelect.extend({
       type: Boolean,
       default: true,
     },
-    browserAutocomplete: {
-      type: String,
-      default: 'off',
+    autoSelectFirst: {
+      type: Boolean,
+      default: false,
     },
     filter: {
       type: Function,
@@ -38,18 +38,14 @@ export default VSelect.extend({
       },
     },
     hideNoData: Boolean,
-    noFilter: Boolean,
-    searchInput: {
-      type: String as PropType<string | undefined>,
-      default: undefined,
-    },
     menuProps: {
       type: VSelect.options.props.menuProps.type,
       default: () => defaultMenuProps,
     },
-    autoSelectFirst: {
-      type: Boolean,
-      default: false,
+    noFilter: Boolean,
+    searchInput: {
+      type: String as PropType<string | undefined>,
+      default: undefined,
     },
   },
 
@@ -95,7 +91,7 @@ export default VSelect.extend({
       set (val: any) {
         this.lazySearch = val
 
-        this.$emit('update:searchInput', val)
+        this.$emit('update:search-input', val)
       },
     },
     isAnyValueAllowed (): boolean {
@@ -202,8 +198,17 @@ export default VSelect.extend({
       // for duplicate items? no idea
       if (val === oldVal) return
 
+      this.setMenuIndex(-1)
+
       this.$nextTick(() => {
-        this.setMenuIndex(val.length > 0 && (val.length === 1 || this.autoSelectFirst) ? 0 : -1)
+        if (
+          !this.internalSearch ||
+          (val.length !== 1 &&
+            !this.autoSelectFirst)
+        ) return
+
+        this.$refs.menu.getTiles()
+        this.setMenuIndex(0)
       })
     },
     onInternalSearchChanged () {
@@ -329,6 +334,7 @@ export default VSelect.extend({
       // proper location
       this.changeSelectedIndex(keyCode)
     },
+    onSpaceDown (e: KeyboardEvent) { /* noop */ },
     onTabDown (e: KeyboardEvent) {
       VSelect.options.methods.onTabDown.call(this, e)
       this.updateSelf()

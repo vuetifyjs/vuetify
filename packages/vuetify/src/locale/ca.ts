@@ -29,4 +29,11 @@ export default {
     prev: 'Visualització prèvia',
     next: 'Següent visual',
   },
+  calendar: {
+    moreEvents: '{0} més',
+  },
+  fileInput: {
+    counter: '{0} files',
+    counterSize: '{0} files ({1} in total)',
+  },
 }

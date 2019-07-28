@@ -1,0 +1,37 @@
+@import '../../styles/styles.sass'
+
++theme(v-file-input) using ($material)
+  .v-file-input__text
+    color: map-deep-get($material, 'text', 'primary')
+
+    &--placeholder
+      color: map-deep-get($material, 'text', 'secondary')
+
+// Block
+.v-file-input
+  input[type="file"]
+    opacity: 0
+    max-width: 0
+    width: 0
+
+// Element
+.v-file-input .v-file-input__text
+  align-items: center
+  align-self: stretch
+  display: flex
+  flex-wrap: wrap
+  width: 100%
+
+  &.v-file-input__text--chips
+    flex-wrap: wrap
+
+  .v-chip
+    margin: 4px
+
+.v-file-input.v-text-field--filled:not(.v-text-field--single-line)
+  .v-file-input__text
+    padding-top: 22px
+
+.v-file-input.v-text-field--outlined
+  .v-text-field__slot
+    padding: 6px 0

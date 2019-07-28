@@ -1,0 +1,13 @@
+{
+  "examples": {
+    "multiple": {
+      "header": "Múltiple"
+    },
+    "custom-icon": {
+      "header": "Íconos personalizados"
+    },
+    "validation": {
+      "header": "Validación"
+    }
+  }
+}

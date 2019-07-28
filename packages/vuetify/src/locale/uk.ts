@@ -29,4 +29,11 @@ export default {
     prev: 'Попередній візуальний',
     next: 'Наступний візуальнийa',
   },
+  calendar: {
+    moreEvents: 'Ще {0}',
+  },
+  fileInput: {
+    counter: '{0} files',
+    counterSize: '{0} files ({1} in total)',
+  },
 }

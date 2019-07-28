@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VExpansionPanel should hide actions and match snapshot 1`] = `
-
 <div aria-expanded="false"
      class="v-expansion-panel"
 >
@@ -14,11 +13,9 @@ exports[`VExpansionPanel should hide actions and match snapshot 1`] = `
   >
   </div>
 </div>
-
 `;
 
 exports[`VExpansionPanel should hide actions and match snapshot 2`] = `
-
 <div aria-expanded="false"
      class="v-expansion-panel"
 >
@@ -27,7 +24,7 @@ exports[`VExpansionPanel should hide actions and match snapshot 2`] = `
   >
     <div class="v-expansion-panel-header__icon">
       <i aria-hidden="true"
-         class="v-icon material-icons theme--light"
+         class="v-icon notranslate material-icons theme--light"
       >
         $vuetify.icons.expand
       </i>
@@ -38,5 +35,4 @@ exports[`VExpansionPanel should hide actions and match snapshot 2`] = `
   >
   </div>
 </div>
-
 `;

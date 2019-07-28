@@ -1,32 +1,32 @@
-const { sharedGridProps } = require('../variables')
+const { sharedGridProps } = require('../helpers/variables')
 
 module.exports = {
   'v-layout': {
     props: [
       {
-        'name': 'row',
-        'type': 'Boolean',
-        'default': 'true',
-        'source': null
+        name: 'row',
+        type: 'boolean',
+        default: 'true',
+        source: null,
       },
       {
-        'name': 'column',
-        'type': 'Boolean',
-        'default': 'false',
-        'source': null
+        name: 'column',
+        type: 'boolean',
+        default: 'false',
+        source: null,
       },
       {
-        'name': 'reverse',
-        'type': 'Boolean',
-        'default': 'false',
-        'source': null
+        name: 'reverse',
+        type: 'boolean',
+        default: 'false',
+        source: null,
       },
       {
-        'name': 'wrap',
-        'type': 'Boolean',
-        'default': 'false',
-        'source': null
-      }
-    ].concat(sharedGridProps)
-  }
+        name: 'wrap',
+        type: 'boolean',
+        default: 'false',
+        source: null,
+      },
+    ].concat(sharedGridProps),
+  },
 }

@@ -63,6 +63,7 @@ describe('VSelect.ts', () => {
   it('should disable list items', () => {
     const wrapper = mountFunction({
       propsData: {
+        eager: true,
         items: [{
           text: 'item',
           disabled: true,
@@ -83,9 +84,9 @@ describe('VSelect.ts', () => {
         VListItem,
       },
     })
-    const itemSlot = ({ item, tile }) => vm.$createElement('v-list-item', {
-      on: tile.on,
-      props: tile.props,
+    const itemSlot = ({ item, attrs, on }) => vm.$createElement('v-list-item', {
+      on,
+      ...attrs,
       class: item.value % 2 === 0 ? '' : 'red lighten-1',
     }, [
       item.text,
@@ -287,6 +288,7 @@ describe('VSelect.ts', () => {
   it('should escape items in menu', async () => {
     const wrapper = mountFunction({
       propsData: {
+        eager: true,
         items: ['<strong>foo</strong>'],
       },
     })
@@ -415,6 +417,7 @@ describe('VSelect.ts', () => {
   it('should use slotted no-data', () => {
     const wrapper = mountFunction({
       propsData: {
+        eager: true,
         items: ['foo'],
       },
       slots: {

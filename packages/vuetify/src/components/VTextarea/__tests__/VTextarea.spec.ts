@@ -125,4 +125,22 @@ describe('VTextarea.ts', () => {
 
     expect(keydown).toHaveBeenCalled()
   })
+
+  it('should dynamically adjust row-height', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        autoGrow: true,
+      },
+    })
+
+    await new Promise(resolve => setTimeout(resolve, 0))
+
+    expect(wrapper.vm.$refs.input.style.height).toBe('120px')
+
+    wrapper.setProps({ rowHeight: 30 })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.$refs.input.style.height).toBe('150px')
+  })
 })

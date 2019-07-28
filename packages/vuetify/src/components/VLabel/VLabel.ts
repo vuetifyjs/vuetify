@@ -42,7 +42,7 @@ export default mixins(Themeable).extend({
     const { children, listeners, props } = ctx
     const data = {
       staticClass: 'v-label',
-      'class': {
+      class: {
         'v-label--active': props.value,
         'v-label--is-disabled': props.disabled,
         ...functionalThemeClasses(ctx),

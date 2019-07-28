@@ -1,11 +1,32 @@
 module.exports = {
   'v-alert': {
-    slots: ['default'],
+    slots: [
+      {
+        name: 'append',
+        props: undefined,
+      },
+      {
+        name: 'close',
+        props: {
+          toggle: 'Function',
+        },
+      },
+      {
+        name: 'prepend',
+        props: undefined,
+      },
+    ],
     events: [
       {
         name: 'input',
-        value: 'boolean'
-      }
-    ]
-  }
+        value: 'boolean',
+      },
+    ],
+    functions: [
+      {
+        name: 'toggle',
+        signature: '(): void',
+      },
+    ],
+  },
 }

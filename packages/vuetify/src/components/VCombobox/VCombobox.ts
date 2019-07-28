@@ -93,14 +93,16 @@ export default VAutocomplete.extend({
     onEnterDown (e: Event) {
       e.preventDefault()
 
-      // If has menu index, let v-select-list handle
-      if (this.getMenuIndex() > -1) return
-
-      this.updateSelf()
+      this.$nextTick(() => {
+        // If has menu index, let v-select-list handle
+        if (this.getMenuIndex() > -1) return
+        this.updateSelf()
+      })
     },
-    onFilteredItemsChanged () {
-      // noop - should not auto select so user can enter custom
-      // words that may loosely match items in the list
+    onFilteredItemsChanged (val: never[], oldVal: never[]) {
+      if (!this.autoSelectFirst) return
+
+      VAutocomplete.options.methods.onFilteredItemsChanged.call(this, val, oldVal)
     },
     onKeyDown (e: KeyboardEvent) {
       const keyCode = e.keyCode

@@ -8,7 +8,7 @@
         <v-btn
           v-for="t in types"
           :key="t"
-          class="my-3"
+          class="my-4"
           block
           @click="type = t"
         >{{ t }}</v-btn>
@@ -25,7 +25,7 @@
       >
         <v-sheet
           dark
-          class="pa-3"
+          class="pa-4"
         >
           <pre>{{ showColor }}</pre>
         </v-sheet>

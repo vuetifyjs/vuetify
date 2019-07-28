@@ -66,6 +66,7 @@ export default baseMixins.extend({
         attrs: {
           id: this.id,
           role: 'radiogroup',
+          'aria-labelledby': this.computedId,
         },
       }, VInput.options.methods.genDefaultSlot.call(this))
     },
@@ -75,6 +76,18 @@ export default baseMixins.extend({
       delete render.data!.on!.click
 
       return render
+    },
+    genLabel () {
+      const label = VInput.options.methods.genLabel.call(this)
+
+      if (!label) return null
+
+      label.data!.attrs!.id = this.computedId
+      // WAI considers this an orphaned label
+      delete label.data!.attrs!.for
+      label.tag = 'div'
+
+      return label
     },
     onClick: BaseItemGroup.options.methods.onClick,
   },

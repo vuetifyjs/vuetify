@@ -1,6 +1,6 @@
 <template>
-  <div class="hide-overflow">
-    <div class="text-xs-center mb-2">
+  <div class="overflow-hidden">
+    <div class="text-center mb-2">
       <v-btn
         text
         color="deep-purple"
@@ -13,8 +13,7 @@
     <v-bottom-navigation
       :input-value="showNav"
       :value="activeBtn"
-      color="deep-purple"
-      dark
+      color="indigo"
     >
       <v-btn>
         <span>Recents</span>

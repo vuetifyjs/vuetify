@@ -1,9 +1,9 @@
 {
-  "header": "# Expansion Panel",
+  "header": "# Expansion panels",
   "headerText": "The `v-expansion-panel` component is useful for reducing vertical space with large amounts of information. The default functionality of the component is to only display one expansion-panel body at a time; however, with the `multiple` property, the expansion-panel can remain open until explicitly closed.",
   "examples": {
     "usage": {
-      "desc": ""
+      "desc": "Expansion panels in their simplest form display a list of expandable items."
     },
     "external": {
       "header": "### External control",
@@ -39,7 +39,7 @@
     },
     "advanced": {
       "header": "### Advanced",
-      "desc": "The expansion panel component provides a rich playground to build truly advanced implementations. Here we take advantage of scoped slots in the `v-expansion-panel-header` component to react to the state of being open or closed by fading content in and out.",
+      "desc": "The expansion panel component provides a rich playground to build truly advanced implementations. Here we take advantage of slots in the `v-expansion-panel-header` component to react to the state of being open or closed by fading content in and out.",
       "uninverted": true
     }
   },
@@ -62,11 +62,23 @@
     "v-expansion-panel-header": {
       "disableIconRotate": "Removes the icon rotation animation when expanding a panel",
       "expandIcon": "Set the expand action icon",
-      "hideActions": "Hide the expand icon in the content header"
+      "hideActions": "Hide the expand icon in the content header",
+      "ripple": "Mixins.Rippleable.props.ripple"
+    }
+  },
+  "events": {
+    "v-expansion-panel": {
+      "change": "Toggles the value of the selected panel",
+      "click": "Mouse click event"
+    },
+    "v-expansion-panel-header": {
+      "click": "Mouse click event"
     }
   },
   "slots": {
-    "actions": "Expansion header actions",
-    "header": "Expansion header content"
+    "v-expansion-panel-header": {
+      "actions": "Expansion header actions",
+      "icon": "Slot for custom icon"
+    }
   }
 }

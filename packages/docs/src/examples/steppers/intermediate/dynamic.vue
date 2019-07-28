@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card class="mb-3">
+    <v-card class="mb-4">
       <v-card-text>
         <div>{{ typeof steps }}</div>
 
@@ -42,7 +42,7 @@
           :step="n"
         >
           <v-card
-            class="mb-5"
+            class="mb-12"
             color="grey lighten-1"
             height="200px"
           ></v-card>

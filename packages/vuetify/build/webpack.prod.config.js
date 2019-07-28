@@ -37,10 +37,11 @@ module.exports = merge(baseWebpackConfig, {
     ]
   },
   plugins: [
-    new ForkTsCheckerWebpackPlugin({
-      checkSyntacticErrors: true,
-      tsconfig: resolve('../tsconfig.json')
-    }),
+    // TODO: hangs build
+    // new ForkTsCheckerWebpackPlugin({
+    //   checkSyntacticErrors: true,
+    //   tsconfig: resolve('../tsconfig.json')
+    // }),
     new HappyPack({
       id: 'scripts',
       threadPool: happyThreadPool,

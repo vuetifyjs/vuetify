@@ -1,17 +1,17 @@
 <template>
   <div>
     <v-radio-group row wrap>
-      <v-switch v-model="alignTop" label="Toggle align-top" class="mx-3"></v-switch>
-      <v-switch v-model="dense" label="Toggle dense" class="mx-3"></v-switch>
-      <v-switch v-model="fillDot" label="Toggle fill-dot" class="mx-3"></v-switch>
-      <v-switch v-model="hideDot" label="Toggle hide-dot" class="mx-3"></v-switch>
-      <v-switch v-model="icon" label="Toggle icon" class="mx-3"></v-switch>
-      <v-switch v-model="avatar" label="Toggle avatar" class="mx-3"></v-switch>
-      <v-switch v-model="iconColor" label="Toggle icon color" class="mx-3"></v-switch>
-      <v-switch v-model="reverse" label="Toggle reverse" class="mx-3"></v-switch>
-      <v-switch v-model="left" label="Toggle left" class="mx-3"></v-switch>
-      <v-switch v-model="right" label="Toggle right" class="mx-3"></v-switch>
-      <v-switch v-model="small" label="Toggle small" class="mx-3"></v-switch>
+      <v-switch v-model="alignTop" label="Toggle align-top" class="mx-4"></v-switch>
+      <v-switch v-model="dense" label="Toggle dense" class="mx-4"></v-switch>
+      <v-switch v-model="fillDot" label="Toggle fill-dot" class="mx-4"></v-switch>
+      <v-switch v-model="hideDot" label="Toggle hide-dot" class="mx-4"></v-switch>
+      <v-switch v-model="icon" label="Toggle icon" class="mx-4"></v-switch>
+      <v-switch v-model="avatar" label="Toggle avatar" class="mx-4"></v-switch>
+      <v-switch v-model="iconColor" label="Toggle icon color" class="mx-4"></v-switch>
+      <v-switch v-model="reverse" label="Toggle reverse" class="mx-4"></v-switch>
+      <v-switch v-model="left" label="Toggle left" class="mx-4"></v-switch>
+      <v-switch v-model="right" label="Toggle right" class="mx-4"></v-switch>
+      <v-switch v-model="small" label="Toggle small" class="mx-4"></v-switch>
     </v-radio-group>
 
     <v-timeline

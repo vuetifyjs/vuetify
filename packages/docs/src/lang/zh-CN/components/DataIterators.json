@@ -1,4 +1,3 @@
 {
-  "header": "数据迭代器",
-  "headerText": "`v-data-iterator`组件用于显示数据，并将其大部分功能与`v-data-table`组件共享。功能包括排序、搜索、分页和选择。"
+  "header": "数据迭代器"
 }

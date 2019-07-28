@@ -1,8 +1,8 @@
 <template>
-  <v-layout wrap mb-5>
+  <v-layout wrap mb-12>
     <v-flex
       xs12
-      mb-5
+      mb-12
     >
       <v-autocomplete
         v-model="selected"
@@ -16,7 +16,7 @@
       >
         <template v-slot:selection="props">
           <v-chip
-            :selected="props.selected"
+            :value="props.selected"
             color="primary"
             class="white--text"
             label
@@ -33,7 +33,10 @@
             <v-icon v-text="props.item.icon" />
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title v-text="props.item.text" />
+            <v-list-item-title
+              :id="props.attrs['aria-labelledby']"
+              v-text="props.item.text"
+            />
             <v-list-item-subtitle v-text="props.item.subtext" />
           </v-list-item-content>
         </template>
@@ -42,15 +45,15 @@
     <v-flex
       v-if="!selected"
       xs12
-      text-xs-center
+      text-center
       grey--text
     >
-      <h3
+      <h2
         class="display-1"
         v-text="$t('Components.ApiExplorer.search')"
       />
       <div v-text="$t('Components.ApiExplorer.or')" />
-      <h3
+      <h2
         class="display-1"
         v-text="$t('Components.ApiExplorer.browseCategories')"
       />

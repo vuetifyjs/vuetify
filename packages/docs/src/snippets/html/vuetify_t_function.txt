@@ -1,3 +1,5 @@
+<!-- Vue Component -->
+
 <template>
   <div class="my-component">
     {{ $vuetify.t('$vuetify.my-component.text') }}

@@ -1,10 +1,56 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VSparkline.ts should render component and match a snapshot 1`] = `
+exports[`VSparkline.ts should position labels correctly 1`] = `
+<svg display="block"
+     stroke-width="20"
+     viewbox="0 0 300 85.5"
+     class="primary--text"
+>
+  <defs>
+    <linearGradient id="35"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="primary"
+      >
+      </stop>
+    </linearGradient>
+  </defs>
+  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
+    <text x="8"
+          y="76.25"
+          font-size="7"
+    >
+      1
+    </text>
+    <text x="150"
+          y="76.25"
+          font-size="7"
+    >
+      7
+    </text>
+    <text x="292"
+          y="76.25"
+          font-size="7"
+    >
+      42
+    </text>
+  </g>
+  <path id="35"
+        d="M8 66.99999L150 58.36585365853659S150 58.36585365853659 150 58.36585365853659L292 8.00001"
+        fill="none"
+        stroke="url(#35)"
+  >
+  </path>
+</svg>
+`;
 
-<svg stroke-width="4"
-     width="100%"
-     height="25%"
+exports[`VSparkline.ts should render component and match a snapshot 1`] = `
+<svg display="block"
+     stroke-width="4"
      viewbox="0 0 300 75"
      class="primary--text"
 >
@@ -22,23 +68,20 @@ exports[`VSparkline.ts should render component and match a snapshot 1`] = `
     </linearGradient>
   </defs>
   <path id="1"
-        d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
+        d="M8 66.99999L150 58.36585365853659S150 58.36585365853659 150 58.36585365853659L292 8.00001"
         fill="none"
         stroke="url(#1)"
   >
   </path>
 </svg>
-
 `;
 
 exports[`VSparkline.ts should render component with bars and auto-line-width and match a snapshot 1`] = `
-
-<svg width="100%"
-     height="25%"
+<svg display="block"
      viewbox="0 0 300 75"
 >
   <defs>
-    <linearGradient id="19"
+    <linearGradient id="21"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -50,35 +93,34 @@ exports[`VSparkline.ts should render component with bars and auto-line-width and
       </stop>
     </linearGradient>
   </defs>
-  <clipPath id="sparkline-bar-19-clip">
-    <rect x="8"
-          y="0"
+  <clipPath id="sparkline-bar-21-clip">
+    <rect x="5.333333333333336"
+          y="73.21428571428571"
           width="89.33333333333333"
-          height="1.3721030232558178"
+          height="1.7857142857142858"
           rx="0"
           ry="0"
     >
     </rect>
-    <rect x="105.33333333333333"
-          y="0"
+    <rect x="105.33333333333334"
+          y="62.5"
           width="89.33333333333333"
-          height="9.604651162790695"
+          height="12.5"
           rx="0"
           ry="0"
     >
     </rect>
-    <rect x="202.66666666666666"
+    <rect x="205.33333333333334"
           y="0"
           width="89.33333333333333"
-          height="57.62789697674418"
+          height="75"
           rx="0"
           ry="0"
     >
     </rect>
   </clipPath>
-  <g transform="scale(1,-1) translate(0,-67)"
-     clip-path="url(#sparkline-bar-19-clip)"
-     fill="url(#19)"
+  <g clip-path="url(#sparkline-bar-21-clip)"
+     fill="url(#21)"
   >
     <rect x="0"
           y="0"
@@ -88,73 +130,10 @@ exports[`VSparkline.ts should render component with bars and auto-line-width and
     </rect>
   </g>
 </svg>
-
 `;
 
 exports[`VSparkline.ts should render component with bars and auto-line-width with custom padding and match a snapshot 1`] = `
-
-<svg width="100%"
-     height="25%"
-     viewbox="0 0 300 75"
->
-  <defs>
-    <linearGradient id="25"
-                    x1="0"
-                    y1="1"
-                    x2="0"
-                    y2="0"
-    >
-      <stop offset="0"
-            stop-color="primary"
-      >
-      </stop>
-    </linearGradient>
-  </defs>
-  <clipPath id="sparkline-bar-25-clip">
-    <rect x="12"
-          y="0"
-          width="84"
-          height="1.1860565116279105"
-          rx="0"
-          ry="0"
-    >
-    </rect>
-    <rect x="108"
-          y="0"
-          width="84"
-          height="8.302325581395351"
-          rx="0"
-          ry="0"
-    >
-    </rect>
-    <rect x="204"
-          y="0"
-          width="84"
-          height="49.813943488372104"
-          rx="0"
-          ry="0"
-    >
-    </rect>
-  </clipPath>
-  <g transform="scale(1,-1) translate(0,-63)"
-     clip-path="url(#sparkline-bar-25-clip)"
-     fill="url(#25)"
-  >
-    <rect x="0"
-          y="0"
-          width="300"
-          height="75"
-    >
-    </rect>
-  </g>
-</svg>
-
-`;
-
-exports[`VSparkline.ts should render component with bars and custom label size and match a snapshot 1`] = `
-
-<svg width="100%"
-     height="25%"
+<svg display="block"
      viewbox="0 0 300 75"
 >
   <defs>
@@ -171,53 +150,32 @@ exports[`VSparkline.ts should render component with bars and custom label size a
     </linearGradient>
   </defs>
   <clipPath id="sparkline-bar-27-clip">
-    <rect x="48.666666666666664"
-          y="0"
-          width="4"
-          height="1.3721030232558178"
+    <rect x="8"
+          y="73.21428571428571"
+          width="84"
+          height="1.7857142857142858"
           rx="0"
           ry="0"
     >
     </rect>
-    <rect x="146"
-          y="0"
-          width="4"
-          height="9.604651162790695"
+    <rect x="108"
+          y="62.5"
+          width="84"
+          height="12.5"
           rx="0"
           ry="0"
     >
     </rect>
-    <rect x="243.33333333333331"
+    <rect x="208"
           y="0"
-          width="4"
-          height="57.62789697674418"
+          width="84"
+          height="75"
           rx="0"
           ry="0"
     >
     </rect>
   </clipPath>
-  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
-    <text x="50.666666666666664"
-          y="82"
-          font-size="15"
-    >
-      1
-    </text>
-    <text x="148"
-          y="82"
-          font-size="15"
-    >
-      7
-    </text>
-    <text x="245.33333333333331"
-          y="82"
-          font-size="15"
-    >
-      42
-    </text>
-  </g>
-  <g transform="scale(1,-1) translate(0,-67)"
-     clip-path="url(#sparkline-bar-27-clip)"
+  <g clip-path="url(#sparkline-bar-27-clip)"
      fill="url(#27)"
   >
     <rect x="0"
@@ -228,17 +186,14 @@ exports[`VSparkline.ts should render component with bars and custom label size a
     </rect>
   </g>
 </svg>
-
 `;
 
-exports[`VSparkline.ts should render component with bars and custom padding and match a snapshot 1`] = `
-
-<svg width="100%"
-     height="25%"
+exports[`VSparkline.ts should render component with bars and correct bar lengths 1`] = `
+<svg display="block"
      viewbox="0 0 300 75"
 >
   <defs>
-    <linearGradient id="23"
+    <linearGradient id="37"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -250,35 +205,26 @@ exports[`VSparkline.ts should render component with bars and custom padding and 
       </stop>
     </linearGradient>
   </defs>
-  <clipPath id="sparkline-bar-23-clip">
-    <rect x="48"
-          y="0"
+  <clipPath id="sparkline-bar-37-clip">
+    <rect x="73"
+          y="37.5"
           width="4"
-          height="1.1860565116279105"
+          height="37.5"
           rx="0"
           ry="0"
     >
     </rect>
-    <rect x="144"
+    <rect x="223"
           y="0"
           width="4"
-          height="8.302325581395351"
-          rx="0"
-          ry="0"
-    >
-    </rect>
-    <rect x="240"
-          y="0"
-          width="4"
-          height="49.813943488372104"
+          height="75"
           rx="0"
           ry="0"
     >
     </rect>
   </clipPath>
-  <g transform="scale(1,-1) translate(0,-63)"
-     clip-path="url(#sparkline-bar-23-clip)"
-     fill="url(#23)"
+  <g clip-path="url(#sparkline-bar-37-clip)"
+     fill="url(#37)"
   >
     <rect x="0"
           y="0"
@@ -288,17 +234,194 @@ exports[`VSparkline.ts should render component with bars and custom padding and 
     </rect>
   </g>
 </svg>
-
 `;
 
-exports[`VSparkline.ts should render component with bars and gradient and match a snapshot 1`] = `
-
-<svg width="100%"
-     height="25%"
+exports[`VSparkline.ts should render component with bars and correct bar lengths 2`] = `
+<svg display="block"
      viewbox="0 0 300 75"
 >
   <defs>
-    <linearGradient id="15"
+    <linearGradient id="37"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="primary"
+      >
+      </stop>
+    </linearGradient>
+  </defs>
+  <clipPath id="sparkline-bar-37-clip">
+    <rect x="73"
+          y="0"
+          width="4"
+          height="37.5"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+    <rect x="223"
+          y="0"
+          width="4"
+          height="75"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+  </clipPath>
+  <g clip-path="url(#sparkline-bar-37-clip)"
+     fill="url(#37)"
+  >
+    <rect x="0"
+          y="0"
+          width="300"
+          height="75"
+    >
+    </rect>
+  </g>
+</svg>
+`;
+
+exports[`VSparkline.ts should render component with bars and custom label size and match a snapshot 1`] = `
+<svg display="block"
+     viewbox="0 0 300 97.5"
+>
+  <defs>
+    <linearGradient id="29"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="primary"
+      >
+      </stop>
+    </linearGradient>
+  </defs>
+  <clipPath id="sparkline-bar-29-clip">
+    <rect x="48"
+          y="73.21428571428571"
+          width="4"
+          height="1.7857142857142858"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+    <rect x="148"
+          y="62.5"
+          width="4"
+          height="12.5"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+    <rect x="248"
+          y="0"
+          width="4"
+          height="75"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+  </clipPath>
+  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
+    <text x="50"
+          y="86.25"
+          font-size="15"
+    >
+      Value 1
+    </text>
+    <text x="150"
+          y="86.25"
+          font-size="15"
+    >
+      Value 2
+    </text>
+    <text x="250"
+          y="86.25"
+          font-size="15"
+    >
+      Value 3
+    </text>
+  </g>
+  <g clip-path="url(#sparkline-bar-29-clip)"
+     fill="url(#29)"
+  >
+    <rect x="0"
+          y="0"
+          width="300"
+          height="75"
+    >
+    </rect>
+  </g>
+</svg>
+`;
+
+exports[`VSparkline.ts should render component with bars and custom padding and match a snapshot 1`] = `
+<svg display="block"
+     viewbox="0 0 300 75"
+>
+  <defs>
+    <linearGradient id="25"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="primary"
+      >
+      </stop>
+    </linearGradient>
+  </defs>
+  <clipPath id="sparkline-bar-25-clip">
+    <rect x="48"
+          y="73.21428571428571"
+          width="4"
+          height="1.7857142857142858"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+    <rect x="148"
+          y="62.5"
+          width="4"
+          height="12.5"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+    <rect x="248"
+          y="0"
+          width="4"
+          height="75"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+  </clipPath>
+  <g clip-path="url(#sparkline-bar-25-clip)"
+     fill="url(#25)"
+  >
+    <rect x="0"
+          y="0"
+          width="300"
+          height="75"
+    >
+    </rect>
+  </g>
+</svg>
+`;
+
+exports[`VSparkline.ts should render component with bars and gradient and match a snapshot 1`] = `
+<svg display="block"
+     viewbox="0 0 300 75"
+>
+  <defs>
+    <linearGradient id="17"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -318,114 +441,33 @@ exports[`VSparkline.ts should render component with bars and gradient and match 
       </stop>
     </linearGradient>
   </defs>
-  <clipPath id="sparkline-bar-15-clip">
-    <rect x="48.666666666666664"
-          y="0"
-          width="4"
-          height="1.3721030232558178"
-          rx="0"
-          ry="0"
-    >
-    </rect>
-    <rect x="146"
-          y="0"
-          width="4"
-          height="9.604651162790695"
-          rx="0"
-          ry="0"
-    >
-    </rect>
-    <rect x="243.33333333333331"
-          y="0"
-          width="4"
-          height="57.62789697674418"
-          rx="0"
-          ry="0"
-    >
-    </rect>
-  </clipPath>
-  <g transform="scale(1,-1) translate(0,-67)"
-     clip-path="url(#sparkline-bar-15-clip)"
-     fill="url(#15)"
-  >
-    <rect x="0"
-          y="0"
-          width="300"
-          height="75"
-    >
-    </rect>
-  </g>
-</svg>
-
-`;
-
-exports[`VSparkline.ts should render component with bars and labels and match a snapshot 1`] = `
-
-<svg width="100%"
-     height="25%"
-     viewbox="0 0 300 75"
->
-  <defs>
-    <linearGradient id="17"
-                    x1="0"
-                    y1="1"
-                    x2="0"
-                    y2="0"
-    >
-      <stop offset="0"
-            stop-color="primary"
-      >
-      </stop>
-    </linearGradient>
-  </defs>
   <clipPath id="sparkline-bar-17-clip">
-    <rect x="48.666666666666664"
-          y="0"
+    <rect x="48"
+          y="73.21428571428571"
           width="4"
-          height="1.3721030232558178"
+          height="1.7857142857142858"
           rx="0"
           ry="0"
     >
     </rect>
-    <rect x="146"
-          y="0"
+    <rect x="148"
+          y="62.5"
           width="4"
-          height="9.604651162790695"
+          height="12.5"
           rx="0"
           ry="0"
     >
     </rect>
-    <rect x="243.33333333333331"
+    <rect x="248"
           y="0"
           width="4"
-          height="57.62789697674418"
+          height="75"
           rx="0"
           ry="0"
     >
     </rect>
   </clipPath>
-  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
-    <text x="50.666666666666664"
-          y="74"
-          font-size="7"
-    >
-      1
-    </text>
-    <text x="148"
-          y="74"
-          font-size="7"
-    >
-      7
-    </text>
-    <text x="245.33333333333331"
-          y="74"
-          font-size="7"
-    >
-      42
-    </text>
-  </g>
-  <g transform="scale(1,-1) translate(0,-67)"
-     clip-path="url(#sparkline-bar-17-clip)"
+  <g clip-path="url(#sparkline-bar-17-clip)"
      fill="url(#17)"
   >
     <rect x="0"
@@ -436,17 +478,14 @@ exports[`VSparkline.ts should render component with bars and labels and match a 
     </rect>
   </g>
 </svg>
-
 `;
 
-exports[`VSparkline.ts should render component with bars and line width and match a snapshot 1`] = `
-
-<svg width="100%"
-     height="25%"
-     viewbox="0 0 300 75"
+exports[`VSparkline.ts should render component with bars and labels and match a snapshot 1`] = `
+<svg display="block"
+     viewbox="0 0 300 85.5"
 >
   <defs>
-    <linearGradient id="21"
+    <linearGradient id="19"
                     x1="0"
                     y1="1"
                     x2="0"
@@ -458,35 +497,54 @@ exports[`VSparkline.ts should render component with bars and line width and matc
       </stop>
     </linearGradient>
   </defs>
-  <clipPath id="sparkline-bar-21-clip">
-    <rect x="48.666666666666664"
-          y="0"
-          width="8"
-          height="1.3721030232558178"
+  <clipPath id="sparkline-bar-19-clip">
+    <rect x="48"
+          y="73.21428571428571"
+          width="4"
+          height="1.7857142857142858"
           rx="0"
           ry="0"
     >
     </rect>
-    <rect x="146"
-          y="0"
-          width="8"
-          height="9.604651162790695"
+    <rect x="148"
+          y="62.5"
+          width="4"
+          height="12.5"
           rx="0"
           ry="0"
     >
     </rect>
-    <rect x="243.33333333333331"
+    <rect x="248"
           y="0"
-          width="8"
-          height="57.62789697674418"
+          width="4"
+          height="75"
           rx="0"
           ry="0"
     >
     </rect>
   </clipPath>
-  <g transform="scale(1,-1) translate(0,-67)"
-     clip-path="url(#sparkline-bar-21-clip)"
-     fill="url(#21)"
+  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
+    <text x="50"
+          y="80.25"
+          font-size="7"
+    >
+      Value 1
+    </text>
+    <text x="150"
+          y="80.25"
+          font-size="7"
+    >
+      Value 2
+    </text>
+    <text x="250"
+          y="80.25"
+          font-size="7"
+    >
+      Value 3
+    </text>
+  </g>
+  <g clip-path="url(#sparkline-bar-19-clip)"
+     fill="url(#19)"
   >
     <rect x="0"
           y="0"
@@ -496,13 +554,66 @@ exports[`VSparkline.ts should render component with bars and line width and matc
     </rect>
   </g>
 </svg>
+`;
 
+exports[`VSparkline.ts should render component with bars and line width and match a snapshot 1`] = `
+<svg display="block"
+     viewbox="0 0 300 75"
+>
+  <defs>
+    <linearGradient id="23"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="primary"
+      >
+      </stop>
+    </linearGradient>
+  </defs>
+  <clipPath id="sparkline-bar-23-clip">
+    <rect x="46"
+          y="73.21428571428571"
+          width="8"
+          height="1.7857142857142858"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+    <rect x="146"
+          y="62.5"
+          width="8"
+          height="12.5"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+    <rect x="246"
+          y="0"
+          width="8"
+          height="75"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+  </clipPath>
+  <g clip-path="url(#sparkline-bar-23-clip)"
+     fill="url(#23)"
+  >
+    <rect x="0"
+          y="0"
+          width="300"
+          height="75"
+    >
+    </rect>
+  </g>
+</svg>
 `;
 
 exports[`VSparkline.ts should render component with bars and match a snapshot 1`] = `
-
-<svg width="100%"
-     height="25%"
+<svg display="block"
      viewbox="0 0 300 75"
 >
   <defs>
@@ -519,33 +630,32 @@ exports[`VSparkline.ts should render component with bars and match a snapshot 1`
     </linearGradient>
   </defs>
   <clipPath id="sparkline-bar-13-clip">
-    <rect x="48.666666666666664"
-          y="0"
+    <rect x="48"
+          y="73.21428571428571"
           width="4"
-          height="1.3721030232558178"
+          height="1.7857142857142858"
           rx="0"
           ry="0"
     >
     </rect>
-    <rect x="146"
-          y="0"
+    <rect x="148"
+          y="62.5"
           width="4"
-          height="9.604651162790695"
+          height="12.5"
           rx="0"
           ry="0"
     >
     </rect>
-    <rect x="243.33333333333331"
+    <rect x="248"
           y="0"
           width="4"
-          height="57.62789697674418"
+          height="75"
           rx="0"
           ry="0"
     >
     </rect>
   </clipPath>
-  <g transform="scale(1,-1) translate(0,-67)"
-     clip-path="url(#sparkline-bar-13-clip)"
+  <g clip-path="url(#sparkline-bar-13-clip)"
      fill="url(#13)"
   >
     <rect x="0"
@@ -556,14 +666,75 @@ exports[`VSparkline.ts should render component with bars and match a snapshot 1`
     </rect>
   </g>
 </svg>
+`;
 
+exports[`VSparkline.ts should render component with bars and negative and match a snapshot 1`] = `
+<svg display="block"
+     viewbox="0 0 300 75"
+>
+  <defs>
+    <linearGradient id="15"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="primary"
+      >
+      </stop>
+    </linearGradient>
+  </defs>
+  <clipPath id="sparkline-bar-15-clip">
+    <rect x="35.5"
+          y="73.25581395348837"
+          width="4"
+          height="1.744186046511628"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+    <rect x="110.5"
+          y="71.51162790697674"
+          width="4"
+          height="1.744186046511628"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+    <rect x="185.5"
+          y="61.04651162790697"
+          width="4"
+          height="12.209302325581396"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+    <rect x="260.5"
+          y="0"
+          width="4"
+          height="73.25581395348837"
+          rx="0"
+          ry="0"
+    >
+    </rect>
+  </clipPath>
+  <g clip-path="url(#sparkline-bar-15-clip)"
+     fill="url(#15)"
+  >
+    <rect x="0"
+          y="0"
+          width="300"
+          height="75"
+    >
+    </rect>
+  </g>
+</svg>
 `;
 
 exports[`VSparkline.ts should render component with gradient and match a snapshot 1`] = `
-
-<svg stroke-width="4"
-     width="100%"
-     height="25%"
+<svg display="block"
+     stroke-width="4"
      viewbox="0 0 300 75"
      class="primary--text"
 >
@@ -589,20 +760,65 @@ exports[`VSparkline.ts should render component with gradient and match a snapsho
     </linearGradient>
   </defs>
   <path id="9"
-        d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
+        d="M8 66.99999L150 58.36585365853659S150 58.36585365853659 150 58.36585365853659L292 8.00001"
         fill="none"
         stroke="url(#9)"
   >
   </path>
 </svg>
+`;
 
+exports[`VSparkline.ts should render component with label size and match a snapshot 1`] = `
+<svg display="block"
+     stroke-width="4"
+     viewbox="0 0 300 96"
+     class="primary--text"
+>
+  <defs>
+    <linearGradient id="33"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="primary"
+      >
+      </stop>
+    </linearGradient>
+  </defs>
+  <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
+    <text x="8"
+          y="81.5"
+          font-size="14"
+    >
+      1
+    </text>
+    <text x="150"
+          y="81.5"
+          font-size="14"
+    >
+      7
+    </text>
+    <text x="292"
+          y="81.5"
+          font-size="14"
+    >
+      42
+    </text>
+  </g>
+  <path id="33"
+        d="M8 66.99999L150 58.36585365853659S150 58.36585365853659 150 58.36585365853659L292 8.00001"
+        fill="none"
+        stroke="url(#33)"
+  >
+  </path>
+</svg>
 `;
 
 exports[`VSparkline.ts should render component with line width and match a snapshot 1`] = `
-
-<svg stroke-width="42"
-     width="100%"
-     height="25%"
+<svg display="block"
+     stroke-width="42"
      viewbox="0 0 300 75"
      class="primary--text"
 >
@@ -620,20 +836,17 @@ exports[`VSparkline.ts should render component with line width and match a snaps
     </linearGradient>
   </defs>
   <path id="7"
-        d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
+        d="M8 66.99999L150 58.36585365853659S150 58.36585365853659 150 58.36585365853659L292 8.00001"
         fill="none"
         stroke="url(#7)"
   >
   </path>
 </svg>
-
 `;
 
 exports[`VSparkline.ts should render component with padding and match a snapshot 1`] = `
-
-<svg stroke-width="4"
-     width="100%"
-     height="25%"
+<svg display="block"
+     stroke-width="4"
      viewbox="0 0 300 75"
      class="primary--text"
 >
@@ -651,21 +864,18 @@ exports[`VSparkline.ts should render component with padding and match a snapshot
     </linearGradient>
   </defs>
   <path id="3"
-        d="M20 54.186036511627904L150 49.30232558139535S150 49.30232558139535 150 49.30232558139535L280 20.813963488372092"
+        d="M20 54.99999L150 49.8780487804878S150 49.8780487804878 150 49.8780487804878L280 20.00001"
         fill="none"
         stroke="url(#3)"
   >
   </path>
 </svg>
-
 `;
 
 exports[`VSparkline.ts should render component with string labels and match a snapshot 1`] = `
-
-<svg stroke-width="4"
-     width="100%"
-     height="25%"
-     viewbox="0 0 300 75"
+<svg display="block"
+     stroke-width="4"
+     viewbox="0 0 300 85.5"
      class="primary--text"
 >
   <defs>
@@ -683,37 +893,37 @@ exports[`VSparkline.ts should render component with string labels and match a sn
   </defs>
   <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
     <text x="8"
-          y="73"
+          y="76.25"
+          font-size="7"
     >
       1
     </text>
     <text x="150"
-          y="73"
+          y="76.25"
+          font-size="7"
     >
       7
     </text>
     <text x="292"
-          y="73"
+          y="76.25"
+          font-size="7"
     >
       42
     </text>
   </g>
   <path id="11"
-        d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
+        d="M8 66.99999L150 58.36585365853659S150 58.36585365853659 150 58.36585365853659L292 8.00001"
         fill="none"
         stroke="url(#11)"
   >
   </path>
 </svg>
-
 `;
 
 exports[`VSparkline.ts should render component with string labels and match a snapshot 2`] = `
-
-<svg stroke-width="4"
-     width="100%"
-     height="25%"
-     viewbox="0 0 300 75"
+<svg display="block"
+     stroke-width="4"
+     viewbox="0 0 300 85.5"
      class="primary--text"
 >
   <defs>
@@ -731,37 +941,37 @@ exports[`VSparkline.ts should render component with string labels and match a sn
   </defs>
   <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
     <text x="8"
-          y="73"
+          y="76.25"
+          font-size="7"
     >
       2
     </text>
     <text x="150"
-          y="73"
+          y="76.25"
+          font-size="7"
     >
       8
     </text>
     <text x="292"
-          y="73"
+          y="76.25"
+          font-size="7"
     >
       43
     </text>
   </g>
   <path id="11"
-        d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
+        d="M8 66.99999L150 58.36585365853659S150 58.36585365853659 150 58.36585365853659L292 8.00001"
         fill="none"
         stroke="url(#11)"
   >
   </path>
 </svg>
-
 `;
 
 exports[`VSparkline.ts should render component with string labels and match a snapshot 3`] = `
-
-<svg stroke-width="4"
-     width="100%"
-     height="25%"
-     viewbox="0 0 300 75"
+<svg display="block"
+     stroke-width="4"
+     viewbox="0 0 300 85.5"
      class="primary--text"
 >
   <defs>
@@ -779,36 +989,64 @@ exports[`VSparkline.ts should render component with string labels and match a sn
   </defs>
   <g style="font-size: 8; text-anchor: middle; dominant-baseline: mathematical; fill: primary;">
     <text x="8"
-          y="73"
+          y="76.25"
+          font-size="7"
     >
       foo
     </text>
     <text x="150"
-          y="73"
+          y="76.25"
+          font-size="7"
     >
       bar
     </text>
     <text x="292"
-          y="73"
+          y="76.25"
+          font-size="7"
     >
       baz
     </text>
   </g>
   <path id="11"
-        d="M8 65.62789697674418L150 57.395348837209305S150 57.395348837209305 150 57.395348837209305L292 9.372103023255814"
+        d="M8 66.99999L150 58.36585365853659S150 58.36585365853659 150 58.36585365853659L292 8.00001"
         fill="none"
         stroke="url(#11)"
   >
   </path>
 </svg>
+`;
 
+exports[`VSparkline.ts should render component with trend and equal values and match a snapshot 1`] = `
+<svg display="block"
+     stroke-width="4"
+     viewbox="0 0 300 75"
+     class="primary--text"
+>
+  <defs>
+    <linearGradient id="31"
+                    x1="0"
+                    y1="1"
+                    x2="0"
+                    y2="0"
+    >
+      <stop offset="0"
+            stop-color="primary"
+      >
+      </stop>
+    </linearGradient>
+  </defs>
+  <path id="31"
+        d="M8 66.99999L150 67L292 67.00001"
+        fill="none"
+        stroke="url(#31)"
+  >
+  </path>
+</svg>
 `;
 
 exports[`VSparkline.ts should render smooth component and match a snapshot 1`] = `
-
-<svg stroke-width="4"
-     width="100%"
-     height="25%"
+<svg display="block"
+     stroke-width="4"
      viewbox="0 0 300 75"
      class="primary--text"
 >
@@ -826,11 +1064,10 @@ exports[`VSparkline.ts should render smooth component and match a snapshot 1`] =
     </linearGradient>
   </defs>
   <path id="5"
-        d="M8 65.62789697674418L130.03352731272736 58.55291889055212S150 57.395348837209305 168.94587032678325 50.98800948606565L292 9.372103023255814"
+        d="M8 66.99999L130.03686879378304 59.579687437670394S150 58.36585365853659 168.8494438621337 51.6801625133916L292 8.00001"
         fill="none"
         stroke="url(#5)"
   >
   </path>
 </svg>
-
 `;

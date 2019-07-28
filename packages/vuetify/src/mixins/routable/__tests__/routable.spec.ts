@@ -4,7 +4,7 @@ import { mount } from '@vue/test-utils'
 describe('routable.ts', () => {
   it('should generate exact route link with to="/" and undefined exact', async () => {
     const wrapper = mount({
-      mixins: [ Routable ],
+      mixins: [Routable],
       render: h => h('div'),
     }, {
       propsData: {

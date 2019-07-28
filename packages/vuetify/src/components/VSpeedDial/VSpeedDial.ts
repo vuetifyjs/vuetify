@@ -53,7 +53,7 @@ export default mixins(Positionable, Toggleable, Transitionable).extend({
   render (h): VNode {
     let children: VNode[] = []
     const data: VNodeData = {
-      'class': this.classes,
+      class: this.classes,
       directives: [{
         name: 'click-outside',
         value: () => (this.isActive = false),
@@ -87,7 +87,7 @@ export default mixins(Positionable, Toggleable, Transitionable).extend({
     }
 
     const list = h('transition-group', {
-      'class': 'v-speed-dial__list',
+      class: 'v-speed-dial__list',
       props: {
         name: this.transition,
         mode: this.mode,

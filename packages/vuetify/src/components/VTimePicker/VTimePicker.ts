@@ -39,13 +39,13 @@ export default mixins(
 
   props: {
     allowedHours: {
-      type: [ Function, Array ],
+      type: [Function, Array],
     } as PropValidator<AllowFunction | number[]>,
     allowedMinutes: {
-      type: [ Function, Array ],
+      type: [Function, Array],
     } as PropValidator<AllowFunction | number[]>,
     allowedSeconds: {
-      type: [ Function, Array ],
+      type: [Function, Array],
     } as PropValidator<AllowFunction | number[]>,
     disabled: Boolean,
     format: {

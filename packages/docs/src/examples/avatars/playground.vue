@@ -1,6 +1,6 @@
 <template>
   <v-container grid-list-md>
-    <v-layout row wrap>
+    <v-layout wrap>
       <v-flex xs12 sm6 md4>
         <v-slider
           v-model="slider"
@@ -34,7 +34,7 @@
         align-center
         justify-center
         layout
-        text-xs-center
+        text-center
       >
         <v-avatar
           :color="color"
@@ -55,7 +55,7 @@
       slider: 56,
       tile: false,
       color: 'grey lighten-4',
-      colors: [ 'primary', 'accent', 'warning lighten-2', 'teal', 'grey lighten-4' ],
+      colors: ['primary', 'accent', 'warning lighten-2', 'teal', 'grey lighten-4'],
       img: true,
     }),
 

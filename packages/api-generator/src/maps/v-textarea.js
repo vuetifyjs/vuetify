@@ -1,21 +1,25 @@
-const { inputEvents, textEvents, validatableEvents, textFieldSlots } = require('../variables')
+const { inputEvents, textEvents, validatableEvents, textFieldSlots } = require('../helpers/variables')
 
 module.exports = {
   'v-textarea': {
     events: [
       {
         name: 'input',
-        value: 'string'
+        value: 'string',
       },
       {
         name: 'change',
-        value: 'string'
+        value: 'string',
+      },
+      {
+        name: 'keydown',
+        value: 'KeyboardEvent',
       },
       ...inputEvents,
-      ...textEvents
+      ...textEvents,
     ].concat(validatableEvents),
     slots: [
-      ...textFieldSlots
-    ]
-  }
+      ...textFieldSlots,
+    ],
+  },
 }

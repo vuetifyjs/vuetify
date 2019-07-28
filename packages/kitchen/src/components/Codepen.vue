@@ -21,18 +21,20 @@
       offset-y
       min-width="200"
     >
-      <v-btn
-        slot="activator"
-        icon
-        title="Compare with another version"
-      >
-        <v-icon>mdi-codepen</v-icon>
-      </v-btn>
+      <template #activator="{ on }">
+        <v-btn
+          icon
+          title="Compare with another version"
+          v-on="on"
+        >
+          <v-icon>mdi-codepen</v-icon>
+        </v-btn>
+      </template>
       <v-card>
         <v-card-text>
           <v-text-field
             v-model="version"
-            box
+            filled
             label="Compare with:"
             prefix="version"
           />
@@ -76,14 +78,14 @@
       cssResources () {
         return [
           'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons',
-          'https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css',
+          'https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css',
           `https://cdn.jsdelivr.net/npm/vuetify@${this.version}/dist/vuetify.min.css`,
         ]
       },
       jsResources () {
         return [
           'https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js',
-          'https://cdn.jsdelivr.net/npm/vue/dist/vue.js',
+          'https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js',
           `https://cdn.jsdelivr.net/npm/vuetify@${this.version}/dist/vuetify.min.js`,
         ]
       },

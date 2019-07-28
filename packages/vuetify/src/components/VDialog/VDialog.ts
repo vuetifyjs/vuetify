@@ -39,29 +39,33 @@ export default baseMixins.extend({
   },
 
   props: {
+    dark: Boolean,
     disabled: Boolean,
-    persistent: Boolean,
     fullscreen: Boolean,
     fullWidth: Boolean,
-    noClickAnimation: Boolean,
     light: Boolean,
-    dark: Boolean,
     maxWidth: {
       type: [String, Number],
       default: 'none',
     },
+    noClickAnimation: Boolean,
     origin: {
       type: String,
       default: 'center center',
     },
-    width: {
-      type: [String, Number],
-      default: 'auto',
+    persistent: Boolean,
+    retainFocus: {
+      type: Boolean,
+      default: true,
     },
     scrollable: Boolean,
     transition: {
       type: [String, Boolean],
       default: 'dialog-transition',
+    },
+    width: {
+      type: [String, Number],
+      default: 'auto',
     },
   },
 
@@ -200,7 +204,7 @@ export default baseMixins.extend({
       this.$emit('keydown', e)
     },
     onFocusin (e: Event) {
-      if (!e) return
+      if (!e || !this.retainFocus) return
 
       const target = e.target as HTMLElement
 
@@ -226,7 +230,7 @@ export default baseMixins.extend({
   render (h): VNode {
     const children = []
     const data = {
-      'class': this.classes,
+      class: this.classes,
       ref: 'dialog',
       directives: [
         {
@@ -265,9 +269,10 @@ export default baseMixins.extend({
     }
 
     children.push(h('div', {
-      'class': this.contentClasses,
+      class: this.contentClasses,
       attrs: {
-        tabIndex: '-1',
+        role: 'document',
+        tabindex: 0,
         ...this.getScopeIdAttrs(),
       },
       on: {
@@ -287,6 +292,7 @@ export default baseMixins.extend({
 
     return h('div', {
       staticClass: 'v-dialog__container',
+      attrs: { role: 'dialog' },
       style: {
         display: (!this.hasActivator || this.fullWidth) ? 'block' : 'inline-block',
       },

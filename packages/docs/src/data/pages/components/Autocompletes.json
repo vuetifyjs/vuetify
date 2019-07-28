@@ -13,6 +13,11 @@
         {
           "type": "usage",
           "value": "usage"
+        },
+        {
+          "type": "alert",
+          "lang": "Components.Selects.objectAlert",
+          "value": "error"
         }
       ]
     },
@@ -42,7 +47,7 @@
           "value": [
             "simple/api",
             "simple/customFilter",
-            "intermediate/scopedSlots",
+            "intermediate/slots",
             "intermediate/asynchronous",
             "intermediate/advanced",
             "complex/stateSelector"

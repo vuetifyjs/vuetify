@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-layout row wrap justify-space-around>
+    <v-layout wrap justify-space-around>
       <v-flex xs12>
         <v-slider v-model="steps" label="Steps" min="2" max="20"></v-slider>
       </v-flex>
@@ -29,7 +29,7 @@
             :step="n"
           >
             <v-card
-              class="mb-5"
+              class="mb-12"
               color="grey lighten-1"
               height="200px"
             ></v-card>
@@ -71,7 +71,7 @@
             :step="n"
           >
             <v-card
-              class="mb-5"
+              class="mb-12"
               color="grey lighten-1"
               height="200px"
             ></v-card>

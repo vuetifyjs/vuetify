@@ -18,6 +18,7 @@ export default mixins(
 
   provide () {
     return {
+      isInGroup: true,
       listItemGroup: this,
     }
   },
@@ -35,6 +36,9 @@ export default mixins(
     genData (): object {
       return this.setTextColor(this.color, {
         ...BaseItemGroup.options.methods.genData.call(this),
+        attrs: {
+          role: 'listbox',
+        },
       })
     },
   },

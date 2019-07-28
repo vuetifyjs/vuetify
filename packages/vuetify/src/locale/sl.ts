@@ -29,4 +29,11 @@ export default {
     prev: 'Prejšnji prikaz',
     next: 'Naslednji prikaz',
   },
+  calendar: {
+    moreEvents: 'Še {0}',
+  },
+  fileInput: {
+    counter: '{0} files',
+    counterSize: '{0} files ({1} in total)',
+  },
 }

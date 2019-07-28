@@ -1,5 +1,5 @@
 <template>
-  <v-layout row justify-space-around>
+  <v-layout justify-space-around>
     <v-layout style="flex-grow: 0;" column wrap justify-space-between align-center>
       <v-select
         v-model="color"
@@ -41,7 +41,7 @@
 <script>
   export default {
     data: () => ({
-      colors: [ 'primary', 'accent', 'warning lighten-2', 'teal', 'error lighten-2' ],
+      colors: ['primary', 'accent', 'warning lighten-2', 'teal', 'error lighten-2'],
       color: 'primary',
       left: false,
       bottom: false,

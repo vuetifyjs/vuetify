@@ -258,7 +258,7 @@
 
         <v-sheet
           id="scroll-1"
-          class="scroll-y"
+          class="overflow-y-auto"
           max-height="100"
         >
           <v-container style="height: 1500px;" />
@@ -313,7 +313,7 @@
 
         <v-sheet
           id="scroll-2"
-          class="scroll-y"
+          class="overflow-y-auto"
           max-height="100"
         >
           <v-container style="height: 1500px;" />
@@ -368,7 +368,7 @@
 
         <v-sheet
           id="scroll-3"
-          class="scroll-y"
+          class="overflow-y-auto"
           max-height="100"
         >
           <v-container style="height: 1500px;" />
@@ -420,7 +420,7 @@
 
         <v-sheet
           id="scroll-4"
-          class="scroll-y"
+          class="overflow-y-auto"
           max-height="100"
         >
           <v-container style="height: 1500px;" />

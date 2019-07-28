@@ -29,4 +29,11 @@ export default {
     prev: 'Превиоус висуал',
     next: 'Нект висуал',
   },
+  calendar: {
+    moreEvents: '{0} море',
+  },
+  fileInput: {
+    counter: '{0} files',
+    counterSize: '{0} files ({1} in total)',
+  },
 }

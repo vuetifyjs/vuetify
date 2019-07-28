@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VTimePickerClock.js should render component 1`] = `
-
 <div class="v-time-picker-clock theme--light">
   <div class="v-time-picker-clock__inner">
     <div class="v-time-picker-clock__hand accent"
@@ -94,11 +93,9 @@ exports[`VTimePickerClock.js should render component 1`] = `
     </span>
   </div>
 </div>
-
 `;
 
 exports[`VTimePickerClock.js should render component with double prop 1`] = `
-
 <div class="v-time-picker-clock theme--light">
   <div class="v-time-picker-clock__inner">
     <div class="v-time-picker-clock__hand accent"
@@ -191,11 +188,9 @@ exports[`VTimePickerClock.js should render component with double prop 1`] = `
     </span>
   </div>
 </div>
-
 `;
 
 exports[`VTimePickerClock.js should render disabled component 1`] = `
-
 <div class="v-time-picker-clock theme--light">
   <div class="v-time-picker-clock__inner">
     <div class="v-time-picker-clock__hand accent"
@@ -288,5 +283,4 @@ exports[`VTimePickerClock.js should render disabled component 1`] = `
     </span>
   </div>
 </div>
-
 `;
