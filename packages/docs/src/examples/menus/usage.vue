@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xs-center">
+  <div class="text-center">
     <v-menu offset-y>
       <template v-slot:activator="{ on }">
         <v-btn

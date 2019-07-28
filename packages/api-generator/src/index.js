@@ -1,25 +1,12 @@
 const Vue = require('vue')
 const Vuetify = require('vuetify')
 const fs = require('fs')
-const map = require('./map')
-const deepmerge = require('deepmerge')
+const map = require('./helpers/map')
+const deepmerge = require('./helpers/merge')
 
 const hyphenateRE = /\B([A-Z])/g
 function hyphenate (str) {
   return str.replace(hyphenateRE, '-$1').toLowerCase()
-}
-
-function arrayMerge (a, b) {
-  const arr = a.slice()
-  for (let i = 0; i < b.length; i++) {
-    const found = a.findIndex(item => item.name === b[i].name)
-    if (found >= 0) {
-      arr[found] = deepmerge(a[found], b[i])
-    } else {
-      arr.push(b[i])
-    }
-  }
-  return arr
 }
 
 Vue.use(Vuetify)
@@ -80,23 +67,22 @@ function getPropSource (name, mixins) {
   return source
 }
 
-function genProp (name, props, mixins) {
-  const prop = props[name]
+function genProp (name, prop, mixins, cmp) {
   const type = getPropType(prop.type)
-  const source = getPropSource(name, mixins)
+  const source = getPropSource(name, mixins) || cmp
 
   return {
     name,
     type,
     default: getPropDefault(prop.default, type),
-    source
+    source,
   }
 }
 
 function parseComponent (component) {
   return {
     props: parseProps(component),
-    mixins: parseMixins(component)
+    mixins: parseMixins(component),
   }
 }
 
@@ -105,8 +91,8 @@ function parseProps (component, array = [], mixin = false) {
   const mixins = [component.super].concat(options.extends).concat(options.mixins).filter(m => !!m)
   const props = options.props || {}
 
-  Object.keys(props).forEach(prop => {
-    const generated = genProp(prop, props, mixins)
+  Object.keys(props).forEach(key => {
+    const generated = genProp(key, props[key], mixins, component.options.name)
     array.push(generated)
   })
 
@@ -154,7 +140,7 @@ for (const name in installedComponents) {
   let options = parseComponent(component)
 
   if (map[kebabName]) {
-    options = deepmerge(options, map[kebabName], { arrayMerge })
+    options = deepmerge(options, map[kebabName])
   }
 
   components[kebabName] = options
@@ -184,7 +170,7 @@ function writeApiFile (obj, file) {
   stream.once('open', () => {
     stream.write(comment)
     stream.write('module.exports = ')
-    stream.write(JSON.stringify(obj, null, 2).replace(/'/g, '').replace(/"/g, '\''))
+    stream.write(JSON.stringify(obj, null, 2))
     stream.write('\n')
     stream.end()
   })
@@ -211,7 +197,7 @@ function writePlainFile (content, file) {
 const tags = Object.keys(components).reduce((t, k) => {
   t[k] = {
     attributes: components[k].props.map(p => p.name.replace(/([A-Z])/g, g => `-${g[0].toLowerCase()}`)).sort(),
-    description: ''
+    description: '',
   }
 
   return t
@@ -229,7 +215,7 @@ const attributes = Object.keys(components).reduce((attrs, k) => {
 
     a[`${k}/${name}`] = {
       type,
-      description: ''
+      description: '',
     }
 
     return a
@@ -240,7 +226,7 @@ const attributes = Object.keys(components).reduce((attrs, k) => {
 
 const fakeComponents = ts => {
   const imports = [
-    `import Vue from 'vue'`
+    `import Vue from 'vue'`,
   ]
   if (ts) imports.push(`import { PropValidator } from 'vue/types/options'`)
   const inspection = ts ? '' : `// noinspection JSUnresolvedFunction\n`

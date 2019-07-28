@@ -82,7 +82,7 @@ export default baseMixins.extend<options>().extend({
         'v-btn--contained': this.contained,
         'v-btn--depressed': (this.depressed) || this.outlined,
         'v-btn--disabled': this.disabled,
-        'v-btn--fab': this.fab || this.icon,
+        'v-btn--fab': this.isRound,
         'v-btn--fixed': this.fixed,
         'v-btn--flat': this.isFlat,
         'v-btn--icon': this.icon,
@@ -94,6 +94,7 @@ export default baseMixins.extend<options>().extend({
         'v-btn--rounded': this.rounded,
         'v-btn--router': this.to,
         'v-btn--text': this.text,
+        'v-btn--tile': this.tile,
         'v-btn--top': this.top,
         ...this.themeClasses,
         ...this.groupClasses,
@@ -149,12 +150,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   methods: {
-    // Prevent focus to match md spec
     click (e: MouseEvent): void {
-      !this.fab &&
-      e.detail &&
-      this.$el.blur()
-
       this.$emit('click', e)
 
       this.btnToggle && this.toggle()

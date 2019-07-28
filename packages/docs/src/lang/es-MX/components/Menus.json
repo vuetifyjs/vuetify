@@ -1,39 +1,32 @@
 {
-  "header": "Menu",
   "headerText": "El componente `v-menu`muestra un menú en la posición del elemento que se usa para activarlo.",
   "examples": {
     "absolute": {
       "header": "Posición _absolute_",
-      "desc": "Los menús también pueden ser posicionados _absolute_ encima del elemento _activator_ usando la prop `absolute`. Trata haciendo click en cualquier parte de la imagen.",
-      "uninverted": true
+      "desc": "Los menús también pueden ser posicionados _absolute_ encima del elemento _activator_ usando la prop `absolute`. Trata haciendo click en cualquier parte de la imagen."
     },
     "disabled": {
       "header": "Deshabilitado"
     },
-    "absoluteWithoutActivator": {
+    "absolute-without-activator": {
       "header": "Posición _absolute_ sin un _activator_",
-      "desc": "Los menús también pueden ser usados sin un _activador_ al hacer uso de `absolute` junto con las props `position-x` y `position-y`. Intenta haciendo click derecho en cualquier parte de la imagen..",
-      "uninverted": true
+      "desc": "Los menús también pueden ser usados sin un _activador_ al hacer uso de `absolute` junto con las props `position-x` y `position-y`. Intenta haciendo click derecho en cualquier parte de la imagen.."
     },
     "hover": {
       "header": "Hover",
-      "desc": "Los menús pueden ser accesados pasando el mouse por encima con la prop `open-on-hover`.",
-      "uninverted": true
+      "desc": "Los menús pueden ser accesados pasando el mouse por encima con la prop `open-on-hover`."
     },
     "menus": {
       "header": "Menus",
-      "desc": "Los menús pueden ser colocados dentro de casi cualquier componente.",
-      "uninverted": true
+      "desc": "Los menús pueden ser colocados dentro de casi cualquier componente."
     },
-    "customTransition": {
+    "custom-transition": {
       "header": "Transiciones personalizadas",
-      "desc": "Vuetify viene con 3 transiciones estándar: **scale**, **slide-x** y **slide-y**. Puedes también crear tus propias transiciones y pasarlas en el argumento _transition_. Para ver un ejemplo de cómo están elaboradas las transiciones de Vuetify, visita [este link](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/util/helpers.ts).",
-      "uninverted": true
+      "desc": "Vuetify viene con 3 transiciones estándar: **scale**, **slide-x** y **slide-y**. Puedes también crear tus propias transiciones y pasarlas en el argumento _transition_. Para ver un ejemplo de cómo están elaboradas las transiciones de Vuetify, visita [este link](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/util/helpers.ts)."
     },
     "popover": {
       "header": "Popover menu",
-      "desc": "Un menú puede ser configurado para ser estático al ser abierto, permitiéndole funcionar como un _popover_. Esto puede ser útil cuando hay múltiples elementos interactivos dentro de los contenidos del menú.",
-      "uninverted": true
+      "desc": "Un menú puede ser configurado para ser estático al ser abierto, permitiéndole funcionar como un _popover_. Esto puede ser útil cuando hay múltiples elementos interactivos dentro de los contenidos del menú."
     }
   },
   "props": {

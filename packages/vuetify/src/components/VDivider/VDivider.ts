@@ -16,6 +16,11 @@ export default Themeable.extend({
   },
 
   render (h): VNode {
+    // WAI-ARIA attributes
+    let orientation
+    if (!this.$attrs.role || this.$attrs.role === 'separator') {
+      orientation = this.vertical ? 'vertical' : 'horizontal'
+    }
     return h('hr', {
       class: {
         'v-divider': true,
@@ -23,7 +28,11 @@ export default Themeable.extend({
         'v-divider--vertical': this.vertical,
         ...this.themeClasses,
       },
-      attrs: this.$attrs,
+      attrs: {
+        role: 'separator',
+        'aria-orientation': orientation,
+        ...this.$attrs,
+      },
       on: this.$listeners,
     })
   },

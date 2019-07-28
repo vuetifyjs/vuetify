@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VData.ts should render data through default scoped slot 1`] = `
-
 <div>
   <div>
     foo
@@ -10,11 +9,9 @@ exports[`VData.ts should render data through default scoped slot 1`] = `
     bar
   </div>
 </div>
-
 `;
 
 exports[`VData.ts should toggle grouping 1`] = `
-
 <div id="wrapper">
   <div>
     c
@@ -29,11 +26,9 @@ exports[`VData.ts should toggle grouping 1`] = `
     b
   </div>
 </div>
-
 `;
 
 exports[`VData.ts should toggle grouping 2`] = `
-
 <div id="wrapper">
   <div>
     bar
@@ -42,11 +37,9 @@ exports[`VData.ts should toggle grouping 2`] = `
     foo
   </div>
 </div>
-
 `;
 
 exports[`VData.ts should toggle sorting 1`] = `
-
 <div id="wrapper">
   <div>
     c
@@ -61,11 +54,9 @@ exports[`VData.ts should toggle sorting 1`] = `
     b
   </div>
 </div>
-
 `;
 
 exports[`VData.ts should toggle sorting 2`] = `
-
 <div id="wrapper">
   <div>
     a
@@ -80,11 +71,9 @@ exports[`VData.ts should toggle sorting 2`] = `
     d
   </div>
 </div>
-
 `;
 
 exports[`VData.ts should toggle sorting 3`] = `
-
 <div id="wrapper">
   <div>
     d
@@ -99,11 +88,9 @@ exports[`VData.ts should toggle sorting 3`] = `
     a
   </div>
 </div>
-
 `;
 
 exports[`VData.ts should toggle sorting on multiple properties 1`] = `
-
 <div id="wrapper">
   <div>
     foo-c
@@ -118,11 +105,9 @@ exports[`VData.ts should toggle sorting on multiple properties 1`] = `
     bar-b
   </div>
 </div>
-
 `;
 
 exports[`VData.ts should toggle sorting on multiple properties 2`] = `
-
 <div id="wrapper">
   <div>
     bar-a
@@ -137,5 +122,4 @@ exports[`VData.ts should toggle sorting on multiple properties 2`] = `
     foo-d
   </div>
 </div>
-
 `;

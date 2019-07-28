@@ -1,4 +1,4 @@
-const { inputSlots, validatableEvents } = require('../variables')
+const { inputSlots, validatableEvents } = require('../helpers/variables')
 
 module.exports = {
   'v-radio-group': {
@@ -6,8 +6,8 @@ module.exports = {
     events: [
       {
         name: 'change',
-        value: 'any'
-      }
-    ].concat(validatableEvents)
-  }
+        value: 'any',
+      },
+    ].concat(validatableEvents),
+  },
 }

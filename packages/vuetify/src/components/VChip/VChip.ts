@@ -17,9 +17,6 @@ import { factory as ToggleableFactory } from '../../mixins/toggleable'
 import Routable from '../../mixins/routable'
 import Sizeable from '../../mixins/sizeable'
 
-// Directives
-import Ripple from '../../directives/ripple'
-
 // Utilities
 import { breaking } from '../../util/console'
 
@@ -37,9 +34,11 @@ export default mixins(
 ).extend({
   name: 'v-chip',
 
-  directives: { Ripple },
-
   props: {
+    active: {
+      type: Boolean,
+      default: true,
+    },
     activeClass: {
       type: String,
       default (): string | undefined {
@@ -85,7 +84,7 @@ export default mixins(
         'v-chip--disabled': this.disabled,
         'v-chip--draggable': this.draggable,
         'v-chip--label': this.label,
-        'v-chip--link': this.isClickable,
+        'v-chip--link': this.isLink,
         'v-chip--no-color': !this.color,
         'v-chip--outlined': this.outlined,
         'v-chip--pill': this.pill,
@@ -109,7 +108,9 @@ export default mixins(
   created () {
     const breakingProps = [
       ['outline', 'outlined'],
-      ['selected', 'value'],
+      ['selected', 'input-value'],
+      ['value', 'active'],
+      ['@input', '@active.sync'],
     ]
 
     /* istanbul ignore next */
@@ -149,6 +150,7 @@ export default mixins(
             e.stopPropagation()
 
             this.$emit('click:close')
+            this.$emit('update:active', false)
           },
         },
       }, this.closeIcon)
@@ -173,6 +175,10 @@ export default mixins(
       draggable: this.draggable ? 'true' : undefined,
       tabindex: this.chipGroup && !this.disabled ? 0 : data.attrs!.tabindex,
     }
+    data.directives!.push({
+      name: 'show',
+      value: this.active,
+    })
     data = this.setBackgroundColor(this.color, data)
 
     const color = this.textColor || (this.outlined && this.color)

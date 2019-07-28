@@ -29,4 +29,11 @@ export default {
     prev: 'اسلاید قبلی',
     next: 'اسلاید بعدی',
   },
+  calendar: {
+    moreEvents: '{بیشتر {0',
+  },
+  fileInput: {
+    counter: '{0} files',
+    counterSize: '{0} files ({1} in total)',
+  },
 }

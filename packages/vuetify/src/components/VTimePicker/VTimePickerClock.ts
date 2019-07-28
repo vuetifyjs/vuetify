@@ -131,7 +131,7 @@ export default mixins<options &
         const color = value === this.value && (this.color || 'accent')
         children.push(this.$createElement('span', this.setBackgroundColor(color, {
           staticClass: 'v-time-picker-clock__item',
-          'class': {
+          class: {
             'v-time-picker-clock__item--active': value === this.displayedValue,
             'v-time-picker-clock__item--disabled': this.disabled || !this.isAllowed(value),
           },
@@ -148,7 +148,7 @@ export default mixins<options &
       const color = (this.value != null) && (this.color || 'accent')
       return this.$createElement('div', this.setBackgroundColor(color, {
         staticClass: 'v-time-picker-clock__hand',
-        'class': {
+        class: {
           'v-time-picker-clock__hand--inner': this.isInner(this.value),
         },
         style: {
@@ -178,7 +178,9 @@ export default mixins<options &
       this.isDragging = true
       this.onDragMove(e)
     },
-    onMouseUp () {
+    onMouseUp (e: MouseEvent | TouchEvent) {
+      e.stopPropagation()
+
       this.isDragging = false
       if (this.valueOnMouseUp !== null && this.isAllowed(this.valueOnMouseUp)) {
         this.$emit('change', this.valueOnMouseUp)
@@ -244,7 +246,7 @@ export default mixins<options &
       on: (this.readonly || this.disabled) ? undefined : Object.assign({
         mousedown: this.onMouseDown,
         mouseup: this.onMouseUp,
-        mouseleave: () => (this.isDragging && this.onMouseUp()),
+        mouseleave: (e: MouseEvent) => (this.isDragging && this.onMouseUp(e)),
         touchstart: this.onMouseDown,
         touchend: this.onMouseUp,
         mousemove: this.onDragMove,

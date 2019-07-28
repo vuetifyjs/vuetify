@@ -58,9 +58,10 @@
   </v-container>
 </template>
 
-<style lang="sass">
-.group
-  display: flex
-  flex: 1
-  justify-content: space-around
+<style>
+.group {
+  display: flex;
+  flex: 1;
+  justify-content: space-around;
+}
 </style>

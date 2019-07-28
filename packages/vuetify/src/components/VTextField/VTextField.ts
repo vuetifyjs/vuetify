@@ -12,7 +12,7 @@ import VLabel from '../VLabel'
 import Loadable from '../../mixins/loadable'
 
 // Directives
-import Ripple from '../../directives/ripple'
+import ripple from '../../directives/ripple'
 
 // Utilities
 import { convertToUnit, keyCodes } from '../../util/helpers'
@@ -42,22 +42,17 @@ const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', '
 export default baseMixins.extend<options>().extend({
   name: 'v-text-field',
 
-  directives: { Ripple },
+  directives: { ripple },
 
   inheritAttrs: false,
 
   props: {
     appendOuterIcon: String,
     autofocus: Boolean,
-    browserAutocomplete: String,
     clearable: Boolean,
     clearIcon: {
       type: String,
       default: '$vuetify.icons.clear',
-    },
-    color: {
-      type: String,
-      default: 'primary',
     },
     counter: [Boolean, Number, String],
     filled: Boolean,
@@ -70,8 +65,8 @@ export default baseMixins.extend<options>().extend({
     prependInnerIcon: String,
     reverse: Boolean,
     rounded: Boolean,
-    singleLine: Boolean,
     shaped: Boolean,
+    singleLine: Boolean,
     solo: Boolean,
     soloInverted: Boolean,
     suffix: String,
@@ -192,6 +187,11 @@ export default baseMixins.extend<options>().extend({
       breaking('box', 'filled', this)
     }
 
+    /* istanbul ignore next */
+    if (this.$attrs.hasOwnProperty('browser-autocomplete')) {
+      breaking('browser-autocomplete', 'autocomplete', this)
+    }
+
     /* istanbul ignore if */
     if (this.shaped && !(this.filled || this.outlined || this.isSolo)) {
       consoleWarn('shaped should be used with either filled or outlined', this)
@@ -212,8 +212,13 @@ export default baseMixins.extend<options>().extend({
       this.onFocus()
     },
     /** @public */
-    blur () {
-      this.$refs.input ? this.$refs.input.blur() : this.onBlur()
+    blur (e?: Event) {
+      // https://github.com/vuetifyjs/vuetify/issues/5913
+      // Safari tab order gets broken if called synchronous
+      window.requestAnimationFrame(() => {
+        this.$refs.input && this.$refs.input.blur()
+      })
+      this.onBlur(e)
     },
     clearableCallback () {
       this.internalValue = null
@@ -318,7 +323,7 @@ export default baseMixins.extend<options>().extend({
           dark: this.dark,
           disabled: this.disabled,
           focused: !this.isSingle && (this.isFocused || !!this.validationState),
-          for: this.id,
+          for: this.computedId,
           left: this.labelPosition.left,
           light: this.light,
           right: this.labelPosition.right,
@@ -336,7 +341,7 @@ export default baseMixins.extend<options>().extend({
 
       return this.$createElement('legend', {
         style: {
-          width: convertToUnit(width),
+          width: !this.isSingle ? convertToUnit(width) : undefined,
         },
       }, [span])
     },
@@ -350,12 +355,10 @@ export default baseMixins.extend<options>().extend({
           value: this.lazyValue,
         },
         attrs: {
-          'aria-label': !this.id && this.label, // Label `for` will be set if we have an id
           ...this.$attrs,
-          autocomplete: this.browserAutocomplete,
           autofocus: this.autofocus,
           disabled: this.disabled,
-          id: this.id,
+          id: this.computedId,
           placeholder: this.placeholder,
           readonly: this.readonly,
           type: this.type,
@@ -391,13 +394,13 @@ export default baseMixins.extend<options>().extend({
     },
     genAffix (type: 'prefix' | 'suffix') {
       return this.$createElement('div', {
-        'class': `v-text-field__${type}`,
+        class: `v-text-field__${type}`,
         ref: type,
       }, this[type])
     },
     onBlur (e?: Event) {
       this.isFocused = false
-      this.$emit('blur', e)
+      e && this.$emit('blur', e)
     },
     onClick () {
       if (this.isFocused || this.disabled) return

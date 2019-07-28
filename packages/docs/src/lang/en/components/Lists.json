@@ -1,5 +1,5 @@
 {
-  "header": "# List",
+  "header": "# Lists",
   "headerText": "The `v-list` component is used to display information. It can contain an avatar, content, actions, subheaders and much more. Lists present content in a way that makes it easy to identify a specific item in a collection. They provide a consistent styling for organizing groups of text and images.",
   "examples": {
     "usage": {
@@ -15,7 +15,7 @@
     },
     "avatar-three-lines": {
       "header": "### Avatar with 3 lines",
-      "desc": "For three line lists, the subtitle will clamp vertically at 2 lines and then ellipsis."
+      "desc": "For three line lists, the subtitle will clamp vertically at 2 lines and then ellipsis. This feature uses [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) and is not supported in all browsers."
     },
     "avatar-subheader-title-and-action": {
       "header": "### Avatar with title and action",
@@ -73,6 +73,7 @@
   "props": {
     "avatar": "Used to set minimum tile height on a single-line list item",
     "dense": "Lowers max height of list tiles",
+    "disabled": "Disables all children `v-list-item` components",
     "expand": "Will only collapse when explicitly closed",
     "flat": "Remove the highlighted background on active `v-list-item`s",
     "group": "Assign a route namespace. Accepts a string or regexp for determining active state",
@@ -80,20 +81,39 @@
     "link": "Applies `v-list-item` hover styles. Useful when using the item as an _activator_.",
     "nav": "An alternative styling that reduces `v-list-item` width and rounds the corners. Typically used with [v-navigation-drawer](/components/navigation-drawers)",
     "noAction": "Removes left padding assigned for action icons from group items",
+    "rounded": "Rounds the `v-list-item` edges",
     "shaped": "Provides an alternative active style for `v-list-item`.",
     "subGroup": "Designate the component as nested list group",
     "subheader": "Removes top padding. Used when previous sibling is a header",
-    "threeLine": "Increases list-item height for three lines",
-    "twoLine": "Increases list-item height for two lines",
-    "value": "Expands / Collapse list group",
+    "threeLine": "Increases list-item height for three lines. This prop uses [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) and is not supported in all browsers.",
+    "twoLine": "Increases list-item height for two lines. This prop uses [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) and is not supported in all browsers.",
+    "v-list-item": {
+      "color": "Applies specified color to the control when in an **active** state or **input-value** is **true** - it can be the name of material color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`)",
+      "disabled": "Disables the component",
+      "inputValue": "Controls the **active** state of the item. This is typically used to highlight the component",
+      "value": "The value used when a child of a [v-list-item-group](/components/list-item-groups)."
+    },
     "v-list-item-avatar": {
-      "color": "Mixins.Colorable.props.color"
+      "color": "Mixins.Colorable.props.color",
+      "horizontal": "Uses an alternative horizontal style."
     },
     "v-list-group": {
       "activeClass": "Mixins.Routable.props.activeClass",
       "appendIcon": "Components.Inputs.props.appendIcon",
-      "disabled": "Components.Inputs.props.disabled",
+      "prependIcon": "Components.Inputs.props.prependIcon",
+      "ripple": "Mixins.Rippleable.props.ripple",
+      "value": "Expands / Collapse list group"
+    }
+  },
+  "slots": {
+    "v-list-group": {
+      "appendIcon": "Components.Inputs.props.appendIcon",
       "prependIcon": "Components.Inputs.props.prependIcon"
+    }
+  },
+  "events": {
+    "v-list-group": {
+      "click": "Emitted when component is clicked"
     }
   }
 }

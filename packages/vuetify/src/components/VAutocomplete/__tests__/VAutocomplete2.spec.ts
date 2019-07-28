@@ -272,7 +272,7 @@ describe('VAutocomplete.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         hideNoData: true,
-        items: [ 'Something first' ],
+        items: ['Something first'],
       },
     })
 
@@ -345,7 +345,15 @@ describe('VAutocomplete.ts', () => {
       },
     })
 
-    wrapper.setData({ internalSearch: 'fo' })
+    await wrapper.vm.$nextTick()
+
+    const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
+
+    input.trigger('focus')
+    element.value = 'fo'
+    input.trigger('input')
+    input.trigger('keydown.enter')
 
     await wrapper.vm.$nextTick()
 
@@ -407,11 +415,11 @@ describe('VAutocomplete.ts', () => {
         items: [
           {
             id: 1,
-            labels: { '1033': 'ID 1 English', '1036': 'ID 1 French' },
+            labels: { 1033: 'ID 1 English', 1036: 'ID 1 French' },
           },
           {
             id: 2,
-            labels: { '1033': 'ID 2 English', '1036': 'ID 2 French' },
+            labels: { 1033: 'ID 2 English', 1036: 'ID 2 French' },
           },
         ],
       },

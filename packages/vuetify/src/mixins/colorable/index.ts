@@ -59,7 +59,7 @@ export default Vue.extend({
       if (isCssColor(color)) {
         data.style = {
           ...data.style as object,
-          'color': `${color}`,
+          color: `${color}`,
           'caret-color': `${color}`,
         }
       } else if (color) {

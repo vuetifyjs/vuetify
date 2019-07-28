@@ -1,7 +1,7 @@
 
 <template>
   <v-container>
-    <v-layout row>
+    <v-layout>
       <v-slider
         v-model="value"
         vertical

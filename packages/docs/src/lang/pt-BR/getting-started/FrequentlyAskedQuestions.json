@@ -1,62 +1,49 @@
 {
   "header": "Perguntas frequentes",
-  "headerText": "Preso em um problema particular? Verifique alguns desses problemas mais comuns antes de criar um ticket. Se ainda não conseguir encontrar o que procura, envie uma [issue](https://issues.vuetifyjs.com) no github ou pergunte à comunidade no [discord](https://community.vuetifyjs.com).",
   "question": "Pergunta:",
   "answer": "Resposta",
   "noResultsFound": "Sem resultados encontratos",
   "resetSearch": "Redefinir pesquisa",
-  "gotchas": [
-    {
-      "q": "Meu código não funciona - o que devo fazer?",
-      "a": "Primeiro, certifique-se de que está usando a versão mais recente do Vue.js e do Vuetify. Tente reproduzir no codepen usando o seguinte [template](https://template.vuetifyjs.com/). Se você não conseguir reproduzir o problema fora do seu ambiente, isso geralmente significa que o problema reside localmente. Se você ainda não conseguir resolver seu problema, forneça seu codepen no tópico **#need-help** na [comunidade](https://chat.vuetifyjs.com)."
-    },
-    {
+  "gotchas": {
+    "0": {
       "q": "Estou recebendo um erro similar à este:<br>Error in ./node_modules/vuetify/src/dir/file.js Module parse \"failed\": Unexpected token (&lt;lineno&gt;:&lt;characterno&gt;)",
       "a": "Se você estiver usando um IDE, como IntelliJ IDEA ou WebStorm, muitas vezes adicionará importações automáticas apontando para o diretório `vuetify/src/` para os componentes que você usa. Altere o caminho da declaração de importação de `vuetify/src/` para `vuetify/es5/`."
     },
-    {
+    "2": {
       "q": "Existe um modelo no codepen com o roteador (router)?",
       "a": "Sim, [bem aqui](https://codepen.io/zikeji/pen/ypeQNm)."
     },
-    {
-      "q": "Minha aplicação não parece correta",
-      "a": "O Vuetify requer o uso do componente `v-app`. Ele deve envolver todo o seu aplicativo e é o ponto central para grande parte da funcionalidade da estrutura. Se, por qualquer motivo, você não pode usar esse elemento, você pode imitá-lo de atributos e classes. Defina o atributo `data-app` como `true` no elemento mais alto disponível (não incluindo o body) e as classes **application application--{light|dark}**."
+    "3": {
+      "q": "Minha aplicação não parece correta"
     },
-    {
-      "q": "Os temas Dark e Light não estão funcionando.",
-      "a": "Vuetify requer um ponto de montagem para executar tarefas como o estilo do tema. Certifique-se de ter um `v-app` envolvendo sua aplicação. Caso isso não seja possível, por qualquer motivo, você pode imitar seu comportamento aplicando **data-app** e **class=\"application application--light (ou dark)\"** para o elemento mais alto possível dentro da sua aplicação."
+    "4": {
+      "q": "Os temas Dark e Light não estão funcionando."
     },
-    {
-      "q": "Menu/Diálogo/Menu de navegação não estão se abrindo corretamente.",
-      "a": "Certifique-se de que seus componentes estejam envolvidos com um elemento `v-app`. Se você estiver usando um elemento para ativar o componente que não é colocado no slot <kbd>activator</kbd>, assegure-se de interromper a propagação do evento de clique. Esses componentes utilizam a diretiva `v-outside-click` e fecharão imediatamente."
+    "5": {
+      "q": "Menu/Diálogo/Menu de navegação não estão se abrindo corretamente."
     },
-    {
-      "q": "A barra de rolagem está sendo exibida mesmo quando meu conteúdo não excede a altura disponível.",
-      "a": "Vuetify por padrão liga a barra de rolagem html. Esta é uma escolha de design e foi debatida várias vezes. Há vantagens e desvantagens de ter e não ter isso e, a partir de agora, a votação é favorável em manter como ela está. Se você deseja desativar esta funcionalidade, basta adicionar `html { overflow-y: auto }` ao seu arquivo de estilo."
+    "6": {
+      "q": "A barra de rolagem está sendo exibida mesmo quando meu conteúdo não excede a altura disponível."
     },
-    {
+    "7": {
       "q": "Como centralizar verticalmente?",
       "a": "Aplique a prop **fill-height** no `v-container`. Esta classe auxiliar normalmente só adiciona **height: 100%**, mas para o recipiente, ele também procura uma criança `v-layout` e aplica as classes necessárias para centralizar verticalmente o conteúdo."
     },
-    {
+    "8": {
       "q": "Meu _/_ link está ativo quando eu estou na página _/home_",
       "a": "Adicione o **exact** ao link que aponta para a / absoluta. Para mais informações sobre isso, você pode visitar a [documentação](https://router.vuejs.org/en/api/router-link.html) oficial do Vue router."
     },
-    {
+    "9": {
       "q": "Minha página móvel não está responsiva",
       "a": "Adicione o `<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui\">` na tag `<head>` na sua index.html."
     },
-    {
-      "q": "Como eu faço para usar os ícones do Font Awesome Icons ou Material Design Icons (mdi)?",
-      "a": "Você deve adicionar as fontes ao seu index.html ou, de outro modo, importá-los para o seu projeto<br>**MDI**: [Material Design Icons](https://materialdesignicons.com/getting-started)<br>**FA**: [Font Awesome](http://fontawesome.io/get-started/)"
-    },
-    {
+    "11": {
       "q": "Minha caixa de diálogo fecha imediatamente após clicar no botão",
       "a": "Quando não estiver usando o slot **activator** para os `v-menu` e` v-dialog`, por exemplo, você deve parar manualmente a _propagação_ do evento de clique. Para fazer isso, basta adicionar o modificador _.stop_ ao evento de clique, `@click.stop=\"myMethod\"`."
     },
-    {
+    "12": {
       "q": "Imagens relativas não estão funcionando nos componentes `v-card`",
       "a": "O carregador do Vue (Vue loader) converte caminhos relativos para exigir funções automaticamente para você. Infelizmente, este não é o caso quando se trata de componentes personalizados. Você pode contornar esse problema usando `require`.<br><br>` <v-card :src=\"require(\"path/to/img/img.jpg\")\"`"
     }
-  ]
+  }
 }

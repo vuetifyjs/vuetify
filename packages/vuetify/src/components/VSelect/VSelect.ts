@@ -27,7 +27,6 @@ import { PropValidator } from 'vue/types/options'
 import { VNode, VNodeDirective } from 'vue'
 
 export const defaultMenuProps = {
-  eager: true,
   closeOnClick: false,
   closeOnContentClick: false,
   disableKeys: true,
@@ -70,23 +69,20 @@ export default baseMixins.extend<options>().extend({
     attach: {
       default: false,
     } as PropValidator<string | boolean | Element | VNode>,
-    browserAutocomplete: {
-      type: String,
-      default: 'on',
-    },
     cacheItems: Boolean,
     chips: Boolean,
     clearable: Boolean,
     deletableChips: Boolean,
     dense: Boolean,
+    eager: Boolean,
     hideSelected: Boolean,
     items: {
       type: Array,
       default: () => [],
     },
-    itemAvatar: {
-      type: [String, Array, Function],
-      default: 'avatar',
+    itemColor: {
+      type: String,
+      default: 'primary',
     },
     itemDisabled: {
       type: [String, Array, Function],
@@ -144,14 +140,12 @@ export default baseMixins.extend<options>().extend({
         'v-select--is-menu-active': this.isMenuActive,
       }
     },
-    computedId (): string {
-      if (this.$attrs.id) return this.$attrs.id
-
-      return `computed-id-${this._uid}`
-    },
     /* Used by other components to overwrite */
     computedItems (): object[] {
       return this.allItems
+    },
+    computedOwns (): string {
+      return `list-${this._uid}`
     },
     counterValue (): number {
       return this.multiple
@@ -188,17 +182,16 @@ export default baseMixins.extend<options>().extend({
       return {
         attrs: {
           ...attrs,
-          id: this.computedId,
+          id: this.computedOwns,
         },
         props: {
           action: this.multiple,
-          color: this.color,
+          color: this.itemColor,
           dense: this.dense,
           hideSelected: this.hideSelected,
           items: this.virtualizedItems,
           noDataText: this.$vuetify.lang.t(this.noDataText),
           selectedItems: this.selectedItems,
-          itemAvatar: this.itemAvatar,
           itemDisabled: this.itemDisabled,
           itemValue: this.itemValue,
           itemText: this.itemText,
@@ -238,6 +231,7 @@ export default baseMixins.extend<options>().extend({
 
       return {
         ...defaultMenuProps,
+        eager: this.eager,
         value: this.menuCanShow && this.isMenuActive,
         nudgeBottom: normalisedProps.offsetY ? 1 : 0, // convert to int
         ...normalisedProps,
@@ -287,12 +281,11 @@ export default baseMixins.extend<options>().extend({
 
   methods: {
     /** @public */
-    blur (e: Event) {
+    blur (e?: Event) {
+      VTextField.options.methods.blur.call(this, e)
       this.isMenuActive = false
       this.isFocused = false
-      this.$refs.input && this.$refs.input.blur()
       this.selectedIndex = -1
-      this.onBlur(e)
     },
     /** @public */
     activateMenu () {
@@ -346,7 +339,7 @@ export default baseMixins.extend<options>().extend({
       )
 
       return this.$createElement(VChip, {
-        staticClass: 'v-chip--select-multi',
+        staticClass: 'v-chip--select',
         attrs: { tabindex: -1 },
         props: {
           close: this.deletableChips && !isDisabled,
@@ -419,7 +412,7 @@ export default baseMixins.extend<options>().extend({
 
       input.data!.domProps!.value = null
       input.data!.attrs!.readonly = true
-      input.data!.attrs!.type = 'hidden'
+      input.data!.attrs!.type = 'text'
       input.data!.attrs!['aria-readonly'] = true
       input.data!.on!.keypress = this.onKeyPress
 
@@ -433,7 +426,7 @@ export default baseMixins.extend<options>().extend({
         role: 'button',
         'aria-haspopup': 'listbox',
         'aria-expanded': String(this.isMenuActive),
-        'aria-owns': this.computedId,
+        'aria-owns': this.computedOwns,
       }
 
       return render
@@ -515,6 +508,9 @@ export default baseMixins.extend<options>().extend({
     },
     genSlotSelection (item: object, index: number): VNode[] | undefined {
       return this.$scopedSlots.selection!({
+        attrs: {
+          class: 'v-chip--select',
+        },
         parent: this,
         item,
         index,
@@ -538,8 +534,8 @@ export default baseMixins.extend<options>().extend({
     getValue (item: object) {
       return getPropertyFromItem(item, this.itemValue, this.getText(item))
     },
-    onBlur (e: Event) {
-      this.$emit('blur', e)
+    onBlur (e?: Event) {
+      e && this.$emit('blur', e)
     },
     onChipInput (item: object) {
       if (this.multiple) this.selectItem(item)
@@ -650,7 +646,7 @@ export default baseMixins.extend<options>().extend({
       }
     },
     onMouseUp (e: MouseEvent) {
-      if (this.hasMouseDown) {
+      if (this.hasMouseDown && e.which !== 3) {
         const appendInner = this.$refs['append-inner']
 
         // If append inner is present
@@ -765,6 +761,10 @@ export default baseMixins.extend<options>().extend({
         const listIndex = this.getMenuIndex()
 
         this.setMenuIndex(-1)
+
+        // There is no item to re-highlight
+        // when selections are hidden
+        if (this.hideSelected) return
 
         this.$nextTick(() => this.setMenuIndex(listIndex))
       }

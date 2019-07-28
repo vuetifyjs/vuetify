@@ -29,4 +29,11 @@ export default {
     prev: '以前的视觉',
     next: '下一个视觉',
   },
+  calendar: {
+    moreEvents: '还有{0}个',
+  },
+  fileInput: {
+    counter: '{0} files',
+    counterSize: '{0} files ({1} in total)',
+  },
 }

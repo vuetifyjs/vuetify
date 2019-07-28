@@ -1,5 +1,5 @@
 {
-  "header": "# Stepper",
+  "header": "# Steppers",
   "headerText": "The `v-stepper` component displays progress through numbered steps.",
   "examples": {
     "usage": {
@@ -70,6 +70,11 @@
     },
     "v-stepper-content": {
       "step": "Sets step to associate the content to"
+    }
+  },
+  "events": {
+    "v-stepper-step": {
+      "click": "Emitted when component is clicked"
     }
   }
 }

@@ -7,7 +7,7 @@
       <v-layout
         align-end
         fill-height
-        pa-3
+        pa-4
         white--text
       >
         <div class="title font-weight-light">Explore our beaches</div>

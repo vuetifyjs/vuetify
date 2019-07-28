@@ -48,8 +48,8 @@ export default baseMixins.extend<options>().extend({
     },
     alignWithTitle: Boolean,
     backgroundColor: String,
-    centered: Boolean,
     centerActive: Boolean,
+    centered: Boolean,
     fixedTabs: Boolean,
     grow: Boolean,
     height: {
@@ -74,6 +74,10 @@ export default baseMixins.extend<options>().extend({
     right: Boolean,
     showArrows: Boolean,
     sliderColor: String,
+    sliderSize: {
+      type: [Number, String],
+      default: 2,
+    },
     vertical: Boolean,
   },
 
@@ -119,7 +123,7 @@ export default baseMixins.extend<options>().extend({
     },
     computedColor (): string {
       if (this.color) return this.color
-      else if (this.isDark) return 'white'
+      else if (this.isDark && !this.appIsDark) return 'white'
       else return 'primary'
     },
   },
@@ -167,19 +171,18 @@ export default baseMixins.extend<options>().extend({
         const el = activeTab.$el as HTMLElement
 
         this.slider = {
-          height: this.vertical ? el.offsetHeight : 2,
+          height: !this.vertical ? Number(this.sliderSize) : el.scrollHeight,
           left: this.vertical ? 0 : el.offsetLeft,
           right: this.vertical ? 0 : el.offsetLeft + el.offsetWidth,
           top: el.offsetTop,
-          width: this.vertical ? 2 : el.scrollWidth,
+          width: this.vertical ? Number(this.sliderSize) : el.scrollWidth,
         }
       })
 
       return true
     },
     genBar (items: VNode[], slider: VNode | null) {
-      return this.$createElement(VTabsBar, this.setTextColor(this.computedColor, {
-        staticClass: this.backgroundColor,
+      const data = {
         style: {
           height: convertToUnit(this.height),
         },
@@ -202,7 +205,12 @@ export default baseMixins.extend<options>().extend({
           },
         },
         ref: 'items',
-      }), [
+      }
+
+      this.setTextColor(this.computedColor, data)
+      this.setBackgroundColor(this.backgroundColor, data)
+
+      return this.$createElement(VTabsBar, data, [
         this.genSlider(slider),
         items,
       ])

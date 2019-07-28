@@ -1,1 +1,61 @@
-{}
+{
+  "headerText": "Component `v-btn` thay thế nút mặc định của html thành nút theo chuẩn material design và nhiều lựa chọn. Mọi lớp màu hỗ trợ đều có thể sử dụng để thay thế màu nền hoặc màu chữ.",
+  "examples": {
+    "flat": {
+      "header": "### Flat",
+      "desc": "Nút dạng `flat` không có đổ bóng và màu nền. Chỉ khi di chuột vào nút thì nút mới hiển thị."
+    },
+    "raised": {
+      "header": "### Raised",
+      "desc": "Nút dạng `Raised ` có hộp đổ bóng tăng cường khi được click. Đây là kiểu mặc định."
+    },
+    "depressed": {
+      "header": "### Depressed",
+      "desc": "Nút dạng `Depressed` vẫn có màu nền nhưng không có đổ bóng."
+    },
+    "dropdown": {
+      "header": "### Button Dropdown Variants",
+      "desc": "Button dropdowns are regular selects with additional styling.",
+      "uninverted": true
+    },
+    "icon": {
+      "header": "### Icon",
+      "desc": "Có thể sử dụng Icon như nội dung chính của nút."
+    },
+    "floating": {
+      "header": "### Floating",
+      "desc": "Nút dạng `Floating` có hình tròn và thường có một icon."
+    },
+    "loaders": {
+      "header": "### Loaders",
+      "desc": "Sử dụng thuộc tính `loading` có thể thông báo cho người dùng biết tiến trình đang được xử lý. Hành vi mặc định là sử dụng component `v-progress-circular` nhưng bạn có thể tùy biến nó."
+    },
+    "sizing": {
+      "header": "### Sizing",
+      "desc": "Các nút có nhiều kích cỡ khác nhau để phù hợp với nhiều tình huống."
+    },
+    "outline": {
+      "header": "### Outline",
+      "desc": "Nút dạng `outline` kế thừa viền và màu của nút."
+    },
+    "round": {
+      "header": "### Round",
+      "desc": "Nút dạng `rounded` có hành vi tương tự nút mặc định nhưng hai cạnh bên được bo tròn."
+    },
+    "block": {
+      "header": "### Block",
+      "desc": "Nút dạng `block` có chiều dài 100%."
+    }
+  },
+  "props": {
+    "v-btn": {
+      "loading": "Thêm hiệu ứng biểu tượng loading",
+      "type": "Thiết lập kiểu của nút"
+    }
+  },
+  "events": {
+    "v-btn-toggle": {
+      "change": "Components.Inputs.events.change"
+    }
+  }
+}

@@ -37,8 +37,7 @@ const builds = {
         })
       ],
       performance: {
-        hints: 'warning',
-        maxEntrypointSize: 500000
+        hints: false
       }
     },
     env: 'production'

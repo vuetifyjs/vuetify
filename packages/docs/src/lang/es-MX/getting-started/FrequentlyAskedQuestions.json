@@ -1,58 +1,45 @@
 {
   "header": "Preguntas Frecuentes",
-  "headerText": "¿Bloqueado con algún problema particular? Mira estos problemas comunes antes de levantar un ticket. Si todavía no puedes encontrar lo que estás buscando, crea un [issue](https://issues.vuetifyjs.com) en github o pregunta en la comunidad en [discord](https://community.vuetifyjs.com).",
   "question": "Pregunta:",
   "answer": "Respuesta",
   "noResultsFound": "Sin resultados",
   "resetSearch": "Reiniciar búsqueda",
-  "gotchas": [
-    {
-      "q": "Mi código no funciona - ¿Qué debería hacer?",
-      "a": "Primero, asegúrate que estás usando las últimas versiones de Vue.js y Vuetify. Trata de reproducir tu error en codepen usando la siguiente plantilla: [template](https://template.vuetifyjs.com/). Si no puedes reproducirlo fuera de tu ambiente, generalmente significa que el problema está localmente. Si aún no puedes resolver tu problema, por favor provee tu codepen y una descripción en el canal **need-help** en la [comunidad](https://chat.vuetifyjs.com)."
-    },
-    {
+  "gotchas": {
+    "0": {
       "q": "¿Hay alguna plantilla de codepen con el router?",
       "a": "Sí, [justo aquí](https://codepen.io/zikeji/pen/ypeQNm)."
     },
-    {
+    "2": {
       "q": "Mi aplicación no parece que se ve bien",
       "a": "Vuetify requiere el uso del componente `v-app`. Éste debe envolver toda la aplicación y es el punto central de una buena parte de la funcionalidad del framework. Si por alguna razón no puedes usar este elemento, puedes imitarlo con atributos y clases. Coloca el atributo `data-app` como true en el elemento más alto disponible (excluyendo body), y las clases **application application--{light|dark}**."
     },
-    {
-      "q": "Los temas Dark o Light no están funcionando.",
-      "a": "Vuetify requiere un punto de montaje (mounting point) para así poder llevar a cabo tareas como darle estilo a los temas. Asegúrate de que tienes un `v-app` que envuelve a tu aplicación. En el caso de que esto no sea posible por cualquier razón, puedes imitar el comportamiento aplicando **data-app** y **class=\"application application--light (or dark)** al elemento más alto dentro de tu aplicación."
+    "3": {
+      "q": "Los temas Dark o Light no están funcionando."
     },
-    {
-      "q": "Los drawers de Menu/Dialog/Navigation no están abriendo correctamente.",
-      "a": "Asegúrate de que tus componentes están envueltos en un elemento `v-app`. Si estás usando un elemento para activar el componente que no está dentro del slot <kbd>activator</kbd>, asegúrate de que detienes la propagación del evento click. Estos componentes utilizan la directiva `v-outside-click` y lo cerrarán de inmediato. "
+    "4": {
+      "q": "Los drawers de Menu/Dialog/Navigation no están abriendo correctamente."
     },
-    {
-      "q": "Se muestra una barra de desplazamiento aunque mi contenido no desborda (overflow) verticalmente.",
-      "a": "Por default Vuetify coloca una barra de desplazamiento. Esta es una decisión de diseño y ha sido debatida muchas veces. Hay pros y contras de colocarla o no y por ahora, el voto está en favor de dejarla como está. Si quieres deshabilitar esta funcionalidad, simplemente agrega `html { overflow-y: auto }` a tu archivo de estilos."
+    "5": {
+      "q": "Se muestra una barra de desplazamiento aunque mi contenido no desborda (overflow) verticalmente."
     },
-    {
-      "q": "¿Cómo centro verticalmente?",
-      "a": "Aplica la propiedad **fill-height** a `v-container`. Esta clase auxiliar normalmente sólo agrega **height: 100%**, pero para el container, también busca por un hijo `v-layout` y aplica las clases necesarias para centrar el contenido."
+    "6": {
+      "q": "¿Cómo centro verticalmente?"
     },
-    {
+    "7": {
       "q": "Mi link _/_ está activo cuando estoy en la página _/home_",
       "a": "Agrega **exact** al link que apunta al / absoluto. Para más información al respecto, puedes visitar la [documentación](https://router.vuejs.org/en/api/router-link.html) oficial de Vue router."
     },
-    {
+    "8": {
       "q": "Mi página no es responsiva en móviles.",
       "a": "Agrega `<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui\">` al `<head>` en tu index.html."
     },
-    {
+    "9": {
       "q": "¿Cómo uso Font Awesome Icons o Material Design Icons (mdi)?",
       "a": "Debes agregar las fuentes a tu index.html o importarlas en tu proyecto <br>**MDI**: [Material Design Icons](https://materialdesignicons.com/getting-started)<br>**FA**: [Font Awesome](http://fontawesome.io/get-started/)"
     },
-    {
-      "q": "Mi diálogo se cierra inmediatamente después de hacer click en el botón.",
-      "a": "Cuando no usas el slot **activator** para `v-menu` y `v-dialog` por ejemplo, debes detener manualmente la _propagación_ del evento click. Para esto, simplemente agrega el modificador _.stop_ al evento: `@click.stop=\"myMethod\"`."
-    },
-    {
+    "11": {
       "q": "Las imágenes relativas no funcionan en los componentes `v-card`",
       "a": "Vue loader convierte los paths relativos en funciones require automáticamente por tí. Desafortunadamente, este no es el caso para los componentes personalizados. Puedes darle la vuelta usando `require`.<br><br>`<v-card :src=\"require('path/to/img/img.jpg')\"`"
     }
-  ]
+  }
 }

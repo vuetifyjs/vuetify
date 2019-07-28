@@ -1,15 +1,14 @@
 module.exports = {
   'v-bottom-navigation': {
-    slots: ['default'],
     events: [
       {
-        name: 'input',
-        value: 'boolean'
+        name: 'change',
+        value: 'any',
       },
       {
-        name: 'update:inputValue',
-        value: 'string | number'
-      }
-    ]
-  }
+        name: 'update:input-value',
+        value: 'string | number',
+      },
+    ],
+  },
 }

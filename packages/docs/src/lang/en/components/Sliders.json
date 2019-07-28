@@ -1,5 +1,5 @@
 {
-  "header": "# Slider",
+  "header": "# Sliders",
   "headerText": "The `v-slider` component is a better visualization of the number input. It is used for gathering numerical user data.",
   "examples": {
     "usage": {
@@ -11,7 +11,7 @@
     },
     "custom-thumb": {
       "header": "### Custom Range slider",
-      "desc": " Using the `tick-labels` prop along with a scoped slot, you can create a very customized solution."
+      "desc": " Using the `tick-labels` prop along with slots, you can create a very customized solution."
     },
     "ticks": {
       "header": "### Ticks",
@@ -68,7 +68,10 @@
   },
   "props": {
     "alwaysDirty": "When used with the **thumb-label** prop will always show the thumb label.",
+    "dark": "Components.Inputs.props.dark",
     "inverseLabel": "Reverse the label position. Works with **rtl**.",
+    "max": "Sets the maximum allowed value",
+    "min": "Sets the minimum allowed value",
     "step": "If greater than 0, sets step interval for ticks",
     "thumbColor": "Sets the thumb and thumb label color",
     "thumbLabel": "Show thumb label. If `true` it shows label when using slider. If set to `'always'` it always shows label.",
@@ -76,19 +79,22 @@
     "ticks": "Show track ticks. If `true` it shows ticks when using slider. If set to `'always'` it always shows ticks.",
     "tickLabels": "When provided with Array<string>, will attempt to map the labels to each step in index order",
     "tickSize": "Controls the size of **ticks**",
-    "trackColor": "Sets the track fill color",
+    "trackColor": "Sets the track's color",
+    "trackFillColor": "Sets the track's fill color",
     "value": "Controls the current value of the slider",
     "vertical": "Changes slider direction to vertical"
   },
   "events": {
+    "blur": "Emitted when component is no longer focused",
     "change": "Components.Inputs.events.change",
     "click:append": "Components.Inputs.events['click:append']",
     "click:prepend": "Components.Inputs.events['click:prepend']",
     "end": "Slider value emitted at the end of slider movement",
+    "focus": "Emitted when component is focused",
     "start": "Slider value emitted at start of slider movement",
     "update:error": "Mixins.Validatable.events['update:error']"
   },
-  "scopedSlots": {
+  "slots": {
     "thumb-label": "Replaces the content inside the thumb label"
   }
 }

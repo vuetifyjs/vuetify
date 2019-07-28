@@ -29,4 +29,11 @@ export default {
     prev: 'Korábbi vizuális',
     next: 'Következő vizuális',
   },
+  calendar: {
+    moreEvents: '{0} további',
+  },
+  fileInput: {
+    counter: '{0} files',
+    counterSize: '{0} files ({1} in total)',
+  },
 }

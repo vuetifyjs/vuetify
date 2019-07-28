@@ -29,4 +29,11 @@ export default {
     prev: 'Önceki görsel',
     next: 'Sonraki görsel',
   },
+  calendar: {
+    moreEvents: '{0} tane daha',
+  },
+  fileInput: {
+    counter: '{0} files',
+    counterSize: '{0} files ({1} in total)',
+  },
 }

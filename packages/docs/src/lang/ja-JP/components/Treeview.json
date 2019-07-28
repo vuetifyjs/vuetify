@@ -1,1 +1,7 @@
-{}
+{
+  "examples": {
+    "color": {
+      "header": "色"
+    }
+  }
+}

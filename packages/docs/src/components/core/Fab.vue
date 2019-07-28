@@ -6,13 +6,15 @@
       :style="{
         bottom: value ? '80px' : ''
       }"
-      fab
-      dark
-      fixed
+      aria-label="Scroll to top"
       bottom
-      right
-      large
       color="red"
+      dark
+      fab
+      fixed
+      large
+      right
+      title="Scroll to top"
       @click="toTop"
     >
       <v-icon>keyboard_arrow_up</v-icon>

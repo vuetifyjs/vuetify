@@ -1,13 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VSelect.ts should be clearable with prop, dirty and multi select 1`] = `
-
 <div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
   <div class="v-input__control">
     <div role="button"
          aria-haspopup="listbox"
          aria-expanded="false"
-         aria-owns="computed-id-142"
+         aria-owns="list-114"
          class="v-input__slot"
     >
       <div class="v-select__slot">
@@ -15,16 +14,16 @@ exports[`VSelect.ts should be clearable with prop, dirty and multi select 1`] = 
           <div class="v-select__selection v-select__selection--comma">
             1
           </div>
-          <input autocomplete="on"
+          <input id="input-114"
                  readonly="readonly"
-                 type="hidden"
+                 type="text"
                  aria-readonly="true"
           >
         </div>
         <div class="v-input__append-inner">
           <div class="v-input__icon v-input__icon--clear">
             <i role="button"
-               class="v-icon v-icon--link material-icons theme--light"
+               class="v-icon notranslate v-icon--link material-icons theme--light"
             >
               $vuetify.icons.clear
             </i>
@@ -33,7 +32,7 @@ exports[`VSelect.ts should be clearable with prop, dirty and multi select 1`] = 
         <div class="v-input__append-inner">
           <div class="v-input__icon v-input__icon--append">
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
             >
               $vuetify.icons.dropdown
             </i>
@@ -41,6 +40,10 @@ exports[`VSelect.ts should be clearable with prop, dirty and multi select 1`] = 
         </div>
       </div>
       <div class="v-menu">
+        <div class="v-menu__content theme--light "
+             style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+        >
+        </div>
       </div>
     </div>
     <div class="v-text-field__details">
@@ -54,17 +57,15 @@ exports[`VSelect.ts should be clearable with prop, dirty and multi select 1`] = 
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSelect.ts should be clearable with prop, dirty and single select 1`] = `
-
 <div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
   <div class="v-input__control">
     <div role="button"
          aria-haspopup="listbox"
          aria-expanded="false"
-         aria-owns="computed-id-128"
+         aria-owns="list-104"
          class="v-input__slot"
     >
       <div class="v-select__slot">
@@ -72,16 +73,16 @@ exports[`VSelect.ts should be clearable with prop, dirty and single select 1`] =
           <div class="v-select__selection v-select__selection--comma">
             1
           </div>
-          <input autocomplete="on"
+          <input id="input-104"
                  readonly="readonly"
-                 type="hidden"
+                 type="text"
                  aria-readonly="true"
           >
         </div>
         <div class="v-input__append-inner">
           <div class="v-input__icon v-input__icon--clear">
             <i role="button"
-               class="v-icon v-icon--link material-icons theme--light"
+               class="v-icon notranslate v-icon--link material-icons theme--light"
             >
               $vuetify.icons.clear
             </i>
@@ -90,7 +91,7 @@ exports[`VSelect.ts should be clearable with prop, dirty and single select 1`] =
         <div class="v-input__append-inner">
           <div class="v-input__icon v-input__icon--append">
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
             >
               $vuetify.icons.dropdown
             </i>
@@ -98,6 +99,10 @@ exports[`VSelect.ts should be clearable with prop, dirty and single select 1`] =
         </div>
       </div>
       <div class="v-menu">
+        <div class="v-menu__content theme--light "
+             style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+        >
+        </div>
       </div>
     </div>
     <div class="v-text-field__details">
@@ -111,17 +116,15 @@ exports[`VSelect.ts should be clearable with prop, dirty and single select 1`] =
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSelect.ts should use scoped slot for selection generation 1`] = `
-
 <div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
   <div class="v-input__control">
     <div role="button"
          aria-haspopup="listbox"
          aria-expanded="false"
-         aria-owns="computed-id-26"
+         aria-owns="list-26"
          class="v-input__slot"
     >
       <div class="v-select__slot">
@@ -129,16 +132,16 @@ exports[`VSelect.ts should use scoped slot for selection generation 1`] = `
           <div>
             foo - from slot
           </div>
-          <input autocomplete="on"
+          <input id="input-26"
                  readonly="readonly"
-                 type="hidden"
+                 type="text"
                  aria-readonly="true"
           >
         </div>
         <div class="v-input__append-inner">
           <div class="v-input__icon v-input__icon--append">
             <i aria-hidden="true"
-               class="v-icon material-icons theme--light"
+               class="v-icon notranslate material-icons theme--light"
             >
               $vuetify.icons.dropdown
             </i>
@@ -146,6 +149,10 @@ exports[`VSelect.ts should use scoped slot for selection generation 1`] = `
         </div>
       </div>
       <div class="v-menu">
+        <div class="v-menu__content theme--light "
+             style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+        >
+        </div>
       </div>
     </div>
     <div class="v-text-field__details">
@@ -159,24 +166,22 @@ exports[`VSelect.ts should use scoped slot for selection generation 1`] = `
     </div>
   </div>
 </div>
-
 `;
 
 exports[`VSelect.ts should use slotted append-item 1`] = `
-
 <div role="listbox"
-     id="computed-id-13"
+     id="list-13"
      tabindex="-1"
      class="v-list v-sheet v-sheet--tile theme--light"
 >
   <div tabindex="0"
        aria-selected="false"
-       aria-labelledby="18-list-foo"
+       aria-labelledby="foo-list-item-18"
        role="option"
        class="v-list-item v-list-item--link theme--light"
   >
     <div class="v-list-item__content">
-      <div id="18-list-foo"
+      <div id="foo-list-item-18"
            class="v-list-item__title"
       >
         foo
@@ -187,13 +192,11 @@ exports[`VSelect.ts should use slotted append-item 1`] = `
     foo
   </div>
 </div>
-
 `;
 
 exports[`VSelect.ts should use slotted prepend-item 1`] = `
-
 <div role="listbox"
-     id="computed-id-1"
+     id="list-1"
      tabindex="-1"
      class="v-list v-sheet v-sheet--tile theme--light"
 >
@@ -202,12 +205,12 @@ exports[`VSelect.ts should use slotted prepend-item 1`] = `
   </div>
   <div tabindex="0"
        aria-selected="false"
-       aria-labelledby="6-list-foo"
+       aria-labelledby="foo-list-item-6"
        role="option"
        class="v-list-item v-list-item--link theme--light"
   >
     <div class="v-list-item__content">
-      <div id="6-list-foo"
+      <div id="foo-list-item-6"
            class="v-list-item__title"
       >
         foo
@@ -215,5 +218,4 @@ exports[`VSelect.ts should use slotted prepend-item 1`] = `
     </div>
   </div>
 </div>
-
 `;

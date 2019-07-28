@@ -14,7 +14,6 @@
         <v-expansion-panel-header>
           <v-layout
             align-center
-            row
             spacer
           >
             <v-flex xs4 sm2 md1>
@@ -44,7 +43,7 @@
               </span>
             </v-flex>
 
-            <v-flex no-wrap xs5 sm3>
+            <v-flex text-no-wrap xs5 sm3>
               <v-chip
                 v-if="message.new"
                 :color="`${message.color} lighten-4`"
@@ -60,7 +59,7 @@
             <v-flex
               v-if="message.excerpt"
               class="grey--text"
-              ellipsis
+              text-truncate
               hidden-sm-and-down
             >
               &mdash;

@@ -12,7 +12,7 @@ import Loadable from '../../mixins/loadable'
 import ClickOutside from '../../directives/click-outside'
 
 // Helpers
-import { addOnceEventListener, deepEqual, keyCodes, createRange, convertToUnit } from '../../util/helpers'
+import { addOnceEventListener, deepEqual, keyCodes, createRange, convertToUnit, passiveSupported } from '../../util/helpers'
 import { consoleWarn } from '../../util/console'
 
 // Types
@@ -47,41 +47,21 @@ export default mixins<options &
   mixins: [Loadable],
 
   props: {
-    color: {
-      type: String,
-      default: 'primary',
-    },
     disabled: Boolean,
     inverseLabel: Boolean,
-    min: {
-      type: [Number, String],
-      default: 0,
-    },
     max: {
       type: [Number, String],
       default: 100,
+    },
+    min: {
+      type: [Number, String],
+      default: 0,
     },
     step: {
       type: [Number, String],
       default: 1,
     },
-    ticks: {
-      type: [Boolean, String],
-      default: false,
-      validator: v => typeof v === 'boolean' || v === 'always',
-    } as PropValidator<boolean | 'always'>,
-    tickLabels: {
-      type: Array,
-      default: () => ([]),
-    } as PropValidator<string[]>,
-    tickSize: {
-      type: [Number, String],
-      default: 2,
-    },
-    thumbColor: {
-      type: String,
-      default: 'primary',
-    },
+    thumbColor: String,
     thumbLabel: {
       type: [Boolean, String],
       default: null,
@@ -91,10 +71,21 @@ export default mixins<options &
       type: [Number, String],
       default: 32,
     },
-    trackColor: {
-      type: String,
-      default: 'primary lighten-3',
+    tickLabels: {
+      type: Array,
+      default: () => ([]),
+    } as PropValidator<string[]>,
+    ticks: {
+      type: [Boolean, String],
+      default: false,
+      validator: v => typeof v === 'boolean' || v === 'always',
+    } as PropValidator<boolean | 'always'>,
+    tickSize: {
+      type: [Number, String],
+      default: 2,
     },
+    trackColor: String,
+    trackFillColor: String,
     value: [Number, String],
     vertical: Boolean,
   },
@@ -194,17 +185,20 @@ export default mixins<options &
         this.$scopedSlots['thumb-label']
       )
     },
-    computedColor (): string | false {
-      if (this.disabled) return false
-      return this.validationState || this.color
+    computedTrackColor (): string | undefined {
+      if (this.disabled) return undefined
+      if (this.trackColor) return this.trackColor
+      if (this.isDark) return this.validationState
+      return this.validationState || 'primary lighten-3'
     },
-    computedTrackColor (): string | false {
-      if (this.disabled) return false
-      return this.validationState || this.trackColor
+    computedTrackFillColor (): string | undefined {
+      if (this.disabled) return undefined
+      if (this.trackFillColor) return this.trackFillColor
+      return this.validationState || this.computedColor
     },
-    computedThumbColor (): string | false {
-      if (this.disabled) return false
-      return this.validationState || this.thumbColor || this.color
+    computedThumbColor (): string | undefined {
+      if (this.thumbColor) return this.thumbColor
+      return this.validationState || this.computedColor
     },
   },
 
@@ -289,7 +283,7 @@ export default mixins<options &
       return this.$createElement('input', {
         attrs: {
           value: this.internalValue,
-          id: this.id,
+          id: this.computedId,
           disabled: this.disabled,
           readonly: true,
           tabindex: -1,
@@ -304,7 +298,7 @@ export default mixins<options &
           staticClass: 'v-slider__track-background',
           style: this.trackStyles,
         })),
-        this.$createElement('div', this.setBackgroundColor(this.computedColor, {
+        this.$createElement('div', this.setBackgroundColor(this.computedTrackFillColor, {
           staticClass: 'v-slider__track-fill',
           style: this.trackFillStyles,
         })),
@@ -455,24 +449,26 @@ export default mixins<options &
     onThumbMouseDown (e: MouseEvent) {
       this.oldValue = this.internalValue
       this.keyPressed = 2
-      const options = { passive: true }
       this.isActive = true
 
+      const mouseUpOptions = passiveSupported ? { passive: true, capture: true } : true
+      const mouseMoveOptions = passiveSupported ? { passive: true } : false
       if ('touches' in e) {
-        this.app.addEventListener('touchmove', this.onMouseMove, options)
-        addOnceEventListener(this.app, 'touchend', this.onSliderMouseUp)
+        this.app.addEventListener('touchmove', this.onMouseMove, mouseMoveOptions)
+        addOnceEventListener(this.app, 'touchend', this.onSliderMouseUp, mouseUpOptions)
       } else {
-        this.app.addEventListener('mousemove', this.onMouseMove, options)
-        addOnceEventListener(this.app, 'mouseup', this.onSliderMouseUp)
+        this.app.addEventListener('mousemove', this.onMouseMove, mouseMoveOptions)
+        addOnceEventListener(this.app, 'mouseup', this.onSliderMouseUp, mouseUpOptions)
       }
 
       this.$emit('start', this.internalValue)
     },
-    onSliderMouseUp () {
+    onSliderMouseUp (e: Event) {
+      e.stopPropagation()
       this.keyPressed = 0
-      const options = { passive: true }
-      this.app.removeEventListener('touchmove', this.onMouseMove, options)
-      this.app.removeEventListener('mousemove', this.onMouseMove, options)
+      const mouseMoveOptions = passiveSupported ? { passive: true } : false
+      this.app.removeEventListener('touchmove', this.onMouseMove, mouseMoveOptions)
+      this.app.removeEventListener('mousemove', this.onMouseMove, mouseMoveOptions)
 
       this.$emit('end', this.internalValue)
       if (!deepEqual(this.oldValue, this.internalValue)) {

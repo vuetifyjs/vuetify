@@ -125,7 +125,7 @@
           </v-tab-item>
         </v-tabs>
 
-        <div class="text-xs-center mt-3">
+        <div class="text-center mt-4">
           <v-btn @click="next">next tab</v-btn>
         </div>
       </core-section>

@@ -95,34 +95,11 @@ describe('VCheckbox.ts', () => { // eslint-disable-line max-statements
     expect(input.element.getAttribute('role')).toBe('checkbox')
     expect(input.element.getAttribute('aria-checked')).toBe('false')
 
-    wrapper.setProps({ 'inputValue': true })
+    wrapper.setProps({ inputValue: true })
     expect(input.element.getAttribute('aria-checked')).toBe('true')
 
-    wrapper.setProps({ 'indeterminate': true })
+    wrapper.setProps({ indeterminate: true })
     expect(input.element.getAttribute('aria-checked')).toBe('mixed')
-  })
-
-  it('should render aria-label attribute with label value on input group', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        label: 'Test',
-      },
-      attrs: {},
-    })
-
-    const inputGroup = wrapper.find('input')
-    expect(inputGroup.element.getAttribute('aria-label')).toBe('Test')
-  })
-
-  it('should not render aria-label attribute with no label value on input group', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        label: null,
-      },
-    })
-
-    const inputGroup = wrapper.find('input')
-    expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
   })
 
   it('should toggle on keypress', async () => {
@@ -355,9 +332,9 @@ describe('VCheckbox.ts', () => { // eslint-disable-line max-statements
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    wrapper.setProps({ value: 'fizz' })
+    wrapper.setProps({ inputValue: true })
     expect(wrapper.html()).toMatchSnapshot()
-    wrapper.setProps({ value: 'buzz' })
+    wrapper.setProps({ inputValue: false })
     expect(wrapper.html()).toMatchSnapshot()
   })
 

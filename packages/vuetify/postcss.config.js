@@ -1,5 +1,4 @@
 const autoprefixer = require('autoprefixer')
-const mqpacker = require('css-mqpacker')
 
 const dir = process.env.VUETIFY_DIRECTION;
 const vuetifyDirection = dir ? (css => css.walkRules(rule => {
@@ -17,10 +16,8 @@ const vuetifyDirection = dir ? (css => css.walkRules(rule => {
 module.exports = ctx => ({
   plugins: [
     autoprefixer({
-      browsers: ['>0.5%', 'last 2 versions', 'not dead', 'not op_mini all'],
       remove: false
     }),
-    mqpacker(),
     vuetifyDirection,
   ]
 })

@@ -1,7 +1,7 @@
 <template>
   <v-card
     :loading="loading"
-    class="mx-auto my-5"
+    class="mx-auto my-12"
     max-width="374"
   >
     <v-img
@@ -21,17 +21,17 @@
           readonly
         ></v-rating>
 
-        <div class="grey--text ml-3">4.5 (413)</div>
+        <div class="grey--text ml-4">4.5 (413)</div>
       </v-layout>
 
-      <div class="my-3 subtitle-1 black--text">
+      <div class="my-4 subtitle-1 black--text">
         $ • Italian, Cafe
       </div>
 
       <div>Small plates, salads & sandwiches an inteimate setting with 12 indoor seats plus patio seating.</div>
     </v-card-text>
 
-    <v-divider class="mx-3"></v-divider>
+    <v-divider class="mx-4"></v-divider>
 
     <v-card-text>
       <div class="title text--primary">Tonight's availability</div>

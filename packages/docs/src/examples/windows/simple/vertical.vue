@@ -30,7 +30,7 @@
       </v-btn>
       <v-item-group
         v-model="onboarding"
-        class="text-xs-center"
+        class="text-center"
         mandatory
       >
         <v-item
@@ -81,6 +81,6 @@
 
 <codepen-resources lang="json">
   {
-    "css": ["https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css"]
+    "css": ["https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css"]
   }
 </codepen-resources>

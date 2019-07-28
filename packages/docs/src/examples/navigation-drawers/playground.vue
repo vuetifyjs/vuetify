@@ -4,7 +4,6 @@
     align-stretch
   >
     <v-layout
-      row
       wrap
       justify-space-around
     >

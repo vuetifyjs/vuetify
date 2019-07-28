@@ -66,12 +66,12 @@ export default baseMixins.extend({
       type: [Number, String],
       default: 'auto',
     },
+    offsetX: Boolean,
+    offsetY: Boolean,
     openOnClick: {
       type: Boolean,
       default: true,
     },
-    offsetX: Boolean,
-    offsetY: Boolean,
     openOnHover: Boolean,
     origin: {
       type: String,
@@ -143,6 +143,9 @@ export default baseMixins.extend({
         : convertToUnit(this.calcYOverflow(this.calculatedTopAuto))
 
       return top || '0'
+    },
+    hasClickableTiles (): boolean {
+      return Boolean(this.tiles.find(tile => tile.tabIndex > -1))
     },
     styles (): object {
       return {
@@ -231,7 +234,7 @@ export default baseMixins.extend({
       // For infinite scroll and autocomplete, re-evaluate children
       this.getTiles()
 
-      if (!this.isActive) {
+      if (!this.isActive || !this.hasClickableTiles) {
         return
       } else if (e.keyCode === keyCodes.tab) {
         this.isActive = false
@@ -298,11 +301,11 @@ export default baseMixins.extend({
           role: 'role' in this.$attrs ? this.$attrs.role : 'menu',
         },
         staticClass: 'v-menu__content',
-        'class': {
+        class: {
           ...this.rootThemeClasses,
           'v-menu__content--auto': this.auto,
           'v-menu__content--fixed': this.activatorFixed,
-          'menuable__content__active': this.isActive,
+          menuable__content__active: this.isActive,
           [this.contentClass.trim()]: true,
         },
         style: this.styles,

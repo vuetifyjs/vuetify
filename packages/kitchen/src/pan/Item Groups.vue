@@ -26,7 +26,7 @@
                     <v-scroll-y-transition>
                       <div
                         v-if="active"
-                        class="display-3 text-xs-center"
+                        class="display-3 text-center"
                       >
                         Active
                       </div>
@@ -62,7 +62,7 @@
                     <v-scroll-y-transition>
                       <div
                         v-if="active"
-                        class="display-3 text-xs-center"
+                        class="display-3 text-center"
                       >
                         Active
                       </div>
@@ -98,7 +98,7 @@
                       <v-scroll-y-transition>
                         <div
                           v-if="active"
-                          class="display-3 text-xs-center"
+                          class="display-3 text-center"
                         >
                           Active
                         </div>

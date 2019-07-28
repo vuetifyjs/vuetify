@@ -141,13 +141,18 @@ export function directiveConfig (binding: BindingConfig, defaults = {}): VNodeDi
   }
 }
 
-export function addOnceEventListener (el: EventTarget, event: string, cb: () => void): void {
-  var once = () => {
-    cb()
-    el.removeEventListener(event, once, false)
+export function addOnceEventListener (
+  el: EventTarget,
+  eventName: string,
+  cb: (event: Event) => void,
+  options: boolean | AddEventListenerOptions = false
+): void {
+  var once = (event: Event) => {
+    cb(event)
+    el.removeEventListener(eventName, once, options)
   }
 
-  el.addEventListener(event, once, false)
+  el.addEventListener(eventName, once, options)
 }
 
 let passiveSupported = false
@@ -214,9 +219,10 @@ export function deepEqual (a: any, b: any): boolean {
   return props.every(p => deepEqual(a[p], b[p]))
 }
 
-export function getObjectValueByPath (obj: object, path: string, fallback?: any): any {
+export function getObjectValueByPath (obj: any, path: string, fallback?: any): any {
   // credit: http://stackoverflow.com/questions/6491463/accessing-nested-javascript-objects-with-string-key#comment55278413_6491621
-  if (!path || path.constructor !== String) return fallback
+  if (obj == null || !path || typeof path !== 'string') return fallback
+  if (obj[path] !== undefined) return obj[path]
   path = path.replace(/\[(\w+)\]/g, '.$1') // convert indexes to properties
   path = path.replace(/^\./, '') // strip a leading dot
   return getNestedValue(obj, path.split('.'), fallback)
@@ -413,9 +419,9 @@ export function sortItems (
   })
 }
 
-export type FilterFn = (value: any, search: string, item: any) => boolean
+export type FilterFn = (value: any, search: string | null, item: any) => boolean
 
-export function defaultFilter (value: any, search: string | null) {
+export function defaultFilter (value: any, search: string | null, item: any) {
   return value != null &&
     search != null &&
     typeof value !== 'boolean' &&
@@ -427,7 +433,7 @@ export function searchItems (items: any[], search: string) {
   search = search.toString().toLowerCase()
   if (search.trim() === '') return items
 
-  return items.filter(item => Object.keys(item).some(key => defaultFilter(getObjectValueByPath(item, key), search)))
+  return items.filter(item => Object.keys(item).some(key => defaultFilter(getObjectValueByPath(item, key), search, item)))
 }
 
 /**
@@ -484,4 +490,19 @@ export function chunk (str: string, size = 1) {
     index += size
   }
   return chunked
+}
+
+export function humanReadableFileSize (bytes: number, binary = false): string {
+  const base = binary ? 1024 : 1000
+  if (bytes < base) {
+    return `${bytes} B`
+  }
+
+  const prefix = binary ? ['Ki', 'Mi', 'Gi'] : ['k', 'M', 'G']
+  let unit = -1
+  while (Math.abs(bytes) >= base && unit < prefix.length - 1) {
+    bytes /= base
+    ++unit
+  }
+  return `${bytes.toFixed(1)} ${prefix[unit]}B`
 }

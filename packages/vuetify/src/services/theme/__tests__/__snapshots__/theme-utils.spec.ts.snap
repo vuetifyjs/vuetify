@@ -15,168 +15,168 @@ exports[`theme-utilities.ts should generate css vars 1`] = `
   --v-primary-darken4: #33303a;
 }
 
-a { color: var(--v-anchor-base); }
-.primary {
+.v-application a { color: var(--v-anchor-base); }
+.v-application .primary {
   background-color: var(--v-primary-base) !important;
   border-color: var(--v-primary-base) !important;
 }
-.primary--text {
+.v-application .primary--text {
   color: var(--v-primary-base) !important;
   caret-color: var(--v-primary-base) !important;
 }
-.primary.lighten-5 {
+.v-application .primary.lighten-5 {
   background-color: var(--v-primary-lighten5) !important;
   border-color: var(--v-primary-lighten5) !important;
 }
-.primary--text.text--lighten-5 {
+.v-application .primary--text.text--lighten-5 {
   color: var(--v-primary-lighten5) !important;
   caret-color: var(--v-primary-lighten5) !important;
 }
-.primary.lighten-4 {
+.v-application .primary.lighten-4 {
   background-color: var(--v-primary-lighten4) !important;
   border-color: var(--v-primary-lighten4) !important;
 }
-.primary--text.text--lighten-4 {
+.v-application .primary--text.text--lighten-4 {
   color: var(--v-primary-lighten4) !important;
   caret-color: var(--v-primary-lighten4) !important;
 }
-.primary.lighten-3 {
+.v-application .primary.lighten-3 {
   background-color: var(--v-primary-lighten3) !important;
   border-color: var(--v-primary-lighten3) !important;
 }
-.primary--text.text--lighten-3 {
+.v-application .primary--text.text--lighten-3 {
   color: var(--v-primary-lighten3) !important;
   caret-color: var(--v-primary-lighten3) !important;
 }
-.primary.lighten-2 {
+.v-application .primary.lighten-2 {
   background-color: var(--v-primary-lighten2) !important;
   border-color: var(--v-primary-lighten2) !important;
 }
-.primary--text.text--lighten-2 {
+.v-application .primary--text.text--lighten-2 {
   color: var(--v-primary-lighten2) !important;
   caret-color: var(--v-primary-lighten2) !important;
 }
-.primary.lighten-1 {
+.v-application .primary.lighten-1 {
   background-color: var(--v-primary-lighten1) !important;
   border-color: var(--v-primary-lighten1) !important;
 }
-.primary--text.text--lighten-1 {
+.v-application .primary--text.text--lighten-1 {
   color: var(--v-primary-lighten1) !important;
   caret-color: var(--v-primary-lighten1) !important;
 }
-.primary.darken-1 {
+.v-application .primary.darken-1 {
   background-color: var(--v-primary-darken1) !important;
   border-color: var(--v-primary-darken1) !important;
 }
-.primary--text.text--darken-1 {
+.v-application .primary--text.text--darken-1 {
   color: var(--v-primary-darken1) !important;
   caret-color: var(--v-primary-darken1) !important;
 }
-.primary.darken-2 {
+.v-application .primary.darken-2 {
   background-color: var(--v-primary-darken2) !important;
   border-color: var(--v-primary-darken2) !important;
 }
-.primary--text.text--darken-2 {
+.v-application .primary--text.text--darken-2 {
   color: var(--v-primary-darken2) !important;
   caret-color: var(--v-primary-darken2) !important;
 }
-.primary.darken-3 {
+.v-application .primary.darken-3 {
   background-color: var(--v-primary-darken3) !important;
   border-color: var(--v-primary-darken3) !important;
 }
-.primary--text.text--darken-3 {
+.v-application .primary--text.text--darken-3 {
   color: var(--v-primary-darken3) !important;
   caret-color: var(--v-primary-darken3) !important;
 }
-.primary.darken-4 {
+.v-application .primary.darken-4 {
   background-color: var(--v-primary-darken4) !important;
   border-color: var(--v-primary-darken4) !important;
 }
-.primary--text.text--darken-4 {
+.v-application .primary--text.text--darken-4 {
   color: var(--v-primary-darken4) !important;
   caret-color: var(--v-primary-darken4) !important;
 }"
 `;
 
 exports[`theme-utilities.ts should generate styles 1`] = `
-"a { color: #c42742; }
-.primary {
+".v-application a { color: #c42742; }
+.v-application .primary {
   background-color: #c42742 !important;
   border-color: #c42742 !important;
 }
-.primary--text {
+.v-application .primary--text {
   color: #c42742 !important;
   caret-color: #c42742 !important;
 }
-.primary.lighten-5 {
+.v-application .primary.lighten-5 {
   background-color: #2c0447 !important;
   border-color: #2c0447 !important;
 }
-.primary--text.text--lighten-5 {
+.v-application .primary--text.text--lighten-5 {
   color: #2c0447 !important;
   caret-color: #2c0447 !important;
 }
-.primary.lighten-4 {
+.v-application .primary.lighten-4 {
   background-color: #cfa854 !important;
   border-color: #cfa854 !important;
 }
-.primary--text.text--lighten-4 {
+.v-application .primary--text.text--lighten-4 {
   color: #cfa854 !important;
   caret-color: #cfa854 !important;
 }
-.primary.lighten-3 {
+.v-application .primary.lighten-3 {
   background-color: #dd88cc !important;
   border-color: #dd88cc !important;
 }
-.primary--text.text--lighten-3 {
+.v-application .primary--text.text--lighten-3 {
   color: #dd88cc !important;
   caret-color: #dd88cc !important;
 }
-.primary.lighten-2 {
+.v-application .primary.lighten-2 {
   background-color: #b49921 !important;
   border-color: #b49921 !important;
 }
-.primary--text.text--lighten-2 {
+.v-application .primary--text.text--lighten-2 {
   color: #b49921 !important;
   caret-color: #b49921 !important;
 }
-.primary.lighten-1 {
+.v-application .primary.lighten-1 {
   background-color: #f899c7 !important;
   border-color: #f899c7 !important;
 }
-.primary--text.text--lighten-1 {
+.v-application .primary--text.text--lighten-1 {
   color: #f899c7 !important;
   caret-color: #f899c7 !important;
 }
-.primary.darken-1 {
+.v-application .primary.darken-1 {
   background-color: #0169dc !important;
   border-color: #0169dc !important;
 }
-.primary--text.text--darken-1 {
+.v-application .primary--text.text--darken-1 {
   color: #0169dc !important;
   caret-color: #0169dc !important;
 }
-.primary.darken-2 {
+.v-application .primary.darken-2 {
   background-color: #c28fd0 !important;
   border-color: #c28fd0 !important;
 }
-.primary--text.text--darken-2 {
+.v-application .primary--text.text--darken-2 {
   color: #c28fd0 !important;
   caret-color: #c28fd0 !important;
 }
-.primary.darken-3 {
+.v-application .primary.darken-3 {
   background-color: #fbe002 !important;
   border-color: #fbe002 !important;
 }
-.primary--text.text--darken-3 {
+.v-application .primary--text.text--darken-3 {
   color: #fbe002 !important;
   caret-color: #fbe002 !important;
 }
-.primary.darken-4 {
+.v-application .primary.darken-4 {
   background-color: #33303a !important;
   border-color: #33303a !important;
 }
-.primary--text.text--darken-4 {
+.v-application .primary--text.text--darken-4 {
   color: #33303a !important;
   caret-color: #33303a !important;
 }"

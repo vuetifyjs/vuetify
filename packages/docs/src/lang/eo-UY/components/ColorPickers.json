@@ -1,49 +1,49 @@
 {
-  "header": "crwdns35836:0crwdne35836:0",
-  "headerText": "crwdns35838:0crwdne35838:0",
+  "header": "crwdns39744:0crwdne39744:0",
+  "headerText": "crwdns39746:0crwdne39746:0",
   "examples": {
     "usage": {
-      "desc": "crwdns35840:0crwdne35840:0"
+      "desc": "crwdns39748:0crwdne39748:0"
     },
     "model": {
-      "header": "crwdns35842:0crwdne35842:0",
-      "desc": "crwdns35844:0crwdne35844:0"
+      "header": "crwdns39750:0crwdne39750:0",
+      "desc": "crwdns39752:0crwdne39752:0"
     },
     "swatches": {
-      "header": "crwdns35846:0crwdne35846:0",
-      "desc": "crwdns35848:0crwdne35848:0"
+      "header": "crwdns39754:0crwdne39754:0",
+      "desc": "crwdns39756:0crwdne39756:0"
     },
     "inputs": {
-      "header": "crwdns35850:0crwdne35850:0",
-      "desc": "crwdns35852:0crwdne35852:0"
+      "header": "crwdns39758:0crwdne39758:0",
+      "desc": "crwdns39760:0crwdne39760:0"
     },
     "canvas": {
-      "header": "crwdns35854:0crwdne35854:0",
-      "desc": "crwdns35856:0crwdne35856:0"
+      "header": "crwdns39762:0crwdne39762:0",
+      "desc": "crwdns39764:0crwdne39764:0"
     }
   },
   "props": {
     "v-color-picker": {
-      "canvasHeight": "crwdns35858:0crwdne35858:0",
-      "disabled": "crwdns35860:0crwdne35860:0",
-      "dotSize": "crwdns35862:0crwdne35862:0",
-      "flat": "crwdns35864:0crwdne35864:0",
-      "hideCanvas": "crwdns35866:0crwdne35866:0",
-      "hideInputs": "crwdns35868:0crwdne35868:0",
-      "hideModeSwitch": "crwdns35870:0crwdne35870:0",
-      "mode": "crwdns35872:0crwdne35872:0",
-      "showSwatches": "crwdns35874:0crwdne35874:0",
-      "swatches": "crwdns35876:0crwdne35876:0",
-      "swatchesMaxHeight": "crwdns35878:0crwdne35878:0",
-      "value": "crwdns35880:0crwdne35880:0",
-      "width": "crwdns35882:0crwdne35882:0"
+      "canvasHeight": "crwdns39766:0crwdne39766:0",
+      "disabled": "crwdns39768:0crwdne39768:0",
+      "dotSize": "crwdns39770:0crwdne39770:0",
+      "flat": "crwdns39772:0crwdne39772:0",
+      "hideCanvas": "crwdns39774:0crwdne39774:0",
+      "hideInputs": "crwdns39776:0crwdne39776:0",
+      "hideModeSwitch": "crwdns39778:0crwdne39778:0",
+      "mode": "crwdns39780:0crwdne39780:0",
+      "showSwatches": "crwdns39782:0crwdne39782:0",
+      "swatches": "crwdns39784:0crwdne39784:0",
+      "swatchesMaxHeight": "crwdns39786:0crwdne39786:0",
+      "value": "crwdns39788:0crwdne39788:0",
+      "width": "crwdns39790:0crwdne39790:0"
     }
   },
   "events": {
     "v-color-picker": {
-      "input": "crwdns35884:0crwdne35884:0",
-      "update:color": "crwdns35886:0crwdne35886:0",
-      "update:mode": "crwdns35888:0crwdne35888:0"
+      "input": "crwdns39792:0crwdne39792:0",
+      "update:color": "crwdns39794:0crwdne39794:0",
+      "update:mode": "crwdns39796:0crwdne39796:0"
     }
   }
 }

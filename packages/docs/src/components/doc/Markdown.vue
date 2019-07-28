@@ -88,4 +88,7 @@
     font-size: 14px
     margin-left: 4px
     vertical-align: baseline
+
+.markdown > h4
+  margin: 8px 0
 </style>

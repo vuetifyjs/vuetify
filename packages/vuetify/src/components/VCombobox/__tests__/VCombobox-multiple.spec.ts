@@ -57,6 +57,8 @@ describe('VCombobox.ts', () => {
     input.trigger('input')
     input.trigger('keydown.enter')
 
+    await wrapper.vm.$nextTick()
+
     expect(change).toHaveBeenCalledWith(['foo'])
   })
 
@@ -170,6 +172,8 @@ describe('VCombobox.ts', () => {
     input.trigger('input')
     input.trigger('keydown.enter')
 
+    await wrapper.vm.$nextTick()
+
     expect(change).toHaveBeenCalledWith(['bar'])
   })
 
@@ -197,6 +201,8 @@ describe('VCombobox.ts', () => {
 
     input.trigger('input')
     input.trigger('keydown.enter')
+
+    await wrapper.vm.$nextTick()
 
     expect(change).toHaveBeenCalledWith(['foo', 'baz'])
     expect(wrapper.vm.selectedIndex).toBe(-1)
@@ -226,6 +232,8 @@ describe('VCombobox.ts', () => {
     input.trigger('input')
     expect(wrapper.vm.internalSearch).toBe('baz')
     input.trigger('keydown.enter')
+
+    await wrapper.vm.$nextTick()
 
     expect(change).toHaveBeenCalledWith(['foo', 'baz'])
     expect(wrapper.vm.selectedIndex).toBe(-1)

@@ -1,36 +1,36 @@
 {
-  "header": "crwdns29520:0crwdne29520:0",
-  "headerText": "crwdns29522:0crwdne29522:0",
-  "buy": "crwdns29524:0crwdne29524:0",
-  "free": "crwdns29526:0crwdne29526:0",
-  "live": "crwdns29528:0crwdne29528:0",
-  "premium": "crwdns29530:0crwdne29530:0",
-  "downloadNow": "crwdns29532:0crwdne29532:0",
-  "viewDemo": "crwdns29534:0crwdne29534:0",
+  "header": "crwdns41540:0crwdne41540:0",
+  "headerText": "crwdns35550:0crwdne35550:0",
+  "buy": "crwdns35552:0crwdne35552:0",
+  "free": "crwdns35554:0crwdne35554:0",
+  "live": "crwdns35556:0crwdne35556:0",
+  "premium": "crwdns35558:0crwdne35558:0",
+  "downloadNow": "crwdns35560:0crwdne35560:0",
+  "viewDemo": "crwdns35562:0crwdne35562:0",
   "templates": {
     "alpha": {
-      "title": "crwdns29536:0crwdne29536:0",
-      "description": "crwdns29538:0crwdne29538:0"
+      "title": "crwdns35564:0crwdne35564:0",
+      "description": "crwdns35566:0crwdne35566:0"
     },
     "dashboard": {
-      "title": "crwdns29540:0crwdne29540:0",
-      "description": "crwdns29542:0crwdne29542:0"
+      "title": "crwdns35568:0crwdne35568:0",
+      "description": "crwdns35570:0crwdne35570:0"
     },
     "freelancer": {
-      "title": "crwdns29544:0crwdne29544:0",
-      "description": "crwdns29546:0crwdne29546:0"
+      "title": "crwdns35572:0crwdne35572:0",
+      "description": "crwdns35574:0crwdne35574:0"
     },
     "material-kit": {
-      "title": "crwdns29548:0crwdne29548:0",
-      "description": "crwdns29550:0crwdne29550:0"
+      "title": "crwdns35576:0crwdne35576:0",
+      "description": "crwdns35578:0crwdne35578:0"
     },
     "parallax": {
-      "title": "crwdns29552:0crwdne29552:0",
-      "description": "crwdns29554:0crwdne29554:0"
+      "title": "crwdns35580:0crwdne35580:0",
+      "description": "crwdns35582:0crwdne35582:0"
     },
     "blog": {
-      "title": "crwdns29556:0crwdne29556:0",
-      "description": "crwdns29558:0crwdne29558:0"
+      "title": "crwdns35584:0crwdne35584:0",
+      "description": "crwdns35586:0crwdne35586:0"
     }
   }
 }

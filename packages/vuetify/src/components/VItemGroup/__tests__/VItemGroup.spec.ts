@@ -48,9 +48,9 @@ describe('VItemGroup', () => {
         multiple: true,
         value: '',
       },
-    });
+    })
 
-    (expect('Model must be bound to an array if the multiple property is true') as any).toHaveBeenTipped()
+    expect('Model must be bound to an array if the multiple property is true').toHaveBeenTipped()
   })
 
   it('should return the correct value', () => {
@@ -114,7 +114,7 @@ describe('VItemGroup', () => {
 
     expect(wrapper.vm.items).toHaveLength(2)
 
-    const [ child1, child2 ] = wrapper.vm.$el.children
+    const [child1, child2] = wrapper.vm.$el.children
 
     child1.click()
     expect(change).toHaveBeenCalledWith(0)

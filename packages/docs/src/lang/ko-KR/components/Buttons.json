@@ -1,5 +1,4 @@
 {
-  "header": "버튼 (Button)",
   "headerText": "`v-btn` 컴포넌트는 표준 HTML 버튼을 대체하며 머티리얼 디자인 테마를 따르고 다양한 옵션을 가지고 있습니다. 어떤 색상 헬퍼(color helper)든 버튼의 배경과 글자색을 조절하는데 쓰일 수 있습니다.",
   "examples": {
     "flat": {
@@ -15,8 +14,7 @@
       "desc": "Depressed 버튼은 여전히 배경색을 관리하지만 박스 그림자가 없습니다."
     },
     "dropdown": {
-      "header": "버튼 드롭다운 변형 (Button Dropdown Variants)",
-      "uninverted": true
+      "header": "버튼 드롭다운 변형 (Button Dropdown Variants)"
     },
     "icon": {
       "header": "아이콘 (Icon)",
@@ -49,18 +47,7 @@
   },
   "props": {
     "v-btn": {
-      "block": "가능한 공간의 100%로 버튼을 확장",
-      "depressed": "버튼 박스의 그림자를 없앰",
-      "flat": "버튼의 배경색을 없앰",
-      "icon": "버튼이 아이콘임을 지정 - round and flat",
-      "inputValue": "버튼의 활성화 상태를 조절",
-      "large": "큰 버튼",
-      "loading": "로딩 아이콘 애니메이션을 추가",
-      "outline": "테두리 강조 버튼",
-      "outlined": "테두리 강조 버튼",
-      "round": "버튼의 모서리가 둥글어짐",
-      "small": "작은 버튼",
-      "type": "버튼의 type attribute 를 설정"
+      "loading": "로딩 아이콘 애니메이션을 추가"
     }
   }
 }

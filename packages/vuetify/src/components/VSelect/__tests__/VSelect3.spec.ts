@@ -71,6 +71,7 @@ describe('VSelect.ts', () => {
     const selectItem = jest.fn()
     const wrapper = mountFunction({
       propsData: {
+        eager: true,
         items: [{ text: 'foo', disabled: true, id: 0 }],
       },
       methods: { selectItem },

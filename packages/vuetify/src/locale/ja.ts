@@ -29,4 +29,11 @@ export default {
     prev: '前のビジュアル',
     next: '次のビジュアル',
   },
+  calendar: {
+    moreEvents: 'さらに{0}',
+  },
+  fileInput: {
+    counter: '{0} files',
+    counterSize: '{0} files ({1} in total)',
+  },
 }

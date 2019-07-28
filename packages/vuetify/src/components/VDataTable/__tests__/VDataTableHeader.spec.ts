@@ -74,8 +74,8 @@ describe('VDataTableHeader.ts', () => {
           propsData: {
             options: {
               multiSort: true,
-              sortBy: [ 'iron' ],
-              sortDesc: [ true ],
+              sortBy: ['iron'],
+              sortDesc: [true],
             },
           },
         })
@@ -87,8 +87,8 @@ describe('VDataTableHeader.ts', () => {
         const wrapper = mountFunction({
           propsData: {
             options: {
-              sortBy: [ 'iron' ],
-              sortDesc: [ true ],
+              sortBy: ['iron'],
+              sortDesc: [true],
             },
           },
         })
@@ -100,8 +100,8 @@ describe('VDataTableHeader.ts', () => {
         const wrapper = mountFunction({
           propsData: {
             options: {
-              sortBy: [ 'iron', 'carbs' ],
-              sortDesc: [ false, true ],
+              sortBy: ['iron', 'carbs'],
+              sortDesc: [false, true],
             },
           },
         })
@@ -113,7 +113,7 @@ describe('VDataTableHeader.ts', () => {
         it('should render with data-table-select header', () => {
           const wrapper = mountFunction({
             propsData: {
-              headers: [ ...testHeaders, { text: 'test', value: 'data-table-select' } ],
+              headers: [...testHeaders, { text: 'test', value: 'data-table-select' }],
             },
           })
 

@@ -1,5 +1,5 @@
 {
-  "header": "# Form",
+  "header": "# Forms",
   "headerText": "When it comes to form validation, Vuetify has a multitude of integrations and baked in functionality. Want to use a 3rd party validation plugin? Out of the box you can use [Vee-validate](https://github.com/baianat/Vee-validate) and [vuelidate](https://github.com/vuelidate/vuelidate).",
   "examples": {
     "usage": {
@@ -27,7 +27,7 @@
     "value": "A boolean value representing the validity of the form."
   },
   "functions": {
-    "reset": "Resets the state of all registered inputs (inside the form) to **[ ]** for arrays and **null** for all other values. Resets errors bag when using the **lazy-validation** prop.",
+    "reset": "Resets the state of all registered inputs (inside the form) to **{}** for arrays and **null** for all other values. Resets errors bag when using the **lazy-validation** prop.",
     "resetValidation": "Resets validation of all registered inputs without modifying their state",
     "validate": "Validates all registered inputs. Returns **true** if successful and **false** if not"
   }

@@ -20,7 +20,7 @@
         <v-btn icon>
           <v-icon>mdi-menu</v-icon>
         </v-btn>
-        <h3 class="title font-weight-light text-xs-center grow">Timeline</h3>
+        <h3 class="title font-weight-light text-center grow">Timeline</h3>
         <v-avatar>
           <v-img src="https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraight&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light"></v-img>
         </v-avatar>
@@ -31,7 +31,7 @@
       >
         <v-container fill-height>
           <v-layout align-center>
-            <strong class="display-4 font-weight-regular mr-4">8</strong>
+            <strong class="display-4 font-weight-regular mr-6">8</strong>
             <v-layout column justify-end>
               <div class="headline font-weight-light">Monday</div>
               <div class="text-uppercase font-weight-light">February 2015</div>
@@ -49,7 +49,7 @@
           color="pink"
           small
         >
-          <v-layout pt-3>
+          <v-layout pt-1>
             <v-flex xs3>
               <strong>5pm</strong>
             </v-flex>
@@ -64,7 +64,7 @@
           color="teal lighten-3"
           small
         >
-          <v-layout wrap pt-3>
+          <v-layout wrap pt-1>
             <v-flex xs3>
               <strong>3-4pm</strong>
             </v-flex>
@@ -95,7 +95,7 @@
           color="pink"
           small
         >
-          <v-layout pt-3>
+          <v-layout pt-1>
             <v-flex xs3>
               <strong>12pm</strong>
             </v-flex>
@@ -109,7 +109,7 @@
           color="teal lighten-3"
           small
         >
-          <v-layout pt-3>
+          <v-layout pt-1>
             <v-flex xs3>
               <strong>9-11am</strong>
             </v-flex>

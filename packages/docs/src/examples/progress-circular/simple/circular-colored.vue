@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xs-center">
+  <div class="text-center">
     <v-progress-circular
       :value="100"
       color="blue-grey"
@@ -27,7 +27,8 @@
   </div>
 </template>
 
-<style lang="sass" scoped>
-.v-progress-circular
-  margin: 1rem
+<style scoped>
+.v-progress-circular {
+  margin: 1rem;
+}
 </style>
